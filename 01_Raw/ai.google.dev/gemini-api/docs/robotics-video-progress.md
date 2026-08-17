@@ -1,33 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=ar
-fetched_at: 2026-08-10T03:14:41.253757+00:00
-title: "\u0641\u0647\u0645 \u0627\u0644\u0641\u064a\u062f\u064a\u0648 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=pl
+fetched_at: 2026-08-17T02:28:08.194676+00:00
+title: "Rozpoznawanie film\u00f3w \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-إرسال ملاحظات
+Prześlij opinię
 
-# فهم الفيديو
+# Rozpoznawanie filmów
 
-يمكن لروبوت Gemini Robotics ER 2 تتبُّع تقدّم المهمة من خلال خلاصات الفيديو المستمرة باستخدام ميزتَين:
+Model Gemini Robotics ER 2 może śledzić postępy w realizacji zadań na podstawie ciągłych strumieni wideo dzięki 2 funkcjom:
 
-- العثور على اللحظات: يحدّد الطابع الزمني الدقيق الذي يقع فيه حدث رئيسي.
-- تصنيف مستوى التقدّم: يتم تصنيف كل فيديو ضمن إحدى فئات مستوى الإكمال الخمس (من 0 إلى 20%، ومن 20 إلى 40%، ومن 40 إلى 60%، ومن 60 إلى 80%، ومن 80 إلى 100%).
+- Wyszukiwanie momentów: identyfikuje dokładny znacznik czasu, w którym występuje kluczowe zdarzenie.
+- Klasyfikacja postępów: przypisuje każdy film do jednego z 5 przedziałów ukończenia (0–20%, 20–40%, 40–60%, 60–80%, 80–100%).
 
-## العثور على اللحظات المميزة
+## Wyszukiwanie momentów
 
-تحدّد ميزة "العثور على اللحظات" إطار الفيديو الدقيق الذي يقع فيه حدث مهم، مثل امتلاء كوب أو عقد ربطة. تستخدم الروبوتات هذه البيانات للتحقّق من نجاح العملية، وترتيب الخطوات، وتفعيل التصحيحات.
+Wyszukiwanie momentów identyfikuje dokładną klatkę wideo, w której występuje krytyczne zdarzenie, np. gdy kubek jest pełny lub gdy zawiązany jest węzeł. Roboty używają tej funkcji do weryfikowania powodzenia, sekwencji kroków i wywoływania korekt.
 
-يطلب مثال الطلب التالي من النموذج تحديد لحظة إكمال مهمة معيّنة في فيديو:
+Poniższy przykładowy prompt prosi model o zidentyfikowanie momentu ukończenia danego zadania w filmie:
 
 ```
 from google import genai
@@ -57,16 +57,15 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-تعرض الصورة التالية لقطات نموذجية من فيديو يهدف إلى العثور على لحظة معيّنة، حيث يحدّد النموذج الطابع الزمني لإكمال المهمة:
+Poniżej przedstawiamy przykładowe klatki z filmu, w którym wyszukiwane są momenty. Model identyfikuje znacznik czasu ukończenia zadania:
 
-![مثال على إطارات فيديو تعرض نتيجة العثور على اللحظة مع تراكب طابع زمني](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-moment-finding.png?hl=ar)
+![Przykładowe klatki filmu pokazujące moment znalezienia wyniku z nałożoną sygnaturą czasową](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-moment-finding.png?hl=pl)
 
-## تصنيف مستوى التقدم
+## Klasyfikacja postępów
 
-يصنّف الفيديو ضمن إحدى فئات الاكتمال الخمس التالية:
-من 0 إلى %20 أو من %20 إلى %40 أو من %40 إلى %60 أو من %60 إلى %80 أو من %80 إلى %100. يمنح ذلك الروبوتات إدراكًا للوضع في الوقت الفعلي، ما يتيح لها تعديل الإجراءات أو إعادة محاولة الخطوات التي تعذّر تنفيذها بدون إعادة تشغيل سير العمل بأكمله.
+Klasyfikacja postępów przypisuje film do jednego z 5 przedziałów ukończenia: 0–20%, 20–40%, 40–60%, 60–80% lub 80–100%. Dzięki temu roboty mają świadomość sytuacji w czasie rzeczywistym, co pozwala im dostosowywać działania lub ponawiać nieudane kroki bez konieczności ponownego uruchamiania całego procesu.
 
-يطلب الطلب النموذجي التالي من النموذج تصنيف مستوى التقدّم الحالي من فيديو:
+Poniższy przykładowy prompt prosi model o sklasyfikowanie bieżącego poziomu postępu na podstawie filmu:
 
 ```
 from google import genai
@@ -96,26 +95,27 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-تعرض الصورة التالية أمثلة على لقطات من فيديو لتصنيف مستوى التقدّم، مع تحديد فئة مستوى التقدّم من خلال النموذج:
+Poniżej przedstawiamy przykładowe klatki z filmu, w którym klasyfikowane są postępy. Model przypisuje przedział postępu:
 
-![أمثلة على لقطات فيديو تعرض ناتج تصنيف مستوى التقدّم مع تصنيف بين قوسين](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-progress-classification.png?hl=ar)
+![Przykładowe klatki filmu pokazujące wynik klasyfikacji postępu z etykietą przedziału postępu](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-progress-classification.png?hl=pl)
 
-## أمثلة
+## Przykłady
 
-للاطّلاع على أمثلة كاملة قابلة للتنفيذ تتضمّن تتبُّع المهام المتعدّدة الخطوات، يُرجى الرجوع إلى [كتاب وصفات الروبوتات](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+Pełne przykłady, które można uruchomić, w tym śledzenie zadań wieloetapowych, znajdziesz w
+[przewodniku Robotics](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-## الخطوات التالية
+## Co dalej?
 
-- [Live API للروبوتات](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=ar): بث ثنائي الاتجاه في الوقت الفعلي
-- [تنظيم المهام](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=ar): مهام طويلة الأمد تتضمّن التفكير المكاني
-- [نظرة عامة على Gemini Robotics ER](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=ar): مقارنة النماذج والإمكانات
+- [Interfejs Live API dla robotyki](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=pl) – dwukierunkowe przesyłanie strumieniowe w czasie rzeczywistym.
+- [Orkiestracja zadań](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=pl) – zadania długoterminowe z rozumowaniem przestrzennym.
+- [Omówienie modelu Gemini Robotics ER](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=pl) – porównanie modeli i możliwości.
 
-إرسال ملاحظات
+Prześlij opinię
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)
+Ostatnia aktualizacja: 2026-07-30 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Chcesz przekazać coś jeszcze?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]

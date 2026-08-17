@@ -1,43 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=he
-fetched_at: 2026-08-10T03:19:38.923333+00:00
-title: "\u05de\u05e2\u05d1\u05e8 \u05dc-Interactions API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=ko
+fetched_at: 2026-08-17T02:34:21.940343+00:00
+title: "Interactions API\ub85c \ub9c8\uc774\uadf8\ub808\uc774\uc158 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-שליחת משוב
+의견 보내기
 
-# מעבר ל-Interactions API
+# Interactions API로 마이그레이션
 
-המדריך הזה יעזור לכם לעבור מ-`generateContent` API ל-Interactions API.
+이 가이드에서는 `generateContent` API에서 Interactions API로 이전하는 방법을 설명합니다.
 
-‫Interactions API הוא הדרך הכי פשוטה וטובה לבנות עם מודלים וסוכנים של Gemini. למרות ש-`generateContent` עדיין נתמך באופן מלא, מומלץ להשתמש ב-Interactions API לכל פיתוח חדש.
+Interactions API는 Gemini 모델 및 에이전트를 사용하여 빌드하는 가장 간단하고 효과적인 방법입니다. `generateContent`는 계속 완전히 지원되지만 모든 신규 개발에는 Interactions API를 사용하는 것이 좋습니다.
 
-### למה כדאי לעבור?
+### 마이그레이션이 필요한 이유
 
-‫Interactions API הוא הדרך הכי פשוטה וטובה שלנו לבנות באמצעות מודלים וסוכנים של Gemini:
+Interactions API는 Gemini 모델 및 에이전트를 사용하여 빌드하는 가장 간단하고 효과적인 방법입니다.
 
-- **ניהול היסטוריה בצד השרת**: תהליכים פשוטים יותר של שיחות מרובות תורות באמצעות `previous_interaction_id`. השרת מפעיל את המצב כברירת מחדל (`store=true`), אבל אפשר להגדיר התנהגות ללא מצב על ידי הגדרת `store=false`.
-- **שלבי ביצוע שניתן לצפות בהם**: שלבים מוקלדים מקלים על ניפוי באגים בתהליכים מורכבים ועל עיבוד ממשק משתמש לאירועים ביניים (כמו מחשבות או ווידג'טים של חיפוש).
-- **שימוש בכלים ותהליכי עבודה שמבוססים על סוכנים**: תמיכה מובנית בשימוש בכלים מרובי-שלבים, בתזמור ובזרימות מורכבות של נימוקים באמצעות שלבי ביצוע מוקלדים.
-- **משימות ארוכות וברקע**: תמיכה בהעברת פעולות שדורשות הרבה זמן, כמו Deep Think ו-Deep Research, לתהליכים ברקע באמצעות `background=true`.
+- **서버 측 기록 관리**: `previous_interaction_id`를 통해 멀티턴 흐름이 간소화되었습니다. 서버는 기본적으로 상태를 사용 설정하지만 (`store=true`) `store=false`를 설정하여 상태 비저장 동작을 선택할 수 있습니다.
+- **관찰 가능한 실행 단계**: 입력된 단계를 사용하면 복잡한 흐름을 쉽게 디버그하고 중간 이벤트 (예: 생각 또는 검색 위젯)의 UI를 렌더링할 수 있습니다.
+- **도구 사용 및 에이전트형 워크플로**: 유형이 지정된 실행 단계를 통해 다단계 도구 사용, 조정, 복잡한 추론 흐름을 기본적으로 지원합니다.
+- **장기 실행 및 백그라운드 작업**: `background=true`를 사용하여 Deep Think 및 Deep Research와 같은 시간 집약적인 작업을 백그라운드 프로세스로 오프로드하는 것을 지원합니다.
 
-## קלט/פלט בסיסי
+## 기본 입력/출력
 
-בקטע הזה נסביר איך להעביר בקשה פשוטה ליצירת טקסט.
+이 섹션에서는 간단한 텍스트 생성 요청을 이전하는 방법을 보여줍니다.
 
-### לפני (`generateContent`)
+### 이전 (`generateContent`)
 
-‫`generateContent` API הוא חסר מצב ומחזיר את התגובה ישירות. מבנה התגובה עוטף את הפלט ברשימה של `candidates`, שכל אחת מהן מכילה `content` עם רשימה של `parts` לניתוח.
+`generateContent` API는 상태가 없으며 응답을 직접 반환합니다. 응답 구조는 출력을 `candidates` 목록으로 래핑합니다. 각 `candidates`에는 파싱할 `parts` 목록이 있는 `content`이 포함됩니다.
 
 ### Python
 
@@ -52,7 +52,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -105,10 +105,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-‫Interactions API מחזיר משאב אינטראקציה מאוחסן עם `steps`ציר זמן. אפשר לבדוק את המערך `steps` באופן ידני כדי למצוא אירועים ביניים, אבל ערכות ה-SDK של GenAI מבית Google מספקות מאפיינים נוחים ישירות באובייקט `Interaction` שמוחזר כדי לגשת לפלט הסופי.
+Interactions API는 `steps` 타임라인과 함께 저장된 상호작용 리소스를 반환합니다. `steps` 배열을 수동으로 검사하여 중간 이벤트를 찾을 수 있지만 Google 생성형 AI SDK는 최종 출력에 액세스할 수 있도록 반환된 `Interaction` 객체에 편리한 속성을 직접 제공합니다.
 
-מאפיין הנוחות הנפוץ ביותר הוא **`.output_text`** (מחרוזת), שבאמצעותו אפשר לחלץ ולצרף באופן אוטומטי בלוקים עוקבים של `TextContent` בסוף התשובה של המודל. השיטה הזו מתאימה לתשובות פשוטות, אבל היא לא כוללת בלוקים קודמים של טקסט שמפריד ביניהם תוכן שאינו טקסט (כמו מחשבות, תמונות, אודיו או קריאות לכלים). לתשובות מורכבות או משולבות
-ממגוון סוגים, צריך להשתמש בשיטה `steps` באופן ידני.
+가장 일반적인 편의 속성은 **`.output_text`** (문자열)로, 모델 대답 끝에 있는 연속된 `TextContent` 블록을 자동으로 추출하여 결합합니다. 이 방법은 간단한 대답에는 완벽하지만 텍스트가 아닌 콘텐츠 (예: 생각, 이미지, 오디오, 도구 호출)로 구분된 이전 텍스트 블록은 포함하지 않습니다. 복잡하거나 인터리브된 멀티모달 응답의 경우 대신 `steps`를 수동으로 반복해야 합니다.
 
 ### Python
 
@@ -124,7 +123,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -180,17 +179,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## שיחות עם זיכרון
+## 멀티턴 대화
 
-ה-Interactions API מאחסן אינטראקציות כברירת מחדל, וכך מאפשר ניהול מצב בצד השרת לשיחות מרובות.
+Interactions API는 기본적으로 상호작용을 저장하여 멀티턴 대화의 서버 측 상태 관리를 지원합니다.
 
-### לפני (`generateContent`)
+### 이전 (`generateContent`)
 
-ב-`generateContent`, צריך לנהל את היסטוריית השיחות באופן ידני באמצעות מערך `contents` או כלי עזר לצ'אט בצד הלקוח.
+`generateContent`에서는 `contents` 배열 또는 클라이언트 측 채팅 도우미를 사용하여 대화 기록을 수동으로 관리해야 합니다.
 
 ### Python
 
-**שימוש בכלי העזר לצ'אט (מומלץ)**
+**채팅 도우미 사용 (권장)**
 
 ```
 from google import genai
@@ -205,7 +204,7 @@ response2 = chat.send_message("What is my name?")
 print(response2.text)
 ```
 
-**ניהול ההיסטוריה באופן ידני**
+**기록 수동 관리**
 
 ```
 from google import genai
@@ -231,9 +230,9 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### JavaScript
+### 자바스크립트
 
-**שימוש בכלי העזר לצ'אט (מומלץ)**
+**채팅 도우미 사용 (권장)**
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -248,7 +247,7 @@ response = await chat.sendMessage({ message: 'What is my name?' });
 console.log(response.text);
 ```
 
-**ניהול ההיסטוריה באופן ידני**
+**기록 수동 관리**
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -300,9 +299,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### ‫After (Interactions API)
+### After (Interactions API)
 
-ה-API של האינטראקציות מנהל את המצב בשרת. כדי להמשיך שיחה, מציינים את `previous_interaction_id`.
+Interactions API는 서버에서 상태를 관리합니다. `previous_interaction_id`를 참조하여 대화를 이어갑니다.
 
 ### Python
 
@@ -324,7 +323,7 @@ interaction2 = client.interactions.create(
 print("Response 2:", interaction2.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -395,13 +394,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## קלט מרובה מצבים
+## 멀티모달 입력
 
-שני ממשקי ה-API תומכים בקלט מולטי-מודאלי (טקסט, תמונות, סרטונים וכו').
+두 API 모두 멀티모달 입력 (텍스트, 이미지, 동영상 등)을 지원합니다.
 
-### לפני (`generateContent`)
+### 이전 (`generateContent`)
 
-ב-`generateContent`, מעבירים רשימה של `parts` במערך `contents`. התגובה מחזירה פלט ב-`parts` של המועמד הראשון.
+`generateContent`에서는 `contents` 배열 내에 `parts` 목록을 전달합니다. 응답은 첫 번째 후보의 `parts`에 출력을 반환합니다.
 
 ### Python
 
@@ -424,7 +423,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -489,9 +488,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### ‫After (Interactions API)
+### After (Interactions API)
 
-ב-API של אינטראקציות, מעבירים מערך לשדה `input`. כדי לאחזר את תוכן הפלט, מאתרים את השלב `model_output` בציר הזמן.
+Interactions API에서는 `input` 필드에 배열을 전달합니다. 타임라인에서 `model_output` 단계를 찾아 출력 콘텐츠를 가져옵니다.
 
 ### Python
 
@@ -519,7 +518,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -601,13 +600,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## פלט מובנה
+## 구조화된 출력
 
-כדי שהמודל יחזיר JSON שתואם לסכימה ספציפית, צריך להגדיר את פורמט התגובה.
+모델이 특정 스키마와 일치하는 JSON을 반환하도록 하려면 응답 형식을 구성하세요.
 
-### לפני (`generateContent`)
+### 이전 (`generateContent`)
 
-ב-`generateContent`, מגדירים את פורמט הפלט באמצעות השדות `response_mime_type` ו-`response_schema` שמוטמעים באובייקט `config` (או `generationConfig`).
+`generateContent`에서는 `config` (또는 `generationConfig`) 객체 내에 중첩된 `response_mime_type` 및 `response_schema` 필드를 사용하여 출력 형식을 구성합니다.
 
 ### Python
 
@@ -633,7 +632,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI, Type } from '@google/genai';
@@ -707,9 +706,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### ‫After (Interactions API)
+### After (Interactions API)
 
-ב-Interactions API, אמצעי הבקרה של פורמט הפלט עוברים למערך `response_format` ברמה העליונה.
+Interactions API에서 출력 형식 컨트롤이 최상위 `response_format` 배열로 이동합니다.
 
 ### Python
 
@@ -738,7 +737,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -821,13 +820,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## יצירה מולטי-מודאלית
+## 멀티모달 생성
 
-כשיוצרים תוכן במודאליות שאינה טקסט (כמו תמונות או אודיו), ההבדל העיקרי הוא במבנה התשובה של המדיה שנוצרה.
+텍스트를 넘어 이미지나 오디오와 같은 모달리티로 콘텐츠를 생성할 때의 주요 차이점은 생성된 미디어의 응답 구조입니다.
 
-### לפני (`generateContent`)
+### 이전 (`generateContent`)
 
-ב-`generateContent`, התשובה מחזירה מדיה שנוצרה ישירות ב-`parts` של המועמד, בדרך כלל כנתוני base64 ב-`inlineData`.
+`generateContent`에서 응답은 생성된 미디어를 후보의 `parts`에 직접 반환합니다. 일반적으로 `inlineData`의 base64 데이터로 반환됩니다.
 
 ```
 # Response structure concept
@@ -852,9 +851,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-### ‫After (Interactions API)
+### After (Interactions API)
 
-ב-Interactions API, מדיה שנוצרה מופיעה כפריטים נפרדים במערך `content` של שלב `model_output` בציר הזמן, תוך שמירה על הרצף הכרונולוגי של האינטראקציה.
+상호작용 API에서 생성된 미디어는 타임라인의 `model_output` 단계의 `content` 배열 내에 별도의 항목으로 표시되어 상호작용의 시간순 흐름을 유지합니다.
 
 ```
 # Response structure concept
@@ -880,15 +879,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-כך ניתוח התגובה נשאר עקבי עם האופן שבו קלטים ופלט טקסט מטופלים – כל דבר הוא שלב בציר הזמן.
+이렇게 하면 입력과 텍스트 출력이 처리되는 방식과 일관되게 대답을 파싱할 수 있습니다. 타임라인의 모든 항목이 단계입니다.
 
-## כלים בצד השרת
+## 서버 측 도구
 
-‫Gemini תומך בכלים מובנים בצד השרת, כמו עיגון נתונים של חיפוש Google. ההבדל העיקרי הוא באופן שבו התשובה מייצגת את הפעלת הכלי.
+Gemini는 Google 검색 그라운딩과 같은 기본 제공 서버 측 도구를 지원합니다. 주요 차이점은 대답에서 도구 실행을 나타내는 방식입니다.
 
-### לפני (`generateContent`)
+### 이전 (`generateContent`)
 
-ב-`generateContent`, הכלים בצד השרת הם ברובם אטומים. אתם מפעילים את הכלי ומקבלים תשובה סופית עם אובייקט `groundingMetadata` נפרד. חשוב לציין שהציטוטים לא מוצגים בתוך הטקסט. `groundingSupports` נעשה שימוש באינדקסים של תווים כדי למפות פלחי טקסט בחזרה למקורות באינטרנט ב-`groundingChunks`.
+`generateContent`에서 서버 측 도구는 대부분 불투명합니다. 도구를 사용 설정하고 별도의 `groundingMetadata` 객체로 최종 답변을 받습니다. 중요한 점은 인용이 인라인이 아니라는 것입니다. `groundingSupports`는 문자 색인을 사용하여 텍스트 세그먼트를 `groundingChunks`의 웹 소스에 다시 매핑합니다.
 
 ### Python
 
@@ -914,7 +913,7 @@ for support in metadata.grounding_supports:
     print(f"Citation: {support.segment.text}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -996,11 +995,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### ‫After (Interactions API)
+### After (Interactions API)
 
-ב-Interactions API, כלים בצד השרת מספקים שקיפות מלאה של ציר הזמן. ה-API מתעד את הקריאה ואת התוצאה כביצועים נפרדים `steps` (`google_search_call` ו-`google_search_result`), וחושף בדיוק אילו נתונים המודל אחזר.
+Interactions API에서 서버 측 도구는 전체 타임라인 투명성을 제공합니다. API는 호출과 결과를 별도의 실행 `steps` (`google_search_call` 및 `google_search_result`)으로 기록하여 모델이 검색한 데이터를 정확하게 노출합니다.
 
-בנוסף, ה-API מחזיר ציטוטים **בגוף הטקסט**. במקום למפות אינדקסים מאובייקט מטא-נתונים נפרד, פריט הטקסט בשלב `model_output` מכיל מערך `annotations` משלו שמקושר ישירות למקור.
+또한 API는 인용을 **인라인**으로 반환합니다. 별도의 메타데이터 객체에서 색인을 매핑하는 대신 `model_output` 단계 내의 텍스트 항목에는 소스에 직접 연결되는 자체 `annotations` 배열이 포함됩니다.
 
 ### Python
 
@@ -1025,7 +1024,7 @@ for step in interaction.steps:
                 print(f"Citation: {anno.title} ({anno.uri})")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1111,13 +1110,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## בקשה להפעלת פונקציה
+## 함수 호출
 
-גם המבנה של קריאות לפונקציות והתוצאות שלהן השתנה כדי להתאים לסכימת השלבים.
+함수 호출 및 결과의 구조도 단계 스키마에 맞게 변경되었습니다.
 
-### לפני (`generateContent`)
+### 이전 (`generateContent`)
 
-ב-`generateContent`, התגובה מחזירה קריאות לפונקציות בתוך המועמדים.\* {Python}
+`generateContent`에서 대답은 후보 내의 함수 호출을 반환합니다.\* {Python}
 
 ```
 ```python
@@ -1163,7 +1162,7 @@ print(response.text)
 ```
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1251,9 +1250,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### ‫After (Interactions API)
+### After (Interactions API)
 
-עכשיו, קריאות לכלים ותוצאות הן שלבים נפרדים בציר הזמן.
+이제 도구 호출과 결과가 타임라인에서 별도의 단계로 표시됩니다.
 
 ### Python
 
@@ -1301,7 +1300,7 @@ for step in interaction.steps:
         print(interaction.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1438,15 +1437,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## סטרימינג
+## 스트리밍
 
-ההבדל העיקרי בסטרימינג הוא שב-Interactions API משתמשים באותה נקודת קצה עם `"stream": true` בגוף הבקשה, בעוד שב-`generateContent` API נדרשה קריאה לנקודת קצה ייעודית (`:streamGenerateContent`).
+스트리밍의 주요 차이점은 Interactions API는 요청 본문에 `"stream": true`가 있는 동일한 엔드포인트를 사용하는 반면 `generateContent` API는 전용 엔드포인트 (`:streamGenerateContent`)를 호출해야 한다는 것입니다.
 
-בנוסף, אירועים בשידור חי משתמשים עכשיו בסוגים מיוחדים כדי לעקוב אחרי מחזור החיים של האינטראקציה ואחרי שלבי הביצוע לאורך ציר הזמן.
+또한 스트리밍 이벤트는 이제 전문화된 유형을 사용하여 상호작용 수명 주기를 모니터링하고 타임라인을 따라 실행 단계를 추적합니다.
 
-### לפני (`generateContentStream`)
+### 이전 (`generateContentStream`)
 
-עם `generateContent`, אתם צורכים זרם של חלקי תגובה.
+`generateContent`를 사용하면 응답 청크 스트림을 소비합니다.
 
 ### Python
 
@@ -1462,7 +1461,7 @@ for chunk in response:
     print(chunk.text, end="")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const responseStream = await client.models.generateContentStream({
@@ -1504,9 +1503,9 @@ event: content.stop
 data: {"event_type": "content.stop", "index": 1}
 ```
 
-### ‫After (Interactions API)
+### After (Interactions API)
 
-ב-Interactions API, הסטרימינג משתמש ב-Server-Sent Events ‏ (SSE) ובסוגי דלתא מיוחדים כדי לייצג שלבי ביצוע בזמן שהם מתרחשים.
+Interactions API에서 스트리밍은 서버 전송 이벤트 (SSE)와 특수 델타 유형을 사용하여 실행 단계를 발생하는 대로 나타냅니다.
 
 ### Python
 
@@ -1529,7 +1528,7 @@ for event in stream:
         print(f"\n\n--- Stream Finished ---")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1555,7 +1554,7 @@ for await (const event of stream) {
 
 ### REST
 
-# Example SSE stream output
+# SSE 스트림 출력 예
 **event: interaction.created
 data: {"type": "interaction.created", "interaction": {"id": "int\_xyz", "status": "created"}}
 event: interaction.in\_progress
@@ -1576,13 +1575,13 @@ event: interaction.completed
 data: {"type": "interaction.completed", "interaction": {"id": "int\_xyz", "status": "completed", "usage": {"prompt\_tokens": 10, "completion\_tokens": 5, "total\_tokens": 15}}}**
 ```
 
-### כלים לסטרימינג וקריאות לפונקציות
+### 스트리밍 도구 및 함수 호출
 
-התנהגות הכלים בסטרימינג השתנתה באופן משמעותי מגרסה `generateContent` כדי לספק שליטה מפורטת יותר ושקיפות רבה יותר.
+스트림에서 도구가 작동하는 방식이 `generateContent`에서 크게 변경되어 더 세부적인 제어 및 가시성을 제공합니다.
 
-#### לפני (`generateContent`)
+#### 이전 (`generateContent`)
 
-עם `generateContent`, קריאות לפונקציות סטרימינג מגיעות בשלמותן בחלק אחד. לא ניתן היה לראות את הארגומנטים שנוצרו בזמן אמת, ולכן הפונקציה לבדיקת הבקשות פשוט בדקה אם יש אובייקט `functionCall` שלם.
+`generateContent`를 사용하면 스트리밍 함수 호출이 단일 청크로 완전히 도착했습니다. 실시간으로 생성되는 인수를 확인할 수 없었으므로 핸들러는 완전한 `functionCall` 객체만 확인했습니다.
 
 ### Python
 
@@ -1607,7 +1606,7 @@ for chunk in stream:
         print(chunk.text, end="")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1646,9 +1645,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 {"candidates": [{"content": {"parts": [{"functionCall": {"name": "get_weather", "args": {"location": "Boston, MA"}}}]}}]}
 ```
 
-#### ‫After (Interactions API)
+#### After (Interactions API)
 
-ה-Interactions API מעביר את הארגומנטים של הקריאה לפונקציה כזרם של אירועים, תו אחר תו, כשהוא משתמש ב-`arguments`. מחזור החיים המלא של הכלי – מחשבה, קריאה, תוצאה ופלט – מתרחש כסדרה של שלבים נפרדים.
+Interactions API는 함수 호출 인수를 `arguments` 이벤트로 문자별로 스트리밍합니다. 전체 도구 수명 주기(생각, 호출, 결과, 출력)는 일련의 개별 단계로 진행됩니다.
 
 ### Python
 
@@ -1677,7 +1676,7 @@ for event in stream:
         print("\n--- Done ---")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1793,12 +1792,12 @@ event: interaction.completed
 data: {"type": "interaction.completed", "interaction": {"id": "int_xyz", "status": "completed", "usage": {"prompt_tokens": 256, "completion_tokens": 128, "total_tokens": 384}}}
 ```
 
-שליחת משוב
+의견 보내기
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-עדכון אחרון: 2026-07-30 (שעון UTC).
+최종 업데이트: 2026-07-30(UTC)
 
-רוצה לתת לנו משוב?
+의견을 전달하고 싶나요?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-30 (שעון UTC)."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-30(UTC)"],[],[]]

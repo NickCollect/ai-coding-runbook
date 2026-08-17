@@ -1,52 +1,52 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/caching?hl=it
-fetched_at: 2026-08-10T03:23:52.208370+00:00
-title: "Memorizzazione nella cache del contesto \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/caching?hl=de
+fetched_at: 2026-08-17T02:21:47.239311+00:00
+title: "Kontext-Caching \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Invia feedback
+Feedback geben
 
-# Memorizzazione nella cache del contesto
+# Kontext-Caching
 
-In un flusso di lavoro AI tipico, potresti passare gli stessi token di input più e più volte a un modello. L'API Gemini offre la memorizzazione nella cache implicita per ottimizzare prestazioni e costi.
+In einem typischen KI-Workflow werden dieselben Eingabetokens immer wieder an ein Modell übergeben. Die Gemini API bietet implizites Caching, um Leistung und Kosten zu optimieren.
 
-## Memorizzazione nella cache implicita
+## Implizites Caching
 
-La memorizzazione nella cache implicita è abilitata per impostazione predefinita per tutti i modelli Gemini 2.5 e versioni successive. È
-supportata sia per le modalità di conversazione [stateful](https://ai.google.dev/gemini-api/docs/text-generation?hl=it#multi-turn-conversations) (utilizzando `previous_interaction_id`)
-sia per quelle [stateless](https://ai.google.dev/gemini-api/docs/text-generation?hl=it#stateless-conversations).
-Se la tua richiesta raggiunge le cache, trasferiamo automaticamente i risparmi sui costi. Non devi fare nulla per abilitare questa funzionalità. Il conteggio minimo dei token di input per la memorizzazione nella cache del contesto è elencato nella tabella seguente per ogni modello:
+Implizites Caching ist standardmäßig für alle Gemini 2.5-Modelle und neuere Modelle aktiviert. Es wird
+sowohl für [zustandsorientierte](https://ai.google.dev/gemini-api/docs/text-generation?hl=de#multi-turn-conversations) (mit `previous_interaction_id`)
+als auch für [zustandslose](https://ai.google.dev/gemini-api/docs/text-generation?hl=de#stateless-conversations) Konversationsmodi unterstützt.
+Wir geben Kosteneinsparungen automatisch weiter, wenn Ihre Anfrage auf Caches trifft. Sie müssen nichts tun, um diese Funktion zu aktivieren. Die Mindestanzahl an Eingabetokens für das Kontext-Caching ist in der folgenden Tabelle für jedes Modell aufgeführt:
 
-| Modello | Limite minimo di token |
+| Modell | Mindestanzahl an Tokens |
 | --- | --- |
-| Gemini 3.5 Flash | 4096 |
-| Gemini 3.1 Pro (anteprima) | 4096 |
+| Gemini 3.5 Flash | 4.096 |
+| Gemini 3.1 Pro (Vorabversion) | 4.096 |
 | Gemini 2.5 Flash | 2048 |
 | Gemini 2.5 Pro | 2048 |
 
-Per aumentare la probabilità di un successo della cache implicita:
+So erhöhen Sie die Wahrscheinlichkeit eines impliziten Cache-Treffers:
 
-- Prova a inserire contenuti di grandi dimensioni e comuni all'inizio del prompt
-- Prova a inviare richieste con prefisso simile in un breve periodo di tempo
+- Platzieren Sie große und häufig verwendete Inhalte am Anfang Ihrer Eingabeaufforderung.
+- Senden Sie Anfragen mit ähnlichem Präfix in kurzer Zeit.
 
-Puoi visualizzare il numero di token che sono stati hit della cache nel campo `usage.total_cached_tokens` (Python e JavaScript) dell'oggetto di risposta.
+Die Anzahl der Tokens, die Cache-Treffer waren, finden Sie im Feld `usage.total_cached_tokens` des Antwortobjekts (Python und JavaScript).
 
-Invia feedback
+Feedback geben
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Ultimo aggiornamento 2026-07-30 UTC.
+Zuletzt aktualisiert: 2026-07-30 (UTC).
 
-Vuoi dirci altro?
+Haben Sie Feedback für uns?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-30 (UTC)."],[],[]]

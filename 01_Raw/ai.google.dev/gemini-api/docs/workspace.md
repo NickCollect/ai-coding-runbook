@@ -1,50 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/workspace?hl=zh-CN
-fetched_at: 2026-08-10T03:09:12.287390+00:00
-title: "\u4f7f\u7528\u60a8\u7684 Workspace \u5e10\u53f7\u8bbf\u95ee Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/workspace?hl=zh-TW
+fetched_at: 2026-08-17T02:24:52.956802+00:00
+title: "\u900f\u904e Workspace \u5e33\u6236\u5b58\u53d6 Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-发送反馈
+提供意見
 
-# 使用您的 Workspace 帐号访问 Google AI Studio
+# 透過 Workspace 帳戶存取 Google AI Studio
 
-所有 [Google Workspace](https://workspace.google.com?hl=zh-cn) 用户默认都有权访问 AI Studio。如果您是 Workspace 用户，并且想要开始使用 AI Studio，请参阅 [AI Studio 快速入门](https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=zh-cn)。
+所有 [Google Workspace](https://workspace.google.com?hl=zh-tw) 使用者預設都能存取 AI Studio。如果您是 Workspace 使用者，想開始使用 AI Studio，請參閱 [AI Studio 快速入門導覽課程](https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=zh-tw)。
 
-## 问题排查
+## 疑難排解
 
-如果您的 Google Workspace 账号无法访问 AI Studio，您可能会看到类似以下内容的错误消息：
+如果 Google Workspace 帳戶無法存取 AI Studio，您可能會看到類似下列的錯誤訊息：
 
 `We are sorry, but you do not have access to Google AI Studio. Please contact
 your Organization Administrator for access.`
 
-如果您认为自己应该有权访问 AI Studio，请与您的 Workspace 管理员联系。
+如果您認為自己應該有權存取 AI Studio，請與 Workspace 管理員聯絡。
 
-## 为 Workspace 用户启用 AI Studio
+## 為 Workspace 使用者啟用 AI Studio
 
-作为 Google Workspace 管理员，您可以控制哪些用户可以使用 AI Studio：
+Google Workspace 管理員可以控管哪些人能使用 AI Studio：
 
-- 默认情况下，AI Studio 在所有版本中都处于启用状态。
-- 您可以为不同组织部门或同一组织部门中的一组用户停用或启用 AI Studio。
-- Google Workspace 教育版：未满 18 周岁的用户无法通过其 Google Workspace 教育版账号使用 AI Studio。即使 AI Studio 设置处于开启状态，也是如此。如需了解详情，请参阅[按年龄控制对 Google 服务的使用权限](https://support.google.com/a/answer/10651918?hl=zh-cn)。
+- 所有版本預設都會啟用 AI Studio。
+- 您可以為機構單位內或跨機構單位的使用者群組開啟或關閉 AI Studio。
+- Google Workspace for Education 版本：未滿 18 歲的使用者無法透過 Google Workspace for Education 帳戶使用 AI Studio。即使「AI Studio」設定已開啟，也無法使用這些應用程式。詳情請參閱「[依年齡層控管存取 Google 服務的權限](https://support.google.com/a/answer/10651918?hl=zh-tw)」。
 
-如需为组织中的用户启用或停用 AI Studio，请参阅[为用户启用或停用 Google AI Studio](https://support.google.com/a/answer/15004095?hl=zh-cn)。
+如要為機構中的使用者啟用或停用 AI Studio，請參閱「[為使用者啟用或停用 Google AI Studio](https://support.google.com/a/answer/15004095?hl=zh-tw)」。
 
-发送反馈
+提供意見
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-最后更新时间 (UTC)：2026-04-29。
+上次更新時間：2026-04-29 (世界標準時間)。
 
-需要向我们提供更多信息？
+想進一步說明嗎？
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-29 (世界標準時間)。"],[],[]]

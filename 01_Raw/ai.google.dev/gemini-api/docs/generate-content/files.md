@@ -1,35 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/files?hl=vi
-fetched_at: 2026-08-10T03:12:14.963872+00:00
-title: "API T\u1ec7p \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/files?hl=ja
+fetched_at: 2026-08-17T02:26:30.474877+00:00
+title: "Files API \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-# API Tệp
+# Files API
 
-Gemini có thể xử lý nhiều loại dữ liệu đầu vào, bao gồm văn bản, hình ảnh và âm thanh cùng một lúc.
+Gemini は、テキスト、画像、音声など、さまざまな種類の入力データを同時に処理できます。
 
-Hướng dẫn này trình bày cách xử lý các tệp nội dung nghe nhìn bằng Files API. Các thao tác cơ bản đều giống nhau đối với tệp âm thanh, hình ảnh, video, tài liệu và các loại tệp được hỗ trợ khác.
+このガイドでは、Files API を使用してメディア ファイルを操作する方法について説明します。音声ファイル、画像、動画、ドキュメント、その他のサポートされているファイル形式の基本的な操作は同じです。
 
-Để biết hướng dẫn về câu lệnh cho tệp, hãy xem phần [Hướng dẫn về câu lệnh cho tệp](https://ai.google.dev/gemini-api/docs/files?hl=vi#prompt-guide).
+ファイル プロンプトのガイダンスについては、[ファイル プロンプト ガイド](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide)をご覧ください。
 
-## Tải tệp lên
+## ファイルをアップロード
 
-Bạn có thể dùng Files API để tải một tệp đa phương tiện lên. Luôn sử dụng Files API khi tổng kích thước yêu cầu (bao gồm cả tệp, câu lệnh văn bản, hướng dẫn hệ thống, v.v.) lớn hơn 100 MB. Đối với tệp PDF, giới hạn là 50 MB.
+Files API を使用してメディア ファイルをアップロードできます。リクエストの合計サイズ（ファイル、テキスト プロンプト、システム指示などを含む）が 100 MB を超える場合は、常に Files API を使用します。PDF ファイルの上限は 50 MB です。
 
-Đoạn mã sau đây tải một tệp lên rồi dùng tệp đó trong một lệnh gọi đến `generateContent`.
+次のコードは、ファイルをアップロードしてから、`generateContent` の呼び出しでそのファイルを使用します。
 
 ### Python
 
@@ -156,9 +156,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## Lấy siêu dữ liệu cho một tệp
+## ファイルのメタデータを取得する
 
-Bạn có thể xác minh rằng API đã lưu trữ thành công tệp được tải lên và nhận siêu dữ liệu của tệp đó bằng cách gọi `files.get`.
+`files.get` を呼び出すことで、API がアップロードされたファイルを正常に保存し、そのメタデータを取得したことを確認できます。
 
 ### Python
 
@@ -226,9 +226,9 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## Liệt kê các tệp đã tải lên
+## アップロードされたファイルを一覧表示する
 
-Đoạn mã sau đây sẽ lấy danh sách tất cả các tệp đã tải lên:
+次のコードは、アップロードされたすべてのファイルのリストを取得します。
 
 ### Python
 
@@ -281,9 +281,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/files" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Xoá tệp đã tải lên
+## アップロードしたファイルを削除する
 
-Các tệp sẽ tự động bị xoá sau 48 giờ. Bạn cũng có thể xoá tệp đã tải lên theo cách thủ công:
+ファイルは 48 時間後に自動的に削除されます。アップロードしたファイルを手動で削除することもできます。
 
 ### Python
 
@@ -335,191 +335,188 @@ curl --request "DELETE" https://generativelanguage.googleapis.com/v1beta/files/$
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Thông tin về việc sử dụng
+## 使用状況情報
 
-Bạn có thể dùng Files API để tải lên và tương tác với các tệp đa phương tiện. Files API cho phép bạn lưu trữ tối đa 20 GB tệp cho mỗi dự án, với kích thước tối đa cho mỗi tệp là 2 GB. Các tệp được lưu trữ trong 48 giờ. Trong thời gian đó, bạn có thể dùng API để lấy siêu dữ liệu về các tệp, nhưng không thể tải các tệp xuống.
-Files API được cung cấp miễn phí ở mọi khu vực có Gemini API.
+Files API を使用して、メディア ファイルをアップロードし、操作できます。Files API を使用すると、プロジェクトごとに最大 20 GB のファイルを保存できます。ファイルごとの最大サイズは 2 GB です。ファイルは 48 時間保存されます。この間、API を使用してファイルに関するメタデータを取得することはできますが、ファイルをダウンロードすることはできません。Files API は、Gemini API が利用可能なすべてのリージョンで無料で利用できます。
 
-## Chiến lược nhắc nhở về tệp
+## ファイル プロンプト戦略
 
-Phần này cung cấp hướng dẫn và các phương pháp hay nhất để sử dụng tệp đa phương tiện với câu lệnh cho Gemini API.
+このセクションでは、Gemini API のプロンプトでメディア ファイルを使用するためのガイダンスとベスト プラクティスについて説明します。
 
-Việc có thể sử dụng nhiều loại dữ liệu trong câu lệnh giúp bạn linh hoạt hơn về những nhiệm vụ mà bạn có thể giải quyết bằng Gemini API. Ví dụ: bạn có thể gửi cho mô hình một bức ảnh về một bữa ăn ngon và yêu cầu mô hình viết một bài đăng ngắn trên blog về bữa ăn đó.
+プロンプトでさまざまな種類のデータを使用できるため、Gemini API で処理できるタスクの柔軟性が高まります。たとえば、おいしい食事の写真をモデルに送信し、その食事に関する短いブログ記事を作成するよう依頼できます。
 
 |  |  |
 | --- | --- |
-| **Câu lệnh** | **Đáp** |
-| Viết một bài đăng ngắn gọn và hấp dẫn trên blog dựa trên bức ảnh này. Nội dung đó phải có phần mô tả về bữa ăn trong ảnh và nói về hành trình chuẩn bị bữa ăn của tôi.   Bánh quy | Chuẩn bị sẵn bữa ăn là một cách hiệu quả để tiết kiệm thời gian và tiền bạc, đồng thời giúp bạn ăn uống lành mạnh hơn. Bữa ăn này là một ví dụ điển hình về bữa ăn lành mạnh và ngon miệng mà bạn có thể dễ dàng chuẩn bị trước.  Bữa ăn này có cơm gạo lứt, rau củ nướng và gà sốt teriyaki. Gạo lứt là một loại cacbohydrat phức tạp và lành mạnh, giúp bạn có năng lượng bền bỉ. Rau củ nướng là một cách tuyệt vời để bổ sung vitamin và khoáng chất hằng ngày, còn món gà teriyaki là một lựa chọn ngon miệng và giàu protein.  Món ăn này cũng rất dễ chế biến. Bạn chỉ cần nấu gạo lứt, nướng rau và nấu món gà sốt teriyaki. Sau khi nấu xong, hãy chia thức ăn vào các hộp đựng và bảo quản trong tủ lạnh. Sau đó, bạn có thể lấy hộp đựng và đi làm vào những buổi sáng bận rộn!  Nếu bạn đang tìm một bữa ăn lành mạnh và ngon miệng mà có thể dễ dàng chuẩn bị trước, thì đây là một lựa chọn tuyệt vời. Món ăn này giàu dinh dưỡng và hương vị, chắc chắn sẽ giúp bạn cảm thấy no và hài lòng.  Chúc bạn chuẩn bị được những bữa ăn lành mạnh và ngon miệng! |
+| **プロンプト** | **レスポンス** |
+| この写真に基づいて、魅力的な短いブログ投稿を書いてください。写真に写っている食事の説明と、私がミールプレップ（食事の作り置き）を始めた経緯について説明する必要があります。   クッキー | ミールプレップは、時間とお金の節約に役立ち、健康的な食事にもつながります。この食事は、事前に簡単に準備できる、健康的でおいしい食事の好例です。  この食事は、玄米、焼き野菜、鶏肉の照り焼きが特徴です。玄米は、持続的なエネルギーを供給する健康的で複合的な炭水化物です。焼き野菜は、1 日に必要なビタミンとミネラルを摂取するのに最適です。鶏肉の照り焼きは、おいしくてタンパク質が豊富なオプションです。  この食事は準備も簡単です。玄米を炊き、野菜をローストし、鶏肉の照り焼きを作ります。すべて調理したら、食事の準備用容器に分けて冷蔵庫に保管します。忙しい朝に、容器を持って出かけることができます。  健康的で美味しい食事を簡単に準備したいなら、この食事がおすすめです。栄養と風味がたっぷり詰まっており、満腹感と満足感が得られます。  健康的でおいしいミールプレップを楽しみましょう。 |
 
-Nếu gặp khó khăn khi nhận được kết quả mong muốn từ những câu lệnh sử dụng tệp đa phương tiện, bạn có thể áp dụng một số chiến lược để đạt được kết quả mong muốn. Các phần sau đây cung cấp các phương pháp thiết kế và mẹo khắc phục sự cố để cải thiện câu lệnh sử dụng dữ liệu đầu vào đa phương thức.
+メディア ファイルを使用するプロンプトから目的の出力を取得できない場合は、目的の結果を得るために役立つ戦略がいくつかあります。以降のセクションでは、マルチモーダル入力を使用するプロンプトを改善するための設計アプローチとトラブルシューティングのヒントについて説明します。
 
-Bạn có thể cải thiện câu lệnh đa phương thức bằng cách làm theo các phương pháp hay nhất sau:
+マルチモーダル プロンプトは、次のベスト プラクティスに沿って改善できます。
 
-- ### [Kiến thức cơ bản về thiết kế câu lệnh](#specific-instructions)
+- ### [プロンプト設計の基礎](#specific-instructions)
 
-  - **Đưa ra chỉ dẫn cụ thể**: Soạn thảo chỉ dẫn rõ ràng và ngắn gọn để giảm thiểu khả năng hiểu sai.
-  - **Thêm một vài ví dụ vào câu lệnh:** Sử dụng một vài ví dụ thực tế để minh hoạ những gì bạn muốn đạt được.
-  - **Chia nhỏ thành từng bước**: Chia các việc phức tạp thành những mục tiêu phụ dễ quản lý, hướng dẫn mô hình thực hiện quy trình.
-  - **Chỉ định định dạng đầu ra**: Trong câu lệnh, hãy yêu cầu đầu ra ở định dạng bạn muốn, chẳng hạn như markdown, JSON, HTML, v.v.
-  - **Đặt hình ảnh lên trước đối với câu lệnh có một hình ảnh**: Mặc dù Gemini có thể xử lý dữ liệu đầu vào là hình ảnh và văn bản theo bất kỳ thứ tự nào, nhưng đối với câu lệnh có một hình ảnh, Gemini có thể hoạt động hiệu quả hơn nếu hình ảnh (hoặc video) đó được đặt trước câu lệnh văn bản. Tuy nhiên, đối với những câu lệnh yêu cầu hình ảnh phải được xen kẽ với văn bản để có ý nghĩa, hãy sử dụng bất kỳ thứ tự nào tự nhiên nhất.
-- ### [Khắc phục sự cố về câu lệnh đa phương thức](#troubleshooting)
+  - **指示を具体的にする**: 誤解を招かないように明確で簡潔な指示を記述します。
+  - **プロンプトにいくつかの例を加える:** 現実的な数個の例を使用して実現したいことを示します。
+  - **小さいステップに分ける**: 複雑なタスクを扱いやすい中間目標に分割して、プロセスに沿ってモデルを導きます。
+  - **出力形式を指定する**: プロンプトで、必要とする形式（マークダウン、JSON、HTML など）で出力することを指示します。
+  - **単一画像のプロンプトではまず画像を配置する**: Gemini は、画像とテキストの入力をどのような順序でも処理できますが、単一画像のプロンプトの場合は、対象の画像（または動画）をテキストのプロンプトよりも前に配置することでパフォーマンスが向上する可能性があります。ただし、その画像がテキストと複雑に絡み合っている場合は、最も自然に意味を捉えることができる順序を使用してください。
+- ### [マルチモーダル プロンプトのトラブルシューティング](#troubleshooting)
 
-  - **Nếu mô hình không lấy thông tin từ phần liên quan của hình ảnh:** Đưa ra gợi ý về những khía cạnh của hình ảnh mà bạn muốn câu lệnh lấy thông tin.
-  - **Nếu đầu ra của mô hình quá chung chung (không đủ phù hợp với đầu vào là hình ảnh/video):** Khi bắt đầu câu lệnh, hãy thử yêu cầu mô hình mô tả(các) hình ảnh hoặc video trước khi đưa ra hướng dẫn về nhiệm vụ, hoặc thử yêu cầu mô hình tham khảo nội dung trong hình ảnh.
-  - **Cách khắc phục sự cố về phần bị lỗi:** Yêu cầu mô hình mô tả hình ảnh hoặc giải thích lý do để đánh giá mức độ hiểu biết ban đầu của mô hình.
-  - **Nếu câu lệnh của bạn tạo ra nội dung ảo:** Hãy thử giảm chế độ cài đặt nhiệt độ hoặc yêu cầu mô hình cung cấp nội dung mô tả ngắn hơn để mô hình ít có khả năng suy đoán thêm chi tiết.
-  - **Điều chỉnh các tham số lấy mẫu:** Thử nghiệm với các chế độ cài đặt nhiệt độ và lựa chọn top-k khác nhau để điều chỉnh khả năng sáng tạo của mô hình.
+  - **モデルが画像の該当箇所から情報を抽出していない場合:** プロンプトで画像のどの部分から情報を引き出してほしいかについてのヒントを出してください。
+  - **モデルの出力内容が一般的すぎる（入力した画像 / 動画に十分対応していない）場合:** プロンプトの冒頭で、タスクの指示を出す前にモデルに画像や動画について説明するよう求めるか、画像の内容に言及するよう求めてみてください。
+  - **失敗した部分のトラブルシューティングを行うには:** モデルの最初の理解度を測るために、モデルに画像の説明を求めるか、モデルに推論についての説明を求めます。
+  - **プロンプトによりハルシネーションが生じたコンテンツが生成された場合:** 温度設定を下げるか、モデルに短い説明を求め、追加の詳細情報が推定されないようにしてみます。
+  - **サンプリング パラメータのチューニング:** さまざまな Temperature 設定と Top-K 選択を試して、モデルの創造性を調整します。
 
-### Đưa ra hướng dẫn cụ thể
+### 指示を具体的にする
 
-Câu lệnh sẽ hiệu quả nhất khi rõ ràng và chi tiết. Nếu bạn có một kết quả cụ thể trong đầu, thì tốt hơn là bạn nên đưa yêu cầu đó vào câu lệnh để đảm bảo bạn nhận được kết quả mình muốn.
+プロンプトは、明確かつ詳細である場合に最も良い結果が出ます。特定の出力を想定している場合は、必要な出力を確実に得られるように、その要件をプロンプトに含めることをおすすめします。
 
-Đối với hình ảnh này về một bảng thông tin tại sân bay, nếu bạn chỉ yêu cầu mô hình "mô tả hình ảnh này", thì mô hình có thể tạo ra một nội dung mô tả chung chung. Nếu cần mô hình phân tích thời gian và thành phố trong hình ảnh, bạn có thể đưa yêu cầu đó trực tiếp vào câu lệnh.
+下に示す空港の発着表示板の画像の場合、「この画像について説明する」ようにモデルにリクエストすると、漠然とした説明が生成される可能性があります。モデルによって画像から時刻と都市が抽出されることを必要とする場合は、そのリクエストをプロンプトに直接追加します。
 
-| Câu lệnh | Câu trả lời của mô hình |
+| プロンプト | モデルのレスポンス |
 | --- | --- |
-| Mô tả hình ảnh này. | Hình ảnh cho thấy bảng thông tin chuyến bay hạ cánh và khởi hành tại sân bay. |
+| この画像を説明してください。 | この画像は、空港の発着表示板を示しています。 |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **更新されたプロンプト** | **改善されたレスポンス** |
 | --- | --- |
-| Lịch trình du lịch Phân tích thời gian và thành phố từ bảng thông tin tại sân bay xuất hiện trong hình ảnh này thành một danh sách. | - 10:50 Moscow - 11:05 Edinburgh - 11:05 London - 11:10 Bucharest - 11:30 Kiev - 11:35 Dublin - 11:45 Đông Midlands - 12:15 Sofia - 12:30 London - 12:30 Newcastle - 12:40 St Petersburg - 12:40 London - 12:45 Manchester |
+| 運行時刻表 この画像にある空港の発着表示板の時刻と都市を抽出してリストにしてください。 | - 10:50 モスクワ - 11:05 エディンバラ - 11:05 ロンドン - 11:10 ブカレスト - 11:30 キーウ - 11:35 ダブリン - 11:45 イースト ミッドランズ - 12:15 ソフィア - 12:30 ロンドン - 12:30 ニューカッスル - 12:40 サンクトペテルブルク - 12:40 ロンドン - 12:45 マンチェスター |
 
-### Thêm một vài ví dụ
+### 例をいくつか追加する
 
-Mô hình Gemini có thể chấp nhận nhiều dữ liệu đầu vào mà mô hình có thể dùng làm ví dụ để hiểu được đầu ra bạn muốn. Việc thêm những ví dụ này có thể giúp mô hình xác định các mẫu và áp dụng mối quan hệ giữa hình ảnh và câu trả lời đã cho vào ví dụ mới. Đây cũng được gọi là học "từ một vài dữ liệu".
+この Gemini モデルはさまざまな入力を受け付け、その入力を例として使用するとユーザーが必要とする出力を理解できます。こうした例を追加することでモデルがパターンを識別できるようになり、指定された画像と回答の関係を新しい例に適用できます。これは「少数ショット」学習とも呼ばれます。
 
-Trong ví dụ bên dưới, kết quả ban đầu được viết dưới dạng câu và cũng chứa quốc gia (Brazil). Giả sử bạn muốn đầu ra ở một định dạng hoặc kiểu khác và bạn chỉ muốn có thành phố chứ không phải quốc gia. Việc đặt câu lệnh kèm một vài ví dụ vào câu lệnh có thể định hướng mô hình phản hồi theo cách bạn muốn.
+下の例では、最初の出力が文章形式で記述されており、国（ブラジル）も含まれています。別の形式やスタイルで出力し、国ではなく都市のみを出力したいとします。プロンプトに少数ショットの例を追加すると、モデルを意図したとおりに応答するように誘導できます。
 
-| **Câu lệnh** | **Phản hồi của mô hình** |
+| **プロンプト** | **モデルのレスポンス** |
 | --- | --- |
-| Lịch trình du lịch Xác định thành phố cùng với địa danh. | Địa danh này là tượng Chúa Kitô Cứu thế ở Rio de Janeiro, Brazil. |
+| 運行時刻表 ランドマークに一致する都市を特定してください。 | このランドマークは、ブラジルのリオデジャネイロにあるコルコバードのキリスト像です。 |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **更新されたプロンプト** | **改善されたレスポンス** |
 | --- | --- |
-| Xác định thành phố cùng với địa danh. đấu trường La Mã | thành phố: Rome, địa danh: Đấu trường La Mã. |
-| Tử Cấm Thành | thành phố: Bắc Kinh, địa danh: Tử Cấm Thành |
-| tử cấm thành | thành phố: Rio de Janeiro, địa danh: Tượng Chúa Kitô Cứu thế |
+| ランドマークに一致する都市を特定してください。 コロッセオ | 都市: ローマ、ランドマーク: コロッセオ。 |
+| 紫禁城 | 都市: 北京、ランドマーク: 紫禁城 |
+| 紫禁城 | 都市: リオデジャネイロ、ランドマーク: コルコバードのキリスト像 |
 
-### Phân tích từng bước
+### 順を追って説明する
 
-Đối với những tác vụ phức tạp như những tác vụ đòi hỏi cả khả năng hiểu biết trực quan và suy luận, bạn nên chia tác vụ thành các bước nhỏ hơn và đơn giản hơn. Ngoài ra, bạn cũng có thể yêu cầu trực tiếp mô hình "suy nghĩ từng bước" trong câu lệnh của mình để đạt được hiệu quả.
+視覚的な理解と推論の両方を必要とするような複雑なタスクの場合は、タスクをより小さく、より簡単なステップに分割することが有効です。また、プロンプトの中でモデルに直接「順を追って考える」ように指示することも効果的な場合があります。
 
-| Câu lệnh | Câu trả lời của mô hình |
+| プロンプト | モデルのレスポンス |
 | --- | --- |
-| Khi nào tôi sẽ hết giấy vệ sinh? | Bạn chỉ còn 3 lượt quay. |
+| トイレット ペーパーは、いつ使い切りますか？ | 間もなくです。あと 3 ロールしかありません。 |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **更新されたプロンプト** | **改善されたレスポンス** |
 | --- | --- |
-| 1. Trước tiên, hãy đếm xem có bao nhiêu cuộn giấy vệ sinh trong bức ảnh này.  2. Sau đó, hãy xác định lượng giấy vệ sinh mà một người thường dùng mỗi ngày.  3. Tính toán thời gian sử dụng hết số giấy vệ sinh này. | 1. Có 3 cuộn giấy vệ sinh trong bức ảnh này.  2. Một người thường dùng khoảng 20 tờ giấy vệ sinh mỗi ngày.  3. Nếu mỗi cuộn có 200 tờ, thì mỗi cuộn sẽ dùng được khoảng 10 ngày. Do đó, 3 cuộn giấy sẽ dùng được khoảng một tháng. |
+| 1. まず、この写真に写っているトイレット ペーパーのロールを数えてください。  2. 次に、標準的な人が 1 日に使用するトイレット ペーパーの量を定めます。  3. そのトイレット ペーパーがどのくらいの期間使用できるかを算出します。 | 1. この写真には、トイレット ペーパーのロールが 3 つ写っています。  2. 標準的な人は、1 日に約 20 枚のトイレット ペーパーを使用します。  3. 1 ロールに 200 枚入っているとすると、1 ロールで約 10 日間使用できます。したがって、3 ロールでは約 1 か月使用できます。 |
 
-Các bài toán hoặc các loại bài toán có lời văn khác là những lựa chọn phù hợp để yêu cầu mô hình suy nghĩ từng bước.
+数学の問題や他の種類の言葉の問題は、モデルに順を追って考えることを求めるのに適しています。
 
-| **Câu lệnh** | **Đáp** |
+| **プロンプト** | **レスポンス** |
 | --- | --- |
-| Số hạng thứ 4 trong dãy số là bao nhiêu? | -135 |
+| 数列の第 4 項は何ですか？ | -135 |
 
-Câu trả lời của mô hình không chính xác. Một số cách để cải thiện vấn đề này là yêu cầu mô hình phân tích vấn đề trước khi trả lời câu lệnh.
+モデルからのレスポンスが正しくありません。これを改善するには、プロンプトに答える前に問題を解析するようにモデルに求める方法があります。
 
-| **Câu lệnh** | **Đáp** |
+| **プロンプト** | **レスポンス** |
 | --- | --- |
-| Trước tiên, hãy phân tích cú pháp công thức trong hình ảnh.  Sau đó, dựa vào công thức, hãy trả lời câu hỏi "số hạng thứ 4 trong dãy số là gì?". | *Nhấp để mở rộng kết quả* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. Thay n = 4 vào công thức:  $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. Chúng ta không biết giá trị của b(3), vì vậy hãy thay n = 3 vào công thức:  $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. Chúng ta không biết giá trị của b(2), nên hãy thay n = 2 vào công thức:  $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. Chúng ta biết giá trị của b(1) là 15, vì vậy hãy thay thế giá trị này vào công thức:  $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. Bây giờ, chúng ta đã biết giá trị của b(2), hãy thay thế giá trị đó vào công thức cho b(3):  $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. Giờ đây, khi đã biết giá trị của b(3), hãy thay thế giá trị đó vào công thức cho b(4):  $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   Do đó, số hạng thứ 4 trong dãy số là -405. |
+| まず、画像内の数式を解析します。  次に、数式に基づいて、「数列の第 4 項は何ですか？」に答えます。 | クリックして結果を拡大 $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. n = 4 を式に代入します。  $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. b(3) の値がわからないため、式に n = 3 を代入します。  $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. b(2) の値がわからないため、式に n = 2 を代入します。  $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. b(1) の値は 15 であるとわかっているため、それを式に代入します。  $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. b(2) の値がわかったので、それを b(3) の式に代入します。  $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. b(3) の値がわかったので、それを b(4) の式に代入します。  $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   したがって、数列の第 4 項は -405 です。 |
 
-Phản hồi này của mô hình là chính xác. Giờ đây, để phản hồi hiệu quả hơn nữa, bạn có thể yêu cầu mô hình suy nghĩ từng bước.
+このモデルのレスポンスは正確ですが、レスポンスをさらに合理化するには、モデルに順を追って考えるように依頼します。
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **更新されたプロンプト** | **改善されたレスポンス** |
 | --- | --- |
-| Số hạng thứ 4 trong dãy số là bao nhiêu? Hãy suy nghĩ từng bước. | Số hạng đầu tiên là 15.  Số hạng thứ hai là b(1) \* (-3) = 15 \* (-3) = -45.  Số hạng thứ ba là b(2) \* (-3) = -45 \* (-3) = 135.  Số hạng thứ tư là b(3) \* (-3) = 135 \* (-3) = -405. |
+| 数列の第 4 項は何ですか？順を追って考えてください。 | 最初の項は 15 です。  第 2 項は、b(1) × (-3) = 15 × (-3) = -45 です。  第 3 項は、b(2) × (-3) = -45 × (-3) = 135 です。  第 4 項は、b(3) × (-3) = 135 × (-3) = -405 です。 |
 
-### Chỉ định định dạng đầu ra
+### 出力形式を指定する
 
-Một vấn đề thường gặp là nhu cầu về đầu ra của mô hình ở một định dạng nhất định (ví dụ: markdown, JSON, HTML), đặc biệt nếu đầu ra của mô hình cần được một tác vụ hạ nguồn tiếp nhận. Bạn có thể thử tạo kết quả ở định dạng đó bằng cách hướng dẫn mô hình làm như vậy trong câu lệnh. Dưới đây là hai ví dụ:
+よくある問題は、モデル出力を特定の形式（マークダウン、JSON、HTML など）にする必要があることです。特に、モデルの出力を下流のタスクで取り込む必要がある場合に発生します。プロンプトの中でモデルにそのように指示することで、その形式での出力を試みることができます。以下に 2 つの例を示します。
 
-| Câu lệnh | Câu trả lời của mô hình |
+| プロンプト | モデルのレスポンス |
 | --- | --- |
-| Phân tích bảng trong hình ảnh này thành định dạng markdown | | Chủ đề | Trạng thái | Thời gian | Ngày bắt đầu | Đến hạn |  | ------- | ------ | ---- | ---------- | ------ |  | Toán học | Đã hoàn thành | 1,5 giờ | 29/11/2023 | 1/12/2023 |  | Địa lý | Đã hoàn tất | 30 phút | 2/12/2023 | 4/12/2023 |  | Vật lý | Đang tiến hành | 2 giờ | 3/12/2023 | 5/12/2023 |  | Sinh học | Chưa bắt đầu | 6 giờ | 2/11/2016 | 6/12/2023 | |
+| この画像の表を解析してマークダウン形式に変換してください。 | | 科目 | ステータス | 時間 | 開始日 | 期限 |  | ------- | ------ | ---- | ---------- | ------ |  | 数学 | 完了 | 1.5 時間 | 2023 年 11 月 29 日 | 2023 年 12 月 1 日 |  | 地理 | 完了 | 30 分 | 2023 年 12 月 2 日 | 2023 年 12 月 4 日 |  | 物理 | 進行中 | 2 時間 | 2023 年 12 月 3 日 | 2023 年 12 月 5 日 |  | 生物 | 未開始 | 6 時間 | 2016 年 11 月 2 日 | 2023 年 12 月 6 日 | |
 
-| **Câu lệnh** | **Phản hồi của mô hình** |
+| **プロンプト** | **モデルのレスポンス** |
 | --- | --- |
-| Cung cấp danh sách tất cả các thuộc tính sau:  thành phần, loại món ăn, có phải là món chay hay không, ở định dạng JSON | ```` ```json ````  `{`  `"ingredients": [`  `"rice",`  `"shrimp",`  `"clams",`  `"mussels",`  `"peas",`  `"tomatoes",`  `"onions",`  `"garlic",`  `"olive oil",`  `"paprika",`  `"salt",`  `"pepper"`  `],`  `"type of cuisine": "Spanish",`  `"vegetarian": false`  `}`  ```` ``` ```` |
+| 次の属性をすべてリストアップしてください。  材料、料理の種類、ベジタリアンかどうか、JSON 形式 | ```` ```json ````  `{`  `"ingredients": [`  `"rice",`  `"shrimp",`  `"clams",`  `"mussels",`  `"peas",`  `"tomatoes",`  `"onions",`  `"garlic",`  `"olive oil",`  `"paprika",`  `"salt",`  `"pepper"`  `],`  `"type of cuisine": "Spanish",`  `"vegetarian": false`  `}`  ```` ``` ```` |
 
-### Đặt hình ảnh lên trước cho câu lệnh một hình ảnh
+### 単一画像のプロンプトではまず画像を配置する
 
-Mặc dù Gemini có thể diễn giải hình ảnh và văn bản theo bất kỳ thứ tự nào trong câu lệnh, nhưng việc đặt một hình ảnh duy nhất trước câu lệnh văn bản có thể mang lại kết quả tốt hơn.
-Trong các mẫu sau, bạn sẽ nhận thấy hình ảnh xuất hiện trước văn bản trong mỗi câu lệnh.
+Gemini は、プロンプト内の画像とテキストをどのような順序でも解釈できますが、テキスト プロンプトの前に画像を 1 つ配置するとより良い結果が得られる場合があります。以下の例では、それぞれのプロンプトにおいて、テキストの前に画像があることを確認できます。
 
-### Khắc phục sự cố với câu lệnh đa phương thức
+### マルチモーダル プロンプトのトラブルシューティング
 
-Bạn có thể cần khắc phục sự cố về câu lệnh nếu không nhận được phản hồi hữu ích. Bạn có thể thử một số chiến lược sau.
+役に立つ回答が得られない場合は、プロンプトのトラブルシューティングが必要になることがあります。以下にいくつかの方法を示します。
 
-#### Nếu mô hình không lấy thông tin từ phần liên quan của hình ảnh
+#### モデルが画像の該当部分から情報を引き出していない場合
 
-Để nhận được câu trả lời cụ thể hơn, bạn có thể chỉ ra những khía cạnh của hình ảnh mà bạn muốn câu lệnh lấy thông tin để đưa ra câu trả lời.
+より具体的なレスポンスを得るには、プロンプトへのレスポンスに必要な情報を、画像のどの部分から引き出すかを指定します。
 
-| Câu lệnh | Câu trả lời của mô hình |
+| プロンプト | モデルのレスポンス |
 | --- | --- |
-| Những chiếc tã này sẽ dùng được bao nhiêu ngày cho một em bé? | Số tã này sẽ dùng được trong 198 ngày. |
+| このおむつは赤ちゃんに何日使えますか？ | おむつは、なくなるまで 198 日使用できます。 |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **更新されたプロンプト** | **改善されたレスポンス** |
 | --- | --- |
-| Tôi có thể dùng hết số tã này trong bao lâu?  Dùng trọng lượng ghi trên hộp để xác định độ tuổi của trẻ và dùng tổng số tã trong hộp.  Chia tổng số tã cho số lượng tã mà trẻ dùng mỗi ngày. | Hộp này có 198 chiếc tã. Trên hộp ghi rằng tã dành cho trẻ nặng từ 10 đến 17 kg.  Trẻ em trung bình trong khoảng cân nặng này có thể từ 1 đến 2 tuổi.  Một đứa trẻ 2 tuổi thường dùng 6 chiếc tã mỗi ngày, do đó, số tã này sẽ dùng được khoảng 33 ngày (198/6). |
+| この紙おむつは、どのくらいで使い切りますか？  箱に記載されている体重から子どもの年齢を割り出し、箱に入っているおむつの総数を使用してください。  合計数を、子どもが 1 日あたりに使用するおむつの数で割ってください。 | 箱には 198 枚のおむつが入っています。箱には、おむつが 22～37 ポンドの子ども用であると書かれています。  この体重の範囲にある子どもの平均年齢は 1～2 歳であると考えられます。  通常、2 歳の子どもは 1 日あたり 6 枚のおむつを使用するため、おむつは約 33 日間（198÷6）使用できます。 |
 
-#### Nếu đầu ra của mô hình quá chung chung và không đủ phù hợp với dữ liệu đầu vào là hình ảnh
+#### モデル出力が漠然としすぎて、画像の入力に十分対応できない場合
 
-Để giúp mô hình điều chỉnh câu trả lời cho (các) hình ảnh, hãy thử yêu cầu mô hình mô tả (các) hình ảnh trước khi thực hiện nhiệm vụ suy luận.
+モデルが画像に対するレスポンスを調整できるように、推論タスクを実行する前に、画像について説明するように求めてみます。
 
-| Câu lệnh | Câu trả lời của mô hình |
+| プロンプト | モデルのレスポンス |
 | --- | --- |
-| Điểm chung giữa những hình ảnh này là gì? | Cả 4 hình ảnh đều là ví dụ về ảnh phong cảnh. |
+| これらの画像の共通点は何ですか？ | 4 枚の画像はいずれも風景写真のサンプルです。 |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **更新されたプロンプト** | **改善されたレスポンス** |
 | --- | --- |
-| Trước tiên, hãy mô tả chi tiết nội dung trong từng hình ảnh. Điểm chung của những hình ảnh này là gì? | Hình ảnh đầu tiên cho thấy một người đang đóng gói hành lý vào vali. Hình ảnh thứ hai cho thấy một hành lang trống trong trung tâm mua sắm. Hình ảnh thứ ba cho thấy một cuộn giấy vệ sinh. Hình ảnh thứ tư cho thấy một vùng biển tối tăm và bão tố.  Điểm chung giữa những hình ảnh này là chúng đều là ví dụ về không gian trung gian. Không gian trung gian là những nơi hoặc tình huống nằm giữa hai nơi hoặc tình huống khác. Chúng thường có đặc điểm là mang lại cảm giác không chắc chắn hoặc mơ hồ.  Hình ảnh đầu tiên cho thấy người ở giữa đang ở nhà và đang đi du lịch. Hình ảnh thứ hai cho thấy hành lang giữa hai cửa hàng. Hình ảnh thứ ba là giấy vệ sinh, có thể tượng trưng cho phòng tắm. Phòng tắm là không gian chuyển tiếp giữa khu vực riêng tư và khu vực công cộng. Đó là nơi chúng ta chuẩn bị bước vào hoặc rời khỏi thế giới bên ngoài.  Hình ảnh thứ tư cho thấy biển ở trạng thái giữa bình lặng và bão tố.  Không gian liminal có thể vừa thú vị vừa bất an. Chúng có thể là nơi bắt đầu hoặc kết thúc. Đó có thể là nơi để suy ngẫm hoặc nơi để hành động. |
+| まず、それぞれの画像の内容を詳しく説明してください。これらの画像の共通点は何ですか？ | 1 つ目の画像にはスーツケースに荷物を詰めている人物が写っています。2 つ目の画像にはショッピング モールの何もない廊下が写っています。3 つ目の画像にはトイレット ペーパーが写っています。4 つ目の画像には暗く荒れ狂う海が写っています。  これらの画像の共通点は、どれもリミナル スペースの例であるということです。リミナル スペースとは、他の 2 つの場所や状況の間にある場所や状況のことです。多くの場合、不確実性やあいまいさによって特徴付けられます。  1 つ目の画像は、自宅にいるときと旅行中の人物を写しています。2 つ目の画像は 2 つの店舗の間にある廊下が写されています。3 つ目の画像はトイレット ペーパーの画像で、バスルームの可能性もあります。トイレは、プライベートなスペースと共用スペースの間の過渡的なスペースです。そこは、外の世界に出入りするための準備をする場所です。  4 つ目の画像は、凪の状態と嵐の状態の間にある海を示しています。  リミナル スペースは刺激的でもあり、不安でもあります。新たな始まりの場所にもなれば、終わりの場所にもなります。内省の場所にもなれば、行動の場所にもなります。 |
 
-Bạn cũng có thể thử yêu cầu mô hình tham khảo nội dung trong hình ảnh một cách rõ ràng.
+また、画像の内容に言及するように明示的にモデルに指示することもできます。
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **更新されたプロンプト** | **改善されたレスポンス** |
 | --- | --- |
-| Điểm chung của những hình ảnh này là gì? Tham khảo nội dung trong hình ảnh trong câu trả lời của bạn. | Tất cả hình ảnh đều liên quan đến du lịch. Hình ảnh đầu tiên cho thấy một người đang đóng gói hành lý vào vali, hình ảnh thứ hai cho thấy một hành lang trống trong trung tâm mua sắm, hình ảnh thứ ba cho thấy một chồng giấy vệ sinh và hình ảnh thứ tư cho thấy một vùng biển tối tăm và giông bão.  Tất cả hình ảnh này đều liên quan đến du lịch vì đây đều là những thứ mà mọi người cần hoặc sử dụng khi đi du lịch. Hình ảnh đầu tiên cho thấy một người đang đóng gói hành lý vào vali. Đây là việc mà mọi người thường làm khi đi du lịch. Hình ảnh thứ hai cho thấy một hành lang trống trong trung tâm mua sắm, nơi mọi người thường đến để mua đồ cho chuyến đi của mình. Hình ảnh thứ ba cho thấy một chồng giấy vệ sinh. Đây là thứ mà mọi người thường dùng khi đi du lịch. Hình ảnh thứ tư cho thấy một vùng biển tối tăm và bão tố. Đây là điều mà mọi người thường gặp phải khi đi du lịch. |
+| これらの画像の共通点は何ですか？レスポンスでは、画像の内容を参考にしてください。 | 画像はすべて旅行に関連しています。1 つ目の画像にはスーツケースに荷物を詰めている人物が写っています。2 つ目の画像にはショッピング モールの何もない廊下が写っています。3 つ目の画像には積み重ねたトイレット ペーパーが写っています。4 つ目の画像には暗く荒れ狂う海が写っています。  これらの画像はすべて、人々が旅行するときに必要なもの、または使用するものであるため、すべて旅行に関連しています。1 つ目の画像には、スーツケースに荷物を詰めている人が写っています。これは、旅行に出かける人が行うことです。2 つ目の画像には、ショッピング モール内の何もない廊下が写っています。ショッピング モールは、旅行用品を購入するために訪れることが多い場所です。3 つ目の画像には、積み重ねたトイレット ペーパーが写っています。トイレット ペーパーは、人が旅行中によく使用するものです。4 つ目の画像には、暗い荒れ狂う海が写っています。これは、人が旅行中によく遭遇する場面です。 |
 
-Những mẹo tương tự cũng áp dụng cho kết quả sáng tạo từ hình ảnh. Trong ví dụ sau đây về chú thỏ, việc yêu cầu rõ ràng mô hình đưa các khía cạnh trong hình ảnh vào có thể cải thiện kết quả.
+画像からクリエイティブな出力を得る場合も、同じアプローチが有効です。ウサギを使った次の例では、画像の特徴を含めるようにモデルに明示的に依頼すると、出力を改善できます。
 
-| Câu lệnh | Câu trả lời của mô hình |
+| プロンプト | モデルのレスポンス |
 | --- | --- |
-| Bạn có thể viết cho tôi một bài thơ về hình ảnh này không? | Chú thỏ nhỏ, mềm mại và có màu nâu,  Nhảy qua cánh đồng, lên và xuống.  Tai dài, đuôi nhỏ,  Bạn là sinh vật đáng yêu nhất trong tất cả.  Bạn gặm cỏ, cỏ xanh và ngọt,  Và nhảy đi khi thấy tôi.  Nhưng tôi sẽ luôn là bạn của bạn,  Chú thỏ nhỏ, cho đến tận cùng. |
+| この画像について詩を書いてもらえますか？ | 柔らかくて茶色い小さなウサギ、 野原を飛び跳ね、上へ下へ。  耳はとても長く、しっぽはとても小さい、  君は一番かわいい生き物だ。  君は草をかじってる、とても青々としていて甘い、 私を見たらぴょんぴょん跳ねて逃げて行ったね。  でも私はいつも君の友だち。  小さなウサギさんが生きている限り。 |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **更新されたプロンプト** | **改善されたレスポンス** |
 | --- | --- |
-| Bạn có thể viết cho tôi một bài thơ giàu hình ảnh và kịch tính về thông tin về hình ảnh này, đồng thời cho biết vị trí không? | Chú thỏ nhỏ trên bãi cỏ xanh,  Đôi tai dài, thính nhạy.  Bạn thấy gì ở nơi đó,  Ở nơi xa xăm mà bạn đang nhìn chằm chằm?  Có phải là màu xanh dương của đại dương,  Lấp lánh dưới ánh mặt trời?  Hay tiếng sóng vỗ và gầm gừ,  Một nhịp điệu mà bạn yêu thích?  Thỏ con ơi, hãy nói thật cho ta hay,  Điều gì khiến con chú ý đến vậy?  Là làn gió mặn,  Hay tiếng hải âu kêu vang?  Có lẽ là do sự rộng lớn của tất cả,  Một thế giới vừa rộng lớn vừa nhỏ bé.  Một nơi mà những giấc mơ có thể bay bổng,  Và những cuộc phiêu lưu có thể nảy mầm.  Thỏ con ơi, ta tự hỏi giấc mơ của con là gì,  Khi con ngồi trên cỏ, thật thanh bình.  Bạn có khao khát khám phá biển sâu,  Hay ở trên đất liền, nơi bạn có thể nhảy?  Dù là gì đi chăng nữa, thỏ con ơi,  Hãy giữ cho ngọn lửa tò mò luôn cháy sáng.  Trong những ước mơ và khát vọng của bạn,  Có một thế giới đang chờ bạn sáng tạo. |
+| この画像について、叙述的で印象的な詩を書き、場所も含めてもらえますか？ | 草原にいる小さなウサギ、 長い耳、鋭い耳。 何を見ているの？ 遠くを見つめて。  それは海の青、 太陽に照らされて輝く海か？ それとも打ち寄せて響く波、 そのリズムに夢中なの？  小さいウサギさん、本当のことを教えてください、 君の心を捉えるものは？ 潮風、 それとも楽しいカモメの鳴き声かい？  きっと、あらゆる存在の壮大さだね、 とても大きくて小さな世界。 夢が広がる場所、 冒険の種がまかれる場所。  小さなウサギさん、どんな夢を見ているの？ 草の上に座って、とても穏やかに。 深い穴を掘りたいの？ それとも飛び跳ねられる大地にいたいの？  君の夢が何であれ、小さいウサギさん、 明るく輝く不思議さをなくさないでね。 夢と願望の中に、 君の創造を待っている世界があるから。 |
 
-#### Khắc phục sự cố về phần nào của câu lệnh không hoạt động
+#### プロンプトの失敗した部分に対するトラブルシューティング
 
-Bạn khó có thể biết liệu một câu lệnh có thất bại là do mô hình không **hiểu được hình ảnh** ngay từ đầu hay là do mô hình hiểu được hình ảnh nhưng không thực hiện đúng **các bước suy luận** sau đó.
-Để phân biệt những lý do đó, hãy yêu cầu mô hình mô tả nội dung trong hình ảnh.
+プロンプトが失敗したのは、モデルがそもそも**画像を理解**していなかったからなのか、それとも画像は理解していたものの、その後に正しい**推論の手順**を実行しなかったからなのかを判断することは困難です。このような理由を見極めるには、画像に何が写っているかを説明するようモデルに指示します。
 
-Trong ví dụ sau, nếu mô hình phản hồi bằng một món ăn nhẹ có vẻ bất ngờ khi kết hợp với trà (ví dụ: bỏng ngô), trước tiên, bạn có thể khắc phục sự cố để xác định xem mô hình có nhận dạng chính xác rằng hình ảnh có chứa trà hay không.
+次の例では、お茶と組み合わせると意外に思えるおやつ（ポップコーンなど）をモデルが返す場合に、まずトラブルシューティングを行い、画像にお茶が含まれていることをモデルが正しく認識しているかどうかを判断します。
 
-| Câu lệnh | Lời nhắc để khắc phục sự cố |
+| プロンプト | トラブルシューティング用のプロンプト |
 | --- | --- |
-| Tôi có thể làm món ăn nhẹ nào trong 1 phút để ăn kèm với món này? | Mô tả nội dung trong hình ảnh này. |
+| 1 分で作ることができるおやつで、これに合うものは何ですか？ | この画像にあるものを説明してください。 |
 
-Một chiến lược khác là yêu cầu mô hình giải thích lý do. Điều này có thể giúp bạn thu hẹp phạm vi để xác định phần nào trong quá trình suy luận bị lỗi (nếu có).
+もう 1 つの方法は、モデルにその推論を説明してもらうことです。そうすることで、推論が破綻した部分を絞り込むことができます。
 
-| Câu lệnh | Lời nhắc để khắc phục sự cố |
+| プロンプト | トラブルシューティング用のプロンプト |
 | --- | --- |
-| Tôi có thể làm món ăn nhẹ nào trong 1 phút để ăn kèm với món này? | Tôi có thể làm món ăn nhẹ nào trong 1 phút để ăn kèm với món này? Vui lòng giải thích lý do. |
+| 1 分で作ることができるおやつで、これに合うものは何ですか？ | 1 分で作ることができるおやつで、これに合うものは何ですか？理由を説明してください。 |
 
-## Bước tiếp theo
+## 次のステップ
 
-- Hãy thử viết câu lệnh đa phương thức của riêng bạn bằng [Google AI Studio](http://aistudio.google.com?hl=vi).
-- Để biết thông tin về cách sử dụng Gemini Files API để tải tệp đa phương tiện lên và đưa tệp đó vào câu lệnh, hãy xem hướng dẫn về [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=vi), [Xử lý âm thanh](https://ai.google.dev/gemini-api/docs/audio?hl=vi) và [Xử lý tài liệu](https://ai.google.dev/gemini-api/docs/document-processing?hl=vi).
-- Để biết thêm hướng dẫn về cách thiết kế câu lệnh, chẳng hạn như điều chỉnh các thông số lấy mẫu, hãy xem trang [Chiến lược tạo câu lệnh](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=vi).
+- [Google AI Studio](http://aistudio.google.com?hl=ja) を使用して、独自のマルチモーダル プロンプトを作成してみましょう。
+- Gemini Files API を使用してメディア ファイルをアップロードし、プロンプトに含める方法については、[Vision](https://ai.google.dev/gemini-api/docs/vision?hl=ja)、[音声](https://ai.google.dev/gemini-api/docs/audio?hl=ja)、[ドキュメント処理](https://ai.google.dev/gemini-api/docs/document-processing?hl=ja)の各ガイドをご覧ください。
+- サンプリング パラメータのチューニングなど、プロンプト設計に関するその他のガイダンスについては、[プロンプト戦略](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ja)のページをご覧ください。
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Cập nhật lần gần đây nhất: 2026-07-30 UTC.
+最終更新日 2026-07-30 UTC。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+ご意見をお聞かせください
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-30 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-30 UTC。"],[],[]]

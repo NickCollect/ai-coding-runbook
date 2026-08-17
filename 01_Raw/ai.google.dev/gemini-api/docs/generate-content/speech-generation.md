@@ -1,45 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=es-419
-fetched_at: 2026-08-10T03:20:39.704502+00:00
-title: "Generaci\u00f3n de texto a voz (TTS) \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=id
+fetched_at: 2026-08-17T02:30:52.145811+00:00
+title: "Pembuatan text-to-speech (TTS) \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Enviar comentarios
+Kirim masukan
 
-# Generación de texto a voz (TTS)
+# Pembuatan text-to-speech (TTS)
 
-La API de Gemini puede transformar la entrada de texto en audio de un solo orador o de varios oradores con las capacidades de generación de texto a voz (TTS) de Gemini.
-La generación de texto a voz (TTS) es *[controlable](#controllable)*, lo que significa que puedes usar el lenguaje natural para estructurar las interacciones y guiar el *estilo*, el *acento*, el *ritmo* y el *tono* del audio.
+Gemini API dapat mengubah input teks menjadi audio satu penutur atau multi-penutur menggunakan kemampuan pembuatan text-to-speech (TTS) Gemini.
+Pembuatan text-to-speech (TTS) dapat *[dikontrol](#controllable)*,
+artinya Anda dapat menggunakan bahasa alami untuk menyusun interaksi dan memandu *gaya*, *aksen*, *kecepatan*, dan *nada* audio.
 
-[Probar en Google AI Studio](https://aistudio.google.com/apps/bundled/voice-library?showPreview=truew&hl=es-419)
+[Coba di Google AI Studio](https://aistudio.google.com/apps/bundled/voice-library?showPreview=truew&hl=id)
 
-La capacidad de TTS difiere de la generación de voz que se proporciona a través de la [API en vivo](https://ai.google.dev/gemini-api/docs/live?hl=es-419), que está diseñada para audio interactivo y no estructurado, y entradas y salidas multimodales. Si bien la API de Live se destaca en contextos conversacionales dinámicos, la API de Gemini ofrece TTS adaptado a situaciones que requieren una recitación de texto exacta con un control detallado sobre el estilo y el sonido, como la generación de podcasts o audiolibros.
+Kemampuan TTS berbeda dengan pembuatan ucapan yang disediakan melalui
+[Live API](https://ai.google.dev/gemini-api/docs/live?hl=id), yang dirancang untuk input dan output multimodal, serta audio interaktif dan tidak terstruktur. Meskipun Live API unggul dalam konteks percakapan dinamis, TTS melalui Gemini API disesuaikan untuk skenario yang memerlukan pembacaan teks yang tepat dengan kontrol gaya dan suara yang cermat, seperti pembuatan podcast atau buku audio.
 
-En esta guía, se muestra cómo generar audio de uno o varios oradores a partir de texto.
+Panduan ini menunjukkan cara membuat audio satu pembicara dan beberapa pembicara dari
+teks.
 
-## Antes de comenzar
+## Sebelum memulai
 
-Asegúrate de usar una variante del modelo de Gemini con capacidades de texto a voz (TTS) de Gemini, como se indica en la sección [Modelos compatibles](https://ai.google.dev/gemini-api/docs/speech-generation?hl=es-419#supported-models). Para obtener resultados óptimos, considera qué modelo se adapta mejor a tu caso de uso específico.
+Pastikan Anda menggunakan varian model Gemini dengan kemampuan text-to-speech (TTS) Gemini, seperti yang tercantum di bagian [Model yang didukung](https://ai.google.dev/gemini-api/docs/speech-generation?hl=id#supported-models). Untuk hasil yang optimal, pertimbangkan model mana yang paling sesuai dengan kasus penggunaan spesifik Anda.
 
-Antes de comenzar a compilar, te recomendamos [probar los modelos de Gemini TTS en AI Studio](https://aistudio.google.com/generate-speech?hl=es-419).
+Anda mungkin merasa perlu [menguji model TTS Gemini di AI Studio](https://aistudio.google.com/generate-speech?hl=id) sebelum mulai membangun.
 
-## TTS de un solo orador
+## TTS satu penutur
 
-Para convertir texto en audio de un solo orador, configura la modalidad de respuesta en "audio" y pasa un objeto `SpeechConfig` con `VoiceConfig` configurado.
-Deberás elegir un nombre de voz de las [voces de salida](#voices) precompiladas.
+Untuk mengonversi teks menjadi audio satu penutur, tetapkan modalitas respons ke "audio",
+dan teruskan objek `SpeechConfig` dengan `VoiceConfig` yang ditetapkan.
+Anda harus memilih nama suara dari [suara output](#voices) bawaan.
 
-En este ejemplo, se guarda el audio de salida del modelo en un archivo wave:
+Contoh ini menyimpan audio output dari model dalam file wave:
 
 ### Python
 
@@ -162,10 +166,12 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-t
 ffmpeg -f s16le -ar 24000 -ac 1 -i out.pcm out.wav
 ```
 
-## TTS con varios oradores
+## TTS multi-penutur
 
-Para el audio con varios interlocutores, necesitarás un objeto `MultiSpeakerVoiceConfig` con cada interlocutor (hasta 2) configurado como un `SpeakerVoiceConfig`.
-Deberás definir cada `speaker` con los mismos nombres que se usan en la [instrucción](#controllable):
+Untuk audio multi-pembicara, Anda memerlukan objek `MultiSpeakerVoiceConfig` dengan
+setiap pembicara (hingga 2) yang dikonfigurasi sebagai `SpeakerVoiceConfig`.
+Anda harus menentukan setiap `speaker` dengan nama yang sama yang digunakan dalam
+[prompt](#controllable):
 
 ### Python
 
@@ -339,10 +345,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-t
 ffmpeg -f s16le -ar 24000 -ac 1 -i out.pcm out.wav
 ```
 
-## Cómo controlar el estilo de voz con instrucciones
+## Mengontrol gaya ucapan dengan perintah
 
-Puedes controlar el estilo, el tono, el acento y el ritmo con instrucciones en lenguaje natural o [etiquetas de audio](#transcript-tags) para el TTS de uno o varios oradores.
-Por ejemplo, en una instrucción de un solo orador, puedes decir lo siguiente:
+Anda dapat mengontrol gaya, intonasi, aksen, dan kecepatan menggunakan perintah bahasa alami atau [tag audio](#transcript-tags) untuk TTS satu penutur dan multi-penutur.
+Misalnya, dalam perintah satu penutur, Anda dapat mengucapkan:
 
 ```
 Say in an spooky voice:
@@ -350,7 +356,7 @@ Say in an spooky voice:
 [whisper] Something wicked this way comes"
 ```
 
-En una instrucción con varios oradores, proporciona al modelo el nombre de cada orador y la transcripción correspondiente. También puedes brindar orientación a cada orador de forma individual:
+Dalam perintah multi-pembicara, berikan nama setiap pembicara dan transkrip yang sesuai kepada model. Anda juga dapat memberikan panduan untuk setiap pembicara secara terpisah:
 
 ```
 Make Speaker1 sound tired and bored, and Speaker2 sound excited and happy:
@@ -359,11 +365,15 @@ Speaker1: So... [yawn] what's on the agenda today?
 Speaker2: You're never going to guess!
 ```
 
-Intenta usar una [opción de voz](#voices) que corresponda al estilo o la emoción que quieres transmitir para enfatizarlo aún más. En la instrucción anterior, por ejemplo, la respiración de *Encélado* podría enfatizar "cansado" y "aburrido", mientras que el tono alegre de *Puck* podría complementar "emocionado" y "feliz".
+Coba gunakan [opsi suara](#voices) yang sesuai dengan gaya atau emosi yang ingin Anda sampaikan, untuk lebih menekankannya. Misalnya, dalam perintah sebelumnya,
+keberingasan *Enceladus* dapat menekankan "lelah" dan "bosan", sementara
+nada riang *Puck* dapat melengkapi "bersemangat" dan "bahagia".
 
-## Generando una instrucción para convertirla en audio
+## Membuat perintah untuk mengonversi ke audio
 
-Los modelos de TTS solo generan audio, pero puedes usar [otros modelos](https://ai.google.dev/gemini-api/docs/models?hl=es-419) para generar primero una transcripción y, luego, pasarla al modelo de TTS para que la lea en voz alta.
+Model TTS hanya menghasilkan output audio, tetapi Anda dapat menggunakan
+[model lain](https://ai.google.dev/gemini-api/docs/models?hl=id) untuk membuat transkrip terlebih dahulu,
+lalu meneruskan transkrip tersebut ke model TTS untuk dibacakan.
 
 ### Python
 
@@ -457,121 +467,132 @@ const response = await ai.models.generateContent({
 await main();
 ```
 
-## Opciones de voz
+## Pilihan suara
 
-Los modelos de TTS admiten las siguientes 30 opciones de voz en el campo `voice_name`:
+Model TTS mendukung 30 opsi suara berikut di kolom `voice_name`:
 
 |  |  |  |
 | --- | --- | --- |
-| **Zephyr**: *Brillante* | **Puck**: *Optimista* | **Charon**: *Informativa* |
-| **Kore**, *Firme* | **Fenrir**: *Excitabilidad* | **Leda**: *Juvenil* |
-| **Orus**: *Firme* | **Aoede**: *Breezy* | **Callirrhoe**: *Voz tranquila* |
-| **Autonoe**: *Brillo* | **Enceladus**: *Respiración* | **Iapetus**: *Claro* |
-| **Umbriel**: *Tranquilo* | **Algieba**: *Suave* | **Despina**: *Suave* |
-| **Erinome**: *Despejado* | **Algenib**: *Gravelly* | **Rasalgethi**: *Informativa* |
-| **Laomedeia**: *Optimista* | **Achernar**: *Suave* | **Alnilam**: *Firme* |
-| **Schedar**: *Par* | **Gacrux**: *Contenido para mayores* | **Pulcherrima** -- *Reenviar* |
-| **Achird**: *Amistoso* | **Zubenelgenubi**: *Casual* | **Vindemiatrix**: *Suave* |
-| **Sadachbia**: *Animada* | **Sadaltager**: *Conocimiento* | **Sulafat**: *Cálida* |
+| **Zephyr** -- *Bright* | **Puck** -- *Ceria* | **Charon** -- *Informatif* |
+| **Kore** -- *Firm* | **Fenrir** -- *Mudah Terangsang (Excitable)* | **Leda** -- *Muda* |
+| **Orus** -- *Firm* | **Aoede** -- *Breezy* | **Callirrhoe** -- *Santai* |
+| **Autonoe** -- *Bright* | **Enceladus** -- *Breathy* | **Iapetus** -- *Jelas* |
+| **Umbriel** -- *Santai* | **Algieba** -- *Halus (Smooth)* | **Despina** -- *Halus (Smooth)* |
+| **Erinome** -- *Clear* | **Algenib** -- *Berbatu* | **Rasalgethi** -- *Informatif* |
+| **Laomedeia** -- *Upbeat* | **Achernar** -- *Soft* | **Alnilam** -- *Firm* |
+| **Schedar** -- *Even* | **Gacrux** -- *Dewasa* | **Pulcherrima** -- *Meneruskan* |
+| **Achird** -- *Ramah* | **Zubenelgenubi** -- *Kasual* | **Vindemiatrix** -- *Lembut (Gentle)* |
+| **Sadachbia** -- *Lively* | **Sadaltager** -- *Berpengetahuan* | **Sulafat** -- *Hangat* |
 
-Puedes escuchar todas las opciones de voz en [AI Studio](https://aistudio.google.com/generate-speech?hl=es-419).
+Anda dapat mendengar semua opsi suara di
+[AI Studio](https://aistudio.google.com/generate-speech?hl=id).
 
-## Idiomas admitidos
+## Bahasa yang didukung
 
-Los modelos de TTS detectan automáticamente el idioma de entrada. Se admiten los siguientes idiomas:
+Model TTS mendeteksi bahasa input secara otomatis. Bahasa berikut didukung:
 
-| Idioma | Código BCP-47 | Idioma | Código BCP-47 |
+| Language | Kode BCP-47 | Language | Kode BCP-47 |
 | --- | --- | --- | --- |
-| Árabe | ar | Filipino | fil |
-| Bengalí | bn | Finlandés | fi |
-| Neerlandés | nl | Gallego | gl |
-| Inglés | en | Georgiano | ka |
-| Francés | fr | Griego | el |
-| Alemán | de | Gujarati | gu |
-| Hindi | hi | Criollo haitiano | ht |
-| Indonesio | id | Hebreo | él |
-| Italiano | it | Húngaro | hu |
-| Japonés | ja | Islandés | es |
-| Coreano | ko | Javanés | jv |
-| Marathi | mr | Canarés | kn |
-| Polaco | pl | Konkani | kok |
-| Portugués | pt | Laosiano | lo |
-| Rumano | ro | Latín | la |
-| Ruso | ru | Letón | lv |
-| Español | es | Lituano | lt |
-| Tamil | ta | Luxemburgués | lb |
-| Telugu | te | Macedonio | mk |
-| Tailandés | th | Maithili | mai |
-| Turco | tr | Malgache | mg |
-| Ucraniano | uk | Malayo | ms |
-| Vietnamita | vi | Malayalam | ml |
-| Afrikaans | af | Mongol | mn |
-| Albanés | sq | Nepalés | ne |
-| Amárico | am | Noruego (Bokmål) | nb |
-| Armenio | hy | Noruego (Nynorsk) | nn |
-| Azerí | az | Oriya | o |
-| Vasco | eu | Pastún | ps |
-| Bielorruso | be | Persa | fa |
-| Búlgaro | bg | Punyabí | pa |
-| Birmano | my | Serbio | sr |
-| Catalán | ca | Sindhi | sd |
-| Cebuano | ceb | Cingalés | si |
-| Chino (mandarín) | cmn | Eslovaco | sk |
-| Croata | h | Esloveno | sl |
-| Checo | cs | Suajili | sw |
-| Danés | da | Sueco | sv |
-| Estonio | et | Urdu | ur |
+| Arab | ar | Filipino | fil |
+| Bangla | bn | Finlandia | fi |
+| Belanda | nl | Galisia | gl |
+| Inggris | en | Georgia | ka |
+| Prancis | fr | Yunani | el |
+| Jerman | de | Gujarat | gu |
+| Hindi | hi | Kreol Haiti | ht |
+| Indonesia | id | Ibrani | dia |
+| Italia | it | Hungaria | hu |
+| Jepang | ja | Islandia | is |
+| Korea | ko | Jawa | jv |
+| Marathi | mr | Kannada | kn |
+| Polandia | pl | Konkani | kok |
+| Portugis | pt | Laos | lo |
+| Rumania | ro | Latin | la |
+| Rusia | ru | Latvia | lv |
+| Spanyol | es | Lituania | lt |
+| Tamil | ta | Luksemburg | lb |
+| Telugu | te | Makedonia | mk |
+| Thai | th | Maithili | mai |
+| Turkiye | tr | Malagasi | mg |
+| Ukraina | uk | Melayu | md |
+| Vietnam | vi | Malayalam | ml |
+| Afrika | af | Mongolia | mn |
+| Albania | sq | Nepal | ne |
+| Amharik | am | Norwegia, Bokmål | nb |
+| Armenia | hy | Norwegia, Nynorsk | nn |
+| Azerbaijan | az | Odia | atau |
+| Basque | eu | Pashto | ps |
+| Belarusia | be | Persia | fa |
+| Bulgaria | bg | Punjabi | pa |
+| Burma | my | Serbia | sr |
+| Katalan | ca | Sindhi | sd |
+| Cebuano | ceb | Sinhala | si |
+| China, Mandarin | cmn | Slovakia | sk |
+| Kroasia | jam | Slovenia | sl |
+| Ceko | cs | Swahili | sw |
+| Denmark | da | Swedia | sv |
+| Estonia | et | Urdu | ur |
 
-## Modelos compatibles
+## Model yang didukung
 
-| Modelo | Orador único | Varios oradores |
+| Model | Satu penutur | Multi-penutur |
 | --- | --- | --- |
-| [Versión preliminar del TTS de Gemini 3.1 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=es-419) | ✔️ | ✔️ |
-| [TTS de Gemini 2.5 Flash Preview](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=es-419) | ✔️ | ✔️ |
-| [TTS de Gemini 2.5 Pro en versión preliminar](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=es-419) | ✔️ | ✔️ |
+| [Pratinjau Gemini 3.1 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=id) | ✔️ | ✔️ |
+| [Gemini 2.5 Flash Preview TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=id) | ✔️ | ✔️ |
+| [Gemini 2.5 Pro Preview TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=id) | ✔️ | ✔️ |
 
-## Guía de instrucciones
+## Panduan penulisan perintah
 
-El modelo de **generación de audio nativa de Gemini Text-to-Speech (TTS)** se diferencia de los modelos de TTS tradicionales porque usa un modelo de lenguaje grande que sabe ***no solo qué decir, sino también cómo decirlo***.
+Model **Gemini Native Audio Generation Text-to-Speech (TTS)** berbeda
+dengan model TTS tradisional karena menggunakan model bahasa besar yang
+mengetahui ***tidak hanya apa yang harus diucapkan, tetapi juga cara mengucapkannya***.
 
-De forma predeterminada, el modelo interpretará una transcripción de forma nativa y determinará cómo se deben transmitir tus palabras. Las transcripciones simples sin indicaciones adicionales suenan naturales. Sin embargo, la función de TTS de Gemini también incluye herramientas que puedes usar para dirigirla.
+Secara langsung, model akan menafsirkan transkrip dan menentukan cara
+kata-kata Anda harus disampaikan. Transkrip sederhana tanpa perintah tambahan
+terdengar alami. Namun, Gemini TTS juga dilengkapi dengan alat yang dapat Anda gunakan untuk
+mengarahkan outputnya.
 
-El objetivo de esta guía es ofrecer orientación fundamental y generar ideas cuando desarrolles experiencias de audio. Comenzaremos con las **etiquetas** para un control rápido intercalado y, luego, exploraremos las **estructuras de instrucciones** avanzadas para una dirección de rendimiento completa.
+Tujuan panduan ini adalah untuk memberikan arahan mendasar dan memicu ide saat mengembangkan pengalaman audio. Kita akan mulai dengan **Tag** untuk kontrol inline cepat, lalu mempelajari **Struktur perintah** lanjutan untuk arahan performa penuh.
 
-### Etiquetas de audio
+### Tag audio
 
-Las etiquetas son modificadores intercalados, como `[whispers]` o `[laughs]`, que te brindan un control detallado sobre la publicación. Puedes usarlos para cambiar el tono, el ritmo y el ambiente emocional de una línea o sección de la transcripción. También puedes usarlos para agregar interjecciones y algunos otros sonidos no verbales a la interpretación, como `[cough]`, `[sighs]` o `[gasp]`.
+Tag adalah pengubah inline seperti `[whispers]` atau `[laughs]` yang memberi Anda kontrol terperinci atas penayangan. Anda dapat menggunakannya untuk mengubah nada, kecepatan, dan
+nuansa emosional baris atau bagian transkrip. Anda juga dapat menggunakannya untuk
+menambahkan interjeksi dan beberapa suara non-verbal lainnya ke dalam performa, seperti
+`[cough]`, `[sighs]`, atau `[gasp]`.
 
-No hay una lista exhaustiva de las etiquetas que funcionan y las que no. Te recomendamos que experimentes con diferentes emociones y expresiones para ver cómo cambia el resultado.
+Tidak ada daftar lengkap tentang tag yang berfungsi dan tidak berfungsi. Sebaiknya lakukan eksperimen dengan berbagai emosi dan ekspresi untuk melihat perubahan outputnya.
 
-Si tu transcripción no está en inglés, para obtener mejores resultados, te recomendamos que uses etiquetas de audio en inglés.
+Jika transkrip Anda tidak dalam bahasa Inggris, untuk hasil terbaik, sebaiknya Anda tetap menggunakan tag audio dalam bahasa Inggris.
 
-**Sé creativo con las etiquetas de audio**
+**Berkreasilah dengan tag audio**
 
-Para mostrar la variabilidad que puedes obtener con las etiquetas de audio, aquí tienes un conjunto de ejemplos que dicen lo mismo, pero la entrega cambia según las etiquetas que se usan.
+Untuk menunjukkan jenis variabilitas yang bisa Anda dapatkan dengan tag audio, berikut adalah serangkaian contoh yang masing-masing mengatakan hal yang sama, tetapi penyampaiannya berubah berdasarkan tag yang digunakan.
 
-Puedes cambiar el énfasis de la entrega agregando etiquetas al comienzo de una línea para que el orador se muestre emocionado, aburrido o reacio:
+Anda dapat mengubah penekanan penyampaian dengan menambahkan tag di awal baris untuk membuat pembicara bersemangat, bosan, atau enggan:
 
-- `[excitedly]` Hola, soy un nuevo modelo de texto a voz y puedo decir cosas de muchas maneras diferentes. ¿En qué puedo ayudarte?
-- `[bored]` Hola, soy un nuevo modelo de texto a voz…
-- `[reluctantly]` Hola, soy un nuevo modelo de texto a voz…
+- `[excitedly]` Halo, saya adalah model text-to-speech baru, dan saya dapat mengucapkan kata-kata dengan berbagai cara. Ada yang bisa saya bantu?
+- `[bored]` Halo, saya adalah model text-to-speech baru…
+- `[reluctantly]` Halo, saya adalah model text-to-speech baru…
 
-Las etiquetas también se pueden usar para cambiar el ritmo de la entrega o para combinar el ritmo con el énfasis:
+Tag juga dapat digunakan untuk mengubah kecepatan penayangan, atau untuk menggabungkan kecepatan dengan penekanan:
 
-- `[very fast]` Hola, soy un nuevo modelo de texto a voz…
-- `[very slow]` Hola, soy un nuevo modelo de texto a voz…
-- `[sarcastically, one painfully slow word at a time]` Hola, soy un nuevo modelo de texto a voz…
+- `[very fast]` Halo, saya adalah model text-to-speech baru…
+- `[very slow]` Halo, saya adalah model text-to-speech baru…
+- `[sarcastically, one painfully slow word at a time]` Halo, saya adalah model text-to-speech baru…
 
-También tienes un control preciso sobre secciones específicas, lo que significa que puedes susurrar una parte y gritar otra.
+Anda juga memiliki kontrol yang akurat atas bagian tertentu, yang berarti Anda dapat membisikkan
+satu bagian dan meneriakkan bagian lainnya.
 
-- `[whispers]` Hola, soy un nuevo modelo de texto a voz `[shouting]` y puedo decir cosas de muchas maneras diferentes. `[whispers]` ¿En qué puedo ayudarte?
+- `[whispers]` Halo, saya adalah model text to speech baru, `[shouting]` dan saya dapat
+  mengucapkan berbagai hal dengan banyak cara yang berbeda. `[whispers]` Ada yang bisa saya bantu?
 
-También puedes experimentar con cualquier idea creativa que desees:
+Anda juga dapat bereksperimen dengan ide kreatif apa pun yang Anda inginkan:
 
-- `[like a cartoon dog]` Hola, soy un nuevo modelo de texto a voz…
-- `[like dracula]` Hola, soy un nuevo modelo de texto a voz…
+- `[like a cartoon dog]` Halo, saya adalah model text-to-speech baru…
+- `[like dracula]` Halo, saya adalah model text-to-speech baru…
 
-Las etiquetas de uso frecuente incluyen las siguientes:
+Tag yang umum digunakan meliputi:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
@@ -580,22 +601,25 @@ Las etiquetas de uso frecuente incluyen las siguientes:
 | `[mischievously]` | `[panicked]` | `[sarcastic]` | `[serious]` |
 | `[shouting]` | `[tired]` | `[trembling]` | `[whispers]` |
 
-Las etiquetas te permiten controlar de forma rápida y sencilla la entrega de tu transcripción. Para tener aún más control, puedes combinarlas con una instrucción de contexto para establecer el tono y el ambiente generales de la interpretación.
+Tag memberikan kontrol yang cepat dan mudah atas pengiriman transkrip Anda. Untuk kontrol yang lebih besar, Anda dapat menggabungkannya dengan perintah konteks untuk menetapkan keseluruhan nada dan nuansa performa.
 
-### Escritura de instrucciones avanzada
+### Penulisan perintah lanjutan
 
-Puedes pensar en una instrucción avanzada como una instrucción del sistema que el modelo debe seguir. Es una forma de brindarle más contexto al modelo y controlar su rendimiento.
+Anda dapat menganggap perintah lanjutan sebagai petunjuk sistem yang harus diikuti model. Ini adalah cara untuk memberikan lebih banyak konteks dan kontrol atas performa model.
 
-Una instrucción sólida idealmente incluye los siguientes elementos que se combinan para crear un gran rendimiento:
+Perintah yang efektif idealnya mencakup elemen berikut yang digabungkan untuk menghasilkan performa yang luar biasa:
 
-- **Perfil de audio**: Establece un arquetipo para la voz, define una identidad de personaje, un arquetipo y cualquier otra característica, como la edad, el origen, etcétera.
-- **Escena**: Establece el contexto. Describe tanto el entorno físico como el "ambiente".
-- **Notas del director**: Orientación sobre el rendimiento en la que puedes desglosar qué instrucciones son importantes para que tu talento virtual las tenga en cuenta. Algunos ejemplos son el estilo, la respiración, el ritmo, la articulación y el acento.
-- **Contexto de ejemplo**: Le proporciona al modelo un punto de partida contextual, de modo que tu actor virtual ingrese a la escena que configuraste de forma natural.
-- **Transcripción**: Es el texto que pronunciará el modelo. Para obtener el mejor rendimiento, recuerda que el tema y el estilo de escritura de la transcripción deben correlacionarse con las instrucciones que das.
-- **Etiquetas de audio**: Son modificadores que puedes agregar a una transcripción para cambiar la forma en que se entrega esa parte del texto, como `[whispers]` o `[shouting]`.
+- **Profil Audio** - Menetapkan persona untuk suara, menentukan identitas karakter, arketipe, dan karakteristik lainnya seperti usia, latar belakang, dll.
+- **Adegan** - Menyiapkan latar. Mendeskripsikan lingkungan fisik dan "suasana".
+- **Catatan Sutradara** - Panduan performa tempat Anda dapat menguraikan petunjuk mana yang penting untuk diperhatikan oleh talenta virtual Anda. Contohnya adalah
+  gaya, pernapasan, kecepatan, artikulasi, dan aksen.
+- **Contoh konteks** - Memberi model titik awal kontekstual, sehingga aktor virtual Anda memasuki adegan yang Anda siapkan secara alami.
+- **Transkrip** - Teks yang akan diucapkan oleh model. Untuk performa terbaik,
+  ingatlah bahwa topik transkrip dan gaya penulisan harus berkorelasi dengan
+  petunjuk yang Anda berikan.
+- **Tag audio** - Pengubah yang dapat Anda masukkan ke dalam transkrip untuk mengubah cara penyampaian bagian teks tersebut, seperti `[whispers]` atau `[shouting]`.
 
-Ejemplo de instrucción completa:
+Contoh perintah lengkap:
 
 ```
 # AUDIO PROFILE: Jaz R.
@@ -634,18 +658,18 @@ just sat there pretending to work... stop it. Seriously, I see you.
 two... let's go!
 ```
 
-### Estrategias de instrucciones detalladas
+### Strategi penulisan perintah yang mendetail
 
-Desglosemos cada elemento de la instrucción.
+Mari kita uraikan setiap elemen perintah.
 
-#### Perfil de audio
+#### Profil Audio
 
-Describe brevemente el arquetipo del personaje.
+Jelaskan secara singkat persona karakter.
 
-- **Nombre.** Ponerle un nombre a tu personaje ayuda a fundamentar el modelo y a unir la interpretación. Refiérete al personaje por su nombre cuando definas la escena y el contexto.
-- **Rol:** Identidad y arquetipo principales del personaje que se interpreta en la escena, p. ej., DJ de radio, podcaster, reportero de noticias, etcétera.
+- **Nama.** Memberi nama karakter membantu menyatukan model dan performa yang ketat. Sebutkan karakter dengan namanya saat mengatur adegan dan konteks
+- **Peran.** Identitas inti dan arketipe karakter yang ditampilkan dalam adegan. Misalnya, DJ Radio, Podcaster, Reporter berita, dll.
 
-Ejemplos:
+Contoh:
 
 ```
 # AUDIO PROFILE: Jaz R.
@@ -659,9 +683,12 @@ Ejemplos:
 
 #### Scene
 
-Establece el contexto de la escena, incluida la ubicación, el estado de ánimo y los detalles ambientales que establecen el tono y la atmósfera. Describe lo que sucede alrededor del personaje y cómo lo afecta. La escena proporciona el contexto ambiental para toda la interacción y guía la actuación de una manera sutil y orgánica.
+Tetapkan konteks untuk adegan, termasuk lokasi, suasana, dan detail lingkungan yang menentukan nuansa dan suasana. Jelaskan apa yang terjadi di sekitar karakter
+dan dampaknya. Adegan memberikan konteks lingkungan
+untuk seluruh interaksi dan memandu performa akting dengan cara yang halus
+dan alami.
 
-Ejemplos:
+Contoh:
 
 ```
 ## THE SCENE: The London Studio
@@ -680,15 +707,18 @@ deadened by plush velvet curtains and a heavy rug, but there is a
 distinct "proximity effect."
 ```
 
-#### Notas de los directores
+#### Catatan sutradara
 
-Esta sección fundamental incluye orientación específica sobre el rendimiento. Puedes omitir todos los demás elementos, pero te recomendamos que incluyas este.
+Bagian penting ini mencakup panduan performa tertentu. Anda dapat melewati semua
+elemen lainnya, tetapi sebaiknya sertakan elemen ini.
 
-Define solo lo que es importante para el rendimiento y ten cuidado de no especificar demasiado. Demasiadas reglas estrictas limitarán la creatividad de los modelos y pueden generar un rendimiento peor. Equilibra la descripción del rol y la escena con las reglas de interpretación específicas.
+Tentukan hanya hal yang penting untuk performa, dengan berhati-hati agar tidak
+menspesifikasikan secara berlebihan. Terlalu banyak aturan ketat akan membatasi kreativitas model dan dapat menghasilkan performa yang lebih buruk. Seimbangkan deskripsi peran dan adegan dengan
+aturan performa tertentu.
 
-Las instrucciones más comunes son **Estilo, ritmo y acento**, pero el modelo no se limita a ellas ni las requiere. No dudes en incluir instrucciones personalizadas para abarcar cualquier detalle adicional importante para tu rendimiento y proporciona tantos o tan pocos detalles como sea necesario.
+Arahannya yang paling umum adalah **Gaya, Kecepatan, dan Aksen**, tetapi model tidak terbatas pada hal ini, dan tidak memerlukannya. Jangan ragu untuk menyertakan petunjuk kustom untuk mencakup detail tambahan yang penting bagi performa Anda, dan berikan detail sebanyak atau sesedikit yang diperlukan.
 
-Por ejemplo:
+Contoh:
 
 ```
 ### DIRECTOR'S NOTES
@@ -701,15 +731,19 @@ delivery influencers use in short form videos.
 Accent: Southern california valley girl from Laguna Beach |
 ```
 
-**Estilo:**
+**Gaya:**
 
-Establece el tono y el estilo del discurso generado. Incluye elementos como alegre, enérgico, relajado, aburrido, etcétera, para guiar la interpretación. Sé descriptivo y proporciona todos los detalles necesarios: *"Entusiasmo contagioso. La frase "El público debe sentir que forma parte de un evento comunitario masivo y emocionante"* funciona mejor que decir simplemente *"enérgico y entusiasta".*
+Menetapkan nada dan Gaya ucapan yang dihasilkan. Sertakan hal-hal seperti bersemangat,
+penuh energi, santai, bosan, dll. untuk memandu performa. Berikan deskripsi dan
+berikan detail sebanyak yang diperlukan: *"Antusiasme yang menular. Pendengar
+harus merasa seperti mereka adalah bagian dari acara komunitas yang besar dan menarik."* lebih baik
+daripada hanya mengatakan *"bersemangat dan antusias".*
 
-Incluso puedes probar con términos populares en la industria de la voz en off, como "sonrisa vocal". Puedes superponer tantas características de estilo como desees.
+Anda bahkan dapat mencoba istilah yang populer di industri voiceover, seperti "senyum vokal". Anda dapat menyusun karakteristik gaya sebanyak yang Anda inginkan.
 
-Ejemplos:
+Contoh:
 
-Simple Emotion
+Emosi Sederhana
 
 ```
 DIRECTORS NOTES
@@ -718,7 +752,7 @@ Style: Frustrated and angry developer who can't get the build to run.
 ...
 ```
 
-Más profundidad
+Lebih dalam
 
 ```
 DIRECTORS NOTES
@@ -727,7 +761,7 @@ Style: Sassy GenZ beauty YouTuber, who mostly creates content for YouTube Shorts
 ...
 ```
 
-Complejo
+Kompleks
 
 ```
 DIRECTORS NOTES
@@ -738,11 +772,11 @@ always raised to keep the tone bright, sunny, and explicitly inviting.
 elongated vowels on excitement words (e.g., "Beauuutiful morning").
 ```
 
-**Acento:**
+**Aksen:**
 
-Describe el acento deseado. Cuanto más específica sea tu solicitud, mejores serán los resultados. Por ejemplo, usa "*Acento británico como el que se escucha en Croydon, Inglaterra*" en lugar de "*Acento británico*".
+Jelaskan aksen yang diinginkan. Makin spesifik perintah Anda, makin baik hasilnya. Misalnya, gunakan "*Aksen Inggris Britania seperti yang terdengar di Croydon, Inggris*" vs. "*Aksen Inggris Britania*".
 
-Ejemplos:
+Contoh:
 
 ```
 ### DIRECTORS NOTES
@@ -758,13 +792,13 @@ Accent: Jaz is a DJ from Brixton, London
 ...
 ```
 
-**Ritmo:**
+**Kecepatan:**
 
-El ritmo general y la variación del ritmo a lo largo de la pieza.
+Kecepatan keseluruhan dan variasi kecepatan di seluruh bagian.
 
-Ejemplos:
+Contoh:
 
-Simple
+Sederhana
 
 ```
 ### DIRECTORS NOTES
@@ -773,7 +807,7 @@ Pacing: Speak as fast as possible
 ...
 ```
 
-Más profundidad
+Lebih Dalam
 
 ```
 ### DIRECTORS NOTES
@@ -782,7 +816,7 @@ Pacing: Speaks at a faster, energetic pace, keeping up with fast paced music.
 ...
 ```
 
-Complejo
+Kompleks
 
 ```
 ### DIRECTORS NOTES
@@ -791,9 +825,11 @@ Pacing: The "Drift": The tempo is incredibly slow and liquid. Words bleed into e
 ...
 ```
 
-#### Etiquetas de transcripción y audio
+#### Transkrip dan tag audio
 
-La transcripción contiene las palabras exactas que dirá el modelo. Una etiqueta de audio es una palabra entre corchetes que indica cómo se debe decir algo, un cambio de tono o una interjección.
+Transkrip adalah kata-kata persis yang akan diucapkan model. Tag audio adalah kata
+dalam tanda kurung siku yang menunjukkan cara mengucapkan sesuatu, perubahan
+nada, atau kata seru.
 
 ```
 ### TRANSCRIPT
@@ -804,17 +840,17 @@ at that point.
 [cough] Well, [sighs] I guess it doesn't matter now.
 ```
 
-**Pruébelo**
+**Coba deh**
 
-Prueba algunos de estos ejemplos en [AI Studio](https://aistudio.google.com/generate-speech?hl=es-419), juega con nuestra [app de TTS](http://aistudio.google.com/app/apps/bundled/synergy_intro?hl=es-419) y deja que Gemini te ponga en la silla del director. Ten en cuenta estas sugerencias para lograr interpretaciones vocales excelentes:
+Coba sendiri beberapa contoh ini di [AI Studio](https://aistudio.google.com/generate-speech?hl=id), gunakan [Aplikasi TTS](http://aistudio.google.com/app/apps/bundled/synergy_intro?hl=id) kami, dan biarkan Gemini memandu Anda. Ingatlah tips berikut untuk menghasilkan performa vokal yang luar biasa:
 
-- Recuerda que toda la instrucción debe ser coherente: el guion y la dirección van de la mano para crear una gran actuación.
-- No sientas que debes describir todo. A veces, darle espacio al modelo para que complete los vacíos ayuda a que el texto sea más natural. (Al igual que un actor talentoso)
-- Si alguna vez te sientes bloqueado, pídele ayuda a Gemini para crear tu guion o presentación.
+- Ingatlah untuk menjaga seluruh perintah tetap koheren – skrip dan arahan saling terkait dalam menciptakan performa yang hebat.
+- Anda tidak perlu menjelaskan semuanya. Terkadang, memberikan ruang bagi model untuk mengisi kekosongan akan membantu kealamian. (Sama seperti aktor berbakat)
+- Jika Anda merasa kesulitan, minta bantuan Gemini untuk menyusun naskah atau penampilan Anda.
 
-## Generación de voz en vivo
+## Pembuatan ucapan saat streaming
 
-Puedes transmitir el audio generado a medida que el modelo lo genera. Esto es útil para reducir la latencia percibida.
+Anda dapat melakukan streaming audio yang dihasilkan saat audio tersebut dibuat oleh model. Hal ini berguna untuk mengurangi latensi yang dirasakan.
 
 ### Python
 
@@ -906,32 +942,34 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-t
     }'
 ```
 
-## Limitaciones
+## Batasan
 
-- Los modelos de TTS solo pueden recibir entradas de texto y generar salidas de audio.
-- Una sesión de TTS tiene un límite de [ventana de contexto](https://ai.google.dev/gemini-api/docs/long-context?hl=es-419) de 32,000 tokens.
-- Revisa la sección [Idiomas](https://ai.google.dev/gemini-api/docs/speech-generation?hl=es-419#languages) para conocer los idiomas admitidos.
-- La TTS no admite la transmisión para modelos anteriores a la versión 3.1 (la transmisión es compatible con `gemini-3.1-flash-tts-preview` y versiones posteriores).
+- Model TTS hanya dapat menerima input teks dan menghasilkan output audio.
+- Sesi TTS memiliki batas [jendela konteks](https://ai.google.dev/gemini-api/docs/long-context?hl=id) sebesar
+  32 ribu token.
+- Tinjau bagian [Bahasa](https://ai.google.dev/gemini-api/docs/speech-generation?hl=id#languages) untuk mengetahui dukungan bahasa.
+- TTS tidak mendukung streaming untuk model yang lebih lama dari versi 3.1 (streaming didukung untuk `gemini-3.1-flash-tts-preview` dan yang lebih baru).
 
-Las siguientes restricciones se aplican específicamente cuando se usa el modelo de TTS de Gemini 3.1 Flash en versión preliminar para la generación de voz:
+Batasan berikut berlaku secara khusus saat menggunakan model Gemini 3.1 Flash TTS Preview untuk pembuatan ucapan:
 
-- **Inconsistencia de la voz con las instrucciones de la instrucción:** Es posible que la salida del modelo no siempre coincida estrictamente con el orador seleccionado, lo que hace que el audio suene diferente de lo esperado. Para evitar tonos que no coincidan (como una voz masculina profunda que intenta hablar como una niña), asegúrate de que el tono y el contexto escritos de tu instrucción se alineen de forma natural con el perfil del orador seleccionado.
-- **Calidad de los resultados más largos:** La calidad y la coherencia del discurso pueden comenzar a disminuir con los resultados generados que duran más de unos minutos. Te recomendamos que dividas tus transcripciones en fragmentos más pequeños.
-- **Devoluciones ocasionales de tokens de texto:** En ocasiones, el modelo devuelve tokens de texto en lugar de tokens de audio, lo que provoca que el servidor rechace la solicitud con un error `500`. Dado que esto ocurre de forma aleatoria en un porcentaje muy pequeño de solicitudes, debes implementar una lógica de reintento automatizada en tu aplicación para controlarlas.
-- **Rechazos falsos del clasificador de instrucciones:** Las instrucciones vagas pueden no activar el clasificador de síntesis de voz, lo que genera una solicitud rechazada (`PROHIBITED_CONTENT`) o hace que el modelo lea en voz alta las instrucciones de estilo y las notas del director. Valida tus instrucciones agregando un preámbulo claro que le indique al modelo que sintetice el habla y etiquetando de forma explícita dónde comienza la transcripción hablada real.
+- **Suara tidak konsisten dengan petunjuk perintah:** Output model mungkin tidak selalu cocok dengan speaker yang dipilih, sehingga audio terdengar berbeda dari yang diharapkan. Untuk menghindari nada yang tidak cocok (seperti suara pria dewasa yang mencoba berbicara seperti gadis kecil), pastikan nada dan konteks tertulis perintah Anda selaras secara alami dengan profil penutur yang dipilih.
+- **Kualitas output yang lebih panjang:** Kualitas dan konsistensi ucapan dapat mulai
+  berubah dengan output yang dihasilkan yang lebih panjang dari beberapa menit. Sebaiknya bagi transkrip Anda menjadi beberapa bagian yang lebih kecil.
+- **Token teks yang terkadang ditampilkan:** Model terkadang menampilkan token teks, bukan token audio, sehingga menyebabkan server gagal memenuhi permintaan dengan error `500`. Karena hal ini terjadi secara acak dalam persentase permintaan yang sangat kecil, Anda harus menerapkan logika coba lagi otomatis di aplikasi Anda untuk menanganinya.
+- **Penolakan palsu pengklasifikasi perintah:** Perintah yang tidak jelas dapat gagal memicu pengklasifikasi sintesis ucapan, sehingga permintaan ditolak (`PROHIBITED_CONTENT`) atau menyebabkan model membaca petunjuk gaya dan catatan sutradara Anda dengan keras. Validasi perintah Anda dengan menambahkan pengantar yang jelas yang menginstruksikan model untuk menyintesis ucapan, dan secara eksplisit memberi label di mana transkrip ucapan sebenarnya dimulai.
 
-## ¿Qué sigue?
+## Langkah berikutnya
 
-- Prueba el [recetario de generación de audio](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_TTS.ipynb?hl=es-419).
-- La [API de Live](https://ai.google.dev/gemini-api/docs/live?hl=es-419) de Gemini ofrece opciones interactivas de generación de audio que puedes intercalar con otras modalidades.
-- Para trabajar con *entradas* de audio, consulta la guía de [Comprensión de audio](https://ai.google.dev/gemini-api/docs/audio?hl=es-419).
+- Coba [cookbook pembuatan audio](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_TTS.ipynb?hl=id).
+- [Live API](https://ai.google.dev/gemini-api/docs/live?hl=id) Gemini menawarkan opsi pembuatan audio interaktif yang dapat Anda selingi dengan modalitas lain.
+- Untuk bekerja dengan *input* audio, buka panduan [Audio understanding](https://ai.google.dev/gemini-api/docs/audio?hl=id).
 
-Enviar comentarios
+Kirim masukan
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Última actualización: 2026-07-30 (UTC)
+Terakhir diperbarui pada 2026-07-30 UTC.
 
-¿Quieres brindar más información?
+Ada masukan untuk kami?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-07-30 (UTC)"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-30 UTC."],[],[]]

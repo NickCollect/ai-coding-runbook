@@ -1,58 +1,58 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-overview?hl=pl
-fetched_at: 2026-08-10T03:12:19.067847+00:00
+source_url: https://ai.google.dev/gemini-api/docs/robotics-overview?hl=he
+fetched_at: 2026-08-17T02:26:17.747558+00:00
 title: "Gemini Robotics ER \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Prześlij opinię
+שליחת משוב
 
 # Gemini Robotics ER
 
-Modele Gemini Robotics ER (embodied reasoning) to modele wizualno-językowe (VLM), które umożliwiają robotom postrzeganie świata fizycznego i interakcję z nim. Interpretują dane wizualne, przeprowadzają rozumowanie przestrzenne i czasowe, planują wieloetapowe zadania oraz koordynują pracę robotów i narzędzi.
+מודלים של Gemini Robotics ER (embodied reasoning) הם מודלים של ראייה ושפה (VLM) שמאפשרים לרובוטים לתפוס את העולם הפיזי ולקיים איתו אינטראקציה. הם מפרשים נתונים חזותיים, מבצעים ניתוח מרחבי וזמני, מתכננים משימות מרובות שלבים ומתזמנים רובוטים וכלים.
 
-## Modele
+## מודלים
 
-Model Gemini Robotics ER 2 to najnowszy model w Gemini Robotics.
-To nasz zaktualizowany model rozumowania, który umożliwia robotom dokładne zrozumienie otoczenia. Specjalizuje się w rozumowaniu w świecie fizycznym, np.w orkiestracji robotów za pomocą agentów (np. z użyciem dużych modeli językowych), rozumieniu filmów z robotów, w tym w rozumieniu postępów i wykrywaniu sukcesów, odczytywaniu wskazań przyrządów, wskazywaniu i rozumowaniu przestrzennym.
+מודל Gemini Robotics ER 2 הוא המודל העדכני ביותר ב-Gemini Robotics.
+זהו מודל חשיבה רציונלית העדכני שלנו, שמאפשר לרובוטים להבין את הסביבה שלהם בצורה מדויקת. הוא מתמחה ביכולות של נימוק מגולם, כמו תזמור של רובוטים על ידי סוכנים (למשל, באמצעות VLAs), הבנת סרטוני רובוטים כולל הבנת התקדמות וזיהוי הצלחה, קריאת מכשירים, הצבעה ונימוק מרחבי.
 
-Model Gemini Robotics ER 2 wprowadza 2 punkty końcowe modelu:
+מודל Gemini Robotics ER 2 כולל שתי נקודות קצה של מודלים:
 
-- **`gemini-robotics-er-2-preview`**: standardowy model ER2. Wersja Gemini 3.5 Flash z ulepszonym rozumowaniem przestrzennym, wyszukiwaniem momentów w filmach, klasyfikacją postępu w filmach, koordynacją pracy wielu robotów i wieloetapowym korzystaniem z narzędzi.
-- **`gemini-robotics-er-2-streaming-preview`**: zoptymalizowany pod kątem przesyłania strumieniowego w czasie rzeczywistym za pomocą [interfejsu Live API](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=pl). Użyj tego modelu w przypadku robotów o krótkim czasie oczekiwania, które przetwarzają ciągłe dane audio i wideo.
+- ‫**`gemini-robotics-er-2-preview`**: מודל ER 2 רגיל. הוא מבוסס על Gemini 3.5 Flash וכולל שיפורים ביכולות הבאות: ניתוח מרחבי, איתור רגעים בסרטונים, סיווג של התקדמות בסרטונים, תיאום בין כמה רובוטים ושימוש בכלי רב-שלבי.
+- ‫**`gemini-robotics-er-2-streaming-preview`**: מותאם לסטרימינג בזמן אמת באמצעות [Live API](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=he). אפשר להשתמש במודל הזה לסוכני רובוט עם זמן אחזור נמוך, שמבצעים עיבוד של קלט אודיו ווידאו רציף.
 
-Jeśli używasz Gemini Robotics ER 1.6, przejdź na Gemini Robotics ER 2, zastępując w wywołaniach interfejsu API ciąg znaków
-`model="gemini-robotics-er-1.6-preview"` ciągiem
-`model="gemini-robotics-er-2-preview"` lub
-`model="gemini-robotics-er-2-streaming-preview"`. Pamiętaj, że model Gemini Robotics ER 1.6 zostanie wyłączony [pod koniec sierpnia](https://ai.google.dev/gemini-api/docs/deprecations?hl=pl#robotics-models).
+אם אתם משתמשים ב-Gemini Robotics ER 1.6, אתם יכולים לשדרג ל-Gemini Robotics ER 2 על ידי החלפת
+`model="gemini-robotics-er-1.6-preview"` ב-
+`model="gemini-robotics-er-2-preview"` או ב-
+`model="gemini-robotics-er-2-streaming-preview"` בקריאות ה-API. חשוב לדעת: מודל Gemini Robotics ER 1.6 ייסגר [בסוף אוגוסט](https://ai.google.dev/gemini-api/docs/deprecations?hl=he#robotics-models).
 
-[Wypróbuj Gemini Robotics ER 2 w Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-preview&hl=pl)
+[התנסות ב-Gemini Robotics ER 2 ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-preview&hl=he)
 
-## Możliwości robotów
+## יכולות רובוטיקה
 
-Gemini Robotics ER obsługuje szereg funkcji rozumowania w świecie fizycznym.
-Wybierz funkcję, aby dowiedzieć się więcej:
+‫Gemini Robotics ER תומך במגוון יכולות של הסקת מסקנות מגוף.
+כדי לקבל מידע נוסף, בוחרים יכולת:
 
-| Możliwości | Opis | Przewodnik |
+| יכולת | תיאור | הדרכות |
 | --- | --- | --- |
-| rozumowanie przestrzenne, | wskazywać obiekty, śledzić je w filmach, wykrywać za pomocą ramek ograniczających i planować trajektorie. | [Rozumowanie przestrzenne](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=pl) |
-| Agentic Vision | Używaj wykonywania kodu, aby zwiększać możliwości innych funkcji, korzystając z narzędzi do manipulowania obrazami. | [Wizja agentowa](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=pl) |
-| Orkiestracja zadań | Łącz rozumowanie przestrzenne z niestandardowymi interfejsami API robotów, aby wykonywać zadania długoterminowe. | [Orkiestracja zadań](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=pl) |
-| Streaming (tylko punkt końcowy Gemini Robotics ER 2 Streaming) | Dwukierunkowe przesyłanie strumieniowe dla robotów w czasie rzeczywistym z małymi opóźnieniami i wywoływaniem funkcji. | [Streaming dla robotyki](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=pl) |
-| Postępy odtwarzania filmu (tylko Gemini Robotics ER2) | Wyszukiwanie momentów i klasyfikowanie postępów na podstawie ciągłych strumieni wideo. | [Rozumienie filmów](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=pl) |
+| חשיבה מרחבית | הפנייה לאובייקטים, מעקב אחריהם בסרטון, זיהוי באמצעות תיבות תוחמות, תכנון מסלולים. | [היגיון מרחבי](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=he) |
+| ראייה באמצעות סוכנים | שימוש בהרצת קוד כדי לשפר יכולות אחרות באמצעות כלים לעריכת תמונות. | [Agentic vision](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=he) |
+| תזמור משימות | שילוב של חשיבה מרחבית עם ממשקי API מותאמים אישית של רובוטים כדי להשלים משימות ארוכות טווח. | [תזמור משימות](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=he) |
+| הזרמה (רק בנקודת הקצה של Gemini Robotics ER 2 Streaming) | סטרימינג דו-כיווני לסוכני רובוטים בזמן אמת עם קריאות לפונקציות בזמן אחזור נמוך. | [סטרימינג לרובוטיקה](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=he) |
+| התקדמות הסרטון (Gemini Robotics ER 2 בלבד) | חיפוש רגעים וסיווג התקדמות מפידים רציפים של סרטונים. | [הבנת סרטונים](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=he) |
 
-## Pierwsze kroki
+## תחילת העבודה
 
-Ten przykład znajduje obiekty na obrazie i zwraca ich znormalizowane współrzędne 2D oraz etykiety. Możesz przekazać te dane wyjściowe bezpośrednio do interfejsu API robotyki lub modelu VLA, aby wygenerować działania robota.
+בדוגמה הבאה מוצגים אובייקטים בתמונה ומוחזרות התוויות והקואורדינטות הדו-ממדיות המנורמלות שלהם. אפשר להעביר את הפלט הזה ישירות ל-API של רובוטיקה או למודל VLA כדי ליצור פעולות של רובוט.
 
 ### Python
 
@@ -120,7 +120,7 @@ curl -X POST \
   }'
 ```
 
-Dane wyjściowe będą tablicą JSON zawierającą obiekty, z których każdy będzie miał `point` (znormalizowane współrzędne `[y, x]`) i `label` identyfikujące obiekt.
+הפלט יהיה מערך JSON שמכיל אובייקטים, שלכל אחד מהם יש `point` (קואורדינטות `[y, x]` מנורמלות) ו-`label` שמזהה את האובייקט.
 
 ### JSON
 
@@ -139,109 +139,109 @@ Dane wyjściowe będą tablicą JSON zawierającą obiekty, z których każdy b�
 ]
 ```
 
-Na tym obrazie widać, jak mogą być wyświetlane te punkty:
+בתמונה הבאה אפשר לראות דוגמה לאופן שבו הנקודות האלה יכולות להופיע:
 
-![Przykład wyświetlający punkty obiektów na obrazie](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=pl)
+![דוגמה שמציגה את הנקודות של אובייקטים בתמונה](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=he)
 
-## Jak to działa
+## איך זה עובד
 
-Gemini Robotics ER przyjmuje dane wejściowe w postaci obrazów, filmów lub dźwięku z promptami w języku naturalnym. Identyfikuje obiekty, analizuje kontekst sceny i relacje przestrzenne oraz zwraca uporządkowane dane wyjściowe, takie jak współrzędne lub ramki ograniczające.
+‫Gemini Robotics ER מקבל קלט של תמונות, סרטונים או אודיו עם הנחיות בשפה טבעית. היא מזהה אובייקטים, מנתחת את ההקשר של הסצנה ואת היחסים המרחביים, ומחזירה פלט מובנה כמו קואורדינטות או תיבות תוחמות.
 
-Gemini Robotics ER jest też agentem: dzieli złożone zadania na podzadania i wykonuje je, wywołując funkcje robota lub uruchamiając wygenerowany kod. Na przykład „włóż jabłko do miski” staje się sekwencją kroków: zlokalizuj, chwyć i umieść.
+‫Gemini Robotics ER הוא גם סוכן: הוא מפרק משימות מורכבות למשימות משנה ומבצע אותן על ידי הפעלת פונקציות הרובוט או הפעלת קוד שנוצר. לדוגמה, המשפט "תשים את התפוח בקערה" הופך לרצף של שלבים: איתור, אחיזה והנחה.
 
-Więcej informacji o tym, jak Gemini wykonuje wywołania narzędzi, znajdziesz w sekcji [Wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=pl#how-it-works).
+במאמר [בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=he#how-it-works) מוסבר איך Gemini מבצע קריאות לכלים.
 
-## Bezpieczeństwo
+## בטיחות
 
-Gemini Robotics ER zostało zaprojektowane z myślą o bezpieczeństwie, ale to Ty odpowiadasz za utrzymanie bezpiecznego środowiska wokół robota. Modele generatywnej AI mogą popełniać błędy, a roboty fizyczne mogą powodować uszkodzenia. Więcej informacji znajdziesz na [stronie Google DeepMind poświęconej bezpieczeństwu robotów](https://deepmind.google/models/gemini-robotics/safety?hl=pl).
+‫Gemini Robotics ER נבנה תוך התחשבות בבטיחות, אבל האחריות לשמירה על סביבה בטוחה סביב הרובוט היא שלכם. מודלים של AI גנרטיבי עלולים לטעות, ורובוטים פיזיים עלולים לגרום נזק. מידע נוסף זמין ב[דף בנושא בטיחות רובוטים של Google DeepMind](https://deepmind.google/models/gemini-robotics/safety?hl=he).
 
-## Sprawdzone metody
+## שיטות מומלצות
 
-1. Używaj prostego, języka naturalnego. Opisz, co ma robić robot, tak jakbyś mówił(-a) do człowieka. Jeśli dane słowo nie działa, wypróbuj popularny synonim.
-2. Optymalizuj dane wizualne. Przed wysłaniem obrazu możesz przyciąć lub powiększyć małe lub niewyraźne obiekty. Oświetlenie i niski kontrast kolorów mogą wpływać na wykrywanie.
-3. Podziel skomplikowane zadania na etapy. Każdy krok wysyłaj jako osobny prompt, aby model był bardziej skupiony i dokładniejszy.
-4. W przypadku zadań wymagających dużej precyzji wykonuj zapytania wielokrotnie i obliczaj średnią wyników. To podejście oparte na konsensusie zmniejsza wariancję danych przestrzennych.
+1. השתמשו בשפה פשוטה וטבעית. מתארים מה רוצים שהרובוט יעשה, כמו שמסבירים לאדם אחר. אם מונח מסוים לא עובד, נסו להשתמש במילה נרדפת נפוצה.
+2. אופטימיזציה של קלט חזותי. לפני ששולחים את התמונה, כדאי לחתוך או לשנות את מרחק התצוגה של אובייקטים קטנים או לא ברורים. תאורה וניגודיות צבעים נמוכה יכולים להשפיע על הזיהוי.
+3. כדאי לפצל משימות מורכבות לשלבים. כדי לשמור על המיקוד של המודל ולשפר את הדיוק, שולחים כל שלב כהנחיה נפרדת.
+4. כדי לבצע משימות שדורשות דיוק גבוה, כדאי להריץ את השאילתה כמה פעמים ולחשב את ממוצע התוצאות. גישת הקונצנזוס הזו מצמצמת את השונות בתוצאות המרחביות.
 
-## Ograniczenia
+## מגבלות
 
-Podczas tworzenia aplikacji z użyciem Gemini Robotics ER pamiętaj o tych ograniczeniach:
+כשמפתחים באמצעות Gemini Robotics ER, חשוב לקחת בחשבון את המגבלות הבאות:
 
-- **Ograniczenia dotyczące klucza interfejsu API:** interfejs Gemini API nie akceptuje żądań z nieograniczonych kluczy interfejsu API i zwraca błąd `403 Forbidden`. Zabezpiecz klucz interfejsu API, dodając ograniczenia w [AI Studio](https://aistudio.google.com/api-keys?hl=pl).
-  Więcej informacji znajdziesz w artykule [Zabezpieczanie kluczy interfejsu API bez ograniczeń](https://ai.google.dev/gemini-api/docs/api-key?hl=pl#secure-unrestricted-keys).
-- **Opóźnienie a wydajność:** złożone zapytania, dane wejściowe o wysokiej rozdzielczości lub wysoki poziom myślenia mogą wydłużyć czas przetwarzania. W przypadku poziomu myślenia wybierz średni, aby zachować równowagę między czasem oczekiwania a wydajnością.
-- **Halucynacje:** podobnie jak wszystkie duże modele językowe, modele Gemini Robotics ER mogą czasami „halucynować” lub podawać nieprawidłowe informacje, zwłaszcza w przypadku niejednoznacznych promptów lub danych wejściowych spoza zakresu.
-- **Zależność od jakości prompta:** jakość wygenerowanych treści zależy od precyzji prompta. Używaj konkretnych, dobrze skonstruowanych promptów.
-- **Koszt obliczeniowy:** uruchamianie modelu, zwłaszcza w przypadku danych wejściowych w postaci filmów lub wysokich wartości `thinking_budget`, zużywa zasoby obliczeniowe i generuje koszty.
-  Więcej informacji znajdziesz na stronie [Myślenie](https://ai.google.dev/gemini-api/docs/thinking?hl=pl).
-- **Rodzaje danych wejściowych:** szczegółowe informacje o ograniczeniach w przypadku każdego trybu znajdziesz w tych artykułach.
-  - [Dane wejściowe dotyczące obrazów](https://ai.google.dev/gemini-api/docs/image-understanding?hl=pl#technical-details-image)
-  - [Wejścia wideo](https://ai.google.dev/gemini-api/docs/video-understanding?hl=pl#supported-formats)
-  - [Wejścia audio](https://ai.google.dev/gemini-api/docs/audio?hl=pl#supported-formats)
+- **הגבלות על מפתחות API:** Gemini API לא מקבל בקשות ממפתחות API ללא הגבלות ומחזיר שגיאה `403 Forbidden`. כדי לאבטח את מפתח ה-API, מוסיפים הגבלות ב-[AI Studio](https://aistudio.google.com/api-keys?hl=he).
+  פרטים נוספים זמינים במאמר בנושא [אבטחת מפתחות API ללא הגבלות](https://ai.google.dev/gemini-api/docs/api-key?hl=he#secure-unrestricted-keys).
+- **זמן אחזור לעומת ביצועים:** שאילתות מורכבות, קלט ברזולוציה גבוהה או רמות חשיבה גבוהות יכולים להוביל לזמני עיבוד ארוכים יותר. לרמת החשיבה, כדאי להשתמש בערך 'בינוני' כדי ליצור איזון טוב בין זמן האחזור לביצועים.
+- **הזיות:** כמו כל המודלים הגדולים של שפה, מודלים של Gemini Robotics ER יכולים מדי פעם "להזות" או לספק מידע שגוי, במיוחד בהנחיות מעורפלות או בקלט שהוא מחוץ להתפלגות.
+- **תלות באיכות ההנחיה:** איכות הפלט תלויה בבהירות של ההנחיה. חשוב להשתמש בהנחיות ספציפיות ומובנות היטב.
+- **עלות החישוב:** הפעלת המודל, במיוחד עם נתוני וידאו או עם `thinking_budget` גבוה, צורכת משאבי מחשוב וגוררת עלויות.
+  פרטים נוספים מופיעים בדף [חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he).
+- **סוגי קלט:** בקישורים הבאים מפורטות המגבלות של כל מצב.
+  - [הוספת תמונות](https://ai.google.dev/gemini-api/docs/image-understanding?hl=he#technical-details-image)
+  - [קלט של סרטונים](https://ai.google.dev/gemini-api/docs/video-understanding?hl=he#supported-formats)
+  - [הוספת אודיו](https://ai.google.dev/gemini-api/docs/audio?hl=he#supported-formats)
 
-## Informacje na temat ochrony prywatności
+## הודעת פרטיות
 
-Przyjmujesz do wiadomości, że modele, o których mowa w tym dokumencie („Modele robotyczne”), wykorzystują dane wideo i audio do działania i poruszania sprzętem zgodnie z Twoimi instrukcjami. W związku z tym możesz używać modeli robotów w taki sposób, aby zbierały dane od osób, które można zidentyfikować, takie jak dane głosowe, obrazy i dane dotyczące podobieństwa („Dane osobowe”). Jeśli zdecydujesz się korzystać z modeli robotów w sposób, który umożliwia zbieranie danych osobowych, nie możesz zezwolić żadnym osobom, których tożsamość można ustalić, na interakcję z modelami robotów ani na przebywanie w ich pobliżu, dopóki nie zostaną one odpowiednio poinformowane o tym, że ich dane osobowe mogą być przekazywane do Google i wykorzystywane przez Google zgodnie z Dodatkowymi warunkami korzystania z usługi Gemini API, które znajdziesz na stronie [https://ai.google.dev/gemini-api/terms](https://ai.google.dev/gemini-api/terms?hl=pl) (dalej „Warunki”), w tym zgodnie z sekcją zatytułowaną „Jak Google wykorzystuje Twoje dane”. Zapewnisz, że takie powiadomienie zezwala na zbieranie i wykorzystywanie danych osobowych w sposób określony w Warunkach, oraz podejmiesz uzasadnione ekonomicznie starania, aby zminimalizować zbieranie i rozpowszechnianie danych osobowych, stosując techniki takie jak rozmywanie twarzy i używając modeli robotów w obszarach, w których nie ma osób umożliwiających identyfikację, w największym możliwym zakresie.
+אתם מאשרים שהמודלים שמצוינים במסמך הזה ('מודלים של רובוטיקה') משתמשים בנתוני וידאו ואודיו כדי לפעול ולהזיז את החומרה בהתאם להוראות שלכם. לכן, יכול להיות שתפעילו את המודלים של הרובוטיקה כך שהם יאספו נתונים מאנשים שאפשר לזהות, כמו נתוני קול, תמונות ונתונים שקשורים לדמות שלהם ('מידע אישי'). אם תבחרו להפעיל את מודלי הרובוטיקה באופן שיאסוף מידע אישי, אתם מסכימים שלא תאפשרו לאנשים שניתן לזהות אותם ליצור אינטראקציה עם מודלי הרובוטיקה או להיות נוכחים באזור שמסביב להם, אלא אם כן הודעתם לאנשים שניתן לזהות אותם מראש שהמידע האישי שלהם עשוי להימסר ל-Google ולשמש אותה כפי שמפורט בתנאים והגבלות הנוספים לשירות של Gemini API שזמינים בכתובת [https://ai.google.dev/gemini-api/terms](https://ai.google.dev/gemini-api/terms?hl=he) (התנאים), כולל בהתאם לקטע שכותרתו 'איך Google משתמשת בנתונים שלך'. תדאגו שההודעה תאפשר איסוף ושימוש במידע אישי כפי שמפורט בתנאים, ותפעלו באופן סביר מבחינה מסחרית כדי לצמצם את האיסוף וההפצה של מידע אישי באמצעות טכניקות כמו טשטוש פנים והפעלת מודלים רובוטיים באזורים שלא מכילים אנשים שניתן לזהות, במידת האפשר.
 
-## Ceny
+## תמחור
 
-Szczegółowe informacje o cenach i dostępnych regionach znajdziesz na stronie [cennika](https://ai.google.dev/gemini-api/docs/pricing?hl=pl).
+מידע מפורט על התמחור והאזורים הזמינים מופיע בדף [תמחור](https://ai.google.dev/gemini-api/docs/pricing?hl=he).
 
-## Punkty końcowe modelu
+## נקודות קצה של מודלים
 
-### Gemini Robotics ER 2 (wersja testowa)
+### ‫Gemini Robotics ER 2 Preview
 
-| Właściwość | Opis |
+| נכס | תיאור |
 | --- | --- |
-| id\_cardKod modelu | `gemini-robotics-er-2-preview` |
-| saveObsługiwane typy danych | **Dane wejściowe**  Tekst, obrazy, filmy, dźwięk  **Dane wyjściowe**  Tekst |
-| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Limit tokenów wejściowych**  131 072  **Limit tokenów wyjściowych**  65 536 |
-| handyman Możliwości | **[Generowanie dźwięku](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl)**  Nieobsługiwane  **[Zapisywanie w pamięci podręcznej](https://ai.google.dev/gemini-api/docs/caching?hl=pl)**  Obsługiwane  **[Wykonanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl)**  Obsługiwane  **[Korzystanie z komputera](https://ai.google.dev/gemini-api/docs/computer-use?hl=pl)**  Obsługiwane  **[Wyszukiwanie plików](https://ai.google.dev/gemini-api/docs/file-search?hl=pl)**  Obsługiwane  **[Wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl)**  Obsługiwane  **[Powiązanie ze źródłami informacji przy użyciu Map Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pl)**  Obsługiwane  **[Generowanie obrazów](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl)**  Nieobsługiwane  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=pl)**  Nieobsługiwane  **[Szukaj groundingu](https://ai.google.dev/gemini-api/docs/google-search?hl=pl)**  Obsługiwane  **[Ustrukturyzowane dane wyjściowe](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl)**  Obsługiwane  **[Myślenie](https://ai.google.dev/gemini-api/docs/thinking?hl=pl)**  Obsługiwane  **[Kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl)**  Obsługiwane |
-| speed Opcje wykorzystania | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=pl)**  Obsługiwane  **[Wnioskowanie Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pl)**  Nieobsługiwane  **[Priorytet wnioskowania](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pl)**  Nieobsługiwane |
-| Wersje 123 | Więcej informacji znajdziesz w [wzorcach wersji modelu](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#model-versions).  - Podgląd: `gemini-robotics-er-2-preview` |
-| calendar\_monthOstatnia aktualizacja | Lipiec 2026 r. |
-| id\_cardKarta modelu | [Karta modelu](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=pl) |
+| id\_cardקוד מודל | `gemini-robotics-er-2-preview` |
+| saveסוגי נתונים נתמכים | **קלטים**  טקסט, תמונות, סרטונים, אודיו  **פלט**  טקסט |
+| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  131,072  **Output token limit**  65,536 |
+| handymanיכולות | **[יצירת אודיו](https://ai.google.dev/gemini-api/docs/speech-generation?hl=he)**  לא נתמך  **[שמירת נתונים במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he)**  נתמך  **[הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he)**  נתמך  **[שימוש במחשב](https://ai.google.dev/gemini-api/docs/computer-use?hl=he)**  נתמך  **[חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he)**  נתמך  **[בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he)**  נתמך  **[עיגון בעזרת מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he)**  נתמך  **[יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he)**  לא נתמך  ‫**[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=he)**  לא נתמך  **[חיפוש עם עיגון בנתונים](https://ai.google.dev/gemini-api/docs/google-search?hl=he)**  נתמך  **[פלטים מובנים](https://ai.google.dev/gemini-api/docs/structured-output?hl=he)**  נתמך  **[חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he)**  נתמך  **[הקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he)**  נתמך |
+| speedאפשרויות צריכה | ‫**[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he)**  נתמך  **[הסקת מסקנות ב-Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=he)**  לא נתמך  **[הסקת עדיפות](https://ai.google.dev/gemini-api/docs/priority-inference?hl=he)**  לא נתמך |
+| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [תבניות של גרסאות מודל](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - תצוגה מקדימה: `gemini-robotics-er-2-preview` |
+| calendar\_monthהעדכון האחרון | יולי 2026 |
+| id\_cardכרטיס מודל | [כרטיס מודל](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=he) |
 
-### Gemini Robotics ER 2 Streaming Preview
+### ‫Gemini Robotics ER 2 Streaming Preview
 
-| Właściwość | Opis |
+| נכס | תיאור |
 | --- | --- |
-| id\_cardKod modelu | `gemini-robotics-er-2-streaming-preview` |
-| saveObsługiwane typy danych | **Dane wejściowe**  Tekst, obrazy, filmy, dźwięk  **Dane wyjściowe**  Tekst |
-| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Limit tokenów wejściowych**  131 072  **Limit tokenów wyjściowych**  65 536 |
-| handyman Możliwości | **[Generowanie dźwięku](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl)**  Nieobsługiwane  **[Zapisywanie w pamięci podręcznej](https://ai.google.dev/gemini-api/docs/caching?hl=pl)**  Nieobsługiwane  **[Wykonanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl)**  Nieobsługiwane  **[Korzystanie z komputera](https://ai.google.dev/gemini-api/docs/computer-use?hl=pl)**  Nieobsługiwane  **[Wyszukiwanie plików](https://ai.google.dev/gemini-api/docs/file-search?hl=pl)**  Nieobsługiwane  **[Wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl)**  Obsługiwane  **[Powiązanie ze źródłami informacji przy użyciu Map Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pl)**  Nieobsługiwane  **[Generowanie obrazów](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl)**  Nieobsługiwane  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=pl)**  Obsługiwane  **[Szukaj groundingu](https://ai.google.dev/gemini-api/docs/google-search?hl=pl)**  Obsługiwane  **[Ustrukturyzowane dane wyjściowe](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl)**  Nieobsługiwane  **[Myślenie](https://ai.google.dev/gemini-api/docs/thinking?hl=pl)**  Obsługiwane  **[Kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl)**  Nieobsługiwane |
-| speed Opcje wykorzystania | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=pl)**  Nieobsługiwane  **[Wnioskowanie Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pl)**  Nieobsługiwane  **[Priorytet wnioskowania](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pl)**  Nieobsługiwane |
-| Wersje 123 | Więcej informacji znajdziesz w [wzorcach wersji modelu](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#model-versions).  - Podgląd: `gemini-robotics-er-2-streaming-preview` |
-| calendar\_monthOstatnia aktualizacja | Lipiec 2026 r. |
-| id\_cardKarta modelu | [Karta modelu](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=pl) |
+| id\_cardקוד מודל | `gemini-robotics-er-2-streaming-preview` |
+| saveסוגי נתונים נתמכים | **קלטים**  טקסט, תמונות, סרטונים, אודיו  **פלט**  טקסט |
+| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  131,072  **Output token limit**  65,536 |
+| handymanיכולות | **[יצירת אודיו](https://ai.google.dev/gemini-api/docs/speech-generation?hl=he)**  לא נתמך  **[שמירת נתונים במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he)**  לא נתמך  **[הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he)**  לא נתמך  **[שימוש במחשב](https://ai.google.dev/gemini-api/docs/computer-use?hl=he)**  לא נתמך  **[חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he)**  לא נתמך  **[בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he)**  נתמך  **[עיגון בעזרת מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he)**  לא נתמך  **[יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he)**  לא נתמך  ‫**[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=he)**  נתמך  **[חיפוש עם עיגון בנתונים](https://ai.google.dev/gemini-api/docs/google-search?hl=he)**  נתמך  **[פלטים מובנים](https://ai.google.dev/gemini-api/docs/structured-output?hl=he)**  לא נתמך  **[חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he)**  נתמך  **[הקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he)**  לא נתמך |
+| speedאפשרויות צריכה | ‫**[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he)**  לא נתמך  **[הסקת מסקנות ב-Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=he)**  לא נתמך  **[הסקת עדיפות](https://ai.google.dev/gemini-api/docs/priority-inference?hl=he)**  לא נתמך |
+| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [תבניות של גרסאות מודל](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - תצוגה מקדימה: `gemini-robotics-er-2-streaming-preview` |
+| calendar\_monthהעדכון האחרון | יולי 2026 |
+| id\_cardכרטיס מודל | [כרטיס מודל](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=he) |
 
-### Gemini Robotics ER 1.6 (wersja testowa)
+### ‫Gemini Robotics ER 1.6 Preview
 
-| Właściwość | Opis |
+| נכס | תיאור |
 | --- | --- |
-| id\_cardKod modelu | `gemini-robotics-er-1.6-preview` |
-| saveObsługiwane typy danych | **Dane wejściowe**  Tekst, obrazy, filmy, dźwięk  **Dane wyjściowe**  Tekst |
-| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Limit tokenów wejściowych**  131 072  **Limit tokenów wyjściowych**  65 536 |
-| handyman Możliwości | **[Generowanie dźwięku](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl)**  Nieobsługiwane  **[Zapisywanie w pamięci podręcznej](https://ai.google.dev/gemini-api/docs/caching?hl=pl)**  Obsługiwane  **[Wykonanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl)**  Obsługiwane  **[Korzystanie z komputera](https://ai.google.dev/gemini-api/docs/computer-use?hl=pl)**  Obsługiwane  **[Wyszukiwanie plików](https://ai.google.dev/gemini-api/docs/file-search?hl=pl)**  Obsługiwane  **[Wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl)**  Obsługiwane  **[Powiązanie ze źródłami informacji przy użyciu Map Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pl)**  Obsługiwane  **[Generowanie obrazów](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl)**  Nieobsługiwane  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=pl)**  Nieobsługiwane  **[Szukaj groundingu](https://ai.google.dev/gemini-api/docs/google-search?hl=pl)**  Obsługiwane  **[Ustrukturyzowane dane wyjściowe](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl)**  Obsługiwane  **[Myślenie](https://ai.google.dev/gemini-api/docs/thinking?hl=pl)**  Obsługiwane  **[Kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl)**  Obsługiwane |
-| speed Opcje wykorzystania | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=pl)**  Obsługiwane  **[Wnioskowanie Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pl)**  Nieobsługiwane  **[Priorytet wnioskowania](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pl)**  Nieobsługiwane |
-| Wersje 123 | Więcej informacji znajdziesz w [wzorcach wersji modelu](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#model-versions).  - Podgląd: `gemini-robotics-er-1.6-preview` |
-| calendar\_monthOstatnia aktualizacja | Grudzień 2025 r. |
-| cognition\_2Granica wiedzy | Styczeń 2025 r. |
+| id\_cardקוד מודל | `gemini-robotics-er-1.6-preview` |
+| saveסוגי נתונים נתמכים | **קלטים**  טקסט, תמונות, סרטונים, אודיו  **פלט**  טקסט |
+| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  131,072  **Output token limit**  65,536 |
+| handymanיכולות | **[יצירת אודיו](https://ai.google.dev/gemini-api/docs/speech-generation?hl=he)**  לא נתמך  **[שמירת נתונים במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he)**  נתמך  **[הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he)**  נתמך  **[שימוש במחשב](https://ai.google.dev/gemini-api/docs/computer-use?hl=he)**  נתמך  **[חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he)**  נתמך  **[בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he)**  נתמך  **[עיגון בעזרת מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he)**  נתמך  **[יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he)**  לא נתמך  ‫**[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=he)**  לא נתמך  **[חיפוש עם עיגון בנתונים](https://ai.google.dev/gemini-api/docs/google-search?hl=he)**  נתמך  **[פלטים מובנים](https://ai.google.dev/gemini-api/docs/structured-output?hl=he)**  נתמך  **[חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he)**  נתמך  **[הקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he)**  נתמך |
+| speedאפשרויות צריכה | ‫**[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he)**  נתמך  **[הסקת מסקנות ב-Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=he)**  לא נתמך  **[הסקת עדיפות](https://ai.google.dev/gemini-api/docs/priority-inference?hl=he)**  לא נתמך |
+| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [תבניות של גרסאות מודל](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - תצוגה מקדימה: `gemini-robotics-er-1.6-preview` |
+| calendar\_monthהעדכון האחרון | דצמבר 2025 |
+| cognition\_2תאריך סף הידע | ינואר 2025 |
 
-## Co dalej?
+## המאמרים הבאים
 
-- [Rozumowanie przestrzenne](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=pl) – wskazywanie, śledzenie, ramki ograniczające, trajektorie.
-- [Funkcje agentowe](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=pl) – wykonywanie kodu, odczytywanie instrumentów, adnotacje do obrazów.
-- [Orkiestracja zadań](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=pl) – zadania długoterminowe z niestandardowymi interfejsami API robotów.
-- [Robotyka z transmisją strumieniową](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=pl) – dwukierunkowa transmisja strumieniowa w czasie rzeczywistym (tylko Gemini Robotics ER 2).
-- [Rozumienie wideo](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=pl) – wyszukiwanie momentów i klasyfikacja postępów (tylko Gemini Robotics ER 2).
-- [Bezpieczeństwo robotów Google DeepMind](https://deepmind.google/models/gemini-robotics/safety?hl=pl) – badania nad bezpieczeństwem modeli.
+- [היגיון מרחבי](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=he) – הצבעה, מעקב, תיבות תוחמות, מסלולים.
+- [יכולות אג'נטיות](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=he) – ביצוע קוד, קריאת מכשירים, הוספת הערות לתמונות.
+- [תיאום משימות](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=he) – משימות ארוכות טווח עם ממשקי API מותאמים אישית של רובוטים.
+- [רובוטיקה עם סטרימינג](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=he) – סטרימינג דו-כיווני בזמן אמת (Gemini Robotics ER 2 בלבד).
+- [הבנת סרטונים](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=he) – איתור רגעים וסיווג התקדמות (Gemini Robotics ER 2 בלבד).
+- [בטיחות רובוטים של Google DeepMind](https://deepmind.google/models/gemini-robotics/safety?hl=he) – מחקר בטיחותי שמאחורי משפחת המודלים.
 
-Prześlij opinię
+שליחת משוב
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Ostatnia aktualizacja: 2026-07-30 UTC.
+עדכון אחרון: 2026-07-30 (שעון UTC).
 
-Chcesz przekazać coś jeszcze?
+רוצה לתת לנו משוב?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-30 (שעון UTC)."],[],[]]

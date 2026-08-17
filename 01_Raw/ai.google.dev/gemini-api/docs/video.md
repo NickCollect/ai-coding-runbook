@@ -1,50 +1,52 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/video?hl=vi
-fetched_at: 2026-08-10T03:13:12.514231+00:00
-title: "T\u1ea1o video trong Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/video?hl=ar
+fetched_at: 2026-08-17T02:24:09.799003+00:00
+title: "\u0625\u0646\u0634\u0627\u0621 \u0627\u0644\u0641\u064a\u062f\u064a\u0648\u0647\u0627\u062a \u0641\u064a Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
-# Tạo video trong Gemini API
+# إنشاء الفيديوهات في Gemini API
 
-Gemini API cung cấp 2 mô hình để tạo video, đó là [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=vi) và [Veo](https://ai.google.dev/gemini-api/docs/veo?hl=vi).
-Mỗi loại được thiết kế cho một quy trình làm việc riêng.
+توفر Gemini API نموذجين لإنشاء الفيديوهات،
+[Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=ar) و[Veo](https://ai.google.dev/gemini-api/docs/veo?hl=ar).
+تم تصميم كلّ منهما لسير عمل مختلف.
 
-Sử dụng Gemini Omni Flash làm mô hình mặc định để tạo video. Mô hình này mang đến độ nhất quán vượt trội cho video, khả năng suy luận đa đầu vào (hỗ trợ đồng thời văn bản, hình ảnh, âm thanh và video), tính nhất quán của nhân vật, độ chính xác về thông tin thực tế và khả năng chỉnh sửa bằng ngôn ngữ tự nhiên nhiều lượt (ví dụ: thay thế phần tử hoặc thay đổi góc nhìn). Bạn cần sử dụng Veo 3.1 cho các chức năng cụ thể như mở rộng cảnh, kiểm soát khung hình cuối cùng hoặc tích hợp với các quy trình cũ.
+استخدِم Gemini Omni Flash كنموذج تلقائي لإنشاء الفيديوهات. يوفّر هذا النموذج اتساقًا فائقًا للفيديوهات، واستدلالًا متعدد الإدخالات (يدعم إدخالات النصوص والصور والمقاطع الصوتية والفيديوهات في الوقت نفسه)، واتساق الشخصيات، ودقة الحقائق، وتعديل المحادثات المترابطة (مثل استبدال العناصر أو تغيير المنظورات). استخدِم Veo 3.1 إذا كنت بحاجة إلى إمكانات معيّنة، مثل توسيع المشهد أو التحكّم في الإطار الأخير أو الدمج مع مسارات البيانات القديمة.
 
 ## Gemini Omni Flash
 
-Gemini Omni Flash là một mô hình đa phương thức, có tốc độ cao để tạo video và chỉnh sửa video theo cách đàm thoại. Mô hình này có khả năng chuyển đổi nhanh chóng các câu lệnh dạng văn bản và hình ảnh thành video ngắn, đồng thời cho phép bạn tinh chỉnh kết quả qua nhiều lượt bằng cách sử dụng Interactions API.
+‫Gemini Omni Flash هو نموذج سريع ومتعدّد الوسائط لإنشاء الفيديوهات وتعديلها في المحادثات. يتفوّق هذا النموذج في تحويل الطلبات النصية والصور بسرعة إلى فيديوهات قصيرة، ويسمح لك بتحسين النتائج على مدار عدة أدوار باستخدام Interactions API.
 
-[Làm quen với Gemini Omni Flash →](https://ai.google.dev/gemini-api/docs/omni?hl=vi)
+[ابدأ باستخدام Gemini Omni Flash ←](https://ai.google.dev/gemini-api/docs/omni?hl=ar)
 
 ## Veo 3.1
 
-Veo 3.1 là một mô hình tạo video có âm thanh gốc. Công cụ này hỗ trợ các tính năng như tiện ích video, tạo nội dung theo khung hình cụ thể và chỉ dẫn dựa trên hình ảnh thông qua API `generateContent`.
+‫Veo 3.1 هو نموذج لإنشاء الفيديوهات مع مقاطع صوتية أصلية. يدعم هذا النموذج ميزات مثل توسيع الفيديوهات والإنشاء على مستوى الإطار والتوجيه المستند إلى الصور من خلال `generateContent` API.
 
-[Bắt đầu dùng Veo 3.1 →](https://ai.google.dev/gemini-api/docs/veo?hl=vi)
+[ابدأ باستخدام Veo 3.1 ←](https://ai.google.dev/gemini-api/docs/veo?hl=ar)
 
-## Hiểu video
+## فهم الفيديوهات
 
-Nếu bạn cần nhập và phân tích nội dung video hiện có thay vì tạo video mới, hãy xem [Hướng dẫn về tính năng hiểu video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi).
+إذا كنت بحاجة إلى استيعاب محتوى الفيديو الحالي وتحليله بدلاً من إنشاء
+فيديو جديد، اطّلِع على دليل [فهم الفيديوهات](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ar).
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Cập nhật lần gần đây nhất: 2026-06-30 UTC.
+تاريخ التعديل الأخير: 2026-06-30 (حسب التوقيت العالمي المتفَّق عليه)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-30 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-30 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

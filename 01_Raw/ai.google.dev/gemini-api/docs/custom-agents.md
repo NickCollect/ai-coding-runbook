@@ -1,35 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=fr
-fetched_at: 2026-08-10T03:26:09.414310+00:00
-title: "Cr\u00e9er des agents g\u00e9r\u00e9s \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=pt-BR
+fetched_at: 2026-08-17T02:16:41.868206+00:00
+title: "Como criar agentes gerenciados \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Envoyer des commentaires
+Envie comentários
 
-# Créer des agents gérés
+# Como criar agentes gerenciados
 
-Les agents gérés de l'API Gemini vous permettent d'étendre l'agent Antigravity avec vos propres instructions, compétences et données. Vous pouvez [personnaliser l'agent de manière intégrée](#customize-inline) au moment de l'interaction ou [enregistrer la configuration](#save-agent) en tant qu'agent géré que vous appelez par ID.
+Os Agentes Gerenciados na API Gemini permitem ampliar o agente do Antigravity com suas próprias instruções, capacidades e dados. É possível [personalizar o agente inline](#customize-inline) no momento da interação ou [salvar a configuração](#save-agent) como um agente gerenciado invocado por ID.
 
-## Personnaliser l'agent Antigravity
+## Personalizar o agente do Antigravity
 
-Le moyen le plus rapide de créer un agent personnalisé consiste à transmettre votre configuration de manière intégrée lors de la création d'une interaction, sans aucune étape d'enregistrement requise. Vous pouvez étendre l'agent de plusieurs manières clés :
+A maneira mais rápida de criar um agente personalizado é transmitir a configuração inline ao criar uma nova interação sem precisar de uma etapa de registro. É possível ampliar o agente de várias maneiras importantes:
 
-- **[Sélection du modèle](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr#model-selection)** : choisissez le modèle Gemini sous-jacent via `agent_config` (par défaut, **Gemini 3.6 Flash**).
-- **Instructions système** : transmettez du texte intégré via `system_instruction` pour façonner le comportement.
-- **Outils** : remplacez les outils par défaut (exécution de code, recherche, contexte d'URL), enregistrez des serveurs MCP distants ou définissez des fonctions personnalisées (appel de fonction).
-- **Fichiers et compétences** : montez des fichiers tels que `AGENTS.md` et `SKILL.md` dans l'environnement.
+- **[Seleção de modelo](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pt-br#model-selection)**: escolha o modelo do Gemini subjacente usando `agent_config` (o padrão é **Gemini 3.6 Flash**).
+- **Instruções do sistema**: transmita texto inline usando `system_instruction` para moldar o comportamento.
+- **Ferramentas**: substitua as ferramentas padrão (execução de código, pesquisa, contexto de URL), registre servidores MCP remotos ou defina funções personalizadas (chamada de função).
+- **Arquivos e habilidades**: monte arquivos como `AGENTS.md` e `SKILL.md` no ambiente.
 
-Voici un exemple de transmission des trois éléments de manière intégrée :
+Confira um exemplo de transmissão dos três inline:
 
 ### Python
 
@@ -121,22 +121,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Tout est défini au moment de l'interaction. Il n'est pas nécessaire d'enregistrer quoi que ce soit au préalable. Le harnais de l'agent Antigravity fournit l'environnement d'exécution (exécution de code, gestion de fichiers, accès Web) et vos couches de configuration par-dessus.
+Tudo é definido no momento da interação. Não é necessário registrar nada primeiro. O harness do agente do Antigravity fornece o ambiente de execução (execução de código, gerenciamento de arquivos, acesso à Web) e as camadas de configuração.
 
-### Outils et instructions système
+### Ferramentas e instruções do sistema
 
-Vous pouvez personnaliser le comportement et les capacités de l'agent pour une interaction spécifique à l'aide des paramètres `system_instruction` et `tools`.
+É possível personalizar o comportamento e os recursos do agente para uma interação específica usando os parâmetros `system_instruction` e `tools`.
 
-- **Instructions système** : utilisez le paramètre `system_instruction` pour transmettre du texte intégré qui façonne le comportement de l'agent. C'est idéal pour les ajustements rapides que vous souhaitez modifier par appel. `system_instruction` et `AGENTS.md` sont additifs. Les deux s'appliquent lorsqu'ils sont présents.
-- **Outils** : par défaut, l'agent Antigravity a accès à `code_execution`, `google_search` et `url_context`. Vous pouvez remplacer cette liste en transmettant le paramètre `tools` au moment de l'interaction. Vous pouvez également enregistrer des [serveurs MCP distants](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr#mcp-servers) ou définir des [fonctions personnalisées (appel de fonction)](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr#function-calling) pour connecter l'agent à vos propres API et bases de données. Pour obtenir des informations complètes sur les outils disponibles, consultez [Agent Antigravity : outils compatibles](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr#supported-tools).
+- **Instruções do sistema**: use o parâmetro `system_instruction` para transmitir texto inline que molda o comportamento do agente. Isso é ideal para ajustes rápidos que você quer mudar por chamada. Os parâmetros `system_instruction` e `AGENTS.md` são aditivos. Os dois são aplicados quando presentes.
+- **Ferramentas**: por padrão, o agente do Antigravity tem acesso a `code_execution`, `google_search`, e `url_context`. É possível substituir essa lista transmitindo o parâmetro `tools` no momento da interação. Também é possível registrar [servidores MCP remotos](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pt-br#mcp-servers) ou definir [funções personalizadas (chamada de função)](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pt-br#function-calling) para conectar o agente às suas próprias APIs e bancos de dados. Para mais detalhes sobre as ferramentas disponíveis, consulte [Agente Antigravity: ferramentas compatíveis](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pt-br#supported-tools).
 
-### Personnalisation basée sur des fichiers
+### Personalização baseada em arquivos
 
-#### Structure du répertoire de l'agent
+#### Estrutura do diretório do agente
 
-Bien que vous puissiez transmettre la configuration de manière intégrée, nous vous recommandons d'organiser les fichiers de votre agent dans un répertoire structuré. Cela facilite la gestion, le contrôle des versions et le montage dans l'environnement de l'agent.
+Embora seja possível transmitir a configuração inline, recomendamos organizar os arquivos do agente em um diretório estruturado. Isso facilita o gerenciamento, o controle de versões e a montagem no ambiente do agente.
 
-Un répertoire de projet d'agent type se présente comme suit :
+Um diretório de projeto de agente típico é assim:
 
 ```
 my-agent/
@@ -147,13 +147,13 @@ my-agent/
 └── workspace/       # Initial data files and knowledge
 ```
 
-L'environnement d'exécution Antigravity analyse `.agents/` (et la racine de l'environnement) pour ces fichiers.
+O ambiente de execução do Antigravity verifica `.agents/` (e a raiz do ambiente) em busca desses arquivos.
 
 #### AGENTS.md
 
-L'agent charge automatiquement `.agents/AGENTS.md` (ou `/.agents/AGENTS.md`) à partir de l'environnement en tant qu'instructions système au démarrage. Utilisez `AGENTS.md` pour les définitions de persona longues, les consignes détaillées et les instructions dont vous souhaitez contrôler les versions avec votre code.
+O agente carrega automaticamente `.agents/AGENTS.md` (ou `/.agents/AGENTS.md`) do ambiente como instruções do sistema na inicialização. Use `AGENTS.md` para definições de persona longas, diretrizes detalhadas e instruções que você quer controlar o controle de versões junto com o código.
 
-Montez un `AGENTS.md` à l'aide d'une source intégrée :
+Monte um `AGENTS.md` usando uma origem inline:
 
 ### Python
 
@@ -230,9 +230,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-#### Compétences : SKILL.md
+#### Habilidades: SKILL.md
 
-Les compétences sont des fichiers qui étendent les capacités de l'agent. Placez-les sous `.agents/skills/<skill-name>/SKILL.md`. Le harnais les détecte et les enregistre automatiquement.
+As habilidades são arquivos que ampliam os recursos do agente. Coloque-os em `.agents/skills/<skill-name>/SKILL.md`. O harness os descobre e registra automaticamente.
 
 ```
 .agents/
@@ -242,7 +242,7 @@ Les compétences sont des fichiers qui étendent les capacités de l'agent. Plac
         └── SKILL.md
 ```
 
-Montez une compétence à l'aide d'une source intégrée :
+Monte uma habilidade usando uma origem inline:
 
 ### Python
 
@@ -319,17 +319,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Les compétences chargées à partir de `.agents/skills/` et `/.agents/skills/` sont toutes deux détectées automatiquement.
+As habilidades carregadas de `.agents/skills/` e `/.agents/skills/` são descobertas automaticamente.
 
-## Créer un agent géré
+## Criar um agente gerenciado
 
-Une fois que vous avez itéré sur votre configuration, vous pouvez la créer en tant qu'agent géré avec `agents.create`. Cela vous permet d'appeler l'agent par ID sans répéter la configuration à chaque fois.
+Depois de iterar na configuração, é possível criá-la como um agente gerenciado com `agents.create`. Isso permite invocar o agente por ID sem repetir a configuração a cada vez.
 
-Le `id` que vous spécifiez lors de la création d'un agent géré doit être unique à votre projet et ne doit pas commencer par des préfixes réservés (par exemple, `google-`, `gemini-`). Pour obtenir la liste complète des préfixes restreints, consultez [Restrictions concernant les ID d'agent](#agent-id-restrictions).
+O `id` especificado ao criar um agente gerenciado precisa ser exclusivo do seu projeto e não pode começar com prefixos reservados (por exemplo, `google-`, `gemini-`). Consulte [Restrições de ID do agente](#agent-id-restrictions) para conferir a lista completa de prefixos restritos.
 
-### À partir de sources
+### De origens
 
-Spécifiez `base_agent`, `id`, `agent_config`, `system_instruction` et `base_environment` avec des sources. La plate-forme provisionne un bac à sable frais avec vos fichiers à chaque appel. Pour connaître les types de sources disponibles (Git, GCS, intégrées), consultez [Environnements](https://ai.google.dev/gemini-api/docs/agent-environment?hl=fr).
+Especifique `base_agent`, `id`, `agent_config`, `system_instruction` e `base_environment` com origens. A plataforma provisiona um sandbox novo com seus arquivos em cada invocação. Consulte [Ambientes](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pt-br) para conferir os tipos de origem disponíveis (Git, GCS, inline).
 
 ### Python
 
@@ -448,9 +448,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 }'
 ```
 
-### À partir d'un environnement existant (fork)
+### De um ambiente atual (fork)
 
-Itérez avec l'agent Antigravity de base jusqu'à ce que l'environnement soit correct (packages installés, fichiers en place), puis créez-en un fork dans un agent géré.
+Itere com o agente do Antigravity de base até que o ambiente esteja correto (pacotes instalados, arquivos no lugar) e, em seguida, bifurque-o em um agente gerenciado.
 
 ### Python
 
@@ -514,11 +514,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Avec des règles de réseau
+### Com regras de rede
 
-Vous pouvez verrouiller l'accès sortant ou injecter des identifiants lorsque vous enregistrez un agent géré. Pour obtenir le schéma complet de la liste d'autorisation, les modèles d'identifiants et les caractères génériques, consultez [Environnements : configuration réseau](https://ai.google.dev/gemini-api/docs/agent-environment?hl=fr#network-configuration).
+É possível bloquear o acesso de saída ou inserir credenciais ao salvar um agente gerenciado. Para conferir o esquema completo da lista de permissões, os padrões de credenciais e os curingas, consulte [Ambientes: configuração de rede](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pt-br#network-configuration).
 
-L'exemple suivant crée un agent `issue-resolver` qui ne peut accéder qu'à GitHub et PyPI, avec des identifiants injectés pour GitHub :
+O exemplo a seguir cria um agente `issue-resolver` que só pode acessar o GitHub e o PyPI, com credenciais injetadas para o GitHub:
 
 ### Python
 
@@ -628,9 +628,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
   }'
 ```
 
-## Appeler l'agent
+## Invocar o agente
 
-Appelez votre agent géré avec votre ID d'agent en créant une interaction. Chaque appel crée un fork de l'environnement de base, de sorte que chaque exécution démarre de manière propre.
+Chame o agente gerenciado com o ID dele criando uma nova interação. Cada invocação faz um fork do ambiente de base, então cada execução começa limpa.
 
 ### Python
 
@@ -669,15 +669,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Pour les conversations multitours et le streaming, consultez le [guide de démarrage rapide](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=fr). Les mêmes modèles `previous_interaction_id` et `environment` s'appliquent aux agents gérés.
+Para conversas multiturno e streaming, consulte o [guia de início rápido](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=pt-br). Os mesmos padrões `previous_interaction_id` e `environment` se aplicam a agentes gerenciados.
 
-Les agents gérés sont également compatibles avec l'exécution et l'annulation en arrière-plan. Pour obtenir des informations et des exemples de code, consultez [Agent Antigravity : exécution en arrière-plan](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr#background-execution).
+Os agentes gerenciados também oferecem suporte à execução e ao cancelamento em segundo plano. Para mais detalhes e exemplos de código, consulte [Agente Antigravity: execução em segundo plano](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pt-br#background-execution).
 
-## Remplacer la configuration lors de l'appel
+## Como modificar a configuração na invocação
 
-Vous pouvez remplacer la configuration réseau par défaut de l'agent `system_instruction`, `tools` et `environment` lorsque vous créez une interaction. Cela vous permet de modifier le comportement, les capacités ou les identifiants de l'agent pour une exécution spécifique sans modifier la définition de l'agent stockée.
+É possível modificar a configuração de rede `system_instruction`, `tools` e `environment` padrão do agente ao criar uma interação. Isso permite modificar o comportamento, os recursos ou as credenciais do agente para uma execução específica sem mudar a definição do agente armazenado.
 
-### Remplacer les instructions système et les outils
+### Modificar a instrução do sistema e as ferramentas
 
 ### Python
 
@@ -721,9 +721,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Remplacer la configuration réseau (actualiser les identifiants)
+### Modificar a configuração de rede (atualizar credenciais)
 
-Si votre agent géré a des identifiants réseau intégrés à son `base_environment`, vous pouvez les remplacer au moment de l'appel pour actualiser les jetons expirés ou faire pivoter les clés API. Transmettez un objet `environment` avec une nouvelle configuration `network`. Les nouvelles règles de réseau remplacent entièrement les précédentes pour cette interaction. Les sources de l'environnement de base (fichiers, dépôts) sont conservées.
+Se o agente gerenciado tiver credenciais de rede incorporadas ao `base_environment`, é possível modificá-las no momento da invocação para atualizar tokens expirados ou alternar chaves de API. Transmita um objeto `environment` com uma nova configuração de `network`. As novas regras de rede substituem totalmente as anteriores para essa interação. As origens do ambiente de base (arquivos, repositórios) são preservadas.
 
 ### Python
 
@@ -803,11 +803,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Gérer les agents
+## Gerenciar agentes
 
-Vous pouvez lister, obtenir et supprimer des agents.
+É possível listar, receber e excluir agentes.
 
-### Répertorier des agents
+### Listar agentes
 
 ### Python
 
@@ -835,7 +835,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/agents" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Obtenir un agent
+### Obter um agente
 
 ### Python
 
@@ -858,9 +858,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/agents/data-analys
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Supprimer un agent
+### Excluir um agente
 
-La suppression supprime la configuration. Les environnements et les interactions existants créés par l'agent ne sont pas affectés.
+A exclusão remove a configuração. Os ambientes e as interações criados pelo agente não são afetados.
 
 ### Python
 
@@ -881,24 +881,24 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/agents/data-ana
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Documentation de référence sur la définition de l'agent
+## Referência da definição do agente
 
-| Champ | Type | Obligatoire | Description |
+| Campo | Tipo | Obrigatório | Descrição |
 | --- | --- | --- | --- |
-| `id` | chaîne | Oui | Identifiant unique de l'agent dans le projet Google Cloud. Utilisé pour appeler l'agent. Ne doit pas utiliser de préfixes réservés. Consultez [Restrictions concernant les ID d'agent](#agent-id-restrictions). |
-| `description` | chaîne | Non | Description de l'agent lisible par l'humain. |
-| `base_agent` | chaîne | Oui | ID de l'agent de base (par exemple, `antigravity-preview-05-2026`). |
-| `agent_config` | objet | Non | Configuration de l'agent de base, y compris la sélection du modèle (`{"type": "antigravity", "model": "gemini-3.6-flash"}`). Par défaut, `gemini-3.6-flash` est utilisé s'il est omis. Ne peut pas être remplacé au moment de l'interaction pour les agents nommés. |
-| `system_instruction` | chaîne | Non | Invite système définissant le comportement et le persona. |
-| `tools` | tableau | Non | Outils que l'agent peut utiliser. S'il est omis, les valeurs par défaut sont `code_execution`, `google_search` et `url_context`. Les outils compatibles incluent `code_execution`, `google_search`, `url_context`, `mcp_server` et les définitions `function` personnalisées. |
-| `base_environment` | chaîne ou objet | Non | `"remote"`, un `environment_id`, ou un objet de configuration avec `sources` et `network`. Consultez Environnements. |
+| `id` | string | Sim | Identificador exclusivo do agente no projeto do Google Cloud. Usado para invocar o agente. Não pode usar prefixos reservados. Consulte [Restrições de ID do agente](#agent-id-restrictions). |
+| `description` | string | Não | Descrição do agente legível por humanos. |
+| `base_agent` | string | Sim | ID do agente de base (por exemplo, `antigravity-preview-05-2026`). |
+| `agent_config` | objeto | Não | Configuração do agente de base, incluindo a seleção do modelo (`{"type": "antigravity", "model": "gemini-3.6-flash"}`). O padrão é `gemini-3.6-flash` se omitido. Não pode ser modificado no momento da interação para agentes nomeados. |
+| `system_instruction` | string | Não | Comando do sistema que define o comportamento e a persona. |
+| `tools` | matriz | Não | Ferramentas que o agente pode usar. Se omitido, o padrão será `code_execution`, `google_search` e `url_context`. As ferramentas compatíveis incluem `code_execution`, `google_search`, `url_context`, `mcp_server` e definições de `function` personalizadas. |
+| `base_environment` | string ou objeto | Não | `"remote"`, um `environment_id` ou um objeto de configuração com `sources` e `network`. Consulte Ambientes. |
 
-### Restrictions concernant les ID d'agent
+### Restrições de ID do agente
 
-Lorsque vous créez un agent géré, l'`id` que vous spécifiez doit respecter les règles suivantes :
+Ao criar um agente gerenciado, o `id` especificado precisa seguir estas regras:
 
-- Il doit être unique à votre projet Google Cloud.
-- Il **ne doit pas** commencer par l'un des préfixes réservés suivants (non sensible à la casse), sinon la création échouera :
+- Ele precisa ser exclusivo do seu projeto do Google Cloud.
+- Ele **não** pode começar com nenhum dos seguintes prefixos reservados (sem distinção entre maiúsculas e minúsculas). Caso contrário, a criação vai falhar:
   - `antigravity-`
   - `veo-`
   - `omni-`
@@ -916,35 +916,35 @@ Lorsque vous créez un agent géré, l'`id` que vous spécifiez doit respecter l
   - `nest-`
   - `kaggle-`
 
-## Workflow d'itération
+## Fluxo de trabalho de iteração
 
-1. **Créez un prototype** avec l'agent Antigravity de base. Transmettez les instructions système et les sources d'environnement de manière intégrée. Testez les instructions, les compétences et la configuration de l'environnement de manière interactive.
-2. **Stabilisez** l'environnement. Installez des packages, montez des sources et vérifiez que tout fonctionne.
-3. **Persistez** en tant qu'agent géré en créant un agent, à partir de sources ou en créant un fork de l'environnement.
-4. **Mettez à jour** la définition de l'agent. Modifiez les instructions système, échangez des compétences ou ajoutez des sources. Le prochain appel récupère la nouvelle configuration.
+1. **Crie um protótipo** com o agente do Antigravity de base. Transmita a instrução do sistema e as origens do ambiente inline. Teste instruções, habilidades e configuração do ambiente de forma interativa.
+2. **Estabilize** o ambiente. Instale pacotes, monte origens e verifique se tudo funciona.
+3. **Persista** como um agente gerenciado criando um novo agente, seja de origens ou fazendo um fork do ambiente.
+4. **Atualize** a definição do agente. Mude a instrução do sistema, troque habilidades ou adicione origens. A próxima invocação vai usar a nova configuração.
 
-## Limites
+## Limitações
 
-- **État de la version preview** : les agents gérés sont en version preview. Les fonctionnalités et les schémas peuvent changer.
-- **Agent de base et modèles** : seul `antigravity-preview-05-2026` est compatible en tant que `base_agent`. Les options de modèle compatibles dans `agent_config` sont `gemini-3.5-flash`, `gemini-3.6-flash` (par défaut) et `gemini-3.5-flash-lite`. Pour les agents nommés, le modèle ne peut pas être remplacé au moment de l'interaction.
-- **Aucune gestion des versions** : la gestion des versions et la restauration de l'agent ne sont pas encore disponibles.
-- **Aucune imbrication de sous-agents** : la délégation de sous-agents n'est pas encore compatible.
-- Vous pouvez avoir jusqu'à 1 000 agents gérés.
+- **Status de visualização**: os agentes gerenciados estão em visualização. Os recursos e esquemas podem mudar.
+- **Agente de base e modelos**: apenas `antigravity-preview-05-2026` é compatível como `base_agent`. As opções de modelo compatíveis em `agent_config` são `gemini-3.5-flash`, `gemini-3.6-flash` (padrão) e `gemini-3.5-flash-lite`. Para agentes nomeados, o modelo não pode ser modificado no momento da interação.
+- **Sem controle de versões**: o controle de versões e o rollback do agente ainda não estão disponíveis.
+- **Sem aninhamento de subagentes**: a delegação de subagentes ainda não é compatível.
+- É possível ter até 1.000 agentes gerenciados.
 
-## Étape suivante
+## A seguir
 
-- [Présentation des agents](https://ai.google.dev/gemini-api/docs/agents?hl=fr) : découvrez les concepts de base des agents gérés.
-- [Guide de démarrage rapide](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=fr) : commencez à créer des conversations multitours et du streaming.
-- [Agent Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr) : découvrez les capacités, les outils et les tarifs de l'agent par défaut.
-- [Environnements d'agent](https://ai.google.dev/gemini-api/docs/agent-environment?hl=fr) : configurez des bacs à sable, des sources et la mise en réseau.
-- [API Agents gérés sur Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/managed-agents?hl=fr) : pour créer des agents avec une gouvernance organisationnelle intégrée.
+- [Visão geral dos agentes](https://ai.google.dev/gemini-api/docs/agents?hl=pt-br): saiba mais sobre os conceitos básicos dos agentes gerenciados.
+- [Guia de início rápido](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=pt-br): comece a criar com conversas multiturno e streaming.
+- [Agente Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pt-br): conheça os recursos, as ferramentas e os preços do agente padrão.
+- [Ambientes de agente](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pt-br): configure sandboxes, origens e rede.
+- [API de Agentes Gerenciados na Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/managed-agents?hl=pt-br): para criar agentes com governança organizacional integrada.
 
-Envoyer des commentaires
+Envie comentários
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Dernière mise à jour le 2026/07/30 (UTC).
+Última atualização 2026-07-30 UTC.
 
-Voulez-vous nous donner plus d'informations ?
+Quer enviar seu feedback?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/30 (UTC)."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-07-30 UTC."],[],[]]

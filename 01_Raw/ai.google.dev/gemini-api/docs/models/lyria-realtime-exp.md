@@ -1,50 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=pt-BR
-fetched_at: 2026-08-10T03:24:19.624176+00:00
-title: "Lyria RealTime experimental \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=id
+fetched_at: 2026-08-17T02:22:17.073180+00:00
+title: "Eksperimental RealTime Lyria \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Envie comentários
+Kirim masukan
 
-# Lyria RealTime experimental
+# Eksperimental RealTime Lyria
 
-Um mecanismo experimental para síntese musical de alta fidelidade, que oferece recursos inovadores para gerar e transformar conteúdo de áudio. O Lyria RealTime
-é ideal para composição de músicas com assistência de IA, geração de instrumentais exclusivos e
-fluxos de trabalho de áudio criativos que exigem controle total sobre melodia e ritmo, sem
-vocais.
+Mesin eksperimental untuk sintesis musik fidelitas tinggi, yang menawarkan kemampuan inovatif untuk membuat dan mengubah konten audio. Lyria RealTime paling cocok untuk penulisan lagu yang dibantu AI, pembuatan instrumen yang unik, dan alur kerja audio kreatif yang memerlukan kontrol mendalam atas melodi dan ritme, tanpa vokal.
 
-[Testar o Lyria RealTime](https://deepmind.google/models/lyria/lyria-realtime/?hl=pt-br)
+[Coba Lyria RealTime](https://deepmind.google/models/lyria/lyria-realtime/?hl=id)
 
-## Documentação
+## Dokumentasi
 
-Acesse a página [Geração de música em tempo real](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=pt-br) para conferir todos os recursos e funcionalidades.
+Buka halaman [Pembuatan musik real-time](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=id)
+untuk mengetahui cakupan lengkap fitur dan kemampuannya.
 
 ## lyria-realtime-exp
 
-| Propriedade | Descrição |
+| Properti | Deskripsi |
 | --- | --- |
-| Código do modelo id\_card | **API Gemini**  `lyria-realtime-exp` |
-| saveTipos de dados aceitos | **Entrada**  Texto (comandos ponderados)  **Saída**  Áudio (PCM bruto de 16 bits) |
-| token\_autoLimites de transmissão | **Taxa de amostragem**  48 kHz (estéreo)  **Controlar a latência**  Máximo de 2 segundos |
-| Versões do 123 | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Experimental: `lyria-realtime-exp` |
-| calendar\_monthÚltima atualização | Maio de 2025 |
+| id\_cardKode model | **Gemini API**  `lyria-realtime-exp` |
+| saveJenis data yang didukung | **Input**  Teks (Perintah berbobot)  **Output**  Audio (PCM 16-bit mentah) |
+| token\_autoBatas streaming | **Frekuensi sampel**  48kHz (Stereo)  **Latensi kontrol**  Maksimum 2 detik |
+| 123Versi | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - Eksperimental: `lyria-realtime-exp` |
+| calendar\_monthPembaruan terbaru | Mei 2025 |
 
-Envie comentários
+Kirim masukan
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Última atualização 2026-04-29 UTC.
+Terakhir diperbarui pada 2026-04-29 UTC.
 
-Quer enviar seu feedback?
+Ada masukan untuk kami?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]

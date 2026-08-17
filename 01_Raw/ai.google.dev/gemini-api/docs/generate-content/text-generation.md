@@ -1,27 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=vi
-fetched_at: 2026-08-10T03:09:04.621656+00:00
-title: "T\u1ea1o v\u0103n b\u1ea3n \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=fr
+fetched_at: 2026-08-17T02:28:36.687725+00:00
+title: "G\u00e9n\u00e9ration de texte \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Gửi ý kiến phản hồi
+Envoyer des commentaires
 
-# Tạo văn bản
+# Génération de texte
 
-Gemini API có thể tạo đầu ra là văn bản từ văn bản, hình ảnh, video và âm thanh đầu vào.
+L'API Gemini peut générer une sortie de texte à partir d'entrées de texte, d'images, de vidéos et audio.
 
-Sau đây là một ví dụ cơ bản:
+Voici un exemple basique :
 
 ### Python
 
@@ -160,11 +160,13 @@ function main() {
 }
 ```
 
-## Suy nghĩ cùng Gemini
+## Raisonnement avec Gemini
 
-Các mô hình Gemini thường được bật tính năng ["tư duy"](https://ai.google.dev/gemini-api/docs/thinking?hl=vi) theo mặc định. Tính năng này cho phép mô hình suy luận trước khi trả lời một yêu cầu.
+[Les modèles Gemini sont souvent activés par défaut
+ce qui leur permet de raisonner avant de répondre à une requête.](https://ai.google.dev/gemini-api/docs/thinking?hl=fr)
 
-Mỗi mô hình hỗ trợ các cấu hình tư duy khác nhau, giúp bạn kiểm soát chi phí, độ trễ và mức độ thông minh. Để biết thêm thông tin, hãy xem [hướng dẫn tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi#set-budget).
+Chaque modèle est compatible avec différentes configurations de raisonnement, ce qui vous permet de contrôler les coûts, la latence et l'intelligence. Pour en savoir plus, consultez le
+[guide sur le raisonnement](https://ai.google.dev/gemini-api/docs/thinking?hl=fr#set-budget).
 
 ### Python
 
@@ -336,9 +338,11 @@ function main() {
 }
 ```
 
-## Hướng dẫn hệ thống và các cấu hình khác
+## Instructions système et autres configurations
 
-Bạn có thể hướng dẫn hành vi của các mô hình Gemini bằng chỉ dẫn hệ thống. Để làm như vậy, hãy truyền một đối tượng [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=vi#v1beta.GenerationConfig).
+Vous pouvez guider le comportement des modèles Gemini à l'aide d'instructions système. Pour ce faire,
+transmettez un [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=fr#v1beta.GenerationConfig)
+objet.
 
 ### Python
 
@@ -510,7 +514,9 @@ function main() {
 }
 ```
 
-Đối tượng [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=vi#v1beta.GenerationConfig) cũng cho phép bạn ghi đè các tham số tạo mặc định, chẳng hạn như [`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=vi#v1beta.GenerationConfig).
+L'[`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=fr#v1beta.GenerationConfig)
+objet vous permet également de remplacer les paramètres de génération par défaut, tels que
+[`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=fr#v1beta.GenerationConfig).
 
 ### Python
 
@@ -676,11 +682,13 @@ function main() {
 }
 ```
 
-Hãy tham khảo [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=vi#v1beta.GenerationConfig) trong tài liệu tham khảo API của chúng tôi để xem danh sách đầy đủ các tham số có thể định cấu hình và nội dung mô tả của các tham số đó.
+Consultez [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=fr#v1beta.GenerationConfig)
+dans notre documentation de référence de l'API pour obtenir la liste complète des paramètres configurables et leurs
+descriptions.
 
-## Thông tin đầu vào đa phương thức
+## Entrées multimodales
 
-Gemini API hỗ trợ dữ liệu đầu vào đa phương thức, cho phép bạn kết hợp văn bản với các tệp nội dung nghe nhìn. Ví dụ sau đây minh hoạ cách cung cấp hình ảnh:
+L'API Gemini accepte les entrées multimodales, ce qui vous permet de combiner du texte avec des fichiers multimédias. L'exemple suivant montre comment fournir une image :
 
 ### Python
 
@@ -888,14 +896,16 @@ function getImageData(url) {
 }
 ```
 
-Để biết các phương thức thay thế để cung cấp hình ảnh và quy trình xử lý hình ảnh nâng cao hơn, hãy xem [hướng dẫn về việc hiểu hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi).
-API này cũng hỗ trợ các đầu vào và thông tin [văn bản](https://ai.google.dev/gemini-api/docs/document-processing?hl=vi), [video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi) và [âm thanh](https://ai.google.dev/gemini-api/docs/audio?hl=vi).
+Pour découvrir d'autres méthodes permettant de fournir des images et un traitement d'image plus avancé,
+consultez notre [guide sur la compréhension des images](https://ai.google.dev/gemini-api/docs/image-understanding?hl=fr).
+L'API accepte également les entrées et la compréhension de [documents](https://ai.google.dev/gemini-api/docs/document-processing?hl=fr), de [vidéos](https://ai.google.dev/gemini-api/docs/video-understanding?hl=fr) et de contenus [audio](https://ai.google.dev/gemini-api/docs/audio?hl=fr).
 
-## Hiện câu trả lời theo thời gian thực
+## Réponses en streaming
 
-Theo mặc định, mô hình chỉ trả về câu trả lời sau khi toàn bộ quy trình tạo hoàn tất.
+Par défaut, le modèle ne renvoie une réponse qu'une fois l'ensemble du processus de génération terminé.
 
-Để có các hoạt động tương tác mượt mà hơn, hãy sử dụng tính năng truyền phát trực tiếp để nhận các thực thể [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=vi#v1beta.GenerateContentResponse) theo gia số khi chúng được tạo.
+Pour des interactions plus fluides, utilisez le streaming afin de recevoir [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=fr#v1beta.GenerateContentResponse) instances de manière incrémentielle
+à mesure qu'elles sont générées.
 
 ### Python
 
@@ -1049,9 +1059,9 @@ function main() {
 }
 ```
 
-## Cuộc trò chuyện nhiều lượt (chat)
+## Conversations multitours (chat)
 
-Các SDK của chúng tôi cung cấp chức năng thu thập nhiều vòng lời nhắc và câu trả lời vào một cuộc trò chuyện, giúp bạn dễ dàng theo dõi nhật ký trò chuyện.
+Nos SDK fournissent une fonctionnalité permettant de collecter plusieurs séries de requêtes et de réponses dans un chat, ce qui vous permet de suivre facilement l'historique des conversations.
 
 ### Python
 
@@ -1259,7 +1269,7 @@ function main() {
 }
 ```
 
-Bạn cũng có thể dùng tính năng truyền trực tuyến cho các cuộc trò chuyện nhiều lượt.
+Le streaming peut également être utilisé pour les conversations multitours.
 
 ### Python
 
@@ -1478,38 +1488,47 @@ function main() {
 }
 ```
 
-## Mẹo tạo câu lệnh
+## Conseils pour écrire des prompts
 
-Tham khảo [hướng dẫn về thiết kế câu lệnh](https://ai.google.dev/gemini/docs/prompting-strategies?hl=vi) của chúng tôi để biết các đề xuất về cách khai thác tối đa Gemini.
+Consultez notre [guide sur l'ingénierie des prompts](https://ai.google.dev/gemini/docs/prompting-strategies?hl=fr) pour
+obtenir des suggestions sur la façon de tirer le meilleur parti de Gemini.
 
-## Bước tiếp theo
+## Étape suivante
 
-- Dùng thử [Gemini trong Google AI Studio](https://aistudio.google.com?hl=vi).
-- Thử nghiệm với [đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi) cho các phản hồi tương tự như JSON.
-- Khám phá các khả năng hiểu [hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi), [video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi), [âm thanh](https://ai.google.dev/gemini-api/docs/audio?hl=vi) và [tài liệu](https://ai.google.dev/gemini-api/docs/document-processing?hl=vi) của Gemini.
-- Tìm hiểu về [các chiến lược đưa ra câu lệnh bằng tệp đa phương thức](https://ai.google.dev/gemini-api/docs/files?hl=vi#prompt-guide).
+- Essayez [Gemini dans Google AI Studio](https://aistudio.google.com?hl=fr).
+- Testez les [sorties structurées](https://ai.google.dev/gemini-api/docs/structured-output?hl=fr) pour
+  les réponses de type JSON.
+- Découvrez les capacités de compréhension des [images](https://ai.google.dev/gemini-api/docs/image-understanding?hl=fr),
+  [vidéos](https://ai.google.dev/gemini-api/docs/video-understanding?hl=fr), des [contenus audio](https://ai.google.dev/gemini-api/docs/audio?hl=fr)
+  et des [documents](https://ai.google.dev/gemini-api/docs/document-processing?hl=fr) de Gemini.
+- Découvrez les stratégies de prompt pour les fichiers multimodaux
+  .
 
-## Tạo nội dung
+## Génération de contenu
 
-Đây là điểm cuối trung tâm để gửi câu lệnh đến mô hình. Có 2 điểm cuối để tạo nội dung, điểm khác biệt chính là cách bạn nhận phản hồi:
+Il s'agit du point de terminaison central pour l'envoi de requêtes au modèle. Il existe deux points de terminaison pour la génération de contenu. La principale différence réside dans la façon dont vous recevez la réponse :
 
-- **[`generateContent`](https://ai.google.dev/api/generate-content?hl=vi#method:-models.generatecontent)
-  (REST)**:
-  Nhận một yêu cầu và cung cấp một phản hồi duy nhất sau khi mô hình hoàn tất toàn bộ quá trình tạo.
-- **[`streamGenerateContent`](https://ai.google.dev/api/generate-content?hl=vi#method:-models.streamgeneratecontent)
-  (SSE)**: Nhận chính xác cùng một yêu cầu, nhưng mô hình sẽ truyền trực tuyến các đoạn phản hồi khi chúng được tạo. Điều này giúp cải thiện trải nghiệm người dùng cho các ứng dụng tương tác vì cho phép bạn hiển thị ngay kết quả một phần.
+- **[`generateContent`](https://ai.google.dev/api/generate-content?hl=fr#method:-models.generatecontent)
+  (REST)** : reçoit une requête et fournit une seule réponse une fois que le modèle a terminé sa génération.
+- **[`streamGenerateContent`](https://ai.google.dev/api/generate-content?hl=fr#method:-models.streamgeneratecontent)
+  (SSE)** : reçoit exactement la même requête, mais le modèle renvoie des blocs de la réponse à mesure qu'ils sont générés. Cela améliore l'expérience utilisateur pour les applications interactives, car vous pouvez afficher immédiatement des résultats partiels.
 
-### Cấu trúc nội dung yêu cầu
+### Structure du corps de la requête
 
-[Nội dung yêu cầu](https://ai.google.dev/api/generate-content?hl=vi#request-body) là một đối tượng JSON **giống hệt nhau** đối với cả chế độ tiêu chuẩn và chế độ truyền phát trực tiếp, đồng thời được tạo từ một số đối tượng cốt lõi:
+Le [corps de la requête](https://ai.google.dev/api/generate-content?hl=fr#request-body) est un objet JSON qui est
+**identique** pour les modes standard et streaming, et est créé à partir de quelques objets principaux
+:
 
-- Đối tượng [`Content`](https://ai.google.dev/api/caching?hl=vi#Content): Đại diện cho một lượt trong cuộc trò chuyện.
-- Đối tượng [`Part`](https://ai.google.dev/api/caching?hl=vi#Part): Một phần dữ liệu trong lượt `Content` (chẳng hạn như văn bản hoặc hình ảnh).
-- `inline_data` ([`Blob`](https://ai.google.dev/api/caching?hl=vi#Blob)): Vùng chứa cho các byte nội dung nghe nhìn thô và loại MIME của chúng.
+- [`Content`](https://ai.google.dev/api/caching?hl=fr#Content) objet : représente un seul tour dans une
+  conversation.
+- [`Part`](https://ai.google.dev/api/caching?hl=fr#Part) objet : élément de données dans un tour `Content`
+  (comme du texte ou une image).
+- `inline_data` ([`Blob`](https://ai.google.dev/api/caching?hl=fr#Blob)) : conteneur pour les octets multimédias bruts
+  et leur type MIME.
 
-Ở cấp cao nhất, phần nội dung yêu cầu chứa một đối tượng `contents`, đây là danh sách các đối tượng `Content`, mỗi đối tượng đại diện cho lượt trong cuộc trò chuyện. Trong hầu hết các trường hợp, để tạo văn bản cơ bản, bạn sẽ có một đối tượng `Content` duy nhất, nhưng nếu muốn duy trì nhật ký trò chuyện, bạn có thể sử dụng nhiều đối tượng `Content`.
+Au niveau le plus élevé, le corps de la requête contient un objet `contents`, qui est une liste d'objets `Content`, chacun représentant des tours de conversation. Dans la plupart des cas, pour la génération de texte de base, vous n'aurez qu'un seul objet `Content`, mais si vous souhaitez conserver l'historique des conversations, vous pouvez utiliser plusieurs objets `Content`.
 
-Sau đây là nội dung yêu cầu `generateContent` điển hình:
+Voici un exemple de corps de requête `generateContent` typique :
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
@@ -1534,20 +1553,24 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-### Cấu trúc nội dung phản hồi
+### Structure du corps de la réponse
 
-[Nội dung phản hồi](https://ai.google.dev/api/generate-content?hl=vi#response-body) tương tự cho cả chế độ phát trực tuyến và chế độ tiêu chuẩn, ngoại trừ những điểm sau:
+Le [corps de la réponse](https://ai.google.dev/api/generate-content?hl=fr#response-body) est semblable pour les modes
+streaming et standard, à l'exception des points suivants :
 
-- Chế độ chuẩn: Nội dung phản hồi chứa một phiên bản của [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=vi#v1beta.GenerateContentResponse).
-- Chế độ truyền phát trực tiếp: Nội dung phản hồi chứa một luồng các thực thể [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=vi#v1beta.GenerateContentResponse).
+- Mode standard : le corps de la réponse contient une instance de
+  [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=fr#v1beta.GenerateContentResponse).
+- Mode streaming : le corps de la réponse contient un flux d'
+  [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=fr#v1beta.GenerateContentResponse)
+  instances.
 
-Nhìn chung, phần nội dung phản hồi chứa một đối tượng `candidates`, là danh sách các đối tượng `Candidate`. Đối tượng `Candidate` chứa một đối tượng `Content` có phản hồi được tạo do mô hình trả về.
+Au niveau le plus élevé, le corps de la réponse contient un objet `candidates`, qui est une liste d'objets `Candidate`. L'objet `Candidate` contient un objet `Content` qui contient la réponse générée renvoyée par le modèle.
 
-## Ví dụ về API REST
+## Exemples d'API REST
 
-### Câu lệnh đa phương thức (văn bản và hình ảnh)
+### Requête multimodale (texte et image)
 
-Để cung cấp cả văn bản và hình ảnh trong một câu lệnh, mảng `parts` phải chứa hai đối tượng `Part`: một cho văn bản và một cho hình ảnh `inline_data`.
+Pour fournir à la fois du texte et une image dans une requête, le tableau `parts` doit contenir deux objets `Part` : un pour le texte et un pour l'image `inline_data`.
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
@@ -1569,9 +1592,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-### Cuộc trò chuyện nhiều lượt (chat)
+### Conversations multitours (chat)
 
-Để tạo một cuộc trò chuyện có nhiều lượt, bạn hãy xác định mảng `contents` bằng nhiều đối tượng `Content`. API sẽ sử dụng toàn bộ nhật ký này làm bối cảnh cho phản hồi tiếp theo. `role` cho mỗi đối tượng `Content` phải luân phiên giữa `user` và `model`.
+Pour créer une conversation avec plusieurs tours, définissez le tableau `contents` avec plusieurs objets `Content`. L'API utilisera l'intégralité de cet historique comme contexte pour la réponse suivante. Le `role` de chaque objet `Content` doit alterner entre `user` et `model`.
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
@@ -1602,24 +1625,26 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-### Những điểm chính cần ghi nhớ
+### Points à retenir
 
-- `Content` là phong bì: Đây là vùng chứa cấp cao nhất cho một lượt tương tác trong tin nhắn, cho dù đó là từ người dùng hay mô hình.
-- `Part` cho phép đa phương thức: Sử dụng nhiều đối tượng `Part` trong một đối tượng `Content` để kết hợp nhiều loại dữ liệu (văn bản, hình ảnh, URI video, v.v.).
-- Chọn phương thức dữ liệu:
-  - Đối với nội dung nghe nhìn nhỏ, được nhúng trực tiếp (như hầu hết hình ảnh), hãy sử dụng `Part` với `inline_data`.
-  - Đối với các tệp lớn hơn hoặc tệp mà bạn muốn sử dụng lại trên các yêu cầu, hãy sử dụng File API để tải tệp lên và tham chiếu tệp đó bằng một phần `file_data`.
-- Quản lý nhật ký trò chuyện: Đối với các ứng dụng trò chuyện sử dụng REST API, hãy tạo mảng `contents` bằng cách thêm các đối tượng `Content` cho mỗi lượt, luân phiên giữa các vai trò `"user"` và `"model"`. Nếu bạn đang sử dụng một SDK, hãy tham khảo tài liệu SDK để biết cách quản lý nhật ký cuộc trò chuyện được đề xuất.
+- `Content` est l'enveloppe : il s'agit du conteneur de premier niveau pour un tour de message, qu'il provienne de l'utilisateur ou du modèle.
+- `Part` permet la multimodalité : utilisez plusieurs objets `Part` dans un seul objet `Content` pour combiner différents types de données (texte, image, URI vidéo, etc.).
+- Choisissez votre méthode de données :
+  - Pour les contenus multimédias petits et directement intégrés (comme la plupart des images), utilisez un `Part` avec `inline_data`.
+  - Pour les fichiers plus volumineux ou ceux que vous souhaitez réutiliser dans plusieurs requêtes, utilisez l'API File pour importer le fichier et le référencer avec une partie `file_data`.
+- Gérez l'historique des conversations : pour les applications de chat utilisant l'API REST, créez
+  le `contents` tableau en ajoutant des `Content` objets pour chaque tour,
+  en alternant les rôles `"user"` et `"model"`. Si vous utilisez un SDK, consultez sa documentation pour connaître la méthode recommandée de gestion de l'historique des conversations.
 
-## Ví dụ về phản hồi
+## Exemples de réponses
 
-Các ví dụ sau đây cho thấy cách các thành phần này kết hợp với nhau cho nhiều loại yêu cầu.
+Les exemples suivants montrent comment ces composants s'assemblent pour différents types de requêtes.
 
-### Câu trả lời chỉ có văn bản
+### Réponse textuelle uniquement
 
-Phản hồi văn bản mặc định bao gồm một mảng `candidates` có một hoặc nhiều đối tượng `content` chứa phản hồi của mô hình.
+Une réponse textuelle par défaut se compose d'un tableau `candidates` avec un ou plusieurs objets `content` contenant la réponse du modèle.
 
-Sau đây là ví dụ về một phản hồi **chuẩn**:
+Voici un exemple de réponse **standard** :
 
 ```
 {
@@ -1640,7 +1665,7 @@ Sau đây là ví dụ về một phản hồi **chuẩn**:
 }
 ```
 
-Sau đây là chuỗi các phản hồi **truyền trực tuyến**. Mỗi phản hồi chứa một `responseId` liên kết toàn bộ phản hồi với nhau:
+Voici une série de réponses **en streaming**. Chaque réponse contient un `responseId` qui lie la réponse complète :
 
 ```
 {
@@ -1688,37 +1713,43 @@ Sau đây là chuỗi các phản hồi **truyền trực tuyến**. Mỗi phả
 }
 ```
 
-## Live API (BidiGenerateContent) WebSockets API
+## API Live (BidiGenerateContent) WebSockets
 
-Live API cung cấp một API dựa trên WebSocket có trạng thái để truyền trực tuyến hai chiều nhằm hỗ trợ các trường hợp sử dụng truyền trực tuyến theo thời gian thực. Bạn có thể xem [hướng dẫn về Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi) và [tài liệu tham khảo API Live](https://ai.google.dev/api/live?hl=vi) để biết thêm thông tin chi tiết.
+L'API Live propose une API avec état basée sur WebSocket pour le streaming bidirectionnel afin d'activer les cas d'utilisation du streaming en temps réel. Pour en savoir plus, consultez le
+[guide de l'API Live](https://ai.google.dev/gemini-api/docs/live?hl=fr) et la [documentation de référence de l'API Live](https://ai.google.dev/api/live?hl=fr).
 
-## Mô hình chuyên biệt
+## Modèles spécialisés
 
-Ngoài nhóm mô hình của Gemini, Gemini API còn cung cấp các điểm cuối cho các mô hình chuyên biệt như [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=vi), [Lyria](https://ai.google.dev/gemini-api/docs/music-generation?hl=vi) và các mô hình [nhúng](https://ai.google.dev/gemini-api/docs/embeddings?hl=vi). Bạn có thể xem các hướng dẫn này trong phần Mô hình.
+En plus de la famille de modèles Gemini, l'API Gemini propose des points de terminaison pour
+les modèles spécialisés tels que [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=fr),
+[Lyria](https://ai.google.dev/gemini-api/docs/music-generation?hl=fr) et
+[les modèles d'embedding](https://ai.google.dev/gemini-api/docs/embeddings?hl=fr). Vous pouvez consulter ces guides dans la section "Modèles".
 
-## Platform API
+## API de plate-forme
 
-Các điểm cuối còn lại cho phép bạn sử dụng các chức năng bổ sung với các điểm cuối chính đã mô tả cho đến nay. Hãy xem các chủ đề [Chế độ hàng loạt](https://ai.google.dev/gemini-api/docs/batch-mode?hl=vi) và [File API](https://ai.google.dev/gemini-api/docs/files?hl=vi) trong phần Hướng dẫn để tìm hiểu thêm.
+Les autres points de terminaison permettent d'utiliser des fonctionnalités supplémentaires avec les points de terminaison principaux décrits jusqu'à présent. Pour en savoir plus, consultez les sujets
+[Mode par lot](https://ai.google.dev/gemini-api/docs/batch-mode?hl=fr) et
+[API File](https://ai.google.dev/gemini-api/docs/files?hl=fr) dans la section "Guides".
 
-## Bước tiếp theo
+## Étape suivante
 
-Nếu bạn mới bắt đầu, hãy tham khảo các hướng dẫn sau đây để hiểu rõ mô hình lập trình Gemini API:
+Si vous débutez, consultez les guides suivants, qui vous aideront à comprendre le modèle de programmation de l'API Gemini :
 
-- [Hướng dẫn bắt đầu sử dụng Gemini API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
-- [Hướng dẫn về mô hình Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi)
+- [Guide de démarrage de l'API Gemini](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fr)
+- [Guide des modèles Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr)
 
-Bạn cũng có thể xem hướng dẫn về các chức năng. Hướng dẫn này giới thiệu các tính năng của Gemini API và cung cấp ví dụ về mã:
+Vous pouvez également consulter les guides sur les fonctionnalités, qui présentent différentes fonctionnalités de l'API Gemini et fournissent des exemples de code :
 
-- [Tạo văn bản](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi)
-- [Lưu ngữ cảnh vào bộ nhớ đệm](https://ai.google.dev/gemini-api/docs/caching?hl=vi)
-- [Vectơ nhúng](https://ai.google.dev/gemini-api/docs/embeddings?hl=vi)
+- [Génération de texte](https://ai.google.dev/gemini-api/docs/text-generation?hl=fr)
+- [Mise en cache du contexte](https://ai.google.dev/gemini-api/docs/caching?hl=fr)
+- [Embeddings](https://ai.google.dev/gemini-api/docs/embeddings?hl=fr)
 
-Gửi ý kiến phản hồi
+Envoyer des commentaires
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Cập nhật lần gần đây nhất: 2026-07-30 UTC.
+Dernière mise à jour le 2026/07/30 (UTC).
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-30 UTC."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/30 (UTC)."],[],[]]

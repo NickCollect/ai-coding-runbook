@@ -1,93 +1,109 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=fr
-fetched_at: 2026-08-10T03:18:51.398701+00:00
-title: "Bonnes pratiques concernant l'API Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=es-419
+fetched_at: 2026-08-17T02:32:29.167274+00:00
+title: "Pr\u00e1cticas recomendadas para la API de Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
+La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-Envoyer des commentaires
+Enviar comentarios
 
-# Bonnes pratiques concernant l'API Live
+# Prácticas recomendadas para la API de Live
 
-Ce guide présente les bonnes pratiques à suivre pour optimiser votre utilisation de l'API Live.
-Consultez la page [Premiers pas avec l'API Live](https://ai.google.dev/gemini-api/docs/live?hl=fr) pour obtenir une présentation et des exemples de code pour les cas d'utilisation courants.
+En esta guía, se abarcan las prácticas recomendadas que puedes seguir para optimizar el uso de la API de Live.
+Consulta la página [Comienza a usar la API de Live](https://ai.google.dev/gemini-api/docs/live?hl=es-419)
+para obtener una descripción general y un código de muestra para casos de uso comunes.
 
-## Concevoir des instructions système claires
+## Diseña instrucciones del sistema claras
 
-Pour obtenir les meilleures performances de l'API Live, nous vous recommandons de définir clairement un ensemble d'instructions système (IS) qui définissent la personnalité de l'agent, les règles de conversation et les garde-fous, dans cet ordre.
+Para obtener el mejor rendimiento de la API de Live, te recomendamos que tengas un conjunto de instrucciones del sistema (IS) claramente definido que defina la personalidad del agente, las reglas conversacionales y las barreras de protección, en este orden.
 
-Pour de meilleurs résultats, séparez chaque agent dans un SI distinct.
+Para obtener mejores resultados, separa cada agente en una IS distinta.
 
-1. **Spécifiez le persona de l'agent** : fournissez des informations sur le nom, le rôle et les caractéristiques préférées de l'agent. Si vous souhaitez spécifier l'accent, veillez également à indiquer la langue de sortie souhaitée (par exemple, un accent britannique pour un locuteur anglophone).
-2. **Spécifiez les règles de conversation** : placez ces règles dans l'ordre dans lequel vous souhaitez que le modèle les suive. Faites la distinction entre les éléments ponctuels de la conversation et les boucles conversationnelles. Exemple :
+1. **Especifica la personalidad del agente:** Proporciona detalles sobre el nombre, el rol y las características preferidas del agente. Si quieres especificar el acento, asegúrate de especificar también el idioma de resultado preferido (como un acento británico para un hablante de inglés).
+2. **Especifica las reglas conversacionales:** Coloca estas reglas en el orden en que esperas que siga el modelo. Delimita entre los elementos únicos de la conversación y los bucles conversacionales. Por ejemplo:
 
-   - **Élément ponctuel** : collectez les informations d'un client une seule fois (nom, localisation, numéro de carte de fidélité, etc.).
-   - **Boucle conversationnelle** : l'utilisateur peut discuter des recommandations, des prix, des retours et de la livraison, et peut vouloir passer d'un sujet à l'autre. Indiquez au modèle qu'il peut s'engager dans cette boucle de conversation aussi longtemps que l'utilisateur le souhaite.
-3. **Spécifiez les appels d'outil dans un flux dans des phrases distinctes** : par exemple, si une étape ponctuelle pour recueillir les informations d'un client nécessite d'appeler une fonction `get_user_info`, vous pouvez dire : *Votre première étape consiste à recueillir les informations de l'utilisateur. Tout d'abord, demandez à l'utilisateur de fournir son nom, sa position et son numéro de carte de fidélité. Ensuite, appelez `get_user_info` avec ces informations.*
-4. ***Ajoutez les garde-fous nécessaires** : fournissez tous les garde-fous conversationnels généraux que vous ne souhaitez pas que le modèle applique. N'hésitez pas à fournir des exemples spécifiques de ce que vous souhaitez que le modèle fasse si *x* se produit.* Si vous n'obtenez toujours pas le niveau de précision souhaité, utilisez le mot *incontestablement* pour guider le modèle vers la précision.
+   - **Elemento único:** Recopila los detalles de un cliente una vez (como el nombre, la ubicación y el número de tarjeta de lealtad).
+   - **Bucle conversacional:** El usuario puede analizar recomendaciones, precios, devoluciones y entregas, y es posible que quiera pasar de un tema a otro. Informa al modelo que está bien participar en este bucle conversacional durante el tiempo que desee el usuario.
+3. **Especifica las llamadas a herramientas dentro de un flujo en oraciones distintas:** Por ejemplo, si un paso único para recopilar los detalles de un cliente requiere invocar una función `get_user_info`, puedes decir lo siguiente: *Tu primer paso es recopilar información del usuario. Primero, pídele al usuario que proporcione su nombre, ubicación y número de tarjeta de lealtad. Luego,
+   invoca `get_user_info` con estos detalles.*
+4. **Agrega las barreras de protección necesarias:** Proporciona las barreras de protección conversacionales generales que no quieres que haga el modelo. No dudes en proporcionar ejemplos específicos de si sucede *x*, quieres que el modelo haga *y*. Si aún no obtienes el nivel de precisión preferido, usa la palabra *inequívocamente* para guiar al modelo para que sea preciso.
 
-## Définir précisément les outils
+## Define las herramientas con precisión
 
-Lorsque vous utilisez des outils avec l'API Live, soyez précis dans vos définitions d'outils.
-Veillez à indiquer à Gemini dans quelles conditions un appel d'outil doit être invoqué. Pour en savoir plus, consultez [Définitions des outils](#tool-definitions-example) dans la section des exemples.
+Cuando uses herramientas con la API de Live, sé específico en las definiciones de herramientas.
+Asegúrate de indicarle a Gemini en qué condiciones se debe invocar una llamada a herramienta. Para obtener más detalles, consulta [Definiciones de herramientas](#tool-definitions-example) en
+la sección de ejemplos.
 
-## Rédiger des requêtes efficaces
+## Elabora instrucciones efectivas
 
-- **Utilisez des requêtes claires** : fournissez des exemples de ce que les modèles doivent et ne doivent pas faire dans les requêtes, et essayez de limiter les requêtes à une par persona ou rôle à la fois. Au lieu d'utiliser des requêtes longues et multipages, pensez plutôt à utiliser l'enchaînement de requêtes. Le modèle est plus performant pour les tâches avec des appels de fonction uniques.
-- **Fournissez des commandes et des informations de départ** : l'API Live attend une entrée utilisateur avant de répondre. Pour que l'API Live lance la conversation, incluez une requête lui demandant de saluer l'utilisateur ou de commencer la conversation. Incluez des informations sur l'utilisateur pour que l'API Live puisse personnaliser le message d'accueil.
+- **Usa instrucciones claras:** Proporciona ejemplos de lo que los modelos deben y no deben hacer en las instrucciones, y trata de limitar las instrucciones a una por personalidad o rol a la vez. En lugar de instrucciones largas de varias páginas, considera usar el encadenamiento de instrucciones. El modelo funciona mejor en tareas con llamadas a funciones únicas.
+- **Proporciona comandos e información iniciales:** La API de Live espera la entrada del usuario antes de responder. Para que la API de Live inicie la conversación, incluye una instrucción en la que se le pida que salude al usuario o que comience la conversación. Incluye información sobre el usuario para que la API de Live personalice ese saludo.
 
-## Spécifier la langue
+## Especifica el idioma
 
-Pour des performances optimales sur les `gemini-live-2.5-flash` en cascade de l'API Live, assurez-vous que le `language_code` de l'API correspond à la langue parlée par l'utilisateur.
+Para obtener un rendimiento óptimo en `gemini-live-2.5-flash` en cascada de la API de Live, asegúrate de que el `language_code` de la API coincida con el idioma que habla el usuario.
 
-Si vous attendez du modèle qu'il réponde dans une langue autre que l'anglais, incluez les éléments suivants dans vos instructions système :
+Si se espera que el modelo responda en un idioma que no sea inglés, incluye lo siguiente como parte de las instrucciones del sistema:
 
 ```
 RESPOND IN {OUTPUT_LANGUAGE}. YOU MUST RESPOND UNMISTAKABLY IN {OUTPUT_LANGUAGE}.
 ```
 
-## Streaming
+## Transmisión
 
-Lorsque vous implémentez l'audio en temps réel, suivez ces bonnes pratiques :
+Cuando implementes audio en tiempo real, sigue estas prácticas recomendadas:
 
-- **Taille des fragments et latence** : envoyez l'audio par fragments de 20 à 40 ms.
-- **Gestion des interruptions** : lorsque l'utilisateur parle pendant que le modèle répond, le serveur envoie un message `server_content` avec `"interrupted": true`. Vous devez immédiatement supprimer votre tampon audio côté client pour empêcher l'agent de continuer à parler par-dessus l'utilisateur.
+- **Tamaño del fragmento y latencia**: Envía audio en fragmentos de 20 ms a 40 ms.
+- **Control de interrupciones**: Cuando el usuario habla mientras el modelo responde,
+  el servidor envía un mensaje `server_content` con `"interrupted": true`. Debes descartar de inmediato el búfer de audio del cliente para evitar que el agente siga hablando sobre el usuario.
 
-## Gestion du contexte
+## Administración del contexto
 
-Utilisez `ContextWindowCompressionConfig` pour les longues sessions, car les jetons audio natifs s'accumulent rapidement (environ 25 jetons par seconde d'audio).
+Usa `ContextWindowCompressionConfig` para sesiones largas, ya que los tokens de audio nativos se acumulan rápidamente (aproximadamente 25 tokens por segundo de audio).
 
-## Mise en mémoire tampon côté client
+## Almacenamiento en búfer del cliente
 
-N'effectuez pas de mise en mémoire tampon importante de l'audio d'entrée (par exemple, une seconde) avant de l'envoyer. Envoyez de petits blocs (20 à 100 ms) pour minimiser la latence.
+No almacenes en búfer el audio de entrada de forma significativa (como 1 segundo) antes de enviarlo. Envía fragmentos pequeños (20 ms a 100 ms) para minimizar la latencia.
 
-## Rééchantillonnage
+## Reproducción de muestras
 
-Assurez-vous que votre application cliente rééchantillonne l'entrée du micro (souvent 44,1 kHz ou 48 kHz) à 16 kHz avant la transmission.
+Asegúrate de que tu aplicación cliente vuelva a muestrear la entrada del micrófono (a menudo, 44.1 kHz o 48 kHz) a 16 kHz antes de la transmisión.
 
-## Gestion de la session
+## Administración de las sesiones
 
-Suivez ces consignes pour gérer le cycle de vie des sessions et garantir une expérience utilisateur fiable :
+Sigue estos lineamientos para controlar el ciclo de vida de la sesión y garantizar una experiencia del usuario confiable:
 
-- **Activez la compression de la fenêtre de contexte** : les jetons audio s'accumulent à environ 25 jetons par seconde. Sans compression, les sessions audio uniquement sont limitées à 15 minutes et les sessions audio-vidéo à 2 minutes. Activez la [compression de la fenêtre de contexte](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=fr#context-window-compression) pour étendre les sessions à une durée illimitée.
-- **Implémentez la reprise de session** : le serveur peut réinitialiser périodiquement la connexion WebSocket. Utilisez la [reprise de session](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=fr#session-resumption) pour vous reconnecter facilement sans perdre le contexte. Conservez le dernier jeton de reprise des messages `SessionResumptionUpdate` et transmettez-le en tant que handle lors de la reconnexion. Les jetons de reprise sont valides pendant deux heures après la fin de la dernière session.
-- **Gérer les messages GoAway** : le serveur envoie un message [GoAway](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=fr#goaway-message) avant de mettre fin à une connexion. Écoutez ce message et utilisez le champ `timeLeft` pour terminer ou rétablir la connexion en douceur avant qu'elle ne se ferme.
-- **Gérez les signaux generationComplete** : utilisez le message [`generationComplete`](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=fr#generation-complete-message) pour savoir quand le modèle a fini de générer une réponse, afin que votre application puisse mettre à jour son UI ou passer à l'action suivante.
+- **Habilita la compresión de la ventana de contexto:** Los tokens de audio se acumulan a aproximadamente 25 tokens por segundo. Sin compresión, las sesiones solo de audio se limitan a 15 minutos y las sesiones de audio y video a 2 minutos. Habilita
+  [la compresión de la ventana de contexto](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=es-419#context-window-compression)
+  para extender las sesiones a una duración ilimitada.
+- **Implementa la reanudación de la sesión:** Es posible que el servidor restablezca periódicamente la conexión WebSocket. Usa
+  [la reanudación de la sesión](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=es-419#session-resumption)
+  para volver a conectarte sin problemas sin perder el contexto. Conserva el token de reanudación más reciente de los mensajes `SessionResumptionUpdate` y pásalo como el controlador cuando vuelvas a conectarte. Los tokens de reanudación son válidos durante 2 horas después de que finaliza la última sesión.
+- **Controla los mensajes GoAway:** El servidor envía un
+  [GoAway](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=es-419#goaway-message)
+  antes de finalizar una conexión. Escucha este mensaje y usa el campo `timeLeft` para finalizar o volver a conectarte correctamente antes de que se cierre la conexión.
+- **Controla los indicadores generationComplete:** Usa el
+  [`generationComplete`](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=es-419#generation-complete-message)
+  mensaje para saber cuándo el modelo terminó de generar una respuesta, de modo que tu
+  aplicación pueda actualizar su IU o continuar con la siguiente acción.
 
-Pour en savoir plus sur l'implémentation, consultez [Gestion des sessions](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=fr).
+Para obtener detalles sobre la implementación, consulta
+[Administración de las sesiones](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=es-419).
 
-## Exemples
+## Ejemplos
 
-Cet exemple combine les bonnes pratiques et les [consignes pour la conception d'instructions système](#system-instruction-guidelines) afin de guider les performances du modèle en tant que coach de carrière.
+En este ejemplo, se combinan las prácticas recomendadas y los
+[lineamientos para el diseño de instrucciones del sistema](#system-instruction-guidelines) para
+guiar el rendimiento del modelo como asesor profesional.
 
 ```
 **Persona:**
@@ -139,10 +155,10 @@ Remember that your ultimate goal is to create a supportive environment for your
 clients to thrive.
 ```
 
-### Définitions d'outils
+### Definiciones de herramientas
 
-Ce JSON définit les fonctions pertinentes appelées dans l'exemple de conseiller professionnel.
-Pour obtenir les meilleurs résultats lorsque vous définissez des fonctions, incluez leur nom, leur description, leurs paramètres et leurs conditions d'appel.
+Este JSON define las funciones relevantes que se llaman en el ejemplo de asesor profesional.
+Para obtener mejores resultados cuando definas funciones, incluye sus nombres, descripciones, parámetros y condiciones de invocación.
 
 ```
 [
@@ -232,44 +248,44 @@ Pour obtenir les meilleurs résultats lorsque vous définissez des fonctions, in
 ]
 ```
 
-## Tarification et facturation
+## Precios y facturación
 
-L'API Gemini Live est facturée strictement en fonction de l'utilisation de jetons. Étant donné que l'API Live maintient une session WebSocket persistante, la facturation suit un modèle composé basé sur la fenêtre de contexte active.
+La API de Gemini Live se factura estrictamente según el uso de tokens. Debido a que la API de Live mantiene una sesión WebSocket persistente, la facturación sigue un modelo de capitalización basado en la ventana de contexto activa.
 
-### Fenêtre de contexte de session (coûts cumulés)
+### La ventana de contexto de la sesión (costos de capitalización)
 
-L'API vous facture chaque tour pour tous les jetons présents dans la fenêtre de contexte de la session. Un "tour" est défini comme une entrée utilisateur et la réponse correspondante du modèle.
+La API te cobra por turno por todos los tokens presentes en la ventana de contexto de la sesión. Un "turno" se define como una entrada del usuario y la respuesta correspondiente del modelo.
 
-- **Accumulation** : la fenêtre de contexte inclut les nouveaux jetons du tour actuel, ainsi que tous les jetons accumulés des tours précédents.
-- **Refacturation** : les jetons précédents sont retraités et pris en compte à chaque nouveau tour, jusqu'à la taille de la fenêtre de contexte que vous avez configurée. À mesure qu'une session s'allonge, le coût par tour augmente, car l'historique des conversations est retraité.
+- **Acumulación:** La ventana de contexto incluye tokens nuevos del turno actual, además de todos los tokens acumulados de turnos anteriores.
+- **Re-facturación:** Los tokens anteriores se vuelven a procesar y se registran en cada turno nuevo, hasta el tamaño de la ventana de contexto configurada. A medida que se alarga una sesión, aumenta el costo por turno porque se vuelve a procesar el historial conversacional.
 
-### Jetons audio et transcriptions
+### Tokens de audio y transcripciones
 
-L'API Live est nativement multimodale. Il conserve l'historique des conversations sous forme de jetons audio bruts pour préserver les nuances et le ton acoustiques.
+La API de Live es multimodal de forma nativa. Conserva el historial conversacional como tokens de audio sin procesar para preservar el tono y los matices acústicos.
 
-- **Facturation audio** : l'API vous facture les jetons audio natifs cumulés au tarif standard des entrées audio à chaque tour.
-- **Frais supplémentaires de transcription** : lorsque la transcription audio en texte est activée (`inputAudioTranscription` ou `outputAudioTranscription`), l'API facture tous les jetons de texte générés pour la transcription au tarif des jetons de texte de sortie, en plus des coûts standard des jetons audio.
+- **Facturación de audio:** La API te factura los tokens de audio nativos acumulados a la tasa de entrada de audio estándar en cada turno.
+- **Recargo por transcripción:** Cuando se habilita la transcripción de audio a texto (`inputAudioTranscription` o `outputAudioTranscription`), la API cobra todos los tokens de texto generados para la transcripción a la tasa de salida de tokens de texto, además de los costos estándar de los tokens de audio.
 
-### Gérer les coûts avec les limites de contexte
+### Administra los costos con límites de contexto
 
-Pour éviter une croissance illimitée des coûts lors de longues sessions, configurez la taille de votre fenêtre de contexte à l'aide de `contextWindowCompression`.
+Para evitar el crecimiento ilimitado de los costos en sesiones largas, configura el tamaño de la ventana de contexto con `contextWindowCompression`.
 
-En définissant un déclencheur de compression (par exemple, 25 000 jetons) et une fenêtre glissante (par exemple, 8 000 jetons), l'API supprime automatiquement les jetons les plus anciens une fois le seuil atteint. L'API facture ensuite les tours suivants uniquement pour l'historique conservé et les nouveaux jetons.
+Si estableces un activador de compresión (p.ej., 25,000 tokens) y una ventana deslizante (p.ej., 8,000 tokens), la API expulsa automáticamente los tokens más antiguos una vez que se alcanza el umbral. Luego, la API factura los turnos posteriores solo por el historial retenido, además de los tokens nuevos.
 
-### Mode audio proactif
+### Modo de audio proactivo
 
-Lorsque le mode audio proactif est activé, les jetons d'entrée sont facturés pendant toute la durée d'écoute de l'API Live, tandis que les jetons de sortie ne sont facturés que lorsque l'API répond.
+Cuando se habilita el modo de audio proactivo, los tokens de entrada se cobran durante todo el tiempo que la API de Live está escuchando, mientras que los tokens de salida solo se cobran cuando la API responde.
 
-- **Remarque concernant Gemini 3.1** : Le mode audio proactif n'est pas compatible avec `gemini-3.1-flash-live-preview`. Pour ce modèle, vous n'êtes facturé pour l'audio que lorsque vous diffusez activement des entrées.
+- **Nota para Gemini 3.1:** El modo de audio proactivo no es compatible con `gemini-3.1-flash-live-preview`. Para este modelo, solo se te factura el audio cuando transmites activamente la entrada.
 
-Pour en savoir plus sur les tarifs, consultez la [page des tarifs de l'API Gemini](https://ai.google.dev/gemini-api/docs/pricing?hl=fr).
+Para obtener información detallada sobre los precios, consulta la [página de precios de la API de Gemini](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419).
 
-Envoyer des commentaires
+Enviar comentarios
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-Dernière mise à jour le 2026/06/01 (UTC).
+Última actualización: 2026-06-01 (UTC)
 
-Voulez-vous nous donner plus d'informations ?
+¿Quieres brindar más información?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/06/01 (UTC)."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-01 (UTC)"],[],[]]

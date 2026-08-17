@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/maps-grounding?hl=pt-BR
-fetched_at: 2026-08-10T03:27:09.935183+00:00
-title: "Embasamento com o Google Maps \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/maps-grounding?hl=de
+fetched_at: 2026-08-17T02:20:26.652384+00:00
+title: "Fundierung mit Google Maps \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Envie comentários
+Feedback geben
 
-# Embasamento com o Google Maps
+# Fundierung mit Google Maps
 
-O embasamento com o Google Maps conecta os recursos generativos do Gemini aos dados detalhados, factuais e atualizados do Google Maps. Esse recurso permite que os desenvolvedores incorporem facilmente funcionalidades com reconhecimento de localização aos aplicativos. Quando uma consulta do usuário tem um contexto relacionado aos dados do Maps, o modelo do Gemini aproveita o Google Maps para fornecer respostas factualmente precisas e atualizadas que são relevantes para o local especificado ou a área geral do usuário.
+Die Fundierung mit Google Maps verbindet die generativen Funktionen von Gemini mit den umfangreichen, faktischen und aktuellen Daten von Google Maps. Mit dieser Funktion können Entwickler standortbezogene Funktionen ganz einfach in ihre Anwendungen einbinden. Wenn eine Nutzeranfrage einen Kontext mit Bezug auf Google Maps-Daten hat, nutzt das Gemini-Modell Google Maps, um faktisch korrekte und aktuelle Antworten zu geben, die für den angegebenen Standort oder den ungefähren Ort des Nutzers relevant sind.
 
-- **Respostas precisas e com reconhecimento de localização**:aproveite os dados abrangentes e atuais do Google Maps para consultas geográficas específicas.
-- **Personalização aprimorada**:adapte as recomendações e informações com base nos locais fornecidos pelo usuário.
+- **Genaue, standortbezogene Antworten**:Nutzen Sie die umfangreichen und aktuellen Daten von Google Maps für geografisch spezifische Anfragen.
+- **Verbesserte Personalisierung**:Passen Sie Empfehlungen und Informationen an die vom Nutzer angegebenen Standorte an.
 
-## Primeiros passos
+## Jetzt starten
 
-Este exemplo demonstra como integrar o embasamento com o Google Maps ao seu aplicativo para fornecer respostas precisas e com reconhecimento de localização às consultas do usuário. O comando pede recomendações locais com um local de usuário opcional, permitindo que o modelo do Gemini use dados do Google Maps.
+In diesem Beispiel wird gezeigt, wie Sie die Fundierung mit Google Maps in Ihre Anwendung einbinden, um genaue, standortbezogene Antworten auf Nutzeranfragen zu geben. Der Prompt fragt nach lokalen Empfehlungen mit einem optionalen Nutzerstandort, sodass das Gemini-Modell Google Maps-Daten verwenden kann.
 
 ### Python
 
@@ -128,38 +128,38 @@ curl -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
 }'
 ```
 
-## Como funciona o embasamento com o Google Maps
+## So funktioniert die Fundierung mit Google Maps
 
-O embasamento com o Google Maps integra a API Gemini ao ecossistema do Google Geo usando a API Maps como uma fonte de embasamento. Quando a consulta de um usuário contém contexto geográfico, o modelo do Gemini pode invocar a ferramenta de embasamento com o Google Maps. Em seguida, o modelo pode gerar respostas com base nos dados do Google Maps relevantes para o local fornecido.
+Bei der Fundierung mit Google Maps wird die Gemini API in das Google Geo-Ökosystem eingebunden, indem die Maps API als Fundierungsquelle verwendet wird. Wenn die Anfrage eines Nutzers einen geografischen Kontext enthält, kann das Gemini-Modell das Tool „Fundierung mit Google Maps“ aufrufen. Das Modell kann dann Antworten generieren, die auf Google Maps-Daten basieren, die für den angegebenen Standort relevant sind.
 
-O processo normalmente envolve:
+Der Prozess umfasst in der Regel Folgendes:
 
-1. **Consulta do usuário**:um usuário envia uma consulta ao seu aplicativo, que pode incluir contexto geográfico (por exemplo, "cafeterias perto de mim", "museus em São Francisco").
-2. **Invocação da ferramenta**:o modelo do Gemini, reconhecendo a intenção geográfica, invoca a ferramenta de embasamento com o Google Maps. Essa ferramenta pode ser fornecida opcionalmente com a `latitude` e a `longitude` do usuário. A ferramenta é uma ferramenta de pesquisa textual e se comporta de maneira semelhante à pesquisa no Maps. As consultas locais ("perto de mim") usam as coordenadas, enquanto as consultas específicas ou não locais provavelmente não serão influenciadas pelo local explícito.
-3. **Recuperação de dados**:o serviço de embasamento com o Google Maps consulta o Google Maps para informações relevantes (por exemplo, lugares, avaliações, fotos, endereços, horário de funcionamento).
-4. **Geração embasada**:os dados recuperados do Maps são usados para informar a resposta do modelo do Gemini, garantindo precisão e relevância factual.
-5. **Resposta**:o modelo retorna uma resposta de texto, que inclui citações de fontes do Google Maps.
+1. **Nutzeranfrage**:Ein Nutzer sendet eine Anfrage an Ihre Anwendung, die möglicherweise einen geografischen Kontext enthält (z.B. „Cafés in meiner Nähe“ oder „Museen in San Francisco“).
+2. **Toolaufruf**:Das Gemini-Modell erkennt die geografische Absicht und ruft das Tool „Fundierung mit Google Maps“ auf. Optional können diesem Tool die `latitude` und `longitude` des Nutzers übergeben werden. Das Tool ist ein Textsuchtool und verhält sich ähnlich wie die Suche in Google Maps. Bei lokalen Anfragen („in meiner Nähe“) werden die Koordinaten verwendet, während spezifische oder nicht lokale Anfragen wahrscheinlich nicht vom expliziten Standort beeinflusst werden.
+3. **Datenabruf**:Der Dienst „Fundierung mit Google Maps“ fragt Google Maps nach relevanten Informationen ab (z.B. Orte, Rezensionen, Fotos, Adressen, Öffnungszeiten).
+4. **Fundierte Generierung**:Die abgerufenen Google Maps-Daten werden verwendet, um die Antwort des Gemini-Modells zu informieren und so die faktische Richtigkeit und Relevanz zu gewährleisten.
+5. **Antwort**:Das Modell gibt eine Textantwort zurück, die Zitate aus Google Maps-Quellen enthält.
 
-## Por que e quando usar o embasamento com o Google Maps
+## Gründe und Anwendungsfälle für die Fundierung mit Google Maps
 
-O embasamento com o Google Maps é ideal para aplicativos que exigem informações precisas, atualizadas e específicas do local. Ele melhora a experiência do usuário fornecendo conteúdo relevante e personalizado com o apoio do banco de dados abrangente do Google Maps de mais de 250 milhões de lugares em todo o mundo.
+Die Fundierung mit Google Maps ist ideal für Anwendungen, die genaue, aktuelle und standortspezifische Informationen erfordern. Sie verbessert die Nutzererfahrung, indem sie relevante und personalisierte Inhalte bereitstellt, die auf der umfangreichen Google Maps-Datenbank mit über 250 Millionen Orten weltweit basieren.
 
-Use o embasamento com o Google Maps quando seu aplicativo precisar:
+Sie sollten die Fundierung mit Google Maps verwenden, wenn Ihre Anwendung Folgendes tun muss:
 
-- Fornecer respostas completas e precisas para perguntas geográficas específicas.
-- Criar planejadores de viagens conversacionais e guias locais.
-- Recomendar pontos de interesse com base na localização e nas preferências do usuário, como restaurantes ou lojas.
-- Criar experiências com reconhecimento de localização para serviços sociais, de varejo ou de entrega de comida.
+- Vollständige und genaue Antworten auf geografisch spezifische Fragen geben
+- Konversationelle Reiseplaner und lokale Reiseführer erstellen
+- Sehenswürdigkeiten basierend auf dem Standort und den Nutzerpräferenzen wie Restaurants oder Geschäfte empfehlen
+- Standortbezogene Funktionen für soziale Dienste, Einzelhandelsdienste oder Essenslieferdienste erstellen
 
-O embasamento com o Google Maps se destaca em casos de uso em que a proximidade e os dados factuais atuais são essenciais, como encontrar a "melhor cafeteria perto de mim" ou receber rotas.
+Die Fundierung mit Google Maps eignet sich besonders für Anwendungsfälle, in denen Nähe und aktuelle faktische Daten entscheidend sind, z. B. wenn Sie nach dem „besten Café in meiner Nähe“ suchen oder eine Wegbeschreibung abrufen möchten.
 
-## Métodos e parâmetros da API
+## API-Methoden und -Parameter
 
-O embasamento com o Google Maps é exposto pela API Gemini como uma ferramenta no método
-[`generateContent`](https://ai.google.dev/api/generate-content?hl=pt-br). Para ativar e configurar
-o embasamento com o Google Maps, inclua um
-[`googleMaps`](https://ai.google.dev/api/caching?hl=pt-br#GoogleMaps) objeto no `tools` parâmetro da sua
-solicitação.
+Die Fundierung mit Google Maps wird über die Gemini API als Tool in
+der [`generateContent`](https://ai.google.dev/api/generate-content?hl=de) Methode bereitgestellt. Sie aktivieren und konfigurieren
+die Fundierung mit Google Maps, indem Sie ein
+[`googleMaps`](https://ai.google.dev/api/caching?hl=de#GoogleMaps)-Objekt in den `tools`-Parameter Ihrer
+Anfrage einfügen.
 
 ### JSON
 
@@ -174,7 +174,7 @@ solicitação.
 }
 ```
 
-Além disso, a ferramenta oferece suporte à transmissão do local contextual como `toolConfig`.
+Außerdem unterstützt das Tool die Übergabe des Kontextstandorts als `toolConfig`.
 
 ### JSON
 
@@ -197,11 +197,10 @@ Além disso, a ferramenta oferece suporte à transmissão do local contextual co
 }
 ```
 
-### Entender a resposta de embasamento
+### Informationen zur Fundierungsantwort
 
-Quando uma resposta é embasada com sucesso nos dados do Google Maps, ela
-inclui um [`groundingMetadata`](https://ai.google.dev/api/generate-content?hl=pt-br#GroundingMetadata) campo.
-Esses dados estruturados são essenciais para verificar reivindicações e criar uma experiência de citação avançada no aplicativo, além de atender aos requisitos de uso do serviço.
+Wenn eine Antwort erfolgreich mit Google Maps-Daten fundiert wurde, enthält sie das Feld [`groundingMetadata`](https://ai.google.dev/api/generate-content?hl=de#GroundingMetadata).
+Diese strukturierten Daten sind wichtig, um Behauptungen zu überprüfen und eine umfassende Zitatfunktion in Ihrer Anwendung zu erstellen sowie die Anforderungen an die Dienstnutzung zu erfüllen.
 
 ### JSON
 
@@ -248,23 +247,23 @@ Esses dados estruturados são essenciais para verificar reivindicações e criar
 }
 ```
 
-A API Gemini retorna as seguintes informações com o
-[`groundingMetadata`](https://ai.google.dev/api/generate-content?hl=pt-br#GroundingMetadata):
+Die Gemini API gibt die folgenden Informationen mit der
+[`groundingMetadata`](https://ai.google.dev/api/generate-content?hl=de#GroundingMetadata) zurück:
 
-- `groundingChunks`: matriz de objetos que contém as fontes `maps` (`uri`, `placeId` e `title`).
-- `groundingSupports`: matriz de blocos para conectar o texto de resposta do modelo às fontes em `groundingChunks`. Cada bloco vincula um intervalo de texto (definido por `startIndex` e `endIndex`) a um ou mais `groundingChunkIndices`. Essa é a chave para criar citações inline.
+- `groundingChunks`: Array von Objekten, die die `maps`-Quellen (`uri`, `placeId` und `title`) enthalten.
+- `groundingSupports`: Array von Chunks, um den Antworttext des Modells mit den Quellen in `groundingChunks` zu verknüpfen. Jeder Chunk verknüpft einen Textbereich (definiert durch `startIndex` und `endIndex`) mit einem oder mehreren `groundingChunkIndices`. Dies ist der Schlüssel zum Erstellen von Inline-Zitaten.
 
-Para um snippet de código que mostra como renderizar citações inline em texto, consulte [o
-exemplo](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br#attributing_sources_with_inline_citations)
-na documentação de embasamento com a Pesquisa Google.
+Ein Code-Snippet zum Rendern von Inline-Zitaten in Text finden Sie im [the
+example](https://ai.google.dev/gemini-api/docs/google-search?hl=de#attributing_sources_with_inline_citations)
+in der Dokumentation zur Fundierung mit der Google Suche.
 
-## Casos de uso
+## Anwendungsfälle
 
-O embasamento com o Google Maps oferece suporte a vários casos de uso com reconhecimento de localização. Os exemplos a seguir demonstram como diferentes comandos e parâmetros podem aproveitar o embasamento com o Google Maps. As informações nos resultados embasados do Google Maps podem ser diferentes das condições reais.
+Die Fundierung mit Google Maps unterstützt eine Vielzahl von standortbezogenen Anwendungsfällen. Die folgenden Beispiele zeigen, wie verschiedene Prompts und Parameter die Fundierung mit Google Maps nutzen können. Informationen in den fundierten Google Maps-Ergebnissen können von den tatsächlichen Gegebenheiten abweichen.
 
-### Como lidar com perguntas específicas do lugar
+### Ortsbezogene Fragen beantworten
 
-Faça perguntas detalhadas sobre um lugar específico para receber respostas com base nas avaliações dos usuários do Google e em outros dados do Maps.
+Stellen Sie detaillierte Fragen zu einem bestimmten Ort, um Antworten zu erhalten, die auf Google-Nutzerrezensionen und anderen Google Maps-Daten basieren.
 
 ### Python
 
@@ -370,9 +369,9 @@ curl -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
 }'
 ```
 
-### Como fornecer personalização com base na localização
+### Standortbezogene Personalisierung bereitstellen
 
-Receba recomendações personalizadas de acordo com as preferências de um usuário e uma área geográfica específica.
+Erhalten Sie Empfehlungen, die auf die Vorlieben eines Nutzers und eine bestimmte geografische Region zugeschnitten sind.
 
 ### Python
 
@@ -474,9 +473,9 @@ curl -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
 }'
 ```
 
-### Como ajudar no planejamento de itinerários
+### Bei der Reiseplanung helfen
 
-Gere planos de vários dias com rotas e informações sobre vários locais, perfeitos para aplicativos de viagens.
+Erstellen Sie mehrtägige Pläne mit Wegbeschreibungen und Informationen zu verschiedenen Orten, die sich perfekt für Reiseanwendungen eignen.
 
 ### Python
 
@@ -580,73 +579,73 @@ curl -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
 }'
 ```
 
-## Requisitos de uso do serviço
+## Anforderungen an die Dienstnutzung
 
-Esta seção descreve os requisitos de uso do serviço para embasamento com o Google Maps.
+In diesem Abschnitt werden die Anforderungen an die Dienstnutzung für die Fundierung mit Google Maps beschrieben.
 
-### Informar o usuário sobre o uso de fontes do Google Maps
+### Nutzer über die Verwendung von Google Maps-Quellen informieren
 
-Com cada resultado embasado do Google Maps, você vai receber fontes em `groundingChunks` que oferecem suporte a cada resposta. Os seguintes metadados também são retornados:
+Mit jedem fundierten Google Maps-Ergebnis erhalten Sie in `groundingChunks` Quellen, die die jeweilige Antwort unterstützen. Außerdem werden die folgenden Metadaten zurückgegeben:
 
-- URI de origem
-- Título
+- Quell-URI
+- Titel
 - ID
 
-Ao apresentar resultados do embasamento com o Google Maps, especifique as fontes associadas do Google Maps e informe seus usuários sobre o seguinte:
+Wenn Sie Ergebnisse aus der Fundierung mit Google Maps präsentieren, müssen Sie die zugehörigen Google Maps-Quellen angeben und Ihre Nutzer über Folgendes informieren:
 
-- As fontes do Google Maps precisam seguir imediatamente o conteúdo gerado que elas oferecem suporte. Esse conteúdo gerado também é chamado de resultado embasado do Google Maps.
-- As fontes do Google Maps precisam ser visualizadas em uma interação do usuário.
+- Die Google Maps-Quellen müssen direkt auf den generierten Inhalt folgen, den sie unterstützen. Dieser generierte Inhalt wird auch als fundiertes Google Maps-Ergebnis bezeichnet.
+- Die Google Maps-Quellen müssen innerhalb einer Nutzerinteraktion sichtbar sein.
 
-### Mostrar fontes do Google Maps com links do Google Maps
+### Google Maps-Quellen mit Google Maps-Links anzeigen
 
-Para cada fonte em `groundingChunks` e em `grounding_chunks.maps.placeAnswerSources.reviewSnippets`, uma prévia do link precisa ser gerada seguindo estes requisitos:
+Für jede Quelle in `groundingChunks` und in `grounding_chunks.maps.placeAnswerSources.reviewSnippets` muss eine Linkvorschau gemäß den folgenden Anforderungen generiert werden:
 
-- Atribua cada fonte ao Google Maps seguindo as diretrizes de atribuição de texto do Google Maps
-  [attribution guidelines](#maps-attribution-guidelines).
-- Mostre o título da fonte fornecido na resposta.
-- Vincule à fonte usando o `uri` ou `googleMapsUri` da resposta.
+- Weisen Sie jede Quelle Google Maps gemäß den Richtlinien für die Quellenangabe als Text
+  [zu](#maps-attribution-guidelines).
+- Zeigen Sie den in der Antwort angegebenen Quelltitel an.
+- Verlinken Sie die Quelle mit der `uri` oder `googleMapsUri` aus der Antwort.
 
-Essas imagens mostram os requisitos mínimos para exibir as fontes e os links do Google Maps.
+Diese Bilder zeigen die Mindestanforderungen für die Anzeige der Quellen und Google Maps-Links.
 
-![Comando com resposta mostrando fontes](https://ai.google.dev/static/gemini-api/docs/images/maps/sources-expanded.jpg?hl=pt-br)
+![Prompt mit Antwort, in der Quellen angegeben sind](https://ai.google.dev/static/gemini-api/docs/images/maps/sources-expanded.jpg?hl=de)
 
-É possível recolher a visualização das fontes.
+Sie können die Ansicht der Quellen minimieren.
 
-![Comando com resposta e fontes recolhidas](https://ai.google.dev/static/gemini-api/docs/images/maps/sources-collapsed.jpg?hl=pt-br)
+![Prompt mit zusammengefasster Antwort und Quellen](https://ai.google.dev/static/gemini-api/docs/images/maps/sources-collapsed.jpg?hl=de)
 
-Opcional: melhore a prévia do link com conteúdo adicional, como:
+Optional: Erweitern Sie die Linkvorschau mit zusätzlichen Inhalten, z. B.:
 
-- Um [favicon do Google Maps](https://www.google.com/images/branding/product/ico/web_maps_icon_32dp.ico?hl=pt-br)
-  é inserido antes da atribuição de texto do Google Maps.
-- Uma foto do URL de origem (`og:image`).
+- Vor der Quellenangabe als Text wird ein [Google Maps-Favicon](https://www.google.com/images/branding/product/ico/web_maps_icon_32dp.ico?hl=de)
+  eingefügt.
+- Ein Foto aus der Quell-URL (`og:image`).
 
-Para mais informações sobre alguns dos nossos provedores de dados do Google Maps e os termos de
-licença deles, consulte os [avisos legais do Google Maps e do Google Earth](https://www.google.com/help/legalnotices_maps/?hl=pt-br).
+Weitere Informationen zu einigen unserer Google Maps-Datenanbieter und ihren
+Lizenzbedingungen finden Sie in den [rechtlichen Hinweisen zu Google Maps und Google Earth](https://www.google.com/help/legalnotices_maps/?hl=de).
 
-### Diretrizes de atribuição de texto do Google Maps
+### Richtlinien für die Quellenangabe als Text für Google Maps
 
-Ao atribuir fontes ao Google Maps no texto, siga estas diretrizes:
+Wenn Sie Quellen in Text Google Maps zuweisen, beachten Sie diese Richtlinien:
 
-- Não modifique o texto do Google Maps de forma alguma:
-  - Não altere a capitalização do Google Maps.
-  - Não quebre o Google Maps em várias linhas.
-  - Não localize o Google Maps para outro idioma.
-  - Impeça que os navegadores traduzam o Google Maps usando o atributo HTML translate="no".
-- Estilize o texto do Google Maps conforme descrito na tabela a seguir:
+- Ändern Sie den Text „Google Maps“ in keiner Weise:
+  - Ändern Sie die Groß- und Kleinschreibung von „Google Maps“ nicht.
+  - Fügen Sie keinen Zeilenumbruch in „Google Maps“ ein.
+  - Lokalisieren Sie „Google Maps“ nicht in eine andere Sprache.
+  - Verhindern Sie, dass Browser Google Maps übersetzen, indem Sie das HTML-Attribut „translate="no"“ verwenden.
+- Formatieren Sie den Text „Google Maps“ wie in der folgenden Tabelle beschrieben:
 
-| Propriedade | Estilo |
+| Attribut | Stil |
 | --- | --- |
-| `Font family` | Roboto. O carregamento da fonte é opcional. |
-| `Fallback font family` | Qualquer fonte Sans Serif já usada no seu produto ou "Sans-Serif" para invocar a fonte padrão do sistema |
+| `Font family` | Roboto. Das Laden der Schriftart ist optional. |
+| `Fallback font family` | Eine beliebige serifenlose Schriftart, die bereits in Ihrem Produkt verwendet wird, oder „Sans-Serif“, um die Standardsystemschriftart aufzurufen |
 | `Font style` | Normal |
 | `Font weight` | 400 |
-| `Font color` | Branco, preto (#1F1F1F) ou cinza (#5E5E5E). Mantenha um contraste acessível (4,5:1) com o plano de fundo. |
-| `Font size` | - Tamanho mínimo da fonte: 12sp - Tamanho máximo da fonte: 16sp - Para saber mais sobre sp, consulte Unidades de tamanho da fonte no site do [Material Design](https://m3.material.io/styles/typography/type-scale-tokens#3f4488e7-3b74-45b0-a143-9d6afa4d62dc). |
+| `Font color` | Weiß, Schwarz (#1F1F1F) oder Grau (#5E5E5E). Achten Sie auf einen barrierefreien Kontrast von 4,5:1 zum Hintergrund. |
+| `Font size` | - Mindestschriftgröße: 12 sp - Maximale Schriftgröße: 16 sp - Weitere Informationen zu „sp“ finden Sie unter Schriftgrößeneinheiten auf der [Material Design-Website](https://m3.material.io/styles/typography/type-scale-tokens#3f4488e7-3b74-45b0-a143-9d6afa4d62dc). |
 | `Spacing` | Normal |
 
-#### CSS de exemplo
+#### Beispiel-CSS
 
-O CSS a seguir renderiza o Google Maps com o estilo e a cor tipográficos adequados em um plano de fundo branco ou claro.
+Mit dem folgenden CSS wird „Google Maps“ mit dem entsprechenden typografischen Stil und der entsprechenden Farbe auf einem weißen oder hellen Hintergrund gerendert.
 
 ### CSS
 
@@ -665,81 +664,81 @@ color: #5e5e5e;
 }
 ```
 
-### ID de lugar e ID da avaliação
+### Orts-ID und Rezensions-ID
 
-Os dados do Google Maps incluem o ID do lugar e o ID da avaliação. É possível armazenar em cache, armazenar e exportar os seguintes dados de resposta:
+Die Google Maps-Daten enthalten die Orts-ID und die Rezensions-ID. Sie können die folgenden Antwortdaten im Cache speichern, speichern und exportieren:
 
 - `placeId`
 - `reviewId`
 
-As restrições contra o armazenamento em cache nos Termos de embasamento com o Google Maps não se aplicam.
+Die Einschränkungen für das Caching in den Nutzungsbedingungen für die Fundierung mit Google Maps gelten nicht.
 
-### Atividade e território proibidos
+### Unzulässige Aktivitäten und Gebiete
 
-O embasamento com o Google Maps tem restrições adicionais para determinados conteúdos e atividades para manter uma plataforma segura e confiável. Além das restrições de uso
-nos [Termos](https://ai.google.dev/gemini-api/terms?hl=pt-br#grounding-with-google-maps):
+Für die Fundierung mit Google Maps gelten zusätzliche Einschränkungen für bestimmte Inhalte und Aktivitäten, um eine sichere und zuverlässige Plattform zu gewährleisten. Zusätzlich zu den Nutzungs
+beschränkungen in den [Nutzungsbedingungen](https://ai.google.dev/gemini-api/terms?hl=de#grounding-with-google-maps) gilt Folgendes:
 
-- Não use o embasamento com o Google Maps para atividades de alto risco, incluindo serviços de resposta a emergências.
-- Não distribua nem comercializar seu aplicativo que oferece embasamento com o Google Maps em um território proibido. Para mais informações, consulte
-  [Territórios proibidos da Plataforma Google Maps](https://cloud.google.com/maps-platform/terms/maps-prohibited-territories?hl=pt-br).
-  A lista de territórios proibidos pode ser atualizada periodicamente.
+- Sie verwenden die Fundierung mit Google Maps nicht für hochriskante Aktivitäten, einschließlich Notfalleinsätze.
+- Sie vertreiben oder bewerben Ihre Anwendung, die die Fundierung mit Google Maps bietet, nicht in einem verbotenen Gebiet. Weitere Informationen finden Sie unter
+  [Verbotene Gebiete der Google Maps Platform](https://cloud.google.com/maps-platform/terms/maps-prohibited-territories?hl=de).
+  Die Liste der verbotenen Gebiete wird gelegentlich aktualisiert.
 
-## Práticas recomendadas
+## Best Practices
 
-- **Forneça a localização do usuário**:para as respostas mais relevantes e personalizadas, sempre inclua a `user_location` (latitude e longitude) na configuração `googleMapsGrounding` quando a localização do usuário for conhecida.
-- **Informe os usuários finais**:informe claramente aos usuários finais que os dados do Google Maps estão sendo usados para responder às consultas deles, principalmente quando a ferramenta está ativada.
-- **Monitore a latência**:para aplicativos conversacionais, verifique se a latência P95 para respostas embasadas permanece dentro dos limites aceitáveis para manter uma experiência do usuário tranquila.
-- **Desative quando não for necessário**:o embasamento com o Google Maps está desativado por padrão. Ative-o (`"tools": [{"googleMaps": {}}]`) somente quando uma consulta tiver um
-  contexto geográfico claro para otimizar o desempenho e o custo.
+- **Nutzerstandort angeben**:Um die relevantesten und personalisierten Antworten zu erhalten, geben Sie in Ihrer `googleMapsGrounding`-Konfiguration immer den `user_location` (Breiten- und Längengrad) an, wenn der Standort des Nutzers bekannt ist.
+- **Endnutzer informieren**:Informieren Sie Ihre Endnutzer deutlich darüber, dass Google Maps-Daten verwendet werden, um ihre Anfragen zu beantworten, insbesondere wenn das Tool aktiviert ist.
+- **Latenz überwachen**:Bei konversationellen Anwendungen muss die P95-Latenz für fundierte Antworten innerhalb akzeptabler Grenzwerte bleiben, um eine reibungslose Nutzererfahrung zu gewährleisten.
+- **Deaktivieren, wenn nicht erforderlich**:Die Fundierung mit Google Maps ist standardmäßig deaktiviert. Aktivieren Sie sie nur (`"tools": [{"googleMaps": {}}]`), wenn eine Anfrage einen
+  klaren geografischen Kontext hat, um Leistung und Kosten zu optimieren.
 
-## Limitações
+## Beschränkungen
 
-- **Escopo geográfico**:o embasamento com o Google Maps está disponível globalmente
-- **Suporte ao modelo**:consulte a seção [Modelos compatíveis](#supported-models).
-- **Entradas/saídas multimodais**:o embasamento com o Google Maps não oferece suporte a entradas ou saídas multimodais além do texto.
-- **Estado padrão**:a ferramenta de embasamento com o Google Maps está desativada por padrão.
-  É necessário ativá-la explicitamente nas solicitações da API.
+- **Geografischer Umfang**:Die Fundierung mit Google Maps ist weltweit verfügbar.
+- **Modellunterstützung:** Weitere Informationen finden Sie im Abschnitt [Unterstützte Modelle](#supported-models).
+- **Multimodale Eingaben/Ausgaben**:Die Fundierung mit Google Maps unterstützt derzeit keine multimodalen Eingaben oder Ausgaben über Text hinaus.
+- **Standardstatus**:Das Tool „Fundierung mit Google Maps“ ist standardmäßig deaktiviert.
+  Sie müssen es in Ihren API-Anfragen explizit aktivieren.
 
-## Preços e limites de taxa
+## Preise und Ratenlimits
 
-O preço do embasamento com o Google Maps é baseado em consultas. A taxa atual é de **US$25 por 1 mil comandos embasados**. O nível sem custo financeiro também tem até 500 solicitações por dia disponíveis. Uma solicitação só é contabilizada na cota quando um comando retorna pelo menos um resultado embasado do Google Maps (ou seja, resultados que contêm pelo menos uma fonte do Google Maps). Se várias consultas forem enviadas ao Google Maps de uma única solicitação, elas serão contabilizadas como uma solicitação para o limite de taxa.
+Die Preise für die Fundierung mit Google Maps basieren auf Anfragen. Der aktuelle Preis beträgt **25 $ pro 1.000 fundierte Prompts**. Im kostenlosen Kontingent sind außerdem bis zu 500 Anfragen pro Tag verfügbar. Eine Anfrage wird nur auf das Kontingent angerechnet, wenn ein Prompt mindestens ein fundiertes Google Maps-Ergebnis zurückgibt (d.h. Ergebnisse, die mindestens eine Google Maps-Quelle enthalten). Wenn mehrere Anfragen aus einer einzelnen Anfrage an Google Maps gesendet werden, zählt dies als eine Anfrage für das Ratenlimit.
 
-Para informações detalhadas sobre preços, consulte a [página de preços da API Gemini](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br).
+Ausführliche Preisinformationen finden Sie auf der Seite [Gemini API-Preise](https://ai.google.dev/gemini-api/docs/pricing?hl=de).
 
-## Modelos compatíveis
+## Unterstützte Modelle
 
-Os seguintes modelos oferecem suporte ao embasamento com o Google Maps:
+Die folgenden Modelle unterstützen die Fundierung mit Google Maps:
 
-| Modelo | Embasamento com o Google Maps |
+| Modell | Fundierung mit Google Maps |
 | --- | --- |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=pt-br) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=pt-br) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=pt-br) | ✔️ |
-| [Pré-lançamento do Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=pt-br) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=pt-br) | ✔️ |
-| [Pré-lançamento do Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=pt-br) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=pt-br) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=pt-br) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=pt-br) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=de) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=de) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=de) | ✔️ |
+| [Gemini 3.1 Pro (Vorabversion)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=de) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=de) | ✔️ |
+| [Gemini 3 Flash (Vorabversion)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=de) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=de) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=de) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=de) | ✔️ |
 
-## Combinações de ferramentas compatíveis
+## Unterstützte Toolkombinationen
 
-Os modelos do Gemini 3 oferecem suporte à combinação de ferramentas integradas (como o embasamento com o Google Maps) com ferramentas personalizadas (chamada de função). Saiba mais na
-[página de combinações de ferramentas](https://ai.google.dev/gemini-api/docs/tool-combination?hl=pt-br).
+Gemini 3-Modelle unterstützen die Kombination von integrierten Tools (z. B. Fundierung mit Google Maps) mit benutzerdefinierten Tools (Funktionsaufruf). Weitere Informationen finden Sie auf der
+[Seite Toolkombinationen](https://ai.google.dev/gemini-api/docs/tool-combination?hl=de).
 
-## A seguir
+## Nächste Schritte
 
-- Teste o [embasamento com a Pesquisa Google no manual da API Gemini
-  Gemini](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=pt-br).
-- Saiba mais sobre outras [ferramentas disponíveis](https://ai.google.dev/gemini-api/docs/tools?hl=pt-br).
-- Para saber mais sobre as práticas recomendadas de IA responsável e os filtros de segurança da API Gemini, consulte [o guia de configurações de segurança](https://ai.google.dev/gemini-api/docs/safety-settings?hl=pt-br).
+- Probieren Sie die [Fundierung mit der Google Suche in der Gemini API
+  Cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=de) aus.
+- Weitere Informationen zu anderen [verfügbaren Tools](https://ai.google.dev/gemini-api/docs/tools?hl=de).
+- Weitere Informationen zu Best Practices für die verantwortungsbewusste Anwendung von KI und den Sicherheitsfiltern der Gemini API finden Sie unter [Sicherheitseinstellungen](https://ai.google.dev/gemini-api/docs/safety-settings?hl=de).
 
-Envie comentários
+Feedback geben
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Última atualização 2026-07-30 UTC.
+Zuletzt aktualisiert: 2026-07-30 (UTC).
 
-Quer enviar seu feedback?
+Haben Sie Feedback für uns?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-07-30 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-30 (UTC)."],[],[]]

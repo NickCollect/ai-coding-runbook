@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/learnlm?hl=vi
-fetched_at: 2026-08-10T03:20:01.890260+00:00
+fetched_at: 2026-08-17T02:31:50.633428+00:00
 title: "LearnLM \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

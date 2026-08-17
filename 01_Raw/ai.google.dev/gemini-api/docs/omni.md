@@ -1,41 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/omni?hl=it
-fetched_at: 2026-08-10T03:12:39.795455+00:00
-title: "Genera e modifica video con Gemini Omni Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/omni?hl=hi
+fetched_at: 2026-08-17T02:24:02.450012+00:00
+title: "Gemini Omni Flash \u0915\u0940 \u092e\u0926\u0926 \u0938\u0947 \u0935\u0940\u0921\u093f\u092f\u094b \u091c\u0928\u0930\u0947\u091f \u0914\u0930 \u090f\u0921\u093f\u091f \u0915\u0930\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Invia feedback
+सुझाव भेजें
 
-# Genera e modifica video con Gemini Omni Flash
+# Gemini Omni Flash की मदद से वीडियो जनरेट और एडिट करना
 
-Gemini Omni Flash (`gemini-omni-flash-preview`) è un modello multimodale ad alte prestazioni progettato per la generazione, la modifica e il controllo cinematografico di video ad alta velocità.
-Gemini Omni si basa sulle seguenti funzionalità principali che lo distinguono dai
-modelli video precedenti:
+Gemini Omni Flash (`gemini-omni-flash-preview`) एक हाई-परफ़ॉर्मेंस मल्टीमॉडल है. इसे वीडियो जनरेट करने, एडिट करने, और सिनेमैटिक कंट्रोल के लिए डिज़ाइन किया गया है. यह मॉडल, इन कामों को तेज़ी से करता है.
+Gemini Omni को इन मुख्य क्षमताओं के आधार पर बनाया गया है. ये क्षमताएं, इसे वीडियो के पिछले मॉडल से अलग बनाती हैं:
 
-- **Multimodalità nativa:** elabora testo, immagini, audio e video
-  contemporaneamente, offrendoti un output più coeso, coerente e controllabile.
-- **Modifica conversazionale**:attivata dall'[API
-  Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it), ti consente di perfezionare
-  e modificare in modo iterativo i tuoi video tramite conversazioni in linguaggio naturale. Descrivi cosa
-  vuoi cambiare e il modello applica la modifica preservando le
-  parti del video che vuoi conservare.
-- **Conoscenza del mondo:** Gemini Omni combina la comprensione della fisica con la conoscenza di storia, scienza e contesto culturale di Gemini, colmando il divario tra fotorealismo e narrazione significativa.
+- **नेटिव मल्टीमॉडल:** यह टेक्स्ट, इमेज, ऑडियो, और वीडियो को एक साथ प्रोसेस करता है. इससे आपको ज़्यादा कोहेसिव, एक जैसा, और कंट्रोल किया जा सकने वाला आउटपुट मिलता है.
+- **बातचीत के ज़रिए एडिटिंग:** यह सुविधा, [Interactions
+  API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) की मदद से उपलब्ध कराई जाती है. इसकी मदद से, नैचुरल लैंग्वेज में बातचीत करके, वीडियो को बार-बार बेहतर बनाया जा सकता है और उनमें बदलाव किया जा सकता है. बताएं कि आपको किस तरह के बदलाव करने हैं. मॉडल, वीडियो के उन हिस्सों को बनाए रखते हुए बदलाव करता है जिन्हें आपको रखना है.
+- **दुनिया के बारे में जानकारी:** Gemini Omni, फ़िज़िक्स की समझ को इतिहास, विज्ञान, और सांस्कृतिक संदर्भ के बारे में Gemini की जानकारी के साथ जोड़ता है. इससे, फ़ोटोरेलिज़्म से लेकर कहानी कहने के मकसद तक के बीच के अंतर को कम किया जा सकता है.
 
-## Generazione di video da testo
+## टेक्स्ट से वीडियो जनरेट करने की सुविधा
 
-Genera un video da un prompt di testo. Il modello genera un video con audio
-in base alla descrizione testuale. Scrivi prompt con dettagli come la descrizione della scena,
-il movimento della videocamera, l'illuminazione e l'atmosfera per ottenere risultati ottimali.
+टेक्स्ट प्रॉम्प्ट की मदद से वीडियो जनरेट करें. मॉडल, आपके टेक्स्ट के ब्यौरे के आधार पर ऑडियो वाला वीडियो जनरेट करता है. बेहतर नतीजे पाने के लिए, सीन के ब्यौरे, कैमरा मूवमेंट, लाइटिंग, और मूड जैसी जानकारी के साथ प्रॉम्प्ट लिखें.
 
 ### Python
 
@@ -81,12 +74,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### Schema di risposta REST
+### REST रिस्पॉन्स स्कीमा
 
-Il campo di convenienza `interaction.output_video` è **solo SDK**.
-Ottieni l'output video dall'array `steps` quando utilizzi direttamente l'API REST.
+सुविधा वाला फ़ील्ड `interaction.output_video` **सिर्फ़ एसडीके** के लिए उपलब्ध है.
+REST API का सीधे तौर पर इस्तेमाल करने पर, `steps` कलेक्शन से वीडियो आउटपुट पाएं.
 
-**Struttura JSON REST non elaborato:**
+**REST JSON का रॉ स्ट्रक्चर:**
 
 ```
 {
@@ -111,10 +104,9 @@ Ottieni l'output video dall'array `steps` quando utilizzi direttamente l'API RES
 }
 ```
 
-### Controllare le proporzioni
+### आसपेक्ट रेशियो (चौड़ाई-ऊंचाई का अनुपात) कंट्रोल करना
 
-Imposta `aspect_ratio` su `"9:16"` per creare video verticali. Orizzontale (16:9)
-è l'impostazione predefinita.
+पोर्ट्रेट वीडियो बनाने के लिए, `aspect_ratio` को `"9:16"` पर सेट करें. डिफ़ॉल्ट रूप से, लैंडस्केप (16:9) सेट होता है.
 
 ### Python
 
@@ -172,24 +164,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-## Generazione di video da immagini
+## इमेज से वीडियो जनरेट करने की सुविधा
 
-Puoi fornire un'immagine di riferimento con il prompt testuale. A seconda del
-prompt, il modello deciderà
-come utilizzare l'immagine. Questa funzionalità è utile per dare vita a scatti di prodotti, illustrazioni o fotografie.
+टेक्स्ट प्रॉम्प्ट के साथ, रेफ़रंस इमेज दी जा सकती है. आपके प्रॉम्प्ट के आधार पर, मॉडल तय करेगा कि इमेज का इस्तेमाल कैसे करना है. यह सुविधा, प्रॉडक्ट की तस्वीरों, इलस्ट्रेशन या फ़ोटोग्राफ़ को असली जैसा दिखाने में मददगार है.
 
-L'esempio seguente mostra come utilizzare l'immagine di riferimento di un disegno di un
-pesce che salta fuori dall'acqua:
+यहां दिए गए उदाहरण में, पानी से छलांग लगाती मछली के ड्रॉइंग की रेफ़रंस इमेज का इस्तेमाल करने का तरीका बताया गया है:
 
-![Disegno di un pesce che salta fuori dall&#39;acqua](https://ai.google.dev/static/gemini-api/docs/images/fish-jumping-inputimage.png?hl=it)
+![पानी से बाहर छलांग लगाती हुई मछली का ड्रॉइंग](https://ai.google.dev/static/gemini-api/docs/images/fish-jumping-inputimage.png?hl=hi)
 
-Con il seguente prompt:
+इस प्रॉम्प्ट के साथ:
 
 ```
 turn this into realistic footage, using the drawing only as a guide for movement, do not show the drawing in the final video
 ```
 
-Per generare un video realistico del disegno.
+ड्रॉइंग का असली जैसा दिखने वाला वीडियो जनरेट करने के लिए.
 
 ### Python
 
@@ -244,11 +233,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### Riferimento oggetto
+### सब्जेक्ट रेफ़रंस
 
-Puoi generare un video che incorpori soggetti specifici forniti come immagini di riferimento.
-Ad esempio, il seguente codice mostra come fornire due immagini di un gatto e di un gomitolo
-per generare un video del gatto che gioca con il gomitolo.
+रेफ़रंस इमेज के तौर पर दिए गए खास सब्जेक्ट को शामिल करके, वीडियो जनरेट किया जा सकता है.
+उदाहरण के लिए, यहां दिए गए कोड में, बिल्ली और ऊन की दो इमेज दी गई हैं. इससे, बिल्ली के ऊन से खेलने का वीडियो जनरेट किया जा सकता है.
 
 ### Python
 
@@ -306,19 +294,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### Parametro Tasks
+### टास्क पैरामीटर
 
-Utilizza il parametro `task` in `video-config` per indicare chiaramente il comportamento previsto. Ad esempio, se vuoi che il modello generi un video da un'immagine, puoi impostare il parametro su `image_to_video`. Se non viene impostato, il modello dedurrà ciò che vuoi dal prompt.
+वीडियो-कॉन्फ़िगरेशन में, `task` पैरामीटर का इस्तेमाल करके, वीडियो जनरेट करने के मकसद के बारे में साफ़ तौर पर बताया जा सकता है. उदाहरण के लिए, अगर आपको मॉडल से किसी इमेज से वीडियो जनरेट कराना है,
+तो पैरामीटर को `image_to_video` पर सेट किया जा सकता है.`video-config` अगर यह सेट नहीं किया जाता है, तो मॉडल प्रॉम्प्ट से यह अनुमान लगाएगा कि आपको क्या चाहिए.
 
-I valori consentiti sono i seguenti:
+ये वैल्यू इस्तेमाल की जा सकती हैं:
 
 - `text_to_video`
 - `image_to_video`
 - `reference_to_video`
 - `edit`
 
-L'esempio seguente mostra come impostare questa opzione per l'esempio di immagine
-in video mostrato in precedenza.
+यहां दिए गए उदाहरण में, पहले दिखाई गई इमेज से वीडियो बनाने के उदाहरण के लिए, इसे सेट करने का तरीका बताया गया है.
 
 ### Python
 
@@ -396,15 +384,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Editing video stateful
+## स्टेटफ़ुल वीडियो एडिटिंग
 
-Genera un video e modificalo in modo iterativo utilizzando prompt di follow-up. Ogni turno
-si basa sul risultato precedente. Il modello ricorda il contesto del video e applica
-le modifiche preservando gli elementi che non hai menzionato. Utilizza
-`previous_interaction_id` per monitorare la cronologia della conversazione e lo stato del video generato
-senza ricaricare il video precedente.
+फ़ॉलो-अप प्रॉम्प्ट का इस्तेमाल करके, वीडियो जनरेट करें और उसे बार-बार एडिट करें. हर बार, पिछले नतीजे के आधार पर वीडियो में बदलाव किया जाता है. मॉडल, वीडियो के कॉन्टेक्स्ट को याद रखता है. साथ ही, आपके बदलावों को लागू करते समय, उन एलिमेंट को बनाए रखता है जिनके बारे में आपने नहीं बताया है. `previous_interaction_id` का इस्तेमाल करके, बातचीत के इतिहास और जनरेट किए गए वीडियो की स्थिति को ट्रैक किया जा सकता है. इसके लिए, पिछले वीडियो को दोबारा अपलोड करने की ज़रूरत नहीं होती.
 
-Il seguente esempio mostra come generare un primo video e poi modificarlo:
+यहां दिए गए उदाहरण में, पहले वीडियो जनरेट करने और फिर उसे एडिट करने का तरीका बताया गया है:
 
 ### Python
 
@@ -464,20 +448,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-Esempio di video iniziale:
+शुरुआती वीडियो का उदाहरण:
 
-Esempio di video modificato:
+एडिट किए गए वीडियो का उदाहरण:
 
-Ogni turno della conversazione produce un nuovo video. Il modello comprende
-il contesto dei turni precedenti, consentendoti di apportare modifiche incrementali come la regolazione
-dell'illuminazione e lo scambio di sfondi, senza dover descrivere nuovamente l'intera scena.
+बातचीत में हर बार, एक नया वीडियो जनरेट होता है. मॉडल, पिछली बातचीत के कॉन्टेक्स्ट को समझता है. इससे, लाइटिंग को अडजस्ट करने और बैकग्राउंड बदलने जैसे बदलाव किए जा सकते हैं. इसके लिए, पूरे सीन के बारे में दोबारा बताने की ज़रूरत नहीं होती.
 
-### Modificare i propri video
+### अपने वीडियो एडिट करना
 
-Carica i tuoi video utilizzando l'[API Files](https://ai.google.dev/gemini-api/docs/files?hl=it) per modificarli
-con Gemini Omni Flash.
+अपने वीडियो अपलोड करने के लिए, [Files API](https://ai.google.dev/gemini-api/docs/files?hl=hi) का इस्तेमाल करें. इसके बाद, उन्हें एडिट करने के लिए
+Gemini Omni Flash की मदद लें.
 
-Il seguente esempio mostra come modificare il video originale:
+यहां दिए गए उदाहरण में, इस ओरिजनल वीडियो को एडिट करने का तरीका बताया गया है:
 
 ### Python
 
@@ -582,14 +564,15 @@ curl -sS -w "\n[HTTP %{http_code}]\n" "https://generativelanguage.googleapis.com
 EOF
 ```
 
-Esempio di video modificato:
+एडिट किए गए वीडियो का उदाहरण:
 
-## Recupero di video con un URI
+ 
 
-Utilizza il parametro `delivery="uri"` in
-`response_format` per recuperare i video generati di dimensioni superiori a 4 MB.
-Viene restituito un URI ospitato da Google che puoi interrogare finché il
-video non è `ACTIVE` prima del download.
+## यूआरआई की मदद से वीडियो वापस पाना
+
+जनरेट किए गए ऐसे वीडियो वापस पाने के लिए जो 4 एमबी से बड़े हैं,
+`response_format` में `delivery="uri"` पैरामीटर का इस्तेमाल करें.
+इससे, Google पर होस्ट किया गया यूआरआई मिलता है. इसे डाउनलोड करने से पहले, वीडियो के `ACTIVE` होने तक पोल किया जा सकता है.
 
 ### Python
 
@@ -704,7 +687,7 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/files/$FILE_ID:
 echo "Done! Video saved to output.mp4"
 ```
 
-**Struttura JSON REST non elaborata (URI):**
+**REST JSON का रॉ स्ट्रक्चर (यूआरआई):**
 
 ```
 {
@@ -729,116 +712,109 @@ echo "Done! Video saved to output.mp4"
 }
 ```
 
-## Best practice
+## सबसे सही तरीके
 
-- **Utilizza la distribuzione URI per i video di grandi dimensioni:** per i video di dimensioni superiori a 4 MB (>720p
-  se disponibili), utilizza `delivery="uri"` in `response_format` per evitare limiti
-  alle dimensioni del payload.
-- **Rendimento ottimizzato:** imposta `background=false`, `store=false` e
-  `stream=false` per una generazione sincrona e più rapida di numeri binari. Tieni presente che l'impostazione
-  `store=false` significa che il video generato non sarà modificabile nei turni
-  successivi utilizzando `previous_interaction_id`.
-- **Precisione dei prompt**:consulta la sezione [Indicazioni per i prompt](#prompt-guide) per
-  maggiori dettagli.
+- **बड़े वीडियो के लिए यूआरआई डिलीवरी का इस्तेमाल करना:** 4 एमबी से बड़े वीडियो (>720p
+  उपलब्ध होने पर) के लिए, पेलोड
+  साइज़ की सीमाओं से बचने के लिए, `delivery="uri"` में `response_format` का इस्तेमाल करें.
+- **ऑप्टिमाइज़ की गई परफ़ॉर्मेंस:** तेज़ और सिंक्रोनस यूनरी जनरेशन के लिए, `background=false`, `store=false`, और `stream=false` सेट करें. ध्यान दें कि `store=false` सेट करने का मतलब है कि जनरेट किए गए वीडियो को, `previous_interaction_id` का इस्तेमाल करके, बाद में एडिट नहीं किया जा सकेगा.
+- **प्रॉम्प्ट की सटीक जानकारी:** ज़्यादा जानकारी के लिए, [प्रॉम्प्ट के लिए गाइडेंस](#prompt-guide) सेक्शन देखें.
 
-## Limitazioni
+## सीमाएं
 
-- Il caricamento e la modifica di immagini contenenti minori non sono supportati nello Spazio economico europeo, in Svizzera e nel Regno Unito.
-- Il caricamento e la modifica di immagini contenenti determinate persone riconoscibili non sono supportati.
-- La modifica dei video caricati non è attualmente disponibile per gli utenti nello Spazio economico europeo (SEE), in Svizzera e nel Regno Unito (la modifica dei video generati dal modello è supportata).
-- Il caricamento di riferimenti audio non è supportato nella versione attuale dell'API.
-- I riferimenti video di durata massima di 3 secondi sono accettati dallo schema dell'API, ma al momento non vengono elaborati correttamente dal modello.
-- Non è supportato il riferimento o il ragionamento su più video. Il tentativo di utilizzare prompt multi-video potrebbe comportare un peggioramento delle prestazioni del modello o output imprevisti.
-- L'estensione video e l'interpolazione video (generazione di video tra il primo e l'ultimo fotogramma) non sono supportate.
-- La modifica vocale non è supportata.
-- Il throughput di cui è stato eseguito il provisioning non è supportato.
-- Le istruzioni di sistema, la temperatura, `top_p`, le sequenze di interruzione e i prompt negativi non sono supportati (puoi inserire i prompt negativi nel prompt normale, ad esempio "Non fare X").
-- L'utilizzo di video di YouTube come origine media non è supportato.
+- यूरोपियन इकनॉमिक एरिया, स्विट्ज़रलैंड, और यूनाइटेड किंगडम में, नाबालिगों की इमेज अपलोड और एडिट नहीं की जा सकतीं.
+- कुछ पहचाने जा सकने वाले लोगों की इमेज अपलोड और एडिट नहीं की जा सकतीं.
+- फ़िलहाल, यूरोपियन इकनॉमिक एरिया (ईईए), स्विट्ज़रलैंड, और यूनाइटेड किंगडम में रहने वाले लोग, अपलोड किए गए वीडियो को एडिट नहीं कर सकते. हालांकि, मॉडल से जनरेट किए गए वीडियो को एडिट किया जा सकता है.
+- एपीआई के मौजूदा वर्शन में, ऑडियो रेफ़रंस अपलोड नहीं किए जा सकते.
+- एपीआई स्कीमा में, तीन सेकंड तक की अवधि वाले वीडियो रेफ़रंस स्वीकार किए जाते हैं. हालांकि, फ़िलहाल मॉडल इन्हें सही तरीके से प्रोसेस नहीं करता.
+- एक से ज़्यादा वीडियो के लिए रेफ़रंस या तर्क देने की सुविधा उपलब्ध नहीं है. एक से ज़्यादा वीडियो के लिए प्रॉम्प्ट देने की कोशिश करने पर, मॉडल की परफ़ॉर्मेंस खराब हो सकती है या अनचाहे आउटपुट मिल सकते हैं.
+- वीडियो एक्सटेंशन और वीडियो इंटरपोलेशन (पहले और आखिरी फ़्रेम के बीच वीडियो जनरेट करना) की सुविधा उपलब्ध नहीं है.
+- आवाज़ में बदलाव करने की सुविधा उपलब्ध नहीं है.
+- प्रोविज़न किए गए थ्रूपुट की सुविधा उपलब्ध नहीं है.
+- सिस्टम के निर्देश, तापमान, `top_p`, स्टॉप सीक्वेंस, और नेगेटिव प्रॉम्प्ट की सुविधा उपलब्ध नहीं है.हालांकि, नेगेटिव प्रॉम्प्ट को सामान्य प्रॉम्प्ट में शामिल किया जा सकता है. जैसे, "X न करें".
+- YouTube वीडियो को मीडिया सोर्स के तौर पर इस्तेमाल करने की सुविधा उपलब्ध नहीं है.
 
-## Dettagli tecnici
+## तकनीकी जानकारी
 
-- Tutti i video generati includono il watermarking SynthID, che è invisibile agli spettatori, ma può essere rilevato a livello di programmazione per la verifica della provenienza.
-- I tempi di generazione dei video variano in base a durata, risoluzione e carico attuale dell'API. I video più lunghi e con una risoluzione più elevata richiedono più tempo per essere generati.
-- I filtri di sicurezza dei contenuti vengono applicati sia ai prompt di input sia al video generato (e dipendono dalla tua regione). I prompt che violano le norme di utilizzo verranno bloccati.
-- L'inglese (EN) è completamente supportato, ma altre lingue non sono state valutate, quindi potrebbero funzionare, ma i risultati possono variare.
+- जनरेट किए गए सभी वीडियो में SynthID वॉटरमार्क शामिल होता है. यह वॉटरमार्क, दर्शकों को नहीं दिखता. हालांकि, ओरिजन की पुष्टि करने के लिए, इसे प्रोग्राम के ज़रिए डिटेक्ट किया जा सकता है.
+- वीडियो जनरेट होने में लगने वाला समय, अवधि, रिज़ॉल्यूशन, और एपीआई के मौजूदा लोड के आधार पर अलग-अलग होता है. ज़्यादा अवधि और ज़्यादा रिज़ॉल्यूशन वाले वीडियो जनरेट होने में ज़्यादा समय लगता है.
+- इनपुट प्रॉम्प्ट और जनरेट किए गए वीडियो, दोनों पर कॉन्टेंट की सुरक्षा के फ़िल्टर लागू होते हैं. ये फ़िल्टर, आपके देश/इलाके के हिसाब से लागू होते हैं. इस्तेमाल की नीतियों का उल्लंघन करने वाले प्रॉम्प्ट ब्लॉक कर दिए जाएंगे.
+- अंग्रेज़ी (ईएन) पूरी तरह से काम करती है. हालांकि, अन्य भाषाओं की जांच नहीं की गई है. इसलिए, वे काम कर सकती हैं, लेकिन नतीजे अलग-अलग हो सकते हैं.
 
-## Guida ai prompt di Gemini Omni Flash
+## Gemini Omni Flash के लिए प्रॉम्प्ट गाइड
 
-Questa sezione contiene suggerimenti ed esempi su come utilizzare Gemini Omni Flash in modo efficace.
+इस सेक्शन में, Gemini Omni Flash के लिए असरदार तरीके से प्रॉम्प्ट लिखने के बारे में सलाह और उदाहरण दिए गए हैं.
 
-### Singola scena
+### एक सीन
 
-Per impostazione predefinita, Omni Flash tenterà di creare un video con diverse inquadrature.
-Tenterà di creare una narrazione interessante basata sul prompt.
+डिफ़ॉल्ट रूप से, Omni Flash कुछ अलग-अलग शॉट वाला वीडियो बनाने की कोशिश करेगा.
+यह प्रॉम्प्ट के आधार पर, दिलचस्प कहानी बनाने की कोशिश करेगा.
 
-Se vuoi che il video di output contenga una sola scena, devi specificarlo nel prompt:
+अगर आपको आउटपुट वीडियो में एक ही सीन चाहिए, तो इसके लिए प्रॉम्प्ट में यह जानकारी शामिल करें:
 
-- In un'unica scena ininterrotta
-- In una singola ripresa continua
-- Nessun taglio di scena
+- एक ही सीन में
+- एक ही शॉट में
+- सीन में कोई कट नहीं
 
-Ad esempio:
+उदाहरण के लिए:
 
 ```
 Continuous, unbroken handheld shot of a fluffy tabby cat sitting on a sunny windowsill, looking out into a leafy garden. The cat's tail twitches slowly, and its ears rotate slightly toward ambient noises. Sunbeams illuminate dust motes in the air. Sound design: Gentle breeze, distant bird chirps. No dialogue.
 ```
 
-### Rimozione degli elementi indesiderati
+### अनचाहे एलिमेंट हटाना
 
-Se il video generato contiene elementi che non vuoi, includi semplici prompt negativi per evitarli:
+अगर जनरेट किए गए वीडियो में ऐसी चीज़ें शामिल हैं जो आपको नहीं चाहिए, तो उन्हें हटाने के लिए, सामान्य नेगेटिव प्रॉम्प्ट शामिल करें:
 
-- Nessun dialogo
-- Nessuna decorazione
-- Nessun effetto sonoro aggiuntivo
+- कोई डायलॉग नहीं
+- कोई सजावट नहीं
+- कोई अतिरिक्त साउंड इफ़ेक्ट नहीं
 
-### Prompt per la modifica
+### एडिटिंग के लिए प्रॉम्प्ट
 
-I prompt semplici funzionano meglio per l'editing video. Prompt eccessivamente descrittivi possono portare a modifiche indesiderate.
+वीडियो एडिटिंग के लिए, सामान्य प्रॉम्प्ट सबसे सही तरीके से काम करते हैं. ज़्यादा जानकारी वाले प्रॉम्प्ट से, अनचाहे बदलाव हो सकते हैं.
 
-Di seguito sono riportati altri esempi di prompt di modifica semplici:
+यहां एडिटिंग के लिए सामान्य प्रॉम्प्ट के कुछ और उदाहरण दिए गए हैं:
 
-- Trasforma questo video in un anime
-- Metti un cappello alla moda a questa persona
-- Modifica l'illuminazione per renderla più drammatica
-- Modifica il testo sul cartello in modo che dica "Omni Flash"
+- इस वीडियो को ऐनिमे में बदलो
+- इस व्यक्ति को फ़ैशन वाला हैट पहनाओ
+- लाइटिंग को ज़्यादा ड्रामैटिक बनाओ
+- साइन पर मौजूद टेक्स्ट को बदलकर "Omni Flash" लिखो
 
-Quando modifichi un aspetto specifico del video, includi `"Keep everything else the same"` per mantenere la coerenza visiva.
+वीडियो के किसी खास पहलू को एडिट करते समय, विज़ुअल कंसिस्टेंसी बनाए रखने के लिए, `"Keep everything else the same"` शामिल करें.
 
-Di seguito sono riportati alcuni esempi per mostrare come applicare questa tecnica:
+यहां कुछ उदाहरण दिए गए हैं, जिनसे पता चलता है कि इस तकनीक को कैसे लागू किया जाता है:
 
-- **Pratiche non consigliate:** `In the video of the man sitting on the sofa, please add a small
+- **ऐसा करने से बचें:** `In the video of the man sitting on the sofa, please add a small
   black cat that runs from the right side of the screen, jumps onto his lap,
   and then he starts to stroke its head while looking down.`
-  - **Semplifica:** `Add a cat that jumps onto his lap, he begins to pet it.
+  - **आसान बनाएं:** `Add a cat that jumps onto his lap, he begins to pet it.
     Keep everything else the same.`
-- **Pratiche non consigliate:** `Please remove the cell phone that the person is holding in
+- **ऐसा करने से बचें:** `Please remove the cell phone that the person is holding in
   their hand and fill in the background so it looks like they are just holding
   their hand empty.`
-  - **Semplifica:** `Make the phone invisible. Keep everything else the
+  - **आसान बनाएं:** `Make the phone invisible. Keep everything else the
     same.`
 
-### Richiesta dell'audio
+### ऑडियो के लिए प्रॉम्प्ट
 
-Per impostazione predefinita, il modello tenterà di generare una traccia audio appropriata per un video. Potrebbe non essere sempre quello che vuoi. Puoi utilizzare il prompt per
-descrivere il tipo di audio che vuoi. Ciò è particolarmente importante se vuoi
-inserire musica nel tuo video:
+डिफ़ॉल्ट रूप से, मॉडल किसी वीडियो के लिए सही ऑडियो ट्रैक जनरेट करने की कोशिश करेगा. यह हमेशा आपकी ज़रूरत के हिसाब से नहीं हो सकता. प्रॉम्प्ट का इस्तेमाल करके, यह बताया जा सकता है कि आपको किस तरह का ऑडियो चाहिए. अगर आपको अपने वीडियो में संगीत चाहिए, तो यह खास तौर पर ज़रूरी है:
 
-- Includi musica di sottofondo rilassante
-- Il video ha un ritmo techno ad alta energia
-- L'audio è una trasmissione radiofonica di bassa qualità in sottofondo, che riproduce una canzone
+- शांत बैकग्राउंड संगीत शामिल करें
+- वीडियो में हाई एनर्जी वाला टेक्नो बीट है
+- ऑडियो, बैकग्राउंड में बजने वाला कम क्वालिटी वाला रेडियो ब्रॉडकास्ट है, जिसमें एक गाना बज रहा है
 
-### Eventi di temporizzazione
+### इवेंट का समय तय करना
 
-Puoi richiedere che determinate azioni vengano eseguite in momenti specifici del video. Non è necessaria una sintassi precisa e puoi utilizzare il linguaggio naturale. Questa funzionalità è particolarmente
-utile per creare tagli di scena, ritmi o sequenze rapide.
-Vedi di seguito alcuni esempi:
+वीडियो में किसी खास समय पर होने वाली चीज़ों के लिए प्रॉम्प्ट दिया जा सकता है. इसके लिए, सटीक सिंटैक्स की ज़रूरत नहीं होती. साथ ही, नैचुरल लैंग्वेज का इस्तेमाल किया जा सकता है. यह सुविधा, सीन कट, रिदम या रैपिड फ़ायर सीक्वेंस बनाने में खास तौर पर काम आती है.
+उदाहरण के लिए, यह देखें:
 
-- Dopo 3 secondi, entra in scena una donna.
-- Al secondo 5 inizia il ritornello nell'audio in background.
-- Ogni 2 secondi viene visualizzato un nuovo fotogramma.
-- In una sequenza di scatti rapidi, ogni mezzo secondo (12 frame a 24 fps) cambia la scena in una nuova posizione.
+- तीन सेकंड बाद, एक महिला सीन में आती है.
+- पांचवें सेकंड पर, बैकग्राउंड ऑडियो में कोरस शुरू होता है.
+- हर दो सेकंड में, नया फ़्रेम दिखाएं.
+- रैपिड फ़ायर सीक्वेंस में, हर आधे सेकंड (24fps पर 12 फ़्रेम) में सीन को नई जगह पर बदलें.
 
-Puoi anche utilizzare una sintassi del timecode:
+टाइमकोड सिंटैक्स का भी इस्तेमाल किया जा सकता है:
 
 ```
 [0-3s] A person is walking
@@ -846,46 +822,38 @@ Puoi anche utilizzare una sintassi del timecode:
 [6-10s] They start running
 ```
 
-### Meta-prompting
+### मेटा प्रॉम्प्टिंग
 
-Puoi chiedere a Gemini Omni Flash di prestare attenzione a qualità generali o
-principi di generazione video:
+Gemini Omni Flash से, वीडियो जनरेट करने की सामान्य क्वालिटी या सिद्धांतों पर ध्यान देने के लिए कहा जा सकता है:
 
-- Considera i microdettagli, l'espressione e la tempistica per creare una scena molto ricca e dettagliata, ma del tutto naturale.
-- Fornisci descrizioni estremamente dettagliate di personaggi e ambienti.
-  Applica i principi di progettazione dei costumi ai personaggi. Descrivi in modo molto specifico
-  le persone, gli articoli e gli oggetti nella scena.
-- Includi molti dettagli appropriati negli elementi di sfondo per rendere la scena realistica e naturale.
-- Crea un video in rapida successione che mostri un diverso `[thing]` raro ogni secondo, con musica
-  allegra e testo per etichettare l'oggetto.
+- बहुत ज़्यादा जानकारी वाला, लेकिन पूरी तरह से असली दिखने वाला सीन बनाने के लिए, माइक्रो-डिटेल, एक्सप्रेशन, और टाइमिंग का ध्यान रखें.
+- किरदारों और एनवायरमेंट के ब्यौरे में ज़्यादा से ज़्यादा जानकारी दें.
+  किरदारों पर कॉस्ट्यूम डिज़ाइन के सिद्धांत लागू करें. सीन में मौजूद लोगों, आइटम, और ऑब्जेक्ट के बारे में साफ़ तौर पर जानकारी दें.
+- सीन को असली और नैचुरल दिखाने के लिए, बैकग्राउंड एलिमेंट में सही जानकारी शामिल करें.
+- रैपिड फ़ायर वीडियो बनाएं, जिसमें हर एक सेकंड में एक अलग और दुर्लभ `[thing]` दिखे. इसमें अपबीट संगीत शामिल करें. साथ ही, चीज़ को लेबल करने के लिए टेक्स्ट शामिल करें.
 
-### Testo nei video
+### वीडियो में टेक्स्ट
 
-Puoi chiedere di includere del testo nel video e Gemini Omni lo renderà in modo corretto e leggibile. Se nel video è presente del testo naturale, anche negli elementi di sfondo, può essere utile definire cosa deve dire.
+वीडियो में टेक्स्ट शामिल करने के लिए प्रॉम्प्ट दिया जा सकता है. Gemini Omni, टेक्स्ट को सही और पढ़ने लायक तरीके से रेंडर करेगा. अगर आपके वीडियो में नैचुरल तरीके से टेक्स्ट दिखेगा, तो यह तय करने में मदद मिल सकती है कि उसे क्या कहना चाहिए. भले ही, यह टेक्स्ट बैकग्राउंड एलिमेंट में हो.
 
-- Una parola alla volta sullo schermo: "did, you, know, that, Omni, can, do,
-  awesome, text?" (lo sapevi che Omni può creare testi fantastici?) Ogni parola viene visualizzata per 1 secondo con uno stile animato diverso. Nessun
-  dialogo.
-- C'è un segnale stradale con la scritta: "This is an AI generation by Omni" (Questa è una generazione di AI di Omni),
-  una vetrina con la scritta: "All you need AI" (Tutto ciò che ti serve è l'AI), un'auto con la targa
-  "OMN111".
+- स्क्रीन पर एक बार में एक शब्द: "did, you, know, that, Omni, can, do, awesome, text?" हर शब्द, एक सेकंड के लिए अलग-अलग ऐनिमेटेड स्टाइल में दिखता है. कोई डायलॉग नहीं.
+- सड़क पर एक साइन है, जिस पर लिखा है: "This is an AI generation by Omni". एक स्टोरफ़्रंट है, जिस पर लिखा है: "All you need AI". एक कार है, जिसकी नंबर प्लेट पर लिखा है: "OMN111"
 
-### Utilizzare i tag nei prompt per impostare i ruoli delle immagini
+### इमेज के रोल सेट करने के लिए, प्रॉम्प्ट में टैग का इस्तेमाल करना
 
-Puoi utilizzare i tag per associare i contenuti multimediali caricati a ruoli di generazione specifici. In questo modo puoi specificare se ogni immagine è un frame iniziale o un riferimento.
+अपलोड किए गए मीडिया को जनरेशन के खास रोल से बाइंड करने के लिए, टैग का इस्तेमाल किया जा सकता है. इससे, यह तय किया जा सकता है कि हर इमेज, शुरुआती फ़्रेम है या रेफ़रंस.
 
-#### 1. Tag semplici (consigliati)
+#### 1. सामान्य टैग (सुझाया गया)
 
-Per i casi semplici in cui i ruoli delle immagini sono chiari dal prompt, puoi associare
-le immagini ai ruoli direttamente:
+ऐसे सामान्य मामलों में जहां प्रॉम्प्ट से इमेज के रोल साफ़ तौर पर पता चलते हैं, वहां इमेज को सीधे रोल से बाइंड किया जा सकता है:
 
-- **`<FIRST_FRAME>`**: utilizza l'immagine come fotogramma iniziale del video, ad esempio: `<FIRST_FRAME> a woman is walking`
-- **`<IMAGE_REF_N>`**: utilizza l'immagine come riferimento, ad esempio: `in the
-  style of <IMAGE_REF_0> a woman <IMAGE_REF_1> is walking` (combina il riferimento allo stile
-  della prima immagine e il riferimento al soggetto della seconda immagine).
-  I riferimenti alle immagini iniziano da 0.
+- **`<FIRST_FRAME>`**: वीडियो के शुरुआती फ़्रेम के तौर पर इमेज का इस्तेमाल करें. उदाहरण के लिए: `<FIRST_FRAME> a woman is walking`
+- **`<IMAGE_REF_N>`**: रेफ़रंस के तौर पर इमेज का इस्तेमाल करें. उदाहरण के लिए: `in the
+  style of <IMAGE_REF_0> a woman <IMAGE_REF_1> is walking` (पहली इमेज से स्टाइल
+  रेफ़रंस और दूसरी इमेज से सब्जेक्ट रेफ़रंस को जोड़ता है).
+  इमेज रेफ़रंस की शुरुआत 0 से होती है.
 
-Di seguito è riportato un esempio con 6 immagini di riferimento:
+यहां छह रेफ़रंस इमेज वाला उदाहरण दिया गया है:
 
 ```
 [0-3s] A studio fashion sequence. Starting with woman <IMAGE_REF_0>, she is holding <IMAGE_REF_1>
@@ -893,38 +861,37 @@ Di seguito è riportato un esempio con 6 immagini di riferimento:
 [6-10s] And finally another woman <IMAGE_REF_4> who is holding <IMAGE_REF_5> while walking.
 ```
 
-#### 2. Dichiarazioni esplicite
+#### 2. साफ़ तौर पर एलान
 
-Per i casi più complessi con più immagini e più ruoli, puoi utilizzare
-tag di prefisso espliciti abbinati a suffissi di istruzioni in linguaggio naturale.
+एक से ज़्यादा इमेज और एक से ज़्यादा रोल वाले ज़्यादा मुश्किल मामलों के लिए, नैचुरल लैंग्वेज वाले निर्देश सफ़िक्स के साथ, साफ़ तौर पर प्रीफ़िक्स टैग का इस्तेमाल किया जा सकता है.
 
-- **Dichiarazione di fonti e immagini di riferimento**:
-  - `[# Sources <FIRST_FRAME>@Image1]` utilizzerà la prima immagine come fotogramma iniziale.
-  - `[# References <IMAGE_REF_0>@Image1]` utilizzerà la prima immagine come riferimento.
-  - `[# References <IMAGE_REF_1>@Image2]` utilizzerà la seconda immagine come riferimento.
-  - `[# References <IMAGE_REF_0>@Image1 <IMAGE_REF_1>@Image2]` utilizzerà entrambe le immagini come riferimenti.
-  - `[# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2]` utilizzerà la prima immagine come fotogramma iniziale e la seconda come riferimento.
-- **Istruzioni guida**: aggiungi istruzioni guida alla fine del prompt:
-  - Per il frame iniziale: `"Use this image as the starting frame."`
-  - Per le immagini di riferimento: `"Use the given image(s) as references for video generation. The images should not be used as literal initial frames."`
+- **सोर्स और रेफ़रंस इमेज का एलान करना**:
+  - `[# Sources <FIRST_FRAME>@Image1]` पहली इमेज को शुरुआती फ़्रेम के तौर पर इस्तेमाल करेगा.
+  - `[# References <IMAGE_REF_0>@Image1]` पहली इमेज को रेफ़रंस के तौर पर इस्तेमाल करेगा.
+  - `[# References <IMAGE_REF_1>@Image2]` दूसरी इमेज को रेफ़रंस के तौर पर इस्तेमाल करेगा.
+  - `[# References <IMAGE_REF_0>@Image1 <IMAGE_REF_1>@Image2]` दोनों इमेज को रेफ़रंस के तौर पर इस्तेमाल करेगा.
+  - `[# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2]` पहली इमेज को शुरुआती फ़्रेम के तौर पर और दूसरी इमेज को रेफ़रंस के तौर पर इस्तेमाल करेगा.
+- **निर्देश**: अपने प्रॉम्प्ट के आखिर में निर्देश जोड़ें:
+  - शुरुआती फ़्रेम के लिए: `"Use this image as the starting frame."`
+  - रेफ़रंस इमेज के लिए: `"Use the given image(s) as references for video generation. The images should not be used as literal initial frames."`
 
-Esempio di prompt espanso:
+प्रॉम्प्ट का बड़ा उदाहरण:
 
 ```
 [# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2] a woman <IMAGE_REF_0> is walking. Use Image1 as the starting frame. Use Image2 as a reference for the video generation.
 ```
 
-## Passaggi successivi
+## आगे क्या करना है
 
-- Inizia a utilizzare Gemini Omni Flash sperimentando in [Omni Quickstart Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Omni.ipynb?hl=it).
-- Scopri come scrivere prompt ancora migliori con la nostra [Introduzione alla progettazione dei prompt](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=it).
+- [Omni Quickstart Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Omni.ipynb?hl=hi) में एक्सपेरिमेंट करके, Gemini Omni Flash का इस्तेमाल शुरू करें.
+- प्रॉम्प्ट डिज़ाइन के बारे में जानकारी देने वाले हमारे [लेख](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=hi) की मदद से, और भी बेहतर प्रॉम्प्ट लिखने का तरीका जानें.
 
-Invia feedback
+सुझाव भेजें
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Ultimo aggiornamento 2026-07-30 UTC.
+आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया.
 
-Vuoi dirci altro?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया."],[],[]]

@@ -1,25 +1,25 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=ja
-fetched_at: 2026-08-10T03:18:46.327909+00:00
-title: "\u97f3\u58f0\u306e\u7406\u89e3 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=it
+fetched_at: 2026-08-17T02:35:23.860550+00:00
+title: "Comprensione dell'audio \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-フィードバックを送信
+Invia feedback
 
-# 音声の理解
+# Comprensione dell'audio
 
-Gemini は音声入力を分析し、テキスト レスポンスを生成できます。
+Gemini può analizzare l'input audio e generare risposte di testo.
 
 ### Python
 
@@ -67,7 +67,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### Vai
 
 ```
 package main
@@ -166,24 +166,25 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## 概要
+## Panoramica
 
-Gemini は音声入力を分析して理解し、それに対するテキスト レスポンスを生成できます。これにより、次のようなユースケースが可能になります。
+Gemini può analizzare e comprendere l'input audio e generare risposte di testo, consentendo casi d'uso come i seguenti:
 
-- 音声コンテンツの説明、要約、質問への回答。
-- 音声の文字起こしと翻訳（音声テキスト変換）の提供。
-- 音声と音楽の感情の検出。
-- 音声の特定のセグメントの分析とタイムスタンプの提供。
+- Descrivere, riepilogare o rispondere a domande sui contenuti audio.
+- Fornire una trascrizione e una traduzione dell'audio (conversione della voce in testo).
+- Rilevare le emozioni nella voce e nella musica.
+- Analizzare segmenti specifici dell'audio e fornire timestamp.
 
-現在のところ、Gemini API はリアルタイムの文字起こしユースケースをサポートしていません。
-リアルタイムの音声と動画のインタラクションについては、[Live API](https://ai.google.dev/gemini-api/docs/live?hl=ja) をご覧ください。
-リアルタイムの文字起こしをサポートする専用の音声テキスト変換モデルについては、
-[Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=ja)を使用してください。
+Al momento, l'API Gemini non supporta i casi d'uso di trascrizione in tempo reale.
+Per le interazioni vocali e video in tempo reale, consulta l'[API Live](https://ai.google.dev/gemini-api/docs/live?hl=it).
+Per i modelli di conversione della voce in testo dedicati con supporto per la trascrizione in tempo reale,
+utilizza l'[API Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text?hl=it).
 
-## 音声をテキストに変換する
+## Trascrivere la voce in testo
 
-[このサンプル アプリケーションは、構造化された出力を使用して、タイムスタンプや感情検出など、音声を文字起こし、
-翻訳、要約するように Gemini API にプロンプトを表示する方法を示しています。](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)
+Questa applicazione di esempio mostra come richiedere all'API Gemini di trascrivere,
+tradurre e riepilogare la voce, inclusi timestamp e rilevamento delle emozioni
+utilizzando [output strutturati](https://ai.google.dev/gemini-api/docs/structured-output?hl=it).
 
 ### Python
 
@@ -411,30 +412,31 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-[AI Studio Build](https://aistudio.google.com/apps?e=0&hl=ja) にプロンプトを表示して、
-[このサンプル文字起こしアプリ](https://aistudio.google.com/apps/bundled/echoscript?hl=ja)
-のようなアプリをボタンをクリックするだけで作成できます。
+Puoi richiedere a [AI Studio Build](https://aistudio.google.com/apps?e=0&hl=it) di creare
+un'app proprio come
+[questa app di trascrizione di esempio](https://aistudio.google.com/apps/bundled/echoscript?hl=it)
+con un clic di un pulsante.
 
-![多言語音声文字変換 Gemini アプリ](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=ja)
+![Un'app Gemini per la trascrizione audio multilingue](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=it)
 
-## 入力音声
+## Audio di input
 
-Gemini に音声データを提供するには、次の方法があります。
+Puoi fornire dati audio a Gemini nei seguenti modi:
 
-- [音声ファイルをアップロード](#upload-audio)してから、
-  `generateContent`にリクエストを行います。
-- [インライン音声データ](#inline-audio)を
-  `generateContent`へのリクエストで渡します。
+- [Carica un file audio](#upload-audio) prima di inviare una richiesta a
+  `generateContent`.
+- [Trasmetti i dati audio in linea](#inline-audio) con la richiesta a
+  `generateContent`.
 
-他のファイル入力方法については、
-[ファイル入力方法](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ja)ガイドをご覧ください。
+Per scoprire di più su altri metodi di input dei file, consulta la
+[guida Metodi di input dei file](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=it).
 
-### 音声ファイルをアップロードする
+### Caricare un file audio
 
-[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja) を使用して音声ファイルをアップロードできます。
-リクエストの合計サイズ（ファイル、テキスト プロンプト、システム指示などを含む）が 20 MB を超える場合は、常に Files API を使用してください。
+Puoi utilizzare l'[API Files](https://ai.google.dev/gemini-api/docs/files?hl=it) per caricare un file audio.
+Utilizza sempre l'API Files quando la dimensione totale della richiesta (inclusi file, prompt di testo, istruzioni di sistema e così via) è superiore a 20 MB.
 
-次のコードは、音声ファイルをアップロードし、そのファイルを `generateContent` の呼び出しで使用します。
+Il seguente codice carica un file audio e poi lo utilizza in una chiamata a `generateContent`.
 
 ### Python
 
@@ -482,7 +484,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### Vai
 
 ```
 package main
@@ -581,12 +583,12 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-メディア ファイルの操作の詳細については、
-[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja) をご覧ください。
+Per scoprire di più su come lavorare con i file multimediali, consulta
+[l'API Files](https://ai.google.dev/gemini-api/docs/files?hl=it).
 
-### 音声データをインラインで渡す
+### Trasmettere dati audio in linea
 
-音声ファイルをアップロードする代わりに、`generateContent` へのリクエストでインライン音声データを渡すことができます。
+Anziché caricare un file audio, puoi trasmettere i dati audio in linea nella richiesta a `generateContent`:
 
 ### Python
 
@@ -640,7 +642,7 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-### Go
+### Vai
 
 ```
 package main
@@ -685,15 +687,15 @@ func main() {
 }
 ```
 
-インライン音声データに関する留意事項は次のとおりです。
+Ecco alcuni aspetti da tenere presente sui dati audio in linea:
 
-- リクエストの最大サイズは 20 MB です。これには、テキスト プロンプト、システム指示、インラインで提供されるファイルが含まれます。ファイルのサイズが原因で*リクエストの合計サイズ*が 20 MB を超える場合は、Files API を使用して、リクエストで使用する[音声ファイルをアップロード](#upload-audio)してください。
-- 音声サンプルを複数回使用する場合は、
-  音声ファイルを[アップロードする](#upload-audio)方が効率的です。
+- La dimensione massima della richiesta è di 20 MB, inclusi prompt di testo, istruzioni di sistema e file forniti in linea. Se la dimensione del file fa sì che la *dimensione totale della richiesta* superi i 20 MB, utilizza l'API Files per [caricare un file audio](#upload-audio) da utilizzare nella richiesta.
+- Se utilizzi un campione audio più volte, è più efficiente
+  [caricare un file audio](#upload-audio).
 
-## 文字起こしを取得する
+## Ottenere una trascrizione
 
-音声データの文字起こしを取得するには、プロンプトでリクエストします。
+Per ottenere una trascrizione dei dati audio, basta richiederla nel prompt:
 
 ### Python
 
@@ -737,7 +739,7 @@ const result = await ai.models.generateContent({
 console.log("result.text=", result.text);
 ```
 
-### Go
+### Vai
 
 ```
 package main
@@ -782,12 +784,12 @@ func main() {
 }
 ```
 
-## タイムスタンプを参照する
+## Fare riferimento ai timestamp
 
-`MM:SS` 形式のタイムスタンプを使用して、音声ファイルの特定のセクションを参照できます。たとえば、次のプロンプトは、次のような文字起こしをリクエストします。
+Puoi fare riferimento a sezioni specifiche di un file audio utilizzando timestamp nel formato `MM:SS`. Ad esempio, il seguente prompt richiede una trascrizione che
 
-- ファイルの先頭から 2 分 30 秒で開始します。
-- ファイルの先頭から 3 分 29 秒で終了します。
+- Inizia a 2 minuti e 30 secondi dall'inizio del file.
+- Termina a 3 minuti e 29 secondi dall'inizio del file.
 
 ### Python
 
@@ -803,7 +805,7 @@ prompt = "Provide a transcript of the speech from 02:30 to 03:29."
 const prompt = "Provide a transcript of the speech from 02:30 to 03:29."
 ```
 
-### Go
+### Vai
 
 ```
 package main
@@ -849,9 +851,9 @@ func main() {
 }
 ```
 
-## トークンをカウントする
+## Contare i token
 
-`countTokens` メソッドを呼び出して、音声ファイル内のトークン数を取得します。次に例を示します。
+Chiama il metodo `countTokens` per ottenere un conteggio del numero di token in un file audio. Ad esempio:
 
 ### Python
 
@@ -891,7 +893,7 @@ const countTokensResponse = await ai.models.countTokens({
 console.log(countTokensResponse.totalTokens);
 ```
 
-### Go
+### Vai
 
 ```
 package main
@@ -935,9 +937,9 @@ func main() {
 }
 ```
 
-## サポートされているオーディオ形式
+## Formati audio supportati
 
-Gemini は、次の音声形式の MIME タイプをサポートしています。
+Gemini supporta i seguenti tipi MIME di formato audio:
 
 - WAV - `audio/wav`
 - MP3 - `audio/mp3`
@@ -946,31 +948,35 @@ Gemini は、次の音声形式の MIME タイプをサポートしています�
 - OGG Vorbis - `audio/ogg`
 - FLAC - `audio/flac`
 
-## 音声に関する技術的な詳細
+## Dettagli tecnici sull'audio
 
-- Gemini は、音声の 1 秒ごとに 32 個のトークンで表します。たとえば、1 分間の音声は 1,920 個のトークンで表されます。
-- Gemini は、鳥の鳴き声やサイレンなどの音声以外の要素を「理解」できます。
-- 1 つのプロンプトでサポートされる音声データの最大長は 9.5 時間です。
-  Gemini は、1 つのプロンプト内の音声ファイルの数に制限を設けていませんが、1 つのプロンプト内のすべての音声ファイルの合計長は 9.5 時間を超えることはできません。
-- Gemini は、音声ファイルを 16 Kbps のデータ解像度にダウンサンプリングします。
-- 音声ソースに複数のチャンネルが含まれている場合、Gemini はそれらのチャンネルを 1 つのチャンネルに結合します。
+- Gemini rappresenta ogni secondo di audio come 32 token; ad esempio, un minuto di audio è rappresentato da 1920 token.
+- Gemini può "comprendere" i componenti non vocali, come il canto degli uccelli o le sirene.
+- La lunghezza massima supportata dei dati audio in un singolo prompt è di 9,5 ore.
+  Gemini non limita il *numero* di file audio in un singolo prompt; tuttavia, la lunghezza totale combinata di tutti i file audio in un singolo prompt non può superare le 9,5 ore.
+- Gemini esegue il downsampling dei file audio a una risoluzione dei dati di 16 Kbps.
+- Se la sorgente audio contiene più canali, Gemini li combina in un unico canale.
 
-## 次のステップ
+## Passaggi successivi
 
-このガイドでは、音声データに応答してテキストを生成する方法について説明します。詳細については、次のリソースをご覧ください。
+Questa guida mostra come generare testo in risposta ai dati audio. Per scoprire di più, consulta le seguenti risorse:
 
-- [ファイル プロンプトの戦略](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide): Gemini API は、テキスト、画像、音声、動画データを使用したプロンプト（マルチモーダル プロンプトとも呼ばれます）をサポートしています。
-- [システム指示](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja#system-instructions):
-  システム指示を使用すると、特定のニーズやユースケースに基づいてモデルの動作を制御できます。
-- [安全性に関するガイダンス](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=ja): 生成 AI
-  モデルは、不正確、偏見がある、不適切な出力など、予期しない出力を生成することがあります。このような出力による危害のリスクを軽減するには、後処理と人間による評価が不可欠です。
+- [Strategie di prompt dei file](https://ai.google.dev/gemini-api/docs/files?hl=it#prompt-guide): l'
+  API Gemini supporta i prompt con dati di testo, immagini, audio e video, noti
+  anche come prompt multimodali.
+- [Istruzioni di sistema](https://ai.google.dev/gemini-api/docs/text-generation?hl=it#system-instructions):
+  Le istruzioni di sistema ti consentono di indirizzare il comportamento del modello in base alle tue
+  esigenze e ai tuoi casi d'uso specifici.
+- [Linee guida sulla sicurezza](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=it): a volte i modelli di AI generativa
+  producono output imprevisti, ad esempio output imprecisi,
+  distorti o offensivi. L'elaborazione post-elaborazione e la valutazione umana sono essenziali per limitare il rischio di danni derivanti da questi output.
 
-フィードバックを送信
+Invia feedback
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-最終更新日 2026-07-30 UTC。
+Ultimo aggiornamento 2026-07-30 UTC.
 
-ご意見をお聞かせください
+Vuoi dirci altro?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-30 UTC。"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]

@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=th
-fetched_at: 2026-08-10T03:25:32.792691+00:00
-title: "\u0e01\u0e32\u0e23\u0e40\u0e23\u0e34\u0e48\u0e21\u0e15\u0e49\u0e19\u0e43\u0e0a\u0e49\u0e07\u0e32\u0e19 Agent \u0e17\u0e35\u0e48\u0e21\u0e35\u0e01\u0e32\u0e23\u0e08\u0e31\u0e14\u0e01\u0e32\u0e23\u0e2d\u0e22\u0e48\u0e32\u0e07\u0e23\u0e27\u0e14\u0e40\u0e23\u0e47\u0e27 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=pl
+fetched_at: 2026-08-17T02:16:34.846115+00:00
+title: "Szybki start z zarz\u0105dzanymi agentami \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-ส่งความคิดเห็น
+Prześlij opinię
 
-# การเริ่มต้นใช้งาน Agent ที่มีการจัดการอย่างรวดเร็ว
+# Szybki start z zarządzanymi agentami
 
-คู่มือนี้จะแนะนำคุณตลอดกระบวนการสร้างและใช้ Agent ที่ได้รับการจัดการใน Gemini API โดยใช้ [Agent ของ Antigravity](https://ai.google.dev/gemini-api/docs/agents/antigravity-agent?hl=th) คุณจะได้ทำการเรียก Agent ครั้งแรก สนทนาต่อแบบการสนทนาไปมา สตรีมคำตอบ ดาวน์โหลดไฟล์จากแซนด์บ็อกซ์ และใช้ Managed Agent ของ Antigravity
+Ten przewodnik zawiera informacje o tworzeniu i używaniu agentów zarządzanych w interfejsie Gemini API na przykładzie agenta [Antigravity](https://ai.google.dev/gemini-api/docs/agents/antigravity-agent?hl=pl). Wykonasz pierwsze wywołanie agenta, poprowadzisz wieloetapową rozmowę, będziesz stopniowo wyświetlać odpowiedź, pobierać pliki z piaskownicy i pracować z agentem zarządzanym Antigravity.
 
-## เรียกใช้การโต้ตอบกับ Agent ครั้งแรก
+## Uruchamianie pierwszej interakcji z agentem
 
-การเรียกใช้ [Interactions API](https://ai.google.dev/gemini-api/docs?hl=th) เพียงครั้งเดียวจะจัดเตรียมแซนด์บ็อกซ์ Linux, เรียกใช้ลูปของ Agent และแสดงผลลัพธ์ คุณจะต้องกำหนดพารามิเตอร์ 3 รายการ ดังนี้
+Pojedyncze wywołanie interfejsu [Interactions API](https://ai.google.dev/gemini-api/docs?hl=pl) powoduje udostępnienie piaskownicy Linux, uruchomienie pętli agenta i zwrócenie wyniku. Określisz 3 parametry:
 
-- ส่ง `agent` เป็น `"antigravity-preview-05-2026",` ซึ่งเป็นเวอร์ชันปัจจุบันของ Managed Agent ที่กำหนดไว้ล่วงหน้าและมีวัตถุประสงค์ทั่วไป
-- กำหนด `environment="remote"` เพื่อจัดเตรียมสภาพแวดล้อมแซนด์บ็อกซ์ใหม่
-- สร้างอินพุตเพื่อกำหนดสิ่งที่ต้องการให้ Agent ทำ
+- Przekaż `agent` jako `"antigravity-preview-05-2026",`, czyli aktualną wersję naszego predefiniowanego agenta zarządzanego ogólnego przeznaczenia.
+- Określ `environment="remote"`, aby udostępnić nowe środowisko piaskownicy.
+- Utwórz dane wejściowe, określając, co ma robić agent.
 
 ### Python
 
@@ -79,16 +79,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-คำตอบจะแสดงออบเจ็กต์ `Interaction` จัดเก็บ `interaction.id` และ `interaction.environment_id` เพื่อสนทนาต่อในแซนด์บ็อกซ์เดียวกัน ใช้ `interaction.output_text` เพื่อเข้าถึงคำตอบสุดท้ายของ Agent `interaction.steps` จะแสดงรายการแต่ละขั้นตอนที่ Agent ดำเนินการ (การให้เหตุผล การเรียกใช้เครื่องมือ การเรียกใช้โค้ด)
+Odpowiedź zwraca obiekt `Interaction`. Zapisz `interaction.id` i `interaction.environment_id`, aby kontynuować rozmowę w tej samej piaskownicy. Użyj `interaction.output_text`, aby uzyskać dostęp do ostatecznej odpowiedzi agenta. `interaction.steps` zawiera listę wszystkich kroków wykonanych przez agenta (rozumowanie, wywołania narzędzi, wykonanie kodu).
 
-## สนทนาต่อ (การสนทนาไปมา)
+## Kontynuowanie rozmowy (wieloetapowej)
 
-API จะติดตามมิติข้อมูลสถานะ 2 รายการแยกกัน ดังนี้
+Interfejs API śledzi 2 niezależne wymiary stanu:
 
-- **บริบทการสนทนา:** ประวัติการแชท การติดตามการให้เหตุผล การใช้เครื่องมือ โดยใช้ `previous_interaction_id`
-- [**สถานะสภาพแวดล้อม:**](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th) ไฟล์ แพ็กเกจที่ติดตั้ง และสถานะแซนด์บ็อกซ์ โดยใช้ `environment`
+- **Kontekst rozmowy:** historia czatu, ślad uzasadnienia, użycie narzędzia, użycie `previous_interaction_id`.
+- [**Stan środowiska:**](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl) pliki, zainstalowane pakiety i stan piaskownicy, użycie `environment`.
 
-ส่งทั้ง 2 รายการในตำแหน่งที่เกี่ยวข้องเพื่อดำเนินการต่อ
+Aby wznowić, przekaż oba w odpowiednim miejscu:
 
 ### Python
 
@@ -130,20 +130,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-ไฟล์จากรอบที่ 1 (`fibonacci.txt`) จะยังคงอยู่ในรอบที่ 2 นอกจากนี้ Agent ยังคงบริบทการสนทนาไว้ด้วย
+Pliki z etapu 1 (`fibonacci.txt`) są zachowywane na etapie 2. Agent zachowuje też kontekst rozmowy.
 
-คุณสามารถผสมและจับคู่รายการเหล่านี้ได้อย่างอิสระ
+Możesz je łączyć i dopasowywać niezależnie:
 
-- **ล้างการสนทนา แต่เก็บไฟล์ไว้:** ละเว้น `previous_interaction_id` และส่งเฉพาะรหัสสภาพแวดล้อมโดยใช้ `environment` เพื่อเริ่มการสนทนาใหม่ในพื้นที่ทำงานเดียวกัน
-- **เก็บการสนทนาไว้ แต่ใช้พื้นที่ทำงานใหม่:** ส่ง `previous_interaction_id` และตั้งค่า `environment="remote"` เพื่อใช้แซนด์บ็อกซ์ใหม่
+- **Wyczyść rozmowę, zachowaj pliki:** pomiń `previous_interaction_id`, przekaż tylko identyfikator środowiska za pomocą `environment`, aby rozpocząć nową rozmowę w tym samym obszarze roboczym.
+- **Zachowaj rozmowę, nowy obszar roboczy:** przekaż `previous_interaction_id`, ustaw `environment="remote"` dla nowej piaskownicy.
 
-### การบีบอัดบริบทอัตโนมัติ
+### Automatyczne kompresowanie kontekstu
 
-ในการสนทนาแบบหลายรอบที่ใช้เวลานาน ประวัติการให้เหตุผล การเรียกใช้เครื่องมือ และเนื้อหาไฟล์ขนาดใหญ่จะเพิ่มขึ้นอย่างรวดเร็วและใช้พื้นที่บริบทจำนวนมาก เพื่อป้องกันข้อผิดพลาดเกี่ยวกับขีดจำกัดโทเค็นและรักษาความสนใจของ Agent (ป้องกัน "บริบทเสื่อม") Managed Agents API จึงมีขั้นตอนการบีบอัดบริบทในตัวเมื่อมีโทเค็นประมาณ 135,000 รายการ ซึ่งจะเกิดขึ้นโดยอัตโนมัติ
+W długotrwałych rozmowach wieloetapowych surowa historia kroków rozumowania, wywołań narzędzi i zawartości dużych plików może szybko się rozrastać i zajmować znaczną przestrzeń kontekstu. Aby zapobiec błędom związanym z przekroczeniem limitu tokenów i utrzymać koncentrację agenta (zapobiegając „utracie kontekstu”), interfejs API zarządzanych agentów zawiera natywny krok kompresowania kontekstu przy około 135 tys. tokenów. Dzieje się to automatycznie.
 
-## สตรีมคำตอบ
+## Stopniowe wyświetlanie odpowiedzi
 
-สำหรับงานที่ใช้เวลานาน คุณสามารถสตรีมคำตอบเพื่อดูการทำงานของ Agent แบบเรียลไทม์ได้
+W przypadku długotrwałych zadań możesz stopniowo wyświetlać odpowiedź, aby zobaczyć, jak agent pracuje w czasie rzeczywistym:
 
 ### Python
 
@@ -201,12 +201,12 @@ curl -N -s -X POST "https://generativelanguage.googleapis.com/v1beta/interaction
 }'
 ```
 
-การสตรีมจะแสดงเดลต้าของขั้นตอนพร้อมข้อมูลอัปเดตแบบเพิ่มขึ้น เมื่อขั้นตอนเสร็จสมบูรณ์ เหตุการณ์ `step.stop` จะรวมสถิติการใช้งานที่สะสมไว้ ดูข้อมูลเพิ่มเติมได้ใน
-[คู่มือการสตรีม](https://ai.google.dev/gemini-api/docs/streaming?hl=th)
+Stopniowe wyświetlanie zwraca delty kroków z przyrostowymi aktualizacjami. Po zakończeniu kroku zdarzenie `step.stop` zawiera skumulowane statystyki wykorzystania. Więcej informacji znajdziesz w
+[przewodniku po stopniowym wyświetlaniu](https://ai.google.dev/gemini-api/docs/streaming?hl=pl).
 
-## ดาวน์โหลดไฟล์จากสภาพแวดล้อม
+## Pobieranie plików ze środowiska
 
-เมื่อ Agent สร้างไฟล์ภายในแซนด์บ็อกซ์ ให้ดาวน์โหลดไฟล์โดยใช้ Files API ด้วยคำขอ HTTP โดยตรง (ยังไม่มีเมธอด SDK)
+Gdy agent tworzy pliki w piaskownicy. Pobierz je za pomocą interfejsu Files API za pomocą bezpośredniego żądania HTTP (nie ma jeszcze metody pakietu SDK):
 
 ### Python
 
@@ -273,13 +273,13 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/files/environme
 tar -xf snapshot.tar -C extracted_snapshot
 ```
 
-## บันทึก Managed Agent
+## Zapisywanie agenta zarządzanego
 
-ในขั้นตอนก่อนหน้า เราใช้ Agent ของ Antigravity ที่เป็นค่าเริ่มต้นและปรับแต่ง Agent แบบอินไลน์ เมื่อทำซ้ำการกำหนดค่า (คำแนะนำ สกิล การเลือกโมเดล และสภาพแวดล้อม) แล้ว คุณจะบันทึกการกำหนดค่าเป็น Managed Agent ที่นำกลับมาใช้ซ้ำได้ ซึ่งจะช่วยให้คุณเรียกใช้ Agent ตามรหัสได้โดยไม่ต้องกำหนดค่าซ้ำ
+W poprzednich krokach użyliśmy domyślnego agenta Antigravity i dostosowaliśmy go w tekście. Gdy skończysz iterować konfigurację (instrukcje, umiejętności, wybór modelu i środowisko), możesz zapisać ją jako agenta zarządzanego, którego można używać wielokrotnie. Dzięki temu możesz wywoływać go za pomocą identyfikatora bez powtarzania konfiguracji.
 
-เมื่อบันทึก Agent โปรดสังเกตความสมมาตรของสถาปัตยกรรมกับการโต้ตอบแบบอินไลน์ โดยคุณจะระบุ `base_agent: "antigravity-preview-05-2026"` และส่ง `agent_config` พร้อม `model` ที่เลือกได้เช่นเดียวกับใน `interactions.create` นอกจากนี้ คุณยังกำหนด `base_environment` (จากแหล่งที่มาหรือโดยการแยกสภาพแวดล้อมที่มีอยู่) Agent จะใช้การกำหนดค่าสภาพแวดล้อมและโมเดลนี้สำหรับการโต้ตอบใหม่ทุกครั้ง
+Gdy zapisujesz agenta, zauważysz symetrię architektury z interakcjami w tekście: określasz `base_agent: "antigravity-preview-05-2026"` i możesz przekazać `agent_config` z wybranym `model`, tak jak w przypadku `interactions.create`. Określasz też `base_environment` (z źródeł lub przez rozwidlenie istniejącego środowiska). Agent będzie używać tej konfiguracji środowiska i modelu w każdej nowej interakcji.
 
-**จากแหล่งที่มา:** กำหนดแหล่งที่มาแบบอินไลน์ หรือจากแหล่งที่มาอื่นๆ เช่น GitHub หรือ Cloud Storage
+**Ze źródeł:** zdefiniuj źródła w tekście lub z innych źródeł, takich jak GitHub czy Cloud Storage.
 
 ### Python
 
@@ -375,9 +375,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 }'
 ```
 
-## เรียกใช้ Managed Agent
+## Wywoływanie agenta zarządzanego
 
-เมื่อบันทึก Managed Agent แล้ว คุณจะเรียกใช้ Agent ตามรหัสได้ การเรียกใช้แต่ละครั้งจะแยกสภาพแวดล้อมพื้นฐาน ดังนั้นการเรียกใช้ทุกครั้งจึงเริ่มต้นใหม่
+Po zapisaniu agenta zarządzanego możesz go wywołać za pomocą identyfikatora. Każde wywołanie rozwidla środowisko podstawowe, więc każde uruchomienie zaczyna się od nowa:
 
 ### Python
 
@@ -418,19 +418,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## ขั้นตอนถัดไป
+## Co dalej?
 
-- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th): ความสามารถ เครื่องมือที่รองรับ อินพุตมัลติโมดัล การกำหนดราคา และข้อจำกัด
-- [การสร้าง Agent ที่ได้รับการจัดการ](https://ai.google.dev/gemini-api/docs/custom-agents?hl=th): ขยาย Antigravity ด้วยคำแนะนำ ทักษะ และข้อมูลของคุณเอง
-- [สภาพแวดล้อม](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th): แหล่งที่มา เครือข่าย วงจรชีวิต ขีดจำกัดของทรัพยากร
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th): API พื้นฐานสำหรับโมเดลและ Agent
+- [Agent Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pl): możliwości, obsługiwane narzędzia, multimodalne wprowadzanie danych, ceny i ograniczenia.
+- [Tworzenie zarządzanych agentów](https://ai.google.dev/gemini-api/docs/custom-agents?hl=pl): rozszerzanie Antigravity o własne instrukcje, umiejętności i dane.
+- [Środowiska](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl): źródła, sieci, cykl życia, limity zasobów.
+- [Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl): podstawowy interfejs API dla modeli i agentów.
 
-ส่งความคิดเห็น
+Prześlij opinię
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-อัปเดตล่าสุด 2026-07-30 UTC
+Ostatnia aktualizacja: 2026-07-30 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Chcesz przekazać coś jeszcze?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-30 UTC"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]

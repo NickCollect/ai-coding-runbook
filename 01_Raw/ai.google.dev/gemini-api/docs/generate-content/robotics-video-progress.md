@@ -1,34 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-video-progress?hl=he
-fetched_at: 2026-08-10T03:12:28.858595+00:00
-title: "\u05d4\u05d1\u05e0\u05ea \u05e1\u05e8\u05d8\u05d5\u05e0\u05d9\u05dd \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-video-progress?hl=it
+fetched_at: 2026-08-17T02:26:43.939693+00:00
+title: "Comprensione dei video \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-שליחת משוב
+Invia feedback
 
-# הבנת סרטונים
+# Comprensione dei video
 
-‫Gemini Robotics ER 2 יכול לעקוב אחרי התקדמות המשימה מפידים רציפים של סרטונים באמצעות שתי יכולות:
+Gemini Robotics ER 2 può monitorare l'avanzamento delle attività dai feed video continui utilizzando due funzionalità:
 
-- זיהוי רגעים: זיהוי חותמת הזמן המדויקת שבה מתרחש אירוע מרכזי.
-- סיווג ההתקדמות: כל סרטון משויך לאחת מ-5 קבוצות של שיעורי צפייה (0-20%, ‏ 20-40%, ‏ 40-60%, ‏ 60-80%, ‏ 80-100%).
+- Ricerca di momenti: identifica il timestamp preciso in cui si verifica un evento chiave.
+- Classificazione dell'avanzamento: assegna a ogni video una delle cinque fasce di completamento (0-20%, 20-40%, 40-60%, 60-80%, 80-100%).
 
-## חיפוש רגעים
+## Ricerca di momenti
 
-התכונה 'איתור רגעים' מזהה את הפריים המדויק בסרטון שבו מתרחש אירוע חשוב – לדוגמה, מתי מתמלאת או מתי קושרים קשר. הרובוטים משתמשים בזה כדי לוודא שהפעולה הצליחה, כדי להגדיר את רצף השלבים וכדי להפעיל תיקונים.
+La ricerca di momenti identifica il frame video esatto in cui si verifica un evento critico, ad esempio quando una tazza è piena o viene fatto un nodo. I robot lo utilizzano per verificare il successo, sequenziare i passaggi e attivare le correzioni.
 
-ההנחיה הבאה מבקשת מהמודל לזהות את רגע ההשלמה של משימה מסוימת בסרטון:
+Il seguente prompt di esempio chiede al modello di identificare il momento di completamento di una determinata attività in un video:
 
 ```
 from google import genai
@@ -56,16 +56,15 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-בדוגמה הבאה מוצגים פריימים מסרטון שבו המודל מזהה רגעים, והמודל מזהה את חותמת הזמן של השלמת המשימה:
+Di seguito sono riportati esempi di frame di un video di ricerca di momenti, con il modello che identifica il timestamp di completamento dell'attività:
 
-![פריים לדוגמה מסרטון שמציג את הפלט של חיפוש הרגע עם שכבת-על של חותמת זמן](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-moment-finding.png?hl=he)
+![Esempio di fotogrammi video che mostrano l'output della ricerca di momenti con una sovrapposizione di timestamp](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-moment-finding.png?hl=it)
 
-## סיווג התקדמות
+## Classificazione dell'avanzamento
 
-סיווג ההתקדמות מקצה סרטון לאחת מחמש קבוצות של שיעורי השלמה:
-0-20%,‏ 20-40%,‏ 40-60%,‏ 60-80% או 80-100%. כך הרובוטים מקבלים מידע על המצב בזמן אמת, ויכולים לשנות את הפעולות או לנסות שוב שלבים שנכשלו בלי להפעיל מחדש את כל תהליך העבודה.
+La classificazione dell'avanzamento assegna un video a una delle cinque fasce di completamento: 0-20%, 20-40%, 40-60%, 60-80% o 80-100%. In questo modo, i robot hanno una consapevolezza situazionale in tempo reale, in modo da poter regolare le azioni o riprovare i passaggi non riusciti senza riavviare un intero flusso di lavoro.
 
-הפרומפט הבא מבקש מהמודל לסווג את רמת ההתקדמות הנוכחית בסרטון:
+Il seguente prompt di esempio chiede al modello di classificare il livello di avanzamento corrente di un video:
 
 ```
 from google import genai
@@ -93,26 +92,27 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-בדוגמה הבאה מוצגים פריימים מסרטון של סיווג התקדמות, עם סוגריים של התקדמות שהוקצו על ידי המודל:
+Di seguito sono riportati esempi di frame di un video di classificazione dell'avanzamento, con il modello che assegna una fascia di avanzamento:
 
-![דוגמה למסגרות של סרטון שבהן מוצג פלט סיווג ההתקדמות עם תווית של סוגר התקדמות](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-progress-classification.png?hl=he)
+![Esempio di fotogrammi video che mostrano l'output della classificazione dell'avanzamento con un'etichetta di parentesi di avanzamento](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-progress-classification.png?hl=it)
 
-## דוגמאות
+## Esempi
 
-דוגמאות מלאות להרצה, כולל מעקב אחרי משימות מרובות שלבים, זמינות ב[אוסף הפתרונות בנושא רובוטיקה](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+Per esempi eseguibili completi, incluso il monitoraggio delle attività in più passaggi, consulta il
+[ricettario di robotica](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-## המאמרים הבאים
+## Passaggi successivi
 
-- ‫[Live API for robotics](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=he) – סטרימינג דו-כיווני בזמן אמת.
-- [תיאום משימות](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=he) – משימות ארוכות טווח עם נימוקים מרחביים.
-- [סקירה כללית של Gemini Robotics ER](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=he) – השוואה בין מודלים ויכולות.
+- [API Live per la robotica](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=it): streaming bidirezionale in tempo reale.
+- [Orchestrazione delle attività](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=it): attività a lungo termine con ragionamento spaziale.
+- [Panoramica di Gemini Robotics ER](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=it): confronto e funzionalità dei modelli.
 
-שליחת משוב
+Invia feedback
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-עדכון אחרון: 2026-07-30 (שעון UTC).
+Ultimo aggiornamento 2026-07-30 UTC.
 
-רוצה לתת לנו משוב?
+Vuoi dirci altro?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-30 (שעון UTC)."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]

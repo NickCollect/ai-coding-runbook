@@ -1,114 +1,107 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/image-generation?hl=vi
-fetched_at: 2026-08-10T03:13:45.915423+00:00
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/image-generation?hl=ja
+fetched_at: 2026-08-17T02:29:18.513948+00:00
 title: "Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-# Tạo hình ảnh bằng Nano Banana
+# Nano Banana による画像生成
 
-Đưa ra câu lệnh để tạo nguyên mẫu cho các ứng dụng đầy đủ chức năng, hoàn chỉnh về giao diện người dùng và xem Nano Banana 2 được tích hợp với các công cụ, dữ liệu thực tế và hệ sinh thái Gemini. Tất cả những việc này đều diễn ra trước khi bạn viết một dòng mã.
+プロンプトを使用して、完全に機能する UI 完成済みのアプリのプロトタイプを作成し、Nano Banana 2 が実際のツール、データ、Gemini エコシステムと統合されている様子を確認します。コードを 1 行も書かずに、すべて完了しました。
 
-- [Dùng thử ứng dụng Nano Banana 2](https://aistudio.google.com/apps/bundled/pet_passport?hl=vi)
-- Hoặc tạo hình ảnh của riêng bạn từ câu lệnh:
+- [Nano Banana 2 アプリを試す](https://aistudio.google.com/apps/bundled/pet_passport?hl=ja)
+- プロンプトから独自のものを構築することもできます。
 
-- ![tạp chí](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
-  ![london](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
-  ![khôi phục](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
-  ![quả chuối](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
-  ![quán cà phê](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
-  ![bài viết](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
-  ![chó](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
-  ![đẳng cự](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
-- ![tạp chí](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+- ![雑誌](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+  ![ロンドン](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
+  ![restore](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
+  ![バナナ](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
+  ![cafe](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
+  ![記事](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
+  ![犬](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
+  ![アイソメトリック](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
+- ![雑誌](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
 
-  Do Nano Banana 2 tạo
+  Nano Banana 2 で生成
 
-  **Câu lệnh:** "Ảnh chụp một trang bìa tạp chí bóng bẩy, trang bìa màu xanh dương tối giản có dòng chữ Nano Banana lớn in đậm. Văn bản có phông chữ có chân và lấp đầy khung hiển thị. Không có văn bản nào khác. Phía trước văn bản là ảnh chân dung một người mặc chiếc váy thanh lịch và tối giản. Cô đang cầm số 2 một cách tinh nghịch, đây là tâm điểm của bức ảnh.
-    
-  Đặt số phát hành và ngày "tháng 2 năm 2026" ở góc cùng với mã vạch. Tạp chí này nằm trên một chiếc kệ dựa vào bức tường trát vữa màu cam, bên trong một cửa hàng thiết kế."
+  **プロンプト:** 「光沢のある雑誌の表紙の写真。青色のシンプルな表紙に、Nano Banana という大きな太字の単語が書かれている。」テキストはセリフフォントで、ビュー全体に表示されます。他のテキストは含めないでください。テキストの前に、洗練されたミニマルなドレスを着た人物のポートレートがあります。彼女は数字の 2 を楽しそうに持っており、それがフォーカル ポイントになっています。  
+  問題番号と「2026 年 2 月」の日付をバーコードとともに隅に配置します。雑誌は、デザイナーズ ショップ内のオレンジ色の漆喰の壁に面した棚に置かれています。」
 
-  Tạo [ảnh chụp sản phẩm chuyên nghiệp](#4_product_mockups_commercial_photography) trong [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=vi)
-- ![london](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
+  [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=ja) で[プロ仕様の商品写真](#4_product_mockups_commercial_photography)を作成する
+- ![ロンドン](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
 
-  Do Nano Banana Pro tạo
+  Nano Banana Pro で生成
 
-  **Câu lệnh:** "Tạo một cảnh hoạt hình 3D thu nhỏ, rõ nét, đẳng cự, góc nhìn 45° từ trên xuống về London, có các địa danh và yếu tố kiến trúc tiêu biểu nhất. Sử dụng các hoạ tiết tinh tế, mềm mại với chất liệu PBR chân thực, ánh sáng và bóng đổ nhẹ nhàng, sống động. Tích hợp điều kiện thời tiết hiện tại trực tiếp vào môi trường thành phố để tạo ra một bầu không khí sống động và chân thực. Sử dụng bố cục tối giản, gọn gàng với nền có màu đồng nhất và dịu nhẹ. Ở phía trên cùng ở giữa, hãy đặt tiêu đề "London" bằng văn bản in đậm cỡ lớn, một biểu tượng thời tiết nổi bật bên dưới, sau đó là ngày (chữ nhỏ) và nhiệt độ (chữ cỡ trung). Tất cả văn bản phải được căn giữa với khoảng cách nhất quán và có thể hơi chồng lên phần trên của các toà nhà."
+  **プロンプト:** 「ロンドンの最も象徴的なランドマークと建築要素を特徴とする、45 度の真上から見た等角投影のミニチュア 3D 漫画のシーンを明確に表現して。リアルな PBR マテリアルと、優しくリアルな照明と影を使用して、柔らかく洗練されたテクスチャを使用します。現在の気象条件を都市環境に直接統合して、没入感のある雰囲気を作り出します。柔らかい単色の背景を使用した、すっきりとしたミニマルな構図にします。上部中央に、大きな太字で「ロンドン」というタイトルを配置し、その下に目立つ天気アイコン、日付（小さいテキスト）、気温（中くらいのテキスト）を配置します。すべてのテキストは、一貫した間隔で中央に配置する必要があります。建物の最上部とわずかに重なることがあります。」
 
-  Tìm hiểu thêm về tính năng [căn cứ vào thông tin tìm kiếm](#use-with-grounding) và dùng thử tính năng này trong [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=vi)
-- ![quetzal](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
+  [検索グラウンディング](#use-with-grounding)の詳細を確認し、[AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=ja) で試す
+- ![ケツァール](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
 
-  Do Nano Banana 2 tạo
+  Nano Banana 2 で生成
 
-  **Câu lệnh:** "Sử dụng tính năng tìm kiếm hình ảnh để tìm hình ảnh chính xác về chim đuôi quạt rực rỡ. Tạo một hình nền đẹp mắt cho chú chim này theo tỷ lệ 3:2, có hiệu ứng chuyển màu tự nhiên từ trên xuống dưới và bố cục tối giản."
+  **プロンプト:** 「画像検索を使用して、ケツァール鳥の正確な画像を見つけてください。この鳥の美しい 3:2 の壁紙を作成してください。上から下への自然なグラデーションと、最小限の構図でお願いします。」
 
-  Sử dụng tính năng [Tìm kiếm hình ảnh](#image-search) trên Google cùng với Nano Banana 2. Dùng thử trong [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=vi)
-- ![quả chuối](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
+  Nano Banana 2 で Google [画像検索](#image-search)のグラウンディングを使用します。[AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=ja) で試す
+- ![バナナ](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
 
-  Do Nano Banana Pro tạo
+  Nano Banana Pro で生成
 
-  **Câu lệnh:** "Đặt biểu trưng này lên một quảng cáo cao cấp cho nước hoa có mùi chuối. Biểu trưng được tích hợp hoàn hảo vào chai."
+  **プロンプト:** 「このロゴをバナナの香りの香水の高級広告に配置して。ロゴがボトルに完璧に統合されています。」
 
-  Dùng thử tính năng [giữ lại chi tiết có độ trung thực cao](#5_high-fidelity_detail_preservation) của Nano Banana trong [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=vi)
-- ![quán cà phê](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
+  [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=ja) で Nano Banana の[高忠実度ディテールの保持](#5_high-fidelity_detail_preservation)を試す
+- ![cafe](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
 
-  Do Nano Banana Pro tạo
+  Nano Banana Pro で生成
 
-  **Câu lệnh:** "Một bức ảnh chụp cảnh sinh hoạt thường ngày tại một quán cà phê đông đúc phục vụ bữa sáng. Ở tiền cảnh là một người đàn ông trong phim hoạt hình có mái tóc màu xanh dương, một trong số những người này là bản phác thảo bằng bút chì, người còn lại là nhân vật hoạt hình bằng đất sét"
+  **プロンプト:** 「朝食を提供する忙しいカフェの日常風景の写真。前景には青い髪のアニメの男性がおり、人物の 1 人は鉛筆スケッチ、もう 1 人はクレイアニメの人物です。」
 
-  Thử nghiệm nhiều [phong cách nghệ thuật](#3_style_transfer) bằng Nano Banana trong [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=vi)
-- ![bài viết](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
+  [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=ja) の Nano Banana でさまざまな[アートスタイル](#3_style_transfer)を試す
+- ![記事](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
 
-  Do Nano Banana Pro tạo
+  Nano Banana Pro で生成
 
-  **Câu lệnh:** "Dùng tính năng tìm kiếm để tìm hiểu phản ứng của mọi người về việc ra mắt Gemini 3 Flash. Hãy dùng thông tin này để viết một bài viết ngắn về chủ đề đó (có tiêu đề). Trả về ảnh của bài viết như xuất hiện trong một tạp chí bóng bẩy tập trung vào thiết kế. Đây là ảnh chụp một trang giấy được gấp lại, cho thấy bài viết về Gemini 3 Flash. Một ảnh chính. Dòng tiêu đề có chân."
+  **プロンプト:** 「検索を使用して、Gemini 3 Flash のリリースがどのように受け止められているかを調べてください。この情報を使用して、それに関する短い記事（見出し付き）を書いてください。デザインに特化した光沢のある雑誌に掲載された記事の写真を返します。Gemini 3 Flash に関する記事が掲載された 1 ページの折り返し部分の写真です。ヒーロー写真 1 枚。セリフ体の見出し。」
 
-  Tạo [văn bản chính xác](#3_accurate_text_in_images) từ [nội dung tìm kiếm](#use-with-grounding). Dùng thử Nano Banana trong [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=vi)
-- ![chó](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
+  [検索](#use-with-grounding)から[正確なテキスト](#3_accurate_text_in_images)を生成します。[AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=ja) で Nano Banana を試す
+- ![犬](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
 
-  Do Nano Banana Pro tạo
+  Nano Banana Pro で生成
 
-  **Câu lệnh:** "Một biểu tượng đại diện cho một chú chó dễ thương. Nền có màu trắng. Tạo các biểu tượng theo phong cách 3D nhiều màu sắc và có kết cấu. Không có văn bản."
+  **プロンプト:** 「かわいい犬を表すアイコン。背景は白です。アイコンをカラフルで触覚的な 3D スタイルにします。テキストなし。」
 
-  Tạo [biểu tượng, hình dán và thành phần](#2_stylized_illustrations_stickers) bằng Nano Banana trong [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=vi)
-- ![đẳng cự](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
+  [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=ja) の Nano Banana で[アイコン、ステッカー、アセット](#2_stylized_illustrations_stickers)を作成する
+- ![アイソメトリック](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
 
-  Do Nano Banana 2 tạo
+  Nano Banana 2 で生成
 
-  **Câu lệnh:** "Tạo một bức ảnh có góc nhìn hoàn toàn đẳng cự. Đây không phải là một bức ảnh thu nhỏ, mà là một bức ảnh chụp tình cờ có góc nhìn hoàn toàn đẳng cự. Đây là ảnh chụp một khu vườn hiện đại tuyệt đẹp. Có một bể bơi lớn có hình số 2 và dòng chữ: Nano Banana 2".
+  **プロンプト:** 「完全にアイソメトリックな写真を作成して。ミニチュアではなく、たまたま完全にアイソメトリックになった写真です。美しいモダンな庭の写真です。大きな 2 の形をしたプールと「Nano Banana 2」という文字があります。」
 
-  Thử [tạo hình ảnh siêu thực](#1_photorealistic_scenes) trong [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=vi)
+  [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=ja) で[フォトリアリスティックな画像生成](#1_photorealistic_scenes)を試す
 
-**Nano Banana** là tên gọi của các tính năng tạo hình ảnh gốc của Gemini.
-Gemini có thể tạo và xử lý hình ảnh theo cách đàm thoại bằng văn bản, hình ảnh, video hoặc kết hợp các loại dữ liệu này. Điều này giúp bạn tạo, chỉnh sửa và lặp lại các hình ảnh với khả năng kiểm soát chưa từng có.
+**Nano Banana** は、Gemini のネイティブ画像生成機能の名称です。Gemini は、テキスト、画像、動画、またはその組み合わせを使用して、会話形式で画像を生成して処理できます。これにより、これまでにない高いコントロール精度で画像を作成、編集、反復的な改善ができます。
 
-Nano Banana là tên gọi của 4 mô hình riêng biệt có trong Gemini API:
+Nano Banana は、Gemini API で利用できる 4 つの異なるモデルを指します。
 
-- **Nano Banana 2 Lite ([Gemini 3.1 Flash Lite Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=vi))
-  (`gemini-3.1-flash-lite-image`):** Mô hình hình ảnh Gemini nhanh nhất và rẻ nhất của chúng tôi, được thiết kế để có tốc độ và quy mô lớn, trong đó tốc độ và chi phí là những hạn chế chính về hoạt động. Không được tối ưu hoá cho nhiều dữ liệu đầu vào tham chiếu hoặc chỉnh sửa tuần tự nhiều lượt.
-- **Nano Banana 2 ([Hình ảnh Gemini 3.1 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=vi))
-  (`gemini-3.1-flash-image`):** Đóng vai trò là mô hình linh hoạt nhất, mô hình đa năng cho mọi tác vụ. Mô hình này cân bằng giữa tốc độ với khả năng tạo nội dung 4K tiên tiến, kiến thức sâu rộng về thế giới và khả năng hiển thị văn bản đáng tin cậy. Xử lý nhiều hình ảnh tham khảo và tính nhất quán một cách xuất sắc.
-- **Nano Banana Pro ([Hình ảnh Gemini 3 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=vi))
-  (`gemini-3-pro-image`):** Lựa chọn cao cấp cho những tác vụ phức tạp nhất về hình ảnh, mang đến kiến thức toàn cầu ở cấp độ cao nhất, khả năng bản địa hoá nâng cao, tính nhất quán chính xác của thương hiệu và khả năng kiểm soát sáng tạo chính xác.
-- **Nano Banana ([Hình ảnh Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=vi))
-  (`gemini-2.5-flash-image`):** Phiên bản tiên phong của dòng Nano Banana.
-  Mặc dù là một công cụ đáng tin cậy, nhưng chúng tôi đặc biệt khuyến nghị khách hàng chuyển sang Nano Banana 2 Lite để trải nghiệm chất lượng nâng cao, tốc độ tạo nhanh hơn và giá API thấp hơn.
+- **Nano Banana 2 Lite（[Gemini 3.1 Flash Lite Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=ja)）（`gemini-3.1-flash-lite-image`）:** 速度とコストが主な運用上の制約となる速度と規模向けに設計された、最も高速で最も安価な Gemini 画像モデル。複数の参照入力やマルチターンの連続編集には最適化されていません。
+- **Nano Banana 2（[Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=ja)）（`gemini-3.1-flash-image`）:** 最も汎用性の高いモデルであり、すべてのタスクに対応する汎用的なワークホース モデルとして機能します。速度、最先端の 4K 生成、実世界の知識、信頼性の高いテキスト レンダリングのバランスが取れたオプションです。複数の参照画像の処理と一貫性に優れています。
+- **Nano Banana Pro（[Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=ja)）（`gemini-3-pro-image`）:** 最も複雑なビジュアル タスクに最適なプレミアム オプション。世界に関する最高レベルの知識、高度なローカライズ、正確なブランドの一貫性、精密なクリエイティブ制御を提供します。
+- **Nano Banana（[Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=ja)）（`gemini-2.5-flash-image`）:** Nano Banana シリーズの先駆者です。Nano Banana は信頼性の高いモデルですが、品質の向上、生成速度の向上、API 料金の引き下げを実現する Nano Banana 2 Lite への移行を強くおすすめします。
 
-Tất cả hình ảnh được tạo đều có [hình mờ SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=vi).
+生成されたすべての画像には [SynthID の透かし](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=ja)が埋め込まれています。
 
-## Tạo hình ảnh (chuyển văn bản thành hình ảnh)
+## 画像生成（テキスト画像変換）
 
 ### Python
 
@@ -297,15 +290,13 @@ curl -s -X POST \
   }'
 ```
 
-## Chỉnh sửa hình ảnh (chuyển văn bản và hình ảnh thành hình ảnh)
+## 画像編集（テキストと画像による画像変換）
 
-**Lời nhắc**: Hãy đảm bảo rằng bạn có các quyền cần thiết đối với mọi hình ảnh mà bạn tải lên.
-Bạn không được tạo nội dung vi phạm quyền của người khác, kể cả video hoặc hình ảnh lừa gạt, quấy rối hoặc gây hại. Khi sử dụng dịch vụ AI tạo sinh này, bạn phải tuân theo [Chính sách về các hành vi bị cấm khi sử dụng](https://policies.google.com/terms/generative-ai/use-policy?hl=vi) của chúng tôi.
+**リマインダー**: アップロードする画像に必要な権利をすべて所有していることをご確認ください。他者の権利を侵害するコンテンツ（他人を欺く、嫌がらせをする、または危害を加える動画や画像など）を生成しないでください。この生成 AI 機能の使用は、Google の[使用禁止に関するポリシー](https://policies.google.com/terms/generative-ai/use-policy?hl=ja)の対象となります。
 
-Cung cấp hình ảnh và sử dụng câu lệnh dạng văn bản để thêm, xoá hoặc sửa đổi các phần tử, thay đổi kiểu hoặc điều chỉnh phân loại màu.
+画像を指定し、テキスト プロンプトを使用して要素の追加、削除、変更、スタイルの変更、カラー グレーディングの調整を行います。
 
-Ví dụ sau đây minh hoạ việc tải hình ảnh được mã hoá `base64` lên.
-Đối với nhiều hình ảnh, tải trọng lớn hơn và các loại MIME được hỗ trợ, hãy xem trang [Hiểu hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi).
+次の例は、`base64` エンコードされた画像をアップロードする方法を示しています。複数の画像、大きなペイロード、サポートされている MIME タイプについては、[画像理解](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja)のページをご覧ください。
 
 ### Python
 
@@ -548,9 +539,9 @@ curl -s -X POST \
     }"
 ```
 
-### Chỉnh sửa hình ảnh nhiều lượt
+### マルチターンの画像編集
 
-Tiếp tục tạo và chỉnh sửa hình ảnh theo cách trò chuyện. Trò chuyện hoặc cuộc trò chuyện nhiều lượt là cách nên dùng để lặp lại hình ảnh. Ví dụ sau đây cho thấy một câu lệnh để tạo bản đồ hoạ thông tin về quá trình quang hợp.
+会話形式で画像の生成と編集を続けます。画像に対して反復処理を行うには、チャットまたはマルチターンの会話をおすすめします。次の例は、光合成に関するインフォグラフィックを生成するプロンプトを示しています。
 
 ### Python
 
@@ -782,11 +773,11 @@ curl -s -X POST \
   }'
 ```
 
-![Bản đồ hoạ thông tin do AI tạo về quá trình quang hợp](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=vi)
+![光合成に関する AI 生成のインフォグラフィック](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=ja)
 
-Bản đồ hoạ thông tin do AI tạo về quá trình quang hợp
+光合成に関する AI 生成のインフォグラフィック
 
-Sau đó, bạn có thể dùng cùng một cuộc trò chuyện để thay đổi ngôn ngữ trên hình ảnh thành tiếng Tây Ban Nha.
+その後、同じチャットを使用して、グラフィックの言語をスペイン語に変更できます。
 
 ### Python
 
@@ -980,35 +971,34 @@ curl -s -X POST \
   }'
 ```
 
-![Bản đồ hoạ thông tin do AI tạo về quá trình quang hợp bằng tiếng Tây Ban Nha](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=vi)
+![スペイン語で光合成のインフォグラフィックを AI が生成](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=ja)
 
-Bản đồ hoạ thông tin do AI tạo về quá trình quang hợp bằng tiếng Tây Ban Nha
+光合成のインフォグラフィックをスペイン語で AI 生成して
 
-## Tính năng mới của các mô hình hình ảnh Gemini 3
+## Gemini 3 画像モデルの新機能
 
-Gemini 3 cung cấp các mô hình tạo và chỉnh sửa hình ảnh tiên tiến. Gemini 3.1 Flash Image được tối ưu hoá về tốc độ và các trường hợp sử dụng với khối lượng lớn, còn Gemini 3 Pro Image được tối ưu hoá cho việc sản xuất tài sản chuyên nghiệp.
-Được thiết kế để giải quyết những quy trình làm việc khó khăn nhất thông qua khả năng suy luận nâng cao, các mô hình này có thể thực hiện xuất sắc những nhiệm vụ tạo và sửa đổi phức tạp, nhiều lượt.
+Gemini 3 は、最先端の画像生成および編集モデルを提供します。Gemini 3.1 Flash Image は速度と大量のユースケース向けに最適化されており、Gemini 3 Pro Image はプロフェッショナルなアセット制作向けに最適化されています。高度な推論を通じて最も困難なワークフローに取り組むように設計されており、複雑なマルチターンの作成タスクや変更タスクに優れています。
 
-- **Đầu ra có độ phân giải cao**: Khả năng tạo hình ảnh 1K, 2K và 4K được tích hợp sẵn.
-  - **Hình ảnh Gemini 3.1 Flash** có độ phân giải nhỏ hơn là 512 (0,5K).
-  - **Gemini 3.1 Flash Lite Image** chỉ hỗ trợ độ phân giải 1K.
-- **Kết xuất văn bản nâng cao**: Có khả năng tạo văn bản dễ đọc, cách điệu cho đồ hoạ thông tin, thực đơn, sơ đồ và thành phần tiếp thị.
-- **Neo bám vào Google Tìm kiếm**: Mô hình có thể sử dụng Google Tìm kiếm làm công cụ để xác minh thông tin và tạo hình ảnh tạo sinh dựa trên dữ liệu theo thời gian thực (ví dụ: bản đồ thời tiết hiện tại, biểu đồ cổ phiếu, sự kiện gần đây).
-  - **Không được mô hình Gemini 3.1 Flash Lite Image hỗ trợ.**
-  - **Hình ảnh Gemini 3.1 Flash** bổ sung tính năng tích hợp Grounding với Google Tìm kiếm cho Hình ảnh cùng với Tìm kiếm trên web.
-- **Chế độ Tư duy**: Mô hình này sử dụng quy trình "tư duy" để suy luận thông qua các câu lệnh phức tạp. Công cụ này tạo ra "hình ảnh ý tưởng" tạm thời (có thể nhìn thấy ở phần phụ trợ nhưng không tính phí) để tinh chỉnh bố cục trước khi tạo ra thành phẩm chất lượng cao cuối cùng.
-- **Tối đa 14 hình ảnh tham khảo**: Giờ đây, bạn có thể kết hợp tối đa 14 hình ảnh tham khảo để tạo ra hình ảnh cuối cùng.
-- **Tỷ lệ khung hình mới**: Gemini 3.1 Flash Lite Image bổ sung `1:1`, `3:2`, `2:3`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9` [tỷ lệ khung hình](#aspect_ratios_and_image_size).
+- **高解像度出力**: 1K、2K、4K のビジュアルを生成する機能が組み込まれています。
+  - **Gemini 3.1 Flash Image** では、より小さい 512（0.5K）にも対応しています。
+  - **Gemini 3.1 Flash Lite Image** は 1K 解像度のみをサポートします。
+- **高度なテキスト レンダリング**: インフォグラフィック、メニュー、図表、マーケティング アセット用に、読みやすくスタイリッシュなテキストを生成できます。
+- **Google 検索によるグラウンディング**: モデルは、Google 検索をツールとして使用して、事実を確認し、リアルタイム データ（現在の天気図、株価チャート、最近のイベントなど）に基づいて画像生成できます。
+  - **Gemini 3.1 Flash Lite Image モデルではサポートされていません。**
+  - **Gemini 3.1 Flash Image** では、ウェブ検索に加えて画像検索による Google 検索によるグラウンディングの統合が追加されています。
+- **思考モード**: モデルは「思考」プロセスを利用して、複雑なプロンプトを推論します。最終的な高品質の出力を生成する前に、構成を調整するための中間的な「思考画像」（バックエンドで表示されるが、課金されない）を生成します。
+- **最大 14 枚の参照画像**: 最大 14 枚の参照画像を組み合わせて、最終的な画像を生成できるようになりました。
+- **新しいアスペクト比**: Gemini 3.1 Flash Lite Image に `1:1`、`3:2`、`2:3`、`3:4`、`4:3`、`4:5`、`5:4`、`9:16`、`16:9`、`21:9` の[アスペクト比](#aspect_ratios_and_image_size)が追加されました。
 
-### Sử dụng tối đa 14 hình ảnh tham khảo
+### 最大 14 枚の参照画像を使用する
 
-Các mô hình hình ảnh Gemini 3 cho phép bạn kết hợp tối đa 14 hình ảnh tham khảo. 14 hình ảnh này có thể bao gồm:
+Gemini 3 画像モデルでは、最大 14 個の参照画像を組み合わせることができます。これらの 14 枚の画像には、次のものを含めることができます。
 
-| Hình ảnh Gemini 3.1 Flash Lite | Hình ảnh Gemini 3.1 Flash | Hình ảnh Gemini 3 Pro |
+| Gemini 3.1 Flash Lite Image | Gemini 3.1 Flash Image | Gemini 3 Pro Image |
 | --- | --- | --- |
-| Tối đa 14 hình ảnh về các đối tượng có độ trung thực cao để đưa vào hình ảnh cuối cùng | Tối đa 10 hình ảnh về các đối tượng có độ trung thực cao để đưa vào hình ảnh cuối cùng | Tối đa 6 hình ảnh về các đối tượng có độ trung thực cao để đưa vào hình ảnh cuối cùng |
-| Không áp dụng | Tối đa 4 hình ảnh về nhân vật để đảm bảo tính nhất quán cho nhân vật | Tối đa 5 hình ảnh về nhân vật để đảm bảo tính nhất quán cho nhân vật |
-| Không áp dụng | Không áp dụng | Tối đa 3 hình ảnh được dùng làm hình ảnh tham khảo về kiểu |
+| 最終画像に含める忠実度の高いオブジェクトの画像（最大 14 枚） | 最終画像に含める忠実度の高いオブジェクトの画像（最大 10 枚） | 最終画像に含める忠実度の高いオブジェクトの画像（最大 6 枚） |
+| なし | キャラクターの一貫性を維持するためのキャラクターの画像（最大 4 枚） | キャラクターの一貫性を保つためのキャラクターの画像（最大 5 枚） |
+| なし | なし | スタイルの参照用として使用する画像（3 枚まで） |
 
 ### Python
 
@@ -1327,15 +1317,15 @@ curl -s -X POST \
     }"
 ```
 
-![Ảnh chụp nhóm nhân viên văn phòng do AI tạo](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=vi)
+![AI 生成のオフィス グループ写真](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=ja)
 
-Ảnh chụp nhóm văn phòng do AI tạo
+AI 生成のオフィス グループ写真
 
-### Bám sát nguồn bằng Google Tìm kiếm
+### Google 検索によるグラウンディング
 
-Sử dụng [công cụ Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi) để tạo hình ảnh dựa trên thông tin theo thời gian thực, chẳng hạn như dự báo thời tiết, biểu đồ cổ phiếu hoặc sự kiện gần đây.
+[Google 検索ツール](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)を使用して、天気予報、株価チャート、最近の出来事などのリアルタイム情報に基づいて画像を生成します。
 
-Xin lưu ý rằng khi sử dụng tính năng Liên kết thực tế với Google Tìm kiếm để tạo hình ảnh, kết quả tìm kiếm dựa trên hình ảnh sẽ không được chuyển đến mô hình tạo và sẽ bị loại trừ khỏi câu trả lời (xem phần [Liên kết thực tế với Google Tìm kiếm cho hình ảnh](#image-search))
+Google 検索によるグラウンディングを画像生成で使用する場合、画像ベースの検索結果は生成モデルに渡されず、レスポンスから除外されます（[画像に対する Google 検索によるグラウンディング](#image-search)を参照）。
 
 ### Python
 
@@ -1524,22 +1514,22 @@ curl -s -X POST \
   }'
 ```
 
-![Biểu đồ thời tiết 5 ngày do AI tạo cho San Francisco](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=vi)
+![サンフランシスコの 5 日間の天気予報の AI 生成グラフ](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=ja)
 
-Biểu đồ thời tiết 5 ngày do AI tạo cho San Francisco
+サンフランシスコの 5 日間の天気予報の AI 生成のグラフ
 
-Phản hồi này bao gồm `groundingMetadata` chứa các trường bắt buộc sau:
+レスポンスには、次の必須フィールドを含む `groundingMetadata` が含まれます。
 
-- **`searchEntryPoint`**: Chứa HTML và CSS để hiển thị các đề xuất tìm kiếm bắt buộc.
-- **`groundingChunks`**: Trả về 3 nguồn hàng đầu trên web được dùng để làm cơ sở cho hình ảnh được tạo
+- **`searchEntryPoint`**: 必要な検索候補をレンダリングする HTML と CSS が含まれています。
+- **`groundingChunks`**: 生成された画像のグラウンディングに使用された上位 3 つのウェブソースを返します
 
-### Neo bám vào Google Tìm kiếm cho hình ảnh (3.1 Flash)
+### 画像に対する Google 検索によるグラウンディング（3.1 Flash）
 
-Tính năng tiếp đất bằng Google Tìm kiếm cho hình ảnh cho phép các mô hình sử dụng hình ảnh trên web được truy xuất thông qua Google Tìm kiếm làm bối cảnh trực quan để tạo hình ảnh. Tìm kiếm bằng hình ảnh là một loại tìm kiếm mới trong công cụ Neo bám vào Google Tìm kiếm hiện có, hoạt động cùng với tính năng [Tìm kiếm trên web](#use-with-grounding) tiêu chuẩn.
+画像用の Google 検索によるグラウンディングを使用すると、モデルは Google 検索で取得したウェブ画像を画像生成の視覚的コンテキストとして使用できます。画像検索は、既存の Google 検索によるグラウンディング ツール内の新しい検索タイプで、標準の[ウェブ検索](#use-with-grounding)とともに機能します。
 
-Để bật tính năng Tìm kiếm bằng hình ảnh, hãy định cấu hình công cụ `googleSearch` trong yêu cầu API của bạn và chỉ định `imageSearch` trong đối tượng `searchTypes`. Bạn có thể sử dụng tính năng Tìm kiếm hình ảnh độc lập hoặc cùng với tính năng Tìm kiếm trên web.
+画像検索を有効にするには、API リクエストで `googleSearch` ツールを構成し、`searchTypes` オブジェクト内で `imageSearch` を指定します。画像検索は、単独で使用することも、ウェブ検索と組み合わせて使用することもできます。
 
-Xin lưu ý rằng bạn không thể dùng tính năng Grounding with Google Search cho hình ảnh để tìm kiếm người.
+画像に対する Google 検索でのグラウンディングは、人物の検索には使用できません。
 
 ### Python
 
@@ -1766,33 +1756,32 @@ curl -s -X POST \
   }'
 ```
 
-**Yêu cầu về việc hiển thị**
+**表示の要件**
 
-Khi sử dụng tính năng Tìm kiếm bằng hình ảnh trong tính năng Nền tảng kiến thức của Google Tìm kiếm, bạn phải tuân thủ các điều kiện sau:
+Google 検索によるグラウンディング内で画像検索を使用する場合は、次の条件を遵守する必要があります。
 
-- **Ghi nhận nguồn**: Bạn phải cung cấp một đường liên kết đến trang web chứa hình ảnh nguồn ("trang chứa", không phải tệp hình ảnh) theo cách mà người dùng sẽ nhận ra đó là một đường liên kết.
-- **Điều hướng trực tiếp**: Nếu chọn hiển thị hình ảnh nguồn, bạn phải cung cấp một đường dẫn trực tiếp, chỉ cần nhấp một lần từ hình ảnh nguồn đến trang web nguồn chứa hình ảnh đó. Bạn không được phép triển khai bất kỳ phương thức nào khác làm chậm hoặc che giấu quyền truy cập của người dùng cuối vào trang web nguồn, bao gồm nhưng không giới hạn ở bất kỳ lộ trình nhiều lượt nhấp nào hoặc việc sử dụng trình xem hình ảnh trung gian.
+- **出典の帰属**: ユーザーがリンクとして認識できる方法で、ソース画像を含むウェブページ（画像ファイル自体ではなく「包含ページ」）へのリンクを提供する必要があります。
+- **直接ナビゲーション**: ソース画像も表示する場合は、ソース画像からそのソース ウェブページへの直接のワンクリック パスを提供する必要があります。エンドユーザーが元のウェブページにアクセスするのを遅らせたり、抽象化したりする他の実装（複数回のクリックが必要なパスや、中間画像ビューアの使用など）は許可されません。
 
-**Đáp**
+**レスポンス**
 
-Đối với các câu trả lời có căn cứ sử dụng tính năng tìm kiếm hình ảnh, API cung cấp thông tin ghi nhận quyền tác giả và siêu dữ liệu rõ ràng để liên kết đầu ra của API với các nguồn đã xác minh. Các trường khoá trong đối tượng `groundingMetadata` bao gồm:
+画像検索を使用するグラウンディングされたレスポンスの場合、API は明確な帰属とメタデータを提供し、出力を検証済みのソースにリンクします。`groundingMetadata` オブジェクトの主なフィールドは次のとおりです。
 
-- **`imageSearchQueries`**: Các cụm từ tìm kiếm cụ thể mà mô hình sử dụng cho ngữ cảnh trực quan (tìm kiếm hình ảnh).
-- **`groundingChunks`**: Chứa thông tin nguồn cho các kết quả đã truy xuất.
-  Đối với các nguồn hình ảnh, những nguồn này sẽ được trả về dưới dạng URL chuyển hướng bằng cách sử dụng một loại đoạn hình ảnh mới. Khối này bao gồm:
+- **`imageSearchQueries`**: モデルが視覚的コンテキスト（画像検索）に使用する特定のクエリ。
+- **`groundingChunks`**: 取得した結果のソース情報が含まれます。画像ソースの場合、新しい画像チャンクタイプを使用してリダイレクト URL として返されます。このチャンクには次のものが含まれます。
 
-  - **`uri`**: URL trang web để phân bổ (trang đích).
-  - **`image_uri`**: URL trực tiếp của hình ảnh.
-- **`groundingSupports`**: Cung cấp các mối liên kết cụ thể để liên kết nội dung được tạo với nguồn trích dẫn có liên quan trong các đoạn.
-- **`searchEntryPoint`**: Bao gồm chip "Google Tìm kiếm" có chứa HTML và CSS tuân thủ để hiển thị Đề xuất tìm kiếm.
+  - **`uri`**: アトリビューションのウェブページ URL（ランディング ページ）。
+  - **`image_uri`**: 画像の直接 URL。
+- **`groundingSupports`**: 生成されたコンテンツをチャンク内の関連する引用元にリンクする特定のマッピングを提供します。
+- **`searchEntryPoint`**: 検索候補をレンダリングするための準拠した HTML と CSS を含む「Google 検索」チップが含まれます。
 
-### Tạo hình ảnh từ video (3.1 Flash)
+### 動画から画像への生成（3.1 Flash）
 
-Tính năng tạo hình ảnh từ video cho phép bạn tạo hình ảnh mới bằng cách sử dụng bối cảnh của video làm thông tin tham khảo đa phương thức. Tính năng này hữu ích khi bạn muốn tạo hình thu nhỏ chất lượng cao cho video, áp phích điện ảnh, ảnh đồ hoạ tóm tắt hoặc tác phẩm nghệ thuật mới lấy cảm hứng từ một cảnh trong video.
+動画から画像への生成では、動画のコンテキストをマルチモーダル参照として使用して、新しい画像を生成できます。この機能は、高品質な動画のサムネイル、映画のポスター、概要のインフォグラフィック、動画のシーンからインスピレーションを得た新しいアートワークの作成に役立ちます。
 
-Trong quá trình tạo, mô hình sẽ phân tích các khung hình video trong ngữ cảnh (tối đa 131.072 mã thông báo theo giới hạn mã thông báo đầu vào của mô hình) để trích xuất các chủ đề trực quan và sự kiện chính, sau đó sử dụng các chủ đề và sự kiện này cùng với câu lệnh văn bản của bạn để tổng hợp hình ảnh đầu ra.
+生成中、モデルはコンテキスト内の動画フレーム（モデルの入力トークン上限である 131,072 トークンまで）を分析して、視覚的なテーマとキーイベントを抽出し、それらをテキスト プロンプトとともに使用して出力画像を合成します。
 
-Bạn có thể truyền trực tiếp [URL công khai trên YouTube](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi#youtube) trong yêu cầu API hoặc tải tệp video cục bộ lên bằng [Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi).
+API リクエストで公開 [YouTube URL](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja#youtube) を直接渡すか、[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja) を使用してローカル動画ファイルをアップロードできます。
 
 ### Python
 
@@ -2048,15 +2037,15 @@ curl -s -X POST \
   }'
 ```
 
-![Bản đồ hoạ thông tin do AI tạo từ một video trên YouTube](https://ai.google.dev/static/gemini-api/docs/images/youtube_infographics.png?hl=vi)
+![YouTube 動画から AI が生成したインフォグラフィック](https://ai.google.dev/static/gemini-api/docs/images/youtube_infographics.png?hl=ja)
 
-Ảnh đồ hoạ do AI tạo từ một video trên YouTube
+YouTube 動画から生成された AI インフォグラフィック
 
-### Tạo hình ảnh có độ phân giải lên đến 4K
+### 最大 4K 解像度の画像を生成する
 
-Các mô hình hình ảnh Gemini 3 tạo ra 1.000 hình ảnh theo mặc định nhưng cũng có thể xuất ra hình ảnh 2K, 4K và 512 (0, 5K) (chỉ có Gemini 3.1 Flash Image). Để tạo thành phần có độ phân giải cao hơn, hãy chỉ định `image_size` trong `generation_config`.
+Gemini 3 画像モデルは、デフォルトで 1K 画像を生成しますが、2K、4K、512（0.5K）（Gemini 3.1 Flash Image のみ）の画像を出力することもできます。高解像度のアセットを生成するには、`generation_config` で `image_size` を指定します。
 
-Bạn phải sử dụng chữ "K" viết hoa (ví dụ: 1K, 2K, 4K). Giá trị `512` không sử dụng hậu tố "K". Các thông số viết thường (ví dụ: 1k) sẽ bị từ chối.
+大文字の「K」を使用する必要があります（例: 1K、2K、4K）。`512` 値には「K」という接尾辞は使用されません。小文字のパラメータ（1k など）は拒否されます。
 
 ### Python
 
@@ -2295,19 +2284,19 @@ curl -s -X POST \
   }'
 ```
 
-Sau đây là một hình ảnh mẫu được tạo từ câu lệnh này:
+このプロンプトから生成された画像の例を次に示します。
 
-![Bản phác thảo giải phẫu theo phong cách Da Vinci do AI tạo về một con bướm vua bị mổ xẻ.](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=vi)
+![モナーク蝶の解剖図をダ ヴィンチ風に描いた AI 生成のスケッチ。](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=ja)
 
-Bản phác thảo giải phẫu theo phong cách Da Vinci do AI tạo về một con bướm vua bị mổ xẻ.
+モナーク蝶の解剖図をダ・ヴィンチ風に描いた AI 生成のスケッチ。
 
-### Quá trình tư duy
+### 思考プロセス
 
-Mô hình hình ảnh Gemini 3 là mô hình tư duy sử dụng quy trình suy luận ("Tư duy") cho các câu lệnh phức tạp. Tính năng này được bật theo mặc định và không thể tắt trong API. Để tìm hiểu thêm về quy trình suy nghĩ, hãy xem hướng dẫn [Quy trình suy nghĩ của Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=vi).
+Gemini 3 画像モデルは、複雑なプロンプトに推論プロセス（「思考」）を使用する思考モデルです。この機能はデフォルトで有効になっており、API で無効にすることはできません。思考プロセスの詳細については、[Gemini の思考](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)ガイドをご覧ください。
 
-Mô hình này tạo tối đa 2 hình ảnh tạm thời để kiểm thử bố cục và logic. Hình ảnh cuối cùng trong phần Suy nghĩ cũng là hình ảnh được kết xuất cuối cùng.
+このモデルは、構成とロジックをテストするために最大 2 つの中間画像を生成します。Thinking の最後の画像は、最終的にレンダリングされた画像でもあります。
 
-Bạn có thể xem những suy nghĩ dẫn đến việc tạo ra hình ảnh cuối cùng.
+最終的な画像が生成されるまでの思考を確認できます。
 
 ### Python
 
@@ -2373,11 +2362,11 @@ foreach (var candidate in response.Candidates) {
 }
 ```
 
-#### Kiểm soát các cấp độ tư duy
+#### 思考レベルを制御する
 
-Với Gemini 3.1 Flash Image và Gemini 3.1 Flash Lite Image, bạn có thể kiểm soát mức độ tư duy mà mô hình sử dụng để cân bằng chất lượng và độ trễ. `thinkingLevel` mặc định là `minimal` và các cấp độ được hỗ trợ là `minimal` và `high`. Việc đặt `thinkingLevel` thành `minimal` sẽ mang lại các phản hồi có độ trễ thấp nhất. Xin lưu ý rằng tư duy tối thiểu không có nghĩa là mô hình hoàn toàn không sử dụng tư duy.
+Gemini 3.1 Flash Image と Gemini 3.1 Flash Lite Image を使用すると、モデルが使用する思考の量を制御して、品質とレイテンシのバランスを取ることができます。デフォルトの `thinkingLevel` は `minimal` で、サポートされているレベルは `minimal` と `high` です。`thinkingLevel` を `minimal` に設定すると、レイテンシが最小限に抑えられたレスポンスが返されます。最小限の思考とは、モデルがまったく思考を使用しないという意味ではないことに注意してください。
 
-Bạn có thể thêm giá trị boolean `includeThoughts` để xác định xem suy nghĩ được tạo của mô hình có được trả về trong phản hồi hay vẫn bị ẩn.
+`includeThoughts` ブール値を追加して、モデルが生成した思考をレスポンスで返すか、非表示のままにするかを決定できます。
 
 ### Python
 
@@ -2616,19 +2605,19 @@ curl -s -X POST \
   }'
 ```
 
-Xin lưu ý rằng các mã thông báo tư duy sẽ được tính phí bất kể `includeThoughts` được đặt thành `true` hay `false`, vì [quy trình tư duy](#thinking-process) luôn diễn ra theo mặc định cho dù bạn có xem quy trình đó hay không.
+`includeThoughts` が `true` または `false` に設定されているかどうかにかかわらず、思考トークンは課金されます。これは、プロセスを表示するかどうかにかかわらず、[思考プロセス](#thinking-process)が常にデフォルトで実行されるためです。
 
-#### Chữ ký của suy nghĩ
+#### 思考シグネチャ
 
-Chữ ký suy nghĩ là biểu diễn được mã hoá của quy trình suy nghĩ nội bộ của mô hình và được dùng để duy trì ngữ cảnh suy luận trong các lượt tương tác nhiều lượt. Tất cả các phản hồi đều có trường `thought_signature`. Theo nguyên tắc chung, nếu nhận được chữ ký suy nghĩ trong phản hồi của mô hình, bạn nên truyền lại chính xác chữ ký đó như khi nhận được khi gửi nhật ký cuộc trò chuyện trong lượt tiếp theo. Việc không lưu hành chữ ký ý tưởng có thể khiến phản hồi không thành công. Hãy xem tài liệu về [chữ ký tư duy](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=vi) để biết thêm thông tin giải thích về chữ ký nói chung.
+思考シグネチャは、モデルの内部的な思考プロセスを暗号化したもので、マルチターンのインタラクションで推論コンテキストを保持するために使用されます。すべてのレスポンスに `thought_signature` フィールドが含まれます。原則として、モデルのレスポンスで思考シグネチャを受け取った場合は、次のターンで会話履歴を送信するときに、受け取ったとおりに渡す必要があります。思考シグネチャを循環させないと、レスポンスが失敗する可能性があります。署名全般について詳しくは、[思考署名](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=ja)のドキュメントをご覧ください。
 
-Sau đây là cách hoạt động của chữ ký tư duy:
+思考シグネチャの仕組みは次のとおりです。
 
-- Tất cả các phần `inline_data` có hình ảnh `mimetype` nằm trong phản hồi đều phải có chữ ký.
-- Nếu có một số phần văn bản ở đầu (trước bất kỳ hình ảnh nào) ngay sau phần suy nghĩ, thì phần văn bản đầu tiên cũng phải có chữ ký.
-- Nếu `inline_data` các phần có hình ảnh `mimetype` là một phần của suy nghĩ, thì chúng sẽ không có chữ ký.
+- レスポンスの一部である画像 `mimetype` を含むすべての `inline_data` 部分には署名が必要です。
+- 考えの直後に（画像の前に）テキスト部分がある場合は、最初のテキスト部分にも署名が必要です。
+- 画像 `mimetype` を含む `inline_data` 部分が思考の一部である場合、署名は含まれません。
 
-Đoạn mã sau đây cho thấy ví dụ về vị trí có chữ ký suy nghĩ:
+次のコードは、思考シグネチャが含まれる場所の例を示しています。
 
 ```
 [
@@ -2688,179 +2677,176 @@ Sau đây là cách hoạt động của chữ ký tư duy:
 ]
 ```
 
-## Các chế độ tạo hình ảnh khác
+## その他の画像生成モード
 
-Gemini hỗ trợ các chế độ tương tác khác với hình ảnh dựa trên cấu trúc câu lệnh và ngữ cảnh, bao gồm:
+Gemini は、プロンプトの構造とコンテキストに基づいて、次のような他の画像操作モードをサポートしています。
 
-- **Văn bản thành hình ảnh và văn bản (xen kẽ):** Tạo ra hình ảnh kèm theo văn bản liên quan.
-  - Ví dụ về câu lệnh: "Tạo một công thức minh hoạ cho món paella."
-- **Hình ảnh và văn bản sang hình ảnh và văn bản (xen kẽ)**: Sử dụng hình ảnh và văn bản đầu vào để tạo hình ảnh và văn bản mới có liên quan.
-  - Ví dụ về câu lệnh: (Với hình ảnh một căn phòng có đồ nội thất) "Những màu sắc nào khác của ghế sofa sẽ phù hợp với không gian của tôi? Bạn có thể cập nhật hình ảnh không?"
+- **テキスト画像変換とテキスト（インターリーブ）:** 関連するテキストを含む画像を出力します。
+  - プロンプトの例: 「パエリアのレシピをイラスト付きで生成してください。」
+- **画像とテキスト画像変換とテキスト（インターリーブ）**: 入力画像とテキストを使用して、関連する新しい画像とテキストを作成します。
+  - プロンプトの例:（家具付きの部屋の画像を提示して）「この部屋に合いそうなソファの色には他にどんなものがありますか？画像を更新してください」。
 
-## Tạo hàng loạt hình ảnh
+## 画像をバッチで生成する
 
-Nếu cần tạo nhiều hình ảnh, bạn có thể sử dụng [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi). Bạn sẽ nhận được [hạn mức tốc độ](https://ai.google.dev/gemini-api/docs/rate-limits?hl=vi) cao hơn để đổi lấy thời gian xử lý lên đến 24 giờ.
+多数の画像を生成する必要がある場合は、[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja) を使用できます。最大 24 時間のターンアラウンドと引き換えに、[レートの上限](https://ai.google.dev/gemini-api/docs/rate-limits?hl=ja)が引き上げられます。
 
-Tham khảo [Tài liệu về tính năng tạo hình ảnh bằng Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi#image-generation) và [sách hướng dẫn](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=vi) để xem các ví dụ và mã về hình ảnh bằng Batch API.
+Batch API の画像例とコードについては、[Batch API の画像生成に関するドキュメント](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja#image-generation)と[クックブック](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=ja)をご覧ください。
 
-## Hướng dẫn và chiến lược đặt câu lệnh
+## プロンプト ガイドと戦略
 
-Để tạo thành thạo hình ảnh, bạn cần nắm vững một nguyên tắc cơ bản:
+画像生成をマスターするには、次の基本原則から始めます。
 
-> **Mô tả cảnh, đừng chỉ liệt kê từ khoá.**
-> Điểm mạnh cốt lõi của mô hình này là khả năng hiểu ngôn ngữ một cách sâu sắc. Một đoạn văn mô tả, tường thuật sẽ hầu như luôn tạo ra hình ảnh nhất quán và chất lượng hơn so với một danh sách các từ rời rạc.
+> **キーワードを並べるだけでなく、シーンを説明します。**このモデルの強みは、言語を深く理解していることです。物語形式の記述的な段落は、関連性のない単語のリストよりも、一貫性のある高品質の画像を生成する可能性がはるかに高くなります。
 
-### Câu lệnh để tạo hình ảnh
+### 画像を生成するためのプロンプト
 
-Các chiến lược sau đây sẽ giúp bạn tạo câu lệnh hiệu quả để tạo ra chính xác những hình ảnh mà bạn đang tìm kiếm.
+次の戦略は、効果的なプロンプトを作成して、思いどおりの画像を生成するのに役立ちます。
 
-#### Nhiếp ảnh
+#### 写真
 
-Để có hình ảnh chân thực, hãy sử dụng các thuật ngữ nhiếp ảnh. Đề cập đến góc camera, loại ống kính, ánh sáng và các chi tiết nhỏ để hướng dẫn mô hình tạo ra kết quả chân thực.
+リアルな画像の場合は、写真用語を使用します。カメラアングル、レンズの種類、照明、細部について言及して、モデルがリアルな結果を生成するようにします。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **プロンプト** | **生成された出力** |
 | --- | --- |
-| Ảnh chụp cận cảnh chân dung một nghệ nhân gốm Nhật Bản lớn tuổi với những nếp nhăn sâu do ánh nắng và nụ cười ấm áp, thấu hiểu. Ông đang kiểm tra cẩn thận một chiếc bát trà mới tráng men. Khung cảnh là xưởng cơ khí mộc mạc, tràn ngập ánh nắng của anh. Khung cảnh được chiếu sáng bằng ánh sáng dịu nhẹ của giờ vàng, chiếu qua một cửa sổ, làm nổi bật kết cấu mịn của đất sét. Chụp bằng ống kính chân dung 85mm, tạo ra một phông nền mềm mại, mờ ảo (bokeh). Tâm trạng chung là thanh bình và điêu luyện. Hướng dọc. | Nghệ nhân gốm sứ Nhật Bản lớn tuổi |
+| 深い日焼けのしわと、温かく知的な笑顔を浮かべた、日本の高齢の陶芸家のクローズアップ ポートレートの写真。彼は、新しく釉薬をかけた茶碗を注意深く調べています。舞台は、太陽の光が差し込む彼の素朴な工房。窓から差し込む柔らかいゴールデンアワーの光で照らされ、粘土のきめ細かい質感が際立っている。85 mm ポートレート レンズで撮影したように、背景が柔らかくぼかされている（ボケ）ようにしてください。全体的に穏やかで、熟練した雰囲気。縦向き。 | 高齢の日本の陶芸家 |
 
-#### Hình minh hoạ và hình dán cách điệu
+#### スタイリッシュなイラストとステッカー
 
-Để tạo hình dán, biểu tượng hoặc thành phần, hãy nêu rõ kiểu và yêu cầu nền trắng.
+ステッカー、アイコン、アセットを作成する場合は、スタイルを明示的に指定し、白い背景をリクエストします。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **プロンプト** | **生成された出力** |
 | --- | --- |
-| Hình dán theo phong cách kawaii về một chú gấu trúc đỏ vui vẻ đang đội một chiếc mũ tre nhỏ. Chú gấu trúc này đang nhai một chiếc lá tre xanh. Thiết kế này có đường viền rõ ràng, đậm nét, kỹ thuật đổ bóng đơn giản và bảng màu sống động. Nền phải có màu trắng. | Hình dán gấu trúc đỏ theo phong cách Kawaii |
+| 小さな竹の帽子をかぶった、嬉しそうなレッサーパンダのかわいいスタイルのステッカー。緑色の竹の葉を食べています。太くてくっきりとした輪郭、シンプルなセルシェーディング、鮮やかなカラーパレットが特徴です。背景は白である必要があります。 | かわいいレッサーパンダのステッカー |
 
-#### Văn bản chính xác trong hình ảnh
+#### 画像内の正確なテキスト
 
-Gemini có khả năng kết xuất văn bản vượt trội. Nêu rõ văn bản, kiểu phông chữ (mô tả) và thiết kế tổng thể. Sử dụng Gemini 3 Pro Image để sản xuất tài sản chuyên nghiệp.
+Gemini はテキストのレンダリングに優れています。テキスト、フォント スタイル（説明）、全体的なデザインを明確にします。Gemini 3 Pro Image を使用して、プロフェッショナルなアセットを制作します。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **プロンプト** | **生成された出力** |
 | --- | --- |
-| Tạo một biểu trưng tối giản, hiện đại cho quán cà phê có tên "The Daily Grind". Văn bản phải sử dụng phông chữ sans-serif rõ ràng và in đậm. Bảng phối màu là đen và trắng. Đặt biểu trưng vào một vòng tròn. Sử dụng hạt cà phê một cách khéo léo. | Biểu trưng của quán cà phê |
+| 「The Daily Grind」というコーヒー ショップのモダンでミニマルなロゴを作成してください。テキストは、クリーンで太字の Sans Serif フォントを使用してください。カラーパターンが白黒である。ロゴを円の中に配置します。コーヒー豆を賢く使う。 | コーヒー ショップのロゴ |
 
-#### Bản mô phỏng sản phẩm và ảnh chụp thương mại
+#### 商品のモックアップと広告写真
 
-Phù hợp để tạo ảnh chụp sản phẩm chuyên nghiệp, rõ ràng cho thương mại điện tử, quảng cáo hoặc hoạt động xây dựng thương hiệu.
+e コマース、広告、ブランディング用のクリーンでプロフェッショナルな商品ショットの作成に最適です。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **プロンプト** | **生成された出力** |
 | --- | --- |
-| Ảnh chụp sản phẩm có độ phân giải cao, được chiếu sáng trong phòng chụp ảnh về một chiếc cốc cà phê bằng gốm tối giản màu đen mờ, được đặt trên bề mặt bê tông đánh bóng. Ánh sáng được thiết lập bằng hộp hắt sáng ba điểm, được thiết kế để tạo ra những điểm sáng dịu nhẹ, khuếch tán và loại bỏ bóng đổ gắt. Góc camera là góc chụp 45 độ hơi cao để làm nổi bật các đường nét gọn gàng của sản phẩm. Siêu chân thực, với tiêu điểm rõ nét vào hơi nước bốc lên từ cà phê. Ảnh hình vuông. | Ảnh chụp sản phẩm cốc cà phê gốm |
+| 高解像度のスタジオ照明で撮影された商品写真。マットブラックのミニマルなセラミック製コーヒー マグが、磨かれたコンクリートの表面に置かれている。照明は、柔らかく拡散したハイライトを作り出し、強い影をなくすように設計されたソフトボックスを使った 3 点照明です。カメラの角度は、クリーンなラインを際立たせるため、やや上向きの 45 度で撮影されています。コーヒーから立ち上る湯気に焦点が合っている、超リアルな画像。正方形の画像。 | セラミック コーヒー マグのプロダクト ショット |
 
-#### Thiết kế tối giản và không gian âm
+#### ミニマルでネガティブ スペースのデザイン
 
-Rất phù hợp để tạo nền cho trang web, bản trình bày hoặc tài liệu tiếp thị nơi văn bản sẽ được đặt lên trên.
+テキストを重ねて表示するウェブサイト、プレゼンテーション、マーケティング資料の背景の作成に最適です。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **プロンプト** | **生成された出力** |
 | --- | --- |
-| Bức ảnh tối giản có một chiếc lá phong đỏ duy nhất, tinh tế nằm ở góc dưới bên phải khung hình. Nền là một canvas trống trải, rộng lớn có màu trắng nhạt, tạo ra khoảng trống âm đáng kể cho văn bản. Ánh sáng dịu nhẹ, phân tán từ phía trên bên trái. Ảnh hình vuông. | Thiết kế tối giản với lá phong đỏ |
+| フレームの右下に配置された 1 枚の繊細な赤いカエデの葉をフィーチャーしたミニマルな構図。背景は広大なオフホワイトのキャンバスで、テキスト用のネガティブ スペースが大きく取られています。左上から柔らかく拡散した照明。正方形の画像。 | 赤いカエデの葉をあしらったミニマルなデザイン |
 
-#### Nghệ thuật tuần tự (bảng phân cảnh / truyện tranh)
+#### 連続したアート（コミック パネル / ストーリーボード）
 
-Dựa trên tính nhất quán của nhân vật và nội dung mô tả cảnh để tạo các bảng cho việc kể chuyện bằng hình ảnh. Để đảm bảo độ chính xác về văn bản và khả năng kể chuyện, những câu lệnh này hoạt động hiệu quả nhất với Gemini 3.1 Pro và Gemini 3.1 Flash Image.
+キャラクターの一貫性とシーンの説明に基づいて、ビジュアル ストーリーテリング用のパネルを作成します。テキストの精度とストーリーテリングの能力については、これらのプロンプトは Gemini 3.1 Pro と Gemini 3.1 Flash Image で最適に動作します。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **プロンプト** | **生成された出力** |
 | --- | --- |
-| **Hình ảnh đầu vào:**  Người đàn ông đeo kính trắng   Hình ảnh đầu vào   **Câu lệnh:** Tạo một truyện tranh gồm 3 khung theo phong cách nghệ thuật noir thô ráp, sử dụng mực đen trắng có độ tương phản cao. Đặt nhân vật vào một cảnh hài hước. | Bảng truyện tranh khắc nghiệt theo phong cách noir |
+| **入力画像:**  白いメガネをかけた男性   入力画像   **プロンプト:** 3 コマの漫画を、高コントラストのモノクロのインクを使った、ざらざらしたノワール アート スタイルで作成して。キャラクターをユーモラスなシーンに配置します。 | ざらざらしたノワール風のコミック パネル |
 
-#### Bám sát nguồn bằng Google Tìm kiếm
+#### Google 検索によるグラウンディング
 
-Sử dụng Google Tìm kiếm để tạo hình ảnh dựa trên thông tin gần đây hoặc thông tin theo thời gian thực.
-Điều này hữu ích cho tin tức, thông tin thời tiết và các chủ đề khác nhạy cảm về thời gian.
+Google 検索を使用して、最近の情報やリアルタイムの情報に基づいて画像を生成します。これは、ニュースや天気など、時間的制約のあるトピックに役立ちます。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **プロンプト** | **生成された出力** |
 | --- | --- |
-| Tạo một hình ảnh đơn giản nhưng phong cách về trận đấu tối qua của Arsenal tại giải Champions League | Đồ hoạ tỷ số bóng đá của Arsenal |
+| 昨夜のチャンピオンズ リーグのアーセナルの試合のシンプルでスタイリッシュなグラフィックを作成して | アーセナル サッカーのスコアのグラフィック |
 
-### Câu lệnh chỉnh sửa hình ảnh
+### 画像を編集するためのプロンプト
 
-Những ví dụ này cho thấy cách cung cấp hình ảnh cùng với câu lệnh văn bản để chỉnh sửa, tạo thành phần và chuyển kiểu.
+これらの例は、編集、構図、スタイル転送のテキスト プロンプトとともに画像を提供する方法を示しています。
 
-#### Thêm và xoá phần tử
+#### 要素の追加と削除
 
-Cung cấp một hình ảnh và mô tả thay đổi bạn muốn. Mô hình sẽ khớp với phong cách, ánh sáng và góc nhìn của hình ảnh gốc.
+画像を提供し、変更内容を説明します。モデルは、元の画像のスタイル、照明、遠近法に一致します。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **プロンプト** | **生成された出力** |
 | --- | --- |
-| **Hình ảnh đầu vào:**  Một bức ảnh chân thực về một chú mèo lông xù màu gừng...   Hình ảnh đầu vào   **Câu lệnh:** Dựa vào hình ảnh được cung cấp về chú mèo của tôi, vui lòng thêm một chiếc mũ phù thuỷ nhỏ bằng len trên đầu chú mèo. Hãy chỉnh sửa sao cho vật thể trông như đang nằm thoải mái và phù hợp với ánh sáng dịu nhẹ của bức ảnh. | Mèo đội mũ phù thuỷ |
+| **入力画像:**  ふわふわの茶色の猫のリアルな写真...   入力画像   **プロンプト:** 提供した猫の画像を使用して、猫の頭に小さな編み物の魔法使いの帽子を追加してください。写真の柔らかな照明と調和し、快適に座っているように見えるようにしてください。 | 魔法使いの帽子をかぶった猫 |
 
-#### Chỉnh sửa cụ thể (tạo mặt nạ ngữ nghĩa)
+#### インペイント（セマンティック マスク）
 
-Xác định "mặt nạ" bằng cách trò chuyện để chỉnh sửa một phần cụ thể của hình ảnh mà không ảnh hưởng đến phần còn lại.
+会話形式で「マスク」を定義して、画像の特定の部分を編集し、残りの部分はそのままにできます。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **プロンプト** | **生成された出力** |
 | --- | --- |
-| **Hình ảnh đầu vào:**  Một cảnh quay rộng về một phòng khách hiện đại, đủ ánh sáng...   Hình ảnh đầu vào   **Câu lệnh:** Dựa vào hình ảnh phòng khách được cung cấp, hãy chỉ thay đổi chiếc ghế sofa màu xanh dương thành một chiếc ghế sofa Chesterfield bằng da màu nâu theo phong cách cổ điển. Giữ nguyên phần còn lại của căn phòng, bao gồm cả gối trên ghế sofa và ánh sáng. | Phòng khách có ghế sofa bằng da màu nâu |
+| **入力画像:**  モダンで明るいリビングルームのワイドショット...   入力画像   **プロンプト:** 提供されたリビングルームの画像を使用して、青いソファだけをヴィンテージの茶色の革製チェスターフィールド ソファに変更してください。ソファの枕や照明など、部屋の他の部分は変更しないでください。 | 茶色の革張りソファがあるリビングルーム |
 
-#### Chuyển đổi kiểu
+#### 画風変換
 
-Cung cấp một hình ảnh và yêu cầu mô hình tạo lại nội dung của hình ảnh đó theo một phong cách nghệ thuật khác.
+画像を提供し、異なる画風でコンテンツを再現するようにモデルに指示します。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **プロンプト** | **生成された出力** |
 | --- | --- |
-| **Hình ảnh đầu vào:**  Một bức ảnh chân thực, có độ phân giải cao về một con phố nhộn nhịp trong thành phố...   Hình ảnh đầu vào   **Câu lệnh:** Biến bức ảnh được cung cấp về một đường phố hiện đại trong thành phố vào ban đêm thành phong cách nghệ thuật của bức tranh "Đêm đầy sao" của Vincent van Gogh. Giữ nguyên bố cục ban đầu của các toà nhà và ô tô, nhưng kết xuất tất cả các phần tử bằng những nét vẽ xoáy tròn, đắp nổi và bảng màu ấn tượng gồm màu xanh dương đậm và màu vàng tươi. | Đường phố theo phong cách Đêm đầy sao |
+| **入力画像:**  にぎやかな街の通りのリアルな高解像度写真...   入力画像   **プロンプト:** 夜の都会のストリートの写真を、フィンセント ファン ゴッホの「星月夜」の画風に変換して。建物や車の元の構図はそのままに、すべての要素を渦巻くようなインパストの筆致と、深い青と明るい黄色の劇的なパレットでレンダリングします。 | 星月夜風の街路 |
 
-#### Bố cục nâng cao: kết hợp nhiều hình ảnh
+#### 高度な構図: 複数の画像を組み合わせる
 
-Cung cấp nhiều hình ảnh làm bối cảnh để tạo một cảnh ghép mới. Đây là lựa chọn hoàn hảo cho bản mô phỏng sản phẩm hoặc ảnh ghép sáng tạo.
+複数の画像をコンテキストとして提供し、新しい複合シーンを作成します。これは、プロダクト モックアップやクリエイティブ コラージュに最適です。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **プロンプト** | **生成された出力** |
 | --- | --- |
-| **Hình ảnh đầu vào:**  Ảnh chụp chuyên nghiệp chiếc váy hoa mùa hè màu xanh dương...   Đầu vào 1: Váy   Ảnh toàn thân của một người phụ nữ tóc búi...   Đầu vào 2: Người mẫu   **Câu lệnh:** Tạo một bức ảnh thời trang chuyên nghiệp cho thương mại điện tử. Lấy chiếc váy hoa màu xanh dương trong hình ảnh đầu tiên và cho người phụ nữ trong hình ảnh thứ hai mặc chiếc váy đó. Tạo một bức ảnh toàn thân chân thực về người phụ nữ mặc chiếc váy, với ánh sáng và bóng đổ được điều chỉnh cho phù hợp với môi trường ngoài trời. | Ảnh chụp thương mại điện tử về thời trang |
+| **入力画像:**  青い花柄の夏のワンピースのプロが撮影した写真...   入力 1: ドレス   髪を束ねた女性の全身写真...   入力 2: モデル   **プロンプト:** プロ仕様の e コマース ファッション写真を作成します。1 枚目の画像の青い花柄のドレスを、2 枚目の画像の女性に着せてください。屋外の環境に合わせて照明と影を調整し、ドレスを着た女性のリアルな全身ショットを生成します。 | ファッション e コマースのショット |
 
-#### Giữ lại chi tiết có độ trung thực cao
+#### 高忠実度の詳細保持
 
-Để đảm bảo các chi tiết quan trọng (chẳng hạn như khuôn mặt hoặc biểu trưng) được giữ nguyên trong quá trình chỉnh sửa, hãy mô tả chi tiết các chi tiết đó cùng với yêu cầu chỉnh sửa của bạn.
+編集時に重要な詳細（顔やロゴなど）が保持されるように、編集リクエストとともに詳細を説明してください。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **プロンプト** | **生成された出力** |
 | --- | --- |
-| **Hình ảnh đầu vào:**  Ảnh chân dung chuyên nghiệp của một phụ nữ có mái tóc nâu và đôi mắt xanh dương...   Đầu vào 1: Phụ nữ   Một biểu trưng đơn giản, hiện đại có chữ &quot;G&quot; và &quot;A&quot;...   Đầu vào 2: Biểu trưng   **Câu lệnh:** Lấy hình ảnh đầu tiên của người phụ nữ có mái tóc nâu, mắt xanh và biểu cảm trung tính. Thêm biểu trưng trong hình ảnh thứ hai vào áo thun đen của cô ấy. Đảm bảo khuôn mặt và các đặc điểm của người phụ nữ hoàn toàn không thay đổi. Biểu trưng phải trông như được in tự nhiên trên vải, theo các nếp gấp của áo. | Người phụ nữ mặc áo thun có biểu trưng |
+| **入力画像:**  茶色の髪と青い目の女性のビジネス用プロフィール写真...   入力 1: 女性   「G」と「A」の文字が入ったシンプルでモダンなロゴ...   入力 2: ロゴ   **プロンプト:** 茶色の髪、青い目、無表情の女性の最初の画像を取得します。2 枚目の画像のロゴを彼女の黒い T シャツに追加して。女性の顔と特徴が完全に変わらないようにします。ロゴは、シャツの折り目に沿って生地に自然にプリントされているように見える必要があります。 | ロゴ付きの T シャツを着た女性 |
 
-#### Tạo cảm giác sống động cho một đối tượng
+#### 何かを生き生きと表現する
 
-Tải một bản phác thảo hoặc bản vẽ thô lên và yêu cầu mô hình tinh chỉnh thành một hình ảnh hoàn chỉnh.
+ラフスケッチや図面をアップロードして、モデルに完成した画像に仕上げるよう依頼します。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **プロンプト** | **生成された出力** |
 | --- | --- |
-| **Hình ảnh đầu vào:**  Bản phác thảo một chiếc ô tô   Bản phác thảo sơ bộ về một chiếc ô tô   **Câu lệnh:** Biến bản phác thảo bằng bút chì thô này về một chiếc xe hơi tương lai thành một bức ảnh bóng bẩy về chiếc xe ý tưởng đã hoàn thiện trong phòng trưng bày. Giữ nguyên các đường nét mượt mà và kiểu dáng thấp trong bản phác thảo, nhưng thêm sơn màu xanh dương ánh kim và đèn viền neon. | Ảnh chụp xe ý tưởng đã được chỉnh sửa |
+| **入力画像:**  車のスケッチ   車のラフスケッチ   **プロンプト:** この未来的な車のラフな鉛筆スケッチを、ショールームに展示されている完成したコンセプトカーの洗練された写真に変換してください。スケッチの滑らかなラインとロープロファイルはそのままに、メタリック ブルーの塗装とネオンのリム照明を追加します。 | コンセプトカーの磨かれた写真 |
 
-#### Đảm bảo tính nhất quán của nhân vật: Chế độ xem 360 độ
+#### キャラクターの一貫性: 360 度ビュー
 
-Bạn có thể tạo chế độ xem 360 độ của một nhân vật bằng cách liên tục đưa ra câu lệnh cho các góc khác nhau. Để có kết quả tốt nhất, hãy thêm những hình ảnh đã tạo trước đó vào các câu lệnh tiếp theo để duy trì tính nhất quán. Đối với những tư thế phức tạp, hãy thêm một hình ảnh tham khảo về tư thế mong muốn.
+さまざまな角度を繰り返しプロンプトすることで、キャラクターの 360 度ビューを生成できます。最適な結果を得るには、一貫性を保つために、以前に生成した画像を後続のプロンプトに含めます。複雑なポーズの場合は、目的のポーズの参照画像を含めます。
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **プロンプト** | **生成された出力** |
 | --- | --- |
-| **Hình ảnh đầu vào:**  Đầu vào ban đầu của một người đàn ông đeo kính trắng   Hình ảnh gốc   **Câu lệnh:** Chân dung của người đàn ông này trong phòng chụp ảnh, trên nền trắng, nhìn nghiêng sang phải | Kết quả là hình ảnh một người đàn ông đeo kính trắng đang nhìn sang phải   Người đàn ông đeo kính trắng nhìn sang phải   Ảnh một người đàn ông đeo kính trắng đang nhìn về phía trước   Người đàn ông đeo kính trắng nhìn về phía trước |
+| **入力画像:**  白いメガネをかけた男性の元の入力   元の画像   **プロンプト:** 白い背景を前に、右を向いた横顔の男性のスタジオ ポートレート | 白いメガネをかけて右を向いている男性の出力   白いメガネをかけて右を向いている男性   白いメガネをかけて前を向いている男性の出力   白いメガネをかけて前を向いている男性 |
 
-### Các phương pháp hay nhất
+### ベスト プラクティス
 
-Để nâng kết quả từ tốt lên xuất sắc, hãy kết hợp những chiến lược chuyên nghiệp này vào quy trình làm việc của bạn.
+結果を優れたものにするには、これらのプロフェッショナルな戦略をワークフローに組み込みます。
 
-- **Nêu thông tin siêu cụ thể:** Bạn càng cung cấp nhiều thông tin chi tiết, bạn càng có nhiều quyền kiểm soát. Thay vì "giáp giả tưởng", hãy mô tả: "giáp lá chắn tinh xảo của người lùn, khắc hoạ các hoạ tiết lá bạc, có cổ áo cao và cầu vai có hình dạng như cánh chim ưng".
-- **Cung cấp bối cảnh và ý định:** Giải thích *mục đích* của hình ảnh. Mức độ hiểu biết của mô hình về ngữ cảnh sẽ ảnh hưởng đến kết quả đầu ra cuối cùng. Ví dụ: "Tạo một biểu trưng cho một thương hiệu chăm sóc da tối giản, cao cấp" sẽ mang lại kết quả tốt hơn so với chỉ "Tạo một biểu trưng".
-- **Lặp lại và tinh chỉnh:** Đừng mong đợi một hình ảnh hoàn hảo ngay từ lần thử đầu tiên. Sử dụng tính chất đàm thoại của mô hình để thực hiện các thay đổi nhỏ. Tiếp tục đưa ra các câu lệnh như "Tuyệt vời, nhưng bạn có thể điều chỉnh ánh sáng ấm hơn một chút không?" hoặc "Giữ nguyên mọi thứ, nhưng thay đổi biểu cảm của nhân vật sao cho nghiêm túc hơn."
-- **Sử dụng hướng dẫn từng bước:** Đối với những cảnh phức tạp có nhiều phần tử, hãy chia câu lệnh thành các bước. "Trước tiên, hãy tạo một hình nền là khu rừng yên bình, mờ sương vào lúc bình minh. Sau đó, ở tiền cảnh, hãy thêm một bàn thờ bằng đá cổ được phủ đầy rêu.
-  Cuối cùng, hãy đặt một thanh kiếm phát sáng duy nhất lên trên bàn thờ."
-- **Sử dụng "câu lệnh phủ định ngữ nghĩa":** Thay vì nói "không có ô tô", hãy mô tả cảnh mong muốn một cách tích cực: "một con đường vắng vẻ, không có dấu hiệu giao thông".
-- **Kiểm soát camera:** Sử dụng ngôn ngữ nhiếp ảnh và điện ảnh để kiểm soát bố cục. Các thuật ngữ như `wide-angle shot`, `macro shot`, `low-angle
-  perspective`.
+- **具体的にする:** 詳細に説明するほど、より細かく制御できます。「ファンタジー アーマー」ではなく、「銀の葉の模様がエッチングされた、装飾的なエルフのプレート アーマー。ハイカラーとハヤブサの翼の形をした肩当て付き」とします。
+- **コンテキストと意図を提供する:** 画像の*目的*を説明します。モデルのコンテキストの理解が最終出力に影響します。たとえば、「高級感のあるミニマリストのスキンケア ブランドのロゴを作成して」は、「ロゴを作成して」よりも効果的です。
+- **繰り返して改良:** 最初の試行で完璧な画像が生成されるとは限りません。モデルの会話的な性質を利用して、小さな変更を行います。「素晴らしいですが、照明をもう少し暖色にできますか？」や「すべてそのままにして、キャラクターの表情をもっとシリアスにしてください」などのフォローアップ プロンプトを使用します。
+- **手順ガイドを使用する:** 多くの要素を含む複雑なシーンの場合は、プロンプトを手順に分割します。「まず、夜明けの静かで霧のかかった森の背景を作成して。次に、前景に苔むした古代の石の祭壇を追加して。最後に、祭壇の上に光る剣を 1 本置いて。」
+- **「セマンティック ネガティブ プロンプト」を使用する:** 「車なし」ではなく、「交通の気配のない、空っぽの寂れた通り」のように、ポジティブな表現でシーンを説明します。
+- **カメラを制御する:** 写真や映画の撮影用語を使用して、構図を制御します。`wide-angle shot`、`macro shot`、`low-angle
+  perspective` などの用語。
 
-## Các điểm hạn chế
+## 制限事項
 
-- Để có hiệu suất tốt nhất, hãy sử dụng các ngôn ngữ sau: tiếng Anh, tiếng Ả Rập (Ai Cập), tiếng Đức (Đức), tiếng Tây Ban Nha (Mexico), tiếng Pháp (Pháp), tiếng Hindi (Ấn Độ), tiếng Indonesia (Indonesia), tiếng Ý (Ý), tiếng Nhật (Nhật Bản), tiếng Hàn (Hàn Quốc), tiếng Bồ Đào Nha (Brazil), tiếng Nga (Nga), tiếng Ukraina (Ukraina), tiếng Việt (Việt Nam), tiếng Trung (Trung Quốc).
-- Tính năng tạo hình ảnh không hỗ trợ dữ liệu đầu vào bằng âm thanh. Chỉ Gemini 3.1 Flash Image mới hỗ trợ đầu vào là video.
-- Mô hình này không phải lúc nào cũng tạo ra chính xác số lượng hình ảnh mà người dùng yêu cầu.
-- `gemini-2.5-flash-image` hoạt động hiệu quả nhất khi có tối đa 3 hình ảnh làm dữ liệu đầu vào, trong khi `gemini-3-pro-image` hỗ trợ 5 hình ảnh có độ trung thực cao và tổng cộng tối đa 14 hình ảnh. `gemini-3.1-flash-image` hỗ trợ độ tương đồng ký tự lên đến 4 ký tự và độ trung thực lên đến 10 đối tượng trong một quy trình duy nhất.
-- Khi tạo văn bản cho một hình ảnh, Gemini hoạt động hiệu quả nhất nếu bạn tạo văn bản trước rồi yêu cầu tạo hình ảnh có văn bản đó.
-- `gemini-3.1-flash-image` Neo bám vào Google Tìm kiếm hiện không hỗ trợ việc sử dụng hình ảnh thực tế về con người từ tìm kiếm trên web.
-- Tất cả hình ảnh được tạo đều có [hình mờ SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=vi).
+- 最高のパフォーマンスを実現するには、EN、ar-EG、de-DE、es-MX、fr-FR、hi-IN、id-ID、it-IT、ja-JP、ko-KR、pt-BR、ru-RU、ua-UA、vi-VN、zh-CN のいずれかの言語を使用してください。
+- 画像生成では、音声入力はサポートされていません。動画入力は Gemini 3.1 Flash Image でのみサポートされています。
+- モデルは、ユーザーが明示的にリクエストした画像の出力数を正確に守るとは限りません。
+- `gemini-2.5-flash-image` は最大 3 枚の画像を、`gemini-3-pro-image` は高忠実度で 5 枚の画像をサポートし、合計で最大 14 枚の画像をサポートします。`gemini-3.1-flash-image` は、1 つのワークフローで最大 4 文字の文字類似性と最大 10 個のオブジェクトの忠実度をサポートします。
+- テキストを含む画像を生成するときは、まずテキストを生成してから、そのテキストを画像に変換するように頼むと、良い結果が得られます。
+- `gemini-3.1-flash-image` 現在、Google 検索によるグラウンディングでは、ウェブ検索から取得した人物の実写画像を使用することはできません。
+- 生成されたすべての画像には [SynthID の透かし](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=ja)が埋め込まれています。
 
-## Cấu hình không bắt buộc
+## オプションの構成
 
-Bạn có thể tuỳ ý định cấu hình các phương thức phản hồi và tỷ lệ khung hình của đầu ra của mô hình trong trường `config` của các lệnh gọi `generate_content`.
+必要に応じて、`generate_content` 呼び出しの `config` フィールドで、モデルの出力のレスポンス モダリティとアスペクト比を構成できます。
 
-### Loại kết quả
+### 出力形式
 
-Theo mặc định, mô hình sẽ trả về văn bản và hình ảnh (tức là `response_modalities=['Text', 'Image']`). Bạn có thể định cấu hình phản hồi để chỉ trả về hình ảnh mà không có văn bản bằng cách sử dụng `response_modalities=['Image']`.
+モデルはデフォルトでテキストと画像の両方のレスポンス（`response_modalities=['Text', 'Image']`）を返します。`response_modalities=['Image']` を使用すると、テキストなしで画像のみを返すようにレスポンスを構成できます。
 
 ### Python
 
@@ -2943,10 +2929,9 @@ curl -s -X POST \
   }'
 ```
 
-### Tỷ lệ khung hình và kích thước hình ảnh
+### アスペクト比と画像サイズ
 
-Theo mặc định, mô hình sẽ điều chỉnh kích thước hình ảnh đầu ra cho phù hợp với kích thước hình ảnh đầu vào của bạn, hoặc tạo ra các hình vuông 1:1.
-Bạn có thể kiểm soát tỷ lệ khung hình của hình ảnh đầu ra bằng cách sử dụng trường `aspect_ratio` trong `response_format` trong yêu cầu phản hồi, như minh hoạ ở đây:
+デフォルトでは、出力画像のサイズは入力画像のサイズと一致します。それ以外の場合は、1:1 の正方形が生成されます。レスポンス リクエストの `response_format` の `aspect_ratio` フィールドを使用して、出力画像のアスペクト比を制御できます。
 
 ### Python
 
@@ -3133,66 +3118,66 @@ curl -s -X POST \
   }'
 ```
 
-Các tỷ lệ hiện có và kích thước của hình ảnh được tạo được liệt kê trong các bảng sau:
+使用可能なさまざまな比率と生成される画像のサイズを次の表に示します。
 
 ### 3.1 Flash Image
 
-| Tỷ lệ khung hình | Độ phân giải 512 | 500 token | Độ phân giải 1K | 1.000 token | Độ phân giải 2K | 2.000 token | Độ phân giải 4K | 4.000 mã thông báo |
+| アスペクト比 | 512 解像度 | 0.5K トークン | 1K 解像度 | 1K トークン | 2K 解像度 | 2K トークン | 4K 解像度 | 4K トークン |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **1:1** | 512x512 | 747 | 1024x1024 | 1120 | 2048x2048 | 1680 | 4096x4096 | 2520 |
+| **1:1** | 512x512 | 747 | 1024 x 1024 | 1120 | 2,048x2,048 | 1680 | 4096x4096 | 2520 |
 | **1:4** | 256x1024 | 747 | 512x2048 | 1120 | 1024x4096 | 1680 | 2048x8192 | 2520 |
 | **1:8** | 192x1536 | 747 | 384x3072 | 1120 | 768x6144 | 1680 | 1536x12288 | 2520 |
 | **2:3** | 424x632 | 747 | 848x1264 | 1120 | 1696x2528 | 1680 | 3392x5056 | 2520 |
 | **3:2** | 632x424 | 747 | 1264x848 | 1120 | 2528x1696 | 1680 | 5056x3392 | 2520 |
-| **3:4** | 448x600 | 747 | 896x1200 | 1120 | 1792x2400 | 1680 | 3584x4800 | 2520 |
+| **3:4** | 448×600 | 747 | 896x1200 | 1120 | 1792x2400 | 1680 | 3584x4800 | 2520 |
 | **4:1** | 1024x256 | 747 | 2048x512 | 1120 | 4096x1024 | 1680 | 8192x2048 | 2520 |
-| **4:3** | 600x448 | 747 | 1200x896 | 1120 | 2400x1792 | 1680 | 4800x3584 | 2520 |
-| **4:5** | 464x576 | 747 | 928x1152 | 1120 | 1856x2304 | 1680 | 3712x4608 | 2520 |
+| **4:3** | 600×448 | 747 | 1,200×896 | 1120 | 2400x1792 | 1680 | 4800x3584 | 2520 |
+| **4:5** | 464×576 | 747 | 928x1152 | 1120 | 1856x2304 | 1680 | 3712x4608 | 2520 |
 | **5:4** | 576x464 | 747 | 1152x928 | 1120 | 2304x1856 | 1680 | 4608x3712 | 2520 |
 | **8:1** | 1536x192 | 747 | 3072x384 | 1120 | 6144x768 | 1680 | 12288x1536 | 2520 |
 | **9:16** | 384x688 | 747 | 768x1376 | 1120 | 1536x2752 | 1680 | 3072x5504 | 2520 |
-| **16:9** | 688x384 | 747 | 1376x768 | 1120 | 2752x1536 | 1680 | 5504x3072 | 2520 |
-| **21:9** | 792x168 | 747 | 1584x672 | 1120 | 3168x1344 | 1680 | 6336x2688 | 2520 |
+| **16:9** | 688x384 | 747 | 1376x768 | 1120 | 2752x1536 | 1680 | 5,504 x 3,072 | 2520 |
+| **21:9** | 792×168 | 747 | 1584x672 | 1120 | 3168x1344 | 1680 | 6336x2688 | 2520 |
 
-### 3.1 Hình ảnh Flash Lite
+### 3.1 Flash Lite Image
 
-| Tỷ lệ khung hình | Độ phân giải 512 | 500 token | Độ phân giải 1K | 1.000 token |
+| アスペクト比 | 512 解像度 | 0.5K トークン | 1K 解像度 | 1K トークン |
 | --- | --- | --- | --- | --- |
-| **1:1** | 512x512 | 747 | 1024x1024 | 1120 |
+| **1:1** | 512x512 | 747 | 1024 x 1024 | 1120 |
 | **1:4** | 256x1024 | 747 | 512x2048 | 1120 |
 | **1:8** | 192x1536 | 747 | 384x3072 | 1120 |
 | **2:3** | 424x632 | 747 | 848x1264 | 1120 |
 | **3:2** | 632x424 | 747 | 1264x848 | 1120 |
-| **3:4** | 448x600 | 747 | 896x1200 | 1120 |
+| **3:4** | 448×600 | 747 | 896x1200 | 1120 |
 | **4:1** | 1024x256 | 747 | 2048x512 | 1120 |
-| **4:3** | 600x448 | 747 | 1200x896 | 1120 |
-| **4:5** | 464x576 | 747 | 928x1152 | 1120 |
+| **4:3** | 600×448 | 747 | 1,200×896 | 1120 |
+| **4:5** | 464×576 | 747 | 928x1152 | 1120 |
 | **5:4** | 576x464 | 747 | 1152x928 | 1120 |
 | **8:1** | 1536x192 | 747 | 3072x384 | 1120 |
 | **9:16** | 384x688 | 747 | 768x1376 | 1120 |
 | **16:9** | 688x384 | 747 | 1376x768 | 1120 |
-| **21:9** | 792x168 | 747 | 1584x672 | 1120 |
+| **21:9** | 792×168 | 747 | 1584x672 | 1120 |
 
 ### 3.1 Pro Image
 
-| Tỷ lệ khung hình | Độ phân giải 1K | 1.000 token | Độ phân giải 2K | 2.000 token | Độ phân giải 4K | 4.000 mã thông báo |
+| アスペクト比 | 1K 解像度 | 1K トークン | 2K 解像度 | 2K トークン | 4K 解像度 | 4K トークン |
 | --- | --- | --- | --- | --- | --- | --- |
-| **1:1** | 1024x1024 | 1120 | 2048x2048 | 1120 | 4096x4096 | 2000 |
+| **1:1** | 1024 x 1024 | 1120 | 2,048x2,048 | 1120 | 4096x4096 | 2000 |
 | **2:3** | 848x1264 | 1120 | 1696x2528 | 1120 | 3392x5056 | 2000 |
 | **3:2** | 1264x848 | 1120 | 2528x1696 | 1120 | 5056x3392 | 2000 |
 | **3:4** | 896x1200 | 1120 | 1792x2400 | 1120 | 3584x4800 | 2000 |
-| **4:3** | 1200x896 | 1120 | 2400x1792 | 1120 | 4800x3584 | 2000 |
+| **4:3** | 1,200×896 | 1120 | 2400x1792 | 1120 | 4800x3584 | 2000 |
 | **4:5** | 928x1152 | 1120 | 1856x2304 | 1120 | 3712x4608 | 2000 |
 | **5:4** | 1152x928 | 1120 | 2304x1856 | 1120 | 4608x3712 | 2000 |
 | **9:16** | 768x1376 | 1120 | 1536x2752 | 1120 | 3072x5504 | 2000 |
-| **16:9** | 1376x768 | 1120 | 2752x1536 | 1120 | 5504x3072 | 2000 |
+| **16:9** | 1376x768 | 1120 | 2752x1536 | 1120 | 5,504 x 3,072 | 2000 |
 | **21:9** | 1584x672 | 1120 | 3168x1344 | 1120 | 6336x2688 | 2000 |
 
-### Hình ảnh Gemini 2.5 Flash
+### Gemini 2.5 Flash Image
 
-| Tỷ lệ khung hình | Độ phân giải | Mã thông báo |
+| アスペクト比 | 解決策 | トークン |
 | --- | --- | --- |
-| 1:1 | 1024x1024 | 1290 |
+| 1:1 | 1024 x 1024 | 1290 |
 | 2:3 | 832x1248 | 1290 |
 | 3:2 | 1248x832 | 1290 |
 | 3:4 | 864x1184 | 1290 |
@@ -3203,32 +3188,31 @@ Các tỷ lệ hiện có và kích thước của hình ảnh được tạo đ
 | 16:9 | 1344x768 | 1290 |
 | 21:9 | 1536x672 | 1290 |
 
-## Lựa chọn mô hình
+## モデルの選択
 
-Chọn mô hình phù hợp nhất với trường hợp sử dụng cụ thể của bạn.
+特定のユースケースに最適なモデルを選択します。
 
-- **Hình ảnh Gemini 3.1 Flash (Nano Banana 2)** nên là mô hình tạo hình ảnh mà bạn ưu tiên sử dụng, vì đây là mô hình có hiệu suất và trí thông minh toàn diện tốt nhất để cân bằng chi phí và độ trễ. Hãy xem trang [giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#gemini-3.1-flash-image) và [khả năng](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=vi) của mô hình để biết thêm thông tin chi tiết.
-- **Gemini 3.1 Flash Lite Image (Nano Banana 2 Lite)** được thiết kế để trở thành chuyên gia hiệu quả trong nhóm mô hình tạo hình ảnh, mang đến độ trễ cực thấp và khả năng tạo cũng như chỉnh sửa hình ảnh tiết kiệm chi phí.
-  Hãy xem trang [giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#gemini-3.1-flash-lite-image) và [khả năng](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=vi) của mô hình để biết thêm thông tin.
-- **Hình ảnh do Gemini 3 Pro tạo (Nano Banana Pro)** được thiết kế để tạo ra các thành phần chuyên nghiệp và thực hiện các chỉ dẫn phức tạp. Mô hình này có tính năng xác thực thông tin thực tế bằng Google Tìm kiếm, quy trình "Suy nghĩ" mặc định giúp tinh chỉnh thành phần trước khi tạo và có thể tạo hình ảnh có độ phân giải lên đến 4K. Hãy xem trang [giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#gemini-3-pro-image) và [khả năng](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=vi) của mô hình để biết thêm thông tin chi tiết.
-- **Hình ảnh Gemini 2.5 Flash (Nano Banana)** được thiết kế để mang lại tốc độ và hiệu quả. Mô hình này được tối ưu hoá cho các tác vụ có khối lượng lớn và độ trễ thấp, đồng thời tạo ra hình ảnh ở độ phân giải 1024 px. Hãy xem trang [giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#gemini-2.5-flash-image) và [khả năng](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=vi) của mô hình để biết thêm thông tin chi tiết.
+- **Gemini 3.1 Flash Image（Nano Banana 2）**は、コストとレイテンシのバランスが取れた、最高のオールラウンドなパフォーマンスとインテリジェンスを備えているため、画像生成モデルとして最適です。詳細については、モデルの[料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#gemini-3.1-flash-image)と[機能](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=ja)のページをご覧ください。
+- **Gemini 3.1 Flash Lite Image（Nano Banana 2 Lite）**は、画像生成ファミリーの効率のスペシャリストとして設計されており、超低レイテンシで費用対効果の高い画像生成と編集を実現します。詳細については、モデルの[料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#gemini-3.1-flash-lite-image)と[機能](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=ja)のページをご覧ください。
+- **Gemini 3 Pro Image（Nano Banana Pro）**は、プロフェッショナルなアセット制作と複雑な指示に対応するように設計されています。このモデルは、Google 検索を使用した実世界のグラウンディング、生成前に構成を調整するデフォルトの「思考」プロセスを備えており、最大 4K の解像度の画像を生成できます。詳細については、モデルの[料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#gemini-3-pro-image)と[機能](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=ja)のページをご覧ください。
+- **Gemini 2.5 Flash Image（Nano Banana）**は、速度と効率性を重視して設計されています。このモデルは、大容量で低レイテンシのタスク向けに最適化されており、1, 024 ピクセルの解像度で画像を生成します。詳細については、モデルの[料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#gemini-2.5-flash-image)と[機能](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=ja)のページをご覧ください。
 
-### Trường hợp nên sử dụng Imagen
+### Imagen を使用する場面
 
-Ngoài việc sử dụng các tính năng tạo hình ảnh tích hợp của Gemini, bạn cũng có thể truy cập vào [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=vi), mô hình tạo hình ảnh chuyên biệt của chúng tôi, thông qua Gemini API. Lên kế hoạch di chuyển trước ngày ngừng hoạt động.
+Gemini の組み込みの画像生成機能を使用するだけでなく、Gemini API を介して Google の特別な画像生成モデルである [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=ja) にもアクセスできます。シャットダウン日より前に移行する計画を立ててください。
 
-## Bước tiếp theo
+## 次のステップ
 
-- Tìm thêm ví dụ và mã mẫu trong [hướng dẫn về sổ tay hướng dẫn](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_Started_Nano_Banana.ipynb?hl=vi).
-- Hãy xem [hướng dẫn về Veo](https://ai.google.dev/gemini-api/docs/video?hl=vi) để tìm hiểu cách tạo video bằng Gemini API.
-- Để tìm hiểu thêm về các mô hình Gemini, hãy xem phần [Các mô hình Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi).
+- その他の例とコードサンプルについては、[クックブック ガイド](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_Started_Nano_Banana.ipynb?hl=ja)をご覧ください。
+- Gemini API を使用して動画を生成する方法については、[Veo ガイド](https://ai.google.dev/gemini-api/docs/video?hl=ja)をご覧ください。
+- Gemini モデルの詳細については、[Gemini モデル](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja)をご覧ください。
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Cập nhật lần gần đây nhất: 2026-07-30 UTC.
+最終更新日 2026-07-30 UTC。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+ご意見をお聞かせください
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-30 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-30 UTC。"],[],[]]

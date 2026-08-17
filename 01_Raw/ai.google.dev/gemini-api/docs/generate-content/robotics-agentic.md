@@ -1,36 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-agentic?hl=id
-fetched_at: 2026-08-10T03:10:34.830322+00:00
-title: "Kemampuan visi agentik \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-agentic?hl=hi
+fetched_at: 2026-08-17T02:25:57.586093+00:00
+title: "\u090f\u091c\u0947\u0902\u091f\u093f\u0915 \u0935\u093f\u091c\u093c\u0928 \u0915\u0940 \u0938\u0941\u0935\u093f\u0927\u093e\u090f\u0901 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Kirim masukan
+सुझाव भेजें
 
-# Kemampuan visi agentik
+# एजेंटिक विज़न की सुविधाएँ
 
-Model Gemini Robotics ER dapat menulis dan menjalankan kode Python untuk memanipulasi gambar dan menerapkan logika sebelum menjawab. Halaman ini membahas contoh eksekusi kode: deteksi objek dengan zoom dan pangkas, pembacaan instrumen, pengukuran cairan, pembacaan papan sirkuit, dan anotasi gambar.
+Gemini Robotics ER मॉडल, इमेज में बदलाव करने और जवाब देने से पहले लॉजिक लागू करने के लिए, Python कोड लिख और चला सकते हैं. इस पेज पर, कोड चलाने के उदाहरण दिए गए हैं. जैसे: ज़ूम और क्रॉप करके ऑब्जेक्ट का पता लगाना, इंस्ट्रुमेंट रीडिंग, फ़्लूड मेज़रमेंट, सर्किट बोर्ड रीडिंग, और इमेज एनोटेशन.
 
-Untuk mengadaptasi contoh ini ke kasus penggunaan Anda sendiri, ganti teks perintah dan file gambar yang diupload dengan milik Anda sendiri. Anda juga dapat menyesuaikan skema JSON yang diminta dalam perintah agar sesuai dengan struktur output yang dibutuhkan aplikasi Anda, atau menambahkan `system_instruction` untuk menerapkan format dan presisi output.
+इन उदाहरणों को अपने इस्तेमाल के हिसाब से ढालने के लिए, प्रॉम्प्ट में दिए गए टेक्स्ट और अपलोड की गई इमेज फ़ाइल को अपनी जानकारी से बदलें. इसके अलावा, प्रॉम्प्ट में अनुरोध किए गए JSON स्कीमा में बदलाव करके, उसे अपने ऐप्लिकेशन के आउटपुट स्ट्रक्चर से मैच किया जा सकता है. साथ ही, आउटपुट फ़ॉर्मैट और सटीक जानकारी के लिए, `system_instruction` जोड़ा जा सकता है.
 
-Untuk kode yang dapat dijalankan sepenuhnya, lihat
-[Cookbook Robotics](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+रन किया जा सकने वाला पूरा कोड देखने के लिए, [Robotics cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb) देखें.
 
-## Tingkat penalaran
+## सूझ-बूझ वाले मॉडल का लेवल
 
-Anda dapat mengontrol tingkat penalaran untuk menukar latensi dengan akurasi. Tugas spasial seperti deteksi objek berperforma baik dengan tingkat penalaran yang rendah. Tugas kompleks seperti penghitungan atau estimasi berat akan mendapatkan manfaat dari tingkat penalaran yang lebih tinggi.
+सटीक जानकारी पाने के लिए, इंतज़ार करने का समय बढ़ाने के लिए, सूझ-बूझ वाले मॉडल के लेवल को कंट्रोल किया जा सकता है. ऑब्जेक्ट का पता लगाने की सुविधा जैसे स्पेस से जुड़े टास्क, सूझ-बूझ वाले मॉडल के कम लेवल पर भी अच्छी तरह काम करते हैं. गिनती करना या वज़न का अनुमान लगाना जैसे मुश्किल टास्क, सूझ-बूझ वाले मॉडल के ज़्यादा लेवल पर अच्छी तरह काम करते हैं.
 
-Contoh berikut menetapkan tingkat penalaran ke `high` untuk tugas penghitungan yang kompleks:
+यहां दिए गए उदाहरण में, गिनती करने जैसे मुश्किल टास्क के लिए, सूझ-बूझ वाले मॉडल का लेवल `high` पर सेट किया गया है:
 
 ### Python
 
@@ -60,11 +59,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Lihat [Penalaran](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=id) untuk mengetahui detailnya.
+ज़्यादा जानकारी के लिए, [सूझ-बूझ वाले मॉडल का लेवल](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=hi) देखें.
 
-## Deteksi objek (Zoom dan pangkas)
+## ऑब्जेक्ट का पता लगाने की सुविधा (ज़ूम और क्रॉप करना)
 
-Contoh berikut menunjukkan cara menggunakan eksekusi kode untuk memperbesar dan memangkas gambar agar tampilan lebih jelas saat mendeteksi objek dan menampilkan kotak pembatas.
+यहां दिए गए उदाहरण में बताया गया है कि ऑब्जेक्ट का पता लगाने और बाउंडिंग बॉक्स दिखाने के लिए, इमेज को ज़ूम और क्रॉप करने के लिए, कोड एक्ज़ीक्यूशन का इस्तेमाल कैसे करें.
 
 ### Python
 
@@ -102,7 +101,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Output model akan mirip dengan respons json berikut:
+मॉडल का आउटपुट, यहां दिए गए JSON रिस्पॉन्स जैसा होगा:
 
 ```
 [
@@ -114,13 +113,13 @@ Output model akan mirip dengan respons json berikut:
 ]
 ```
 
-Gambar berikut menampilkan kotak yang ditampilkan dari model.
+यहां दी गई इमेज में, मॉडल से मिले बॉक्स दिखाए गए हैं.
 
-![Contoh yang menampilkan kotak pembatas untuk objek yang ditemukan](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=id)
+![मिली हुई चीज़ों के लिए बाउंडिंग बॉक्स दिखाने वाला उदाहरण](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=hi)
 
-## Membaca pengukur analog dan menerapkan logika
+## ऐनलॉग गेज को पढ़ना और लॉजिक लागू करना
 
-Contoh berikut menunjukkan cara menggunakan model untuk membaca pengukur analog dan melakukan penghitungan waktu. Contoh ini menggunakan instruksi sistem untuk menerapkan output JSON.
+यहां दिए गए उदाहरण में बताया गया है कि ऐनलॉग गेज को पढ़ने और समय की कैलकुलेशन करने के लिए, मॉडल का इस्तेमाल कैसे करें. इसमें JSON आउटपुट लागू करने के लिए, सिस्टम इंस्ट्रक्शन का इस्तेमाल किया गया है.
 
 ### Python
 
@@ -156,9 +155,9 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-## Mengukur cairan dalam wadah
+## कंटेनर में मौजूद फ़्लूड को मेज़र करना
 
-Contoh berikut menunjukkan cara menggunakan eksekusi kode untuk mengukur tingkat cairan dalam wadah.
+यहां दिए गए उदाहरण में बताया गया है कि कंटेनर में मौजूद फ़्लूड के लेवल को मेज़र करने के लिए, कोड एक्ज़ीक्यूशन का इस्तेमाल कैसे करें.
 
 ### Python
 
@@ -193,9 +192,9 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-## Membaca tanda pada papan sirkuit
+## सर्किट बोर्ड पर मौजूद निशान पढ़ना
 
-Contoh berikut menunjukkan cara menggunakan eksekusi kode untuk membaca tanda pada papan sirkuit.
+यहां दिए गए उदाहरण में बताया गया है कि सर्किट बोर्ड पर मौजूद निशान पढ़ने के लिए, कोड चलाने की सुविधा का इस्तेमाल कैसे करें.
 
 ### Python
 
@@ -230,11 +229,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-![Contoh yang menampilkan tanda pada papan sirkuit](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=id)
+![सर्किट बोर्ड पर मार्किंग दिखाने वाला उदाहरण](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=hi)
 
-## Anotasi gambar
+## इमेज के ऊपर टेक्स्ट, लिंक वगैरह
 
-Contoh berikut menunjukkan cara menggunakan eksekusi kode untuk menganotasi gambar (misalnya, menggambar panah untuk petunjuk pembuangan) dan menampilkan gambar yang diubah.
+यहां दिए गए उदाहरण में बताया गया है कि इमेज को एनोटेट करने के लिए, कोड एक्ज़ीक्यूशन का इस्तेमाल कैसे करें. जैसे, डिस्पोज़ल के निर्देशों के लिए तीर के निशान बनाना और बदली हुई इमेज दिखाना.
 
 ### Python
 
@@ -271,11 +270,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Berikut adalah contoh input gambar.
+यहां इनपुट के तौर पर इस्तेमाल की गई इमेज का उदाहरण दिया गया है.
 
-![Contoh yang menunjukkan jam untuk dibaca](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=id)
+![पढ़ने के लिए घड़ी दिखाने वाला उदाहरण](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=hi)
 
-Output model akan mirip dengan berikut ini:
+मॉडल का आउटपुट, यहां दिए गए आउटपुट जैसा होगा:
 
 ```
   The annotated image shows the suggested disposal locations for the items on the table:
@@ -284,18 +283,18 @@ Output model akan mirip dengan berikut ini:
   - **Black bin (Trash)**: Chocolate bar wrapper, Welch's packet, and white tissue.
 ```
 
-## Langkah berikutnya
+## आगे क्या करना है
 
-- [Orkestrasi tugas](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=id) — tugas jangka panjang dengan API robot kustom.
-- [Robotika dengan streaming](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=id) — streaming dua arah real-time (khusus Gemini Robotics ER 2).
-- [Pemahaman video](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=id) — menemukan momen dan klasifikasi progres (khusus Gemini Robotics ER 2).
+- [टास्क ऑर्केस्ट्रेशन](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=hi) — कस्टम रोबोट एपीआई की मदद से, लंबे समय तक चलने वाले टास्क.
+- [स्ट्रीमिंग की सुविधा के साथ रोबोटिक्स](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=hi) — रीयल-टाइम में दोनों दिशाओं में स्ट्रीमिंग (सिर्फ़ Gemini Robotics ER 2 में उपलब्ध).
+- [वीडियो को समझना](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=hi) — अहम पलों का पता लगाना और प्रोग्रेस क्लासिफ़िकेशन (सिर्फ़ Gemini Robotics ER 2 में उपलब्ध).
 
-Kirim masukan
+सुझाव भेजें
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Terakhir diperbarui pada 2026-07-30 UTC.
+आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया.
 
-Ada masukan untuk kami?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-30 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया."],[],[]]

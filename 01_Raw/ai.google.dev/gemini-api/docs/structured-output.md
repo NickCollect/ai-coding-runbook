@@ -1,41 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=pl
-fetched_at: 2026-08-10T03:25:12.569044+00:00
-title: "Dane wyj\u015bciowe uporz\u0105dkowane \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=vi
+fetched_at: 2026-08-17T02:21:38.907128+00:00
+title: "K\u1ebft qu\u1ea3 c\u00f3 c\u1ea5u tr\u00fac \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Prześlij opinię
+Gửi ý kiến phản hồi
 
-# Dane wyjściowe uporządkowane
+# Kết quả có cấu trúc
 
-Modele Gemini możesz skonfigurować tak, aby generowały odpowiedzi zgodne z podanym schematem JSON. Dzięki temu uzyskasz przewidywalne i bezpieczne typowo wyniki oraz uprościsz wyodrębnianie uporządkowanych danych z nieuporządkowanego tekstu.
+Bạn có thể định cấu hình các mô hình Gemini để tạo câu trả lời tuân thủ Giản đồ JSON được cung cấp. Điều này đảm bảo kết quả có thể dự đoán và an toàn về kiểu, đồng thời đơn giản hoá việc trích xuất dữ liệu có cấu trúc từ văn bản không có cấu trúc.
 
-Używanie uporządkowanych danych wyjściowych jest idealne w tych przypadkach:
+Sử dụng đầu ra có cấu trúc là lựa chọn lý tưởng cho:
 
-- **Wyodrębnianie danych:** wyodrębnianie z tekstu konkretnych informacji, takich jak imiona i nazwiska oraz daty.
-- **Uporządkowana klasyfikacja:** klasyfikowanie tekstu według wstępnie zdefiniowanych kategorii.
-- **Przepływy pracy agenta:** generowanie uporządkowanych danych wejściowych dla narzędzi lub interfejsów API.
+- **Trích xuất dữ liệu:** Lấy thông tin cụ thể như tên và ngày tháng từ văn bản.
+- **Phân loại có cấu trúc:** Phân loại văn bản thành các danh mục được xác định trước.
+- **Quy trình công việc dựa trên tác nhân:** Tạo thông tin đầu vào có cấu trúc cho các công cụ hoặc API.
 
-Oprócz obsługi schematu JSON w interfejsie REST API, pakiety SDK Google GenAI
-umożliwiają definiowanie schematów za pomocą
-[Pydantic](https://docs.pydantic.dev/latest/) (Python) i
-[Zod](https://zod.dev/) (JavaScript).
+Ngoài việc hỗ trợ JSON Schema trong API REST, Google GenAI SDK còn cho phép xác định giản đồ bằng [Pydantic](https://docs.pydantic.dev/latest/) (Python) và [Zod](https://zod.dev/) (JavaScript).
 
-## Przykłady uporządkowanych danych wyjściowych
+## Ví dụ về đầu ra có cấu trúc
 
-### Ekstraktor przepisów
+### Công cụ trích xuất công thức
 
-Ten przykład pokazuje, jak wyodrębniać uporządkowane dane z tekstu za pomocą podstawowych typów schematu JSON, takich jak `object`, `array`, `string` i `integer`.
+Ví dụ này minh hoạ cách trích xuất dữ liệu có cấu trúc từ văn bản bằng các loại Giản đồ JSON cơ bản như `object`, `array`, `string` và `integer`.
 
 ### Python
 
@@ -199,7 +196,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Przykładowa odpowiedź:**
+**Ví dụ về câu trả lời:**
 
 ```
 {
@@ -227,9 +224,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### Moderacja treści
+### Kiểm duyệt nội dung
 
-Ten przykład pokazuje, jak używać `anyOf` w przypadku schematów warunkowych i `enum` w przypadku klasyfikacji, co pozwala na zmianę struktury danych wyjściowych w zależności od treści.
+Ví dụ này minh hoạ `anyOf` cho các giản đồ có điều kiện và `enum` cho việc phân loại, cho phép cấu trúc đầu ra thay đổi dựa trên nội dung.
 
 ### Python
 
@@ -378,7 +375,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Przykładowa odpowiedź:**
+**Ví dụ về câu trả lời:**
 
 ```
 {
@@ -389,9 +386,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### Struktury rekurencyjne
+### Cấu trúc đệ quy
 
-Ten przykład pokazuje, jak zdefiniować schemat rekurencyjny, np. schemat organizacyjny.
+Ví dụ này minh hoạ cách xác định một giản đồ đệ quy, chẳng hạn như biểu đồ tổ chức.
 
 ### Python
 
@@ -508,7 +505,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Przykładowa odpowiedź:**
+**Ví dụ về câu trả lời:**
 
 ```
 {
@@ -535,9 +532,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-## Strumieniowanie wyników
+## Kết quả phát trực tuyến
 
-Możesz strumieniować uporządkowane dane wyjściowe, co pozwala na rozpoczęcie przetwarzania odpowiedzi w trakcie jej generowania. Strumieniowane fragmenty są prawidłowymi częściowymi ciągami JSON, które można połączyć, aby utworzyć ostateczny obiekt JSON.
+Bạn có thể truyền trực tuyến các đầu ra có cấu trúc, cho phép bạn bắt đầu xử lý phản hồi khi phản hồi đang được tạo. Các khối được truyền trực tuyến là các chuỗi JSON hợp lệ một phần có thể được nối để tạo thành đối tượng JSON cuối cùng.
 
 ### Python
 
@@ -634,14 +631,9 @@ curl -N -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
     }'
 ```
 
-## Uporządkowane dane wyjściowe z narzędziami
+## Đầu ra có cấu trúc bằng các công cụ
 
-Gemini 3 umożliwia łączenie uporządkowanych danych wyjściowych z wbudowanymi narzędziami, takimi jak
-[powiązanie ze źródłami informacji przy użyciu wyszukiwarki Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pl),
-[kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl),
-[wykonanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl),
-[File Search](https://ai.google.dev/gemini-api/docs/file-search?hl=pl#structured-output), i
-[wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl).
+Gemini 3 cho phép bạn kết hợp Đầu ra có cấu trúc với các công cụ tích hợp, bao gồm [Neo bám vào Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi), [Bối cảnh từ URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi), [Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi), [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi#structured-output) và [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi).
 
 ### Python
 
@@ -734,80 +726,79 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Obsługa schematu JSON
+## Hỗ trợ giản đồ JSON
 
-Aby wygenerować obiekt JSON, skonfiguruj `response_format` za pomocą obiektu (lub tablicy zawierającej obiekt) typu `text` i ustaw jego `mime_type` na `application/json`. Schemat należy podać w polu `schema`.
+Để tạo một đối tượng JSON, hãy định cấu hình `response_format` bằng một đối tượng (hoặc một mảng chứa một đối tượng) thuộc loại `text` và đặt `mime_type` của đối tượng đó thành `application/json`. Bạn nên cung cấp giản đồ trong trường `schema`.
 
-Tryb uporządkowanych danych wyjściowych Gemini obsługuje podzbiór specyfikacji
-[schematu JSON](https://json-schema.org/).
+Chế độ đầu ra có cấu trúc của Gemini hỗ trợ một phần của quy cách [Giản đồ JSON](https://json-schema.org/).
 
-Obsługiwane są te wartości `type`:
+Sau đây là các giá trị được hỗ trợ của `type`:
 
-- **`string`**: w przypadku tekstu.
-- **`number`**: w przypadku liczb zmiennoprzecinkowych.
-- **`integer`**: w przypadku liczb całkowitych.
-- **`boolean`**: w przypadku wartości true lub false.
-- **`object`**: w przypadku uporządkowanych danych z parami klucz-wartość.
-- **`array`**: w przypadku list elementów.
-- **`null`**: aby zezwolić na wartość null właściwości, dodaj `"null"` do tablicy typów (np. `{"type": ["string", "null"]}`).
+- **`string`**: Đối với văn bản.
+- **`number`**: Đối với số dấu phẩy động.
+- **`integer`**: Đối với số nguyên.
+- **`boolean`**: Đối với giá trị đúng hoặc sai.
+- **`object`**: Đối với dữ liệu có cấu trúc có các cặp khoá-giá trị.
+- **`array`**: Đối với danh sách các mục.
+- **`null`**: Để cho phép một thuộc tính có giá trị rỗng, hãy thêm `"null"` vào mảng loại (ví dụ: `{"type": ["string", "null"]}`).
 
-Te właściwości opisowe pomagają modelowi:
+Những thuộc tính mô tả này giúp hướng dẫn mô hình:
 
-- **`title`**: krótki opis właściwości.
-- **`description`**: dłuższy i bardziej szczegółowy opis właściwości.
+- **`title`**: Nội dung mô tả ngắn về một tài sản.
+- **`description`**: Nội dung mô tả dài hơn và chi tiết hơn về một tài sản.
 
-### Właściwości specyficzne dla typu
+### Thuộc tính cụ thể theo loại
 
-**W przypadku wartości `object`:**
+**Đối với các giá trị `object`:**
 
-- **`properties`**: obiekt, w którym każdy klucz jest nazwą właściwości, a każda wartość jest schematem tej właściwości.
-- **`required`**: tablica ciągów znaków, która zawiera listę właściwości obowiązkowych.
-- **`additionalProperties`**: określa, czy właściwości nieuwzględnione w `properties` są dozwolone. Może to być wartość logiczna lub schemat.
+- **`properties`**: Một đối tượng trong đó mỗi khoá là tên thuộc tính và mỗi giá trị là một giản đồ cho thuộc tính đó.
+- **`required`**: Một mảng gồm các chuỗi, liệt kê những thuộc tính bắt buộc.
+- **`additionalProperties`**: Kiểm soát việc có cho phép các thuộc tính không có trong `properties` hay không. Có thể là một boolean hoặc một giản đồ.
 
-**W przypadku wartości `string`:**
+**Đối với các giá trị `string`:**
 
-- **`enum`**: zawiera listę konkretnych możliwych ciągów znaków w przypadku zadań klasyfikacji.
-- **`format`**: określa składnię ciągu znaków, np. `date-time`, `date`, `time`.
+- **`enum`**: Liệt kê một tập hợp cụ thể gồm các chuỗi có thể có cho các tác vụ phân loại.
+- **`format`**: Chỉ định cú pháp cho chuỗi, chẳng hạn như `date-time`, `date`, `time`.
 
-**W przypadku wartości `number` i `integer`:**
+**Đối với các giá trị `number` và `integer`:**
 
-- **`enum`**: zawiera listę konkretnych możliwych wartości liczbowych.
-- **`minimum`**: minimalna wartość włącznie.
-- **`maximum`**: maksymalna wartość włącznie.
+- **`enum`**: Liệt kê một tập hợp cụ thể gồm các giá trị bằng số có thể có.
+- **`minimum`**: Giá trị tối thiểu bao gồm.
+- **`maximum`**: Giá trị tối đa (bao gồm).
 
-**W przypadku wartości `array` values:**
+**Đối với các giá trị `array`:**
 
-- **`items`**: określa schemat wszystkich elementów w tablicy.
-- **`prefixItems`**: określa listę schematów dla pierwszych N elementów, co umożliwia tworzenie struktur podobnych do krotek.
-- **`minItems`**: minimalna liczba elementów w tablicy.
-- **`maxItems`**: maksymalna liczba elementów w tablicy.
+- **`items`**: Xác định giản đồ cho tất cả các mục trong mảng.
+- **`prefixItems`**: Xác định danh sách giản đồ cho N mục đầu tiên, cho phép các cấu trúc giống như bộ giá trị.
+- **`minItems`**: Số lượng tối thiểu các mục trong mảng.
+- **`maxItems`**: Số lượng tối đa của các mục trong mảng.
 
-## Uporządkowane dane wyjściowe a wywoływanie funkcji
+## Đầu ra có cấu trúc so với gọi hàm
 
-| Funkcja | Główny przypadek użycia |
+| Tính năng | Trường hợp sử dụng chính |
 | --- | --- |
-| **Uporządkowane dane wyjściowe** | **Formatowanie ostatecznej odpowiedzi.** Używaj, gdy chcesz, aby *odpowiedź* modelu miała określony format. |
-| **Wywoływanie funkcji** | **Podejmowanie działań podczas rozmowy.** Używaj, gdy model musi *poprosić Cię* o wykonanie zadania przed udzieleniem ostatecznej odpowiedzi. |
+| **Đầu ra có cấu trúc** | **Định dạng câu trả lời cuối cùng.** Sử dụng khi bạn muốn *câu trả lời* của mô hình ở một định dạng cụ thể. |
+| **Lệnh gọi hàm** | **Thực hiện hành động trong cuộc trò chuyện.** Sử dụng khi mô hình cần *hỏi bạn* thực hiện một việc trước khi đưa ra câu trả lời cuối cùng. |
 
-## Sprawdzone metody
+## Các phương pháp hay nhất
 
-- **Jasne opisy:** używaj pola `description`, aby kierować modelem.
-- **Ścisłe typowanie:** używaj konkretnych typów (`integer`, `string`, `enum`).
-- **Inżynieria promptów:** jasno określ, co ma zrobić model.
-- **Weryfikacja:** chociaż dane wyjściowe są syntaktycznie poprawnym kodem JSON, zawsze sprawdzaj wartości w swojej aplikacji.
-- **Obsługa błędów:** zaimplementuj niezawodną obsługę błędów w przypadku danych wyjściowych zgodnych ze schematem, ale niepoprawnych semantycznie.
+- **Nội dung mô tả rõ ràng:** Sử dụng trường `description` để hướng dẫn mô hình.
+- **Nhập liệu mạnh:** Sử dụng các loại cụ thể (`integer`, `string`, `enum`).
+- **Thiết kế câu lệnh:** Nêu rõ những gì bạn muốn mô hình thực hiện.
+- **Xác thực:** Mặc dù đầu ra là JSON có cú pháp chính xác, nhưng bạn luôn phải xác thực các giá trị trong ứng dụng của mình.
+- **Xử lý lỗi:** Triển khai biện pháp xử lý lỗi hữu ích cho các đầu ra tuân thủ giản đồ nhưng không chính xác về mặt ngữ nghĩa.
 
-## Ograniczenia
+## Các điểm hạn chế
 
-- **Podzbiór schematu:** nie wszystkie funkcje schematu JSON są obsługiwane.
-- **Złożoność schematu:** bardzo duże lub głęboko zagnieżdżone schematy mogą zostać odrzucone.
+- **Tập hợp con giản đồ:** Không phải tính năng nào của Giản đồ JSON cũng được hỗ trợ.
+- **Độ phức tạp của giản đồ:** Giản đồ quá lớn hoặc có nhiều lớp lồng nhau có thể bị từ chối.
 
-Prześlij opinię
+Gửi ý kiến phản hồi
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Ostatnia aktualizacja: 2026-07-30 UTC.
+Cập nhật lần gần đây nhất: 2026-07-30 UTC.
 
-Chcesz przekazać coś jeszcze?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-30 UTC."],[],[]]

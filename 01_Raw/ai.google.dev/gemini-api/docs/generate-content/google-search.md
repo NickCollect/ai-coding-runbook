@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/google-search?hl=hi
-fetched_at: 2026-08-10T03:11:29.474275+00:00
-title: "Google Search \u0915\u0947 \u0906\u0927\u093e\u0930 \u092a\u0930 \u091c\u093e\u0928\u0915\u093e\u0930\u0940 \u0926\u0947\u0928\u093e \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/google-search?hl=he
+fetched_at: 2026-08-17T02:23:11.491920+00:00
+title: "\u05e2\u05d9\u05d2\u05d5\u05df \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea \u05d7\u05d9\u05e4\u05d5\u05e9 Google \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-सुझाव भेजें
+שליחת משוב
 
-# Google Search के आधार पर जानकारी देना
+# עיגון באמצעות חיפוש Google
 
-Google Search से सटीक जानकारी पाने की सुविधा, Gemini मॉडल को रीयल-टाइम में वेब कॉन्टेंट से कनेक्ट करती है और सभी उपलब्ध भाषाओं में काम करती है. इससे Gemini, जानकारी न मिलने की स्थिति के दायरे से बाहर निकलकर ज़्यादा सटीक जवाब और भरोसेमंद सोर्स के रेफ़रंस दे पाता है.
+העיגון באמצעות חיפוש Google מחבר את מודל Gemini לתוכן מהאינטרנט שמתעדכן בזמן אמת, ועובד בכל השפות הזמינות. כך Gemini יכול לתת תשובות מדויקות יותר ולצטט מקורות ניתנים לאימות, מעבר לתאריך סף הידע שלו.
 
-ग्राउंडिंग की मदद से, ऐसे ऐप्लिकेशन बनाए जा सकते हैं जो ये काम कर सकते हैं:
+ההארקה עוזרת לכם ליצור אפליקציות שיכולות:
 
-- **तथ्यों के हिसाब से जवाबों को ज़्यादा सटीक बनाना:** मॉडल के गलत जानकारी देने की समस्या को कम करने के लिए, जवाबों को असल दुनिया की जानकारी के आधार पर तैयार करना.
-- **रीयल-टाइम में जानकारी ऐक्सेस करना:** हाल ही की घटनाओं और विषयों के बारे में सवालों के जवाब देना.
-- **उद्धरण दें:** मॉडल के दावों के सोर्स दिखाकर, उपयोगकर्ताओं का भरोसा जीतें.
+- **שיפור הדיוק העובדתי:** כדי לצמצם את ההזיות של המודל, התשובות מבוססות על מידע מהעולם האמיתי.
+- **גישה למידע בזמן אמת:** מענה לשאלות על אירועים ונושאים עדכניים.
+- **לספק ציטוטים:** כדי לבנות את אמון המשתמשים, כדאי להציג את המקורות של הטענות של המודל.
 
 ### Python
 
@@ -99,24 +99,23 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-ज़्यादा जानने के लिए, [खोज टूल
-नोटबुक](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=hi) का इस्तेमाल करें.
+אפשר לנסות את [מחברת כלי החיפוש](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=he) כדי לקבל מידע נוסף.
 
-## Google Search से सटीक जानकारी पाने की सुविधा कैसे काम करती है
+## איך עיגון באמצעות חיפוש Google פועל
 
-`google_search` टूल चालू करने पर, मॉडल खोज करने, जानकारी को प्रोसेस करने, और उद्धरण देने का पूरा वर्कफ़्लो अपने-आप मैनेज करता है.
+כשמפעילים את הכלי `google_search`, המודל מטפל בכל תהליך העבודה של חיפוש, עיבוד וציטוט מידע באופן אוטומטי.
 
-![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=hi)
+![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=he)
 
-1. **उपयोगकर्ता का प्रॉम्प्ट:** आपका ऐप्लिकेशन, उपयोगकर्ता के प्रॉम्प्ट को Gemini API पर भेजता है. इसके लिए, `google_search` टूल चालू होना चाहिए.
-2. **प्रॉम्प्ट का विश्लेषण:** मॉडल, प्रॉम्प्ट का विश्लेषण करता है. इससे यह तय किया जाता है कि Google Search से जवाब को बेहतर बनाया जा सकता है या नहीं.
-3. **Google Search:** ज़रूरत पड़ने पर, मॉडल अपने-आप एक या एक से ज़्यादा सर्च क्वेरी जनरेट करता है और उन्हें पूरा करता है.
-4. **खोज के नतीजों को प्रोसेस करना:** मॉडल, खोज के नतीजों को प्रोसेस करता है, जानकारी को इकट्ठा करता है, और जवाब तैयार करता है.
-5. **भरोसेमंद स्रोतों से मिली जानकारी के आधार पर जवाब देना:** एपीआई, खोज के नतीजों के आधार पर उपयोगकर्ता को ऐसा जवाब देता है जो समझने में आसान हो. इस जवाब में, मॉडल का टेक्स्ट वाला जवाब और `groundingMetadata` शामिल है. इसमें खोज क्वेरी, वेब नतीजे, और उद्धरण भी शामिल हैं.
+1. **הנחיית משתמש:** האפליקציה שולחת הנחיית משתמש אל Gemini API עם הכלי `google_search` מופעל.
+2. **ניתוח ההנחיה:** המודל מנתח את ההנחיה וקובע אם חיפוש ב-Google יכול לשפר את התשובה.
+3. **חיפוש Google:** אם צריך, המודל יוצר באופן אוטומטי שאילתת חיפוש אחת או יותר ומריץ אותן.
+4. **עיבוד תוצאות החיפוש:** המודל מעבד את תוצאות החיפוש, מסנתז את המידע ומנסח תשובה.
+5. **תשובה מבוססת:** ה-API מחזיר תשובה סופית וידידותית למשתמש שמבוססת על תוצאות החיפוש. התשובה הזו כוללת את התשובה הטקסטואלית של המודל `groundingMetadata` עם שאילתות החיפוש, תוצאות החיפוש והציטוטים.
 
-## भरोसेमंद स्रोतों से मिले जवाब को समझना
+## הסבר על תשובת ההארקה
 
-जब जवाब को भरोसेमंद स्रोतों से लिया जाता है, तो जवाब में `groundingMetadata` फ़ील्ड शामिल होता है. दावों की पुष्टि करने और अपने ऐप्लिकेशन में उद्धरणों को ज़्यादा बेहतर तरीके से दिखाने के लिए, यह स्ट्रक्चर्ड डेटा ज़रूरी है.
+כשמקרקעים תשובה בהצלחה, התשובה כוללת את השדה `groundingMetadata`. הנתונים המובנים האלה חיוניים לאימות הטענות וליצירת חוויית ציטוט עשירה באפליקציה.
 
 ```
 {
@@ -158,18 +157,18 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }
 ```
 
-Gemini API, `groundingMetadata` के साथ यह जानकारी दिखाता है:
+‫Gemini API מחזיר את המידע הבא עם התג `groundingMetadata`:
 
-- `webSearchQueries` : इस्तेमाल की गई खोज क्वेरी का कलेक्शन. यह डीबग करने और मॉडल की तर्क देने की प्रोसेस को समझने के लिए फ़ायदेमंद है.
-- `searchEntryPoint` : इसमें ज़रूरी खोज के सुझावों को रेंडर करने के लिए एचटीएमएल और सीएसएस शामिल होता है. इस्तेमाल से जुड़ी सभी ज़रूरी शर्तों के बारे में, [सेवा की शर्तों](https://ai.google.dev/gemini-api/terms?hl=hi#grounding-with-google-search) में बताया गया है.
-- `groundingChunks` : यह ऑब्जेक्ट का ऐसा कलेक्शन है जिसमें वेब सोर्स (`uri` और `title`) शामिल होते हैं.
-- `groundingSupports` : यह चंक का ऐसा कलेक्शन है जिसका इस्तेमाल, मॉडल के जवाब `text` को `groundingChunks` में मौजूद सोर्स से कनेक्ट करने के लिए किया जाता है. हर चंक, टेक्स्ट `segment` को एक या उससे ज़्यादा `groundingChunkIndices` से लिंक करता है. टेक्स्ट `segment` को `startIndex` और `endIndex` के ज़रिए तय किया जाता है. इनलाइन उद्धरण बनाने के लिए, यह ज़रूरी है.
+- ‫`webSearchQueries` : מערך של שאילתות החיפוש שנעשה בהן שימוש. המידע הזה שימושי לניפוי באגים ולהבנת תהליך החשיבה של המודל.
+- ‫`searchEntryPoint` : מכיל את ה-HTML ואת ה-CSS לעיבוד הצעות החיפוש הנדרשות. דרישות השימוש המלאות מפורטות [בתנאים ובהגבלות](https://ai.google.dev/gemini-api/terms?hl=he#grounding-with-google-search).
+- ‫`groundingChunks` : מערך של אובייקטים שמכילים את המקורות באינטרנט (`uri` ו-`title`).
+- ‫`groundingSupports` : מערך של מקטעים לחיבור התגובה של המודל `text` למקורות ב-`groundingChunks`. כל מקטע מקשר טקסט `segment` (מוגדר על ידי `startIndex` ו-`endIndex`) ל-`groundingChunkIndices` אחד או יותר. זהו המפתח ליצירת ציטוטים בגוף הטקסט.
 
-Google Search से मिली जानकारी का इस्तेमाल, [यूआरएल के कॉन्टेक्स्ट वाले टूल](https://ai.google.dev/gemini-api/docs/url-context?hl=hi) के साथ भी किया जा सकता है. इससे, जवाबों को सार्वजनिक वेब डेटा और आपके दिए गए यूआरएल, दोनों के हिसाब से तैयार किया जा सकता है.
+אפשר גם להשתמש בעיגון באמצעות חיפוש Google בשילוב עם [כלי ההקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he) כדי לעגן תשובות גם על נתונים ציבוריים באינטרנט וגם על כתובות ה-URL הספציפיות שאתם מספקים.
 
-## इनलाइन उद्धरणों के साथ सोर्स एट्रिब्यूट करना
+## שיוך מקורות באמצעות ציטוטים מוטמעים
 
-यह एपीआई, स्ट्रक्चर्ड उद्धरण डेटा दिखाता है. इससे आपको यह तय करने का पूरा कंट्रोल मिलता है कि आपको अपने यूज़र इंटरफ़ेस में सोर्स कैसे दिखाने हैं. `groundingSupports` और `groundingChunks` फ़ील्ड का इस्तेमाल करके, मॉडल के जवाबों को सीधे उनके सोर्स से लिंक किया जा सकता है. यहां मेटाडेटा को प्रोसेस करने का सामान्य पैटर्न दिया गया है. इससे, इनलाइन और क्लिक किए जा सकने वाले उद्धरणों के साथ जवाब बनाया जा सकता है.
+ממשק ה-API מחזיר נתוני ציטוט מובְנים, כך שיש לכם שליטה מלאה על האופן שבו אתם מציגים מקורות בממשק המשתמש. אפשר להשתמש בשדות `groundingSupports` וב-`groundingChunks` כדי לקשר את ההצהרות של המודל ישירות למקורות שלהן. הנה דפוס נפוץ לעיבוד המטא-נתונים כדי ליצור תגובה עם ציטוטים מוטמעים שאפשר ללחוץ עליהם.
 
 ### Python
 
@@ -244,57 +243,57 @@ const textWithCitations = addCitations(response);
 console.log(textWithCitations);
 ```
 
-इनलाइन उद्धरणों के साथ नया जवाब ऐसा दिखेगा:
+התשובה החדשה עם ציטוטים מוטבעים תיראה כך:
 
 ```
 Spain won Euro 2024, defeating England 2-1 in the final.[1](https:/...), [2](https:/...), [4](https:/...), [5](https:/...) This victory marks Spain's record-breaking fourth European Championship title.[5]((https:/...), [2](https:/...), [3](https:/...), [4](https:/...)
 ```
 
-## कीमत
+## תמחור
 
-Gemini 3 के साथ Google Search की ग्राउंडिंग का इस्तेमाल करने पर, आपके प्रोजेक्ट को हर उस खोज क्वेरी के लिए बिल किया जाता है जिसे मॉडल पूरा करने का फ़ैसला करता है. अगर मॉडल किसी एक प्रॉम्प्ट का जवाब देने के लिए, कई खोज क्वेरी चलाने का फ़ैसला करता है (उदाहरण के लिए, एक ही एपीआई कॉल में `"UEFA Euro 2024 winner"` और `"Spain vs England Euro 2024 final
-score"` खोजना), तो इसे उस अनुरोध के लिए, टूल के दो बार इस्तेमाल के तौर पर गिना जाएगा. बिलिंग के लिए, यूनीक क्वेरी की गिनती करते समय, हम वेब सर्च की उन क्वेरी को अनदेखा करते हैं जिनमें कोई शब्द नहीं होता. यह बिलिंग मॉडल सिर्फ़ Gemini 3 मॉडल पर लागू होता है. Gemini 2.5 या इससे पुराने मॉडल के साथ खोज के नतीजों का इस्तेमाल करने पर, आपके प्रोजेक्ट के लिए हर प्रॉम्प्ट के हिसाब से बिल भेजा जाता है.
+כשמשתמשים בעיגון באמצעות חיפוש Google עם Gemini 3, הפרויקט מחויב על כל שאילתת חיפוש שהמודל מחליט לבצע. אם המודל מחליט להריץ כמה שאילתות חיפוש כדי לענות על הנחיה אחת (לדוגמה, חיפוש של `"UEFA Euro 2024 winner"` ושל `"Spain vs England Euro 2024 final
+score"` באותה קריאה ל-API), זה נחשב כשני שימושים מחויבים בכלי עבור הבקשה הזו. לצורך חיוב, אנחנו מתעלמים משאילתות ריקות בחיפוש Google כשסופרים שאילתות ייחודיות. מודל החיוב הזה רלוונטי רק למודלים של Gemini 3. כשמשתמשים בהארקה של חיפוש עם Gemini 2.5 או מודלים ישנים יותר, החיוב על הפרויקט הוא לפי הנחיה.
 
-शुल्क के बारे में ज़्यादा जानकारी के लिए, [Gemini API के शुल्क वाला पेज](https://ai.google.dev/gemini-api/docs/pricing?hl=hi) देखें.
+למידע מפורט על התמחור, אפשר לעיין ב[דף התמחור של Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=he).
 
-## इन मॉडल के साथ काम करता है
+## מודלים נתמכים
 
-आपको [मॉडल की खास जानकारी](https://ai.google.dev/gemini-api/docs/models?hl=hi) वाले पेज पर, सभी सुविधाएं मिल सकती हैं.
+אפשר למצוא את כל היכולות בדף [סקירה כללית של המודל](https://ai.google.dev/gemini-api/docs/models?hl=he).
 
-| मॉडल | Google Search से सटीक जानकारी पाने की सुविधा |
+| מודל | עיגון באמצעות חיפוש Google |
 | --- | --- |
 | Gemini 3.6 Flash | ✔️ |
 | Gemini 3.5 Flash-Lite | ✔️ |
 | Gemini 3.5 Flash | ✔️ |
 | Gemini 3.1 Flash-Lite | ✔️ |
-| Gemini 3.1 Flash की इमेज का प्रीव्यू | ✔️ |
-| Gemini 3.1 Pro की झलक | ✔️ |
-| Gemini 3 Pro की इमेज की झलक | ✔️ |
-| Gemini 3 Flash की झलक | ✔️ |
-| Gemini 3.1 Flash-Lite की झलक | ✔️ |
-| Gemini 2.5 Pro | ✔️ |
-| Gemini 2.5 Flash | ✔️ |
+| תצוגה מקדימה של תמונות ב-Gemini 3.1 Flash | ✔️ |
+| ‫Gemini 3.1 Pro Preview | ✔️ |
+| תצוגה מקדימה של תמונות ב-Gemini 3 Pro | ✔️ |
+| ‫Gemini 3 Flash Preview | ✔️ |
+| ‫Gemini 3.1 Flash-Lite Preview | ✔️ |
+| Gemini ‎2.5 Pro | ✔️ |
+| Gemini ‎2.5 Flash | ✔️ |
 | Gemini 2.5 Flash-Lite | ✔️ |
-| Gemini 2.0 Flash | ✔️ |
+| Gemini ‎2.0 Flash | ✔️ |
 
-## साथ-साथ इस्तेमाल किए जा सकने वाले टूल
+## שילובים נתמכים של כלים
 
-ज़्यादा मुश्किल इस्तेमाल के उदाहरणों के लिए, Google Search के साथ ग्राउंडिंग की सुविधा का इस्तेमाल अन्य टूल के साथ किया जा सकता है. जैसे, [कोड एक्ज़ीक्यूशन](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi) और [यूआरएल कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi).
+אתם יכולים להשתמש ב-עיגון באמצעות חיפוש Google עם כלים אחרים כמו [הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he) ו[הקשר של כתובת URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he) כדי להפעיל תרחישי שימוש מורכבים יותר.
 
-Gemini 3 मॉडल, बिल्ट-इन टूल (जैसे, Google Search के साथ ग्राउंडिंग) को कस्टम टूल (फ़ंक्शन कॉलिंग) के साथ इस्तेमाल करने की सुविधा देते हैं. [टूल के कॉम्बिनेशन](https://ai.google.dev/gemini-api/docs/tool-combination?hl=hi) पेज पर जाकर, इस बारे में ज़्यादा जानें.
+מודלים של Gemini 3 תומכים בשילוב של כלים מובנים (כמו עיגון באמצעות חיפוש Google) עם כלים מותאמים אישית (קריאה לפונקציה). מידע נוסף זמין בדף [שילובים של כלים](https://ai.google.dev/gemini-api/docs/tool-combination?hl=he).
 
-## आगे क्या करना है
+## המאמרים הבאים
 
-- [Gemini API की कुकबुक में, Google Search की मदद से जानकारी पाने की सुविधा](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=hi) आज़माएं.
-- उपलब्ध अन्य टूल के बारे में जानें. जैसे, [फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi).
-- [यूआरएल कॉन्टेक्स्ट टूल](https://ai.google.dev/gemini-api/docs/url-context?hl=hi) का इस्तेमाल करके, प्रॉम्प्ट में यूआरएल जोड़ने का तरीका जानें.
+- כדאי לנסות את [המתכון לעיגון בחיפוש Google ב-Gemini API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=he).
+- אפשר לקרוא על כלים זמינים אחרים, כמו [הפעלת פונקציות](https://ai.google.dev/gemini-api/docs/function-calling?hl=he).
+- [כאן](https://ai.google.dev/gemini-api/docs/url-context?hl=he) מוסבר איך להוסיף לתיאורים כתובות URL ספציפיות באמצעות הכלי 'הקשר כתובת URL'.
 
-सुझाव भेजें
+שליחת משוב
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया.
+עדכון אחרון: 2026-07-30 (שעון UTC).
 
-क्या आपको हमें और कुछ बताना है?
+רוצה לתת לנו משוב?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-30 (שעון UTC)."],[],[]]

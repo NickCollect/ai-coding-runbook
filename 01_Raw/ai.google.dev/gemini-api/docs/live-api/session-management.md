@@ -1,39 +1,51 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=tr
-fetched_at: 2026-08-10T03:24:16.266037+00:00
-title: "Live API ile oturum y\u00f6netimi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=id
+fetched_at: 2026-08-17T02:21:13.894712+00:00
+title: "Pengelolaan sesi dengan Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Geri bildirim gönderin
+Kirim masukan
 
-# Live API ile oturum yönetimi
+# Pengelolaan sesi dengan Live API
 
-Live API'de oturum, giriş ve çıkışın aynı bağlantı üzerinden sürekli olarak yayınlandığı kalıcı bir bağlantıyı ifade eder ([İşleyiş şekli](https://ai.google.dev/gemini-api/docs/live?hl=tr) hakkında daha fazla bilgi edinin).
-Bu benzersiz oturum tasarımı, düşük gecikme süresi sağlar ve benzersiz özellikleri destekler. Ancak oturum süresi sınırları ve erken sonlandırma gibi zorluklara da yol açabilir.
-Bu kılavuzda, Canlı API'yi kullanırken ortaya çıkabilecek oturum yönetimi zorluklarının üstesinden gelmeye yönelik stratejiler ele alınmaktadır.
+Di Live API, sesi mengacu pada koneksi persisten
+tempat input dan output di-streaming secara terus-menerus melalui koneksi yang sama (baca lebih lanjut tentang [cara kerjanya](https://ai.google.dev/gemini-api/docs/live?hl=id)).
+Desain sesi yang unik ini memungkinkan latensi rendah dan mendukung fitur unik, tetapi juga dapat menimbulkan tantangan, seperti batas waktu sesi, dan penghentian awal.
+Panduan ini membahas strategi untuk mengatasi tantangan pengelolaan sesi yang dapat muncul saat menggunakan Live API.
 
-## Oturum ömrü
+## Masa aktif sesi
 
-Sıkıştırma olmadan yalnızca sesli oturumlar 15 dakika, sesli ve görüntülü oturumlar ise 2 dakika ile sınırlıdır. Bu sınırların aşılması oturumu (ve dolayısıyla bağlantıyı) sonlandırır ancak oturumları sınırsız süreye uzatmak için [bağlam penceresi sıkıştırmasını](#context-window-compression) kullanabilirsiniz.
+Tanpa kompresi, sesi khusus audio dibatasi hingga 15 menit, dan sesi audio-video dibatasi hingga 2 menit. Jika batas ini terlampaui
+sesi (dan koneksi) akan dihentikan, tetapi Anda dapat menggunakan
+[kompresi jendela konteks](#context-window-compression) untuk memperpanjang sesi hingga
+waktu yang tidak terbatas.
 
-Bağlantı ömrü de yaklaşık 10 dakika ile sınırlıdır. Bağlantı sonlandırıldığında oturum da sonlandırılır. Bu durumda, [oturum devam ettirme](#session-resumption) özelliğini kullanarak tek bir oturumu birden fazla bağlantıda etkin kalacak şekilde yapılandırabilirsiniz.
-Ayrıca, bağlantı sona ermeden önce [GoAway mesajı](#goaway-message) alırsınız. Bu mesaj, daha fazla işlem yapmanıza olanak tanır.
+Masa aktif koneksi juga dibatasi, hingga sekitar 10 menit. Saat koneksi dihentikan, sesi juga akan dihentikan. Dalam hal ini, Anda dapat
+mengonfigurasi satu sesi agar tetap aktif di beberapa koneksi menggunakan
+[kelanjutan sesi](#session-resumption).
+Anda juga akan menerima [pesan GoAway](#goaway-message) sebelum
+koneksi berakhir, sehingga Anda dapat mengambil tindakan lebih lanjut.
 
-## Bağlam penceresi sıkıştırması
+## Kompresi jendela konteks
 
-Daha uzun oturumlar sağlamak ve bağlantının aniden sonlandırılmasını önlemek için oturum yapılandırmasının bir parçası olarak [contextWindowCompression](https://ai.google.dev/api/live?hl=tr#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression) alanını ayarlayarak bağlam penceresi sıkıştırmasını etkinleştirebilirsiniz.
+Untuk mengaktifkan sesi yang lebih lama, dan menghindari penghentian koneksi yang tiba-tiba, Anda dapat
+mengaktifkan kompresi jendela konteks dengan menetapkan kolom [contextWindowCompression](https://ai.google.dev/api/live?hl=id#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression)
+sebagai bagian dari konfigurasi sesi.
 
-[ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=tr#contextwindowcompressionconfig) bölümünde, [kayan pencere mekanizması](https://ai.google.dev/api/live?hl=tr#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window) ve sıkıştırmayı tetikleyen [jeton sayısını](https://ai.google.dev/api/live?hl=tr#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens) yapılandırabilirsiniz.
+Di [ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=id#contextwindowcompressionconfig), Anda dapat mengonfigurasi
+[mekanisme jendela geser](https://ai.google.dev/api/live?hl=id#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window)
+dan [jumlah token](https://ai.google.dev/api/live?hl=id#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens)
+yang memicu kompresi.
 
 ### Python
 
@@ -60,13 +72,14 @@ const config = {
 };
 ```
 
-## Oturum devam ettirme
+## Kelanjutan sesi
 
-Sunucu, WebSocket bağlantısını düzenli olarak sıfırladığında oturumun sonlandırılmasını önlemek için [kurulum yapılandırması](https://ai.google.dev/api/live?hl=tr#BidiGenerateContentSetup) içindeki [sessionResumption](https://ai.google.dev/api/live?hl=tr#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption) alanını yapılandırın.
+Untuk mencegah penghentian sesi saat server secara berkala mereset koneksi WebSocket, konfigurasi kolom [sessionResumption](https://ai.google.dev/api/live?hl=id#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption)
+dalam [konfigurasi penyiapan](https://ai.google.dev/api/live?hl=id#BidiGenerateContentSetup).
 
-Bu yapılandırmanın iletilmesi, sunucunun [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=tr#SessionResumptionUpdate) mesajları göndermesine neden olur. Bu mesajlar, oturumu devam ettirmek için kullanılabilir. Oturum devam ettirmek için son devam ettirme jetonu, sonraki bağlantının [`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=tr#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle) olarak iletilir.
+Jika konfigurasi ini diteruskan, server akan mengirim pesan [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=id#SessionResumptionUpdate), yang dapat digunakan untuk melanjutkan sesi dengan meneruskan token kelanjutan terakhir sebagai [`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=id#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle) koneksi berikutnya.
 
-Devam ettirme jetonları, son oturumun sonlandırılmasından sonraki 2 saat boyunca geçerlidir.
+Token kelanjutan berlaku selama 2 jam setelah penghentian sesi terakhir.
 
 ### Python
 
@@ -201,9 +214,12 @@ async function main() {
 main();
 ```
 
-## Oturum bağlantısı kesilmeden önce ileti alma
+## Menerima pesan sebelum sesi terputus
 
-Sunucu, mevcut bağlantının yakında sonlandırılacağını belirten bir [GoAway](https://ai.google.dev/api/live?hl=tr#GoAway) mesajı gönderir. Bu mesaj, kalan süreyi belirten [timeLeft](https://ai.google.dev/api/live?hl=tr#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left) değerini içerir ve bağlantı ABORTED olarak sonlandırılmadan önce başka işlemler yapmanıza olanak tanır.
+Server mengirim pesan [GoAway](https://ai.google.dev/api/live?hl=id#GoAway) yang menandakan bahwa koneksi saat ini
+akan segera dihentikan. Pesan ini mencakup [timeLeft](https://ai.google.dev/api/live?hl=id#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left),
+yang menunjukkan waktu yang tersisa dan memungkinkan Anda mengambil tindakan lebih lanjut sebelum
+koneksi dihentikan sebagai ABORTED.
 
 ### Python
 
@@ -226,9 +242,10 @@ for (const turn of turns) {
 }
 ```
 
-## Oluşturma işlemi tamamlandığında mesaj alma
+## Menerima pesan saat pembuatan selesai
 
-Sunucu, modelin yanıt oluşturmayı tamamladığını belirten bir [generationComplete](https://ai.google.dev/api/live?hl=tr#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete) mesajı gönderir.
+Server mengirim pesan [generationComplete](https://ai.google.dev/api/live?hl=id#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete)
+yang menandakan bahwa model telah selesai membuat respons.
 
 ### Python
 
@@ -250,16 +267,19 @@ for (const turn of turns) {
 }
 ```
 
-## Sırada ne var?
+## Langkah berikutnya
 
-Live API ile çalışmanın diğer yollarını öğrenmek için [Özellikler](https://ai.google.dev/gemini-api/docs/live?hl=tr) kılavuzunun tamamını, [Araç kullanımı](https://ai.google.dev/gemini-api/docs/live-tools?hl=tr) sayfasını veya [Live API yemek kitabını](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=tr) inceleyin.
+Pelajari lebih lanjut cara menggunakan Live API di panduan
+[Kemampuan](https://ai.google.dev/gemini-api/docs/live?hl=id) lengkap,
+halaman [Penggunaan alat](https://ai.google.dev/gemini-api/docs/live-tools?hl=id), atau
+[buku resep Live API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=id).
 
-Geri bildirim gönderin
+Kirim masukan
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Son güncelleme tarihi: 2026-06-01 UTC.
+Terakhir diperbarui pada 2026-06-01 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Ada masukan untuk kami?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-01 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-01 UTC."],[],[]]

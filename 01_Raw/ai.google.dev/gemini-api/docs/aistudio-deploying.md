@@ -1,103 +1,101 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=hi
-fetched_at: 2026-08-10T03:09:17.403427+00:00
-title: "Google AI Studio \u0938\u0947 \u0921\u093f\u092a\u094d\u0932\u0949\u092f \u0915\u0930\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=es-419
+fetched_at: 2026-08-17T02:29:25.983666+00:00
+title: "Implementaci\u00f3n desde Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-सुझाव भेजें
+Enviar comentarios
 
-# Google AI Studio से डिप्लॉय करना
+# Implementación desde Google AI Studio
 
-Google AI Studio की मदद से, फ़ुल-स्टैक ऐप्लिकेशन को सीधे तौर पर बिल्ड मोड से डिप्लॉय किया जा सकता है. इससे प्रोटोटाइप से लेकर मैनेज किए जा सकने वाले और बड़े पैमाने पर इस्तेमाल किए जा सकने वाले प्रोडक्शन एनवायरमेंट तक तेज़ी से पहुंचा जा सकता है.
+Google AI Studio te permite implementar tus aplicaciones de pila completa directamente desde el modo de compilación. Esto proporciona una ruta rápida desde el prototipo hasta un entorno de producción administrado y escalable.
 
-## डिप्लॉयमेंट के विकल्प
+## Opciones de implementación
 
-AI Studio के बिल्ड मोड से ऐप्लिकेशन डिप्लॉय करने के लिए, ज़रूरी शर्तें इस बात पर निर्भर करती हैं कि आपने कौनसी सदस्यता ली है:
+Para implementar tu aplicación desde el modo de compilación de AI Studio, los requisitos dependen del nivel que uses:
 
-- [**Google Cloud का स्टार्टर टियर**](https://docs.cloud.google.com/docs/starter-tier?hl=hi):
-  इसकी मदद से, Google Cloud प्रोजेक्ट या बिलिंग खाता सेट अप किए बिना, ज़्यादा से ज़्यादा दो फ़ुल-स्टैक ऐप्लिकेशन पब्लिश किए जा सकते हैं.
-- **स्टैंडर्ड डिप्लॉयमेंट**: इसके लिए, आपके AI Studio खाते से लिंक किया गया Google Cloud प्रोजेक्ट होना चाहिए. साथ ही, उस प्रोजेक्ट पर बिलिंग की सुविधा चालू होनी चाहिए.
+- [**Nivel básico de Google Cloud**](https://docs.cloud.google.com/docs/starter-tier?hl=es-419): Te permite publicar hasta 2 aplicaciones de pila completa sin configurar un proyecto de Google Cloud ni una cuenta de facturación.
+- **Implementación estándar**: Requiere un proyecto de Google Cloud vinculado a tu cuenta de AI Studio y la facturación habilitada en ese proyecto.
 
-## Starter टियर के बारे में जानकारी
+## Acerca del nivel Starter
 
-Google Cloud के स्टार्टर टियर की मदद से, Google AI Studio से सीधे Google Cloud पर ऐप्लिकेशन डिप्लॉय किए जा सकते हैं. इसके लिए, आपको Google Cloud का पूरा एनवायरमेंट या बिलिंग खाता सेट अप करने की ज़रूरत नहीं होती.
+El nivel básico de Google Cloud proporciona una ruta optimizada para implementar aplicaciones en Google Cloud directamente desde Google AI Studio sin configurar un entorno completo de Google Cloud ni una cuenta de facturación.
 
-Google AI Studio के हर डिप्लॉयमेंट से, Cloud Run में एक सेवा बनती है. Google AI Studio में Starter टियर के साथ डिप्लॉय की गई सेवाओं पर, ये सीमाएं लागू होती हैं:
+Cada implementación de Google AI Studio crea un servicio correspondiente en Cloud Run. Para los servicios implementados en Google AI Studio con el nivel básico, se aplican las siguientes limitaciones:
 
-- ज़्यादा से ज़्यादा दो सेवाएं डिप्लॉय की जा सकती हैं.
-- आपकी सेवाएं, [Cloud Run के एक ही क्षेत्र](https://docs.cloud.google.com/run/docs/locations?hl=hi) में डिप्लॉय की गई हों.
+- Puedes implementar hasta dos servicios.
+- Tus servicios se implementan en una [sola región de Cloud Run](https://docs.cloud.google.com/run/docs/locations?hl=es-419).
 
-## Starter Tier को डिप्लॉय करने के चरण
+## Pasos para implementar el nivel Inicial
 
-बिल्ड मोड में ऐप्लिकेशन डिज़ाइन करने के बाद, उसे स्टार्टर टियर के साथ डिप्लॉय करें:
+Después de diseñar tu app en el modo de compilación, impleméntala con el nivel básico:
 
-1. सबसे ऊपर दाएं कोने में मौजूद, **पब्लिश करें** बटन पर क्लिक करें.
-2. **शुरू करें** पर क्लिक करें.
-3. **ऐप्लिकेशन पब्लिश करें** पर क्लिक करें.
+1. Haz clic en el botón **Publicar** en la esquina superior derecha.
+2. Haz clic en **Comenzar**.
+3. Haz clic en **Publicar app**.
 
-डिप्लॉयमेंट पूरा होने के बाद, AI Studio एक Cloud Run यूआरएल देता है. इस यूआरएल से, लाइव ऐप्लिकेशन को ऐक्सेस किया जा सकता है.
+Una vez que se complete la implementación, AI Studio proporcionará una URL de Cloud Run en la que podrás acceder a tu aplicación activa.
 
-## AI Studio के लिए कस्टम यूआरएल
+## URLs personalizadas para AI Studio
 
-Google AI Studio से कोई ऐप्लिकेशन पब्लिश करते समय, `ai.studio` में जाकर अपनी पसंद के मुताबिक, याद रखने में आसान सबडोमेन सेट किया जा सकता है. उदाहरण के लिए, `ai.studio`.`https://your-app-name.ai.studio`
+Cuando publicas una aplicación desde Google AI Studio, puedes establecer un subdominio personalizado y fácil de recordar en `ai.studio` (por ejemplo, `https://your-app-name.ai.studio`).
 
-Google AI Studio के लिए, यह ज़रूरी है कि सभी प्रोजेक्ट में सबडोमेन यूनीक हों. साथ ही, इन्हें पहले आओ, पहले पाओ के आधार पर असाइन किया जाता है. अगर किसी दूसरे प्रोजेक्ट में पहले से ही कोई नाम इस्तेमाल किया जा रहा है, तो AI Studio आपको कोई दूसरा नाम चुनने के लिए कहेगा. किसी ऐप्लिकेशन को
-अनपब्लिश या मिटाने पर, उसका कस्टम यूआरएल रिलीज़ हो जाता है. इसके बाद, अन्य लोग उस पर दावा कर सकते हैं.
+Google AI Studio requiere que los subdominios sean únicos a nivel global en todos los proyectos y los asigna por orden de llegada. Si otro proyecto ya usa un nombre, AI Studio te pedirá que elijas uno diferente. Si anulas la publicación o borras una aplicación, se libera su URL personalizada y otros usuarios podrán reclamarla.
 
-### कस्टम यूआरएल सेट करना
+### Cómo establecer una URL personalizada
 
-अपने ऐप्लिकेशन के लिए कस्टम यूआरएल सेट करने या अपडेट करने के लिए:
+Para establecer o actualizar una URL personalizada para tu aplicación, haz lo siguiente:
 
-1. Google AI Studio में, अपने ऐप्लिकेशन को **बनाएं** मोड में खोलें.
-2. सबसे ऊपर दाएं कोने में मौजूद, **पब्लिश करें** पर क्लिक करें.
-3. डिप्लॉयमेंट कॉन्फ़िगरेशन में, **कस्टम यूआरएल** फ़ील्ड में अपना पसंदीदा सबडोमेन डालें या सुझाया गया यूआरएल स्वीकार करें.
-4. **ऐप्लिकेशन पब्लिश करें** पर क्लिक करें.
+1. Abre tu aplicación en Google AI Studio en el modo **Compilación**.
+2. Haz clic en **Publicar** en la esquina superior derecha.
+3. En la configuración de implementación, ingresa el subdominio que prefieras en el campo **URL personalizada** o acepta la URL sugerida.
+4. Haz clic en **Publicar app**.
 
-किसी मौजूदा कस्टम यूआरएल को किसी दूसरे ऐप्लिकेशन पर ट्रांसफ़र करने के लिए, आपको पहले उस ऐप्लिकेशन को अनपब्लिश करना होगा या मिटाना होगा जिसे वह कस्टम यूआरएल असाइन किया गया है. इसके बाद, चुने गए सबडोमेन का इस्तेमाल करके अपना नया ऐप्लिकेशन पब्लिश करें.
+Para transferir una URL personalizada existente a otra aplicación, primero debes anular la publicación o borrar la aplicación a la que se asignó esa URL personalizada y, luego, publicar tu nueva aplicación con el subdominio elegido.
 
-### ट्रेडमार्क या कॉपीराइट से जुड़ी समस्याओं की शिकायत करना
+### Cómo denunciar problemas de derechos de autor o marcas
 
-कस्टम सबडोमेन को [Google की सेवा की शर्तों](https://policies.google.com/terms?hl=hi) का पालन करना होगा. अगर आपको कोई ऐसा कस्टम यूआरएल दिखता है जो किसी ट्रेडमार्क का उल्लंघन करता है या जिसमें कॉपीराइट वाले नाम का इस्तेमाल बिना अनुमति के किया गया है, तो [Google के कानूनी मामलों से जुड़ी समस्या हल करने वाले टूल](https://support.google.com/legal/troubleshooter/1114905?hl=hi) का इस्तेमाल करके इसकी शिकायत की जा सकती है.
+Los subdominios personalizados deben satisfacer las [Condiciones del Servicio de Google](https://policies.google.com/terms?hl=es-419). Si detectas una URL personalizada que infringe una marca comercial o usa un nombre protegido por derechos de autor sin permiso, puedes denunciarla con el [Solucionador de Problemas Legales de Google](https://support.google.com/legal/troubleshooter/1114905?hl=es-419).
 
-## स्टैंडर्ड डिप्लॉयमेंट
+## Implementación estándar
 
-आपके ऐप्लिकेशन के बेहतर होने के साथ-साथ, आपको Starter टियर से ज़्यादा सुविधाएं चाहिए हो सकती हैं. जैसे, ज़्यादा कोटा, कंप्यूट संसाधनों में बढ़ोतरी या Google Cloud के ऐसे अन्य प्रॉडक्ट जो Starter टियर में उपलब्ध नहीं हैं. इन सुविधाओं को अनलॉक करने के लिए, पूरी तरह से मैनेज किए जाने वाले Starter Tier प्रोजेक्ट को स्टैंडर्ड Google Cloud प्रोजेक्ट में बदला जा सकता है.
+A medida que evolucionen tus aplicaciones, es posible que necesites capacidades más allá del nivel inicial, como cuotas más altas, más recursos de procesamiento o productos de Google Cloud que no estén disponibles en el nivel inicial. Para desbloquear estas capacidades, puedes convertir tu proyecto de nivel inicial completamente administrado en un proyecto estándar de Google Cloud.
 
-इससे यह पक्का होता है कि आप अपनी प्रोग्रेस को खोए बिना आसानी से स्केल कर सकें. [Cloud Billing खाता बनाने](https://docs.cloud.google.com/billing/docs/how-to/create-billing-account?hl=hi#create-new-billing-account), Google Cloud की सेवा की मानक शर्तों को औपचारिक तौर पर स्वीकार करने, और [Google Cloud के स्टैंडर्ड प्रोजेक्ट पर अपग्रेड करने](https://docs.cloud.google.com/docs/starter-tier?hl=hi#upgradee) के लिए, यह तरीका अपनाएं.
-ज़्यादा जानकारी के लिए, [पैसे चुकाकर लिए गए खातों के लिए सेटअप](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=hi#paid-setup) लेख पढ़ें.
+Esto garantiza que puedas escalar sin problemas y sin perder tu progreso. Sigue los pasos para [crear una cuenta de Cloud Billing](https://docs.cloud.google.com/billing/docs/how-to/create-billing-account?hl=es-419#create-new-billing-account), aceptar formalmente las Condiciones del Servicio estándar de Google Cloud y [actualizar a un proyecto estándar de Google Cloud](https://docs.cloud.google.com/docs/starter-tier?hl=es-419#upgradee).
+Para obtener más información, consulta [Configuración de cuentas pagadas](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=es-419#paid-setup).
 
-बिलिंग टियर के बारे में ज़्यादा जानने के लिए, [बिलिंग](https://ai.google.dev/gemini-api/docs/billing?hl=hi) पर जाएं.
+Para obtener más información sobre los niveles de facturación, consulta [Facturación](https://ai.google.dev/gemini-api/docs/billing?hl=es-419).
 
-## अपना आवेदन मिटाना
+## Borra tu solicitud
 
-अगर आपको अब अपने ऐप्लिकेशन की ज़रूरत नहीं है, तो Google AI Studio में जाकर इसे मिटाया जा सकता है. इसके लिए, यह तरीका अपनाएं:
+Si ya no necesitas tu app, puedes borrarla en Google AI Studio siguiendo estas instrucciones:
 
-1. Google AI Studio में, अपने [ऐप्लिकेशन पेज](https://aistudio.google.com/app/apps?hl=hi) पर जाएं.
-2. बाईं ओर मौजूद मेन्यू में जाकर, **ऐप्लिकेशन** को चुनें.
-3. जिस ऐप्लिकेशन को मिटाना है उस पर पॉइंटर घुमाएं.
-4. ऐप्लिकेशन को मिटाने के लिए, लाइन की दाईं ओर मौजूद ट्रैश कैन आइकॉन पर क्लिक करें.
+1. En Google AI Studio, ve a tu [página de Apps](https://aistudio.google.com/app/apps?hl=es-419).
+2. En el menú de la izquierda, selecciona **Apps**.
+3. Mantén el puntero sobre la app que deseas borrar.
+4. Haz clic en el ícono de papelera que se encuentra en el lado derecho de la fila para borrar la app.
 
-## आगे क्या करना है
+## ¿Qué sigue?
 
-- [Google Cloud Starter Tier](https://docs.cloud.google.com/docs/starter-tier?hl=hi) के बारे में ज़्यादा जानें.
-- Gemini API में [बिलिंग](https://ai.google.dev/gemini-api/docs/billing?hl=hi) के बारे में पढ़ें.
+- Obtén más información sobre el [nivel básico de Google Cloud](https://docs.cloud.google.com/docs/starter-tier?hl=es-419).
+- Obtén más información sobre la [facturación](https://ai.google.dev/gemini-api/docs/billing?hl=es-419) en la API de Gemini.
 
-सुझाव भेजें
+Enviar comentarios
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-आखिरी बार 2026-07-10 (UTC) को अपडेट किया गया.
+Última actualización: 2026-07-10 (UTC)
 
-क्या आपको हमें और कुछ बताना है?
+¿Quieres brindar más información?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-10 (UTC) को अपडेट किया गया."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-07-10 (UTC)"],[],[]]

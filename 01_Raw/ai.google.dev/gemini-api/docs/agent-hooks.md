@@ -1,28 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-hooks?hl=th
-fetched_at: 2026-08-10T03:13:08.054744+00:00
-title: "\u0e2e\u0e38\u0e01 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agent-hooks?hl=pt-BR
+fetched_at: 2026-08-17T02:24:40.341061+00:00
+title: "Hooks \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-ส่งความคิดเห็น
+Envie comentários
 
-# ฮุก
+# Hooks
 
-Hooks ช่วยให้คุณเรียกใช้สคริปต์ที่กำหนดเองหรือคำขอ HTTP ภายนอกได้ก่อนหรือหลังที่ Agent จะเรียกใช้โค้ดหรือแก้ไขไฟล์ภายใน Sandbox ระยะไกล ใช้ Hooks เพื่อขยายลูปของ Agent ด้วยการป้องกันอัตโนมัติและเวิร์กโฟลว์เบื้องหลัง เช่น
+Os hooks permitem executar scripts personalizados ou solicitações HTTP externas imediatamente antes ou depois que o agente executa o código ou modifica arquivos no sandbox remoto. Use hooks para estender o loop do agente com barreiras de proteção automatizadas e fluxos de trabalho em segundo plano, como:
 
-- **บังคับใช้การป้องกันด้านความปลอดภัยและการเข้าถึง** ก่อนที่จะมีการเรียกใช้คำสั่ง Shell ที่มีความเสี่ยงสูงหรือการอ่านไฟล์ที่จำกัด
-- **เปลี่ยนรูปแบบไปป์ไลน์ข้อมูลโดยอัตโนมัติ** ทันทีหลังจากที่ Agent สร้างหรือแก้ไขไฟล์
-- **สตรีมการวัดและส่งข้อมูลทางไกลสำหรับการตรวจสอบขององค์กร** ไปยังระบบการตรวจสอบภายนอกหลังจากที่เครื่องมือทำงานเสร็จ
+- **Aplicar barreiras de proteção de segurança e acesso** antes da execução de comandos do shell de alto risco ou leituras de arquivos restritas.
+- **Automatizar transformações de pipeline de dados** imediatamente após um agente criar ou modificar arquivos.
+- **Transmitir telemetria de auditoria empresarial** para sistemas de monitoramento externos após a execução da ferramenta.
 
 ### Python
 
@@ -167,20 +167,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## เหตุการณ์ในวงจรที่รองรับ
+## Eventos de ciclo de vida compatíveis
 
-Hooks รองรับ 2 เหตุการณ์ภายใน Sandbox ดังนี้
+Os hooks oferecem suporte a dois eventos no sandbox:
 
-| เหตุการณ์ | เวลาที่ทริกเกอร์ | การทำงาน |
+| Evento | Quando é acionado | O que faz? |
 | --- | --- | --- |
-| `pre_tool_execution` | ก่อนที่เครื่องมือจะทำงาน | สามารถอนุมัติ (`allow`) หรือบล็อก (`deny`) เครื่องมือก่อนที่จะมีการเรียกใช้ เมื่อถูกบล็อก โมเดลจะเห็นเหตุผลการปฏิเสธและปรับเปลี่ยน |
-| `post_tool_execution` | หลังจากที่เครื่องมือทำงานเสร็จ | เรียกใช้ฟังก์ชันติดตามผล เช่น การจัดรูปแบบโค้ด การเรียกใช้การทดสอบหน่วย หรือการบันทึกการวัดและส่งข้อมูลทางไกล ไม่สามารถบล็อกหรือเลิกทำการดำเนินการที่เสร็จสมบูรณ์แล้ว |
+| `pre_tool_execution` | Imediatamente antes da execução de uma ferramenta | Pode aprovar (`allow`) ou bloquear (`deny`) a ferramenta antes da execução. Quando bloqueado, o modelo mostra o motivo da rejeição e se adapta. |
+| `post_tool_execution` | Imediatamente após a conclusão de uma ferramenta | Executa tarefas de acompanhamento, como formatação de código, execução de testes de unidade ou registro de telemetria. Não é possível bloquear ou desfazer ações concluídas. |
 
 ### `pre_tool_execution`
 
-ทริกเกอร์ก่อนที่เครื่องมือจะทำงาน สคริปต์จะอ่านรายละเอียดการเรียกใช้เครื่องมือจาก `stdin` และส่งออก JSON การตัดสินใจ (`allow` หรือ `deny`) ไปยัง `stdout`
+É acionado imediatamente antes da execução de uma ferramenta. O script lê os detalhes da chamada de ferramenta de `stdin` e gera a decisão JSON (`allow` ou `deny`) para `stdout`.
 
-**เพย์โหลดอินพุต (`stdin`):**
+**Payload de entrada (`stdin`):**
 
 ```
 {
@@ -195,9 +195,9 @@ Hooks รองรับ 2 เหตุการณ์ภายใน Sandbox �
 }
 ```
 
-**การตอบกลับเอาต์พุต (`stdout`):**
+**Resposta de saída (`stdout`):**
 
-หากต้องการอนุมัติการเรียกใช้เครื่องมือ ให้ทำดังนี้
+Para aprovar a chamada de ferramenta:
 
 ```
 {
@@ -205,7 +205,7 @@ Hooks รองรับ 2 เหตุการณ์ภายใน Sandbox �
 }
 ```
 
-หากต้องการบล็อกการเรียกใช้เครื่องมือและส่งความคิดเห็นกลับไปยังโมเดล ให้ทำดังนี้
+Para bloquear a chamada de ferramenta e retornar feedback ao modelo:
 
 ```
 {
@@ -214,15 +214,15 @@ Hooks รองรับ 2 เหตุการณ์ภายใน Sandbox �
 }
 ```
 
-เมื่อ Hook ปฏิเสธคำสั่ง ระบบจะข้ามการเรียกใช้เครื่องมือทันที Agent จะเห็นผลลัพธ์ข้อผิดพลาดที่มีเหตุผลการปฏิเสธของคุณภายในเทิร์นปัจจุบัน จากนั้นโมเดลจะแก้ไขตัวเองได้โดยเลือกคำสั่งอื่นหรืออธิบายการบล็อกให้ผู้ใช้ทราบ
+Quando um hook nega um comando, a chamada de ferramenta é ignorada imediatamente. O agente mostra um resultado de erro contendo o motivo da rejeição diretamente no turno atual. Em seguida, o modelo pode se corrigir escolhendo um comando alternativo ou explicando o bloco ao usuário.
 
-หากสคริปต์ส่งออก JSON, ข้อความธรรมดา หรือสิ่งอื่นที่ไม่รู้จักนอกเหนือจาก `{"decision": "deny"}` รันไทม์จะถือว่าการตอบกลับเป็นการอนุมัติ (`allow`)
+Se o script gerar um JSON não reconhecido, texto simples ou qualquer outra coisa que não seja `{"decision": "deny"}`, o ambiente de execução vai tratar a resposta como uma aprovação (`allow`).
 
 ### `post_tool_execution`
 
-ทริกเกอร์หลังจากที่เครื่องมือทำงานเสร็จ สคริปต์จะอ่านรายละเอียดการดำเนินการและสถานะข้อผิดพลาดจาก `stdin`
+É acionado imediatamente após a conclusão de uma ferramenta. O script lê os detalhes da execução e qualquer status de erro de `stdin`.
 
-**เพย์โหลดอินพุต (`stdin`):**
+**Payload de entrada (`stdin`):**
 
 ```
 {
@@ -237,27 +237,27 @@ Hooks รองรับ 2 เหตุการณ์ภายใน Sandbox �
 }
 ```
 
-หากคำสั่ง Shell พิมพ์ข้อผิดพลาดไปยังข้อผิดพลาดมาตรฐาน (`stderr`) หรือการดำเนินการระบบไฟล์ล้มเหลว ระบบจะรวมฟิลด์ `"error"` ที่มีข้อความแสดงข้อผิดพลาดไว้ในเพย์โหลด เมื่อคำสั่งสำเร็จโดยไม่มีข้อผิดพลาด ระบบจะละเว้นฟิลด์ `"error"` ทั้งหมด
+Se um comando do shell imprimir erros no erro padrão (`stderr`) ou uma operação do sistema de arquivos falhar, um `"error"` campo contendo o texto do erro será incluído no payload. Quando o comando é bem-sucedido sem erros, o campo `"error"` é omitido completamente.
 
-**การตอบกลับเอาต์พุต (`stdout`):**
+**Resposta de saída (`stdout`):**
 
 ```
 {}
 ```
 
-เนื่องจาก Hooks หลังการทำงานของเครื่องมือจะทำงานสำหรับฟังก์ชันเบื้องหลังอย่างเคร่งครัด เช่น การจัดรูปแบบโค้ดหรือการบันทึก รันไทม์จึงละเว้นค่าการตัดสินใจที่ส่งคืนใน `stdout`
+Como os hooks pós-ferramenta são executados estritamente para tarefas em segundo plano, como formatação de código ou registro, o ambiente de execução ignora todos os valores de decisão retornados em `stdout`.
 
-## การค้นหาการกำหนดค่า
+## Descoberta de configuração
 
-รันไทม์จะค้นหาคำจำกัดความของ Hooks จาก `.agents/hooks.json` หรือ `/.agents/hooks.json` ภายในสภาพแวดล้อม Sandbox โดยอัตโนมัติ คุณสามารถระบุ `hooks.json` ควบคู่ไปกับสคริปต์ที่กำหนดเองได้โดยใช้แหล่งที่มาของ [สภาพแวดล้อม](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th#mount_from_a_source) ที่รองรับ ดังนี้
+O ambiente de execução descobre automaticamente as definições de hook de `.agents/hooks.json` ou `/.agents/hooks.json` no ambiente de sandbox. É possível fornecer `hooks.json` junto com seus scripts personalizados usando qualquer [origem de ambiente](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pt-br#mount_from_a_source) compatível:
 
-- **การติดตั้งที่เก็บ**: ที่เก็บ Git ที่มี `.agents/hooks.json` ควบคู่ไปกับ `AGENTS.md`
-- **Cloud Storage (`gcs`)**: บัคเก็ต GCS ที่มี `hooks.json` ซึ่งคัดลอกลงในสภาพแวดล้อม
-- **แหล่งที่มาแบบอินไลน์**: สตริง JSON ดิบและเนื้อหาสคริปต์ที่ส่งใน `environment.sources` เมื่อเรียกใช้ `client.interactions.create`
+- **Montagem de repositório**: um repositório Git que contém `.agents/hooks.json` junto com `AGENTS.md`.
+- **Cloud Storage (`gcs`)**: um bucket do GCS que contém `hooks.json` copiado para o ambiente.
+- **Fontes inline**: string JSON bruta e conteúdo do script transmitidos em `environment.sources` ao chamar `client.interactions.create`.
 
-### สคีมา `hooks.json`
+### Esquema `hooks.json`
 
-ไฟล์ `hooks.json` จะจัดกลุ่มคำจำกัดความของเหตุการณ์ (`pre_tool_execution` หรือ `post_tool_execution`) ภายใต้ชื่อที่กำหนดเอง คุณสามารถเปิดหรือปิดใช้แต่ละกลุ่มแยกกันได้
+Um arquivo `hooks.json` agrupa definições de eventos (`pre_tool_execution` ou `post_tool_execution`) em nomes personalizados. É possível ativar ou desativar cada grupo de forma independente:
 
 ```
 {
@@ -293,71 +293,71 @@ Hooks รองรับ 2 เหตุการณ์ภายใน Sandbox �
 }
 ```
 
-### ไวยากรณ์และกฎของ Matcher
+### Sintaxe e regras do matcher
 
-แต่ละกลุ่มกฎใน `hooks.json` จะกำหนดเวลาและวิธีที่ตัวจัดการทริกเกอร์โดยใช้พร็อพเพอร์ตี้ `matcher` และ `hooks`
+Cada grupo de regras em `hooks.json` define quando e como os gerenciadores são acionados usando as propriedades `matcher` e `hooks`:
 
-| ช่อง | ประเภท | คำอธิบาย |
+| Campo | Tipo | Descrição |
 | --- | --- | --- |
-| `enabled` | `boolean` | ไม่บังคับ ตั้งค่าเป็น `false` เพื่อปิดใช้กลุ่ม (`true` โดยค่าเริ่มต้น) |
-| `matcher` | `string` | รูปแบบนิพจน์ทั่วไปที่ตรงกับชื่อเครื่องมือเป้าหมายภายในคอนเทนเนอร์ |
-| `hooks` | `array` | รายการคำจำกัดความของตัวจัดการ (`command` หรือ `http`) ที่เรียงลำดับ ตัวจัดการจะทำงานตามลำดับการประกาศ |
+| `enabled` | `boolean` | Opcional. Defina como `false` para desativar o grupo (`true` por padrão). |
+| `matcher` | `string` | Padrão de expressão regular que corresponde a nomes de ferramentas de destino dentro do contêiner. |
+| `hooks` | `array` | Lista ordenada de definições de gerenciador (`command` ou `http`). Os gerenciadores são executados sequencialmente na ordem de declaração. |
 
-#### วิธีการทำงานของการประเมินนิพจน์ทั่วไป
+#### Como funciona a avaliação de regex
 
-เมื่อ Agent เรียกใช้เครื่องมือภายใน Sandbox รันไทม์จะประเมินชื่อคอนเทนเนอร์ของเครื่องมือกับรูปแบบ `matcher` โดยใช้นิพจน์ทั่วไป RE2 มาตรฐาน หากนิพจน์ทั่วไปตรงกับชื่อเครื่องมือ ตัวจัดการทั้งหมดในอาร์เรย์ `hooks` จะทำงานตามลำดับ หากกลุ่มกฎหลายกลุ่มตรงกับเครื่องมือเดียวกัน อาร์เรย์ตัวจัดการที่เกี่ยวข้องทั้งหมดจะทำงาน
+Quando o agente invoca uma ferramenta no sandbox, o ambiente de execução avalia o nome do contêiner da ferramenta em relação ao padrão `matcher` usando expressões regulares RE2 padrão. Se a regex corresponder ao nome da ferramenta, todos os gerenciadores na matriz `hooks` serão executados em ordem. Se vários grupos de regras corresponderem à mesma ferramenta, todas as matrizes de gerenciadores correspondentes serão executadas.
 
-คุณสามารถกำหนดเป้าหมายชื่อเครื่องมือคอนเทนเนอร์ในตัวได้ทุกชื่อ ได้แก่ การเรียกใช้โค้ด (`code_execution`) หรือการดำเนินการระบบไฟล์ (`read_file`, `write_file`, `list_files` และ `delete_file`)
+É possível segmentar qualquer nome de ferramenta de contêiner integrada: execução de código (`code_execution`) ou operações do sistema de arquivos (`read_file`, `write_file`, `list_files` e `delete_file`).
 
-#### นิพจน์ Matcher ที่พบบ่อย
+#### Expressões de matcher comuns
 
-- `"code_execution"`: การจับคู่สตริงที่แน่นอนสำหรับคำสั่ง Shell และการเรียกใช้สคริปต์
-- `"write_file"`: การจับคู่ที่แน่นอนสำหรับการสร้างไฟล์ระบบไฟล์และการเขียนดิสก์
-- `"read_file|write_file"`: การคั่นด้วยไปป์จะจับคู่ชื่อเครื่องมือที่เฉพาะเจาะจงหลายชื่อในกฎเดียว
-- `".*_file"`: การจับคู่ไวลด์การ์ดของนิพจน์ทั่วไปกับเครื่องมือใดก็ตามที่ลงท้ายด้วย `_file` (เช่น `read_file`, `write_file` หรือ `delete_file`) นิพจน์ทั่วไป RE2 มาตรฐานต้องใช้ `.*` ส่วน Globs Shell อย่างง่าย เช่น `*_file` เป็นไวยากรณ์นิพจน์ทั่วไปที่ไม่ถูกต้องและจะจับคู่ไม่สำเร็จ
-- `".*"` หรือ `"*"` หรือ `""`: รูปแบบการจับทั้งหมดที่สกัดกั้นการเรียกใช้เครื่องมือทุกรายการภายในคอนเทนเนอร์
+- `"code_execution"`: correspondência exata de string para comandos do shell e execuções de script.
+- `"write_file"`: correspondência exata para criação de arquivos do sistema de arquivos e gravações em disco.
+- `"read_file|write_file"`: a separação de pipe corresponde a vários nomes de ferramentas específicos em uma única regra.
+- `".*_file"`: caractere curinga de regex que corresponde a qualquer ferramenta que termine em `_file` (como `read_file`, `write_file` ou `delete_file`). As expressões regulares RE2 padrão exigem `.*`; globs de shell simples, como `*_file`, são sintaxe de regex inválida e não correspondem.
+- `".*"` ou `"*"` ou `""`: padrão de captura que intercepta todas as chamadas de ferramenta no contêiner.
 
-## ประเภทตัวแฮนเดิล
+## Tipos de gerenciador
 
-### Hooks คำสั่ง
+### Hooks de comando
 
-Hooks คำสั่งจะเรียกใช้คำสั่ง Shell หรือสคริปต์ภายใน Sandbox สคริปต์จะได้รับ JSON เหตุการณ์ใน `stdin` และส่งออก JSON การตัดสินใจใน `stdout`
+Os hooks de comando executam um comando ou script do shell no sandbox. O script recebe o JSON do evento em `stdin` e gera a decisão JSON em `stdout`.
 
-| ช่อง | ประเภท | คำอธิบาย |
+| Campo | Tipo | Descrição |
 | --- | --- | --- |
-| `type` | `string` | ต้องเป็น `"command"` |
-| `command` | `string` | บรรทัดคำสั่งที่จะเรียกใช้ภายใน Sandbox (เช่น `python3 /.agents/hooks-scripts/gate.py`) |
-| `timeout` | `integer` | การหมดเวลาเป็นวินาที ค่าเริ่มต้น: `30` |
+| `type` | `string` | Precisa ser `"command"`. |
+| `command` | `string` | Linha de comando a ser executada no sandbox (por exemplo, `python3 /.agents/hooks-scripts/gate.py`). |
+| `timeout` | `integer` | Tempo limite em segundos. Padrão: `30`. |
 
 ### Hooks HTTP
 
-Hooks HTTP จะส่ง JSON เหตุการณ์เป็นคำขอ POST ไปยัง URL HTTPS ภายนอกโดยตรงจากภายในเครือข่าย Sandbox เซิร์ฟเวอร์เป้าหมายจะส่งคืนการตัดสินใจในเนื้อหาการตอบกลับ HTTP โดยใช้รูปแบบ JSON เดียวกัน (`{"decision": "allow"}` หรือ `{"decision": "deny", "reason": "..."}`)
+Os hooks HTTP enviam o JSON do evento como uma solicitação POST para um URL HTTPS externo diretamente de dentro da rede de sandbox. O servidor de destino retorna a decisão no corpo da resposta HTTP usando o mesmo formato JSON (`{"decision": "allow"}` ou `{"decision": "deny", "reason": "..."}`).
 
-| ช่อง | ประเภท | คำอธิบาย |
+| Campo | Tipo | Descrição |
 | --- | --- | --- |
-| `type` | `string` | ต้องเป็น `"http"` |
-| `url` | `string` | ปลายทาง HTTPS ภายนอกที่จะ POST เพย์โหลดเหตุการณ์ |
-| `headers` | `object` | คู่คีย์-ค่าที่ไม่บังคับสำหรับส่วนหัวที่กำหนดเองที่ไม่ละเอียดอ่อน (เช่น `{"X-Event-Source": "agent-sandbox"}`) สำหรับข้อมูลเข้าสู่ระบบการตรวจสอบสิทธิ์ ให้ใช้พร็อกซีเครือข่ายแทน |
-| `timeout` | `integer` | การหมดเวลาเป็นวินาที ค่าเริ่มต้น: `30` |
+| `type` | `string` | Precisa ser `"http"`. |
+| `url` | `string` | Endpoint HTTPS externo para POST do payload do evento. |
+| `headers` | `object` | Pares de chave-valor opcionais para cabeçalhos personalizados não sensíveis (como `{"X-Event-Source": "agent-sandbox"}`). Para credenciais de autenticação, use o proxy de rede. |
+| `timeout` | `integer` | Tempo limite em segundos. Padrão: `30`. |
 
-#### พร็อกซีขาออกและการเปลี่ยนรูปแบบโทเค็น
+#### Proxy de saída e transformação de token
 
-เนื่องจาก Hooks HTTP จะทำงานโดยตรงจากเนมสเปซเครือข่าย Sandbox คำขอขาออกจึงผ่านพร็อกซีขาออกแบบโปร่งใส สถาปัตยกรรมนี้ให้ข้อได้เปรียบด้านความปลอดภัยที่สำคัญ 2 ประการ ดังนี้
+Como os hooks HTTP são executados diretamente de dentro do namespace da rede de sandbox, as solicitações de saída passam pelo proxy de saída transparente. Essa arquitetura oferece duas vantagens de segurança importantes:
 
-- **การอนุญาตเครือข่าย:** ต้องได้รับอนุญาตปลายทางเป้าหมายอย่างชัดเจนใน `network.allowlist` ของสภาพแวดล้อม พร็อกซีจะบล็อกการรับส่งข้อมูลแบบวนซ้ำ (`127.0.0.1` หรือ `localhost`) ให้กำหนดเป้าหมายปลายทางภายนอกที่ได้รับอนุญาตเสมอ
-- **การเปลี่ยนรูปแบบโทเค็น:** คุณไม่จำเป็นต้องจัดเก็บคีย์ API หรือโทเค็นผู้รับมอบสิทธิ์ที่เป็นความลับไว้ใน `.agents/hooks.json` หรือติดตั้งลงในคอนเทนเนอร์ แต่ให้กำหนดค่ากฎการเปลี่ยนรูปแบบโทเค็นในการกำหนดค่า[เครือข่าย](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th#network-configuration) (`network.allowlist.transform`) พร็อกซีขาออกจะสกัดกั้นการรับส่งข้อมูล Hooks HTTP ขาออกโดยอัตโนมัติและแทรกส่วนหัวการตรวจสอบสิทธิ์จริงลงในสายก่อนที่จะออกจาก Sandbox
+- **Permitir lista de rede**:os endpoints de destino precisam ser permitidos explicitamente em `network.allowlist` do ambiente. O tráfego de loopback (`127.0.0.1` ou `localhost`) é bloqueado pelo proxy. Sempre segmente endpoints externos permitidos.
+- **Transformação de token**:não é necessário armazenar chaves de API ou tokens de portador secretos em `.agents/hooks.json` ou montá-los no contêiner. Em vez disso, configure regras de transformação de token na [configuração de rede](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pt-br#network-configuration) (`network.allowlist.transform`). O proxy de saída intercepta automaticamente o tráfego de hook HTTP de saída e injeta os cabeçalhos de autenticação reais na conexão antes de sair do sandbox.
 
-## วิธีที่รันไทม์จัดการการตัดสินใจและความล้มเหลว
+## Como o ambiente de execução processa decisões e falhas
 
-- **การรอแบบซิงโครนัส:** Agent จะหยุดชั่วคราวและรอให้ Hooks ทำงานเสร็จก่อนที่จะดำเนินการต่อ
-- **การบล็อกการทำงานของเครื่องมือ:** หาก Hook ก่อนการทำงานของเครื่องมือส่งคืน `{"decision": "deny", "reason": "<your reason>"}` รันไทม์จะยกเลิกการเรียกใช้เครื่องมือทันที โมเดลจะเห็นเหตุผลการปฏิเสธในประวัติการสนทนาและปรับเปลี่ยนโดยเลือกตัวเลือกที่ปลอดภัยหรืออธิบายการบล็อกให้ผู้ใช้ทราบ
-- **การจัดการการหยุดทำงานของสคริปต์ ข้อผิดพลาด HTTP และการหมดเวลา:** หากสคริปต์คำสั่งหยุดทำงาน (สถานะการออกที่ไม่เป็น 0) Hook HTTP ส่งคืนรหัสสถานะที่ไม่ใช่ 2xx (เช่น ข้อผิดพลาดเกี่ยวกับเซิร์ฟเวอร์ 4xx หรือ 5xx) หรือการดำเนินการหมดเวลาหรือส่งคืน JSON ที่ไม่รู้จัก รันไทม์จะถือว่าเป็นการอนุมัติ (`allow`) การทำงานของเครื่องมือจะดำเนินต่อไปตามปกติ สคริปต์ที่เสียหายหรือเซิร์ฟเวอร์การวัดและส่งข้อมูลทางไกลที่เข้าถึงไม่ได้จึงไม่ทำให้แอปพลิเคชันหยุดทำงาน
+- **Espera síncrona**:o agente pausa e aguarda a conclusão dos hooks antes de continuar.
+- **Bloqueio da execução da ferramenta**:se o hook pré-ferramenta retornar `{"decision": "deny", "reason": "<your reason>"}`, o ambiente de execução vai cancelar imediatamente a chamada de ferramenta. O modelo mostra o motivo da rejeição no histórico de conversas e se adapta escolhendo uma alternativa segura ou explicando o bloco ao usuário.
+- **Como lidar com falhas de script, erros HTTP e tempos limite**:se um script de comando falhar (status de saída diferente de zero), um hook HTTP retornar um código de status não 2xx (como um erro de servidor 4xx ou 5xx) ou uma operação expirar ou retornar um JSON não reconhecido, o ambiente de execução vai tratar isso como uma aprovação (`allow`). A execução da ferramenta continua normalmente para que um script corrompido ou um servidor de telemetria inacessível nunca bloqueie o aplicativo.
 
-## กรณีการใช้งานทั่วไป
+## Casos de uso comuns
 
-### การกู้คืนหลายเทิร์นเพื่อความเป็นส่วนตัวของข้อมูลและการปฏิบัติตามข้อกำหนด
+### Recuperação de várias rodadas para privacidade e compliance de dados
 
-เมื่อ Hook บล็อกการเข้าถึงทรัพยากรที่จำกัด เช่น ไดเรกทอรีที่มีข้อมูลส่วนบุคคลที่ระบุตัวบุคคลนั้นได้ (PII) หรือบันทึกทางการเงินที่เป็นความลับ คุณสามารถส่ง `previous_interaction_id` ในการเรียกใช้ครั้งถัดไปเพื่อดำเนินการต่อในสภาพแวดล้อมเดิม Agent จะอ่านคำอธิบายการปฏิเสธและกู้คืนโดยอัตโนมัติด้วยการค้นหาตารางสาธารณะที่ได้รับอนุมัติแทน
+Quando um hook bloqueia o acesso a recursos restritos, como diretórios que contêm informações de identificação pessoal (PII) ou registros financeiros confidenciais, é possível transmitir `previous_interaction_id` na próxima chamada para continuar a rodada no mesmo ambiente. O agente lê a explicação da negação e se recupera automaticamente consultando tabelas públicas aprovadas.
 
 ### Python
 
@@ -571,12 +571,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 #   }'
 ```
 
-### การวัดและส่งข้อมูลทางไกลและการบันทึกการตรวจสอบภายนอก
+### Registro de auditoria e telemetria externos
 
-ส่งเหตุการณ์การตรวจสอบแบบเรียลไทม์จากภายใน Sandbox ไปยังเซิร์ฟเวอร์การตรวจสอบภายนอกทุกครั้งที่มีการอ่านหรือแก้ไขไฟล์
+Envie eventos de auditoria em tempo real de dentro do sandbox para um servidor de monitoramento externo sempre que os arquivos forem lidos ou modificados.
 
-- **จับคู่เครื่องมือหลายรายการ:** เนื่องจาก Matcher ใช้นิพจน์ทั่วไปมาตรฐาน คุณจึงรวมเครื่องมือหลายรายการไว้ในกฎเดียวได้โดยใช้ไปป์ (`read_file|write_file`) หรือไวลด์การ์ด (`.*_file`)
-- **เก็บข้อมูลลับไว้ในการกำหนดค่า:** กำหนดโทเค็นการตรวจสอบสิทธิ์ในการกำหนดค่า[เครือข่าย](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th#network-configuration)ของสภาพแวดล้อม (`network.allowlist.transform`) พร็อกซีขาออกจะแทรกโทเค็นผู้รับมอบสิทธิ์จริงลงในคำขอขาออกโดยอัตโนมัติ
+- **Corresponder a várias ferramentas**:como os matchers usam regex padrão, é possível combinar várias ferramentas em uma única regra usando pipes (`read_file|write_file`) ou caracteres curinga (`.*_file`).
+- **Manter segredos fora da configuração:** defina tokens de autenticação na [configuração de rede](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pt-br#network-configuration) do ambiente (`network.allowlist.transform`). O proxy de saída injeta automaticamente os tokens de portador reais em solicitações de saída.
 
 ### Python
 
@@ -718,25 +718,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## ข้อจำกัด
+## Limitações
 
-- **ขอบเขตเครื่องมือ Sandbox:** Hooks จะสกัดกั้นเครื่องมือในตัวภายใน Sandbox ได้แก่ การเรียกใช้โค้ด (`code_execution`) และการดำเนินการระบบไฟล์ (`read_file`, `write_file`, `list_files` และ `delete_file`) โดยจะไม่ทริกเกอร์สำหรับการเรียกใช้ฟังก์ชันที่กำหนดเอง (`function`) หรือเครื่องมือ Model Context Protocol (`mcp_server`) ภายนอกที่จัดการนอกคอนเทนเนอร์
-- **การอนุญาตเครือข่าย:** Hooks HTTP จะทำงานภายในเครือข่ายคอนเทนเนอร์ คุณต้องอนุญาต URL เป้าหมายอย่างชัดเจนใน `network.allowlist` ของสภาพแวดล้อม พร็อกซีจะบล็อกที่อยู่แบบวนซ้ำ (`localhost`, `127.0.0.1`)
-- **การอนุมัติอัตโนมัติเมื่อเกิดข้อผิดพลาด:** หากสคริปต์ Hook หยุดทำงาน (สถานะการออกที่ไม่เป็น 0) หมดเวลา หรือล้มเหลว รันไทม์จะบันทึกความล้มเหลวและอนุญาตให้การเรียกใช้เครื่องมือดำเนินต่อไป ซึ่งจะช่วยให้สคริปต์ Linter ที่เสียหายหรือกระบวนการที่ค้างอยู่ไม่ทำให้แอปพลิเคชันหยุดทำงาน
-- **การป้องกันการกำหนดค่า Sandbox:** เนื่องจาก Hooks ทำงานภายใน Sandbox คอนเทนเนอร์ Agent ที่มีเครื่องมือเขียนระบบไฟล์หรือสิทธิ์การเรียกใช้โค้ด Shell จึงสามารถแก้ไข `.agents/hooks.json` หรือสคริปต์ภายในพื้นที่ทำงานที่เขียนได้ ใช้ Hooks คอนเทนเนอร์เป็นคำแนะนำนโยบายอัตโนมัติและการป้องกันการทำงาน หากจำเป็นต้องมีการป้องกันการดัดแปลงอย่างเข้มงวดจากการเรียกใช้โมเดลที่ไม่น่าเชื่อถือ ให้ติดตั้งแหล่งที่มาของการกำหนดค่าจากที่เก็บแบบอ่านอย่างเดียว
+- **Escopo da ferramenta de sandbox**:os hooks interceptam ferramentas integradas no sandbox: execução de código (`code_execution`) e operações do sistema de arquivos (`read_file`, `write_file`, `list_files` e `delete_file`). Eles não são acionados para chamadas de função personalizadas (`function`) ou ferramentas de protocolo de contexto de modelo externo (`mcp_server`) processadas fora do contêiner.
+- **Permitir listas de rede**:os hooks HTTP são executados na rede de contêiner. É necessário permitir explicitamente os URLs de destino em `network.allowlist` do ambiente. Os endereços de loopback (`localhost`, `127.0.0.1`) são bloqueados pelo proxy.
+- **Aprovação automática em erros**:se um script de hook falhar (status de saída diferente de zero), expirar ou falhar, o ambiente de execução vai registrar a falha e permitir que a chamada de ferramenta continue. Isso garante que scripts de linter corrompidos ou processos suspensos nunca bloqueiem seus aplicativos.
+- **Proteção de configuração de sandbox**:como os hooks são executados no sandbox do contêiner, os agentes com ferramentas de gravação do sistema de arquivos ou permissões de execução de código do shell podem modificar `.agents/hooks.json` local ou scripts em espaços de trabalho graváveis. Use hooks de contêiner como orientação de política automatizada e barreiras de proteção operacionais. Se for necessária uma resistência estrita contra adulterações em execuções de modelos não confiáveis, monte fontes de configuração de repositórios somente leitura.
 
-## ขั้นตอนถัดไป
+## A seguir
 
-- ดูวิธีกำหนดค่า Sandbox และสภาพแวดล้อมระยะไกลแบบถาวร [remote sandboxes and environments](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th)
-- สำรวจความสามารถและเครื่องมือในตัวของ [Agent Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th)
-- ดูภาพรวมของ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) สำหรับเซสชันการสนทนาไปมาและการสตรีม
+- Saiba como configurar sandboxes e ambientes [remotos persistentes](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pt-br).
+- Conheça os recursos e as ferramentas integradas do [agente do Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pt-br).
+- Consulte a [visão geral da API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) para sessões multiturno e streaming.
 
-ส่งความคิดเห็น
+Envie comentários
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-อัปเดตล่าสุด 2026-07-30 UTC
+Última atualização 2026-07-30 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Quer enviar seu feedback?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-30 UTC"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-07-30 UTC."],[],[]]

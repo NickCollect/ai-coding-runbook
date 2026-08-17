@@ -1,46 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=hi
-fetched_at: 2026-08-10T03:15:37.960217+00:00
-title: "\u0907\u092b\u093c\u0947\u092e\u0930\u0932 \u091f\u094b\u0915\u0928 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=pt-BR
+fetched_at: 2026-08-17T02:31:37.035141+00:00
+title: "Tokens tempor\u00e1rios \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-सुझाव भेजें
+Envie comentários
 
-# इफ़ेमरल टोकन
+# Tokens temporários
 
-Ephemeral token, कम समय के लिए मान्य होने वाले ऐसे टोकन होते हैं जिनकी मदद से [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) के ज़रिए Gemini
-API को ऐक्सेस किया जा सकता है. इन्हें, सुरक्षा को बेहतर बनाने के लिए डिज़ाइन किया गया है. इनका इस्तेमाल, उपयोगकर्ता के डिवाइस से सीधे एपीआई से कनेक्ट करने पर किया जाता है. इसे
-[क्लाइंट-टू-सर्वर](https://ai.google.dev/gemini-api/docs/live?hl=hi#implementation-approach)
-लागू करने का तरीका कहा जाता है. मानक एपीआई पासकोड की तरह, ephemeral token को क्लाइंट-साइड ऐप्लिकेशन से निकाला जा सकता है. जैसे, वेब ब्राउज़र या मोबाइल ऐप्लिकेशन. हालांकि, ephemeral token की समयसीमा बहुत कम होती है और इन पर पाबंदियां लगाई जा सकती हैं. इसलिए, प्रोडक्शन एनवायरमेंट में सुरक्षा से जुड़े जोखिम काफ़ी कम हो जाते हैं. लाइव एपीआई को क्लाइंट-साइड ऐप्लिकेशन से सीधे ऐक्सेस करते समय, इनका इस्तेमाल करना चाहिए. इससे एपीआई पासकोड की सुरक्षा बेहतर होती है.
+Os tokens temporários são tokens de autenticação de curta duração para acessar a API Gemini
+usando [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). Eles foram projetados para aumentar a segurança quando
+você se conecta diretamente de um dispositivo do usuário à API (uma
+[implementação cliente-servidor](https://ai.google.dev/gemini-api/docs/live?hl=pt-br#implementation-approach)
+). Assim como as chaves de API padrão, os tokens temporários podem ser extraídos de aplicativos do lado do cliente, como navegadores da Web ou apps para dispositivos móveis. No entanto, como os tokens temporários expiram rapidamente e podem ser restritos, eles reduzem significativamente os riscos de segurança em um ambiente de produção. Use-os ao acessar a API Live diretamente de aplicativos do lado do cliente para aumentar a segurança da chave de API.
 
-## Ephemeral token कैसे काम करते हैं
+## Como os tokens temporários funcionam
 
-यहां, ephemeral token के काम करने का तरीका बताया गया है:
+Confira como os tokens temporários funcionam de modo geral:
 
-1. आपका क्लाइंट (जैसे, वेब ऐप्लिकेशन) आपके बैकएंड से पुष्टि करता है.
-2. आपका बैकएंड, Gemini API की प्रोविज़निंग सेवा से ephemeral token का अनुरोध करता है.
-3. Gemini API, कम समय के लिए मान्य होने वाला टोकन जारी करता है.
-4. आपका बैकएंड, लाइव एपीआई से WebSocket कनेक्शन के लिए, क्लाइंट को टोकन भेजता है. इसके लिए, एपीआई पासकोड को ephemeral token से बदला जा सकता है.
-5. इसके बाद, क्लाइंट इस टोकन का इस्तेमाल, एपीआई पासकोड की तरह करता है.
+1. O cliente (por exemplo, um app da Web) é autenticado com o back-end.
+2. O back-end solicita um token temporário do serviço de provisionamento da API Gemini.
+3. A API Gemini emite um token de curta duração.
+4. O back-end envia o token ao cliente para conexões WebSocket com a API Live. Para fazer isso, troque a chave de API por um token temporário.
+5. O cliente usa o token como se fosse uma chave de API.
 
-![कुछ समय के लिए इस्तेमाल किए जाने वाले टोकन के बारे में खास जानकारी](https://ai.google.dev/static/gemini-api/docs/images/Live_API_01.png?hl=hi)
+![Visão geral dos tokens temporários](https://ai.google.dev/static/gemini-api/docs/images/Live_API_01.png?hl=pt-br)
 
-इससे सुरक्षा बेहतर होती है, क्योंकि टोकन को निकालने पर भी, यह कम समय के लिए मान्य होता है. वहीं, क्लाइंट-साइड पर डिप्लॉय किया गया एपीआई पासकोड, लंबे समय के लिए मान्य होता है. क्लाइंट, Gemini को सीधे डेटा भेजता है. इसलिए, इससे लेटेंसी भी बेहतर होती है. साथ ही, आपके बैकएंड को रीयल टाइम डेटा को प्रॉक्सी करने की ज़रूरत नहीं पड़ती.
+Isso aumenta a segurança porque, mesmo que seja extraído, o token é de curta duração, ao contrário de uma chave de API de longa duração implantada no lado do cliente. Como o cliente envia dados diretamente ao Gemini, isso também melhora a latência e evita que os back-ends precisem fazer proxy dos dados em tempo real.
 
-## Ephemeral token बनाना
+## Criar um token temporário
 
-यहां, Gemini से ephemeral token पाने का एक आसान उदाहरण दिया गया है.
-डिफ़ॉल्ट रूप से, आपके पास इस अनुरोध (`newSessionExpireTime`) से मिले टोकन का इस्तेमाल करके, लाइव एपीआई के नए सेशन शुरू करने के लिए एक मिनट और उस कनेक्शन पर मैसेज भेजने के लिए 30 मिनट (`expireTime`) होंगे.
+Confira um exemplo simplificado de como receber um token temporário do Gemini.
+Por padrão, você terá 1 minuto para iniciar novas sessões da API Live usando o token dessa solicitação (`newSessionExpireTime`) e 30 minutos para enviar mensagens por essa conexão (`expireTime`).
 
 ### Python
 
@@ -94,13 +95,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/auth_tokens" \
   }'
 ```
 
-`expireTime` की वैल्यू की सीमाओं, डिफ़ॉल्ट वैल्यू, और अन्य फ़ील्ड की खास जानकारी के लिए, [एपीआई का संदर्भ](https://ai.google.dev/api/live?hl=hi#ephemeral-auth-tokens) देखें.
-`expireTime` की समयसीमा के अंदर, आपको
-[`sessionResumption`](https://ai.google.dev/gemini-api/docs/live-session?hl=hi#session-resumption) हर 10 मिनट में कॉल को फिर से कनेक्ट करने के लिए
-की ज़रूरत होगी. ऐसा, उसी टोकन से किया जा सकता है, भले ही
-`uses: 1` हो.
+Para restrições de valor `expireTime`, padrões e outras especificações de campo, consulte a
+[referência da API](https://ai.google.dev/api/live?hl=pt-br#ephemeral-auth-tokens).
+No período `expireTime`, você precisará de
+[`sessionResumption`](https://ai.google.dev/gemini-api/docs/live-session?hl=pt-br#session-resumption) para
+reconectar a chamada a cada 10 minutos. Isso pode ser feito com o mesmo token, mesmo
+que `uses: 1`.
 
-किसी खास कॉन्फ़िगरेशन के लिए, ephemeral token को लॉक भी किया जा सकता है. यह आपके ऐप्लिकेशन की सुरक्षा को बेहतर बनाने और सर्वर साइड पर अपने सिस्टम के निर्देशों को बनाए रखने में मददगार हो सकता है.
+Também é possível bloquear um token temporário em um conjunto de configurações. Isso pode ser útil para melhorar ainda mais a segurança do aplicativo e manter as instruções do sistema no lado do servidor.
 
 ### Python
 
@@ -169,15 +171,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/auth_tokens" \
   }'
 ```
 
-फ़ील्ड के सबसेट को भी लॉक किया जा सकता है. ज़्यादा जानकारी के लिए, [SDK टूल का दस्तावेज़](https://googleapis.github.io/python-genai/genai.html#genai.types.CreateAuthTokenConfig.lock_additional_fields)
-देखें.
+Também é possível bloquear um subconjunto de campos. Consulte a [documentação do SDK](https://googleapis.github.io/python-genai/genai.html#genai.types.CreateAuthTokenConfig.lock_additional_fields)
+para mais informações.
 
-## Ephemeral token की मदद से, लाइव एपीआई से कनेक्ट करना
+## Conectar-se à API Live com um token temporário
 
-Ephemeral token मिलने के बाद, इसका इस्तेमाल एपीआई पासकोड की तरह किया जा सकता है. हालांकि, ध्यान रखें कि यह सिर्फ़ लाइव एपीआई के लिए काम करता है. साथ ही, यह एपीआई के `v1beta` वर्शन के साथ ही काम करता है.
+Depois de ter um token temporário, use-o como se fosse uma chave de API. No entanto, ele só funciona para a API Live e apenas com a versão `v1beta` da API.
 
-[क्लाइंट-टू-सर्वर लागू करने के तरीके का इस्तेमाल करने वाले ऐप्लिकेशन
-को डिप्लॉय करने पर ही, ephemeral token का इस्तेमाल करने से फ़ायदा मिलता है.](https://ai.google.dev/gemini-api/docs/live?hl=hi#implementation-approach)
+O uso de tokens temporários só agrega valor ao implantar aplicativos
+que seguem a abordagem de implementação [cliente-servidor](https://ai.google.dev/gemini-api/docs/live?hl=pt-br#implementation-approach).
 
 ### JavaScript
 
@@ -207,30 +209,30 @@ async function main() {
 main();
 ```
 
-ज़्यादा उदाहरणों के लिए, [लाइव एपीआई का इस्तेमाल शुरू करना](https://ai.google.dev/gemini-api/docs/live?hl=hi) लेख पढ़ें.
+Consulte [Introdução à API Live](https://ai.google.dev/gemini-api/docs/live?hl=pt-br) para mais exemplos.
 
-## सबसे सही तरीके
+## Práticas recomendadas
 
-- `expire_time` पैरामीटर का इस्तेमाल करके, समयसीमा कम सेट करें.
-- टोकन की समयसीमा खत्म हो जाती है. इसलिए, प्रोविज़निंग की प्रोसेस को फिर से शुरू करना पड़ता है.
-- अपने बैकएंड के लिए, सुरक्षित पुष्टि की सुविधा की पुष्टि करें. Ephemeral token की सुरक्षा, आपके बैकएंड की पुष्टि करने के तरीके जितनी ही होगी.
-- आम तौर पर, बैकएंड-टू-Gemini कनेक्शन के लिए, ephemeral token का इस्तेमाल न करें. ऐसा इसलिए, क्योंकि इस पाथ को आम तौर पर सुरक्षित माना जाता है.
+- Defina uma duração de expiração curta usando o parâmetro `expire_time`.
+- Os tokens expiram, exigindo a reinicialização do processo de provisionamento.
+- Verifique a autenticação segura do seu back-end. Os tokens temporários só serão tão seguros quanto o método de autenticação do back-end.
+- Em geral, evite usar tokens temporários para conexões de back-end para Gemini, já que esse caminho normalmente é considerado seguro.
 
-## सीमाएं
+## Limitações
 
-फ़िलहाल, ephemeral token सिर्फ़ [लाइव एपीआई](https://ai.google.dev/gemini-api/docs/live?hl=hi) के साथ काम करते हैं.
+No momento, os tokens temporários só são compatíveis com a [API Live](https://ai.google.dev/gemini-api/docs/live?hl=pt-br).
 
-## आगे क्या करना है
+## A seguir
 
-- ज़्यादा जानकारी के लिए, ephemeral token के बारे में लाइव एपीआई के [रेफ़रंस](https://ai.google.dev/api/live?hl=hi#ephemeral-auth-tokens)
-  पढ़ें.
+- Leia a referência da API Live [sobre tokens temporários](https://ai.google.dev/api/live?hl=pt-br#ephemeral-auth-tokens)
+  para mais informações.
 
-सुझाव भेजें
+Envie comentários
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया.
+Última atualização 2026-07-30 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Quer enviar seu feedback?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-07-30 UTC."],[],[]]

@@ -1,30 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/media-resolution?hl=vi
-fetched_at: 2026-08-10T03:24:41.464155+00:00
-title: "\u0110\u1ed9 ph\u00e2n gi\u1ea3i n\u1ed9i dung nghe nh\u00ecn \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/media-resolution?hl=es-419
+fetched_at: 2026-08-17T02:17:18.051605+00:00
+title: "Resoluci\u00f3n de contenido multimedia \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-Gửi ý kiến phản hồi
+Enviar comentarios
 
-# Độ phân giải nội dung nghe nhìn
+# Resolución de contenido multimedia
 
-Tham số `media_resolution` kiểm soát cách Gemini API xử lý dữ liệu đầu vào đa phương tiện như hình ảnh, video và tài liệu PDF bằng cách xác định **số lượng mã thông báo tối đa** được phân bổ cho dữ liệu đầu vào đa phương tiện, cho phép bạn cân bằng chất lượng phản hồi với độ trễ và chi phí. Để biết các chế độ cài đặt, giá trị mặc định và cách các giá trị này tương ứng với mã thông báo, hãy xem phần [Số lượng mã thông báo](#token-counts).
+El parámetro `media_resolution` controla cómo la API de Gemini procesa las entradas de contenido multimedia, como imágenes, videos y documentos PDF, ya que determina la **cantidad máxima de tokens** asignados para las entradas de contenido multimedia, lo que te permite equilibrar la calidad de la respuesta con la latencia y el costo. Para conocer los diferentes parámetros de configuración, los valores predeterminados y cómo se corresponden con los tokens, consulta la sección [Recuento de tokens](#token-counts).
 
-Bạn có thể định cấu hình độ phân giải của nội dung nghe nhìn cho từng đối tượng nội dung nghe nhìn (mục nội dung) trong yêu cầu của mình (chỉ Gemini 3).
+Puedes configurar la resolución de contenido multimedia para objetos de contenido multimedia individuales (elementos de contenido) dentro de tu solicitud (solo Gemini 3).
 
-## Độ phân giải nội dung đa phương tiện theo từng mục nội dung (chỉ Gemini 3)
+## Resolución de contenido multimedia por elemento de contenido (solo Gemini 3)
 
-Gemini 3 cho phép bạn đặt độ phân giải của nội dung nghe nhìn cho từng đối tượng nội dung nghe nhìn trong yêu cầu của mình, giúp tối ưu hoá mức sử dụng mã thông báo một cách chi tiết. Bạn có thể kết hợp các cấp độ phân giải trong một yêu cầu duy nhất. Ví dụ: sử dụng độ phân giải cao cho một sơ đồ phức tạp và độ phân giải thấp cho một hình ảnh theo ngữ cảnh đơn giản.
+Gemini 3 te permite establecer la resolución de contenido multimedia para objetos de contenido multimedia individuales dentro de tu solicitud, lo que ofrece una optimización detallada del uso de tokens. Puedes combinar niveles de resolución en una sola solicitud. Por ejemplo, usar alta resolución para un diagrama complejo y baja resolución para una imagen contextual simple.
 
 ### Python
 
@@ -102,69 +102,69 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Các giá trị độ phân giải có thể sử dụng
+## Valores de resolución disponibles
 
-Gemini API xác định các cấp độ sau đây cho độ phân giải của nội dung nghe nhìn:
+La API de Gemini define los siguientes niveles para la resolución de contenido multimedia:
 
-- `unspecified`: Chế độ cài đặt mặc định. Số token cho cấp độ này có sự khác biệt đáng kể giữa Gemini 3 và các mô hình Gemini trước đó.
-- `low`: Số token thấp hơn, giúp xử lý nhanh hơn và giảm chi phí, nhưng ít chi tiết hơn.
-- `medium`: Cân bằng giữa mức độ chi tiết, chi phí và độ trễ.
-- `high`: Số token cao hơn, cung cấp nhiều thông tin chi tiết hơn để mô hình hoạt động, nhưng phải trả giá bằng độ trễ và chi phí tăng lên.
-- `ultra_high` (Chỉ tính trên mỗi mục nội dung): Số lượng mã thông báo cao nhất, bắt buộc đối với một số trường hợp sử dụng cụ thể, chẳng hạn như [sử dụng máy tính](https://ai.google.dev/gemini-api/docs/computer-use?hl=vi).
+- `unspecified`: Es la configuración predeterminada. El recuento de tokens para este nivel varía significativamente entre Gemini 3 y los modelos de Gemini anteriores.
+- `low`: Recuento de tokens más bajo, lo que genera un procesamiento más rápido y un costo más bajo, pero con menos detalles.
+- `medium`: Un equilibrio entre detalles, costo y latencia.
+- `high`: Recuento de tokens más alto, que proporciona más detalles para que el modelo funcione, a costa de una mayor latencia y costo.
+- `ultra_high` (solo por elemento de contenido): Recuento de tokens más alto, necesario para casos de uso específicos, como el [uso de computadoras](https://ai.google.dev/gemini-api/docs/computer-use?hl=es-419).
 
-Xin lưu ý rằng `high` mang lại hiệu suất tối ưu cho hầu hết các trường hợp sử dụng.
+Ten en cuenta que `high` proporciona el rendimiento óptimo para la mayoría de los casos de uso.
 
-Số lượng mã thông báo chính xác được tạo cho mỗi cấp độ này phụ thuộc vào cả **loại nội dung nghe nhìn** (Hình ảnh, Video, PDF) và **phiên bản mô hình**.
+La cantidad exacta de tokens generados para cada uno de estos niveles depende del **tipo de contenido multimedia** (imagen, video, PDF) y de la **versión del modelo**.
 
-## Số lượng mã thông báo
+## Recuento de tokens
 
-Các bảng dưới đây tóm tắt số lượng mã thông báo gần đúng cho từng giá trị `media_resolution` và loại nội dung nghe nhìn cho mỗi họ mô hình.
+En las siguientes tablas, se resumen los recuentos de tokens aproximados para cada valor de `media_resolution` y tipo de contenido multimedia por familia de modelos.
 
-**Các mô hình Gemini 3**
+**Modelos de Gemini 3**
 
-| MediaResolution | Hình ảnh | Video | PDF |
+| MediaResolution | Imagen | Video | PDF |
 | --- | --- | --- | --- |
-| `unspecified` (Mặc định) | 1120 | 70 | 560 |
-| `low` | 280 | 70 | 280 + Văn bản gốc |
-| `medium` | 560 | 70 | 560 + Văn bản gốc |
-| `high` | 1120 | 280 | 1120 + Văn bản gốc |
-| `ultra_high` | 2240 | Không áp dụng | Không áp dụng |
+| `unspecified` (predeterminado) | 1120 | 70 | 560 |
+| `low` | 280 | 70 | 280 + texto nativo |
+| `medium` | 560 | 70 | 560 + texto nativo |
+| `high` | 1120 | 280 | 1120 + texto nativo |
+| `ultra_high` | 2240 | N/A | N/A |
 
-## Chọn độ phân giải phù hợp
+## Cómo elegir la resolución correcta
 
-- **Mặc định (`unspecified`):** Bắt đầu bằng chế độ mặc định. Nó được điều chỉnh để cân bằng chất lượng, độ trễ và chi phí cho hầu hết các trường hợp sử dụng phổ biến.
-- **`low`:** Sử dụng cho những trường hợp mà chi phí và độ trễ là yếu tố quan trọng nhất, còn chi tiết chính xác thì ít quan trọng hơn.
-- **`medium` / `high`:** Tăng độ phân giải khi nhiệm vụ yêu cầu bạn hiểu rõ các chi tiết phức tạp trong nội dung nghe nhìn. Điều này thường cần thiết cho việc phân tích hình ảnh phức tạp, đọc biểu đồ hoặc hiểu tài liệu dày đặc.
-- **`ultra_high`** – Chỉ có trong chế độ cài đặt theo từng mục nội dung. Nên dùng cho các trường hợp sử dụng cụ thể, chẳng hạn như khi dùng máy tính hoặc khi thử nghiệm cho thấy có sự cải tiến rõ rệt so với `high`.
-- **Kiểm soát theo từng mục nội dung (Gemini 3):** Tối ưu hoá mức sử dụng mã thông báo. Ví dụ: trong một câu lệnh có nhiều hình ảnh, hãy dùng `high` cho một sơ đồ phức tạp và `low` hoặc `medium` cho các hình ảnh theo ngữ cảnh đơn giản hơn.
+- **Predeterminado (`unspecified`):** Comienza con el valor predeterminado. Está optimizado para un buen equilibrio entre calidad, latencia y costo para los casos de uso más comunes.
+- **`low`:** Úsalo en situaciones en las que el costo y la latencia son fundamentales, y los detalles precisos son menos importantes.
+- **`medium` / `high`:** Aumenta la resolución cuando la tarea requiere comprender detalles complejos dentro del contenido multimedia. Esto suele ser necesario para el análisis visual complejo, la lectura de gráficos o la comprensión de documentos densos.
+- **`ultra_high`** : Solo está disponible para la configuración por elemento de contenido. Se recomienda para casos de uso específicos, como el uso de computadoras o cuando las pruebas muestran una mejora clara en comparación con `high`.
+- **Control por elemento de contenido (Gemini 3):** Optimiza el uso de tokens. Por ejemplo, en un prompt con varias imágenes, usa `high` para un diagrama complejo y `low` o `medium` para imágenes contextuales más simples.
 
-**Chế độ cài đặt được đề xuất**
+**Configuración recomendada**
 
-Sau đây là danh sách các chế độ cài đặt độ phân giải phương tiện được đề xuất cho từng loại phương tiện được hỗ trợ.
+A continuación, se enumeran los parámetros de configuración de resolución de contenido multimedia recomendados para cada tipo de contenido multimedia compatible.
 
-| Loại phương tiện | Chế độ cài đặt nên dùng | Số mã thông báo tối đa | Hướng dẫn sử dụng |
+| Tipo de medio | Configuración recomendada | Tokens máx. | Orientación sobre el uso |
 | --- | --- | --- | --- |
-| **Hình ảnh** | `high` | 1120 | Bạn nên dùng chế độ này cho hầu hết các tác vụ phân tích hình ảnh để đảm bảo chất lượng tối đa. |
-| **Tệp PDF** | `medium` | 560 | Tối ưu cho việc hiểu tài liệu; chất lượng thường đạt đến mức tối đa ở `medium`. Việc tăng lên `high` hiếm khi cải thiện kết quả OCR cho các tài liệu tiêu chuẩn. |
-| **Video** (Chung) | `low` (hoặc `medium`) | 70 (mỗi khung hình) | **Lưu ý:** Đối với video, chế độ cài đặt `low` và `medium` được xử lý giống nhau (70 mã thông báo) để tối ưu hoá việc sử dụng ngữ cảnh. Điều này là đủ cho hầu hết các nhiệm vụ nhận dạng và mô tả hành động. |
-| **Video** (Nhiều văn bản) | `high` | 280 (mỗi khung hình) | Chỉ bắt buộc khi trường hợp sử dụng liên quan đến việc đọc văn bản dày đặc (OCR) hoặc các chi tiết nhỏ trong khung hình video. |
+| **Imágenes** | `high` | 1120 | Se recomienda para la mayoría de las tareas de análisis de imágenes para garantizar la máxima calidad. |
+| **PDFs** | `medium` | 560 | Es óptimo para la comprensión de documentos; la calidad suele saturarse en `medium`. Aumentar a `high` rara vez mejora los resultados de OCR para documentos estándar. |
+| **Video** (general) | `low` (o `medium`) | 70 (por fotograma) | **Nota:** En el caso de los videos, los parámetros de configuración `low` y `medium` se tratan de forma idéntica (70 tokens) para optimizar el uso del contexto. Esto es suficiente para la mayoría de las tareas de reconocimiento y descripción de acciones. |
+| **Video** (con mucho texto) | `high` | 280 (por fotograma) | Solo es necesario cuando el caso de uso implica leer texto denso (OCR) o detalles pequeños dentro de los fotogramas de video. |
 
-Luôn kiểm thử và đánh giá tác động của các chế độ cài đặt độ phân giải khác nhau đối với ứng dụng của bạn để tìm ra sự cân bằng tốt nhất giữa chất lượng, độ trễ và chi phí.
+Siempre prueba y evalúa el impacto de los diferentes parámetros de configuración de resolución en tu aplicación para encontrar el mejor equilibrio entre calidad, latencia y costo.
 
-## Bản tóm tắt về khả năng tương thích với phiên bản
+## Resumen de compatibilidad de versiones
 
-- Việc đặt `resolution` cho từng mục nội dung là **đặc quyền của các mô hình Gemini 3**.
+- Establecer la `resolution` en elementos de contenido individuales es **exclusivo de los modelos de Gemini 3**.
 
-## Các bước tiếp theo
+## Próximos pasos
 
-- Tìm hiểu thêm về các khả năng đa phương thức của Gemini API trong các hướng dẫn về [hiểu hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi), [hiểu video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi) và [hiểu tài liệu](https://ai.google.dev/gemini-api/docs/document-processing?hl=vi).
+- Obtén más información sobre las capacidades multimodales de la API de Gemini en las guías de [comprensión de imágenes](https://ai.google.dev/gemini-api/docs/image-understanding?hl=es-419), [comprensión de videos](https://ai.google.dev/gemini-api/docs/video-understanding?hl=es-419) y [comprensión de documentos](https://ai.google.dev/gemini-api/docs/document-processing?hl=es-419).
 
-Gửi ý kiến phản hồi
+Enviar comentarios
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-Cập nhật lần gần đây nhất: 2026-07-30 UTC.
+Última actualización: 2026-07-30 (UTC)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+¿Quieres brindar más información?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-30 UTC."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-07-30 (UTC)"],[],[]]

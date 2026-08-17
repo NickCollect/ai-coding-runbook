@@ -1,50 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=it
-fetched_at: 2026-08-10T03:11:13.285976+00:00
-title: "Anteprima di Deep Research \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=vi
+fetched_at: 2026-08-17T02:29:33.115669+00:00
+title: "B\u1ea3n d\u00f9ng th\u1eed Deep Research \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Invia feedback
+Gửi ý kiến phản hồi
 
-# Anteprima di Deep Research
+# Bản dùng thử Deep Research
 
-Un potente ricercatore agentico progettato per indagini autonome in più fasi
-che sintetizzano informazioni complesse in report completi e citati. Questo
-modello supporta la pianificazione collaborativa, la visualizzazione, i server MCP e la ricerca
-di file. È disponibile in due versioni: Deep Research per velocità ed efficienza e
-Deep Research Max per la massima completezza.
+Một nhà nghiên cứu mạnh mẽ được thiết kế cho các cuộc điều tra tự động, nhiều bước, tổng hợp thông tin phức tạp thành các báo cáo toàn diện có trích dẫn. Mô hình này hỗ trợ lập kế hoạch cộng tác, hình ảnh hoá, máy chủ MCP và Tìm tệp. Mô hình này có hai phiên bản: Deep Research để tăng tốc độ và hiệu quả, và Deep Research Max để tối đa hoá tính toàn diện.
 
-## Documentazione
+## Tài liệu
 
-Visita la pagina [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) per una copertura completa
-di funzionalità e capacità.
+Truy cập trang [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) để xem đầy đủ các tính năng và chức năng.
 
 ## deep-research-preview-04-2026
 
-| Proprietà | Descrizione |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardCodice agente | **API Interactions**  `deep-research-preview-04-2026` |
-| saveTipi di dati supportati | **Ingresso**  Testo, immagine, PDF, audio, video  **Output**  Testo (report citati), immagini |
-| token\_autoLimiti dei token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Finestra contestuale di input**  1.048.576  **Limite di token di output**  65.536 |
-| Versioni 123 | Per ulteriori dettagli, leggi i [pattern delle versioni del modello](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#model-versions).  - Anteprima: `deep-research-preview-04-2026` - Max: `deep-research-max-preview-04-2026` |
-| calendar\_monthUltimo aggiornamento | Aprile 2026 |
+| id\_cardMã đại lý | **API Tương tác**  `deep-research-preview-04-2026` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, Hình ảnh, PDF, Âm thanh, Video  **Đầu ra**  Văn bản (Báo cáo có trích dẫn), Hình ảnh |
+| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Cửa sổ ngữ cảnh đầu vào**  1.048.576  **Giới hạn mã thông báo đầu ra**  65.536 |
+| 123Phiên bản | Đọc các [mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm chi tiết.  - Xem trước: `deep-research-preview-04-2026` - Max: `deep-research-max-preview-04-2026` |
+| calendar\_monthNội dung cập nhật mới nhất | Tháng 4 năm 2026 |
 
-Invia feedback
+Gửi ý kiến phản hồi
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Ultimo aggiornamento 2026-04-29 UTC.
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-Vuoi dirci altro?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

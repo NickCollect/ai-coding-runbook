@@ -1,66 +1,64 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=th
-fetched_at: 2026-08-10T03:11:09.674716+00:00
-title: "\u0e01\u0e32\u0e23\u0e41\u0e04\u0e0a\u0e1a\u0e23\u0e34\u0e1a\u0e17 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=vi
+fetched_at: 2026-08-17T02:25:09.199201+00:00
+title: "L\u01b0u ng\u1eef c\u1ea3nh v\u00e0o b\u1ed9 nh\u1edb \u0111\u1ec7m \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-ส่งความคิดเห็น
+Gửi ý kiến phản hồi
 
-# การแคชบริบท
+# Lưu ngữ cảnh vào bộ nhớ đệm
 
-ในเวิร์กโฟลว์ AI ทั่วไป คุณอาจส่งโทเค็นอินพุตเดียวกันซ้ำๆ ไปยังโมเดล Gemini API มีกลไกการแคช 2 แบบดังนี้
+Trong quy trình làm việc điển hình của AI, bạn có thể truyền đi truyền lại cùng một mã thông báo đầu vào cho một mô hình. Gemini API cung cấp 2 cơ chế lưu vào bộ nhớ đệm:
 
-- การแคชแบบไม่เจาะจง (เปิดใช้โดยอัตโนมัติในโมเดล Gemini 2.5 และใหม่กว่า ไม่รับประกันการประหยัดค่าใช้จ่าย)
-- การแคชแบบเจาะจง (เปิดใช้ด้วยตนเองในโมเดลส่วนใหญ่ได้ รับประกันการประหยัดค่าใช้จ่าย)
+- Lưu vào bộ nhớ đệm ngầm (tự động bật trên Gemini 2.5 và các mô hình mới hơn, không đảm bảo tiết kiệm chi phí)
+- Lưu vào bộ nhớ đệm rõ ràng (có thể bật theo cách thủ công trên hầu hết các mô hình, đảm bảo tiết kiệm chi phí)
 
-การแคชแบบเจาะจงมีประโยชน์ในกรณีที่คุณต้องการรับประกันการประหยัดค่าใช้จ่าย แต่ต้องมีงานเพิ่มเติมสำหรับนักพัฒนาแอป
+Việc lưu vào bộ nhớ đệm rõ ràng sẽ hữu ích trong trường hợp bạn muốn đảm bảo tiết kiệm chi phí, nhưng cần thêm một số công việc của nhà phát triển.
 
-## การแคชแบบไม่เจาะจง
+## Lưu vào bộ nhớ đệm ngầm
 
-การแคชแบบไม่เจาะจงจะเปิดใช้โดยค่าเริ่มต้นสำหรับโมเดล Gemini 2.5 และใหม่กว่าทั้งหมด เราจะส่งต่อการประหยัดค่าใช้จ่ายโดยอัตโนมัติหากคำขอของคุณตรงกับแคช คุณไม่จำเป็นต้องดำเนินการใดๆ เพื่อเปิดใช้ฟีเจอร์นี้ จำนวนโทเค็นอินพุตขั้นต่ำสำหรับการแคชบริบทแสดงอยู่ในตารางต่อไปนี้สำหรับแต่ละโมเดล
+Tính năng lưu vào bộ nhớ đệm ngầm định được bật theo mặc định cho tất cả các mô hình Gemini 2.5 trở lên. Chúng tôi tự động chuyển các khoản tiết kiệm chi phí nếu yêu cầu của bạn truy cập vào bộ nhớ đệm. Bạn không cần làm gì để bật tính năng này. Số lượng số token đầu vào tối thiểu để lưu vào bộ nhớ đệm theo bối cảnh được liệt kê trong bảng sau cho từng mô hình:
 
-| รุ่น | ขีดจำกัดโทเค็นขั้นต่ำ |
+| Mô hình | Giới hạn mã thông báo tối thiểu |
 | --- | --- |
 | Gemini 3.5 Flash | 4096 |
-| Gemini 3.1 Pro Preview | 4096 |
+| Gemini 3.1 Pro (Bản xem trước) | 4096 |
 | Gemini 2.5 Flash | 2048 |
 | Gemini 2.5 Pro | 2048 |
 
-วิธีเพิ่มโอกาสที่จะพบแคชแบบไม่เจาะจง
+Để tăng cơ hội nhận được kết quả tìm kiếm trong bộ nhớ cache ngầm ẩn:
 
-- ลองวางเนื้อหาขนาดใหญ่และเนื้อหาทั่วไปไว้ที่จุดเริ่มต้นของพรอมต์
-- ลองส่งคำขอที่มีคำนำหน้าที่คล้ายกันภายในระยะเวลาสั้นๆ
+- Hãy thử đặt nội dung lớn và phổ biến ở đầu câu lệnh
+- Hãy thử gửi các yêu cầu có tiền tố tương tự trong một khoảng thời gian ngắn
 
-คุณสามารถดูจำนวนโทเค็นที่แคชทำงานได้ในช่อง `usage_metadata` ของออบเจ็กต์การตอบกลับ
+Bạn có thể xem số lượng mã thông báo là lượt truy cập vào bộ nhớ đệm trong trường `usage_metadata` của đối tượng phản hồi.
 
-## การแคชแบบเจาะจง
+## Lưu vào bộ nhớ đệm một cách rõ ràng
 
-การใช้ฟีเจอร์การแคชแบบเจาะจงของ Gemini API ช่วยให้คุณส่งเนื้อหาบางส่วนไปยังโมเดลได้ครั้งเดียว แคชโทเค็นอินพุต แล้วอ้างอิงโทเค็นที่แคชไว้สำหรับคำขอที่ตามมา เมื่อมีปริมาณการใช้งานถึงระดับหนึ่ง การใช้โทเค็นที่แคชไว้จะมีค่าใช้จ่ายต่ำกว่าการส่งโทเค็นชุดเดียวกันซ้ำๆ
+Khi sử dụng tính năng lưu vào bộ nhớ đệm rõ ràng của Gemini API, bạn có thể truyền một số nội dung đến mô hình một lần, lưu mã thông báo đầu vào vào bộ nhớ đệm, sau đó tham chiếu đến mã thông báo đã lưu vào bộ nhớ đệm cho các yêu cầu tiếp theo. Ở một số lượng nhất định, việc sử dụng mã thông báo được lưu vào bộ nhớ đệm sẽ có chi phí thấp hơn so với việc truyền cùng một tập hợp mã thông báo nhiều lần.
 
-เมื่อแคชชุดโทเค็น คุณสามารถเลือกระยะเวลาที่ต้องการให้แคชอยู่ก่อนที่ระบบจะลบโทเค็นโดยอัตโนมัติ ระยะเวลาการแคชนี้เรียกว่า *Time to Live* (TTL) หากไม่ได้ตั้งค่า TTL จะมีค่าเริ่มต้นเป็น 1 ชั่วโมง ค่าใช้จ่ายในการแคชขึ้นอยู่กับขนาดโทเค็นอินพุตและระยะเวลาที่คุณต้องการให้โทเค็นอยู่
+Khi lưu trữ một nhóm mã thông báo vào bộ nhớ đệm, bạn có thể chọn khoảng thời gian bạn muốn bộ nhớ đệm tồn tại trước khi mã thông báo bị xoá tự động. Khoảng thời gian lưu vào bộ nhớ đệm này được gọi là *thời gian tồn tại* (TTL). Nếu bạn không đặt, TTL sẽ mặc định là 1 giờ. Chi phí lưu vào bộ nhớ đệm phụ thuộc vào kích thước mã thông báo đầu vào và thời gian bạn muốn mã thông báo duy trì.
 
-ส่วนนี้จะถือว่าคุณได้ติดตั้ง Gemini SDK (หรือติดตั้ง curl)
-และกำหนดค่าคีย์ API แล้วตามที่แสดงใน
-[คู่มือเริ่มต้นใช้งาน](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=th)
+Phần này giả định rằng bạn đã cài đặt Gemini SDK (hoặc đã cài đặt curl) và bạn đã định cấu hình khoá API, như trong [Hướng dẫn bắt đầu sử dụng](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi).
 
-### สร้างเนื้อหาโดยใช้แคช
+### Tạo nội dung bằng bộ nhớ đệm
 
 ### Python
 
-ตัวอย่างต่อไปนี้แสดงวิธีสร้างเนื้อหาโดยใช้คำแนะนำระบบและไฟล์วิดีโอที่แคชไว้
+Ví dụ sau đây cho biết cách tạo nội dung bằng chỉ dẫn hệ thống và tệp video được lưu vào bộ nhớ đệm.
 
-### วิดีโอ
+### Video
 
 ```
 import os
@@ -167,7 +165,7 @@ print('\n\n', response.text)
 
 ### JavaScript
 
-ตัวอย่างต่อไปนี้แสดงวิธีสร้างเนื้อหาโดยใช้คำแนะนำระบบและไฟล์ข้อความที่แคชไว้
+Ví dụ sau đây cho thấy cách tạo nội dung bằng cách sử dụng một chỉ dẫn hệ thống được lưu vào bộ nhớ đệm và một tệp văn bản.
 
 ```
 import {
@@ -208,7 +206,7 @@ await main();
 
 ### Go
 
-ตัวอย่างต่อไปนี้แสดงวิธีสร้างเนื้อหาโดยใช้แคช
+Ví dụ sau đây cho thấy cách tạo nội dung bằng bộ nhớ đệm.
 
 ```
 package main
@@ -278,9 +276,9 @@ func main() {
 
 ### REST
 
-ตัวอย่างต่อไปนี้แสดงวิธีสร้างแคชแล้วใช้แคชเพื่อสร้างเนื้อหา
+Ví dụ sau đây cho biết cách tạo bộ nhớ đệm rồi dùng bộ nhớ đệm đó để tạo nội dung.
 
-### วิดีโอ
+### Video
 
 ```
 wget https://storage.googleapis.com/generativeai-downloads/data/a11.txt
@@ -429,22 +427,20 @@ cat response.json
 echo jq ".candidates[].content.parts[].text" response.json
 ```
 
-### แสดงรายการแคช
+### Liệt kê bộ nhớ đệm
 
-คุณไม่สามารถดึงหรือดูเนื้อหาที่แคชไว้ได้ แต่สามารถดึง
-ข้อมูลเมตาของแคช (`name`, `model`, `display_name`, `usage_metadata`,
-`create_time`, `update_time` และ `expire_time`)
+Bạn không thể truy xuất hoặc xem nội dung trong bộ nhớ đệm, nhưng có thể truy xuất siêu dữ liệu trong bộ nhớ đệm (`name`, `model`, `display_name`, `usage_metadata`, `create_time`, `update_time` và `expire_time`).
 
 ### Python
 
-หากต้องการแสดงข้อมูลเมตาสำหรับแคชที่อัปโหลดทั้งหมด ให้ใช้ `CachedContent.list()`
+Để liệt kê siêu dữ liệu cho tất cả bộ nhớ đệm đã tải lên, hãy sử dụng `CachedContent.list()`:
 
 ```
 for cache in client.caches.list():
   print(cache)
 ```
 
-หากต้องการดึงข้อมูลเมตาสำหรับออบเจ็กต์แคชรายการเดียว ให้ใช้ `get` หากทราบชื่อ
+Để tìm nạp siêu dữ liệu cho một đối tượng trong bộ nhớ đệm, nếu bạn biết tên của đối tượng đó, hãy sử dụng `get`:
 
 ```
 client.caches.get(name=name)
@@ -452,7 +448,7 @@ client.caches.get(name=name)
 
 ### JavaScript
 
-หากต้องการแสดงข้อมูลเมตาสำหรับแคชที่อัปโหลดทั้งหมด ให้ใช้ `GoogleGenAI.caches.list()`
+Để liệt kê siêu dữ liệu cho tất cả bộ nhớ đệm đã tải lên, hãy sử dụng `GoogleGenAI.caches.list()`:
 
 ```
 console.log("My caches:");
@@ -469,7 +465,7 @@ while (true) {
 
 ### Go
 
-ตัวอย่างต่อไปนี้แสดงรายการแคชทั้งหมด
+Ví dụ sau đây liệt kê tất cả các bộ nhớ đệm.
 
 ```
 caches, err := client.Caches.All(ctx)
@@ -482,7 +478,7 @@ for _, item := range caches {
 }
 ```
 
-ตัวอย่างต่อไปนี้แสดงรายการแคชโดยใช้ขนาดหน้า 2
+Ví dụ sau đây liệt kê các bộ nhớ đệm bằng cách sử dụng kích thước trang là 2.
 
 ```
 page, err := client.Caches.List(ctx, &genai.ListCachedContentsConfig{PageSize: 2})
@@ -515,13 +511,13 @@ for {
 curl "https://generativelanguage.googleapis.com/v1beta/cachedContents?key=$GEMINI_API_KEY"
 ```
 
-### อัปเดตแคช
+### Cập nhật bộ nhớ đệm
 
-คุณสามารถตั้งค่า `ttl` หรือ `expire_time` ใหม่สำหรับแคช ระบบไม่รองรับการเปลี่ยนแปลงอื่นๆ เกี่ยวกับแคช
+Bạn có thể đặt `ttl` hoặc `expire_time` mới cho bộ nhớ đệm. Không hỗ trợ việc thay đổi bất kỳ thông tin nào khác về bộ nhớ đệm.
 
 ### Python
 
-ตัวอย่างต่อไปนี้แสดงวิธีอัปเดต `ttl` ของแคชโดยใช้ `client.caches.update()`
+Ví dụ sau đây cho thấy cách cập nhật `ttl` của một bộ nhớ đệm bằng `client.caches.update()`.
 
 ```
 from google import genai
@@ -535,10 +531,7 @@ client.caches.update(
 )
 ```
 
-หากต้องการตั้งเวลาหมดอายุ ระบบจะยอมรับออบเจ็กต์ `datetime` หรือสตริง datetime ที่จัดรูปแบบ ISO (`dt.isoformat()`, เช่น
-`2025-01-27T16:02:36.473528+00:00`) เวลาของคุณต้องมีเขตเวลา
-(`datetime.utcnow()` จะไม่แนบเขตเวลา แต่
-`datetime.now(datetime.timezone.utc)` จะแนบเขตเวลา)
+Để đặt thời gian hết hạn, bạn có thể chấp nhận đối tượng `datetime` hoặc chuỗi ngày giờ theo định dạng ISO (`dt.isoformat()`, chẳng hạn như `2025-01-27T16:02:36.473528+00:00`). Thời gian của bạn phải bao gồm múi giờ (`datetime.utcnow()` không đính kèm múi giờ, `datetime.now(datetime.timezone.utc)` có đính kèm múi giờ).
 
 ```
 from google import genai
@@ -558,7 +551,7 @@ client.caches.update(
 
 ### JavaScript
 
-ตัวอย่างต่อไปนี้แสดงวิธีอัปเดต `ttl` ของแคชโดยใช้ `GoogleGenAI.caches.update()`
+Ví dụ sau đây cho thấy cách cập nhật `ttl` của một bộ nhớ đệm bằng `GoogleGenAI.caches.update()`.
 
 ```
 const ttl = `${2 * 3600}s`; // 2 hours in seconds
@@ -571,7 +564,7 @@ console.log("After update (TTL):", updatedCache);
 
 ### Go
 
-ตัวอย่างต่อไปนี้แสดงวิธีอัปเดต `TTL` ของแคช
+Ví dụ sau đây cho thấy cách cập nhật `TTL` của một bộ nhớ đệm.
 
 ```
 // Update the TTL (2 hours).
@@ -587,7 +580,7 @@ fmt.Println(cache)
 
 ### REST
 
-ตัวอย่างต่อไปนี้แสดงวิธีอัปเดต `ttl` ของแคช
+Ví dụ sau đây cho thấy cách cập nhật `ttl` của một bộ nhớ đệm.
 
 ```
 curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY" \
@@ -595,9 +588,9 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=
 -d '{"ttl": "600s"}'
 ```
 
-### ลบแคช
+### Xoá bộ nhớ đệm
 
-บริการแคชมีการดำเนินการลบเพื่อนำเนื้อหาออกจากแคชด้วยตนเอง ตัวอย่างต่อไปนี้แสดงวิธีลบแคช
+Dịch vụ lưu vào bộ nhớ đệm cung cấp một thao tác xoá để xoá nội dung khỏi bộ nhớ đệm theo cách thủ công. Ví dụ sau đây cho thấy cách xoá bộ nhớ đệm:
 
 ### Python
 
@@ -627,49 +620,44 @@ fmt.Println("Cache deleted:", cache.Name)
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY"
 ```
 
-### การแคชแบบเจาะจงโดยใช้ไลบรารี OpenAI
+### Bộ nhớ đệm rõ ràng bằng thư viện OpenAI
 
-หากคุณใช้[ไลบรารี OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=th) คุณสามารถเปิดใช้
-การแคชแบบเจาะจงได้โดยใช้พร็อพเพอร์ตี้ `cached_content` ใน
-[`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=th#extra-body)
+Nếu đang sử dụng [thư viện OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=vi), bạn có thể bật tính năng lưu vào bộ nhớ đệm rõ ràng bằng cách sử dụng thuộc tính `cached_content` trên [`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=vi#extra-body).
 
-## กรณีที่ควรใช้การแคชแบบเจาะจง
+## Trường hợp sử dụng tính năng lưu vào bộ nhớ đệm rõ ràng
 
-การแคชบริบทเหมาะอย่างยิ่งสำหรับสถานการณ์ที่คำขอสั้นๆ อ้างอิงบริบทเริ่มต้นขนาดใหญ่ซ้ำๆ ลองใช้การแคชบริบทสำหรับกรณีการใช้งานต่อไปนี้
+Tính năng lưu vào bộ nhớ đệm theo bối cảnh đặc biệt phù hợp với những trường hợp mà một ngữ cảnh ban đầu đáng kể được các yêu cầu ngắn hơn tham chiếu nhiều lần. Hãy cân nhắc sử dụng tính năng lưu vào bộ nhớ đệm theo bối cảnh cho các trường hợp sử dụng như:
 
-- แชทบ็อตที่มี[คำแนะนำระบบ](https://ai.google.dev/gemini-api/docs/system-instructions?hl=th)ที่ครอบคลุม
-- การวิเคราะห์ไฟล์วิดีโอขนาดยาวซ้ำๆ
-- การค้นหาชุดเอกสารขนาดใหญ่ที่เกิดขึ้นซ้ำๆ
-- การวิเคราะห์ที่เก็บโค้ดหรือการแก้ไขข้อบกพร่องบ่อยๆ
+- Chatbot có [hướng dẫn chi tiết về hệ thống](https://ai.google.dev/gemini-api/docs/system-instructions?hl=vi)
+- Phân tích lặp đi lặp lại các tệp video dài
+- Truy vấn định kỳ đối với các tập tài liệu lớn
+- Thường xuyên phân tích kho lưu trữ mã hoặc sửa lỗi
 
-### วิธีที่การแคชแบบเจาะจงช่วยลดค่าใช้จ่าย
+### Cách bộ nhớ đệm rõ ràng giúp giảm chi phí
 
-การแคชบริบทเป็นฟีเจอร์แบบชำระเงินที่ออกแบบมาเพื่อลดค่าใช้จ่าย การเรียกเก็บเงินจะพิจารณาจากปัจจัยต่อไปนี้
+Lưu vào bộ nhớ đệm theo bối cảnh là một tính năng có tính phí được thiết kế để giảm chi phí. Việc tính phí dựa trên các yếu tố sau:
 
-1. **จำนวนโทเค็นแคช:** จำนวนโทเค็นอินพุตที่แคชไว้ ซึ่งจะเรียกเก็บเงินในอัตราที่ลดลงเมื่อรวมอยู่ในพรอมต์ที่ตามมา
-2. **ระยะเวลาการจัดเก็บ:** ระยะเวลาที่จัดเก็บโทเค็นที่แคชไว้ (TTL) ซึ่งจะเรียกเก็บเงินตามระยะเวลา TTL ของจำนวนโทเค็นที่แคชไว้ ไม่มีขีดจำกัดขั้นต่ำหรือสูงสุดสำหรับ TTL
-3. **ปัจจัยอื่นๆ:** ระบบจะเรียกเก็บค่าใช้จ่ายอื่นๆ เช่น โทเค็นอินพุตและโทเค็นเอาต์พุตที่ไม่ได้แคชไว้
+1. **Số token trong bộ nhớ đệm:** Số token đầu vào được lưu vào bộ nhớ đệm, được tính phí với mức giá thấp hơn khi có trong các câu lệnh tiếp theo.
+2. **Thời gian lưu trữ:** Khoảng thời gian lưu trữ mã thông báo được lưu vào bộ nhớ đệm (TTL), được tính phí dựa trên thời lượng TTL của số token được lưu vào bộ nhớ đệm. Không có giới hạn tối thiểu hoặc tối đa về TTL.
+3. **Các yếu tố khác:** Các khoản phí khác được áp dụng, chẳng hạn như đối với mã thông báo đầu vào và đầu ra không được lưu vào bộ nhớ đệm.
 
-โปรดดูรายละเอียดราคาล่าสุดในหน้าการกำหนดราคา Gemini API [pricing
-page](https://ai.google.dev/pricing?hl=th) ดูวิธีนับโทเค็นได้ที่[คู่มือ
-โทเค็น](https://ai.google.dev/gemini-api/docs/tokens?hl=th)
+Để biết thông tin chi tiết mới nhất về giá, hãy tham khảo [trang định giá](https://ai.google.dev/pricing?hl=vi) của Gemini API. Để tìm hiểu cách đếm mã thông báo, hãy xem [Hướng dẫn về mã thông báo](https://ai.google.dev/gemini-api/docs/tokens?hl=vi).
 
-### ข้อควรพิจารณาเพิ่มเติม
+### Các yếu tố cần cân nhắc khác
 
-โปรดคำนึงถึงข้อควรพิจารณาต่อไปนี้เมื่อใช้การแคชบริบท
+Khi sử dụng tính năng lưu vào bộ nhớ đệm theo bối cảnh, hãy lưu ý những điểm sau:
 
-- จำนวนโทเค็นอินพุต *ขั้นต่ำ* สำหรับการแคชบริบทจะแตกต่างกันไปตามโมเดล *สูงสุด* จะเท่ากับค่าสูงสุดสำหรับโมเดลที่กำหนด (ดูข้อมูลเพิ่มเติมเกี่ยวกับการนับโทเค็นได้ที่
-  ดู[คู่มือโทเค็น](https://ai.google.dev/gemini-api/docs/tokens?hl=th))
-- โมเดลจะไม่แยกความแตกต่างระหว่างโทเค็นที่แคชไว้กับโทเค็นอินพุตปกติ เนื้อหาที่แคชไว้จะเป็นคำนำหน้าของพรอมต์
-- ไม่มีอัตราพิเศษหรือขีดจำกัดการใช้งานสำหรับการแคชบริบท โดยจะใช้ขีดจำกัดอัตรามาตรฐานสำหรับ `GenerateContent` และขีดจำกัดโทเค็นจะรวมโทเค็นที่แคชไว้
-- ระบบจะแสดงจำนวนโทเค็นที่แคชไว้ใน `usage_metadata` จากการดำเนินการสร้าง รับ และแสดงรายการของบริการแคช รวมถึงใน `GenerateContent` เมื่อใช้แคช
+- Số lượng mã thông báo đầu vào *tối thiểu* để lưu vào bộ nhớ đệm theo bối cảnh sẽ khác nhau tuỳ theo mô hình. *Tối đa* giống với giá trị tối đa của mô hình đã cho. (Để biết thêm thông tin về cách đếm mã thông báo, hãy xem [Hướng dẫn về mã thông báo](https://ai.google.dev/gemini-api/docs/tokens?hl=vi)).
+- Mô hình này không phân biệt giữa các mã thông báo được lưu vào bộ nhớ đệm và các mã thông báo đầu vào thông thường. Nội dung trong bộ nhớ đệm là tiền tố của câu lệnh.
+- Không có hạn mức sử dụng hoặc mức giá đặc biệt nào đối với tính năng lưu vào bộ nhớ đệm theo ngữ cảnh; hạn mức tiêu chuẩn cho `GenerateContent` sẽ được áp dụng và hạn mức mã thông báo bao gồm cả mã thông báo được lưu vào bộ nhớ đệm.
+- Số lượng mã thông báo được lưu vào bộ nhớ đệm sẽ được trả về trong `usage_metadata` từ các thao tác tạo, nhận và liệt kê của dịch vụ bộ nhớ đệm, cũng như trong `GenerateContent` khi sử dụng bộ nhớ đệm.
 
-ส่งความคิดเห็น
+Gửi ý kiến phản hồi
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-อัปเดตล่าสุด 2026-07-30 UTC
+Cập nhật lần gần đây nhất: 2026-07-30 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-30 UTC"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-30 UTC."],[],[]]

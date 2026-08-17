@@ -1,435 +1,460 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/billing?hl=ar
-fetched_at: 2026-08-10T03:25:48.759099+00:00
-title: "\u0627\u0644\u0641\u0648\u062a\u0631\u0629 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/billing?hl=pt-BR
+fetched_at: 2026-08-17T02:22:13.178116+00:00
+title: "Faturamento \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-إرسال ملاحظات
+Envie comentários
 
-# الفوترة
+# Faturamento
 
-يقدّم هذا الدليل نظرة عامة على خيارات الفوترة المختلفة لواجهة Gemini API، ويشرح كيفية تفعيل الفوترة وتتبُّع الاستخدام، كما يقدّم إجابات عن الأسئلة الشائعة حول الفوترة.
+Este guia oferece uma visão geral das diferentes opções de faturamento da API Gemini, explica como ativar o faturamento e monitorar o uso e fornece respostas para perguntas frequentes sobre o faturamento.
 
-## لمحة عن الفوترة والمستويات
+## Sobre faturamento e níveis
 
-تستند الفوترة في Gemini API إلى سجلّ الدفع الخاص بك.
+O faturamento da API Gemini é baseado no seu histórico de pagamentos.
 
-| فئة الاستخدام | التصفيات | [الحد الأقصى لفئة الفوترة](#spend-caps) |
+| Nível de uso | Qualificação | [Limite do nível de faturamento](#spend-caps) |
 | --- | --- | --- |
-| **Free** | [مشروع نشط](https://ai.google.dev/gemini-api/docs/api-key?hl=ar#google-cloud-projects) أو فترة تجريبية مجانية | لا ينطبق |
-| **المستوى 1** | [إعداد حساب فوترة نشط وربطه](#setup-billing) | ‫250 دولار أمريكي |
-| **المستوى 2** | تم دفع 100 دولار أمريكي + 3 أيام من أول عملية دفع ناجحة | 2000 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
-| **المستوى 3** | تم دفع 1,000 دولار أمريكي + 30 يومًا من أول عملية دفع ناجحة | ‫20,000 دولار أمريكي - 100,000 دولار أمريكي أو أكثر |
+| **Free** (link em francês) | [Projeto ativo](https://ai.google.dev/gemini-api/docs/api-key?hl=pt-br#google-cloud-projects) ou teste sem custo financeiro | N/A |
+| **Nível 1** | [Configurar e vincular uma conta de faturamento ativa](#setup-billing) | US$ 250,00 |
+| **Nível 2** | Pagamento de US $100 + 3 dias desde o primeiro pagamento bem-sucedido | US$ 2.000 |
+| **Nível 3** | Pago US $1.000 + 30 dias desde o primeiro pagamento bem-sucedido | US$ 20.000 a US$ 100.000 ou mais |
 
-تبدأ الحسابات الجديدة بالمستوى المجاني الذي يتيح الوصول إلى [نماذج معيّنة](https://ai.google.dev/gemini-api/docs/pricing?hl=ar) في Gemini API وAI Studio، وذلك بما لا يتجاوز [حدود معدّل](https://aistudio.google.com/rate-limit?hl=ar) المستوى المجاني للنماذج.
+As novas contas começam no nível sem custo financeiro, que permite o acesso a
+[determinados modelos](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br) na API Gemini e no AI Studio,
+até os [limites de taxa](https://aistudio.google.com/rate-limit?hl=pt-br) do nível sem custo financeiro dos modelos.
 
-لنشر تطبيقاتك مباشرةً من "وضع الإنشاء"، يمكنك استخدام
-**المستوى التمهيدي من Google Cloud**. تتيح لك هذه الفئة نشر ما يصل إلى تطبيقَين كاملَين بدون الحاجة إلى إعداد مشروع Google Cloud أو حساب فوترة.
-لمزيد من التفاصيل، يُرجى الاطّلاع على [النشر من Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=ar)، كما يمكنك الرجوع إلى [مستندات "مستوى المبتدئين" في Google Cloud](https://docs.cloud.google.com/docs/starter-tier?hl=ar).
+Para implantar seus aplicativos diretamente do modo de build, use o
+**nível Starter do Google Cloud**. Com esse nível, é possível publicar até dois aplicativos
+de pilha completa sem configurar um projeto do Google Cloud ou uma conta de faturamento.
+Consulte [Como fazer a implantação no Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=pt-br) para mais detalhes e consulte a [documentação do nível inicial do Google Cloud](https://docs.cloud.google.com/docs/starter-tier?hl=pt-br) para mais informações.
 
-للوصول إلى حدود معدّل استخدام أعلى، واستخدام نماذج متقدّمة، والتأكّد من **عدم** استخدام طلباتك وردودك لتحسين منتجات Google\*، يمكنك [ربط حساب فوترة](#setup-billing) و[الدفع المسبق](#prepay) للانتقال إلى
-الفئات المدفوعة.
-بعد ذلك، ستنتقل إلى مستويات أعلى استنادًا إلى الإنفاق التراكمي وعمر الحساب. في المستوى 3، قد يتوفّر لك خيار التبديل إلى نظام فوترة [الدفع الآجل](#postpay).
+Para acessar limites de taxa mais altos, usar modelos avançados e garantir que seus comandos e respostas **não** sejam usados para melhorar os produtos do Google\*, [vincule uma conta de faturamento](#setup-billing) e [faça uma pré-pagamento](#prepay) para mudar para os planos pagos.
+Em seguida, você vai passar para níveis mais altos com base no gasto acumulado e na idade da conta. No nível 3, você pode mudar para o faturamento [pós-pago](#postpay).
 
-يتم تحديد الفئات وحدود المعدّل القصوى وحدود حساب الفوترة على مستوى [حساب الفوترة](#cloud-billing).
+Os níveis, os limites de taxa e os limites máximos da conta de faturamento são determinados no nível da [conta de faturamento](#cloud-billing).
 
-\* *خصوصية البيانات على مستوى المؤسسة: لمزيد من المعلومات حول استخدام البيانات في الخدمات المدفوعة، يُرجى الاطّلاع على [بنود الخدمة](https://ai.google.dev/gemini-api/terms?hl=ar#data-use-paid).*
+\* *Privacidade de dados de nível empresarial: para mais informações sobre o uso de dados
+para serviços pagos, consulte os [Termos de Serviço](https://ai.google.dev/gemini-api/terms?hl=pt-br#data-use-paid).*
 
-## إعداد الفوترة للوصول إلى "الفئة المدفوعة"
+## Configurar o faturamento para acessar o nível pago
 
-يمكنك إنشاء مشروع وإعداد الفوترة، أو استيراد مشروع حالي، للترقية إلى "المستوى المدفوع" في [Google AI Studio](https://aistudio.google.com/projects?hl=ar).
-يعني الترقية من "المستوى المجاني" إلى "المستوى المدفوع" ربط حساب فوترة و[الدفع المسبق](#prepay) لإضافة 10 دولار أمريكي كحد أدنى (أو ما يعادله بعملات أخرى) إلى حسابك.
+Você pode criar um projeto e configurar o faturamento ou importar um projeto existente para
+fazer upgrade para o nível pago no [Google AI Studio](https://aistudio.google.com/projects?hl=pt-br).
+Para fazer upgrade do Nível sem custo financeiro para o Nível pago, vincule uma conta de faturamento e [faça um pré-pagamento](#prepay) para adicionar um mínimo de US $10 (ou o equivalente em outras moedas) de créditos à sua conta.
 
-1. انتقِل إلى صفحة [مفاتيح واجهة برمجة التطبيقات](https://aistudio.google.com/api-keys?hl=ar) أو صفحة [المشاريع](https://aistudio.google.com/projects?hl=ar) في AI Studio، أو إلى أي مكان يظهر فيه زر **إعداد الفوترة** في AI Studio.
-   - سيتم تلقائيًا إنشاء [مشروع ومفتاح واجهة برمجة تطبيقات](https://ai.google.dev/gemini-api/docs/api-key?hl=ar#google-cloud-projects) للمستخدمين الجدد.
-   - إذا كنت بحاجة إلى مفتاح جديد، انقر على [**إنشاء مفتاح واجهة برمجة تطبيقات**](https://aistudio.google.com/api-keys?hl=ar)
-     واتّبِع التعليمات الواردة في مربّع الحوار لإضافة زوج من المفتاح والمشروع إلى الجدول.
-2. ابحث عن مشروع "المستوى المجاني" الذي تريد ترقيته إلى "المستوى المدفوع"، وانقر على **إعداد الفوترة** ضمن عمود *مستوى الفوترة*.
-3. إذا لم يسبق لك إعداد حساب فوترة على Google:
-   - سيُطلب منك اختيار بلدك للموافقة على بنود الخدمة.
-   - بعد ذلك، املأ معلومات الاتصال وطريقة الدفع أو أكِّدهما للمتابعة.
-4. إذا سبق لك إعداد حسابات فوترة على Google:
-   - سيُطلب منك الاختيار من بين حسابات الفوترة الحالية.
-   - إذا كنت لا تريد استخدام أي من حساباتك الحالية، انقر على **إضافة حساب فوترة جديد** وأدخِل معلومات الاتصال وطريقة الدفع أو أكِّدهما للمتابعة.
-5. بعد ذلك، سيتم إما:
-   - يُطلب منك الدفع المسبق بمبلغ 10 دولار أمريكي كحد أدنى لإكمال عملية إعداد الفوترة (ما يعني أنّه يتم تلقائيًا تعيين حسابك إلى خطة الفوترة [الدفع المسبق](#prepay)).
-   - يجب الاختيار بين خطتَي الفوترة [الدفع المسبق](#prepay) و[الدفع الآجل](#postpay) لحسابك.
-   - تم تعيينها إلى خطة فوترة [الدفع الآجل](#postpay) لفترة وسيطة
-     إلى أن يتم نشر نظام الدفع المسبق الجديد لجميع المستخدمين (بدءًا من 23 مارس 2026).
-6. بعد الدفع المسبق أو اختيار الدفع الآجل، يكتمل إعداد حسابك.
+1. Acesse a página [Chaves de API](https://aistudio.google.com/api-keys?hl=pt-br), [Projetos](https://aistudio.google.com/projects?hl=pt-br) ou qualquer lugar em que o botão **Configurar faturamento** apareça no AI Studio.
+   - Por padrão, os novos usuários têm um [projeto e uma chave de API](https://ai.google.dev/gemini-api/docs/api-key?hl=pt-br#google-cloud-projects) criados para eles.
+   - Se você precisar de uma nova chave, clique em [**Criar chave de API**](https://aistudio.google.com/api-keys?hl=pt-br) e siga a caixa de diálogo para adicionar um par chave-projeto à tabela.
+2. Encontre o projeto do nível sem custo financeiro que você quer fazer upgrade para o nível pago e clique em **Configurar faturamento** na coluna *Nível de faturamento*.
+3. Se você nunca configurou uma conta de faturamento do Google:
+   - Você vai precisar selecionar seu país para concordar com os Termos de Serviço.
+   - Em seguida, preencha ou confirme suas informações de contato e forma de pagamento para continuar.
+4. Se você já configurou contas de faturamento do Google:
+   - Será necessário escolher uma das suas contas de faturamento.
+   - Se não quiser usar nenhuma das suas contas, clique em **Adicionar nova conta de faturamento** e preencha ou confirme suas informações de contato e forma de pagamento para continuar.
+5. Em seguida, você vai:
+   - Foi solicitado que você fizesse um pré-pagamento mínimo de US $10 para concluir a configuração do faturamento (ou seja, sua conta foi atribuída automaticamente ao plano de faturamento [pré-pago](#prepay)).
+   - Escolha entre os planos de faturamento [Pré-pago](#prepay) e [Pós-pago](#postpay) para sua conta.
+   - Atribuído a um plano de faturamento [pós-pago](#postpay) por um período intermediário
+     até que o novo sistema pré-pago seja propagado para todos os usuários (a partir de 23 de março de 2026).
+6. Depois de fazer o pré-pagamento ou selecionar o pós-pago, a configuração da conta será concluída.
 
-### الترقية إلى فئة الاشتراك المدفوع التالية
+### Fazer upgrade para o próximo nível pago
 
-إذا كنت مشتركًا في فئة مدفوعة وتستوفي [المعايير](#about-billing)
-لتغيير الخطة، ستتم ترقيتك تلقائيًا إلى الفئة التالية
-(مع مراعاة [أوقات المعالجة](#processing-times)).
+Se você já estiver em um nível pago e atender aos [critérios](#about-billing) para uma mudança de plano, vai receber um upgrade automático para o próximo nível (sujeito a [tempos de processamento](#processing-times)).
 
-## التحقّق من حالة الفوترة
+## Verificar o status de faturamento
 
-بعد [ربط حساب فوترة](#setup-billing) بمشروعك، يمكنك تتبُّع حالته في [صفحة الفوترة في AI Studio](https://aistudio.google.com/billing?hl=ar). على عكس الخطة المجانية، تتغيّر حالة الخطة المدفوعة بشكل ديناميكي. ففي حين يتم تحديد درجة استخدامك استنادًا إلى سجلّ حسابك، لن تستجيب واجهة Gemini API للطلبات إلا إذا كان لديك رصيد [دفع مسبق](#prepay) إيجابي.
+Depois de [vincular uma conta de faturamento](#setup-billing) ao seu projeto, você
+pode monitorar o status dela na
+[página de faturamento do AI Studio](https://aistudio.google.com/billing?hl=pt-br). Ao contrário do nível sem custo financeiro, o status do nível pago é dinâmico. Embora seu nível de uso seja determinado pelo histórico da conta, a API Gemini só vai atender às solicitações se você tiver um saldo de crédito [pré-pago](#prepay) positivo.
 
-في صفحة [المشاريع](https://aistudio.google.com/projects?hl=ar)، يمكنك الاطّلاع على مستوى مشروعك وخطة الفوترة ضِمن عمود *مستوى الفوترة*. تظهر أي إجراءات متعلقة بحالة الفوترة يجب اتّخاذها لمشروع معيّن في عمودَي *فئة الفوترة* أو *الحالة*:
+Na página [Projetos](https://aistudio.google.com/projects?hl=pt-br), é possível
+ver o nível e o plano de faturamento do projeto na coluna *Nível de faturamento*. Todas as ações de status de faturamento que você precisa realizar em um projeto são mostradas nas colunas *Nível de faturamento* ou *Status*:
 
-- ***إعداد الفوترة*** إذا لم يكن المشروع مرتبطًا بحساب فوترة
-- ***إعداد الدفع المسبق*** إذا كان المشروع يتضمّن حساب فوترة مرتبطًا به، ولكن يجب استخدام خطة فوترة [الدفع المسبق](#prepay) التي يجب إعدادها.
-- "***لا تتوفّر أرصدة***" إذا كان حساب الفوترة مطلوبًا لشراء أرصدة، ولكن لم يتم إعداد حساب الدفعات المسبقة أو تم استنفاد رصيد الأرصدة المتاح.
+- ***Configurar faturamento*** se o projeto não tiver uma conta de faturamento vinculada.
+- ***Configurar pré-pago*** se o projeto tiver uma conta de faturamento vinculada, mas precisar usar um plano de faturamento [pré-pago](#prepay) que precisa ser configurado.
+- ***Sem créditos***: se a conta de faturamento for necessária para comprar créditos, mas a conta para pagamentos por pré-pagamento não estiver configurada ou o saldo de crédito disponível estiver esgotado.
 
-انقر على أي من الرسائل للمتابعة واتّخاذ الإجراءات اللازمة.
+Clique em qualquer uma das mensagens para continuar com as ações necessárias.
 
-## مراقبة الاستخدام
+## Monitorar o uso
 
-يمكنك تتبُّع استخدامك لواجهة Gemini API في
-[Google AI Studio](https://aistudio.google.com/usage?hl=ar) من خلال **لوحة البيانات** >
-**الاستخدام**.
+É possível monitorar o uso da API Gemini no
+[Google AI Studio](https://aistudio.google.com/usage?hl=pt-br) em **Painel** >
+**Uso**.
 
-## خطط الفوترة
+## Planos de faturamento
 
-تنقسم خطط الفوترة لواجهة Gemini API وAI Studio إلى فئتَين تحدّدان وقت الدفع مقابل الاستخدام: الدفع المسبق والدفع الآجل. يمكنك الاطّلاع على خطة الفوترة المحدّدة وإدارة طرق الدفع في صفحة [فوترة AI Studio](https://aistudio.google.com/billing?hl=ar).
+Os planos de faturamento da API Gemini e do AI Studio se enquadram em duas categorias que
+determinam quando você paga pelo uso: pré-pago e pós-pago. Você pode verificar seu plano de faturamento atribuído e gerenciar as formas de pagamento na página [Faturamento do AI Studio](https://aistudio.google.com/billing?hl=pt-br).
 
-### الدفع المسبق
+### Pré-pagamento
 
-في خطة الفوترة المسبقة الدفع، يمكنك شراء أرصدة لتعبئة رصيدك المسبق الدفع قبل استخدام Gemini API، ويتم خصم تكاليف استخدام واجهة برمجة التطبيقات من رصيد الدفع المسبق [في الوقت الفعلي تقريبًا](#processing-times).
-يمكنك إجراء الدفع المسبق عن طريق [إضافة رصيد](#buy-credits) إلى حسابك أو إعداد ميزة [تعبئة الرصيد تلقائيًا](#auto-reload). بعد شراء الأرصدة، تنتهي صلاحية الأرصدة غير المستخدَمة بعد 12 شهرًا، وهي [غير قابلة للاسترداد](#refunds)، إلا بعد [التبديل إلى حساب الدفع الآجل](#postpay).
+No plano de faturamento pré-pago, você compra créditos para o saldo de pré-pagamento antes de usar a API Gemini, e os custos de uso da API são deduzidos do saldo de crédito pré-pago [quase em tempo real](#processing-times).
+Você pode fazer um pré-pagamento [adicionando créditos](#buy-credits) à sua conta ou configurando a [recarga automática](#auto-reload). Depois da compra, os créditos não usados expiram após 12 meses e [não são reembolsáveis](#refunds), exceto após [mudar para uma conta pós-paga](#postpay).
 
-عندما يصل رصيد الدفع المسبق في حساب الفوترة إلى 0 دولار أمريكي، ستتوقّف جميع مفاتيح API في جميع المشاريع المرتبطة بحساب الفوترة هذا عن العمل في الوقت نفسه.
-لا تنطبق الأرصدة المدفوعة مسبقًا إلا على تكاليف استخدام Gemini API، ولا يمكنك استخدامها للدفع مقابل خدمات Google Cloud الأخرى.
+Quando o saldo de crédito pré-pago na conta de faturamento chegar a US $0, todas as chaves de API em todos os projetos vinculados a essa conta de faturamento vão parar de funcionar simultaneamente.
+Os créditos pré-pagos se aplicam apenas aos custos de uso da API Gemini. Eles não podem ser usados para pagar por outros serviços do Google Cloud.
 
-يتم تلقائيًا ضبط خطة الفوترة على "الدفع المسبق" للمستخدمين الجدد. قد تحتاج المشاريع التي تم إنشاؤها قبل طرح خطتَي الفوترة "الدفع المسبق" و"الدفع الآجل" إلى [تعديل تفاصيل الفوترة الخاصة بالمشروع](#verify-billing) قبل مواصلة استخدام Gemini API.
+Os novos usuários usam o plano de faturamento pré-pago por padrão. Os projetos anteriores à introdução dos planos de faturamento pré-pago e pós-pago talvez precisem [atualizar os detalhes de faturamento do projeto](#verify-billing) antes de continuar usando a API Gemini.
 
-*يُرجى العِلم أنّ ميزة "الدفع المُسبَق" غير متاحة للحسابات [التي يتم إرسال الفواتير إليها (أو الحسابات غير الإلكترونية)](https://docs.cloud.google.com/billing/docs/concepts?hl=ar#billing_account_types).*
+*O pré-pagamento não está disponível para contas [faturadas (ou off-line)](https://docs.cloud.google.com/billing/docs/concepts?hl=pt-br#billing_account_types).*
 
-#### شراء أرصدة
+#### Comprar créditos
 
-يمكنك شراء أرصدة يدويًا مسبقًا قبل استخدام Gemini API لتحميلها إلى رصيد حساب الدفع المسبق.
+É possível comprar créditos manualmente antes de usar a API Gemini para carregá-los no saldo de crédito da sua conta pré-paga.
 
-لشراء وحدات، انتقِل إلى صفحة [الفوترة في AI Studio](https://aistudio.google.com/billing?hl=ar) وانقر على **شراء وحدات**.
-الحدّ الأدنى للشراء هو 10 دولار أمريكي. الحدّ الأقصى لمبلغ الرصيد الذي يمكنك دفعه مسبقًا هو 5,000 دولار أمريكي.
+Para comprar créditos, acesse a página [Faturamento do AI Studio](https://aistudio.google.com/billing?hl=pt-br) e selecione **Comprar créditos**.
+A compra mínima é de US $10. O valor máximo de créditos que você pode pagar antecipadamente é de US$ 5.000.
 
-#### إعادة التحميل تلقائيًا
+#### Atualizar automaticamente
 
-ميزة "تعبئة الرصيد تلقائيًا" هي ميزة اختيارية تعمل على إضافة رصيد إلى حسابك للدفع المسبق تلقائيًا عندما يكون رصيدك منخفضًا. ويفيد ذلك في تجنُّب انقطاع الخدمة.
+A recarga automática é um recurso opcional que recarrega automaticamente o saldo de crédito pré-pago quando ele está baixo. Isso é útil para evitar interrupções no serviço.
 
-يمكنك إعداد ميزة "تعبئة الرصيد تلقائيًا" والاطّلاع على حالتها في بطاقة *الرصيد المتاح* ضمن صفحة [الفوترة في AI Studio](https://aistudio.google.com/billing?hl=ar). انقر على **إعداد ميزة "تعبئة الرصيد تلقائيًا"** أو **إدارة ميزة "تعبئة الرصيد تلقائيًا"** لضبط طريقة الدفع ومبلغ تعبئة الرصيد والحد الأدنى للرصيد الذي يؤدي إلى إجراء دفعة تلقائية.
+Você pode configurar a recarga automática e conferir o status dela no card *Créditos disponíveis* na página [Faturamento do AI Studio](https://aistudio.google.com/billing?hl=pt-br). Clique em **Configurar recarga automática** ou
+**Gerenciar recarga automática** para definir sua forma de pagamento, o valor da recarga e o
+saldo mínimo que aciona um pagamento de recarga.
 
-#### الحد الأقصى الشهري للدفع التلقائي
+#### Limite mensal de cobrança automática
 
-يتوفّر حدّ التكلفة الشهرية التلقائية لمستخدمي "الدفع المسبق"، ويساعد في منع التكاليف غير المتوقّعة الناتجة عن عمليات إعادة تحميل الرصيد التلقائية المتكرّرة.
-استخدِم هذه الميزة لضبط حدّ أقصى لعمليات إعادة تحميل الرصيد التلقائية خلال دورة فوترة واحدة. بعد أن يصل إجمالي مبلغ عمليات إعادة التعبئة التلقائية خلال دورة الفوترة إلى هذا الحدّ، سيوقف النظام ميزة "تعبئة الرصيد تلقائيًا" إلى حين بداية الشهر التالي. لا تُحتسب الدفعات لمرة واحدة التي تبدأها يدويًا ضمن هذا الحدّ.
+O limite mensal de recarga automática está disponível para usuários pré-pagos e ajuda a evitar custos inesperados de recargas automáticas frequentes de crédito.
+Use esse recurso para definir um limite máximo de recargas automáticas de crédito em um único ciclo de faturamento. Quando o valor total das recargas automáticas em um ciclo de faturamento atinge esse limite, o sistema desativa a recarga automática até o início do mês seguinte. Os pagamentos únicos iniciados manualmente não são contabilizados nesse limite.
 
-لضبط الحد الأقصى للرسوم التلقائية الشهرية عند تفعيل ميزة "تعبئة الرصيد تلقائيًا"، اتّبِع الخطوات التالية:
+Para definir o limite mensal de recarga automática quando a recarga automática está ativada:
 
-1. انتقِل إلى صفحة [فوترة AI Studio](https://aistudio.google.com/billing?hl=ar).
-2. انقر على **إدارة ميزة "تعبئة الرصيد تلقائيًا"**.
-3. وسِّع قسم **الحدّ الشهري** وأدخِل الحدّ الأقصى الشهري لعمليات تعبئة الرصيد تلقائيًا.
-4. انقر على **حفظ**.
+1. Acesse a página [Faturamento do AI Studio](https://aistudio.google.com/billing?hl=pt-br).
+2. Clique em **Gerenciar a recarga automática**.
+3. Abra a seção **Limite mensal** e insira o limite máximo mensal para recargas automáticas.
+4. Clique em **Salvar**.
 
-### الدفع عند الاستخدام
+### Pós-pagamento
 
-في خطة فوترة الدفع الآجل، تتراكم التكاليف في حسابك على Cloud Billing، ويتم تحصيل الرسوم منك تلقائيًا في نهاية الشهر أو عندما تصل تكاليفك إلى [حد أقصى للإنفاق يتم تحديده تلقائيًا](#tier-spend-caps) استنادًا إلى مستوى حسابك.
-يتم تحصيل الدفعة من طريقة الدفع المرتبطة بحسابك على Postpay، ويمكنك إدارة ذلك من صفحة [الفوترة في AI Studio](https://aistudio.google.com/billing?hl=ar).
+No plano de faturamento pós-pago, sua conta do Cloud Billing acumula custos, e você
+recebe uma cobrança automática no fim do mês ou quando os custos atingem um
+[limite de gastos atribuído automaticamente](#tier-spend-caps) com base no nível da conta.
+O pagamento é cobrado na forma de pagamento anexada à sua conta de pagamentos pós-pagos, que pode ser gerenciada na página [Faturamento do AI Studio](https://aistudio.google.com/billing?hl=pt-br).
 
-عند استيفاء [معايير المستوى 3](#about-billing)، يمكنك التبديل يدويًا من خطة الدفع المُسبق إلى خطة الدفع عند الاستخدام. لتغيير الخطط، عليك النقر على الزر **التبديل إلى الدفع الآجل** الذي يظهر في أعلى يسار صفحة [الفوترة في AI Studio](https://aistudio.google.com/billing?hl=ar) عندما يصبح حسابك مؤهلاً.
+Quando você atender aos [critérios do nível 3](#about-billing), poderá
+mudar manualmente do plano pré-pago para o pós-pago. Para mudar de plano, clique no botão **Mudar para pós-pago**, que aparece no canto superior direito da página [Faturamento do AI Studio](https://aistudio.google.com/billing?hl=pt-br) quando sua conta se qualificar.
 
-بعد ذلك، ستتمكّن في صفحة **الفوترة** من الاطّلاع على رصيدك وتواريخ الاستحقاق والدفعات السابقة، بالإضافة إلى إجراء الدفعات وإدارة طرق الدفع.
+Na página **Faturamento**, você pode conferir seu saldo, datas de vencimento e pagamentos anteriores, além de fazer pagamentos e gerenciar formas de pagamento.
 
-عند [إعداد الفوترة](#setup-billing) لمشروع جديد، إذا كنت مؤهلاً للاستفادة من خدمة الدفع الآجل، سيتاح لك الخيار بين الدفع المسبق والدفع الآجل في مربّع الحوار [إعدادات الفوترة](#setup-billing).
+Ao [configurar o faturamento](#setup-billing) de um novo projeto, se você se qualificar para o pós-pagamento, poderá escolher entre pré-pagamento e pós-pagamento na caixa de diálogo [configuração de faturamento](#setup-billing).
 
-بعد التبديل إلى خطة الفوترة بنظام الدفع الآجل في حساب فوترة Cloud، يتم التبديل إلى هذه الخطة في جميع المشاريع المرتبطة بحساب الفوترة هذا. ولا يمكنك إعادة حساب الفوترة هذا إلى خطة فوترة الدفع المسبق. يمكنك نقل مشروع إلى حساب فوترة يتضمّن خطة فوترة مختلفة لتغيير دورة الفوترة لهذا المشروع. يُرجى الاطّلاع على مستندات Cloud حول [إدارة الفوترة للمشاريع](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=ar).
+Depois de mudar uma conta do Cloud Billing para usar o plano de faturamento pós-pago, todos os projetos vinculados a essa conta também serão mudados para o plano pós-pago. Não é possível mover essa conta de faturamento de volta para o plano de faturamento pré-pago. Você pode
+mover um projeto para uma conta de faturamento com um plano diferente para mudar
+o ciclo de cobrança dele. Consulte a documentação do Cloud sobre [gerenciar
+o faturamento de projetos](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=pt-br).
 
-يمكنك الاطّلاع على مزيد من المعلومات عن دورة فوترة الدفع عند الاستخدام في [دليل فوترة Cloud](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=ar).
+Saiba mais sobre o ciclo de cobrança pós-pago no [guia do Faturamento do Cloud](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=pt-br).
 
-## حدود الإنفاق
+## Limites de gastos
 
-تتيح Gemini API وضع حدود قصوى للإنفاق الشهري على مستوى كلّ من فئة حساب الفوترة والمشاريع. تم تصميم عناصر التحكّم هذه لحماية حسابك من التجاوزات غير المتوقّعة، ولحماية النظام المتكامل لضمان توفّر الخدمة.
+A API Gemini oferece suporte a limites de gastos mensais nos níveis da conta de faturamento e do projeto. Esses controles foram criados para proteger sua conta contra
+excedentes inesperados e o ecossistema para garantir a disponibilidade do serviço.
 
-*يُرجى العِلم أنّ حدود الإنفاق غير متاحة للحسابات [التي يتم إرسال الفواتير إليها (أو الحسابات غير الإلكترونية)](https://docs.cloud.google.com/billing/docs/concepts?hl=ar#billing_account_types).*
+*Os limites de gastos não estão disponíveis para contas [faturadas (ou off-line)](https://docs.cloud.google.com/billing/docs/concepts?hl=pt-br#billing_account_types).*
 
-### حدود الإنفاق على المشاريع
+### Limites de gastos do projeto
 
-يمكنك ضبط حدود الإنفاق [على مستوى المشروع](https://ai.google.dev/gemini-api/docs/api-key?hl=ar#google-cloud-projects) في AI Studio.
-ويكون ذلك مفيدًا إذا كان لديك مشاريع متعددة ضمن حساب الفوترة نفسه وأردت التأكّد من أنّ كل مشروع يمكنه الاستفادة من الحدّ الأقصى للإنفاق التراكمي.
+É possível definir seus próprios limites de gastos [no nível do projeto](https://ai.google.dev/gemini-api/docs/api-key?hl=pt-br#google-cloud-projects) no AI Studio.
+Isso é útil se você tiver vários projetos na mesma conta de faturamento e quiser garantir que cada um tenha acesso a um limite de gastos cumulativo suficiente.
 
-يمكن للحسابات التي لديها [أدوار](https://docs.cloud.google.com/iam/docs/roles-overview?hl=ar) محرّر المشروع أو المالك أو المشرف ضبط حدود الإنفاق القصوى لكل مشروع في &quot;استوديو الذكاء الاصطناعي&quot; من خلال صفحة [الإنفاق](https://aistudio.google.com/spend?hl=ar) ضمن **حد الإنفاق الأقصى الشهري** > **تعديل حد الإنفاق الأقصى**.
+As contas com as [funções](https://docs.cloud.google.com/iam/docs/roles-overview?hl=pt-br) de editor, proprietário ou administrador do projeto podem definir limites de gastos por projeto no AI Studio na página [Gasto](https://aistudio.google.com/spend?hl=pt-br) em **Limite de gastos mensais** > **Editar limite de gastos**.
 
-للحصول على تفاصيل حول أذونات "إدارة الهوية وإمكانية الوصول" (IAM) المحدّدة في Google Cloud المطلوبة لعرض حدود الإنفاق ومعلومات الفوترة أو تعديلها في AI Studio، يُرجى الاطّلاع على [دليل تحديد المشاكل وحلّها في AI Studio](https://ai.google.dev/gemini-api/docs/troubleshoot-ai-studio?hl=ar#iam-permissions).
+Para detalhes sobre as permissões específicas do IAM do Google Cloud necessárias para visualizar ou editar limites de gastos e informações de faturamento no AI Studio, consulte o [guia de solução de problemas do AI Studio](https://ai.google.dev/gemini-api/docs/troubleshoot-ai-studio?hl=pt-br#iam-permissions).
 
-في حال [نقل مشروع إلى حساب فوترة مختلف](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=ar#change_the_billing_account_for_a_project)، سيظلّ أي حدّ أقصى للإنفاق سبق أن ضبطته لهذا المشروع ساريًا، ولكن ستتم إعادة ضبط أي إنفاق متراكم إلى 0 دولار أمريكي لدورة الفوترة الجديدة.
+Se você [mover um projeto para uma conta de faturamento diferente](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=pt-br#change_the_billing_account_for_a_project),
+o limite de gastos definido para esse projeto vai persistir, mas os gastos acumulados
+serão redefinidos para US $0 no novo ciclo de faturamento.
 
-قد تتجاوز تكلفة المهام التي تستغرق وقتًا طويلاً، مثل عمليات إكمال [الوضع المجمّع](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar) وجلسات الوكيل، الحدّ الأقصى للإنفاق في مشروعك.
+Tarefas de longa duração, como conclusões no [modo em lote](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br) e sessões de agente, podem gerar excedentes além do limite de gastos do projeto.
 
-قد تتأخر أوقات معالجة بيانات الفوترة في AI Studio لمدة تصل إلى 10 دقائق تقريبًا. قد تتجاوز الحد الأقصى للمشروع إذا لم تتم معالجة بيانات الفوترة قبل تراكم المزيد من الرسوم.
+Os tempos de processamento dos dados de faturamento podem ter um atraso de até 10 minutos no AI Studio. Você pode ter excedentes além do limite do projeto se os dados de faturamento não forem processados antes do acúmulo de mais cobranças.
 
-### حدود الإنفاق القصوى لمستوى حساب الفوترة
+### Limites de gastos por nível da conta de faturamento
 
-يحتوي كل [مستوى](#about-billing) على حدّ أقصى للإنفاق الشهري:
+Cada [nível](#about-billing) tem um limite máximo de gasto mensal:
 
-| فئة الاستخدام | الحدّ الأقصى للإنفاق |
+| Nível de uso | Limite de gastos |
 | --- | --- |
-| **Free** | لا ينطبق |
-| **المستوى 1** | ‫250 دولار أمريكي |
-| **المستوى 2** | 2000 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
-| **المستوى 3** | ‫20,000 - 100,000 دولار أمريكي |
+| **Free** (link em francês) | N/A |
+| **Nível 1** | US$ 250,00 |
+| **Nível 2** | US$ 2.000 |
+| **Nível 3** | US$ 20.000 a US$ 100.000 |
 
-يتم فرض حدود قصوى للاستخدام الشهري لواجهة Gemini API على مستوى [حساب الفوترة](#cloud-billing). على الرغم من أنّ الحدود التلقائية تكون مضبوطة مسبقًا، يمكنك [طلب زيادة](https://docs.google.com/forms/d/e/1FAIpQLSdiP6BWJyNNN65lnwnlOr-5Kv0MOFp0jLQyqi_ixVCfddqWBw/viewform?hl=ar) لاستيعاب الاستخدام الأعلى. يتم تجميع إجمالي الإنفاق على مستوى جميع المشاريع المرتبطة التي تم تفعيل خدمة Gemini API فيها. بعد أن يصل إجمالي الحساب التراكمي إلى حد الفئة، يتم إيقاف الخدمة مؤقتًا لجميع المشاريع المرتبطة بحساب الفوترة هذا إلى حين بدء دورة الفوترة التالية (اليوم الأول من كل شهر).
+Os limites de uso mensais são obrigatórios para a API Gemini no nível da [conta de faturamento](#cloud-billing). Embora os limites padrão sejam predefinidos, é possível [solicitar um aumento](https://docs.google.com/forms/d/e/1FAIpQLSdiP6BWJyNNN65lnwnlOr-5Kv0MOFp0jLQyqi_ixVCfddqWBw/viewform?hl=pt-br) para acomodar um uso maior. O gasto total é agregado em todos os projetos vinculados que têm o serviço da API Gemini ativado. Quando o total acumulado da conta atinge o limite do nível, o serviço é pausado para todos os projetos vinculados a essa conta de faturamento até o início do próximo ciclo de faturamento (o primeiro dia de cada mês).
 
-#### تقييم الإنفاق في حساب الفوترة
+#### Avaliar o gasto da sua conta de faturamento
 
-لتقييم إنفاقك الشهري السابق وتحديد ما إذا كانت [حدود الإنفاق الجديدة على مستوى فئة حساب الفوترة](#tier-spend-caps) ستؤثر في مشاريعك الحالية، اتّبِع الخطوات التالية:
+Para avaliar seus gastos mensais históricos e determinar se os novos [limites de gastos por nível da conta de faturamento](#tier-spend-caps) vão afetar seus projetos em andamento, siga estas etapas:
 
-1. في Google Cloud Console، اعرض صفحة [تقارير حساب فوترة Cloud](https://console.cloud.google.com/billing/reports?hl=ar).
-   - إذا كان لديك أكثر من حساب فوترة واحد، اختَر حساب فوترة Cloud الذي تريد عرض تقارير التكاليف الخاصة به، عندما يُطلب منك ذلك.
-2. يتم ضبط التقرير تلقائيًا على "التجميع حسب الخدمة" في "الشهر الحالي". سيظهر لك **Gemini API** في عمود **الخدمة** وإجمالي الإنفاق في عمود **تكلفة الاستخدام** من الجدول.
-3. للاطّلاع على التكاليف التفصيلية التي تقتصر على استخدام Gemini API، اضبط فلتر **التجميع حسب** على التجميع حسب **رمز التخزين التعريفي**، وفلتر **الخدمات** على **Gemini API**.
-4. اضبط فلتر **النطاق الزمني حسب تاريخ الاستخدام** على النطاق الذي تريده لتقييم إنفاقك السابق خلال فترة زمنية.
+1. No console do Google Cloud, acesse a página [Relatórios da conta do Cloud Billing](https://console.cloud.google.com/billing/reports?hl=pt-br).
+   - Se você tiver mais de uma conta de faturamento, escolha a conta do Cloud
+     Billing que tem os relatórios de custo que você quer visualizar.
+2. Por padrão, o relatório é "Agrupar por serviço" no "Mês atual". Você vai encontrar **API Gemini** na coluna **Serviço** e o gasto total na coluna **Custo de uso** da tabela.
+3. Para ver custos granulares limitados ao uso da API Gemini, defina o filtro **Agrupar por** para **SKU** e o filtro **Serviços** para **API Gemini**.
+4. Ajuste o filtro **Período por data de uso** para o intervalo desejado e avalie seu gasto histórico em um período.
 
-## مدد المعالجة
+## Tempos de processamento
 
-لا تتم دائمًا إشارات الفوترة والتعديلات في الوقت الفعلي.
+Os indicadores e atualizações de faturamento nem sempre acontecem em tempo real.
 
-- **استخدام الرصيد**: يتم عادةً خصم تكاليف الاستخدام من رصيدك في غضون دقائق.
-- **تأكيد الدفع**: على الرغم من أنّ معظم عمليات الدفع باستخدام البطاقات تتم بشكل فوري، قد تستغرق بعض طرق الدفع (مثل الحوالات المصرفية) عدة أيام لتتم معالجتها. لا يمكن استئناف الخدمات أو ترقيتها إلا بعد تأكيد شراء الرصيد رسميًا.
-- **الترقيات إلى فئة أعلى**: بعد إتمام عملية الدفع بنجاح أو استيفاء [معايير الترقية](#about-billing)، تظهر الترقيات إلى فئة أعلى عادةً في غضون 10 دقائق.
-- **الرسومات البيانية لتفاصيل التكلفة الإجمالية**: قد يستغرق تعديل الرسومات البيانية التي تعرض تفاصيل التكلفة الإجمالية في كلّ من صفحة [الفوترة](https://aistudio.google.com/billing?hl=ar) وصفحة [الإنفاق](https://aistudio.google.com/spend?hl=ar) مدة تصل إلى 24 ساعة.
+- **Uso de crédito**: os custos de uso geralmente são descontados do seu saldo em minutos.
+- **Confirmação do pagamento**: embora a maioria dos pagamentos com cartão seja instantânea, algumas formas de pagamento (como transferências bancárias) podem levar vários dias para serem compensadas. Os serviços só são retomados ou atualizados após a confirmação oficial da compra de créditos.
+- **Upgrades de nível**: após um pagamento bem-sucedido ou quando você atende aos [critérios de upgrade](#about-billing), os upgrades de nível geralmente são refletidos em até 10 minutos.
+- **Gráficos de detalhamento do custo total**: os gráficos que mostram o detalhamento do custo total nas páginas [Faturamento](https://aistudio.google.com/billing?hl=pt-br) e [Gasto](https://aistudio.google.com/spend?hl=pt-br) podem levar até 24 horas para serem atualizados.
 
-يمكنك الاطّلاع على أدلة الفوترة في السحابة الإلكترونية حول [دورة الفوترة](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=ar#delayed-billing)
-و[فترات التأخير في المعاملات](https://docs.cloud.google.com/billing/docs/how-to/view-history?hl=ar#missing-transactions)
-لمعرفة المزيد عن حالات التأخير المحتملة في الفوترة.
+Leia os guias do Cloud Billing sobre [ciclo de cobrança](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=pt-br#delayed-billing) e [latências de transação](https://docs.cloud.google.com/billing/docs/how-to/view-history?hl=pt-br#missing-transactions) para saber mais sobre possíveis atrasos no faturamento.
 
-## عمليات ردّ الأموال
+## Reembolsos
 
-لا يُسمح بردّ الأموال لحسابات الفوترة **الدفع المسبق**، إلا عند تبديل أنواع الحسابات.
+Não é possível receber reembolsos em contas de faturamento **pré-pagas**, exceto ao mudar de tipo de conta.
 
-**عندما يتم التبديل من حساب "الدفع المسبق" إلى حساب "الدفع الآجل"** (بعد استيفاء [المعايير](#about-billing) و[الترقية يدويًا](#postpay) لحسابك)، يتم إغلاق حساب "الدفع المسبق" ويتم تلقائيًا ردّ أي رصيد متبقٍ من الدفع المسبق إلى طريقة الدفع المحفوظة.
+**Quando uma conta pré-paga muda para o tipo pós-pago** (depois que você atende aos [critérios](#about-billing) e [faz upgrade manual](#postpay) da conta), a conta pré-paga é encerrada, e todos os créditos pré-pagos restantes são reembolsados automaticamente para a forma de pagamento registrada.
 
-في حال [إغلاق](https://docs.cloud.google.com/billing/docs/how-to/close-or-reopen-billing-account?hl=ar#close-a-billing-account) حساب الدفع المسبق لأي سبب آخر غير الترقية إلى حساب الدفع الآجل، سيتم فقدان أي أرصدة متبقية مدفوعة مسبقًا.
+Se você [encerrar](https://docs.cloud.google.com/billing/docs/how-to/close-or-reopen-billing-account?hl=pt-br#close-a-billing-account)
+sua conta pré-paga por qualquer motivo que não seja o upgrade para pós-pago, todos os
+créditos pré-pagos restantes serão perdidos.
 
-تنتهي صلاحية الأرصدة التي يتم شراؤها بعد عام واحد. بعد انتهاء صلاحية الرصيد، سيتم مصادرته
-ولن يكون بإمكانك استرداده.
+Os créditos comprados expiram após um ano. Após o vencimento, os créditos são perdidos e não podem ser recuperados.
 
-تخضع حسابات **الدفع الآجل** [لسياسة ردّ الأموال في Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/resolve-issues?hl=ar#request_a_refund).
+As contas **pós-pagas** seguem a [política de reembolso do Google Cloud](https://docs.cloud.google.com/billing/docs/how-to/resolve-issues?hl=pt-br#request_a_refund).
 
-## حسابات الفوترة في السحابة الإلكترونية
+## Contas do Cloud Billing
 
-تستخدم Gemini API [حسابات الفوترة في Cloud](https://cloud.google.com/billing/docs/concepts?hl=ar) لخدمات الفوترة، ويمكنك [إعدادها مباشرةً في AI Studio](#setup-billing).
-يمكنك استخدام AI Studio لتتبُّع الإنفاق وفهم التكاليف وتسديد الدفعات.
+A API Gemini usa [contas do Cloud Billing](https://cloud.google.com/billing/docs/concepts?hl=pt-br) para serviços de faturamento, que você pode [configurar diretamente no AI Studio](#setup-billing).
+Use o AI Studio para acompanhar os gastos, entender os custos e fazer pagamentos.
 
-يتم تحديد الفئات وحدود المعدّل القصوى وحدود حساب الفوترة على مستوى حساب الفوترة.
+Os níveis, os limites de taxa e os limites máximos da conta de faturamento são determinados no nível da conta de faturamento.
 
-### المشاريع ومفاتيح واجهة برمجة التطبيقات
+### Projetos e chaves de API
 
-ترث جميع [المشاريع](https://ai.google.dev/gemini-api/docs/api-key?hl=ar#google-cloud-projects) المرتبطة بحساب فوترة في السحابة الإلكترونية فئة الاستخدام وحدود المعدّل القصوى وحدود الحساب المرتبطة بحساب الفوترة. في حال [تغيير مشروع](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=ar#change_the_billing_account_for_a_project)
-من حساب فوترة إلى آخر، سيتم تبديل فئته، وبالتالي حدود المعدّل القصوى وحدود الحساب، إلى فئة حساب الفوترة الجديد.
+Todos os [projetos](https://ai.google.dev/gemini-api/docs/api-key?hl=pt-br#google-cloud-projects) vinculados a uma conta de faturamento do Cloud herdam o nível de uso e os limites de taxa e de conta associados. Se você [mudar um projeto](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=pt-br#change_the_billing_account_for_a_project)
+de uma conta de faturamento para outra, o nível dele e, consequentemente, os limites de taxa e
+os limites da conta serão alterados para o nível da nova conta de faturamento.
 
-يتم احتساب الإنفاق التراكمي (على جميع منتجات Google Cloud) وعمر الحساب في جميع المشاريع المرتبطة بحساب فوترة ضمن [مؤهلات الفئة](#about-billing) الخاصة بحساب الفوترة هذا.
+O gasto cumulativo (em todos os produtos do Google Cloud) e a idade da conta em todos os projetos vinculados a uma conta de faturamento contam para as [qualificações de nível](#about-billing) dessa conta.
 
-يمكنك [إلغاء ربط مشروع](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=ar#disable_billing_for_a_project)
-بحساب الفوترة للرجوع إلى الطبقة المجانية.
+É possível [desvincular um projeto](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=pt-br#disable_billing_for_a_project)
+da conta de faturamento para voltar ao nível sem custo financeiro.
 
-[مفاتيح واجهة برمجة التطبيقات](https://ai.google.dev/gemini-api/docs/api-key?hl=ar) هي بيانات اعتماد يتم إنشاؤها داخل مشروع.
-ولا تتضمّن أي إعدادات فوترة مستقلة، بل تستخدم حدود الفئة وحالة الفوترة الخاصة بالمشروع. يتم احتساب الاستخدام التراكمي من جميع المفاتيح ضِمن مشروع معيّن ضمن الحد الأقصى للإنفاق الخاص بهذا المشروع وإجمالي الإنفاق الخاص بحساب الفوترة.
+As [chaves de API](https://ai.google.dev/gemini-api/docs/api-key?hl=pt-br) são credenciais geradas em um projeto.
+Elas não têm configurações de faturamento independentes. Elas herdam os limites de nível e o status de faturamento do projeto. O uso cumulativo de todas as chaves em um projeto conta para o limite de gastos desse projeto e o gasto total da conta de faturamento.
 
-## الأسئلة الشائعة
+## Perguntas frequentes
 
-تقدّم الأقسام التالية إجابات عن الأسئلة الشائعة.
+As seções a seguir fornecem respostas para perguntas frequentes.
 
-### ما هي الرسوم التي يتم تحصيلها مني؟
+### Por que estou recebendo uma cobrança?
 
-يستند تسعير Gemini API إلى ما يلي:
+O preço da API Gemini é baseado no seguinte:
 
-- عدد الرموز المميّزة المدخَلة
-- عدد الرموز المميزة في الناتج
-- عدد الرموز المميّزة المخزَّنة مؤقتًا
-- مدة تخزين الرمز المميّز المخزّن مؤقتًا
+- Contagem de tokens de entrada
+- Contagem de tokens de saída
+- Contagem de tokens em cache
+- Duração do armazenamento de tokens em cache
 
-للحصول على معلومات عن الأسعار، يُرجى الانتقال إلى [صفحة الأسعار](https://ai.google.dev/pricing?hl=ar).
+Para informações sobre preços, consulte a [página de preços](https://ai.google.dev/pricing?hl=pt-br).
 
-### أين يمكنني الاطّلاع على حصتي؟
+### Onde posso ver minha cota?
 
-يمكنك الاطّلاع على الحصة المخصّصة لك وحدود النظام في [AI Studio](https://aistudio.google.com/usage?hl=ar).
+Você pode conferir sua cota e os limites do sistema no [AI Studio](https://aistudio.google.com/usage?hl=pt-br).
 
-### كيف يمكنني الانتقال إلى فئة أعلى من الحدّ الأقصى لمعدّل الطلبات أو طلب المزيد من الحصة؟
+### Como faço para mudar para um nível de limite de taxa mais alto ou solicitar mais cota?
 
-سيتم تلقائيًا منحك المزيد من الحصة عندما يستوفي حسابك [متطلبات المستوى](https://ai.google.dev/gemini-api/docs/rate-limits?hl=ar#usage-tiers) التالي.
+Você vai receber mais cota automaticamente quando sua conta atingir os próximos [requisitos de nível](https://ai.google.dev/gemini-api/docs/rate-limits?hl=pt-br#usage-tiers).
 
-### هل يمكنني استخدام Gemini API بدون أي تكلفة في المنطقة الاقتصادية الأوروبية (بما في ذلك الاتحاد الأوروبي) والمملكة المتحدة وسويسرا؟
+### Posso usar a API Gemini sem custo financeiro no EEE (incluindo a UE), no Reino Unido e na Suíça?
 
-نعم، تتوفّر الطبقة المجانية والطبقة المدفوعة في [العديد من المناطق](https://ai.google.dev/gemini-api/docs/available-regions?hl=ar).
+Sim, oferecemos o nível sem custo financeiro e o nível pago em [várias regiões](https://ai.google.dev/gemini-api/docs/available-regions?hl=pt-br).
 
-### إذا أعددت الفوترة باستخدام Gemini API، هل سيتم تحصيل رسوم مني مقابل استخدام Google AI Studio؟
+### Se eu configurar o faturamento com a API Gemini, vou receber uma cobrança pelo uso do Google AI Studio?
 
-يبقى استخدام AI Studio بدون أي تكلفة ما لم يربط المستخدمون مفتاح واجهة برمجة تطبيقات مدفوعًا للوصول إلى الميزات المدفوعة.
-بعد ربط مفتاح واجهة برمجة تطبيقات مدفوعة كجزء من مشروع مدفوع في AI Studio، سيتم تحصيل رسوم منك مقابل استخدام AI Studio لهذا المفتاح. يمكنك التبديل بين مشاريع &quot;الفئة المدفوعة&quot; ومشاريع &quot;الفئة المجانية&quot; حسب الحاجة باستخدام مفاتيح واجهة برمجة التطبيقات المرتبطة بكل نوع.
+O uso do AI Studio continua sem custos financeiros, a menos que os usuários vinculem uma chave de API paga para
+acessar recursos pagos.
+Depois de vincular uma chave de API paga como parte de um projeto pago no AI Studio, você vai receber uma cobrança pelo uso do AI Studio com essa chave. Você pode alternar entre projetos do nível pago e do nível sem custo financeiro conforme necessário usando as respectivas chaves de API vinculadas a cada tipo.
 
-### إذا كنت مشتركًا في "الخطة المجانية"، كيف يمكنني الترقية إلى خطط أعلى؟
+### Se eu estiver no nível sem custo financeiro, como faço upgrade para níveis mais altos?
 
-للوصول إلى مستويات أعلى، عليك إعداد الفوترة في مشروعك. انقر على [**إعداد
-الفوترة**](#setup-billing) في Google AI Studio. سيرشدك ذلك خلال عملية اختيار حساب فوترة على Cloud أو إنشائه. إذا كان عليك استخدام نموذج الفوترة المدفوعة مسبقًا، ستساعدك عملية **إعداد الفوترة** في إنشاء حساب الدفع المسبق المرتبط بحساب الفوترة في السحابة الإلكترونية.
+Para acessar níveis mais altos, configure o faturamento no seu projeto. Clique em [**Configurar
+faturamento**](#setup-billing) no Google AI Studio. Isso vai orientar você na
+seleção ou criação de uma conta do Cloud Billing. Se você precisar usar o modelo de faturamento pré-pago, o processo **Configurar faturamento** vai orientar você na criação de uma conta pré-paga vinculada à sua conta do Cloud Billing.
 
-### هل يمكنني استخدام مليون رمز مميز في المستوى المجاني؟
+### Posso usar 1 milhão de tokens no nível sem custo financeiro?
 
-يختلف المستوى المجاني من Gemini API حسب النموذج الذي تم اختياره. يمكنك حاليًا تجربة قدرة استيعاب مليون رمز مميّز بالطرق التالية:
+O nível sem custos financeiros da API Gemini varia de acordo com o modelo selecionado. Por enquanto, você
+pode testar a janela de contexto de 1 milhão de tokens das seguintes maneiras:
 
-- في Google AI Studio
-- مع خطط مجانية لطُرز محدّدة
-- مع خطط الدفع عند الاستخدام
+- No Google AI Studio
+- Com planos sem custo financeiro para modelos selecionados
+- Com planos pós-pagos
 
-### هل يمكنني الرجوع إلى "الطبقة المجانية" بعد الترقية إلى طبقات أعلى (مدفوعة)؟
+### Posso voltar para o nível sem custo financeiro depois de fazer upgrade para níveis mais altos (pagos)?
 
-للرجوع إلى "الطبقة المجانية"، يمكنك [إيقاف الفوترة](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=ar#disable_billing_for_a_project)
-في كل مشروع تريد الرجوع إليه.
+Para fazer downgrade para o nível sem custo financeiro, [desative o faturamento](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=pt-br#disable_billing_for_a_project)
+em cada um dos projetos que você quer fazer downgrade.
 
-### كيف يمكنني احتساب عدد الرموز المميزة التي أستخدمها؟
+### Como posso calcular o número de tokens que estou usando?
 
-استخدِم طريقة [`GenerativeModel.count_tokens`](https://ai.google.dev/api/python/google/generativeai/GenerativeModel?hl=ar#count_tokens)
-لاحتساب عدد الرموز المميزة. راجِع [دليل الرموز المميّزة](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) لمعرفة المزيد من المعلومات حول الرموز المميّزة.
+Use o método [`GenerativeModel.count_tokens`](https://ai.google.dev/api/python/google/generativeai/GenerativeModel?hl=pt-br#count_tokens)
+para contar o número de tokens. Consulte o [guia de tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) para saber mais sobre eles.
 
-### إذا اشتركتُ في أول حساب فوترة على Cloud من خلال AI Studio، هل سأظلّ مؤهَّلاً للحصول على فترة تجريبية مجانية من Google Cloud؟
+### Se eu me inscrever na minha primeira conta do Cloud Billing pelo AI Studio, ainda vou receber um teste sem custo financeiro do Google Cloud?
 
-عند الاشتراك في أول حساب فوترة لك على Cloud، تبدأ [الفترة التجريبية المجانية من Google Cloud](https://docs.cloud.google.com/free/docs/free-cloud-features?hl=ar#free-trial) ويتم منحك [رصيدًا ترحيبيًا](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=ar#welcome-credits) بقيمة 300 دولار أمريكي.
-ومع ذلك، لا يمكن استخدام هذه الأرصدة للدفع مقابل استخدام AI Studio. يمكنك استخدام رصيد الترحيب للدفع مقابل خدمات أخرى مؤهَّلة ضمن Google Cloud (يُرجى العِلم أنّه بعد استهلاك هذه الأرصدة أو انتهاء صلاحيتها (في غضون 90 يومًا)، سيتم تلقائيًا تحصيل رسوم أي استخدام إضافي من طريقة الدفع التي حدّدتها).
+Ao se inscrever na sua primeira conta do Cloud Billing, o [teste sem custo financeiro do Google Cloud](https://docs.cloud.google.com/free/docs/free-cloud-features?hl=pt-br#free-trial) começa, e você recebe um [crédito de boas-vindas](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=pt-br#welcome-credits) de US $300.
+No entanto, esses créditos não podem ser usados para pagar pelo uso do AI Studio. Você pode usar o crédito de boas-vindas para pagar por outros serviços qualificados no Google Cloud. Depois que esses créditos forem consumidos ou expirarem (em 90 dias), os custos de uso adicionais serão faturados automaticamente na sua forma de pagamento estabelecida.
 
-### هل يمكنني استخدام رصيدي الترحيبي على Google Cloud مع Gemini API؟
+### Posso usar meu crédito de boas-vindas do Google Cloud com a API Gemini?
 
-لا، لا يمكن استخدام [رصيد الترحيب](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=ar#welcome-credits) أو الرصيد التجريبي المجاني في Google Cloud مع Gemini API أو AI Studio.
+Não, o [crédito de boas-vindas](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=pt-br#welcome-credits)
+ou o crédito do teste sem custo financeiro do Google Cloud não podem ser usados na API Gemini ou no AI Studio.
 
-إذا تم منحك رصيدًا ترحيبيًا من Google Cloud قبل أن تصبح غير مؤهّل، يمكنك إنفاق الرصيد المتبقي على Gemini API وAI Studio إلى أن تنتهي صلاحية الرصيد (بعد 90 يومًا).
+Se você recebeu um crédito de boas-vindas do Google Cloud antes de ele se tornar inelegível, poderá gastar os créditos restantes na API Gemini e no AI Studio até que eles expirem (após 90 dias).
 
-### هل تنطبق الفترة التجريبية المجانية من Google Cloud على استخدام Gemini API؟
+### O teste sem custo financeiro do Google Cloud se aplica ao uso da API Gemini?
 
-لا، اعتبارًا من آذار (مارس) 2026، سيتم استبعاد تكاليف استخدام Gemini API تحديدًا من برنامج [الفترة التجريبية المجانية من Google Cloud بقيمة 300 دولار أمريكي](https://docs.cloud.google.com/free/docs/free-cloud-features?hl=ar#free-trial).
+Não. A partir de março de 2026, os custos de uso da API Gemini serão especificamente excluídos do programa [Teste sem custos financeiros do Google Cloud de US$300](https://docs.cloud.google.com/free/docs/free-cloud-features?hl=pt-br#free-trial).
 
-### كيف تعمل أرصدة Google Cloud مع خدمة "الدفع المسبق"؟
+### Como os créditos do Google Cloud funcionam com o pré-pagamento?
 
-على مستخدمي الدفع المسبق أولاً [شراء أرصدة الدفع المسبق](#buy-credits) قبل أن يتم تطبيق أي أرصدة مؤهّلة من Google Cloud على استخدام Gemini API. بعد أن يتوفّر لديك رصيد نشط في حساب الدفع المسبق، سيتم استهلاك أرصدة Google Cloud المؤهَّلة لاستخدام Gemini API قبل استهلاك رصيد الدفع المسبق. عندما يصل رصيد الدفع المسبق في حساب الفوترة إلى 0 دولار أمريكي، لن يتم استهلاك رصيد Google Cloud بعد ذلك.
+Os usuários pré-pagos precisam primeiro [comprar créditos pré-pagos](#buy-credits) antes que qualquer crédito qualificado do Google Cloud possa ser aplicado ao uso da API Gemini. Depois que você tiver um saldo de crédito pré-pago ativo, os créditos do Google Cloud qualificados para a API Gemini serão consumidos antes do saldo de crédito pré-pago. Quando o saldo de crédito pré-pago na conta de faturamento chegar a US $0, os créditos do Google Cloud não serão mais consumidos.
 
-لا يمكن استخدام بعض أرصدة Google Cloud، مثل [رصيد الترحيب من Google Cloud](#cloud-credits)، مع Gemini API وAI Studio.
+Nem todos os créditos do Google Cloud, como o [crédito de boas-vindas do Google Cloud](#cloud-credits), podem ser usados na API Gemini e no AI Studio.
 
-### كيف تتم إدارة الفوترة؟
+### Como o faturamento é processado?
 
-تتم معالجة الفوترة لواجهة Gemini API من خلال نظام [الفوترة على Google Cloud](https://cloud.google.com/billing/docs/concepts?hl=ar). يمكنك الاطّلاع على مزيد من المعلومات عن عملية إعداد الفوترة في Cloud داخل المنتج في [مستندات Cloud Billing](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=ar).
+O faturamento da API Gemini é processado pelo sistema [Cloud Billing](https://cloud.google.com/billing/docs/concepts?hl=pt-br). Saiba mais sobre a
+configuração do Cloud Billing no produto na [documentação do Cloud Billing](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=pt-br).
 
-### هل يتم تحصيل رسوم مني مقابل الطلبات التي تعذّر تنفيذها؟
+### Sou cobrado por solicitações com falha?
 
-إذا تعذّر تنفيذ طلبك وظهرت رسالة الخطأ 400 أو 500، لن يتم تحصيل رسوم منك مقابل الرموز المميزة المستخدَمة. ومع ذلك، سيتم احتساب الطلب ضمن حصتك.
+Se a solicitação falhar com um erro 400 ou 500, não haverá cobrança pelos tokens usados. No entanto, a solicitação ainda será deduzida da sua cota.
 
-### هل يتم تحصيل رسوم مقابل `GetTokens`؟
+### O `GetTokens` é faturado?
 
-لا يتم تحصيل رسوم مقابل الطلبات إلى واجهة برمجة التطبيقات `GetTokens`، ولا يتم احتسابها ضمن حصة الاستدلال.
+As solicitações para a API `GetTokens` não são faturadas e não são contabilizadas na cota de inferência.
 
-### كيف تتم معالجة بياناتي في Google AI Studio إذا كان لديّ حساب API مدفوع؟
+### Como meus dados do Google AI Studio são tratados se eu tiver uma conta de API paga?
 
-راجِع [بنود الخدمة](https://ai.google.dev/gemini-api/terms?hl=ar#paid-services) للحصول على تفاصيل حول طريقة معالجة البيانات عند تفعيل الفوترة في Cloud (اطّلِع على "كيفية استخدام Google لبياناتك" ضمن "الخدمات المدفوعة"). يُرجى العِلم أنّ طلباتك في Google AI Studio تخضع لبنود "الخدمات المدفوعة" نفسها ما دام تم تفعيل الفوترة في مشروع واحد على الأقل من مشاريع واجهة برمجة التطبيقات، ويمكنك التأكّد من ذلك من خلال [صفحة مفتاح Gemini API](https://aistudio.google.com/api-keys?hl=ar) إذا رأيت أي مشاريع مصنّفة على أنّها "مدفوعة" ضمن "الخطة".
+Consulte os [Termos de Serviço](https://ai.google.dev/gemini-api/terms?hl=pt-br#paid-services) para detalhes sobre como os dados são tratados quando o Cloud Billing está ativado (consulte "Como o Google usa seus dados" em "Serviços pagos"). Vale lembrar que seus comandos do Google AI Studio são tratados de acordo com os mesmos termos de "Serviços pagos", desde que pelo menos um projeto de API tenha o faturamento ativado. Para verificar isso, acesse a [página da chave de API Gemini](https://aistudio.google.com/api-keys?hl=pt-br) e confira se há projetos marcados como "Pago" em "Plano".
 
-### ما هي الفوترة المدفوعة مسبقًا ومن يُطلب منه استخدام نموذج الفوترة المدفوعة مسبقًا؟
+### O que é o faturamento pré-pago e quem precisa usar esse modelo?
 
-تتيح الفوترة المدفوعة مُسبقًا لمستخدمي Gemini API في AI Studio شراء أرصدة مُسبقًا.
-اعتبارًا من 23 مارس 2026، قد يُطلب من المستخدمين الجدد في AI Studio الاشتراك في خطة الفوترة المدفوعة مسبقًا. أثناء عملية [إعداد الفوترة](#setup-billing) في AI Studio، سترشدك واجهة المستخدم خلال خطوات إعداد الفوترة، وستوضّح لك ما إذا كان عليك الدفع مسبقًا.
+Com o faturamento pré-pago, os usuários da API Gemini no AI Studio podem comprar créditos antecipadamente.
+A partir de 23 de março de 2026, os novos usuários do AI Studio talvez precisem usar o plano de faturamento pré-pago. Durante o processo de [Configurar faturamento](#setup-billing) do AI Studio, a interface vai orientar você pelo fluxo de configuração de faturamento e indicar se é necessário fazer um pré-pagamento.
 
-### كيف يمكنني شراء أرصدة Prepay، وهل هناك حدّ أدنى أو أقصى؟
+### Como faço para comprar créditos pré-pagos? Há um valor mínimo ou máximo?
 
-يمكنك [شراء وحدات](#buy-credits) من صفحة الفوترة في AI Studio. أثناء عملية الشراء، ستوفّر واجهة المستخدم الحدّ الأدنى لمبلغ الشراء المسبق المطلوب في منطقتك ومستوى اشتراكك، بالإضافة إلى الحدّ الأقصى للمبلغ الذي يمكن أن يكون في حسابك في وقت واحد.
+Você pode [comprar créditos](#buy-credits) na página de faturamento do AI Studio. Durante o processo de compra, a interface vai mostrar o valor mínimo de pré-compra necessário para sua região e nível, além de um valor máximo que pode estar na sua conta de uma só vez.
 
-### هل يمكنني ضبط حساب الدفع المُسبَق لشراء المزيد من الرصيد تلقائيًا حسب الحاجة؟
+### Posso configurar minha conta pré-paga para comprar mais créditos automaticamente conforme necessário?
 
-نعم، ننصحك بضبط إعدادات [إعادة التحميل التلقائي](#auto-reload) في إعدادات الفوترة في AI Studio. عليك تحديد رصيد "مشغِّل" (مثل "عندما ينخفض رصيدي عن 30 دولارًا أمريكيًا") و "قيمة إعادة التعبئة" (مثل "إضافة 100 دولار أمريكي").
+Sim, recomendamos que você configure o [recarregamento automático](#auto-reload) nas configurações de faturamento do AI Studio. Você especifica um saldo de crédito de "acionamento" (por exemplo, "quando meu saldo ficar abaixo de R $30") e um "valor de recarga" (por exemplo, "adicionar R $100").
 
-### هل يمكنني وضع حدّ لمبلغ رسوم إعادة التعبئة التلقائية؟
+### Posso limitar o valor das recargas automáticas?
 
-نعم، يمكن لمستخدمي الدفع المُسبَق ضبط [حدّ شهري للخصم التلقائي](#monthly-auto-charge-limit)
-ضمن أداة **تعبئة الرصيد تلقائيًا**. عندما يصل المبلغ الإجمالي لعمليات إعادة التعبئة التلقائية في دورة الفوترة إلى هذا الحد، سيوقف النظام ميزة "تعبئة الرصيد تلقائيًا" حتى الشهر التالي. لا يتم احتساب عمليات شراء الرصيد اليدوية ضمن هذا الحدّ.
+Sim, os usuários do pré-pago podem definir um [limite mensal de recarga automática](#monthly-auto-charge-limit) no widget **Recarga automática**. Quando o valor total das recargas automáticas em um ciclo de faturamento atinge esse limite, o sistema desativa a recarga automática até o mês seguinte. As compras manuais de crédito não contam para esse limite.
 
-### هل يمكنني استرداد الأموال المدفوعة مقابل الرصيد غير المستخدَم؟
+### Posso receber um reembolso pelos meus créditos não utilizados?
 
-تنتهي صلاحية جميع أرصدة واجهة برمجة التطبيقات المدفوعة مسبقًا بعد عام واحد ولا يمكن استردادها. اطّلِع على
-[سياسة ردّ الأموال لحسابات الدفع المسبق](#refunds).
+Todos os créditos pré-pagos da API expiram após um ano e não podem ser reembolsados. Leia a [política de reembolso para contas pré-pagas](#refunds).
 
-### هل تنتهي صلاحية الأرصدة المدفوعة مسبقًا؟
+### Meus créditos pré-pagos expiram?
 
-نعم، تنتهي صلاحية الوحدات بعد 12 شهرًا من تاريخ شرائها.
+Sim, os créditos expiram 12 meses após a data da compra.
 
-### ماذا يحدث عندما يصل رصيد الدفع المُسبق إلى 0 دولار أمريكي؟
+### O que acontece quando meu saldo de crédito pré-pago chega a R $0?
 
-سيتم إيقاف جميع خدمات Gemini API في جميع المشاريع المدفوعة من خلال حساب Cloud Billing Prepay على الفور لمنع تكبّد المزيد من الرسوم. لن يتم تلقائيًا خفض مستوى مشاريعك إلى "الفئة المجانية".
+Todos os serviços da API Gemini em todos os projetos pagos por essa conta pré-paga do Cloud Billing serão interrompidos imediatamente para evitar mais cobranças. Seus projetos
+não são automaticamente rebaixados para o nível sem custo financeiro.
 
-لاستعادة الخدمة على مستوى "الفئة المدفوعة" الحالية، عليك [شراء
-رصيد إضافي](#buy-credits). بعد شراء الوحدات، من المفترض أن تتمكّن من استخدام Gemini API. يُرجى العِلم أنّه قد يحدث [تأخير](#processing-times) أثناء تعديل أنظمتنا لتعكس رصيد الائتمان.
+Para restaurar o serviço no seu nível pago atual, [compre mais créditos](#buy-credits). Depois de comprar créditos, você poderá usar a API Gemini. Pode haver um [atraso](#processing-times) enquanto nossos sistemas são atualizados para refletir seu saldo de crédito.
 
-يمكنك اختياريًا [إيقاف الفوترة](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=ar#disable_billing_for_a_project) في المشاريع التي تريد الرجوع إلى إصدار سابق منها، وذلك للرجوع إلى "الطبقة المجانية".
+Se quiser fazer downgrade para o nível sem custo financeiro, [desative o faturamento](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=pt-br#disable_billing_for_a_project)
+nos projetos em que você quer fazer downgrade.
 
-### لماذا توقّف استخدامي على الرغم من أنّ رصيد الدفع المسبق أكبر من 0 دولار أمريكي؟
+### Por que meu uso foi interrompido mesmo com um saldo de crédito pré-pago maior que R $0?
 
-ربما بلغت [سقف الاستخدام](#tier-spend-caps) في فئتك الحالية.
-ستزداد حدود الاستخدام تلقائيًا عند الانتقال إلى مستويات أعلى. قد يتأثر استخدامك لواجهة Gemini API في AI Studio أيضًا [بحالة حسابك على Cloud Billing](#missed-payment).
+Talvez você tenha atingido o [limite de uso](#tier-spend-caps) do seu nível atual.
+Os limites de uso aumentam automaticamente à medida que você avança para níveis mais altos. O uso da API Gemini no AI Studio também pode ser afetado pelo [status da sua conta do Cloud Billing](#missed-payment).
 
-### لماذا رصيد حساب الدفع المسبق سالب؟
+### Por que o saldo de crédito da minha conta pré-paga está negativo?
 
-نظرًا لتعقيد أنظمة الفوترة والمعالجة لدينا، قد يحدث [تأخير](#processing-times) في قدرتنا على إيقاف الاستخدام بعد استهلاك جميع أرصدتك. قد يظهر هذا الاستخدام الزائد كرصيد سلبي في لوحة بيانات الفوترة في AI Studio. في هذه الحالة، سيتم إيقاف خدمتك مؤقتًا، وسيتم خصم رصيدك السالب من عملية شراء الرصيد التالية.
+Devido à complexidade dos nossos sistemas de faturamento e processamento, pode haver [atrasos](#processing-times) na nossa capacidade de interromper o uso depois que você consumir todos os seus créditos. Esse uso em excesso pode aparecer como um saldo de crédito negativo no painel de faturamento do AI Studio. Se isso acontecer, o serviço será pausado, e o saldo negativo será deduzido da sua próxima compra de crédito.
 
-لتجنُّب توقّف خدمة Gemini API مؤقتًا، ننصحك بإعداد ميزة
-[إعادة التحميل التلقائي](#auto-reload) لشراء المزيد من الرصيد تلقائيًا عندما ينخفض رصيدك إلى أقل من قيمة تحدّدها.
+Para evitar uma pausa no serviço da API Gemini, recomendamos configurar a [recarga automática](#auto-reload) para comprar mais créditos automaticamente quando o saldo ficar abaixo de um valor especificado.
 
-### هل يمكنني استخدام أرصدة Prepay لخدمات Google Cloud الأخرى، مثل Gemini Enterprise Agent Platform؟
+### Posso usar meus créditos pré-pagos em outros serviços do Google Cloud, como a Gemini Enterprise Agent Platform?
 
-لا، فالأرصدة المدفوعة مسبقًا مخصّصة حصريًا لاستخدام Gemini API. يتم تحصيل رسوم أي خدمات أخرى من Google Cloud تستخدمها (مثل Compute وStorage وGemini Enterprise Agent Platform) باستخدام [دورة الفوترة العادية في Cloud](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=ar).
+Não, os créditos de pré-pagamento são estritamente vinculados ao uso da API Gemini. Qualquer
+outro serviço do Google Cloud que você usar (Compute, Storage, Gemini Enterprise Agent Platform) será cobrado usando
+o [ciclo de cobrança do Cloud](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=pt-br) padrão.
 
-### هل يمكنني التبديل إلى خطة فوترة للدفع عند الاستخدام؟
+### Posso mudar para um plano de faturamento pós-pago?
 
-عند إنشاء سجلّ دفع و[الوصول إلى مستوى مؤهّل](#about-billing)
-لخطة الفوترة بنظام الدفع الآجل، يمكنك اختيار نقل جميع تكاليف استخدامك المستقبلي لواجهة Gemini API إلى [دورة فوترة بنظام الدفع الآجل](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=ar#view-your-charging-cycle) موحّدة وعادية في Google Cloud.
+Quando você estabelece um histórico de pagamentos e [atinge um nível qualificado](#about-billing) para o plano de faturamento pós-pago, é possível transferir todos os custos futuros de uso da API Gemini para um [ciclo de cobrança pós-pago](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=pt-br#view-your-charging-cycle) padrão e consolidado do Google Cloud.
 
-### ماذا يحدث لرصيد الدفع المُسبق إذا بدّلت إلى الدفع الآجل؟
+### O que acontece com meus créditos pré-pagos se eu mudar para o pós-pago?
 
-عند الترقية إلى [الدفع الآجل](#postpay)، سيغلق حساب "الفوترة على Cloud" حساب الدفع المُسبَق، وسيوقف ميزة [تعبئة الرصيد تلقائيًا](#auto-reload)، وسيردّ إليك تلقائيًا أي رصيد غير مستخدَم من رصيد الدفع المُسبَق (مع مراعاة وقت معالجة عمليات ردّ الأموال المعتاد).
+Ao fazer upgrade para o [pós-pago](#postpay), o Cloud Billing encerra sua conta de pagamentos pré-paga, desativa a [recarga automática](#auto-reload) e reembolsa automaticamente os créditos pré-pagos não utilizados (sujeito ao tempo padrão de processamento de reembolso).
 
-### أين يمكنني الاطّلاع على رصيد حساب الدفع المُسبَق الحالي وسجلّ المعاملات؟
+### Onde posso ver meu saldo de crédito pré-pago atual e o histórico de transações?
 
-يجب إجراء جميع عمليات إدارة الرصيد وسجلّ المعاملات في Gemini API مباشرةً ضمن علامة التبويب "الفوترة" في Google AI Studio.
+Todo o gerenciamento de saldo e o histórico de transações da API Gemini precisam ser feitos diretamente na guia "Faturamento" do Google AI Studio.
 
-### لماذا تظهر لي الرسالة "نوع حساب الفوترة غير نشط أو غير متوافق"؟
+### Por que aparece a mensagem "O tipo de conta de faturamento está inativo ou não é compatível"?
 
-قد يتم حظر التفاعلات المتعلقة بالدفع في [صفحة الفوترة في AI Studio](https://aistudio.google.com/billing?hl=ar) واستبدالها بالرسالة "نوع حساب الفوترة غير نشط أو غير متوافق" إذا كان نوع حساب الفوترة المحدّد أو حالة حساب الفوترة غير مؤهّلة للاستفادة من "الخطة المدفوعة" في AI Studio.
+As interações de pagamentos na [página de faturamento do AI Studio](https://aistudio.google.com/billing?hl=pt-br) podem ser bloqueadas e substituídas pela mensagem "O tipo de conta de faturamento está inativo ou não é compatível" se o tipo ou status da conta de faturamento selecionada não for qualificado para o nível pago do AI Studio.
 
-تحقَّق من [Cloud Console](https://console.cloud.google.com/billing/?hl=ar) للاطّلاع على حالة حساب الفوترة. أحد الأنواع غير المؤهَّلة هو *حساب الفترة التجريبية المجانية*، وفي هذه الحالة، يمكنك [تفعيل الفوترة](#setup-billing) في AI Studio لتصبح مؤهَّلاً. إحدى حالات عدم النشاط هي *مغلق*، وفي هذه الحالة يمكنك [إعادة فتح الحساب](https://docs.cloud.google.com/billing/docs/how-to/close-or-reopen-billing-account?hl=ar).
+Verifique o [Console do Cloud](https://console.cloud.google.com/billing/?hl=pt-br) para conferir o status da sua conta de faturamento. Um tipo inelegível pode ser *Conta de teste sem custo financeiro*. Nesse caso, [ative o faturamento](#setup-billing) no AI Studio para se tornar elegível. Um estado inativo pode ser *Encerrado*. Nesse caso, é possível [reabrir a conta](https://docs.cloud.google.com/billing/docs/how-to/close-or-reopen-billing-account?hl=pt-br).
 
-### هل ستظهر تكاليف استخدام Gemini API في "وحدة تحكّم Google Cloud"؟
+### Os custos de uso da API Gemini vão aparecer no console do Google Cloud?
 
-نعم، يمكن الاطّلاع على تكاليف Gemini API، بالإضافة إلى التكاليف المرتبطة بأي خدمات أخرى من Google Cloud يتم دفعها من خلال حساب الفوترة في Cloud، وذلك في [صفحات إدارة التكاليف](https://docs.cloud.google.com/billing/docs/how-to/split-charging-cycle?hl=ar#cost-reports) في [وحدة تحكّم الفوترة في Cloud](https://console.cloud.google.com/billing?hl=ar). يُرجى العِلم أنّه يمكنك إدارة رصيد الدفع المسبق في "استوديو الذكاء الاصطناعي" فقط.
+Sim, os custos da API Gemini, assim como os custos associados a outros serviços do Google Cloud pagos pela sua conta do Cloud Billing, podem ser consultados nas [páginas de gerenciamento de custos](https://docs.cloud.google.com/billing/docs/how-to/split-charging-cycle?hl=pt-br#cost-reports) no [console do Cloud Billing](https://console.cloud.google.com/billing?hl=pt-br). Observação: só é possível gerenciar seu saldo de crédito pré-pago no AI Studio.
 
-### لماذا لا يظهر استخدامي لواجهة Gemini API في Cloud Billing Console، مع أنّه يظهر في "فوترة AI Studio"، بالإضافة إلى استهلاك رصيدي؟
+### Por que meu uso da API Gemini não aparece no console do Cloud Billing, mas aparece no faturamento do AI Studio, junto com o consumo dos meus créditos?
 
-ترسل Google Cloud وAI Studio بيانات الاستخدام إلى Cloud Billing على فترات زمنية مختلفة. بسبب تعقيد أنظمة الفوترة والمعالجة لدينا، قد يحدث تأخير بين استخدامك للخدمات وتوفُّر بيانات الاستخدام والتكاليف في "الفوترة في Cloud". تتوفّر تفاصيل التكلفة عادةً في غضون يوم واحد، ولكن قد تستغرق أكثر من 24 ساعة في بعض الأحيان.
-يمكنك الاطّلاع على مزيد من المعلومات عن الفوترة المؤجّلة في [مستندات "فوترة Cloud"](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=ar#delayed-billing).
+O Google Cloud e o AI Studio informam dados de uso ao Cloud Billing em intervalos variados. Devido à complexidade dos nossos sistemas de faturamento e processamento, pode haver um atraso entre o uso dos serviços e a disponibilização do uso e dos custos para visualização no Cloud Billing. Normalmente, os detalhes de custo ficam disponíveis em um dia, mas às vezes podem demorar mais de 24 horas.
+Saiba mais sobre o faturamento atrasado na [documentação do Cloud Billing](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=pt-br#delayed-billing).
 
-### إذا كنت أستخدم خدمات أخرى من Google Cloud تتضمّن تكاليف تخضع لدورة فوترة بنظام الدفع الآجل، ماذا يحدث إذا لم أسدّد دفعة؟
+### Se eu usar outros serviços do Google Cloud com custos sujeitos a um ciclo de cobrança pós-pago, o que acontece se eu não fizer um pagamento?
 
-قد يؤدي عدم دفع رسوم خدمات Google Cloud الأخرى إلى تعليق إمكانية الوصول إلى Gemini API في AI Studio، **بغض النظر عن عدد أرصدة الدفع المُسبَق المتوفّرة لديك**. يتم تفعيل استخدام AI Studio من خلال حساب فوترة على Google Cloud، ويمكن أن يشارك هذا الحساب في كلّ من الفوترة المسبقة الدفع في AI Studio والفوترة اللاحقة الدفع في خدمات Cloud الأخرى. تؤدي المشكلة في رصيد Postpay إلى إيقاف جميع الخدمات المرتبطة بهذا الحساب. سيتم تعليق استخدامك لواجهة Gemini API إذا تم الإبلاغ عن حساب الفوترة الخاص بك في Cloud بسبب مشاكل مثل:
+Se você não fizer um pagamento por outros serviços do Google Cloud, seu acesso à API Gemini
+no AI Studio poderá ser suspenso, **independente de quantos créditos pré-pagos você tiver
+disponíveis**. O uso do AI Studio é feito por uma conta de faturamento do Google Cloud, que pode compartilhar o faturamento pré-pago do AI Studio e o pós-pago de outros serviços do Cloud. Um problema com seu saldo pós-pago interrompe todos os serviços vinculados a essa
+conta. O uso da API Gemini será suspenso se sua conta do Cloud Billing for sinalizada por problemas como:
 
-- رصيد متأخّر أو مستحق
-- دفعة مرفوضة
-- طريقة دفع غير صالحة أو منتهية الصلاحية
+- Um saldo em atraso ou vencido
+- Um pagamento recusado
+- Uma forma de pagamento inválida ou expirada
 
-لاستعادة الخدمة، عليك [حلّ مشكلة حساب الدفع الآجل](https://docs.cloud.google.com/billing/docs/how-to/resolve-issues?hl=ar#resolving-declined-payments) في وحدة تحكّم الفوترة في Google Cloud. بعد حلّ المشكلة، ستستعيد إمكانية الوصول إلى أرصدة وخدمات Gemini API المدفوعة مسبقًا.
+Para restaurar o serviço, [resolva o problema da conta pós-paga](https://docs.cloud.google.com/billing/docs/how-to/resolve-issues?hl=pt-br#resolving-declined-payments) no console do Google Cloud Billing. Depois de resolver o problema, você vai recuperar o acesso aos seus créditos e serviços pré-pagos da API Gemini.
 
-### أين يمكنني الحصول على المساعدة بشأن الفوترة؟
+### Onde posso receber ajuda com o faturamento?
 
-للحصول على مساعدة بشأن الفوترة، يُرجى الاطّلاع على [الحصول على دعم بشأن الفوترة في Cloud](https://cloud.google.com/support/billing?hl=ar).
+Para receber ajuda com o faturamento, consulte
+[Receber suporte do Cloud Billing](https://cloud.google.com/support/billing?hl=pt-br).
 
-إرسال ملاحظات
+Envie comentários
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-تاريخ التعديل الأخير: 2026-07-07 (حسب التوقيت العالمي المتفَّق عليه)
+Última atualização 2026-07-07 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Quer enviar seu feedback?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-07 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-07-07 UTC."],[],[]]

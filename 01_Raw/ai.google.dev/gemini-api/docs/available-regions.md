@@ -1,274 +1,274 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=pt-BR
-fetched_at: 2026-08-10T03:26:32.130452+00:00
-title: "Regi\u00f5es dispon\u00edveis para o Google AI Studio e a API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=it
+fetched_at: 2026-08-17T02:16:29.163419+00:00
+title: "Regioni disponibili per Google AI Studio e l'API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Envie comentários
+Invia feedback
 
-# Regiões disponíveis para o Google AI Studio e a API Gemini
+# Regioni disponibili per Google AI Studio e l'API Gemini
 
-Se você chegou a esta página ao tentar acessar [Google AI Studio](https://aistudio.google.com/?hl=pt-br), pode
-ser por um destes motivos:
+Se hai raggiunto questa pagina mentre tentavi di accedere a [Google AI Studio](https://aistudio.google.com/?hl=it), la ragione potrebbe
+essere una delle seguenti:
 
-- **Restrições regionais**: o Google AI Studio não está disponível na sua região. Consulte a seção abaixo para conferir uma lista de regiões com suporte.
-- **Requisitos de idade**: você não atende ao requisito de idade mínima (18 anos) para acessar esse serviço.
-- **Verificação de conta**: você pode ter acesso ao serviço, mas ainda não [verificou sua idade](https://support.google.com/accounts/answer/10071085?hl=pt-br) na Conta do Google.
+- **Limitazioni regionali**: Google AI Studio non è disponibile nella tua regione. Consulta la sezione di seguito per un elenco delle regioni supportate.
+- **Requisiti di età**: non soddisfi il requisito di età minima (18 anni) per accedere a questo servizio.
+- **Verifica dell'account**: potresti avere accesso al servizio, ma non hai ancora [verificato la tua età](https://support.google.com/accounts/answer/10071085?hl=it) nel tuo Account Google.
 
-Para mais detalhes sobre os requisitos, consulte nossos [Termos de Serviço](https://ai.google.dev/gemini-api/terms?hl=pt-br).
+Per ulteriori dettagli sui requisiti, consulta i nostri [Termini di servizio](https://ai.google.dev/gemini-api/terms?hl=it).
 
-## Regiões disponíveis
+## Aree geografiche disponibili
 
-A API Gemini e o Google AI Studio estão disponíveis nestes países e territórios. Se você não estiver em um desses países ou territórios, tente a
-[API Gemini na Plataforma de Agentes do Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform?hl=pt-br):
+L'API Gemini e Google AI Studio sono disponibili nei seguenti paesi e territori. Se non ti trovi in uno di questi paesi o territori, prova l'
+[API Gemini nella piattaforma agentica Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform?hl=it):
 
-- Albânia
-- Argélia
-- Samoa Americana
+- Albania
+- Algeria
+- Samoa Americane
 - Andorra
 - Angola
-- Anguila
-- Antártida
-- Antígua e Barbuda
+- Anguilla
+- Antartide
+- Antigua e Barbuda
 - Argentina
-- Armênia
+- Armenia
 - Aruba
-- Austrália
-- Áustria
-- Azerbaijão
+- Australia
+- Austria
+- Azerbaigian
 - Bahamas
-- Barein
+- Bahrein
 - Bangladesh
 - Barbados
-- Bélgica
+- Belgio
 - Belize
 - Benin
-- Bermudas
-- Butão
-- Bolívia
-- Bósnia e Herzegovina
-- Botsuana
-- Brasil
-- Território Britânico do Oceano Índico
-- Ilhas Virgens Britânicas
+- Bermuda
+- Bhutan
+- Bolivia
+- Bosnia ed Erzegovina
+- Botswana
+- Brasile
+- Territorio Britannico dell'Oceano Indiano
+- Isole Vergini Britanniche
 - Brunei
-- Bulgária
+- Bulgaria
 - Burkina Faso
 - Burundi
-- Cabo Verde
-- Camboja
-- Camarões
-- Canadá
-- Países Baixos Caribenhos
-- Ilhas Cayman
-- República Centro-Africana
-- Chade
-- Chile
-- Ilha Christmas
-- Ilhas Cocos (Keeling)
-- Colômbia
-- Ilhas Comores
-- Ilhas Cook
+- Capo Verde
+- Cambogia
+- Camerun
+- Canada
+- Caraibi olandesi
+- Isole Cayman
+- Repubblica Centrafricana
+- Ciad
+- Cile
+- Isola Christmas
+- Isole Cocos (Keeling)
+- Colombia
+- Comore
+- Isole Cook
 - Costa Rica
-- Costa do Marfim
-- Croácia
+- Costa d'Avorio
+- Croazia
 - Curaçao
-- República Tcheca
-- República Democrática do Congo
-- Dinamarca
-- Djibouti
+- Repubblica Ceca
+- Repubblica Democratica del Congo
+- Danimarca
+- Gibuti
 - Dominica
-- República Dominicana
-- Equador
-- Egito
+- Repubblica Dominicana
+- Ecuador
+- Egitto
 - El Salvador
-- Guiné Equatorial
-- Eritreia
-- Estônia
-- Essuatíni
-- Etiópia
-- Ilhas Malvinas (Falkland)
-- Ilhas Faroé
-- Fiji
-- Finlândia
-- França
-- Guiana Francesa
-- Gabão
-- Gâmbia
-- Geórgia
-- Alemanha
-- Gana
-- Gibraltar
-- Grécia
-- Groenlândia
-- Granada
+- Guinea Equatoriale
+- Eritrea
+- Estonia
+- Eswatini
+- Etiopia
+- Isole Falkland (Isole Malvine)
+- Isole Fær Øer
+- Figi
+- Finlandia
+- Francia
+- Guyana Francese
+- Gabon
+- Gambia
+- Georgia
+- Germania
+- Ghana
+- Gibilterra
+- Grecia
+- Groenlandia
+- Grenada
 - Guam
 - Guatemala
 - Guernsey
-- Guiné
-- Guiné-Bissau
+- Guinea
+- Guinea-Bissau
 - Guiana
 - Haiti
-- Ilha Heard e Ilhas McDonald
+- Isole Heard e McDonald
 - Honduras
-- Hungria
-- Islândia
-- Índia
-- Indonésia
-- Iraque
+- Ungheria
+- Islanda
+- India
+- Indonesia
+- Iraq
 - Irlanda
-- Ilha de Man
-- Israel
-- Itália
-- Jamaica
-- Japão
+- Isola di Man
+- Israele
+- Italia
+- Giamaica
+- Giappone
 - Jersey
-- Jordânia
-- Cazaquistão
-- Quênia
+- Giordania
+- Kazakistan
+- Kenya
 - Kiribati
 - Kosovo
 - Kuwait
-- Quirguistão
+- Kirghizistan
 - Laos
-- Letônia
-- Líbano
-- Lesoto
-- Libéria
-- Líbia
+- Lettonia
+- Libano
+- Lesotho
+- Liberia
+- Libia
 - Liechtenstein
-- Lituânia
-- Luxemburgo
+- Lituania
+- Lussemburgo
 - Madagascar
-- Malauí
-- Malásia
-- Maldivas
+- Malawi
+- Malaysia
+- Maldive
 - Mali
 - Malta
-- Ilhas Marshall
-- Mauritânia
-- Ilhas Maurício
-- México
-- Micronésia
-- Moldávia
-- Mônaco
-- Mongólia
+- Isole Marshall
+- Mauritania
+- Mauritius
+- Messico
+- Micronesia
+- Moldavia
+- Monaco
+- Mongolia
 - Montenegro
 - Montserrat
-- Marrocos
-- Moçambique
-- Namíbia
+- Marocco
+- Mozambico
+- Namibia
 - Nauru
 - Nepal
-- Países Baixos
-- Nova Caledônia
-- Nova Zelândia
-- Nicarágua
-- Níger
-- Nigéria
+- Paesi Bassi
+- Nuova Caledonia
+- Nuova Zelanda
+- Nicaragua
+- Niger
+- Nigeria
 - Niue
-- Ilha Norfolk
-- Macedônia do Norte
-- Ilhas Marianas do Norte
-- Noruega
-- Omã
-- Paquistão
+- Isola Norfolk
+- Macedonia del Nord
+- Isole Marianne Settentrionali
+- Norvegia
+- Oman
+- Pakistan
 - Palau
 - Palestina
-- Panamá
-- Papua-Nova Guiné
-- Paraguai
-- Peru
-- Filipinas
-- Ilhas Pitcairn
-- Polônia
-- Portugal
-- Porto Rico
-- Catar
-- República do Chipre
-- República do Congo
-- Romênia
+- Panama
+- Papua Nuova Guinea
+- Paraguay
+- Perù
+- Filippine
+- Isole Pitcairn
+- Polonia
+- Portogallo
+- Portorico
+- Qatar
+- Repubblica di Cipro
+- Repubblica del Congo
+- Romania
 - Ruanda
-- Ilha Reunião
-- São Bartolomeu
-- Santa Helena, Ascensão e Tristão da Cunha
-- São Cristóvão e Névis
-- Santa Lúcia
-- Saint Pierre e Miquelon
-- São Vicente e Granadinas
+- La Riunione
+- Saint-Barthélemy
+- Sant'Elena, Ascensione e Tristan da Cunha
+- Saint Kitts e Nevis
+- Saint Lucia
+- Saint-Pierre e Miquelon
+- Saint Vincent e Grenadine
 - Samoa
 - San Marino
 - São Tomé e Príncipe
-- Arábia Saudita
+- Arabia Saudita
 - Senegal
-- Sérvia
-- Ilhas Seychelles
-- Serra Leoa
-- Singapura
-- Eslováquia
-- Eslovênia
-- Ilhas Salomão
-- Somália
-- África do Sul
-- Ilhas Geórgia do Sul e Sandwich do Sul
-- Coreia do Sul
-- Sudão do Sul
-- Espanha
+- Serbia
+- Seychelles
+- Sierra Leone
+- Singapore
+- Slovacchia
+- Slovenia
+- Isole Salomone
+- Somalia
+- Sudafrica
+- Georgia del Sud e Sandwich Australi
+- Corea del Sud
+- Sud Sudan
+- Spagna
 - Sri Lanka
-- Sudão
+- Sudan
 - Suriname
-- Suécia
-- Suíça
+- Svezia
+- Svizzera
 - Taiwan
-- Tajiquistão
-- Tanzânia
-- Tailândia
-- Timor Leste
+- Tagikistan
+- Tanzania
+- Thailandia
+- Timor Est
 - Togo
-- Toquelau
+- Tokelau
 - Tonga
 - Trinidad e Tobago
-- Tunísia
-- Turcomenistão
-- Ilhas Turks e Caicos
+- Tunisia
+- Turkmenistan
+- Isole Turks e Caicos
 - Tuvalu
-- Turquia
+- Turchia
 - Uganda
-- Ucrânia
-- Emirados Árabes Unidos
-- Reino Unido
-- Estados Unidos
-- Ilhas Menores Distantes dos Estados Unidos
-- Uruguai
-- Ilhas Virgens Americanas
-- Uzbequistão
+- Ucraina
+- Emirati Arabi Uniti
+- Regno Unito
+- Stati Uniti
+- Isole Minori Esterne degli Stati Uniti
+- Uruguay
+- Isole Vergini Americane
+- Uzbekistan
 - Vanuatu
-- Cidade do Vaticano
+- Città del Vaticano
 - Venezuela
-- Vietnã
-- Ilhas Wallis e Futuna
-- Saara Ocidental
-- Iêmen
-- Zâmbia
-- Zimbábue
-- Ilhas Åland
+- Vietnam
+- Wallis e Futuna
+- Sahara occidentale
+- Yemen
+- Zambia
+- Zimbabwe
+- Isole Åland
 
-Envie comentários
+Invia feedback
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Última atualização 2026-04-29 UTC.
+Ultimo aggiornamento 2026-04-29 UTC.
 
-Quer enviar seu feedback?
+Vuoi dirci altro?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]

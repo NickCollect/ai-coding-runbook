@@ -1,67 +1,70 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/usage-policies?hl=de
-fetched_at: 2026-08-10T03:26:38.926812+00:00
-title: "Missbrauchs\u00fcberwachung \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/usage-policies?hl=th
+fetched_at: 2026-08-17T02:17:06.331321+00:00
+title: "\u0e01\u0e32\u0e23\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e01\u0e32\u0e23\u0e25\u0e30\u0e40\u0e21\u0e34\u0e14 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Feedback geben
+ส่งความคิดเห็น
 
-# Missbrauchsüberwachung
+# การตรวจสอบการละเมิด
 
-Google verpflichtet sich zu einer verantwortungsbewussten Entwicklung und Nutzung von KI. Um die Sicherheit und Integrität der Gemini API zu gewährleisten, haben wir diese Richtlinien erstellt.
-Wenn Sie die Gemini API verwenden, stimmen Sie den folgenden Richtlinien, den [Zusatzbedingungen für die Gemini API](https://ai.google.dev/gemini-api/terms?hl=de) und der [Richtlinie zur unzulässigen Nutzung von generativer KI](https://policies.google.com/terms/generative-ai/use-policy?hl=de) zu.
+Google มุ่งมั่นที่จะพัฒนาและใช้ AI อย่างมีความรับผิดชอบ เราได้สร้างหลักเกณฑ์ด้านนโยบายเหล่านี้ขึ้นมาเพื่อให้มั่นใจในความปลอดภัยและความสมบูรณ์ของ Gemini API
+การใช้ Gemini API แสดงว่าคุณยอมรับหลักเกณฑ์ต่อไปนี้ รวมถึง[ข้อกำหนดในการให้บริการเพิ่มเติม](https://ai.google.dev/gemini-api/terms?hl=th)ของ
+Gemini API
+และนโยบายการใช้งานที่[ไม่อนุญาต
+สำหรับ Generative AI](https://policies.google.com/terms/generative-ai/use-policy?hl=th)
 
-## So überwachen wir auf Missbrauch
+## วิธีที่เราตรวจสอบการใช้งานในทางที่ผิด
 
-Das Trust and Safety-Team von Google setzt eine Kombination aus automatisierten und manuellen Prozessen ein, um potenziellen Missbrauch der Gemini API und von Google AI Studio zu erkennen und unsere Richtlinien durchzusetzen.
+ทีมความน่าเชื่อถือและความปลอดภัยของ Google ใช้กระบวนการอัตโนมัติและกระบวนการที่ดำเนินการโดยเจ้าหน้าที่ร่วมกันเพื่อตรวจหาการใช้งาน Gemini API และ Google AI Studio ในทางที่ผิดที่อาจเกิดขึ้น เพื่อบังคับใช้นโยบายของเรา
 
-- **Automatisierte Erkennung**:Automatisierte Systeme scannen die API-Nutzung auf Verstöße gegen unsere Richtlinie zur unzulässigen Nutzung, z. B. Hassreden, Belästigungen, sexuell explizite Inhalte und gefährliche Inhalte.
-- **Manuelle Erkennung**:Wenn in einem Projekt wiederholt verdächtige Aktivitäten auftreten, wird es möglicherweise zur manuellen Überprüfung durch autorisierte Google-Mitarbeiter gekennzeichnet.
+- **การตรวจหาโดยอัตโนมัติ:** ระบบอัตโนมัติจะสแกนการใช้งาน API เพื่อหาการละเมิดนโยบายการใช้งานที่ไม่อนุญาต เช่น วาจาสร้างความเกลียดชัง การคุกคาม เนื้อหาเกี่ยวกับเรื่องเพศอย่างโจ่งแจ้ง และเนื้อหาที่เป็นอันตราย
+- **การตรวจหาโดยเจ้าหน้าที่:** หากโปรเจ็กต์แสดงกิจกรรมที่น่าสงสัยอย่างสม่ำเสมอ ระบบอาจติดแท็กเพื่อส่งให้เจ้าหน้าที่ที่ได้รับอนุญาตของ Google ตรวจสอบ
 
-## So gehen wir mit Daten um
+## วิธีที่เราจัดการข้อมูล
 
-Google bewahrt die folgenden Daten 55 Tage lang auf, um Verstöße gegen die Richtlinie zur unzulässigen Nutzung zu erkennen und zu verhindern, die Sicherheit der Dienste zu gewährleisten und alle erforderlichen rechtlichen oder behördlichen Offenlegungen vorzunehmen:
+Google จะเก็บข้อมูลต่อไปนี้ไว้เป็นระยะเวลาห้าสิบห้า (55) วันเพื่อตรวจหาและป้องกันการละเมิดนโยบายการใช้งานที่ไม่อนุญาต เพื่อรักษาความปลอดภัยของบริการ รวมถึงการเปิดเผยข้อมูลตามกฎหมายหรือข้อบังคับที่กำหนด
 
-- **Prompts**:Die Text-Prompts, die Sie an die API senden.
-- **Kontextinformationen**:Zusätzlicher Kontext, den Sie mit Ihren Prompts bereitstellen.
-- **Ausgabe**:Die von der Gemini API generierten Antworten.
+- **พรอมต์:** พรอมต์ข้อความที่คุณส่งไปยัง API
+- **ข้อมูลบริบท:** บริบทเพิ่มเติมที่คุณระบุพร้อมกับพรอมต์
+- **เอาต์พุต:** คำตอบที่สร้างโดย Gemini API
 
-## So gehen wir bei der Untersuchung potenzieller Probleme vor
+## วิธีที่เราตรวจสอบปัญหาที่อาจเกิดขึ้น
 
-Wenn Prompts oder Modellausgaben von den oben beschriebenen Sicherheitsfiltern und Missbrauchserkennungssystemen gekennzeichnet werden, können autorisierte Google-Mitarbeiter die gekennzeichneten Inhalte prüfen und die Klassifizierung oder Entscheidung anhand vordefinierter Richtlinien und Bestimmungen bestätigen oder korrigieren. Auf Daten kann nur von autorisierten Google-Mitarbeitern über eine interne Governance-Bewertungs- und Überprüfungsplattform zugegriffen werden. Wenn Daten für die Missbrauchsüberwachung protokolliert werden, werden sie ausschließlich zur Durchsetzung von Richtlinien und zur Verhinderung von Richtlinienverstößen verwendet.
-Sie werden nicht zum Trainieren oder Optimieren von KI-/ML-Modellen verwendet, die nicht speziell für die Richtliniendurchsetzung eingesetzt werden.
+เมื่อตัวกรองความปลอดภัยและระบบตรวจหาการละเมิดที่อธิบายไว้ข้างต้นติดแท็กพรอมต์หรือเอาต์พุตของโมเดล พนักงานที่ได้รับอนุญาตของ Google อาจประเมินเนื้อหาที่ติดแท็ก และยืนยันหรือแก้ไขการจัดประเภทหรือการตัดสินใจตามหลักเกณฑ์และนโยบายที่กำหนดไว้ล่วงหน้า เฉพาะพนักงานที่ได้รับอนุญาตของ Google เท่านั้นที่จะเข้าถึงข้อมูลเพื่อทำการตรวจสอบโดยเจ้าหน้าที่ผ่านแพลตฟอร์มการประเมินการกำกับดูแลภายในและการจัดการการตรวจสอบ เมื่อมีการบันทึกข้อมูลเพื่อการตรวจสอบการละเมิด เราจะใช้ข้อมูลดังกล่าวเพื่อวัตถุประสงค์ในการบังคับใช้นโยบายและป้องกันการละเมิดนโยบายเท่านั้น
+และจะไม่ใช้ข้อมูลดังกล่าวเพื่อฝึกหรือปรับแต่งโมเดล AI/ML นอกเหนือจากโมเดลที่ใช้เพื่อการบังคับใช้นโยบายโดยเฉพาะ
 
-## Zusammenarbeit mit Ihnen bei der Einhaltung von Richtlinien
+## การทำงานร่วมกับคุณในการปฏิบัติตามนโยบาย
 
-Wenn Ihre Nutzung von Gemini nicht unseren Richtlinien entspricht, ergreifen wir möglicherweise die folgenden Maßnahmen:
+หากการใช้งาน Gemini ของคุณไม่สอดคล้องกับนโยบาย เราอาจดำเนินการตามขั้นตอนต่อไปนี้
 
-- **Kontakt aufnehmen**:Wir kontaktieren Sie möglicherweise per E-Mail, um mehr über Ihren Anwendungsfall zu erfahren und Möglichkeiten zu finden, wie Sie die Nutzungsbedingungen einhalten können.
-- **Vorübergehende Nutzungslimits**:Wir können Ihren Zugriff auf die Gemini API einschränken, indem wir beispielsweise Ratenlimits anpassen oder ändern, welches Modell eine bestimmte Anfrage beantwortet.
-- **Vorübergehende Sperrung**:Wir können Ihren Zugriff auf die Gemini API vorübergehend sperren.
-- **Kontoschließung**:Als letztes Mittel und bei schwerwiegenden Verstößen können wir Ihren Zugriff auf die Gemini API und andere Google-Dienste dauerhaft schließen.
+- **ติดต่อคุณ:** เราอาจติดต่อคุณทางอีเมลเพื่อทำความเข้าใจกรณีการใช้งานของคุณและหาวิธีทำให้การใช้งานของคุณเป็นไปตามนโยบาย
+- **ขีดจำกัดการใช้งานชั่วคราว:** เราอาจจำกัดการเข้าถึง Gemini API ของคุณโดยการปรับขีดจำกัดอัตราหรือเปลี่ยนโมเดลที่จะตอบคำขอที่เฉพาะเจาะจง เป็นต้น
+- **การระงับชั่วคราว:** เราอาจหยุดการเข้าถึง Gemini API ของคุณชั่วคราว
+- **การปิดบัญชี:** เราอาจปิดการเข้าถึง Gemini API และบริการอื่นๆ ของ Google อย่างถาวรในกรณีที่จำเป็นและมีการละเมิดอย่างร้ายแรง
 
-Wenn wir Sie bezüglich einer Sperrung oder Kontoschließung kontaktieren, stellen wir Ihnen auch einen Link zur Verfügung, über den Sie Einspruch einlegen können.
+หากเราติดต่อคุณเกี่ยวกับการระงับหรือการปิดบัญชี เราจะระบุลิงก์ที่คุณสามารถอุทธรณ์ได้ด้วย
 
-## Umfang
+## ขอบเขต
 
-Diese Richtlinien gelten für die Nutzung der Gemini API und von AI Studio.
+หลักเกณฑ์ด้านนโยบายเหล่านี้มีผลบังคับใช้กับการใช้งาน Gemini API และ AI Studio
 
-Feedback geben
+ส่งความคิดเห็น
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Zuletzt aktualisiert: 2026-06-09 (UTC).
+อัปเดตล่าสุด 2026-06-09 UTC
 
-Haben Sie Feedback für uns?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-06-09 (UTC)."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-09 UTC"],[],[]]

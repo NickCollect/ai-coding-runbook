@@ -1,1188 +1,1212 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/pricing?hl=ar
-fetched_at: 2026-08-10T03:14:05.686855+00:00
-title: "\u0623\u0633\u0639\u0627\u0631 Gemini Developer API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/pricing?hl=id
+fetched_at: 2026-08-17T02:23:19.517826+00:00
+title: "Harga Gemini Developer API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-# أسعار Gemini Developer API
+# Harga Gemini Developer API
 
-يمكنك البدء في إنشاء التطبيقات مجانًا مع حدود سخية، ثم توسيع نطاقها باستخدام
-الأسعار المدفوعة مسبقًا ثم الأسعار حسب الاستخدام لتطبيقاتك الجاهزة للإنتاج.
+Mulai membangun aplikasi tanpa biaya dengan batas yang besar, lalu tingkatkan skala dengan harga prabayar, kemudian bayar sesuai penggunaan untuk aplikasi yang siap produksi.
 
-### مجانًا
+### Gratis
 
-هذه الحزمة مخصّصة للمطوّرين والمشروعات الصغيرة التي تريد بدء استخدام Gemini API.
+Untuk developer dan project kecil yang baru mulai menggunakan Gemini API.
 
-- check\_circleإمكانية وصول محدودة إلى نماذج معيّنة
-- check\_circleرموز مميّزة مجانية للإدخال والإخراج
-- check\_circleإمكانية الوصول إلى Google AI Studio
-- check\_circleالمحتوى المستخدَم لتحسين منتجاتنا[\*](https://ai.google.dev/gemini-api/terms?hl=ar)
+- check\_circleAkses terbatas ke model tertentu
+- check\_circleToken input & output gratis
+- check\_circleAkses Google AI Studio
+- check\_circleKonten yang digunakan untuk meningkatkan kualitas produk kami[\*](https://ai.google.dev/gemini-api/terms?hl=id)
 
-[تجربة مجانية](https://aistudio.google.com?hl=ar)
+[Mulai secara Gratis](https://aistudio.google.com?hl=id)
 
-### مدفوع
+### Berbayar
 
-للتطبيقات المتاحة للجميع والتي تتطلّب أحجامًا أكبر وميزات متقدّمة
+Untuk aplikasi produksi yang memerlukan volume lebih tinggi dan fitur lanjutan.
 
-- check\_circleسقف أعلى للاستخدام في عمليات النشر في مرحلة الإنتاج
-- check\_circleالوصول إلى التخزين المؤقت للسياق
-- check\_circleواجهة برمجة التطبيقات المجمّعة (تخفيض التكلفة بنسبة% 50)
-- check\_circleالوصول إلى نماذج Google الأكثر تقدّمًا
-- check\_circleالمحتوى **غير** مستخدَم لتحسين منتجاتنا[\*](https://ai.google.dev/gemini-api/terms?hl=ar)
+- check\_circleBatas kapasitas yang lebih tinggi untuk deployment produksi
+- check\_circleAkses ke Cache konteks
+- check\_circleBatch API (pengurangan biaya sebesar 50%)
+- check\_circleAkses ke model tercanggih Google
+- check\_circleKonten **tidak** digunakan untuk meningkatkan kualitas produk kami[\*](https://ai.google.dev/gemini-api/terms?hl=id)
 
-[الترقية إلى حساب مدفوع](https://aistudio.google.com/api-keys?hl=ar)
+[Upgrade ke Akun Berbayar](https://aistudio.google.com/api-keys?hl=id)
 
-### للمؤسسات
+### Enterprise
 
-عمليات نشر واسعة النطاق مع احتياجات مخصّصة للأمان والدعم والامتثال، تستند إلى [منصة وكيل Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform?hl=ar)
+Untuk deployment skala besar dengan kebutuhan khusus terkait keamanan, dukungan, dan kepatuhan, yang didukung oleh [Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform?hl=id).
 
-- check\_circleجميع الميزات في الإصدار المدفوع، بالإضافة إلى إمكانية الوصول الاختياري إلى:
-- check\_circleقنوات الدعم المخصّصة
-- check\_circleالأمان والامتثال المتقدّمان
-- check\_circleسرعة معالجة البيانات المتوفّرة
-- check\_circleخصومات مستندة إلى الحجم (استنادًا إلى الاستخدام)
-- check\_circleعمليات تعلّم الآلة وModel Garden والمزيد
+- check\_circleSemua fitur di Berbayar, ditambah akses opsional ke:
+- check\_circleSaluran dukungan khusus
+- check\_circleKeamanan & kepatuhan lanjutan
+- check\_circleThroughput yang disediakan
+- check\_circleDiskon berbasis volume (berdasarkan penggunaan)
+- check\_circleOperasi ML, model garden, dan lainnya
 
-[التواصل مع فريق المبيعات](https://cloud.google.com/contact?hl=ar)
+[Hubungi Bagian Penjualan](https://cloud.google.com/contact?hl=id)
 
 ## Gemini 3.6 Flash
 
 *`gemini-3.6-flash`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-3.6-flash&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-3.6-flash&hl=id)
 
-نموذجنا الأكثر ذكاءً والمصمَّم للعمل بسرعة، إذ يجمع بين الذكاء المتقدّم
-والبحث والتأسيس الفائقَين.
+Model tercerdas kami yang dibuat untuk kecepatan, menggabungkan kecerdasan terdepan dengan penelusuran dan perujukan yang unggul.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫1.50 دولار أمريكي |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | $7.50 |
-| سعر التخزين المؤقت حسب السياق | بدون أي تكلفة | ‫0.15 دولار أمريكي 1.00 دولار أمريكي / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $1,50 |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $7,50 |
+| Harga context caching | Tanpa biaya | $0,15 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | 0.75 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫3.75 دولار أمريكي |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.075 $1.00 / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب شهريًا (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,75 |
+| Harga output (termasuk token pemikiran) | Tidak tersedia | $3,75 |
+| Harga context caching | Tidak tersedia | $0,075 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 permintaan per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### التعبير
+### Lipat
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | 0.75 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫3.75 دولار أمريكي |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.075 $1.00 / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب شهريًا (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,75 |
+| Harga output (termasuk token pemikiran) | Tidak tersedia | $3,75 |
+| Harga context caching | Tidak tersedia | $0,075 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 permintaan per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### الأولوية
+### Prioritas
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫2.70 دولار أمريكي |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | $13.50 |
-| سعر التخزين المؤقت حسب السياق | بدون أي تكلفة | ‫0.27 $1.00 / 1,000,000 رمز مميّز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $2,70 |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $13,50 |
+| Harga context caching | Tanpa biaya | $0,27 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-\* قد يؤدي الطلب الذي يرسله العميل إلى Gemini إلى إنشاء طلب بحث واحد أو أكثر إلى &quot;بحث Google&quot;. سيتم تحصيل رسوم منك مقابل كل طلب بحث فردي يتم إجراؤه.
+\* Permintaan yang dikirimkan pelanggan ke Gemini dapat menghasilkan satu atau beberapa
+kueri ke Google Penelusuran. Anda akan dikenai biaya untuk setiap kueri penelusuran individual yang dilakukan.
+
+\*\* Dapat diuji di Google AI Studio.
 
 ## Gemini 3.5 Flash
 
 *`gemini-3.5-flash`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-3.5-flash&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-3.5-flash&hl=id)
 
-نموذجنا الأكثر ذكاءً والمصمَّم للعمل بسرعة، إذ يجمع بين الذكاء المتقدّم
-والبحث والتأسيس الفائقَين.
+Model tercerdas kami yang dibuat untuk kecepatan, menggabungkan kecerdasan terdepan dengan penelusuran dan perujukan yang unggul.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫1.50 دولار أمريكي |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | 9.00 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
-| سعر التخزين المؤقت حسب السياق | بدون أي تكلفة | ‫0.15 دولار أمريكي 1.00 دولار أمريكي / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $1,50 |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $9,00 |
+| Harga context caching | Tanpa biaya | $0,15 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | 0.75 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫4.50 دولار أمريكي |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.075 $1.00 / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب شهريًا (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,75 |
+| Harga output (termasuk token pemikiran) | Tidak tersedia | $4,50 |
+| Harga context caching | Tidak tersedia | $0,075 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 permintaan per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### التعبير
+### Lipat
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | 0.75 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫4.50 دولار أمريكي |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.08 $1.00 / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب شهريًا (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,75 |
+| Harga output (termasuk token pemikiran) | Tidak tersedia | $4,50 |
+| Harga context caching | Tidak tersedia | $0,08 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 permintaan per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### الأولوية
+### Prioritas
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫2.70 دولار أمريكي |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | $16.20 |
-| سعر التخزين المؤقت حسب السياق | بدون أي تكلفة | ‫0.27 $1.00 / 1,000,000 رمز مميّز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $2,70 |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $16,20 |
+| Harga context caching | Tanpa biaya | $0,27 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-\* قد يؤدي الطلب الذي يرسله العميل إلى Gemini إلى إنشاء طلب بحث واحد أو أكثر إلى &quot;بحث Google&quot;. سيتم تحصيل رسوم منك مقابل كل طلب بحث فردي يتم إجراؤه.
+\* Permintaan yang dikirimkan pelanggan ke Gemini dapat menghasilkan satu atau beberapa
+kueri ke Google Penelusuran. Anda akan dikenai biaya untuk setiap kueri penelusuran individual yang dilakukan.
 
-## ‫Gemini 3.5 Live Translate
+\*\* Dapat diuji di Google AI Studio.
+
+## Gemini 3.5 Live Translate
 
 *`gemini-3.5-live-translate-preview`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-live-translate-preview&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-live-translate-preview&hl=id)
 
-نموذج ترجمة الكلام في الوقت الفعلي وبزمن استجابة منخفض، ويتوافق مع أكثر من 70 لغة.
+Model terjemahan ucapan ke ucapan real-time latensi rendah kami yang mendukung lebih dari 70 bahasa.
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+### Standar
+
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫3.50 دولار أمريكي أو 0.0053 دولار أمريكي في الدقيقة\* (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫21.00 دولار أمريكي أو 0.0315 دولار أمريكي/دقيقة\* (صوت) |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $3,50 atau $0,0053/mnt\* (audio) |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $21,00 atau $0,0315/mnt\* (audio) |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-\* تستند الفوترة إلى إجمالي استهلاك الرموز الصوتية المدخلة والمخرجة، ويتم احتسابها بمعدل 25 رمزًا صوتيًا في الثانية الواحدة من الصوت، ما يعادل سعرًا فعليًا يبلغ حوالي 0.0368 دولار أمريكي في الدقيقة.
+\* Penagihan didasarkan pada total konsumsi token audio input dan output, yang dihitung dengan tarif 25 token per detik audio, yang setara dengan harga efektif sekitar $0,0368 per menit.
 
 ## Gemini 3.5 Flash-Lite
 
 *`gemini-3.5-flash-lite`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash-lite&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash-lite&hl=id)
 
-هذا النموذج هو الأكثر فعالية من حيث التكلفة في GA، وهو محسّن لتنفيذ المهام التي تتطلب عددًا كبيرًا من الوكلاء، والترجمة، ومعالجة البيانات البسيطة.
+Model GA kami yang paling hemat biaya, dioptimalkan untuk tugas agentic bervolume tinggi, terjemahan, dan pemrosesan data sederhana.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | 0.30 دولار أمريكي (نص / صورة / فيديو / صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫2.50 دولار أمريكي |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.03 $1.00 / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب شهريًا (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $0,30 (teks / gambar / video / audio) |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $2,50 |
+| Harga context caching | Tidak tersedia | $0,03 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 permintaan per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫0.15 دولار أمريكي (نص أو صورة أو فيديو أو مقطع صوتي) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | 1.25 دولارًا أمريكيًا (أو ما يعادلها بالعملة المحلية) |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.02 $1.00 / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $0,15 (teks / gambar / video / audio) |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $1.25 |
+| Harga context caching | Tidak tersedia | $0,02 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### التعبير
+### Lipat
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫0.15 دولار أمريكي (نص أو صورة أو فيديو أو مقطع صوتي) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | 1.25 دولارًا أمريكيًا (أو ما يعادلها بالعملة المحلية) |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.02 $1.00 / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $0,15 (teks / gambar / video / audio) |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $1.25 |
+| Harga context caching | Tidak tersedia | $0,02 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### الأولوية
+### Prioritas
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | $0.54 (نص / صورة / فيديو / صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫4.50 دولار أمريكي |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.05 $1.00 / 1,000,000 رمز مميّز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $0,54 (teks / gambar / video / audio) |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $4,50 |
+| Harga context caching | Tidak tersedia | $0,05 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+
+\* Permintaan yang dikirimkan pelanggan ke Gemini dapat menghasilkan satu atau beberapa
+kueri ke Google Penelusuran. Anda akan dikenai biaya untuk setiap kueri penelusuran individual yang dilakukan.
+
+\*\* Dapat diuji di Google AI Studio.
+
+\*\* Dapat diuji di Google AI Studio.
 
 ## Gemini 3.1 Flash-Lite
 
 *`gemini-3.1-flash-lite`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=id)
 
-هذا النموذج هو الأكثر فعالية من حيث التكلفة، وهو محسّن لتنفيذ المهام التي تتطلب عددًا كبيرًا من وكلاء الذكاء الاصطناعي والترجمة ومعالجة البيانات البسيطة.
+Model kami yang paling hemat biaya, dioptimalkan untuk tugas agentic bervolume tinggi, terjemahan, dan pemrosesan data sederhana.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫0.25 دولار أمريكي (نص / صورة / فيديو) 0.50 دولار أمريكي (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫1.50 دولار أمريكي |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.025 دولار أمريكي (نص/صورة/فيديو) ‫0.05 دولار أمريكي (صوت) ‫1.00 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $0,25 (teks / gambar / video) $0,50 (audio) |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $1,50 |
+| Harga context caching | Tidak tersedia | $0,025 (teks / gambar / video) $0,05 (audio) $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫0.125 دولار أمريكي (نص / صورة / فيديو) 0.25 دولار أمريكي (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | 0.75 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.0125 دولار أمريكي (نص/صورة/فيديو) 0.025 دولار أمريكي (صوت) 0.50 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $0,125 (teks / gambar / video) $0,25 (audio) |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $0,75 |
+| Harga context caching | Tidak tersedia | $0,0125 (teks / gambar / video) $0,025 (audio) $0,50 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### التعبير
+### Lipat
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫0.125 دولار أمريكي (نص / صورة / فيديو) 0.25 دولار أمريكي (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | 0.75 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.0125 دولار أمريكي (نص/صورة/فيديو) 0.025 دولار أمريكي (صوت) 0.50 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $0,125 (teks / gambar / video) $0,25 (audio) |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $0,75 |
+| Harga context caching | Tidak tersedia | $0,0125 (teks / gambar / video) $0,025 (audio) $0,50 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### الأولوية
+### Prioritas
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫0.45 دولار أمريكي (نص أو صورة أو فيديو) 0.90 دولار أمريكي (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫2.70 دولار أمريكي |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.045 دولار أمريكي (نص / صورة / فيديو) ‫0.09 دولار أمريكي (صوت) ‫1.80 دولار أمريكي / مليون رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $0,45 (teks / gambar / video) $0,90 (audio) |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $2,70 |
+| Harga context caching | Tidak tersedia | $0,045 (teks / gambar / video) $0,09 (audio) $1,80 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-\* قد يؤدي الطلب الذي يرسله العميل إلى Gemini إلى إنشاء طلب بحث واحد أو أكثر إلى &quot;بحث Google&quot;. سيتم تحصيل رسوم منك مقابل كل طلب بحث فردي يتم إجراؤه.
+\* Permintaan yang dikirimkan pelanggan ke Gemini dapat menghasilkan satu atau beberapa
+kueri ke Google Penelusuran. Anda akan dikenai biaya untuk setiap kueri penelusuran individual yang dilakukan.
 
-## معاينة Gemini Omni Flash
+\*\* Dapat diuji di Google AI Studio.
+
+## Pratinjau Gemini Omni Flash
 
 *`gemini-omni-flash-preview`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-flash-preview&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-flash-preview&hl=id)
 
-جيلنا التالي من نماذج إنشاء الفيديوهات وتعديلها، وهو متاح للمطوّرين في المستوى المدفوع من Gemini API.
+Model pengeditan dan pembuatan video generasi berikutnya kami, yang tersedia bagi developer di tingkat berbayar Gemini API.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫1.50 دولار أمريكي (نص / صورة / فيديو / صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫9.00 دولار أمريكي (نص) ‫17.50 دولار أمريكي (فيديو)\* |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $1,50 (teks / gambar / video / audio) |
+| Harga output (termasuk token pemikiran) | Tidak tersedia | $9,00 (teks) $17,50 (video)\* |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-\* تستند الفوترة إلى إجمالي استهلاك الرموز المميزة للردّ، ويتم احتسابها بمعدل 5,792 رمزًا مميزًا في الثانية الواحدة من فيديو بدقة 720 بكسل. في إطار "الأسعار العادية"، يعادل ذلك سعرًا فعليًا يبلغ حوالي 0.10 دولار أمريكي في الثانية.
+\* Penagihan didasarkan pada total konsumsi token output, yang dihitung dengan kecepatan 5.792 token per detik video 720p. Dengan harga Standar, ini setara dengan harga efektif sekitar $0,10 per detik.
 
-## معاينة Gemini 3.1 Pro
+## Pratinjau Gemini 3.1 Pro
 
-‫*`gemini-3.1-pro-preview` و`gemini-3.1-pro-preview-customtools`*
+*`gemini-3.1-pro-preview` dan `gemini-3.1-pro-preview-customtools`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=id)
 
-أحدث التحسينات على الأداء والذكاء وسهولة الاستخدام في أفضل سلسلة نماذج في العالم من حيث فهم المحتوى المتعدّد الوسائط وإمكانات بالذكاء الاصطناعي الوكيل والبرمجة الحدسية
+Peningkatan terbaru pada performa, kecerdasan, dan kegunaan untuk rangkaian model terbaik di dunia untuk pemahaman multimodal, kemampuan agentic, dan vibe-coding.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫2.00 دولار أمريكي، الطلبات التي تتضمّن أقل من أو يساوي 200 ألف رمز مميّز ‫4.00 دولار أمريكي، الطلبات التي تتضمّن أكثر من 200 ألف رمز مميّز |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫12.00 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز ‫18.00 دولار أمريكي، الطلبات > 200 ألف |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.20 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز ‫0.40 دولار أمريكي، الطلبات > 200 ألف رمز مميّز ‫4.50 دولار أمريكي لكل مليون رمز مميّز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $2,00, perintah <= 200 ribu token $4,00, perintah > 200 ribu token |
+| Harga output (termasuk token pemikiran) | Tidak tersedia | $12,00, perintah <= 200 ribu token $18,00, perintah > 200 ribu |
+| Harga context caching | Tidak tersedia | $0,20, perintah <= 200 ribu token $0,40, perintah > 200 ribu $4,50 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫1.00 دولار أمريكي، الطلبات التي تتضمّن أقل من أو يساوي 200 ألف رمز مميّز ‫2.00 دولار أمريكي، الطلبات التي تتضمّن أكثر من 200 ألف رمز مميّز |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫6.00 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز ‫9.00 دولار أمريكي، الطلبات > 200 ألف رمز مميّز |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | *مثل Standard*  0.20 دولار أمريكي، طلبات تتضمّن <= 200 ألف رمز مميز 0.40 دولار أمريكي، طلبات تتضمّن > 200 ألف رمز مميز 4.50 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب شهريًا (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $1,00, perintah <= 200 ribu token $2,00, perintah > 200 ribu token |
+| Harga output (termasuk token pemikiran) | Tidak tersedia | $6,00, perintah <= 200 ribu token $9,00, perintah > 200 ribu |
+| Harga context caching | Tidak tersedia | *Sama seperti Standard*  $0,20, perintah <= 200 ribu token $0,40, perintah > 200 ribu token $4,50 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 permintaan per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### التعبير
+### Lipat
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫1.00 دولار أمريكي، الطلبات التي تتضمّن أقل من أو يساوي 200 ألف رمز مميّز ‫2.00 دولار أمريكي، الطلبات التي تتضمّن أكثر من 200 ألف رمز مميّز |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫6.00 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز ‫9.00 دولار أمريكي، الطلبات > 200 ألف رمز مميّز |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | *مثل Standard*  0.20 دولار أمريكي، طلبات تتضمّن <= 200 ألف رمز مميز 0.40 دولار أمريكي، طلبات تتضمّن > 200 ألف رمز مميز 4.50 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب شهريًا (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $1,00, perintah <= 200 ribu token $2,00, perintah > 200 ribu token |
+| Harga output (termasuk token pemikiran) | Tidak tersedia | $6,00, perintah <= 200 ribu token $9,00, perintah > 200 ribu |
+| Harga context caching | Tidak tersedia | *Sama seperti Standard*  $0,20, perintah <= 200 ribu token $0,40, perintah > 200 ribu token $4,50 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 permintaan per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### الأولوية
+### Prioritas
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫3.60 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز ‫7.20 دولار أمريكي، الطلبات > 200 ألف رمز مميّز |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫21.60 دولار أمريكي، طلبات <= 200 ألف رمز مميّز ‫32.40 دولار أمريكي، طلبات > 200 ألف |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.36 دولار أمريكي، طلبات تتضمّن أقل من أو يساوي 200 ألف رمز مميّز ‫0.72 دولار أمريكي، طلبات تتضمّن أكثر من 200 ألف رمز مميّز ‫8.10 دولار أمريكي لكل مليون رمز مميّز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $3,60, perintah <= 200 ribu token $7,20, perintah > 200 ribu token |
+| Harga output (termasuk token pemikiran) | Tidak tersedia | $21,60, perintah <= 200 ribu token $32,40, perintah > 200 ribu |
+| Harga context caching | Tidak tersedia | $0,36, perintah <= 200 ribu token $0,72, perintah > 200 ribu $8,10 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-\* قد يؤدي الطلب الذي يرسله العميل إلى Gemini إلى إنشاء طلب بحث واحد أو أكثر إلى &quot;بحث Google&quot;. سيتم تحصيل رسوم منك مقابل كل طلب بحث فردي يتم إجراؤه.
+\* Permintaan yang dikirimkan pelanggan ke Gemini dapat menghasilkan satu atau beberapa
+kueri ke Google Penelusuran. Anda akan dikenai biaya untuk setiap kueri penelusuran individual yang dilakukan.
 
-## معاينة مباشرة في Gemini 3.1 Flash
+\*\* Dapat diuji di Google AI Studio.
+
+## Pratinjau Langsung Gemini 3.1 Flash
 
 *`gemini-3.1-flash-live-preview`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-live-preview&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-live-preview&hl=id)
 
-نموذجنا الصوتي الذي يتضمّن زمن انتقال منخفضًا والمحسّن للحوار في الوقت الفعلي مع رصد الفروق الدقيقة الصوتية والدقة الرقمية والوعي المتعدّد الوسائط.
+Model audio-ke-audio latensi rendah kami dioptimalkan untuk dialog real-time dengan deteksi nuansa akustik, presisi numerik, dan kesadaran multimodal.
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫0.75 دولار أمريكي (نص) ‫3.00 دولار أمريكي أو 0.005 دولار أمريكي للدقيقة (صوت) ‫1.00 دولار أمريكي أو 0.002 دولار أمريكي للدقيقة (صورة/فيديو) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫4.50 دولار أمريكي (نص) ‫12.00 دولار أمريكي أو 0.018 دولار أمريكي/دقيقة (صوت) |
-| تحديد المصدر من خلال "بحث Google"\* | متاح | ‫5,000 طلب بحث مجاني شهريًا (يتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $0,75 (teks) $3,00 atau $0,005/menit (audio) $1,00 atau $0,002/menit (gambar/video) |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $4,50 (teks) $12,00 atau $0,018/menit (audio) |
+| Grounding dengan Google Penelusuran\* | Didukung | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-\* قد يؤدي الطلب الذي يرسله العميل إلى Gemini إلى إنشاء طلب بحث واحد أو أكثر إلى &quot;بحث Google&quot;. سيتم تحصيل رسوم منك مقابل كل طلب بحث فردي يتم إجراؤه.
+\* Permintaan yang dikirimkan pelanggan ke Gemini dapat menghasilkan satu atau beberapa
+kueri ke Google Penelusuran. Anda akan dikenai biaya untuk setiap kueri penelusuran individual yang dilakukan.
 
-## ‫Gemini 3.1 Flash Image (‫Nano Banana 2) 🍌
+## Gemini 3.1 Flash Image (Nano Banana 2) 🍌
 
 *`gemini-3.1-flash-image`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-image&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-image&hl=id)
 
-تم تصميم نموذج إنشاء الصور Gemini 3.1 Flash ليكون سريعًا وفعّالاً، وهو مناسب للحصول على ردود تفاعلية سريعة ومعدّل أعلى لنقل البيانات.
+Model pembuatan Gambar Gemini 3.1 Flash yang didesain untuk kecepatan dan efisiensi ini efektif untuk respons interaktif yang cepat dan throughput tinggi.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫0.50 دولار أمريكي (نص/صورة) |
-| سعر المنتج | غير متوفر | ‫3 دولار أمريكي (النص والتفكير)  ‫60.00 دولار أمريكي (الصور)  أي ما يعادل 0.045 دولار أمريكي لكل صورة بدقة 0.5K\*  ‫0.067 دولار أمريكي لكل صورة بدقة 1K\*، ‫0.101 دولار أمريكي لكل صورة بدقة 2K\*، ‫0.151 دولار أمريكي لكل صورة بدقة 4K\* |
-| تحديد المصدر من خلال "بحث الويب من Google" و"بحث الصور من Google"\*\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث مستند إلى النص والصورة |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,50 (teks/gambar) |
+| Harga output | Tidak tersedia | $3 (teks dan pemikiran)  $60,00 (gambar)  Setara dengan $0,045 per 0,5K gambar\*  $0,067 per 1K gambar\*, $0,101 per 2K gambar\*, dan $0,151 per 4K gambar\*. |
+| Melakukan grounding dengan Google Penelusuran Web dan Gambar\*\* | Tidak tersedia\*\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan untuk perujukan berbasis teks dan gambar. |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫0.25 دولار أمريكي (نص وصورة) |
-| سعر المنتج | غير متوفر | ‫1.50 دولار أمريكي (النص والتفكير)  ‫30.00 دولار أمريكي (الصور)  أي ما يعادل 0.022 دولار أمريكي لكل صورة بدقة 0.5K\*  و0.034 دولار أمريكي لكل صورة بدقة 1K\*  و0.050 دولار أمريكي لكل صورة بدقة 2K\*  و0.076 دولار أمريكي لكل صورة بدقة 4K\*. |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,25 (teks, gambar) |
+| Harga output | Tidak tersedia | $1,50 (teks dan pemikiran)  $30,00 (gambar)  Setara dengan $0,022 per 0,5 ribu gambar\*  $0,034 per 1 ribu gambar\*,  $0,050 per 2 ribu gambar\*,  dan $0,076 per 4 ribu gambar\*. |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-\* يبلغ سعر مخرجات الصور 60 دولارًا أمريكيًا لكل مليون رمز مميّز.
-تستهلك الصور الناتجة بدقة 0.5K (512 بكسل) 747 رمزًا مميزًا، أي ما يعادل 0.045 دولار أمريكي لكل صورة. تستهلك الصور الناتجة بدقة 1K (1024x1024 بكسل) 1120 رمزًا مميزًا، وتساوي 0.067 دولار أمريكي لكل صورة. تستهلك الصور الناتجة بدقة 2K (2048x2048 بكسل) 1680 رمزًا مميزًا،
-وتساوي 0.101 دولار أمريكي لكل صورة. تستهلك صور الإخراج بدقة 4K (4096x4096 بكسل) 2520 رمزًا مميزًا، وتساوي 0.151 دولار أمريكي لكل صورة.
+\* Output gambar dikenai biaya $60 per 1.000.000 token.
+Gambar output pada 0,5K (512 piksel) menggunakan 747 token dan setara dengan $0,045 per
+gambar. Gambar output pada 1K (1024x1024 piksel) menggunakan 1.120 token dan setara dengan $0,067 per gambar. Gambar output pada 2K (2048x2048 piksel) menggunakan 1.680 token dan setara dengan $0,101 per gambar. Gambar output dalam 4K (4096x4096 piksel) menggunakan
+2.520 token dan setara dengan $0,151 per gambar.
 
-\*\* قد يؤدي الطلب الذي يرسله العميل إلى Gemini إلى إنشاء طلب بحث واحد أو أكثر إلى &quot;بحث Google&quot;. سيتم تحصيل رسوم منك مقابل كل طلب بحث فردي يتم إجراؤه. لا يتم تحصيل رسوم مقابل السياق الذي يتم استرجاعه (نص أو صور) والمقدَّم من خلال ميزة Grounding with Google Search، وذلك باعتباره رموزًا مميزة للإدخال.
+\*\* Permintaan yang dikirimkan pelanggan ke Gemini dapat menghasilkan satu atau beberapa
+kueri ke Google Penelusuran. Anda akan dikenai biaya untuk setiap kueri penelusuran individual yang dilakukan. Konteks yang diambil (teks atau gambar) yang disediakan oleh Perujukan dengan Google Penelusuran tidak dikenai biaya sebagai token input.
 
-## ‫Gemini 3.1 Flash Lite Image (Nano Banana 2 Lite) 🍌
+\*\*\* Dapat diuji di Google AI Studio.
+
+## Gambar Gemini 3.1 Flash Lite (Nano Banana 2 Lite) 🍌
 
 *`gemini-3.1-flash-lite-image`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-image&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-image&hl=id)
 
-تم تصميم نموذج Gemini 3.1‎ Flash Lite Image ليكون متخصصًا في الكفاءة ضمن مجموعة نماذج إنشاء الصور، وهو يهدف إلى توفير وقت استجابة فائق السرعة وإنشاء الصور وتعديلها بطريقة فعالة من حيث التكلفة.
+Didesain sebagai spesialis efisiensi dalam rangkaian model pembuatan gambar, model Gemini 3.1 Flash Lite Image dirancang untuk latensi sangat rendah serta pembuatan dan pengeditan gambar yang hemat biaya.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫0.25 دولار أمريكي (نص/صورة/فيديو) |
-| سعر المنتج | غير متوفر | ‫1.50 دولار أمريكي (نص وتفكير)  ‫30.00 دولار أمريكي (صور)  أي ما يعادل 0.0336 دولار أمريكي لكل صورة بدقة 1000 بكسل\* |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,25 (teks/gambar/video) |
+| Harga output | Tidak tersedia | $1,50 (teks dan pemikiran)  $30,00 (gambar)  Setara dengan $0,0336 per gambar beresolusi 1K\* |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫0.125 دولار أمريكي (نص/صورة/فيديو) |
-| سعر المنتج | غير متوفر | $0.75 (النص والتفكير)  $15.00 (الصور)  أي ما يعادل $0.0168 لكل صورة بدقة 1000 بكسل\* |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,125 (teks/gambar/video) |
+| Harga output | Tidak tersedia | $0,75 (teks dan pemikiran)  $15,00 (gambar)  Setara dengan $0,0168 per gambar resolusi 1K\* |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-\* يبلغ سعر مخرجات الصور 30 دولارًا أمريكيًا لكل مليون رمز مميّز. تستهلك الصور الناتجة بدقة 1K (1024x1024 بكسل) 1120 رمزًا مميزًا، أي ما يعادل 0.0336 دولار أمريكي لكل صورة.
+\* Output gambar dihargai $30 per 1.000.000 token. Gambar output pada 1K (1024x1024 piksel) menggunakan 1.120 token dan setara dengan $0,0336 per gambar.
 
-## معاينة ميزة "تحويل النص إلى كلام" في Gemini 3.1 Flash
+## Pratinjau Gemini 3.1 Flash TTS
 
 *`gemini-3.1-flash-tts-preview`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-tts-preview&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-tts-preview&hl=id)
 
-‫3.1 Flash Text-to-Speech هو نموذج صوتي لتحويل النص إلى كلام تم تحسينه لتقديم أداء جيد مقابل السعر،
-ووقت استجابة منخفض، وإمكانية التحكّم في إنشاء الكلام.
+Model audio Text-to-Speech 3.1 Flash kami dioptimalkan untuk performa harga yang baik, pembuatan ucapan yang mudah dikontrol, dan latensi rendah.
 
-قد تتغيّر نماذج المعاينة قبل أن تصبح ثابتة، وقد تتضمّن حدودًا أكثر صرامة بشأن عدد الطلبات المسموح بها.
+Model pratinjau dapat berubah sebelum menjadi stabil dan memiliki batas laju yang lebih ketat.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫$1.00 (نص) |
-| سعر المنتج | بدون أي تكلفة | ‫$20.00 (محتوى صوتي) |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $1,00 (teks) |
+| Harga output | Tanpa biaya | $20,00 (audio) |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫0.50 دولار أمريكي (نص) |
-| سعر المنتج | غير متوفر | ‫$10.00 (محتوى صوتي) |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,50 (teks) |
+| Harga output | Tidak tersedia | Rp100.000 (audio) |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-\* تتوافق الرموز المميزة الصوتية مع 25 رمزًا مميزًا لكل ثانية من الصوت.
+\* Token audio sesuai dengan 25 token per detik audio.
 
-## معاينة Gemini 3 Flash
+## Pratinjau Gemini 3 Flash
 
 *`gemini-3-flash-preview`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-3-flash-preview&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-3-flash-preview&hl=id)
 
-نموذجنا الأكثر ذكاءً والمصمَّم للعمل بسرعة، إذ يجمع بين الذكاء المتقدّم
-والبحث والتأسيس الفائقَين.
+Model tercerdas kami yang dibuat untuk kecepatan, menggabungkan kecerdasan terdepan dengan penelusuran dan perujukan yang unggul.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫0.50 دولار أمريكي (نص / صورة / فيديو) 1.00 دولار أمريكي (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | $3,00 |
-| سعر التخزين المؤقت حسب السياق | بدون أي تكلفة | ‫0.05 دولار أمريكي (نص/صورة/فيديو) 0.10 دولار أمريكي (صوت) 1.00 دولار أمريكي لكل مليون رمز مميّز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $0,50 (teks / gambar / video) $1,00 (audio) |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $3,00 |
+| Harga context caching | Tanpa biaya | $0,05 (teks / gambar / video) $0,10 (audio) $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫0.25 دولار أمريكي (نص / صورة / فيديو) 0.50 دولار أمريكي (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫1.50 دولار أمريكي |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | *السعر نفسه كما في Standard*  ‫0.05 دولار أمريكي (نص/صورة/فيديو)  ‫0.10 دولار أمريكي (صوت)  ‫1.00 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب شهريًا (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,25 (teks / gambar / video) $0,50 (audio) |
+| Harga output (termasuk token pemikiran) | Tidak tersedia | $1,50 |
+| Harga context caching | Tidak tersedia | *Sama seperti Standard*  $0,05 (teks / gambar / video)  $0,10 (audio)  $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 permintaan per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### التعبير
+### Lipat
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫0.25 دولار أمريكي (نص / صورة / فيديو) 0.50 دولار أمريكي (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫1.50 دولار أمريكي |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | *السعر نفسه كما في Standard*  ‫0.05 دولار أمريكي (نص/صورة/فيديو)  ‫0.10 دولار أمريكي (صوت)  ‫1.00 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب شهريًا (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,25 (teks / gambar / video) $0,50 (audio) |
+| Harga output (termasuk token pemikiran) | Tidak tersedia | $1,50 |
+| Harga context caching | Tidak tersedia | *Sama seperti Standard*  $0,05 (teks / gambar / video)  $0,10 (audio)  $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 permintaan per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### الأولوية
+### Prioritas
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫0.90 دولار أمريكي (نص / صورة / فيديو) 1.80 دولار أمريكي (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫5.40 دولار أمريكي |
-| سعر التخزين المؤقت حسب السياق | بدون أي تكلفة | ‫0.09 دولار أمريكي (نص/صورة/فيديو) ‫0.18 دولار أمريكي (صوت) ‫1.80 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $0,90 (teks / gambar / video) $1,80 (audio) |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $5,40 |
+| Harga context caching | Tanpa biaya | $0,09 (teks / gambar / video) $0,18 (audio) $1,80 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-\* قد يؤدي الطلب الذي يرسله العميل إلى Gemini إلى إنشاء طلب بحث واحد أو أكثر إلى &quot;بحث Google&quot;. سيتم تحصيل رسوم منك مقابل كل طلب بحث فردي يتم إجراؤه.
+\* Permintaan yang dikirimkan pelanggan ke Gemini dapat menghasilkan satu atau beberapa
+kueri ke Google Penelusuran. Anda akan dikenai biaya untuk setiap kueri penelusuran individual yang dilakukan.
 
-## صورة Gemini 3 Pro (‫Nano Banana Pro) 🍌
+\*\* Dapat diuji di Google AI Studio.
+
+## Gambar Gemini 3 Pro (Nano Banana Pro) 🍌
 
 *`gemini-3-pro-image`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3-pro-image&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3-pro-image&hl=id)
 
-نموذجنا الأصلي لإنشاء الصور، وهو نموذج محسّن من حيث السرعة والمرونة والفهم السياقي. يتم تسعير **إدخال النصوص وإخراجها** بالسعر نفسه الذي يتم به تسعير [Gemini 3.1 Pro](#gemini-3.1-pro-preview).
+Model pembuatan gambar native kami, yang dioptimalkan untuk kecepatan, fleksibilitas, dan pemahaman kontekstual. **Input dan output teks** memiliki harga yang sama dengan
+[Gemini 3.1 Pro](#gemini-3.1-pro-preview).
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫2.00 دولار أمريكي (نص/صورة)،  أي ما يعادل 0.0011 دولار أمريكي لكل صورة\* |
-| سعر المنتج | غير متوفر | ‫12.00 دولار أمريكي (نص وتفكير)  ‫120.00 دولار أمريكي (صور)  أي ما يعادل 0.134 دولار أمريكي لكل صورة بدقة 1000/2000 بكسل\*\*  و0.24 دولار أمريكي لكل صورة بدقة 4000 بكسل\*\* |
-| تحديد المصدر من خلال "بحث Google"\*\*\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $2,00 (teks/gambar),  setara dengan $0,0011 per gambar\* |
+| Harga output | Tidak tersedia | $12,00 (teks dan pemikiran)  $120,00 (gambar)  Setara dengan $0,134 per gambar 1K/2K\*\*  dan $0,24 per gambar 4K\*\* |
+| Grounding dengan Google Penelusuran\*\*\* | Tidak tersedia\*\*\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫1.00 دولار أمريكي (نص)، ‫0.0006 دولار أمريكي (صورة)\* |
-| سعر المنتج | غير متوفر | ‫6.00 دولار أمريكي (النص والتفكير)  ‫0.067 دولار أمريكي لكل صورة بدقة 1000/2000 بكسل\*\*  ‫0.12 دولار أمريكي لكل صورة بدقة 4000 بكسل\*\* |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $1,00 (teks), $0,0006 (gambar)\* |
+| Harga output | Tidak tersedia | $6,00 (teks dan pemikiran)  $0,067 per gambar 1K/2K\*\*  $0,12 per gambar 4K\*\* |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### التعبير
+### Lipat
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫1.00 دولار أمريكي (نص)، ‫0.0006 دولار أمريكي (صورة)\* |
-| سعر المنتج | غير متوفر | ‫6.00 دولار أمريكي (النص والتفكير)  ‫0.067 دولار أمريكي لكل صورة بدقة 1000/2000 بكسل\*\*  ‫0.12 دولار أمريكي لكل صورة بدقة 4000 بكسل\*\* |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $1,00 (teks), $0,0006 (gambar)\* |
+| Harga output | Tidak tersedia | $6,00 (teks dan pemikiran)  $0,067 per gambar 1K/2K\*\*  $0,12 per gambar 4K\*\* |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### الأولوية
+### Prioritas
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫3.60 دولار أمريكي (نص/صورة) |
-| سعر المنتج | غير متوفر | ‫21.60 دولار أمريكي (النصوص والتفكير)  ‫216.00 دولار أمريكي (الصور) |
-| تحديد المصدر من خلال "بحث Google"\*\*\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $3,60 (teks/gambar) |
+| Harga output | Tidak tersedia | $21,60 (teks dan pemikiran)  $216,00 (gambar) |
+| Grounding dengan Google Penelusuran\*\*\* | Tidak tersedia\*\*\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-\* تم ضبط إدخال الصور على 560 رمزًا مميزًا أو 0.0011 دولار أمريكي لكل صورة.
+\* Input gambar ditetapkan pada 560 token atau $0,0011 per gambar.
 
-\*\* تبلغ تكلفة إنتاج الصور 120 دولارًا أمريكيًا لكل مليون رمز مميّز. تستهلك الصور الناتجة التي تتراوح دقتها بين 1024×1024 بكسل (1K) و2048×2048 بكسل (2K) 1120 رمزًا مميزًا،
-وتساوي تكلفتها 0.134 دولار أمريكي لكل صورة. تستهلك الصور الناتجة التي تصل دقتها إلى 4096x4096 بكسل (4K) 2000 رمز مميز، وتبلغ تكلفتها 0.24 دولار أمريكي لكل صورة.
+\*\* Output gambar dihargai $120 per 1.000.000 token. Gambar output dari 1024x1024 piksel (1K) hingga 2048x2048 piksel (2K) menggunakan 1.120 token dan setara dengan $0,134 per gambar. Gambar output hingga 4096x4096 piksel (4K) menggunakan
+2.000 token dan setara dengan $0,24 per gambar.
 
-\*\*\* قد يؤدي الطلب الذي يرسله العميل إلى Gemini إلى إنشاء طلب بحث واحد أو أكثر في "بحث Google". سيتم تحصيل رسوم منك مقابل كل طلب بحث فردي يتم إجراؤه.
+\*\*\* Permintaan yang dikirimkan pelanggan ke Gemini dapat menghasilkan satu atau beberapa kueri ke Google Penelusuran. Anda akan dikenai biaya untuk setiap kueri penelusuran individual yang dilakukan.
+
+\*\*\*\* Dapat diuji di Google AI Studio.
 
 ## Gemini 2.5 Pro
 
 *`gemini-2.5-pro`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-2.5-pro&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-2.5-pro&hl=id)
 
-نموذجنا المتطوّر المتعدّد الأغراض الذي يتفوّق في الترميز ومهام الاستدلال المعقّدة.
+Model serbaguna canggih kami, yang unggul dalam tugas coding dan penalaran yang kompleks.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫1.25 دولار أمريكي، الطلبات التي تتضمّن أقل من أو يساوي 200 ألف رمز مميّز ‫2.50 دولار أمريكي، الطلبات التي تتضمّن أكثر من 200 ألف رمز مميّز |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫10.00 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز ‫15.00 دولار أمريكي، الطلبات > 200 ألف |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.125 دولار أمريكي، الطلبات <= 200 ألف رمز مميز ‫0.25 دولار أمريكي، الطلبات > 200 ألف رمز مميز ‫4.50 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫1,500 طلب في الدقيقة (مجاني)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫10,000 طلب في الدقيقة (مجانًا)، ثم 25 دولارًا أمريكيًا لكل 1,000 طلب أساسي |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $1,25, perintah <= 200 ribu token $2,50, perintah > 200 ribu token |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $10,00, perintah <= 200 ribu token $15,00, perintah > 200 ribu |
+| Harga context caching | Tidak tersedia | $0,125, perintah <= 200 ribu token $0,25, perintah > 200 ribu token $4,50 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran | Tidak tersedia | 1.500 RPD (gratis), lalu $35 / 1.000 perintah berbasis data |
+| Grounding with Google Maps | Tidak tersedia | 10.000 RPD (gratis), lalu $25 / 1.000 perintah yang memiliki rujukan |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫0.625 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز ‫1.25 دولار أمريكي، الطلبات > 200 ألف رمز مميّز |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫5.00 دولار أمريكي، الطلبات <= 200 ألف رمز ‫7.50 دولار أمريكي، الطلبات > 200 ألف |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.125 دولار أمريكي، الطلبات <= 200 ألف رمز مميز ‫0.25 دولار أمريكي، الطلبات > 200 ألف رمز مميز ‫4.50 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫1,500 طلب في الدقيقة (مجاني)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | غير متوفر |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,625, perintah <= 200 ribu token $1,25, perintah > 200 ribu token |
+| Harga output (termasuk token pemikiran) | Tidak tersedia | $5,00, perintah <= 200 ribu token $7,50, perintah > 200 ribu |
+| Harga context caching | Tidak tersedia | $0,125, perintah <= 200 ribu token $0,25, perintah > 200 ribu token $4,50 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran | Tidak tersedia | 1.500 RPD (gratis), lalu $35 / 1.000 perintah berbasis data |
+| Grounding with Google Maps | Tidak tersedia | Tidak tersedia |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### التعبير
+### Lipat
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫0.625 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز ‫1.25 دولار أمريكي، الطلبات > 200 ألف رمز مميّز |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫5.00 دولار أمريكي، الطلبات <= 200 ألف رمز ‫7.50 دولار أمريكي، الطلبات > 200 ألف |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.125 دولار أمريكي، الطلبات <= 200 ألف رمز مميز ‫0.25 دولار أمريكي، الطلبات > 200 ألف رمز مميز ‫4.50 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫1,500 طلب في الدقيقة (مجاني)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | غير متوفر |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,625, perintah <= 200 ribu token $1,25, perintah > 200 ribu token |
+| Harga output (termasuk token pemikiran) | Tidak tersedia | $5,00, perintah <= 200 ribu token $7,50, perintah > 200 ribu |
+| Harga context caching | Tidak tersedia | $0,125, perintah <= 200 ribu token $0,25, perintah > 200 ribu token $4,50 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran | Tidak tersedia | 1.500 RPD (gratis), lalu $35 / 1.000 perintah berbasis data |
+| Grounding with Google Maps | Tidak tersedia | Tidak tersedia |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### الأولوية
+### Prioritas
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫2.25 دولار أمريكي، الطلبات التي تتضمّن أقل من أو يساوي 200 ألف رمز مميّز ‫4.50 دولار أمريكي، الطلبات التي تتضمّن أكثر من 200 ألف رمز مميّز |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫18.00 دولار أمريكي، الطلبات <= 200 ألف رمز مميز ‫27.00 دولار أمريكي، الطلبات > 200 ألف |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.225 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز 0.45 دولار أمريكي، الطلبات > 200 ألف رمز مميّز 8.10 دولار أمريكي لكل مليون رمز مميّز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫1,500 طلب في الدقيقة (مجاني)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | ‫10,000 طلب في الدقيقة (مجانًا)، ثم 25 دولارًا أمريكيًا لكل 1,000 طلب أساسي |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $2,25, perintah <= 200 ribu token $4,50, perintah > 200 ribu token |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $18,00, perintah <= 200 ribu token $27,00, perintah > 200 ribu |
+| Harga context caching | Tidak tersedia | $0,225, perintah <= 200 ribu token $0,45, perintah > 200 ribu token $8,10 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran | Tidak tersedia | 1.500 RPD (gratis), lalu $35 / 1.000 perintah berbasis data |
+| Grounding with Google Maps | Tidak tersedia | 10.000 RPD (gratis), lalu $25 / 1.000 perintah yang memiliki rujukan |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
 ## Gemini 2.5 Flash
 
 *`gemini-2.5-flash`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash&hl=id)
 
-أول نموذج استدلال هجين لدينا يتيح قدرة استيعاب مليون رمز مميّز ويوفّر ميزانيات للتفكير.
+Model penalaran hybrid pertama kami yang mendukung jendela konteks 1 juta token dan memiliki anggaran berpikir.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | $0.30 (نص / صورة / فيديو) $1.00 (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫2.50 دولار أمريكي |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.03 دولار أمريكي (نص / صورة / فيديو) 0.1 دولار أمريكي (صوت) 1.00 دولار أمريكي / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Search" | بدون أي تكلفة، ما يصل إلى 500 RPD (الحدّ الأقصى مشترك مع Flash-Lite RPD) | ‫1,500 طلب في الدقيقة (مجانًا، الحدّ الأقصى مشترك مع Flash-Lite RPD)، ثم 35 دولار أمريكي لكل 1,000 طلب أساسي |
-| استخدام "خرائط Google" كمصدر | ‫500 روبية باكستانية | ‫1,500 طلب في اليوم (مجانًا)، ثم 25 دولارًا أمريكيًا لكل 1,000 طلب |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $0,30 (teks / gambar / video) $1,00 (audio) |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $2,50 |
+| Harga context caching | Tidak tersedia | $0,03 (teks / gambar / video) $0,1 (audio) $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran | Gratis, hingga 500 RPD (batas yang sama dengan RPD Flash-Lite) | 1.500 RPD (gratis, batasnya sama dengan RPD Flash-Lite), lalu $35 / 1.000 perintah yang dilarang |
+| Grounding with Google Maps | 500 RPD | 1.500 RPD (gratis), lalu $25 / 1.000 perintah yang memiliki rujukan |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫0.15 دولار أمريكي (نص أو صورة أو فيديو) ‫0.50 دولار أمريكي (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | 1.25 دولارًا أمريكيًا (أو ما يعادلها بالعملة المحلية) |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.03 دولار أمريكي (نص / صورة / فيديو) 0.1 دولار أمريكي (صوت) 1.00 دولار أمريكي / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫1,500 طلب في الدقيقة (مجانًا، الحدّ الأقصى مشترك مع Flash-Lite RPD)، ثم 35 دولار أمريكي لكل 1,000 طلب أساسي |
-| استخدام "خرائط Google" كمصدر | غير متوفر | غير متوفر |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,15 (teks / gambar / video) $0,50 (audio) |
+| Harga output (termasuk token pemikiran) | Tidak tersedia | $1.25 |
+| Harga context caching | Tidak tersedia | $0,03 (teks / gambar / video) $0,1 (audio) $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran | Tidak tersedia | 1.500 RPD (gratis, batasnya sama dengan RPD Flash-Lite), lalu $35 / 1.000 perintah yang dilarang |
+| Grounding with Google Maps | Tidak tersedia | Tidak tersedia |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### التعبير
+### Lipat
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫0.15 دولار أمريكي (نص أو صورة أو فيديو) ‫0.50 دولار أمريكي (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | 1.25 دولارًا أمريكيًا (أو ما يعادلها بالعملة المحلية) |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.03 دولار أمريكي (نص / صورة / فيديو) 0.1 دولار أمريكي (صوت) 1.00 دولار أمريكي / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫1,500 طلب في الدقيقة (مجانًا، الحدّ الأقصى مشترك مع Flash-Lite RPD)، ثم 35 دولار أمريكي لكل 1,000 طلب أساسي |
-| استخدام "خرائط Google" كمصدر | غير متوفر | غير متوفر |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,15 (teks / gambar / video) $0,50 (audio) |
+| Harga output (termasuk token pemikiran) | Tidak tersedia | $1.25 |
+| Harga context caching | Tidak tersedia | $0,03 (teks / gambar / video) $0,1 (audio) $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran | Tidak tersedia | 1.500 RPD (gratis, batasnya sama dengan RPD Flash-Lite), lalu $35 / 1.000 perintah yang dilarang |
+| Grounding with Google Maps | Tidak tersedia | Tidak tersedia |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### الأولوية
+### Prioritas
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫0.54 دولار أمريكي (نص / صورة / فيديو) 1.80 دولار أمريكي (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫4.50 دولار أمريكي |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.054 دولار أمريكي (نص / صورة / فيديو) 0.18 دولار أمريكي (صوت) 1.80 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Search" | بدون أي تكلفة، ما يصل إلى 500 RPD (الحدّ الأقصى مشترك مع Flash-Lite RPD) | ‫1,500 طلب في الدقيقة (مجانًا، الحدّ الأقصى مشترك مع Flash-Lite RPD)، ثم 35 دولار أمريكي لكل 1,000 طلب أساسي |
-| استخدام "خرائط Google" كمصدر | ‫500 روبية باكستانية | ‫1,500 طلب في اليوم (مجانًا)، ثم 25 دولارًا أمريكيًا لكل 1,000 طلب |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $0,54 (teks / gambar / video) $1,80 (audio) |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $4,50 |
+| Harga context caching | Tidak tersedia | $0,054 (teks / gambar / video) $0,18 (audio) $1,80 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran | Gratis, hingga 500 RPD (batas yang sama dengan RPD Flash-Lite) | 1.500 RPD (gratis, batasnya sama dengan RPD Flash-Lite), lalu $35 / 1.000 perintah yang dilarang |
+| Grounding with Google Maps | 500 RPD | 1.500 RPD (gratis), lalu $25 / 1.000 perintah yang memiliki rujukan |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
 ## Gemini 2.5 Flash-Lite
 
 *`gemini-2.5-flash-lite`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=id)
 
-هذا النموذج هو الأصغر والأكثر فعالية من حيث التكلفة، وهو مصمّم للاستخدام على نطاق واسع.
+Model terkecil dan paling hemat biaya kami, yang dibuat untuk penggunaan dalam skala besar.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال (نص أو صورة أو فيديو) | بدون أي تكلفة | ‫0.10 دولار أمريكي (نص أو صورة أو فيديو) ‫0.30 دولار أمريكي (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | 0.40 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.01 دولار أمريكي (نص/صورة/فيديو) 0.03 دولار أمريكي (صوت) 1.00 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Search" | بدون رسوم، ما يصل إلى 500 RPD (الحدّ الأقصى مشترك مع Flash RPD) | ‫1,500 طلب بحث في اليوم (مجانًا، الحدّ الأقصى مشترك مع Flash RPD)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب بحث مستند إلى بيانات واقعية |
-| استخدام "خرائط Google" كمصدر | ‫500 روبية باكستانية | ‫1,500 طلب في اليوم (مجانًا)، ثم 25 دولارًا أمريكيًا لكل 1,000 طلب |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input (teks, gambar, video) | Tanpa biaya | $0,10 (teks / gambar / video) $0,30 (audio) |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $0,40 |
+| Harga context caching | Tidak tersedia | $0,01 (teks / gambar / video) $0,03 (audio) $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran | Gratis, hingga 500 RPD (batas yang sama dengan RPD Flash) | 1.500 RPD (gratis, batas dibagikan dengan RPD Flash), lalu $35 / 1.000 perintah yang sudah diproses |
+| Grounding with Google Maps | 500 RPD | 1.500 RPD (gratis), lalu $25 / 1.000 perintah yang memiliki rujukan |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال (نص أو صورة أو فيديو) | غير متوفر | ‫0.05 دولار أمريكي (نص أو صورة أو فيديو) ‫0.15 دولار أمريكي (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | 0,20 دولار أمريكي (أو ما يعادل هذا المبلغ بالعملة المحلية) |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.01 دولار أمريكي (نص/صورة/فيديو) 0.03 دولار أمريكي (صوت) 1.00 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫1,500 طلب بحث في اليوم (مجانًا، الحدّ الأقصى مشترك مع Flash RPD)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب بحث مستند إلى بيانات واقعية |
-| استخدام "خرائط Google" كمصدر | غير متوفر | غير متوفر |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input (teks, gambar, video) | Tidak tersedia | $0,05 (teks / gambar / video) $0,15 (audio) |
+| Harga output (termasuk token pemikiran) | Tidak tersedia | $0,20 |
+| Harga context caching | Tidak tersedia | $0,01 (teks / gambar / video) $0,03 (audio) $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran | Tidak tersedia | 1.500 RPD (gratis, batas dibagikan dengan RPD Flash), lalu $35 / 1.000 perintah yang sudah diproses |
+| Grounding with Google Maps | Tidak tersedia | Tidak tersedia |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### التعبير
+### Lipat
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال (نص أو صورة أو فيديو) | غير متوفر | ‫0.05 دولار أمريكي (نص أو صورة أو فيديو) ‫0.15 دولار أمريكي (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | 0,20 دولار أمريكي (أو ما يعادل هذا المبلغ بالعملة المحلية) |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.01 دولار أمريكي (نص/صورة/فيديو) 0.03 دولار أمريكي (صوت) 1.00 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫1,500 طلب بحث في اليوم (مجانًا، الحدّ الأقصى مشترك مع Flash RPD)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب بحث مستند إلى بيانات واقعية |
-| استخدام "خرائط Google" كمصدر | غير متوفر | غير متوفر |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input (teks, gambar, video) | Tidak tersedia | $0,05 (teks / gambar / video) $0,15 (audio) |
+| Harga output (termasuk token pemikiran) | Tidak tersedia | $0,20 |
+| Harga context caching | Tidak tersedia | $0,01 (teks / gambar / video) $0,03 (audio) $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran | Tidak tersedia | 1.500 RPD (gratis, batas dibagikan dengan RPD Flash), lalu $35 / 1.000 perintah yang sudah diproses |
+| Grounding with Google Maps | Tidak tersedia | Tidak tersedia |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### الأولوية
+### Prioritas
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال (نص أو صورة أو فيديو) | بدون أي تكلفة | ‫0.18 دولار أمريكي (نص أو صورة أو فيديو) 0.54 دولار أمريكي (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | $0.72 |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.018 دولار أمريكي (نص/صورة/فيديو) ‫0.054 دولار أمريكي (صوت) ‫1.80 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Search" | بدون رسوم، ما يصل إلى 500 RPD (الحدّ الأقصى مشترك مع Flash RPD) | ‫1,500 طلب بحث في اليوم (مجانًا، الحدّ الأقصى مشترك مع Flash RPD)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب بحث مستند إلى بيانات واقعية |
-| استخدام "خرائط Google" كمصدر | ‫500 روبية باكستانية | ‫1,500 طلب في اليوم (مجانًا)، ثم 25 دولارًا أمريكيًا لكل 1,000 طلب |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input (teks, gambar, video) | Tanpa biaya | $0,18 (teks / gambar / video) $0,54 (audio) |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $0,72 |
+| Harga context caching | Tidak tersedia | $0,018 (teks / gambar / video) $0,054 (audio) $1,80 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran | Gratis, hingga 500 RPD (batas yang sama dengan RPD Flash) | 1.500 RPD (gratis, batas dibagikan dengan RPD Flash), lalu $35 / 1.000 perintah yang sudah diproses |
+| Grounding with Google Maps | 500 RPD | 1.500 RPD (gratis), lalu $25 / 1.000 perintah yang memiliki rujukan |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-## إصدار Gemini 2.5 Flash-Lite التجريبي
+## Pratinjau Gemini 2.5 Flash-Lite
 
 *`gemini-2.5-flash-lite-preview-09-2025`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite-preview-09-2025&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite-preview-09-2025&hl=id)
 
-أحدث نموذج يستند إلى Gemini 2.5 Flash lite، وهو محسّن من أجل الفعالية من حيث التكلفة، ومعدّل أعلى لنقل البيانات، والجودة العالية.
+Model terbaru berdasarkan Gemini 2.5 Flash lite yang dioptimalkan untuk efisiensi biaya, throughput tinggi, dan kualitas tinggi.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال (نص أو صورة أو فيديو) | بدون أي تكلفة | ‫0.10 دولار أمريكي (نص أو صورة أو فيديو) ‫0.30 دولار أمريكي (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | 0.40 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.01 دولار أمريكي (نص/صورة/فيديو) 0.03 دولار أمريكي (صوت) 1.00 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Search" | بدون رسوم، ما يصل إلى 500 RPD (الحدّ الأقصى مشترك مع Flash RPD) | ‫1,500 طلب بحث في اليوم (مجانًا، الحدّ الأقصى مشترك مع Flash RPD)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب بحث مستند إلى بيانات واقعية |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input (teks, gambar, video) | Tanpa biaya | $0,10 (teks / gambar / video) $0,30 (audio) |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $0,40 |
+| Harga context caching | Tidak tersedia | $0,01 (teks / gambar / video) $0,03 (audio) $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran | Gratis, hingga 500 RPD (batas yang sama dengan RPD Flash) | 1.500 RPD (gratis, batas dibagikan dengan RPD Flash), lalu $35 / 1.000 perintah yang sudah diproses |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال (نص أو صورة أو فيديو) | غير متوفر | ‫0.05 دولار أمريكي (نص أو صورة أو فيديو) ‫0.15 دولار أمريكي (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | 0,20 دولار أمريكي (أو ما يعادل هذا المبلغ بالعملة المحلية) |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.01 دولار أمريكي (نص/صورة/فيديو) 0.03 دولار أمريكي (صوت) 1.00 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫1,500 طلب بحث في اليوم (مجانًا، الحدّ الأقصى مشترك مع Flash RPD)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب بحث مستند إلى بيانات واقعية |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input (teks, gambar, video) | Tidak tersedia | $0,05 (teks / gambar / video) $0,15 (audio) |
+| Harga output (termasuk token pemikiran) | Tidak tersedia | $0,20 |
+| Harga context caching | Tidak tersedia | $0,01 (teks / gambar / video) $0,03 (audio) $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran | Tidak tersedia | 1.500 RPD (gratis, batas dibagikan dengan RPD Flash), lalu $35 / 1.000 perintah yang sudah diproses |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-## Gemini 2.5 Flash Native Audio (Live API)
+## Audio Native Gemini 2.5 Flash (Live API)
 
 *`gemini-2.5-flash-native-audio-preview-12-2025`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com/app/live?hl=ar#gemini-2.5-flash-native-audio-preview-12-2025)
+[Coba di Google AI Studio](https://aistudio.google.com/app/live?hl=id#gemini-2.5-flash-native-audio-preview-12-2025)
 
-نماذج الصوت الأصلية في [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar) محسّنة لإنتاج مخرجات صوتية بجودة أعلى، مع تحسين السرعة الطبيعية للكلام، ومستوى الإسهاب، والمزاج.
+Model audio asli [Live API](https://ai.google.dev/gemini-api/docs/live?hl=id) kami dioptimalkan untuk output audio berkualitas lebih tinggi dengan kecepatan, kealamian suara, verbositas, dan suasana yang lebih baik.
 
-قد تتغيّر نماذج المعاينة قبل أن تصبح ثابتة، وقد تتضمّن حدودًا أكثر صرامة بشأن عدد الطلبات المسموح بها.
+Model pratinjau dapat berubah sebelum menjadi stabil dan memiliki batas laju yang lebih ketat.
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫0.50 دولار أمريكي (نص) 3.00 دولار أمريكي (صوت / فيديو) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫$2.00 (نص) $12.00 (صوت) |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $0,50 (teks) $3,00 (audio / video) |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $2,00 (teks) $12,00 (audio) |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-## ‫Gemini 2.5 Flash Image (Nano Banana) 🍌
+## Gemini 2.5 Flash Image (Nano Banana) 🍌
 
 *`gemini-2.5-flash-image`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=id)
 
-نموذجنا الأصلي لإنشاء الصور، وهو نموذج محسّن من حيث السرعة والمرونة والفهم السياقي. يتم تسعير إدخال النص وإخراجه بالسعر نفسه المحدّد في
-[‫2.5 Flash](#gemini-2.5-flash).
+Model pembuatan gambar native kami, yang dioptimalkan untuk kecepatan, fleksibilitas, dan pemahaman kontekstual. Input dan output teks dihargai sama dengan
+[2.5 Flash](#gemini-2.5-flash).
 
-قد تتغيّر نماذج المعاينة قبل أن تصبح ثابتة، وقد تتضمّن حدودًا أكثر صرامة بشأن عدد الطلبات المسموح بها.
+Model pratinjau dapat berubah sebelum menjadi stabil dan memiliki batas laju yang lebih ketat.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫0.30 دولار أمريكي (نص / صورة) |
-| سعر المنتج | غير متوفر | ‫0.039 دولار أمريكي لكل صورة\* |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,30 (teks / gambar) |
+| Harga output | Tidak tersedia | $0,039 per gambar\* |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | 0.15 دولار أمريكي (نص / صورة) |
-| سعر المنتج | غير متوفر | ‫0.0195 دولار أمريكي لكل صورة\* |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,15 (teks / gambar) |
+| Harga output | Tidak tersedia | $0,0195 per gambar\* |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### التعبير
+### Lipat
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | 0.15 دولار أمريكي (نص / صورة) |
-| سعر المنتج | غير متوفر | ‫0.0195 دولار أمريكي لكل صورة\* |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,15 (teks / gambar) |
+| Harga output | Tidak tersedia | $0,0195 per gambar\* |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### الأولوية
+### Prioritas
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | $0.54 (نص / صورة) |
-| سعر المنتج | غير متوفر | ‫0.0702 دولار أمريكي لكل صورة\* |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,54 (teks / gambar) |
+| Harga output | Tidak tersedia | $0,0702 per gambar\* |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-[\*] يبلغ سعر ناتج الصور 30 دولارًا أمريكيًا لكل مليون رمز مميز. تستهلك الصور الناتجة التي تصل دقتها إلى 1024x1024 بكسل 1290 رمزًا مميزًا، وتساوي 0.039 دولار أمريكي لكل صورة.
+[\*] Output gambar dikenai biaya $30 per 1.000.000 token. Gambar output hingga 1024x1024 piksel menggunakan 1290 token dan setara dengan $0,039 per gambar.
 
 ## Gemini 2.5 Flash Preview TTS
 
 *`gemini-2.5-flash-preview-tts`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com/generate-speech?hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com/generate-speech?hl=id)
 
-نموذج تحويل النص إلى صوت 2.5 Flash، وهو نموذج صوتي محسّن من حيث السعر والأداء،
-ويتميّز بوقت استجابة منخفض وإمكانية التحكّم في عملية إنشاء الكلام.
+Model audio text-to-speech 2.5 Flash kami dioptimalkan untuk performa harga yang kompetitif, latensi rendah, dan pembuatan ucapan yang dapat dikontrol.
 
-قد تتغيّر نماذج المعاينة قبل أن تصبح ثابتة، وقد تتضمّن حدودًا أكثر صرامة بشأن عدد الطلبات المسموح بها.
+Model pratinjau dapat berubah sebelum menjadi stabil dan memiliki batas laju yang lebih ketat.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫0.50 دولار أمريكي (نص) |
-| سعر المنتج | بدون أي تكلفة | ‫$10.00 (محتوى صوتي) |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $0,50 (teks) |
+| Harga output | Tanpa biaya | Rp100.000 (audio) |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | $0.25 (text) |
-| سعر المنتج | غير متوفر | $5.00 (محتوى صوتي) |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,25 (teks) |
+| Harga output | Tidak tersedia | $5,00 (audio) |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
 ## Gemini 2.5 Pro Preview TTS
 
 *`gemini-2.5-pro-preview-tts`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com/generate-speech?hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com/generate-speech?hl=id)
 
-تم تحسين نموذج الصوت "تحويل النص إلى كلام" 2.5‎ Pro لإنشاء كلام قوي وبزمن استجابة منخفض، ما يتيح الحصول على نتائج أكثر طبيعية وتوجيه الطلبات بسهولة أكبر.
+Model audio text-to-speech 2.5 Pro kami dioptimalkan untuk menghasilkan ucapan yang kuat dan latensi rendah, sehingga menghasilkan output yang lebih alami dan perintah yang lebih mudah diarahkan.
 
-قد تتغيّر نماذج المعاينة قبل أن تصبح ثابتة، وقد تتضمّن حدودًا أكثر صرامة بشأن عدد الطلبات المسموح بها.
+Model pratinjau dapat berubah sebelum menjadi stabil dan memiliki batas laju yang lebih ketat.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫$1.00 (نص) |
-| سعر المنتج | غير متوفر | ‫$20.00 (محتوى صوتي) |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $1,00 (teks) |
+| Harga output | Tidak tersedia | $20,00 (audio) |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫0.50 دولار أمريكي (نص) |
-| سعر المنتج | غير متوفر | ‫$10.00 (محتوى صوتي) |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,50 (teks) |
+| Harga output | Tidak tersedia | Rp100.000 (audio) |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
 ## Gemini 2.0 Flash
 
 *`gemini-2.0-flash`*
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫0.10 دولار أمريكي (نص أو صورة أو فيديو) ‫0.70 دولار أمريكي (صوت) |
-| سعر المنتج | بدون أي تكلفة | 0.40 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
-| سعر التخزين المؤقت حسب السياق | بدون أي تكلفة | ‫0.025 دولار أمريكي لكل مليون رمز مميز (نص/صورة/فيديو) 0.175 دولار أمريكي لكل مليون رمز مميز (صوت) |
-| التخزين المؤقت للسياق (مساحة التخزين) | غير متوفر | ‫1.00 دولار أمريكي / 1,000,000 رمز مميّز في الساعة |
-| أسعار إنشاء الصور | غير متوفرة ([تم إيقافها](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar#gemini-2.0-models)) | غير متوفرة ([تم إيقافها](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar#gemini-2.0-models)) |
-| سعر الضبط | غير متوفر | غير متوفر |
-| تحديد المصدر من خلال "بحث Search" | بدون أي تكلفة، وبحد أقصى 500 RPD | ‫1,500 طلب في الدقيقة (مجاني)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | ‫500 روبية باكستانية | ‫1,500 طلب في اليوم (مجانًا)، ثم 25 دولارًا أمريكيًا لكل 1,000 طلب |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $0,10 (teks / gambar / video) $0,70 (audio) |
+| Harga output | Tanpa biaya | $0,40 |
+| Harga context caching | Tanpa biaya | $0,025 / 1.000.000 token (teks/gambar/video) $0,175 / 1.000.000 token (audio) |
+| Context caching (penyimpanan) | Tidak tersedia | $1,00 / 1.000.000 token per jam |
+| Harga pembuatan gambar | Tidak tersedia ([dimatikan](https://ai.google.dev/gemini-api/docs/deprecations?hl=id#gemini-2.0-models)) | Tidak tersedia ([dimatikan](https://ai.google.dev/gemini-api/docs/deprecations?hl=id#gemini-2.0-models)) |
+| Harga penyesuaian | Tidak tersedia | Tidak tersedia |
+| Grounding dengan Google Penelusuran | Tanpa biaya, hingga 500 RPD | 1.500 RPD (gratis), lalu $35 / 1.000 perintah berbasis data |
+| Grounding with Google Maps | 500 RPD | 1.500 RPD (gratis), lalu $25 / 1.000 perintah yang memiliki rujukan |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫0.05 دولار أمريكي (نص / صورة / فيديو) 0.35 دولار أمريكي (صوت) |
-| سعر المنتج | غير متوفر | 0,20 دولار أمريكي (أو ما يعادل هذا المبلغ بالعملة المحلية) |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.025 دولار أمريكي لكل مليون رمز مميز (نص/صورة/فيديو) 0.175 دولار أمريكي لكل مليون رمز مميز (صوت) |
-| التخزين المؤقت للسياق (مساحة التخزين) | غير متوفر | ‫1.00 دولار أمريكي / 1,000,000 رمز مميّز في الساعة |
-| أسعار إنشاء الصور | غير متوفرة ([تم إيقافها](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar#gemini-2.0-models)) | غير متوفرة ([تم إيقافها](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar#gemini-2.0-models)) |
-| سعر الضبط | غير متوفر | غير متوفر |
-| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫1,500 طلب في الدقيقة (مجاني)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب |
-| استخدام "خرائط Google" كمصدر | غير متوفر | غير متوفر |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,05 (teks / gambar / video) $0,35 (audio) |
+| Harga output | Tidak tersedia | $0,20 |
+| Harga context caching | Tidak tersedia | $0,025 / 1.000.000 token (teks/gambar/video) $0,175 / 1.000.000 token (audio) |
+| Context caching (penyimpanan) | Tidak tersedia | $1,00 / 1.000.000 token per jam |
+| Harga pembuatan gambar | Tidak tersedia ([dimatikan](https://ai.google.dev/gemini-api/docs/deprecations?hl=id#gemini-2.0-models)) | Tidak tersedia ([dimatikan](https://ai.google.dev/gemini-api/docs/deprecations?hl=id#gemini-2.0-models)) |
+| Harga penyesuaian | Tidak tersedia | Tidak tersedia |
+| Grounding dengan Google Penelusuran | Tidak tersedia | 1.500 RPD (gratis), lalu $35 / 1.000 perintah berbasis data |
+| Grounding with Google Maps | Tidak tersedia | Tidak tersedia |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-[\*] يبلغ سعر ناتج الصور 30 دولارًا أمريكيًا لكل مليون رمز مميز. تستهلك الصور الناتجة التي تصل دقتها إلى 1024x1024 بكسل 1290 رمزًا مميزًا، وتساوي 0.039 دولار أمريكي لكل صورة.
+[\*] Output gambar dikenai biaya $30 per 1.000.000 token. Gambar output hingga 1024x1024 piksel menggunakan 1290 token dan setara dengan $0,039 per gambar.
 
 ## Gemini 2.0 Flash-Lite
 
 *`gemini-2.0-flash-lite`*
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫0.075 دولار أمريكي |
-| سعر المنتج | بدون أي تكلفة | $0.30 |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | غير متوفر |
-| التخزين المؤقت للسياق (مساحة التخزين) | غير متوفر | غير متوفر |
-| سعر الضبط | غير متوفر | غير متوفر |
-| تحديد المصدر من خلال "بحث Search" | غير متوفر | غير متوفر |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $0,075 |
+| Harga output | Tanpa biaya | $0,30 |
+| Harga context caching | Tidak tersedia | Tidak tersedia |
+| Context caching (penyimpanan) | Tidak tersedia | Tidak tersedia |
+| Harga penyesuaian | Tidak tersedia | Tidak tersedia |
+| Grounding dengan Google Penelusuran | Tidak tersedia | Tidak tersedia |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫0.0375 دولار أمريكي |
-| سعر المنتج | غير متوفر | ‫0.15 دولار أمريكي |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | غير متوفر |
-| التخزين المؤقت للسياق (مساحة التخزين) | غير متوفر | غير متوفر |
-| سعر الضبط | غير متوفر | غير متوفر |
-| تحديد المصدر من خلال "بحث Search" | غير متوفر | غير متوفر |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,0375 |
+| Harga output | Tidak tersedia | $0,15 |
+| Harga context caching | Tidak tersedia | Tidak tersedia |
+| Context caching (penyimpanan) | Tidak tersedia | Tidak tersedia |
+| Harga penyesuaian | Tidak tersedia | Tidak tersedia |
+| Grounding dengan Google Penelusuran | Tidak tersedia | Tidak tersedia |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
 ## Imagen 4
 
-‫*`imagen-4.0-generate-001` و`imagen-4.0-ultra-generate-001` و`imagen-4.0-fast-generate-001`*
+*`imagen-4.0-generate-001`, `imagen-4.0-ultra-generate-001`, `imagen-4.0-fast-generate-001`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com/generate-image?hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com/generate-image?hl=id)
 
-أحدث نموذج لإنشاء الصور، وهو يقدّم عرضًا أفضل بكثير للنصوص
-ويحسّن جودة الصور بشكل عام.
+Model pembuatan gambar terbaru kami, dengan rendering teks yang jauh lebih baik dan kualitas gambar keseluruhan yang lebih baik.
 
-قد تتغيّر نماذج المعاينة قبل أن تصبح ثابتة، وقد تتضمّن حدودًا أكثر صرامة بشأن عدد الطلبات المسموح بها.
+Model pratinjau dapat berubah sebelum menjadi stabil dan memiliki batas laju yang lebih ketat.
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل صورة بالدولار الأمريكي |
+|  | Paket Gratis | Tingkatan Berbayar, per Gambar dalam USD |
 | --- | --- | --- |
-| سعر الصورة في Imagen 4 Fast | غير متوفر | $0.02 |
-| سعر الصورة العادية في Imagen 4 | غير متوفر | $0.04 |
-| سعر صورة Imagen 4 Ultra | غير متوفر | $0.06 |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga gambar cepat Imagen 4 | Tidak tersedia | $0,02 |
+| Harga gambar Standar Imagen 4 | Tidak tersedia | $0,04 |
+| Harga gambar Imagen 4 Ultra | Tidak tersedia | $0,06 |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
 ## Veo 3.1
 
-‫*`veo-3.1-generate-preview` و`veo-3.1-fast-generate-preview` و`veo-3.1-lite-generate-preview`*
+*`veo-3.1-generate-preview`, `veo-3.1-fast-generate-preview`, `veo-3.1-lite-generate-preview`*
 
-[تجربة Veo 3.1](https://deepmind.google/models/veo/?hl=ar)
+[Coba Veo 3.1](https://deepmind.google/models/veo/?hl=id)
 
-أحدث نموذج لدينا لإنشاء الفيديوهات، وهو متاح للمطوّرين ضمن
-الفئة المدفوعة من Gemini API.
+Model pembuatan video terbaru kami, tersedia untuk developer di tingkat berbayar Gemini API.
 
-قد تتغيّر نماذج المعاينة قبل أن تصبح ثابتة، وقد تتضمّن حدودًا أكثر صرامة بشأن عدد الطلبات المسموح بها.
+Model pratinjau dapat berubah sebelum menjadi stabil dan memiliki batas laju yang lebih ketat.
 
-|  | الفئة المجانية | المستوى المدفوع، لكل ثانية بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per detik dalam USD |
 | --- | --- | --- |
-| سعر فيديو Veo 3.1 Standard مع صوت (الإعداد التلقائي) | غير متوفر | ‫0.40 دولار أمريكي (720p و1080p) 0.60 دولار أمريكي (4k) |
-| سعر فيديو Veo 3.1 Fast مع صوت (تلقائي) | غير متوفر | ‫0.10 دولار أمريكي (720p) ‫0.12 دولار أمريكي (1080p) ‫0.30 دولار أمريكي (4k) |
-| سعر فيديو Veo 3.1 Lite مع صوت (الإعداد التلقائي) | غير متوفر | ‫0.05 دولار أمريكي (720p) 0.08 دولار أمريكي (1080p) (لا تتوفّر دقة 4k) |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga video standar Veo 3.1 dengan audio (default) | Tidak tersedia | $0,40 (720p dan 1080p) $0,60 (4k) |
+| Harga video Veo 3.1 Fast dengan audio (default) | Tidak tersedia | $0,10 (720p) $0,12 (1080p) $0,30 (4k) |
+| Harga video Veo 3.1 Lite dengan audio (default) | Tidak tersedia | $0,05 (720p) $0,08 (1080p) (output 4k tidak didukung) |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
 ## Veo 3
 
-*`veo-3.0-generate-001`، `veo-3.0-fast-generate-001`*
+*`veo-3.0-generate-001`, `veo-3.0-fast-generate-001`*
 
-[تجربة Veo 3](https://deepmind.google/models/veo/?hl=ar)
+[Coba Veo 3](https://deepmind.google/models/veo/?hl=id)
 
-نموذجنا الثابت لإنشاء الفيديوهات، وهو متاح للمطوّرين في الفئة المدفوعة من Gemini API.
+Model pembuatan video stabil kami, yang tersedia bagi developer di tingkat berbayar Gemini API.
 
-|  | الفئة المجانية | المستوى المدفوع، لكل ثانية بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per detik dalam USD |
 | --- | --- | --- |
-| سعر فيديو Veo 3 Standard مع صوت (الإعداد التلقائي) | غير متوفر | 0.40 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
-| سعر فيديو Veo 3 Fast مع صوت (الإعداد التلقائي) | غير متوفر | ‫0.10 دولار أمريكي (720p) ‫0.12 دولار أمريكي (1080p) ‫0.30 دولار أمريكي (4k) |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga video dengan audio Veo 3 Standard (default) | Tidak tersedia | $0,40 |
+| Harga video Veo 3 Fast dengan audio (default) | Tidak tersedia | $0,10 (720p) $0,12 (1080p) $0,30 (4k) |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
 ## Veo 2
 
 *`veo-2.0-generate-001`*
 
-[تجربة واجهة برمجة التطبيقات](https://ai.google.dev/gemini-api/docs/video?hl=ar)
+[Coba API](https://ai.google.dev/gemini-api/docs/video?hl=id)
 
-نموذجنا المتقدّم لإنشاء الفيديوهات، والمتوفّر للمطوّرين ضمن الفئة المدفوعة من Gemini API
+Model pembuatan video tercanggih kami, yang tersedia bagi developer di tingkat berbayar Gemini API.
 
-|  | الفئة المجانية | المستوى المدفوع، لكل ثانية بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per detik dalam USD |
 | --- | --- | --- |
-| سعر الفيديو | غير متوفر | 0.35 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga video | Tidak tersedia | $0,35 |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-## ‫Lyria 3
+## Lyria 3
 
-‫*`lyria-3-clip-preview` و`lyria-3-pro-preview`*
+*`lyria-3-clip-preview` dan `lyria-3-pro-preview`*
 
-مجموعة نماذج إنشاء الموسيقى من Google قد تتغيّر نماذج المعاينة قبل أن تصبح مستقرة، وقد يكون لها حدود معدّل استخدام أكثر صرامة.
+Rangkaian model pembuatan musik Google. Model pratinjau dapat berubah sebelum menjadi stabil dan memiliki batas penggunaan yang lebih ketat.
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل طلب بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per permintaan dalam USD |
 | --- | --- | --- |
-| معاينة مقطع Lyria 3 (30 ثانية) | غير متوفر | 0.04 دولار أمريكي لكل أغنية |
-| معاينة Lyria 3 Pro (أغنية كاملة) | غير متوفر | $0.08 لكل أغنية |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Pratinjau Klip Lyria 3 (30 detik) | Tidak tersedia | $0,04 per lagu |
+| Pratinjau Lyria 3 Pro (Lagu Lengkap) | Tidak tersedia | $0,08 per lagu |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-## Gemini Embedding 2
+## Penyematan Gemini 2
 
 *`gemini-embedding-2`*
 
-[تجربة واجهة برمجة التطبيقات](https://ai.google.dev/gemini-api/docs/embeddings?hl=ar)
+[Coba API](https://ai.google.dev/gemini-api/docs/embeddings?hl=id)
 
-أول نموذج تضمين متعدد الوسائط يربط النصوص والصور والفيديوهات والمقاطع الصوتية وملفات PDF بمساحة تضمين موحّدة.
+Model embedding multimodal pertama kami, yang memetakan teks, gambar, video, audio, dan PDF ke dalam ruang embedding terpadu.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال النصي | بدون أي تكلفة | 0,20 دولار أمريكي (أو ما يعادل هذا المبلغ بالعملة المحلية) |
-| سعر إدخال الصورة | بدون أي تكلفة | ‫0.45 دولار أمريكي (0.00012 دولار أمريكي لكل صورة) |
-| سعر إدخال الصوت | بدون أي تكلفة | ‫6.50 دولار أمريكي (0.00016 دولار أمريكي في الثانية) |
-| سعر إدخال الفيديو | بدون أي تكلفة | ‫12.00 دولار أمريكي (0.00079 دولار أمريكي لكل إطار) |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input teks | Tanpa biaya | $0,20 |
+| Harga input gambar | Tanpa biaya | $0,45 ($0,00012 per gambar) |
+| Harga input audio | Tanpa biaya | $6,50 ($0,00016 per detik) |
+| Harga input video | Tanpa biaya | $12,00 ($0,00079 per frame) |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال النصي | غير متوفر | ‫0.10 دولار أمريكي |
-| سعر إدخال الصورة | غير متوفر | ‫0.225 دولار أمريكي (0.00006 دولار أمريكي لكل صورة) |
-| سعر إدخال الصوت | غير متوفر | ‫3.25 دولار أمريكي (0.00008 دولار أمريكي في الثانية) |
-| سعر إدخال الفيديو | غير متوفر | ‫6.00 دولار أمريكي (0.000395 دولار أمريكي لكل إطار) |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input teks | Tidak tersedia | $0,10 |
+| Harga input gambar | Tidak tersedia | $0,225 ($0,00006 per gambar) |
+| Harga input audio | Tidak tersedia | $3,25 ($0,00008 per detik) |
+| Harga input video | Tidak tersedia | $6,00 ($0,000395 per frame) |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-## تضمين Gemini
+## Penyematan Gemini
 
 *`gemini-embedding-001`*
 
-[تجربة واجهة برمجة التطبيقات](https://ai.google.dev/gemini-api/docs/embeddings?hl=ar)
+[Coba API](https://ai.google.dev/gemini-api/docs/embeddings?hl=id)
 
-نموذج Gemini Embeddings لحالات الاستخدام التي تتضمّن النصوص فقط، وهو متاح للمطوّرين في المستويَين المجاني والمدفوع من Gemini API.
+Model Gemini Embeddings kami untuk kasus penggunaan khusus teks, tersedia bagi developer di tingkat gratis dan berbayar Gemini API.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫0.15 دولار أمريكي |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $0,15 |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫0.075 دولار أمريكي |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,075 |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-## ‫Gemini Robotics ER 2 Preview
+## Pratinjau Gemini Robotics ER 2
 
 *`gemini-robotics-er-2-preview`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-preview&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-preview&hl=id)
 
-‫Gemini Robotics ER 2، وهو اختصار لعبارة Gemini Robotics Embodied Reasoning 2، هو نقطة نهاية لنموذج رؤية ولغة تتيح للروبوتات فهم بيئاتها بدقة، ما يتيح التنسيق بين الروبوتات، وفهم تقدّم الفيديو، والتعاون بين الروبوتات المتعدّدة، والاستدلال المكاني المتقدّم.
+Gemini Robotics ER 2, atau Gemini Robotics Embodied Reasoning 2, adalah endpoint model bahasa visual yang memungkinkan robot memahami lingkungan mereka secara akurat, mendukung orkestrasi agentic robot, pemahaman progres video, kolaborasi multi-robot, dan penalaran spasial tingkat lanjut.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫2.00 دولار أمريكي (نص / صورة / فيديو / ملف صوتي) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | $10.00 |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.20 $1.00 / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $2,00 (teks / gambar / video / audio) |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $10,00 |
+| Harga context caching | Tidak tersedia | $0,20 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran | Tidak tersedia | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫1.00 دولار أمريكي (نص أو صورة أو فيديو أو مقطع صوتي) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | $5.00 |
-| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.10 $1.00 / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
-| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $1,00 (teks / gambar / video / audio) |
+| Harga output (termasuk token pemikiran) | Tidak tersedia | $5,00 |
+| Harga context caching | Tidak tersedia | $0,10 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
+| Grounding dengan Google Penelusuran | Tidak tersedia | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-## Gemini Robotics ER 2 Streaming Preview
+## Pratinjau Streaming Gemini Robotics ER 2
 
 *`gemini-robotics-er-2-streaming-preview`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-streaming-preview&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-streaming-preview&hl=id)
 
-‫Gemini Robotics ER 2 Streaming هو نقطة نهاية لنموذج رؤية ولغة خاص بالروبوتات، وهو محسّن لبث النصوص في الوقت الفعلي باستخدام Live API. يقبل هذا النموذج إدخال النصوص والصور والفيديوهات والمقاطع الصوتية، ويتيح بث البيانات في اتجاهين مع إمكانية استدعاء الدوال.
+Gemini Robotics ER 2 Streaming adalah endpoint model bahasa-penglihatan untuk robotik yang dioptimalkan untuk streaming teks real-time menggunakan Live API. API ini menerima input teks, gambar, video, dan audio serta mendukung streaming dua arah dengan panggilan fungsi.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫2.00 دولار أمريكي (نص أو صورة أو فيديو أو ملف صوتي) |
-| سعر المنتج | بدون أي تكلفة | $10.00 |
-| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $2,00 (teks / gambar / video / audio) |
+| Harga output | Tanpa biaya | $10,00 |
+| Grounding dengan Google Penelusuran | Tidak tersedia | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-## معاينة Gemini Robotics ER 1.6
+## Pratinjau Gemini Robotics ER 1.6
 
 *`gemini-robotics-er-1.6-preview`*
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-1.6-preview&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-1.6-preview&hl=id)
 
-‫Gemini Robotics ER، أي Gemini Robotics-Embodied Reasoning، هو نموذج مفكّر يعزّز قدرات الروبوتات على فهم العالم المادي والتفاعل معه.
+Gemini Robotics ER, singkatan dari Gemini Robotics-Embodied Reasoning, adalah model berpikir yang meningkatkan kemampuan robot untuk memahami dan berinteraksi dengan dunia fisik.
 
-### خطة "الرزمة العادية"
+### Standar
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | ‫1.00 دولار أمريكي (نص / صورة / فيديو) ‫2.00 دولار أمريكي (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | $5.00 |
-| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | $1,00 (teks / gambar / video) $2,00 (audio) |
+| Harga output (termasuk token pemikiran) | Tanpa biaya | $5,00 |
+| Grounding dengan Google Penelusuran | Tidak tersedia | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-### مجمّعة
+### Batch
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫0.50 دولار أمريكي (نص / صورة / فيديو) 1.00 دولار أمريكي (صوت) |
-| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫2.50 دولار أمريكي |
-| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $0,50 (teks / gambar / video) $1,00 (audio) |
+| Harga output (termasuk token pemikiran) | Tidak tersedia | $2,50 |
+| Grounding dengan Google Penelusuran | Tidak tersedia | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-## معاينة ميزة "استخدام الكمبيوتر" في Gemini 2.5
+## Pratinjau Penggunaan Komputer Gemini 2.5
 
 *`gemini-2.5-computer-use-preview-10-2025`*
 
-نموذج &quot;استخدام الكمبيوتر&quot; المحسَّن لإنشاء وكلاء التحكّم في المتصفّح الذين يؤتمتون المهام.
+Model Penggunaan Komputer kami dioptimalkan untuk membangun agen kontrol browser yang mengotomatiskan tugas.
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | غير متوفر | ‫1.25 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز 2.50 دولار أمريكي، الطلبات > 200 ألف رمز مميّز |
-| سعر المنتج | غير متوفر | ‫10.00 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز ‫15.00 دولار أمريكي، الطلبات > 200 ألف |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tidak tersedia | $1,25, perintah <= 200 ribu token $2,50, perintah > 200 ribu token |
+| Harga output | Tidak tersedia | $10,00, perintah <= 200 ribu token $15,00, perintah > 200 ribu |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
 ## Gemma 4
 
-‫Gemma هو نموذج مفتوح وخفيف ومتطوّر تم إنشاؤه بالاستناد إلى التكنولوجيا نفسها التي استُخدمَت لإنشاء نماذج Gemini.
+Model terbuka kami yang ringan, canggih, dan dibangun dari teknologi yang sama dengan yang mendukung model Gemini kami.
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| سعر الإدخال | بدون أي تكلفة | غير متوفر |
-| سعر المنتج | بدون أي تكلفة | غير متوفر |
-| سعر التخزين المؤقت حسب السياق | بدون أي تكلفة | غير متوفر |
-| التخزين المؤقت للسياق (مساحة التخزين) | بدون أي تكلفة | غير متوفر |
-| سعر الضبط | غير متوفر | غير متوفر |
-| تحديد المصدر من خلال "بحث Search" | غير متوفر | غير متوفر |
-| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+| Harga input | Tanpa biaya | Tidak tersedia |
+| Harga output | Tanpa biaya | Tidak tersedia |
+| Harga context caching | Tanpa biaya | Tidak tersedia |
+| Context caching (penyimpanan) | Tanpa biaya | Tidak tersedia |
+| Harga penyesuaian | Tidak tersedia | Tidak tersedia |
+| Grounding dengan Google Penelusuran | Tidak tersedia | Tidak tersedia |
+| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
 
-## أسعار الأدوات
+## Harga untuk alat
 
-يتم تحديد أسعار الأدوات وفقًا لمعدّلاتها الخاصة، ويتم تطبيقها على النموذج الذي يستخدمها.
-راجِع صفحة [النماذج](https://ai.google.dev/gemini-api/docs/models?hl=ar) لمعرفة الأدوات المتاحة لكل نموذج.
+Alat dikenai biaya sesuai tarifnya sendiri, yang diterapkan pada model yang menggunakannya.
+Periksa halaman [Model](https://ai.google.dev/gemini-api/docs/models?hl=id) untuk mengetahui alat yang tersedia untuk setiap model.
 
-|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
 | --- | --- | --- |
-| [بحث Google](https://ai.google.dev/gemini-api/docs/google-search?hl=ar#pricing) | ‫500 طلب في الدقيقة مجانًا (يتم مشاركة الحدّ الأقصى بين Flash وFlash-Lite). لا يتوفّر هذا الخيار في Pro. | نماذج Gemini 2.5:  1,500 طلب في اليوم مجانًا (يتم تطبيق الحدّ على Flash وFlash-Lite). بعد ذلك، 35 دولار أمريكي لكل 1,000 طلب استنادًا إلى بيانات خارجية   نماذج Gemini 3:  5,000 طلب بحث مجاني في الشهر (يتم تطبيق الحدّ على جميع نماذج Gemini)، ثم 14 دولار أمريكي لكل 1,000 طلب. |
-| [خرائط Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ar#pricing_and_rate_limits) | ‫500 RPD غير متوفّر في Pro. | ‫1,500 طلب في اليوم مجانًا (الحدّ الأقصى مشترك بين Flash وFlash-Lite) ‫10,000 طلب في اليوم مجانًا لمستخدمي Pro ثم 25 دولار أمريكي لكل 1,000 طلب |
-| [تنفيذ الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar#billing) | بدون أي تكلفة | يتم تحصيل رسوم تنفيذ الرمز البرمجي وفقًا لأسعار الرموز المميزة العادية للنموذج المحدّد. يتم تحديد التكاليف استنادًا إلى معدّل استخدام الأداة فقط، ولا يتم تحصيل أي رسوم مقابل مدة تشغيل الجلسة. يتم تحصيل رسوم مقابل الرمز الذي تم إنشاؤه ونتائج التنفيذ باعتبارهما **رموزًا مميزة للناتج** عند إنشائهما، وباعتبارهما **رموزًا مميزة للمدخلات** عندما يستخدمهما النموذج كجزء من عملية الاستدلال التكراري. |
-| [سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar#limitations) | بدون أي تكلفة | يتم تحصيل الرسوم كرموز مميّزة للإدخال لكل نموذج تسعير. |
-| [استخدام الكمبيوتر](https://ai.google.dev/gemini-api/docs/computer-use?hl=ar) | غير متوفر | يتم تحصيل الرسوم كرموز عادية وفقًا لأسعار كل نموذج (مثل أسعار [Gemini 3.5 Flash](#gemini-3.6-flash) العادية). راجِع جدول أسعار [النسخة الحصرية من Gemini 2.5 لاستخدام الكمبيوتر](#gemini-2.5-computer-use-preview-10-2025) لمعرفة أسعار النموذج القديم. |
-| [البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar#pricing) | بدون أي تكلفة | يتم تحصيل رسوم مقابل [عمليات التضمين](#gemini-embedding) بقيمة 0.15 دولار أمريكي لكل مليون رمز مميز. يتم تحصيل رسوم مقابل الرموز المميزة للمستندات التي تم استرجاعها كرموز مميزة عادية وفقًا لأسعار النموذج. |
-| [نقطة نهاية "الأدوات المخصّصة" (إصدار تجريبي من Gemini 3.1 Pro)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ar) | غير متوفر | الأسعار نفسها المحدّدة في [معاينة Gemini 3.1 Pro](#gemini-3.1-pro-preview) |
+| [Google Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id#pricing) | 500 RPD gratis (batas yang sama untuk Flash dan Flash-Lite). Tidak tersedia untuk Pro. | Model Gemini 2.5:  1.500 RPD gratis (batas penggunaan bersama untuk Flash dan Flash-Lite). Kemudian $35 / 1.000 perintah berbasis perujukan   Model Gemini 3:  5.000 permintaan penelusuran gratis per bulan (digunakan bersama di semua model Gemini), lalu $14 per 1.000 permintaan. |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=id#pricing_and_rate_limits) | 500 RPD Tidak tersedia untuk Pro. | 1.500 RPD gratis (batas bersama untuk Flash dan Flash-Lite) 10.000 RPD gratis untuk Pro. Kemudian $25 / 1.000 perintah yang tidak mendasar |
+| [Eksekusi kode](https://ai.google.dev/gemini-api/docs/code-execution?hl=id#billing) | Tanpa biaya | Eksekusi kode ditagih dengan tarif token standar untuk model yang dipilih. Biaya ditentukan hanya oleh penggunaan alat, tidak ada biaya yang terakumulasi untuk runtime sesi. Kode yang dihasilkan dan hasil eksekusi ditagih sebagai **Token output** saat dibuat, dan sebagai **Token input** saat model menggunakannya sebagai bagian dari proses penalaran iteratifnya. |
+| [Konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id#limitations) | Tanpa biaya | Ditagih sebagai token input per harga model. |
+| [Penggunaan komputer](https://ai.google.dev/gemini-api/docs/computer-use?hl=id) | Tidak tersedia | Ditagih sebagai token reguler per harga model (misalnya, harga [Gemini 3.5 Flash](#gemini-3.6-flash) standar). Lihat tabel harga [Pratinjau Penggunaan Komputer Gemini 2.5](#gemini-2.5-computer-use-preview-10-2025) untuk tarif model lama. |
+| [Penelusuran file](https://ai.google.dev/gemini-api/docs/file-search?hl=id#pricing) | Tanpa biaya | Ditagih untuk [embedding](#gemini-embedding) sebesar $0,15 / 1 juta token. Token dokumen yang diambil ditagih sebagai token reguler sesuai harga per model. |
+| [Endpoint Alat Kustom (Pratinjau Gemini 3.1 Pro)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=id) | Tidak tersedia | Sama dengan harga [Pratinjau Gemini 3.1 Pro](#gemini-3.1-pro-preview) |
 
-## أسعار الوكلاء
+## Harga untuk agen
 
-يتم احتساب تكاليف استخدام الوكيل استنادًا إلى استهلاك الرموز الأساسية واستخدام الأدوات.
+Biaya penggunaan agen dihitung berdasarkan penggunaan token pokok dan penggunaan alat.
 
-|  | الطراز | الأدوات |
+|  | Model | Alat |
 | --- | --- | --- |
-| [وكيل Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) | يتم تحصيل رسوم عن جميع عمليات استنتاج النماذج وفقًا للأسعار العادية لقائمة Gemini، بما في ذلك رموز الإدخال والإخراج والرموز الوسيطة للإدخال / الاستدلال التي يتم إنشاؤها أثناء الحلقات المستندة إلى الوكيل. | تنطبق رسوم استخدام الأداة على كل بنية تسعير حالية، مع الحفاظ على الفروق المعيارية بين ميزة "الاستناد إلى البحث" (الرموز المميزة التي تم استرجاعها مستبعدة) وميزة Url\_context / File Search (الرموز المميزة التي تم استرجاعها مضمّنة في جميع الأدوات الأخرى). |
-| [الوكلاء المُدارون في Gemini API](https://ai.google.dev/gemini-api/docs/agents?hl=ar) | يتم تحصيل رسوم عن جميع عمليات استنتاج النماذج وفقًا للأسعار العادية لقائمة Gemini، بما في ذلك رموز الإدخال والإخراج والرموز الوسيطة للإدخال / الاستدلال التي يتم إنشاؤها أثناء الحلقات المستندة إلى الوكيل. (اطّلِع على [تفاصيل الأسعار](https://ai.google.dev/gemini-api/docs/agents?hl=ar#pricing)). | لا يتم تحصيل رسوم مقابل حوسبة البيئة (وحدة المعالجة المركزية والذاكرة وتنفيذ وضع الحماية) خلال فترة المعاينة. |
-| [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ar) | يتم تحصيل رسوم عن جميع عمليات استنتاج النماذج وفقًا للأسعار العادية لقائمة Gemini، بما في ذلك رموز الإدخال والإخراج والرموز الوسيطة للإدخال / الاستدلال التي يتم إنشاؤها أثناء الحلقات المستندة إلى الوكيل. (اطّلِع على [تفاصيل الأسعار](https://ai.google.dev/gemini-api/docs/agents?hl=ar#pricing)). | لا يتم تحصيل رسوم مقابل حوسبة البيئة (وحدة المعالجة المركزية والذاكرة وتنفيذ وضع الحماية) خلال فترة المعاينة. |
+| [Agen Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) | Semua inferensi model dikenai biaya sesuai tarif daftar Gemini standar, termasuk token input, output, dan input / penalaran perantara yang dihasilkan selama loop agentik. | Biaya penggunaan alat berlaku per struktur harga yang ada, dengan mempertahankan perbedaan standar untuk Perujukan Penelusuran (token yang diambil dikecualikan) versus Penelusuran File / Url\_context (token yang diambil disertakan dalam semua alat lainnya). |
+| [Agen terkelola di Gemini API](https://ai.google.dev/gemini-api/docs/agents?hl=id) | Semua inferensi model dikenai biaya sesuai tarif daftar Gemini standar, termasuk token input, output, dan input / penalaran perantara yang dihasilkan selama loop agentik. (Lihat [detail harga](https://ai.google.dev/gemini-api/docs/agents?hl=id#pricing)). | Komputasi lingkungan (CPU, memori, eksekusi sandbox) tidak ditagih selama periode pratinjau. |
+| [Agen Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=id) | Semua inferensi model dikenai biaya sesuai tarif daftar Gemini standar, termasuk token input, output, dan input / penalaran perantara yang dihasilkan selama loop agentik. (Lihat [detail harga](https://ai.google.dev/gemini-api/docs/agents?hl=id#pricing)). | Komputasi lingkungan (CPU, memori, eksekusi sandbox) tidak ditagih selama periode pratinjau. |
 
-## ملاحظات
+## Catatan
 
-- **الفوترة المستندة إلى الرموز المميزة للمستندات:** يتم تحصيل رسوم الرموز المميزة الخاصة بالوسائط `DOCUMENT` (مثل ملفات PDF) وفقًا لأسعار الرموز المميزة للصور. في الردود من واجهة برمجة التطبيقات، تظهر هذه الرموز المميزة ضمن `DOCUMENT` modality في `promptTokensDetails`.
-- إنّ استخدام Google AI Studio مجاني في جميع [المناطق التي يتوفّر فيها](https://ai.google.dev/gemini-api/docs/available-regions?hl=ar). لمعرفة التفاصيل، يُرجى الاطّلاع على [الأسئلة الشائعة حول الفوترة](https://ai.google.dev/gemini-api/docs/billing?hl=ar).
-- قد تختلف الأسعار عن الأسعار المذكورة هنا والأسعار المعروضة على &quot;منصة Gemini Enterprise Agent&quot;. للاطّلاع على أسعار Gemini Enterprise Agent Platform، يُرجى الانتقال إلى [صفحة أسعار Gemini Enterprise Agent Platform](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=ar).
-- إذا كنت تستخدم [الاسترجاع الديناميكي](https://ai.google.dev/gemini-api/docs/grounding?hl=ar) لتحسين التكاليف، لن يتم تحصيل رسوم منك مقابل ميزة "الاستناد إلى معلومات من Google Search" إلا إذا كانت الردود تتضمّن عنوان URL واحدًا على الأقل من الويب يقدّم معلومات أساسية.
-  تُطبَّق دائمًا تكاليف استخدام Gemini. تخضع حدود المعدّل للتغيير.
+- **Penagihan token dokumen:** Token untuk modalitas `DOCUMENT` (misalnya, PDF) ditagih dengan tarif token gambar. Dalam respons API, token ini muncul di bawah modalitas `DOCUMENT` dalam `promptTokensDetails`.
+- Penggunaan Google AI Studio tidak dikenai biaya di semua [wilayah yang tersedia](https://ai.google.dev/gemini-api/docs/available-regions?hl=id). Lihat [FAQ Penagihan](https://ai.google.dev/gemini-api/docs/billing?hl=id) untuk mengetahui detailnya.
+- Harga dapat berbeda dengan harga yang tercantum di sini dan harga yang ditawarkan di Gemini Enterprise Agent Platform. Untuk mengetahui harga Gemini Enterprise Agent Platform, lihat [halaman harga Gemini Enterprise Agent Platform](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=id).
+- Jika Anda menggunakan [pengambilan dinamis](https://ai.google.dev/gemini-api/docs/grounding?hl=id) untuk mengoptimalkan biaya, hanya permintaan yang berisi setidaknya satu URL dukungan perujukan dari web dalam responsnya yang ditagih untuk Grounding with Google Search.
+  Biaya untuk Gemini selalu berlaku. Batas frekuensi panggilan dapat berubah sewaktu-waktu.
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)
+Terakhir diperbarui pada 2026-08-11 UTC.
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-08-11 UTC."],[],[]]

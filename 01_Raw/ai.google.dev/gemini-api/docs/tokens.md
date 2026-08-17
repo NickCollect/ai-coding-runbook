@@ -1,46 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=pl
-fetched_at: 2026-08-10T03:23:35.617003+00:00
-title: "Zrozumienie i liczenie token\u00f3w \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=it
+fetched_at: 2026-08-17T02:20:53.141968+00:00
+title: "Comprendi e conteggia i token \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Prześlij opinię
+Invia feedback
 
-# Zrozumienie i liczenie tokenów
+# Comprendi e conteggia i token
 
-Gemini i inne modele generatywnej AI przetwarzają dane wejściowe i wyjściowe z dokładnością do *tokena*.
+Gemini e altri modelli di AI generativa elaborano input e output con una granularità chiamata *token*.
 
-**W przypadku modeli Gemini token odpowiada około 4 znakom.
-100 tokenów to około 60–80 słów w języku angielskim.**
+**Per i modelli Gemini, un token equivale a circa 4 caratteri.
+100 token equivalgono a circa 60-80 parole in inglese.**
 
-## Informacje o tokenach
+## Informazioni sui token
 
-Tokeny mogą być pojedynczymi znakami, np. `z`, lub całymi słowami, np. `cat`. Długie słowa są dzielone na kilka tokenów. Zbiór wszystkich tokenów używanych przez model nazywa się słownikiem, a proces dzielenia tekstu na tokeny – *tokenizacją*.
+I token possono essere singoli caratteri come `z` o parole intere come `cat`. Le parole lunghe vengono suddivise in più token. L'insieme di tutti i token utilizzati dal modello è chiamato vocabolario e il processo di suddivisione del testo in token è chiamato *tokenizzazione*.
 
-Gdy płatności są włączone, [koszt wywołania Gemini API](https://ai.google.dev/pricing?hl=pl) jest
-częściowo określany przez liczbę tokenów wejściowych i wyjściowych, dlatego warto wiedzieć, jak je
-zliczać.
+Quando la fatturazione è abilitata, il [costo di una chiamata all'API Gemini](https://ai.google.dev/pricing?hl=it) è
+determinato in parte dal numero di token di input e output, quindi sapere come
+contarli può essere utile.
 
-## Zliczanie tokenów
+## Contare i token
 
-Wszystkie dane wejściowe i wyjściowe z Gemini API są tokenizowane, w tym tekst, pliki graficzne i inne formaty nietekstowe.
+Tutti gli input e gli output dell'API Gemini vengono tokenizzati, inclusi testo, file immagine e altre modalità non testuali.
 
-Tokeny możesz zliczać na te sposoby:
+Puoi contare i token nei seguenti modi:
 
-- **Wywołaj funkcję `count_tokens` z danymi wejściowymi żądania.** Zwraca łączną liczbę tokenów *tylko w danych wejściowych*. Wykonaj to wywołanie przed wysłaniem danych wejściowych, aby sprawdzić rozmiar żądań.
-- **Użyj parametru `usage` w odpowiedzi na interakcję.** Zwraca liczbę tokenów dla danych wejściowych (`total_input_tokens`), wyjściowych (`total_output_tokens`), myślenia (`total_thought_tokens`), treści z pamięci podręcznej (`total_cached_tokens`), użycia narzędzia (`total_tool_use_tokens`) i łączną liczbę tokenów (`total_tokens`).
+- **Chiama `count_tokens` con l'input della richiesta.** Restituisce il numero totale di token *solo nell'input*. Esegui questa chiamata prima di inviare l'input per verificare le dimensioni delle richieste.
+- **Utilizza il `usage` nella risposta di interazione.** Restituisce i conteggi dei token per input (`total_input_tokens`), output (`total_output_tokens`), pensiero (`total_thought_tokens`), contenuti memorizzati nella cache (`total_cached_tokens`), utilizzo degli strumenti (`total_tool_use_tokens`) e totale (`total_tokens`).
 
-### Zliczanie tokenów tekstowych
+### Contare i token di testo
 
 ### Python
 
@@ -100,9 +100,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
   -d '{"contents": [{"parts": [{"text": "The quick brown fox."}]}]}'
 ```
 
-### Zliczanie tokenów wieloetapowych
+### Contare i token multi-turn
 
-Zliczaj tokeny w historii rozmów za pomocą parametru `previous_interaction_id`:
+Conta i token nella cronologia delle conversazioni utilizzando `previous_interaction_id`:
 
 ### Python
 
@@ -148,16 +148,16 @@ console.log(`Input tokens: ${interaction2.usage.total_input_tokens}`);
 console.log(`Output tokens: ${interaction2.usage.total_output_tokens}`);
 ```
 
-### Zliczanie tokenów multimodalnych
+### Contare i token multimodali
 
-Wszystkie dane wejściowe do Gemini API są tokenizowane, w tym obrazy, filmy i dźwięk.
-Najważniejsze informacje o tokenizacji:
+Tutti gli input dell'API Gemini vengono tokenizzati, incluse immagini, video e audio.
+Punti chiave sulla tokenizzazione:
 
-- **Obrazy**: obrazy o wymiarach ≤384 pikseli w obu wymiarach są liczone jako 258 tokenów. Większe obrazy są dzielone na kafelki o wymiarach 768 x 768 pikseli, z których każdy jest liczony jako 258 tokenów.
-- **Film**: 263 tokeny na sekundę
-- **Dźwięk**: 32 tokeny na sekundę
+- **Immagini**: le immagini ≤384 pixel in entrambe le dimensioni vengono conteggiate come 258 token. Le immagini più grandi vengono suddivise in riquadri di 768x768 pixel, ognuno dei quali viene conteggiato come 258 token.
+- **Video**: 263 token al secondo
+- **Audio**: 32 token al secondo
 
-#### Tokeny obrazów
+#### Token immagine
 
 ### Python
 
@@ -203,7 +203,7 @@ const countResponse = await client.models.countTokens({
 console.log(countResponse.totalTokens);
 ```
 
-**Przykład danych wbudowanych:**
+**Esempio di dati in linea:**
 
 ### Python
 
@@ -228,7 +228,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### Tokeny filmów
+#### Token video
 
 ### Python
 
@@ -261,7 +261,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### Tokeny dźwięku
+#### Token audio
 
 ### Python
 
@@ -287,9 +287,9 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-### Zliczanie tokenów instrukcji systemowych
+### Contare i token delle istruzioni di sistema
 
-Instrukcje systemowe są liczone jako część tokenów wejściowych:
+Le istruzioni di sistema vengono conteggiate come parte dei token di input:
 
 ### Python
 
@@ -305,9 +305,9 @@ interaction = client.interactions.create(
 print(f"Input tokens: {interaction.usage.total_input_tokens}")
 ```
 
-### Zliczanie tokenów narzędzi
+### Contare i token degli strumenti
 
-Narzędzia (funkcje, wykonywanie kodu, wyszukiwarka Google) są również zliczane:
+Vengono conteggiati anche gli strumenti (funzioni, esecuzione di codice, Ricerca Google):
 
 ### Python
 
@@ -337,11 +337,11 @@ print(f"Input tokens: {interaction.usage.total_input_tokens}")
 print(f"Tool use tokens: {interaction.usage.total_tool_use_tokens}")
 ```
 
-## Okno kontekstu
+## Finestra contestuale
 
-Każdy model Gemini ma maksymalną liczbę tokenów, które może przetworzyć. Okno kontekstu określa łączny limit tokenów wejściowych i wyjściowych.
+Ogni modello Gemini ha un numero massimo di token che può gestire. La finestra contestuale definisce il limite combinato di token di input e output.
 
-### Programowe pobieranie rozmiaru okna kontekstu
+### Ottenere le dimensioni della finestra contestuale a livello di programmazione
 
 ### Python
 
@@ -361,20 +361,20 @@ console.log(`Input token limit: ${modelInfo.inputTokenLimit}`);
 console.log(`Output token limit: ${modelInfo.outputTokenLimit}`);
 ```
 
-Rozmiary okien kontekstu znajdziesz na stronie [modeli](https://ai.google.dev/gemini-api/docs/models?hl=pl).
+Trova le dimensioni della finestra contestuale nella pagina dei [modelli](https://ai.google.dev/gemini-api/docs/models?hl=it).
 
-## Co dalej?
+## Passaggi successivi
 
-- [Generowanie tekstu](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl): podstawy generowania
-- [Pamięć podręczna](https://ai.google.dev/gemini-api/docs/caching?hl=pl): zmniejszanie kosztów dzięki pamięci podręcznej
-- [Ceny](https://ai.google.dev/gemini-api/docs/pricing?hl=pl): informacje o kosztach
+- [Generazione di testo](https://ai.google.dev/gemini-api/docs/text-generation?hl=it): nozioni di base sulla generazione
+- [Memorizzazione nella cache](https://ai.google.dev/gemini-api/docs/caching?hl=it): ridurre i costi con la memorizzazione nella cache
+- [Prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it): comprendere i costi
 
-Prześlij opinię
+Invia feedback
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Ostatnia aktualizacja: 2026-07-30 UTC.
+Ultimo aggiornamento 2026-07-30 UTC.
 
-Chcesz przekazać coś jeszcze?
+Vuoi dirci altro?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]

@@ -1,46 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=de
-fetched_at: 2026-08-10T03:21:18.234307+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=hi
+fetched_at: 2026-08-17T02:36:54.516449+00:00
 title: "Gemini Omni Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Feedback geben
+सुझाव भेजें
 
 # Gemini Omni Flash
 
-Gemini Omni Flash ist ein Vorabmodell, das für die schnelle, dialogorientierte Videogenerierung und ‑bearbeitung entwickelt wurde. Sie eignet sich hervorragend, um Text und Bilder in Videos umzuwandeln. Außerdem können Sie generierte Videos über Konversationen in natürlicher Sprache mithilfe der Interactions API optimieren und bearbeiten.
+Gemini Omni Flash, प्रीव्यू मॉडल है. इसे बातचीत के फ़ॉर्मैट में तेज़ी से वीडियो जनरेट करने और एडिट करने के लिए डिज़ाइन किया गया है. यह मॉडल, टेक्स्ट और इमेज को वीडियो में बदलने में माहिर है. साथ ही, Interactions API का इस्तेमाल करके, नैचुरल लैंग्वेज में बातचीत करके जनरेट किए गए वीडियो को बेहतर बनाने और एडिट करने की सुविधा देता है.
 
-[In Google AI Studio ausprobieren](https://aistudio.google.com?model=gemini-omni-flash-preview&hl=de)
+[Google AI Studio में आज़माएं](https://aistudio.google.com?model=gemini-omni-flash-preview&hl=hi)
 
-## Dokumentation
+## दस्तावेज़
 
-Auf der Seite [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=de) finden Sie eine vollständige Übersicht über die Funktionen.
+सुविधाओं और क्षमताओं के बारे में पूरी जानकारी पाने के लिए, [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=hi)
+का पेज देखें.
 
 ## gemini-omni-flash-preview
 
-| Attribut | Beschreibung |
+| प्रॉपर्टी | ब्यौरा |
 | --- | --- |
-| id\_cardModellcode | **Gemini API**  `gemini-omni-flash-preview` |
-| saveUnterstützte Datentypen | **Eingabe**  Text, Bild, Video (bis zu 10 Sekunden für die Bearbeitung)  **Ausgabe**  Video |
-| token\_auto-Limits | **Kontextfenster**  1.048.576 Tokens  **Ausgabe-Video**  3–10 Sekunden (720p, 24 FPS) |
-| calendar\_monthLetzte Aktualisierung | Juni 2026 |
+| id\_cardModel कोड | **Gemini API**  `gemini-omni-flash-preview` |
+| saveकौन-कौनसे डेटा टाइप इसके साथ काम करते हैं | **इनपुट**  टेक्स्ट, इमेज, वीडियो (एडिट करने के लिए, ज़्यादा से ज़्यादा 10 सेकंड का वीडियो)  **आउटपुट**  वीडियो |
+| token\_autoLimits | **कॉन्टेक्स्ट विंडो**  10,48,576 टोकन  **आउटपुट वीडियो**  3 से 10 सेकंड (720 पिक्सल, 24 एफ़पीएस) |
+| calendar\_monthसबसे नया अपडेट | जून 2026 |
 
-Feedback geben
+सुझाव भेजें
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Zuletzt aktualisiert: 2026-06-30 (UTC).
+आखिरी बार 2026-06-30 (UTC) को अपडेट किया गया.
 
-Haben Sie Feedback für uns?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-06-30 (UTC)."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-06-30 (UTC) को अपडेट किया गया."],[],[]]

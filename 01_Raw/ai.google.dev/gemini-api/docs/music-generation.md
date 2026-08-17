@@ -1,38 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/music-generation?hl=th
-fetched_at: 2026-08-10T03:18:38.032304+00:00
-title: "\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e40\u0e1e\u0e25\u0e07\u0e14\u0e49\u0e27\u0e22 Lyria 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/music-generation?hl=de
+fetched_at: 2026-08-17T02:33:27.262776+00:00
+title: "Musik mit Lyria\u00a03 generieren \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-ส่งความคิดเห็น
+Feedback geben
 
-# สร้างเพลงด้วย Lyria 3
+# Musik mit Lyria 3 generieren
 
-Lyria 3 เป็นกลุ่มโมเดลการสร้างเพลงของ Google ซึ่งพร้อมให้บริการผ่าน Gemini API Lyria 3 ช่วยให้คุณสร้างเสียงสเตอริโอคุณภาพสูง 44.1 kHz จากพรอมต์ข้อความหรือจากรูปภาพได้ โมเดลเหล่านี้ให้ความสอดคล้องเชิงโครงสร้าง ซึ่งรวมถึงเสียงร้อง เนื้อเพลงที่กำหนดเวลา และดนตรีบรรเลงแบบเต็ม
+Lyria 3 ist die Familie der Musikgenerierungsmodelle von Google, die über die Gemini API verfügbar sind. Mit Lyria 3 können Sie aus Textprompts oder Bildern hochwertiges Stereo-Audio mit 44,1 kHz generieren. Diese Modelle liefern strukturelle Kohärenz, einschließlich Gesang, zeitgesteuerter Songtexte und vollständiger Instrumentalarrangements.
 
-กลุ่ม Lyria 3 มี 2 โมเดล ได้แก่
+Die Lyria 3-Familie umfasst zwei Modelle:
 
-| รุ่น | รหัสโมเดล | เหมาะสำหรับ | ระยะเวลา | เอาต์พุต |
+| Modell | Modell-ID | Optimal für | Dauer | Ausgabe |
 | --- | --- | --- | --- | --- |
-| **Lyria 3 Clip** | `lyria-3-clip-preview` | คลิปสั้น ลูป ตัวอย่าง | 30 วินาที | MP3 |
-| **Lyria 3 Pro** | `lyria-3-pro-preview` | เพลงแบบเต็มความยาวที่มีท่อน Verse, Chorus และ Bridge | 2-3 นาที (ควบคุมได้โดยใช้พรอมต์) | MP3 |
+| **Lyria 3 Clip** | `lyria-3-clip-preview` | Kurze Clips, Loops, Vorschauen | 30 Sekunden | MP3 |
+| **Lyria 3 Pro** | `lyria-3-pro-preview` | Songs in voller Länge mit Strophen, Refrains und Bridges | Ein paar Minuten (über Prompt steuerbar) | MP3 |
 
-คุณสามารถใช้โมเดลทั้ง 2 ได้โดยใช้
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) ใหม่ ซึ่งรองรับอินพุตหลายรูปแบบ (ข้อความและรูปภาพ) และสร้างเสียง **สเตอริโอความสมจริงสูง 44.1 kHz**
+Beide Modelle können mit der neuen
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) verwendet werden, die multimodale
+Eingaben (Text und Bilder) unterstützt und **Stereo-Audio mit 44,1 kHz**
+erzeugt.
 
-## สร้างคลิปเพลง
+## Musikclip generieren
 
-โมเดล Lyria 3 Clip จะสร้างคลิปความยาว **30 วินาที** เสมอ หากต้องการสร้างคลิป ให้เรียกใช้เมธอด `interactions.create` ด้วยพรอมต์ข้อความ การตอบกลับจะมีเนื้อเพลงและโครงสร้างเพลงที่สร้างขึ้นเสมอ รวมถึงเสียงในสคีมา `steps`
+Das Modell Lyria 3 Clip generiert immer einen **30-sekündigen** Clip. Rufen Sie zum Generieren eines Clips die Methode `interactions.create` mit einem Text-Prompt auf. Die Antwort enthält immer den generierten Songtext und die Songstruktur sowie das Audio im `steps`-Schema.
 
 ### Python
 
@@ -93,14 +95,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-คุณสามารถดึงข้อมูลเพลงที่สร้างขึ้นได้โดยใช้พร็อพเพอร์ตี้ `interaction.output_audio` ซึ่งจะแสดงผลบล็อกเสียงที่สร้างขึ้นล่าสุด นอกจากนี้ คุณยังดึงเนื้อเพลงและโครงสร้างของเพลงได้โดยใช้พร็อพเพอร์ตี้ `interaction.output_text` ดูรายละเอียดเกี่ยวกับพร็อพเพอร์ตี้ที่สะดวกได้ที่
-[ภาพรวมของ Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th#convenience-properties)
+Sie können generierte Musikdaten mit der Eigenschaft `interaction.output_audio` abrufen, die den letzten generierten Audioblock zurückgibt. Sie können auch den Songtext und die Struktur des Songs mit der Eigenschaft `interaction.output_text` abrufen. Weitere Informationen zu Convenience-Eigenschaften finden Sie in der
+[Übersicht zu Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de#convenience-properties).
 
-## สร้างเพลงแบบเต็มความยาว
+## Song in voller Länge generieren
 
-ใช้โมเดล `lyria-3-pro-preview` เพื่อสร้างเพลงแบบเต็มความยาวที่ใช้เวลา 2-3 นาที โมเดล Pro เข้าใจโครงสร้างเพลงและสามารถสร้างเพลงที่มีท่อน Verse, Chorus และ Bridge ที่แตกต่างกันได้ คุณสามารถกำหนด
-ระยะเวลาได้โดยระบุในพรอมต์ (เช่น "สร้างเพลงความยาว 2 นาที") หรือ
-ใช้ [การประทับเวลา](#timing) เพื่อกำหนดโครงสร้าง
+Mit dem Modell `lyria-3-pro-preview` können Sie Songs in voller Länge generieren, die ein paar Minuten dauern. Das Pro-Modell versteht die musikalische Struktur und kann Kompositionen mit unterschiedlichen Strophen, Refrains und Bridges erstellen. Sie können die
+Dauer beeinflussen, indem Sie sie in Ihrem Prompt angeben (z.B. „Erstelle einen 2-Minuten-Song“) oder
+[Zeitstempel](#timing) verwenden, um die Struktur zu definieren.
 
 ### Python
 
@@ -132,9 +134,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## เลือกรูปแบบเอาต์พุต
+## Ausgabeformat auswählen
 
-โดยค่าเริ่มต้น โมเดล Lyria 3 จะสร้างเสียงในรูปแบบ **MP3** สำหรับ Lyria 3 Pro คุณยังขอเอาต์พุตในรูปแบบ **WAV** ได้ด้วยโดยตั้งค่า `response_format`
+Standardmäßig generieren die Lyria 3-Modelle Audio im **MP3** -Format. Für Lyria 3 Pro können Sie die Ausgabe auch im **WAV** -Format anfordern, indem Sie `response_format` festlegen.
 
 ### Python
 
@@ -173,12 +175,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## แยกวิเคราะห์การตอบกลับ
+## Antwort analysieren
 
-การตอบกลับจาก Lyria 3 มีบล็อกเนื้อหาหลายรายการภายในสคีมา `steps`
-Interactions จะแสดงผลลำดับขั้นตอน โดยขั้นตอน `model_output` จะมีเนื้อหาที่สร้างขึ้น
-บล็อกเนื้อหาข้อความจะมีเนื้อเพลงที่สร้างขึ้นหรือคำอธิบายโครงสร้างเพลงในรูปแบบ JSON
-บล็อกเนื้อหาที่มีประเภท `audio` จะมีข้อมูลเสียงที่เข้ารหัสแบบ Base64
+Die Antwort von Lyria 3 enthält mehrere Inhaltsblöcke im `steps`-Schema.
+Interactions geben eine Abfolge von Schritten zurück, wobei `model_output`-Schritte den generierten Inhalt enthalten.
+Textinhaltsblöcke enthalten den generierten Songtext oder eine JSON-Beschreibung der Songstruktur.
+Inhaltsblöcke mit dem Typ `audio` enthalten die base64-codierten Audiodaten.
 
 ### Python
 
@@ -222,11 +224,11 @@ if (lyrics) {
 curl ... | jq -r '.steps[] | select(.type=="model_output") | .content[] | select(.type=="audio") | .data' | base64 -d > output.mp3
 ```
 
-#### เนื้อเพลงและเพลงที่สลับกัน
+#### Verschachtelte Songtexte und Musik
 
-เนื่องจากเอาต์พุตจาก Lyria 3 มีความซับซ้อน โดยมีขั้นตอนและบล็อกแยกกันสำหรับเนื้อเพลง (ข้อความ) และเพลงเอง (เสียง) พร็อพเพอร์ตี้ที่สะดวกจึงเป็นทางลัดที่รวดเร็วและแนะนำ
+Da die Ausgabe von Lyria 3 komplex ist und separate Schritte und Blöcke für generierte Songtexte (Text) und den Song selbst (Audio) enthält, bieten Convenience-Eigenschaften eine schnelle und empfohlene Abkürzung.
 
-อย่างไรก็ตาม หากต้องการควบคุมไทม์ไลน์แบบดิบของขั้นตอนที่เซิร์ฟเวอร์แสดงผลแบบเป็นโปรแกรมอย่างเต็มรูปแบบ (เช่น การบันทึกบล็อกเนื้อหาแต่ละรายการเมื่อได้รับ) คุณสามารถวนซ้ำ `steps` ด้วยตนเองแทนได้ ดังนี้
+Wenn Sie jedoch die vollständige programmatische Kontrolle über die Rohzeitachse der vom Server zurückgegebenen Schritte haben möchten (z. B. einzelne Inhaltsblöcke protokollieren, sobald sie empfangen werden), können Sie stattdessen manuell über `steps` iterieren:
 
 ### Python
 
@@ -277,9 +279,9 @@ if (audioData) {
 }
 ```
 
-## สร้างเพลงจากรูปภาพ
+## Musik aus Bildern generieren
 
-Lyria 3 รองรับอินพุตหลายรูปแบบ โดยคุณสามารถใส่รูปภาพได้สูงสุด **10 รูป** พร้อมกับพรอมต์ข้อความในรายการ `input` แล้วโมเดลจะแต่งเพลงที่ได้รับแรงบันดาลใจจากเนื้อหาภาพ
+Lyria 3 unterstützt multimodale Eingaben. Sie können in der Liste `input` neben Ihrem Textprompt bis zu **10 Bilder** angeben. Das Modell komponiert dann Musik, die von den visuellen Inhalten inspiriert ist.
 
 ### Python
 
@@ -345,9 +347,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## ใส่เนื้อเพลงที่กำหนดเอง
+## Benutzerdefinierte Songtexte angeben
 
-คุณสามารถเขียนเนื้อเพลงของคุณเองและใส่ไว้ในพรอมต์ได้ ใช้แท็กส่วนต่างๆ เช่น `[Verse]`, `[Chorus]` และ `[Bridge]` เพื่อช่วยให้โมเดลเข้าใจโครงสร้างเพลง
+Sie können Ihre eigenen Songtexte schreiben und in den Prompt einfügen. Verwenden Sie Abschnitts-Tags wie `[Verse]`, `[Chorus]` und `[Bridge]`, damit das Modell die Songstruktur versteht:
 
 ### Python
 
@@ -423,9 +425,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## ควบคุมเวลาและโครงสร้าง
+## Timing und Struktur steuern
 
-คุณสามารถระบุสิ่งที่เกิดขึ้นในบางช่วงเวลาของเพลงได้อย่างแม่นยำโดยใช้การประทับเวลา ซึ่งมีประโยชน์สำหรับการควบคุมเวลาที่เครื่องดนตรีเริ่มเล่น เวลาที่เนื้อเพลงเริ่มร้อง และความคืบหน้าของเพลง
+Mit Zeitstempeln können Sie genau angeben, was in bestimmten Momenten im Song passiert. Das ist nützlich, um zu steuern, wann Instrumente einsetzen, wann Songtexte gesungen werden und wie der Song weitergeht:
 
 ### Python
 
@@ -477,9 +479,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## สร้างแทร็กดนตรีบรรเลง
+## Instrumentaltracks generieren
 
-สำหรับเพลงประกอบ เกม หรือกรณีการใช้งานที่ไม่จำเป็นต้องมีเสียงร้อง คุณสามารถแจ้งให้โมเดลสร้างแทร็กดนตรีบรรเลงเท่านั้นได้
+Für Hintergrundmusik, Game-Soundtracks oder jeden Anwendungsfall, bei dem kein Gesang erforderlich ist, können Sie das Modell auffordern, reine Instrumentaltracks zu erstellen:
 
 ### Python
 
@@ -511,9 +513,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## สร้างเพลงในภาษาต่างๆ
+## Musik in verschiedenen Sprachen generieren
 
-Lyria 3 จะสร้างเนื้อเพลงในภาษาของพรอมต์ หากต้องการสร้างเพลงที่มีเนื้อเพลงเป็นภาษาฝรั่งเศส ให้เขียนพรอมต์เป็นภาษาฝรั่งเศส โมเดลจะปรับสไตล์การร้องและการออกเสียงให้เข้ากับภาษา
+Lyria 3 generiert Songtexte in der Sprache Ihres Prompts. Wenn Sie einen Song mit französischen Songtexten generieren möchten, schreiben Sie Ihren Prompt auf Französisch. Das Modell passt seinen Gesangsstil und seine Aussprache an die Sprache an.
 
 ### Python
 
@@ -545,30 +547,30 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## ความสามารถของโมเดล
+## Modellintelligenz
 
-Lyria 3 จะวิเคราะห์กระบวนการพรอมต์ที่โมเดลใช้เหตุผลผ่านโครงสร้างเพลง (Intro, Verse, Chorus, Bridge ฯลฯ) ตามพรอมต์ของคุณ
-กระบวนการนี้จะเกิดขึ้นก่อนที่จะสร้างเสียง และช่วยให้มั่นใจได้ถึงความสอดคล้องเชิงโครงสร้างและความเป็นเพลง
+Lyria 3 analysiert Ihren Prompt-Prozess, wobei das Modell die musikalische Struktur (Intro, Strophe, Refrain, Bridge usw.) anhand Ihres Prompts ableitet.
+Das geschieht, bevor das Audio generiert wird, und sorgt für strukturelle Kohärenz und Musikalität.
 
-## คำแนะนำในการเขียนพรอมต์
+## Anleitung zu Prompts
 
-พรอมต์ที่เฉพาะเจาะจงมากขึ้นจะให้ผลลัพธ์ที่ดีขึ้น สิ่งที่คุณใส่ได้เพื่อแนะนำการสร้างมีดังนี้
+Je genauer Ihr Prompt ist, desto besser sind die Ergebnisse. Hier sind einige Beispiele für Informationen, die Sie angeben können, um die Generierung zu steuern:
 
-- **ประเภท**: ระบุประเภทหรือการผสมผสานของประเภท (เช่น "Lo-fi Hip Hop",
-  "Jazz Fusion", "Cinematic Orchestral")
-- **เครื่องดนตรี**: ระบุชื่อเครื่องดนตรี (เช่น "เปียโน Fender Rhodes",
-  "กีตาร์สไลด์", "เครื่องดรัม TR-808")
-- **BPM**: กำหนดจังหวะ (เช่น "120 BPM", "จังหวะช้าประมาณ 70 BPM")
-- **คีย์/สเกล**: ระบุคีย์เพลง (เช่น "ในคีย์ G เมเจอร์", "D ไมเนอร์")
-- **อารมณ์และบรรยากาศ**: ใช้คำคุณศัพท์เชิงพรรณนา (เช่น "คิดถึงอดีต",
-  "ดุดัน", "เหนือจริง", "ชวนฝัน")
-- **โครงสร้าง**: ใช้แท็กต่างๆ เช่น `[Verse]`, `[Chorus]`, `[Bridge]`, `[Intro]`,
-  `[Outro]` หรือการประทับเวลาเพื่อควบคุมความคืบหน้าของเพลง
-- **ระยะเวลา**: โมเดล Clip จะสร้างคลิปความยาว 30 วินาทีเสมอ สำหรับโมเดล Pro ให้ระบุความยาวที่ต้องการในพรอมต์ (เช่น "สร้างเพลงความยาว 2 นาที") หรือใช้การประทับเวลาเพื่อควบคุมระยะเวลา
+- **Genre**: Geben Sie ein Genre oder eine Mischung aus Genres an (z.B. „Lo-Fi-Hip-Hop“,
+  „Jazz-Fusion“, „Orchestral-Soundtrack“).
+- **Instrumente**: Nennen Sie bestimmte Instrumente (z.B. „Fender Rhodes-Piano“,
+  „Slide-Gitarre“, „TR-808-Drum-Machine“).
+- **BPM**: Legen Sie das Tempo fest (z.B. „120 BPM“, „langsames Tempo um 70 BPM“).
+- **Tonart/Tonleiter**: Geben Sie eine Tonart an (z.B. „in G-Dur“, „D-Moll“).
+- **Stimmung und Atmosphäre**: Verwenden Sie beschreibende Adjektive (z.B. „nostalgisch“,
+  „aggressiv“, „ätherisch“, „vertäumt“).
+- **Struktur**: Verwenden Sie Tags wie `[Verse]`, `[Chorus]`, `[Bridge]`, `[Intro]`,
+  `[Outro]` oder Zeitstempel, um den Ablauf des Songs zu steuern.
+- **Dauer**: Das Modell „Clip“ erzeugt immer 30-sekündige Clips. Geben Sie für das Modell „Pro“ die gewünschte Länge in Ihrem Prompt an (z.B. „Erstelle einen 2-Minuten-Song“) oder verwenden Sie Zeitstempel, um die Dauer zu steuern.
 
-### ตัวอย่างพรอมต์
+### Beispiele für Prompts
 
-ตัวอย่างพรอมต์ที่มีประสิทธิภาพมีดังนี้
+Beispiele für effektive Prompts:
 
 - `"A 30-second lofi hip hop beat with dusty vinyl crackle, mellow Rhodes
   piano chords, a slow boom-bap drum pattern at 85 BPM, and a jazzy upright
@@ -579,43 +581,43 @@ Lyria 3 จะวิเคราะห์กระบวนการพรอม
 - `"A dark, atmospheric trap beat at 140 BPM with heavy 808 bass, eerie synth
   pads, sharp hi-hats, and a haunting vocal sample. In D minor."`
 
-## แนวทางปฏิบัติแนะนำ
+## Best Practices
 
-- **วนซ้ำด้วย Clip ก่อน** ใช้โมเดล `lyria-3-clip-preview` ที่เร็วกว่าเพื่อทดลองใช้พรอมต์ก่อนที่จะสร้างเพลงแบบเต็มความยาวด้วย `lyria-3-pro-preview`
-- **ใช้คำที่เฉพาะเจาะจง** พรอมต์ที่คลุมเครือจะให้ผลลัพธ์ทั่วไป ระบุเครื่องดนตรี BPM คีย์ อารมณ์ และโครงสร้างเพื่อให้ได้เอาต์พุตที่ดีที่สุด
-- **ใช้ภาษาที่ต้องการ** เขียนพรอมต์ในภาษาที่ต้องการให้เนื้อเพลงเป็น
-- **ใช้แท็กส่วนต่างๆ** แท็ก `[Verse]`, `[Chorus]`, `[Bridge]` จะให้โครงสร้างที่ชัดเจนแก่โมเดลเพื่อทำตาม
-- **แยกเนื้อเพลงออกจากคำแนะนำ** เมื่อใส่เนื้อเพลงที่กำหนดเอง ให้แยกเนื้อเพลงออกจากคำแนะนำเกี่ยวกับทิศทางดนตรีอย่างชัดเจน
+- **Zuerst mit Clip iterieren** Verwenden Sie das schnellere Modell `lyria-3-clip-preview`, um mit Prompts zu experimentieren, bevor Sie eine Generierung in voller Länge mit `lyria-3-pro-preview` starten.
+- **Machen Sie genaue Angaben** Vage Prompts führen zu allgemeinen Ergebnissen. Geben Sie Instrumente, BPM, Tonart, Stimmung und Struktur an, um die besten Ergebnisse zu erzielen.
+- **Passen Sie die Sprache an** Geben Sie den Prompt in der Sprache an, in der Sie den Songtext haben möchten.
+- **Abschnitts-Tags verwenden** Die Tags `[Verse]`, `[Chorus]` und `[Bridge]` geben dem Modell eine klare Struktur, an die es sich halten kann.
+- **Songtexte von Anweisungen trennen** Wenn Sie benutzerdefinierte Songtexte angeben, trennen Sie sie deutlich von Ihren Anweisungen zur musikalischen Ausrichtung.
 
-## ข้อจำกัด
+## Beschränkungen
 
-- **ความปลอดภัย**: ระบบจะตรวจสอบพรอมต์ทั้งหมดด้วยตัวกรองความปลอดภัย และจะบล็อกพรอมต์ที่ทริกเกอร์ตัวกรอง ซึ่งรวมถึงพรอมต์ที่ขอเสียงร้องของศิลปินที่เฉพาะเจาะจงหรือการสร้างเนื้อเพลงที่มีลิขสิทธิ์
-- **การใส่ลายน้ำ**: เสียงทั้งหมดที่สร้างขึ้นจะมี
-  [ลายน้ำที่เป็นเสียง SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=th) เพื่อ
-  การระบุ ลายน้ำนี้หูของมนุษย์ไม่สามารถรับรู้ได้และไม่ส่งผลต่อประสบการณ์การฟัง
-- **การแก้ไขแบบผ่านการสนทนาไปมา**: การสร้างเพลงเป็นกระบวนการแบบผ่านการสนทนาไปมาครั้งเดียว
-  ระบบไม่รองรับการแก้ไขซ้ำๆ หรือการปรับแต่งคลิปที่สร้างขึ้นผ่านพรอมต์หลายรายการใน Lyria 3 เวอร์ชันปัจจุบัน
-- **ความยาว**: โมเดล Clip จะสร้างคลิปความยาว 30 วินาทีเสมอ โมเดล Pro จะสร้างเพลงที่ใช้เวลา 2-3 นาที โดยคุณสามารถกำหนดระยะเวลาที่แน่นอนได้ผ่านพรอมต์
-- **ความแน่นอน**: ผลลัพธ์อาจแตกต่างกันไประหว่างการเรียกใช้ แม้ว่าจะใช้พรอมต์เดียวกันก็ตาม
+- **Sicherheit**: Alle Prompts werden von Sicherheitsfiltern geprüft. Prompts, die die Filter auslösen, werden blockiert. Dazu gehören Prompts, in denen bestimmte Stimmen von Künstlern angefordert werden oder urheberrechtlich geschützte Songtexte generiert werden sollen.
+- **Wasserzeichen**: Alle generierten Audioinhalte enthalten ein
+  [SynthID-Audio-Wasserzeichen](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=de) zur
+  Identifizierung. Dieses Wasserzeichen ist für das menschliche Ohr nicht wahrnehmbar und beeinträchtigt das Hörerlebnis nicht.
+- **Bearbeitung in mehreren Schritten**: Die Musikgenerierung ist ein Prozess in einem Schritt.
+  Die iterative Bearbeitung oder Verfeinerung eines generierten Clips durch mehrere Prompts wird in der aktuellen Version von Lyria 3 nicht unterstützt.
+- **Länge**: Das Modell „Clip“ erzeugt immer 30-sekündige Clips. Das Modell „Pro“ generiert Songs, die ein paar Minuten dauern. Die genaue Dauer kann über Ihren Prompt beeinflusst werden.
+- **Determinismus**: Die Ergebnisse können zwischen den Aufrufen variieren, auch bei demselben Prompt.
 
-## ขั้นตอนถัดไป
+## Nächste Schritte
 
-- ตรวจสอบ[ราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th)ของโมเดล Lyria 3
-- ลองสร้างเพลงแบบสตรีมมิงแบบ[เรียลไทม์](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=th)
-  ด้วย Lyria RealTime
-- สร้างการสนทนาแบบหลายผู้พูดด้วย
-  [โมเดล TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th)
-- ดูวิธีสร้าง[รูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)หรือ[วิดีโอ](https://ai.google.dev/gemini-api/docs/video?hl=th)
-- ดูวิธีที่ Gemini [เข้าใจไฟล์เสียง](https://ai.google.dev/gemini-api/docs/audio?hl=th)
-- สนทนาแบบเรียลไทม์กับ Gemini โดยใช้
-  [Live API](https://ai.google.dev/gemini-api/docs/live?hl=th)
+- Preise für [Lyria 3-Modelle](https://ai.google.dev/gemini-api/docs/pricing?hl=de) ansehen
+- [Musikgenerierung in Echtzeit](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=de)
+  mit Lyria RealTime ausprobieren.
+- Unterhaltungen mit mehreren Sprechern mit den
+  [TTS-Modellen](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de) generieren
+- Informationen zum Generieren von [Bildern](https://ai.google.dev/gemini-api/docs/image-generation?hl=de) oder [Videos](https://ai.google.dev/gemini-api/docs/video?hl=de)
+- Informationen dazu, wie Gemini [Audiodateien verstehen](https://ai.google.dev/gemini-api/docs/audio?hl=de) kann.
+- Unterhaltungen mit Gemini in Echtzeit über die
+  [Live API](https://ai.google.dev/gemini-api/docs/live?hl=de)
 
-ส่งความคิดเห็น
+Feedback geben
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-อัปเดตล่าสุด 2026-07-30 UTC
+Zuletzt aktualisiert: 2026-07-30 (UTC).
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Haben Sie Feedback für uns?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-30 UTC"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-30 (UTC)."],[],[]]

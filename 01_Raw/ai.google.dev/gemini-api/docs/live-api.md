@@ -1,132 +1,137 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api?hl=es-419
-fetched_at: 2026-08-10T03:11:17.027723+00:00
-title: "Descripci\u00f3n general de la API de Gemini Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api?hl=th
+fetched_at: 2026-08-17T02:24:48.152281+00:00
+title: "\u0e20\u0e32\u0e1e\u0e23\u0e27\u0e21\u0e02\u0e2d\u0e07 Gemini Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Enviar comentarios
+ส่งความคิดเห็น
 
-# Descripción general de la API de Gemini Live
+# ภาพรวมของ Gemini Live API
 
-La API de Live permite interacciones de voz y visión en tiempo real con baja latencia con Gemini. Procesa flujos continuos de audio, imágenes y texto para brindar respuestas habladas inmediatas y similares a las humanas, lo que crea una experiencia conversacional natural para tus usuarios.
+Live API ช่วยให้การโต้ตอบด้วยเสียงและภาพกับ Gemini เป็นไปแบบเรียลไทม์และมีความหน่วงต่ำ โดยจะประมวลผลสตรีมเสียง รูปภาพ และข้อความอย่างต่อเนื่องเพื่อแสดงเสียงตอบกลับที่เหมือนมนุษย์ในทันที ซึ่งสร้างประสบการณ์การสนทนาที่เป็นธรรมชาติให้กับผู้ใช้
 
-![Descripción general de la API de Live](https://ai.google.dev/static/gemini-api/docs/images/live-api-overview.png?hl=es-419)
+![ภาพรวม Live API](https://ai.google.dev/static/gemini-api/docs/images/live-api-overview.png?hl=th)
 
-[Probar la API en vivo en Google AI Studiomic](https://aistudio.google.com/live?hl=es-419)
-[Clonar apps de ejemplo desde GitHubcode](https://github.com/google-gemini/gemini-live-api-examples)
-[Usar habilidades de agentes de programaciónterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=es-419)
+[ลองใช้ Live API ใน Google AI Studiomic](https://aistudio.google.com/live?hl=th)
+[โคลนแอปตัวอย่างจาก GitHubcode](https://github.com/google-gemini/gemini-live-api-examples)
+[ใช้ทักษะของ Agent ในการเขียนโค้ดterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=th)
 
-## Casos de uso
+## กรณีการใช้งาน
 
-La API de Live se puede usar para compilar agentes de voz en tiempo real para una variedad de industrias, incluidas las siguientes:
+คุณสามารถใช้ Live API เพื่อสร้าง Agent ที่ใช้เสียงแบบเรียลไทม์สำหรับอุตสาหกรรมต่างๆ ได้แก่
 
-- **Comercio electrónico y venta minorista:** Asistentes de compras que ofrecen recomendaciones personalizadas y agentes de asistencia que resuelven los problemas de los clientes.
-- **Juegos:** Personajes controlados por la máquina (NPC) interactivos, asistentes de ayuda en el juego y traducción en tiempo real del contenido del juego
-- **Interfaces de nueva generación:** Experiencias habilitadas para voz y video en robótica, anteojos inteligentes y vehículos
-- **Cuidado de la salud:** Compañeros de salud para la asistencia y educación de los pacientes
-- **Servicios financieros:** Asesores de IA para la administración de patrimonio y la orientación sobre inversiones
-- **Educación:** Mentores y compañeros de aprendizaje basados en IA que brindan instrucción y comentarios personalizados.
-- **Traducción y localización:** Traducción en tiempo real y de baja latencia de conversaciones habladas, lo que permite una comunicación multilingüe fluida.
+- **อีคอมเมิร์ซและการค้าปลีก:** ผู้ช่วยช็อปปิ้งที่ให้คำแนะนำที่ปรับให้เหมาะกับแต่ละบุคคลและ Agent ฝ่ายสนับสนุนที่แก้ไขปัญหาของลูกค้า
+- **เกม:** ตัวละครที่ไม่ใช่ผู้เล่น (NPC) แบบอินเทอร์แอกทีฟ ผู้ช่วยในเกม และการแปลเนื้อหาในเกมแบบเรียลไทม์
+- **อินเทอร์เฟซยุคใหม่:** ประสบการณ์ที่ใช้เสียงและวิดีโอได้ในหุ่นยนต์ แว่นตาอัจฉริยะ และยานพาหนะ
+- **การดูแลสุขภาพ:** เพื่อนดูแลสุขภาพเพื่อสนับสนุนและให้ความรู้แก่ผู้ป่วย
+- **บริการทางการเงิน:** ที่ปรึกษา AI สำหรับการจัดการความมั่งคั่งและคำแนะนำด้านการลงทุน
+- **การศึกษา:** ครูฝึก AI และเพื่อนร่วมเรียนที่ให้คำแนะนำและข้อเสนอแนะที่ปรับให้เหมาะกับแต่ละบุคคล
+- **การแปลและการแปลเป็นภาษาท้องถิ่น:** การแปลบทสนทนาแบบเรียลไทม์ที่มีความหน่วงต่ำ ซึ่งช่วยให้การสื่อสารหลายภาษาเป็นไปอย่างราบรื่น
 
-## Características clave
+## ฟีเจอร์หลัก
 
-La API de Live ofrece un conjunto integral de funciones para crear agentes de voz sólidos:
+Live API มีชุดฟีเจอร์ที่ครอบคลุมสำหรับการสร้าง Agent ที่ใช้เสียงได้อย่างมีประสิทธิภาพ ดังนี้
 
-- [**Compatibilidad con varios idiomas**](https://ai.google.dev/gemini-api/docs/live-guide?hl=es-419#supported-languages):
-  Conversa en 70 idiomas compatibles.
-- [**Interrupción**](https://ai.google.dev/gemini-api/docs/live-guide?hl=es-419#interruptions):
-  Los usuarios pueden interrumpir el modelo en cualquier momento para tener interacciones responsivas.
-- [**Uso de herramientas**](https://ai.google.dev/gemini-api/docs/live-tools?hl=es-419):
-  Integra herramientas como llamadas a funciones y la Búsqueda de Google para interacciones dinámicas.
-- [**Transcripciones de audio**](https://ai.google.dev/gemini-api/docs/live-guide?hl=es-419#audio-transcription):
-  Proporciona transcripciones de texto de la entrada del usuario y el resultado del modelo.
-- [**Audio proactivo**](https://ai.google.dev/gemini-api/docs/live-guide?hl=es-419#proactive-audio):
-  Te permite controlar cuándo responde el modelo y en qué contextos.
-- [**Diálogo afectivo**](https://ai.google.dev/gemini-api/docs/live-guide?hl=es-419#affective-dialog):
-  Adapta el estilo y el tono de la respuesta para que coincidan con la expresión de entrada del usuario.
-- [**Traducción instantánea**](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=es-419): Traducción de voz a voz en tiempo real en más de 70 idiomas
+- [**การรองรับหลายภาษา**](https://ai.google.dev/gemini-api/docs/live-guide?hl=th#supported-languages):
+  สนทนาในภาษาที่รองรับ 70 ภาษา
+- [**Barge-in**](https://ai.google.dev/gemini-api/docs/live-guide?hl=th#interruptions):
+  ผู้ใช้สามารถขัดจังหวะโมเดลได้ทุกเมื่อเพื่อการโต้ตอบที่ตอบสนอง
+- [**การใช้เครื่องมือ**](https://ai.google.dev/gemini-api/docs/live-tools?hl=th):
+  ผสานรวมเครื่องมือต่างๆ เช่น การเรียกใช้ฟังก์ชันและการค้นหาของ Google เพื่อการโต้ตอบแบบไดนามิก
+- [**การถอดเสียง**](https://ai.google.dev/gemini-api/docs/live-guide?hl=th#audio-transcription):
+  ให้ข้อความถอดเสียงทั้งข้อมูลจากผู้ใช้และเอาต์พุตโมเดล
+- [**เสียงเชิงรุก**](https://ai.google.dev/gemini-api/docs/live-guide?hl=th#proactive-audio):
+  ให้คุณควบคุมได้ว่าโมเดลจะตอบกลับเมื่อใดและในบริบทใด
+- [**การสนทนาเชิงอารมณ์**](https://ai.google.dev/gemini-api/docs/live-guide?hl=th#affective-dialog):
+  ปรับรูปแบบและน้ำเสียงในการตอบกลับให้ตรงกับคำพูดของผู้ใช้
+- [**การแปลสด**](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=th):
+  การแปลเสียงเป็นเสียงแบบเรียลไทม์ในภาษาต่างๆ มากกว่า 70 ภาษา
 
-## Especificaciones técnicas
+## ข้อกำหนดทางเทคนิค
 
-En la siguiente tabla, se describen las especificaciones técnicas de la API de Live:
+ตารางต่อไปนี้แสดงข้อกำหนดทางเทคนิคของ Live API
 
-| Categoría | Detalles |
+| หมวดหมู่ | รายละเอียด |
 | --- | --- |
-| Modalidades de entrada | Audio (audio PCM sin procesar de 16 bits, 16 kHz, little-endian), imágenes (JPEG <= 1 FPS), texto |
-| Modalidades de salida | Audio (audio PCM sin procesar de 16 bits, 24 kHz, little-endian) |
-| Protocolo | Conexión de WebSocket con estado (WSS) |
+| รูปแบบอินพุต | เสียง (เสียง PCM แบบดิบ 16 บิต, 16 kHz, little-endian), รูปภาพ (JPEG <= 1 FPS), ข้อความ |
+| รูปแบบเอาต์พุต | เสียง (เสียง PCM แบบดิบ 16 บิต, 24 kHz, little-endian) |
+| โปรโตคอล | การเชื่อมต่อ WebSocket แบบมีสถานะ (WSS) |
 
-## Elige un enfoque de implementación
+## เลือกวิธีการนำไปใช้งาน
 
-Cuando realices la integración con la API de Live, deberás elegir uno de los siguientes enfoques de implementación:
+เมื่อผสานรวมกับ Live API คุณจะต้องเลือกวิธีการนำไปใช้งานวิธีใดวิธีหนึ่งต่อไปนี้
 
-- **Servidor a servidor**: Tu backend se conecta a la API de Live con [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). Por lo general, tu cliente envía datos de transmisión (audio, video, texto) a tu servidor, que luego los reenvía a la API de Live.
-- **Cliente a servidor**: Tu código de frontend se conecta directamente a la API de Live con [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) para transmitir datos, lo que omite tu backend.
+- **เซิร์ฟเวอร์ต่อเซิร์ฟเวอร์**: แบ็กเอนด์ของคุณเชื่อมต่อกับ Live API โดยใช้
+  [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) โดยปกติแล้ว ไคลเอ็นต์จะส่งข้อมูลสตรีม (เสียง วิดีโอ ข้อความ) ไปยังเซิร์ฟเวอร์ ซึ่งจะส่งต่อข้อมูลไปยัง Live API
+- **ไคลเอ็นต์ต่อเซิร์ฟเวอร์**: โค้ดส่วนหน้าของคุณเชื่อมต่อกับ Live API โดยตรง
+  โดยใช้ [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) เพื่อสตรีมข้อมูล โดยข้ามแบ็กเอนด์
 
-## Comenzar
+## เริ่มต้นใช้งาน
 
-Selecciona la guía que coincida con tu entorno de desarrollo:
+เลือกคำแนะนำที่ตรงกับสภาพแวดล้อมในการพัฒนาซอฟต์แวร์ของคุณ
 
-De servidor a servidor
+เซิร์ฟเวอร์ต่อเซิร์ฟเวอร์
 
-### [Instructivo del SDK de IA generativa](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=es-419)
+### [บทแนะนำเกี่ยวกับ GenAI SDK](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=th)
 
-Conéctate a la API de Gemini Live con el SDK de GenAI para compilar una aplicación multimodal en tiempo real con un backend de Python.
+เชื่อมต่อกับ Gemini Live API โดยใช้ GenAI SDK เพื่อสร้างแอปพลิเคชันมัลติโมดัลแบบเรียลไทม์ด้วยแบ็กเอนด์ Python
 
-Cliente a servidor
+ไคลเอ็นต์ต่อเซิร์ฟเวอร์
 
-### [Tutorial de WebSocket](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=es-419)
+### [บทแนะนำเกี่ยวกับ WebSocket](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=th)
 
-Conéctate a la API de Gemini Live con WebSockets para crear una aplicación multimodal en tiempo real con un frontend de JavaScript y tokens efímeros.
+เชื่อมต่อกับ Gemini Live API โดยใช้ WebSocket เพื่อสร้างแอปพลิเคชันมัลติโมดัลแบบเรียลไทม์ด้วยส่วนหน้า JavaScript และโทเค็นชั่วคราว
 
-Kit de desarrollo de agentes
+ชุดเครื่องมือพัฒนา Agent
 
-### [Instructivo de ADK](https://google.github.io/adk-docs/streaming/)
+### [บทแนะนำเกี่ยวกับ ADK](https://google.github.io/adk-docs/streaming/)
 
-Crea un agente y usa la transmisión del Kit de desarrollo de agentes (ADK) para habilitar la comunicación por voz y video.
+สร้าง Agent และใช้การสตรีมชุดเครื่องมือพัฒนา Agent (ADK) เพื่อเปิดใช้การสื่อสารด้วยเสียงและวิดีโอ
 
-## Integraciones a socios
+## การผสานรวมพาร์ทเนอร์
 
-Para optimizar el desarrollo de apps de audio y video en tiempo real, puedes usar una integración de terceros que admita la API de Gemini Live a través de WebRTC o WebSockets.
+คุณสามารถใช้
+การผสานรวมของบุคคลที่สามที่รองรับ Gemini Live
+API ผ่าน WebRTC หรือ WebSocket เพื่อเพิ่มประสิทธิภาพการพัฒนาแอปเสียงและวิดีโอแบบเรียลไทม์
 
 [LiveKit
 
-Usa la API de Gemini Live con los agentes de LiveKit.](https://docs.livekit.io/agents/models/realtime/plugins/gemini/)
-[Pipecat de Daily
+ใช้ Gemini Live API กับ LiveKit Agent](https://docs.livekit.io/agents/models/realtime/plugins/gemini/)
+[Pipecat by Daily
 
-Crea un chatbot de IA en tiempo real con Gemini Live y Pipecat.](https://docs.pipecat.ai/guides/features/gemini-live)
-[Fishjam de Software Mansion
+สร้างแชทบ็อต AI แบบเรียลไทม์โดยใช้ Gemini Live และ Pipecat](https://docs.pipecat.ai/guides/features/gemini-live)
+[Fishjam by Software Mansion
 
-Crea aplicaciones de transmisión de audio y video en vivo con Fishjam.](https://docs.fishjam.io/tutorials/gemini-live-integration)
-[Agentes de Vision por transmisión
+สร้างแอปพลิเคชันการสตรีมวิดีโอสดและเสียงด้วย Fishjam](https://docs.fishjam.io/tutorials/gemini-live-integration)
+[Vision Agents by Stream
 
-Crea aplicaciones de IA de voz y video en tiempo real con Vision Agents.](https://visionagents.ai/integrations/gemini)
+สร้างแอปพลิเคชัน AI ที่ใช้เสียงและวิดีโอแบบเรียลไทม์ด้วย Vision Agents](https://visionagents.ai/integrations/gemini)
 [Voximplant
 
-Conecta llamadas entrantes y salientes a la API de Live con Voximplant.](https://voximplant.com/products/gemini-client)
+เชื่อมต่อการโทรขาเข้าและขาออกกับ Live API ด้วย Voximplant](https://voximplant.com/products/gemini-client)
 [Agora
 
-Crea aplicaciones de IA conversacional en tiempo real con Agora.](https://docs.agora.io/en/conversational-ai/models/mllm/gemini)
-[SDK de Firebase AI
+สร้างแอปพลิเคชัน AI สำหรับการสนทนาแบบเรียลไทม์ด้วย Agora](https://docs.agora.io/en/conversational-ai/models/mllm/gemini)
+[Firebase AI SDK
 
-Comienza a usar la API de Gemini Live con Firebase AI Logic.](https://firebase.google.com/docs/ai-logic/live-api?api=dev&hl=es-419)
+เริ่มต้นใช้งาน Gemini Live API โดยใช้ Firebase AI Logic](https://firebase.google.com/docs/ai-logic/live-api?api=dev&hl=th)
 
-Enviar comentarios
+ส่งความคิดเห็น
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Última actualización: 2026-06-12 (UTC)
+อัปเดตล่าสุด 2026-06-12 UTC
 
-¿Quieres brindar más información?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-12 (UTC)"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-12 UTC"],[],[]]

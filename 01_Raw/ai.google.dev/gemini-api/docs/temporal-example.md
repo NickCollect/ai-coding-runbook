@@ -1,84 +1,83 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/temporal-example?hl=es-419
-fetched_at: 2026-08-10T03:16:18.344746+00:00
-title: "Agente de IA duradero con Gemini y Temporal \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/temporal-example?hl=th
+fetched_at: 2026-08-17T02:32:59.311564+00:00
+title: "\u0e40\u0e2d\u0e40\u0e08\u0e19\u0e15\u0e4c AI \u0e17\u0e35\u0e48\u0e17\u0e19\u0e17\u0e32\u0e19\u0e14\u0e49\u0e27\u0e22 Gemini \u0e41\u0e25\u0e30 Temporal \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Enviar comentarios
+ส่งความคิดเห็น
 
-# Agente de IA duradero con Gemini y Temporal
+# เอเจนต์ AI ที่ทนทานด้วย Gemini และ Temporal
 
-En este instructivo, se explica cómo compilar un
-[bucle de agente de estilo ReAct](https://arxiv.org/abs/2210.03629) que usa la
-API de Gemini para el razonamiento y [Temporal](https://temporal.io/) para la durabilidad.
-El código fuente completo de este instructivo está disponible en
-[GitHub](https://github.com/temporal-community/durable-react-agent-gemini).
+บทแนะนำนี้จะอธิบายขั้นตอนการสร้างลูปของ Agent ในสไตล์
+[ReAct](https://arxiv.org/abs/2210.03629) ที่ใช้
+Gemini API สำหรับการให้เหตุผลและ [Temporal](https://temporal.io/) สำหรับความทนทาน
+ซอร์สโค้ดฉบับสมบูรณ์สำหรับบทแนะนำนี้พร้อมให้บริการบน
+[GitHub](https://github.com/temporal-community/durable-react-agent-gemini)
 
-El agente puede llamar a herramientas, como buscar alertas meteorológicas o geolocalizar una dirección IP, y se repetirá hasta que tenga suficiente información para responder.
+Agent สามารถเรียกใช้เครื่องมือต่างๆ ได้ เช่น การค้นหาการแจ้งเตือนสภาพอากาศหรือการระบุตำแหน่งทางภูมิศาสตร์ของที่อยู่ IP และจะวนซ้ำจนกว่าจะมีข้อมูลเพียงพอที่จะตอบกลับ
 
-Lo que diferencia a este agente de una demostración típica es la **durabilidad**. Temporal conserva cada llamada a LLM, cada invocación de herramienta y cada paso del bucle de agente. Si el proceso falla, la red se cae o se agota el tiempo de espera de una API, Temporal vuelve a intentarlo automáticamente y se reanuda desde el último paso completado. No se pierde el historial de conversaciones ni se repiten de forma incorrecta las llamadas a herramientas.
+สิ่งที่ทำให้ Agent นี้แตกต่างจากการสาธิต Agent ทั่วไปคือ**ความทนทาน** Temporal จะเก็บรักษาการเรียกใช้ LLM, การเรียกใช้เครื่องมือ และทุกขั้นตอนของลูปของ Agent หากกระบวนการขัดข้อง เครือข่ายขาดการเชื่อมต่อ หรือ API หมดเวลา Temporal จะลองอีกครั้งโดยอัตโนมัติและดำเนินการต่อจากขั้นตอนสุดท้ายที่เสร็จสมบูรณ์ ระบบจะไม่สูญเสียประวัติการสนทนาและจะไม่เรียกใช้เครื่องมือซ้ำอย่างไม่ถูกต้อง
 
-## Arquitectura
+## สถาปัตยกรรม
 
-La arquitectura consta de tres partes:
+สถาปัตยกรรมประกอบด้วย 3 ส่วนดังนี้
 
-- **Flujo de trabajo:** Es el bucle de agente que organiza la lógica de ejecución.
-- **Actividades:** Son unidades de trabajo individuales (llamadas a LLM, llamadas a herramientas) que Temporal hace duraderas.
-- **Trabajador:** Es el proceso que ejecuta los flujos de trabajo y las actividades.
+- **เวิร์กโฟลว์:** ลูปของ Agent ที่จัดระเบียบตรรกะการดำเนินการ
+- **กิจกรรม:** หน่วยงานแต่ละหน่วย (การเรียกใช้ LLM, การเรียกใช้เครื่องมือ) ที่ Temporal ทำให้ทนทาน
+- **Worker:** กระบวนการที่ดำเนินการเวิร์กโฟลว์และกิจกรรม
 
-En este ejemplo, colocarás las tres partes en un solo archivo (`durable_agent_worker.py`). En una implementación real, las separarías para permitir varias ventajas de implementación y escalabilidad. Colocarás el código que proporciona una instrucción al agente en un segundo archivo (`start_workflow.py`).
+ในตัวอย่างนี้ คุณจะวางทั้ง 3 ส่วนนี้ไว้ในไฟล์เดียว (`durable_agent_worker.py`) แต่ในการใช้งานจริง คุณควรแยกส่วนต่างๆ ออกจากกันเพื่อให้ได้รับประโยชน์ต่างๆ ในด้านการติดตั้งใช้งานและความสามารถในการปรับขนาด คุณจะวางโค้ดที่ส่งพรอมต์ไปยัง Agent ไว้ในไฟล์ที่ 2 (`start_workflow.py`)
 
-## Requisitos previos
+## ข้อกำหนดเบื้องต้น
 
-Para completar esta guía, necesitarás lo siguiente:
+สิ่งที่ต้องมีเพื่อให้ทำตามคำแนะนำนี้ได้
 
-- Una clave de API de Gemini. Puedes crear una gratis en
-  [Google AI Studio](https://aistudio.google.com/apikey?hl=es-419).
-- [Python](https://www.python.org/downloads/) versión 3.10 o posterior.
-- La [CLI de Temporal](https://docs.temporal.io/cli) para ejecutar un servidor de desarrollo
-  local.
+- คีย์ Gemini API คุณสร้างคีย์ได้ฟรีใน
+  [Google AI Studio](https://aistudio.google.com/apikey?hl=th)
+- [Python](https://www.python.org/downloads/) เวอร์ชัน 3.10 ขึ้นไป
+- [Temporal CLI](https://docs.temporal.io/cli) สำหรับเรียกใช้เซิร์ฟเวอร์การพัฒนาซอฟต์แวร์ภายใน
 
-## Configuración
+## ตั้งค่า
 
-Antes de comenzar, asegúrate de tener un
-[servidor de desarrollo de Temporal](https://docs.temporal.io/cli#start-dev-server)
-ejecutándose de forma local:
+ก่อนเริ่มต้น ให้ตรวจสอบว่าคุณมี
+[เซิร์ฟเวอร์การพัฒนาซอฟต์แวร์ Temporal](https://docs.temporal.io/cli#start-dev-server)
+ที่ทำงานภายในเครื่อง
 
 ```
 temporal server start-dev
 ```
 
-Luego, instala las dependencias requeridas:
+จากนั้นติดตั้งการอ้างอิงที่จำเป็น
 
 ```
 pip install temporalio google-genai httpx pydantic python-dotenv
 ```
 
-Crea un archivo `.env` en el directorio de tu proyecto con tu clave de API de Gemini. Puedes
-obtener una clave de API en
-[Google AI Studio](https://aistudio.google.com/apikey?hl=es-419).
+สร้างไฟล์ `.env` ในไดเรกทอรีโปรเจ็กต์ด้วยคีย์ Gemini API คุณ
+รับคีย์ API ได้จาก
+[Google AI Studio](https://aistudio.google.com/apikey?hl=th)
 
 ```
 echo "GOOGLE_API_KEY=your-api-key-here" > .env
 ```
 
-## Implementación
+## การใช้งาน
 
-En el resto de este instructivo, se explica `durable_agent_worker.py` de principio a fin, y se compila el agente paso a paso. Crea el archivo y sigue los pasos.
+ส่วนที่เหลือของบทแนะนำนี้จะอธิบาย `durable_agent_worker.py` ตั้งแต่ต้นจนจบ โดยสร้าง Agent ขึ้นทีละส่วน สร้างไฟล์แล้วทำตาม
 
-### Importaciones y configuración de sandbox
+### การนำเข้าและการตั้งค่าแซนด์บ็อกซ์
 
-Comienza con las importaciones que se deben definir por adelantado. El bloque `workflow.unsafe.imports_passed_through()` le indica al sandbox de flujo de trabajo de Temporal que permita el paso de ciertos módulos sin restricciones. Esto es necesario porque varias bibliotecas (en particular, `httpx`, que subclases `urllib.request.Request`) usan patrones que el sandbox bloquearía de otro modo.
+เริ่มต้นด้วยการนำเข้าที่ต้องกำหนดไว้ล่วงหน้า บล็อก `workflow.unsafe.imports_passed_through()` จะบอกให้แซนด์บ็อกซ์เวิร์กโฟลว์ของ Temporal อนุญาตให้โมดูลบางโมดูลผ่านได้โดยไม่มีข้อจำกัด ซึ่งจำเป็นเนื่องจากไลบรารีหลายรายการ (โดยเฉพาะ `httpx` ซึ่งเป็นคลาสย่อยของ `urllib.request.Request`) ใช้รูปแบบที่แซนด์บ็อกซ์จะบล็อก
 
 ```
 from temporalio import workflow
@@ -93,9 +92,9 @@ with workflow.unsafe.imports_passed_through():
     from google.genai import types
 ```
 
-### Instrucciones del sistema
+### วิธีการของระบบ
 
-A continuación, define la personalidad del agente. Las instrucciones del sistema le indican al modelo cómo debe comportarse. Se le indica a este agente que responda en haikus cuando no se necesiten herramientas.
+จากนั้นกำหนดบุคลิกของ Agent วิธีการของระบบจะบอกให้โมเดลทราบถึงวิธีแสดงพฤติกรรม Agent นี้ได้รับคำสั่งให้ตอบกลับเป็นไฮกุเมื่อไม่จำเป็นต้องใช้เครื่องมือ
 
 ```
 SYSTEM_INSTRUCTIONS = """
@@ -106,9 +105,9 @@ If no tools are needed, respond in haikus.
 """
 ```
 
-### Definiciones de herramientas
+### คำจำกัดความของเครื่องมือ
 
-Ahora define las herramientas que puede usar el agente. Cada herramienta es una función asíncrona con una cadena de documentación descriptiva. Las herramientas que toman parámetros usan un modelo Pydantic como su único argumento. Esta es una práctica recomendada de Temporal que mantiene estables las firmas de actividad a medida que agregas campos opcionales con el tiempo.
+ตอนนี้ให้กำหนดเครื่องมือที่ Agent ใช้ได้ เครื่องมือแต่ละอย่างเป็นฟังก์ชันแบบไม่พร้อมกันที่มีสตริงเอกสารอธิบาย เครื่องมือที่ใช้พารามิเตอร์จะใช้โมเดล Pydantic เป็นอาร์กิวเมนต์เดียว นี่เป็นแนวทางปฏิบัติแนะนำของ Temporal ที่ช่วยให้ลายเซ็นของกิจกรรมมีเสถียรภาพเมื่อคุณเพิ่มช่องที่ไม่บังคับเมื่อเวลาผ่านไป
 
 ```
 import json
@@ -137,7 +136,7 @@ async def get_weather_alerts(request: GetWeatherAlertsRequest) -> str:
         return json.dumps(response.json())
 ```
 
-A continuación, define las herramientas para la geolocalización de direcciones IP:
+จากนั้นกำหนดเครื่องมือสำหรับการระบุตำแหน่งทางภูมิศาสตร์ของที่อยู่ IP
 
 ```
 class GetLocationRequest(BaseModel):
@@ -166,11 +165,10 @@ async def get_location_info(request: GetLocationRequest) -> str:
         return f"{result['city']}, {result['regionName']}, {result['country']}"
 ```
 
-### Registro de herramientas
+### รีจิสทรีเครื่องมือ
 
-A continuación, crea un registro que asigne nombres de herramientas a funciones de controlador. La función
-`get_tools()` genera objetos `FunctionDeclaration` compatibles con Gemini
-a partir de los objetos invocables con `FunctionDeclaration.from_callable_with_api_option()`.
+จากนั้นสร้างรีจิสทรีที่แมปชื่อเครื่องมือกับฟังก์ชันตัวแฮนเดิล ฟังก์ชัน
+`get_tools()` จะสร้างออบเจ็กต์ที่เข้ากันได้กับ Gemini `FunctionDeclaration` จากฟังก์ชันที่เรียกใช้ได้โดยใช้ `FunctionDeclaration.from_callable_with_api_option()`
 
 ```
 from typing import Any, Awaitable, Callable
@@ -208,11 +206,11 @@ def get_tools() -> types.Tool:
     )
 ```
 
-### Actividad de LLM
+### กิจกรรม LLM
 
-Ahora define la actividad que llama a la API de Gemini. Las clases de datos `GeminiChatRequest` y `GeminiChatResponse` definen el contrato.
+ตอนนี้ให้กำหนดกิจกรรมที่เรียกใช้ Gemini API คลาสข้อมูล `GeminiChatRequest` และ `GeminiChatResponse` จะกำหนดสัญญา
 
-Inhabilitarás la llamada a función automática para que la invocación de LLM y la invocación de herramienta se controlen como tareas separadas, lo que aportará más durabilidad a tu agente. También inhabilitarás los reintentos integrados del SDK (`attempts=1`), ya que Temporal controla los reintentos de forma duradera.
+คุณจะปิดใช้การเรียกใช้ฟังก์ชันอัตโนมัติเพื่อให้ระบบจัดการการเรียกใช้ LLM และการเรียกใช้เครื่องมือเป็นงานแยกกัน ซึ่งจะช่วยเพิ่มความทนทานให้กับ Agent นอกจากนี้ คุณยังจะปิดใช้การลองอีกครั้งในตัวของ SDK (`attempts=1`) เนื่องจาก Temporal จัดการการลองอีกครั้งได้อย่างทนทาน
 
 ```
 import os
@@ -288,13 +286,11 @@ async def generate_content(request: GeminiChatRequest) -> GeminiChatResponse:
     )
 ```
 
-### Actividad de herramienta dinámica
+### กิจกรรมเครื่องมือแบบไดนามิก
 
-A continuación, define la actividad que ejecuta herramientas. Esto usa la función de actividad dinámica de Temporal: el controlador de herramientas (un objeto invocable) se obtiene del registro de herramientas a través de la función `get_handler`. Esto permite definir diferentes agentes con solo proporcionar un conjunto diferente de herramientas e instrucciones del sistema. El flujo de trabajo que implementa el bucle de agente no requiere cambios.
+จากนั้นกำหนดกิจกรรมที่ดำเนินการเครื่องมือ ซึ่งใช้ฟีเจอร์กิจกรรมแบบไดนามิกของ Temporal โดยระบบจะรับตัวแฮนเดิลเครื่องมือ (ฟังก์ชันที่เรียกใช้ได้) จากรีจิสทรีเครื่องมือผ่านฟังก์ชัน `get_handler` วิธีนี้ช่วยให้กำหนด Agent ต่างๆ ได้ง่ายๆ เพียงแค่ระบุชุดเครื่องมือและวิธีการของระบบที่แตกต่างกัน โดยเวิร์กโฟลว์ที่ใช้ลูปของ Agent ไม่จำเป็นต้องมีการเปลี่ยนแปลง
 
-La actividad inspecciona la firma del controlador para determinar cómo pasar argumentos. Si el controlador espera un modelo Pydantic, controla el formato de salida anidado
-que produce Gemini (por ejemplo, `{"request": {"state": "CA"}}` en lugar
-de un `{"state": "CA"}` plano).
+กิจกรรมจะตรวจสอบลายเซ็นของตัวจัดการเพื่อกำหนดวิธีส่งอาร์กิวเมนต์ หากตัวจัดการคาดหวังโมเดล Pydantic ระบบจะจัดการรูปแบบเอาต์พุตที่ซ้อนกันซึ่ง Gemini สร้างขึ้น (เช่น `{"request": {"state": "CA"}}` แทนที่จะเป็น `{"state": "CA"}` แบบแบน)
 
 ```
 import inspect
@@ -334,11 +330,11 @@ async def dynamic_tool_activity(args: Sequence[RawValue]) -> dict:
     return result
 ```
 
-### El flujo de trabajo del bucle de agente
+### เวิร์กโฟลว์ลูปของ Agent
 
-Ahora tienes todas las piezas para terminar de compilar el agente. La clase `AgentWorkflow` implementa un flujo de trabajo que contiene el bucle de agente. Dentro de ese bucle, se invoca el LLM a través de la actividad (lo que lo hace duradero), se inspecciona el resultado y, si el LLM eligió una herramienta, se invoca a través de `dynamic_tool_activity`.
+ตอนนี้คุณมีทุกส่วนที่จำเป็นในการสร้าง Agent ให้เสร็จสมบูรณ์แล้ว คลาส `AgentWorkflow` ใช้เวิร์กโฟลว์ที่มีลูปของ Agent ภายในลูปนั้น ระบบจะเรียกใช้ LLM ผ่านกิจกรรม (ทำให้ทนทาน) ตรวจสอบเอาต์พุต และหาก LLM เลือกเครื่องมือ ระบบจะเรียกใช้เครื่องมือผ่าน `dynamic_tool_activity`
 
-En este agente simple de estilo ReAct, una vez que el LLM decide no usar una herramienta, el bucle se considera completo y se muestra el resultado final del LLM.
+ใน Agent สไตล์ ReAct อย่างง่ายนี้ เมื่อ LLM เลือกที่จะไม่ใช้เครื่องมือ ระบบจะถือว่าลูปเสร็จสมบูรณ์และส่งคืนผลลัพธ์สุดท้ายของ LLM
 
 ```
 from datetime import timedelta
@@ -406,13 +402,13 @@ class AgentWorkflow:
         return result
 ```
 
-El bucle de agente es completamente duradero. Si el trabajador del agente falla después de varias iteraciones a través del bucle, Temporal retomará exactamente donde lo dejó sin necesidad de volver a invocar las invocaciones de LLM o las llamadas a herramientas ya ejecutadas.
+ลูปของ Agent มีความทนทานอย่างเต็มที่ หาก Worker ของ Agent ขัดข้องหลังจากวนซ้ำหลายครั้ง Temporal จะดำเนินการต่อจากจุดที่หยุดไว้โดยไม่ต้องเรียกใช้การเรียกใช้ LLM หรือการเรียกใช้เครื่องมือที่ดำเนินการไปแล้วอีกครั้ง
 
-### Inicio del trabajador
+### การเริ่มต้น Worker
 
-Por último, conecta todo. Si bien el código implementa la lógica empresarial necesaria de una manera que hace que parezca que se ejecuta en un solo proceso, el uso de Temporal lo convierte en un sistema controlado por eventos (específicamente, de origen de eventos) en el que la comunicación entre el flujo de trabajo y las actividades se realiza a través de la mensajería que proporciona Temporal.
+สุดท้ายให้เชื่อมต่อทุกอย่างเข้าด้วยกัน แม้ว่าโค้ดจะใช้ตรรกะทางธุรกิจที่จำเป็นในลักษณะที่ทำให้ดูเหมือนว่ากำลังทำงานในกระบวนการเดียว แต่การใช้ Temporal จะทำให้ระบบเป็นระบบที่ขับเคลื่อนด้วยเหตุการณ์ (โดยเฉพาะอย่างยิ่งระบบที่ใช้การจัดเก็บข้อมูลเหตุการณ์) ซึ่งการสื่อสารระหว่างเวิร์กโฟลว์และกิจกรรมจะเกิดขึ้นผ่านการรับส่งข้อความที่ Temporal จัดเตรียมไว้
 
-El trabajador de Temporal se conecta al servicio de Temporal y actúa como un programador para las tareas de flujo de trabajo y actividad. El trabajador registra el flujo de trabajo y ambas actividades, y luego comienza a escuchar las tareas.
+Worker ของ Temporal จะเชื่อมต่อกับบริการ Temporal และทำหน้าที่เป็นตัวจัดตารางเวลาสำหรับเวิร์กโฟลว์และงานกิจกรรม Worker จะลงทะเบียนเวิร์กโฟลว์และกิจกรรมทั้ง 2 อย่าง จากนั้นจะเริ่มรอรับงาน
 
 ```
 import asyncio
@@ -451,9 +447,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## La secuencia de comandos del cliente
+## สคริปต์ไคลเอ็นต์
 
-Crea la secuencia de comandos del cliente (`start_workflow.py`). Envía una consulta y espera el resultado. Ten en cuenta que se conecta a la misma lista de tareas en cola a la que se hace referencia en el trabajador del agente. La secuencia de comandos `start_workflow` envía una tarea de flujo de trabajo con la instrucción del usuario a esa lista de tareas en cola, lo que inicia la ejecución del agente.
+สร้างสคริปต์ไคลเอ็นต์ (`start_workflow.py`) ซึ่งจะส่งคำค้นหาและรอผลลัพธ์ โปรดทราบว่าสคริปต์นี้จะเชื่อมต่อกับคิวงานเดียวกันกับที่อ้างอิงไว้ใน Worker ของ Agent โดยสคริปต์ `start_workflow` จะส่งงานเวิร์กโฟลว์พร้อมพรอมต์ของผู้ใช้ไปยังคิวงานนั้น ซึ่งจะเริ่มการดำเนินการของ Agent
 
 ```
 import asyncio
@@ -483,29 +479,29 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## Ejecuta el agente
+## เรียกใช้ Agent
 
-Si aún no lo hiciste, inicia el servidor de desarrollo de Temporal:
+หากยังไม่ได้ดำเนินการ ให้เริ่มเซิร์ฟเวอร์การพัฒนาซอฟต์แวร์ Temporal โดยทำดังนี้
 
 ```
 temporal server start-dev
 ```
 
-En una ventana de terminal nueva, inicia el trabajador del agente:
+เริ่ม Worker ของ Agent ในหน้าต่างเทอร์มินัลใหม่โดยทำดังนี้
 
 ```
 python -m durable_agent_worker
 ```
 
-En una tercera ventana de terminal, envía una consulta a tu agente:
+ส่งคำค้นหาไปยัง Agent ในหน้าต่างเทอร์มินัลที่ 3 โดยทำดังนี้
 
 ```
 python -m start_workflow "are there any weather alerts for where I am?"
 ```
 
-Observa el resultado en la terminal de `durable_agent_worker` que muestra las acciones que ocurren en cada iteración del bucle de agente. El LLM puede satisfacer la solicitud del usuario invocando una serie de herramientas a su disposición. Puedes ver los pasos que se ejecutaron a través de la IU de Temporal en `http://localhost:8233/namespaces/default/workflows`.
+สังเกตเอาต์พุตในเทอร์มินัลของ `durable_agent_worker` ซึ่งแสดงการดำเนินการที่เกิดขึ้นในแต่ละการวนซ้ำของลูปของ Agent LLM สามารถตอบสนองคำขอของผู้ใช้ได้โดยการเรียกใช้เครื่องมือต่างๆ ที่มี คุณดูขั้นตอนที่ดำเนินการได้ผ่าน UI ของ Temporal ที่ `http://localhost:8233/namespaces/default/workflows`
 
-Prueba algunas instrucciones diferentes para ver el razonamiento del agente y las herramientas de llamada:
+ลองใช้พรอมต์ต่างๆ เพื่อดูเหตุผลและการเรียกใช้เครื่องมือของ Agent โดยทำดังนี้
 
 ```
 python -m start_workflow "are there any weather alerts for New York?"
@@ -514,63 +510,63 @@ python -m start_workflow "what is my ip address?"
 python -m start_workflow "tell me a joke"
 ```
 
-La última instrucción no requiere ninguna herramienta, por lo que el agente responde en un haiku basado en `SYSTEM_INSTRUCTIONS`.
+พรอมต์สุดท้ายไม่จำเป็นต้องใช้เครื่องมือใดๆ ดังนั้น Agent จะตอบกลับเป็นไฮกุตาม `SYSTEM_INSTRUCTIONS`
 
-## Prueba la durabilidad (opcional)
+## ทดสอบความทนทาน (ไม่บังคับ)
 
-La compilación en Temporal garantiza que tu agente sobreviva a las fallas sin problemas. Puedes probar esto con dos experimentos distintos.
+การสร้าง Agent บน Temporal จะช่วยให้ Agent ทำงานต่อไปได้อย่างราบรื่นเมื่อเกิดข้อผิดพลาด คุณทดสอบได้โดยใช้การทดลอง 2 อย่างที่แตกต่างกัน
 
-### Simula una interrupción de la red
+### จำลองเครือข่ายขัดข้อง
 
-En esta prueba, inhabilitarás temporalmente la conexión a Internet de tu computadora, enviarás un flujo de trabajo, observarás cómo Temporal vuelve a intentarlo automáticamente y, luego, restablecerás la red para ver cómo se recupera.
+ในการทดสอบนี้ คุณจะปิดใช้การเชื่อมต่ออินเทอร์เน็ตของคอมพิวเตอร์ชั่วคราว ส่งเวิร์กโฟลว์ ดู Temporal ลองอีกครั้งโดยอัตโนมัติ จากนั้นกู้คืนเครือข่ายเพื่อดูว่าระบบกู้คืนได้หรือไม่
 
-1. Desconecta tu máquina de Internet (por ejemplo, desactiva la red Wi-Fi).
-2. Envía un flujo de trabajo:
+1. ยกเลิกการเชื่อมต่อเครื่องกับอินเทอร์เน็ต (เช่น ปิด Wi-Fi)
+2. ส่งเวิร์กโฟลว์โดยทำดังนี้
 
    ```
    python -m start_workflow "tell me a joke"
    ```
-3. Consulta la IU de Temporal (`http://localhost:8233`). Verás que la actividad de LLM falla y que Temporal administra automáticamente los reintentos en segundo plano.
-4. Vuelve a conectarte a Internet.
-5. El siguiente reintento automático llegará correctamente a la API de Gemini y tu terminal imprimirá el resultado final.
+3. ตรวจสอบ UI ของ Temporal (`http://localhost:8233`) คุณจะเห็นว่ากิจกรรม LLM ล้มเหลวและ Temporal จัดการการลองอีกครั้งโดยอัตโนมัติในเบื้องหลัง
+4. เชื่อมต่ออินเทอร์เน็ตอีกครั้ง
+5. การลองอีกครั้งโดยอัตโนมัติครั้งถัดไปจะเข้าถึง Gemini API ได้สำเร็จ และเทอร์มินัลจะพิมพ์ผลลัพธ์สุดท้าย
 
-### Sobrevive a una falla del trabajador
+### การทำงานต่อไปได้เมื่อ Worker ขัดข้อง
 
-En esta prueba, finalizas el trabajador a mitad de la ejecución y lo reinicias. Temporal reproduce el historial del flujo de trabajo (origen de eventos) y se reanuda desde la última actividad completada. No se repiten las invocaciones de LLM ni las llamadas a herramientas ya completadas.
+ในการทดสอบนี้ คุณจะหยุดกระบวนการ Worker กลางคันและรีสตาร์ท Temporal จะเล่นประวัติเวิร์กโฟลว์ซ้ำ (การจัดเก็บข้อมูลเหตุการณ์) และดำเนินการต่อจากกิจกรรมสุดท้ายที่เสร็จสมบูรณ์ โดยจะไม่เรียกใช้ LLM และการเรียกใช้เครื่องมือที่เสร็จสมบูรณ์ไปแล้วอีกครั้ง
 
-1. Para darte tiempo de finalizar el Worker, abre `durable_agent_worker.py` y quita temporalmente la marca de comentario de `await asyncio.sleep(10)` dentro del bucle `run` de `AgentWorkflow`.
-2. Reinicia el trabajador:
+1. หากต้องการให้มีเวลาหยุด Worker ให้เปิด `durable_agent_worker.py` และยกเลิกการแสดงความคิดเห็น `await asyncio.sleep(10)` ชั่วคราวภายในลูป `run` ของ `AgentWorkflow`
+2. รีสตาร์ท Worker โดยทำดังนี้
 
    ```
    python -m durable_agent_worker
    ```
-3. Envía una consulta que active varias herramientas:
+3. ส่งคำค้นหาที่ทริกเกอร์เครื่องมือหลายอย่างโดยทำดังนี้
 
    ```
    python -m start_workflow "are there any weather alerts where I am?"
    ```
-4. Finaliza el proceso de trabajador en cualquier momento antes de que se complete (`Ctrl-C` en la terminal del trabajador o con `kill %1` si se ejecuta en segundo plano).
-5. Reinicia el trabajador:
+4. หยุดกระบวนการ Worker ได้ทุกเมื่อก่อนที่จะเสร็จสมบูรณ์ (`Ctrl-C` ในเทอร์มินัลของ Worker หรือใช้ `kill %1` หากทำงานในเบื้องหลัง)
+5. รีสตาร์ท Worker โดยทำดังนี้
 
    ```
    python -m durable_agent_worker
    ```
 
-Temporal reproduce el historial del flujo de trabajo. Las llamadas a LLM y las invocaciones de herramientas que ya se completaron **no** se vuelven a ejecutar. Sus resultados se reproducen instantáneamente desde el historial (el registro de eventos). El flujo de trabajo finaliza correctamente.
+Temporal จะเล่นประวัติเวิร์กโฟลว์ซ้ำ ระบบจะ**ไม่** เรียกใช้การเรียกใช้ LLM และการเรียกใช้เครื่องมือที่เสร็จสมบูรณ์ไปแล้วอีกครั้ง แต่จะเล่นผลลัพธ์ซ้ำจากประวัติ (บันทึกเหตุการณ์) ทันที เวิร์กโฟลว์จะเสร็จสมบูรณ์
 
-## Más recursos
+## แหล่งข้อมูลเพิ่มเติม
 
-- [Documentación de Temporal](https://docs.temporal.io/)
-- [SDK de Python de Temporal](https://docs.temporal.io/develop/python)
-- [SDK de Google GenAI](https://googleapis.github.io/python-genai/)
-- [Código fuente de este instructivo](https://github.com/temporal-community/durable-react-agent-gemini)
+- [เอกสารประกอบของ Temporal](https://docs.temporal.io/)
+- [Temporal Python SDK](https://docs.temporal.io/develop/python)
+- [Google GenAI SDK](https://googleapis.github.io/python-genai/)
+- [ซอร์สโค้ดสำหรับบทแนะนำนี้](https://github.com/temporal-community/durable-react-agent-gemini)
 
-Enviar comentarios
+ส่งความคิดเห็น
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Última actualización: 2026-06-22 (UTC)
+อัปเดตล่าสุด 2026-06-22 UTC
 
-¿Quieres brindar más información?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-22 (UTC)"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-22 UTC"],[],[]]

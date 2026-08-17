@@ -1,57 +1,57 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=tr
-fetched_at: 2026-08-10T03:18:32.458231+00:00
-title: "Gemini 3.1 Pro \u00d6nizlemesi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=pl
+fetched_at: 2026-08-17T02:30:15.942288+00:00
+title: "Gemini\u00a03.1 Pro (wersja testowa) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Geri bildirim gönderin
+Prześlij opinię
 
-# Gemini 3.1 Pro Önizlemesi
+# Gemini 3.1 Pro (wersja testowa)
 
-Gemini 3 Pro serisinin performansını ve güvenilirliğini artırmak için geliştirilen Gemini 3.1 Pro Önizlemesi; daha iyi düşünme, gelişmiş jeton verimliliği ve daha temelli, olgusal olarak tutarlı bir deneyim sunar. Yazılım mühendisliği davranışları ve kullanılabilirliğinin yanı sıra gerçek dünya alanlarında hassas araç kullanımı ve güvenilir çok adımlı yürütme gerektiren ajan tabanlı iş akışları için optimize edilmiştir.
+Wersja testowa Gemini 3.1 Pro została opracowana z myślą o poprawie wydajności i niezawodności serii Gemini 3 Pro. Zapewnia lepsze wnioskowanie, większą wydajność tokenów oraz bardziej wiarygodne i spójne pod względem faktów działanie. Jest zoptymalizowany pod kątem zachowań i użyteczności inżynierii oprogramowania, a także procesów opartych na agentach, które wymagają precyzyjnego korzystania z narzędzi i niezawodnego wykonywania wieloetapowych zadań w różnych dziedzinach.
 
-[Google AI Studio'da deneme](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=tr)
+[Wypróbuj w Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=pl)
 
-## Belgeler
+## Dokumentacja
 
-Özellikler ve işlevler hakkında kapsamlı bilgi için [Gemini 3 Geliştirici Kılavuzu](https://ai.google.dev/gemini-api/docs/gemini-3?hl=tr) sayfasını ziyaret edin.
+Pełny opis funkcji i możliwości znajdziesz w [Przewodniku dla deweloperów Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=pl).
 
 ## gemini-3.1-pro-preview
 
-| Mülk | Açıklama |
+| Właściwość | Opis |
 | --- | --- |
-| id\_cardModel kodu | `gemini-3.1-pro-preview` |
-| saveDesteklenen veri türleri | **Girişler**  Metin, resim, video, ses ve PDF  **Çıkış**  Metin |
-| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  1.048.576  **Çıkış jetonu sınırı**  65.536 |
-| handymanÖzellikler | **[Ses üretme](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr)**  Desteklenmiyor  **[Önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr)**  Destekleniyor  **[Kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr)**  Destekleniyor  **[Dosya arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr)**  Desteklenir (yalnızca AI Studio)  **[İşlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr)**  Destekleniyor  **[Google Haritalar ile Temellendirme](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr)**  Destekleniyor  **[Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr)**  Desteklenmiyor  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)**  Desteklenmiyor  **[Arama temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr)**  Destekleniyor  **[Yapılandırılmış çıkışlar](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr)**  Destekleniyor  **[Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr)**  Destekleniyor  **[URL bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr)**  Destekleniyor |
-| speedTüketim seçenekleri | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr)**  Destekleniyor  **[Esnek çıkarım](https://ai.google.dev/gemini-api/docs/flex-inference?hl=tr)**  Destekleniyor  **[Öncelik çıkarımı](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr)**  Destekleniyor |
-| 123Sürümler | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - Önizleme: `gemini-3.1-pro-preview` - Önizleme: `gemini-3.1-pro-preview-customtools` \* |
-| calendar\_monthSon güncelleme | Şubat 2026 |
-| id\_cardModel kartı | [Model kartı](https://deepmind.google/models/model-cards/gemini-3-1-pro/?hl=tr) |
+| id\_cardKod modelu | `gemini-3.1-pro-preview` |
+| saveObsługiwane typy danych | **Dane wejściowe**  Tekst, obraz, film, dźwięk i PDF  **Dane wyjściowe**  Tekst |
+| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Limit tokenów wejściowych**  1 048 576  **Limit tokenów wyjściowych**  65 536 |
+| handyman Uprawnienia | **[Generowanie dźwięku](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl)**  Nieobsługiwane  **[Zapisywanie w pamięci podręcznej](https://ai.google.dev/gemini-api/docs/caching?hl=pl)**  Obsługiwane  **[Wykonanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl)**  Obsługiwane  **[Wyszukiwanie plików](https://ai.google.dev/gemini-api/docs/file-search?hl=pl)**  Obsługiwane (tylko AI Studio)  **[Wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl)**  Obsługiwane  **[Powiązanie ze źródłami informacji przy użyciu Map Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pl)**  Obsługiwane  **[Generowanie obrazów](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl)**  Nieobsługiwane  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=pl)**  Nieobsługiwane  **[Szukaj groundingu](https://ai.google.dev/gemini-api/docs/google-search?hl=pl)**  Obsługiwane  **[Ustrukturyzowane dane wyjściowe](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl)**  Obsługiwane  **[Myślenie](https://ai.google.dev/gemini-api/docs/thinking?hl=pl)**  Obsługiwane  **[Kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl)**  Obsługiwane |
+| speed Opcje wykorzystania | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=pl)**  Obsługiwane  **[Elastyczne wnioskowanie](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pl)**  Obsługiwane  **[Priorytet wnioskowania](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pl)**  Obsługiwane |
+| 123 wersje | Więcej informacji znajdziesz w [wzorcach wersji modelu](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#model-versions).  - Podgląd: `gemini-3.1-pro-preview` - Podgląd: `gemini-3.1-pro-preview-customtools` \* |
+| calendar\_monthOstatnia aktualizacja | Luty 2026 r. |
+| id\_cardKarta modelu | [Karta modelu](https://deepmind.google/models/model-cards/gemini-3-1-pro/?hl=pl) |
 
 #### gemini-3.1-pro-preview-customtools
 
-\* *Bash ve özel araçların karışımıyla geliştirme yapanlar için Gemini 3.1 Pro Önizleme
-`gemini-3.1-pro-preview-customtools` adlı API üzerinden kullanılabilen ayrı bir uç nokta ile birlikte gelir. Bu uç nokta, özel araçlarınıza (ör. `view_file` veya `search_code`) öncelik verme konusunda daha iyidir.*
+\* *Dla osób, które tworzą aplikacje przy użyciu kombinacji narzędzi bash i narzędzi niestandardowych, dostępny jest oddzielny punkt końcowy Gemini 3.1 Pro (wersja testowa) w interfejsie API o nazwie
+`gemini-3.1-pro-preview-customtools`. Ten punkt końcowy lepiej określa priorytety Twoich narzędzi niestandardowych (np. `view_file` lub `search_code`).*
 
-*`gemini-3.1-pro-preview-customtools`, özel araçlar ve bash kullanan görev odaklı iş akışları için optimize edilmiş olsa da bu tür araçlardan yararlanmayan bazı kullanım alanlarında kalite dalgalanmaları görebileceğinizi unutmayın.*
+*Pamiętaj, że chociaż model `gemini-3.1-pro-preview-customtools` jest zoptymalizowany pod kątem przepływów pracy z użyciem agentów, które korzystają z narzędzi niestandardowych i bash, w niektórych przypadkach użycia, które nie korzystają z takich narzędzi, możesz zauważyć wahania jakości.*
 
-Geri bildirim gönderin
+Prześlij opinię
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Son güncelleme tarihi: 2026-07-21 UTC.
+Ostatnia aktualizacja: 2026-07-21 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Chcesz przekazać coś jeszcze?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-21 UTC."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-21 UTC."],[],[]]

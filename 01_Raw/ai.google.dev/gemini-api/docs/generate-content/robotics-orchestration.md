@@ -1,35 +1,36 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-orchestration?hl=tr
-fetched_at: 2026-08-10T03:27:15.361499+00:00
-title: "G\u00f6rev d\u00fczenleme \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-orchestration?hl=ar
+fetched_at: 2026-08-17T02:22:23.343522+00:00
+title: "\u062a\u0646\u0638\u064a\u0645 \u0627\u0644\u0645\u0647\u0627\u0645 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Geri bildirim gönderin
+إرسال ملاحظات
 
-# Görev düzenleme
+# تنظيم المهام
 
-Gemini Robotics ER modelleri, görevleri planlayabilir ve uzayla ilgili akıl yürütebilir. Bu sayede, bir hedefi tamamlamak için hangi işlemlerin yapılacağını ve hangi nesnelerin taşınacağını çıkarabilir. Bu sayfada, bir öğeyi kaseye yerleştirme görevini düzenlemek için özel bir robot API'si aracılığıyla [alma ve yerleştirme işleminin nasıl yapılacağına](#calling-custom-robot-api) dair bir örnek gösterilmektedir.
+يمكن لنماذج Gemini Robotics ER التخطيط للمهام والاستدلال المنطقي بشأن المساحة، ما يتيح لها تحديد الإجراءات التي يجب اتخاذها والأشياء التي يجب نقلها لتحقيق هدف معيّن. تعرض هذه الصفحة مثالاً على [تنفيذ عملية التقاط ووضع](#calling-custom-robot-api) من خلال واجهة برمجة تطبيقات مخصّصة للروبوتات لتنظيم مهمة وضع عنصر في وعاء.
 
-Çalıştırılabilir kodun tamamı için [Robotics cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)'a (Robotik yemek kitabı) bakın.
+للاطّلاع على الرمز الكامل القابل للتنفيذ، راجِع
+[كتاب وصفات الروبوتات](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-## Özel bir robot API'si kullanma
+## استخدام واجهة برمجة تطبيقات مخصّصة للروبوت
 
-Bu örnekte, özel bir robot API'si ile görev düzenleme gösterilmektedir. Bu kitapta, seçme ve yerleştirme işlemi için tasarlanmış bir sahte API tanıtılmaktadır. Görev, mavi bir bloğu alıp turuncu bir kaseye yerleştirmektir:
+يوضّح هذا المثال تنسيق المهام باستخدام واجهة برمجة تطبيقات مخصّصة للروبوت. وتتضمّن واجهة برمجة تطبيقات وهمية مصمَّمة لتنفيذ عملية الالتقاط والوضع. المهمة هي التقاط مكعّب أزرق ووضعه في وعاء برتقالي:
 
-![Blok ve kase resmi](https://ai.google.dev/static/gemini-api/docs/images/robotics/robot-api-example.png?hl=tr)
+![صورة للكتلة والوعاء](https://ai.google.dev/static/gemini-api/docs/images/robotics/robot-api-example.png?hl=ar)
 
-Bu örnekte aşağıdaki sahte robot API'si ve araç tanımları kullanılmaktadır:
+يستخدم هذا المثال تعريفات واجهة برمجة التطبيقات والأدوات الوهمية التالية الخاصة بالروبوت:
 
 ### Python
 
@@ -77,7 +78,7 @@ set_gripper_state_declaration = types.FunctionDeclaration(
 robot_tools = types.Tool(function_declarations=[move_declaration, set_gripper_state_declaration])
 ```
 
-Aşağıdaki örnekte, istem ve resim, araç tanımlarıyla birlikte modele gönderilir. Ardından, her model yanıtından sonra istenen işlev çağrılarını (`move`, `setGripperState`) yürüten, sonuçları modele geri döndüren ve model işlev çağırmayı durdurana veya adım sınırına ulaşılana kadar tekrarlayan bir aracı döngüsü çalıştırır.
+يرسل المثال التالي الطلب والصورة إلى النموذج مع تعريفات الأدوات. بعد ذلك، يتم تشغيل حلقة وكيل: بعد كل ردّ من النموذج، يتم تنفيذ أي طلبات لاستدعاء الدوال (`move`، `setGripperState`)، ويتم إرجاع النتائج إلى النموذج، وتتكرر العملية إلى أن يتوقف النموذج عن استدعاء الدوال أو يتم بلوغ الحد الأقصى لعدد الخطوات.
 
 ### Python
 
@@ -151,7 +152,7 @@ while step_count < max_steps:
     contents.append(types.Content(role="user", parts=function_response_parts))
 ```
 
-Aşağıda, isteme ve sahte robot API'sine dayalı olarak modelin olası bir çıkışı gösterilmektedir. Çıkış, modelin birlikte sıraladığı robot işlevi çağrılarının çıkışını içerir.
+يوضّح ما يلي ناتجًا محتملاً للنموذج استنادًا إلى الطلب وواجهة برمجة التطبيقات الوهمية الخاصة بالروبوت. يتضمّن الإخراج نتائج استدعاءات دالة الروبوت التي رتّبها النموذج معًا.
 
 ```
 --- Executing Orchestrated Plan ---
@@ -168,18 +169,18 @@ Sequence complete.
 Model Summary: I have completed the task of picking up the blue block and placing it into the orange bowl.
 ```
 
-## Sırada ne var?
+## الخطوات التالية
 
-- [Akışlı robotik](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=tr): İşlev çağrısıyla gerçek zamanlı akış (yalnızca Gemini Robotics ER 2).
-- [Video anlama](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=tr): Yalnızca ER 2'de video üzerinden görev ilerlemesini takip edin.
-- [Uzamsal akıl yürütme](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=tr): İşaretleme, izleme ve sınırlayıcı kutu örnekleri.
+- [الروبوتات مع البث](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=ar): البث في الوقت الفعلي مع ميزة استدعاء الدوال (إصدار Gemini Robotics ER 2 فقط)
+- [فهم الفيديو](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=ar): تتبُّع مستوى تقدّم المهمة من الفيديو (الإصدار 2 من ER فقط)
+- [الاستدلال المكاني](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=ar): أمثلة على التأشير والتتبُّع ومربّع الإحاطة
 
-Geri bildirim gönderin
+إرسال ملاحظات
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Son güncelleme tarihi: 2026-07-30 UTC.
+تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

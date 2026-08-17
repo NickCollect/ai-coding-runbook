@@ -1,41 +1,36 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/function-calling?hl=it
-fetched_at: 2026-08-10T03:20:25.304622+00:00
-title: "Chiamate di funzione con l'API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/function-calling?hl=tr
+fetched_at: 2026-08-17T02:32:05.993000+00:00
+title: "Gemini API ile i\u015flev \u00e7a\u011f\u0131rma \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Invia feedback
+Geri bildirim gönderin
 
-# Chiamate di funzione con l'API Gemini
+# Gemini API ile işlev çağırma
 
-La chiamata di funzione ti consente di collegare i modelli a strumenti e API esterni.
-Anziché generare risposte di testo, il modello determina quando chiamare funzioni specifiche e fornisce i parametri necessari per eseguire azioni nel mondo reale.
-In questo modo, il modello funge da ponte tra il linguaggio naturale e le azioni e i dati del mondo reale. La chiamata di funzione ha tre casi d'uso principali:
+İşlev çağırma, modelleri harici araçlara ve API'lere bağlamanıza olanak tanır.
+Model, metin yanıtları oluşturmak yerine belirli işlevlerin ne zaman çağrılacağını belirler ve gerçek dünyadaki işlemleri gerçekleştirmek için gerekli parametreleri sağlar.
+Bu sayede model, doğal dil ile gerçek dünyadaki işlemler ve veriler arasında köprü görevi görebilir. İşlev çağrısının 3 temel kullanım alanı vardır:
 
-- [**Eseguire azioni:**](#meeting) interagisci con sistemi esterni utilizzando le API, ad esempio
-  pianificando appuntamenti, creando fatture, inviando email o controllando i
-  dispositivi smart home.
-- [**Aumentare le conoscenze:**](#weather) accedi alle informazioni da fonti esterne come
-  database, API e knowledge base.
-- [**Estendere le funzionalità:**](#chart) utilizza strumenti esterni per eseguire calcoli ed
-  estendere i limiti del modello, ad esempio utilizzando una calcolatrice o creando
-  grafici.
+- [**İşlem Yapma:**](#meeting) API'leri kullanarak harici sistemlerle etkileşim kurun. Örneğin, randevu planlayın, fatura oluşturun, e-posta gönderin veya akıllı ev cihazlarını kontrol edin.
+- [**Bilgileri Artırma:**](#weather) Veritabanları, API'ler ve bilgi tabanları gibi harici kaynaklardaki bilgilere erişin.
+- [**Özellikleri genişletme:**](#chart) Hesaplama yapmak ve modelin sınırlamalarını genişletmek için harici araçlar kullanın (ör. hesap makinesi kullanma veya grafik oluşturma).
 
-Di seguito puoi sfogliare esempi di questi casi d'uso:
+Bu kullanım alanlarının örneklerine aşağıdan göz atabilirsiniz:
 
-### Pianificare una riunione
+### Toplantı planlama
 
-Questo esempio mostra come definire una funzione che pianifica una riunione con i partecipanti a un'ora specifica, consentendo al modello di analizzare le richieste degli utenti e restituire argomenti strutturati per attivare azioni in sistemi esterni.
+Bu örnekte, katılımcılarla belirli bir zamanda toplantı planlayan bir işlevin nasıl tanımlanacağı gösterilmektedir. Bu işlev, modelin kullanıcı isteklerini ayrıştırmasına ve harici sistemlerdeki işlemleri tetiklemek için yapılandırılmış bağımsız değişkenler döndürmesine olanak tanır.
 
 ### Python
 
@@ -136,9 +131,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Visualizzare meteo
+### Hava Durumunu Öğrenme
 
-Questo esempio mostra come definire una funzione che recupera i dati sulla temperatura per una località, consentendo al modello di chiamare API esterne per rispondere alle query che richiedono informazioni esterne o in tempo reale.
+Bu örnekte, bir konumun sıcaklık verilerini alan bir işlevin nasıl tanımlanacağı gösterilmektedir. Bu sayede model, gerçek zamanlı veya harici bilgi gerektiren sorgulara yanıt vermek için harici API'leri çağırabilir.
 
 ### Python
 
@@ -236,9 +231,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Creare un grafico
+### Grafik oluşturma
 
-Questo esempio mostra come definire una funzione che genera un grafico a barre da dati strutturati, dimostrando come il modello può utilizzare strumenti esterni per eseguire calcoli o creare asset visivi:
+Bu örnekte, yapılandırılmış verilerden çubuk grafik oluşturan bir işlevin nasıl tanımlanacağı gösterilmektedir. Bu sayede, modelin hesaplama yapmak veya görsel öğeler oluşturmak için harici araçları nasıl kullanabileceği gösterilmektedir:
 
 ### Python
 
@@ -335,22 +330,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Come funziona la chiamata di funzione
+## İşlev çağrısının işleyiş şekli
 
-![Panoramica della chiamata di funzione](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=it)
+![İşlev çağrısına genel bakış](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=tr)
 
-La chiamata di funzione prevede un'interazione strutturata tra l'applicazione, il modello e le funzioni esterne:
+İşlev çağırma, uygulamanız, model ve harici işlevler arasında yapılandırılmış bir etkileşimi içerir:
 
-1. **Definisci la dichiarazione di funzione:** definisci il nome, i parametri e lo scopo della funzione per il modello.
-2. **Chiama l'LLM con le dichiarazioni di funzione:** invia il prompt dell'utente insieme alle dichiarazioni di funzione al modello.
-3. **Esegui il codice della funzione (di tua responsabilità):** il modello *non*
-   esegue la funzione stessa. Estrai il nome e gli argomenti ed esegui nell'applicazione.
-4. **Crea una risposta intuitiva:** invia il risultato al modello per una risposta finale e intuitiva.
+1. **İşlev Bildirimini Tanımla:** İşlevin adını, parametrelerini ve amacını modele tanımlayın.
+2. **İşlev bildirimleriyle LLM'yi çağırma:** Kullanıcı istemini, işlev bildirimiyle birlikte modele gönderin.
+3. **İşlev Kodunu Yürütme (Sizin Sorumluluğunuz):** Model, işlevi *yürütmez*. Adı ve bağımsız değişkenleri ayıklayıp uygulamanızda yürütün.
+4. **Kullanıcı dostu yanıt oluşturma:** Son ve kullanıcı dostu bir yanıt için sonucu modele geri gönderin.
 
-Questa procedura può essere ripetuta più volte. Il modello supporta la chiamata di
-più funzioni in un singolo turno ([chiamata di funzione parallela](#parallel_function_calling)) e in sequenza ([chiamata di funzione compositiva](#compositional_function_calling)).
+Bu işlem birden fazla dönüşte tekrarlanabilir. Model, tek bir dönüşte ([paralel işlev çağrısı](#parallel_function_calling)) ve sırayla ([bileşik işlev çağrısı](#compositional_function_calling)) birden fazla işlev çağrısını destekler.
 
-### Passaggio 1: definisci una dichiarazione di funzione
+### 1. adım: Bir işlev bildirimi tanımlayın
 
 ### Python
 
@@ -403,7 +396,7 @@ function setLightValues(brightness, color_temp) {
 }
 ```
 
-### Passaggio 2: chiama il modello con le dichiarazioni di funzione
+### 2. adım: İşlev beyanlarıyla modeli çağırın
 
 ### Python
 
@@ -439,7 +432,7 @@ const fcStep = in>teraction.steps.find(s = s.type === 'function_call');
 console.log(fcStep);
 ```
 
-Il modello restituisce un passaggio `function_call` con `type`, `name` e `arguments`:
+Model, `type`, `name` ve `arguments` ile `function_call` adımını döndürüyor:
 
 ```
 type='function_call'
@@ -447,7 +440,7 @@ name='set_light_values'
 arguments={'color_temp': &#39;warm', 'brightness': 25}
 ```
 
-### Passaggio 3: esegui la funzione
+### 3. adım: İşlevi yürütün
 
 ### Python
 
@@ -471,7 +464,7 @@ if (fcStep.name === 'set_light_values') {
 }
 ```
 
-### Passaggio 4: invia il risultato al modello
+### 4. adım: Sonucu modele geri gönderin
 
 ### Python
 
@@ -511,13 +504,14 @@ const finalInteraction = await client.interactions.create({
 console.log(finalInteraction.output_text);
 ```
 
-### Chiamata di funzione senza stato
+### Durum bilgisiz işlev çağrısı
 
-Puoi anche utilizzare la chiamata di funzione in modalità senza stato gestendo la cronologia delle conversazioni sul lato client e impostando `store=false`.
+Ayrıca, istemci tarafında sohbet geçmişini yönetip `store=false` ayarını yaparak işlev çağrısını durumsuz modda da kullanabilirsiniz.
 
-In modalità senza stato, devi passare la cronologia completa della conversazione nel campo `input` di ogni richiesta successiva. Questa cronologia deve includere: 1. Il passaggio `user_input` iniziale.
-2. Tutti i passaggi generati dal modello restituiti nel turno 1 (inclusi i passaggi `thought` e `function_call`) esattamente come ricevuti.
-3. Il passaggio `function_result` contenente l'output della funzione eseguita.
+Durum bilgisiz modda, görüşmenin tam geçmişini sonraki her isteğin `input` alanına iletmeniz gerekir. Bu geçmiş şunları içermelidir:
+1. İlk `user_input` adım.
+2. 1. dönüşte döndürülen tüm model tarafından oluşturulan adımlar (`thought` ve `function_call` adımları dahil) alındığı gibi.
+3. Çalıştırılan işlevinizin çıkışını içeren `function_result` adımı.
 
 ### Python
 
@@ -689,25 +683,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## Dichiarazioni di funzione
+## İşlev beyanları
 
-Una dichiarazione di funzione viene passata come strumento e include:
+İşlev bildirimi, araç olarak iletilir ve şunları içerir:
 
-- `type` (stringa): deve essere `"function"` per le funzioni personalizzate.
-- `name` (stringa): nome della funzione univoco (utilizza trattini bassi o camelCase).
-- `description` (stringa): spiegazione chiara dello scopo della funzione.
-- `parameters` (oggetto): parametri di input previsti dalla funzione.
-  - `type` (stringa): tipo di dati generale, ad esempio `object`.
-  - `properties` (oggetto): parametri individuali con tipo e descrizione.
-  - `required` (array): nomi dei parametri obbligatori.
+- `type` (dize): Özel işlevler için `"function"` olmalıdır.
+- `name` (dize): Benzersiz işlev adı (alt çizgi veya camelCase kullanın).
+- `description` (dize): İşlevin amacının net açıklaması.
+- `parameters` (nesne): İşlevin beklediği giriş parametreleri.
+  - `type` (dize): Genel veri türü (ör. `object`).
+  - `properties` (nesne): Tür ve açıklamaya sahip bireysel parametreler.
+  - `required` (dizi): Zorunlu parametre adları.
 
-## Chiamata di funzione con modelli di pensiero
+## Düşünebilen modellerle işlev çağırma
 
-I modelli della serie Gemini 3 utilizzano un processo di ["pensiero"](https://ai.google.dev/gemini-api/docs/thinking?hl=it) interno che migliora la chiamata di funzione. Gli SDK gestiscono automaticamente le [firme di pensiero](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=it).
+Gemini 3 serisi modeller, işlev çağrısını iyileştiren dahili bir ["düşünme"](https://ai.google.dev/gemini-api/docs/thinking?hl=tr) süreci kullanır. SDK'lar, [düşünce imzalarını](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=tr) sizin için otomatik olarak işler.
 
-## Chiamata di funzione parallela
+## Paralel işlev çağırma
 
-Chiama più funzioni contemporaneamente quando sono indipendenti:
+Bağımsız olduklarında aynı anda birden fazla işlevi çağırma:
 
 ### Python
 
@@ -809,9 +803,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Chiamata di funzione compositiva
+## Bileşik işlev çağrısı
 
-Collega più chiamate di funzione per richieste complesse (ad es. recupera prima la località, poi le previsioni meteo per quella località).
+Karmaşık istekler için birden fazla işlev çağrısını birlikte zincirleyin (ör. önce konumu alın, ardından bu konumun hava durumunu alın).
 
 ### Python
 
@@ -963,14 +957,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Modalità di chiamata di funzione
+## İşlev çağırma modları
 
-Controlla il modo in cui il modello utilizza gli strumenti utilizzando `tool_choice` in `generation_config`:
+`generation_config` içindeki `tool_choice` seçeneğini kullanarak modelin araçları nasıl kullanacağını kontrol edin:
 
-- `auto` (predefinito): il modello decide se chiamare una funzione o rispondere direttamente.
-- `any`: il modello è vincolato a prevedere sempre una chiamata di funzione.
-- `none`: al modello è vietato effettuare chiamate di funzione.
-- `validated`: il modello garantisce la conformità dello schema della funzione.
+- `auto` (Varsayılan): Model, bir işlevi çağırmaya mı yoksa doğrudan yanıt vermeye mi karar verir.
+- `any`: Model, her zaman bir işlev çağrısı tahmin edecek şekilde sınırlandırılmıştır.
+- `none`: Modelin işlev çağrıları yapması yasaktır.
+- `validated`: Model, işlev şemasına uygunluğu sağlar.
 
 ### Python
 
@@ -1030,9 +1024,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Utilizzo di più strumenti
+## Çok amaçlı araç kullanımı
 
-Puoi attivare più strumenti, combinando gli strumenti integrati con la chiamata di funzione nella stessa richiesta. I modelli Gemini 3 possono combinare gli strumenti integrati con la chiamata di funzione immediatamente nelle interazioni. Il passaggio di `previous_interaction_id` fa circolare automaticamente il contesto dello strumento integrato.
+Yerleşik araçları işlev çağrısıyla birleştirerek aynı istekte birden fazla aracı etkinleştirebilirsiniz. Gemini 3 modelleri, Etkileşimler'de yerleşik araçları kullanıma hazır işlev çağrılarıyla birleştirebilir. `previous_interaction_id` iletildiğinde yerleşik araç bağlamı otomatik olarak dolaşıma girer.
 
 ### Python
 
@@ -1200,13 +1194,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Risposte di funzioni multimodali
+## Çok formatlı işlev yanıtları
 
-Per i modelli della serie Gemini 3, puoi includere contenuti multimodali nelle parti di risposta della funzione che invii al modello. Il modello può elaborare questi contenuti multimodali nel turno successivo per produrre una risposta più informata.
+Gemini 3 serisi modeller için, modele gönderdiğiniz işlev yanıtı bölümlerine çok formatlı içerik ekleyebilirsiniz. Model, daha bilinçli bir yanıt üretmek için bu çok formatlı içeriği bir sonraki turda işleyebilir.
 
-Per includere dati multimodali in una risposta della funzione, includili come uno o più blocchi di contenuti nel campo `result` del passaggio `function_result`. Ogni blocco di contenuti deve specificare il relativo `type` (ad es. `"text"`, `"image"`).
+Bir işlev yanıtına çok formatlı veriler eklemek için bu verileri `function_result` adımının `result` alanına bir veya daha fazla içerik bloğu olarak ekleyin. Her içerik bloğu `type` değerini belirtmelidir (ör. `"text"`, `"image"`).
 
-L'esempio seguente mostra come inviare una risposta della funzione contenente dati immagine al modello in un'interazione:
+Aşağıdaki örnekte, bir etkileşimde görüntü verileri içeren bir işlev yanıtının modele nasıl geri gönderileceği gösterilmektedir:
 
 ### Python
 
@@ -1306,30 +1300,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Chiamata di funzione con output strutturato
+## Yapılandırılmış çıkışla işlev çağırma
 
-Per i modelli della serie Gemini 3, combina la chiamata di funzione con
-[l'output strutturato](https://ai.google.dev/gemini-api/docs/structured-output?hl=it) per
-risposte con formattazione coerente.
+Gemini 3 serisi modellerde, işlev çağrısını [yapılandırılmış çıkışla](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr) birleştirerek tutarlı biçimde biçimlendirilmiş yanıtlar alın.
 
-## MCP (Model Context Protocol) remoto
+## Uzak MCP (Model Context Protocol)
 
-L'API Interactions supporta la connessione ai server MCP remoti per consentire al modello di accedere a strumenti e servizi esterni. Fornisci il `name` e l'`url` del server nella configurazione degli strumenti.
+Etkileşimler API'si, modele harici araçlara ve hizmetlere erişim sağlamak için uzak MCP sunucularına bağlanmayı destekler. Araç yapılandırmasında sunucu `name` ve `url` bilgilerini siz sağlarsınız.
 
-Quando utilizzi MCP remoto, tieni presente i seguenti vincoli:
+Uzak MCP'yi kullanırken aşağıdaki kısıtlamalara dikkat edin:
 
-- **Tipi di server**: MCP remoto funziona solo con i server HTTP in streaming. I server SSE (Server-Sent Events) non sono supportati.
-- **Denominazione**: i nomi dei server MCP non devono includere il carattere `-`. Utilizza invece i nomi dei server `snake_case`.
+- **Sunucu türleri**: Uzak MCP yalnızca akışa uygun HTTP sunucularıyla çalışır. SSE (Server-Sent Events) sunucuları desteklenmez.
+- **Adlandırma**: MCP sunucusu adları `-` karakterini içermemelidir. Bunun yerine `snake_case` sunucu adlarını kullanın.
 
-| Campo | Tipo | Obbligatorio | Descrizione |
+| Alan | Tür | Zorunlu | Açıklama |
 | --- | --- | --- | --- |
-| `type` | `string` | Sì | Deve essere `"mcp_server"`. |
-| `name` | `string` | No | Un nome visualizzato per il server MCP. |
-| `url` | `string` | No | L'URL completo dell'endpoint del server MCP. |
-| `headers` | `object` | No | Coppie chiave-valore inviate come intestazioni HTTP con ogni richiesta al server (ad esempio, token di autenticazione). |
-| `allowed_tools` | `array` | No | Limita gli strumenti del server che l'agente può chiamare. |
+| `type` | `string` | Evet | `"mcp_server"` olmalıdır. |
+| `name` | `string` | Hayır | MCP sunucusunun görünen adı. |
+| `url` | `string` | Hayır | MCP sunucusu uç noktasının tam URL'si. |
+| `headers` | `object` | Hayır | Sunucuya yapılan her istekle birlikte HTTP başlıkları olarak gönderilen anahtar/değer çiftleri (örneğin, kimlik doğrulama jetonları). |
+| `allowed_tools` | `array` | Hayır | Ajanın sunucudan hangi araçları çağırabileceğini kısıtlayın. |
 
-### Esempio
+### Örnek
 
 ### Python
 
@@ -1390,9 +1382,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Chiamate allo strumento di streaming
+## Araç çağrılarını yayınlama
 
-Quando utilizzi gli strumenti con lo streaming, il modello genera chiamate di funzione come sequenza di eventi `step.delta` nello stream. Gli argomenti dello strumento possono essere trasmessi in streaming come argomenti parziali utilizzando `arguments`. Devi aggregare questi delta per ricostruire le chiamate allo strumento complete prima di eseguirle.
+Model, akışla birlikte kullanılan araçlarda akışta `step.delta` etkinlikleri dizisi olarak işlev çağrıları oluşturur. Araç bağımsız değişkenleri, `arguments` kullanılarak kısmi bağımsız değişkenler olarak yayınlanabilir. Bu farkları, tam araç çağrılarını yeniden oluşturmak için toplamanız gerekir.
 
 ### Python
 
@@ -1557,42 +1549,42 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
 }'
 ```
 
-## Best practice
+## En iyi uygulamalar
 
-- **Descrizioni di funzioni e parametri:** devono essere chiare e specifiche.
-- **Denominazione:** utilizza nomi descrittivi senza spazi o caratteri speciali.
-- **Digitazione forte:** utilizza tipi specifici (integer, stringa, enum).
-- **Selezione degli strumenti:** mantieni il set attivo a un massimo di 10-20 strumenti.
-- **Ingegneria dei prompt:** fornisci contesto e istruzioni.
-- **Convalida:** convalida le chiamate di funzione prima di eseguirle.
-- **Gestione degli errori:** implementa una gestione degli errori efficace.
-- **Sicurezza:** utilizza l'autenticazione appropriata per le API esterne.
+- **İşlev ve Parametre Açıklamaları:** Net ve spesifik olun.
+- **Adlandırma:** Boşluk veya özel karakter içermeyen açıklayıcı adlar kullanın.
+- **Güçlü Tür Belirleme:** Belirli türleri (tam sayı, dize, enum) kullanın.
+- **Araç Seçimi:** Etkin araç sayısını en fazla 10-20 olarak ayarlayın.
+- **İstem Mühendisliği:** Bağlam ve talimatlar sağlayın.
+- **Doğrulama:** İşlev çağrılarını yürütmeden önce doğrulayın.
+- **Hata İşleme:** Hataların etkili bir şekilde yönetilmesini sağlayın.
+- **Güvenlik:** Harici API'ler için uygun kimlik doğrulama yöntemini kullanın.
 
-## Soluzioni alternative per i requisiti di testo pre-strumento
+## Araç öncesi metin şartları için geçici çözümler
 
-**Problema:** se il prompt richiede al modello di generare testo strutturato (XML, YAML, JSON e così via) (ad es. `<UPDATE>...</UPDATE>`) immediatamente prima di effettuare una chiamata allo strumento, la chiamata allo strumento potrebbe occasionalmente non riuscire con `Malformed_Function_Call`.
+**Sorun:** İsteminizde modelin yapılandırılmış metin (XML, YAML, JSON vb.) çıkışı vermesi gerekiyorsa (ör. `<UPDATE>...</UPDATE>`) hemen önce yapıldığında araç çağrısı bazen `Malformed_Function_Call` ile başarısız olabilir.
 
-**Soluzioni:** le seguenti soluzioni alternative risolvono questo problema:
+**Çözümler:** Aşağıdaki geçici çözümler bu sorunu giderir:
 
-- **CONSIGLIATO:** indica al modello di inserire le note pre-strumento all'interno di una chiamata di funzione `update()` dedicata anziché nel testo non elaborato (dettagli di seguito).
-- Indica al modello di scrivere le note come intestazioni Markdown (`# UPDATE`, `## PLAN`) anziché come testo strutturato.
-- Non richiedere al modello di generare testo prima delle chiamate allo strumento.
+- **TERCİH EDİLEN:** Modele, araç öncesi notlarını ham metin yerine özel bir `update()` işlev çağrısının içine yerleştirmesini söyleyin (ayrıntılar aşağıda).
+- Modele, notları yapılandırılmış metin yerine Markdown başlıkları (`# UPDATE`, `## PLAN`) olarak yazmasını söyleyin.
+- Modelin, araç çağrılarından önce metin çıkışı yapmasını zorunlu kılmayın.
 
-### Soluzione alternativa consigliata: racchiudi le note di lavoro in una chiamata di funzione dedicata
+### Tercih edilen geçici çözüm: Çalışma notlarını özel bir işlev çağrısına sarmalama
 
-Anziché l'istruzione originale:
+Orijinal talimat yerine:
 
 ```
 Before calling a tool, in every response you MUST first output a single `<UPDATE>` part as specified, don't skip this part or any of required sub-tags with<in `UP>DATE`.
 ```
 
-Utilizza questa istruzione aggiornata:
+Güncellenen bu talimatı kullanın:
 
 ```
 Before calling any other tool, in every response you MUST first call `update` with all required parameters (previous_step, plan, next_step, external).
 ```
 
-Aggiorna tutti i riferimenti al vecchio formato XML `<UPDATE>` nella richiesta del cliente. Aggiungi poi la dichiarazione di funzione corrispondente per la funzione di aggiornamento:
+Ayrıca, müşteri isteğindeki eski `<UPDATE>` XML biçimine yapılan tüm referansları güncelleyin. Ardından, güncelleme işlevi için ilgili işlev beyanını ekleyin:
 
 ```
 {
@@ -1628,20 +1620,20 @@ Aggiorna tutti i riferimenti al vecchio formato XML `<UPDATE>` nella richiesta d
 }
 ```
 
-Il modello effettuerà quindi due chiamate nello stesso passaggio: la chiamata `update()` che sostituisce l'XML strutturato e la chiamata di funzione effettiva che vuole effettuare.
+Ardından model, aynı adımda iki çağrı yapar: yapılandırılmış XML'nin yerini alan `update()` çağrısı ve yapmak istediği gerçek işlev çağrısı.
 
-## Note e limitazioni
+## Notlar ve sınırlamalar
 
-- È supportato solo un [sottoinsieme dello schema OpenAPI](https://ai.google.dev/api/rest/v1beta/cachedContents?hl=it#FunctionDeclaration).
-- Per la modalità `any`, l'API potrebbe rifiutare schemi molto grandi o con nidificazione profonda.
-- I tipi di parametri supportati in Python sono limitati.
+- Yalnızca [OpenAPI şemasının bir alt kümesi](https://ai.google.dev/api/rest/v1beta/cachedContents?hl=tr#FunctionDeclaration) desteklenir.
+- `any` modunda API, çok büyük veya derin iç içe yerleştirilmiş şemaları reddedebilir.
+- Python'da desteklenen parametre türleri sınırlıdır.
 
-Invia feedback
+Geri bildirim gönderin
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Ultimo aggiornamento 2026-07-30 UTC.
+Son güncelleme tarihi: 2026-07-30 UTC.
 
-Vuoi dirci altro?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]

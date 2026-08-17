@@ -1,78 +1,78 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-errors?hl=pl
-fetched_at: 2026-08-10T03:20:28.302682+00:00
-title: "B\u0142\u0119dy interfejsu API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-errors?hl=it
+fetched_at: 2026-08-17T02:35:15.725537+00:00
+title: "Errori API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Prześlij opinię
+Invia feedback
 
-# Błędy interfejsu API
+# Errori API
 
-Ta strona zawiera informacje o wszystkich kodach błędów interfejsu Interactions API, opisuje format odpowiedzi na błędy i wyjaśnia, jak interfejs API dostarcza błędy w przypadku różnych typów żądań.
+Questa pagina fornisce un riferimento per tutti i codici di errore dell'API Interactions, descrive il formato della risposta di errore e spiega come l'API restituisce gli errori per i diversi tipi di richiesta.
 
-## Standardowe kody błędów interfejsu API
+## Codici di errore API standard
 
-Te ogólne kody błędów na poziomie żądania odpowiadają standardowym kodom stanu HTTP.
-Aby programowo obsługiwać błędy, użyj pola `code` w logice aplikacji.
+Questi codici di errore generali a livello di richiesta corrispondono ai codici di stato HTTP standard.
+Utilizza il campo `code` nella logica dell'applicazione per gestire gli errori a livello di programmazione.
 
-| Kod | Stan HTTP | Opis | Zalecane działanie |
+| Codice | Stato HTTP | Descrizione | Comportamento consigliato |
 | --- | --- | --- | --- |
-| `invalid_request` | 400 Nieprawidłowe żądanie | Żądanie jest nieprawidłowe lub zawiera nieprawidłowe parametry. | Sprawdź dane wejściowe w [dokumentacji API](https://ai.google.dev/api/interactions-api?hl=pl). |
-| `parameter_unknown` | 400 Nieprawidłowe żądanie | Żądanie zawiera nieznany parametr. | Usuń nierozpoznany parametr i spróbuj ponownie. |
-| `authentication` | 401 Brak autoryzacji | Brakujący lub nieprawidłowy klucz interfejsu API. | [Sprawdź kl0}ucz interfejsu API](https://ai.google.dev/gemini-api/docs/api-key?hl=pl). |
-| `permission_denied` | 403 Dostęp zabroniony | Twój klucz interfejsu API nie ma uprawnień do tego zasobu. | Sprawdź uprawnienia klucza interfejsu API i dostęp do projektu. |
-| `not_found` | 404 Nie znaleziono | Nie znaleziono żądanego zasobu. | Sprawdź ścieżkę zasobu i parametry. |
-| `model_not_found` | 404 Nie znaleziono | Nie znaleziono określonego modelu. | Sprawdź nazwę modelu lub użyj innego modelu. |
-| `rate_limit_exceeded` | 429 Zbyt wiele żądań | Przekroczono limit żądań lub tokenów na minutę lub sekundę. | Poczekaj i spróbuj ponownie ze wzrastającym czasem do ponowienia. |
-| `quota_exceeded` | 429 Zbyt wiele żądań | Przekroczono dzienny limit. | Poczekaj, aż limit się zresetuje, lub poproś o jego zwiększenie. |
-| `cancelled` | 499 Klient zamknął żądanie | Klient anulował żądanie przed jego zakończeniem. | Nie musisz niczego robić. Zwykle oznacza to, że klient się rozłączył. |
-| `api_error` | 500 Wewnętrzny błąd serwera | Na serwerze wystąpił nieoczekiwany błąd. | Ponów próbę. Jeśli problem się powtórzy, skontaktuj się z zespołem pomocy. |
-| `service_unavailable` | 503 Usługa niedostępna | Usługa jest tymczasowo przeciążona lub niedostępna. | Poczekaj i spróbuj ponownie ze wzrastającym czasem do ponowienia. |
+| `invalid_request` | 400 Richiesta non valida | La richiesta non è valida o contiene parametri non validi. | Controlla gli input rispetto al [riferimento API](https://ai.google.dev/api/interactions-api?hl=it). |
+| `parameter_unknown` | 400 Richiesta non valida | La richiesta contiene un parametro sconosciuto. | Rimuovi il parametro non riconosciuto e riprova. |
+| `authentication` | 401 Non autorizzato | La chiave API non è presente o non è valida. | Verifica la [chiave API](https://ai.google.dev/gemini-api/docs/api-key?hl=it). |
+| `permission_denied` | 403 Non consentito | La chiave API non dispone dell'autorizzazione per questa risorsa. | Controlla le autorizzazioni della chiave API e l'accesso al progetto. |
+| `not_found` | 404: non trovato | La risorsa richiesta non è stata trovata. | Verifica il percorso e i parametri della risorsa. |
+| `model_not_found` | 404: non trovato | Il modello specificato non è stato trovato. | Verifica il nome del modello o utilizza un modello diverso. |
+| `rate_limit_exceeded` | 429 Troppe richieste | Hai superato il limite di richieste o token al minuto o al secondo. | Attendi e riprova con un backoff esponenziale. |
+| `quota_exceeded` | 429 Troppe richieste | Hai superato la quota giornaliera. | Attendi il ripristino della quota o richiedi un aumento della quota. |
+| `cancelled` | 499 Richiesta chiusa dal client | Il client ha annullato la richiesta prima del completamento. | Nessuna azione richiesta. In genere, questo significa che il client si è disconnesso. |
+| `api_error` | 500 Errore interno del server | Si è verificato un errore imprevisto sul server. | Riprova a inviare la richiesta. Se il problema persiste, contatta l'assistenza. |
+| `service_unavailable` | 503 Servizio non disponibile | Il servizio è temporaneamente sovraccarico o non è disponibile. | Attendi e riprova con un backoff esponenziale. |
 
-## Kody zablokowanej generacji
+## Codici di generazione bloccati
 
-Te kody błędów wskazują, że dane wyjściowe modelu zostały zablokowane przez ograniczenia dotyczące zasad, bezpieczeństwa lub ograniczenia treści. Gdy otrzymasz jeden z tych kodów, zmodyfikuj dane wejściowe i spróbuj ponownie.
+Questi codici di errore indicano che le norme, la sicurezza o le limitazioni dei contenuti hanno bloccato l'output del modello. Quando ricevi uno di questi codici, modifica l'input e riprova.
 
-| Kod | Opis |
+| Codice | Descrizione |
 | --- | --- |
-| `safety` | Żądanie zostało zablokowane z powodu naruszenia zasad bezpieczeństwa (szkodliwe treści). |
-| `recitation` | Żądanie zostało zablokowane z powodu ograniczeń dotyczących praw autorskich lub recytacji. |
-| `language` | Żądanie zostało zablokowane z powodu nieobsługiwanego języka. |
-| `prohibited_content` | Żądanie zostało zablokowane z powodu wytycznych dotyczących niedozwolonych treści. |
-| `spii` | Żądanie zostało zablokowane z powodu ograniczeń dotyczących informacji poufnych umożliwiających identyfikację. |
-| `blocklist` | Żądanie zostało zablokowane z powodu niedozwolonych terminów na liście zablokowanych. |
-| `image_safety` | Generowanie obrazu zostało zablokowane z powodu naruszenia zasad bezpieczeństwa. |
-| `image_prohibited_content` | Generowanie obrazu zostało zablokowane z powodu wytycznych dotyczących niedozwolonych treści. |
-| `image_recitation` | Generowanie obrazu zostało zablokowane z powodu ograniczeń dotyczących praw autorskich lub recytacji. |
-| `image_other` | Generowanie obrazu zostało zablokowane z nieokreślonych powodów. |
-| `content_blocked` | Żądanie zostało zablokowane z nieokreślonego powodu związanego z zasadami. |
+| `safety` | Le violazioni della sicurezza (contenuti dannosi) hanno bloccato la richiesta. |
+| `recitation` | Le limitazioni relative al copyright o alla recitazione hanno bloccato la richiesta. |
+| `language` | Una lingua non supportata ha bloccato la richiesta. |
+| `prohibited_content` | Le linee guida per i contenuti vietati hanno bloccato la richiesta. |
+| `spii` | Le limitazioni relative alle informazioni sensibili che consentono l'identificazione personale hanno bloccato la richiesta. |
+| `blocklist` | I termini vietati in una lista di blocco hanno bloccato la richiesta. |
+| `image_safety` | Le violazioni della sicurezza hanno bloccato la generazione di immagini. |
+| `image_prohibited_content` | Le linee guida per i contenuti vietati hanno bloccato la generazione di immagini. |
+| `image_recitation` | Le limitazioni relative al copyright o alla recitazione hanno bloccato la generazione di immagini. |
+| `image_other` | Motivi non specificati hanno bloccato la generazione di immagini. |
+| `content_blocked` | Un motivo di norme non specificato ha bloccato la richiesta. |
 
-## Kody błędów generowania
+## Codici di errore di generazione
 
-Te kody błędów wskazują na problem strukturalny z wygenerowanymi danymi wyjściowymi modelu (np. nieprawidłowe wywołanie funkcji lub niezadeklarowane wywołanie narzędzia).
+Questi codici di errore indicano un problema strutturale con l'output generato dal modello (ad esempio una chiamata di funzione non valida o una chiamata di strumento non dichiarata).
 
-| Kod | Opis |
+| Codice | Descrizione |
 | --- | --- |
-| `malformed_function_call` | Model wygenerował wywołanie funkcji, którego nie udało się przeanalizować. |
-| `malformed_tool_call` | Model wygenerował wywołanie narzędzia, którego nie udało się przeanalizować. |
-| `unexpected_tool_call` | Model wywołał narzędzie, które nie zostało zadeklarowane w żądaniu. |
-| `no_image` | Model nie był w stanie wygenerować obrazu. |
-| `too_many_tool_calls` | Model wygenerował więcej wywołań narzędzi niż jest to dozwolone. |
-| `missing_thought_signature` | W odpowiedzi brakuje wymaganej sygnatury. |
+| `malformed_function_call` | Il modello ha prodotto una chiamata di funzione che non è stato possibile analizzare. |
+| `malformed_tool_call` | Il modello ha prodotto una chiamata di strumento che non è stato possibile analizzare. |
+| `unexpected_tool_call` | Il modello ha chiamato uno strumento non dichiarato nella richiesta. |
+| `no_image` | Il modello non è riuscito a generare un'immagine. |
+| `too_many_tool_calls` | Il modello ha generato più chiamate di strumenti di quelle consentite. |
+| `missing_thought_signature` | Nella risposta manca una firma di pensiero obbligatoria. |
 
-## Format odpowiedzi na błędy
+## Formato della risposta di errore
 
-Wszystkie błędy z interfejsu Interactions API zwracają obiekt `error` zawierający `code` i `message`. Na przykład przekazanie nieobsługiwanego typu narzędzia zwraca:
+Tutti gli errori dell'API Interactions restituiscono un `error` oggetto contenente un `code` e `message`. Ad esempio, il passaggio di un tipo di strumento non supportato restituisce:
 
 ```
 {
@@ -83,18 +83,18 @@ Wszystkie błędy z interfejsu Interactions API zwracają obiekt `error` zawiera
 }
 ```
 
-| Pole | Typ | Opis |
+| Campo | Tipo | Descrizione |
 | --- | --- | --- |
-| `code` | tekst | Kod błędu w formacie `snake_case`. |
-| `message` | tekst | Zrozumiały dla człowieka opis tego, co poszło nie tak. |
+| `code` | stringa | Un codice di errore leggibile dalla macchina in `snake_case`. |
+| `message` | stringa | Una descrizione leggibile di ciò che è andato storto. |
 
-## Jak są dostarczane błędy
+## Come vengono restituiti gli errori
 
-Interfejs API dostarcza błędy w różny sposób w zależności od tego, czy wysyłasz standardowe żądanie HTTP, czy żądanie przesyłania strumieniowego (SSE).
+L'API restituisce gli errori in modo diverso a seconda che tu effettui una richiesta HTTP standard o una richiesta di streaming (SSE).
 
-### Standardowe żądania HTTP
+### Richieste HTTP standard
 
-W przypadku standardowych (niestrumieniowych) żądań interfejs API ustawia kod stanu odpowiedzi HTTP (np. `400 Bad Request`, `401 Unauthorized`, lub `429 Too Many Requests`) i zwraca obiekt `error` w treści odpowiedzi JSON:
+Per le richieste standard (non di streaming), l'API imposta il codice di stato della risposta HTTP (ad esempio `400 Bad Request`, `401 Unauthorized`, o `429 Too Many Requests`) e restituisce un oggetto `error` nel corpo della risposta JSON:
 
 ```
 {
@@ -105,9 +105,9 @@ W przypadku standardowych (niestrumieniowych) żądań interfejs API ustawia kod
 }
 ```
 
-### Żądania przesyłania strumieniowego (SSE)
+### Richieste di streaming (SSE)
 
-W przypadku żądań przesyłania strumieniowego (`stream: true`) interfejs API wysyła zdarzenia błędów w strumieniu Server-Sent Events (SSE) z ustawionym parametrem `event_type` na wartość `"error"`. Pole `error` zawiera tę samą strukturę `code` i `message`:
+Per le richieste di streaming (`stream: true`), l'API invia eventi di errore tramite il flusso di eventi inviati dal server (SSE) con `event_type` impostato su `"error"`. Il campo `error` contiene la stessa struttura `code` e `message`:
 
 ```
 {
@@ -119,19 +119,19 @@ W przypadku żądań przesyłania strumieniowego (`stream: true`) interfejs API 
 }
 ```
 
-Pełny schemat zdarzeń SSE znajdziesz w dokumentacji interfejsu [Interactions API](https://ai.google.dev/api/interactions-api?hl=pl).
+Per lo schema completo degli eventi SSE, consulta il [riferimento dell'API Interactions](https://ai.google.dev/api/interactions-api?hl=it).
 
-## Co dalej?
+## Passaggi successivi
 
-- [Rozwiązywanie problemów z interfejsem API](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=pl): rozwiązywanie typowych problemów i scenariuszy błędów.
-- [Limity](https://ai.google.dev/gemini-api/docs/rate-limits?hl=pl): informacje o limitach żądań i obsłudze limitów.
+- [Risoluzione dei problemi dell'API](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=it): risolvi i problemi comuni e gli scenari di errore.
+- [Limiti di frequenza](https://ai.google.dev/gemini-api/docs/rate-limits?hl=it): scopri di più sui limiti di richiesta e sulla gestione delle quote.
 
-Prześlij opinię
+Invia feedback
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Ostatnia aktualizacja: 2026-07-30 UTC.
+Ultimo aggiornamento 2026-07-30 UTC.
 
-Chcesz przekazać coś jeszcze?
+Vuoi dirci altro?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]

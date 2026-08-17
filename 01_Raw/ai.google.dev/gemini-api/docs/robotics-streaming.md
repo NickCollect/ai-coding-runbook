@@ -1,73 +1,72 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=th
-fetched_at: 2026-08-10T03:24:34.050138+00:00
-title: "\u0e2b\u0e38\u0e48\u0e19\u0e22\u0e19\u0e15\u0e4c\u0e17\u0e35\u0e48\u0e21\u0e35\u0e01\u0e32\u0e23\u0e2a\u0e15\u0e23\u0e35\u0e21 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=pt-BR
+fetched_at: 2026-08-17T02:19:32.364466+00:00
+title: "Rob\u00f3tica com streaming \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-ส่งความคิดเห็น
+Envie comentários
 
-# หุ่นยนต์ที่มีการสตรีม
+# Robótica com streaming
 
-ปลายทางของโมเดล `gemini-robotics-er-2-streaming-preview` จะแสดงปลายทางการสตรีมมิงเฉพาะ
-ที่ผสานรวมกับ [Live
-API](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=th) ซึ่งช่วยให้แอปพลิเคชันและหุ่นยนต์โต้ตอบกันแบบสองทางได้แบบเรียลไทม์
-จึงเหมาะสำหรับเอเจนต์ที่ต้องการวงจรความคิดเห็นที่รวดเร็วและการตอบสนองต่อสภาพแวดล้อมแบบโต้ตอบ
+O endpoint do modelo `gemini-robotics-er-2-streaming-preview` expõe um endpoint de streaming dedicado
+que se integra à API [Live](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=pt-br), permitindo a interação bidirecional em tempo real
+entre o aplicativo e o robô. Isso o torna adequado para agentes que precisam de loops de feedback rápidos e respostas reativas ao ambiente.
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-streaming-preview&hl=th)
-[โคลนแอปตัวอย่างจาก GitHub](https://github.com/google-gemini/robotics-samples/tree/main/live-api)
+[Testar no Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-streaming-preview&hl=pt-br)
+[Clonar apps de exemplo do GitHub](https://github.com/google-gemini/robotics-samples/tree/main/live-api)
 
-## กรณีการใช้งาน
+## Casos de uso
 
-- **การประสานงานของหุ่นยนต์หลายตัว**: หุ่นยนต์หลายตัวที่สื่อสารสถานะของงาน
-  และมอบหมายงานย่อยผ่านเซสชันที่แชร์
-- **การตรวจสอบอย่างต่อเนื่อง**: หุ่นยนต์ที่สังเกตฉากและทริกเกอร์การดำเนินการ
-  เมื่อเกิดเหตุการณ์ที่เฉพาะเจาะจง เช่น คอนเทนเนอร์มีระดับการเติมถึงระดับหนึ่ง
-- **คลังสินค้าและโลจิสติกส์**: เอเจนต์หยิบและแพ็กที่ยืนยันรายการ
-  ด้วยสายตา ติดตามความคืบหน้าในการแพ็ก และกู้คืนจากข้อผิดพลาด
+- **Coordenação de vários robôs**: vários robôs que comunicam o estado da tarefa
+  e delegam subtarefas por uma sessão compartilhada.
+- **Monitoramento contínuo**: robôs que observam uma cena e acionam ações
+  quando eventos específicos ocorrem, como um contêiner atingir um nível de preenchimento.
+- **Armazém e logística**: agentes de coleta e embalagem que verificam itens
+  visualmente, acompanham o progresso da embalagem e se recuperam de erros.
 
-## ข้อกำหนดทางเทคนิค
+## Especificações técnicas
 
-ตารางต่อไปนี้สรุปข้อกำหนดทางเทคนิคของ Live API
+A tabela a seguir descreve as especificações técnicas da API Live:
 
-| หมวดหมู่ | รายละเอียด |
+| Categoria | Detalhes |
 | --- | --- |
-| รูปแบบอินพุต | เสียง (เสียง PCM แบบดิบ 16 บิต, 16kHz, little-endian), รูปภาพ (JPEG <= 1FPS), ข้อความ |
-| รูปแบบเอาต์พุต | ข้อความ |
-| โปรโตคอล | การเชื่อมต่อ WebSocket แบบมีสถานะ (WSS) |
+| Modalidades de entrada | Áudio (PCM bruto de 16 bits, 16 kHz, little-endian), imagens (JPEG <= 1 FPS), texto |
+| Modalidades de saída | Texto |
+| Protocolo | Conexão WebSocket com estado (WSS) |
 
-## สร้างการตั้งค่าแบบเอเจนต์
+## Criar uma configuração de agente
 
-เอเจนต์ระบบหุ่นยนต์ทุกตัวที่สร้างขึ้นใน Live API จะทำตาม 3 ขั้นตอนต่อไปนี้
+Cada agente de robótica criado na API Live segue três etapas:
 
-1. **ประกาศความสามารถของหุ่นยนต์เป็นเครื่องมือ** การดำเนินการแต่ละอย่างที่หุ่นยนต์ทำได้ เช่น การนำทาง การจับ การพูด จะกลายเป็นการประกาศฟังก์ชันที่มีชื่อ คำอธิบาย และสคีมาพารามิเตอร์ การดำเนินการทางกายภาพต้องใช้
-   `"behavior": "BLOCKING"` เพื่อให้โมเดลรอให้หุ่นยนต์ดำเนินการเสร็จสิ้นก่อนที่จะ
-   เลือกขั้นตอนถัดไป
-2. **สตรีมอินพุตหลายรูปแบบลงในเซสชันแบบถาวร** เปิดเซสชัน `live.connect` และเปิดไว้ตลอดระยะเวลาของงาน ส่งเฟรมวิดีโอ เสียง หรือข้อความเมื่อเซ็นเซอร์ของหุ่นยนต์ส่งมา
-3. **จัดการการเรียกเครื่องมือในลูปการรับ** ทุกครั้งที่โมเดลเลือกการดำเนินการ โมเดลจะส่งข้อความ `tool_call` ลูปการรับจะเรียกใช้ฟังก์ชันกับ SDK ของหุ่นยนต์และส่ง `tool_response` กลับ เซสชันจะเปิดอยู่ และโมเดลจะเลือกการดำเนินการถัดไปตามผลลัพธ์
+1. **Declarar os recursos do robô como ferramentas**. Cada ação que o robô pode realizar (navegar, agarrar, falar) se torna uma declaração de função com um nome, descrição e esquema de parâmetros. As ações físicas precisam usar
+   `"behavior": "BLOCKING"` para que o modelo espere o robô terminar antes de
+   escolher a próxima etapa.
+2. **Transmitir entrada multimodal para uma sessão persistente**. Abra uma sessão `live.connect` e mantenha-a aberta durante toda a tarefa. Envie frames de vídeo, áudio ou texto à medida que eles chegam dos sensores do robô.
+3. **Processar chamadas de ferramentas em um loop de recebimento**. Cada vez que o modelo seleciona uma ação, ele envia uma mensagem `tool_call`. O loop de recebimento executa a função no SDK do robô e envia um `tool_response`. A sessão permanece aberta, e o modelo escolhe a próxima ação com base no resultado.
 
-ส่วนต่อไปนี้จะแสดงวิธีใช้ขั้นตอนเหล่านี้กับ 3 รูปแบบทั่วไป ได้แก่ ลูปเอเจนต์พื้นฐาน การตรวจสอบฉากเชิงรุกด้วยสัญญาณชีพจร และการกำหนดเส้นทางคำพูดผ่าน TTS เป็นเครื่องมือ
+As seções a seguir mostram como aplicar essas etapas a três padrões comuns: um loop do agente de linha de base, monitoramento proativo de cenário com um sinal de funcionamento e roteamento de fala por TTS como uma ferramenta.
 
-## ประสานงานหุ่นยนต์ผ่านการเรียกฟังก์ชัน
+## Orquestrar um robô por chamada de função
 
-ตัวอย่างต่อไปนี้แสดงขั้นตอนทั้ง 3 ขั้นตอนที่เชื่อมโยงกันในสคริปต์ Python เดียว
+O exemplo a seguir mostra todas as três etapas conectadas em um único script Python.
 
-ขั้นตอนที่ 1 - คำจำกัดความของเครื่องมือ - ประกาศความสามารถของหุ่นยนต์เป็นการประกาศฟังก์ชัน ฟังก์ชัน `navigate` ใช้ `"behavior": "BLOCKING"` เพื่อให้
-โมเดลรอให้หุ่นยนต์ไปถึงจุดอ้างอิงก่อนที่จะเรียกเครื่องมืออื่น
-เพิ่มการประกาศฟังก์ชันเพิ่มเติมในรายการเดียวกันเพื่อแสดงความสามารถเพิ่มเติมของหุ่นยนต์
+A etapa 1 (definições de ferramentas) declara os recursos do robô como declarações de função. A função `navigate` usa `"behavior": "BLOCKING"` para que o
+modelo espere o robô chegar ao waypoint antes de chamar outra ferramenta.
+Adicione mais declarações de função na mesma lista para expor outros recursos do robô.
 
-ขั้นตอนที่ 2 - ตัวช่วยอินพุต - แสดงฟังก์ชัน 3 ฟังก์ชันที่สตรีมอินพุตรูปแบบต่างๆ ลงในเซสชัน ได้แก่ `send_text` สำหรับคำสั่ง, `send_image` สำหรับเฟรมกล้องที่มีพรอมต์ข้อความที่ไม่บังคับ และ `send_audio` สำหรับเสียง PCM แบบดิบจากไมโครโฟน
+A etapa 2 (helpers de entrada) mostra três funções que transmitem entradas de modalidades diferentes para a sessão: `send_text` para comandos, `send_image` para frames de câmera com um comando de texto opcional e `send_audio` para áudio PCM bruto de um microfone.
 
-ขั้นตอนที่ 3 - ลูปการรับ - ทำงานพร้อมกันและจัดการข้อความ 2 ประเภท ได้แก่ ข้อความ `server_content` (เอาต์พุตข้อความของโมเดล) และข้อความ `tool_call` (โมเดลขอการดำเนินการของหุ่นยนต์) เมื่อมีการเรียกใช้เครื่องมือ ลูปจะเรียก `execute_tool` ซึ่งเป็น Stub ที่คุณแทนที่ด้วย SDK ของหุ่นยนต์จริง จากนั้นส่ง `tool_response` กลับเพื่อให้โมเดลเลือกการดำเนินการถัดไปได้
+A etapa 3 (o loop de recebimento) é executada simultaneamente e processa dois tipos de mensagens: mensagens `server_content` (a saída de texto do modelo) e mensagens `tool_call` (o modelo solicitando uma ação do robô). Quando uma chamada de ferramenta chega, o loop chama `execute_tool` (um stub que você substitui pelo SDK do robô real) e envia um `tool_response` para que o modelo possa selecionar a próxima ação.
 
 ```
 import asyncio
@@ -172,18 +171,19 @@ async def main():
 asyncio.run(main())
 ```
 
-ลูปการรับจะยังคงทำงานอยู่หลังจากได้รับคำตอบจากเครื่องมือแต่ละรายการ โมเดลจะสร้างและแก้ไขแผนระยะยาวโดยที่คุณไม่ต้องเข้ารหัสลำดับการดำเนินการทั้งหมดล่วงหน้า
+O loop de recebimento permanece ativo após cada resposta da ferramenta. O modelo constrói e revisa um plano de longo prazo sem que você codifique toda a sequência de ações com antecedência.
 
-## การให้เหตุผลเชิงรุกด้านพื้นที่และเวลา
+## Raciocínio espacial-temporal proativo
 
-Live API จะสตรีมวิดีโอ แต่เฟรมวิดีโอเพียงอย่างเดียวจะไม่ทริกเกอร์การให้เหตุผลใหม่ เฟรมวิดีโอต้องมาพร้อมกับพรอมต์ข้อความหรือเสียงเพื่อทริกเกอร์การตอบสนองของโมเดล ดูรายละเอียดเพิ่มเติมได้ที่
-[ความสามารถของ Live API](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=th)สำหรับ
+A API Live transmite vídeo, mas os frames de vídeo sozinhos não acionam um novo turno de raciocínio. Os frames de vídeo precisam ser acompanhados por um comando de texto ou áudio para acionar uma resposta do modelo. Consulte
+[os recursos da API Live](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=pt-br) para
+mais detalhes.
 
-หากต้องการเปิดใช้การให้เหตุผลเชิงรุก ให้ใช้**สัญญาณชีพจร**: ส่ง
-เฟรมกล้องล่าสุดเป็นระยะๆ ตามด้วยพรอมต์ข้อความสั้นๆ ที่บังคับให้โมเดล
-ตรวจสอบฉากและตัดสินใจอย่างชัดเจน อินพุตวิดีโอจะจำกัดอัตราไว้ที่ 1 เฟรมต่อวินาที
+Para ativar o raciocínio proativo, implemente um **heartbeat**: envie periodicamente o
+frame de câmera mais recente seguido por um comando de texto curto que força o modelo a
+inspecionar a cena e tomar uma decisão explícita. A entrada de vídeo é limitada a um frame por segundo.
 
-เพิ่มโครูทีนนี้ข้างลูปการรับจากส่วนก่อนหน้า โดยจะทำงานเป็นงาน `asyncio` แยกต่างหากในเซสชันเดียวกัน
+Adicione essa corrotina ao loop de recebimento da seção anterior. Ela é executada como uma tarefa `asyncio` separada na mesma sessão:
 
 ```
 async def heartbeat(session, camera):  # camera is your robot camera API
@@ -204,24 +204,25 @@ async def heartbeat(session, camera):  # camera is your robot camera API
         await asyncio.sleep(1)
 ```
 
-คุณไม่จำเป็นต้องหยุดสัญญาณชีพจรชั่วคราวระหว่างการดำเนินการของหุ่นยนต์ เมื่อใช้เป็น
-**ตัวตรวจจับความสำเร็จโดยนัย** การเปิดใช้งานสัญญาณชีพจรจะช่วยให้โมเดลสังเกตการดำเนินการที่กำลังดำเนินการอยู่ได้อย่างต่อเนื่อง (ติดตามว่าการจับยึดปลอดภัยหรือไม่ การเท
-ตรงเป้าหมายหรือไม่ หรือวัตถุกำลังเข้าที่อย่างถูกต้องหรือไม่) และตอบสนองทันทีที่
-ผลลัพธ์ชัดเจน
+Não é necessário pausar o heartbeat durante as ações do robô. Quando usado como um
+**detector de sucesso implícito**, manter a execução permite que o modelo observe continuamente
+a ação em andamento (rastreando se um aperto está seguro, um despejo
+está no alvo ou um objeto está se acomodando corretamente) e reaja no momento em que o
+resultado fica claro.
 
-ข้อความสัญญาณชีพจรจะทำหน้าที่เป็นการโต้ตอบของผู้ใช้และขัดจังหวะการสร้างโมเดลที่กำลังดำเนินการอยู่
-ดู
-[คู่มือ Live API เกี่ยวกับการขัดจังหวะ](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=th#interruptions)
-เพื่อทำความเข้าใจวิธีที่ Live API จัดการลักษณะการทำงานนี้
+As mensagens de heartbeat atuam como turnos de usuário e interrompem a geração de modelos em andamento.
+Consulte
+[o guia da API Live sobre interrupções](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=pt-br#interruptions)
+para entender como a API Live processa esse comportamento.
 
-## เอาต์พุตเสียงผ่าน TTS ภายนอก
+## Saída de áudio por TTS externo
 
-Gemini Robotics ER 2 จะแสดงผลข้อความ แอปพลิเคชันของคุณจะกำหนดเส้นทางคำตอบที่เสร็จสมบูรณ์
-ไปยังผู้ให้บริการ TTS แยกต่างหาก (เช่น
-[Gemini TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th)) ผ่านการเรียกกลับที่แทรก
-ซึ่งจะช่วยให้คุณควบคุมเวลาในการตอบสนองของคำพูด การเลือกเสียง และลักษณะการทำงานของการขัดจังหวะได้ และช่วยให้คุณสลับแบ็กเอนด์ TTS ได้โดยไม่ต้องเปลี่ยนตรรกะของเอเจนต์
+O Gemini Robotics ER 2 retorna texto. O aplicativo encaminha as respostas concluídas
+para um provedor de TTS separado (como
+[Gemini TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br)) por um callback injetado.
+Isso mantém a latência de fala, a seleção de voz e o comportamento de interrupção sob seu controle e permite trocar back-ends de TTS sem mudar a lógica do agente.
 
-นอกจากนี้ คุณยังประกาศ TTS เป็นเครื่องมือได้เพื่อให้โมเดลถือว่า "พูดอะไรบางอย่าง" เหมือนกับ "ขยับแขน" เพิ่มการประกาศฟังก์ชันต่อไปนี้ลงในรายการ `tools` จากส่วนแรก
+Você também pode declarar o TTS como uma ferramenta para que o modelo trate "diga algo" da mesma forma que "mova o braço". Adicione a seguinte declaração de função à lista `tools` da primeira seção:
 
 ```
 TOOLS = [
@@ -251,26 +252,26 @@ TOOLS = [
 ]
 ```
 
-การห่อหุ้ม TTS ในการประกาศฟังก์ชันจะช่วยให้โมเดลจัดการคำพูดผ่านเส้นทางการเรียกเครื่องมือเดียวกันกับการดำเนินการอื่นๆ ของหุ่นยนต์ แอปพลิเคชันของคุณจะดำเนินการตามการเรียกด้วยการเรียกกลับที่แทรก
+Ao encapsular o TTS em uma declaração de função, o modelo processa a fala pelo mesmo caminho de chamada de ferramenta que qualquer outra ação do robô. O aplicativo atende à chamada com um callback injetado.
 
-## ตัวอย่างใน GitHub
+## Exemplos no GitHub
 
-ดูตัวอย่างการทำงานทั้งหมด รวมถึงการสาธิตการหยิบขนมของหุ่นยนต์ Spot และ Tinybot
-pan-tilt hello world ได้ที่
-[ตัวอย่าง Robotics Live API](https://github.com/google-gemini/robotics-samples/tree/main/live-api)
+Para exemplos de trabalho completos, incluindo a demonstração de busca de lanches do robô Spot e o Tinybot
+pan-tilt hello world, consulte
+[Exemplos da API Robotics Live](https://github.com/google-gemini/robotics-samples/tree/main/live-api).
 
-## ขั้นตอนถัดไป
+## A seguir
 
-- [การทำความเข้าใจวิดีโอ](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=th) - การค้นหาช่วงเวลาและการจัดประเภทความคืบหน้า
-- [การประสานงานงาน](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=th) - งานระยะยาวโดยไม่มีการสตรีมมิง
-- [ภาพรวมของ Live API](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=th) - เอกสารประกอบทั้งหมดของ Live API
+- [Entendimento de vídeo](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=pt-br): descoberta de momentos e classificação de progresso.
+- [Orquestração de tarefas](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=pt-br): tarefas de longo prazo sem streaming.
+- [Visão geral da API Live](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=pt-br): documentação completa da API Live.
 
-ส่งความคิดเห็น
+Envie comentários
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-อัปเดตล่าสุด 2026-07-31 UTC
+Última atualização 2026-07-31 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Quer enviar seu feedback?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-31 UTC"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-07-31 UTC."],[],[]]
