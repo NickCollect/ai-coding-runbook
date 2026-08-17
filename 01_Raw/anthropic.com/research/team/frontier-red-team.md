@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/frontier-red-team
-fetched_at: 2026-08-03T04:25:06.148191+00:00
+fetched_at: 2026-08-17T02:15:22.728073+00:00
 title: "Frontier Red Team \\ Anthropic"
 ---
 
@@ -28,6 +28,9 @@ Search
 
 DateCategoryTitle
 
+- [Aug 13, 2026Frontier Red Team
+
+  Patterns and problems in emerging multiagent systems](https://www.anthropic.com/research/multiagent-systems)
 - [Jul 28, 2026Frontier Red Team
 
   Discovering cryptographic weaknesses with Claude](https://www.anthropic.com/research/discovering-cryptographic-weaknesses)
@@ -55,8 +58,5 @@ DateCategoryTitle
 - [Apr 7, 2026Frontier Red Team
 
   Assessing Claude Mythos Preview’s cybersecurity capabilities](https://www.anthropic.com/research/mythos-preview)
-- [Mar 6, 2026Policy
-
-  Partnering with Mozilla to improve Firefox’s security](https://www.anthropic.com/news/mozilla-firefox-security)
 
 [See more](#)

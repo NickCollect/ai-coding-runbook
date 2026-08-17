@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/discovering-cryptographic-weaknesses
-fetched_at: 2026-08-03T04:25:02.816896+00:00
+fetched_at: 2026-08-17T02:15:18.886185+00:00
 title: "Discovering cryptographic weaknesses with Claude \\ Anthropic"
 ---
 
@@ -153,19 +153,23 @@ Read the paper [introducing CryptanalysisBench](https://arxiv.org/abs/2607.18538
 
 ## Related content
 
-### Project Pilot: Can AI control a drone?
+### Patterns and problems in emerging multiagent systems
 
-Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+Here, we identify a few examples of behavioral tendencies in current frontier models and show how they can produce unexpected systemic failures, in hopes of starting a conversation about mitigating these risks.
 
-[Read more](https://www.anthropic.com/research/project-pilot)
+[Read more](https://www.anthropic.com/research/multiagent-systems)
 
-### How Canada uses Claude: Findings from the Anthropic Economic Index
+### Reviewing the evidence on worker retraining programs
 
-[Read more](https://www.anthropic.com/research/how-canada-uses-claude)
+We're sharing a review of the evidence on worker retraining programs, coauthored by independent researcher David Roodman and Anthropic's Maxim Massenkoff.
 
-### Claude’s values across models and languages
+[Read more](https://www.anthropic.com/research/reviewing-the-evidence-on-worker-retraining-programs)
 
-[Read more](https://www.anthropic.com/research/claude-values-models-languages)
+### Learning more about Claude's mathematical capabilities
+
+An unreleased research version of Claude has made strides on a problem related to the Riemann hypothesis. It improved a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the hypothesis, increasing it from 41.6% to 67.2%.
+
+[Read more](https://www.anthropic.com/research/riemann-zeta)
 
 ## Subscribe to the Frontier Red Team newsletter
 
