@@ -461,7 +461,7 @@ pub(crate) fn decorate_spans(line: &HyperlinkLine) -> Vec<Span<'static>> {
                 }
                 active_link_index = selected_link_index;
             }
-            push_styled_content(&mut out, &ch.to_string(), span.style);
+            push_styled_content(&mut out, ch.encode_utf8(&mut [0; 4]), span.style);
             column += width;
         }
     }
@@ -500,7 +500,7 @@ pub(crate) fn mark_buffer_hyperlinks(
     lines: &[HyperlinkLine],
     scroll_rows: usize,
 ) {
-    if area.width == 0 {
+    if area.width == 0 || lines.iter().all(|line| line.hyperlinks.is_empty()) {
         return;
     }
     let mut logical_row = 0usize;

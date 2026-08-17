@@ -83,14 +83,7 @@ impl GrpcCodeModeHost {
                     Status::invalid_argument(format!("invalid code-mode tool output JSON: {error}"))
                 })?,
             ),
-            Some(proto::complete_tool_call_request::Outcome::Failed(error)) => {
-                validation::bounded(
-                    &error.message,
-                    validation::MAX_TOOL_ERROR_BYTES,
-                    "tool error message",
-                )?;
-                Err(error.message)
-            }
+            Some(proto::complete_tool_call_request::Outcome::Failed(error)) => Err(error.message),
             None => {
                 return Err(Status::invalid_argument(
                     "tool completion is missing its outcome",
@@ -106,9 +99,8 @@ impl GrpcCodeModeHost {
         request: proto::AcknowledgeNotificationRequest,
     ) -> Result<Response<proto::AcknowledgeNotificationResponse>, Status> {
         let _permit = self.state.control_permit()?;
-        let session = self.state.session(&request.session_id)?;
-        let notification_id = validation::uuid(&request.notification_id, "notification ID")?;
-        session.acknowledge_notification(notification_id)?;
+        self.state.session(&request.session_id)?;
+        validation::uuid(&request.notification_id, "notification ID")?;
         Ok(Response::new(proto::AcknowledgeNotificationResponse {}))
     }
 

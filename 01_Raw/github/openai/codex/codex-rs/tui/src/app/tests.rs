@@ -2,6 +2,10 @@
 
 #[path = "tests/advanced_reasoning_tests.rs"]
 mod advanced_reasoning_tests;
+#[path = "tests/background_exit_tests.rs"]
+mod background_exit_tests;
+#[path = "tests/connector_policy.rs"]
+mod connector_policy;
 #[path = "tests/key_chords.rs"]
 mod key_chords;
 #[path = "tests/mcp_startup.rs"]
@@ -14,6 +18,8 @@ mod safety_buffering;
 mod session_lifecycle_requests;
 mod session_summary;
 mod startup;
+#[path = "tests/thread_usage.rs"]
+mod thread_usage;
 #[path = "tests/turn_submission.rs"]
 mod turn_submission;
 
@@ -94,6 +100,7 @@ use codex_app_server_protocol::TurnStatus;
 use codex_app_server_protocol::UserInput;
 use codex_app_server_protocol::UserInput as AppServerUserInput;
 use codex_app_server_protocol::WarningNotification;
+use codex_history::RolloutItem;
 use codex_models_manager::test_support::construct_model_info_offline_for_tests;
 use codex_models_manager::test_support::get_model_offline_for_tests;
 use codex_otel::SessionTelemetry;
@@ -113,7 +120,6 @@ use codex_protocol::openai_models::MODEL_SPECIALTY_CYBER;
 use codex_protocol::protocol::EventMsg;
 use codex_protocol::protocol::MAX_THREAD_GOAL_OBJECTIVE_CHARS;
 use codex_protocol::protocol::MultiAgentVersion;
-use codex_protocol::protocol::RolloutItem;
 use codex_protocol::protocol::SessionMeta;
 use codex_protocol::protocol::SessionSource as RolloutSessionSource;
 use codex_protocol::protocol::SubAgentSource;
@@ -147,6 +153,29 @@ macro_rules! assert_app_snapshot {
 
 fn test_absolute_path(path: &str) -> AbsolutePathBuf {
     AbsolutePathBuf::try_from(PathBuf::from(path)).expect("absolute test path")
+}
+
+#[tokio::test]
+async fn pasted_text_normalizes_mixed_line_endings_at_app_boundary() -> Result<()> {
+    let mut app = make_test_app().await;
+    let mut app_server = start_config_write_test_app_server(&app).await?;
+    let mut tui = crate::tui::test_support::make_test_tui()?;
+
+    app.handle_tui_event(
+        &mut tui,
+        &mut app_server,
+        TuiEvent::Paste("line1\r\nline2\rline3\nline4".to_string()),
+    )
+    .await?;
+
+    assert_snapshot!(app.chat_widget.composer_text_with_pending(), @r"
+    line1
+    line2
+    line3
+    line4
+    ");
+
+    Ok(())
 }
 
 #[tokio::test]
@@ -225,6 +254,7 @@ async fn handle_mcp_inventory_result_respects_origin_thread() {
     app.handle_mcp_inventory_result(
         Ok(vec![McpServerStatus {
             name: "docs".to_string(),
+            plugin_id: None,
             server_info: None,
             tools: HashMap::new(),
             resources: Vec::new(),
@@ -285,6 +315,53 @@ async fn cyber_model_auto_review_notice_snapshot() -> Result<()> {
     };
     let rendered = lines_to_single_string(&cell.display_lines(/*width*/ 80));
     assert_app_snapshot!("cyber_model_auto_review_notice", rendered);
+    Ok(())
+}
+
+#[tokio::test]
+#[serial_test::serial]
+async fn external_editor_writable_directory_rejected_snapshot() -> Result<()> {
+    struct RestoreVisual(Option<std::ffi::OsString>);
+
+    impl Drop for RestoreVisual {
+        fn drop(&mut self) {
+            match self.0.take() {
+                Some(value) => unsafe { std::env::set_var("VISUAL", value) },
+                None => unsafe { std::env::remove_var("VISUAL") },
+            }
+        }
+    }
+
+    let (mut app, mut app_event_rx, _op_rx) = make_test_app_with_channels().await;
+    let codex_home = app.chat_widget.config_ref().codex_home.clone();
+    let fallback_home = dirs::home_dir()
+        .expect("home directory")
+        .join(".codex")
+        .abs();
+    let workspace_codex_home = app.chat_widget.config_ref().cwd.join(".codex");
+    let permission_profile = PermissionProfile::workspace_write_with(
+        &[codex_home, fallback_home, workspace_codex_home],
+        codex_protocol::permissions::NetworkSandboxPolicy::Restricted,
+        /*exclude_tmpdir_env_var*/ true,
+        /*exclude_slash_tmp*/ true,
+    );
+    app.chat_widget
+        .set_permission_profile_from_session_snapshot(PermissionProfileSnapshot::legacy(
+            permission_profile,
+        ))?;
+    let mut tui = crate::tui::test_support::make_test_tui()?;
+    let restore_visual = RestoreVisual(std::env::var_os("VISUAL"));
+    unsafe { std::env::set_var("VISUAL", "editor") };
+
+    app.launch_external_editor(&mut tui).await;
+    drop(restore_visual);
+
+    let cell = match app_event_rx.try_recv() {
+        Ok(AppEvent::InsertHistoryCell(cell)) => cell,
+        other => panic!("expected InsertHistoryCell event, got {other:?}"),
+    };
+    let rendered = lines_to_single_string(&cell.display_lines(/*width*/ 80));
+    assert_app_snapshot!("external_editor_writable_directory_rejected", rendered);
     Ok(())
 }
 
@@ -4790,6 +4867,7 @@ async fn make_test_app() -> App {
         chat_widget,
         workspace_command_runner: None,
         launch_cwd: config.cwd.to_path_buf(),
+        runtime_working_directory_override: None,
         config,
         state_db: None,
         cli_kv_overrides: Vec::new(),
@@ -4800,6 +4878,9 @@ async fn make_test_app() -> App {
         runtime_permission_profile_override: None,
         file_search,
         transcript_cells: Vec::new(),
+        last_rendered_history_tail: None,
+        last_thread_usage_status_cell: None,
+        pending_thread_usage_history_refresh: false,
         overlay: None,
         deferred_history_lines: Vec::new(),
         has_emitted_history_lines: false,
@@ -4835,6 +4916,8 @@ async fn make_test_app() -> App {
         pending_primary_events: VecDeque::new(),
         pending_app_server_requests: PendingAppServerRequests::default(),
         pending_startup_thread_start: false,
+        startup_protected_input_boundary: false,
+        startup_pending_protected_request: false,
         rate_limit_hard_stop_generation: 0,
         pending_plugin_enabled_writes: HashMap::new(),
         pending_hook_enabled_writes: HashMap::new(),
@@ -4860,6 +4943,7 @@ async fn make_test_app_with_channels() -> (
             chat_widget,
             workspace_command_runner: None,
             launch_cwd: config.cwd.to_path_buf(),
+            runtime_working_directory_override: None,
             config,
             state_db: None,
             cli_kv_overrides: Vec::new(),
@@ -4870,6 +4954,9 @@ async fn make_test_app_with_channels() -> (
             runtime_permission_profile_override: None,
             file_search,
             transcript_cells: Vec::new(),
+            last_rendered_history_tail: None,
+            last_thread_usage_status_cell: None,
+            pending_thread_usage_history_refresh: false,
             overlay: None,
             deferred_history_lines: Vec::new(),
             has_emitted_history_lines: false,
@@ -4905,6 +4992,8 @@ async fn make_test_app_with_channels() -> (
             pending_primary_events: VecDeque::new(),
             pending_app_server_requests: PendingAppServerRequests::default(),
             pending_startup_thread_start: false,
+            startup_protected_input_boundary: false,
+            startup_pending_protected_request: false,
             rate_limit_hard_stop_generation: 0,
             pending_plugin_enabled_writes: HashMap::new(),
             pending_hook_enabled_writes: HashMap::new(),
@@ -5809,6 +5898,7 @@ fn session_start_error_surfaces_archived_guidance_without_rollout_path() {
             "/Users/me/.codex/archived_sessions/rollout.jsonl",
         )),
         thread_id,
+        history_mode: None,
     };
     let expected = format!(
         "session {thread_id} is archived. Run `codex unarchive {thread_id}` to unarchive it first."
@@ -6112,6 +6202,7 @@ async fn remote_resume_current_cwd_rejection_snapshot() -> Result<()> {
             crate::resume_picker::SessionTarget {
                 path: None,
                 thread_id: ThreadId::new(),
+                history_mode: None,
             },
         )
         .await?;
@@ -6154,6 +6245,7 @@ async fn remote_exec_resume_current_cwd_is_rejected() -> Result<()> {
             crate::resume_picker::SessionTarget {
                 path: None,
                 thread_id: ThreadId::new(),
+                history_mode: None,
             },
         )
         .await?;
@@ -6191,6 +6283,7 @@ async fn in_app_resume_session_cwd_without_metadata_is_non_fatal() -> Result<()>
             crate::resume_picker::SessionTarget {
                 path: None,
                 thread_id: ThreadId::new(),
+                history_mode: None,
             },
         )
         .await?;
@@ -6253,6 +6346,7 @@ async fn remote_resume_keeps_server_only_cwd_out_of_local_config() -> Result<()>
             crate::resume_picker::SessionTarget {
                 path: Some(rollout_path),
                 thread_id: ThreadId::from_string(&thread_id)?,
+                history_mode: None,
             },
         )
         .await?;
@@ -6270,12 +6364,16 @@ async fn remote_resume_keeps_server_only_cwd_out_of_local_config() -> Result<()>
 
 #[tokio::test]
 async fn in_app_resume_uses_configured_or_explicit_cwd() -> Result<()> {
-    for (configured_mode, has_explicit_cwd, has_remote_exec, expected_directory) in [
-        ("current", false, false, "launch"),
-        ("session", false, false, "session"),
-        ("session", true, false, "explicit"),
-        ("session", false, true, "session"),
-        ("session", true, true, "explicit"),
+    for (configured_mode, has_explicit_cwd, has_remote_exec, has_runtime_cwd, expected_directory) in [
+        ("current", false, false, false, "launch"),
+        ("session", false, false, false, "session"),
+        ("session", true, false, false, "explicit"),
+        ("session", false, true, false, "session"),
+        ("session", true, true, false, "explicit"),
+        ("current", false, false, true, "runtime"),
+        ("current", true, false, true, "runtime"),
+        ("session", false, false, true, "runtime"),
+        ("session", true, false, true, "runtime"),
     ] {
         let temp_dir = tempdir()?;
         let codex_home = temp_dir.path().join("codex-home");
@@ -6283,15 +6381,25 @@ async fn in_app_resume_uses_configured_or_explicit_cwd() -> Result<()> {
         let active_cwd = temp_dir.path().join("active");
         let session_cwd = temp_dir.path().join("session");
         let explicit_cwd = temp_dir.path().join("explicit");
+        let runtime_cwd = temp_dir.path().join("runtime");
         std::fs::create_dir_all(&codex_home)?;
         std::fs::create_dir_all(&launch_cwd)?;
         std::fs::create_dir_all(&active_cwd)?;
         std::fs::create_dir_all(&session_cwd)?;
         std::fs::create_dir_all(&explicit_cwd)?;
+        std::fs::create_dir_all(&runtime_cwd)?;
         std::fs::write(
             codex_home.join("config.toml"),
             format!("[tui]\nresume_cwd = \"{configured_mode}\"\n"),
         )?;
+        if has_runtime_cwd {
+            crate::legacy_core::config::set_project_trust_level(
+                codex_home.as_path(),
+                runtime_cwd.as_path(),
+                codex_protocol::config_types::TrustLevel::Trusted,
+            )
+            .map_err(|error| color_eyre::eyre::eyre!(error.to_string()))?;
+        }
         let config = ConfigBuilder::default()
             .codex_home(codex_home.clone())
             .loader_overrides(LoaderOverrides::without_managed_config_for_tests())
@@ -6363,6 +6471,30 @@ async fn in_app_resume_uses_configured_or_explicit_cwd() -> Result<()> {
         app.chat_widget
             .handle_thread_session_quiet(test_thread_session(ThreadId::new(), active_cwd));
         let mut tui = crate::tui::test_support::make_test_tui()?;
+        if has_runtime_cwd {
+            let started = app_server
+                .start_thread_with_session_start_source(
+                    &app.config,
+                    /*session_start_source*/ None,
+                )
+                .await?;
+            let empty_thread_id = started.session.thread_id;
+            app.replace_chat_widget_with_app_server_thread(
+                &mut tui,
+                started,
+                crate::app::session_lifecycle::ThreadAttachPresentation::SessionLineage,
+                /*initial_user_message*/ None,
+            )
+            .await?;
+            app.change_working_directory(&mut tui, &mut app_server, runtime_cwd.clone().abs())
+                .await;
+
+            assert_ne!(app.chat_widget.thread_id(), Some(empty_thread_id));
+            assert_eq!(
+                app.runtime_working_directory_override.as_deref(),
+                Some(runtime_cwd.as_path()),
+            );
+        }
 
         let control = app
             .resume_target_session(
@@ -6371,6 +6503,7 @@ async fn in_app_resume_uses_configured_or_explicit_cwd() -> Result<()> {
                 crate::resume_picker::SessionTarget {
                     path: Some(rollout_path),
                     thread_id,
+                    history_mode: None,
                 },
             )
             .await?;
@@ -6483,6 +6616,7 @@ async fn remembered_current_cwd_stays_at_launch_across_in_app_resumes() -> Resul
         targets.push(crate::resume_picker::SessionTarget {
             path: Some(rollout_path),
             thread_id: ThreadId::from_string(&thread_id)?,
+            history_mode: None,
         });
     }
     let state_db =

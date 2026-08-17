@@ -17,12 +17,12 @@ use std::fmt;
 use std::path::PathBuf;
 use wildmatch::WildMatchPattern;
 
-use super::requirements_exec_policy::RequirementsExecPolicy;
 use super::requirements_exec_policy::RequirementsExecPolicyToml;
 use crate::Constrained;
 use crate::ConstraintError;
 use crate::ManagedAuthPolicy;
 use crate::ManagedHooksRequirementsToml;
+use crate::RequirementsExecPolicy;
 use crate::config_toml::ConfigToml;
 use crate::mcp_requirements::McpServerRequirement;
 use crate::mcp_types::AppToolApproval;
@@ -1417,8 +1417,7 @@ impl ConfigRequirementsToml {
 
     /// Applies the requirements whose values replace config values.
     ///
-    /// This projection is shared by config/read and config-lock export so
-    /// both surfaces describe the same behavior as the final runtime config.
+    /// This projection keeps config/read aligned with the final runtime config.
     pub fn apply_exact_to_config(&self, config: &mut ConfigToml) {
         macro_rules! apply_exact {
             ($field:ident) => {

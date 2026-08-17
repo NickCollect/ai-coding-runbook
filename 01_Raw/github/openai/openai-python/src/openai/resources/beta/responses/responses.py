@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Castiron. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from types import TracebackType
 from typing import TYPE_CHECKING, Any, Dict, List, Union, Callable, Iterable, Iterator, Optional, Awaitable, cast
 from typing_extensions import Literal, AsyncIterator, overload
 
-import httpx
+import httpx2
 from pydantic import BaseModel
 
 from .... import _legacy_response
@@ -54,12 +54,11 @@ from ....types.websocket_reconnection import ReconnectingEvent, ReconnectingOver
 from ....types.beta.beta_compacted_response import BetaCompactedResponse
 from ....types.websocket_connection_options import WebSocketConnectionOptions
 from ....types.beta.beta_response_includable import BetaResponseIncludable
-from ....types.beta.beta_response_error_event import BetaResponseErrorEvent
 from ....types.beta.beta_response_input_param import BetaResponseInputParam
 from ....types.beta.beta_response_prompt_param import BetaResponsePromptParam
 from ....types.beta.beta_response_stream_event import BetaResponseStreamEvent
 from ....types.beta.beta_responses_client_event import BetaResponsesClientEvent
-from ....types.beta.beta_responses_server_event import BetaResponsesServerEvent
+from ....types.beta.beta_responses_server_event import BetaResponseWsError, BetaResponsesServerEvent
 from ....types.beta.beta_response_input_item_param import BetaResponseInputItemParam
 from ....types.beta.beta_response_text_config_param import BetaResponseTextConfigParam
 from ....types.beta.beta_responses_client_event_param import BetaResponsesClientEventParam
@@ -122,6 +121,7 @@ class Responses(SyncAPIResource):
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
                 "gpt-5.5",
+                "gpt-5.5-2026-04-23",
                 "gpt-5.4",
                 "gpt-5.4-mini",
                 "gpt-5.4-nano",
@@ -210,10 +210,15 @@ class Responses(SyncAPIResource):
                 "o4-mini-deep-research-2025-06-26",
                 "computer-use-preview",
                 "computer-use-preview-2025-03-11",
+                "gpt-5.5-pro",
+                "gpt-5.5-pro-2026-04-23",
                 "gpt-5-codex",
                 "gpt-5-pro",
                 "gpt-5-pro-2025-10-06",
                 "gpt-5.1-codex-max",
+                "gpt-daybreak-blue-latest",
+                "gpt-daybreak-red-latest",
+                "gpt-5.6-cyber",
             ],
             str,
         ]
@@ -228,7 +233,8 @@ class Responses(SyncAPIResource):
         prompt_cache_retention: Optional[Literal["in_memory", "24h"]] | Omit = omit,
         reasoning: Optional[response_create_params.Reasoning] | Omit = omit,
         safety_identifier: Optional[str] | Omit = omit,
-        service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
+        service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast", "ultrafast"]]
+        | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream: Optional[Literal[False]] | Omit = omit,
         stream_options: Optional[response_create_params.StreamOptions] | Omit = omit,
@@ -246,7 +252,7 @@ class Responses(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaResponse:
         """Creates a model response.
 
@@ -402,6 +408,10 @@ class Responses(SyncAPIResource):
                 Responses or Chat Completions. The response will show `service_tier=priority`
                 regardless of if you specify `service_tier=fast` or `priority` in your
                 request.
+              - If set to 'ultrafast', then the request will be processed with the
+                access-controlled Ultrafast Processing service tier. This tier is currently
+                available for `gpt-5.6-sol`; a response served through it will show
+                `service_tier=ultrafast`.
               - When not set, the default behavior is 'auto'.
 
               When the `service_tier` parameter is set, the response body will include the
@@ -509,6 +519,7 @@ class Responses(SyncAPIResource):
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
                 "gpt-5.5",
+                "gpt-5.5-2026-04-23",
                 "gpt-5.4",
                 "gpt-5.4-mini",
                 "gpt-5.4-nano",
@@ -597,10 +608,15 @@ class Responses(SyncAPIResource):
                 "o4-mini-deep-research-2025-06-26",
                 "computer-use-preview",
                 "computer-use-preview-2025-03-11",
+                "gpt-5.5-pro",
+                "gpt-5.5-pro-2026-04-23",
                 "gpt-5-codex",
                 "gpt-5-pro",
                 "gpt-5-pro-2025-10-06",
                 "gpt-5.1-codex-max",
+                "gpt-daybreak-blue-latest",
+                "gpt-daybreak-red-latest",
+                "gpt-5.6-cyber",
             ],
             str,
         ]
@@ -615,7 +631,8 @@ class Responses(SyncAPIResource):
         prompt_cache_retention: Optional[Literal["in_memory", "24h"]] | Omit = omit,
         reasoning: Optional[response_create_params.Reasoning] | Omit = omit,
         safety_identifier: Optional[str] | Omit = omit,
-        service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
+        service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast", "ultrafast"]]
+        | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream_options: Optional[response_create_params.StreamOptions] | Omit = omit,
         temperature: Optional[float] | Omit = omit,
@@ -632,7 +649,7 @@ class Responses(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> Stream[BetaResponseStreamEvent]:
         """Creates a model response.
 
@@ -795,6 +812,10 @@ class Responses(SyncAPIResource):
                 Responses or Chat Completions. The response will show `service_tier=priority`
                 regardless of if you specify `service_tier=fast` or `priority` in your
                 request.
+              - If set to 'ultrafast', then the request will be processed with the
+                access-controlled Ultrafast Processing service tier. This tier is currently
+                available for `gpt-5.6-sol`; a response served through it will show
+                `service_tier=ultrafast`.
               - When not set, the default behavior is 'auto'.
 
               When the `service_tier` parameter is set, the response body will include the
@@ -895,6 +916,7 @@ class Responses(SyncAPIResource):
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
                 "gpt-5.5",
+                "gpt-5.5-2026-04-23",
                 "gpt-5.4",
                 "gpt-5.4-mini",
                 "gpt-5.4-nano",
@@ -983,10 +1005,15 @@ class Responses(SyncAPIResource):
                 "o4-mini-deep-research-2025-06-26",
                 "computer-use-preview",
                 "computer-use-preview-2025-03-11",
+                "gpt-5.5-pro",
+                "gpt-5.5-pro-2026-04-23",
                 "gpt-5-codex",
                 "gpt-5-pro",
                 "gpt-5-pro-2025-10-06",
                 "gpt-5.1-codex-max",
+                "gpt-daybreak-blue-latest",
+                "gpt-daybreak-red-latest",
+                "gpt-5.6-cyber",
             ],
             str,
         ]
@@ -1001,7 +1028,8 @@ class Responses(SyncAPIResource):
         prompt_cache_retention: Optional[Literal["in_memory", "24h"]] | Omit = omit,
         reasoning: Optional[response_create_params.Reasoning] | Omit = omit,
         safety_identifier: Optional[str] | Omit = omit,
-        service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
+        service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast", "ultrafast"]]
+        | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream_options: Optional[response_create_params.StreamOptions] | Omit = omit,
         temperature: Optional[float] | Omit = omit,
@@ -1018,7 +1046,7 @@ class Responses(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaResponse | Stream[BetaResponseStreamEvent]:
         """Creates a model response.
 
@@ -1181,6 +1209,10 @@ class Responses(SyncAPIResource):
                 Responses or Chat Completions. The response will show `service_tier=priority`
                 regardless of if you specify `service_tier=fast` or `priority` in your
                 request.
+              - If set to 'ultrafast', then the request will be processed with the
+                access-controlled Ultrafast Processing service tier. This tier is currently
+                available for `gpt-5.6-sol`; a response served through it will show
+                `service_tier=ultrafast`.
               - When not set, the default behavior is 'auto'.
 
               When the `service_tier` parameter is set, the response body will include the
@@ -1279,6 +1311,7 @@ class Responses(SyncAPIResource):
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
                 "gpt-5.5",
+                "gpt-5.5-2026-04-23",
                 "gpt-5.4",
                 "gpt-5.4-mini",
                 "gpt-5.4-nano",
@@ -1367,10 +1400,15 @@ class Responses(SyncAPIResource):
                 "o4-mini-deep-research-2025-06-26",
                 "computer-use-preview",
                 "computer-use-preview-2025-03-11",
+                "gpt-5.5-pro",
+                "gpt-5.5-pro-2026-04-23",
                 "gpt-5-codex",
                 "gpt-5-pro",
                 "gpt-5-pro-2025-10-06",
                 "gpt-5.1-codex-max",
+                "gpt-daybreak-blue-latest",
+                "gpt-daybreak-red-latest",
+                "gpt-5.6-cyber",
             ],
             str,
         ]
@@ -1385,7 +1423,8 @@ class Responses(SyncAPIResource):
         prompt_cache_retention: Optional[Literal["in_memory", "24h"]] | Omit = omit,
         reasoning: Optional[response_create_params.Reasoning] | Omit = omit,
         safety_identifier: Optional[str] | Omit = omit,
-        service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
+        service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast", "ultrafast"]]
+        | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream: Optional[Literal[False]] | Literal[True] | Omit = omit,
         stream_options: Optional[response_create_params.StreamOptions] | Omit = omit,
@@ -1403,7 +1442,7 @@ class Responses(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaResponse | Stream[BetaResponseStreamEvent]:
         extra_headers = {
             **strip_not_given({"openai-beta": ",".join(str(e) for e in betas) if is_given(betas) else not_given}),
@@ -1477,7 +1516,7 @@ class Responses(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaResponse:
         """
         Retrieves a model response with the given ID.
@@ -1527,7 +1566,7 @@ class Responses(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> Stream[BetaResponseStreamEvent]:
         """
         Retrieves a model response with the given ID.
@@ -1577,7 +1616,7 @@ class Responses(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaResponse | Stream[BetaResponseStreamEvent]:
         """
         Retrieves a model response with the given ID.
@@ -1626,7 +1665,7 @@ class Responses(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaResponse | Stream[BetaResponseStreamEvent]:
         if not response_id:
             raise ValueError(f"Expected a non-empty value for `response_id` but received {response_id!r}")
@@ -1667,7 +1706,7 @@ class Responses(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Deletes a model response with the given ID.
@@ -1710,7 +1749,7 @@ class Responses(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaResponse:
         """Cancels a model response with the given ID.
 
@@ -1754,6 +1793,7 @@ class Responses(SyncAPIResource):
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
                 "gpt-5.5",
+                "gpt-5.5-2026-04-23",
                 "gpt-5.4",
                 "gpt-5.4-mini",
                 "gpt-5.4-nano",
@@ -1842,10 +1882,15 @@ class Responses(SyncAPIResource):
                 "o4-mini-deep-research-2025-06-26",
                 "computer-use-preview",
                 "computer-use-preview-2025-03-11",
+                "gpt-5.5-pro",
+                "gpt-5.5-pro-2026-04-23",
                 "gpt-5-codex",
                 "gpt-5-pro",
                 "gpt-5-pro-2025-10-06",
                 "gpt-5.1-codex-max",
+                "gpt-daybreak-blue-latest",
+                "gpt-daybreak-red-latest",
+                "gpt-5.6-cyber",
             ],
             str,
             None,
@@ -1863,7 +1908,7 @@ class Responses(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaCompactedResponse:
         """Compact a conversation.
 
@@ -2035,6 +2080,7 @@ class AsyncResponses(AsyncAPIResource):
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
                 "gpt-5.5",
+                "gpt-5.5-2026-04-23",
                 "gpt-5.4",
                 "gpt-5.4-mini",
                 "gpt-5.4-nano",
@@ -2123,10 +2169,15 @@ class AsyncResponses(AsyncAPIResource):
                 "o4-mini-deep-research-2025-06-26",
                 "computer-use-preview",
                 "computer-use-preview-2025-03-11",
+                "gpt-5.5-pro",
+                "gpt-5.5-pro-2026-04-23",
                 "gpt-5-codex",
                 "gpt-5-pro",
                 "gpt-5-pro-2025-10-06",
                 "gpt-5.1-codex-max",
+                "gpt-daybreak-blue-latest",
+                "gpt-daybreak-red-latest",
+                "gpt-5.6-cyber",
             ],
             str,
         ]
@@ -2141,7 +2192,8 @@ class AsyncResponses(AsyncAPIResource):
         prompt_cache_retention: Optional[Literal["in_memory", "24h"]] | Omit = omit,
         reasoning: Optional[response_create_params.Reasoning] | Omit = omit,
         safety_identifier: Optional[str] | Omit = omit,
-        service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
+        service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast", "ultrafast"]]
+        | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream: Optional[Literal[False]] | Omit = omit,
         stream_options: Optional[response_create_params.StreamOptions] | Omit = omit,
@@ -2159,7 +2211,7 @@ class AsyncResponses(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaResponse:
         """Creates a model response.
 
@@ -2315,6 +2367,10 @@ class AsyncResponses(AsyncAPIResource):
                 Responses or Chat Completions. The response will show `service_tier=priority`
                 regardless of if you specify `service_tier=fast` or `priority` in your
                 request.
+              - If set to 'ultrafast', then the request will be processed with the
+                access-controlled Ultrafast Processing service tier. This tier is currently
+                available for `gpt-5.6-sol`; a response served through it will show
+                `service_tier=ultrafast`.
               - When not set, the default behavior is 'auto'.
 
               When the `service_tier` parameter is set, the response body will include the
@@ -2422,6 +2478,7 @@ class AsyncResponses(AsyncAPIResource):
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
                 "gpt-5.5",
+                "gpt-5.5-2026-04-23",
                 "gpt-5.4",
                 "gpt-5.4-mini",
                 "gpt-5.4-nano",
@@ -2510,10 +2567,15 @@ class AsyncResponses(AsyncAPIResource):
                 "o4-mini-deep-research-2025-06-26",
                 "computer-use-preview",
                 "computer-use-preview-2025-03-11",
+                "gpt-5.5-pro",
+                "gpt-5.5-pro-2026-04-23",
                 "gpt-5-codex",
                 "gpt-5-pro",
                 "gpt-5-pro-2025-10-06",
                 "gpt-5.1-codex-max",
+                "gpt-daybreak-blue-latest",
+                "gpt-daybreak-red-latest",
+                "gpt-5.6-cyber",
             ],
             str,
         ]
@@ -2528,7 +2590,8 @@ class AsyncResponses(AsyncAPIResource):
         prompt_cache_retention: Optional[Literal["in_memory", "24h"]] | Omit = omit,
         reasoning: Optional[response_create_params.Reasoning] | Omit = omit,
         safety_identifier: Optional[str] | Omit = omit,
-        service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
+        service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast", "ultrafast"]]
+        | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream_options: Optional[response_create_params.StreamOptions] | Omit = omit,
         temperature: Optional[float] | Omit = omit,
@@ -2545,7 +2608,7 @@ class AsyncResponses(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> AsyncStream[BetaResponseStreamEvent]:
         """Creates a model response.
 
@@ -2708,6 +2771,10 @@ class AsyncResponses(AsyncAPIResource):
                 Responses or Chat Completions. The response will show `service_tier=priority`
                 regardless of if you specify `service_tier=fast` or `priority` in your
                 request.
+              - If set to 'ultrafast', then the request will be processed with the
+                access-controlled Ultrafast Processing service tier. This tier is currently
+                available for `gpt-5.6-sol`; a response served through it will show
+                `service_tier=ultrafast`.
               - When not set, the default behavior is 'auto'.
 
               When the `service_tier` parameter is set, the response body will include the
@@ -2808,6 +2875,7 @@ class AsyncResponses(AsyncAPIResource):
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
                 "gpt-5.5",
+                "gpt-5.5-2026-04-23",
                 "gpt-5.4",
                 "gpt-5.4-mini",
                 "gpt-5.4-nano",
@@ -2896,10 +2964,15 @@ class AsyncResponses(AsyncAPIResource):
                 "o4-mini-deep-research-2025-06-26",
                 "computer-use-preview",
                 "computer-use-preview-2025-03-11",
+                "gpt-5.5-pro",
+                "gpt-5.5-pro-2026-04-23",
                 "gpt-5-codex",
                 "gpt-5-pro",
                 "gpt-5-pro-2025-10-06",
                 "gpt-5.1-codex-max",
+                "gpt-daybreak-blue-latest",
+                "gpt-daybreak-red-latest",
+                "gpt-5.6-cyber",
             ],
             str,
         ]
@@ -2914,7 +2987,8 @@ class AsyncResponses(AsyncAPIResource):
         prompt_cache_retention: Optional[Literal["in_memory", "24h"]] | Omit = omit,
         reasoning: Optional[response_create_params.Reasoning] | Omit = omit,
         safety_identifier: Optional[str] | Omit = omit,
-        service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
+        service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast", "ultrafast"]]
+        | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream_options: Optional[response_create_params.StreamOptions] | Omit = omit,
         temperature: Optional[float] | Omit = omit,
@@ -2931,7 +3005,7 @@ class AsyncResponses(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaResponse | AsyncStream[BetaResponseStreamEvent]:
         """Creates a model response.
 
@@ -3094,6 +3168,10 @@ class AsyncResponses(AsyncAPIResource):
                 Responses or Chat Completions. The response will show `service_tier=priority`
                 regardless of if you specify `service_tier=fast` or `priority` in your
                 request.
+              - If set to 'ultrafast', then the request will be processed with the
+                access-controlled Ultrafast Processing service tier. This tier is currently
+                available for `gpt-5.6-sol`; a response served through it will show
+                `service_tier=ultrafast`.
               - When not set, the default behavior is 'auto'.
 
               When the `service_tier` parameter is set, the response body will include the
@@ -3192,6 +3270,7 @@ class AsyncResponses(AsyncAPIResource):
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
                 "gpt-5.5",
+                "gpt-5.5-2026-04-23",
                 "gpt-5.4",
                 "gpt-5.4-mini",
                 "gpt-5.4-nano",
@@ -3280,10 +3359,15 @@ class AsyncResponses(AsyncAPIResource):
                 "o4-mini-deep-research-2025-06-26",
                 "computer-use-preview",
                 "computer-use-preview-2025-03-11",
+                "gpt-5.5-pro",
+                "gpt-5.5-pro-2026-04-23",
                 "gpt-5-codex",
                 "gpt-5-pro",
                 "gpt-5-pro-2025-10-06",
                 "gpt-5.1-codex-max",
+                "gpt-daybreak-blue-latest",
+                "gpt-daybreak-red-latest",
+                "gpt-5.6-cyber",
             ],
             str,
         ]
@@ -3298,7 +3382,8 @@ class AsyncResponses(AsyncAPIResource):
         prompt_cache_retention: Optional[Literal["in_memory", "24h"]] | Omit = omit,
         reasoning: Optional[response_create_params.Reasoning] | Omit = omit,
         safety_identifier: Optional[str] | Omit = omit,
-        service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
+        service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast", "ultrafast"]]
+        | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream: Optional[Literal[False]] | Literal[True] | Omit = omit,
         stream_options: Optional[response_create_params.StreamOptions] | Omit = omit,
@@ -3316,7 +3401,7 @@ class AsyncResponses(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaResponse | AsyncStream[BetaResponseStreamEvent]:
         extra_headers = {
             **strip_not_given({"openai-beta": ",".join(str(e) for e in betas) if is_given(betas) else not_given}),
@@ -3390,7 +3475,7 @@ class AsyncResponses(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaResponse:
         """
         Retrieves a model response with the given ID.
@@ -3440,7 +3525,7 @@ class AsyncResponses(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> AsyncStream[BetaResponseStreamEvent]:
         """
         Retrieves a model response with the given ID.
@@ -3490,7 +3575,7 @@ class AsyncResponses(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaResponse | AsyncStream[BetaResponseStreamEvent]:
         """
         Retrieves a model response with the given ID.
@@ -3539,7 +3624,7 @@ class AsyncResponses(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaResponse | AsyncStream[BetaResponseStreamEvent]:
         if not response_id:
             raise ValueError(f"Expected a non-empty value for `response_id` but received {response_id!r}")
@@ -3580,7 +3665,7 @@ class AsyncResponses(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Deletes a model response with the given ID.
@@ -3623,7 +3708,7 @@ class AsyncResponses(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaResponse:
         """Cancels a model response with the given ID.
 
@@ -3667,6 +3752,7 @@ class AsyncResponses(AsyncAPIResource):
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
                 "gpt-5.5",
+                "gpt-5.5-2026-04-23",
                 "gpt-5.4",
                 "gpt-5.4-mini",
                 "gpt-5.4-nano",
@@ -3755,10 +3841,15 @@ class AsyncResponses(AsyncAPIResource):
                 "o4-mini-deep-research-2025-06-26",
                 "computer-use-preview",
                 "computer-use-preview-2025-03-11",
+                "gpt-5.5-pro",
+                "gpt-5.5-pro-2026-04-23",
                 "gpt-5-codex",
                 "gpt-5-pro",
                 "gpt-5-pro-2025-10-06",
                 "gpt-5.1-codex-max",
+                "gpt-daybreak-blue-latest",
+                "gpt-daybreak-red-latest",
+                "gpt-5.6-cyber",
             ],
             str,
             None,
@@ -3776,7 +3867,7 @@ class AsyncResponses(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+        timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaCompactedResponse:
         """Compact a conversation.
 
@@ -4229,11 +4320,11 @@ class AsyncResponsesConnection:
 
         Can be used as a method (returns ``self`` for chaining)::
 
-            connection.on("response.audio.delta", my_handler)
+            connection.on("response.inject.created", my_handler)
 
         Or as a decorator::
 
-            @connection.on("response.audio.delta")
+            @connection.on("response.inject.created")
             async def my_handler(event): ...
         """
         if handler is not None:
@@ -4285,7 +4376,7 @@ class AsyncResponsesConnection:
             generic = self._event_handler_registry.get_handlers("event")
 
             if event_type == "error" and not specific and not generic:
-                if isinstance(event, BetaResponseErrorEvent):
+                if isinstance(event, BetaResponseWsError):
                     raise OpenAIError(f"WebSocket error: {event}")
 
             for handler in specific:
@@ -4456,7 +4547,7 @@ class AsyncResponsesConnectionManager:
             **self.__websocket_connection_options,
         )
 
-    def _prepare_url(self) -> httpx.URL:
+    def _prepare_url(self) -> httpx2.URL:
         if self.__client.websocket_base_url is not None:
             base_url = normalize_httpx_url(self.__client.websocket_base_url)
         else:
@@ -4680,11 +4771,11 @@ class ResponsesConnection:
 
         Can be used as a method (returns ``self`` for chaining)::
 
-            connection.on("response.audio.delta", my_handler)
+            connection.on("response.inject.created", my_handler)
 
         Or as a decorator::
 
-            @connection.on("response.audio.delta")
+            @connection.on("response.inject.created")
             def my_handler(event): ...
         """
         if handler is not None:
@@ -4734,7 +4825,7 @@ class ResponsesConnection:
             generic = self._event_handler_registry.get_handlers("event")
 
             if event_type == "error" and not specific and not generic:
-                if isinstance(event, BetaResponseErrorEvent):
+                if isinstance(event, BetaResponseWsError):
                     raise OpenAIError(f"WebSocket error: {event}")
 
             for handler in specific:
@@ -4901,7 +4992,7 @@ class ResponsesConnectionManager:
             **self.__websocket_connection_options,
         )
 
-    def _prepare_url(self) -> httpx.URL:
+    def _prepare_url(self) -> httpx2.URL:
         if self.__client.websocket_base_url is not None:
             base_url = normalize_httpx_url(self.__client.websocket_base_url)
         else:
@@ -4952,6 +5043,7 @@ class ResponsesResponseResource(BaseResponsesConnectionResource):
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
                 "gpt-5.5",
+                "gpt-5.5-2026-04-23",
                 "gpt-5.4",
                 "gpt-5.4-mini",
                 "gpt-5.4-nano",
@@ -5040,10 +5132,15 @@ class ResponsesResponseResource(BaseResponsesConnectionResource):
                 "o4-mini-deep-research-2025-06-26",
                 "computer-use-preview",
                 "computer-use-preview-2025-03-11",
+                "gpt-5.5-pro",
+                "gpt-5.5-pro-2026-04-23",
                 "gpt-5-codex",
                 "gpt-5-pro",
                 "gpt-5-pro-2025-10-06",
                 "gpt-5.1-codex-max",
+                "gpt-daybreak-blue-latest",
+                "gpt-daybreak-red-latest",
+                "gpt-5.6-cyber",
             ],
             str,
         ]
@@ -5058,9 +5155,11 @@ class ResponsesResponseResource(BaseResponsesConnectionResource):
         prompt_cache_retention: Optional[Literal["in_memory", "24h"]] | Omit = omit,
         reasoning: Optional[beta_responses_client_event_param.ResponseCreateReasoning] | Omit = omit,
         safety_identifier: Optional[str] | Omit = omit,
-        service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
+        service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast", "ultrafast"]]
+        | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream: Optional[bool] | Omit = omit,
+        stream_id: str | Omit = omit,
         stream_options: Optional[beta_responses_client_event_param.ResponseCreateStreamOptions] | Omit = omit,
         temperature: Optional[float] | Omit = omit,
         text: BetaResponseTextConfigParam | Omit = omit,
@@ -5073,11 +5172,13 @@ class ResponsesResponseResource(BaseResponsesConnectionResource):
     ) -> None:
         """
         Client event for creating a response over a persistent WebSocket connection.
-        This payload uses the same top-level fields as `POST /v1/responses`.
+        This payload uses the same top-level fields as `POST /v1/responses`, plus
+        WebSocket-only envelope metadata.
 
         Notes:
         - `stream` is implicit over WebSocket and should not be sent.
         - `background` is not supported over WebSocket.
+        - `stream_id` is WebSocket-only and is not part of `POST /v1/responses`.
         """
         self._connection.send(
             cast(
@@ -5108,6 +5209,7 @@ class ResponsesResponseResource(BaseResponsesConnectionResource):
                         "service_tier": service_tier,
                         "store": store,
                         "stream": stream,
+                        "stream_id": stream_id,
                         "stream_options": stream_options,
                         "temperature": temperature,
                         "text": text,
@@ -5156,6 +5258,7 @@ class AsyncResponsesResponseResource(BaseAsyncResponsesConnectionResource):
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
                 "gpt-5.5",
+                "gpt-5.5-2026-04-23",
                 "gpt-5.4",
                 "gpt-5.4-mini",
                 "gpt-5.4-nano",
@@ -5244,10 +5347,15 @@ class AsyncResponsesResponseResource(BaseAsyncResponsesConnectionResource):
                 "o4-mini-deep-research-2025-06-26",
                 "computer-use-preview",
                 "computer-use-preview-2025-03-11",
+                "gpt-5.5-pro",
+                "gpt-5.5-pro-2026-04-23",
                 "gpt-5-codex",
                 "gpt-5-pro",
                 "gpt-5-pro-2025-10-06",
                 "gpt-5.1-codex-max",
+                "gpt-daybreak-blue-latest",
+                "gpt-daybreak-red-latest",
+                "gpt-5.6-cyber",
             ],
             str,
         ]
@@ -5262,9 +5370,11 @@ class AsyncResponsesResponseResource(BaseAsyncResponsesConnectionResource):
         prompt_cache_retention: Optional[Literal["in_memory", "24h"]] | Omit = omit,
         reasoning: Optional[beta_responses_client_event_param.ResponseCreateReasoning] | Omit = omit,
         safety_identifier: Optional[str] | Omit = omit,
-        service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
+        service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast", "ultrafast"]]
+        | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream: Optional[bool] | Omit = omit,
+        stream_id: str | Omit = omit,
         stream_options: Optional[beta_responses_client_event_param.ResponseCreateStreamOptions] | Omit = omit,
         temperature: Optional[float] | Omit = omit,
         text: BetaResponseTextConfigParam | Omit = omit,
@@ -5277,11 +5387,13 @@ class AsyncResponsesResponseResource(BaseAsyncResponsesConnectionResource):
     ) -> None:
         """
         Client event for creating a response over a persistent WebSocket connection.
-        This payload uses the same top-level fields as `POST /v1/responses`.
+        This payload uses the same top-level fields as `POST /v1/responses`, plus
+        WebSocket-only envelope metadata.
 
         Notes:
         - `stream` is implicit over WebSocket and should not be sent.
         - `background` is not supported over WebSocket.
+        - `stream_id` is WebSocket-only and is not part of `POST /v1/responses`.
         """
         await self._connection.send(
             cast(
@@ -5312,6 +5424,7 @@ class AsyncResponsesResponseResource(BaseAsyncResponsesConnectionResource):
                         "service_tier": service_tier,
                         "store": store,
                         "stream": stream,
+                        "stream_id": stream_id,
                         "stream_options": stream_options,
                         "temperature": temperature,
                         "text": text,

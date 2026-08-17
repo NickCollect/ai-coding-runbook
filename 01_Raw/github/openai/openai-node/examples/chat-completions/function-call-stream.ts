@@ -1,8 +1,8 @@
 #!/usr/bin/env -S npm run tsn -- -T
 
-import util from 'util';
+import { formatWithOptions } from 'node:util';
 import OpenAI from 'openai';
-import {
+import type {
   ChatCompletionMessage,
   ChatCompletionChunk,
   ChatCompletionMessageParam,
@@ -48,17 +48,21 @@ const functions: OpenAI.Chat.ChatCompletionCreateParams.Function[] = [
 async function callFunction(function_call: ChatCompletionMessage.FunctionCall): Promise<any> {
   const args = JSON.parse(function_call.arguments!);
   switch (function_call.name) {
-    case 'list':
+    case 'list': {
       return await list(args['genre']);
+    }
 
-    case 'search':
+    case 'search': {
       return await search(args['name']);
+    }
 
-    case 'get':
+    case 'get': {
       return await get(args['id']);
+    }
 
-    default:
+    default: {
       throw new Error('No function found');
+    }
   }
 }
 
@@ -83,7 +87,7 @@ async function main() {
     const stream = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages,
-      functions: functions,
+      functions,
       stream: true,
     });
 
@@ -142,8 +146,8 @@ function lineRewriter() {
   return function write(value: any) {
     process.stdout.cursorTo(0);
     process.stdout.moveCursor(0, -Math.floor((lastMessageLength - 1) / process.stdout.columns));
-    lastMessageLength = util.formatWithOptions({ colors: false, breakLength: Infinity }, value).length;
-    process.stdout.write(util.formatWithOptions({ colors: true, breakLength: Infinity }, value));
+    lastMessageLength = formatWithOptions({ colors: false, breakLength: Infinity }, value).length;
+    process.stdout.write(formatWithOptions({ colors: true, breakLength: Infinity }, value));
   };
 }
 

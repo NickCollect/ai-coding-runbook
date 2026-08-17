@@ -21,6 +21,12 @@ $ PNPM_VERSION=$(node -p "require('./package.json').packageManager.replace(/^pnp
 $ npm install --global "pnpm@$PNPM_VERSION"
 ```
 
+### Windows shell requirements
+
+The repository's pnpm scripts use Bash. On Windows, install [Git for Windows](https://git-scm.com/download/win)
+and run the development commands from Git Bash, where `bash` is available on `PATH`. If you run pnpm from
+PowerShell instead, add the Git for Windows `bin` directory that contains `bash.exe` to `PATH` first.
+
 To set up the repository, run:
 
 ```sh
@@ -121,22 +127,23 @@ $ pnpm bench:json
 ```
 
 This writes `benchmark-results.json` in the repository root. The report is ignored
-by Git and is uploaded by the separate, manually triggered or scheduled benchmark
-workflow alongside a runtime, runner, revision, and fixture-hash metadata file.
-Pass a benchmark name or file filter directly to run only part of the suite, for
-example:
+by Git and uploaded as an artifact by the performance-benchmark job in normal CI.
+The separate, manually triggered or scheduled benchmark workflow also uploads a
+runtime, runner, revision, and fixture-hash metadata file. Pass a benchmark name
+or file filter directly to run only part of the suite, for example:
 
 ```sh
 $ pnpm bench streaming
 ```
 
-Benchmarks cover SSE chunk decoding and JSON parsing, incremental structured
-output parsing, schema generation and validation, and base64-versus-float
-embedding responses. Each case prepares its fixtures before timing and uses
-explicit warmup and repeated measurements. Compare medians and tail latency only
-between runs with the same Node.js version, CPU or runner class, SDK revision,
-fixture sizes, and background load. Shared CI runners are useful for collecting
-trends but are too variable for blocking performance thresholds.
+Benchmarks cover request preparation, header merging, query serialization, SSE
+chunk decoding and JSON parsing, incremental structured output parsing, schema
+generation and validation, and base64-versus-float embedding responses. Each case
+prepares its fixtures before timing and uses explicit warmup and repeated
+measurements. Compare medians and tail latency only between runs with the same
+Node.js version, CPU or runner class, SDK revision, fixture sizes, and background
+load. Shared CI runners are useful for collecting trends but are too variable for
+blocking performance thresholds.
 
 ## Linting and formatting
 
@@ -145,12 +152,18 @@ This repository uses [Ultracite](https://www.ultracite.ai/) with
 [Oxlint](https://oxc.rs/docs/guide/usage/linter.html) to format and lint its code.
 The Ultracite presets live in `oxfmt.config.ts` and `oxlint.config.ts`, with
 repository-specific formatting options, import rules, fixture exceptions, and
-generated-file lint exclusions layered on top. Files with a Stainless- or
-Castiron-generated header are formatted and checked only for unused imports and
-restricted SDK package imports; handwritten files in the same directories remain
-checked. Existing handwritten patterns are explicitly
+generated-file lint exclusions layered on top. Files with a Castiron-generated
+header and explicitly listed legacy SDK files are formatted and checked only for
+unused imports and restricted SDK package imports; other handwritten files in the
+same directories remain checked. Existing handwritten patterns are explicitly
 exempted from incompatible Ultracite rules, while the remaining preset rules stay
 enabled.
+
+Handwritten SDK exports, their public class members, configuration fields, and
+event payload properties must have accurate JSDoc so that their behavior is
+available through editor hover. Describe meaningful defaults, prerequisites,
+failure modes, and lifecycle semantics rather than repeating TypeScript types.
+Generated SDK files and vendored dependencies are excluded.
 
 To check formatting and lint rules:
 

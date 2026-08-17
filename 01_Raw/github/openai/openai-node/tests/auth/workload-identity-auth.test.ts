@@ -1,10 +1,57 @@
-import { vi } from 'vitest';
+import { once } from 'node:events';
+import { createServer } from 'node:http';
+import type { Server } from 'node:http';
+import { expect, vi } from 'vitest';
 
 import { WorkloadIdentityAuth } from 'openai/auth/workload-identity-auth';
-import { OAuthError, OpenAIError } from 'openai';
+import { APIError, OAuthError, OpenAIError } from 'openai';
 import type { WorkloadIdentity } from 'openai/auth/types';
 
 const originalFetch = global.fetch;
+
+async function listenLoopback(server: Server): Promise<string> {
+  const listening = once(server, 'listening');
+  server.listen(0, '127.0.0.1');
+  await listening;
+
+  const address = server.address();
+  if (!address || typeof address === 'string') {
+    throw new Error('Expected a loopback TCP server address');
+  }
+  return `http://127.0.0.1:${address.port}`;
+}
+
+async function closeLoopback(server: Server): Promise<void> {
+  if (!server.listening) {
+    return;
+  }
+
+  const closed = once(server, 'close');
+  server.close();
+  server.closeAllConnections();
+  await closed;
+}
+
+function tokenExchangeResponse(accessToken: string, expiresIn: number): Response {
+  return Response.json({
+    access_token: accessToken,
+    issued_token_type: 'urn:ietf:params:oauth:token-type:id_token',
+    token_type: 'Bearer',
+    expires_in: expiresIn,
+  });
+}
+
+function pendingTokenExchange(): {
+  response: Promise<Response>;
+  resolve: (response: Response) => void;
+} {
+  let resolveResponse!: (response: Response) => void;
+  const response = new Promise<Response>((resolve) => {
+    resolveResponse = resolve;
+  });
+
+  return { response, resolve: resolveResponse };
+}
 
 describe('WorkloadIdentityAuth', () => {
   beforeEach(() => {
@@ -33,13 +80,13 @@ describe('WorkloadIdentityAuth', () => {
 
     global.fetch = vi.fn(async () => {
       fetchCallCount++;
-      return new Response(
-        JSON.stringify({
+      return Response.json(
+        {
           access_token: 'access-token',
           issued_token_type: 'urn:ietf:params:oauth:token-type:id_token',
           token_type: 'Bearer',
           expires_in: 3600,
-        }),
+        },
         { status: 200 },
       );
     }) as typeof fetch;
@@ -73,13 +120,13 @@ describe('WorkloadIdentityAuth', () => {
 
     global.fetch = vi.fn(async () => {
       fetchCallCount++;
-      return new Response(
-        JSON.stringify({
+      return Response.json(
+        {
           access_token: `access-token-${fetchCallCount}`,
           issued_token_type: 'urn:ietf:params:oauth:token-type:id_token',
           token_type: 'Bearer',
           expires_in: 1,
-        }),
+        },
         { status: 200 },
       );
     }) as typeof fetch;
@@ -117,13 +164,13 @@ describe('WorkloadIdentityAuth', () => {
     global.fetch = vi.fn(async () => {
       fetchCallCount++;
       await new Promise((resolve) => setTimeout(resolve, 100));
-      return new Response(
-        JSON.stringify({
+      return Response.json(
+        {
           access_token: 'access-token',
           issued_token_type: 'urn:ietf:params:oauth:token-type:id_token',
           token_type: 'Bearer',
           expires_in: 3600,
-        }),
+        },
         { status: 200 },
       );
     }) as typeof fetch;
@@ -137,6 +184,34 @@ describe('WorkloadIdentityAuth', () => {
     expect(token3).toBe('access-token');
     expect(providerCallCount).toBe(1);
     expect(fetchCallCount).toBe(1);
+  });
+
+  test('keeps cached tokens usable after a failed background refresh and retries later', async () => {
+    const config: WorkloadIdentity = {
+      identityProviderId: 'test-identity-provider-id',
+      serviceAccountId: 'test-service-account-id',
+      provider: {
+        tokenType: 'jwt',
+        getToken: async () => 'subject-token',
+      },
+    };
+    const customFetch = vi
+      .fn()
+      .mockResolvedValueOnce(tokenExchangeResponse('cached-token', 60))
+      .mockRejectedValueOnce(new Error('temporary refresh failure'))
+      .mockResolvedValueOnce(tokenExchangeResponse('refreshed-token', 3600));
+    const auth = new WorkloadIdentityAuth(config, customFetch);
+
+    await expect(auth.getToken()).resolves.toBe('cached-token');
+    await expect(auth.getToken()).resolves.toBe('cached-token');
+    await vi.waitFor(() => expect(customFetch).toHaveBeenCalledTimes(2));
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    await expect(auth.getToken()).resolves.toBe('cached-token');
+    await vi.waitFor(() => expect(customFetch).toHaveBeenCalledTimes(3));
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    await expect(auth.getToken()).resolves.toBe('refreshed-token');
   });
 
   test('sends correct OAuth2 token exchange request', async () => {
@@ -157,13 +232,13 @@ describe('WorkloadIdentityAuth', () => {
 
       capturedRequest = { url, body, headers };
 
-      return new Response(
-        JSON.stringify({
+      return Response.json(
+        {
           access_token: 'access-token',
           issued_token_type: 'urn:ietf:params:oauth:token-type:id_token',
           token_type: 'Bearer',
           expires_in: 3600,
-        }),
+        },
         { status: 200 },
       );
     }) as typeof fetch;
@@ -184,6 +259,54 @@ describe('WorkloadIdentityAuth', () => {
     expect(body.service_account_id).toBe('test-service-account-id');
   });
 
+  test.each([307, 308])(
+    'does not expose workload credentials through an HTTP %i redirect',
+    async (status) => {
+      const attackerRequests: string[] = [];
+      const attacker = createServer((request, response) => {
+        let body = '';
+        request.setEncoding('utf-8');
+        request.on('data', (chunk: string) => {
+          body += chunk;
+        });
+        request.on('end', () => {
+          attackerRequests.push(body);
+          response.writeHead(200, { 'Content-Type': 'application/json' });
+          response.end(JSON.stringify({ access_token: 'attacker-token', expires_in: 3600 }));
+        });
+      });
+      let attackerUrl = '';
+      const tokenEndpoint = createServer((_request, response) => {
+        response.writeHead(status, { Location: `${attackerUrl}/stolen-credentials` });
+        response.end();
+      });
+
+      try {
+        attackerUrl = await listenLoopback(attacker);
+        const tokenEndpointUrl = await listenLoopback(tokenEndpoint);
+        const config: WorkloadIdentity = {
+          identityProviderId: 'sensitive-identity-provider-id',
+          serviceAccountId: 'sensitive-service-account-id',
+          provider: {
+            tokenType: 'jwt',
+            getToken: async () => 'sensitive-kubernetes-service-account-jwt',
+          },
+        };
+        const auth = new WorkloadIdentityAuth(config, async (url, init) => {
+          expect(url).toBe('https://auth.openai.com/oauth/token');
+          return await globalThis.fetch(tokenEndpointUrl, init);
+        });
+        const tokenPromise = auth.getToken();
+
+        await expect.soft(tokenPromise).rejects.toBeInstanceOf(APIError);
+        await expect.soft(tokenPromise).rejects.toHaveProperty('status', status);
+        expect(attackerRequests).toEqual([]);
+      } finally {
+        await Promise.all([closeLoopback(tokenEndpoint), closeLoopback(attacker)]);
+      }
+    },
+  );
+
   test('includes all required fields in token exchange', async () => {
     const config: WorkloadIdentity = {
       identityProviderId: 'test-identity-provider-id',
@@ -199,13 +322,13 @@ describe('WorkloadIdentityAuth', () => {
     global.fetch = vi.fn(async (url: string, init?: RequestInit) => {
       capturedBody = init?.body?.toString() || '';
 
-      return new Response(
-        JSON.stringify({
+      return Response.json(
+        {
           access_token: 'access-token',
           issued_token_type: 'urn:ietf:params:oauth:token-type:id_token',
           token_type: 'Bearer',
           expires_in: 3600,
-        }),
+        },
         { status: 200 },
       );
     }) as typeof fetch;
@@ -237,13 +360,13 @@ describe('WorkloadIdentityAuth', () => {
     global.fetch = vi.fn(async (url: string, init?: RequestInit) => {
       capturedBody = init?.body?.toString() || '';
 
-      return new Response(
-        JSON.stringify({
+      return Response.json(
+        {
           access_token: 'access-token',
           issued_token_type: 'urn:ietf:params:oauth:token-type:id_token',
           token_type: 'Bearer',
           expires_in: 3600,
-        }),
+        },
         { status: 200 },
       );
     }) as typeof fetch;
@@ -265,15 +388,15 @@ describe('WorkloadIdentityAuth', () => {
       },
     };
 
-    global.fetch = vi.fn(async () => {
-      return new Response(
-        JSON.stringify({
+    global.fetch = vi.fn(async () =>
+      Response.json(
+        {
           error: 'invalid_grant',
           error_description: 'The subject token is invalid',
-        }),
+        },
         { status: 400 },
-      );
-    }) as typeof fetch;
+      ),
+    ) as typeof fetch;
 
     const auth = new WorkloadIdentityAuth(config);
 
@@ -291,16 +414,16 @@ describe('WorkloadIdentityAuth', () => {
       },
     };
 
-    global.fetch = vi.fn(async () => {
-      return new Response(
-        JSON.stringify({
+    global.fetch = vi.fn(async () =>
+      Response.json(
+        {
           access_token: 'access-token',
           issued_token_type: 'urn:ietf:params:oauth:token-type:id_token',
           token_type: 'Bearer',
-        }),
+        },
         { status: 200 },
-      );
-    }) as typeof fetch;
+      ),
+    ) as typeof fetch;
 
     const auth = new WorkloadIdentityAuth(config);
 
@@ -346,9 +469,7 @@ describe('WorkloadIdentityAuth', () => {
       },
     };
 
-    global.fetch = vi.fn(async () => {
-      return new Response(JSON.stringify(body), { status: 200 });
-    }) as typeof fetch;
+    global.fetch = vi.fn(async () => Response.json(body, { status: 200 })) as typeof fetch;
 
     const auth = new WorkloadIdentityAuth(config);
     const tokenPromise = auth.getToken();
@@ -371,13 +492,13 @@ describe('WorkloadIdentityAuth', () => {
 
     global.fetch = vi.fn(async () => {
       fetchCallCount++;
-      return new Response(
-        JSON.stringify({
+      return Response.json(
+        {
           access_token: `access-token-${fetchCallCount}`,
           issued_token_type: 'urn:ietf:params:oauth:token-type:id_token',
           token_type: 'Bearer',
           expires_in: 3600,
-        }),
+        },
         { status: 200 },
       );
     }) as typeof fetch;
@@ -394,6 +515,87 @@ describe('WorkloadIdentityAuth', () => {
     expect(fetchCallCount).toBe(2);
   });
 
+  test('keeps a newer foreground exchange shared after an invalidated exchange finishes', async () => {
+    const config: WorkloadIdentity = {
+      identityProviderId: 'test-identity-provider-id',
+      serviceAccountId: 'test-service-account-id',
+      provider: {
+        tokenType: 'jwt',
+        getToken: async () => 'subject-token',
+      },
+    };
+    const invalidatedExchange = pendingTokenExchange();
+    const freshExchange = pendingTokenExchange();
+    const customFetch = vi
+      .fn()
+      .mockReturnValueOnce(invalidatedExchange.response)
+      .mockReturnValueOnce(freshExchange.response);
+    const auth = new WorkloadIdentityAuth(config, customFetch);
+    const invalidatedToken = auth.getToken();
+
+    await vi.waitFor(() => expect(customFetch).toHaveBeenCalledTimes(1));
+    auth.invalidateToken();
+
+    const firstFreshToken = auth.getToken();
+    await vi.waitFor(() => expect(customFetch).toHaveBeenCalledTimes(2));
+
+    invalidatedExchange.resolve(tokenExchangeResponse('invalidated-token', 3600));
+    await expect(invalidatedToken).resolves.toBe('invalidated-token');
+
+    const secondFreshToken = auth.getToken();
+    freshExchange.resolve(tokenExchangeResponse('fresh-token', 3600));
+
+    await expect(Promise.all([firstFreshToken, secondFreshToken])).resolves.toEqual([
+      'fresh-token',
+      'fresh-token',
+    ]);
+    await expect(auth.getToken()).resolves.toBe('fresh-token');
+    expect(customFetch).toHaveBeenCalledTimes(2);
+  });
+
+  test('does not let an invalidated background exchange overwrite a newer cached token', async () => {
+    const config: WorkloadIdentity = {
+      identityProviderId: 'test-identity-provider-id',
+      serviceAccountId: 'test-service-account-id',
+      provider: {
+        tokenType: 'jwt',
+        getToken: async () => 'subject-token',
+      },
+    };
+    const invalidatedExchange = pendingTokenExchange();
+    const freshExchange = pendingTokenExchange();
+    const customFetch = vi
+      .fn()
+      .mockResolvedValueOnce(tokenExchangeResponse('cached-token', 60))
+      .mockReturnValueOnce(invalidatedExchange.response)
+      .mockReturnValueOnce(freshExchange.response);
+    const auth = new WorkloadIdentityAuth(config, customFetch);
+    const initialTime = Date.now();
+    const dateNow = vi.spyOn(Date, 'now').mockReturnValue(initialTime);
+
+    try {
+      await expect(auth.getToken()).resolves.toBe('cached-token');
+      await expect(auth.getToken()).resolves.toBe('cached-token');
+      await vi.waitFor(() => expect(customFetch).toHaveBeenCalledTimes(2));
+
+      dateNow.mockReturnValue(initialTime + 60_000);
+      const invalidatedToken = auth.getToken();
+      auth.invalidateToken();
+
+      const freshToken = auth.getToken();
+      await vi.waitFor(() => expect(customFetch).toHaveBeenCalledTimes(3));
+      freshExchange.resolve(tokenExchangeResponse('fresh-token', 3600));
+      await expect(freshToken).resolves.toBe('fresh-token');
+
+      invalidatedExchange.resolve(tokenExchangeResponse('invalidated-token', 3600));
+      await expect(invalidatedToken).resolves.toBe('invalidated-token');
+      await expect(auth.getToken()).resolves.toBe('fresh-token');
+      expect(customFetch).toHaveBeenCalledTimes(3);
+    } finally {
+      dateNow.mockRestore();
+    }
+  });
+
   test('uses the configured fetch implementation for token exchange', async () => {
     const config: WorkloadIdentity = {
       identityProviderId: 'test-identity-provider-id',
@@ -404,17 +606,17 @@ describe('WorkloadIdentityAuth', () => {
       },
     };
 
-    const customFetch = vi.fn(async () => {
-      return new Response(
-        JSON.stringify({
+    const customFetch = vi.fn(async () =>
+      Response.json(
+        {
           access_token: 'access-token',
           issued_token_type: 'urn:ietf:params:oauth:token-type:id_token',
           token_type: 'Bearer',
           expires_in: 3600,
-        }),
+        },
         { status: 200 },
-      );
-    }) as typeof fetch;
+      ),
+    ) as typeof fetch;
 
     const auth = new WorkloadIdentityAuth(config, customFetch);
     await auth.getToken();

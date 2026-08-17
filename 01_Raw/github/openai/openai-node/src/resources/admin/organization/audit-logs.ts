@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+// File generated from our OpenAPI spec by Castiron. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
 import {
@@ -125,6 +125,7 @@ export interface AuditLogListResponse {
     | 'tenant.workload_identity.mapping.archived'
     | 'tenant.workload_identity.binding.created'
     | 'tenant.workload_identity.principal.provisioned'
+    | 'tenant.workload_identity.access_token.issued'
     | 'tenant.admin_api_key.created'
     | 'tenant.admin_api_key.updated'
     | 'tenant.admin_api_key.deleted'
@@ -1929,6 +1930,7 @@ export interface AuditLogListParams extends ConversationCursorPageParams {
     | 'tenant.workload_identity.mapping.archived'
     | 'tenant.workload_identity.binding.created'
     | 'tenant.workload_identity.principal.provisioned'
+    | 'tenant.workload_identity.access_token.issued'
     | 'tenant.admin_api_key.created'
     | 'tenant.admin_api_key.updated'
     | 'tenant.admin_api_key.deleted'

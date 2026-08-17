@@ -13,7 +13,7 @@ async function runTests() {
   /** @type {TestResult[]} */
   const results = [];
   function displayResults() {
-    let pre = document.getElementById('results');
+    let pre = document.querySelector('#results');
     if (!pre) {
       pre = document.createElement('pre');
       pre.id = 'results';
@@ -26,29 +26,29 @@ async function runTests() {
     try {
       await Promise.race([
         run(),
-        new Promise((_, reject) =>
+        new Promise((_resolve, reject) =>
           setTimeout(() => reject(new Error(`Test timed out after ${timeout} ms`)), timeout),
         ),
       ]);
-      console.log('passed ', ...path);
+      console.log('passed', ...path);
       results.push({ path, passed: true });
     } catch (error) {
-      console.log('error  ', ...path);
+      console.log('error', ...path);
       console.error(error);
       results.push({ path, passed: false, error: error instanceof Error ? error.stack : String(error) });
     }
     displayResults();
   }
-  const runningEl = document.getElementById('running');
-  if (runningEl) runningEl.remove();
+  const runningEl = document.querySelector('#running');
+  if (runningEl) {runningEl.remove();}
 }
 
 /** @type {string[]} */
 const testPath = [];
 
 /**
- * @param {string} description 
- * @param {() => void} handler 
+ * @param {string} description - Test suite description.
+ * @param {() => void} handler - Test suite callback.
  */
 function describe(description, handler) {
   testPath.push(description);
@@ -60,16 +60,16 @@ function describe(description, handler) {
 }
 
 /**
- * @param {string} description
- * @param {() => any} run
- * @param {number} [timeout=60000]
+ * @param {string} description - Test case description.
+ * @param {() => any} run - Test case callback.
+ * @param {number} [timeout] - Defaults to `60000`.
  */
-function it(description, run, timeout = 60000) {
+function it(description, run, timeout = 60_000) {
   tests.push({ path: [...testPath, description], run, timeout });
 }
 
 /**
- * @param {any} received
+ * @param {any} received - Value being asserted.
  * @returns {{
  *   toEqual: (expected: any) => void;
  *   toBeSimilarTo: (comparedTo: string, expectedDistance: number) => void;
@@ -86,7 +86,7 @@ function expect(received) {
     },
     toBeSimilarTo(comparedTo, expectedDistance) {
       const actualDistance = distance(received, comparedTo);
-      if (actualDistance < expectedDistance) return;
+      if (actualDistance < expectedDistance) {return;}
 
       throw new Error(
         [
@@ -107,9 +107,11 @@ const correctAnswer =
   'It was anxious to find him no one that expectation of a man who were giving his father enjoyment. But he was avoided in sight in the minister to which indeed,';
 const model = 'whisper-1';
 
-const params = new URLSearchParams(location.search);
+const apiKey = /** @type {typeof globalThis & { __OPENAI_ECOSYSTEM_TEST_API_KEY__?: string }} */ (
+  globalThis
+).__OPENAI_ECOSYSTEM_TEST_API_KEY__;
 
-const client = new OpenAI({ apiKey: params.get('apiKey') ?? undefined, dangerouslyAllowBrowser: true });
+const client = new OpenAI({ apiKey, dangerouslyAllowBrowser: true });
 
 async function typeTests() {
   // @ts-expect-error this should error if the `Uploadable` type was resolved correctly
@@ -120,7 +122,7 @@ async function typeTests() {
   await client.audio.transcriptions.create({ file: 'test', model: 'whisper-1' });
 }
 
-it(`raw response`, async function () {
+it(`raw response`, async () => {
   const response = await client.chat.completions
     .create({
       model: 'gpt-4o-mini',
@@ -130,7 +132,7 @@ it(`raw response`, async function () {
 
   // test that we can use web Response API
   const { body } = response;
-  if (!body) throw new Error('expected response.body to be defined');
+  if (!body) {throw new Error('expected response.body to be defined');}
 
   const reader = body.getReader();
   /** @type {Uint8Array[]} */
@@ -138,7 +140,7 @@ it(`raw response`, async function () {
   let result;
   do {
     result = await reader.read();
-    if (!result.done) chunks.push(result.value);
+    if (!result.done) {chunks.push(result.value);}
   } while (!result.done);
 
   reader.releaseLock();
@@ -154,7 +156,7 @@ it(`raw response`, async function () {
   expect(json.choices[0]?.message.content || '').toBeSimilarTo('This is a test', 10);
 });
 
-it(`streaming works`, async function () {
+it(`streaming works`, async () => {
   const stream = await client.chat.completions.create({
     model: 'gpt-4o-mini',
     messages: [{ role: 'user', content: 'Reply with exactly this text and nothing else: This is a test' }],
@@ -168,7 +170,7 @@ it(`streaming works`, async function () {
 });
 
 if (typeof File !== 'undefined') {
-  it('handles builtinFile', async function () {
+  it('handles builtinFile', async () => {
     const file = await fetch(url)
       .then((x) => x.arrayBuffer())
       .then((x) => new File([x], filename));
@@ -178,7 +180,7 @@ if (typeof File !== 'undefined') {
   });
 }
 
-it('handles Response', async function () {
+it('handles Response', async () => {
   const file = await fetch(url);
 
   const result = await client.audio.transcriptions.create({ file, model });
@@ -189,7 +191,7 @@ const fineTune = `{"prompt": "<prompt text>", "completion": "<ideal generated te
 
 describe('toFile', () => {
   if (typeof Blob !== 'undefined') {
-    it('handles builtin Blob', async function () {
+    it('handles builtin Blob', async () => {
       const result = await client.files.create({
         file: await toFile(
           // @ts-ignore avoid DOM lib for testing purposes
@@ -201,21 +203,21 @@ describe('toFile', () => {
       expect(result.filename).toEqual('finetune.jsonl');
     });
   }
-  it('handles Uint8Array', async function () {
+  it('handles Uint8Array', async () => {
     const result = await client.files.create({
       file: await toFile(new TextEncoder().encode(fineTune), 'finetune.jsonl'),
       purpose: 'fine-tune',
     });
     expect(result.filename).toEqual('finetune.jsonl');
   });
-  it('handles ArrayBuffer', async function () {
+  it('handles ArrayBuffer', async () => {
     const result = await client.files.create({
       file: await toFile(new TextEncoder().encode(fineTune).buffer, 'finetune.jsonl'),
       purpose: 'fine-tune',
     });
     expect(result.filename).toEqual('finetune.jsonl');
   });
-  it('handles DataView', async function () {
+  it('handles DataView', async () => {
     const result = await client.files.create({
       file: await toFile(new DataView(new TextEncoder().encode(fineTune).buffer), 'finetune.jsonl'),
       purpose: 'fine-tune',

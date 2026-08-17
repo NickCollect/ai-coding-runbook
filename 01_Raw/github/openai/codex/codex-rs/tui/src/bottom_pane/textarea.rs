@@ -39,6 +39,7 @@ use std::borrow::Cow;
 use std::cell::Ref;
 use std::cell::RefCell;
 use std::ops::Range;
+use std::sync::Arc;
 use unicode_segmentation::UnicodeSegmentation;
 
 mod vim;
@@ -127,7 +128,7 @@ pub(crate) struct TextArea {
     vim_enabled: bool,
     vim_mode: VimMode,
     vim_pending: VimPending,
-    editor_keymap: EditorKeymap,
+    editor_keymap: Arc<EditorKeymap>,
     vim_normal_keymap: VimNormalKeymap,
     vim_operator_keymap: VimOperatorKeymap,
     vim_text_object_keymap: VimTextObjectKeymap,
@@ -182,7 +183,7 @@ impl TextArea {
     /// the kill buffer, so callers can safely apply a live config update while
     /// preserving the current draft exactly as typed.
     pub fn set_keymap_bindings(&mut self, keymap: &RuntimeKeymap) {
-        self.editor_keymap = keymap.editor.clone();
+        self.editor_keymap = Arc::clone(&keymap.editor);
         self.vim_normal_keymap = keymap.vim_normal.clone();
         self.vim_operator_keymap = keymap.vim_operator.clone();
         self.vim_text_object_keymap = keymap.vim_text_object.clone();
@@ -1007,7 +1008,22 @@ impl TextArea {
         }
         let mut target = self.cursor_pos;
         for _ in 0..n {
-            target = self.prev_atomic_boundary(target);
+            if let Some((boundary, ch)) = self.text[..target].char_indices().next_back()
+                && matches!(
+                    ch,
+                    // Thai-only special casing is not ideal; refactor if it becomes more complex.
+                    // All Thai nonspacing marks: vowel signs, tone marks, and other diacritics.
+                    '\u{0e31}' | '\u{0e34}'..='\u{0e3a}' | '\u{0e47}'..='\u{0e4e}'
+                )
+                && !self
+                    .elements
+                    .iter()
+                    .any(|element| target > element.range.start && target <= element.range.end)
+            {
+                target = boundary;
+            } else {
+                target = self.prev_atomic_boundary(target);
+            }
             if target == 0 {
                 break;
             }
@@ -2246,6 +2262,63 @@ mod tests {
     }
 
     #[test]
+    fn delete_backward_removes_thai_marks_one_at_a_time() {
+        let mut t = ta_with("ที่");
+
+        t.input(KeyEvent::new(KeyCode::Backspace, KeyModifiers::NONE));
+
+        let area = Rect::new(0, 0, /*width*/ 8, /*height*/ 1);
+        let mut terminal = Terminal::new(TestBackend::new(area.width, area.height)).unwrap();
+        let mut state = TextAreaState::default();
+        terminal
+            .draw(|frame| {
+                StatefulWidgetRef::render_ref(&(&t), frame.area(), frame.buffer_mut(), &mut state);
+            })
+            .unwrap();
+        insta::assert_snapshot!(
+            "textarea_thai_backspace_preserves_remaining_marks",
+            format!("cursor: {:?}\n{}", t.cursor_pos(area), terminal.backend())
+        );
+        assert_eq!(t.text(), "ที");
+
+        t.delete_backward(/*n*/ 1);
+        assert_eq!(t.text(), "ท");
+
+        t.delete_backward(/*n*/ 1);
+        assert_eq!(t.text(), "");
+    }
+
+    #[test]
+    fn delete_backward_preserves_other_grapheme_behavior() {
+        let mut thai_spacing_vowel = ta_with("ซ้ำ");
+        thai_spacing_vowel.delete_backward(/*n*/ 1);
+        assert_eq!(thai_spacing_vowel.text(), "ซ้");
+
+        let mut decomposed_latin = ta_with("e\u{301}");
+        decomposed_latin.delete_backward(/*n*/ 1);
+        assert_eq!(decomposed_latin.text(), "");
+
+        let mut family_emoji = ta_with("👨\u{200d}👩\u{200d}👧\u{200d}👦");
+        family_emoji.delete_backward(/*n*/ 1);
+        assert_eq!(family_emoji.text(), "");
+    }
+
+    #[test]
+    fn delete_backward_keeps_thai_elements_atomic() {
+        let mut t = TextArea::new();
+        t.insert_str("before ");
+        t.insert_element("ที่");
+        t.insert_str(" after");
+
+        t.set_cursor(t.elements[0].range.end);
+        t.delete_backward(/*n*/ 1);
+
+        assert_eq!(t.text(), "before  after");
+        assert_eq!(t.cursor(), "before ".len());
+        assert!(t.elements.is_empty());
+    }
+
+    #[test]
     fn delete_forward_deletes_element_at_left_edge() {
         let mut t = TextArea::new();
         t.insert_str("a");
@@ -2899,8 +2972,8 @@ mod tests {
         let mut t = ta_with("abc\ndef\nghi");
         t.set_cursor(/*pos*/ 5);
         let mut keymap = RuntimeKeymap::defaults().editor;
-        keymap.kill_line_start.clear();
-        keymap.kill_whole_line = vec![key_hint::ctrl(KeyCode::Char('u'))];
+        Arc::make_mut(&mut keymap).kill_line_start.clear();
+        Arc::make_mut(&mut keymap).kill_whole_line = vec![key_hint::ctrl(KeyCode::Char('u'))];
 
         t.input_with_keymap(
             KeyEvent::new(KeyCode::Char('u'), KeyModifiers::CONTROL),
@@ -3150,7 +3223,7 @@ mod tests {
         let mut t = ta_with("a\nb");
         t.set_cursor(/*pos*/ 2);
         let mut keymap = RuntimeKeymap::defaults().editor;
-        keymap.move_up.clear();
+        Arc::make_mut(&mut keymap).move_up.clear();
 
         t.input_with_keymap(
             KeyEvent::new(KeyCode::Char('\u{0010}'), KeyModifiers::NONE),
@@ -3165,8 +3238,8 @@ mod tests {
         let mut t = ta_with("a\nb");
         t.set_cursor(/*pos*/ 0);
         let mut keymap = RuntimeKeymap::defaults().editor;
-        keymap.move_up.clear();
-        keymap.move_down = vec![crate::key_hint::ctrl(KeyCode::Char('p'))];
+        Arc::make_mut(&mut keymap).move_up.clear();
+        Arc::make_mut(&mut keymap).move_down = vec![crate::key_hint::ctrl(KeyCode::Char('p'))];
 
         t.input_with_keymap(
             KeyEvent::new(KeyCode::Char('\u{0010}'), KeyModifiers::NONE),

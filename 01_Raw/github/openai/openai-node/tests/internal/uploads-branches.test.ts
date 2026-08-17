@@ -28,6 +28,50 @@ describe('streaming upload metadata', () => {
   });
 
   test.each([
+    ['CRLF header injection', 'text/plain\r\nContent-Disposition: form-data; name="purpose"'],
+    ['CR', 'text/plain\r'],
+    ['LF', 'text/plain\n'],
+    ['NUL', 'text/plain\0'],
+    ['HTAB', 'text/plain\t'],
+    ['C0 control', 'text/plain\u001F'],
+    ['DEL', 'text/plain\u007F'],
+  ] as const)('rejects %s in streaming content types synchronously', (_, type) => {
+    async function* chunks() {
+      yield 'content';
+    }
+
+    expect(() => toStreamingFile(chunks(), 'upload.txt', { type })).toThrow(TypeError);
+    expect(() => toStreamingFile(chunks(), 'upload.txt', { type })).toThrow(/content.type/i);
+  });
+
+  test.each([
+    'TEXT/PLAIN; charset=UTF-8',
+    '  TEXT/PLAIN; charset=UTF-8  ',
+    'text/x-café; note=こんにちは',
+  ] as const)('preserves valid content types unchanged: %s', (type) => {
+    async function* chunks() {
+      yield 'content';
+    }
+
+    expect(toStreamingFile(chunks(), 'upload.txt', { type }).type).toBe(type);
+  });
+
+  test('reads streaming content type metadata only once', () => {
+    async function* chunks() {
+      yield 'content';
+    }
+
+    const getType = vi
+      .fn()
+      .mockReturnValueOnce('text/plain')
+      .mockReturnValue('text/plain\r\nContent-Disposition: form-data; name="purpose"');
+    const options = Object.defineProperty({}, 'type', { get: getType });
+
+    expect(toStreamingFile(chunks(), 'upload.txt', options)).toHaveProperty('type', 'text/plain');
+    expect(getType).toHaveBeenCalledTimes(1);
+  });
+
+  test.each([
     [{ name: '/tmp/named.jsonl' }, 'named.jsonl'],
     [{ url: 'https://example.com/files/audio.wav' }, 'audio.wav'],
     [{ filename: 'C:\\recordings\\audio.wav' }, 'audio.wav'],
@@ -38,6 +82,18 @@ describe('streaming upload metadata', () => {
     ['filename.txt', undefined],
   ] as const)('extracts upload filenames from supported metadata', (value, expected) => {
     expect(getName(value)).toBe(expected);
+  });
+
+  test.each([
+    [{ name: 'my-skill/SKILL.md' }, 'my-skill/SKILL.md'],
+    [{ filename: 'my-skill/assets/data.json' }, 'my-skill/assets/data.json'],
+    [{ name: 'my-skill\\SKILL.md' }, 'my-skill/SKILL.md'],
+    [{ filename: 'my-skill\\assets\\data.json' }, 'my-skill/assets/data.json'],
+    [{ url: 'https://example.com/private/remote.txt?signature=example#fragment' }, 'remote.txt'],
+    [{ path: '/private/tmp/local.txt' }, 'local.txt'],
+    [{ path: 'C:\\private\\nested\\local.txt' }, 'local.txt'],
+  ] as const)('preserves only explicitly supplied filename paths', (value, expected) => {
+    expect(getName(value, { stripFilename: false })).toBe(expected);
   });
 
   test('detects async iterables without treating arbitrary objects as streams', () => {
@@ -98,6 +154,19 @@ describe('buffered multipart forms', () => {
     expect(form.get('nested[upload]')).toBeInstanceOf(File);
   });
 
+  test('preserves explicit nested file paths only when requested', async () => {
+    const upload = new File(['manifest'], 'my-skill/SKILL.md');
+    const defaultOptions = await maybeMultipartFormRequestOptions({ body: { nested: { upload } } }, fetch);
+    const preservedOptions = await maybeMultipartFormRequestOptions({ body: { nested: { upload } } }, fetch, {
+      stripFilenames: false,
+    });
+
+    expect(((defaultOptions.body as FormData).get('nested[upload]') as File).name).toBe('SKILL.md');
+    expect(((preservedOptions.body as FormData).get('nested[upload]') as File).name).toBe(
+      'my-skill/SKILL.md',
+    );
+  });
+
   test('serializes response bodies and async iterables into buffered File entries', async () => {
     async function* chunks() {
       yield new TextEncoder().encode('stream contents');
@@ -132,7 +201,11 @@ describe('buffered multipart forms', () => {
 
   test('rejects fetch implementations that stringify FormData objects', async () => {
     class UnsupportedResponse {
-      constructor(private readonly body: FormData) {}
+      private readonly body: FormData;
+
+      constructor(body: FormData) {
+        this.body = body;
+      }
 
       async text() {
         return this.body.toString();
@@ -173,6 +246,224 @@ describe('buffered multipart forms', () => {
 });
 
 describe('lazy multipart stream encoding', () => {
+  test('rejects mutated content types instead of injecting duplicate form parameters', async () => {
+    async function* chunks() {
+      yield 'sensitive upload bytes';
+    }
+
+    const upload = toStreamingFile(chunks(), 'secret.txt', { type: 'text/plain' });
+    Object.defineProperty(upload, 'type', {
+      value: 'text/plain\r\nContent-Disposition: form-data; name="purpose"',
+    });
+
+    const options = await multipartFormRequestOptions({ body: { upload, purpose: 'assistants' } }, fetch);
+    const contentType = buildHeaders([options.headers]).values.get('content-type')!;
+    const outcome = await new Response(options.body as ReadableStream, {
+      headers: { 'content-type': contentType },
+    })
+      .formData()
+      .then(
+        (form) => ({ hasUpload: form.has('upload'), purposes: form.getAll('purpose') }),
+        (error: unknown) => error,
+      );
+
+    expect(outcome).toBeInstanceOf(TypeError);
+    expect(outcome).toHaveProperty('message', expect.stringMatching(/content.type/i));
+  });
+
+  test('rejects a mutated content type before emitting its multipart boundary', async () => {
+    async function* chunks() {
+      yield 'sensitive upload bytes';
+    }
+
+    const upload = toStreamingFile(chunks(), 'secret.txt', { type: 'text/plain' });
+    Object.defineProperty(upload, 'type', {
+      value: 'text/plain\r\nContent-Disposition: form-data; name="purpose"',
+    });
+
+    const options = await multipartFormRequestOptions({ body: { upload } }, fetch);
+    const reader = (options.body as ReadableStream).getReader();
+
+    await expect(reader.read()).rejects.toThrow(/content.type/i);
+  });
+
+  test('rejects mutable content types that inject headers through string coercion', async () => {
+    async function* chunks() {
+      yield 'sensitive upload bytes';
+    }
+
+    const upload = toStreamingFile(chunks(), 'secret.txt', { type: 'text/plain' });
+    Object.defineProperty(upload, 'type', {
+      value: {
+        length: 0,
+        toString: () => 'text/plain\r\nContent-Disposition: form-data; name="purpose"',
+      },
+    });
+
+    const options = await multipartFormRequestOptions({ body: { upload, purpose: 'assistants' } }, fetch);
+    const contentType = buildHeaders([options.headers]).values.get('content-type')!;
+    const outcome = await new Response(options.body as ReadableStream, {
+      headers: { 'content-type': contentType },
+    })
+      .formData()
+      .then(
+        (form) => ({ hasUpload: form.has('upload'), purposes: form.getAll('purpose') }),
+        (error: unknown) => error,
+      );
+
+    expect(outcome).toBeInstanceOf(TypeError);
+    expect(outcome).toHaveProperty('message', expect.stringMatching(/content.type/i));
+  });
+
+  test('rejects malicious File content types in mixed streaming forms before emitting a boundary', async () => {
+    const maliciousFile = new File(['sensitive upload bytes'], 'secret.txt');
+    Object.defineProperty(maliciousFile, 'type', {
+      get: () => 'text/plain\r\nContent-Disposition: form-data; name="purpose"',
+    });
+
+    async function* chunks() {
+      yield 'safe stream';
+    }
+
+    const options = await maybeMultipartFormRequestOptions(
+      {
+        body: {
+          upload: maliciousFile,
+          stream: toStreamingFile(chunks(), 'safe.txt'),
+          purpose: 'assistants',
+        },
+      },
+      fetch,
+    );
+    const reader = (options.body as ReadableStream).getReader();
+
+    await expect(reader.read()).rejects.toThrow(/content.type/i);
+  });
+
+  test('reads File content types only once while encoding mixed streaming forms', async () => {
+    const upload = new File(['sensitive upload bytes'], 'secret.txt');
+    const getType = vi
+      .fn()
+      .mockReturnValueOnce('text/plain')
+      .mockReturnValue('text/plain\r\nContent-Disposition: form-data; name="purpose"');
+    Object.defineProperty(upload, 'type', { get: getType });
+
+    async function* chunks() {
+      yield 'safe stream';
+    }
+
+    const options = await maybeMultipartFormRequestOptions(
+      {
+        body: {
+          upload,
+          stream: toStreamingFile(chunks(), 'safe.txt'),
+          purpose: 'assistants',
+        },
+      },
+      fetch,
+    );
+    const contentType = buildHeaders([options.headers]).values.get('content-type')!;
+    const form = await new Response(options.body as ReadableStream, {
+      headers: { 'content-type': contentType },
+    }).formData();
+
+    expect(getType).toHaveBeenCalledTimes(1);
+    expect(form.getAll('purpose')).toEqual(['assistants']);
+    expect(form.get('upload')).toBeInstanceOf(File);
+  });
+
+  test('preserves content type case and parameters while encoding streaming files', async () => {
+    async function* chunks() {
+      yield 'content';
+    }
+
+    const options = await multipartFormRequestOptions(
+      {
+        body: {
+          upload: toStreamingFile(chunks(), 'upload.txt', { type: 'TEXT/PLAIN; charset=UTF-8' }),
+        },
+      },
+      fetch,
+    );
+
+    await expect(new Response(options.body as ReadableStream).text()).resolves.toContain(
+      'Content-Type: TEXT/PLAIN; charset=UTF-8',
+    );
+  });
+
+  test('retains the default content type for streaming files', async () => {
+    async function* chunks() {
+      yield 'content';
+    }
+
+    const options = await multipartFormRequestOptions(
+      { body: { upload: toStreamingFile(chunks(), 'upload.bin') } },
+      fetch,
+    );
+
+    await expect(new Response(options.body as ReadableStream).text()).resolves.toContain(
+      'Content-Type: application/octet-stream',
+    );
+  });
+
+  test('continues stripping ordinary File paths when streaming is enabled', async () => {
+    async function* chunks() {
+      yield 'streamed';
+    }
+
+    const options = await maybeMultipartFormRequestOptions(
+      {
+        body: {
+          files: [new File(['manifest'], 'my-skill/SKILL.md'), toStreamingFile(chunks(), 'stream.txt')],
+        },
+      },
+      fetch,
+    );
+    const body = await new Response(options.body as ReadableStream).text();
+
+    expect(body).toContain('filename="SKILL.md"');
+    expect(body).toContain('filename="stream.txt"');
+    expect(body).not.toContain('my-skill/SKILL.md');
+  });
+
+  test.each([
+    ['conditional multipart', maybeMultipartFormRequestOptions],
+    ['required multipart', multipartFormRequestOptions],
+  ] as const)('preserves explicit paths but never inferred paths in %s streams', async (_, encodeRequest) => {
+    const response = new Response('downloaded');
+    Object.defineProperty(response, 'url', {
+      value: 'https://example.com/private/remote.txt?signature=example#fragment',
+    });
+
+    async function* chunks() {
+      yield 'streamed';
+    }
+
+    const filesystemStream = Object.assign(chunks(), { path: '/private/tmp/local.txt' });
+    const options = await encodeRequest(
+      {
+        body: {
+          files: [
+            new File(['manifest'], 'my-skill/SKILL.md'),
+            toStreamingFile(chunks(), 'my-skill/assets/data.txt'),
+            response,
+            filesystemStream,
+          ],
+        },
+      },
+      fetch,
+      { stripFilenames: false },
+    );
+    const body = await new Response(options.body as ReadableStream).text();
+
+    expect(body).toContain('filename="my-skill/SKILL.md"');
+    expect(body).toContain('filename="my-skill/assets/data.txt"');
+    expect(body).toContain('filename="remote.txt"');
+    expect(body).toContain('filename="local.txt"');
+    expect(body).not.toContain('/private/');
+    expect(body).not.toContain('signature=example');
+  });
+
   test('encodes mixed chunk formats and nested form fields without buffering', async () => {
     async function* nestedChunks() {
       yield new Uint8Array([69]);
@@ -259,7 +550,7 @@ describe('lazy multipart stream encoding', () => {
       {
         body: {
           upload: toStreamingFile(
-            (async function* () {
+            (async function* upload() {
               yield legacyBlob;
             })(),
             'legacy.bin',

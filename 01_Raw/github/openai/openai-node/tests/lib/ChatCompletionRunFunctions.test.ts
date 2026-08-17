@@ -1,18 +1,30 @@
 import OpenAI from 'openai';
 import { Stream } from 'openai/core/streaming';
-import { OpenAIError, APIConnectionError } from 'openai/error';
-import { PassThrough } from 'stream';
+import type { OpenAIError } from 'openai/error';
+import { APIConnectionError } from 'openai/error';
+import { PassThrough } from 'node:stream';
 import {
   ParsingToolFunction,
   ChatCompletionRunner,
-  type ChatCompletionToolRunnerParams,
   ChatCompletionStreamingRunner,
-  type ChatCompletionStreamingToolRunnerParams,
-  type ChatCompletionMessageParam,
+} from 'openai/resources/chat/completions';
+import type {
+  ChatCompletionToolRunnerParams,
+  ChatCompletionStreamingToolRunnerParams,
+  ChatCompletionMessageParam,
 } from 'openai/resources/chat/completions';
 import type { RunnableToolFunction } from 'openai/lib/RunnableFunction';
 import { isAssistantMessage } from '../../src/lib/chatCompletionUtils';
 import { mockFetch } from '../utils/mock-fetch';
+
+const unregisteredFunctionNames = [
+  { name: 'get_weather', tool: 'getWeather' },
+  { name: 'constructor', tool: 'getWeather' },
+  { name: 'toString', tool: 'getWeather' },
+  { name: '__proto__', tool: 'getWeather' },
+  { name: 'hasOwnProperty', tool: 'getWeather' },
+  { name: 'function', tool: '__proto__' },
+] as const;
 
 // mockChatCompletionFetch is like mockFetch, but with better a more convenient handleRequest to mock
 // chat completion request/responses.
@@ -20,13 +32,19 @@ function mockChatCompletionFetch() {
   const { fetch, handleRequest: handleRawRequest } = mockFetch();
 
   function handleRequest(
-    handler: (body: ChatCompletionToolRunnerParams<any[]>) => Promise<OpenAI.Chat.ChatCompletion>,
+    handler: (
+      body: ChatCompletionToolRunnerParams<any[]>,
+      init: RequestInit | undefined,
+    ) => Promise<OpenAI.Chat.ChatCompletion>,
   ): Promise<void> {
     return handleRawRequest(async (req, init) => {
       const rawBody = init?.body;
-      if (typeof rawBody !== 'string') throw new Error(`expected init.body to be a string`);
+      if (typeof rawBody !== 'string') {
+        // oxlint-disable-next-line unicorn/prefer-type-error -- Preserve the mock's historical Error identity.
+        throw new Error(`expected init.body to be a string`);
+      }
       const body: ChatCompletionToolRunnerParams<any[]> = JSON.parse(rawBody);
-      return new Response(JSON.stringify(await handler(body)), {
+      return Response.json(await handler(body, init), {
         headers: { 'Content-Type': 'application/json' },
       });
     });
@@ -46,7 +64,10 @@ function mockStreamingChatCompletionFetch() {
   ): Promise<void> {
     return handleRawRequest(async (req, init) => {
       const rawBody = init?.body;
-      if (typeof rawBody !== 'string') throw new Error(`expected init.body to be a string`);
+      if (typeof rawBody !== 'string') {
+        // oxlint-disable-next-line unicorn/prefer-type-error -- Preserve the mock's historical Error identity.
+        throw new Error(`expected init.body to be a string`);
+      }
       const body: ChatCompletionStreamingToolRunnerParams<any[]> = JSON.parse(rawBody);
       const stream = new PassThrough();
       (async () => {
@@ -64,6 +85,16 @@ function mockStreamingChatCompletionFetch() {
     });
   }
   return { fetch, handleRequest };
+}
+
+function findLastAssistantMessage(messages: ChatCompletionMessageParam[]) {
+  for (let index = messages.length - 1; index >= 0; index -= 1) {
+    const message = messages[index];
+    if (message && isAssistantMessage(message)) {
+      return message;
+    }
+  }
+  return undefined;
 }
 
 // contentChoiceDeltas returns an async iterator which mocks a delta stream of a by splitting the
@@ -146,8 +177,10 @@ class RunnerListener {
   gotEnd = false;
 
   onceMessageCallCount = 0;
+  public runner: ChatCompletionRunner<any>;
 
-  constructor(public runner: ChatCompletionRunner<any>) {
+  constructor(runner: ChatCompletionRunner<any>) {
+    this.runner = runner;
     runner
       .on('connect', () => (this.gotConnect = true))
       .on('content', (content) => this.contents.push(content))
@@ -179,7 +212,9 @@ class RunnerListener {
   } = {}) {
     expect(this.onceMessageCallCount).toBeLessThanOrEqual(1);
     expect(this.gotAbort).toEqual(this.runner.aborted);
-    if (this.runner.aborted) expect(this.runner.errored).toBe(true);
+    if (this.runner.aborted) {
+      expect(this.runner.errored).toBe(true);
+    }
     if (error) {
       expect(this.error?.message).toEqual(error);
       expect(this.runner.errored).toBe(true);
@@ -211,14 +246,16 @@ class RunnerListener {
       return;
     }
 
-    if (error) return;
+    if (error) {
+      return;
+    }
 
     const expectedContents = this.messages
       .filter(isAssistantMessage)
       .map((m) => m.content as string)
       .filter(Boolean);
     expect(this.contents).toEqual(expectedContents);
-    expect(this.finalMessage).toEqual([...this.messages].reverse().find((x) => x.role === 'assistant'));
+    expect(this.finalMessage).toEqual(findLastAssistantMessage(this.messages));
     expect(await this.runner.finalMessage()).toEqual(this.finalMessage);
     expect(this.finalContent).toEqual(expectedContents[expectedContents.length - 1] ?? null);
     expect(await this.runner.finalContent()).toEqual(this.finalContent);
@@ -270,8 +307,10 @@ class StreamingRunnerListener {
   error: OpenAIError | undefined;
   gotConnect = false;
   gotEnd = false;
+  public runner: ChatCompletionStreamingRunner<any>;
 
-  constructor(public runner: ChatCompletionStreamingRunner<any>) {
+  constructor(runner: ChatCompletionStreamingRunner<any>) {
+    this.runner = runner;
     runner
       .on('connect', () => (this.gotConnect = true))
       .on('chunk', (chunk) => this.eventChunks.push(chunk))
@@ -326,10 +365,14 @@ class StreamingRunnerListener {
       return;
     }
 
-    if (error) return;
+    if (error) {
+      return;
+    }
 
-    if (this.eventContents.length) expect(this.eventChunks.length).toBeGreaterThan(0);
-    expect(this.finalMessage).toEqual([...this.eventMessages].reverse().find((x) => x.role === 'assistant'));
+    if (this.eventContents.length) {
+      expect(this.eventChunks.length).toBeGreaterThan(0);
+    }
+    expect(this.finalMessage).toEqual(findLastAssistantMessage(this.eventMessages));
     expect(await this.runner.finalMessage()).toEqual(this.finalMessage);
     expect(this.finalContent).toEqual(this.eventContents[this.eventContents.length - 1]?.[1] ?? null);
     expect(await this.runner.finalContent()).toEqual(this.finalContent);
@@ -453,8 +496,7 @@ function _typeTests() {
           function: (_args, _runner, context) => {
             const eventId: string = context.eventId;
             // @ts-expect-error tool context only includes eventId
-            context.missing;
-            return eventId;
+            return context.missing ?? eventId;
           },
           parameters: {},
           description: 'updates an event',
@@ -577,6 +619,47 @@ function _typeTests() {
 
 describe('resource completions', () => {
   describe('runTools with stream: false', () => {
+    test('defaultHeaders can suppress helper method header', async () => {
+      const { fetch, handleRequest } = mockChatCompletionFetch();
+
+      const openai = new OpenAI({
+        apiKey: 'something1234',
+        baseURL: 'http://127.0.0.1:4010',
+        defaultHeaders: { 'x-stainless-helper-method': null },
+        fetch,
+      });
+
+      const runner = openai.chat.completions.runTools({
+        messages: [{ role: 'user', content: 'say hi' }],
+        model: 'gpt-3.5-turbo',
+        tools: [],
+      });
+
+      await handleRequest(async (_request, init) => {
+        expect(new Headers(init?.headers).has('x-stainless-helper-method')).toBe(false);
+        return {
+          id: '1',
+          choices: [
+            {
+              index: 0,
+              finish_reason: 'stop',
+              logprobs: null,
+              message: {
+                role: 'assistant',
+                content: 'hi',
+                refusal: null,
+              },
+            },
+          ],
+          created: Math.floor(Date.now() / 1000),
+          model: 'gpt-3.5-turbo',
+          object: 'chat.completion',
+        };
+      });
+
+      await runner.done();
+    });
+
     test('successful flow', async () => {
       const { fetch, handleRequest } = mockChatCompletionFetch();
 
@@ -607,7 +690,9 @@ describe('resource completions', () => {
         {
           afterCompletion: (completion, runner) => {
             completionIDs.push(completion.id);
-            if (completion.id === '1') runner.messages.push(injectedMessage);
+            if (completion.id === '1') {
+              runner.messages.push(injectedMessage);
+            }
           },
         },
       );
@@ -1596,7 +1681,7 @@ describe('resource completions', () => {
       expect(listener.functionCallResults).toEqual([`must be an object`, '3']);
       await listener.sanityCheck();
     });
-    test('single function call', async () => {
+    test.each(['getWeather', '__proto__'])('single function call: %s', async (functionName) => {
       const { fetch, handleRequest } = mockChatCompletionFetch();
 
       const openai = new OpenAI({ apiKey: 'something1234', baseURL: 'http://127.0.0.1:4010', fetch });
@@ -1607,13 +1692,14 @@ describe('resource completions', () => {
         tool_choice: {
           type: 'function',
           function: {
-            name: 'getWeather',
+            name: functionName,
           },
         },
         tools: [
           {
             type: 'function',
             function: {
+              name: functionName,
               function: function getWeather() {
                 return `it's raining`;
               },
@@ -1646,7 +1732,7 @@ describe('resource completions', () => {
                       id: '123',
                       function: {
                         arguments: '',
-                        name: 'getWeather',
+                        name: functionName,
                       },
                     },
                   ],
@@ -1673,7 +1759,7 @@ describe('resource completions', () => {
               id: '123',
               function: {
                 arguments: '',
-                name: 'getWeather',
+                name: functionName,
                 parsed_arguments: null,
               },
             },
@@ -1684,7 +1770,7 @@ describe('resource completions', () => {
       expect(listener.functionCallResults).toEqual([`it's raining`]);
       await listener.sanityCheck();
     });
-    test('wrong function name', async () => {
+    test.each(unregisteredFunctionNames)('wrong function name: $name', async ({ name, tool }) => {
       const { fetch, handleRequest } = mockChatCompletionFetch();
 
       const openai = new OpenAI({ apiKey: 'something1234', baseURL: 'http://127.0.0.1:4010', fetch });
@@ -1696,6 +1782,7 @@ describe('resource completions', () => {
           {
             type: 'function',
             function: {
+              name: tool,
               function: function getWeather() {
                 return `it's raining`;
               },
@@ -1710,6 +1797,12 @@ describe('resource completions', () => {
       await Promise.all([
         handleRequest(async (request) => {
           expect(request.messages).toEqual([{ role: 'user', content: 'tell me what the weather is like' }]);
+          expect(request.tools).toEqual([
+            {
+              type: 'function',
+              function: { name: tool, parameters: {}, description: 'gets the weather' },
+            },
+          ]);
           return {
             id: '1',
             choices: [
@@ -1728,7 +1821,7 @@ describe('resource completions', () => {
                       id: '123',
                       function: {
                         arguments: '',
-                        name: 'get_weather',
+                        name,
                       },
                     },
                   ],
@@ -1752,14 +1845,14 @@ describe('resource completions', () => {
                   id: '123',
                   function: {
                     arguments: '',
-                    name: 'get_weather',
+                    name,
                   },
                 },
               ],
             },
             {
               role: 'tool',
-              content: `Invalid tool_call: "get_weather". Available options are: "getWeather". Please try again`,
+              content: `Invalid tool_call: "${name}". Available options are: "${tool}". Please try again`,
               tool_call_id: '123',
             },
           ]);
@@ -1781,7 +1874,7 @@ describe('resource completions', () => {
                       id: '1234',
                       function: {
                         arguments: '',
-                        name: 'getWeather',
+                        name: tool,
                       },
                     },
                   ],
@@ -1805,14 +1898,14 @@ describe('resource completions', () => {
                   id: '123',
                   function: {
                     arguments: '',
-                    name: 'get_weather',
+                    name,
                   },
                 },
               ],
             },
             {
               role: 'tool',
-              content: `Invalid tool_call: "get_weather". Available options are: "getWeather". Please try again`,
+              content: `Invalid tool_call: "${name}". Available options are: "${tool}". Please try again`,
               tool_call_id: '123',
             },
             {
@@ -1824,7 +1917,7 @@ describe('resource completions', () => {
                   id: '1234',
                   function: {
                     arguments: '',
-                    name: 'getWeather',
+                    name: tool,
                   },
                 },
               ],
@@ -1867,13 +1960,13 @@ describe('resource completions', () => {
             {
               type: 'function',
               id: '123',
-              function: { name: 'get_weather', arguments: '', parsed_arguments: null },
+              function: { name, arguments: '', parsed_arguments: null },
             },
           ],
         },
         {
           role: 'tool',
-          content: `Invalid tool_call: "get_weather". Available options are: "getWeather". Please try again`,
+          content: `Invalid tool_call: "${name}". Available options are: "${tool}". Please try again`,
           tool_call_id: '123',
         },
         {
@@ -1886,7 +1979,7 @@ describe('resource completions', () => {
               type: 'function',
               id: '1234',
               function: {
-                name: 'getWeather',
+                name: tool,
                 arguments: '',
                 parsed_arguments: null,
               },
@@ -1903,7 +1996,7 @@ describe('resource completions', () => {
         },
       ]);
       expect(listener.functionCallResults).toEqual([
-        `Invalid tool_call: "get_weather". Available options are: "getWeather". Please try again`,
+        `Invalid tool_call: "${name}". Available options are: "${tool}". Please try again`,
         `it's raining`,
       ]);
       await listener.sanityCheck();
@@ -1942,78 +2035,84 @@ describe('resource completions', () => {
         {
           afterCompletion: (completion, runner) => {
             completionIDs.push(completion.id);
-            if (completion.id === '1') runner.messages.push(injectedMessage);
+            if (completion.id === '1') {
+              runner.messages.push(injectedMessage);
+            }
           },
         },
       );
       const listener = new StreamingRunnerListener(runner);
 
       await Promise.all([
-        handleRequest(async function* (request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
-          expect(request.messages).toEqual([{ role: 'user', content: 'tell me what the weather is like' }]);
-          yield {
-            id: '1',
-            choices: [
-              {
-                index: 0,
-                finish_reason: 'function_call',
-                logprobs: null,
-                delta: {
-                  role: 'assistant',
-                  content: null,
-                  tool_calls: [
-                    {
-                      type: 'function',
-                      index: 0,
-                      id: '123',
-                      function: {
-                        arguments: '',
-                        name: 'getWeather',
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-            created: Math.floor(Date.now() / 1000),
-            model: 'gpt-3.5-turbo',
-            object: 'chat.completion.chunk',
-          };
-        }),
-        handleRequest(async function* (request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
-          expect(request.messages).toEqual([
-            { role: 'user', content: 'tell me what the weather is like' },
-            {
-              role: 'assistant',
-              content: null,
-              tool_calls: [
+        handleRequest(
+          async function* requestHandler(request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+            expect(request.messages).toEqual([{ role: 'user', content: 'tell me what the weather is like' }]);
+            yield {
+              id: '1',
+              choices: [
                 {
-                  type: 'function',
-                  id: '123',
-                  function: {
-                    arguments: '',
-                    name: 'getWeather',
+                  index: 0,
+                  finish_reason: 'function_call',
+                  logprobs: null,
+                  delta: {
+                    role: 'assistant',
+                    content: null,
+                    tool_calls: [
+                      {
+                        type: 'function',
+                        index: 0,
+                        id: '123',
+                        function: {
+                          arguments: '',
+                          name: 'getWeather',
+                        },
+                      },
+                    ],
                   },
                 },
               ],
-            },
-            {
-              role: 'tool',
-              content: `it's raining`,
-              tool_call_id: '123',
-            },
-            injectedMessage,
-          ]);
-          for (const choice of contentChoiceDeltas(`it's raining`)) {
-            yield {
-              id: '2',
-              choices: [choice],
               created: Math.floor(Date.now() / 1000),
               model: 'gpt-3.5-turbo',
               object: 'chat.completion.chunk',
             };
-          }
-        }),
+          },
+        ),
+        handleRequest(
+          async function* requestHandler(request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+            expect(request.messages).toEqual([
+              { role: 'user', content: 'tell me what the weather is like' },
+              {
+                role: 'assistant',
+                content: null,
+                tool_calls: [
+                  {
+                    type: 'function',
+                    id: '123',
+                    function: {
+                      arguments: '',
+                      name: 'getWeather',
+                    },
+                  },
+                ],
+              },
+              {
+                role: 'tool',
+                content: `it's raining`,
+                tool_call_id: '123',
+              },
+              injectedMessage,
+            ]);
+            for (const choice of contentChoiceDeltas(`it's raining`)) {
+              yield {
+                id: '2',
+                choices: [choice],
+                created: Math.floor(Date.now() / 1000),
+                model: 'gpt-3.5-turbo',
+                object: 'chat.completion.chunk',
+              };
+            }
+          },
+        ),
         runner.done(),
       ]);
 
@@ -2074,70 +2173,74 @@ describe('resource completions', () => {
       const listener = new StreamingRunnerListener(proxied);
 
       await Promise.all([
-        handleRequest(async function* (request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
-          expect(request.messages).toEqual([{ role: 'user', content: 'tell me what the weather is like' }]);
-          yield {
-            id: '1',
-            choices: [
-              {
-                index: 0,
-                finish_reason: 'function_call',
-                logprobs: null,
-                delta: {
-                  role: 'assistant',
-                  content: null,
-                  tool_calls: [
-                    {
-                      type: 'function',
-                      index: 0,
-                      id: '123',
-                      function: {
-                        arguments: '',
-                        name: 'getWeather',
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-            created: Math.floor(Date.now() / 1000),
-            model: 'gpt-3.5-turbo',
-            object: 'chat.completion.chunk',
-          };
-        }),
-        handleRequest(async function* (request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
-          expect(request.messages).toEqual([
-            { role: 'user', content: 'tell me what the weather is like' },
-            {
-              role: 'assistant',
-              content: null,
-              tool_calls: [
+        handleRequest(
+          async function* requestHandler(request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+            expect(request.messages).toEqual([{ role: 'user', content: 'tell me what the weather is like' }]);
+            yield {
+              id: '1',
+              choices: [
                 {
-                  type: 'function',
-                  id: '123',
-                  function: {
-                    arguments: '',
-                    name: 'getWeather',
+                  index: 0,
+                  finish_reason: 'function_call',
+                  logprobs: null,
+                  delta: {
+                    role: 'assistant',
+                    content: null,
+                    tool_calls: [
+                      {
+                        type: 'function',
+                        index: 0,
+                        id: '123',
+                        function: {
+                          arguments: '',
+                          name: 'getWeather',
+                        },
+                      },
+                    ],
                   },
                 },
               ],
-            },
-            {
-              role: 'tool',
-              content: `it's raining`,
-              tool_call_id: '123',
-            },
-          ]);
-          for (const choice of contentChoiceDeltas(`it's raining`)) {
-            yield {
-              id: '2',
-              choices: [choice],
               created: Math.floor(Date.now() / 1000),
               model: 'gpt-3.5-turbo',
               object: 'chat.completion.chunk',
             };
-          }
-        }),
+          },
+        ),
+        handleRequest(
+          async function* requestHandler(request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+            expect(request.messages).toEqual([
+              { role: 'user', content: 'tell me what the weather is like' },
+              {
+                role: 'assistant',
+                content: null,
+                tool_calls: [
+                  {
+                    type: 'function',
+                    id: '123',
+                    function: {
+                      arguments: '',
+                      name: 'getWeather',
+                    },
+                  },
+                ],
+              },
+              {
+                role: 'tool',
+                content: `it's raining`,
+                tool_call_id: '123',
+              },
+            ]);
+            for (const choice of contentChoiceDeltas(`it's raining`)) {
+              yield {
+                id: '2',
+                choices: [choice],
+                created: Math.floor(Date.now() / 1000),
+                model: 'gpt-3.5-turbo',
+                object: 'chat.completion.chunk',
+              };
+            }
+          },
+        ),
         proxied.done(),
       ]);
 
@@ -2200,37 +2303,39 @@ describe('resource completions', () => {
       const listener = new StreamingRunnerListener(proxied);
 
       await Promise.all([
-        handleRequest(async function* (request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
-          expect(request.messages).toEqual([{ role: 'user', content: 'tell me what the weather is like' }]);
-          yield {
-            id: '1',
-            choices: [
-              {
-                index: 0,
-                finish_reason: 'function_call',
-                logprobs: null,
-                delta: {
-                  role: 'assistant',
-                  content: null,
-                  tool_calls: [
-                    {
-                      type: 'function',
-                      index: 0,
-                      id: '123',
-                      function: {
-                        arguments: '',
-                        name: 'getWeather',
+        handleRequest(
+          async function* requestHandler(request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+            expect(request.messages).toEqual([{ role: 'user', content: 'tell me what the weather is like' }]);
+            yield {
+              id: '1',
+              choices: [
+                {
+                  index: 0,
+                  finish_reason: 'function_call',
+                  logprobs: null,
+                  delta: {
+                    role: 'assistant',
+                    content: null,
+                    tool_calls: [
+                      {
+                        type: 'function',
+                        index: 0,
+                        id: '123',
+                        function: {
+                          arguments: '',
+                          name: 'getWeather',
+                        },
                       },
-                    },
-                  ],
+                    ],
+                  },
                 },
-              },
-            ],
-            created: Math.floor(Date.now() / 1000),
-            model: 'gpt-3.5-turbo',
-            object: 'chat.completion.chunk',
-          };
-        }),
+              ],
+              created: Math.floor(Date.now() / 1000),
+              model: 'gpt-3.5-turbo',
+              object: 'chat.completion.chunk',
+            };
+          },
+        ),
         runner.done(),
         proxied.done(),
       ]);
@@ -2293,37 +2398,39 @@ describe('resource completions', () => {
       const listener = new StreamingRunnerListener(proxied);
 
       await Promise.all([
-        handleRequest(async function* (request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
-          expect(request.messages).toEqual([{ role: 'user', content: 'tell me what the weather is like' }]);
-          yield {
-            id: '1',
-            choices: [
-              {
-                index: 0,
-                finish_reason: 'function_call',
-                logprobs: null,
-                delta: {
-                  role: 'assistant',
-                  content: null,
-                  tool_calls: [
-                    {
-                      type: 'function',
-                      index: 0,
-                      id: '123',
-                      function: {
-                        arguments: '',
-                        name: 'getWeather',
+        handleRequest(
+          async function* requestHandler(request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+            expect(request.messages).toEqual([{ role: 'user', content: 'tell me what the weather is like' }]);
+            yield {
+              id: '1',
+              choices: [
+                {
+                  index: 0,
+                  finish_reason: 'function_call',
+                  logprobs: null,
+                  delta: {
+                    role: 'assistant',
+                    content: null,
+                    tool_calls: [
+                      {
+                        type: 'function',
+                        index: 0,
+                        id: '123',
+                        function: {
+                          arguments: '',
+                          name: 'getWeather',
+                        },
                       },
-                    },
-                  ],
+                    ],
+                  },
                 },
-              },
-            ],
-            created: Math.floor(Date.now() / 1000),
-            model: 'gpt-3.5-turbo',
-            object: 'chat.completion.chunk',
-          };
-        }),
+              ],
+              created: Math.floor(Date.now() / 1000),
+              model: 'gpt-3.5-turbo',
+              object: 'chat.completion.chunk',
+            };
+          },
+        ),
         runner.done(),
         proxied.done(),
       ]);
@@ -2377,7 +2484,7 @@ describe('resource completions', () => {
       const proxied = ChatCompletionStreamingRunner.fromReadableStream(runner.toReadableStream());
 
       await Promise.all([
-        handleRequest(async function* (): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+        handleRequest(async function* requestHandler(): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
           for (const choice of functionCallDeltas('', { id: '', name: 'getWeather' })) {
             yield {
               id: '1',
@@ -2388,30 +2495,32 @@ describe('resource completions', () => {
             };
           }
         }),
-        handleRequest(async function* (request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
-          const assistantMessage = request.messages[1];
-          const toolMessage = request.messages[2];
-          if (assistantMessage?.role !== 'assistant' || !assistantMessage.tool_calls?.[0]) {
-            throw new Error('expected an assistant message with a tool call');
-          }
-          if (toolMessage?.role !== 'tool') {
-            throw new Error('expected a tool result message');
-          }
+        handleRequest(
+          async function* requestHandler(request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+            const assistantMessage = request.messages[1];
+            const toolMessage = request.messages[2];
+            if (assistantMessage?.role !== 'assistant' || !assistantMessage.tool_calls?.[0]) {
+              throw new Error('expected an assistant message with a tool call');
+            }
+            if (toolMessage?.role !== 'tool') {
+              throw new Error('expected a tool result message');
+            }
 
-          const generatedID = assistantMessage.tool_calls[0].id;
-          expect(generatedID).toMatch(/^call_/);
-          expect(toolMessage.tool_call_id).toBe(generatedID);
+            const generatedID = assistantMessage.tool_calls[0].id;
+            expect(generatedID).toMatch(/^call_/);
+            expect(toolMessage.tool_call_id).toBe(generatedID);
 
-          for (const choice of contentChoiceDeltas(`it's raining`)) {
-            yield {
-              id: '2',
-              choices: [choice],
-              created: Math.floor(Date.now() / 1000),
-              model: 'gpt-3.5-turbo',
-              object: 'chat.completion.chunk',
-            };
-          }
-        }),
+            for (const choice of contentChoiceDeltas(`it's raining`)) {
+              yield {
+                id: '2',
+                choices: [choice],
+                created: Math.floor(Date.now() / 1000),
+                model: 'gpt-3.5-turbo',
+                object: 'chat.completion.chunk',
+              };
+            }
+          },
+        ),
         runner.done(),
         proxied.done(),
       ]);
@@ -2472,7 +2581,7 @@ describe('resource completions', () => {
       })();
 
       const [, chunks] = await Promise.all([
-        handleRequest(async function* (): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+        handleRequest(async function* requestHandler(): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
           yield {
             id: '1',
             choices: [
@@ -2540,36 +2649,38 @@ describe('resource completions', () => {
       runner.on('functionToolCallResult', () => controller.abort());
       const listener = new StreamingRunnerListener(runner);
 
-      await handleRequest(async function* (request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
-        expect(request.messages).toEqual([{ role: 'user', content: 'tell me what the weather is like' }]);
-        yield {
-          id: '1',
-          choices: [
-            {
-              index: 0,
-              finish_reason: 'function_call',
-              delta: {
-                role: 'assistant',
-                content: null,
-                tool_calls: [
-                  {
-                    type: 'function',
-                    index: 0,
-                    id: '123',
-                    function: {
-                      arguments: '',
-                      name: 'getWeather',
+      await handleRequest(
+        async function* requestHandler(request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+          expect(request.messages).toEqual([{ role: 'user', content: 'tell me what the weather is like' }]);
+          yield {
+            id: '1',
+            choices: [
+              {
+                index: 0,
+                finish_reason: 'function_call',
+                delta: {
+                  role: 'assistant',
+                  content: null,
+                  tool_calls: [
+                    {
+                      type: 'function',
+                      index: 0,
+                      id: '123',
+                      function: {
+                        arguments: '',
+                        name: 'getWeather',
+                      },
                     },
-                  },
-                ],
+                  ],
+                },
               },
-            },
-          ],
-          created: Math.floor(Date.now() / 1000),
-          model: 'gpt-3.5-turbo',
-          object: 'chat.completion.chunk',
-        };
-      });
+            ],
+            created: Math.floor(Date.now() / 1000),
+            model: 'gpt-3.5-turbo',
+            object: 'chat.completion.chunk',
+          };
+        },
+      );
 
       await runner.done().catch(() => {});
 
@@ -2629,77 +2740,81 @@ describe('resource completions', () => {
       const listener = new StreamingRunnerListener(runner);
 
       await Promise.all([
-        handleRequest(async function* (request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
-          expect(request.messages).toEqual([
-            {
-              role: 'user',
-              content: 'can you tell me how many properties are in {"a": 1, "b": 2, "c": 3}',
-            },
-          ]);
-          yield {
-            id: '1',
-            choices: [
+        handleRequest(
+          async function* requestHandler(request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+            expect(request.messages).toEqual([
               {
-                index: 0,
-                finish_reason: 'function_call',
-                delta: {
-                  role: 'assistant',
-                  content: null,
-                  tool_calls: [
-                    {
-                      type: 'function',
-                      id: '123',
-                      index: 0,
-                      function: {
-                        arguments: '{"a": 1, "b": 2, "c": 3}',
-                        name: 'numProperties',
-                      },
-                    },
-                  ],
-                },
+                role: 'user',
+                content: 'can you tell me how many properties are in {"a": 1, "b": 2, "c": 3}',
               },
-            ],
-            created: Math.floor(Date.now() / 1000),
-            model: 'gpt-3.5-turbo',
-            object: 'chat.completion.chunk',
-          };
-        }),
-        handleRequest(async function* (request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
-          expect(request.messages).toEqual([
-            {
-              role: 'user',
-              content: 'can you tell me how many properties are in {"a": 1, "b": 2, "c": 3}',
-            },
-            {
-              role: 'assistant',
-              content: null,
-              tool_calls: [
+            ]);
+            yield {
+              id: '1',
+              choices: [
                 {
-                  type: 'function',
-                  id: '123',
-                  function: {
-                    arguments: '{"a": 1, "b": 2, "c": 3}',
-                    name: 'numProperties',
+                  index: 0,
+                  finish_reason: 'function_call',
+                  delta: {
+                    role: 'assistant',
+                    content: null,
+                    tool_calls: [
+                      {
+                        type: 'function',
+                        id: '123',
+                        index: 0,
+                        function: {
+                          arguments: '{"a": 1, "b": 2, "c": 3}',
+                          name: 'numProperties',
+                        },
+                      },
+                    ],
                   },
                 },
               ],
-            },
-            {
-              role: 'tool',
-              content: '3',
-              tool_call_id: '123',
-            },
-          ]);
-          for (const choice of contentChoiceDeltas(`there are 3 properties in {"a": 1, "b": 2, "c": 3}`)) {
-            yield {
-              id: '2',
-              choices: [choice],
               created: Math.floor(Date.now() / 1000),
               model: 'gpt-3.5-turbo',
               object: 'chat.completion.chunk',
             };
-          }
-        }),
+          },
+        ),
+        handleRequest(
+          async function* requestHandler(request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+            expect(request.messages).toEqual([
+              {
+                role: 'user',
+                content: 'can you tell me how many properties are in {"a": 1, "b": 2, "c": 3}',
+              },
+              {
+                role: 'assistant',
+                content: null,
+                tool_calls: [
+                  {
+                    type: 'function',
+                    id: '123',
+                    function: {
+                      arguments: '{"a": 1, "b": 2, "c": 3}',
+                      name: 'numProperties',
+                    },
+                  },
+                ],
+              },
+              {
+                role: 'tool',
+                content: '3',
+                tool_call_id: '123',
+              },
+            ]);
+            for (const choice of contentChoiceDeltas(`there are 3 properties in {"a": 1, "b": 2, "c": 3}`)) {
+              yield {
+                id: '2',
+                choices: [choice],
+                created: Math.floor(Date.now() / 1000),
+                model: 'gpt-3.5-turbo',
+                object: 'chat.completion.chunk',
+              };
+            }
+          },
+        ),
         runner.done(),
       ]);
 
@@ -2765,120 +2880,126 @@ describe('resource completions', () => {
       const listener = new StreamingRunnerListener(runner);
 
       await Promise.all([
-        handleRequest(async function* (request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
-          expect(request.messages).toEqual([
-            {
-              role: 'user',
-              content: 'can you tell me how many properties are in {"a": 1, "b": 2, "c": 3}',
-            },
-          ]);
-          for (const choice of functionCallDeltas('[{"a": 1, "b": 2, "c": 3}]', {
-            name: 'numProperties',
-            id: '123',
-          })) {
-            yield {
-              id: '1',
-              choices: [choice],
-              created: Math.floor(Date.now() / 1000),
-              model: 'gpt-3.5-turbo',
-              object: 'chat.completion.chunk',
-            };
-          }
-        }),
-        handleRequest(async function* (request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
-          expect(request.messages).toEqual([
-            {
-              role: 'user',
-              content: 'can you tell me how many properties are in {"a": 1, "b": 2, "c": 3}',
-            },
-            {
-              role: 'assistant',
-              content: null,
-              tool_calls: [
-                {
-                  type: 'function',
-                  id: '123',
-                  function: {
-                    arguments: '[{"a": 1, "b": 2, "c": 3}]',
-                    name: 'numProperties',
+        handleRequest(
+          async function* requestHandler(request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+            expect(request.messages).toEqual([
+              {
+                role: 'user',
+                content: 'can you tell me how many properties are in {"a": 1, "b": 2, "c": 3}',
+              },
+            ]);
+            for (const choice of functionCallDeltas('[{"a": 1, "b": 2, "c": 3}]', {
+              name: 'numProperties',
+              id: '123',
+            })) {
+              yield {
+                id: '1',
+                choices: [choice],
+                created: Math.floor(Date.now() / 1000),
+                model: 'gpt-3.5-turbo',
+                object: 'chat.completion.chunk',
+              };
+            }
+          },
+        ),
+        handleRequest(
+          async function* requestHandler(request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+            expect(request.messages).toEqual([
+              {
+                role: 'user',
+                content: 'can you tell me how many properties are in {"a": 1, "b": 2, "c": 3}',
+              },
+              {
+                role: 'assistant',
+                content: null,
+                tool_calls: [
+                  {
+                    type: 'function',
+                    id: '123',
+                    function: {
+                      arguments: '[{"a": 1, "b": 2, "c": 3}]',
+                      name: 'numProperties',
+                    },
                   },
-                },
-              ],
-            },
-            {
-              role: 'tool',
-              content: `must be an object`,
-              tool_call_id: '123',
-            },
-          ]);
-          for (const choice of functionCallDeltas('{"a": 1, "b": 2, "c": 3}', {
-            name: 'numProperties',
-            id: '1234',
-          })) {
-            yield {
-              id: '2',
-              choices: [choice],
-              created: Math.floor(Date.now() / 1000),
-              model: 'gpt-3.5-turbo',
-              object: 'chat.completion.chunk',
-            };
-          }
-        }),
-        handleRequest(async function* (request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
-          expect(request.messages).toEqual([
-            {
-              role: 'user',
-              content: 'can you tell me how many properties are in {"a": 1, "b": 2, "c": 3}',
-            },
-            {
-              role: 'assistant',
-              content: null,
-              tool_calls: [
-                {
-                  type: 'function',
-                  id: '123',
-                  function: {
-                    arguments: '[{"a": 1, "b": 2, "c": 3}]',
-                    name: 'numProperties',
+                ],
+              },
+              {
+                role: 'tool',
+                content: `must be an object`,
+                tool_call_id: '123',
+              },
+            ]);
+            for (const choice of functionCallDeltas('{"a": 1, "b": 2, "c": 3}', {
+              name: 'numProperties',
+              id: '1234',
+            })) {
+              yield {
+                id: '2',
+                choices: [choice],
+                created: Math.floor(Date.now() / 1000),
+                model: 'gpt-3.5-turbo',
+                object: 'chat.completion.chunk',
+              };
+            }
+          },
+        ),
+        handleRequest(
+          async function* requestHandler(request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+            expect(request.messages).toEqual([
+              {
+                role: 'user',
+                content: 'can you tell me how many properties are in {"a": 1, "b": 2, "c": 3}',
+              },
+              {
+                role: 'assistant',
+                content: null,
+                tool_calls: [
+                  {
+                    type: 'function',
+                    id: '123',
+                    function: {
+                      arguments: '[{"a": 1, "b": 2, "c": 3}]',
+                      name: 'numProperties',
+                    },
                   },
-                },
-              ],
-            },
-            {
-              role: 'tool',
-              content: `must be an object`,
-              tool_call_id: '123',
-            },
-            {
-              role: 'assistant',
-              content: null,
-              tool_calls: [
-                {
-                  type: 'function',
-                  id: '1234',
-                  function: {
-                    arguments: '{"a": 1, "b": 2, "c": 3}',
-                    name: 'numProperties',
+                ],
+              },
+              {
+                role: 'tool',
+                content: `must be an object`,
+                tool_call_id: '123',
+              },
+              {
+                role: 'assistant',
+                content: null,
+                tool_calls: [
+                  {
+                    type: 'function',
+                    id: '1234',
+                    function: {
+                      arguments: '{"a": 1, "b": 2, "c": 3}',
+                      name: 'numProperties',
+                    },
                   },
-                },
-              ],
-            },
-            {
-              role: 'tool',
-              content: '3',
-              tool_call_id: '1234',
-            },
-          ]);
-          for (const choice of contentChoiceDeltas(`there are 3 properties in {"a": 1, "b": 2, "c": 3}`)) {
-            yield {
-              id: '3',
-              choices: [choice],
-              created: Math.floor(Date.now() / 1000),
-              model: 'gpt-3.5-turbo',
-              object: 'chat.completion.chunk',
-            };
-          }
-        }),
+                ],
+              },
+              {
+                role: 'tool',
+                content: '3',
+                tool_call_id: '1234',
+              },
+            ]);
+            for (const choice of contentChoiceDeltas(`there are 3 properties in {"a": 1, "b": 2, "c": 3}`)) {
+              yield {
+                id: '3',
+                choices: [choice],
+                created: Math.floor(Date.now() / 1000),
+                model: 'gpt-3.5-turbo',
+                object: 'chat.completion.chunk',
+              };
+            }
+          },
+        ),
         runner.done(),
       ]);
 
@@ -2928,7 +3049,7 @@ describe('resource completions', () => {
       expect(listener.eventFunctionCallResults).toEqual([`must be an object`, '3']);
       await listener.sanityCheck();
     });
-    test('single function call', async () => {
+    test.each(['getWeather', '__proto__'])('single function call: %s', async (functionName) => {
       const { fetch, handleRequest } = mockStreamingChatCompletionFetch();
 
       const openai = new OpenAI({ apiKey: 'something1234', baseURL: 'http://127.0.0.1:4010', fetch });
@@ -2940,13 +3061,14 @@ describe('resource completions', () => {
         tool_choice: {
           type: 'function',
           function: {
-            name: 'getWeather',
+            name: functionName,
           },
         },
         tools: [
           {
             type: 'function',
             function: {
+              name: functionName,
               function: function getWeather() {
                 return `it's raining`;
               },
@@ -2959,36 +3081,38 @@ describe('resource completions', () => {
       const listener = new StreamingRunnerListener(runner);
 
       await Promise.all([
-        handleRequest(async function* (request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
-          expect(request.messages).toEqual([{ role: 'user', content: 'tell me what the weather is like' }]);
-          yield {
-            id: '1',
-            choices: [
-              {
-                index: 0,
-                finish_reason: 'function_call',
-                delta: {
-                  role: 'assistant',
-                  content: null,
-                  tool_calls: [
-                    {
-                      type: 'function',
-                      index: 0,
-                      id: '123',
-                      function: {
-                        arguments: '',
-                        name: 'getWeather',
+        handleRequest(
+          async function* requestHandler(request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+            expect(request.messages).toEqual([{ role: 'user', content: 'tell me what the weather is like' }]);
+            yield {
+              id: '1',
+              choices: [
+                {
+                  index: 0,
+                  finish_reason: 'function_call',
+                  delta: {
+                    role: 'assistant',
+                    content: null,
+                    tool_calls: [
+                      {
+                        type: 'function',
+                        index: 0,
+                        id: '123',
+                        function: {
+                          arguments: '',
+                          name: functionName,
+                        },
                       },
-                    },
-                  ],
+                    ],
+                  },
                 },
-              },
-            ],
-            created: Math.floor(Date.now() / 1000),
-            model: 'gpt-3.5-turbo',
-            object: 'chat.completion.chunk',
-          };
-        }),
+              ],
+              created: Math.floor(Date.now() / 1000),
+              model: 'gpt-3.5-turbo',
+              object: 'chat.completion.chunk',
+            };
+          },
+        ),
         runner.done(),
       ]);
 
@@ -3004,7 +3128,7 @@ describe('resource completions', () => {
               id: '123',
               function: {
                 arguments: '',
-                name: 'getWeather',
+                name: functionName,
               },
             },
           ],
@@ -3014,7 +3138,7 @@ describe('resource completions', () => {
       expect(listener.eventFunctionCallResults).toEqual([`it's raining`]);
       await listener.sanityCheck();
     });
-    test('wrong function name', async () => {
+    test.each(unregisteredFunctionNames)('wrong function name: $name', async ({ name, tool }) => {
       const { fetch, handleRequest } = mockStreamingChatCompletionFetch();
 
       const openai = new OpenAI({ apiKey: 'something1234', baseURL: 'http://127.0.0.1:4010', fetch });
@@ -3027,6 +3151,7 @@ describe('resource completions', () => {
           {
             type: 'function',
             function: {
+              name: tool,
               function: function getWeather() {
                 return `it's raining`;
               },
@@ -3039,140 +3164,152 @@ describe('resource completions', () => {
       const listener = new StreamingRunnerListener(runner);
 
       await Promise.all([
-        handleRequest(async function* (request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
-          expect(request.messages).toEqual([{ role: 'user', content: 'tell me what the weather is like' }]);
-          yield {
-            id: '1',
-            choices: [
+        handleRequest(
+          async function* requestHandler(request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+            expect(request.messages).toEqual([{ role: 'user', content: 'tell me what the weather is like' }]);
+            expect(request.tools).toEqual([
               {
-                index: 0,
-                finish_reason: 'function_call',
-                delta: {
-                  role: 'assistant',
-                  content: null,
-                  tool_calls: [
-                    {
-                      type: 'function',
-                      index: 0,
-                      id: '123',
-                      function: {
-                        arguments: '',
-                        name: 'get_weather',
-                      },
-                    },
-                  ],
-                },
+                type: 'function',
+                function: { name: tool, parameters: {}, description: 'gets the weather' },
               },
-            ],
-            created: Math.floor(Date.now() / 1000),
-            model: 'gpt-3.5-turbo',
-            object: 'chat.completion.chunk',
-          };
-        }),
-        handleRequest(async function* (request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
-          expect(request.messages).toEqual([
-            { role: 'user', content: 'tell me what the weather is like' },
-            {
-              role: 'assistant',
-              content: null,
-              tool_calls: [
-                {
-                  type: 'function',
-                  id: '123',
-                  function: {
-                    arguments: '',
-                    name: 'get_weather',
-                  },
-                },
-              ],
-            },
-            {
-              role: 'tool',
-              content: `Invalid tool_call: "get_weather". Available options are: "getWeather". Please try again`,
-              tool_call_id: '123',
-            },
-          ]);
-          yield {
-            id: '2',
-            choices: [
-              {
-                index: 0,
-                finish_reason: 'function_call',
-                logprobs: null,
-                delta: {
-                  role: 'assistant',
-                  content: null,
-                  tool_calls: [
-                    {
-                      type: 'function',
-                      index: 0,
-                      id: '1234',
-                      function: {
-                        arguments: '',
-                        name: 'getWeather',
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-            created: Math.floor(Date.now() / 1000),
-            model: 'gpt-3.5-turbo',
-            object: 'chat.completion.chunk',
-          };
-        }),
-        handleRequest(async function* (request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
-          expect(request.messages).toEqual([
-            { role: 'user', content: 'tell me what the weather is like' },
-            {
-              role: 'assistant',
-              content: null,
-              tool_calls: [
-                {
-                  type: 'function',
-                  id: '123',
-                  function: {
-                    arguments: '',
-                    name: 'get_weather',
-                  },
-                },
-              ],
-            },
-            {
-              role: 'tool',
-              content: `Invalid tool_call: "get_weather". Available options are: "getWeather". Please try again`,
-              tool_call_id: '123',
-            },
-            {
-              role: 'assistant',
-              content: null,
-              tool_calls: [
-                {
-                  type: 'function',
-                  id: '1234',
-                  function: {
-                    arguments: '',
-                    name: 'getWeather',
-                  },
-                },
-              ],
-            },
-            {
-              role: 'tool',
-              content: `it's raining`,
-              tool_call_id: '1234',
-            },
-          ]);
-          for (const choice of contentChoiceDeltas(`it's raining`)) {
+            ]);
             yield {
-              id: '3',
-              choices: [choice],
+              id: '1',
+              choices: [
+                {
+                  index: 0,
+                  finish_reason: 'function_call',
+                  delta: {
+                    role: 'assistant',
+                    content: null,
+                    tool_calls: [
+                      {
+                        type: 'function',
+                        index: 0,
+                        id: '123',
+                        function: {
+                          arguments: '',
+                          name,
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
               created: Math.floor(Date.now() / 1000),
               model: 'gpt-3.5-turbo',
               object: 'chat.completion.chunk',
             };
-          }
-        }),
+          },
+        ),
+        handleRequest(
+          async function* requestHandler(request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+            expect(request.messages).toEqual([
+              { role: 'user', content: 'tell me what the weather is like' },
+              {
+                role: 'assistant',
+                content: null,
+                tool_calls: [
+                  {
+                    type: 'function',
+                    id: '123',
+                    function: {
+                      arguments: '',
+                      name,
+                    },
+                  },
+                ],
+              },
+              {
+                role: 'tool',
+                content: `Invalid tool_call: "${name}". Available options are: "${tool}". Please try again`,
+                tool_call_id: '123',
+              },
+            ]);
+            yield {
+              id: '2',
+              choices: [
+                {
+                  index: 0,
+                  finish_reason: 'function_call',
+                  logprobs: null,
+                  delta: {
+                    role: 'assistant',
+                    content: null,
+                    tool_calls: [
+                      {
+                        type: 'function',
+                        index: 0,
+                        id: '1234',
+                        function: {
+                          arguments: '',
+                          name: tool,
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+              created: Math.floor(Date.now() / 1000),
+              model: 'gpt-3.5-turbo',
+              object: 'chat.completion.chunk',
+            };
+          },
+        ),
+        handleRequest(
+          async function* requestHandler(request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+            expect(request.messages).toEqual([
+              { role: 'user', content: 'tell me what the weather is like' },
+              {
+                role: 'assistant',
+                content: null,
+                tool_calls: [
+                  {
+                    type: 'function',
+                    id: '123',
+                    function: {
+                      arguments: '',
+                      name,
+                    },
+                  },
+                ],
+              },
+              {
+                role: 'tool',
+                content: `Invalid tool_call: "${name}". Available options are: "${tool}". Please try again`,
+                tool_call_id: '123',
+              },
+              {
+                role: 'assistant',
+                content: null,
+                tool_calls: [
+                  {
+                    type: 'function',
+                    id: '1234',
+                    function: {
+                      arguments: '',
+                      name: tool,
+                    },
+                  },
+                ],
+              },
+              {
+                role: 'tool',
+                content: `it's raining`,
+                tool_call_id: '1234',
+              },
+            ]);
+            for (const choice of contentChoiceDeltas(`it's raining`)) {
+              yield {
+                id: '3',
+                choices: [choice],
+                created: Math.floor(Date.now() / 1000),
+                model: 'gpt-3.5-turbo',
+                object: 'chat.completion.chunk',
+              };
+            }
+          },
+        ),
         runner.done(),
       ]);
 
@@ -3188,14 +3325,14 @@ describe('resource completions', () => {
               id: '123',
               function: {
                 arguments: '',
-                name: 'get_weather',
+                name,
               },
             },
           ],
         },
         {
           role: 'tool',
-          content: `Invalid tool_call: "get_weather". Available options are: "getWeather". Please try again`,
+          content: `Invalid tool_call: "${name}". Available options are: "${tool}". Please try again`,
           tool_call_id: '123',
         },
         {
@@ -3209,7 +3346,7 @@ describe('resource completions', () => {
               id: '1234',
               function: {
                 arguments: '',
-                name: 'getWeather',
+                name: tool,
               },
             },
           ],
@@ -3224,7 +3361,7 @@ describe('resource completions', () => {
         },
       ]);
       expect(listener.eventFunctionCallResults).toEqual([
-        `Invalid tool_call: "get_weather". Available options are: "getWeather". Please try again`,
+        `Invalid tool_call: "${name}". Available options are: "${tool}". Please try again`,
         `it's raining`,
       ]);
       await listener.sanityCheck();
@@ -3246,18 +3383,20 @@ describe('resource completions', () => {
       const listener = new StreamingRunnerListener(runner);
 
       await Promise.all([
-        handleRequest(async function* (request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
-          expect(request.messages).toEqual([{ role: 'user', content: 'tell me what the weather is like' }]);
-          for (const choice of contentChoiceDeltas(`The weather is great today!`)) {
-            yield {
-              id: '1',
-              choices: [choice],
-              created: Math.floor(Date.now() / 1000),
-              model: 'gpt-3.5-turbo',
-              object: 'chat.completion.chunk',
-            };
-          }
-        }),
+        handleRequest(
+          async function* requestHandler(request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+            expect(request.messages).toEqual([{ role: 'user', content: 'tell me what the weather is like' }]);
+            for (const choice of contentChoiceDeltas(`The weather is great today!`)) {
+              yield {
+                id: '1',
+                choices: [choice],
+                created: Math.floor(Date.now() / 1000),
+                model: 'gpt-3.5-turbo',
+                object: 'chat.completion.chunk',
+              };
+            }
+          },
+        ),
         runner.done(),
       ]);
 
@@ -3285,18 +3424,20 @@ describe('resource completions', () => {
       const listener = new StreamingRunnerListener(proxied);
 
       await Promise.all([
-        handleRequest(async function* (request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
-          expect(request.messages).toEqual([{ role: 'user', content: 'tell me what the weather is like' }]);
-          for (const choice of contentChoiceDeltas(`The weather is great today!`)) {
-            yield {
-              id: '1',
-              choices: [choice],
-              created: Math.floor(Date.now() / 1000),
-              model: 'gpt-3.5-turbo',
-              object: 'chat.completion.chunk',
-            };
-          }
-        }),
+        handleRequest(
+          async function* requestHandler(request): AsyncIterable<OpenAI.Chat.ChatCompletionChunk> {
+            expect(request.messages).toEqual([{ role: 'user', content: 'tell me what the weather is like' }]);
+            for (const choice of contentChoiceDeltas(`The weather is great today!`)) {
+              yield {
+                id: '1',
+                choices: [choice],
+                created: Math.floor(Date.now() / 1000),
+                model: 'gpt-3.5-turbo',
+                object: 'chat.completion.chunk',
+              };
+            }
+          },
+        ),
         proxied.done(),
       ]);
 

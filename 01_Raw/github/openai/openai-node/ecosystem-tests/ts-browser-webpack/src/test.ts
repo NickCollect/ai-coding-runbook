@@ -1,26 +1,26 @@
-import puppeteer from 'puppeteer';
+import { launch } from 'puppeteer';
 
 (async () => {
-  const browser = await puppeteer.launch({
+  const browser = await launch({
     args: ['--no-sandbox'],
   });
   let page;
   try {
     page = await browser.newPage();
-    function debugEvent(subj: string) {
-      return subj.padEnd('requestfailed'.length);
-    }
+    const debugEvent = (subj: string) => subj.padEnd('requestfailed'.length);
     page
       .on('console', (message) =>
         console.error(
           `${debugEvent('console')} ${message
             .type()
-            .substr(0, 'warning'.length)
+            .slice(0, 'warning'.length)
             .toUpperCase()
             .padEnd('warning'.length)} ${message.text()}`,
         ),
       )
-      .on('pageerror', ({ message }) => console.error(`${debugEvent('pageerror')} ${message}`))
+      .on('pageerror', (error) =>
+        console.error(`${debugEvent('pageerror')} ${error instanceof Error ? error.message : String(error)}`),
+      )
       .on('response', (response) =>
         console.error(`${debugEvent('response')} ${response.status()} ${response.url()}`),
       )
@@ -30,16 +30,31 @@ import puppeteer from 'puppeteer';
 
     const apiKey = process.env.OPENAI_API_KEY;
 
-    if (!apiKey) throw new Error('missing process.env.OPENAI_API_KEY');
+    if (!apiKey) {throw new Error('missing process.env.OPENAI_API_KEY');}
 
-    // Navigate the page to a URL
-    await page.goto(`http://localhost:8080/index.html?apiKey=${apiKey}`);
+    const origin = 'http://localhost:8080';
+    await page.evaluateOnNewDocument(
+      (key, expectedOrigin) => {
+        if (location.origin !== expectedOrigin) {
+          return;
+        }
+        Object.defineProperty(globalThis, '__OPENAI_ECOSYSTEM_TEST_API_KEY__', {
+          value: key,
+          configurable: false,
+          enumerable: false,
+          writable: false,
+        });
+      },
+      apiKey,
+      origin,
+    );
+    await page.goto(`${origin}/index.html`);
 
-    await page.waitForSelector('#running', { timeout: 15000 });
+    await page.waitForSelector('#running', { timeout: 15_000 });
 
     const start = Date.now();
-    while ((await page.$('#running')) != null && Date.now() - start < 3 * 60000) {
-      await new Promise((r) => setTimeout(r, 1000));
+    while ((await page.$('#running')) != null && Date.now() - start < 3 * 60_000) {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     }
 
     let results;
@@ -50,7 +65,7 @@ import puppeteer from 'puppeteer';
     }
 
     if (!Array.isArray(results)) {
-      throw new Error(`failed to get test results from page`);
+      throw new TypeError(`failed to get test results from page`);
     }
     const failed = results.filter((r) => !r.passed);
     if (failed.length) {

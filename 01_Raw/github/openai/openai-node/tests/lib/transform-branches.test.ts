@@ -11,7 +11,7 @@ import {
 
 describe('JSON Schema child traversal', () => {
   test('visits schema-valued keywords without descending into literal payloads', () => {
-    const visited: Array<{ path: string; keyword: string; value: unknown }> = [];
+    const visited: { path: string; keyword: string; value: unknown }[] = [];
     const schema = {
       type: 'object',
       additionalProperties: false,
@@ -179,6 +179,28 @@ describe('object intersection normalization for exclusivity', () => {
       required: ['first', 'second'],
     });
     expect(schema).toEqual(original);
+  });
+
+  test('preserves own prototype-named schema metadata while flattening an intersection', () => {
+    const branch = JSON.parse(
+      '{"type":"object","properties":{"value":{"type":"string"}},"required":["value"],"__proto__":{"polluted":"YES"}}',
+    ) as JSONSchema;
+    const schema: JSONSchema = { allOf: [branch], title: 'preserved annotation' };
+
+    const normalized = normalizeObjectAllOfForExclusivity(schema, schema);
+
+    expect(normalized).toBeDefined();
+    expect(Object.getPrototypeOf(normalized)).toBe(Object.prototype);
+    expect(Object.getOwnPropertyDescriptor(normalized, '__proto__')).toMatchObject({
+      configurable: true,
+      enumerable: true,
+      value: { polluted: 'YES' },
+      writable: true,
+    });
+    expect((normalized as Record<string, unknown>)['polluted']).toBeUndefined();
+    expect((Object.prototype as Record<string, unknown>)['polluted']).toBeUndefined();
+    expect(normalized?.title).toBe('preserved annotation');
+    expect(schema.allOf).toEqual([branch]);
   });
 
   test.each([

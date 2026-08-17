@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+// File generated from our OpenAPI spec by Castiron. See CONTRIBUTING.md for details.
 
 export {
   Assistants,
@@ -43,6 +43,7 @@ export {
   type BetaInlineSkillSource,
   type BetaLocalEnvironment,
   type BetaLocalSkill,
+  type BetaMcpToolCallError,
   type BetaNamespaceTool,
   type BetaResponse,
   type BetaResponseApplyPatchToolCall,
@@ -146,6 +147,11 @@ export {
   type BetaResponseReasoningTextDoneEvent,
   type BetaResponseRefusalDeltaEvent,
   type BetaResponseRefusalDoneEvent,
+  type BetaResponseShellCallCommandAddedEvent,
+  type BetaResponseShellCallCommandDeltaEvent,
+  type BetaResponseShellCallCommandDoneEvent,
+  type BetaResponseShellCallOutputContentDeltaEvent,
+  type BetaResponseShellCallOutputContentDoneEvent,
   type BetaResponseStatus,
   type BetaResponseStreamEvent,
   type BetaResponseTextConfig,

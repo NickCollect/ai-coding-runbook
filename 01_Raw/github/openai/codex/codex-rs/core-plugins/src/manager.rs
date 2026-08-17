@@ -82,7 +82,6 @@ use codex_hooks::plugin_hook_declarations;
 use codex_http_client::HttpClientFactory;
 use codex_login::AuthManager;
 use codex_login::CodexAuth;
-use codex_model_provider::AMAZON_BEDROCK_PROVIDER_ID;
 use codex_plugin::AppConnectorId;
 use codex_plugin::PluginCapabilitySummary;
 use codex_plugin::PluginId;
@@ -491,35 +490,24 @@ impl PluginLoadCacheKey {
     }
 }
 
-fn target_curated_marketplace(
-    auth_mode: Option<AuthMode>,
-    model_provider_id: &str,
-) -> TargetCuratedMarketplace {
-    match auth_mode {
-        Some(auth_mode) => {
-            if auth_mode.uses_codex_backend() {
-                TargetCuratedMarketplace::OpenAiWithRemote
-            } else {
-                TargetCuratedMarketplace::OpenAiApi
-            }
-        }
-        // Bedrock can use ambient AWS credentials without producing a stored auth mode.
-        None if model_provider_id == AMAZON_BEDROCK_PROVIDER_ID => {
-            TargetCuratedMarketplace::OpenAiApi
-        }
-        None => TargetCuratedMarketplace::OpenAi,
+fn target_curated_marketplace(auth_mode: Option<AuthMode>) -> TargetCuratedMarketplace {
+    if auth_mode.is_some_and(AuthMode::uses_codex_backend) {
+        TargetCuratedMarketplace::OpenAiWithRemote
+    } else {
+        TargetCuratedMarketplace::OpenAiApi
     }
 }
 
 impl PluginsManager {
     pub fn new(
         codex_home: PathBuf,
+        auth_mode: Option<AuthMode>,
         skill_root_loader: Arc<dyn SkillRootLoader<PluginSkillRoot>>,
     ) -> Self {
         Self::new_with_options(
             codex_home,
             Some(Product::Codex),
-            /*auth_mode*/ None,
+            auth_mode,
             skill_root_loader,
         )
     }
@@ -683,7 +671,7 @@ impl PluginsManager {
             remote_global_catalog_active,
         );
         if !force_reload && let Some(plugins) = self.cached_loaded_plugins(&cache_key) {
-            return self.resolve_loaded_plugins_for_auth(plugins, &config.model_provider_id);
+            return self.resolve_loaded_plugins_for_auth(plugins);
         }
 
         let Ok(_load_permit) = self.loaded_plugins_load_semaphore.acquire().await else {
@@ -691,7 +679,7 @@ impl PluginsManager {
             return PluginLoadOutcome::default();
         };
         if !force_reload && let Some(plugins) = self.cached_loaded_plugins(&cache_key) {
-            return self.resolve_loaded_plugins_for_auth(plugins, &config.model_provider_id);
+            return self.resolve_loaded_plugins_for_auth(plugins);
         }
         let cache_generation = self.loaded_plugins_cache_generation();
         let plugin_skill_snapshots = new_plugin_skill_snapshots();
@@ -712,16 +700,12 @@ impl PluginsManager {
             plugins.clone(),
             plugin_skill_snapshots,
         );
-        self.resolve_loaded_plugins_for_auth(plugins, &config.model_provider_id)
+        self.resolve_loaded_plugins_for_auth(plugins)
     }
 
-    fn resolve_loaded_plugins_for_auth(
-        &self,
-        mut plugins: Vec<LoadedPlugin>,
-        model_provider_id: &str,
-    ) -> PluginLoadOutcome {
+    fn resolve_loaded_plugins_for_auth(&self, mut plugins: Vec<LoadedPlugin>) -> PluginLoadOutcome {
         let auth_mode = self.auth_mode();
-        let target_curated_marketplace = target_curated_marketplace(auth_mode, model_provider_id);
+        let target_curated_marketplace = target_curated_marketplace(auth_mode);
         plugins.retain(|plugin| {
             plugin_is_eligible_for_target_marketplace(
                 &plugin.config_name,
@@ -787,28 +771,6 @@ impl PluginsManager {
         }
     }
 
-    /// Load plugins for a config layer stack without touching the plugins cache.
-    pub async fn plugins_for_layer_stack(
-        &self,
-        config_layer_stack: &ConfigLayerStack,
-        config: &PluginsConfigInput,
-    ) -> PluginLoadOutcome {
-        if !config.plugins_enabled {
-            return PluginLoadOutcome::default();
-        }
-        let plugins = load_plugins_from_layer_stack(
-            config_layer_stack,
-            self.remote_installed_plugins_snapshot(),
-            &self.store,
-            /*plugin_skill_snapshots*/ None,
-            self.restriction_product,
-            self.remote_global_catalog_active(config),
-            self.skill_root_loader.as_ref(),
-        )
-        .await;
-        self.resolve_loaded_plugins_for_auth(plugins, &config.model_provider_id)
-    }
-
     /// Resolve plugin hooks for a config layer stack without loading other plugin capabilities.
     pub async fn plugin_hooks_for_layer_stack(
         &self,
@@ -818,8 +780,7 @@ impl PluginsManager {
         if !config.plugins_enabled {
             return PluginHookLoadOutcome::default();
         }
-        let target_curated_marketplace =
-            target_curated_marketplace(self.auth_mode(), &config.model_provider_id);
+        let target_curated_marketplace = target_curated_marketplace(self.auth_mode());
         load_plugin_hooks_from_layer_stack(
             config_layer_stack,
             self.remote_installed_plugin_configs(),
@@ -828,17 +789,6 @@ impl PluginsManager {
             self.remote_global_catalog_active(config),
         )
         .await
-    }
-
-    /// Resolve plugin skill roots for a config layer stack without touching the plugins cache.
-    pub async fn effective_skill_roots_for_layer_stack(
-        &self,
-        config_layer_stack: &ConfigLayerStack,
-        config: &PluginsConfigInput,
-    ) -> Vec<PluginSkillRoot> {
-        self.plugins_for_layer_stack(config_layer_stack, config)
-            .await
-            .effective_plugin_skill_roots()
     }
 
     fn cached_loaded_plugins(&self, key: &PluginLoadCacheKey) -> Option<Vec<LoadedPlugin>> {
@@ -2191,6 +2141,8 @@ impl PluginsManager {
             if should_spawn_marketplace_auto_upgrade {
                 let manager = Arc::clone(self);
                 let config = config.clone();
+                let on_effective_plugins_changed = on_effective_plugins_changed.clone();
+                let runtime = tokio::runtime::Handle::current();
                 if let Err(err) = std::thread::Builder::new()
                     .name("plugins-marketplace-auto-upgrade".to_string())
                     .spawn(move || {
@@ -2199,6 +2151,16 @@ impl PluginsManager {
                         );
                         match outcome {
                             Ok(outcome) => {
+                                if !outcome.upgraded_roots.is_empty()
+                                    && let Some(on_effective_plugins_changed) =
+                                        on_effective_plugins_changed
+                                {
+                                    runtime.spawn(async move {
+                                        on_effective_plugins_changed(
+                                            EffectivePluginsChange::default(),
+                                        );
+                                    });
+                                }
                                 for error in outcome.errors {
                                     warn!(
                                         marketplace = error.marketplace_name,
@@ -2942,7 +2904,7 @@ impl PluginsManager {
             self.codex_home.as_path(),
         ));
         let curated_marketplace_path = if include_openai_curated {
-            match target_curated_marketplace(self.auth_mode(), &config.model_provider_id) {
+            match target_curated_marketplace(self.auth_mode()) {
                 TargetCuratedMarketplace::OpenAi | TargetCuratedMarketplace::OpenAiWithRemote => {
                     let curated_repo_root = curated_plugins_repo_path(self.codex_home.as_path());
                     curated_repo_root.is_dir().then_some(curated_repo_root)

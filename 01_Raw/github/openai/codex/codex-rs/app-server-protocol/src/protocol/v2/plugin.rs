@@ -1,7 +1,5 @@
 use super::AppSummary;
 use super::HookEventName;
-use super::HookExecutionMode;
-use super::HookHandlerType;
 use super::HookSource;
 use super::HookTrustStatus;
 use crate::JsonSchema;
@@ -518,17 +516,32 @@ pub struct HooksListEntry {
     pub errors: Vec<HookErrorInfo>,
 }
 
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq, JsonSchema, TS)]
+#[serde(tag = "handlerType", rename_all = "camelCase")]
+#[ts(tag = "handlerType", export_to = "v2/")]
+pub enum HookHandlerMetadata {
+    Command {
+        command: String,
+        #[serde(default)]
+        r#async: bool,
+    },
+    McpTool {
+        server: String,
+        tool: String,
+    },
+    Prompt {},
+    Agent {},
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
 #[ts(export_to = "v2/")]
 pub struct HookMetadata {
     pub key: String,
     pub event_name: HookEventName,
-    pub handler_type: HookHandlerType,
-    #[serde(default)]
-    pub execution_mode: HookExecutionMode,
+    #[serde(flatten)]
+    pub handler: HookHandlerMetadata,
     pub matcher: Option<String>,
-    pub command: Option<String>,
     pub timeout_sec: u64,
     pub status_message: Option<String>,
     /// Configured `additionalContext` spill threshold.
@@ -893,6 +906,9 @@ pub struct PluginInstallParams {
     pub marketplace_path: Option<AbsolutePathBuf>,
     #[ts(optional = nullable)]
     pub remote_marketplace_name: Option<String>,
+    /// Client-generated identifier used to correlate one installation attempt.
+    #[ts(optional = nullable)]
+    pub install_attempt_id: Option<String>,
     pub plugin_name: String,
 }
 

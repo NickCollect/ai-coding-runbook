@@ -1,9 +1,12 @@
-import { ZodFirstPartyTypeKind, ZodMapDef, ZodRecordDef, ZodTypeAny } from 'zod/v3';
-import { JsonSchema7Type, parseDef } from '../parseDef';
-import { Refs } from '../Refs';
-import { JsonSchema7EnumType } from './enum';
-import { JsonSchema7ObjectType } from './object';
-import { JsonSchema7StringType, parseStringDef } from './string';
+import type { ZodMapDef, ZodRecordDef, ZodTypeAny } from 'zod/v3';
+import { ZodFirstPartyTypeKind } from 'zod/v3';
+import type { JsonSchema7Type } from '../parseDef';
+import { parseDef } from '../parseDef';
+import type { Refs } from '../Refs';
+import type { JsonSchema7EnumType } from './enum';
+import type { JsonSchema7ObjectType } from './object';
+import type { JsonSchema7StringType } from './string';
+import { parseStringDef } from './string';
 
 type JsonSchema7RecordPropertyNamesType =
   | Omit<JsonSchema7StringType, 'type'>
@@ -50,9 +53,9 @@ export function parseRecordDef(
   }
 
   if (def.keyType?._def.typeName === ZodFirstPartyTypeKind.ZodString && def.keyType._def.checks?.length) {
-    const keyType: JsonSchema7RecordPropertyNamesType = Object.entries(
-      parseStringDef(def.keyType._def, refs),
-    ).reduce((acc, [key, value]) => (key === 'type' ? acc : { ...acc, [key]: value }), {});
+    const keyType = Object.fromEntries(
+      Object.entries(parseStringDef(def.keyType._def, refs)).filter(([key]) => key !== 'type'),
+    ) as JsonSchema7RecordPropertyNamesType;
 
     return {
       ...schema,

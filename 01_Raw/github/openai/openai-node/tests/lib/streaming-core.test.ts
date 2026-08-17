@@ -1,6 +1,7 @@
 import { vi } from 'vitest';
 import { APIError, OpenAIError } from 'openai/core/error';
 import { Stream, _iterSSEMessages } from 'openai/core/streaming';
+import * as lineDecoders from 'openai/internal/decoders/line';
 import { ReadableStreamFrom } from 'openai/internal/shims';
 
 const encoder = new TextEncoder();
@@ -23,6 +24,58 @@ describe('Stream.fromSSEResponse', () => {
     const stream = Stream.fromSSEResponse<{ id: number }>(response, new AbortController());
 
     await expect(collect(stream)).resolves.toEqual([{ id: 1 }, { id: 2 }]);
+  });
+
+  test('finishes at the completion sentinel without waiting for the response body to close', async () => {
+    const cancel = vi.fn();
+    const body = new ReadableStream<Uint8Array>(
+      {
+        start(controller) {
+          controller.enqueue(encoder.encode('data: {"id":1}\n\ndata: [DONE]\n\n'));
+        },
+        pull() {
+          throw new Error('Attempted to read past the [DONE] completion sentinel');
+        },
+        cancel,
+      },
+      { highWaterMark: 0 },
+    );
+    const controller = new AbortController();
+    const iterator = Stream.fromSSEResponse<{ id: number }>(new Response(body), controller)[
+      Symbol.asyncIterator
+    ]();
+
+    await expect(iterator.next()).resolves.toEqual({ value: { id: 1 }, done: false });
+    await expect(iterator.next()).resolves.toEqual({ value: undefined, done: true });
+    expect(cancel).toHaveBeenCalledTimes(1);
+    expect(body.locked).toBe(false);
+    expect(controller.signal.aborted).toBe(false);
+  });
+
+  test('finishes at the completion sentinel and aborts when response cancellation rejects', async () => {
+    const cancel = vi.fn().mockRejectedValue(new Error('Response body cancellation failed'));
+    const body = new ReadableStream<Uint8Array>(
+      {
+        start(controller) {
+          controller.enqueue(encoder.encode('data: {"id":1}\n\ndata: [DONE]\n\n'));
+        },
+        pull() {
+          throw new Error('Attempted to read past the [DONE] completion sentinel');
+        },
+        cancel,
+      },
+      { highWaterMark: 0 },
+    );
+    const controller = new AbortController();
+    const iterator = Stream.fromSSEResponse<{ id: number }>(new Response(body), controller)[
+      Symbol.asyncIterator
+    ]();
+
+    await expect(iterator.next()).resolves.toEqual({ value: { id: 1 }, done: false });
+    await expect(iterator.next()).resolves.toEqual({ value: undefined, done: true });
+    expect(cancel).toHaveBeenCalledTimes(1);
+    expect(body.locked).toBe(false);
+    expect(controller.signal.aborted).toBe(true);
   });
 
   test('optionally preserves the event name alongside its parsed data', async () => {
@@ -173,7 +226,7 @@ describe('Stream.tee', () => {
     const controller = new AbortController();
     const source = new Stream(
       () =>
-        (async function* () {
+        (async function* sourceItems() {
           yield 1;
           yield 2;
           yield 3;
@@ -201,7 +254,7 @@ describe('Stream.toReadableStream', () => {
   test('round-trips structured values as newline-delimited JSON', async () => {
     const original = new Stream(
       () =>
-        (async function* () {
+        (async function* originalItems() {
           yield { id: 1 };
           yield { id: 2 };
         })(),
@@ -262,9 +315,262 @@ describe('_iterSSEMessages', () => {
     ]);
   });
 
+  test.each(
+    ['\n', '\r', '\r\n'].flatMap((firstEnding) =>
+      ['\n', '\r', '\r\n']
+        .filter((secondEnding) => firstEnding !== '\r' || secondEnding !== '\n')
+        .map((secondEnding) => [firstEnding, secondEnding]),
+    ),
+  )(
+    'decodes byte-fragmented %j + %j separators before the stream ends',
+    async (firstEnding, secondEnding) => {
+      const delimiter = firstEnding + secondEnding;
+      const firstEvent = encoder.encode(`data: first${delimiter}`);
+      const secondEvent = encoder.encode(`data: second${delimiter}`);
+      let streamController: ReadableStreamDefaultController<Uint8Array> | undefined;
+      const response = new Response(
+        new ReadableStream<Uint8Array>({
+          start(controller) {
+            streamController = controller;
+          },
+        }),
+      );
+      const events = _iterSSEMessages(response, new AbortController());
+      const first = events.next();
+
+      for (const byte of firstEvent) {
+        streamController?.enqueue(Uint8Array.of(byte));
+      }
+
+      await expect(first).resolves.toMatchObject({ done: false, value: { event: null, data: 'first' } });
+
+      const second = events.next();
+      for (const byte of secondEvent) {
+        streamController?.enqueue(Uint8Array.of(byte));
+      }
+
+      await expect(second).resolves.toMatchObject({
+        done: false,
+        value: { event: null, data: 'second' },
+      });
+
+      streamController?.close();
+      await expect(events.next()).resolves.toMatchObject({ done: true });
+    },
+  );
+
+  test('decodes carriage-return separators split into individual bytes', async () => {
+    const events = encoder.encode('data: first\r\rdata: second\r\r');
+    const response = new Response(ReadableStreamFrom(Array.from(events, (byte) => Uint8Array.of(byte))));
+
+    await expect(collect(_iterSSEMessages(response, new AbortController()))).resolves.toMatchObject([
+      { event: null, data: 'first' },
+      { event: null, data: 'second' },
+    ]);
+  });
+
+  test('delivers LF followed by CRLF before the stream closes', async () => {
+    let streamController: ReadableStreamDefaultController<Uint8Array> | undefined;
+    const response = new Response(
+      new ReadableStream<Uint8Array>({
+        start(controller) {
+          streamController = controller;
+        },
+      }),
+    );
+    const events = _iterSSEMessages(response, new AbortController());
+    const first = events.next();
+
+    streamController?.enqueue(encoder.encode('data: first\n\r\n'));
+    await expect(first).resolves.toMatchObject({ done: false, value: { event: null, data: 'first' } });
+
+    const second = events.next();
+    streamController?.enqueue(encoder.encode('data: second\r\n\n'));
+    await expect(second).resolves.toMatchObject({
+      done: false,
+      value: { event: null, data: 'second' },
+    });
+
+    streamController?.close();
+    await expect(events.next()).resolves.toMatchObject({ done: true });
+  });
+
+  test('does not emit a phantom event when CRLF is split after an immediate CR delimiter', async () => {
+    let streamController: ReadableStreamDefaultController<Uint8Array> | undefined;
+    const response = new Response(
+      new ReadableStream<Uint8Array>({
+        start(controller) {
+          streamController = controller;
+        },
+      }),
+    );
+    const events = _iterSSEMessages(response, new AbortController());
+    const first = events.next();
+
+    streamController?.enqueue(encoder.encode('data: first\r\r'));
+    await expect(first).resolves.toMatchObject({ done: false, value: { event: null, data: 'first' } });
+
+    const second = events.next();
+    streamController?.enqueue(encoder.encode('\ndata: second\r\r'));
+    await expect(second).resolves.toMatchObject({
+      done: false,
+      value: { event: null, data: 'second' },
+    });
+
+    streamController?.enqueue(encoder.encode('\n'));
+    streamController?.close();
+    await expect(events.next()).resolves.toMatchObject({ done: true });
+  });
+
+  test.each([
+    ['\r', '\n', '\r'],
+    ['\r\n', '\r', '\r\n'],
+    ['\n', '\r\n', '\r'],
+  ])('preserves byte-fragmented multiline data with %j, %j, and %j endings', async (first, second, third) => {
+    const bytes = encoder.encode(`data: first${first}data: second${second}${third}`);
+    const response = new Response(ReadableStreamFrom(Array.from(bytes, (byte) => Uint8Array.of(byte))));
+
+    await expect(collect(_iterSSEMessages(response, new AbortController()))).resolves.toMatchObject([
+      { event: null, data: 'first\nsecond' },
+    ]);
+  });
+
+  test('finds consecutive events after scanning an earlier fragmented prefix', async () => {
+    const response = new Response(
+      ReadableStreamFrom([
+        encoder.encode('data: first with a fragmented prefix'),
+        encoder.encode('\r\n\r\ndata: second\r\n\r\ndata: third\r\n\r\n'),
+      ]),
+    );
+
+    await expect(collect(_iterSSEMessages(response, new AbortController()))).resolves.toMatchObject([
+      { event: null, data: 'first with a fragmented prefix' },
+      { event: null, data: 'second' },
+      { event: null, data: 'third' },
+    ]);
+  });
+
+  test('retains the longest partial separator between separately scanned chunks', async () => {
+    const response = new Response(
+      ReadableStreamFrom([
+        encoder.encode('data: first\r\n\r'),
+        encoder.encode('\ndata: second\r\n'),
+        encoder.encode('\r\n'),
+      ]),
+    );
+
+    await expect(collect(_iterSSEMessages(response, new AbortController()))).resolves.toMatchObject([
+      { event: null, data: 'first' },
+      { event: null, data: 'second' },
+    ]);
+  });
+
+  test('only rescans delimiter overlap when receiving one byte at a time', async () => {
+    const findDelimiter = vi.spyOn(lineDecoders, 'findDoubleNewlineIndex');
+    const payload = 'x'.repeat(256);
+    const event = encoder.encode(`data: ${payload}\n\n`);
+    const response = new Response(ReadableStreamFrom(Array.from(event, (byte) => Uint8Array.of(byte))));
+
+    try {
+      await expect(collect(_iterSSEMessages(response, new AbortController()))).resolves.toMatchObject([
+        { event: null, data: payload },
+      ]);
+
+      expect(findDelimiter).toHaveBeenCalled();
+      const scannedBytes = findDelimiter.mock.calls.reduce((total, [buffer]) => total + buffer.byteLength, 0);
+      expect(scannedBytes).toBeLessThan(event.byteLength * 5);
+    } finally {
+      findDelimiter.mockRestore();
+    }
+  });
+
+  test('copies fragmented SSE data a linear number of times', async () => {
+    const payload = 'x'.repeat(4096);
+    const event = encoder.encode(`data: ${payload}\n\n`);
+    const response = new Response(ReadableStreamFrom(Array.from(event, (byte) => Uint8Array.of(byte))));
+    const copyBytes = vi.spyOn(Uint8Array.prototype, 'set');
+
+    try {
+      await expect(collect(_iterSSEMessages(response, new AbortController()))).resolves.toMatchObject([
+        { event: null, data: payload },
+      ]);
+
+      const copiedBytes = copyBytes.mock.calls.reduce((total, [source]) => total + source.length, 0);
+      expect(copiedBytes).toBeLessThan(event.byteLength * 8);
+    } finally {
+      copyBytes.mockRestore();
+    }
+  });
+
+  test('compacts consumed prefixes without overwriting retained SSE frames', async () => {
+    const firstFrame = encoder.encode('data: first\r\n\r\n');
+    const response = new Response(
+      ReadableStreamFrom([
+        encoder.encode('data: first\r\n\r\ndata: second\r\n\r'),
+        encoder.encode('\n'),
+        encoder.encode('data: third\r\n\r\n'),
+      ]),
+    );
+    const compactBytes = vi.spyOn(Uint8Array.prototype, 'copyWithin');
+    const decodeLines = vi.spyOn(lineDecoders.LineDecoder.prototype, 'decode');
+
+    try {
+      await expect(collect(_iterSSEMessages(response, new AbortController()))).resolves.toMatchObject([
+        { event: null, data: 'first' },
+        { event: null, data: 'second' },
+        { event: null, data: 'third' },
+      ]);
+
+      expect(compactBytes).toHaveBeenCalled();
+      expect(decodeLines.mock.calls[0]?.[0]).toEqual(firstFrame);
+    } finally {
+      decodeLines.mockRestore();
+      compactBytes.mockRestore();
+    }
+  });
+
+  test('does not compact a large live event to reclaim a small consumed prefix', async () => {
+    const payload = 'x'.repeat(4096);
+    const response = new Response(
+      ReadableStreamFrom([encoder.encode(`data: first\n\ndata: ${payload}`), encoder.encode('\n\n')]),
+    );
+    const compactBytes = vi.spyOn(Uint8Array.prototype, 'copyWithin');
+
+    try {
+      await expect(collect(_iterSSEMessages(response, new AbortController()))).resolves.toMatchObject([
+        { event: null, data: 'first' },
+        { event: null, data: payload },
+      ]);
+
+      expect(compactBytes).not.toHaveBeenCalled();
+    } finally {
+      compactBytes.mockRestore();
+    }
+  });
+
   test('ignores an SSE message that ends without its required blank-line delimiter', async () => {
     const response = responseForSSE('data: {"flushed":true}\n');
 
     await expect(collect(_iterSSEMessages(response, new AbortController()))).resolves.toEqual([]);
+  });
+
+  test('ignores an SSE message that ends with only a single carriage return', async () => {
+    const response = responseForSSE('data: {"flushed":true}\r');
+
+    await expect(collect(_iterSSEMessages(response, new AbortController()))).resolves.toEqual([]);
+  });
+
+  test('ignores an SSE message that ends with only a single CRLF line ending', async () => {
+    const response = responseForSSE('data: {"flushed":true}\r\n');
+
+    await expect(collect(_iterSSEMessages(response, new AbortController()))).resolves.toEqual([]);
+  });
+
+  test('emits exactly one SSE message that ends with two carriage returns', async () => {
+    const response = responseForSSE('data: {"flushed":true}\r\r');
+
+    await expect(collect(_iterSSEMessages(response, new AbortController()))).resolves.toMatchObject([
+      { event: null, data: '{"flushed":true}' },
+    ]);
   });
 });

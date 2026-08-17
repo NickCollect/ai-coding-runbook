@@ -533,6 +533,8 @@ impl App {
             /*initial_user_message*/ None,
         );
         self.replace_chat_widget(ChatWidget::new_with_app_event(init));
+        self.chat_widget
+            .note_rendered_width(tui.terminal.last_known_screen_size.width);
         if blocks_direct_input {
             self.chat_widget.set_parent_owned_thread();
         }
@@ -754,6 +756,8 @@ impl App {
             initial_user_message,
         );
         self.replace_chat_widget(ChatWidget::new_with_app_event(init));
+        self.chat_widget
+            .note_rendered_width(tui.terminal.last_known_screen_size.width);
         if started.blocks_direct_input {
             self.mark_primary_thread_parent_owned(started.session.thread_id);
         }
@@ -918,9 +922,9 @@ impl App {
         self.refresh_in_memory_config_from_disk_best_effort("resuming a thread")
             .await;
         let cwd_override = self
-            .harness_overrides
-            .cwd
+            .runtime_working_directory_override
             .as_deref()
+            .or(self.harness_overrides.cwd.as_deref())
             .or_else(|| app_server.remote_cwd_override());
         let resume_cwd_mode = crate::session_resume::effective_resume_cwd_mode(
             self.config.tui_resume_cwd,
@@ -972,7 +976,8 @@ impl App {
                     ));
                     return Ok(AppRunControl::Continue);
                 }
-                Ok(crate::session_resume::ResolveCwdOutcome::Continue(Some(cwd))) => cwd,
+                Ok(crate::session_resume::ResolveCwdOutcome::Continue(Some(cwd)))
+                | Ok(crate::session_resume::ResolveCwdOutcome::ContinueAfterPrompt(cwd)) => cwd,
                 Ok(crate::session_resume::ResolveCwdOutcome::Continue(None)) => current_cwd.clone(),
                 Ok(crate::session_resume::ResolveCwdOutcome::Exit) => {
                     return Ok(AppRunControl::Exit(ExitReason::UserRequested));
@@ -1007,6 +1012,9 @@ impl App {
             self.chat_widget.thread_name(),
             self.chat_widget.rollout_path().as_deref(),
         );
+        if let Some(history_mode) = target_session.history_mode {
+            app_server.remember_thread_history_mode(target_session.thread_id, history_mode);
+        }
         match app_server
             .resume_thread(
                 resume_config.clone(),

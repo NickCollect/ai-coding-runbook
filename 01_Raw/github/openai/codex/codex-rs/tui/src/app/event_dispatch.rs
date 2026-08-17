@@ -10,6 +10,7 @@ use crate::app_server_session::ForkGoalContinuation;
 use crate::config_update::format_config_error;
 use crate::external_agent_config_migration::flow::ExternalAgentConfigMigrationFlowOutcome;
 use crate::pager_overlay::TranscriptHistoryState;
+use crate::session_resume::cwds_differ;
 #[cfg(target_os = "windows")]
 use codex_config::types::WindowsSandboxModeToml;
 
@@ -23,12 +24,53 @@ impl App {
         event: AppEvent,
     ) -> Result<AppRunControl> {
         match event {
+            AppEvent::SkillsListLoaded { ref cwd, .. }
+            | AppEvent::PluginMentionsLoaded { ref cwd, .. }
+                if cwds_differ(cwd, self.config.cwd.as_path()) => {}
             AppEvent::NewSession { name } => {
                 self.start_fresh_session_with_summary_hint(
                     tui, app_server, /*session_start_source*/ None,
                     /*initial_user_message*/ None, name,
                 )
                 .await;
+            }
+            AppEvent::ChangeWorkingDirectory {
+                thread_id,
+                requested_cwd,
+            } => {
+                if self.primary_thread_id != Some(thread_id)
+                    || !self.chat_widget.can_change_working_directory(thread_id)
+                {
+                    self.chat_widget.add_error_message(
+                        "Changing directories requires an idle primary session without queued input."
+                            .to_string(),
+                    );
+                } else if crate::uses_remote_workspace_or_environment(
+                    &self.app_server_target,
+                    self.environment_manager.as_ref(),
+                ) {
+                    self.chat_widget.add_error_message(
+                        "Changing directories is not supported for remote workspaces or remote execution environments."
+                            .to_string(),
+                    );
+                } else {
+                    let cwd = AbsolutePathBuf::resolve_path_against_base(
+                        requested_cwd.as_path(),
+                        self.chat_widget.config_ref().cwd.as_path(),
+                    );
+                    match std::fs::metadata(cwd.as_path()) {
+                        Ok(metadata) if metadata.is_dir() => {
+                            self.change_working_directory(tui, app_server, cwd).await;
+                        }
+                        Ok(_) => self
+                            .chat_widget
+                            .add_error_message(format!("Not a directory: {}", cwd.display())),
+                        Err(error) => self.chat_widget.add_error_message(format!(
+                            "Cannot access directory {}: {error}",
+                            cwd.display()
+                        )),
+                    }
+                }
             }
             AppEvent::StartupThreadStarted { result } => {
                 self.handle_startup_thread_started(app_server, result)
@@ -181,6 +223,9 @@ impl App {
                         );
                     }
                     Ok(ExternalAgentConfigMigrationFlowOutcome::Cancelled) => {}
+                    Ok(ExternalAgentConfigMigrationFlowOutcome::TerminalError(err)) => {
+                        return Err(err.into());
+                    }
                     Err(error_message) => {
                         self.chat_widget.add_error_message(error_message);
                     }
@@ -531,6 +576,61 @@ impl App {
                 }
                 return Ok(self.handle_exit_mode(app_server, mode).await);
             }
+            AppEvent::RunningTaskExit { action, thread_id } => match action {
+                RunningTaskExitAction::RunInBackground => {
+                    return Ok(self.handle_exit_mode(app_server, ExitMode::Immediate).await);
+                }
+                RunningTaskExitAction::CancelTask => {
+                    if self.chat_widget.thread_id() == Some(thread_id)
+                        && self.chat_widget.is_agent_turn_running()
+                        && self.chat_widget.submit_op(AppCommand::interrupt())
+                    {
+                        self.chat_widget.pause_active_goal_for_interrupt();
+                    } else if self.side_threads.contains_key(&thread_id)
+                        && let Err(error) = self
+                            .try_submit_active_thread_op_via_app_server(
+                                app_server,
+                                thread_id,
+                                &AppCommand::interrupt(),
+                            )
+                            .await
+                    {
+                        self.chat_widget
+                            .add_error_message(format!("Failed to interrupt task: {error}"));
+                    }
+                }
+                RunningTaskExitAction::Exit => {
+                    if self.chat_widget.thread_id() == Some(thread_id)
+                        && self.chat_widget.is_active_goal_turn_running()
+                        && let Err(error) = app_server
+                            .thread_goal_set(
+                                thread_id,
+                                /*objective*/ None,
+                                Some(codex_app_server_protocol::ThreadGoalStatus::Paused),
+                                /*token_budget*/ None,
+                            )
+                            .await
+                    {
+                        self.chat_widget
+                            .add_error_message(format!("Failed to pause task goal: {error}"));
+                        return Ok(AppRunControl::Continue);
+                    }
+                    let turn_id = self
+                        .active_turn_id_for_thread(thread_id)
+                        .await
+                        .unwrap_or_default();
+                    match app_server.turn_interrupt(thread_id, turn_id).await {
+                        Ok(()) => {
+                            self.app_event_tx
+                                .send(AppEvent::Exit(ExitMode::ShutdownFirst));
+                        }
+                        Err(error) => {
+                            self.chat_widget
+                                .add_error_message(format!("Failed to interrupt task: {error}"));
+                        }
+                    }
+                }
+            },
             AppEvent::Logout => match app_server.logout_account().await {
                 Ok(()) => {
                     self.show_shutdown_feedback(tui)?;
@@ -599,7 +699,11 @@ impl App {
             AppEvent::AppendMessageHistoryEntry { thread_id, text } => {
                 self.append_message_history_entry(thread_id, text);
             }
-            AppEvent::SyncThreadGitBranch { thread_id, branch } => {
+            AppEvent::SyncThreadGitBranch {
+                thread_id,
+                branch,
+                cwd: _cwd,
+            } => {
                 if let Err(err) = app_server
                     .thread_metadata_update_branch(thread_id, branch)
                     .await
@@ -634,7 +738,10 @@ impl App {
                 self.enqueue_thread_history_entry_response(thread_id, event)
                     .await?;
             }
-            AppEvent::DiffResult(text) => {
+            AppEvent::DiffResult(cwd, text) => {
+                if cwds_differ(&cwd, self.chat_widget.config_ref().cwd.as_path()) {
+                    return Ok(AppRunControl::Continue);
+                }
                 // Clear the in-progress state in the bottom pane
                 self.chat_widget.on_diff_complete();
                 // Enter alternate screen using TUI helper and build pager lines
@@ -707,8 +814,13 @@ impl App {
             AppEvent::RefreshConnectors { force_refetch } => {
                 self.chat_widget.refresh_connectors(force_refetch);
             }
-            AppEvent::FetchConnectorsList { force_refetch } => {
-                self.fetch_connectors_list(app_server, force_refetch);
+            AppEvent::FetchConnectorsList {
+                force_refetch,
+                generation,
+            } => {
+                if generation == self.chat_widget.connector_scope_generation() {
+                    self.fetch_connectors_list(app_server, force_refetch);
+                }
             }
             AppEvent::PluginInstallAuthAdvance { refresh_connectors } => {
                 if refresh_connectors {
@@ -965,7 +1077,7 @@ impl App {
             } => {
                 self.handle_mcp_inventory_result(result, detail, thread_id);
             }
-            AppEvent::SkillsListLoaded { result } => {
+            AppEvent::SkillsListLoaded { result, .. } => {
                 self.handle_skills_list_result(
                     result.map_err(|err| color_eyre::eyre::eyre!(err)),
                     "failed to load skills on startup",
@@ -982,6 +1094,12 @@ impl App {
             }
             AppEvent::RefreshTokenActivity { request_id } => {
                 self.refresh_token_activity(app_server, request_id);
+            }
+            AppEvent::RefreshThreadUsage {
+                thread_id,
+                request_id,
+            } => {
+                self.refresh_thread_usage(app_server, thread_id, request_id);
             }
             AppEvent::RefreshStatusLineWorkspaceHeadline { request_id } => {
                 self.refresh_status_line_workspace_headline(app_server, request_id);
@@ -1208,14 +1326,32 @@ impl App {
                     self.insert_pending_usage_output_if_ready(tui);
                 }
             }
+            AppEvent::ThreadUsageLoaded {
+                thread_id,
+                request_id,
+                result,
+            } => {
+                self.finish_thread_usage_refresh(tui, thread_id, request_id, result)?;
+            }
             AppEvent::CommitPendingUsageOutput => {
                 self.insert_pending_usage_output_if_ready(tui);
             }
             AppEvent::CommitPendingUsageOutputAfterStreamShutdown => {
                 self.insert_pending_usage_output_after_stream_shutdown(tui);
             }
-            AppEvent::ConnectorsLoaded { result, is_final } => {
-                self.chat_widget.on_connectors_loaded(result, is_final);
+            AppEvent::ConnectorsLoaded {
+                thread_id,
+                cwd,
+                generation,
+                result,
+                is_final,
+            } => {
+                if thread_id == self.current_displayed_thread_id()
+                    && cwd.as_path() == self.chat_widget.config_ref().cwd.as_path()
+                    && generation == self.chat_widget.connector_scope_generation()
+                {
+                    self.chat_widget.on_connectors_loaded(result, is_final);
+                }
             }
             AppEvent::UpdateReasoningEffort(effort) => {
                 self.on_update_reasoning_effort(effort.clone());
@@ -1872,7 +2008,7 @@ impl App {
             AppEvent::RefreshPluginMentions => {
                 self.refresh_plugin_mentions(app_server);
             }
-            AppEvent::PluginMentionsLoaded { mut plugins } => {
+            AppEvent::PluginMentionsLoaded { mut plugins, .. } => {
                 if !self.config.features.enabled(Feature::Plugins) {
                     plugins = None;
                 }

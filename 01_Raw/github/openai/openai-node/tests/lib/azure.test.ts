@@ -1,6 +1,7 @@
 import { vi } from 'vitest';
-import { AzureOpenAI, APIUserAbortError } from 'openai';
-import { type Response, RequestInit, RequestInfo } from 'openai/internal/builtin-types';
+import { AzureOpenAI, APIUserAbortError, OpenAIError, toStreamingFile } from 'openai';
+import type { AzureClientOptions } from 'openai';
+import type { RequestInit, RequestInfo, Response } from 'openai/internal/builtin-types';
 
 const defaultFetch = fetch;
 
@@ -20,6 +21,17 @@ describe('instantiate azure client', () => {
 
   afterEach(() => {
     process.env = env;
+  });
+
+  test('exports AzureClientOptions from the package root', () => {
+    const options: AzureClientOptions = {
+      baseURL: 'https://example.com',
+      apiKey: 'My API Key',
+      apiVersion,
+    };
+
+    const client = new AzureOpenAI(options);
+    expect(client.baseURL).toEqual('https://example.com');
   });
 
   describe('defaultHeaders', () => {
@@ -118,13 +130,15 @@ describe('instantiate azure client', () => {
       baseURL: 'http://localhost:5000/',
       apiKey: 'My API Key',
       apiVersion,
-      fetch: (url) => {
-        return Promise.resolve(
-          new Response(JSON.stringify({ url, custom: true }), {
-            headers: { 'Content-Type': 'application/json' },
-          }),
-        );
-      },
+      fetch: (url) =>
+        Promise.resolve(
+          Response.json(
+            { url, custom: true },
+            {
+              headers: { 'Content-Type': 'application/json' },
+            },
+          ),
+        ),
     });
 
     const response = await client.get('/foo');
@@ -136,8 +150,8 @@ describe('instantiate azure client', () => {
       baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
       apiKey: 'My API Key',
       apiVersion,
-      fetch: (...args) => {
-        return new Promise((resolve, reject) =>
+      fetch: (...args) =>
+        new Promise((resolve, reject) =>
           setTimeout(
             () =>
               defaultFetch(...args)
@@ -145,8 +159,7 @@ describe('instantiate azure client', () => {
                 .catch(reject),
             300,
           ),
-        );
-      },
+        ),
     });
 
     const controller = new AbortController();
@@ -154,7 +167,7 @@ describe('instantiate azure client', () => {
 
     const spy = vi.spyOn(client, 'request');
 
-    await expect(client.get('/foo', { signal: controller.signal })).rejects.toThrowError(APIUserAbortError);
+    await expect(client.get('/foo', { signal: controller.signal })).rejects.toThrow(APIUserAbortError);
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
@@ -246,21 +259,103 @@ describe('instantiate azure client', () => {
   });
 
   describe('Azure Active Directory (AD)', () => {
+    describe('browser credential safety', () => {
+      beforeEach(() => {
+        delete process.env['AZURE_OPENAI_API_KEY'];
+        vi.stubGlobal('window', { document: {} });
+        vi.stubGlobal('navigator', {});
+      });
+
+      afterEach(() => {
+        vi.unstubAllGlobals();
+      });
+
+      test('honors explicit browser denial before obtaining credentials or sending requests', () => {
+        const azureADTokenProvider = vi.fn(async () => 'AZURE_ENTRA_BEARER_SECRET');
+        const customFetch = vi.fn();
+        const createClient = () =>
+          new AzureOpenAI({
+            baseURL: 'https://example.com',
+            apiVersion,
+            azureADTokenProvider,
+            dangerouslyAllowBrowser: false,
+            fetch: customFetch,
+          });
+
+        expect(createClient).toThrow(OpenAIError);
+        expect(createClient).toThrow(/running in a browser-like environment/);
+        expect(azureADTokenProvider).not.toHaveBeenCalled();
+        expect(customFetch).not.toHaveBeenCalled();
+      });
+
+      test.each([undefined, true])(
+        'preserves Microsoft Entra browser access when dangerouslyAllowBrowser is %s',
+        async (dangerouslyAllowBrowser) => {
+          const azureADTokenProvider = vi.fn(async () => 'AZURE_ENTRA_BEARER_SECRET');
+          const customFetch = vi.fn(
+            async (_url: RequestInfo, { headers }: RequestInit = {}): Promise<Response> =>
+              new globalThis.Response(JSON.stringify({ ok: true }), { headers: headers ?? [] }),
+          );
+          const client = new AzureOpenAI({
+            baseURL: 'https://example.com',
+            apiVersion,
+            azureADTokenProvider,
+            dangerouslyAllowBrowser,
+            fetch: customFetch,
+          });
+
+          expect(client).toHaveProperty('_options.dangerouslyAllowBrowser', true);
+
+          const response = await client.request({ method: 'get', path: '/foo' }).asResponse();
+
+          expect(response.headers.get('authorization')).toBe('Bearer AZURE_ENTRA_BEARER_SECRET');
+          expect(azureADTokenProvider).toHaveBeenCalledTimes(1);
+          expect(customFetch).toHaveBeenCalledTimes(1);
+        },
+      );
+
+      test('continues to reject static Azure API keys in browsers', () => {
+        const customFetch = vi.fn();
+
+        expect(
+          () =>
+            new AzureOpenAI({
+              baseURL: 'https://example.com',
+              apiVersion,
+              apiKey: 'My API Key',
+              fetch: customFetch,
+            }),
+        ).toThrow(OpenAIError);
+        expect(customFetch).not.toHaveBeenCalled();
+      });
+    });
+
+    test('preserves explicit browser denial outside browser environments', () => {
+      delete process.env['AZURE_OPENAI_API_KEY'];
+
+      const azureADTokenProvider = vi.fn(async () => 'AZURE_ENTRA_BEARER_SECRET');
+      const client = new AzureOpenAI({
+        baseURL: 'https://example.com',
+        apiVersion,
+        azureADTokenProvider,
+        dangerouslyAllowBrowser: false,
+      });
+
+      expect(client).toHaveProperty('_options.dangerouslyAllowBrowser', false);
+      expect(azureADTokenProvider).not.toHaveBeenCalled();
+    });
+
     test('with azureADTokenProvider', async () => {
-      const testFetch = async (url: RequestInfo, { headers }: RequestInit = {}): Promise<Response> => {
-        return new Response(JSON.stringify({ a: 1 }), { headers: headers ?? [] });
-      };
+      const testFetch = async (url: RequestInfo, { headers }: RequestInit = {}): Promise<Response> =>
+        Response.json({ a: 1 }, { headers: headers ?? [] });
       const client = new AzureOpenAI({
         baseURL: 'http://localhost:5000/',
         azureADTokenProvider: async () => 'my token',
         apiVersion,
         fetch: testFetch,
       });
-      expect(
-        (await client.request({ method: 'post', path: 'https://example.com' }).asResponse()).headers.get(
-          'authorization',
-        ),
-      ).toEqual('Bearer my token');
+      const response = await client.request({ method: 'post', path: 'https://example.com' }).asResponse();
+      expect(response.headers.get('authorization')).toEqual('Bearer my token');
     });
 
     test('apiKey and azureADTokenProvider cant be combined', () => {
@@ -289,9 +384,12 @@ describe('instantiate azure client', () => {
             },
           });
         }
-        return new Response(JSON.stringify({}), {
-          headers: headers ?? [],
-        });
+        return Response.json(
+          {},
+          {
+            headers: headers ?? [],
+          },
+        );
       };
       let counter = 0;
       async function azureADTokenProvider() {
@@ -303,23 +401,19 @@ describe('instantiate azure client', () => {
         apiVersion,
         fetch: testFetch,
       });
-      expect(
-        (
-          await client.chat.completions
-            .create({
-              model,
-              messages: [{ role: 'system', content: 'Hello' }],
-            })
-            .asResponse()
-        ).headers.get('authorization'),
-      ).toEqual('Bearer token-1');
+      const response = await client.chat.completions
+        .create({
+          model,
+          messages: [{ role: 'system', content: 'Hello' }],
+        })
+        .asResponse();
+      expect(response.headers.get('authorization')).toEqual('Bearer token-1');
     });
   });
 
   test('uses api-key header when apiKey is provided', async () => {
-    const testFetch = async (url: RequestInfo, { headers }: RequestInit = {}): Promise<Response> => {
-      return new Response(JSON.stringify({ a: 1 }), { headers: headers ?? [] });
-    };
+    const testFetch = async (url: RequestInfo, { headers }: RequestInit = {}): Promise<Response> =>
+      Response.json({ a: 1 }, { headers: headers ?? [] });
     const client = new AzureOpenAI({
       baseURL: 'http://localhost:5000/',
       apiKey: 'My API Key',
@@ -361,11 +455,10 @@ describe('instantiate azure client', () => {
 describe('azure request building', () => {
   const client = new AzureOpenAI({ baseURL: 'https://example.com', apiKey: 'My API Key', apiVersion });
 
-  describe('model to deployment mapping', function () {
-    const testFetch = async (url: RequestInfo): Promise<Response> => {
-      return new Response(JSON.stringify({ url }), { headers: { 'content-type': 'application/json' } });
-    };
-    describe('with client-level deployment', function () {
+  describe('model to deployment mapping', () => {
+    const testFetch = async (url: RequestInfo): Promise<Response> =>
+      Response.json({ url }, { headers: { 'content-type': 'application/json' } });
+    describe('with client-level deployment', () => {
       const client = new AzureOpenAI({
         endpoint: 'https://example.com',
         apiKey: 'My API Key',
@@ -442,15 +535,12 @@ describe('azure request building', () => {
       });
 
       test('handles text to speech', async () => {
-        expect(
-          await (
-            await client.audio.speech.create({
-              model,
-              input: '',
-              voice: 'alloy',
-            })
-          ).json(),
-        ).toMatchObject({
+        const response = await client.audio.speech.create({
+          model,
+          input: '',
+          voice: 'alloy',
+        });
+        expect(await response.json()).toMatchObject({
           url: `https://example.com/openai/deployments/${deployment}/audio/speech?api-version=${apiVersion}`,
         });
       });
@@ -463,6 +553,18 @@ describe('azure request building', () => {
           }),
         ).toMatchObject({
           url: `https://example.com/openai/deployments/${deployment}/images/generations?api-version=${apiVersion}`,
+        });
+      });
+
+      test('uses the client-level deployment for image edits', async () => {
+        expect(
+          await client.images.edit({
+            model: 'request-model',
+            image: new File([], 'image.png'),
+            prompt: 'prompt',
+          }),
+        ).toMatchObject({
+          url: `https://example.com/openai/deployments/${deployment}/images/edits?api-version=${apiVersion}`,
         });
       });
 
@@ -499,7 +601,7 @@ describe('azure request building', () => {
       });
     });
 
-    describe('with no client-level deployment', function () {
+    describe('with no client-level deployment', () => {
       const client = new AzureOpenAI({
         endpoint: 'https://example.com',
         apiKey: 'My API Key',
@@ -569,15 +671,12 @@ describe('azure request building', () => {
       });
 
       test('handles text to speech', async () => {
-        expect(
-          await (
-            await client.audio.speech.create({
-              model: deployment,
-              input: '',
-              voice: 'alloy',
-            })
-          ).json(),
-        ).toMatchObject({
+        const response = await client.audio.speech.create({
+          model: deployment,
+          input: '',
+          voice: 'alloy',
+        });
+        expect(await response.json()).toMatchObject({
           url: `https://example.com/openai/deployments/${deployment}/audio/speech?api-version=${apiVersion}`,
         });
       });
@@ -590,6 +689,87 @@ describe('azure request building', () => {
           }),
         ).toMatchObject({
           url: `https://example.com/openai/deployments/${deployment}/images/generations?api-version=${apiVersion}`,
+        });
+      });
+
+      test('handles image edit', async () => {
+        expect(
+          await client.images.edit({
+            model: deployment,
+            image: new File([], ''),
+            prompt: 'prompt',
+          }),
+        ).toMatchObject({
+          url: `https://example.com/openai/deployments/${deployment}/images/edits?api-version=${apiVersion}`,
+        });
+      });
+
+      test('routes streaming image uploads to the request model deployment', async () => {
+        async function* imageBytes(): AsyncGenerator<Uint8Array> {
+          yield new Uint8Array([1, 2, 3]);
+        }
+
+        expect(
+          await client.images.edit({
+            model: deployment,
+            image: toStreamingFile(imageBytes(), 'image.png', { type: 'image/png' }),
+            prompt: 'prompt',
+          }),
+        ).toMatchObject({
+          url: `https://example.com/openai/deployments/${deployment}/images/edits?api-version=${apiVersion}`,
+        });
+      });
+
+      test('preserves existing request metadata when setting the image deployment', async () => {
+        const buildRequest = vi.spyOn(client, 'buildRequest');
+
+        try {
+          await client.images.edit(
+            { model: deployment, image: new File([], 'image.png'), prompt: 'prompt' },
+            { __metadata: { requestID: 'request_123', model: 'stale-deployment' } },
+          );
+
+          expect(buildRequest).toHaveBeenCalledWith(
+            expect.objectContaining({ __metadata: { requestID: 'request_123', model: deployment } }),
+            expect.objectContaining({ retryCount: 0 }),
+          );
+        } finally {
+          buildRequest.mockRestore();
+        }
+      });
+
+      test('preserves a metadata deployment when the image request omits its model', async () => {
+        expect(
+          await client.images.edit(
+            { image: new File([], 'image.png'), prompt: 'prompt' },
+            { __metadata: { model: deployment } },
+          ),
+        ).toMatchObject({
+          url: `https://example.com/openai/deployments/${deployment}/images/edits?api-version=${apiVersion}`,
+        });
+      });
+
+      test('does not invent a deployment when the image request omits its model', async () => {
+        expect(
+          await client.images.edit({ image: new File([], 'image.png'), prompt: 'prompt' }),
+        ).toMatchObject({
+          url: `https://example.com/openai/images/edits?api-version=${apiVersion}`,
+        });
+      });
+
+      test('does not route a nullable streaming image model to a null deployment', async () => {
+        async function* imageBytes(): AsyncGenerator<Uint8Array> {
+          yield new Uint8Array([1, 2, 3]);
+        }
+
+        expect(
+          await client.images.edit({
+            model: null,
+            image: toStreamingFile(imageBytes(), 'image.png', { type: 'image/png' }),
+            prompt: 'prompt',
+          }),
+        ).toMatchObject({
+          url: `https://example.com/openai/images/edits?api-version=${apiVersion}`,
         });
       });
 
@@ -652,7 +832,7 @@ describe('retries', () => {
           signal?.addEventListener('abort', () => reject(new Error('timed out'))),
         );
       }
-      return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
+      return Response.json({ a: 1 }, { headers: { 'Content-Type': 'application/json' } });
     };
 
     const client = new AzureOpenAI({
@@ -685,7 +865,7 @@ describe('retries', () => {
           },
         });
       }
-      return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
+      return Response.json({ a: 1 }, { headers: { 'Content-Type': 'application/json' } });
     };
 
     const client = new AzureOpenAI({
@@ -717,7 +897,7 @@ describe('retries', () => {
           },
         });
       }
-      return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
+      return Response.json({ a: 1 }, { headers: { 'Content-Type': 'application/json' } });
     };
 
     const client = new AzureOpenAI({

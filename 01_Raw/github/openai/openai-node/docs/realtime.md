@@ -74,13 +74,55 @@ import { OpenAIRealtimeWS } from 'openai/realtime/ws';
 const rt = new OpenAIRealtimeWS({ callID: 'rtc_123456' });
 ```
 
-`model` and `callID` are mutually exclusive. The web `WebSocket` helper supports the same `callID` option.
+To start a transcription-only session, pass `intent: 'transcription'` instead of a model:
+
+```ts
+const rt = new OpenAIRealtimeWS({ intent: 'transcription' });
+```
+
+Azure transcription sessions also use transcription intent. Do not pass a deployment in the connection options; configure the transcription deployment in a `session.update` event after the socket opens:
+
+```ts
+const rt = await OpenAIRealtimeWS.azure(azureClient, { intent: 'transcription' });
+
+rt.socket.on('open', () => {
+  rt.send({
+    type: 'session.update',
+    session: {
+      type: 'transcription',
+      audio: {
+        input: {
+          transcription: { model: 'your-transcription-deployment' },
+        },
+      },
+    },
+  });
+});
+```
+
+`model`, `callID`, and transcription `intent` are mutually exclusive. Azure transcription sessions must not include a `deploymentName`. The web `WebSocket` helper supports the same connection options.
 
 For an Azure Realtime GA call, pass `callID` to the Azure factory instead:
 
 ```ts
 const rt = await OpenAIRealtimeWS.azure(azureClient, { callID: 'rtc_123456' });
 ```
+
+To connect to a deployment that requires an exact WebSocket URL, such as SAP AI Core, provide a `buildRealtimeURL` callback. Both `OpenAIRealtimeWS` and `OpenAIRealtimeWebSocket` accept this option in their constructors, `create()` factories, and Azure factories:
+
+```ts
+import OpenAI from 'openai';
+import { OpenAIRealtimeWS } from 'openai/realtime/ws';
+
+const client = new OpenAI();
+const rt = await OpenAIRealtimeWS.create(client, {
+  model: 'gpt-realtime',
+  buildRealtimeURL: () =>
+    new URL('wss://sap-ai-core.example.com/v2/inference/deployments/my-deployment/realtime'),
+});
+```
+
+The callback receives the client and validated connection target and returns the final `wss:` URL. Exactly one of `model`, `callID`, or transcription `intent` is still required, but the SDK does not add routing parameters such as `model` to the returned URL. Use only a trusted endpoint because connection credentials are sent to it. For native Azure WebSocket connections, the required authentication query parameter is still added before connecting and redacted from the exposed URL afterward.
 
 A full example can be found in [`examples/realtime/websocket.ts`](../examples/realtime/websocket.ts).
 

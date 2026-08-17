@@ -1,7 +1,7 @@
 #!/usr/bin/env -S npm run tsn -- -T
 
 import OpenAI from 'openai';
-import { ChatCompletionMessage, ChatCompletionMessageParam } from 'openai/resources/chat';
+import type { ChatCompletionMessage, ChatCompletionMessageParam } from 'openai/resources/chat';
 
 // gets API Key from environment variable OPENAI_API_KEY
 const openai = new OpenAI();
@@ -43,17 +43,21 @@ const functions: OpenAI.Chat.ChatCompletionCreateParams.Function[] = [
 async function callFunction(function_call: ChatCompletionMessage.FunctionCall): Promise<any> {
   const args = JSON.parse(function_call.arguments!);
   switch (function_call.name) {
-    case 'list':
+    case 'list': {
       return await list(args['genre']);
+    }
 
-    case 'search':
+    case 'search': {
       return await search(args['name']);
+    }
 
-    case 'get':
+    case 'get': {
       return await get(args['id']);
+    }
 
-    default:
+    default: {
       throw new Error('No function found');
+    }
   }
 }
 
@@ -78,7 +82,7 @@ async function main() {
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages,
-      functions: functions,
+      functions,
     });
 
     const message = completion.choices[0]!.message;

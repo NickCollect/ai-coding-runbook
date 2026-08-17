@@ -1,10 +1,17 @@
-(() => {
-  const assert = require('node:assert/strict');
-  const childProcess = require('node:child_process');
-  const fs = require('node:fs');
-  const os = require('node:os');
-  const path = require('node:path');
+import type { Dirent } from 'node:fs';
 
+const packedPackageAssert = require('node:assert/strict');
+const packedPackageChildProcess = require('node:child_process');
+const packedPackageFs = require('node:fs');
+const packedPackageOs = require('node:os');
+const packedPackagePath = require('node:path');
+
+(() => {
+  const assert = packedPackageAssert;
+  const childProcess = packedPackageChildProcess;
+  const fs = packedPackageFs;
+  const os = packedPackageOs;
+  const path = packedPackagePath;
   interface PackageMetadata {
     engines?: {
       node?: string;
@@ -25,18 +32,25 @@
   const dist = path.join(root, 'dist');
   const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'openai-node-packed-'));
   const npmCache = path.join(temporaryDirectory, '.npm-cache');
+  const authExportNames = [
+    'k8sServiceAccountTokenProvider',
+    'azureManagedIdentityTokenProvider',
+    'gcpIDTokenProvider',
+    'OAuthError',
+    'SubjectTokenProviderError',
+  ];
   const run = (command: string, args: string[], options: RunOptions = {}): string =>
     childProcess.execFileSync(command, args, {
       cwd: temporaryDirectory,
-      encoding: 'utf8',
+      encoding: 'utf-8',
       stdio: 'pipe',
       ...options,
     });
   const readPackage = (file: string): PackageMetadata =>
-    JSON.parse(fs.readFileSync(file, 'utf8')) as PackageMetadata;
+    JSON.parse(fs.readFileSync(file, 'utf-8')) as PackageMetadata;
   const findSourceMaps = (directory: string): string[] => {
     const maps: string[] = [];
-    const entries = fs.readdirSync(directory, { withFileTypes: true }) as import('node:fs').Dirent[];
+    const entries = fs.readdirSync(directory, { withFileTypes: true }) as Dirent[];
     for (const entry of entries) {
       const resolved = path.join(directory, entry.name);
       if (entry.isDirectory() && entry.name !== 'node_modules') {
@@ -84,8 +98,13 @@
       [
         "const OpenAI = require('openai');",
         "const { bedrock } = require('openai/providers/bedrock');",
+        "const auth = require('openai/auth');",
         "if (typeof OpenAI !== 'function') throw new Error('CommonJS default export is not constructable');",
         "if (typeof bedrock !== 'function') throw new Error('CommonJS Bedrock export is unavailable');",
+        ...authExportNames.map(
+          (name) =>
+            `if (typeof auth.${name} !== 'function') throw new Error('CommonJS auth export ${name} is unavailable');`,
+        ),
         "new OpenAI({ apiKey: 'test' });",
       ].join('\n'),
     );
@@ -94,8 +113,13 @@
       [
         "import OpenAI from 'openai';",
         "import { bedrock } from 'openai/providers/bedrock';",
+        `import { ${authExportNames.join(', ')} } from 'openai/auth';`,
         "if (typeof OpenAI !== 'function') throw new Error('ESM default export is not constructable');",
         "if (typeof bedrock !== 'function') throw new Error('ESM Bedrock export is unavailable');",
+        ...authExportNames.map(
+          (name) =>
+            `if (typeof ${name} !== 'function') throw new Error('ESM auth export ${name} is unavailable');`,
+        ),
         "new OpenAI({ apiKey: 'test' });",
       ].join('\n'),
     );
@@ -103,13 +127,26 @@
       path.join(temporaryDirectory, 'consumer.ts'),
       [
         "import OpenAI, { AzureOpenAI } from 'openai';",
+        `import { ${authExportNames.join(', ')} } from 'openai/auth';`,
+        "import type { WorkloadIdentity } from 'openai/auth';",
         "import type { ResponsesWS } from 'openai/resources/responses/ws';",
         "import type { ResponsesWS as BetaResponsesWS } from 'openai/resources/beta/responses/ws';",
         "import type { OpenAIRealtimeWS as RealtimeWS } from 'openai/realtime/ws';",
         "import type { OpenAIRealtimeWS as BetaRealtimeWS } from 'openai/beta/realtime/ws';",
         "new OpenAI({ apiKey: 'test', dangerouslyAllowBrowser: true });",
         'void AzureOpenAI;',
+        ...authExportNames.map((name) => `void ${name};`),
+        'void (null as unknown as WorkloadIdentity);',
         'void (null as unknown as ResponsesWS | BetaResponsesWS | RealtimeWS | BetaRealtimeWS);',
+      ].join('\n'),
+    );
+    fs.writeFileSync(
+      path.join(temporaryDirectory, 'consumer.cts'),
+      [
+        `import { ${authExportNames.join(', ')} } from 'openai/auth';`,
+        "import type { WorkloadIdentity } from 'openai/auth';",
+        ...authExportNames.map((name) => `void ${name};`),
+        'void (null as unknown as WorkloadIdentity);',
       ].join('\n'),
     );
     const websocketPeer = path.join(temporaryDirectory, 'websocket-peer.d.ts');
@@ -125,8 +162,10 @@
         '    readonly readyState: number;',
         '    send(data: string | ArrayBufferLike | ArrayBufferView): void;',
         '    close(code?: number, reason?: string): void;',
+        '    terminate(): void;',
         "    on(event: 'message', listener: (data: ArrayBuffer | Uint8Array | Uint8Array[], isBinary: boolean) => void): this;",
         "    on(event: 'error', listener: (error: Error) => void): this;",
+        "    on(event: 'redirect', listener: (url: string, request: { getHeaders(): Record<string, string | string[] | undefined> }) => void): this;",
         '    on(event: string, listener: (...args: unknown[]) => void): this;',
         '    removeListener(event: string, listener: (...args: unknown[]) => void): this;',
         '  }',
@@ -136,7 +175,7 @@
     fs.writeFileSync(
       path.join(temporaryDirectory, 'tsconfig.json'),
       JSON.stringify({
-        files: ['consumer.ts', 'websocket-peer.d.ts'],
+        files: ['consumer.ts', 'consumer.cts', 'websocket-peer.d.ts'],
         compilerOptions: {
           target: 'ES2020',
           lib: ['DOM', 'DOM.Iterable', 'ES2020'],
@@ -146,6 +185,18 @@
           strict: true,
           skipLibCheck: false,
           noEmit: true,
+        },
+      }),
+    );
+    const bundlerConfig = path.join(temporaryDirectory, 'bundler.tsconfig.json');
+    fs.writeFileSync(
+      bundlerConfig,
+      JSON.stringify({
+        extends: './tsconfig.json',
+        files: ['consumer.ts', 'websocket-peer.d.ts'],
+        compilerOptions: {
+          module: 'ESNext',
+          moduleResolution: 'Bundler',
         },
       }),
     );
@@ -182,9 +233,10 @@
     );
 
     const mappedSources = new Map<string, string>();
-    const sourceMaps = findSourceMaps(installedPackageRoot).sort();
+    const sourceMaps = findSourceMaps(installedPackageRoot);
+    sourceMaps.sort();
     for (const mapPath of sourceMaps) {
-      const sourceMap = JSON.parse(fs.readFileSync(mapPath, 'utf8')) as SourceMap;
+      const sourceMap = JSON.parse(fs.readFileSync(mapPath, 'utf-8')) as SourceMap;
       for (const source of sourceMap.sources) {
         const resolvedSource: string = path.resolve(
           path.dirname(mapPath),
@@ -227,10 +279,10 @@
 
     // Zod/AWS helpers require optional peers; Node-only helpers require @types/node.
     // Validate every other mapped source without installing either in this consumer.
-    const browserSafeSources = Array.from(mappedSources.entries())
+    const browserSafeSources = [...mappedSources.entries()]
       .filter(([source]) => !requiresOptionalPeer(source))
-      .map(([, source]) => source)
-      .sort();
+      .map(([, source]) => source);
+    browserSafeSources.sort();
     const sourceNavigationConfig = path.join(temporaryDirectory, 'source-navigation.tsconfig.json');
     fs.writeFileSync(
       sourceNavigationConfig,
@@ -262,6 +314,9 @@
         env: isolatedEnvironment,
       });
     }
+    run(process.execPath, [path.join(root, 'node_modules/typescript/bin/tsc'), '--project', bundlerConfig], {
+      env: isolatedEnvironment,
+    });
 
     run(process.execPath, ['consumer.cjs']);
     run(process.execPath, ['consumer.mjs']);

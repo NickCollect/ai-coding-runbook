@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Castiron. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
@@ -131,6 +131,7 @@ class ResponseCreateParamsBase(TypedDict, total=False):
             "gpt-5.6-terra",
             "gpt-5.6-luna",
             "gpt-5.5",
+            "gpt-5.5-2026-04-23",
             "gpt-5.4",
             "gpt-5.4-mini",
             "gpt-5.4-nano",
@@ -219,10 +220,15 @@ class ResponseCreateParamsBase(TypedDict, total=False):
             "o4-mini-deep-research-2025-06-26",
             "computer-use-preview",
             "computer-use-preview-2025-03-11",
+            "gpt-5.5-pro",
+            "gpt-5.5-pro-2026-04-23",
             "gpt-5-codex",
             "gpt-5-pro",
             "gpt-5-pro-2025-10-06",
             "gpt-5.1-codex-max",
+            "gpt-daybreak-blue-latest",
+            "gpt-daybreak-red-latest",
+            "gpt-5.6-cyber",
         ],
         str,
     ]
@@ -315,7 +321,7 @@ class ResponseCreateParamsBase(TypedDict, total=False):
     [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).
     """
 
-    service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]]
+    service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast", "ultrafast"]]
     """Specifies the processing type used for serving the request.
 
     - If set to 'auto', then the request will be processed with the service tier
@@ -330,6 +336,10 @@ class ResponseCreateParamsBase(TypedDict, total=False):
       Responses or Chat Completions. The response will show `service_tier=priority`
       regardless of if you specify `service_tier=fast` or `priority` in your
       request.
+    - If set to 'ultrafast', then the request will be processed with the
+      access-controlled Ultrafast Processing service tier. This tier is currently
+      available for `gpt-5.6-sol`; a response served through it will show
+      `service_tier=ultrafast`.
     - When not set, the default behavior is 'auto'.
 
     When the `service_tier` parameter is set, the response body will include the
