@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/sdk/python
-fetched_at: 2026-08-10T03:07:42.092381+00:00
+fetched_at: 2026-08-17T02:15:19.058442+00:00
 fetch_method: mintlify_md
 ---
 
@@ -120,6 +120,10 @@ asyncio.run(main())
 
 There is no global async default client. Instantiate `AsyncClient` explicitly, or use `AsyncClient.launch_bridge(...)` as an async context manager, so each event loop owns its own client. Do not mix sync and async clients in the same code path.
 
+Direct `AsyncAgent` class methods require `client=`. Use
+`await client.agents.create(...)` or
+`await AsyncAgent.create(..., client=client)`.
+
 | Sync                      | Async                               |
 | :------------------------ | :---------------------------------- |
 | `CursorClient` / `Client` | `AsyncClient` / `AsyncCursorClient` |
@@ -155,11 +159,27 @@ cloud_agent = Agent.create(
 Cloud agents started by the SDK are filtered out of the default agent list. To
 view them in Cursor Web or a Cursor agent window, click **Filter > Source > SDK**.
 
+### No-repo cloud agents
+
+Cloud agents can run on an empty VM with no repository. Pass `cloud` with an empty `repos` list, or omit `repos` entirely. Omitting `cloud` selects the local runtime instead.
+
+```python
+from cursor_sdk import Agent, CloudAgentOptions
+
+with Agent.create(cloud=CloudAgentOptions(repos=[])) as agent:
+    run = agent.send("Research the top 3 Python testing frameworks and summarize.")
+    print(run.wait().result)
+```
+
+No-repo agents must be enabled for your account or team. Repository-scoped API keys can't create them; use an unrestricted service account key or a user API key instead.
+
 ### Session environment variables
 
 For cloud agents, pass `env_vars` when a run needs short-lived credentials or other values that should live only with that agent.
 
 ```python
+import os
+
 agent = Agent.create(
     model="composer-2.5",
     cloud=CloudAgentOptions(
@@ -177,7 +197,7 @@ For values that should only exist during a single run, pass them on `agent.send(
 
 ### Agent metadata
 
-Attach your own identifiers to a cloud agent when you create it. Metadata can link an agent to a user, tenant, workflow, or ticket in your system, and is read back on `SDKAgentInfo.metadata` from `client.agents.get()` and `client.agents.list()`.
+Attach your own identifiers to a cloud agent when you create it. Metadata can link an agent to a user, tenant, workflow, or ticket in your system, and is read back on `SDKAgentInfo.metadata` from `client.agents.get()` and `client.agents.list()`. These tags are not the in-VM [agent metadata](https://cursor.com/docs/cloud-agent/metadata.md) API, which exposes the current run's id, owner, turn, and workspace from inside the VM.
 
 ```python
 from cursor_sdk import Agent, CloudAgentOptions, CloudRepository
@@ -387,6 +407,7 @@ class Agent:
     ) -> list[AgentMessage]: ...
     def list_artifacts(self) -> list[SDKArtifact]: ...
     def download_artifact(self, path: str) -> bytes: ...
+    def get_usage(self, *, run_id: str | None = None) -> AgentUsage: ...
 
     def archive(self, options: Mapping[str, Any] | None = None) -> None: ...
     def unarchive(self, options: Mapping[str, Any] | None = None) -> None: ...
@@ -403,6 +424,7 @@ class Agent:
 | `list_messages`                    | List message history for the agent.                                                   |
 | `list_artifacts`                   | List files produced by the agent (cloud only; local returns empty).                   |
 | `download_artifact`                | Download a file by path (cloud only; local raises).                                   |
+| `get_usage`                        | Fetch billed token usage and dollar cost for the agent.                               |
 | `archive` / `unarchive` / `delete` | Manage cloud agent lifecycle.                                                         |
 
 Use a context manager for automatic cleanup:
@@ -511,7 +533,7 @@ async with await AsyncClient.launch_bridge(
 
 ### Configuring timeouts and retries
 
-Both clients expose `with_options(...)`, which returns a shallow copy that shares connection settings and overrides defaults:
+Both clients expose `with_options(...)`, which returns a shallow copy that shares connection settings and overrides defaults. Use `timeout` for all requests, or set `unary_timeout` and `stream_timeout` separately. `max_retries` controls client retries:
 
 ```python
 short = client.with_options(timeout=5.0, max_retries=2)
@@ -1075,6 +1097,23 @@ run = await client.agents.get_run(runs.items[0].id)
 
 Use `agent.list_messages()` on an agent handle to read message history. `Agent.messages.list(agent_id)` is a typed-attribute convenience for the same call when you only have an ID.
 
+Use `Agent.get_run(run_id)` or `client.agents.get_run(run_id)` to fetch a run
+without an agent handle. Cancel it with
+`Agent.cancel_run(run_id, agent_id=...)` or
+`client.agents.cancel_run(run_id, agent_id=...)`. The async client methods are
+awaitable and use the same arguments.
+
+`AgentMessage` is distinct from a streamed `SDKMessage`:
+
+```python
+@dataclass(frozen=True)
+class AgentMessage:
+    type: str
+    uuid: str
+    agent_id: str
+    message: Any = None
+```
+
 List endpoints return `ListResult[T]`. Use `.items` and `.next_cursor` directly, iterate the current page with `for item in page`, or iterate all pages with `.auto_paging_iter()`. Async list endpoints return `AsyncListResult[T]`; `async for item in page` walks the current page, and `async for item in page.auto_paging_iter()` walks every page in the result set.
 
 ### SDKAgentInfo
@@ -1189,6 +1228,10 @@ me = await AsyncCursor.me(client=client)
 models = await AsyncCursor.models.list(client=client)
 repositories = await AsyncCursor.repositories.list(client=client)
 ```
+
+`Cursor.me()` returns an `SDKUser` with `api_key_name`, `created_at`, and
+optional `user_id`, `user_email`, `user_first_name`, and `user_last_name`
+fields.
 
 Use `Cursor.models.list()` to discover valid model IDs and per-model parameters before calling `Agent.create()` or `agent.send()`. Parameters are model-specific. Common examples are reasoning effort and Cursor Router's `optimize_for` on `auto-smart`.
 
@@ -1531,16 +1574,16 @@ The Python SDK accepts helper dataclasses and raw dictionaries. Dataclasses use 
 
 ### CloudAgentOptions
 
-| Property                    | Type                                             | Default                                                | Description                                                                                                                                                                |
-| :-------------------------- | :----------------------------------------------- | :----------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `env`                       | `CloudEnvironment \| Mapping[str, Any]`          | `None`                                                 | Execution environment. When omitted, the server uses Cursor-hosted cloud VMs. `pool` and `machine` target self-hosted workers you run.                                     |
-| `repos`                     | `Sequence[CloudRepository \| Mapping[str, Any]]` | `None`                                                 | Repositories to clone into the VM. Omit both `repos` and `env` for a no-repo agent with an empty workspace. Pass `pr_url` on a repo to attach the agent to an existing PR. |
-| `work_on_current_branch`    | `bool`                                           | `None`                                                 | Push commits to the existing branch instead of a new one. The server treats an omitted value as `False`.                                                                   |
-| `auto_create_pr`            | `bool`                                           | `None`                                                 | Open a PR when the run finishes. The server treats an omitted value as `False`.                                                                                            |
-| `open_as_cursor_github_app` | `bool`                                           | `True` for service-account keys, `False` for user keys | Open PRs as the Cursor GitHub App instead of the API key's owner. The resolved value is echoed on create, get, and list.                                                   |
-| `skip_reviewer_request`     | `bool`                                           | `None`                                                 | Skip requesting the calling user as a reviewer on the PR. The server treats an omitted value as `False`.                                                                   |
-| `env_vars`                  | `Mapping[str, str]`                              | `None`                                                 | Session-scoped environment variables for cloud agents.                                                                                                                     |
-| `metadata`                  | `Mapping[str, str]`                              | `None`                                                 | Caller-owned string tags persisted on the cloud agent. See [Agent metadata](https://cursor.com/docs/sdk/python.md#agent-metadata).                                         |
+| Property                    | Type                                             | Default                                                | Description                                                                                                                                                                                                                    |
+| :-------------------------- | :----------------------------------------------- | :----------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `env`                       | `CloudEnvironment \| Mapping[str, Any]`          | `None`                                                 | Execution environment. When omitted, the server uses Cursor-hosted cloud VMs. `pool` and `machine` target self-hosted workers you run.                                                                                         |
+| `repos`                     | `Sequence[CloudRepository \| Mapping[str, Any]]` | `None`                                                 | Repositories to clone into the VM. Omit or pass `[]` for a [no-repo agent](https://cursor.com/docs/sdk/python.md#no-repo-cloud-agents) with an empty workspace. Pass `pr_url` on a repo to attach the agent to an existing PR. |
+| `work_on_current_branch`    | `bool`                                           | `None`                                                 | Push commits to the existing branch instead of a new one. The server treats an omitted value as `False`.                                                                                                                       |
+| `auto_create_pr`            | `bool`                                           | `None`                                                 | Open a PR when the run finishes. The server treats an omitted value as `False`.                                                                                                                                                |
+| `open_as_cursor_github_app` | `bool`                                           | `True` for service-account keys, `False` for user keys | Open PRs as the Cursor GitHub App instead of the API key's owner. The resolved value is echoed on create, get, and list.                                                                                                       |
+| `skip_reviewer_request`     | `bool`                                           | `None`                                                 | Skip requesting the calling user as a reviewer on the PR. The server treats an omitted value as `False`.                                                                                                                       |
+| `env_vars`                  | `Mapping[str, str]`                              | `None`                                                 | Session-scoped environment variables for cloud agents.                                                                                                                                                                         |
+| `metadata`                  | `Mapping[str, str]`                              | `None`                                                 | Caller-owned string tags persisted on the cloud agent. See [Agent metadata](https://cursor.com/docs/sdk/python.md#agent-metadata).                                                                                             |
 
 ### AgentDefinition
 
@@ -1700,6 +1743,7 @@ class CursorAgentError(Exception):
     details: list[Mapping[str, Any]]
     is_retryable: bool
     cause: BaseException | None
+    proto_error_code: str | None
     request_id: str | None
     headers: Mapping[str, str]
     retry_after: str | None

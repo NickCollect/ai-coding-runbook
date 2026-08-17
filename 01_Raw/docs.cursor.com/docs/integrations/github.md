@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/github
-fetched_at: 2026-08-10T03:07:40.996452+00:00
+fetched_at: 2026-08-17T02:15:18.119154+00:00
 fetch_method: mintlify_md
 ---
 
@@ -78,17 +78,19 @@ The proxy should allow authenticated GitHub API requests from Cursor without blo
 
 If your organization uses GitHub's IP allow list feature to restrict access to your repositories, Cursor can be configured to use a hosted egress proxy with a narrow set of IPs.
 
-Before configuring IP allowlists, contact [hi@cursor.com](mailto:hi@cursor.com) to enable this feature for your team. This is required for either configuration method below.
+The recommended GitHub Apps setting is configured in GitHub. You do not need Cursor to enable it. If you add the git egress proxy IPs yourself instead, contact [hi@cursor.com](mailto:hi@cursor.com) so we can enable git egress proxy for your team. Otherwise git traffic may not come from those addresses.
 
 ### Enable IP allow list configuration for installed GitHub Apps (recommended)
 
 The Cursor GitHub app has the IP list already pre-configured. You can enable the allowlist for installed apps to automatically inherit this list. This is the **recommended approach**, as it allows us to update the list and your organization receives updates automatically.
 
+This inherits the IP list registered on the Cursor GitHub App. It does not allow every client that happens to use those addresses.
+
 To enable this:
 
 1. Go to your organization's Security settings
 2. Navigate to IP allow list settings
-3. Check **"Allow access by GitHub Apps"**
+3. Check **"Enable IP allow list configuration for installed GitHub Apps"**
 
 For detailed instructions, see [GitHub's documentation](https://docs.github.com/en/enterprise-cloud@latest/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/managing-allowed-ip-addresses-for-your-organization#allowing-access-by-github-apps).
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/opentelemetry-export
-fetched_at: 2026-08-10T03:07:40.813792+00:00
+fetched_at: 2026-08-17T02:15:17.947322+00:00
 fetch_method: mintlify_md
 ---
 
@@ -131,6 +131,7 @@ Everything below is on by default for a new destination. Turn individual familie
 - `cursor.cloud_agent.setup`: `started` / `completed` / `failed`
 - `cursor.cloud_agent.artifact`
 - `cursor.cloud_agent.pull_request`: `opened` / `creation_failed`
+- `cursor.cloud_agent.mcp_auth_error`: an MCP server rejected the run's credentials
 
 **Families** (admin toggles; all default on)
 
@@ -182,7 +183,7 @@ Metrics (`cursor.token.usage`, `cursor.tool.calls`, `cursor.cost.usage`) are agg
 3. Left-join other logs on the same `cursor.conversation.id`:
    - `cursor.skill.activated` shows which skills ran
    - `cursor.hook.execution_complete` shows hooks
-   - `cursor.cloud_agent.*` shows setup, pull requests, and artifacts (cloud agents only)
+   - `cursor.cloud_agent.*` shows setup, pull requests, artifacts, and MCP auth failures (cloud agents only)
 4. `cursor.tool.calls` is metric-only, so it has no conversation id. Report org-wide tool rates from the metric. Per-session tool attribution is not on the wire yet.
 
 `cursor.cost.usage` is also metric-only. To rank sessions by cost, approximate from `api.request` token totals and your own rates, or pull spend from the Admin and billing APIs and join on `cursor.usage_event.id` where available.

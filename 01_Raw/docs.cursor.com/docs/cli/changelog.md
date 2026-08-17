@@ -1,12 +1,73 @@
 ---
 source_url: https://cursor.com/docs/cli/changelog
-fetched_at: 2026-07-27T04:31:48.023903+00:00
+fetched_at: 2026-08-17T02:15:17.287166+00:00
 fetch_method: mintlify_md
 ---
 
 # CLI Changelog
 
 The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent --version` to check your installed version, and `agent update` to upgrade in place.
+
+## August 11, 2026 release
+
+### Steering and subagents
+
+- **Steer a running turn, then interrupt.** Pressing Enter while the agent works now sends your queued message into the active run at a safe boundary to steer it, and only interrupts the turn if you press Enter again.
+- **Single-turn runs wait for their subagents.** Headless and single-turn runs drain delegated subagents and include their completion before exiting, instead of cutting off while background shells or dev servers are still running.
+- **Read the full subagent transcript.** Drilling into a subagent shows its complete, ordered transcript, including the prompt, thinking, tool calls, and final response, instead of only tool rows.
+- **Choose the Explore subagent's model.** Set the Explore subagent to the default, disabled, inherit the parent model, or a specific model from `/config`.
+- **Background task follow-ups are back.** Completion follow-ups for finished background tasks fire again in interactive and headless sessions.
+
+### Skills, custom modes, and goals
+
+- **Sticky skills and custom modes.** A skill slash entry attaches once when you press Enter, and Option+Enter invokes a mode-backed skill as a sticky custom mode that stays active until you exit it.
+- **Managed skills can ship Markdown resources.** Managed-skill sync now materializes a skill's nested Markdown files under `~/.cursor/skills-cursor`, so skills that reference extra resources work.
+- **Skill discovery skips hidden directories.** Skill and subagent scans no longer descend into hidden dot-directories, avoiding slow loads from large nested folders.
+- **Durable goals.** `/goal` tracks a durable goal with an active or paused status line, continues the goal across idle and headless runs, and pauses it on Ctrl+C. This is rolling out and gated.
+
+### Models
+
+- **Auto stays pinned in the picker.** Auto is pinned to the top of the `/model` list, matching the IDE.
+- **Editing a model's parameters selects it.** Adjusting parameters in `/model` now selects that model, so pressing Esc leaves your updated choice active.
+- **Headless keeps Max-mode variants.** A headless `--model` selection that requires Max Mode now sends it, so max-context variants are no longer clamped down.
+
+### MCP and plugins
+
+- **Simpler MCP login for known hosts.** Logging into servers like Slack from the `/mcp` pager uses default authentication, avoiding dynamic-client-registration failures.
+- **Plugin hooks run from installed plugins.** Hooks defined by installed plugins, including those loaded with `--plugin-dir`, now execute and refresh when plugins reload.
+- **Secrets stay masked in plugin config.** Plugin configuration forms mask credential-named and secret-typed fields like tokens, API keys, and passwords.
+
+### Terminal and rendering
+
+- **Inline image previews.** Attached and generated images render inline in terminals that support it, with text fallbacks everywhere else.
+- **LaTeX math renders as Unicode.** Math in Markdown renders as terminal-friendly Unicode instead of raw TeX.
+- **Cleaner shell output and transcripts.** Long shell output no longer has zero-width spaces injected into it, so copied paths and tokens stay intact; the working-directory note is hidden when a command runs in the current directory; hidden tool-call groups no longer leave blank lines; and queued "+N more pending" approval previews stack without gaps.
+- **Responsive `@` file palette.** Typing stays responsive in large repositories while the `@` palette computes file suggestions.
+- **Steadier custom status line.** A custom `statusLine` command keeps its throttle during streaming updates and restarts only when the command or working directory changes.
+
+### Approvals and security
+
+- **Timed mode-switch approvals.** Approving a mode switch now uses the pager UI with a 15-second countdown and auto-rejects when left unattended, matching the IDE.
+- **Hardened git commands.** Repository-controlled git configuration, including fsmonitor, hooks, attributes, and external diff programs, no longer runs during the agent's own git operations.
+- **Sandbox read access and git over SSH.** Sandbox policy gains a read-access boundary, and sandboxed git-over-SSH on macOS and Linux routes through the SOCKS proxy so allowlisted remotes work and denied ones fail with a clear error.
+- **Sudo uses your latest input.** Submitting a sudo password now sends exactly what you typed rather than a stale rendered value.
+
+### Reliability and startup
+
+- **Faster startup.** Syntax-highlighting grammars and the background-composer client load lazily off the boot path, and a slow plugin list falls back to a plugin-less session instead of stalling startup.
+- **Long headless sessions no longer hang.** Wedged uploads on long-running headless HTTP/1.1 sessions are detected and retried instead of silently stalling.
+- **Faster resume on network filesystems.** The resume picker scans sessions in parallel and keeps your newest chat selected while the full cross-workspace list loads.
+
+### Self-hosted workers
+
+- **More control over self-hosted workers.** Workers can join a named pool with `agent worker --pool <name>`, default to releasing after an hour idle (`--idle-release-timeout 0` keeps them running), start from a non-git directory with `--worker-dir`, take a data-directory lock to prevent duplicate daemons, and run session-start and session-end hooks on claim and release.
+
+### Enterprise and install
+
+- **Admin command denylist enforced in the CLI.** A team admin's command denylist is enforced in local shell execution and refreshed per request, with a killswitch. Admin-controlled.
+- **MDM sign-in policy.** CLI login sends and enforces MDM sign-in policy, including organization, team, email, and domain allowlists, and reports enforcement denials. Admin-controlled.
+- **Windows uninstall can remove your data.** The Windows uninstaller can optionally delete Cursor user data, including the `~/.cursor` folder that stores CLI credentials.
+- **Resilient install script.** The install script falls back to wget or python3 when curl is broken.
 
 ## July 20, 2026 release
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/setup
-fetched_at: 2026-08-10T03:07:40.552540+00:00
+fetched_at: 2026-08-17T02:15:17.737867+00:00
 fetch_method: mintlify_md
 ---
 
@@ -119,6 +119,8 @@ The install script was previously called the update script in the dashboard and 
 Cursor runs the install script (`install` in `environment.json`) when it creates a [Build](https://cursor.com/docs/cloud-agent/builds.md). The script completes in the background instead of delaying each agent start.
 
 Use `install` for work Cursor can prepare ahead of time. Examples include installing dependencies, generating code, compiling artifacts, and warming disk caches.
+
+Install scripts can read [agent metadata](https://cursor.com/docs/cloud-agent/metadata.md) and mint [OIDC tokens](https://cursor.com/docs/cloud-agent/identity.md) from the same local socket the agent uses.
 
 ### Install script idempotency
 

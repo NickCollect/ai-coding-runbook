@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/opentelemetry-export/wire
-fetched_at: 2026-08-10T03:07:40.839398+00:00
+fetched_at: 2026-08-17T02:15:18.099462+00:00
 fetch_method: mintlify_md
 ---
 
@@ -37,12 +37,12 @@ One resource per (team, user, surface, entrypoint, surface version) grouping.
 
 Family ids match the toggles in Team Settings. All default on for a new destination.
 
-| Family id              | Signals        | Covers                                                                    |
-| ---------------------- | -------------- | ------------------------------------------------------------------------- |
-| `model_usage`          | metrics + logs | `token.usage`, `cost.usage`; `api.request`, `api.error`, `api.correction` |
-| `tool_calls`           | metrics        | `tool.calls`                                                              |
-| `skills_hooks_plugins` | logs           | `skill.activated`, `hook.execution_complete`, `plugin.installed`          |
-| `cloud_agents`         | logs           | `cloud_agent.pull_request`, `cloud_agent.setup`, `cloud_agent.artifact`   |
+| Family id              | Signals        | Covers                                                                                                |
+| ---------------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
+| `model_usage`          | metrics + logs | `token.usage`, `cost.usage`; `api.request`, `api.error`, `api.correction`                             |
+| `tool_calls`           | metrics        | `tool.calls`                                                                                          |
+| `skills_hooks_plugins` | logs           | `skill.activated`, `hook.execution_complete`, `plugin.installed`                                      |
+| `cloud_agents`         | logs           | `cloud_agent.pull_request`, `cloud_agent.setup`, `cloud_agent.artifact`, `cloud_agent.mcp_auth_error` |
 
 ## Metrics
 
@@ -186,6 +186,16 @@ INFO, body `cloud_agent_artifact_created`. Family `cloud_agents`. `conversation.
 | ------------------------------------------ | ------ | -------- | -------------- |
 | `cursor.cloud_agent.artifact.file_name`    | string | Always   | Open           |
 | `cursor.cloud_agent.artifact.content_type` | string | Optional | MIME           |
+
+### `cursor.cloud_agent.mcp_auth_error`
+
+ERROR, body `cloud_agent_mcp_auth_error`. Family `cloud_agents`. `conversation.id` = `bc-...`.
+
+An MCP server you connected rejected the run's credentials. That server's tool calls failed while the run continued. ERROR because only you can fix the integration; alert on this to catch Automations and Cloud Agents silently losing an MCP server.
+
+| Attribute                | Type   | Presence | Values / notes                                                                                                               |
+| ------------------------ | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `cursor.mcp.server.name` | string | Always   | Customer-defined server display name (open), e.g. `github`. Same value space as the `cursor.tool.calls` datapoint attribute. |
 
 ## Identity and joins
 

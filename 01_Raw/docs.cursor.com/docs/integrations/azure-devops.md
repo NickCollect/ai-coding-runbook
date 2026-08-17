@@ -1,23 +1,23 @@
 ---
 source_url: https://cursor.com/docs/integrations/azure-devops
-fetched_at: 2026-07-06T05:04:27.881873+00:00
+fetched_at: 2026-08-17T02:15:18.076664+00:00
 fetch_method: mintlify_md
 ---
 
 # Azure DevOps
 
-The Azure DevOps integration connects Azure DevOps Services repositories so Cursor can clone your code, work on branches, and open pull requests from [Cloud Agents](https://cursor.com/docs/cloud-agent.md).
+The Azure DevOps integration connects Azure DevOps Services repositories to [Cloud Agents](https://cursor.com/docs/cloud-agent.md) and [Bugbot](https://cursor.com/docs/bugbot.md).
 
 The Azure DevOps integration is in public beta. It supports Azure DevOps Services at `dev.azure.com`. Azure DevOps Server is not supported.
 
 ## Supported features
 
-Azure DevOps works with [Cloud Agents](https://cursor.com/docs/cloud-agent.md) only. Cloud Agents can clone your code, work on branches, and open pull requests.
+Cloud Agents clone your code, work on branches, and open pull requests. Bugbot reviews pull requests and posts its findings as comments.
 
 The following features don't support Azure DevOps yet:
 
 - [Automations](https://cursor.com/docs/cloud-agent/automations.md)
-- [Bugbot](https://cursor.com/docs/bugbot.md) and Bugbot autofix
+- [Bugbot autofix](https://cursor.com/docs/bugbot.md#autofix)
 - [Security Agents](https://cursor.com/docs/security-agents.md), including Security Reviewer and Vulnerability Scanner
 
 These features work with [GitHub](https://cursor.com/docs/integrations/github.md) today. Azure DevOps support is on the roadmap.
@@ -34,6 +34,71 @@ Requires access to the Azure DevOps organizations and repositories you want to u
 6. Configure Cloud Agents on the repositories you want Cursor to use
 
 To disconnect your Azure DevOps account, return to the integrations dashboard and click **Disconnect Account**.
+
+## Set up Bugbot
+
+Bugbot on Azure DevOps is in limited availability. Setup needs a Microsoft Entra ID administrator to grant tenant admin consent, and we walk you through that step. [Contact us](https://cursor.com/contact-sales?source=docs-bugbot-azure-devops) to get started.
+
+Bugbot reviews Azure DevOps pull requests under a Microsoft Entra service principal that Cursor provisions in your tenant. That service principal installs the service hooks Bugbot listens to, reads pull request diffs, and posts review comments and build statuses. Setup runs once per Azure DevOps organization.
+
+Bugbot on Azure DevOps works on team repositories. Personal-scope repositories aren't supported.
+
+### Grant Microsoft Entra admin consent
+
+Requires a Microsoft Entra ID administrator holding the Global Administrator, Application Administrator, or Cloud Application Administrator role. Consent applies to the whole tenant, so a repository administrator alone can't complete it.
+
+1. Connect Azure DevOps from [Integrations in the dashboard](https://cursor.com/dashboard/integrations) while signed in as an administrator of the Azure DevOps organization
+2. Ask your Entra administrator to grant admin consent for the Cursor application in your tenant
+3. Tell your Cursor contact once consent is granted
+
+Cursor asks for access to the Azure DevOps API, plus the standard sign-in scopes. It asks for no Microsoft Graph data. Your tenant keeps the service principal, and you can revoke it in Entra at any time.
+
+Azure DevOps organizations backed by a personal Microsoft account can't host the service principal. Connect the organization to Microsoft Entra ID first.
+
+### Give the service principal access to your organization
+
+After consent, Cursor adds the service principal to your Azure DevOps organization and requests a Basic access level for it. Both happen automatically, using the administrator account that connected Azure DevOps. The service principal then appears under **Organization settings** → **Users**.
+
+Three things can stop that:
+
+- **The connected account can't add users to the organization.** Reconnect Azure DevOps as an administrator of the organization.
+- **No Basic access level is available.** Free a Basic seat, or assign one to the service principal under **Organization settings** → **Users**.
+- **The service principal can't read the repository.** Grant it Read permission on that repository under **Project settings** → **Repositories** → **Security**.
+
+### Enable Bugbot on repositories
+
+1. Open [Bugbot in Automations](https://cursor.com/automations/from-cursor/bugbot)
+2. Find your Azure DevOps repositories in the installations list
+3. Turn Bugbot on for each repository you want reviewed
+
+Bugbot installs its service hooks when you turn a repository on, and removes them when you turn it off. Turning Bugbot off for a repository, or disconnecting Azure DevOps, stops reviews for that repository right away.
+
+### How reviews are triggered
+
+Bugbot reviews each pull request as it opens and updates. Someone can also ask for a review on demand by commenting `cursor review` or `bugbot run`.
+
+Comment triggers have one Azure DevOps limit. They work for people whose Azure DevOps sign-in address matches a Cursor account in the team that owns the repository. A comment from anyone else is ignored without a reply. Automatic reviews carry no such limit, and they cover every author.
+
+### Filter which authors get reviewed
+
+Bugbot reviews every author by default. To narrow that, turn off **Run for All Authors** in the repository's Bugbot settings, then pick **Only Review PRs by...** or **Skip PRs by...**.
+
+That list takes **Azure DevOps sign-in addresses**, not usernames, and the field is labeled that way. A sign-in address looks like `taylor@contoso.com`, and it's the value your organization administrator reads under **Organization settings** → **Users**. A username matches nobody, so Bugbot stays quiet for that author.
+
+### Differences from other providers
+
+Repository settings and repository rules work on Azure DevOps. These don't:
+
+- **Auto-Enable for New Repositories.** Turn Bugbot on for each new repository yourself.
+- **Automatically Learn Rules.** Repository rules you write by hand still apply.
+- **Personal Bugbot settings.** Repository settings apply to everyone instead.
+- **Autofix.** Bugbot reports its findings without opening fix commits.
+
+### Build statuses and branch policies
+
+Bugbot posts a build status on each reviewed pull request under the context `cursor-bugbot/review`. See [CI check statuses](https://cursor.com/docs/bugbot.md#ci-check-statuses) for what each conclusion means.
+
+If you make that context a required status branch policy, set the policy's **Reset conditions** to **Reset status whenever there are new changes**. Without it, a status from an earlier push keeps satisfying the policy after new commits land.
 
 ## Repository URLs
 
@@ -57,6 +122,14 @@ Cursor connects to Azure DevOps through Microsoft Entra OAuth. The connection le
 | **Code repositories**          | Clone repositories and create working branches                                 |
 | **Pull requests**              | Open, update, and merge pull requests created by Cloud Agents                  |
 
+Bugbot adds a second identity. Cursor provisions a Microsoft Entra service principal in your tenant and uses it for every Bugbot action, so reviews keep running when the person who set the integration up changes roles or leaves.
+
+| Action                                                                     | Azure DevOps identity           |
+| -------------------------------------------------------------------------- | ------------------------------- |
+| Bugbot review comments, inline comments, and build statuses                | Cursor service principal        |
+| Bugbot service hook installation and removal                               | Cursor service principal        |
+| Git clone, branch push, commits, and pull request creation by Cloud Agents | The connected Azure DevOps user |
+
 ## Troubleshooting
 
 ### I don't see my Azure DevOps repository
@@ -75,10 +148,32 @@ Cursor connects to Azure DevOps through Microsoft Entra OAuth. The connection le
 
 Use the `dev.azure.com` repository URL from Azure DevOps. Cursor does not accept Azure DevOps Server URLs for this integration.
 
+### Bugbot doesn't review my pull requests
+
+- Confirm the repository is turned on in [Bugbot in Automations](https://cursor.com/automations/from-cursor/bugbot).
+- Confirm the repository belongs to a Cursor team. Bugbot on Azure DevOps doesn't review personal-scope repositories.
+- Confirm the Cursor service principal can read the repository under **Project settings** → **Repositories** → **Security**.
+- If you filter authors, confirm the pull request author is listed by Azure DevOps sign-in address rather than username.
+
+### Commenting on a pull request doesn't trigger a review
+
+A comment trigger works only when your Azure DevOps sign-in address matches a Cursor account in the team that owns the repository. Two addresses that belong to the same person still count as two people here.
+
+Check the sign-in address on your Azure DevOps profile against the email on your Cursor account, and have a team admin invite that address if it's missing. Automatic reviews keep running either way.
+
+### Bugbot ignores my personal settings
+
+Personal Bugbot settings don't apply to Azure DevOps repositories yet. Repository settings do. Set the behavior you want at the repository level in [Bugbot in Automations](https://cursor.com/automations/from-cursor/bugbot).
+
+### A required Bugbot status stays green after a new push
+
+Open the branch policy for the `cursor-bugbot/review` status and set **Reset conditions** to **Reset status whenever there are new changes**. Azure DevOps keeps the earlier status otherwise, so the policy passes on commits Bugbot hasn't reviewed.
+
 ## Next steps
 
 Once your Azure DevOps integration is connected, configure the features that use it:
 
+- [Bugbot](https://cursor.com/docs/bugbot.md) - automated PR reviews that catch bugs and security issues
 - [Cloud Agents](https://cursor.com/docs/cloud-agent.md) - AI agents that run in the cloud on your repositories
 - [Cloud Agent setup](https://cursor.com/docs/cloud-agent/setup.md) - saved environments, multi-repo setup, secrets, and Dockerfiles
 

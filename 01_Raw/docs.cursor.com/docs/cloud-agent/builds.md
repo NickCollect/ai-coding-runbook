@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/builds
-fetched_at: 2026-08-10T03:07:40.355034+00:00
+fetched_at: 2026-08-17T02:15:17.567325+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,7 +35,7 @@ A Build is a bootable snapshot of a prepared Cloud Agent environment. Cursor cre
 
 Each Build follows this lifecycle:
 
-1. **Trigger**: A Build starts on a schedule, after you save an environment version, from a manual request, or at an agent's request.
+1. **Trigger**: A Build starts on a schedule, after you save an environment version, from a manual request, or at an agent's request. See [When Builds occur](https://cursor.com/docs/cloud-agent/builds.md#when-builds-occur).
 2. **Prepare**: Cursor starts from your base image, clones every repository in the environment at its default branch, and runs the `install` command to completion.
 3. **Snapshot**: Cursor saves the machine's disk state with the environment version and exact commit SHA for each repository.
 4. **Activate**: A successful Build becomes active.
@@ -44,6 +44,29 @@ Each Build follows this lifecycle:
 Cursor keeps pre-warmed copies of active Builds ready. This removes repository cloning and dependency installation from the agent startup path.
 
 If a new Build fails, agents continue to use the last successful Build. A broken dependency update, install command, or Dockerfile doesn't replace the active environment.
+
+## When Builds occur
+
+Cursor starts a Build for four reasons. The Builds tab labels each one with its trigger type.
+
+| Trigger              | When it runs                                                            |
+| :------------------- | :---------------------------------------------------------------------- |
+| Recurring            | On a regular schedule for every environment with Builds enabled         |
+| Configuration change | When you save the environment configuration or change its secrets       |
+| Manual               | When you select **Trigger build** (or **Test build**) in the Builds tab |
+| Agent-requested      | When an agent runs a test Build, for example during environment setup   |
+
+### Recurring Builds
+
+Cursor regularly checks each environment with Builds enabled and rebuilds it when something changed. This keeps the active Build close to the head of each repository's default branch, so agents start with fresh code and warm dependency caches instead of pulling and reinstalling at startup.
+
+### Skipped Builds
+
+A recurring check skips the Build when nothing changed since the last completed one: no new commits on the default branch of any repository in the environment, and no configuration or secret changes. The Builds tab records these checks with a **Skipped** status. They complete in seconds, run no install commands, and leave the active Build in place.
+
+A steady stream of Recurring entries mixing Skipped and Success statuses is the expected state for a healthy environment. Quiet repositories produce mostly Skipped entries. Active repositories rebuild more often.
+
+Cursor only skips recurring Builds. Manual, agent-requested, and configuration-change Builds always run.
 
 ## What runs during a Build and an agent start
 

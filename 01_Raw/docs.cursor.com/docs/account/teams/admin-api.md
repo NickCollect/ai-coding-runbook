@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/admin-api
-fetched_at: 2026-08-10T03:07:39.543914+00:00
+fetched_at: 2026-08-17T02:15:17.002316+00:00
 fetch_method: mintlify_md
 ---
 
@@ -478,7 +478,7 @@ Retrieve detailed usage events for your team with filtering, search, and paginat
 
 **Cost Calculation**: To reconcile event-level costs with `/teams/spend` totals, sum the `chargedCents` field across events. This field includes both the model cost and the Cursor Token Rate when a request is eligible for the rate, matching the dashboard totals. It works for both token-based and request-based billing plans.
 
-The `cursorTokenFee` field represents the Cursor Token Rate and is only present when the rate applies to a third-party model request. This includes when Auto Balance or Auto Intelligence routes to a third-party model. Auto Cost, first-party Cursor models such as Composer 2.5 and Grok 4.5, and request-based enterprise accounts do not include this fee.
+The `cursorTokenFee` field represents the Cursor Token Rate and is only present when the rate applies to a third-party model request. This includes when Auto Balance or Auto Intelligence routes to a third-party model. Auto Cost, first-party Cursor models such as Composer 2.5, Grok 4.6, and Grok 4.5, and request-based enterprise accounts do not include this fee.
 
 #### Parameters
 
@@ -1386,17 +1386,19 @@ curl -X DELETE https://api.cursor.com/teams/groups/group_PDSPmvukpYgZEDXsoNirw3C
 
 Model access routes are in preview and may change. Paths, response fields, and error behavior can shift before general availability.
 
-Read and update the team's [model access](https://cursor.com/docs/enterprise/model-and-integration-management.md#model-access-control) policy: whether a custom policy is on, defaults for new providers and models, and per-provider / per-model toggles.
+Read and update the team's [model access](https://cursor.com/docs/enterprise/model-and-integration-management.md#model-access-control) policy: whether a custom policy is on, defaults for new providers and models, per-provider / per-model toggles, and per-model settings such as Fast and reasoning effort.
 
-These routes return the **team baseline**. Organization Groups can still widen access for some members; group allowlists are not part of this API. Effort, reasoning, and personal API key (BYOK) controls stay in the dashboard.
+Enabling a model without parameter settings leaves it on the catalog defaults. Use per-model settings when those defaults, such as Fast, do not match your team's policy.
+
+These routes return the **team baseline**. Organization Groups can still widen access for some members; group allowlists are not part of this API. Personal API key (BYOK) controls stay in the dashboard.
 
 For org-wide reads and bulk toggles across linked teams, see the [Organization API model access](https://cursor.com/docs/account/organizations/organization-admin-api.md#model-access) routes.
 
 - **Availability**: Teams with model access control enabled
-- **Authentication**: Team API key (Basic auth) with the **`admin:*`** scope.
+- **Authentication**: Team API key (Basic auth). Reads require **`models:read`**. Writes require **`models:*`**. Keys with **`admin:*`** work for both. Generic **`read:*`** keys cannot call these routes.
 - **Provider and model IDs**: Path segments are catalog ids such as `anthropic` and `claude-opus-4-6`, not display names. GET responses include display names.
-- **Configuration first**: Provider and model writes return **409** while `state` is `unrestricted` (or `legacy`). The first `PUT /teams/model-access/configuration` on an unrestricted team turns policy on and seeds the current catalog (same idea as the first save on the Models page). Later configuration PUTs update defaults only and leave existing toggles in place.
-- **Clearing policy**: There is no API to clear a team back to unrestricted. Use the dashboard if you need that.
+- **Configuration first**: Provider and model reads and writes return **409** while `state` is `unrestricted` (or `legacy`). The first `PUT /teams/model-access/configuration` with defaults on an unrestricted team turns policy on and seeds the current catalog (same idea as the first save on the Models page). Later configuration PUTs with defaults update defaults only and leave existing toggles in place.
+- **Return to unrestricted**: `PUT /teams/model-access/configuration` with `{ "state": "unrestricted" }` clears the custom policy so `state` becomes `unrestricted` again.
 - **Rate limits**: 20 requests per minute. Writes appear in team audit logs as `team_settings` events. See [rate limits and best practices](https://cursor.com/docs/api.md#rate-limits).
 
 ### Get Model Access Configuration
@@ -1443,17 +1445,28 @@ curl -X GET https://api.cursor.com/teams/model-access/configuration \
 
 /teams/model-access/configuration
 
-Set defaults for new providers and models. The first call on an unrestricted team creates a custom policy and seeds catalog entries. Later calls update defaults only and leave existing toggles in place.
+Create a custom policy, update defaults, or return the team to unrestricted.
+
+Send either:
+
+- `{ "state": "unrestricted" }` to clear the custom policy (and legacy allowed/blocked lists) so `state` becomes `unrestricted`
+- `{ "newProviderDefault", "newModelDefault" }` to create or update a custom policy (backward-compatible shorthand for `state: "custom"`)
+
+The first defaults PUT on an unrestricted team creates a custom policy and seeds catalog entries. Later defaults PUTs update defaults only and leave existing toggles in place.
 
 #### Request body
 
-`newProviderDefault` string Required
+`state` string
 
-`enabled` or `disabled`.
+Optional. Use `unrestricted` to clear policy. Omit when sending defaults.
 
-`newModelDefault` string Required
+`newProviderDefault` string
 
-`enabled` or `disabled`.
+`enabled` or `disabled`. Required when creating or updating a custom policy; omit when `state` is `unrestricted`.
+
+`newModelDefault` string
+
+`enabled` or `disabled`. Required when creating or updating a custom policy; omit when `state` is `unrestricted`.
 
 ```bash
 curl -X PUT https://api.cursor.com/teams/model-access/configuration \
@@ -1476,11 +1489,59 @@ curl -X PUT https://api.cursor.com/teams/model-access/configuration \
 }
 ```
 
+Return the team to unrestricted:
+
+```bash
+curl -X PUT https://api.cursor.com/teams/model-access/configuration \
+  -u YOUR_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{ "state": "unrestricted" }'
+```
+
+**Response:**
+
+```json
+{
+  "teamId": 7,
+  "state": "unrestricted",
+  "newProviderDefault": null,
+  "newModelDefault": null
+}
+```
+
 ### List Model Access Providers
 
 /teams/model-access/providers
 
-List catalog providers and models with resolved enabled flags. When `state` is not `custom`, `providers` is an empty array.
+List catalog providers and models with resolved enabled flags and per-model `parameters`. Returns **409** when the team does not have a custom policy.
+
+Each model includes a catalog-driven `parameters` array. Parameter ids and supported values come from the model catalog (for example `fast`, `reasoning`, `effort`, `context`). Use this GET to discover which parameters a model supports before writing.
+
+#### Model `parameters` fields
+
+`id` string
+
+Parameter id (for example `fast` or `reasoning`).
+
+`displayName` string
+
+Human-readable label.
+
+`supportedValues` string\[]
+
+All values the catalog allows for this parameter on this model.
+
+`allowedValues` string\[]
+
+Values currently allowed by the team policy.
+
+`configuredDefaultValue` string | null
+
+Admin-pinned default, or `null` when unset.
+
+`catalogDefaultValue` string | null
+
+Catalog default for the parameter on this model.
 
 ```bash
 curl -X GET https://api.cursor.com/teams/model-access/providers \
@@ -1500,14 +1561,19 @@ curl -X GET https://api.cursor.com/teams/model-access/providers \
       "enabled": true,
       "models": [
         {
-          "id": "claude-sonnet-4-6",
-          "displayName": "Sonnet 4.6",
-          "enabled": true
-        },
-        {
           "id": "claude-opus-4-6",
           "displayName": "Opus 4.6",
-          "enabled": false
+          "enabled": true,
+          "parameters": [
+            {
+              "id": "fast",
+              "displayName": "Fast",
+              "supportedValues": ["false", "true"],
+              "allowedValues": ["false", "true"],
+              "configuredDefaultValue": null,
+              "catalogDefaultValue": "true"
+            }
+          ]
         }
       ]
     },
@@ -1519,7 +1585,17 @@ curl -X GET https://api.cursor.com/teams/model-access/providers \
         {
           "id": "gpt-5.4",
           "displayName": "GPT-5.4",
-          "enabled": true
+          "enabled": true,
+          "parameters": [
+            {
+              "id": "reasoning",
+              "displayName": "Reasoning",
+              "supportedValues": ["low", "medium", "high", "xhigh", "max"],
+              "allowedValues": ["low", "medium", "high"],
+              "configuredDefaultValue": "high",
+              "catalogDefaultValue": "medium"
+            }
+          ]
         }
       ]
     }
@@ -1554,7 +1630,7 @@ curl -X PUT https://api.cursor.com/teams/model-access/providers/openai \
 
 /teams/model-access/providers/:provider/models
 
-List models for one provider with resolved enabled flags. Returns **409** when the team does not have a custom policy.
+List models for one provider with resolved enabled flags and per-model `parameters`. The parameter fields match the [providers response](https://cursor.com/docs/account/teams/admin-api.md#list-model-access-providers). Returns **409** when the team does not have a custom policy.
 
 #### Parameters
 
@@ -1571,7 +1647,7 @@ curl -X GET https://api.cursor.com/teams/model-access/providers/anthropic/models
 
 /teams/model-access/providers/:provider/models/:model
 
-Enable or disable a single model. Returns **409** when the team is still `unrestricted` or `legacy`.
+Enable or disable a single model, and optionally set per-model parameter restrictions and defaults. Returns **409** when the team is still `unrestricted` or `legacy`.
 
 #### Parameters
 
@@ -1587,21 +1663,81 @@ Catalog model id (for example `claude-opus-4-6`).
 
 `enabled` boolean Required
 
+`parameters` object
+
+Optional map from parameter id to settings. Omitted parameters and fields are left unchanged.
+
+- `allowedValues` string\[] | null: Restrict which values members may pick. Pass `null` to clear the restriction.
+- `defaultValue` string | null: Default value for the team. Must be within `allowedValues` when a restriction is set. Pass `null` to restore the catalog default.
+
+Unknown parameter ids or values, empty `allowedValues` arrays, defaults outside `allowedValues`, and settings that resolve to no valid model variant return **400**.
+
+Disable Fast on a model:
+
 ```bash
 curl -X PUT https://api.cursor.com/teams/model-access/providers/anthropic/models/claude-opus-4-6 \
   -u YOUR_API_KEY: \
   -H "Content-Type: application/json" \
-  -d '{"enabled": false}'
+  -d '{
+    "enabled": true,
+    "parameters": {
+      "fast": { "allowedValues": ["false"] }
+    }
+  }'
+```
+
+Set allowed reasoning levels and a default:
+
+```bash
+curl -X PUT https://api.cursor.com/teams/model-access/providers/openai/models/gpt-5.4 \
+  -u YOUR_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{
+    "enabled": true,
+    "parameters": {
+      "reasoning": {
+        "allowedValues": ["low", "medium", "high"],
+        "defaultValue": "high"
+      }
+    }
+  }'
+```
+
+Clear a restriction and restore the catalog default:
+
+```bash
+curl -X PUT https://api.cursor.com/teams/model-access/providers/openai/models/gpt-5.4 \
+  -u YOUR_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{
+    "enabled": true,
+    "parameters": {
+      "reasoning": {
+        "allowedValues": null,
+        "defaultValue": null
+      }
+    }
+  }'
 ```
 
 **Response:**
 
 ```json
 {
-  "id": "claude-opus-4-6",
-  "displayName": "Opus 4.6",
-  "enabled": false,
-  "provider": "anthropic"
+  "id": "gpt-5.4",
+  "displayName": "GPT-5.4",
+  "enabled": true,
+  "provider": "openai",
+  "parameters": [
+    {
+      "id": "reasoning",
+      "displayName": "Reasoning",
+      "supportedValues": ["low", "medium", "high", "xhigh", "max"],
+      "allowedValues": ["low", "medium", "high", "xhigh", "max"],
+      "configuredDefaultValue": null,
+      "catalogDefaultValue": "medium"
+    }
+  ]
 }
 ```
 
@@ -1613,12 +1749,12 @@ Error bodies use:
 { "code": "error", "message": "…" }
 ```
 
-| Status | When                                                                                        |
-| ------ | ------------------------------------------------------------------------------------------- |
-| `401`  | Bad key, or missing `admin:*`                                                               |
-| `403`  | Model access control is not available for that team                                         |
-| `409`  | Provider or model write while `state` is `unrestricted` or `legacy`                         |
-| `400`  | Unknown provider or model id, invalid body, or a Smart Auto required model would be blocked |
+| Status | When                                                                                                                                                                                                                              |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `401`  | Bad key, or missing `models:read` / `models:*` (or `admin:*`)                                                                                                                                                                     |
+| `403`  | Model access control is not available for that team                                                                                                                                                                               |
+| `409`  | Provider or model read or write while `state` is `unrestricted` or `legacy`                                                                                                                                                       |
+| `400`  | Unknown provider, model, parameter id, or parameter value; invalid body; empty `allowedValues`; default outside `allowedValues`; settings that resolve to no valid model variant; or a Smart Auto required model would be blocked |
 
 
 ---

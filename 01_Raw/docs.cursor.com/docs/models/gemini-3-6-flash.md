@@ -1,10 +1,12 @@
 ---
 source_url: https://cursor.com/docs/models/gemini-3-6-flash
-fetched_at: 2026-07-27T04:31:49.342589+00:00
+fetched_at: 2026-08-17T02:15:18.532679+00:00
 fetch_method: mintlify_md
 ---
 
-Gemini 3.6 Flash is Google's newest speed-tier model. At $1.50 per million input tokens and $7.50 per million output tokens, it sits between Gemini 3 Flash and Gemini 3.1 Pro on price while bringing reasoning improvements over earlier Flash models. Use it for high-throughput coding tasks that need stronger reasoning than Gemini 3 Flash, but at a lower cost than Pro models.
+We recommend using [Gemini 3.7 Flash](https://cursor.com/docs/models/gemini-3-7-flash.md). It's Google's latest speed-tier model with lower input and output prices.
+
+Gemini 3.6 Flash is Google's previous speed-tier model. At $1.50 per million input tokens and $7.50 per million output tokens, it sits between Gemini 3 Flash and Gemini 3.1 Pro on price while bringing reasoning improvements over earlier Flash models.
 
 ## Strengths
 

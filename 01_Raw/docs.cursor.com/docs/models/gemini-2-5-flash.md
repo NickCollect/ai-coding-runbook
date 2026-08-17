@@ -1,10 +1,10 @@
 ---
 source_url: https://cursor.com/docs/models/gemini-2-5-flash
-fetched_at: 2026-07-27T04:31:49.280202+00:00
+fetched_at: 2026-08-17T02:15:18.485668+00:00
 fetch_method: mintlify_md
 ---
 
-We recommend using [Gemini 3.6 Flash](https://cursor.com/docs/models/gemini-3-6-flash.md). It's faster, more capable, and the latest Gemini Flash model.
+We recommend using [Gemini 3.7 Flash](https://cursor.com/docs/models/gemini-3-7-flash.md). It's Google's latest speed-tier model.
 
 ## Tools
 

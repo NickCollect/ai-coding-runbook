@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/organizations/organization-admin-api
-fetched_at: 2026-08-10T03:07:39.415832+00:00
+fetched_at: 2026-08-17T02:15:16.910656+00:00
 fetch_method: mintlify_md
 ---
 
@@ -36,7 +36,7 @@ Every Organization API key carries exactly one scope. A route runs only when the
 | `members:*`    | Read and write access to membership and groups. Includes everything `members:read` allows. | `GET /organizations/members`, `POST /organizations/team-memberships/sync`, all `/organizations/groups` routes                                                                     |
 | `usage:*`      | Read access to pooled usage and reporting.                                                 | `POST /organizations/pooled-usage`, `POST /organizations/filtered-usage-events`, `POST /organizations/daily-usage-data`, `POST /organizations/spend`                              |
 | `models:read`  | Read-only access to model-access configuration and provider inventories.                   | `GET /organizations/teams/model-access/configuration`, `GET /organizations/teams/{teamId}/model-access/configuration`, `GET /organizations/teams/{teamId}/model-access/providers` |
-| `models:*`     | Read and write access to model access. Includes everything `models:read` allows.           | All model-access routes, including bulk provider/model toggles                                                                                                                    |
+| `models:*`     | Read and write access to model access. Includes everything `models:read` allows.           | All model-access routes, including bulk provider/model toggles and bulk configuration                                                                                             |
 | `admin:*`      | Full access to every organization route.                                                   | All of the above                                                                                                                                                                  |
 
 Pick the narrowest scope for the job. Use `members:read` for read-only integrations that list members but never change membership. Use `models:read` or `models:*` for model-access automation without granting full admin. You can select these scopes when you create an Organization API key in the dashboard.
@@ -486,7 +486,7 @@ By default, events from **all** teams in the organization pool are returned. Pas
 
 **Cost Calculation**: Sum the `chargedCents` field across events to reconcile event-level costs with the per-team `usedCents` breakdown from [`/organizations/pooled-usage`](https://cursor.com/docs/account/organizations/organization-admin-api.md#get-pooled-usage). This field includes both the model cost and the Cursor Token Rate when a request is eligible for the rate.
 
-The `cursorTokenFee` field represents the Cursor Token Rate and is only present when the rate applies to a third-party model request. This includes when Auto Balance or Auto Intelligence routes to a third-party model. Auto Cost, first-party Cursor models such as Composer 2.5 and Grok 4.5, and request-based enterprise accounts do not include this fee.
+The `cursorTokenFee` field represents the Cursor Token Rate and is only present when the rate applies to a third-party model request. This includes when Auto Balance or Auto Intelligence routes to a third-party model. Auto Cost, first-party Cursor models such as Composer 2.5, Grok 4.6, and Grok 4.5, and request-based enterprise accounts do not include this fee.
 
 #### Request body
 
@@ -868,15 +868,18 @@ Model access routes are in preview and may change. Paths, response fields, and e
 
 Read and update [model access](https://cursor.com/docs/enterprise/model-and-integration-management.md#model-access-control) policy for teams linked to the organization. These routes match the team [model access](https://cursor.com/docs/account/teams/admin-api.md#model-access) API, scoped to linked teams.
 
-Use the list and per-team GETs to catch configuration drift. Align teams with configuration PUTs plus provider/model toggles. There is no org-level copy endpoint or policy fingerprint.
+Use the list and per-team GETs to catch configuration drift. Align teams with configuration PUTs plus provider/model toggles (including per-model `parameters`). There is no org-level copy endpoint or policy fingerprint.
+
+Enabling a model without parameter settings leaves it on the catalog defaults. Use the bulk model route when defaults such as Fast do not match your organization policy.
 
 Numeric `teamId` values come from routes such as [`GET /organizations/members`](https://cursor.com/docs/account/organizations/organization-admin-api.md#list-organization-members).
 
 - **Availability**: Enterprise organizations. Target teams must have model access control enabled.
 - **Authentication**: Organization API key (Basic auth). Reads require **`models:read`**. Writes require **`models:*`**. Keys with **`admin:*`** work for both. **`members:*`**, **`usage:*`**, and **`read:*`** keys cannot call these routes.
 - **Team containment**: Every `teamId` must be linked to the organization. On single-team routes, unknown or unlinked teams return **404**. On bulk routes, unlinked teams are HTTP 200 error rows.
-- **Configuration first**: Provider and model writes return **409** while that team is still `unrestricted` (or `legacy`). Create a custom policy with `PUT /organizations/teams/{teamId}/model-access/configuration` first. The first PUT seeds catalog defaults; it does not clone another team's on/off map.
-- **Bulk toggles**: Bulk routes accept up to 100 `teamIds` and return HTTP 200 with per-row `status`, `successCount`, and `errorCount` (same shape as [`/organizations/team-memberships/sync`](https://cursor.com/docs/account/organizations/organization-admin-api.md#sync-organization-team-memberships)).
+- **Configuration first**: Provider and model reads and writes return **409** while that team is still `unrestricted` (or `legacy`). Create a custom policy with `PUT /organizations/teams/{teamId}/model-access/configuration` first (or the bulk configuration route). The first defaults PUT seeds catalog defaults; it does not clone another team's on/off map.
+- **Return to unrestricted**: Send `{ "state": "unrestricted" }` on the per-team or bulk configuration PUT.
+- **Bulk partial success**: Bulk routes accept up to 100 `teamIds` and always return HTTP **200** when the batch is *processed*, even if some rows fail. Inspect `errorCount` and every `results[].status`. Successful rows are **not** rolled back. Operations are idempotent per team, so retry only the failed `teamId`s. A **4xx** or **5xx** response rejects the whole request and applies no changes. Response shape matches [`/organizations/team-memberships/sync`](https://cursor.com/docs/account/organizations/organization-admin-api.md#sync-organization-team-memberships).
 - **Rate limits**: 20 requests per minute. Writes appear in team audit logs as `team_settings` events. See [rate limits and best practices](https://cursor.com/docs/api.md#rate-limits).
 
 ### List Model Access Configuration
@@ -970,7 +973,7 @@ curl -X GET https://api.cursor.com/organizations/teams/7/model-access/configurat
 
 /organizations/teams/:teamId/model-access/configuration
 
-Create or update configuration for one linked team. Same body and seeding behavior as the team route.
+Create or update configuration for one linked team, or return that team to unrestricted. Same body and seeding behavior as the team route.
 
 #### Parameters
 
@@ -980,13 +983,17 @@ Integer ID of a team linked to the organization.
 
 #### Request body
 
-`newProviderDefault` string Required
+`state` string
 
-`enabled` or `disabled`.
+Optional. Use `unrestricted` to clear policy. Omit when sending defaults.
 
-`newModelDefault` string Required
+`newProviderDefault` string
 
-`enabled` or `disabled`.
+`enabled` or `disabled`. Required when creating or updating a custom policy; omit when `state` is `unrestricted`.
+
+`newModelDefault` string
+
+`enabled` or `disabled`. Required when creating or updating a custom policy; omit when `state` is `unrestricted`.
 
 ```bash
 curl -X PUT https://api.cursor.com/organizations/teams/7/model-access/configuration \
@@ -998,11 +1005,89 @@ curl -X PUT https://api.cursor.com/organizations/teams/7/model-access/configurat
   }'
 ```
 
+Return one linked team to unrestricted:
+
+```bash
+curl -X PUT https://api.cursor.com/organizations/teams/7/model-access/configuration \
+  -u YOUR_ORGANIZATION_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{ "state": "unrestricted" }'
+```
+
+### Bulk Update Model Access Configuration
+
+/organizations/teams/model-access/configuration
+
+Create or update configuration, or return teams to unrestricted, across many linked teams. Up to 100 `teamIds` per request.
+
+HTTP **200** means the batch was processed, not that every row succeeded. Check `errorCount` and each `results[].status`. Successful teams keep their new configuration. The operation is idempotent per team, so retry only failed `teamId`s. A **4xx** or **5xx** response rejects the whole request and applies no changes.
+
+#### Request body
+
+`teamIds` number\[] Required
+
+Linked team IDs to update. Maximum 100 per request.
+
+`state` string
+
+Optional. Use `unrestricted` to clear policy on each team. Omit when sending defaults.
+
+`newProviderDefault` string
+
+`enabled` or `disabled`. Required when creating or updating custom policies; omit when `state` is `unrestricted`.
+
+`newModelDefault` string
+
+`enabled` or `disabled`. Required when creating or updating custom policies; omit when `state` is `unrestricted`.
+
+Seed custom policy defaults on many teams:
+
+```bash
+curl -X PUT https://api.cursor.com/organizations/teams/model-access/configuration \
+  -u YOUR_ORGANIZATION_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{
+    "teamIds": [7, 8, 9],
+    "newProviderDefault": "disabled",
+    "newModelDefault": "enabled"
+  }'
+```
+
+Return many teams to unrestricted:
+
+```bash
+curl -X PUT https://api.cursor.com/organizations/teams/model-access/configuration \
+  -u YOUR_ORGANIZATION_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{
+    "teamIds": [7, 8, 9],
+    "state": "unrestricted"
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "results": [
+    { "teamId": 7, "status": "success" },
+    { "teamId": 8, "status": "success" },
+    {
+      "teamId": 9,
+      "status": "error",
+      "errorMessage": "Team is not linked to this organization"
+    }
+  ],
+  "successCount": 2,
+  "errorCount": 1
+}
+```
+
 ### Get Team Model Access Providers
 
 /organizations/teams/:teamId/model-access/providers
 
-List providers and models for one linked team.
+List providers and models for one linked team, including per-model `parameters` (same shape as the team [providers](https://cursor.com/docs/account/teams/admin-api.md#list-model-access-providers) route). Returns **409** when the team does not have a custom policy.
 
 #### Parameters
 
@@ -1019,7 +1104,7 @@ curl -X GET https://api.cursor.com/organizations/teams/7/model-access/providers 
 
 /organizations/teams/:teamId/model-access/providers/:provider
 
-Enable or disable a provider on one linked team.
+Enable or disable a provider on one linked team. Returns **409** when the team does not have a custom policy.
 
 #### Parameters
 
@@ -1046,7 +1131,7 @@ curl -X PUT https://api.cursor.com/organizations/teams/7/model-access/providers/
 
 /organizations/teams/:teamId/model-access/providers/:provider/models/:model
 
-Enable or disable a model on one linked team.
+Enable or disable a model on one linked team, and optionally set per-model `parameters` (same body as the team model route). Returns **409** when the team does not have a custom policy.
 
 #### Parameters
 
@@ -1066,11 +1151,39 @@ Catalog model id (for example `claude-opus-4-6`).
 
 `enabled` boolean Required
 
+`parameters` object
+
+Optional map from parameter id to `{ allowedValues, defaultValue }`. Omitted fields are unchanged. `allowedValues: null` clears a restriction. `defaultValue: null` restores the catalog default. See the team [Update Model Access Model](https://cursor.com/docs/account/teams/admin-api.md#update-model-access-model) docs.
+
+Disable Fast on one linked team:
+
 ```bash
 curl -X PUT https://api.cursor.com/organizations/teams/7/model-access/providers/anthropic/models/claude-opus-4-6 \
   -u YOUR_ORGANIZATION_API_KEY: \
   -H "Content-Type: application/json" \
-  -d '{"enabled": false}'
+  -d '{
+    "enabled": true,
+    "parameters": {
+      "fast": { "allowedValues": ["false"] }
+    }
+  }'
+```
+
+Set default reasoning effort:
+
+```bash
+curl -X PUT https://api.cursor.com/organizations/teams/7/model-access/providers/openai/models/gpt-5.4 \
+  -u YOUR_ORGANIZATION_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{
+    "enabled": true,
+    "parameters": {
+      "reasoning": {
+        "allowedValues": ["low", "medium", "high"],
+        "defaultValue": "high"
+      }
+    }
+  }'
 ```
 
 ### Bulk Update Model Access Provider
@@ -1078,6 +1191,8 @@ curl -X PUT https://api.cursor.com/organizations/teams/7/model-access/providers/
 /organizations/teams/model-access/providers/:provider
 
 Enable or disable a provider on many linked teams. Up to 100 `teamIds` per request.
+
+HTTP **200** means the batch was processed, not that every row succeeded. Inspect `errorCount` and every `results[].status`. Successful rows are not rolled back. The operation is idempotent per team, so retry only failed `teamId`s. A **4xx** or **5xx** response rejects the whole request and applies no changes.
 
 #### Parameters
 
@@ -1121,11 +1236,15 @@ curl -X PUT https://api.cursor.com/organizations/teams/model-access/providers/op
 }
 ```
 
+In this example HTTP status is still **200** because the batch completed. Teams 7 and 8 keep the provider disabled; only retry team 9 after creating its configuration.
+
 ### Bulk Update Model Access Model
 
 /organizations/teams/model-access/providers/:provider/models/:model
 
-Enable or disable a model on many linked teams. Up to 100 `teamIds` per request.
+Enable or disable a model on many linked teams, optionally with the same `parameters` map as the single-team model PUT. Up to 100 `teamIds` per request.
+
+HTTP **200** means the batch was processed, not that every row succeeded. Inspect `errorCount` and every `results[].status`. Successful rows are not rolled back. The operation is idempotent per team, so retry only failed `teamId`s. A **4xx** or **5xx** response rejects the whole request and applies no changes.
 
 #### Parameters
 
@@ -1145,13 +1264,40 @@ Catalog model id (for example `claude-opus-4-6`).
 
 Linked team IDs to update. Maximum 100 per request.
 
+`parameters` object
+
+Optional. Same map as the single-team model PUT. `allowedValues: null` clears a restriction. `defaultValue: null` restores the catalog default.
+
+Disable Fast across linked teams:
+
 ```bash
 curl -X PUT https://api.cursor.com/organizations/teams/model-access/providers/anthropic/models/claude-opus-4-6 \
   -u YOUR_ORGANIZATION_API_KEY: \
   -H "Content-Type: application/json" \
   -d '{
     "teamIds": [7, 8, 9],
-    "enabled": false
+    "enabled": true,
+    "parameters": {
+      "fast": { "allowedValues": ["false"] }
+    }
+  }'
+```
+
+Pin the default reasoning effort across linked teams:
+
+```bash
+curl -X PUT https://api.cursor.com/organizations/teams/model-access/providers/openai/models/gpt-5.4 \
+  -u YOUR_ORGANIZATION_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{
+    "teamIds": [7, 8, 9],
+    "enabled": true,
+    "parameters": {
+      "reasoning": {
+        "allowedValues": ["low", "medium", "high"],
+        "defaultValue": "high"
+      }
+    }
   }'
 ```
 
@@ -1181,15 +1327,15 @@ Error bodies use:
 { "code": "error", "message": "…" }
 ```
 
-| Status | When                                                                                        |
-| ------ | ------------------------------------------------------------------------------------------- |
-| `401`  | Bad key, or missing `models:read` / `models:*` (or `admin:*`)                               |
-| `403`  | Model access control is not available for that team (single-team routes)                    |
-| `404`  | Team is not linked to the organization (single-team routes)                                 |
-| `409`  | Provider or model write while that team's `state` is `unrestricted` or `legacy`             |
-| `400`  | Unknown provider or model id, invalid body, or a Smart Auto required model would be blocked |
+| Status | When                                                                                                                                                                                                                              |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `401`  | Bad key, or missing `models:read` / `models:*` (or `admin:*`)                                                                                                                                                                     |
+| `403`  | Model access control is not available for that team (single-team routes)                                                                                                                                                          |
+| `404`  | Team is not linked to the organization (single-team routes)                                                                                                                                                                       |
+| `409`  | Provider or model read or single-team write while that team's `state` is `unrestricted` or `legacy`                                                                                                                               |
+| `400`  | Unknown provider, model, parameter id, or parameter value; invalid body; empty `allowedValues`; default outside `allowedValues`; settings that resolve to no valid model variant; or a Smart Auto required model would be blocked |
 
-Bulk org routes return HTTP 200 with per-row `status` instead of failing the whole request. Unlinked teams and public errors such as missing configuration appear as `status: "error"` rows. Unexpected server failures still fail the whole request. The list route also returns HTTP 200 with an `errorMessage` row when a linked team cannot load configuration.
+Bulk org routes (`PUT .../providers/:provider`, `PUT .../providers/:provider/models/:model`, and `PUT .../configuration` with `teamIds`) return HTTP **200** when the batch is processed, even if some rows fail. A non-zero `errorCount` is still a successful HTTP response. Unlinked teams and public errors such as missing configuration appear as `status: "error"` rows. Successful rows are not rolled back. Operations are idempotent per team, so retry only the failed `teamId`s. Any **4xx** or **5xx** response means the whole request was rejected and no changes were applied. The list route also returns HTTP 200 with an `errorMessage` row when a linked team cannot load configuration.
 
 ## Organization Groups
 
