@@ -5,16 +5,21 @@
 # pyright: reportUnknownLambdaType=false
 from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Annotated, Any, Final, NamedTuple, TypedDict
+from typing import TYPE_CHECKING, Annotated, Any, Final, NamedTuple, TypedDict
 
 import annotated_types
 import pytest
 from dirty_equals import IsPartialDict
-from mcp_types import CallToolResult, InputRequiredResult
-from pydantic import BaseModel, Field
+from mcp_types import CallToolResult, ContentBlock, EmbeddedResource, InputRequiredResult, TextContent
+from pydantic import BaseModel, Field, ValidationError
+from typing_extensions import NotRequired, ReadOnly, Required
 
+from mcp.server.mcpserver import Audio, Image
 from mcp.server.mcpserver.exceptions import InvalidSignature
-from mcp.server.mcpserver.utilities.func_metadata import func_metadata
+from mcp.server.mcpserver.utilities.func_metadata import ArgModelBase, FuncMetadata, func_metadata
+
+if TYPE_CHECKING:
+    from decimal import Decimal
 
 
 class SomeInputModelA(BaseModel):
@@ -772,22 +777,28 @@ def test_structured_output_dataclass():
 def test_structured_output_typeddict():
     """Test structured output with TypedDict return types"""
 
+    # stdlib TypedDict with a qualifier: exercises the typing_extensions rebuild below Python 3.12
     class PersonTypedDictOptional(TypedDict, total=False):
-        name: str
+        name: Required[str]
         age: int
 
-    def func_returning_typeddict_optional() -> PersonTypedDictOptional:  # pragma: no cover
+    def func_returning_typeddict_optional() -> PersonTypedDictOptional:
         return {"name": "Dave"}  # Only returning one field to test partial dict
 
     meta = func_metadata(func_returning_typeddict_optional)
     assert meta.output_schema == {
         "type": "object",
         "properties": {
-            "name": {"title": "Name", "type": "string", "default": None},
-            "age": {"title": "Age", "type": "integer", "default": None},
+            "name": {"title": "Name", "type": "string"},
+            "age": {"title": "Age", "type": "integer"},
         },
+        "required": ["name"],
         "title": "PersonTypedDictOptional",
     }
+    # An optional key the tool leaves out is absent, not null, so it validates against the schema above
+    result = meta.convert_result(func_returning_typeddict_optional())
+    assert isinstance(result, CallToolResult)
+    assert result.structured_content == {"name": "Dave"}
 
     # Test with total=True (all required)
     class PersonTypedDictRequired(TypedDict):
@@ -809,6 +820,78 @@ def test_structured_output_typeddict():
         "required": ["name", "age", "email"],
         "title": "PersonTypedDictRequired",
     }
+
+
+def test_structured_output_typeddict_qualifiers_and_metadata():
+    """PEP 655/705 qualifiers register on every supported Python and decide `required`; the docstring and
+    `Annotated` field metadata reach the schema like they do for a BaseModel, and an alias names the wire key.
+    A stdlib TypedDict, so below 3.12 all of this goes through the typing_extensions rebuild."""
+
+    class Forecast(TypedDict, total=False):
+        """Tomorrow's weather."""
+
+        city: Required[Annotated[str, Field(alias="cityName", description="City name")]]
+        high: ReadOnly[Required[float]]
+        low: float
+        summary: NotRequired[Annotated[str, Field(max_length=80)]]
+
+    def forecast() -> Forecast:
+        return {"city": "Berlin", "high": 21.5}
+
+    with pytest.warns(UserWarning, match="ReadOnly"):  # pydantic notes it won't enforce ReadOnly
+        meta = func_metadata(forecast)
+    result = meta.convert_result(forecast())
+    assert isinstance(result, CallToolResult)
+    assert result.structured_content == {"cityName": "Berlin", "high": 21.5}
+    assert meta.output_schema == {
+        "type": "object",
+        "title": "Forecast",
+        "description": "Tomorrow's weather.",
+        "properties": {
+            "cityName": {"title": "Cityname", "type": "string", "description": "City name"},
+            "high": {"title": "High", "type": "number"},
+            "low": {"title": "Low", "type": "number"},
+            "summary": {"title": "Summary", "type": "string", "maxLength": 80},
+        },
+        "required": ["cityName", "high"],
+    }
+
+
+def test_func_metadata_built_by_hand_keeps_a_given_output_schema():
+    """A hand-built FuncMetadata publishes the schema it was given but still validates results against output_model."""
+    meta = FuncMetadata(arg_model=ArgModelBase, output_model=SomeInputModelB.InnerModel, output_schema={"x": 1})
+    assert meta.output_schema == {"x": 1}
+    with pytest.raises(ValidationError):
+        meta.convert_result({"x": "not an int"})
+
+
+def test_func_metadata_output_fields_are_read_live():
+    """Code in the wild switches structured output off or on by assigning the fields after registration."""
+
+    def total() -> int:
+        return 3
+
+    meta = func_metadata(total)
+    meta.output_schema = None
+    off = meta.convert_result(total())
+    meta.output_schema, meta.output_model, meta.wrap_output = {"type": "object"}, SomeInputModelB.InnerModel, False
+    on = meta.convert_result({"x": 3})
+    assert isinstance(off, CallToolResult) and isinstance(on, CallToolResult)
+    assert (off.structured_content, on.structured_content) == (None, {"x": 3})
+
+
+def test_structured_output_typeddict_with_unresolvable_annotation_is_unstructured():
+    """An annotation only importable under TYPE_CHECKING degrades the same way on every supported Python."""
+
+    class Report(TypedDict):
+        total: "Decimal"
+
+    def report() -> Report:  # pragma: no cover
+        raise NotImplementedError
+
+    assert func_metadata(report).output_schema is None
+    with pytest.raises(InvalidSignature):
+        func_metadata(report, structured_output=True)
 
 
 def test_structured_output_ordinary_class():
@@ -852,6 +935,73 @@ def test_unstructured_output_unannotated_class():
 
     meta = func_metadata(func_returning_unannotated)
     assert meta.output_schema is None
+
+
+def _returns_block() -> EmbeddedResource:
+    raise NotImplementedError
+
+
+def _returns_blocks() -> list[ContentBlock]:
+    raise NotImplementedError
+
+
+def _returns_strings_and_images() -> list[str | Image]:
+    raise NotImplementedError
+
+
+def _returns_audio_clips() -> tuple[Audio, ...]:
+    raise NotImplementedError
+
+
+def _returns_described_blocks() -> list[Annotated[TextContent, Field(description="one line each")]]:
+    raise NotImplementedError
+
+
+def _returns_call_tool_result_annotated_with_blocks() -> Annotated[CallToolResult, list[TextContent]]:
+    raise NotImplementedError
+
+
+@pytest.mark.parametrize(
+    "tool",
+    [
+        _returns_block,
+        _returns_blocks,
+        _returns_strings_and_images,
+        _returns_audio_clips,
+        _returns_described_blocks,
+        _returns_call_tool_result_annotated_with_blocks,
+    ],
+)
+def test_content_block_return_annotation_yields_no_output_schema(tool: Callable[..., Any]):
+    """SDK-defined: content blocks and the Image/Audio helpers anywhere in the return annotation are
+    presentation, not data, so auto-detection derives no output schema (and `list[str | Image]` /
+    `tuple[Audio, ...]`, which pydantic cannot build a schema for, register instead of raising)."""
+    assert func_metadata(tool).output_schema is None
+
+
+def test_structured_output_true_overrides_the_content_block_rule():
+    """SDK-defined: the explicit flag still publishes the block's own schema for callers who want it."""
+    assert func_metadata(_returns_block, structured_output=True).output_model is EmbeddedResource
+
+
+class _Report(BaseModel):
+    summary: str
+    attachment: EmbeddedResource
+
+
+def _returns_report() -> _Report:
+    raise NotImplementedError
+
+
+def _returns_blocks_by_key() -> dict[str, TextContent]:
+    raise NotImplementedError
+
+
+@pytest.mark.parametrize("tool", [_returns_report, _returns_blocks_by_key])
+def test_content_blocks_as_model_fields_or_mapping_values_stay_structured(tool: Callable[..., Any]):
+    """SDK-defined: the rule mirrors `_convert_to_content`, which renders blocks only when they are the
+    value itself or list/tuple items; a model field or a mapping value is data and keeps its schema."""
+    assert func_metadata(tool).output_schema is not None
 
 
 def test_tool_call_result_is_unstructured_and_not_converted():
