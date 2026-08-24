@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/azure-devops
-fetched_at: 2026-08-17T02:15:18.076664+00:00
+fetched_at: 2026-08-24T02:18:37.430051+00:00
 fetch_method: mintlify_md
 ---
 
@@ -99,6 +99,20 @@ Repository settings and repository rules work on Azure DevOps. These don't:
 Bugbot posts a build status on each reviewed pull request under the context `cursor-bugbot/review`. See [CI check statuses](https://cursor.com/docs/bugbot.md#ci-check-statuses) for what each conclusion means.
 
 If you make that context a required status branch policy, set the policy's **Reset conditions** to **Reset status whenever there are new changes**. Without it, a status from an earlier push keeps satisfying the policy after new commits land.
+
+### Migrating from the earlier Bugbot setup
+
+Organizations that enabled Bugbot for Azure DevOps before August 2026 used an earlier per-repository setup. A repository still on that setup shows "This Azure DevOps repository still uses the earlier Bugbot setup." when you turn it on.
+
+Migration is automatic. Connect Azure DevOps as an administrator of the organization, then turn the repository on again in [Bugbot in Automations](https://cursor.com/automations/from-cursor/bugbot). Cursor removes the earlier service hooks and completes the new setup in one step.
+
+If Cursor reports it could not remove the earlier setup, remove it yourself:
+
+1. In Azure DevOps, open **Project settings** → **Service hooks**
+2. Delete the Cursor **Web Hooks** subscriptions that deliver to `https://api2.cursor.sh/azure_devops_webhook`
+3. Turn the repository on again in [Bugbot in Automations](https://cursor.com/automations/from-cursor/bugbot)
+
+The new setup prerequisites apply after migration. Your tenant needs the one-time [Microsoft Entra admin consent](https://cursor.com/docs/integrations/azure-devops.md#grant-microsoft-entra-admin-consent), and the service principal needs [a Basic access level in your organization](https://cursor.com/docs/integrations/azure-devops.md#give-the-service-principal-access-to-your-organization).
 
 ## Repository URLs
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/prompting
-fetched_at: 2026-08-10T03:07:39.863357+00:00
+fetched_at: 2026-08-24T02:18:35.839418+00:00
 fetch_method: mintlify_md
 ---
 
@@ -19,6 +19,16 @@ Type `@` in the chat input to attach specific context to your prompt. Start typi
 - **Browser**: `@Browser` to attach context from the built-in browser
 
 Use @ mentions when you know which files are relevant. If you're not sure which files matter, skip it — Agent finds relevant files through its own search.
+
+## Custom Modes
+
+Type `/` in the chat input to invoke a [skill](https://cursor.com/docs/skills.md). Pressing Enter attaches the skill to one message, and it fades as the conversation moves on. Use any skill as a Custom Mode to keep the agent focused on it while it works.
+
+Pick the skill from the `/` menu and press Option+Enter (Mac) or Alt+Enter (Windows) instead. You can also select **Use as Mode** from the skill entry. Inside a mode, the skill stays in context on every turn, even as the agent works for hours, until you exit the mode.
+
+Custom Modes work well for skills that describe how to work rather than a one-shot task. Keep a code-review checklist active while you move through several files, or hold a team playbook like `/tdd` on for an entire feature.
+
+Custom Modes are available in the [Agents Window](https://cursor.com/docs/agent/agents-window.md) and the [CLI](https://cursor.com/docs/cli.md). Any skill with a valid frontmatter block can back a mode, and the optional `icon` and `color` frontmatter fields style the mode's badge. See [Using a skill as a Custom Mode](https://cursor.com/docs/skills.md#using-a-skill-as-a-custom-mode).
 
 ## Image input
 

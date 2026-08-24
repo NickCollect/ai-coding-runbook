@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/using
-fetched_at: 2026-06-22T06:23:24.813174+00:00
+fetched_at: 2026-08-24T02:18:36.412433+00:00
 fetch_method: mintlify_md
 ---
 
@@ -68,6 +68,10 @@ Review changes with Ctrl+R. Press i to add follow-up instructions. Use ArrowUp/A
 ### Selecting context
 
 Select files and folders to include in context with @. Free up space in the context window by running `/summarize`. `/compress` remains an alias.
+
+### Custom Modes
+
+Pick a [skill](https://cursor.com/docs/skills.md) from the `/` menu and press Enter to attach it to one message. Press Option+Enter instead to invoke it as a Custom Mode that stays active until you exit it.
 
 ## Cloud Agent handoff
 

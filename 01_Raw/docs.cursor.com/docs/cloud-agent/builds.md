@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/builds
-fetched_at: 2026-08-17T02:15:17.567325+00:00
+fetched_at: 2026-08-24T02:18:36.511365+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,21 +13,6 @@ With Builds, you get:
 - **Faster starts**: Clone, install, and dependency work happen ahead of time, so agents boot from a ready environment instead of waiting on every start.
 - **Reliable starts**: Agents always start from the latest successful Build. A failed install or bad config doesn't replace the working one.
 - **Observable environments**: You can see every Build, inspect its logs and commits, and trace which Build each agent used.
-
-## Opt an existing environment into Builds
-
-New environments use Builds by default. To enable Builds for an existing environment:
-
-1. Open **Environments** in the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#environments).
-2. Select an environment and open its **Builds** tab.
-3. Choose one of these setup paths:
-   - Select **Run setup agent** to let an agent inspect your environment, test a Build, and propose any needed changes.
-   - Select **Enable Builds** to enable Builds and create one with your current configuration.
-4. Confirm the first Build succeeds before using it for agent runs.
-
-The setup agent checks which commands should run during a Build and which need to run when an agent starts. For dashboard-managed environments, it proposes an updated configuration for you to review and save. For environments defined in `.cursor/environment.json`, it can open a pull request with the changes.
-
-You can select **Test build** from the Builds tab to test your configuration without enabling Builds for all agent runs. The setup agent doesn't enable Builds for you. Select **Enable Builds** when you're ready.
 
 ## How Builds work
 
@@ -49,16 +34,16 @@ If a new Build fails, agents continue to use the last successful Build. A broken
 
 Cursor starts a Build for four reasons. The Builds tab labels each one with its trigger type.
 
-| Trigger              | When it runs                                                            |
-| :------------------- | :---------------------------------------------------------------------- |
-| Recurring            | On a regular schedule for every environment with Builds enabled         |
-| Configuration change | When you save the environment configuration or change its secrets       |
-| Manual               | When you select **Trigger build** (or **Test build**) in the Builds tab |
-| Agent-requested      | When an agent runs a test Build, for example during environment setup   |
+| Trigger              | When it runs                                                          |
+| :------------------- | :-------------------------------------------------------------------- |
+| Recurring            | On a regular schedule for every environment                           |
+| Configuration change | When you save the environment configuration or change its secrets     |
+| Manual               | When you select **Trigger build** in the Builds tab                   |
+| Agent-requested      | When an agent runs a test Build, for example during environment setup |
 
 ### Recurring Builds
 
-Cursor regularly checks each environment with Builds enabled and rebuilds it when something changed. This keeps the active Build close to the head of each repository's default branch, so agents start with fresh code and warm dependency caches instead of pulling and reinstalling at startup.
+Cursor regularly checks each environment and rebuilds it when something changed. This keeps the active Build close to the head of each repository's default branch, so agents start with fresh code and warm dependency caches instead of pulling and reinstalling at startup.
 
 ### Skipped Builds
 
@@ -110,7 +95,7 @@ Open an environment's **Builds** tab to:
 
 - See every Build's type, status, and start time
 - Open a Build to inspect its details and logs
-- Select **Trigger build** (or **Test build** when Builds are off) to run a Build on demand
+- Select **Trigger build** to run a Build on demand
 - Activate a draft Build or deactivate a Build
 - Cancel an in-progress Build
 - Start an agent from a specific Build

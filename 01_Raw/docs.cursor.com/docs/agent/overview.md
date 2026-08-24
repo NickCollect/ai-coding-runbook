@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/overview
-fetched_at: 2026-07-13T04:25:37.262515+00:00
+fetched_at: 2026-08-24T02:18:35.814280+00:00
 fetch_method: mintlify_md
 ---
 
@@ -82,7 +82,7 @@ Checkpoints are stored locally and separate from Git. Only use them for undoing 
 
 ## Queued messages
 
-Queue follow-up messages while Agent is working on the current task. Your instructions wait in line and execute automatically when ready.
+You have two ways to talk to an agent while it works. Queue a message and it waits for the current task to finish. [Send a follow-up now](https://cursor.com/docs/agent/overview.md#steer-a-running-agent) and it steers the active turn at the agent's next tool call.
 
 [Media](/docs-static/images/agent/planning/agent-queue.mp4)
 
@@ -108,6 +108,26 @@ When you use Cmd+Enter to send immediately, your message is appended to the most
 - Your message attaches to tool results and sends immediately
 - This creates a more responsive experience for urgent follow-ups
 - Use this when you need to interrupt or redirect Agent's current work
+
+### Steer a running agent
+
+You can send a follow-up to steer the agent while it's working, without interrupting it. Type a follow-up and hit **Send now**, or press Enter twice. The message is delivered at the agent's next tool call instead of cutting off work mid-action, which preserves in-flight work and keeps the agent on task.
+
+This is available on [cursor.com/agents](https://cursor.com/agents) now and rolling out in the [Agents Window](https://cursor.com/docs/agent/agents-window.md). Press Tab to queue the message for after the turn instead.
+
+In the [CLI](https://cursor.com/docs/cli.md), pressing Enter while the agent works steers the active run at a safe boundary, and pressing Enter again interrupts the turn.
+
+## Goals with /goal
+
+Agent reads each message as a new job. Use `/goal` to give the agent a long-lived objective to work towards until it's fully complete:
+
+```text
+/goal fix all flaky tests and make CI green
+```
+
+In the [CLI](https://cursor.com/docs/cli.md), Ctrl+C pauses the goal. Pair a goal with a [Custom Mode](https://cursor.com/docs/agent/prompting.md#custom-modes) when you want the agent to follow a playbook, or with the built-in [`/loop`](https://cursor.com/docs/skills.md#built-in-cursor-skills) skill for recurring check-ins while it pursues the objective.
+
+`/goal` is rolling out. If you don't see it, try it in a new chat.
 
 
 ---
