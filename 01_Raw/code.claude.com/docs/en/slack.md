@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/slack
-fetched_at: 2026-08-17T02:15:30.000472+00:00
+fetched_at: 2026-08-24T02:18:41.907756+00:00
 fetch_method: mintlify_md
 ---
 
@@ -87,7 +87,7 @@ Before using Claude Code in Slack, ensure you have the following:
 
 ### Automatic detection
 
-When you mention @Claude in a Slack channel or thread, Claude automatically analyzes your message to determine if it's a coding task. If Claude detects coding intent, it will route your request to Claude Code on the web instead of responding as a regular chat assistant.
+In Code + Chat routing mode, when you mention @Claude in a Slack channel or thread, Claude automatically detects whether your message is a coding task. Coding tasks go to Claude Code on the web. Anything else gets a regular chat reply. In Code only mode, every @mention goes to Claude Code.
 
 You can also explicitly tell Claude to handle a request as a coding task, even if it doesn't automatically detect it.
 
@@ -117,10 +117,6 @@ This context helps Claude understand the problem, select the appropriate reposit
 6. **Review**: Click "View Session" to see the full transcript, or "Create PR" to open a pull request
 
 ## User interface elements
-
-### App Home
-
-The App Home tab shows your connection status and allows you to connect or disconnect your Claude account from Slack.
 
 ### Message actions
 
@@ -199,12 +195,12 @@ This error means your Claude account has no cloud environment yet, not that an a
 
 This entry applies to workspaces using [Claude Tag](https://claude.com/docs/claude-tag/overview), where Claude works in channels as your organization's shared identity, not as any member's account. If you created the channel's cloud environment at [claude.ai/code](https://claude.ai/code), it belongs to your personal account, and Claude can't start channel sessions in a personal environment. Claude Code fails the session immediately, and retrying doesn't help.
 
-If you're an Owner or admin, recreate the environment as an [organization-shared environment](/docs/en/cloud-environments#organization-shared-environments) from the **Cloud environments** page in [admin settings](https://claude.ai/admin-settings). You can apply it in two ways:
+If you're an Owner, recreate the environment as an [organization-shared environment](/docs/en/cloud-environments#organization-shared-environments) from the **Cloud environments** page in [admin settings](https://claude.ai/admin-settings). You can apply it in two ways:
 
 * Set it as the organization default at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code).
 * [Set it on the channel](https://claude.com/docs/claude-tag/admins/troubleshooting#channel-sessions-use-the-wrong-environment-or-can%E2%80%99t-find-one) in the Claude Tag admin settings.
 
-If you're not an Owner or admin, send this entry to one.
+If you're not an Owner, send this entry to one.
 
 ### Repository not showing
 

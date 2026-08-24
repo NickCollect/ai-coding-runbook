@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/llm-gateway-rollout
-fetched_at: 2026-08-17T02:15:26.438871+00:00
+fetched_at: 2026-08-24T02:18:40.032887+00:00
 fetch_method: mintlify_md
 ---
 
@@ -38,7 +38,7 @@ Whichever product provides the gateway, it must:
 * **Stream responses**: pass server-sent events through as they arrive, including keep-alive pings, instead of buffering the whole response; [streaming](/docs/en/llm-gateway-protocol#streaming) covers what buffering or stripped pings break
 * **Route Claude model names**: map each name developers use to an upstream model. Claude Code sends a model name such as `claude-sonnet-4-6` in each request; in most gateway products the mapping is a model list or routing table in the gateway's own configuration
 * **Forward headers and body unchanged**: pass `anthropic-beta`, `anthropic-version`, and the request body through in both directions; the [feature pass-through table](/docs/en/llm-gateway-protocol#feature-pass-through) maps each to the feature that breaks without it
-* **Return upstream errors unmodified**: Claude Code's automatic recovery matches on error wording, so wrapping errors in the gateway's own envelope breaks it
+* **Return upstream errors unmodified**: Claude Code's automatic recovery matches on error wording, so wrapping errors in the gateway's own envelope breaks it, unless the envelope's message carries one of the `capability_rejected:` tokens a [Claude apps gateway substitutes for cloud providers' error wording](/docs/en/claude-apps-gateway-config#upstream-error-messages)
 * **Exempt the path from request-body WAF inspection**: Claude Code prompts carry source code and XML-style tags that match cross-site-scripting body rules; a WAF in front of the gateway returns `403` on real sessions while short test requests pass
 
 Optionally, serve `GET /v1/models` so Claude Code can populate the model picker from your gateway with [model discovery](/docs/en/llm-gateway-protocol#model-discovery).
@@ -163,7 +163,7 @@ A wrong or unreachable base URL produces a different symptom: Claude Code [retri
 
 ### Distribute the configuration
 
-Every developer machine needs the gateway address and a credential. You can distribute them centrally through [managed settings](/docs/en/settings#settings-files), so developers configure nothing, or hand developers the values to set themselves.
+Every developer machine needs the gateway address and a credential. You can distribute them centrally through [managed settings](/docs/en/managed-settings#delivery-mechanisms), so developers configure nothing, or hand developers the values to set themselves.
 
 #### What to distribute
 
@@ -182,7 +182,7 @@ The same set of variables applies whichever path you choose. Most rollouts only 
 
 #### Distribute through managed settings
 
-Deliver the variables through the `env` block of a [managed settings file](/docs/en/settings#settings-files), pushed by MDM, registry policy, or configuration management:
+Deliver the variables through the `env` block of a [managed settings file](/docs/en/managed-settings#delivery-mechanisms), pushed by MDM, registry policy, or configuration management:
 
 ```json theme={null}
 {
@@ -195,7 +195,7 @@ Deliver the variables through the `env` block of a [managed settings file](/docs
 
 Add the conditional variables from the table to the same `env` block. A managed `ANTHROPIC_BASE_URL` is enforced and cannot be overridden by a developer's shell export, since Claude Code applies it over the process environment and lower-precedence settings.
 
-Do not include `forceLoginMethod` or `forceLoginOrgUUID` in managed settings alongside a gateway credential. On Claude Code v2.1.146 and later, either key, with any value, blocks `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, and `apiKeyHelper` at startup, so developers see `This machine's managed settings require a first-party login` and cannot proceed.&#x20;
+Do not include `forceLoginMethod` or `forceLoginOrgUUID` in managed settings alongside a gateway credential. Either key, with any value, blocks `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, and `apiKeyHelper` at startup, so developers see `This machine's managed settings require a first-party login` and cannot proceed.
 
 [Server-managed settings](/docs/en/server-managed-settings#platform-availability) delivery requires a direct connection to `api.anthropic.com`, so it does not reach gateway-routed sessions. Gateway deployments use this file-based managed settings path, which enforces the same keys.
 
@@ -205,7 +205,7 @@ Some environments need separate delivery:
 
 * The desktop app reads gateway routing from its third-party inference configuration, not from managed settings; deploy that file through MDM alongside managed settings so desktop sessions route through the gateway too. See the [desktop third-party configuration docs](https://claude.com/docs/third-party/claude-desktop/configuration) and the [desktop gateway docs](https://claude.com/docs/third-party/claude-desktop/gateway)
 * CI runners need `ANTHROPIC_BASE_URL` and the credential set in the [runner's environment](/docs/en/llm-gateway-connect#configure-each-surface)
-* WSL on managed Windows machines reads the Windows managed settings only when [`wslInheritsWindowsSettings`](/docs/en/settings#available-settings) is `true`
+* WSL on managed Windows machines reads the Windows managed settings only when [`wslInheritsWindowsSettings`](/docs/en/settings-reference#wslinheritswindowssettings) is `true`
 
 #### Hand developers the values to set themselves
 
@@ -275,5 +275,6 @@ When sizing per-key rate limits, account for the client [retrying transient fail
 
 * [Connect Claude Code to an LLM gateway](/docs/en/llm-gateway-connect): the developer-facing setup steps, with per-surface configuration and a troubleshooting table you can hand to developers
 * [Gateway protocol reference](/docs/en/llm-gateway-protocol): the wire contract for gateway operators, covering endpoints, headers to forward, and the feature pass-through table
-* [Settings files and precedence](/docs/en/settings#settings-files): how managed, project, and user settings combine, and where the managed file goes on each platform
+* [Which value Claude Code uses](/docs/en/settings#which-value-claude-code-uses): how managed, project, and user settings combine
+* [Delivery mechanisms](/docs/en/managed-settings#delivery-mechanisms): where the managed file goes on each platform
 * [Set up Claude Code for your organization](/docs/en/admin-setup): the wider rollout this gateway is one part of, including policy enforcement, usage visibility, and data handling

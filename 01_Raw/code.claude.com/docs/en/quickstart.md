@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/quickstart
-fetched_at: 2026-08-03T04:25:06.830139+00:00
+fetched_at: 2026-08-24T02:18:40.838811+00:00
 fetch_method: mintlify_md
 ---
 
@@ -21,7 +21,7 @@ Make sure you have:
 * A terminal or command prompt open
   * If you've never used the terminal before, check out the [terminal guide](/docs/en/terminal-guide)
 * A code project to work with
-* A [Claude subscription](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=quickstart_prereq) (Pro, Max, Team, or Enterprise), [Claude Console](https://console.anthropic.com/) account, or access through a [supported cloud provider](/docs/en/third-party-integrations)
+* A [Claude subscription](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=quickstart_prereq) (Pro, Max, Team, or Enterprise), [Claude Console](https://platform.claude.com/) account, or access through a [supported cloud provider](/docs/en/third-party-integrations)
 
 <Note>
   This guide covers the terminal CLI. Claude Code is also available on the [web](https://claude.ai/code), as a [desktop app](/docs/en/desktop), in [VS Code](/docs/en/vs-code) and [JetBrains IDEs](/docs/en/jetbrains), in [Slack](/docs/en/slack), and in CI/CD with [GitHub Actions](/docs/en/github-actions) and [GitLab](/docs/en/gitlab-ci-cd). See [all interfaces](/docs/en/overview#use-claude-code-everywhere).
@@ -112,11 +112,11 @@ For Claude subscription or Console accounts, follow the prompts to complete auth
 You can log in using any of these account types:
 
 * [Claude Pro, Max, Team, or Enterprise](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=quickstart_login) (recommended)
-* [Claude Console](https://console.anthropic.com/) (API access with pre-paid credits). On first login, a "Claude Code" workspace is automatically created in the Console for centralized cost tracking.
+* [Claude Console](https://platform.claude.com/) (API access with pre-paid credits). On first login, a "Claude Code" workspace is automatically created in the Console for centralized cost tracking.
 * [Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry](/docs/en/third-party-integrations) (enterprise cloud providers)
 * A self-hosted [Claude apps gateway](/docs/en/claude-apps-gateway), if your organization runs one: your admin pre-configures the gateway URL, and `/login` opens directly on the **Cloud gateway** screen for you to sign in with corporate SSO
 
-Once logged in, your credentials are stored and you won't need to log in again.
+Once logged in, your credentials are stored and you won't need to log in again. Learn more in [Credential Management](/docs/en/authentication#credential-management).
 
 ## Step 3: Start your first session
 
@@ -130,10 +130,6 @@ claude
 Replace `/path/to/your/project` with the path to the project you want to work on.
 
 You'll see the Claude Code prompt with the version, current model, and working directory shown above it. Type `/help` for available commands or `/resume` to continue a previous conversation.
-
-<Tip>
-  After logging in (Step 2), your credentials are stored on your system. Learn more in [Credential Management](/docs/en/authentication#credential-management).
-</Tip>
 
 ## Step 4: Ask your first question
 
@@ -183,15 +179,12 @@ Now let's make Claude Code do some actual coding. Try a simple task:
 add a hello world function to the main file
 ```
 
-Claude Code will:
+Claude Code finds the appropriate file and shows you the change. In your first session after installing, it asks before each change. Select **Yes** to approve.
 
-1. Find the appropriate file
-2. Show you the proposed changes
-3. Ask for your approval before changing files, depending on your permission mode
-4. Make the edit
+After your first session, auto mode is the [built-in starting permission mode](/docs/en/permission-modes#eliminate-prompts-with-auto-mode) for interactive terminal and VS Code sessions on Pro, Max, and Team plans: a classifier reviews actions instead of you, and Claude edits most files and runs most commands without asking you. On other plans, Manual mode is the built-in starting permission mode.
 
 <Note>
-  Whether Claude Code asks before changing files depends on your [permission mode](/docs/en/permission-modes). In default mode, Claude asks for approval before each change. Press `Shift+Tab` to cycle through modes: `acceptEdits` auto-approves file edits, and `plan` lets Claude propose changes without editing. Some accounts also have an `auto` mode that runs a background safety check and blocks risky actions, returning to prompts only after repeated blocks.
+  Your settings or your organization can set a different starting permission mode. [Which permission mode a session starts in](/docs/en/permission-modes#which-mode-a-session-starts-in) lists what does. Press `Shift+Tab` at any time to switch the permission mode of the session you're in.
 </Note>
 
 ## Step 6: Use Git with Claude Code
@@ -333,7 +326,7 @@ For more, see [best practices](/docs/en/best-practices) and [common workflows](/
   </Accordion>
 
   <Accordion title="Save time with shortcuts">
-    * Type `/` to see all commands and skills
+    * Type `/` to see the commands and skills available to you
     * Use Tab for command completion
     * Press ↑ for command history
     * Press `Shift+Tab` to cycle permission modes

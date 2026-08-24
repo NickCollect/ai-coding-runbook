@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugin-dependencies
-fetched_at: 2026-08-17T02:15:27.684041+00:00
+fetched_at: 2026-08-24T02:18:40.386665+00:00
 fetch_method: mintlify_md
 ---
 
@@ -80,7 +80,7 @@ To add a tool to the standard set later, publish a new `backend-standard` versio
 * Enable auto-update for the marketplace in `/plugin`. The next auto-update moves the bundle to the new version and installs any dependencies it adds.
 * Run `claude plugin update backend-standard`, then `/reload-plugins` to install the newly added dependencies.
 
-To roll bundles out across an organization, add the bundle plugin to `enabledPlugins` in [managed settings](/docs/en/settings#enabledplugins).
+To roll bundles out across an organization, add the bundle plugin to `enabledPlugins` in [managed settings](/docs/en/settings-reference#enabledplugins).
 
 ## Depend on a plugin from another marketplace
 
@@ -159,7 +159,7 @@ When you uninstall the last plugin that constrains a dependency, the dependency 
 
 ## Enable or disable a plugin with dependencies
 
-Enabling a plugin also enables the plugins it depends on, and disabling a plugin is blocked if another enabled plugin still needs it. Both behaviors require Claude Code v2.1.143 or later. Earlier versions enable or disable only the named plugin and surface a `dependency-unsatisfied` error on the next load.
+Enabling a plugin also enables the plugins it depends on, and disabling a plugin is blocked if another enabled plugin still needs it.
 
 When you enable a plugin, Claude Code also enables its dependencies at the same scope. If a dependency has its own dependencies, Claude Code enables those too. The success message lists what else was enabled along with the plugin you named. If a dependency can't be enabled, the command refuses and tells you what's blocking and how to fix it:
 

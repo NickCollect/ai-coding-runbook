@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/modifying-system-prompts
-fetched_at: 2026-08-17T02:15:18.470039+00:00
+fetched_at: 2026-08-24T02:18:35.256612+00:00
 fetch_method: mintlify_md
 ---
 
@@ -352,7 +352,7 @@ The four customization methods differ in where they live, how they're shared, an
 
 ## Combine approaches
 
-These methods compose. A persistent output style or CLAUDE.md sets the long-lived behavior, and `append` layers session-specific instructions on top without touching the saved configuration.
+The approaches compose. A persistent output style or CLAUDE.md sets the long-lived behavior, and `append` layers session-specific instructions on top without touching the saved configuration.
 
 ### Combine an output style with session-specific additions
 

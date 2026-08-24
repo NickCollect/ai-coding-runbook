@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/best-practices
-fetched_at: 2026-08-17T02:15:21.905077+00:00
+fetched_at: 2026-08-24T02:18:36.956463+00:00
 fetch_method: mintlify_md
 ---
 
@@ -38,7 +38,7 @@ This matters since LLM performance degrades as context fills. When the context w
 
 Claude stops when the work looks done. Without a check it can run, "looks done" is the only signal available, and you become the verification loop: every mistake waits for you to notice it. Give Claude something that produces a pass or fail, and the loop closes on its own. Claude does the work, runs the check, reads the result, and iterates until the check passes.
 
-The check is anything that returns a signal Claude can read in the conversation: a test suite, a build exit code, a linter, a script that diffs output against a fixture, or a [browser screenshot](/docs/en/chrome) compared against a design.
+The check is anything that returns a signal Claude can read in the conversation: a test suite, a build exit code, a linter, a script that diffs output against a fixture, or a [browser screenshot](/docs/en/chrome) compared against a design. Run [`/verify`](/docs/en/skills#run-and-verify-your-app) yourself after Claude's check passes to confirm the change against the running app.
 
 | Strategy                              | Before                                                  | After                                                                                                                                                                                                   |
 | ------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -93,7 +93,7 @@ The recommended workflow has four phases:
   <Step title="Implement">
     Switch out of plan mode by approving the plan or pressing `Shift+Tab`, then let Claude code, verifying against its plan.
 
-    ```txt title="claude (default mode)" wrap theme={null}
+    ```txt title="claude" wrap theme={null}
     implement the OAuth flow from your plan. write tests for the
     callback handler, run the test suite and fix any failures.
     ```
@@ -102,7 +102,7 @@ The recommended workflow has four phases:
   <Step title="Commit">
     Ask Claude to commit with a descriptive message and create a PR.
 
-    ```txt title="claude (default mode)" wrap theme={null}
+    ```txt title="claude" wrap theme={null}
     commit with a descriptive message and open a PR
     ```
   </Step>
@@ -189,21 +189,22 @@ Keep it concise. For each line, ask: *"Would removing this cause Claude to make 
 | Developer environment quirks (required env vars)     | File-by-file descriptions of the codebase          |
 | Common gotchas or non-obvious behaviors              | Self-evident practices like "write clean code"     |
 
-If Claude keeps doing something you don't want despite having a rule against it, the file is probably too long and the rule is getting lost. If Claude asks you questions that are answered in CLAUDE.md, the phrasing might be ambiguous. Treat CLAUDE.md like code: review it when things go wrong, prune it regularly, and test changes by observing whether Claude's behavior actually shifts.
+If Claude keeps doing something you don't want despite having a rule against it, the file is probably too long and the rule is getting lost. If Claude asks you questions that are answered in CLAUDE.md, the phrasing might be ambiguous. Treat CLAUDE.md like code: review it when things go wrong, prune it regularly, and test changes by observing whether Claude's behavior actually shifts. For a checked-in CLAUDE.md, run [`/doctor`](/docs/en/commands#all-commands) and Claude proposes cuts for content it can derive from the codebase.
 
-You can tune instructions by adding emphasis (e.g., "IMPORTANT" or "YOU MUST") to improve adherence. Check CLAUDE.md into git so your team can contribute. The file compounds in value over time.
+If Claude keeps skipping one instruction, add emphasis such as "IMPORTANT" to that line alone. If you emphasize many lines, none of them stands out. Check CLAUDE.md into git so your team can contribute. The file compounds in value over time.
 
 CLAUDE.md files can import additional files using `@path/to/import` syntax. For import rules and where CLAUDE.md files can live, see [CLAUDE.md files](/docs/en/memory#claude-md-files).
 
 ### Configure permissions
 
 <Tip>
-  Use [auto mode](/docs/en/permission-modes#eliminate-prompts-with-auto-mode) to let a classifier handle approvals, `/permissions` to allowlist specific commands, or `/sandbox` for OS-level isolation. Each reduces interruptions while keeping you in control.
+  To get fewer prompts without giving up control, pre-approve the tools you trust with `/permissions` and let sandboxed commands run without asking with `/sandbox`. Switch to Manual mode when you want to approve edits and commands yourself.
 </Tip>
 
-By default, Claude Code requests permission for actions that might modify your system: file writes, Bash commands, MCP tools, etc. This is safe but tedious. After the tenth approval you're not really reviewing anymore, you're just clicking through. There are three ways to reduce these interruptions:
+On Pro, Max, and Team plans, auto mode is the [built-in starting permission mode](/docs/en/permission-modes#eliminate-prompts-with-auto-mode) for interactive terminal and VS Code sessions: a separate classifier model reviews most actions instead of you and blocks only what looks risky, such as scope escalation, unknown infrastructure, or hostile-content-driven actions.
 
-* **Auto mode**: a separate classifier model reviews commands and blocks only what looks risky: scope escalation, unknown infrastructure, or hostile-content-driven actions. Best when you trust the general direction of a task but don't want to click through every step
+In Manual mode, the built-in starting permission mode on other plans, Claude Code asks before actions that might modify your system: file writes, Bash commands, MCP tools. That's safe but tedious. After the tenth approval you're clicking through rather than reviewing. Two tools cut those interruptions in Manual mode and apply in auto mode as well:
+
 * **Permission allowlists**: permit specific tools you know are safe, like `npm run lint` or `git commit`
 * **Sandboxing**: enable OS-level isolation that restricts filesystem and network access, allowing Claude to work more freely within defined boundaries
 
@@ -432,7 +433,7 @@ Instead of carefully planning every move, you can tell Claude to try something r
   Name sessions with `/rename` and treat them like branches: each workstream gets its own persistent context.
 </Tip>
 
-Claude Code saves conversations locally, so when a task spans multiple sittings you don't have to re-explain the context. Run `claude --continue` to pick up the most recent session, or `claude --resume` to choose from a list. Give sessions descriptive names like `oauth-migration` so you can find them later. See [Manage sessions](/docs/en/sessions) for the full set of resume, branch, and naming controls.
+Claude Code saves conversations locally, so when a task spans multiple sittings you don't have to re-explain the context. Run [`claude --continue`](/docs/en/sessions#resume-a-session) to pick up where you left off, or `claude --resume` to choose from a list. Give sessions descriptive names like `oauth-migration` so you can find them later. See [Manage sessions](/docs/en/sessions) for the full set of resume, branch, and naming controls.
 
 ***
 
@@ -472,7 +473,8 @@ Pick the parallel approach that fits how much coordination you want to do yourse
 * [Worktrees](/docs/en/worktrees): run separate CLI sessions in isolated git checkouts so edits don't collide
 * [Desktop app](/docs/en/desktop#work-in-parallel-with-sessions): manage multiple local sessions visually, each in its own worktree
 * [Claude Code on the web](/docs/en/claude-code-on-the-web): run sessions in the cloud, on Anthropic-managed infrastructure by default
-* [Agent teams](/docs/en/agent-teams): automated coordination of multiple sessions with shared tasks, messaging, and a team lead
+* [Agent view](/docs/en/agent-view): research preview. Run `claude agents` to dispatch sessions that keep running in the background and watch them from one screen
+* [Agent teams](/docs/en/agent-teams): experimental and disabled by default. Automated coordination of multiple sessions with shared tasks, messaging, and a team lead
 
 Beyond parallelizing work, multiple sessions enable quality-focused workflows. A fresh context improves code review since Claude won't be biased toward code it just wrote.
 
@@ -492,7 +494,7 @@ You can do something similar with tests: have one Claude write tests, then anoth
   Loop through tasks calling `claude -p` for each. Use `--allowedTools` to scope permissions for batch operations.
 </Tip>
 
-For large migrations or analyses, you can distribute work across many parallel Claude invocations:
+For large migrations or analyses, you can distribute work across many parallel Claude invocations. In a git repository, run [`/batch <instruction>`](/docs/en/commands#all-commands) to have Claude split the change across 5 to 30 subagents. Each subagent works in its own worktree and opens a pull request. To drive the fan-out from your own script instead, loop over `claude -p`:
 
 <Steps>
   <Step title="Generate a task list">
@@ -547,7 +549,7 @@ every requirement is implemented, the listed edge cases have tests, and
 nothing outside the task's scope changed. Report gaps, not style preferences.
 ```
 
-Because the reviewer runs as a subagent, the implementing session receives the gaps directly and can fix them and re-review without you copying findings between windows. For longer autonomous runs, an [agent team](/docs/en/agent-teams) can keep this loop going across many tasks while you spot-check the recorded findings.
+Because the reviewer runs as a subagent, the implementing session receives the gaps directly and can fix them and re-review without you copying findings between windows.
 
 <Callout>
   A reviewer prompted to find gaps will usually report some, even when the work is sound, because that is what it was asked to do. Chasing every finding leads to over-engineering: extra abstraction layers, defensive code, and tests for cases that can't happen. Tell the reviewer to flag only gaps that affect correctness or the stated requirements, and treat the rest as optional.

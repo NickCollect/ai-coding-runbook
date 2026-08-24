@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/amazon-bedrock
-fetched_at: 2026-08-17T02:15:20.738802+00:00
+fetched_at: 2026-08-24T02:18:36.852319+00:00
 fetch_method: mintlify_md
 ---
 
@@ -105,7 +105,7 @@ If you have AWS credentials and want to start using Claude Code through Amazon B
   </Step>
 
   <Step title="Start Claude Code and choose Amazon Bedrock">
-    Run `claude`. At the login prompt, select **3rd-party platform**, then **Amazon Bedrock**. If you're already signed in and see the chat prompt instead, run `/setup-bedrock` to open the wizard. The command works when typed even though it isn't listed in the command menu until Bedrock is configured.
+    Run `claude`. At the login prompt, select **3rd-party platform**, then **Amazon Bedrock**. If you're already signed in and see the chat prompt instead, run `/setup-bedrock` to open the wizard. Until `CLAUDE_CODE_USE_BEDROCK=1` is set, Claude Code [hides the command from the command menu](/docs/en/commands#how-the-command-menu-matches-what-you-type); type it in full.
   </Step>
 
   <Step title="Follow the wizard prompts">
@@ -254,7 +254,11 @@ When enabling Amazon Bedrock for Claude Code, keep the following in mind:
   * the `region` set on your active AWS profile, read from the AWS shared credentials file first and then the shared config file, matching AWS SDK precedence
   * `us-east-1`
 
-  The active profile is `AWS_PROFILE` if set, otherwise `default`. Set `AWS_SHARED_CREDENTIALS_FILE` or `AWS_CONFIG_FILE` to point at non-default file paths. Run `/status` to see the resolved region. When the region came from your AWS config files or the default fallback, `/status` also notes the source. On v2.1.171 and earlier, Claude Code does not read the AWS config files, so set `AWS_REGION` explicitly.
+  If a value from any of these sources isn't shaped like a region name, Claude Code treats it as unset and continues down the order. For example, Claude Code treats a value containing a slash, dot, or space as unset.
+
+  The active profile is `AWS_PROFILE` if set, otherwise `default`. Set `AWS_SHARED_CREDENTIALS_FILE` or `AWS_CONFIG_FILE` to point at non-default file paths.
+
+  Run `/status` to see the resolved region. When the region came from your AWS config files or the default fallback, Claude Code also notes the source in the `/status` output. On v2.1.171 and earlier, Claude Code doesn't read the AWS config files, so set `AWS_REGION` explicitly.
 * When using Amazon Bedrock, the `/logout` command is unavailable since authentication is handled through AWS credentials.
 * The WebSearch tool is not available on Amazon Bedrock. See [WebSearch tool behavior](/docs/en/tools-reference#websearch-tool-behavior).
 * You can use settings files for environment variables like `AWS_PROFILE` that you don't want to leak to other processes. See [Settings](/docs/en/settings) for more information.
@@ -295,7 +299,7 @@ Claude Code uses these default models when no pinning variables are set:
 
 Background tasks such as session title generation use the small/fast model, normally a Haiku-class model. On Amazon Bedrock, Claude Code uses the default Sonnet model for background tasks because Haiku may not be enabled in every account or region. Two selections change which model carries them:
 
-* When you select a primary model with `--model`, `ANTHROPIC_MODEL`, or the `model` setting, background tasks use that model. Setting `ANTHROPIC_DEFAULT_OPUS_MODEL` without `ANTHROPIC_DEFAULT_SONNET_MODEL` counts as a selection too, because the built-in Sonnet model may not be enabled in an account that steers its own Opus.
+* When you select a primary model with `--model`, `ANTHROPIC_MODEL`, or the `model` setting, background tasks use that model. When Claude Code starts the session on the model you set with [`ANTHROPIC_DEFAULT_MODEL`](/docs/en/model-config#set-a-default-model-for-new-sessions), background tasks use that model too. Setting `ANTHROPIC_DEFAULT_OPUS_MODEL` without `ANTHROPIC_DEFAULT_SONNET_MODEL` also counts as a selection, because the built-in Sonnet model may not be enabled in an account that steers its own Opus.
 * To use Haiku for background tasks, set `ANTHROPIC_DEFAULT_HAIKU_MODEL` to a model ID that is available in your account.
 
 <Warning>
@@ -327,7 +331,7 @@ The 1-hour cache TTL is billed at a higher rate than the 5-minute default. See [
 
 #### Map each model version to an inference profile
 
-The `ANTHROPIC_DEFAULT_*_MODEL` environment variables configure one inference profile per model family. If your organization needs to expose several versions of the same family in the `/model` picker, each routed to its own application inference profile ARN, use the `modelOverrides` setting in your [settings file](/docs/en/settings#settings-files) instead.
+The `ANTHROPIC_DEFAULT_*_MODEL` environment variables configure one inference profile per model family. If your organization needs to expose several versions of the same family in the `/model` picker, each routed to its own application inference profile ARN, use the `modelOverrides` setting in your [settings file](/docs/en/settings#where-settings-live) instead.
 
 This example maps four Opus versions to distinct ARNs so users can switch between them without bypassing your organization's inference profiles:
 
@@ -352,7 +356,7 @@ If you have pinned a model version that is older than the current Claude Code de
 
 If you have not pinned a model and the current default is unavailable in your account, Claude Code falls back for the current session and shows a notice. It tries earlier versions of the default model first and, when the default is an Opus model and no Opus version is available, falls back to the default Sonnet model. The fallback is not persisted. Enable the newer model in your Amazon Bedrock account or [pin a version](#4-pin-model-versions) to make the choice permanent.
 
-When you start the session on a specific Sonnet or Opus version, with `--model`, `ANTHROPIC_MODEL`, or the [`model` setting](/docs/en/settings), that version acts as the session's pinned default for the matching `sonnet` or `opus` alias. Claude Code skips the availability check for the built-in default your model replaces and starts on the model you configured, with no fallback notice.
+When you start the session on a specific Sonnet or Opus version, for example with `--model`, `ANTHROPIC_MODEL`, or the [`model` setting](/docs/en/settings-reference#model), that version acts as the session's pinned default for the matching `sonnet` or `opus` alias. Claude Code skips the availability check for the built-in default your model replaces and starts on the model you configured, with no fallback notice.
 
 Model aliases such as `opus` don't act as pins, and neither does a model ID Claude Code doesn't recognize, such as an application inference profile ARN.
 
@@ -446,7 +450,7 @@ For details, see [Amazon Bedrock IAM documentation](https://docs.aws.amazon.com/
 
 ## 1M token context window
 
-Claude Sonnet 5, Opus 4.6 and later, and Sonnet 4.6 support the [1M token context window](https://platform.claude.com/docs/en/build-with-claude/context-windows#context-window-sizes-by-model) on Amazon Bedrock. Sonnet 5 is served through the [Mantle endpoint](#use-the-mantle-endpoint) and always runs with the 1M window, with no `[1m]` variant to select. For the other models, Claude Code automatically enables the extended context window when you select a 1M model variant.
+Claude Sonnet 5, Opus 4.6 and later, and Sonnet 4.6 support the [1M token context window](https://platform.claude.com/docs/en/build-with-claude/context-windows#context-window-sizes-by-model) on Amazon Bedrock. Sonnet 5 always runs with the 1M window on both the Invoke API and the [Mantle endpoint](#use-the-mantle-endpoint), with no `[1m]` variant to select. For the other models, Claude Code automatically enables the extended context window when you select a 1M model variant.
 
 The [setup wizard](#sign-in-with-bedrock) offers a 1M context option when it pins models. To enable it for a manually pinned model instead, append `[1m]` to the model ID. See [Pin models for third-party deployments](/docs/en/model-config#pin-models-for-third-party-deployments) for details.
 

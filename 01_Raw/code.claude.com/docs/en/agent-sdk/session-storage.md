@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/session-storage
-fetched_at: 2026-08-17T02:15:19.046200+00:00
+fetched_at: 2026-08-24T02:18:35.835826+00:00
 fetch_method: mintlify_md
 ---
 
@@ -92,7 +92,11 @@ A `SessionStore` is an object with two required methods, `append` and `load`, an
   ```
 </CodeGroup>
 
-`SessionKey` addresses one transcript. `projectKey` is a stable, filesystem-safe encoding of the working directory, `sessionId` is the session UUID, and `subpath` is set when the entry belongs to a subagent transcript or sidecar file rather than the main conversation. Because `projectKey` encodes the working directory, resume or continue from the store from a working directory matching the original run's. Treat `subpath` as an opaque key suffix; it follows the on-disk layout, for example `subagents/agent-<id>`. When `subpath` is undefined the key refers to the main transcript.
+`SessionKey` addresses one transcript. `projectKey` is a stable, filesystem-safe encoding of the working directory, `sessionId` is the session UUID, and `subpath` is set when the entry belongs to a subagent transcript or sidecar file rather than the main conversation.
+
+Because `projectKey` encodes the working directory, resume or continue from the store from a working directory matching the original run's. In TypeScript, if you set [`CLAUDE_CODE_PROJECT_DIR_NAME`](/docs/en/sessions#name-the-project-directory-yourself) beside `CLAUDE_CONFIG_DIR` in a query's [`env` option](/docs/en/agent-sdk/typescript#options), the SDK keys that query's entries, and its `resume` and `continue` lookups, by that name instead. Because standalone helpers such as `listSessions` and `deleteSession` take no `env` and read the process environment, set `CLAUDE_CONFIG_DIR` and the same name in the host process environment too. Requires Agent SDK v0.3.234 or later.
+
+Treat `subpath` as an opaque key suffix; it follows the on-disk layout, for example `subagents/agent-<id>`. When `subpath` is undefined the key refers to the main transcript.
 
 | Method                 | Required | Called when                                                                                                                                                                                                                                                                                               |
 | :--------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -289,7 +293,7 @@ When the store returns the transcript, the SDK writes it into a temporary config
 
 The SDK also seeds the temporary directory with files from your real config directory. What it copies differs by language:
 
-* **TypeScript**: credentials, `.claude.json`, and your user `settings.json`. From `settings.json` it strips the keys that misbehave under a temporary config directory: `enabledPlugins`, `extraKnownMarketplaces`, its [`additionalMarketplaces`](/docs/en/settings#extraknownmarketplaces) alias, and any `CLAUDE_CONFIG_DIR` in the file's `env` block. Before Agent SDK v0.3.232, the SDK didn't strip the alias. Auth configured in settings, such as [`apiKeyHelper`](/docs/en/settings#available-settings), works when you resume from the store. Before Agent SDK v0.3.222, the TypeScript SDK copied only credentials and `.claude.json`.
+* **TypeScript**: credentials, `.claude.json`, and your user `settings.json`. From `settings.json` it strips the keys that misbehave under a temporary config directory: `enabledPlugins`, `extraKnownMarketplaces`, its [`additionalMarketplaces`](/docs/en/settings-reference#extraknownmarketplaces) alias, and any `CLAUDE_CONFIG_DIR` in the file's `env` block. Before Agent SDK v0.3.232, the SDK didn't strip the alias. Auth configured in settings, such as [`apiKeyHelper`](/docs/en/settings-reference#apikeyhelper), works when you resume from the store. Before Agent SDK v0.3.222, the TypeScript SDK copied only credentials and `.claude.json`.
 * **Python**: credentials and `.claude.json` only, so an app that authenticates through `apiKeyHelper` in your user `settings.json` fails with `Not logged in` when resuming from a store. An `apiKeyHelper` in managed or project settings still works, because Claude Code reads those files from locations that `CLAUDE_CONFIG_DIR` doesn't affect.
 
 When the store has nothing for the session, the SDK runs under your real config directory instead, and the outcome depends on which option you passed:

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/computer-use
-fetched_at: 2026-08-17T02:15:23.412558+00:00
+fetched_at: 2026-08-24T02:18:38.147693+00:00
 fetch_method: mintlify_md
 ---
 
@@ -104,7 +104,7 @@ Understanding the flow helps you anticipate what Claude will do and how to inter
 
 ### One session at a time
 
-Only one session at a time can use your computer. Claude Code takes a machine-wide lock when a session performs its first computer use action. Claude Code releases it when that session exits, not when the task finishes. If another session is already using your computer, Claude Code rejects new attempts and tells you which session holds the lock. Exit that session first.
+Only one session at a time can use your computer. A session takes a machine-wide lock at its first computer use action and releases it when the session exits, not when the task finishes. A second session's computer use fails with an error naming the session that holds the lock. Exit that session first.
 
 ### Apps are hidden while Claude works
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-code-on-the-web
-fetched_at: 2026-08-17T02:15:22.440930+00:00
+fetched_at: 2026-08-24T02:18:37.783906+00:00
 fetch_method: mintlify_md
 ---
 
@@ -34,7 +34,7 @@ This page covers the web product itself:
 
 ## Cloud environments
 
-Every cloud session runs in a [cloud environment](/docs/en/cloud-environments), the saved configuration that controls network access, environment variables, and setup scripts. When you onboard, Claude Code sets up a **Default** environment with [**Trusted** network access](/docs/en/cloud-environments#access-levels). See [The Default environment](/docs/en/cloud-environments#the-default-environment) for how it's created and how sessions choose an environment when you have more than one.
+Every cloud session runs in a [cloud environment](/docs/en/cloud-environments), the saved configuration that controls network access, environment variables, and setup scripts. If you don't have an environment yet when you onboard, Claude Code sets up a **Default** environment with [**Trusted** network access](/docs/en/cloud-environments#access-levels). See [The Default environment](/docs/en/cloud-environments#the-default-environment) for how it's created and how sessions choose an environment when you have more than one.
 
 The same environments apply wherever you start a cloud session: the web, the terminal, [Claude Tag](https://claude.com/docs/claude-tag/overview), [routines](/docs/en/routines), and the mobile and Desktop apps. Claude Tag channel sessions use [organization-shared environments](/docs/en/cloud-environments#organization-shared-environments) only.
 
@@ -54,8 +54,6 @@ Cloud sessions need access to your GitHub repositories to clone code and push br
 </Note>
 
 Either method works. [`/schedule`](/docs/en/routines) checks for either form of access and prompts you to run `/web-setup` if neither is configured. See [Connect from your terminal](/docs/en/web-quickstart#connect-from-your-terminal) for the `/web-setup` walkthrough.
-
-The GitHub App is required for [Auto-fix](#auto-fix-pull-requests), which uses the App to receive PR webhooks. If you connect with `/web-setup` and later want Auto-fix, install the App on those repositories.
 
 Team and Enterprise Owners can disable `/web-setup` with the Quick web setup toggle at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code).
 
@@ -104,8 +102,6 @@ In plan mode, Claude reads files, runs commands to explore, and proposes a plan 
 ```bash theme={null}
 claude --cloud "Execute the migration plan in docs/migration-plan.md"
 ```
-
-This pattern gives you control over the strategy while letting Claude execute autonomously in the cloud.
 
 **Run tasks in parallel**: each `--cloud` command creates its own cloud session that runs independently. You can start multiple tasks and they'll all run simultaneously in separate sessions:
 
@@ -362,7 +358,7 @@ Before relying on cloud sessions for a workflow, account for these constraints:
 * [Ultrareview](/docs/en/ultrareview): run a deep multi-agent code review in a cloud sandbox
 * [Routines](/docs/en/routines): automate work on a schedule, via API call, or in response to GitHub events
 * [Hooks configuration](/docs/en/hooks): run scripts at session lifecycle events
-* [Settings reference](/docs/en/settings): all configuration options
+* [Settings reference](/docs/en/settings-reference): all configuration options
 * [Security](/docs/en/security): isolation guarantees and data handling
 * [Data usage](/docs/en/data-usage): what Anthropic retains from cloud sessions
 * [Claude Tag](https://claude.com/docs/claude-tag/overview): an organization-managed @Claude in Slack that runs on the same cloud infrastructure

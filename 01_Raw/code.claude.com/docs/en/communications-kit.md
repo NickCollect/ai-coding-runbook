@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/communications-kit
-fetched_at: 2026-08-17T02:15:23.362064+00:00
+fetched_at: 2026-08-24T02:18:38.104304+00:00
 fetch_method: mintlify_md
 ---
 
@@ -411,7 +411,7 @@ and it's pointing at line 47-ish"? Screenshot it.
 
 Drag a screenshot straight into the terminal and Claude sees it: error
 dialogs, UI mockups, whiteboard photos, Figma exports. *Ctrl+V* pastes from
-clipboard (Ctrl+V works on macOS too, and Cmd+V works in iTerm2).
+the clipboard, or *Alt+V* on Windows and WSL.
 
 *Try it now:* next time something visual breaks, screenshot it and paste it
 right into the prompt. Then just type "what's wrong here?"

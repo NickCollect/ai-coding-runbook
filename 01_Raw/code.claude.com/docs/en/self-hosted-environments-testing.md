@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/self-hosted-environments-testing
-fetched_at: 2026-08-17T02:15:29.635979+00:00
+fetched_at: 2026-08-24T02:18:41.690186+00:00
 fetch_method: mintlify_md
 ---
 
@@ -94,7 +94,7 @@ The `--environment` and `--ref` dispatch flags require Claude Code v2.1.224 or l
 
 In a non-interactive run, with `-p` or a piped prompt, Claude Code creates the session, prints the session ID and a link to it, and exits. From a terminal, `claude --environment <id> "task"` starts an attached interactive cloud session on the environment instead.
 
-The flag takes precedence over the [`remote.defaultEnvironmentId`](/docs/en/settings#available-settings) setting. It doesn't support `--output-format stream-json`, and can't be combined with flags that resume, attach to, or preconfigure a session, such as `--resume`, `--continue`, `--teleport`, `--session-id`, or `--init-only`. `--cloud` is rejected with a session ID or URL, and in non-interactive runs when it carries a description. A bare `--cloud` is treated as absent. From a terminal, you can pass the task as the `--cloud` description instead of a positional prompt.
+The flag takes precedence over the [`remote.defaultEnvironmentId`](/docs/en/settings-reference#remote-defaultenvironmentid) setting. It doesn't support `--output-format stream-json`, and can't be combined with flags that resume, attach to, or preconfigure a session, such as `--resume`, `--continue`, `--teleport`, `--session-id`, or `--init-only`. `--cloud` is rejected with a session ID or URL, and in non-interactive runs when it carries a description. A bare `--cloud` is treated as absent. From a terminal, you can pass the task as the `--cloud` description instead of a positional prompt.
 
 ## Example script
 
@@ -208,9 +208,9 @@ Create and delete environments programmatically so each CI run gets a clean one;
 
 ### Mint the admin token
 
-`$ADMIN_TOKEN` is a claude.ai OAuth access token for an account that holds an Owner or admin role, minted the same way as [Authenticate from CI](#authenticate-from-ci):
+`$ADMIN_TOKEN` is a claude.ai OAuth access token for an account that holds an Owner role, minted the same way as [Authenticate from CI](#authenticate-from-ci):
 
-* **Mint it**: run `claude auth login` with an account that holds an Owner or admin role, then read the current access token from the OS keychain on macOS or `~/.claude/.credentials.json` on Linux and Windows.
+* **Mint it**: run `claude auth login` with an account that holds an Owner role, then read the current access token from the OS keychain on macOS or `~/.claude/.credentials.json` on Linux and Windows.
 * **Read it fresh each run**: the CLI rotates the access token, and the same 30-day refresh-grant cap applies, so don't store a copy.
 * **Pass it via stdin**: as the example does, so the token never lands in curl's argument list or your build log.
 
@@ -229,7 +229,7 @@ ENVIRONMENT_ID=$(jq -er .pool.pool_id <<<"$create")
 ENVIRONMENT_SECRET=$(jq -er .pool_secret <<<"$create")
 ```
 
-Until an [Owner or admin turns on **Allow self-hosted environments**](/docs/en/self-hosted-environments#availability-and-limitations) for the organization, the call fails with a `403` `permission_error` reading `self-hosted runners are disabled by your organization's policy`.
+Until an [Owner turns on **Allow self-hosted environments**](/docs/en/self-hosted-environments#availability-and-limitations) for the organization, the call fails with a `403` `permission_error` reading `self-hosted runners are disabled by your organization's policy`.
 
 Start a runner on this host with `SELF_HOSTED_RUNNER_ENVIRONMENT_SECRET=$ENVIRONMENT_SECRET`, plus the capture hook and `E2E_REPLY_DIR` per [Install the capture hook](#install-the-capture-hook-on-your-test-runner), then run the test script.
 
