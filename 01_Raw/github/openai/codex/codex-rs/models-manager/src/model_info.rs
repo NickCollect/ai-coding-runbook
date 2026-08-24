@@ -59,6 +59,7 @@ pub fn with_config_overrides(mut model: ModelInfo, config: &ModelsManagerConfig)
             permissions: None,
             multi_agent: None,
             token_budget: None,
+            guardian_v2: None,
         });
         model_messages.instructions_template = Some(base_instructions.clone());
         model_messages.instructions_variables = None;
@@ -144,7 +145,7 @@ pub fn model_info_from_slug(slug: &str) -> ModelInfo {
         description: None,
         default_reasoning_level: None,
         supported_reasoning_levels: Vec::new(),
-        shell_type: ConfigShellToolType::Default,
+        shell_type: ConfigShellToolType::UnifiedExec,
         visibility: ModelVisibility::None,
         supported_in_api: true,
         priority: 99,
@@ -201,6 +202,7 @@ fn local_model_messages_for_slug(slug: &str) -> ModelMessages {
             permissions: None,
             multi_agent: None,
             token_budget: None,
+            guardian_v2: None,
         },
         _ => ModelMessages {
             instructions_template: Some(BASE_INSTRUCTIONS.to_string()),
@@ -211,6 +213,7 @@ fn local_model_messages_for_slug(slug: &str) -> ModelMessages {
             permissions: None,
             multi_agent: None,
             token_budget: None,
+            guardian_v2: None,
         },
     }
 }

@@ -207,17 +207,23 @@ mod agent_message_consolidation;
 mod agent_navigation;
 mod agent_picker;
 mod agent_status_feed;
+mod agents_overview;
+mod agents_overview_view;
+pub(crate) use agents_overview::AGENTS_OVERVIEW_VIEW_ID;
 mod app_server_event_targets;
 mod app_server_events;
 pub(crate) mod app_server_requests;
 mod background_requests;
 mod config_persistence;
+mod connector_mentions;
 mod event_dispatch;
+mod file_change_approvals;
 mod history_pagination;
 mod history_ui;
 mod input;
 mod loaded_threads;
 mod pending_interactive_replay;
+mod permission_shortcuts;
 mod pets;
 mod platform_actions;
 mod plugin_mentions;
@@ -228,6 +234,7 @@ mod session_lifecycle;
 mod side;
 mod startup;
 mod startup_prompts;
+mod thread_event_buffer;
 mod thread_events;
 mod thread_goal_actions;
 mod thread_routing;
@@ -590,6 +597,7 @@ pub(crate) struct App {
     thread_event_channels: HashMap<ThreadId, ThreadEventChannel>,
     thread_event_listener_tasks: HashMap<ThreadId, JoinHandle<()>>,
     agent_navigation: AgentNavigationState,
+    agents_overview: agents_overview::AgentsOverviewState,
     side_threads: HashMap<ThreadId, SideThreadState>,
     abandoned_side_threads: HashSet<ThreadId>,
     active_thread_id: Option<ThreadId>,
@@ -599,6 +607,9 @@ pub(crate) struct App {
     primary_session_configured: Option<ThreadSessionState>,
     pending_primary_events: VecDeque<ThreadBufferedEvent>,
     pending_app_server_requests: PendingAppServerRequests,
+    dynamic_tool_status_updates:
+        tokio::sync::broadcast::Sender<codex_app_server_protocol::ThreadStatusChangedNotification>,
+    dynamic_tool_tasks: HashMap<codex_app_server_protocol::RequestId, (String, JoinHandle<()>)>,
     pending_startup_thread_start: bool,
     /// Keeps protected screens quarantined until initialized chat receives genuine user input.
     startup_protected_input_boundary: bool,
@@ -673,31 +684,6 @@ fn active_turn_steer_race(error: &TypedRequestError) -> Option<ActiveTurnSteerRa
         .strip_suffix('`')?
         .to_string();
     Some(ActiveTurnSteerRace::ExpectedTurnMismatch { actual_turn_id })
-}
-
-fn session_start_error(
-    action: &str,
-    target_session: &SessionTarget,
-    err: color_eyre::eyre::Report,
-) -> color_eyre::eyre::Report {
-    if let Some(message) = archived_session_guidance(&err) {
-        return color_eyre::eyre::eyre!("{message}");
-    }
-
-    let target_label = target_session.display_label();
-    color_eyre::eyre::eyre!("Failed to {action} session from {target_label}: {err}")
-}
-
-fn archived_session_guidance(err: &color_eyre::eyre::Report) -> Option<String> {
-    let err = err.to_string();
-    let message = &err[err.find("session ")?..];
-    if !message.contains(" is archived. Run `codex unarchive ") {
-        return None;
-    }
-    let message = message
-        .split_once(" (code ")
-        .map_or(message, |(message, _)| message);
-    Some(message.to_string())
 }
 
 fn active_turn_interrupt_race(error: &TypedRequestError) -> Option<String> {
@@ -860,7 +846,24 @@ impl App {
     }
 
     fn render_chat_widget_frame(&mut self, tui: &mut tui::Tui, screen_size: Size) -> Result<Rect> {
+        let dashboard_visible = self
+            .chat_widget
+            .selected_index_for_present_view(AGENTS_OVERVIEW_VIEW_ID)
+            .is_some();
+        if std::mem::replace(
+            &mut self.agents_overview.rendered_full_screen,
+            dashboard_visible,
+        ) && !dashboard_visible
+        {
+            self.schedule_immediate_resize_reflow(tui);
+            self.maybe_run_resize_reflow(tui, screen_size)?;
+        }
         self.with_chat_widget_frame(screen_size.width, |desired_height, chat_widget| {
+            let desired_height = if dashboard_visible {
+                screen_size.height
+            } else {
+                desired_height
+            };
             let mut rendered_area = Rect::default();
             tui.draw_with_resize_reflow(desired_height, screen_size, |frame| {
                 let area = frame.area();

@@ -40,7 +40,7 @@ pub enum SlashCommand {
     Compact,
     Plan,
     Goal,
-    Agent,
+    Agents,
     Side,
     Btw,
     Copy,
@@ -99,7 +99,7 @@ impl SlashCommand {
             SlashCommand::Fork => "fork the current chat",
             SlashCommand::App => "continue this session in the Desktop app",
             SlashCommand::Quit | SlashCommand::Exit => "exit Codex",
-            SlashCommand::Copy => "copy last response as markdown",
+            SlashCommand::Copy => "copy the last response, code block, or quote",
             SlashCommand::Export => "export the conversation as markdown",
             SlashCommand::Raw => "toggle raw scrollback mode for copy-friendly terminal selection",
             SlashCommand::Diff => "show git diff (including untracked files)",
@@ -127,7 +127,8 @@ impl SlashCommand {
             SlashCommand::Personality => "choose a communication style for Codex",
             SlashCommand::Plan => "switch to Plan mode",
             SlashCommand::Goal => "set or view the goal for a long-running task",
-            SlashCommand::Agent | SlashCommand::MultiAgents => "switch the active agent thread",
+            SlashCommand::Agents => "view and switch between all active agent sessions",
+            SlashCommand::MultiAgents => "switch between this session's subagents",
             SlashCommand::Side | SlashCommand::Btw => {
                 "start a side conversation in an ephemeral fork"
             }
@@ -188,6 +189,7 @@ impl SlashCommand {
         matches!(
             self,
             SlashCommand::Copy
+                | SlashCommand::Agents
                 | SlashCommand::Export
                 | SlashCommand::Raw
                 | SlashCommand::Diff
@@ -256,7 +258,7 @@ impl SlashCommand {
             | SlashCommand::Btw => true,
             SlashCommand::Rollout => true,
             SlashCommand::TestApproval => true,
-            SlashCommand::Agent | SlashCommand::MultiAgents => true,
+            SlashCommand::Agents | SlashCommand::MultiAgents => true,
             SlashCommand::Theme | SlashCommand::Pets => false,
         }
     }

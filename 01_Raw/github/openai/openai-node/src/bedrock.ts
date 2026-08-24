@@ -1,6 +1,7 @@
 import * as Errors from './error';
 import { OpenAI } from './client';
 import type { ApiKeySetter, ClientOptions } from './client';
+import { assertNoDataResidency } from './internal/data-residency';
 import { assertBedrockRequestOrigin, brand_privateBedrockClient } from './internal/bedrock';
 import type { RequestInit } from './internal/builtin-types';
 import type { NullableHeaders } from './internal/headers';
@@ -15,7 +16,7 @@ import type * as ResponsesAPI from './resources/responses/responses';
 /** Configures Amazon Bedrock's OpenAI-compatible endpoint and bearer-token authentication. */
 export interface BedrockClientOptions extends Omit<
   ClientOptions,
-  'apiKey' | 'adminAPIKey' | 'baseURL' | 'workloadIdentity'
+  'apiKey' | 'adminAPIKey' | 'baseURL' | 'workloadIdentity' | 'dataResidency'
 > {
   /**
    * Bedrock bearer token used for authentication.
@@ -37,6 +38,9 @@ export interface BedrockClientOptions extends Omit<
    * BedrockOpenAI only supports Bedrock bearer token authentication.
    */
   adminAPIKey?: never;
+
+  /** OpenAI data residency cannot be combined with Bedrock routing. */
+  dataResidency?: never;
 
   /**
    * BedrockOpenAI only supports Bedrock bearer token authentication.
@@ -62,6 +66,11 @@ function deriveBedrockBaseURL(awsRegion: string | undefined): string {
   if (!region) {
     throw new Errors.OpenAIError(
       'Must provide one of the `baseURL` or `awsRegion` arguments, or set the `AWS_BEDROCK_BASE_URL`, `AWS_REGION`, or `AWS_DEFAULT_REGION` environment variable.',
+    );
+  }
+  if (!/^[a-z]{2,8}(?:-[a-z0-9]+)+-\d+$/u.test(region)) {
+    throw new Errors.OpenAIError(
+      'The Bedrock AWS `region` is invalid. Use a standard AWS region such as `us-east-1`.',
     );
   }
 
@@ -129,8 +138,10 @@ export class BedrockOpenAI extends OpenAI {
     bedrockTokenProvider,
     adminAPIKey,
     workloadIdentity,
+    dataResidency,
     ...opts
   }: BedrockClientOptions = {}) {
+    assertNoDataResidency(dataResidency, 'BedrockOpenAI');
     if (adminAPIKey || workloadIdentity) {
       throw new Errors.OpenAIError('BedrockOpenAI only supports Bedrock bearer token authentication.');
     }
@@ -203,6 +214,7 @@ export class BedrockOpenAI extends OpenAI {
   ): Promise<void> {
     assertBedrockRequestOrigin(this._options.baseURL ?? this.baseURL, context.url);
     await super.prepareRequest(request, context);
+    request.redirect = 'manual';
   }
 
   protected override async authHeaders(

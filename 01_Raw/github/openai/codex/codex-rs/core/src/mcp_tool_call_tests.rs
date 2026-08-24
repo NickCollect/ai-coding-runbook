@@ -88,9 +88,7 @@ fn approval_metadata(
 }
 
 fn approval_config(turn_context: &TurnContext) -> codex_mcp::McpConfig {
-    let mut config = (*mcp_config_for_test(&turn_context.config)).clone();
-    config.permission_profile = turn_context.permission_profile();
-    config
+    (*mcp_config_for_test(&turn_context.config)).clone()
 }
 
 fn mcp_turn_metadata_context(turn_context: &TurnContext) -> McpTurnMetadataContext<'_> {
@@ -1121,6 +1119,9 @@ async fn mcp_sandbox_cwd_uses_matching_server_environment_uri() -> anyhow::Resul
                         .permission_profile_state()
                         .snapshot(),
                     shell_environment_policy: Default::default(),
+                    exec_policy: None,
+                    mcp_policy: None,
+                    network_policy: None,
                     selected_capability_roots: Vec::new(),
                 }),
             },
@@ -2321,6 +2322,7 @@ async fn approve_mode_skips_when_annotations_do_not_require_approval() {
     let decision = maybe_request_mcp_tool_approval(
         &session,
         &StepContext::for_test(Arc::clone(&turn_context)),
+        &CancellationToken::new(),
         "call-1",
         &invocation,
         &ToolName::namespaced(&invocation.server, &invocation.tool),
@@ -2400,6 +2402,7 @@ async fn guardian_mode_skips_auto_when_annotations_do_not_require_approval() {
     let decision = maybe_request_mcp_tool_approval(
         &session,
         &StepContext::for_test(Arc::clone(&turn_context)),
+        &CancellationToken::new(),
         "call-guardian",
         &invocation,
         &ToolName::namespaced(&invocation.server, &invocation.tool),
@@ -2461,6 +2464,7 @@ async fn permission_request_hook_allows_mcp_tool_call() {
     let decision = maybe_request_mcp_tool_approval(
         &session,
         &StepContext::for_test(Arc::clone(&turn_context)),
+        &CancellationToken::new(),
         "call-mcp-hook",
         &invocation,
         &ToolName::namespaced(&invocation.server, &invocation.tool),
@@ -2530,6 +2534,7 @@ async fn permission_request_hook_uses_hook_tool_name_without_metadata() {
     let decision = maybe_request_mcp_tool_approval(
         &session,
         &StepContext::for_test(Arc::clone(&turn_context)),
+        &CancellationToken::new(),
         "call-mcp-hook-no-metadata",
         &invocation,
         &ToolName::namespaced(&invocation.server, &invocation.tool),
@@ -2614,6 +2619,7 @@ async fn permission_request_hook_runs_after_remembered_mcp_approval() {
     let decision = maybe_request_mcp_tool_approval(
         &session,
         &StepContext::for_test(Arc::clone(&turn_context)),
+        &CancellationToken::new(),
         "call-mcp-remembered",
         &invocation,
         &ToolName::namespaced(&invocation.server, &invocation.tool),
@@ -2712,6 +2718,7 @@ async fn strict_auto_review_forces_guardian_for_mcp_policy_skip() {
     let decision = maybe_request_mcp_tool_approval(
         &session,
         &StepContext::for_test(Arc::clone(&turn_context)),
+        &CancellationToken::new(),
         "call-guardian-deny",
         &invocation,
         &ToolName::namespaced(&invocation.server, &invocation.tool),
@@ -2788,6 +2795,7 @@ async fn assert_mcp_user_approval_persistence(
             maybe_request_mcp_tool_approval(
                 &session,
                 &StepContext::for_test(Arc::clone(&turn_context)),
+                &CancellationToken::new(),
                 "call-mcp-persist",
                 &invocation,
                 &ToolName::namespaced(&invocation.server, &invocation.tool),
@@ -2872,6 +2880,7 @@ async fn prompt_mode_waits_for_approval_when_annotations_do_not_require_approval
             maybe_request_mcp_tool_approval(
                 &session,
                 &StepContext::for_test(Arc::clone(&turn_context)),
+                &CancellationToken::new(),
                 "call-prompt",
                 &invocation,
                 &ToolName::namespaced(&invocation.server, &invocation.tool),
@@ -2936,6 +2945,7 @@ async fn full_access_mode_skips_mcp_tool_approval_for_all_approval_modes() {
         let decision = maybe_request_mcp_tool_approval(
             &session,
             &StepContext::for_test(Arc::clone(&turn_context)),
+            &CancellationToken::new(),
             "call-2",
             &invocation,
             &ToolName::namespaced(&invocation.server, &invocation.tool),
@@ -3028,6 +3038,7 @@ async fn approve_mode_skips_guardian_in_every_permission_mode() {
         let decision = maybe_request_mcp_tool_approval(
             &session,
             &StepContext::for_test(Arc::clone(&turn_context)),
+            &CancellationToken::new(),
             "call-3",
             &invocation,
             &ToolName::namespaced(&invocation.server, &invocation.tool),

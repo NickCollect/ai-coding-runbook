@@ -9,19 +9,19 @@ import {
   assertProviderOwnsAuthorization,
   errorWithCause,
   normalizeOptionalString,
+  parseBedrockEndpointHostname,
   resolveBedrockBearerAuth,
   resolveBedrockEndpoint,
 } from '../../internal/bedrock';
 import type {
   BedrockBearerOptions,
+  BedrockEndpoint,
   BedrockEndpointOptions,
   BedrockRequestAuth,
 } from '../../internal/bedrock';
 import { createProvider } from '../../internal/provider';
 import type { Provider, ProviderRequestContext } from '../../internal/provider';
 import type { FinalizedRequestInit } from '../../internal/types';
-
-const BEDROCK_SERVICE = 'bedrock-mantle';
 
 /** AWS credentials used to sign an Amazon Bedrock request with Signature Version 4. */
 export interface AwsCredentialIdentity {
@@ -101,8 +101,14 @@ function validateStaticCredentials(options: BedrockProviderOptions): AwsCredenti
 }
 
 function requestTarget(parsedURL: URL): { path: string; query: Record<string, string | string[]> } {
-  const query: Record<string, string | string[]> = {};
+  const query: Record<string, string | string[]> = Object.create(null);
   for (const [name, value] of parsedURL.searchParams) {
+    if (name === '__proto__') {
+      throw new Errors.OpenAIError(
+        'The Bedrock SigV4 signer cannot safely sign a `__proto__` query parameter.',
+      );
+    }
+
     const existing = query[name];
     if (existing === undefined) {
       query[name] = value;
@@ -144,6 +150,7 @@ function validateCredentialIdentity(identity: AwsCredentialIdentity): AwsCredent
 }
 
 type BedrockSigV4AuthOptions = {
+  endpoint: BedrockEndpoint;
   region: string;
   staticCredentials?: AwsCredentialIdentity | undefined;
   profile?: string | undefined;
@@ -182,7 +189,7 @@ class BedrockSigV4Auth implements BedrockRequestAuth {
     return (this.signer ??= new SignatureV4({
       credentials: this.credentialsProvider(),
       region: this.options.region,
-      service: BEDROCK_SERVICE,
+      service: this.options.endpoint === 'runtime' ? 'bedrock' : 'bedrock-mantle',
       sha256: Hash.bind(null, 'sha256'),
     }));
   }
@@ -195,10 +202,15 @@ class BedrockSigV4Auth implements BedrockRequestAuth {
     }
 
     const parsedURL = new URL(url);
-    const canonicalRegion = /^bedrock-mantle\.([a-z0-9-]+)\.api\.aws$/i.exec(parsedURL.hostname)?.[1];
-    if (canonicalRegion && canonicalRegion !== this.options.region) {
+    const canonicalEndpoint = parseBedrockEndpointHostname(parsedURL.hostname);
+    if (canonicalEndpoint && canonicalEndpoint.endpoint !== this.options.endpoint) {
       throw new Errors.OpenAIError(
-        `The Bedrock endpoint region \`${canonicalRegion}\` does not match the SigV4 region \`${this.options.region}\`.`,
+        `The Bedrock ${canonicalEndpoint.endpoint} hostname does not match the selected \`${this.options.endpoint}\` endpoint.`,
+      );
+    }
+    if (canonicalEndpoint && canonicalEndpoint.region !== this.options.region) {
+      throw new Errors.OpenAIError(
+        `The Bedrock endpoint region \`${canonicalEndpoint.region}\` does not match the SigV4 region \`${this.options.region}\`.`,
       );
     }
 
@@ -211,6 +223,7 @@ class BedrockSigV4Auth implements BedrockRequestAuth {
 
     const method = (request.method ?? 'GET').toUpperCase();
     const body = signableBody(request.body);
+    const target = requestTarget(parsedURL);
 
     let signed: { headers: Record<string, string> };
     try {
@@ -219,7 +232,7 @@ class BedrockSigV4Auth implements BedrockRequestAuth {
         hostname: parsedURL.hostname,
         ...(parsedURL.port ? { port: Number(parsedURL.port) } : {}),
         method,
-        ...requestTarget(parsedURL),
+        ...target,
         headers: Object.fromEntries(headers.entries()),
         ...(body === undefined ? {} : { body }),
       });
@@ -273,10 +286,19 @@ export function bedrock(options: BedrockProviderOptions = {}): Provider {
     );
   }
 
-  const { region, baseURL } = resolveBedrockEndpoint(options);
+  const { endpoint, region, baseURL } = resolveBedrockEndpoint(options);
   if (!bearerAuth.factory && !region) {
     throw new Errors.OpenAIError(
       'Bedrock requires an AWS region. Pass `region` to `bedrock(...)`, or set `AWS_REGION` or `AWS_DEFAULT_REGION`.',
+    );
+  }
+  if (
+    !bearerAuth.factory &&
+    options.endpoint === undefined &&
+    !parseBedrockEndpointHostname(new URL(baseURL).hostname)
+  ) {
+    throw new Errors.OpenAIError(
+      'A custom Bedrock endpoint requires an explicit `endpoint` option when using AWS credential authentication.',
     );
   }
   const credentialProvider = options.credentialProvider;
@@ -286,6 +308,7 @@ export function bedrock(options: BedrockProviderOptions = {}): Provider {
       const auth =
         bearerAuth.factory?.() ??
         new BedrockSigV4Auth({
+          endpoint,
           region: region!,
           staticCredentials,
           profile,

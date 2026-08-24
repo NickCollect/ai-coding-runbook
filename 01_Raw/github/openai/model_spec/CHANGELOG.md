@@ -1,5 +1,14 @@
 # Changelog
 
+## v2026.08.18 ([Release Notes](https://help.openai.com/en/articles/9624314-model-release-notes), [HTML](https://model-spec.openai.com/2026-08-18.html))
+
+Notable updates
+* Adds additional clarity around principles on appropriate relational interactions for teens (more context in [this](https://openai.com/index/chatgpt-for-teens) blog post).
+* Clarifies how the assistant should handle requests based on false or unsupported premises.
+* Removes outdated guidance about how pre-reasoning-models should think through requests.
+* Adds a new section "Be clear about capabilities and limits" about helping the user form and maintain an accurate mental model of what the assistant can and can't do.
+* A few other small changes and copy edits.
+
 ## v2025.12.18 ([Release Notes](https://help.openai.com/en/articles/9624314-model-release-notes#updates-to-the-openai-model-spec-december-18-2025), [HTML](https://model-spec.openai.com/2025-12-18.html))
 
 Notable updates

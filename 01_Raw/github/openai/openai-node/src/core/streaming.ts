@@ -9,6 +9,45 @@ import type { OpenAI } from '../client';
 
 type Bytes = string | ArrayBuffer | Uint8Array | null | undefined;
 
+type StreamTeeQueue<Item> = {
+  readonly length: number;
+  enqueue: (value: Promise<IteratorResult<Item>>) => void;
+  dequeue: () => Promise<IteratorResult<Item>> | undefined;
+};
+
+function createStreamTeeQueue<Item>(): StreamTeeQueue<Item> {
+  let entries: (Promise<IteratorResult<Item>> | undefined)[] = [];
+  let head = 0;
+
+  return {
+    get length() {
+      return entries.length - head;
+    },
+    enqueue(value) {
+      entries.push(value);
+    },
+    dequeue() {
+      if (head === entries.length) {
+        return undefined;
+      }
+
+      const value = entries[head];
+      entries[head] = undefined;
+      head += 1;
+
+      if (head === entries.length) {
+        entries = [];
+        head = 0;
+      } else if (head >= 1024 && head * 2 >= entries.length) {
+        entries = entries.slice(head);
+        head = 0;
+      }
+
+      return value;
+    },
+  };
+}
+
 /** A decoded server-sent event before its JSON payload has been parsed. */
 export type ServerSentEvent = {
   /** Explicit SSE event name, or `null` when the event has no `event:` field. */
@@ -64,7 +103,7 @@ export class Stream<Item> implements AsyncIterable<Item> {
       let receivedCompletionSentinel = false;
       try {
         for await (const sse of _iterSSEMessages(response, controller)) {
-          if (sse.data.startsWith('[DONE]')) {
+          if (sse.data === '[DONE]') {
             receivedCompletionSentinel = true;
             break;
           }
@@ -74,10 +113,14 @@ export class Stream<Item> implements AsyncIterable<Item> {
 
             try {
               data = JSON.parse(sse.data) as any;
-            } catch (e) {
-              logger.error(`Could not parse message into JSON:`, sse.data);
-              logger.error(`From chunk:`, sse.raw);
-              throw e;
+            } catch {
+              logger.error(`Could not parse message into JSON:`);
+              logger.error(`From chunk:`);
+              throw new SyntaxError('Error reading response: malformed server-sent event JSON.');
+            }
+
+            if (sse.event === 'error') {
+              throw new APIError(undefined, data?.error ?? data, undefined, response.headers);
             }
 
             if (data && data.error) {
@@ -89,14 +132,10 @@ export class Stream<Item> implements AsyncIterable<Item> {
             let data;
             try {
               data = JSON.parse(sse.data);
-            } catch (e) {
-              console.error(`Could not parse message into JSON:`, sse.data);
-              console.error(`From chunk:`, sse.raw);
-              throw e;
-            }
-            // SSE error events surface as APIError instances.
-            if (sse.event === 'error') {
-              throw new APIError(undefined, data.error, data.message, undefined);
+            } catch {
+              logger.error(`Could not parse message into JSON:`);
+              logger.error(`From chunk:`);
+              throw new SyntaxError('Error reading response: malformed server-sent event JSON.');
             }
             yield { event: sse.event, data } as any;
           }
@@ -199,7 +238,18 @@ export class Stream<Item> implements AsyncIterable<Item> {
             continue;
           }
           if (line) {
-            yield JSON.parse(line) as Item;
+            let data: Item;
+            try {
+              data = JSON.parse(line) as Item;
+            } catch (error) {
+              if (error instanceof SyntaxError) {
+                throw new SyntaxError('Error reading response: malformed newline-delimited JSON.');
+              }
+
+              throw error;
+            }
+
+            yield data;
           }
         }
         done = true;
@@ -230,18 +280,18 @@ export class Stream<Item> implements AsyncIterable<Item> {
    * independently read from at different speeds.
    */
   tee(): [Stream<Item>, Stream<Item>] {
-    const left: Promise<IteratorResult<Item>>[] = [];
-    const right: Promise<IteratorResult<Item>>[] = [];
+    const left = createStreamTeeQueue<Item>();
+    const right = createStreamTeeQueue<Item>();
     const iterator = this.iterator();
 
-    const teeIterator = (queue: Promise<IteratorResult<Item>>[]): AsyncIterator<Item> => ({
+    const teeIterator = (queue: StreamTeeQueue<Item>): AsyncIterator<Item> => ({
       next: () => {
         if (queue.length === 0) {
           const result = iterator.next();
-          left.push(result);
-          right.push(result);
+          left.enqueue(result);
+          right.enqueue(result);
         }
-        return queue.shift()!;
+        return queue.dequeue()!;
       },
     });
 
@@ -286,6 +336,7 @@ export class Stream<Item> implements AsyncIterable<Item> {
 
 /**
  * Decodes complete SSE records from a response and aborts when its body is absent.
+ * Complete events are decoded on demand without imposing a line or event size limit.
  *
  * @yields {ServerSentEvent} Each decoded server-sent event in wire order.
  */

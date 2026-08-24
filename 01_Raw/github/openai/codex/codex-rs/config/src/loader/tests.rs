@@ -1,17 +1,74 @@
 use super::*;
+use crate::ConfigRequirementsToml;
 use codex_file_system::CopyOptions;
 use codex_file_system::CreateDirectoryOptions;
 use codex_file_system::ExecutorFileSystemFuture;
 use codex_file_system::FileMetadata;
 use codex_file_system::FileSystemReadStream;
 use codex_file_system::FileSystemSandboxContext;
+use codex_file_system::GetMetadataOptions;
 use codex_file_system::ReadDirectoryEntry;
+use codex_file_system::ReadFileOptions;
 use codex_file_system::RemoveOptions;
+use codex_file_system::WalkOptions;
+use codex_file_system::WalkOutcome;
+use codex_file_system::WriteFileOptions;
 use codex_utils_path_uri::PathUri;
 use pretty_assertions::assert_eq;
 use tempfile::tempdir;
 
-struct TestFileSystem;
+pub(super) struct TestFileSystem;
+
+#[test]
+fn project_config_cannot_bind_permission_shortcuts() {
+    let safe = "[tui.keymap.chat]\nincrease_reasoning_effort = 'f9'\n";
+    for key in ["previous_permission_mode", "next_permission_mode"] {
+        let mut config = toml::from_str(&format!("{safe}{key} = 'page-down'")).unwrap();
+        assert_eq!(
+            sanitize_project_config(&mut config),
+            [format!("tui.keymap.chat.{key}")]
+        );
+        assert_eq!(config, toml::from_str::<TomlValue>(safe).unwrap());
+    }
+}
+
+#[tokio::test]
+async fn managed_browser_import_denial_survives_user_and_session_config() {
+    let tmp = tempdir().expect("tempdir");
+    let allow = "[in_app_browser]\nallow_external_browser_settings_import = true";
+    let deny = "[in_app_browser]\nallow_external_browser_settings_import = false";
+    let requirements_path = tmp.path().join("requirements.toml");
+    std::fs::write(&requirements_path, allow).expect("write system requirements");
+    std::fs::write(tmp.path().join(CONFIG_TOML_FILE), allow).expect("write user config");
+    let mut loader_overrides = LoaderOverrides::without_managed_config_for_tests();
+    loader_overrides.system_requirements_path = Some(requirements_path);
+
+    let stack = load_config_layers_state(
+        &TestFileSystem,
+        tmp.path(),
+        /*cwd*/ None,
+        &[(
+            "in_app_browser.allow_external_browser_settings_import".to_string(),
+            TomlValue::Boolean(true),
+        )],
+        ConfigLoadOptions {
+            loader_overrides,
+            strict_config: false,
+            cloud_config_bundle:
+                crate::test_support::CloudConfigBundleFixture::enterprise_requirement(deny)
+                    .add_enterprise_requirement("[in_app_browser]")
+                    .into_loader(),
+        },
+        &crate::NoopThreadConfigLoader,
+    )
+    .await
+    .expect("load managed browser import requirement");
+
+    assert_eq!(
+        stack.requirements_toml(),
+        &toml::from_str::<ConfigRequirementsToml>(deny).expect("expected requirement"),
+    );
+}
 
 impl ExecutorFileSystem for TestFileSystem {
     fn canonicalize<'a>(
@@ -29,6 +86,7 @@ impl ExecutorFileSystem for TestFileSystem {
     fn read_file<'a>(
         &'a self,
         path: &'a PathUri,
+        _options: ReadFileOptions,
         _sandbox: Option<&'a FileSystemSandboxContext>,
     ) -> ExecutorFileSystemFuture<'a, Vec<u8>> {
         Box::pin(async move {
@@ -54,6 +112,7 @@ impl ExecutorFileSystem for TestFileSystem {
         &'a self,
         _path: &'a PathUri,
         _contents: Vec<u8>,
+        _options: WriteFileOptions,
         _sandbox: Option<&'a FileSystemSandboxContext>,
     ) -> ExecutorFileSystemFuture<'a, ()> {
         Box::pin(async move { unimplemented!("test filesystem only supports reads") })
@@ -71,6 +130,7 @@ impl ExecutorFileSystem for TestFileSystem {
     fn get_metadata<'a>(
         &'a self,
         path: &'a PathUri,
+        _options: GetMetadataOptions,
         _sandbox: Option<&'a FileSystemSandboxContext>,
     ) -> ExecutorFileSystemFuture<'a, FileMetadata> {
         Box::pin(async move {
@@ -93,6 +153,15 @@ impl ExecutorFileSystem for TestFileSystem {
         _sandbox: Option<&'a FileSystemSandboxContext>,
     ) -> ExecutorFileSystemFuture<'a, Vec<ReadDirectoryEntry>> {
         Box::pin(async move { unimplemented!("test filesystem only supports reads") })
+    }
+
+    fn walk<'a>(
+        &'a self,
+        _path: &'a PathUri,
+        _options: WalkOptions,
+        _sandbox: Option<&'a FileSystemSandboxContext>,
+    ) -> ExecutorFileSystemFuture<'a, WalkOutcome> {
+        unimplemented!()
     }
 
     fn remove<'a>(
@@ -193,6 +262,54 @@ model_provider = "system-provider"
 }
 
 #[tokio::test]
+async fn ignoring_login_requirements_preserves_local_auth_backend_requirements() {
+    let tmp = tempdir().expect("tempdir");
+    let requirements_path = tmp.path().join("requirements.toml");
+    std::fs::write(
+        &requirements_path,
+        r#"allowed_login_methods = ["chatgpt"]
+allowed_chatgpt_workspaces = ["managed-workspace"]
+cli_auth_credentials_store = "keyring"
+chatgpt_base_url = "https://managed.example/backend-api/"
+"#,
+    )
+    .expect("write local authentication requirements");
+
+    let mut overrides = LoaderOverrides::without_managed_config_for_tests();
+    overrides.system_requirements_path = Some(requirements_path);
+    overrides.ignore_login_requirements = true;
+
+    let stack = load_config_layers_state(
+        &TestFileSystem,
+        tmp.path(),
+        /*cwd*/ None,
+        &[],
+        overrides,
+        &crate::NoopThreadConfigLoader,
+    )
+    .await
+    .expect("load configuration with remote login exemptions");
+
+    let requirements = stack.requirements();
+    assert_eq!(requirements.allowed_login_methods, None);
+    assert_eq!(requirements.allowed_chatgpt_workspaces, None);
+    assert_eq!(
+        requirements
+            .cli_auth_credentials_store
+            .as_ref()
+            .map(|required| required.value),
+        Some(crate::types::AuthCredentialsStoreMode::Keyring)
+    );
+    assert_eq!(
+        requirements
+            .chatgpt_base_url
+            .as_ref()
+            .map(|required| required.value.as_str()),
+        Some("https://managed.example/backend-api/")
+    );
+}
+
+#[tokio::test]
 async fn missing_packaged_defaults_file_returns_an_error() {
     let tmp = tempdir().expect("tempdir");
     let packaged_defaults_path =
@@ -219,6 +336,82 @@ async fn missing_packaged_defaults_file_returns_an_error() {
             packaged_defaults_path.display()
         )
     );
+}
+
+#[cfg(windows)]
+#[tokio::test]
+async fn default_windows_managed_config_is_ignored_with_warning() {
+    let tmp = tempdir().expect("tempdir");
+    let codex_home = tmp.path().join("codex-home");
+    std::fs::create_dir_all(&codex_home).expect("create codex home");
+    let managed_config_path = codex_home.join("managed_config.toml");
+    std::fs::write(
+        &managed_config_path,
+        r#"
+model = "legacy-model"
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+"#,
+    )
+    .expect("write default legacy managed config");
+    std::fs::write(codex_home.join(CONFIG_TOML_FILE), r#"model = "user-model""#)
+        .expect("write user config");
+
+    let mut overrides = LoaderOverrides::without_managed_config_for_tests();
+    overrides.managed_config_path = None;
+    overrides.system_config_path = Some(tmp.path().join("system-config.toml"));
+    overrides.system_requirements_path = Some(tmp.path().join("requirements.toml"));
+    let stack = load_config_layers_state(
+        &TestFileSystem,
+        &codex_home,
+        /*cwd*/ None,
+        &[],
+        overrides,
+        &crate::NoopThreadConfigLoader,
+    )
+    .await
+    .expect("load config layers");
+
+    assert_eq!(
+        stack.effective_config().get("model"),
+        Some(&TomlValue::String("user-model".to_string()))
+    );
+    assert_eq!(stack.requirements_toml().allowed_approval_policies, None);
+    assert_eq!(stack.requirements_toml().allowed_sandbox_modes, None);
+    assert!(stack.all_layers_low_to_high().all(|layer| !matches!(
+        &layer.name,
+        ConfigLayerSource::LegacyManagedConfigTomlFromFile { .. }
+    )));
+    let expected_warnings = vec![format!(
+        "Ignoring deprecated managed config file at {}; CODEX_HOME/managed_config.toml is no longer supported on Windows. Use %ProgramData%\\OpenAI\\Codex\\requirements.toml for enforced settings or config.toml for defaults.",
+        managed_config_path.display()
+    )];
+    assert_eq!(stack.startup_warnings(), Some(expected_warnings.as_slice()));
+}
+
+#[cfg(windows)]
+#[test]
+fn windows_local_managed_configuration_ignores_legacy_file_but_detects_requirements() {
+    let tmp = tempdir().expect("tempdir");
+    let codex_home = tmp.path().join("codex-home");
+    std::fs::create_dir_all(&codex_home).expect("create codex home");
+    std::fs::write(codex_home.join("managed_config.toml"), "")
+        .expect("write default legacy managed config");
+    let system_requirements_path = tmp.path().join("requirements.toml");
+
+    let legacy_only = has_local_managed_configuration_with_system_requirements_path(
+        &codex_home,
+        &system_requirements_path,
+    )
+    .expect("check legacy-only managed configuration");
+    std::fs::write(&system_requirements_path, "").expect("write system requirements");
+    let with_system_requirements = has_local_managed_configuration_with_system_requirements_path(
+        &codex_home,
+        &system_requirements_path,
+    )
+    .expect("check system managed configuration");
+
+    assert_eq!((legacy_only, with_system_requirements), (false, true));
 }
 
 #[tokio::test]

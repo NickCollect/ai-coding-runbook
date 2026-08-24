@@ -1,6 +1,9 @@
 use crate::capabilities::SelectedCapabilityRoot;
 use crate::config_types::ShellEnvironmentPolicy;
+use crate::mcp_policy::EnvironmentMcpPolicy;
 use crate::models::PermissionProfileSnapshot;
+use codex_execpolicy::RequirementsExecPolicy;
+use codex_network_proxy::EnvironmentNetworkPolicy;
 
 /// Configuration supplied for a thread's selected environment.
 #[allow(clippy::large_enum_variant)]
@@ -25,6 +28,12 @@ pub struct EnvironmentConfig {
     pub permission_profile: PermissionProfileSnapshot,
     /// Controls which environment variables shell commands may inherit.
     pub shell_environment_policy: ShellEnvironmentPolicy,
+    /// Additional managed command restrictions for this environment attachment.
+    pub exec_policy: Option<RequirementsExecPolicy>,
+    /// Additional managed MCP restrictions for this environment attachment.
+    pub mcp_policy: Option<EnvironmentMcpPolicy>,
+    /// Owner-provided traffic restrictions. `None` keeps the existing controller policy.
+    pub network_policy: Option<EnvironmentNetworkPolicy>,
     /// Capability roots selected for this thread's environment attachment.
     pub selected_capability_roots: Vec<SelectedCapabilityRoot>,
 }
@@ -36,6 +45,9 @@ impl std::fmt::Debug for EnvironmentConfig {
             .field("allow_login_shell", &self.allow_login_shell)
             .field("permission_profile", &self.permission_profile)
             .field("shell_environment_policy", &"<redacted>")
+            .field("exec_policy", &self.exec_policy)
+            .field("mcp_policy", &self.mcp_policy)
+            .field("network_policy", &self.network_policy)
             .field("selected_capability_roots", &self.selected_capability_roots)
             .finish()
     }

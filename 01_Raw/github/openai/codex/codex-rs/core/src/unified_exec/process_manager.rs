@@ -60,6 +60,7 @@ use crate::unified_exec::head_tail_buffer::HeadTailBuffer;
 use crate::unified_exec::process::OutputHandles;
 use crate::unified_exec::process::SpawnLifecycleHandle;
 use crate::unified_exec::process::UnifiedExecProcess;
+use crate::unified_exec::shell_snapshot::shell_snapshot_request;
 use crate::unified_exec::take_plugin_metrics_sidecar;
 use codex_core_plugins::PLUGIN_METRICS_OUTPUT_ENV_VAR;
 use codex_core_plugins::PluginCommandAttribution;
@@ -186,6 +187,11 @@ fn exec_server_env_for_request(
     if let Some(exec_server_env_config) = &request.exec_server_env_config {
         let mut env =
             env_overlay_for_exec_server(&request.env, &exec_server_env_config.local_policy_env);
+        if request.exec_server_shell_snapshot.is_some()
+            && !exec_server_env_config.policy.r#set.contains_key("PATH")
+        {
+            env.remove("PATH");
+        }
         if request.exec_server_managed_network.is_some() {
             for (key, value) in &request.env {
                 if is_managed_proxy_env_var(key, value) {
@@ -210,17 +216,20 @@ fn exec_server_params_for_request(
         sandbox.windows_sandbox_proxy_settings_mode = Some(windows_sandbox_proxy_settings_mode);
         sandbox
     });
-    // Sandbox retries reuse the unified-exec ID but start a distinct executor process.
-    let exec_server_process_id = if request.exec_server_sandbox.is_some() {
-        format!("{process_id}-{}", Uuid::new_v4())
-    } else {
-        process_id.to_string()
-    };
+    // Sandbox retries and memory-backed local launches can reuse a unified-exec
+    // ID while the executor still retains the previous process.
+    let exec_server_process_id =
+        if request.exec_server_sandbox.is_some() || request.exec_server_shell_snapshot.is_some() {
+            format!("{process_id}-{}", Uuid::new_v4())
+        } else {
+            process_id.to_string()
+        };
     codex_exec_server::ExecParams {
         process_id: exec_server_process_id.into(),
         argv: request.command.clone(),
         cwd: request.cwd.clone(),
         env_policy,
+        shell_snapshot: request.exec_server_shell_snapshot.clone(),
         env,
         tty,
         pipe_stdin: false,
@@ -1059,12 +1068,13 @@ impl UnifiedExecProcessManager {
         network_proxy_launch: Option<codex_network_proxy::RemoteNetworkProxyLaunchConfig>,
         environment_id: Option<&str>,
         exec_server_env_config: Option<ExecServerEnvConfig>,
+        shell_snapshot: Option<codex_exec_server::ShellSnapshotRequest>,
         windows_sandbox_proxy_settings_mode: codex_sandboxing::WindowsSandboxProxySettingsMode,
         tty: bool,
         spawn_lifecycle: SpawnLifecycleHandle,
         environment: &codex_exec_server::Environment,
     ) -> Result<UnifiedExecProcess, ToolError> {
-        let mut request = if environment.is_remote() {
+        let mut request = if environment.is_remote() || shell_snapshot.is_some() {
             attempt.env_for_exec_server(command, options)
         } else {
             attempt.env_for(command, options, network, environment_id)
@@ -1076,6 +1086,7 @@ impl UnifiedExecProcessManager {
             .and_then(|_| network.and_then(NetworkProxy::remote_policy_decider));
         request.exec_server_network_proxy = network_proxy_launch;
         request.exec_server_env_config = exec_server_env_config;
+        request.exec_server_shell_snapshot = shell_snapshot;
         self.open_session_with_prepared_exec_env(
             process_id,
             &request,
@@ -1110,7 +1121,7 @@ impl UnifiedExecProcessManager {
     ) -> Result<UnifiedExecProcess, UnifiedExecError> {
         let inherited_fds = spawn_lifecycle.inherited_fds();
 
-        if environment.is_remote() {
+        if environment.is_remote() || request.exec_server_shell_snapshot.is_some() {
             if !inherited_fds.is_empty() {
                 return Err(UnifiedExecError::create_process(
                     "remote exec-server does not support inherited file descriptors".to_string(),
@@ -1236,25 +1247,37 @@ impl UnifiedExecProcessManager {
             policy: exec_env_policy_from_shell_policy(shell_environment_policy),
             local_policy_env,
         };
+        let shell_snapshot = shell_snapshot_request(request, &cwd, context);
         let mut orchestrator = ToolOrchestrator::new();
         let mut runtime = UnifiedExecRuntime::new(self, request.shell_mode.clone());
+        let session_shell = context.session.user_shell();
+        let configured_shell = request
+            .turn_environment
+            .shell
+            .as_ref()
+            .unwrap_or(session_shell.as_ref());
         let exec_approval_requirement = context
             .session
             .services
             .exec_policy
-            .create_exec_approval_requirement_for_command(ExecApprovalRequest {
-                command: &request.command,
-                approval_policy: turn.approval_policy(),
-                permission_profile: request.turn_environment.permission_profile().clone(),
-                windows_sandbox_level: turn.windows_sandbox_level,
-                sandbox_permissions: if request.additional_permissions_preapproved {
-                    crate::sandboxing::SandboxPermissions::UseDefault
-                } else {
-                    request.sandbox_permissions
+            .create_exec_approval_requirement_for_shell(
+                ExecApprovalRequest {
+                    command: &request.command,
+                    approval_policy: turn.approval_policy(),
+                    permission_profile: request.turn_environment.permission_profile().clone(),
+                    environment_policy: request.turn_environment.config().exec_policy.as_ref(),
+                    windows_sandbox_level: turn.windows_sandbox_level,
+                    sandbox_permissions: if request.additional_permissions_preapproved {
+                        crate::sandboxing::SandboxPermissions::UseDefault
+                    } else {
+                        request.sandbox_permissions
+                    },
+                    prefix_rule: request.prefix_rule.clone(),
+                    allow_prefix_rules: context.step_context.turn.allow_prefix_rules(),
                 },
-                prefix_rule: request.prefix_rule.clone(),
-                allow_prefix_rules: context.step_context.turn.allow_prefix_rules(),
-            })
+                configured_shell,
+                &request.shell_mode,
+            )
             .await;
         let req = UnifiedExecToolRequest {
             command: request.command.clone(),
@@ -1266,6 +1289,7 @@ impl UnifiedExecProcessManager {
             turn_environment: request.turn_environment.clone(),
             env,
             exec_server_env_config: Some(exec_server_env_config),
+            shell_snapshot,
             explicit_env_overrides,
             network: request.network.clone(),
             tty: request.tty,
@@ -1279,6 +1303,7 @@ impl UnifiedExecProcessManager {
         let tool_ctx = ToolCtx {
             session: context.session.clone(),
             step_context: Arc::clone(&context.step_context),
+            cancellation_token: context.cancellation_token.clone(),
             call_id: context.call_id.clone(),
             tool_name: ToolName::plain("exec_command"),
         };
@@ -1304,11 +1329,11 @@ impl UnifiedExecProcessManager {
             })
     }
 
-    pub(super) async fn collect_output_until_deadline(
-        output: &OutputHandles,
+    pub(super) async fn collect_output_until_deadline<const MAX_BYTES: usize>(
+        output: &OutputHandles<MAX_BYTES>,
         mut pause_state: Option<watch::Receiver<bool>>,
         mut deadline: Instant,
-    ) -> HeadTailBuffer {
+    ) -> HeadTailBuffer<MAX_BYTES> {
         const POST_EXIT_CLOSE_WAIT_CAP: Duration = Duration::from_millis(50);
 
         let OutputHandles {
@@ -1328,12 +1353,12 @@ impl UnifiedExecProcessManager {
                 &mut post_exit_deadline,
             )
             .await;
-            let drained_output: HeadTailBuffer;
+            let drained_output: HeadTailBuffer<MAX_BYTES>;
             let has_drained_output: bool;
             let mut wait_for_output = None;
             {
                 let mut guard = output_buffer.lock().await;
-                drained_output = guard.drain();
+                drained_output = std::mem::take(&mut *guard);
                 has_drained_output =
                     drained_output.retained_bytes() > 0 || drained_output.omitted_bytes() > 0;
                 if !has_drained_output {

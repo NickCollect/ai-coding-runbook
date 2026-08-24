@@ -75,7 +75,10 @@ export function makeParseableResponseFormat<ParsedT>(
   response_format: ResponseFormatJSONSchema,
   parser: (content: string) => ParsedT,
 ): AutoParseableResponseFormat<ParsedT> {
-  const obj = { ...response_format };
+  const obj = { ...response_format, type: 'json_schema' as const };
+  obj.json_schema = { ...obj.json_schema };
+  delete (obj as { toJSON?: unknown }).toJSON;
+  delete (obj.json_schema as { toJSON?: unknown }).toJSON;
 
   Object.defineProperties(obj, {
     $brand: {
@@ -107,7 +110,8 @@ export function makeParseableTextFormat<ParsedT>(
   response_format: ResponseFormatTextJSONSchemaConfig,
   parser: (content: string) => ParsedT,
 ): AutoParseableTextFormat<ParsedT> {
-  const obj = { ...response_format };
+  const obj = { ...response_format, type: 'json_schema' as const };
+  delete (obj as { toJSON?: unknown }).toJSON;
 
   Object.defineProperties(obj, {
     $brand: {
@@ -169,7 +173,15 @@ export function parseResponseFormatContent<ParsedT>(format: unknown, content: st
     return format.$parseRaw(content) as ParsedT;
   }
 
-  return JSON.parse(content) as ParsedT;
+  try {
+    return JSON.parse(content) as ParsedT;
+  } catch (error) {
+    if (error instanceof SyntaxError) {
+      throw new SyntaxError('Error reading response: invalid structured output JSON.');
+    }
+
+    throw error;
+  }
 }
 
 /** Type-level details used to infer a chat function tool's parser and execution callback. */
@@ -344,7 +356,10 @@ function parseToolCall<Params extends ChatCompletionCreateParams>(
   if (isAutoParsableTool(inputTool)) {
     parsedArguments = inputTool.$parseRaw(toolCall.function.arguments);
   } else if (inputTool?.function.strict) {
-    parsedArguments = JSON.parse(toolCall.function.arguments);
+    parsedArguments = parseResponseFormatContent(
+      { type: 'json_schema', $parseRaw: undefined },
+      toolCall.function.arguments,
+    );
   }
 
   return {

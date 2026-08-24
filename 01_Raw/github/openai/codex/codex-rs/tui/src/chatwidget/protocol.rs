@@ -154,7 +154,21 @@ impl ChatWidget {
             }
             ServerNotification::Warning(notification) => self.on_warning(notification.message),
             ServerNotification::GuardianWarning(notification) => {
-                self.on_warning(notification.message)
+                if !notification
+                    .message
+                    .starts_with("Automatic approval review approved (")
+                {
+                    self.on_warning(notification.message);
+                }
+            }
+            ServerNotification::StrictReviewRequired(_) => {
+                self.app_event_tx.send(AppEvent::InsertHistoryCell(Box::new(
+                    history_cell::new_warning_event(
+                        "This request requires additional safety checks, some tool calls might take extra time"
+                            .to_string(),
+                    ),
+                )));
+                self.request_redraw();
             }
             ServerNotification::DeprecationNotice(notification) => {
                 self.on_deprecation_notice(notification.summary, notification.details)
@@ -208,6 +222,7 @@ impl ChatWidget {
             | ServerNotification::CommandExecOutputDelta(_)
             | ServerNotification::ProcessOutputDelta(_)
             | ServerNotification::ProcessExited(_)
+            | ServerNotification::McpServerEventStream(_)
             | ServerNotification::FileChangePatchUpdated(_)
             | ServerNotification::McpToolCallProgress(_)
             | ServerNotification::McpServerOauthLoginCompleted(_)
@@ -231,7 +246,9 @@ impl ChatWidget {
             | ServerNotification::ThreadRealtimeTranscriptDone(_)
             | ServerNotification::WindowsWorldWritableWarning(_)
             | ServerNotification::WindowsSandboxSetupCompleted(_)
-            | ServerNotification::AccountLoginCompleted(_) => {}
+            | ServerNotification::AccountLoginCompleted(_)
+            | ServerNotification::ProjectChanged(_)
+            | ServerNotification::ThreadProjectUpdated(_) => {}
             ServerNotification::ContextCompacted(_) => {}
         }
         self.thread_usage.replaying_turn_completion = was_replaying_turn_completion;
@@ -359,7 +376,6 @@ impl ChatWidget {
                 reasoning_effort,
                 agents_states,
             }),
-            item @ ThreadItem::SubAgentActivity { .. } => self.on_sub_agent_activity(item),
             ThreadItem::EnteredReviewMode { review, .. } if !from_replay => {
                 self.enter_review_mode_with_hint(review, /*from_replay*/ false);
             }

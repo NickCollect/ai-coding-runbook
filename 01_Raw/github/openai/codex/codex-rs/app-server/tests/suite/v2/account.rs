@@ -40,6 +40,7 @@ use codex_app_server_protocol::ServerRequest;
 use codex_app_server_protocol::TurnCompletedNotification;
 use codex_app_server_protocol::TurnStatus;
 use codex_config::types::AuthCredentialsStoreMode;
+use codex_http_client::HttpClientBuilder;
 use codex_login::AuthDotJson;
 use codex_login::AuthKeyringBackendKind;
 use codex_login::CLIENT_ID_OVERRIDE_ENV_VAR;
@@ -57,6 +58,7 @@ use serial_test::serial;
 use std::path::Path;
 use std::time::Duration;
 use tempfile::TempDir;
+use test_case::test_case;
 use tokio::time::timeout;
 use url::Url;
 use wiremock::Mock;
@@ -1097,6 +1099,18 @@ async fn login_account_api_key_succeeds_and_notifies() -> Result<()> {
 async fn login_amazon_bedrock_replaces_primary_auth_and_persists_provider() -> Result<()> {
     let codex_home = TempDir::new()?;
     create_config_toml(codex_home.path(), CreateConfigTomlParams::default())?;
+    let config_path = codex_home.path().join("config.toml");
+    let original_config = std::fs::read_to_string(&config_path)?;
+    std::fs::write(
+        &config_path,
+        format!(
+            "{original_config}\n[model_providers.amazon-bedrock]\n\
+             http_headers = {{ X-Existing = \"preserved\" }}\n\
+             [model_providers.amazon-bedrock.aws]\n\
+             profile = \"stale-profile\"\n\
+             region = \"us-east-1\"\n"
+        ),
+    )?;
     login_with_api_key(
         codex_home.path(),
         "sk-test-key",
@@ -1117,6 +1131,10 @@ async fn login_amazon_bedrock_replaces_primary_auth_and_persists_provider() -> R
             "model_provider".to_string(),
             toml::Value::String("amazon-bedrock".to_string()),
         );
+    expected_config["model_providers"]["amazon-bedrock"]["aws"]
+        .as_table_mut()
+        .expect("AWS configuration should be a table")
+        .remove("profile");
     let request_id = mcp
         .send_login_account_amazon_bedrock_request(" managed-bedrock-api-key ", " us-west-2 ")
         .await?;
@@ -1165,6 +1183,15 @@ async fn login_amazon_bedrock_replaces_primary_auth_and_persists_provider() -> R
         }
     );
     assert_account_updated(&mut mcp, Some(AuthMode::BedrockApiKey)).await?;
+    assert_eq!(
+        read_account(&mut mcp).await?,
+        GetAccountResponse {
+            account: Some(Account::AmazonBedrock {
+                uses_codex_managed_credentials: true,
+            }),
+            requires_openai_auth: false,
+        }
+    );
 
     Ok(())
 }
@@ -2162,9 +2189,9 @@ async fn login_account_chatgpt_redirects_to_hosted_success_page() -> Result<()> 
         .query_pairs()
         .find_map(|(key, value)| (key == "state").then(|| value.into_owned()))
         .ok_or_else(|| anyhow::anyhow!("missing state"))?;
-    let client = reqwest::Client::builder()
-        .redirect(reqwest::redirect::Policy::none())
-        .build()?;
+    let client = HttpClientBuilder::new()
+        .without_redirects()
+        .build_direct()?;
 
     let token_redirect_uri = callback_url.clone();
     let mut callback_url = Url::parse(&callback_url)?;
@@ -2676,8 +2703,14 @@ async fn get_account_with_chatgpt() -> Result<()> {
     Ok(())
 }
 
+#[test_case("self_serve_business_prolite", AccountPlanType::SelfServeBusinessProLite; "business_prolite")]
+#[test_case("edu_plus", AccountPlanType::EduPlus; "edu_plus")]
+#[test_case("edu_pro", AccountPlanType::EduPro; "edu_pro")]
 #[tokio::test]
-async fn get_account_with_business_prolite_returns_plan_type() -> Result<()> {
+async fn get_account_with_chatgpt_plan_variants_returns_plan_type(
+    plan_type: &str,
+    expected_plan: AccountPlanType,
+) -> Result<()> {
     let codex_home = TempDir::new()?;
     create_config_toml(
         codex_home.path(),
@@ -2690,7 +2723,7 @@ async fn get_account_with_business_prolite_returns_plan_type() -> Result<()> {
         codex_home.path(),
         ChatGptAuthFixture::new("access-chatgpt")
             .email("user@example.com")
-            .plan_type("self_serve_business_prolite"),
+            .plan_type(plan_type),
         AuthCredentialsStoreMode::File,
     )?;
 
@@ -2714,7 +2747,7 @@ async fn get_account_with_business_prolite_returns_plan_type() -> Result<()> {
         GetAccountResponse {
             account: Some(Account::Chatgpt {
                 email: Some("user@example.com".to_string()),
-                plan_type: AccountPlanType::SelfServeBusinessProLite,
+                plan_type: expected_plan,
             }),
             requires_openai_auth: true,
         }

@@ -6,11 +6,13 @@ use crate::config::ConfigBuilder;
 use crate::config::ConfigOverrides;
 use crate::config::test_config;
 use crate::context::ContextualUserFragment;
+use crate::context::DeveloperInstructions;
 use crate::context::TurnAborted;
 use crate::environment_selection::EnvironmentConfigOrigin;
 use crate::environment_selection::ThreadEnvironments;
 use crate::environment_selection::TurnEnvironmentState;
 use crate::function_tool::FunctionCallError;
+use crate::hook_mcp_executor::CoreHookMcpExecutor;
 use crate::plugins::plugins_manager_for_config;
 use crate::session::step_context::StepContext;
 use crate::shell::default_user_shell;
@@ -95,7 +97,6 @@ use crate::tools::context::ToolInvocation;
 use crate::tools::context::ToolPayload;
 use crate::tools::handlers::ExecCommandHandler;
 use crate::tools::handlers::RequestPermissionsHandler;
-use crate::tools::handlers::ShellCommandHandler;
 use crate::tools::registry::ToolExecutor;
 use crate::tools::router::ToolCallSource;
 use crate::turn_diff_tracker::TurnDiffTracker;
@@ -126,6 +127,7 @@ use codex_protocol::items::HookPromptFragment;
 use codex_protocol::items::build_hook_prompt_message;
 use codex_protocol::models::BaseInstructions;
 use codex_protocol::models::ContentItem;
+use codex_protocol::models::ContentItemKind;
 use codex_protocol::models::InternalChatMessageMetadataPassthrough;
 use codex_protocol::models::ResponseItem;
 use codex_protocol::protocol::AskForApproval;
@@ -258,7 +260,10 @@ fn user_message(text: &str) -> ResponseItem {
             text: text.to_string(),
         }],
         phase: None,
-        internal_chat_message_metadata_passthrough: None,
+        internal_chat_message_metadata_passthrough: Some(InternalChatMessageMetadataPassthrough {
+            content_item_kinds: Some(vec![ContentItemKind("unknown".to_string())]),
+            ..Default::default()
+        }),
     }
 }
 
@@ -321,7 +326,10 @@ fn assistant_message(text: &str) -> ResponseItem {
             text: text.to_string(),
         }],
         phase: None,
-        internal_chat_message_metadata_passthrough: None,
+        internal_chat_message_metadata_passthrough: Some(InternalChatMessageMetadataPassthrough {
+            content_item_kinds: Some(vec![ContentItemKind("unknown".to_string())]),
+            ..Default::default()
+        }),
     }
 }
 
@@ -402,8 +410,31 @@ fn extension_metrics_preserve_session_metadata_tags() {
         ],
     );
 
+    extension_metrics.counter(
+        "codex.test.extension.counter",
+        /*inc*/ 2,
+        &[("component", "skills"), ("model", "extension-model")],
+    );
+
     let snapshot = metrics.snapshot().expect("metrics snapshot");
     let attributes = single_histogram_attributes(&snapshot, "codex.test.extension");
+    let counter = find_metric(&snapshot, "codex.test.extension.counter");
+    let AggregatedMetrics::U64(MetricData::Sum(sum)) = counter.data() else {
+        panic!("expected counter");
+    };
+    let points = sum.data_points().collect::<Vec<_>>();
+    assert_eq!(points.len(), 1);
+    assert_eq!(points[0].value(), 2);
+    assert_eq!(
+        points[0]
+            .attributes()
+            .map(|attribute| (
+                attribute.key.as_str().to_string(),
+                attribute.value.as_str().to_string(),
+            ))
+            .collect::<BTreeMap<_, _>>(),
+        attributes,
+    );
     assert_eq!(
         attributes,
         BTreeMap::from([
@@ -791,6 +822,10 @@ async fn preview_session_start_hooks(
             ..HooksConfig::default()
         },
         thread_id,
+        Arc::new(CoreHookMcpExecutor {
+            runtime: Arc::new(McpRuntime::empty(config.prefix_mcp_tool_names())),
+            thread_id,
+        }),
     )
     .expect("initialize hooks for session-start preview");
 
@@ -1230,7 +1265,7 @@ async fn danger_full_access_tool_attempts_do_not_enforce_managed_network() -> an
             _req: &TurnEnvironment,
             call_id: &str,
         ) -> std::io::Result<crate::tools::sandboxing::ApprovalAction> {
-            Ok(crate::tools::sandboxing::ApprovalAction::Shell {
+            Ok(crate::tools::sandboxing::ApprovalAction::ExecCommand {
                 id: call_id.to_string(),
                 environment_id: codex_exec_server::LOCAL_ENVIRONMENT_ID.to_string(),
                 command: Vec::new(),
@@ -1239,6 +1274,7 @@ async fn danger_full_access_tool_attempts_do_not_enforce_managed_network() -> an
                 sandbox_permissions: crate::sandboxing::SandboxPermissions::UseDefault,
                 additional_permissions: None,
                 justification: None,
+                tty: false,
                 proposed_execpolicy_amendment: None,
             })
         }
@@ -1312,6 +1348,7 @@ async fn danger_full_access_tool_attempts_do_not_enforce_managed_network() -> an
     let mut orchestrator = crate::tools::orchestrator::ToolOrchestrator::new();
     let mut tool = ProbeToolRuntime::default();
     let tool_ctx = crate::tools::sandboxing::ToolCtx {
+        cancellation_token: CancellationToken::new(),
         session: Arc::clone(&session),
         step_context: StepContext::for_test(Arc::clone(&turn)),
         call_id: "probe-call".to_string(),
@@ -2052,6 +2089,7 @@ async fn reconstruct_history_uses_replacement_history_verbatim() {
     let rollout_items = vec![RolloutItem::Compacted(CompactedItem {
         message: String::new(),
         replacement_history: Some(replacement_history.clone()),
+        mcp_resource_origins: None,
         window_number: Some(42),
         first_window_id: Some(first_window_id.to_string()),
         previous_window_id: Some(previous_window_id.to_string()),
@@ -2354,7 +2392,9 @@ async fn prepares_image_failures_before_history_insertion() {
     .await;
     let item = ResponseItem::FunctionCallOutput {
         id: None,
-        call_id: "call-1".to_string(),
+        call_id: Some("call-1".to_string()),
+        name: None,
+        namespace: None,
         output: FunctionCallOutputPayload {
             body: FunctionCallOutputBody::ContentItems(vec![
                 FunctionCallOutputContentItem::InputText {
@@ -2392,7 +2432,9 @@ async fn prepares_image_failures_before_history_insertion() {
     assert_eq!(parsed_id.get_version(), Some(uuid::Version::SortRand));
     let expected = vec![ResponseItem::FunctionCallOutput {
         id: Some(id.clone()),
-        call_id: "call-1".to_string(),
+        call_id: Some("call-1".to_string()),
+        name: None,
+        namespace: None,
         output: FunctionCallOutputPayload {
             body: FunctionCallOutputBody::ContentItems(vec![
                 FunctionCallOutputContentItem::InputText {
@@ -2469,7 +2511,16 @@ async fn prepares_resumed_history_before_installing_it() {
                 },
             ],
             phase: None,
-            internal_chat_message_metadata_passthrough: None,
+            internal_chat_message_metadata_passthrough: Some(
+                InternalChatMessageMetadataPassthrough {
+                    content_item_kinds: Some(vec![
+                        ContentItemKind("images.preparation_error".to_string()),
+                        ContentItemKind("images.preparation_error".to_string()),
+                        ContentItemKind("unknown".to_string()),
+                    ]),
+                    ..Default::default()
+                },
+            ),
         }]
     );
     assert_eq!(
@@ -3285,11 +3336,22 @@ async fn record_initial_history_assigns_and_persists_id_for_forked_response_item
     .await;
     let rollout_path =
         attach_thread_persistence(Arc::get_mut(&mut session).expect("unique session")).await;
-    let response_item = crate::context_manager::updates::build_developer_update_item(vec![
-        "Subagent guidance.".to_string(),
-    ])
-    .expect("developer message");
-    let mut expected_item = response_item.clone();
+    let response_item =
+        ContextualUserFragment::into(DeveloperInstructions::new("Subagent guidance."));
+    let mut expected_item = ResponseItem::Message {
+        id: None,
+        role: "developer".to_string(),
+        content: vec![ContentItem::InputText {
+            text: "Subagent guidance.".to_string(),
+        }],
+        phase: None,
+        internal_chat_message_metadata_passthrough: Some(InternalChatMessageMetadataPassthrough {
+            content_item_kinds: Some(vec![ContentItemKind(
+                "generic.developer_instructions".to_string(),
+            )]),
+            ..Default::default()
+        }),
+    };
     let response_item = ResponseItemEnvelope {
         item: response_item,
         metadata: Some(CodexHarnessMetadata::default()),
@@ -3497,6 +3559,7 @@ async fn record_initial_history_forked_hydrates_previous_turn_settings() {
         approvals_reviewer: None,
         sandbox_policy: turn_context.sandbox_policy(),
         permission_profile: None,
+        active_permission_profile: None,
         network: None,
         file_system_sandbox_policy: None,
         model: previous_model.to_string(),
@@ -3892,6 +3955,7 @@ async fn thread_rollback_restores_cleared_reference_context_item_after_compactio
                     .map(ResponseItemEnvelope::new)
                     .collect(),
             ),
+            mcp_resource_origins: None,
             window_number: Some(7),
             first_window_id: Some(first_window_id.to_string()),
             previous_window_id: Some(previous_window_id.to_string()),
@@ -4906,6 +4970,7 @@ async fn emit_subagent_session_started_includes_fork_lineage_and_originator() {
     let child_thread_id = ThreadId::new();
     let mut session_configuration = make_session_configuration_for_tests().await;
     session_configuration.forked_from_thread_id = Some(forked_from_thread_id);
+    session_configuration.thread_source = Some(ThreadSource::GuardianReview);
 
     emit_subagent_session_started(
         &analytics_events_client,
@@ -4917,13 +4982,7 @@ async fn emit_subagent_session_started_includes_fork_lineage_and_originator() {
         child_thread_id,
         Some(parent_thread_id),
         session_configuration.thread_config_snapshot(Vec::new()),
-        SubAgentSource::ThreadSpawn {
-            parent_thread_id,
-            depth: 1,
-            agent_path: None,
-            agent_nickname: None,
-            agent_role: None,
-        },
+        SubAgentSource::Other(crate::guardian::GUARDIAN_REVIEWER_NAME.to_string()),
     );
 
     let event = timeout(Duration::from_secs(1), async {
@@ -4947,6 +5006,7 @@ async fn emit_subagent_session_started_includes_fork_lineage_and_originator() {
     .await
     .expect("subagent initialization analytics should be emitted");
 
+    assert_eq!(event["event_params"]["thread_source"], "guardian_review");
     assert_eq!(
         event["event_params"]["parent_thread_id"],
         parent_thread_id.to_string()
@@ -5008,7 +5068,7 @@ async fn session_configuration_apply_preserves_profile_file_system_policy_on_cwd
             missing_path_behavior: None,
         },
         FileSystemSandboxEntry {
-            path: FileSystemPath::Path { path: docs_dir },
+            path: docs_dir.into(),
             access: FileSystemAccessMode::Read,
             missing_path_behavior: None,
         },
@@ -5115,7 +5175,7 @@ async fn session_configuration_apply_permission_profile_accepts_direct_write_roo
     let file_system_sandbox_policy =
         FileSystemSandboxPolicy::restricted(vec![FileSystemSandboxEntry {
             path: FileSystemPath::Path {
-                path: external_write_path.clone(),
+                path: external_write_path.clone().into(),
             },
             access: FileSystemAccessMode::Write,
             missing_path_behavior: None,
@@ -5373,7 +5433,7 @@ async fn session_configuration_apply_preserves_absolute_cwd_write_root_on_cwd_up
         },
         FileSystemSandboxEntry {
             path: FileSystemPath::Path {
-                path: original_cwd.clone(),
+                path: original_cwd.clone().into(),
             },
             access: FileSystemAccessMode::Write,
             missing_path_behavior: None,
@@ -5672,7 +5732,7 @@ async fn session_new_fails_when_zsh_fork_enabled_without_packaged_zsh() {
     let (agent_status_tx, _agent_status_rx) = watch::channel(AgentStatus::PendingInit);
     let plugins_manager = Arc::new(plugins_manager_for_config(
         &config,
-        auth_manager.get_api_auth_mode(),
+        Arc::clone(&auth_manager),
     ));
     let mcp_manager = Arc::new(McpManager::new(Arc::clone(&plugins_manager)));
     let skills_service = Arc::new(HostSkillsService::new(
@@ -5843,7 +5903,7 @@ pub(crate) async fn make_session_and_context() -> (Session, TurnContext) {
     );
     let plugins_manager = Arc::new(plugins_manager_for_config(
         &config,
-        auth_manager.get_api_auth_mode(),
+        Arc::clone(&auth_manager),
     ));
     let mcp_manager = Arc::new(McpManager::new(Arc::clone(&plugins_manager)));
     let skills_service = Arc::new(HostSkillsService::new(
@@ -5862,6 +5922,10 @@ pub(crate) async fn make_session_and_context() -> (Session, TurnContext) {
             ..HooksConfig::default()
         },
         thread_id,
+        Arc::new(CoreHookMcpExecutor {
+            runtime: Arc::clone(&mcp_runtime),
+            thread_id,
+        }),
     )
     .expect("initialize test hooks");
     let services = SessionServices {
@@ -6103,7 +6167,7 @@ async fn make_session_with_config_and_rx(
     let (agent_status_tx, _agent_status_rx) = watch::channel(AgentStatus::PendingInit);
     let plugins_manager = Arc::new(plugins_manager_for_config(
         &config,
-        auth_manager.get_api_auth_mode(),
+        Arc::clone(&auth_manager),
     ));
     let mcp_manager = Arc::new(McpManager::new(Arc::clone(&plugins_manager)));
     let skills_service = Arc::new(HostSkillsService::new(
@@ -6224,7 +6288,7 @@ async fn make_session_with_history_source_and_agent_control_and_rx(
     let (agent_status_tx, _agent_status_rx) = watch::channel(AgentStatus::PendingInit);
     let plugins_manager = Arc::new(plugins_manager_for_config(
         &config,
-        auth_manager.get_api_auth_mode(),
+        Arc::clone(&auth_manager),
     ));
     let mcp_manager = Arc::new(McpManager::new(Arc::clone(&plugins_manager)));
     let skills_service = Arc::new(HostSkillsService::new(
@@ -6733,7 +6797,7 @@ async fn request_permissions_tool_resolves_relative_paths_against_selected_envir
         file_system: Some(FileSystemPermissions {
             entries: vec![FileSystemSandboxEntry {
                 path: FileSystemPath::Path {
-                    path: environment_cwd.join("relative.txt"),
+                    path: environment_cwd.join("relative.txt").into(),
                 },
                 access: FileSystemAccessMode::Write,
                 missing_path_behavior: None,
@@ -7962,7 +8026,7 @@ where
     let state_db = None;
     let config = Arc::new(config);
     let thread_id = ThreadId::default();
-    let auth_manager = AuthManager::from_auth_for_testing(auth);
+    let auth_manager = AuthManager::from_auth_for_testing_with_home(auth, codex_home.to_path_buf());
     let models_manager = models_manager_with_provider(
         config.codex_home.to_path_buf(),
         auth_manager.clone(),
@@ -8048,7 +8112,7 @@ where
     );
     let plugins_manager = Arc::new(plugins_manager_for_config(
         &config,
-        auth_manager.get_api_auth_mode(),
+        Arc::clone(&auth_manager),
     ));
     let mcp_manager = Arc::new(McpManager::new(Arc::clone(&plugins_manager)));
     let skills_service = Arc::new(HostSkillsService::new(
@@ -8067,6 +8131,10 @@ where
             ..HooksConfig::default()
         },
         thread_id,
+        Arc::new(CoreHookMcpExecutor {
+            runtime: Arc::clone(&mcp_runtime),
+            thread_id,
+        }),
     )
     .expect("initialize test hooks");
     let services = SessionServices {
@@ -8569,26 +8637,38 @@ async fn mcp_policy_changes_schedule_runtime_refresh() {
 }
 
 #[tokio::test]
-async fn mcp_refresh_updates_plugin_auth_mode_before_checking_pending_state() {
-    let codex_home = tempfile::tempdir().expect("create auth test directory");
-    let (mut session, _turn_context) = make_session_and_context().await;
-    session.services.auth_manager = AuthManager::from_auth_for_testing_with_home(
-        CodexAuth::from_api_key("old-api-key"),
-        codex_home.path().to_path_buf(),
+async fn mcp_refresh_detects_shared_auth_manager_changes() {
+    let (session, _turn_context) = make_session_and_context().await;
+    let session = Arc::new(session);
+
+    assert_eq!(
+        session.services.plugins_manager.auth_mode(),
+        Some(codex_protocol::auth::AuthMode::ApiKey)
     );
+    session.refresh_mcp_if_dirty().await;
+    assert!(
+        session
+            .services
+            .mcp_runtime
+            .current_auth_matches(session.services.auth_manager.auth_cached().as_ref())
+    );
+
     session
         .services
-        .plugins_manager
-        .set_auth_mode(/*auth_mode*/ None);
-    let session = Arc::new(session);
-    let auth_mode = session.services.auth_manager.get_api_auth_mode();
-
-    assert_ne!(session.services.plugins_manager.auth_mode(), auth_mode);
-    session.mcp_refresh.claim();
+        .auth_manager
+        .logout()
+        .await
+        .expect("logout should succeed");
+    assert_eq!(session.services.plugins_manager.auth_mode(), None);
+    assert!(
+        !session
+            .services
+            .mcp_runtime
+            .current_auth_matches(session.services.auth_manager.auth_cached().as_ref())
+    );
 
     session.refresh_mcp_if_dirty().await;
 
-    assert_eq!(session.services.plugins_manager.auth_mode(), auth_mode);
     assert!(
         session
             .services
@@ -8597,28 +8677,6 @@ async fn mcp_refresh_updates_plugin_auth_mode_before_checking_pending_state() {
             .await
             .is_some()
     );
-
-    codex_login::login_with_api_key(
-        codex_home.path(),
-        "new-api-key",
-        codex_login::AuthCredentialsStoreMode::File,
-        codex_login::AuthKeyringBackendKind::default(),
-    )
-    .expect("store replacement API key");
-    session.services.auth_manager.reload().await;
-    assert_eq!(
-        session
-            .services
-            .auth_manager
-            .auth_cached()
-            .and_then(|auth| auth.get_token().ok()),
-        Some("new-api-key".to_string())
-    );
-    assert_eq!(session.services.plugins_manager.auth_mode(), auth_mode);
-    session.mcp_refresh.claim();
-
-    session.refresh_mcp_if_dirty().await;
-
     assert!(
         session
             .services
@@ -9205,6 +9263,7 @@ impl codex_extension_api::ContextContributor for PromptExtensionTestContributor 
                 .then(|| {
                     codex_extension_api::PromptFragment::developer_policy(
                         "prompt extension enabled",
+                        codex_extension_api::ContentItemKind("test.prompt_extension".to_string()),
                     )
                 })
                 .into_iter()
@@ -9237,6 +9296,7 @@ impl codex_extension_api::ContextContributor for TurnContextExtensionTestContrib
             .then(|| {
                 codex_extension_api::PromptFragment::developer_policy(
                     "turn context extension enabled",
+                    codex_extension_api::ContentItemKind("test.turn_context".to_string()),
                 )
             })
             .into_iter()
@@ -9560,6 +9620,28 @@ async fn turn_context_item_omits_legacy_equivalent_file_system_sandbox_policy() 
 }
 
 #[tokio::test]
+async fn turn_context_item_stores_active_permission_profile() {
+    let (_session, mut turn_context) = make_session_and_context().await;
+    let active_permission_profile = ActivePermissionProfile::read_only();
+    let TurnEnvironmentState::Ready(environment) = &mut turn_context.environments.environments[0]
+    else {
+        panic!("turn environment should be ready");
+    };
+    environment.config_origin = EnvironmentConfigOrigin::Owner;
+    environment.config_mut().permission_profile = PermissionProfileSnapshot::active(
+        PermissionProfile::read_only(),
+        active_permission_profile.clone(),
+    );
+
+    assert_eq!(
+        turn_context
+            .to_turn_context_item()
+            .active_permission_profile,
+        Some(active_permission_profile)
+    );
+}
+
+#[tokio::test]
 async fn turn_context_item_stores_split_file_system_sandbox_policy_when_different() {
     let (_session, mut turn_context) = make_session_and_context().await;
     let file_system_sandbox_policy = file_system_policy_with_unreadable_glob(&turn_context);
@@ -9568,16 +9650,22 @@ async fn turn_context_item_stores_split_file_system_sandbox_policy_when_differen
         &file_system_sandbox_policy,
         turn_context.network_sandbox_policy(),
     );
-    Arc::make_mut(&mut turn_context.config)
-        .permissions
-        .set_permission_profile(permission_profile)
-        .expect("test setup should allow updating permission profile");
+    let TurnEnvironmentState::Ready(environment) = &mut turn_context.environments.environments[0]
+    else {
+        panic!("turn environment should be ready");
+    };
+    environment.config_mut().permission_profile =
+        PermissionProfileSnapshot::legacy(permission_profile);
 
     let item = turn_context.to_turn_context_item();
 
     assert_eq!(
         item.file_system_sandbox_policy,
-        Some(file_system_sandbox_policy)
+        Some(
+            file_system_sandbox_policy
+                .try_into()
+                .expect("serializable split policy"),
+        )
     );
     assert_eq!(
         item.permission_profile,
@@ -9737,10 +9825,12 @@ async fn record_context_updates_and_set_reference_context_item_persists_split_fi
         &file_system_sandbox_policy,
         turn_context.network_sandbox_policy(),
     );
-    Arc::make_mut(&mut turn_context.config)
-        .permissions
-        .set_permission_profile(permission_profile)
-        .expect("test setup should allow updating permission profile");
+    let TurnEnvironmentState::Ready(environment) = &mut turn_context.environments.environments[0]
+    else {
+        panic!("turn environment should be ready");
+    };
+    environment.config_mut().permission_profile =
+        PermissionProfileSnapshot::legacy(permission_profile);
     let rollout_path = attach_thread_persistence(&mut session).await;
 
     let turn_context = Arc::new(turn_context);
@@ -9766,7 +9856,11 @@ async fn record_context_updates_and_set_reference_context_item_persists_split_fi
     });
     assert_eq!(
         persisted_file_system_sandbox_policy,
-        Some(file_system_sandbox_policy)
+        Some(
+            file_system_sandbox_policy
+                .try_into()
+                .expect("serializable split policy"),
+        )
     );
 }
 
@@ -11027,7 +11121,7 @@ async fn fatal_tool_error_stops_turn_and_reports_error() {
         id: None,
         status: None,
         call_id: "call-1".to_string(),
-        name: "shell_command".to_string(),
+        name: "exec_command".to_string(),
         namespace: None,
         input: "{}".to_string(),
         internal_chat_message_metadata_passthrough: None,
@@ -11054,7 +11148,7 @@ async fn fatal_tool_error_stops_turn_and_reports_error() {
         FunctionCallError::Fatal(message) => {
             assert_eq!(
                 message,
-                "tool shell_command invoked with incompatible payload"
+                "tool exec_command invoked with incompatible payload"
             );
         }
         other => panic!("expected FunctionCallError::Fatal, got {other:?}"),
@@ -11106,30 +11200,14 @@ async fn sample_rollout(
         reconstruction_turn.model_info.truncation_policy.into(),
     );
 
-    let user1 = ResponseItem::Message {
-        id: None,
-        role: "user".to_string(),
-        content: vec![ContentItem::InputText {
-            text: "first user".to_string(),
-        }],
-        phase: None,
-        internal_chat_message_metadata_passthrough: None,
-    };
+    let user1 = user_message("first user");
     live_history.record_items(
         std::iter::once(&user1),
         reconstruction_turn.model_info.truncation_policy.into(),
     );
     rollout_items.push(RolloutItem::ResponseItem(user1.clone().into()));
 
-    let assistant1 = ResponseItem::Message {
-        id: None,
-        role: "assistant".to_string(),
-        content: vec![ContentItem::OutputText {
-            text: "assistant reply one".to_string(),
-        }],
-        phase: None,
-        internal_chat_message_metadata_passthrough: None,
-    };
+    let assistant1 = assistant_message("assistant reply one");
     live_history.record_items(
         std::iter::once(&assistant1),
         reconstruction_turn.model_info.truncation_policy.into(),
@@ -11137,9 +11215,7 @@ async fn sample_rollout(
     rollout_items.push(RolloutItem::ResponseItem(assistant1.clone().into()));
 
     let summary1 = "summary one";
-    let snapshot1 = live_history
-        .clone()
-        .for_prompt(&reconstruction_turn.model_info.input_modalities);
+    let snapshot1 = raw_history_items(&live_history);
     let user_messages1 = collect_user_messages(&snapshot1);
     let rebuilt1 = compact::build_compacted_history(Vec::new(), &user_messages1, summary1);
     live_history.replace_annotated(rebuilt1);
@@ -11147,36 +11223,21 @@ async fn sample_rollout(
     rollout_items.push(RolloutItem::Compacted(CompactedItem {
         message: summary1.to_string(),
         replacement_history: None,
+        mcp_resource_origins: None,
         window_number: Some(window_number),
         first_window_id: Some(window_ids.first_window_id.to_string()),
         previous_window_id: window_ids.previous_window_id.map(|id| id.to_string()),
         window_id: Some(window_ids.window_id.to_string()),
     }));
 
-    let user2 = ResponseItem::Message {
-        id: None,
-        role: "user".to_string(),
-        content: vec![ContentItem::InputText {
-            text: "second user".to_string(),
-        }],
-        phase: None,
-        internal_chat_message_metadata_passthrough: None,
-    };
+    let user2 = user_message("second user");
     live_history.record_items(
         std::iter::once(&user2),
         reconstruction_turn.model_info.truncation_policy.into(),
     );
     rollout_items.push(RolloutItem::ResponseItem(user2.clone().into()));
 
-    let assistant2 = ResponseItem::Message {
-        id: None,
-        role: "assistant".to_string(),
-        content: vec![ContentItem::OutputText {
-            text: "assistant reply two".to_string(),
-        }],
-        phase: None,
-        internal_chat_message_metadata_passthrough: None,
-    };
+    let assistant2 = assistant_message("assistant reply two");
     live_history.record_items(
         std::iter::once(&assistant2),
         reconstruction_turn.model_info.truncation_policy.into(),
@@ -11184,9 +11245,7 @@ async fn sample_rollout(
     rollout_items.push(RolloutItem::ResponseItem(assistant2.clone().into()));
 
     let summary2 = "summary two";
-    let snapshot2 = live_history
-        .clone()
-        .for_prompt(&reconstruction_turn.model_info.input_modalities);
+    let snapshot2 = raw_history_items(&live_history);
     let user_messages2 = collect_user_messages(&snapshot2);
     let rebuilt2 = compact::build_compacted_history(Vec::new(), &user_messages2, summary2);
     live_history.replace_annotated(rebuilt2);
@@ -11194,221 +11253,28 @@ async fn sample_rollout(
     rollout_items.push(RolloutItem::Compacted(CompactedItem {
         message: summary2.to_string(),
         replacement_history: None,
+        mcp_resource_origins: None,
         window_number: Some(window_number),
         first_window_id: Some(window_ids.first_window_id.to_string()),
         previous_window_id: window_ids.previous_window_id.map(|id| id.to_string()),
         window_id: Some(window_ids.window_id.to_string()),
     }));
 
-    let user3 = ResponseItem::Message {
-        id: None,
-        role: "user".to_string(),
-        content: vec![ContentItem::InputText {
-            text: "third user".to_string(),
-        }],
-        phase: None,
-        internal_chat_message_metadata_passthrough: None,
-    };
+    let user3 = user_message("third user");
     live_history.record_items(
         std::iter::once(&user3),
         reconstruction_turn.model_info.truncation_policy.into(),
     );
     rollout_items.push(RolloutItem::ResponseItem(user3.into()));
 
-    let assistant3 = ResponseItem::Message {
-        id: None,
-        role: "assistant".to_string(),
-        content: vec![ContentItem::OutputText {
-            text: "assistant reply three".to_string(),
-        }],
-        phase: None,
-        internal_chat_message_metadata_passthrough: None,
-    };
+    let assistant3 = assistant_message("assistant reply three");
     live_history.record_items(
         std::iter::once(&assistant3),
         reconstruction_turn.model_info.truncation_policy.into(),
     );
     rollout_items.push(RolloutItem::ResponseItem(assistant3.into()));
 
-    (
-        rollout_items,
-        live_history.for_prompt(&reconstruction_turn.model_info.input_modalities),
-    )
-}
-
-#[tokio::test]
-async fn rejects_escalated_permissions_when_policy_not_on_request() {
-    use crate::exec_policy::ExecApprovalRequest;
-    use crate::sandboxing::SandboxPermissions;
-    use crate::tools::sandboxing::ExecApprovalRequirement;
-    use crate::turn_diff_tracker::TurnDiffTracker;
-    use codex_protocol::protocol::AskForApproval;
-    use codex_tools::ShellCommandBackendConfig;
-
-    let (session, mut turn_context_raw) = make_session_and_context().await;
-    // Ensure policy is NOT OnRequest so the early rejection path triggers
-    Arc::make_mut(&mut turn_context_raw.config)
-        .permissions
-        .approval_policy
-        .set(AskForApproval::Never)
-        .expect("test setup should allow updating approval policy");
-    let session = Arc::new(session);
-    let mut turn_context = Arc::new(turn_context_raw);
-    let step_context = StepContext::for_test(Arc::clone(&turn_context));
-
-    let command_script = "echo hi";
-    let timeout_ms = 1000;
-    let sandbox_permissions = SandboxPermissions::RequireEscalated;
-
-    let turn_diff_tracker = Arc::new(tokio::sync::Mutex::new(TurnDiffTracker::new()));
-
-    let tool_name = "shell_command";
-    let call_id = "test-call".to_string();
-
-    let handler = ShellCommandHandler::from(ShellCommandBackendConfig::Classic);
-    #[allow(deprecated)]
-    let workdir = Some(turn_context.cwd.to_string_lossy().to_string());
-    let resp = handler
-        .handle(ToolInvocation {
-            session: Arc::clone(&session),
-            turn: Arc::clone(&turn_context),
-            step_context,
-            cancellation_token: CancellationToken::new(),
-            tracker: Arc::clone(&turn_diff_tracker),
-            call_id,
-            tool_name: codex_tools::ToolName::plain(tool_name),
-            source: crate::tools::context::ToolCallSource::Direct,
-            payload: ToolPayload::Function {
-                arguments: serde_json::json!({
-                    "command": command_script,
-                    "workdir": workdir,
-                    "timeout_ms": timeout_ms,
-                    "sandbox_permissions": sandbox_permissions,
-                    "justification": Some("test"),
-                })
-                .to_string(),
-            },
-        })
-        .await;
-
-    let Err(FunctionCallError::RespondToModel(output)) = resp else {
-        panic!("expected error result");
-    };
-
-    let expected = format!(
-        "approval policy is {policy:?}; reject command — you should not ask for escalated permissions if the approval policy is {policy:?}",
-        policy = turn_context.approval_policy()
-    );
-
-    pretty_assertions::assert_eq!(output, expected);
-    pretty_assertions::assert_eq!(
-        session
-            .granted_turn_permissions(codex_exec_server::LOCAL_ENVIRONMENT_ID)
-            .await,
-        None
-    );
-
-    // The rejection should not poison the non-escalated path for the same
-    // command. Force DangerFullAccess so this check stays focused on approval
-    // policy rather than platform-specific sandbox behavior.
-    let turn_context_mut = Arc::get_mut(&mut turn_context).expect("unique thread settings Arc");
-    Arc::make_mut(&mut turn_context_mut.config)
-        .permissions
-        .set_permission_profile(PermissionProfile::Disabled)
-        .expect("test setup should allow updating permission profile");
-
-    let command = session.user_shell().derive_exec_args(
-        command_script,
-        turn_context.config.permissions.allow_login_shell,
-    );
-    let exec_approval_requirement = session
-        .services
-        .exec_policy
-        .create_exec_approval_requirement_for_command(ExecApprovalRequest {
-            command: &command,
-            approval_policy: turn_context.approval_policy(),
-            permission_profile: turn_context.permission_profile(),
-            windows_sandbox_level: turn_context.windows_sandbox_level,
-            sandbox_permissions: SandboxPermissions::UseDefault,
-            prefix_rule: None,
-            allow_prefix_rules: turn_context.allow_prefix_rules(),
-        })
-        .await;
-    assert!(matches!(
-        exec_approval_requirement,
-        ExecApprovalRequirement::Skip { .. }
-    ));
-}
-
-#[cfg(unix)]
-#[tokio::test]
-async fn shell_tool_cancellation_waits_for_runtime_cleanup() -> anyhow::Result<()> {
-    let session = make_session_with_config(|config| {
-        let cwd = config.cwd.clone();
-        config
-            .permissions
-            .set_legacy_sandbox_policy(SandboxPolicy::DangerFullAccess, cwd.as_path())
-            .expect("test setup should allow sandbox policy");
-    })
-    .await?;
-    let turn_context = session.new_default_turn().await;
-    let session = Arc::new(session);
-    let turn_context = Arc::new(turn_context);
-    let temp_dir = tempfile::TempDir::new()?;
-    let ready_marker = temp_dir.path().join("ready");
-    let cleanup_marker = temp_dir.path().join("cleanup");
-    // Interrupt after the shell starts, then verify dispatch waits for its TERM cleanup trap.
-    let command = format!(
-        r#"trap 'printf cleaned > "{}"; exit 0' TERM
-printf ready > "{}"
-while :; do sleep 1; done"#,
-        cleanup_marker.display(),
-        ready_marker.display(),
-    );
-    let item = ResponseItem::FunctionCall {
-        id: None,
-        name: "shell_command".to_string(),
-        namespace: None,
-        arguments: serde_json::json!({
-            "command": command,
-            "timeout_ms": 60_000,
-        })
-        .to_string(),
-        call_id: "shell-cleanup-call".to_string(),
-        encrypted_function_args: None,
-        internal_chat_message_metadata_passthrough: None,
-    };
-    let call = ToolRouter::build_tool_call(item)?
-        .expect("shell command response item should build a tool call");
-    let cancellation_token = CancellationToken::new();
-    let cancellation_tx = cancellation_token.clone();
-    let handle = tokio::spawn(
-        test_tool_runtime(Arc::clone(&session), Arc::clone(&turn_context))
-            .handle_tool_call(call, cancellation_token),
-    );
-
-    let mut ready = false;
-    for _ in 0..50 {
-        if ready_marker.exists() {
-            ready = true;
-            break;
-        }
-        tokio::time::sleep(Duration::from_millis(20)).await;
-    }
-    if !ready {
-        cancellation_tx.cancel();
-        let _ = timeout(Duration::from_secs(5), handle).await;
-        anyhow::bail!("shell command should reach the ready marker");
-    }
-
-    cancellation_tx.cancel();
-    timeout(Duration::from_secs(5), handle)
-        .await
-        .expect("cancelled shell tool should finish promptly")
-        .expect("shell tool task should join")
-        .expect("cancelled shell tool should return a response item");
-    assert_eq!(std::fs::read_to_string(cleanup_marker)?, "cleaned");
-    Ok(())
+    (rollout_items, raw_history_items(&live_history))
 }
 
 #[tokio::test]

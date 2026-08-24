@@ -72,12 +72,14 @@ use serde::Serialize;
 use supports_color::Stream;
 
 mod background;
+mod desktop;
 mod disk;
 mod git;
 mod network;
 mod output;
 mod progress;
 mod runtime;
+mod sandbox;
 mod security;
 mod system;
 mod thread_inventory;
@@ -85,6 +87,10 @@ mod title;
 mod updates;
 #[cfg(target_os = "windows")]
 mod windows_dev_drive;
+
+#[cfg(test)]
+#[path = "doctor/desktop_tests.rs"]
+mod desktop_tests;
 
 use background::background_server_check;
 use git::git_check;
@@ -95,6 +101,7 @@ use progress::DoctorProgress;
 use progress::doctor_progress;
 use runtime::runtime_check;
 use runtime::search_check;
+use sandbox::sandbox_check;
 use system::system_check;
 use thread_inventory::thread_inventory_check;
 use title::terminal_title_check;
@@ -534,6 +541,17 @@ async fn build_report(
                 reachability_check,
             ]);
         }
+    }
+
+    progress.begin("desktop");
+    if let Some(desktop) = desktop::collect().await {
+        #[cfg(any(target_os = "macos", target_os = "windows"))]
+        if let Some(application) = desktop.application.as_ref() {
+            updates::append_desktop_update(&mut checks, config_result.as_ref().ok(), application)
+                .await;
+        }
+        progress.finish("desktop", overall_status(&desktop.checks));
+        checks.extend(desktop.checks);
     }
 
     progress.settle();
@@ -1682,41 +1700,6 @@ async fn mcp_check_from_servers(servers: &HashMap<String, McpServerConfig>) -> D
     check
 }
 
-fn sandbox_check(config: &Config, arg0_paths: &Arg0DispatchPaths) -> DoctorCheck {
-    let mut details = Vec::new();
-    details.push(format!(
-        "approval policy: {:?}",
-        config.permissions.approval_policy.value()
-    ));
-    let file_system_sandbox = config.permissions.file_system_sandbox_policy();
-    details.push(format!("filesystem sandbox: {}", file_system_sandbox.kind));
-    details.push(format!(
-        "network sandbox: {}",
-        config.permissions.network_sandbox_policy()
-    ));
-    push_path_detail(
-        &mut details,
-        "codex-linux-sandbox helper",
-        arg0_paths.codex_linux_sandbox_exe.as_deref(),
-    );
-    push_path_detail(
-        &mut details,
-        "execve wrapper helper",
-        arg0_paths.main_execve_wrapper_exe.as_deref(),
-    );
-
-    let mut status = CheckStatus::Ok;
-    let mut summary = "sandbox configuration is readable".to_string();
-    if let Some(helper) = arg0_paths.codex_linux_sandbox_exe.as_deref()
-        && !helper.exists()
-    {
-        status = CheckStatus::Warning;
-        summary = "Linux sandbox helper path does not exist".to_string();
-    }
-
-    DoctorCheck::new("sandbox.helpers", "sandbox", status, summary).details(details)
-}
-
 #[derive(Clone, Debug)]
 struct TerminalCheckInputs {
     info: TerminalInfo,
@@ -2595,6 +2578,12 @@ impl ProviderAuthReachabilityMode {
 }
 
 fn provider_reachability_plan(config: &Config) -> ReachabilityPlan {
+    let query_params = config.model_provider.query_params.as_ref().map(|params| {
+        params
+            .iter()
+            .map(|(name, value)| (name.clone(), value.as_str().to_owned()))
+            .collect::<HashMap<_, _>>()
+    });
     let stored_auth = load_auth_dot_json(
         &config.codex_home,
         config.cli_auth_credentials_store_mode,
@@ -2614,7 +2603,7 @@ fn provider_reachability_plan(config: &Config) -> ReachabilityPlan {
         &config.model_provider_id,
         &config.model_provider.name,
         config.model_provider.base_url.as_deref(),
-        config.model_provider.query_params.as_ref(),
+        query_params.as_ref(),
         config.model_provider.is_amazon_bedrock(),
         &config.chatgpt_base_url,
     );

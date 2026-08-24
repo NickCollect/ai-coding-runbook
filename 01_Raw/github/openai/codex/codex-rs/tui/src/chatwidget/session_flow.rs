@@ -28,7 +28,6 @@ impl ChatWidget {
             self.review.recent_auto_review_denials = RecentAutoReviewDenials::default();
             self.clear_thread_usage_state();
         }
-        self.refresh_plan_mode_nudge();
         self.turn_lifecycle.reset_thread();
         self.clear_safety_buffering();
         self.thread_name = session.thread_name.clone();
@@ -106,7 +105,6 @@ impl ChatWidget {
                     mask.reasoning_effort = Some(session.reasoning_effort.clone());
                 }
                 self.update_collaboration_mode_indicator();
-                self.refresh_plan_mode_nudge();
             }
         }
         let effort = self.effective_reasoning_effort();
@@ -148,10 +146,14 @@ impl ChatWidget {
         }
         self.transcript.saw_copy_source_this_turn = false;
         self.refresh_skills_for_current_cwd(/*force_reload*/ true);
-        if self.connectors_enabled() {
-            self.prefetch_connectors();
-        }
+        self.refresh_connector_mentions(/*force_refresh*/ false);
+        let initial_user_message_pending = self.initial_user_message.is_some();
         self.submit_initial_user_message_if_pending();
+        if self.mcp_startup_status.is_none()
+            && (!initial_user_message_pending || self.is_user_turn_pending_or_running())
+        {
+            self.maybe_send_next_queued_input();
+        }
         if display == SessionConfiguredDisplay::Normal
             && let Some(forked_from_id) = forked_from_id
         {

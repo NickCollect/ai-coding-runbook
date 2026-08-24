@@ -10,6 +10,7 @@ use std::sync::atomic::AtomicBool;
 use std::sync::atomic::Ordering;
 
 use serde_json::Value;
+use tokio::sync::watch;
 use tokio::task::JoinHandle;
 
 use crate::responses_metadata::AGENT_NAME_KEY;
@@ -86,6 +87,7 @@ pub async fn detached_memory_responses_metadata(
 ) -> CodexResponsesMetadata {
     CodexResponsesMetadata {
         request_kind: Some(CodexResponsesRequestKind::Memory),
+        thread_source: Some(ThreadSource::MemoryConsolidation),
         subagent_header: subagent_header_value(session_source),
         sandbox: sandbox.map(ToString::to_string),
         sandbox_mode: Some(
@@ -124,6 +126,7 @@ pub(crate) struct TurnMetadataState {
     root_turn_ambiguous: AtomicBool,
     user_input_requested_during_turn: AtomicBool,
     enrichment_task: Mutex<Option<JoinHandle<()>>>,
+    git_enrichment_complete: watch::Sender<bool>,
 }
 
 impl TurnMetadataState {
@@ -185,6 +188,7 @@ impl TurnMetadataState {
             root_turn_ambiguous: AtomicBool::new(false),
             user_input_requested_during_turn: AtomicBool::new(false),
             enrichment_task: Mutex::new(None),
+            git_enrichment_complete: watch::channel(/*init*/ true).0,
         }
     }
 
@@ -288,7 +292,11 @@ impl TurnMetadataState {
         }
         match &self.thread_source {
             // Desktop create/fork/send lacks trusted app-server provenance; fail closed.
-            Some(ThreadSource::Subagent | ThreadSource::MemoryConsolidation) => false,
+            Some(
+                ThreadSource::Subagent
+                | ThreadSource::GuardianReview
+                | ThreadSource::MemoryConsolidation,
+            ) => false,
             Some(ThreadSource::Feature(feature)) => {
                 !matches!(feature.as_str(), "system" | "title") && !feature.starts_with("ambient")
             }
@@ -405,9 +413,9 @@ impl TurnMetadataState {
     }
 
     pub(crate) fn spawn_git_enrichment_task(self: &Arc<Self>) {
-        if self.repo_root.is_none() {
+        let Some(repo_root) = self.repo_root.clone() else {
             return;
-        }
+        };
 
         let mut task_guard = self
             .enrichment_task
@@ -417,27 +425,30 @@ impl TurnMetadataState {
             return;
         }
 
+        self.git_enrichment_complete.send_replace(/*value*/ false);
         let state = Arc::clone(self);
         *task_guard = Some(tokio::spawn(async move {
-            let Some(repo_root) = state.repo_root.clone() else {
-                return;
-            };
             let workspace_git_metadata = state.fetch_workspace_git_metadata(&repo_root).await;
 
-            if workspace_git_metadata.is_empty() {
-                return;
+            if !workspace_git_metadata.is_empty() {
+                let mut workspaces = BTreeMap::new();
+                workspaces.insert(
+                    repo_root.to_string_lossy().into_owned(),
+                    workspace_git_metadata.into(),
+                );
+                *state
+                    .enriched_workspaces
+                    .write()
+                    .unwrap_or_else(std::sync::PoisonError::into_inner) = Some(workspaces);
             }
 
-            let mut workspaces = BTreeMap::new();
-            workspaces.insert(
-                repo_root.to_string_lossy().into_owned(),
-                workspace_git_metadata.into(),
-            );
-            *state
-                .enriched_workspaces
-                .write()
-                .unwrap_or_else(std::sync::PoisonError::into_inner) = Some(workspaces);
+            state.git_enrichment_complete.send_replace(/*value*/ true);
         }));
+    }
+
+    pub(crate) async fn wait_for_git_enrichment(&self) {
+        let mut completion = self.git_enrichment_complete.subscribe();
+        let _ = completion.wait_for(|complete| *complete).await;
     }
 
     pub(crate) fn cancel_git_enrichment_task(&self) {
@@ -447,6 +458,7 @@ impl TurnMetadataState {
             .unwrap_or_else(std::sync::PoisonError::into_inner);
         if let Some(task) = task_guard.take() {
             task.abort();
+            self.git_enrichment_complete.send_replace(/*value*/ true);
         }
     }
 
