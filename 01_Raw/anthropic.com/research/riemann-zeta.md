@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/riemann-zeta
-fetched_at: 2026-08-17T02:15:22.117677+00:00
+fetched_at: 2026-08-24T02:18:43.660314+00:00
 title: "Learning more about Claude's mathematical capabilities \\ Anthropic"
 ---
 
@@ -73,6 +73,12 @@ Below is a list of documents that provide more information about Claude’s resu
 
 ## Related content
 
+### How Claude is accelerating protein design and analytical chemistry
+
+In this post, we share two results that show how Claude can help life scientists increase the pace of their research. In the first, we tested Claude’s ability to design protein binders from scratch, a key step in creating protein-based drugs that has historically taken a specialist weeks or months per target. In the second example, we evaluated whether Claude can accelerate chemical analysis. Claude Opus 5, a generally available model, was given NMR and LC-MS data (the data that allows chemists to assess the identity and purity of the compounds they work with).
+
+[Read more](https://www.anthropic.com/research/Claude-accelerates-protein-design)
+
 ### Patterns and problems in emerging multiagent systems
 
 Here, we identify a few examples of behavioral tendencies in current frontier models and show how they can produce unexpected systemic failures, in hopes of starting a conversation about mitigating these risks.
@@ -84,12 +90,6 @@ Here, we identify a few examples of behavioral tendencies in current frontier mo
 We're sharing a review of the evidence on worker retraining programs, coauthored by independent researcher David Roodman and Anthropic's Maxim Massenkoff.
 
 [Read more](https://www.anthropic.com/research/reviewing-the-evidence-on-worker-retraining-programs)
-
-### Discovering cryptographic weaknesses with Claude
-
-cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher.
-
-[Read more](https://www.anthropic.com/research/discovering-cryptographic-weaknesses)
 
 ## Subscribe to Anthropic Science
 
