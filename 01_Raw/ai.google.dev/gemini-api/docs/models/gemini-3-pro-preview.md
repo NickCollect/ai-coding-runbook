@@ -1,42 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-preview?hl=it
-fetched_at: 2026-08-17T02:30:11.665919+00:00
-title: "Anteprima di Gemini 3 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-preview?hl=ja
+fetched_at: 2026-08-24T02:27:50.998086+00:00
+title: "Gemini 3 Pro \u30d7\u30ec\u30d3\u30e5\u30fc \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Invia feedback
+フィードバックを送信
 
-# Anteprima di Gemini 3 Pro
+# Gemini 3 Pro プレビュー
 
 ## gemini-3-pro-preview
 
-| Proprietà | Descrizione |
+| プロパティ | 説明 |
 | --- | --- |
-| Codice modello id\_card | `gemini-3-pro-preview` |
-| saveTipi di dati supportati | **Input**  Testo, immagine, video, audio e PDF  **Output**  Testo |
-| token\_autoLimiti dei token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Limite di token di input**  1.048.576  **Limite di token di output**  65.536 |
-| handymanFunzionalità | **[Generazione di audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=it)**  Non supportato  **[Memorizzazione nella cache](https://ai.google.dev/gemini-api/docs/caching?hl=it)**  Supportato  **[Esecuzione di codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it)**  Supportato  **[Utilizzo del computer](https://ai.google.dev/gemini-api/docs/computer-use?hl=it)**  Non supportato  **[Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it)**  Supportato  **[Chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it)**  Supportato  **[Grounding con Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it)**  Non supportato  **[Generazione di immagini](https://ai.google.dev/gemini-api/docs/image-generation?hl=it)**  Non supportato  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=it)**  Non supportato  **[Fondatezza della Ricerca](https://ai.google.dev/gemini-api/docs/google-search?hl=it)**  Supportato  **[Output strutturati](https://ai.google.dev/gemini-api/docs/structured-output?hl=it)**  Supportato  **[Pensiero](https://ai.google.dev/gemini-api/docs/thinking?hl=it)**  Supportato  **[Contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it)**  Supportato |
-| speedOpzioni di consumo | **[API batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=it)**  Supportato  **[Inferenza flessibile](https://ai.google.dev/gemini-api/docs/flex-inference?hl=it)**  Non supportato  **[Inferenza prioritaria](https://ai.google.dev/gemini-api/docs/priority-inference?hl=it)**  Non supportato |
-| 123Versioni | Leggi i [pattern delle versioni del modello](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#model-versions) per maggiori dettagli.  - *Arresto*: `gemini-3-pro-preview` |
-| calendar\_monthUltimo aggiornamento | Novembre 2025 |
-| id\_cardScheda del modello | [Scheda del modello](https://deepmind.google/models/model-cards/gemini-3-pro/?hl=it) |
+| id\_cardモデルコード | `gemini-3-pro-preview` |
+| saveサポートされるデータタイプ | **入力**  テキスト、画像、動画、音声、PDF  **出力**  テキスト |
+| token\_autoトークン上限[[\*](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)] | **入力トークンの上限**  1,048,576  **出力トークンの上限**  65,536 |
+| handyman機能 | **[音声生成](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja)**  サポート対象外  **[キャッシュ](https://ai.google.dev/gemini-api/docs/caching?hl=ja)**  サポート対象  **[コード実行](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)**  サポート対象  **[コンピュータ使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=ja)**  サポート対象外  **[ファイル検索](https://ai.google.dev/gemini-api/docs/file-search?hl=ja)**  サポート対象  **[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)**  サポート対象  **[Google マップによるグラウンディング](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ja)**  サポート対象外  **[画像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja)**  サポート対象外  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ja)**  サポート対象外  **[検索によるグラウンディング](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)**  サポート対象  **[構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)**  サポート対象  **[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)**  サポート対象  **[URL コンテキスト](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)**  サポート対象 |
+| speed使用オプション | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja)**  サポート対象  **[Flex 推論](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ja)**  サポート対象外  **[優先推論](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ja)**  サポート対象外 |
+| 123バージョン | 詳細については、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja#model-versions)をご覧ください。  - *シャットダウン*: `gemini-3-pro-preview` |
+| calendar\_month最終更新日 | 2025 年 11 月 |
+| id\_cardモデルカード | [モデルカード](https://deepmind.google/models/model-cards/gemini-3-pro/?hl=ja) |
 
-Invia feedback
+フィードバックを送信
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Ultimo aggiornamento 2026-07-21 UTC.
+最終更新日 2026-08-19 UTC。
 
-Vuoi dirci altro?
+ご意見をお聞かせください
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-21 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-08-19 UTC。"],[],[]]

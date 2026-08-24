@@ -1,38 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=th
-fetched_at: 2026-08-17T02:22:04.266567+00:00
-title: "\u0e01\u0e32\u0e23\u0e17\u0e33\u0e04\u0e27\u0e32\u0e21\u0e40\u0e02\u0e49\u0e32\u0e43\u0e08\u0e40\u0e2d\u0e01\u0e2a\u0e32\u0e23 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=tr
+fetched_at: 2026-08-24T02:37:37.223677+00:00
+title: "Belge anlama \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-ส่งความคิดเห็น
+Geri bildirim gönderin
 
-# การทำความเข้าใจเอกสาร
+# Belge anlama
 
-โมเดล Gemini สามารถประมวลผลเอกสารในรูปแบบ PDF ได้โดยใช้วิชันซิสเต็มเพื่อทำความเข้าใจบริบทของเอกสารทั้งหมด ซึ่งมีความสามารถมากกว่าการแยกข้อความเพียงอย่างเดียว โดยช่วยให้ Gemini ทำสิ่งต่อไปนี้ได้
+Gemini modelleri, doküman bağlamlarının tamamını anlamak için yerel görsel işleme özelliğini kullanarak PDF biçimindeki dokümanları işleyebilir. Bu, yalnızca metin ayıklamadan daha fazlasını sunar. Gemini bu sayede:
 
-- วิเคราะห์และตีความเนื้อหา ซึ่งรวมถึงข้อความ รูปภาพ ไดอะแกรม แผนภูมิ และตาราง แม้ในเอกสารขนาดยาวที่มีหน้ามากถึง 1,000 หน้า
-- แยกข้อมูลเป็นรูปแบบเอาต์พุตที่มี[โครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)
-- สรุปและตอบคำถามโดยอิงตามองค์ประกอบทั้งที่เป็นภาพและข้อความในเอกสาร
-- ถอดเสียงเนื้อหาเอกสาร (เช่น เป็น HTML) โดยรักษารูปแบบและการจัดรูปแบบไว้เพื่อใช้ในแอปพลิเคชันปลายทาง
+- Metin, resim, diyagram, grafik ve tablo gibi içerikleri 1.000 sayfaya kadar olan uzun dokümanlarda bile analiz edip yorumlayın.
+- Bilgileri [yapılandırılmış çıkış](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr) biçimlerinde ayıklayın.
+- Bir belgedeki hem görsel hem de metin öğelerini temel alarak özetleme ve soru yanıtlama
+- Aşağı akış uygulamalarında kullanılmak üzere düzenleri ve biçimlendirmeyi koruyarak doküman içeriğini (ör. HTML'ye) transkribe edin.
 
-นอกจากนี้ คุณยังส่งเอกสารที่ไม่ใช่ PDF ในลักษณะเดียวกันได้ แต่ Gemini จะเห็นเอกสารเหล่านั้นเป็นข้อความปกติ ซึ่งจะทำให้บริบท เช่น แผนภูมิหรือการจัดรูปแบบหายไป
+PDF olmayan dokümanları da aynı şekilde iletebilirsiniz ancak Gemini bunları normal metin olarak görür. Bu durumda grafikler veya biçimlendirme gibi bağlamlar ortadan kalkar.
 
-## การส่งข้อมูล PDF แบบอินไลน์
+## PDF verilerini satır içi olarak iletme
 
-คุณสามารถส่งข้อมูล PDF แบบอินไลน์ในคำขอ `generateContent` ได้ วิธีนี้เหมาะที่สุดสำหรับเอกสารขนาดเล็กหรือการประมวลผลชั่วคราวที่คุณไม่จำเป็นต้องอ้างอิงไฟล์ในคำขอที่ตามมา เราขอแนะนำให้ใช้ [Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=th#large-pdfs) สำหรับเอกสารขนาดใหญ่ที่คุณต้องอ้างอิงในการสนทนาไปมาเพื่อลดเวลาในการตอบสนองของคำขอและลดการใช้แบนด์วิดท์
+PDF verilerini `generateContent` isteğinde satır içi olarak iletebilirsiniz. Bu yöntem, daha küçük belgeler veya dosyaya sonraki isteklerde başvurmanız gerekmeyen geçici işlemler için en uygun yöntemdir. İstek gecikmesini iyileştirmek ve bant genişliği kullanımını azaltmak için çok aşamalı etkileşimlerde başvurmanız gereken daha büyük belgeler için [Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=tr#large-pdfs)'yi kullanmanızı öneririz.
 
-ตัวอย่างต่อไปนี้แสดงวิธีดึงข้อมูล PDF จาก URL และแปลงเป็นไบต์เพื่อประมวลผล
+Aşağıdaki örnekte, bir URL'den PDF'nin nasıl getirileceği ve işlenmek üzere baytlara nasıl dönüştürüleceği gösterilmektedir:
 
 ### Python
 
@@ -190,7 +190,7 @@ jq ".candidates[].content.parts[].text" response.json
 rm "${DISPLAY_NAME}.pdf"
 ```
 
-นอกจากนี้ คุณยังอ่าน PDF จากไฟล์ในเครื่องเพื่อประมวลผลได้ด้วย
+İşleme için yerel bir dosyadan PDF de okuyabilirsiniz:
 
 ### Python
 
@@ -291,13 +291,13 @@ func main() {
 }
 ```
 
-## การอัปโหลด PDF โดยใช้ Files API
+## Files API'yi kullanarak PDF yükleme
 
-เราขอแนะนำให้คุณใช้ Files API สำหรับไฟล์ขนาดใหญ่หรือเมื่อต้องการนำเอกสารไปใช้ซ้ำในคำขอหลายรายการ วิธีนี้จะช่วยลดเวลาในการตอบสนองของคำขอและลดการใช้แบนด์วิดท์ด้วยการแยกการอัปโหลดไฟล์ออกจากคำขอโมเดล
+Daha büyük dosyalar için veya bir belgeyi birden fazla istekte yeniden kullanmak istediğinizde Files API'yi kullanmanızı öneririz. Bu sayede, dosya yükleme işlemi model isteklerinden ayrılır ve istek gecikmesi iyileşirken bant genişliği kullanımı azalır.
 
-### PDF ขนาดใหญ่จาก URL
+### URL'lerden alınan büyük PDF'ler
 
-ใช้ File API เพื่อลดความซับซ้อนในการอัปโหลดและประมวลผลไฟล์ PDF ขนาดใหญ่จาก URL
+URL'lerden büyük PDF dosyalarını yükleme ve işleme sürecini basitleştirmek için File API'yi kullanın:
 
 ### Python
 
@@ -505,7 +505,7 @@ jq ".candidates[].content.parts[].text" response.json
 rm "${DISPLAY_NAME}.pdf"
 ```
 
-### PDF ขนาดใหญ่ที่จัดเก็บไว้ในเครื่อง
+### Yerel olarak depolanan büyük PDF'ler
 
 ### Python
 
@@ -677,8 +677,8 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-คุณสามารถตรวจสอบว่า API จัดเก็บไฟล์ที่อัปโหลดไว้เรียบร้อยแล้วและรับ
-ข้อมูลเมตาของไฟล์ได้โดยเรียกใช้ [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=th) เฉพาะ `name` (และ `uri` ที่เกี่ยวข้อง) เท่านั้นที่จะไม่ซ้ำกัน
+[`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=tr) işlevini çağırarak API'nin yüklenen dosyayı başarıyla sakladığını doğrulayabilir ve dosyanın meta verilerini alabilirsiniz. Yalnızca `name`
+(ve dolayısıyla `uri`) benzersizdir.
 
 ### Python
 
@@ -710,9 +710,9 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## การส่ง PDF หลายไฟล์
+## Birden fazla PDF'yi iletme
 
-Gemini API สามารถประมวลผลเอกสาร PDF หลายไฟล์ (สูงสุด 1, 000 หน้า) ในคำขอเดียวได้ ตราบใดที่ขนาดรวมของเอกสารและพรอมต์ข้อความยังคงอยู่ในหน้าต่างบริบทของโมเดล
+Gemini API, dokümanların ve metin isteminin toplam boyutu modelin bağlam penceresi içinde kaldığı sürece tek bir istekte birden fazla PDF dokümanını (1.000 sayfaya kadar) işleyebilir.
 
 ### Python
 
@@ -964,56 +964,51 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## รายละเอียดทางเทคนิค
+## Teknik ayrıntılar
 
-Gemini รองรับไฟล์ PDF ที่มีขนาดไม่เกิน 50 MB หรือ 1,000 หน้า ขีดจำกัดนี้มีผลกับทั้งข้อมูลแบบอินไลน์และการอัปโหลด Files API หน้าเอกสารแต่ละหน้าเทียบเท่ากับ 258 โทเค็น
+Gemini, 50 MB veya 1.000 sayfaya kadar olan PDF dosyalarını destekler. Bu sınır hem satır içi veriler hem de Files API yüklemeleri için geçerlidir. Her belge sayfası 258 jetona karşılık gelir.
 
-แม้ว่าจะไม่มีขีดจำกัดที่เฉพาะเจาะจงเกี่ยวกับจำนวนพิกเซลในเอกสารนอกเหนือจาก
-หน้าต่าง[บริบท](https://ai.google.dev/gemini-api/docs/long-context?hl=th)ของโมเดล แต่ระบบจะปรับขนาดหน้าที่มีขนาดใหญ่ให้มีความละเอียดสูงสุด 3072 x 3072 โดยรักษาสัดส่วน
-เดิมไว้ ส่วนหน้าที่มีขนาดเล็กกว่าจะปรับขนาดให้มีขนาดสูงสุด 768 x 768 พิกเซล ไม่มีการลดค่าใช้จ่ายสำหรับหน้าที่มีขนาดเล็กลง นอกเหนือจากแบนด์วิดท์ หรือการปรับปรุงประสิทธิภาพสำหรับหน้าที่มีความละเอียดสูงขึ้น
+Modelin [bağlam penceresi](https://ai.google.dev/gemini-api/docs/long-context?hl=tr) dışında bir dokümandaki piksel sayısıyla ilgili belirli bir sınır olmasa da daha büyük sayfalar, orijinal en boy oranları korunarak maksimum 3072 x 3072 çözünürlüğe ölçeklendirilirken daha küçük sayfalar 768 x 768 piksele ölçeklendirilir. Daha küçük boyutlu sayfalar için bant genişliği dışında maliyet düşüşü veya daha yüksek çözünürlüklü sayfalar için performans artışı olmaz.
 
-### โมเดล Gemini 3
+### Gemini 3 modelleri
 
-Gemini 3 ขอแนะนำการควบคุมแบบละเอียดเกี่ยวกับการประมวลผลวิชันซิสเต็มแบบมัลติโมดัลด้วยพารามิเตอร์ `media_resolution` ตอนนี้คุณสามารถตั้งค่าความละเอียดเป็นต่ำ ปานกลาง หรือสูงสำหรับสื่อแต่ละส่วนได้แล้ว การเพิ่มพารามิเตอร์นี้ทำให้การประมวลผลเอกสาร PDF ได้รับการอัปเดตดังนี้
+Gemini 3, `media_resolution` parametresiyle çok formatlı görüntü işleme üzerinde ayrıntılı kontrol sunar. Artık çözünürlüğü her bir medya parçası için ayrı ayrı düşük, orta veya yüksek olarak ayarlayabilirsiniz. Bu eklemeyle birlikte PDF belgelerinin işlenmesi güncellendi:
 
-1. **การรวมข้อความแบบเนทีฟ:** ระบบจะแยกข้อความที่ฝังแบบเนทีฟใน PDF และส่งไปยังโมเดล
-2. **การเรียกเก็บเงินและการรายงานโทเค็น:**
-   - ระบบจะ**ไม่เรียกเก็บเงิน** สำหรับโทเค็นที่มาจาก**ข้อความแบบเนทีฟ** ที่แยกออกมาใน PDF
-   - ในส่วน `usage_metadata` ของการตอบกลับ API ตอนนี้ระบบจะนับโทเค็นที่สร้างขึ้นจากการประมวลผลหน้า PDF (เป็นรูปภาพ) ภายใต้โมดาลิตี `IMAGE` ไม่ใช่โมดาลิตี `DOCUMENT` แยกต่างหากเหมือนในบางเวอร์ชันก่อนหน้า
+1. **Doğal metin ekleme:** PDF'ye doğal olarak yerleştirilmiş metin çıkarılır ve modele sağlanır.
+2. **Faturalandırma ve jeton raporlama:**
+   - PDF'lerdeki çıkarılan **yerel metinden** kaynaklanan jetonlar için **ücretlendirilmezsiniz**.
+   - API yanıtının `usage_metadata` bölümünde, PDF sayfalarının (resim olarak) işlenmesiyle oluşturulan jetonlar artık `IMAGE` biçimi altında sayılıyor. Bazı önceki sürümlerde olduğu gibi ayrı bir `DOCUMENT` biçimi altında sayılmıyor.
 
-ดูรายละเอียดเพิ่มเติมเกี่ยวกับพารามิเตอร์ความละเอียดของสื่อได้ที่
-[คู่มือความละเอียดของสื่อ](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=th)
+Medya çözünürlüğü parametresi hakkında daha fazla bilgi için [Medya çözünürlüğü](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=tr) kılavuzuna bakın.
 
-### ประเภทเอกสาร
+### Belge türleri
 
-ในทางเทคนิคแล้ว คุณสามารถส่ง MIME ประเภทอื่นๆ เพื่อให้ระบบทำความเข้าใจเอกสารได้ เช่น TXT, Markdown, HTML, XML ฯลฯ อย่างไรก็ตาม วิชันซิสเต็มของเอกสาร***จะเข้าใจ PDF ได้อย่างมีความหมายเท่านั้น*** ระบบจะแยกเอกสารประเภทอื่นๆ ออกมาเป็นข้อความธรรมดา และโมเดลจะไม่สามารถตีความสิ่งที่เราเห็นในการแสดงผลไฟล์เหล่านั้นได้ ข้อมูลเฉพาะของประเภทไฟล์ เช่น แผนภูมิ ไดอะแกรม แท็ก HTML การจัดรูปแบบ Markdown ฯลฯ จะหายไป
+Teknik olarak, doküman anlama için TXT, Markdown, HTML, XML gibi diğer MIME türlerini iletebilirsiniz. Ancak dokümanla ilgili görsel algılama ***yalnızca PDF'leri anlamlı bir şekilde anlar***. Diğer türler düz metin olarak ayıklanır ve model, bu dosyaların oluşturulmasında gördüklerimizi yorumlayamaz. Grafikler, diyagramlar, HTML etiketleri, Markdown biçimlendirmesi vb. gibi dosya türüne özgü tüm özellikler kaybolur.
 
-ดูข้อมูลเกี่ยวกับวิธีการป้อนไฟล์อื่นๆ ได้ที่
-[คู่มือวิธีการป้อนไฟล์](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=th)
+Diğer dosya giriş yöntemleri hakkında bilgi edinmek için [Dosya giriş yöntemleri](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=tr) kılavuzuna bakın.
 
-### แนวทางปฏิบัติแนะนำ
+### En iyi uygulamalar
 
-เพื่อผลลัพธ์ที่ดีที่สุด ให้ทำดังนี้
+En iyi sonuçlar için:
 
-- หมุนหน้าให้เป็นแนวที่ถูกต้องก่อนอัปโหลด
-- หลีกเลี่ยงหน้าที่มีภาพเบลอ
-- หากใช้หน้าเดียว ให้วางพรอมต์ข้อความไว้หลังหน้า
+- Yüklemeden önce sayfaları doğru yöne döndürün.
+- Bulanık sayfalardan kaçının.
+- Tek sayfa kullanıyorsanız metin istemini sayfanın sonuna yerleştirin.
 
-## ขั้นตอนถัดไป
+## Sırada ne var?
 
-ดูข้อมูลเพิ่มเติมได้จากแหล่งข้อมูลต่อไปนี้
+Daha fazla bilgi edinmek için aşağıdaki kaynakları inceleyin:
 
-- [กลยุทธ์การเขียนพรอมต์กับไฟล์](https://ai.google.dev/gemini-api/docs/files?hl=th#prompt-guide): Gemini API รองรับการเขียนพรอมต์กับข้อมูลข้อความ รูปภาพ เสียง และวิดีโอ หรือที่เรียกว่าการเขียนพรอมต์แบบหลายรูปแบบ
-- [คำแนะนำของระบบ](https://ai.google.dev/gemini-api/docs/text-generation?hl=th#system-instructions):
-  คำแนะนำของระบบช่วยให้คุณกำหนดลักษณะการทำงานของโมเดลตาม
-  ความต้องการและกรณีการใช้งานที่เฉพาะเจาะจงได้
+- [Dosya istemi stratejileri](https://ai.google.dev/gemini-api/docs/files?hl=tr#prompt-guide): Gemini API, çok formatlı istem olarak da bilinen metin, resim, ses ve video verileriyle istem oluşturmayı destekler.
+- [Sistem talimatları](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr#system-instructions):
+  Sistem talimatları, modelin davranışını özel ihtiyaçlarınıza ve kullanım alanlarınıza göre yönlendirmenizi sağlar.
 
-ส่งความคิดเห็น
+Geri bildirim gönderin
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-อัปเดตล่าสุด 2026-07-30 UTC
+Son güncelleme tarihi: 2026-07-30 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-30 UTC"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]

@@ -1,29 +1,29 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=pl
-fetched_at: 2026-08-17T02:27:11.683837+00:00
-title: "\u0141\u0105czenie wbudowanych narz\u0119dzi i\u00a0wywo\u0142ywania funkcji \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=fr
+fetched_at: 2026-08-24T02:20:16.173103+00:00
+title: "Combiner les outils int\u00e9gr\u00e9s et l'appel de fonction \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Prześlij opinię
+Envoyer des commentaires
 
-# Łączenie wbudowanych narzędzi i wywoływania funkcji
+# Combiner les outils intégrés et l'appel de fonction
 
-Gemini umożliwia łączenie [narzędzi wbudowanych](https://ai.google.dev/gemini-api/docs/tools?hl=pl), takich
-jak `google_search`, i [wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl)
-(znanych też jako *narzędzia niestandardowe*) w ramach jednej interakcji dzięki zachowaniu i udostępnianiu
-historii kontekstu wywołań narzędzi. Kombinacje narzędzi wbudowanych i niestandardowych umożliwiają tworzenie złożonych przepływów pracy, w których np. model może opierać się na danych internetowych w czasie rzeczywistym przed wywołaniem konkretnej logiki biznesowej.
+Gemini permet de combiner des [outils intégrés](https://ai.google.dev/gemini-api/docs/tools?hl=fr), tels
+que `google_search`, et l'[appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr)
+(également appelé *outils personnalisés*) dans une seule interaction en préservant et en exposant
+l'historique du contexte des appels d'outils. Les combinaisons d'outils intégrés et personnalisés permettent des workflows complexes et autonomes où, par exemple, le modèle peut s'appuyer sur des données Web en temps réel avant d'appeler votre logique métier spécifique.
 
-Oto przykład, który umożliwia łączenie narzędzi wbudowanych i niestandardowych za pomocą `google_search` i funkcji niestandardowej `getWeather`:
+Voici un exemple qui active les combinaisons d'outils intégrés et personnalisés avec `google_search` et une fonction personnalisée `getWeather` :
 
 ### Python
 
@@ -144,93 +144,91 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Jak to działa
+## Fonctionnement
 
-Modele Gemini 3 używają *cyrkulacji kontekstu narzędzia*, aby umożliwić łączenie narzędzi wbudowanych i niestandardowych. Cyrkulacja kontekstu narzędzia umożliwia zachowanie i udostępnianie kontekstu narzędzi wbudowanych oraz udostępnianie go narzędziom niestandardowym w ramach tej samej interakcji.
+Les modèles Gemini 3 utilisent la *circulation du contexte d'outil* pour activer les combinaisons d'outils intégrés et personnalisés. La circulation du contexte d'outil permet de préserver et d'exposer le contexte des outils intégrés, et de le partager avec des outils personnalisés dans la même interaction.
 
-### Włączanie łączenia narzędzi
+### Activer la combinaison d'outils
 
-- Aby wywołać zachowanie łączenia, dołącz [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl#function-declarations) wraz
-  z narzędziami wbudowanymi, których chcesz używać.
+- Incluez les [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr#function-declarations), ainsi
+  que les outils intégrés que vous souhaitez utiliser, pour déclencher le comportement de combinaison.
 
-### Kroki zwracane przez interfejs API
+### Étapes renvoyées par l'API
 
-W odpowiedzi na interakcję interfejs API zwraca osobne kroki dla wywołań narzędzi wbudowanych i wywołań funkcji (narzędzi niestandardowych):
+Dans une réponse d'interaction, l'API renvoie des étapes distinctes pour les appels d'outils intégrés et les appels de fonction (outil personnalisé) :
 
-- **Kroki narzędzi wbudowanych**: interfejs API zarządza nimi automatycznie, zachowując
-  kontekst między turami.
-- **Kroki wywołań funkcji**: interfejs API zwraca kro2/}ki dla Twoich
-  funkcji niestandardowych.`function_call` Wykonujesz funkcję i podajesz wynik.
+- **Étapes d'outils intégrés** : l'API les gère automatiquement, en préservant
+  le contexte entre les tours.
+- **Étapes d'appel de fonction** : l'API renvoie des étapes `function_call` pour vos
+  fonctions personnalisées. Vous exécutez la fonction et fournissez le résultat.
 
-### Krytyczne pola w zwracanych krokach
+### Champs essentiels dans les étapes renvoyées
 
-Niektóre pola w zwracanych krokach są niezbędne do zachowania kontekstu narzędzia i umożliwienia łączenia narzędzi:
+Certains champs des étapes renvoyées sont essentiels pour maintenir le contexte de l'outil et activer les combinaisons d'outils :
 
-- **`id`**: znajduje się w krokach `function_call` i `function_response`. Unikalny identyfikator, który przypisuje wywołanie do jego odpowiedzi.
-- **`signature`**: znajduje się w krokach `thought` oraz we wszystkich krokach wywołań narzędzi (np. `function_call`) i wyników (np. `function_response`) w przypadku modeli Gemini 3 i nowszych. Ten zaszyfrowany kontekst umożliwia **cyrkulację kontekstu narzędzia** w ramach interakcji.
+- **`id`**: se trouve dans les étapes `function_call` et `function_response`. Identifiant unique qui mappe un appel à sa réponse.
+- **`signature`**: se trouve dans les étapes `thought`, ainsi que dans toutes les étapes d'appel d'outil (par exemple, `function_call`) et de résultat (par exemple, `function_response`) pour les modèles Gemini 3 et versions ultérieures. Ce contexte chiffré permet la **circulation du contexte d'outil** entre les interactions.
 
-**Zarządzanie tymi polami:**
+**Gérer ces champs :**
 
-- **Tryb stanowy (zalecany)**: gdy używasz `previous_interaction_id`, serwer automatycznie obsługuje pola `id` i `signature`.
-- **Tryb bezstanowy**: podczas ręcznego zarządzania historią rozmów musisz się upewnić, że w kolejnych żądaniach przekazujesz do modelu zarówno pole `id`, jak i `signature`, aby zweryfikować autentyczność i zachować kontekst. Oficjalne pakiety SDK obsługują to automatycznie, jeśli przekazujesz pełny obiekt odpowiedzi do historii.
+- **Mode avec état (recommandé)** : lorsque vous utilisez `previous_interaction_id`, le serveur gère automatiquement les champs `id` et `signature`.
+- **Mode sans état** : lorsque vous gérez manuellement l'historique des conversations, vous devez vous assurer de renvoyer les champs `id` et `signature` au modèle dans les requêtes suivantes pour valider l'authenticité et maintenir le contexte. Les SDK officiels gèrent cela automatiquement si vous renvoyez l'objet de réponse complet à l'historique.
 
-### Dane specyficzne dla narzędzia
+### Données spécifiques à l'outil
 
-Niektóre narzędzia wbudowane zwracają argumenty danych widoczne dla użytkownika, które są specyficzne dla typu narzędzia.
+Certains outils intégrés renvoient des arguments de données visibles par l'utilisateur, spécifiques au type d'outil.
 
-| Narzędzie | Argumenty wywołania narzędzia widoczne dla użytkownika (jeśli występują) | Odpowiedź narzędzia widoczna dla użytkownika (jeśli występuje) |
+| Outil | Arguments d'appel d'outil visibles par l'utilisateur (le cas échéant) | Réponse de l'outil visible par l'utilisateur (le cas échéant) |
 | --- | --- | --- |
 | **google\_search** | `queries` | `search_suggestions` |
 | **google\_maps** | `queries` | `places` `google_maps_widget_context_token` |
-| **url\_context** | `urls` Adresy URL do przeglądania | `status`: stan przeglądania `retrieved_url`: przeglądane adresy URL |
-| **file\_search** | Brak | Brak |
+| **url\_context** | `urls` URL à parcourir | `status` : état de la navigation `retrieved_url` : URL parcourues |
+| **file\_search** | Aucun | Aucun |
 
-## Tokeny i ceny
+## Jetons et tarifs
 
-Pamiętaj, że części wywołań narzędzi wbudowanych w żądaniach są wliczane do `prompt_token_count`. Ponieważ te pośrednie kroki narzędzi są teraz widoczne i zwracane, stanowią część historii rozmów. Dotyczy to tylko
-przypadku *żądań*, a nie *odpowiedzi*.
+Notez que les parties d'appel d'outil intégrées dans les requêtes sont comptabilisées dans `prompt_token_count`. Étant donné que ces étapes d'outil intermédiaires sont désormais visibles et vous sont renvoyées, elles font partie de l'historique des conversations. Cela ne s'applique qu'aux
+cas de *requêtes*, et non aux *réponses*.
 
-Wyjątkiem od tej reguły jest narzędzie wyszukiwarki Google. Wyszukiwarka Google stosuje już
-własny model cenowy na poziomie zapytania, więc tokeny nie są
-naliczane podwójnie (patrz strona [Ceny](https://ai.google.dev/gemini-api/docs/pricing?hl=pl)).
+L'outil Recherche Google est une exception à cette règle. La recherche Google applique déjà son propre modèle de tarification au niveau de la requête. Les jetons ne sont donc pas facturés deux fois (consultez la page [Tarifs](https://ai.google.dev/gemini-api/docs/pricing?hl=fr)).
 
-Więcej informacji znajdziesz na stronie [Tokeny](https://ai.google.dev/gemini-api/docs/tokens?hl=pl).
+Pour en savoir plus, consultez la page [Jetons](https://ai.google.dev/gemini-api/docs/tokens?hl=fr).
 
-## Ograniczenia
+## Limites
 
-- Gdy włączona jest cyrkulacja kontekstu narzędzia, domyślnie używaj trybu `validated` (tryb `auto` nie jest obsługiwany).
-- Narzędzia wbudowane, takie jak `google_search`, korzystają z informacji o lokalizacji i aktualnej godzinie. Jeśli więc w `system_instruction` lub `function_declaration.description` występują sprzeczne informacje o lokalizacji i czasie, funkcja łączenia narzędzi może nie działać prawidłowo.
+- Par défaut, le mode `validated` est activé (le mode `auto` n'est pas compatible) lorsque la circulation du contexte d'outil est activée.
+- Les outils intégrés tels que `google_search` s'appuient sur des informations de localisation et d'heure actuelles. Par conséquent, si votre `system_instruction` ou `function_declaration.description` contient des informations de localisation et d'heure conflictuelles, la fonctionnalité de combinaison d'outils risque de ne pas fonctionner correctement.
 
-## Obsługiwane narzędzia
+## Outils compatibles
 
-Standardowa cyrkulacja kontekstu narzędzia dotyczy narzędzi po stronie serwera (wbudowanych).
-Wykonywanie kodu to też narzędzie po stronie serwera, ale ma własne wbudowane rozwiązanie do cyrkulacji kontekstu. Korzystanie z komputera i wywoływanie funkcji to narzędzia po stronie klienta, które też mają wbudowane rozwiązania do cyrkulacji kontekstu.
+La circulation standard du contexte d'outil s'applique aux outils côté serveur (intégrés).
+L'exécution de code est également un outil côté serveur, mais elle dispose de sa propre solution intégrée pour la circulation du contexte. L'utilisation de l'ordinateur et l'appel de fonction sont des outils côté client, et disposent également de solutions intégrées pour la circulation du contexte.
 
-| Narzędzie | Strona wykonania | Obsługa cyrkulacji kontekstu |
+| Outil | Côté exécution | Compatibilité avec la circulation du contexte |
 | --- | --- | --- |
-| [Wyszukiwarka Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pl) | Po stronie serwera | Obsługiwane |
-| [Mapy Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pl) | Po stronie serwera | Obsługiwane |
-| [Kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl) | Po stronie serwera | Obsługiwane |
-| [Wyszukiwanie plików](https://ai.google.dev/gemini-api/docs/file-search?hl=pl) | Po stronie serwera | Obsługiwane |
-| [Wykonywanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl) | Po stronie serwera | Obsługiwane (wbudowane, używa kroków `code_execution` i `code_execution_result`) |
-| [Korzystanie z komputera](https://ai.google.dev/gemini-api/docs/computer-use?hl=pl) | Po stronie klienta | Obsługiwane (wbudowane, używa kroków `function_call` i `function_response`) |
-| [Funkcje niestandardowe](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl) | Po stronie klienta | Obsługiwane (wbudowane, używa kroków `function_call` i `function_response`) |
+| [La recherche Google](https://ai.google.dev/gemini-api/docs/google-search?hl=fr) | Côté serveur | Compatible |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fr) | Côté serveur | Compatible |
+| [Contexte de l'URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr) | Côté serveur | Compatible |
+| [Recherche de fichiers](https://ai.google.dev/gemini-api/docs/file-search?hl=fr) | Côté serveur | Compatible |
+| [Exécution de code](https://ai.google.dev/gemini-api/docs/code-execution?hl=fr) | Côté serveur | Compatible (intégré, utilise les étapes `code_execution` et `code_execution_result`) |
+| [Utilisation de l'ordinateur](https://ai.google.dev/gemini-api/docs/computer-use?hl=fr) | Côté client | Compatible (intégré, utilise les étapes `function_call` et `function_response`) |
+| [Fonctions personnalisées](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr) | Côté client | Compatible (intégré, utilise les étapes `function_call` et `function_response`) |
 
-## Co dalej?
+## Étape suivante
 
-- Dowiedz się więcej o [wywoływaniu funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl) w interfejsie Gemini API.
-- Poznaj obsługiwane narzędzia:
-  - [Wyszukiwarka Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pl)
-  - [Mapy Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pl)
-  - [Kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl)
-  - [Wyszukiwanie plików](https://ai.google.dev/gemini-api/docs/file-search?hl=pl)
+- En savoir plus sur l'[appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr) dans l'API Gemini.
+- Découvrez les outils compatibles :
+  - [La recherche Google](https://ai.google.dev/gemini-api/docs/google-search?hl=fr)
+  - [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fr)
+  - [Contexte de l'URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr)
+  - [Recherche de fichiers](https://ai.google.dev/gemini-api/docs/file-search?hl=fr)
 
-Prześlij opinię
+Envoyer des commentaires
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Ostatnia aktualizacja: 2026-07-30 UTC.
+Dernière mise à jour le 2026/07/30 (UTC).
 
-Chcesz przekazać coś jeszcze?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/30 (UTC)."],[],[]]

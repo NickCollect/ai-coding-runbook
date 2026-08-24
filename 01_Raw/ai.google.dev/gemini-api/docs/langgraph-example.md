@@ -1,44 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/langgraph-example?hl=he
-fetched_at: 2026-08-17T02:27:02.304173+00:00
-title: "\u05e1\u05d5\u05db\u05df ReAct \u05de\u05d0\u05e4\u05e1 \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea Gemini \u05d5-LangGraph \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/langgraph-example?hl=fr
+fetched_at: 2026-08-24T02:25:53.807752+00:00
+title: "Cr\u00e9er un agent ReAct \u00e0 partir de z\u00e9ro avec Gemini et LangGraph \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-שליחת משוב
+Envoyer des commentaires
 
-# סוכן ReAct מאפס באמצעות Gemini ו-LangGraph
+# Créer un agent ReAct à partir de zéro avec Gemini et LangGraph
 
-‫LangGraph הוא framework לבניית אפליקציות LLM עם שמירת מצב, ולכן הוא בחירה טובה לבניית סוכני ReAct (Reasoning and Acting).
+LangGraph est un framework permettant de créer des applications LLM avec état. Il constitue donc un bon choix pour créer des agents ReAct (Reasoning and Acting).
 
-סוכני ReAct משלבים בין נימוק של LLM לבין ביצוע פעולות. הם חושבים באופן איטרטיבי, משתמשים בכלים ופועלים על סמך תצפיות כדי להשיג את יעדי המשתמשים, ומתאימים את הגישה שלהם באופן דינמי. התבנית הזו, שהוצגה במאמר ["ReAct: Synergizing Reasoning and Acting
-in Language Models"‎](https://arxiv.org/abs/2210.03629) (2023), מנסה לשקף פתרון בעיות גמיש כמו אצל בני אדם, ולא תהליכי עבודה נוקשים.
+Les agents ReAct combinent le raisonnement LLM et l'exécution d'actions. Ils réfléchissent de manière itérative, utilisent des outils et agissent en fonction des observations pour atteindre les objectifs des utilisateurs, en adaptant dynamiquement leur approche. Présenté dans ["ReAct : Synergizing Reasoning and Acting in Language Models"](https://arxiv.org/abs/2210.03629) (2023), ce modèle tente d'imiter la résolution de problèmes flexible et semblable à celle des humains plutôt que des workflows rigides.
 
-‫LangGraph מציע סוכן ReAct מוכן מראש ([`create_react_agent`](https://langchain-ai.github.io/langgraph/reference/prebuilt/#langgraph.prebuilt.chat_agent_executor.create_react_agent)),
-שמתאים במיוחד כשצריך יותר שליטה והתאמה אישית בהטמעות של ReAct. במדריך הזה מוצגת גרסה פשוטה יותר.
+LangGraph propose un agent ReAct prédéfini ([`create_react_agent`](https://langchain-ai.github.io/langgraph/reference/prebuilt/#langgraph.prebuilt.chat_agent_executor.create_react_agent)), qui est idéal lorsque vous avez besoin de plus de contrôle et de personnalisation pour vos implémentations ReAct. Ce guide vous en présente une version simplifiée.
 
-מודלים של סוכני LangGraph הם גרפים שכוללים שלושה רכיבים מרכזיים:
+LangGraph modélise les agents sous forme de graphiques à l'aide de trois composants clés :
 
-- ‫`State`: מבנה נתונים משותף (בדרך כלל `TypedDict` או `Pydantic BaseModel`) שמייצג את תמונת המצב העדכנית של האפליקציה.
-- ‫`Nodes`: קידוד הלוגיקה של הסוכנים. הם מקבלים את המצב הנוכחי כקלט, מבצעים חישוב או תופעת לוואי ומחזירים מצב מעודכן, כמו קריאות ל-LLM או קריאות לכלים.
-- ‫`Edges`: מגדירים את `Node` הבא להפעלה על סמך `State` הנוכחי, כדי לאפשר לוגיקה מותנית ומעברים קבועים.
+- `State` : structure de données partagée (généralement `TypedDict` ou `Pydantic BaseModel`) représentant l'instantané actuel de l'application.
+- `Nodes` : code la logique de vos agents. Ils reçoivent l'état actuel en entrée, effectuent un calcul ou un effet secondaire, et renvoient un état mis à jour, tel que des appels LLM ou des appels d'outils.
+- `Edges` : définit le prochain `Node` à exécuter en fonction du `State` actuel, ce qui permet une logique conditionnelle et des transitions fixes.
 
-אם עדיין אין לכם מפתח API, תוכלו לקבל אותו מ-[Google AI Studio](https://aistudio.google.com/apikey?hl=he).
+Si vous ne disposez pas encore d'une clé API, vous pouvez en obtenir une auprès de [Google AI Studio](https://aistudio.google.com/apikey?hl=fr).
 
 ```
 pip install langgraph langchain-google-genai geopy requests
 ```
 
-מגדירים את מפתח ה-API במשתנה הסביבה `GEMINI_API_KEY`.
+Définissez votre clé API dans la variable d'environnement `GEMINI_API_KEY`.
 
 ```
 import os
@@ -47,11 +45,11 @@ import os
 api_key = os.getenv("GEMINI_API_KEY")
 ```
 
-כדי להבין טוב יותר איך להטמיע סוכן ReAct באמצעות LangGraph, במדריך הזה נציג דוגמה מעשית. תצרו סוכן שהמטרה שלו היא להשתמש בכלי כדי למצוא את מזג האוויר הנוכחי במיקום ספציפי.
+Pour mieux comprendre comment implémenter un agent ReAct à l'aide de LangGraph, ce guide vous présentera un exemple pratique. Vous allez créer un agent dont l'objectif est d'utiliser un outil pour trouver la météo actuelle d'un lieu spécifié.
 
-לצורך המחשה, סוכן מזג האוויר הזה, `State`, ישמור את היסטוריית השיחה המתמשכת (כמו רשימה של הודעות) ומונה (כמספר שלם) של מספר השלבים שבוצעו.
+Pour cet agent météo, `State` conservera l'historique des conversations en cours (sous forme de liste de messages) et un compteur (sous forme d'entier) pour le nombre d'étapes effectuées, à des fins d'illustration.
 
-‫LangGraph מספקת פונקציית עזר, `add_messages`, לעדכון רשימות של הודעות מצב. היא פועלת כ[פונקציית צמצום](https://langchain-ai.github.io/langgraph/concepts/low_level/#reducers), מקבלת את הרשימה הנוכחית בתוספת ההודעות החדשות ומחזירה רשימה משולבת. הוא מטפל בעדכונים לפי מזהה ההודעה, ובאופן ברירת מחדל הוא פועל בשיטת 'הוספה בלבד' להודעות חדשות שלא נראו.
+LangGraph fournit une fonction d'assistance, `add_messages`, pour mettre à jour les listes de messages d'état. Elle fonctionne comme un [réducteur](https://langchain-ai.github.io/langgraph/concepts/low_level/#reducers), en prenant la liste actuelle, plus les nouveaux messages, et en renvoyant une liste combinée. Il gère les mises à jour par ID de message et adopte par défaut un comportement "d'ajout uniquement" pour les nouveaux messages non lus.
 
 ```
 from typing import Annotated,Sequence, TypedDict
@@ -65,7 +63,7 @@ class AgentState(TypedDict):
     number_of_steps: int
 ```
 
-בשלב הבא, מגדירים את כלי מזג האוויר.
+Définissez ensuite votre outil météo.
 
 ```
 from langchain_core.tools import tool
@@ -104,7 +102,7 @@ def get_weather_forecast(location: str, date: str):
 tools = [get_weather_forecast]
 ```
 
-עכשיו מאתחלים את המודל ומקשרים את הכלים למודל.
+Initialisez maintenant le modèle et associez-y les outils.
 
 ```
 from datetime import datetime
@@ -127,14 +125,14 @@ res=model.invoke(f"What is the weather in Berlin on {datetime.today()}?")
 print(res)
 ```
 
-השלב האחרון לפני הפעלת הסוכן הוא הגדרת הצמתים והקצוות.
-בדוגמה הזו יש שני צמתים וקצה אחד.
+La dernière étape avant de pouvoir exécuter votre agent consiste à définir vos nœuds et vos arêtes.
+Dans cet exemple, vous avez deux nœuds et un bord.
 
-- ‫`call_tool` node שמבצע את שיטת הכלי. ל-LangGraph יש צומת מובנה מראש בשביל זה שנקרא [ToolNode](https://langchain-ai.github.io/langgraph/how-tos/tool-calling/).
-- ‫`call_model` שמשתמש בצומת `model_with_tools` כדי להפעיל את המודל.
-- `should_continue` edge שמחליט אם להתקשר לכלי או למודל.
+- Nœud `call_tool` qui exécute la méthode de votre outil. LangGraph dispose d'un nœud prédéfini à cet effet, appelé [ToolNode](https://langchain-ai.github.io/langgraph/how-tos/tool-calling/).
+- Nœud `call_model` qui utilise `model_with_tools` pour appeler le modèle.
+- `should_continue` edge qui décide s'il faut appeler l'outil ou le modèle.
 
-מספר הצמתים והקצוות לא קבוע. אתם יכולים להוסיף לגרף כמה צמתים וקשתות שתרצו. לדוגמה, אפשר להוסיף צומת להוספת פלט מובנה או צומת לאימות עצמי או לרפלקציה כדי לבדוק את פלט המודל לפני שמפעילים את הכלי או המודל.
+Le nombre de nœuds et d'arêtes n'est pas fixe. Vous pouvez ajouter autant de nœuds et d'arêtes que vous le souhaitez à votre graphique. Par exemple, vous pouvez ajouter un nœud pour ajouter une sortie structurée ou un nœud d'auto-vérification/réflexion pour vérifier la sortie du modèle avant d'appeler l'outil ou le modèle.
 
 ```
 from langchain_core.messages import ToolMessage
@@ -178,7 +176,7 @@ def should_continue(state: AgentState):
     return "continue"
 ```
 
-אחרי שכל רכיבי הסוכן מוכנים, אפשר להרכיב אותם.
+Maintenant que tous les composants de l'agent sont prêts, vous pouvez les assembler.
 
 ```
 from langgraph.graph import StateGraph, END
@@ -214,7 +212,7 @@ workflow.add_edge("tools", "llm")
 graph = workflow.compile()
 ```
 
-אפשר להמחיש את הגרף באמצעות ה-method‏ `draw_mermaid_png`.
+Vous pouvez visualiser votre graphique à l'aide de la méthode `draw_mermaid_png`.
 
 ```
 from IPython.display import Image, display
@@ -222,9 +220,9 @@ from IPython.display import Image, display
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-![png](https://ai.google.dev/static/gemini-api/docs/images/langgraph-react-agent_16_0.png?hl=he)
+![png](https://ai.google.dev/static/gemini-api/docs/images/langgraph-react-agent_16_0.png?hl=fr)
 
-עכשיו מפעילים את הסוכן.
+Exécutez maintenant l'agent.
 
 ```
 from datetime import datetime
@@ -237,7 +235,7 @@ for state in graph.stream(inputs, stream_mode="values"):
     last_message.pretty_print()
 ```
 
-עכשיו אפשר להמשיך את השיחה, לשאול מה מזג האוויר בעיר אחרת או לבקש השוואה.
+Vous pouvez à présent poursuivre votre conversation, demander la météo dans une autre ville ou demander une comparaison.
 
 ```
 state["messages"].append(("user", "Would it be warmer in Munich?"))
@@ -247,12 +245,12 @@ for state in graph.stream(state, stream_mode="values"):
     last_message.pretty_print()
 ```
 
-שליחת משוב
+Envoyer des commentaires
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-עדכון אחרון: 2026-06-22 (שעון UTC).
+Dernière mise à jour le 2026/06/22 (UTC).
 
-רוצה לתת לנו משוב?
+Voulez-vous nous donner plus d'informations ?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-22 (שעון UTC)."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/06/22 (UTC)."],[],[]]

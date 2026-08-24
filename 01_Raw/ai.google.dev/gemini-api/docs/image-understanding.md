@@ -1,38 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/image-understanding?hl=hi
-fetched_at: 2026-08-17T02:30:35.276079+00:00
-title: "\u0907\u092e\u0947\u091c \u0915\u094b \u0938\u092e\u091d\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/image-understanding?hl=pl
+fetched_at: 2026-08-24T02:30:39.129700+00:00
+title: "Interpretacja obrazu \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-सुझाव भेजें
+Prześlij opinię
 
-# इमेज को समझना
+# Interpretacja obrazu
 
-Gemini मॉडल को मल्टीमॉडल के तौर पर डिज़ाइन किया गया है. इससे इमेज प्रोसेसिंग और कंप्यूटर विज़न से जुड़े कई काम किए जा सकते हैं. जैसे, इमेज के लिए कैप्शन जनरेट करना, इमेज को अलग-अलग कैटगरी में बांटना, और इमेज से जुड़े सवालों के जवाब देना. इसके लिए, आपको एमएल मॉडल को ट्रेनिंग देने की ज़रूरत नहीं होती.
+Modele Gemini są budowane od podstaw z myślą o multimodalności, co umożliwia wykonywanie wielu zadań związanych z przetwarzaniem obrazów i widzeniem komputerowym, w tym m.in. tworzenie podpisów do obrazów, klasyfikację i wizualne odpowiedzi na pytania, bez konieczności trenowania wyspecjalizowanych modeli ML.
 
-Gemini मॉडल, मल्टीमॉडल की सामान्य सुविधाओं के साथ-साथ, कुछ खास इस्तेमाल के उदाहरणों के लिए **ज़्यादा सटीक नतीजे** देते हैं. जैसे, [ऑब्जेक्ट का पता लगाने की सुविधा](#object-detection) और [सेगमेंटेशन](#segmentation). इसके लिए, उन्हें अतिरिक्त ट्रेनिंग दी जाती है.
+Oprócz ogólnych możliwości multimodalnych modele Gemini oferują
+**większą dokładność** w konkretnych przypadkach użycia, takich jak [wykrywanie obiektów](#object-detection)
+i [segmentacja](#segmentation), dzięki dodatkowemu trenowaniu.
 
-## Gemini को इमेज पास करना
+## Przekazywanie obrazów do Gemini
 
-Gemini को इनपुट के तौर पर इमेज देने के लिए, कई तरीकों का इस्तेमाल किया जा सकता है:
+Obrazy możesz przekazywać do Gemini na kilka sposobów:
 
-- [यूआरएल का इस्तेमाल करके इमेज पास करना](#url-image): यह उन इमेज के लिए सबसे सही तरीका है जिन्हें सार्वजनिक तौर पर ऐक्सेस किया जा सकता है.
-- [इनलाइन इमेज डेटा पास करना](#inline-image): Base64 कोड में बदले गए इमेज डेटा के लिए.
-- [File API का इस्तेमाल करके इमेज अपलोड करना](#upload-image): इसका सुझाव बड़ी फ़ाइलों के लिए दिया जाता है. इसके अलावा, इसका इस्तेमाल कई अनुरोधों में इमेज का दोबारा इस्तेमाल करने के लिए भी किया जा सकता है.
+- [Przekazywanie obrazu za pomocą adresu URL](#url-image): idealne rozwiązanie w przypadku obrazów dostępnych publicznie.
+- [Przekazywanie danych obrazu w tekście](#inline-image): w przypadku danych obrazu zakodowanych w formacie Base64.
+- [Przesyłanie obrazów za pomocą interfejsu File API](#upload-image): zalecane w przypadku
+  większych plików lub ponownego używania obrazów w wielu żądaniach.
 
-### यूआरएल का इस्तेमाल करके इमेज पास करना
+### Przekazywanie obrazu za pomocą adresu URL
 
-[Files API](https://ai.google.dev/gemini-api/docs/files?hl=hi) का इस्तेमाल करके, इमेज अपलोड की जा सकती है. इसके बाद, इसे अनुरोध में पास किया जा सकता है:
+Obraz możesz przesłać za pomocą interfejsu [Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl) i przekazać go
+w żądaniu:
 
 ### Python
 
@@ -103,9 +107,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### इनलाइन इमेज का डेटा पास करना
+### Przekazywanie danych obrazu w tekście
 
-इमेज का डेटा, base64-encoded स्ट्रिंग के तौर पर दिया जा सकता है:
+Dane obrazu możesz przekazywać jako ciągi tekstowe zakodowane w formacie Base64:
 
 ### Python
 
@@ -184,9 +188,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### File API का इस्तेमाल करके इमेज अपलोड करना
+### Przesyłanie obrazów za pomocą interfejsu File API
 
-बड़ी फ़ाइलों के लिए या एक ही इमेज फ़ाइल का बार-बार इस्तेमाल करने के लिए, फ़ाइल एपीआई का इस्तेमाल करें. [Files API की गाइड](https://ai.google.dev/gemini-api/docs/files?hl=hi) देखें.
+W przypadku dużych plików lub aby móc wielokrotnie używać tego samego pliku obrazu, użyj interfejsu Files API. Zapoznaj się z przewodnikiem po interfejsie [Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl).
 
 ### Python
 
@@ -259,9 +263,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## एक से ज़्यादा इमेज का इस्तेमाल करके प्रॉम्प्ट देना
+## Promptowanie za pomocą wielu obrazów
 
-`input` ऐरे में कई इमेज ऑब्जेक्ट शामिल करके, एक ही प्रॉम्प्ट में कई इमेज दी जा सकती हैं:
+W jednym prompcie możesz podać kilka obrazów, dodając do tablicy `input` kilka obiektów obrazu:
 
 ### Python
 
@@ -339,9 +343,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## ऑब्जेक्ट का पता लगाने की सुविधा
+## Wykrywanie obiektów
 
-मॉडल को इस तरह से ट्रेन किया जाता है कि वे किसी इमेज में मौजूद ऑब्जेक्ट का पता लगा सकें और उनके बाउंडिंग बॉक्स के निर्देशांक पा सकें. इमेज के डाइमेंशन के हिसाब से, निर्देशांकों को [0, 1000] पर स्केल किया जाता है. आपको अपनी मूल इमेज के साइज़ के आधार पर, इन कोऑर्डिनेट को कम करना होगा.
+Modele są trenowane do wykrywania obiektów na obrazie i uzyskiwania ich współrzędnych ramki ograniczającej. Współrzędne względem wymiarów obrazu są skalowane do zakresu [0, 1000]. Musisz przeskalować te współrzędne na podstawie oryginalnego rozmiaru obrazu.
 
 ### Python
 
@@ -462,13 +466,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-ज़्यादा उदाहरणों के लिए, [Gemini की कुकबुक](https://github.com/google-gemini/cookbook) पर जाएं.
+Więcej przykładów znajdziesz w [Gemini Cookbook](https://github.com/google-gemini/cookbook).
 
-## सेगमेंटेशन
+## Podział na segmenty
 
-Gemini मॉडल, न सिर्फ़ आइटम का पता लगाते हैं, बल्कि उन्हें सेगमेंट भी करते हैं और उनके कॉन्टूर मास्क भी उपलब्ध कराते हैं.
+Modele Gemini nie tylko wykrywają obiekty, ale też je segmentują i udostępniają ich maski konturów.
 
-मॉडल, JSON फ़ॉर्मैट में एक सूची का अनुमान लगाता है. इसमें हर आइटम, सेगमेंटेशन मास्क के बारे में बताता है. हर आइटम में एक बाउंडिंग बॉक्स ("`box_2d`") होता है. यह `[ymin, xmin, ymax, xmax]` फ़ॉर्मैट में होता है. इसमें 0 से 1000 के बीच सामान्य किए गए कोऑर्डिनेट होते हैं. साथ ही, इसमें एक लेबल ("`label`") होता है, जो ऑब्जेक्ट की पहचान करता है. आखिर में, बाउंडिंग बॉक्स के अंदर सेगमेंटेशन मास्क होता है. यह `[x, y]` कोऑर्डिनेट के पॉलीगॉन के तौर पर होता है. इसे 0 से 1000 के बीच सामान्य किया जाता है.
+Model przewiduje listę JSON, w której każdy element reprezentuje maskę segmentacji. Każdy element ma ramkę ograniczającą („`box_2d`”) w formacie `[ymin, xmin, ymax, xmax]` ze znormalizowanymi współrzędnymi od 0 do 1000, etykietę („`label`”) identyfikującą obiekt oraz maskę segmentacji w ramce ograniczającej jako wielokąt ze współrzędnymi `[x, y]` znormalizowanymi do zakresu 0–1000.
 
 ### Python
 
@@ -609,75 +613,81 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-![कपकेक वाली टेबल, जिसमें लकड़ी और कांच की चीज़ों को हाइलाइट किया गया है](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=hi)
+![Stół z babeczkami, na którym wyróżniono drewniane i szklane przedmioty](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=pl)
 
-ऑब्जेक्ट और सेगमेंटेशन मास्क के साथ सेगमेंटेशन आउटपुट का उदाहरण
+Przykład danych wyjściowych segmentacji z obiektami i maskami segmentacji
 
-## Google Images पर काम करने वाले फ़ॉर्मैट
+## Obsługiwane formaty obrazów
 
-Gemini में, इस तरह के इमेज फ़ॉर्मैट वाले एमआईएमई टाइप इस्तेमाल किए जा सकते हैं:
+Gemini obsługuje te typy MIME formatów obrazów:
 
-- PNG - `image/png`
-- JPEG - `image/jpeg`
-- WEBP - `image/webp`
-- HEIC - `image/heic`
-- HEIF - `image/heif`
+- PNG – `image/png`
+- JPEG – `image/jpeg`
+- WEBP – `image/webp`
+- HEIC – `image/heic`
+- HEIF – `image/heif`
 
-फ़ाइल इनपुट करने के अन्य तरीकों के बारे में जानने के लिए, [फ़ाइल इनपुट करने के तरीके](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=hi) गाइड देखें.
+Więcej informacji o innych metodach wprowadzania plików znajdziesz w
+[przewodniku po metodach wprowadzania plików](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=pl).
 
-## क्षमताएं
+## Uprawnienia
 
-Gemini मॉडल के सभी वर्शन मल्टीमॉडल हैं. इनका इस्तेमाल इमेज प्रोसेसिंग और कंप्यूटर विज़न से जुड़े कई कामों के लिए किया जा सकता है. जैसे, इमेज के लिए कैप्शन, विज़ुअल से जुड़े सवालों के जवाब देना, इमेज क्लासिफ़िकेशन, ऑब्जेक्ट का पता लगाने की सुविधा, और सेगमेंटेशन. हालांकि, इनके अलावा और भी काम किए जा सकते हैं.
+Wszystkie wersje modelu Gemini są multimodalne i mogą być używane w wielu zadaniach związanych z przetwarzaniem obrazów i widzeniem komputerowym, w tym m.in. tworzeniem podpisów do obrazów, odpowiadaniem na pytania dotyczące obrazów, klasyfikowaniem obrazów, wykrywaniem obiektów i segmentacją obiektów.
 
-Gemini, आपकी क्वालिटी और परफ़ॉर्मेंस से जुड़ी ज़रूरतों के हिसाब से, खास एमएल मॉडल का इस्तेमाल करने की ज़रूरत को कम कर सकता है.
+W zależności od wymagań dotyczących jakości i skuteczności Gemini może ograniczyć konieczność używania wyspecjalizowanych modeli ML.
 
-मॉडल के नए वर्शन को खास तौर पर, सामान्य क्षमताओं के साथ-साथ खास कामों को ज़्यादा सटीक तरीके से करने के लिए ट्रेन किया गया है. जैसे, बेहतर [ऑब्जेक्ट का पता लगाने की सुविधा](#object-detection) और [सेगमेंटेशन](#segmentation).
+Najnowsze wersje modelu są specjalnie trenowane, aby oprócz ogólnych możliwości, takich jak ulepszone
+[wykrywanie obiektów](#object-detection) i [segmentacja](#segmentation), zwiększać dokładność w przypadku
+wyspecjalizowanych zadań.
 
-## सीमाएं और मुख्य तकनीकी जानकारी
+## Ograniczenia i najważniejsze informacje techniczne
 
-### फ़ाइल की सीमा
+### Limit pliku
 
-Gemini मॉडल, हर अनुरोध के लिए ज़्यादा से ज़्यादा 3,600 इमेज फ़ाइलें इस्तेमाल कर सकते हैं.
+Modele Gemini obsługują maksymalnie 3600 plików obrazów na żądanie.
 
-### टोकन की गिनती
+### Obliczanie liczby tokenów
 
-- अगर दोनों डाइमेंशन 384 पिक्सल से कम या इसके बराबर हैं, तो 258 टोकन.
-  बड़ी इमेज को 768x768 पिक्सल वाली टाइल में बांटा जाता है. हर टाइल की कीमत 258 टोकन होती है.
+- 258 tokenów, jeśli oba wymiary są mniejsze lub równe 384 piksele.
+  Większe obrazy są dzielone na kafelki o wymiarach 768 x 768 pikseli, z których każdy kosztuje 258 tokenów.
 
-टाइल की संख्या कैलकुलेट करने का सामान्य फ़ॉर्मूला यहां दिया गया है:
+Przybliżony wzór na obliczanie liczby kafelków jest taki:
 
-- क्रॉप यूनिट के साइज़ का हिसाब लगाएं. यह करीब-करीब `floor(min(width, height)` / 1.5) होता है.
-- टाइल की संख्या पाने के लिए, हर डाइमेंशन को क्रॉप यूनिट के साइज़ से भाग दें और फिर उन्हें आपस में गुणा करें.
+- Oblicz rozmiar jednostki przycinania, który wynosi w przybliżeniu: `floor(min(width, height)` / 1,5).
+- Podziel każdy wymiar przez rozmiar jednostki przycinania i pomnóż przez siebie, aby uzyskać liczbę kafelków.
 
-उदाहरण के लिए, 960x540 डाइमेंशन वाली इमेज के लिए, क्रॉप यूनिट का साइज़ 360 होगा. हर डाइमेंशन को 360 से भाग दें. टाइल की संख्या 3 \* 2 = 6 है.
+Na przykład obraz o wymiarach 960 x 540 będzie miał rozmiar jednostki przycinania równy 360. Podziel każdy wymiar przez 360, a liczba kafelków wyniesie 3 \* 2 = 6.
 
-### मीडिया रिज़ॉल्यूशन
+### Rozdzielczość multimediów
 
-Gemini 3 में, मल्टीमॉडल विज़न प्रोसेसिंग को ज़्यादा बारीकी से कंट्रोल करने की सुविधा मिलती है. इसके लिए, `media_resolution` पैरामीटर का इस्तेमाल किया जाता है. `media_resolution` पैरामीटर से यह तय होता है कि **हर इनपुट इमेज या वीडियो फ़्रेम के लिए ज़्यादा से ज़्यादा कितने टोकन असाइन किए जा सकते हैं.**
-ज़्यादा रिज़ॉल्यूशन से, मॉडल को छोटे टेक्स्ट को पढ़ने या छोटी-छोटी बारीकियों को पहचानने में मदद मिलती है. हालांकि, इससे टोकन का इस्तेमाल और लेटेन्सी बढ़ जाती है.
+Gemini 3 wprowadza szczegółową kontrolę nad przetwarzaniem multimodalnego widzenia za pomocą parametru `media_resolution`. Parametr `media_resolution` określa **maksymalną liczbę tokenów przydzielonych na obraz wejściowy lub klatkę wideo**.
+Wyższe rozdzielczości zwiększają zdolność modelu do odczytywania drobnego tekstu lub identyfikowania małych szczegółów, ale zwiększają zużycie tokenów i opóźnienie.
 
-## सलाह और सबसे सही तरीके
+## Porady i sprawdzone metody
 
-- पुष्टि करें कि इमेज सही तरीके से घुमाई गई हों.
-- साफ़ और बिना धुंधली इमेज का इस्तेमाल करें.
-- टेक्स्ट वाली किसी इमेज का इस्तेमाल करते समय, `input` ऐरे में इमेज से *पहले* टेक्स्ट प्रॉम्प्ट डालें.
+- Sprawdź, czy obrazy są prawidłowo obrócone.
+- Używaj wyraźnych obrazów bez rozmycia.
+- Jeśli używasz jednego obrazu z tekstem, umieść prompt tekstowy *przed* obrazem w tablicy `input`.
 
-## आगे क्या करना है
+## Co dalej?
 
-इस गाइड में, इमेज फ़ाइलें अपलोड करने और इमेज इनपुट से टेक्स्ट आउटपुट जनरेट करने का तरीका बताया गया है. ज़्यादा जानने के लिए, यहां दिए गए संसाधन देखें:
+Z tego przewodnika dowiesz się, jak przesyłać pliki obrazów i generować dane wyjściowe tekstowe na podstawie danych wejściowych obrazów. Więcej informacji znajdziesz w tych materiałach:
 
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=hi): Gemini के साथ इस्तेमाल करने के लिए, फ़ाइलें अपलोड करने और उन्हें मैनेज करने के बारे में ज़्यादा जानें.
-- [सिस्टम के लिए निर्देश](https://ai.google.dev/gemini-api/docs/text-generation?hl=hi#system-instructions):
-  सिस्टम के लिए निर्देश देने की सुविधा की मदद से, अपनी खास ज़रूरतों और इस्तेमाल के उदाहरणों के आधार पर, मॉडल के व्यवहार को कंट्रोल किया जा सकता है.
-- [फ़ाइल प्रॉम्प्ट करने की रणनीतियां](https://ai.google.dev/gemini-api/docs/files?hl=hi#prompt-guide): Gemini API, टेक्स्ट, इमेज, ऑडियो, और वीडियो डेटा के साथ प्रॉम्प्ट करने की सुविधा देता है. इसे मल्टीमॉडल प्रॉम्प्टिंग भी कहा जाता है.
-- [सुरक्षा से जुड़ी गाइडलाइन](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=hi): कभी-कभी जनरेटिव एआई मॉडल से ऐसे आउटपुट मिलते हैं जिनकी उम्मीद नहीं होती. जैसे, गलत, पक्षपात करने वाले या आपत्तिजनक आउटपुट. इस तरह के जवाबों से होने वाले नुकसान के जोखिम को कम करने के लिए, पोस्ट-प्रोसेसिंग और मैन्युअल तरीके से आकलन करना ज़रूरी है.
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl): dowiedz się więcej o przesyłaniu plików i zarządzaniu nimi na potrzeby Gemini.
+- [Instrukcje systemowe](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl#system-instructions):
+  Instrukcje systemowe pozwalają sterować działaniem modelu na podstawie
+  konkretnych potrzeb i przypadków użycia.
+- [Strategie tworzenia promptów za pomocą plików](https://ai.google.dev/gemini-api/docs/files?hl=pl#prompt-guide): interfejs Gemini API obsługuje tworzenie promptów za pomocą danych tekstowych, obrazów, dźwięku i wideo, czyli tworzenie promptów multimodalnych.
+- [Wskazówki dotyczące bezpieczeństwa](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=pl): modele generatywnej
+  AI czasami generują nieoczekiwane dane wyjściowe, np. niedokładne,
+  stronnicze lub obraźliwe. Przetwarzanie końcowe i ocena przez człowieka są niezbędne, aby ograniczyć ryzyko szkód spowodowanych takimi danymi wyjściowymi.
 
-सुझाव भेजें
+Prześlij opinię
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया.
+Ostatnia aktualizacja: 2026-07-30 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Chcesz przekazać coś jeszcze?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]

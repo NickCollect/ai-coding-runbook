@@ -1,28 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-TW
-fetched_at: 2026-08-17T02:25:02.719431+00:00
-title: "Gemini Deep Research \u4ee3\u7406 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=pl
+fetched_at: 2026-08-24T02:20:11.928516+00:00
+title: "Agent Deep Research w\u00a0Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-提供意見
+Prześlij opinię
 
-# Gemini Deep Research 代理
+# Agent Deep Research w Gemini
 
-Gemini Deep Research 代理程式會自主規劃、執行及統整多步驟研究工作。這項功能採用 Gemini，可瀏覽複雜的資訊環境，並生成詳細的報告 (附上引用來源)。新功能可讓您與代理共同規劃、使用 MCP 伺服器連線至外部工具、加入視覺化內容 (例如圖表和圖形)，以及直接提供文件做為輸入內容。
+Agent Gemini Deep Research autonomicznie planuje, wykonuje i syntetyzuje wieloetapowe zadania badawcze. Dzięki Gemini potrafi poruszać się po złożonych zasobach informacji, aby tworzyć szczegółowe raporty z cytatami. Nowe funkcje umożliwiają wspólne planowanie z agentem, łączenie się z narzędziami zewnętrznymi za pomocą serwerów MCP, dodawanie wizualizacji (takich jak wykresy) i bezpośrednie przekazywanie dokumentów jako danych wejściowych.
 
-研究工作需要反覆搜尋和閱讀，可能需要幾分鐘才能完成。您必須使用[背景執行](https://ai.google.dev/gemini-api/docs/background-execution?hl=zh-tw) (設定 `background=true`)，以非同步方式執行代理程式，並輪詢結果或串流更新。詳情請參閱「[處理長時間執行的工作](#long-running-tasks)」。
+Zadania badawcze obejmują iteracyjne wyszukiwanie i czytanie, a ich wykonanie może potrwać kilka minut. Aby uruchomić agenta asynchronicznie i sprawdzać wyniki lub przesyłać strumieniowo aktualizacje, musisz użyć [wykonywania w tle](https://ai.google.dev/gemini-api/docs/background-execution?hl=pl) (ustaw `background=true`). Więcej informacji znajdziesz w sekcji [Obsługa długotrwałych zadań](#long-running-tasks).
 
-以下範例說明如何在背景啟動研究工作，並輪詢結果。
+Poniższy przykład pokazuje, jak rozpocząć analizę w tle i sprawdzać wyniki.
 
 ### Python
 
@@ -97,20 +97,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## 支援的版本
+## Obsługiwane wersje
 
-Deep Research 代理有兩種版本：
+Agent Deep Research jest dostępny w 2 wersjach:
 
-- **Deep Research** (`deep-research-preview-04-2026`)：專為速度和效率而設計，非常適合串流回用戶端 UI。
-- **Deep Research Max** (`deep-research-max-preview-04-2026`)：自動收集及統整內容，提供最全面的資訊。
+- **Deep Research** (`deep-research-preview-04-2026`): zaprojektowany z myślą o szybkości i wydajności, idealny do przesyłania strumieniowego do interfejsu klienta.
+- **Deep Research Max** (`deep-research-max-preview-04-2026`): maksymalna kompleksowość automatycznego zbierania i syntezy kontekstu.
 
-## 共同規劃
+## Planowanie zespołowe
 
-協作規劃功能可讓您在代理程式開始工作前，先查看並修正研究計畫，控管研究方向。啟用後，代理程式會傳回建議的研究計畫，而不是立即執行。接著，您可以透過多輪互動查看、修改或核准計畫。
+Planowanie oparte na współpracy daje Ci kontrolę nad kierunkiem badań, zanim agent rozpocznie pracę. Możesz przejrzeć i dopracować plan badań przed jego realizacją. Gdy ta opcja jest włączona, agent zwraca proponowany plan badań zamiast natychmiastowego wykonania. Następnie możesz przejrzeć, zmodyfikować lub zatwierdzić plan w ramach interakcji wieloetapowych.
 
-### 步驟 1：申請方案
+### Krok 1. Poproś o plan
 
-在第一次互動中設定 `collaborative_planning=True`。代理會傳回研究計畫，而不是完整報告。
+Ustaw `collaborative_planning=True` w pierwszej interakcji. Zamiast pełnego raportu agent zwraca plan badań.
 
 ### Python
 
@@ -176,9 +176,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 步驟 2：修正計畫 (選用)
+### Krok 2. Ulepsz plan (opcjonalnie)
 
-使用 `previous_interaction_id` 繼續對話，並反覆修正行程。按住 `collaborative_planning=True` 即可繼續規劃路線。
+Użyj `previous_interaction_id`, aby kontynuować rozmowę i ulepszać plan. Naciśnij `collaborative_planning=True`, aby pozostać w trybie planowania.
 
 ### Python
 
@@ -242,9 +242,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 步驟 3：核准並執行
+### Krok 3. Zatwierdź i wykonaj
 
-設定 `collaborative_planning=False` (或省略) 即可核准計畫並開始研究。
+Ustaw wartość `collaborative_planning=False` (lub pomiń ją), aby zatwierdzić plan i rozpocząć zbieranie informacji.
 
 ### Python
 
@@ -308,10 +308,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 圖表
+## Wizualizacja
 
-如果 `visualization` 設為 `"auto"`，代理程式可以生成圖表和其他視覺元素，輔助研究結果。
-生成圖片會納入回覆步驟，並以 `image` 增量串流傳輸。為獲得最佳結果，請在查詢中明確要求提供視覺化內容，例如「請附上顯示一段時間內趨勢的圖表」或「請生成比較市占率的圖形」。將 `visualization` 設為 `"auto"` 即可啟用這項功能，但只有在提示要求時，代理程式才會生成圖像。
+Gdy `visualization` jest ustawione na `"auto"`, agent może generować wykresy i inne elementy wizualne, aby wspierać wyniki swoich badań.
+Wygenerowane obrazy są uwzględniane w krokach odpowiedzi i przesyłane strumieniowo jako delty `image`. Aby uzyskać najlepsze wyniki, w zapytaniu wyraźnie poproś o elementy wizualne, np. „Dołącz wykresy pokazujące trendy na przestrzeni czasu” lub „Wygeneruj grafiki porównujące udziały w rynku”. Ustawienie `visualization` na `"auto"` włącza tę funkcję, ale agent generuje wizualizacje tylko wtedy, gdy jest o to proszony w prompcie.
 
 ### Python
 
@@ -402,21 +402,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 支援的工具
+## Obsługiwane narzędzia
 
-Deep Research 支援多種內建和外部工具。根據預設 (未提供 `tools` 參數時)，代理程式可存取 Google 搜尋、網址內容和程式碼執行功能。您可以明確指定工具，限制或擴充代理的功能。
+Funkcja Deep Research obsługuje wiele wbudowanych i zewnętrznych narzędzi. Domyślnie (gdy nie podano parametru `tools`) agent ma dostęp do wyszukiwarki Google, kontekstu adresu URL i wykonywania kodu. Możesz wyraźnie określić narzędzia, aby ograniczyć lub rozszerzyć możliwości agenta.
 
-| 工具 | 輸入值 | 說明 |
+| Narzędzie | Wpisz wartość | Opis |
 | --- | --- | --- |
-| Google 搜尋 | `google_search` | 搜尋公開網路。(預設為啟用)。 |
-| 網址背景資訊 | `url_context` | 閱讀並摘要網頁內容。(預設為啟用)。 |
-| 程式碼執行 | `code_execution` | 執行程式碼以進行計算和資料分析。(預設為啟用)。 |
-| MCP 伺服器 | `mcp_server` | 連線至遠端 MCP 伺服器，存取外部工具。 |
-| 檔案搜尋 | `file_search` | 搜尋上傳的文件語料庫。 |
+| Wyszukiwarka Google | `google_search` | Wyszukiwanie w sieci publicznej. Ta opcja jest domyślnie włączona. |
+| Kontekst adresu URL | `url_context` | czytać i podsumowywać treści na stronach internetowych; Ta opcja jest domyślnie włączona. |
+| Wykonanie kodu | `code_execution` | wykonywać kod w celu przeprowadzania obliczeń i analizy danych, Ta opcja jest domyślnie włączona. |
+| Serwer MCP | `mcp_server` | Łączenie się ze zdalnymi serwerami MCP w celu uzyskania dostępu do narzędzi zewnętrznych. |
+| Wyszukiwanie plików | `file_search` | Wyszukiwanie w przesłanych korpusach dokumentów. |
 
-### Google 搜尋
+### Wyszukiwarka Google
 
-明確啟用 Google 搜尋做為唯一工具：
+Włącz wyszukiwarkę Google jako jedyne narzędzie:
 
 ### Python
 
@@ -454,9 +454,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 網址背景資訊
+### Kontekst adresu URL
 
-讓代理程式讀取及摘要特定網頁內容：
+Umożliwienie agentowi odczytywania i streszczania konkretnych stron internetowych:
 
 ### Python
 
@@ -494,9 +494,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 程式碼執行
+### Wykonanie kodu
 
-允許代理執行程式碼進行計算和資料分析：
+Zezwól agentowi na wykonywanie kodu do obliczeń i analizy danych:
 
 ### Python
 
@@ -534,21 +534,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### MCP 伺服器
+### Serwery MCP
 
-連線至遠端 MCP 伺服器，讓代理存取外部工具和服務。
+Łącz się ze zdalnymi serwerami MCP, aby umożliwić agentowi dostęp do narzędzi i usług zewnętrznych.
 
-在工具設定中提供伺服器 `name` 和 `url`。您也可以傳遞驗證憑證，並限制代理程式可呼叫的工具。
+W konfiguracji narzędzi podaj serwer `name` i `url`. Możesz też przekazywać dane logowania i ograniczać narzędzia, z których może korzystać agent.
 
-| 欄位 | 類型 | 必要 | 說明 |
+| Pole | Typ | Wymagane | Opis |
 | --- | --- | --- | --- |
-| `type` | `string` | 是 | 必須為 `"mcp_server"`。 |
-| `name` | `string` | 否 | MCP 伺服器的顯示名稱。 |
-| `url` | `string` | 否 | MCP 伺服器端點的完整網址。 |
-| `headers` | `object` | 否 | 以 HTTP 標頭形式傳送至伺服器的鍵值組 (例如驗證權杖)。 |
-| `allowed_tools` | `array` | 否 | 限制代理可呼叫的伺服器工具。 |
+| `type` | `string` | Tak | Musi to być `"mcp_server"`. |
+| `name` | `string` | Nie | Wyświetlana nazwa serwera MCP. |
+| `url` | `string` | Nie | Pełny adres URL punktu końcowego serwera MCP. |
+| `headers` | `object` | Nie | Pary klucz-wartość wysyłane jako nagłówki HTTP z każdym żądaniem do serwera (np. tokeny uwierzytelniania). |
+| `allowed_tools` | `array` | Nie | Ogranicz narzędzia na serwerze, z których agent może korzystać. |
 
-#### 基本用法
+#### Podstawowe użycie
 
 ### Python
 
@@ -607,9 +607,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 檔案搜尋
+### Wyszukiwanie plików
 
-使用[檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw)工具，授予代理程式自有資料的存取權。
+Udostępnij agentowi własne dane za pomocą narzędzia [Wyszukiwanie plików](https://ai.google.dev/gemini-api/docs/file-search?hl=pl).
 
 ### Python
 
@@ -661,11 +661,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 可操控性和格式
+## Sterowanie i formatowanie
 
-您可以在提示中提供具體的格式設定指示，引導代理程式輸出內容。您可以將報表劃分為特定章節和子章節、加入資料表，或針對不同目標對象調整語氣 (例如「技術」、「主管」、「輕鬆」)。
+Możesz sterować danymi wyjściowymi agenta, podając w prompcie konkretne instrukcje formatowania. Umożliwia to dzielenie raportów na określone sekcje i podsekcje, dodawanie tabel danych oraz dostosowywanie tonu do różnych odbiorców (np. „techniczny”, „dla kadry kierowniczej”, „nieformalny”).
 
-在輸入文字中明確定義所需的輸出格式。
+W tekście wejściowym wyraźnie określ żądany format wyjściowy.
 
 ### Python
 
@@ -718,9 +718,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 多模態輸入內容
+## Dane wejściowe multimodalne
 
-Deep Research 支援多模態輸入內容，包括圖片和文件 (PDF)，可讓代理程式分析視覺內容，並根據提供的輸入內容進行網路研究。
+Deep Research obsługuje dane wejściowe w różnych formatach, w tym obrazy i dokumenty (PDF), co umożliwia agentowi analizowanie treści wizualnych i przeprowadzanie wyszukiwania w internecie w kontekście podanych danych wejściowych.
 
 ### Python
 
@@ -826,9 +826,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### 文件解讀
+### Rozumienie dokumentów
 
-文件理解功能可直接將文件做為多模態輸入內容傳遞。代理程式會分析提供的文件，並根據文件內容進行研究。
+Rozumienie dokumentów umożliwia przekazywanie dokumentów bezpośrednio jako danych wejściowych multimodalnych.
+Agent analizuje podane dokumenty i przeprowadza badania na podstawie ich treści.
 
 ### Python
 
@@ -889,27 +890,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 處理長時間執行的工作
+## Obsługa długotrwałych zadań
 
-Deep Research 包含規劃、搜尋、閱讀和撰寫等多個步驟。這個週期通常會超過同步 API 呼叫的標準逾時限制。
+Deep Research to wieloetapowy proces obejmujący planowanie, wyszukiwanie, czytanie i pisanie. Ten cykl zwykle przekracza standardowe limity czasu oczekiwania synchronicznych wywołań interfejsu API.
 
-服務專員必須使用 `background=True`。API 會立即傳回部分 `Interaction` 物件。您可以使用 `id` 屬性擷取輪詢的互動。互動狀態會從 `in_progress` 轉換為 `completed` 或 `failed`。如需管理背景工作的完整指南，請參閱「[背景執行](https://ai.google.dev/gemini-api/docs/background-execution?hl=zh-tw)」。
+Przedstawiciele muszą korzystać z usługi `background=True`. Interfejs API od razu zwraca obiekt częściowy
+`Interaction`. Za pomocą właściwości `id` możesz pobrać interakcję na potrzeby ankiety. Stan interakcji zmieni się z `in_progress` na `completed` lub `failed`. Szczegółowy przewodnik zarządzania zadaniami w tle znajdziesz w artykule [Wykonywanie w tle](https://ai.google.dev/gemini-api/docs/background-execution?hl=pl).
 
-### 串流
+### Streaming
 
-Deep Research 支援串流，可即時接收研究進度更新，包括想法摘要、文字輸出內容和生成的圖片。您必須設定 `stream=True` 和 `background=True`。
+Deep Research obsługuje przesyłanie strumieniowe, dzięki czemu możesz otrzymywać aktualizacje w czasie rzeczywistym dotyczące postępów w badaniach, w tym podsumowania przemyśleń, dane wyjściowe w postaci tekstu i wygenerowane obrazy.
+Musisz ustawić wartości `stream=True` i `background=True`.
 
-如要接收中間推理步驟 (想法) 和進度更新，請將 `thinking_summaries` 設為 `"auto"`，在 `agent_config` 中啟用**思考摘要**。否則串流可能只會提供最終結果。
+Aby otrzymywać pośrednie kroki rozumowania (myśli) i informacje o postępach, musisz włączyć **podsumowania myślenia**, ustawiając wartość `thinking_summaries` na `"auto"` w `agent_config`. Bez tego strumień może dostarczać tylko wyniki końcowe.
 
-#### 串流事件類型
+#### Typy zdarzeń strumienia
 
-| 事件類型 | 差異類型 | 說明 |
+| Typ zdarzenia | Typ delty | Opis |
 | --- | --- | --- |
-| `step.delta` | `thought` | 代理程式的中間推理步驟。 |
-| `step.delta` | `text` | 最終文字輸出內容的一部分。 |
-| `step.delta` | `image` | 生成的圖片 (Base64 編碼)。 |
+| `step.delta` | `thought` | Pośredni krok rozumowania agenta. |
+| `step.delta` | `text` | Część ostatecznego tekstu wyjściowego. |
+| `step.delta` | `image` | Wygenerowany obraz (zakodowany w formacie base64). |
 
-以下範例會啟動研究工作，並處理自動重新連線的串流。這項功能會追蹤 `interaction_id` 和 `last_event_id`，因此如果連線中斷 (例如在 600 秒逾時後)，可以從中斷處繼續。
+W tym przykładzie rozpoczyna się zadanie badawcze i przetwarzanie strumienia z automatycznym ponownym łączeniem. Śledzi ona `interaction_id` i `last_event_id`, dzięki czemu w przypadku utraty połączenia (np. po upływie 600-sekundowego limitu czasu) może wznowić działanie od miejsca, w którym zostało przerwane.
 
 ### Python
 
@@ -1030,9 +1033,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/INTER
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## 後續問題和互動
+## Dodatkowe pytania i interakcje
 
-代理程式傳回最終報告後，您可以使用 `previous_interaction_id` 繼續對話。這樣一來，您不必重新啟動整個工作，就能要求釐清、總結或詳細說明研究的特定部分。
+Po przesłaniu przez pracownika obsługi klienta ostatecznego raportu możesz kontynuować rozmowę, korzystając z `previous_interaction_id`. Dzięki temu możesz poprosić o wyjaśnienie, podsumowanie lub rozwinięcie określonych sekcji badania bez konieczności ponownego rozpoczynania całego zadania.
 
 ### Python
 
@@ -1075,28 +1078,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 使用 Gemini Deep Research 代理的時機
+## Kiedy warto używać agenta Deep Research w Gemini
 
-Deep Research 是**代理**，而不只是模型。這項功能最適合需要「分析師即時服務」方法的工作負載，而非低延遲的即時通訊。
+Deep Research to **agent**, a nie tylko model. Najlepiej sprawdza się w przypadku zbiorów zadań, które wymagają podejścia „analityk w pudełku”, a nie czatu o niskim poziomie opóźnień.
 
-| 功能 | 標準 Gemini 模型 | Gemini Deep Research 代理 |
+| Funkcja | Standardowe modele Gemini | Agent Deep Research w Gemini |
 | --- | --- | --- |
-| **延遲** | 秒 | 分鐘 (非同步/背景) |
-| **流程** | 生成 -> 輸出內容 | 規劃 -> 搜尋 -> 閱讀 -> 疊代 -> 輸出 |
-| **輸出內容** | 對話文字、程式碼、簡短摘要 | 詳細報表、長篇分析、比較表 |
-| **最佳用途** | 聊天機器人、擷取、創意寫作 | 市場分析、盡職調查、文獻回顧、競爭環境 |
+| **Opóźnienie** | Sekundy | Minuty (asynchroniczne/w tle) |
+| **Proces** | Generowanie –> dane wyjściowe | Planowanie –> Wyszukiwanie –> Czytanie –> Iteracja –> Wynik |
+| **Dane wyjściowe** | tekst konwersacyjny, kod, krótkie podsumowania; | Szczegółowe raporty, długie analizy, tabele porównawcze |
+| **Najlepsze zastosowania** | Chatboty, wyodrębnianie, pisanie kreatywne | analiza rynku, należyta staranność, przeglądy literatury, analiza konkurencji; |
 
-## 代理程式設定
+## Konfiguracja agenta
 
-「深入研究」使用 `agent_config` 參數控制行為。
-以字典形式傳遞，並包含下列欄位：
+Funkcja Deep Research używa parametru `agent_config` do kontrolowania zachowania.
+Przekaż go jako słownik z tymi polami:
 
-| 欄位 | 類型 | 預設 | 說明 |
+| Pole | Typ | Domyślny | Opis |
 | --- | --- | --- | --- |
-| `type` | `string` | 必填 | 必須為 `"deep-research"`。 |
-| `thinking_summaries` | `string` | `"none"` | 設為 `"auto"` 即可在串流期間接收中間推論步驟。如要停用，請設為 `"none"`。 |
-| `visualization` | `string` | `"auto"` | 設為 `"auto"`，即可啟用代理程式生成的圖表和圖片。如要停用，請設為 `"off"`。 |
-| `collaborative_planning` | `boolean` | `false` | 設為 `true`，在開始研究前啟用多輪計畫審查。 |
+| `type` | `string` | Wymagane | Musi to być `"deep-research"`. |
+| `thinking_summaries` | `string` | `"none"` | Ustaw wartość `"auto"`, aby otrzymywać pośrednie kroki rozumowania podczas przesyłania strumieniowego. Aby wyłączyć tę funkcję, ustaw wartość `"none"`. |
+| `visualization` | `string` | `"auto"` | Ustaw wartość `"auto"`, aby włączyć wykresy i obrazy generowane przez agenta. Aby wyłączyć tę funkcję, ustaw wartość `"off"`. |
+| `collaborative_planning` | `boolean` | `false` | Ustaw na `true`, aby włączyć wieloetapowe sprawdzanie planu przed rozpoczęciem wyszukiwania. |
 
 ### Python
 
@@ -1151,59 +1154,58 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 適用情形與定價
+## Dostępność i ceny
 
-您可以使用 Google AI Studio 和 Gemini API 中的 Interactions API，存取 Gemini Deep Research Agent。
+Do agenta Deep Research w Gemini możesz uzyskać dostęp za pomocą interfejsu Interactions API w Google AI Studio i Gemini API.
 
-價格採用[即付即用模式](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw#pricing-for-agents)，取決於基礎 Gemini 模型和代理使用的特定工具。標準聊天要求會產生一個輸出結果，但 Deep Research 工作是代理式工作流程。只要提出要求，系統就會自主規劃、搜尋、閱讀和推論。
+Ceny są oparte na [modelu płatności za wykorzystanie](https://ai.google.dev/gemini-api/docs/pricing?hl=pl#pricing-for-agents), który zależy od podstawowych modeli Gemini i narzędzi używanych przez agenta. W odróżnieniu od standardowych żądań czatu, w których przypadku żądanie prowadzi do jednego wyniku, zadanie Deep Research to proces oparty na działaniach agenta. Pojedyncze żądanie wywołuje autonomiczne zapętlenie planowania, wyszukiwania, czytania i wnioskowania.
 
-### 預估費用
+### Szacunkowy koszt
 
-費用會因所需研究深度而異。代理會自主判斷回答提示詞需要多少閱讀和搜尋量。
+Koszty zależą od głębokości wymaganych badań. Agent samodzielnie określa, ile czytania i wyszukiwania jest potrzebne, aby odpowiedzieć na Twój prompt.
 
-- **Deep Research** (`deep-research-preview-04-2026`)：對於需要中等程度分析的典型查詢，代理程式可能會使用約 80 個搜尋查詢、約 25 萬個輸入權杖 (約 50% 至 70% 的權杖會快取)，以及約 6 萬個輸出權杖。
-  - **預估總金額：**每項工作約$1.00 美元至 $3.00 美元
-- **Deep Research Max** (`deep-research-max-preview-04-2026`)：如要深入分析競爭環境或進行廣泛的盡職調查，代理程式最多可能會使用約 160 個搜尋查詢、約 90 萬個輸入權杖 (約 50% 至 70% 的權杖會快取)，以及約 8 萬個輸出權杖。
-  - **預估總金額：**每項工作約$3.00 美元至 $7.00 美元
+- **Deep Research** (`deep-research-preview-04-2026`): w przypadku typowego zapytania wymagającego umiarkowanej analizy agent może użyć około 80 zapytań, około 250 tys. tokenów wejściowych (ok. 50–70% z nich może być w pamięci podręcznej) i około 60 tys. tokenów wyjściowych.
+  - **Szacunkowa suma:** od 1,00 PLN do 3,00 PLN za zadanie
+- **Deep Research Max** (`deep-research-max-preview-04-2026`): w przypadku dogłębnej analizy konkurencji lub szczegółowego badania due diligence agent może użyć do ok. 160 zapytań, ok. 900 tys. tokenów wejściowych (ok. 50–70% – z pamięci podręcznej) i ok. 80 tys. tokenów wyjściowych.
+  - **Szacunkowa suma:** od 3 do 7 PLN za zadanie
 
-## 安全考量
+## kwestie bezpieczeństwa;
 
-授予代理程式網路和私人檔案的存取權時，請務必謹慎評估安全風險。
+Przyznanie agentowi dostępu do internetu i plików prywatnych wymaga starannego rozważenia zagrożeń związanych z bezpieczeństwem.
 
-- **使用檔案進行提示注入：**代理程式會讀取您提供的檔案內容。請確認上傳的文件 (PDF、文字檔) 來自可信來源。惡意檔案可能含有隱藏文字，用於操縱代理程式的輸出內容。
-- **網路內容風險：**代理程式會搜尋公開網路，雖然我們導入了強大的安全篩選器，但代理程式仍可能遇到並處理惡意網頁。建議您查看回覆中`citations`提供的資訊
-  ，確認來源是否正確。
-- **資料外洩：**如果允許代理程式瀏覽網頁，要求代理程式摘要說明機密內部資料時，請務必謹慎。
+- **Wstrzykiwanie promptów za pomocą plików:** agent odczytuje zawartość podanych przez Ciebie plików. Upewnij się, że przesłane dokumenty (pliki PDF, pliki tekstowe) pochodzą z zaufanych źródeł. Złośliwy plik może zawierać ukryty tekst, który ma na celu manipulowanie danymi wyjściowymi agenta.
+- **Ryzyko związane z treściami w internecie:** agent przeszukuje publiczny internet. Stosujemy co prawda zaawansowane filtry bezpieczeństwa, ale istnieje ryzyko, że agent natrafi na złośliwe strony internetowe i je przetworzy. Zalecamy sprawdzenie `citations` podanych w odpowiedzi, aby zweryfikować źródła.
+- **Eksfiltracja:** zachowaj ostrożność, prosząc agenta o podsumowanie poufnych danych wewnętrznych, jeśli zezwalasz mu też na przeglądanie internetu.
 
-## 最佳做法
+## Sprawdzone metody
 
-- **提示未知內容：**指示代理程式如何處理遺漏的資料。
-  舉例來說，在提示中加入「如果無法取得 2025 年的具體數據，請明確指出這些是預測或無法取得，而非估算」。
-- **提供脈絡：**直接在輸入提示中提供背景資訊或限制，做為代理程式研究的基準。
-- **使用協作規劃功能：**對於複雜的查詢，請啟用協作規劃功能，以便在執行前查看及修正研究計畫。
-- **多模態輸入內容：**Deep Research Agent 支援多模態輸入內容。
-  請謹慎使用，因為這會增加成本，並可能導致脈絡窗口溢位。
+- **Pytaj o nieznane:** podaj agentowi instrukcje dotyczące postępowania w przypadku brakujących danych.
+  Na przykład dodaj do promptu *„Jeśli konkretne dane za 2025 r. nie są dostępne, wyraźnie zaznacz, że są to prognozy lub że są niedostępne, zamiast je szacować”*.
+- **Podaj kontekst:** ugruntuj wiedzę agenta, podając informacje lub ograniczenia bezpośrednio w prompcie wejściowym.
+- **Korzystaj z planowania zespołowego:** w przypadku złożonych zapytań włącz planowanie zespołowe, aby przed wykonaniem zadania przejrzeć i dopracować plan badań.
+- **Wprowadzanie danych w różnych formatach:** agent Deep Research obsługuje wprowadzanie danych w różnych formatach.
+  Używaj go ostrożnie, ponieważ zwiększa koszty i ryzyko przepełnienia okna kontekstu.
 
-## 限制
+## Ograniczenia
 
-- **自訂工具：**目前無法提供自訂函式呼叫工具，但可搭配 Deep Research 代理使用遠端 MCP (Model Context Protocol) 伺服器。
-- **結構化輸出內容：**Deep Research Agent 目前不支援結構化輸出內容。
-- **研究時間上限：**Deep Research 代理的研究時間上限為 60 分鐘。大多數工作應可在 20 分鐘內完成。
-- **商店規定：**使用 `background=True` 執行代理程式時，需要
-  `store=True`。
-- **Google 搜尋：** [Google 搜尋](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)預設為啟用，且[特定限制](https://ai.google.dev/gemini-api/terms?hl=zh-tw#use-restrictions2)適用於有依據的結果。
+- **Niestandardowe narzędzia:** obecnie nie możesz udostępniać niestandardowych narzędzi do wywoływania funkcji, ale możesz używać zdalnych serwerów MCP (Model Context Protocol) z agentem Deep Research.
+- **Uporządkowane dane wyjściowe:** agent Deep Research nie obsługuje obecnie uporządkowanych danych wyjściowych.
+- **Maksymalny czas wyszukiwania:** agent Deep Research ma maksymalny czas wyszukiwania wynoszący 60 minut. Większość zadań powinna zostać ukończona w ciągu 20 minut.
+- **Wymagania dotyczące sklepu:** uruchomienie agenta za pomocą `background=True` wymaga
+  `store=True`.
+- **Wyszukiwarka Google:** [wyszukiwarka Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pl) jest domyślnie włączona, a do wyników opartych na wiedzy stosowane są [określone ograniczenia](https://ai.google.dev/gemini-api/terms?hl=pl#use-restrictions2).
 
-## 後續步驟
+## Co dalej?
 
-- 進一步瞭解 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw)。
-- 瞭解如何使用[檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw)工具，存取自己的資料。
+- Dowiedz się więcej o [interfejsie Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl).
+- Dowiedz się, jak korzystać z własnych danych za pomocą narzędzia [Wyszukiwanie plików](https://ai.google.dev/gemini-api/docs/file-search?hl=pl).
 
-提供意見
+Prześlij opinię
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-上次更新時間：2026-07-14 (世界標準時間)。
+Ostatnia aktualizacja: 2026-07-14 UTC.
 
-想進一步說明嗎？
+Chcesz przekazać coś jeszcze?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-14 (世界標準時間)。"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-14 UTC."],[],[]]

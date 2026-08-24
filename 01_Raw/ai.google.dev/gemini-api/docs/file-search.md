@@ -1,30 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/file-search?hl=he
-fetched_at: 2026-08-17T02:32:53.702540+00:00
-title: "\u05d7\u05d9\u05e4\u05d5\u05e9 \u05e7\u05d1\u05e6\u05d9\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/file-search?hl=id
+fetched_at: 2026-08-24T02:29:34.768605+00:00
+title: "Penelusuran file \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-שליחת משוב
+Kirim masukan
 
-# חיפוש קבצים
+# Penelusuran file
 
-‫Gemini API מאפשר יצירה משולבת-אחזור (RAG) באמצעות הכלי File Search (חיפוש קבצים). התכונה 'חיפוש קבצים' מייבאת את הנתונים, מחלקת אותם לחלקים ויוצרת אינדקס כדי לאפשר שליפה מהירה של מידע רלוונטי על סמך הנחיה שסופקה. המידע הזה משמש כהקשר למודל, וכך הוא יכול לספק תשובות מדויקות ורלוונטיות יותר. חיפוש קבצים יכול גם לספק יכולות מולטי-מודאליות עם הטמעות טקסט שנתמכות על ידי `gemini-embedding-001`, והטמעות תמונות/מולטי-מודאליות שנתמכות על ידי `gemini-embedding-2`.
+Gemini API memungkinkan Retrieval-Augmented Generation ("RAG") melalui alat Penelusuran File. Penelusuran File mengimpor, membagi, dan mengindeks data Anda untuk memungkinkan pengambilan informasi yang relevan dengan cepat berdasarkan perintah yang diberikan. Informasi yang diambil ini kemudian digunakan sebagai konteks untuk model, sehingga model dapat memberikan jawaban yang lebih akurat dan relevan. Penelusuran file juga dapat
+memberikan kemampuan multimodal dengan embedding teks yang didukung oleh
+`gemini-embedding-001`, dan embedding gambar/multimodal yang didukung oleh `gemini-embedding-2`.
 
-אחסון קבצים ויצירת הטמעה בזמן השאילתה הם בחינם, ותשלמו רק על יצירת הטמעות כשמבצעים אינדוקס של הקבצים בפעם הראשונה, ועל העלות הרגילה של טוקנים של קלט / פלט במודל Gemini. הפרדיגמה החדשה הזו של חיוב מאפשרת לבנות את הכלי לחיפוש קבצים ולהרחיב אותו בקלות רבה יותר ובעלות נמוכה יותר. פרטים נוספים מופיעים בקטע [תמחור](#pricing).
+Penyimpanan file dan pembuatan sematan pada waktu kueri gratis, dan Anda hanya akan membayar
+pembuatan sematan saat pertama kali mengindeks file dan biaya token input / output model Gemini
+yang normal. Paradigma penagihan baru ini membuat Alat Penelusuran File lebih mudah dan hemat biaya untuk dibangun dan diskalakan. Lihat bagian [harga](#pricing) untuk mengetahui detailnya.
 
-## העלאה ישירה למאגר חיפוש הקבצים
+## Mengupload langsung ke penyimpanan Penelusuran File
 
-בדוגמה הזו אפשר לראות איך מעלים קובץ ישירות אל [מאגר הקבצים לחיפוש](https://ai.google.dev/api/file-search/file-search-stores?hl=he#method:-media.uploadtofilesearchstore):
+Contoh ini menunjukkan cara mengupload file secara langsung ke
+[penyimpanan penelusuran file](https://ai.google.dev/api/file-search/file-search-stores?hl=id#method:-media.uploadtofilesearchstore):
 
 ### Python
 
@@ -55,7 +60,7 @@ while not operation.done:
     operation = client.operations.get(operation)
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.7-flash",
     input="Can you tell me about [insert question]",
     tools=[{
         "type": "file_search",
@@ -104,7 +109,7 @@ async function run() {
   }
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.7-flash",
     input: "Can you tell me about [insert question]",
     tools: [{
       type: "file_search",
@@ -174,7 +179,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H "Content-Type: application/json" \
     -d '{
-      "model": "gemini-3.6-flash",
+      "model": "gemini-3.7-flash",
       "input": "Can you tell me about [insert question]",
       "tools": [{
         "type": "file_search",
@@ -183,11 +188,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-מידע נוסף זמין בהפניית ה-API בנושא [`uploadToFileSearchStore`](https://ai.google.dev/api/file-search/file-search-stores?hl=he#method:-media.uploadtofilesearchstore).
+Lihat referensi API untuk [`uploadToFileSearchStore`](https://ai.google.dev/api/file-search/file-search-stores?hl=id#method:-media.uploadtofilesearchstore) untuk mengetahui informasi selengkapnya.
 
-## ייבוא קבצים
+## Mengimpor file
 
-לחלופין, אפשר להעלות קובץ קיים ו[לייבא אותו למאגר של חיפוש הקבצים](https://ai.google.dev/api/file-search/file-search-stores?hl=he#method:-filesearchstores.importfile):
+Atau, Anda dapat mengupload file yang ada dan [mengimpornya ke penyimpanan penelusuran file Anda](https://ai.google.dev/api/file-search/file-search-stores?hl=id#method:-filesearchstores.importfile):
 
 ### Python
 
@@ -217,7 +222,7 @@ while not operation.done:
     operation = client.operations.get(operation)
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.7-flash",
     input="Can you tell me about [insert question]",
     tools=[{
         "type": "file_search",
@@ -263,7 +268,7 @@ async function run() {
   }
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.7-flash",
     input: "Can you tell me about [insert question]",
     tools: [{
       type: "file_search",
@@ -330,7 +335,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H "Content-Type: application/json" \
     -d '{
-      "model": "gemini-3.6-flash",
+      "model": "gemini-3.7-flash",
       "input": "Can you tell me about [insert question]",
       "tools": [{
         "type": "file_search",
@@ -339,11 +344,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-מידע נוסף זמין בהפניית ה-API בנושא [`importFile`](https://ai.google.dev/api/file-search/file-search-stores?hl=he#method:-filesearchstores.importfile).
+Lihat referensi API untuk [`importFile`](https://ai.google.dev/api/file-search/file-search-stores?hl=id#method:-filesearchstores.importfile) untuk mengetahui informasi selengkapnya.
 
-## הגדרות חלוקה לחלקים
+## Konfigurasi pemotongan
 
-כשמייבאים קובץ למאגר חיפוש קבצים, הוא מפורק אוטומטית לחלקים, מוטמע, עובר אינדוקס ועולה למאגר חיפוש הקבצים. אם אתם צריכים שליטה רבה יותר באסטרטגיית החלוקה לחלקים, אתם יכולים לציין הגדרה של [`chunking_config`](https://ai.google.dev/api/file-search/file-search-stores?hl=he#request-body_5) כדי להגדיר מספר מקסימלי של טוקנים לכל חלק ומספר מקסימלי של טוקנים חופפים.
+Saat Anda mengimpor file ke penyimpanan Penelusuran File, file tersebut akan otomatis dipecah menjadi beberapa bagian, disematkan, diindeks, dan diupload ke penyimpanan Penelusuran File Anda. Jika Anda
+membutuhkan kontrol yang lebih besar atas strategi chunking, Anda dapat menentukan setelan
+[`chunking_config`](https://ai.google.dev/api/file-search/file-search-stores?hl=id#request-body_5)
+untuk menetapkan jumlah maksimum token per chunk dan jumlah maksimum token yang tumpang-tindih.
 
 ### Python
 
@@ -435,38 +443,51 @@ curl "${upload_url}" \
 cat upload_response.json
 ```
 
-כדי להשתמש בחנות שלכם לחיפוש קבצים, מעבירים אותה ככלי לשיטה `interactions.create`, כמו בדוגמאות של [העלאה](#upload) ו[ייבוא](#importing-files).
+Untuk menggunakan penyimpanan Penelusuran File, teruskan sebagai alat ke metode `interactions.create`, seperti yang ditunjukkan dalam contoh [Upload](#upload) dan [Impor](#importing-files).
 
-## איך זה עובד
+## Cara kerjanya
 
-בחיפוש קבצים נעשה שימוש בטכניקה שנקראת חיפוש סמנטי כדי למצוא מידע שרלוונטי להנחיה של המשתמש. בניגוד לחיפוש רגיל שמבוסס על מילות מפתח, חיפוש סמנטי מבין את המשמעות וההקשר של השאילתה.
+Penelusuran File menggunakan teknik yang disebut penelusuran semantik untuk menemukan informasi yang relevan dengan perintah pengguna. Tidak seperti penelusuran berbasis kata kunci standar, penelusuran semantik memahami makna dan konteks kueri Anda.
 
-כשמייבאים קובץ, הוא מומר לייצוגים מספריים שנקראים [הטמעות](https://ai.google.dev/gemini-api/docs/embeddings?hl=he), שמתעדים את המשמעות הסמנטית של התוכן שהועלה. ההטמעות האלה מאוחסנות במסד נתונים ייעודי של חיפוש קבצים.
-כשמבצעים שאילתה, היא מומרת גם להטמעה. לאחר מכן, המערכת מבצעת חיפוש קבצים כדי למצוא את חלקי המסמכים הכי דומים ורלוונטיים ממאגר חיפוש הקבצים.
+Saat Anda mengimpor file, file tersebut akan dikonversi menjadi representasi numerik yang disebut
+[embedding](https://ai.google.dev/gemini-api/docs/embeddings?hl=id), yang menangkap makna semantik
+konten yang diupload. きたいEmbeddings ini disimpan dalam database Penelusuran File khusus.
+Saat Anda membuat kueri, kueri tersebut juga dikonversi menjadi embedding. Kemudian, sistem
+melakukan Penelusuran File untuk menemukan potongan dokumen yang paling mirip dan relevan
+dari penyimpanan Penelusuran File.
 
-אין אורך חיים (TTL) להטמעות. הן נשמרות עד למחיקה ידנית או עד שהמודל יוצא משימוש. אבל הקבצים נמחקים אחרי 48 שעות.
+Tidak ada Time To Live (TTL) untuk penyematan;
+penyematan akan tetap ada hingga dihapus secara manual, atau saat model tidak digunakan lagi. Namun, file akan dihapus setelah 48 jam.
 
-פירוט התהליך לשימוש ב-File Search
+Berikut perincian proses penggunaan File Search
 `uploadToFileSearchStore` API:
 
-1. **יצירת מאגר חיפוש קבצים**: מאגר חיפוש קבצים מכיל את הנתונים המעובדים מהקבצים שלכם. זהו מאגר קבוע של ההטמעות שהחיפוש הסמנטי יפעל עליהן.
-2. **העלאת קובץ וייבוא שלו למאגר של חיפוש קבצים**: אפשר להעלות קובץ ולייבא את התוצאות שלו למאגר של חיפוש קבצים בו-זמנית. הפעולה הזו יוצרת אובייקט `File` זמני, שהוא הפניה למסמך הגולמי. הנתונים האלה מחולקים לחלקים, מומרים להטמעות של חיפוש קבצים ומתווספים לאינדקס. אובייקט `File`
-   יימחק אחרי 48 שעות, אבל הנתונים שיובאו למאגר של חיפוש הקבצים
-   יישמרו ללא הגבלת זמן עד שתבחרו למחוק אותם.
-3. **שאילתה באמצעות File Search**: לבסוף, משתמשים בכלי `FileSearch` בשיחה עם `generateContent`. בהגדרת הכלי, מציינים `FileSearchRetrievalResource`, שמפנה אל `FileSearchStore` שרוצים לחפש. ההנחיה הזו אומרת למודל לבצע חיפוש סמנטי במאגר הספציפי של חיפוש קבצים כדי למצוא מידע רלוונטי שישמש בסיס לתשובה.
+1. **Membuat penyimpanan Penelusuran File**: Penyimpanan Penelusuran File berisi data yang diproses dari file Anda. Ini adalah penampung persisten untuk sematan yang akan digunakan oleh penelusuran semantik.
+2. **Mengupload file dan mengimpor ke penyimpanan Penelusuran File**: Mengupload file dan mengimpor hasil ke penyimpanan Penelusuran File secara bersamaan. Tindakan ini akan membuat objek `File`
+   sementara, yang merupakan referensi ke dokumen mentah Anda. Data tersebut kemudian dibagi-bagi, dikonversi menjadi embedding Penelusuran File, dan diindeks. `File`
+   Objek akan dihapus setelah 48 jam, sedangkan data yang diimpor ke penyimpanan
+   Penelusuran File akan disimpan tanpa batas waktu hingga Anda memilih untuk menghapusnya.
+3. **Kueri dengan Penelusuran File**: Terakhir, Anda menggunakan alat `FileSearch` dalam panggilan `generateContent`. Dalam konfigurasi alat, Anda menentukan
+   `FileSearchRetrievalResource`, yang mengarah ke `FileSearchStore` yang ingin
+   Anda telusuri. Hal ini memberi tahu model untuk melakukan penelusuran semantik di penyimpanan Penelusuran File tertentu tersebut guna menemukan informasi yang relevan untuk mendasari responsnya.
 
-![תהליך ההוספה לאינדקס והשאילתה בחיפוש הקבצים](https://ai.google.dev/static/gemini-api/docs/images/File-search.png?hl=he)
+![Proses pengindeksan dan pembuatan kueri Penelusuran File](https://ai.google.dev/static/gemini-api/docs/images/File-search.png?hl=id)
 
-תהליך ההוספה לאינדקס והשאילתות בחיפוש הקבצים
+Proses pengindeksan dan pembuatan kueri Penelusuran File
 
-בתרשים הזה, הקו המקווקו מ*מסמכים* אל *מודל להטמעה* (באמצעות [`gemini-embedding-001`](https://ai.google.dev/gemini-api/docs/embeddings?hl=he)) מייצג את `uploadToFileSearchStore` API (דילוג על *אחסון קבצים*).
-אחרת, שימוש ב-[Files API](https://ai.google.dev/gemini-api/docs/files?hl=he) כדי ליצור בנפרד ואז לייבא קבצים מעביר את תהליך יצירת האינדקס מ*מסמכים* אל *אחסון קבצים* ואז אל *מודל הטמעה*.
+Dalam diagram ini, garis putus-putus dari *Documents* ke *Embedding model*
+(menggunakan [`gemini-embedding-001`](https://ai.google.dev/gemini-api/docs/embeddings?hl=id))
+merepresentasikan `uploadToFileSearchStore` API (melewati *File storage*).
+Jika tidak, menggunakan [Files API](https://ai.google.dev/gemini-api/docs/files?hl=id) untuk membuat
+dan mengimpor file secara terpisah akan memindahkan proses pengindeksan dari *Dokumen* ke
+*Penyimpanan file*, lalu ke *Model sematan*.
 
-## מאגרי חיפוש קבצים
+## Menyimpan Penelusuran File
 
-מאגר חיפוש קבצים הוא מאגר להטמעות של המסמכים שלכם. קובצי RAW שהועלו דרך File API נמחקים אחרי 48 שעות, אבל הנתונים שיובאו למאגר של חיפוש קבצים נשמרים ללא הגבלת זמן עד שמבצעים מחיקה ידנית. אתם יכולים ליצור כמה מאגרי חיפוש קבצים כדי לארגן את המסמכים שלכם. ‫`FileSearchStore` API מאפשר לכם ליצור, לרשום, לקבל ולמחוק כדי לנהל את חנויות החיפוש של הקבצים. שמות מאגרי חיפוש קבצים הם בהיקף גלובלי.
+Penyimpanan Penelusuran File adalah container untuk embedding dokumen Anda. Meskipun file mentah yang diupload melalui File API akan dihapus setelah 48 jam, data yang diimpor ke penyimpanan Penelusuran File akan disimpan tanpa batas waktu hingga Anda menghapusnya secara manual. Anda dapat membuat beberapa penyimpanan Penelusuran File untuk mengatur dokumen Anda. API
+`FileSearchStore` memungkinkan Anda membuat, mencantumkan, mendapatkan, dan menghapus untuk mengelola toko penelusuran file. Nama toko Penelusuran File memiliki cakupan global.
 
-הנה כמה דוגמאות לניהול מאגרי חיפוש קבצים:
+Berikut beberapa contoh cara mengelola toko Penelusuran File Anda:
 
 ### Python
 
@@ -525,9 +546,12 @@ curl "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilese
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilesearchstore123?key=${GEMINI_API_KEY}"
 ```
 
-## מסמכים בחיפוש קבצים
+## Dokumen Penelusuran File
 
-אפשר לנהל מסמכים ספציפיים במאגרי קבצים באמצעות [File Search Documents](https://ai.google.dev/api/file-search/documents?hl=he) API כדי `list` כל מסמך במאגר קבצים לחיפוש, `get` מידע על מסמך ו`delete` מסמך לפי שם.
+Anda dapat mengelola setiap dokumen di penyimpanan file dengan API
+[File Search Documents](https://ai.google.dev/api/file-search/documents?hl=id) untuk `list` setiap dokumen
+di penyimpanan penelusuran file, `get` informasi tentang dokumen, dan `delete`
+dokumen berdasarkan nama.
 
 ### Python
 
@@ -571,9 +595,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilese
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilesearchstore123/documents/sampletxt123?key=${GEMINI_API_KEY}&force=true"
 ```
 
-## המטא-נתונים של הקבצים
+## Metadata file
 
-אתם יכולים להוסיף מטא-נתונים מותאמים אישית לקבצים כדי לסנן אותם או לספק הקשר נוסף. מטא-נתונים הם קבוצה של צמדי מפתח/ערך.
+Anda dapat menambahkan metadata kustom ke file untuk membantu memfilter atau memberikan
+konteks tambahan. Metadata adalah sekumpulan key-value pair.
 
 ### Python
 
@@ -605,13 +630,14 @@ let operation = await ai.fileSearchStores.importFile({
 });
 ```
 
-האפשרות הזו שימושית אם יש לכם כמה מסמכים במאגר של חיפוש קבצים ואתם רוצים לחפש רק בחלק מהם.
+Hal ini berguna jika Anda memiliki beberapa dokumen di penyimpanan Penelusuran File dan ingin
+menelusuri hanya sebagian dokumen tersebut.
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.7-flash",
     input="Tell me about the book 'I, Claudius'",
     tools=[{
         "type": "file_search",
@@ -631,7 +657,7 @@ for step in interaction.steps:
 
 ```
 const interaction = await ai.interactions.create({
-  model: "gemini-3.6-flash",
+  model: "gemini-3.7-flash",
   input: "Tell me about the book 'I, Claudius'",
   tools: [{
     type: "file_search",
@@ -659,7 +685,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H 'Content-Type: application/json' \
     -X POST \
     -d '{
-            "model": "gemini-3.6-flash",
+            "model": "gemini-3.7-flash",
             "input": [{"type": "text", "text": "Tell me about the book I, Claudius"}],
             "tools": [{
                 "type": "file_search",
@@ -671,16 +697,17 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
 cat response.json
 ```
 
-הנחיות להטמעה של תחביר מסנן רשימה עבור `metadata_filter` זמינות בכתובת [google.aip.dev/160](https://google.aip.dev/160)
+Panduan tentang penerapan sintaksis filter daftar untuk `metadata_filter` dapat ditemukan
+di [google.aip.dev/160](https://google.aip.dev/160)
 
-## חיפוש קבצים מרובה מצבים
+## Penelusuran File Multimodal
 
-חיפוש קבצים מולטימודאלי מאפשר לכם להטמיע ולחפש תמונות באופן מקורי,
-וכך ליצור אפליקציות RAG עשירות ומולטימודאליות.
+Penelusuran File Multimodal memungkinkan Anda menyematkan dan menelusuri gambar secara native, sehingga memungkinkan aplikasi RAG multimodal yang kaya.
 
-### הגדרת מודל ההטמעה
+### Mengonfigurasi model embedding
 
-כשיוצרים `FileSearchStore`, צריך להחליף את מודל ברירת המחדל להטמעה של טקסט בלבד במודל multi-modal. משתמשים ב-`models/gemini-embedding-2` כדי לעבד טקסט ותמונות.
+Saat membuat `FileSearchStore`, Anda harus mengganti model embedding default khusus teks untuk menggunakan model multimodal. Gunakan `models/gemini-embedding-2` untuk
+memproses teks dan gambar.
 
 ### Python
 
@@ -715,20 +742,24 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/fileSearchStores?
     }'
 ```
 
-### העלאת תמונות
+### Upload gambar
 
-אחרי שיוצרים את המאגר באמצעות מודל הטמעה מולטימודאלי, אפשר להעלות קובצי תמונות ישירות באמצעות אותם ממשקי API להעלאה שמתוארים במאמרים [העלאה ישירה למאגר של חיפוש קבצים](#upload) או [ייבוא קבצים](#importing-files).
+Setelah membuat penyimpanan dengan model penyematan multimodal, Anda dapat mengupload
+file gambar secara langsung menggunakan API upload yang sama seperti yang dijelaskan dalam
+[Mengupload langsung ke penyimpanan Penelusuran File](#upload) atau [Mengimpor file](#importing-files).
 
-**הדרישות לגבי קובץ תמונה:**
+**Persyaratan file gambar:**
 
-- קבצי התמונות צריכים להיות ברזולוציה של 4K x 4K פיקסלים לכל היותר.
-- הפורמטים הנתמכים הם PNG ו-JPEG.
+- File gambar harus memiliki resolusi maksimal 4K x 4K piksel.
+- Format yang didukung adalah PNG, JPEG.
 
-## ציטוטים ביבליוגרפיים
+## Kutipan
 
-כשמשתמשים בחיפוש קבצים, התשובה של המודל עשויה לכלול ציטוטים שמציינים אילו חלקים מהמסמכים שהועלו שימשו ליצירת התשובה. המידע הזה עוזר בבדיקת עובדות ובאימות.
+Saat Anda menggunakan Penelusuran File, respons model dapat menyertakan kutipan yang
+menentukan bagian dokumen yang Anda upload yang digunakan untuk membuat
+jawaban. Hal ini membantu dalam pengecekan fakta dan verifikasi.
 
-אפשר לגשת לפרטי הציטוט דרך המאפיין `annotations` בתוך בלוקי התגובה של שלב `model_output` `content`.
+Anda dapat mengakses informasi kutipan melalui atribut `annotations` di dalam blok `content` langkah `model_output` dalam respons.
 
 ### Python
 
@@ -779,12 +810,14 @@ for (const step of interaction.steps) {
 }
 ```
 
-מידע מפורט על מבנה הציטוטים זמין במאמר [הפניית API לאינטראקציות](https://ai.google.dev/api/interactions-api?hl=he#Resource:FileCitation).
+Untuk mengetahui informasi mendetail tentang struktur kutipan, lihat
+[referensi API untuk Interaksi](https://ai.google.dev/api/interactions-api?hl=id#Resource:FileCitation).
 
-### מספרי דפים
+### Nomor halaman
 
-כשמשתמשים בחיפוש קבצים עם מסמכים שיש להם דפים (כמו קובצי PDF), התשובה של המודל עשויה לכלול את מספר הדף שבו נמצא המידע.
-אפשר לגשת למידע הזה דרך מאפיין `page_number` של הערה `file_citation`.
+Saat Anda menggunakan Penelusuran File dengan dokumen yang memiliki halaman (seperti PDF), respons model dapat menyertakan nomor halaman tempat informasi ditemukan.
+Anda dapat mengakses informasi ini melalui atribut `page_number` dari anotasi
+`file_citation`.
 
 ### Python
 
@@ -842,11 +875,11 @@ for (const step of interaction.steps) {
 }
 ```
 
-### ציטוטים של מדיה
+### Kutipan media
 
-כשהמודל מפנה לחלק של תמונה במהלך היצירה, ה-API מחזיר הערה מהסוג `file_citation` בהערות שכוללת `media_id`. אפשר להשתמש במזהה הזה כדי להוריד את נתח התמונה המדויק שהמודל התייחס אליו. הערך הזה `media_id` נשמר בכמה קריאות חיפוש, כך שאפשר לאחזר את אותה תמונה באופן מהימן או לשמור אותה במטמון באמצעות המזהה.
+Saat model mereferensikan potongan gambar selama pembuatan, API akan menampilkan anotasi jenis `file_citation` dalam anotasi yang menyertakan `media_id`. Anda dapat menggunakan ID ini untuk mendownload potongan gambar persis yang dirujuk model. `media_id` ini bersifat persisten di beberapa panggilan penelusuran, sehingga Anda dapat mengambil gambar yang sama atau menyimpannya dalam cache menggunakan ID dengan andal.
 
-קטע הקוד הבא הוא דוגמה לשלב של תגובת REST:
+Cuplikan berikut adalah contoh langkah respons REST:
 
 ```
 {
@@ -867,7 +900,7 @@ for (const step of interaction.steps) {
 }
 ```
 
-בדוגמאות הקוד הבאות אפשר לראות איך מאחזרים את `media_id` ומורידים את המדיה:
+Cuplikan kode berikut menunjukkan cara mengambil `media_id` dan mendownload media:
 
 ### Python
 
@@ -910,16 +943,17 @@ curl -X GET "https://generativelanguage.googleapis.com/v1/fileSearchStores/my-st
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## מטא-נתונים בהתאמה אישית
+## Metadata kustom
 
-אם הוספתם מטא-נתונים מותאמים אישית לקבצים, תוכלו לגשת אליהם בהערות של תשובת המודל. האפשרות הזו שימושית להעברת הקשר נוסף (כמו כתובות URL, מספרי דפים או מחברים) ממסמכי המקור ללוגיקה של האפליקציה. כל הערת ציטוט מסוג `file_citation`
-מכילה את המטא-נתונים המותאמים אישית האלה.
+Jika telah menambahkan metadata kustom ke file, Anda dapat mengaksesnya di
+anotasi respons model. Hal ini berguna untuk meneruskan konteks tambahan (seperti URL, nomor halaman, atau penulis) dari dokumen sumber ke logika aplikasi Anda. Setiap anotasi kutipan berjenis `file_citation`
+berisi metadata kustom ini.
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.7-flash",
     input="Tell me about [insert question]",
     tools=[{
         "type": "file_search",
@@ -939,7 +973,7 @@ for step in interaction.steps:
 
 ```
 const interaction = await ai.interactions.create({
-  model: "gemini-3.6-flash",
+  model: "gemini-3.7-flash",
   input: "Tell me about [insert question]",
   tools: [{
     type: "file_search",
@@ -994,9 +1028,10 @@ for (const step of interaction.steps) {
 }
 ```
 
-## פלט מובנה
+## Output terstruktur
 
-החל ממודלים של Gemini 3, אפשר לשלב את הכלי לחיפוש קבצים עם [פלט מובנה](https://ai.google.dev/gemini-api/docs/structured-output?hl=he).
+Mulai dari model Gemini 3, Anda dapat menggabungkan alat penelusuran file dengan
+[output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id).
 
 ### Python
 
@@ -1008,7 +1043,7 @@ class Money(BaseModel):
     currency: str = Field(description="The currency of amount.")
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.7-flash",
     input="What is the minimum hourly wage in Tokyo right now?",
     tools=[{
         "type": "file_search",
@@ -1042,7 +1077,7 @@ const moneySchema = z.fromJSONSchema(moneyJsonSchema);
 
 async function run() {
   const interaction = await ai.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.7-flash",
     input: "What is the minimum hourly wage in Tokyo right now?",
     tools: [{
       type: "file_search",
@@ -1070,7 +1105,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H 'Content-Type: application/json' \
   -X POST \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.7-flash",
     "input": "What is the minimum hourly wage in Tokyo right now?",
     "tools": [{
       "type": "file_search",
@@ -1091,24 +1126,25 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## מודלים נתמכים
+## Model yang didukung
 
-המודלים הבאים תומכים בחיפוש קבצים:
+Model berikut mendukung Penelusuran File:
 
-| מודל | חיפוש קבצים |
+| Model | Penelusuran File |
 | --- | --- |
-| ‫[Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=he) | ✔️ |
-| ‫[Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=he) | ✔️ |
-| ‫[Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=he) | ✔️ |
-| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=he) | ✔️ |
-| ‫[Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=he) | ✔️ |
-| [תצוגה מקדימה של Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=he) | ✔️ |
+| [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=id) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=id) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=id) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=id) | ✔️ |
+| [Pratinjau Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=id) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=id) | ✔️ |
+| [Pratinjau Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=id) | ✔️ |
 
-## סוגי קבצים נתמכים
+## Jenis file yang didukung
 
-החיפוש בקבצים תומך במגוון רחב של פורמטים של קבצים, שמפורטים בקטעים הבאים.
+Penelusuran File mendukung berbagai format file, yang tercantum di bagian berikut.
 
-### סוגי קבצים של אפליקציות
+### Jenis file aplikasi
 
 - `application/dart`
 - `application/ecmascript`
@@ -1141,7 +1177,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
 - `application/xml`
 - `application/zip`
 
-### סוגים של קובצי טקסט
+### Jenis file teks
 
 - `text/1d-interleaved-parityfec`
 - `text/RED`
@@ -1300,40 +1336,43 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
 - `text/xml-external-parsed-entity`
 - `text/yaml`
 
-## מגבלות
+## Batasan
 
-- **API פעיל:** חיפוש קבצים לא אפשרי ב[API הפעיל](https://ai.google.dev/gemini-api/docs/live?hl=he).
-- **אי-תאימות בין כלים:** אי אפשר לשלב בין כלי העיגון המובנים. לדוגמה, אי אפשר להשתמש בחיפוש קבצים בו-זמנית עם [עיגון באמצעות חיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he) או עם [URL Context](https://ai.google.dev/gemini-api/docs/url-context?hl=he) באותה בקשה.
+- **Live API:** Penelusuran File tidak didukung di
+  [Live API](https://ai.google.dev/gemini-api/docs/live?hl=id).
+- **Ketidakcocokan alat:** Alat perujukan bawaan tidak dapat digabungkan satu sama lain;
+  misalnya, Penelusuran File tidak dapat digunakan secara bersamaan dengan [Perujukan dengan Google Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id) atau
+  [Konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id) dalam permintaan yang sama.
 
-### מגבלות קצב
+### Batas kapasitas
 
-כדי לשמור על יציבות השירות, יש ב-File Search API את המגבלות הבאות:
+File Search API memiliki batas berikut untuk menerapkan stabilitas layanan:
 
-- **גודל קובץ מקסימלי / מגבלה לכל מסמך**: 100MB
-- **הגודל הכולל של מאגרי חיפוש הקבצים בפרויקט** (על סמך רמת המשתמש):
-  - **בחינם**: 1GB
-  - **רמה 1**: 10GB
-  - **רמה 2**: 100GB
-  - **רמה 3**: 1TB
-- **המלצה**: כדי להבטיח חביון אופטימלי של אחזור נתונים, מומלץ להגביל את הגודל של כל מאגר של חיפוש קבצים ל-20GB.
+- **Ukuran file maksimum / batas per dokumen**: 100 MB
+- **Total ukuran penyimpanan Penelusuran File project** (berdasarkan tingkat pengguna):
+  - **Gratis**: 1 GB
+  - **Tingkat 1**: 10 GB
+  - **Tingkat 2**: 100 GB
+  - **Tingkat 3**: 1 TB
+- **Rekomendasi**: Batasi ukuran setiap penyimpanan Penelusuran File hingga di bawah 20 GB untuk memastikan latensi pengambilan yang optimal.
 
-## תמחור
+## Harga
 
-- החיוב על הטמעות מתבצע בזמן יצירת האינדקס, על סמך [תמחור ההטמעות](https://ai.google.dev/gemini-api/docs/pricing?hl=he#gemini-embedding-2) הקיים.
-- האחסון הוא בחינם.
-- הטמעות בזמן השאילתה הן בחינם.
-- האסימונים של המסמך שאוחזר מחויבים בתור [אסימוני הקשר](https://ai.google.dev/gemini-api/docs/tokens?hl=he) רגילים.
+- Anda akan ditagih untuk penyematan pada waktu pengindeksan berdasarkan [harga penyematan](https://ai.google.dev/gemini-api/docs/pricing?hl=id#gemini-embedding-2) yang ada.
+- Penyimpanan tidak dikenai biaya.
+- Penyematan waktu kueri tidak dikenai biaya.
+- Token dokumen yang diambil akan ditagih sebagai [token konteks](https://ai.google.dev/gemini-api/docs/tokens?hl=id) reguler.
 
-## המאמרים הבאים
+## Langkah berikutnya
 
-- אפשר לעיין ב[הפניית API](https://ai.google.dev/api/file-search/file-search-stores?hl=he) בנושא מאגרי חיפוש קבצים ו[מסמכים](https://ai.google.dev/api/file-search/documents?hl=he) של חיפוש קבצים.
+- Baca referensi API untuk [Penyimpanan Penelusuran File](https://ai.google.dev/api/file-search/file-search-stores?hl=id) dan [Dokumen](https://ai.google.dev/api/file-search/documents?hl=id) Penelusuran File.
 
-שליחת משוב
+Kirim masukan
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-עדכון אחרון: 2026-07-30 (שעון UTC).
+Terakhir diperbarui pada 2026-08-19 UTC.
 
-רוצה לתת לנו משוב?
+Ada masukan untuk kami?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-30 (שעון UTC)."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-08-19 UTC."],[],[]]

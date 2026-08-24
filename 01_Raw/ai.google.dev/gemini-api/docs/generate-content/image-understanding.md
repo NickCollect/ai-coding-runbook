@@ -1,43 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=zh-CN
-fetched_at: 2026-08-17T02:18:02.758430+00:00
-title: "\u56fe\u7247\u7406\u89e3 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=zh-TW
+fetched_at: 2026-08-24T02:36:52.463743+00:00
+title: "\u5716\u50cf\u89e3\u8b80 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-发送反馈
+提供意見
 
-# 图片理解
+# 圖像解讀
 
-Gemini 模型从一开始就具有多模态特性，可解锁各种图片处理和计算机视觉任务，包括但不限于图片配文、分类和视觉问答，而无需训练专门的机器学习模型。
+Gemini 模型從一開始就建構於多模態的基礎上，因此可執行各種圖像處理和電腦視覺工作，包括但不限於生成圖像說明文字、分類和回答圖像問題，無須訓練專門的機器學習模型。
 
-除了通用的多模态功能外，Gemini 模型还通过额外训练，针对特定使用场景（例如[对象检测](#object-detection)）提供
-**更高的准确率**。
+除了提供一般多模態功能，Gemini 模型還經過額外訓練，可**提升準確度**，適用於[物體偵測](#object-detection)等特定用途。
 
-## 将图片传递给 Gemini
+## 將圖片傳送給 Gemini
 
-您可以使用以下两种方法将图片作为输入提供给 Gemini：
+你可以透過下列兩種方式，將圖片做為 Gemini 的輸入內容：
 
-- [传递内嵌图片数据](#inline-image)：非常适合较小的文件（总请求
-  大小小于 20MB，包括提示）。
-- [使用 File API 上传图片](#upload-image)：建议用于较大的文件，或在
-  多个请求中重复使用图片。
+- [傳遞內嵌圖片資料](#inline-image)：適合較小的檔案 (包括提示在內，要求總大小小於 20 MB)。
+- [使用 File API 上傳圖片](#upload-image)：建議用於較大的檔案，或在多個要求中重複使用圖片。
 
-### 传递内嵌图片数据
+### 傳遞內嵌圖片資料
 
-您可以在对 `generateContent` 的请求中传递内嵌图片数据。您可以提供 Base64 编码的字符串形式的图片数据，也可以直接读取本地文件（具体取决于语言）。
+您可以在對 `generateContent` 的要求中傳遞內嵌圖片資料。您可以提供 Base64 編碼字串形式的圖片資料，也可以直接讀取本機檔案 (視語言而定)。
 
-以下示例展示了如何从本地文件读取图片并将其传递给 `generateContent` API 进行处理。
+以下範例說明如何從本機檔案讀取圖片，並傳遞至 `generateContent` API 進行處理。
 
 ### Python
 
@@ -145,7 +142,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }' 2> /dev/null
 ```
 
-您还可以从网址提取图片，将其转换为字节，然后将其传递给 `generateContent`，如以下示例所示。
+您也可以從網址擷取圖片、轉換為位元組，然後傳遞至 `generateContent`，如以下範例所示。
 
 ### Python
 
@@ -287,10 +284,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
     }' 2> /dev/null
 ```
 
-### 使用 File API 上传图片
+### 使用 File API 上傳圖片
 
-对于较大的文件，或者为了能够重复使用同一图片文件，请使用 Files API。以下代码会上传图片文件，然后在对 `generateContent` 的调用中使用该文件。如需了解
-更多信息和示例，请参阅[Files API 指南](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn)。
+如要處理大型檔案或重複使用同一張圖片，請使用 Files API。下列程式碼會上傳圖片檔案，然後在呼叫 `generateContent` 時使用該檔案。如需更多資訊和範例，請參閱 [Files API 指南](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw)。
 
 ### Python
 
@@ -435,9 +431,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## 使用多张图片进行提示
+## 使用多張圖片提示
 
-您可以在单个提示中提供多张图片，方法是在 `contents` 数组中添加多个图片 `Part` 对象。这些对象可以是内嵌数据（本地文件或网址）和 File API 引用的组合。
+您可以在單一提示中提供多張圖片，方法是在 `contents` 陣列中加入多個圖片 `Part` 物件。這些可以是內嵌資料 (本機檔案或網址) 和 File API 參照的組合。
 
 ### Python
 
@@ -622,9 +618,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## 对象检测
+## 物件偵測
 
-模型经过训练，可以检测图片中的对象并获取其边界框坐标。相对于图片尺寸的坐标会缩放为 [0, 1000]。您需要根据原始图片大小对这些坐标进行反缩放。
+模型經過訓練後，可偵測圖片中的物件並取得定界框座標。座標會根據圖片尺寸縮放至 [0, 1000]。您需要根據原始圖片大小，縮放這些座標。
 
 ### Python
 
@@ -826,86 +822,78 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }' 2> /dev/null
 ```
 
-如需查看更多示例，请查看 [Gemini Cookbook](https://github.com/google-gemini/cookbook) 中的以下笔记本：
+如需更多範例，請參閱 [Gemini 教戰手冊](https://github.com/google-gemini/cookbook)中的下列筆記本：
 
-- [2D 空间理解笔记本](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Spatial_understanding.ipynb?hl=zh-cn)
-- [实验性 3D 指向笔记本](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/examples/Spatial_understanding_3d.ipynb?hl=zh-cn)
+- [2D 空間理解筆記本](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Spatial_understanding.ipynb?hl=zh-tw)
+- [實驗性 3D 指向筆記型電腦](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/examples/Spatial_understanding_3d.ipynb?hl=zh-tw)
 
-## 支持的图片格式
+## 支援的圖片格式
 
-Gemini 支持以下图片格式 MIME 类型：
+Gemini 支援下列圖片格式 MIME 類型：
 
 - PNG - `image/png`
 - JPEG - `image/jpeg`
-- WEBP - `image/webp`
+- WebP - `image/webp`
 - HEIC - `image/heic`
 - HEIF - `image/heif`
 
-如需了解其他文件输入方法，请参阅
-[文件输入方法](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-cn)指南。
+如要瞭解其他檔案輸入方式，請參閱「[檔案輸入方式](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-tw)」指南。
 
 ## 功能
 
-所有 Gemini 模型版本都是多模态的，可用于各种图片处理和计算机视觉任务，包括但不限于图片配文、视觉问答、图片分类和对象检测。
+所有 Gemini 模型版本都是多模態模型，可用於各種圖像處理和電腦視覺工作，包括但不限於圖像說明文字、視覺問答、圖片分類和物件偵測。
 
-Gemini 可以减少对专用机器学习模型的需求，具体取决于您的质量和性能要求。
+視品質和效能需求而定，Gemini 可減少使用專業機器學習模型的需求。
 
-除了通用功能（例如增强的
-[对象检测](#object-detection)）之外，最新模型版本还经过专门训练，可提高
-专用任务的准确率。
+最新模型版本經過特別訓練，除了強化[物件偵測](#object-detection)等一般功能外，還能提升特定工作的準確度。
 
-## 限制和关键技术信息
+## 限制和重要技術資訊
 
-### 文件限制
+### 檔案限制
 
-Gemini 模型每个请求最多支持 3,600 个图片文件。
+Gemini 模型每項要求最多可支援 3,600 個圖片檔案。
 
-### token 计算
+### 代幣計算
 
-- 如果两个尺寸均小于或等于 384 像素，则为 258 个 token。
-  较大的图片会平铺到 768x768 像素的图块中，每个图块需要 258 个 token。
+- 如果兩個維度都 <= 384 像素，則為 258 個權杖。
+  較大的圖片會分割成 768x768 像素的圖塊，每個圖塊需支付 258 個權杖。
 
-计算图块数量的粗略公式如下：
+計算圖塊數量的粗略公式如下：
 
-- 计算裁剪单元大小，大致为：floor(min(width, height) / 1.5)。
-- 将每个尺寸除以裁剪单元大小，然后将结果相乘，即可得到图块数量。
+- 計算裁剪單元大小，大約是：floor(min(width, height) / 1.5)。
+- 將每個維度除以裁剪單元大小，然後相乘，即可取得圖塊數量。
 
-例如，对于尺寸为 960x540 的图片，裁剪单元大小为 360。将每个尺寸除以 360，得到的图块数量为 3 \* 2 = 6。
+舉例來說，如果圖片尺寸為 960x540，裁剪單位大小為 360。將每個維度除以 360，圖塊數量為 3 \* 2 = 6。
 
-### 媒体分辨率
+### 媒體解析度
 
-Gemini 3 引入了对多模态视觉处理的精细控制，通过 `media_resolution` 参数实现。`media_resolution` 参数用于确定**为每个输入图片或视频帧分配的 token 数量上限** 。分辨率越高，模型读取精细文本或识别细小细节的能力就越强，但 token 用量和延迟也会增加。
+Gemini 3 推出 `media_resolution` 參數，可精細控管多模態視覺處理作業。`media_resolution` 參數會決定**每個輸入圖片或影片影格分配到的詞元數量上限。**
+解析度越高，模型就越能辨識細小文字或細節，但也會增加權杖用量和延遲時間。
 
-如需详细了解该参数及其对 token 计算的影响，
-请参阅[媒体分辨率](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=zh-cn)指南。
+如要進一步瞭解參數及其對權杖計算的影響，請參閱[媒體解析度](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=zh-tw)指南。
 
-## 技巧和最佳做法
+## 提示與最佳做法
 
-- 验证图片是否正确旋转。
-- 使用清晰、不模糊的图片。
-- 如果使用包含文本的单张图片，请在 `contents` 数组中将文本提示放在图片部分之后。
+- 確認圖片已正確旋轉。
+- 使用清晰的圖片，避免模糊不清。
+- 使用含有文字的單一圖片時，請將文字提示詞放在 `contents` 陣列的圖片部分*之後*。
 
-## 后续步骤
+## 後續步驟
 
-本指南介绍了如何上传图片文件并根据图片输入生成文本输出。如需了解详情，请参阅以下资源：
+本指南說明如何上傳圖片檔案，以及如何從圖片輸入內容生成文字輸出內容。如要進一步瞭解相關內容，請參閱下列資源：
 
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn)：详细了解如何上传和管理文件以供 Gemini 使用。
-- [系统说明](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-cn#system-instructions)：
-  系统说明可让您根据
-  特定需求和使用情形来控制模型的行为。
-- [文件提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn#prompt-guide)：
-  Gemini API 支持使用文本、图片、音频和视频数据进行提示，也
-  称为多模态提示。
-- [安全指南](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=zh-cn)：生成式
-  AI 模型有时会产生意外输出，例如不准确、
-  有偏见或令人反感的输出。后处理和人工评估对于限制此类输出造成的危害风险至关重要。
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw)：進一步瞭解如何上傳及管理檔案，以便搭配 Gemini 使用。
+- [系統指令](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-tw#system-instructions)：
+  系統指令可根據特定需求和用途，引導模型行為。
+- [檔案提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw#prompt-guide)：Gemini API 支援使用文字、圖片、音訊和影片資料提示，也稱為多模態提示。
+- [安全指引](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=zh-tw)：生成式 AI 模型有時會產生出乎意料的輸出內容，例如不準確、有偏見或令人反感的內容。後續處理和人工評估是不可或缺的環節，有助於降低這類輸出內容造成危害的風險。
 
-发送反馈
+提供意見
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-最后更新时间 (UTC)：2026-07-30。
+上次更新時間：2026-07-30 (世界標準時間)。
 
-需要向我们提供更多信息？
+想進一步說明嗎？
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-30。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-30 (世界標準時間)。"],[],[]]

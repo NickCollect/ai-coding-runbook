@@ -1,228 +1,209 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=id
-fetched_at: 2026-08-17T02:30:20.746843+00:00
-title: "Strategi desain prompt \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ja
+fetched_at: 2026-08-24T02:32:12.333426+00:00
+title: "\u30d7\u30ed\u30f3\u30d7\u30c8\u8a2d\u8a08\u6226\u7565 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Kirim masukan
+フィードバックを送信
 
-# Strategi desain prompt
+# プロンプト設計戦略
 
-*Desain prompt* adalah proses pembuatan perintah, atau permintaan dalam bahasa alami,
-yang mendapatkan respons yang akurat dan berkualitas tinggi dari model bahasa.
+プロンプト設計とは、言語モデルから正確で高品質なレスポンスを引き出すプロンプト（自然言語リクエスト）を作成するプロセスです。
 
-Halaman ini memperkenalkan konsep dasar, strategi, dan praktik terbaik untuk membantu Anda mulai mendesain perintah agar dapat memanfaatkan model AI Gemini secara maksimal.
+このページでは、Gemini AI モデルを最大限に活用するためのプロンプト設計の基本的なコンセプト、戦略、ベスト プラクティスについて説明します。
 
-## Panduan perintah khusus topik
+## トピック別のプロンプト ガイド
 
-Mencari strategi perintah yang lebih spesifik? Lihat panduan perintah lainnya di:
+より具体的なプロンプト戦略をお探しですか？次のプロンプト ガイドをご覧ください。
 
-- [Memberikan perintah dengan file media](https://ai.google.dev/gemini-api/docs/files?hl=id#prompt-guide)
-- Perintah untuk pembuatan gambar dengan [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=id#imagen-prompt-guide) dan [Pembuatan Gambar Native Gemini](https://ai.google.dev/gemini-api/docs/image-generation?hl=id#prompt-guide)
-- [Memberikan perintah untuk pembuatan video](https://ai.google.dev/gemini-api/docs/video?hl=id#prompt-guide)
+- [メディア ファイルを使用したプロンプト](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide)
+- [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=ja#imagen-prompt-guide) と [Gemini ネイティブ画像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja#prompt-guide) を使用した画像生成のプロンプト
+- [動画生成のプロンプト](https://ai.google.dev/gemini-api/docs/video?hl=ja#prompt-guide)
 
-Anda dapat menemukan contoh perintah lainnya di [galeri perintah](https://ai.google.dev/gemini-api/prompts?hl=id) yang dimaksudkan untuk menampilkan banyak konsep yang dibagikan dalam panduan ini secara interaktif.
+その他のサンプル プロンプトについては、[プロンプト ギャラリー](https://ai.google.dev/gemini-api/prompts?hl=ja)
+をご覧ください。このガイドで説明されているコンセプトの多くをインタラクティブに紹介しています。
 
-## Petunjuk yang jelas dan spesifik
+## 明確で具体的な指示
 
-Cara yang efektif dan efisien untuk menyesuaikan perilaku model adalah dengan memberikan instruksi yang jelas dan spesifik. Petunjuk dapat berupa pertanyaan,
-tugas langkah demi langkah, atau serumit memetakan pengalaman dan pola pikir pengguna.
+モデルの動作をカスタマイズする効果的かつ効率的な方法は、明確で具体的な指示を与えることです。指示は、質問、段階的なタスク、ユーザー エクスペリエンスや考え方を表すような複雑な内容にすることもできます。
 
-### Input
+### 入力
 
-Input adalah teks yang diperlukan dalam perintah yang harus diberikan respons oleh model. Input dapat berupa pertanyaan yang menjadi model jawaban (masukan pertanyaan), tugas yang dilakukan model (masukan tugas), suatu entitas model beroperasi (input entitas), atau sebagian input yang diselesaikan model atau berlanjut (input penyelesaian).
+入力は、モデルにレスポンスを提供させるプロンプトの必須テキストです。入力は、モデルが回答する質問（質問入力）、モデルが実行するタスク（タスク入力）、モデルが動作するエンティティ（エンティティ入力）、またはモデルが完了または続行する部分入力（コンプリーション入力）のいずれかです。
 
-| **Jenis input** | **Perintah** | **Output yang dihasilkan** |
+| **入力タイプ** | **プロンプト** | **生成された出力** |
 | --- | --- | --- |
-| Pertanyaan | ```     What's a good name for a flower shop that specializes in selling bouquets of     dried flowers? Create a list of 5 options with just the names. ``` | ```     Here are 5 names for a flower shop specializing in dried flowers:      1. Everlasting Blooms     2. Dried & Delightful     3. The Petal Preserve     4. Whispers of Wildflowers     5. Forever Blooms ``` |
-| Tugas | ```     Give me a simple list of just the things that I must bring on a camping trip. The list should have 5 items. ``` | ```     1. **Tent:** Your shelter from the elements.     2. **Sleeping Bag:** Stay warm and comfortable.     3. **Sleeping Pad:** Insulation and cushioning for a good night's sleep.     4. **Headlamp or Flashlight:** Light for nighttime activities.     5. **First Aid Kit:** Be prepared for minor injuries. ``` |
-| Entitas | ```     Classify the following items as [large, small]: Elephant Mouse Snail ``` | ``` Here's the classification:  * **Elephant:** Large * **Mouse:** Small * **Snail:** Small ``` |
+| 質問 | ```     What's a good name for a flower shop that specializes in selling bouquets of     dried flowers? Create a list of 5 options with just the names. ``` | ```     Here are 5 names for a flower shop specializing in dried flowers:      1. Everlasting Blooms     2. Dried & Delightful     3. The Petal Preserve     4. Whispers of Wildflowers     5. Forever Blooms ``` |
+| タスク | ```     Give me a simple list of just the things that I must bring on a camping trip. The list should have 5 items. ``` | ```     1. **Tent:** Your shelter from the elements.     2. **Sleeping Bag:** Stay warm and comfortable.     3. **Sleeping Pad:** Insulation and cushioning for a good night's sleep.     4. **Headlamp or Flashlight:** Light for nighttime activities.     5. **First Aid Kit:** Be prepared for minor injuries. ``` |
+| エンティティ | ```     Classify the following items as [large, small]: Elephant Mouse Snail ``` | ``` Here's the classification:  * **Elephant:** Large * **Mouse:** Small * **Snail:** Small ``` |
 
-#### Penyelesaian input sebagian
+#### 部分的な入力の補完
 
-Model bahasa generatif berfungsi seperti alat pelengkapan otomatis canggih. Jika Anda menyediakan konten sebagian, model dapat memberikan konten lainnya atau yang dianggapnya sebagai kelanjutan dari konten tersebut sebagai respons. Saat melakukannya, jika Anda menyertakan contoh atau konteks, model dapat mempertimbangkan contoh atau konteks tersebut.
+生成言語モデルは、高度な予測入力ツールのように機能します。部分的なコンテンツを提供すると、モデルは残りのコンテンツ、またはコンテンツの継続として認識したコンテンツをレスポンスとして提供できます。その場合、例やコンテキストを含めると、モデルはそれらの例やコンテキストを考慮できます。
 
-Contoh berikut memberikan perintah dengan petunjuk dan input entity:
-
-|  |
-| --- |
-| **Perintah:**    ``` For the given order, return a JSON object that has the fields cheeseburger, hamburger, fries, or drink, with the value being the quantity.  Order: A burger and a drink. ```  **Respons:**    ``` {   "cheeseburger": 0,   "hamburger": 1,   "fries": 0,   "drink": 1 } ```  (gemini-2.5-flash) |
-
-Meskipun model melakukan seperti yang diminta, menuliskan petunjuk dalam bahasa alami terkadang dapat menjadi tantangan dan menyisakan banyak hal untuk interpretasi model. Misalnya, menu restoran mungkin berisi banyak item. Untuk mengurangi ukuran respons JSON, Anda mungkin ingin menghilangkan item yang tidak dipesan. Dalam hal ini, Anda dapat memberikan contoh dan awalan respons, lalu membiarkan model melengkapinya:
+次の例では、指示とエンティティ入力を含むプロンプトを示しています。
 
 |  |
 | --- |
-| **Perintah:**    ``` Valid fields are cheeseburger, hamburger, fries, and drink. Order: Give me a cheeseburger and fries Output: ``` {   "cheeseburger": 1,   "fries": 1 } ``` Order: I want two burgers, a drink, and fries. Output: ```  **Respons:**    ``` ``` {   "hamburger": 2,   "drink": 1,   "fries": 1 } ``` ```  (gemini-2.5-flash) |
+| **プロンプト:**    ``` For the given order, return a JSON object that has the fields cheeseburger, hamburger, fries, or drink, with the value being the quantity.  Order: A burger and a drink. ```  **レスポンス:**    ``` {   "cheeseburger": 0,   "hamburger": 1,   "fries": 0,   "drink": 1 } ```  （gemini-2.5-flash） |
 
-Perhatikan bagaimana "cheeseburger" dikecualikan dari output karena bukan bagian
-dari pesanan.
-
-Meskipun Anda dapat menentukan format objek respons JSON sederhana menggunakan perintah, sebaiknya gunakan fitur [output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id) Gemini API saat menentukan Skema JSON yang lebih kompleks untuk respons.
-
-### Batasan
-
-Tentukan batasan apa pun dalam membaca perintah atau membuat respons. Anda dapat
-memberi tahu model apa yang boleh dan tidak boleh dilakukan. Misalnya, Anda dapat menentukan batasan
-dalam perintah tentang panjang ringkasan yang Anda inginkan:
+モデルはプロンプトに従って動作しましたが、自然言語での指示は難しい場合があり、モデルの解釈に多くの負担が残ります。
+たとえば、レストランのメニューに多くのアイテムが含まれているとします。JSON レスポンスのサイズを小さくするには、オーダーされていないアイテムを省略します。この場合、例とレスポンス接頭辞を指定して、モデルに完成させることができます。
 
 |  |
 | --- |
-| **Perintah:**     ``` Summarize this text in one sentence: Text: A quantum computer exploits quantum mechanical phenomena to perform calculations exponentially faster than any modern traditional computer. At very tiny scales, physical matter acts as both particles and as waves, and quantum computing uses specialized hardware to leverage this behavior. The operating principles of quantum devices is beyond the scope of classical physics. When deployed at scale, quantum computers could be used in a wide variety of applications such as: in cybersecurity to break existing encryption methods while helping researchers create new ones, in meteorology to develop better weather forecasting etc. However, the current state of the art quantum computers are still largely experimental and impractical. ```     **Respons:**     ```       Exploiting quantum mechanical phenomena, quantum computers can perform calculations exponentially faster than traditional computers for potential applications like cybersecurity and meteorology, although they are currently largely experimental and impractical. ```  (gemini-2.5-flash) |
+| **プロンプト:**    ``` Valid fields are cheeseburger, hamburger, fries, and drink. Order: Give me a cheeseburger and fries Output: ``` {   "cheeseburger": 1,   "fries": 1 } ``` Order: I want two burgers, a drink, and fries. Output: ```  **レスポンス:**    ``` ``` {   "hamburger": 2,   "drink": 1,   "fries": 1 } ``` ```  （gemini-2.5-flash） |
 
-### Format respons
+「cheeseburger」は注文に含まれていないため、出力から除外されています。
 
-Anda dapat memberikan petunjuk yang menentukan format respons. Misalnya, Anda dapat meminta agar respons diformat sebagai tabel, daftar berbutir, presentasi singkat, kata kunci, kalimat, atau paragraf. Petunjuk sistem berikut memberi tahu model untuk memberikan respons yang lebih komunikatif:
+プロンプトを使用して単純な JSON レスポンス オブジェクトの形式を指定できますが、
+レスポンスに複雑な JSON スキーマを指定する場合は、Gemini API's
+[構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)機能を使用することをおすすめします。
 
-|  |
-| --- |
-| **Petunjuk sistem**    ```     All questions should be answered comprehensively with details, unless the user requests a concise response specifically. ```  **Perintah**    ```     What is a smart way to make a business that sells DVD's in 2026? ```  **Respons:**    ``` Starting a business selling DVDs in 2026 presents significant challenges due to the overwhelming dominance of digital streaming and on-demand services; a "smart" approach would therefore require a highly specialized niche, a strong value proposition beyond just the disc, and likely a focus on community or collector markets rather than mainstream consumption.  Here's a breakdown of what a smart DVD business in 2026 would likely entail:  1. Extreme Niche Specialization: You cannot compete with streaming libraries. Your business must focus on what digital doesn't offer easily or at all. This could include:      * Out-of-Print & Rare Titles: Sourcing films or TV shows that have never been released digitally or are currently unavailable on major streaming platforms.     .... ```  (gemini-2.5-flash) |
+### 制約
 
-#### Memformat respons dengan strategi penyelesaian
-
-[Strategi penyelesaian](#completion) juga dapat membantu memformat respons.
-Contoh berikut meminta model untuk membuat garis besar esai:
+プロンプトの読み取りやレスポンスの生成に関する制約を指定します。行うべきことと、行うべきでないことをモデルに指示できます。たとえば、必要な要約の長さについてプロンプトで制約を指定できます。
 
 |  |
 | --- |
-| **Perintah:**    ``` Create an outline for an essay about hummingbirds. ```  **Respons:**    ``` Here is a possible outline for an essay about hummingbirds:  I. Introduction A. Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). B. Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds. C. Thesis Statement: State the main point of the essay, which could be about the remarkable adaptations, behaviors, and ecological importance of hummingbirds.  II. Appearance and Identification ..... ```  (gemini-2.5-flash) |
+| **プロンプト:**     ``` Summarize this text in one sentence: Text: A quantum computer exploits quantum mechanical phenomena to perform calculations exponentially faster than any modern traditional computer. At very tiny scales, physical matter acts as both particles and as waves, and quantum computing uses specialized hardware to leverage this behavior. The operating principles of quantum devices is beyond the scope of classical physics. When deployed at scale, quantum computers could be used in a wide variety of applications such as: in cybersecurity to break existing encryption methods while helping researchers create new ones, in meteorology to develop better weather forecasting etc. However, the current state of the art quantum computers are still largely experimental and impractical. ```     **レスポンス:**     ```       Exploiting quantum mechanical phenomena, quantum computers can perform calculations exponentially faster than traditional computers for potential applications like cybersecurity and meteorology, although they are currently largely experimental and impractical. ```  （gemini-2.5-flash） |
 
-Perintah tidak menentukan format untuk garis besar dan model telah memilih format untuk Anda. Agar model mengembalikan garis besar dalam format tertentu, Anda dapat menambahkan teks yang mewakili awal garis besar dan membiarkan model menyelesaikannya berdasarkan pola yang Anda mulai.
+### 回答の形式
 
-|  |
-| --- |
-| **Perintah:**    ``` Create an outline for an essay about hummingbirds. I. Introduction    * ```  **Respons:**    ``` Okay, here is an outline for an essay about hummingbirds, starting from the introduction you provided:  I. Introduction * Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). * Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds, and their general characteristics. * Thesis Statement: State the main point of the essay, focusing on the remarkable adaptations, behaviors, and ecological significance that make hummingbirds extraordinary. ..... ```  (gemini-2.5-flash) |
-
-## Prompt zero-shot vs few-shot
-
-Anda dapat menyertakan contoh dalam prompt yang menunjukkan tampilan penerapannya dengan benar pada model. Model mencoba mengidentifikasi pola dan hubungan dari contoh-contoh tersebut dan menerapkannya saat membuat respons. Perintah yang berisi beberapa contoh disebut perintah *few-shot*, sedangkan perintah yang tidak memberikan contoh disebut perintah *zero-shot*. Prompt few-shot sering digunakan
-untuk mengatur pemformatan, frasa, cakupan, atau pola umum respons model. Gunakan contoh yang spesifik dan bervariasi untuk membantu model mempersempit fokusnya dan menghasilkan hasil yang lebih akurat.
-
-Sebaiknya selalu sertakan contoh sedikit tembakan dalam perintah Anda. Perintah tanpa
-contoh sedikit tembakan cenderung kurang efektif. Bahkan, Anda dapat menghapus
-petunjuk dari perintah jika contoh Anda cukup jelas dalam menunjukkan
-tugas yang sedang dilakukan.
-
-Petunjuk zero-shot berikut meminta model untuk memilih penjelasan terbaik.
+指示の中でレスポンスの形式を指定することもできます。たとえば、表、箇条書き、エレベーター ピッチ、キーワード、文、段落の形式でレスポンスを求めることができます。次のシステム指示は、レスポンスでより会話形式にするようモデルに指示します。
 
 |  |
 | --- |
-| **Perintah:**    ``` Please choose the best explanation to the question:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **Respons:**    ``` Explanation1 is the better explanation because it provides more detail on the process, including how ice crystals combine and grow into snowflakes as they fall through the atmosphere. ```  (gemini-2.5-flash) |
+| **システム指示**    ```     All questions should be answered comprehensively with details, unless the user requests a concise response specifically. ```  **プロンプト**    ```     What is a smart way to make a business that sells DVD's in 2026? ```  **レスポンス:**    ``` Starting a business selling DVDs in 2026 presents significant challenges due to the overwhelming dominance of digital streaming and on-demand services; a "smart" approach would therefore require a highly specialized niche, a strong value proposition beyond just the disc, and likely a focus on community or collector markets rather than mainstream consumption.  Here's a breakdown of what a smart DVD business in 2026 would likely entail:  1. Extreme Niche Specialization: You cannot compete with streaming libraries. Your business must focus on what digital doesn't offer easily or at all. This could include:      * Out-of-Print & Rare Titles: Sourcing films or TV shows that have never been released digitally or are currently unavailable on major streaming platforms.     .... ```  （gemini-2.5-flash） |
 
-Jika kasus penggunaan Anda memerlukan model untuk menghasilkan respons yang ringkas, Anda dapat menyertakan
-contoh dalam perintah yang memberikan preferensi pada respons yang ringkas.
+#### 完了戦略でレスポンスの形式を設定する
 
-Perintah berikut memberikan dua contoh yang menunjukkan preferensi terhadap penjelasan yang lebih singkat. Dalam respons, Anda dapat melihat bahwa contoh memandu model untuk memilih penjelasan yang lebih pendek (`Explanation2`) dibandingkan dengan penjelasan yang lebih panjang (`Explanation1`) seperti sebelumnya.
-
-|  |
-| --- |
-| **Perintah:**    ``` Below are some examples showing a question, explanation, and answer format:  Question: Why is the sky blue? Explanation1: The sky appears blue because of Rayleigh scattering, which causes shorter blue wavelengths of light to be scattered more easily than longer red wavelengths, making the sky look blue. Explanation2: Due to Rayleigh scattering effect. Answer: Explanation2  Question: What is the cause of earthquakes? Explanation1: Sudden release of energy in the Earth's crust. Explanation2: Earthquakes happen when tectonic plates suddenly slip or break apart, causing a release of energy that creates seismic waves that can shake the ground and cause damage. Answer: Explanation1  Now, Answer the following question given the example formats above:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **Respons:**    ``` Answer: Explanation2 ```  (gemini-2.5-flash) |
-
-### Jumlah contoh yang optimal
-
-Model seperti Gemini sering kali dapat memahami pola menggunakan beberapa contoh, meskipun Anda mungkin perlu bereksperimen dengan jumlah contoh yang akan diberikan dalam perintah untuk mendapatkan hasil terbaik. Pada saat yang sama, jika Anda menyertakan terlalu banyak contoh, model mungkin akan mulai [melebihi](https://developers.google.com/machine-learning/glossary?hl=id#overfitting) respons terhadap contoh.
-
-### Format yang konsisten
-
-Pastikan struktur dan pemformatan contoh few-shot sama untuk menghindari respons dengan format yang tidak diinginkan. Salah satu tujuan utama menambahkan contoh few-shot dalam perintah adalah untuk menunjukkan format respons kepada model. Oleh karena itu, penting untuk memastikan format yang konsisten di semua contoh, terutama dengan memperhatikan tag XML, spasi kosong, baris baru, dan pemisah contoh.
-
-## Tambahkan konteks
-
-Anda dapat menyertakan petunjuk dan informasi dalam perintah yang diperlukan model
-untuk memecahkan masalah, bukan mengasumsikan bahwa model memiliki semua informasi
-yang diperlukan. Informasi kontekstual ini membantu model memahami batasan dan detail tugas yang Anda minta.
-
-Contoh berikut meminta model untuk memberikan panduan pemecahan masalah untuk router:
+[完了戦略](#completion)は、レスポンスの形式にも活用できます。
+次の例では、小論文の概要を作成するようにモデルに指示しています。
 
 |  |
 | --- |
-| **Perintah:**    ``` What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly. ```  **Respons:**    ```   A yellow blinking light on your Google Wifi router usually indicates a problem   with the internet connection. Here are some steps to troubleshoot and fix the   issue:   1. Restart your router and modem:     - Unplug your modem from the power outlet and wait for 30 seconds.     - Plug your modem back in and wait for it to fully boot up.     - Unplug your Google Wifi router and wait for 30 seconds.     - Plug your Google Wifi router back in and wait for it to fully boot up. ..... ```  (gemini-2.5-flash) |
+| **プロンプト:**    ``` Create an outline for an essay about hummingbirds. ```  **レスポンス:**    ``` Here is a possible outline for an essay about hummingbirds:  I. Introduction A. Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). B. Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds. C. Thesis Statement: State the main point of the essay, which could be about the remarkable adaptations, behaviors, and ecological importance of hummingbirds.  II. Appearance and Identification ..... ```  （gemini-2.5-flash） |
 
-Responsnya terlihat seperti informasi pemecahan masalah umum yang tidak spesifik
-untuk router atau status lampu indikator LED.
-
-Guna menyesuaikan respons untuk router tertentu, Anda dapat menambahkan prompt dalam panduan pemecahan masalah router sebagai konteks yang dirujuk saat memberikan respons.
+プロンプトでアウトラインの形式が指定されていないため、モデルによって形式が選択されています。モデルが特定の形式でアウトラインを返すようにするには、アウトラインの始点を表すテキストを追加し、開始パターンに基づいてモデルを完成させます。
 
 |  |
 | --- |
-| **Perintah:**    ``` Answer the question using the text below. Respond with only the text provided. Question: What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly.  Text: Color: Slowly pulsing yellow What it means: There is a network error. What to do: Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again.  Color: Fast blinking yellow What it means: You are holding down the reset button and are factory resetting this device. What to do: If you keep holding down the reset button, after about 12 seconds, the light will turn solid yellow. Once it is solid yellow, let go of the factory reset button.  Color: Solid yellow What it means: Router is factory resetting. What to do: This can take up to 10 minutes. When it's done, the device will reset itself and start pulsing white, letting you know it's ready for setup.  Color: Solid red What it means: Something is wrong. What to do: Critical failure. Factory reset the router. If the light stays red, contact Wifi customer support. ```  **Respons:**    ``` Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again. ```  (gemini-2.5-flash) |
+| **プロンプト:**    ``` Create an outline for an essay about hummingbirds. I. Introduction    * ```  **レスポンス:**    ``` Okay, here is an outline for an essay about hummingbirds, starting from the introduction you provided:  I. Introduction * Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). * Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds, and their general characteristics. * Thesis Statement: State the main point of the essay, focusing on the remarkable adaptations, behaviors, and ecological significance that make hummingbirds extraordinary. ..... ```  （gemini-2.5-flash） |
 
-## Menguraikan perintah menjadi komponen
+## ゼロショット プロンプトと少数ショット プロンプト
 
-Untuk kasus penggunaan yang memerlukan perintah kompleks, Anda dapat membantu model mengelola kompleksitas ini dengan memecah perintah menjadi komponen yang lebih sederhana.
+プロンプトに、モデルに対して望ましい動作を示す例を含めることができます。モデルは、例からパターンと関係を特定し、回答を生成する際にそれらを適用します。いくつかの
+例を含むプロンプトは*少数ショット* プロンプトと呼ばれ、例のない
+プロンプトは*ゼロショット* プロンプトと呼ばれます。少数ショット プロンプトは、モデルのレスポンスのフォーマット、フレーズ、範囲、一般的なパターンの設定を規制するために頻繁に使用されます。具体的で多様な例を使用して、モデルが焦点を絞り込み、より正確な結果を生成できるようにします。
 
-1. **Memecah petunjuk:** Daripada memiliki banyak petunjuk dalam satu perintah, buat satu perintah per petunjuk. Anda dapat memilih perintah mana yang akan diproses berdasarkan input pengguna.
-2. **Rangkai perintah:** Untuk tugas kompleks yang melibatkan beberapa langkah berurutan,
-   jadikan setiap langkah sebagai perintah dan rangkai perintah tersebut secara berurutan. Dalam rangkaian perintah berurutan ini, output satu perintah dalam urutan menjadi input perintah berikutnya. Output perintah terakhir dalam urutan
-   adalah output akhir.
-3. **Respons gabungan:** Penggabungan adalah saat Anda ingin melakukan berbagai tugas paralel pada berbagai bagian data dan menggabungkan hasilnya untuk menghasilkan output akhir. Misalnya, Anda dapat memberi tahu model untuk melakukan satu
-   operasi pada bagian pertama data, melakukan operasi lain pada bagian data
-   lainnya, dan menggabungkan hasilnya.
+プロンプトには、常に少数ショットの例を含めることをおすすめします。少数ショットの例は、モデルに対して指示の適用方法を示すものであり、このようなショットのないプロンプトは効果的でない可能性があります。タスクを説明するのに十分な例が含まれていれば、プロンプトから指示を削除することも可能です。
 
-## Bereksperimen dengan parameter model
+次のゼロショット プロンプトでは、モデルに最良の説明を選択するよう求めます。
 
-Setiap panggilan yang Anda kirim ke model menyertakan parameter value yang mengontrol cara model menghasilkan respons. Model ini dapat memberikan hasil yang berbeda untuk parameter value yang berbeda. Bereksperimenlah dengan parameter value yang berbeda untuk mendapatkan nilai terbaik untuk tugas. Parameter yang tersedia untuk model yang berbeda mungkin berbeda. Parameter yang paling umum adalah sebagai berikut:
+|  |
+| --- |
+| **プロンプト:**    ``` Please choose the best explanation to the question:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **レスポンス:**    ``` Explanation1 is the better explanation because it provides more detail on the process, including how ice crystals combine and grow into snowflakes as they fall through the atmosphere. ```  （gemini-2.5-flash） |
 
-1. **Token output maks:** Menentukan jumlah maksimum token yang dapat
-   dibuat dalam respons. Token terdiri atas sekitar empat karakter. 100
-   token setara dengan sekitar 60-80 kata.
-2. **Temperatur:** Temperatur mengontrol tingkat keacakan dalam pemilihan token. Temperatur digunakan untuk pengambilan sampel selama pembuatan respons, yang terjadi saat `topP` dan `topK` diterapkan. Temperatur yang lebih rendah cocok untuk perintah yang memerlukan respons yang lebih deterministik atau kurang terbuka, sedangkan temperatur yang lebih tinggi dapat memberikan hasil yang lebih beragam atau kreatif. Temperatur 0 bersifat deterministik, yang berarti bahwa respons probabilitas tertinggi akan selalu dipilih.
-3. **`topK`:** Parameter `topK` mengubah cara model memilih token untuk output. Nilai `topK` 1 berarti token yang dipilih adalah yang paling mungkin di antara semua token dalam kosakata model (disebut juga greedy decoding), sedangkan nilai `topK` 3 berarti token berikutnya dipilih dari antara 3 token yang paling mungkin menggunakan temperatur. Untuk setiap langkah pemilihan token, token `topK` dengan probabilitas tertinggi akan diambil sampelnya. Token kemudian difilter lebih lanjut berdasarkan `topP` dengan token akhir yang dipilih menggunakan pengambilan sampel temperatur.
-4. **`topP`:** Parameter `topP` mengubah cara model memilih token untuk output. Token dipilih dari yang paling mungkin hingga yang paling tidak mungkin hingga jumlah probabilitasnya sama dengan nilai `topP`. Misalnya, jika token A, B, dan C memiliki probabilitas 0,3, 0,2, dan 0,1 serta nilai `topP` adalah 0,5, maka model akan memilih A atau B sebagai token berikutnya dengan menggunakan temperatur dan mengecualikan C sebagai kandidat. Nilai `topP` default adalah 0,95.
-5. **`stop_sequences`:** Tetapkan urutan penghentian untuk
-   memberi tahu model agar berhenti membuat konten. Urutan penghentian dapat berupa
-   urutan karakter apa pun. Coba hindari penggunaan urutan karakter yang
-   mungkin muncul dalam konten yang dihasilkan.
+ユースケースでモデルが簡潔なレスポンスを生成する必要がある場合は、簡潔なレスポンスを優先する例をプロンプトに含めることができます。
 
-## Strategi iterasi prompt
+次のプロンプトでは、短い説明を優先する例を 2 つ示します。レスポンスでは、前の例のような長い説明（`Explanation1`）ではなく、短い説明（`Explanation2`）を選択するように例がモデルをガイドしたことがわかります。
 
-Desain prompt terkadang memerlukan beberapa iterasi sebelum
-Anda mendapatkan respons yang diinginkan secara konsisten. Bagian ini memberikan
-panduan tentang beberapa hal yang dapat Anda coba saat melakukan iterasi pada perintah Anda:
+|  |
+| --- |
+| **プロンプト:**    ``` Below are some examples showing a question, explanation, and answer format:  Question: Why is the sky blue? Explanation1: The sky appears blue because of Rayleigh scattering, which causes shorter blue wavelengths of light to be scattered more easily than longer red wavelengths, making the sky look blue. Explanation2: Due to Rayleigh scattering effect. Answer: Explanation2  Question: What is the cause of earthquakes? Explanation1: Sudden release of energy in the Earth's crust. Explanation2: Earthquakes happen when tectonic plates suddenly slip or break apart, causing a release of energy that creates seismic waves that can shake the ground and cause damage. Answer: Explanation1  Now, Answer the following question given the example formats above:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **レスポンス:**    ``` Answer: Explanation2 ```  （gemini-2.5-flash） |
 
-1. **Gunakan frasa yang berbeda:** Penggunaan kata atau frasa yang berbeda dalam perintah Anda sering kali menghasilkan respons yang berbeda dari model meskipun semuanya memiliki arti yang sama. Jika Anda tidak mendapatkan hasil yang diharapkan dari perintah Anda, coba
-   susun ulang perintah tersebut.
+### 最適なサンプル数
+
+Gemini などのモデルでは、多くの場合、いくつかの例を使用してパターンを検出できますが、最適な結果を得るには、プロンプトで提供する例の数をテストすることが必要な場合があります。同時に、過剰に多くの例を追加すると、
+モデルが例に対するレスポンスを[過学習](https://developers.google.com/machine-learning/glossary?hl=ja#overfitting)
+し始める可能性があります。
+
+### 一貫性のある形式
+
+レスポンスが望ましくない形式で返されないように、少数ショットの例の構造と形式を同じにする必要があります。プロンプトに少数ショットの例を追加する主な目的の 1 つは、モデルにレスポンスの形式を示すことです。そのため、すべてのサンプルで形式を統一することが重要になります。特に、XML タグ、空白、改行、サンプルの分割子には注意してください。
+
+## コンテキストを追加する
+
+モデルに必要な情報がすべて与えられていると仮定するのではなく、モデルが問題を解決するために必要な指示や情報をプロンプトに含めることができます。このコンテキスト情報により、モデルは求められている内容について、制約と詳細を理解できます。
+
+次の例では、モデルにルーターのトラブルシューティング ガイダンスを提供するよう求めています。
+
+|  |
+| --- |
+| **プロンプト:**    ``` What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly. ```  **レスポンス:**    ```   A yellow blinking light on your Google Wifi router usually indicates a problem   with the internet connection. Here are some steps to troubleshoot and fix the   issue:   1. Restart your router and modem:     - Unplug your modem from the power outlet and wait for 30 seconds.     - Plug your modem back in and wait for it to fully boot up.     - Unplug your Google Wifi router and wait for 30 seconds.     - Plug your Google Wifi router back in and wait for it to fully boot up. ..... ```  （gemini-2.5-flash） |
+
+レスポンスは一般的なトラブルシューティング情報のように見えますが、ルーターや LED インジケーター ライトのステータスに固有のものではありません。
+
+特定のルーターに関するレスポンスをカスタマイズするには、ルーターのトラブルシューティング ガイドを、レスポンスの提供時に参照するコンテキストとしてプロンプトに追加します。
+
+|  |
+| --- |
+| **プロンプト:**    ``` Answer the question using the text below. Respond with only the text provided. Question: What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly.  Text: Color: Slowly pulsing yellow What it means: There is a network error. What to do: Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again.  Color: Fast blinking yellow What it means: You are holding down the reset button and are factory resetting this device. What to do: If you keep holding down the reset button, after about 12 seconds, the light will turn solid yellow. Once it is solid yellow, let go of the factory reset button.  Color: Solid yellow What it means: Router is factory resetting. What to do: This can take up to 10 minutes. When it's done, the device will reset itself and start pulsing white, letting you know it's ready for setup.  Color: Solid red What it means: Something is wrong. What to do: Critical failure. Factory reset the router. If the light stays red, contact Wifi customer support. ```  **レスポンス:**    ``` Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again. ```  （gemini-2.5-flash） |
+
+## プロンプトをコンポーネントに分割する
+
+複雑なプロンプトを必要とするユースケースでは、プロンプトをより単純なコンポーネントに分割することで、モデルでこの複雑さを管理できるようになります。
+
+1. **指示を分割する:** 1 つのプロンプトに複数の指示を記述するのではなく、指示ごとに 1 つのプロンプトを作成します。ユーザーの入力に基づいて、処理するプロンプトを選択できます。
+2. **プロンプトを連結する:** 複数の連続したステップを含む複雑なタスクの場合は、各ステップをプロンプトにして、プロンプトを順番に連結します。プロンプトが順番に並んだこの連鎖では、シーケンス内の 1 つのプロンプトの出力が次のプロンプトの入力になります。シーケンス内の最後のプロンプトの出力が最終出力です。
+3. **レスポンスを集計する:** 集計とは、データのさまざまな部分に対して異なる並列タスクを実行し、結果を集計して最終出力を生成することです。たとえば、データの最初の部分に対して 1 つのオペレーションを実行し、残りのデータに対して別のオペレーションを実行して、結果を集計するようにモデルに指示できます。
+
+## モデル パラメータをテストする
+
+モデルに送信する呼び出しの一つ一つに、モデルがどのようにレスポンスを生成するかを制御するパラメータ値が含まれています。このモデルは、パラメータ値によって異なる結果を生成できます。さまざまなパラメータ値を試して、タスクに最適な値を取得します。使用可能なパラメータはモデルに世代によって異なる場合があります。最も一般的なパラメータは次のとおりです。
+
+1. **最大出力トークン:** レスポンスで生成できるトークンの最大数を指定します。トークンは約 4 文字です。100 トークンは約 60 ～ 80 語に相当します。
+2. **Temperature:** Temperature は、トークン選択のランダム性の度合いを制御します。温度は、レスポンス生成時のサンプリングに使用されます。レスポンス生成は、`topP` と `topK` が適用された場合に発生します。温度が低いほど、確定的で自由度を抑えたレスポンスが求められるプロンプトに適しています。一方、温度が高いと、より多様で創造的な結果を導くことができます。Temperature 0 は決定的であり、最も高い確率のレススポンスが常に選択されることを意味します。
+3. **`topK`:** `topK` パラメータは、モデルが出力用のトークンを選択する方法を変更します。`topK` が 1 の場合、選択されるトークンは、モデルの語彙内のすべてのトークンで最も確率の高いものであることになります（グリーディ デコードとも呼ばれます）。`topK` が 3 の場合は、最も確率が高い上位 3 つのトークンから次のトークン選択されることになります（温度を使用します）。トークン選択ステップごとに、確率が最も高い `topK` トークンがサンプリングされます。その後、トークンは `topP` に基づいてさらにフィルタリングされ、最終的なトークンは温度サンプリングを用いて選択されます。
+4. **`topP`:** `topP` パラメータは、モデルが出力用のトークンを選択する方法を変更します。トークンは、確率の合計が `topP` 値に等しくなるまで、確率の高いものから低いものへと選択されます。たとえば、トークン A、B、C の確率が 0.3、0.2、0.1 で、`topP` が 0.5 だとします。このとき、モデルは次のトークンとして A か B を Temperature を使って選択し、C は候補から外します。デフォルトの `topP` 値は 0.95 です。
+5. **`stop_sequences`:** 停止シーケンスを設定して、コンテンツの生成を停止するようモデルに指示します。停止シーケンスには任意の文字シーケンスを使用できます。生成されたコンテンツに表示される可能性のある文字シーケンスは使用しないようにしてください。
+
+## プロンプトの反復処理に関する戦略
+
+プロンプト設計では、望ましいレスポンスを一貫して得られるようになるまでにイテレーション（反復）が何度か必要になることがあります。このセクションでは、プロンプトを反復処理する際に試すことができるいくつかのガイダンスについて説明します。
+
+1. **異なるフレーズを使用する:** プロンプトで異なる単語やフレーズを使用すると、すべて同じ意味であっても、多くの場合、モデルの応答は異なります。プロンプトから期待される結果が得られない場合は、言い換えてみてください。
 
    |  |
    | --- |
    | ``` Version 1: How do I bake a pie?  Version 2: Suggest a recipe for a pie.  Version 3: What's a good pie recipe? ``` |
-2. **Beralih ke tugas analog:** Jika Anda tidak dapat membuat model agar mengikuti petunjuk untuk suatu tugas, coba berikan petunjuk untuk tugas analog yang mencapai hasil yang sama.
+2. **同様のタスクに切り替える:** モデルに対してタスクの指示に従わせることができない場合は、同じ結果が得られる同様のタスクの指示を出してみてください。
 
-   Perintah ini memberi tahu model untuk mengategorikan buku dengan menggunakan kategori yang telah ditentukan:
-
-   |  |
-   | --- |
-   | **Perintah:**    ``` Which category does The Odyssey belong to: thriller sci-fi mythology biography ```  **Respons:**    ```     The Odyssey belongs to the category of **mythology**.       Here's why:      * **Mythology:** The Odyssey tells the story of Odysseus, a hero from Greek mythology, and his     journey home after the Trojan War. It features gods, monsters, and supernatural events common to     Greek mythology. ..... ```  (gemini-2.5-flash) |
-
-   Responsnya benar, tetapi modelnya tidak tetap dalam batas opsi. Anda juga ingin membuat model untuk merespons hanya dengan salah satu opsi, bukan
-   menggunakan kalimat lengkap. Dalam hal ini, Anda dapat menulis ulang petunjuk sebagai
-   pertanyaan pilihan ganda dan meminta model untuk memilih opsi.
+   このプロンプトは、事前定義されたカテゴリを使用して書籍を分類するようモデルに指示します。
 
    |  |
    | --- |
-   | **Perintah:**    ``` Multiple choice problem: Which of the following options describes the book The Odyssey? Options: ``` |
+   | **プロンプト:**    ``` Which category does The Odyssey belong to: thriller sci-fi mythology biography ```  **レスポンス:**    ```     The Odyssey belongs to the category of **mythology**.       Here's why:      * **Mythology:** The Odyssey tells the story of Odysseus, a hero from Greek mythology, and his     journey home after the Trojan War. It features gods, monsters, and supernatural events common to     Greek mythology. ..... ```  （gemini-2.5-flash） |
+
+   レスポンスは正解ですが、モデルがオプションの境界内に収まっていません。また、完全な文ではなく、いずれかのオプションのみを使用して応答するようにモデル化する必要があります。この場合は、指示を多肢選択式の質問として言い換えて、モデルにオプションの選択を求めることができます。
+
+   |  |
+   | --- |
+   | **プロンプト:**    ``` Multiple choice problem: Which of the following options describes the book The Odyssey? Options: ``` |
 
    - thriller
    - sci-fi
    - mythology
    - biography
-     **Respons:**
+     **レスポンス:**
 
      ```
      The correct answer is mythology.
      ```
 
-     (gemini-2.5-flash)
-   - **Mengubah urutan konten perintah:** Urutan konten dalam perintah terkadang dapat memengaruhi respons. Coba ubah urutan konten dan lihat pengaruhnya terhadap respons.
+     （gemini-2.5-flash）
+   - **プロンプト コンテンツの順序を変更する:** プロンプト内のコンテンツの順序がレスポンスに影響する場合があります。コンテンツの順序を変更して、レスポンスにどう影響するかを確認してみます。
 
      ```
      Version 1:
@@ -241,60 +222,57 @@ panduan tentang beberapa hal yang dapat Anda coba saat melakukan iterasi pada pe
      [context]
      ```
 
-## Respons penggantian
+## フォールバック レスポンス
 
-Respons penggantian adalah respons yang ditampilkan oleh model saat prompt
-atau respons memicu filter keamanan. Contoh respons penggantian adalah
-"Saya tidak dapat membantu, karena saya hanya model bahasa".
+フォールバック レスポンスは、プロンプトまたはレスポンスのいずれかが安全フィルタをトリガーした場合に、モデルが返すレスポンスです。フォールバック レスポンスの例としては、「私は言語モデルにすぎないため、それについては対応できません」が挙げられます。
 
-Jika model merespons dengan respons penggantian, coba tingkatkan suhu.
+モデルがフォールバック レスポンスを返す場合は、温度を上げてみてください。
 
-## Perujukan dan eksekusi kode
+## グラウンディングとコード実行
 
-Gemini dapat menggunakan alat untuk menghindari halusinasi dalam skenario yang berpotensi menghasilkan respons yang salah.
+Gemini は、ツールを使用して、誤ったレスポンスを生成する可能性のあるシナリオでハルシネーションを回避できます。
 
-[Grounding dengan Google Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id) menghubungkan model Gemini ke konten web real-time, dan harus diaktifkan setiap kali model mungkin perlu mengetahui fakta-fakta yang tidak jelas atau terbaru.
+[Google 検索によるグラウンディング](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)は、
+Gemini モデルをリアルタイムのウェブ コンテンツに接続します。モデルが
+不明な事実や最新の事実を知る必要がある場合は、この機能を有効にする必要があります。
 
-[Alat eksekusi kode](https://ai.google.dev/gemini-api/docs/code-execution?hl=id) Gemini memungkinkan model membuat dan menjalankan kode Python, dan harus diaktifkan setiap kali model perlu melakukan perhitungan, penghitungan, atau kalkulasi apa pun.
+Gemini の [コード実行ツール](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)を使用すると、
+モデルは Python コードを生成して実行できます。モデル
+が算術演算、カウント、計算を行う必要がある場合は、この機能を有効にする必要があります。
 
 ## Gemini 3
 
-[Model Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=id#gemini-3) dirancang untuk penalaran dan pemahaman petunjuk yang canggih.
-Model ini merespons perintah yang langsung, terstruktur dengan baik, dan mendefinisikan tugas serta batasan dengan jelas. Praktik berikut direkomendasikan untuk
-hasil optimal dengan Gemini 3:
+[Gemini 3 モデル](https://ai.google.dev/gemini-api/docs/models?hl=ja#gemini-3)は、高度な
+推論と指示の遵守を目的として設計されています。
+タスクと制約が明確に定義された、直接的で構造化されたプロンプトに最適に応答します。Gemini 3 で最適な結果を得るには、次の方法をおすすめします。
 
-### Prinsip inti perintah
+### プロンプトの基本原則
 
-- **Tulis dengan tepat dan langsung:** Nyatakan tujuan Anda dengan jelas dan ringkas. Hindari
-  bahasa yang tidak perlu atau terlalu persuasif.
-- **Gunakan struktur yang konsisten:** Gunakan pembatas yang jelas untuk memisahkan berbagai bagian perintah Anda. Tag gaya XML (misalnya, `<context>`, `<task>`) atau heading Markdown efektif. Pilih satu format dan gunakan secara konsisten dalam satu perintah.
-- **Tentukan parameter:** Jelaskan secara eksplisit setiap istilah atau parameter yang ambigu.
-- **Mengontrol kejelasan output:** Secara default, model Gemini 3 memberikan jawaban yang langsung dan efisien. Jika Anda memerlukan respons yang lebih bersifat percakapan atau lebih mendetail,
-  Anda harus secara eksplisit memintanya dalam petunjuk Anda.
-- **Tangani input multimodal secara koheren:** Saat menggunakan teks, gambar, audio, atau
-  video, perlakukan input tersebut sebagai input kelas yang sama. Pastikan petunjuk Anda dengan jelas
-  mereferensikan setiap modalitas sesuai kebutuhan.
-- **Prioritaskan petunjuk penting:** Tempatkan batasan perilaku penting, definisi peran (persona), dan persyaratan format output dalam Petunjuk Sistem atau di awal perintah pengguna.
-- **Struktur untuk konteks panjang:** Saat memberikan konteks dalam jumlah besar (misalnya, dokumen, kode), berikan semua konteks terlebih dahulu. Tempatkan petunjuk atau pertanyaan spesifik Anda di *akhir* perintah.
-- **Konteks penanda:** Setelah blok data yang besar, gunakan frasa transisi
-  yang jelas untuk menghubungkan konteks dan kueri Anda, seperti "Berdasarkan
-  informasi di atas..."
+- **正確かつ直接的に記述する:** 目標を明確かつ簡潔に記述します。不要な表現や説得力のある表現は避けてください。
+- **一貫した構造を使用する:** 明確な区切り文字を使用して、プロンプトのさまざまな部分を分離します。XML スタイルのタグ（`<context>`、`<task>` など）や
+  Markdown 見出しが効果的です。1 つの形式を選択し、1 つのプロンプト内で一貫して使用します。
+- **パラメータを定義する:** あいまいな用語やパラメータは明示的に説明します。
+- **出力の冗長性を制御する:** デフォルトでは、Gemini 3 モデルは直接的で効率的な回答を提供します。より会話形式または詳細なレスポンスが必要な場合は、指示で明示的にリクエストする必要があります。
+- **マルチモーダル入力を一貫して処理する:** テキスト、画像、音声、動画を使用する場合は、同じクラスの入力として扱います。必要に応じて、指示で各モダリティを明確に参照してください。
+- **重要な指示を優先する:** 重要な動作制約、ロール定義（ペルソナ）、出力形式の要件は、システム指示またはユーザー プロンプトの冒頭に記述します。
+- **長いコンテキストの構造化:** 大量のコンテキスト（ドキュメント、コードなど）を提供する場合は、最初にすべてのコンテキストを指定します。具体的な指示や質問は、プロンプトの末尾に記述します。
+- **コンテキストを固定する:** 大量のデータブロックの後に、コンテキストとクエリを橋渡しする明確な移行フレーズ（「上記の情報に基づいて...」など）を使用します。
 
-### Strategi Gemini 3 Flash
+### Gemini 3 Flash の戦略
 
-- **Akurasi hari ini:** Tambahkan klausa berikut ke petunjuk sistem untuk membantu model memperhatikan bahwa hari ini berada pada tahun 2026:
+- **現在日の精度:** モデルが 2026 年の現在日に注意を払うように、次の句をシステム指示に追加します。
 
   ```
   For time-sensitive user queries that require up-to-date information, you
   MUST follow the provided current time (date and year) when formulating
   search queries in tool calls. Remember it is 2026 this year.
   ```
-- **Akurasi batas informasi:** Tambahkan klausa berikut ke petunjuk sistem agar model mengetahui batas informasinya:
+- **ナレッジ カットオフの精度:** モデルがナレッジ カットオフを認識するように、次の句をシステム指示に追加します。
 
   ```
   Your knowledge cutoff date is January 2025.
   ```
-- **Performa perujukan:** Tambahkan klausa berikut ke petunjuk sistem (dengan pengeditan jika sesuai) untuk meningkatkan kemampuan model dalam merujuk respons pada konteks yang diberikan:
+- **グラウンディングのパフォーマンス:** 提供されたコンテキストでレスポンスをグラウンディングするモデルの能力を向上させるには、次の句をシステム指示に追加します（必要に応じて編集します）。
 
   ```
   You are a strictly grounded assistant limited to the information provided in
@@ -310,17 +288,18 @@ hasil optimal dengan Gemini 3:
   the context, you must state that the information is not available.
   ```
 
-### Meningkatkan penalaran dan perencanaan
+### 推論と計画の強化
 
-Model seri Gemini 2.5 dan 3 secara otomatis membuat teks "pemikiran" internal untuk meningkatkan performa penalaran. Oleh karena itu, umumnya tidak perlu membuat model menguraikan, merencanakan, atau menjelaskan langkah-langkah penalaran dalam respons yang ditampilkan. Untuk masalah yang memerlukan penalaran berat, permintaan sederhana seperti "Berpikir keras sebelum menjawab" dapat meningkatkan performa, meskipun dengan biaya token pemikiran tambahan.
+Gemini 2.5 シリーズと 3 シリーズのモデルは、推論のパフォーマンスを向上させるために、内部の「思考」テキストを自動的に生成します。そのため、返されたレスポンス自体でモデルがアウトライン、計画、推論ステップの詳細を示す必要はありません。高度な推論が必要な問題については、「回答する前に慎重に検討してください」などの簡単なリクエストでパフォーマンスを向上させることができますが、思考トークンが追加されます。
 
-Lihat dokumentasi [Proses berpikir Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=id) untuk mengetahui detail selengkapnya.
+詳細については、[Gemini の思考](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)に関するドキュメントをさらに
+ご覧ください。
 
-### Contoh perintah terstruktur
+### 構造化されたプロンプトの例
 
-Penggunaan tag atau Markdown membantu model membedakan antara petunjuk, konteks, dan tugas.
+タグまたは Markdown を使用すると、モデルは指示、コンテキスト、タスクを区別できます。
 
-**Contoh XML:**
+**XML の例:**
 
 ```
 <role>
@@ -341,7 +320,7 @@ You are a helpful assistant.
 </task>
 ```
 
-**Contoh Markdown:**
+**Markdown 記法の例:**
 
 ```
 # Identity
@@ -355,12 +334,11 @@ You are a senior solution architect.
 Return a single code block.
 ```
 
-### Contoh template yang menggabungkan praktik terbaik
+### ベスト プラクティスを組み合わせたテンプレートの例
 
-Template ini mencakup prinsip inti untuk memberikan perintah dengan Gemini 3. Selalu
-pastikan untuk melakukan iterasi dan modifikasi untuk kasus penggunaan spesifik Anda.
+このテンプレートは、Gemini 3 でプロンプトを使用するための基本原則を捉えています。特定のユースケースに合わせて、必ず反復処理と変更を行ってください。
 
-**Petunjuk Sistem:**
+**システム指示:**
 
 ```
 <role>
@@ -387,7 +365,7 @@ Structure your response as follows:
 </output_format>
 ```
 
-**Perintah Pengguna:**
+**ユーザー プロンプト:**
 
 ```
 <context>
@@ -403,41 +381,41 @@ Remember to think step-by-step before answering.
 </final_instruction>
 ```
 
-## Alur kerja agentic
+## エージェント ワークフロー
 
-Untuk alur kerja agentik yang mendalam, sering kali diperlukan petunjuk khusus untuk mengontrol cara model bernalar, merencanakan, dan menjalankan tugas. Meskipun Gemini memberikan performa umum yang kuat, agen yang kompleks sering kali mengharuskan Anda mengonfigurasi pertimbangan antara biaya komputasi (latensi dan token) dan akurasi tugas.
+高度なエージェント ワークフローでは、モデルがタスクを推論、計画、実行する方法を制御するために、具体的な指示が必要になることがよくあります。Gemini は一般的なパフォーマンスに優れていますが、複雑なエージェントでは、多くの場合、計算コスト（レイテンシとトークン）とタスクの精度とのトレードオフを構成する必要があります。
 
-Saat mendesain perintah untuk agen, pertimbangkan dimensi perilaku berikut yang dapat Anda arahkan di agen:
+エージェントのプロンプトを設計する際は、エージェントで制御できる次の動作の側面を考慮してください。
 
-### Penalaran dan strategi
+### 推論と戦略
 
-Konfigurasi cara model berpikir dan merencanakan sebelum mengambil tindakan.
+行動を起こす前にモデルが思考し、計画を立てる方法の構成。
 
-- **Dekomposisi logis:** Menentukan seberapa menyeluruh model harus menganalisis batasan, prasyarat, dan urutan operasi.
-- **Diagnosis masalah**: Mengontrol kedalaman analisis saat mengidentifikasi penyebab dan penggunaan penalaran abduktif model. Menentukan apakah model harus menerima jawaban yang paling jelas atau menjelajahi penjelasan yang kompleks dan kurang mungkin.
-- **Kelengkapan informasi:** Kompromi antara menganalisis setiap kebijakan dan dokumen yang tersedia versus memprioritaskan efisiensi dan kecepatan.
+- **論理分解:** モデルが制約、前提条件、オペレーションの順序をどの程度徹底的に分析する必要があるかを定義します。
+- **問題の診断**: 原因を特定する際の分析の深さと、モデルの仮説的推論の使用を制御します。モデルが最も明白な回答を受け入れるか、複雑で可能性の低い説明を探索するかを決定します。
+- **情報の網羅性:** 利用可能なすべてのポリシーとドキュメントを分析することと、効率と速度を優先することのトレードオフ。
 
-### Eksekusi dan keandalan
+### 実行と信頼性
 
-Konfigurasi cara agen beroperasi secara mandiri dan menangani hambatan.
+エージェントが自律的に動作し、障害を処理する方法の構成。
 
-- **Kemampuan beradaptasi:** Cara model bereaksi terhadap data baru. Menentukan apakah harus mematuhi rencana awalnya secara ketat atau langsung mengubah rencana saat pengamatan bertentangan dengan asumsi.
-- **Persistensi dan Pemulihan:** Tingkat upaya model untuk mengoreksi sendiri kesalahan. Persistensi tinggi meningkatkan tingkat keberhasilan, tetapi berisiko menimbulkan biaya token atau loop yang lebih tinggi.
-- **Penilaian Risiko:** Logika untuk mengevaluasi konsekuensi. Secara eksplisit membedakan antara tindakan eksplorasi berisiko rendah (baca) dan perubahan status berisiko tinggi (tulis).
+- **適応性:** モデルが新しいデータにどのように反応するか。最初の計画を厳守するか、観測結果が仮定と矛盾する場合はすぐにピボットするかを決定します。
+- **永続性と復旧:** モデルがエラーを自己修正しようとする度合い。永続性が高いほど成功率は向上しますが、トークン費用やループが増加するリスクがあります。
+- **リスク評価:** 結果を評価するロジック。低リスクの探索的アクション（読み取り）と高リスクの状態変更（書き込み）を明示的に区別します。
 
-### Interaksi dan output
+### インタラクションと出力
 
-Konfigurasi cara agen berkomunikasi dengan pengguna dan memformat hasil.
+エージェントがユーザーと通信し、結果の形式を設定する方法の構成。
 
-- **Ambiguitas dan penanganan izin:** Menentukan kapan model diizinkan untuk membuat asumsi dan kapan model harus menjeda eksekusi untuk meminta klarifikasi atau izin kepada pengguna.
-- **Panjang Teks:** Mengontrol volume teks yang dihasilkan bersamaan dengan panggilan alat. Hal ini menentukan apakah model menjelaskan tindakannya kepada pengguna atau tetap diam selama eksekusi.
-- **Presisi dan kelengkapan:** Tingkat kecermatan output yang diperlukan. Menentukan apakah model harus menyelesaikan setiap kasus ekstrem dan memberikan angka yang tepat atau apakah perkiraan kasar dapat diterima.
+- **あいまいさと権限の処理:** モデルが仮定を行うことが許可される場合と、実行を一時停止してユーザーに明確化または権限を求める必要がある場合を定義します。
+- **冗長性:** ツール呼び出しとともに生成されるテキストの量を制御します。これにより、モデルがユーザーにアクションを説明するか、実行中に無音のままにするかが決まります。
+- **精度と完全性:** 出力の必要な忠実度。モデルがすべてのエッジケースを解決して正確な数値を提示する必要があるか、概算で許容されるかを指定します。
 
-### Template petunjuk sistem
+### システム指示テンプレート
 
-Petunjuk sistem berikut adalah contoh yang telah dievaluasi oleh peneliti untuk meningkatkan performa pada tolok ukur agentik di mana model harus mematuhi buku peraturan yang kompleks dan berinteraksi dengan pengguna. Hal ini mendorong agen untuk bertindak sebagai pemberi alasan dan perencana yang kuat, menerapkan perilaku tertentu di seluruh dimensi yang tercantum di atas, dan mewajibkan model untuk merencanakan secara proaktif sebelum mengambil tindakan apa pun.
+次のシステム指示は、モデルが複雑なルールブックを遵守し、ユーザーとやり取りする必要があるエージェント ベンチマークのパフォーマンスを向上させるために研究者によって評価された例です。エージェントが強力な推論者およびプランナーとして行動することを推奨し、上記のディメンション全体で特定の動作を強制し、モデルが行動を起こす前に積極的に計画を立てることを要求します。
 
-Anda dapat menyesuaikan template ini agar sesuai dengan batasan kasus penggunaan spesifik Anda.
+このテンプレートは、特定のユースケースの制約に合わせて調整できます。
 
 ```
 You are a very strong reasoner and planner. Use these critical instructions to structure your plans, thoughts, and responses.
@@ -485,20 +463,22 @@ Before taking any action (either tool calls *or* responses to the user), you mus
 9) Inhibit your response: only take an action after all the above reasoning is completed. Once you've taken an action, you cannot take it back.
 ```
 
-## Langkah berikutnya
+## 次のステップ
 
-- Setelah Anda memahami desain perintah dengan lebih baik, coba tulis perintah Anda sendiri menggunakan [Google AI Studio](http://aistudio.google.com?hl=id).
-- Untuk mempelajari multimodal prompting, lihat
-  [Membuat perintah dengan file media](https://ai.google.dev/gemini-api/docs/files?hl=id#prompt-guide).
-- Untuk mempelajari perintah gambar, lihat panduan perintah [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=id#prompt-guide) dan [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=id#imagen-prompt-guide).
-- Untuk mempelajari perintah video, lihat [panduan perintah Veo](https://ai.google.dev/gemini-api/docs/video?hl=id#prompt-guide).
+- プロンプト設計について理解を深めたので、
+  独自のプロンプトを[Google AI Studio](http://aistudio.google.com?hl=ja)を使用して作成してみてください。
+- マルチモーダル プロンプトの詳細については、
+  [メディア ファイルを使用したプロンプト](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide)をご覧ください。
+- 画像プロンプトの詳細については、[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja#prompt-guide)
+  と [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=ja#imagen-prompt-guide) のプロンプト ガイドをご覧ください。
+- 動画プロンプトの詳細については、[Veo プロンプト ガイド](https://ai.google.dev/gemini-api/docs/video?hl=ja#prompt-guide)をご覧ください。
 
-Kirim masukan
+フィードバックを送信
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Terakhir diperbarui pada 2026-06-10 UTC.
+最終更新日 2026-06-10 UTC。
 
-Ada masukan untuk kami?
+ご意見をお聞かせください
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-10 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-10 UTC。"],[],[]]

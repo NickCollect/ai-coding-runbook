@@ -1,66 +1,66 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/get-started?hl=fr
-fetched_at: 2026-08-17T02:19:27.551116+00:00
-title: "Premiers pas \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/get-started?hl=vi
+fetched_at: 2026-08-24T02:32:45.564112+00:00
+title: "B\u1eaft \u0111\u1ea7u \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Envoyer des commentaires
+Gửi ý kiến phản hồi
 
-# Premiers pas
+# Bắt đầu
 
-Ce guide vous aide à faire vos premiers pas avec l'API Gemini à l'aide de l'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr). Vous effectuerez votre premier appel d'API en moins d'une minute et explorerez la génération de texte, la compréhension multimodale, la génération d'images, la sortie structurée, les outils, l'appel de fonction, les agents et l'exécution en arrière-plan.
+Hướng dẫn này giúp bạn bắt đầu sử dụng Gemini API bằng [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi). Bạn sẽ thực hiện lệnh gọi API đầu tiên trong vòng chưa đầy một phút và khám phá tính năng tạo văn bản, khả năng hiểu đa phương thức, tạo hình ảnh, đầu ra có cấu trúc, công cụ, gọi hàm, tác nhân và thực thi ở chế độ nền.
 
-L'API Interactions est disponible via les SDK [Python](https://github.com/googleapis/python-genai) et [JavaScript](https://github.com/googleapis/js-genai), ainsi que via REST.
+Bạn có thể sử dụng Interactions API thông qua SDK [Python](https://github.com/googleapis/python-genai) và [JavaScript](https://github.com/googleapis/js-genai), cũng như thông qua REST.
 
-## 1. Obtenir une clé API
+## 1. Lấy khoá API
 
-Pour utiliser l'API Gemini, vous devez disposer d'une clé API afin d'authentifier vos requêtes, d'appliquer des limites de sécurité et de suivre l'utilisation de votre compte.
+Để sử dụng Gemini API, bạn cần có một khoá API để xác thực các yêu cầu, thực thi giới hạn bảo mật và theo dõi mức sử dụng cho tài khoản của bạn.
 
-- Google AI Studio crée automatiquement un projet et une clé API pour les nouveaux utilisateurs.
-  Vous pouvez la copier depuis la page [Clés API](https://aistudio.google.com/api-keys?hl=fr).
-- Si vous avez besoin d'une nouvelle clé, cliquez sur **Créer une clé API** dans AI Studio et suivez la boîte de dialogue pour ajouter une nouvelle paire clé/projet.
+- Google AI Studio sẽ tự động tạo một dự án và khoá API cho người dùng mới.
+  Bạn có thể sao chép khoá này từ [trang khoá API](https://aistudio.google.com/api-keys?hl=vi).
+- Nếu bạn cần một khoá mới, hãy nhấp vào **Tạo khoá API** trong AI Studio rồi làm theo hộp thoại để thêm một cặp khoá-dự án mới.
 
-[Créer une clé API Gemini](https://aistudio.google.com/apikey?hl=fr)
+[Tạo khoá Gemini API](https://aistudio.google.com/apikey?hl=vi)
 
-Définissez votre clé en tant que variable d'environnement :
+Đặt khoá của bạn làm biến môi trường:
 
 ```
 export GEMINI_API_KEY="YOUR_API_KEY"
 ```
 
-### Passer au niveau payant
+### Nâng cấp lên gói trả phí
 
-Pour passer au niveau payant, vous devez configurer Cloud Billing. Vous pourrez ainsi augmenter vos limites de débit.
+Việc nâng cấp lên gói trả phí sẽ giúp bạn tăng hạn mức sử dụng và yêu cầu bạn thiết lập dịch vụ Thanh toán trên đám mây.
 
-- Cliquez sur **Configurer la facturation** sur les pages [Clés API](https://aistudio.google.com/api-keys?hl=fr) ou [Projets](https://aistudio.google.com/projects?hl=fr) d'AI Studio.
-- Suivez les instructions de la boîte de dialogue Cloud Billing pour créer ou associer un compte de facturation, ajouter un mode de paiement et prépayer un minimum de 10 $ (ou l'équivalent dans votre devise) en crédits payants.
-- Consultez votre utilisation de l'API dans [Google AI Studio](https://aistudio.google.com/usage?hl=fr) sous **Tableau de bord** > **Utilisation**.
+- Nhấp vào **Thiết lập thông tin thanh toán** trên trang [Khoá API](https://aistudio.google.com/api-keys?hl=vi) hoặc [Dự án](https://aistudio.google.com/projects?hl=vi) của AI Studio.
+- Làm theo hộp thoại Thanh toán trên Cloud để tạo hoặc liên kết một tài khoản thanh toán, thêm một phương thức thanh toán và trả trước tối thiểu 10 USD (hoặc số tiền tương đương bằng đơn vị tiền tệ khác) dưới dạng tín dụng có tính phí.
+- Xem mức sử dụng API trong [Google AI Studio](https://aistudio.google.com/usage?hl=vi) trong mục **Trang tổng quan** > **Mức sử dụng**.
 
-Pour en savoir plus, consultez la [page "Facturation"](https://ai.google.dev/gemini-api/docs/billing?hl=fr).
+Hãy xem [trang Thanh toán](https://ai.google.dev/gemini-api/docs/billing?hl=vi) để biết thêm thông tin.
 
-## 2. Installer le SDK et effectuer votre premier appel
+## 2. Cài đặt SDK và thực hiện cuộc gọi đầu tiên
 
-Installez le SDK et générez du texte en un seul appel d'API.
+Cài đặt SDK và tạo văn bản bằng một lệnh gọi API duy nhất.
 
 ### Python
 
-Installez le SDK :
+Cài đặt SDK:
 
 ```
 pip install -U google-genai
 ```
 
-Initialisez le client et envoyez une requête :
+Khởi động ứng dụng và đưa ra yêu cầu:
 
 ```
 from google import genai
@@ -76,13 +76,13 @@ print(interaction.output_text)
 
 ### JavaScript
 
-Installez le SDK :
+Cài đặt SDK:
 
 ```
 npm install @google/genai
 ```
 
-Initialisez le client et envoyez une requête :
+Khởi động ứng dụng và đưa ra yêu cầu:
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -108,7 +108,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**Réponse :**
+**Câu trả lời:**
 
 ```
 {
@@ -140,13 +140,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-Lorsque vous utilisez REST, l'API renvoie la ressource `Interaction` complète contenant les métadonnées, les statistiques d'utilisation et l'historique détaillé du tour.
+Khi sử dụng REST, API sẽ trả về tài nguyên `Interaction` đầy đủ chứa siêu dữ liệu, số liệu thống kê về mức sử dụng và nhật ký từng bước của lượt tương tác.
 
-Bien que les SDK exposent la réponse complète, ils fournissent également des propriétés pratiques telles que `interaction.output_text` et `interaction.output_image` pour accéder directement aux résultats finaux. Pour en savoir plus sur la structure des réponses, consultez la [présentation des interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) ou le [guide de génération de texte](https://ai.google.dev/gemini-api/docs/text-generation?hl=fr) pour en savoir plus sur les instructions système et la configuration de la génération.
+Mặc dù các SDK này hiển thị toàn bộ phản hồi, nhưng chúng cũng cung cấp các thuộc tính tiện lợi như `interaction.output_text` và `interaction.output_image` để truy cập trực tiếp vào đầu ra cuối cùng. Tìm hiểu thêm về cấu trúc phản hồi trong phần [Tổng quan về các lượt tương tác](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hoặc đọc [hướng dẫn tạo văn bản](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi) để biết thông tin chi tiết về hướng dẫn hệ thống và cấu hình tạo.
 
-## 3. Diffuser la réponse
+## 3. Hiện câu trả lời theo thời gian thực
 
-Pour des interactions plus fluides, diffusez la réponse au fur et à mesure de sa génération. Chaque événement `step.delta` fournit un bloc de texte que vous pouvez afficher immédiatement.
+Để có các lượt tương tác mượt mà hơn, hãy truyền trực tuyến câu trả lời khi câu trả lời được tạo. Mỗi sự kiện `step.delta` sẽ gửi một đoạn văn bản mà bạn có thể hiển thị ngay lập tức.
 
 ### Python
 
@@ -196,9 +196,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-Lors de la diffusion en flux continu, le serveur répond par un flux d'événements envoyés par le serveur (SSE). Chaque événement inclut un type et des données JSON.
+Khi phát trực tuyến, máy chủ sẽ phản hồi bằng một luồng sự kiện do máy chủ gửi (SSE). Mỗi sự kiện đều có một loại và dữ liệu JSON.
 
-**Réponse :**
+**Câu trả lời:**
 
 ```
 event: interaction.created
@@ -229,18 +229,18 @@ event: interaction.completed
 data: {"interaction":{"id":"v1_Chd...","status":"completed","usage":{"total_tokens":197}},"event_type":"interaction.completed"}
 ```
 
-Pour en savoir plus sur la gestion des événements de streaming et des types de delta, consultez le [guide des interactions de streaming](https://ai.google.dev/gemini-api/docs/streaming?hl=fr).
+Để xem chi tiết về cách xử lý các sự kiện truyền phát trực tiếp và các loại delta, hãy xem [hướng dẫn về các tương tác truyền phát trực tiếp](https://ai.google.dev/gemini-api/docs/streaming?hl=vi).
 
-## 4. Conversations multitours
+## 4. Cuộc trò chuyện nhiều lượt
 
-L'API Interactions prend en charge les conversations multitours de deux manières :
+Interactions API hỗ trợ các cuộc trò chuyện nhiều lượt với 2 phương pháp:
 
-- **Avec état (recommandé)** : poursuivez une conversation sur le serveur à l'aide de `previous_interaction_id`. Idéal pour la plupart des workflows de chat et agentiques où vous souhaitez que le serveur gère l'historique et optimise la mise en cache.
-- **Sans état** : gérez l'historique des conversations sur le client en transmettant tous les tours précédents (y compris les étapes de réflexion et d'outil intermédiaires du modèle) dans chaque requête.
+- **Có trạng thái (nên dùng)**: Tiếp tục cuộc trò chuyện trên máy chủ bằng cách sử dụng `previous_interaction_id`. Lý tưởng cho hầu hết các quy trình trò chuyện và quy trình dựa trên tác nhân mà bạn muốn máy chủ quản lý nhật ký và tối ưu hoá việc lưu vào bộ nhớ đệm.
+- **Không trạng thái**: Quản lý nhật ký cuộc trò chuyện trên ứng dụng bằng cách truyền tất cả các lượt trước đó (bao gồm cả suy nghĩ và các bước sử dụng công cụ của mô hình trung gian) trong mỗi yêu cầu.
 
-### Avec état (recommandé)
+### Có trạng thái (nên dùng)
 
-Enchaînez les interactions en transmettant `previous_interaction_id`. Le serveur gère l'intégralité de l'historique des conversations pour vous.
+Tạo chuỗi tương tác bằng cách truyền `previous_interaction_id`. Máy chủ sẽ quản lý toàn bộ nhật ký trò chuyện cho bạn.
 
 ### Python
 
@@ -310,9 +310,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Sans état
+### Không có trạng thái
 
-Définissez `store=false` et gérez l'historique des conversations côté client. Vous devez conserver et renvoyer toutes les étapes générées par le modèle (y compris les étapes `thought` et `function_call`) exactement telles que vous les avez reçues.
+Đặt `store=false` và quản lý nhật ký cuộc trò chuyện ở phía máy khách. Bạn phải giữ nguyên và gửi lại tất cả các bước do mô hình tạo (bao gồm cả các bước `thought` và `function_call`) đúng như những gì bạn nhận được.
 
 ### Python
 
@@ -424,7 +424,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-**Réponse :**
+**Câu trả lời:**
 
 ```
 {
@@ -451,11 +451,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-La deuxième interaction renvoie un objet de réponse complet qui n'inclut que les nouvelles étapes, mais qui est ancré dans le contexte du tour précédent. Pour en savoir plus sur la gestion de l'état dans le [guide sur les conversations multitours](https://ai.google.dev/gemini-api/docs/text-generation?hl=fr#multi-turn-conversations), ou découvrez le [mode sans état](https://ai.google.dev/gemini-api/docs/text-generation?hl=fr#stateless-conversations) pour la gestion de l'historique côté client.
+Lần tương tác thứ hai sẽ trả về một đối tượng phản hồi hoàn chỉnh chỉ bao gồm các bước mới, nhưng dựa trên ngữ cảnh của lượt tương tác trước đó. Tìm hiểu thêm về cách duy trì trạng thái trong [hướng dẫn về cuộc trò chuyện nhiều lượt](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi#multi-turn-conversations) hoặc khám phá [chế độ không trạng thái](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi#stateless-conversations) để quản lý nhật ký phía máy khách.
 
-## 5. Compréhension multimodale
+## 5. Khả năng hiểu đa phương thức
 
-Les modèles Gemini comprennent les images, les contenus audio et vidéo, et les documents de manière native. Transmettez des contenus multimédias en même temps que du texte dans une seule requête.
+Các mô hình Gemini có thể hiểu được hình ảnh, âm thanh, video và tài liệu một cách tự nhiên. Truyền nội dung nghe nhìn cùng với văn bản trong một yêu cầu duy nhất.
 
 ### Python
 
@@ -547,7 +547,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions"   -
   }'
 ```
 
-**Réponse :**
+**Câu trả lời:**
 
 ```
 {
@@ -572,27 +572,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions"   -
 }
 ```
 
-Découvrez comment transmettre des images, des vidéos et des fichiers audio dans le [guide de compréhension d'images](https://ai.google.dev/gemini-api/docs/image-understanding?hl=fr).
+Khám phá cách truyền tệp hình ảnh, video và âm thanh trong [hướng dẫn về việc hiểu hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi).
 
 [hearing
 
-Compréhension audio
+Hiểu được âm thanh
 
-Transcrivez des fichiers audio, résumez-les ou posez des questions à leur sujet.](https://ai.google.dev/gemini-api/docs/audio?hl=fr)
+Chép lời, tóm tắt hoặc trả lời câu hỏi về tệp âm thanh.](https://ai.google.dev/gemini-api/docs/audio?hl=vi)
 [videocam
 
-Compréhension des vidéos
+Hiểu video
 
-Analyser le contenu vidéo, localiser des événements et décrire des actions.](https://ai.google.dev/gemini-api/docs/video-understanding?hl=fr)
+Phân tích nội dung video, xác định vị trí của các sự kiện và mô tả các hành động.](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi)
 [description
 
-Traitement de documents
+Xử lý tài liệu
 
-Extrayez des informations à partir de fichiers PDF et d'autres formats de documents.](https://ai.google.dev/gemini-api/docs/document-processing?hl=fr)
+Trích xuất thông tin từ tệp PDF và các định dạng tài liệu khác.](https://ai.google.dev/gemini-api/docs/document-processing?hl=vi)
 
-## 6. Génération multimodale
+## 6. Tạo nội dung đa phương thức
 
-Gemini peut générer des images de manière native à l'aide des modèles d'image [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=fr).
+Gemini có thể tạo hình ảnh một cách tự nhiên bằng cách sử dụng mô hình tạo ảnh [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi).
 
 ### Python
 
@@ -645,7 +645,7 @@ curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
   }'
 ```
 
-**Réponse :**
+**Câu trả lời:**
 
 ```
 {
@@ -668,22 +668,22 @@ curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
 }
 ```
 
-Lorsque le modèle génère une image, il renvoie les données d'image encodées en base64 dans une étape du tableau `steps`, ainsi que via la propriété pratique `output_image`. Consultez le [guide de génération d'images](https://ai.google.dev/gemini-api/docs/image-generation?hl=fr) pour en savoir plus sur les formats, la retouche d'images et les références.
+Khi tạo một hình ảnh, mô hình sẽ trả về dữ liệu hình ảnh được mã hoá bằng base64 trong một bước trong mảng `steps`, cũng như thông qua thuộc tính tiện lợi `output_image`. Hãy xem [hướng dẫn tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi) để tìm hiểu về tỷ lệ khung hình, cách chỉnh sửa hình ảnh và nguồn tham khảo.
 
 [record\_voice\_over
 
-Génération de voix
+Tạo lời nói
 
-Générez des voix expressives et multilocuteurs avec Gemini 3.1 Flash TTS.](https://ai.google.dev/gemini-api/docs/speech-generation?hl=fr)
+Tạo lời nói biểu cảm của nhiều người nói bằng công nghệ chuyển văn bản sang lời nói Gemini 3.1 Flash.](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi)
 [music\_note
 
-Génération de musique
+Tạo nhạc
 
-Créez des extraits et des chansons complètes avec Lyria 3.](https://ai.google.dev/gemini-api/docs/music-generation?hl=fr)
+Tạo đoạn video và bài hát có thời lượng đầy đủ bằng Lyria 3.](https://ai.google.dev/gemini-api/docs/music-generation?hl=vi)
 
-## 7. Utiliser une sortie structurée
+## 7. Sử dụng đầu ra có cấu trúc
 
-Configurez le modèle pour qu'il renvoie un fichier JSON correspondant à un schéma que vous définissez. La sortie structurée fonctionne avec [Pydantic](https://docs.pydantic.dev/latest/) (Python) et [Zod](https://zod.dev/) (JavaScript).
+Định cấu hình mô hình để trả về JSON phù hợp với giản đồ mà bạn xác định. Đầu ra có cấu trúc hoạt động với [Pydantic](https://docs.pydantic.dev/latest/) (Python) và [Zod](https://zod.dev/) (JavaScript).
 
 ### Python
 
@@ -786,7 +786,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**Réponse :**
+**Câu trả lời:**
 
 ```
 {
@@ -808,11 +808,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-Le bloc de texte de sortie contient une chaîne JSON valide qui correspond exactement au schéma demandé. Pour savoir comment définir des structures plus complexes et des schémas récursifs, consultez le [guide sur les sorties structurées](https://ai.google.dev/gemini-api/docs/structured-output?hl=fr).
+Khối văn bản đầu ra chứa một chuỗi JSON hợp lệ tuân thủ chính xác giản đồ được yêu cầu. Để tìm hiểu cách xác định các cấu trúc phức tạp hơn và lược đồ đệ quy, hãy xem [hướng dẫn về đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi).
 
-## 8. Utiliser des outils
+## 8. Sử dụng công cụ
 
-Ancrez la réponse du modèle dans des informations en temps réel avec la recherche Google. L'API recherche et traite automatiquement les résultats, puis renvoie les citations.
+Dựa vào thông tin theo thời gian thực trên Google Tìm kiếm để đưa ra câu trả lời cho mô hình. API này tự động tìm kiếm, xử lý kết quả và trả về trích dẫn.
 
 ### Python
 
@@ -885,7 +885,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**Réponse :**
+**Câu trả lời:**
 
 ```
 {
@@ -935,41 +935,41 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-Les étapes de recherche sont détaillées dans l'historique des interactions, et le résultat final inclut des citations intégrées pointant vers des sources Web.
+Các bước tìm kiếm được trình bày chi tiết trong nhật ký tương tác và kết quả cuối cùng bao gồm các trích dẫn nội dòng trỏ đến các nguồn trên web.
 
-Pour savoir comment extraire des citations de recherche, consultez le [guide sur l'ancrage avec la recherche Google](https://ai.google.dev/gemini-api/docs/google-search?hl=fr). Pour découvrir comment combiner plusieurs outils, consultez le [guide sur la combinaison d'outils](https://ai.google.dev/gemini-api/docs/tool-combination?hl=fr).
+Bạn có thể tìm hiểu cách trích xuất thông tin trích dẫn từ kết quả tìm kiếm trong [hướng dẫn về cơ sở dữ liệu của Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi) hoặc xem cách kết hợp nhiều công cụ trong [hướng dẫn kết hợp công cụ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi).
 
 [code
 
-Exécution de code
+Thực thi mã
 
-Exécutez du code Python dans un environnement Borg sécurisé en mode bac à sable.](https://ai.google.dev/gemini-api/docs/code-execution?hl=fr)
+Chạy mã Python trong môi trường Borg hộp cát bảo mật.](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi)
 [link
 
-Contexte de l'URL
+Bối cảnh URL
 
-Transmettez des URL Web publiques directement pour ancrer les réponses dans le contenu des pages Web.](https://ai.google.dev/gemini-api/docs/url-context?hl=fr)
+Truyền trực tiếp các URL trang web công khai để đưa ra câu trả lời dựa trên nội dung trang web.](https://ai.google.dev/gemini-api/docs/url-context?hl=vi)
 [search
 
-Recherche de fichiers
+Tìm kiếm tệp
 
-Indexez et recherchez les documents et fichiers multimédias importés.](https://ai.google.dev/gemini-api/docs/file-search?hl=fr)
+Lập chỉ mục và tìm kiếm trong các tài liệu và tệp đa phương tiện đã tải lên.](https://ai.google.dev/gemini-api/docs/file-search?hl=vi)
 [map
 
-Google Maps
+Google Maps
 
-ancrer les réponses dans des données géospatiales et de localisation réelles ;](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fr)
+Đưa ra câu trả lời dựa trên dữ liệu vị trí và không gian địa lý trong thế giới thực.](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi)
 [computer
 
-Utilisation d'un ordinateur
+Sử dụng máy tính
 
-Automatisation du navigateur et interaction avec l'écran.](https://ai.google.dev/gemini-api/docs/computer-use?hl=fr)
+Tự động hoá trình duyệt và tương tác trên màn hình.](https://ai.google.dev/gemini-api/docs/computer-use?hl=vi)
 
-## 9. Appeler vos propres fonctions
+## 9. Gọi hàm riêng của bạn
 
-L'appel de fonction vous permet de connecter le modèle à votre code. Vous déclarez le nom et les paramètres d'une fonction, le modèle décide quand l'appeler et renvoie des arguments structurés, et vous l'exécutez localement et renvoyez le résultat.
+Tính năng gọi hàm cho phép bạn kết nối mô hình với mã của mình. Bạn khai báo tên và các tham số của hàm, mô hình sẽ quyết định thời điểm gọi hàm và trả về các đối số có cấu trúc, đồng thời bạn sẽ thực thi hàm cục bộ và gửi kết quả trở lại.
 
-### Avec état (recommandé)
+### Có trạng thái (nên dùng)
 
 ### Python
 
@@ -1154,13 +1154,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Sans état
+### Không có trạng thái
 
-Vous pouvez également utiliser les appels de fonction en mode sans état en gérant l'historique des conversations côté client et en définissant `store=false`. En mode sans état, vous devez transmettre l'intégralité de l'historique de la conversation dans le champ `input` de chaque requête suivante. Cet historique doit inclure les éléments suivants :
+Bạn cũng có thể sử dụng tính năng gọi hàm ở chế độ không trạng thái bằng cách quản lý nhật ký trò chuyện ở phía máy khách và đặt `store=false`. Ở chế độ không trạng thái, bạn phải truyền toàn bộ nhật ký cuộc trò chuyện trong trường `input` của mỗi yêu cầu tiếp theo. Nhật ký này phải bao gồm:
 
-1. Étape `user_input` initiale.
-2. Toutes les étapes générées par le modèle renvoyées au tour 1 (y compris les étapes `thought` et `function_call`) exactement telles qu'elles ont été reçues.
-3. Étape `function_result` contenant le résultat de votre fonction exécutée.
+1. Bước `user_input` ban đầu.
+2. Tất cả các bước do mô hình tạo được trả về trong Lượt 1 (bao gồm cả các bước `thought` và `function_call`) chính xác như đã nhận.
+3. Bước `function_result` chứa kết quả của hàm mà bạn đã thực thi.
 
 ### Python
 
@@ -1368,9 +1368,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-**Réponse :**
+**Câu trả lời:**
 
-Au cours du tour 1, le modèle renvoie une réponse avec l'état `requires_action` et l'étape `function_call` :
+Trong Lượt 1, mô hình sẽ trả về một phản hồi có trạng thái `requires_action` và bước `function_call`:
 
 ```
 {
@@ -1391,7 +1391,7 @@ Au cours du tour 1, le modèle renvoie une réponse avec l'état `requires_acti
 }
 ```
 
-Une fois que vous avez exécuté la fonction en local et envoyé le résultat (tour 2), l'interaction finale terminée est renvoyée :
+Sau khi bạn chạy hàm cục bộ và gửi kết quả (Lượt 2), lượt tương tác hoàn tất cuối cùng sẽ trả về:
 
 ```
 {
@@ -1421,11 +1421,11 @@ Une fois que vous avez exécuté la fonction en local et envoyé le résultat (t
 }
 ```
 
-Pour en savoir plus sur les fonctionnalités avancées telles que l'appel de fonction parallèle ou les modes de sélection de fonction, consultez le [guide sur l'appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr).
+Để biết các tính năng nâng cao như gọi hàm song song hoặc chế độ chọn hàm, hãy xem [hướng dẫn gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi).
 
-## 10. Exécuter un agent géré
+## 10. Chạy tác nhân được quản lý
 
-Les agents gérés s'exécutent dans un bac à sable distant et ont accès à des outils tels que l'exécution de code et la gestion de fichiers. Transmettez un `agent` au lieu d'un `model` et définissez `environment="remote"`.
+Các tác nhân được quản lý chạy trong một hộp cát từ xa và có quyền truy cập vào các công cụ như thực thi mã và quản lý tệp. Truyền `agent` thay vì `model` và đặt `environment="remote"`.
 
 ### Python
 
@@ -1472,27 +1472,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Vous pouvez également définir et enregistrer des [agents personnalisés](https://ai.google.dev/gemini-api/docs/custom-agents?hl=fr) avec vos propres instructions, compétences et sources de données.
+Bạn cũng có thể xác định và lưu [các trợ lý tuỳ chỉnh](https://ai.google.dev/gemini-api/docs/custom-agents?hl=vi) bằng chỉ dẫn, kỹ năng và nguồn dữ liệu của riêng mình.
 
 [rocket\_launch
 
-Guide de démarrage rapide
+Bắt đầu nhanh
 
-Passez votre premier appel d'agent, diffusez des réponses et créez un agent personnalisé.](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=fr)
+Thực hiện cuộc gọi đầu tiên cho tác nhân, truyền trực tuyến các câu trả lời và tạo tác nhân tuỳ chỉnh.](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=vi)
 [smart\_toy
 
-Agent Antigravity
+Tác nhân Antigravity
 
-Fonctionnalités, outils, saisie multimodale et tarifs de l'agent par défaut.](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr)
+Các chức năng, công cụ, chế độ nhập đa phương thức và giá của tác nhân mặc định.](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=vi)
 [experiment
 
-Agents dans AI Studio
+Tác nhân trong AI Studio
 
-Terrain de jeu visuel pour prototyper des agents sans écrire de code.](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=fr)
+Sân chơi trực quan để tạo mẫu tác nhân mà không cần viết mã.](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=vi)
 
-## 11. Exécuter des tâches en arrière-plan
+## 11. Chạy các tác vụ ở chế độ nền
 
-Définissez `background=True` pour exécuter les tâches longues de manière asynchrone. Interrogez les résultats avec `interactions.get()`. Pour en savoir plus, consultez le [guide sur l'exécution en arrière-plan](https://ai.google.dev/gemini-api/docs/background-execution?hl=fr).
+Đặt `background=True` để chạy các tác vụ dài theo cách không đồng bộ. Thăm dò ý kiến về kết quả bằng `interactions.get()`. Để biết thêm thông tin chi tiết, hãy xem [Hướng dẫn thực thi ở chế độ nền](https://ai.google.dev/gemini-api/docs/background-execution?hl=vi).
 
 ### Python
 
@@ -1587,9 +1587,9 @@ while true; do
 done
 ```
 
-**Réponse :**
+**Câu trả lời:**
 
-La réponse initiale est renvoyée immédiatement avec l'état `in_progress` :
+Phản hồi ban đầu sẽ trả về ngay lập tức với trạng thái `in_progress`:
 
 ```
 {
@@ -1600,7 +1600,7 @@ La réponse initiale est renvoyée immédiatement avec l'état `in_progress` :
 }
 ```
 
-Une fois la tâche en arrière-plan entièrement exécutée, la vérification de l'état de l'interaction renvoie :
+Sau khi tác vụ ở chế độ nền được thực thi hoàn toàn, việc kiểm tra trạng thái tương tác sẽ trả về:
 
 ```
 {
@@ -1622,27 +1622,27 @@ Une fois la tâche en arrière-plan entièrement exécutée, la vérification de
 }
 ```
 
-Pour en savoir plus sur l'exécution asynchrone de modèles et d'agents, consultez le [guide d'exécution en arrière-plan](https://ai.google.dev/gemini-api/docs/background-execution?hl=fr).
+Đọc về các mô hình và tác nhân chạy không đồng bộ trong [hướng dẫn thực thi trong nền](https://ai.google.dev/gemini-api/docs/background-execution?hl=vi).
 
-## Étape suivante
+## Bước tiếp theo
 
-- [Exécution en arrière-plan](https://ai.google.dev/gemini-api/docs/background-execution?hl=fr) : exécutez les tâches de longue durée de manière asynchrone et gérez l'état.
-- [Génération de texte](https://ai.google.dev/gemini-api/docs/text-generation?hl=fr) : instructions système, configuration de la génération et modèles de texte avancés.
-- [Génération d'images](https://ai.google.dev/gemini-api/docs/image-generation?hl=fr) : formats, retouche d'images et références de style.
-- [Compréhension des images](https://ai.google.dev/gemini-api/docs/image-understanding?hl=fr) : classification, détection d'objets et questions/réponses visuelles.
-- [Raisonnement](https://ai.google.dev/gemini-api/docs/thinking?hl=fr) : utilise le raisonnement en chaîne de pensée pour les tâches complexes.
-- [Appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr) : modes de fonction parallèle, compositionnelle et contrainte.
-- [Recherche Google](https://ai.google.dev/gemini-api/docs/google-search?hl=fr) : ancrage, citations et suggestions de recherche.
-- [Agents gérés](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=fr) : agents prédéfinis avec exécution de code et gestion de fichiers.
-- [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) : recherche autonome en plusieurs étapes avec planification et synthèse.
-- [Sortie structurée](https://ai.google.dev/gemini-api/docs/structured-output?hl=fr) : schémas JSON, énumérations et définitions de types récursifs.
+- [Thực thi ở chế độ nền](https://ai.google.dev/gemini-api/docs/background-execution?hl=vi): Chạy các tác vụ dài hạn không đồng bộ và quản lý trạng thái.
+- [Tạo văn bản](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi): Hướng dẫn của hệ thống, cấu hình tạo và các mẫu văn bản nâng cao.
+- [Tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi): Tỷ lệ khung hình, chỉnh sửa hình ảnh và tham chiếu kiểu.
+- [Hiểu hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi): Phân loại, phát hiện đối tượng và hỏi đáp bằng hình ảnh.
+- [Tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi): Sử dụng phương pháp suy luận theo chuỗi suy nghĩ cho các nhiệm vụ phức tạp.
+- [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi): Chế độ hàm song song, thành phần và bị hạn chế.
+- [Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi): Nền tảng, trích dẫn và đề xuất tìm kiếm.
+- [Tác nhân được quản lý](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=vi): Các tác nhân được tạo sẵn có chức năng thực thi mã và quản lý tệp.
+- [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi): Nghiên cứu nhiều bước một cách tự động, có lập kế hoạch và tổng hợp.
+- [Đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi): Giản đồ JSON, enum và định nghĩa loại đệ quy.
 
-Envoyer des commentaires
+Gửi ý kiến phản hồi
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Dernière mise à jour le 2026/07/30 (UTC).
+Cập nhật lần gần đây nhất: 2026-07-30 UTC.
 
-Voulez-vous nous donner plus d'informations ?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/30 (UTC)."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-30 UTC."],[],[]]

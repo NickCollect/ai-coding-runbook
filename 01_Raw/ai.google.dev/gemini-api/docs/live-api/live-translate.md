@@ -1,44 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=th
-fetched_at: 2026-08-17T02:21:54.135265+00:00
-title: "\u0e01\u0e32\u0e23\u0e41\u0e1b\u0e25\u0e2a\u0e14\u0e14\u0e49\u0e27\u0e22 Gemini Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=tr
+fetched_at: 2026-08-24T02:34:29.066602+00:00
+title: "Gemini Live API ile canl\u0131 \u00e7eviri \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-ส่งความคิดเห็น
+Geri bildirim gönderin
 
-# การแปลสดด้วย Gemini Live API
+# Gemini Live API ile canlı çeviri
 
-Gemini Live API รองรับการแปลคำพูดเป็นคำพูดแบบเรียลไทม์ที่มีเวลาในการตอบสนองต่ำระหว่างภาษาต่างๆ กว่า 70 ภาษาโดยใช้โมเดล [`gemini-3.5-live-translate-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=th) การกำหนดค่า Live API ด้วยการตั้งค่าการแปลจะช่วยให้คุณสตรีมเสียงในภาษาหนึ่งและรับเอาต์พุตเสียงที่แปลแล้วในอีกภาษาหนึ่งได้ ซึ่งจะช่วยให้การแปลเสียงเป็นเสียงแบบเรียลไทม์เป็นไปอย่างราบรื่น
+Gemini Live API, [`gemini-3.5-live-translate-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=tr) modelini kullanarak 70'ten fazla dil arasında düşük gecikmeli, anlık sesli çeviri yapılmasını destekler. Live API'yi çeviri ayarlarıyla yapılandırarak sesi bir dilde yayınlayabilir ve çevrilmiş ses çıkışını başka bir dilde alabilirsiniz. Böylece, anlık ve sorunsuz bir şekilde sesli çeviri yapabilirsiniz.
 
-[ลองใช้การแปลสดใน Google AI Studiomic](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=th)
-[โคลนแอปตัวอย่างจาก GitHubcode](https://github.com/google-gemini/gemini-live-api-examples)
-[ใช้ทักษะของเอเจนต์การเขียนโค้ดterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=th#gemini-live-api-dev)
+[Google AI Studio'da Anında Çeviri'yi deneyinmic](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=tr)
+[Örnek uygulamayı GitHub'dan klonlayıncode](https://github.com/google-gemini/gemini-live-api-examples)
+[Kodlama aracısı becerilerini kullanınterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=tr#gemini-live-api-dev)
 
-## เจ้าหน้าที่บริการลูกค้าเทียบกับการแปลสด
+## Canlı Müşteri Temsilcisi ve Canlı Çeviri
 
-แม้ว่าทั้ง 2 อย่างจะใช้ Live API แต่โมเดลทางความคิดสำหรับการแปลสดจะแตกต่างจากการโต้ตอบของเอเจนต์แบบเรียลไทม์ผ่านการสนทนา
+Her ikisi de Live API'yi kullanırken Canlı Çeviri'nin zihinsel modeli, sohbet tarzında anlık temsilci etkileşimlerinden farklıdır.
 
-| ตัวแทนแบบเรียลไทม์ | การแปลสด |
+| Canlı Müşteri Temsilcisi | Canlı Çeviri |
 | --- | --- |
-| **โมเดลจะทำหน้าที่เป็นผู้ช่วย** โดยจะรับฟัง ให้เหตุผล และดำเนินการในนามของคุณ | **โมเดลจะทำหน้าที่เป็นล่าม** โดยจะทำงานเป็นไปป์ไลน์การแปลแบบเรียลไทม์ |
-| **ใช้การโต้ตอบแบบผลัดกัน** ใช้การหยุดชั่วคราว การตรวจหาเจตนา และจัดการการหยุดชะงัก | **ใช้การประมวลผลสตรีมอย่างต่อเนื่อง** แปลขณะที่ผู้พูดพูดโดยไม่ต้องรอให้ถึงคิว |
-| **รองรับเครื่องมือและตัวแทน** รองรับการเรียกใช้ฟังก์ชัน, Google Search และคำสั่งโดยตรง | **รองรับการแปลเท่านั้น** การแปลที่มีเวลาในการตอบสนองต่ำอย่างแท้จริง โดยไม่มีการรองรับเครื่องมือหรือคำสั่ง |
-| **Multimodal อย่างเต็มรูปแบบ** รองรับอินพุตข้อความ เสียง วิดีโอ และรูปภาพ | **เสียงถูกจำกัด** โดยจะจำกัดเฉพาะเสียงเพื่อรักษาระดับเวลาในการตอบสนองแบบเรียลไทม์ที่เข้มงวด |
-| **การกำหนดค่าแบบละเอียด** ใช้คำสั่งการสร้าง คำสั่งเสียง เครื่องมือ และคำสั่งของระบบ | **การกำหนดค่าที่ง่ายขึ้น** ตั้งค่า `target_language_code` และเปิด/ปิด เช่น `echo_target_language` |
+| **Model, asistan olarak hareket eder.** Dinler, akıl yürütür ve sizin adınıza işlem yapar. | **Model, çevirmen gibi davranır.** Gerçek zamanlı çeviri ardışık düzeni gibi çalışır. |
+| **Sıra tabanlı etkileşimler kullanır.** Duraklamalara, amaç algılamaya dayanır ve kesintileri yönetir. | **Sürekli akış işleme kullanır.** Konuşmacının konuşmasını beklemeden, konuşma sırasında çeviri yapar. |
+| **Araçları ve temsilcileri destekler.** İşlev çağrısı, Google Arama ve talimatlar için yerel destek. | **Yalnızca çeviriyi destekler.** Tamamen düşük gecikmeli çeviri; araçlar veya talimatlar desteklenmez. |
+| **Tamamen çok formatlı.** Metin, ses, video ve resim girişlerini destekler. | **Ses kısıtlanmış.** Sıkı anlık gecikme eşiklerini sağlamak için giriş yalnızca sesle sınırlıdır. |
+| **Ayrıntılı yapılandırma.** Üretim, konuşma, araçlar ve sistem talimatlarını kullanır. | **Basitleştirilmiş yapılandırma.** `target_language_code` ve `echo_target_language` gibi açma/kapatma düğmelerini ayarlayın. |
 
-## เริ่มต้นใช้งาน
+## Başlayın
 
-ตัวอย่างต่อไปนี้แสดงวิธีเริ่มต้นไคลเอ็นต์และเชื่อมต่อกับ Live API ด้วยการกำหนดค่าการแปล
+Aşağıdaki örneklerde, bir istemcinin nasıl başlatılacağı ve çeviri yapılandırmasıyla Live API'ye nasıl bağlanılacağı gösterilmektedir.
 
 ### Python
 
@@ -185,15 +185,15 @@ websocket.onmessage = (event) => {
 };
 ```
 
-## การส่งเสียง
+## Ses gönderme
 
-หากต้องการสตรีมอินพุตเสียงเพื่อการแปล ให้ส่งเสียง PCM แบบ 16 บิต, Little-Endian ที่ยังไม่ได้ประมวลผล
+Çeviri için ses girişlerini yayınlamak üzere ham, little-endian, 16 bit PCM ses gönderirsiniz.
 
-- **รูปแบบเสียงอินพุต**: PCM แบบ 16 บิตดิบที่ 16 kHz (โมโน, Little-Endian)
-- **รูปแบบเสียงเอาต์พุต**: PCM แบบ 16 บิตดิบที่ 24 kHz (โมโน, Little-Endian)
-- **ขนาดกลุ่มและเวลาในการตอบสนอง**: ส่งเสียงเป็นกลุ่มขนาด 100 มิลลิวินาที
+- **Giriş ses biçimi**: 16 kHz'de (mono, little-endian) ham 16 bit PCM.
+- **Çıkış ses biçimi**: 24 kHz'de (mono, little-endian) ham 16 bit PCM.
+- **Yığın Boyutu ve Gecikme**: Sesleri 100 ms'lik yığınlar halinde gönderin.
 
-ตัวอย่างต่อไปนี้แสดงวิธีส่งกลุ่มเสียงไปยังเซสชัน
+Aşağıdaki örneklerde, ses parçalarının oturuma nasıl gönderileceği gösterilmektedir.
 
 ### Python
 
@@ -238,23 +238,23 @@ function sendAudioChunk(chunk) {
 }
 ```
 
-## การกำหนดค่า
+## Yapılandırma
 
-หากต้องการเปิดใช้การแปล คุณต้องระบุ `translationConfig` ภายใน `generationConfig` ระหว่างการตั้งค่าเซสชัน
+Çeviriyi etkinleştirmek için oturum kurulumu sırasında `translationConfig` öğesini `generationConfig` içinde belirtmeniz gerekir.
 
-### การกำหนดค่าข้อความเกี่ยวกับการตั้งค่า
+### Kurulum mesajı yapılandırması
 
-`generationConfig` รองรับฟิลด์ต่อไปนี้เพื่อเปิดใช้ข้อความถอดเสียง
+`generationConfig`, transkriptleri etkinleştirmek için aşağıdaki alanları destekler:
 
-- **`inputAudioTranscription`**: ออบเจ็กต์ที่เมื่อมีอยู่จะช่วยให้โมเดลส่งข้อความถอดเสียงของเสียงที่ป้อนได้
-- **`outputAudioTranscription`**: ออบเจ็กต์ที่เมื่อมีอยู่จะช่วยให้โมเดลส่งข้อความถอดเสียงของเอาต์พุต (เสียงที่แปลแล้ว) ได้
+- **`inputAudioTranscription`**: Mevcut olduğunda modelin, giriş sesinin metin transkriptlerini göndermesini sağlayan bir nesne.
+- **`outputAudioTranscription`**: Mevcut olduğunda modelin, çıkış (çevrilmiş) sesin metin transkriptlerini göndermesini sağlayan bir nesne.
 
-`translationConfig` รองรับฟิลด์ต่อไปนี้
+`translationConfig` aşağıdaki alanları destekler:
 
-- **`targetLanguageCode`**: [รหัสภาษา BCP-47](#supported-languages) ของภาษาที่คุณต้องการให้โมเดลแปล (เช่น `"pl"` สำหรับภาษาโปแลนด์ `"es"` สำหรับภาษาสเปน) ค่าเริ่มต้นคือ `"en"`
-- **`echoTargetLanguage`**: บูลีนที่ระบุวิธีจัดการเสียงอินพุตที่เป็นภาษาเป้าหมายอยู่แล้ว หากตั้งค่าเป็น `true` โมเดลจะพูดตามเสียงที่ป้อนซึ่งเป็นภาษาเป้าหมายอยู่แล้ว หากตั้งค่าเป็น `false` โมเดลจะเงียบเมื่อเสียงพูดอินพุตเป็นภาษาเป้าหมายอยู่แล้ว ค่าเริ่มต้นคือ `false`
+- **`targetLanguageCode`**: Modelin çevirmesini istediğiniz dilin [BCP-47 dil kodu](#supported-languages) (ör. Lehçe için `"pl"`, İspanyolca için `"es"`). Varsayılan olarak `"en"` değerine ayarlanır.
+- **`echoTargetLanguage`**: Hedef dildeki giriş sesinin nasıl işleneceğini belirten bir boole. `true` olarak ayarlanırsa model, hedef dildeki giriş sesini tekrarlar. `false` olarak ayarlanırsa model, giriş konuşması zaten hedef dilde olduğunda sessiz kalır. Varsayılan olarak `false` değerine ayarlanır.
 
-ตัวอย่างโครงสร้างข้อความการตั้งค่ามีดังนี้
+Aşağıda, kurulum mesajı yapısı örneği verilmiştir:
 
 ```
 "setup": {
@@ -273,19 +273,19 @@ function sendAudioChunk(chunk) {
 }
 ```
 
-## ใช้โทเค็นชั่วคราวในแอปพลิเคชันฝั่งไคลเอ็นต์
+## İstemci tarafı uygulamalarda kısa ömürlü jetonları kullanma
 
-สำหรับแอปพลิเคชันไคลเอ็นต์ต่อเซิร์ฟเวอร์ คุณสามารถใช้[โทเค็นชั่วคราว](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=th) (ปัจจุบันอยู่ใน`v1beta`) เพื่อหลีกเลี่ยงการเปิดเผยคีย์ API
+İstemciden sunucuya uygulamalarda, API anahtarınızı açığa çıkarmamak için [kısa ömürlü jetonlar](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=tr) (şu anda `v1beta` aşamasında) kullanabilirsiniz.
 
-เมื่อใช้โทเค็นชั่วคราวกับการแปลสด ให้ทำดังนี้
+Canlı Çeviri ile geçici jetonlar kullanılırken:
 
-1. คุณต้องใช้ปลายทาง `v1beta`
-2. **การกำหนดค่าการล็อก:** โดยค่าเริ่มต้น คุณควรกำหนด `translationConfig` ในข้อจำกัดการสร้างโทเค็นบนเซิร์ฟเวอร์ ซึ่งจะช่วยให้มั่นใจได้ว่าการกำหนดค่าการแปลจะล็อกไว้และไคลเอ็นต์จะแก้ไขไม่ได้
-3. **การกำหนดค่าการปลดล็อก:** หากต้องการตั้งค่า `translationConfig` ในฝั่งไคลเอ็นต์ (เช่น เพื่อให้ผู้ใช้เลือกภาษาเป้าหมายของตนเองได้) คุณต้องละเว้นค่านี้จากคำขอสร้างโทเค็นและตั้งค่า `"lock_additional_fields": []` แทน ซึ่งจะปลดล็อก `translationConfig` เพื่อตั้งค่าในฝั่งไคลเอ็นต์
+1. `v1beta` uç noktasını kullanmanız gerekir.
+2. **Kilitleme yapılandırması:** Varsayılan olarak, sunucunuzdaki jeton oluşturma kısıtlamalarında `translationConfig` değerini belirtmeniz gerekir. Bu sayede çeviri yapılandırması kilitlenir ve istemci tarafından değiştirilemez.
+3. **Yapılandırmanın kilidini açma:** `translationConfig` değerini istemci tarafında ayarlayabilmek istiyorsanız (ör. kullanıcının kendi hedef dilini seçmesine izin vermek için) bu değeri jeton oluşturma isteğinden çıkarmanız ve bunun yerine `"lock_additional_fields": []` değerini ayarlamanız gerekir. Bu işlem, `translationConfig` öğesinin istemci tarafında ayarlanabilmesini sağlar.
 
-### สร้างโทเค็นชั่วคราวที่จำกัด
+### Kısıtlanmış geçici jeton oluşturma
 
-ตัวอย่างต่อไปนี้แสดงวิธีสร้างโทเค็นชั่วคราวที่มีข้อจำกัดด้านการแปล
+Aşağıdaki örneklerde, çeviri kısıtlamaları içeren geçici jetonun nasıl oluşturulacağı gösterilmektedir.
 
 ### Python
 
@@ -366,74 +366,74 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/auth_tokens" \
   }'
 ```
 
-## ข้อจำกัด
+## Sınırlamalar
 
-- **รูปแบบอินพุต**: รองรับเฉพาะอินพุตเสียงสำหรับการแปล ไม่รองรับการป้อนข้อความ
-- **การจำลองเสียง**: การจำลองเสียงอาจไม่สอดคล้องกัน เสียงอาจเปลี่ยนหลังจากหยุดพูดนานๆ ระบบอาจกำหนดเพศผิดตามวิธีที่เริ่มพูด หรืออาจใช้เสียงเดียวตลอดการสนทนาแบบหลายคนพูดอย่างรวดเร็ว
-- **การตรวจหาภาษา**: การตรวจหาภาษาอาจมีปัญหาเมื่อมีสำเนียงที่หนัก ภาษาที่คล้ายกัน (เช่น สเปนกับโปรตุเกส) หรือการเปลี่ยนภาษาอย่างรวดเร็ว **หมายเหตุ:** การดำเนินการนี้ควรส่งผลต่อเฉพาะข้อความถอดเสียงที่ป้อน รหัสภาษาและคำแปลสุดท้ายควรยังคงถูกต้อง
-- **เสียงเบื้องหลัง**: โมเดลได้รับการออกแบบมาเพื่อกรองเสียงรบกวนและเพลงออกเพื่อให้ได้เสียงพูดที่ชัดเจน แต่อาจไม่สามารถกรองเสียงเบื้องหลังบางอย่างได้
-- **ภาษาเป้าหมายของเสียงก้อง**: เมื่อ`echoTargetLanguage: true` เสียงรบกวนรอบข้างหรือเพลงอาจทำให้เกิดอาร์ติแฟกต์ในเสียงที่แปลเมื่อเสียงอินพุตเป็นภาษาเป้าหมายอยู่แล้ว
+- **Giriş Biçimleri**: Çeviri için yalnızca ses girişi desteklenir. Metin girişi desteklenmez.
+- **Ses Çoğaltma**: Ses çoğaltma tutarsız olabilir. Sesler, uzun aralardan sonra değişebilir, konuşmanın başlangıcına göre yanlış cinsiyet atanabilir veya hızlı çok konuşmacılı sohbetlerde tek bir seste takılabilir.
+- **Dil algılama**: Dil algılama, yoğun aksanlar, benzer diller (ör. İspanyolca ve Portekizce) veya hızlı dil geçişleri konusunda zorlanır. **Not:** Bu durum yalnızca giriş transkriptini etkiler. Dil kodları ve nihai çeviri doğru olmalıdır.
+- **Arka plan sesi**: Model, temiz konuşma üretmek için gürültüyü ve müziği filtreleyecek şekilde tasarlanmıştır ancak tüm arka plan sesleri göz ardı edilmeyebilir.
+- **Hedef Dili Tekrar Et**: `echoTargetLanguage: true` seçildiğinde, giriş sesi zaten hedef dildeyse arka plan gürültüsü veya müzik, çevrilen seste yapaylıklar oluşturabilir.
 
-## ภาษาที่รองรับ
+## Desteklenen diller
 
-ระบบรองรับการแปลสดในภาษาต่อไปนี้
+Canlı Çeviri için aşağıdaki diller desteklenir.
 
-| ภาษา | รหัส BCP-47 | ภาษา | รหัส BCP-47 |
+| Dil | BCP-47 Kodu | Dil | BCP-47 Kodu |
 | --- | --- | --- | --- |
-| แอฟริคานส์ | af | คาซัค | kk |
-| อะคัน | ak | เขมร | กม. |
-| แอลเบเนีย | sq | คินยารวันดา | rw |
-| อัมฮาริก | am | เกาหลี | ko |
-| อาหรับ | ar | ภาษาลาว | lo |
-| อาร์เมเนีย | hy | ลัตเวีย | lv |
-| อาร์เซอร์ไบจัน | az | ลิทัวเนีย | lt |
-| บาสก์ | eu | มาซีโดเนีย | mk |
-| เบลารุส | be | มาเลย์ | มิลลิวินาที |
-| เบงกอล | bn | มาลายาลัม | ml |
-| บัลแกเรีย | bg | มราฐี | mr |
-| พม่า (เมียนมา) | my | มองโกเลีย | mn |
-| คาตาลัน | ca | เนปาล | ne |
-| จีน (ตัวย่อ) | zh-Hans | นอร์เวย์ | no, nb |
-| จีน (ดั้งเดิม) | zh-Hant | เปอร์เซีย | fa |
-| โครเอเชีย | ชม. | โปแลนด์ | pl |
-| เช็ก | cs | โปรตุเกส (บราซิล) | pt-BR |
-| เดนมาร์ก | da | โปรตุเกส (โปรตุเกส) | pt-PT |
-| ดัตช์ | nl | ปัญจาบ | pa |
-| อังกฤษ | en | โรมาเนีย | ro |
-| เอสโตเนีย | et | รัสเซีย | ru |
-| ฟิลิปปินส์ | fil | เซอร์เบีย | sr |
-| ฟินแลนด์ | fi | สินธี | SD |
-| ฝรั่งเศส | fr | สิงหล | si |
-| กาลิเชียน | gl | สโลวัก | sk |
-| จอร์เจีย | ka | สโลวีเนีย | sl |
-| เยอรมัน | de | สเปน | es |
-| กรีก | el | ซุนดา | su |
-| คุชราต | gu | สวาฮิลี | sw |
-| เฮาซา | ha | สวีเดน | sv |
-| ฮีบรู | เขา | ทมิฬ | ta |
-| ฮินดี | hi | เตลูกู | te |
-| ฮังการี | hu | ไทย | th |
-| ไอซ์แลนด์ | is | ตุรกี | tr |
-| อินโดนีเซีย | id | ยูเครน | uk |
-| อิตาลี | it | อูรดู | ur |
-| ญี่ปุ่น | ja | อุซเบก | uz |
-| ชวา | jv | เวียดนาม | vi |
-| กันนาดา | kn | ซูลู | zu |
+| Afrikaanca | af | Kazakça | kk |
+| Akan | ak | Kmerce | km |
+| Arnavutça | sq | Ruandaca | rw |
+| Amharca | öö | Korece | ko |
+| Arapça | ar | Laoca | lo |
+| Ermenice | hy | Letonca | lv |
+| Azerbaycanca | az | Litvanca | lt |
+| Baskça | eu | Makedonca | mk |
+| Belarusça | be | Malayca | ms |
+| Bengali | bn | Malayalam | ml |
+| Bulgarca | bg | Marathi | mr |
+| Birmanca (Myanmar) | my | Moğolca | mn |
+| Katalanca | ca | Nepalce | ne |
+| Çince (Basitleştirilmiş) | zh-Hans | Norwegian | no, nb |
+| Çince (Geleneksel) | zh-Hant | Farsça | fa |
+| Hırvatça | s | Lehçe | pl |
+| Çekya | cs | Portekizce (Brezilya) | pt-BR |
+| Danca | da | Portekizce (Portekiz) | pt-PT |
+| Felemenkçe | nl | Punjabi | pa |
+| İngilizce | en | Rumence | ro |
+| Estonca | et | Rusça | ru |
+| Filipince | fil | Sırpça | sr |
+| Finnish | fi | Sindice | sd |
+| Fransızca | fr | Seylanca | si |
+| Galiçyaca | gl | Slovakça | sk |
+| Gürcüce | ka | Slovence | sl |
+| Almanca | de | İspanyolca | es |
+| Greek | el | Sundaca | su |
+| Güceratça | gu | Swahili | sw |
+| Hausaca | ha | İsveççe | sv |
+| İbranice | o | Tamilce | ta |
+| Hindi | hi | Telugu dili | te |
+| Macarca | hu | Tayca | th |
+| İzlandaca | is | Türkçe | tr |
+| Endonezce | id | Ukraynaca | uk |
+| Italian | it | Urduca | UR |
+| Japonca | ja | Özbekçe | uz |
+| Cavaca | jv | Vietnamca | vi |
+| Kannada | kn | Zulu | zu |
 
-## ขั้นตอนถัดไป
+## Sırada ne var?
 
-- อ่านคู่มือ[ความสามารถ](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=th)ของ Live API ฉบับเต็ม
-- อ่านคู่มือ[เริ่มต้นใช้งาน SDK](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=th)
-- อ่านคู่มือ[เริ่มต้นใช้งาน WebSockets](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=th)
-- อ่านคู่มือ[โทเค็นชั่วคราว](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=th)เพื่อดูการตรวจสอบสิทธิ์ที่ปลอดภัยในแอปพลิเคชันไคลเอ็นต์ต่อเซิร์ฟเวอร์
-- โคลน[ตัวอย่าง API ที่ใช้งานจริง](https://github.com/google-gemini/gemini-live-api-examples)จาก GitHub
+- Live API [Özellikleri](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=tr) kılavuzunun tamamını okuyun.
+- [SDK'yı kullanmaya başlama](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=tr) kılavuzunu okuyun.
+- [WebSocket'leri kullanmaya başlama](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=tr) kılavuzunu okuyun.
+- İstemciden sunucuya uygulamalarda güvenli kimlik doğrulama için [Geçici jetonlar](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=tr) kılavuzunu okuyun.
+- GitHub'dan [Live API examples](https://github.com/google-gemini/gemini-live-api-examples)'ı (Canlı API örnekleri) kopyalayın.
 
-ส่งความคิดเห็น
+Geri bildirim gönderin
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-อัปเดตล่าสุด 2026-07-23 UTC
+Son güncelleme tarihi: 2026-07-23 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-23 UTC"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-23 UTC."],[],[]]

@@ -1,38 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=vi
-fetched_at: 2026-08-17T02:21:38.907128+00:00
-title: "K\u1ebft qu\u1ea3 c\u00f3 c\u1ea5u tr\u00fac \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=tr
+fetched_at: 2026-08-24T02:37:03.574819+00:00
+title: "Yap\u0131land\u0131r\u0131lm\u0131\u015f \u00e7\u0131k\u0131\u015flar \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Gửi ý kiến phản hồi
+Geri bildirim gönderin
 
-# Kết quả có cấu trúc
+# Yapılandırılmış çıkışlar
 
-Bạn có thể định cấu hình các mô hình Gemini để tạo câu trả lời tuân thủ Giản đồ JSON được cung cấp. Điều này đảm bảo kết quả có thể dự đoán và an toàn về kiểu, đồng thời đơn giản hoá việc trích xuất dữ liệu có cấu trúc từ văn bản không có cấu trúc.
+Gemini modellerini, sağlanan bir JSON şemasına uygun yanıtlar oluşturacak şekilde yapılandırabilirsiniz. Bu sayede, tahmin edilebilir ve tür açısından güvenli sonuçlar elde edilir. Ayrıca, yapılandırılmamış metinlerden yapılandırılmış verilerin ayıklanması kolaylaşır.
 
-Sử dụng đầu ra có cấu trúc là lựa chọn lý tưởng cho:
+Yapılandırılmış çıkışlar şu durumlarda idealdir:
 
-- **Trích xuất dữ liệu:** Lấy thông tin cụ thể như tên và ngày tháng từ văn bản.
-- **Phân loại có cấu trúc:** Phân loại văn bản thành các danh mục được xác định trước.
-- **Quy trình công việc dựa trên tác nhân:** Tạo thông tin đầu vào có cấu trúc cho các công cụ hoặc API.
+- **Veri ayıklama:** Metinden adlar ve tarihler gibi belirli bilgileri alın.
+- **Yapılandırılmış sınıflandırma:** Metni önceden tanımlanmış kategorilere göre sınıflandırın.
+- **Ajan tabanlı iş akışları:** Araçlar veya API'ler için yapılandırılmış girişler oluşturun.
 
-Ngoài việc hỗ trợ JSON Schema trong API REST, Google GenAI SDK còn cho phép xác định giản đồ bằng [Pydantic](https://docs.pydantic.dev/latest/) (Python) và [Zod](https://zod.dev/) (JavaScript).
+Google GenAI SDK'ları, REST API'de JSON şemasını desteklemenin yanı sıra [Pydantic](https://docs.pydantic.dev/latest/) (Python) ve [Zod](https://zod.dev/) (JavaScript) kullanılarak şemaların tanımlanmasına da olanak tanır.
 
-## Ví dụ về đầu ra có cấu trúc
+## Yapılandırılmış çıkış örnekleri
 
-### Công cụ trích xuất công thức
+### Recipe Extractor
 
-Ví dụ này minh hoạ cách trích xuất dữ liệu có cấu trúc từ văn bản bằng các loại Giản đồ JSON cơ bản như `object`, `array`, `string` và `integer`.
+Bu örnekte, `object`, `array`, `string` ve `integer` gibi temel JSON şema türlerini kullanarak metinden yapılandırılmış verilerin nasıl ayıklanacağı gösterilmektedir.
 
 ### Python
 
@@ -196,7 +196,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Ví dụ về câu trả lời:**
+**Örnek Yanıt:**
 
 ```
 {
@@ -224,9 +224,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### Kiểm duyệt nội dung
+### İçerik Denetimi
 
-Ví dụ này minh hoạ `anyOf` cho các giản đồ có điều kiện và `enum` cho việc phân loại, cho phép cấu trúc đầu ra thay đổi dựa trên nội dung.
+Bu örnekte, koşullu şemalar için `anyOf`, sınıflandırma için `enum` gösterilmektedir. Böylece, çıkış yapısının içeriğe göre değişmesine olanak tanınır.
 
 ### Python
 
@@ -375,7 +375,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Ví dụ về câu trả lời:**
+**Örnek Yanıt:**
 
 ```
 {
@@ -386,9 +386,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### Cấu trúc đệ quy
+### Yinelemeli Yapılar
 
-Ví dụ này minh hoạ cách xác định một giản đồ đệ quy, chẳng hạn như biểu đồ tổ chức.
+Bu örnekte, kuruluş şeması gibi yinelemeli bir şemanın nasıl tanımlanacağı gösterilmektedir.
 
 ### Python
 
@@ -505,7 +505,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Ví dụ về câu trả lời:**
+**Örnek Yanıt:**
 
 ```
 {
@@ -532,9 +532,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-## Kết quả phát trực tuyến
+## Yayın sonuçları
 
-Bạn có thể truyền trực tuyến các đầu ra có cấu trúc, cho phép bạn bắt đầu xử lý phản hồi khi phản hồi đang được tạo. Các khối được truyền trực tuyến là các chuỗi JSON hợp lệ một phần có thể được nối để tạo thành đối tượng JSON cuối cùng.
+Yapılandırılmış çıkışları yayınlayarak yanıt oluşturulurken işlemeye başlamanıza olanak tanır. Yayınlanan parçalar, son JSON nesnesini oluşturmak için birleştirilebilen geçerli kısmi JSON dizeleridir.
 
 ### Python
 
@@ -631,9 +631,9 @@ curl -N -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
     }'
 ```
 
-## Đầu ra có cấu trúc bằng các công cụ
+## Araçlarla yapılandırılmış çıkışlar
 
-Gemini 3 cho phép bạn kết hợp Đầu ra có cấu trúc với các công cụ tích hợp, bao gồm [Neo bám vào Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi), [Bối cảnh từ URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi), [Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi), [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi#structured-output) và [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi).
+Gemini 3, Yapılandırılmış Çıkışları [Google Arama ile Temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr), [URL Bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr), [Kod Yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr), [Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr#structured-output) ve [İşlev Çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) gibi yerleşik araçlarla birleştirmenize olanak tanır.
 
 ### Python
 
@@ -726,79 +726,79 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Hỗ trợ giản đồ JSON
+## JSON şeması desteği
 
-Để tạo một đối tượng JSON, hãy định cấu hình `response_format` bằng một đối tượng (hoặc một mảng chứa một đối tượng) thuộc loại `text` và đặt `mime_type` của đối tượng đó thành `application/json`. Bạn nên cung cấp giản đồ trong trường `schema`.
+JSON nesnesi oluşturmak için `response_format` öğesini `text` türünde bir nesneyle (veya nesne içeren bir diziyle) yapılandırın ve `mime_type` özelliğini `application/json` olarak ayarlayın. Şema, `schema` alanında sağlanmalıdır.
 
-Chế độ đầu ra có cấu trúc của Gemini hỗ trợ một phần của quy cách [Giản đồ JSON](https://json-schema.org/).
+Gemini'ın yapılandırılmış çıkış modu, [JSON Şeması](https://json-schema.org/) spesifikasyonunun bir alt kümesini destekler.
 
-Sau đây là các giá trị được hỗ trợ của `type`:
+`type` için aşağıdaki değerler desteklenir:
 
-- **`string`**: Đối với văn bản.
-- **`number`**: Đối với số dấu phẩy động.
-- **`integer`**: Đối với số nguyên.
-- **`boolean`**: Đối với giá trị đúng hoặc sai.
-- **`object`**: Đối với dữ liệu có cấu trúc có các cặp khoá-giá trị.
-- **`array`**: Đối với danh sách các mục.
-- **`null`**: Để cho phép một thuộc tính có giá trị rỗng, hãy thêm `"null"` vào mảng loại (ví dụ: `{"type": ["string", "null"]}`).
+- **`string`**: Metin için.
+- **`number`**: Kayan noktalı sayılar için.
+- **`integer`**: Tam sayılar için.
+- **`boolean`**: Doğru veya yanlış değerler için.
+- **`object`**: Anahtar/değer çiftleri içeren yapılandırılmış veriler için.
+- **`array`**: Öğe listeleri için.
+- **`null`**: Bir özelliğin null olmasına izin vermek için tür dizisine `"null"` değerini ekleyin (ör. `{"type": ["string", "null"]}`).
 
-Những thuộc tính mô tả này giúp hướng dẫn mô hình:
+Bu açıklayıcı özellikler, modele yol göstermeye yardımcı olur:
 
-- **`title`**: Nội dung mô tả ngắn về một tài sản.
-- **`description`**: Nội dung mô tả dài hơn và chi tiết hơn về một tài sản.
+- **`title`**: Bir mülkün kısa açıklaması.
+- **`description`**: Bir mülkün daha uzun ve ayrıntılı açıklaması.
 
-### Thuộc tính cụ thể theo loại
+### Türe özel özellikler
 
-**Đối với các giá trị `object`:**
+**`object` değerleri için:**
 
-- **`properties`**: Một đối tượng trong đó mỗi khoá là tên thuộc tính và mỗi giá trị là một giản đồ cho thuộc tính đó.
-- **`required`**: Một mảng gồm các chuỗi, liệt kê những thuộc tính bắt buộc.
-- **`additionalProperties`**: Kiểm soát việc có cho phép các thuộc tính không có trong `properties` hay không. Có thể là một boolean hoặc một giản đồ.
+- **`properties`**: Her anahtarın bir özellik adı, her değerin ise söz konusu özelliğin şeması olduğu bir nesne.
+- **`required`**: Hangi özelliklerin zorunlu olduğunu listeleyen bir dizeler dizisi.
+- **`additionalProperties`**: `properties` içinde listelenmeyen özelliklere izin verilip verilmeyeceğini kontrol eder. Boole veya şema olabilir.
 
-**Đối với các giá trị `string`:**
+**`string` değerleri için:**
 
-- **`enum`**: Liệt kê một tập hợp cụ thể gồm các chuỗi có thể có cho các tác vụ phân loại.
-- **`format`**: Chỉ định cú pháp cho chuỗi, chẳng hạn như `date-time`, `date`, `time`.
+- **`enum`**: Sınıflandırma görevleri için olası dizelerin belirli bir kümesini listeler.
+- **`format`**: Dize için `date-time`, `date`, `time` gibi bir söz dizimi belirtir.
 
-**Đối với các giá trị `number` và `integer`:**
+**`number` ve `integer` değerleri için:**
 
-- **`enum`**: Liệt kê một tập hợp cụ thể gồm các giá trị bằng số có thể có.
-- **`minimum`**: Giá trị tối thiểu bao gồm.
-- **`maximum`**: Giá trị tối đa (bao gồm).
+- **`enum`**: Olası sayısal değerlerin belirli bir kümesini listeler.
+- **`minimum`**: Minimum dahil edilen değer.
+- **`maximum`**: Maksimum dahil edilen değer.
 
-**Đối với các giá trị `array`:**
+**`array` değerleri için:**
 
-- **`items`**: Xác định giản đồ cho tất cả các mục trong mảng.
-- **`prefixItems`**: Xác định danh sách giản đồ cho N mục đầu tiên, cho phép các cấu trúc giống như bộ giá trị.
-- **`minItems`**: Số lượng tối thiểu các mục trong mảng.
-- **`maxItems`**: Số lượng tối đa của các mục trong mảng.
+- **`items`**: Dizideki tüm öğelerin şemasını tanımlar.
+- **`prefixItems`**: İlk N öğe için bir şema listesi tanımlar ve demet benzeri yapılara izin verir.
+- **`minItems`**: Dizideki minimum öğe sayısı.
+- **`maxItems`**: Dizideki maksimum öğe sayısı.
 
-## Đầu ra có cấu trúc so với gọi hàm
+## Yapılandırılmış çıkışlar ve işlev çağrısı
 
-| Tính năng | Trường hợp sử dụng chính |
+| Özellik | Birincil Kullanım Alanı |
 | --- | --- |
-| **Đầu ra có cấu trúc** | **Định dạng câu trả lời cuối cùng.** Sử dụng khi bạn muốn *câu trả lời* của mô hình ở một định dạng cụ thể. |
-| **Lệnh gọi hàm** | **Thực hiện hành động trong cuộc trò chuyện.** Sử dụng khi mô hình cần *hỏi bạn* thực hiện một việc trước khi đưa ra câu trả lời cuối cùng. |
+| **Yapılandırılmış Çıkışlar** | **Son yanıtı biçimlendirme** Modelin *yanıtının* belirli bir biçimde olmasını istediğinizde kullanın. |
+| **İşlev Çağırma** | **Sohbet sırasında işlem yapma** Modelin nihai yanıtı vermeden önce bir görevi *yapmanızı istemesi* gerektiğinde kullanılır. |
 
-## Các phương pháp hay nhất
+## En iyi uygulamalar
 
-- **Nội dung mô tả rõ ràng:** Sử dụng trường `description` để hướng dẫn mô hình.
-- **Nhập liệu mạnh:** Sử dụng các loại cụ thể (`integer`, `string`, `enum`).
-- **Thiết kế câu lệnh:** Nêu rõ những gì bạn muốn mô hình thực hiện.
-- **Xác thực:** Mặc dù đầu ra là JSON có cú pháp chính xác, nhưng bạn luôn phải xác thực các giá trị trong ứng dụng của mình.
-- **Xử lý lỗi:** Triển khai biện pháp xử lý lỗi hữu ích cho các đầu ra tuân thủ giản đồ nhưng không chính xác về mặt ngữ nghĩa.
+- **Net açıklamalar:** Modeli yönlendirmek için `description` alanını kullanın.
+- **Güçlü tür:** Belirli türleri (`integer`, `string`, `enum`) kullanın.
+- **İstem mühendisliği:** Modelin ne yapmasını istediğinizi açıkça belirtin.
+- **Doğrulama:** Çıkış söz dizimi açısından doğru JSON olsa da uygulamanızdaki değerleri her zaman doğrulayın.
+- **Hata yönetimi:** Şemaya uygun ancak semantik olarak yanlış çıktılar için etkili hata yönetimi uygulayın.
 
-## Các điểm hạn chế
+## Sınırlamalar
 
-- **Tập hợp con giản đồ:** Không phải tính năng nào của Giản đồ JSON cũng được hỗ trợ.
-- **Độ phức tạp của giản đồ:** Giản đồ quá lớn hoặc có nhiều lớp lồng nhau có thể bị từ chối.
+- **Şema alt kümesi:** Tüm JSON şema özellikleri desteklenmez.
+- **Şema karmaşıklığı:** Çok büyük veya derin şekilde iç içe yerleştirilmiş şemalar reddedilebilir.
 
-Gửi ý kiến phản hồi
+Geri bildirim gönderin
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Cập nhật lần gần đây nhất: 2026-07-30 UTC.
+Son güncelleme tarihi: 2026-07-30 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-30 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]

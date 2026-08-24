@@ -1,42 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=it
-fetched_at: 2026-08-17T02:36:05.914968+00:00
-title: "Utilizzo dei modelli Gemini pi\u00f9 recenti \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=tr
+fetched_at: 2026-08-24T02:26:40.082717+00:00
+title: "En yeni Gemini modellerini kullanma \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Invia feedback
+Geri bildirim gönderin
 
-# Utilizzo dei modelli Gemini più recenti
+# En yeni Gemini modellerini kullanma
 
-[Questa pagina](#)
-[3.5 Flash](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.5?hl=it)
+[Bu sayfa](#)
+[3.5 Flash](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.5?hl=tr)
 
-Gemini 3.6 Flash (`gemini-3.6-flash`) e Gemini 3.5 Flash-Lite (`gemini-3.5-flash-lite`) sono in disponibilità generale e pronti per l'utilizzo in produzione.
+Gemini 3.6 Flash (`gemini-3.6-flash`) ve Gemini 3.5 Flash-Lite (`gemini-3.5-flash-lite`) genel kullanıma sunuldu ve üretimde kullanılmaya hazır.
 
-- **Gemini 3.6 Flash**: prestazioni migliori per attività agentiche e multimodali complesse, con un utilizzo ridotto dei token e un prezzo inferiore rispetto a 3.5 Flash.
-- **Gemini 3.5 Flash-Lite**: il modello più veloce ed economico della famiglia 3.5. Supera le generazioni precedenti di Flash-Lite per l'esecuzione a throughput elevato.
+- **Gemini 3.6 Flash**: Karmaşık görevlerde ve çok formatlı görevlerde daha güçlü performans sunarken 3.5 Flash'e kıyasla daha düşük bir fiyatla jeton kullanımını azaltır.
+- **Gemini 3.5 Flash-Lite**: 3.5 ailesindeki en hızlı ve en düşük maliyetli modeldir. Yüksek işleme hızıyla yürütme için önceki Flash-Lite nesillerinden daha iyi performans gösterir.
 
-Questa guida spiega le novità di ogni modello, le modifiche all'API che interessano il tuo codice e come eseguire la migrazione.
+Bu kılavuzda, her modeldeki yenilikler, kodunuzu etkileyen API değişiklikleri ve nasıl geçiş yapacağınız açıklanmaktadır.
 
 ### Gemini 3.6 Flash
 
-1. Installa la skill:
+1. Beceriyi yükleyin:
 
    ```
    npx skills add google-gemini/gemini-skills --skill gemini-interactions-api --global
    ```
-2. Applica la skill:
+2. Beceriyi uygulama:
 
    ```
    /gemini-interactions-api migrate my app to Gemini 3.6 Flash
@@ -44,34 +44,34 @@ Questa guida spiega le novità di ogni modello, le modifiche all'API che interes
 
 ### Gemini 3.5 Flash-Lite
 
-1. Installa la skill:
+1. Beceriyi yükleyin:
 
    ```
    npx skills add google-gemini/gemini-skills --skill gemini-interactions-api --global
    ```
-2. Applica la skill:
+2. Beceriyi uygulama:
 
    ```
    /gemini-interactions-api migrate my app to Gemini 3.5 Flash-Lite
    ```
 
-## Nuovi modelli
+## Yeni modeller
 
-| Modello | ID modello | Livello di pensiero predefinito | Prezzi | Descrizione |
+| Model | Model Kimliği | Varsayılan düşünme düzeyi | Fiyatlandırma | Açıklama |
 | --- | --- | --- | --- | --- |
-| Gemini 3.6 Flash | `gemini-3.6-flash` | `medium` | 1,50 $ per 1 milione di token di input e 7,50 $per 1 milione di token di output | Bilancia velocità e intelligenza per attività agentiche e multimodali. |
-| Gemini 3.5 Flash-Lite | `gemini-3.5-flash-lite` | `minimal` | 0,30 $ per 1 milione di token di input e 2,50 $per 1 milione di token di output | Il modello 3.5 più veloce ed economico per l'esecuzione a throughput elevato. |
+| Gemini 3.6 Flash | `gemini-3.6-flash` | `medium` | 1,50 ABD doları/1 milyon giriş jetonu ve 7,50 ABD doları/1 milyon çıkış jetonu | Ajan tabanlı ve çok formatlı görevler için hız ile akıl arasında denge kurar. |
+| Gemini 3.5 Flash-Lite | `gemini-3.5-flash-lite` | `minimal` | 0,30 ABD doları/1 milyon giriş jetonu ve 2,50 ABD doları/1 milyon çıkış jetonu | Yüksek işleme hızı için en hızlı ve en düşük maliyetli 3.5 modeli. |
 
-Entrambi i modelli supportano la finestra contestuale di 1 milione di token, un massimo di 64.000 token di output, il ragionamento e la suite completa di strumenti integrati, incluso [l'utilizzo del computer](https://ai.google.dev/gemini-api/docs/computer-use?hl=it).
+Her iki model de 1 milyon parçalık bağlam penceresini, 64 bin maksimum çıkış parçası sayısını, düşünme özelliğini ve [Bilgisayar Kullanımı](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr) da dahil olmak üzere yerleşik araçların tamamını destekler.
 
-Per le specifiche complete, consulta le pagine dei modelli:
+Tam özellikler için model sayfalarına bakın:
 
-- [Pagina del modello Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=it)
-- [Pagina del modello Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=it)
+- [Gemini 3.6 Flash model sayfası](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=tr)
+- [Gemini 3.5 Flash-Lite model sayfası](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=tr)
 
-Per informazioni dettagliate sui prezzi, consulta la [pagina dei prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it).
+Ayrıntılı fiyatlandırma bilgileri için [fiyatlandırma sayfasına](https://ai.google.dev/gemini-api/docs/pricing?hl=tr) bakın.
 
-## Guida rapida
+## Hızlı başlangıç kılavuzu
 
 ### Python
 
@@ -120,42 +120,42 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-## Novità di Gemini 3.6 Flash
+## Gemini 3.6 Flash'teki yenilikler
 
-- **Riduzione dei token e dei turni:** completa i workflow in più passaggi con meno passaggi di ragionamento, turni di conversazione e chiamate di strumenti rispetto a Gemini 3.5. Riduce anche la spirale del ciclo di esecuzione.
-- **Generazione di codice migliorata:** produce codice di qualità superiore pronto per la produzione con meno modifiche indesiderate e meno cicli di debug.
-- **Migliore rispetto delle istruzioni**: riduce le modifiche indesiderate ai file durante le attività di diagnostica.
-- **Ragionamento multimodale e spaziale efficace:** prestazioni migliorate nell'interpretazione dei grafici, nella conversione di progetti visivi e nella generazione di layout web multi-elemento.
-- **Ispezione programmatica anticipata:** preferisce eseguire script di codice di diagnostica prima di apportare modifiche più frequentemente rispetto a Gemini 3.5 Flash. Ciò migliora la precisione delle attività complesse, ma può aggiungere passaggi esplorativi aggiuntivi per il lavoro semplice sul frontend.
-- **Supporto per l'utilizzo del computer:** supportato come strumento nativo per l'automazione dell'interfaccia utente agentica.
-- **Preferenza per lo stile dell'interfaccia utente**: più efficace nella creazione di codice funzionale, anche se i valutatori umani hanno preferito i modelli precedenti per il layout grafico e lo stile. Puoi attenuare questo problema fornendo linee guida di progettazione esplicite.
-- **Impegno di pensiero predefinito (medio):** utilizza lo stesso livello di pensiero predefinito `medium` di Gemini 3.5 Flash.
-- **Prezzi ridotti**: costi dei token di output inferiori (7,50 $ per 1 milione rispetto a 9,00 $ per 1 milione per 3.5 Flash). I token di input rimangono a 1,50 $per 1 milione.
+- **Token ve dönüş azaltma:** Çok adımlı iş akışlarını Gemini 3.5'e kıyasla daha az muhakeme adımı, sohbet dönüşü ve araç çağrısıyla tamamlar. Ayrıca yürütme döngüsünün spiral şeklinde ilerlemesini de azaltır.
+- **Geliştirilmiş kod oluşturma:** Daha az istenmeyen düzenleme ve daha az hata ayıklama döngüsüyle üretime hazır, daha yüksek kaliteli kodlar üretir.
+- **Daha iyi talimat takibi**: Teşhis görevleri sırasında istenmeyen dosya değişikliklerini azaltır.
+- **Güçlü çok formatlı ve uzamsal akıl yürütme:** Grafik yorumlama, görsel plan dönüştürme ve çok öğeli web düzeni oluşturma konusunda daha iyi performans.
+- **Önceden programatik inceleme:** Değişiklik yapmadan önce teşhis kodu komut dosyalarını Gemini 3.5 Flash'e kıyasla daha sık çalıştırmayı tercih eder. Bu, karmaşık görevlerde doğruluğu artırır ancak basit ön uç çalışmalarında ek keşif adımları ekleyebilir.
+- **Bilgisayar Kullanımı desteği:** Ajanlı kullanıcı arayüzü otomasyonu için yerel araç olarak desteklenir.
+- **Kullanıcı arayüzü stil tercihi**: İşlevsel kod oluşturma konusunda daha iyi olsa da insan değerlendiriciler görsel düzen ve stil için önceki modelleri tercih etti. Açık tasarım kuralları belirleyerek bu durumu önleyebilirsiniz.
+- **Varsayılan düşünme çabası (orta):** Gemini 3.5 Flash ile aynı `medium` varsayılan düşünme düzeyini kullanır.
+- **Daha düşük fiyatlandırma**: Daha düşük çıkış jetonu maliyetleri (3.5 Flash için 9,00 ABD doları/1 milyon jeton yerine 7,50 ABD doları/1 milyon jeton). Giriş jetonları 1,50 ABD doları/1 milyon olarak kalır.
 
-## Novità di Gemini 3.5 Flash-Lite
+## Gemini 3.5 Flash-Lite'taki yenilikler
 
-- **Latenza di esecuzione delle attività ridotta:** throughput più elevato nella famiglia 3.5 per l'analisi dei dati e l'estrazione dei documenti ad alto volume.
-- **Prestazioni di ragionamento e multimodali migliorate:** percorso di migrazione efficace da Gemini 2.5 Flash, con punteggi più elevati nelle attività di ragionamento come HLE (18,0% rispetto a 11,0%) e nei benchmark multimodali come CharXIV (74,5% rispetto a 63,7%).
-- **Orchestrazione di subagenti e affidabilità degli strumenti:** migliora l'affidabilità dell'esecuzione degli strumenti per l'esecuzione del codice, la ricerca e i workflow MCP. Aumenta il livello di pensiero per la pianificazione autonoma e le attività complesse dei subagenti.
-- **Comprensione dei documenti migliorata:** migliora l'accuratezza dell'analisi dei documenti e dell'estrazione dei dati strutturati. Sperimenta i livelli di pensiero minimo e alto a seconda della complessità del documento.
-- **Programmazione web interattiva ed elaborazione di dati tabulari:** prestazioni elevate nell'elaborazione di JavaScript frontend e dati tabulari tramite la pianificazione tramite l'esecuzione di codice leggero.
-- **Persistenza di chatbot e persona:** maggiore rispetto delle istruzioni multi-turno e coerenza della persona rispetto a Gemini 3.1 Flash-Lite.
-- **Supporto per l'utilizzo del computer:** supportato come strumento nativo per l'automazione dell'interfaccia utente agentica.
+- **Daha düşük görev yürütme gecikmesi:** Yüksek hacimli veri ayrıştırma ve doküman çıkarma için 3.5 ailesindeki en yüksek işleme hızı.
+- **Gelişmiş akıl yürütme ve çok formatlı performans:** HLE (%18,0'a karşı %11,0) gibi akıl yürütme görevlerinde ve CharXIV (%74,5'e karşı %63,7) gibi çok formatlı karşılaştırmalarda daha yüksek puanlar alarak Gemini 2.5 Flash'ten sorunsuz bir şekilde geçiş yapın.
+- **Alt aracı düzenleme ve araç güvenilirliği:** Kod yürütme, arama ve MCP iş akışlarında araç yürütme güvenilirliğini artırır. Bağımsız planlama ve karmaşık alt aracı görevleri için düşünme düzeyini artırın.
+- **Gelişmiş belge anlama:** Belge ayrıştırma ve yapılandırılmış veri çıkarma işlemlerinde doğruluğu artırır. Belgenin karmaşıklığına bağlı olarak hem minimum hem de yüksek düşünme seviyelerini deneyin.
+- **Etkileşimli web kodlama ve tablo verisi işleme:** Basit kod yürütme yoluyla planlama yaparak ön uç JavaScript ve tablo verisi işlemede güçlü bir performans gösterir.
+- **Chatbot ve karakter kalıcılığı:** Gemini 3.1 Flash-Lite'a kıyasla çok aşamalı etkileşim talimatlarını daha iyi takip etme ve karakter tutarlılığı.
+- **Bilgisayar Kullanımı desteği:** Ajanlı kullanıcı arayüzü otomasyonu için yerel araç olarak desteklenir.
 
-## Scegliere il modello Flash o Flash-Lite giusto
+## Doğru Flash veya Flash-Lite modelini seçme
 
-Utilizza questa tabella per selezionare il modello e il percorso di migrazione giusti per i tuoi carichi di lavoro.
+İş yükleriniz için doğru modeli ve taşıma yolunu seçmek üzere bu tabloyu kullanın.
 
-Entrambi i modelli richiedono la rimozione dei parametri di campionamento deprecati (`temperature`, `top_p`, `top_k`) e dei turni del modello precompilati. Per maggiori dettagli, consulta le modifiche all'[API](#api-changes-and-parameter-updates).
+Her iki modelde de desteği sonlandırılan örnekleme parametrelerinin (`temperature`, `top_p`, `top_k`) ve önceden doldurulmuş model dönüşlerinin kaldırılması gerekir. Ayrıntılar için [API değişiklikleri](#api-changes-and-parameter-updates) başlıklı makaleyi inceleyin.
 
-| Modello | Casi d'uso principali | Target di migrazione consigliato |
+| Model | Birincil kullanım alanları | Önerilen taşıma hedefi |
 | --- | --- | --- |
-| **Gemini 3.6 Flash** `gemini-3.6-flash` | Generazione di codice, ragionamento spaziale/multimodale, workflow agentici in più passaggi | **Gemini 3.5 Flash**, **Gemini 3 Flash (anteprima)** o **Gemini 3.1 Pro** |
-| **Gemini 3.5 Flash-Lite**  `gemini-3.5-flash-lite` | Esecuzione autonoma di subagenti, analisi dei dati e estrazione dei documenti ad alto volume, analisi JSON strutturata | **Gemini 3.1 Flash-Lite** o **Gemini 2.5 Flash** |
+| **Gemini 3.6 Flash** `gemini-3.6-flash` | Kod oluşturma, uzamsal/çok formatlı akıl yürütme, çok adımlı ajan tabanlı iş akışları | **Gemini 3.5 Flash**, **Gemini 3 Flash (Önizleme)** veya **Gemini 3.1 Pro** |
+| **Gemini 3.5 Flash-Lite**  `gemini-3.5-flash-lite` | Bağımsız alt aracı yürütme, yüksek hacimli veri analizi ve doküman çıkarma, yapılandırılmış JSON ayrıştırma | **Gemini 3.1 Flash-Lite** veya **Gemini 2.5 Flash** |
 
-## Agente Antigravity aggiornato
+## Antigravity aracısı güncellendi
 
-Grazie alle prestazioni migliorate, Gemini 3.6 Flash è ora il nuovo modello predefinito che alimenta l'[agente Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agentn?hl=it) in Gemini Managed Agents. Puoi modificare questa impostazione impostando un nuovo campo nell'API.
+Gemini 3.6 Flash, performansının iyileştirilmesi sayesinde artık Gemini Yönetilen Ajanlar'daki [Antigravity ajanı](https://ai.google.dev/gemini-api/docs/antigravity-agentn?hl=tr) destekleyen yeni varsayılan model. Bu durum, API'de yeni bir alan ayarlanarak değiştirilebilir.
 
 ### Python
 
@@ -202,18 +202,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Modifiche all'API e aggiornamenti dei parametri
+## API değişiklikleri ve parametre güncellemeleri
 
-A partire da Gemini 3.6 Flash e Gemini 3.5 Flash-Lite, le seguenti modifiche all'API si applicano a questi modelli e a tutte le future release dei modelli Gemini.
+Gemini 3.6 Flash ve Gemini 3.5 Flash-Lite'tan itibaren, aşağıdaki API değişiklikleri bu modeller ve gelecekteki tüm Gemini model sürümleri için geçerli olacaktır.
 
-- **Deprecazione dei parametri di campionamento**: `temperature`, `top_p` e `top_k` sono deprecati. L'API ignora questi parametri e restituisce un errore nelle future generazioni di modelli.
-- **Convalida del turno del modello precompilato**: la precompilazione dei turni del modello non è più supportata. Se l'ultimo turno non vuoto nella richiesta è un turno `model`, l'API restituisce un errore `400`.
+- **Örnekleme parametresinin desteği sonlandırıldı**: `temperature`, `top_p` ve `top_k` parametrelerinin desteği sonlandırıldı. API bu parametreleri yok sayar ve gelecekteki model oluşturma işlemlerinde hata döndürür.
+- **Önceden doldurulmuş model dönüşü doğrulama**: Model dönüşlerinin önceden doldurulması artık desteklenmiyor. İstekteki son boş olmayan dönüş bir `model` dönüşüyse API, `400` hatası döndürür.
 
-Di seguito sono riportate spiegazioni dettagliate ed esempi di codice per ogni modifica all'API.
+Aşağıda, her API değişikliğiyle ilgili ayrıntılı açıklamalar ve kod örnekleri verilmiştir.
 
-### 1. Deprecazione dei parametri di campionamento (`temperature`, `top_p`, `top_k`)
+### 1. Örnekleme parametresinin desteğinin sonlandırılması (`temperature`, `top_p`, `top_k`)
 
-`temperature`, `top_p` e `top_k` sono deprecati e ignorati. Nelle future generazioni di modelli, la fornitura di questi parametri restituisce un errore HTTP 400. **Rimuovi questi parametri da tutte le richieste.**
+`temperature`, `top_p` ve `top_k` kullanımdan kaldırıldı ve yoksayılıyor. Gelecekteki model nesillerinde bu parametrelerin sağlanması HTTP 400 hatası döndürür. **Bu parametreleri tüm isteklerden kaldırın.**
 
 ```
 # ⚠️ Remove these parameters (deprecated)
@@ -224,15 +224,15 @@ generation_config = {
 }
 ```
 
-Per migliorare il determinismo, definisci un'istruzione di sistema con regole esplicite per il tuo caso d'uso specifico.
+Belirleyiciliği artırmak için belirli kullanım alanınıza yönelik açık kurallar içeren bir sistem talimatı tanımlayın.
 
-### 2. Convalida del turno del modello precompilato
+### 2. Önceden doldurulmuş model dönüşü doğrulama
 
-Le richieste API che terminano con un turno di ruolo del modello non vuoto non sono consentite e restituiscono un **errore HTTP 400**.
+Boş olmayan bir model rolüyle biten API isteklerine izin verilmez ve **HTTP 400 Hatası** döndürülür.
 
-#### ⚠️ Evita
+#### ⚠️ Kullanılmasın
 
-Nei payload REST `generateContent` o non elaborati legacy, la fine con un turno di ruolo del modello non è più consentita:
+Eski `generateContent` veya ham REST yüklerinde, model rolü dönüşüyle bitenler artık yasaklanmıştır:
 
 ```
 /* ❌ DO NOT: End payload contents with a 'model' role turn */
@@ -244,9 +244,9 @@ Nei payload REST `generateContent` o non elaborati legacy, la fine con un turno 
 }
 ```
 
-#### ✅ Migrazione consigliata
+#### ✅ Önerilen taşıma
 
-Se in precedenza l'applicazione precompilava un turno del modello per eliminare i preamboli o forzare la formattazione JSON, utilizza `system_instruction` o [output strutturati](https://ai.google.dev/gemini-api/docs/structured-output?hl=it) invece.
+Uygulamanız daha önce girişleri bastırmak veya JSON biçimlendirmesini zorlamak için bir model dönüşünü önceden dolduruyorsa bunun yerine `system_instruction` veya [Yapılandırılmış çıkışlar](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr)'ı kullanın.
 
 ```
 # ✅ RECOMMENDED: Use system_instruction to specify output format
@@ -257,16 +257,16 @@ response = client.models.generate_content(
 )
 ```
 
-## Elenco di controllo per la migrazione
+## Taşıma kontrol listesi
 
 ### Gemini 3.6 Flash
 
-1. Installa la skill:
+1. Beceriyi yükleyin:
 
    ```
    npx skills add google-gemini/gemini-skills --skill gemini-interactions-api --global
    ```
-2. Applica la skill:
+2. Beceriyi uygulama:
 
    ```
    /gemini-interactions-api migrate my app to Gemini 3.6 Flash
@@ -274,55 +274,55 @@ response = client.models.generate_content(
 
 ### Gemini 3.5 Flash-Lite
 
-1. Installa la skill:
+1. Beceriyi yükleyin:
 
    ```
    npx skills add google-gemini/gemini-skills --skill gemini-interactions-api --global
    ```
-2. Applica la skill:
+2. Beceriyi uygulama:
 
    ```
    /gemini-interactions-api migrate my app to Gemini 3.5 Flash-Lite
    ```
 
-### Eseguire la migrazione a gemini-3.6-flash
+### gemini-3.6-flash'e geçiş yapma
 
-- **Aggiorna l'ID modello:** modifica la stringa del modello di destinazione in `gemini-3.6-flash`.
-- **Rimuovi i parametri di campionamento deprecati:**
-  - Rimuovi `temperature`, `top_p` e `top_k` dalle configurazioni di generazione.
-  - Sostituisci `thinking_budget` con l'enumerazione di stringhe `thinking_level` impostata su `"medium"` o `"high"`.
-  - Rimuovi `candidate_count` (non supportato in Gemini 3.x).
-- **Applica le regole di convalida dei turni:**
-  - Rimuovi i turni del modello precompilati.
-  - Assicurati che il turno dell'utente finale contenga testo non vuoto.
-- **Controlla la chiamata di funzione:**
-  - Assicurati che tutti gli oggetti `FunctionResponse` includano `call_id` e `name`.
-  - Inserisci gli asset multimodali all'interno del payload della risposta.
-  - Formatta le istruzioni in linea utilizzando `\\n\\n`.
-  - Se visualizzi errori `Malformed_Function_Call` associati al testo pre-strumento, consulta [Soluzioni alternative per i requisiti del testo pre-strumento](https://ai.google.dev/gemini-api/docs/generate-content/function-calling?hl=it#workarounds-for-pre-tool-text-requirements).
-- **Requisiti di base di Gemini 3.x:** per gli aggiornamenti dell'SDK e la conservazione della firma del pensiero, consulta l'[elenco di controllo per la migrazione di Gemini 3.5](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.5?hl=it#migration).
+- **Model Kimliğini Güncelle:** Hedef model dizesini `gemini-3.6-flash` olarak değiştirin.
+- **Desteği sonlandırılan örnekleme parametrelerini kaldırma:**
+  - Üretim yapılandırmalarından `temperature`, `top_p` ve `top_k` öğelerini kaldırın.
+  - `thinking_budget` öğesini, `"medium"` veya `"high"` olarak ayarlanmış dize numaralandırması `thinking_level` ile değiştirin.
+  - `candidate_count` adlı ülkeyi kaldırın (Gemini 3.x'te desteklenmez).
+- **Hamle doğrulama kurallarını zorunlu kılma:**
+  - Önceden doldurulmuş model dönüşlerini kaldırın.
+  - Son kullanıcı dönüşünün boş olmayan metin içerdiğinden emin olun.
+- **İşlev çağrısını denetleme:**
+  - Tüm `FunctionResponse` nesnelerinin `call_id` ve `name` içerdiğinden emin olun.
+  - Çok formatlı öğeleri yanıt yükünün içine yerleştirin.
+  - Satır içi talimatları `\\n\\n` kullanarak biçimlendirin.
+  - Araç öncesi metinle ilgili `Malformed_Function_Call` hataları görüyorsanız [Araç öncesi metin koşulları için geçici çözümler](https://ai.google.dev/gemini-api/docs/generate-content/function-calling?hl=tr#workarounds-for-pre-tool-text-requirements) başlıklı makaleyi inceleyin.
+- **Temel Gemini 3.x gereksinimleri:** SDK güncellemeleri ve düşünce imzası koruması için [Gemini 3.5'e Geçiş Yapılacaklar Listesi](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.5?hl=tr#migration)'ne bakın.
 
-### Eseguire la migrazione a gemini-3.5-flash-lite
+### gemini-3.5-flash-lite'a geçiş
 
-- **Aggiorna l'ID modello:** modifica la stringa del modello di destinazione in `gemini-3.5-flash-lite`.
-- **Configura il livello di impegno di pensiero:**
-  - Per l'estrazione, il routing o la classificazione ad alto volume: lascia `thinking_level` su `"minimal"` (impostazione predefinita) per il massimo throughput.
-  - Per i subagenti autonomi con chiamate di strumenti, esecuzione di codice o ragionamento multi-step: imposta `thinking_level` su `"medium"` o `"high"` per evitare la chiusura prematura dello strumento.
-- **Rimuovi i parametri deprecati e convalida la chiamata di funzione:** Applica le [stesse regole di 3.6 Flash](#migrate-to-gemini-3-6-flash).
-- **Requisiti di base di Gemini 3.x:** consulta l'[elenco di controllo per la migrazione di Gemini 3.5](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.5?hl=it#migration).
+- **Model Kimliğini Güncelle:** Hedef model dizesini `gemini-3.5-flash-lite` olarak değiştirin.
+- **Düşünme çabası seviyesini yapılandırma:**
+  - Yüksek hacimli çıkarma, yönlendirme veya sınıflandırma için: Maksimum işleme hızı elde etmek üzere `thinking_level` değerini `"minimal"` (varsayılan) olarak bırakın.
+  - Araç çağrıları, kod yürütme veya çok adımlı akıl yürütme içeren bağımsız alt aracılar için: Erken araç sonlandırmasını önlemek üzere `thinking_level` değerini `"medium"` veya `"high"` olarak ayarlayın.
+- **Kullanımdan kaldırılan parametreleri kaldırın ve işlev çağrısını doğrulayın:** [3.6 Flash ile aynı kuralları](#migrate-to-gemini-3-6-flash) uygulayın.
+- **Temel Gemini 3.x şartları:** [Gemini 3.5 Geçiş Kontrol Listesi](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.5?hl=tr#migration)'ne bakın.
 
-## Passaggi successivi
+## Sonraki adımlar
 
-- Esamina le specifiche dell'API nella [panoramica dei modelli](https://ai.google.dev/gemini-api/docs/models?hl=it).
-- Esplora l'orchestrazione multi-agente nella [Guida all'API Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=it).
-- Testa e perfeziona i prompt in [Google AI Studio](https://aistudio.google.com/?hl=it).
+- [Modellere Genel Bakış](https://ai.google.dev/gemini-api/docs/models?hl=tr) sayfasındaki API spesifikasyonlarını inceleyin.
+- [Etkileşimler API Kılavuzu](https://ai.google.dev/gemini-api/docs/interactions?hl=tr)'nda çoklu aracı düzenlemesini keşfedin.
+- [Google AI Studio](https://aistudio.google.com/?hl=tr)'da istemleri test edin ve iyileştirin.
 
-Invia feedback
+Geri bildirim gönderin
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Ultimo aggiornamento 2026-07-30 UTC.
+Son güncelleme tarihi: 2026-07-30 UTC.
 
-Vuoi dirci altro?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]

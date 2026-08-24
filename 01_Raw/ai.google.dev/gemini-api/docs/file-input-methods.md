@@ -1,28 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/file-input-methods?hl=he
-fetched_at: 2026-08-17T02:22:39.685411+00:00
-title: "\u05e9\u05d9\u05d8\u05d5\u05ea \u05e7\u05dc\u05d8 \u05e9\u05dc \u05e7\u05d1\u05e6\u05d9\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/file-input-methods?hl=fr
+fetched_at: 2026-08-24T02:35:48.621152+00:00
+title: "M\u00e9thodes de saisie de fichiers \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-שליחת משוב
+Envoyer des commentaires
 
-# שיטות קלט של קבצים
+# Méthodes de saisie de fichiers
 
-במדריך הזה מוסברות הדרכים השונות שבהן אפשר לכלול קובצי מדיה כמו תמונות, אודיו, וידאו ומסמכים כששולחים בקשות ל-Gemini API.
-השיטות החדשות נתמכות בכל נקודות הקצה (endpoints) של Gemini API, כולל Batch, ‏ Interactions ו-Live API.
-השיטה המתאימה תלויה בגודל הקובץ, במיקום שבו הנתונים מאוחסנים ובתדירות שבה אתם מתכננים להשתמש בקובץ.
+Ce guide explique les différentes manières d'inclure des fichiers multimédias tels que des images, des fichiers audio, des vidéos et des documents lorsque vous envoyez des requêtes à l'API Gemini.
+Les nouvelles méthodes sont compatibles avec tous les points de terminaison de l'API Gemini, y compris les API Batch, Interactions et Live.
+Le choix de la méthode appropriée dépend de la taille de votre fichier, de l'emplacement où vos données sont stockées et de la fréquence à laquelle vous prévoyez d'utiliser le fichier.
 
-הדרך הכי פשוטה לכלול קובץ כקלט היא לקרוא קובץ מקומי ולכלול אותו בהנחיה. בדוגמה הבאה אפשר לראות איך קוראים קובץ PDF מקומי. בשיטה הזו, קובצי PDF מוגבלים ל-50MB. רשימה מלאה של סוגי קבצים ומגבלות מופיעה [בטבלת ההשוואה של שיטות הקלט](#method-comparison).
+La façon la plus simple d'inclure un fichier comme entrée consiste à lire un fichier local et à l'inclure dans un prompt. L'exemple suivant montre comment lire un fichier PDF local. Les fichiers PDF sont limités à 50 Mo pour cette méthode. Consultez le
+[tableau de comparaison des méthodes d'entrée](#method-comparison) pour obtenir la liste complète des types d'entrée de fichier
+et des limites.
 
 ### Python
 
@@ -97,26 +99,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## השוואה בין שיטות קלט
+## Comparaison des méthodes d'entrée
 
-בטבלה הבאה מוצגת השוואה בין כל שיטות הקלט, עם מגבלות הקבצים והתרחישים המומלצים לשימוש. שימו לב שמגבלת גודל הקובץ עשויה להשתנות בהתאם לסוג הקובץ ולמודל או לטוקנייזר שמשמשים לעיבוד הקובץ.
+Le tableau suivant compare chaque méthode d'entrée avec les limites de fichiers et les cas d'utilisation les plus adaptés. Notez que la limite de taille de fichier peut varier en fonction du type de fichier et du modèle ou du tokenizer utilisé pour traiter le fichier.
 
-| שיטה | הכי טוב עבור | גודל קובץ מקסימלי | התמדה |
+| Méthode | Application idéale | Taille maximale du fichier | Persistance |
 | --- | --- | --- | --- |
-| **נתונים מוטבעים** | בדיקה מהירה, קבצים קטנים, אפליקציות בזמן אמת. | ‫100MB לכל בקשה או מטען ייעודי   (**50MB לקובצי PDF**) | ללא (נשלח עם כל בקשה) |
-| **העלאה דרך File API** | קבצים גדולים, קבצים שנעשה בהם שימוש כמה פעמים. | ‫2GB לכל קובץ,   עד 20GB לכל פרויקט | ‫48 שעות |
-| **רישום של URI של GCS ב-File API** | קבצים גדולים שכבר נמצאים ב-Google Cloud Storage, קבצים שנמצאים בשימוש כמה פעמים. | ‫2GB לכל קובץ, ללא מגבלות אחסון כוללות | ללא (מאוחזר לכל בקשה). רישום חד-פעמי יכול להעניק גישה למשך 30 ימים לכל היותר. |
-| **כתובות URL חיצוניות** | נתונים ציבוריים או נתונים בדליים בענן (AWS, ‏ Azure, ‏ GCS) בלי להעלות אותם מחדש. | ‫100MB לכל בקשה או מטען ייעודי (payload) | ללא (מאוחזר לפי בקשה) |
+| **Données intégrées** | Tests rapides, petits fichiers, applications en temps réel. | 100 Mo par requête ou charge utile   (**50 Mo pour les fichiers PDF**) | Aucune (envoyée avec chaque requête) |
+| **Importation de fichiers via l'API** | Fichiers volumineux, fichiers utilisés plusieurs fois. | 2 Go par fichier,   jusqu'à 20 Go par projet | 48 heures |
+| **Enregistrement d'URI GCS via l'API Files** | Fichiers volumineux déjà présents dans Google Cloud Storage, fichiers utilisés plusieurs fois. | 2 Go par fichier, aucune limite de stockage globale | Aucune (récupérée par requête). L'enregistrement unique peut donner accès jusqu'à 30 jours. |
+| **URL externes** | Données publiques ou données dans des buckets cloud (AWS, Azure, GCS) sans avoir à les importer à nouveau. | 100 Mo par requête/charge utile | Aucune (récupérée par requête) |
 
-## נתונים מוטבעים
+## Données intégrées
 
-בקובצי PDF או בקבצים קטנים יותר (עד 100MB, או עד 50MB לקובצי PDF), אפשר להעביר את הנתונים ישירות במטען הייעודי (payload) של הבקשה. זו השיטה הפשוטה ביותר לבדיקות מהירות או לאפליקציות שמטפלות בנתונים זמניים בזמן אמת. אפשר לספק נתונים כמחרוזות מקודדות ב-Base64 או על ידי קריאה ישירה של קבצים מקומיים.
+Pour les fichiers plus petits (moins de 100 Mo ou 50 Mo pour les fichiers PDF), vous pouvez transmettre les données directement dans la charge utile de la requête. Il s'agit de la méthode la plus simple pour les tests rapides ou les applications qui gèrent des données temporaires en temps réel. Vous pouvez fournir des données sous forme de chaînes encodées en base64 ou en lisant directement des fichiers locaux.
 
-דוגמה לקריאה מקובץ מקומי מופיעה בתחילת הדף הזה.
+Pour obtenir un exemple de lecture à partir d'un fichier local, consultez l'exemple au début de cette page.
 
-### אחזור מכתובת URL
+### Récupérer à partir d'une URL
 
-אפשר גם לאחזר קובץ מכתובת URL, להמיר אותו לבייטים ולכלול אותו בקלט.
+Vous pouvez également récupérer un fichier à partir d'une URL, le convertir en octets et l'inclure dans l'entrée.
 
 ### Python
 
@@ -214,13 +216,13 @@ echo
 jq ".outputs[] | select(.type == \"text\") | .text" response.json
 ```
 
-## Gemini File API
+## API Gemini Files
 
-ממשק File API מיועד לקבצים גדולים יותר (עד 2GB) או לקבצים שרוצים להשתמש בהם בכמה בקשות.
+L'API Files est conçue pour les fichiers plus volumineux (jusqu'à 2 Go) ou les fichiers que vous prévoyez d'utiliser dans plusieurs requêtes.
 
-### העלאה רגילה של קבצים
+### Importation standard de fichiers
 
-העלאת קובץ מקומי ל-Gemini API. קבצים שמועלים בדרך הזו מאוחסנים באופן זמני (למשך 48 שעות) ומעובדים כדי שהמודל יוכל לאחזר אותם ביעילות.
+Importez un fichier local dans l'API Gemini. Les fichiers importés de cette manière sont stockés temporairement (48 heures) et traités pour être récupérés efficacement par le modèle.
 
 ### Python
 
@@ -317,43 +319,48 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-### רישום קבצים ב-Google Cloud Storage
+### Enregistrer des fichiers Google Cloud Storage
 
-אם הנתונים שלכם כבר נמצאים ב-Google Cloud Storage, אתם לא צריכים להוריד אותם ולהעלות אותם מחדש. אפשר לרשום אותו ישירות באמצעות File API.
+Si vos données se trouvent déjà dans Google Cloud Storage, vous n'avez pas besoin de les télécharger ni de les importer à nouveau. Vous pouvez les enregistrer directement avec l'API Files.
 
-1. הענקת גישה לכל קטגוריה ל**סוכן השירות**
+1. Accorder l'accès de l'**agent de service** à chaque bucket
 
-   1. מפעילים את Gemini API בפרויקט בענן ב-Google Cloud.
-   2. יוצרים את סוכן השירות:
+   1. Activez l'API Gemini dans votre projet Google Cloud.
+   2. Créez l'agent de service :
 
       `gcloud beta services identity create --service=generativelanguage.googleapis.com --project=<your_project>`
-   3. **נותנים לסוכן השירות של Gemini API הרשאות** לקריאה של קטגוריות האחסון.
+   3. **Accordez à l'agent de service de l'API Gemini les autorisations** nécessaires pour lire vos buckets de stockage.
 
-      המשתמש צריך להקצות את `Storage Object Viewer`
-      [תפקיד ה-IAM](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=he#storage.objectViewer) לסוכן השירות הזה בקטגוריות האחסון הספציפיות שהוא מתכוון להשתמש בהן.
+      L'utilisateur doit attribuer le `Storage Object Viewer`
+      [rôle IAM](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=fr#storage.objectViewer)
+      à cet agent de service sur les buckets de stockage spécifiques qu'il prévoit d'utiliser.
 
-   הגישה הזו לא פגה כברירת מחדל, אבל אפשר לשנות את זה בכל שלב. אפשר גם להשתמש בפקודות של [Google Cloud Storage IAM SDK](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=he) כדי להעניק הרשאות.
-2. אימות השירות
+   Cet accès n'expire pas par défaut, mais peut être modifié à tout moment. Vous pouvez
+   également utiliser les
+   [commandes du SDK IAM Google Cloud Storage](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=fr)
+   pour accorder des autorisations.
+2. Authentifier votre service
 
-   **דרישות מוקדמות**
+   **Prérequis**
 
-   - הפעלת ה-API
-   - יוצרים חשבון שירות או סוכן עם ההרשאות המתאימות.
+   - Activer une API
+   - Créez un compte de service ou un agent avec les autorisations appropriées.
 
-   קודם צריך לבצע אימות בתור השירות שיש לו הרשאות צפייה באובייקט אחסון. אופן הגבייה תלוי בסביבה שבה יפעל קוד ניהול הקבצים.
+   Vous devez d'abord vous authentifier en tant que service disposant des autorisations de lecteur d'objets de stockage. La manière dont cela se produit dépend de l'environnement dans lequel votre code de gestion des fichiers s'exécutera.
 
-   **מחוץ ל-Google Cloud**
+   **En dehors de Google Cloud**
 
-   אם הקוד שלכם מורץ מחוץ ל-Google Cloud, למשל מהמחשב, אתם יכולים להוריד את פרטי הכניסה לחשבון מ-Google Cloud Console באמצעות השלבים הבאים:
+   Si votre code s'exécute en dehors de Google Cloud, par exemple sur votre ordinateur, téléchargez les identifiants du compte à partir de la console Google Cloud en procédant comme suit :
 
-   1. עוברים אל [מסוף חשבון השירות](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=he).
-   2. בוחרים את חשבון השירות הרלוונטי.
-   3. בוחרים בכרטיסייה **Keys** ואז באפשרות **Add key, Create new key**.
-   4. בוחרים את סוג המפתח **JSON** ורושמים את המיקום במחשב שאליו הקובץ הורד.
+   1. Accédez à la console [Comptes de service](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=fr).
+   2. Sélectionnez le compte de service concerné.
+   3. Sélectionnez l'onglet **Clés, puis **Ajouter une clé** et Créer une clé**.
+   4. Choisissez le type de clé **JSON** et notez l'emplacement où le fichier a été téléchargé sur votre ordinateur.
 
-   פרטים נוספים זמינים במאמרי העזרה הרשמיים של Google Cloud בנושא [ניהול מפתחות של חשבונות שירות](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=he).
+   Pour en savoir plus, consultez la documentation officielle de Google Cloud sur
+   [la gestion des clés de compte de service](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=fr).
 
-   אחר כך משתמשים בפקודות הבאות כדי לבצע אימות. הפקודות האלה מניחות שקובץ חשבון השירות נמצא בספרייה הנוכחית, ושמו `service-account.json`.
+   Utilisez ensuite les commandes suivantes pour vous authentifier. Ces commandes supposent que votre fichier de compte de service se trouve dans le répertoire actuel et qu'il est nommé `service-account.json`.
 
    ### Python
 
@@ -373,7 +380,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
    )
    ```
 
-   ### JavaScript
+   ### Javascript
 
    ```
    const { GoogleAuth } = require('google-auth-library');
@@ -399,13 +406,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
      --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only'
    ```
 
-   **ב-Google Cloud**
+   **Sur Google Cloud**
 
-   אם אתם מריצים את האפליקציה ישירות ב-Google Cloud, למשל באמצעות [פונקציות של Cloud Run](https://cloud.google.com/functions?hl=he) או [מכונה של Compute Engine](https://cloud.google.com/products/compute?hl=he), יהיו לכם פרטי כניסה מרומזים, אבל תצטרכו לבצע אימות מחדש כדי להעניק את ההיקפים המתאימים.
+   Si vous exécutez directement dans Google Cloud, par exemple à l'aide de [fonctions Cloud Run](https://cloud.google.com/functions?hl=fr) ou d'une [instance Compute Engine](https://cloud.google.com/products/compute?hl=fr), vous disposerez d'identifiants implicites, mais vous devrez vous réauthentifier pour accorder les champs d'application appropriés.
 
    ### Python
 
-   הקוד הזה מניח שהשירות פועל בסביבה שבה אפשר לקבל [Application Default Credentials](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=he) באופן אוטומטי, כמו Cloud Run או Compute Engine.
+   Ce code s'attend à ce que le service s'exécute dans un environnement où
+   [les identifiants par défaut de l'application](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=fr)
+   peuvent être obtenus automatiquement, comme Cloud Run ou Compute Engine.
 
    ```
    import google.auth
@@ -420,7 +429,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
    ### JavaScript
 
-   הקוד הזה מניח שהשירות פועל בסביבה שבה אפשר לקבל [Application Default Credentials](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=he) באופן אוטומטי, כמו Cloud Run או Compute Engine.
+   Ce code s'attend à ce que le service s'exécute dans un environnement où
+   [les identifiants par défaut de l'application](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=fr)
+   peuvent être obtenus automatiquement, comme Cloud Run ou Compute Engine.
 
    ```
    const { GoogleAuth } = require('google-auth-library');
@@ -435,15 +446,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
    ### CLI
 
-   זוהי פקודה אינטראקטיבית. בשירותים כמו Compute Engine, אפשר לצרף היקפי הרשאות לשירות הפועל ברמת ההגדרה. דוגמה מופיעה ב[מסמכי חשבון השירות שמנוהל על ידי משתמש](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=he#using).
+   Il s'agit d'une commande interactive. Pour les services tels que Compute Engine, vous pouvez associer des champs d'application au service en cours d'exécution au niveau de la configuration. [Pour obtenir un exemple, consultez la documentation sur les services gérés par l'utilisateur.](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=fr#using)
 
    ```
    gcloud auth application-default login \
    --scopes="https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only"
    ```
-3. רישום קבצים (Files API)
+3. Enregistrement de fichiers (API Files)
 
-   משתמשים ב-Files API כדי לרשום קבצים וליצור נתיב Files API שאפשר להשתמש בו ישירות ב-Gemini API.
+   Utilisez l'API Files pour enregistrer des fichiers et générer un chemin d'accès à l'API Files qui peut être utilisé directement dans l'API Gemini.
 
    ### Python
 
@@ -512,10 +523,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
        -d '{"uris": ["gs://bucket/object1", "gs://bucket/object2"]}'
    ```
 
-## כתובות URL חיצוניות מסוג HTTP / כתובות URL חתומות
+## URL HTTP externes / signées
 
-אפשר להעביר כתובות URL מסוג HTTPS שנגישות לכולם או כתובות URL חתומות מראש ישירות בבקשה. ‫Gemini API יאחזר את התוכן באופן מאובטח במהלך העיבוד.
-האפשרות הזו מתאימה לקבצים בגודל של עד 100MB שאתם לא רוצים להעלות מחדש.
+Vous pouvez transmettre des URL HTTPS accessibles au public ou des URL pré-signées directement dans votre requête. L'API Gemini récupérera le contenu de manière sécurisée lors du traitement.
+Cette méthode est idéale pour les fichiers de 100 Mo maximum que vous ne souhaitez pas importer à nouveau.
 
 ### Python
 
@@ -537,7 +548,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### Javascript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -580,21 +591,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
         }'
 ```
 
-### נגישות
+### Accessibilité
 
-מוודאים שכתובות ה-URL שציינתם לא מובילות לדפים שנדרשת בהם התחברות או לדפים שמוגנים על ידי חומת תשלום. במסדי נתונים פרטיים, חשוב לוודא שאתם יוצרים כתובת URL חתומה עם הרשאות הגישה הנכונות ותאריך התפוגה הנכון.
+Vérifiez que les URL que vous fournissez ne mènent pas à des pages qui nécessitent une connexion ou qui sont payantes. Pour les bases de données privées, assurez-vous de créer une URL signée avec les autorisations d'accès et la date d'expiration appropriées.
 
-### בדיקות אבטחה
+### Contrôles de sécurité
 
-המערכת מבצעת בדיקה של ניהול התוכן בכתובת ה-URL כדי לוודא שהיא עומדת בסטנדרטים של בטיחות ומדיניות. אם כתובת ה-URL תיכשל בבדיקה הזו, תקבלו הודעה
-`url_retrieval_status` של `URL_RETRIEVAL_STATUS_UNSAFE`.
+Le système effectue une vérification de modération du contenu sur l'URL pour s'assurer qu'elle respecte les normes de sécurité et les règles. Si l'URL échoue à cette vérification, vous recevrez un `url_retrieval_status` de `URL_RETRIEVAL_STATUS_UNSAFE`.
 
-### סוגי התוכן הנתמכים
+### Types de contenu compatibles
 
-הרשימה הזו של סוגי קבצים נתמכים ומגבלות נועדה לספק הנחיות ראשוניות, והיא לא מקיפה. קבוצת הסוגים הנתמכים בפועל עשויה להשתנות, והיא תלויה במודל הספציפי ובגרסת הטוקנייזר שנמצאים בשימוש. סוגים שלא נתמכים יגרמו לשגיאה.
-בנוסף, אחזור תוכן עבור סוגי הקבצים האלה תומך רק בכתובות URL שזמינות לכל.
+Cette liste des types de fichiers et des limites compatibles est fournie à titre indicatif et n'est pas exhaustive. L'ensemble effectif des types compatibles est susceptible d'être modifié et peut varier en fonction du modèle spécifique et de la version du tokenizer utilisés. Les types non compatibles génèrent une erreur.
+De plus, la récupération de contenu pour ces types de fichiers n'est compatible qu'avec les URL accessibles au public.
 
-#### סוגים של קובצי טקסט
+#### Types de fichiers texte
 
 - `text/html`
 - `text/css`
@@ -604,19 +614,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 - `text/rtf`
 - `text/javascript`
 
-#### סוגי קבצים של אפליקציות
+#### Types de fichiers d'application
 
 - `application/json`
 - `application/pdf`
 
-#### סוגים של קובצי תמונות
+#### Types de fichiers image
 
 - `image/bmp`
 - `image/jpeg`
 - `image/png`
 - `image/webp`
 
-#### סוגים של קובצי וידאו
+#### Types de fichiers vidéo
 
 - `video/mp4`
 - `video/mpeg`
@@ -628,31 +638,36 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 - `video/wmv`
 - `video/3gpp`
 
-## שיטות מומלצות
+## Bonnes pratiques
 
-- **בחירת השיטה הנכונה:** משתמשים בנתונים מוטבעים לקבצים קטנים וזמניים.
-  כדאי להשתמש ב-File API לקבצים גדולים או לקבצים שמשתמשים בהם לעיתים קרובות. שימוש בכתובות URL חיצוניות לנתונים שכבר מתארחים באינטרנט.
-- **צריך לציין סוגי MIME:** חשוב לספק תמיד את סוג ה-MIME הנכון של נתוני הקובץ כדי להבטיח עיבוד תקין.
-- **טיפול בשגיאות:** כדאי להטמיע טיפול בשגיאות בקוד כדי לנהל בעיות פוטנציאליות כמו כשלים ברשת, בעיות בגישה לקבצים או שגיאות ב-API.
+- **Choisissez la bonne méthode** : utilisez des données intégrées pour les petits fichiers temporaires.
+  Utilisez l'API Files pour les fichiers plus volumineux ou fréquemment utilisés. Utilisez des URL externes pour les données déjà hébergées en ligne.
+- **Spécifiez les types MIME** : fournissez toujours le type MIME correct pour les données de fichier afin de garantir un traitement approprié.
+- **Gérez les erreurs** : implémentez la gestion des erreurs dans votre code pour gérer les problèmes potentiels tels que les pannes de réseau, les problèmes d'accès aux fichiers ou les erreurs d'API.
 
-## מגבלות
+## Limites
 
-- מגבלות גודל הקובץ משתנות בהתאם לשיטה (ראו [טבלת השוואה](#method-comparison)) וסוג הקובץ.
-- נתונים מוטמעים מגדילים את גודל המטען הייעודי (payload) של הבקשה.
-- ההעלאות באמצעות File API הן זמניות והתוקף שלהן פג אחרי 48 שעות.
-- הגודל של מטען ייעודי (payload) שמתקבל מכתובת URL חיצונית מוגבל ל-100MB, ויש תמיכה בסוגי תוכן ספציפיים.
+- Les limites de taille des fichiers varient en fonction de la méthode (voir le [tableau comparatif](#method-comparison))
+  et du type de fichier.
+- Les données intégrées augmentent la taille de la charge utile de la requête.
+- Les importations de fichiers via l'API sont temporaires et expirent au bout de 48 heures.
+- La récupération d'URL externes est limitée à 100 Mo par charge utile et est compatible avec des types de contenu spécifiques.
 
-## המאמרים הבאים
+## Étape suivante
 
-- אתם יכולים לנסות לכתוב פרומפטים מולטימודאליים משלכם באמצעות [Google AI Studio](http://aistudio.google.com/?hl=he).
-- מידע על הוספת קבצים להנחיות זמין במדריכים בנושא [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=he), [אודיו](https://ai.google.dev/gemini-api/docs/audio?hl=he) ו[עיבוד מסמכים](https://ai.google.dev/gemini-api/docs/document-processing?hl=he).
+- Essayez d'écrire vos propres invites multimodales à l'aide de
+  [Google AI Studio](http://aistudio.google.com/?hl=fr).
+- Pour savoir comment inclure des fichiers dans vos prompts, consultez les
+  [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=fr) sur le traitement de la
+  [vision](https://ai.google.dev/gemini-api/docs/audio?hl=fr), de l'audio et des
+  [documents](https://ai.google.dev/gemini-api/docs/document-processing?hl=fr).
 
-שליחת משוב
+Envoyer des commentaires
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-עדכון אחרון: 2026-07-30 (שעון UTC).
+Dernière mise à jour le 2026/07/30 (UTC).
 
-רוצה לתת לנו משוב?
+Voulez-vous nous donner plus d'informations ?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-30 (שעון UTC)."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/30 (UTC)."],[],[]]

@@ -1,70 +1,71 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=pt-BR
-fetched_at: 2026-08-17T02:29:50.072083+00:00
-title: "Explica\u00e7\u00e3o sobre as vers\u00f5es da API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=it
+fetched_at: 2026-08-24T02:23:53.843525+00:00
+title: "Spiegazione delle versioni API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Referência da API](https://ai.google.dev/api?hl=pt-br)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Riferimento API](https://ai.google.dev/api?hl=it)
 
-Envie comentários
+Invia feedback
 
-# Explicação sobre as versões da API
+# Spiegazione delle versioni API
 
-Este documento oferece uma visão geral das diferenças entre as versões `v1`
-e `v1beta` da API Gemini.
+Questo documento fornisce una panoramica generale delle differenze tra le versioni `v1`
+e `v1beta` dell'API Gemini.
 
-- **v1**: versão estável da API. Os recursos na versão estável têm suporte completo durante o ciclo de vida da versão principal. Se houver mudanças significativas, uma nova versão principal da API será criada, e a versão atual será descontinuada após um período razoável.
-  Mudanças não significativas podem ser introduzidas na API sem alterar a versão principal. A **API Interactions** e os principais recursos dela estão disponíveis na versão `v1`.
-- **v1beta**: essa versão inclui recursos e funcionalidades iniciais que estão sendo desenvolvidos ativamente. Embora os recursos na versão `v1beta` possam estar sujeitos a mudanças à medida que os refinamos com base no feedback, ela permite que você teste novos recursos antes que sejam promovidos à versão estável.
+- **v1**: versione stabile dell'API. Le funzionalità della versione stabile sono completamente supportate per l'intero ciclo di vita della versione principale. In caso di modifiche che causano interruzioni, verrà creata una nuova versione principale dell'API e la versione esistente verrà ritirata dopo un periodo di tempo ragionevole.
+  Le modifiche che non causano interruzioni possono essere introdotte nell'API senza modificare la versione principale. L'**API Interactions** e le relative funzionalità principali sono generalmente disponibili in `v1`.
+- **v1beta**: questa versione include funzionalità e funzionalità iniziali in fase di sviluppo
+  attivo. Sebbene le funzionalità di `v1beta` possano essere soggette a modifiche man mano che le perfezioniamo in base al feedback, ti consentono di provare nuove funzionalità prima che vengano promosse alla versione stabile.
 
-## Suporte a recursos e funcionalidades
+## Supporto di funzionalità e funzionalità
 
-A tabela a seguir detalha a disponibilidade de recursos nas versões `v1` (GA)
-e `v1beta` (Beta). Os principais recursos e ferramentas da API se aplicam à API Interactions e à `generateContent`, a menos que especificado de outra forma:
+La tabella seguente descrive in dettaglio la disponibilità delle funzionalità in `v1` (GA)
+e `v1beta` (beta). Le funzionalità e gli strumenti principali dell'API si applicano sia all'API Interactions sia a `generateContent`, se non diversamente specificato:
 
-| Recurso | v1 | v1beta |
+| Funzionalità | v1 | v1beta |
 | --- | --- | --- |
-| **Principais recursos da API** |  |  |
-| [API Interactions](https://ai.google.dev/gemini-api/docs/get-started?hl=pt-br) |  |  |
-| [Chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br) |  |  |
-| [Saída estruturada](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br) |  |  |
-| [Raciocínio](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br) |  |  |
-| [Instruções do sistema](https://ai.google.dev/gemini-api/docs/system-instructions?hl=pt-br) |  |  |
-| [Saída de áudio (configuração de fala)](https://ai.google.dev/gemini-api/docs/audio?hl=pt-br) |  |  |
-| [Nível de serviço (prioridade / flexível)](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pt-br) |  |  |
-| **Ferramentas** |  |  |
-| [Ferramenta de execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br) |  |  |
-| [Embasamento da Pesquisa Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br) |  |  |
-| [Embasamento do Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pt-br) |  |  |
-| [Ferramenta de contexto de URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br) |  |  |
-| [Ferramenta de pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br) |  |  |
-| [Ferramenta de uso do computador](https://ai.google.dev/gemini-api/docs/computer-use?hl=pt-br) |  |  |
-| [Ferramenta de servidores MCP](https://ai.google.dev/gemini-api/docs/eap/remote_mcp?hl=pt-br) |  |  |
-| **APIs em tempo real** |  |  |
-| [API Live (WebSockets)](https://ai.google.dev/gemini-api/docs/live-api?hl=pt-br) |  |  |
-| [API Live Music](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=pt-br) |  |  |
-| [Tokens temporários (API Live)](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=pt-br) |  |  |
-| **APIs da plataforma** |  |  |
-| [API Models](https://ai.google.dev/gemini-api/docs/models?hl=pt-br) |  |  |
-| [Rota do serviço de arquivos](https://ai.google.dev/gemini-api/docs/files?hl=pt-br) |  |  |
-| [Rota de lojas de pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br) |  |  |
-| [API Agents](https://ai.google.dev/gemini-api/docs/agents?hl=pt-br) |  |  |
-| [API Webhooks](https://ai.google.dev/gemini-api/docs/webhooks?hl=pt-br) |  |  |
-| [Armazenamento em cache de contexto](https://ai.google.dev/gemini-api/docs/caching?hl=pt-br) |  |  |
+| **Funzionalità principali dell'API** |  |  |
+| [API Interactions](https://ai.google.dev/gemini-api/docs/get-started?hl=it) |  |  |
+| [Chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it) |  |  |
+| [Output strutturato](https://ai.google.dev/gemini-api/docs/structured-output?hl=it) |  |  |
+| [Pensiero / ragionamento](https://ai.google.dev/gemini-api/docs/thinking?hl=it) |  |  |
+| [Istruzioni di sistema](https://ai.google.dev/gemini-api/docs/system-instructions?hl=it) |  |  |
+| [Output audio (configurazione vocale)](https://ai.google.dev/gemini-api/docs/audio?hl=it) |  |  |
+| [Livello di servizio (priorità / flessibilità)](https://ai.google.dev/gemini-api/docs/priority-inference?hl=it) |  |  |
+| **Strumenti** |  |  |
+| [Strumento di esecuzione del codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it) |  |  |
+| [Grounding della Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it) |  |  |
+| [Grounding di Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it) |  |  |
+| [Strumento di contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it) |  |  |
+| [Strumento di ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it) |  |  |
+| [Strumento di utilizzo del computer](https://ai.google.dev/gemini-api/docs/computer-use?hl=it) |  |  |
+| [Strumento dei server MCP](https://ai.google.dev/gemini-api/docs/eap/remote_mcp?hl=it) |  |  |
+| **API in tempo reale** |  |  |
+| [API Live (WebSocket)](https://ai.google.dev/gemini-api/docs/live-api?hl=it) |  |  |
+| [API Live Music](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=it) |  |  |
+| [Token effimeri (API Live)](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=it) |  |  |
+| **API della piattaforma** |  |  |
+| [API Models](https://ai.google.dev/gemini-api/docs/models?hl=it) |  |  |
+| [Route del servizio File](https://ai.google.dev/gemini-api/docs/files?hl=it) |  |  |
+| [Route degli archivi di ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it) |  |  |
+| [API Agents](https://ai.google.dev/gemini-api/docs/agents?hl=it) |  |  |
+| [API Webhook](https://ai.google.dev/gemini-api/docs/webhooks?hl=it) |  |  |
+| [Memorizzazione nella cache del contesto](https://ai.google.dev/gemini-api/docs/caching?hl=it) |  |  |
 
-- - Compatível
+- - Supportato
 
-## Configurar a versão da API em um SDK
+## Configurare la versione dell'API in un SDK
 
-Os SDKs da API Gemini são definidos como `v1beta` por padrão, mas é possível especificar versões definindo a versão da API, conforme mostrado no exemplo de código a seguir:
+Per impostazione predefinita, gli SDK dell'API Gemini utilizzano `v1beta`, ma puoi specificare esplicitamente le versioni impostando la versione dell'API come mostrato nel seguente esempio di codice:
 
 ### Python
 
@@ -113,12 +114,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1/interactions" \
   }'
 ```
 
-Envie comentários
+Invia feedback
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Última atualização 2026-07-28 UTC.
+Ultimo aggiornamento 2026-07-28 UTC.
 
-Quer enviar seu feedback?
+Vuoi dirci altro?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-07-28 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-28 UTC."],[],[]]

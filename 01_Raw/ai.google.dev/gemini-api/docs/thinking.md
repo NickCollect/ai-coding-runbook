@@ -1,39 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=es-419
-fetched_at: 2026-08-17T02:17:43.918708+00:00
-title: "Pensamiento de Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=fr
+fetched_at: 2026-08-24T02:37:26.739769+00:00
+title: "Gemini avec r\u00e9flexion \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Enviar comentarios
+Envoyer des commentaires
 
-# Pensamiento de Gemini
+# Gemini avec réflexion
 
-Los modelos de las series [Gemini 3 y 2.5](https://ai.google.dev/gemini-api/docs/models?hl=es-419) usan un
-"proceso de razonamiento" que mejora significativamente sus capacidades de razonamiento y planificación de varios pasos, lo que los hace muy eficaces para tareas complejas, como la
-codificación, las matemáticas avanzadas y el análisis de datos.
+Les modèles des séries [Gemini 3 et 2.5](https://ai.google.dev/gemini-api/docs/models?hl=fr) utilisent un
+"processus de réflexion" qui améliore considérablement leurs capacités de raisonnement et de planification en plusieurs étapes,
+ce qui les rend très efficaces pour les tâches complexes telles que
+la programmation, les mathématiques avancées et l'analyse de données.
 
-Cuando usas un modelo de razonamiento, Gemini razona internamente antes de responder. La API de Interactions muestra este razonamiento a través de pasos `thought`, que son pasos dedicados que aparecen de forma cronológica junto con las llamadas a funciones, las entradas del usuario o los resultados del modelo en el array `steps`.
+Lorsque vous utilisez un modèle de réflexion, Gemini raisonne en interne avant de répondre. L'API Interactions met en évidence ce raisonnement via des étapes `thought` dédiées qui apparaissent de manière chronologique à côté des appels de fonction, des entrées utilisateur ou des sorties de modèle dans le tableau `steps`.
 
-Cada paso de razonamiento contiene dos campos:
+Chaque étape de réflexion contient deux champs :
 
-| Campo | Obligatorio | Descripción |
+| Champ | Obligatoire | Description |
 | --- | --- | --- |
-| `signature` | ✅ Sí | Es una representación encriptada del estado de razonamiento interno del modelo. Siempre está presente, incluso cuando el modelo realiza un razonamiento mínimo. |
-| `summary` | ❌ No | Es un array de contenido (texto o imágenes) que resume el razonamiento. Puede estar vacío según la configuración de [`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=es-419), si el modelo realizó suficiente razonamiento o el tipo de contenido (por ejemplo, es posible que las imágenes latentes no tengan resúmenes de texto). |
+| `signature` | ✅ Oui | Représentation chiffrée de l'état de raisonnement interne du modèle. Toujours présent, même lorsque le modèle effectue un raisonnement minimal. |
+| `summary` | ❌ Non | Tableau de contenu (texte et/ou images) résumant le raisonnement. Peut être vide en fonction de la [`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=fr) config, du fait que le modèle a effectué suffisamment de raisonnement ou du type de contenu (par exemple, les latents d'image peuvent ne pas avoir de résumés de texte). |
 
-## Interacciones con el razonamiento
+## Interactions avec la réflexion
 
-Iniciar una interacción con un modelo de razonamiento es similar a cualquier otra solicitud de interacción. Especifica uno de los [modelos con compatibilidad de razonamiento](#thinking-levels) en el campo `model`:
+Lancer une interaction avec un modèle de réflexion est semblable à toute autre requête d'interaction. Spécifiez l'un des [modèles compatibles avec la réflexion](#thinking-levels) dans le `model` champ :
 
 ### Python
 
@@ -75,10 +76,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Resúmenes de razonamiento
+## Résumés des réflexions
 
-Los resúmenes de razonamiento proporcionan información sobre el proceso de razonamiento interno del modelo.
-De forma predeterminada, solo se muestra el resultado final. Puedes habilitar los resúmenes de razonamiento con `thinking_summaries`:
+Les résumés des réflexions fournissent des insights sur le processus de raisonnement interne du modèle.
+Par défaut, seule la sortie finale est renvoyée. Vous pouvez activer les résumés des réflexions avec `thinking_summaries` :
 
 ### Python
 
@@ -160,23 +161,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Un bloque de razonamiento puede contener **solo una firma sin resumen** en los siguientes casos:
+Un bloc de réflexion peut contenir **uniquement une signature sans résumé** dans les cas suivants :
 
-- Solicitudes simples, en las que el modelo no razonó lo suficiente para generar un resumen
-- `thinking_summaries: "none"`, en las que los resúmenes están inhabilitados de forma explícita
-- Es posible que ciertos tipos de contenido de razonamiento, como las imágenes, no tengan resúmenes de texto
+- Requêtes simples, où le modèle n'a pas suffisamment raisonné pour générer un résumé
+- `thinking_summaries: "none"`, où les résumés sont explicitement désactivés
+- Certains types de contenu de réflexion, tels que les images, peuvent ne pas avoir de résumés de texte
 
-Tu código siempre debe controlar los bloques de razonamiento en los que `summary` está vacío o ausente.
+Votre code doit toujours gérer les blocs de réflexion où `summary` est vide ou absent.
 
-## Transmisión con razonamiento
+## Streaming avec réflexion
 
-Usa la transmisión para recibir resúmenes de razonamiento incrementales durante la generación.
-Los bloques de razonamiento se entregan mediante eventos enviados por el servidor (SSE) con dos tipos de delta distintos:
+Utilisez le streaming pour recevoir des résumés de réflexion incrémentiels lors de la génération.
+Les blocs de réflexion sont fournis à l'aide d'événements envoyés par le serveur (SSE) avec deux types de delta distincts :
 
-| Tipo de delta | Contiene | Cuándo se envía |
+| Type de delta | Contient | Quand les données sont envoyées |
 | --- | --- | --- |
-| `thought_summary` | Contenido de resumen de texto o imagen | Uno o más deltas con resumen incremental |
-| `thought_signature` | La firma criptográfica | el último delta antes de `step.stop` |
+| `thought_summary` | Contenu du résumé de texte ou d'image | Un ou plusieurs deltas avec un résumé incrémentiel |
+| `thought_signature` | La signature cryptographique | le dernier delta avant `step.stop` |
 
 ### Python
 
@@ -278,7 +279,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-La respuesta de transmisión usa eventos enviados por el servidor (SSE) y se compone de pasos y eventos, por ejemplo:
+La réponse en streaming utilise des événements envoyés par le serveur (SSE) et se compose d'étapes et d'événements, par exemple :
 
 ```
 event: interaction.created
@@ -309,22 +310,22 @@ event: done
 data: [DONE]
 ```
 
-## Control del razonamiento
+## Contrôler la réflexion
 
-Los modelos de Gemini realizan un razonamiento dinámico de forma predeterminada, y ajustan automáticamente la cantidad de esfuerzo de razonamiento según la complejidad de la solicitud. Puedes controlar este comportamiento con el parámetro `thinking_level`.
+Les modèles Gemini s'engagent dans une réflexion dynamique par défaut, en ajustant automatiquement la quantité d'efforts de raisonnement en fonction de la complexité de la requête. Vous pouvez contrôler ce comportement à l'aide du paramètre `thinking_level`.
 
-| Modelo | Razonamiento predeterminado | Niveles admitidos |
+| Modèle | Réflexion par défaut | Niveaux compatibles |
 | --- | --- | --- |
-| gemini-3.6-flash | Activado (medio) | minimal, low, medium, high |
-| gemini-3.5-flash-lite | Activado (mínimo) | minimal, low, medium, high |
-| gemini-3.1-pro-preview | Activado (alto) | low, medium, high |
-| gemini-3.1-flash-lite-image | Activado (mínimo) | minimal, high |
-| gemini-3-flash-preview | Activado (alto) | minimal, low, medium, high |
-| gemini-3-pro-preview | Activado (alto) | low, high |
-| gemini-3.5-flash | Activado (medio) | minimal, low, medium, high |
-| gemini-2.5-pro | Activado | low, medium, high |
-| gemini-2.5-flash | Activado | low, medium, high |
-| gemini-2.5-flash-lite | Desactivado | low, medium, high |
+| gemini-3.6-flash | Activé (moyen) | minimal, faible, moyen, élevé |
+| gemini-3.5-flash-lite | Activé (minimal) | minimal, faible, moyen, élevé |
+| gemini-3.1-pro-preview | Activé (élevé) | faible, moyen, élevé |
+| gemini-3.1-flash-lite-image | Activé (minimal) | minimal, élevé |
+| gemini-3-flash-preview | Activé (élevé) | minimal, faible, moyen, élevé |
+| gemini-3-pro-preview | Activé (élevé) | faible, élevé |
+| gemini-3.5-flash | Activé (moyen) | minimal, faible, moyen, élevé |
+| gemini-2.5-pro | Activé | faible, moyen, élevé |
+| gemini-2.5-flash | Activé | faible, moyen, élevé |
+| gemini-2.5-flash-lite | Désactivé | faible, moyen, élevé |
 
 ### Python
 
@@ -375,27 +376,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Firmas de razonamiento
+## Signatures de réflexion
 
-Las firmas de razonamiento son representaciones encriptadas del razonamiento interno del modelo. Son necesarias para mantener la continuidad del razonamiento en las interacciones de varios turnos.
+Les signatures de réflexion sont des représentations chiffrées du raisonnement interne du modèle. Elles sont nécessaires pour maintenir la continuité du raisonnement dans les interactions multitours.
 
-La API de Interactions facilita el manejo de las firmas de razonamiento en comparación con la API de `generateContent`.
+L'API Interactions simplifie considérablement la gestion des signatures de réflexion par rapport à l'API `generateContent`.
 
-### Modo con estado (recomendado)
+### Mode avec état (recommandé)
 
-De forma predeterminada, cuando usas la API de Interactions en modo con estado (si configuras `store: true` y pasas el `previous_interaction_id` en los turnos posteriores), el servidor administra automáticamente el estado de la conversación, incluidos todos los bloques de razonamiento y las firmas. En este modo, no necesitas hacer nada con respecto a las firmas. Se controlan por completo en el servidor.
+Par défaut, lorsque vous utilisez l'API Interactions en mode avec état (en définissant `store: true` et en transmettant le `previous_interaction_id` dans les tours suivants), le serveur gère automatiquement l'état de la conversation, y compris tous les blocs de réflexion et les signatures. Dans ce mode, vous n'avez rien à faire concernant les signatures. Elles sont entièrement gérées côté serveur.
 
-### Modo sin estado
+### Mode sans état
 
-Si administras el estado de la conversación por tu cuenta (modo sin estado) y pasas el historial completo de entradas y salidas en cada solicitud:
+Si vous gérez vous-même l'état de la conversation (mode sans état) et que vous transmettez l'historique complet des entrées et des sorties dans chaque requête :
 
-- **DEBES** volver a enviar todos los bloques `thought` exactamente como se recibieron del modelo.
-- **NO** debes quitar ni modificar los bloques de razonamiento del historial, ya que contienen las firmas necesarias para que el modelo continúe con su razonamiento.
-- Cuando cambies de modelo dentro de una sesión, debes volver a enviar los bloques de razonamiento del modelo anterior. El backend administra la compatibilidad.
+- Vous **DEVEZ** toujours renvoyer tous les blocs `thought` exactement tels qu'ils ont été reçus du modèle.
+- Vous **NE DEVEZ PAS** supprimer ni modifier les blocs de réflexion de l'historique, car ils contiennent les signatures requises pour que le modèle poursuive son raisonnement.
+- Lorsque vous changez de modèle au cours d'une session, vous devez toujours renvoyer les blocs de réflexion du modèle précédent. Le backend gère la compatibilité.
 
-## Precios
+## Tarifs
 
-Cuando el razonamiento está activado, el precio de la respuesta es la suma de los tokens de salida y los tokens de razonamiento. Puedes obtener la cantidad total de tokens de razonamiento generados en el campo `total_thought_tokens`.
+Lorsque la réflexion est activée, le prix de la réponse correspond à la somme des jetons de sortie et des jetons de réflexion. Vous pouvez obtenir le nombre total de jetons de réflexion générés à partir du champ `total_thought_tokens`.
 
 ### Python
 
@@ -411,34 +412,32 @@ console.log(`Thoughts tokens: ${interaction.usage.total_thought_tokens}`);
 console.log(`Output tokens: ${interaction.usage.total_output_tokens}`);
 ```
 
-Los modelos de razonamiento generan razonamientos completos para mejorar la calidad de la respuesta final
-y, luego, muestran [resúmenes](#summaries) para proporcionar información sobre el
-proceso de razonamiento. El precio se basa en los tokens de razonamiento completos que el modelo necesita generar, a pesar de que solo se muestra el resumen de la API.
+Les modèles de réflexion génèrent des réflexions complètes pour améliorer la qualité de la réponse finale, puis génèrent des [résumés](#summaries) pour fournir des insights sur le processus de réflexion. La tarification est basée sur les jetons de réflexion complets que le modèle doit générer, même si seul le résumé est généré par l'API.
 
-Puedes obtener más información sobre los tokens en la guía de [conteo de tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419).
+Pour en savoir plus sur les jetons, consultez le guide sur le [comptage des jetons](https://ai.google.dev/gemini-api/docs/tokens?hl=fr).
 
-## Prácticas recomendadas
+## Bonnes pratiques
 
-Sigue estos lineamientos para usar los modelos de razonamiento de manera eficiente.
+Utilisez efficacement les modèles de réflexion en suivant ces consignes.
 
-- **Revisa el razonamiento**: Analiza los resúmenes de razonamiento para comprender las fallas y mejorar las instrucciones.
-- **Controla el presupuesto de razonamiento**: Solicita al modelo que razone menos para obtener resultados extensos y ahorrar tokens.
-- **Tareas simples**: Usa un razonamiento mínimo o bajo para la recuperación o clasificación de hechos (p.ej., "¿Dónde se fundó DeepMind?").
-- **Tareas moderadas**: Usa el razonamiento predeterminado para comparar conceptos o razonamientos creativos (p.ej., compara autos eléctricos e híbridos).
-- **Tareas complejas**: Usa el razonamiento máximo para la codificación avanzada, las matemáticas o la planificación de varios pasos (p.ej., resuelve problemas matemáticos de AIME).
+- **Examiner le raisonnement** : analysez les résumés des réflexions pour comprendre les échecs et améliorer les requêtes.
+- **Contrôler le budget de réflexion** : demandez au modèle de moins réfléchir pour les sorties longues afin d'économiser des jetons.
+- **Tâches simples** : utilisez une réflexion minimale ou faible pour la récupération ou la classification de faits (par exemple, « Où DeepMind a-t-il été fondé ? »).
+- **Tâches modérées** : utilisez la réflexion par défaut pour comparer des concepts ou un raisonnement créatif (par exemple, comparer les voitures électriques et hybrides).
+- **Tâches complexes** : utilisez une réflexion maximale pour la programmation avancée, les mathématiques ou la planification en plusieurs étapes (par exemple, résoudre des problèmes mathématiques AIME).
 
-## ¿Qué sigue?
+## Étape suivante
 
-- [Generación de texto](https://ai.google.dev/gemini-api/docs/text-generation?hl=es-419): Respuestas de texto básicas
-- [Llamadas a función](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419): Conexión con las herramientas
-- [Guía de Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=es-419): Funciones específicas del modelo
+- [Génération de texte](https://ai.google.dev/gemini-api/docs/text-generation?hl=fr) : réponses textuelles de base
+- [Appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr) : se connecter à des outils
+- [Guide Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=fr) : fonctionnalités spécifiques au modèle
 
-Enviar comentarios
+Envoyer des commentaires
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Última actualización: 2026-07-30 (UTC)
+Dernière mise à jour le 2026/07/30 (UTC).
 
-¿Quieres brindar más información?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-07-30 (UTC)"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/30 (UTC)."],[],[]]

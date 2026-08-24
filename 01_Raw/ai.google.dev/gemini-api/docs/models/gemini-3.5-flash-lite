@@ -1,52 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=id
-fetched_at: 2026-08-17T02:32:14.702083+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=tr
+fetched_at: 2026-08-24T02:31:59.881994+00:00
 title: "Gemini 3.5 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Kirim masukan
+Geri bildirim gönderin
 
 # Gemini 3.5 Flash-Lite
 
-Gemini 3.5 Flash-Lite adalah model multimodal hemat biaya dengan latensi rendah yang dioptimalkan untuk eksekusi berbiaya rendah dan throughput tinggi untuk tugas sub-agen dan parsing dokumen. Model ini mendukung input teks, gambar, video, audio, dan PDF, serta dirancang untuk alur kerja agentic bervolume tinggi, ekstraksi data sederhana, dan aplikasi yang memiliki batasan utama pada latensi dan biaya API.
+Gemini 3.5 Flash-Lite, alt aracı görevleri ve belge ayrıştırma için yüksek işleme hızı ve düşük maliyetli yürütme amacıyla optimize edilmiş, düşük gecikme süresine sahip, uygun maliyetli bir çok formatlı modeldir. Model; metin, resim, video, ses ve PDF girişlerini destekler. Ayrıca yüksek hacimli aracı iş akışları, basit veri ayıklama ve gecikme ile API maliyetinin temel kısıtlamalar olduğu uygulamalar için tasarlanmıştır.
 
-[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash-lite&hl=id)
+[Google AI Studio'da deneme](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash-lite&hl=tr)
 
-## Dokumentasi
+## Belgeler
 
-Buka halaman
-[Model terbaru](https://ai.google.dev/gemini-api/docs/latest-model?hl=id)
-untuk mengetahui cakupan lengkap fitur dan kemampuannya.
+Özellikler ve işlevler hakkında kapsamlı bilgi için [En yeni model](https://ai.google.dev/gemini-api/docs/latest-model?hl=tr) sayfasına gidin.
 
 ## gemini-3.5-flash-lite
 
-| Properti | Deskripsi |
+| Mülk | Açıklama |
 | --- | --- |
-| Kode model id\_card | `gemini-3.5-flash-lite` |
-| saveJenis data yang didukung | **Input**  Teks, Gambar, Video, Audio, dan PDF  **Output**  Teks |
-| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Batas token input**  1.048.576  **Batas token output**  65.536 |
-| handymanKemampuan | **[Pembuatan audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=id)**  Tidak didukung  **[Caching](https://ai.google.dev/gemini-api/docs/caching?hl=id)**  Didukung  **[Eksekusi kode](https://ai.google.dev/gemini-api/docs/code-execution?hl=id)**  Didukung  **[Penggunaan komputer](https://ai.google.dev/gemini-api/docs/computer-use?hl=id)**  Didukung (Pratinjau)  **[Penelusuran file](https://ai.google.dev/gemini-api/docs/file-search?hl=id)**  Didukung  **[Pemanggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id)**  Didukung  **[Melakukan grounding dengan Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=id)**  Didukung  **[Pembuatan gambar](https://ai.google.dev/gemini-api/docs/image-generation?hl=id)**  Tidak didukung  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=id)**  Tidak didukung  **[Grounding penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id)**  Didukung  **[Output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id)**  Didukung  **[Penalaran](https://ai.google.dev/gemini-api/docs/thinking?hl=id)**  Didukung  **[Konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id)**  Didukung |
-| speedOpsi pemakaian | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=id)**  Didukung  **[Inferensi fleksibel](https://ai.google.dev/gemini-api/docs/flex-inference?hl=id)**  Didukung  **[Inferensi prioritas](https://ai.google.dev/gemini-api/docs/priority-inference?hl=id)**  Didukung |
-| Versi 123 | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - Stabil: `gemini-3.5-flash-lite` |
-| calendar\_monthPembaruan terbaru | Juli 2026 |
-| Kartu model id\_card | [Kartu model](https://deepmind.google/models/model-cards/gemini-3-5-flash-lite/?hl=id) |
+| id\_cardModel kodu | `gemini-3.5-flash-lite` |
+| saveDesteklenen veri türleri | **Girişler**  Metin, resim, video, ses ve PDF  **Çıkış**  Metin |
+| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  1.048.576  **Çıkış jetonu sınırı**  65.536 |
+| handymanÖzellikler | **[Ses üretme](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr)**  Desteklenmiyor  **[Önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr)**  Destekleniyor  **[Kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr)**  Destekleniyor  **[Bilgisayar kullanımı](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr)**  Desteklenir (önizleme)  **[Dosya arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr)**  Destekleniyor  **[İşlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr)**  Destekleniyor  **[Google Haritalar ile Temellendirme](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr)**  Destekleniyor  **[Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr)**  Desteklenmiyor  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)**  Desteklenmiyor  **[Arama temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr)**  Destekleniyor  **[Yapılandırılmış çıkışlar](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr)**  Destekleniyor  **[Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr)**  Destekleniyor  **[URL bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr)**  Destekleniyor |
+| speedTüketim seçenekleri | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr)**  Destekleniyor  **[Esnek çıkarım](https://ai.google.dev/gemini-api/docs/flex-inference?hl=tr)**  Destekleniyor  **[Öncelik çıkarımı](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr)**  Destekleniyor |
+| 123Sürümler | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - Kararlı: `gemini-3.5-flash-lite` |
+| calendar\_monthSon güncelleme | Temmuz 2026 |
+| id\_cardModel kartı | [Model kartı](https://deepmind.google/models/model-cards/gemini-3-5-flash-lite/?hl=tr) |
 
-Kirim masukan
+Geri bildirim gönderin
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Terakhir diperbarui pada 2026-07-30 UTC.
+Son güncelleme tarihi: 2026-07-30 UTC.
 
-Ada masukan untuk kami?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-30 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]

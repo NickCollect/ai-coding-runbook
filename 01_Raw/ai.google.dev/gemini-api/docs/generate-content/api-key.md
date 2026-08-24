@@ -1,145 +1,144 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/api-key?hl=ar
-fetched_at: 2026-08-17T02:36:42.623857+00:00
-title: "\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0645\u0641\u0627\u062a\u064a\u062d \u0648\u0627\u062c\u0647\u0629 \u0628\u0631\u0645\u062c\u0629 \u0627\u0644\u062a\u0637\u0628\u064a\u0642\u0627\u062a \u0641\u064a Gemini \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/api-key?hl=de
+fetched_at: 2026-08-24T02:30:30.070428+00:00
+title: "Gemini API-Schl\u00fcssel verwenden \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-إرسال ملاحظات
+Feedback geben
 
-# استخدام مفاتيح واجهة برمجة التطبيقات في Gemini
+# Gemini API-Schlüssel verwenden
 
-لاستخدام Gemini API، يجب مصادقة طلباتك. يمكنك المصادقة باستخدام مفتاح واجهة برمجة تطبيقات عادي أو مفتاح تفويض.
+Wenn Sie die Gemini API verwenden möchten, müssen Sie Ihre Anfragen authentifizieren. Sie können sich mit einem Standard- oder Autorisierungs-API-Schlüssel authentifizieren.
 
-[إنشاء مفتاح واجهة Gemini API أو الاطّلاع عليه](https://aistudio.google.com/apikey?hl=ar)
+[Gemini API-Schlüssel erstellen oder ansehen](https://aistudio.google.com/apikey?hl=de)
 
-## أنواع مفاتيح واجهة برمجة التطبيقات: المفتاح العادي مقابل مفتاح التفويض
+## API-Schlüsseltypen: Standard vs. Autorisierung
 
-توفّر مفاتيح واجهة برمجة التطبيقات إمكانية الوصول إلى Gemini API، ولكن تختلف خصائص الأمان الخاصة بها. نعمل على نقل بيانات Gemini API من مفاتيح واجهة برمجة التطبيقات العادية إلى مفاتيح التفويض
-لتحسين الأمان:
+API-Schlüssel ermöglichen den Zugriff auf die Gemini API, unterscheiden sich jedoch in ihren Sicherheitsmerkmalen. Die Gemini API wechselt von Standard-API-Schlüsseln zu Autorisierungsschlüsseln, um die Sicherheit zu verbessern:
 
-- **مفاتيح واجهة برمجة التطبيقات العادية**: تربط الطلبات بمشروع على Google Cloud لأغراض الفوترة والحصة. لا تحدّد المفاتيح العادية هوية المتصل، ما يحدّ من مستوى دقة الأذونات وعناصر التحكّم في الوصول التي يمكن أن توفّرها.
-- **مفاتيح التفويض**: مرتبطة مباشرةً بحساب
-  خدمة Google Cloud. عند استخدام مفتاح تفويض، تتم معالجة طلباتك
-  باسم حساب الخدمة المرتبط، ما يتيح التحكّم الدقيق في
-  إذن الوصول. تقتصر مفاتيح التفويض تلقائيًا على Generative Language API
-  (Gemini API)، وتوفّر تنفيذًا سريعًا للمفاتيح المسروقة، ما يؤدي إلى
-  إيقاف استخدامها بسرعة عند رصدها من خلال أنظمتنا.
+- **Standard-API-Schlüssel**: Verknüpfen Anfragen mit einem Google Cloud-Projekt für
+  Abrechnungs- und Kontingentzwecke. Standard-API-Schlüssel identifizieren keinen Aufrufer, was die Granularität der Berechtigungen und der Zugriffssteuerung einschränkt, die sie unterstützen können.
+- **Autorisierungsschlüssel**: Sind direkt an ein Google Cloud-Dienstkonto gebunden. Wenn Sie einen Autorisierungsschlüssel verwenden, werden Ihre Anfragen unter der Identität dieses gebundenen Dienstkontos verarbeitet, wodurch eine detaillierte Zugriffssteuerung möglich ist. Autorisierungsschlüssel sind standardmäßig auf die Generative Language API (Gemini API) beschränkt und bieten eine schnell wirkende Durchsetzung bei Lecks, die die Verwendung von durch unsere Systeme erkannten Lecks schnell beendet.
 
-لضمان الاستخدام الآمن، سيتم نقل Gemini API من مفاتيح Standard إلى مفاتيح Auth:
+Um eine sichere Verwendung zu gewährleisten, wechselt die Gemini API von Standard- zu Autorisierungsschlüsseln:
 
-- **مفاتيح المصادقة تلقائيًا**: يتم تلقائيًا إنشاء جميع مفاتيح واجهة برمجة التطبيقات الجديدة التي يتم إنشاؤها في Google AI Studio كمفاتيح مصادقة.
-- **رفض المفاتيح غير المقيدة**: ترفض Gemini API الطلبات الواردة من **المفاتيح العادية غير المقيدة**. ستبقى مفاتيح واجهة برمجة التطبيقات العادية التي تم تطبيق قيود صريحة عليها صالحة. يمنع هذا القيد الاستخدام غير المصرّح به للمفاتيح التي قد تتم مشاركتها بشكل علني أو ربطها بخدمات أخرى.
-- **في سبتمبر 2026**: سترفض Gemini API الطلبات الواردة من **مفاتيح Standard**. يجب [نقل البيانات إلى مفاتيح المصادقة](#migrate-to-auth-key)
-  قبل هذا التاريخ لتجنُّب انقطاع الخدمة. يُرجى نقل البيانات إلى مفاتيح المصادقة قبل سبتمبر 2026.
+- **Standardmäßig Autorisierungsschlüssel**: Alle neuen API-Schlüssel, die in Google AI Studio
+  werden automatisch als Autorisierungsschlüssel erstellt.
+- **Nicht eingeschränkte Schlüssel werden abgelehnt**: Die Gemini API lehnt Anfragen
+  von **nicht eingeschränkten Standardschlüsseln** ab. Standard-API-Schlüssel, auf die explizite Einschränkungen angewendet wurden, funktionieren weiterhin. Diese Einschränkung verhindert die unbefugte Verwendung von Schlüsseln, die öffentlich freigegeben oder mit anderen Diensten verknüpft sein könnten.
+- **Im September 2026** lehnt die Gemini API Anfragen von **Standard
+  schlüsseln** ab. Sie müssen [vor diesem Datum zu Autorisierungsschlüsseln migrieren](#migrate-to-auth-key)
+  , um Dienstunterbrechungen zu vermeiden. Migrieren Sie vor September 2026 zu Autorisierungsschlüsseln.
 
-## إدارة مفاتيح واجهة برمجة التطبيقات في Google AI Studio
+## API-Schlüssel in Google AI Studio verwalten
 
-يمكنك إدارة مشاريعك ومفاتيحك مباشرةً في [Google AI Studio](https://aistudio.google.com/apikey?hl=ar).
+Sie können Ihre Projekte und Schlüssel direkt in [Google AI Studio](https://aistudio.google.com/apikey?hl=de) verwalten.
 
-### مشاريع Google Cloud
+### Google Cloud-Projekte
 
-يرتبط كل مفتاح Gemini API [بمشروع على Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=ar).
-تتولّى مشاريع Google Cloud إدارة الفوترة والمتعاونين والأذونات. يوفّر Google AI
-Studio واجهة بسيطة للوصول إلى هذه المشاريع.
+Jeder Gemini API-Schlüssel ist mit einem [Google Cloud-Projekt](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=de) verknüpft.
+In Google Cloud-Projekten werden Abrechnung, Mitarbeiter und Berechtigungen verwaltet. Google AI Studio bietet eine einfache Oberfläche für den Zugriff auf diese Projekte.
 
-- **المشروع التلقائي**: إذا كنت مستخدمًا جديدًا، ينشئ Google AI Studio تلقائيًا مشروعًا تلقائيًا على Google Cloud ومفتاح واجهة برمجة تطبيقات بعد قبولك بنود الخدمة. يمكنك إعادة تسمية هذا المشروع من خلال الانتقال إلى عرض
-  **المشاريع** في لوحة البيانات.
-- **المشاريع الحالية**: إذا كان لديك حساب على Google Cloud، لن ينشئ AI Studio مشروعًا تلقائيًا. بدلاً من ذلك، عليك استيراد مشاريعك الحالية.
+- **Standardprojekt**: Wenn Sie ein neuer Nutzer sind, erstellt Google AI Studio automatisch
+  ein Standard-Google Cloud-Projekt und einen API-Schlüssel, nachdem Sie die
+  Nutzungsbedingungen akzeptiert haben. Sie können dieses Projekt umbenennen, indem Sie in Ihrem Dashboard zur Ansicht **Projekte** navigieren.
+- **Vorhandene Projekte**: Wenn Sie bereits ein Google Cloud-Konto haben, erstellt AI
+  Studio kein Standardprojekt. Stattdessen müssen Sie Ihre vorhandenen Projekte importieren.
 
-### استيراد المشاريع
+### Projekte importieren
 
-لا يعرض Google AI Studio تلقائيًا جميع مشاريعك على Google Cloud. يجب استيراد المشاريع التي تريد استخدامها:
+Standardmäßig werden in Google AI Studio nicht alle Ihre Google Cloud-Projekte angezeigt. Sie müssen die Projekte importieren, die Sie verwenden möchten:
 
-1. انتقِل إلى [Google AI Studio](https://aistudio.google.com?hl=ar).
-2. افتح **لوحة البيانات** من اللوحة اليمنى واختَر **المشاريع**.
-3. انقر على الزر **استيراد المشاريع**.
-4. ابحث عن مشروع Google Cloud الذي تريد استيراده واختَره، ثم انقر على **استيراد**.
-5. بعد الاستيراد، انتقِل إلى صفحة **مفاتيح واجهة برمجة التطبيقات** في لوحة البيانات
-   لإنشاء مفتاح في هذا المشروع.
+1. Rufen Sie [Google AI Studio](https://aistudio.google.com?hl=de) auf.
+2. Öffnen Sie im linken Bereich das **Dashboard** und wählen Sie **Projekte** aus.
+3. Klicken Sie auf die Schaltfläche **Projekte importieren**.
+4. Suchen Sie nach dem Google Cloud-Projekt, das Sie importieren möchten, und wählen Sie es aus. Klicken Sie dann auf **Importieren**.
+5. Navigieren Sie nach dem Importieren im Dashboard zur Seite **API-Schlüssel**, um einen Schlüssel in diesem Projekt zu erstellen.
 
-### تحديد المشاكل في أذونات إنشاء المفاتيح وحلّها
+### Fehlerbehebung bei Berechtigungen zum Erstellen von Schlüsseln
 
-إذا كان الزر **إنشاء مفتاح واجهة برمجة التطبيقات** غير متاح وعرض الرسالة:
-*"ليس لديك الإذن بإنشاء مفتاح في هذا المشروع"*، يعني ذلك أنّك لا تملك أذونات إدارة الهوية وإمكانية الوصول (IAM) المطلوبة.
+Wenn die Schaltfläche **API-Schlüssel erstellen** nicht verfügbar ist und die Meldung
+*„Sie sind nicht berechtigt, einen Schlüssel in diesem Projekt zu erstellen“* angezeigt wird, fehlen Ihnen die
+erforderlichen IAM-Berechtigungen.
 
-يُرجى التواصل مع مشرف مشروع Google Cloud أو مشرف المؤسسة لمنحك دورًا يتضمّن الأذونات التالية (مثل "محرِّر المشروع"):
+Bitten Sie Ihren Google Cloud-Projekt- oder Organisationsadministrator, Ihnen eine Rolle mit den folgenden Berechtigungen zuzuweisen (z. B. Projektbearbeiter):
 
-- `resourcemanager.projects.get`: يسمح لـ AI Studio بالتحقّق من المشروع.
-- `apikeys.keys.create`: يسمح بإنشاء المفاتيح.
-- `serviceusage.services.enable`: يضمن تفعيل Generative Language API.
-- ‫`iam.serviceAccounts.create`: مطلوب لإنشاء حساب الخدمة المرتبط.
-- `iam.serviceAccountApiKeyBindings.create`: لربط حساب الخدمة بمفتاح واجهة برمجة التطبيقات
+- `resourcemanager.projects.get`: Ermöglicht AI Studio, das Projekt zu überprüfen.
+- `apikeys.keys.create`: Ermöglicht die Schlüsselgenerierung.
+- `serviceusage.services.enable`: Stellt sicher, dass die Generative Language API aktiviert ist.
+- `iam.serviceAccounts.create`: Erforderlich, um das verknüpfte Dienstkonto zu erstellen.
+- `iam.serviceAccountApiKeyBindings.create`: Bindet das Dienstkonto an den API-Schlüssel.
 
-إذا لم تتمكّن من الحصول على إذن وصول إداري، يمكنك إنشاء مشروع جديد على Google Cloud غير مرتبط بمؤسسة لإنشاء مفاتيحك.
+Wenn Sie keinen Administratorzugriff erhalten, können Sie ein neues Google Cloud-Projekt erstellen, das nicht mit einer Organisation verknüpft ist, um Ihre Schlüssel zu generieren.
 
-## إعداد البيئة
+## Umgebung einrichten
 
-بعد الحصول على مفتاح، عليك إعداد بيئتك لاستخدامه بأمان في تطبيقاتك.
+Sobald Sie einen Schlüssel haben, konfigurieren Sie Ihre Umgebung so, dass er sicher in Ihren Anwendungen verwendet werden kann.
 
-### استخدام متغيّرات البيئة (يُنصح بذلك)
+### Umgebungsvariablen verwenden (empfohlen)
 
-اضبط متغيّر البيئة `GEMINI_API_KEY` أو `GOOGLE_API_KEY`. تكتشف مكتبات برامج Gemini API هذه المتغيّرات وتستخدمها تلقائيًا. وفي حال ضبطهما معًا، يتم منح الأولوية لعلامة `GOOGLE_API_KEY`.
+Legen Sie die Umgebungsvariable `GEMINI_API_KEY` oder `GOOGLE_API_KEY` fest. Die Gemini API-Clientbibliotheken erkennen und verwenden diese Variablen automatisch. Wenn beide festgelegt sind, hat `GOOGLE_API_KEY` Vorrang.
 
-اختَر نظام التشغيل لضبط المتغيّر:
+Wählen Sie Ihr Betriebssystem aus, um die Variable festzulegen:
 
-### ‫Linux/macOS - Bash
+### Linux/macOS – Bash
 
-تحقَّق مما إذا كان لديك ملف إعداد bash:
+Prüfen Sie, ob Sie eine Bash-Konfigurationsdatei haben:
 
 ```
 ~/.bashrc
 ```
 
-إذا لم يكن لديك حساب، أنشِئ حسابًا وافتحه:
+Wenn nicht, erstellen Sie eine und öffnen Sie sie:
 
 ```
 touch ~/.bashrc && open ~/.bashrc
 ```
 
-أضِف أمر التصدير في نهاية الملف:
+Fügen Sie am Ende der Datei den Exportbefehl hinzu:
 
 ```
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-احفظ الملف، ثم طبِّق التغييرات:
+Speichern Sie die Datei und übernehmen Sie die Änderungen:
 
 ```
 source ~/.bashrc
 ```
 
-### ‫macOS - Zsh
+### macOS – Zsh
 
-تحقَّق مما إذا كان لديك ملف إعدادات zsh:
+Prüfen Sie, ob Sie eine Zsh-Konfigurationsdatei haben:
 
 ```
 ~/.zshrc
 ```
 
-إذا لم يكن لديك حساب، أنشِئ حسابًا وافتحه:
+Wenn nicht, erstellen Sie eine und öffnen Sie sie:
 
 ```
 touch ~/.zshrc && open ~/.zshrc
 ```
 
-أضِف أمر التصدير:
+Fügen Sie den Exportbefehl hinzu:
 
 ```
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-احفظ الملف، ثم طبِّق التغييرات:
+Speichern Sie die Datei und übernehmen Sie die Änderungen:
 
 ```
 source ~/.zshrc
@@ -147,15 +146,15 @@ source ~/.zshrc
 
 ### Windows
 
-1. ابحث عن "متغيرات البيئة" في شريط البحث في Windows.
-2. انقر على **متغيّرات البيئة** في مربّع الحوار "خصائص النظام".
-3. ضمن **متغيّرات المستخدم** أو **متغيّرات النظام**، انقر على **جديد...**.
-4. اضبط اسم المتغيّر على `GEMINI_API_KEY` والقيمة على مفتاح واجهة برمجة التطبيقات.
-5. انقر على **موافق** للحفظ. افتح جلسة طرفية جديدة لتحميل المتغيّر.
+1. Suchen Sie in der Windows-Suchleiste nach „Umgebungsvariablen“.
+2. Klicken Sie im Dialogfeld „Systemeigenschaften“ auf **Umgebungsvariablen**.
+3. Klicken Sie unter **Benutzervariablen** oder **Systemvariablen** auf **Neu...**.
+4. Legen Sie den Variablennamen auf `GEMINI_API_KEY` und den Wert auf Ihren API-Schlüssel fest.
+5. Klicken Sie zum Speichern auf **OK**. Öffnen Sie eine neue Terminalsitzung, um die Variable zu laden.
 
-### توفير مفتاح واجهة برمجة التطبيقات بشكل صريح في الرمز البرمجي
+### API-Schlüssel explizit im Code angeben
 
-يمكنك تمرير مفتاح واجهة برمجة التطبيقات بشكل صريح عند إعداد العميل. لا تنفّذ هذه الخطوة إلا إذا تعذّر عليك استخدام متغيّرات البيئة.
+Sie können den API-Schlüssel explizit übergeben, wenn Sie den Client initialisieren. Tun Sie dies nur, wenn Sie keine Umgebungsvariablen verwenden können.
 
 ### Python
 
@@ -189,7 +188,7 @@ async function main() {
 main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -224,7 +223,7 @@ func main() {
 }
 ```
 
-### جافا
+### Java
 
 ```
 package com.example;
@@ -263,100 +262,110 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-## الأمان وإدارة الأسرار
+## Sicherheits- und Secret-Verwaltung
 
-يجب التعامل مع مفتاح Gemini API كما لو كان كلمة مرور. في حال تعرّضها للاختراق، يمكن للآخرين استهلاك حصة مشروعك، وتحمّل رسوم فوترة غير متوقّعة، والوصول إلى الموارد الخاصة.
+Behandeln Sie Ihren Gemini API-Schlüssel wie ein Passwort. Wenn er kompromittiert wird, können andere das Kontingent Ihres Projekts nutzen, unerwartete Abrechnungsgebühren verursachen und auf private Ressourcen zugreifen.
 
-### قواعد الأمان المهمة
+### Wichtige Sicherheitsregeln
 
-- **الحفاظ على سرية المفاتيح**: لا تسجّل مفاتيح واجهة برمجة التطبيقات في أنظمة التحكّم في المصدر
-  مثل Git.
-- **عدم عرض المفاتيح من جهة العميل في بيئة الإنتاج**: لا تدرِج مفاتيح واجهة برمجة التطبيقات بشكل ثابت مباشرةً في تطبيقات الويب أو الأجهزة الجوّالة. يمكن للمستخدمين استخراج المفاتيح المجمّعة في الرمز البرمجي من جهة العميل. لتأمين التطبيقات من جهة العميل، شغِّل خادم وكيل للخلفية لإجراء طلبات البيانات الفعلية من واجهة برمجة التطبيقات.
+- **Schlüssel vertraulich behandeln**: Checken Sie API-Schlüssel niemals in Quellverwaltungssysteme
+  wie Git ein.
+- **Schlüssel in der Produktion niemals clientseitig freigeben**: Codieren Sie API-Schlüssel
+  nicht direkt in Web- oder mobilen Apps. Schlüssel, die in clientseitigen Code kompiliert wurden, können von Nutzern extrahiert werden. Um clientseitige Apps zu schützen, führen Sie einen Backend-Proxyserver aus, um die eigentlichen API-Aufrufe auszuführen.
 
-### أفضل ممارسات إدارة الأسرار
+### Best Practices für die Secret-Verwaltung
 
-- **متغيّرات البيئة**: قراءة المفاتيح من متغيّرات البيئة بدلاً من ملفات الإعداد
-- **Secret Manager**: في مرحلة الإنتاج، خزِّن مفاتيحك في مخزن أسرار آمن
-  مثل [Google Cloud Secret Manager](https://cloud.google.com/secret-manager?hl=ar).
-- **تنبيهات الفوترة**: يمكنك إعداد تنبيهات الفوترة في Google Cloud Console لتلقّي إشعارات في حال حدوث ارتفاع مفاجئ في الاستخدام أو التكاليف.
+- **Umgebungsvariablen**: Lesen Sie Schlüssel aus Umgebungsvariablen und nicht aus
+  Konfigurationsdateien.
+- **Secret Manager**: Speichern Sie Ihre Schlüssel für die Produktion in einem sicheren Secret-Speicher
+  wie [Google Cloud Secret Manager](https://cloud.google.com/secret-manager?hl=de).
+- **Abrechnungsbenachrichtigungen**: Richten Sie in der Google Cloud Console Abrechnungsbenachrichtigungen ein, um
+  benachrichtigt zu werden, wenn die Nutzung oder die Kosten steigen.
 
-### قائمة التحقّق من الردود على التسريبات
+### Checkliste für die Reaktion auf Lecks
 
-إذا كنت تشك في أنّه تم تسريب مفتاح واجهة برمجة التطبيقات، اتّبِع الخطوات التالية:
+Wenn Sie vermuten, dass Ihr API-Schlüssel offengelegt wurde, gehen Sie so vor:
 
-1. **إنشاء مفتاح جديد**: أنشئ مفتاحًا بديلاً في Google AI Studio أو Cloud Console.
-2. **تحديث تطبيقك**: يمكنك نشر الرمز باستخدام المفتاح الجديد.
-3. **إيقاف المفتاح المخترَق أو حذفه**: أوقِف المفتاح الذي تم تسريبه في Cloud Console بعد إثبات ملكية المفتاح الجديد. لا تحذف المفتاح القديم إلى أن يصبح المفتاح الجديد نشطًا بالكامل لتجنُّب توقّف التطبيق عن العمل.
-4. **تدقيق الاستخدام**: راجِع سجلّات الفوترة واستخدام واجهة برمجة التطبيقات في Google Cloud Console لتحديد الأنشطة غير المصرّح بها.
+1. **Neuen Schlüssel generieren**: Erstellen Sie in Google AI Studio oder der
+   Cloud Console einen Ersatzschlüssel.
+2. **Anwendung aktualisieren**: Stellen Sie Ihren Code mit dem neuen Schlüssel bereit.
+3. **Kompromittierten Schlüssel deaktivieren oder löschen**: Deaktivieren Sie den offengelegten Schlüssel in der
+   Cloud Console, sobald der neue Schlüssel bestätigt wurde. Löschen Sie den alten Schlüssel erst, wenn der neue Schlüssel vollständig aktiv ist, um Ausfallzeiten der Anwendung zu vermeiden.
+4. **Nutzung prüfen**: Prüfen Sie in der Google Cloud
+   Console Abrechnungsprotokolle und API-Nutzung, um unbefugte Aktivitäten zu erkennen.
 
-## تقييد مفاتيحك وتأمينها
+## Schlüssel einschränken und sichern
 
-تساعد إضافة قيود إلى مفاتيح واجهة برمجة التطبيقات في الحدّ من الأضرار المحتملة في حال تم اختراق أحد المفاتيح.
+Wenn Sie Ihren API-Schlüsseln Einschränkungen hinzufügen, wird der potenzielle Schaden minimiert, falls ein Schlüssel kompromittiert wird.
 
-### تطبيق قيود على مصدر الطلب
+### Einschränkungen für den Ursprung von Anfragen anwenden
 
-تحدّ القيود المفروضة على المصدر من عناوين IP أو المواقع الإلكترونية أو التطبيقات التي يمكنها استخدام مفتاحك.
+Einschränkungen für den Ursprung beschränken, welche IP-Adressen, Websites oder Anwendungen Ihren Schlüssel verwenden können.
 
-1. انتقِل إلى [صفحة "بيانات الاعتماد" في Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=ar).
-2. اختَر مشروعك، ثم انقر على اسم مفتاح واجهة برمجة التطبيقات الذي تريد حظره.
-3. ضمن **قيود التطبيق**، اختَر **عناوين IP** (أو نوع القيود المناسب لبيئتك).
-4. حدِّد عناوين IP أو النطاقات المسموح بها، ثم انقر على **حفظ**.
+1. Rufen Sie in der [Google Cloud Console die Seite „Anmeldedaten“ auf](https://console.cloud.google.com/apis/credentials?hl=de).
+2. Wählen Sie Ihr Projekt aus und klicken Sie auf den Namen des API-Schlüssels, den Sie einschränken möchten.
+3. Wählen Sie unter **Anwendungseinschränkungen** die Option **IP-Adressen** (oder den
+   entsprechenden Einschränkungstyp für Ihre Umgebung) aus.
+4. Geben Sie die zulässigen IP-Adressen oder ‑Bereiche an und klicken Sie auf **Speichern**.
 
-### تأمين مفاتيح واجهة برمجة التطبيقات العادية غير المقيدة
+### Nicht eingeschränkte Standard-API-Schlüssel sichern
 
-لمواصلة استخدام Gemini API، عليك تأمين أي مفاتيح غير مقيّدة.
+Wenn Sie die Gemini API weiterhin verwenden möchten, müssen Sie alle nicht eingeschränkten Schlüssel sichern.
 
-#### حصر استخدام المفتاح في Gemini API فقط من خلال AI Studio
+#### Schlüssel nur auf die Gemini API beschränken (über AI Studio)
 
-إذا كنت تستخدم المفتاح فقط لواجهة Gemini API، يمكنك تأمينه مباشرةً في AI Studio باتّباع الخطوات التالية:
+Wenn Sie den Schlüssel nur für die Gemini API verwenden, sichern Sie ihn direkt in AI Studio:
 
-1. في صفحة **مفاتيح واجهة برمجة التطبيقات** ضمن [Google AI Studio](https://aistudio.google.com/api-keys?hl=ar)، ابحث عن المفاتيح التي تحمل التصنيف **بدون قيود**.
-2. مرِّروا مؤشر الماوس فوق التصنيف وانقروا على **إضافة قيود** في مربّع الحوار.
-3. انقر على **الحصر على Gemini API فقط**.
-4. انقر على **تقييد المفتاح** للتأكيد.
+1. Suchen Sie auf der Seite **API-Schlüssel** in [Google AI Studio](https://aistudio.google.com/api-keys?hl=de) nach Schlüsseln, die mit dem
+   **Nicht eingeschränkt** Label gekennzeichnet sind.
+2. Bewegen Sie den Mauszeiger auf das Label und klicken Sie im Dialogfeld auf **Einschränkungen hinzufügen**.
+3. Wählen Sie **Nur auf die Gemini API beschränken** aus.
+4. Klicken Sie zur Bestätigung auf **Schlüssel einschränken**.
 
-#### تقييد المفتاح للخدمات الأخرى من خلال Google Cloud Console
+#### Schlüssel für andere Dienste über die Google Cloud Console einschränken
 
-إذا كان المفتاح مشتركًا مع واجهات Google API الأخرى (لا يُنصح بذلك)، يمكنك فرض قيود عليه في Cloud Console. **ملاحظة: ستتعذّر معالجة طلبات Gemini API التي تستخدم هذا المفتاح بعد تطبيق هذه القيود.**
+Wenn der Schlüssel für andere Google APIs freigegeben ist (nicht empfohlen), schränken Sie ihn in der Cloud Console ein. **Hinweis: Anfragen an die Gemini API mit diesem Schlüssel schlagen fehl, nachdem
+diese Einschränkungen angewendet wurden.**
 
-1. انتقِل إلى [صفحة "بيانات الاعتماد" في Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=ar).
-2. اختَر المشروع ومفتاح واجهة برمجة التطبيقات.
-3. ضمن **قيود واجهة برمجة التطبيقات**، اختَر **تقييد المفتاح**.
-4. من القائمة المنسدلة، اختَر واجهات برمجة التطبيقات التي تريد أن يصل إليها هذا المفتاح. لا تحدّد **Generative Language API**.
-5. انقر على **حفظ**. أنشئ مفتاحًا منفصلاً ومقيّدًا في AI Studio لمواصلة استخدام Gemini API.
+1. Rufen Sie in der [Google Cloud Console die Seite „Anmeldedaten“](https://console.cloud.google.com/apis/credentials?hl=de) auf.
+2. Wählen Sie das Projekt und den API-Schlüssel aus.
+3. Wählen Sie unter **API-Einschränkungen** die Option **Schlüssel einschränken** aus.
+4. Wählen Sie im Drop-down-Menü die APIs aus, auf die dieser Schlüssel zugreifen soll. Wählen Sie nicht die **Generative Language API** aus.
+5. Klicken Sie auf **Speichern**. Erstellen Sie in AI Studio einen separaten, eingeschränkten Schlüssel, um die Gemini API weiterhin verwenden zu können.
 
-### المفاتيح غير النشطة المحظورة
+### Blockierte inaktive Schlüssel
 
-اعتبارًا من 7 مايو 2026، ستحظر Gemini API مفاتيح واجهة برمجة التطبيقات غير المقيدة التي لم يتم استخدامها لفترة طويلة. تعرض هذه المفاتيح العلامة **محظور** في AI Studio. يجب إنشاء مفتاح جديد أو استخدام مفتاح حالي محظور لمتابعة العملية.
+Ab dem 7. Mai 2026 blockiert die Gemini API nicht eingeschränkte API-Schlüssel, die längere Zeit inaktiv waren. Diese Schlüssel haben in AI Studio das Tag **Blockiert**. Sie müssen einen neuen Schlüssel generieren oder einen vorhandenen eingeschränkten Schlüssel verwenden, um fortzufahren.
 
-## نقل البيانات إلى مفتاح مصادقة
+## Zu einem Autorisierungsschlüssel migrieren
 
-اتّبِع الخطوات التالية لإنشاء مفتاح جديد لواجهة برمجة التطبيقات الخاصة بالمصادقة وتعديل تطبيقاتك:
+Führen Sie die folgenden Schritte aus, um einen neuen Autorisierungs-API-Schlüssel zu erstellen und Ihre Anwendungen zu aktualisieren:
 
-1. انتقِل إلى [صفحة مفاتيح واجهة برمجة تطبيقات الاستوديو في AI Studio](https://aistudio.google.com/api-keys?hl=ar).
-2. تحقَّق من عمود **نوع المفتاح** لتحديد أي مفاتيح مُدرَجة على أنّها **عادية**.
-3. انقر على **إنشاء مفتاح واجهة برمجة تطبيقات** لإنشاء مفتاح جديد. يتم تلقائيًا إنشاء جميع المفاتيح الجديدة التي يتم إنشاؤها في AI Studio كمفاتيح مصادقة.
-4. انسخ مفتاح واجهة برمجة التطبيقات الجديد للمصادقة.
-5. عدِّل الرمز البرمجي لتطبيقك ومتغيّرات البيئة وأي إعدادات نشر لاستخدام مفتاح واجهة برمجة التطبيقات الجديد للمصادقة.
-6. اختبِر تطبيقك للتأكّد من أنّه يعمل بشكل صحيح باستخدام المفتاح الجديد.
-7. بعد إثبات ملكية المفتاح، احذفه أو ألغِ إمكانية استخدامه لمنع إساءة استخدامه.
+1. Rufen Sie die Seite „[API-Schlüssel](https://aistudio.google.com/api-keys?hl=de)“ in AI Studio auf.
+2. Prüfen Sie in der Spalte **Schlüsseltyp** , ob Schlüssel als **Standard** aufgeführt sind.
+3. Klicken Sie auf **API-Schlüssel erstellen** , um einen neuen Schlüssel zu generieren. Alle neuen Schlüssel, die in AI Studio erstellt werden, werden automatisch als Autorisierungsschlüssel erstellt.
+4. Kopieren Sie den neuen Autorisierungs-API-Schlüssel.
+5. Aktualisieren Sie Ihren Anwendungscode, Ihre Umgebungsvariablen und alle Bereitstellungskonfigurationen, um den neuen Autorisierungs-API-Schlüssel zu verwenden.
+6. Testen Sie Ihre Anwendung, um zu bestätigen, dass sie mit dem neuen Schlüssel ordnungsgemäß funktioniert.
+7. Löschen oder widerrufen Sie nach der Bestätigung Ihren alten Trafficschlüssel, um Missbrauch zu verhindern.
 
-## القيود
+## Beschränkungen
 
-يفرض Google AI Studio القيود التالية على إدارة المشاريع والمفاتيح:
+In Google AI Studio gelten die folgenden Einschränkungen für die Projekt- und Schlüsselverwaltung:
 
-- يمكنك إنشاء 10 مشاريع كحدّ أقصى في كل مرة من صفحة **المشاريع** في Google AI Studio.
-- تعرض صفحتا **مفاتيح واجهة برمجة التطبيقات** و**المشاريع** 100 مفتاح و50 مشروعًا كحد أقصى.
-- لا يتم عرض سوى مفاتيح واجهة برمجة التطبيقات غير المحظورة أو المحظورة تحديدًا على Generative Language API (Gemini API).
+- Sie können maximal 10 Projekte gleichzeitig auf der Seite **Projekte** in Google AI Studio erstellen.
+- Auf den Seiten **API-Schlüssel** und **Projekte** werden maximal 100 Schlüssel und 50 Projekte angezeigt.
+- Es werden nur API-Schlüssel angezeigt, die nicht eingeschränkt oder speziell auf die Generative Language API (Gemini API) beschränkt sind.
 
-لإدارة المشاريع المتقدّمة أو تعديل المفاتيح مع قيود أخرى، استخدِم [صفحة بيانات الاعتماد في Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=ar).
+Für die erweiterte Projektverwaltung oder zum Ändern von Schlüsseln mit anderen Einschränkungen verwenden Sie
+die [Seite „Anmeldedaten“ in der Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=de).
 
-إرسال ملاحظات
+Feedback geben
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)
+Zuletzt aktualisiert: 2026-07-30 (UTC).
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Haben Sie Feedback für uns?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-30 (UTC)."],[],[]]

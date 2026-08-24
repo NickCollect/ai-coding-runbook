@@ -1,49 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=tr
-fetched_at: 2026-08-17T02:26:59.104949+00:00
-title: "Lyria 3 Pro \u00d6nizlemesi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=ar
+fetched_at: 2026-08-24T02:20:25.747759+00:00
+title: "\u0645\u0639\u0627\u064a\u0646\u0629 Lyria 3 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Geri bildirim gönderin
+إرسال ملاحظات
 
-# Lyria 3 Pro Önizlemesi
+# معاينة Lyria 3 Pro
 
-Lyria 3 Pro Önizleme, Google'ın amiral gemisi müzik üretme modelidir. Birden fazla kıta, nakarat ve köprü içeren, karmaşık yapısal tutarlılığa sahip tam uzunlukta şarkılar oluşturmak için optimize edilmiştir. Metin istemlerinden veya resim girişlerinden yüksek kaliteli, 48 kHz stereo ses üretir.
+‫Lyria 3 Pro Preview هو نموذج Google الرئيسي لإنشاء الموسيقى. وهي محسّنة لإنشاء أغانٍ كاملة الطول ذات بنية متماسكة ومعقدة، بما في ذلك مقاطع متعددة وجوقات وجسور موسيقية. يمكنه إنشاء مقاطع صوتية استريو عالية الجودة بتردد 48 كيلو هرتز من الطلبات النصية أو الصور.
 
-[Google AI Studio'da deneme](https://aistudio.google.com/prompts/new_chat?model=lyria-3-pro-preview&hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=lyria-3-pro-preview&hl=ar)
 
-## Belgeler
+## الوثائق
 
-Özellikler ve işlevler hakkında kapsamlı bilgi için [Müzik Üretme](https://ai.google.dev/gemini-api/docs/music-generation?hl=tr) kılavuzunu ziyaret edin.
+يمكنك الانتقال إلى دليل [إنشاء الموسيقى](https://ai.google.dev/gemini-api/docs/music-generation?hl=ar) للاطّلاع على تغطية كاملة للميزات والإمكانات.
 
 ## lyria-3-pro-preview
 
-| Mülk | Açıklama |
+| الموقع | الوصف |
 | --- | --- |
-| id\_cardModel kodu | `lyria-3-clip-preview` |
-| saveDesteklenen veri türleri | **Girişler**  Metin ve Resim  **Çıkış**  Ses (MP3), Metin (Şarkı Sözleri) |
-| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  131.072 |
-| handymanÖzellikler | **[Ses üretme](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr)**  Destekleniyor  **[Önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr)**  Desteklenmiyor  **[Kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr)**  Desteklenmiyor  **[Dosya arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr)**  Desteklenmiyor  **[İşlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr)**  Desteklenmiyor  **[Google Haritalar ile Temellendirme](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr)**  Desteklenmiyor  **[Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr)**  Desteklenmiyor  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)**  Desteklenmiyor  **[Arama temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr)**  Desteklenmiyor  **[Yapılandırılmış çıkışlar](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr)**  Desteklenmiyor  **[Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr)** (Thinking)  Desteklenmiyor  **[URL bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr)**  Desteklenmiyor |
-| speedTüketim seçenekleri | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr)**  Desteklenmiyor  **[Esnek çıkarım](https://ai.google.dev/gemini-api/docs/flex-inference?hl=tr)**  Desteklenmiyor  **[Öncelik çıkarımı](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr)**  Desteklenmiyor |
-| 123Sürümler | Daha fazla bilgi için [model sürümü kalıpları](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) başlıklı makaleyi inceleyin.  - Önizleme: `lyria-3-clip-preview` - Önizleme: `lyria-3-pro-preview` |
-| calendar\_monthSon güncelleme | Mart 2026 |
+| رمز النموذج id\_card | `lyria-3-clip-preview` |
+| saveأنواع البيانات المتوافقة | **المدخلات**  النص والصورة  **الناتج**  الصوت (MP3)، النص (كلمات الأغنية) |
+| token\_autoحدود الرموز المميزة[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحدّ الأقصى لعدد الرموز المميزة التي يمكن إدخالها**  131,072 |
+| handymanالإمكانات | **[إنشاء الصوت](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ar)**  متاح  **[التخزين المؤقت](https://ai.google.dev/gemini-api/docs/caching?hl=ar)**  غير متاح  **[تنفيذ الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar)**  غير متاح  **[البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar)**  غير متاح  **[استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar)**  غير متاح  **[استخدام "خرائط Google" كمصدر](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ar)**  غير متاح  **[إنشاء الصور](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar)**  غير متاح  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ar)**  غير متاح  **[تحديد المصادر في "بحث Google"](https://ai.google.dev/gemini-api/docs/google-search?hl=ar)**  غير متاح  **[المُخرجات المنظَّمة](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar)**  غير متاح  **[التفكير](https://ai.google.dev/gemini-api/docs/thinking?hl=ar)**  غير متاح  **[سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar)**  غير متاح |
+| speedخيارات الاستهلاك | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar)**  غير متاح  **[الاستدلال المرن](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ar)**  غير متاح  **[استنتاج الأولوية](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ar)**  غير متاح |
+| 123الإصدارات | يمكنك الاطّلاع على [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions) لمزيد من التفاصيل.  - معاينة: `lyria-3-clip-preview` - معاينة: `lyria-3-pro-preview` |
+| calendar\_monthآخر تعديل | مارس 2026 |
 
-Geri bildirim gönderin
+إرسال ملاحظات
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Son güncelleme tarihi: 2026-06-23 UTC.
+تاريخ التعديل الأخير: 2026-08-19 (حسب التوقيت العالمي المتفَّق عليه)
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-23 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-08-19 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

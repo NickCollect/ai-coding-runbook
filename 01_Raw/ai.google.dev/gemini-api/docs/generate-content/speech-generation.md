@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=id
-fetched_at: 2026-08-17T02:30:52.145811+00:00
+fetched_at: 2026-08-24T02:29:19.860964+00:00
 title: "Pembuatan text-to-speech (TTS) \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 

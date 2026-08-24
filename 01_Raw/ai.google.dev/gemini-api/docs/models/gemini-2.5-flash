@@ -1,46 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=vi
-fetched_at: 2026-08-17T02:31:07.795896+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=tr
+fetched_at: 2026-08-24T02:29:58.696262+00:00
 title: "Gemini 2.5 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Gửi ý kiến phản hồi
+Geri bildirim gönderin
 
 # Gemini 2.5 Flash
 
-Mô hình tốt nhất của chúng tôi về hiệu suất và giá cả, cung cấp các tính năng toàn diện. 2.5 Flash là lựa chọn tốt nhất cho việc xử lý ở quy mô lớn, độ trễ thấp, các tác vụ có khối lượng lớn đòi hỏi khả năng tư duy và các trường hợp sử dụng theo hướng đại diện.
+Fiyat-performans açısından en iyi modelimizdir ve çok yönlü özellikler sunar. 2.5 Flash, büyük ölçekli işleme, düşük gecikme süresi, düşünmeyi gerektiren yüksek hacimli görevler ve aracı kullanım alanları için en iyisidir.
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash&hl=vi)
+[Google AI Studio'da deneme](https://aistudio.google.com?model=gemini-2.5-flash&hl=tr)
 
 ## gemini-2.5-flash
 
-| Thuộc tính | Mô tả |
+| Mülk | Açıklama |
 | --- | --- |
-| id\_cardMã mô hình | `gemini-2.5-flash` |
-| saveCác loại dữ liệu được hỗ trợ | **Thông tin đầu vào**  Văn bản, hình ảnh, video, âm thanh  **Đầu ra**  Văn bản |
-| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  1.048.576  **Giới hạn mã thông báo đầu ra**  65.536 |
-| handymanCác tính năng | **[Tạo âm thanh](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi)**  Không được hỗ trợ  **[Lưu vào bộ nhớ đệm](https://ai.google.dev/gemini-api/docs/caching?hl=vi)**  Được hỗ trợ  **[Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi)**  Được hỗ trợ  **[Tìm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi)**  Được hỗ trợ  **[Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi)**  Được hỗ trợ  **[Liên kết thực tế với Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi)**  Được hỗ trợ  **[Tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi)**  Không được hỗ trợ  **[API trực tiếp](https://ai.google.dev/gemini-api/docs/live-api?hl=vi)**  Không được hỗ trợ  **[Tìm trong phần liên kết thực tế](https://ai.google.dev/gemini-api/docs/google-search?hl=vi)**  Được hỗ trợ  **[Đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi)**  Được hỗ trợ  **[Tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi)**  Được hỗ trợ  **[Bối cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi)**  Được hỗ trợ |
-| speedCác lựa chọn | **[API hàng loạt](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi)**  Được hỗ trợ  **[Suy luận linh hoạt](https://ai.google.dev/gemini-api/docs/flex-inference?hl=vi)**  Được hỗ trợ  **[Suy luận theo mức độ ưu tiên](https://ai.google.dev/gemini-api/docs/priority-inference?hl=vi)**  Được hỗ trợ |
-| 123Phiên bản | Đọc các [mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm chi tiết.  - Ổn định: `gemini-2.5-flash` - Tắt: [`gemini-2.5-flash-preview-09-2025`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-09-2025?hl=vi) |
-| calendar\_monthNội dung cập nhật mới nhất | Tháng 6 năm 2025 |
-| cognition\_2Điểm cắt kiến thức | Tháng 1 năm 2025 |
+| id\_cardModel kodu | `gemini-2.5-flash` |
+| saveDesteklenen veri türleri | **Girişler**  Metin, resim, video, ses  **Çıkış**  Metin |
+| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  1.048.576  **Çıkış jetonu sınırı**  65.536 |
+| handymanÖzellikler | **[Ses üretme](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr)**  Desteklenmiyor  **[Önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr)**  Destekleniyor  **[Kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr)**  Destekleniyor  **[Dosya arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr)**  Destekleniyor  **[İşlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr)**  Destekleniyor  **[Google Haritalar ile Temellendirme](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr)**  Destekleniyor  **[Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr)**  Desteklenmiyor  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)**  Desteklenmiyor  **[Arama temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr)**  Destekleniyor  **[Yapılandırılmış çıkışlar](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr)**  Destekleniyor  **[Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr)** (Thinking)  Destekleniyor  **[URL bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr)**  Destekleniyor |
+| speedTüketim seçenekleri | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr)**  Destekleniyor  **[Esnek çıkarım](https://ai.google.dev/gemini-api/docs/flex-inference?hl=tr)**  Destekleniyor  **[Öncelik çıkarımı](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr)**  Destekleniyor |
+| 123Sürümler | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - Kararlı: `gemini-2.5-flash` - Kapat: [`gemini-2.5-flash-preview-09-2025`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-09-2025?hl=tr) |
+| calendar\_monthSon güncelleme | Haziran 2025 |
+| cognition\_2Son güncel bilgi tarihi | Ocak 2025 |
 
-Gửi ý kiến phản hồi
+Geri bildirim gönderin
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Cập nhật lần gần đây nhất: 2026-06-23 UTC.
+Son güncelleme tarihi: 2026-06-23 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-23 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-23 UTC."],[],[]]

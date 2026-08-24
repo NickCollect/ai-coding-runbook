@@ -1,39 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=es-419
-fetched_at: 2026-08-17T02:23:34.881828+00:00
-title: "Contexto de URL \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=fr
+fetched_at: 2026-08-24T02:25:57.302418+00:00
+title: "URLs de contexte \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Enviar comentarios
+Envoyer des commentaires
 
-# Contexto de URL
+# URLs de contexte
 
-La herramienta de contexto de URL te permite proporcionar contexto adicional a los modelos en
-forma de URLs. Si incluyes URLs en tu solicitud, el modelo accederá a
-el contenido de esas páginas (siempre que no sea un tipo de URL que se indique en la
-[sección de limitaciones](#limitations)) para informar
-y mejorar su respuesta.
+L'outil de contexte d'URL vous permet de fournir un contexte supplémentaire aux modèles sous la
+forme d'URL. En incluant des URL dans votre requête, le modèle accédera
+au contenu de ces pages (à condition qu'il ne s'agisse pas d'un type d'URL listé dans la
+[section "Limites"](#limitations)) pour informer
+et améliorer sa réponse.
 
-La herramienta de contexto de URL es útil para tareas como las siguientes:
+L'outil de contexte d'URL est utile pour les tâches suivantes, par exemple :
 
-- **Extraer datos**: Extrae información específica, como precios, nombres o hallazgos clave
-  de varias URLs.
-- **Comparar documentos**: Analiza varios informes, artículos o PDFs para
-  identificar diferencias y hacer un seguimiento de las tendencias.
-- **Sintetizar y crear contenido**: Combina información de varias URLs de origen para generar resúmenes, entradas de blog o informes precisos.
-- **Analizar código y documentos**: Dirígete a un repositorio de GitHub o a documentación técnica para explicar el código, generar instrucciones de configuración o responder preguntas.
+- **Extraire des données** : extrayez des informations spécifiques telles que des prix, des noms ou des conclusions
+  clés à partir de plusieurs URL.
+- **Comparer des documents** : analysez plusieurs rapports, articles ou PDF pour
+  identifier les différences et suivre les tendances.
+- **Synthétiser et créer du contenu** : combinez des informations provenant de plusieurs URL sources pour générer des résumés, des articles de blog ou des rapports précis.
+- **Analyser du code et des documents** : pointez vers un dépôt GitHub ou une documentation technique pour expliquer du code, générer des instructions de configuration ou répondre à des questions.
 
-En el siguiente ejemplo, se muestra cómo comparar dos recetas de diferentes sitios web.
+L'exemple suivant montre comment comparer deux recettes provenant de différents sites Web.
 
 ### Python
 
@@ -117,26 +117,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Cómo funciona
+## Fonctionnement
 
-La herramienta de contexto de URL usa un proceso de recuperación de dos pasos para equilibrar la velocidad, el costo y el acceso a datos actualizados. Cuando proporcionas una URL, la herramienta primero intenta recuperar el contenido de una caché de índice interna. Esto actúa como una caché altamente optimizada. Si una URL no está disponible en el índice (por ejemplo, si es una página muy nueva), la herramienta recurre automáticamente a realizar una recuperación en vivo.
-Esto accede directamente a la URL para recuperar su contenido en tiempo real.
+L'outil Contexte de l'URL utilise un processus d'extraction en deux étapes pour équilibrer la vitesse, le coût et l'accès aux données récentes. Lorsque vous fournissez une URL, l'outil tente d'abord d'extraire le contenu d'un cache d'index interne. Il s'agit d'un cache hautement optimisé. Si une URL n'est pas disponible dans l'index (par exemple, s'il s'agit d'une page très récente), l'outil revient automatiquement à une extraction en direct.
+Il accède directement à l'URL pour récupérer son contenu en temps réel.
 
-## Combinación con otras herramientas
+## Combinaison avec d'autres outils
 
-Puedes combinar la herramienta de contexto de URL con otras herramientas para crear flujos de trabajo más potentes.
+Vous pouvez combiner l'outil de contexte d'URL avec d'autres outils pour créer des workflows plus puissants.
 
-[Los modelos de Gemini 3](#supported-models) admiten la combinación de herramientas integradas
-(como el contexto de URL) con herramientas personalizadas (llamada a funciones). Obtén más información en la
-[página de combinaciones de herramientas](https://ai.google.dev/gemini-api/docs/tool-combination?hl=es-419).
+[Les modèles Gemini 3](#supported-models) sont compatibles avec la combinaison d'outils intégrés
+(comme le Contexte de l'URL) et d'outils personnalisés (appel de fonction). Pour en savoir plus, consultez la
+[page sur les combinaisons d'outils](https://ai.google.dev/gemini-api/docs/tool-combination?hl=fr).
 
-### Fundamentación con la búsqueda
+### Ancrage avec la recherche
 
-Cuando se habilitan el contexto de URL y
-[la fundamentación con la Búsqueda de Google](https://ai.google.dev/gemini-api/docs/grounding?hl=es-419),
-el modelo puede usar sus capacidades de búsqueda para encontrar
-información relevante en línea y, luego, usar la herramienta de contexto de URL para obtener una comprensión más
-detallada de las páginas que encuentra. Este enfoque es potente para las instrucciones que requieren una búsqueda amplia y un análisis profundo de páginas específicas.
+Lorsque le contexte d'URL et
+[l'ancrage avec la recherche Google](https://ai.google.dev/gemini-api/docs/grounding?hl=fr) sont activés,
+le modèle peut utiliser ses fonctionnalités de recherche pour trouver
+des informations pertinentes en ligne, puis utiliser l'outil de contexte d'URL pour mieux
+comprendre les pages qu'il trouve. Cette approche est efficace pour les invites qui nécessitent à la fois une recherche étendue et une analyse approfondie de pages spécifiques.
 
 ### Python
 
@@ -209,21 +209,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Comprende la respuesta
+## Comprendre la réponse
 
-Cuando el modelo usa la herramienta de contexto de URL, su respuesta de texto incluye anotaciones `url_citation` intercaladas en el bloque de contenido de texto. Cada anotación vincula un segmento del texto de respuesta (a través de `start_index` y `end_index`) a la URL de origen de la que se derivó. Esta es la forma principal de mostrar citas en tu
-aplicación. Consulta el [ejemplo principal anterior](#get-started) para obtener información sobre cómo extraerlas.
+Lorsque le modèle utilise l'outil de contexte d'URL, sa réponse textuelle inclut des annotations `url_citation` intégrées dans le bloc de contenu textuel. Chaque annotation associe un segment du texte de la réponse (via `start_index` et `end_index`) à l'URL source à partir de laquelle il a été dérivé. Il s'agit du principal moyen d'afficher des citations dans votre
+application. Pour savoir comment les extraire, consultez le [main example above](#get-started).
 
-La respuesta también incluye un paso `url_context_result` con metadatos sobre cada intento de recuperación de URL (estado, URL recuperada). Esto es útil, principalmente, para la depuración.
+La réponse inclut également une étape `url_context_result` avec des métadonnées sur chaque tentative d'extraction d'URL (état, URL extraite). Cela est principalement utile pour le débogage.
 
-### Controles de seguridad
+### Contrôles de sécurité
 
-El sistema realiza una verificación de moderación de contenido en las URLs para confirmar que cumplen con los estándares de seguridad. Si una URL no pasa esta verificación, el paso correspondiente
-`url_context_result` mostrará un `status` de `"unsafe"`.
+Le système effectue un contrôle de modération du contenu sur les URL pour vérifier qu'elles respectent les normes de sécurité. Si une URL échoue à ce contrôle, l'étape correspondante
+`url_context_result` affiche un `status` de `"unsafe"`.
 
-### Recuento de tokens
+### Nombre de jetons
 
-El contenido recuperado de las URLs que especificas en tu instrucción se cuenta como parte de los tokens de entrada. Puedes ver el recuento de tokens en el objeto `usage` de la interacción. A continuación, se muestra un ejemplo:
+Le contenu extrait des URL que vous spécifiez dans votre invite est comptabilisé dans les jetons d'entrée. Vous pouvez voir le nombre de jetons dans l'objet `usage` de l'interaction. Voici un exemple :
 
 ```
 'usage': {
@@ -237,62 +237,61 @@ El contenido recuperado de las URLs que especificas en tu instrucción se cuenta
 }
 ```
 
-El precio por token depende del modelo utilizado. Consulta la
-[página de precios](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419) para obtener más detalles.
+Le prix par jeton dépend du modèle utilisé. Pour en savoir plus, consultez la
+[page sur les tarifs](https://ai.google.dev/gemini-api/docs/pricing?hl=fr).
 
-## Modelos compatibles
+## Modèles compatibles
 
-| Modelo | Contexto de URL |
+| Modèle | Contexte de l'URL |
 | --- | --- |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=es-419) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=es-419) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=es-419) | ✔️ |
-| [Versión preliminar de Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=es-419) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=es-419) | ✔️ |
-| [Versión preliminar de Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=es-419) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=es-419) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=es-419) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=es-419) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=fr) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=fr) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=fr) | ✔️ |
+| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=fr) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=fr) | ✔️ |
+| [Preview Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=fr) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=fr) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=fr) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=fr) | ✔️ |
 
-## Prácticas recomendadas
+## Bonnes pratiques
 
-- **Proporciona URLs específicas**: Para obtener los mejores resultados, proporciona URLs directas al
-  contenido que deseas que analice el modelo. El modelo solo recuperará contenido de las URLs que proporciones, no de los vínculos anidados.
-- **Verifica la accesibilidad**: Verifica que las URLs que proporciones no dirijan a
-  páginas que requieran un acceso o que estén detrás de un muro de pago.
-- **Usa la URL completa**: Proporciona la URL completa, incluido el protocolo
-  (p.ej., https://www.google.com en lugar de solo google.com).
+- **Fournissez des URL spécifiques** : pour obtenir les meilleurs résultats, fournissez des URL directes vers le
+  contenu que vous souhaitez que le modèle analyse. Le modèle ne récupérera le contenu que des URL que vous fournissez, et non celui des liens imbriqués.
+- **Vérifiez l'accessibilité** : vérifiez que les URL que vous fournissez ne mènent pas à
+  des pages qui nécessitent une connexion ou qui sont soumises à un paywall.
+- **Utilisez l'URL complète** : fournissez l'URL complète, y compris le protocole
+  (par exemple, https://www.google.com au lieu de google.com).
 
-## Limitaciones
+## Limites
 
-- Límite de solicitudes: La herramienta puede procesar hasta 20 URLs por solicitud.
-- Tamaño del contenido de la URL: El tamaño máximo del contenido recuperado de una sola URL es de 34 MB.
-- Accesibilidad pública: Las URLs deben ser de acceso público en la Web.
-  No se admiten las direcciones de localhost (p.ej., localhost, 127.0.0.1), las redes privadas ni los servicios de tunelización (p.ej., ngrok, pinggy).
+- Limite de requêtes : l'outil peut traiter jusqu'à 20 URL par requête.
+- Taille du contenu de l'URL : la taille maximale du contenu extrait d'une seule URL est de 34 Mo.
+- Accessibilité publique : les URL doivent être accessibles au public sur le Web.
+  Les adresses localhost (par exemple, localhost, 127.0.0.1), les réseaux privés et les services de tunneling (par exemple, ngrok, pinggy) ne sont pas acceptés.
 
-### Tipos de contenido compatibles y no compatibles
+### Types de contenu acceptés et non acceptés
 
-La herramienta puede extraer contenido de URLs con los siguientes tipos de contenido:
+L'outil peut extraire du contenu à partir d'URL avec les types de contenu suivants :
 
-- Texto (texto/html, aplicación/json, texto/sin formato, texto/xml, texto/css, texto/javascript , texto/csv, texto/rtf)
-- Imagen (imagen/png, imagen/jpeg, imagen/bmp, imagen/webp)
-- PDF (aplicación/pdf)
+- Texte (text/html, application/json, text/plain, text/xml, text/css, text/javascript , text/csv, text/rtf)
+- Image (image/png, image/jpeg, image/bmp, image/webp)
+- PDF (application/pdf)
 
-**No** se admiten los siguientes tipos de contenido:
+Les types de contenu suivants **ne sont pas** acceptés :
 
-- Contenido con muro de pago
-- Videos de YouTube (consulta
-  [Comprensión de videos](https://ai.google.dev/gemini-api/docs/video-understanding?hl=es-419#youtube) para obtener información sobre
-  cómo procesar URLs de YouTube)
-- Archivos de Google Workspace, como documentos o hojas de cálculo de Google
-- Archivos de audio y video
+- Contenu soumis à un paywall
+- Vidéos YouTube (pour savoir comment traiter les URL YouTube, consultez
+  [Comprendre les vidéos](https://ai.google.dev/gemini-api/docs/video-understanding?hl=fr#youtube))
+- Fichiers Google Workspace tels que des documents ou des feuilles de calcul Google
+- Fichiers audio et vidéo
 
-Enviar comentarios
+Envoyer des commentaires
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Última actualización: 2026-07-31 (UTC)
+Dernière mise à jour le 2026/07/31 (UTC).
 
-¿Quieres brindar más información?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-07-31 (UTC)"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/31 (UTC)."],[],[]]

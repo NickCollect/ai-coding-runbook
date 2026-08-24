@@ -1,33 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/learnlm?hl=vi
-fetched_at: 2026-08-17T02:31:50.633428+00:00
+source_url: https://ai.google.dev/gemini-api/docs/learnlm?hl=de
+fetched_at: 2026-08-24T02:30:22.050674+00:00
 title: "LearnLM \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Gửi ý kiến phản hồi
+Feedback geben
 
 # LearnLM
 
-LearnLM không còn là một mục riêng biệt trong AI Studio nữa. Thay vào đó, các chức năng của LearnLM đã được tích hợp vào Gemini, bắt đầu từ [dòng mô hình 2.5](https://ai.google.dev/gemini-api/docs/models?hl=vi).
+LearnLM ist nicht mehr als separater Eintrag in AI Studio verfügbar. Stattdessen wurden die LearnLM
+-Funktionen in Gemini integriert, beginnend mit der
+[Modellreihe 2.5](https://ai.google.dev/gemini-api/docs/models?hl=de).
 
-Để tìm hiểu thêm về trạng thái hiện tại của LearnLM, hãy xem tài liệu về [LearnLM](https://cloud.google.com/solutions/learnlm?hl=vi).
+Weitere Informationen zum aktuellen Status von LearnLM finden Sie in der [LearnLM](https://cloud.google.com/solutions/learnlm?hl=de)-Dokumentation.
 
-Gửi ý kiến phản hồi
+Feedback geben
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+Zuletzt aktualisiert: 2026-04-29 (UTC).
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Haben Sie Feedback für uns?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-04-29 (UTC)."],[],[]]

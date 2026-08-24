@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/background-execution?hl=it
-fetched_at: 2026-08-17T02:33:17.136540+00:00
-title: "Esecuzione in background \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/background-execution?hl=fr
+fetched_at: 2026-08-24T02:28:37.140762+00:00
+title: "Ex\u00e9cution en arri\u00e8re-plan \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Invia feedback
+Envoyer des commentaires
 
-# Esecuzione in background
+# Exécution en arrière-plan
 
-Per le attività a lunga esecuzione come la ricerca approfondita, il ragionamento complesso o le esecuzioni di agenti in più passaggi, i timeout di connessione possono interrompere le richieste HTTP standard (che in genere si chiudono dopo 60 secondi). L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) fornisce l'**esecuzione in background** per eseguire queste attività in modo asincrono.
+Pour les tâches de longue durée, telles que la recherche approfondie, le raisonnement complexe ou les exécutions d'agents en plusieurs étapes, les délais d'expiration des connexions peuvent interrompre les requêtes HTTP standards (qui se ferment généralement après 60 secondes). L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) fournit une **exécution en arrière-plan** pour exécuter ces tâches de manière asynchrone.
 
-Per consentire all'interazione di essere eseguita fino al completamento dell'attività sul server, imposta `"background": true` quando crei l'interazione. L'API restituisce immediatamente un ID di interazione, che le applicazioni client possono utilizzare per eseguire il polling dello stato, lo streaming dei progressi o la riconnessione a uno stream disconnesso.
+Pour que l'interaction s'exécute jusqu'à ce qu'elle termine la tâche sur le serveur, définissez `"background": true` lors de la création de l'interaction. L'API renvoie immédiatement un ID d'interaction, que les applications clientes peuvent utiliser pour interroger l'état, diffuser la progression ou se reconnecter à un flux déconnecté.
 
-L'esecuzione in background è supportata per i modelli Gemini standard (ad esempio `gemini-3.6-flash` e `gemini-3.1-pro-preview`) e gli agenti gestiti (ad esempio `antigravity-preview-05-2026`).
+L'exécution en arrière-plan est compatible avec les modèles Gemini standards (tels que `gemini-3.6-flash` et `gemini-3.1-pro-preview`) et les agents gérés (tels que `antigravity-preview-05-2026`).
 
-## Creare un'interazione in background
+## Créer une interaction en arrière-plan
 
-Per avviare un'interazione in background, imposta il parametro `background` su `true` quando crei la risorsa.
+Pour démarrer une interaction en arrière-plan, définissez le paramètre `background` sur `true` lors de la création de la ressource.
 
 ### Python
 
@@ -72,31 +72,31 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Come funziona l'esecuzione in background
+## Fonctionnement de l'exécution en arrière-plan
 
-Quando crei un'interazione in background, l'attività viene eseguita in modo asincrono sul server. L'interazione passa attraverso vari stati di esecuzione:
+Lorsque vous créez une interaction en arrière-plan, la tâche s'exécute de manière asynchrone sur le serveur. L'interaction passe par différents états d'exécution :
 
-- `in_progress`: il server sta eseguendo attivamente l'interazione (ad esempio, eseguendo codice o effettuando ricerche).
-- `requires_action`: l'interazione è stata messa in pausa ed è in attesa dell'input del client (ad esempio, la conferma dell'esecuzione di uno strumento o la risposta a una domanda).
-- `completed`: l'interazione è stata completata correttamente e l'output è disponibile.
-- `failed`: si è verificato un errore durante l'esecuzione (ad esempio, un errore dello strumento o limiti di frequenza).
-- `cancelled`: una richiesta del client ha interrotto l'esecuzione.
+- `in_progress` : le serveur exécute activement l'interaction (par exemple, en exécutant du code ou en effectuant des recherches).
+- `requires_action` : l'interaction est mise en pause et attend une entrée du client (par exemple, la confirmation de l'exécution d'un outil ou la réponse à une question).
+- `completed` : l'interaction s'est terminée correctement et la sortie est disponible.
+- `failed` : une erreur s'est produite lors de l'exécution (par exemple, un échec d'outil ou des limites de débit).
+- `cancelled` : une requête client a arrêté l'exécution.
 
-### Casi d'uso
+### Cas d'utilisation
 
-Utilizza l'esecuzione in background per:
+Utilisez l'exécution en arrière-plan pour :
 
-- **Esecuzioni di agenti:** attività che richiedono l'esecuzione di codice, la navigazione web o l'orchestrazione di sub-agenti (ad esempio `antigravity-preview-05-2026`).
-- **Ricerca approfondita:** esecuzioni che utilizzano `deep-research-preview-04-2026` o `deep-research-max-preview-04-2026` e che richiedono diversi minuti.
-- **Ragionamento lungo:** attività in cui i passaggi di pensiero del modello superano i limiti di connessione HTTP standard.
+- **Exécutions d'agents** : tâches nécessitant l'exécution de code, la navigation sur le Web ou l'orchestration de sous-agents (telles que `antigravity-preview-05-2026`).
+- **Recherche approfondie** : exécutions utilisant `deep-research-preview-04-2026` ou `deep-research-max-preview-04-2026`, qui prennent plusieurs minutes.
+- **Raisonnement long** : tâches dans lesquelles les étapes de réflexion du modèle dépassent les limites de connexion HTTP standards.
 
-## Recuperare i risultati
+## Récupérer les résultats
 
-Ottieni i risultati dell'interazione in background utilizzando il **polling** o lo **streaming**.
+Obtenez les résultats d'une interaction en arrière-plan à l'aide de **l'interrogation** ou du **streaming**.
 
-### Sequenza di polling (non bloccante)
+### Modèle d'interrogation (non bloquant)
 
-Il polling controlla periodicamente lo stato dell'interazione utilizzando richieste GET non bloccanti finché non raggiunge uno stato terminale.
+L'interrogation vérifie régulièrement l'état de l'interaction à l'aide de requêtes GET non bloquantes jusqu'à ce qu'elle atteigne un état final.
 
 ### Python
 
@@ -147,9 +147,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/YOUR_
   -H "Api-Revision: 2026-05-20"
 ```
 
-### Sequenza di streaming
+### Modèle de streaming
 
-Se un'interruzione della rete disconnette uno stream, lo streaming può riprendere dall'ultimo evento ricevuto. Ogni delta contiene un `event_id` univoco nel relativo payload. Se passi questo ID come `last_event_id`, lo stream riprende da quell'evento.
+Si une interruption du réseau déconnecte un flux, le streaming peut reprendre à partir du dernier événement reçu. Chaque delta contient un `event_id` unique dans sa charge utile. Le fait de transmettre cet ID en tant que `last_event_id` reprend le flux à partir de cet événement.
 
 ### Python
 
@@ -240,14 +240,14 @@ curl -N -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/YO
   -H "Api-Revision: 2026-05-20"
 ```
 
-## Conversazioni multi-turno
+## Conversations multitours
 
-Le interazioni successive possono essere concatenate a una conversazione in background utilizzando `previous_interaction_id`, soggetta a questi vincoli:
+Les interactions suivantes peuvent être enchaînées à une conversation en arrière-plan à l'aide de `previous_interaction_id`, sous réserve des contraintes suivantes :
 
-1. **Le esecuzioni attive sono bloccate:** la concatenazione di un'interazione successiva a una con stato `in_progress` restituisce un errore `400 Bad Request`. Attendi che l'interazione raggiunga lo stato `completed` prima di iniziare la successiva.
-2. **Parametro dell'ambiente per gli agenti gestiti:** quando concateni le interazioni per gli agenti gestiti (ad esempio `antigravity-preview-05-2026`), le richieste devono includere sia `previous_interaction_id` sia `environment`.
+1. **Les exécutions actives sont bloquées** : l'enchaînement d'une interaction suivante à une interaction dont l'état est `in_progress` renvoie une erreur `400 Bad Request`. Attendez que l'interaction atteigne l'état `completed` avant de démarrer la suivante.
+2. **Paramètre d'environnement pour les agents gérés** : lorsque vous enchaînez des interactions pour des agents gérés (tels que `antigravity-preview-05-2026`), les requêtes doivent inclure à la fois `previous_interaction_id` et `environment`.
 
-Gli esempi seguenti mostrano come concatenare le interazioni:
+Les exemples suivants montrent comment enchaîner des interactions :
 
 ### Python
 
@@ -335,12 +335,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Annullamento ed eliminazione
+## Annulation et suppression
 
-Controlla le esecuzioni in corso e gestisci lo spazio di archiviazione utilizzando le richieste di annullamento ed eliminazione:
+Contrôlez les exécutions en cours et gérez le stockage à l'aide des requêtes d'annulation et de suppression :
 
-- **Annulla (`POST /interactions/{id}/cancel`):** interrompe l'attività in esecuzione. Lo stato passa a `cancelled`. Le azioni di pulizia sul server possono causare un leggero ritardo prima che lo stato venga aggiornato nelle richieste GET.
-- **Elimina (`DELETE /interactions/{id}`):** rimuove i record di interazione dal server. Le richieste GET successive restituiscono un errore `404 Not Found`.
+- **Annuler (`POST /interactions/{id}/cancel`)** : arrête la tâche en cours d'exécution. L'état passe à `cancelled`. Les actions de nettoyage sur le serveur peuvent entraîner un léger délai avant que l'état ne soit mis à jour dans les requêtes GET.
+- **Supprimer (`DELETE /interactions/{id}`)** : supprime les enregistrements d'interaction du serveur. Les requêtes GET suivantes renvoient une erreur `404 Not Found`.
 
 ### Python
 
@@ -384,18 +384,18 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/interactions/YO
   -H "Api-Revision: 2026-05-20"
 ```
 
-## Passaggi successivi
+## Étapes suivantes
 
-- Leggi la [panoramica dell'API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) per comprendere la gestione di sessioni e stati.
-- Consulta la guida [Interazioni di streaming](https://ai.google.dev/gemini-api/docs/streaming?hl=it) per i dettagli sugli aggiornamenti degli eventi in tempo reale.
-- Esplora la [guida rapida Agenti gestiti](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it) per creare agenti a più turni con stato.
+- Consultez la [présentation de l'API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) pour comprendre la gestion des sessions et des états.
+- Consultez le guide [Interactions de streaming](https://ai.google.dev/gemini-api/docs/streaming?hl=fr) pour en savoir plus sur les mises à jour des événements en temps réel.
+- Découvrez le [guide de démarrage rapide Agents gérés](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=fr) pour créer des agents multitours avec état.
 
-Invia feedback
+Envoyer des commentaires
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Ultimo aggiornamento 2026-07-30 UTC.
+Dernière mise à jour le 2026/07/30 (UTC).
 
-Vuoi dirci altro?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/30 (UTC)."],[],[]]

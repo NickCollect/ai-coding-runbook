@@ -1,46 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-2.0-generate-001?hl=tr
-fetched_at: 2026-08-17T02:22:08.674869+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-2.0-generate-001?hl=zh-TW
+fetched_at: 2026-08-24T02:34:56.461923+00:00
 title: "Veo 2.0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Geri bildirim gönderin
+提供意見
 
 # Veo 2.0
 
-Üretime hazır iş akışlarında tutarlı performans sağlayan, güçlü ve güvenilir video üretme modelimiz. Veo 2.0, standart 1080p içerik oluşturma, sosyal medya öğeleri ve güvenilir karakter tutarlılığı ile bir saniyeden kısa sürede tahmin edilebilir üretim hızlarına öncelik veren yüksek hacimli video görevleri için en iyi seçenektir.
+我們提供穩定可靠的影片生成模型，可為正式版工作流程提供一致的效能。Veo 2.0 最適合製作標準 1080p 內容、社群媒體素材資源，以及需要大量生成影片的工作，這類工作著重於確保角色一致性，並以可預測的次秒生成速度完成。
 
-[Google AI Studio'da deneme](https://aistudio.google.com?model=veo-2.0-generate-001&hl=tr)
+[在 Google AI Studio 中試用](https://aistudio.google.com?model=veo-2.0-generate-001&hl=zh-tw)
 
-## Belgeler
+## 說明文件
 
-Özellikler ve işlevler hakkında kapsamlı bilgi için [Video oluşturma](https://ai.google.dev/gemini-api/docs/video?hl=tr) sayfasını ziyaret edin.
+如要全面瞭解功能和用途，請前往[影片生成](https://ai.google.dev/gemini-api/docs/video?hl=zh-tw)頁面。
 
 ## veo-2.0-generate-001
 
-| Mülk | Açıklama |
+| 屬性 | 說明 |
 | --- | --- |
-| id\_cardModel kodu | **Gemini API**  `veo-2.0-generate-001` |
-| saveDesteklenen veri türleri | **Giriş**  Metin, resim  **Çıkış**  Video |
-| token\_autoSınırlar | **Metin girişi**  Yok  **Resim girişi**  Dosya boyutu 20 MB'a kadar olan tüm görüntü çözünürlükleri ve en boy oranları  **Çıkış videosu**  2'ye kadar |
-| calendar\_monthSon güncelleme | Nisan 2025 |
+| id\_card 模型代碼 | **Gemini API**  `veo-2.0-generate-001` |
+| save支援的資料類型 | **輸入功率**  文字、圖片  **輸出內容**  影片 |
+| token\_auto 限制 | **文字輸入**  不適用  **圖片輸入**  任何解析度和顯示比例的圖片，檔案大小上限為 20 MB  **輸出影片**  最多 2 個 |
+| calendar\_month最新更新 | 2025 年 4 月 |
 
-Geri bildirim gönderin
+提供意見
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Son güncelleme tarihi: 2026-06-15 UTC.
+上次更新時間：2026-06-15 (世界標準時間)。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+想進一步說明嗎？
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-15 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-15 (世界標準時間)。"],[],[]]

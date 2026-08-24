@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th
-fetched_at: 2026-08-17T02:19:07.072586+00:00
-title: "\u0e01\u0e32\u0e23\u0e2d\u0e49\u0e32\u0e07\u0e2d\u0e34\u0e07\u0e15\u0e33\u0e41\u0e2b\u0e19\u0e48\u0e07\u0e14\u0e49\u0e27\u0e22 Google Maps \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pl
+fetched_at: 2026-08-24T02:33:55.789350+00:00
+title: "Grounding z u\u017cyciem Map Google \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-ส่งความคิดเห็น
+Prześlij opinię
 
-# การอ้างอิงตำแหน่งด้วย Google Maps
+# Grounding z użyciem Map Google
 
-การเชื่อมต่อแหล่งข้อมูลกับ Google Maps จะเชื่อมต่อความสามารถในการสร้างเนื้อหาของ Gemini กับข้อมูลที่สมบูรณ์ เป็นข้อเท็จจริง และเป็นข้อมูลล่าสุดของ Google Maps ฟีเจอร์นี้ช่วยให้นักพัฒนาแอปสามารถผสานรวมฟังก์ชันการทำงานที่รับรู้ตำแหน่งลงในแอปพลิเคชันได้อย่างง่ายดาย เมื่อคำค้นหาของผู้ใช้มีบริบทที่เกี่ยวข้องกับข้อมูล Maps โมเดล Gemini จะใช้ประโยชน์จาก Google Maps เพื่อให้คำตอบที่เป็นข้อเท็จจริงและเป็นข้อมูลล่าสุดซึ่งเกี่ยวข้องกับสถานที่ที่ผู้ใช้ระบุหรือพื้นที่ทั่วไป
+Powiązanie ze źródłami informacji przy użyciu Map Google łączy generatywne możliwości Gemini z bogatymi, aktualnymi i opartymi na faktach danymi z Map Google. Dzięki tej funkcji deweloperzy mogą łatwo wprowadzać w swoich aplikacjach funkcje oparte na lokalizacji. Gdy zapytanie użytkownika ma kontekst związany z danymi z Map, model Gemini korzysta z Map Google, aby udzielać dokładnych i aktualnych odpowiedzi, które są odpowiednie dla określonej przez użytkownika lokalizacji lub ogólnego obszaru.
 
-- **คำตอบที่แม่นยำและรับรู้ตำแหน่ง:** ใช้ประโยชน์จากข้อมูลที่ครอบคลุมและเป็นปัจจุบันของ Google Maps สำหรับคำค้นหาที่เฉพาะเจาะจงทางภูมิศาสตร์
-- **การปรับเปลี่ยนในแบบของผู้ใช้ที่มีประสิทธิภาพมากขึ้น:** ปรับแต่งคำแนะนำและข้อมูลตามสถานที่ที่ผู้ใช้ระบุ
+- **Dokładne odpowiedzi oparte na lokalizacji:** wykorzystuj obszerne i aktualne dane z Map Google w przypadku zapytań dotyczących konkretnych lokalizacji.
+- **Ulepszona personalizacja:** dostosowuj rekomendacje i informacje na podstawie lokalizacji podanych przez użytkownika.
 
-## เริ่มต้นใช้งาน
+## Rozpocznij
 
-ตัวอย่างนี้แสดงวิธีผสานรวมการเชื่อมต่อแหล่งข้อมูลกับ Google Maps เข้ากับแอปพลิเคชันเพื่อให้คำตอบที่แม่นยำและรับรู้ตำแหน่งสำหรับคำค้นหาของผู้ใช้ พรอมต์จะขอคำแนะนำในพื้นที่พร้อมสถานที่ของผู้ใช้ (ไม่บังคับ) ซึ่งช่วยให้โมเดล Gemini ใช้ข้อมูล Google Maps ได้
+Ten przykład pokazuje, jak zintegrować powiązanie ze źródłami informacji przy użyciu Map Google z aplikacją, aby udzielać dokładnych odpowiedzi opartych na lokalizacji na zapytania użytkowników. Prompt prosi o lokalne rekomendacje z opcjonalną lokalizacją użytkownika, co umożliwia modelowi Gemini korzystanie z danych z Map Google.
 
 ### Python
 
@@ -118,39 +118,38 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## วิธีการทำงานของการเชื่อมต่อแหล่งข้อมูลกับ Google Maps
+## Jak działa powiązanie ze źródłami informacji przy użyciu Map Google
 
-การเชื่อมต่อแหล่งข้อมูลกับ Google Maps จะผสานรวม Gemini API กับระบบนิเวศ Geo ของ Google โดยใช้ Maps API เป็นแหล่งข้อมูล เมื่อคำค้นหาของผู้ใช้มีบริบททางภูมิศาสตร์ โมเดล Gemini จะเรียกใช้เครื่องมือการเชื่อมต่อแหล่งข้อมูลกับ Google Maps ได้ จากนั้นโมเดลจะสร้างคำตอบที่อิงตามข้อมูล Google Maps ที่เกี่ยวข้องกับสถานที่ที่ระบุ
+Powiązanie ze źródłami informacji przy użyciu Map Google integruje interfejs Gemini API z ekosystemem Google Geo, używając interfejsu API Map Google jako źródła powiązania ze źródłem informacji. Gdy zapytanie użytkownika zawiera kontekst geograficzny, model Gemini może wywołać narzędzie Grounding z użyciem Map Google. Model może wtedy generować odpowiedzi oparte na danych z Map Google dotyczących podanej lokalizacji.
 
-โดยปกติกระบวนการจะมีลักษณะดังนี้
+Proces ten zwykle obejmuje te etapy:
 
-1. **คำค้นหาของผู้ใช้:** ผู้ใช้ส่งคำค้นหาไปยังแอปพลิเคชันของคุณ ซึ่งอาจมีบริบททางภูมิศาสตร์ (เช่น "ร้านกาแฟใกล้ฉัน" "พิพิธภัณฑ์ในซานฟรานซิสโก")
-2. **การเรียกใช้เครื่องมือ:** โมเดล Gemini จะเรียกใช้เครื่องมือการเชื่อมต่อแหล่งข้อมูลกับ Google Maps เมื่อรับรู้ถึงความตั้งใจทางภูมิศาสตร์ คุณสามารถระบุ `latitude` และ `longitude` ของผู้ใช้ให้กับเครื่องมือนี้ได้ (ไม่บังคับ)
-   เครื่องมือนี้เป็นเครื่องมือค้นหาข้อความและทำงานคล้ายกับการค้นหาใน Maps โดยคำค้นหาในพื้นที่ ("ใกล้ฉัน") จะใช้พิกัด ส่วนคำค้นหาที่เฉพาะเจาะจงหรือไม่ใช่ในพื้นที่นั้นๆ จะไม่ได้รับผลกระทบจากสถานที่ที่ระบุ
-3. **การดึงข้อมูล:** บริการการเชื่อมต่อแหล่งข้อมูลกับ Google Maps จะค้นหาข้อมูลที่เกี่ยวข้องจาก Google Maps (เช่น สถานที่ รีวิว รูปภาพ ที่อยู่ เวลาทำการ)
-4. **การสร้างเนื้อหาที่อิงตามแหล่งข้อมูล:** ระบบจะใช้ข้อมูล Maps ที่ดึงมาเพื่อแจ้งคำตอบของโมเดล Gemini เพื่อให้มั่นใจในความถูกต้องของข้อเท็จจริงและความเกี่ยวข้อง
-5. **คำตอบและคำอธิบายประกอบ:** โมเดลจะแสดงคำตอบเป็นข้อความพร้อมคำอธิบายประกอบแบบอินไลน์ที่ลิงก์ไปยังแหล่งข้อมูล Google Maps ซึ่งช่วยให้นักพัฒนาแอปแสดงการอ้างอิงได้
+1. **Zapytanie użytkownika:** użytkownik przesyła zapytanie do Twojej aplikacji, które może zawierać kontekst geograficzny (np. „kawiarnie w pobliżu”, „muzea w San Francisco”).
+2. **Wywołanie narzędzia:** model Gemini, rozpoznając intencję geograficzną, wywołuje narzędzie powiązanie ze źródłami informacji przy użyciu Map Google. To narzędzie może opcjonalnie otrzymać współrzędne geograficzne użytkownika (`latitude` i `longitude`). Narzędzie to służy do wyszukiwania tekstowego i działa podobnie do wyszukiwania w Mapach. Zapytania lokalne („w pobliżu”) będą korzystać ze współrzędnych, a zapytania konkretne lub nielokalne raczej nie będą uwzględniać lokalizacji.
+3. **Pobieranie danych:** usługa powiązanie ze źródłami informacji przy użyciu Map Google wysyła zapytania do Map Google, aby uzyskać odpowiednie informacje (np. miejsca, opinie, zdjęcia, adresy, godziny otwarcia).
+4. **Generowanie oparte na danych:** pobrane dane z Map są używane do informowania odpowiedzi modelu Gemini, co zapewnia dokładność i trafność.
+5. **Odpowiedź i adnotacje:** model zwraca odpowiedź tekstową z adnotacjami w tekście, które zawierają linki do źródeł w Mapach Google, co umożliwia deweloperom wyświetlanie cytatów.
 
-## เหตุผลและเวลาที่ควรใช้การเชื่อมต่อแหล่งข้อมูลกับ Google Maps
+## Kiedy i dlaczego warto używać powiązania ze źródłami informacji przy użyciu Map Google
 
-การเชื่อมต่อแหล่งข้อมูลกับ Google Maps เหมาะอย่างยิ่งสำหรับแอปพลิเคชันที่ต้องใช้ข้อมูลที่แม่นยำ เป็นข้อมูลล่าสุด และเฉพาะเจาะจงสถานที่ ฟีเจอร์นี้ช่วยยกระดับประสบการณ์การใช้งานของผู้ใช้ด้วยการแสดงเนื้อหาที่เกี่ยวข้องและปรับเปลี่ยนในแบบของผู้ใช้ ซึ่งอิงตามฐานข้อมูลที่ครอบคลุมของ Google Maps ที่มีสถานที่มากกว่า 250 ล้านแห่งทั่วโลก
+Powiązanie ze źródłami informacji przy użyciu Map Google jest idealne w przypadku aplikacji, które wymagają dokładnych, aktualnych i opartych na lokalizacji informacji. Poprawia komfort użytkowania, ponieważ zapewnia trafne i spersonalizowane treści oparte na obszernej bazie danych Map Google, która zawiera ponad 250 milionów miejsc na całym świecie.
 
-คุณควรใช้การเชื่อมต่อแหล่งข้อมูลกับ Google Maps เมื่อแอปพลิเคชันของคุณต้องทำสิ่งต่อไปนี้
+Powiązanie ze źródłami informacji przy użyciu Map Google należy stosować, gdy aplikacja musi:
 
-- ให้คำตอบที่สมบูรณ์และถูกต้องสำหรับคำถามที่เฉพาะเจาะจงทางภูมิศาสตร์
-- สร้างเครื่องมือวางแผนการเดินทางและไกด์นำเที่ยวในพื้นที่แบบสนทนา
-- แนะนำจุดที่น่าสนใจตามสถานที่และการกำหนดค่าของผู้ใช้ เช่น ร้านอาหารหรือร้านค้า
-- สร้างประสบการณ์ที่รับรู้ตำแหน่งสำหรับบริการโซเชียลมีเดีย บริการค้าปลีก หรือบริการจัดส่งอาหาร
+- udzielać pełnych i dokładnych odpowiedzi na pytania dotyczące lokalizacji;
+- tworzyć konwersacyjne plany podróży i lokalne przewodniki;
+- rekomendować ciekawe miejsca na podstawie lokalizacji i preferencji użytkownika, np. restauracje lub sklepy;
+- tworzyć oparte na lokalizacji funkcje dla usług społecznościowych, handlowych lub dostawy jedzenia.
 
-การเชื่อมต่อแหล่งข้อมูลกับ Google Maps เหมาะอย่างยิ่งสำหรับกรณีการใช้งานที่ระยะทางและข้อมูลข้อเท็จจริงปัจจุบันมีความสำคัญอย่างยิ่ง เช่น การค้นหา "ร้านกาแฟที่ดีที่สุดใกล้ฉัน" หรือการดูเส้นทาง
+Powiązanie ze źródłami informacji przy użyciu Map Google sprawdza się w przypadkach użycia, w których kluczowe są bliskość i aktualne dane zgodne z prawdą, np. w przypadku wyszukiwania „najlepszej kawiarni w pobliżu” lub wyznaczania trasy.
 
-## กรณีการใช้งาน
+## Przypadki użycia
 
-การเชื่อมต่อแหล่งข้อมูลกับ Google Maps รองรับกรณีการใช้งานที่รับรู้ตำแหน่งได้หลากหลาย
+Powiązanie ze źródłami informacji przy użyciu Map Google obsługuje różne przypadki użycia oparte na lokalizacji.
 
-### การจัดการคำถามที่เฉพาะเจาะจงสถานที่
+### Obsługa pytań dotyczących konkretnego miejsca
 
-ถามคำถามโดยละเอียดเกี่ยวกับสถานที่ที่เฉพาะเจาะจงเพื่อรับคำตอบตามรีวิวของผู้ใช้ Google และข้อมูล Maps อื่นๆ
+Zadawaj szczegółowe pytania dotyczące konkretnego miejsca, aby uzyskać odpowiedzi na podstawie opinii użytkowników Google i innych danych z Map.
 
 ### Python
 
@@ -223,9 +222,9 @@ async function main() {
 main();
 ```
 
-### การปรับเปลี่ยนในแบบของผู้ใช้ตามสถานที่
+### Personalizacja na podstawie lokalizacji
 
-รับคำแนะนำที่ปรับให้เหมาะกับการกำหนดค่าของผู้ใช้และพื้นที่ทางภูมิศาสตร์ที่เฉพาะเจาะจง
+Uzyskuj rekomendacje dostosowane do preferencji użytkownika i konkretnego obszaru geograficznego.
 
 ### Python
 
@@ -298,9 +297,9 @@ async function main() {
 main();
 ```
 
-### การช่วยเหลือในการวางแผนการเดินทาง
+### Pomoc w planowaniu planu podróży
 
-สร้างแผนการเดินทางหลายวันพร้อมเส้นทางและข้อมูลเกี่ยวกับสถานที่ต่างๆ ซึ่งเหมาะสำหรับแอปพลิเคชันการเดินทาง
+Generuj plany na wiele dni z informacjami o różnych lokalizacjach i wskazówkami dojazdu. Jest to idealne rozwiązanie dla aplikacji podróżniczych.
 
 ### Python
 
@@ -365,102 +364,102 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## ข้อกำหนดในการใช้งานบริการ
+## Wymagania dotyczące korzystania z usługi
 
-ส่วนนี้อธิบายข้อกำหนดในการใช้งานบริการสำหรับการเชื่อมต่อแหล่งข้อมูลกับ Google Maps
+Ta sekcja opisuje wymagania dotyczące korzystania z usługi Grounding z użyciem Map Google.
 
-### แจ้งให้ผู้ใช้ทราบเกี่ยวกับการใช้แหล่งข้อมูล Google Maps
+### Informowanie użytkownika o korzystaniu ze źródeł z Map Google
 
-ผลลัพธ์แต่ละรายการที่อิงตาม Google Maps จะมีคำอธิบายประกอบแหล่งข้อมูลในบล็อกเนื้อหาของขั้นตอน `model_output` ที่รองรับคำตอบแต่ละรายการ ระบบจะแสดงข้อมูลเมตาดังต่อไปนี้
+W przypadku każdego wyniku opartego na Mapach Google otrzymasz adnotacje źródłowe w blokach treści kroku `model_output`, które obsługują każdą odpowiedź. Zwracane są te metadane:
 
-- URL ต้นทาง
-- ชื่อ
+- adres URL źródła
+- nazwa
 
-เมื่อแสดงผลลัพธ์จากการเชื่อมต่อแหล่งข้อมูลกับ Google Maps คุณต้องระบุแหล่งข้อมูล Google Maps ที่เกี่ยวข้องและแจ้งให้ผู้ใช้ทราบดังต่อไปนี้
+Podczas prezentowania wyników powiązania ze źródłami informacji przy użyciu Map Google musisz określić powiązane źródła z Map Google i poinformować użytkowników o tych kwestiach:
 
-- แหล่งข้อมูล Google Maps ต้องอยู่ต่อจากเนื้อหาที่สร้างขึ้นซึ่งแหล่งข้อมูลรองรับโดยทันที เนื้อหาที่สร้างขึ้นนี้เรียกอีกอย่างว่าผลลัพธ์ที่อิงตาม Google Maps
-- แหล่งข้อมูล Google Maps ต้องดูได้ภายใน 1 การโต้ตอบของผู้ใช้
+- Źródła z Map Google muszą znajdować się bezpośrednio po wygenerowanej treści, którą obsługują. Ta wygenerowana treść jest też nazywana wynikiem opartym na Mapach Google.
+- Źródła z Map Google muszą być widoczne w ramach jednej interakcji z użytkownikiem.
 
-### แสดงแหล่งข้อมูล Google Maps พร้อมลิงก์ Google Maps
+### Wyświetlanie źródeł z Map Google z linkami do Map Google
 
-คำอธิบายประกอบแหล่งข้อมูลแต่ละรายการต้องสร้างตัวอย่างลิงก์ตามข้อกำหนดต่อไปนี้
+W przypadku każdej adnotacji źródłowej należy wygenerować podgląd linku zgodnie z tymi wymaganiami:
 
-- ระบุแหล่งที่มาแต่ละรายการเป็น Google Maps ตามหลักเกณฑ์การระบุแหล่งที่มาด้วยข้อความของ Google Maps
-- แสดงชื่อแหล่งที่มาที่ระบุไว้ในคำตอบ
-- ลิงก์ไปยังแหล่งที่มาโดยใช้ `url` จากคำอธิบายประกอบ
+- Przypisz każde źródło do Map Google zgodnie ze wskazówkami dotyczącymi atrybucji tekstowej w Mapach Google
+  .
+- Wyświetl nazwę źródła podaną w odpowiedzi.
+- Utwórz link do źródła za pomocą `url` z adnotacji.
 
-### หลักเกณฑ์การระบุแหล่งที่มาด้วยข้อความของ Google Maps
+### Wskazówki dotyczące atrybucji tekstowej w Mapach Google
 
-เมื่อระบุแหล่งที่มาเป็น Google Maps ในข้อความ ให้ทำตามหลักเกณฑ์ต่อไปนี้
+Gdy przypisujesz źródła do Map Google w tekście, postępuj zgodnie z tymi wskazówkami:
 
-- อย่าแก้ไขข้อความ Google Maps ในลักษณะใดก็ตาม ดังนี้
-  - อย่าเปลี่ยนการใช้ตัวพิมพ์ใหญ่และตัวพิมพ์เล็กของ Google Maps
-  - อย่าขึ้นบรรทัดใหม่สำหรับ Google Maps
-  - อย่าแปล Google Maps เป็นภาษาอื่น
-  - ป้องกันไม่ให้เบราว์เซอร์แปล Google Maps โดยใช้แอตทริบิวต์ HTML translate="no"
+- Nie modyfikuj w żaden sposób tekstu Mapy Google:
+  - Nie zmieniaj wielkości liter w nazwie Mapy Google.
+  - Nie dziel nazwy Mapy Google na kilka wierszy.
+  - Nie tłumacz nazwy Mapy Google na inny język.
+  - Uniemożliwiaj przeglądarkom tłumaczenie nazwy Mapy Google, używając atrybutu HTML translate="no".
 
-ดูข้อมูลเพิ่มเติมเกี่ยวกับผู้ให้บริการข้อมูล Google Maps บางรายและ
-ข้อกำหนดสิทธิ์การใช้งานได้ที่ [ประกาศทางกฎหมายของ Google Maps และ Google Earth](https://www.google.com/help/legalnotices_maps/?hl=th)
+Więcej informacji o niektórych dostawcach danych do Map Google i ich
+warunkach licencji znajdziesz w [informacjach prawnych dotyczących Map Google i Google Earth](https://www.google.com/help/legalnotices_maps/?hl=pl).
 
-## แนวทางปฏิบัติแนะนำ
+## Sprawdzone metody
 
-- **ระบุสถานที่ของผู้ใช้:** เพื่อให้ได้คำตอบที่เกี่ยวข้องมากที่สุดและปรับเปลี่ยนในแบบของผู้ใช้
-  ระบุ `latitude` และ `longitude` ในการกำหนดค่าเครื่องมือ `google_maps` เสมอเมื่อทราบสถานที่ของผู้ใช้
-- **แจ้งผู้ใช้ปลายทาง:** แจ้งให้ผู้ใช้ปลายทางทราบอย่างชัดเจนว่าระบบกำลังใช้ข้อมูล Google Maps เพื่อตอบคำค้นหาของผู้ใช้ โดยเฉพาะอย่างยิ่งเมื่อเปิดใช้เครื่องมือ
-- **ปิดเมื่อไม่จำเป็น:** การเชื่อมต่อแหล่งข้อมูลกับ Google Maps จะปิดอยู่โดยค่าเริ่มต้น ให้เปิดใช้ (`"tools": [{"type": "google_maps"}]`) เมื่อคำค้นหามี
-  บริบททางภูมิศาสตร์ที่ชัดเจนเท่านั้น เพื่อเพิ่มประสิทธิภาพและลดค่าใช้จ่าย
+- **Podaj lokalizację użytkownika:** aby uzyskać najbardziej trafne i spersonalizowane odpowiedzi, zawsze uwzględniaj współrzędne geograficzne (`latitude` i `longitude`) w konfiguracji narzędzia `google_maps`, gdy znasz lokalizację użytkownika.
+- **Informuj użytkowników:** wyraźnie informuj użytkowników, że do odpowiadania na ich zapytania używane są dane z Map Google, zwłaszcza gdy narzędzie jest włączone.
+- **Wyłączaj, gdy nie jest potrzebne:** Powiązanie ze źródłami informacji przy użyciu Map Google jest domyślnie wyłączone. Włączaj go (`"tools": [{"type": "google_maps"}]`) tylko wtedy, gdy zapytanie ma
+  wyraźny kontekst geograficzny, aby zoptymalizować wydajność i koszty.
 
-## ข้อจำกัด
+## Ograniczenia
 
-- ปัจจุบันการเชื่อมต่อแหล่งข้อมูลกับ Google Maps รองรับเฉพาะพรอมต์และคำตอบที่เป็นภาษาอังกฤษเท่านั้น
-- เครื่องมือนี้อาจไม่พร้อมให้บริการในบางภูมิภาค
-- ผลลัพธ์อาจแตกต่างกันไปตามความแม่นยำของสถานที่และข้อมูล Maps ที่มี
-- **ขอบเขตทางภูมิศาสตร์:** การเชื่อมต่อแหล่งข้อมูลกับ Google Maps พร้อมให้บริการทั่วโลก
-- **สถานะเริ่มต้น:** เครื่องมือการเชื่อมต่อแหล่งข้อมูลกับ Google Maps จะปิดอยู่โดยค่าเริ่มต้น
-  คุณต้องเปิดใช้เครื่องมือนี้อย่างชัดเจนในคำขอ API
+- Powiązanie ze źródłami informacji przy użyciu Map Google obsługuje obecnie tylko prompty i odpowiedzi w języku angielskim.
+- Narzędzie może być niedostępne w niektórych regionach.
+- Wyniki mogą się różnić w zależności od dokładności lokalizacji i dostępnych danych z Map.
+- **Zasięg geograficzny:** Powiązanie ze źródłami informacji przy użyciu Map Google jest dostępne na całym świecie.
+- **Stan domyślny:** narzędzie powiązanie ze źródłami informacji przy użyciu Map Google jest domyślnie wyłączone.
+  Musisz je wyraźnie włączyć w żądaniach do interfejsu API.
 
-## ราคาและขีดจำกัดอัตรา
+## Ceny i limity zapytań
 
-ราคาการเชื่อมต่อแหล่งข้อมูลกับ Google Maps จะแตกต่างกันไปตามรุ่นของโมเดล ดังนี้
+Ceny powiązania ze źródłami informacji przy użyciu Map Google różnią się w zależności od generowania modelu:
 
-- **โมเดล Gemini 3:** ระบบจะเรียกเก็บเงินจากโปรเจ็กต์ของคุณสำหรับ**คำค้นหา**แต่ละรายการที่โมเดลตัดสินใจดำเนินการ **พรอมต์การค้นหา**รายการเดียว (คำขอ API ของคุณที่ส่งไปยังโมเดล) อาจทำให้โมเดลดำเนินการคำค้นหาหลายรายการเพื่อค้นหาข้อมูลที่จำเป็น คำค้นหาแต่ละรายการจะนับเป็นการใช้งานเครื่องมือที่เรียกเก็บเงินได้
-- **โมเดล Gemini 2.5 และโมเดลเก่ากว่า:** ระบบจะเรียกเก็บเงินจากโปรเจ็กต์ของคุณต่อ**พรอมต์การค้นหา**
-  ระบบจะเรียกเก็บเงินจากคำขอเฉพาะในกรณีที่พรอมต์แสดงผลลัพธ์ที่อิงตาม Google Maps อย่างน้อย 1 รายการได้สำเร็จ ไม่ว่าโมเดลจะดำเนินการคำค้นหาแต่ละรายการภายในกี่รายการก็ตามเพื่อให้ได้ผลลัพธ์นั้น
+- **Modele Gemini 3:** projekt jest obciążany za każde **zapytanie wyszukiwania** , które model zdecyduje się wykonać. Pojedynczy **prompt wyszukiwania** (żądanie do interfejsu API wysłane do modelu) może spowodować, że model wykona wiele zapytań wyszukiwania, aby znaleźć potrzebne informacje. Każde z tych zapytań jest liczone jako płatne użycie narzędzia.
+- **Modele Gemini 2.5 i starsze:** projekt jest obciążany za każdy **prompt wyszukiwania**.
+  Żądanie jest rozliczane tylko wtedy, gdy prompt zwróci co najmniej 1 wynik oparty na Mapach Google, niezależnie od tego, ile pojedynczych zapytań wyszukiwania model wykonał wewnętrznie, aby uzyskać ten wynik.
 
-ดูข้อมูลราคาโดยละเอียดได้ที่หน้าการกำหนดราคา [Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=th)
+Szczegółowe informacje o cenach znajdziesz na stronie z cennikiem interfejsu [Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=pl).
 
-## โมเดลที่รองรับ
+## Obsługiwane modele
 
-โมเดลต่อไปนี้รองรับการเชื่อมต่อแหล่งข้อมูลกับ Google Maps
+Powiązanie ze źródłami informacji przy użyciu Map Google jest obsługiwane przez te modele:
 
-| โมเดล | การเชื่อมต่อแหล่งข้อมูลกับ Google Maps |
+| Model | Powiązanie ze źródłami informacji przy użyciu Map Google |
 | --- | --- |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=th) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=th) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=th) | ✔️ |
-| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=th) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=th) | ✔️ |
-| [Gemini 3 Flash Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=th) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=th) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=th) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=th) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=pl) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=pl) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=pl) | ✔️ |
+| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=pl) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=pl) | ✔️ |
+| [Gemini 3 Flash Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=pl) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=pl) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=pl) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=pl) | ✔️ |
 
-## ชุดเครื่องมือที่รองรับ
+## Obsługiwane kombinacje narzędzi
 
-โมเดล Gemini 3 รองรับการรวมเครื่องมือในตัว (เช่น การเชื่อมต่อแหล่งข้อมูลกับ Google Maps) กับเครื่องมือที่กำหนดเอง (การเรียกใช้ฟังก์ชัน) ดูข้อมูลเพิ่มเติมได้ที่หน้า
-[ชุดเครื่องมือ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=th)
+Modele Gemini 3 obsługują łączenie wbudowanych narzędzi (takich jak grounding z użyciem Map Google) z narzędziami niestandardowymi (wywoływanie funkcji). Więcej informacji znajdziesz na
+[stronie dotyczącej kombinacji narzędzi](https://ai.google.dev/gemini-api/docs/tool-combination?hl=pl).
 
-## ขั้นตอนถัดไป
+## Co dalej?
 
-- ดูข้อมูลเกี่ยวกับเครื่องมืออื่นๆ ที่[พร้อมให้บริการ](https://ai.google.dev/gemini-api/docs/tools?hl=th)
-- ดูข้อมูลเพิ่มเติมเกี่ยวกับแนวทางปฏิบัติแนะนำด้าน AI ที่มีความรับผิดชอบและตัวกรองความปลอดภัยของ Gemini API ได้ที่[คู่มือการตั้งค่าความปลอดภัย](https://ai.google.dev/gemini-api/docs/safety-settings?hl=th)
+- Dowiedz się więcej o innych [dostępnych narzędziach](https://ai.google.dev/gemini-api/docs/tools?hl=pl).
+- Więcej informacji o sprawdzonych metodach dotyczących odpowiedzialnej AI i filtrach bezpieczeństwa interfejsu Gemini API znajdziesz w [przewodniku po ustawieniach bezpieczeństwa](https://ai.google.dev/gemini-api/docs/safety-settings?hl=pl).
 
-ส่งความคิดเห็น
+Prześlij opinię
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-อัปเดตล่าสุด 2026-07-30 UTC
+Ostatnia aktualizacja: 2026-07-30 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Chcesz przekazać coś jeszcze?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-30 UTC"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]

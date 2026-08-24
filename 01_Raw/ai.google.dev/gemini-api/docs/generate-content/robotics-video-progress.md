@@ -1,34 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-video-progress?hl=it
-fetched_at: 2026-08-17T02:26:43.939693+00:00
-title: "Comprensione dei video \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-video-progress?hl=ko
+fetched_at: 2026-08-24T02:21:02.972571+00:00
+title: "\ub3d9\uc601\uc0c1 \uc774\ud574 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Invia feedback
+의견 보내기
 
-# Comprensione dei video
+# 동영상 이해
 
-Gemini Robotics ER 2 può monitorare l'avanzamento delle attività dai feed video continui utilizzando due funzionalità:
+Gemini Robotics ER 2는 두 가지 기능을 사용하여 연속 동영상 피드에서 작업 진행 상황을 추적할 수 있습니다.
 
-- Ricerca di momenti: identifica il timestamp preciso in cui si verifica un evento chiave.
-- Classificazione dell'avanzamento: assegna a ogni video una delle cinque fasce di completamento (0-20%, 20-40%, 40-60%, 60-80%, 80-100%).
+- 순간 찾기: 주요 이벤트가 발생하는 정확한 타임스탬프를 식별합니다.
+- 진행 상황 분류: 각 동영상을 5개의 완료 구간 (0~20%, 20~40%, 40~60%, 60~80%, 80~100%) 중 하나에 할당합니다.
 
-## Ricerca di momenti
+## 순간 찾기
 
-La ricerca di momenti identifica il frame video esatto in cui si verifica un evento critico, ad esempio quando una tazza è piena o viene fatto un nodo. I robot lo utilizzano per verificare il successo, sequenziare i passaggi e attivare le correzioni.
+순간 찾기는 컵이 가득 차거나 매듭이 묶이는 등 중요한 이벤트가 발생하는 정확한 동영상 프레임을 식별합니다. 로봇은 이를 사용하여 성공 여부를 확인하고, 단계를 순서대로 진행하고, 수정을 트리거합니다.
 
-Il seguente prompt di esempio chiede al modello di identificare il momento di completamento di una determinata attività in un video:
+다음 예시 프롬프트는 모델에 동영상에서 지정된 작업의 완료 순간을 식별하도록 요청합니다.
 
 ```
 from google import genai
@@ -56,15 +56,15 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Di seguito sono riportati esempi di frame di un video di ricerca di momenti, con il modello che identifica il timestamp di completamento dell'attività:
+다음은 모델이 작업 완료 타임스탬프를 식별하는 순간 찾기 동영상의 프레임 예시를 보여줍니다.
 
-![Esempio di fotogrammi video che mostrano l'output della ricerca di momenti con una sovrapposizione di timestamp](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-moment-finding.png?hl=it)
+![타임스탬프 오버레이가 있는 순간 찾기 출력을 보여주는 동영상 프레임의 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-moment-finding.png?hl=ko)
 
-## Classificazione dell'avanzamento
+## 진행 상황 분류
 
-La classificazione dell'avanzamento assegna un video a una delle cinque fasce di completamento: 0-20%, 20-40%, 40-60%, 60-80% o 80-100%. In questo modo, i robot hanno una consapevolezza situazionale in tempo reale, in modo da poter regolare le azioni o riprovare i passaggi non riusciti senza riavviare un intero flusso di lavoro.
+진행 상황 분류는 동영상을 5개의 완료 구간(0~20%, 20~40%, 40~60%, 60~80%, 80~100%) 중 하나에 할당합니다. 이를 통해 로봇은 실시간으로 상황을 인식하여 전체 워크플로를 다시 시작하지 않고도 작업을 조정하거나 실패한 단계를 다시 시도할 수 있습니다.
 
-Il seguente prompt di esempio chiede al modello di classificare il livello di avanzamento corrente di un video:
+다음 예시 프롬프트는 모델에 동영상의 현재 진행 상황 수준을 분류하도록 요청합니다.
 
 ```
 from google import genai
@@ -92,27 +92,27 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Di seguito sono riportati esempi di frame di un video di classificazione dell'avanzamento, con il modello che assegna una fascia di avanzamento:
+다음은 모델이 진행 상황 구간을 할당하는 진행 상황 분류 동영상의 프레임 예시를 보여줍니다.
 
-![Esempio di fotogrammi video che mostrano l'output della classificazione dell'avanzamento con un'etichetta di parentesi di avanzamento](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-progress-classification.png?hl=it)
+![진행률 괄호 라벨이 있는 진행률 분류 출력을 보여주는 동영상 프레임 예시](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-progress-classification.png?hl=ko)
 
-## Esempi
+## 예
 
-Per esempi eseguibili completi, incluso il monitoraggio delle attività in più passaggi, consulta il
-[ricettario di robotica](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+다단계 작업 추적을 비롯한 실행 가능한 전체 예시는
+[로봇공학 레시피](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)를 참고하세요.
 
-## Passaggi successivi
+## 다음 단계
 
-- [API Live per la robotica](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=it): streaming bidirezionale in tempo reale.
-- [Orchestrazione delle attività](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=it): attività a lungo termine con ragionamento spaziale.
-- [Panoramica di Gemini Robotics ER](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=it): confronto e funzionalità dei modelli.
+- [로봇공학용 Live API](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=ko) - 실시간 양방향 스트리밍
+- [작업 오케스트레이션](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=ko) - 공간 추론을 사용하는 장기 작업
+- [Gemini Robotics ER 개요](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=ko) - 모델 비교 및 기능
 
-Invia feedback
+의견 보내기
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Ultimo aggiornamento 2026-07-30 UTC.
+최종 업데이트: 2026-07-30(UTC)
 
-Vuoi dirci altro?
+의견을 전달하고 싶나요?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-30(UTC)"],[],[]]

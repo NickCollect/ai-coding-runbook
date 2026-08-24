@@ -1,89 +1,102 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=fr
-fetched_at: 2026-08-17T02:33:44.926053+00:00
-title: "Signatures de pens\u00e9e \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=pt-BR
+fetched_at: 2026-08-24T02:26:58.279443+00:00
+title: "Assinaturas de racioc\u00ednio \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Envoyer des commentaires
+Envie comentários
 
-# Signatures de pensée
+# Assinaturas de raciocínio
 
-Les signatures de pensée sont des représentations chiffrées du processus de réflexion interne du modèle. Elles sont utilisées pour préserver le contexte de raisonnement lors d'interactions en plusieurs étapes.
-Lorsque vous utilisez des modèles de réflexion (tels que les séries Gemini 3 et 2.5), l'API peut renvoyer un champ `thoughtSignature` dans les [parties de contenu](https://ai.google.dev/api/caching?hl=fr#Part) de la réponse (par exemple, les parties `text` ou `functionCall`).
+As assinaturas de pensamento são representações criptografadas do processo de pensamento interno do modelo e são usadas para preservar o contexto de raciocínio em interações de várias etapas.
+Ao usar modelos de pensamento (como as séries Gemini 3 e 2.5), a API pode
+retornar um campo `thoughtSignature` nas [partes de conteúdo](https://ai.google.dev/api/caching?hl=pt-br#Part)
+da resposta (por exemplo, partes `text` ou `functionCall`).
 
-En règle générale, si vous recevez une signature de pensée dans la réponse d'un modèle, vous devez la renvoyer exactement telle qu'elle a été reçue lorsque vous envoyez l'historique des conversations au tour suivant.
-**Lorsque vous utilisez les modèles Gemini 3, vous devez renvoyer les signatures de pensée lors de l'appel de fonction, sinon vous recevrez une erreur de validation** (code d'état 4xx).
-Cela inclut l'utilisation du paramètre `minimal`
-[Niveau de raisonnement](https://ai.google.dev/gemini-api/docs/thinking?hl=fr#thinking-levels) pour Gemini 3 Flash.
+Como regra geral, se você receber uma assinatura de pensamento em uma resposta do modelo, transmita-a exatamente como recebida ao enviar o histórico da conversa na próxima interação.
+**Ao usar modelos do Gemini 3, é necessário transmitir assinaturas de pensamento durante a chamada de função. Caso contrário, você receberá um erro de validação** (código de status 4xx).
+Isso inclui o uso da configuração de `minimal`
+[nível de pensamento](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br#thinking-levels) para o Gemini 3
+Flash.
 
-## Fonctionnement
+## Como funciona
 
-Le graphique ci-dessous illustre la signification des termes "tour" et "étape" en ce qui concerne l'[appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr) dans l'API Gemini. Un "tour" correspond à un échange complet dans une conversation entre un utilisateur et un modèle. Une "étape" est une action ou une opération plus précise effectuée par le modèle, souvent dans le cadre d'un processus plus vaste pour terminer un tour.
+O gráfico abaixo mostra o significado de "interação" e "etapa" em relação a
+[chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br) na API Gemini. Uma "interação" é uma troca única e completa em uma conversa entre um usuário e um modelo. Uma "etapa" é uma ação ou operação mais detalhada realizada pelo modelo, geralmente como parte de um processo maior para concluir uma interação.
 
-![Diagramme des tours et des étapes d&#39;appel de fonction](https://ai.google.dev/static/gemini-api/docs/images/fc-turns.png?hl=fr)
+![Diagrama de turnos e etapas de chamada de função](https://ai.google.dev/static/gemini-api/docs/images/fc-turns.png?hl=pt-br)
 
-*Ce document se concentre sur la gestion de l'appel de fonction pour les modèles Gemini 3. Consultez la section [Comportement du modèle](#model-behavior) pour connaître les différences avec la version 2.5.*
+*Este documento se concentra no processamento de chamadas de função para modelos do Gemini 3. Consulte
+a seção sobre o [comportamento do modelo](#model-behavior) para conferir discrepâncias com a versão 2.5.*
 
-Gemini 3 renvoie des signatures de pensée pour toutes les réponses du modèle (réponses de l'API) avec un appel de fonction. Les signatures de pensée s'affichent dans les cas suivants :
+O Gemini 3 retorna assinaturas de pensamento para todas as respostas do modelo (respostas da API) com uma chamada de função. As assinaturas de pensamento aparecem nos seguintes casos:
 
-- Lorsqu'il y a des appels de [fonction parallèle](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr#parallel_function_calling), la première partie d'appel de fonction renvoyée par la réponse du modèle aura une signature de pensée.
-- Lorsqu'il existe des appels de fonction séquentiels (multietapes), chaque appel de fonction aura une signature et vous devrez renvoyer toutes les signatures.
-- Les réponses du modèle sans appel de fonction renvoient une signature de réflexion dans la dernière partie renvoyée par le modèle.
+- Quando há [chamadas de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br#parallel_function_calling)
+  paralelas, a primeira parte da chamada de função retornada pela resposta do modelo terá uma
+  assinatura de pensamento.
+- Quando há chamadas de função sequenciais (várias etapas), cada chamada de função terá uma assinatura, e você precisará transmitir todas as assinaturas.
+- As respostas do modelo sem uma chamada de função vão retornar uma assinatura de pensamento na última parte retornada pelo modelo.
 
-Le tableau suivant fournit une visualisation des appels de fonction en plusieurs étapes, en combinant les définitions des tours et des étapes avec le concept de signatures présenté ci-dessus :
+A tabela a seguir oferece uma visualização para chamadas de função de várias etapas, combinando as definições de interações e etapas com o conceito de assinaturas apresentado acima:
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Tourner** | **Step** | **Demande de l'utilisateur** | **Réponse du modèle** | **FunctionResponse** |
+| **Interação** | **Etapa** | **Solicitação do usuário** | **Resposta do modelo** | **FunctionResponse** |
 | 1 | 1 | `request1 = user_prompt` | `FC1 + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + (FC1 + signature) + FR1` | `FC2 + signature` | `FR2` |
-| 1 | 3 | `request3 = request2 + (FC2 + signature) + FR2` | `text_output`  `(no FCs)` | Aucun |
+| 1 | 3 | `request3 = request2 + (FC2 + signature) + FR2` | `text_output`  `(no FCs)` | Nenhum |
 
-## Signatures dans les parties d'appel de fonction
+## Assinaturas em partes de chamada de função
 
-Lorsque Gemini génère un `functionCall`, il s'appuie sur `thought_signature` pour traiter correctement la sortie de l'outil au tour suivant.
+Quando o Gemini gera um `functionCall`, ele depende da `thought_signature` para processar a saída da ferramenta corretamente na próxima interação.
 
-- **Comportement** :
-  - **Appel de fonction unique** : la partie `functionCall` contiendra un `thought_signature`.
-  - **Appels de fonction parallèles** : si le modèle génère des appels de fonction parallèles dans une réponse, le `thought_signature` n'est associé **qu'à la première** partie `functionCall`. Les parties `functionCall` suivantes de la même réponse **ne contiendront pas** de signature.
-- **Exigence** : Vous **devez** renvoyer cette signature exactement à l'endroit où elle a été reçue lorsque vous renvoyez l'historique des conversations.
-- **Validation** : une validation stricte est appliquée à tous les appels de fonction au cours du tour actuel . (Seul le tour actuel est requis. Nous ne validons pas les tours précédents.)
-  - L'API remonte dans l'historique (du plus récent au plus ancien) pour trouver le message **User** le plus récent contenant du contenu standard (par exemple, `text`), qui correspond au début du tour actuel. Il ne **be** d'un `functionResponse`.
-  - Les tours `functionCall` du modèle **Tous** qui se produisent après ce message d'utilisation spécifique sont considérés comme faisant partie du tour.
-  - La **première** partie `functionCall` de **chaque étape** du tour actuel **doit** inclure son `thought_signature`.
-  - Si vous omettez un `thought_signature` pour la première partie `functionCall` d'une étape du tour actuel, la requête échouera et renverra une erreur 400.
-- **Si les signatures appropriées ne sont pas renvoyées, voici comment l'erreur s'affichera :**
-  - Modèles Gemini 3 : si vous n'incluez pas de signatures, une erreur 400 se produira. Le libellé se présentera sous la forme suivante :
-    - Il manque un `thought_signature` à l'appel de fonction `<Function Call>` dans le bloc de contenu `<index of contents array>`. Par exemple, *l'appel de fonction `FC1` dans le bloc de contenu `1.` est manquant `thought_signature`*.
+- **Comportamento**:
+  - **Chamada de função única**: a parte `functionCall` vai conter uma `thought_signature`.
+  - **Chamadas de função paralelas**: se o modelo gerar chamadas de função paralelas
+    em uma resposta, a `thought_signature` será anexada **apenas à primeira**
+    `functionCall` parte. As partes `functionCall` subsequentes na mesma resposta **não** vão conter uma assinatura.
+- **Requisito**: você **precisa** retornar essa assinatura na parte exata em que ela
+  foi recebida ao enviar o histórico da conversa de volta.
+- **Validação**: a validação estrita é aplicada a todas as chamadas de função na
+  interação atual . Apenas a interação atual é necessária. Não validamos as interações anteriores.
+  - A API volta no histórico (do mais recente ao mais antigo) para encontrar a mensagem **do usuário** mais recente que contém conteúdo padrão (por exemplo, `text`) ( que seria o início da interação atual). Essa mensagem **be** será uma `functionResponse`.
+  - **Todas** as interações `functionCall` do modelo que ocorrem após essa mensagem de uso específica são consideradas parte da interação.
+  - A **primeira** parte `functionCall` em **cada etapa** da interação atual **precisa** incluir a `thought_signature`.
+  - Se você omitir uma `thought_signature` para a primeira parte `functionCall` em qualquer etapa da interação atual, a solicitação vai falhar com um erro 400.
+- **Se as assinaturas adequadas não forem retornadas, veja como você vai receber um erro**
+  - Modelos do Gemini 3: a falha ao incluir assinaturas vai resultar em um erro 400. A redação será do formulário:
+    - A chamada de função `<Function Call>` no bloco de conteúdo `<index of contents array>`
+      está sem um `thought_signature`. Por exemplo, *a chamada de função `FC1` no bloco de conteúdo `1.` está sem um `thought_signature`.*
 
-### Exemple d'appel de fonction séquentiel
+### Exemplo de chamada de função sequencial
 
-Cette section présente un exemple d'appels de fonction multiples dans lequel l'utilisateur pose une question complexe nécessitant plusieurs tâches.
+Esta seção mostra um exemplo de várias chamadas de função em que o usuário faz uma pergunta complexa que exige várias tarefas.
 
-Prenons l'exemple d'un appel de fonction multitours où l'utilisateur pose une question complexe nécessitant plusieurs tâches : `"Check flight status for AA100 and
+Vamos analisar um exemplo de chamada de função de várias interações em que o usuário faz
+uma pergunta complexa que exige várias tarefas: `"Check flight status for AA100 and
 book a taxi if delayed"`.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Tourner** | **Step** | **Demande de l'utilisateur** | **Réponse du modèle** | **FunctionResponse** |
+| **Interação** | **Etapa** | **Solicitação do usuário** | **Resposta do modelo** | **FunctionResponse** |
 | 1 | 1 | `request1="Check flight status for AA100 and book a taxi 2 hours before if delayed."` | `FC1 ("check_flight") + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + FC1 ("check_flight") + signature + FR1` | `FC2("book_taxi") + signature` | `FR2` |
 | 1 | 3 | `request3 = request2 + FC2 ("book_taxi") + signature + FR2` | `text_output`  `(no FCs)` | `None` |
 
-Le code suivant illustre la séquence du tableau ci-dessus.
+O código a seguir ilustra a sequência na tabela acima.
 
-**Tour 1, étape 1 (demande de l'utilisateur)**
+**Interação 1, etapa 1 (solicitação do usuário)**
 
 ```
 {
@@ -138,7 +151,7 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-**Tour 1, étape 1 (réponse du modèle)**
+**Interação 1, etapa 1 (resposta do modelo)**
 
 ```
 {
@@ -159,7 +172,8 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-**Tour 1, étape 2 (réponse de l'utilisateur : envoi des résultats de l'outil)** : comme ce tour d'utilisateur ne contient qu'un `functionResponse` (aucun nouveau texte), nous sommes toujours au tour 1. Nous devons préserver `<Signature_A>`.
+**Interação 1, etapa 2 (resposta do usuário: envio de saídas de ferramentas)** Como essa interação do usuário contém apenas uma `functionResponse` (sem texto novo), ainda estamos na interação 1. Precisamos
+preservar `<Signature_A>`.
 
 ```
 {
@@ -200,7 +214,7 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-**Tour 1, étape 2 (modèle)** : le modèle décide maintenant de réserver un taxi en fonction du résultat de l'outil précédent.
+**Interação 1, etapa 2 (modelo)** O modelo agora decide reservar um táxi com base na saída da ferramenta anterior.
 
 ```
 {
@@ -221,7 +235,8 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-**Tour 1, Étape 3 (Utilisateur : envoi du résultat de l'outil)** Pour envoyer la confirmation de la réservation de taxi, nous devons inclure des signatures pour **TOUS** les appels de fonction dans cette boucle (`<Signature A>` + `<Signature B>`).
+**Interação 1, etapa 3 (usuário: envio da saída da ferramenta)** Para enviar a confirmação da reserva de táxi, precisamos incluir assinaturas para **TODAS** as chamadas de função neste loop
+(`<Signature A>` + `<Signature B>`).
 
 ```
 {
@@ -290,18 +305,19 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-### Exemple d'appel de fonction parallèle
+### Exemplo de chamada de função paralela
 
-Passons à un exemple d'appel de fonction parallèle où l'utilisateur demande `"Check weather in Paris and London"` pour voir où le modèle effectue la validation.
+Vamos analisar um exemplo de chamada de função paralela em que o usuário pergunta
+`"Check weather in Paris and London"` para ver onde o modelo faz a validação.
 
-| **Tourner** | **Step** | **Demande de l'utilisateur** | **Réponse du modèle** | **FunctionResponse** |
+| **Interação** | **Etapa** | **Solicitação do usuário** | **Resposta do modelo** | **FunctionResponse** |
 | --- | --- | --- | --- | --- |
-| 1 | 1 | `request1="Check the weather in Paris and London"` | FC1 ("Paris") + signature  FC2 ("Londres") | FR1 |
-| 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | text\_output  (sans FC) | Aucun |
+| 1 | 1 | `request1="Check the weather in Paris and London"` | FC1 ("Paris") + signature  FC2 ("London") | FR1 |
+| 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | text\_output  (no FCs) | Nenhum |
 
-Le code suivant illustre la séquence du tableau ci-dessus.
+O código a seguir ilustra a sequência na tabela acima.
 
-**Tour 1, étape 1 (demande de l'utilisateur)**
+**Interação 1, etapa 1 (solicitação do usuário)**
 
 ```
 {
@@ -340,7 +356,7 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-**Tour 1, étape 1 (réponse du modèle)**
+**Interação 1, etapa 1 (resposta do modelo)**
 
 ```
 {
@@ -368,7 +384,8 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-**Étape 2 du tour 1 (réponse de l'utilisateur : envoi des résultats de l'outil)** Nous devons conserver `<Signature_A>` dans la première partie exactement tel qu'il a été reçu.
+**Interação 1, etapa 2 (resposta do usuário: envio de saídas de ferramentas)** Precisamos preservar
+`<Signature_A>` na primeira parte exatamente como recebida.
 
 ```
 [
@@ -426,17 +443,20 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 ]
 ```
 
-## Signatures dans les parties non `functionCall`
+## Assinaturas em partes não `functionCall`
 
-Gemini peut également renvoyer `thought_signatures` dans la dernière partie de la réponse, dans les parties qui ne sont pas des appels de fonction.
+O Gemini também pode retornar `thought_signatures` na parte final da resposta em partes que não são de chamada de função.
 
-- **Comportement** : la dernière partie du contenu (`text, inlineData…`) renvoyée par le modèle peut contenir un `thought_signature`.
-- **Recommandation** : il est **recommandé** de renvoyer ces signatures pour s'assurer que le modèle conserve un raisonnement de haute qualité, en particulier pour les workflows agentifs simulés ou le suivi d'instructions complexes.
-- **Validation** : l'API **n'applique pas** strictement la validation. Vous ne recevrez pas d'erreur bloquante si vous les omettez, mais les performances peuvent se dégrader.
+- **Comportamento**: a parte de conteúdo final (`text, inlineData…`) retornada pelo
+  modelo pode conter um `thought_signature`.
+- **Recomendação**: o retorno dessas assinaturas é **recomendado** para garantir que
+  o modelo mantenha um raciocínio de alta qualidade, especialmente para instruções complexas
+  seguindo ou fluxos de trabalho de agente simulados.
+- **Validação**: a API **não** aplica a validação de forma estrita. Você não vai receber um erro de bloqueio se omiti-las, embora a performance possa ser reduzida.
 
-### Texte/Raisonnement en contexte (aucune validation)
+### Raciocínio de texto/no contexto (sem validação)
 
-**Tour 1, étape 1 (réponse du modèle)**
+**Interação 1, etapa 1 (resposta do modelo)**
 
 ```
 {
@@ -450,7 +470,7 @@ Gemini peut également renvoyer `thought_signatures` dans la dernière partie de
 }
 ```
 
-**Tour 2, étape 1 (utilisateur)**
+**Interação 2, etapa 1 (usuário)**
 
 ```
 [
@@ -468,26 +488,27 @@ Gemini peut également renvoyer `thought_signatures` dans la dernière partie de
 ]
 ```
 
-## Signatures pour la compatibilité avec OpenAI
+## Assinaturas para compatibilidade com OpenAI
 
-L'exemple suivant montre comment gérer les signatures de pensée pour une API Chat Completions à l'aide de la [compatibilité OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=fr).
+Os exemplos a seguir mostram como processar assinaturas de pensamento para uma API de conclusão de chat
+usando [compatibilidade com OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=pt-br).
 
-### Exemple d'appel de fonction séquentiel
+### Exemplo de chamada de função sequencial
 
-Voici un exemple d'appel de fonction multiple où l'utilisateur pose une question complexe nécessitant plusieurs tâches.
+Este é um exemplo de várias chamadas de função em que o usuário faz uma pergunta complexa que exige várias tarefas.
 
-Examinons un exemple d'appel de fonction multitours où l'utilisateur demande `Check flight status for AA100 and book a taxi if delayed`. Vous pouvez voir ce qui se passe lorsque l'utilisateur pose une question complexe nécessitant plusieurs tâches.
+Vamos analisar um exemplo de chamada de função de várias interações em que o usuário pergunta `Check flight status for AA100 and book a taxi if delayed` e você pode ver o que acontece quando o usuário faz uma pergunta complexa que exige várias tarefas.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Tourner** | **Step** | **Demande de l'utilisateur** | **Réponse du modèle** | **FunctionResponse** |
+| **Interação** | **Etapa** | **Solicitação do usuário** | **Resposta do modelo** | **FunctionResponse** |
 | 1 | 1 | `request1 = "Check flight status for AA100 and book a taxi 2 hours before if delayed."` | `FC1 ("check_flight") + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + FC1 ("check_flight") + signature + FR1` | `FC2("book_taxi") + signature` | `FR2` |
 | 1 | 3 | `request3 = request2 + FC2 ("book_taxi") + signature + FR2` | `text_output`  `(no FCs)` | `None` |
 
-Le code suivant parcourt la séquence donnée.
+O código a seguir mostra a sequência fornecida.
 
-**Tour 1, étape 1 (demande de l'utilisateur)**
+**Interação 1, etapa 1 (solicitação do usuário)**
 
 ```
 {
@@ -541,7 +562,7 @@ Le code suivant parcourt la séquence donnée.
 }
 ```
 
-**Tour 1, étape 1 (réponse du modèle)**
+**Interação 1, etapa 1 (resposta do modelo)**
 
 ```
 {
@@ -564,9 +585,10 @@ Le code suivant parcourt la séquence donnée.
     }
 ```
 
-**Tour 1, étape 2 (réponse de l'utilisateur : envoi des résultats de l'outil)**
+**Interação 1, etapa 2 (resposta do usuário: envio de saídas de ferramentas)**
 
-Étant donné que ce tour d'utilisateur ne contient qu'un `functionResponse` (pas de nouveau texte), nous sommes toujours au tour 1 et devons conserver `<Signature_A>`.
+Como essa interação do usuário contém apenas um `functionResponse` (sem texto novo), ainda estamos
+na interação 1 e precisamos preservar `<Signature_A>`.
 
 ```
 "messages": [
@@ -601,9 +623,9 @@ Le code suivant parcourt la séquence donnée.
   ]
 ```
 
-**Tour 1, étape 2 (modèle)**
+**Interação 1, etapa 2 (modelo)**
 
-Le modèle décide maintenant de réserver un taxi en fonction du résultat de l'outil précédent.
+O modelo agora decide reservar um táxi com base na saída da ferramenta anterior.
 
 ```
 {
@@ -626,9 +648,10 @@ Le modèle décide maintenant de réserver un taxi en fonction du résultat de l
 }
 ```
 
-**Tour 1, Étape 3 (Utilisateur : envoi du résultat de l'outil)**
+**Interação 1, etapa 3 (usuário: envio da saída da ferramenta)**
 
-Pour envoyer la confirmation de réservation de taxi, nous devons inclure des signatures pour TOUS les appels de fonction dans cette boucle (`<Signature A>` + `<Signature B>`).
+Para enviar a confirmação da reserva de táxi, precisamos incluir assinaturas para TODAS as
+chamadas de função neste loop (`<Signature A>` + `<Signature B>`).
 
 ```
 "messages": [
@@ -687,19 +710,21 @@ Pour envoyer la confirmation de réservation de taxi, nous devons inclure des si
   ]
 ```
 
-### Exemple d'appel de fonction parallèle
+### Exemplo de chamada de função paralela
 
-Prenons l'exemple d'un appel de fonction parallèle où l'utilisateur demande `"Check weather in Paris and London"`. Vous pouvez voir où le modèle effectue la validation.
+Vamos analisar um exemplo de chamada de função paralela em que o usuário pergunta
+`"Check weather in Paris and London"` e você pode ver onde o modelo faz
+validação.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Tourner** | **Step** | **Demande de l'utilisateur** | **Réponse du modèle** | **FunctionResponse** |
+| **Interação** | **Etapa** | **Solicitação do usuário** | **Resposta do modelo** | **FunctionResponse** |
 | 1 | 1 | `request1="Check the weather in Paris and London"` | `FC1 ("Paris") + signature`  `FC2 ("London")` | `FR1` |
 | 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | `text_output`  `(no FCs)` | `None` |
 
-Voici le code permettant de parcourir la séquence donnée.
+Confira o código para analisar a sequência fornecida.
 
-**Tour 1, étape 1 (demande de l'utilisateur)**
+**Interação 1, etapa 1 (solicitação do usuário)**
 
 ```
 {
@@ -738,7 +763,7 @@ Voici le code permettant de parcourir la séquence donnée.
 }
 ```
 
-**Tour 1, étape 1 (réponse du modèle)**
+**Interação 1, etapa 1 (resposta do modelo)**
 
 ```
 {
@@ -769,9 +794,9 @@ Voici le code permettant de parcourir la séquence donnée.
 }
 ```
 
-**Tour 1, étape 2 (réponse de l'utilisateur : envoi des résultats de l'outil)**
+**Interação 1, etapa 2 (resposta do usuário: envio de saídas de ferramentas)**
 
-Vous devez conserver `<Signature_A>` dans la première partie exactement tel que vous l'avez reçu.
+É necessário preservar `<Signature_A>` na primeira parte exatamente como recebida.
 
 ```
 "messages": [
@@ -820,39 +845,52 @@ Vous devez conserver `<Signature_A>` dans la première partie exactement tel que
   ]
 ```
 
-## Questions fréquentes
+## Perguntas frequentes
 
-1. **Comment transférer l'historique d'un autre modèle vers Gemini 3 avec une partie d'appel de fonction dans le tour et l'étape actuels ? Je dois fournir des parties d'appel de fonction qui n'ont pas été générées par l'API et qui n'ont donc pas de signature de pensée associée.**
+1. **Como faço para transferir o histórico de um modelo diferente para o Gemini 3 com uma parte de chamada de função na interação e etapa atuais? Preciso fornecer partes de chamada de função
+   que não foram geradas pela API e, portanto, não têm uma assinatura de pensamento associada
+   ?**
 
-   Bien qu'il soit fortement déconseillé d'injecter des blocs d'appels de fonction personnalisés dans la requête, vous pouvez définir les signatures fictives suivantes (`"context_engineering_is_the_way_to_go"` ou `"skip_thought_signature_validator"`) dans le champ de signature de pensée pour ignorer la validation dans les cas où cela ne peut pas être évité (par exemple, pour fournir au modèle des informations sur les appels de fonction et les réponses qui ont été exécutés de manière déterministe par le client, ou pour transférer une trace à partir d'un autre modèle qui n'inclut pas de signatures de pensée).
-2. **J'envoie des appels et des réponses de fonctions parallèles entrelacés, et l'API renvoie un code 400. Pourquoi ?**
+   Embora a injeção de blocos de chamada de função personalizados na solicitação seja fortemente
+   desencorajada, em casos em que não é possível evitá-la, por exemplo, fornecer informações
+   ao modelo sobre chamadas de função e respostas que foram executadas
+   de forma determinística pelo cliente ou transferir um rastreamento de um modelo diferente
+   que não inclui assinaturas de pensamento, é possível definir as seguintes
+   assinaturas fictícias de `"context_engineering_is_the_way_to_go"` ou
+   `"skip_thought_signature_validator"` no campo de assinatura de pensamento para ignorar a
+   validação.
+2. **Estou enviando chamadas e respostas de função paralelas intercaladas, e a API está retornando um erro 400. Por quê?**
 
-   Lorsque l'API renvoie des appels de fonction parallèles "FC1 + signature, FC2", la réponse attendue de l'utilisateur est "FC1+ signature, FC2, FR1, FR2". Si vous les avez entrelacés comme "FC1 + signature, FR1, FC2, FR2", l'API renverra une erreur 400.
-3. **Lorsque le modèle ne renvoie pas d'appel de fonction lors du streaming, je ne trouve pas la signature de la pensée.**
+   Quando a API retorna chamadas de função paralelas "FC1 + assinatura, FC2", a resposta do usuário esperada é "FC1 + assinatura, FC2, FR1, FR2". Se você as tiver intercaladas como "FC1 + assinatura, FR1, FC2, FR2", a API vai retornar um erro 400.
+3. **Ao fazer streaming, e o modelo não retornar uma chamada de função, não consigo encontrar
+   a assinatura de pensamento**
 
-   Lorsqu'une réponse de modèle ne contient pas de FC avec une demande de streaming, le modèle peut renvoyer la signature de pensée dans une partie avec une partie de contenu textuel vide. Il est conseillé d'analyser l'intégralité de la requête jusqu'à ce que le modèle renvoie `finish_reason`.
+   Durante uma resposta do modelo que não contém uma FC com uma solicitação de streaming, o modelo pode retornar a assinatura de pensamento em uma parte com uma parte de conteúdo de texto vazia. É recomendável analisar toda a solicitação até que o `finish_reason` seja retornado pelo modelo.
 
-## Signatures de réflexion pour différents modèles
+## Assinaturas de pensamento para diferentes modelos
 
-Les [modèles Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=fr#gemini-3) et Gemini 2.5 se comportent différemment avec les signatures de pensée dans les appels de fonction :
+[Os modelos do Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=pt-br#gemini-3) e do Gemini 2.5
+se comportam de maneira diferente com assinaturas de pensamento em chamadas de função:
 
-- Si une réponse contient des appels de fonction,
-  - Gemini 3 aura toujours la signature dans la première partie de l'appel de fonction.
-    Il est **obligatoire** de renvoyer cette partie.
-  - Dans Gemini 2.5, la signature figurera dans la première partie (quel que soit le type). Le renvoi de cette partie est **facultatif**.
-- S'il n'y a pas d'appels de fonction dans une réponse,
-  - Gemini 3 ajoutera la signature à la dernière partie si le modèle génère une réflexion.
-  - Gemini 2.5 ne comporte aucune signature.
+- Se houver chamadas de função em uma resposta,
+  - O Gemini 3 sempre terá a assinatura na primeira parte da chamada de função.
+    É **obrigatório** retornar essa parte.
+  - O Gemini 2.5 terá a assinatura na primeira parte (independente do tipo). É **opcional** retornar essa parte.
+- Se não houver chamadas de função em uma resposta,
+  - O Gemini 3 terá a assinatura na última parte se o modelo gerar um pensamento.
+  - O Gemini 2.5 não terá uma assinatura em nenhuma parte.
 
-Pour en savoir plus sur les comparaisons, consultez la page [Réflexion](https://ai.google.dev/gemini-api/docs/thinking?hl=fr#signatures).
-Pour les modèles Gemini 3 Image, consultez la section sur le processus de réflexion du guide [Génération d'images](https://ai.google.dev/gemini-api/docs/image-generation?hl=fr#thinking-process).
+Consulte a página [Pensamento](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br#signatures) para mais
+detalhes sobre a comparação.
+Para modelos de imagem do Gemini 3, consulte a seção processo de pensamento do
+[guia de geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br#thinking-process).
 
-Envoyer des commentaires
+Envie comentários
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Dernière mise à jour le 2026/07/30 (UTC).
+Última atualização 2026-08-19 UTC.
 
-Voulez-vous nous donner plus d'informations ?
+Quer enviar seu feedback?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/30 (UTC)."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-08-19 UTC."],[],[]]

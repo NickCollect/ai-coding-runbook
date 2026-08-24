@@ -1,41 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/veo?hl=zh-TW
-fetched_at: 2026-08-17T02:18:46.873367+00:00
-title: "\u5728 Gemini API \u4e2d\u4f7f\u7528 Veo 3.1 \u751f\u6210\u5f71\u7247 \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/veo?hl=pl
+fetched_at: 2026-08-24T02:33:15.380512+00:00
+title: "Generowanie film\u00f3w za pomoc\u0105 Veo\u00a03.1 w\u00a0interfejsie Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-提供意見
+Prześlij opinię
 
-# 在 Gemini API 中使用 Veo 3.1 生成影片
+# Generowanie filmów za pomocą Veo 3.1 w interfejsie Gemini API
 
-> 如要瞭解影片理解功能，請參閱「[影片理解](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-tw)」指南。
+> Więcej informacji o rozumieniu filmów znajdziesz w przewodniku [Rozumienie filmów](https://ai.google.dev/gemini-api/docs/video-understanding?hl=pl).
 
-[Veo 3.1](https://deepmind.google/models/veo/?hl=zh-tw) 模型可生成 8 秒影片 (720p、1080p 或 4k)，並搭配原生生成的音訊。您可以使用 Gemini API，以程式輔助方式存取這個模型。如要進一步瞭解可用的 Veo 模型版本，請參閱「[模型版本](#model-versions)」一節。
+[Veo 3.1](https://deepmind.google/models/veo/?hl=pl) to model do generowania 8-sekundowych filmów (720p, 1080p lub 4K) z natywnie generowanym dźwiękiem. Dostęp do tego modelu możesz uzyskać w sposób zautomatyzowany za pomocą interfejsu Gemini API. Więcej informacji o dostępnych wariantach modelu Veo znajdziesz w sekcji [Wersje modelu](#model-versions).
 
-Veo 3.1 擅長各種視覺和電影風格，並推出多項新功能：
+Veo 3.1 doskonale radzi sobie z różnymi stylami wizualnymi i filmowymi oraz wprowadza kilka nowych funkcji:
 
-- **直向影片**：選擇橫向 (`16:9`) 或直向 (`9:16`) 影片。
-- **影片擴充功能**：擴充先前使用 Veo 生成的影片。
-- **指定影格生成**：指定影片的開始和結束影格，生成影片。
-- **以圖片為基礎的指引**：使用最多三張參考圖片，引導生成影片的內容。
+- **Filmy w orientacji pionowej:** wybierz filmy w orientacji poziomej (`16:9`) lub pionowej (`9:16`).
+- **Rozszerzenie wideo:** rozszerzaj filmy, które zostały wcześniej wygenerowane za pomocą Veo.
+- **Generowanie konkretnych klatek:** wygeneruj film, określając pierwszą i ostatnią klatkę.
+- **Kierowanie na podstawie obrazu:** użyj maksymalnie 3 obrazów referencyjnych, aby określić zawartość generowanego filmu.
 
-如要進一步瞭解如何撰寫有效的文字提示詞來生成影片，請參閱 [Veo 提示詞指南](#prompt-guide)
+Więcej informacji o pisaniu skutecznych promptów tekstowych do generowania filmów znajdziesz w [przewodniku po tworzeniu promptów Veo](#prompt-guide).
 
-## 文字轉影片生成
+## Generowanie filmu na podstawie tekstu
 
-以下範例說明如何生成[對話](#dialogue)、[電影般的真實感](#realism)或[創意動畫](#style)影片：
+Poniższe przykłady pokazują, jak wygenerować film z [dialogami](#dialogue), [kinowym realizmem](#realism) lub [kreatywną animacją](#style):
 
-### 對話和音效
+### Dialogi i efekty dźwiękowe
 
 ### Python
 
@@ -227,7 +227,7 @@ while true; do
 done
 ```
 
-### 電影寫實風格
+### Realizm filmowy
 
 ### Python
 
@@ -419,7 +419,7 @@ while true; do
 done
 ```
 
-### 廣告素材動畫
+### Animacja kreacji
 
 ### Python
 
@@ -605,9 +605,10 @@ while true; do
 done
 ```
 
-## 控制顯示比例
+## Kontrolowanie formatu obrazu
 
-Veo 3.1 可製作橫向 (`16:9`，預設設定) 或直向 (`9:16`) 影片。您可以使用 `aspect_ratio` 參數，告知模型要使用哪一個：
+Veo 3.1 umożliwia tworzenie filmów w orientacji poziomej (`16:9`, domyślne ustawienie) lub pionowej (`9:16`). Możesz wskazać model, którego chcesz użyć, za pomocą parametru
+`aspect_ratio`:
 
 ### Python
 
@@ -770,13 +771,13 @@ while true; do
 done
 ```
 
-## 控制解析度
+## Kontrolowanie rozdzielczości
 
-Veo 3.1 也能直接生成 720p、1080p 或 4k 影片 (Veo 3.1 Lite 無法生成 4k 影片)。
+Veo 3.1 może też bezpośrednio generować filmy w rozdzielczości 720p, 1080p lub 4K (4K nie jest dostępne w przypadku Veo 3.1 Lite).
 
-請注意，解析度越高，延遲時間就越長。4K 影片的費用也較高 (請參閱[定價](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw#veo-3.1))。
+Pamiętaj, że im wyższa rozdzielczość, tym większe opóźnienie. Filmy w rozdzielczości 4K są też droższe (zobacz [cennik](https://ai.google.dev/gemini-api/docs/pricing?hl=pl#veo-3.1)).
 
-[影片擴充功能](#extending_veo_videos)也僅支援 720p 影片。
+[Rozszerzenie z filmem](#extending_veo_videos) jest też ograniczone do filmów w rozdzielczości 720p.
 
 ### Python
 
@@ -939,9 +940,9 @@ while true; do
 done
 ```
 
-## 以圖片生成影片
+## Generowanie filmu na podstawie obrazu
 
-下列程式碼示範如何使用 [Gemini 3.1 Flash Image (又稱 Nano Banana 2)](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw) 生成圖片，然後將該圖片做為起始影格，透過 Veo 3.1 生成影片。
+Poniższy kod pokazuje, jak wygenerować obraz za pomocą [Gemini 3.1 Flash Image, czyli Nano Banana 2](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl), a następnie użyć go jako klatki początkowej do wygenerowania filmu za pomocą Veo 3.1.
 
 ### Python
 
@@ -1129,15 +1130,15 @@ class GenerateVideoFromImage {
 }
 ```
 
-### 使用參考圖片
+### Korzystanie z obrazów referencyjnych
 
-Veo 3.1 現在最多可接受 3 張參考圖像，引導生成影片的內容。提供人物、角色或產品的圖片，確保輸出影片保留主體外觀。
+Veo 3.1 akceptuje teraz do 3 obrazów referencyjnych, które pomagają w generowaniu treści filmu. Prześlij zdjęcia osoby, postaci lub produktu, aby zachować wygląd obiektu w wygenerowanym filmie.
 
-舉例來說，使用這三張以 [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw) 生成的圖片做為參考，並搭配[撰寫良好的提示](#use-reference-images)，即可生成下列影片：
+Na przykład użycie tych 3 obrazów wygenerowanych za pomocą [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl) jako odniesień z [dobrze napisanym promptem](#use-reference-images) spowoduje utworzenie tego filmu:
 
 | `` `dress_image` `` | `` `woman_image` `` | `` `glasses_image` `` |
 | --- | --- | --- |
-| 高時尚火鶴洋裝，以層層粉紅色和紫紅色羽毛製成 | 美麗女子，深色頭髮和暖棕色眼睛 | 粉紅色心形太陽眼鏡，造型奇特 |
+| Sukienka w stylu haute couture z motywem flaminga z warstwami różowych i fuksjowych piór | Piękna kobieta z ciemnymi włosami i ciepłymi brązowymi oczami | Fantazyjne różowe okulary przeciwsłoneczne w kształcie serca |
 
 ### Python
 
@@ -1365,9 +1366,9 @@ while true; do
 done
 ```
 
-### 使用初始和結束影格
+### Korzystanie z pierwszej i ostatniej klatki
 
-你可以使用插補法，或指定影片的開頭和結尾影格，透過 Veo 3.1 製作影片。如要瞭解如何撰寫有效的文字提示詞來生成影片，請參閱 [Veo 提示詞指南](#use-reference-images)。
+Veo 3.1 umożliwia tworzenie filmów za pomocą interpolacji lub określania pierwszej i ostatniej klatki filmu. Informacje o pisaniu skutecznych promptów tekstowych do generowania filmów znajdziesz w [przewodniku po tworzeniu promptów Veo](#use-reference-images).
 
 ### Python
 
@@ -1540,31 +1541,31 @@ done
 
 | `` `first_image` `` | `` `last_image` `` | *veo3.1\_with\_interpolation.mp4* |
 | --- | --- | --- |
-| 一位長著白色長髮、穿著飄逸洋裝的鬼魅女子，在繩索鞦韆上輕輕擺盪 | 鬼魅女子從鞦韆上消失 | 電影般的詭異影片：一名女子在霧中從鞦韆上消失，令人毛骨悚然 |
+| Duch kobiety z długimi białymi włosami i powiewającą sukienką delikatnie huśta się na huśtawce linowej. | Duch kobiety znika z huśtawki | Kinowy, niepokojący film przedstawiający upiorną kobietę znikającą z huśtawki we mgle |
 
-## 延長 Veo 影片
+## Rozszerzanie filmów wygenerowanych przez Veo
 
-使用 Veo 3.1 將先前以 Veo 生成的影片延長 7 秒，最多可延長 20 次。
+Za pomocą Veo 3.1 możesz wydłużyć filmy wygenerowane wcześniej za pomocą Veo o 7 sekund i nawet 20 razy.
 
-輸入影片限制：
+Ograniczenia dotyczące filmu wejściowego:
 
-- Veo 生成的影片長度上限為 141 秒。
-- Gemini API 僅支援 Veo 生成影片的影片擴充功能。
-- 影片應來自前幾代，例如
+- Filmy wygenerowane przez Veo mogą trwać maksymalnie 141 sekund.
+- Interfejs Gemini API obsługuje wydłużanie filmów tylko w przypadku filmów wygenerowanych przez Veo.
+- Film powinien pochodzić z poprzedniej generacji, np.
   `operation.response.generated_videos[0].video`
-- 影片會保留 2 天，但如果影片用於延長時間，2 天的保留期限就會重設。你只能延長過去兩天內生成或參考的影片。
-- 輸入影片的長度、長寬比和尺寸必須符合特定條件：
-  - 顯示比例：9:16 或 16:9
-  - 解析度：720p
-  - 影片長度：不超過 141 秒
+- Filmy są przechowywane przez 2 dni, ale jeśli film jest używany jako odniesienie do rozszerzenia, licznik czasu przechowywania resetuje się. Możesz wydłużać tylko filmy wygenerowane lub przywołane w ciągu ostatnich 2 dni.
+- Filmy wejściowe powinny mieć określoną długość, format obrazu i wymiary:
+  - Format obrazu: 9:16 lub 16:9
+  - Rozdzielczość: 720p
+  - Długość wideo: maksymalnie 141 sekund
 
-擴充功能會將使用者輸入的影片和生成的擴充影片合併為單一影片，最長可達 148 秒。
+Wynikiem działania rozszerzenia jest jeden film łączący dane wejściowe użytkownika z wygenerowanym rozszerzonym filmem o długości do 148 sekund.
 
-這個範例會使用 Veo 生成的影片 (如下所示，附上原始提示)，並透過 `video` 參數和新提示加以擴充：
+W tym przykładzie wykorzystujemy film wygenerowany przez Veo (widoczny tutaj z oryginalnym promptem) i rozszerzamy go za pomocą parametru `video` oraz nowego prompta:
 
-| 提示詞 | 輸出：`butterfly_video` |
+| Prompt | Wyjście: `butterfly_video` |
 | --- | --- |
-| 摺紙蝴蝶拍動翅膀，從落地窗飛進花園。 | 紙藝蝴蝶拍動翅膀，從落地窗飛進花園。 |
+| Motyl origami macha skrzydłami i wylatuje przez drzwi balkonowe do ogrodu. | Motyl origami macha skrzydłami i wylatuje przez drzwi balkonowe do ogrodu. |
 
 ### Python
 
@@ -1740,13 +1741,13 @@ while true; do
 done
 ```
 
-如要瞭解如何撰寫有效的文字提示詞來生成影片，請參閱 [Veo 提示詞指南](#extend-prompt)。
+Informacje o tworzeniu skutecznych promptów tekstowych do generowania filmów znajdziesz w [przewodniku po tworzeniu promptów Veo](#extend-prompt).
 
-## 處理非同步作業
+## Obsługa operacji asynchronicznych
 
-生成影片需要大量運算資源，當您向 API 傳送要求時，系統會啟動長時間執行的工作，並立即傳回 `operation` 物件。接著，您必須輪詢，直到影片就緒為止 (以 `done` 狀態為 true 表示)。
+Generowanie filmów jest zadaniem wymagającym dużej mocy obliczeniowej. Gdy wyślesz żądanie do interfejsu API, rozpocznie on długotrwałe zadanie i natychmiast zwróci obiekt `operation`. Następnie musisz wysyłać zapytania, dopóki film nie będzie gotowy. Wskazuje na to stan `done`.
 
-這項程序的中心是輪詢迴圈，會定期檢查工作的狀態。
+Podstawą tego procesu jest pętla sondowania, która okresowo sprawdza stan zadania.
 
 ### Python
 
@@ -1925,301 +1926,304 @@ while true; do
 done
 ```
 
-## Veo API 參數和規格
+## Parametry i specyfikacje interfejsu Veo API
 
-您可以在 API 要求中設定這些參數，控管影片生成程序。
+Są to parametry, które możesz ustawić w żądaniu do interfejsu API, aby kontrolować proces generowania filmu.
 
-| 參數 | Veo 3.1 和 Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 和 Veo 3 Fast | Veo 2 |
+| Parametr | Veo 3.1 i Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 i Veo 3 Fast | Veo 2 |
 | --- | --- | --- | --- | --- |
-| 執行個體 | | | | |
-| `prompt`： 影片的文字說明。支援音訊提示。 | `string` | `string` | `string` | `string` |
-| `image`： 要製作動畫的初始圖片。 | `Image` 個物件 | `Image` 個物件 | `Image` 個物件 | `Image` 個物件 |
-| `lastFrame`： 插補影片要轉換的最終圖像。必須與 `image` 參數搭配使用。 | `Image` 個物件 | `Image` 個物件 | `Image` 個物件 | `Image` 個物件 |
-| `referenceImages`： 最多三張圖片，做為風格和內容參考。 | `VideoGenerationReferenceImage` 個物件 | `n/a` 個物件 | 不適用 | 不適用 |
-| `video`： 用於影片擴充功能的影片。 | `Video` 物件，來自前一代 | 不適用 | 不適用 | 不適用 |
-| 參數 | | | | |
-| `aspectRatio`： 影片的顯示比例。 | `"16:9"` (預設)、 `"9:16"` | `"16:9"` (預設)、 `"9:16"` | `"16:9"` (預設)、 `"9:16"` | `"16:9"` (預設)、 `"9:16"` |
-| `durationSeconds`： 生成的影片長度。 | `"4"`，`"6"`，`"8"`。   *使用擴充功能、參考圖片或 1080p 和 4K 解析度時，必須為「8」* | `"4"`，`"6"`，`"8"`。   *使用參考圖片或 1080p 時，必須為「8」* | `"4"`，`"6"`，`"8"`。   *使用擴充功能、參考圖片或 1080p 和 4K 解析度時，必須為「8」* | `"5"`、`"6"`、`"8"` |
-| `personGeneration`： 控制人物的生成。(如需地區限制，請參閱「[限制](#limitations)」一節) | 文字轉影片和擴充功能： `"allow_all"`僅限   圖片轉影片、插補和參考圖片： `"allow_adult"`僅限 | 文字轉影片： `"allow_all"`僅限   圖像轉影片、插補和參考圖像： `"allow_adult"`僅限 | 文字轉影片： `"allow_all"`僅限   圖像轉影片： `"allow_adult"`僅限 | 文字轉影片： `"allow_all"`、`"allow_adult"`、`"dont_allow"`   圖片轉影片： `"allow_adult"`和 `"dont_allow"` |
-| `resolution`： 影片的解析度。 | `"720p"` (預設)、 `"1080p"` (僅支援 8 秒長度)、 `"4k"` (僅支援 8 秒長度)   *`"720p"` 僅適用於擴充功能* | `"720p"` (預設)、 `"1080p"` (僅支援 8 秒長度) | `"720p"` (預設)、 `"1080p"` (僅支援 8 秒長度)、 `"4k"` (僅支援 8 秒長度)   *`"720p"` 僅適用於擴充功能* | 不支援 |
+| Instancje | | | | |
+| `prompt`: opis tekstowy filmu. Obsługuje wskazówki audio. | `string` | `string` | `string` | `string` |
+| `image`: początkowy obraz do animacji; | `Image` obiekt | `Image` obiekt | `Image` obiekt | `Image` obiekt |
+| `lastFrame`: Obraz końcowy filmu z interpolacją, do którego ma nastąpić przejście. Musi być używany w połączeniu z parametrem `image`. | `Image` obiekt | `Image` obiekt | `Image` obiekt | `Image` obiekt |
+| `referenceImages`: maksymalnie 3 obrazy, które będą służyć jako odniesienia do stylu i treści; | `VideoGenerationReferenceImage` obiekt | `n/a` obiekt | nie dotyczy | nie dotyczy |
+| `video`: film, który ma być używany w rozszerzeniu o film. | `Video` obiekt z poprzedniej generacji | nie dotyczy | nie dotyczy | nie dotyczy |
+| Parametry | | | | |
+| `aspectRatio`: współczynnik proporcji filmu. | `"16:9"` (domyślny), `"9:16"` | `"16:9"` (domyślny), `"9:16"` | `"16:9"` (domyślny), `"9:16"` | `"16:9"` (domyślny), `"9:16"` |
+| `durationSeconds`: długość wygenerowanego filmu; | `"4"`, `"6"`, `"8"`.   *Musi mieć wartość „8”, jeśli używasz rozszerzenia, obrazów referencyjnych lub rozdzielczości 1080p i 4K* | `"4"`, `"6"`, `"8"`.   *W przypadku używania obrazów referencyjnych lub rozdzielczości 1080p musi mieć wartość „8”.* | `"4"`, `"6"`, `"8"`.   *Musi mieć wartość „8”, jeśli używasz rozszerzenia, obrazów referencyjnych lub rozdzielczości 1080p i 4K* | `"5"`, `"6"`, `"8"` |
+| `personGeneration`: określa, czy mają być generowane osoby. (Ograniczenia regionalne znajdziesz w sekcji [Ograniczenia](#limitations)). | Zamiana tekstu na film i rozszerzenie: `"allow_all"` tylko   Zamiana obrazu na film, interpolacja i obrazy referencyjne: `"allow_adult"` tylko | Zamiana tekstu na film: `"allow_all"` tylko   Zamiana obrazu na film, interpolacja i obrazy referencyjne: `"allow_adult"` tylko | Tekst na film: `"allow_all"` tylko   Obraz na film: `"allow_adult"` tylko | Tekst na film:  `"allow_all"`, `"allow_adult"`, `"dont_allow"`   Obraz na film:  `"allow_adult"` i `"dont_allow"` |
+| `resolution`: rozdzielczość filmu. | `"720p"` (domyślnie),  `"1080p"` (obsługuje tylko filmy 8-sekundowe), `"4k"` (obsługuje tylko filmy 8-sekundowe)   *`"720p"` tylko w przypadku rozszerzenia* | `"720p"` (domyślne),  `"1080p"` (obsługuje tylko 8-sekundowe nagrania) | `"720p"` (domyślnie),  `"1080p"` (obsługuje tylko filmy 8-sekundowe), `"4k"` (obsługuje tylko filmy 8-sekundowe)   *`"720p"` tylko w przypadku rozszerzenia* | Nieobsługiwany |
 
-請注意，`seed` 參數也適用於 Veo 3 模型。
-這無法保證確定性，但可稍微提升確定性。
+Pamiętaj, że parametr `seed` jest też dostępny w przypadku modeli Veo 3.
+Nie gwarantuje to determinizmu, ale nieco go poprawia.
 
-## 模型功能
+## Funkcje modelu
 
-| 功能 | Veo 3.1 和 Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 和 Veo 3 Fast | Veo 2 |
+| Funkcja | Veo 3.1 i Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 i Veo 3 Fast | Veo 2 |
 | --- | --- | --- | --- | --- |
-| **音訊：** 以原生方式生成影片音訊。 | ✔️ 一律開啟 | ✔️ 一律開啟 | ✔️ 一律開啟 | ❌ 僅限靜音 |
-| **輸入模態：** 用於生成的輸入類型。 | 文字轉影片、圖像轉影片、影片轉影片 | 文字轉影片、圖像轉影片 | 文字轉影片、圖像轉影片 | 文字轉影片、圖像轉影片 |
-| **解析度：** 影片的輸出解析度。 | 720p、1080p (僅限 8 秒)、4K (僅限 8 秒)  *使用影片增補功能時，僅限 720p。* | 720p、1080p (僅限 8 秒長度) | 720p 和 1080p (僅限 16:9) | 720p |
-| **影格率：** 影片的輸出影格率。 | 24fps | 24fps | 24fps | 24fps |
-| **影片長度：** 生成的影片長度。 | 8 秒、6 秒、4 秒  *只有在 1080p 或 4k 或使用參考圖片時，才可使用 8 秒* | 8 秒、6 秒、4 秒  *只有在 1080p 或使用參考圖片時，才能選擇 8 秒* | 8 秒 | 5 到 8 秒 |
-| **每次要求的影片數：** 每次要求生成的影片數。 | 1 | 1 | 1 | 1 或 2 |
-| **狀態：** 模型可用性 | [預覽](https://ai.google.dev/gemini-api/docs/models?hl=zh-tw#preview) | [預覽](https://ai.google.dev/gemini-api/docs/models?hl=zh-tw#preview) | [穩定版](https://ai.google.dev/gemini-api/docs/models?hl=zh-tw#stable) | [穩定版](https://ai.google.dev/gemini-api/docs/models?hl=zh-tw#latest-stable) |
+| **Dźwięk:** generuje dźwięk natywnie wraz z filmem. | ✔️ Zawsze włączone | ✔️ Zawsze włączone | ✔️ Zawsze włączone | ❌ Tylko cichy |
+| **Rodzaje danych wejściowych:**  typ danych wejściowych użytych do wygenerowania odpowiedzi. | Zamiana tekstu na film, obrazu na film i filmu na film | Zamiana tekstu na film, zamiana obrazu na film | Zamiana tekstu na film, zamiana obrazu na film | Zamiana tekstu na film, zamiana obrazu na film |
+| **Rozdzielczość:**  rozdzielczość wyjściowa filmu. | 720p, 1080p (tylko 8 s), 4K (tylko 8 s)  *Tylko 720p w przypadku korzystania z wydłużania filmów.* | 720p, 1080p (tylko 8 s) | 720p i 1080p (tylko 16:9) | 720p |
+| **Liczba klatek:**  liczba klatek wyjściowych filmu. | 24 kl./s | 24 kl./s | 24 kl./s | 24 kl./s |
+| **Czas trwania filmu:**  długość wygenerowanego filmu. | 8 sekund, 6 sekund, 4 sekundy  *8 sekund tylko w przypadku rozdzielczości 1080p lub 4K albo korzystania z obrazów referencyjnych* | 8 sekund, 6 sekund, 4 sekundy  *8 sekund tylko w przypadku rozdzielczości 1080p lub korzystania z obrazów referencyjnych* | 8 sekund | 5–8 sekund |
+| **Filmy na żądanie:**  liczba filmów wygenerowanych na żądanie. | 1 | 1 | 1 | 1 lub 2 |
+| **Stan:**  dostępność modelu | [Podgląd](https://ai.google.dev/gemini-api/docs/models?hl=pl#preview) | [Podgląd](https://ai.google.dev/gemini-api/docs/models?hl=pl#preview) | [Stabilna](https://ai.google.dev/gemini-api/docs/models?hl=pl#stable) | [Stabilna](https://ai.google.dev/gemini-api/docs/models?hl=pl#latest-stable) |
 
-## 限制
+## Ograniczenia
 
-- **多部影片提示：**目前不支援參照或推論多部影片的內容。嘗試使用多部影片提示，可能會導致模型效能降低或輸出非預期的內容。
-- **語言支援：**系統完全支援英文 (EN)，但尚未評估其他語言，因此其他語言可能可以運作，但結果可能有所不同。
-- **要求延遲時間：**最短 11 秒，最長 6 分鐘 (高峰時段)。
-- **區域限制：**在歐盟、英國、瑞士和中東與北非地區，`personGeneration` 的允許值如下：
-  - Veo 3 和 3.1：僅支援 `allow_adult`。
-  - Veo 2：`dont_allow` 和 `allow_adult`。預設值為 `dont_allow`。
-- **影片保留期限：**生成的影片會在伺服器上保留 2 天，之後就會移除。如要儲存本機副本，請在影片生成後的 2 天內下載。延長版影片會視為新生成的影片。
-- **浮水印：**Veo 製作的影片會使用 [SynthID](https://deepmind.google/technologies/synthid/?hl=zh-tw) 加上浮水印。這項工具可辨識 AI 生成內容並加上浮水印。您可以使用 [SynthID](https://deepmind.google/science/synthid/?hl=zh-tw) 驗證平台驗證影片。
-- **安全性：**生成的影片會經過安全篩選器和記憶檢查程序，有助於降低隱私權、著作權和偏見風險。
-- **音訊錯誤：**有時 Veo 3.1 會因為安全篩選器或音訊的其他處理問題，而無法生成影片。如果影片無法生成，系統不會向你收費。
+- **Prompty dotyczące wielu filmów:** odwoływanie się do wielu filmów lub wnioskowanie na ich podstawie nie jest obecnie obsługiwane. Próba użycia promptów z wieloma filmami może spowodować pogorszenie wydajności modelu lub nieoczekiwane wyniki.
+- **Obsługa języków:** język angielski (EN) jest w pełni obsługiwany, ale inne języki nie zostały jeszcze ocenione, więc mogą działać, ale wyniki mogą się różnić.
+- **Czas oczekiwania na żądanie:** min.: 11 sekund; maks.: 6 minut (w godzinach szczytu).
+- **Ograniczenia regionalne:** w UE, Wielkiej Brytanii, Szwajcarii i regionie MENA dozwolone wartości w przypadku parametru `personGeneration` to:
+  - Veo 3 i 3.1: `allow_adult`.
+  - Veo 2: `dont_allow` i `allow_adult`. Wartość domyślna to `dont_allow`.
+- **Przechowywanie filmów:** wygenerowane filmy są przechowywane na serwerze przez 2 dni, a następnie usuwane. Aby zapisać kopię lokalną, musisz pobrać film w ciągu 2 dni od jego wygenerowania. Rozszerzone filmy są traktowane jako nowo wygenerowane filmy.
+- **Znaki wodne:** filmy utworzone za pomocą Veo są oznaczane znakiem wodnym [SynthID](https://deepmind.google/technologies/synthid/?hl=pl), czyli naszym narzędziem do dodawania znaków wodnych i identyfikowania treści generowanych przez AI. Filmy można weryfikować za pomocą platformy weryfikacyjnej [SynthID](https://deepmind.google/science/synthid/?hl=pl).
+- **Bezpieczeństwo:** wygenerowane filmy są sprawdzane przez filtry bezpieczeństwa i procesy weryfikacji zapamiętywania, które pomagają ograniczać ryzyko związane z prywatnością, prawami autorskimi i stronniczością.
+- **Błąd dźwięku:** Veo 3.1 czasami blokuje generowanie filmu z powodu filtrów bezpieczeństwa lub innych problemów z przetwarzaniem dźwięku. Jeśli wygenerowanie filmu zostanie zablokowane, nie zostaną naliczone żadne opłaty.
 
-## Veo 提示詞指南
+## Przewodnik po tworzeniu promptów w Veo
 
-本節提供使用 Veo 製作的影片範例，並說明如何修改提示來產生不同結果。
+W tej sekcji znajdziesz przykłady filmów, które możesz utworzyć za pomocą Veo, oraz dowiesz się, jak modyfikować prompty, aby uzyskać różne wyniki.
 
-### 安全篩選機制
+### Filtry bezpieczeństwa
 
-Veo 會在 Gemini 中套用安全篩選器，確保生成的影片和上傳的相片不含令人反感的內容。違反[條款和規範](https://ai.google.dev/gemini-api/docs/usage-policies?hl=zh-tw#abuse-monitoring)的提示會遭到封鎖。
+Veo stosuje w Gemini filtry bezpieczeństwa, aby mieć pewność, że wygenerowane filmy i przesłane zdjęcia nie zawierają obraźliwych treści.
+Prompty, które naruszają nasze [warunki i wytyczne](https://ai.google.dev/gemini-api/docs/usage-policies?hl=pl#abuse-monitoring), są blokowane.
 
-### 提示撰寫基礎知識
+### Podstawowe informacje o pisaniu promptów
 
-好的提示詞應具體明確。如要充分發揮 Veo 的效用，請先找出核心概念，然後加入關鍵字和修飾符來修正概念，並在提示詞中加入影片專用術語。
+Dobre prompty są opisowe i jasne. Aby w pełni wykorzystać możliwości Veo, zacznij od określenia głównego pomysłu, dopracuj go, dodając słowa kluczowe i modyfikatory, a także uwzględnij w promptach terminologię związaną z wideo.
 
-提示應包含下列元素：
+Prompt powinien zawierać te elementy:
 
-- **主題**：影片中要出現的物體、人物、動物或風景，例如*城市景觀*、*自然*、*車輛*或*小狗*。
-- **動作**：主體正在做什麼 (例如*走路*、*跑步*或*轉頭*)。
-- **風格**：使用特定電影風格關鍵字指定創作方向，例如*科幻*、*恐怖片*、*黑色電影*，或是*卡通*等動畫風格。
-- **攝影機位置和動作**：[選用] 使用「鳥瞰」、「平視」、「俯拍」、「推軌鏡頭」或「仰角」等詞彙，控制攝影機的位置和動作。
-- **構圖**：[選用] 取景方式，例如*遠景*、*特寫*、*單人鏡頭*或*雙人鏡頭*。
-- **對焦和鏡頭效果**：[選用] 使用「淺景深」、「深景深」、「柔焦」、「微距鏡頭」和「廣角鏡頭」等詞彙，達到特定視覺效果。
-- **環境光源**：[選填] 色彩和亮度如何營造場景氣氛，例如*藍色調*、*夜晚*或*暖色調*。
+- **Temat:** obiekt, osoba, zwierzę lub sceneria, które chcesz umieścić w filmie, np. *pejzaż miejski*, *przyroda*, *pojazdy* lub *szczenięta*.
+- **Działanie:** co robi obiekt (np. *idzie*, *biegnie* lub *obraca głowę*).
+- **Styl:** określ kierunek kreatywny, używając słów kluczowych związanych z określonym stylem filmowym, np. *science fiction*, *horror*, *film noir* lub style animowane, takie jak *kreskówka*.
+- **Położenie i ruch kamery:** [Opcjonalnie] steruj położeniem i ruchem kamery, używając określeń takich jak *widok z lotu ptaka*, *na poziomie oczu*, *zdjęcie z góry*, *zdjęcie z wózka* lub *z perspektywy żabiej*.
+- **Kompozycja:** [opcjonalnie] sposób kadrowania ujęcia, np. *szerokie ujęcie*, *zbliżenie*, *jedno ujęcie* lub *dwa ujęcia*.
+- **Ostrość i efekty obiektywu:** [opcjonalnie] użyj terminów takich jak *mała głębia ostrości*, *duża głębia ostrości*, *nieostrość*, *obiektyw makro* i *obiektyw szerokokątny*, aby uzyskać określone efekty wizualne.
+- **Atmosfera:** [Opcjonalnie] jak kolor i światło wpływają na scenerię, np. *niebieskie odcienie*, *noc* lub *ciepłe odcienie*.
 
-#### 撰寫提示的訣竅
+#### Więcej wskazówek dotyczących pisania promptów
 
-- **使用描述性語言**：使用形容詞和副詞，讓 Veo 清楚瞭解你的需求。
-- **強化臉部細節**：在提示中加入「肖像」等字詞，將臉部細節設為相片焦點。
+- **Używaj opisowego języka:** używaj przymiotników i przysłówków, aby dokładnie opisać, czego oczekujesz od Veo.
+- **Popraw szczegóły twarzy:** określ szczegóły twarzy jako główny element zdjęcia, np. używając słowa *portret* w prompcie.
 
-*如需更全面的提示策略，請參閱「[提示設計簡介](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=zh-tw)」一文。*
+*Bardziej szczegółowe strategie tworzenia promptów znajdziesz w [artykule wprowadzającym do projektowania promptów](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=pl).*
 
-### 提示音訊
+### Prośba o dźwięk
 
-你可以為 Veo 提供音效、環境噪音和對話的提示。模型會擷取這些提示的細微差異，生成同步配樂。
+Możesz podać Veo wskazówki dotyczące efektów dźwiękowych, szumu otoczenia i dialogów.
+Model wychwytuje niuanse tych wskazówek, aby wygenerować zsynchronizowaną ścieżkę dźwiękową.
 
-- **對話：**特定語音請使用引號。(例如：「這一定是鑰匙，」他低聲說道)。
-- **音效：**明確描述聲音。(例如：輪胎尖銳的摩擦聲、引擎轟隆聲)。
-- **環境噪音：**描述環境的音景。(例如：背景中傳來微弱的詭異嗡嗡聲。)
+- **Dialog:** używaj cudzysłowów, aby wyróżnić konkretne wypowiedzi. (Przykład: „To musi być klucz”, mruknął).
+- **Efekty dźwiękowe:** dokładnie opisz dźwięki. (Przykład: opony
+  głośno piszczą, silnik ryczy).
+- **Szum otoczenia:** opisz dźwięki otoczenia. (Przykład: w tle słychać cichy, upiorny szum).
 
-這些影片會逐步詳細說明如何提示 Veo 3 生成音訊。
+Te filmy pokazują, jak za pomocą coraz bardziej szczegółowych promptów można generować dźwięk w Veo 3.
 
-| **提示** | **生成內容** |
+| **Prompt** | **Wygenerowane dane wyjściowe** |
 | --- | --- |
-| **更多細節 (對話和環境)** 鏡頭廣角拍攝美國西北太平洋地區的森林，兩名疲憊的登山客 (一男一女) 穿過蕨類植物時，男子突然停下腳步，盯著一棵樹。特寫：樹皮上留下新鮮的深爪痕。男子：(手放在獵刀上)「那不是普通的熊。」女子：(聲音因恐懼而緊繃，掃視樹林)「那是什麼？」粗糙的樹皮、折斷的樹枝、潮濕土地上的腳步聲。一隻鳥發出鳴叫聲。 | 兩人在樹林中發現熊的蹤跡。 |
-| **Less detail (Dialogue)** Paper Cut-Out Animation. 新圖書館員：「禁書放在哪裡？」舊任管理員：「我們沒有。他們會留住我們。」 | 動畫圖書館員討論禁書 |
+| **Więcej szczegółów (dialogi i otoczenie)** Szerokie ujęcie zamglonego lasu w północno-zachodniej części Stanów Zjednoczonych. Dwoje wyczerpanych wędrowców, mężczyzna i kobieta, przedzierają się przez paprocie. Nagle mężczyzna zatrzymuje się i wpatruje w drzewo. Zbliżenie: na korze drzewa widać świeże, głębokie ślady pazurów. Mężczyzna: (kładzie rękę na nożu myśliwskim) „To nie jest zwykły niedźwiedź”. Kobieta: (głos drży ze strachu, rozgląda się po lesie) „To co to jest?”. Szorstka kora, łamiące się gałązki, kroki na wilgotnej ziemi. Ćwierka samotny ptak. | Dwie osoby w lesie natrafiają na ślady niedźwiedzia. |
+| **Mniej szczegółów (dialog)**  animacja wycinankowa. Nowy bibliotekarz: „Gdzie trzymacie zakazane książki?” Stary kurator: „Nie. Zostawią je sobie”. | Animowane bibliotekarki rozmawiające o zakazanych książkach |
 
-請自行嘗試這些提示，聽聽音訊！
-[試用 Veo](https://deepmind.google/models/veo/?hl=zh-tw)
+Wypróbuj te prompty, aby usłyszeć dźwięk.
+[Wypróbuj Veo](https://deepmind.google/models/veo/?hl=pl)
 
-### 使用參考圖片生成提示
+### Promptowanie z użyciem obrazów referencyjnych
 
-你可以使用一或多張圖片做為輸入內容，透過 Veo 的[圖片轉影片](https://ai.google.dev/gemini-api/docs/veo?hl=zh-tw#generate-from-images)功能生成影片。Veo 會將輸入圖片做為初始影格。選取最符合您想像的影片第一幕圖片，為日常物品加上動畫效果、讓繪畫作品動起來，以及為自然景觀增添動感和聲音。
+Możesz użyć co najmniej 1 obrazu jako danych wejściowych, aby kierować generowanymi filmami, korzystając z funkcji [obrazu do filmu](https://ai.google.dev/gemini-api/docs/veo?hl=pl#generate-from-images) w Veo. Veo używa obrazu wejściowego jako klatki początkowej. Wybierz obraz, który najbardziej przypomina pierwszą scenę filmu, aby animować przedmioty codziennego użytku, ożywiać rysunki i obrazy oraz dodawać ruch i dźwięk do scen przyrodniczych.
 
-| **提示** | **生成內容** |
+| **Prompt** | **Wygenerowane dane wyjściowe** |
 | --- | --- |
-| **輸入圖片 (由 Nano Banana 生成)** ：一張超寫實的微距照片，呈現迷你衝浪者在古樸的石製浴室洗手台內乘風破浪。復古黃銅水龍頭正在出水，形成永恆的浪花。超現實、異想天開、明亮的自然光。 | 在古樸的石製浴室洗手盆中，迷你衝浪者在海浪上衝浪。 |
-| **輸出影片 (由 Veo 3.1 生成)** ：超現實的電影風格微距影片。微型衝浪者在石造浴室洗手台內，乘著不斷湧現的波浪。老舊的黃銅水龍頭不斷流出水，形成無止盡的浪花。攝影機緩緩平移，帶出陽光普照的奇幻場景，微型人偶則熟練地在碧綠海水中雕刻。 | 浴室洗手台的波浪中，有小小的衝浪者在繞圈。 |
+| **Obraz wejściowy (wygenerowany przez Nano Banana)** Hiperrealistyczne makro zdjęcie przedstawiające małych, miniaturowych surferów pływających na falach oceanu w rustykalnej kamiennej umywalce w łazience. Z mosiężnego kranu w stylu retro leje się woda, tworząc nieustanną falę. Surrealistyczne, fantazyjne, jasne naturalne oświetlenie. | Malutcy surferzy na falach oceanu w rustykalnej kamiennej umywalce. |
+| **Film wyjściowy (wygenerowany przez Veo 3.1)** Surrealistyczny, kinowy film makro. Mali surferzy pływają na nieustannie pojawiających się falach w kamiennej umywalce. Niekończące się fale generuje działający zabytkowy mosiężny kran. Kamera powoli przesuwa się po fantazyjnej, oświetlonej słońcem scenie, a miniaturowe figurki sprawnie pokonują turkusową wodę. | Małe figurki surferów krążące po falach w umywalce. |
 
-你可以使用 Veo 3.1 [參考圖片](https://ai.google.dev/gemini-api/docs/veo?hl=zh-tw#reference-images)或素材，引導生成影片的內容。最多提供三張單一人物、角色或產品的素材資源圖片。Veo 會在輸出影片中保留主體的外觀。
+Veo 3.1 umożliwia [odwoływanie się do obrazów](https://ai.google.dev/gemini-api/docs/veo?hl=pl#reference-images) lub elementów, aby określać zawartość generowanego filmu. Prześlij maksymalnie 3 obrazy pojedynczej osoby, postaci lub produktu. Veo zachowuje wygląd obiektu w filmie wyjściowym.
 
-| **提示** | **生成內容** |
+| **Prompt** | **Wygenerowane dane wyjściowe** |
 | --- | --- |
-| **參考圖像 (由 Nano Banana 生成)** ：深海鮟鱇魚潛伏在深不見底的黑暗水中，露出牙齒，魚餌發出光芒。 | 發光的深色安康魚 |
-| **參考圖像 (由 Nano Banana 生成)** ：粉紅色兒童公主裝，附有魔杖和皇冠，背景為素色產品。 | 兒童粉紅色公主裝 |
-| **輸出影片 (由 Veo 3.1 生成)** ：製作魚兒穿著服裝、游泳和揮舞魔杖的搞笑卡通版本。 | 穿著公主裝的安康魚 |
+| **Obraz referencyjny (wygenerowany przez Nano Banana)** Żabnica głębinowa czai się w ciemnej toni oceanu, pokazując zęby i świecąc przynętą. | Ciemna, świecąca ryba żabnica |
+| **Obraz referencyjny (wygenerowany przez Nano Banana)** Różowy kostium księżniczki dla dziecka z różdżką i tiarą na jednolitym tle produktu. | Różowy kostium księżniczki dla dziecka |
+| **Film wyjściowy (wygenerowany przez Veo 3.1)** Utwórz zabawną kreskówkową wersję ryby w kostiumie, która pływa i machając różdżką. | Żabnica w kostiumie księżniczki |
 
-你也可以使用 Veo 3.1，指定影片的[第一個和最後一個影格](https://ai.google.dev/gemini-api/docs/veo?hl=zh-tw#using-first-and-last-video-frames)來生成影片。
+Za pomocą Veo 3.1 możesz też generować filmy, określając [pierwszą i ostatnią klatkę](https://ai.google.dev/gemini-api/docs/veo?hl=pl#using-first-and-last-video-frames) filmu.
 
-| **提示** | **生成內容** |
+| **Prompt** | **Wygenerowane dane wyjściowe** |
 | --- | --- |
-| **第一張圖片 (由 Nano Banana 生成)** ：一隻薑黃色貓咪駕駛紅色敞篷賽車，行駛在法國蔚藍海岸，這張圖片的擬真度極高。 | 一隻薑黃色貓咪駕駛紅色敞篷賽車 |
-| **最後一張圖片 (由 Nano Banana 生成)** ：顯示車輛從懸崖起飛時的情況。 | 一隻薑黃色貓咪駕駛紅色敞篷車衝下懸崖 |
-| **輸出影片 (由 Veo 3.1 生成)** 選用 | 貓咪開車衝下懸崖，然後起飛 |
+| **Pierwszy obraz (wygenerowany przez Nano Banana)** Fotorealistyczny obraz wysokiej jakości przedstawiający rudego kota prowadzącego czerwony kabriolet wyścigowy na Riwierze Francuskiej. | Rudy kot prowadzący czerwony kabriolet |
+| **Ostatni obraz (wygenerowany przez Nano Banana)** Pokaż, co się stanie, gdy samochód zjedzie z klifu. | Rudy kot jadący czerwonym kabrioletem spada z klifu |
+| **Film wyjściowy (wygenerowany przez Veo 3.1)** Opcjonalnie | Kot zjeżdża z klifu i odlatuje |
 
-這項功能可讓你定義開始和結束影格，精確控制鏡頭構圖。上傳圖片或使用先前生成的影片影格，確保場景的開頭和結尾完全符合您的想像。
+Ta funkcja zapewnia precyzyjną kontrolę nad kompozycją ujęcia, ponieważ pozwala określić klatkę początkową i końcową. Prześlij obraz lub użyj klatki z wcześniej wygenerowanego filmu, aby mieć pewność, że scena zaczyna się i kończy dokładnie tak, jak chcesz.
 
-### 提示擴充功能
+### Promptowanie rozszerzenia
 
-如要使用 Veo 3.1 [延長](https://ai.google.dev/gemini-api/docs/veo?hl=zh-tw#extending_veo_videos) Veo 生成的影片 (不適用於 Veo 3.1 Lite)，請將影片做為輸入內容，並視需要提供文字提示詞。「延長」會完成影片最後一秒或 24 格畫面，並繼續執行動作。
+Aby [wydłużyć](https://ai.google.dev/gemini-api/docs/veo?hl=pl#extending_veo_videos) wygenerowany przez Veo film za pomocą Veo 3.1 (niedostępne w przypadku Veo 3.1 Lite), użyj filmu jako danych wejściowych wraz z opcjonalnym promptem tekstowym. Wydłużenie kończy ostatnią sekundę lub 24 klatki filmu i pozwala scenie rozwijać się naturalnie, bez przerywania akcji.
 
-請注意，如果影片最後 1 秒沒有語音，就無法有效延長語音。
+Pamiętaj, że nie można skutecznie przedłużyć głosu, jeśli nie występuje on w ostatniej sekundzie filmu.
 
-| **提示** | **生成內容** |
+| **Prompt** | **Wygenerowane dane wyjściowe** |
 | --- | --- |
-| **輸入影片 (由 Veo 3.1 生成)** 滑翔傘從山頂起飛，開始滑翔下山，俯瞰下方花卉覆蓋的山谷。 | 從山頂起飛的滑翔傘 |
-| **輸出影片 (由 Veo 3.1 生成)** ：延長這部影片，讓滑翔傘緩緩下降。 | 滑翔傘從山頂起飛，然後緩緩下降 |
+| **Film wejściowy (wygenerowany przez Veo 3.1)** Paralotniarz startuje ze szczytu góry i zaczyna szybować w dół, nad dolinami pokrytymi kwiatami. | Paralotniarz startuje ze szczytu góry |
+| **Film wyjściowy (wygenerowany przez Veo 3.1)** Przedłuż ten film, dodając scenę, w której paralotniarz powoli opada. | Paralotniarz startuje ze szczytu góry, a potem powoli opada. |
 
-### 提示和輸出內容範例
+### Przykładowe prompty i dane wyjściowe
 
-本節提供幾個提示，說明詳細的描述如何提升每個影片的成果。
+W tej sekcji znajdziesz kilka promptów, które pokazują, jak szczegółowe opisy mogą poprawić jakość każdego filmu.
 
-#### 冰柱
+#### Sople
 
-這部影片會示範如何在提示中使用[提示撰寫基本概念](#basics)的元素。
+Z tego filmu dowiesz się, jak w prompcie wykorzystać elementy [podstaw pisania promptów](#basics).
 
-| **提示** | **生成內容** |
+| **Prompt** | **Wygenerowane dane wyjściowe** |
 | --- | --- |
-| 融化的冰柱 (主體) 特寫鏡頭 (構圖)，背景是結冰的岩壁 (情境)，整體色調偏冷藍色 (氛圍)，鏡頭拉近 (攝影機動作)，維持水滴的特寫細節 (動作)。 | 藍色背景上的滴水冰柱。 |
+| Zbliżenie (kompozycja) topniejących sopli (obiekt) na zamarzniętej (kontekst) kamiennej ścianie w chłodnych, niebieskich odcieniach (atmosfera), z przybliżeniem (ruch kamery) zachowującym szczegóły kropel wody (akcja). | Kapiące sople lodu na niebieskim tle. |
 
-#### 男子講電話
+#### Mężczyzna rozmawia przez telefon
 
-這些影片會示範如何使用越來越具體的詳細資料修訂提示，讓 Veo 根據你的喜好調整輸出內容。
+Te filmy pokazują, jak możesz poprawiać prompt, dodając coraz bardziej szczegółowe informacje, aby Veo dostosował wygenerowany film do Twoich potrzeb.
 
-| **提示** | **生成內容** |
+| **Prompt** | **Wygenerowane dane wyjściowe** |
 | --- | --- |
-| **細節較少** ：攝影機推軌拍攝，特寫一名身穿綠色風衣的絕望男子。他正在撥打老式轉盤壁掛電話，電話旁有綠色霓虹燈。就像電影場景。 | 男子講電話。 |
-| **更多詳細資料** ：鏡頭以電影特寫手法，跟隨一名身穿綠色舊風衣的絕望男子，他正在撥打裝在粗糙磚牆上的老式轉盤電話，牆上綠色霓虹燈散發出詭異的光芒。攝影機拉近鏡頭，顯示他下顎的緊繃感，以及他努力撥打電話時臉上刻畫的絕望。淺景深效果著重於他緊皺的眉頭和黑色旋轉撥號電話，背景則模糊成一片霓虹色和模糊的陰影，營造出急迫和孤立感。 | 男子講電話 |
+| **Mniej szczegółów**  Kamera przesuwa się, aby pokazać zbliżenie na zdesperowanego mężczyznę w zielonym prochowcu. Dzwoni z telefonu ściennego z tarczą, który jest oświetlony zielonym neonem. Wygląda jak scena z filmu. | Mężczyzna rozmawia przez telefon. |
+| **Więcej szczegółów** Zbliżenie w stylu filmowym przedstawia zdesperowanego mężczyznę w spranym zielonym prochowcu, który wybiera numer na telefonie z tarczą zamontowanym na szorstkiej ceglanej ścianie, oświetlonej upiornym blaskiem zielonego neonu. Kamera zbliża się do niego, ukazując napięcie w jego szczęce i desperację na twarzy, gdy próbuje zadzwonić. Płytka głębia ostrości skupia się na jego zmarszczonym czole i czarnym telefonie obrotowym, rozmywając tło w morze neonowych kolorów i nieokreślonych cieni, co tworzy poczucie pilności i izolacji. | Mężczyzna rozmawia przez telefon |
 
-#### 雪豹
+#### Irbis śnieżny
 
-| **提示** | **生成內容** |
+| **Prompt** | **Wygenerowane dane wyjściowe** |
 | --- | --- |
-| **簡單的提示詞：** 一隻毛皮類似雪豹的可愛生物在冬季森林中行走，3D 卡通風格的算繪圖。 | 雪豹昏昏欲睡。 |
-| **詳細提示：** 製作一段短片，以歡樂的卡通風格呈現 3D 動畫場景。這隻可愛的生物有著雪豹般的毛皮、大而有神的眼睛，以及圓潤友善的體型，在充滿奇幻感的冬季森林中歡快地跳躍。場景應有圓潤的雪樹、輕柔飄落的雪花，以及穿過樹枝的溫暖陽光。生物的彈跳動作和燦爛笑容應傳達純粹的喜悅。以明亮歡快的色彩和活潑的動畫，營造溫暖歡樂的氛圍。 | 雪豹跑得更快。 |
+| **Prosty prompt:** Urocze stworzenie z futrem podobnym do futra irbisa śnieżnego idzie przez zimowy las, render w stylu kreskówki 3D. | Lampart śnieżny jest ospały. |
+| **Szczegółowy prompt:** Utwórz krótką animowaną scenę 3D w radosnym stylu kreskówkowym. Urocze stworzenie z futrem podobnym do futra pantery śnieżnej, dużymi, wyrazistymi oczami i przyjazną, zaokrągloną sylwetką radośnie kica po fantastycznym zimowym lesie. Scena powinna przedstawiać zaokrąglone, pokryte śniegiem drzewa, delikatnie padające płatki śniegu i ciepłe światło słoneczne przenikające przez gałęzie. Skoczne ruchy i szeroki uśmiech stworzenia powinny wyrażać czystą radość. Postaw na optymistyczny, wzruszający ton, jasne, wesołe kolory i zabawne animacje. | Irbis śnieżny biegnie szybciej. |
 
-### 依撰寫元素分類的範例
+### Przykłady według elementów tekstu
 
-這些範例會依據每個基本元素，說明如何調整提示。
+Te przykłady pokazują, jak doprecyzować prompty za pomocą poszczególnych elementów podstawowych.
 
-#### 主題和背景資訊
+#### Temat i kontekst
 
-指定主要焦點 (主體) 和背景或環境 (情境)。
+Określ główny obiekt (temat) oraz tło lub otoczenie (kontekst).
 
-| **提示** | **生成內容** |
+| **Prompt** | **Wygenerowane dane wyjściowe** |
 | --- | --- |
-| 建築彩現圖：白色混凝土公寓大樓，具有流動的有機形狀，與茂密的綠色植物和未來元素無縫融合 | 預留位置。 |
-| 衛星漂浮在外太空，背景是月球和一些星星。 | 漂浮在大氣層中的衛星。 |
+| Render architektoniczny białego betonowego budynku mieszkalnego o płynnych, organicznych kształtach, płynnie łączącego się z bujną zielenią i futurystycznymi elementami. | Obiekt zastępczy. |
+| Satelita unoszący się w kosmosie z księżycem i gwiazdami w tle. | Satelita unoszący się w atmosferze. |
 
-#### 動作
+#### Działanie
 
-指定主體正在做什麼 (例如走路、跑步或轉頭)。
+Określ, co robi obiekt (np. idzie, biegnie lub obraca głowę).
 
-| **提示** | **生成內容** |
+| **Prompt** | **Wygenerowane dane wyjściowe** |
 | --- | --- |
-| 廣角鏡頭拍攝的畫面：一名女子在海灘上散步，在日落時分望向地平線，神情滿足放鬆。 | 日落美景令人驚豔。 |
+| Szeroki kadr przedstawiający kobietę spacerującą po plaży. Jest zadowolona i zrelaksowana, patrzy w stronę horyzontu o zachodzie słońca. | Zachód słońca jest absolutnie piękny. |
 
-#### 樣式
+#### Styl
 
-新增關鍵字，引導生成特定美學風格的圖片 (例如超現實、復古、未來主義、黑色電影)。
+Dodaj słowa kluczowe, aby ukierunkować generowanie na konkretną estetykę (np. surrealistyczną, vintage, futurystyczną, film noir).
 
-| **提示** | **生成內容** |
+| **Prompt** | **Wygenerowane dane wyjściowe** |
 | --- | --- |
-| 黑色電影風格，一男一女走在街上，懸疑、電影感、黑白。 | 黑色電影風格非常優美。 |
+| Styl film noir, mężczyzna i kobieta idą ulicą, tajemnica, kinowy, czarno-biały. | Styl film noir jest absolutnie piękny. |
 
-#### 攝影機動作和構圖
+#### Ruch kamery i kompozycja
 
-指定攝影機的移動方式 (第一人稱視角、空拍、追蹤無人機視角)，以及取景方式 (廣角、特寫、低角度)。
+Określ, jak porusza się kamera (ujęcie z perspektywy pierwszej osoby, widok z lotu ptaka, ujęcie z drona śledzącego) i jak jest nakręcone ujęcie (szeroki kadr, zbliżenie, z niskiego kąta).
 
-| **提示** | **生成內容** |
+| **Prompt** | **Wygenerowane dane wyjściowe** |
 | --- | --- |
-| 主觀鏡頭：復古車輛在加拿大夜間的雨中行駛，電影感。 | 日落美景令人驚豔。 |
-| 眼睛的極度特寫，眼睛中映照出城市。 | 日落美景令人驚豔。 |
+| Ujęcie z perspektywy pierwszej osoby z samochodu w stylu vintage jadącego w deszczu w Kanadzie w nocy, w stylu filmowym. | Zachód słońca jest absolutnie piękny. |
+| Ekstremalne zbliżenie oka, w którym odbija się miasto. | Zachód słońca jest absolutnie piękny. |
 
-#### 類別
+#### Atmosfera
 
-調色盤和燈光會影響情緒。請試試「柔和的橘色暖色調」、「自然光」、「日出」或「冷色調藍色」等詞彙。
+Palety kolorów i oświetlenie wpływają na nastrój. Spróbuj użyć terminów takich jak „przygaszony pomarańczowy, ciepłe odcienie”, „naturalne światło”, „wschód słońca” lub „chłodne niebieskie odcienie”.
 
-| **提示** | **生成內容** |
+| **Prompt** | **Wygenerowane dane wyjściowe** |
 | --- | --- |
-| 特寫鏡頭：女孩在公園裡抱著可愛的黃金獵犬幼犬，陽光灑落。 | 小女孩抱著小狗。 |
-| 電影風格的特寫鏡頭：一名悲傷的女子在雨中搭乘公車，冷色調，悲傷的氛圍。 | 一名女子坐在公車上，看起來很難過。 |
+| Zbliżenie na dziewczynkę trzymającą uroczego szczeniaka rasy golden retriever w parku, w promieniach słońca. | Szczeniak w ramionach dziewczynki. |
+| Filmowe zbliżenie na smutną kobietę jadącą autobusem w deszczu, chłodne niebieskie odcienie, smutny nastrój. | Kobieta jadąca autobusem, która jest smutna. |
 
-### 顯示比例
+### Formaty obrazu
 
-你可以使用 Veo 指定影片的顯示比例。
+Veo umożliwia określenie formatu obrazu filmu.
 
-| **提示** | **生成內容** |
+| **Prompt** | **Wygenerowane dane wyjściowe** |
 | --- | --- |
-| **寬螢幕 (16:9)** ：製作一段影片，以追蹤無人機視角拍攝 1970 年代的棕櫚泉，一名男子駕駛紅色敞篷車，陽光溫暖，陰影拉長。 | 一名男子在棕櫚泉駕駛 1970 年代風格的紅色敞篷車。 |
-| **直向 (9:16)** 製作影片，呈現茂密熱帶雨林中壯麗夏威夷瀑布的流暢動態。著重於逼真的水流、細緻的樹葉和自然光線，營造寧靜氛圍。捕捉奔騰的水流、霧氣瀰漫的氛圍，以及穿過茂密樹冠的點點陽光。使用流暢的電影運鏡，呈現瀑布和周遭環境。請盡量使用平靜寫實的語氣，讓觀眾彷彿置身於夏威夷雨林的寧靜美景。 | 茂密雨林中的壯麗夏威夷瀑布。 |
+| **Panoramiczny (16:9)** Utwórz film z widokiem z drona śledzącego mężczyznę jadącego czerwonym kabrioletem w Palm Springs w latach 70. XX wieku. Ciepłe światło słoneczne, długie cienie. | Mężczyzna prowadzący czerwony kabriolet w Palm Springs w stylu lat 70. |
+| **Orientacja pionowa (9:16)**  Utwórz film przedstawiający płynny ruch majestatycznego hawajskiego wodospadu w bujnym lesie deszczowym. Skup się na realistycznym przepływie wody, szczegółowych liściach i naturalnym oświetleniu, aby przekazać spokój. Uchwyć szumiącą wodę, mglistą atmosferę i plamki światła słonecznego, które przenikają przez gęsty baldachim. Użyj płynnych, filmowych ruchów kamery, aby pokazać wodospad i jego otoczenie. Postaw na spokojny, realistyczny ton, który przeniesie widza w spokojne piękno hawajskiego lasu deszczowego. | Majestatyczny hawajski wodospad w bujnym lesie deszczowym. |
 
-## 模型版本
+## Wersje modelu
 
-如要進一步瞭解 Veo 模型的用量詳情，請參閱「[定價](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw#veo-3.1)」頁面和「[速率限制](https://aistudio.google.com/rate-limit?hl=zh-tw)」。
+Więcej informacji o używaniu modeli Veo znajdziesz na stronie [Ceny](https://ai.google.dev/gemini-api/docs/pricing?hl=pl#veo-3.1) i w sekcji [Limity żądań](https://aistudio.google.com/rate-limit?hl=pl).
 
-### Veo 3.1 預先發布版
+### Veo 3.1 (wersja testowa)
 
-| 屬性 | 說明 |
+| Właściwość | Opis |
 | --- | --- |
-| id\_card 模型代碼 | **Gemini API**  `veo-3.1-generate-preview` |
-| save支援的資料類型 | **輸入功率**  文字、圖片  **輸出內容**  有聲影片 |
-| token\_auto 限制 | **文字輸入**  1,024 個權杖  **輸出影片**  1 |
-| calendar\_month最新更新 | 2026 年 1 月 |
+| id\_cardKod modelu | **Gemini API**  `veo-3.1-generate-preview` |
+| saveObsługiwane typy danych | **Wejście**  Tekst, obraz  **Dane wyjściowe**  Film z dźwiękiem |
+| Limity token\_auto | **Wpisywanie tekstu**  1024 tokeny  **Film wyjściowy**  1 |
+| calendar\_monthOstatnia aktualizacja | Styczeń 2026 |
 
-### Veo 3.1 Fast 預先發布版
+### Veo 3.1 Fast (wersja testowa)
 
-| 屬性 | 說明 |
+| Właściwość | Opis |
 | --- | --- |
-| id\_card 模型代碼 | **Gemini API**  `veo-3.1-fast-generate-preview` |
-| save支援的資料類型 | **輸入功率**  文字、圖片  **輸出內容**  有聲影片 |
-| token\_auto 限制 | **文字輸入**  1,024 個權杖  **輸出影片**  1 |
-| calendar\_month最新更新 | 2026 年 1 月 |
+| id\_cardKod modelu | **Gemini API**  `veo-3.1-fast-generate-preview` |
+| saveObsługiwane typy danych | **Wejście**  Tekst, obraz  **Dane wyjściowe**  Film z dźwiękiem |
+| Limity token\_auto | **Wpisywanie tekstu**  1024 tokeny  **Film wyjściowy**  1 |
+| calendar\_monthOstatnia aktualizacja | Styczeń 2026 |
 
-### Veo 3.1 Lite 預先發布版
+### Veo 3.1 Lite (wersja testowa)
 
-| 屬性 | 說明 |
+| Właściwość | Opis |
 | --- | --- |
-| id\_card 模型代碼 | **Gemini API**  `veo-3.1-lite-generate-preview` |
-| save支援的資料類型 | **輸入功率**  文字、圖片  **輸出內容**  有聲影片 |
-| token\_auto 限制 | **文字輸入**  1,024 個權杖  **輸出影片**  1 |
-| calendar\_month最新更新 | 2026 年 3 月 |
+| id\_cardKod modelu | **Gemini API**  `veo-3.1-lite-generate-preview` |
+| saveObsługiwane typy danych | **Wejście**  Tekst, obraz  **Dane wyjściowe**  Film z dźwiękiem |
+| Limity token\_auto | **Wpisywanie tekstu**  1024 tokeny  **Film wyjściowy**  1 |
+| calendar\_monthOstatnia aktualizacja | Marzec 2026 r. |
 
-### Veo 3 (已淘汰)
+### Veo 3 (wycofane)
 
-| 屬性 | 說明 |
+| Właściwość | Opis |
 | --- | --- |
-| id\_card 模型代碼 | **Gemini API**  `veo-3.0-generate-001` |
-| save支援的資料類型 | **輸入功率**  文字、圖片  **輸出內容**  有聲影片 |
-| token\_auto 限制 | **文字輸入**  1,024 個權杖  **輸出影片**  1 |
-| calendar\_month最新更新 | 2025 年 7 月 |
+| id\_cardKod modelu | **Gemini API**  `veo-3.0-generate-001` |
+| saveObsługiwane typy danych | **Wejście**  Tekst, obraz  **Dane wyjściowe**  Film z dźwiękiem |
+| Limity token\_auto | **Wpisywanie tekstu**  1024 tokeny  **Film wyjściowy**  1 |
+| calendar\_monthOstatnia aktualizacja | Lipiec 2025 r. |
 
-### Veo 3 Fast (已淘汰)
+### Veo 3 Fast (wycofana)
 
-| 屬性 | 說明 |
+| Właściwość | Opis |
 | --- | --- |
-| id\_card 模型代碼 | **Gemini API**  `veo-3.0-fast-generate-001` |
-| save支援的資料類型 | **輸入功率**  文字、圖片  **輸出內容**  有聲影片 |
-| token\_auto 限制 | **文字輸入**  1,024 個權杖  **輸出影片**  1 |
-| calendar\_month最新更新 | 2025 年 7 月 |
+| id\_cardKod modelu | **Gemini API**  `veo-3.0-fast-generate-001` |
+| saveObsługiwane typy danych | **Wejście**  Tekst, obraz  **Dane wyjściowe**  Film z dźwiękiem |
+| Limity token\_auto | **Wpisywanie tekstu**  1024 tokeny  **Film wyjściowy**  1 |
+| calendar\_monthOstatnia aktualizacja | Lipiec 2025 r. |
 
-### Veo 2 (已淘汰)
+### Veo 2 (wycofane)
 
-| 屬性 | 說明 |
+| Właściwość | Opis |
 | --- | --- |
-| id\_card 模型代碼 | **Gemini API**  `veo-2.0-generate-001` |
-| save支援的資料類型 | **輸入功率**  文字、圖片  **輸出內容**  影片 |
-| token\_auto 限制 | **文字輸入**  不適用  **圖片輸入**  任何解析度和顯示比例的圖片，檔案大小上限為 20 MB  **輸出影片**  最多 2 個 |
-| calendar\_month最新更新 | 2025 年 4 月 |
+| id\_cardKod modelu | **Gemini API**  `veo-2.0-generate-001` |
+| saveObsługiwane typy danych | **Wejście**  Tekst, obraz  **Dane wyjściowe**  Wideo |
+| Limity token\_auto | **Wpisywanie tekstu**  Nie dotyczy  **Wejście obrazu**  Dowolna rozdzielczość i format obrazu, rozmiar pliku do 20 MB  **Film wyjściowy**  Do 2 |
+| calendar\_monthOstatnia aktualizacja | Kwiecień 2025 r. |
 
-### Veo 2 (已淘汰)
+### Veo 2 (wycofane)
 
-| 屬性 | 說明 |
+| Właściwość | Opis |
 | --- | --- |
-| id\_card 模型代碼 | **Gemini API**  `veo-2.0-generate-001` |
-| save支援的資料類型 | **輸入功率**  文字、圖片  **輸出內容**  影片 |
-| token\_auto 限制 | **文字輸入**  不適用  **圖片輸入**  任何解析度和顯示比例的圖片，檔案大小上限為 20 MB  **輸出影片**  最多 2 個 |
-| calendar\_month最新更新 | 2025 年 4 月 |
+| id\_cardKod modelu | **Gemini API**  `veo-2.0-generate-001` |
+| saveObsługiwane typy danych | **Wejście**  Tekst, obraz  **Dane wyjściowe**  Wideo |
+| Limity token\_auto | **Wpisywanie tekstu**  Nie dotyczy  **Wejście obrazu**  Dowolna rozdzielczość i format obrazu, rozmiar pliku do 20 MB  **Film wyjściowy**  Do 2 |
+| calendar\_monthOstatnia aktualizacja | Kwiecień 2025 r. |
 
-開發人員可使用 Veo Fast 版本製作有聲影片，兼顧高品質和速度，並滿足業務用途。這類 API 非常適合用於以程式輔助方式產生廣告的後端服務、快速對創意概念進行 A/B 測試的工具，或是需要快速製作社群媒體內容的應用程式。
+Wersje Veo Fast umożliwiają deweloperom tworzenie filmów z dźwiękiem przy zachowaniu wysokiej jakości i optymalizacji pod kątem szybkości oraz zastosowań biznesowych. Są one idealne w przypadku usług backendowych, które programowo generują reklamy, narzędzi do szybkiego testowania A/B koncepcji kreatywnych lub aplikacji, które muszą szybko tworzyć treści do mediów społecznościowych.
 
-## 後續步驟
+## Co dalej?
 
-- 如要開始使用 Veo 3.1 API，請試用 [Veo 快速入門 Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Veo.ipynb?hl=zh-tw) 和 [Veo 3.1 小程式](https://aistudio.google.com/apps/bundled/veo_studio?hl=zh-tw)。
-- 如要瞭解如何撰寫更有效的提示，請參閱「[提示設計簡介](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=zh-tw)」。
+- Zacznij korzystać z interfejsu Veo 3.1 API, eksperymentując w [Veo Quickstart Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Veo.ipynb?hl=pl) i [aplecie Veo 3.1](https://aistudio.google.com/apps/bundled/veo_studio?hl=pl).
+- Dowiedz się, jak pisać jeszcze lepsze prompty, korzystając z naszego [wprowadzenia do projektowania promptów](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=pl).
 
-提供意見
+Prześlij opinię
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-上次更新時間：2026-07-30 (世界標準時間)。
+Ostatnia aktualizacja: 2026-07-30 UTC.
 
-想進一步說明嗎？
+Chcesz przekazać coś jeszcze?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-30 (世界標準時間)。"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]

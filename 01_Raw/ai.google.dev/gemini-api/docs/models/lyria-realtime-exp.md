@@ -1,48 +1,51 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=id
-fetched_at: 2026-08-17T02:22:17.073180+00:00
-title: "Eksperimental RealTime Lyria \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=ar
+fetched_at: 2026-08-24T02:33:58.783054+00:00
+title: "\u062a\u062c\u0631\u0628\u0629 Lyria RealTime \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Kirim masukan
+إرسال ملاحظات
 
-# Eksperimental RealTime Lyria
+# تجربة Lyria RealTime
 
-Mesin eksperimental untuk sintesis musik fidelitas tinggi, yang menawarkan kemampuan inovatif untuk membuat dan mengubah konten audio. Lyria RealTime paling cocok untuk penulisan lagu yang dibantu AI, pembuatan instrumen yang unik, dan alur kerja audio kreatif yang memerlukan kontrol mendalam atas melodi dan ritme, tanpa vokal.
+محرك تجريبي لتوليف الموسيقى بدقة عالية، يقدّم إمكانات مبتكرة لإنشاء المحتوى الصوتي وتحويله. ‫Lyria RealTime
+هو الخيار الأفضل لكتابة الأغاني بمساعدة الذكاء الاصطناعي وإنشاء مقاطع موسيقية فريدة
+وسير عمل إبداعي للصوت يتطلّب تحكّمًا دقيقًا في اللحن والإيقاع،
+بدون غناء.
 
-[Coba Lyria RealTime](https://deepmind.google/models/lyria/lyria-realtime/?hl=id)
+[تجربة Lyria RealTime](https://deepmind.google/models/lyria/lyria-realtime/?hl=ar)
 
-## Dokumentasi
+## الوثائق
 
-Buka halaman [Pembuatan musik real-time](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=id)
-untuk mengetahui cakupan lengkap fitur dan kemampuannya.
+يمكنك الانتقال إلى صفحة [إنشاء الموسيقى في الوقت الفعلي](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=ar)
+للاطّلاع على تغطية كاملة للميزات والإمكانات.
 
 ## lyria-realtime-exp
 
-| Properti | Deskripsi |
+| الموقع | الوصف |
 | --- | --- |
-| id\_cardKode model | **Gemini API**  `lyria-realtime-exp` |
-| saveJenis data yang didukung | **Input**  Teks (Perintah berbobot)  **Output**  Audio (PCM 16-bit mentah) |
-| token\_autoBatas streaming | **Frekuensi sampel**  48kHz (Stereo)  **Latensi kontrol**  Maksimum 2 detik |
-| 123Versi | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - Eksperimental: `lyria-realtime-exp` |
-| calendar\_monthPembaruan terbaru | Mei 2025 |
+| id\_cardرمز النموذج | **Gemini API**  `lyria-realtime-exp` |
+| saveأنواع البيانات المتوافقة | **الإدخال**  النص (الطلبات المرجّحة)  **الناتج**  الصوت (Raw 16-bit PCM) |
+| token\_autoحدود البث | **معدّل أخذ العيّنات**  ‫48 كيلو هرتز (استيريو)  **وقت استجابة التحكّم**  ثانيتان كحدّ أقصى |
+| 123الإصدارات | لمزيد من التفاصيل، يُرجى الاطّلاع على [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions).  - تجريبي: `lyria-realtime-exp` |
+| calendar\_monthآخر تعديل | مايو 2025 |
 
-Kirim masukan
+إرسال ملاحظات
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Terakhir diperbarui pada 2026-04-29 UTC.
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-Ada masukan untuk kami?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

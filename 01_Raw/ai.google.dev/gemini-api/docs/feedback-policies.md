@@ -1,55 +1,55 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/feedback-policies?hl=zh-CN
-fetched_at: 2026-08-17T02:29:22.174581+00:00
-title: "\u53cd\u9988 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/feedback-policies?hl=fr
+fetched_at: 2026-08-24T02:24:00.094176+00:00
+title: "Commentaires \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-发送反馈
+Envoyer des commentaires
 
-# 反馈
+# Commentaires
 
-## 内嵌式偏好投票
+## Vote par préférence intégré
 
-在 Google AI Studio 中，您有时可能会看到两个不同的提示回答对照比较显示。这是我们的内嵌式偏好投票系统的一部分。系统会要求您选择更喜欢的回答。这有助于我们了解用户认为哪些模型输出最有用。
+Dans Google AI Studio, vous pouvez parfois voir une comparaison côte à côte de deux réponses différentes à votre requête. Cela fait partie de notre système de vote des préférences intégré. Vous serez invité à choisir la réponse que vous préférez. Cela nous aide à comprendre quelles sorties de modèle les utilisateurs trouvent les plus utiles.
 
-### 为什么要这样做？
+### Quel est l'objectif ?
 
-我们会不断努力改进 AI 模型和服务。您通过内嵌式偏好投票提供的反馈有助于我们根据[Gemini API 附加服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn)和[隐私权政策](https://policies.google.com/privacy?hl=zh-cn)，提供、改进和开发 Google 产品和服务以及机器学习技术，包括 Google 的企业功能、产品和服务。
+Nous nous efforçons constamment d'améliorer nos modèles et services d'IA. Vos commentaires via le vote sur les préférences intégrées nous aident à fournir, améliorer et développer les produits et services de Google, ainsi que ses technologies de machine learning, y compris les fonctionnalités, produits et services pour les entreprises de Google, conformément aux [Conditions d'utilisation supplémentaires de l'API Gemini](https://ai.google.dev/gemini-api/terms?hl=fr) et aux [Règles de confidentialité](https://policies.google.com/privacy?hl=fr).
 
-### 反馈中包含哪些数据？
+### Quelles données sont incluses dans les commentaires ?
 
-为了能够根据充分的信息做出有关模型的决策，我们会收集您参与内嵌式偏好投票时的一些数据：
+Pour prendre des décisions éclairées concernant nos modèles, nous collectons certaines données lorsque vous participez au vote des préférences intégré :
 
-- **提示和回答**： 我们会记录您提交反馈的对话中的所有提示和回答，包括所有上传的内容。我们还会记录您从中选择的两个回答选项。这有助于我们了解您偏好的背景信息。
-- **您的投票**： 我们会记录您更喜欢哪个回答。这是我们收集的反馈的核心内容。
-- **使用详情**： 这包括生成回答的模型的相关信息，以及有关您使用此功能的其他技术和运营详情。
+- **Requêtes et réponses** : nous enregistrons toutes les requêtes et réponses, y compris les contenus importés, dans la conversation sur laquelle vous avez envoyé des commentaires. Nous enregistrons également les deux options de réponse que vous avez sélectionnées. Cela nous aide à comprendre le contexte de votre préférence.
+- **Votre vote** : nous enregistrons la réponse que vous avez préférée. Il s'agit du cœur des commentaires que nous recueillons.
+- **Détails d'utilisation** : incluent des informations sur le modèle qui a généré la réponse, ainsi que d'autres détails techniques et opérationnels sur votre utilisation de cette fonctionnalité.
 
-### 您的隐私
+### Confidentialité
 
-我们十分重视用户的隐私。在此过程中，Google 会采取相应的措施来保护您的隐私， 包括消除这些数据与您的 Google 账号、API 密钥和 Cloud 项目的关联，然后才允许审核员查看或添加注释。**请勿针对包含敏感信息、机密信息或个人信息的对话提交反馈。**
+Nous prenons votre confidentialité très au sérieux. Lors de ce processus, Google prend les mesures nécessaires pour protéger la confidentialité de vos données. Entre autres, ces données sont dissociées de votre compte Google, de votre clé API et de votre projet Cloud avant que les réviseurs les voient ou les annotent. **N'envoyez pas de commentaires sur les conversations qui incluent des informations sensibles, confidentielles ou personnelles.**
 
-### 停用此功能
+### Désactivation
 
-内嵌式偏好投票出现时，您可以选择跳过。
+Vous pouvez ignorer le vote des préférences intégrées lorsqu'il s'affiche.
 
-感谢您帮助我们改进 Google AI Studio！
+Merci de nous aider à améliorer Google AI Studio !
 
-发送反馈
+Envoyer des commentaires
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-最后更新时间 (UTC)：2026-04-29。
+Dernière mise à jour le 2026/04/29 (UTC).
 
-需要向我们提供更多信息？
+Voulez-vous nous donner plus d'informations ?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/04/29 (UTC)."],[],[]]

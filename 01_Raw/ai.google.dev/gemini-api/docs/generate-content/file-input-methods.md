@@ -1,29 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/file-input-methods?hl=vi
-fetched_at: 2026-08-17T02:36:48.876840+00:00
-title: "Ph\u01b0\u01a1ng th\u1ee9c nh\u1eadp t\u1ec7p \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/file-input-methods?hl=zh-TW
+fetched_at: 2026-08-24T02:32:08.660765+00:00
+title: "\u6a94\u6848\u8f38\u5165\u65b9\u5f0f \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Gửi ý kiến phản hồi
+提供意見
 
-# Phương thức nhập tệp
+# 檔案輸入方式
 
-Hướng dẫn này giải thích những cách để bạn có thể đưa các tệp đa phương tiện (chẳng hạn như hình ảnh, âm thanh, video và tài liệu) vào khi đưa ra yêu cầu cho Gemini API.
-Các phương thức mới được hỗ trợ trong tất cả các điểm cuối của Gemini API, bao gồm cả Batch, Interactions và Live API.
-Việc chọn phương thức phù hợp phụ thuộc vào kích thước tệp, vị trí lưu trữ dữ liệu hiện tại và tần suất bạn dự định sử dụng tệp.
+本指南說明向 Gemini API 提出要求時，可採用哪些方式加入圖片、音訊、影片和文件等媒體檔案。所有 Gemini API 端點都支援這些新方法，包括 Batch、Interactions 和 Live API。選擇合適的方法取決於檔案大小、資料目前的儲存位置，以及檔案的預計使用頻率。
 
-Cách đơn giản nhất để đưa một tệp vào làm dữ liệu đầu vào là đọc một tệp cục bộ và đưa tệp đó vào một câu lệnh. Ví dụ sau đây cho thấy cách đọc một tệp PDF cục bộ. Đối với phương thức này, tệp PDF chỉ được có dung lượng tối đa là 50 MB. Hãy xem [Bảng so sánh phương thức nhập](#method-comparison) để biết danh sách đầy đủ các loại và giới hạn nhập tệp.
+如要將檔案做為輸入內容，最簡單的方法是讀取本機檔案，然後將檔案納入提示。以下範例說明如何讀取本機 PDF 檔案。使用這種方法時，PDF 檔案大小不得超過 50 MB。如需檔案輸入類型和限制的完整清單，請參閱「[輸入法比較表](#method-comparison)」。
 
 ### Python
 
@@ -112,26 +110,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
   }'
 ```
 
-## So sánh phương thức nhập
+## 輸入法比較
 
-Bảng sau đây so sánh từng phương thức nhập với giới hạn tệp và các trường hợp sử dụng hiệu quả nhất. Xin lưu ý rằng giới hạn kích thước tệp có thể thay đổi tuỳ thuộc vào loại tệp và mô hình/trình mã hoá từ được dùng để xử lý tệp.
+下表比較各種輸入方式的檔案限制和最佳用途。請注意，檔案大小上限可能會因檔案類型和用於處理檔案的模型/權杖化工具而異。
 
-| Phương thức | Phù hợp nhất cho | Kích thước tệp tối đa | Khả năng lưu trữ dài lâu |
+| 方法 | 適用情境 | 檔案大小上限 | 持續性 |
 | --- | --- | --- | --- |
-| **Dữ liệu nội tuyến** | Thử nghiệm nhanh, tệp nhỏ, ứng dụng theo thời gian thực. | 100 MB cho mỗi yêu cầu/tải trọng   (**50 MB đối với tệp PDF**) | Không có (gửi kèm theo mọi yêu cầu) |
-| **Tải tệp lên bằng API** | Tệp lớn, tệp được dùng nhiều lần. | 2 GB cho mỗi tệp,   tối đa 20 GB cho mỗi dự án | 48 giờ |
-| **Đăng ký URI GCS của File API** | Các tệp lớn đã có trong Google Cloud Storage, các tệp được dùng nhiều lần. | 2 GB cho mỗi tệp, không có giới hạn chung về bộ nhớ | Không có (tìm nạp theo yêu cầu). Một lần đăng ký có thể cấp quyền truy cập trong tối đa 30 ngày. |
-| **URL bên ngoài** | Dữ liệu công khai hoặc dữ liệu trong các vùng lưu trữ đám mây (AWS, Azure, GCS) mà không cần tải lại. | 100 MB cho mỗi yêu cầu/tải trọng | Không có (tìm nạp theo yêu cầu) |
+| **內嵌資料** | 快速測試、小型檔案、即時應用程式。 | 每個要求/酬載 100 MB   (PDF 檔案為 **50 MB**) | 無 (隨每個要求傳送) |
+| **透過 File API 上傳** | 大型檔案、多次使用的檔案。 | 每個檔案 2 GB， 每個專案最多 20 GB | 48 小時 |
+| **檔案 API GCS URI 註冊** | Google Cloud Storage 中已有的檔案、多次使用的檔案。 | 每個檔案 2 GB，沒有總儲存空間限制 | 無 (按要求擷取)。一次註冊最多可存取 30 天。 |
+| **外部網址** | 公開資料或雲端儲存空間 (AWS、Azure、GCS) 中的資料，不必重新上傳。 | 每個要求/酬載 100 MB | 無 (每次要求都會擷取) |
 
-## Dữ liệu cùng dòng
+## 內嵌資料
 
-Đối với các tệp nhỏ hơn (dưới 100 MB hoặc 50 MB đối với tệp PDF), bạn có thể truyền dữ liệu trực tiếp trong tải trọng yêu cầu. Đây là phương thức đơn giản nhất để kiểm thử nhanh hoặc các ứng dụng xử lý dữ liệu tạm thời theo thời gian thực. Bạn có thể cung cấp dữ liệu dưới dạng chuỗi được mã hoá base64 hoặc bằng cách đọc trực tiếp các tệp cục bộ.
+如果是較小的檔案 (小於 100 MB，PDF 檔案則小於 50 MB)，您可以直接在要求酬載中傳遞資料。這是最簡單的方法，適用於快速測試或處理即時暫時性資料的應用程式。您可以提供 base64 編碼字串形式的資料，也可以直接讀取本機檔案。
 
-Để xem ví dụ về cách đọc từ một tệp cục bộ, hãy xem ví dụ ở đầu trang này.
+如需從本機檔案讀取的範例，請參閱本頁開頭的範例。
 
-### Tìm nạp từ URL
+### 從網址擷取
 
-Bạn cũng có thể tìm nạp một tệp từ URL, chuyển đổi tệp đó thành byte và đưa tệp đó vào dữ liệu đầu vào.
+您也可以從網址擷取檔案、轉換為位元組，然後加入輸入內容。
 
 ### Python
 
@@ -235,11 +233,11 @@ jq ".candidates[].content.parts[].text" response.json
 
 ## Gemini File API
 
-File API được thiết kế cho các tệp lớn (tối đa 2 GB) hoặc các tệp mà bạn dự định sử dụng trong nhiều yêu cầu.
+File API 適用於較大的檔案 (最多 2 GB)，或您打算在多項要求中使用的檔案。
 
-### Tải tệp lên theo cách tiêu chuẩn
+### 標準檔案上傳
 
-Tải một tệp cục bộ lên Gemini API. Các tệp được tải lên theo cách này sẽ được lưu trữ tạm thời (48 giờ) và được xử lý để mô hình có thể truy xuất một cách hiệu quả.
+將本機檔案上傳至 Gemini API。以這種方式上傳的檔案會暫時儲存 (48 小時)，並經過處理，方便模型有效率地擷取內容。
 
 ### Python
 
@@ -346,44 +344,43 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-### Đăng ký tệp Google Cloud Storage
+### 註冊 Google Cloud Storage 檔案
 
-Nếu dữ liệu của bạn đã có trong Google Cloud Storage, bạn không cần tải xuống rồi tải lên lại. Bạn có thể đăng ký trực tiếp với File API.
+如果資料已儲存在 Google Cloud Storage，就不需要下載並重新上傳。您可以直接透過 File API 註冊。
 
-1. Cấp quyền truy cập cho **Tác nhân dịch vụ** vào từng bộ chứa
+1. 授予**服務代理**每個值區的存取權
 
-   1. Bật Gemini API trong dự án trên đám mây của bạn.
-   2. Tạo tác nhân dịch vụ:
+   1. 在 Google Cloud 專案中啟用 Gemini API。
+   2. 建立服務代理：
 
       `gcloud beta services identity create --service=generativelanguage.googleapis.com --project=<your_project>`
-   3. **Cấp cho Gemini API Service Agent quyền** đọc các bộ chứa lưu trữ của bạn.
+   3. **授予 Gemini API 服務代理讀取儲存空間 bucket 的權限**。
 
-      Người dùng cần chỉ định `Storage Object Viewer`
-      [vai trò IAM](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=vi#storage.objectViewer)
-      cho tác nhân dịch vụ này trên các vùng lưu trữ cụ thể mà họ dự định sử dụng.
+      使用者必須在要使用的特定儲存空間 bucket 中，為這個服務代理指派 `Storage Object Viewer`
+      [IAM 角色](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=zh-tw#storage.objectViewer)。
 
-   Theo mặc định, quyền truy cập này không hết hạn, nhưng bạn có thể thay đổi bất cứ lúc nào. Bạn cũng có thể dùng các lệnh [SDK IAM của Google Cloud Storage](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=vi) để cấp quyền.
-2. Xác thực dịch vụ của bạn
+   這項存取權預設不會過期，但可以隨時變更。您也可以使用 [Google Cloud Storage IAM SDK](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=zh-tw) 指令授予權限。
+2. 驗證服務
 
-   **Điều kiện tiên quyết**
+   **必要條件**
 
-   - Bật API
-   - Tạo một tài khoản dịch vụ/tác nhân có các quyền thích hợp.
+   - 啟用 API
+   - 建立具備適當權限的服務帳戶/代理程式。
 
-   Trước tiên, bạn cần xác thực với tư cách là dịch vụ có quyền xem đối tượng lưu trữ. Cách thức này phụ thuộc vào môi trường mà mã quản lý tệp của bạn sẽ chạy.
+   您必須先以具備 Storage 物件檢視者權限的服務進行驗證，這取決於檔案管理程式碼的執行環境。
 
-   **Bên ngoài Google Cloud**
+   **Google Cloud 以外**
 
-   Nếu mã của bạn đang chạy bên ngoài Google Cloud, chẳng hạn như trên máy tính, hãy tải thông tin đăng nhập tài khoản xuống từ Google Cloud Console theo các bước sau:
+   如果您的程式碼是在 Google Cloud 以外的位置 (例如桌面) 執行，請按照下列步驟，從 Google Cloud 控制台下載帳戶憑證：
 
-   1. Duyệt đến [Bảng điều khiển tài khoản dịch vụ](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=vi)
-   2. Chọn tài khoản dịch vụ có liên quan
-   3. Chọn thẻ **Khoá** rồi chọn **Thêm khoá, Tạo khoá mới**
-   4. Chọn loại khoá **JSON** và ghi lại vị trí tải tệp xuống trên máy của bạn.
+   1. 瀏覽至[服務帳戶控制台](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=zh-tw)
+   2. 選取相關服務帳戶
+   3. 選取「金鑰」分頁，然後依序選擇「新增金鑰」和「建立新的金鑰」
+   4. 選擇「JSON」金鑰類型，並記下檔案下載到電腦的位置。
 
-   Để biết thêm thông tin chi tiết, hãy xem tài liệu chính thức của Google Cloud về [quản lý khoá tài khoản dịch vụ](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=vi).
+   詳情請參閱 Google Cloud 官方說明文件，瞭解如何[管理服務帳戶金鑰](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=zh-tw)。
 
-   Sau đó, hãy dùng các lệnh sau để xác thực. Các lệnh này giả định rằng tệp tài khoản dịch vụ của bạn nằm trong thư mục hiện tại, có tên là `service-account.json`.
+   然後使用下列指令進行驗證。這些指令假設服務帳戶檔案位於目前目錄中，且名為 `service-account.json`。
 
    ### Python
 
@@ -429,13 +426,13 @@ Nếu dữ liệu của bạn đã có trong Google Cloud Storage, bạn không 
      --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only'
    ```
 
-   **Trên Google Cloud**
+   **在 Google Cloud 中**
 
-   Nếu đang chạy trực tiếp trong Google Cloud, chẳng hạn như bằng cách sử dụng [các hàm Cloud Run](https://cloud.google.com/functions?hl=vi) hoặc một [phiên bản Compute Engine](https://cloud.google.com/products/compute?hl=vi), bạn sẽ có thông tin đăng nhập ngầm nhưng cần xác thực lại để cấp các phạm vi thích hợp.
+   如果您直接在 Google Cloud 中執行 (例如使用 [Cloud Run 函式](https://cloud.google.com/functions?hl=zh-tw)或 [Compute Engine 執行個體](https://cloud.google.com/products/compute?hl=zh-tw))，您會擁有隱含憑證，但需要重新驗證，才能授予適當的範圍。
 
    ### Python
 
-   Mã này giả định rằng dịch vụ đang chạy trong một môi trường mà [Thông tin xác thực mặc định của ứng dụng](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=vi) có thể được tự động lấy, chẳng hạn như Cloud Run hoặc Compute Engine.
+   這段程式碼預期服務會在可自動取得[應用程式預設憑證](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=zh-tw)的環境中執行，例如 Cloud Run 或 Compute Engine。
 
    ```
    import google.auth
@@ -450,7 +447,7 @@ Nếu dữ liệu của bạn đã có trong Google Cloud Storage, bạn không 
 
    ### JavaScript
 
-   Mã này giả định rằng dịch vụ đang chạy trong một môi trường mà [Thông tin xác thực mặc định của ứng dụng](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=vi) có thể được tự động lấy, chẳng hạn như Cloud Run hoặc Compute Engine.
+   這段程式碼預期服務會在可自動取得[應用程式預設憑證](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=zh-tw)的環境中執行，例如 Cloud Run 或 Compute Engine。
 
    ```
    const { GoogleAuth } = require('google-auth-library');
@@ -465,15 +462,15 @@ Nếu dữ liệu của bạn đã có trong Google Cloud Storage, bạn không 
 
    ### CLI
 
-   Đây là một lệnh tương tác. Đối với các dịch vụ như Compute Engine, bạn có thể đính kèm các phạm vi vào dịch vụ đang chạy ở cấp cấu hình. Hãy xem [tài liệu về dịch vụ do người dùng quản lý](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=vi#using) để biết ví dụ.
+   這項指令是互動式指令，對於 Compute Engine 等服務，您可以在設定層級將範圍附加至執行中的服務。如需範例，請參閱[使用者自行管理的服務文件](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=zh-tw#using)。
 
    ```
    gcloud auth application-default login \
    --scopes="https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only"
    ```
-3. Đăng ký tệp (API Tệp)
+3. 檔案註冊 (Files API)
 
-   Sử dụng Files API để đăng ký tệp và tạo đường dẫn Files API có thể được dùng trực tiếp trong Gemini API.
+   使用 Files API 註冊檔案，並產生可直接在 Gemini API 中使用的 Files API 路徑。
 
    ### Python
 
@@ -518,11 +515,11 @@ Nếu dữ liệu của bạn đã có trong Google Cloud Storage, bạn không 
        -d '{"uris": ["gs://bucket/object1", "gs://bucket/object2"]}'
    ```
 
-## HTTP bên ngoài / URL đã ký
+## 外部 HTTP / 已簽章網址
 
-Bạn có thể truyền trực tiếp các URL HTTPS truy cập công khai hoặc URL được ký trước (tương thích với [URL được ký trước S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) và SAS Azure) trong yêu cầu tạo. Gemini API sẽ tìm nạp nội dung một cách an toàn trong quá trình xử lý. Đây là lựa chọn lý tưởng cho những tệp có kích thước tối đa 100 MB mà bạn không muốn tải lại lên.
+您可以在生成要求中直接傳遞可公開存取的 HTTPS 網址或預先簽署的網址 (與 [S3 預先簽署的網址](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html)和 Azure SAS 相容)。Gemini API 會在處理期間安全地擷取內容。如果檔案大小在 100 MB 以下，且您不想重新上傳，這項功能就是絕佳選擇。
 
-Bạn có thể sử dụng URL công khai hoặc URL đã ký làm dữ liệu đầu vào bằng cách sử dụng các URL trong trường `file_uri`.
+您可以使用「URLs」(網址) `file_uri` 欄位中的網址，以公開或已簽署的網址做為輸入內容。
 
 ### Python
 
@@ -596,20 +593,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
         }'
 ```
 
-### Hỗ trợ tiếp cận
+### 無障礙設定
 
-Xác minh rằng các URL bạn cung cấp không dẫn đến những trang yêu cầu đăng nhập hoặc có tường phí. Đối với cơ sở dữ liệu riêng tư, hãy đảm bảo rằng bạn tạo một URL đã ký với quyền truy cập và thời gian hết hạn chính xác.
+確認提供的網址不會導向需要登入或位於付費牆後的網頁。如果是私人資料庫，請務必建立具備正確存取權限和有效期限的經簽署的網址。
 
-### Kiểm tra an toàn
+### 安全檢查
 
-Hệ thống sẽ kiểm tra nội dung của URL để xác nhận rằng các URL đó đáp ứng các tiêu chuẩn về sự an toàn và chính sách (ví dụ: nội dung không bị loại trừ và có tường phí). Nếu URL bạn cung cấp không vượt qua bước kiểm tra này, bạn sẽ nhận được `url_retrieval_status` của `URL_RETRIEVAL_STATUS_UNSAFE`.
+系統會對網址執行內容審核檢查，確認網址符合安全和政策標準 (例如未停用及設有付費牆的內容)。如果提供的網址未通過這項檢查，您會收到`url_retrieval_status`的`URL_RETRIEVAL_STATUS_UNSAFE`。
 
-### Các loại nội dung được hỗ trợ
+### 支援的內容類型
 
-Danh sách các loại tệp được hỗ trợ và hạn chế này chỉ mang tính hướng dẫn ban đầu và chưa đầy đủ. Tập hợp các loại được hỗ trợ có hiệu lực có thể thay đổi và có thể khác nhau tuỳ theo mô hình và phiên bản mã hoá từ cụ thể đang được sử dụng. Các loại không được hỗ trợ sẽ dẫn đến lỗi.
-Ngoài ra, tính năng truy xuất nội dung cho các loại tệp này hiện chỉ hỗ trợ những URL có thể truy cập công khai.
+這份支援的檔案類型和限制清單僅供初步參考，並未涵蓋所有項目。支援的有效型別組合可能會變更，且會因使用的特定模型和權杖化工具版本而異。如果類型不受支援，系統會顯示錯誤訊息。
+此外，目前僅支援可公開存取的網址，以擷取這些檔案類型的內容。
 
-#### Loại tệp văn bản
+#### 文字檔案類型
 
 - `text/html`
 - `text/css`
@@ -619,19 +616,19 @@ Ngoài ra, tính năng truy xuất nội dung cho các loại tệp này hiện 
 - `text/rtf`
 - `text/javascript`
 
-#### Các loại tệp ứng dụng
+#### 應用程式檔案類型
 
 - `application/json`
 - `application/pdf`
 
-#### Loại tệp hình ảnh
+#### 圖片檔案類型
 
 - `image/bmp`
 - `image/jpeg`
 - `image/png`
 - `image/webp`
 
-#### Loại tệp video
+#### 影片檔案類型
 
 - `video/mp4`
 - `video/mpeg`
@@ -643,35 +640,35 @@ Ngoài ra, tính năng truy xuất nội dung cho các loại tệp này hiện 
 - `video/wmv`
 - `video/3gpp`
 
-## Các phương pháp hay nhất
+## 最佳做法
 
-- **Chọn phương thức phù hợp:** Sử dụng dữ liệu nội tuyến cho các tệp nhỏ, tạm thời.
-  Sử dụng File API cho các tệp có kích thước lớn hoặc thường dùng. Sử dụng URL bên ngoài cho dữ liệu đã được lưu trữ trực tuyến.
-- **Chỉ định loại MIME:** Luôn cung cấp loại MIME chính xác cho dữ liệu tệp để đảm bảo quá trình xử lý diễn ra đúng cách.
-- **Xử lý lỗi:** Triển khai quy trình xử lý lỗi trong mã của bạn để quản lý các vấn đề tiềm ẩn như lỗi mạng, vấn đề về quyền truy cập vào tệp hoặc lỗi API.
-- **Quản lý quyền GCS:** Khi sử dụng chế độ đăng ký GCS, chỉ cấp cho Gemini API Service Agent vai trò `Storage Object Viewer` cần thiết trên các bộ chứa cụ thể.
-- **Bảo mật URL đã ký:** Đảm bảo URL đã ký có thời gian hết hạn thích hợp và quyền hạn hạn chế.
+- **選擇合適的方法：**針對小型暫時性檔案使用內嵌資料。如要處理較大或經常使用的檔案，請使用 File API。使用外部網址，
+  匯入已在線上託管的資料。
+- **指定 MIME 類型：**請務必為檔案資料提供正確的 MIME 類型，確保系統能正確處理。
+- **處理錯誤：**在程式碼中導入錯誤處理機制，管理網路連線失敗、檔案存取問題或 API 錯誤等潛在問題。
+- **管理 GCS 權限：**使用 GCS 註冊時，請只授予 Gemini API 服務代理特定 bucket 的必要 `Storage Object Viewer` 角色。
+- **經簽署的網址安全性：**請確保經簽署的網址的到期時間適當，且權限有限。
 
-## Các điểm hạn chế
+## 限制
 
-- Giới hạn kích thước tệp thay đổi tuỳ theo phương thức (xem [bảng so sánh](#method-comparison)) và loại tệp.
-- Dữ liệu nội tuyến làm tăng kích thước tải trọng yêu cầu.
-- Tệp tải lên qua File API chỉ là tạm thời và sẽ hết hạn sau 48 giờ.
-- Việc tìm nạp URL bên ngoài bị giới hạn ở 100 MB cho mỗi tải trọng và hỗ trợ các loại nội dung cụ thể.
-- Để đăng ký Google Cloud Storage, bạn cần thiết lập IAM và quản lý mã thông báo OAuth đúng cách.
+- 檔案大小上限會因方法 (請參閱[比較表](#method-comparison)) 和檔案類型而異。
+- 內嵌資料會增加要求酬載大小。
+- File API 上傳的檔案是暫時性的，48 小時後就會失效。
+- 每個酬載的外部網址擷取上限為 100 MB，且支援特定內容類型。
+- 如要註冊 Google Cloud Storage，必須正確設定 IAM 和 OAuth 權杖管理。
 
-## Bước tiếp theo
+## 後續步驟
 
-- Hãy thử viết câu lệnh đa phương thức của riêng bạn bằng [Google AI Studio](http://aistudio.google.com/?hl=vi).
-- Để biết thông tin về cách đưa tệp vào câu lệnh, hãy xem các hướng dẫn về [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=vi), [Âm thanh](https://ai.google.dev/gemini-api/docs/audio?hl=vi) và [Xử lý tài liệu](https://ai.google.dev/gemini-api/docs/document-processing?hl=vi).
-- Để biết thêm hướng dẫn về cách thiết kế câu lệnh, chẳng hạn như điều chỉnh các thông số lấy mẫu, hãy xem hướng dẫn [Chiến lược tạo câu lệnh](https://ai.google.dev/gemini-api/docs/prompt-strategies?hl=vi).
+- 使用 [Google AI Studio](http://aistudio.google.com/?hl=zh-tw) 撰寫自己的多模態提示。
+- 如要瞭解如何在提示中加入檔案，請參閱「[Vision](https://ai.google.dev/gemini-api/docs/vision?hl=zh-tw)」、「[Audio](https://ai.google.dev/gemini-api/docs/audio?hl=zh-tw)」和「[Document processing](https://ai.google.dev/gemini-api/docs/document-processing?hl=zh-tw)」指南。
+- 如需提示設計的更多指引 (例如微調取樣參數)，請參閱「[提示策略](https://ai.google.dev/gemini-api/docs/prompt-strategies?hl=zh-tw)」指南。
 
-Gửi ý kiến phản hồi
+提供意見
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Cập nhật lần gần đây nhất: 2026-07-30 UTC.
+上次更新時間：2026-07-30 (世界標準時間)。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+想進一步說明嗎？
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-30 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-30 (世界標準時間)。"],[],[]]

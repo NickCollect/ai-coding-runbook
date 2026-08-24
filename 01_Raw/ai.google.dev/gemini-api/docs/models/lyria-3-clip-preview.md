@@ -1,49 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=id
-fetched_at: 2026-08-17T02:19:01.043312+00:00
-title: "Pratinjau Klip Lyria 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=ko
+fetched_at: 2026-08-24T02:35:51.666648+00:00
+title: "Lyria 3 \ud074\ub9bd \ubbf8\ub9ac\ubcf4\uae30 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Kirim masukan
+의견 보내기
 
-# Pratinjau Klip Lyria 3
+# Lyria 3 클립 미리보기
 
-Pratinjau Klip Lyria 3 adalah model Google yang dioptimalkan untuk membuat klip, loop, dan pratinjau musik pendek. Fitur ini menghasilkan audio stereo 48 kHz berkualitas tinggi berdurasi 30 detik dari perintah teks atau input gambar.
+Lyria 3 클립 미리보기는 짧은 음악 클립, 루프, 미리보기를 생성하는 데 최적화된 Google 모델입니다. 텍스트 프롬프트 또는 이미지 입력에서 30초 길이의 고품질 48kHz 스테레오 오디오를 생성합니다.
 
-[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=lyria-3-clip-preview&hl=id)
+[Google AI Studio에서 사용해 보기](https://aistudio.google.com/prompts/new_chat?model=lyria-3-clip-preview&hl=ko)
 
-## Dokumentasi
+## 문서
 
-Buka panduan [Pembuatan Musik](https://ai.google.dev/gemini-api/docs/music-generation?hl=id) untuk mengetahui cakupan lengkap fitur dan kemampuannya.
+기능 및 기능에 관한 전체 내용은 [음악 생성](https://ai.google.dev/gemini-api/docs/music-generation?hl=ko) 가이드를 참고하세요.
 
 ## lyria-3-clip-preview
 
-| Properti | Deskripsi |
+| 속성 | 설명 |
 | --- | --- |
-| Kode model id\_card | `lyria-3-clip-preview` |
-| saveJenis data yang didukung | **Input**  Teks dan Gambar  **Output**  Audio (MP3), Teks (Lirik) |
-| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Batas token input**  131.072 |
-| handymanKemampuan | **[Pembuatan audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=id)**  Didukung  **[Caching](https://ai.google.dev/gemini-api/docs/caching?hl=id)**  Tidak didukung  **[Eksekusi kode](https://ai.google.dev/gemini-api/docs/code-execution?hl=id)**  Tidak didukung  **[Penelusuran file](https://ai.google.dev/gemini-api/docs/file-search?hl=id)**  Tidak didukung  **[Pemanggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id)**  Tidak didukung  **[Melakukan grounding dengan Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=id)**  Tidak didukung  **[Pembuatan gambar](https://ai.google.dev/gemini-api/docs/image-generation?hl=id)**  Tidak didukung  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=id)**  Tidak didukung  **[Grounding penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id)**  Tidak didukung  **[Output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id)**  Tidak didukung  **[Berpikir](https://ai.google.dev/gemini-api/docs/thinking?hl=id)**  Tidak didukung  **[Konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id)**  Tidak didukung |
-| speedOpsi pemakaian | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=id)**  Tidak didukung  **[Inferensi fleksibel](https://ai.google.dev/gemini-api/docs/flex-inference?hl=id)**  Tidak didukung  **[Inferensi prioritas](https://ai.google.dev/gemini-api/docs/priority-inference?hl=id)**  Tidak didukung |
-| Versi 123 | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - Pratinjau: `lyria-3-clip-preview` - Pratinjau: `lyria-3-pro-preview` |
-| calendar\_monthPembaruan terbaru | Maret 2026 |
+| id\_card모델 코드 | `lyria-3-clip-preview` |
+| save지원되는 데이터 유형 | **입력**  텍스트 및 이미지  **출력**  오디오 (MP3), 텍스트 (가사) |
+| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 토큰 한도**  131,072 |
+| handyman기능 | **[오디오 생성](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ko)**  지원됨  **[캐싱](https://ai.google.dev/gemini-api/docs/caching?hl=ko)**  지원되지 않음  **[코드 실행](https://ai.google.dev/gemini-api/docs/code-execution?hl=ko)**  지원되지 않음  **[파일 검색](https://ai.google.dev/gemini-api/docs/file-search?hl=ko)**  지원되지 않음  **[함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)**  지원되지 않음  **[Google 지도 기반 그라운딩](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ko)**  지원되지 않음  **[이미지 생성](https://ai.google.dev/gemini-api/docs/image-generation?hl=ko)**  지원되지 않음  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ko)**  지원되지 않음  **[검색 그라운딩](https://ai.google.dev/gemini-api/docs/google-search?hl=ko)**  지원되지 않음  **[구조화된 출력](https://ai.google.dev/gemini-api/docs/structured-output?hl=ko)**  지원되지 않음  **[사고](https://ai.google.dev/gemini-api/docs/thinking?hl=ko)**  지원되지 않음  **[URL 컨텍스트](https://ai.google.dev/gemini-api/docs/url-context?hl=ko)**  지원되지 않음 |
+| speed소비 옵션 | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ko)**  지원되지 않음  **[유연한 추론](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ko)**  지원되지 않음  **[우선순위 추론](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ko)**  지원되지 않음 |
+| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - 미리보기: `lyria-3-clip-preview` - 미리보기: `lyria-3-pro-preview` |
+| calendar\_month최신 업데이트 | 2026년 3월 |
 
-Kirim masukan
+의견 보내기
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Terakhir diperbarui pada 2026-06-23 UTC.
+최종 업데이트: 2026-08-19(UTC)
 
-Ada masukan untuk kami?
+의견을 전달하고 싶나요?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-23 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-08-19(UTC)"],[],[]]

@@ -1,163 +1,163 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/deprecations?hl=pl
-fetched_at: 2026-08-17T02:26:23.629927+00:00
-title: "Wycofanie Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/deprecations?hl=hi
+fetched_at: 2026-08-24T02:21:12.523535+00:00
+title: "Gemini \u0915\u0940 \u0938\u0941\u0935\u093f\u0927\u093e\u090f\u0901 \u092c\u0902\u0926 \u0939\u094b\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Prześlij opinię
+सुझाव भेजें
 
-# Wycofanie Gemini
+# Gemini की सुविधाएँ बंद होना
 
-Na tej stronie znajdziesz znane harmonogramy wycofywania [stabilnych (ogólnodostępnych)](https://ai.google.dev/gemini-api/docs/models?hl=pl#stable) i [wersji podglądowych](https://ai.google.dev/gemini-api/docs/models?hl=pl#preview) modeli w interfejsie Gemini API. „**Wycofanie**” to ogłoszenie, że nie obsługujemy już danego modelu i w niedalekiej przyszłości zostanie on „**wyłączony**”. Gdy model zostanie „**wyłączony**”, jest całkowicie wyłączony, a punkt końcowy nie jest już dostępny.
+इस पेज पर, Gemini API में [भरोसेमंद (GA)](https://ai.google.dev/gemini-api/docs/models?hl=hi#stable) और [प्रीव्यू](https://ai.google.dev/gemini-api/docs/models?hl=hi#preview) मॉडल के बंद होने की तय तारीखों के बारे में बताया गया है. "**बंद होने वाली सुविधा**" का मतलब है कि हम अब किसी मॉडल के लिए सहायता नहीं देंगे. साथ ही, आने वाले समय में उसे "**बंद कर दिया जाएगा**". किसी मॉडल को "**बंद**" करने के बाद, वह पूरी तरह से बंद हो जाता है. साथ ही, उसका एंडपॉइंट भी उपलब्ध नहीं रहता.
 
-Ogłoszenia o wycofaniu są publikowane na stronie [Informacje o wersji](https://ai.google.dev/gemini-api/docs/changelog?hl=pl), a ogłoszone najwcześniejsze daty wyłączenia są śledzone na tej stronie.
-Modele, które zostały już wyłączone, są oznaczone szarym tłem.
+बंद होने की सूचनाएं, [प्रॉडक्ट की जानकारी](https://ai.google.dev/gemini-api/docs/changelog?hl=hi) पेज पर दी जाती हैं. साथ ही, बंद होने की तारीखों को इस पेज पर ट्रैक किया जाता है.
+पहले से बंद हो चुके मॉडल, स्लेटी बैकग्राउंड से दिखाए जाते हैं.
 
-## Modele Gemini 3
+## Gemini 3 के मॉडल
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **मॉडल** | **रिलीज़ की तारीख** | **बंद होने की तारीख** | **बदले जाने का सुझाव** |
 | --- | --- | --- | --- |
-| `gemini-3.6-flash` | 21 lipca 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-3.5-flash-lite` | 21 lipca 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-3.5-flash` | 19 maja 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-3.1-flash-image` | 28 maja 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-3-pro-image` | 28 maja 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-3.1-flash-lite` | 7 maja 2026 r. | 7 maja 2027 r. | `gemini-3.5-flash-lite` |
-| Podgląd modeli | | | |
-| `gemini-3.1-flash-image-preview` | 26 lutego 2026 r. | 25 czerwca 2026 r. | `gemini-3.1-flash-image` |
-| `gemini-3.1-pro-preview` | 19 lutego 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-3-pro-image-preview` | 20 listopada 2025 r. | 25 czerwca 2026 r. | `gemini-3-pro-image` |
-| `gemini-3-flash-preview` | 17 grudnia 2025 r. | Nie ogłoszono daty wyłączenia | `gemini-3.6-flash` |
-| `gemini-3-pro-preview` | 18 listopada 2025 r. | 9 marca 2026 r. | `gemini-3.1-pro-preview` |
-| `gemini-3.1-flash-lite-preview` | 3 marca 2026 r. | 25 maja 2026 r. | `gemini-3.1-flash-lite` |
+| `gemini-3.6-flash` | 21 जुलाई, 2026 | बंद होने की तारीख का एलान नहीं किया गया है |  |
+| `gemini-3.5-flash-lite` | 21 जुलाई, 2026 | बंद होने की तारीख का एलान नहीं किया गया है |  |
+| `gemini-3.5-flash` | 19 मई, 2026 | बंद होने की तारीख का एलान नहीं किया गया है |  |
+| `gemini-3.1-flash-image` | 28 मई, 2026 | बंद होने की तारीख का एलान नहीं किया गया है |  |
+| `gemini-3-pro-image` | 28 मई, 2026 | बंद होने की तारीख का एलान नहीं किया गया है |  |
+| `gemini-3.1-flash-lite` | 7 मई, 2026 | 7 मई, 2027 | `gemini-3.5-flash-lite` |
+| सिर्फ़ झलक के लिए उपलब्ध मॉडल | | | |
+| `gemini-3.1-flash-image-preview` | 26 फ़रवरी, 2026 | 25 जून, 2026 | `gemini-3.1-flash-image` |
+| `gemini-3.1-pro-preview` | 19 फ़रवरी, 2026 | बंद होने की तारीख का एलान नहीं किया गया है |  |
+| `gemini-3-pro-image-preview` | 20 नवंबर, 2025 | 25 जून, 2026 | `gemini-3-pro-image` |
+| `gemini-3-flash-preview` | 17 दिसंबर, 2025 | बंद होने की तारीख का एलान नहीं किया गया है | `gemini-3.6-flash` |
+| `gemini-3-pro-preview` | 18 नवंबर, 2025 | 9 मार्च, 2026 | `gemini-3.1-pro-preview` |
+| `gemini-3.1-flash-lite-preview` | 3 मार्च, 2026 | 25 मई, 2026 | `gemini-3.1-flash-lite` |
 
-## modele Gemini 2.5 Pro,
+## Gemini 2.5 Pro मॉडल
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **मॉडल** | **रिलीज़ की तारीख** | **बंद होने की तारीख** | **बदले जाने का सुझाव** |
 | --- | --- | --- | --- |
-| `gemini-2.5-pro` | 17 czerwca 2025 r. | Nie ogłoszono daty wyłączenia |  |
-| Podgląd modeli | | | |
-| `gemini-2.5-pro-preview-03-25` | 3 marca 2025 r. | 2 grudnia 2025 r. | `gemini-3.1-pro-preview` |
-| `gemini-2.5-pro-preview-05-06` | 6 maja 2025 r. | 2 grudnia 2025 r. | `gemini-3.1-pro-preview` |
-| `gemini-2.5-pro-preview-06-05` | 5 czerwca 2025 r. | 2 grudnia 2025 r. | `gemini-3.1-pro-preview` |
+| `gemini-2.5-pro` | 17 जून, 2025 | बंद होने की तारीख का एलान नहीं किया गया है |  |
+| सिर्फ़ झलक के लिए उपलब्ध मॉडल | | | |
+| `gemini-2.5-pro-preview-03-25` | 3 मार्च, 2025 | 2 दिसंबर, 2025 | `gemini-3.1-pro-preview` |
+| `gemini-2.5-pro-preview-05-06` | 6 मई, 2025 | 2 दिसंबर, 2025 | `gemini-3.1-pro-preview` |
+| `gemini-2.5-pro-preview-06-05` | 5 जून, 2025 | 2 दिसंबर, 2025 | `gemini-3.1-pro-preview` |
 
-## Modele Gemini 2.5 Flash
+## Gemini 2.5 Flash मॉडल
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **मॉडल** | **रिलीज़ की तारीख** | **बंद होने की तारीख** | **बदले जाने का सुझाव** |
 | --- | --- | --- | --- |
-| `gemini-2.5-flash` | 17 czerwca 2025 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-2.5-flash-image` | 2 października 2025 r. | 2 października 2026 r. | `gemini-3.1-flash-image-preview` |
-| `gemini-2.5-flash-lite` | 22 lipca 2025 r. | Nie ogłoszono daty wyłączenia |  |
-| Podgląd modeli | | | |
-| `gemini-2.5-flash-lite-preview-09-2025` | 25 września 2025 r. | 31 marca 2026 r. | `gemini-3.1-flash-lite` |
-| `gemini-2.5-flash-preview-05-20` | 20 maja 2025 r. | 18 listopada 2025 r. | `gemini-3.6-flash` |
-| `gemini-2.5-flash-image-preview` | 7 maja 2025 r. | 15 stycznia 2026 r. | `gemini-2.5-flash-image` |
-| `gemini-2.5-flash-preview-09-25` | 25 września 2025 r. | 17 lutego 2026 r. | `gemini-3.6-flash` |
+| `gemini-2.5-flash` | 17 जून, 2025 | बंद होने की तारीख का एलान नहीं किया गया है |  |
+| `gemini-2.5-flash-image` | 2 अक्टूबर, 2025 | 2 अक्टूबर, 2026 | `gemini-3.1-flash-image-preview` |
+| `gemini-2.5-flash-lite` | 22 जुलाई, 2025 | बंद होने की तारीख का एलान नहीं किया गया है |  |
+| सिर्फ़ झलक के लिए उपलब्ध मॉडल | | | |
+| `gemini-2.5-flash-lite-preview-09-2025` | 25 सितंबर, 2025 | 31 मार्च, 2026 | `gemini-3.1-flash-lite` |
+| `gemini-2.5-flash-preview-05-20` | 20 मई, 2025 | 18 नवंबर, 2025 | `gemini-3.6-flash` |
+| `gemini-2.5-flash-image-preview` | 7 मई, 2025 | 15 जनवरी, 2026 | `gemini-2.5-flash-image` |
+| `gemini-2.5-flash-preview-09-25` | 25 सितंबर, 2025 | 17 फ़रवरी, 2026 | `gemini-3.6-flash` |
 
-## Modele Gemini 2.0
+## Gemini 2.0 के मॉडल
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **मॉडल** | **रिलीज़ की तारीख** | **बंद होने की तारीख** | **बदले जाने का सुझाव** |
 | --- | --- | --- | --- |
-| `gemini-2.0-flash` | 5 lutego 2025 r. | 1 czerwca 2026 r. | `gemini-3.6-flash` |
-| `gemini-2.0-flash-001` | 5 lutego 2025 r. | 1 czerwca 2026 r. | `gemini-3.6-flash` |
-| `gemini-2.0-flash-lite` | 25 lutego 2025 r. | 1 czerwca 2026 r. | `gemini-3.1-flash-lite` |
-| `gemini-2.0-flash-lite-001` | 25 lutego 2025 r. | 1 czerwca 2026 r. | `gemini-3.1-flash-lite` |
-| Podgląd modeli | | | |
-| `gemini-2.0-flash-preview-image-generation` | 7 maja 2025 r. | 14 listopada 2025 r. | `gemini-2.5-flash-image` |
-| `gemini-2.0-flash-lite-preview` | 5 lutego 2025 r. | 9 grudnia 2025 r. | `gemini-2.5-flash-lite` |
-| `gemini-2.0-flash-lite-preview-02-05` | 5 lutego 2025 r. | 9 grudnia 2025 r. | `gemini-2.5-flash-lite` |
+| `gemini-2.0-flash` | 5 फ़रवरी, 2025 | 1 जून, 2026 | `gemini-3.6-flash` |
+| `gemini-2.0-flash-001` | 5 फ़रवरी, 2025 | 1 जून, 2026 | `gemini-3.6-flash` |
+| `gemini-2.0-flash-lite` | 25 फ़रवरी, 2025 | 1 जून, 2026 | `gemini-3.1-flash-lite` |
+| `gemini-2.0-flash-lite-001` | 25 फ़रवरी, 2025 | 1 जून, 2026 | `gemini-3.1-flash-lite` |
+| सिर्फ़ झलक के लिए उपलब्ध मॉडल | | | |
+| `gemini-2.0-flash-preview-image-generation` | 7 मई, 2025 | 14 नवंबर, 2025 | `gemini-2.5-flash-image` |
+| `gemini-2.0-flash-lite-preview` | 5 फ़रवरी, 2025 | 9 दिसंबर, 2025 | `gemini-2.5-flash-lite` |
+| `gemini-2.0-flash-lite-preview-02-05` | 5 फ़रवरी, 2025 | 9 दिसंबर, 2025 | `gemini-2.5-flash-lite` |
 
-## Modele interfejsu Live API
+## Live API के मॉडल
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **मॉडल** | **रिलीज़ की तारीख** | **बंद होने की तारीख** | **बदले जाने का सुझाव** |
 | --- | --- | --- | --- |
-| `gemini-2.0-flash-live-001` | 9 kwietnia 2025 r. | 9 grudnia 2025 r. | `gemini-3.1-flash-live-preview` |
-| Podgląd modeli | | | |
-| `gemini-3.1-flash-live-preview` | 11 marca 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-2.5-flash-native-audio-preview-12-2025` | 12 grudnia 2025 r. | Nie ogłoszono daty wyłączenia | `gemini-3.1-flash-live-preview` |
-| `gemini-live-2.5-flash-preview` | 17 czerwca 2025 r. | 9 grudnia 2025 r. | `gemini-3.1-flash-live-preview` |
+| `gemini-2.0-flash-live-001` | 9 अप्रैल, 2025 | 9 दिसंबर, 2025 | `gemini-3.1-flash-live-preview` |
+| सिर्फ़ झलक के लिए उपलब्ध मॉडल | | | |
+| `gemini-3.1-flash-live-preview` | 11 मार्च, 2026 | बंद होने की तारीख का एलान नहीं किया गया है |  |
+| `gemini-2.5-flash-native-audio-preview-12-2025` | 12 दिसंबर, 2025 | बंद होने की तारीख का एलान नहीं किया गया है | `gemini-3.1-flash-live-preview` |
+| `gemini-live-2.5-flash-preview` | 17 जून, 2025 | 9 दिसंबर, 2025 | `gemini-3.1-flash-live-preview` |
 
-## Modele audio
+## ऑडियो मॉडल
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **मॉडल** | **रिलीज़ की तारीख** | **बंद होने की तारीख** | **बदले जाने का सुझाव** |
 | --- | --- | --- | --- |
-| Podgląd modeli | | | |
-| `gemini-3.1-flash-tts-preview` | 13 kwietnia 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-2.5-flash-preview-tts` | 20 maja 2025 r. | Nie ogłoszono daty wyłączenia | `gemini-3.1-flash-tts-preview` |
-| `gemini-2.5-pro-preview-tts` | 20 maja 2025 r. | Nie ogłoszono daty wyłączenia | `gemini-3.1-flash-tts-preview` |
+| सिर्फ़ झलक के लिए उपलब्ध मॉडल | | | |
+| `gemini-3.1-flash-tts-preview` | 13 अप्रैल, 2026 | बंद होने की तारीख का एलान नहीं किया गया है |  |
+| `gemini-2.5-flash-preview-tts` | 20 मई, 2025 | बंद होने की तारीख का एलान नहीं किया गया है | `gemini-3.1-flash-tts-preview` |
+| `gemini-2.5-pro-preview-tts` | 20 मई, 2025 | बंद होने की तारीख का एलान नहीं किया गया है | `gemini-3.1-flash-tts-preview` |
 
-## Modele wektorów dystrybucyjnych
+## मॉडल एम्बेड करना
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **मॉडल** | **रिलीज़ की तारीख** | **बंद होने की तारीख** | **बदले जाने का सुझाव** |
 | --- | --- | --- | --- |
-| `gemini-embedding-2` | 22 kwietnia 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-embedding-001` | 14 lipca 2025 r. | 14 maja 2028 r. | `gemini-embedding-2` |
-| `text-embedding-004` | 9 kwietnia 2024 r. | 14 stycznia 2026 r. | `gemini-embedding-2` |
-| Podgląd modeli | | | |
-| `embedding-2-preview` | 10 marca 2026 r. | 10 sierpnia 2026 r. | `gemini-embedding-2` |
-| `embedding-001` | 9 kwietnia 2024 r. | 30 października 2025 r. | `gemini-embedding-2` |
-| `embedding-gecko-001` |  | 30 października 2025 r. | `gemini-embedding-2` |
-| `gemini-embedding-exp` |  | 30 października 2025 r. | `gemini-embedding-2` |
-| `gemini-embedding-exp-03-07` |  | 30 października 2025 r. | `gemini-embedding-2` |
+| `gemini-embedding-2` | 22 अप्रैल, 2026 | बंद होने की तारीख का एलान नहीं किया गया है |  |
+| `gemini-embedding-001` | 14 जुलाई, 2025 | 14 मई, 2028 | `gemini-embedding-2` |
+| `text-embedding-004` | 9 अप्रैल, 2024 | 14 जनवरी, 2026 | `gemini-embedding-2` |
+| सिर्फ़ झलक के लिए उपलब्ध मॉडल | | | |
+| `embedding-2-preview` | 10 मार्च, 2026 | 10 अगस्त, 2026 | `gemini-embedding-2` |
+| `embedding-001` | 9 अप्रैल, 2024 | 30 अक्टूबर, 2025 | `gemini-embedding-2` |
+| `embedding-gecko-001` |  | 30 अक्टूबर, 2025 | `gemini-embedding-2` |
+| `gemini-embedding-exp` |  | 30 अक्टूबर, 2025 | `gemini-embedding-2` |
+| `gemini-embedding-exp-03-07` |  | 30 अक्टूबर, 2025 | `gemini-embedding-2` |
 
-## Modele Imagen
+## Imagen मॉडल
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **मॉडल** | **रिलीज़ की तारीख** | **बंद होने की तारीख** | **बदले जाने का सुझाव** |
 | --- | --- | --- | --- |
-| `imagen-4.0-generate-001` | 24 czerwca 2025 r. | 17 sierpnia 2026 r. | `gemini-3.1-flash-image` |
-| `imagen-4.0-ultra-generate-001` | 24 czerwca 2025 r. | 17 sierpnia 2026 r. | `gemini-3.1-flash-image` |
-| `imagen-4.0-fast-generate-001` | 24 czerwca 2025 r. | 17 sierpnia 2026 r. | `gemini-3.1-flash-image` |
-| `imagen-3.0-generate-002` | 6 lutego 2025 r. | 10 listopada 2025 r. | `imagen-4.0-generate-001` |
-| Podgląd modeli | | | |
-| `imagen-4.0-generate-preview-06-06` | 24 czerwca 2025 r. | 17 lutego 2026 r. | `imagen-4.0-generate-001` |
-| `imagen-4.0-ultra-generate-preview-06-06` | 24 czerwca 2025 r. | 17 lutego 2026 r. | `imagen-4.0-ultra-generate-001` |
+| `imagen-4.0-generate-001` | 24 जून, 2025 | 17 अगस्त, 2026 | `gemini-3.1-flash-image` |
+| `imagen-4.0-ultra-generate-001` | 24 जून, 2025 | 17 अगस्त, 2026 | `gemini-3.1-flash-image` |
+| `imagen-4.0-fast-generate-001` | 24 जून, 2025 | 17 अगस्त, 2026 | `gemini-3.1-flash-image` |
+| `imagen-3.0-generate-002` | 6 फ़रवरी, 2025 | 10 नवंबर, 2025 | `imagen-4.0-generate-001` |
+| सिर्फ़ झलक के लिए उपलब्ध मॉडल | | | |
+| `imagen-4.0-generate-preview-06-06` | 24 जून, 2025 | 17 फ़रवरी, 2026 | `imagen-4.0-generate-001` |
+| `imagen-4.0-ultra-generate-preview-06-06` | 24 जून, 2025 | 17 फ़रवरी, 2026 | `imagen-4.0-ultra-generate-001` |
 
-## Modele Veo
+## Veo के मॉडल
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **मॉडल** | **रिलीज़ की तारीख** | **बंद होने की तारीख** | **बदले जाने का सुझाव** |
 | --- | --- | --- | --- |
-| `veo-3.0-generate-001` | 9 września 2025 r. | 30 czerwca 2026 r. | `veo-3.1-generate-preview` lub modele w wersji ogólnodostępnej na [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=pl). |
-| `veo-3.0-fast-generate-001` | 9 września 2025 r. | 30 czerwca 2026 r. | `veo-3.1-fast-generate-preview` lub modele w wersji ogólnodostępnej na [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=pl). |
-| `veo-2.0-generate-001` | 9 kwietnia 2025 r. | 30 czerwca 2026 r. | `veo-3.1-generate-preview` lub modele w wersji ogólnodostępnej na [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=pl). |
-| Podgląd modeli | | | |
-| `veo-3.1-lite-generate-preview` | 31 marca 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `veo-3.1-generate-preview` | 15 października 2025 r. | Nie ogłoszono daty wyłączenia |  |
-| `veo-3.1-fast-generate-preview` | 15 października 2025 r. | Nie ogłoszono daty wyłączenia |  |
-| `veo-3.0-generate-preview` | 31 lipca 2025 r. | 12 listopada 2025 r. | `veo-3.1-generate-preview` |
-| `veo-3.0-fast-generate-preview` | 31 lipca 2025 r. | 12 listopada 2025 r. | `veo-3.1-fast-generate-preview` |
+| `veo-3.0-generate-001` | 9 सितंबर, 2025 | 30 जून, 2026 | `veo-3.1-generate-preview` या [Gemini Enterprise Agent प्लैटफ़ॉर्म](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=hi) पर उपलब्ध GA मॉडल |
+| `veo-3.0-fast-generate-001` | 9 सितंबर, 2025 | 30 जून, 2026 | `veo-3.1-fast-generate-preview` या [Gemini Enterprise Agent प्लैटफ़ॉर्म](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=hi) पर उपलब्ध GA मॉडल |
+| `veo-2.0-generate-001` | 9 अप्रैल, 2025 | 30 जून, 2026 | `veo-3.1-generate-preview` या [Gemini Enterprise Agent प्लैटफ़ॉर्म](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=hi) पर उपलब्ध GA मॉडल |
+| सिर्फ़ झलक के लिए उपलब्ध मॉडल | | | |
+| `veo-3.1-lite-generate-preview` | 31 मार्च, 2026 | बंद होने की तारीख का एलान नहीं किया गया है |  |
+| `veo-3.1-generate-preview` | 15 अक्टूबर, 2025 | बंद होने की तारीख का एलान नहीं किया गया है |  |
+| `veo-3.1-fast-generate-preview` | 15 अक्टूबर, 2025 | बंद होने की तारीख का एलान नहीं किया गया है |  |
+| `veo-3.0-generate-preview` | 31 जुलाई, 2025 | 12 नवंबर, 2025 | `veo-3.1-generate-preview` |
+| `veo-3.0-fast-generate-preview` | 31 जुलाई, 2025 | 12 नवंबर, 2025 | `veo-3.1-fast-generate-preview` |
 
-## Modele Lyria
+## Lyria के मॉडल
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **मॉडल** | **रिलीज़ की तारीख** | **बंद होने की तारीख** | **बदले जाने का सुझाव** |
 | --- | --- | --- | --- |
-| `lyria-3-clip-preview` | 25 marca 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `lyria-3-pro-preview` | 25 marca 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `lyria-realtime-exp` | 20 maja 2025 r. | Nie ogłoszono daty wyłączenia |  |
+| `lyria-3-clip-preview` | 25 मार्च, 2026 | बंद होने की तारीख का एलान नहीं किया गया है |  |
+| `lyria-3-pro-preview` | 25 मार्च, 2026 | बंद होने की तारीख का एलान नहीं किया गया है |  |
+| `lyria-realtime-exp` | 20 मई, 2025 | बंद होने की तारीख का एलान नहीं किया गया है |  |
 
-## Modele robotów
+## रोबोटिक्स मॉडल
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **मॉडल** | **रिलीज़ की तारीख** | **बंद होने की तारीख** | **बदले जाने का सुझाव** |
 | --- | --- | --- | --- |
-| Podgląd modeli | | | |
-| `gemini-robotics-er-1.6-preview` | 14 kwietnia 2026 r. | 31 sierpnia 2026 r. | gemini-robotics-er-2-preview |
-| `gemini-robotics-er-1.5-preview` | 25 września 2025 r. | 30 kwietnia 2026 r. | `gemini-robotics-er-1.6-preview` |
+| सिर्फ़ झलक के लिए उपलब्ध मॉडल | | | |
+| `gemini-robotics-er-1.6-preview` | 14 अप्रैल, 2026 | 31 अगस्त, 2026 | gemini-robotics-er-2-preview |
+| `gemini-robotics-er-1.5-preview` | 25 सितंबर, 2025 | 30 अप्रैल, 2026 | `gemini-robotics-er-1.6-preview` |
 
-Prześlij opinię
+सुझाव भेजें
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Ostatnia aktualizacja: 2026-08-03 UTC.
+आखिरी बार 2026-08-03 (UTC) को अपडेट किया गया.
 
-Chcesz przekazać coś jeszcze?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-08-03 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-08-03 (UTC) को अपडेट किया गया."],[],[]]

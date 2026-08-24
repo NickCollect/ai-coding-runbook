@@ -1,33 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/priority-inference?hl=he
-fetched_at: 2026-08-17T02:16:57.436657+00:00
-title: "\u05d4\u05e1\u05e7\u05ea \u05e2\u05d3\u05d9\u05e4\u05d5\u05ea \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/priority-inference?hl=pt-BR
+fetched_at: 2026-08-24T02:33:18.506229+00:00
+title: "Infer\u00eancia de prioridade \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-שליחת משוב
+Envie comentários
 
-# הסקת עדיפות
+# Inferência de prioridade
 
-תיאור: איך מבצעים אופטימיזציה של זמן האחזור באמצעות רמת ההסקה Priority
+Descrição: saiba como otimizar a latência com o nível de inferência de prioridade
 
-‫Gemini Priority API הוא רמת פרימיום של הסקת מסקנות, שמיועדת לעומסי עבודה קריטיים לעסק שדורשים זמן אחזור נמוך ואמינות גבוהה ביותר, במחיר פרימיום. תעבורת נתונים ברמת עדיפות גבוהה מקבלת עדיפות על פני תעבורת נתונים של API רגיל ושל רמת Flex.
+A API Gemini Priority é um nível de inferência premium projetado para cargas de trabalho essenciais aos negócios que exigem menor latência e maior confiabilidade a um preço premium. O tráfego do nível de prioridade tem prioridade sobre o tráfego da API padrão e do nível Flex.
 
-הסקת עדיפות זמינה למשתמשי [Tier 2 ו-Tier 3](https://ai.google.dev/gemini-api/docs/billing?hl=he#about-billing) בנקודות הקצה של GenerateContent API ו-Interactions API.
+A inferência de prioridade está disponível para usuários [dos níveis 2 e 3](https://ai.google.dev/gemini-api/docs/billing?hl=pt-br#about-billing) nos endpoints da API GenerateContent
+e da API Interactions.
 
-## איך משתמשים בעדיפות
+## Como usar a prioridade
 
-כדי להשתמש ברמת העדיפות, מגדירים את השדה `service_tier` בגוף הבקשה ל-`priority`. אם השדה לא מצוין, רמת ברירת המחדל היא רגילה.
+Para usar o nível de prioridade, defina o campo `service_tier` no corpo da solicitação como `priority`. O nível padrão será usado se o campo for omitido.
 
 ### Python
 
@@ -138,82 +139,92 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
 }'
 ```
 
-## איך פועל הסקת עדיפות
+## Como funciona a inferência de prioridade
 
-ההסקה לפי עדיפות מעבירה בקשות לתורים של מחשוב ברמת קריטיות גבוהה, וכך מספקת ביצועים מהירים וצפויים לאפליקציות שפונות למשתמשים. המנגנון העיקרי שלו הוא שדרוג לאחור בצד השרת לעיבוד רגיל של תנועה שחורגת מהמגבלות הדינמיות, כדי להבטיח את יציבות האפליקציה במקום לגרום לכשל בבקשה.
+A inferência de prioridade encaminha solicitações para filas de computação de alta criticidade, oferecendo desempenho rápido e previsível para aplicativos voltados ao usuário. O mecanismo principal é um downgrade suave do lado do servidor para o processamento padrão de tráfego que excede os limites dinâmicos, garantindo a estabilidade do aplicativo em vez de falhar na solicitação.
 
-| תכונה | עדיפות | רגיל | שרירים של סלע | Batch |
+| Recurso | Prioridade | Padrão | Flex | Lote |
 | --- | --- | --- | --- | --- |
-| **תמחור** | ‫75% עד 100% יותר מבתוכנית Standard | מחיר מלא | הנחה של 50% | הנחה של 50% |
-| **זמן אחזור** | שניות | שניות לדקות | דקות (יעד של 15-1 דקות) | עד 24 שעות |
-| **אמינות** | גבוהה (לא נושרת) | גבוהה / בינונית-גבוהה | הכי טוב שאפשר (ניתן להשמטה) | גבוהה (לתפוקה) |
-| **ממשק** | סינכרוני | סינכרוני | סינכרוני | אסינכרוני |
+| **Preços** | 75 a 100% mais caro que o padrão | Preço total | 50% de desconto | 50% de desconto |
+| **Latência** | Segundos | Segundos a minutos | Minutos (meta de 1 a 15 minutos) | Até 24 horas |
+| **Confiabilidade** | Alta (não descartável) | Alta / média-alta | Melhor esforço (descartável) | Alta (para capacidade de processamento) |
+| **Interface** | Síncrona | Síncrona | Síncrona | Assíncrona |
 
-### יתרונות עיקריים
+### Principais benefícios
 
-- **זמן אחזור נמוך**: מיועד לזמני תגובה של שנייה אחת עבור כלי AI אינטראקטיביים שפונים למשתמשים.
-- **מהימנות גבוהה**: התנועה מקבלת את רמת הקריטיות הגבוהה ביותר, והיא לא ניתנת להסרה.
-- **הפחתה הדרגתית של רמת השירות**: אם יש עליות פתאומיות בתנועה שחורגות מהמגבלות הדינמיות, המערכת מורידה אוטומטית את רמת השירות לרמה רגילה לצורך עיבוד, במקום שהעיבוד ייכשל. כך נמנעים שיבושים בשירות.
-- **הפעלה חלקה**: משתמש באותה שיטת `generateContent` סינכרון כמו בתוכניות הרגילה והגמישה.
+- **Baixa latência**: projetado para tempos de resposta de segundos para ferramentas de IA interativas,
+  voltadas ao usuário.
+- **Alta confiabilidade**: o tráfego é tratado com a maior criticidade e é
+  estritamente não descartável.
+- **Degradação suave**: picos de tráfego que excedem os limites dinâmicos são
+  automaticamente rebaixados para o nível padrão para processamento em vez de falhar,
+  evitando interrupções de serviço.
+- **Baixa fricção**: usa o mesmo método síncrono `generateContent` que os
+  níveis padrão e Flex.
 
-### תרחישים לדוגמה
+### Casos de uso
 
-עיבוד בעדיפות גבוהה הוא פתרון אידיאלי לתהליכי עבודה קריטיים לעסק, שבהם הביצועים והאמינות הם בעלי חשיבות עליונה.
+O processamento de prioridade é ideal para fluxos de trabalho essenciais aos negócios em que o desempenho e a confiabilidade são fundamentais.
 
-- **אפליקציות אינטראקטיביות מבוססות-AI**: צ'אטבוטים וטייסים וירטואליים לשירות לקוחות, שבהם המשתמשים משלמים מחיר פרימיום ומצפים לתשובות מהירות ועקביות.
-- **מנועי קבלת החלטות בזמן אמת**: מערכות שנדרשים בהן תוצאות מהימנות עם זמן אחזור נמוך, כמו תעדוף כרטיסים בשידור חי או זיהוי הונאות.
-- **תכונות ללקוחות פרימיום**: מפתחים שצריכים להבטיח יעדים גבוהים יותר למדידת רמת השירות (SLO) ללקוחות משלמים.
+- **Aplicativos de IA interativos**: chatbots de atendimento ao cliente e copilotos em que
+  os usuários pagam um valor premium e esperam respostas rápidas e consistentes.
+- **Mecanismos de decisão em tempo real**: sistemas que exigem resultados altamente confiáveis e de baixa latência
+  como triagem de tickets ao vivo ou detecção de fraudes.
+- **Recursos premium para clientes**: desenvolvedores que precisam garantir objetivos de nível de serviço (SLOs) mais altos para clientes pagantes.
 
-### מגבלות קצב
+### Limites de taxas
 
-לצריכה בעדיפות יש מגבלות קצב משלה, גם אם הצריכה נספרת במסגרת [מגבלות הקצב הכוללות של תנועה אינטראקטיבית](https://aistudio.google.com/rate-limit?hl=he). מגבלות ברירת המחדל על קצב העברת נתונים (rate limits) להסקת עדיפות הן **0.3x ממגבלת הקצב הרגילה לדגם או לרמת השירות**
+O consumo de prioridade tem limites de taxa próprios, mesmo que o consumo seja
+contabilizado nos [limites gerais de taxa de tráfego interativo](https://aistudio.google.com/rate-limit?hl=pt-br). Os limites de taxa padrão para inferência de prioridade são **0,3 vezes o limite de taxa padrão para modelo / nível**.
 
-### לוגיקה של שדרוג לאחור
+### Lógica de downgrade suave
 
-אם יש עומס ומתרחשת חריגה ממגבלות העדיפות, הבקשות העודפות **משודרגות אוטומטית בצורה חלקה** לעיבוד רגיל במקום להיכשל עם שגיאה 503 או 429. בקשות ששודרגו לאחור יחויבו בתעריף הרגיל, ולא בתעריף הפרימיום של Priority.
+Se os limites de prioridade forem excedidos devido ao congestionamento, as solicitações de estouro serão **rebaixadas automaticamente e de maneira suave** para o processamento padrão em vez de falhar com um erro 503 ou 429. As solicitações rebaixadas são cobradas na taxa padrão, não na taxa premium de prioridade.
 
-### באחריות הלקוח
+### Responsabilidade do cliente
 
-- **מעקב אחר תגובות**: מפתחים צריכים לעקוב אחרי `x-gemini-service-tier`
-  הכותרת בתגובת ה-API כדי לזהות אם הבקשות משודרגות לעיתים קרובות ל`standard`.
-- **ניסיונות חוזרים**: לקוחות צריכים להטמיע לוגיקה של ניסיונות חוזרים או השהיה מעריכית לפני ניסיון חוזר (exponential backoff) לשגיאות רגילות, כמו `DEADLINE_EXCEEDED`.
+- **Monitoramento de respostas**: os desenvolvedores precisam monitorar o `x-gemini-service-tier`
+  cabeçalho na resposta da API para detectar se as solicitações estão sendo rebaixadas com frequência para
+  `standard`.
+- **Nova tentativa**: os clientes precisam implementar a lógica de nova tentativa/espera exponencial para
+  erros padrão, como `DEADLINE_EXCEEDED`.
 
-## תמחור
+## Preços
 
-המחיר של הסקת מסקנות בעדיפות גבוהה גבוה ב-75% עד 100% מהמחיר של [ה-API הרגיל](https://ai.google.dev/gemini-api/docs/pricing?hl=he), והחיוב הוא לפי טוקן.
+A inferência de prioridade custa de 75 a 100% mais do que a [API padrão](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br) e é cobrada por token.
 
-## מודלים נתמכים
+## Modelos compatíveis
 
-המודלים הבאים תומכים בהסקת מסקנות בעדיפות גבוהה:
+Os modelos a seguir oferecem suporte à inferência de prioridade:
 
-| מודל | הסקת עדיפות |
+| Modelo | Inferência de prioridade |
 | --- | --- |
-| ‫[Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=he) | ✔️ |
-| ‫[Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=he) | ✔️ |
-| ‫[Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=he) | ✔️ |
-| ‫[Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=he) | ✔️ |
-| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=he) | ✔️ |
-| [תצוגה מקדימה של Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=he) | ✔️ |
-| [תצוגה מקדימה של תמונות ב-Gemini 3 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=he) | ✔️ |
-| ‫[Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=he) | ✔️ |
-| ‫[Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=he) | ✔️ |
-| [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=he) | ✔️ |
-| ‫[Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=he) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=pt-br) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=pt-br) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=pt-br) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=pt-br) | ✔️ |
+| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=pt-br) | ✔️ |
+| [Gemini 3 Flash Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=pt-br) | ✔️ |
+| [Gemini 3 Pro Image Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=pt-br) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=pt-br) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=pt-br) | ✔️ |
+| [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=pt-br) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=pt-br) | ✔️ |
 
-## המאמרים הבאים
+## A seguir
 
-מידע נוסף על אפשרויות אחרות של [הסקת מסקנות ואופטימיזציה](https://ai.google.dev/gemini-api/docs/optimization?hl=he) ב-Gemini:
+Leia sobre outras opções de [inferência e otimização](https://ai.google.dev/gemini-api/docs/optimization?hl=pt-br) do Gemini:
 
-- [היקש ברמת Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=he) להפחתת עלויות ב-50%.
-- ‫[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he) לעיבוד אסינכרוני תוך 24 שעות.
-- [שמירת מטמון של ההקשר](https://ai.google.dev/gemini-api/docs/caching?hl=he) כדי להפחית את העלויות של טוקנים של קלט.
+- [Inferência flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pt-br) para redução de custos de 50%.
+- [API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br) para processamento assíncrono em até 24 horas.
+- [Armazenamento em cache de contexto](https://ai.google.dev/gemini-api/docs/caching?hl=pt-br) para reduzir os custos de token de entrada.
 
-שליחת משוב
+Envie comentários
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-עדכון אחרון: 2026-07-30 (שעון UTC).
+Última atualização 2026-07-30 UTC.
 
-רוצה לתת לנו משוב?
+Quer enviar seu feedback?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-30 (שעון UTC)."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-07-30 UTC."],[],[]]

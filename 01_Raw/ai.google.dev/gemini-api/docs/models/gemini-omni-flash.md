@@ -1,47 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=hi
-fetched_at: 2026-08-17T02:36:54.516449+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=ja
+fetched_at: 2026-08-24T02:27:05.147215+00:00
 title: "Gemini Omni Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-सुझाव भेजें
+フィードバックを送信
 
 # Gemini Omni Flash
 
-Gemini Omni Flash, प्रीव्यू मॉडल है. इसे बातचीत के फ़ॉर्मैट में तेज़ी से वीडियो जनरेट करने और एडिट करने के लिए डिज़ाइन किया गया है. यह मॉडल, टेक्स्ट और इमेज को वीडियो में बदलने में माहिर है. साथ ही, Interactions API का इस्तेमाल करके, नैचुरल लैंग्वेज में बातचीत करके जनरेट किए गए वीडियो को बेहतर बनाने और एडिट करने की सुविधा देता है.
+Gemini Omni Flash は、会話形式で動画を迅速に生成、編集できるように設計されたプレビュー モデルです。テキストや画像を動画に変換するのに優れており、Interactions API を使用して自然言語での会話を通じて生成された動画を調整、編集できます。
 
-[Google AI Studio में आज़माएं](https://aistudio.google.com?model=gemini-omni-flash-preview&hl=hi)
+[Google AI Studio で試す](https://aistudio.google.com?model=gemini-omni-flash-preview&hl=ja)
 
-## दस्तावेज़
+## ドキュメント
 
-सुविधाओं और क्षमताओं के बारे में पूरी जानकारी पाने के लिए, [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=hi)
-का पेज देखें.
+機能と機能の詳細については、[Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=ja)
+のページをご覧ください。
 
 ## gemini-omni-flash-preview
 
-| प्रॉपर्टी | ब्यौरा |
+| プロパティ | 説明 |
 | --- | --- |
-| id\_cardModel कोड | **Gemini API**  `gemini-omni-flash-preview` |
-| saveकौन-कौनसे डेटा टाइप इसके साथ काम करते हैं | **इनपुट**  टेक्स्ट, इमेज, वीडियो (एडिट करने के लिए, ज़्यादा से ज़्यादा 10 सेकंड का वीडियो)  **आउटपुट**  वीडियो |
-| token\_autoLimits | **कॉन्टेक्स्ट विंडो**  10,48,576 टोकन  **आउटपुट वीडियो**  3 से 10 सेकंड (720 पिक्सल, 24 एफ़पीएस) |
-| calendar\_monthसबसे नया अपडेट | जून 2026 |
+| id\_cardModel コード | **Gemini API**  `gemini-omni-flash-preview` |
+| saveサポートされるデータタイプ | **入力**  テキスト、画像、動画（編集の場合は最大 10 秒）  **出力**  動画 |
+| token\_autoLimits | **コンテキスト ウィンドウ**  1,048,576 個のトークン  **出力動画**  3 秒～ 10 秒（720p、24 FPS） |
+| calendar\_month最終更新日 | 2026 年 6 月 |
 
-सुझाव भेजें
+フィードバックを送信
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-आखिरी बार 2026-06-30 (UTC) को अपडेट किया गया.
+最終更新日 2026-06-30 UTC。
 
-क्या आपको हमें और कुछ बताना है?
+ご意見をお聞かせください
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-06-30 (UTC) को अपडेट किया गया."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-30 UTC。"],[],[]]

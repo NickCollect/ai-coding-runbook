@@ -1,38 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/llama-index?hl=vi
-fetched_at: 2026-08-17T02:24:44.880789+00:00
-title: "T\u00e1c nh\u00e2n nghi\u00ean c\u1ee9u b\u1eb1ng Gemini v\u00e0 LlamaIndex \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/llama-index?hl=de
+fetched_at: 2026-08-24T02:25:05.852995+00:00
+title: "Recherchergebnisse mit Gemini und LlamaIndex abrufen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Gửi ý kiến phản hồi
+Feedback geben
 
-# Tác nhân nghiên cứu bằng Gemini và LlamaIndex
+# Recherchergebnisse mit Gemini und LlamaIndex abrufen
 
-LlamaIndex là một khung để xây dựng các tác nhân tri thức bằng cách sử dụng các mô hình ngôn ngữ lớn (LLM) được kết nối với dữ liệu của bạn. Ví dụ này cho bạn thấy cách xây dựng quy trình công việc nhiều tác nhân cho Tác nhân nghiên cứu. Trong LlamaIndex, [`Workflows`](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)
-là các khối xây dựng của hệ thống tác nhân và nhiều tác nhân.
+LlamaIndex ist ein Framework zum Erstellen von Wissensagenten mit LLMs, die mit Ihren Daten verbunden sind. In diesem Beispiel erfahren Sie, wie Sie einen Multi-Agenten-Workflow für einen Research Agent erstellen. In LlamaIndex sind [`Workflows`](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)
+die Bausteine von Agenten- und Multi-Agenten-Systemen.
 
-Bạn cần có khoá Gemini API. Nếu chưa có, bạn có thể
-[lấy khoá này trong Google AI Studio](https://aistudio.google.com/apikey?hl=vi).
-Trước tiên, hãy cài đặt tất cả các thư viện LlamaIndex cần thiết. LlamaIndex sử dụng gói `google-genai` nâng cao.
+Sie benötigen einen Gemini API-Schlüssel. Wenn Sie noch keinen haben, können Sie
+[einen in Google AI Studio erstellen](https://aistudio.google.com/apikey?hl=de).
+Installieren Sie zuerst alle erforderlichen LlamaIndex-Bibliotheken. LlamaIndex verwendet im Hintergrund das Paket `google-genai`.
 
 ```
 pip install llama-index llama-index-utils-workflow llama-index-llms-google-genai llama-index-tools-google
 ```
 
-## Thiết lập Gemini trong LlamaIndex
+## Gemini in LlamaIndex einrichten
 
-Công cụ của bất kỳ tác nhân LlamaIndex nào cũng là một LLM (mô hình ngôn ngữ lớn) xử lý quá trình suy luận và xử lý văn bản. Ví dụ này sử dụng Gemini 3 Flash. Hãy nhớ [đặt khoá API làm
-biến môi trường](https://ai.google.dev/gemini-api/docs/api-key?hl=vi).
+Die Engine eines jeden LlamaIndex-Agenten ist ein LLM, das für die Schlussfolgerung und Textverarbeitung zuständig ist. In diesem Beispiel wird Gemini 3 Flash verwendet. [Achten Sie darauf, dass Sie Ihren API-Schlüssel als Umgebungsvariable festlegen.](https://ai.google.dev/gemini-api/docs/api-key?hl=de)
 
 ```
 import os
@@ -44,11 +43,11 @@ assert 'GEMINI_API_KEY' in os.environ
 llm = GoogleGenAI(model="gemini-3.5-flash")
 ```
 
-## Công cụ xây dựng
+## Build-Tools
 
-Các tác nhân sử dụng công cụ để tương tác với thế giới bên ngoài, chẳng hạn như tìm kiếm trên web hoặc lưu trữ thông tin. [Các công cụ trong LlamaIndex](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/tools/)
-có thể là các hàm Python thông thường hoặc được nhập từ `ToolSpecs`.
-Gemini đi kèm với một công cụ tích hợp để sử dụng Google Tìm kiếm, được sử dụng ở đây.
+Agenten verwenden Tools, um mit der Außenwelt zu interagieren, z. B. um im Web zu suchen oder Informationen zu speichern. [Tools in LlamaIndex](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/tools/)
+können reguläre Python-Funktionen sein oder aus vorhandenen `ToolSpecs` importiert werden.
+Gemini enthält ein integriertes Tool für die Verwendung der Google Suche, das hier verwendet wird.
 
 ```
 from google.genai import types
@@ -63,21 +62,21 @@ llm_with_search = GoogleGenAI(
 )
 ```
 
-Bây giờ, hãy kiểm thử thực thể LLM bằng một truy vấn yêu cầu tìm kiếm. Hướng dẫn này giả định một vòng lặp sự kiện đang chạy (chẳng hạn như `python -m asyncio` hoặc Google Colab).
+Testen Sie nun die LLM-Instanz mit einer Abfrage, für die eine Suche erforderlich ist. In dieser Anleitung wird davon ausgegangen, dass eine Ereignisschleife ausgeführt wird (z. B. `python -m asyncio` oder Google Colab).
 
 ```
 response = await llm_with_search.acomplete("What's the weather like today in Biarritz?")
 print(response)
 ```
 
-Tác nhân nghiên cứu sẽ sử dụng các hàm Python làm công cụ. Có rất nhiều cách để bạn xây dựng một hệ thống thực hiện tác vụ này. Trong ví dụ này, bạn sẽ sử dụng những nội dung sau:
+Der Research Agent verwendet Python-Funktionen als Tools. Es gibt viele Möglichkeiten, ein System zu erstellen, um diese Aufgabe auszuführen. In diesem Beispiel verwenden Sie Folgendes:
 
-1. `search_web` sử dụng Gemini với Google Tìm kiếm để tìm kiếm thông tin trên web về chủ đề đã cho.
-2. `record_notes` lưu kết quả nghiên cứu tìm thấy trên web vào trạng thái để các công cụ khác có thể sử dụng.
-3. `write_report` viết báo cáo bằng thông tin do `ResearchAgent` tìm thấy
-4. `review_report` xem xét báo cáo và đưa ra ý kiến phản hồi.
+1. `search_web` verwendet Gemini mit der Google Suche, um im Web nach Informationen zum angegebenen Thema zu suchen.
+2. `record_notes` speichert die im Web gefundenen Informationen im Status, damit sie von den anderen Tools verwendet werden können.
+3. `write_report` schreibt den Bericht mit den Informationen, die vom `ResearchAgent` gefunden wurden.
+4. `review_report` überprüft den Bericht und gibt Feedback.
 
-Lớp `Context` chuyển trạng thái giữa các tác nhân/công cụ và mỗi tác nhân sẽ có quyền truy cập vào trạng thái hiện tại của hệ thống.
+Die Klasse `Context` übergibt den Status zwischen Agenten/Tools und jeder Agent hat Zugriff auf den aktuellen Status des Systems.
 
 ```
 from llama_index.core.workflow import Context
@@ -112,18 +111,18 @@ async def review_report(ctx: Context, review: str) -> str:
     return "Report reviewed."
 ```
 
-## Xây dựng trợ lý nhiều tác nhân
+## Multi-Agenten-Assistent erstellen
 
-Để xây dựng hệ thống nhiều tác nhân, bạn hãy xác định các tác nhân và tương tác của chúng.
-Hệ thống của bạn sẽ có 3 tác nhân:
+Um ein Multi-Agenten-System zu erstellen, definieren Sie die Agenten und ihre Interaktionen.
+Ihr System besteht aus drei Agenten:
 
-1. `ResearchAgent` tìm kiếm thông tin trên web về chủ đề đã cho.
-2. `WriteAgent` viết báo cáo bằng thông tin do `ResearchAgent` tìm thấy.
-3. `ReviewAgent` xem xét báo cáo và đưa ra ý kiến phản hồi.
+1. Ein `ResearchAgent` sucht im Web nach Informationen zum angegebenen Thema.
+2. Ein `WriteAgent` schreibt den Bericht mit den Informationen, die vom `ResearchAgent` gefunden wurden.
+3. Ein `ReviewAgent` überprüft den Bericht und gibt Feedback.
 
-Ví dụ này sử dụng lớp `AgentWorkflow` để tạo một hệ thống nhiều tác nhân sẽ thực thi các tác nhân này theo thứ tự. Mỗi tác nhân lấy một `system_prompt` cho biết tác nhân đó nên làm gì và đề xuất cách làm việc với các tác nhân khác.
+In diesem Beispiel wird die Klasse `AgentWorkflow` verwendet, um ein Multi-Agenten-System zu erstellen, das diese Agenten in der richtigen Reihenfolge ausführt. Jeder Agent verwendet einen `system_prompt`, der ihm mitteilt, was er tun soll, und Vorschläge zur Zusammenarbeit mit den anderen Agenten enthält.
 
-Bạn có thể tuỳ ý hỗ trợ hệ thống nhiều tác nhân bằng cách chỉ định những tác nhân khác mà hệ thống có thể trao đổi bằng `can_handoff_to` (nếu không, hệ thống sẽ tự tìm hiểu).
+Optional können Sie Ihr Multi-Agenten-System unterstützen, indem Sie mit `can_handoff_to` angeben, mit welchen anderen Agenten es kommunizieren kann. Andernfalls versucht es, dies selbst herauszufinden.
 
 ```
 from llama_index.core.agent.workflow import (
@@ -173,7 +172,7 @@ review_agent = FunctionAgent(
 )
 ```
 
-Các tác nhân đã được xác định, giờ đây bạn có thể tạo `AgentWorkflow` và kích hoạt.
+Die Agenten sind definiert. Jetzt können Sie den `AgentWorkflow` erstellen und ausführen.
 
 ```
 from llama_index.core.agent.workflow import AgentWorkflow
@@ -189,7 +188,7 @@ agent_workflow = AgentWorkflow(
 )
 ```
 
-Trong quá trình thực thi quy trình công việc, bạn có thể truyền trực tuyến các sự kiện, lệnh gọi công cụ và bản cập nhật vào bảng điều khiển.
+Während der Ausführung des Workflows können Sie Ereignisse, Tool-Aufrufe und Aktualisierungen an die Konsole streamen.
 
 ```
 from llama_index.core.agent.workflow import (
@@ -237,7 +236,7 @@ async for event in handler.stream_events():
         print(f"  With arguments: {event.tool_kwargs}")
 ```
 
-Sau khi quy trình công việc hoàn tất, bạn có thể in kết quả cuối cùng của báo cáo, cũng như trạng thái xem xét cuối cùng của tác nhân xem xét.
+Nach Abschluss des Workflows können Sie die endgültige Ausgabe des Berichts sowie den endgültigen Überprüfungsstatus des Überprüfungsagenten ausgeben.
 
 ```
 state = await handler.ctx.store.get("state")
@@ -245,28 +244,28 @@ print("Report Content:\n", state["report_content"])
 print("\n------------\nFinal Review:\n", state["review"])
 ```
 
-## Tiến xa hơn với quy trình công việc tuỳ chỉnh
+## Benutzerdefinierte Workflows
 
-`AgentWorkflow` là một cách tuyệt vời để bắt đầu với hệ thống nhiều tác nhân. Nhưng nếu bạn cần kiểm soát nhiều hơn thì sao? Bạn có thể xây dựng quy trình công việc từ đầu. Dưới đây là một số lý do bạn nên xây dựng quy trình làm việc của riêng mình:
+Der `AgentWorkflow` ist eine gute Möglichkeit, mit Multi-Agenten-Systemen zu beginnen. Was aber, wenn Sie mehr Kontrolle benötigen? Sie können einen Workflow von Grund auf neu erstellen. Hier sind einige Gründe, warum Sie einen eigenen Workflow erstellen sollten:
 
-- **Kiểm soát nhiều hơn đối với quy trình**: Bạn có thể quyết định chính xác đường dẫn mà các tác nhân của bạn
-  sẽ thực hiện. Điều này bao gồm việc tạo vòng lặp, đưa ra quyết định tại một số điểm nhất định hoặc để các tác nhân làm việc song song trên các tác vụ khác nhau.
-- **Sử dụng dữ liệu phức tạp**: Vượt ra ngoài văn bản thuần tuý. Quy trình công việc tuỳ chỉnh cho phép bạn sử dụng dữ liệu có cấu trúc hơn, chẳng hạn như đối tượng JSON hoặc lớp tuỳ chỉnh, cho dữ liệu đầu vào và đầu ra.
-- **Làm việc với nhiều loại nội dung đa phương tiện**: Xây dựng các tác nhân có thể hiểu và xử lý
-  không chỉ văn bản mà còn cả hình ảnh, âm thanh và video.
-- **Lập kế hoạch thông minh hơn**: Bạn có thể thiết kế một quy trình công việc trước tiên tạo một
-  kế hoạch chi tiết trước khi các tác nhân bắt đầu làm việc. Điều này hữu ích cho các tác vụ phức tạp đòi hỏi nhiều bước.
-- **Cho phép tự sửa lỗi**: Tạo các tác nhân có thể xem xét công việc của chính mình. Nếu kết quả đầu ra không đủ tốt, tác nhân có thể thử lại, tạo một vòng lặp cải thiện cho đến khi kết quả hoàn hảo.
+- **Mehr Kontrolle über den Prozess**: Sie können den genauen Pfad festlegen, den Ihre Agenten
+  nehmen. Dazu gehört das Erstellen von Schleifen, das Treffen von Entscheidungen an bestimmten Punkten oder das parallele Arbeiten von Agenten an verschiedenen Aufgaben.
+- **Komplexe Daten verwenden**: Gehen Sie über einfachen Text hinaus. Mit benutzerdefinierten Workflows können Sie für Ihre Eingaben und Ausgaben strukturiertere Daten wie JSON-Objekte oder benutzerdefinierte Klassen verwenden.
+- **Mit verschiedenen Medien arbeiten**: Erstellen Sie Agenten, die
+  nicht nur Text, sondern auch Bilder, Audio und Video verstehen und verarbeiten können.
+- **Intelligenter planen**: Sie können einen Workflow entwerfen, der zuerst einen
+  detaillierten Plan erstellt, bevor die Agenten mit der Arbeit beginnen. Dies ist nützlich für komplexe Aufgaben, die mehrere Schritte erfordern.
+- **Selbstkorrektur aktivieren**: Erstellen Sie Agenten, die ihre eigene Arbeit überprüfen können. Wenn die Ausgabe nicht gut genug ist, kann der Agent es noch einmal versuchen und so eine Schleife zur Verbesserung erstellen, bis das Ergebnis perfekt ist.
 
-Để tìm hiểu thêm về Quy trình công việc của LlamaIndex, hãy xem [Tài liệu
-về quy trình công việc của LlamaIndex](https://docs.llamaindex.ai/en/stable/module_guides/workflow/).
+Weitere Informationen zu LlamaIndex-Workflows finden Sie in der [LlamaIndex-Workflows
+Dokumentation](https://docs.llamaindex.ai/en/stable/module_guides/workflow/).
 
-Gửi ý kiến phản hồi
+Feedback geben
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Cập nhật lần gần đây nhất: 2026-06-10 UTC.
+Zuletzt aktualisiert: 2026-06-10 (UTC).
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Haben Sie Feedback für uns?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-10 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-06-10 (UTC)."],[],[]]

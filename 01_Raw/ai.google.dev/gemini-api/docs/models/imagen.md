@@ -1,47 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/imagen?hl=th
-fetched_at: 2026-08-17T02:28:41.940291+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/imagen?hl=id
+fetched_at: 2026-08-24T02:21:24.083619+00:00
 title: "Imagen 4 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-ส่งความคิดเห็น
+Kirim masukan
 
 # Imagen 4
 
-เครื่องมือประสิทธิภาพสูงสำหรับการสังเคราะห์ภาพขั้นสูง ซึ่งให้การควบคุมครีเอทีฟโฆษณาที่ซับซ้อนและเอาต์พุตที่สมจริงเหมือนภาพถ่าย ใช้ Imagen 4 สำหรับการสร้างแบรนด์ระดับมืออาชีพ การจัดฉากที่ซับซ้อน และงานออกแบบที่มีรายละเอียดเสมือนจริงสูงซึ่งต้องมีการแสดงข้อความที่แม่นยำและการจัดแสงที่ซับซ้อน
+Mesin berperforma tinggi untuk sintesis visual tingkat lanjut, yang menawarkan kontrol kreatif yang canggih dan output fotorealistis. Gunakan Imagen 4 untuk tugas desain fidelitas tinggi, komposisi adegan yang rumit, dan branding profesional yang memerlukan rendering teks yang presisi dan pencahayaan yang kompleks.
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com?model=imagen-4.0-generate-001&hl=th)
+[Coba di Google AI Studio](https://aistudio.google.com?model=imagen-4.0-generate-001&hl=id)
 
-## เอกสารประกอบ
+## Dokumentasi
 
-ไปที่หน้า [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=th) เพื่อดูข้อมูลทั้งหมดเกี่ยวกับ
-ฟีเจอร์และความสามารถ
+Buka halaman [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=id) untuk mengetahui cakupan lengkap fitur dan kemampuan.
 
 ## imagen-4.0-generate-001
 
-| พร็อพเพอร์ตี้ | คำอธิบาย |
+| Properti | Deskripsi |
 | --- | --- |
-| รหัสโมเดล id\_card | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
-| บันทึกประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ  **เอาต์พุต**  รูปภาพ |
-| token\_autoขีดจำกัดของโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  480 โทเค็น (ข้อความ)  **รูปภาพเอาต์พุต**  1 ถึง 4 (Ultra/Standard/Fast) |
-| calendar\_monthการอัปเดตล่าสุด | มิถุนายน 2025 |
+| Kode model id\_card | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
+| saveJenis data yang didukung | **Input**  Teks  **Output**  Gambar |
+| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Batas token input**  480 token (teks)  **Output gambar**  1 hingga 4 (Ultra/Standard/Cepat) |
+| calendar\_monthPembaruan terbaru | Juni 2025 |
 
-ส่งความคิดเห็น
+Kirim masukan
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-อัปเดตล่าสุด 2026-06-15 UTC
+Terakhir diperbarui pada 2026-06-15 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Ada masukan untuk kami?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-15 UTC"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-15 UTC."],[],[]]

@@ -1,31 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=ko
-fetched_at: 2026-08-17T02:33:37.042332+00:00
-title: "\uacf5\uac04 \ucd94\ub860 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=he
+fetched_at: 2026-08-24T02:32:19.638754+00:00
+title: "\u05d7\u05e9\u05d9\u05d1\u05d4 \u05de\u05e8\u05d7\u05d1\u05d9\u05ea \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-의견 보내기
+שליחת משוב
 
-# 공간 추론
+# חשיבה מרחבית
 
-Gemini Robotics ER 모델은 객체를 가리키고, 동영상에서 객체를 추적하고, 경계 상자로 객체를 감지하고, 이동 궤적을 생성할 수 있습니다.
+מודלים של Gemini Robotics ER יכולים להצביע על אובייקטים, לעקוב אחריהם בסרטון, לזהות אותם באמצעות תיבות תוחמות וליצור מסלולי תנועה.
 
-실행 가능한 전체 코드는
-[로봇공학 Cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)을 참고하세요.
+קוד מלא שניתן להרצה זמין ב-[Robotics cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-## 객체 가리키기
+## הצבעה על אובייקטים
 
-다음 예에서는 이미지에서 특정 객체를 찾고 정규화된 `[y, x]` 좌표를 반환합니다.
+בדוגמה הבאה מוצגים אובייקטים ספציפיים בתמונה ומוחזרות הקואורדינטות המנורמלות של `[y, x]`:
 
 ### Python
 
@@ -93,7 +92,7 @@ curl -X POST \
   }'
 ```
 
-출력은 객체를 포함하는 JSON 배열이며, 각 객체에는 `point`(정규화된 `[y, x]` 좌표)와 객체를 식별하는 `label`이 있습니다.
+הפלט יהיה מערך JSON שמכיל אובייקטים, שלכל אחד מהם יש `point` (קואורדינטות `[y, x]` מנורמלות) ו-`label` שמזהה את האובייקט.
 
 ### JSON
 
@@ -112,14 +111,13 @@ curl -X POST \
 ]
 ```
 
-다음 이미지는 이러한 점이 표시되는 방식을 보여주는 예입니다.
+בתמונה הבאה אפשר לראות דוגמה לאופן שבו הנקודות האלה יכולות להופיע:
 
-![이미지에서 객체의 점을 표시하는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=ko)
+![דוגמה שמציגה את הנקודות של אובייקטים בתמונה](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=he)
 
-## 동영상에서 객체 추적
+## מעקב אחרי אובייקטים בסרטון
 
-Gemini Robotics ER 2는 동영상 프레임을 분석하여 시간이 지남에 따라 객체를 추적할 수도 있습니다. 지원되는 동영상 형식 목록은 [동영상 입력](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ko#supported-formats)
-을 참고하세요.
+‫Gemini Robotics ER 2 יכול גם לנתח פריימים של סרטונים כדי לעקוב אחרי אובייקטים לאורך זמן. רשימה של פורמטים נתמכים של סרטונים זמינה במאמר בנושא [קלט של סרטונים](https://ai.google.dev/gemini-api/docs/video-understanding?hl=he#supported-formats).
 
 ### Python
 
@@ -153,9 +151,9 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-## 객체 감지 및 경계 상자
+## זיהוי אובייקטים ותיבות תוחמות
 
-점을 사용하는 것 외에도 모델에 2D 경계 상자를 반환하도록 요청할 수 있습니다. 이 경계 상자는 감지된 객체에 대한 더 많은 공간적 세부정보를 제공합니다.
+בנוסף לנקודות, אפשר להנחות את המודל להחזיר תיבות תוחמות דו-ממדיות, שמספקות פרטים מרחביים נוספים לגבי אובייקטים שזוהו.
 
 ### Python
 
@@ -189,11 +187,12 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-## 궤적
+## מסלולים
 
-Gemini Robotics ER 2는 로봇 이동을 안내하는 데 유용한 궤적을 정의하는 점 시퀀스를 생성할 수 있습니다.
+‫Gemini Robotics ER 2 יכול ליצור רצפים של נקודות שמגדירות מסלול, שימושי להנחיית תנועת הרובוט.
 
-이 예에서는 중간 경유지 추정치를 포함하여 빨간색 펜을 정리함으로 이동하는 궤적을 요청합니다. 프롬프트만 표시되도록 코드가 축소되었습니다.
+בדוגמה הזו, המשתמש מבקש מסלול להזזת עט אדום למארגן, כולל הערכה של נקודות הציון הביניים. הקוד צומצם כדי להציג
+רק את ההנחיה.
 
 ### Python
 
@@ -206,9 +205,11 @@ prompt = """
         """
 ```
 
-## 노트북을 위한 공간 만들기
+## מפנים מקום למחשב נייד
 
-이 예에서는 Gemini Robotics ER이 공간에 대해 추론하는 방법을 보여줍니다. 프롬프트는 다른 항목을 위한 공간을 만들기 위해 이동해야 하는 객체를 식별하도록 모델에 요청합니다.
+בדוגמה הזו אפשר לראות איך Gemini Robotics ER מסיק מסקנות לגבי מרחב. ההנחיה
+מבקשת מהמודל לזהות איזה אובייקט צריך להזיז כדי ליצור
+מקום לפריט אחר.
 
 ### Python
 
@@ -240,7 +241,7 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-응답에는 사용자의 질문에 답변하는 객체의 2D 좌표가 포함되어 있습니다. 이 경우 노트북을 위한 공간을 만들기 위해 이동해야 하는 객체입니다.
+התגובה מכילה קואורדינטה דו-ממדית של האובייקט שנותן מענה לשאלה של המשתמש. במקרה הזה, האובייקט שצריך להזיז כדי לפנות מקום למחשב נייד.
 
 ```
 [
@@ -248,11 +249,11 @@ print(image_response.output_text)
 ]
 ```
 
-![다른 객체를 위해 이동해야 하는 객체를 보여주는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=ko)
+![דוגמה שמראה איזה אובייקט צריך להעביר כדי שאובייקט אחר](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=he)
 
-## 점심 포장하기
+## אריזת ארוחת צהריים
 
-모델은 여러 단계로 구성된 작업에 대한 안내를 제공하고 각 단계와 관련된 객체를 가리킬 수도 있습니다. 이 예에서는 모델이 점심 가방을 포장하기 위한 일련의 단계를 계획하는 방법을 보여줍니다.
+המודל יכול גם לספק הוראות למשימות מרובות שלבים ולהצביע על אובייקטים רלוונטיים לכל שלב. בדוגמה הזו אפשר לראות איך המודל מתכנן סדרה של שלבים לאריזת ארוחת צהריים בתיק.
 
 ### Python
 
@@ -285,13 +286,13 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-이 프롬프트의 응답은 이미지 입력에서 점심 가방을 포장하는 방법에 관한 단계별 안내입니다.
+התשובה לפרומפט הזה היא סדרה של הוראות מפורטות לאריזת תיק לארוחת צהריים על סמך קלט התמונה.
 
-**입력 이미지**
+**תמונת קלט**
 
-![도시락과 도시락에 넣을 물건의 이미지](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=ko)
+![תמונה של קופסת אוכל ופריטים שאפשר להכניס לתוכה](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=he)
 
-**모델 출력**
+**פלט המודל**
 
 ```
 Based on the image, here is a plan to pack the lunch box and lunch bag:
@@ -314,19 +315,19 @@ Here is the list of objects and their locations:
 *   [{"point": [448, 501], "label": "brown lunch bag"}]
 ```
 
-## 다음 단계
+## המאמרים הבאים
 
-- [에이전트 기능](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=ko): 코드 실행, 기기 읽기, 이미지 주석 처리
-- [작업 조정](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=ko): 커스텀 로봇 API를 사용하는 장기 작업
-- [스트리밍을 통한 로봇공학](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=ko): 실시간 양방향 스트리밍 (Gemini Robotics ER 2만 해당)
-- [동영상 이해](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=ko): 순간 찾기 및 진행률 분류 (Gemini Robotics ER 2만 해당)
+- [יכולות אג'נטיות](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=he) – ביצוע קוד, קריאת מכשירים, הוספת הערות לתמונות.
+- [תיאום משימות](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=he) – משימות ארוכות טווח עם ממשקי API מותאמים אישית של רובוטים.
+- [רובוטיקה עם סטרימינג](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=he) – סטרימינג דו-כיווני בזמן אמת (Gemini Robotics ER 2 בלבד).
+- [הבנת סרטונים](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=he) – איתור רגעים וסיווג התקדמות (Gemini Robotics ER 2 בלבד).
 
-의견 보내기
+שליחת משוב
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-최종 업데이트: 2026-07-30(UTC)
+עדכון אחרון: 2026-07-30 (שעון UTC).
 
-의견을 전달하고 싶나요?
+רוצה לתת לנו משוב?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-30(UTC)"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-30 (שעון UTC)."],[],[]]

@@ -1,65 +1,64 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=id
-fetched_at: 2026-08-17T02:20:57.993294+00:00
-title: "Gambar Gemini 3.1 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=zh-CN
+fetched_at: 2026-08-24T02:33:51.185543+00:00
+title: "Gemini 3.1 Flash Image \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Kirim masukan
+发送反馈
 
-# Gambar Gemini 3.1 Flash
+# Gemini 3.1 Flash Image
 
-**Nano Banana 2** menyediakan pembuatan gambar berkualitas tinggi dan pengeditan
-percakapan dengan harga yang terjangkau dan latensi rendah. Model ini berfungsi sebagai
-mitra berefisiensi tinggi untuk [Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=id), yang dioptimalkan untuk kecepatan dan
-kasus penggunaan developer bervolume tinggi.
+**Nano Banana 2** 以主流价格和低延迟提供高品质图片生成和对话式编辑功能。此模型是
+[Gemini 3 Pro 图像模型](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=zh-cn)的高效互补版本，专为极致速度与
+大规模量产场景而优化。
 
-**Update utama:**
+**主要更新**：
 
-- Opsi resolusi output baru:
-  - Dukungan baru untuk 0,5K, 2K, dan 4K, default 1K
-- Penetapan Lokasi Penelusuran Gambar Baru:
-  - Integrasi hasil penelusuran teks dan gambar untuk menginformasikan pembuatan dengan data web real-time
-  - Didukung dengan fitur Berpikir diaktifkan atau dinonaktifkan
-- Rasio aspek baru 1:4, 4:1, 1:8, dan 8:1
-- Peningkatan kepatuhan terhadap rasio aspek
-- Kualitas dan konsistensi gambar yang lebih baik
-- Peningkatan rendering teks i18n
+- 新增了输出分辨率选项：
+  - 新增了对 0.5K、2K 和 4K 的支持，默认分辨率为 1K
+- 新增了图片搜索接地：
+  - 集成了文本和图片搜索结果，可使用实时网络数据为生成提供信息
+  - 支持开启或关闭思考功能
+- 新增了 1:4、4:1、1:8 和 8:1 的宽高比
+- 提升了对宽高比的遵循度
+- 提升了图片质量和一致性
+- 提升了 i18n 文本呈现效果
 
-[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-3.1-flash-image&hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com?model=gemini-3.1-flash-image&hl=zh-cn)
 
-## Dokumentasi
+## 文档
 
-Buka halaman [Pembuatan gambar](https://ai.google.dev/gemini-api/docs/image-generation?hl=id) untuk mengetahui cakupan lengkap fitur dan kemampuannya.
+如需全面了解各项功能，请访问[图片生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn)页面。
 
 ## gemini-3.1-flash-image
 
-| Properti | Deskripsi |
+| 属性 | 说明 |
 | --- | --- |
-| Kode model id\_card | `gemini-3.1-flash-image` |
-| saveJenis data yang didukung | **Input**  Teks dan Gambar / PDF  **Output**  Gambar dan Teks |
-| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Batas token input**  131.072  **Batas token output**  32.768 |
-| handymanKemampuan | **[Pembuatan audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=id)**  Tidak didukung  **[Caching](https://ai.google.dev/gemini-api/docs/caching?hl=id)**  Tidak didukung  **[Eksekusi kode](https://ai.google.dev/gemini-api/docs/code-execution?hl=id)**  Tidak didukung  **[Penelusuran file](https://ai.google.dev/gemini-api/docs/file-search?hl=id)**  Tidak didukung  **[Pemanggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id)**  Tidak didukung  **[Melakukan grounding dengan Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=id)**  Tidak didukung  **[Pembuatan gambar](https://ai.google.dev/gemini-api/docs/image-generation?hl=id)**  Didukung  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=id)**  Tidak didukung  **[Grounding penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id)**  Didukung  **[Output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id)**  Tidak didukung  **[Penalaran](https://ai.google.dev/gemini-api/docs/thinking?hl=id)**  Didukung  **[Konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id)**  Tidak didukung |
-| speedOpsi pemakaian | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=id)**  Didukung  **[Inferensi fleksibel](https://ai.google.dev/gemini-api/docs/flex-inference?hl=id)**  Tidak didukung  **[Inferensi prioritas](https://ai.google.dev/gemini-api/docs/priority-inference?hl=id)**  Tidak didukung |
-| Versi 123 | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - Stabil: `gemini-3.1-flash-image` |
-| calendar\_monthPembaruan terbaru | Februari 2026 |
-| Kartu model id\_card | [Kartu model](https://deepmind.google/models/model-cards/gemini-3-1-flash-image/?hl=id) |
+| id\_card模型代码 | `gemini-3.1-flash-image` |
+| save支持的数据类型 | **输入**  文本和图片 / PDF  **输出**  图片和文本 |
+| token\_autoToken 限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入 token 限制**  131,072  **输出 token 限制**  32,768 |
+| handyman功能 | **[音频生成](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-cn)**  不支持  **[缓存](https://ai.google.dev/gemini-api/docs/caching?hl=zh-cn)**  不支持  **[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)**  不支持  **[文件搜索](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-cn)**  不支持  **[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)**  不支持  **[Grounding with Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-cn)**  不支持  **[图片生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn)**  支持  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-cn)**  不支持  **[搜索接地](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)**  支持  **[结构化输出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)**  不支持  **[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)**  支持  **[网址上下文](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn)**  不支持 |
+| speed消耗选项 | **[批量 API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn)**  支持  **[灵活推理](https://ai.google.dev/gemini-api/docs/flex-inference?hl=zh-cn)**  不支持  **[优先推理](https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-cn)**  不支持 |
+| 123版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 稳定版：`gemini-3.1-flash-image` |
+| calendar\_month最新更新 | 2026 年 2 月 |
+| id\_card模型卡片 | [模型卡片](https://deepmind.google/models/model-cards/gemini-3-1-flash-image/?hl=zh-cn) |
 
-Kirim masukan
+发送反馈
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Terakhir diperbarui pada 2026-07-21 UTC.
+最后更新时间 (UTC)：2026-08-19。
 
-Ada masukan untuk kami?
+需要向我们提供更多信息？
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-21 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-08-19。"],[],[]]

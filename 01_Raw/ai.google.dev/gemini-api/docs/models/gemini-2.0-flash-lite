@@ -1,42 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash-lite?hl=tr
-fetched_at: 2026-08-17T02:32:24.279697+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash-lite?hl=pt-BR
+fetched_at: 2026-08-24T02:31:11.743418+00:00
 title: "Gemini 2.0 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Geri bildirim gönderin
+Envie comentários
 
 # Gemini 2.0 Flash-Lite
 
 ## gemini-2.0-flash-lite
 
-| Mülk | Açıklama |
+| Propriedade | Descrição |
 | --- | --- |
-| id\_cardModel kodu | `gemini-2.0-flash-lite` |
-| saveDesteklenen veri türleri | **Girişler**  Ses, resim, video ve metin  **Çıkış**  Metin |
-| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  1.048.576  **Çıkış jetonu sınırı**  8.192 |
-| handymanÖzellikler | **[Ses üretme](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr)**  Desteklenmiyor  **[Önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr)**  Destekleniyor  **[Kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr)**  Desteklenmiyor  **[Dosya arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr)**  Desteklenmiyor  **[İşlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr)**  Destekleniyor  **[Google Haritalar ile Temellendirme](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr)**  Desteklenmiyor  **[Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr)**  Desteklenmiyor  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)**  Desteklenmiyor  **[Arama temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr)**  Desteklenmiyor  **[Yapılandırılmış çıkışlar](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr)**  Destekleniyor  **[Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr)** (Thinking)  Desteklenmiyor  **[URL bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr)**  Desteklenmiyor |
-| speedTüketim seçenekleri | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr)**  Destekleniyor  **[Esnek çıkarım](https://ai.google.dev/gemini-api/docs/flex-inference?hl=tr)**  Desteklenmiyor  **[Öncelik çıkarımı](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr)**  Desteklenmiyor |
-| 123Sürümler | Daha fazla bilgi için [model sürümü kalıpları](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) başlıklı makaleyi inceleyin.  - *Kapatma*: `gemini-2.0-flash-lite` - *Kapatma*: `gemini-2.0-flash-lite-001` |
-| calendar\_monthSon güncelleme | Şubat 2025 |
-| cognition\_2Son güncel bilgi tarihi | Ağustos 2024 |
+| Código do modelo id\_card | `gemini-2.0-flash-lite` |
+| saveTipos de dados aceitos | **Entradas** (link em inglês)  Áudio, imagens, vídeo e texto  **Saída**  Texto |
+| Limites de tokens [[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br)token\_auto | **Limite de tokens de entrada**  1.048.576  **Limite de token de saída**  8.192 |
+| handymanRecursos | **[Geração de áudio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br)**  incompatível  **[Armazenamento em cache](https://ai.google.dev/gemini-api/docs/caching?hl=pt-br)**  Compatível  **[Execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br)**  incompatível  **[Pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br)**  incompatível  **[Chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br)**  Compatível  **[Embasamento com o Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pt-br)**  incompatível  **[Geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br)**  incompatível  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=pt-br)**  incompatível  **[Embasamento da pesquisa](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br)**  incompatível  **[Respostas estruturadas](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br)**  Compatível  **[Pensando](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br)**  Não aceito  **[Contexto do URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br)**  incompatível |
+| speedOpções de consumo | **[API em lote](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br)**  Compatível  **[Inferência flexível](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pt-br)**  incompatível  **[Inferência de prioridade](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pt-br)**  incompatível |
+| Versões 123 | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - *Desligar*: `gemini-2.0-flash-lite` - *Desligar*: `gemini-2.0-flash-lite-001` |
+| calendar\_monthÚltima atualização | Fevereiro de 2025 |
+| cognition\_2Limite de conhecimento | Agosto de 2024 |
 
-Geri bildirim gönderin
+Envie comentários
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Son güncelleme tarihi: 2026-06-23 UTC.
+Última atualização 2026-06-23 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Quer enviar seu feedback?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-23 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-23 UTC."],[],[]]

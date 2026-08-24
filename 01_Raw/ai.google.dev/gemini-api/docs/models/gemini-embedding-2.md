@@ -1,46 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=th
-fetched_at: 2026-08-17T02:31:45.187281+00:00
-title: "\u0e42\u0e21\u0e40\u0e14\u0e25 Gemini Embedding 2 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=ja
+fetched_at: 2026-08-24T02:28:32.716358+00:00
+title: "Gemini Embedding 2 \u30e2\u30c7\u30eb \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-ส่งความคิดเห็น
+フィードバックを送信
 
-# โมเดล Gemini Embedding 2
+# Gemini Embedding 2 モデル
 
-โมเดลการฝังแบบหลายรูปแบบตัวแรกของเรา ซึ่งให้การแมปตัวเลขที่มีประสิทธิภาพของ
-ข้อความ รูปภาพ วิดีโอ เสียง และ PDF ลงในพื้นที่การฝังแบบรวมเดียว โมเดล Gemini Embedding 2 เหมาะที่สุดสำหรับการค้นหาเชิงความหมายแบบข้ามโมดอล การดึงข้อมูลเอกสาร และระบบคำแนะนำที่ต้องมีการคำนวณความคล้ายคลึงที่รวดเร็วและปรับขนาดได้ในชุดข้อมูลมัลติโมดอลขนาดใหญ่
+テキスト、画像、動画、音声、PDF を単一の統合エンベディング空間に効率的に数値マッピングする、初のマルチモーダル エンベディング モデル。Gemini Embedding 2 モデルは、大規模なマルチモーダル データセット全体で高速でスケーラブルな類似性計算を必要とする、クロスモーダル セマンティック検索、ドキュメント検索、レコメンデーション システムに最適です。
 
-## เอกสารประกอบ
+## ドキュメント
 
-ไปที่หน้า[การฝัง](https://ai.google.dev/gemini-api/docs/embeddings?hl=th)เพื่อดูฟีเจอร์และความสามารถทั้งหมด
+機能と機能の全容については、[エンベディング](https://ai.google.dev/gemini-api/docs/embeddings?hl=ja)のページをご覧ください。
 
 ## gemini-embedding-2
 
-| พร็อพเพอร์ตี้ | คำอธิบาย |
+| プロパティ | 説明 |
 | --- | --- |
-| รหัสโมเดล id\_card | **Gemini API**  `gemini-embedding-2` |
-| บันทึกประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ, รูปภาพ, วิดีโอ, เสียง, PDF  **เอาต์พุต**  การฝังข้อความ |
-| token\_autoขีดจำกัดของโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  8,192  **ขนาดมิติข้อมูลเอาต์พุต**  ยืดหยุ่น รองรับ: 128 - 3072, แนะนำ: 768, 1536, 3072 |
-| 123เวอร์ชัน | อ่านรายละเอียดเพิ่มเติมได้ใน[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)  - เสถียร: `gemini-embedding-2` |
-| calendar\_monthการอัปเดตล่าสุด | เมษายน 2026 |
+| id\_cardモデルコード | **Gemini API**  `gemini-embedding-2` |
+| save でサポートされるデータ型 | **入力**  テキスト、画像、動画、音声、PDF  **出力**  テキスト エンベディング |
+| token\_autoトークン上限[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ja) | **入力トークンの上限**  8,192  **出力ディメンションのサイズ**  柔軟、サポート: 128 ～ 3072、推奨: 768、1536、3072 |
+| 123 バージョン | 詳細については、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja#model-versions)をご覧ください。  - 安定版: `gemini-embedding-2` |
+| calendar\_month最終更新日 | 2026 年 4 月 |
 
-ส่งความคิดเห็น
+フィードバックを送信
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-อัปเดตล่าสุด 2026-04-29 UTC
+最終更新日 2026-04-29 UTC。
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+ご意見をお聞かせください
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-29 UTC"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]

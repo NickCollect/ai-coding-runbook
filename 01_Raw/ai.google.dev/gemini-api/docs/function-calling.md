@@ -1,36 +1,36 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/function-calling?hl=tr
-fetched_at: 2026-08-17T02:32:05.993000+00:00
-title: "Gemini API ile i\u015flev \u00e7a\u011f\u0131rma \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/function-calling?hl=he
+fetched_at: 2026-08-24T02:27:32.845419+00:00
+title: "\u05e7\u05e8\u05d9\u05d0\u05d4 \u05dc\u05e4\u05d5\u05e0\u05e7\u05e6\u05d9\u05d5\u05ea \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Geri bildirim gönderin
+שליחת משוב
 
-# Gemini API ile işlev çağırma
+# קריאה לפונקציות באמצעות Gemini API
 
-İşlev çağırma, modelleri harici araçlara ve API'lere bağlamanıza olanak tanır.
-Model, metin yanıtları oluşturmak yerine belirli işlevlerin ne zaman çağrılacağını belirler ve gerçek dünyadaki işlemleri gerçekleştirmek için gerekli parametreleri sağlar.
-Bu sayede model, doğal dil ile gerçek dünyadaki işlemler ve veriler arasında köprü görevi görebilir. İşlev çağrısının 3 temel kullanım alanı vardır:
+התכונה 'הפעלת פונקציות' מאפשרת לכם לחבר מודלים לכלים ולממשקי API חיצוניים.
+במקום ליצור תשובות טקסטואליות, המודל קובע מתי לקרוא לפונקציות ספציפיות ומספק את הפרמטרים הנדרשים לביצוע פעולות בעולם האמיתי.
+כך המודל יכול לשמש כגשר בין שפה טבעית לבין פעולות ונתונים בעולם האמיתי. יש 3 תרחישי שימוש עיקריים לבקשה להפעלת פונקציה:
 
-- [**İşlem Yapma:**](#meeting) API'leri kullanarak harici sistemlerle etkileşim kurun. Örneğin, randevu planlayın, fatura oluşturun, e-posta gönderin veya akıllı ev cihazlarını kontrol edin.
-- [**Bilgileri Artırma:**](#weather) Veritabanları, API'ler ve bilgi tabanları gibi harici kaynaklardaki bilgilere erişin.
-- [**Özellikleri genişletme:**](#chart) Hesaplama yapmak ve modelin sınırlamalarını genişletmek için harici araçlar kullanın (ör. hesap makinesi kullanma veya grafik oluşturma).
+- [**ביצוע פעולות:**](#meeting) אינטראקציה עם מערכות חיצוניות באמצעות ממשקי API, כמו קביעת פגישות, יצירת חשבוניות, שליחת אימיילים או שליטה במכשירים חכמים לבית.
+- [**העשרת הידע:**](#weather) גישה למידע ממקורות חיצוניים כמו מסדי נתונים, ממשקי API ומאגרי ידע.
+- [**הרחבת היכולות:**](#chart) אפשר להשתמש בכלים חיצוניים כדי לבצע חישובים ולהרחיב את המגבלות של המודל, למשל באמצעות מחשבון או יצירת תרשימים.
 
-Bu kullanım alanlarının örneklerine aşağıdan göz atabilirsiniz:
+בהמשך מפורטות דוגמאות לתרחישי שימוש כאלה:
 
-### Toplantı planlama
+### קביעת פגישה
 
-Bu örnekte, katılımcılarla belirli bir zamanda toplantı planlayan bir işlevin nasıl tanımlanacağı gösterilmektedir. Bu işlev, modelin kullanıcı isteklerini ayrıştırmasına ve harici sistemlerdeki işlemleri tetiklemek için yapılandırılmış bağımsız değişkenler döndürmesine olanak tanır.
+בדוגמה הזו מוסבר איך להגדיר פונקציה שמתזמנת פגישה עם משתתפים בשעה ספציפית, כדי לאפשר למודל לנתח בקשות של משתמשים ולהחזיר ארגומנטים מובנים להפעלת פעולות במערכות חיצוניות.
 
 ### Python
 
@@ -131,9 +131,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Hava Durumunu Öğrenme
+### הצגת מזג האוויר
 
-Bu örnekte, bir konumun sıcaklık verilerini alan bir işlevin nasıl tanımlanacağı gösterilmektedir. Bu sayede model, gerçek zamanlı veya harici bilgi gerektiren sorgulara yanıt vermek için harici API'leri çağırabilir.
+בדוגמה הזו מוסבר איך להגדיר פונקציה שמחלצת נתוני טמפרטורה של מיקום מסוים, וכך מאפשרת למודל להפעיל ממשקי API חיצוניים כדי לענות על שאילתות שדורשות מידע בזמן אמת או מידע חיצוני.
 
 ### Python
 
@@ -231,9 +231,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Grafik oluşturma
+### יצירת תרשים
 
-Bu örnekte, yapılandırılmış verilerden çubuk grafik oluşturan bir işlevin nasıl tanımlanacağı gösterilmektedir. Bu sayede, modelin hesaplama yapmak veya görsel öğeler oluşturmak için harici araçları nasıl kullanabileceği gösterilmektedir:
+בדוגמה הזו מוגדרת פונקציה שמייצרת תרשים עמודות מנתונים מובְנים. הדוגמה הזו ממחישה איך המודל יכול להשתמש בכלים חיצוניים כדי לבצע חישובים או ליצור נכסים חזותיים:
 
 ### Python
 
@@ -330,20 +330,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## İşlev çağrısının işleyiş şekli
+## איך פועלת התקשרות לפונקציות
 
-![İşlev çağrısına genel bakış](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=tr)
+![סקירה כללית על קריאה להפעלת פונקציות](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=he)
 
-İşlev çağırma, uygulamanız, model ve harici işlevler arasında yapılandırılmış bir etkileşimi içerir:
+השימוש בפונקציות כולל אינטראקציה מובנית בין האפליקציה, המודל ופונקציות חיצוניות:
 
-1. **İşlev Bildirimini Tanımla:** İşlevin adını, parametrelerini ve amacını modele tanımlayın.
-2. **İşlev bildirimleriyle LLM'yi çağırma:** Kullanıcı istemini, işlev bildirimiyle birlikte modele gönderin.
-3. **İşlev Kodunu Yürütme (Sizin Sorumluluğunuz):** Model, işlevi *yürütmez*. Adı ve bağımsız değişkenleri ayıklayıp uygulamanızda yürütün.
-4. **Kullanıcı dostu yanıt oluşturma:** Son ve kullanıcı dostu bir yanıt için sonucu modele geri gönderin.
+1. **הגדרת הצהרת פונקציה:** מגדירים למודל את שם הפונקציה, הפרמטרים והמטרה שלה.
+2. **קוראים למודל LLM עם הצהרות על פונקציות:** שולחים את ההנחיה של המשתמש יחד עם ההצהרות על הפונקציות למודל.
+3. **הפעלת קוד הפונקציה (באחריותכם):** המודל *לא* מפעיל את הפונקציה בעצמו. מחלקים את השם והארגומנטים ומבצעים את הפעולה באפליקציה.
+4. **יצירת תשובה ידידותית למשתמש:** שליחת התוצאה בחזרה למודל כדי לקבל תשובה סופית וידידותית למשתמש.
 
-Bu işlem birden fazla dönüşte tekrarlanabilir. Model, tek bir dönüşte ([paralel işlev çağrısı](#parallel_function_calling)) ve sırayla ([bileşik işlev çağrısı](#compositional_function_calling)) birden fazla işlev çağrısını destekler.
+אפשר לחזור על התהליך הזה כמה פעמים. המודל תומך בהפעלת כמה פונקציות בתור אחד ([הפעלת פונקציות במקביל](#parallel_function_calling)) וברצף ([הפעלת פונקציות בהרכבה](#compositional_function_calling)).
 
-### 1. adım: Bir işlev bildirimi tanımlayın
+### שלב 1: הגדרת הצהרה על פונקציה
 
 ### Python
 
@@ -396,7 +396,7 @@ function setLightValues(brightness, color_temp) {
 }
 ```
 
-### 2. adım: İşlev beyanlarıyla modeli çağırın
+### שלב 2: קוראים למודל עם הצהרות על פונקציות
 
 ### Python
 
@@ -432,7 +432,7 @@ const fcStep = in>teraction.steps.find(s = s.type === 'function_call');
 console.log(fcStep);
 ```
 
-Model, `type`, `name` ve `arguments` ile `function_call` adımını döndürüyor:
+המודל מחזיר שלב `function_call` עם `type`, `name` ו-`arguments`:
 
 ```
 type='function_call'
@@ -440,7 +440,7 @@ name='set_light_values'
 arguments={'color_temp': &#39;warm', 'brightness': 25}
 ```
 
-### 3. adım: İşlevi yürütün
+### שלב 3: הפעלת הפונקציה
 
 ### Python
 
@@ -464,7 +464,7 @@ if (fcStep.name === 'set_light_values') {
 }
 ```
 
-### 4. adım: Sonucu modele geri gönderin
+### שלב 4: שליחת התוצאה בחזרה למודל
 
 ### Python
 
@@ -504,14 +504,14 @@ const finalInteraction = await client.interactions.create({
 console.log(finalInteraction.output_text);
 ```
 
-### Durum bilgisiz işlev çağrısı
+### בקשה להפעלת פונקציה ללא שמירת מצב
 
-Ayrıca, istemci tarafında sohbet geçmişini yönetip `store=false` ayarını yaparak işlev çağrısını durumsuz modda da kullanabilirsiniz.
+אפשר גם להשתמש בהפעלת פונקציות במצב חסר מצב (stateless) על ידי ניהול היסטוריית השיחות בצד הלקוח והגדרת `store=false`.
 
-Durum bilgisiz modda, görüşmenin tam geçmişini sonraki her isteğin `input` alanına iletmeniz gerekir. Bu geçmiş şunları içermelidir:
-1. İlk `user_input` adım.
-2. 1. dönüşte döndürülen tüm model tarafından oluşturulan adımlar (`thought` ve `function_call` adımları dahil) alındığı gibi.
-3. Çalıştırılan işlevinizin çıkışını içeren `function_result` adımı.
+במצב חסר מצב, צריך להעביר את ההיסטוריה המלאה של השיחה בשדה `input` של כל בקשה עוקבת. ההיסטוריה הזו צריכה לכלול:
+‫1. השלב הראשוני `user_input`.
+2. כל השלבים שנוצרו על ידי המודל ומוחזרים בתור 1 (כולל השלבים `thought` ו-`function_call`) בדיוק כפי שהתקבלו.
+3. השלב `function_result` שמכיל את הפלט של הפונקציה שהופעלה.
 
 ### Python
 
@@ -683,25 +683,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## İşlev beyanları
+## הצהרות על פונקציות
 
-İşlev bildirimi, araç olarak iletilir ve şunları içerir:
+הצהרה על פונקציה מועברת ככלי וכוללת:
 
-- `type` (dize): Özel işlevler için `"function"` olmalıdır.
-- `name` (dize): Benzersiz işlev adı (alt çizgi veya camelCase kullanın).
-- `description` (dize): İşlevin amacının net açıklaması.
-- `parameters` (nesne): İşlevin beklediği giriş parametreleri.
-  - `type` (dize): Genel veri türü (ör. `object`).
-  - `properties` (nesne): Tür ve açıklamaya sahip bireysel parametreler.
-  - `required` (dizi): Zorunlu parametre adları.
+- ‫`type` (מחרוזת): צריך להיות `"function"` עבור פונקציות בהתאמה אישית.
+- ‫`name` (string): שם ייחודי של הפונקציה (אפשר להשתמש בקו תחתון או ב-camelCase).
+- ‫`description` (string): הסבר ברור על מטרת הפונקציה.
+- ‫`parameters` (אובייקט): פרמטרי הקלט שהפונקציה מצפה לקבל.
+  - ‫`type` (string): סוג הנתונים הכולל, כמו `object`.
+  - ‫`properties` (אובייקט): פרמטרים נפרדים עם סוג ותיאור.
+  - ‫`required` (מערך): שמות פרמטרים נדרשים.
 
-## Düşünebilen modellerle işlev çağırma
+## בקשה להפעלת פונקציה באמצעות מודלים של חשיבה
 
-Gemini 3 serisi modeller, işlev çağrısını iyileştiren dahili bir ["düşünme"](https://ai.google.dev/gemini-api/docs/thinking?hl=tr) süreci kullanır. SDK'lar, [düşünce imzalarını](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=tr) sizin için otomatik olarak işler.
+מודלים מסדרת Gemini 3 משתמשים בתהליך פנימי של ["חשיבה"](https://ai.google.dev/gemini-api/docs/thinking?hl=he) שמשפר את השימוש בפונקציות. ערכות ה-SDK מטפלות באופן אוטומטי ב[חתימות מחשבה](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=he) בשבילכם.
 
-## Paralel işlev çağırma
+## בקשות מקבילות להפעלת פונקציות
 
-Bağımsız olduklarında aynı anda birden fazla işlevi çağırma:
+הפעלת כמה פונקציות בבת אחת כשהן בלתי תלויות:
 
 ### Python
 
@@ -803,9 +803,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Bileşik işlev çağrısı
+## בקשה להפעלת פונקציה עם קומפוזיציה
 
-Karmaşık istekler için birden fazla işlev çağrısını birlikte zincirleyin (ör. önce konumu alın, ardından bu konumun hava durumunu alın).
+אפשר לשרשר כמה קריאות לפונקציות כדי לבצע בקשות מורכבות (למשל, קודם לקבל את המיקום ואז לקבל את מזג האוויר באותו מיקום).
 
 ### Python
 
@@ -957,14 +957,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## İşlev çağırma modları
+## מצבים של בקשה להפעלת פונקציה
 
-`generation_config` içindeki `tool_choice` seçeneğini kullanarak modelin araçları nasıl kullanacağını kontrol edin:
+שליטה באופן השימוש של המודל בכלים באמצעות `tool_choice` ב-`generation_config`:
 
-- `auto` (Varsayılan): Model, bir işlevi çağırmaya mı yoksa doğrudan yanıt vermeye mi karar verir.
-- `any`: Model, her zaman bir işlev çağrısı tahmin edecek şekilde sınırlandırılmıştır.
-- `none`: Modelin işlev çağrıları yapması yasaktır.
-- `validated`: Model, işlev şemasına uygunluğu sağlar.
+- ‫`auto` (ברירת מחדל): המודל מחליט אם להפעיל פונקציה או להגיב ישירות.
+- ‫`any`: המודל מוגבל כך שתמיד יחזה קריאה לפונקציה.
+- ‫`none`: המודל לא יכול לבצע קריאות לפונקציות.
+- ‫`validated`: המודל מוודא שהפונקציה תואמת לסכימה.
 
 ### Python
 
@@ -1024,9 +1024,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Çok amaçlı araç kullanımı
+## שימוש במולטיטול
 
-Yerleşik araçları işlev çağrısıyla birleştirerek aynı istekte birden fazla aracı etkinleştirebilirsiniz. Gemini 3 modelleri, Etkileşimler'de yerleşik araçları kullanıma hazır işlev çağrılarıyla birleştirebilir. `previous_interaction_id` iletildiğinde yerleşik araç bağlamı otomatik olarak dolaşıma girer.
+אפשר להפעיל כמה כלים ולשלב בין כלים מובנים לבין קריאות לפונקציות באותה בקשה. מודלים של Gemini 3 יכולים לשלב כלים מובנים עם קריאה לפונקציות (function calling) מחוץ לקופסה באינטראקציות. העברת `previous_interaction_id`
+תפיץ אוטומטית את ההקשר של הכלי המובנה.
 
 ### Python
 
@@ -1194,13 +1195,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Çok formatlı işlev yanıtları
+## תשובות של פונקציות מרובות מצבים
 
-Gemini 3 serisi modeller için, modele gönderdiğiniz işlev yanıtı bölümlerine çok formatlı içerik ekleyebilirsiniz. Model, daha bilinçli bir yanıt üretmek için bu çok formatlı içeriği bir sonraki turda işleyebilir.
+במודלים מסדרת Gemini 3, אפשר לכלול תוכן מולטימודאלי בחלקים של תגובת הפונקציה ששולחים למודל. המודל יכול לעבד את התוכן הרב-מודאלי הזה בתור הבא כדי לספק תשובה מושכלת יותר.
 
-Bir işlev yanıtına çok formatlı veriler eklemek için bu verileri `function_result` adımının `result` alanına bir veya daha fazla içerik bloğu olarak ekleyin. Her içerik bloğu `type` değerini belirtmelidir (ör. `"text"`, `"image"`).
+כדי לכלול נתונים מרובי-אופנים בתשובה של פונקציה, צריך לכלול אותם כאחד או יותר בלוקים של תוכן בשדה `result` של שלב `function_result`. בכל בלוק תוכן צריך לציין את `type` (למשל `"text"`,‏ `"image"`).
 
-Aşağıdaki örnekte, bir etkileşimde görüntü verileri içeren bir işlev yanıtının modele nasıl geri gönderileceği gösterilmektedir:
+בדוגמה הבאה אפשר לראות איך לשלוח בחזרה למודל בתגובה לפונקציה נתוני תמונה במהלך אינטראקציה:
 
 ### Python
 
@@ -1300,28 +1301,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Yapılandırılmış çıkışla işlev çağırma
+## בקשה להפעלת פונקציה עם פלט מובנה
 
-Gemini 3 serisi modellerde, işlev çağrısını [yapılandırılmış çıkışla](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr) birleştirerek tutarlı biçimde biçimlendirilmiş yanıtlar alın.
+במודלים מסדרת Gemini 3, אפשר לשלב קריאה לפונקציה עם [פלט מובנה](https://ai.google.dev/gemini-api/docs/structured-output?hl=he) כדי לקבל תשובות בפורמט עקבי.
 
-## Uzak MCP (Model Context Protocol)
+## ‫MCP (Model Context Protocol) מרוחק
 
-Etkileşimler API'si, modele harici araçlara ve hizmetlere erişim sağlamak için uzak MCP sunucularına bağlanmayı destekler. Araç yapılandırmasında sunucu `name` ve `url` bilgilerini siz sağlarsınız.
+‫Interactions API תומך בחיבור לשרתי MCP מרוחקים כדי לתת למודל גישה לכלים ולשירותים חיצוניים. אתם מספקים את השרת `name` ואת `url` בהגדרת הכלים.
 
-Uzak MCP'yi kullanırken aşağıdaki kısıtlamalara dikkat edin:
+כשמשתמשים ב-Remote MCP, חשוב לשים לב למגבלות הבאות:
 
-- **Sunucu türleri**: Uzak MCP yalnızca akışa uygun HTTP sunucularıyla çalışır. SSE (Server-Sent Events) sunucuları desteklenmez.
-- **Adlandırma**: MCP sunucusu adları `-` karakterini içermemelidir. Bunun yerine `snake_case` sunucu adlarını kullanın.
+- **סוגי שרתים**: שרת MCP מרוחק פועל רק עם שרתי HTTP שניתן להזרים מהם. אין תמיכה בשרתי SSE (אירועים שנשלחים מהשרת).
+- **שמות**: שמות של שרתי MCP לא יכולים לכלול את התו `-`. במקום זאת, צריך להשתמש בשמות השרתים `snake_case`.
 
-| Alan | Tür | Zorunlu | Açıklama |
+| שדה | סוג | נדרש | תיאור |
 | --- | --- | --- | --- |
-| `type` | `string` | Evet | `"mcp_server"` olmalıdır. |
-| `name` | `string` | Hayır | MCP sunucusunun görünen adı. |
-| `url` | `string` | Hayır | MCP sunucusu uç noktasının tam URL'si. |
-| `headers` | `object` | Hayır | Sunucuya yapılan her istekle birlikte HTTP başlıkları olarak gönderilen anahtar/değer çiftleri (örneğin, kimlik doğrulama jetonları). |
-| `allowed_tools` | `array` | Hayır | Ajanın sunucudan hangi araçları çağırabileceğini kısıtlayın. |
+| `type` | `string` | כן | חייב להיות `"mcp_server"`. |
+| `name` | `string` | לא | השם המוצג של שרת ה-MCP. |
+| `url` | `string` | לא | כתובת ה-URL המלאה של נקודת הקצה של שרת ה-MCP. |
+| `headers` | `object` | לא | צמדי מפתח/ערך שנשלחים ככותרות HTTP עם כל בקשה לשרת (לדוגמה, אסימוני אימות). |
+| `allowed_tools` | `array` | לא | הגבלת הכלים בשרת שהסוכן יכול להשתמש בהם. |
 
-### Örnek
+### דוגמה
 
 ### Python
 
@@ -1382,9 +1383,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Araç çağrılarını yayınlama
+## העברת קריאות לכלי בסטרימינג
 
-Model, akışla birlikte kullanılan araçlarda akışta `step.delta` etkinlikleri dizisi olarak işlev çağrıları oluşturur. Araç bağımsız değişkenleri, `arguments` kullanılarak kısmi bağımsız değişkenler olarak yayınlanabilir. Bu farkları, tam araç çağrılarını yeniden oluşturmak için toplamanız gerekir.
+כשמשתמשים בכלים עם סטרימינג, המודל יוצר קריאות לפונקציות כרצף של אירועים בסטרימינג.`step.delta` אפשר להזרים ארגומנטים של כלים כארגומנטים חלקיים באמצעות `arguments`. כדי לשחזר את הקריאות המלאות לכלים לפני שמריצים אותן, צריך לצבור את השינויים האלה.
 
 ### Python
 
@@ -1549,42 +1550,42 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
 }'
 ```
 
-## En iyi uygulamalar
+## שיטות מומלצות
 
-- **İşlev ve Parametre Açıklamaları:** Net ve spesifik olun.
-- **Adlandırma:** Boşluk veya özel karakter içermeyen açıklayıcı adlar kullanın.
-- **Güçlü Tür Belirleme:** Belirli türleri (tam sayı, dize, enum) kullanın.
-- **Araç Seçimi:** Etkin araç sayısını en fazla 10-20 olarak ayarlayın.
-- **İstem Mühendisliği:** Bağlam ve talimatlar sağlayın.
-- **Doğrulama:** İşlev çağrılarını yürütmeden önce doğrulayın.
-- **Hata İşleme:** Hataların etkili bir şekilde yönetilmesini sağlayın.
-- **Güvenlik:** Harici API'ler için uygun kimlik doğrulama yöntemini kullanın.
+- **תיאורים של פונקציות ופרמטרים:** הקפידו להיות ברורים וספציפיים.
+- **שמות:** צריך להשתמש בשמות תיאוריים ללא רווחים או תווים מיוחדים.
+- **הקלדה חזקה:** שימוש בסוגים ספציפיים (מספר שלם, מחרוזת, enum).
+- **בחירת כלים:** כדאי להגדיר את האפשרות 'פעיל' ל-10 עד 20 כלים לכל היותר.
+- **הנדסת הנחיות:** מספקים הקשר והוראות.
+- **אימות:** אימות של קריאות לפונקציות לפני ההפעלה.
+- **טיפול בשגיאות:** צריך להטמיע טיפול בשגיאות בצורה חזקה.
+- **אבטחה:** השתמשו באימות מתאים לממשקי API חיצוניים.
 
-## Araç öncesi metin şartları için geçici çözümler
+## פתרונות עקיפים לדרישות הטקסט של כלי ההכנה
 
-**Sorun:** İsteminizde modelin yapılandırılmış metin (XML, YAML, JSON vb.) çıkışı vermesi gerekiyorsa (ör. `<UPDATE>...</UPDATE>`) hemen önce yapıldığında araç çağrısı bazen `Malformed_Function_Call` ile başarısız olabilir.
+**בעיה:** אם ההנחיה שלכם דורשת מהמודל ליצור טקסט מובנה (XML,‏ YAML,‏ JSON וכו') (לדוגמה, `<UPDATE>...</UPDATE>`) מיד לפני ביצוע קריאה לכלי, יכול להיות שהקריאה לכלי תיכשל מדי פעם עם `Malformed_Function_Call`.
 
-**Çözümler:** Aşağıdaki geçici çözümler bu sorunu giderir:
+**פתרונות:** הפתרונות הבאים יעזרו לכם לפתור את הבעיה:
 
-- **TERCİH EDİLEN:** Modele, araç öncesi notlarını ham metin yerine özel bir `update()` işlev çağrısının içine yerleştirmesini söyleyin (ayrıntılar aşağıda).
-- Modele, notları yapılandırılmış metin yerine Markdown başlıkları (`# UPDATE`, `## PLAN`) olarak yazmasını söyleyin.
-- Modelin, araç çağrılarından önce metin çıkışı yapmasını zorunlu kılmayın.
+- **מומלץ:** מנחים את המודל להוסיף את ההערות שלו לפני השימוש בכלי בתוך קריאה ייעודית לפונקציה `update()` במקום בטקסט גולמי (פרטים בהמשך).
+- מנחים את המודל לכתוב הערות ככותרות Markdown ‏ (`# UPDATE`, `## PLAN`) במקום כטקסט מובנה.
+- לא לחייב את המודל להפיק טקסט לפני קריאות לכלים.
 
-### Tercih edilen geçici çözüm: Çalışma notlarını özel bir işlev çağrısına sarmalama
+### פתרון עדיף: עטיפת הערות העבודה בקריאה ייעודית לפונקציה
 
-Orijinal talimat yerine:
+במקום ההוראה המקורית:
 
 ```
 Before calling a tool, in every response you MUST first output a single `<UPDATE>` part as specified, don't skip this part or any of required sub-tags with<in `UP>DATE`.
 ```
 
-Güncellenen bu talimatı kullanın:
+צריך להשתמש בהוראה המעודכנת הזו:
 
 ```
 Before calling any other tool, in every response you MUST first call `update` with all required parameters (previous_step, plan, next_step, external).
 ```
 
-Ayrıca, müşteri isteğindeki eski `<UPDATE>` XML biçimine yapılan tüm referansları güncelleyin. Ardından, güncelleme işlevi için ilgili işlev beyanını ekleyin:
+בנוסף, צריך לעדכן את כל ההפניות לפורמט ה-XML הישן של `<UPDATE>` בבקשת הלקוח. לאחר מכן מוסיפים את הצהרת הפונקציה המתאימה לפונקציית העדכון:
 
 ```
 {
@@ -1620,20 +1621,20 @@ Ayrıca, müşteri isteğindeki eski `<UPDATE>` XML biçimine yapılan tüm refe
 }
 ```
 
-Ardından model, aynı adımda iki çağrı yapar: yapılandırılmış XML'nin yerini alan `update()` çağrısı ve yapmak istediği gerçek işlev çağrısı.
+לאחר מכן, המודל יבצע שתי קריאות באותו השלב: הקריאה `update()` שמחליפה את ה-XML המובנה, והקריאה בפועל לפונקציה שהוא רוצה לבצע.
 
-## Notlar ve sınırlamalar
+## הערות ומגבלות
 
-- Yalnızca [OpenAPI şemasının bir alt kümesi](https://ai.google.dev/api/rest/v1beta/cachedContents?hl=tr#FunctionDeclaration) desteklenir.
-- `any` modunda API, çok büyük veya derin iç içe yerleştirilmiş şemaları reddedebilir.
-- Python'da desteklenen parametre türleri sınırlıdır.
+- יש תמיכה רק ב[קבוצת משנה של סכימת OpenAPI](https://ai.google.dev/api/rest/v1beta/cachedContents?hl=he#FunctionDeclaration).
+- במצב `any`, יכול להיות שה-API ידחה סכימות גדולות מאוד או סכימות עם קינון עמוק.
+- סוגי הפרמטרים הנתמכים ב-Python מוגבלים.
 
-Geri bildirim gönderin
+שליחת משוב
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Son güncelleme tarihi: 2026-07-30 UTC.
+עדכון אחרון: 2026-07-30 (שעון UTC).
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+רוצה לתת לנו משוב?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-30 (שעון UTC)."],[],[]]

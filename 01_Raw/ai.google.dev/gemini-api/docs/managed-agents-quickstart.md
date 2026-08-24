@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=pl
-fetched_at: 2026-08-17T02:16:34.846115+00:00
-title: "Szybki start z zarz\u0105dzanymi agentami \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it
+fetched_at: 2026-08-24T02:34:03.265646+00:00
+title: "Guida rapida di Managed Agents \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Prześlij opinię
+Invia feedback
 
-# Szybki start z zarządzanymi agentami
+# Guida rapida di Managed Agents
 
-Ten przewodnik zawiera informacje o tworzeniu i używaniu agentów zarządzanych w interfejsie Gemini API na przykładzie agenta [Antigravity](https://ai.google.dev/gemini-api/docs/agents/antigravity-agent?hl=pl). Wykonasz pierwsze wywołanie agenta, poprowadzisz wieloetapową rozmowę, będziesz stopniowo wyświetlać odpowiedź, pobierać pliki z piaskownicy i pracować z agentem zarządzanym Antigravity.
+Questa guida ti illustra come creare e utilizzare gli agenti gestiti nell'API Gemini, utilizzando l'agente [Antigravity](https://ai.google.dev/gemini-api/docs/agents/antigravity-agent?hl=it). Eseguirai la tua prima chiamata all'agente, continuerai una conversazione multi-turno, visualizzerai in streaming la risposta, scaricherai i file dalla sandbox e lavorerai con l'agente gestito Antigravity.
 
-## Uruchamianie pierwszej interakcji z agentem
+## Esegui la tua prima interazione con l'agente
 
-Pojedyncze wywołanie interfejsu [Interactions API](https://ai.google.dev/gemini-api/docs?hl=pl) powoduje udostępnienie piaskownicy Linux, uruchomienie pętli agenta i zwrócenie wyniku. Określisz 3 parametry:
+Una singola chiamata all'[API Interactions](https://ai.google.dev/gemini-api/docs?hl=it) esegue il provisioning di una sandbox Linux, esegue il loop dell'agente e restituisce il risultato. Definirai tre parametri:
 
-- Przekaż `agent` jako `"antigravity-preview-05-2026",`, czyli aktualną wersję naszego predefiniowanego agenta zarządzanego ogólnego przeznaczenia.
-- Określ `environment="remote"`, aby udostępnić nowe środowisko piaskownicy.
-- Utwórz dane wejściowe, określając, co ma robić agent.
+- Trasmetti il `agent` come `"antigravity-preview-05-2026",` che è la versione attuale del nostro agente gestito predefinito e di uso generale.
+- Definisci `environment="remote"` per eseguire il provisioning di un nuovo ambiente sandbox.
+- Crea un input che definisca cosa vuoi che faccia l'agente.
 
 ### Python
 
@@ -79,16 +79,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Odpowiedź zwraca obiekt `Interaction`. Zapisz `interaction.id` i `interaction.environment_id`, aby kontynuować rozmowę w tej samej piaskownicy. Użyj `interaction.output_text`, aby uzyskać dostęp do ostatecznej odpowiedzi agenta. `interaction.steps` zawiera listę wszystkich kroków wykonanych przez agenta (rozumowanie, wywołania narzędzi, wykonanie kodu).
+La risposta restituisce un oggetto `Interaction`. Memorizza `interaction.id` e `interaction.environment_id` per continuare la conversazione nella stessa sandbox. Utilizza `interaction.output_text` per accedere alla risposta finale dell'agente. `interaction.steps` elenca ogni passaggio eseguito dall'agente (ragionamento, chiamate di strumenti, esecuzione del codice).
 
-## Kontynuowanie rozmowy (wieloetapowej)
+## Continua la conversazione (multi-turno)
 
-Interfejs API śledzi 2 niezależne wymiary stanu:
+L'API tiene traccia di due dimensioni di stato indipendenti:
 
-- **Kontekst rozmowy:** historia czatu, ślad uzasadnienia, użycie narzędzia, użycie `previous_interaction_id`.
-- [**Stan środowiska:**](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl) pliki, zainstalowane pakiety i stan piaskownicy, użycie `environment`.
+- **Contesto della conversazione:** cronologia chat, traccia di ragionamento, utilizzo degli strumenti, utilizzando `previous_interaction_id`.
+- [**Stato dell'ambiente:**](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it) file, pacchetti installati e stato della sandbox, utilizzando `environment`.
 
-Aby wznowić, przekaż oba w odpowiednim miejscu:
+Trasmetti entrambi nel rispettivo posto per riprendere:
 
 ### Python
 
@@ -130,20 +130,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Pliki z etapu 1 (`fibonacci.txt`) są zachowywane na etapie 2. Agent zachowuje też kontekst rozmowy.
+I file del turno 1 (`fibonacci.txt`) persistono nel turno 2. L'agente conserva anche il contesto della conversazione.
 
-Możesz je łączyć i dopasowywać niezależnie:
+Puoi combinarli e abbinarli in modo indipendente:
 
-- **Wyczyść rozmowę, zachowaj pliki:** pomiń `previous_interaction_id`, przekaż tylko identyfikator środowiska za pomocą `environment`, aby rozpocząć nową rozmowę w tym samym obszarze roboczym.
-- **Zachowaj rozmowę, nowy obszar roboczy:** przekaż `previous_interaction_id`, ustaw `environment="remote"` dla nowej piaskownicy.
+- **Cancella conversazione, conserva i file:** ometti `previous_interaction_id`, trasmetti solo l'ID ambiente utilizzando `environment` per una nuova conversazione nello stesso workspace.
+- **Conserva la conversazione, nuovo workspace:** trasmetti `previous_interaction_id`, imposta `environment="remote"` per una nuova sandbox.
 
-### Automatyczne kompresowanie kontekstu
+### Compattazione automatica del contesto
 
-W długotrwałych rozmowach wieloetapowych surowa historia kroków rozumowania, wywołań narzędzi i zawartości dużych plików może szybko się rozrastać i zajmować znaczną przestrzeń kontekstu. Aby zapobiec błędom związanym z przekroczeniem limitu tokenów i utrzymać koncentrację agenta (zapobiegając „utracie kontekstu”), interfejs API zarządzanych agentów zawiera natywny krok kompresowania kontekstu przy około 135 tys. tokenów. Dzieje się to automatycznie.
+Nelle conversazioni a più turni di lunga durata, la cronologia non elaborata dei passaggi di ragionamento, delle chiamate di strumenti e dei contenuti di file di grandi dimensioni può crescere rapidamente e consumare uno spazio di contesto significativo. Per evitare errori di limite di token e mantenere l'attenzione dell'agente (prevenendo il "deterioramento del contesto"), l'API Managed Agents include un passaggio di compattazione del contesto nativo a circa 135.000 token. Ciò avviene automaticamente.
 
-## Stopniowe wyświetlanie odpowiedzi
+## Visualizza in streaming la risposta
 
-W przypadku długotrwałych zadań możesz stopniowo wyświetlać odpowiedź, aby zobaczyć, jak agent pracuje w czasie rzeczywistym:
+Per le attività di lunga durata, puoi visualizzare in streaming la risposta per vedere l'agente lavorare in tempo reale:
 
 ### Python
 
@@ -201,12 +201,12 @@ curl -N -s -X POST "https://generativelanguage.googleapis.com/v1beta/interaction
 }'
 ```
 
-Stopniowe wyświetlanie zwraca delty kroków z przyrostowymi aktualizacjami. Po zakończeniu kroku zdarzenie `step.stop` zawiera skumulowane statystyki wykorzystania. Więcej informacji znajdziesz w
-[przewodniku po stopniowym wyświetlaniu](https://ai.google.dev/gemini-api/docs/streaming?hl=pl).
+Lo streaming restituisce delta di passaggi con aggiornamenti incrementali. Al termine di un passaggio, l'evento `step.stop` include le statistiche di utilizzo accumulate. Scopri di più nella
+[guida allo streaming](https://ai.google.dev/gemini-api/docs/streaming?hl=it).
 
-## Pobieranie plików ze środowiska
+## Scarica i file dall'ambiente
 
-Gdy agent tworzy pliki w piaskownicy. Pobierz je za pomocą interfejsu Files API za pomocą bezpośredniego żądania HTTP (nie ma jeszcze metody pakietu SDK):
+Quando l'agente crea file all'interno della sandbox. Scaricali utilizzando l'API Files con una richiesta HTTP diretta (non è ancora disponibile alcun metodo SDK):
 
 ### Python
 
@@ -273,13 +273,13 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/files/environme
 tar -xf snapshot.tar -C extracted_snapshot
 ```
 
-## Zapisywanie agenta zarządzanego
+## Salva un agente gestito
 
-W poprzednich krokach użyliśmy domyślnego agenta Antigravity i dostosowaliśmy go w tekście. Gdy skończysz iterować konfigurację (instrukcje, umiejętności, wybór modelu i środowisko), możesz zapisać ją jako agenta zarządzanego, którego można używać wielokrotnie. Dzięki temu możesz wywoływać go za pomocą identyfikatora bez powtarzania konfiguracji.
+Nei passaggi precedenti, abbiamo utilizzato l'agente Antigravity predefinito e lo abbiamo personalizzato in linea. Dopo aver eseguito l'iterazione sulla configurazione (istruzioni, competenze, selezione del modello e ambiente), puoi salvarla come agente gestito riutilizzabile. In questo modo puoi richiamarlo per ID senza ripetere la configurazione.
 
-Gdy zapisujesz agenta, zauważysz symetrię architektury z interakcjami w tekście: określasz `base_agent: "antigravity-preview-05-2026"` i możesz przekazać `agent_config` z wybranym `model`, tak jak w przypadku `interactions.create`. Określasz też `base_environment` (z źródeł lub przez rozwidlenie istniejącego środowiska). Agent będzie używać tej konfiguracji środowiska i modelu w każdej nowej interakcji.
+Quando salvi un agente, nota la simmetria architetturale con le interazioni in linea: specifichi `base_agent: "antigravity-preview-05-2026"` e puoi trasmettere un `agent_config` con il `model` scelto proprio come faresti su `interactions.create`. Definisci anche un `base_environment` (da origini o creando una copia di un ambiente esistente). L'agente utilizzerà questa configurazione di ambiente e modello per ogni nuova interazione.
 
-**Ze źródeł:** zdefiniuj źródła w tekście lub z innych źródeł, takich jak GitHub czy Cloud Storage.
+**Da origini:** definisci le origini in linea o da altre origini come GitHub o Cloud Storage.
 
 ### Python
 
@@ -289,7 +289,7 @@ agent = client.agents.create(
     base_agent="antigravity-preview-05-2026",
     agent_config={
         "type": "antigravity",
-        "model": "gemini-3.6-flash",
+        "model": "gemini-3.7-flash",
     },
     system_instruction="You are a math analysis agent. Generate sequences, visualize them, and export results as PDF reports.",
     base_environment={
@@ -320,7 +320,7 @@ const agent = await client.agents.create({
     base_agent: "antigravity-preview-05-2026",
     agent_config: {
         type: "antigravity",
-        model: "gemini-3.6-flash",
+        model: "gemini-3.7-flash",
     },
     system_instruction: "You are a math analysis agent. Generate sequences, visualize them, and export results as PDF reports.",
     base_environment: {
@@ -354,7 +354,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
     "base_agent": "antigravity-preview-05-2026",
     "agent_config": {
         "type": "antigravity",
-        "model": "gemini-3.6-flash"
+        "model": "gemini-3.7-flash"
     },
     "system_instruction": "You are a math analysis agent. Generate sequences, visualize them, and export results as PDF reports.",
     "base_environment": {
@@ -375,9 +375,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 }'
 ```
 
-## Wywoływanie agenta zarządzanego
+## Richiama l'agente gestito
 
-Po zapisaniu agenta zarządzanego możesz go wywołać za pomocą identyfikatora. Każde wywołanie rozwidla środowisko podstawowe, więc każde uruchomienie zaczyna się od nowa:
+Dopo aver salvato un agente gestito, puoi richiamarlo per ID. Ogni chiamata crea una copia dell'ambiente di base, quindi ogni esecuzione inizia da zero:
 
 ### Python
 
@@ -418,19 +418,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Co dalej?
+## Passaggi successivi
 
-- [Agent Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pl): możliwości, obsługiwane narzędzia, multimodalne wprowadzanie danych, ceny i ograniczenia.
-- [Tworzenie zarządzanych agentów](https://ai.google.dev/gemini-api/docs/custom-agents?hl=pl): rozszerzanie Antigravity o własne instrukcje, umiejętności i dane.
-- [Środowiska](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl): źródła, sieci, cykl życia, limity zasobów.
-- [Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl): podstawowy interfejs API dla modeli i agentów.
+- [Agente Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it): funzionalità, strumenti supportati, input multimodale, prezzi e limitazioni.
+- [Creazione di agenti gestiti](https://ai.google.dev/gemini-api/docs/custom-agents?hl=it): estendi Antigravity con le tue istruzioni, competenze e dati.
+- [Ambienti](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it): origini, networking, ciclo di vita, limiti delle risorse.
+- [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it): l'API sottostante per modelli e agenti.
 
-Prześlij opinię
+Invia feedback
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Ostatnia aktualizacja: 2026-07-30 UTC.
+Ultimo aggiornamento 2026-08-19 UTC.
 
-Chcesz przekazać coś jeszcze?
+Vuoi dirci altro?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-08-19 UTC."],[],[]]

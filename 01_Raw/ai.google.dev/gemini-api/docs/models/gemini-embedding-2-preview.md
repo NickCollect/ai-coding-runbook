@@ -1,7 +1,7 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2-preview?hl=fr
-fetched_at: 2026-08-17T02:21:03.614173+00:00
-title: "Mod\u00e8le Gemini Embedding\u00a02 Preview \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+fetched_at: 2026-08-24T02:36:02.363671+00:00
+title: "Mod\u00e8le Gemini Embedding\u00a02 en version Preview \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
 L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
@@ -15,7 +15,7 @@ Google utilise la technologie IA pour traduire le contenu dans votre langue pré
 
 Envoyer des commentaires
 
-# Modèle Gemini Embedding 2 Preview
+# Modèle Gemini Embedding 2 en version Preview
 
 Notre premier modèle d'embedding multimodal, qui fournit un mappage numérique efficace du texte, des images, des vidéos, de l'audio et des PDF dans un espace d'embedding unifié. Le modèle Gemini Embedding 2 est idéal pour la recherche sémantique cross-modale, la récupération de documents et les systèmes de recommandation qui nécessitent des calculs de similarité rapides et évolutifs sur de grands ensembles de données multimodales.
 
@@ -37,8 +37,8 @@ Envoyer des commentaires
 
 Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Dernière mise à jour le 2026/04/29 (UTC).
+Dernière mise à jour le 2026/08/19 (UTC).
 
 Voulez-vous nous donner plus d'informations ?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/04/29 (UTC)."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/08/19 (UTC)."],[],[]]

@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-001?hl=id
-fetched_at: 2026-08-17T02:21:42.799800+00:00
+fetched_at: 2026-08-24T02:32:22.736224+00:00
 title: "Model Embedding Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

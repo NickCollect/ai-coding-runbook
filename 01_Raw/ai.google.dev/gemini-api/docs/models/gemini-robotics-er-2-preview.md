@@ -1,78 +1,82 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-2-preview?hl=fr
-fetched_at: 2026-08-17T02:24:36.441230+00:00
-title: "Gemini Robotics ER\u00a02 Preview \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-2-preview?hl=th
+fetched_at: 2026-08-24T02:22:12.576933+00:00
+title: "\u0e15\u0e31\u0e27\u0e2d\u0e22\u0e48\u0e32\u0e07 Gemini Robotics ER 2 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Envoyer des commentaires
+ส่งความคิดเห็น
 
-# Gemini Robotics ER 2 Preview
+# ตัวอย่าง Gemini Robotics ER 2
 
-Gemini Robotics ER2 est un modèle de vision-langage (VLM) pour la robotique qui accepte les entrées de texte, d'image, de vidéo et d'audio. Il prend en charge le raisonnement spatial, la compréhension des vidéos, l'exécution de code agentique, l'orchestration d'outils en plusieurs étapes et la coordination de plusieurs robots.
+Gemini Robotics ER 2 เป็นโมเดลวิทัศน์ภาษา (VLM) สำหรับหุ่นยนต์ที่
+รับอินพุตข้อความ รูปภาพ วิดีโอ และเสียง โดยรองรับการใช้เหตุผลเชิงพื้นที่
+การทำความเข้าใจวิดีโอ การดำเนินการโค้ดแบบเอเจนต์ การจัดระเบียบเครื่องมือแบบหลายขั้นตอน
+และการประสานงานหุ่นยนต์หลายตัว
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-preview&hl=fr)
+[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-preview&hl=th)
 
-## Documentation
+## เอกสารประกอบ
 
-Consultez la page [Robotique](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=fr) pour obtenir une couverture complète des fonctionnalités.
+ไปที่หน้า[หุ่นยนต์](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=th)เพื่อดูข้อมูลทั้งหมด
+เกี่ยวกับฟีเจอร์และความสามารถ
 
 ## gemini-robotics-er-2-preview
 
-### Gemini Robotics ER 2 Preview
+### Gemini Robotics ER 2 (เวอร์ชันตัวอย่าง)
 
-| Propriété | Description |
+| พร็อพเพอร์ตี้ | คำอธิบาย |
 | --- | --- |
-| Code du modèle id\_card | `gemini-robotics-er-2-preview` |
-| Types de données acceptés pour save | **Entrées**  Texte, images, vidéo, audio  **Résultat**  Texte |
-| token\_autoLimites de jetons[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  131 072  **Limite de jetons de sortie**  65 536 |
-| handyman Fonctionnalités | **[Génération d'audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=fr)**  Not supported  **[Mise en cache](https://ai.google.dev/gemini-api/docs/caching?hl=fr)**  Compatible  **[Exécution de code](https://ai.google.dev/gemini-api/docs/code-execution?hl=fr)**  Compatible  **[Utilisation de l'ordinateur](https://ai.google.dev/gemini-api/docs/computer-use?hl=fr)**  Compatible  **[Recherche de fichiers](https://ai.google.dev/gemini-api/docs/file-search?hl=fr)**  Compatible  **[Appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr)**  Compatible  **[Ancrage avec Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fr)**  Compatible  **[Génération d'images](https://ai.google.dev/gemini-api/docs/image-generation?hl=fr)**  Not supported  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=fr)**  Not supported  **[Ancrage de recherche](https://ai.google.dev/gemini-api/docs/google-search?hl=fr)**  Compatible  **[Sorties structurées](https://ai.google.dev/gemini-api/docs/structured-output?hl=fr)**  Compatible  **[Réflexion](https://ai.google.dev/gemini-api/docs/thinking?hl=fr)**  Compatible  **[Contexte de l'URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr)**  Compatible |
-| speed Options de consommation | **[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr)**  Compatible  **[Inférence Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=fr)**  Not supported  **[Inférence prioritaire](https://ai.google.dev/gemini-api/docs/priority-inference?hl=fr)**  Not supported |
-| Versions 123 | Pour en savoir plus, consultez les [schémas de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - Aperçu : `gemini-robotics-er-2-preview` |
-| calendar\_monthDernière mise à jour | Juillet 2026 |
-| Fiche de modèle id\_card | [fiche de modèle](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=fr) |
+| รหัสโมเดล id\_card | `gemini-robotics-er-2-preview` |
+| บันทึกประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ รูปภาพ วิดีโอ เสียง  **เอาต์พุต**  ข้อความ |
+| token\_autoขีดจำกัดของโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  131,072  **ขีดจำกัดโทเค็นเอาต์พุต**  65,536 |
+| handymanความสามารถ | **[การสร้างเสียง](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th)**  สิ่งที่ทำไม่ได้  **[การแคช](https://ai.google.dev/gemini-api/docs/caching?hl=th)**  สิ่งที่ทำได้  **[การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th)**  สิ่งที่ทำได้  **[การใช้คอมพิวเตอร์](https://ai.google.dev/gemini-api/docs/computer-use?hl=th)**  สิ่งที่ทำได้  **[การค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th)**  สิ่งที่ทำได้  **[การเรียกใช้ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)**  สิ่งที่ทำได้  **[การเชื่อมต่อแหล่งข้อมูลกับ Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th)**  สิ่งที่ทำได้  **[การสร้างรูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)**  สิ่งที่ทำไม่ได้  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=th)**  สิ่งที่ทำไม่ได้  **[การเชื่อมต่อแหล่งข้อมูลของ Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th)**  สิ่งที่ทำได้  **[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)**  สิ่งที่ทำได้  **[การคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th)**  สิ่งที่ทำได้  **[บริบทของ URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th)**  สิ่งที่ทำได้ |
+| speedตัวเลือกการรับชม | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th)**  สิ่งที่ทำได้  **[การอนุมานแบบยืดหยุ่น](https://ai.google.dev/gemini-api/docs/flex-inference?hl=th)**  สิ่งที่ทำไม่ได้  **[การอนุมานตามลำดับความสำคัญ](https://ai.google.dev/gemini-api/docs/priority-inference?hl=th)**  สิ่งที่ทำไม่ได้ |
+| 123เวอร์ชัน | อ่านรายละเอียดเพิ่มเติมได้ใน[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)  - ตัวอย่าง: `gemini-robotics-er-2-preview` |
+| calendar\_monthการอัปเดตล่าสุด | กรกฎาคม 2026 |
+| id\_cardการ์ดโมเดล | [การ์ดโมเดล](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=th) |
 
-### Aperçu du streaming Gemini Robotics ER 2
+### Gemini Robotics ER 2 Streaming Preview
 
-| Propriété | Description |
+| พร็อพเพอร์ตี้ | คำอธิบาย |
 | --- | --- |
-| Code du modèle id\_card | `gemini-robotics-er-2-streaming-preview` |
-| Types de données acceptés pour save | **Entrées**  Texte, images, vidéo, audio  **Résultat**  Texte |
-| token\_autoLimites de jetons[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  131 072  **Limite de jetons de sortie**  65 536 |
-| handyman Fonctionnalités | **[Génération d'audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=fr)**  Not supported  **[Mise en cache](https://ai.google.dev/gemini-api/docs/caching?hl=fr)**  Not supported  **[Exécution de code](https://ai.google.dev/gemini-api/docs/code-execution?hl=fr)**  Not supported  **[Utilisation de l'ordinateur](https://ai.google.dev/gemini-api/docs/computer-use?hl=fr)**  Not supported  **[Recherche de fichiers](https://ai.google.dev/gemini-api/docs/file-search?hl=fr)**  Not supported  **[Appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr)**  Compatible  **[Ancrage avec Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fr)**  Not supported  **[Génération d'images](https://ai.google.dev/gemini-api/docs/image-generation?hl=fr)**  Not supported  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=fr)**  Compatible  **[Ancrage de recherche](https://ai.google.dev/gemini-api/docs/google-search?hl=fr)**  Compatible  **[Sorties structurées](https://ai.google.dev/gemini-api/docs/structured-output?hl=fr)**  Not supported  **[Réflexion](https://ai.google.dev/gemini-api/docs/thinking?hl=fr)**  Compatible  **[Contexte de l'URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr)**  Not supported |
-| speed Options de consommation | **[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr)**  Not supported  **[Inférence Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=fr)**  Not supported  **[Inférence prioritaire](https://ai.google.dev/gemini-api/docs/priority-inference?hl=fr)**  Not supported |
-| Versions 123 | Pour en savoir plus, consultez les [schémas de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - Aperçu : `gemini-robotics-er-2-streaming-preview` |
-| calendar\_monthDernière mise à jour | Juillet 2026 |
-| Fiche de modèle id\_card | [fiche de modèle](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=fr) |
+| รหัสโมเดล id\_card | `gemini-robotics-er-2-streaming-preview` |
+| บันทึกประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ รูปภาพ วิดีโอ เสียง  **เอาต์พุต**  ข้อความ |
+| token\_autoขีดจำกัดของโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  131,072  **ขีดจำกัดโทเค็นเอาต์พุต**  65,536 |
+| handymanความสามารถ | **[การสร้างเสียง](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th)**  สิ่งที่ทำไม่ได้  **[การแคช](https://ai.google.dev/gemini-api/docs/caching?hl=th)**  สิ่งที่ทำไม่ได้  **[การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th)**  สิ่งที่ทำไม่ได้  **[การใช้คอมพิวเตอร์](https://ai.google.dev/gemini-api/docs/computer-use?hl=th)**  สิ่งที่ทำไม่ได้  **[การค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th)**  สิ่งที่ทำไม่ได้  **[การเรียกใช้ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)**  สิ่งที่ทำได้  **[การเชื่อมต่อแหล่งข้อมูลกับ Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th)**  สิ่งที่ทำไม่ได้  **[การสร้างรูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)**  สิ่งที่ทำไม่ได้  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=th)**  สิ่งที่ทำได้  **[การเชื่อมต่อแหล่งข้อมูลของ Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th)**  สิ่งที่ทำได้  **[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)**  สิ่งที่ทำไม่ได้  **[การคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th)**  สิ่งที่ทำได้  **[บริบทของ URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th)**  สิ่งที่ทำไม่ได้ |
+| speedตัวเลือกการรับชม | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th)**  สิ่งที่ทำไม่ได้  **[การอนุมานแบบยืดหยุ่น](https://ai.google.dev/gemini-api/docs/flex-inference?hl=th)**  สิ่งที่ทำไม่ได้  **[การอนุมานตามลำดับความสำคัญ](https://ai.google.dev/gemini-api/docs/priority-inference?hl=th)**  สิ่งที่ทำไม่ได้ |
+| 123เวอร์ชัน | อ่านรายละเอียดเพิ่มเติมได้ใน[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)  - ตัวอย่าง: `gemini-robotics-er-2-streaming-preview` |
+| calendar\_monthการอัปเดตล่าสุด | กรกฎาคม 2026 |
+| id\_cardการ์ดโมเดล | [การ์ดโมเดล](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=th) |
 
-### Gemini Robotics ER 1.6 (preview)
+### Gemini Robotics ER 1.6 (เวอร์ชันตัวอย่าง)
 
-| Propriété | Description |
+| พร็อพเพอร์ตี้ | คำอธิบาย |
 | --- | --- |
-| Code du modèle id\_card | `gemini-robotics-er-1.6-preview` |
-| Types de données acceptés pour save | **Entrées**  Texte, images, vidéo, audio  **Résultat**  Texte |
-| token\_autoLimites de jetons[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  131 072  **Limite de jetons de sortie**  65 536 |
-| handyman Fonctionnalités | **[Génération d'audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=fr)**  Not supported  **[Mise en cache](https://ai.google.dev/gemini-api/docs/caching?hl=fr)**  Compatible  **[Exécution de code](https://ai.google.dev/gemini-api/docs/code-execution?hl=fr)**  Compatible  **[Utilisation de l'ordinateur](https://ai.google.dev/gemini-api/docs/computer-use?hl=fr)**  Compatible  **[Recherche de fichiers](https://ai.google.dev/gemini-api/docs/file-search?hl=fr)**  Compatible  **[Appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr)**  Compatible  **[Ancrage avec Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fr)**  Compatible  **[Génération d'images](https://ai.google.dev/gemini-api/docs/image-generation?hl=fr)**  Not supported  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=fr)**  Not supported  **[Ancrage de recherche](https://ai.google.dev/gemini-api/docs/google-search?hl=fr)**  Compatible  **[Sorties structurées](https://ai.google.dev/gemini-api/docs/structured-output?hl=fr)**  Compatible  **[Réflexion](https://ai.google.dev/gemini-api/docs/thinking?hl=fr)**  Compatible  **[Contexte de l'URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr)**  Compatible |
-| speed Options de consommation | **[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr)**  Compatible  **[Inférence Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=fr)**  Not supported  **[Inférence prioritaire](https://ai.google.dev/gemini-api/docs/priority-inference?hl=fr)**  Not supported |
-| Versions 123 | Pour en savoir plus, consultez les [schémas de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - Aperçu : `gemini-robotics-er-1.6-preview` |
-| calendar\_monthDernière mise à jour | Décembre 2025 |
-| cognition\_2Date limite des connaissances | Janvier 2025 |
+| รหัสโมเดล id\_card | `gemini-robotics-er-1.6-preview` |
+| บันทึกประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ รูปภาพ วิดีโอ เสียง  **เอาต์พุต**  ข้อความ |
+| token\_autoขีดจำกัดของโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  131,072  **ขีดจำกัดโทเค็นเอาต์พุต**  65,536 |
+| handymanความสามารถ | **[การสร้างเสียง](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th)**  สิ่งที่ทำไม่ได้  **[การแคช](https://ai.google.dev/gemini-api/docs/caching?hl=th)**  สิ่งที่ทำได้  **[การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th)**  สิ่งที่ทำได้  **[การใช้คอมพิวเตอร์](https://ai.google.dev/gemini-api/docs/computer-use?hl=th)**  สิ่งที่ทำได้  **[การค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th)**  สิ่งที่ทำได้  **[การเรียกใช้ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)**  สิ่งที่ทำได้  **[การเชื่อมต่อแหล่งข้อมูลกับ Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th)**  สิ่งที่ทำได้  **[การสร้างรูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)**  สิ่งที่ทำไม่ได้  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=th)**  สิ่งที่ทำไม่ได้  **[การเชื่อมต่อแหล่งข้อมูลของ Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th)**  สิ่งที่ทำได้  **[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)**  สิ่งที่ทำได้  **[การคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th)**  สิ่งที่ทำได้  **[บริบทของ URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th)**  สิ่งที่ทำได้ |
+| speedตัวเลือกการรับชม | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th)**  สิ่งที่ทำได้  **[การอนุมานแบบยืดหยุ่น](https://ai.google.dev/gemini-api/docs/flex-inference?hl=th)**  สิ่งที่ทำไม่ได้  **[การอนุมานตามลำดับความสำคัญ](https://ai.google.dev/gemini-api/docs/priority-inference?hl=th)**  สิ่งที่ทำไม่ได้ |
+| 123เวอร์ชัน | อ่านรายละเอียดเพิ่มเติมได้ใน[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)  - ตัวอย่าง: `gemini-robotics-er-1.6-preview` |
+| calendar\_monthการอัปเดตล่าสุด | ธันวาคม 2025 |
+| cognition\_2การตัดข้อมูล | มกราคม 2025 |
 
-Envoyer des commentaires
+ส่งความคิดเห็น
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Dernière mise à jour le 2026/07/30 (UTC).
+อัปเดตล่าสุด 2026-08-19 UTC
 
-Voulez-vous nous donner plus d'informations ?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/30 (UTC)."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-08-19 UTC"],[],[]]

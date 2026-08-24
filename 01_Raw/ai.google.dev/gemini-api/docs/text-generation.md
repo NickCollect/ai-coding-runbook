@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-TW
-fetched_at: 2026-08-17T02:23:45.792968+00:00
-title: "\u6587\u5b57\u751f\u6210 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=th
+fetched_at: 2026-08-24T02:20:48.638774+00:00
+title: "\u0e01\u0e32\u0e23\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-提供意見
+ส่งความคิดเห็น
 
-# 文字生成
+# การสร้างข้อความ
 
-Gemini API 可根據文字、圖片、影片和音訊輸入內容生成文字輸出內容。
+Gemini API สามารถสร้างเอาต์พุตข้อความจากอินพุตข้อความ รูปภาพ วิดีโอ และเสียง
 
-基本範例如下：
+ตัวอย่างเบื้องต้นมีดังนี้
 
 ### Python
 
@@ -66,15 +66,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Google GenAI SDK 會在傳回的 `Interaction` 物件上直接提供便利屬性，方便您存取模型的回覆。
+Google GenAI SDK มีพร็อพเพอร์ตี้ที่สะดวกในออบเจ็กต์ `Interaction` ที่ส่งกลับมาโดยตรงเพื่อให้เข้าถึงการตอบกลับของโมเดลได้
 
-最常見的輔助函式是 **`interaction.output_text`** (String)，會傳回模型回覆中的最後一個文字區塊。如果回覆內容分成多個連續的 `TextContent` 區塊，系統會自動合併這些區塊。請注意，`.output_text` 不包括以非文字內容 (例如想法、圖片、音訊或工具呼叫) 分隔的先前文字區塊。如果是複雜或交錯的多模態回應，則必須改為手動疊代 `steps`。如要進一步瞭解其他媒體便利性屬性，請參閱「[互動總覽](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-tw#convenience-properties)」。
+ตัวช่วยที่ใช้บ่อยที่สุดคือ **`interaction.output_text`** (String) ซึ่งจะแสดงผลบล็อกข้อความสุดท้ายในการตอบกลับของโมเดล หากการตอบกลับแยกออกเป็นบล็อก `TextContent` หลายบล็อกที่ต่อเนื่องกัน ระบบจะรวมบล็อกเหล่านั้นโดยอัตโนมัติ
+โปรดทราบว่า `.output_text` จะไม่รวมบล็อกข้อความก่อนหน้าที่คั่นด้วยเนื้อหาที่ไม่ใช่ข้อความ (เช่น ความคิด รูปภาพ เสียง หรือการเรียกใช้เครื่องมือ) สำหรับคำตอบแบบหลายรูปแบบที่ซับซ้อนหรือมีการสลับกัน คุณต้องวนซ้ำ `steps` ด้วยตนเองแทน ดูข้อมูลเพิ่มเติมเกี่ยวกับพร็อพเพอร์ตี้ที่สะดวกอื่นๆ ของสื่อได้ที่
+[ภาพรวมของการโต้ตอบ](https://ai.google.dev/gemini-api/docs/interactions?hl=th#convenience-properties)
 
-## 與 Gemini 一起思考
+## การคิดด้วย Gemini
 
-Gemini 模型預設會[「思考」](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=zh-tw)，也就是先推論要求內容，再進行回覆。
+โมเดล Gemini มักจะเปิดใช้ ["การคิด"](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=th)
+ไว้โดยค่าเริ่มต้น ซึ่งช่วยให้โมเดลใช้เหตุผลก่อนที่จะตอบกลับ
+คำขอได้
 
-每種模型支援不同的思考設定，可讓您控管成本、延遲和智慧。詳情請參閱[思考指南](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=zh-tw#set-budget)。
+โมเดลแต่ละรายการรองรับการกำหนดค่าการคิดที่แตกต่างกัน ซึ่งช่วยให้คุณควบคุมต้นทุน เวลาในการตอบสนอง และความฉลาดได้ ดูรายละเอียดเพิ่มเติมได้ที่
+[คู่มือการคิด](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=th#set-budget)
 
 ### Python
 
@@ -129,9 +134,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 系統指令和其他設定
+## คำแนะนำระบบและการกำหนดค่าอื่นๆ
 
-你可以使用系統指令引導 Gemini 模型行為。傳遞 `system_instruction` 參數來設定模型行為。
+คุณสามารถกำหนดลักษณะการทำงานของโมเดล Gemini ด้วยคำแนะนำระบบได้ ส่งพารามิเตอร์ `system_instruction` เพื่อกำหนดค่าลักษณะการทำงานของโมเดล
 
 ### Python
 
@@ -181,7 +186,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-您也可以使用 `generation_config` 參數，覆寫預設生成參數，例如溫度。
+นอกจากนี้ คุณยังลบล้างพารามิเตอร์การสร้างเริ่มต้น เช่น อุณหภูมิ โดยใช้พารามิเตอร์ `generation_config` ได้ด้วย
 
 ### Python
 
@@ -236,11 +241,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-如需可設定參數的完整清單及其說明，請參閱 [Interactions API 參考資料](https://ai.google.dev/api/interactions-api?hl=zh-tw)。
+โปรดดูรายการพารามิเตอร์ที่กำหนดค่าได้ทั้งหมดและคำอธิบายของพารามิเตอร์เหล่านั้นได้ที่ข้อมูลอ้างอิง [Interactions API](https://ai.google.dev/api/interactions-api?hl=th)
 
-## 多模態輸入內容
+## อินพุตหลายรูปแบบ
 
-Gemini API 支援多模態輸入內容，可讓您結合文字和媒體檔案。以下範例說明如何提供圖片：
+Gemini API รองรับอินพุตหลายรูปแบบ ซึ่งช่วยให้คุณรวมข้อความกับไฟล์สื่อได้ ตัวอย่างต่อไปนี้แสดงการระบุรูปภาพ
 
 ### Python
 
@@ -315,13 +320,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-如需提供圖片的替代方法和更進階的圖片處理方式，請參閱[圖像解讀指南](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=zh-tw)。這項 API 也支援[文件](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=zh-tw)、[影片](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=zh-tw)和[音訊](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=zh-tw)輸入內容，並可解讀這些內容。
+ดูวิธีการระบุรูปภาพแบบอื่นและการประมวลผลรูปภาพขั้นสูงเพิ่มเติมได้ที่
+ดู[คู่มือการทำความเข้าใจรูปภาพ](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=th)ของเรา
+นอกจากนี้ API ยังรองรับอินพุตและการทำความเข้าใจ[เอกสาร](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=th) [วิดีโอ](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=th) และ
+[เสียง](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=th)ด้วย
 
-## 逐句顯示回覆
+## การตอบกลับแบบสตรีม
 
-根據預設，整個生成程序完成後，模型才會傳回回覆。
+โดยค่าเริ่มต้น โมเดลจะแสดงผลการตอบกลับหลังจากกระบวนการสร้างทั้งหมดเสร็จสมบูรณ์แล้วเท่านั้น
 
-如要讓互動更流暢，請使用串流處理生成的回應區塊。如需涵蓋事件類型、使用工具串流、思考、代理程式和圖像生成的完整指南，請參閱專屬的[串流互動](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=zh-tw)指南。
+หากต้องการให้การโต้ตอบราบรื่นขึ้น ให้ใช้การสตรีมเพื่อจัดการกับส่วนการตอบกลับเมื่อมีการสร้าง [ดูคู่มือ
+การโต้ตอบแบบสตรีม
+โดยเฉพาะ ซึ่งครอบคลุมประเภทเหตุการณ์
+การสตรีมด้วยเครื่องมือ การคิด เอเจนต์ และการสร้างรูปภาพ](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=th)
 
 ### Python
 
@@ -381,9 +392,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-## 多轉折對話
+## การสนทนาไปมา
 
-Interactions API 支援多輪對話，只要使用 `previous_interaction_id` 將互動串連在一起即可。每個回合都是獨立的互動，API 會自動管理對話記錄。
+Interactions API รองรับการสนทนาไปมาโดยการเชื่อมโยงการโต้ตอบเข้าด้วยกันโดยใช้ `previous_interaction_id` แต่ละรอบเป็นการโต้ตอบแยกกัน และ API จะจัดการประวัติการสนทนาโดยอัตโนมัติ
 
 ### Python
 
@@ -454,7 +465,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-您也可以將 `previous_interaction_id` 與串流方法結合，用於多輪對話。
+นอกจากนี้ยังใช้การสตรีมสำหรับการสนทนาไปมาได้ด้วยการรวม `previous_interaction_id` กับวิธีการสตรีม
 
 ### Python
 
@@ -537,14 +548,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-## 無狀態對話
+## การสนทนาแบบไม่เก็บสถานะ
 
-根據預設，使用 `previous_interaction_id` 時，Interactions API 會在伺服器端管理對話狀態。不過，您也可以在用戶端自行管理對話記錄，以無狀態模式運作。
+โดยค่าเริ่มต้น Interactions API จะจัดการสถานะการสนทนาฝั่งเซิร์ฟเวอร์เมื่อคุณใช้ `previous_interaction_id` อย่างไรก็ตาม คุณยังทำงานในโหมดไร้สถานะได้ด้วยการจัดการประวัติการสนทนาด้วยตนเองฝั่งไคลเอ็นต์
 
-如要使用無狀態模式，請按照下列步驟操作：
-1. 在要求中設定 `store=false`，即可停用伺服器端儲存空間。
-2. 在用戶端將對話記錄維護為 **steps** 陣列。
-3. 在後續要求中，請在 `input` 欄位中傳遞累積的步驟，並將新回合附加為 `user_input` 步驟。
+วิธีใช้โหมดไร้สถานะ 1. ตั้งค่า `store=false` ในคำขอเพื่อเลือกไม่ใช้พื้นที่เก็บข้อมูลฝั่งเซิร์ฟเวอร์
+2. เก็บประวัติการสนทนาเป็นอาร์เรย์ของ**ขั้นตอน** ฝั่งไคลเอ็นต์
+3. ในคำขอที่ตามมา ให้ส่งขั้นตอนที่สะสมไว้ในช่อง `input` และเพิ่มรอบใหม่เป็นขั้นตอน `user_input`
 
 ### Python
 
@@ -665,26 +675,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## 提示詞撰寫訣竅
+## เคล็ดลับเกี่ยวกับพรอมต์
 
-請參閱[提示工程指南](https://ai.google.dev/gemini/docs/prompting-strategies?hl=zh-tw)，瞭解如何充分發揮 Gemini 的效用。
+โปรดดู[คู่มือวิศวกรรมพรอมต์](https://ai.google.dev/gemini/docs/prompting-strategies?hl=th)สำหรับ
+คำแนะนำในการใช้ประโยชน์จาก Gemini ให้ได้มากที่สุด
 
-## 後續步驟
+## ขั้นตอนถัดไป
 
-- 在 [Google AI Studio 中試用 Gemini](https://aistudio.google.com?hl=zh-tw)。
-- 試用[結構化輸出內容](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=zh-tw)，取得類似 JSON 的回覆。
-- 探索 Gemini 的[圖片](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=zh-tw)、
-  [影片](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=zh-tw)、
-  [音訊](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=zh-tw)和
-  [文件](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=zh-tw)理解功能。
-- 瞭解多模態[檔案提示策略](https://ai.google.dev/gemini-api/docs/interactions/files?hl=zh-tw#prompt-guide)。
+- ลองใช้ [Gemini ใน Google AI Studio](https://aistudio.google.com?hl=th)
+- ทดลองใช้
+  [เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=th)สำหรับการตอบกลับที่คล้ายกับ
+  JSON
+- สำรวจความสามารถในการทำความเข้าใจ[รูปภาพ](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=th),
+  [วิดีโอ](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=th),
+  [เสียง](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=th) และ
+  [เอกสาร](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=th)ของ Gemini
+- ดูข้อมูลเกี่ยวกับกลยุทธ์การใช้พรอมต์กับไฟล์หลายรูปแบบ
 
-提供意見
+ส่งความคิดเห็น
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-上次更新時間：2026-07-30 (世界標準時間)。
+อัปเดตล่าสุด 2026-07-30 UTC
 
-想進一步說明嗎？
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-30 (世界標準時間)。"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-30 UTC"],[],[]]

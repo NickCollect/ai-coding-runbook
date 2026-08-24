@@ -1,50 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=pt-BR
-fetched_at: 2026-08-17T02:31:03.357494+00:00
-title: "Pr\u00e9-lan\u00e7amento do Gemini 3 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=hi
+fetched_at: 2026-08-24T02:29:43.531171+00:00
+title: "Gemini 3 Flash \u0915\u0940 \u091d\u0932\u0915 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Envie comentários
+सुझाव भेजें
 
-# Pré-lançamento do Gemini 3 Flash
+# Gemini 3 Flash की झलक
 
-O melhor modelo do mundo para compreensão multimodal e nosso modelo de agentes e vibe coding mais avançado até o momento, oferecendo visuais mais ricos e interatividade mais profunda, tudo com base em um raciocínio de última geração.
+यह मॉडल, टेक्स्ट, इमेज वगैरह को प्रोसेस करने के मामले में दुनिया का बेहतरीन मॉडल है. साथ ही, यह हमारा अब तक का सबसे पावरफ़ुल एजेंटिक और वाइब-कोडिंग मॉडल है. यह बेहतर विज़ुअल और ज़्यादा इंटरैक्टिविटी उपलब्ध कराता है. इसे, स्टेट-ऑफ़-द-आर्ट गहराई से विश्लेषण के आधार पर बनाया गया है.
 
-[Testar no Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3-flash-preview&hl=pt-br)
+[Google AI Studio में आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-3-flash-preview&hl=hi)
 
-## Documentação
+## दस्तावेज़
 
-Acesse a página do [Guia para desenvolvedores do Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=pt-br) para conferir todos os recursos e funcionalidades.
+सुविधाओं और क्षमताओं के बारे में पूरी जानकारी पाने के लिए, [Gemini 3 की डेवलपर गाइड](https://ai.google.dev/gemini-api/docs/gemini-3?hl=hi) वाले पेज पर जाएं.
 
 ## gemini-3-flash-preview
 
-| Propriedade | Descrição |
+| प्रॉपर्टी | ब्यौरा |
 | --- | --- |
-| Código do modelo id\_card | `gemini-3-flash-preview` |
-| saveTipos de dados aceitos | **Entradas** (link em inglês)  Texto, imagem, vídeo, áudio e PDF  **Saída**  Texto |
-| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de tokens de entrada**  1.048.576  **Limite de token de saída**  65.536 |
-| handymanRecursos | **[Geração de áudio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br)**  incompatível  **[Armazenamento em cache](https://ai.google.dev/gemini-api/docs/caching?hl=pt-br)**  Compatível  **[Execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br)**  Compatível  **[Uso do computador](https://ai.google.dev/gemini-api/docs/computer-use?hl=pt-br)**  Compatível  **[Pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br)**  Compatível  **[Chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br)**  Compatível  **[Embasamento com o Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pt-br)**  Compatível  **[Geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br)**  incompatível  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=pt-br)**  incompatível  **[Embasamento da pesquisa](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br)**  Compatível  **[Respostas estruturadas](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br)**  Compatível  **[Raciocínio](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br)**  Compatível  **[Contexto do URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br)**  Compatível |
-| speedOpções de consumo | **[API em lote](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br)**  Compatível  **[Inferência flexível](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pt-br)**  Compatível  **[Inferência de prioridade](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pt-br)**  Compatível |
-| Versões 123 | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - `Preview: gemini-3-flash-preview` |
-| calendar\_monthÚltima atualização | Dezembro de 2025 |
-| id\_cardCard de modelo | [Card de modelo](https://deepmind.google/models/model-cards/gemini-3-flash/?hl=pt-br) |
+| id\_cardModel कोड | `gemini-3-flash-preview` |
+| saveकौन-कौनसे डेटा टाइप इसके साथ काम करते हैं | **इनपुट**  टेक्स्ट, इमेज, वीडियो, ऑडियो, और PDF  **आउटपुट**  टेक्स्ट |
+| token\_autoटोकन की सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  1,048,576  **आउटपुट टोकन की सीमा**  65,536 |
+| handymanसुविधाएं | **[ऑडियो जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi)**  काम नहीं करता है  **[कैश मेमोरी में सेव होना](https://ai.google.dev/gemini-api/docs/caching?hl=hi)**  काम करता है  **[कोड एक्ज़ीक्यूशन](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi)**  काम करता है  **[कंप्यूटर पर इस्तेमाल](https://ai.google.dev/gemini-api/docs/computer-use?hl=hi)**  काम करता है  **[फ़ाइल सर्च](https://ai.google.dev/gemini-api/docs/file-search?hl=hi)**  काम करता है  **[फ़ंक्शन कॉल](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi)**  काम करता है  **[Google Maps के साथ भरोसेमंद स्रोतों से जानकारी लें](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi)**  काम करता है  **[इमेज जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi)**  काम नहीं करता है  **[लाइव एपीआई](https://ai.google.dev/gemini-api/docs/live-api?hl=hi)**  काम नहीं करता है  **[भरोसेमंद स्रोतों से जानकारी लें](https://ai.google.dev/gemini-api/docs/google-search?hl=hi)**  काम करता है  **[स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi)**  काम करता है  **[प्रोसेस](https://ai.google.dev/gemini-api/docs/thinking?hl=hi)**  काम करता है  **[यूआरएल के हिसाब से कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi)**  काम करता है |
+| speedConsumption विकल्प | **[बैच एपीआई](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi)**  काम करता है  **[Flex अनुमान](https://ai.google.dev/gemini-api/docs/flex-inference?hl=hi)**  काम करता है  **[प्राथमिकता अनुमान](https://ai.google.dev/gemini-api/docs/priority-inference?hl=hi)**  काम करता है |
+| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल के वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) पढ़ें.  - `Preview: gemini-3-flash-preview` |
+| calendar\_monthसबसे नया अपडेट | दिसंबर 2025 |
+| id\_cardमॉडल कार्ड | [मॉडल कार्ड](https://deepmind.google/models/model-cards/gemini-3-flash/?hl=hi) |
 
-Envie comentários
+सुझाव भेजें
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Última atualização 2026-07-21 UTC.
+आखिरी बार 2026-08-19 (UTC) को अपडेट किया गया.
 
-Quer enviar seu feedback?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-07-21 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-08-19 (UTC) को अपडेट किया गया."],[],[]]

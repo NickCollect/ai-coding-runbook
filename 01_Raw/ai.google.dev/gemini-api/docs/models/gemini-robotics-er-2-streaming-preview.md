@@ -1,78 +1,78 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-2-streaming-preview?hl=he
-fetched_at: 2026-08-17T02:30:07.409732+00:00
-title: "\u202bGemini Robotics ER 2 Streaming Preview \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-2-streaming-preview?hl=pl
+fetched_at: 2026-08-24T02:22:52.903745+00:00
+title: "Przesy\u0142anie strumieniowe Gemini Robotics ER\u00a02 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-שליחת משוב
+Prześlij opinię
 
-# ‫Gemini Robotics ER 2 Streaming Preview
+# Przesyłanie strumieniowe Gemini Robotics ER 2
 
-‫Gemini Robotics ER 2 Streaming הוא מודל ראייה-שפה (VLM) לרובוטיקה שעבר אופטימיזציה לסטרימינג של טקסט בזמן אמת באמצעות Live API. הוא מקבל קלט של טקסט, תמונות, סרטונים ואודיו, ותומך בהזרמה דו-כיוונית עם קריאה לפונקציות.
+Gemini Robotics ER 2 Streaming to model wizualno-językowy (VLM) dla robotyki zoptymalizowany pod kątem przesyłania strumieniowego tekstu w czasie rzeczywistym za pomocą interfejsu Live API. Przyjmuje dane wejściowe w formie tekstu, obrazu, filmu i dźwięku oraz obsługuje dwukierunkowe przesyłanie strumieniowe z wywoływaniem funkcji.
 
-[לניסיון ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-streaming-preview&hl=he)
+[Wypróbuj w Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-streaming-preview&hl=pl)
 
-## מאמרי עזרה
+## Dokumentacja
 
-בדף [Live API for robotics](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=he) אפשר לקרוא על כל התכונות והיכולות.
+Więcej informacji o funkcjach i możliwościach znajdziesz na stronie [Live API for robotics](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=pl).
 
 ## gemini-robotics-er-2-streaming-preview
 
-### ‫Gemini Robotics ER 2 Preview
+### Gemini Robotics ER 2 (wersja testowa)
 
-| נכס | תיאור |
+| Właściwość | Opis |
 | --- | --- |
-| id\_cardקוד מודל | `gemini-robotics-er-2-preview` |
-| saveסוגי נתונים נתמכים | **קלטים**  טקסט, תמונות, סרטונים, אודיו  **פלט**  טקסט |
-| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  131,072  **Output token limit**  65,536 |
-| handymanיכולות | **[יצירת אודיו](https://ai.google.dev/gemini-api/docs/speech-generation?hl=he)**  לא נתמך  **[שמירת נתונים במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he)**  נתמך  **[הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he)**  נתמך  **[שימוש במחשב](https://ai.google.dev/gemini-api/docs/computer-use?hl=he)**  נתמך  **[חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he)**  נתמך  **[בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he)**  נתמך  **[עיגון בעזרת מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he)**  נתמך  **[יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he)**  לא נתמך  ‫**[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=he)**  לא נתמך  **[חיפוש עם עיגון בנתונים](https://ai.google.dev/gemini-api/docs/google-search?hl=he)**  נתמך  **[פלטים מובנים](https://ai.google.dev/gemini-api/docs/structured-output?hl=he)**  נתמך  **[חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he)**  נתמך  **[הקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he)**  נתמך |
-| speedאפשרויות צריכה | ‫**[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he)**  נתמך  **[הסקת מסקנות ב-Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=he)**  לא נתמך  **[הסקת עדיפות](https://ai.google.dev/gemini-api/docs/priority-inference?hl=he)**  לא נתמך |
-| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [תבניות של גרסאות מודל](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - תצוגה מקדימה: `gemini-robotics-er-2-preview` |
-| calendar\_monthהעדכון האחרון | יולי 2026 |
-| id\_cardכרטיס מודל | [כרטיס מודל](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=he) |
+| id\_cardKod modelu | `gemini-robotics-er-2-preview` |
+| saveObsługiwane typy danych | **Dane wejściowe**  Tekst, obrazy, filmy, dźwięk  **Dane wyjściowe**  Tekst |
+| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Limit tokenów wejściowych**  131 072  **Limit tokenów wyjściowych**  65 536 |
+| handyman Możliwości | **[Generowanie dźwięku](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl)**  Nieobsługiwane  **[Zapisywanie w pamięci podręcznej](https://ai.google.dev/gemini-api/docs/caching?hl=pl)**  Obsługiwane  **[Wykonanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl)**  Obsługiwane  **[Korzystanie z komputera](https://ai.google.dev/gemini-api/docs/computer-use?hl=pl)**  Obsługiwane  **[Wyszukiwanie plików](https://ai.google.dev/gemini-api/docs/file-search?hl=pl)**  Obsługiwane  **[Wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl)**  Obsługiwane  **[Powiązanie ze źródłami informacji przy użyciu Map Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pl)**  Obsługiwane  **[Generowanie obrazów](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl)**  Nieobsługiwane  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=pl)**  Nieobsługiwane  **[Szukaj groundingu](https://ai.google.dev/gemini-api/docs/google-search?hl=pl)**  Obsługiwane  **[Ustrukturyzowane dane wyjściowe](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl)**  Obsługiwane  **[Myślenie](https://ai.google.dev/gemini-api/docs/thinking?hl=pl)**  Obsługiwane  **[Kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl)**  Obsługiwane |
+| speed Opcje wykorzystania | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=pl)**  Obsługiwane  **[Wnioskowanie Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pl)**  Nieobsługiwane  **[Priorytet wnioskowania](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pl)**  Nieobsługiwane |
+| Wersje 123 | Więcej informacji znajdziesz w [wzorcach wersji modelu](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#model-versions).  - Podgląd: `gemini-robotics-er-2-preview` |
+| calendar\_monthOstatnia aktualizacja | Lipiec 2026 r. |
+| id\_cardKarta modelu | [Karta modelu](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=pl) |
 
-### ‫Gemini Robotics ER 2 Streaming Preview
+### Gemini Robotics ER 2 Streaming Preview
 
-| נכס | תיאור |
+| Właściwość | Opis |
 | --- | --- |
-| id\_cardקוד מודל | `gemini-robotics-er-2-streaming-preview` |
-| saveסוגי נתונים נתמכים | **קלטים**  טקסט, תמונות, סרטונים, אודיו  **פלט**  טקסט |
-| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  131,072  **Output token limit**  65,536 |
-| handymanיכולות | **[יצירת אודיו](https://ai.google.dev/gemini-api/docs/speech-generation?hl=he)**  לא נתמך  **[שמירת נתונים במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he)**  לא נתמך  **[הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he)**  לא נתמך  **[שימוש במחשב](https://ai.google.dev/gemini-api/docs/computer-use?hl=he)**  לא נתמך  **[חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he)**  לא נתמך  **[בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he)**  נתמך  **[עיגון בעזרת מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he)**  לא נתמך  **[יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he)**  לא נתמך  ‫**[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=he)**  נתמך  **[חיפוש עם עיגון בנתונים](https://ai.google.dev/gemini-api/docs/google-search?hl=he)**  נתמך  **[פלטים מובנים](https://ai.google.dev/gemini-api/docs/structured-output?hl=he)**  לא נתמך  **[חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he)**  נתמך  **[הקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he)**  לא נתמך |
-| speedאפשרויות צריכה | ‫**[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he)**  לא נתמך  **[הסקת מסקנות ב-Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=he)**  לא נתמך  **[הסקת עדיפות](https://ai.google.dev/gemini-api/docs/priority-inference?hl=he)**  לא נתמך |
-| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [תבניות של גרסאות מודל](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - תצוגה מקדימה: `gemini-robotics-er-2-streaming-preview` |
-| calendar\_monthהעדכון האחרון | יולי 2026 |
-| id\_cardכרטיס מודל | [כרטיס מודל](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=he) |
+| id\_cardKod modelu | `gemini-robotics-er-2-streaming-preview` |
+| saveObsługiwane typy danych | **Dane wejściowe**  Tekst, obrazy, filmy, dźwięk  **Dane wyjściowe**  Tekst |
+| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Limit tokenów wejściowych**  131 072  **Limit tokenów wyjściowych**  65 536 |
+| handyman Możliwości | **[Generowanie dźwięku](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl)**  Nieobsługiwane  **[Zapisywanie w pamięci podręcznej](https://ai.google.dev/gemini-api/docs/caching?hl=pl)**  Nieobsługiwane  **[Wykonanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl)**  Nieobsługiwane  **[Korzystanie z komputera](https://ai.google.dev/gemini-api/docs/computer-use?hl=pl)**  Nieobsługiwane  **[Wyszukiwanie plików](https://ai.google.dev/gemini-api/docs/file-search?hl=pl)**  Nieobsługiwane  **[Wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl)**  Obsługiwane  **[Powiązanie ze źródłami informacji przy użyciu Map Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pl)**  Nieobsługiwane  **[Generowanie obrazów](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl)**  Nieobsługiwane  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=pl)**  Obsługiwane  **[Szukaj groundingu](https://ai.google.dev/gemini-api/docs/google-search?hl=pl)**  Obsługiwane  **[Ustrukturyzowane dane wyjściowe](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl)**  Nieobsługiwane  **[Myślenie](https://ai.google.dev/gemini-api/docs/thinking?hl=pl)**  Obsługiwane  **[Kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl)**  Nieobsługiwane |
+| speed Opcje wykorzystania | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=pl)**  Nieobsługiwane  **[Wnioskowanie Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pl)**  Nieobsługiwane  **[Priorytet wnioskowania](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pl)**  Nieobsługiwane |
+| Wersje 123 | Więcej informacji znajdziesz w [wzorcach wersji modelu](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#model-versions).  - Podgląd: `gemini-robotics-er-2-streaming-preview` |
+| calendar\_monthOstatnia aktualizacja | Lipiec 2026 r. |
+| id\_cardKarta modelu | [Karta modelu](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=pl) |
 
-### ‫Gemini Robotics ER 1.6 Preview
+### Gemini Robotics ER 1.6 (wersja testowa)
 
-| נכס | תיאור |
+| Właściwość | Opis |
 | --- | --- |
-| id\_cardקוד מודל | `gemini-robotics-er-1.6-preview` |
-| saveסוגי נתונים נתמכים | **קלטים**  טקסט, תמונות, סרטונים, אודיו  **פלט**  טקסט |
-| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  131,072  **Output token limit**  65,536 |
-| handymanיכולות | **[יצירת אודיו](https://ai.google.dev/gemini-api/docs/speech-generation?hl=he)**  לא נתמך  **[שמירת נתונים במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he)**  נתמך  **[הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he)**  נתמך  **[שימוש במחשב](https://ai.google.dev/gemini-api/docs/computer-use?hl=he)**  נתמך  **[חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he)**  נתמך  **[בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he)**  נתמך  **[עיגון בעזרת מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he)**  נתמך  **[יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he)**  לא נתמך  ‫**[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=he)**  לא נתמך  **[חיפוש עם עיגון בנתונים](https://ai.google.dev/gemini-api/docs/google-search?hl=he)**  נתמך  **[פלטים מובנים](https://ai.google.dev/gemini-api/docs/structured-output?hl=he)**  נתמך  **[חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he)**  נתמך  **[הקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he)**  נתמך |
-| speedאפשרויות צריכה | ‫**[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he)**  נתמך  **[הסקת מסקנות ב-Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=he)**  לא נתמך  **[הסקת עדיפות](https://ai.google.dev/gemini-api/docs/priority-inference?hl=he)**  לא נתמך |
-| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [תבניות של גרסאות מודל](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - תצוגה מקדימה: `gemini-robotics-er-1.6-preview` |
-| calendar\_monthהעדכון האחרון | דצמבר 2025 |
-| cognition\_2תאריך סף הידע | ינואר 2025 |
+| id\_cardKod modelu | `gemini-robotics-er-1.6-preview` |
+| saveObsługiwane typy danych | **Dane wejściowe**  Tekst, obrazy, filmy, dźwięk  **Dane wyjściowe**  Tekst |
+| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Limit tokenów wejściowych**  131 072  **Limit tokenów wyjściowych**  65 536 |
+| handyman Możliwości | **[Generowanie dźwięku](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl)**  Nieobsługiwane  **[Zapisywanie w pamięci podręcznej](https://ai.google.dev/gemini-api/docs/caching?hl=pl)**  Obsługiwane  **[Wykonanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl)**  Obsługiwane  **[Korzystanie z komputera](https://ai.google.dev/gemini-api/docs/computer-use?hl=pl)**  Obsługiwane  **[Wyszukiwanie plików](https://ai.google.dev/gemini-api/docs/file-search?hl=pl)**  Obsługiwane  **[Wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl)**  Obsługiwane  **[Powiązanie ze źródłami informacji przy użyciu Map Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pl)**  Obsługiwane  **[Generowanie obrazów](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl)**  Nieobsługiwane  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=pl)**  Nieobsługiwane  **[Szukaj groundingu](https://ai.google.dev/gemini-api/docs/google-search?hl=pl)**  Obsługiwane  **[Ustrukturyzowane dane wyjściowe](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl)**  Obsługiwane  **[Myślenie](https://ai.google.dev/gemini-api/docs/thinking?hl=pl)**  Obsługiwane  **[Kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl)**  Obsługiwane |
+| speed Opcje wykorzystania | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=pl)**  Obsługiwane  **[Wnioskowanie Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pl)**  Nieobsługiwane  **[Priorytet wnioskowania](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pl)**  Nieobsługiwane |
+| Wersje 123 | Więcej informacji znajdziesz w [wzorcach wersji modelu](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#model-versions).  - Podgląd: `gemini-robotics-er-1.6-preview` |
+| calendar\_monthOstatnia aktualizacja | Grudzień 2025 r. |
+| cognition\_2Granica wiedzy | Styczeń 2025 r. |
 
-שליחת משוב
+Prześlij opinię
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-עדכון אחרון: 2026-07-30 (שעון UTC).
+Ostatnia aktualizacja: 2026-08-19 UTC.
 
-רוצה לתת לנו משוב?
+Chcesz przekazać coś jeszcze?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-30 (שעון UTC)."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-08-19 UTC."],[],[]]

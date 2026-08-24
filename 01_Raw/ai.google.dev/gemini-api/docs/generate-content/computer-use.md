@@ -1,40 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/computer-use?hl=es-419
-fetched_at: 2026-08-17T02:20:19.671767+00:00
-title: "Uso de la computadora \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/computer-use?hl=th
+fetched_at: 2026-08-24T02:35:42.738923+00:00
+title: "\u0e01\u0e32\u0e23\u0e43\u0e0a\u0e49\u0e04\u0e2d\u0e21\u0e1e\u0e34\u0e27\u0e40\u0e15\u0e2d\u0e23\u0e4c \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Enviar comentarios
+ส่งความคิดเห็น
 
-# Uso de la computadora
+# การใช้คอมพิวเตอร์
 
-La herramienta Uso de la computadora te permite crear agentes de control para navegadores, dispositivos móviles y computadoras de escritorio que interactúan con tareas y las automatizan. Con las capturas de pantalla, el modelo puede "ver" una pantalla de computadora y "actuar" generando acciones específicas de la IU, como clics del mouse y entradas del teclado. Al igual que con la llamada a funciones, deberás implementar el entorno de ejecución del cliente para recibir y ejecutar las acciones de uso de la computadora.
+เครื่องมือการใช้คอมพิวเตอร์ช่วยให้คุณสร้างเอเจนต์ควบคุมเบราว์เซอร์ อุปกรณ์เคลื่อนที่ และเดสก์ท็อป
+ที่โต้ตอบและทำงานโดยอัตโนมัติได้ การใช้ภาพหน้าจอทำให้โมเดล "เห็น" หน้าจอคอมพิวเตอร์ และ "ดำเนินการ" โดยสร้างการดำเนินการ UI ที่เฉพาะเจาะจง เช่น การคลิกเมาส์
+และการป้อนข้อมูลด้วยแป้นพิมพ์ คุณจะต้องใช้สภาพแวดล้อมการดำเนินการฝั่งไคลเอ็นต์เพื่อรับและดำเนินการกับการดำเนินการใช้คอมพิวเตอร์
+เช่นเดียวกับการเรียกใช้ฟังก์ชัน
 
-Para obtener la lista de modelos compatibles, consulta [Versiones de modelos](#model-versions). Los modelos de Gemini 3.x admiten varias capacidades avanzadas:
+ดูรายการโมเดลที่รองรับได้ที่[เวอร์ชันโมเดล](#model-versions) โมเดล Gemini 3.x รองรับความสามารถขั้นสูงหลายอย่าง ได้แก่
 
-- **Compatibilidad con múltiples entornos:** Agentes de compilación para entornos de [navegador, dispositivos móviles y computadoras](#supported-environments)
-- **Acciones optimizadas con intents:** Las acciones incluyen un campo `intent` que explica el razonamiento del modelo detrás de cada paso.
-- **Políticas de seguridad configurables:** Ajusta el [comportamiento de seguridad](#safety-policies) con categorías de políticas y anulaciones integradas.
-- **Detección de inyección de instrucciones:** Habilita la [exploración de capturas de pantalla](#prompt-injection) para detectar instrucciones adversarias ocultas.
+- Awareness API **รองรับสภาพแวดล้อมที่หลากหลาย** ได้แก่ [เบราว์เซอร์ อุปกรณ์เคลื่อนที่ และเดสก์ท็อป](#supported-environments)
+- **การดำเนินการที่ปรับปรุงแล้วด้วยเจตนา:** การดำเนินการมีฟิลด์ `intent` ที่อธิบายการให้เหตุผลของโมเดลในแต่ละขั้นตอน
+- **นโยบายความปลอดภัยที่กำหนดค่าได้:** ปรับ[พฤติกรรมด้านความปลอดภัย](#safety-policies)ให้เหมาะสมด้วยหมวดหมู่นโยบายและการลบล้างที่มีอยู่
+- **การตรวจจับการแทรกพรอมต์:** เลือกใช้[การสแกนภาพหน้าจอ](#prompt-injection)เพื่อตรวจจับคำสั่งที่เป็นอันตรายที่ซ่อนอยู่
 
-Con Computer Use, puedes compilar agentes que hagan lo siguiente:
+การใช้คอมพิวเตอร์ช่วยให้คุณสร้างเอเจนต์ที่ทำสิ่งต่อไปนี้ได้
 
-- Automatiza el ingreso de datos repetitivos o el llenado de formularios en sitios web.
-- Realiza pruebas automatizadas de aplicaciones web y flujos de usuarios
-- Realizar investigaciones en varios sitios web (p.ej., recopilar información de productos, precios y opiniones de sitios de comercio electrónico para tomar una decisión de compra)
+- ป้อนข้อมูลซ้ำๆ หรือกรอกแบบฟอร์มในเว็บไซต์โดยอัตโนมัติ
+- ทำการทดสอบเว็บแอปพลิเคชันและโฟลว์ของผู้ใช้โดยอัตโนมัติ
+- ทําการวิจัยในเว็บไซต์ต่างๆ (เช่น รวบรวมข้อมูลผลิตภัณฑ์ ราคา และรีวิวจากเว็บไซต์อีคอมเมิร์ซเพื่อประกอบการตัดสินใจซื้อ)
 
-A continuación, se muestra un ejemplo mínimo para habilitar la herramienta Uso de la computadora:
+ต่อไปนี้คือตัวอย่างการเปิดใช้เครื่องมือการใช้คอมพิวเตอร์ในรูปแบบที่เรียบง่ายที่สุด
 
 ### Python
 
@@ -45,7 +48,7 @@ from google.genai import types
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3.6-flash",
+    model="gemini-3.7-flash",
     contents="Search for 'Gemini API' on Google.",
     config=types.GenerateContentConfig(
         tools=[types.Tool(
@@ -67,7 +70,7 @@ import { GoogleGenAI } from '@google/genai';
 const ai = new GoogleGenAI();
 
 const response = await ai.models.generateContent({
-  model: 'gemini-3.6-flash',
+  model: 'gemini-3.7-flash',
   contents: "Search for 'Gemini API' on Google.",
   config: {
     tools: [{
@@ -81,45 +84,58 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-## Cómo funciona el uso de la computadora
+## การทำงานของการใช้คอมพิวเตอร์
 
-Para compilar un agente con el modelo de Computer Use, debes configurar un bucle continuo entre tu aplicación y la API. Esto es lo que hará tu código en cada paso:
+หากต้องการสร้างเอเจนต์ด้วยโมเดลการใช้คอมพิวเตอร์ คุณต้องตั้งค่า
+ลูปต่อเนื่องระหว่างแอปพลิเคชันกับ API โค้ดของคุณจะทำสิ่งต่อไปนี้ในแต่ละขั้นตอน
 
-1. [**Envía una solicitud al modelo**](#send-request)
-   - Tu aplicación envía una solicitud a la API que contiene la herramienta Uso de la computadora, tu configuración (como el entorno de destino), la instrucción del usuario y una captura de pantalla de la pantalla actual.
-2. [**Recibe la respuesta del modelo**](#model-response)
-   - El modelo analiza la pantalla y la instrucción, y devuelve una respuesta que incluye un `function_call` sugerido que representa una acción de la IU (como un clic, un desplazamiento o una pulsación de tecla).
-   - En el caso de los **modelos de Gemini 3.x**, la respuesta también incluye un razonamiento `intent` que explica por qué el modelo eligió esa acción.
-   - La respuesta también puede incluir un `safety_decision` de un sistema de seguridad interno que clasifica la acción como normal/permitida, `require_confirmation` (que requiere la aprobación del usuario) o bloqueada.
-3. [**Ejecuta la acción recibida**](#execute-actions)
-   - Si se permite la acción (o el usuario la confirma), tu código del cliente analiza el objeto `function_call`, ajusta las coordenadas normalizadas para que coincidan con tu viewport y ejecuta la acción en tu entorno de destino con herramientas de automatización (como Playwright). Si la acción está bloqueada, tu cliente debe detener la ejecución o controlar la interrupción.
-4. [**Captura el estado del entorno nuevo**](#capture-state)
-   - Después de que la acción termina de ejecutarse, tu aplicación captura una nueva captura de pantalla y la envía de vuelta al modelo en un `function_result` para solicitar el siguiente paso.
+1. [**ส่งคำขอไปยังโมเดล**](#send-request)
+   - แอปพลิเคชันของคุณจะส่งคำขอ API ที่มีเครื่องมือการใช้งานคอมพิวเตอร์
+     การตั้งค่าการกำหนดค่า (เช่น สภาพแวดล้อมเป้าหมาย) พรอมต์ของผู้ใช้
+     และภาพหน้าจอของหน้าจอปัจจุบัน
+2. [**รับคำตอบของโมเดล**](#model-response)
+   - โมเดลจะวิเคราะห์หน้าจอและพรอมต์ แล้วส่งคำตอบ
+     ซึ่งมี`function_call`ที่แนะนำซึ่งแสดงถึงการดำเนินการใน UI (เช่น
+     การคลิก การเลื่อน หรือการกดแป้น)
+   - สำหรับ**โมเดล Gemini 3.x** คำตอบจะมีเหตุผล `intent`
+     อธิบายว่าเหตุใดโมเดลจึงเลือกการดำเนินการนั้น
+   - การตอบกลับอาจรวมถึง`safety_decision`จากระบบความปลอดภัยภายใน
+     ที่จัดประเภทการดำเนินการเป็นปกติ/อนุญาต
+     `require_confirmation` (ต้องได้รับการอนุมัติจากผู้ใช้) หรือถูกบล็อก
+3. [**ดำเนินการตามการกระทำที่ได้รับ**](#execute-actions)
+   - หากอนุญาตการดำเนินการ (หรือผู้ใช้ยืนยัน) โค้ดฝั่งไคลเอ็นต์ จะแยกวิเคราะห์ `function_call` ปรับขนาดพิกัดที่ปรับให้เป็นมาตรฐานให้ตรงกับ วิวพอร์ต และดำเนินการในสภาพแวดล้อมเป้าหมายโดยใช้ เครื่องมือการทำงานอัตโนมัติ (เช่น Playwright) หากการดำเนินการถูกบล็อก ไคลเอ็นต์ควรหยุดการดำเนินการหรือจัดการการหยุดชะงัก
+4. [**บันทึกสถานะสภาพแวดล้อมใหม่**](#capture-state)
+   - หลังจากดำเนินการเสร็จแล้ว แอปพลิเคชันจะจับภาพหน้าจอใหม่
+     และส่งกลับไปยังโมเดลใน `function_result` เพื่อ
+     ขอขั้นตอนถัดไป
 
-Luego, este proceso se repite desde el paso 2, y se solicita continuamente la siguiente acción del modelo hasta que se completa o finaliza la tarea.
+จากนั้นกระบวนการนี้จะทำซ้ำจากขั้นตอนที่ 2 โดยจะขอให้โมเดลดำเนินการต่อไปเรื่อยๆ
+จนกว่างานจะเสร็จสมบูรณ์หรือสิ้นสุด
 
-![Descripción general del uso de la computadora](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=es-419)
+![ภาพรวมการใช้คอมพิวเตอร์](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=th)
 
-## Cómo implementar el uso de la computadora
+## วิธีใช้การใช้คอมพิวเตอร์
 
-Antes de compilar con la herramienta Uso de la computadora, deberás configurar lo siguiente:
+ก่อนที่จะสร้างด้วยเครื่องมือการใช้งานคอมพิวเตอร์ คุณจะต้องตั้งค่าสิ่งต่อไปนี้
 
-- **Entorno de ejecución seguro:** Ejecuta tu agente en una VM o un contenedor de zona de pruebas para aislarlo de tu sistema host y limitar su impacto potencial.
-  La [implementación de referencia](https://github.com/google/computer-use-preview/) incluye un entorno de pruebas basado en Docker listo para usar que puedes utilizar como punto de partida.
-- **Controlador de acciones del cliente:** Implementa la lógica del cliente para ejecutar coordenadas, escribir texto y tomar capturas de pantalla.
+- **สภาพแวดล้อมการดำเนินการที่ปลอดภัย:** เรียกใช้เอเจนต์ใน VM หรือคอนเทนเนอร์แซนด์บ็อกซ์เพื่อแยกเอเจนต์ออกจากระบบโฮสต์และจำกัดผลกระทบที่อาจเกิดขึ้น
+  [การติดตั้งใช้งานอ้างอิง](https://github.com/google/computer-use-preview/)
+  มีแซนด์บ็อกซ์ที่ใช้ Docker พร้อมใช้งานซึ่งคุณใช้เป็นจุดเริ่มต้นได้
+- **ตัวแฮนเดิลการดำเนินการฝั่งไคลเอ็นต์:** ใช้ตรรกะฝั่งไคลเอ็นต์เพื่อดำเนินการกับพิกัด พิมพ์ข้อความ และถ่ายภาพหน้าจอ
 
-En los siguientes ejemplos, se usa un navegador web como entorno de ejecución y [Playwright](https://playwright.dev/) como controlador del cliente.
+ตัวอย่างด้านล่างใช้เว็บเบราว์เซอร์เป็นสภาพแวดล้อมการดำเนินการและ
+[Playwright](https://playwright.dev/) เป็นตัวแฮนเดิลฝั่งไคลเอ็นต์
 
-### 0. Cómo configurar Playwright
+### 0. ตั้งค่า Playwright
 
-Primero, instala los paquetes requeridos:
+ก่อนอื่น ให้ติดตั้งแพ็กเกจที่จำเป็น
 
 ```
 pip install google-genai playwright
 playwright install chromium
 ```
 
-Luego, inicializa una instancia del navegador Playwright para usarla en la ejecución:
+จากนั้นเริ่มต้นอินสแตนซ์เบราว์เซอร์ Playwright เพื่อใช้ในการดำเนินการ
 
 ```
 from playwright.sync_api import sync_playwright
@@ -147,15 +163,15 @@ page.goto("https://www.google.com")
 # will be used in the steps below.
 ```
 
-### 1. Envía una solicitud al modelo
+### 1. ส่งคำขอไปยังโมเดล
 
-Inicializa la biblioteca cliente y configura la herramienta Computer Use. Ten en cuenta que no es necesario especificar el tamaño de visualización cuando se envía una solicitud. El modelo predice las coordenadas de píxeles ajustadas a la altura y el ancho de la pantalla.
+เริ่มต้นไลบรารีของไคลเอ็นต์และกำหนดค่าเครื่องมือการใช้งานคอมพิวเตอร์ โปรดทราบว่าไม่จำเป็นต้องระบุขนาดการแสดงผลเมื่อส่งคำขอ เนื่องจากโมเดลจะคาดการณ์พิกัดพิกเซลที่ปรับขนาดตามความสูงและความกว้างของหน้าจอ
 
 ### Gemini 3.x
 
 ### Python
 
-Usa el SDK de `google-genai` de Python (versión `2.7.0` o posterior) para configurar una solicitud que se oriente al entorno del navegador:
+ใช้ `google-genai` Python SDK (เวอร์ชัน `2.7.0` ขึ้นไป) เพื่อกำหนดค่าคำขอที่กำหนดเป้าหมายไปยังสภาพแวดล้อมของเบราว์เซอร์
 
 ```
 from google import genai
@@ -172,7 +188,7 @@ from google.genai.types import (
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3.6-flash",
+    model="gemini-3.7-flash",
     contents=[
         Content(
             role="user",
@@ -201,7 +217,7 @@ print(response.text)
 
 ### JavaScript
 
-Usa el SDK de `@google/genai` Node.js para configurar una solicitud que apunte al entorno del navegador:
+ใช้ `@google/genai` Node.js SDK เพื่อกำหนดค่าคำขอที่กำหนดเป้าหมายไปยังสภาพแวดล้อมของเบราว์เซอร์
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -209,7 +225,7 @@ import { GoogleGenAI } from '@google/genai';
 const ai = new GoogleGenAI();
 
 const response = await ai.models.generateContent({
-  model: 'gemini-3.6-flash',
+  model: 'gemini-3.7-flash',
   contents: [
     {
       role: 'user',
@@ -234,11 +250,11 @@ console.log(response.text);
 
 ### REST
 
-Usa curl para enviar una solicitud:
+ใช้ curl เพื่อส่งคำขอ
 
 ```
 curl -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=$GEMINI_API_KEY" \
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.7-flash:generateContent?key=$GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "contents": [
@@ -260,7 +276,7 @@ curl -X POST \
   }'
 ```
 
-### Gemini 2.5 (heredado)
+### Gemini 2.5 (เดิม)
 
 ### Python
 
@@ -334,9 +350,11 @@ const response = await ai.models.generateContent({
 console.log(response);
 ```
 
-### 2. Recibe la respuesta del modelo
+### 2. รับคำตอบของโมเดล
 
-El modelo de respuesta sugiere una llamada a función. En el caso de los **modelos de Gemini 3.x**, la respuesta contiene una intención de razonamiento personalizada junto con las coordenadas. A continuación, se muestran ejemplos de ambas respuestas:
+โมเดลการตอบกลับแนะนำการเรียกใช้ฟังก์ชัน สำหรับ**โมเดล Gemini 3.x** คำตอบ
+จะมีความตั้งใจในการให้เหตุผลที่ปรับแต่งแล้วพร้อมกับพิกัด
+ต่อไปนี้เป็นตัวอย่างของการตอบกลับทั้ง 2 แบบ
 
 ### Gemini 3.x
 
@@ -353,7 +371,7 @@ El modelo de respuesta sugiere una llamada a función. En el caso de los **model
 }
 ```
 
-### Gemini 2.5 (heredado)
+### Gemini 2.5 (เดิม)
 
 ```
 {
@@ -378,11 +396,11 @@ El modelo de respuesta sugiere una llamada a función. En el caso de los **model
 }
 ```
 
-### 3. Ejecuta las acciones recibidas
+### 3. ดำเนินการตามการดำเนินการที่ได้รับ
 
-El código de tu aplicación debe analizar la respuesta del modelo, ejecutar las acciones y recopilar los resultados.
+โค้ดของแอปพลิเคชันของคุณต้องแยกวิเคราะห์การตอบกลับของโมเดล ดำเนินการ และรวบรวมผลลัพธ์
 
-El siguiente código controla los comandos de herramientas heredadas (`click_at`, `type_text_at`) y los comandos modernos optimizados (`click`, `type`).
+โค้ดด้านล่างจะจัดการทั้งคำสั่งเครื่องมือเดิม (`click_at`, `type_text_at`) และคำสั่งที่ปรับปรุงใหม่ (`click`, `type`)
 
 ### Python
 
@@ -566,9 +584,9 @@ async function executeFunctionCalls(candidate, page, screenWidth, screenHeight) 
 }
 ```
 
-### 4. Captura el estado del entorno nuevo
+### 4. บันทึกสถานะสภาพแวดล้อมใหม่
 
-Captura una representación de la pantalla y la devuelve al modelo.
+จับภาพการแสดงหน้าจอและส่งกลับไปยังโมเดล
 
 ### Python
 
@@ -628,13 +646,13 @@ async function getFunctionResponses(page, results) {
 }
 ```
 
-Una vez que hayas definido cómo capturar y dar formato al estado del entorno, puedes combinar todos estos pasos en un bucle de ejecución continua.
+เมื่อกำหนดวิธีบันทึกและจัดรูปแบบสถานะสภาพแวดล้อมแล้ว คุณจะรวมขั้นตอนทั้งหมดเหล่านี้ไว้ในลูปการดำเนินการต่อเนื่องได้
 
-## Crea un bucle de agente
+## สร้างลูปของ Agent
 
-Para habilitar las interacciones de varios pasos, combina los cuatro pasos de la sección [Cómo implementar el uso de la computadora](#implement-computer-use) en un solo bucle. Este bucle continúa solicitando acciones y enviando los resultados al modelo hasta que se completa la tarea.
+หากต้องการเปิดใช้การโต้ตอบแบบหลายขั้นตอน ให้รวม 4 ขั้นตอนจากส่วน[วิธีใช้งานคอมพิวเตอร์](#implement-computer-use)เป็นลูปเดียว ลูปนี้จะขอให้ดำเนินการและป้อนผลลัพธ์กลับไปยังโมเดลต่อไปจนกว่างานจะเสร็จสมบูรณ์
 
-Recuerda administrar el historial de conversación correctamente agregando las respuestas del modelo y las respuestas de la función al historial en cada paso.
+อย่าลืมจัดการประวัติการสนทนาอย่างถูกต้องโดยการต่อท้ายทั้งคำตอบของโมเดลและคำตอบของฟังก์ชันลงในประวัติในแต่ละขั้นตอน
 
 ### Python
 
@@ -686,7 +704,7 @@ try:
         print(f"\n--- Turn {i+1} ---")
         print("Thinking...")
         response = client.models.generate_content(
-            model='gemini-3.6-flash',
+            model='gemini-3.7-flash',
             contents=contents,
             config=config,
         )
@@ -782,7 +800,7 @@ try {
         console.log(`\n--- Turn ${i + 1} ---`);
         console.log("Thinking...");
         const response = await ai.models.generateContent({
-            model: 'gemini-3.6-flash',
+            model: 'gemini-3.7-flash',
             contents: contents,
             config: config
         });
@@ -819,107 +837,107 @@ try {
 }
 ```
 
-## Entornos compatibles (Gemini 3.x)
+## สภาพแวดล้อมที่รองรับ (Gemini 3.x)
 
-Los modelos de Gemini 3.x admiten tres entornos especificados en las configuraciones de `computer_use`:
+โมเดล Gemini 3.x รองรับสภาพแวดล้อม 3 แบบที่ระบุไว้ในการกำหนดค่า `computer_use` ดังนี้
 
-### Entorno del navegador (`ENVIRONMENT_BROWSER`)
+### สภาพแวดล้อมของเบราว์เซอร์ (`ENVIRONMENT_BROWSER`)
 
-Acciones de acción en la herramienta del navegador:
+การดำเนินการของ Action ในเครื่องมือเบราว์เซอร์
 
-| Nombre del comando | Descripción | Argumentos (en la llamada a la función) |
+| ชื่อคำสั่ง | คำอธิบาย | อาร์กิวเมนต์ (ในการเรียกใช้ฟังก์ชัน) |
 | --- | --- | --- |
-| **click** | Hace clic con el botón izquierdo en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **double\_click** | Hace doble clic en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **triple\_click** | Hace tres clics en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **middle\_click** | Se hace clic con el botón central en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **right\_click** | Haz clic con el botón derecho en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_down** | Presiona y mantiene presionado el botón del mouse en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_up** | Suelta el botón del mouse en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **move** | Mueve el cursor a la posición especificada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **type** | Escribe texto. | `text`: str `press_enter`: bool (opcional, el valor predeterminado es `false`) `intent`: str |
-| **drag\_and\_drop** | Arrastra un elemento desde la coordenada de inicio hasta la coordenada de finalización. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
-| **wait** | Pausa la ejecución durante una cantidad específica de segundos. | `seconds`: int (opcional, valor predeterminado `1`) `intent`: str |
-| **press\_key** | Presiona la tecla especificada y la suelta. | `key`: str `intent`: str |
-| **key\_down** | Presiona y mantiene presionada la tecla especificada. | `key`: str `intent`: str |
-| **key\_up** | Suelta la tecla especificada. | `key`: str `intent`: str |
-| **Tecla de acceso rápido** | Presiona la combinación de teclas especificada. | `keys`: `List[str]` `intent`: `str` |
-| **take\_screenshot** | Devuelve una captura de pantalla de la pantalla actual. | `intent`: str |
-| **scroll** | Se desplaza hacia arriba, abajo, izquierda o derecha en una coordenada por una distancia de píxeles. | `y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, opcional, valor predeterminado `300`) `intent`: str |
-| **go\_back** | Navega a la página web anterior en el historial del navegador. | `intent`: str |
-| **navegar** | Navega directamente a una URL especificada. | `url`: str `intent`: str |
-| **go\_forward** | Navega hacia adelante a la siguiente página web en el historial del navegador. | `intent`: str |
+| **คลิก** | คลิกซ้ายที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **double\_click** | ดับเบิลคลิกที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **triple\_click** | คลิก 3 ครั้งที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **middle\_click** | คลิกตรงกลางที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **right\_click** | คลิกขวาที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **mouse\_down** | กดปุ่มเมาส์ค้างไว้ที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **mouse\_up** | ปล่อยปุ่มเมาส์ที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **ย้าย** | ย้ายเคอร์เซอร์ไปยังตำแหน่งที่ระบุ | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **ประเภท** | พิมพ์ข้อความ | `text`: str `press_enter`: bool (ไม่บังคับ ค่าเริ่มต้น `false`) `intent`: str |
+| **drag\_and\_drop** | ลากรายการจากพิกัดเริ่มต้นไปยังพิกัดสิ้นสุด | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
+| **รอ** | หยุดการดำเนินการชั่วคราวตามจำนวนวินาทีที่ระบุ | `seconds`: int (ไม่บังคับ ค่าเริ่มต้น `1`) `intent`: str |
+| **press\_key** | กดแป้นที่ระบุแล้วปล่อย | `key`: str `intent`: str |
+| **key\_down** | กดแป้นที่ระบุค้างไว้ | `key`: str `intent`: str |
+| **key\_up** | ปล่อยคีย์ที่ระบุ | `key`: str `intent`: str |
+| **ฮอตคีย์** | กดชุดแป้นที่ระบุ | `keys`: `List[str]` `intent`: `str` |
+| **take\_screenshot** | แสดงผลภาพหน้าจอปัจจุบัน | `intent`: str |
+| **เลื่อน** | เลื่อนขึ้น ลง ซ้าย หรือขวาที่พิกัดตามระยะห่างของพิกเซล | `y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, ไม่บังคับ, ค่าเริ่มต้น `300`) `intent`: str |
+| **go\_back** | กลับไปยังหน้าเว็บก่อนหน้าในประวัติการท่องเว็บ | `intent`: str |
+| **navigate** | ไปยัง URL ที่ระบุโดยตรง | `url`: str `intent`: str |
+| **go\_forward** | ไปยังหน้าเว็บถัดไปในประวัติการท่องเว็บ | `intent`: str |
 
-### Entorno móvil (`ENVIRONMENT_MOBILE`)
+### สภาพแวดล้อมบนอุปกรณ์เคลื่อนที่ (`ENVIRONMENT_MOBILE`)
 
-Acciones del entorno optimizado para Android:
+การดำเนินการในสภาพแวดล้อมที่เพิ่มประสิทธิภาพสำหรับ Android
 
-| Nombre del comando | Descripción | Argumentos (en la llamada a la función) |
+| ชื่อคำสั่ง | คำอธิบาย | อาร์กิวเมนต์ (ในการเรียกใช้ฟังก์ชัน) |
 | --- | --- | --- |
-| **open\_app** | Abre una aplicación por su nombre. | `app_name`: str `intent`: str |
-| **click** | Hace clic con el botón izquierdo en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **list\_apps** | Enumera las aplicaciones disponibles en el dispositivo y muestra sus nombres y nombres de paquete. | `intent`: str |
-| **wait** | Pausa la ejecución durante una cantidad específica de segundos. | `seconds`: int (opcional, valor predeterminado `1`) `intent`: str |
-| **go\_back** | Navega de vuelta a la pantalla o página web anterior. | `intent`: str |
-| **type** | Escribe texto. | `text`: str `press_enter`: bool (opcional, el valor predeterminado es `false`) `intent`: str |
-| **drag\_and\_drop** | Arrastra un elemento desde la coordenada de inicio hasta la coordenada de finalización. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
-| **long\_press** | Realiza una presión prolongada en una coordenada de la pantalla. | `y`: int (0-999) `x`: int (0-999) `seconds`: int (opcional, valor predeterminado `2`) `intent`: str |
-| **press\_key** | Presiona la tecla especificada y la suelta. | `key`: str `intent`: str |
-| **take\_screenshot** | Devuelve una captura de pantalla de la pantalla actual. | `intent`: str |
+| **open\_app** | เปิดแอปพลิเคชันตามชื่อ | `app_name`: str `intent`: str |
+| **คลิก** | คลิกซ้ายที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **list\_apps** | แสดงรายการแอปพลิเคชันที่พร้อมใช้งานในอุปกรณ์ โดยแสดงชื่อและชื่อแพ็กเกจ | `intent`: str |
+| **รอ** | หยุดการดำเนินการชั่วคราวตามจำนวนวินาทีที่ระบุ | `seconds`: int (ไม่บังคับ ค่าเริ่มต้น `1`) `intent`: str |
+| **go\_back** | กลับไปยังหน้าจอก่อนหน้าหรือหน้าเว็บก่อนหน้า | `intent`: str |
+| **ประเภท** | พิมพ์ข้อความ | `text`: str `press_enter`: bool (ไม่บังคับ ค่าเริ่มต้น `false`) `intent`: str |
+| **drag\_and\_drop** | ลากรายการจากพิกัดเริ่มต้นไปยังพิกัดสิ้นสุด | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
+| **long\_press** | กดค้างที่พิกัดบนหน้าจอ | `y`: int (0-999) `x`: int (0-999) `seconds`: int (ไม่บังคับ ค่าเริ่มต้น `2`) `intent`: str |
+| **press\_key** | กดแป้นที่ระบุแล้วปล่อย | `key`: str `intent`: str |
+| **take\_screenshot** | แสดงผลภาพหน้าจอปัจจุบัน | `intent`: str |
 
-### Entorno de escritorio (`ENVIRONMENT_DESKTOP`)
+### สภาพแวดล้อมของเดสก์ท็อป (`ENVIRONMENT_DESKTOP`)
 
-Comandos del cursor a nivel del SO de los entornos de escritorio:
+คำสั่งเคอร์เซอร์ระดับระบบปฏิบัติการของสภาพแวดล้อมเดสก์ท็อป
 
-| Nombre del comando | Descripción | Argumentos (en la llamada a la función) |
+| ชื่อคำสั่ง | คำอธิบาย | อาร์กิวเมนต์ (ในการเรียกใช้ฟังก์ชัน) |
 | --- | --- | --- |
-| **click** | Hace clic con el botón izquierdo en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **double\_click** | Hace doble clic en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **triple\_click** | Hace tres clics en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **middle\_click** | Se hace clic con el botón central en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **right\_click** | Haz clic con el botón derecho en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_down** | Presiona y mantiene presionado el botón del mouse en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_up** | Suelta el botón del mouse en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **move** | Mueve el cursor a la posición especificada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **type** | Escribe texto. | `text`: str `press_enter`: bool (opcional, el valor predeterminado es `false`) `intent`: str |
-| **drag\_and\_drop** | Arrastra un elemento desde la coordenada de inicio hasta la coordenada de finalización. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
-| **wait** | Pausa la ejecución durante una cantidad específica de segundos. | `seconds`: int (opcional, valor predeterminado `1`) `intent`: str |
-| **press\_key** | Presiona la tecla especificada y la suelta. | `key`: str `intent`: str |
-| **key\_down** | Presiona y mantiene presionada la tecla especificada. | `key`: str `intent`: str |
-| **key\_up** | Suelta la tecla especificada. | `key`: str `intent`: str |
-| **Tecla de acceso rápido** | Presiona la combinación de teclas especificada. | `keys`: `List[str]` `intent`: `str` |
-| **take\_screenshot** | Devuelve una captura de pantalla de la pantalla actual. | `intent`: str |
-| **scroll** | Se desplaza hacia arriba, abajo, izquierda o derecha en una coordenada por una distancia de píxeles. | `y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, opcional, valor predeterminado `300`) `intent`: str |
+| **คลิก** | คลิกซ้ายที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **double\_click** | ดับเบิลคลิกที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **triple\_click** | คลิก 3 ครั้งที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **middle\_click** | คลิกตรงกลางที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **right\_click** | คลิกขวาที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **mouse\_down** | กดปุ่มเมาส์ค้างไว้ที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **mouse\_up** | ปล่อยปุ่มเมาส์ที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **ย้าย** | ย้ายเคอร์เซอร์ไปยังตำแหน่งที่ระบุ | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **ประเภท** | พิมพ์ข้อความ | `text`: str `press_enter`: bool (ไม่บังคับ ค่าเริ่มต้น `false`) `intent`: str |
+| **drag\_and\_drop** | ลากรายการจากพิกัดเริ่มต้นไปยังพิกัดสิ้นสุด | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
+| **รอ** | หยุดการดำเนินการชั่วคราวตามจำนวนวินาทีที่ระบุ | `seconds`: int (ไม่บังคับ ค่าเริ่มต้น `1`) `intent`: str |
+| **press\_key** | กดแป้นที่ระบุแล้วปล่อย | `key`: str `intent`: str |
+| **key\_down** | กดแป้นที่ระบุค้างไว้ | `key`: str `intent`: str |
+| **key\_up** | ปล่อยคีย์ที่ระบุ | `key`: str `intent`: str |
+| **ฮอตคีย์** | กดชุดแป้นที่ระบุ | `keys`: `List[str]` `intent`: `str` |
+| **take\_screenshot** | แสดงผลภาพหน้าจอปัจจุบัน | `intent`: str |
+| **เลื่อน** | เลื่อนขึ้น ลง ซ้าย หรือขวาที่พิกัดตามระยะห่างของพิกเซล | `y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, ไม่บังคับ, ค่าเริ่มต้น `300`) `intent`: str |
 
-## Acciones de la IU compatibles heredadas (Gemini 2.5)
+## การดำเนินการใน UI ที่รองรับเวอร์ชันเดิม (Gemini 2.5)
 
-Para los modelos heredados (`gemini-2.5-computer-use-preview-10-2025`), se admiten las siguientes acciones:
+สำหรับโมเดลเดิม (`gemini-2.5-computer-use-preview-10-2025`) ระบบจะรองรับการดำเนินการต่อไปนี้
 
-| Nombre del comando | Descripción | Argumentos (en la llamada a la función) | Ejemplo de llamada a función |
+| ชื่อคำสั่ง | คำอธิบาย | อาร์กิวเมนต์ (ในการเรียกใช้ฟังก์ชัน) | ตัวอย่างการเรียกใช้ฟังก์ชัน |
 | --- | --- | --- | --- |
-| **open\_web\_browser** | Abre el navegador web. | Ninguno | `{"name": "open_web_browser", "args": {}}` |
-| **wait\_5\_seconds** | Pausa la ejecución durante 5 segundos. | Ninguno | `{"name": "wait_5_seconds", "args": {}}` |
-| **go\_back** | Navega a la página anterior del historial. | Ninguno | `{"name": "go_back", "args": {}}` |
-| **go\_forward** | Navega a la página siguiente del historial. | Ninguno | `{"name": "go_forward", "args": {}}` |
-| **search** | Navega al motor de búsqueda predeterminado. | Ninguno | `{"name": "search", "args": {}}` |
-| **navegar** | Navega el navegador directamente a la URL especificada. | `url`: str | `{"name": "navigate", "args": {"url": "https://www.wikipedia.org"}}` |
-| **click\_at** | Hace clic en una coordenada específica. | `y`: int (0-999), `x`: int (0-999) | `{"name": "click_at", "args": {"y": 300, "x": 500}}` |
-| **hover\_at** | Coloca el cursor en una coordenada específica. | `y`: int (0-999), `x`: int (0-999) | `{"name": "hover_at", "args": {"y": 150, "x": 250}}` |
-| **type\_text\_at** | Escribe texto en una coordenada. | `y`: int (0 a 999), `x`: int (0 a 999), `text`: str, `press_enter`: bool (opcional, valor predeterminado es True), `clear_before_typing`: bool (opcional, valor predeterminado es True) | `{"name": "type_text_at", "args": {"y": 250, "x": 400, "text": "search", "press_enter": false}}` |
-| **key\_combination** | Presiona teclas o combinaciones. | `keys`: str | `{"name": "key_combination", "args": {"keys": "Control+A"}}` |
-| **scroll\_document** | Desplaza toda la página web. | `direction`: str | `{"name": "scroll_document", "args": {"direction": "down"}}` |
-| **scroll\_at** | Se desplaza en la coordenada (x,y). | `y`: int, `x`: int, `direction`: str, `magnitude`: int (opcional, valor predeterminado 800) | `{"name": "scroll_at", "args": {"y": 500, "x": 500, "direction": "down"}}` |
-| **drag\_and\_drop** | Arrastra entre dos coordenadas. | `y`: int, `x`: int, `destination_y`: int, `destination_x`: int | `{"name": "drag_and_drop", "args": {"y": 100, "destination_y": 500, "destination_x": 500, "x": 100}}` |
+| **open\_web\_browser** | เปิดเว็บเบราว์เซอร์ | ไม่มี | `{"name": "open_web_browser", "args": {}}` |
+| **wait\_5\_seconds** | หยุดการดำเนินการชั่วคราวเป็นเวลา 5 วินาที | ไม่มี | `{"name": "wait_5_seconds", "args": {}}` |
+| **go\_back** | ไปยังหน้าก่อนหน้าในประวัติการเข้าชม | ไม่มี | `{"name": "go_back", "args": {}}` |
+| **go\_forward** | ไปยังหน้าถัดไปในประวัติการเข้าชม | ไม่มี | `{"name": "go_forward", "args": {}}` |
+| **search** | ไปยังเครื่องมือค้นหาเริ่มต้น | ไม่มี | `{"name": "search", "args": {}}` |
+| **navigate** | นำทางเบราว์เซอร์ไปยัง URL ที่ระบุโดยตรง | `url`: str | `{"name": "navigate", "args": {"url": "https://www.wikipedia.org"}}` |
+| **click\_at** | คลิกที่พิกัดที่เฉพาะเจาะจง | `y`: int (0-999), `x`: int (0-999) | `{"name": "click_at", "args": {"y": 300, "x": 500}}` |
+| **hover\_at** | วางเมาส์ที่พิกัดที่เฉพาะเจาะจง | `y`: int (0-999), `x`: int (0-999) | `{"name": "hover_at", "args": {"y": 150, "x": 250}}` |
+| **type\_text\_at** | พิมพ์ข้อความที่พิกัด | `y`: int (0-999), `x`: int (0-999), `text`: str, `press_enter`: bool (ไม่บังคับ ค่าเริ่มต้นคือ True), `clear_before_typing`: bool (ไม่บังคับ ค่าเริ่มต้นคือ True) | `{"name": "type_text_at", "args": {"y": 250, "x": 400, "text": "search", "press_enter": false}}` |
+| **key\_combination** | กดแป้นหรือชุดแป้น | `keys`: str | `{"name": "key_combination", "args": {"keys": "Control+A"}}` |
+| **scroll\_document** | เลื่อนทั้งหน้าเว็บ | `direction`: str | `{"name": "scroll_document", "args": {"direction": "down"}}` |
+| **scroll\_at** | เลื่อนที่พิกัด (x,y) | `y`: int, `x`: int, `direction`: str, `magnitude`: int (ไม่บังคับ ค่าเริ่มต้นคือ 800) | `{"name": "scroll_at", "args": {"y": 500, "x": 500, "direction": "down"}}` |
+| **drag\_and\_drop** | ลากระหว่างพิกัด 2 จุด | `y`: int, `x`: int, `destination_y`: int, `destination_x`: int | `{"name": "drag_and_drop", "args": {"y": 100, "destination_y": 500, "destination_x": 500, "x": 100}}` |
 
-## Funciones personalizadas definidas por el usuario
+## ฟังก์ชันที่กำหนดเองซึ่งผู้ใช้กำหนด
 
-Puedes extender la funcionalidad del modelo incluyendo funciones definidas por el usuario personalizadas. Por ejemplo, en situaciones de interacción humana (HITL), puedes excluir las acciones predefinidas predeterminadas y registrar acciones personalizadas.
+คุณขยายฟังก์ชันการทำงานของโมเดลได้โดยรวมฟังก์ชันที่กำหนดเองโดยผู้ใช้ เช่น ในสถานการณ์ที่มีการใช้คนในกระบวนการ (HITL) คุณสามารถยกเว้นการดำเนินการเริ่มต้นที่กำหนดไว้ล่วงหน้าและลงทะเบียนการดำเนินการที่กำหนดเองได้
 
-#### Herramientas personalizadas de Gemini 3.x
+#### เครื่องมือที่กำหนดเองของ Gemini 3.x
 
 ### Python
 
-Excluye las acciones predefinidas estándar del navegador (como `click`) y registra una herramienta `yield_to_user` personalizada:
+ยกเว้นการดำเนินการในเบราว์เซอร์ที่กำหนดไว้ล่วงหน้ามาตรฐาน (เช่น `click`) และลงทะเบียนเครื่องมือ `yield_to_user` ที่กำหนดเอง
 
 ```
 from google import genai
@@ -943,7 +961,7 @@ yield_to_user_tool = types.FunctionDeclaration(
 )
 
 response = client.models.generate_content(
-    model="gemini-3.6-flash",
+    model="gemini-3.7-flash",
     contents="Click the submit button. If you need a second factor authentication code, ask me.",
     config=types.GenerateContentConfig(
         tools=[
@@ -959,7 +977,7 @@ response = client.models.generate_content(
 )
 ```
 
-#### Herramientas personalizadas de Gemini 2.5 (heredado)
+#### เครื่องมือที่กำหนดเองของ Gemini 2.5 (เดิม)
 
 ### Python
 
@@ -989,29 +1007,29 @@ def make_generate_content_config():
     return generate_content_config
 ```
 
-## Administra los niveles de pensamiento (Gemini 3.x)
+## การจัดการระดับการคิด (Gemini 3.x)
 
-En el caso de los agentes de uso de la computadora, puedes configurar diferentes niveles de pensamiento para equilibrar la calidad de la acción y la velocidad de ejecución. Por lo general, los niveles de pensamiento más bajos logran un buen equilibrio para las tareas de automatización estándar.
+สำหรับเอเจนต์ที่ใช้คอมพิวเตอร์ คุณสามารถกำหนดค่าระดับการคิดต่างๆ เพื่อปรับสมดุลคุณภาพการดำเนินการและความเร็วในการดำเนินการ โดยทั่วไปแล้ว ระดับการคิดที่ต่ำกว่าจะสร้างสมดุลที่ดีสำหรับงานอัตโนมัติมาตรฐาน
 
-## Seguridad y protección
+## ความปลอดภัย
 
-### Configuración de políticas de seguridad (Gemini 3.x)
+### การกำหนดค่านโยบายความปลอดภัย (Gemini 3.x)
 
-Los modelos de Gemini 3.x incluyen categorías de servicios de seguridad integrados que determinan automáticamente si se requiere la confirmación del usuario.
+โมเดล Gemini 3.x มีหมวดหมู่บริการด้านความปลอดภัยในตัวที่จะพิจารณาโดยอัตโนมัติว่าต้องมีการยืนยันจากผู้ใช้หรือไม่
 
-| Categoría de la política de seguridad | Descripción |
+| หมวดหมู่นโยบายด้านความปลอดภัย | คำอธิบาย |
 | --- | --- |
-| `FINANCIAL_TRANSACTIONS` | Bloquea o activa la confirmación de acciones que involucran pagos, compras en tiendas o bienes regulados. |
-| `SENSITIVE_DATA_MODIFICATION` | Protege los registros de salud, financieros o gubernamentales contra modificaciones no autorizadas. |
-| `COMMUNICATION_TOOL` | Restringe la capacidad del agente para enviar correos electrónicos, mensajes de chat o borradores de forma autónoma. |
-| `ACCOUNT_CREATION` | Restringe al agente para que no registre de forma autónoma cuentas nuevas en sitios web. |
-| `DATA_MODIFICATION` | Regula las modificaciones generales del sistema de archivos, el uso compartido de datos y la eliminación del almacenamiento. |
-| `USER_CONSENT_MANAGEMENT` | Requiere la intervención del usuario para los banners de consentimiento de uso de cookies y los mensajes de privacidad. |
-| `LEGAL_TERMS_AND_AGREEMENTS` | Evita que el modelo acepte de forma autónoma las Condiciones del Servicio o los contratos legalmente vinculantes. |
+| `FINANCIAL_TRANSACTIONS` | บล็อกหรือทริกเกอร์การยืนยันสำหรับการดำเนินการที่เกี่ยวข้องกับการชำระเงิน การชำระเงินที่ร้านค้าปลีก หรือสินค้าควบคุม |
+| `SENSITIVE_DATA_MODIFICATION` | ปกป้องบันทึกด้านสุขภาพ การเงิน หรือของรัฐบาลจากการแก้ไขที่ไม่ได้รับอนุญาต |
+| `COMMUNICATION_TOOL` | lighthouse\_agent\_restricted\_email\_chat |
+| `ACCOUNT_CREATION` | จำกัดไม่ให้เอเจนต์ลงทะเบียนบัญชีใหม่บนเว็บไซต์โดยอัตโนมัติ |
+| `DATA_MODIFICATION` | ควบคุมการแก้ไขระบบไฟล์โดยรวม การแชร์ข้อมูล และการลบข้อมูลที่จัดเก็บ |
+| `USER_CONSENT_MANAGEMENT` | ต้องมีการเข้าควบคุมของผู้ใช้สำหรับแบนเนอร์แสดงความยินยอมในการใช้คุกกี้และข้อความแจ้งเกี่ยวกับความเป็นส่วนตัว |
+| `LEGAL_TERMS_AND_AGREEMENTS` | ป้องกันไม่ให้โมเดลยอมรับข้อกำหนดในการให้บริการหรือสัญญาที่มีผลผูกพันทางกฎหมายโดยอัตโนมัติ |
 
-#### Anulaciones de seguridad
+#### การลบล้างความปลอดภัย
 
-Puedes anular políticas seleccionadas pasando anulaciones:
+คุณสามารถลบล้างนโยบายบางอย่างได้โดยส่งการลบล้างดังนี้
 
 ### Python
 
@@ -1022,7 +1040,7 @@ from google.genai import types
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3.6-flash",
+    model="gemini-3.7-flash",
     contents="Clean up the local folder by archiving old logs.",
     config=types.GenerateContentConfig(
         tools=[
@@ -1047,7 +1065,7 @@ import { GoogleGenAI } from '@google/genai';
 const ai = new GoogleGenAI();
 
 const response = await ai.models.generateContent({
-  model: 'gemini-3.6-flash',
+  model: 'gemini-3.7-flash',
   contents: "Clean up the local folder by archiving old logs.",
   config: {
     tools: [{
@@ -1062,13 +1080,13 @@ const response = await ai.models.generateContent({
 });
 ```
 
-### Detección de inyección de instrucciones (Gemini 3.x)
+### การตรวจหาการแทรกพรอมต์ (Gemini 3.x)
 
-Es un mecanismo de seguridad opcional que analiza los píxeles de las capturas de pantalla en busca de instrucciones ocultas de instrucciones adversarias (p.ej., "Ignora los comandos anteriores") y bloquea la ejecución cuando se detectan.
+กลไกความปลอดภัยแบบเลือกใช้ที่จะสแกนพิกเซลของภาพหน้าจอเพื่อหาคำสั่งพรอมต์ที่เป็นการโจมตีแบบซ่อนเร้น (เช่น "ไม่สนใจคำสั่งก่อนหน้า") และบล็อกการดำเนินการเมื่อตรวจพบ
 
-### Confirma la decisión de seguridad
+### รับทราบการตัดสินใจด้านความปลอดภัย
 
-La respuesta puede incluir un parámetro `safety_decision` en los argumentos de la llamada a la función:
+การตอบกลับอาจมีพารามิเตอร์ `safety_decision` ในอาร์กิวเมนต์การเรียกใช้ฟังก์ชัน
 
 ```
 {
@@ -1086,7 +1104,7 @@ La respuesta puede incluir un parámetro `safety_decision` en los argumentos de 
 }
 ```
 
-Si `safety_decision` es `require_confirmation`, muestra un mensaje al usuario final. Si el usuario confirma, establece `safety_acknowledgement` en `FunctionResponse`.
+หาก `safety_decision` เป็น `require_confirmation` ให้แจ้งผู้ใช้ปลายทาง หากผู้ใช้ยืนยัน ให้ตั้งค่า `safety_acknowledgement` ใน `FunctionResponse`
 
 ### Python
 
@@ -1105,14 +1123,15 @@ if 'safety_decision' in function_call.args:
     action_result["safety_acknowledgement"] = True
 ```
 
-### Prácticas recomendadas de seguridad
+### แนวทางปฏิบัติแนะนำด้านความปลอดภัย
 
-El uso de la computadora presenta riesgos operativos y de seguridad únicos, ya que un modelo que actúa en nombre de un usuario puede encontrar contenido no confiable en las pantallas o cometer errores al ejecutar acciones. Implementa las siguientes prácticas recomendadas para proteger los datos y los sistemas de los usuarios:
+การใช้คอมพิวเตอร์มีความเสี่ยงด้านความปลอดภัยและการดำเนินงานที่ไม่เหมือนใคร เนื่องจากโมเดลที่ดำเนินการในนามของผู้ใช้อาจพบเนื้อหาที่ไม่น่าเชื่อถือบนหน้าจอหรือทำผิดพลาดในการดำเนินการ ใช้แนวทางปฏิบัติแนะนำต่อไปนี้เพื่อปกป้องข้อมูลและระบบของผู้ใช้
 
-1. **Con interacción humana (HITL):**
+1. **การมีมนุษย์เป็นผู้ตรวจสอบ (HITL):**
 
-   - **Exige la confirmación del usuario:** Cuando la respuesta de seguridad indica `require_confirmation` (o la decisión de seguridad heredada lo requiere), solicita la aprobación del usuario.
-   - **Proporciona instrucciones de seguridad personalizadas:** Implementa una instrucción del sistema personalizada para definir y aplicar tus propios límites de seguridad. Por ejemplo:
+   - **บังคับใช้การยืนยันผู้ใช้:** เมื่อการตอบกลับด้านความปลอดภัยระบุ
+     `require_confirmation` (หรือการตัดสินด้านความปลอดภัยเดิมกำหนดไว้) ให้แจ้งให้ผู้ใช้ขออนุมัติ
+   - **ระบุวิธีการด้านความปลอดภัยที่กำหนดเอง:** ใช้คำสั่งของระบบที่กำหนดเองเพื่อกำหนดและบังคับใช้ขอบเขตด้านความปลอดภัยของคุณเอง เช่น
 
      ### Python
 
@@ -1210,7 +1229,7 @@ El uso de la computadora presenta riesgos operativos y de seguridad únicos, ya 
 
      client = genai.Client()
      response = client.models.generate_content(
-         model="gemini-3.6-flash",
+         model="gemini-3.7-flash",
          contents="Prepare a draft but do not send.",
          config=types.GenerateContentConfig(
              system_instruction=system_instruction,
@@ -1315,7 +1334,7 @@ El uso de la computadora presenta riesgos operativos y de seguridad únicos, ya 
      `;
 
      const response = await ai.models.generateContent({
-       model: 'gemini-3.6-flash',
+       model: 'gemini-3.7-flash',
        contents: "Prepare a draft but do not send.",
        config: {
          systemInstruction: systemInstruction,
@@ -1327,38 +1346,52 @@ El uso de la computadora presenta riesgos operativos y de seguridad únicos, ya 
        }
      });
      ```
-2. **Entorno de ejecución seguro:** Ejecuta tu agente en un entorno seguro de zona de pruebas para limitar su impacto potencial. Puede ser una máquina virtual (VM) en zona de pruebas, un contenedor (p.ej., Docker) o un perfil de navegador dedicado con permisos limitados. Consulta la [implementación de referencia de GitHub](https://github.com/google/computer-use-preview/) para obtener orientación sobre la configuración de la zona de pruebas con Docker.
-3. **Limpieza de entradas:** Limpia todo el texto generado por el usuario en las instrucciones para mitigar el riesgo de instrucciones no deseadas o inyección de instrucciones. Esta es una capa de seguridad útil, pero no reemplaza un entorno de ejecución seguro.
-4. **Barreras de seguridad del contenido:** Usa barreras de seguridad y APIs de seguridad del contenido para evaluar la adecuación, la inyección de instrucciones y la detección de jailbreak en las entradas del usuario, las entradas y salidas de las herramientas, y las respuestas del agente.
-5. **Listas de entidades permitidas y bloqueadas:** Implementa mecanismos de filtrado para controlar dónde puede navegar el modelo y qué puede hacer. Una lista de entidades bloqueadas de sitios web prohibidos es un buen punto de partida, mientras que una lista de entidades permitidas más restrictiva es aún más segura.
-6. **Observabilidad y registro:** Mantén registros detallados para la depuración, la auditoría y la respuesta ante incidentes. Tu cliente debe registrar las instrucciones, las capturas de pantalla, las acciones sugeridas por el modelo (`function_call`), las respuestas de seguridad y todas las acciones que, en última instancia, ejecute el cliente.
-7. **Administración del entorno:** Asegúrate de que el entorno de la GUI sea coherente.
-   Las ventanas emergentes, las notificaciones o los cambios en el diseño inesperados pueden confundir al modelo. Si es posible, comienza cada tarea nueva desde un estado limpio y conocido.
+2. **สภาพแวดล้อมการดำเนินการที่ปลอดภัย:** เรียกใช้เอเจนต์ในสภาพแวดล้อมแซนด์บ็อกซ์ที่ปลอดภัย
+   เพื่อจำกัดผลกระทบที่อาจเกิดขึ้น ซึ่งอาจเป็นเครื่องเสมือน (VM) แบบแซนด์บ็อกซ์ คอนเทนเนอร์ (เช่น Docker) หรือโปรไฟล์เบราว์เซอร์เฉพาะที่มีสิทธิ์จำกัด ดูคำแนะนำในการตั้งค่าแซนด์บ็อกซ์โดยใช้ Docker ได้ที่[การใช้งานอ้างอิงของ GitHub](https://github.com/google/computer-use-preview/)
+3. **การล้างข้อมูลอินพุต:** ล้างข้อความทั้งหมดที่ผู้ใช้สร้างขึ้นในพรอมต์เพื่อลดความเสี่ยงของวิธีการที่ไม่ต้องการหรือการแทรกพรอมต์ ซึ่งเป็น
+   การรักษาความปลอดภัยที่มีประโยชน์ แต่ไม่ใช่สิ่งทดแทนสภาพแวดล้อมการดำเนินการที่ปลอดภัย
+4. **แนวทางป้องกันเนื้อหา:** ใช้ API แนวทางป้องกันและ API ความปลอดภัยของเนื้อหาเพื่อประเมิน
+   อินพุตของผู้ใช้ อินพุตและเอาต์พุตของเครื่องมือ รวมถึงการตอบกลับของเอเจนต์ว่าเหมาะสมหรือไม่
+   การแทรกพรอมต์ และการตรวจหาการหลบเลี่ยง
+5. **รายการที่อนุญาตและรายการที่บล็อก:** ใช้กลไกการกรองเพื่อควบคุม
+   ตำแหน่งที่โมเดลสามารถไปยังส่วนต่างๆ และสิ่งที่โมเดลทำได้ การใช้รายการที่บล็อกของเว็บไซต์ที่ห้าม
+   เป็นจุดเริ่มต้นที่ดี ในขณะที่การใช้รายการที่อนุญาตที่เข้มงวดมากขึ้นจะ
+   ปลอดภัยยิ่งกว่า
+6. **ความสามารถในการสังเกตและการบันทึก:** จัดเก็บบันทึกโดยละเอียดสำหรับการแก้ไขข้อบกพร่อง การตรวจสอบ และการตอบสนองต่อเหตุการณ์ ลูกค้าควรบันทึกพรอมต์
+   ภาพหน้าจอ การดำเนินการที่โมเดลแนะนำ (`function_call`) การตอบกลับด้านความปลอดภัย และ
+   การดำเนินการทั้งหมดที่ไคลเอ็นต์ดำเนินการในท้ายที่สุด
+7. **การจัดการสภาพแวดล้อม:** ตรวจสอบว่าสภาพแวดล้อม GUI สอดคล้องกัน
+   ป๊อปอัป การแจ้งเตือน หรือการเปลี่ยนแปลงเลย์เอาต์ที่ไม่คาดคิดอาจทำให้โมเดลสับสน
+   เริ่มต้นจากสถานะที่ทราบและสะอาดสำหรับงานใหม่แต่ละงานหากเป็นไปได้
 
-## Versiones del modelo
+## เวอร์ชันของโมเดล
 
-Puedes usar Uso del equipo con los siguientes modelos:
+คุณใช้การใช้คอมพิวเตอร์กับรุ่นต่อไปนี้ได้
 
-- [**Gemini 3.6 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=es-419) (`gemini-3.6-flash`): Es el modelo recomendado para el uso en computadoras, ya que incluye acciones optimizadas con intents, compatibilidad con entornos de navegador, dispositivos móviles y computadoras, políticas de seguridad configurables y detección de inyección de instrucciones.
-- [**Gemini 3.5 Flash-Lite**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=es-419) (`gemini-3.5-flash-lite`): Un modelo rentable y de baja latencia que admite el uso de computadoras.
-- [**Gemini 3.5 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=es-419) (`gemini-3.5-flash`): Modelo estable anterior que admite el uso de la computadora.
-- [**Versión preliminar de Gemini 3 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=es-419) (`gemini-3-flash-preview`): Modelo de versión preliminar que admite el uso de la computadora.
-- [**Gemini 2.5 (versión preliminar heredada)**](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=es-419) (`gemini-2.5-computer-use-preview-10-2025`): Es un modelo de versión preliminar heredada optimizado para el uso de computadoras basadas en navegadores.
+- [**Gemini 3.7 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=th) (`gemini-3.7-flash`): โมเดลที่แนะนำสำหรับการใช้งานในคอมพิวเตอร์ ซึ่งมี
+  การดำเนินการที่ปรับปรุงแล้วพร้อมเจตนา รองรับสภาพแวดล้อมของเบราว์เซอร์ อุปกรณ์เคลื่อนที่ และเดสก์ท็อป นโยบายความปลอดภัยที่กำหนดค่าได้ และ
+  การตรวจหาการแทรกพรอมต์
+- [**Gemini 3.5 Flash-Lite**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=th) (`gemini-3.5-flash-lite`): โมเดลที่มีเวลาในการตอบสนองต่ำและคุ้มค่าที่รองรับการใช้งานคอมพิวเตอร์
+- [**Gemini 3.5 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=th) (`gemini-3.5-flash`): โมเดลเวอร์ชันเสถียรก่อนหน้าซึ่งรองรับ
+  การใช้งานคอมพิวเตอร์
+- [**รุ่นตัวอย่าง Gemini 3 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=th) (`gemini-3-flash-preview`): โมเดลตัวอย่าง
+  ที่รองรับการใช้งานคอมพิวเตอร์
+- [**Gemini 2.5 (ตัวอย่างเวอร์ชันเดิม)**](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=th) (`gemini-2.5-computer-use-preview-10-2025`): โมเดลตัวอย่างเวอร์ชันเดิมที่ได้รับการเพิ่มประสิทธิภาพสำหรับการใช้งานคอมพิวเตอร์ที่ใช้เบราว์เซอร์
 
-## ¿Qué sigue?
+## ขั้นตอนถัดไป
 
-- Experimenta con el uso de la computadora en el [entorno de demostración de Browserbase](http://gemini.browserbase.com).
-- Consulta la [implementación de referencia](https://github.com/google/computer-use-preview) para ver un ejemplo de código.
-- Obtén más información sobre otras herramientas de la API de Gemini:
-  - [Llamada a función](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419)
-  - [Grounding with Google Search](https://ai.google.dev/gemini-api/docs/grounding?hl=es-419)
+- ทดลองใช้คอมพิวเตอร์ใน[สภาพแวดล้อมการสาธิตของ Browserbase](http://gemini.browserbase.com)
+- ดูโค้ดตัวอย่างได้ที่[การติดตั้งใช้งานอ้างอิง](https://github.com/google/computer-use-preview)
+- ดูข้อมูลเกี่ยวกับเครื่องมืออื่นๆ ของ Gemini API
+  - [การเรียกใช้ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)
+  - [การเชื่อมต่อแหล่งข้อมูลกับ Google Search](https://ai.google.dev/gemini-api/docs/grounding?hl=th)
 
-Enviar comentarios
+ส่งความคิดเห็น
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Última actualización: 2026-07-30 (UTC)
+อัปเดตล่าสุด 2026-08-19 UTC
 
-¿Quieres brindar más información?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-07-30 (UTC)"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-08-19 UTC"],[],[]]

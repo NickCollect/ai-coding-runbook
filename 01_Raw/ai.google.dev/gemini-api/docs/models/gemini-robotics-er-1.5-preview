@@ -1,50 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.5-preview?hl=hi
-fetched_at: 2026-08-17T02:26:39.873753+00:00
-title: "Gemini Robotics ER 1.5 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.5-preview?hl=pl
+fetched_at: 2026-08-24T02:22:07.082955+00:00
+title: "Gemini Robotics ER\u00a01.5 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-सुझाव भेजें
+Prześlij opinię
 
-# Gemini Robotics ER 1.5
+# Gemini Robotics ER 1.5
 
-Gemini Robotics ER 1.5, विज़न-लैंग्वेज मॉडल (वीएलएम) है. यह Gemini की एजेंटिक एआई की सुविधाओं को रोबोटिक्स में इस्तेमाल करने की सुविधा देता है. इसे असल दुनिया में बेहतर तरीके से काम करने के लिए डिज़ाइन किया गया है. इससे रोबोट, मुश्किल विज़ुअल डेटा को समझ पाते हैं, जगह के हिसाब से तर्क कर पाते हैं, और नैचुरल लैंग्वेज में दिए गए निर्देशों के हिसाब से काम कर पाते हैं.
+Gemini Robotics ER 1.5 to model wizyjno-językowy (VLM), który wprowadza możliwości agenta Gemini do robotyki. Jest on przeznaczony do zaawansowanego wnioskowania w świecie fizycznym, dzięki czemu roboty mogą interpretować złożone dane wizualne, przeprowadzać rozumowanie przestrzenne i planować działania na podstawie poleceń w języku naturalnym.
 
-[Google AI Studio में आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-1.5-preview&hl=hi)
+[Wypróbuj w Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-1.5-preview&hl=pl)
 
-## दस्तावेज़
+## Dokumentacja
 
-सुविधाओं और क्षमताओं के बारे में पूरी जानकारी पाने के लिए, [रोबोटिक्स](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=hi) पेज पर जाएं.
+Więcej informacji o funkcjach i możliwościach znajdziesz na stronie [Robotyka](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=pl).
 
 ## gemini-robotics-er-1.5-preview
 
-| प्रॉपर्टी | ब्यौरा |
+| Właściwość | Opis |
 | --- | --- |
-| id\_cardमॉडल कोड | `gemini-robotics-er-1.5-preview` |
-| saveके साथ इस्तेमाल किए जा सकने वाले डेटा टाइप | **इनपुट**  टेक्स्ट, इमेज, वीडियो, ऑडियो  **आउटपुट**  टेक्स्ट |
-| token\_autoटोकन की सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  1,048,576  **आउटपुट टोकन की सीमा**  65,536 |
-| handymanसुविधाएँ | **[ऑडियो जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi)**  काम नहीं करता है  **[कैश मेमोरी में सेव होना](https://ai.google.dev/gemini-api/docs/caching?hl=hi)**  काम नहीं करता है  **[कोड एक्ज़ीक्यूट करना](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi)**  काम करता है  **[फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi)**  काम करता है  **[Google Maps की मदद से जवाब तैयार करना](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi)**  काम नहीं करता है  **[इमेज जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi)**  काम नहीं करता है  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=hi)**  काम नहीं करता है  **[भरोसेमंद स्रोतों से जानकारी लेना](https://ai.google.dev/gemini-api/docs/google-search?hl=hi)**  काम करता है  **[स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi)**  काम करता है  **[सोचना](https://ai.google.dev/gemini-api/docs/thinking?hl=hi)**  काम करता है  **[यूआरएल का कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi)**  काम करता है |
-| speedकॉन्टेंट देखने के विकल्प | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi)**  काम नहीं करता है  **[फ़्लेक्स अनुमान](https://ai.google.dev/gemini-api/docs/flex-inference?hl=hi)**  काम नहीं करता है  **[प्राथमिकता का अनुमान लगाना](https://ai.google.dev/gemini-api/docs/priority-inference?hl=hi)**  काम नहीं करता है |
-| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) पढ़ें.  - झलक देखें: `gemini-robotics-er-1.5-preview` |
-| calendar\_monthनया अपडेट | सितंबर 2025 |
-| cognition\_2जानकारी उपलब्ध न होना | जनवरी 2025 |
+| id\_cardKod modelu | `gemini-robotics-er-1.5-preview` |
+| saveObsługiwane typy danych | **Dane wejściowe**  Tekst, obrazy, filmy, dźwięk  **Dane wyjściowe**  Tekst |
+| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Limit tokenów wejściowych**  1 048 576  **Limit tokenów wyjściowych**  65 536 |
+| handymanMożliwości | **[Generowanie dźwięku](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl)**  Nieobsługiwane  **[Zapisywanie w pamięci podręcznej](https://ai.google.dev/gemini-api/docs/caching?hl=pl)**  Nieobsługiwane  **[Wykonywanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl)**  Obsługiwane  **[Wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl)**  Obsługiwane  **[Powiązanie ze źródłami informacji przy użyciu Map Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pl)**  Nieobsługiwane  **[Generowanie obrazów](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl)**  Nieobsługiwane  **[Interfejs API na żywo](https://ai.google.dev/gemini-api/docs/live-api?hl=pl)**  Nieobsługiwane  **[Szukaj groundingu](https://ai.google.dev/gemini-api/docs/google-search?hl=pl)**  Obsługiwane  **[Ustrukturyzowane dane wyjściowe](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl)**  Obsługiwane  **[Myślę](https://ai.google.dev/gemini-api/docs/thinking?hl=pl)**  Obsługiwane  **[Kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl)**  Obsługiwane |
+| speedOpcje zużycia | **[Interfejs API wsadowy](https://ai.google.dev/gemini-api/docs/batch-api?hl=pl)**  Nieobsługiwane  **[Wnioskowanie Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pl)**  Nieobsługiwane  **[Wnioskowanie priorytetowe](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pl)**  Nieobsługiwane |
+| 123Wersje | Więcej informacji znajdziesz w artykule [Wzorce wersji modelu](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#model-versions).  - Podgląd: `gemini-robotics-er-1.5-preview` |
+| calendar\_monthNajnowsza aktualizacja | Wrzesień 2025 r. |
+| cognition\_2Granica wiedzy | Styczeń 2025 r. |
 
-सुझाव भेजें
+Prześlij opinię
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया.
+Ostatnia aktualizacja: 2026-07-30 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Chcesz przekazać coś jeszcze?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]

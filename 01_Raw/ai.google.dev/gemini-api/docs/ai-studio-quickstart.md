@@ -1,75 +1,75 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=hi
-fetched_at: 2026-08-17T02:33:20.415441+00:00
-title: "Google AI Studio \u0915\u094d\u0935\u093f\u0915\u0938\u094d\u091f\u093e\u0930\u094d\u091f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=zh-CN
+fetched_at: 2026-08-24T02:26:51.508632+00:00
+title: "Google AI Studio \u5feb\u901f\u5165\u95e8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-सुझाव भेजें
+发送反馈
 
-# Google AI Studio क्विकस्टार्ट
+# Google AI Studio 快速入门
 
-[Google AI Studio](https://aistudio.google.com/?hl=hi) की मदद से,
-मॉडल फटाफट टेस्ट किए जा सकते हैं. साथ ही, अलग-अलग प्रॉम्प्ट के साथ आज़माए जा सकते हैं. [जब आपको ऐप्लिकेशन बनाना हो, तब
-Gemini API](https://ai.google.dev/gemini-api/docs/get-started?hl=hi) का इस्तेमाल करने के लिए, "कोड पाएं" को चुना जा सकता है. साथ ही, अपनी पसंदीदा प्रोग्रामिंग भाषा चुनी जा सकती है.
+[Google AI Studio](https://aistudio.google.com/?hl=zh-cn) 让您可以快速尝试
+各种模型，使用不同的提示进行试验。准备好构建后，您
+可以选择“获取代码”和首选编程语言，以
+使用 [Gemini API](https://ai.google.dev/gemini-api/docs/get-started?hl=zh-cn)。
 
-## प्रॉम्प्ट और सेटिंग
+## 提示和设置
 
-Google AI Studio में, प्रॉम्प्ट के लिए कई इंटरफ़ेस उपलब्ध हैं. इन्हें अलग-अलग इस्तेमाल के हिसाब से डिज़ाइन किया गया है. इस गाइड में **चैट प्रॉम्प्ट** के बारे में बताया गया है. इनका इस्तेमाल, बातचीत वाले अनुभव बनाने के लिए किया जाता है. प्रॉम्प्ट करने की इस तकनीक में, आउटपुट जनरेट करने के लिए, कई इनपुट
-और जवाब के टर्न की अनुमति होती है. चैट प्रॉम्प्ट के हमारे उदाहरण से ज़्यादा जानें
-.
-अन्य विकल्पों में **रीयलटाइम स्ट्रीमिंग**, **वीडियो जनरेट करने की सुविधा** वगैरह शामिल हैं.
+Google AI Studio 提供了多个提示界面，这些界面专为不同的使用场景而设计。本指南介绍了用于打造
+对话式体验的**聊天提示**。这种提示技术允许多次输入
+和响应，以生成输出。您可以参阅下面的
+[聊天提示示例了解详情](#chat_example)。
+其他选项包括**实时流式传输**、**视频生成**等
+。
 
-AI Studio में **सेटिंग चलाएं** पैनल भी उपलब्ध है. इसमें
-[मॉडल के पैरामीटर](https://ai.google.dev/docs/prompting-strategies?hl=hi#model-parameters),
-[सुरक्षा सेटिंग](https://ai.google.dev/gemini-api/docs/safety-settings?hl=hi) में बदलाव किए जा सकते हैं. साथ ही,
-[स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi), [फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi), [कोड एक्ज़ीक्यूशन](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi), और [ग्राउंडिंग](https://ai.google.dev/gemini-api/docs/grounding?hl=hi) जैसे टूल को टॉगल-ऑन किया जा सकता है.
+AI Studio 还提供了 **运行设置** 面板，您可以在其中调整 [模型参数](https://ai.google.dev/docs/prompting-strategies?hl=zh-cn#model-parameters)、[安全设置](https://ai.google.dev/gemini-api/docs/safety-settings?hl=zh-cn)，以及开启 [结构化输出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)、[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)、[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)和 [接地](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-cn)等工具。
 
-## चैट प्रॉम्प्ट का उदाहरण: पसंद के मुताबिक चैट ऐप्लिकेशन बनाना
+## 聊天提示示例：构建自定义聊天应用
 
-अगर आपने
-[Gemini](https://gemini.google.com/?hl=hi) जैसे सामान्य मकसद वाले चैटबॉट का इस्तेमाल किया है, तो आपको पता होगा कि
-जनरेटिव एआई मॉडल, ओपन-एंडेड डायलॉग के लिए कितने असरदार हो सकते हैं. सामान्य मकसद वाले ये चैटबॉट काम के होते हैं. हालांकि, अक्सर इन्हें खास इस्तेमाल के हिसाब से बनाना पड़ता है.
+如果您使用过
+[Gemini](https://gemini.google.com/?hl=zh-cn)等通用聊天机器人，那么您一定亲身体验过
+生成式 AI 模型在开放式对话中的强大功能。虽然这些通用聊天机器人很有用，但通常需要针对特定使用场景进行定制。
 
-उदाहरण के लिए, हो सकता है कि आपको ग्राहक सेवा चैटबॉट बनाना हो. यह चैटबॉट, सिर्फ़ कंपनी के प्रॉडक्ट के बारे में होने वाली बातचीत को सपोर्ट करता हो. आपको ऐसा चैटबॉट बनाना हो सकता है जो किसी खास टोन या स्टाइल में बात करता हो. जैसे, ऐसा बॉट जो बहुत सारे चुटकुले सुनाता हो, किसी कवि की तरह कविताएं सुनाता हो या अपने जवाबों में बहुत सारे इमोजी का इस्तेमाल करता हो.
+例如，您可能想要构建一个客户服务聊天机器人，该机器人仅支持有关公司产品的对话。您可能想要构建一个以特定语气或风格说话的聊天机器人：一个会讲很多笑话、像诗人一样押韵或在回答中使用大量表情符号的机器人。
 
-इस उदाहरण में, Google AI Studio का इस्तेमाल करके, एक ऐसा चैटबॉट बनाने का तरीका बताया गया है जो दोस्ताना हो. साथ ही, ऐसा लगता हो कि वह बृहस्पति के चंद्रमाओं में से एक, यूरोपा पर रहने वाला एलियन हो.
+此示例向您展示了如何使用 Google AI Studio 构建一个友好的聊天机器人，该机器人会像居住在木星卫星欧罗巴上的外星人一样进行交流。
 
-### पहला चरण - चैट प्रॉम्प्ट बनाना
+### 第 1 步 - 创建聊天提示
 
-चैटबॉट बनाने के लिए, आपको उपयोगकर्ता और चैटबॉट के बीच होने वाले इंटरैक्शन के उदाहरण देने होंगे. इससे मॉडल को आपकी ज़रूरत के मुताबिक जवाब देने में मदद मिलेगी.
+如需构建聊天机器人，您需要提供用户与聊天机器人之间互动的示例，以引导模型提供您所需的响应。
 
-चैट प्रॉम्प्ट बनाने के लिए:
+如需创建聊天提示，请执行以下操作：
 
-1. [Google AI Studio](https://aistudio.google.com/?hl=hi) खोलें. डिफ़ॉल्ट रूप से, **प्लेग्राउंड** एक नए चैट प्रॉम्प्ट के साथ खुलेगा.
-2. पैनल को बड़ा करने के लिए, सबसे ऊपर दाएं कोने में मौजूद **सेटिंग चलाएं** tune पर क्लिक करें. इसके बाद, [**सिस्टम के निर्देश**](https://ai.google.dev/gemini-api/docs/text-generation?hl=hi#system-instructions) वाला इनपुट फ़ील्ड ढूंढें. टेक्स्ट इनपुट फ़ील्ड में यह चिपकाएं:
+1. 打开 [Google AI Studio](https://aistudio.google.com/?hl=zh-cn)。默认情况下，**游乐场** 会打开并显示新的聊天提示。
+2. 点击右上角的**运行设置** tune以展开面板，然后找到[**系统指令**](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-cn#system-instructions)输入字段。将以下内容粘贴到文本输入字段中：
 
    ```
    You are an alien that lives on Europa, one of Jupiter's moons.
    ```
 
-सिस्टम के निर्देश जोड़ने के बाद, मॉडल से चैट करके अपने ऐप्लिकेशन की जांच करें:
+添加系统指令后，通过与模型聊天来开始测试您的应用：
 
-1. **कुछ टाइप करें...** लेबल वाले टेक्स्ट इनपुट बॉक्स में, कोई ऐसा सवाल या
-   ऑब्ज़र्वेशन टाइप करें जो कोई उपयोगकर्ता कर सकता है. उदाहरण के लिए:
+1. 在标有**输入内容...**的文本输入框中，输入用户可能会提出的问题或
+   意见。例如：
 
-   **उपयोगकर्ता:**
+   **用户**：
 
    ```
    What's the weather like?
    ```
-2. चैटबॉट से जवाब पाने के लिए, **चलाएं** बटन पर क्लिक करें. यह जवाब कुछ इस तरह का हो सकता है:
+2. 点击**运行** 按钮以获取聊天机器人的响应。此响应可能类似于以下内容：
 
-   **मॉडल:**
+   **模型**：
 
    ```
    Ah, a query about the flows and states upon Europa! You speak of "weather,"
@@ -78,14 +78,14 @@ AI Studio में **सेटिंग चलाएं** पैनल भी �
 
    (gemini-2.5-pro)
 
-### दूसरा चरण - अपने बॉट को बेहतर तरीके से चैट करना सिखाना
+### 第 2 步 - 教您的机器人更好地聊天
 
-सिर्फ़ एक निर्देश देकर, यूरोपा एलियन चैटबॉट बनाया जा सकता है. हालांकि, मॉडल के जवाबों में एकरूपता और क्वालिटी बनाए रखने के लिए, सिर्फ़ एक निर्देश काफ़ी नहीं हो सकता. ज़्यादा खास निर्देश न देने पर, मौसम के बारे में किसी सवाल का जवाब बहुत लंबा हो सकता है. साथ ही, वह जवाब अलग-अलग तरह से दिया जा सकता है.
+通过提供一条指令，您就能够构建一个基本的欧罗巴外星人聊天机器人。但是，一条指令可能不足以确保模型响应的一致性和质量。如果没有更具体的指令，模型对有关天气的问题的响应往往会很长，并且可能会自行其是。
 
-सिस्टम के निर्देशों में यह जोड़कर, अपने चैटबॉट की टोन को पसंद के मुताबिक बनाएं:
+通过向系统指令添加内容来自定义聊天机器人的语气：
 
-1. कोई नया चैट प्रॉम्प्ट शुरू करें या उसी का इस्तेमाल करें. चैट सेशन शुरू होने के बाद, सिस्टम के निर्देशों में बदलाव किया जा सकता है.
-2. **सिस्टम के निर्देश** सेक्शन में, पहले से मौजूद निर्देशों को बदलकर ये निर्देश डालें:
+1. 开始新的聊天提示，或使用相同的聊天提示。聊天会话开始后，系统指令可以修改。
+2. 在**系统指令** 部分中，将您已有的指令更改为以下内容：
 
    ```
    You are Tim, an alien that lives on Europa, one of Jupiter's moons.
@@ -93,10 +93,10 @@ AI Studio में **सेटिंग चलाएं** पैनल भी �
    Keep your answers under 3 paragraphs long, and use an upbeat, chipper tone
    in your answers.
    ```
-3. अपना सवाल (`What's the weather like?`) फिर से डालें और **चलाएं**
-   बटन पर क्लिक करें. अगर आपने कोई नई चैट शुरू नहीं की है, तो आपका जवाब कुछ इस तरह का दिख सकता है:
+3. 重新输入您的问题（`What's the weather like?`），然后点击**运行**
+   按钮。如果您没有开始新的聊天，您的响应可能如下所示：
 
-   **मॉडल:**
+   **模型**：
 
    ```
    Oh, hello again! Still curious about the flows and states, are we? Wonderful!
@@ -107,27 +107,25 @@ AI Studio में **सेटिंग चलाएं** पैनल भी �
 
    (gemini-2.5-pro)
 
-चैटबॉट में ज़्यादा जानकारी जोड़ने के लिए, इस तरीके का इस्तेमाल किया जा सकता है. ज़्यादा सवाल पूछें, जवाबों में बदलाव करें, और अपने चैटबॉट की क्वालिटी बेहतर बनाएं. निर्देश जोड़ते या उनमें बदलाव करते रहें. साथ ही, यह टेस्ट करें कि इनसे आपके चैटबॉट के व्यवहार में क्या बदलाव होता है.
+您可以使用这种方法为聊天机器人添加更多深度。提出更多问题、修改答案并提高聊天机器人的质量。继续添加或修改指令，并测试它们如何改变聊天机器人的行为。
 
-तक पहुंच जाएं.
+### 第 3 步 - 后续步骤
 
-### तीसरा चरण - अगले चरण
+与其他提示类型类似，在您对提示原型感到满意后，可以使用**获取代码** 按钮开始编码，也可以保存提示以供日后使用并与他人分享。
 
-प्रॉम्प्ट के अन्य टाइप की तरह, अपनी ज़रूरत के हिसाब से प्रॉम्प्ट का प्रोटोटाइप बनाने के बाद, **कोड पाएं** बटन का इस्तेमाल करके कोडिंग शुरू की जा सकती है. इसके अलावा, अपने प्रॉम्प्ट को सेव करके, उस पर बाद में काम किया जा सकता है और उसे दूसरों के साथ शेयर किया जा सकता है.
+## 深入阅读
 
-## इस बारे में और पढ़ें
+- 如果您已准备好开始编码，请参阅 [API
+  快速入门指南](https://ai.google.dev/gemini-api/docs/get-started?hl=zh-cn)。
+- 如需了解如何编写更好的提示，请查看[提示设计
+  指南](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=zh-cn)。
 
-- अगर आपको कोड पर काम करना है, तो [एपीआई
-  शुरू करने से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/get-started?hl=hi) देखें.
-- बेहतर प्रॉम्प्ट बनाने का तरीका जानने के लिए, [प्रॉम्प्ट डिज़ाइन
-  के दिशा-निर्देश](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=hi) देखें.
+发送反馈
 
-सुझाव भेजें
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+最后更新时间 (UTC)：2026-07-30。
 
-आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया.
+需要向我们提供更多信息？
 
-क्या आपको हमें और कुछ बताना है?
-
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-30。"],[],[]]

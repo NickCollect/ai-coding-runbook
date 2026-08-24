@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/google-search?hl=he
-fetched_at: 2026-08-17T02:23:11.491920+00:00
-title: "\u05e2\u05d9\u05d2\u05d5\u05df \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea \u05d7\u05d9\u05e4\u05d5\u05e9 Google \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/google-search?hl=id
+fetched_at: 2026-08-24T02:21:36.734458+00:00
+title: "Grounding with Google Search \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-שליחת משוב
+Kirim masukan
 
-# עיגון באמצעות חיפוש Google
+# Grounding with Google Search
 
-העיגון באמצעות חיפוש Google מחבר את מודל Gemini לתוכן מהאינטרנט שמתעדכן בזמן אמת, ועובד בכל השפות הזמינות. כך Gemini יכול לתת תשובות מדויקות יותר ולצטט מקורות ניתנים לאימות, מעבר לתאריך סף הידע שלו.
+Grounding dengan Google Penelusuran menghubungkan model Gemini ke konten web real-time dan berfungsi dengan semua bahasa yang tersedia. Dengan fitur ini, Gemini dapat memberikan jawaban yang lebih akurat dan mengutip sumber yang dapat diverifikasi di luar batas informasinya.
 
-ההארקה עוזרת לכם ליצור אפליקציות שיכולות:
+Grounding membantu Anda membangun aplikasi yang dapat:
 
-- **שיפור הדיוק העובדתי:** כדי לצמצם את ההזיות של המודל, התשובות מבוססות על מידע מהעולם האמיתי.
-- **גישה למידע בזמן אמת:** מענה לשאלות על אירועים ונושאים עדכניים.
-- **לספק ציטוטים:** כדי לבנות את אמון המשתמשים, כדאי להציג את המקורות של הטענות של המודל.
+- **Meningkatkan akurasi faktual:** Mengurangi halusinasi model dengan mendasarkan respons pada informasi dunia nyata.
+- **Mengakses informasi real-time:** Menjawab pertanyaan tentang peristiwa dan topik terbaru.
+- **Memberikan kutipan:** Membangun kepercayaan pengguna dengan menampilkan sumber untuk klaim model.
 
 ### Python
 
@@ -44,7 +44,7 @@ config = types.GenerateContentConfig(
 )
 
 response = client.models.generate_content(
-    model="gemini-3.6-flash",
+    model="gemini-3.7-flash",
     contents="Who won the euro 2024?",
     config=config,
 )
@@ -68,7 +68,7 @@ const config = {
 };
 
 const response = await ai.models.generateContent({
-  model: "gemini-3.6-flash",
+  model: "gemini-3.7-flash",
   contents: "Who won the euro 2024?",
   config,
 });
@@ -79,7 +79,7 @@ console.log(response.text);
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.7-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -X POST \
@@ -99,23 +99,23 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-אפשר לנסות את [מחברת כלי החיפוש](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=he) כדי לקבל מידע נוסף.
+Anda dapat mempelajari lebih lanjut dengan mencoba notebook alat [Penelusuran](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=id).
 
-## איך עיגון באמצעות חיפוש Google פועל
+## Cara kerja grounding dengan Google Penelusuran
 
-כשמפעילים את הכלי `google_search`, המודל מטפל בכל תהליך העבודה של חיפוש, עיבוד וציטוט מידע באופן אוטומטי.
+Saat Anda mengaktifkan alat `google_search`, model akan menangani seluruh alur kerja penelusuran, pemrosesan, dan pengutipan informasi secara otomatis.
 
-![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=he)
+![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=id)
 
-1. **הנחיית משתמש:** האפליקציה שולחת הנחיית משתמש אל Gemini API עם הכלי `google_search` מופעל.
-2. **ניתוח ההנחיה:** המודל מנתח את ההנחיה וקובע אם חיפוש ב-Google יכול לשפר את התשובה.
-3. **חיפוש Google:** אם צריך, המודל יוצר באופן אוטומטי שאילתת חיפוש אחת או יותר ומריץ אותן.
-4. **עיבוד תוצאות החיפוש:** המודל מעבד את תוצאות החיפוש, מסנתז את המידע ומנסח תשובה.
-5. **תשובה מבוססת:** ה-API מחזיר תשובה סופית וידידותית למשתמש שמבוססת על תוצאות החיפוש. התשובה הזו כוללת את התשובה הטקסטואלית של המודל `groundingMetadata` עם שאילתות החיפוש, תוצאות החיפוש והציטוטים.
+1. **Perintah Pengguna:** Aplikasi Anda mengirimkan perintah pengguna ke Gemini API dengan alat `google_search` yang diaktifkan.
+2. **Analisis Perintah:** Model menganalisis perintah dan menentukan apakah Google Penelusuran dapat meningkatkan kualitas jawaban.
+3. **Google Penelusuran:** Jika diperlukan, model akan otomatis membuat satu atau beberapa kueri penelusuran dan menjalankannya.
+4. **Pemrosesan Hasil Penelusuran:** Model memproses hasil penelusuran, menyintesis informasi, dan merumuskan respons.
+5. **Respons yang Didasarkan pada Fakta:** API menampilkan respons akhir yang mudah digunakan dan didasarkan pada hasil penelusuran. Respons ini mencakup jawaban teks model dan `groundingMetadata` dengan kueri penelusuran, hasil web, dan kutipan.
 
-## הסבר על תשובת ההארקה
+## Memahami respons grounding
 
-כשמקרקעים תשובה בהצלחה, התשובה כוללת את השדה `groundingMetadata`. הנתונים המובנים האלה חיוניים לאימות הטענות וליצירת חוויית ציטוט עשירה באפליקציה.
+Jika grounding berhasil, respons akan menyertakan kolom `groundingMetadata`. Data terstruktur ini penting untuk memverifikasi klaim dan membangun pengalaman kutipan yang kaya di aplikasi Anda.
 
 ```
 {
@@ -131,11 +131,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
       },
       "groundingMetadata": {
         "webSearchQueries": [
-          "UEFA Euro 2024 winner"<;,
-          "who won euro 2024">;
+          "UEFA Euro 2024 winner",
+          "who won euro 2024"
         ],
         "searchEntryPoint": {
-          "renderedContent": "!-- HTML and CSS for the search widget --"
+          "renderedContent": "<!-- HTML and CSS for the search widget -->"
         },
         "groundingChunks": [
           {"web": {"uri": "https://vertexaisearch.cloud.google.com.....", "title": "aljazeera.com"}},
@@ -143,7 +143,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
         ],
         "groundingSupports": [
           {
-            "segment": {"startIndex": 0, "endIndex": 85, &quot;text": "Spain won Euro 2024, defeatin..."},
+            "segment": {"startIndex": 0, "endIndex": 85, "text": "Spain won Euro 2024, defeatin..."},
             "groundingChunkIndices": [0]
           },
           {
@@ -157,18 +157,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }
 ```
 
-‫Gemini API מחזיר את המידע הבא עם התג `groundingMetadata`:
+Gemini API menampilkan informasi berikut dengan `groundingMetadata`:
 
-- ‫`webSearchQueries` : מערך של שאילתות החיפוש שנעשה בהן שימוש. המידע הזה שימושי לניפוי באגים ולהבנת תהליך החשיבה של המודל.
-- ‫`searchEntryPoint` : מכיל את ה-HTML ואת ה-CSS לעיבוד הצעות החיפוש הנדרשות. דרישות השימוש המלאות מפורטות [בתנאים ובהגבלות](https://ai.google.dev/gemini-api/terms?hl=he#grounding-with-google-search).
-- ‫`groundingChunks` : מערך של אובייקטים שמכילים את המקורות באינטרנט (`uri` ו-`title`).
-- ‫`groundingSupports` : מערך של מקטעים לחיבור התגובה של המודל `text` למקורות ב-`groundingChunks`. כל מקטע מקשר טקסט `segment` (מוגדר על ידי `startIndex` ו-`endIndex`) ל-`groundingChunkIndices` אחד או יותר. זהו המפתח ליצירת ציטוטים בגוף הטקסט.
+- `webSearchQueries` : Array kueri penelusuran yang digunakan. Hal ini berguna untuk men-debug dan memahami proses penalaran model.
+- `searchEntryPoint` : Berisi HTML dan CSS untuk merender Saran Penelusuran yang diperlukan. Persyaratan penggunaan lengkap dijelaskan dalam [Persyaratan
+  Layanan](https://ai.google.dev/gemini-api/terms?hl=id#grounding-with-google-search).
+- `groundingChunks` : Array objek yang berisi sumber web (`uri` dan `title`).
+- `groundingSupports` : Array potongan untuk menghubungkan `text` respons model ke sumber di `groundingChunks`. Setiap potongan menautkan `segment` teks (ditentukan oleh `startIndex` dan `endIndex`) ke satu atau beberapa `groundingChunkIndices`. Hal ini merupakan kunci untuk membuat kutipan inline.
 
-אפשר גם להשתמש בעיגון באמצעות חיפוש Google בשילוב עם [כלי ההקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he) כדי לעגן תשובות גם על נתונים ציבוריים באינטרנט וגם על כתובות ה-URL הספציפיות שאתם מספקים.
+Grounding dengan Google Penelusuran juga dapat digunakan bersama dengan alat konteks [URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id) untuk mendasarkan respons pada data web publik
+dan URL tertentu yang Anda berikan.
 
-## שיוך מקורות באמצעות ציטוטים מוטמעים
+## Memberikan atribusi sumber dengan kutipan inline
 
-ממשק ה-API מחזיר נתוני ציטוט מובְנים, כך שיש לכם שליטה מלאה על האופן שבו אתם מציגים מקורות בממשק המשתמש. אפשר להשתמש בשדות `groundingSupports` וב-`groundingChunks` כדי לקשר את ההצהרות של המודל ישירות למקורות שלהן. הנה דפוס נפוץ לעיבוד המטא-נתונים כדי ליצור תגובה עם ציטוטים מוטמעים שאפשר ללחוץ עליהם.
+API menampilkan data kutipan terstruktur, sehingga Anda memiliki kontrol penuh atas cara menampilkan sumber di antarmuka pengguna. Anda dapat menggunakan kolom `groundingSupports` dan `groundingChunks` untuk menautkan pernyataan model langsung ke sumbernya. Berikut adalah pola umum untuk memproses metadata guna membuat respons dengan kutipan inline yang dapat diklik.
 
 ### Python
 
@@ -243,57 +245,66 @@ const textWithCitations = addCitations(response);
 console.log(textWithCitations);
 ```
 
-התשובה החדשה עם ציטוטים מוטבעים תיראה כך:
+Respons baru dengan kutipan inline akan terlihat seperti ini:
 
 ```
 Spain won Euro 2024, defeating England 2-1 in the final.[1](https:/...), [2](https:/...), [4](https:/...), [5](https:/...) This victory marks Spain's record-breaking fourth European Championship title.[5]((https:/...), [2](https:/...), [3](https:/...), [4](https:/...)
 ```
 
-## תמחור
+## Harga
 
-כשמשתמשים בעיגון באמצעות חיפוש Google עם Gemini 3, הפרויקט מחויב על כל שאילתת חיפוש שהמודל מחליט לבצע. אם המודל מחליט להריץ כמה שאילתות חיפוש כדי לענות על הנחיה אחת (לדוגמה, חיפוש של `"UEFA Euro 2024 winner"` ושל `"Spain vs England Euro 2024 final
-score"` באותה קריאה ל-API), זה נחשב כשני שימושים מחויבים בכלי עבור הבקשה הזו. לצורך חיוב, אנחנו מתעלמים משאילתות ריקות בחיפוש Google כשסופרים שאילתות ייחודיות. מודל החיוב הזה רלוונטי רק למודלים של Gemini 3. כשמשתמשים בהארקה של חיפוש עם Gemini 2.5 או מודלים ישנים יותר, החיוב על הפרויקט הוא לפי הנחיה.
+Saat Anda menggunakan Grounding with Google Search dengan Gemini 3, project Anda akan ditagih untuk setiap kueri penelusuran yang diputuskan untuk dijalankan oleh model. Jika model memutuskan untuk
+menjalankan beberapa kueri penelusuran untuk menjawab satu perintah (misalnya,
+menelusuri `"UEFA Euro 2024 winner"` dan `"Spain vs England Euro 2024 final
+score"` dalam panggilan API yang sama), hal ini akan dihitung sebagai dua penggunaan alat yang dapat ditagih
+untuk permintaan tersebut. Untuk tujuan penagihan, kami mengabaikan kueri penelusuran web kosong saat menghitung kueri unik. Model penagihan ini hanya berlaku untuk model Gemini 3. Jika Anda menggunakan grounding penelusuran dengan model Gemini 2.5 atau yang lebih lama, project Anda akan ditagih per perintah.
 
-למידע מפורט על התמחור, אפשר לעיין ב[דף התמחור של Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=he).
+Untuk mengetahui informasi harga mendetail, lihat halaman harga [Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=id).
 
-## מודלים נתמכים
+## Model yang didukung
 
-אפשר למצוא את כל היכולות בדף [סקירה כללית של המודל](https://ai.google.dev/gemini-api/docs/models?hl=he).
+Anda dapat menemukan kemampuan lengkap di halaman ringkasan [model
+overview](https://ai.google.dev/gemini-api/docs/models?hl=id).
 
-| מודל | עיגון באמצעות חיפוש Google |
+| Model | Grounding dengan Google Penelusuran |
 | --- | --- |
+| Gemini 3.7 Flash | ✔️ |
 | Gemini 3.6 Flash | ✔️ |
 | Gemini 3.5 Flash-Lite | ✔️ |
 | Gemini 3.5 Flash | ✔️ |
 | Gemini 3.1 Flash-Lite | ✔️ |
-| תצוגה מקדימה של תמונות ב-Gemini 3.1 Flash | ✔️ |
-| ‫Gemini 3.1 Pro Preview | ✔️ |
-| תצוגה מקדימה של תמונות ב-Gemini 3 Pro | ✔️ |
-| ‫Gemini 3 Flash Preview | ✔️ |
-| ‫Gemini 3.1 Flash-Lite Preview | ✔️ |
-| Gemini ‎2.5 Pro | ✔️ |
-| Gemini ‎2.5 Flash | ✔️ |
+| Gemini 3.1 Flash Image Preview | ✔️ |
+| Gemini 3.1 Pro Preview | ✔️ |
+| Gemini 3 Pro Image Preview | ✔️ |
+| Gemini 3 Flash Preview | ✔️ |
+| Gemini 3.1 Flash-Lite Preview | ✔️ |
+| Gemini 2.5 Pro | ✔️ |
+| Gemini 2.5 Flash | ✔️ |
 | Gemini 2.5 Flash-Lite | ✔️ |
-| Gemini ‎2.0 Flash | ✔️ |
+| Gemini 2.0 Flash | ✔️ |
 
-## שילובים נתמכים של כלים
+## Kombinasi alat yang didukung
 
-אתם יכולים להשתמש ב-עיגון באמצעות חיפוש Google עם כלים אחרים כמו [הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he) ו[הקשר של כתובת URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he) כדי להפעיל תרחישי שימוש מורכבים יותר.
+Anda dapat menggunakan Grounding with Google Search bersama dengan alat lain seperti
+[eksekusi kode](https://ai.google.dev/gemini-api/docs/code-execution?hl=id),
+[Konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id), dan
+[Grounding with Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=id) (didukung di
+model Gemini 3.5 Flash dan yang lebih baru) untuk mendukung kasus penggunaan yang lebih kompleks. Model Gemini 3 juga mendukung penggabungan alat bawaan ini dengan alat kustom (panggilan fungsi). Pelajari lebih lanjut di halaman
+[kombinasi alat](https://ai.google.dev/gemini-api/docs/tool-combination?hl=id).
 
-מודלים של Gemini 3 תומכים בשילוב של כלים מובנים (כמו עיגון באמצעות חיפוש Google) עם כלים מותאמים אישית (קריאה לפונקציה). מידע נוסף זמין בדף [שילובים של כלים](https://ai.google.dev/gemini-api/docs/tool-combination?hl=he).
+## Langkah berikutnya
 
-## המאמרים הבאים
+- Coba [Grounding dengan Google Penelusuran di Gemini API
+  Cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=id).
+- Pelajari alat lain yang tersedia, seperti [Panggilan Fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id).
+- Pelajari cara menambah perintah dengan URL tertentu menggunakan [alat konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id).
 
-- כדאי לנסות את [המתכון לעיגון בחיפוש Google ב-Gemini API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=he).
-- אפשר לקרוא על כלים זמינים אחרים, כמו [הפעלת פונקציות](https://ai.google.dev/gemini-api/docs/function-calling?hl=he).
-- [כאן](https://ai.google.dev/gemini-api/docs/url-context?hl=he) מוסבר איך להוסיף לתיאורים כתובות URL ספציפיות באמצעות הכלי 'הקשר כתובת URL'.
+Kirim masukan
 
-שליחת משוב
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Terakhir diperbarui pada 2026-08-20 UTC.
 
-עדכון אחרון: 2026-07-30 (שעון UTC).
+Ada masukan untuk kami?
 
-רוצה לתת לנו משוב?
-
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-30 (שעון UTC)."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-08-20 UTC."],[],[]]

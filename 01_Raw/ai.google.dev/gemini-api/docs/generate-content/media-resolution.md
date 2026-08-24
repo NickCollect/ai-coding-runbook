@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=zh-CN
-fetched_at: 2026-08-17T02:17:38.585817+00:00
+fetched_at: 2026-08-24T02:36:33.781970+00:00
 title: "\u5a92\u4f53\u5206\u8fa8\u7387 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 

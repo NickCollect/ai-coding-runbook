@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=es-419
-fetched_at: 2026-08-17T02:30:44.887829+00:00
-title: "Entornos en agentes administrados \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=th
+fetched_at: 2026-08-24T02:31:55.788452+00:00
+title: "\u0e2a\u0e20\u0e32\u0e1e\u0e41\u0e27\u0e14\u0e25\u0e49\u0e2d\u0e21\u0e43\u0e19 Agent \u0e17\u0e35\u0e48\u0e21\u0e35\u0e01\u0e32\u0e23\u0e08\u0e31\u0e14\u0e01\u0e32\u0e23 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Enviar comentarios
+ส่งความคิดเห็น
 
-# Entornos en agentes administrados
+# สภาพแวดล้อมใน Agent ที่มีการจัดการ
 
-Los entornos son zonas de pruebas de Linux administradas que les brindan a los agentes un lugar aislado para ejecutar código y conservar archivos. Están separados del contexto de interacción, por lo que puedes reutilizar el mismo entorno en varias interacciones o comenzar de nuevo en cualquier momento.
+สภาพแวดล้อมคือแซนด์บ็อกซ์ Linux ที่มีการจัดการ ซึ่งช่วยให้ตัวแทนมีพื้นที่ที่แยกต่างหากเพื่อรันโค้ดและเก็บไฟล์ไว้ โดยสภาพแวดล้อมจะแยกออกจากบริบทการโต้ตอบ คุณจึงใช้สภาพแวดล้อมเดียวกันซ้ำในการโต้ตอบหลายครั้งหรือเริ่มต้นใหม่ได้ทุกเมื่อ
 
-En el siguiente ejemplo, se muestra cómo crear una interacción con un entorno remoto nuevo y recuperar su ID:
+ตัวอย่างต่อไปนี้แสดงวิธีสร้างการโต้ตอบกับสภาพแวดล้อมระยะไกลใหม่และดึงข้อมูลรหัสของการโต้ตอบ
 
 ### Python
 
@@ -67,17 +67,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## El parámetro `environment`
+## พารามิเตอร์ `environment`
 
-El parámetro `environment` acepta tres formas:
+พารามิเตอร์ `environment` ยอมรับ 3 รูปแบบ ดังนี้
 
-| Técnica | Ejemplo | Cuándo debe utilizarse |
+| ฟอร์ม | ตัวอย่าง | กรณีที่ควรใช้ |
 | --- | --- | --- |
-| `"remote"` | `environment="remote"` | Aprovisiona una zona de pruebas nueva. |
-| ID del entorno | `environment="env_abc123"` | Reutiliza una zona de pruebas existente con todos sus archivos y paquetes. |
-| Objeto de configuración | `environment={...}` | Aprovisiona una zona de pruebas nueva con fuentes, reglas de red o ambas. |
+| `"remote"` | `environment="remote"` | จัดเตรียมแซนด์บ็อกซ์ใหม่ |
+| รหัสสภาพแวดล้อม | `environment="env_abc123"` | ใช้แซนด์บ็อกซ์ที่มีอยู่ซ้ำพร้อมไฟล์และแพ็กเกจทั้งหมด |
+| ออบเจ็กต์การกำหนดค่า | `environment={...}` | จัดเตรียมแซนด์บ็อกซ์ใหม่ที่มีแหล่งที่มา กฎเครือข่าย หรือทั้ง 2 อย่าง |
 
-En los siguientes ejemplos, se muestran las tres formas de usar el parámetro `environment`.
+ตัวอย่างต่อไปนี้แสดงวิธีใช้พารามิเตอร์ `environment` 3 วิธี
 
 ### Python
 
@@ -205,10 +205,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Configura un entorno
+## กำหนดค่าสภาพแวดล้อม
 
-Una forma de configurar un entorno es indicarle al agente lo que necesitas instalar.
-Se encarga de la resolución de dependencias y la solución de problemas. Una vez que el entorno esté listo, guarda el `environment_id` y vuelve a usarlo.
+วิธีหนึ่งในการตั้งค่าสภาพแวดล้อมคือการบอกตัวแทนว่าคุณต้องการติดตั้งอะไร
+ตัวแทนจะจัดการการแก้ปัญหาการพึ่งพาอาศัยกันและการแก้ปัญหา เมื่อสภาพแวดล้อมพร้อมแล้ว ให้บันทึก `environment_id` แล้วนำไปใช้ซ้ำ
 
 ### Python
 
@@ -285,15 +285,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Realiza el montaje desde una fuente
+### ติดตั้งจากแหล่งที่มา
 
-Si sabes exactamente qué archivos necesita el agente, móntalos en una sola llamada en lugar de iterar. El objeto de configuración `environment` acepta un array `sources` con tres tipos:
+หากทราบแน่ชัดว่าตัวแทนต้องการไฟล์ใด ให้ติดตั้งไฟล์เหล่านั้นในการเรียกใช้ครั้งเดียวแทนการวนซ้ำ ออบเจ็กต์การกำหนดค่า `environment` ยอมรับอาร์เรย์ `sources` 3 ประเภท ดังนี้
 
-| Tipo de fuente | Valor `type` | Descripción | Límite |
+| ประเภทแหล่งที่มา | ค่า `type` | คำอธิบาย | ขีดจำกัด |
 | --- | --- | --- | --- |
-| Repositorio de Git | `repository` | Clona un repositorio desde una URL en la zona de pruebas en `target`. | 500 MB |
-| Cloud Storage | `gcs` | Copia un archivo o directorio de Cloud Storage en la zona de pruebas en `target`. | 2 GB |
-| Contenido intercalado | `inline` | Escribe contenido de texto sin procesar en un archivo de la zona de pruebas en `target`. | 1 MB por archivo, 2 MB en total |
+| ที่เก็บ Git | `repository` | โคลนที่เก็บจาก URL ลงในแซนด์บ็อกซ์ที่ `target` | 500 MB |
+| Cloud Storage | `gcs` | คัดลอกไฟล์หรือไดเรกทอรีจาก Cloud Storage ลงในแซนด์บ็อกซ์ที่ `target` | 2 GB |
+| เนื้อหาแบบอินไลน์ | `inline` | เขียนเนื้อหาข้อความดิบลงในไฟล์ในแซนด์บ็อกซ์ที่ `target` | 1 MB ต่อไฟล์, รวม 2 MB |
 
 ### Python
 
@@ -398,15 +398,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Puedes combinar ambos enfoques: montar fuentes conocidas de forma declarativa y, luego, iterar con interacciones de seguimiento para instalar paquetes o ejecutar secuencias de comandos de configuración. No puedes establecer la raíz (`/`) como destino cuando agregas una fuente personalizada. Siempre debes especificar un subdirectorio.
+คุณสามารถใช้ทั้ง 2 แนวทางร่วมกันได้ นั่นคือ ติดตั้งแหล่งที่มาที่ทราบแบบประกาศ จากนั้นวนซ้ำด้วยการโต้ตอบติดตามผลเพื่อติดตั้งแพ็กเกจหรือเรียกใช้สคริปต์การตั้งค่า คุณไม่สามารถตั้งค่ารูท (`/`) เป็นเป้าหมายเมื่อเพิ่มแหล่งที่มาที่กำหนดเองได้ คุณต้องระบุไดเรกทอรีย่อยเสมอ
 
-### Fuentes privadas
+### ฮุก
 
-También puedes descargar desde repositorios privados de GitHub o buckets privados de Cloud Storage agregando las credenciales en la configuración de red:
+นอกจากนี้ คุณยังติดตั้งไฟล์การกำหนดค่า `.agents/hooks.json` และสคริปต์การดักจับที่กำหนดเองลงในแซนด์บ็อกซ์เพื่อบังคับใช้การป้องกันด้านความปลอดภัยหรือเรียกใช้การตรวจสอบอัตโนมัติทุกครั้งที่เครื่องมือทำงานได้ด้วย ดูคำจำกัดความของสคีมาและโค้ดตัวอย่างได้ที่ [ฮุก](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=th)
 
-Para **repositorios privados de Git**, usa la autenticación `Basic` con tu
-[token de acceso personal (PAT) de GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
-Codifica el token con `x-oauth-basic` como nombre de usuario:
+### แหล่งที่มาแบบส่วนตัว
+
+นอกจากนี้ คุณยังดาวน์โหลดจากที่เก็บ GitHub แบบส่วนตัวหรือ Bucket ของ Cloud Storage แบบส่วนตัวได้โดยเพิ่มข้อมูลเข้าสู่ระบบในการกำหนดค่าเครือข่าย ดังนี้
+
+สำหรับ**ที่เก็บ Git แบบส่วนตัว** ให้ใช้การตรวจสอบสิทธิ์ `Basic` ด้วย
+[โทเค็นเพื่อการเข้าถึงส่วนบุคคล (PAT) ของ GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+เข้ารหัสโทเค็นโดยใช้ `x-oauth-basic` เป็นชื่อผู้ใช้
 
 ```
 echo -n "x-oauth-basic:ghp_YourPATHere" | base64
@@ -511,7 +515,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Para **buckets privados de Cloud Storage**, usa un token del portador OAuth 2.0 estándar:
+สำหรับ**Bucket ของ Cloud Storage แบบส่วนตัว** ให้ใช้โทเค็น Bearer ของ OAuth 2.0 มาตรฐาน
 
 ```
 gcloud auth print-access-token
@@ -616,25 +620,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Software ya instalado
+## ซอฟต์แวร์ที่ติดตั้งไว้ล่วงหน้า
 
-La zona de pruebas se ejecuta en Ubuntu y viene con entornos de ejecución y paquetes comunes preinstalados. El agente puede instalar paquetes adicionales en el tiempo de ejecución con `pip
-install` o `npm install`. Los paquetes instalados durante una interacción persisten cuando vuelves a usar el mismo `environment_id`.
+แซนด์บ็อกซ์ทำงานบน Ubuntu และมาพร้อมกับรันไทม์และแพ็กเกจทั่วไปที่ติดตั้งไว้ล่วงหน้า ตัวแทนสามารถติดตั้งแพ็กเกจเพิ่มเติมในรันไทม์ได้โดยใช้ `pip
+install` หรือ `npm install` แพ็กเกจที่ติดตั้งระหว่างการโต้ตอบจะยังคงอยู่เมื่อคุณใช้ `environment_id` เดียวกันซ้ำ
 
-| Categoría | Paquetes preinstalados |
+| หมวดหมู่ | แพ็กเกจที่ติดตั้งไว้ล่วงหน้า |
 | --- | --- |
-| **Herramientas de UNIX** | `curl`, `wget`, `git`, `rsync`, `unzip`, `ripgrep`, `fd-find`, `gawk`, `bc`, `tree`, `which`, `lsof`, `htop`, `jq`, `iproute2`, `procps`, `gcloud CLI` |
+| **เครื่องมือ UNIX** | `curl`, `wget`, `git`, `rsync`, `unzip`, `ripgrep`, `fd-find`, `gawk`, `bc`, `tree`, `which`, `lsof`, `htop`, `jq`, `iproute2`, `procps`, `gcloud CLI` |
 | **Python 3.12** | `numpy`, `pandas`, `requests`, `google-genai`, `beautifulsoup4`, `pyyaml`, `ast-grep-cli` |
 | **Node.js 22** | `create-next-app`, `create-vite`, `typescript` |
 
-## Configuración de red
+## การกำหนดค่าเครือข่าย
 
-De forma predeterminada, los entornos tienen acceso a la red de salida sin restricciones. Usa el campo `network` para restringir el tráfico de salida a dominios específicos. Cada regla especifica un `domain` y un objeto `transform` opcional para insertar encabezados en las solicitudes coincidentes. Estos encabezados pueden ser únicos por interacción, y puedes actualizarlos para el mismo entorno.
+โดยค่าเริ่มต้น สภาพแวดล้อมจะมีการเข้าถึงเครือข่ายขาออกแบบไม่จำกัด ใช้ช่อง `network` เพื่อจำกัดการรับส่งข้อมูลขาออกไปยังโดเมนที่เฉพาะเจาะจง กฎแต่ละข้อจะระบุ `domain` และออบเจ็กต์ `transform` ที่ไม่บังคับเพื่อแทรกส่วนหัวลงในคำขอที่ตรงกัน ส่วนหัวเหล่านี้อาจไม่ซ้ำกันต่อการโต้ตอบ และคุณสามารถอัปเดตส่วนหัวสำหรับสภาพแวดล้อมเดียวกันได้
 
-| Campo | Tipo | Descripción |
+| ช่อง | ประเภท | คำอธิบาย |
 | --- | --- | --- |
-| `domain` | `string` | Dominio que se hará coincidir. Usa un nombre de host exacto o `*` para todos los dominios. |
-| `transform` | `object` | Objeto que contiene pares clave-valor planos que representan los encabezados que se insertarán en las solicitudes coincidentes, p.ej., `{"Authorization": "Bearer ..."}`. |
+| `domain` | `string` | โดเมนที่จะจับคู่ ใช้ชื่อโฮสต์ที่แน่นอนหรือ `*` สำหรับโดเมนทั้งหมด |
+| `transform` | `object` | ออบเจ็กต์ที่มีคู่คีย์-ค่าแบบแบนซึ่งแสดงถึงส่วนหัวที่จะแทรกลงในคำขอที่ตรงกัน เช่น `{"Authorization": "Bearer ..."}` |
 
 ### Python
 
@@ -723,14 +727,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Cuando se establece una lista de entidades permitidas, solo se permiten las solicitudes a los dominios que se enumeran de forma explícita. Puedes usar comodines para hacer coincidir subdominios (p.ej., `{"domain":
-"*.example.com"}`), pero ten en cuenta que esto no coincide con el dominio raíz
-`example.com`, que se debe agregar por separado. Para permitir todo el tráfico restante, como enrutar dominios no incluidos en la lista sin encabezados insertados, agrega `{"domain": "*"}` como una
-entrada de captura total.
+เมื่อตั้งค่ารายการที่อนุญาตไว้ ระบบจะอนุญาตเฉพาะคำขอที่ส่งไปยังโดเมนที่ระบุไว้อย่างชัดเจนเท่านั้น คุณสามารถใช้ไวลด์การ์ดเพื่อจับคู่โดเมนย่อย (เช่น `{"domain":
+"*.example.com"}`) แต่โปรดทราบว่าไวลด์การ์ดนี้จะไม่จับคู่โดเมนราก
+`example.com` ซึ่งต้องเพิ่มแยกต่างหาก หากต้องการอนุญาตการรับส่งข้อมูลอื่นๆ ทั้งหมด เช่น การกำหนดเส้นทางโดเมนที่ไม่ได้ระบุไว้โดยไม่มีส่วนหัวที่แทรก ให้เพิ่ม `{"domain": "*"}` เป็นรายการแบบครอบคลุม
 
-### Credenciales
+### ข้อมูลเข้าสู่ระบบ
 
-Puedes agregar credenciales para que las use tu agente agregando transformaciones de encabezado. Un proxy de salida inserta las credenciales en los encabezados HTTP respectivos. Nunca se exponen dentro de la zona de pruebas como variables de entorno o archivos.
+คุณสามารถเพิ่มข้อมูลเข้าสู่ระบบเพื่อให้ตัวแทนใช้ได้โดยเพิ่มการแปลงส่วนหัว พร็อกซีขาออกจะแทรกข้อมูลเข้าสู่ระบบในส่วนหัว HTTP ที่เกี่ยวข้อง โดยข้อมูลเข้าสู่ระบบจะไม่แสดงในแซนด์บ็อกซ์เป็นตัวแปรสภาพแวดล้อมหรือไฟล์
 
 ### Python
 
@@ -823,9 +826,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Inhabilita el acceso a la red
+### ปิดใช้การเข้าถึงเครือข่าย
 
-Para bloquear todo el acceso a la red de salida, establece `network` en `disabled`:
+หากต้องการบล็อกการเข้าถึงเครือข่ายขาออกทั้งหมด ให้ตั้งค่า `network` เป็น `disabled`
 
 ### Python
 
@@ -881,10 +884,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Actualiza las credenciales
+### รีเฟรชข้อมูลเข้าสู่ระบบ
 
-Las credenciales, como los tokens de acceso y las claves de API de corta duración, vencen.
-Puedes actualizarlas pasando el `environment_id` existente junto con una nueva configuración `network` en la siguiente interacción. Las nuevas reglas de red reemplazan por completo las anteriores, mientras que se conserva el estado del sistema de archivos del entorno (paquetes instalados, archivos, repositorios).
+ข้อมูลเข้าสู่ระบบ เช่น โทเค็นเพื่อการเข้าถึงและคีย์ API ที่มีอายุสั้นจะหมดอายุ
+คุณสามารถรีเฟรชข้อมูลเข้าสู่ระบบได้โดยส่ง `environment_id` ที่มีอยู่พร้อมกับการกำหนดค่า `network` ใหม่ในการโต้ตอบครั้งถัดไป กฎเครือข่ายใหม่จะแทนที่กฎก่อนหน้าทั้งหมด ขณะที่สถานะระบบไฟล์ของสภาพแวดล้อม (แพ็กเกจ ไฟล์ ที่เก็บที่ติดตั้ง) จะยังคงอยู่
 
 ### Python
 
@@ -1011,26 +1014,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Ciclo de vida del entorno
+## วงจรการใช้งานสภาพแวดล้อม
 
-Los entornos siguen este ciclo de vida:
+สภาพแวดล้อมมีวงจรการใช้งานดังนี้
 
-| Estado | Comportamiento |
+| สถานะ | พฤติกรรม |
 | --- | --- |
-| **Creado** | Se aprovisiona cuando una interacción especifica `environment: "remote"` o un objeto de configuración. |
-| **Activo** | Se ejecuta mientras una interacción está en curso. |
-| **Inactivo** | Se toma una instantánea automática y se detiene después de 15 minutos de inactividad. |
-| **Sin conexión** | Se retiene durante 7 días desde la última actividad. Se puede reanudar pasando su ID. |
-| **Eliminado** | Se quita del sistema automáticamente después de que vence la retención de TTL de 7 días o cuando se borra de forma manual. |
+| **สร้างแล้ว** | จัดเตรียมเมื่อการโต้ตอบระบุ `environment: "remote"` หรือออบเจ็กต์การกำหนดค่า |
+| **ใช้งานอยู่** | ทำงานอยู่ขณะที่การโต้ตอบอยู่ระหว่างดำเนินการ |
+| **ไม่มีการใช้งาน** | สร้างสแนปช็อตอัตโนมัติและหยุดทำงานหลังจากไม่มีการใช้งานเป็นเวลา 15 นาที |
+| **ออฟไลน์** | เก็บไว้ 7 วันนับตั้งแต่ใช้งานครั้งล่าสุด กลับมาใช้งานต่อได้โดยส่งรหัส |
+| **ลบแล้ว** | นำออกจากระบบโดยอัตโนมัติหลังจากระยะเวลาการเก็บรักษา TTL 7 วันหมดอายุหรือเมื่อลบด้วยตนเอง |
 
-## API de Environments
+## Environments API
 
-Puedes usar la API de Environments para administrar sesiones de zona de pruebas de forma programática.
-La enumeración de entornos te permite descubrir IDs de sesión activos y recuperar el estado si finaliza una conexión del cliente durante una tarea de larga duración. También puedes inspeccionar los metadatos de la sesión y borrar entornos de forma explícita cuando finalizan los flujos de trabajo en lugar de esperar el vencimiento automático del TTL.
+คุณสามารถใช้ Environments API เพื่อจัดการเซสชันแซนด์บ็อกซ์แบบเป็นโปรแกรมได้
+การแจกแจงสภาพแวดล้อมช่วยให้คุณค้นหารหัสเซสชันที่ใช้งานอยู่และกู้คืนสถานะได้หากการเชื่อมต่อไคลเอ็นต์สิ้นสุดลงระหว่างงานที่ใช้เวลานาน นอกจากนี้ คุณยังตรวจสอบข้อมูลเมตาของเซสชันและลบสภาพแวดล้อมอย่างชัดเจนได้เมื่อเวิร์กโฟลว์เสร็จสิ้นแทนที่จะรอให้ TTL หมดอายุโดยอัตโนมัติ
 
-### Enumera entornos
+### แสดงรายการสภาพแวดล้อม
 
-Enumera los entornos activos que pertenecen a tu proyecto. Usa parámetros de paginación para controlar el tamaño del lote de respuesta.
+แสดงรายการสภาพแวดล้อมที่ใช้งานอยู่ซึ่งเป็นของโปรเจ็กต์ของคุณ ใช้พารามิเตอร์การแบ่งหน้าเพื่อควบคุมขนาดกลุ่มการตอบกลับ
 
 ### Python
 
@@ -1063,7 +1066,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments?pageS
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-El resultado es similar al siguiente:
+คำตอบจะมีลักษณะคล้ายกับตัวอย่างต่อไปนี้
 
 ```
 {
@@ -1081,9 +1084,9 @@ El resultado es similar al siguiente:
 }
 ```
 
-### Obtén un entorno
+### รับสภาพแวดล้อม
 
-Recupera metadatos y detalles de configuración para un entorno específico por su nombre de recurso.
+ดึงข้อมูลเมตาและรายละเอียดการกำหนดค่าสำหรับสภาพแวดล้อมที่เฉพาะเจาะจงตามชื่อทรัพยากร
 
 ### Python
 
@@ -1114,7 +1117,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/YOUR_
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-El resultado es similar al siguiente:
+คำตอบจะมีลักษณะคล้ายกับตัวอย่างต่อไปนี้
 
 ```
 {
@@ -1140,9 +1143,9 @@ El resultado es similar al siguiente:
 }
 ```
 
-### Borra un entorno
+### ลบสภาพแวดล้อม
 
-Finaliza y borra un entorno de forma explícita para limpiar los recursos de la zona de pruebas cuando finalicen tus tareas o canalizaciones.
+ยุติและลบสภาพแวดล้อมอย่างชัดเจนเพื่อล้างทรัพยากรแซนด์บ็อกซ์เมื่องานหรือไปป์ไลน์เสร็จสิ้น
 
 ### Python
 
@@ -1171,9 +1174,9 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/environments/YO
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Descarga archivos del entorno
+## ดาวน์โหลดไฟล์จากสภาพแวดล้อม
 
-El agente crea archivos dentro de la zona de pruebas durante la ejecución. Puedes descargar la instantánea completa del entorno como un archivo tar con la API de Files:
+ตัวแทนจะสร้างไฟล์ภายในแซนด์บ็อกซ์ระหว่างการดำเนินการ คุณสามารถดาวน์โหลดสแนปช็อตสภาพแวดล้อมแบบเต็มเป็นไฟล์ tar ได้โดยใช้ Files API ดังนี้
 
 ### Python
 
@@ -1268,42 +1271,43 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 #   -o snapshot.tar
 ```
 
-## Precios y recursos
+## ราคาและทรัพยากร
 
-Cada entorno se ejecuta con asignaciones de recursos fijas:
+สภาพแวดล้อมแต่ละรายการทำงานด้วยการจัดสรรทรัพยากรแบบคงที่ ดังนี้
 
-| Recurso | Valor |
+| ทรัพยากร | ค่า |
 | --- | --- |
-| **CPU** | 4 núcleos |
-| **Memoria** | 16 GB |
+| **CPU** | 4 แกน |
+| **หน่วยความจำ** | 16 GB |
 
-El procesamiento del entorno (CPU, memoria, ejecución de zona de pruebas) **no se factura** durante el período de vista previa. Consulta
-[Precios](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419#pricing-for-agents) para
-ver los costos de los tokens de agente.
+ระบบจะ**ไม่เรียกเก็บเงิน** ค่าคอมพิวต์ของสภาพแวดล้อม (CPU, หน่วยความจำ, การดำเนินการแซนด์บ็อกซ์) ในช่วงระยะเวลาแสดงตัวอย่าง ดูค่าใช้จ่ายโทเค็นของตัวแทนได้ที่
+[ราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th#pricing-for-agents)สำหรับ
 
-## Limitaciones
+## ข้อจำกัด
 
-- **Estado de la versión preliminar:** Los entornos y los agentes administrados están en versión preliminar. Es posible que cambien las funciones y los esquemas.
-- **Tamaño de la fuente intercalada:** Las fuentes intercaladas están limitadas a 1 MB por archivo y a 2 MB en total en todos los archivos.
-- **Tamaño de la fuente**: Los repositorios de Git están limitados a 500 MB y los repositorios de Cloud Storage a 2 GB.
-- **Inicio del entorno:** El aprovisionamiento de un entorno nuevo tarda hasta ~5 segundos. Los repositorios de fuentes grandes pueden aumentar este tiempo.
-- **Vencimiento del entorno:** Los entornos sin conexión inactivos se retienen durante 7 días antes de vencer con la limpieza automática de TTL. Si se pasa un ID de entorno vencido o no válido, se muestra un error `404 Not Found`.
-- **Compatibilidad con archivos:** Actualmente, el agente está restringido a la lectura de archivos de texto y de imagen. La compatibilidad con archivos binarios aún no está disponible.
-- **No se puede realizar el montaje desde la raíz:** No puedes establecer la raíz (`/`) como destino cuando agregas una fuente personalizada. Siempre debes especificar un subdirectorio.
+- **สถานะแสดงตัวอย่าง:** สภาพแวดล้อมและตัวแทนที่มีการจัดการอยู่ในช่วงแสดงตัวอย่าง ฟีเจอร์และสคีมาอาจมีการเปลี่ยนแปลง
+- **ขนาดแหล่งที่มาแบบอินไลน์:** แหล่งที่มาแบบอินไลน์จำกัดไว้ที่ 1 MB ต่อไฟล์ และรวม 2 MB สำหรับไฟล์ทั้งหมด
+- **ขนาดแหล่งที่มา**: ที่เก็บ Git จำกัดไว้ที่ 500 MB และที่เก็บ Cloud Storage จำกัดไว้ที่ 2 GB
+- **การเริ่มต้นสภาพแวดล้อม:** การจัดเตรียมสภาพแวดล้อมใหม่ใช้เวลาสูงสุดประมาณ 5 วินาที ที่เก็บแหล่งที่มาขนาดใหญ่อาจทำให้ใช้เวลานานขึ้น
+- **การหมดอายุของสภาพแวดล้อม:** ระบบจะเก็บสภาพแวดล้อมแบบออฟไลน์ที่ไม่มีการใช้งานไว้ 7 วันก่อนที่จะหมดอายุโดยใช้การล้างข้อมูล TTL อัตโนมัติ การส่งรหัสสภาพแวดล้อมที่หมดอายุหรือ
+  ไม่ถูกต้องจะแสดงข้อผิดพลาด `404 Not Found`
+- **การรองรับไฟล์:** ปัจจุบันตัวแทนอ่านได้เฉพาะไฟล์ข้อความและรูปภาพ ยังไม่รองรับไฟล์ไบนารี
+- **ไม่สามารถติดตั้งจากรูทได้:** คุณไม่สามารถตั้งค่ารูท (`/`) เป็นเป้าหมายเมื่อเพิ่มแหล่งที่มาที่กำหนดเองได้ คุณต้องระบุไดเรกทอรีย่อยเสมอ
 
-## ¿Qué sigue?
+## ขั้นตอนถัดไป
 
-- [Descripción general de los agentes](https://ai.google.dev/gemini-api/docs/agents?hl=es-419): Obtén información sobre los conceptos básicos de los agentes administrados.
-- [Guía de inicio rápido](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=es-419): Comienza a compilar con conversaciones de varios turnos y transmisión.
-- [Agente antigravedad](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419): Explora las capacidades, las herramientas, la selección de modelos y los precios del agente predeterminado.
-- [Compila agentes personalizados](https://ai.google.dev/gemini-api/docs/custom-agents?hl=es-419): Define tus propios agentes con `AGENTS.md` y `SKILL.md`.
+- [ภาพรวมของตัวแทน](https://ai.google.dev/gemini-api/docs/agents?hl=th): ดูข้อมูลเกี่ยวกับแนวคิดหลักของตัวแทนที่มีการจัดการ
+- [คู่มือเริ่มใช้งานฉบับย่อ](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=th): เริ่มสร้างด้วยการสนทนาไปมาและการสตรีม
+- [ตัวแทน Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th): สำรวจความสามารถ เครื่องมือ การเลือกโมเดล และราคาสำหรับตัวแทนเริ่มต้น
+- [การสร้างตัวแทนที่กำหนดเอง](https://ai.google.dev/gemini-api/docs/custom-agents?hl=th): กำหนดตัวแทนของคุณเองโดยใช้ `AGENTS.md` และ `SKILL.md`
+- [ฮุก](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=th): บังคับใช้การป้องกันด้านความปลอดภัยและเรียกใช้การตรวจสอบผลข้างเคียงภายในแซนด์บ็อกซ์
 
-Enviar comentarios
+ส่งความคิดเห็น
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Última actualización: 2026-07-23 (UTC)
+อัปเดตล่าสุด 2026-08-19 UTC
 
-¿Quieres brindar más información?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-07-23 (UTC)"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-08-19 UTC"],[],[]]

@@ -1,50 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=tr
-fetched_at: 2026-08-17T02:33:07.544633+00:00
-title: "Gemini 3.5 Live Translate \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=id
+fetched_at: 2026-08-24T02:31:18.669356+00:00
+title: "Terjemahan lisan langsung Gemini 3.5 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Geri bildirim gönderin
+Kirim masukan
 
-# Gemini 3.5 Live Translate
+# Terjemahan lisan langsung Gemini 3.5
 
-Gemini 3.5 Live Translate, konuşma sohbetlerinin anında çevrilmesi için optimize edilmiş, düşük gecikmeli, sesli çeviri modelimizdir. Bu sayede yüksek doğruluk oranı ve doğal ses çıkışıyla sorunsuz, çift yönlü çeviri yapabilirsiniz.
+Gemini 3.5 Live Translate adalah model audio-ke-audio berlatensi rendah kami yang dioptimalkan untuk terjemahan real-time percakapan lisan. Fitur ini memungkinkan terjemahan dua arah yang lancar dengan akurasi tinggi dan output suara yang alami.
 
-[Google AI Studio'da deneme](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=tr)
+[Coba di Google AI Studio](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=id)
 
-## Belgeler
+## Dokumentasi
 
-Özellikler ve işlevler hakkında kapsamlı bilgi için [Canlı Çeviri](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=tr) kılavuzunu ziyaret edin.
+Buka panduan [Terjemahan Langsung](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=id) untuk mengetahui cakupan lengkap fitur dan kemampuannya.
 
 ## gemini-3.5-live-translate-preview
 
-| Mülk | Açıklama |
+| Properti | Deskripsi |
 | --- | --- |
-| id\_cardModel kodu | `gemini-3.5-live-translate-preview` |
-| saveDesteklenen veri türleri | **Girişler**  Ses (konuşma)  **Çıkış**  Ses (çevrilmiş konuşma) ve Metin (transkript) |
-| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  131.072  **Çıkış jetonu sınırı**  65.536 |
-| handymanÖzellikler | **[Ses üretme](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr)**  Destekleniyor  **[Önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr)**  Desteklenmiyor  **[Kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr)**  Desteklenmiyor  **[Dosya arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr)**  Desteklenmiyor  **[İşlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr)**  Desteklenmiyor  **[Google Haritalar ile Temellendirme](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr)**  Desteklenmiyor  **[Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr)**  Desteklenmiyor  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)**  Destekleniyor  **[Arama temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr)**  Desteklenmiyor  **[Yapılandırılmış çıkışlar](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr)**  Desteklenmiyor  **[Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr)**  Desteklenmiyor  **[URL bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr)**  Desteklenmiyor |
-| speedTüketim seçenekleri | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr)**  Desteklenmiyor  **[Esnek çıkarım](https://ai.google.dev/gemini-api/docs/flex-inference?hl=tr)**  Desteklenmiyor  **[Öncelik çıkarımı](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr)**  Desteklenmiyor |
-| 123Sürümler | Daha fazla bilgi için [model sürümü kalıpları](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) başlıklı makaleyi inceleyin.  - Önizleme: `gemini-3.5-live-translate-preview` |
-| calendar\_monthSon güncelleme | Haziran 2026 |
-| id\_cardModel kartı | [Model kartı](https://deepmind.google/models/model-cards/gemini-3-5-audio/?hl=tr) |
+| Kode model id\_card | `gemini-3.5-live-translate-preview` |
+| saveJenis data yang didukung | **Input**  Audio (ucapan)  **Output**  Audio (ucapan yang diterjemahkan) dan Teks (transkrip) |
+| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Batas token input**  131.072  **Batas token output**  65.536 |
+| handymanKemampuan | **[Pembuatan audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=id)**  Didukung  **[Caching](https://ai.google.dev/gemini-api/docs/caching?hl=id)**  Tidak didukung  **[Eksekusi kode](https://ai.google.dev/gemini-api/docs/code-execution?hl=id)**  Tidak didukung  **[Penelusuran file](https://ai.google.dev/gemini-api/docs/file-search?hl=id)**  Tidak didukung  **[Pemanggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id)**  Tidak didukung  **[Melakukan grounding dengan Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=id)**  Tidak didukung  **[Pembuatan gambar](https://ai.google.dev/gemini-api/docs/image-generation?hl=id)**  Tidak didukung  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=id)**  Didukung  **[Grounding penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id)**  Tidak didukung  **[Output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id)**  Tidak didukung  **[Penalaran](https://ai.google.dev/gemini-api/docs/thinking?hl=id)**  Tidak didukung  **[Konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id)**  Tidak didukung |
+| speedOpsi pemakaian | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=id)**  Tidak didukung  **[Inferensi Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=id)**  Tidak didukung  **[Inferensi prioritas](https://ai.google.dev/gemini-api/docs/priority-inference?hl=id)**  Tidak didukung |
+| Versi 123 | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - Pratinjau: `gemini-3.5-live-translate-preview` |
+| calendar\_monthPembaruan terbaru | Juni 2026 |
+| Kartu model id\_card | [Kartu model](https://deepmind.google/models/model-cards/gemini-3-5-audio/?hl=id) |
 
-Geri bildirim gönderin
+Kirim masukan
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Son güncelleme tarihi: 2026-07-21 UTC.
+Terakhir diperbarui pada 2026-08-19 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Ada masukan untuk kami?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-21 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-08-19 UTC."],[],[]]

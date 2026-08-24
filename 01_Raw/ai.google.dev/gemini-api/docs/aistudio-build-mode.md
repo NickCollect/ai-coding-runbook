@@ -1,216 +1,239 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=it
-fetched_at: 2026-08-17T02:19:42.114960+00:00
-title: "Crea app in Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=th
+fetched_at: 2026-08-24T02:33:21.827157+00:00
+title: "\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e41\u0e2d\u0e1b\u0e43\u0e19 Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Invia feedback
+ส่งความคิดเห็น
 
-# Crea app in Google AI Studio
+# สร้างแอปใน Google AI Studio
 
-Questa pagina descrive come utilizzare Google AI Studio per creare rapidamente (o "vibe
-code") ed eseguire il deployment di app che testano le funzionalità più recenti di Gemini, come
-[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=it) e l'API [Live](https://ai.google.dev/gemini-api/docs/live?hl=it). Google AI Studio supporta la creazione di **app web** con runtime full stack e **app Android native** con Kotlin e Jetpack Compose, il tutto tramite prompt in linguaggio naturale.
+หน้านี้อธิบายวิธีใช้ Google AI Studio เพื่อสร้าง (หรือ "vibe
+code") และติดตั้งใช้งานแอปอย่างรวดเร็วเพื่อทดสอบความสามารถล่าสุดของ Gemini เช่น [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=th) และ [Live
+API](https://ai.google.dev/gemini-api/docs/live?hl=th) Google AI Studio รองรับการสร้าง**เว็บแอป**
+ด้วยรันไทม์แบบฟูลสแต็กและ**แอป Android ที่มาพร้อมเครื่อง**ด้วย Kotlin และ Jetpack
+Compose ทั้งหมดนี้ผ่านการแจ้งด้วยภาษาธรรมชาติ
 
-## Inizia
+## เริ่มต้นใช้งาน
 
-Inizia a utilizzare il vibe coding nella [modalità di creazione](https://aistudio.google.com/apps?hl=it) di Google AI Studio. Puoi iniziare a creare in diversi modi:
+เริ่ม Vibe Coding ใน[โหมดสร้าง](https://aistudio.google.com/apps?hl=th)ของ Google AI Studio คุณ
+เริ่มสร้างได้หลายวิธี ดังนี้
 
-- **Inizia con un prompt**: in modalità di creazione, utilizza la casella di input per inserire una
-  descrizione di ciò che vuoi creare. Seleziona AI Chips per aggiungere funzionalità specifiche, come la generazione di immagini o i dati di Google Maps, al prompt. Puoi anche dire quello che vuoi utilizzando il pulsante di sintesi vocale.
-- **Pulsante "Mi sento fortunato"**: se hai bisogno di un'idea creativa, utilizza il pulsante "Mi
-  sento fortunato" e Gemini genererà un prompt con un'idea di progetto
-  per aiutarti a iniziare.
-- **Remixa un progetto dalla galleria**: apri un progetto dalla [Galleria
-  app](https://aistudio.google.com/apps?source=showcase&hl=it) e seleziona **Copia app**.
-- **Importa un progetto da GitHub**: in modalità di creazione, seleziona
-  **Importa da GitHub** dal menu **Aggiungi file** (icona +) nella casella di input del prompt
-  per importare il codice esistente.
+- **เริ่มต้นด้วยพรอมต์**: ในโหมดสร้าง ให้ใช้ช่องป้อนข้อมูลเพื่อป้อนคำอธิบายของสิ่งที่คุณต้องการสร้าง
+  เลือกชิป AI เพื่อเพิ่มฟีเจอร์ที่เฉพาะเจาะจง เช่น การสร้างรูปภาพหรือข้อมูล Google Maps ลงในพรอมต์ คุณยัง
+  พูดสิ่งที่ต้องการได้โดยใช้ปุ่มการแปลงเสียงเป็นข้อความ
+- **ปุ่ม "ดีใจจัง เขียนมาให้เลย"**: หากต้องการแรงบันดาลใจในการสร้างสรรค์ ให้ใช้ปุ่ม "ดีใจจัง
+  เขียนมาให้เลย" แล้ว Gemini จะสร้างพรอมต์พร้อมไอเดียโปรเจ็กต์
+  เพื่อช่วยให้คุณเริ่มต้นได้
+- **รีมิกซ์โปรเจ็กต์จากแกลเลอรี**: เปิดโปรเจ็กต์จาก[App
+  Gallery](https://aistudio.google.com/apps?source=showcase&hl=th) แล้วเลือก**คัดลอกแอป**
+- **นำเข้าโปรเจ็กต์จาก GitHub**: ในโหมดสร้าง ให้เลือก**นำเข้าจาก GitHub** จากเมนู**เพิ่มไฟล์** (ไอคอน +) ในช่องป้อนพรอมต์
+  เพื่อนำเข้าโค้ดที่มีอยู่
 
-Una volta eseguito il prompt, vedrai che vengono generati il codice e i file necessari, con un'anteprima live della tua app che apparirà sul lato destro.
+เมื่อเรียกใช้พรอมต์แล้ว คุณจะเห็นโค้ดและไฟล์ที่จำเป็นถูกสร้างขึ้น
+พร้อมตัวอย่างแอปแบบเรียลไทม์ที่ปรากฏทางด้านขวามือ
 
-## Che cosa viene creato?
+## ระบบจะสร้างอะไร
 
-Quando esegui il prompt, AI Studio crea un'applicazione completa. Puoi scegliere di creare un'**app web** o un'**app Android nativa** utilizzando il selettore della piattaforma.
+เมื่อคุณเรียกใช้พรอมต์ AI Studio จะสร้างแอปพลิเคชันที่สมบูรณ์ คุณเลือกสร้าง**เว็บแอป**หรือ**แอป Android แบบเนทีฟ**ได้โดยใช้ตัวเลือกแพลตฟอร์ม
 
-Per le **app web** (impostazione predefinita), AI Studio crea un ambiente full stack che include:
+สำหรับ**เว็บแอป** (ค่าเริ่มต้น) AI Studio จะสร้างสภาพแวดล้อมแบบฟูลสแต็กซึ่งมีองค์ประกอบต่อไปนี้
 
-- **Lato client**: un frontend web (React è l'impostazione predefinita).
-- **Lato server**: un runtime Node.js che consente chiamate API sicure,
-  connessioni al database e utilizzo di pacchetti npm.
+- **ฝั่งไคลเอ็นต์**: ส่วนหน้าของเว็บ (React เป็นค่าเริ่มต้น)
+- **ฝั่งเซิร์ฟเวอร์**: รันไทม์ Node.js ที่อนุญาตให้เรียกใช้ API ที่ปลอดภัย
+  การเชื่อมต่อฐานข้อมูล และการใช้แพ็กเกจ npm
 
-Per le **app Android**, AI Studio genera un progetto Kotlin e Jetpack Compose
-di cui puoi visualizzare l'anteprima in un emulatore basato su browser, installare su un dispositivo fisico,
-e pubblicare sul Play Store per i test. [Scopri di più sulla creazione di app Android
-apps](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=it).
+สำหรับ**แอป Android**, AI Studio จะสร้างโปรเจ็กต์ Kotlin และ Jetpack Compose
+ที่คุณสามารถดูตัวอย่างในโปรแกรมจำลองที่ใช้เบราว์เซอร์ ติดตั้งในอุปกรณ์จริง
+และเผยแพร่ไปยัง Play Store เพื่อทดสอบ [ดูข้อมูลเพิ่มเติมเกี่ยวกับการสร้างแอป Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=th)
 
-Puoi visualizzare il codice generato selezionando la scheda **Codice** nel riquadro di anteprima a destra. L'**agente Antigravity** gestisce in modo intelligente più file nello stack, assicurandosi che le modifiche vengano propagate correttamente.
+คุณดูโค้ดที่สร้างขึ้นได้โดยเลือกแท็บ**โค้ด**ใน
+แผงแสดงตัวอย่างด้านขวา **Antigravity Agent** จะจัดการไฟล์หลายไฟล์ใน Stack ของคุณอย่างชาญฉลาด เพื่อให้มั่นใจว่าการเปลี่ยนแปลงจะเผยแพร่ได้อย่างถูกต้อง
 
-### L'agente Antigravity
+### The Antigravity Agent
 
-L'**agente Antigravity** è la funzionalità di AI principale di [Google
-Antigravity](https://antigravity.google?hl=it) e ora i componenti principali dell'
-agente sono alla base dell'esperienza della modalità di creazione in Google AI Studio. Va oltre la semplice generazione di codice mantenendo il contesto dell'intero progetto, gestendo più file e comprendendo istruzioni complesse per creare applicazioni full stack robuste.
+**Antigravity Agent** เป็นฟังก์ชันการทำงานหลักของ AI ใน [Google
+Antigravity](https://antigravity.google?hl=th) และตอนนี้คอมโพเนนต์หลักของ
+agent harness กำลังขับเคลื่อนประสบการณ์โหมดสร้างใน Google AI Studio โดยจะทำงานได้มากกว่าการสร้างโค้ดอย่างง่ายด้วยการรักษาบริบทของทั้งโปรเจ็กต์
+การจัดการไฟล์หลายไฟล์ และการทำความเข้าใจคำสั่งที่ซับซ้อนเพื่อสร้างแอปพลิเคชันแบบฟูลสแต็กที่แข็งแกร่ง
 
-Le sue funzionalità principali includono:
+ความสามารถหลักๆ มีดังนี้
 
-- **Rilevamento del contesto**: mantiene il contesto dei prompt precedenti e degli stati dei file.
-- **Gestione di più file**: gestisce le dipendenze tra più file.
-- **Esecuzione verificata**: verifica gli aggiornamenti del codice per ridurre le allucinazioni.
+- **การรับรู้บริบท**: รักษาบริบทของพรอมต์ก่อนหน้าและสถานะไฟล์
+- **การจัดการหลายไฟล์**: จัดการการอ้างอิงในหลายไฟล์
+- **การดำเนินการที่ยืนยันแล้ว**: ตรวจสอบการอัปเดตโค้ดเพื่อลดการหลอน
 
-## Funzionalità full stack
+## ความสามารถแบบ Full Stack
 
-Google AI Studio sfrutta la potenza del moderno ecosistema web, consentendoti di creare prototipi non solo lato client.
+Google AI Studio ปลดล็อกศักยภาพของระบบนิเวศเว็บสมัยใหม่ ซึ่งช่วยให้คุณ
+สร้างได้มากกว่าแค่ต้นแบบฝั่งไคลเอ็นต์
 
-- **Runtime lato server e npm**: utilizza la vasta libreria di pacchetti npm. L'agente identificherà e installerà automaticamente i pacchetti necessari per la tua app (ad es. librerie specifiche per la visualizzazione dei dati o client API). Se vuoi, puoi anche richiedere pacchetti specifici.
-- **Gestione dei secret**: archivia in modo sicuro chiavi API e secret nel
-  **menu Impostazioni**. Questi sono accessibili nel codice lato server, mantenendoli al sicuro dall'esposizione lato client.
-- **Multiplayer**: crea esperienze collaborative in tempo reale direttamente in
-  AI Studio. Il runtime lato server gestisce lo stato e le connessioni necessarie per l'interazione degli utenti.
-- **Firebase Firestore e autenticazione**: esegui automaticamente il provisioning e la configurazione di Firebase,
-  inclusi il database Firestore (archiviazione permanente dei dati) e
-  l'autenticazione Firebase (flussi di accesso, in particolare "Accedi con Google").
-  L'agente gestisce l'intera procedura di configurazione e scrive persino il codice nella tua app per questi servizi.
-- **Integrazioni di Google Workspace**: collega la tua app alle API di Google Workspace
-  come Gmail, Fogli, Documenti, Drive, Calendar e altro ancora. AI Studio gestisce automaticamente tutta la configurazione OAuth.
+- **รันไทม์ฝั่งเซิร์ฟเวอร์และ npm**: ใช้ไลบรารีแพ็กเกจ npm จำนวนมาก
+  เอเจนต์จะระบุและติดตั้งแพ็กเกจโดยอัตโนมัติตามที่จำเป็นสำหรับ
+  แอปของคุณ (เช่น ไลบรารีเฉพาะสำหรับการแสดงข้อมูลด้วยภาพหรือไคลเอ็นต์ API) คุณ
+  ยังขอแพ็กเกจเฉพาะได้หากต้องการ
+- **การจัดการข้อมูลลับ**: จัดเก็บคีย์ API และข้อมูลลับอย่างปลอดภัยในเมนู**การตั้งค่า** ซึ่งจะเข้าถึงได้ในโค้ดฝั่งเซิร์ฟเวอร์ ทำให้ข้อมูลปลอดภัยจากการเปิดเผยฝั่งไคลเอ็นต์
+- **ผู้เล่นหลายคน**: สร้างประสบการณ์การทำงานร่วมกันแบบเรียลไทม์ได้โดยตรงภายใน
+  AI Studio รันไทม์ฝั่งเซิร์ฟเวอร์จะจัดการสถานะและการเชื่อมต่อที่จำเป็น
+  เพื่อให้ผู้ใช้โต้ตอบกันได้
+- **Firebase Firestore และการตรวจสอบสิทธิ์**: จัดสรรและตั้งค่า Firebase โดยอัตโนมัติ
+  รวมถึงฐานข้อมูล Firestore (ที่เก็บข้อมูลแบบถาวร) และ
+  การตรวจสอบสิทธิ์ Firebase (ขั้นตอนการลงชื่อเข้าใช้ โดยเฉพาะ "ลงชื่อเข้าใช้ด้วย Google")
+  เอเจนต์จะจัดการกระบวนการตั้งค่าทั้งหมดและเขียนโค้ดใน
+  แอปสำหรับบริการเหล่านี้ด้วย
+- **การผสานรวม Google Workspace**: เชื่อมต่อแอปกับ Google Workspace
+  API เช่น Gmail, ชีต, เอกสาร, ไดรฟ์, ปฏิทิน และอื่นๆ AI Studio จะจัดการ
+  การกำหนดค่า OAuth ทั้งหมดโดยอัตโนมัติ
 
-[Scopri di più sullo sviluppo di app full stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=it)
+[ดูข้อมูลเพิ่มเติมเกี่ยวกับการพัฒนาแอปแบบฟูลสแต็ก](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=th)
 
-### App Android
+### แอป Android
 
-Puoi anche creare app Android native utilizzando Kotlin e Jetpack Compose.
-Visualizza l'anteprima dell'app in un emulatore Android basato su browser, installala su un dispositivo fisico utilizzando ADB nel browser e pubblicala sul Play Store per i test interni.
+นอกจากนี้ คุณยังสร้างแอป Android ที่มาพร้อมเครื่องได้โดยใช้ Kotlin และ Jetpack Compose
+ดูตัวอย่างแอปในโปรแกรมจำลอง Android บนเบราว์เซอร์ ติดตั้งในอุปกรณ์จริงโดยใช้ ADB ในเบราว์เซอร์ และเผยแพร่ไปยัง Play Store เพื่อการทดสอบภายใน
 
-[Scopri di più sulla creazione di app Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=it)
+[ดูข้อมูลเพิ่มเติมเกี่ยวกับการสร้างแอป Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=th)
 
-## Continua a creare
+## สร้างต่อไป
 
-Una volta che Google AI Studio genera il codice iniziale per la tua applicazione, puoi continuare a perfezionarlo:
+เมื่อ Google AI Studio สร้างโค้ดเริ่มต้นสำหรับแอปพลิเคชันแล้ว คุณจะปรับแต่งโค้ดต่อไปได้โดยทำดังนี้
 
-### Crea in Google AI Studio
+### สร้างใน Google AI Studio
 
-- **Esegui iterazioni con Gemini**: utilizza il riquadro della chat in **modalità di creazione** per chiedere a Gemini
-  di apportare modifiche, aggiungere nuove funzionalità o modificare lo stile.
-- **Modifica il codice direttamente**: apri la **scheda Codice** nel riquadro di anteprima per
-  apportare modifiche live.
+- **ทำซ้ำด้วย Gemini**: ใช้แผงแชทใน**โหมดสร้าง**เพื่อขอให้ Gemini
+  ทำการแก้ไข เพิ่มฟีเจอร์ใหม่ หรือเปลี่ยนสไตล์
+- **แก้ไขโค้ดโดยตรง**: เปิด**แท็บโค้ด**ในแผงแสดงตัวอย่างเพื่อ
+  ทำการแก้ไขแบบเรียลไทม์
 
-### Sviluppa esternamente
+### พัฒนาภายนอก
 
-Per workflow più avanzati, puoi esportare il codice e lavorare nell'ambiente che preferisci:
+สำหรับเวิร์กโฟลว์ขั้นสูง คุณสามารถส่งออกโค้ดและทำงานในสภาพแวดล้อมที่ต้องการได้โดยทำดังนี้
 
-- **Scarica e sviluppa localmente**: esporta il codice generato come **file
-  ZIP** e importalo nell'editor di codice.
-- **Esegui il push su GitHub**: integra il codice con i processi di sviluppo e
-  esecuzione del deployment esistenti eseguendo il push in un **repository GitHub**.
+- **ดาวน์โหลดและพัฒนาในเครื่อง**: ส่งออกโค้ดที่สร้างเป็น**ไฟล์ ZIP** แล้วนำเข้าไปยังโปรแกรมแก้ไขโค้ด
+- **พุชไปยัง GitHub**: ผสานรวมโค้ดกับกระบวนการพัฒนาและการติดตั้งใช้งานที่มีอยู่โดยการพุชไปยัง**ที่เก็บ GitHub**
 
-## Funzionalità principali
+## ฟีเจอร์หลัก
 
-Google AI Studio include diverse funzionalità per rendere il processo di creazione intuitivo e visivo:
+Google AI Studio มีฟีเจอร์หลายอย่างที่จะช่วยให้กระบวนการสร้างเป็นไปอย่าง
+เป็นธรรมชาติและมองเห็นได้
 
-- **Crea ed esegui iterazioni di app full stack**: crea app full stack con un semplice
-  prompt ed esegui iterazioni tramite la chat o la **modalità di annotazione**. La modalità di annotazione ti consente di evidenziare qualsiasi parte della UI dell'app e descrivere la modifica che vuoi apportare.
-- **Condividi ed esegui il deployment dell'app**: puoi condividere le tue creazioni con altri utenti per
-  collaborare o mostrare il tuo lavoro. Quando condividi, le chiamate API vengono conteggiate ai fini dei limiti di utilizzo. Se utilizzi modelli a pagamento, potrebbero essere applicati costi. Quando l'app è pronta, esegui il deployment in Cloud Run.
-- **Galleria app**: la Galleria app fornisce una libreria visiva di idee di progetto.
-  Puoi sfogliare le possibilità offerte da Gemini, visualizzare immediatamente l'anteprima delle applicazioni e remixarle per personalizzarle.
+- **สร้างและทำซ้ำแอป Full Stack**: สร้างแอป Full Stack ด้วยพรอมต์เพียงอย่างเดียว และทำซ้ำผ่านแชทหรือ**โหมดคำอธิบายประกอบ** โหมดคำอธิบายประกอบ
+  ช่วยให้คุณไฮไลต์ส่วนใดก็ได้ใน UI ของแอปและอธิบาย
+  การเปลี่ยนแปลงที่ต้องการ
+- **แชร์และติดตั้งใช้งานแอป**: คุณสามารถแชร์ผลงานกับผู้อื่นเพื่อ
+  ทำงานร่วมกันหรือแสดงผลงานของคุณได้ เมื่อแชร์ การเรียก API จะนับรวมใน
+  โควต้าการใช้งาน หากใช้โมเดลแบบชำระเงิน อาจมีค่าใช้จ่าย จากนั้นเมื่อแอปพร้อมแล้ว ให้ติดตั้งใช้งานใน Cloud Run
+- **แกลเลอรีแอป**: แกลเลอรีแอปมีคลังภาพของไอเดียโปรเจ็กต์
+  คุณสามารถเรียกดูสิ่งที่ทำได้ด้วย Gemini ดูตัวอย่างแอปพลิเคชันได้ทันที
+  และรีมิกซ์แอปพลิเคชันเหล่านั้นให้เป็นของคุณเอง
 
-## Esegui il deployment o l'archiviazione dell'app
+## ติดตั้งใช้งานหรือเก็บถาวรแอป
 
-Quando l'applicazione è pronta, puoi eseguirne il deployment:
+เมื่อแอปพลิเคชันพร้อมแล้ว คุณจะนําไปใช้งานได้โดยทำดังนี้
 
-- **Cloud Run**: esegui il deployment dell'applicazione come servizio scalabile.
-  Potrebbero essere applicati prezzi per [Google Cloud Run](https://cloud.google.com/run?hl=it) in base
-  all'utilizzo. Per scoprire di più sul deployment, consulta
-  [Eseguire il deployment da Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=it).
-- **GitHub**: esporta il progetto in un repository GitHub.
+- **Cloud Run**: ทำให้แอปพลิเคชันใช้งานได้เป็นบริการที่ปรับขนาดได้
+  อาจมีการกำหนดราคาสำหรับ [Google Cloud Run](https://cloud.google.com/run?hl=th) ตามการใช้งาน
+  ดูข้อมูลเพิ่มเติมเกี่ยวกับการติดตั้งใช้งานได้ที่[การติดตั้งใช้งานจาก Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=th)
+- **GitHub**: ส่งออกโปรเจ็กต์ไปยังที่เก็บ GitHub
 
-## Limitazioni
+## ข้อจำกัด
 
-Questa sezione elenca le limitazioni attuali della modalità di creazione in Google AI Studio.
+ส่วนนี้แสดงข้อจำกัดปัจจุบันของโหมดสร้างใน Google AI Studio
 
-### Gestione delle chiavi API
+### การจัดการคีย์ API
 
-Quando crei una nuova app che utilizza l'API Gemini, AI Studio configura automaticamente la chiave API Gemini come secret nell'ambiente lato server dell'app.
-Puoi visualizzare e gestire questa chiave nel riquadro **Secret**.
+เมื่อสร้างแอปใหม่ที่ใช้ Gemini API ทาง AI Studio จะกำหนดค่าคีย์ Gemini API เป็นข้อมูลลับในสภาพแวดล้อมฝั่งเซิร์ฟเวอร์ของแอปโดยอัตโนมัติ
+คุณดูและจัดการคีย์นี้ได้ในแผง**ข้อมูลลับ**
 
-- **Configurazione automatica**: la variabile `GEMINI_API_KEY` viene configurata automaticamente. Non è necessaria alcuna configurazione manuale
-  per iniziare a creare.
-- **Solo lato server**: le chiavi API vengono inserite nel runtime lato server e
-  non sono mai incluse nel codice lato client.
-- **App esistenti**: per le app create prima del 14 maggio 2026, l'agente aggiornerà
-  automaticamente l'integrazione dell'API Gemini all'approccio lato server
-  consigliato la prossima volta che modifichi le funzionalità Gemini dell'app.
+- **การตั้งค่าอัตโนมัติ**: ระบบจะตั้งค่า `GEMINI_API_KEY` ให้คุณโดยไม่ต้องกำหนดค่าด้วยตนเองเพื่อเริ่มสร้าง
+- **ฝั่งเซิร์ฟเวอร์เท่านั้น**: ระบบจะแทรกคีย์ API ลงในรันไทม์ฝั่งเซิร์ฟเวอร์และ
+  จะไม่รวมไว้ในโค้ดฝั่งไคลเอ็นต์
+- **แอปที่มีอยู่**: สำหรับแอปที่สร้างขึ้นก่อนวันที่ 14 พฤษภาคม 2026 เอเจนต์จะ
+  อัปเกรดการผสานรวม Gemini API โดยอัตโนมัติเป็นแนวทางฝั่งเซิร์ฟเวอร์ที่แนะนำ
+  ในครั้งถัดไปที่คุณแก้ไขฟีเจอร์ Gemini ของแอป
 
-### Deployment al di fuori di Google AI Studio
+### การทำให้ใช้งานได้นอก Google AI Studio
 
-- **Cloud Run**: quando esegui il deployment in Cloud Run da AI Studio, la chiave API viene
-  inclusa in modo sicuro nell'ambiente lato server. L'app di cui è stato eseguito il deployment utilizzerà la chiave API per tutte le chiamate API Gemini degli utenti.
-- **Download ZIP**: se scarichi l'app come file ZIP per eseguirla
-  altrove, dovrai impostare la variabile di ambiente `GEMINI_API_KEY` nell'ambiente di hosting. Poiché le chiamate API Gemini dell'app vengono effettuate dal codice lato server, la chiave non viene esposta agli utenti finali.
+- **Cloud Run**: เมื่อคุณทําให้ใช้งานได้ใน Cloud Run จาก AI Studio ระบบจะรวมคีย์ API ไว้ในสภาพแวดล้อมฝั่งเซิร์ฟเวอร์อย่างปลอดภัย
+  แอปที่ติดตั้งใช้งานจะใช้
+  คีย์ API ของคุณสำหรับการเรียก Gemini API ของผู้ใช้ทั้งหมด
+- **การดาวน์โหลด ZIP**: หากดาวน์โหลดแอปเป็นไฟล์ ZIP เพื่อเรียกใช้ที่อื่น คุณจะต้องตั้งค่า`GEMINI_API_KEY`ตัวแปรสภาพแวดล้อม
+  ในสภาพแวดล้อมการโฮสต์ เนื่องจากการเรียกใช้ Gemini API ของแอปมาจากโค้ดฝั่งเซิร์ฟเวอร์ คีย์จึงไม่แสดงต่อผู้ใช้ปลายทาง
 
-### Errore durante la condivisione delle app
+### ข้อผิดพลาดเมื่อแชร์แอป
 
-Se condividi la tua app e l'utente finale riscontra un errore **403 Accesso limitato** quando utilizza l'URL condiviso, potrebbe essere dovuto a uno dei seguenti motivi:
+หากคุณแชร์แอปและผู้ใช้ปลายทางพบข้อผิดพลาด **403 Access Restricted**
+เมื่อใช้ URL ที่แชร์ อาจเกิดจากสาเหตุใดสาเหตุหนึ่งต่อไปนี้
 
-- **Estensioni del browser**: le estensioni per la privacy come Privacy Badger potrebbero bloccare l'app. Disattiva l'estensione per evitare l'errore.
-- **Problemi di build**: potrebbero esserci problemi con il codice attuale. Chiedi all'agente di "correggere eventuali problemi di build con il codice attuale" e poi condividi di nuovo l'URL.
+- **ส่วนขยายเบราว์เซอร์**: ส่วนขยายความเป็นส่วนตัว เช่น Privacy Badger อาจบล็อกแอป ให้ปิดใช้ส่วนขยายเพื่อหลีกเลี่ยงข้อผิดพลาด
+- **ปัญหาในการสร้าง**: โค้ดปัจจุบันอาจมีปัญหา แจ้งให้เอเจนต์ "แก้ไขปัญหาการบิลด์ด้วยโค้ดปัจจุบัน" แล้วแชร์ URL อีกครั้ง
 
-## Domande frequenti
+## คำถามที่พบบ่อย
 
-### Che cos'è la modalità di creazione in AI Studio?
+### Build ใน AI Studio คืออะไร
 
-La modalità di creazione di AI Studio è una piattaforma progettata per trasformare un semplice prompt in un'applicazione basata sull'AI pronta per la produzione utilizzando Gemini. Descrivi ciò che vuoi creare con un prompt e Gemini genererà un'app per te. Puoi anche esplorare la nostra galleria per scoprire le possibilità offerte dall'API Gemini e remixare le app per personalizzarle.
+AI Studio Build เป็นแพลตฟอร์มที่ออกแบบมาเพื่อช่วยให้คุณเปลี่ยนจากพรอมต์ง่ายๆ ไปเป็นแอปพลิเคชันที่ทำงานด้วยระบบ AI ซึ่งพร้อมใช้งานจริงโดยใช้ Gemini
+อธิบายสิ่งที่คุณ
+ต้องการสร้างด้วยพรอมต์ แล้ว Gemini จะสร้างแอปให้คุณ คุณยังสำรวจแกลเลอรีของเราเพื่อดูสิ่งที่คุณทำได้ด้วย Gemini API
+และรีมิกซ์แอปให้เป็นของคุณเองได้ด้วย
 
-### In che modo la modalità di creazione gestisce la mia chiave API Gemini?
+### Build จัดการคีย์ Gemini API ของฉันอย่างไร
 
-Quando crei un'app che utilizza l'API Gemini, AI Studio configura automaticamente la chiave API Gemini come secret lato server. Le chiamate API Gemini dell'app vengono effettuate dal codice lato server utilizzando questa chiave, quindi non viene mai esposta nel browser. Puoi visualizzare la chiave API nel riquadro **Secret** in Impostazioni.
+เมื่อคุณสร้างแอปที่ใช้ Gemini API ทาง AI Studio จะตั้งค่าคีย์ Gemini API เป็นข้อมูลลับฝั่งเซิร์ฟเวอร์โดยอัตโนมัติ
+การเรียก Gemini API ของแอปจะทำจากโค้ดฝั่งเซิร์ฟเวอร์โดยใช้คีย์นี้ จึงไม่มีการเปิดเผยคีย์ในเบราว์เซอร์
+คุณดูคีย์ API ได้ในแผง**ข้อมูลลับ**ในส่วน
+การตั้งค่า
 
-### La mia chiave API viene esposta quando condivido le app?
+### คีย์ API ของฉันจะแสดงเมื่อแชร์แอปไหม
 
-No. La chiave API viene memorizzata come secret lato server e non è mai inclusa nel codice lato client. Quando condividi l'app, altri utenti possono utilizzarla, ma non possono vedere la tua chiave API.
+ไม่ คีย์ API จะจัดเก็บเป็นข้อมูลลับฝั่งเซิร์ฟเวอร์และจะไม่รวมไว้ในโค้ดฝั่งไคลเอ็นต์
+เมื่อคุณแชร์แอป ผู้ใช้คนอื่นๆ จะใช้แอปได้ แต่จะดูคีย์ API ของคุณไม่ได้
 
-Quando condividi le tue app con altri utenti, le chiamate API vengono conteggiate ai fini dei limiti di utilizzo.
-Se utilizzi modelli a pagamento, potrebbero essere applicati costi. AI Studio ti avviserà durante la configurazione e prima della condivisione se la tua app potrebbe comportare costi.
+เมื่อแชร์แอปกับผู้อื่น การเรียก API จะนับรวมในโควต้าการใช้งานของคุณ
+หากใช้โมเดลแบบชำระเงิน อาจมีค่าใช้จ่าย AI Studio จะแจ้งให้คุณทราบ
+ในระหว่างการตั้งค่าและก่อนที่คุณจะแชร์หากแอปอาจมีค่าใช้จ่าย
 
-### Chi può vedere le mie app?
+### ใครจะเห็นแอปของฉันได้บ้าง
 
-Per impostazione predefinita, la tua app è privata. Puoi condividere la tua app con altri utenti per consentire loro di utilizzarla. Gli utenti con cui condividi la tua app possono vedere il codice e creare un fork per i propri scopi. Se condividi la tua app con l'autorizzazione di modifica, gli altri utenti possono modificare il codice dell'app.
+โดยค่าเริ่มต้น แอปของคุณจะเป็นแบบส่วนตัว คุณแชร์แอปกับผู้ใช้คนอื่นๆ เพื่อให้ผู้ใช้เหล่านั้นใช้แอปได้ ผู้ใช้ที่คุณแชร์แอปด้วยจะดูโค้ดของแอปและ Fork โค้ดนั้น
+เพื่อวัตถุประสงค์ของตนเองได้ หากคุณแชร์แอปโดยให้สิทธิ์แก้ไข ผู้ใช้รายอื่นจะแก้ไขโค้ดของแอปได้
 
-### Posso eseguire app al di fuori di AI Studio?
+### ฉันจะเรียกใช้แอปภายนอก AI Studio ได้ไหม
 
-Sì. Puoi eseguire il deployment dell'app in
-[Cloud Run](https://cloud.google.com/run?hl=it) da AI Studio, che
-assegna alla tua app un URL pubblico con la chiave API configurata in modo sicuro nell'
-ambiente lato server. Puoi anche scaricare l'app come file ZIP e ospitarla altrove. Dovrai impostare la variabile di ambiente `GEMINI_API_KEY` nell'ambiente di hosting. Poiché le chiamate API Gemini vengono effettuate dal codice lato server, la chiave rimane sicura.
+ได้ คุณสามารถทําให้แอปใช้งานได้ใน [Cloud Run](https://cloud.google.com/run?hl=th) จาก AI Studio ซึ่งจะทําให้แอปมี URL สาธารณะพร้อมคีย์ API ที่กําหนดค่าอย่างปลอดภัยในสภาพแวดล้อมฝั่งเซิร์ฟเวอร์ นอกจากนี้ คุณยังดาวน์โหลดแอปเป็นไฟล์ ZIP และ
+โฮสต์ไว้ที่อื่นได้ด้วย โดยจะต้องตั้งค่าตัวแปร`GEMINI_API_KEY`สภาพแวดล้อม
+ในสภาพแวดล้อมการโฮสต์ เนื่องจากการเรียก Gemini API มาจากโค้ดฝั่งเซิร์ฟเวอร์ คีย์ของคุณจึงปลอดภัย
 
-Per scoprire di più sulle opzioni di deployment, consulta [Eseguire il deployment da Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=it).
+ดูข้อมูลเพิ่มเติมเกี่ยวกับตัวเลือกการติดตั้งใช้งานได้ที่[การติดตั้งใช้งานจาก Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=th)
 
-### Posso sviluppare app localmente con i miei strumenti e poi condividerle qui?
+### ฉันจะพัฒนาแอปในเครื่องด้วยเครื่องมือของตัวเองแล้วแชร์ที่นี่ได้ไหม
 
-Questa funzionalità non è ancora disponibile. Siamo felici di supportare altri casi d'uso per le app in futuro. Ti invitiamo a inviarci un feedback se hai qualcosa di specifico in mente.
+ฟังก์ชันนี้ยังไม่พร้อมใช้งาน เรายินดีที่จะรองรับกรณีการใช้งานแอปเพิ่มเติมในอนาคต
+โปรดแสดงความคิดเห็นหากคุณมีข้อเสนอแนะที่เฉพาะเจาะจง
 
-### Come posso utilizzare un database o un altro spazio di archiviazione con le mie app?
+### ฉันจะใช้ฐานข้อมูลหรือพื้นที่เก็บข้อมูลอื่นๆ กับแอปได้อย่างไร
 
-Le app di AI Studio sono app standard in esecuzione in un container Cloud Run. Puoi utilizzare qualsiasi soluzione di archiviazione a cui puoi connetterti tramite una rete, a condizione che non esista un firewall che impedisca l'accesso da un intervallo di indirizzi IP dinamici.
+แอป AI Studio เป็นแอปมาตรฐานที่ทำงานในคอนเทนเนอร์ Cloud Run คุณสามารถ
+ใช้โซลูชันพื้นที่เก็บข้อมูลใดก็ได้ที่เชื่อมต่อผ่านเครือข่ายได้
+ตราบใดที่ไม่มีไฟร์วอลล์ที่ป้องกันการเข้าถึงจากช่วง IP แบบไดนามิก
 
-Stiamo lavorando per aggiungere il supporto diretto per l'archiviazione in futuro, che potrai configurare direttamente in AI Studio.
+เรากำลังดำเนินการเพื่อเพิ่มการสนับสนุนพื้นที่เก็บข้อมูลโดยตรงในอนาคต ซึ่งคุณจะกำหนดค่าได้โดยตรงภายใน AI Studio
 
-### Come posso accedere al microfono, alla webcam e ad altre API Navigator?
+### ฉันจะเข้าถึงไมโครโฟน เว็บแคม และ Navigator API อื่นๆ ได้อย่างไร
 
-Per garantire che gli spettatori siano a conoscenza dell'utilizzo della webcam o di altri
-dispositivi da parte di un'app, richiediamo un'ulteriore conferma prima che l'app possa accedere
-a queste [API Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator).
-I creatori di app possono aggiungere queste richieste di autorizzazione al file `metadata.json` dell'app. Ad esempio:
+เรากำหนดให้มีการรับทราบเพิ่มเติมก่อนที่แอปจะเข้าถึง [Navigator API](https://developer.mozilla.org/en-US/docs/Web/API/Navigator) เหล่านี้ได้ เพื่อให้ผู้ชมทราบว่าแอปใช้เว็บแคมหรืออุปกรณ์อื่นๆ ของตนอย่างไร
+ผู้สร้างแอปสามารถเพิ่มคำขอสิทธิ์เหล่านี้ลงในไฟล์
+`metadata.json` ของแอปได้ เช่น
 
 ```
 {
@@ -228,65 +251,71 @@ I creatori di app possono aggiungere queste richieste di autorizzazione al file 
 }
 ```
 
-I valori supportati per `requestFramePermissions` sono un sottoinsieme delle
-funzionalità standard [controllate dalle norme](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md).
+ค่าที่รองรับสำหรับ `requestFramePermissions` เป็นชุดย่อยของ[ฟีเจอร์ที่ควบคุมโดยนโยบาย](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md)มาตรฐาน
 
-### Come posso utilizzare GitHub con le mie app?
+### ฉันจะใช้ GitHub กับแอปของฉันได้อย่างไร
 
-L'integrazione di GitHub di AI Studio ti consente di importare un progetto esistente da GitHub per iniziare a creare o esportare il progetto in un repository GitHub ed eseguire il commit delle modifiche più recenti.
+การผสานรวม GitHub ของ AI Studio ช่วยให้คุณนำเข้าโปรเจ็กต์ที่มีอยู่
+จาก GitHub เพื่อเริ่มสร้าง หรือส่งออกโปรเจ็กต์ไปยังที่เก็บ GitHub
+และคอมมิตการเปลี่ยนแปลงล่าสุดได้
 
-### Posso concedere ad altri utenti l'accesso in modifica alla mia app?
+### ฉันจะให้สิทธิ์แก้ไขแอปแก่ผู้ใช้รายอื่นได้ไหม
 
-Questa funzionalità non è ancora supportata, ma sarà disponibile a breve.
+ระบบยังไม่รองรับการดำเนินการนี้ แต่จะรองรับเร็วๆ นี้
 
-### Perché la mia app è stata segnalata per violazione delle norme?
+### เหตุใดแอปของฉันจึงถูกแจ้งว่าละเมิดนโยบาย
 
-Disponiamo di sistemi che esaminano automaticamente le app per assicurarsi che rispettino le nostre norme. Se rileviamo che un'app viola le nostre norme, verrà rimossa da AI Studio. Le violazioni delle norme possono includere, a titolo esemplificativo:
+เรามีระบบที่ตรวจสอบแอปโดยอัตโนมัติเพื่อให้แน่ใจว่าเป็นไปตามนโยบายของเรา
+หากพบว่าแอปละเมิดนโยบายของเรา เราจะนำแอปดังกล่าวออกจาก AI Studio การละเมิดนโยบายอาจรวมถึงแต่ไม่จำกัดเพียงรายการต่อไปนี้
 
-- App che contengono malware, phishing o furto d'identità
-- App che mostrano o distribuiscono contenuti che violano le norme relative alle immagini di abusi sessuali su minori
-- App che mostrano o distribuiscono contenuti che violano le norme relative alle molestie
-- App che mostrano o distribuiscono contenuti che violano le norme relative ai discorsi di incitamento all'odio
-- App che mostrano o distribuiscono contenuti che violano le norme relative alla tratta di esseri umani
-- App che mostrano o distribuiscono contenuti che violano le norme relative ai contenuti sessualmente espliciti
-- App che mostrano o distribuiscono contenuti che violano le norme relative a violenza e spargimento di sangue
-- App che mostrano o distribuiscono contenuti che violano le norme relative a contenuti dannosi o pericolosi
+- แอปที่มีมัลแวร์ ฟิชชิง หรือการแอบอ้างเป็นบุคคลอื่น
+- แอปที่แสดงหรือเผยแพร่เนื้อหาที่ละเมิดนโยบายภาพการล่วงละเมิดทางเพศเด็ก
+- แอปที่แสดงหรือเผยแพร่เนื้อหาที่ละเมิดนโยบายการคุกคาม
+- แอปที่แสดงหรือเผยแพร่เนื้อหาที่ละเมิดนโยบายวาจาสร้างความเกลียดชัง
+- แอปที่แสดงหรือเผยแพร่เนื้อหาที่ละเมิดนโยบายการค้ามนุษย์
+- แอปที่แสดงหรือเผยแพร่เนื้อหาที่ละเมิดนโยบายเนื้อหาเกี่ยวกับเรื่องเพศอย่างโจ่งแจ้ง
+- แอปที่แสดงหรือเผยแพร่เนื้อหาที่ละเมิดนโยบายความรุนแรงและภาพนองเลือด
+- แอปที่แสดงหรือเผยแพร่เนื้อหาที่ละเมิดนโยบายที่เป็นอันตรายหรือเป็นภัย
 
-Se la tua app è stata segnalata per una violazione delle norme e ritieni che si tratti di un errore, puoi presentare un ricorso. Le violazioni ripetute delle nostre norme possono comportare la chiusura dell'accesso ad AI Studio.
+หากแอปถูกแจ้งว่าละเมิดนโยบายและคุณเชื่อว่าเป็นการแจ้งที่ผิดพลาด คุณสามารถยื่นอุทธรณ์ได้ การละเมิดนโยบายของเราซ้ำๆ อาจ
+ส่งผลให้มีการสิ้นสุดการเข้าถึง AI Studio ของคุณ
 
-### Quali sono le mie responsabilità in qualità di sviluppatore di app?
+### ฉันมีหน้าที่รับผิดชอบอะไรบ้างในฐานะนักพัฒนาแอป
 
-Ti ricordiamo che, in qualità di proprietario dell'applicazione, sei responsabile del suo comportamento e di tutti i dati che gestisce. È incluso quanto segue:
+โปรดทราบว่าในฐานะเจ้าของแอปพลิเคชัน คุณมีหน้าที่รับผิดชอบต่อ
+ลักษณะการทำงานและข้อมูลทั้งหมดที่แอปพลิเคชันจัดการ ซึ่งรวมถึงเนื้อหาต่อไปนี้
 
-- **Conformità legale e diritti di terze parti:** assicurati che la tua app sia conforme a tutte le leggi e le normative vigenti e che non violi i diritti di terzi, inclusi i diritti di proprietà intellettuale e di privacy.
-- **Monitoraggio dei contenuti:** potrebbero essere applicati termini aggiuntivi ad altri servizi utilizzati dalla tua app. Ad esempio,
-  [i Termini di servizio di Google Cloud](https://cloud.google.com/terms?hl=it),
-  applicabili a Firestore, richiedono ai clienti che ospitano contenuti di terze parti di
-  pubblicare norme che definiscono i contenuti vietati (ad es. contenuti
-  illegali) e di monitorare la presenza di questi contenuti illegali.
-- **Implementazione sicura:** implementa le misure di sicurezza e gli strumenti di moderazione necessari per impedire l'uso improprio dell'applicazione.
+- **การปฏิบัติตามกฎหมายและสิทธิของบุคคลที่สาม:** ตรวจสอบว่าแอปของคุณเป็นไปตามกฎหมายและกฎระเบียบที่เกี่ยวข้องทั้งหมด และไม่ละเมิดสิทธิของผู้อื่น ซึ่งรวมถึงสิทธิในทรัพย์สินทางปัญญาและสิทธิด้านความเป็นส่วนตัว
+- **การตรวจสอบเนื้อหา:** การปฏิบัติตามข้อกำหนดเพิ่มเติมอาจมีผลกับ
+  บริการอื่นๆ ที่แอปของคุณใช้ ตัวอย่างเช่น
+  [ข้อกำหนดในการให้บริการของ Google Cloud](https://cloud.google.com/terms?hl=th)
+  ซึ่งมีผลกับ Firestore กำหนดให้ลูกค้าที่โฮสต์เนื้อหาของบุคคลที่สามต้อง
+  เผยแพร่นโยบายที่กำหนดเนื้อหาที่ห้าม (เช่น เนื้อหาที่ผิดกฎหมาย)
+  และตรวจสอบว่ามีเนื้อหาที่ผิดกฎหมายดังกล่าวหรือไม่
+- **การติดตั้งใช้งานที่ปลอดภัย:** การติดตั้งใช้งานมาตรการป้องกันที่จำเป็นและ
+  เครื่องมือการกลั่นกรองเพื่อป้องกันไม่ให้มีการนำแอปพลิเคชันของคุณไปใช้ในทางที่ผิด
 
-Tieni presente le [limitazioni d'uso](https://ai.google.dev/gemini-api/terms?hl=it#use-restrictions)
-indicate nei Termini di servizio.
+โปรดทราบ[ข้อจำกัดในการใช้](https://ai.google.dev/gemini-api/terms?hl=th#use-restrictions)
+ในข้อกำหนดในการให้บริการ
 
-### Quali termini si applicano alle app nella Galleria app di AI Studio?
+### ข้อกำหนดใดมีผลกับแอปในแกลเลอรีแอปใน AI Studio
 
-I [Termini di servizio aggiuntivi dell'API Gemini](https://ai.google.dev/gemini-api/terms?hl=it)
-si applicano all'utilizzo delle app presenti nella Galleria app di AI Studio, salvo
-diversa indicazione.
+[ข้อกำหนดในการให้บริการเพิ่มเติมของ Gemini API](https://ai.google.dev/gemini-api/terms?hl=th)
+มีผลกับการใช้งานแอปที่แนะนำในแกลเลอรีแอปใน AI Studio เว้นแต่จะ
+ระบุไว้เป็นอย่างอื่น
 
-## Passaggi successivi
+## ขั้นตอนถัดไป
 
-- [Sviluppare app full stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=it) (web)
-- [Creare app Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=it)
-- Vedi esempi nella [Galleria app](https://aistudio.google.com/apps?source=showcase&hl=it).
+- [การพัฒนาแอปแบบ Full Stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=th) (เว็บ)
+- [สร้างแอป Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=th)
+- ดูตัวอย่างได้ใน[App Gallery](https://aistudio.google.com/apps?source=showcase&hl=th)
 
-Invia feedback
+ส่งความคิดเห็น
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Ultimo aggiornamento 2026-07-14 UTC.
+อัปเดตล่าสุด 2026-07-14 UTC
 
-Vuoi dirci altro?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-14 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-14 UTC"],[],[]]

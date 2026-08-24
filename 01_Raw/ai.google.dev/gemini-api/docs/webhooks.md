@@ -1,49 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/webhooks?hl=hi
-fetched_at: 2026-08-17T02:17:13.655813+00:00
-title: "\u0935\u0947\u092c\u0939\u0941\u0915 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/webhooks?hl=id
+fetched_at: 2026-08-24T02:34:24.165118+00:00
+title: "Webhook \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-सुझाव भेजें
+Kirim masukan
 
-# वेबहुक
+# Webhook
 
-वेबसाइटों पर होने वाली गतिविधियों की सूचनाएं रीयल-टाइम में पाने के लिए, Gemini API के वेबहुक का इस्तेमाल किया जा सकता है. ऐसा तब किया जा सकता है, जब एसिंक्रोनस या लंबे समय तक चलने वाली कार्रवाइयां (एलआरओ) पूरी हो जाती हैं. इससे, स्टेटस अपडेट के लिए एपीआई को बार-बार पोल करने की ज़रूरत नहीं पड़ती. साथ ही, इंतज़ार का समय और ओवरहेड कम हो जाता है.
+Webhook memungkinkan Gemini API mengirim notifikasi real-time ke server Anda saat Operasi Asinkron atau Operasi yang Berjalan Lama (LRO) selesai. Hal ini menggantikan kebutuhan untuk melakukan polling API guna mendapatkan update status, sehingga mengurangi latensi dan overhead.
 
-[[[वेबसाइटों पर होने वाली गतिविधियों की सूचनाएं पाने के लिए, बैच जॉब, इंटरैक्शन, और वीडियो जनरेट करने जैसी कार्रवाइयों के लिए वेबहुक उपलब्ध हैं.](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi)](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi)](https://ai.google.dev/gemini-api/docs/video?hl=hi)
+Webhook tersedia untuk operasi seperti [Tugas batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=id),
+[Interaksi](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id), dan [pembuatan video](https://ai.google.dev/gemini-api/docs/video?hl=id).
 
-## यह कैसे काम करता है
+## Cara kerjanya
 
-किसी जॉब के पूरा होने की जानकारी पाने के लिए, `GET /operations` को बार-बार पोल करने के बजाय, Gemini API के वेबहुक को कॉन्फ़िगर किया जा सकता है. इससे, किसी इवेंट के ट्रिगर होने पर, आपके लिसनर यूआरएल पर तुरंत एचटीटीपी पीओएसटी अनुरोध भेजा जा सकता है.
+Daripada melakukan polling `GET /operations` berulang kali untuk memeriksa apakah tugas telah selesai, Anda dapat mengonfigurasi Webhook Gemini API untuk mengirim permintaan POST HTTP ke URL pemroses Anda segera setelah pemicu peristiwa.
 
-वेबसाइटों पर होने वाली गतिविधियों की सूचनाएं पाने के लिए, Gemini API में वेबहुक को कॉन्फ़िगर करने के दो तरीके हैं:
+Gemini API mendukung dua cara untuk mengonfigurasi webhook:
 
-- [**स्टैटिक वेबहुक**](#static-webhooks): प्रोजेक्ट-लेवल के एंडपॉइंट, जिन्हें Gemini [WebhookService API](https://ai.google.dev/api?hl=hi) के साथ कॉन्फ़िगर किया गया है. ये ग्लोबल इंटिग्रेशन के लिए सही हैं. जैसे, Slack को सूचनाएं भेजना, डेटाबेस को सिंक करना वगैरह.
-- [**डाइनैमिक वेबहुक**](#dynamic-webhooks): अनुरोध-लेवल के ओवरराइड, जो किसी खास जॉब कॉल के कॉन्फ़िगरेशन पेलोड में
-  वेबहुक यूआरएल पास करते हैं. ये खास जॉब को खास एंडपॉइंट पर रूट करने के लिए सही हैं.
+- [**Webhook statis**](#static-webhooks): Endpoint tingkat project yang dikonfigurasi
+  dengan Gemini [WebhookService API](https://ai.google.dev/api?hl=id). Baik untuk integrasi global (misalnya, memberi tahu Slack, menyinkronkan database, dll.).
+- [**Webhook dinamis**](#dynamic-webhooks): Penggantian tingkat permintaan yang meneruskan
+  URL webhook dalam payload konfigurasi panggilan tugas tertentu. Ideal untuk merutekan tugas tertentu ke endpoint khusus.
 
-## स्टैटिक वेबहुक
+## Webhook statis
 
-स्टैटिक वेबहुक, पूरे [प्रोजेक्ट](https://ai.google.dev/gemini-api/docs/api-key?hl=hi#google-cloud-projects) के लिए रजिस्टर किए जाते हैं. साथ ही, ये मैच करने वाले किसी भी
-इवेंट के लिए ट्रिगर होते हैं.
+Webhook statis terdaftar untuk seluruh [project](https://ai.google.dev/gemini-api/docs/api-key?hl=id#google-cloud-projects) dan dipicu untuk peristiwa yang cocok.
 
-### वेबसाइटों पर होने वाली गतिविधियों की सूचनाएं पाने के लिए वेबहुक बनाना
+### Membuat webhook
 
-एसडीके या REST API का इस्तेमाल करके, एंडपॉइंट बनाए जा सकते हैं.
+Anda dapat membuat endpoint menggunakan SDK atau REST API.
 
-**अहम जानकारी**: वेबसाइटों पर होने वाली गतिविधियों की सूचनाएं पाने के लिए वेबहुक बनाते समय, एपीआई **सिर्फ़ एक बार**
-**साइनिंग सीक्रेट** दिखाता है. आपको इसे सुरक्षित तरीके से सेव करना होगा.जैसे, अपने एनवायरमेंट वैरिएबल में. इससे, बाद में सिग्नेचर की पुष्टि की जा सकती है. साइनिंग सीक्रेट खो जाने पर, आपको इसे
-[रोटेट](#rotate-signing-secret) करना होगा.
+**PENTING**: Saat membuat webhook, API hanya menampilkan **secret penandatanganan**
+**satu kali**. Anda harus menyimpannya dengan aman (misalnya, dalam variabel lingkungan) untuk memverifikasi tanda tangan nanti. Jika kehilangan secret penandatanganan, Anda harus
+[merotasi](#rotate-signing-secret)nya.
 
 ### Python
 
@@ -99,12 +100,12 @@ curl -X POST \
   }'
 ```
 
-डेटा पाने के लिए, अपने सर्वर को सेट अप करने के बारे में ज़्यादा जानने के लिए, वेबसाइटों पर होने वाली गतिविधियों की सूचनाओं के लिए अनुरोधों को मैनेज करना
-[सेक्शन देखें.](#handle-webhook-requests)
+Untuk mengetahui detail tentang cara menyiapkan server untuk menerima data, lihat bagian
+[Menangani permintaan webhook](#handle-webhook-requests).
 
-### वेबसाइटों पर होने वाली गतिविधियों की सूचनाएं पाने के लिए वेबहुक पाना
+### Mendapatkan webhook
 
-किसी खास वेबहुक के बारे में जानकारी पाने के लिए, उसके संसाधन के नाम का इस्तेमाल करें.
+Ambil detail tentang webhook tertentu berdasarkan nama resource-nya.
 
 ### Python
 
@@ -146,9 +147,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### वेबसाइटों पर होने वाली गतिविधियों की सूचनाएं पाने के लिए वेबहुक की सूची बनाना
+### Mencantumkan webhook
 
-मौजूदा प्रोजेक्ट के लिए कॉन्फ़िगर किए गए सभी वेबहुक की सूची बनाएं. इसमें पेज नंबरिंग की सुविधा भी जोड़ी जा सकती है.
+Cantumkan semua webhook yang dikonfigurasi untuk project saat ini, dengan penomoran halaman opsional.
 
 ### Python
 
@@ -189,9 +190,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### वेबसाइटों पर होने वाली गतिविधियों की सूचनाएं पाने के लिए वेबहुक को अपडेट करना
+### Memperbarui webhook
 
-मौजूदा वेबहुक की प्रॉपर्टी अपडेट करें. जैसे, डिसप्ले नेम, टारगेट यूआरआई या सदस्यता वाले इवेंट.
+Perbarui properti webhook yang ada seperti nama tampilan, URI target, atau peristiwa yang diikuti.
 
 ### Python
 
@@ -241,9 +242,9 @@ curl -X PATCH \
   }'
 ```
 
-### वेबसाइटों पर होने वाली गतिविधियों की सूचनाएं पाने के लिए वेबहुक मिटाना
+### Menghapus webhook
 
-प्रोजेक्ट से, वेबसाइटों पर होने वाली गतिविधियों की सूचनाएं पाने के लिए वेबहुक का एंडपॉइंट हटाएं. इससे, उस एंडपॉइंट पर आने वाले समय में इवेंट की सूचनाएं नहीं भेजी जाएंगी.
+Hapus endpoint webhook dari project. Tindakan ini akan menghentikan pengiriman peristiwa di masa mendatang ke endpoint tersebut.
 
 ### Python
 
@@ -281,11 +282,12 @@ curl -X DELETE \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### साइनिंग सीक्रेट रोटेट करना
+### Merotasi secret penandatanganan
 
-वेबसाइटों पर होने वाली गतिविधियों की सूचनाएं पाने के लिए वेबहुक का साइनिंग सीक्रेट रोटेट करें. यह कॉन्फ़िगर किया जा सकता है कि पहले से ऐक्टिव सीक्रेट को तुरंत रद्द किया जाए या 24 घंटे के ग्रेस पीरियड के बाद.
+Rotasi secret penandatanganan untuk webhook. Anda dapat mengonfigurasi apakah secret yang sebelumnya aktif akan dicabut segera atau setelah masa tenggang 24 jam.
 
-**अहम जानकारी**: रोटेशन के समय, नया साइनिंग सीक्रेट **सिर्फ़ एक बार** दिखाया जाता है. पुष्टि करने की लॉजिक को अपडेट करने से पहले, इसे सुरक्षित तरीके से सेव करें.
+**PENTING**: Secret penandatanganan baru hanya ditampilkan **satu kali** pada waktu rotasi
+time. Simpan dengan aman sebelum memperbarui logika verifikasi Anda.
 
 ### Python
 
@@ -338,13 +340,14 @@ curl -X POST \
   }'
 ```
 
-### किसी सर्वर पर, वेबसाइटों पर होने वाली गतिविधियों की सूचनाओं के लिए अनुरोधों को मैनेज करना
+### Menangani permintaan webhook di server
 
-जब कोई ऐसा इवेंट होता है जिसकी सदस्यता आपने ली है, तो आपके वेबहुक यूआरएल को एचटीटीपी पीओएसटी अनुरोध मिलेगा. फिर से कोशिश करने से बचने के लिए, आपके एंडपॉइंट को कुछ सेकंड के अंदर 2xx स्टेटस कोड के साथ जवाब देना होगा. डिलीवरी पक्का करने के लिए, Gemini API, एक्स्पोनेंशियल बैकऑफ़ का इस्तेमाल करके, 24 घंटे तक फ़ेल हुए अनुरोधों को अपने-आप फिर से भेजता है.
+Saat peristiwa yang Anda ikuti terjadi, URL webhook Anda akan menerima permintaan POST HTTP. Endpoint Anda harus merespons dengan kode status 2xx dalam beberapa detik untuk menghindari percobaan ulang. Untuk memastikan pengiriman, Gemini API secara otomatis mencoba ulang permintaan yang gagal selama 24 jam menggunakan backoff eksponensial.
 
-Gemini, सुरक्षा हेडर के लिए, वेबसाइटों पर होने वाली गतिविधियों की सूचनाओं के लिए [स्टैंडर्ड वेबहुक्स](https://github.com/standard-webhooks/standard-webhooks) स्पेसिफ़िकेशन का सख्ती से पालन करता है. साइन किए गए हेडर सिग्नेचर और सेव किए गए स्टैटिक साइनिंग सीक्रेट का इस्तेमाल करके, अपने सर्वर पर पेलोड की पुष्टि करें. पेलोड की जानकारी के लिए, [वेबसाइटों पर होने वाली गतिविधियों की सूचनाओं के लिए एनवलप](#webhook-envelope) सेक्शन देखें.
+Gemini secara ketat mengikuti spesifikasi [Webhook Standar](https://github.com/standard-webhooks/standard-webhooks) untuk
+header keamanan. Verifikasi payload di server Anda menggunakan tanda tangan header yang ditandatangani dan secret penandatanganan statis yang disimpan. Lihat bagian [Amplop webhook](#webhook-envelope) untuk mengetahui informasi payload.
 
-यहां एचटीटीपी लिसनर के लिए, Flask का इस्तेमाल करने का एक उदाहरण दिया गया है:
+Berikut adalah contoh penggunaan Flask untuk pemroses HTTP:
 
 ### Python
 
@@ -437,14 +440,14 @@ app.listen(8000, () => {
 });
 ```
 
-## डाइनैमिक वेबहुक
+## Webhook dinamis
 
-डाइनैमिक वेबहुक की मदद से, वेबसाइटों पर होने वाली गतिविधियों की सूचनाएं पाने के लिए वेबहुक के एंडपॉइंट को **किसी खास अनुरोध के
-कॉन्फ़िगरेशन** से जोड़ा जा सकता है. यह एजेंट-ऑर्केस्ट्रेशन कतारों के लिए सही है. डाइनैमिक वेबहुक, सिमेट्रिक सीक्रेट के बजाय, एसिमेट्रिक पब्लिक-की JWKS सिग्नेचर का इस्तेमाल करते हैं.
+Webhook dinamis memungkinkan Anda mengikat endpoint webhook ke **konfigurasi
+permintaan tertentu**, yang ideal untuk antrean orkestrasi agen. Webhook dinamis memanfaatkan tanda tangan JWKS kunci publik asimetris, bukan secret simetris.
 
-### डाइनैमिक अनुरोध सबमिट करना
+### Mengirim permintaan dinamis
 
-एसिंक्रोनस जॉब (जैसे, बैच बनाना) ट्रिगर करते समय, `webhook_config` जोड़ें.
+Tambahkan `webhook_config` saat memicu tugas asinkron (misalnya, membuat Batch).
 
 ### Python
 
@@ -513,11 +516,10 @@ curl -X POST \
   }'
 ```
 
-### डाइनैमिक सिग्नेचर (JWKS) की पुष्टि करना
+### Memverifikasi tanda tangan dinamis (JWKS)
 
-वेबसाइटों पर होने वाली गतिविधियों की सूचनाओं के लिए डाइनैमिक अनुरोध, JSON Web Token (JWT) सिग्नेचर देते हैं. आपके लिसनर
-को सिग्नेचर एक्सट्रैक्ट करना होगा और [Google के पब्लिक सर्टिफ़िकेट
-एंडपॉइंट का इस्तेमाल करके, इसकी पुष्टि करनी होगी](https://www.googleapis.com/oauth2/v3/certs).
+Permintaan webhook dinamis memancarkan tanda tangan JSON Web Token (JWT). Pemroses Anda
+harus mengekstrak tanda tangan dan memverifikasinya menggunakan [endpoint sertifikat publik Google](https://www.googleapis.com/oauth2/v3/certs).
 
 ### Python
 
@@ -618,11 +620,11 @@ app.post('/gemini-webhook-dynamic', (req, res) => {
 });
 ```
 
-## वेबसाइटों पर होने वाली गतिविधियों की सूचनाओं के लिए एनवलप
+## Amplop webhook
 
-बैंडविथ की समस्या से बचने के लिए, Gemini के वेबहुक, डेटा डिलीवर करने के लिए **थिन पेलोड** मॉडल का इस्तेमाल करते हैं. डिलीवरी में, स्टेटस की जानकारी और नतीजों के पॉइंटर वाला स्नैपशॉट भेजा जाता है. इसमें, रॉ आउटपुट फ़ाइल नहीं भेजी जाती.
+Untuk menghindari kemacetan bandwidth, webhook Gemini menggunakan model **payload tipis** untuk mengirimkan data. pengiriman mengirimkan snapshot yang berisi detail status dan pointer ke hasil, bukan file output mentah itu sendiri.
 
-यहां पेलोड फ़ॉर्मैट का एक उदाहरण दिया गया है:
+Berikut adalah contoh format payload:
 
 ```
 {
@@ -636,42 +638,41 @@ app.post('/gemini-webhook-dynamic', (req, res) => {
 }
 ```
 
-## इवेंट कैटलॉग रेफ़रंस
+## Referensi katalog peristiwa
 
-जॉब को सपोर्ट करने के लिए, ये इवेंट ट्रिगर होते हैं:
+Peristiwa berikut dipicu untuk mendukung tugas:
 
-| इवेंट किस तरह का है | ट्रिगर | पेलोड आइटम (`data`) |
+| Jenis peristiwa | Pemicu | Item payload (`data`) |
 | --- | --- | --- |
-| `batch.succeeded` | प्रोसेसिंग पूरी हो गई है. | `id`, `output_file_uri` |
-| `batch.cancelled` | उपयोगकर्ता ने अनुरोध रद्द कर दिया | `id` |
-| `batch.expired` | बैच को 24 घंटे में प्रोसेस (पूरा) नहीं किया गया है | `id` |
-| `batch.failed` | बैच जॉब फ़ेल हो गई है. इसकी वजह, सिस्टम या पुष्टि करने में हुई गड़बड़ी हो सकती है. | `id`, `error_code`, `error_message` |
-| `interaction.requires_action` | फ़ंक्शन कॉल, उपयोगकर्ता को कुछ करना होगा | `id` |
-| `interaction.completed` | इंटरैक्शन API में एलआरओ पूरा हो गया है | `id` |
-| `interaction.failed` | इंटरैक्शन API में एलआरओ फ़ेल हो गया है. इसकी वजह, सिस्टम या पुष्टि करने में हुई गड़बड़ी हो सकती है. | `id`, `error_code`, `error_message` |
-| `interaction.cancelled` | इंटरैक्शन API में एलआरओ रद्द कर दिया गया है | `id` |
-| `video.generated` | वीडियो जनरेट करने का एलआरओ पूरा हो गया है. | `id`, `output_file_uri`, `file_name` |
+| `batch.succeeded` | Pemrosesan berhasil diselesaikan. | `id`, `output_file_uri` |
+| `batch.cancelled` | Pengguna membatalkan permintaan | `id` |
+| `batch.expired` | Batch belum diproses (selesai) dalam jangka waktu 24 jam | `id` |
+| `batch.failed` | Tugas batch gagal (error sistem atau validasi). | `id`, `error_code`, `error_message` |
+| `interaction.requires_action` | Panggilan fungsi, pengguna harus melakukan sesuatu | `id` |
+| `interaction.completed` | LRO di interactions API berhasil | `id` |
+| `interaction.failed` | LRO di interactions API gagal (error sistem atau validasi). | `id`, `error_code`, `error_message` |
+| `interaction.cancelled` | LRO di interactions API dibatalkan | `id` |
+| `video.generated` | LRO pembuatan video selesai. | `id`, `output_file_uri`, `file_name` |
 
-## सबसे सही तरीके
+## Praktik terbaik
 
-भरोसेमंद और बढ़ाने लायक ऑपरेशन पक्का करने के लिए:
+Untuk memastikan operasi yang andal dan skalabel:
 
-- **रिप्ले प्रोटेक्शन की सख्त जांच**: सभी अनुरोधों में `webhook-timestamp`
-  हेडर होता है. अपने सर्वर कॉन्फ़िगरेशन लेयर पर हमेशा इस टाइमस्टैंप की पुष्टि करें, ताकि **पांच मिनट** से पुराने पेलोड को अस्वीकार किया जा सके. इससे, रिप्ले हमलों को कम किया जा सकता है.
-- **एसिंक्रोनस तरीके से प्रोसेस करना**: मान्य
-  सिग्नेचर का पता लगने पर, तुरंत `2xx OK` के साथ जवाब दें. साथ ही, पार्सिंग कार्रवाइयों को इंटरनली कतार में लगाएं. लिसनर के होल्ड टाइम ज़्यादा होने पर, डिलीवरी की फिर से कोशिश करने का साइकल ट्रिगर हो जाएगा.
-- **डुप्लीकेट हटाने की सुविधा**: स्टैंडर्ड वेबहुक, "कम से कम एक बार" डिलीवरी करते हैं. ज़्यादा कंजेशन वाले फ़्लो में संभावित डुप्लीकेट को मैनेज करने के लिए, एक जैसा `webhook-id` हेडर इस्तेमाल करें.
+- **Pemeriksaan perlindungan replay yang ketat**: Semua permintaan membawa `webhook-timestamp`
+  header. Selalu validasi stempel waktu ini di lapisan konfigurasi server Anda untuk menolak payload yang lebih lama dari **5 menit** (untuk mengurangi serangan replay).
+- **Proses secara asinkron**: Langsung respons dengan `2xx OK` setelah deteksi tanda tangan yang valid, dan antrekan operasi penguraian secara internal. Waktu tunggu pemroses yang terlalu lama akan memicu siklus percobaan ulang pengiriman.
+- **Penanganan penghapusan duplikat**: Webhook standar mengirimkan "Setidaknya sekali". Gunakan header `webhook-id` yang konsisten untuk menangani potensi duplikat dalam aliran kemacetan yang lebih tinggi.
 
-## आगे क्या करना है?
+## Apa langkah selanjutnya?
 
-- [Batch API](https://ai.google.dev/gemini-api/docs/batch?hl=hi): ज़्यादा वॉल्यूम वाले एंडपॉइंट को ऑटोमेट करने के लिए, वेबहुक का इस्तेमाल करें.
+- [Batch API](https://ai.google.dev/gemini-api/docs/batch?hl=id): Manfaatkan webhook untuk mengotomatiskan endpoint volume tinggi.
 
-सुझाव भेजें
+Kirim masukan
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया.
+Terakhir diperbarui pada 2026-07-30 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Ada masukan untuk kami?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-30 UTC."],[],[]]

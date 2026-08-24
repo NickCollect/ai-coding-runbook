@@ -1,45 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-pro-preview-12-2025?hl=he
-fetched_at: 2026-08-17T02:34:27.151328+00:00
-title: "\u05ea\u05e6\u05d5\u05d2\u05d4 \u05de\u05e7\u05d3\u05d9\u05de\u05d4 \u05e9\u05dc Deep Research \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-pro-preview-12-2025?hl=id
+fetched_at: 2026-08-24T02:31:15.182873+00:00
+title: "Pratinjau Deep Research \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-שליחת משוב
+Kirim masukan
 
-# תצוגה מקדימה של Deep Research
+# Pratinjau Deep Research
 
-חוקר סוכני רב-עוצמה שנועד לחקירות אוטונומיות בכמה שלבים, שבהן מידע מורכב מסוכם לדוחות מקיפים עם ציטוטים. המודל הזה מבוסס על Gemini 3.1 Pro ועבר אופטימיזציה למשימות ארוכות ולניתוחים שבהם דיוק הוא קריטי. הוא מתבסס על מאות מקורות מידע ציבוריים באינטרנט ועל נתונים פרטיים מ-Workspace כמו Gmail ו-Drive.
+Peneliti agentik yang canggih dan dirancang untuk penyelidikan multi-langkah yang otonom, yang menyintesis informasi kompleks menjadi laporan komprehensif yang mencantumkan kutipan. Didukung oleh Gemini 3.1 Pro, model ini dioptimalkan untuk tugas yang berjalan lama dan analisis yang sangat akurat di ratusan sumber web publik dan data ruang kerja pribadi seperti Gmail dan Drive.
 
-## מאמרי עזרה
+## Dokumentasi
 
-מידע מלא על התכונות והיכולות זמין בדף [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he).
+Buka halaman [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) untuk mengetahui cakupan lengkap fitur dan kapabilitas.
 
 ## deep-research-pro-preview-12-2025
 
-| נכס | תיאור |
+| Properti | Deskripsi |
 | --- | --- |
-| id\_cardקוד הסוכן | **Interactions API**  `deep-research-pro-preview-12-2025` |
-| saveסוגי נתונים נתמכים | **קלט**  טקסט, תמונה, PDF, אודיו, וידאו  **פלט**  טקסט (דוחות מצוטטים) |
-| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **חלון הקשר של הקלט**  1,048,576  **מגבלת אסימונים בפלט**  65,536 |
-| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - תצוגה מקדימה: `deep-research-pro-preview-12-2025` |
-| calendar\_monthהעדכון האחרון | דצמבר 2025 |
+| Kode agen id\_card | **Interactions API**  `deep-research-pro-preview-12-2025` |
+| saveJenis data yang didukung | **Input**  Teks, Gambar, PDF, Audio, Video  **Output**  Teks (Laporan yang Dikutip) |
+| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Jendela konteks input**  1.048.576  **Batas token output**  65.536 |
+| Versi 123 | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - Pratinjau: `deep-research-pro-preview-12-2025` |
+| calendar\_monthPembaruan terbaru | Desember 2025 |
 
-שליחת משוב
+Kirim masukan
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-עדכון אחרון: 2026-04-29 (שעון UTC).
+Terakhir diperbarui pada 2026-04-29 UTC.
 
-רוצה לתת לנו משוב?
+Ada masukan untuk kami?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]

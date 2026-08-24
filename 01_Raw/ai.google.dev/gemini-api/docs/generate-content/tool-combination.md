@@ -1,29 +1,29 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/tool-combination?hl=he
-fetched_at: 2026-08-17T02:17:50.044559+00:00
-title: "\u05e9\u05d9\u05dc\u05d5\u05d1 \u05e9\u05dc \u05db\u05dc\u05d9\u05dd \u05de\u05d5\u05d1\u05e0\u05d9\u05dd \u05d5\u05e7\u05e8\u05d9\u05d0\u05d4 \u05dc\u05e4\u05d5\u05e0\u05e7\u05e6\u05d9\u05d5\u05ea \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/tool-combination?hl=it
+fetched_at: 2026-08-24T02:32:51.093203+00:00
+title: "Combinare strumenti integrati e chiamata di funzione \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-שליחת משוב
+Invia feedback
 
-# שילוב של כלים מובנים וקריאה לפונקציות
+# Combinare strumenti integrati e chiamata di funzione
 
-‫
+Gemini consente di combinare [strumenti integrati](https://ai.google.dev/gemini-api/docs/tools?hl=it), come `google_search`, e [chiamate di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it)
+(note anche come *strumenti personalizzati*) in una singola generazione, conservando ed esponendo
+la cronologia del contesto delle chiamate di strumenti. Le combinazioni di strumenti integrati e personalizzati consentono workflow complessi e agentivi in cui, ad esempio, il modello può basarsi su dati web in tempo reale prima di chiamare la logica di business specifica.
 
-‫Gemini מאפשר לשלב [כלים מובנים](https://ai.google.dev/gemini-api/docs/tools?hl=he), כמו `google_search`, ו[קריאות לפונקציות](https://ai.google.dev/gemini-api/docs/function-calling?hl=he) (שנקראות גם *כלים מותאמים אישית*) ביצירה אחת, על ידי שמירה של היסטוריית ההקשר של קריאות לכלים וחשיפה שלה. שילובים מובנים ומותאמים אישית של כלים מאפשרים תהליכי עבודה מורכבים ודינמיים. לדוגמה, המודל יכול להסתמך על נתונים מהאינטרנט בזמן אמת לפני שהוא מפעיל את הלוגיקה העסקית הספציפית שלכם.
-
-דוגמה שבה מופעלים שילובים מובנים ומותאמים אישית של כלים באמצעות `google_search` ופונקציה מותאמת אישית `getWeather`:
+Ecco un esempio che consente combinazioni di strumenti integrati e personalizzati con `google_search` e una funzione personalizzata `getWeather`:
 
 ### Python
 
@@ -113,7 +113,7 @@ for part in response_2.candidates[0].content.parts:
         print(part.text)
 ```
 
-### JavaScript
+### Javascript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -390,57 +390,65 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
 }'
 ```
 
-## איך זה עובד
+## Come funziona
 
-מודלים של Gemini 3 משתמשים ב*העברת הקשר של כלי* כדי לאפשר שילובים מובנים ושילובים בהתאמה אישית של כלים. הפצת ההקשר של כלי מאפשרת לשמור את ההקשר של כלים מובנים ולחשוף אותו, ולשתף אותו עם כלים בהתאמה אישית באותה שיחה, מתור לתור.
+I modelli Gemini 3 utilizzano la *circolazione del contesto degli strumenti* per consentire combinazioni di strumenti integrati e personalizzati. La circolazione del contesto degli strumenti consente di conservare ed esporre il contesto degli strumenti integrati e di condividerlo con gli strumenti personalizzati nella stessa chiamata da un turno all'altro.
 
-### הפעלת שילוב של כלים
+### Attivare la combinazione di strumenti
 
-- כדי להפעיל את העברת ההקשר של הכלי, צריך להגדיר את הדגל `include_server_side_tool_invocations` לערך `true`.
-- כדי להפעיל את ההתנהגות המשולבת, צריך לכלול את [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=he#function-declarations), יחד עם הכלים המובנים שרוצים להשתמש בהם.
-  - אם לא תכללו את `function_declarations`, עדיין תהיה השפעה של העברת ההקשר של הכלי על הכלים המובנים שכללתם, כל עוד הדגל מוגדר.
+- Devi impostare il flag `include_server_side_tool_invocations` su `true` per attivare la circolazione del contesto degli strumenti.
+- Includi [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=it#function-declarations), insieme agli
+  strumenti integrati che vuoi utilizzare, per attivare il comportamento di combinazione.
+  - Se non includi `function_declarations`, la circolazione del contesto degli strumenti continuerà ad agire sugli strumenti integrati inclusi, a condizione che il flag sia impostato.
 
-### חלקים שמוחזרים על ידי ה-API
+### Parti restituite dall'API
 
-בתשובה אחת, ה-API מחזיר את החלקים `toolCall` ו-`toolResponse` של קריאת הפונקציה המובנית. במקרה של קריאה לפונקציה (כלי בהתאמה אישית), ה-API מחזיר את `functionCall` החלק של הקריאה, והמשתמש מספק את החלק `functionResponse` בתור הבא.
+In una singola risposta, l'API restituisce le parti `toolCall` e `toolResponse` per la chiamata dello strumento integrato. Per la chiamata di funzione (strumento personalizzato), l'API restituisce la parte di chiamata `functionCall`, a cui l'utente fornisce la parte `functionResponse` nel turno successivo.
 
-- ‫`toolCall` ו-`toolResponse`: ה-API מחזיר את החלקים האלה כדי לשמור על ההקשר של הכלים שמופעלים בצד השרת, ועל התוצאה של ההרצה שלהם, לתור הבא.
-- ‫`functionCall` ו-`functionResponse`: ה-API שולח את הקריאה לפונקציה למשתמש כדי למלא אותה, והמשתמש שולח את התוצאה בחזרה בתגובה לפונקציה (החלקים האלה הם סטנדרטיים לכל [הקריאות לפונקציות](https://ai.google.dev/gemini-api/docs/function-calling?hl=he) ב-Gemini API, ולא ייחודיים לתכונה של שילוב כלים).
-- ([כלי להרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he) בלבד)
-  ‫`executableCode` ו-`codeExecutionResult`:
-  כשמשתמשים בכלי להרצת קוד, במקום `functionCall` ו-`functionResponse`, ה-API מחזיר `executableCode` (הקוד שנוצר על ידי המודל שאמור להיות מורץ) ו-`codeExecutionResult` (התוצאה של הקוד שניתן להרצה).
+- `toolCall` e `toolResponse`: l'API restituisce queste parti per conservare il contesto degli strumenti eseguiti sul lato server e il risultato della loro esecuzione per il turno successivo.
+- `functionCall` e `functionResponse`: l'API invia la chiamata di funzione all'
+  utente per completarla e l'utente invia il risultato nella
+  risposta della funzione (queste parti sono standard per tutte le [chiamate di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it) nell'API Gemini, non sono univoche per la
+  funzionalità di combinazione di strumenti).
+- ([Solo strumento di esecuzione del codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it))
+  `executableCode` e `codeExecutionResult`:
+  Quando utilizzi lo strumento di esecuzione del codice, anziché `functionCall` e
+  `functionResponse`, l'API restituisce `executableCode` (il codice generato
+  dal modello che deve essere eseguito) e `codeExecutionResult` (il
+  risultato del codice eseguibile).
 
-כדי לשמור על ההקשר ולאפשר שילוב של כלים, צריך להחזיר למודל את כל החלקים, כולל כל [השדות](#critical-fields) שהם מכילים, בכל תור.
+Devi restituire tutte le parti, inclusi tutti i [campi](#critical-fields) che
+contengono, al modello a ogni turno per mantenere il contesto e attivare le combinazioni di strumenti.
 
-### שדות קריטיים בחלקים שמוחזרים
+### Campi critici nelle parti restituite
 
-[חלקים מסוימים שמוחזרים על ידי ה-API](#api-returns-parts) יכללו את השדות `id`,‏ `tool_type` ו-`thought_signature`. השדות האלה חשובים לשמירה על ההקשר של הכלי (ולכן חשובים לשילובים של כלים). צריך להחזיר את כל החלקים *כפי שמופיעים בתשובה* בבקשות הבאות.
+Alcune [parti restituite dall'API](#api-returns-parts) includeranno i campi `id`,
+`tool_type` e `thought_signature`. Questi campi sono fondamentali per mantenere il contesto degli strumenti (e quindi fondamentali per le combinazioni di strumenti); devi restituire tutte le parti *come indicato nella risposta* nelle richieste successive.
 
-- ‫`id`: מזהה ייחודי שממפה קריאה לתגובה שלה. הערך `id` **מוגדר בכל התשובות של קריאות לפונקציות**, ללא קשר להפצה של הקשר הכלי.
-  *חובה* לספק את אותו `id` בתשובת הפונקציה שה-API מספק בקריאה לפונקציה. הכלים המובנים משתפים באופן אוטומטי את `id` בין קריאת הכלי לתגובה של הכלי.
-  - מופיע בכל החלקים שקשורים לכלי: `toolCall`, `toolResponse`, `functionCall`, `functionResponse`, `executableCode`, `codeExecutionResult`
-- ‫`tool_type`: מזהה את הכלי הספציפי שבו נעשה שימוש; השם המילולי של הכלי המובנה
-  או (לדוגמה, `URL_CONTEXT`) או הפונקציה (לדוגמה, `getWeather`).
-  - נמצא בחלקים `toolCall` ו-`toolResponse`.
-- ‫`thought_signature`: ההקשר המוצפן בפועל שמוטמע ב**כל חלק שמוחזר על ידי ה-API**. אי אפשר לשחזר את ההקשר בלי חתימות המחשבה. אם לא תחזירו את חתימות המחשבה לכל החלקים בכל תור, המודל יחזיר שגיאה.
-  - נמצא ב*כל* החלקים.
+- `id`: un identificatore univoco che mappa una chiamata alla relativa risposta. `id` viene **impostato su
+  tutte le risposte delle chiamate di funzione**, indipendentemente dalla circolazione del contesto degli strumenti.
+  Devi *fornire* lo stesso `id` nella risposta della funzione
+  che l'API fornisce nella chiamata di funzione. Gli strumenti integrati condividono automaticamente l'`id` tra la chiamata dello strumento e la risposta dello strumento.
+  - Trovato in tutte le parti correlate agli strumenti: `toolCall`, `toolResponse`, `functionCall`, `functionResponse`, `executableCode`, `codeExecutionResult`
+- `tool_type`: identifica lo strumento specifico utilizzato; il nome letterale dello strumento integrato (ad es. `URL_CONTEXT`) o della funzione (ad es. `getWeather`).
+  - Trovato nelle parti `toolCall` e `toolResponse`.
+- `thought_signature`: il contesto criptato effettivo incorporato in **ogni parte restituita dall'API**. Il contesto non può essere ricostruito senza le firme di pensiero; se non restituisci le firme di pensiero per tutte le parti in ogni turno, il modello genererà un errore.
+  - Trovato in *tutte* le parti.
 
-### נתונים ספציפיים לכלי
+### Dati specifici dello strumento
 
-חלק מהכלים המובנים מחזירים ארגומנטים של נתונים שגלויים למשתמשים, שספציפיים לסוג הכלי.
+Alcuni strumenti integrati restituiscono argomenti di dati visibili all'utente specifici per il tipo di strumento.
 
-| כלי | User visible tool call args (if any) | תגובה של הכלי שגלויה למשתמש (אם יש) |
+| Strumento | Argomenti della chiamata dello strumento visibili all'utente (se presenti) | Risposta dello strumento visibile all'utente (se presente) |
 | --- | --- | --- |
 | **GOOGLE\_SEARCH** | `queries` | `search_suggestions` |
 | **GOOGLE\_MAPS** | `queries` | `places` `google_maps_widget_context_token` |
-| **URL\_CONTEXT** | `urls` כתובות URL לבדיקה | ‫`urls_metadata` `retrieved_url`: כתובות URL שנבדקו `url_retrieval_status`: סטטוס הבדיקה |
-| **FILE\_SEARCH** | ללא | ללא |
+| **URL\_CONTEXT** | `urls` URL da sfogliare | `urls_metadata` `retrieved_url`: URL sfogliati `url_retrieval_status`: stato di navigazione |
+| **FILE\_SEARCH** | Nessuno | Nessuno |
 
-## דוגמה למבנה של בקשה לשילוב כלים
+## Esempio di struttura della richiesta di combinazione di strumenti
 
-מבנה הבקשה הבא מציג את מבנה הבקשה של ההנחיה: "מהי העיר הכי צפונית בארצות הברית? What's the weather like there
-today?". הוא משלב שלושה כלים: הכלים המובנים של Gemini‏ `google_search`
-ו-`code_execution`, ופונקציה בהתאמה אישית `get_weather`.
+La seguente struttura della richiesta mostra la struttura della richiesta del prompt: "Qual è la città più a nord degli Stati Uniti? Che tempo fa oggi?". Combina tre strumenti: gli strumenti Gemini integrati `google_search` e `code_execution` e una funzione personalizzata `get_weather`.
 
 ```
 {
@@ -509,49 +517,52 @@ today?". הוא משלב שלושה כלים: הכלים המובנים של Gem
 }
 ```
 
-## אסימונים ותמחור
+## Token e prezzi
 
-שימו לב: החלקים `toolCall` ו-`toolResponse` בבקשות נספרים במסגרת `prompt_token_count`. השלבים האלה של כלי הביניים גלויים לכם עכשיו ומוחזרים לכם, ולכן הם חלק מהיסטוריית השיחה. זה קורה רק ב*בקשות*, ולא ב*תגובות*.
+Tieni presente che le parti `toolCall` e `toolResponse` nelle richieste vengono conteggiate per `prompt_token_count`. Poiché questi passaggi intermedi dello strumento sono ora visibili e ti vengono restituiti, fanno parte della cronologia delle conversazioni. Questo vale solo per il
+caso per *richieste*, non per *risposte*.
 
-הכלי של חיפוש Google הוא חריג לכלל הזה. חיפוש Google כבר מחיל מודל תמחור משלו ברמת השאילתה, כך שלא מתבצע חיוב כפול על טוקנים (ראו את הדף [תמחור](https://ai.google.dev/gemini-api/docs/pricing?hl=he)).
+Lo strumento Ricerca Google è un'eccezione a questa regola. La Ricerca Google applica già
+il proprio modello di prezzi a livello di query, quindi i token non sono
+addebitati due volte (vedi la pagina [dei prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it)).
 
-מידע נוסף זמין בדף [אסימונים](https://ai.google.dev/gemini-api/docs/tokens?hl=he).
+Per ulteriori informazioni, consulta la pagina [Token](https://ai.google.dev/gemini-api/docs/tokens?hl=it).
 
-## מגבלות
+## Limitazioni
 
-- ברירת המחדל היא מצב `VALIDATED` (מצב `AUTO` לא אפשרי) כשהדגל `include_server_side_tool_invocations` מופעל
-- כלים מובנים כמו `google_search` מסתמכים על מידע לגבי המיקום והשעה הנוכחית, ולכן אם יש סתירה במידע לגבי המיקום והשעה ב-`system_instruction` או ב-`function_declaration.description`, יכול להיות שהתכונה של שילוב כלים לא תפעל בצורה טובה.
+- Impostazione predefinita della modalità `VALIDATED` (la modalità `AUTO` non è supportata) quando il flag `include_server_side_tool_invocations` è attivato
+- Gli strumenti integrati come `google_search` si basano sulle informazioni relative alla località e all'ora corrente, quindi se `system_instruction` o `function_declaration.description` contengono informazioni su località e ora in conflitto, la funzionalità di combinazione di strumenti potrebbe non funzionare correttamente.
 
-## כלים נתמכים
+## Strumenti supportati
 
-הפצת ההקשר הרגילה של הכלי חלה על כלים בצד השרת (מוכללים).
-הכלי Code Execution (הרצת קוד) הוא גם כלי בצד השרת, אבל יש לו פתרון מובנה משלו להעברת הקשר. השימוש במחשב והפעלת פונקציות הם כלים בצד הלקוח, ויש להם גם פתרונות מובנים להעברת הקשר.
+La circolazione standard del contesto degli strumenti si applica agli strumenti lato server (integrati).
+Anche l'esecuzione del codice è uno strumento lato server, ma ha una propria soluzione integrata per la circolazione del contesto. L'utilizzo del computer e le chiamate di funzione sono strumenti lato client e dispongono anche di soluzioni integrate per la circolazione del contesto.
 
-| כלי | צד הביצוע | תמיכה בהעברת הקשר |
+| Strumento | Lato di esecuzione | Supporto per la circolazione del contesto |
 | --- | --- | --- |
-| [חיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he) | צד השרת | כן |
-| [מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he) | צד השרת | כן |
-| [הקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he) | צד השרת | כן |
-| [חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he) | צד השרת | כן |
-| [Code Execution](https://ai.google.dev/gemini-api/docs/code-execution?hl=he) | צד השרת | נתמך (מובנה, משתמש בחלקים `executableCode` ו-`codeExecutionResult`) |
-| [שימוש במחשב](https://ai.google.dev/gemini-api/docs/computer-use?hl=he) | בצד הלקוח | נתמך (מובנה, משתמש בחלקים `functionCall` ו-`functionResponse`) |
-| [פונקציות מותאמות אישית](https://ai.google.dev/gemini-api/docs/function-calling?hl=he) | בצד הלקוח | נתמך (מובנה, משתמש בחלקים `functionCall` ו-`functionResponse`) |
+| [Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it) | Lato server | Supportato |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it) | Lato server | Supportato |
+| [Contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it) | Lato server | Supportato |
+| [Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it) | Lato server | Supportato |
+| [Esecuzione del codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it) | Lato server | Supportato (integrato, utilizza le parti `executableCode` e `codeExecutionResult`) |
+| [Utilizzo del computer](https://ai.google.dev/gemini-api/docs/computer-use?hl=it) | Lato client | Supportato (integrato, utilizza le parti `functionCall` e `functionResponse`) |
+| [Funzioni personalizzate](https://ai.google.dev/gemini-api/docs/function-calling?hl=it) | Lato client | Supportato (integrato, utilizza le parti `functionCall` e `functionResponse`) |
 
-## המאמרים הבאים
+## Passaggi successivi
 
-- מידע נוסף על [בקשות להפעלת פונקציות](https://ai.google.dev/gemini-api/docs/function-calling?hl=he) ב-Gemini API
-- אפשר לעיין ברשימת הכלים הנתמכים:
-  - [חיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he)
-  - [מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he)
-  - [הקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he)
-  - [חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he)
+- Scopri di più sulle [chiamate di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it) nell'API Gemini.
+- Esplora gli strumenti supportati:
+  - [Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it)
+  - [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it)
+  - [Contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it)
+  - [Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it)
 
-שליחת משוב
+Invia feedback
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-עדכון אחרון: 2026-07-30 (שעון UTC).
+Ultimo aggiornamento 2026-07-30 UTC.
 
-רוצה לתת לנו משוב?
+Vuoi dirci altro?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-30 (שעון UTC)."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]

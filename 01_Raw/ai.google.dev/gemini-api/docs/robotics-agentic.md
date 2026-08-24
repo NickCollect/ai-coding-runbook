@@ -1,35 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=pt-BR
-fetched_at: 2026-08-17T02:18:15.602006+00:00
-title: "Vis\u00e3o ag\u00eantica \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=it
+fetched_at: 2026-08-24T02:35:26.060355+00:00
+title: "Agentic Vision \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Envie comentários
+Invia feedback
 
-# Visão agêntica
+# Agentic Vision
 
-Os modelos do Gemini Robotics ER podem escrever e executar código Python para manipular imagens e aplicar lógica antes de responder. Esta página aborda exemplos de execução de código: detecção de objetos com zoom e corte, leitura de instrumentos, medição de fluidos, leitura de placas de circuito e anotação de imagens.
+I modelli Gemini Robotics ER possono scrivere ed eseguire codice Python per manipolare le immagini e applicare la logica prima di rispondere. Questa pagina illustra esempi di esecuzione del codice: rilevamento di oggetti con zoom e ritaglio, lettura di strumenti, misurazione di fluidi, lettura di schede di circuiti e annotazione di immagini.
 
-Para adaptar esses exemplos ao seu caso de uso, substitua o texto do comando e o arquivo de imagem enviado pelos seus. Você também pode ajustar o esquema JSON solicitado no comando para corresponder à estrutura de saída necessária para seu aplicativo ou adicionar uma `system_instruction` para aplicar o formato e a precisão da saída.
+Per adattare questi esempi al tuo caso d'uso, sostituisci il testo del prompt e il file immagine caricato con i tuoi. Puoi anche modificare lo schema JSON richiesto nel prompt in modo che corrisponda alla struttura di output di cui ha bisogno la tua applicazione oppure aggiungere un `system_instruction` per applicare il formato e la precisione dell'output.
 
-Para ver o código executável completo, consulte o
-[livro de receitas de robótica](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+Per il codice eseguibile completo, consulta il
+[ricettario di robotica](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-## Nível de raciocínio
+## Livello di pensiero
 
-Você pode controlar o nível de raciocínio do modelo para trocar a latência pela precisão. Tarefas espaciais, como detecção de objetos, têm bom desempenho com um nível de raciocínio baixo. Tarefas complexas, como contagem ou estimativa de peso, se beneficiam de um nível de raciocínio mais alto.
+Puoi controllare il livello di ragionamento del modello per scambiare la latenza con l'accuratezza. Le attività spaziali come il rilevamento di oggetti funzionano bene con un livello di pensiero basso. Le attività complesse come il conteggio o la stima del peso traggono vantaggio da un livello di pensiero più elevato.
 
-O exemplo a seguir define o nível de raciocínio como `high` para uma tarefa de contagem complexa:
+L'esempio seguente imposta il livello di pensiero su `high` per un'attività di conteggio complessa:
 
 ### Python
 
@@ -58,11 +58,11 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-Consulte [Raciocínio](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br) para mais detalhes.
+Per i dettagli, consulta la sezione [Pensiero](https://ai.google.dev/gemini-api/docs/thinking?hl=it).
 
-## Detecção de objetos (zoom e corte)
+## Rilevamento di oggetti (zoom e ritaglio)
 
-O exemplo a seguir usa a execução de código para aplicar zoom e cortar uma imagem para uma visualização mais clara ao detectar objetos e retornar caixas delimitadoras.
+L'esempio seguente utilizza l'esecuzione del codice per ingrandire e ritagliare un'immagine per una visualizzazione più chiara durante il rilevamento degli oggetti e la restituzione dei riquadri di delimitazione.
 
 ### Python
 
@@ -96,7 +96,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-A saída do modelo seria semelhante à seguinte resposta JSON:
+L'output del modello sarà simile alla seguente risposta JSON:
 
 ```
 [
@@ -108,13 +108,13 @@ A saída do modelo seria semelhante à seguinte resposta JSON:
 ]
 ```
 
-A imagem a seguir mostra as caixas retornadas do modelo.
+L'immagine seguente mostra le caselle restituite dal modello.
 
-![Exemplo mostrando caixas delimitadoras para objetos encontrados](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=pt-br)
+![Un esempio che mostra i riquadri di delimitazione per gli oggetti trovati](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=it)
 
-## Ler um medidor analógico e aplicar lógica
+## Leggi un indicatore analogico e applica la logica
 
-O exemplo a seguir demonstra como usar o modelo para ler um medidor analógico e realizar cálculos de tempo. Ele usa uma instrução do sistema para aplicar uma saída JSON.
+L'esempio seguente mostra come utilizzare il modello per leggere un indicatore analogico ed eseguire calcoli temporali. Utilizza un'istruzione di sistema per applicare un output JSON.
 
 ### Python
 
@@ -145,9 +145,9 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-## Medir fluido em um contêiner
+## Misura il fluido in un contenitore
 
-O exemplo a seguir demonstra como usar a execução de código para medir o nível de fluido em um contêiner.
+L'esempio seguente mostra come utilizzare l'esecuzione del codice per misurare il livello di fluido in un contenitore.
 
 ### Python
 
@@ -177,9 +177,9 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-## Ler marcações em uma placa de circuito
+## Leggi i segni su una scheda di circuiti
 
-O exemplo a seguir demonstra como usar a execução de código para ler as marcações em uma placa de circuito.
+L'esempio seguente mostra come utilizzare l'esecuzione del codice per leggere i segni su una scheda di circuiti.
 
 ### Python
 
@@ -209,11 +209,11 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-![Exemplo mostrando marcações em uma placa de circuito](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=pt-br)
+![Esempio che mostra i segni su una scheda di circuito](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=it)
 
-## Anotação da imagem
+## Annotazione immagine
 
-O exemplo a seguir demonstra como usar a execução de código para anotar uma imagem (por exemplo, desenhar setas para instruções de descarte) e retornar a imagem modificada.
+L'esempio seguente mostra come utilizzare l'esecuzione del codice per annotare un'immagine (ad es. disegnare frecce per le istruzioni di smaltimento) e restituire l'immagine modificata.
 
 ### Python
 
@@ -247,11 +247,11 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-A seguir, um exemplo de entrada de imagem.
+Di seguito è riportata un'immagine di input di esempio.
 
-![Um exemplo mostrando um relógio para leitura](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=pt-br)
+![Un esempio che mostra un orologio da leggere](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=it)
 
-A saída do modelo seria semelhante a esta:
+L'output del modello sarà simile al seguente:
 
 ```
   The annotated image shows the suggested disposal locations for the items on the table:
@@ -260,18 +260,18 @@ A saída do modelo seria semelhante a esta:
   - **Black bin (Trash)**: Chocolate bar wrapper, Welch's packet, and white tissue.
 ```
 
-## A seguir
+## Passaggi successivi
 
-- [Orquestração de tarefas](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=pt-br): tarefas de longo prazo com APIs de robôs personalizados.
-- [Robótica com streaming](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=pt-br): streaming bidirecional em tempo real (somente no Gemini Robotics ER 2).
-- [Compreensão de vídeo](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=pt-br): localização de momentos e classificação de progresso (somente no Gemini Robotics ER 2).
+- [Orchestrazione delle attività](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=it): attività a lungo termine con API robot personalizzate.
+- [Robotica con streaming](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=it): streaming bidirezionale in tempo reale (solo Gemini Robotics ER 2).
+- [Comprensione video](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=it): ricerca di momenti e classificazione dei progressi (solo Gemini Robotics ER 2).
 
-Envie comentários
+Invia feedback
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Última atualização 2026-07-30 UTC.
+Ultimo aggiornamento 2026-07-30 UTC.
 
-Quer enviar seu feedback?
+Vuoi dirci altro?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-07-30 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]

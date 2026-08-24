@@ -1,47 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=pl
-fetched_at: 2026-08-17T02:30:01.438148+00:00
-title: "Veo\u00a03.1 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=ar
+fetched_at: 2026-08-24T02:25:01.398146+00:00
+title: "Veo 3.1 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Prześlij opinię
+إرسال ملاحظات
 
-# Veo 3.1
+# Veo 3.1
 
-Najnowocześniejszy silnik filmowy zaprojektowany z myślą o zaawansowanym opowiadaniu historii
-i eksperymentalnej produkcji wideo. Veo 3.1 najlepiej sprawdza się w przypadku profesjonalnych filmów w rozdzielczości 4K, natywnie zsynchronizowanego generowania dźwięku i złożonych ruchów kamery, które wymagają najwyższego poziomu spójności czasowej i kontroli artystycznej.
+محرك سينمائي متطوّر مصمّم لسرد القصص الإبداعية المتطورة وإنتاج الفيديوهات التجريبية يُعدّ نموذج Veo 3.1 الأفضل لإنتاج فيديوهات احترافية بدقة 4K، وإنشاء صوت متزامن بشكل تلقائي، وتنفيذ حركات معقّدة للكاميرا تتطلّب أعلى مستوى من الاتساق الزمني والتحكّم الفني.
 
-[Wypróbuj w Google AI Studio](https://aistudio.google.com?model=veo-3.1-generate-preview&hl=pl)
+[تجربة النموذج في Google AI Studio](https://aistudio.google.com?model=veo-3.1-generate-preview&hl=ar)
 
-## Dokumentacja
+## الوثائق
 
-Więcej informacji o funkcjach i możliwościach znajdziesz na stronie [Generowanie filmów](https://ai.google.dev/gemini-api/docs/video?hl=pl).
+انتقِل إلى صفحة [إنشاء الفيديوهات](https://ai.google.dev/gemini-api/docs/video?hl=ar) للاطّلاع على تغطية كاملة لـ
+الميزات والإمكانات.
 
 ## veo-3.1-generate-preview
 
-| Właściwość | Opis |
+| الموقع | الوصف |
 | --- | --- |
-| id\_cardKod modelu | **Gemini API**  `veo-3.1-generate-preview`  `veo-3.1-fast-generate-preview` |
-| saveObsługiwane typy danych | **Wejście**  Tekst, obraz  **Dane wyjściowe**  Film z dźwiękiem |
-| Limity token\_auto | **Wpisywanie tekstu**  1024 tokeny  **Film wyjściowy**  1 |
-| calendar\_monthOstatnia aktualizacja | Styczeń 2026 |
+| id\_cardModel code | ‫**Gemini API**  `veo-3.1-generate-preview`  `veo-3.1-fast-generate-preview` |
+| saveSupported data types | **الإدخال**  نص، صورة  **الناتج**  فيديو مع صوت |
+| token\_autoLimits | **إدخال نص**  ‫1,024 رمزًا مميّزًا  **فيديو الناتج**  1 |
+| calendar\_monthLatest update | يناير 2026 |
 
-Prześlij opinię
+إرسال ملاحظات
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Ostatnia aktualizacja: 2026-04-29 UTC.
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-Chcesz przekazać coś jeszcze?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

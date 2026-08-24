@@ -1,265 +1,266 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models?hl=zh-CN
-fetched_at: 2026-08-17T02:34:02.597337+00:00
-title: "\u6a21\u578b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models?hl=id
+fetched_at: 2026-08-24T02:28:29.135585+00:00
+title: "Model \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-发送反馈
+Kirim masukan
 
-# 模型
+# Model
 
-本指南将介绍可通过 Gemini API 使用的所有模型。
+Panduan ini memperkenalkan semua model yang tersedia melalui Gemini API.
 
 ---
 
 ## Gemini 3
 
-### 稳定
+### Stabil
 
 [spark
 
 ### Gemini 3.6 Flash
 
-Google 推出的最新模型，在速度和智能性之间实现了平衡，可在智能体和多模态任务中提供出色的性能。
+Model terbaru kami yang menyeimbangkan kecepatan dengan kecerdasan untuk memberikan performa yang kuat dalam tugas agentic dan multimodal.
 
-稳定](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=zh-cn)
+Stabil](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=id)
 [spark
 
 ### Gemini 3.5 Flash
 
-最智能的模型，可在智能体和编程任务中持续提供前沿性能。
+Model paling cerdas untuk performa terdepan yang berkelanjutan dalam tugas agentic dan coding.
 
-稳定](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=zh-cn)
+Stabil](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=id)
 [bolt
 
 ### Gemini 3.5 Flash-Lite
 
-Google 旗下最快、最具成本效益的 3.5 模型，可实现高吞吐量执行。
+Model 3.5 tercepat dan paling hemat biaya untuk eksekusi dengan throughput tinggi.
 
-稳定](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-cn)
+Stabil](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=id)
 [bolt
 
 ### Gemini 3.1 Flash-Lite
 
-以远低于大型模型的成本，实现可与 Frontier 级模型相媲美的性能。
+Performa kelas terdepan yang menyaingi model yang lebih besar dengan sebagian kecil biaya.
 
-稳定](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-cn)
+Stabil](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=id)
 [🍌🍌
 
 ### Nano Banana 2
 
-功能强大、高效的图片生成和编辑模型，专为极致速度与大规模量产场景而优化。
+Pembuatan dan pengeditan gambar yang canggih dan sangat efisien, dioptimalkan untuk kecepatan dan kasus penggunaan bervolume tinggi.
 
-稳定](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=zh-cn)
+Stabil](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=id)
 [🍌
 
 ### Nano Banana 2 Lite
 
-超低延迟且经济实惠的图片生成和编辑功能，专为高流量互动应用场景而设计。
+Latensi ultra-rendah serta pembuatan dan pengeditan gambar yang hemat biaya, yang dirancang untuk kasus penggunaan interaktif bervolume tinggi.
 
-稳定](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=zh-cn)
+Stabil](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=id)
 [🍌
 
 ### Nano Banana Pro
 
-前沿图片生成和编辑模型，可根据上下文高度相关地创建原生图片。
+Model pengeditan dan pembuatan gambar tercanggih untuk pembuatan gambar native yang sangat kontekstual.
 
-稳定](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=zh-cn)
+Stabil](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=id)
 
-### 预览
+### Pratinjau
 
 [auto\_awesome
 
 ### Gemini 3.1 Pro
 
-具备高级智能、复杂问题解决能力，以及强大的智能体和氛围编程 (vibe coding) 能力。
+Kecerdasan tingkat lanjut, keterampilan pemecahan masalah yang kompleks, serta kemampuan pengodean suasana dan agen yang canggih.
 
-预览](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-cn)
+Pratinjau](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=id)
 [spark
 
 ### Gemini 3 Flash
 
-以远低于大型模型的成本，实现可与 Frontier 级模型相媲美的性能。
+Performa kelas terdepan yang menyaingi model yang lebih besar dengan sebagian kecil biaya.
 
-预览](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-cn)
+Pratinjau](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=id)
 [translate
 
-### Gemini 3.5 实时翻译
+### Gemini 3.5 Live Translate
 
-低延迟的实时语音翻译模型，支持 70 多种语言。
+Model terjemahan ucapan ke ucapan real-time dengan latensi rendah yang mendukung lebih dari 70 bahasa.
 
-新预览](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=zh-cn)
+Pratinjau Baru](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=id)
 [settings\_voice
 
 ### Gemini 3.1 Flash Live
 
-高品质、低延迟的 Live API 模型，适用于实时对话和以语音为主的 AI 应用。
+Model Live API berkualitas tinggi dan berlatensi rendah untuk aplikasi AI berbasis suara dan dialog real-time.
 
-新预览](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=zh-cn)
+Pratinjau Baru](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=id)
 [graphic\_eq
 
 ### Gemini 3.1 Flash TTS
 
-功能强大、低延迟的语音生成。
+Pembuatan ucapan yang andal dengan latensi rendah.
 
-新预览](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=zh-cn)
+Pratinjau Baru](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=id)
 [movie\_filter
 
 ### Gemini Omni Flash
 
-快速生成和编辑视频，并支持对话式操作。将文字和图片转换为视频，并通过自然语言优化结果。
+Pembuatan dan pengeditan video yang cepat dan percakapan. Ubah teks dan gambar menjadi video, dan sempurnakan hasil melalui bahasa alami.
 
-新预览](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=zh-cn)
+Pratinjau Baru](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=id)
 
-### 所有 Gemini 3 模型
+### Semua model Gemini 3
 
-| 模型 | 端点 |
+| Model | Endpoint |
 | --- | --- |
-| [Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-cn) | ``` gemini-3.1-pro-preview ``` |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=zh-cn) | ``` gemini-3.5-flash ``` |
-| [Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-cn) | ``` gemini-3-flash-preview ``` |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-cn) | ``` gemini-3.1-flash-lite ``` |
-| [Nano Banana 2](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=zh-cn) | ``` gemini-3.1-flash-image ``` |
-| [Nano Banana 2 Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=zh-cn) | ``` gemini-3.1-flash-lite-image ``` |
-| [Nano Banana Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=zh-cn) | ``` gemini-3-pro-image ``` |
-| [Gemini 3.5 实时翻译](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=zh-cn) | ``` gemini-3.5-live-translate-preview ``` |
-| [Gemini 3.1 Flash Live](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=zh-cn) | ``` gemini-3.1-flash-live-preview ``` |
-| [Gemini 3.1 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=zh-cn) | ``` gemini-3.1-flash-tts-preview ``` |
+| [Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=id) | ``` gemini-3.1-pro-preview ``` |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=id) | ``` gemini-3.5-flash ``` |
+| [Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=id) | ``` gemini-3-flash-preview ``` |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=id) | ``` gemini-3.1-flash-lite ``` |
+| [Nano Banana 2](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=id) | ``` gemini-3.1-flash-image ``` |
+| [Nano Banana 2 Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=id) | ``` gemini-3.1-flash-lite-image ``` |
+| [Nano Banana Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=id) | ``` gemini-3-pro-image ``` |
+| [Gemini 3.5 Live Translate](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=id) | ``` gemini-3.5-live-translate-preview ``` |
+| [Gemini 3.1 Flash Live](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=id) | ``` gemini-3.1-flash-live-preview ``` |
+| [Gemini 3.1 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=id) | ``` gemini-3.1-flash-tts-preview ``` |
 
 ## Gemini 2.5 Flash
 
-| 模型 | 说明 | 端点 |
+| Model | Deskripsi | Endpoint |
 | --- | --- | --- |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=zh-cn) | 在性价比方面表现出色的模型，适合需要推理的低延迟、高数据量任务。 | ``` gemini-2.5-flash ``` |
-| [Nano Banana](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=zh-cn) | 前沿的原生图片生成和编辑功能，专为快速创意工作流而设计。 | ``` gemini-2.5-flash-image ``` |
-| [Gemini 2.5 Flash Live](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=zh-cn) | 经过优化，可用于亚秒级原生音频流式传输的实时对话代理。 | ``` gemini-2.5-flash-native-audio-preview-12-2025 ``` |
-| [Gemini 2.5 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=zh-cn) | 可控的文字转语音音频生成，可精细控制风格和节奏。 | ``` gemini-2.5-flash-preview-tts ``` |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=id) | Model rasio harga-performa terbaik kami untuk tugas latensi rendah dan volume tinggi yang memerlukan penalaran. | ``` gemini-2.5-flash ``` |
+| [Nano Banana](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=id) | Pembuatan dan pengeditan gambar native canggih yang dirancang untuk alur kerja yang cepat dan kreatif. | ``` gemini-2.5-flash-image ``` |
+| [Gemini 2.5 Flash Live](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=id) | Dioptimalkan untuk agen percakapan real-time dengan streaming audio native kurang dari satu detik. | ``` gemini-2.5-flash-native-audio-preview-12-2025 ``` |
+| [Gemini 2.5 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=id) | Pembuatan audio text-to-speech yang dapat dikontrol dengan kontrol yang akurat atas gaya dan tempo. | ``` gemini-2.5-flash-preview-tts ``` |
 
 ## Gemini 2.5 Flash-Lite
 
-| 模型 | 说明 | 端点 |
+| Model | Deskripsi | Endpoint |
 | --- | --- | --- |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-cn) | 2.5 系列中最快且最具预算友好性的多模态模型。 | ``` gemini-2.5-flash-lite ``` |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=id) | Model multimodal tercepat dan paling hemat dalam keluarga 2.5. | ``` gemini-2.5-flash-lite ``` |
 
 ## Gemini 2.5 Pro
 
-| 模型 | 说明 | 端点 |
+| Model | Deskripsi | Endpoint |
 | --- | --- | --- |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-cn) | Google 旗下最先进的模型，可用于处理复杂任务，在 2.5 系列中具有出色的深度推理和编码能力。 | ``` gemini-2.5-pro ``` |
-| [Gemini 2.5 Pro TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=zh-cn) | 高保真语音合成，针对播客和有声读物等结构化工作流程中的质量进行了优化。 | ``` gemini-2.5-pro-preview-tts ``` |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=id) | Model tercanggih kami untuk tugas kompleks, yang menampilkan kemampuan penalaran dan coding yang mendalam dalam rangkaian model 2.5. | ``` gemini-2.5-pro ``` |
+| [Gemini 2.5 Pro TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=id) | Sintesis ucapan dengan fidelitas tinggi yang dioptimalkan untuk kualitas dalam alur kerja terstruktur seperti podcast dan buku audio. | ``` gemini-2.5-pro-preview-tts ``` |
 
-## 音频模型
+## Model audio
 
-*此部分包含所有音频模型，包括可能已在其他部分列出的模型*
+*Bagian ini berisi semua model audio, termasuk model yang mungkin sudah tercantum di bagian lain*
 
-| 模型 | 说明 | 端点 |
+| Model | Deskripsi | Endpoint |
 | --- | --- | --- |
-| [Gemini 3.1 Flash Live](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=zh-cn) | Google 的高品质低延迟音频转音频 (A2A) 模型，专为实时对话和语音优先 AI 应用而设计。 | ``` gemini-3.1-flash-live-preview ``` |
-| [Gemini 3.1 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=zh-cn) | 强大的低延迟语音生成能力，语音输出自然流畅，提示可引导，并新增了富有表现力的音频标记，可实现精准的旁白控制。 | ``` gemini-3.1-flash-tts-preview ``` |
-| [Gemini 2.5 Flash Live](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=zh-cn) | 我们的旗舰版 Live API 模型，适用于低延迟、双向语音和视频代理，具有原生音频推理功能。 | ``` gemini-2.5-flash-native-audio-preview-12-2025 ``` |
-| [Gemini 2.5 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=zh-cn) | 快速且可控的文字转语音功能，适用于低延迟、经济实惠的应用和实时助理。 | ``` gemini-2.5-flash-preview-tts ``` |
-| [Gemini 2.5 Pro TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=zh-cn) | 高保真语音合成，针对播客和有声读物等结构化工作流程中的质量进行了优化。 | ``` gemini-2.5-pro-preview-tts ``` |
+| [Gemini 3.1 Flash Live](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=id) | Model audio-ke-audio (A2A) berkualitas tinggi dan berlatensi rendah kami dirancang untuk dialog real-time dan aplikasi AI yang mengutamakan suara. | ``` gemini-3.1-flash-live-preview ``` |
+| [Gemini 3.1 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=id) | Pembuatan ucapan yang canggih dan berlatensi rendah, dengan output alami, perintah yang dapat diarahkan, dan tag audio ekspresif baru untuk kontrol narasi yang presisi. | ``` gemini-3.1-flash-tts-preview ``` |
+| [Gemini 2.5 Flash Live](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=id) | Model Live API unggulan kami untuk agen suara dan video dua arah dengan latensi rendah dan penalaran audio native. | ``` gemini-2.5-flash-native-audio-preview-12-2025 ``` |
+| [Gemini 2.5 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=id) | Text-to-speech yang cepat dan mudah dikontrol untuk aplikasi latensi rendah, hemat biaya, dan asisten real-time. | ``` gemini-2.5-flash-preview-tts ``` |
+| [Gemini 2.5 Pro TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=id) | Sintesis ucapan dengan fidelitas tinggi yang dioptimalkan untuk kualitas dalam alur kerja terstruktur seperti podcast dan buku audio. | ``` gemini-2.5-pro-preview-tts ``` |
 
-## 生成式媒体模型
+## Model media generatif
 
-*此部分包含所有生成式媒体模型，包括可能已在其他部分列出的模型*
+*Bagian ini berisi semua model media generatif, termasuk model yang mungkin sudah tercantum di bagian lain*
 
-| 模型 | 说明 | 端点 |
+| Model | Deskripsi | Endpoint |
 | --- | --- | --- |
-| [Nano Banana 2](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=zh-cn) | 高效的生产级视觉内容创作，将 Gemini 3 系列的智能与极快的生成速度相结合。 | ``` gemini-3.1-flash-image ``` |
-| [Nano Banana 2 Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=zh-cn) | 作为图像生成系列中的效率专家，可提供超低延迟且经济实惠的图像生成和编辑功能。 | ``` gemini-3.1-flash-lite-image ``` |
-| [Veo 3.1](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=zh-cn) | 前沿电影级视频生成功能，支持高级创意控制和原生同步音频。 | ``` veo-3.1-generate-preview ``` |
-| [Nano Banana Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=zh-cn) | 一款专业的设计引擎，具有推理核心，可实现影棚级 4K 视觉效果、复杂布局和精准的文字渲染。 | ``` gemini-3-pro-image ``` |
-| [Veo 3.1 Lite](https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=zh-cn) | Veo 3.1 系列产品可高效、低成本地为开发者提供视频生成、编辑和电影级控制功能。 | ``` veo-3.1-lite-generate-preview ``` |
-| [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=zh-cn) | 快速生成和编辑视频，并支持对话式操作。将文字和图片转换为视频，并通过自然语言优化结果。 | ``` gemini-omni-flash ``` |
-| [Nano Banana](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=zh-cn) | 前沿的原生图片生成和编辑功能，专为快速创意工作流而设计。 | ``` gemini-2.5-flash-image ``` |
-| [Imagen 4（已弃用）](https://ai.google.dev/gemini-api/docs/models/imagen?hl=zh-cn) | 文生图模型，可快速和超快速生成图片，清晰度最高可达 2K 分辨率。 | ``` imagen-4.0-generate ``` |
+| [Nano Banana 2](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=id) | Pembuatan visual skala produksi yang sangat efisien, yang menggabungkan kecerdasan seri Gemini 3 dengan kecepatan pembuatan yang sangat cepat. | ``` gemini-3.1-flash-image ``` |
+| [Nano Banana 2 Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=id) | Dirancang sebagai spesialis efisiensi dalam keluarga pembuatan gambar, yang menawarkan latensi ultra-rendah serta pembuatan dan pengeditan gambar yang hemat biaya. | ``` gemini-3.1-flash-lite-image ``` |
+| [Veo 3.1](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=id) | Pembuatan video sinematik canggih dengan kontrol kreatif lanjutan dan audio yang disinkronkan secara alami. | ``` veo-3.1-generate-preview ``` |
+| [Nano Banana Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=id) | Mesin desain profesional dengan inti penalaran untuk visual 4K berkualitas studio, tata letak yang kompleks, dan rendering teks yang presisi. | ``` gemini-3-pro-image ``` |
+| [Veo 3.1 Lite](https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=id) | Pembuatan dan pengeditan video yang efisien, berbiaya rendah, dan mengutamakan developer, serta kontrol sinematik dari keluarga Veo 3.1. | ``` veo-3.1-lite-generate-preview ``` |
+| [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=id) | Pembuatan dan pengeditan video yang cepat dan percakapan. Ubah teks dan gambar menjadi video, dan sempurnakan hasil melalui bahasa alami. | ``` gemini-omni-flash ``` |
+| [Nano Banana](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=id) | Pembuatan dan pengeditan gambar native canggih yang dirancang untuk alur kerja yang cepat dan kreatif. | ``` gemini-2.5-flash-image ``` |
+| [Imagen 4 (Tidak digunakan lagi)](https://ai.google.dev/gemini-api/docs/models/imagen?hl=id) | Model text-to-image yang menampilkan pembuatan cepat dan sangat cepat serta kejernihan luar biasa hingga resolusi 2K. | ``` imagen-4.0-generate ``` |
 
-## 音乐创作模型
+## Model pembuatan musik
 
-*此部分包含所有音乐创作模型，包括可能已在其他部分中列出的模型*
+*Bagian ini berisi semua model pembuatan musik, termasuk model yang mungkin sudah tercantum di bagian lain*
 
-| 模型 | 说明 | 端点 |
+| Model | Deskripsi | Endpoint |
 | --- | --- | --- |
-| [Lyria 3 Pro](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=zh-cn) | Google 的旗舰级音乐创作模型，经过优化，可生成结构连贯的完整歌曲。 | ``` lyria-3-pro-preview ``` |
-| [Lyria 3 Clip](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=zh-cn) | 经过优化，可生成时长不超过 30 秒的短音乐片段、循环播放片段和预览片段。 | ``` lyria-3-clip-preview ``` |
-| [Lyria RealTime](https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=zh-cn) | 高保真音乐生成模型，可提供精细的创作控制和实时流式传输功能。 | ``` lyria-realtime-exp ``` |
+| [Lyria 3 Pro](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=id) | Model pembuatan musik unggulan kami, yang dioptimalkan untuk lagu berdurasi penuh dengan koherensi struktural yang kompleks. | ``` lyria-3-pro-preview ``` |
+| [Klip Lyria 3](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=id) | Dioptimalkan untuk membuat klip musik pendek, loop, dan pratinjau hingga 30 detik. | ``` lyria-3-clip-preview ``` |
+| [Lyria RealTime](https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=id) | Model pembuatan musik dengan fidelitas tinggi yang menyediakan kontrol kreatif terperinci dan kemampuan streaming real-time. | ``` lyria-realtime-exp ``` |
 
-## 工具和代理模型
+## Model alat dan agen
 
-| 模型 | 说明 | 端点 |
+| Model | Deskripsi | Endpoint |
 | --- | --- | --- |
-| [计算机使用](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=zh-cn) | 一种可以“看到”数字屏幕并执行点击、输入和导航等界面操作的专用模型，可自动执行复杂的浏览器任务。 | ``` gemini-2.5-computer-use-preview-10-2025 ``` |
-| [Gemini Deep Research](https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=zh-cn) | 一种智能体模型，可自主规划和执行跨数百个来源的多步研究，以生成注明引用来源的交互式报告。 | ``` deep-research-preview-04-2026 ``` |
-| [Gemini Deep Research Max](https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=zh-cn) | 可自动从数百个来源收集和整合上下文信息，实现最全面的信息覆盖。 | ``` deep-research-max-preview-04-2026 ``` |
-| [Antigravity Agent](https://ai.google.dev/gemini-api/docs/models/antigravity-preview-05-2026?hl=zh-cn) | 一种通用型托管式智能体，可在安全、隔离的 Linux 沙盒中自主规划、推理、运行代码、管理文件和浏览网页。 | ``` antigravity-preview-05-2026 ``` |
+| [Penggunaan Komputer](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=id) | Model khusus yang dapat "melihat" layar digital dan melakukan tindakan UI seperti mengklik, mengetik, dan membuka untuk mengotomatiskan tugas browser yang kompleks. | ``` gemini-2.5-computer-use-preview-10-2025 ``` |
+| [Deep Research Gemini](https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=id) | Model agentic yang secara mandiri merencanakan dan menjalankan riset multilangkah di ratusan sumber untuk menghasilkan laporan interaktif yang disertai kutipan. | ``` deep-research-preview-04-2026 ``` |
+| [Gemini Deep Research Max](https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=id) | Komprehensivitas maksimum untuk pengumpulan dan sintesis konteks otomatis di ratusan sumber. | ``` deep-research-max-preview-04-2026 ``` |
+| [Agen Antigravity](https://ai.google.dev/gemini-api/docs/models/antigravity-preview-05-2026?hl=id) | Agen terkelola serbaguna yang secara mandiri merencanakan, melakukan penalaran, menjalankan kode, mengelola file, dan menjelajahi web di dalam sandbox Linux yang aman dan terisolasi. | ``` antigravity-preview-05-2026 ``` |
 
-## 专业任务模型
+## Model tugas khusus
 
-| 模型 | 说明 | 端点 |
+| Model | Deskripsi | Endpoint |
 | --- | --- | --- |
-| [Gemini Embedding 2](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=zh-cn) | Google 的首款多模态嵌入模型，可将文本、图片、视频、音频和 PDF 映射到统一的嵌入空间中，以用于高级语义搜索和 RAG 系统。 | ``` gemini-embedding-2-preview ``` |
-| [Gemini Embedding](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-001?hl=zh-cn) | 用于高级语义搜索、文本分类和 RAG 系统的高维向量表示法。 | ``` gemini-embedding-001 ``` |
-| [Gemini Robotics ER 2](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=zh-cn) | 一种具身推理模型，可提供高级视频理解、空间推理、多步工具编排和多机器人协作功能，以完成机器人任务。 | ``` gemini-robotics-er-2-preview ``` |
-| [Gemini Robotics ER 1.6](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.6-preview?hl=zh-cn) | 先进的具身推理模型，可理解物理空间并为机器人代理规划多步任务，还具备读取仪器、改进空间和物理推理等新功能。 | ``` gemini-robotics-er-1.6-preview ``` |
+| [Gemini Embedding 2](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=id) | Model embedding multimodal pertama kami, yang memetakan teks, gambar, video, audio, dan PDF ke dalam ruang embedding terpadu untuk sistem RAG dan penelusuran semantik tingkat lanjut. | ``` gemini-embedding-2-preview ``` |
+| [Penyematan Gemini](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-001?hl=id) | Representasi vektor berdimensi tinggi untuk penelusuran semantik tingkat lanjut, klasifikasi teks, dan sistem RAG. | ``` gemini-embedding-001 ``` |
+| [Gemini Robotics ER 2](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=id) | Model penalaran terwujud yang memberikan pemahaman video tingkat lanjut, penalaran spasial, orkestrasi alat multilangkah, dan kolaborasi multirobot untuk tugas robotika. | ``` gemini-robotics-er-2-preview ``` |
+| [Gemini Robotics ER 1.6](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.6-preview?hl=id) | Model penalaran berwujud canggih yang memahami ruang fisik dan merencanakan tugas multi-langkah untuk agen robotik dengan kemampuan baru seperti pembacaan instrumen, penalaran spasial dan fisik yang lebih baik. | ``` gemini-robotics-er-1.6-preview ``` |
 
-## 之前的模型
+## Model sebelumnya
 
-| 模型 | 说明 | 端点 |
+| Model | Deskripsi | Endpoint |
 | --- | --- | --- |
-| [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=zh-cn)（已关闭） | 我们的第二代主力模型，具备新一代特性和改进功能，包括卓越的速度、原生工具使用和 100 万个 token 的上下文窗口。 | ``` gemini-2.0-flash ``` |
-| [Gemini 2.0 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash-lite?hl=zh-cn)（已关闭） | Google 速度最快的第二代模型，经过优化，提高了成本效益并缩短了延迟时间。 | ``` gemini-2.0-flash-lite ``` |
-| [Gemini 3.1 Flash-Lite 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=zh-cn)（已关闭） | Google 最具成本效益的多模态模型，可为高频轻量级任务提供最快的性能。 | ``` gemini-3.1-flash-lite-preview ``` |
-| [Gemini 3 Pro 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-preview?hl=zh-cn)（已关闭） | 我们前沿的推理模型，具有先进的多模态理解能力。 | ``` gemini-3-pro-preview ``` |
+| [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=id) (Dihentikan) | Model andalan generasi kedua kami, dengan fitur generasi berikutnya dan kemampuan yang ditingkatkan, termasuk kecepatan yang lebih tinggi, penggunaan alat native, dan jendela konteks 1 juta token. | ``` gemini-2.0-flash ``` |
+| [Gemini 2.0 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash-lite?hl=id) (Ditutup) | Model generasi kedua tercepat kami, yang dioptimalkan untuk efisiensi biaya dan latensi rendah. | ``` gemini-2.0-flash-lite ``` |
+| [Pratinjau Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=id) (Ditutup) | Model multimodal kami yang paling hemat biaya, yang menawarkan performa tercepat untuk tugas ringan berfrekuensi tinggi. | ``` gemini-3.1-flash-lite-preview ``` |
+| [Pratinjau Gemini 3 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-preview?hl=id) (Ditutup) | Model penalaran canggih kami, dengan pemahaman multimodal tingkat lanjut. | ``` gemini-3-pro-preview ``` |
 
-## 模型版本名称模式
+## Pola nama versi model
 
-Gemini 模型有*稳定版*、*预览版*、*最新版*或*实验版*。
+Model Gemini tersedia dalam versi *stabil*, *pratinjau*, *terbaru*, atau *eksperimental*.
 
-### 稳定
+### Stabil
 
-指向特定的稳定模型。稳定模型通常不会发生变化。大多数正式版应用都应使用特定的稳定模型。
+Menunjuk ke model stabil tertentu. Model stabil biasanya tidak berubah. Sebagian besar aplikasi produksi harus menggunakan model stabil tertentu.
 
-例如：`gemini-3.6-flash`。
+Misalnya: `gemini-3.6-flash`.
 
-### 预览
+### Pratinjau
 
-指向可用于生产的预览版模型。预览版模型通常会启用结算功能，可能具有更严格的速率限制，并且会在至少提前 2 周通知的情况下被弃用。
+Menunjuk ke model pratinjau yang dapat digunakan untuk produksi. Model pratinjau biasanya mengaktifkan penagihan, mungkin memiliki batas frekuensi yang lebih ketat, dan akan dihentikan dengan pemberitahuan minimal 2 minggu sebelumnya.
 
-例如：`gemini-2.5-flash-preview-09-2025`。
+Misalnya: `gemini-2.5-flash-preview-09-2025`.
 
-### 最新
+### Terbaru
 
-指向特定模型变体的最新版本。可以是稳定版、预览版或实验版。此别名将随着特定型号变体的每次新发布而进行热交换。对于破坏性更改，我们会在版本落后于最新版本之前通过电子邮件提供**两周的通知**。
+Menunjuk ke rilis terbaru untuk variasi model tertentu. Rilis ini dapat berupa rilis stabil, pratinjau, atau eksperimental. Alias ini akan diganti secara langsung dengan
+setiap rilis baru variasi model tertentu. Untuk perubahan yang dapat menyebabkan gangguan, **pemberitahuan 2 minggu** akan diberikan melalui email sebelum versi yang tidak terbaru diubah.
 
-例如：`gemini-flash-latest`。
+Misalnya: `gemini-flash-latest`.
 
-### 实验性
+### Eksperimental
 
-指向实验性模型，该模型通常不适合用于生产环境，并且速率限制更为严格。我们会发布实验性模型，以便收集反馈并快速将最新更新交付给开发者。
+Menunjuk ke model eksperimental yang biasanya tidak cocok untuk penggunaan produksi dan memiliki batas kecepatan yang lebih ketat. Kami merilis model eksperimental untuk mengumpulkan masukan dan memberikan update terbaru kami kepada developer dengan cepat.
 
-实验性模型不稳定，模型端点的可用性可能会发生变化。
+Model eksperimental tidak stabil dan ketersediaan endpoint model dapat berubah.
 
-## 模型弃用
+## Penghentian penggunaan model
 
-如需了解模型弃用，请访问 [Gemini 弃用](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn)页面。
+Untuk mengetahui informasi tentang penghentian penggunaan model, buka halaman [Penghentian penggunaan Gemini](https://ai.google.dev/gemini-api/docs/deprecations?hl=id).
 
-发送反馈
+Kirim masukan
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-最后更新时间 (UTC)：2026-08-04。
+Terakhir diperbarui pada 2026-08-04 UTC.
 
-需要向我们提供更多信息？
+Ada masukan untuk kami?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-08-04。"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-08-04 UTC."],[],[]]

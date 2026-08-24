@@ -1,37 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/function-calling?hl=pl
-fetched_at: 2026-08-17T02:25:52.834273+00:00
-title: "Wywo\u0142ywanie funkcji za pomoc\u0105 interfejsu Gemini API \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/function-calling?hl=ja
+fetched_at: 2026-08-24T02:23:46.666820+00:00
+title: "Gemini API \u3092\u4f7f\u7528\u3057\u305f\u95a2\u6570\u547c\u3073\u51fa\u3057 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Prześlij opinię
+フィードバックを送信
 
-# Wywoływanie funkcji za pomocą interfejsu Gemini API
+# Gemini API を使用した関数呼び出し
 
-Wywoływanie funkcji umożliwia łączenie modeli z narzędziami zewnętrznymi i interfejsami API.
-Zamiast generować odpowiedzi tekstowe, model określa, kiedy wywołać określone funkcje, i podaje niezbędne parametry do wykonania działań w rzeczywistym świecie.
-Dzięki temu model może stanowić pomost między językiem naturalnym a rzeczywistymi działaniami i danymi. Wywoływanie funkcji ma 3 główne zastosowania:
+関数呼び出しを使用すると、モデルを外部ツールや API に接続できます。テキスト レスポンスを生成する代わりに、モデルは特定の関数を呼び出すタイミングを判断し、現実世界のアクションを実行するために必要なパラメータを提供します。これにより、モデルは自然言語と現実世界のアクションやデータとの間の橋渡しとして機能できます。関数呼び出しには、次の 3 つの主なユースケースがあります。
 
-- [**Podejmowanie działań:**](#meeting) wchodzenie w interakcje z systemami zewnętrznymi za pomocą interfejsów API, np. planowanie spotkań, tworzenie faktur, wysyłanie e-maili czy sterowanie inteligentnymi urządzeniami domowymi.
-- [**Wzbogacanie wiedzy:**](#weather) dostęp do informacji ze źródeł zewnętrznych, takich jak bazy danych, interfejsy API i bazy wiedzy.
-- [**Rozszerzanie możliwości:**](#chart) używaj narzędzi zewnętrznych do wykonywania obliczeń i przekraczania ograniczeń modelu, np. korzystaj z kalkulatora lub twórz wykresy.
+- [**アクションを実行する:**](#meeting) API を使用して外部システムとやり取りします。たとえば、予定のスケジュール設定、請求書の作成、メールの送信、スマートホーム デバイスの制御などを行います。
+- [**知識の補強:**](#weather) データベース、API、ナレッジベースなどの外部ソースから情報にアクセスします。
+- [**機能の拡張:**](#chart) 外部ツールを使用して計算を行い、モデルの制限を拡張します（電卓の使用やグラフの作成など）。
 
-Przykłady tych przypadków użycia znajdziesz poniżej:
+これらのユースケースの例については、以下をご覧ください。
 
-### Zaplanuj spotkanie
+### 会議のスケジュール
 
-Ten przykład pokazuje, jak zdefiniować funkcję, która planuje spotkanie z uczestnikami o określonej godzinie, umożliwiając modelowi analizowanie żądań użytkowników i zwracanie uporządkowanych argumentów w celu wywoływania działań w systemach zewnętrznych.
+この例では、特定の時間に会議をスケジュールする関数を定義する方法を示します。これにより、モデルはユーザー リクエストを解析し、構造化された引数を返して外部システムでアクションをトリガーできます。
 
 ### Python
 
@@ -209,9 +207,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-### Pobierz pogodę
+### 天気情報を取得する
 
-Ten przykład pokazuje, jak zdefiniować funkcję, która pobiera dane o temperaturze w danej lokalizacji, umożliwiając modelowi wywoływanie zewnętrznych interfejsów API w celu odpowiadania na zapytania wymagające informacji w czasie rzeczywistym lub informacji zewnętrznych.
+この例では、ある場所の気温データを取得する関数を定義する方法を示します。これにより、モデルはリアルタイムまたは外部情報を必要とするクエリに回答するために外部 API を呼び出すことができます。
 
 ### Python
 
@@ -350,9 +348,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-### Utwórz wykres
+### グラフを作成
 
-Ten przykład pokazuje, jak zdefiniować funkcję, która generuje wykres słupkowy na podstawie danych strukturalnych. Pokazuje on, jak model może używać narzędzi zewnętrznych do wykonywania obliczeń lub tworzenia zasobów wizualnych:
+次の例は、構造化データから棒グラフを生成する関数を定義する方法を示しています。この例では、モデルが外部ツールを使用して計算を実行したり、ビジュアル アセットを作成したりする方法を示しています。
 
 ### Python
 
@@ -522,27 +520,26 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-## Jak działa wywoływanie funkcji
+## 関数呼び出しの仕組み
 
-![wywoływanie funkcji
-omówienie](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=pl)
+![関数呼び出しの概要](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=ja)
 
-Wywoływanie funkcji obejmuje strukturalną interakcję między aplikacją, modelem i funkcjami zewnętrznymi. Oto zestawienie procesu:
+関数呼び出しでは、アプリケーション、モデル、外部関数間の構造化されたやり取りが行われます。プロセスの詳細は次のとおりです。
 
-1. **Zdefiniuj deklarację funkcji:** zdefiniuj deklarację funkcji w kodzie aplikacji. Deklaracje funkcji opisują nazwę, parametry i przeznaczenie funkcji dla modelu.
-2. **Wywoływanie interfejsu API za pomocą deklaracji funkcji:** wysyłaj do modelu prompt użytkownika wraz z deklaracjami funkcji. Analizuje żądanie i określa, czy wywołanie funkcji będzie przydatne. Jeśli tak, odpowiada uporządkowanym obiektem JSON zawierającym nazwę funkcji, argumenty i unikalny identyfikator `id` (ten identyfikator `id` jest teraz zawsze zwracany przez interfejs API w przypadku modeli Gemini 3\*).
-3. **Wykonywanie kodu funkcji (Twoja odpowiedzialność):** model *nie* wykonuje samej funkcji. Obowiązkiem aplikacji jest przetworzenie odpowiedzi i sprawdzenie, czy zawiera ona wywołanie funkcji. Jeśli
-   - **Tak**: wyodrębnij nazwę, argumenty i `id` funkcji, a następnie wykonaj odpowiednią funkcję w aplikacji.
-   - **Nie:** model udzielił bezpośredniej odpowiedzi tekstowej na prompt (w przykładzie ten proces jest mniej podkreślony, ale jest możliwym wynikiem).
-4. **Utwórz przyjazną dla użytkownika odpowiedź:** jeśli funkcja została wykonana, przechwyć wynik i odeślij go do modelu, pamiętając o uwzględnieniu pasującego `id` w kolejnej turze rozmowy. Na podstawie wyniku wygeneruje ostateczną, przyjazną dla użytkownika odpowiedź, która będzie zawierać informacje z wywołania funkcji.
+1. **関数宣言を定義する:** アプリケーション コードで関数宣言を定義します。関数宣言は、関数の名前、パラメータ、目的をモデルに記述します。
+2. **関数宣言を使用して API を呼び出す:** ユーザーのプロンプトと関数宣言をモデルに送信します。リクエストを分析し、関数呼び出しが役立つかどうかを判断します。その場合、関数名、引数、一意の `id` を含む構造化 JSON オブジェクトで応答します（この `id` は、Gemini 3 モデルの API で常に返されるようになりました\*）。
+3. **関数コードの実行（ユーザーの責任）:** モデルは関数自体を実行しません。レスポンスを処理して関数呼び出しを確認するのは、アプリケーションの責任です。
+   - **はい**: 関数の名前、引数、`id` を抽出し、アプリケーション内の対応する関数を実行します。
+   - **いいえ:** モデルがプロンプトに直接テキスト レスポンスを提供しました（このフローは例ではあまり強調されていませんが、考えられる結果です）。
+4. **ユーザー フレンドリーなレスポンスを作成する:** 関数が実行された場合は、結果をキャプチャしてモデルに送り返し、会話の次のターンで一致する `id` を含めます。この結果を使用して、関数呼び出しからの情報を取り込んだ、ユーザーフレンドリーな最終的なレスポンスを生成します。
 
-Ten proces może się powtarzać wielokrotnie, co umożliwia złożone interakcje i przepływy pracy. Model obsługuje też wywoływanie wielu funkcji w ramach jednej tury ([równoległe wywoływanie funkcji](#parallel_function_calling)), sekwencyjnie ([kompozycyjne wywoływanie funkcji](#compositional_function_calling)) oraz za pomocą wbudowanych narzędzi Gemini ([korzystanie z wielu narzędzi](#native-tools)).
+このプロセスは複数回繰り返すことができ、複雑なインタラクションとワークフローが可能になります。このモデルは、1 回のターンで複数の関数を呼び出す（[並列関数呼び出し](#parallel_function_calling)）、順番に呼び出す（[構成関数呼び出し](#compositional_function_calling)）、組み込みの Gemini ツールを使用して呼び出す（[マルチツール使用](#native-tools)）こともサポートしています。
 
-\* **Zawsze mapuj identyfikatory funkcji:** Gemini 3 zawsze zwraca unikalny identyfikator funkcji z każdym wywołaniem funkcji.`id``functionCall` W odpowiedzi umieść dokładnie ten ciąg znaków `id`,`functionResponse` aby model mógł dokładnie przypisać wynik do pierwotnego żądania.
+\* **関数 ID を常にマッピング:** Gemini 3 は、すべての `functionCall` で一意の `id` を返すようになりました。モデルが結果を元のリクエストに正確にマッピングできるように、`functionResponse` にこの `id` を含めます。
 
-### Krok 1. Zdefiniuj deklarację funkcji
+### ステップ 1: 関数宣言を定義する
 
-Zdefiniuj w kodzie aplikacji funkcję i jej deklarację, które pozwolą użytkownikom ustawiać wartości światła i wysyłać żądania do interfejsu API. Funkcja ta może wywoływać usługi zewnętrzne lub interfejsy API.
+ユーザーが照明の値を設定して API リクエストを行うことができる関数とその宣言を、アプリのコード内で定義します。この関数は、外部サービスまたは API を呼び出す可能性があります。
 
 ### Python
 
@@ -623,9 +620,9 @@ function setLightValues(brightness, color_temp) {
 }
 ```
 
-### Krok 2. Wywołaj model z deklaracjami funkcji
+### ステップ 2: 関数宣言を使用してモデルを呼び出す
 
-Po zdefiniowaniu deklaracji funkcji możesz poprosić model o ich użycie. Analizuje prompt i deklaracje funkcji oraz decyduje, czy odpowiedzieć bezpośrednio, czy wywołać funkcję. Jeśli wywoływana jest funkcja, obiekt odpowiedzi będzie zawierać sugestię wywołania funkcji.
+関数宣言を定義したら、モデルにそれらを使用するように指示できます。プロンプトと関数宣言を分析し、直接応答するか関数を呼び出すかを決定します。関数が呼び出されると、レスポンス オブジェクトに関数呼び出しの候補が含まれます。
 
 ### Python
 
@@ -687,7 +684,7 @@ const response = await ai.models.generateContent({
 console.log(response.functionCalls[0]);
 ```
 
-Model zwraca następnie obiekt `functionCall` w schemacie zgodnym z OpenAPI, który określa, jak wywołać co najmniej jedną zadeklarowaną funkcję, aby odpowiedzieć na pytanie użytkownika.
+次に、モデルは、ユーザーの質問に回答するために宣言された 1 つ以上の関数を呼び出す方法を指定する OpenAPI 互換スキーマの `functionCall` オブジェクトを返します。
 
 ### Python
 
@@ -705,9 +702,9 @@ id='8f2b1a3c' args={'color_temp': 'warm', 'brightness': 25} name='set_light_valu
 }
 ```
 
-### Krok 3. Wykonaj kod funkcji set\_light\_values
+### ステップ 3: set\_light\_values 関数コードを実行する
 
-Wyodrębnij szczegóły wywołania funkcji z odpowiedzi modelu, przeanalizuj argumenty i wykonaj funkcję `set_light_values`.
+モデルのレスポンスから関数呼び出しの詳細を抽出し、引数を解析して、`set_light_values` 関数を実行します。
 
 ### Python
 
@@ -733,9 +730,9 @@ if (tool_call.name === 'set_light_values') {
 }
 ```
 
-### Krok 4. Utwórz przyjazną dla użytkownika odpowiedź z wynikiem funkcji i ponownie wywołaj model
+### ステップ 4: 関数結果を含むユーザー フレンドリーなレスポンスを作成し、モデルを再度呼び出す
 
-Na koniec wyślij wynik wykonania funkcji z powrotem do modelu, aby mógł on uwzględnić te informacje w ostatecznej odpowiedzi dla użytkownika.
+最後に、関数実行の結果をモデルに送り返します。モデルはこの情報をユーザーへの最終的なレスポンスに組み込みます。
 
 ### Python
 
@@ -788,57 +785,52 @@ const final_response = await ai.models.generateContent({
 console.log(final_response.text);
 ```
 
-To ostatni element procesu wywoływania funkcji. Modelowi udało się użyć funkcji
-`set_light_values` do wykonania działania, o które prosił użytkownik.
+これで、関数呼び出しフローが完了します。モデルは `set_light_values` 関数を使用して、ユーザーのリクエスト アクションを正常に実行しました。
 
-## Deklaracje funkcji
+## 関数宣言
 
-Gdy zaimplementujesz wywoływanie funkcji w prompcie, utworzysz obiekt `tools`, który zawiera co najmniej 1 obiekt `function declarations`. Funkcje definiujesz za pomocą kodu JSON, a konkretnie za pomocą [wybranego podzbioru](https://ai.google.dev/api/caching?hl=pl#Schema) formatu [schematu OpenAPI](https://spec.openapis.org/oas/v3.0.3#schemaw). Deklaracja pojedynczej funkcji może zawierać te parametry:
+プロンプトで関数呼び出しを実装する場合は、1 つ以上の `function declarations` を含む `tools` オブジェクトを作成します。関数は JSON を使用して定義します。具体的には、[OpenAPI スキーマ](https://spec.openapis.org/oas/v3.0.3#schemaw)形式の[サブセットを選択](https://ai.google.dev/api/caching?hl=ja#Schema)します。1 つの関数宣言に含めることができるパラメータは、次のとおりです。
 
-- `name` (ciąg znaków): unikalna nazwa funkcji (`get_weather_forecast`,
-  `send_email`). Używaj opisowych nazw bez spacji i znaków specjalnych (używaj podkreśleń lub notacji camelCase).
-- `description` (string): jasne i szczegółowe wyjaśnienie celu i możliwości funkcji. Jest to kluczowe, aby model wiedział, kiedy użyć funkcji. Podaj szczegółowe informacje i przykłady, jeśli to pomoże („Wyszukuje kina na podstawie lokalizacji i opcjonalnie tytułu filmu, który jest obecnie wyświetlany w kinach”).
-- `parameters` (obiekt): określa parametry wejściowe, których oczekuje funkcja.
-  - `type` (string): określa ogólny typ danych, np. `object`.
-  - `properties` (obiekt): zawiera listę poszczególnych parametrów, z których każdy ma:
-    - `type` (string): typ danych parametru, np. `string`, `integer`, `boolean, array`.
-    - `description` (string): opis przeznaczenia i formatu parametru. Podaj przykłady i ograniczenia („Miasto i stan, np. „San Francisco, CA” lub kod pocztowy, np. „95616””).
-    - `enum` (tablica, opcjonalnie): jeśli wartości parametru pochodzą ze stałego zbioru, użyj „enum”, aby wyświetlić listę dozwolonych wartości zamiast tylko opisywać je w opisie. Zwiększa to dokładność („enum”:
-      [„daylight”, „cool”, „warm”]).
-  - `required` (tablica): tablica ciągów znaków zawierająca nazwy parametrów, które są wymagane do działania funkcji.
+- `name`（文字列）: 関数の固有の名前（`get_weather_forecast`、`send_email`）。スペースや特殊文字を含まない説明的な名前を使用します（アンダースコアまたは camelCase を使用します）。
+- `description`（文字列）: 関数の目的と機能についての明確で詳細な説明。これは、モデルが関数を使用するタイミングを理解するために重要です。具体的で、必要に応じて例を挙げてください（「現在上映中の映画のタイトルと場所に基づいて映画館を検索します。」）。
+- `parameters`（オブジェクト）: 関数が想定する入力パラメータを定義します。
+  - `type`（文字列）: 全体的なデータ型（`object` など）を指定します。
+  - `properties`（オブジェクト）: 個々のパラメータを一覧表示します。各パラメータには次の情報が含まれます。
+    - `type`（文字列）: パラメータのデータ型（`string`、`integer`、`boolean, array` など）。
+    - `description`（文字列）: パラメータの目的と形式の説明。例と制約（「市区町村と都道府県（例: 「カリフォルニア州サンフランシスコ」）または郵便番号（例: 「95616」）」）を指定します。
+    - `enum`（配列、省略可）: パラメータ値が固定セットの場合、説明で説明するだけでなく、"enum" を使用して許容値をリストします。これにより、精度が向上します（「enum」: [「daylight」、「cool」、「warm」]）。
+  - `required`（配列）: 関数の動作に必須のパラメータ名を列挙した文字列の配列。
 
-Możesz też tworzyć `FunctionDeclarations` bezpośrednio z funkcji Pythona za pomocą `types.FunctionDeclaration.from_callable(client=client, callable=your_function)`.
+`types.FunctionDeclaration.from_callable(client=client, callable=your_function)` を使用して、Python 関数から `FunctionDeclarations` を直接構築することもできます。
 
-## Wywoływanie funkcji za pomocą modeli myślących
+## 思考モデルを使用した関数呼び出し
 
-Modele Gemini 3 i 2.5 wykorzystują wewnętrzny proces [„myślenia”](https://ai.google.dev/gemini-api/docs/thinking?hl=pl), aby analizować żądania. To znacznie poprawia skuteczność wywoływania funkcji, dzięki czemu model może lepiej określać, kiedy wywołać funkcję i których parametrów użyć. Interfejs Gemini API jest bezstanowy, więc modele używają [sygnatur myśli](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=pl), aby zachować kontekst w rozmowach wieloetapowych.
+Gemini 3 および 2.5 シリーズのモデルは、内部の「思考」プロセスを使用してリクエストを推論します。これにより、関数呼び出しのパフォーマンスが大幅に向上し、モデルが関数を呼び出すタイミングと使用するパラメータをより適切に判断できるようになります。Gemini API はステートレスであるため、モデルは[思考シグネチャ](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=ja)を使用して、マルチターン会話でコンテキストを維持します。
 
-Ta sekcja dotyczy zaawansowanego zarządzania sygnaturami myśli i jest potrzebna tylko wtedy, gdy ręcznie tworzysz żądania interfejsu API (np. za pomocą REST) lub manipulujesz historią rozmów.
+このセクションでは、思考シグネチャの高度な管理について説明します。このセクションは、API リクエストを手動で作成する場合（REST 経由など）や、会話履歴を操作する場合にのみ必要です。
 
-**Jeśli używasz [pakietów SDK Google GenAI](https://ai.google.dev/gemini-api/docs/libraries?hl=pl) (naszych oficjalnych bibliotek), nie musisz zarządzać tym procesem**. Zestawy SDK automatycznie wykonują niezbędne czynności, jak pokazano we wcześniejszym [przykładzie](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl#step-4).
+**[Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=ja)（Google の公式ライブラリ）を使用している場合は、このプロセスを管理する必要はありません**。SDK は、前の[例](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja#step-4)に示すように、必要な手順を自動的に処理します。
 
-### Ręczne zarządzanie historią rozmów
+### 会話履歴を手動で管理する
 
-Jeśli zmodyfikujesz historię rozmowy ręcznie, zamiast wysyłać [pełną poprzednią odpowiedź](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl#step-4), musisz prawidłowo obsłużyć znak `thought_signature` zawarty w odpowiedzi modelu.
+会話履歴を手動で変更する場合は、[以前の完全なレスポンス](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja#step-4)を送信する代わりに、モデルのターンに含まれる `thought_signature` を正しく処理する必要があります。
 
-Aby zachować kontekst modelu, postępuj zgodnie z tymi zasadami:
+モデルのコンテキストが保持されるように、次のルールに従ってください。
 
-- Zawsze odsyłaj `thought_signature` do modelu w oryginalnym [`Part`](https://ai.google.dev/api?hl=pl#request-body-structure).
-- **Zawsze uwzględniaj dokładny `id` z `function_call` w `function_response`, aby interfejs API mógł przypisać wynik do prawidłowego żądania.**
-- Nie łącz `Part` zawierającego podpis z `Part`, który go nie zawiera. To
-  zaburza kontekst pozycyjny myśli.
-- Nie łącz 2 elementów `Parts`, które zawierają podpisy, ponieważ ciągi znaków podpisu nie mogą być scalane.
+- 常に、元の [`Part`](https://ai.google.dev/api?hl=ja#request-body-structure) 内のモデルに `thought_signature` を送り返します。
+- **API が結果を正しいリクエストにマッピングできるように、`function_call` の正確な `id` を常に `function_response` に含めてください。**
+- シグネチャを含む `Part` と含まないものを結合しないでください。これにより、思考の位置コンテキストが損なわれます。
+- 署名文字列はマージできないため、両方に署名が含まれている 2 つの `Parts` を結合しないでください。
 
-#### Sygnatury myśli Gemini 3
+#### Gemini 3 の思考シグネチャ
 
-W Gemini 3 każdy [`Part`](https://ai.google.dev/api?hl=pl#request-body-structure) odpowiedzi modelu może zawierać podpis myśli.
-Zalecamy zwracanie sygnatur wszystkich typów `Part`, ale w przypadku wywoływania funkcji przekazywanie sygnatur myśli jest obowiązkowe. O ile nie manipulujesz historią rozmów ręcznie, pakiet Google GenAI SDK będzie automatycznie obsługiwać sygnatury myśli.
+Gemini 3 では、モデル レスポンスの [`Part`](https://ai.google.dev/api?hl=ja#request-body-structure) に思考シグネチャが含まれることがあります。一般に、すべての `Part` タイプからシグネチャを返すことをおすすめしますが、関数呼び出しでは思考シグネチャを返すことが必須です。会話履歴を手動で操作しない限り、Google GenAI SDK は思考シグネチャを自動的に処理します。
 
-Jeśli ręcznie manipulujesz historią rozmów, zapoznaj się ze stroną [Podpisy myśli](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=pl), aby uzyskać pełne wskazówki i szczegółowe informacje o obsłudze podpisów myśli w przypadku Gemini 3.
+会話履歴を手動で操作する場合は、[思考シグネチャ](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=ja)のページで、Gemini 3 の思考シグネチャの処理に関する完全なガイダンスと詳細を参照してください。
 
-##### Sprawdzanie podpisów myśli
+##### 思考シグネチャの検査
 
-Nie jest to konieczne do wdrożenia, ale możesz sprawdzić odpowiedź, aby zobaczyć `thought_signature` na potrzeby debugowania lub edukacyjne.
+実装には必要ありませんが、デバッグや学習のためにレスポンスを調べて `thought_signature` を確認できます。
 
 ### Python
 
@@ -866,13 +858,13 @@ if (part.thoughtSignature) {
 }
 ```
 
-Więcej informacji o ograniczeniach i używaniu sygnatur myśli oraz o modelach myślenia znajdziesz na stronie [Myślenie](https://ai.google.dev/gemini-api/docs/thinking?hl=pl#signatures).
+思考シグネチャの制限事項と使用方法、および思考モデル全般については、[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=ja#signatures)のページをご覧ください。
 
-## Równoległe wywoływanie funkcji
+## 並列関数呼び出し
 
-Oprócz wywoływania pojedynczych funkcji możesz też wywoływać wiele funkcji jednocześnie. Równoległe wywoływanie funkcji umożliwia wykonywanie wielu funkcji jednocześnie i jest używane, gdy funkcje nie są od siebie zależne. Jest to przydatne w sytuacjach takich jak zbieranie danych z wielu niezależnych źródeł, np. pobieranie szczegółów klientów z różnych baz danych, sprawdzanie poziomu zapasów w różnych magazynach lub wykonywanie wielu działań, takich jak przekształcenie mieszkania w dyskotekę.
+単一ターンの関数呼び出しに加えて、複数の関数を一度に呼び出すこともできます。並列関数呼び出しを使用すると、複数の関数を同時に実行できます。これは、関数が相互に依存していない場合に使用されます。これは、複数の独立したソースからデータを収集するシナリオ（異なるデータベースから顧客の詳細を取得する、さまざまな倉庫の在庫レベルを確認する、アパートをディスコに改造するなど複数のアクションを実行する）で役立ちます。
 
-Jeśli model inicjuje wiele wywołań funkcji w jednej turze, nie musisz zwracać obiektów `function_result` w tej samej kolejności, w jakiej zostały odebrane obiekty `function_call`. Interfejs Gemini API mapuje każdy wynik z powrotem na odpowiednie wywołanie za pomocą parametru `id` z danych wyjściowych modelu. Dzięki temu możesz wykonywać funkcje asynchronicznie i dołączać wyniki do listy po ich zakończeniu.
+モデルが 1 ターンで複数の関数呼び出しを開始する場合、`function_call` オブジェクトが受信された順序と同じ順序で `function_result` オブジェクトを返す必要はありません。Gemini API は、モデルの出力の `id` を使用して、各結果を対応する呼び出しにマッピングします。これにより、関数を非同期で実行し、完了した結果をリストに追加できます。
 
 ### Python
 
@@ -982,8 +974,7 @@ const dimLights = {
 };
 ```
 
-Skonfiguruj tryb wywoływania funkcji, aby umożliwić korzystanie ze wszystkich określonych narzędzi.
-Więcej informacji znajdziesz w artykule o [konfigurowaniu wywoływania funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl#function_calling_modes).
+指定されたすべてのツールを使用できるように関数呼び出しモードを構成します。詳細については、[関数呼び出しの構成](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja#function_calling_modes)をご覧ください。
 
 ### Python
 
@@ -1057,9 +1048,9 @@ for (const fn of response.functionCalls) {
 }
 ```
 
-Każdy z wydrukowanych wyników odzwierciedla pojedyncze wywołanie funkcji, o które poprosił model. Aby odesłać wyniki, umieść odpowiedzi w tej samej kolejności, w jakiej zostały przesłane w żądaniu.
+出力された結果はそれぞれ、モデルがリクエストした単一の関数呼び出しを反映しています。結果を返すには、リクエストされた順序と同じ順序でレスポンスを含めます。
 
-Pakiet Python SDK obsługuje [automatyczne wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl#automatic_function_calling_python_only), które automatycznie przekształca funkcje Pythona w deklaracje i obsługuje cykl wykonywania wywołań funkcji i odpowiedzi. Poniżej znajdziesz przykład dla przypadku użycia disco.
+Python SDK は、Python 関数を宣言に自動的に変換し、関数呼び出しの実行とレスポンスのサイクルを処理する[自動関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja#automatic_function_calling_python_only)をサポートしています。以下に、ディスコのユースケースの例を示します。
 
 ### Python
 
@@ -1122,15 +1113,15 @@ print(response.text)
 # I've turned on the disco ball, started playing loud and energetic music, and dimmed the lights to 50% brightness. Let's get this party started!
 ```
 
-## Wywoływanie funkcji kompozycyjnych
+## コンポジション関数呼び出し
 
-Kompozycyjne lub sekwencyjne wywoływanie funkcji umożliwia Gemini łączenie ze sobą wielu wywołań funkcji w celu realizacji złożonej prośby. Na przykład, aby odpowiedzieć na pytanie „Jaka jest temperatura w mojej bieżącej lokalizacji?”, interfejs Gemini API może najpierw wywołać funkcję `get_current_location()`, a potem funkcję `get_weather()`, która przyjmuje lokalizację jako parametr.
+構成関数呼び出しまたは順次関数呼び出しを使用すると、Gemini は複数の関数呼び出しを連結して、複雑なリクエストを満たすことができます。たとえば、「現在地の気温を教えて」という質問に答えるために、Gemini API は最初に `get_current_location()` 関数を呼び出し、次に位置情報をパラメータとして受け取る `get_weather()` 関数を呼び出すことがあります。
 
-Poniższy przykład pokazuje, jak zaimplementować wywoływanie funkcji kompozycyjnych za pomocą pakietu SDK Pythona i automatycznego wywoływania funkcji.
+次の例は、Python SDK と自動関数呼び出しを使用して、構成関数呼び出しを実装する方法を示しています。
 
 ### Python
 
-W tym przykładzie użyto funkcji automatycznego wywoływania funkcji w `google-genai`pakiecie Python SDK. Pakiet SDK automatycznie przekształca funkcje Pythona w wymagany schemat, wykonuje wywołania funkcji na żądanie modelu i wysyła wyniki z powrotem do modelu, aby dokończyć zadanie.
+この例では、`google-genai` Python SDK の自動関数呼び出し機能を使用します。SDK は、Python 関数を必要なスキーマに自動的に変換し、モデルからリクエストされたときに関数呼び出しを実行し、結果をモデルに送り返してタスクを完了します。
 
 ```
 import os
@@ -1169,9 +1160,9 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-**Oczekiwane dane wyjściowe**
+**想定される出力**
 
-Po uruchomieniu kodu zobaczysz, jak pakiet SDK koordynuje wywołania funkcji. Model najpierw wywołuje funkcję `get_weather_forecast`, otrzymuje temperaturę, a następnie wywołuje funkcję `set_thermostat_temperature` z prawidłową wartością na podstawie logiki w prompcie.
+コードを実行すると、SDK が関数呼び出しをオーケストレートしていることがわかります。モデルは最初に `get_weather_forecast` を呼び出し、Temperature を受け取ってから、プロンプトのロジックに基づいて正しい値で `set_thermostat_temperature` を呼び出します。
 
 ```
 Tool Call: get_weather_forecast(location=London)
@@ -1183,7 +1174,7 @@ OK. I've set the thermostat to 20°C.
 
 ### JavaScript
 
-Ten przykład pokazuje, jak używać pakietu SDK JavaScript/TypeScript do wywoływania funkcji kompozycyjnych za pomocą ręcznej pętli wykonywania.
+この例では、JavaScript/TypeScript SDK を使用して、手動実行ループで合成関数呼び出しを行う方法を示します。
 
 ```
 import { GoogleGenAI, Type } from "@google/genai";
@@ -1312,9 +1303,9 @@ while (true) {
 }
 ```
 
-**Oczekiwane dane wyjściowe**
+**想定される出力**
 
-Po uruchomieniu kodu zobaczysz, jak pakiet SDK koordynuje wywołania funkcji. Model najpierw wywołuje funkcję `get_weather_forecast`, otrzymuje temperaturę, a następnie wywołuje funkcję `set_thermostat_temperature` z prawidłową wartością na podstawie logiki w prompcie.
+コードを実行すると、SDK が関数呼び出しをオーケストレートしていることがわかります。モデルは最初に `get_weather_forecast` を呼び出し、Temperature を受け取ってから、プロンプトのロジックに基づいて正しい値で `set_thermostat_temperature` を呼び出します。
 
 ```
 Tool Call: get_weather_forecast(location=London)
@@ -1324,7 +1315,7 @@ Tool Response: {'status': 'success'}
 OK. It's 25°C in London, so I've set the thermostat to 20°C.
 ```
 
-Kompozycyjne wywoływanie funkcji to natywna funkcja [Live API](https://ai.google.dev/gemini-api/docs/live?hl=pl). Oznacza to, że Live API może obsługiwać wywoływanie funkcji podobnie jak pakiet SDK w Pythonie.
+コンポジション関数呼び出しは、ネイティブの [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ja) 機能です。つまり、Live API は Python SDK と同様に関数呼び出しを処理できます。
 
 ### Python
 
@@ -1364,16 +1355,14 @@ const tools = [
 await run(prompt, tools=tools, modality="AUDIO")
 ```
 
-## Tryby wywoływania funkcji
+## 関数呼び出しモード
 
-Interfejs Gemini API umożliwia kontrolowanie sposobu, w jaki model korzysta z udostępnionych narzędzi (deklaracji funkcji). Tryb możesz ustawić w sekcji`function_calling_config`.
+Gemini API を使用すると、モデルが提供されたツール（関数宣言）を使用する方法を制御できます。具体的には、.`function_calling_config` 内でモードを設定できます。
 
-- `VALIDATED`: domyślny tryb łączenia narzędzi (gdy włączone są też wbudowane narzędzia lub dane wyjściowe w formie strukturalnej). Model jest ograniczony do przewidywania wywołań funkcji lub języka naturalnego i zapewnia zgodność ze schematem funkcji. Jeśli nie podasz parametru `allowed_function_names`, model wybierze jedną z dostępnych deklaracji funkcji. Jeśli podano `allowed_function_names`, model wybiera z zestawu dozwolonych funkcji. Ten tryb zmniejsza liczbę nieprawidłowych wywołań funkcji (w porównaniu z trybem `AUTO`).
-- `AUTO`: domyślny tryb, gdy włączone jest tylko narzędzie function\_declarations.
-  Model decyduje, czy wygenerować odpowiedź w języku naturalnym, czy zaproponować wywołanie funkcji na podstawie prompta i kontekstu.
-- `ANY`: model jest ograniczony do zawsze przewidywania wywołania funkcji i zapewnia zgodność ze schematem funkcji. Jeśli nie podasz `allowed_function_names`, model może wybrać dowolną z podanych deklaracji funkcji.
-  Jeśli `allowed_function_names` jest podana jako lista, model może wybierać tylko funkcje z tej listy. Użyj tego trybu, gdy w przypadku każdego promptu wymagana jest odpowiedź wywołania funkcji (w stosownych przypadkach).
-- `NONE`: model *nie może* wywoływać funkcji. Jest to równoznaczne z wysłaniem żądania bez deklaracji funkcji. Użyj tej opcji, aby tymczasowo wyłączyć wywoływanie funkcji bez usuwania definicji narzędzi.
+- `VALIDATED`: ツール組み合わせのデフォルト モード（組み込みツールまたは構造化された出力も有効になっている場合）。モデルは、関数呼び出しまたは自然言語のいずれかを予測するように制約され、関数スキーマの準拠が保証されます。`allowed_function_names` が指定されていない場合、モデルは使用可能なすべての関数宣言から選択します。`allowed_function_names` が指定されている場合、モデルは許可された関数のセットから選択します。このモードでは、不正な関数呼び出しが減少します（`AUTO` モードと比較して）。
+- `AUTO`: function\_declarations ツールのみが有効になっている場合のデフォルト モード。モデルは、プロンプトとコンテキストに基づいて、自然言語によるレスポンスを生成するか、関数呼び出しを提案するかを決定します。
+- `ANY`: モデルは常に関数呼び出しを予測するように制約され、関数スキーマの準拠が保証されます。`allowed_function_names` が指定されていない場合、モデルは指定された関数宣言のいずれかを選択できます。`allowed_function_names` がリストとして指定されている場合、モデルはそのリスト内の関数からのみ選択できます。すべてのプロンプトに関数呼び出しのレスポンスが必要な場合は、このモードを使用します（該当する場合）。
+- `NONE`: モデルは関数呼び出しを行うことが*禁止*されています。これは、関数宣言なしでリクエストを送信するのと同じです。これを使用すると、ツール定義を削除せずに関数呼び出しを一時的に無効にできます。
 
 ### Python
 
@@ -1414,18 +1403,16 @@ const config = {
 };
 ```
 
-## Automatyczne wywoływanie funkcji (tylko Python)
+## 自動関数呼び出し（Python のみ）
 
-Jeśli używasz pakietu Python SDK, możesz udostępniać funkcje Pythona bezpośrednio jako narzędzia.
-Pakiet SDK przekształca te funkcje w deklaracje, zarządza wykonywaniem wywołań funkcji i obsługuje cykl odpowiedzi. Zdefiniuj funkcję za pomocą wskazówek dotyczących typu i ciągu dokumentującego. Aby uzyskać optymalne wyniki, zalecamy używanie [ciągów dokumentujących w stylu Google](https://google.github.io/styleguide/pyguide.html#383-functions-and-methods).
-Pakiet SDK automatycznie:
+Python SDK を使用する場合は、Python 関数をツールとして直接指定できます。SDK はこれらの関数を宣言に変換し、関数呼び出しの実行を管理し、レスポンス サイクルを処理します。型ヒントと docstring を使用して関数を定義します。最適な結果を得るには、[Google スタイルの docstring](https://google.github.io/styleguide/pyguide.html#383-functions-and-methods) を使用することをおすすめします。SDK は、次の処理を自動的に行います。
 
-1. wykrywać odpowiedzi modelu na wywołanie funkcji;
-2. Wywołaj w kodzie odpowiednią funkcję Pythona.
-3. Wyślij odpowiedź funkcji z powrotem do modelu.
-4. Zwraca ostateczną odpowiedź tekstową modelu.
+1. モデルからの関数呼び出しレスポンスを検出します。
+2. コードで対応する Python 関数を呼び出します。
+3. 関数のレスポンスをモデルに送り返します。
+4. モデルの最終的なテキスト レスポンスを返します。
 
-Pakiet SDK nie analizuje obecnie opisów argumentów w celu umieszczenia ich w polach opisu właściwości wygenerowanej deklaracji funkcji. Zamiast tego wysyła cały ciąg dokumentu jako opis funkcji najwyższego poziomu.
+現在、SDK は引数の説明を解析して、生成された関数宣言のプロパティの説明スロットに格納しません。代わりに、docstring 全体を最上位の関数説明として送信します。
 
 ### Python
 
@@ -1462,7 +1449,7 @@ response = client.models.generate_content(
 print(response.text)  # The SDK handles the function call and returns the final text
 ```
 
-Automatyczne wywoływanie funkcji możesz wyłączyć za pomocą tego kodu:
+自動関数呼び出しは、次のコマンドで無効にできます。
 
 ### Python
 
@@ -1473,9 +1460,9 @@ config = types.GenerateContentConfig(
 )
 ```
 
-### Automatyczna deklaracja schematu funkcji
+### 関数スキーマの自動宣言
 
-Interfejs API może opisywać dowolny z tych typów. Dozwolone są typy `Pydantic`, o ile zdefiniowane w nich pola również składają się z dozwolonych typów. Typy słownikowe (np. `dict[str: int]`) nie są tutaj dobrze obsługiwane, więc nie używaj ich.
+API は次のいずれかの型を記述できます。`Pydantic` 型は、定義されたフィールドも許可された型で構成されている限り許可されます。ここでは辞書型（`dict[str: int]` など）は十分にサポートされていないため、使用しないでください。
 
 ### Python
 
@@ -1484,7 +1471,7 @@ AllowedType = (
   int | float | bool | str | list['AllowedType'] | pydantic.BaseModel)
 ```
 
-Aby zobaczyć, jak wygląda wywnioskowany schemat, możesz go przekonwertować za pomocą tego polecenia:[`from_callable`](https://googleapis.github.io/python-genai/genai.html#genai.types.FunctionDeclaration.from_callable)
+推定スキーマを確認するには、[`from_callable`](https://googleapis.github.io/python-genai/genai.html#genai.types.FunctionDeclaration.from_callable) を使用して変換します。
 
 ### Python
 
@@ -1503,11 +1490,11 @@ fn_decl = types.FunctionDeclaration.from_callable(callable=multiply, client=clie
 print(fn_decl.to_json_dict())
 ```
 
-## Korzystanie z wielu narzędzi: łączenie wbudowanych narzędzi z wywoływaniem funkcji
+## マルチツールの使用: 組み込みツールと関数呼び出しを組み合わせる
 
-Możesz włączyć wiele narzędzi, łącząc narzędzia wbudowane z wywoływaniem funkcji w tym samym żądaniu.
+複数のツールを有効にして、同じリクエストで組み込みツールと関数呼び出しを組み合わせることができます。
 
-Modele Gemini 3 mogą łączyć wbudowane narzędzia z wywoływaniem funkcji od razu po wyjęciu z pudełka dzięki funkcji obiegu kontekstu narzędzia. Więcej informacji znajdziesz na stronie [Łączenie wbudowanych narzędzi i wywoływania funkcji](https://ai.google.dev/gemini-api/docs/tool-combination?hl=pl).
+Gemini 3 モデルは、ツール コンテキスト循環機能により、組み込みツールと関数呼び出しをすぐに組み合わせることができます。詳しくは、[組み込みツールと関数呼び出しの組み合わせ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ja)をご覧ください。
 
 ### Python
 
@@ -1649,21 +1636,20 @@ async function run() {
 run();
 ```
 
-W przypadku modeli starszych niż seria Gemini 3 użyj [interfejsu Live API](https://ai.google.dev/gemini-api/docs/live-api/tools?hl=pl).
+Gemini 3 シリーズより前のモデルでは、[Live API](https://ai.google.dev/gemini-api/docs/live-api/tools?hl=ja) を使用します。
 
-## Odpowiedzi funkcji multimodalnych
+## マルチモーダル関数レスポンス
 
-W przypadku modeli z serii Gemini 3 możesz uwzględniać treści multimodalne w częściach odpowiedzi funkcji, które wysyłasz do modelu. Model może przetworzyć te treści multimodalne w kolejnej turze, aby wygenerować bardziej przemyślaną odpowiedź.
-W przypadku treści multimodalnych w odpowiedziach funkcji obsługiwane są te typy MIME:
+Gemini 3 シリーズのモデルでは、モデルに送信する関数レスポンス部分にマルチモーダル コンテンツを含めることができます。モデルは、次のターンでこのマルチモーダル コンテンツを処理して、より多くの情報に基づいたレスポンスを生成できます。関数レスポンスのマルチモーダル コンテンツでは、次の MIME タイプがサポートされています。
 
-- **Grafika:** `image/png`, `image/jpeg`, `image/webp`
-- **Dokumenty:** `application/pdf`, `text/plain`
+- **画像**: `image/png`、`image/jpeg`、`image/webp`
+- **ドキュメント**: `application/pdf`、`text/plain`
 
-Aby uwzględnić dane multimodalne w odpowiedzi funkcji, dodaj je jako co najmniej 1 element zagnieżdżony w elemencie `functionResponse`. Każda część multimodalna musi zawierać `inlineData`. Jeśli odwołujesz się do komponentu multimodalnego z poziomu pola strukturalnego `response`, musi ono zawierać unikalny atrybut `displayName`.
+関数レスポンスにマルチモーダル データを含めるには、`functionResponse` 部分内にネストされた 1 つ以上の部分としてデータを含めます。各マルチモーダル部分には、`inlineData` を含める必要があります。構造化された `response` フィールド内からマルチモーダル パートを参照する場合は、一意の `displayName` を含める必要があります。
 
-Możesz też odwołać się do części multimodalnej w ramach strukturalnego `response`pola`functionResponse` części, używając formatu odwołania JSON`{"$ref": "<displayName>"}`. Podczas przetwarzania odpowiedzi model zastępuje odniesienie treściami multimodalnymi. Każdy element `displayName` może być przywoływany tylko raz w polu strukturalnym `response`.
+JSON 参照形式 `{"$ref": "<displayName>"}` を使用して、`functionResponse` 部分の構造化された `response` フィールド内からマルチモーダル部分を参照することもできます。モデルは、レスポンスの処理時に参照をマルチモーダル コンテンツに置き換えます。各 `displayName` は、構造化された `response` フィールドで 1 回だけ参照できます。
 
-Poniższy przykład pokazuje wiadomość zawierającą `functionResponse` dla funkcji o nazwie `get_image` i zagnieżdżoną część zawierającą dane obrazu z `displayName: "instrument.jpg"`. Pole `functionResponse`'s `response` odnosi się do tej części obrazu:
+次の例は、`get_image` という名前の関数の `functionResponse` と、`displayName: "instrument.jpg"` を含む画像データを含むネストされた部分を含むメッセージを示しています。`functionResponse` の `response` フィールドは、この画像部分を参照します。
 
 ### Python
 
@@ -1907,22 +1893,21 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-## Wywoływanie funkcji z uporządkowanymi danymi wyjściowymi
+## 構造化出力を使用した関数呼び出し
 
-W przypadku modeli z serii Gemini 3 możesz używać wywoływania funkcji z [danymi wyjściowymi w formacie strukturalnym](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl). Dzięki temu model może przewidywać wywołania funkcji lub dane wyjściowe zgodne z określonym schematem. Dzięki temu otrzymujesz odpowiedzi w spójnym formacie, gdy model nie generuje wywołań funkcji.
+Gemini 3 シリーズのモデルでは、[構造化された出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)で関数呼び出しを使用できます。これにより、モデルは特定のスキーマに準拠する関数呼び出しまたは出力を予測できます。その結果、モデルが関数呼び出しを生成しない場合でも、一貫した形式のレスポンスを受信できます。
 
-## Model Context Protocol (MCP)
+## モデル コンテキスト プロトコル（MCP）
 
-[Protokół Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) to otwarty standard łączenia aplikacji AI z narzędziami zewnętrznymi i danymi.
-MCP to wspólny protokół, który umożliwia modelom dostęp do kontekstu, takiego jak funkcje (narzędzia), źródła danych (zasoby) lub predefiniowane prompty.
+[Model Context Protocol（MCP）](https://modelcontextprotocol.io/introduction)は、AI アプリケーションを外部のツールやデータに接続するためのオープン スタンダードです。MCP は、モデルが関数（ツール）、データソース（リソース）、事前定義されたプロンプトなどのコンテキストにアクセスするための共通プロトコルを提供します。
 
-Pakiety SDK Gemini mają wbudowaną obsługę MCP, co zmniejsza ilość powtarzalnego kodu i umożliwia [automatyczne wywoływanie narzędzi](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl#automatic_function_calling_python_only) MCP. Gdy model wygeneruje wywołanie narzędzia MCP, pakiet SDK klienta w językach Python i JavaScript może automatycznie wykonać to narzędzie i odesłać odpowiedź do modelu w kolejnym żądaniu. Ta pętla będzie się powtarzać, dopóki model nie wygeneruje kolejnych wywołań narzędzi.
+Gemini SDK には MCP のサポートが組み込まれているため、ボイラープレート コードが削減され、MCP ツール用の[自動ツール呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja#automatic_function_calling_python_only)が提供されます。モデルが MCP ツール呼び出しを生成すると、Python と JavaScript のクライアント SDK は MCP ツールを自動的に実行し、後続のリクエストでレスポンスをモデルに送り返します。このループは、モデルがツール呼び出しを行わなくなるまで続きます。
 
-Tutaj znajdziesz przykład użycia lokalnego serwera MCP z Gemini i pakietem SDK`mcp`.
+Gemini と `mcp` SDK でローカル MCP サーバーを使用する方法の例については、こちらをご覧ください。
 
 ### Python
 
-Sprawdź, czy na wybranej platformie jest zainstalowana najnowsza wersja [`mcp` pakietu SDK](https://modelcontextprotocol.io/introduction).
+選択したプラットフォームに最新バージョンの [`mcp` SDK](https://modelcontextprotocol.io/introduction) がインストールされていることを確認します。
 
 ```
 pip install mcp
@@ -1975,7 +1960,7 @@ asyncio.run(run())
 
 ### JavaScript
 
-Sprawdź, czy na wybranej platformie masz zainstalowaną najnowszą wersję pakietu `mcp` SDK.
+選択したプラットフォームに最新バージョンの `mcp` SDK がインストールされていることを確認します。
 
 ```
 npm install @modelcontextprotocol/sdk
@@ -2023,75 +2008,75 @@ console.log(response.text)
 await client.close();
 ```
 
-### Ograniczenia wbudowanej obsługi MCP
+### 組み込みの MCP サポートの制限事項
 
-Wbudowana obsługa MCP to [eksperymentalna](https://ai.google.dev/gemini-api/docs/models?hl=pl#preview) funkcja w naszych pakietach SDK, która ma te ograniczenia:
+組み込みの MCP サポートは SDK の[試験運用版](https://ai.google.dev/gemini-api/docs/models?hl=ja#preview)の機能であり、次の制限があります。
 
-- Obsługiwane są tylko narzędzia, a nie zasoby ani prompty
-- Jest on dostępny w pakietach SDK w językach Python i JavaScript/TypeScript.
-- W kolejnych wersjach mogą wystąpić zmiany powodujące niezgodność.
+- ツールのみがサポートされ、リソースやプロンプトはサポートされません
+- これは、Python と JavaScript/TypeScript の SDK で使用できます。
+- 今後のリリースで破壊的変更が発生する可能性があります。
 
-Jeśli te ograniczenia utrudniają Ci tworzenie, zawsze możesz zintegrować serwery MCP ręcznie.
+これらの制限によって構築するものが制限される場合は、MCP サーバーの手動統合をいつでも選択できます。
 
-## Obsługiwane modele
+## サポートされているモデル
 
-W tej sekcji znajdziesz listę modeli i ich możliwości wywoływania funkcji. Nie obejmuje modeli eksperymentalnych. Szczegółowy przegląd możliwości znajdziesz na stronie [informacji o modelu](https://ai.google.dev/gemini-api/docs/models?hl=pl).
+このセクションでは、モデルとその関数呼び出し機能の一覧を示します。試験運用版のモデルは含まれていません。機能の包括的な概要については、[モデルの概要](https://ai.google.dev/gemini-api/docs/models?hl=ja)ページをご覧ください。
 
-| Model | Wywoływanie funkcji | Równoległe wywoływanie funkcji | Wywoływanie funkcji kompozycyjnych |
+| モデル | 関数呼び出し | 並列関数呼び出し | コンポジション関数呼び出し |
 | --- | --- | --- | --- |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=pl) | ✔️ | ✔️ | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=pl) | ✔️ | ✔️ | ✔️ |
-| [Gemini 3.1 Pro (wersja testowa)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=pl) | ✔️ | ✔️ | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=pl) | ✔️ | ✔️ | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=pl) | ✔️ | ✔️ | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=pl) | ✔️ | ✔️ | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=pl) | ✔️ | ✔️ | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=pl) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=ja) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=ja) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.1 Pro プレビュー版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ja) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ja) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ja) | ✔️ | ✔️ | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ja) | ✔️ | ✔️ | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ja) | ✔️ | ✔️ | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ja) | ✔️ | ✔️ | ✔️ |
 
-## Sprawdzone metody
+## ベスト プラクティス
 
-- **Opisy funkcji i parametrów:** opisy powinny być bardzo jasne i konkretne. Model korzysta z nich, aby wybrać odpowiednią funkcję i podać właściwe argumenty.
-- **Nazewnictwo:** używaj opisowych nazw funkcji (bez spacji, kropek ani myślników).
-- **Silne typowanie:** używaj konkretnych typów (liczba całkowita, ciąg znaków, wyliczenie) w przypadku parametrów, aby zmniejszyć liczbę błędów. Jeśli parametr ma ograniczony zestaw prawidłowych wartości, użyj wyliczenia.
-- **Wybór narzędzia:** model może używać dowolnej liczby narzędzi, ale podanie zbyt wielu może zwiększyć ryzyko wybrania nieprawidłowego lub nieoptymalnego narzędzia. Aby uzyskać najlepsze wyniki, staraj się udostępniać tylko odpowiednie narzędzia w kontekście danego zadania. Najlepiej, aby aktywny zestaw narzędzi nie przekraczał 10–20. Jeśli masz dużą łączną liczbę narzędzi, rozważ dynamiczne wybieranie narzędzi na podstawie kontekstu rozmowy.
-- **Inżynieria promptów:**
-  - Podaj kontekst: określ rolę modelu (np. „Jesteś pomocnym asystentem pogodowym”).
-  - Podaj instrukcje: określ, jak i kiedy używać funkcji (np. „Nie zgaduj dat. W przypadku prognoz zawsze używaj daty przyszłej”).
-  - Zachęcaj do wyjaśnień: poproś model, aby w razie potrzeby zadawał pytania wyjaśniające.
-  - Więcej strategii projektowania tych promptów znajdziesz w artykule [Przepływy pracy oparte na agentach](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=pl#agentic-workflows). Oto przykład przetestowanej [instrukcji systemowej](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=pl#agentic-si-template).
-- **Temperatura:** używaj niskiej temperatury (np. 0), aby uzyskać bardziej deterministyczne i niezawodne wywołania funkcji.
-- **Weryfikacja:** jeśli wywołanie funkcji ma istotne konsekwencje (np. złożenie zamówienia), przed jego wykonaniem poproś użytkownika o potwierdzenie.
-- **Sprawdź przyczynę zakończenia:** zawsze sprawdzaj [`finishReason`](https://ai.google.dev/api/generate-content?hl=pl#FinishReason) w odpowiedzi modelu, aby obsługiwać przypadki, w których model nie wygenerował prawidłowego wywołania funkcji.
-- **Obsługa błędów:** zaimplementuj w funkcjach niezawodną obsługę błędów, aby prawidłowo obsługiwać nieoczekiwane dane wejściowe lub awarie interfejsu API. Zwracaj informacyjne komunikaty o błędach, których model może używać do generowania przydatnych odpowiedzi dla użytkownika.
-- **Bezpieczeństwo:** zachowaj ostrożność podczas wywoływania zewnętrznych interfejsów API. Używaj odpowiednich mechanizmów uwierzytelniania i autoryzacji. Unikaj ujawniania danych wrażliwych w wywołaniach funkcji.
-- **Limity tokenów:** opisy funkcji i parametry wliczają się do limitu tokenów wejściowych. Jeśli osiągasz limity tokenów, rozważ ograniczenie liczby funkcji lub długości opisów albo podziel złożone zadania na mniejsze, bardziej szczegółowe zestawy funkcji.
-- **Połączenie narzędzi bash i niestandardowych**: dla osób, które korzystają z połączenia narzędzi bash i niestandardowych, Gemini 3.1 Pro (wersja testowa) udostępnia oddzielny punkt końcowy dostępny przez interfejs API o nazwie [`gemini-3.1-pro-preview-customtools`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=pl#gemini-31-pro-preview-customtools).
+- **関数とパラメータの説明:** 説明は非常に明確かつ具体的に記述します。モデルは、この説明に基づいて正しい関数を選択し、適切な引数を指定します。
+- **命名:** 説明的な関数名を使用します（スペース、ピリオド、ダッシュは使用しません）。
+- **強い型指定:** パラメータに特定の型（整数、文字列、列挙型）を使用して、エラーを減らします。パラメータの有効な値のセットが限られている場合は、列挙型を使用します。
+- **ツールの選択:** モデルでは任意の数のツールを使用できますが、ツールが多すぎると、誤ったツールや最適でないツールが選択されるリスクが高まる可能性があります。最良の結果を得るには、コンテキストやタスクに関連するツールのみを提供することを目指します。理想的には、アクティブなセットを最大 10 ～ 20 個に保ちます。ツールの合計数が多い場合は、会話のコンテキストに基づく動的なツール選択を検討してください。
+- **プロンプト エンジニアリング:**
+  - コンテキストを提供する: モデルに役割を伝えます（例: 「あなたは有能な天気予報アシスタントです。」）。
+  - 指示を出す: 関数をいつ、どのように使用するかを指定します（例: 「日付を推測しないでください。予測には常に将来の日付を使用してください。」）。
+  - 明確化を促す: 必要に応じて、明確化を求める質問をするようモデルに指示します。
+  - これらのプロンプトの設計に関するその他の戦略については、[エージェント ワークフロー](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ja#agentic-workflows)をご覧ください。テスト済みの[システム指示](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ja#agentic-si-template)の例を次に示します。
+- **Temperature:** より確定的で信頼性の高い関数呼び出しには、低い Temperature（0 など）を使用します。
+- **検証:** 関数呼び出しが重大な結果をもたらす場合（注文など）、それを実行する前にユーザーにその呼び出しの妥当性を確認してください。
+- **終了理由を確認する:** モデルのレスポンスで [`finishReason`](https://ai.google.dev/api/generate-content?hl=ja#FinishReason) を常に確認し、モデルが有効な関数呼び出しを生成できなかったケースを処理します。
+- **エラー処理**: 関数で堅牢なエラー処理を実装して、予期しない入力や API の障害を適切に処理します。モデルがユーザーに役立つ回答を生成するために使用できる、有益なエラー メッセージを返します。
+- **セキュリティ:** 外部 API を呼び出す際は、セキュリティに注意してください。適切な認証と認可のメカニズムを使用します。関数呼び出しでセンシティブ データを公開しないようにします。
+- **トークンの上限:** 関数の説明とパラメータは、入力トークンの上限にカウントされます。トークンの上限に達した場合は、関数の数や説明の長さを制限するか、複雑なタスクをより小さな、より集約された関数セットに分割することを検討してください。
+- **bash とカスタムツールの組み合わせ**: bash とカスタムツールの組み合わせで構築している場合、Gemini 3.1 Pro プレビューには、[`gemini-3.1-pro-preview-customtools`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ja#gemini-31-pro-preview-customtools) という API を介して利用できる個別のエンドポイントが付属しています。
 
-## Obejścia wymagań dotyczących tekstu przed narzędziem
+## ツール前のテキスト要件の回避策
 
-**Problem:** jeśli prompt wymaga od modelu wygenerowania tekstu strukturalnego (XML, YAML, JSON itp.). (np. `<UPDATE>...</UPDATE>`) bezpośrednio przed wywołaniem narzędzia, wywołanie narzędzia może czasami zakończyć się niepowodzeniem z błędem `Malformed_Function_Call`.
+**問題:** プロンプトでモデルに構造化テキスト（XML、YAML、JSON など）の出力を要求している場合（例: `<UPDATE>...</UPDATE>`）ツール呼び出しの直前に実行すると、ツール呼び出しが `Malformed_Function_Call` で失敗することがあります。
 
-**Rozwiązania:** ten problem można rozwiązać za pomocą tych obejść:
+**解決策:** この問題を解決するには、次の回避策を使用します。
 
-- **ZALECANE:** poinstruuj model, aby umieszczał notatki przed użyciem narzędzia w wywołaniu funkcji `update()` zamiast w postaci zwykłego tekstu (szczegóły poniżej).
-- Poproś model o zapisywanie notatek jako nagłówków Markdown (`# UPDATE`, `## PLAN`) zamiast tekstu strukturalnego.
-- Nie wymagaj od modelu generowania tekstu przed wywołaniami narzędzi.
+- **推奨:** モデルに、ツール前のメモを未加工のテキストではなく専用の `update()` 関数呼び出し内に配置するよう指示します（詳細は下記を参照）。
+- 構造化テキストではなく、マークダウン ヘッダー（`# UPDATE`、`## PLAN`）としてメモを作成するようにモデルに指示します。
+- ツール呼び出しの前にモデルがテキストを出力することを要求しないでください。
 
-### Preferowane obejście: umieść notatki robocze w wywołaniu funkcji
+### 推奨される回避策: 作業メモを専用の関数呼び出しでラップする
 
-Zamiast oryginalnej instrukcji:
+元の手順の代わりに、次の手順を行います。
 
 ```
 Before calling a tool, in every response you MUST first output a single `<UPDATE>` part as specified, don't skip this part or any of required sub-tags with<in `UP>DATE`.
 ```
 
-Skorzystaj z tej zaktualizowanej instrukcji:
+更新された手順は次のとおりです。
 
 ```
 Before calling any other tool, in every response you MUST first call `update` with all required parameters (previous_step, plan, next_step, external).
 ```
 
-i zaktualizować wszystkie odwołania do starego formatu XML `<UPDATE>` w żądaniu klienta. Następnie dodaj odpowiednią deklarację funkcji aktualizacji:
+また、顧客リクエスト内の古い `<UPDATE>` XML 形式への参照をすべて更新します。次に、更新関数に対応する関数宣言を追加します。
 
 ```
 {
@@ -2127,22 +2112,22 @@ i zaktualizować wszystkie odwołania do starego formatu XML `<UPDATE>` w żą
 }
 ```
 
-Następnie w tym samym kroku model wykona 2 wywołania: wywołanie `update()`, które zastępuje strukturalny kod XML, oraz rzeczywiste wywołanie funkcji, które chce wykonać.
+モデルは同じステップで 2 つの呼び出しを行います。構造化 XML を置き換える `update()` 呼び出しと、実際に行う関数呼び出しです。
 
-## Uwagi i ograniczenia
+## 注意と制限事項
 
-- Pozycjonowanie części wywołania funkcji: gdy używasz deklaracji funkcji niestandardowych [wraz z narzędziami wbudowanymi](https://ai.google.dev/gemini-api/docs/tool-combination?hl=pl) (takimi jak wyszukiwarka Google), model może w jednej turze zwracać części `functionCall`, `toolCall` i `toolResponse`. Z tego powodu nie zakładaj, że `functionCall` zawsze będzie ostatnim elementem w tablicy części. Jeśli ręcznie analizujesz odpowiedź JSON, zawsze iteruj po tablicy części, zamiast polegać na pozycji.
-- Obsługiwany jest tylko [podzbiór schematu OpenAPI](https://ai.google.dev/api/caching?hl=pl#FunctionDeclaration).
-- W przypadku trybu `ANY` interfejs API może odrzucać bardzo duże lub głęboko zagnieżdżone schematy. Jeśli napotkasz błędy, spróbuj uprościć schematy parametrów funkcji i odpowiedzi, skracając nazwy właściwości, zmniejszając zagnieżdżenie lub ograniczając liczbę deklaracji funkcji.
-- Obsługiwane typy parametrów w Pythonie są ograniczone.
-- Automatyczne wywoływanie funkcji jest dostępne tylko w pakiecie Python SDK.
+- 関数呼び出し部分の配置: カスタム関数宣言を[組み込みツール](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ja)（Google 検索など）とともに使用する場合、モデルは 1 つのターンで `functionCall`、`toolCall`、`toolResponse` の部分を組み合わせて返すことがあります。そのため、`functionCall` が常に parts 配列の最後の項目であるとは限りません。JSON レスポンスを手動で解析する場合は、位置に依存するのではなく、常に parts 配列を反復処理します。
+- [OpenAPI スキーマのサブセット](https://ai.google.dev/api/caching?hl=ja#FunctionDeclaration)のみがサポートされています。
+- `ANY` モードの場合、API は非常に大きなスキーマやネストが深いスキーマを拒否することがあります。エラーが発生した場合は、プロパティ名を短くしたり、ネストを減らしたり、関数宣言の数を制限したりして、関数パラメータとレスポンス スキーマを簡素化してみてください。
+- Python でサポートされているパラメータの型は限られています。
+- 自動関数呼び出しは Python SDK の機能です。
 
-Prześlij opinię
+フィードバックを送信
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Ostatnia aktualizacja: 2026-07-30 UTC.
+最終更新日 2026-07-30 UTC。
 
-Chcesz przekazać coś jeszcze?
+ご意見をお聞かせください
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-30 UTC。"],[],[]]

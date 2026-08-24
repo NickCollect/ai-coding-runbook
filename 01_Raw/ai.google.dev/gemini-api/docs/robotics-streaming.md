@@ -1,72 +1,67 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=pt-BR
-fetched_at: 2026-08-17T02:19:32.364466+00:00
-title: "Rob\u00f3tica com streaming \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=ko
+fetched_at: 2026-08-24T02:35:30.389172+00:00
+title: "\uc2a4\ud2b8\ub9ac\ubc0d\uc744 \uc0ac\uc6a9\ud55c \ub85c\ubd07 \uacf5\ud559 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Envie comentários
+의견 보내기
 
-# Robótica com streaming
+# 스트리밍을 사용한 로봇 공학
 
-O endpoint do modelo `gemini-robotics-er-2-streaming-preview` expõe um endpoint de streaming dedicado
-que se integra à API [Live](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=pt-br), permitindo a interação bidirecional em tempo real
-entre o aplicativo e o robô. Isso o torna adequado para agentes que precisam de loops de feedback rápidos e respostas reativas ao ambiente.
+[`gemini-robotics-er-2-streaming-preview` 모델 엔드포인트는 Live API와 통합되는 전용 스트리밍 엔드포인트를 노출하여 애플리케이션과 로봇 간의 실시간 양방향 상호작용을 지원합니다.](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=ko) 따라서 빠른 피드백 루프와 환경에 대한 반응형 응답이 필요한 에이전트에 적합합니다.
 
-[Testar no Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-streaming-preview&hl=pt-br)
-[Clonar apps de exemplo do GitHub](https://github.com/google-gemini/robotics-samples/tree/main/live-api)
+[Google AI Studio에서 사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-streaming-preview&hl=ko)
+[GitHub에서 샘플 앱 클론](https://github.com/google-gemini/robotics-samples/tree/main/live-api)
 
-## Casos de uso
+## 사용 사례
 
-- **Coordenação de vários robôs**: vários robôs que comunicam o estado da tarefa
-  e delegam subtarefas por uma sessão compartilhada.
-- **Monitoramento contínuo**: robôs que observam uma cena e acionam ações
-  quando eventos específicos ocorrem, como um contêiner atingir um nível de preenchimento.
-- **Armazém e logística**: agentes de coleta e embalagem que verificam itens
-  visualmente, acompanham o progresso da embalagem e se recuperam de erros.
+- **다중 로봇 조정**: 공유 세션을 통해 작업 상태를 전달하고
+  하위 작업을 위임하는 여러 로봇입니다.
+- **지속적 모니터링**: 장면을 관찰하고 컨테이너가 채우기 수준에 도달하는 등의 특정 이벤트가 발생하면 작업을 트리거하는 로봇입니다.
+- **창고 및 물류**: 항목을 시각적으로 확인하고, 포장 진행 상황을 추적하고, 오류를 복구하는 출하 및 포장 에이전트입니다.
 
-## Especificações técnicas
+## 기술 사양
 
-A tabela a seguir descreve as especificações técnicas da API Live:
+다음 표에는 Live API의 기술 사양이 나와 있습니다.
 
-| Categoria | Detalhes |
+| 카테고리 | 세부정보 |
 | --- | --- |
-| Modalidades de entrada | Áudio (PCM bruto de 16 bits, 16 kHz, little-endian), imagens (JPEG <= 1 FPS), texto |
-| Modalidades de saída | Texto |
-| Protocolo | Conexão WebSocket com estado (WSS) |
+| 입력 모달리티 | 오디오 (원시 16비트 PCM 오디오, 16kHz, 리틀 엔디안), 이미지 (JPEG <= 1FPS), 텍스트 |
+| 출력 모달리티 | 텍스트 |
+| 프로토콜 | 스테이트풀 WebSocket 연결 (WSS) |
 
-## Criar uma configuração de agente
+## 에이전트 설정 빌드
 
-Cada agente de robótica criado na API Live segue três etapas:
+Live API를 기반으로 빌드된 모든 로봇 공학 에이전트는 다음 세 단계를 따릅니다.
 
-1. **Declarar os recursos do robô como ferramentas**. Cada ação que o robô pode realizar (navegar, agarrar, falar) se torna uma declaração de função com um nome, descrição e esquema de parâmetros. As ações físicas precisam usar
-   `"behavior": "BLOCKING"` para que o modelo espere o robô terminar antes de
-   escolher a próxima etapa.
-2. **Transmitir entrada multimodal para uma sessão persistente**. Abra uma sessão `live.connect` e mantenha-a aberta durante toda a tarefa. Envie frames de vídeo, áudio ou texto à medida que eles chegam dos sensores do robô.
-3. **Processar chamadas de ferramentas em um loop de recebimento**. Cada vez que o modelo seleciona uma ação, ele envia uma mensagem `tool_call`. O loop de recebimento executa a função no SDK do robô e envia um `tool_response`. A sessão permanece aberta, e o modelo escolhe a próxima ação com base no resultado.
+1. **로봇 기능을 도구로 선언합니다.** 로봇이 실행할 수 있는 각 작업(탐색, 잡기, 말하기)은 이름, 설명, 매개변수 스키마가 있는 함수 선언이 됩니다. 모델이 다음 단계를 선택하기 전에 로봇이 완료될 때까지 기다리도록 하려면 실제 작업에서
+   `"behavior": "BLOCKING"`을 사용해야 합니다.
+2. **멀티모달 입력을 지속적 세션으로 스트리밍합니다.** `live.connect` 세션을 열고 작업 기간 동안 열어 둡니다. 로봇의 센서에서 도착하는 대로 동영상 프레임, 오디오 또는 텍스트를 전송합니다.
+3. **수신 루프에서 도구 호출을 처리합니다.** 모델이 작업을 선택할 때마다 `tool_call` 메시지를 전송합니다. 수신 루프는 로봇 SDK에 대해 함수를 실행하고 `tool_response`를 다시 전송합니다. 세션은 열린 상태로 유지되고 모델은 결과에 따라 다음 작업을 선택합니다.
 
-As seções a seguir mostram como aplicar essas etapas a três padrões comuns: um loop do agente de linha de base, monitoramento proativo de cenário com um sinal de funcionamento e roteamento de fala por TTS como uma ferramenta.
+다음 섹션에서는 이러한 단계를 세 가지 일반적인 패턴(기준 에이전트 루프, 하트비트를 사용한 선제적 장면 모니터링, TTS를 도구로 사용한 음성 라우팅)에 적용하는 방법을 보여줍니다.
 
-## Orquestrar um robô por chamada de função
+## 함수 호출을 통해 로봇 조정
 
-O exemplo a seguir mostra todas as três etapas conectadas em um único script Python.
+다음 예에서는 세 단계를 모두 단일 Python 스크립트에 연결하는 방법을 보여줍니다.
 
-A etapa 1 (definições de ferramentas) declara os recursos do robô como declarações de função. A função `navigate` usa `"behavior": "BLOCKING"` para que o
-modelo espere o robô chegar ao waypoint antes de chamar outra ferramenta.
-Adicione mais declarações de função na mesma lista para expor outros recursos do robô.
+1단계(도구 정의)에서는 로봇 기능을 함수 선언으로 선언합니다. `navigate` 함수는 `"behavior": "BLOCKING"`을 사용하므로
+모델은 로봇이 경유지에 도달할 때까지 기다린 후 다른 도구를 호출합니다.
+동일한 목록에 함수 선언을 더 추가하여 추가 로봇 기능을 노출합니다.
 
-A etapa 2 (helpers de entrada) mostra três funções que transmitem entradas de modalidades diferentes para a sessão: `send_text` para comandos, `send_image` para frames de câmera com um comando de texto opcional e `send_audio` para áudio PCM bruto de um microfone.
+2단계(입력 도우미)에서는 다양한 모달리티 입력을 세션으로 스트리밍하는 세 가지 함수를 보여줍니다. 명령어의 경우 `send_text`, 선택적 텍스트 프롬프트가 있는 카메라 프레임의 경우 `send_image`, 마이크의 원시 PCM 오디오의 경우 `send_audio`입니다.
 
-A etapa 3 (o loop de recebimento) é executada simultaneamente e processa dois tipos de mensagens: mensagens `server_content` (a saída de texto do modelo) e mensagens `tool_call` (o modelo solicitando uma ação do robô). Quando uma chamada de ferramenta chega, o loop chama `execute_tool` (um stub que você substitui pelo SDK do robô real) e envia um `tool_response` para que o modelo possa selecionar a próxima ação.
+3단계(수신 루프)는 동시에 실행되며 두 가지 유형의 메시지(`server_content` 메시지(모델의 텍스트 출력) 및 `tool_call` 메시지(로봇 작업을 요청하는 모델))를 처리합니다. 도구 호출이 도착하면 루프는 실제 로봇 SDK로 대체하는 스텁인 `execute_tool`을 호출한 다음 모델이 다음 작업을 선택할 수 있도록 `tool_response`를 다시 전송합니다.
 
 ```
 import asyncio
@@ -171,19 +166,18 @@ async def main():
 asyncio.run(main())
 ```
 
-O loop de recebimento permanece ativo após cada resposta da ferramenta. O modelo constrói e revisa um plano de longo prazo sem que você codifique toda a sequência de ações com antecedência.
+수신 루프는 각 도구 응답 후에도 활성 상태를 유지합니다. 전체 작업 시퀀스를 미리 인코딩하지 않아도 모델이 장기 계획을 구성하고 수정합니다.
 
-## Raciocínio espacial-temporal proativo
+## 선제적 시공간 추론
 
-A API Live transmite vídeo, mas os frames de vídeo sozinhos não acionam um novo turno de raciocínio. Os frames de vídeo precisam ser acompanhados por um comando de texto ou áudio para acionar uma resposta do modelo. Consulte
-[os recursos da API Live](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=pt-br) para
-mais detalhes.
+Live API는 동영상을 스트리밍하지만 동영상 프레임만으로는 새로운 추론 차례가 트리거되지 않습니다. 모델 응답을 트리거하려면 동영상 프레임에 텍스트 또는 오디오 프롬프트가 함께 제공되어야 합니다. 자세한 내용은
+[Live API 기능](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=ko)을
+참고하세요.
 
-Para ativar o raciocínio proativo, implemente um **heartbeat**: envie periodicamente o
-frame de câmera mais recente seguido por um comando de texto curto que força o modelo a
-inspecionar a cena e tomar uma decisão explícita. A entrada de vídeo é limitada a um frame por segundo.
+선제적 추론을 사용 설정하려면 **하트비트**를 구현합니다. 모델이 장면을 검사하고 명시적 결정을 내리도록 하는 짧은 텍스트 프롬프트가 뒤따르는
+최신 카메라 프레임을 주기적으로 전송합니다. 동영상 입력은 초당 1프레임으로 속도 제한됩니다.
 
-Adicione essa corrotina ao loop de recebimento da seção anterior. Ela é executada como uma tarefa `asyncio` separada na mesma sessão:
+이전 섹션의 수신 루프와 함께 이 코루틴을 추가합니다. 동일한 세션에서 별도의 `asyncio` 작업으로 실행됩니다.
 
 ```
 async def heartbeat(session, camera):  # camera is your robot camera API
@@ -204,25 +198,23 @@ async def heartbeat(session, camera):  # camera is your robot camera API
         await asyncio.sleep(1)
 ```
 
-Não é necessário pausar o heartbeat durante as ações do robô. Quando usado como um
-**detector de sucesso implícito**, manter a execução permite que o modelo observe continuamente
-a ação em andamento (rastreando se um aperto está seguro, um despejo
-está no alvo ou um objeto está se acomodando corretamente) e reaja no momento em que o
-resultado fica claro.
+로봇 작업 중에 하트비트를 일시중지할 필요는 없습니다.
+**암시적 성공 감지기**로 사용하면 모델이 진행 중인 작업을 지속적으로
+관찰 (잡기가 안전한지, 붓기가 목표에 있는지, 객체가 올바르게 정착되는지 추적)하고 결과가 명확해지는 순간에 반응할 수 있습니다.
 
-As mensagens de heartbeat atuam como turnos de usuário e interrompem a geração de modelos em andamento.
-Consulte
-[o guia da API Live sobre interrupções](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=pt-br#interruptions)
-para entender como a API Live processa esse comportamento.
+하트비트 메시지는 사용자 차례로 작동하며 진행 중인 모델 생성을 중단합니다.
+Live API가 이 동작을 처리하는 방법을 알아보려면 중단에 관한
+[Live API 가이드](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=ko#interruptions)
+를 참고하세요.
 
-## Saída de áudio por TTS externo
+## 외부 TTS를 통한 오디오 출력
 
-O Gemini Robotics ER 2 retorna texto. O aplicativo encaminha as respostas concluídas
-para um provedor de TTS separado (como
-[Gemini TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br)) por um callback injetado.
-Isso mantém a latência de fala, a seleção de voz e o comportamento de interrupção sob seu controle e permite trocar back-ends de TTS sem mudar a lógica do agente.
+Gemini Robotics ER 2는 텍스트를 반환합니다. 애플리케이션은 삽입된 콜백을 통해 완료된 응답을
+별도의 TTS 제공업체 (예:
+[Gemini TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ko))로 라우팅합니다.
+이렇게 하면 음성 지연 시간, 음성 선택, 중단 동작을 제어할 수 있으며 에이전트 로직을 변경하지 않고도 TTS 백엔드를 교체할 수 있습니다.
 
-Você também pode declarar o TTS como uma ferramenta para que o modelo trate "diga algo" da mesma forma que "mova o braço". Adicione a seguinte declaração de função à lista `tools` da primeira seção:
+TTS를 도구로 선언하여 모델이 '말하기'를 '팔 움직이기'와 동일하게 처리하도록 할 수도 있습니다. 첫 번째 섹션의 `tools` 목록에 다음 함수 선언을 추가합니다.
 
 ```
 TOOLS = [
@@ -252,26 +244,26 @@ TOOLS = [
 ]
 ```
 
-Ao encapsular o TTS em uma declaração de função, o modelo processa a fala pelo mesmo caminho de chamada de ferramenta que qualquer outra ação do robô. O aplicativo atende à chamada com um callback injetado.
+TTS를 함수 선언으로 래핑하면 모델은 다른 로봇 작업과 동일한 도구 호출 경로를 통해 음성을 처리합니다. 애플리케이션은 삽입된 콜백으로 호출을 처리합니다.
 
-## Exemplos no GitHub
+## GitHub의 예
 
-Para exemplos de trabalho completos, incluindo a demonstração de busca de lanches do robô Spot e o Tinybot
-pan-tilt hello world, consulte
-[Exemplos da API Robotics Live](https://github.com/google-gemini/robotics-samples/tree/main/live-api).
+Spot 로봇 스낵 가져오기 데모 및 Tinybot
+팬틸트 Hello World를 비롯한 전체 작업 예시는
+[로봇 공학 Live API 예시](https://github.com/google-gemini/robotics-samples/tree/main/live-api)를 참고하세요.
 
-## A seguir
+## 다음 단계
 
-- [Entendimento de vídeo](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=pt-br): descoberta de momentos e classificação de progresso.
-- [Orquestração de tarefas](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=pt-br): tarefas de longo prazo sem streaming.
-- [Visão geral da API Live](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=pt-br): documentação completa da API Live.
+- [동영상 이해](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=ko): 순간 찾기 및 진행률 분류
+- [작업 조정](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=ko): 스트리밍이 없는 장기 작업
+- [Live API 개요](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=ko): 전체 Live API 문서
 
-Envie comentários
+의견 보내기
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Última atualização 2026-07-31 UTC.
+최종 업데이트: 2026-07-31(UTC)
 
-Quer enviar seu feedback?
+의견을 전달하고 싶나요?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-07-31 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-31(UTC)"],[],[]]

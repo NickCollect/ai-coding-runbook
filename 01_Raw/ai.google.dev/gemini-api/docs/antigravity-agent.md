@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419
-fetched_at: 2026-08-17T02:24:21.222004+00:00
-title: "Agente de Antigravity \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr
+fetched_at: 2026-08-24T02:26:11.804507+00:00
+title: "Antigravity ajan\u0131 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Enviar comentarios
+Geri bildirim gönderin
 
-# Agente de Antigravity
+# Antigravity ajanı
 
-El agente de Antigravity es un agente administrado de uso general en la API de Gemini. Una sola llamada a la API te proporciona un agente que razona, ejecuta código, administra archivos y navega por la Web dentro de tu propia zona de pruebas segura de Linux, alojada por Google.
+Antigravity ajanı, Gemini API'de genel amaçlı bir yönetilen ajandır. Tek bir API çağrısı, Google tarafından barındırılan kendi güvenli Linux sanal alanınızda akıl yürüten, kod yürüten, dosyaları yöneten ve web'de gezinmenizi sağlayan bir aracı sunar.
 
-Cuenta con la tecnología de Gemini 3.6 Flash y usa el mismo arnés que el IDE de Antigravity. Puedes configurar el modelo de Gemini subyacente con `agent_config`. Disponible a través de la [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) y [Google AI Studio](https://aistudio.google.com?hl=es-419).
+Gemini 3.7 Flash tarafından desteklenir ve Antigravity IDE ile aynı koşum takımını kullanır. Temel Gemini modelini `agent_config` kullanarak yapılandırabilirsiniz. [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) ve [Google AI Studio](https://aistudio.google.com?hl=tr) üzerinden kullanılabilir.
 
 ### Python
 
@@ -67,33 +67,33 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Funciones
+## Özellikler
 
-Cada llamada puede aprovisionar una zona de pruebas de Linux y comenzar un bucle de uso de herramientas. El agente planifica, actúa, observa los resultados y repite el proceso hasta que se completa la tarea.
+Her çağrı, bir Linux sanal alanı sağlayabilir ve araç kullanma döngüsü başlatabilir. Ajan; plan yapar, harekete geçer, sonuçları gözlemler ve görev tamamlanana kadar tekrarlar.
 
-- **Ejecución de código:** Ejecuta comandos de Bash, Python y Node.js. Instalar paquetes, ejecutar pruebas y compilar apps
-- **Administración de archivos:** Lee, escribe, edita, busca y enumera archivos en el sandbox. Los archivos persisten en todas las interacciones.
-- **Acceso a la Web:** Búsqueda de Google y recuperación de URLs para obtener datos
-- **Compactación del contexto:** Compactación automática del contexto (se activa con alrededor de 135, 000 tokens) para admitir sesiones de varios turnos y de larga duración sin perder el contexto ni alcanzar los límites de tokens.
+- **Kod yürütme:** Bash, Python ve Node.js komutlarını çalıştırın. Paketleri yükleyin, testleri çalıştırın ve uygulamalar oluşturun.
+- **Dosya yönetimi:** Sandbox'taki dosyaları okuma, yazma, düzenleme, arama ve listeleme. Dosyalar, etkileşimler arasında korunur.
+- **Web erişimi:** Veriler için Google Arama ve URL getirme.
+- **Bağlam sıkıştırma:** Bağlamı kaybetmeden veya parça sınırlarına ulaşmadan uzun süren, çok aşamalı etkileşim oturumlarını desteklemek için otomatik bağlam sıkıştırma (~135.000 parçada tetiklenir).
 
-Consulta la [Guía de inicio rápido](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=es-419) para obtener información sobre el uso en varios turnos y la transmisión.
+Çok aşamalı etkileşim kullanımı ve yayın için [Hızlı Başlangıç](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=tr) bölümüne bakın.
 
-## Herramientas compatibles
+## Desteklenen araçlar
 
-De forma predeterminada, el agente tiene acceso a `code_execution`, `google_search` y `url_context`. Las herramientas del sistema de archivos se habilitan automáticamente cuando especificas el parámetro `environment`. También puedes definir **funciones personalizadas** para conectar el agente a tus propias APIs y herramientas. Solo necesitas especificar el parámetro `tools` cuando personalizas o restringes el conjunto predeterminado, o cuando agregas funciones personalizadas.
+Varsayılan olarak, ajan `code_execution`, `google_search` ve `url_context` uygulamalarına erişebilir. `environment` parametresini belirttiğinizde dosya sistemi araçları otomatik olarak etkinleştirilir. Ayrıca, aracıyı kendi API'lerinize ve araçlarınıza bağlamak için **özel işlevler** de tanımlayabilirsiniz. Varsayılan grubu özelleştirirken veya kısıtlarken ya da özel işlevler eklerken yalnızca `tools` parametresini belirtmeniz gerekir.
 
-| Herramienta | Valor del tipo | Descripción |
+| Araç | Tür değeri | Açıklama |
 | --- | --- | --- |
-| Ejecución de código | `code_execution` | Ejecuta comandos de shell (bash, Python, Node) con captura de stdout/stderr. |
-| Búsqueda de Google | `google_search` | Buscar en la Web pública |
-| Contexto de URL | `url_context` | Recuperar y leer páginas web |
-| Sistema de archivos | *(se habilita a través de `environment`)* | Leer, escribir, editar, buscar y enumerar archivos en el entorno de pruebas El sistema habilita estas herramientas automáticamente cuando configuras `environment`. |
-| Funciones personalizadas | `function` | Define funciones personalizadas que el agente puede solicitar ejecutar. Consulta [Llamadas a funciones](#function-calling). |
-| Servidor de MCP remoto | `mcp_server` | Registrar servidores externos del Protocolo de contexto del modelo (MCP) como herramientas Consulta [Servidores de MCP](#mcp-servers). |
+| Kod Yürütme | `code_execution` | stdout/stderr yakalama ile kabuk komutlarını (bash, Python, Node) çalıştırın. |
+| Google Arama | `google_search` | Herkese açık web'de arama yapın. |
+| URL Bağlamı | `url_context` | Web sayfalarını getirme ve okuma |
+| Dosya sistemi | *(`environment` üzerinden etkinleştirilir)* | Sandbox'ta dosyaları okuma, yazma, düzenleme, arama ve listeleme Sistemi `environment` olarak ayarladığınızda bu araçlar otomatik olarak etkinleştirilir. |
+| Özel İşlevler | `function` | Ajanın yürütülmesini isteyebileceği özel işlevler tanımlayın. [İşlev çağırma](#function-calling) başlıklı makaleyi inceleyin. |
+| Uzak MCP sunucusu | `mcp_server` | Harici Model Bağlam Protokolü (MCP) sunucularını araç olarak kaydedin. [MCP sunucuları](#mcp-servers) başlıklı makaleyi inceleyin. |
 
-Puedes interceptar y validar la ejecución de las herramientas `code_execution` y `filesystem` directamente en la zona de pruebas remota con [enlaces](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=es-419) síncronos.
+Senkron [kancalar](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=tr) kullanarak `code_execution` ve `filesystem` araç yürütmesini doğrudan uzak korumalı alanda yakalayabilir ve doğrulayabilirsiniz.
 
-Para limitar el agente a herramientas específicas, pasa solo las que necesites:
+Aracıyı belirli araçlarla sınırlamak için yalnızca ihtiyacınız olanları iletin:
 
 ### Python
 
@@ -152,9 +152,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Entrada multimodal
+## Çok formatlı giriş
 
-El agente de Antigravity admite entradas multimodales. Actualmente, solo se admiten las entradas `text` y `image`. Las imágenes se deben proporcionar como cadenas intercaladas codificadas en base64 (`data`).
+Antigravity aracısı, çok formatlı girişleri destekler. Şu anda yalnızca `text` ve `image` girişleri desteklenmektedir. Resimler, satır içi Base64 kodlu dizeler (`data`) olarak sağlanmalıdır.
 
 ### Python
 
@@ -227,11 +227,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }"
 ```
 
-## Llamada a función
+## İşlev çağırma
 
-La llamada a funciones te permite conectar el agente de Antigravity a APIs y bases de datos externas definiendo herramientas personalizadas que el agente puede invocar. Para conocer los conceptos generales, consulta [Llamada a funciones con la API de Gemini](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=es-419).
+İşlev çağırma, aracının çağırabileceği özel araçlar tanımlayarak Antigravity aracısını harici API'lere ve veritabanlarına bağlamanıza olanak tanır. Genel kavramlar için [Gemini API ile işlev çağrısı](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=tr) başlıklı makaleyi inceleyin.
 
-En el siguiente ejemplo, se muestra una interacción de 2 turnos. Primero, el agente solicita una llamada a la función `get_weather` personalizada, y el cliente la ejecuta y devuelve el resultado en el segundo turno.
+Aşağıdaki örnekte 2 dönüşlü bir etkileşim gösterilmektedir. Ajan önce özel bir `get_weather` işlev çağrısı ister, istemci bunu yürütür ve sonucu ikinci turda döndürür.
 
 ### Python
 
@@ -445,19 +445,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## Servidores de MCP
+## MCP sunucuları
 
-Puedes conectar el agente de Antigravity a herramientas externas registrando servidores remotos del Protocolo de contexto del modelo (MCP). El agente admite servidores MCP remotos a través de HTTP con capacidad de transmisión.
+Uzak Model Bağlam Protokolü (MCP) sunucularını kaydederek Antigravity ajanı harici araçlara bağlayabilirsiniz. Aracı, akışa uygun HTTP üzerinden uzak MCP sunucularını destekler.
 
-Cuando registres un servidor de MCP, debes especificar los siguientes campos en el array `tools`:
+Bir MCP sunucusu kaydederken `tools` dizisinde aşağıdaki alanları belirtmeniz gerekir:
 
-| Campo | Tipo | Obligatorio | Descripción |
+| Alan | Tür | Zorunlu | Açıklama |
 | --- | --- | --- | --- |
-| `type` | string | Sí | Debe ser `"mcp_server"`. |
-| `name` | string | Sí | Es un identificador único del servidor. Debe ser estrictamente alfanumérico y en minúsculas (coincidir con `^[a-z0-9_-]+$`). |
-| `url` | string | Sí | Es la URL del extremo del servidor de MCP remoto. |
-| `headers` | objeto | No | Encabezados personalizados (p.ej., de autenticación) que se envían con las solicitudes. |
-| `allowed_tools` | array | No | Es la lista de nombres de herramientas que se pueden ejecutar. Si se omite, se permiten todas las herramientas. |
+| `type` | dize | Evet | `"mcp_server"` olmalıdır. |
+| `name` | dize | Evet | Sunucunun benzersiz tanımlayıcısı. Kesinlikle küçük harf ve alfanümerik olmalıdır (`^[a-z0-9_-]+$` ile eşleşmelidir). |
+| `url` | dize | Evet | Uzak MCP sunucusunun uç nokta URL'si. |
+| `headers` | nesne | Hayır | İsteklerle gönderilen özel üstbilgiler (ör. kimlik doğrulama). |
+| `allowed_tools` | dizi | Hayır | Çalıştırılmasına izin verilen araç adlarının listesi. Atlanırsa tüm araçlara izin verilir. |
 
 ### Python
 
@@ -520,11 +520,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Selección del modelo
+## Model seçimi
 
-En el caso de `antigravity-preview-05-2026`, el modelo predeterminado es **Gemini 3.6 Flash** (`gemini-3.6-flash`). Si omites `agent_config`, el agente usará `gemini-3.6-flash` de forma predeterminada.
+`antigravity-preview-05-2026` için varsayılan model **Gemini 3.7 Flash**'tır (`gemini-3.7-flash`). `agent_config` öğesini atlarsanız temsilci varsayılan olarak `gemini-3.7-flash` modelini kullanır.
 
-Puedes configurar el modelo subyacente de Gemini con `agent_config` para optimizar la velocidad, el costo o la capacidad de razonamiento.
+Hızı, maliyeti veya muhakeme yeteneğini optimize etmek için `agent_config` kullanarak temel Gemini modelini yapılandırabilirsiniz.
 
 ### Python
 
@@ -583,25 +583,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Estos son los valores admitidos para `agent_config.model`:
+`agent_config.model` için desteklenen değerler şunlardır:
 
-| Modelo | Valor en `agent_config.model` | Descripción |
+| Model | `agent_config.model` cinsinden değer | Açıklama |
 | --- | --- | --- |
-| **Gemini 3.6 Flash** (predeterminado) | `gemini-3.6-flash` | Modelo equilibrado predeterminado para el razonamiento, la programación y el uso de herramientas. |
-| **Gemini 3.5 Flash** | `gemini-3.5-flash` | Modelo Flash de generación anterior para flujos de trabajo generales de agentes. |
-| **Gemini 3.5 Flash-Lite** | `gemini-3.5-flash-lite` | Modelo ligero optimizado para tareas sensibles a la latencia y el costo. |
+| **Gemini 3.7 Flash** (varsayılan) | `gemini-3.7-flash` | Akıl yürütme, kodlama ve araç kullanımı için varsayılan dengeli model. |
+| **Gemini 3.6 Flash** | `gemini-3.6-flash` | Genel temsilci tabanlı iş akışları için önceki nesil Flash modeli. |
+| **Gemini 3.5 Flash** | `gemini-3.5-flash` | Genel iş akışları için hafif model. |
+| **Gemini 3.5 Flash-Lite** | `gemini-3.5-flash-lite` | Düşük gecikme ve maliyete duyarlı görevler için optimize edilmiş hafif model. |
 
-Cuando creas un agente administrado con `agents.create`, configuras el modelo de la misma manera pasando `base_agent` y `agent_config`. Ten en cuenta que no puedes anular el modelo en el momento de la interacción para un agente administrado creado con `agents.create`. El modelo está bloqueado según lo que se configuró cuando se creó el agente. Esto garantiza un comportamiento predecible de las llamadas a herramientas, una depuración coherente y el cumplimiento de los límites de seguridad.
+`agents.create` ile yönetilen bir aracı oluştururken `base_agent` ve `agent_config` parametrelerini ileterek modeli tam olarak aynı şekilde yapılandırırsınız. `agents.create` ile oluşturulan yönetilen bir aracı için etkileşim sırasında modeli geçersiz kılamayacağınızı unutmayın. Model, aracı oluşturulurken ayarlananlara göre kilitlenir. Bu sayede, araç çağırma davranışının tahmin edilebilir olması, tutarlı hata ayıklama ve güvenlik sınırlarına uyulması sağlanır.
 
-## Personaliza el agente
+## Aracıyı özelleştirme
 
-Puedes extender el agente de Antigravity personalizando sus instrucciones, herramientas y entorno. El agente admite un enfoque de personalización nativo del sistema de archivos: puedes montar archivos como `AGENTS.md` para obtener instrucciones y habilidades en `.agents/skills/` directamente en el entorno de pruebas, o pasar la configuración intercalada en el momento de la interacción. Puedes iterar tu configuración intercalada y, luego, guardarla como un agente administrado cuando esté todo listo.
+Antigravity aracısını talimatlarını, araçlarını ve ortamını özelleştirerek genişletebilirsiniz. Aracı, özelleştirme için dosya sistemiyle uyumlu bir yaklaşımı destekler: Talimatlar ve beceriler için `AGENTS.md` gibi dosyaları doğrudan korumalı alana `.agents/skills/` altında bağlayabilir veya yapılandırmayı etkileşim sırasında satır içi olarak iletebilirsiniz. Yapılandırmanızı satır içi olarak yineleyebilir ve hazır olduğunuzda yönetilen ajan olarak kaydedebilirsiniz.
 
-Para obtener todos los detalles sobre cómo compilar agentes personalizados, consulta [Compila agentes administrados](https://ai.google.dev/gemini-api/docs/custom-agents?hl=es-419).
+Özel ajanları oluşturma hakkında ayrıntılı bilgi için [Yönetilen Ajanlar Oluşturma](https://ai.google.dev/gemini-api/docs/custom-agents?hl=tr) başlıklı makaleyi inceleyin.
 
-## Ejecución en segundo plano
+## Arka planda yürütme
 
-Las tareas del agente que implican razonamiento de varios pasos, ejecución de código o operaciones de archivos pueden tardar minutos en completarse. Usa `background=True` para ejecutar la interacción de forma asíncrona. La API devuelve de inmediato un ID de interacción que sondea hasta que el estado sea `completed` o `failed`.
+Çok adımlı akıl yürütme, kod yürütme veya dosya işlemleri içeren aracı görevlerinin tamamlanması birkaç dakika sürebilir. Etkileşimi eşzamansız olarak çalıştırmak için `background=True` öğesini kullanın. API, durum `completed` veya `failed` olana kadar yokladığınız bir etkileşim kimliğiyle hemen yanıt verir.
 
 ### Python
 
@@ -683,9 +684,9 @@ curl -s -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/$I
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-La ejecución en segundo plano requiere `store=True`, que es el valor predeterminado. Para obtener actualizaciones de progreso en tiempo real durante la ejecución en segundo plano, consulta [Interacciones en segundo plano de transmisión](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=es-419#streaming-background).
+Arka planda yürütme için varsayılan olarak `store=True` gerekir. Arka planda yürütme sırasında gerçek zamanlı ilerleme güncellemeleri için [Arka planda etkileşimleri yayınlama](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=tr#streaming-background) başlıklı makaleyi inceleyin.
 
-Puedes cancelar una interacción en segundo plano en ejecución con el método `cancel`.
+`cancel` yöntemini kullanarak devam eden bir arka plan etkileşimini iptal edebilirsiniz.
 
 ### Python
 
@@ -706,9 +707,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions/INTE
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-**Interacción de varios turnos con ejecución en segundo plano**
+**Arka planda yürütme ile çok aşamalı etkileşim**
 
-Cuando una interacción en segundo plano involucre herramientas con estado (como la ejecución de código en un sandbox), usa el `environment_id` de la interacción completada para continuar en el mismo entorno. Esto garantiza que el agente continúe donde lo dejó con todos los archivos y el estado intactos.
+Arka plandaki bir etkileşim durum bilgisi olan araçları (ör. bir sandbox'ta kod yürütme) içerdiğinde, aynı ortamda devam etmek için tamamlanan etkileşimdeki `environment_id` simgesini kullanın. Bu sayede, temsilci tüm dosyalar ve durum korunarak kaldığı yerden devam eder.
 
 ### Python
 
@@ -820,25 +821,25 @@ curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
   }"
 ```
 
-## Entornos
+## Ortam
 
-Cada llamada crea o reutiliza una zona de pruebas de Linux. El parámetro `environment` toma tres formas:
+Her çağrı, bir Linux sanal alanı oluşturur veya yeniden kullanır. `environment` parametresi üç biçimde olabilir:
 
-| Formulario | Descripción |
+| Form | Açıklama |
 | --- | --- |
-| `"remote"` | Aprovisiona un entorno de pruebas nuevo con la configuración predeterminada. |
-| `"env_abc123"` | Reutiliza un entorno existente por ID y conserva todos los archivos y el estado. |
-| `{...}` | `EnvironmentConfig` completo con fuentes personalizadas y reglas de red |
+| `"remote"` | Varsayılan ayarlarla yeni bir sanal alan sağlayın. |
+| `"env_abc123"` | Tüm dosyaları ve durumu koruyarak mevcut bir ortamı kimliğe göre yeniden kullanın. |
+| `{...}` | Özel kaynaklar ve ağ kurallarıyla tam `EnvironmentConfig` |
 
-Consulta [Entornos](https://ai.google.dev/gemini-api/docs/agent-environment?hl=es-419) para obtener detalles sobre las fuentes (Git, GCS, intercaladas), las redes, el ciclo de vida y los límites de recursos.
+Kaynaklar (Git, GCS, satır içi), ağ, yaşam döngüsü ve kaynak sınırları hakkında ayrıntılı bilgi için [Ortamlar](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr) başlıklı makaleyi inceleyin.
 
-## Activadores
+## Tetikleyiciler
 
-Los activadores te permiten programar un agente para que se ejecute automáticamente según un programa cron. Un activador vincula un agente, un entorno, una instrucción y una programación en un recurso persistente que se activa sin intervención manual. Cada ejecución reutiliza el mismo entorno, por lo que los archivos creados en una ejecución persisten y son visibles para la siguiente.
+Tetikleyiciler, bir aracı cron zamanlamasına göre otomatik olarak çalışacak şekilde planlamanıza olanak tanır. Tetikleyici, bir temsilciyi, ortamı, istemi ve planı manuel müdahale olmadan tetiklenen kalıcı bir kaynağa bağlar. Her yürütme aynı ortamı yeniden kullandığından, bir çalıştırmada oluşturulan dosyalar kalıcı olur ve bir sonraki çalıştırmada görünür.
 
-### Crear un activador
+### Tetikleyici oluştur
 
-Crea un activador especificando un programa de cron, una zona horaria y la configuración de interacción. El activador comienza en estado `active` y se activará en el siguiente horario de cron que coincida. Guarda el `id` que se devolvió para administrar el activador en llamadas posteriores.
+Cron planı, saat dilimi ve etkileşim yapılandırmasını belirterek tetikleyici oluşturun. Tetikleyici, `active` durumunda başlar ve eşleşen bir sonraki cron zamanında tetiklenir. Sonraki çağrılarda tetikleyiciyi yönetmek için döndürülen `id` değerini kaydedin.
 
 ### Python
 
@@ -944,29 +945,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/triggers" \
   }'
 ```
 
-La solicitud `CreateTrigger` acepta los siguientes campos:
+`CreateTrigger` isteği aşağıdaki alanları kabul eder:
 
-| Campo | Tipo | Obligatorio | Descripción |
+| Alan | Tür | Zorunlu | Açıklama |
 | --- | --- | --- | --- |
-| `schedule` | string | Sí | Expresión cron (p. ej., `0 * * * *` para cada hora, `0 9 * * 1-5` para las mañanas de los días laborables) |
-| `time_zone` | string | Sí | Zona horaria de IANA (p.ej., `UTC`, `America/Argentina/Buenos_Aires`). |
-| `display_name` | string | No | Es el nombre legible del activador. |
-| `max_consecutive_failures` | integer | No | Es la cantidad máxima de fallas antes de que se pause automáticamente el activador. Valor predeterminado: 5. |
-| `execution_timeout_seconds` | integer | No | Tiempo de espera por ejecución en segundos. El valor predeterminado es 600. |
-| `interaction` | objeto | Sí | Un `CreateInteractionRequest` que define el agente, la entrada, las herramientas y el entorno. |
+| `schedule` | dize | Evet | Cron ifadesi (ör. saatlik için `0 * * * *`, hafta içi sabahları için `0 9 * * 1-5`). |
+| `time_zone` | dize | Evet | IANA saat dilimi (ör. `UTC`, `America/Argentina/Buenos_Aires`). |
+| `display_name` | dize | Hayır | Tetikleyicinin, kullanıcılar tarafından okunabilir adı. |
+| `max_consecutive_failures` | tam sayı | Hayır | Tetikleyicinin otomatik olarak duraklatılmadan önceki maksimum hata sayısı. Varsayılan: 5. |
+| `execution_timeout_seconds` | tam sayı | Hayır | Yürütme başına zaman aşımı süresi (saniye). Varsayılan: 600. |
+| `interaction` | nesne | Evet | Ajanı, girişi, araçları ve ortamı tanımlayan bir `CreateInteractionRequest`. |
 
-La respuesta incluye los siguientes campos clave:
+Yanıtta aşağıdaki önemli alanlar bulunur:
 
-| Campo | Tipo | Descripción |
+| Alan | Tür | Açıklama |
 | --- | --- | --- |
-| `id` | string | Es el identificador único del activador. Úsala en todas las operaciones posteriores. |
-| `status` | string | Estado actual: `active`, `paused` o `disabled`. |
-| `next_run_time` | string | Es la marca de tiempo ISO 8601 de la próxima ejecución programada. |
-| `consecutive_failure_count` | integer | Cantidad de ejecuciones fallidas consecutivas desde la última ejecución exitosa. |
+| `id` | dize | Tetikleyicinin benzersiz tanımlayıcısı. Bunu sonraki tüm işlemlerde kullanın. |
+| `status` | dize | Mevcut durum: `active`, `paused` veya `disabled`. |
+| `next_run_time` | dize | Sonraki planlanmış yürütmenin ISO 8601 zaman damgası. |
+| `consecutive_failure_count` | tam sayı | Son başarılı yürütmeden bu yana art arda başarısız olan yürütme sayısı. |
 
-### Enumera activadores
+### Tetikleyicileri listeleme
 
-Recupera todos los activadores asociados con tu proyecto.
+Projenizle ilişkili tüm tetikleyicileri alın.
 
 ### Python
 
@@ -992,9 +993,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/triggers" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Obtén un activador
+### Tetikleyici edinme
 
-Recupera la configuración completa y el estado actual de un solo activador.
+Tek bir tetikleyicinin tam yapılandırmasını ve mevcut durumunu getirin.
 
 ### Python
 
@@ -1019,9 +1020,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER_I
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Cómo detener y reanudar propuestas y líneas de pedido propuestas
+### Duraklatma ve devam ettirme
 
-Puedes pausar un activador para detener las ejecuciones programadas y reanudarlo para reactivar el programa. La detención no afecta las ejecuciones manuales.
+Programlanmış yürütmeleri durdurmak için tetikleyiciyi duraklatabilir, zamanlamayı yeniden etkinleştirmek için ise devam ettirebilirsiniz. Duraklatma, manuel yürütmeleri etkilemez.
 
 ### Python
 
@@ -1059,9 +1060,9 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER
   -d '{"status": "active"}'
 ```
 
-### Borra un activador
+### Tetikleyici silme
 
-Quita un activador de forma permanente. No se borra el historial de ejecuciones anteriores.
+Bir tetikleyiciyi kalıcı olarak kaldırma Geçmiş yürütme geçmişi silinmez.
 
 ### Python
 
@@ -1082,9 +1083,9 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGE
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Cómo ejecutar un activador de inmediato
+### Tetikleyiciyi hemen çalıştırma
 
-Activa un disparador a pedido sin esperar la próxima hora programada. Esto funciona incluso si el activador está en pausa.
+Bir sonraki planlanmış zamanı beklemeden isteğe bağlı olarak tetikleyiciyi etkinleştirin. Bu özellik, tetikleyici duraklatılmış olsa bile çalışır.
 
 ### Python
 
@@ -1105,9 +1106,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER_
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Enumerar ejecuciones
+### Yürütmeleri listeleme
 
-Consulta el historial de ejecución de un activador. Cada ejecución incluye un `status`, marcas de tiempo, un `interaction_id` que puedes usar para recuperar el resultado completo de la interacción y un `environment_id` que confirma que todas las ejecuciones comparten el mismo sandbox.
+Bir tetikleyicinin yürütme geçmişini görüntüleme Her yürütme işleminde `status`, zaman damgaları, tam etkileşim çıkışını getirmek için kullanabileceğiniz bir `interaction_id` ve tüm çalıştırmaların aynı korumalı alanı paylaştığını onaylayan bir `environment_id` bulunur.
 
 ### Python
 
@@ -1141,20 +1142,20 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER_I
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Disponibilidad y precios
+## Kullanılabilirlik ve fiyatlandırma
 
-El agente de Antigravity está disponible en versión preliminar a través de la [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) en Google AI Studio y la API de Gemini para proyectos de nivel gratuito y de nivel pagado.
+Antigravity aracısı, Google AI Studio'daki [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) ve hem ücretsiz katman hem de ücretli katman projeleri için Gemini API aracılığıyla önizleme sürümünde kullanılabilir.
 
-Los precios siguen un [modelo de pago por uso](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419#pricing-for-agents) basado en los tokens del modelo de Gemini subyacente y las herramientas que usa el agente. A diferencia de una solicitud de chat estándar que produce un solo resultado, una interacción de Antigravity es un flujo de trabajo de agente. Una sola solicitud activa un bucle autónomo de razonamiento, ejecución de herramientas, ejecución de código y administración de archivos. Los proyectos del nivel gratuito incluyen un límite de frecuencia y una cuota de uso gratuitos.
+Fiyatlandırma, temel Gemini model jetonlarına ve aracının kullandığı araçlara dayalı [kullandıkça öde modeline](https://ai.google.dev/gemini-api/docs/pricing?hl=tr#pricing-for-agents) göre belirlenir. Tek bir çıkış üreten standart bir sohbet isteğinin aksine, Antigravity etkileşimi, bir aracı iş akışıdır. Tek bir istek, muhakeme, araç yürütme, kod çalıştırma ve dosya yönetimi gibi işlemleri içeren bağımsız bir döngüyü tetikler. Ücretsiz katman projelerinde ücretsiz bir hız sınırı ve kullanım kotası bulunur.
 
-Las interacciones de antigravedad ejecutan bucles autónomos de varios turnos y pueden consumir una cantidad significativa de tokens. Establece [controles de presupuesto](#budget-controls) en tu solicitud para limitar el uso de tokens. También puedes supervisar el progreso en tiempo real con la [transmisión de SSE](https://ai.google.dev/gemini-api/docs/streaming?hl=es-419) o cancelar las solicitudes en ejecución.
+Antigravity etkileşimleri, çok turlu bağımsız döngüler çalıştırır ve önemli sayıda jeton tüketebilir. Jeton kullanımını sınırlamak için isteğinizde [bütçe kontrolleri](#budget-controls) ayarlayın. Ayrıca [SSE akışıyla](https://ai.google.dev/gemini-api/docs/streaming?hl=tr) ilerlemeyi anlık olarak izleyebilir veya çalışan istekleri iptal edebilirsiniz.
 
-### Controles de presupuesto
+### Bütçe kontrolleri
 
-Además de la [selección del modelo](#model-selection), establece `max_total_tokens` dentro de `agent_config` (con `"type": "antigravity"`) para limitar la cantidad total de tokens (entrada + salida + pensamiento) que puede consumir una interacción.
-Los tokens almacenados en caché no se consideran en este límite. Cuando el agente alcanza el límite, la interacción se detiene y se devuelve con `status: "incomplete"`. El límite es el mejor esfuerzo posible: El uso real puede superarlo ligeramente según el momento en que el agente verifique el presupuesto entre los pasos.
+[Model seçimine](#model-selection) ek olarak, bir etkileşimin kullanabileceği toplam jeton sayısını (giriş + çıkış + düşünme) sınırlamak için `max_total_tokens` değerini `agent_config` içinde (`"type": "antigravity"` ile) ayarlayın.
+Önbelleğe alınan jetonlar bu sınıra dahil edilmez. Ajan sınıra ulaştığında etkileşim durdurulur ve `status: "incomplete"` ile geri döner. Bu sınır, en iyi çaba ilkesine göre belirlenir: Ajanın adımlar arasında bütçeyi kontrol etme zamanına bağlı olarak gerçek kullanım bu sınırı biraz aşabilir.
 
-Establece el presupuesto en la solicitud de interacción en `agent_config` junto con `agent` y `input`.
+`agent_config`, `agent` ve `input` ile birlikte etkileşim isteğinde bütçeyi ayarlayın.
 
 ### Python
 
@@ -1240,9 +1241,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-#### Cómo continuar una interacción incompleta
+#### Tamamlanmamış bir etkileşimi devam ettirme
 
-Cuando una interacción devuelve `status: "incomplete"`, se conservan el trabajo y el contexto del agente. Envía una nueva interacción que haga referencia a la interacción original `id` y `environment_id` para continuar donde se dejó. La nueva interacción obtiene su propio presupuesto de `max_total_tokens`.
+Bir etkileşim `status: "incomplete"` döndürdüğünde temsilcinin çalışması ve bağlamı korunur. Kaldığı yerden devam etmek için orijinal etkileşime `id` ve `environment_id` referans veren yeni bir etkileşim gönderin. Yeni etkileşimin kendi `max_total_tokens` bütçesi olur.
 
 ### Python
 
@@ -1295,48 +1296,48 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Costos estimados
+### Tahmini maliyetler
 
-Los costos varían según la complejidad de la tarea. El agente determina de forma autónoma cuántas llamadas a herramientas, ejecuciones de código y operaciones de archivos se necesitan. Las siguientes estimaciones se basan en las ejecuciones.
+Maliyetler, görevin karmaşıklığına göre değişir. Ajan, kaç araç çağrısı, kod yürütme ve dosya işlemi gerektiğini bağımsız olarak belirler. Aşağıdaki tahminler çalıştırmalara dayanmaktadır.
 
-| Categoría de la tarea | Tokens de entrada | Tokens de salida | Costo habitual |
+| Görev kategorisi | Giriş jetonu sayısı | Çıkış jetonu sayısı | Normal maliyet |
 | --- | --- | --- | --- |
-| **Investigación y síntesis de información** | De 100,000 a 500,000 | De 10,000 a 40,000 | USD 0.30 a USD 1.00 |
-| **Generación de documentos y contenido** | De 100,000 a 500,000 | De 15,000 a 50,000 | USD 0.30 a USD 1.30 |
-| **Diseño de procesos y sistemas** | De 100,000 a 400,000 | De 10,000 a 30,000 | USD 0.25 a USD 0.80 |
-| **Procesamiento y análisis de datos** | 300,000 a 3 millones | De 30,000 a 150,000 | USD 0.70 a USD 3.25 |
+| **Araştırma ve bilgi sentezi** | 100.000-500.000 | 10.000-40.000 | 0,30-1,00 ABD doları |
+| **Doküman ve içerik oluşturma** | 100.000-500.000 | 15.000-50.000 | 0,30-1,30 ABD doları |
+| **Süreç ve sistem tasarımı** | 100.000-400.000 | 10.000-30.000 | 0,25-0,80 ABD doları |
+| **Veri işleme ve analiz** | 300.000-3.000.000 | 30 bin - 150 bin | 0,70-3,25 ABD doları |
 
-Por lo general, se almacenan en caché entre el 50% y el 70% de los tokens de entrada. Los flujos de trabajo complejos con muchos llamados a herramientas pueden acumular entre 3 y 5 millones de tokens en una sola interacción, con costos de hasta USD 5.
+Giriş jetonlarının% 50-70'i genellikle önbelleğe alınır. Çok sayıda araç çağrısı içeren karmaşık aracı iş akışları, tek bir etkileşimde 3-5 milyon jeton biriktirebilir ve maliyeti yaklaşık 5 ABD dolarına kadar çıkabilir.
 
-El **cómputo del entorno** (CPU, memoria, ejecución en zona de pruebas) **no se factura** durante el período de vista previa.
+Önizleme döneminde **ortam bilgi işlem** (CPU, bellek, korumalı alan yürütme) için **ücret alınmaz**.
 
-## Limitaciones
+## Sınırlamalar
 
-- **Estado de la versión preliminar:** El agente de Antigravity y la API de Interactions. Las funciones y los esquemas pueden cambiar.
-- **Configuración de generación no admitida:** Los siguientes parámetros no se admiten y devuelven un error 400: `temperature`, `top_p`, `top_k`, `stop_sequences`, `max_output_tokens`.
-- **Salida estructurada:** El agente de Antigravity no admite salidas estructuradas.
-- **Herramientas no disponibles:** `file_search`, `computer_use` y `google_maps` aún no son compatibles.
-- **Limitaciones de MCP remoto:** No se admite el transporte de eventos enviados por el servidor (SSE) (usa HTTP transmisible). Además, el servidor `name` debe ser estrictamente alfanumérico y en minúsculas (el uso de letras mayúsculas activa un error genérico `400 Bad Request`).
-- **Herramienta del sistema de archivos:** No hay una herramienta del sistema de archivos en este momento. Es parte de `environment`.
-- **Requisito de la tienda:** La ejecución del agente con `background=True` requiere `store=True`.
-- **Llamada a función solo con estado:** La llamada a función solo se admite en el modo con estado. Debes usar `previous_interaction_id` para continuar el turno. No se admite la reconstrucción manual del historial (modo sin estado).
-- **Tipos multimodales no admitidos.** Por el momento, no se admiten entradas de audio, video ni documentos. Solo se permiten texto e imágenes.
+- **Önizleme durumu:** Antigravity ajanı ve Interactions API'si. Özellikler ve şemalar değişebilir.
+- **Desteklenmeyen oluşturma yapılandırması:** Şu parametreler desteklenmez ve 400 hatası döndürür: `temperature`, `top_p`, `top_k`, `stop_sequences`, `max_output_tokens`.
+- **Yapılandırılmış çıkış:** Antigravity aracısı, yapılandırılmış çıkışları desteklemez.
+- **Kullanılamayan araçlar:** `file_search`, `computer_use` ve `google_maps` henüz desteklenmemektedir.
+- **Uzak MCP sınırlamaları:** Server-Sent Events (SSE) aktarımı desteklenmez (Streamable HTTP kullanın). Ayrıca, sunucu `name` kesinlikle küçük harf ve alfasayısal olmalıdır (büyük harf kullanılması genel bir `400 Bad Request` hatasını tetikler).
+- **Dosya sistemi aracı:** Şu anda dosya sistemi aracı yok. Bu, `environment`'nın bir parçasıdır.
+- **Mağaza şartı:** `background=True` kullanılarak yapılan aracı yürütme işlemi için `store=True` gerekir.
+- **Yalnızca durum bilgisi olan işlev çağrısı:** İşlev çağrısı yalnızca durum bilgisi olan modda desteklenir. Sırayı devam ettirmek için `previous_interaction_id` kullanmanız gerekir. Geçmişi manuel olarak yeniden oluşturma (durum bilgisiz mod) desteklenmiyor.
+- **Desteklenmeyen çok formatlı türler.** Ses, video ve doküman girişleri şu anda desteklenmemektedir. Yalnızca metin ve resimlere izin verilir.
 
-## ¿Qué sigue?
+## Sırada ne var?
 
-- [Guía de inicio rápido](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=es-419): Conversaciones de varios turnos y transmisión.
-- [Crea agentes personalizados](https://ai.google.dev/gemini-api/docs/custom-agents?hl=es-419): Instrucciones personalizadas, habilidades y guardado de agentes
-- [Entornos](https://ai.google.dev/gemini-api/docs/agent-environment?hl=es-419): Configuración de zona de pruebas, fuentes y redes
-- [Hooks](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=es-419): Aplican barreras de seguridad y validación de efectos secundarios dentro de la zona de pruebas.
-- [Agente de Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419): Tareas de investigación de formato largo.
-- [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419): Es la API subyacente.
+- [Hızlı başlangıç](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=tr): Çok aşamalı etkileşimler ve akış.
+- [Özel Ajanlar Oluşturma](https://ai.google.dev/gemini-api/docs/custom-agents?hl=tr): Özel talimatlar, beceriler ve ajanları kaydetme.
+- [Ortamlar](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr): korumalı alan yapılandırması, kaynaklar, ağ iletişimi.
+- [Kancalar](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=tr): Korumalı alan içinde güvenlik kapılarını ve yan etki doğrulamasını zorunlu kılın.
+- [Deep Research aracısı](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr): Uzun araştırma görevleri.
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr): Temel API.
 
-Enviar comentarios
+Geri bildirim gönderin
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Última actualización: 2026-07-30 (UTC)
+Son güncelleme tarihi: 2026-08-19 UTC.
 
-¿Quieres brindar más información?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-07-30 (UTC)"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-08-19 UTC."],[],[]]

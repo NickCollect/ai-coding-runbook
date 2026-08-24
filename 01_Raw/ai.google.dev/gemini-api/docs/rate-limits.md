@@ -1,205 +1,206 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/rate-limits?hl=vi
-fetched_at: 2026-08-17T02:20:41.257936+00:00
-title: "Gi\u1edbi h\u1ea1n s\u1ed1 l\u01b0\u1ee3ng y\u00eau c\u1ea7u \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/rate-limits?hl=hi
+fetched_at: 2026-08-24T02:36:21.686399+00:00
+title: "\u0926\u0930 \u0915\u0940 \u0938\u0940\u092e\u093e\u090f\u0902 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Gửi ý kiến phản hồi
+सुझाव भेजें
 
-# Giới hạn số lượng yêu cầu
+# दर की सीमाएं
 
-Hạn mức tỷ lệ điều chỉnh số lượng yêu cầu mà bạn có thể gửi đến Gemini API trong một khoảng thời gian nhất định. Những giới hạn này giúp duy trì mức sử dụng hợp lý, bảo vệ khỏi hành vi sai trái và giúp duy trì hiệu suất hệ thống cho tất cả người dùng.
+अनुरोधों की दर से जुड़ी सीमाओं से यह तय होता है कि किसी तय समयसीमा में, Gemini API को कितने अनुरोध किए जा सकते हैं. इन सीमाओं से, सभी उपयोगकर्ताओं के लिए सिस्टम की परफ़ॉर्मेंस को बनाए रखने, गलत इस्तेमाल को रोकने, और उचित इस्तेमाल को बनाए रखने में मदद मिलती है.
 
-[Xem hạn mức sử dụng đang hoạt động trong AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=vi)
+[AI Studio में, दर से जुड़ी लागू सीमाएं देखना](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=hi)
 
-## Cách hoạt động của hạn mức yêu cầu
+## अनुरोध करने की सीमाएं कैसे काम करती हैं
 
-Hạn mức tỷ lệ thường được đo lường theo 3 phương diện:
+दर की सीमाओं को आम तौर पर तीन डाइमेंशन के हिसाब से मापा जाता है:
 
-- Số yêu cầu mỗi phút (**RPM**)
-- Số mã thông báo mỗi phút (đầu vào) (**TPM**)
-- Số yêu cầu mỗi ngày (**RPD**)
+- हर मिनट में किए गए अनुरोधों की संख्या (**आरपीएम**)
+- हर मिनट इस्तेमाल किए गए टोकन (इनपुट) (**टीपीएम**)
+- हर दिन के हिसाब से अनुरोध (**RPD**)
 
-Mức sử dụng của bạn được đánh giá dựa trên từng hạn mức và việc vượt quá bất kỳ hạn mức nào trong số đó sẽ kích hoạt lỗi giới hạn tốc độ. Ví dụ: nếu giới hạn RPM của bạn là 20, thì việc đưa ra 21 yêu cầu trong vòng một phút sẽ dẫn đến lỗi, ngay cả khi bạn chưa vượt quá giới hạn TPM hoặc các giới hạn khác.
+आपके इस्तेमाल का आकलन हर सीमा के हिसाब से किया जाता है. किसी भी सीमा से ज़्यादा इस्तेमाल करने पर, दर की सीमा से जुड़ी गड़बड़ी ट्रिगर होगी. उदाहरण के लिए, अगर आपकी आरपीएम सीमा 20 है, तो एक मिनट में 21 अनुरोध करने पर गड़बड़ी होगी. भले ही, आपने टीपीएम या अन्य सीमाओं का उल्लंघन न किया हो.
 
-Hạn mức sử dụng được áp dụng cho mỗi dự án, chứ không phải cho mỗi khoá API. Hạn mức số yêu cầu mỗi ngày (**RPD**) sẽ được đặt lại vào lúc nửa đêm theo giờ Thái Bình Dương.
+दर सीमाएं, हर प्रोजेक्ट पर लागू होती हैं, न कि हर एपीआई कुंजी पर. हर दिन के अनुरोध (**RPD**) का कोटा, पैसिफ़िक टाइम के मुताबिक आधी रात को रीसेट होता है.
 
-Hạn mức sẽ khác nhau tuỳ thuộc vào mô hình cụ thể đang được sử dụng và một số hạn mức chỉ áp dụng cho một số mô hình cụ thể. Ví dụ: Số hình ảnh mỗi phút (IPM) chỉ được tính cho các mô hình có khả năng tạo hình ảnh (Nano Banana), nhưng về mặt khái niệm thì tương tự như số mã thông báo mỗi phút (TPM). Các mô hình khác có thể có giới hạn về số lượng mã thông báo mỗi ngày (TPD).
+इस्तेमाल की सीमाएं, इस्तेमाल किए जा रहे मॉडल के हिसाब से अलग-अलग होती हैं. साथ ही, कुछ सीमाएं सिर्फ़ चुनिंदा मॉडल पर लागू होती हैं. उदाहरण के लिए, इमेज प्रति मिनट या आईपीएम की गिनती सिर्फ़ इमेज जनरेट करने वाले मॉडल (Nano Banana) के लिए की जाती है. हालांकि, यह टीपीएम से मिलता-जुलता है. अन्य मॉडल के लिए, हर दिन इस्तेमाल किए जा सकने वाले टोकन की सीमा (टीपीडी) तय की जा सकती है.
 
-Hạn mức sử dụng của các mô hình thử nghiệm và mô hình xem trước sẽ bị hạn chế hơn.
+एक्सपेरिमेंट के तौर पर उपलब्ध मॉडल और झलक वाले मॉडल के लिए, अनुरोध करने की सीमाएं ज़्यादा प्रतिबंधित होती हैं.
 
-### Giới hạn số lượng yêu cầu dựa trên mức chi tiêu
+### खर्च के आधार पर तय की गई दर की सीमाएं
 
-Ngoài hạn mức yêu cầu mỗi phút (RPM) và hạn mức mã thông báo mỗi phút (TPM), Gemini API còn áp dụng hạn mức dựa trên mức chi tiêu để ngăn chặn các khoản phí không mong muốn. Việc các hạn mức này có áp dụng cho tài khoản của bạn hay không phụ thuộc vào nhật ký thanh toán và [bậc sử dụng](#usage-tiers) của bạn.
+Gemini API, एक मिनट में किए जा सकने वाले अनुरोधों (आरपीएम) और एक मिनट में इस्तेमाल किए जा सकने वाले टोकन (टीपीएम) की सीमाओं के अलावा, खर्च के आधार पर दर की सीमाएं भी लागू करता है. इससे, अनचाहे शुल्कों से बचा जा सकता है. ये सीमाएं आपके खाते पर लागू होंगी या नहीं, यह आपकी बिलिंग के इतिहास और [इस्तेमाल के टियर](#usage-tiers) पर निर्भर करता है.
 
-Bảng sau đây cho biết hạn mức dựa trên mức chi tiêu cho từng [bậc sử dụng](#usage-tiers). Các hạn mức này được đánh giá trong khoảng thời gian 10 phút liên tục. Việc tài khoản của bạn có phải tuân thủ những hạn mức này hay không phụ thuộc vào nhật ký thanh toán và trạng thái tài khoản của bạn.
+यहां दी गई टेबल में, हर [इस्तेमाल के टियर](#usage-tiers) के लिए, खर्च के आधार पर तय की गई दर की सीमाएं दिखाई गई हैं. इन सीमाओं का आकलन, 10 मिनट की रोलिंग विंडो के आधार पर किया जाता है. ये सीमाएं आपके खाते पर लागू होती हैं या नहीं, यह आपके बिलिंग इतिहास और खाते की स्थिति पर निर्भर करता है.
 
-| Cấp sử dụng | Giới hạn tốc độ chi tiêu (mỗi 10 phút) |
+| इस्तेमाल का टियर | खर्च करने की दर की सीमा (हर 10 मिनट में) |
 | --- | --- |
-| **Free** | Không áp dụng |
-| **Cấp 1** | đô la Hong Kong |
-| **Cấp 2** | đô la Hong Kong |
-| **Cấp 3** | đô la Hong Kong |
+| **Free** | लागू नहीं |
+| **टियर 1** | $10 |
+| **टियर 2** | 200 डॉलर |
+| **टियर 3** | 200 डॉलर |
 
-Nếu bạn đạt đến giới hạn tốc độ dựa trên mức chi tiêu, API sẽ trả về lỗi `429 RESOURCE_EXHAUSTED`. Cách giải quyết:
+खर्च के आधार पर तय की गई सीमा पूरी होने पर, एपीआई `429 RESOURCE_EXHAUSTED`
+गड़बड़ी का मैसेज दिखाता है. इस समस्या को हल करने के लिए:
 
-- **Đợi rồi thử lại** sau một khoảng thời gian ngắn.
-- **Giảm tốc độ của các yêu cầu tốn kém**, chẳng hạn như bằng cách sử dụng các cửa sổ ngữ cảnh nhỏ hơn hoặc đầu ra ngắn hơn.
-- Nếu bạn thường xuyên đạt đến giới hạn này trong quá trình sử dụng bình thường, hãy [yêu cầu tăng giới hạn tốc độ](#request-rate-limit-increase).
+- कुछ समय बाद, **इंतज़ार करें और फिर से कोशिश करें**.
+- **ज़्यादा कीमत वाले अनुरोधों की दर कम करें**. उदाहरण के लिए, छोटी कॉन्टेक्स्ट विंडो या छोटे आउटपुट का इस्तेमाल करें.
+- अगर आपको सामान्य इस्तेमाल के दौरान लगातार इस सीमा का सामना करना पड़ता है, तो [दर की सीमा बढ़ाने का अनुरोध करें](#request-rate-limit-increase).
 
-## Cấp sử dụng
+## इस्तेमाल के टियर
 
-Giới hạn về tốc độ được gắn với cấp sử dụng của dự án. Khi mức sử dụng và mức chi tiêu API tăng lên, bạn sẽ tự động được nâng cấp lên một cấp cao hơn với hạn mức tốc độ cao hơn.
+दर से जुड़ी सीमाएं, प्रोजेक्ट के इस्तेमाल के टियर से जुड़ी होती हैं. एपीआई का इस्तेमाल और खर्च बढ़ने पर, आपको अपने-आप अपग्रेड करके ज़्यादा दर सीमा वाले बड़े टियर पर भेज दिया जाएगा.
 
-Điều kiện để đạt được Cấp 2 và Cấp 3 dựa trên tổng mức chi tiêu tích luỹ cho các dịch vụ của Google Cloud (bao gồm nhưng không giới hạn ở Gemini API) đối với tài khoản thanh toán được liên kết với dự án của bạn.
+दूसरे और तीसरे टियर के लिए ज़रूरी शर्तें, Google Cloud की सेवाओं (इसमें Gemini API भी शामिल है) पर किए गए कुल खर्च के आधार पर तय की जाती हैं. यह खर्च, आपके प्रोजेक्ट से लिंक किए गए बिलिंग खाते से किया गया होना चाहिए.
 
-| Cấp sử dụng | Vòng loại | [Hạn mức cấp thanh toán](https://ai.google.dev/gemini-api/docs/billing?hl=vi#tier-spend-caps) |
+| इस्तेमाल का टियर | क्वालिफ़िकेशन राउंड | [बिलिंग टियर कैप](https://ai.google.dev/gemini-api/docs/billing?hl=hi#tier-spend-caps) |
 | --- | --- | --- |
-| **Free** | [Dự án đang hoạt động](https://ai.google.dev/gemini-api/docs/api-key?hl=vi#google-cloud-projects) hoặc dùng thử miễn phí | Không áp dụng |
-| **Cấp 1** | [Thiết lập và liên kết một tài khoản thanh toán đang hoạt động](https://ai.google.dev/gemini-api/docs/billing?hl=vi#setup-billing) | 250 USD |
-| **Cấp 2** | Thanh toán 100 USD + 3 ngày kể từ lần thanh toán thành công đầu tiên | $2.000 |
-| **Cấp 3** | Thanh toán 1.000 USD + 30 ngày kể từ lần thanh toán thành công đầu tiên | 20.000 – 100.000 đô la Mỹ trở lên |
+| **Free** | [चालू प्रोजेक्ट](https://ai.google.dev/gemini-api/docs/api-key?hl=hi#google-cloud-projects) या बिना किसी शुल्क के आज़माने की सुविधा | लागू नहीं |
+| **टियर 1** | [चालू बिलिंग खाता सेट अप करना और उसे लिंक करना](https://ai.google.dev/gemini-api/docs/billing?hl=hi#setup-billing) | 250 डॉलर |
+| **टियर 2** | पहली बार पेमेंट पूरा होने के तीन दिन बाद, 100 डॉलर का पेमेंट किया गया | 2,000 डॉलर |
+| **टियर 3** | पहली बार पेमेंट पूरा होने के 30 दिन बाद, 1,000 डॉलर का पेमेंट किया गया | 20,000 से 1,00,000 डॉलर से ज़्यादा |
 
-Mặc dù việc đáp ứng các tiêu chí đủ điều kiện đã nêu thường là đủ để được phê duyệt, nhưng trong một số trường hợp hiếm gặp, yêu cầu nâng cấp có thể bị từ chối dựa trên các yếu tố khác được xác định trong quá trình xem xét.
+आम तौर पर, ज़रूरी शर्तें पूरी करने पर ही अपग्रेड करने का अनुरोध स्वीकार कर लिया जाता है. हालांकि, कुछ मामलों में समीक्षा के दौरान मिले अन्य तथ्यों के आधार पर, अपग्रेड करने का अनुरोध अस्वीकार किया जा सकता है.
 
-Hệ thống này giúp duy trì tính bảo mật và tính toàn vẹn của nền tảng Gemini API cho tất cả người dùng.
+यह सिस्टम, सभी उपयोगकर्ताओं के लिए Gemini API प्लैटफ़ॉर्म की सुरक्षा और अखंडता बनाए रखने में मदद करता है.
 
-## Hạn mức yêu cầu Gemini API
+## Gemini API के लिए अनुरोध करने की सीमाएँ
 
-Hạn mức sử dụng phụ thuộc vào nhiều yếu tố (chẳng hạn như cấp sử dụng của bạn) và bạn có thể xem hạn mức này trong Google AI Studio. Khi cấp và trạng thái tài khoản của bạn thay đổi theo thời gian, giới hạn tốc độ sẽ tự động cập nhật.
+दर की सीमाएं कई बातों पर निर्भर करती हैं. जैसे, इस्तेमाल का टियर. इन्हें Google AI Studio में देखा जा सकता है. समय के साथ-साथ, आपके टियर और खाते की स्थिति में बदलाव होता रहता है. इसलिए, दर की सीमाएं अपने-आप अपडेट हो जाएंगी.
 
-[Xem hạn mức sử dụng đang hoạt động trong AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=vi)
+[AI Studio में, दर से जुड़ी लागू सीमाएं देखना](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=hi)
 
-Hạn mức tốc độ được chỉ định không được đảm bảo và dung lượng thực tế có thể thay đổi.
+तय की गई दर की सीमाओं की गारंटी नहीं दी जाती. साथ ही, असल क्षमता अलग-अलग हो सकती है.
 
-## Giới hạn số lượng yêu cầu suy luận mức độ ưu tiên
+## प्राथमिकता का अनुमान लगाने के लिए, अनुरोधों की तय सीमाएं
 
-[Mức tiêu thụ ưu tiên](https://ai.google.dev/gemini-api/docs/priority-inference?hl=vi) có giới hạn tốc độ riêng, mặc dù mức tiêu thụ được tính vào giới hạn tốc độ lưu lượng truy cập tương tác tổng thể. **Giới hạn tốc độ mặc định là: 0,3 lần [giới hạn tốc độ tiêu chuẩn](https://aistudio.google.com/rate-limit?hl=vi) cho mỗi mô hình và cấp**
+[प्राथमिकता](https://ai.google.dev/gemini-api/docs/priority-inference?hl=hi) के आधार पर इस्तेमाल किए जाने वाले संसाधनों के लिए, दर की अपनी सीमाएं होती हैं. भले ही, इस्तेमाल को इंटरैक्टिव ट्रैफ़िक की दर की कुल सीमाओं में गिना जाता हो. **डिफ़ॉल्ट रूप से तय की गई दर की सीमाएं ये हैं: हर मॉडल और टियर के लिए, [स्टैंडर्ड दर की सीमा](https://aistudio.google.com/rate-limit?hl=hi) का 0.3 गुना**
 
-## Hạn mức về tốc độ của Batch API
+## बैच एपीआई के इस्तेमाल की दर से जुड़ी सीमाएं
 
-Các yêu cầu [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi) phải tuân theo giới hạn tốc độ riêng, tách biệt với các lệnh gọi API không theo lô.
+[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi) अनुरोधों के लिए, दर की सीमाएं अलग से तय की जाती हैं. ये सीमाएं, नॉन-बैच एपीआई कॉल से अलग होती हैं.
 
-- **Số yêu cầu theo lô đồng thời:** 100
-- **Giới hạn kích thước tệp đầu vào:** 2 GB
-- **Hạn mức lưu trữ tệp:** 20 GB
-- **Số lượng mã thông báo được đưa vào hàng đợi cho mỗi mô hình:** Bảng **Số lượng mã thông báo được đưa vào hàng đợi theo lô** liệt kê số lượng mã thông báo tối đa có thể được đưa vào hàng đợi để xử lý theo lô trên tất cả các công việc xử lý theo lô đang hoạt động của bạn cho một mô hình nhất định.
+- **एक साथ किए गए बैच अनुरोध:** 100
+- **इनपुट फ़ाइल का साइज़:** 2 जीबी
+- **फ़ाइल स्टोरेज की सीमा:** 20 जीबी
+- **हर मॉडल के लिए, लाइन में लगे टोकन:** **बैच में लाइन में लगे टोकन** टेबल में, किसी मॉडल के लिए बैच प्रोसेसिंग के लिए लाइन में लगाए जा सकने वाले टोकन की ज़्यादा से ज़्यादा संख्या दी गई होती है. यह संख्या, बैच प्रोसेसिंग के लिए चालू किए गए सभी जॉब के लिए होती है.
 
-### Cấp 1
+### टियर 1
 
-| Mô hình | Mã thông báo được xếp hàng đợi theo lô |
+| मॉडल | बैच में शामिल किए गए टोकन |
 | --- | --- |
-| Mô hình xoá văn bản | | | | |
+| टेक्स्ट-आउट मॉडल | | | | |
 | --- | --- | --- | --- | --- |
-| Gemini 3.1 Pro (Bản xem trước) | 5.000.000 |
-| Gemini 3.1 Flash Lite | 10.000.000 |
-| Bản xem trước Gemini 3.1 Flash Lite | 10.000.000 |
-| Gemini 3.5 Flash | 3.000.000 |
-| Gemini 2.5 Pro | 5.000.000 |
-| Gemini 2.5 Pro TTS | 25.000 |
-| Gemini 2.5 Flash | 3.000.000 |
-| Bản xem trước Gemini 2.5 Flash | 3.000.000 |
-| Bản xem trước hình ảnh Gemini 2.5 Flash | 3.000.000 |
-| Gemini 2.5 Flash TTS | 100.000 |
-| Gemini 2.5 Flash Lite | 10.000.000 |
-| Bản xem trước Gemini 2.5 Flash Lite | 10.000.000 |
-| Gemini 2.0 Flash | 10.000.000 |
-| Hình ảnh Gemini 2.0 Flash | 3.000.000 |
-| Gemini 2.0 Flash Lite | 10.000.000 |
-| Mô hình tạo nội dung đa phương thức | | | | |
-| Bản xem trước hình ảnh Gemini 3.1 Flash 🍌 | 1.000.000 |
-| Hình ảnh Gemini 3.1 Flash Lite 🍌 | 2.000.000 |
-| Bản xem trước hình ảnh của Gemini 3 Pro 🍌 | 2.000.000 |
-| Mô hình nhúng | | | | |
-| Gemini Embedding | 500.000 |
+| Gemini 3.1 Pro की झलक | 5,000,000 |
+| Gemini 3.1 Flash Lite | 10,000,000 |
+| Gemini 3.1 Flash Lite की झलक | 10,000,000 |
+| Gemini 3.5 Flash | 30,00,000 |
+| Gemini 2.5 Pro | 5,000,000 |
+| Gemini 2.5 Pro TTS | 25,000 |
+| Gemini 2.5 Flash | 30,00,000 |
+| Gemini 2.5 Flash का प्रीव्यू | 30,00,000 |
+| Gemini 2.5 Flash की इमेज का प्रीव्यू | 30,00,000 |
+| Gemini 2.5 Flash TTS | 1,00,000 |
+| Gemini 2.5 Flash Lite | 10,000,000 |
+| Gemini 2.5 Flash Lite का प्रीव्यू | 10,000,000 |
+| Gemini 2.0 Flash | 10,000,000 |
+| Gemini 2.0 Flash Image | 30,00,000 |
+| Gemini 2.0 Flash Lite | 10,000,000 |
+| मल्टी-मोडल जनरेशन मॉडल | | | | |
+| Gemini 3.1 Flash की इमेज का प्रीव्यू 🍌 | 1,000,000 |
+| Gemini 3.1 Flash Lite इमेज 🍌 | 2,000,000 |
+| Gemini 3 Pro की इमेज की झलक 🍌 | 2,000,000 |
+| मॉडल एम्बेड करना | | | | |
+| Gemini Embedding | 500,000 |
 
-### Cấp 2
+### टियर 2
 
-| Mô hình | Mã thông báo được xếp hàng đợi theo lô |
+| मॉडल | बैच में शामिल किए गए टोकन |
 | --- | --- |
-| Mô hình xoá văn bản | | | | |
+| टेक्स्ट-आउट मॉडल | | | | |
 | --- | --- | --- | --- | --- |
-| Gemini 3.1 Pro (Bản xem trước) | 500.000.000 |
-| Gemini 3.1 Flash Lite | 500.000.000 |
-| Bản xem trước Gemini 3.1 Flash Lite | 500.000.000 |
-| Gemini 3.5 Flash | 400.000.000 |
-| Gemini 2.5 Pro | 500.000.000 |
-| Gemini 2.5 Pro TTS | 100.000 |
-| Gemini 2.5 Flash | 400.000.000 |
-| Bản xem trước Gemini 2.5 Flash | 400.000.000 |
-| Bản xem trước hình ảnh Gemini 2.5 Flash | 400.000.000 |
-| Gemini 2.5 Flash TTS | 100.000 |
-| Gemini 2.5 Flash Lite | 500.000.000 |
-| Bản xem trước Gemini 2.5 Flash Lite | 500.000.000 |
-| Gemini 2.0 Flash | 1.000.000.000 |
-| Hình ảnh Gemini 2.0 Flash | 400.000.000 |
-| Gemini 2.0 Flash Lite | 1.000.000.000 |
-| Mô hình tạo nội dung đa phương thức | | | | |
-| Bản xem trước hình ảnh Gemini 3.1 Flash 🍌 | 250.000.000 |
-| Hình ảnh Gemini 3.1 Flash Lite 🍌 | 270.000.000 |
-| Bản xem trước hình ảnh của Gemini 3 Pro 🍌 | 270.000.000 |
-| Mô hình nhúng | | | | |
-| Gemini Embedding | 5.000.000 |
+| Gemini 3.1 Pro की झलक | 500,000,000 |
+| Gemini 3.1 Flash Lite | 500,000,000 |
+| Gemini 3.1 Flash Lite की झलक | 500,000,000 |
+| Gemini 3.5 Flash | 400,000,000 |
+| Gemini 2.5 Pro | 500,000,000 |
+| Gemini 2.5 Pro TTS | 1,00,000 |
+| Gemini 2.5 Flash | 400,000,000 |
+| Gemini 2.5 Flash का प्रीव्यू | 400,000,000 |
+| Gemini 2.5 Flash की इमेज का प्रीव्यू | 400,000,000 |
+| Gemini 2.5 Flash TTS | 1,00,000 |
+| Gemini 2.5 Flash Lite | 500,000,000 |
+| Gemini 2.5 Flash Lite का प्रीव्यू | 500,000,000 |
+| Gemini 2.0 Flash | 1,000,000,000 |
+| Gemini 2.0 Flash Image | 400,000,000 |
+| Gemini 2.0 Flash Lite | 1,000,000,000 |
+| मल्टी-मोडल जनरेशन मॉडल | | | | |
+| Gemini 3.1 Flash की इमेज का प्रीव्यू 🍌 | 25,00,00,000 |
+| Gemini 3.1 Flash Lite इमेज 🍌 | 27 करोड़ |
+| Gemini 3 Pro की इमेज की झलक 🍌 | 27 करोड़ |
+| मॉडल एम्बेड करना | | | | |
+| Gemini Embedding | 5,000,000 |
 
-### Cấp 3
+### टियर 3
 
-| Mô hình | Mã thông báo được xếp hàng đợi theo lô |
+| मॉडल | बैच में शामिल किए गए टोकन |
 | --- | --- |
-| Mô hình xoá văn bản | | | | |
+| टेक्स्ट-आउट मॉडल | | | | |
 | --- | --- | --- | --- | --- |
-| Gemini 3.1 Pro (Bản xem trước) | 1.000.000.000 |
-| Gemini 3.1 Flash Lite | 1.000.000.000 |
-| Bản xem trước Gemini 3.1 Flash Lite | 1.000.000.000 |
-| Gemini 3.5 Flash | 1.000.000.000 |
-| Gemini 2.5 Pro | 1.000.000.000 |
-| Gemini 2.5 Pro TTS | 1.000.000 |
-| Gemini 2.5 Flash | 1.000.000.000 |
-| Bản xem trước Gemini 2.5 Flash | 1.000.000.000 |
-| Bản xem trước hình ảnh Gemini 2.5 Flash | 1.000.000.000 |
-| Gemini 2.5 Flash TTS | 4.000.000 |
-| Gemini 2.5 Flash Lite | 1.000.000.000 |
-| Bản xem trước Gemini 2.5 Flash Lite | 1.000.000.000 |
-| Gemini 2.0 Flash | 5.000.000.000 |
-| Hình ảnh Gemini 2.0 Flash | 1.000.000.000 |
-| Gemini 2.0 Flash Lite | 5.000.000.000 |
-| Mô hình tạo nội dung đa phương thức | | | | |
-| Bản xem trước hình ảnh Gemini 3.1 Flash 🍌 | 750.000.000 |
-| Hình ảnh Gemini 3.1 Flash Lite 🍌 | 1.000.000.000 |
-| Bản xem trước hình ảnh của Gemini 3 Pro 🍌 | 1.000.000.000 |
-| Mô hình nhúng | | | | |
-| Gemini Embedding | 10.000.000 |
+| Gemini 3.1 Pro की झलक | 1,000,000,000 |
+| Gemini 3.1 Flash Lite | 1,000,000,000 |
+| Gemini 3.1 Flash Lite की झलक | 1,000,000,000 |
+| Gemini 3.5 Flash | 1,000,000,000 |
+| Gemini 2.5 Pro | 1,000,000,000 |
+| Gemini 2.5 Pro TTS | 1,000,000 |
+| Gemini 2.5 Flash | 1,000,000,000 |
+| Gemini 2.5 Flash का प्रीव्यू | 1,000,000,000 |
+| Gemini 2.5 Flash की इमेज का प्रीव्यू | 1,000,000,000 |
+| Gemini 2.5 Flash TTS | 40,00,000 |
+| Gemini 2.5 Flash Lite | 1,000,000,000 |
+| Gemini 2.5 Flash Lite का प्रीव्यू | 1,000,000,000 |
+| Gemini 2.0 Flash | 5,000,000,000 |
+| Gemini 2.0 Flash Image | 1,000,000,000 |
+| Gemini 2.0 Flash Lite | 5,000,000,000 |
+| मल्टी-मोडल जनरेशन मॉडल | | | | |
+| Gemini 3.1 Flash की इमेज का प्रीव्यू 🍌 | 750,000,000 |
+| Gemini 3.1 Flash Lite इमेज 🍌 | 1,000,000,000 |
+| Gemini 3 Pro की इमेज की झलक 🍌 | 1,000,000,000 |
+| मॉडल एम्बेड करना | | | | |
+| Gemini Embedding | 10,000,000 |
 
-## Cách nâng cấp lên cấp độ tiếp theo
+## अगले टियर पर अपग्रेड करने का तरीका
 
-Để chuyển từ gói Miễn phí sang gói có tính phí, trước tiên, bạn phải [thiết lập thông tin thanh toán trong AI Studio](https://ai.google.dev/gemini-api/docs/billing?hl=vi).
+मुफ़्त टियर से पैसे चुकाकर ली जाने वाली सदस्यता पर स्विच करने के लिए, आपको सबसे पहले [AI Studio में बिलिंग सेट अप करनी होगी](https://ai.google.dev/gemini-api/docs/billing?hl=hi).
 
-Sau khi dự án của bạn đáp ứng [các tiêu chí được chỉ định](#usage-tiers), dự án đó sẽ tự động được nâng cấp lên cấp tiếp theo. Việc nâng cấp từ gói Miễn phí lên Cấp 1 thường có hiệu lực ngay lập tức, còn các lần nâng cấp cấp độ tiếp theo sẽ có hiệu lực trong vòng 10 phút. Chuyển đến [trang Dự án](https://aistudio.google.com/projects?hl=vi) trong AI Studio để kiểm tra các cấp.
+जब आपका प्रोजेक्ट [तय की गई शर्तों](#usage-tiers) को पूरा कर लेगा, तब उसे अगले टियर में अपने-आप अपग्रेड कर दिया जाएगा. मुफ़्त टियर से टियर 1 में अपग्रेड करने पर, आम तौर पर बदलाव तुरंत लागू हो जाते हैं. इसके बाद, टियर अपग्रेड करने पर बदलाव 10 मिनट के अंदर लागू हो जाते हैं. अपने टियर देखने के लिए, AI Studio में [प्रोजेक्ट पेज](https://aistudio.google.com/projects?hl=hi) पर जाएं.
 
-## Yêu cầu tăng giới hạn tốc độ
+## अनुरोधों की संख्या बढ़ाने का अनुरोध करना
 
-Mỗi biến thể mô hình đều có một hạn mức liên kết (số yêu cầu mỗi phút, RPM).
-Để biết thông tin chi tiết về các giới hạn tốc độ đó, hãy xem trang [Giới hạn tốc độ của AI Studio](https://aistudio.google.com/rate-limit?hl=vi).
+मॉडल के हर वर्शन के लिए, दर की सीमा (हर मिनट में अनुरोध, आरपीएम) तय की जाती है.
+इन रेट लिमिट के बारे में जानने के लिए, [AI Studio की रेट लिमिट](https://aistudio.google.com/rate-limit?hl=hi) पेज पर जाएं.
 
-[Yêu cầu tăng giới hạn tốc độ cho cấp có tính phí](https://forms.gle/ETzX94k8jf7iSotH9)
+[पैसे चुकाकर ली जाने वाली सदस्यता के लिए, अनुरोधों की संख्या बढ़ाने का अनुरोध करना](https://forms.gle/ETzX94k8jf7iSotH9)
 
-Chúng tôi không đảm bảo sẽ tăng hạn mức sử dụng cho bạn, nhưng chúng tôi sẽ cố gắng hết sức để xem xét yêu cầu của bạn.
+हम रेट लिमिट बढ़ाने की कोई गारंटी नहीं देते. हालांकि, हम आपके अनुरोध की समीक्षा करने की पूरी कोशिश करेंगे.
 
-Gửi ý kiến phản hồi
+सुझाव भेजें
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Cập nhật lần gần đây nhất: 2026-07-03 UTC.
+आखिरी बार 2026-07-03 (UTC) को अपडेट किया गया.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-03 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-03 (UTC) को अपडेट किया गया."],[],[]]
