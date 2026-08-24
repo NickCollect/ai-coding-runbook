@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/cli/using
-fetched_at: 2026-08-17T02:15:18.363330+00:00
+fetched_at: 2026-08-24T02:18:39.742602+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ ant <resource>[:<subresource>] <action> [flags]
 
 Run `ant --help` for the full resource list, or append `--help` to any subcommand for its flags.
 
-Resources in beta (including agents, sessions, deployments, environments, and skills) live under the `beta:` prefix. Commands in this namespace automatically send the appropriate `anthropic-beta` header for that resource, so you don't need to pass it yourself. Use `--beta <header>` only to override the default (for example, to opt into a different schema version).
+Resources in beta (including agents, sessions, deployments, and environments) live under the `beta:` prefix. Commands in this namespace automatically send the appropriate `anthropic-beta` header for that resource, so you don't need to pass it yourself. Use `--beta <header>` only to override the default (for example, to opt into a different schema version).
 
 ```bash
 ant models list
@@ -158,7 +158,7 @@ YAML
 Flags that take a file path, such as `--file` on the upload command, accept a bare path:
 
 ```bash
-ant beta:files upload --file ./report.pdf
+ant files upload --file ./report.pdf
 ```
 
 To inline a file's contents into a string-valued field, prefix the path with `@`:

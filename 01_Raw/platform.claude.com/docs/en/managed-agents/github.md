@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/github
-fetched_at: 2026-08-17T02:15:16.503650+00:00
+fetched_at: 2026-08-24T02:18:38.041536+00:00
 fetch_method: mintlify_md
 ---
 
@@ -53,16 +53,28 @@ First, create an agent that declares the GitHub MCP server. The agent definition
   )
   ```
 
-  ```bash CLI
-  AGENT_ID=$(ant beta:agents create \
-    --name "Code Reviewer" \
-    --model '{id: claude-opus-5}' \
-    --system "You are a code review assistant with access to GitHub." \
-    --mcp-server '{type: url, name: github, url: https://api.githubcopilot.com/mcp/}' \
-    --tool '{type: agent_toolset_20260401}' \
-    --tool '{type: mcp_toolset, mcp_server_name: github}' \
-    --transform id --raw-output)
-  ```
+  <MultiFileExample language="cli" label="CLI">
+    ```bash CLI
+    AGENT_ID=$(ant beta:agents create --transform id --raw-output < code-reviewer.agent.yaml)
+    ```
+
+    <File filename="code-reviewer.agent.yaml">
+      ```yaml
+      name: Code Reviewer
+      model:
+        id: claude-opus-5
+      system: You are a code review assistant with access to GitHub.
+      mcp_servers:
+        - type: url
+          name: github
+          url: https://api.githubcopilot.com/mcp/
+      tools:
+        - type: agent_toolset_20260401
+        - type: mcp_toolset
+          mcp_server_name: github
+      ```
+    </File>
+  </MultiFileExample>
 
   ```python Python
   agent = client.beta.agents.create(
@@ -383,7 +395,15 @@ Then create a session that mounts the GitHub repository:
   ```
 </CodeGroup>
 
-The `resources[].authorization_token` authenticates the repository clone operation and is not echoed in API responses.
+A `github_repository` resource accepts the following fields:
+
+| Field                 | Description                                                                                                                                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                | Required. Must be `"github_repository"`.                                                                                                                                                          |
+| `url`                 | Required. The repository's HTTPS URL in the form `https://github.com/<owner>/<repo>`, without a `.git` suffix. Other forms, including SSH URLs, are rejected with an `invalid_request_error`.     |
+| `authorization_token` | Required. The GitHub token used to clone the repository. It is not echoed in API responses. See [Token permissions](https://platform.claude.com/docs/en/managed-agents/github#token-permissions). |
+| `mount_path`          | Optional. The directory under `/workspace` to clone the repository into. Defaults to `/workspace/<repo-name>`.                                                                                    |
+| `checkout`            | Optional. A branch (`{"type": "branch", "name": "main"}`) or commit (`{"type": "commit", "sha": "..."}`) to check out. Defaults to the repository's default branch.                               |
 
 Mounting a repository also loads any skills stored in its root `.claude/skills` directory. Skills are discovered once per session, from the repository state checked out at session start. See [Load skills from a GitHub repository](https://platform.claude.com/docs/en/managed-agents/skills#load-skills-from-a-github-repository).
 
@@ -739,9 +759,7 @@ With the GitHub MCP server, the agent can create branches, commit changes, and p
   ```
 
   ```bash CLI
-  ant beta:sessions:events send \
-    --session-id "$SESSION_ID" \
-    > /dev/null <<'EOF'
+  ant beta:sessions:events send --session-id "$SESSION_ID" > /dev/null <<'EOF'
   events:
     - type: user.message
       content:

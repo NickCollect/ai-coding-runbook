@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/wif-providers/okta
-fetched_at: 2026-08-17T02:15:17.036424+00:00
+fetched_at: 2026-08-24T02:18:38.449678+00:00
 fetch_method: mintlify_md
 ---
 
@@ -118,13 +118,13 @@ Unlike platform-native providers (AWS, Google Cloud, Kubernetes), which make a t
 
   ```python Python
   import os
-  import httpx
+  import httpx2
   import anthropic
   from anthropic import WorkloadIdentityCredentials
 
 
   def fetch_okta_token() -> str:
-      response = httpx.post(
+      response = httpx2.post(
           f"{os.environ['OKTA_ISSUER']}/v1/token",
           data={
               "grant_type": "client_credentials",
@@ -462,7 +462,7 @@ Each SDK tab shows the callable pattern: the Anthropic SDK calls your identity-t
 
 ## Verify the setup
 
-A successful exchange returns an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. On `400 invalid_grant`, see [Troubleshoot a failed exchange](https://platform.claude.com/docs/en/manage-claude/wif-reference#troubleshoot-a-failed-exchange); the most common Okta-side cause is an `issuer_url` mismatch (it must include the `/oauth2/<auth-server-id>` path; the Okta org authorization server is not usable).
+A successful exchange returns an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. If the exchange fails with the opaque `401` `authentication_error` response (message `Authentication failed`), check the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) for the deny reason and see [Troubleshoot a failed exchange](https://platform.claude.com/docs/en/manage-claude/wif-reference#troubleshoot-a-failed-exchange); the most common Okta-side cause is an `issuer_url` mismatch (it must include the `/oauth2/<auth-server-id>` path; the Okta org authorization server is not usable).
 
 ## Scope your rule
 

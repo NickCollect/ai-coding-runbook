@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages/batches/results
-fetched_at: 2026-08-17T02:15:19.070316+00:00
+fetched_at: 2026-08-24T02:18:40.583110+00:00
 fetch_method: mintlify_md
 ---
 
@@ -64,6 +64,26 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
           - `expires_at: string`
 
             The time at which the container will expire.
+
+          - `skills: array of ContainerSkill or null`
+
+            Skills loaded in the container
+
+            - `skill_id: string`
+
+              Skill ID
+
+            - `type: "anthropic" or "custom"`
+
+              Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+
+              - `"anthropic"`
+
+              - `"custom"`
+
+            - `version: string`
+
+              The resolved version: a skill version ID for custom skills.
 
         - `content: array of ContentBlock`
 
@@ -250,7 +270,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               - `"redacted_thinking"`
 
-          - `ToolUseBlock object { id, caller, input, 2 more }`
+          - `ToolUseBlock object { id, caller, input, 3 more }`
 
             - `id: string`
 
@@ -291,6 +311,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             - `type: "tool_use"`
 
               - `"tool_use"`
+
+            - `toolset_name: optional string or null`
+
+              For a toolset member tool_use, the toolset family.
 
           - `ServerToolUseBlock object { id, caller, input, 2 more }`
 

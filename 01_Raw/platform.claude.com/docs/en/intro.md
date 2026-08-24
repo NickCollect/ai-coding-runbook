@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/intro
-fetched_at: 2026-08-17T02:15:13.891397+00:00
+fetched_at: 2026-08-24T02:18:35.566661+00:00
 fetch_method: mintlify_md
 ---
 
@@ -81,7 +81,7 @@ Anthropic provides developer tools to help you build and scale applications with
 
 <CardGroup cols={3}>
   <Card title="Developer Console" icon="computer" href="https://platform.claude.com/">
-    Prototype and test prompts in your browser with the Workbench.
+    Explore and understand the API in your browser with Playground.
   </Card>
 
   <Card title="API Reference" icon="code" href="https://platform.claude.com/docs/en/api/overview">

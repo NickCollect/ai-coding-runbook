@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/app-attest
-fetched_at: 2026-08-17T02:15:16.794310+00:00
+fetched_at: 2026-08-24T02:18:38.275826+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ description: Let genuine installations of your iOS or macOS app call the Claude 
 
 App Attest authenticates iOS and macOS apps that call the Claude API directly from the device, with usage billed to your workspace. This page explains how App Attest works, how to register your app in the Claude Console, and how to revoke an app integration.
 
-Apps use App Attest through the [Claude for Foundation Models](https://github.com/anthropics/ClaudeForFoundationModels) Swift package, which is in beta: it requires the OS 27 betas, and APIs might change before general availability. For the Swift configuration, see [Apple Foundation Models](https://platform.claude.com/docs/en/cli-sdks-libraries/libraries/apple-foundation-models#app-attest-production).
+Apps use App Attest through the [Claude for Foundation Models](https://github.com/anthropics/ClaudeForFoundationModels) Swift package, which is in beta: it requires the OS 27 betas, and APIs might change during the beta. For the Swift configuration, see [Apple Foundation Models](https://platform.claude.com/docs/en/cli-sdks-libraries/libraries/apple-foundation-models#app-attest-production).
 
 ## How App Attest works
 

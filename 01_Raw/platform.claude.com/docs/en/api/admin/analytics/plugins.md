@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/analytics/plugins
-fetched_at: 2026-08-17T02:15:23.248958+00:00
+fetched_at: 2026-08-24T02:18:48.033268+00:00
 fetch_method: mintlify_md
 ---
 
@@ -146,7 +146,7 @@ range-rollup mode like /skills.
 ```http
 curl https://api.anthropic.com/v1/organizations/analytics/plugins \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
 #### Response

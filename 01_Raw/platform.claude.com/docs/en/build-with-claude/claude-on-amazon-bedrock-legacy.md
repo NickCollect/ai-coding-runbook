@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy
-fetched_at: 2026-08-17T02:15:15.793046+00:00
+fetched_at: 2026-08-24T02:18:37.534503+00:00
 fetch_method: mintlify_md
 ---
 
@@ -60,14 +60,14 @@ Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries
   <Tab title="Java">
     <CodeGroup>
       ```groovy Gradle
-      implementation("com.anthropic:anthropic-java-bedrock:2.53.0")
+      implementation("com.anthropic:anthropic-java-bedrock:2.57.0")
       ```
 
       ```xml Maven
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java-bedrock</artifactId>
-          <version>2.53.0</version>
+          <version>2.57.0</version>
       </dependency>
       ```
 
@@ -332,8 +332,9 @@ The following examples show how to generate text from Claude on Bedrock:
         # Temporary credentials can be used with aws_session_token.
         # Read more at https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html.
         aws_session_token="<session_token>",
-        # aws_region changes the aws region to which the request is made. By default, the SDK reads AWS_REGION,
-        # and if that's not present, defaults to us-east-1. Note that the SDK does not read ~/.aws/config for the region.
+        # aws_region changes the aws region to which the request is made. If it is not provided, the SDK reads
+        # AWS_REGION / AWS_DEFAULT_REGION, then the region configured for your boto3 session or AWS profile
+        # (including ~/.aws/config), and raises ValueError if no region can be resolved.
         aws_region="us-west-2",
     )
 
@@ -743,6 +744,7 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 * Claude Managed Agents
 * Server-side fallback (the [`fallbacks` parameter](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback); use the [client-side fallback pattern](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#client-side-fallback) instead)
 * Automatic prompt caching (the [top-level `cache_control` field](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#automatic-caching); use [explicit cache breakpoints](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#explicit-cache-breakpoints) instead)
+* [Computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool) and [browser use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool) toolsets (`computer_toolset_20260801` and `browser_toolset_20260801` are not currently available on Amazon Bedrock; the beta computer use tool versions remain available)
 
 ### PDF support on Bedrock
 

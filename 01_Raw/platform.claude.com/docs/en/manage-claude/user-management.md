@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/user-management
-fetched_at: 2026-08-17T02:15:16.754961+00:00
+fetched_at: 2026-08-24T02:18:38.248453+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,27 +13,27 @@ description: "Manage the people in your Claude Enterprise organization with the 
 This page covers managing the people in your **Claude Enterprise** (claude.ai) organization programmatically, using the [Admin API](https://platform.claude.com/docs/en/api/admin): list members and look them up by email address, change a member's role, remove members, send and withdraw invites, manage your enterprise's groups and their membership, and read your organization's custom roles. For Claude Console (Claude Platform) organizations, see the [Admin API guide for Claude Console](https://platform.claude.com/docs/en/manage-claude/admin-api).
 
 <Note>
-  **The endpoints on this page are in beta for Claude Enterprise organizations.** The beta is enabled for all Claude Enterprise organizations. Group and custom-role requests must include the [beta header](https://platform.claude.com/docs/en/api/beta-headers) `anthropic-beta: ce-user-management-2026-07-13`; requests without it return 404. Member and invite requests take no beta header.
+  Group and custom-role requests don't require the `anthropic-beta: ce-user-management-2026-07-13` [beta header](https://platform.claude.com/docs/en/api/beta-headers). Requests that still send it are accepted and behave identically.
 </Note>
 
 ## Which endpoints can your organization use?
 
 The Admin API is a single set of endpoints under `https://api.anthropic.com/v1/organizations/`. Claude Console and Claude Enterprise organizations authenticate with [different keys](https://platform.claude.com/docs/en/manage-claude/admin-api-keys) and each have access to a different subset of the endpoints:
 
-| Endpoints                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Claude Console (Claude Platform)                                                                  | Claude Enterprise (claude.ai)   |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------- |
-| [Members](https://platform.claude.com/docs/en/manage-claude/user-management#members) and [invites](https://platform.claude.com/docs/en/manage-claude/user-management#invites)                                                                                                                                                                                                                                                                             | Available; see the [Admin API guide](https://platform.claude.com/docs/en/manage-claude/admin-api) | **Beta** (this page)            |
-| [Groups](https://platform.claude.com/docs/en/manage-claude/user-management#groups)                                                                                                                                                                                                                                                                                                                                                                        | Not available                                                                                     | **Beta** (this page)            |
-| [Custom roles](https://platform.claude.com/docs/en/manage-claude/user-management#custom-roles)                                                                                                                                                                                                                                                                                                                                                            | Not available                                                                                     | **Beta**, read-only (this page) |
-| [Spend limits](https://platform.claude.com/docs/en/manage-claude/spend-limits-api)                                                                                                                                                                                                                                                                                                                                                                        | Not available                                                                                     | Available                       |
-| [Workspaces](https://platform.claude.com/docs/en/manage-claude/workspaces), [API keys](https://platform.claude.com/docs/en/manage-claude/admin-api#api-keys), [usage and cost reports](https://platform.claude.com/docs/en/manage-claude/usage-cost-api), [rate limits](https://platform.claude.com/docs/en/manage-claude/rate-limits-api), and the other endpoints in the [Admin API guide](https://platform.claude.com/docs/en/manage-claude/admin-api) | Available                                                                                         | Not available                   |
+| Endpoints                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Claude Console (Claude Platform)                                                                  | Claude Enterprise (claude.ai)    |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | -------------------------------- |
+| [Members](https://platform.claude.com/docs/en/manage-claude/user-management#members) and [invites](https://platform.claude.com/docs/en/manage-claude/user-management#invites)                                                                                                                                                                                                                                                                             | Available; see the [Admin API guide](https://platform.claude.com/docs/en/manage-claude/admin-api) | Available (this page)            |
+| [Groups](https://platform.claude.com/docs/en/manage-claude/user-management#groups)                                                                                                                                                                                                                                                                                                                                                                        | Not available                                                                                     | Available (this page)            |
+| [Custom roles](https://platform.claude.com/docs/en/manage-claude/user-management#custom-roles)                                                                                                                                                                                                                                                                                                                                                            | Not available                                                                                     | Available, read-only (this page) |
+| [Spend limits](https://platform.claude.com/docs/en/manage-claude/spend-limits-api)                                                                                                                                                                                                                                                                                                                                                                        | Not available                                                                                     | Available                        |
+| [Workspaces](https://platform.claude.com/docs/en/manage-claude/workspaces), [API keys](https://platform.claude.com/docs/en/manage-claude/admin-api#api-keys), [usage and cost reports](https://platform.claude.com/docs/en/manage-claude/usage-cost-api), [rate limits](https://platform.claude.com/docs/en/manage-claude/rate-limits-api), and the other endpoints in the [Admin API guide](https://platform.claude.com/docs/en/manage-claude/admin-api) | Available                                                                                         | Not available                    |
 
 Members and invites are the same endpoints for both organization types; this page documents their Claude Enterprise behavior, including the Claude Enterprise [organization roles](https://platform.claude.com/docs/en/manage-claude/user-management#organization-roles). The group and custom-role endpoints exist only for Claude Enterprise.
 
 <Check>
   **Scoped Admin API key required**
 
-  These endpoints require an Admin API key with the `read:members` scope (member and invite `GET` endpoints, and all custom-role endpoints; there is no separate role scope), the `write:members` scope (member and invite `POST` and `DELETE` endpoints), the `read:rbac_groups` scope (group `GET` endpoints), or the `write:rbac_groups` scope (group `POST` and `DELETE` endpoints). A key carrying the `read:org_audit` scope (a read-only scope for security-audit integrations) can also call every `GET` endpoint on this page and the [Compliance API](https://platform.claude.com/docs/en/manage-claude/compliance-api) read endpoints. See [Create an Admin API key](https://platform.claude.com/docs/en/manage-claude/admin-api-keys#create-a-key-for-a-claude-enterprise-organization) for where your primary owner creates one and which scopes to select. Pass the key in the `x-api-key` header on every request. Member and invite requests also require the `anthropic-version: 2023-06-01` header, as shown in the examples; group and custom-role requests do not, and instead require the `anthropic-beta` header described in the preceding note.
+  These endpoints require an Admin API key with the `read:members` scope (member and invite `GET` endpoints, and all custom-role endpoints; there is no separate role scope), the `write:members` scope (member and invite `POST` and `DELETE` endpoints), the `read:rbac_groups` scope (group `GET` endpoints), or the `write:rbac_groups` scope (group `POST` and `DELETE` endpoints). A key carrying the `read:org_audit` scope (a read-only scope for security-audit integrations) can also call every `GET` endpoint on this page and the [Compliance API](https://platform.claude.com/docs/en/manage-claude/compliance-api) read endpoints. See [Create an Admin API key](https://platform.claude.com/docs/en/manage-claude/admin-api-keys#create-a-key-for-a-claude-enterprise-organization) for where your primary owner creates one and which scopes to select. Pass the key in the `x-api-key` header on every request. Member and invite requests also require the `anthropic-version: 2023-06-01` header, as shown in the examples; group and custom-role requests do not.
 </Check>
 
 ## Overview
@@ -251,7 +251,7 @@ curl -X DELETE "https://api.anthropic.com/v1/organizations/invites/invite_01QrSt
 
 ## Groups
 
-Groups your enterprise creates directly, in [claude.ai organization settings](https://claude.ai/admin-settings) or through this API (`source_type: "direct"`), support every endpoint in this section. Groups provisioned by your identity provider (`source_type: "scim"`) can be read but not modified: renaming or deleting a SCIM group, or changing its membership, returns 400, because your identity provider owns it. Every group request must include the `anthropic-beta: ce-user-management-2026-07-13` header, as shown in the examples; requests without it return 404. Unlike member and invite requests, group requests do not require the `anthropic-version` header.
+Groups your enterprise creates directly, in [claude.ai organization settings](https://claude.ai/admin-settings) or through this API (`source_type: "direct"`), support every endpoint in this section. Groups provisioned by your identity provider (`source_type: "scim"`) can be read but not modified: renaming or deleting a SCIM group, or changing its membership, returns 400, because your identity provider owns it. Unlike member and invite requests, group requests do not require the `anthropic-version` header.
 
 ### List groups
 
@@ -261,8 +261,7 @@ For complete parameter details and response schemas, see [List groups](https://p
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/rbac_groups?limit=20" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13"
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ```json
@@ -291,8 +290,7 @@ For complete parameter details and response schemas, see [Get group](https://pla
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13"
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ### Create a group
@@ -305,7 +303,6 @@ For complete parameter details and response schemas, see [Create group](https://
 curl -X POST "https://api.anthropic.com/v1/organizations/rbac_groups" \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13" \
   -d '{"name": "Engineering"}'
 ```
 
@@ -331,7 +328,6 @@ For complete parameter details and response schemas, see [Update group](https://
 curl -X POST "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn" \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13" \
   -d '{"name": "Platform Engineering"}'
 ```
 
@@ -343,8 +339,7 @@ For complete parameter details and response schemas, see [Delete group](https://
 
 ```bash cURL
 curl -X DELETE "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13"
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ```json
@@ -362,8 +357,7 @@ For complete parameter details and response schemas, see [List group members](ht
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn/members?limit=100" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13"
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ```json
@@ -392,7 +386,6 @@ For complete parameter details and response schemas, see [Add group member](http
 curl -X POST "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn/members" \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13" \
   -d '{"user_id": "user_01AbCdEfGhIjKlMnOpQrSt"}'
 ```
 
@@ -414,8 +407,7 @@ For complete parameter details and response schemas, see [Remove group member](h
 
 ```bash cURL
 curl -X DELETE "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn/members/user_01AbCdEfGhIjKlMnOpQrSt" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13"
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ```json
@@ -428,7 +420,7 @@ curl -X DELETE "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_grou
 
 ## Custom roles
 
-Custom roles are read-only through the API: these endpoints catalog your organization's custom roles (defined in [claude.ai organization settings](https://claude.ai/admin-settings) or provisioned by Anthropic) and the permissions each role grants. Custom-role reads use the `read:members` scope (there is no separate role scope) and work with an organization-level key: unlike the group endpoints, they do not require a key created for all linked organizations, and the catalog returned is your organization's own. Custom-role requests, like group requests, must include the `anthropic-beta: ce-user-management-2026-07-13` header; requests without it return 404.
+Custom roles are read-only through the API: these endpoints catalog your organization's custom roles (defined in [claude.ai organization settings](https://claude.ai/admin-settings) or provisioned by Anthropic) and the permissions each role grants. Custom-role reads use the `read:members` scope (there is no separate role scope) and work with an organization-level key: unlike the group endpoints, they do not require a key created for all linked organizations, and the catalog returned is your organization's own.
 
 ### List roles
 
@@ -438,8 +430,7 @@ For complete parameter details and response schemas, see [List roles](https://pl
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/rbac_roles?limit=20" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13"
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ```json
@@ -466,22 +457,20 @@ For complete parameter details and response schemas, see [Get role](https://plat
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/rbac_roles/rbac_role_01CdEfGhIjKlMnOpQrStUv" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13"
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ### List a role's permissions
 
 `GET /v1/organizations/rbac_roles/{role_id}/permissions` returns the role's permissions. Each permission pairs a `resource` (what it applies to: the organization's product features, a connector tool, a connector OAuth scope, one connector, or every connector) with an `action` (what it grants on that resource). Rows for features not enabled for your organization are omitted, so a page might contain fewer than `limit` rows while `has_more` is `true`. Requires the `read:members` scope.
 
-Two `action` values need special care: an `organization` permission whose action is `capability_access_all` (every product feature) or `capability_access_all_ga` (every generally available product feature) is a blanket grant (one that covers neither model access nor the `permission_`-prefixed admin-panel permissions) and is listed as that single row rather than expanded. When you tally what a role grants, treat a blanket row as covering everything its variant describes, not just the features named in other rows.
+Two `action` values need special care: an `organization` permission whose action is `capability_access_all` (every product feature) or `capability_access_all_ga` (every stable product feature, that is, every feature not labeled beta or research preview) is a blanket grant (one that covers neither model access nor the `permission_`-prefixed admin-panel permissions) and is listed as that single row rather than expanded. When you tally what a role grants, treat a blanket row as covering everything its variant describes, not just the features named in other rows.
 
 For complete parameter details and response schemas, see [List role permissions](https://platform.claude.com/docs/en/api/admin/rbac_roles/permissions/list) in the API reference.
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/rbac_roles/rbac_role_01CdEfGhIjKlMnOpQrStUv/permissions?limit=20" \
-  -H "x-api-key: $ANTHROPIC_ADMIN_KEY" \
-  -H "anthropic-beta: ce-user-management-2026-07-13"
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ```json

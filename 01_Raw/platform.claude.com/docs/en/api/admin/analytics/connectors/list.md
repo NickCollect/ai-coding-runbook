@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/analytics/connectors/list
-fetched_at: 2026-08-17T02:15:23.206404+00:00
+fetched_at: 2026-08-24T02:18:47.936526+00:00
 fetch_method: mintlify_md
 ---
 
@@ -185,7 +185,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 ```http
 curl https://api.anthropic.com/v1/organizations/analytics/connectors \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
 #### Response

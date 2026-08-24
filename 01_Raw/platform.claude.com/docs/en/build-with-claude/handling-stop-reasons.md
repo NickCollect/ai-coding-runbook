@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons
-fetched_at: 2026-08-17T02:15:14.069214+00:00
+fetched_at: 2026-08-24T02:18:35.728742+00:00
 fetch_method: mintlify_md
 ---
 
@@ -903,8 +903,7 @@ Claude stopped because it reached the `max_tokens` limit specified in your reque
 
   <CodeGroup exclude="shell:cURL">
     ```bash CLI
-    RESPONSE=$(ant messages create --max-tokens 1024 \
-      --format jsonl < request.yaml)
+    RESPONSE=$(ant messages create --max-tokens 1024 --format jsonl < request.yaml)
 
     # Check if the response was truncated mid tool use
     STOP_REASON=$(jq -r '.stop_reason' <<<"$RESPONSE")

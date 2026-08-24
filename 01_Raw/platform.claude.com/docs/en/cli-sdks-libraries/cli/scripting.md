@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/cli/scripting
-fetched_at: 2026-08-17T02:15:18.356883+00:00
+fetched_at: 2026-08-24T02:18:39.746104+00:00
 fetch_method: mintlify_md
 ---
 
@@ -154,8 +154,7 @@ The CLI is designed to compose with standard shell tooling.
 `--transform id --raw-output` on a list endpoint emits one bare ID per line, so standard tools such as `head` and `xargs` apply directly. Capture the first result, then pass it to a follow-up command:
 
 ```bash
-FIRST_AGENT=$(ant beta:agents list \
-  --transform id --raw-output | head -1)
+FIRST_AGENT=$(ant beta:agents list --transform id --raw-output | head -1)
 
 ant beta:agents:versions list \
   --agent-id "$FIRST_AGENT" \

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool
-fetched_at: 2026-08-17T02:15:14.748186+00:00
+fetched_at: 2026-08-24T02:18:36.523536+00:00
 fetch_method: mintlify_md
 ---
 
@@ -48,7 +48,7 @@ Each tool version builds on the previous one:
 * `code_execution_20260120` adds REPL state persistence and [programmatic tool calling](https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling) from within the sandbox. Claude Haiku 4.5 accepts the `code_execution_20260120` and `code_execution_20260521` tool types, but programmatic tool calling and the REPL state persistence that depends on it aren't available on it, so the newer versions behave like `code_execution_20250825` there.
 * `code_execution_20260521` is the same runtime as `code_execution_20260120`. The difference is that the tool description tells Claude about the 90-second wall-clock limit on each Python cell in programmatic tool calling, so Claude can budget long-running cells. A cell that exceeds the limit returns a normal code execution result with a non-zero `return_code` and a `detection_timeout` status message in its output. This is separate from the `execution_time_exceeded` [error code](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool#errors), which the API returns when a whole tool invocation exceeds the maximum execution time.
 
-All three tool versions are generally available and don't require an `anthropic-beta` header. The legacy code execution beta headers remain valid opt-ins.
+None of the three tool versions requires an `anthropic-beta` header. The legacy code execution beta headers remain valid opt-ins.
 
 The examples on this page use `code_execution_20250825`, which covers the Bash and file operations they demonstrate and behaves the same way on every model in the table; use `code_execution_20260120` or later when you need programmatic tool calling or REPL state persistence. The current [web search](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool) and [web fetch](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool) tools (`web_search_20260209`, `web_fetch_20260209`, and later) require `code_execution_20260120` or later as their code execution version.
 
@@ -281,11 +281,7 @@ If you want Claude to run code for a borderline request, ask explicitly (for exa
 
 ### Upload and analyze your own files
 
-To analyze your own data files (such as CSV, Excel, or images), upload them through the Files API and reference them in your request:
-
-<Note>
-  Using the Files API with code execution requires the Files API beta header: `"anthropic-beta": "files-api-2025-04-14"`
-</Note>
+To analyze your own data files (such as CSV, Excel, or images), upload them through the Files API and reference them in your request.
 
 The Python environment can process various file types uploaded through the Files API, including:
 
@@ -308,14 +304,12 @@ The Python environment can process various file types uploaded through the Files
   FILE_ID=$(curl --fail-with-body -sS https://api.anthropic.com/v1/files \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: files-api-2025-04-14" \
     -F "file=@data.csv" | jq -r '.id')
 
   # Then use the file_id with code execution
   curl --fail-with-body -sS https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: files-api-2025-04-14" \
     -H "content-type: application/json" \
     -d '{
       "model": "claude-opus-5",
@@ -336,13 +330,10 @@ The Python environment can process various file types uploaded through the Files
 
   ```bash CLI
   # First, upload a file and capture the file ID
-  FILE_ID=$(ant beta:files upload \
-    --file ./data.csv \
-    --transform id --raw-output)
+  FILE_ID=$(ant files upload --file ./data.csv --transform id --raw-output)
 
   # Then use the file_id with code execution
-  ant beta:messages create \
-    --beta files-api-2025-04-14 <<YAML
+  ant messages create <<YAML
   model: claude-opus-5
   max_tokens: 4096
   messages:
@@ -362,12 +353,11 @@ The Python environment can process various file types uploaded through the Files
   client = anthropic.Anthropic()
 
   # Upload a file
-  file_object = client.beta.files.upload(file=Path("data.csv"))
+  file_object = client.files.upload(file=Path("data.csv"))
 
   # Use the file_id with code execution
-  response = client.beta.messages.create(
+  response = client.messages.create(
       model="claude-opus-5",
-      betas=["files-api-2025-04-14"],
       max_tokens=4096,
       messages=[
           {
@@ -390,14 +380,13 @@ The Python environment can process various file types uploaded through the Files
   const client = new Anthropic();
 
   // Upload a file
-  const fileObject = await client.beta.files.upload({
+  const fileObject = await client.files.upload({
     file: createReadStream("data.csv")
   });
 
   // Use the file_id with code execution
-  const response = await client.beta.messages.create({
+  const response = await client.messages.create({
     model: "claude-opus-5",
-    betas: ["files-api-2025-04-14"],
     max_tokens: 4096,
     messages: [
       {
@@ -423,7 +412,7 @@ The Python environment can process various file types uploaded through the Files
   AnthropicClient client = new();
 
   // Upload a file
-  var fileObject = await client.Beta.Files.Upload(new FileUploadParams
+  var fileObject = await client.Files.Upload(new FileUploadParams
   {
       File = File.OpenRead("data.csv")
   });
@@ -433,21 +422,20 @@ The Python environment can process various file types uploaded through the Files
   {
       Model = Model.ClaudeOpus5,
       MaxTokens = 4096,
-      Betas = [AnthropicBeta.FilesApi2025_04_14],
       Messages = [
           new()
           {
               Role = Role.User,
               Content = new([
-                  new BetaTextBlockParam { Text = "Analyze this CSV data" },
-                  new BetaContainerUploadBlockParam { FileID = fileObject.ID }
+                  new TextBlockParam { Text = "Analyze this CSV data" },
+                  new ContainerUploadBlockParam { FileID = fileObject.ID }
               ])
           }
       ],
-      Tools = [new BetaCodeExecutionTool20250825()]
+      Tools = [new CodeExecutionTool20250825()]
   };
 
-  var response = await client.Beta.Messages.Create(parameters);
+  var response = await client.Messages.Create(parameters);
   Console.WriteLine(response);
   ```
 
@@ -462,7 +450,7 @@ The Python environment can process various file types uploaded through the Files
   }
   defer file.Close()
 
-  fileObject, err := client.Beta.Files.Upload(ctx, anthropic.BetaFileUploadParams{
+  fileObject, err := client.Files.Upload(ctx, anthropic.FileUploadParams{
   	File: file,
   })
   if err != nil {
@@ -470,20 +458,17 @@ The Python environment can process various file types uploaded through the Files
   }
 
   // Use the file_id with code execution
-  response, err := client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
+  response, err := client.Messages.New(ctx, anthropic.MessageNewParams{
   	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 4096,
-  	Messages: []anthropic.BetaMessageParam{
-  		anthropic.NewBetaUserMessage(
-  			anthropic.NewBetaTextBlock("Analyze this CSV data"),
-  			anthropic.NewBetaContainerUploadBlock(fileObject.ID),
+  	Messages: []anthropic.MessageParam{
+  		anthropic.NewUserMessage(
+  			anthropic.NewTextBlock("Analyze this CSV data"),
+  			anthropic.NewContainerUploadBlock(fileObject.ID),
   		),
   	},
-  	Tools: []anthropic.BetaToolUnionParam{
-  		{OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{}},
-  	},
-  	Betas: []anthropic.AnthropicBeta{
-  		anthropic.AnthropicBetaFilesAPI2025_04_14,
+  	Tools: []anthropic.ToolUnionParam{
+  		{OfCodeExecutionTool20250825: &anthropic.CodeExecutionTool20250825Param{}},
   	},
   })
   if err != nil {
@@ -497,27 +482,26 @@ The Python environment can process various file types uploaded through the Files
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   // Upload a file
-  FileMetadata fileObject = client.beta().files().upload(
+  FileMetadata fileObject = client.files().upload(
       FileUploadParams.builder()
           .file(Path.of("data.csv"))
           .build()
   );
 
   // Use the file_id with code execution
-  BetaMessage response = client.beta().messages().create(
+  Message response = client.messages().create(
       MessageCreateParams.builder()
           .model(Model.CLAUDE_OPUS_5)
-          .addBeta(AnthropicBeta.FILES_API_2025_04_14)
           .maxTokens(4096L)
-          .addUserMessageOfBetaContentBlockParams(List.of(
-              BetaContentBlockParam.ofText(BetaTextBlockParam.builder()
+          .addUserMessageOfBlockParams(List.of(
+              ContentBlockParam.ofText(TextBlockParam.builder()
                   .text("Analyze this CSV data")
                   .build()),
-              BetaContentBlockParam.ofContainerUpload(BetaContainerUploadBlockParam.builder()
+              ContentBlockParam.ofContainerUpload(ContainerUploadBlockParam.builder()
                   .fileId(fileObject.id())
                   .build())
           ))
-          .addTool(BetaCodeExecutionTool20250825.builder().build())
+          .addTool(CodeExecutionTool20250825.builder().build())
           .build()
   );
 
@@ -528,25 +512,24 @@ The Python environment can process various file types uploaded through the Files
   $client = new Client();
 
   // Upload a file
-  $fileObject = $client->beta->files->upload(
+  $fileObject = $client->files->upload(
       file: FileParam::fromResource(fopen('data.csv', 'r')),
   );
 
   // Use the file_id with code execution
-  $response = $client->beta->messages->create(
+  $response = $client->messages->create(
       model: Model::CLAUDE_OPUS_5,
       maxTokens: 4096,
-      betas: [AnthropicBeta::FILES_API_2025_04_14],
       messages: [
           [
               'role' => 'user',
               'content' => [
-                  BetaTextBlockParam::with(text: 'Analyze this CSV data'),
-                  BetaContainerUploadBlockParam::with(fileID: $fileObject->id),
+                  TextBlockParam::with(text: 'Analyze this CSV data'),
+                  ContainerUploadBlockParam::with(fileID: $fileObject->id),
               ],
           ],
       ],
-      tools: [new BetaCodeExecutionTool20250825()],
+      tools: [new CodeExecutionTool20250825()],
   );
 
   echo json_encode($response), PHP_EOL;
@@ -556,14 +539,13 @@ The Python environment can process various file types uploaded through the Files
   client = Anthropic::Client.new
 
   # Upload a file
-  file_object = client.beta.files.upload(
+  file_object = client.files.upload(
     file: Pathname("data.csv")
   )
 
   # Use the file_id with code execution
-  response = client.beta.messages.create(
+  response = client.messages.create(
     model: Anthropic::Model::CLAUDE_OPUS_5,
-    betas: [Anthropic::AnthropicBeta::FILES_API_2025_04_14],
     max_tokens: 4096,
     messages: [
       {
@@ -575,7 +557,7 @@ The Python environment can process various file types uploaded through the Files
       }
     ],
     tools: [
-      Anthropic::Beta::BetaCodeExecutionTool20250825.new
+      Anthropic::CodeExecutionTool20250825.new
     ]
   )
 
@@ -604,9 +586,8 @@ When Claude saves files to its output directory during code execution (see [How 
   client = Anthropic()
 
   # Request code execution that creates files
-  response = client.beta.messages.create(
+  response = client.messages.create(
       model="claude-opus-5",
-      betas=["files-api-2025-04-14"],
       max_tokens=4096,
       messages=[
           {
@@ -619,7 +600,7 @@ When Claude saves files to its output directory during code execution (see [How 
 
 
   # Extract file IDs from the response
-  def extract_file_ids(response: BetaMessage) -> list[str]:
+  def extract_file_ids(response: Message) -> list[str]:
       file_ids: list[str] = []
       for item in response.content:
           if item.type == "bash_code_execution_tool_result":
@@ -632,8 +613,8 @@ When Claude saves files to its output directory during code execution (see [How 
 
   # Download the created files
   for file_id in extract_file_ids(response):
-      file_metadata = client.beta.files.retrieve_metadata(file_id)
-      file_content = client.beta.files.download(file_id)
+      file_metadata = client.files.retrieve_metadata(file_id)
+      file_content = client.files.download(file_id)
       file_content.write_to_file(file_metadata.filename)
       print(f"Downloaded: {file_metadata.filename}")
   ```
@@ -644,9 +625,8 @@ When Claude saves files to its output directory during code execution (see [How 
   const client = new Anthropic();
 
   // Request code execution that creates files
-  const response = await client.beta.messages.create({
+  const response = await client.messages.create({
     model: "claude-opus-5",
-    betas: ["files-api-2025-04-14"],
     max_tokens: 4096,
     messages: [
       {
@@ -669,8 +649,8 @@ When Claude saves files to its output directory during code execution (see [How 
       if (result.type === "bash_code_execution_result") {
         for (const outputBlock of result.content) {
           const [fileMetadata, fileResponse] = await Promise.all([
-            client.beta.files.retrieveMetadata(outputBlock.file_id),
-            client.beta.files.download(outputBlock.file_id)
+            client.files.retrieveMetadata(outputBlock.file_id),
+            client.files.download(outputBlock.file_id)
           ]);
           await writeFile(fileMetadata.filename, await fileResponse.bytes());
           console.log(`Downloaded: ${fileMetadata.filename}`);
@@ -687,12 +667,11 @@ When Claude saves files to its output directory during code execution (see [How 
   {
       Model = Model.ClaudeOpus5,
       MaxTokens = 4096,
-      Betas = [AnthropicBeta.FilesApi2025_04_14],
       Messages = [new() { Role = Role.User, Content = "Create a matplotlib visualization and save it as output.png" }],
-      Tools = [new BetaCodeExecutionTool20250825()]
+      Tools = [new CodeExecutionTool20250825()]
   };
 
-  var response = await client.Beta.Messages.Create(parameters);
+  var response = await client.Messages.Create(parameters);
 
   // Collect the file IDs from the tool results
   List<string> fileIds = [];
@@ -700,7 +679,7 @@ When Claude saves files to its output directory during code execution (see [How 
   {
       if (!block.TryPickBashCodeExecutionToolResult(out var toolResult))
           continue;
-      if (!toolResult.Content.TryPickBetaBashCodeExecutionResultBlock(out var result))
+      if (!toolResult.Content.TryPickBashCodeExecutionResultBlock(out var result))
           continue;
       foreach (var output in result.Content)
       {
@@ -711,8 +690,8 @@ When Claude saves files to its output directory during code execution (see [How 
   // Download each created file
   foreach (var fileId in fileIds)
   {
-      var fileMetadata = await client.Beta.Files.RetrieveMetadata(fileId);
-      using var download = await client.Beta.Files.Download(fileId);
+      var fileMetadata = await client.Files.RetrieveMetadata(fileId);
+      using var download = await client.Files.Download(fileId);
       var downloadStream = await download.ReadAsStream();
       await using var target = File.Create(fileMetadata.Filename);
       await downloadStream.CopyToAsync(target);
@@ -724,17 +703,14 @@ When Claude saves files to its output directory during code execution (see [How 
   	client := anthropic.NewClient()
   	ctx := context.Background()
 
-  	response, err := client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
+  	response, err := client.Messages.New(ctx, anthropic.MessageNewParams{
   		Model:     anthropic.ModelClaudeOpus5,
   		MaxTokens: 4096,
-  		Messages: []anthropic.BetaMessageParam{
-  			anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Create a matplotlib visualization and save it as output.png")),
+  		Messages: []anthropic.MessageParam{
+  			anthropic.NewUserMessage(anthropic.NewTextBlock("Create a matplotlib visualization and save it as output.png")),
   		},
-  		Tools: []anthropic.BetaToolUnionParam{
-  			{OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{}},
-  		},
-  		Betas: []anthropic.AnthropicBeta{
-  			anthropic.AnthropicBetaFilesAPI2025_04_14,
+  		Tools: []anthropic.ToolUnionParam{
+  			{OfCodeExecutionTool20250825: &anthropic.CodeExecutionTool20250825Param{}},
   		},
   	})
   	if err != nil {
@@ -744,12 +720,12 @@ When Claude saves files to its output directory during code execution (see [How 
   	fileIDs := extractFileIDs(response)
 
   	for _, fileID := range fileIDs {
-  		fileMetadata, err := client.Beta.Files.GetMetadata(ctx, fileID, anthropic.BetaFileGetMetadataParams{})
+  		fileMetadata, err := client.Files.GetMetadata(ctx, fileID)
   		if err != nil {
   			log.Fatal(err)
   		}
 
-  		fileContent, err := client.Beta.Files.Download(ctx, fileID, anthropic.BetaFileDownloadParams{})
+  		fileContent, err := client.Files.Download(ctx, fileID)
   		if err != nil {
   			log.Fatal(err)
   		}
@@ -770,11 +746,11 @@ When Claude saves files to its output directory during code execution (see [How 
   	}
   // ...
 
-  func extractFileIDs(response *anthropic.BetaMessage) []string {
+  func extractFileIDs(response *anthropic.Message) []string {
   	var fileIDs []string
   	for _, item := range response.Content {
   		switch variant := item.AsAny().(type) {
-  		case anthropic.BetaBashCodeExecutionToolResultBlock:
+  		case anthropic.BashCodeExecutionToolResultBlock:
   			// Collect the file IDs from the tool result
   			for _, file := range variant.Content.Content {
   				if file.FileID != "" {
@@ -793,19 +769,18 @@ When Claude saves files to its output directory during code execution (see [How 
 
       MessageCreateParams params = MessageCreateParams.builder()
           .model(Model.CLAUDE_OPUS_5)
-          .addBeta(AnthropicBeta.FILES_API_2025_04_14)
           .maxTokens(4096L)
           .addUserMessage("Create a matplotlib visualization and save it as output.png")
-          .addTool(BetaCodeExecutionTool20250825.builder().build())
+          .addTool(CodeExecutionTool20250825.builder().build())
           .build();
 
-      BetaMessage response = client.beta().messages().create(params);
+      Message response = client.messages().create(params);
 
       List<String> fileIds = extractFileIds(response);
 
       for (String fileId : fileIds) {
-          FileMetadata fileMetadata = client.beta().files().retrieveMetadata(fileId);
-          try (HttpResponse fileContent = client.beta().files().download(fileId)) {
+          FileMetadata fileMetadata = client.files().retrieveMetadata(fileId);
+          try (HttpResponse fileContent = client.files().download(fileId)) {
               Files.copy(
                   fileContent.body(),
                   Path.of(fileMetadata.filename()),
@@ -815,15 +790,15 @@ When Claude saves files to its output directory during code execution (see [How 
       }
   }
 
-  List<String> extractFileIds(BetaMessage response) {
+  List<String> extractFileIds(Message response) {
       List<String> fileIds = new ArrayList<>();
       // Collect the file IDs from the tool results
-      for (BetaContentBlock item : response.content()) {
+      for (ContentBlock item : response.content()) {
           item.bashCodeExecutionToolResult().ifPresent(toolResult -> {
-              if (toolResult.content().isBetaBashCodeExecutionResultBlock()) {
-                  BetaBashCodeExecutionResultBlock result =
-                      toolResult.content().asBetaBashCodeExecutionResultBlock();
-                  for (BetaBashCodeExecutionOutputBlock output : result.content()) {
+              if (toolResult.content().isBashCodeExecutionResultBlock()) {
+                  BashCodeExecutionResultBlock result =
+                      toolResult.content().asBashCodeExecutionResultBlock();
+                  for (BashCodeExecutionOutputBlock output : result.content()) {
                       fileIds.add(output.fileId());
                   }
               }
@@ -837,7 +812,7 @@ When Claude saves files to its output directory during code execution (see [How 
   $client = new Client();
 
   // Request code execution that creates files
-  $response = $client->beta->messages->create(
+  $response = $client->messages->create(
       maxTokens: 4096,
       messages: [
           [
@@ -846,8 +821,7 @@ When Claude saves files to its output directory during code execution (see [How 
           ],
       ],
       model: Model::CLAUDE_OPUS_5,
-      betas: [AnthropicBeta::FILES_API_2025_04_14],
-      tools: [new BetaCodeExecutionTool20250825()],
+      tools: [new CodeExecutionTool20250825()],
   );
 
   /**
@@ -855,7 +829,7 @@ When Claude saves files to its output directory during code execution (see [How 
    *
    * @return list<string>
    */
-  function extractFileIds(BetaMessage $response): array
+  function extractFileIds(Message $response): array
   {
       $fileIds = [];
       foreach ($response->content as $block) {
@@ -875,8 +849,8 @@ When Claude saves files to its output directory during code execution (see [How 
 
   // Download the created files
   foreach (extractFileIds($response) as $fileId) {
-      $fileMetadata = $client->beta->files->retrieveMetadata($fileId);
-      $fileContent = $client->beta->files->download($fileId);
+      $fileMetadata = $client->files->retrieveMetadata($fileId);
+      $fileContent = $client->files->download($fileId);
 
       file_put_contents($fileMetadata->filename, $fileContent);
       echo "Downloaded: {$fileMetadata->filename}\n";
@@ -886,9 +860,8 @@ When Claude saves files to its output directory during code execution (see [How 
   ```ruby Ruby
   client = Anthropic::Client.new
 
-  response = client.beta.messages.create(
+  response = client.messages.create(
     model: Anthropic::Model::CLAUDE_OPUS_5,
-    betas: ["files-api-2025-04-14"],
     max_tokens: 4096,
     messages: [
       {
@@ -923,8 +896,8 @@ When Claude saves files to its output directory during code execution (see [How 
   end
 
   extract_file_ids(response).each do |file_id|
-    file_metadata = client.beta.files.retrieve_metadata(file_id)
-    file_content = client.beta.files.download(file_id)
+    file_metadata = client.files.retrieve_metadata(file_id)
+    file_content = client.files.download(file_id)
 
     File.open(file_metadata.filename, "wb") do |f|
       f.write(file_content.read)
@@ -1345,7 +1318,9 @@ Containers expire 30 days after creation. After about 5 minutes of inactivity a 
 
   // Reuse the container from the first request so the file is still there.
   response2, err := client.Messages.New(ctx, anthropic.MessageNewParams{
-  	Container: anthropic.String(response1.Container.ID),
+  	Container: anthropic.MessageCreateParamsContainerUnion{
+  		OfString: anthropic.String(response1.Container.ID),
+  	},
   	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 4096,
   	Messages: []anthropic.MessageParam{
@@ -1555,7 +1530,7 @@ To upgrade, update the tool type in your API requests:
 
 ## Data retention
 
-Code execution runs in server-side sandbox containers. Container data, including execution artifacts, uploaded files, and outputs, is retained for up to 30 days. This retention applies to all data processed within the container environment. Files that code execution creates in the [Files API](https://platform.claude.com/docs/en/build-with-claude/files) (retrievable with `client.beta.files.download()`) persist until explicitly deleted.
+Code execution runs in server-side sandbox containers. Container data, including execution artifacts, uploaded files, and outputs, is retained for up to 30 days. This retention applies to all data processed within the container environment. Files that code execution creates in the [Files API](https://platform.claude.com/docs/en/build-with-claude/files) (retrievable with `client.files.download()`) persist until explicitly deleted.
 
 For ZDR eligibility across all features, see [API and data retention](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention).
 

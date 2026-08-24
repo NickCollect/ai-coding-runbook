@@ -1,0 +1,60 @@
+---
+source_url: https://platform.claude.com/docs/en/api/skills/delete
+fetched_at: 2026-08-24T02:18:40.958679+00:00
+fetch_method: mintlify_md
+---
+
+---
+title: Delete Skill
+url: https://platform.claude.com/docs/en/api/skills/delete
+---
+
+## Delete Skill
+
+**delete** `/v1/skills/{skill_id}`
+
+Delete Skill
+
+### Path Parameters
+
+- `skill_id: string`
+
+  Unique identifier for the skill.
+
+  The format and length of IDs may change over time.
+
+### Returns
+
+- `DeletedSkill object { id, type }`
+
+  - `id: string`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `type: "skill_deleted"`
+
+    Deleted object type.
+
+    For Skills, this is always `"skill_deleted"`.
+
+    - `"skill_deleted"`
+
+### Example
+
+```http
+curl https://api.anthropic.com/v1/skills/$SKILL_ID \
+    -X DELETE \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "skill_deleted"
+}
+```

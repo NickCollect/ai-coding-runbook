@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/usage-cost-api
-fetched_at: 2026-08-17T02:15:17.049227+00:00
+fetched_at: 2026-08-24T02:18:38.542183+00:00
 fetch_method: mintlify_md
 ---
 
@@ -316,9 +316,9 @@ Code execution costs appear in the cost endpoint grouped under `Code Execution U
 
 Filter or group by `service_tier` in the usage endpoint and look for the `priority` value. Priority Tier costs are not available in the cost endpoint.
 
-### What happens with Anthropic Workbench usage?
+### What happens with Playground usage?
 
-API usage from the Workbench is not associated with an API key, so `api_key_id` will be `null` even when grouping by that dimension.
+API usage from Playground in the Claude Console (and from the legacy Workbench before it) is not associated with an API key, so `api_key_id` will be `null` even when grouping by that dimension.
 
 ### How is the default workspace represented?
 

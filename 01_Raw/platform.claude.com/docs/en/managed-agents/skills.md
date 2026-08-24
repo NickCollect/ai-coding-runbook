@@ -1,13 +1,13 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/skills
-fetched_at: 2026-08-17T02:15:16.189094+00:00
+fetched_at: 2026-08-24T02:18:37.812175+00:00
 fetch_method: mintlify_md
 ---
 
 ---
 title: Skills
 url: https://platform.claude.com/docs/en/managed-agents/skills
-description: Attach reusable, filesystem-based expertise to your agent for domain-specific workflows.
+description: Attach pre-built or custom skills to an agent in Claude Managed Agents to give it reusable, filesystem-based expertise for domain-specific workflows.
 ---
 
 Skills are reusable, filesystem-based resources that give your agent domain-specific expertise: workflows, context, and best practices that turn a general-purpose agent into a specialist. Each skill you add incurs a modest cost on the session's context window, adding instructions and metadata that help the model use the skill. Learn more in the [Agent Skills](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) overview.
@@ -27,22 +27,18 @@ To learn how to author custom skills, see [Agent Skills](https://platform.claude
 
 A custom skill is a directory containing a `SKILL.md` file plus any supporting files, uploaded to your workspace as a zip archive or as individual files. Creating the skill returns the `skill_*` ID you reference when attaching it to an agent. Anthropic pre-built skills are already available in every workspace and don't require this step. To use only pre-built skills, skip to [Attach skills to an agent](https://platform.claude.com/docs/en/managed-agents/skills#attach-skills-to-an-agent).
 
-When you call the Skills API directly with cURL, pass the `anthropic-beta: skills-2025-10-02` header explicitly. The CLI and SDKs send it automatically.
-
-These examples omit the optional `display_title` field, so the skill's title is derived from `SKILL.md`. An explicitly passed `display_title` must be unique among the custom skills in your workspace.
+These examples omit the optional `display_name` field, so the skill's display name is derived from the `name` field in `SKILL.md`. An explicit `display_name` can be up to 255 characters and doesn't need to be unique within your workspace.
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
   curl -X POST "https://api.anthropic.com/v1/skills" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: skills-2025-10-02" \
     -F "files[]=@example_skill.zip"
   ```
 
   ```bash CLI
-  ant beta:skills create \
-    --file example_skill.zip
+  ant skills create --file example_skill.zip
   ```
 
   ```python Python
@@ -51,12 +47,12 @@ These examples omit the optional `display_title` field, so the skill's title is 
 
   client = anthropic.Anthropic()
 
-  skill = client.beta.skills.create(
+  skill = client.skills.create(
       files=files_from_dir("example_skill"),
   )
 
   print(f"Created skill: {skill.id}")
-  print(f"Latest version: {skill.latest_version}")
+  print(f"Latest version: {skill.latest_version_id}")
   ```
 
   ```typescript TypeScript
@@ -66,18 +62,18 @@ These examples omit the optional `display_title` field, so the skill's title is 
 
   const client = new Anthropic();
 
-  const skill = await client.beta.skills.create({
+  const skill = await client.skills.create({
     files: [await toFile(fs.createReadStream("example_skill.zip"), "example_skill.zip")]
   });
 
   console.log(`Created skill: ${skill.id}`);
-  console.log(`Latest version: ${skill.latest_version}`);
+  console.log(`Latest version: ${skill.latest_version_id}`);
   ```
 
   ```csharp C#
   using System.IO;
   using Anthropic;
-  using Anthropic.Models.Beta.Skills;
+  using Anthropic.Models.Skills;
 
   AnthropicClient client = new();
 
@@ -88,10 +84,10 @@ These examples omit the optional `display_title` field, so the skill's title is 
       ],
   };
 
-  var skill = await client.Beta.Skills.Create(parameters);
+  var skill = await client.Skills.Create(parameters);
 
   Console.WriteLine($"Created skill: {skill.ID}");
-  Console.WriteLine($"Latest version: {skill.LatestVersion}");
+  Console.WriteLine($"Latest version: {skill.LatestVersionID}");
   ```
 
   ```go Go
@@ -116,7 +112,7 @@ These examples omit the optional `display_title` field, so the skill's title is 
   	}
   	defer zipFile.Close()
 
-  	skill, err := client.Beta.Skills.New(context.TODO(), anthropic.BetaSkillNewParams{
+  	skill, err := client.Skills.New(context.TODO(), anthropic.SkillNewParams{
   		Files: []io.Reader{zipFile},
   	})
   	if err != nil {
@@ -124,7 +120,7 @@ These examples omit the optional `display_title` field, so the skill's title is 
   	}
 
   	fmt.Printf("Created skill: %s\n", skill.ID)
-  	fmt.Printf("Latest version: %s\n", skill.LatestVersion)
+  	fmt.Printf("Latest version: %s\n", skill.LatestVersionID)
   }
   ```
 
@@ -132,8 +128,8 @@ These examples omit the optional `display_title` field, so the skill's title is 
   import com.anthropic.client.AnthropicClient;
   import com.anthropic.client.okhttp.AnthropicOkHttpClient;
   import com.anthropic.core.MultipartField;
-  import com.anthropic.models.beta.skills.SkillCreateParams;
-  import com.anthropic.models.beta.skills.SkillCreateResponse;
+  import com.anthropic.models.skills.Skill;
+  import com.anthropic.models.skills.SkillCreateParams;
   import java.io.IOException;
   import java.io.InputStream;
   import java.nio.file.Files;
@@ -150,29 +146,27 @@ These examples omit the optional `display_title` field, so the skill's title is 
               .build())
           .build();
 
-      SkillCreateResponse skill = client.beta().skills().create(params);
+      Skill skill = client.skills().create(params);
 
       IO.println("Created skill: " + skill.id());
-      IO.println("Latest version: " + skill.latestVersion().orElseThrow());
+      IO.println("Latest version: " + skill.latestVersionId());
   }
   ```
 
   ```php PHP
-  <?php
-
   use Anthropic\Client;
   use Anthropic\Core\FileParam;
 
   $client = new Client();
 
-  $skill = $client->beta->skills->create(
+  $skill = $client->skills->create(
       files: [
-          FileParam::fromResource(fopen('example_skill.zip', 'r'))
+          FileParam::fromResource(fopen('example_skill.zip', 'r')),
       ],
   );
 
   echo "Created skill: {$skill->id}\n";
-  echo "Latest version: {$skill->latestVersion}\n";
+  echo "Latest version: {$skill->latestVersionID}\n";
   ```
 
   ```ruby Ruby
@@ -180,18 +174,18 @@ These examples omit the optional `display_title` field, so the skill's title is 
 
   client = Anthropic::Client.new
 
-  skill = client.beta.skills.create(
+  skill = client.skills.create(
     files: [
       File.open("example_skill.zip", "rb")
     ]
   )
 
   puts "Created skill: #{skill.id}"
-  puts "Latest version: #{skill.latest_version}"
+  puts "Latest version: #{skill.latest_version_id}"
   ```
 </CodeGroup>
 
-To list, retrieve, delete, and version custom skills, see [Managing custom skills](https://platform.claude.com/docs/en/build-with-claude/skills-guide#managing-custom-skills). For the full request and response schemas, see the [Create Skill API reference](https://platform.claude.com/docs/en/api/beta/skills/create). Skill bundles upload directly to the Skills API rather than through the [Files API](https://platform.claude.com/docs/en/build-with-claude/files).
+To list, retrieve, delete, and version custom skills, see [Managing custom skills](https://platform.claude.com/docs/en/build-with-claude/skills-guide#managing-custom-skills). For the full request and response schemas, see the [Create Skill API reference](https://platform.claude.com/docs/en/api/skills/create). Skill bundles upload directly to the Skills API rather than through the [Files API](https://platform.claude.com/docs/en/build-with-claude/files).
 
 ## Attach skills to an agent
 
@@ -229,19 +223,25 @@ Each entry in the `skills` array uses the following fields:
   )
   ```
 
-  ```bash CLI
-  ant beta:agents create <<'YAML'
-  name: Financial Analyst
-  model: claude-opus-5
-  system: You are a financial analysis agent.
-  skills:
-    - type: anthropic
-      skill_id: xlsx
-    - type: custom
-      skill_id: skill_01AbCdEfGhIjKlMnOpQrStUv
-      version: latest
-  YAML
-  ```
+  <MultiFileExample language="cli" label="CLI">
+    ```bash CLI
+    ant beta:agents create < agent.yaml
+    ```
+
+    <File filename="agent.yaml">
+      ```yaml
+      name: Financial Analyst
+      model: claude-opus-5
+      system: You are a financial analysis agent.
+      skills:
+        - type: anthropic
+          skill_id: xlsx
+        - type: custom
+          skill_id: skill_01AbCdEfGhIjKlMnOpQrStUv
+          version: latest
+      ```
+    </File>
+  </MultiFileExample>
 
   ```python Python
   agent = client.beta.agents.create(
@@ -353,8 +353,8 @@ Each entry in the `skills` array uses the following fields:
       model: 'claude-opus-5',
       system: 'You are a financial analysis agent.',
       skills: [
-          ['type' => 'anthropic', 'skill_id' => 'xlsx'],
-          ['type' => 'custom', 'skill_id' => 'skill_01AbCdEfGhIjKlMnOpQrStUv', 'version' => 'latest'],
+          ['type' => 'anthropic', 'skillID' => 'xlsx'],
+          ['type' => 'custom', 'skillID' => 'skill_01AbCdEfGhIjKlMnOpQrStUv', 'version' => 'latest'],
       ],
   );
   ```

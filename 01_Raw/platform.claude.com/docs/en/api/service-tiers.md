@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/service-tiers
-fetched_at: 2026-08-17T02:15:18.709164+00:00
+fetched_at: 2026-08-24T02:18:40.053101+00:00
 fetch_method: mintlify_md
 ---
 
@@ -81,9 +81,7 @@ You can control which service tiers can be used for a request by setting the `se
   ```
 
   ```bash CLI
-  ant messages create \
-    --transform usage.service_tier \
-    --raw-output <<'YAML'
+  ant messages create --transform usage.service_tier --raw-output <<'YAML'
   model: claude-opus-4-8
   max_tokens: 1024
   messages:

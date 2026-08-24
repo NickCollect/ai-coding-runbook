@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/token-counting
-fetched_at: 2026-08-17T02:15:15.234782+00:00
+fetched_at: 2026-08-24T02:18:37.078980+00:00
 fetch_method: mintlify_md
 ---
 
@@ -522,11 +522,11 @@ All [active models](https://platform.claude.com/docs/en/about-claude/models/over
 
   ```python Python
   import base64
-  import httpx
+  import httpx2
 
   image_url = "https://platform.claude.com/docs/images/vision-example.jpg"
   image_media_type = "image/jpeg"
-  image_data = base64.standard_b64encode(httpx.get(image_url).content).decode("utf-8")
+  image_data = base64.standard_b64encode(httpx2.get(image_url).content).decode("utf-8")
 
   client = anthropic.Anthropic()
 
@@ -777,6 +777,8 @@ All [active models](https://platform.claude.com/docs/en/about-claude/models/over
 ```json Output
 { "input_tokens": 1028 }
 ```
+
+An embedded image block that sets [`"oversized_image": "error"`](https://platform.claude.com/docs/en/build-with-claude/vision-coordinates#oversized-image-error) is rejected at count time exactly as the Messages API would reject it.
 
 ### Count tokens in messages with thinking
 

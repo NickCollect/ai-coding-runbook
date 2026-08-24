@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/messages/batches/results
-fetched_at: 2026-08-17T02:15:19.456072+00:00
+fetched_at: 2026-08-24T02:18:41.680050+00:00
 fetch_method: mintlify_md
 ---
 
@@ -33,7 +33,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -78,6 +78,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
     - `"output-300k-2026-03-24"`
 
     - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -159,7 +161,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `version: string`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `content: array of BetaContentBlock`
 
@@ -346,7 +348,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               - `"redacted_thinking"`
 
-          - `BetaToolUseBlock object { id, input, name, 2 more }`
+          - `BetaToolUseBlock object { id, input, name, 3 more }`
 
             - `id: string`
 
@@ -387,6 +389,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
                 - `type: "code_execution_20260120"`
 
                   - `"code_execution_20260120"`
+
+            - `toolset_name: optional string or null`
+
+              For a toolset member tool_use, the toolset family.
 
           - `BetaServerToolUseBlock object { id, input, name, 2 more }`
 

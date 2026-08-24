@@ -1,16 +1,14 @@
 ---
 source_url: https://platform.claude.com/docs/en/resources/overview
-fetched_at: 2026-08-17T02:15:18.102439+00:00
+fetched_at: 2026-08-24T02:18:39.526172+00:00
 fetch_method: mintlify_md
 ---
 
 ---
-title: Resources
+title: Model cards
 url: https://platform.claude.com/docs/en/resources/overview
-description: Model cards, learning resources, and documentation formats optimized for AI ingestion.
+description: Model cards with detailed documentation for Claude models.
 ---
-
-## Model cards
 
 <CardGroup cols={3}>
   <Card title="Claude Opus 5 System Card" icon="file" href="https://www.anthropic.com/claude-opus-5-system-card">
@@ -79,45 +77,5 @@ description: Model cards, learning resources, and documentation formats optimize
 
   <Card title="Claude 2 Model Card" icon="file" href="https://www.anthropic.com/claude-2-model-card">
     Detailed documentation of Claude 2 models.
-  </Card>
-</CardGroup>
-
-## Learning resources
-
-<CardGroup cols={3}>
-  <Card title="Quickstarts" icon="lightning" href="https://github.com/anthropics/anthropic-quickstarts">
-    Deployable applications built with the API.
-  </Card>
-
-  <Card title="Courses" icon="graduation-cap" href="https://anthropic.skilljar.com/">
-    Step-by-step lessons on building with Claude.
-  </Card>
-
-  <Card title="Cookbook" icon="fork-knife" href="https://platform.claude.com/cookbook">
-    Replicable code samples and implementations.
-  </Card>
-
-  <Card title="Use case guides" icon="compass" href="https://platform.claude.com/docs/en/about-claude/use-case-guides/overview">
-    In-depth production guides for building common use cases with Claude.
-  </Card>
-
-  <Card title="Glossary" icon="book-bookmark" href="https://platform.claude.com/docs/en/about-claude/glossary">
-    Key terms and concepts for working with Claude and language models.
-  </Card>
-</CardGroup>
-
-## Resources for AI ingestion
-
-<CardGroup cols={3}>
-  <Card title="API primer for Claude ingestion" icon="settings" href="https://platform.claude.com/docs/en/claude_api_primer">
-    Concise API guide meant for ingestion by Claude.
-  </Card>
-
-  <Card title="Claude Platform docs overview" icon="robot" href="https://platform.claude.com/docs/for-claude">
-    Concise overview of Claude Platform documentation, optimized for LLM ingestion.
-  </Card>
-
-  <Card title="llms.txt" icon="file" href="https://platform.claude.com/llms.txt">
-    LLM-optimized documentation index.
   </Card>
 </CardGroup>

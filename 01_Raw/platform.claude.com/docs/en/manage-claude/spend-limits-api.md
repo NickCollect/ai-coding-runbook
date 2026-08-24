@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/spend-limits-api
-fetched_at: 2026-08-17T02:15:17.175880+00:00
+fetched_at: 2026-08-24T02:18:38.620046+00:00
 fetch_method: mintlify_md
 ---
 
@@ -61,7 +61,7 @@ The `source` field on each member's row tells you which level their spend limit 
 
 ### Period
 
-`period` is the recurring window over which the spend limit is enforced and spend resets. A spend limit is identified by its `(scope, period)` pair. Currently `monthly` is the only supported period; monthly spend resets at 00UTC on the first of each calendar month. Treat `period` as an open set.
+`period` is the recurring window over which the spend limit is enforced and spend resets. A spend limit is identified by its `(scope, period)` pair. Currently `monthly` is the only supported period; monthly spend resets at 00:00 UTC on the first of each calendar month. Treat `period` as an open set.
 
 ### Amounts and currency
 

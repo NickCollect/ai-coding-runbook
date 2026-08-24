@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/go
-fetched_at: 2026-08-17T02:15:18.467838+00:00
+fetched_at: 2026-08-24T02:18:39.827584+00:00
 fetch_method: mintlify_md
 ---
 
@@ -32,7 +32,7 @@ go get github.com/anthropics/anthropic-sdk-go
 
 ## Requirements
 
-This library requires Go 1.23+.
+This library requires Go 1.24+.
 
 ## Usage
 
@@ -566,12 +566,12 @@ Request parameters that correspond to file uploads in multipart requests are typ
 ```go
 // A file from the file system
 file, err := os.Open("/path/to/file.json")
-anthropic.BetaFileUploadParams{
+anthropic.FileUploadParams{
 	File: anthropic.File(file, "custom-name.json", "application/json"),
 }
 
 // A file from a string
-anthropic.BetaFileUploadParams{
+anthropic.FileUploadParams{
 	File: anthropic.File(strings.NewReader("my file contents"), "custom-name.json", "application/json"),
 }
 ```

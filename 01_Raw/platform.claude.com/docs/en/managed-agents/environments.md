@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/environments
-fetched_at: 2026-08-17T02:15:16.221158+00:00
+fetched_at: 2026-08-24T02:18:37.814514+00:00
 fetch_method: mintlify_md
 ---
 
@@ -42,11 +42,21 @@ This page covers `type: cloud` environments. To run sandboxes on your own infras
   echo "Environment ID: $environment_id"
   ```
 
-  ```bash CLI
-  ant beta:environments create \
-    --name "python-dev" \
-    --config '{type: cloud, networking: {type: unrestricted}}'
-  ```
+  <MultiFileExample language="cli" label="CLI">
+    ```bash CLI
+    ant beta:environments create < python-dev.environment.yaml
+    ```
+
+    <File filename="python-dev.environment.yaml">
+      ```yaml
+      name: python-dev
+      config:
+        type: cloud
+        networking:
+          type: unrestricted
+      ```
+    </File>
+  </MultiFileExample>
 
   ```python Python
   environment = client.beta.environments.create(
@@ -157,9 +167,7 @@ Pass the environment ID as a string when [creating a session](https://platform.c
   ```
 
   ```bash CLI
-  ant beta:sessions create \
-    --agent "$AGENT_ID" \
-    --environment-id "$ENVIRONMENT_ID"
+  ant beta:sessions create --agent "$AGENT_ID" --environment-id "$ENVIRONMENT_ID"
   ```
 
   ```python Python
@@ -247,22 +255,28 @@ The `packages` field pre-installs packages into the sandbox before the agent sta
   )
   ```
 
-  ```bash CLI
-  ant beta:environments create <<'YAML'
-  name: data-analysis
-  config:
-    type: cloud
-    packages:
-      pip:
-        - pandas
-        - numpy
-        - scikit-learn
-      npm:
-        - express
-    networking:
-      type: unrestricted
-  YAML
-  ```
+  <MultiFileExample language="cli" label="CLI">
+    ```bash CLI
+    ant beta:environments create < environment.yaml
+    ```
+
+    <File filename="environment.yaml">
+      ```yaml
+      name: data-analysis
+      config:
+        type: cloud
+        packages:
+          pip:
+            - pandas
+            - numpy
+            - scikit-learn
+          npm:
+            - express
+        networking:
+          type: unrestricted
+      ```
+    </File>
+  </MultiFileExample>
 
   ```python Python
   environment = client.beta.environments.create(
@@ -380,16 +394,16 @@ Supported package managers:
 
 | Field   | Package manager           | Example                                     |
 | ------- | ------------------------- | ------------------------------------------- |
-| `apt`   | System packages (apt-get) | `"ffmpeg"`                                  |
-| `cargo` | Rust (cargo)              | `"ripgrep@14.0.0"`                          |
+| `apt`   | System packages (apt-get) | `"graphviz"`                                |
+| `cargo` | Rust (cargo)              | `"hyperfine@1.18.0"`                        |
 | `gem`   | Ruby (gem)                | `"rails:7.1.0"`                             |
 | `go`    | Go modules                | `"golang.org/x/tools/cmd/goimports@latest"` |
 | `npm`   | Node.js (npm)             | `"express@4.18.0"`                          |
-| `pip`   | Python (pip)              | `"pandas==2.2.0"`                           |
+| `pip`   | Python (pip)              | `"sqlalchemy==2.0.30"`                      |
 
 ### Networking
 
-The `networking` field controls the sandbox's outbound network access. It does not affect the allowed domains for the `web_search` or `web_fetch` tools.
+The `networking` field controls the sandbox's outbound network access. It does not affect the `web_search` or `web_fetch` tools, which run on Anthropic's servers; to restrict the sites those tools can reach, set `allowed_domains` or `blocked_domains` on the tool's entry in the agent toolset. See [Restrict web search and web fetch domains](https://platform.claude.com/docs/en/managed-agents/tools#restrict-web-search-and-web-fetch-domains).
 
 | Mode           | Description                                                                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -419,19 +433,25 @@ The following example creates an environment with `limited` networking:
     }'
   ```
 
-  ```bash CLI
-  ant beta:environments create <<'YAML'
-  name: api-access
-  config:
-    type: cloud
-    networking:
-      type: limited
-      allowed_hosts:
-        - api.example.com
-      allow_mcp_servers: true
-      allow_package_managers: true
-  YAML
-  ```
+  <MultiFileExample language="cli" label="CLI">
+    ```bash CLI
+    ant beta:environments create < environment.yaml
+    ```
+
+    <File filename="environment.yaml">
+      ```yaml
+      name: api-access
+      config:
+        type: cloud
+        networking:
+          type: limited
+          allowed_hosts:
+            - api.example.com
+          allow_mcp_servers: true
+          allow_package_managers: true
+      ```
+    </File>
+  </MultiFileExample>
 
   ```python Python
   environment = client.beta.environments.create(
@@ -706,7 +726,7 @@ When using `limited` networking:
 
 ## Pre-installed runtimes
 
-Cloud sandboxes include common runtimes out of the box. See [Cloud sandbox reference](https://platform.claude.com/docs/en/managed-agents/cloud-sandboxes-reference) for the full list of pre-installed languages, databases, and utilities.
+Cloud sandboxes include common language runtimes, databases, and command-line tools out of the box. See [Cloud sandbox reference](https://platform.claude.com/docs/en/managed-agents/cloud-sandboxes-reference) for the full list.
 
 ## Next steps
 

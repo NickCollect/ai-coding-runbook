@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/prompt-caching
-fetched_at: 2026-08-17T02:15:15.187364+00:00
+fetched_at: 2026-08-24T02:18:37.076630+00:00
 fetch_method: mintlify_md
 ---
 
@@ -665,7 +665,7 @@ The following table shows which parts of the cache are invalidated by different 
 | **Non-tool results passed to extended thinking requests** | ✓              | ✓              | Model-specific | On Opus 4.5+ and Sonnet 4.6+, thinking blocks are preserved by default, so the cache remains valid (✓). On earlier Opus/Sonnet models and all Haiku models, all previously-cached thinking blocks are stripped from context, and any messages that follow those thinking blocks are removed from the cache (✘). For more details, see [Caching with thinking blocks](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#caching-with-thinking-blocks). |
 
 <Note>
-  On Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 5, and Claude Sonnet 5, you can add a new system instruction partway through a conversation without invalidating the system or message caches. Append a `{"role": "system"}` message to `messages` instead of editing the top-level `system` field, so the cached prefix stays unchanged. See [Mid-conversation system messages](https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages).
+  On Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), Claude Opus 4.8, and Claude Opus 5, you can add a new system instruction partway through a conversation without invalidating the system or message caches. Append a `{"role": "system"}` message to `messages` instead of editing the top-level `system` field, so the cached prefix stays unchanged. This feature is not available on Claude Sonnet 5; use the top-level `system` field instead. See [Mid-conversation system messages](https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages).
 </Note>
 
 ### Tracking cache performance
@@ -3316,66 +3316,6 @@ For ZDR eligibility across all features, see [API and data retention](https://pl
       ```python Python
       client.beta.prompt_caching.messages.create(**params)
       ```
-
-      ```typescript TypeScript
-      const client = new Anthropic();
-
-      const response = await client.beta.promptCaching.messages.create({
-        model: "claude-opus-5",
-        max_tokens: 1024,
-        system: [
-          {
-            type: "text",
-            text: "You are an expert on this large document...",
-            cache_control: { type: "ephemeral" }
-          }
-        ],
-        messages: [{ role: "user", content: "Summarize the key points" }]
-      });
-
-      console.log(response);
-      ```
-
-      ```php PHP
-      $client = new Client();
-
-      $message = $client->beta->promptCaching->messages->create(
-          maxTokens: 1024,
-          messages: [
-              ['role' => 'user', 'content' => 'Summarize the key points']
-          ],
-          model: 'claude-opus-5',
-          system: [
-              [
-                  'type' => 'text',
-                  'text' => 'You are an expert on this large document...',
-                  'cache_control' => ['type' => 'ephemeral']
-              ]
-          ],
-      );
-
-      echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
-      ```
-
-      ```ruby Ruby
-      client = Anthropic::Client.new
-
-      message = client.beta.prompt_caching.messages.create(
-        model: "claude-opus-5",
-        max_tokens: 1024,
-        system: [
-          {
-            type: "text",
-            text: "You are an expert on this large document...",
-            cache_control: { type: "ephemeral" }
-          }
-        ],
-        messages: [
-          { role: "user", content: "Summarize the key points" }
-        ]
-      )
-      puts message.content.find { it.type == :text }.text
-      ```
     </CodeGroup>
 
     Use:
@@ -3383,66 +3323,6 @@ For ZDR eligibility across all features, see [API and data retention](https://pl
     <CodeGroup>
       ```python Python
       client.messages.create(**params)
-      ```
-
-      ```typescript TypeScript
-      const client = new Anthropic();
-
-      const response = await client.messages.create({
-        model: "claude-opus-5",
-        max_tokens: 1024,
-        system: [
-          {
-            type: "text",
-            text: "You are an expert on this large document...",
-            cache_control: { type: "ephemeral" }
-          }
-        ],
-        messages: [{ role: "user", content: "Summarize the key points" }]
-      });
-
-      console.log(response);
-      ```
-
-      ```php PHP
-      $client = new Client();
-
-      $message = $client->messages->create(
-          maxTokens: 1024,
-          messages: [
-              ['role' => 'user', 'content' => 'Summarize the key points']
-          ],
-          model: 'claude-opus-5',
-          system: [
-              [
-                  'type' => 'text',
-                  'text' => 'You are an expert on this large document...',
-                  'cache_control' => ['type' => 'ephemeral']
-              ]
-          ],
-      );
-
-      echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
-      ```
-
-      ```ruby Ruby
-      client = Anthropic::Client.new
-
-      message = client.messages.create(
-        model: "claude-opus-5",
-        max_tokens: 1024,
-        system: [
-          {
-            type: "text",
-            text: "You are an expert on this large document...",
-            cache_control: { type: "ephemeral" }
-          }
-        ],
-        messages: [
-          { role: "user", content: "Summarize the key points" }
-        ]
-      )
-      puts message
       ```
     </CodeGroup>
   </Accordion>
