@@ -4,7 +4,7 @@ import os
 import json
 from typing import Any, Set, Dict, TypeVar, cast
 
-import httpx
+import httpx2 as httpx
 import pytest
 from respx import MockRouter
 
@@ -393,7 +393,11 @@ class TestSyncMessages:
     @pytest.mark.respx(base_url=base_url)
     def test_context_manager(self, respx_mock: MockRouter) -> None:
         respx_mock.post("/v1/messages").mock(
-            return_value=httpx.Response(200, content=get_response("basic_response.txt"))
+            return_value=httpx.Response(
+                200,
+                headers={"request-id": "my-req-id", "anthropic-workspace-id": "wrkspc_123"},
+                content=get_response("basic_response.txt"),
+            )
         )
 
         with sync_client.beta.messages.stream(
@@ -407,6 +411,8 @@ class TestSyncMessages:
             model="claude-3-opus-latest",
         ) as stream:
             assert not stream.response.is_closed
+            assert stream.request_id == "my-req-id"
+            assert stream.workspace_id == "wrkspc_123"
 
         # response should be closed even if the body isn't read
         assert stream.response.is_closed
@@ -557,7 +563,11 @@ class TestAsyncMessages:
     @pytest.mark.respx(base_url=base_url)
     async def test_context_manager(self, respx_mock: MockRouter) -> None:
         respx_mock.post("/v1/messages").mock(
-            return_value=httpx.Response(200, content=to_async_iter(get_response("basic_response.txt")))
+            return_value=httpx.Response(
+                200,
+                headers={"request-id": "my-req-id", "anthropic-workspace-id": "wrkspc_123"},
+                content=to_async_iter(get_response("basic_response.txt")),
+            )
         )
 
         async with async_client.beta.messages.stream(
@@ -571,6 +581,8 @@ class TestAsyncMessages:
             model="claude-3-opus-latest",
         ) as stream:
             assert not stream.response.is_closed
+            assert stream.request_id == "my-req-id"
+            assert stream.workspace_id == "wrkspc_123"
 
         # response should be closed even if the body isn't read
         assert stream.response.is_closed
@@ -789,7 +801,7 @@ def test_tool_runner_method_definition_in_sync(sync: bool) -> None:
     assert_overloads_in_sync(
         client.beta.messages.create,
         client.beta.messages.tool_runner,
-        exclude_params={"stream", "tools", "max_iterations", "compaction_control", "output_format"},
+        exclude_params={"stream", "tools", "max_iterations", "output_format"},
     )
 
 

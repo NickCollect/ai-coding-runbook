@@ -492,7 +492,12 @@ async function generateToolResponse(
   const available = availableToolNames(params);
   const toolResults = await Promise.all(
     toolUseBlocks.map(async (toolUse) => {
-      const tool = params.tools.find((t) => ('name' in t ? t.name : t.mcp_server_name) === toolUse.name);
+      const tool = params.tools.find(
+        (t) =>
+          ('name' in t ? t.name
+          : 'mcp_server_name' in t ? t.mcp_server_name
+          : t.type) === toolUse.name,
+      );
       // A `tool_removal` is only a hint to the model, which may still emit a tool_use for a
       // withdrawn tool — treat those exactly like a tool that was never defined.
       if (!tool || !('run' in tool) || !available.has(toolUse.name)) {
@@ -577,18 +582,6 @@ function applyToolChange(block: BetaContentBlockParam, available: Set<string>): 
     case 'tool_removal':
     case 'tool_addition':
       applyToolReference(block, available);
-      break;
-    case 'mid_conv_system':
-      // A `mid_conv_system` block's content is limited by the API schema to
-      // text / tool_addition / tool_removal, so we walk exactly one level — no recursion.
-      for (const inner of block.content) {
-        if (inner.type === 'tool_removal' || inner.type === 'tool_addition') {
-          applyToolReference(inner, available);
-        }
-      }
-      break;
-    default:
-      // Other and unknown/newer block types leave the set untouched (forward compatibility).
       break;
   }
 }

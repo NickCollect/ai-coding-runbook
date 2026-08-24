@@ -12,7 +12,7 @@ describe('resource messages', () => {
     const responsePromise = client.messages.create({
       max_tokens: 1024,
       messages: [{ content: 'Hello, world', role: 'user' }],
-      model: 'claude-opus-4-6',
+      model: 'claude-opus-5',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,9 +27,18 @@ describe('resource messages', () => {
     const response = await client.messages.create({
       max_tokens: 1024,
       messages: [{ content: 'Hello, world', role: 'user' }],
-      model: 'claude-opus-4-6',
+      model: 'claude-opus-5',
       cache_control: { type: 'ephemeral', ttl: '5m' },
-      container: 'container',
+      container: {
+        id: 'id',
+        skills: [
+          {
+            skill_id: 'pdf',
+            type: 'anthropic',
+            version: 'latest',
+          },
+        ],
+      },
       inference_geo: 'inference_geo',
       metadata: { user_id: '13803d75-b4b5-4c3e-b2a2-6f21399b021b' },
       output_config: {
@@ -89,7 +98,7 @@ describe('resource messages', () => {
   test('countTokens: only required params', async () => {
     const responsePromise = client.messages.countTokens({
       messages: [{ content: 'Hello, world', role: 'user' }],
-      model: 'claude-opus-4-6',
+      model: 'claude-opus-5',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -103,7 +112,7 @@ describe('resource messages', () => {
   test('countTokens: required and optional params', async () => {
     const response = await client.messages.countTokens({
       messages: [{ content: 'Hello, world', role: 'user' }],
-      model: 'claude-opus-4-6',
+      model: 'claude-opus-5',
       cache_control: { type: 'ephemeral', ttl: '5m' },
       output_config: {
         effort: 'low',

@@ -4,7 +4,7 @@ from types import TracebackType
 from typing import TYPE_CHECKING, Any, Type, Generic, Callable, cast
 from typing_extensions import Self, Iterator, Awaitable, AsyncIterator, assert_never
 
-import httpx
+import httpx2 as httpx
 from pydantic import BaseModel
 
 from anthropic.types.tool_use_block import ToolUseBlock
@@ -59,6 +59,10 @@ class MessageStream(Generic[ResponseFormatT]):
     @property
     def request_id(self) -> str | None:
         return self.response.headers.get("request-id")  # type: ignore[no-any-return]
+
+    @property
+    def workspace_id(self) -> str | None:
+        return self.response.headers.get("anthropic-workspace-id")  # type: ignore[no-any-return]
 
     def __next__(self) -> ParsedMessageStreamEvent[ResponseFormatT]:
         return self._iterator.__next__()
@@ -207,6 +211,10 @@ class AsyncMessageStream(Generic[ResponseFormatT]):
     @property
     def request_id(self) -> str | None:
         return self.response.headers.get("request-id")  # type: ignore[no-any-return]
+
+    @property
+    def workspace_id(self) -> str | None:
+        return self.response.headers.get("anthropic-workspace-id")  # type: ignore[no-any-return]
 
     async def __anext__(self) -> ParsedMessageStreamEvent[ResponseFormatT]:
         return await self._iterator.__anext__()

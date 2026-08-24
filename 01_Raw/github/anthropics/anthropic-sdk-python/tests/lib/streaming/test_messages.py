@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 from typing import Any, Set, TypeVar, Iterator, cast
 
-import httpx
+import httpx2 as httpx
 import pytest
 from respx import MockRouter
 
@@ -218,15 +218,18 @@ class TestSyncMessages:
             ],
             model="claude-3-opus-latest",
         ) as stream:
-            with pytest.warns(DeprecationWarning):
-                assert isinstance(cast(Any, stream), Stream)
+            assert not isinstance(cast(Any, stream), Stream)
 
             assert_basic_response([event for event in stream], stream.get_final_message())
 
     @pytest.mark.respx(base_url=base_url)
     def test_context_manager(self, respx_mock: MockRouter) -> None:
         respx_mock.post("/v1/messages").mock(
-            return_value=httpx.Response(200, content=get_response("basic_response.txt"))
+            return_value=httpx.Response(
+                200,
+                headers={"request-id": "my-req-id", "anthropic-workspace-id": "wrkspc_123"},
+                content=get_response("basic_response.txt"),
+            )
         )
 
         with sync_client.messages.stream(
@@ -240,6 +243,8 @@ class TestSyncMessages:
             model="claude-3-opus-latest",
         ) as stream:
             assert not stream.response.is_closed
+            assert stream.request_id == "my-req-id"
+            assert stream.workspace_id == "wrkspc_123"
 
         # response should be closed even if the body isn't read
         assert stream.response.is_closed
@@ -276,8 +281,7 @@ class TestSyncMessages:
             ],
             model="claude-sonnet-4-5",
         ) as stream:
-            with pytest.warns(DeprecationWarning):
-                assert isinstance(cast(Any, stream), Stream)
+            assert not isinstance(cast(Any, stream), Stream)
 
             assert_tool_use_response([event for event in stream], stream.get_final_message())
 
@@ -400,8 +404,7 @@ class TestAsyncMessages:
             ],
             model="claude-3-opus-latest",
         ) as stream:
-            with pytest.warns(DeprecationWarning):
-                assert isinstance(cast(Any, stream), AsyncStream)
+            assert not isinstance(cast(Any, stream), AsyncStream)
 
             assert_basic_response([event async for event in stream], await stream.get_final_message())
 
@@ -409,7 +412,11 @@ class TestAsyncMessages:
     @pytest.mark.respx(base_url=base_url)
     async def test_context_manager(self, respx_mock: MockRouter) -> None:
         respx_mock.post("/v1/messages").mock(
-            return_value=httpx.Response(200, content=to_async_iter(get_response("basic_response.txt")))
+            return_value=httpx.Response(
+                200,
+                headers={"request-id": "my-req-id", "anthropic-workspace-id": "wrkspc_123"},
+                content=to_async_iter(get_response("basic_response.txt")),
+            )
         )
 
         async with async_client.messages.stream(
@@ -423,6 +430,8 @@ class TestAsyncMessages:
             model="claude-3-opus-latest",
         ) as stream:
             assert not stream.response.is_closed
+            assert stream.request_id == "my-req-id"
+            assert stream.workspace_id == "wrkspc_123"
 
         # response should be closed even if the body isn't read
         assert stream.response.is_closed
@@ -461,8 +470,7 @@ class TestAsyncMessages:
             ],
             model="claude-sonnet-4-5",
         ) as stream:
-            with pytest.warns(DeprecationWarning):
-                assert isinstance(cast(Any, stream), AsyncStream)
+            assert not isinstance(cast(Any, stream), AsyncStream)
 
             assert_tool_use_response([event async for event in stream], await stream.get_final_message())
 

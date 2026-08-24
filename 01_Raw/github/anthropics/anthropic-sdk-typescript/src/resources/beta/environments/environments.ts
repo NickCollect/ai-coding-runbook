@@ -260,9 +260,9 @@ export interface BetaEnvironment {
   created_at: string;
 
   /**
-   * User-provided description for the environment
+   * User-provided description for the environment; null when unset
    */
-  description: string;
+  description: string | null;
 
   /**
    * User-provided metadata key-value pairs
@@ -525,7 +525,8 @@ export interface EnvironmentUpdateParams {
   config?: BetaCloudConfigParams | BetaSelfHostedConfigParams | null;
 
   /**
-   * Body param: Updated description of the environment
+   * Body param: Updated description of the environment. Omit to preserve; null
+   * clears to null; an empty string is stored as an empty string.
    */
   description?: string | null;
 

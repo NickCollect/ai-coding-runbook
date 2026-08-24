@@ -13,7 +13,7 @@ from datetime import datetime, timedelta
 from enum import StrEnum
 from functools import partial
 from pathlib import PosixPath
-from typing import cast, get_args
+from typing import Any, cast, get_args
 
 import httpx
 import streamlit as st
@@ -322,6 +322,18 @@ async def main():
         model_conf = _lookup_model_conf(st.session_state.model)
         thinking_modes = model_conf.thinking_modes
         st.session_state.thinking_modes = thinking_modes
+        # The three thinking widgets below render conditionally, and Streamlit
+        # deletes a widget's session_state key at the end of any run that
+        # doesn't render it (e.g. picking "Off" removes the effort slider and,
+        # with it, `thinking_effort`). Re-assigning the keys each run detaches
+        # them from the widget lifecycle so the sampling loop can always read
+        # them; the defaults cover a key that was already dropped.
+        for key, default in (
+            ("thinking_mode", thinking_modes[0]),
+            ("thinking_effort", "medium"),
+            ("thinking_budget", int(model_conf.default_output_tokens / 2)),
+        ):
+            st.session_state[key] = st.session_state.get(key, default)
         if st.session_state.thinking_mode not in thinking_modes:
             st.session_state.thinking_mode = thinking_modes[0]
         if model_conf is DEFAULT_MODEL_CONF:
@@ -460,19 +472,23 @@ def maybe_add_interruption_blocks():
     # and we should annotate the conversation with additional context for the model and heal any incomplete tool use calls
     result = []
     last_message = st.session_state.messages[-1]
-    previous_tool_use_ids = [
-        block["id"] for block in last_message["content"] if block["type"] == "tool_use"
+    previous_tool_uses = [
+        block for block in last_message["content"] if block["type"] == "tool_use"
     ]
-    for tool_use_id in previous_tool_use_ids:
-        st.session_state.tools[tool_use_id] = ToolResult(error=INTERRUPT_TOOL_ERROR)
-        result.append(
-            BetaToolResultBlockParam(
-                tool_use_id=tool_use_id,
-                type="tool_result",
-                content=INTERRUPT_TOOL_ERROR,
-                is_error=True,
-            )
+    for tool_use in previous_tool_uses:
+        st.session_state.tools[tool_use["id"]] = ToolResult(error=INTERRUPT_TOOL_ERROR)
+        block = BetaToolResultBlockParam(
+            tool_use_id=tool_use["id"],
+            type="tool_result",
+            content=INTERRUPT_TOOL_ERROR,
+            is_error=True,
         )
+        # A toolset member call's result must carry the same toolset_name as
+        # the tool_use it answers (see _make_api_tool_result in loop.py).
+        toolset_name = cast(dict[str, Any], tool_use).get("toolset_name")
+        if toolset_name is not None:
+            cast(dict[str, Any], block)["toolset_name"] = toolset_name
+        result.append(block)
     result.append(BetaTextBlockParam(type="text", text=INTERRUPT_TEXT))
     return result
 

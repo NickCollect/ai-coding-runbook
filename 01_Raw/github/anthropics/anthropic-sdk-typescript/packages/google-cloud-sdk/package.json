@@ -1,6 +1,6 @@
 {
   "name": "@anthropic-ai/google-cloud-sdk",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "The official TypeScript library for Claude Platform on Google Cloud",
   "author": "Anthropic <support@anthropic.com>",
   "types": "dist/index.d.ts",
@@ -8,7 +8,6 @@
   "type": "commonjs",
   "repository": "github:anthropics/anthropic-sdk-typescript",
   "license": "MIT",
-  "packageManager": "pnpm@10.34.5",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -25,7 +24,7 @@
     "fix": "eslint --fix --ext ts,js ."
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "file:../../dist/",
+    "@anthropic-ai/sdk": "workspace:*",
     "google-auth-library": "^10.2.0"
   },
   "devDependencies": {

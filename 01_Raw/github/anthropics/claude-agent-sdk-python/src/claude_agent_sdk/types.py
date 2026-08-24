@@ -3,7 +3,7 @@
 import sys
 import warnings
 from collections.abc import Awaitable, Callable
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Final, Literal, Protocol, TypeAlias
 
@@ -629,7 +629,17 @@ class McpHttpServerConfig(TypedDict):
 
 
 class McpSdkServerConfig(TypedDict):
-    """SDK MCP server configuration."""
+    """SDK (in-process) MCP server configuration.
+
+    Usually produced by ``create_sdk_mcp_server()``. ``instance`` may also be
+    any ``mcp.server.Server`` you have built yourself; the SDK serves it to
+    Claude Code over an in-memory MCP transport (one ``Server.run`` per
+    query, so its lifespan runs once), and the requests it handles (tools,
+    resources, prompts, ...) all reach it. Requests and notifications the
+    server sends to the client (sampling, elicitation, roots, logging,
+    progress) are not forwarded yet, and on mcp 1.x its tools are not
+    cancelled when Claude Code abandons a call: they run to completion.
+    """
 
     type: Literal["sdk"]
     name: str
@@ -1748,15 +1758,25 @@ class SessionMessage:
         uuid: Unique message identifier.
         session_id: ID of the session this message belongs to.
         message: Raw Anthropic API message dict (role, content, etc.).
-        parent_tool_use_id: Always ``None`` for top-level conversation
-            messages (tool-use sidechain messages are filtered out).
+        parent_tool_use_id: For messages returned by ``get_subagent_messages()``
+            / ``get_subagent_messages_from_store()``, the id of the Agent
+            ``tool_use`` block in the parent session that spawned the subagent
+            (recovered from the subagent's metadata; ``None`` if that metadata
+            is unavailable). Always ``None`` for top-level
+            ``get_session_messages()`` / ``get_session_messages_from_store()``
+            results.
+        parent_agent_id: For subagent messages, the agent id of the subagent
+            that spawned this subagent, or ``None`` if it was spawned by the
+            main session (or the metadata is unavailable). Always ``None`` for
+            top-level session messages.
     """
 
     type: Literal["user", "assistant"]
     uuid: str
     session_id: str
     message: Any
-    parent_tool_use_id: None = None
+    parent_tool_use_id: str | None = None
+    parent_agent_id: str | None = None
 
 
 # Controls whether thinking text is returned summarized or omitted. Opus 4.7+
@@ -1871,6 +1891,50 @@ def _warn_if_can_use_tool_shadowed(options: "ClaudeAgentOptions") -> None:
         # different, async-frame-dependent depth for each entry point, so
         # precise caller attribution isn't feasible here.
         warnings.warn(message, CanUseToolShadowedWarning, stacklevel=2)
+
+
+def _configure_can_use_tool(options: "ClaudeAgentOptions") -> "ClaudeAgentOptions":
+    """Validate ``can_use_tool`` and route permission prompts over stdio.
+
+    Shared by ``query()`` and ``ClaudeSDKClient.connect()`` so both entry
+    points enforce the same rules. Returns ``options`` unchanged when no
+    callback is set; otherwise checks it is not combined with
+    ``permission_prompt_tool_name``, emits the shadowing advisory, and returns
+    a copy with ``permission_prompt_tool_name="stdio"`` so the CLI sends
+    permission requests over the control protocol.
+
+    Raises:
+        ValueError: If both ``can_use_tool`` and ``permission_prompt_tool_name``
+            are set.
+    """
+    if not options.can_use_tool:
+        return options
+    # canUseTool and permission_prompt_tool_name are mutually exclusive
+    if options.permission_prompt_tool_name:
+        raise ValueError(
+            "can_use_tool callback cannot be used with permission_prompt_tool_name. "
+            "Please use one or the other."
+        )
+    _warn_if_can_use_tool_shadowed(options)
+    return replace(options, permission_prompt_tool_name="stdio")
+
+
+def _hooks_to_internal_format(
+    hooks: "dict[HookEvent, list[HookMatcher]]",
+) -> dict[str, list[dict[str, Any]]]:
+    """Convert ``ClaudeAgentOptions.hooks`` to the dict shape ``Query`` expects."""
+    internal_hooks: dict[str, list[dict[str, Any]]] = {}
+    for event, matchers in hooks.items():
+        internal_hooks[event] = []
+        for matcher in matchers:
+            internal_matcher: dict[str, Any] = {
+                "matcher": matcher.matcher if hasattr(matcher, "matcher") else None,
+                "hooks": matcher.hooks if hasattr(matcher, "hooks") else [],
+            }
+            if hasattr(matcher, "timeout") and matcher.timeout is not None:
+                internal_matcher["timeout"] = matcher.timeout
+            internal_hooks[event].append(internal_matcher)
+    return internal_hooks
 
 
 @dataclass
@@ -2091,6 +2155,18 @@ class ClaudeAgentOptions:
     TypeScript SDK's ``includeHookEvents``.
     """
 
+    forward_subagent_text: bool = False
+    """Forward subagent text and thinking blocks as messages in the stream.
+
+    By default only ``tool_use`` / ``tool_result`` blocks from subagents
+    (spawned via the Agent tool) are emitted, as ``AssistantMessage`` /
+    ``UserMessage`` objects whose ``parent_tool_use_id`` is the spawning
+    Agent ``tool_use`` id — enough for a progress heartbeat. When true, the
+    subagent's text and thinking blocks are forwarded the same way, so
+    consumers can render the full nested transcript. Matches the TypeScript
+    SDK's ``forwardSubagentText``.
+    """
+
     fork_session: bool = False
     """When true, resumed sessions fork to a new session ID rather than
     continuing the previous session. Use with ``resume``."""
@@ -2306,6 +2382,9 @@ class SDKControlInitializeRequest(TypedDict):
     subtype: Literal["initialize"]
     hooks: dict[HookEvent, Any] | None
     agents: NotRequired[dict[str, dict[str, Any]]]
+    excludeDynamicSections: NotRequired[bool]
+    skills: NotRequired[list[str]]
+    forwardSubagentText: NotRequired[bool]
 
 
 class SDKControlSetPermissionModeRequest(TypedDict):
