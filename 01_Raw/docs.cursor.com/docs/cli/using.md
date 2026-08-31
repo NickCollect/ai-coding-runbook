@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/using
-fetched_at: 2026-08-24T02:18:36.412433+00:00
+fetched_at: 2026-08-31T06:29:31.336546+00:00
 fetch_method: mintlify_md
 ---
 
@@ -86,7 +86,7 @@ Push your conversation to a [Cloud Agent](https://cursor.com/docs/cloud-agent.md
 
 Pass `-w` or `--worktree [name]` to run the agent in a new Git worktree instead of editing your current checkout directly. Cursor creates these checkouts under `~/.cursor/worktrees/<reponame>/<name>`, alongside worktrees created from the editor. If you omit `name`, Cursor generates one.
 
-Cursor cleans up CLI worktrees with the same retention rules it uses for editor worktrees. For cleanup settings and limits, see [How are old worktrees cleaned up?](https://cursor.com/docs/configuration/worktrees.md#how-are-old-worktrees-cleaned-up).
+Cursor cleans up CLI worktrees with the same retention rules it uses for editor worktrees. For cleanup settings and limits, see [How are old worktrees cleaned up?](https://cursor.com/docs/configuration/worktrees.md#worktrees-cleanup).
 
 Combine `--workspace <path>` when you need an explicit repository root. Otherwise the CLI uses the current working directory. `--worktree` only changes where the agent makes file edits inside that project.
 

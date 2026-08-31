@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/tools/search
-fetched_at: 2026-07-27T04:31:47.973703+00:00
+fetched_at: 2026-08-31T06:29:30.687467+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ Instant Grep supports full regex and word-boundary matching, so Agent can constr
 
 ## Privacy and security
 
-File paths are encrypted before being sent to Cursor's servers. Code content is never stored in plaintext; it is held in memory during indexing, then discarded.
+File paths are encrypted before being sent to Cursor's servers. Code content is never stored in plaintext.
 
 ## Explore subagent
 
@@ -28,10 +28,6 @@ This is useful for context management. Searching through many files generates a 
 
 ## FAQ
 
-### Is my source code stored on Cursor servers?
-
-No. Cursor creates embeddings without storing filenames or source code. Filenames are obfuscated and code chunks are encrypted. When Agent searches, Cursor retrieves the embeddings and decrypts the chunks on the client side.
-
 ### Can I customize path encryption?
 
 Create a `.cursor/keys` file in your workspace root:
@@ -42,13 +38,9 @@ Create a `.cursor/keys` file in your workspace root:
 }
 ```
 
-### How does team sharing work?
-
-Indexes can be shared across team members for faster indexing of similar codebases. Cursor respects file access permissions and only shares accessible content.
-
 ### Does Cursor support multi-root workspaces?
 
-Yes. Cursor supports [multi-root workspaces](https://code.visualstudio.com/docs/editor/workspaces#_multiroot-workspaces). All codebases get indexed automatically, and each codebase's context is available to Agent. Some features that rely on a single git root, like worktrees, are disabled for multi-root workspaces. Cloud Agents do not support multi-root workspaces.
+Yes. Cursor supports [multi-root workspaces](https://code.visualstudio.com/docs/editor/workspaces#_multiroot-workspaces). Each workspace folder's context is available to Agent. Some features that rely on a single git root, like worktrees, are disabled for multi-root workspaces. Cloud Agents do not support multi-root workspaces.
 
 
 ---

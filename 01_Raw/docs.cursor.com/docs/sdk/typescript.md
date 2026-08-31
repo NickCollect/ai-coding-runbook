@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/sdk/typescript
-fetched_at: 2026-08-17T02:15:19.114635+00:00
+fetched_at: 2026-08-31T06:29:34.138681+00:00
 fetch_method: mintlify_md
 ---
 
@@ -369,12 +369,11 @@ Per-run model overrides are sticky. Later sends without an override keep using t
 
 #### Billing and routing pool
 
-- **Cost** follows classic Auto behavior and bundled Auto pricing.
-- **Balance** and **Intelligence** use Cursor Router and bill at the routed model's rate under your plan or contract.
+- All Auto modes bill at the list price of the model each request is routed to.
 - The underlying model can change between requests. Prefer a fixed model id when you need reproducible comparisons.
 - Enterprise model allowlists shape the routing pool. Blocking required models can disable Router.
 
-For current rates and the routing pool, see [Cursor Router](https://cursor.com/docs/cursor-router.md) and [Models & Pricing](https://cursor.com/docs/models-and-pricing.md).
+For current rates and the routing pool, see [Cursor Router](https://cursor.com/docs/cursor-router.md) and [Auto modes](https://cursor.com/docs/models-and-pricing.md#auto-modes).
 
 #### Troubleshooting missing Router
 
@@ -1777,7 +1776,7 @@ Cloud runs always execute inside an isolated VM, so `sandboxOptions` doesn't app
 
 ## Auto-review
 
-By default a local agent runs every tool call without restriction, since headless runs have no human to approve them. Set `local.autoReview: true` to route local tool calls through [Auto-review](https://cursor.com/docs/agent/tools/terminal.md#run-mode) instead, the same classifier the IDE uses to allow or block Shell, MCP, and Fetch calls based on safety and how well each call matches the run's intent.
+By default a local agent runs every tool call without restriction, since headless runs have no human to approve them. Set `local.autoReview: true` to route local tool calls through [Auto-review](https://cursor.com/docs/agent/security/run-modes.md) instead, the same classifier the IDE uses to allow or block Shell, MCP, and Fetch calls based on safety and how well each call matches the run's intent.
 
 ```typescript
 const agent = await Agent.create({
@@ -1792,7 +1791,7 @@ const agent = await Agent.create({
 
 Auto-review needs the classifier enabled on the connected backend; when it isn't available, runs fall back to the default behavior. Because there's no interactive approval in a headless run, a call the classifier blocks is denied rather than escalated, and the agent gets the block reason and can try another approach. Steer the classifier with a `permissions.json` `autoRun` block in the workspace, the same as in the IDE. See [permissions.json](https://cursor.com/docs/reference/permissions.md) for the format.
 
-Auto-review is local agents only. Cloud runs already execute in an isolated VM. The classifier is best-effort convenience, not a security boundary; combine it with [`sandboxOptions`](https://cursor.com/docs/sdk/typescript.md#sandbox-options) or an [allowlist](https://cursor.com/docs/agent/tools/terminal.md#run-mode) for strict control.
+Auto-review is local agents only. Cloud runs already execute in an isolated VM. The classifier is best-effort convenience, not a security boundary; combine it with [`sandboxOptions`](https://cursor.com/docs/sdk/typescript.md#sandbox-options) or an [allowlist](https://cursor.com/docs/agent/security/run-modes.md) for strict control.
 
 ## Artifacts
 
@@ -2177,7 +2176,7 @@ class CursorSdkError extends Error {
 | Error class                    | Typical message                                               | Likely cause                                                                                                               | Recommended fix                                                                                                                                                                                                 |
 | :----------------------------- | :------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `AuthenticationError`          | "Invalid API key"                                             | Missing or wrong `CURSOR_API_KEY`, expired token, or admin disabled the key.                                               | Generate a new key from [API Keys](https://cursor.com/dashboard/api) (user) or [Team settings](https://cursor.com/dashboard/team-settings) (service account). Confirm the key has permission for the operation. |
-| `RateLimitError`               | "Rate limit exceeded" or "Usage limit exceeded"               | Burst limit or monthly usage cap.                                                                                          | Back off using exponential delay (the SDK reports `isRetryable: true` for transient cases). For monthly cap, raise the plan's [usage limit](https://cursor.com/docs/account/usage.md).                          |
+| `RateLimitError`               | "Rate limit exceeded" or "Usage limit exceeded"               | Burst limit or monthly usage cap.                                                                                          | Back off using exponential delay (the SDK reports `isRetryable: true` for transient cases). For monthly cap, raise the plan's [usage limit](https://cursor.com/help/models-and-usage/usage-limits.md).          |
 | `ConfigurationError`           | "Bad model name", "API key not supported", "File unsupported" | Invalid `model.id`, missing required `params`, unsupported file in a tool call, or an admin policy blocking the request.   | Call `Cursor.models.list()` to confirm the id and params. Check repo / file paths exist.                                                                                                                        |
 | `AgentBusyError`               | "Agent is busy"                                               | Sending a follow-up while the same cloud agent already has a run in `CREATING` or `RUNNING` state.                         | Wait for the active run to finish, cancel it, or poll `Agent.listRuns()` before sending again.                                                                                                                  |
 | `IntegrationNotConnectedError` | "\[provider] integration is not connected"                    | Creating a cloud agent for a repo whose SCM provider isn't connected to your Cursor team.                                  | Open `error.helpUrl` to reconnect the provider, then retry.                                                                                                                                                     |

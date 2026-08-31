@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/kimi-k3
-fetched_at: 2026-08-03T04:24:59.344114+00:00
+fetched_at: 2026-08-31T06:29:33.914399+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ Kimi K3 is an open-weight model from Moonshot AI. Cursor serves it through our i
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Kimi K3 draws from the third-party **Other Models** pool, which charges at the rates below. Individual plans include at least $20 of third-party Other Models usage each month (more on higher tiers). All prices are per million tokens.
+Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Kimi K3 draws from the third-party **Other Models** pool, which charges at the rates below. All prices are per million tokens.
 
 Pricing is flat across the full context window. There is no long-context surcharge and no separate cache-write fee. On legacy request-based plans, extended context requires Max Mode.
 

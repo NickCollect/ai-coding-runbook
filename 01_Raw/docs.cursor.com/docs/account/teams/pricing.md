@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/pricing
-fetched_at: 2026-08-24T02:18:35.718381+00:00
+fetched_at: 2026-08-31T06:29:30.399909+00:00
 fetch_method: mintlify_md
 ---
 
@@ -41,7 +41,7 @@ Each paid seat comes with included usage across two pools:
 - Cursor Models (Cursor Grok 4.6, Grok 4.5, and Composer 2.5)
 - Other Models (third-party models)
 
-Usage is allocated per user based on seat type, does not transfer between team members, and resets at the start of each billing cycle. Third-party Other Models usage is charged at public list API prices plus the Cursor Token Rate. This includes when Auto Balance or Auto Intelligence routes to a third-party model. Auto Cost and Cursor Models, including Composer 2.5, Grok 4.6, and Grok 4.5, are exempt from the Cursor Token Rate.
+Usage is allocated per user based on seat type, does not transfer between team members, and resets at the start of each billing cycle. Third-party Other Models usage is charged at public list API prices plus the Cursor Token Rate. This includes when Auto routes to a third-party model. Cursor Models, including Grok and Composer, are exempt from the Cursor Token Rate.
 
 The [usage dashboard](https://cursor.com/dashboard/usage) tracks included usage separately for:
 
@@ -57,8 +57,8 @@ On-demand usage allows you to continue using models after included usage is cons
 When a team member consumes all of their included third-party Other Models usage, Cursor switches them to the Cursor Models pool. If they continue using third-party Other Models, or if they fully consume their Cursor Models pool usage, they continue with **on-demand usage** if it is enabled.
 
 - Third-party models are billed monthly at public list API prices plus the Cursor Token Rate
-- First-party Cursor models, including Composer 2.5, Grok 4.6, and Grok 4.5, are billed monthly at their token rates with no Cursor Token Rate
-- Auto Cost pricing is set per million tokens, regardless of which model is used, with no Cursor Token Rate. Auto Balance and Auto Intelligence are billed at Model API rates for the model used; third-party models also incur the Cursor Token Rate
+- First-party Cursor models, including Grok and Composer, are billed monthly at their token rates with no Cursor Token Rate
+- All Auto modes bill at the list price of the model each request is routed to. Third-party models also incur the Cursor Token Rate
 - No interruption in service or quality
 - Tracked per user in your admin dashboard (see [spending data API](https://cursor.com/docs/account/teams/admin-api.md#get-spending-data))
 - Can be controlled with spending limits
@@ -72,9 +72,9 @@ The Cursor Token Rate is $0.25 per million tokens and is charged on third-party 
 - Custom model execution (Tab, Apply, etc.)
 - Infrastructure and processing costs
 
-The Cursor Token Rate applies to input tokens, output tokens, and cached tokens on eligible third-party model requests. This includes when Auto Balance or Auto Intelligence routes to a third-party model. This applies to [BYOK](https://cursor.com/help/models-and-usage/api-keys.md) as well. Auto Cost and all first-party Cursor models, including Composer 2.5, Grok 4.6, and Grok 4.5, are exempt.
+The Cursor Token Rate applies to input tokens, output tokens, and cached tokens on eligible third-party model requests. This includes when Auto routes to a third-party model. This applies to [BYOK](https://cursor.com/help/models-and-usage/api-keys.md) as well. First-party Cursor models, including Grok and Composer, are exempt.
 
-See [Auto modes](https://cursor.com/docs/models-and-pricing.md#auto-modes) for Auto Cost, Auto Balance, and Auto Intelligence pricing.
+See [Auto modes](https://cursor.com/docs/models-and-pricing.md#auto-modes) for Auto pricing.
 
 ## Active seats
 
@@ -93,11 +93,10 @@ Contact `enterprise@cursor.com` for volume discounts on larger teams.
 
 ## Model Pricing
 
-All prices are per million tokens. Teams are charged at public list API prices plus [Cursor Token Rate](https://cursor.com/docs/account/teams/pricing.md#cursor-token-rate) for third-party model requests, including when Auto Balance or Auto Intelligence routes to a third-party model.
+All prices are per million tokens. Teams are charged at public list API prices plus [Cursor Token Rate](https://cursor.com/docs/account/teams/pricing.md#cursor-token-rate) for third-party model requests, including when Auto routes to a third-party model.
 
 | Model                                                                                         | Provider  | Input | Cache write | Cache read | Output | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | --------------------------------------------------------------------------------------------- | --------- | ----- | ----------- | ---------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Auto Cost                                                                                     | Cursor    | $1.25 | $1.25       | $0.25      | $6     | Hidden by default                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | [Claude 4 Sonnet](https://www.anthropic.com/claude/sonnet)                                    | Anthropic | $3    | $3.75       | $0.3       | $15    | Hidden by default; Thinking variant counts as 2 requests in legacy pricing                                                                                                                                                                                                                                                                                                                                                                    |
 | [Claude 4 Sonnet 1M](https://www.anthropic.com/claude/sonnet)                                 | Anthropic | $6    | $7.5        | $0.6       | $22.5  | Hidden by default; Thinking variant counts as 2 requests in legacy pricing; This model can be very expensive due to the large context window; The cost is 2x when the input exceeds 200k tokens                                                                                                                                                                                                                                               |
 | [Claude 4.5 Haiku](https://www.anthropic.com/claude/haiku)                                    | Anthropic | $1    | $1.25       | $0.1       | $5     | Hidden by default; Bedrock/Vertex: regional endpoints +10% surcharge; Cache: writes 1.25x, reads 0.1x                                                                                                                                                                                                                                                                                                                                         |
@@ -143,6 +142,7 @@ All prices are per million tokens. Teams are charged at public list API prices p
 | Grok 4.6                                                                                      | Cursor    | $2    | -           | $0.5       | $6     | Jointly trained by Cursor and SpaceXAI                                                                                                                                                                                                                                                                                                                                                                                                        |
 | Kimi K2.7 Code                                                                                | Moonshot  | $0.95 | -           | $0.19      | $4     | Hidden by default                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | [Kimi K3](https://www.moonshot.ai)                                                            | Moonshot  | $3    | -           | $0.3       | $15    | Hidden by default; Requires Max Mode on legacy request-based plans; Up to 1M tokens with extended context at the same per-token rates (no long-context surcharge); No separate cache-write fee                                                                                                                                                                                                                                                |
+| Legacy Enterprise Auto                                                                        | Cursor    | $1.25 | $1.25       | $0.25      | $6     | Hidden by default                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 
 ---

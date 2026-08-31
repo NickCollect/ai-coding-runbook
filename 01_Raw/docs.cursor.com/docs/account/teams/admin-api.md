@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/admin-api
-fetched_at: 2026-08-17T02:15:17.002316+00:00
+fetched_at: 2026-08-31T06:29:30.303259+00:00
 fetch_method: mintlify_md
 ---
 
@@ -478,7 +478,7 @@ Retrieve detailed usage events for your team with filtering, search, and paginat
 
 **Cost Calculation**: To reconcile event-level costs with `/teams/spend` totals, sum the `chargedCents` field across events. This field includes both the model cost and the Cursor Token Rate when a request is eligible for the rate, matching the dashboard totals. It works for both token-based and request-based billing plans.
 
-The `cursorTokenFee` field represents the Cursor Token Rate and is only present when the rate applies to a third-party model request. This includes when Auto Balance or Auto Intelligence routes to a third-party model. Auto Cost, first-party Cursor models such as Composer 2.5, Grok 4.6, and Grok 4.5, and request-based enterprise accounts do not include this fee.
+The `cursorTokenFee` field represents the Cursor Token Rate and is only present when the rate applies to a third-party model request. This includes when Auto routes to a third-party model. First-party Cursor models such as Grok and Composer, and request-based enterprise accounts do not include this fee. See [Cursor Token Rate](https://cursor.com/help/models-and-usage/token-rate.md).
 
 #### Parameters
 
@@ -563,7 +563,7 @@ Each object in `usageEvents` contains:
   - `totalCents` number - Total model cost in cents
   - `discountPercentOff` number | undefined - Discount percentage applied, if any
 - `chargedCents` number - Total amount charged in cents for this event. For third-party model requests subject to the Cursor Token Rate, this includes model cost plus the Cursor Token Rate. Use this field to reconcile event-level costs with `/teams/spend` totals. Works for both token-based and request-based billing plans.
-- `cursorTokenFee` number | undefined - Cursor Token Rate in cents. Present only when the rate applies to a third-party model request (including Auto Balance or Auto Intelligence routes to a third-party model).
+- `cursorTokenFee` number | undefined - Cursor Token Rate in cents. Present only when the rate applies to a third-party model request (including when Auto routes to a third-party model).
 
 ```bash
 curl -X POST https://api.cursor.com/teams/filtered-usage-events \
@@ -872,7 +872,7 @@ curl -X POST https://api.cursor.com/teams/remove-member \
 
 /settings/repo-blocklists/repos
 
-Retrieve all repository blocklists configured for your team. Add repositories and use patterns to prevent files or directories from being indexed or used as context.
+Retrieve all repository blocklists configured for your team. Add repositories and use patterns to prevent files or directories from being used as context.
 
 #### Pattern Examples
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/tools/terminal
-fetched_at: 2026-06-29T05:25:13.285182+00:00
+fetched_at: 2026-08-31T06:29:30.713496+00:00
 fetch_method: mintlify_md
 ---
 
@@ -38,6 +38,10 @@ if [[ -n "$CURSOR_AGENT" ]]; then
   PS1='\u@\h \W \$ '
 fi
 ```
+
+## Related
+
+- [Terminal help](https://cursor.com/help/ai-features/terminal.md)
 
 
 ---

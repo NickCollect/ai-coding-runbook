@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/slack
-fetched_at: 2026-08-17T02:15:18.228613+00:00
+fetched_at: 2026-08-31T06:29:33.156540+00:00
 fetch_method: mintlify_md
 ---
 
@@ -50,17 +50,17 @@ Run `@Cursor help` for an up-to-date command list.
 
 Customize Cloud Agent behavior with these options:
 
-| Option                | Description                                                                                                              | Natural language example       | Inline example      |
-| :-------------------- | :----------------------------------------------------------------------------------------------------------------------- | :----------------------------- | :------------------ |
-| `repo`                | Use a specific repository                                                                                                | `in acme/backend`              | `repo=acme/backend` |
-| `env` / `environment` | Use a named [cloud agent environment](https://cursor.com/docs/cloud-agent/setup.md)                                      | `use the Platform environment` | `env=Platform`      |
-| `branch`              | Use a specific base branch                                                                                               | `work from the dev branch`     | `branch=dev`        |
-| `model`               | Use a specific model                                                                                                     | `with opus`                    | `model=opus`        |
-| `autopr`              | Enable or disable automatic PR creation                                                                                  | Inline option required         | `autopr=false`      |
-| `worker` / `machine`  | Run on a named [My Machine](https://cursor.com/docs/cloud-agent/my-machines.md#trigger-this-machine-from-a-chat-surface) | Inline option required         | `worker=my-devbox`  |
-| `pool`                | Run on a named [self-hosted pool](https://cursor.com/docs/cloud-agent/self-hosted-pool.md#triggering-pool-agents)        | Inline option required         | `pool=gpu`          |
-| `self_hosted`         | Run on your team's self-hosted pool                                                                                      | Inline option required         | `self_hosted=true`  |
-| `channel`             | Post agent updates in another channel you and Cursor can access                                                          | Inline option required         | `channel=#eng-bots` |
+| Option                | Description                                                                                                                                | Natural language example       | Inline example      |
+| :-------------------- | :----------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------- | :------------------ |
+| `repo`                | Use a specific repository                                                                                                                  | `in acme/backend`              | `repo=acme/backend` |
+| `env` / `environment` | Use a named [cloud agent environment](https://cursor.com/docs/cloud-agent/setup.md)                                                        | `use the Platform environment` | `env=Platform`      |
+| `branch`              | Use a specific base branch                                                                                                                 | `work from the dev branch`     | `branch=dev`        |
+| `model`               | Use a specific model                                                                                                                       | `with opus`                    | `model=opus`        |
+| `autopr`              | Enable or disable automatic PR creation                                                                                                    | Inline option required         | `autopr=false`      |
+| `worker` / `machine`  | Run on a named [My Machine](https://cursor.com/docs/cloud-agent/bring-your-own-machine/my-machines.md)                                     | Inline option required         | `worker=my-devbox`  |
+| `pool`                | Run on a named [bring-your-own-machine pool](https://cursor.com/docs/cloud-agent/bring-your-own-machine/pools.md#route-requests-to-a-pool) | Inline option required         | `pool=gpu`          |
+| `self_hosted`         | Run on your team's self-hosted pool                                                                                                        | Inline option required         | `self_hosted=true`  |
+| `channel`             | Post agent updates in another channel you and Cursor can access                                                                            | Inline option required         | `channel=#eng-bots` |
 
 #### Syntax formats
 

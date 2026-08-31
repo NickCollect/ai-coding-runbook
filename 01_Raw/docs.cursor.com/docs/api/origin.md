@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin
-fetched_at: 2026-08-24T02:18:38.234299+00:00
+fetched_at: 2026-08-31T06:29:33.319378+00:00
 title: "Origin API | Cursor Docs"
 ---
 
@@ -93,7 +93,7 @@ Installations use one of two repository-selection modes:
 - `all`: the installation can access every repository owned by the selected target.
 - `selected`: the installation can access only repositories selected by the workspace admin.
 
-Neither mode covers a repository that Origin mirrors in from GitHub. An installation reaches native Origin repositories and repositories Origin mirrors out to GitHub. A repository mirrored in from GitHub stays outside the installation, so it never appears in `GET /installation/repos`, and a request that names it returns `403`.
+Both modes cover mirrored repositories as well as native Origin ones, so a mirror appears in `GET /installation/repos` and can be selected. A mirror is read-only until it becomes a stable outbound mirror: see [Mirrored repositories](#mirrored-repositories).
 
 Use `GET /installation/repos` with an installation token to discover the repositories available to that installation. App JWT endpoints can list, inspect, and delete the app's installations. Deleting an installation prevents new tokens from being minted.
 
@@ -110,11 +110,12 @@ JOSE header:
 Claims:
 
 ```
-{  "iss": "https://api.cursor.com/v1/origin",  "aud": "app_01...",  "sub": "i_01...",  "namespace_id": "ns_01...",  "iat": 1786465200,  "exp": 1786465500,  "jti": "RECEIPT_UUID",  "state": "ORIGINAL_VALUE"}
+{  "iss": "https://api.cursor.com/v1/origin",  "aud": "app_01...",  "sub": "i_01...",  "namespace_id": "ns_01...",  "iat": 1786465200,  "exp": 1786465500,  "jti": "RECEIPT_UUID",  "installedBy": {    "id": "user_01...",    "email": "installer@example.com"  },  "state": "ORIGINAL_VALUE"}
 ```
 
 - `aud` is your app ID and `sub` is the installation ID to use when minting installation access tokens.
 - `namespace_id` is the stable ID of the namespace the app was installed into.
+- `installedBy` identifies the user who performed this install or re-consent. It describes the current action, so on a re-consent it can differ from the durable `installedBy` on [Get App Installation](#get-app-installation).
 - Receipts expire five minutes after issuance. `jti` is unique per receipt.
 - `state` is present only when the install URL carried a non-empty `state`, and echoes that value. Match it against the anti-forgery value you generated before redirecting.
 
@@ -214,6 +215,8 @@ git -c credential.helper="!f() { echo username=x-access-token; echo password=${I
 
 The Origin CLI credential helper is for user logins. App integrations pass the installation token as shown here. Treat the token like a password, never log it, and mint a fresh one before `expiresAt` when a job still needs Git access.
 
+On a mirrored repository, an installation token clones, fetches, and pulls, and Origin rejects `git push` with `403` until the mirror becomes a stable outbound mirror. See [Mirrored repositories](#mirrored-repositories).
+
 ### [User-authenticated CLI requests](#user-authenticated-cli-requests)
 
 After signing in with the [Origin CLI](#origin-cli), use `origin api` for user-authenticated requests. The CLI resolves the user's credential and sends it as a Bearer token. App integrations should use app JWTs and installation access tokens instead.
@@ -257,12 +260,25 @@ Request only the minimum scopes your app needs. `repository:metadata:read` and a
 | `repository:pull_requests:write` | Create and update pull requests. Assign and remove pull request labels. |
 | `repository:pull_requests:reviews:read` | Read pull request comments and submitted reviews. |
 | `repository:pull_requests:reviews:write` | Create and update comments; create, update, and dismiss reviews. |
-| `repository:checks:read` | Read check suites and runs. |
-| `repository:checks:write` | Create and update check suites and runs. |
+| `repository:checks:read` | Read check suites, runs, and check run annotations. |
+| `repository:checks:write` | Create and update check suites and runs. Append check run annotations. |
+| `repository:labels:read` | Read the label definitions a repository owns. |
+| `repository:labels:write` | Create, update, and delete repository label definitions. |
 | `repository:rulesets:read` | Read repository rulesets. |
-| `repository:rulesets:write` | Create and update repository rulesets. |
+| `repository:rulesets:write` | Create, update, and delete repository rulesets. |
 
 The installation token can only narrow these grants. It cannot add a scope or repository the workspace admin did not approve.
+
+### [Mirrored repositories](#mirrored-repositories)
+
+An installation uses every scope it holds on a native Origin repository and on a stable outbound mirror. On a repository in any other mirror state, only two scopes apply:
+
+- `repository:metadata:read`
+- `repository:contents:read`
+
+Every other scope returns `403` on that repository, whatever the workspace admin approved. Over the REST API, repository and contents reads, commit comparison, and [Sync Mirror](#sync-mirror) keep working, and Origin rejects pull requests, reviews, comments, checks, rulesets, and every write. Over Git HTTPS, clone, fetch, pull, and LFS download keep working, and Origin rejects push and LFS upload.
+
+The `mirror` object on a repository does not tell you whether writes are allowed. A mirror partway through a transition can report `mirror.status` as `outbound` and still be read-only, so treat the `403` as authoritative rather than branching on `mirror.status`.
 
 ## [Rate limits](#rate-limits)
 
@@ -324,7 +340,9 @@ Delivery is at least once. Deduplicate retries with `webhook-id`, durably accept
 
 Origin retries transport errors, `429`, and `5xx` responses up to six total attempts. Retry delays are 30 seconds, 1 minute, 2 minutes, 4 minutes, and 8 minutes. Other `4xx` responses are terminal.
 
-Origin sends no events for a repository mirrored in from GitHub, and installation event payloads leave those repositories out of the selected repository arrays.
+To confirm a receiver works before any real event reaches it, call [Ping Webhook](#ping-webhook).
+
+Origin delivers events for mirrored repositories, and installation event payloads list them in the selected repository arrays. Delivery does not widen what the installation can call: see [Mirrored repositories](#mirrored-repositories).
 
 ### [Headers](#headers)
 
@@ -381,6 +399,7 @@ Each request wraps the event payload with delivery, app, and installation identi
 | `pull_request.published` | A draft becomes open. |
 | `pull_request.comment.created` | A visible pull request comment is created. |
 | `pull_request.review.submitted` | A review is submitted with any verdict. |
+| `pull_request.review.dismissed` | A submitted review is dismissed, explicitly or by being superseded. |
 | `pull_request.reviewer.added` | A reviewer is requested. |
 | `pull_request.reviewer.removed` | A reviewer is removed. |
 | `pull_request.reviewer.rerequested` | A reviewer is requested again. |
@@ -388,17 +407,21 @@ Each request wraps the event payload with delivery, app, and installation identi
 | `repository.check_run.completed` | A check run completes. |
 | `installation.created` | The app is installed. |
 | `installation.updated` | Scopes or repository selection change. |
+| `installation.suspended` | The installation is suspended. |
+| `installation.unsuspended` | A suspended installation is restored. |
 | `installation.deleted` | The app is uninstalled. |
+
+The five `installation.*` events go to the app itself rather than to a repository subscription. Origin always sends them, so they do not appear in the app's selectable event list. Every other event in this table is a repository-scoped subscription.
 
 ### [Payload families](#payload-families)
 
 - Pull request lifecycle events contain a `pullRequest` snapshot and `repository` reference. Route on `event.type`; there is no separate action field. The snapshot omits the pull request's assigned `labels`; read them from [Get Pull Request](#get-pull-request) or [List Pull Requests](#list-pull-requests).
 - Comment events contain a `pullRequest` reference and the affected `comment`.
-- Review events contain a `pullRequest` reference and the submitted `review`.
-- Reviewer events contain a `pullRequest` reference, a user or group `reviewer`, how the request was created, an optional actor, and a timestamp. The reviewer `id` is the encoded user ID (`user_…`, the same format as the organization API) when `kind` is `user`, and the group public ID (`grp_…`) when `kind` is `group`. There is no public HTTP API to add, remove, or rerequest reviewers.
+- Review events contain a `pullRequest` reference and the affected `review`. Both `pull_request.review.submitted` and `pull_request.review.dismissed` use this shape; on a dismissal the review carries `review.dismissal` with the dismissing actor, timestamp, and message. A review superseded by a newer decision carries a server-generated message.
+- Reviewer events contain a `pullRequest` reference, a `reviewer`, how the request was created, an optional actor, and a timestamp. Exactly one of `reviewer.user` or `reviewer.group` is present: `reviewer.user.id` is the encoded user ID (`user_…`, the same format as the organization API), and `reviewer.group.id` is the group public ID (`grp_…`). There is no public HTTP API to add, remove, or rerequest reviewers.
 - Check events contain `repository`, `checkSuite`, `checkRun`, and `actor`.
-- Push events contain one repository snapshot and up to 100 `refUpdates`. `refUpdatesCount` is authoritative. Optional tip metadata is best effort and does not provide a complete commits array.
-- Installation events contain the installation snapshot and app identity. Selected repository arrays may be capped at 5,000; `repositoriesCount` is authoritative.
+- Push events contain one repository snapshot and up to 100 `refUpdates`. `refUpdatesCount` is authoritative. Optional tip metadata is best effort and does not provide a complete commits array. Merging a pull request advances the base ref, and that update is delivered as a push event; because Origin itself performs the merge push, the event names no pusher.
+- Installation events contain the installation snapshot and app identity. The snapshot carries `installedBy`, the user who originally installed the app, on all five `installation.*` events. Selected repository arrays may be capped at 5,000; `repositoriesCount` is authoritative.
 
 ### [Recovery](#recovery)
 
@@ -429,9 +452,17 @@ Common HTTP statuses are `400`, `401`, `403`, `404`, `429`, `500`, and `503`. So
 
 Use the HTTP status and `code` to branch on errors. Treat `message` as developer-facing text.
 
+Every error response carries the request ID twice: in an `X-Request-ID` response header, and as a `google.rpc.RequestInfo` entry in `details`. Origin echoes the `x-request-id` you sent, or generates one when you send none. The `RequestInfo` entry is present even when `message` is an opaque internal error, so quote the request ID when you contact Cursor about a failed call.
+
+Unmatched paths under `/v1/origin`, and requests that use the wrong method on a known path, return this same body rather than a generic router error. The message names the method and path and never echoes the query string.
+
 ### [Repository paths](#repository-paths)
 
 Repository-scoped paths take the owner slug and repository name as `{ownerSlug}/{repoName}`. Both segments resolve case-insensitively, so any casing addresses the repository. Responses return the stored name and slug rather than the casing you sent, and Git HTTPS URLs resolve the same way. Compare repository names case-insensitively, and read the canonical casing from [Get Repo](#get-repo).
+
+Every repository-scoped path also accepts the repository's stable ID in place of the pair: send `_` as the owner slug and the ID as the repository name, as in `GET /v1/origin/repos/_/REPO_ID`. Read the ID from the `id` field on [Get Repo](#get-repo). The sentinel `_` cannot be claimed as an owner slug, so the two forms never collide. In a Connect or JSON request, set `ownerSlug` to `_` and `name` to the ID.
+
+The ID form survives a rename, which makes it the stable way to address a repository. It grants nothing on its own: after Origin resolves the ID to a repository, your app still needs the same scope on that repository. An ID your app cannot reach returns the same `404` body as an ID that does not exist, so a response never confirms that a repository exists. A malformed ID returns `400`. [Create Repo](#create-repo) takes an owner slug alone and rejects `_`.
 
 ### [Resource references](#resource-references)
 
@@ -450,7 +481,7 @@ Resource snapshots contain the resource's current fields. Container context uses
 - Reviewer add, remove, and rerequest operations are webhook-only.
 - Push webhooks do not include a complete commit list.
 - Pull request merge supports native Origin repositories. Mirrored repositories are rejected.
-- Apps cannot reach a repository that Origin mirrors in from GitHub. Origin leaves those repositories out of installations, installation access tokens, and webhook deliveries.
+- A mirrored repository is read-only for an installation until it becomes a stable outbound mirror. See [Mirrored repositories](#mirrored-repositories).
 
 ## [Implementation checklist](#implementation-checklist)
 
@@ -468,9 +499,7 @@ Resource snapshots contain the resource's current fields. Container context uses
 
 ## [Endpoint reference](#endpoint-reference)
 
-Download the [OpenAPI specification](https://cursor.com/docs/api/origin/openapi.yaml) for the complete component schemas.
-
-Generated OpenAPI path bindings such as `identifier.ownerSlug` and `identifier.name` appear here as `ownerSlug` and `repoName`. The URL segments and request behavior are unchanged.
+Download the [OpenAPI specification](https://cursor.com/docs/api/origin/openapi.yaml) for the complete component schemas. The document declares `https://api.cursor.com` as its server and a `bearerAuth` HTTP bearer security scheme, and every operation lists `400`, `401`, `403`, and `429` responses alongside its success response. Path parameters carry the same names the URLs use, `ownerSlug` and `repoName`.
 
 The JSON snippets show schema-shaped placeholder values. Response field descriptions reflect the OpenAPI schema and current platform contract.
 
@@ -636,6 +665,18 @@ Repository grant mode; exactly all or selected.
 
 Scopes approved for the installation.
 
+`installations[].installedBy` object
+
+The user who originally installed the app, not the most recent re-consent actor. Output-only. Absent when that user record can no longer be read.
+
+`installations[].installedBy.id` string
+
+Public identifier for the user, prefixed `user_`.
+
+`installations[].installedBy.email` string
+
+Email address of the user.
+
 `nextPageToken` string
 
 Opaque cursor for the next page; empty when there are no more pages.
@@ -647,7 +688,7 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/app/installations'
 **Response shape:**
 
 ```
-{  "installations": [    {      "id": "string",      "appId": "string",      "target": {        "slug": "string",        "id": "string",        "type": "team"      },      "createdAt": "2026-01-01T00:00:00Z",      "updatedAt": "2026-01-01T00:00:00Z",      "repoSelectionMode": "all",      "scopes": [        "string"      ]    }  ],  "nextPageToken": "string"}
+{  "installations": [    {      "id": "string",      "appId": "string",      "target": {        "slug": "string",        "id": "string",        "type": "team"      },      "createdAt": "2026-01-01T00:00:00Z",      "updatedAt": "2026-01-01T00:00:00Z",      "repoSelectionMode": "all",      "scopes": [        "string"      ],      "installedBy": {        "id": "string",        "email": "string"      }    }  ],  "nextPageToken": "string"}
 ```
 
 ### [Get App Installation](#get-app-installation)
@@ -706,6 +747,18 @@ Repository grant mode; exactly all or selected.
 
 Scopes approved for the installation.
 
+`installedBy` object
+
+The user who originally installed the app, not the most recent re-consent actor. Output-only. Absent when that user record can no longer be read.
+
+`installedBy.id` string
+
+Public identifier for the user, prefixed `user_`.
+
+`installedBy.email` string
+
+Email address of the user.
+
 ```
 curl --request GET \  --url 'https://api.cursor.com/v1/origin/app/installations/INSTALLATION_ID' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN'
 ```
@@ -713,7 +766,7 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/app/installations/
 **Response shape:**
 
 ```
-{  "id": "string",  "appId": "string",  "target": {    "slug": "string",    "id": "string",    "type": "team"  },  "createdAt": "2026-01-01T00:00:00Z",  "updatedAt": "2026-01-01T00:00:00Z",  "repoSelectionMode": "all",  "scopes": [    "string"  ]}
+{  "id": "string",  "appId": "string",  "target": {    "slug": "string",    "id": "string",    "type": "team"  },  "createdAt": "2026-01-01T00:00:00Z",  "updatedAt": "2026-01-01T00:00:00Z",  "repoSelectionMode": "all",  "scopes": [    "string"  ],  "installedBy": {    "id": "string",    "email": "string"  }}
 ```
 
 ### [Delete App Installation](#delete-app-installation)
@@ -750,7 +803,7 @@ Creates an installation access token for the authenticated app.
 
 Requires app signing-JWT authentication, like GetAuthenticatedApp. The token is scoped to the named installation, which must belong to the authenticated app. Callers may attenuate the token to a subset of the installation's accepted scopes and accessible repositories.
 
-Origin rejects a request whose `repositoryIds` names a repository mirrored in from GitHub, because that repository is not accessible to the installation.
+`repositoryIds` can name a mirrored repository. The resulting token carries the installation's scopes, and Origin still applies the mirror ceiling on each request: see [Mirrored repositories](#mirrored-repositories).
 
 #### [Path Parameters](#path-parameters-2)
 
@@ -798,7 +851,7 @@ Requires an installation access token (`oit_`) minted by CreateInstallationAcces
 
 Partners discover their repositories through this endpoint. List entries are sparse repository summaries; use [Get Repo](#get-repo) for full timestamps. [Get Repo](#get-repo) includes the output-only `cloneUrl`.
 
-Results leave out repositories that Origin mirrors in from GitHub, because an installation cannot reach them.
+Results include mirrored repositories. A mirror is read-only until it becomes a stable outbound mirror: see [Mirrored repositories](#mirrored-repositories).
 
 #### [Query Parameters](#query-parameters-1)
 
@@ -888,7 +941,7 @@ GET`/v1/origin/app/webhook/deliveries`
 
 Lists webhook deliveries for the authenticated app, newest first.
 
-A delivery is one event owed to one app; its id is the Standard Webhooks `webhook-id` header the receiver sees. `delivered=false` is the recovery predicate: it selects every delivery that has never received a `2xx`, including deliveries whose retry ladder ran out during an outage.
+A delivery is one event owed to one app; its id is the `webhook-id` header value the receiver sees. `delivered=false` is the recovery predicate: it selects every delivery that has never received a `2xx`, including deliveries whose retry ladder ran out during an outage.
 
 Deliveries are listable for seven days after they are created, and only while your app has an active installation in the delivery's namespace. App-targeted lifecycle events such as `installation.deleted` stay visible after the uninstall they describe.
 
@@ -928,7 +981,7 @@ Webhook deliveries for the authenticated app, ordered newest first. Each deliver
 
 `deliveries[].id` string
 
-Stable delivery identifier and Standard Webhooks webhook-id value; use it as the idempotency key.
+Stable delivery identifier and the `webhook-id` value the receiver sees; use it as the idempotency key.
 
 `deliveries[].event` object
 
@@ -1058,6 +1111,50 @@ curl --request POST \  --url 'https://api.cursor.com/v1/origin/app/webhook/deliv
 {  "results": [    {      "deliveryId": "string",      "outcome": "queued"    }  ]}
 ```
 
+### [Ping Webhook](#ping-webhook)
+
+POST`/v1/origin/app/webhook/pings`
+
+Sends a test delivery to the authenticated app's webhook URL and reports what the receiver answered.
+
+Use it to verify a receiver while you set an app up, instead of waiting for a real event. Requires app signing-JWT authentication, like [Get Authenticated App](#get-authenticated-app).
+
+The receiver sees the production shape: the same [headers](#headers) and `v1ed` signature, verifiable against the [signing keys](#discovery-and-signing-keys), with `webhook-event-type` set to `ping` and a payload naming the app. A ping belongs to no installation, so the `webhook-installation-id` header and the envelope's `installationId` are both absent.
+
+Origin sends the ping once, synchronously, and reports the outcome in the response. There are no retries, and a ping is not a domain event: it never appears in [List Webhook Deliveries](#list-webhook-deliveries) and cannot be redelivered. A receiver that fails is reported in the response rather than as an error. An app with no webhook URL configured returns `FailedPrecondition` (HTTP 400).
+
+#### [Request Body](#request-body-2)
+
+The request takes no fields. Send an empty JSON object.
+
+#### [Response Fields](#response-fields-9)
+
+`deliveryId` string
+
+The test delivery's `webhook-id`, matching the header the receiver saw.
+
+`eventId` string
+
+Event ID inside the signed envelope, the same value as `event.id`.
+
+`delivered` boolean
+
+True when the receiver answered with a `2xx` status before the delivery timeout. Always present.
+
+`responseStatusCode` integer
+
+HTTP status the receiver answered with, or `0` when no response arrived because the connection failed or timed out. Always present.
+
+```
+curl --request POST \  --url 'https://api.cursor.com/v1/origin/app/webhook/pings' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{}'
+```
+
+**Response shape:**
+
+```
+{  "deliveryId": "string",  "eventId": "string",  "delivered": true,  "responseStatusCode": 200}
+```
+
 ## [Repositories](#repositories)
 
 `cloneUrl` is an output-only HTTPS clone URL. [Get Repo](#get-repo) includes `cloneUrl`.
@@ -1090,7 +1187,7 @@ Opaque cursor from a previous response's `next_page_token`. Empty for the first 
 
 Optional case-insensitive substring filter.
 
-#### [Response Fields](#response-fields-9)
+#### [Response Fields](#response-fields-10)
 
 `repositories` array
 
@@ -1192,7 +1289,7 @@ Owning entity's unique slug.
 
 Repo name, unique to the owner entity.
 
-#### [Response Fields](#response-fields-10)
+#### [Response Fields](#response-fields-11)
 
 `id` string
 
@@ -1286,7 +1383,7 @@ The first push to a new repo can retarget its default branch. When that push onl
 
 Parent owner entity's slug.
 
-#### [Request Body](#request-body-2)
+#### [Request Body](#request-body-3)
 
 `name` string Required
 
@@ -1296,7 +1393,7 @@ The repo name, unique to its owner. Required on create.
 
 Default branch name. Always set on responses. On create, omitting this field or leaving it empty defaults to "main".
 
-#### [Response Fields](#response-fields-11)
+#### [Response Fields](#response-fields-12)
 
 `id` string
 
@@ -1398,7 +1495,7 @@ Max branches to return. Defaults to 30 when unset or 0. Values above 100 are cla
 
 Opaque cursor from a previous response's `next_page_token`. Empty for the first page. Encodes the page offset, so `page_size` on a follow-up request is ignored when a token is supplied.
 
-#### [Response Fields](#response-fields-12)
+#### [Response Fields](#response-fields-13)
 
 `branches` array
 
@@ -1446,7 +1543,7 @@ Owning entity's unique slug.
 
 Repo name, unique to the owner entity.
 
-#### [Request Body](#request-body-3)
+#### [Request Body](#request-body-4)
 
 `ref` string Required
 
@@ -1460,11 +1557,11 @@ When true, block until synced or the wait budget expires. Defaults to false.
 
 Optional full commit object ID: 40- or 64-character hex. Omit or leave empty to wait on the tip of `ref`. When set and reachable from `ref`, the call returns early without waiting for other mirror work to drain. Other values are rejected with `INVALID_ARGUMENT`.
 
-#### [Response Fields](#response-fields-13)
+#### [Response Fields](#response-fields-14)
 
 `synced` boolean
 
-True when the sync target is known to be satisfied. Prefer the HTTP status (`200` vs `202`): proto3 JSON omits this field when false.
+True when the sync target is known to be satisfied, false while the sync is still pending. Always present, mirroring the HTTP status: `200` when true, `202` when false.
 
 ```
 curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME:syncMirror' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "ref": "refs/heads/main",  "wait": true}'
@@ -1496,6 +1593,8 @@ Upserts a check suite + check run using an installation access token with `repos
 
 The endpoint atomically resolves or creates the suite attempt and upserts one run attempt. `externalUpdatedAt` orders updates to the same run identity; stale retries cannot overwrite newer state.
 
+`deadlineAt` records an optional deadline on the run. Origin stores it, returns it on reads, and clears it once the run reaches `completed`; it does not change a run's status when the deadline passes. A deadline more than 24 hours in the future is rejected with `InvalidArgument` (HTTP 400) rather than clamped.
+
 #### [Path Parameters](#path-parameters-8)
 
 `ownerSlug` string Required
@@ -1506,7 +1605,7 @@ Owning entity's unique slug.
 
 Repo name, unique to the owner entity.
 
-#### [Request Body](#request-body-4)
+#### [Request Body](#request-body-5)
 
 `headSha` string Required
 
@@ -1588,7 +1687,11 @@ Summary of the output. May contain Markdown. Maximum UTF-8 size: 65535 bytes.
 
 Detailed output. May contain Markdown. Maximum UTF-8 size: 65535 bytes.
 
-#### [Response Fields](#response-fields-14)
+`checkRun.deadlineAt` string
+
+Deadline for the check run, as an RFC 3339 timestamp. Values more than 24 hours in the future are rejected with `InvalidArgument` (HTTP 400) rather than clamped. Omit it on a create to record no deadline; omit it on an update to leave the stored deadline unchanged.
+
+#### [Response Fields](#response-fields-15)
 
 `checkSuite` object
 
@@ -1834,6 +1937,10 @@ Summary of the output. May contain Markdown. Maximum UTF-8 size: 65535 bytes.
 
 Detailed output. May contain Markdown. Maximum UTF-8 size: 65535 bytes.
 
+`checkRun.deadlineAt` string
+
+Deadline recorded for the check run, as an RFC 3339 timestamp. Absent when the run has no deadline, including after the run completes.
+
 ```
 curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/check-runs' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "headSha": "HEAD_SHA",  "checkSuite": {    "key": "KEY",    "name": "NAME",    "externalId": "EXTERNAL_ID"  },  "checkRun": {    "key": "KEY",    "name": "NAME",    "status": "queued",    "externalUpdatedAt": "2026-01-01T00:00:00Z",    "externalId": "EXTERNAL_ID"  }}'
 ```
@@ -1841,7 +1948,7 @@ curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/
 **Response shape:**
 
 ```
-{  "checkSuite": {    "id": "string",    "repository": {      "id": "string",      "name": "string",      "owner": {        "slug": "string",        "id": "string",        "type": "team"      }    },    "sha": "string",    "key": "string",    "name": "string",    "detailsUrl": "string",    "createdAt": "2026-01-01T00:00:00Z",    "updatedAt": "2026-01-01T00:00:00Z",    "externalId": "string",    "actor": {      "user": {        "id": "string",        "email": "string"      }    }  },  "checkRun": {    "id": "string",    "repository": {      "id": "string",      "name": "string",      "owner": {        "slug": "string",        "id": "string",        "type": "team"      }    },    "checkSuite": {      "id": "string"    },    "sha": "string",    "key": "string",    "name": "string",    "status": "queued",    "conclusion": "success",    "detailsUrl": "string",    "externalUpdatedAt": "2026-01-01T00:00:00Z",    "startedAt": "2026-01-01T00:00:00Z",    "completedAt": "2026-01-01T00:00:00Z",    "createdAt": "2026-01-01T00:00:00Z",    "updatedAt": "2026-01-01T00:00:00Z",    "externalId": "string",    "actor": {      "user": {        "id": "string",        "email": "string"      }    },    "output": {      "title": "string",      "summary": "string",      "text": "string"    }  }}
+{  "checkSuite": {    "id": "string",    "repository": {      "id": "string",      "name": "string",      "owner": {        "slug": "string",        "id": "string",        "type": "team"      }    },    "sha": "string",    "key": "string",    "name": "string",    "detailsUrl": "string",    "createdAt": "2026-01-01T00:00:00Z",    "updatedAt": "2026-01-01T00:00:00Z",    "externalId": "string",    "actor": {      "user": {        "id": "string",        "email": "string"      }    }  },  "checkRun": {    "id": "string",    "repository": {      "id": "string",      "name": "string",      "owner": {        "slug": "string",        "id": "string",        "type": "team"      }    },    "checkSuite": {      "id": "string"    },    "sha": "string",    "key": "string",    "name": "string",    "status": "queued",    "conclusion": "success",    "detailsUrl": "string",    "externalUpdatedAt": "2026-01-01T00:00:00Z",    "startedAt": "2026-01-01T00:00:00Z",    "completedAt": "2026-01-01T00:00:00Z",    "createdAt": "2026-01-01T00:00:00Z",    "updatedAt": "2026-01-01T00:00:00Z",    "externalId": "string",    "actor": {      "user": {        "id": "string",        "email": "string"      }    },    "output": {      "title": "string",      "summary": "string",      "text": "string"    },    "deadlineAt": "2026-01-01T00:00:00Z"  }}
 ```
 
 ### [Batch Upsert Check Runs](#batch-upsert-check-runs)
@@ -1849,6 +1956,8 @@ curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/
 POST`/v1/origin/repos/{ownerSlug}/{repoName}/check-runs:batchUpsert`
 
 Atomically upserts several check runs belonging to one suite. The request accepts at most 10 runs and rejects duplicate `(external_id, key)` identities. Every run is committed or the entire request is rolled back.
+
+Each run accepts the same optional `deadlineAt` as [Post Check Run](#post-check-run).
 
 #### [Path Parameters](#path-parameters-9)
 
@@ -1860,7 +1969,7 @@ Owning entity's unique slug.
 
 Repo name, unique to the owner entity.
 
-#### [Request Body](#request-body-5)
+#### [Request Body](#request-body-6)
 
 `headSha` string Required
 
@@ -1942,7 +2051,11 @@ Summary of the output. May contain Markdown. Maximum UTF-8 size: 65535 bytes.
 
 Detailed output. May contain Markdown. Maximum UTF-8 size: 65535 bytes.
 
-#### [Response Fields](#response-fields-15)
+`checkRuns[0].deadlineAt` string
+
+Deadline for the check run, as an RFC 3339 timestamp. Values more than 24 hours in the future are rejected with `InvalidArgument` (HTTP 400) rather than clamped. Omit it on a create to record no deadline; omit it on an update to leave the stored deadline unchanged.
+
+#### [Response Fields](#response-fields-16)
 
 `checkSuite` object
 
@@ -2188,6 +2301,10 @@ Summary of the output. May contain Markdown. Maximum UTF-8 size: 65535 bytes.
 
 Detailed output. May contain Markdown. Maximum UTF-8 size: 65535 bytes.
 
+`checkRuns[].deadlineAt` string
+
+Deadline recorded for the check run, as an RFC 3339 timestamp. Absent when the run has no deadline, including after the run completes.
+
 ```
 curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/check-runs:batchUpsert' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "headSha": "HEAD_SHA",  "checkSuite": {    "key": "KEY",    "name": "NAME",    "externalId": "EXTERNAL_ID"  },  "checkRuns": [    {      "key": "KEY",      "name": "NAME",      "status": "queued",      "externalUpdatedAt": "2026-01-01T00:00:00Z",      "externalId": "EXTERNAL_ID"    }  ]}'
 ```
@@ -2195,7 +2312,7 @@ curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/
 **Response shape:**
 
 ```
-{  "checkSuite": {    "id": "string",    "repository": {      "id": "string",      "name": "string",      "owner": {        "slug": "string",        "id": "string",        "type": "team"      }    },    "sha": "string",    "key": "string",    "name": "string",    "detailsUrl": "string",    "createdAt": "2026-01-01T00:00:00Z",    "updatedAt": "2026-01-01T00:00:00Z",    "externalId": "string",    "actor": {      "user": {        "id": "string",        "email": "string"      }    }  },  "checkRuns": [    {      "id": "string",      "repository": {        "id": "string",        "name": "string",        "owner": {          "slug": "string",          "id": "string",          "type": "team"        }      },      "checkSuite": {        "id": "string"      },      "sha": "string",      "key": "string",      "name": "string",      "status": "queued",      "conclusion": "success",      "detailsUrl": "string",      "externalUpdatedAt": "2026-01-01T00:00:00Z",      "startedAt": "2026-01-01T00:00:00Z",      "completedAt": "2026-01-01T00:00:00Z",      "createdAt": "2026-01-01T00:00:00Z",      "updatedAt": "2026-01-01T00:00:00Z",      "externalId": "string",      "actor": {        "user": {          "id": "string",          "email": "string"        }      },      "output": {        "title": "string",        "summary": "string",        "text": "string"      }    }  ]}
+{  "checkSuite": {    "id": "string",    "repository": {      "id": "string",      "name": "string",      "owner": {        "slug": "string",        "id": "string",        "type": "team"      }    },    "sha": "string",    "key": "string",    "name": "string",    "detailsUrl": "string",    "createdAt": "2026-01-01T00:00:00Z",    "updatedAt": "2026-01-01T00:00:00Z",    "externalId": "string",    "actor": {      "user": {        "id": "string",        "email": "string"      }    }  },  "checkRuns": [    {      "id": "string",      "repository": {        "id": "string",        "name": "string",        "owner": {          "slug": "string",          "id": "string",          "type": "team"        }      },      "checkSuite": {        "id": "string"      },      "sha": "string",      "key": "string",      "name": "string",      "status": "queued",      "conclusion": "success",      "detailsUrl": "string",      "externalUpdatedAt": "2026-01-01T00:00:00Z",      "startedAt": "2026-01-01T00:00:00Z",      "completedAt": "2026-01-01T00:00:00Z",      "createdAt": "2026-01-01T00:00:00Z",      "updatedAt": "2026-01-01T00:00:00Z",      "externalId": "string",      "actor": {        "user": {          "id": "string",          "email": "string"        }      },      "output": {        "title": "string",        "summary": "string",        "text": "string"      },      "deadlineAt": "2026-01-01T00:00:00Z"    }  ]}
 ```
 
 ### [Get Check Run](#get-check-run)
@@ -2218,7 +2335,7 @@ Repo name, unique to the owner entity.
 
 Server-assigned check-run id (`cr_...`).
 
-#### [Response Fields](#response-fields-16)
+#### [Response Fields](#response-fields-17)
 
 `id` string
 
@@ -2360,6 +2477,10 @@ Summary of the output. May contain Markdown. Maximum UTF-8 size: 65535 bytes.
 
 Detailed output. May contain Markdown. Maximum UTF-8 size: 65535 bytes.
 
+`deadlineAt` string
+
+Deadline recorded for the check run, as an RFC 3339 timestamp. Absent when the run has no deadline, including after the run completes.
+
 ```
 curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/check-runs/CHECK_RUN_ID' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN'
 ```
@@ -2367,7 +2488,267 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "id": "string",  "repository": {    "id": "string",    "name": "string",    "owner": {      "slug": "string",      "id": "string",      "type": "team"    }  },  "checkSuite": {    "id": "string"  },  "sha": "string",  "key": "string",  "name": "string",  "status": "queued",  "conclusion": "success",  "detailsUrl": "string",  "externalUpdatedAt": "2026-01-01T00:00:00Z",  "startedAt": "2026-01-01T00:00:00Z",  "completedAt": "2026-01-01T00:00:00Z",  "createdAt": "2026-01-01T00:00:00Z",  "updatedAt": "2026-01-01T00:00:00Z",  "externalId": "string",  "actor": {    "user": {      "id": "string",      "email": "string"    }  },  "output": {    "title": "string",    "summary": "string",    "text": "string"  }}
+{  "id": "string",  "repository": {    "id": "string",    "name": "string",    "owner": {      "slug": "string",      "id": "string",      "type": "team"    }  },  "checkSuite": {    "id": "string"  },  "sha": "string",  "key": "string",  "name": "string",  "status": "queued",  "conclusion": "success",  "detailsUrl": "string",  "externalUpdatedAt": "2026-01-01T00:00:00Z",  "startedAt": "2026-01-01T00:00:00Z",  "completedAt": "2026-01-01T00:00:00Z",  "createdAt": "2026-01-01T00:00:00Z",  "updatedAt": "2026-01-01T00:00:00Z",  "externalId": "string",  "actor": {    "user": {      "id": "string",      "email": "string"    }  },  "output": {    "title": "string",    "summary": "string",    "text": "string"  },  "deadlineAt": "2026-01-01T00:00:00Z"}
+```
+
+### [List Check Run Annotations](#list-check-run-annotations)
+
+GET`/v1/origin/repos/{ownerSlug}/{repoName}/check-runs/{checkRunId}/annotations`
+
+Lists a check run's annotations in ascending ID order.
+
+Annotation IDs are time-sortable, so ascending ID order is also creation order. A page token fixes the page size and scope for the rest of the sequence, so `pageSize` is ignored once you send one.
+
+#### [Path Parameters](#path-parameters-11)
+
+`ownerSlug` string Required
+
+Owning entity's unique slug.
+
+`repoName` string Required
+
+Repo name, unique to the owner entity.
+
+`checkRunId` string Required
+
+Server-assigned check run ID.
+
+#### [Query Parameters](#query-parameters-5)
+
+`pageSize` integer
+
+Maximum annotations to return. Defaults to 30 when omitted or zero; values above 100 are clamped to 100.
+
+`pageToken` string
+
+Opaque cursor from a previous response's `nextPageToken`. Omit for the first page.
+
+#### [Response Fields](#response-fields-18)
+
+`annotations` array
+
+Page of annotations, in ascending ID order.
+
+`annotations[].id` string
+
+Stable Origin annotation ID. IDs are time-sortable.
+
+`annotations[].checkRunId` string
+
+ID of the check run the annotation belongs to.
+
+`annotations[].annotationLevel` string
+
+Severity of the annotation. Allowed values: `notice`, `warning`, `failure`.
+
+`annotations[].message` string
+
+Annotation message.
+
+`annotations[].title` string
+
+Annotation title. Absent when the annotation has none.
+
+`annotations[].rawDetails` string
+
+Raw detail text. Absent when the annotation has none.
+
+`annotations[].createdAt` string
+
+When the annotation was created (RFC 3339).
+
+`annotations[].updatedAt` string
+
+When the annotation was last updated (RFC 3339).
+
+`annotations[].location` object
+
+Source location. Absent for a run-level annotation.
+
+`annotations[].location.path` string
+
+Canonical repository-relative file path.
+
+`annotations[].location.startLine` integer
+
+First line of the range. 1-based and inclusive.
+
+`annotations[].location.endLine` integer
+
+Last line of the range. 1-based and inclusive.
+
+`annotations[].location.columns` object
+
+Column range. Absent unless the annotation covers a single line.
+
+`annotations[].location.columns.startColumn` integer
+
+First column of the range. 1-based and inclusive.
+
+`annotations[].location.columns.endColumn` integer
+
+Last column of the range. 1-based and inclusive.
+
+`nextPageToken` string
+
+Opaque cursor for the next page. Empty when there are no more results.
+
+```
+curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/check-runs/CHECK_RUN_ID/annotations' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN'
+```
+
+**Response shape:**
+
+```
+{  "annotations": [    {      "id": "string",      "checkRunId": "string",      "annotationLevel": "warning",      "message": "string",      "title": "string",      "rawDetails": "string",      "createdAt": "2026-01-01T00:00:00Z",      "updatedAt": "2026-01-01T00:00:00Z",      "location": {        "path": "string",        "startLine": 0,        "endLine": 0,        "columns": {          "startColumn": 0,          "endColumn": 0        }      }    }  ],  "nextPageToken": "string"}
+```
+
+### [Create Check Run Annotations](#create-check-run-annotations)
+
+POST`/v1/origin/repos/{ownerSlug}/{repoName}/check-runs/{checkRunId}/annotations`
+
+Appends between 1 and 25 annotations to a check run in a single atomic batch.
+
+A check run holds at most 100 annotations. A batch that would take it past that limit is rejected with `ResourceExhausted` (HTTP 429) and nothing is written; a batch outside the 1 to 25 range is rejected with `InvalidArgument` (HTTP 400). The operation is append-only and is not idempotent, so retrying after an ambiguous transport failure can append duplicates and consume capacity. Identical content is allowed.
+
+#### [Path Parameters](#path-parameters-12)
+
+`ownerSlug` string Required
+
+Owning entity's unique slug.
+
+`repoName` string Required
+
+Repo name, unique to the owner entity.
+
+`checkRunId` string Required
+
+Server-assigned check run ID.
+
+#### [Request Body](#request-body-7)
+
+`annotations` array Required
+
+The batch to append. Must contain between 1 and 25 entries.
+
+`annotations[].annotationLevel` string Required
+
+Severity of the annotation. Allowed values: `notice`, `warning`, `failure`.
+
+`annotations[].message` string Required
+
+Annotation message. Must be non-empty. Maximum 65,535 bytes of UTF-8.
+
+`annotations[].title` string
+
+Annotation title. Maximum length: 255 Unicode characters.
+
+`annotations[].rawDetails` string
+
+Raw detail text. Maximum 65,535 bytes of UTF-8.
+
+`annotations[].location` object
+
+Source location the annotation points at. Omit for a run-level annotation that is not tied to a line of code.
+
+`annotations[].location.path` string Required
+
+Canonical repository-relative file path. Maximum 4,096 bytes of UTF-8.
+
+`annotations[].location.startLine` integer Required
+
+First line of the range. 1-based and inclusive.
+
+`annotations[].location.endLine` integer Required
+
+Last line of the range. 1-based and inclusive, and at or after `startLine`.
+
+`annotations[].location.columns` object
+
+Column range within the line. Supported only when `startLine` and `endLine` are the same line, and both columns must be sent together.
+
+`annotations[].location.columns.startColumn` integer
+
+First column of the range. 1-based and inclusive.
+
+`annotations[].location.columns.endColumn` integer
+
+Last column of the range. 1-based and inclusive, and at or after `startColumn`.
+
+#### [Response Fields](#response-fields-19)
+
+`annotations` array
+
+The annotations created by this request.
+
+`annotations[].id` string
+
+Stable Origin annotation ID. IDs are time-sortable.
+
+`annotations[].checkRunId` string
+
+ID of the check run the annotation belongs to.
+
+`annotations[].annotationLevel` string
+
+Severity of the annotation. Allowed values: `notice`, `warning`, `failure`.
+
+`annotations[].message` string
+
+Annotation message.
+
+`annotations[].title` string
+
+Annotation title. Absent when the annotation has none.
+
+`annotations[].rawDetails` string
+
+Raw detail text. Absent when the annotation has none.
+
+`annotations[].createdAt` string
+
+When the annotation was created (RFC 3339).
+
+`annotations[].updatedAt` string
+
+When the annotation was last updated (RFC 3339).
+
+`annotations[].location` object
+
+Source location. Absent for a run-level annotation.
+
+`annotations[].location.path` string
+
+Canonical repository-relative file path.
+
+`annotations[].location.startLine` integer
+
+First line of the range. 1-based and inclusive.
+
+`annotations[].location.endLine` integer
+
+Last line of the range. 1-based and inclusive.
+
+`annotations[].location.columns` object
+
+Column range. Absent unless the annotation covers a single line.
+
+`annotations[].location.columns.startColumn` integer
+
+First column of the range. 1-based and inclusive.
+
+`annotations[].location.columns.endColumn` integer
+
+Last column of the range. 1-based and inclusive.
+
+```
+curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/check-runs/CHECK_RUN_ID/annotations' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "annotations": [    {      "annotationLevel": "warning",      "message": "MESSAGE",      "location": {        "path": "src/index.ts",        "startLine": 12,        "endLine": 12      }    }  ]}'
+```
+
+**Response shape:**
+
+```
+{  "annotations": [    {      "id": "string",      "checkRunId": "string",      "annotationLevel": "warning",      "message": "string",      "title": "string",      "rawDetails": "string",      "createdAt": "2026-01-01T00:00:00Z",      "updatedAt": "2026-01-01T00:00:00Z",      "location": {        "path": "string",        "startLine": 0,        "endLine": 0,        "columns": {          "startColumn": 0,          "endColumn": 0        }      }    }  ]}
 ```
 
 ### [Get Check Suite](#get-check-suite)
@@ -2376,7 +2757,7 @@ GET`/v1/origin/repos/{ownerSlug}/{repoName}/check-suites/{checkSuiteId}`
 
 Returns check suite metadata by server-assigned id (`crg_...`). Does not embed check runs; use `ListCheckRunsForSuite` for the suite's runs.
 
-#### [Path Parameters](#path-parameters-11)
+#### [Path Parameters](#path-parameters-13)
 
 `ownerSlug` string Required
 
@@ -2390,7 +2771,7 @@ Repo name, unique to the owner entity.
 
 Server-assigned check suite id (`crg_...`).
 
-#### [Response Fields](#response-fields-17)
+#### [Response Fields](#response-fields-20)
 
 `id` string
 
@@ -2504,7 +2885,7 @@ GET`/v1/origin/repos/{ownerSlug}/{repoName}/check-suites/{checkSuiteId}/check-ru
 
 Lists check runs belonging to a suite. Paginated.
 
-#### [Path Parameters](#path-parameters-12)
+#### [Path Parameters](#path-parameters-14)
 
 `ownerSlug` string Required
 
@@ -2518,7 +2899,7 @@ Repo name, unique to the owner entity.
 
 Server-assigned check suite id (`crg_...`).
 
-#### [Query Parameters](#query-parameters-5)
+#### [Query Parameters](#query-parameters-6)
 
 `pageSize` integer
 
@@ -2528,7 +2909,7 @@ Max check runs to return. Defaults to 30 when unset or 0. Values above 100 are c
 
 Opaque cursor from a previous response's `next_page_token`. Empty for the first page. Encodes the last-seen check-run id scoped to this suite, so `page_size` on a follow-up request is ignored when a token is supplied.
 
-#### [Response Fields](#response-fields-18)
+#### [Response Fields](#response-fields-21)
 
 `checkRuns` array
 
@@ -2674,6 +3055,10 @@ Summary of the output. May contain Markdown. Maximum UTF-8 size: 65535 bytes.
 
 Detailed output. May contain Markdown. Maximum UTF-8 size: 65535 bytes.
 
+`checkRuns[].deadlineAt` string
+
+Deadline recorded for the check run, as an RFC 3339 timestamp. Absent when the run has no deadline, including after the run completes.
+
 `nextPageToken` string
 
 Opaque cursor for the next page; empty when there are no more pages.
@@ -2685,7 +3070,7 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "checkRuns": [    {      "id": "string",      "repository": {        "id": "string",        "name": "string",        "owner": {          "slug": "string",          "id": "string",          "type": "team"        }      },      "checkSuite": {        "id": "string"      },      "sha": "string",      "key": "string",      "name": "string",      "status": "queued",      "conclusion": "success",      "detailsUrl": "string",      "externalUpdatedAt": "2026-01-01T00:00:00Z",      "startedAt": "2026-01-01T00:00:00Z",      "completedAt": "2026-01-01T00:00:00Z",      "createdAt": "2026-01-01T00:00:00Z",      "updatedAt": "2026-01-01T00:00:00Z",      "externalId": "string",      "actor": {        "user": {          "id": "string",          "email": "string"        }      },      "output": {        "title": "string",        "summary": "string",        "text": "string"      }    }  ],  "nextPageToken": "string"}
+{  "checkRuns": [    {      "id": "string",      "repository": {        "id": "string",        "name": "string",        "owner": {          "slug": "string",          "id": "string",          "type": "team"        }      },      "checkSuite": {        "id": "string"      },      "sha": "string",      "key": "string",      "name": "string",      "status": "queued",      "conclusion": "success",      "detailsUrl": "string",      "externalUpdatedAt": "2026-01-01T00:00:00Z",      "startedAt": "2026-01-01T00:00:00Z",      "completedAt": "2026-01-01T00:00:00Z",      "createdAt": "2026-01-01T00:00:00Z",      "updatedAt": "2026-01-01T00:00:00Z",      "externalId": "string",      "actor": {        "user": {          "id": "string",          "email": "string"        }      },      "output": {        "title": "string",        "summary": "string",        "text": "string"      },      "deadlineAt": "2026-01-01T00:00:00Z"    }  ],  "nextPageToken": "string"}
 ```
 
 ### [List Check Runs For Commit](#list-check-runs-for-commit)
@@ -2694,7 +3079,7 @@ GET`/v1/origin/repos/{ownerSlug}/{repoName}/commits/{sha}/check-runs`
 
 Lists every check run reported against a commit, across all suites. Paginated.
 
-#### [Path Parameters](#path-parameters-13)
+#### [Path Parameters](#path-parameters-15)
 
 `ownerSlug` string Required
 
@@ -2708,7 +3093,7 @@ Repo name, unique to the owner entity.
 
 Commit SHA (40- or 64-char hex) to list check runs for.
 
-#### [Query Parameters](#query-parameters-6)
+#### [Query Parameters](#query-parameters-7)
 
 `pageSize` integer
 
@@ -2718,7 +3103,7 @@ Max check runs to return. Defaults to 30 when unset or 0. Values above 100 are c
 
 Opaque cursor from a previous response's `next_page_token`. Empty for the first page. Encodes the last-seen check-run id scoped to this commit, so `page_size` on a follow-up request is ignored when a token is supplied.
 
-#### [Response Fields](#response-fields-19)
+#### [Response Fields](#response-fields-22)
 
 `checkRuns` array
 
@@ -2864,6 +3249,10 @@ Summary of the output. May contain Markdown. Maximum UTF-8 size: 65535 bytes.
 
 Detailed output. May contain Markdown. Maximum UTF-8 size: 65535 bytes.
 
+`checkRuns[].deadlineAt` string
+
+Deadline recorded for the check run, as an RFC 3339 timestamp. Absent when the run has no deadline, including after the run completes.
+
 `nextPageToken` string
 
 Opaque cursor for the next page; empty when there are no more pages.
@@ -2875,7 +3264,7 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "checkRuns": [    {      "id": "string",      "repository": {        "id": "string",        "name": "string",        "owner": {          "slug": "string",          "id": "string",          "type": "team"        }      },      "checkSuite": {        "id": "string"      },      "sha": "string",      "key": "string",      "name": "string",      "status": "queued",      "conclusion": "success",      "detailsUrl": "string",      "externalUpdatedAt": "2026-01-01T00:00:00Z",      "startedAt": "2026-01-01T00:00:00Z",      "completedAt": "2026-01-01T00:00:00Z",      "createdAt": "2026-01-01T00:00:00Z",      "updatedAt": "2026-01-01T00:00:00Z",      "externalId": "string",      "actor": {        "user": {          "id": "string",          "email": "string"        }      },      "output": {        "title": "string",        "summary": "string",        "text": "string"      }    }  ],  "nextPageToken": "string"}
+{  "checkRuns": [    {      "id": "string",      "repository": {        "id": "string",        "name": "string",        "owner": {          "slug": "string",          "id": "string",          "type": "team"        }      },      "checkSuite": {        "id": "string"      },      "sha": "string",      "key": "string",      "name": "string",      "status": "queued",      "conclusion": "success",      "detailsUrl": "string",      "externalUpdatedAt": "2026-01-01T00:00:00Z",      "startedAt": "2026-01-01T00:00:00Z",      "completedAt": "2026-01-01T00:00:00Z",      "createdAt": "2026-01-01T00:00:00Z",      "updatedAt": "2026-01-01T00:00:00Z",      "externalId": "string",      "actor": {        "user": {          "id": "string",          "email": "string"        }      },      "output": {        "title": "string",        "summary": "string",        "text": "string"      },      "deadlineAt": "2026-01-01T00:00:00Z"    }  ],  "nextPageToken": "string"}
 ```
 
 ### [List Check Suites For Commit](#list-check-suites-for-commit)
@@ -2884,7 +3273,7 @@ GET`/v1/origin/repos/{ownerSlug}/{repoName}/commits/{sha}/check-suites`
 
 Lists check suites reported against a commit. Returns suite metadata only (no embedded runs). Paginated.
 
-#### [Path Parameters](#path-parameters-14)
+#### [Path Parameters](#path-parameters-16)
 
 `ownerSlug` string Required
 
@@ -2898,7 +3287,7 @@ Repo name, unique to the owner entity.
 
 Commit SHA (40- or 64-char hex) to list suites for.
 
-#### [Query Parameters](#query-parameters-7)
+#### [Query Parameters](#query-parameters-8)
 
 `pageSize` integer
 
@@ -2908,7 +3297,7 @@ Max suites to return. Defaults to 30 when unset or 0. Values above 100 are clamp
 
 Opaque cursor from a previous response's `next_page_token`. Empty for the first page. Encodes the last-seen check-suite id scoped to this commit, so `page_size` on a follow-up request is ignored when a token is supplied.
 
-#### [Response Fields](#response-fields-20)
+#### [Response Fields](#response-fields-23)
 
 `checkSuites` array
 
@@ -3038,7 +3427,7 @@ Lists commits on a branch or starting ref.
 
 List results omit `stats`. Use [Get Commit](#get-commit) for aggregate stats and [List Commit Files](#list-commit-files) for the paginated file diff.
 
-#### [Path Parameters](#path-parameters-15)
+#### [Path Parameters](#path-parameters-17)
 
 `ownerSlug` string Required
 
@@ -3048,7 +3437,7 @@ Owning entity's unique slug.
 
 Repo name, unique to the owner entity.
 
-#### [Query Parameters](#query-parameters-8)
+#### [Query Parameters](#query-parameters-9)
 
 `sha` string
 
@@ -3062,7 +3451,7 @@ Max commits to return. Defaults to 30 when unset or 0. Values above 100 are clam
 
 Opaque cursor from a previous response's `next_page_token`. Empty for the first page. Encodes the starting ref and page, so `sha`/`page_size` on a follow-up request are ignored when a token is supplied.
 
-#### [Response Fields](#response-fields-21)
+#### [Response Fields](#response-fields-24)
 
 `commits` array
 
@@ -3150,7 +3539,7 @@ Returns a single commit by SHA or ref with whole-commit aggregate `stats`. It do
 
 `author` and `committer` are git identities recorded in the commit, not Origin user objects.
 
-#### [Path Parameters](#path-parameters-16)
+#### [Path Parameters](#path-parameters-18)
 
 `ownerSlug` string Required
 
@@ -3164,7 +3553,7 @@ Repo name, unique to the owner entity.
 
 SHA, branch, tag, or symbolic ref (for example `HEAD`) of the commit to fetch.
 
-#### [Response Fields](#response-fields-22)
+#### [Response Fields](#response-fields-25)
 
 `sha` string
 
@@ -3260,7 +3649,7 @@ Lists the files changed by a commit.
 
 `sha` may be a commit SHA, branch, tag, or symbolic ref such as `HEAD`. Results default to 30 files and are capped at 100. A page token fixes the resolved commit, page size, and file cursor; on later requests, `sha` and `pageSize` must match the token. Each file includes `filename`, `status`, `additions`, `deletions`, `changes`, `patch`, and `previousFilename` when renamed or copied. `patch` is empty for binary files.
 
-#### [Path Parameters](#path-parameters-17)
+#### [Path Parameters](#path-parameters-19)
 
 `ownerSlug` string Required
 
@@ -3274,7 +3663,7 @@ Repo name, unique to the owner entity.
 
 SHA, branch, tag, or symbolic ref (for example `HEAD`) of the commit whose files should be listed.
 
-#### [Query Parameters](#query-parameters-9)
+#### [Query Parameters](#query-parameters-10)
 
 `pageSize` integer
 
@@ -3284,7 +3673,7 @@ Max changed files to return. Defaults to 30 when unset or 0. Values above 100 ar
 
 Opaque cursor from a previous response's `next_page_token`. Empty for the first page. The token fixes the resolved commit, page size, and file cursor, so `sha` and `page_size` on a follow-up request must match the token.
 
-#### [Response Fields](#response-fields-23)
+#### [Response Fields](#response-fields-26)
 
 `files` array
 
@@ -3340,7 +3729,7 @@ Compares commits, refs, or tags relative to their merge base. `basehead` is `"{b
 
 `base` and `head` may each be a SHA, branch, tag, or symbolic ref such as `HEAD`. The response is an unpaginated summary: `status` is `identical`, `ahead`, `behind`, or `diverged`; the three commit objects are sparse and omit `stats` and files. No `totalCommits`, embedded `commits`, or `files` fields are returned. Unrelated histories return `404`.
 
-#### [Path Parameters](#path-parameters-18)
+#### [Path Parameters](#path-parameters-20)
 
 `ownerSlug` string Required
 
@@ -3354,7 +3743,7 @@ Repo name, unique to the owner entity.
 
 `"{base}...{head}"`, where either revision may be a SHA, branch, tag, or symbolic ref such as `HEAD`.
 
-#### [Response Fields](#response-fields-24)
+#### [Response Fields](#response-fields-27)
 
 `status` string
 
@@ -3578,7 +3967,7 @@ Returns file or directory contents at a ref. The file path is passed as the `pat
 
 Files contain base64 content. Directories contain immediate children in `entries`. Directory entries are sparse children containing `type`, `name`, `path`, `sha`, and `size`; fetch a child path to read its content.
 
-#### [Path Parameters](#path-parameters-19)
+#### [Path Parameters](#path-parameters-21)
 
 `ownerSlug` string Required
 
@@ -3588,7 +3977,7 @@ Owning entity's unique slug.
 
 Repo name, unique to the owner entity.
 
-#### [Query Parameters](#query-parameters-10)
+#### [Query Parameters](#query-parameters-11)
 
 `path` string
 
@@ -3598,7 +3987,7 @@ Path to the file or directory relative to the repository root. Empty requests th
 
 Commit, branch, tag, or symbolic ref (for example `HEAD`) to read from. Empty means the repository's default branch.
 
-#### [Response Fields](#response-fields-25)
+#### [Response Fields](#response-fields-28)
 
 `type` string
 
@@ -3648,7 +4037,7 @@ POST`/v1/origin/repos/{ownerSlug}/{repoName}/contents:batchGet`
 
 Returns the contents of several explicit paths at a ref in one request. Each requested path yields a result marking whether it was found; a found path carries the same `Content` shape as `GetContents` (files as base64, directories as immediate `entries`, symlinks as files). Paths are matched exactly, with no globs or patterns, and at most 20 may be requested; duplicates are removed. Response results preserve first-seen request order. A single file larger than the [Get Contents](#get-contents) 1 MiB cap fails the whole batch with `FailedPrecondition` (HTTP 400). Uses POST because the path list travels in the request body.
 
-#### [Path Parameters](#path-parameters-20)
+#### [Path Parameters](#path-parameters-22)
 
 `ownerSlug` string Required
 
@@ -3658,7 +4047,7 @@ Owning entity's unique slug.
 
 Repo name, unique to the owner entity.
 
-#### [Request Body](#request-body-6)
+#### [Request Body](#request-body-8)
 
 `paths` array Required
 
@@ -3668,7 +4057,7 @@ Exact paths to fetch, relative to the repository root (no globs or patterns). At
 
 Commit, branch, tag, or symbolic ref (for example `HEAD`) to read from. Empty means the repository's default branch.
 
-#### [Response Fields](#response-fields-26)
+#### [Response Fields](#response-fields-29)
 
 `results` array
 
@@ -3742,7 +4131,7 @@ GET`/v1/origin/repos/{ownerSlug}/{repoName}/git/blobs/{sha}`
 
 Returns a Git blob object by SHA. Default response is JSON with MIME-wrapped base64 `content`. Pass `Accept: application/vnd.origin.raw+json` (or `application/vnd.origin.raw`) on the REST surface to receive raw blob bytes instead. Blobs larger than 4 MiB (decoded) are rejected; fetch larger files by cloning the repository over [Git HTTPS](#git-https-authentication). Empty repositories return 409 Conflict.
 
-#### [Path Parameters](#path-parameters-21)
+#### [Path Parameters](#path-parameters-23)
 
 `ownerSlug` string Required
 
@@ -3756,7 +4145,7 @@ Repo name, unique to the owner entity.
 
 Full or abbreviated hex SHA of the blob object.
 
-#### [Response Fields](#response-fields-27)
+#### [Response Fields](#response-fields-30)
 
 `sha` string
 
@@ -3790,7 +4179,7 @@ GET`/v1/origin/repos/{ownerSlug}/{repoName}/git/commits/{sha}`
 
 Returns a Git commit object by SHA (or resolvable revision). This is the low-level Git Database commit shape (flat author/message/tree), not the higher-level `GetCommit` resource under `/commits/{sha}`. `sha` accepts a commit SHA, branch, tag, or symbolic ref such as `HEAD`. Empty repositories return 409 Conflict.
 
-#### [Path Parameters](#path-parameters-22)
+#### [Path Parameters](#path-parameters-24)
 
 `ownerSlug` string Required
 
@@ -3804,7 +4193,7 @@ Repo name, unique to the owner entity.
 
 Full or abbreviated hex SHA of the commit object, or a branch, tag, or symbolic ref such as `HEAD`.
 
-#### [Response Fields](#response-fields-28)
+#### [Response Fields](#response-fields-31)
 
 `sha` string
 
@@ -3878,7 +4267,7 @@ GET`/v1/origin/repos/{ownerSlug}/{repoName}/git/ref/{ref}`
 
 Returns a single Git reference by name. `ref` is typically `heads/<branch>` or `tags/<tag>` (with or without a leading `refs/`), or the symbolic `HEAD`. Exact match only; use ListMatchingGitRefs for prefixes. Empty repositories return 409 Conflict.
 
-#### [Path Parameters](#path-parameters-23)
+#### [Path Parameters](#path-parameters-25)
 
 `ownerSlug` string Required
 
@@ -3892,7 +4281,7 @@ Repo name, unique to the owner entity.
 
 Git reference name. Typically `heads/<branch>` or `tags/<tag>`; a leading `refs/` is accepted and normalized. The symbolic `HEAD` is also accepted (returned as `ref: "HEAD"` with the tip commit). Exact match on the full ref name.
 
-#### [Response Fields](#response-fields-29)
+#### [Response Fields](#response-fields-32)
 
 `ref` string
 
@@ -3926,7 +4315,7 @@ GET`/v1/origin/repos/{ownerSlug}/{repoName}/git/matching-refs`
 
 Lists Git references whose names start with the given prefix. REST responses unwrap to a JSON array (via `response_body`). A trailing slash on `ref` is preserved (`heads/` → `refs/heads/`). The symbolic `HEAD` is matched exactly (it is not under `refs/`). Empty repositories return 409 Conflict.
 
-#### [Path Parameters](#path-parameters-24)
+#### [Path Parameters](#path-parameters-26)
 
 `ownerSlug` string Required
 
@@ -3936,13 +4325,13 @@ Owning entity's unique slug.
 
 Repo name, unique to the owner entity.
 
-#### [Query Parameters](#query-parameters-11)
+#### [Query Parameters](#query-parameters-12)
 
 `ref` string
 
 Prefix to match. Typically `heads/<prefix>` or `tags/<prefix>`; a leading `refs/` is accepted and normalized. Empty lists all refs (REST binding without a trailing path segment).
 
-#### [Response Fields](#response-fields-30)
+#### [Response Fields](#response-fields-33)
 
 The response is an array. Each item contains:
 
@@ -3978,7 +4367,7 @@ GET`/v1/origin/repos/{ownerSlug}/{repoName}/git/matching-refs/{ref}`
 
 Lists Git references whose names start with the given prefix. REST responses unwrap to a JSON array (via `response_body`). A trailing slash on `ref` is preserved (`heads/` → `refs/heads/`). The symbolic `HEAD` is matched exactly (it is not under `refs/`). Empty repositories return 409 Conflict.
 
-#### [Path Parameters](#path-parameters-25)
+#### [Path Parameters](#path-parameters-27)
 
 `ownerSlug` string Required
 
@@ -3992,7 +4381,7 @@ Repo name, unique to the owner entity.
 
 Prefix to match. Typically `heads/<prefix>` or `tags/<prefix>`; a leading `refs/` is accepted and normalized. Empty lists all refs (REST binding without a trailing path segment).
 
-#### [Response Fields](#response-fields-31)
+#### [Response Fields](#response-fields-34)
 
 The response is an array. Each item contains:
 
@@ -4028,7 +4417,7 @@ GET`/v1/origin/repos/{ownerSlug}/{repoName}/git/tags/{sha}`
 
 Returns an annotated Git tag object by SHA. Lightweight tags are not tag objects and return NotFound. Empty repositories return 409 Conflict.
 
-#### [Path Parameters](#path-parameters-26)
+#### [Path Parameters](#path-parameters-28)
 
 `ownerSlug` string Required
 
@@ -4042,7 +4431,7 @@ Repo name, unique to the owner entity.
 
 Full or abbreviated hex SHA of the annotated tag object.
 
-#### [Response Fields](#response-fields-32)
+#### [Response Fields](#response-fields-35)
 
 `sha` string
 
@@ -4100,7 +4489,7 @@ GET`/v1/origin/repos/{ownerSlug}/{repoName}/git/trees/{sha}`
 
 Returns a Git tree object by SHA or resolvable revision. `sha` accepts a tree SHA, commit SHA, branch, tag, or symbolic ref such as `HEAD`. Set `recursive=true` (or `1`) to walk the whole tree; omitting the parameter or passing any other value lists immediate children only. Recursive listings truncate at 100,000 entries or 7 MiB and set `truncated=true`. Empty repositories return 409 Conflict.
 
-#### [Path Parameters](#path-parameters-27)
+#### [Path Parameters](#path-parameters-29)
 
 `ownerSlug` string Required
 
@@ -4114,13 +4503,13 @@ Repo name, unique to the owner entity.
 
 Tree SHA, commit SHA, branch, tag, or symbolic ref such as `HEAD`.
 
-#### [Query Parameters](#query-parameters-12)
+#### [Query Parameters](#query-parameters-13)
 
 `recursive` boolean
 
 When true, returns the full recursive walk of the tree. Query values `true` and `1` enable recursion; omitting the parameter or passing any other value (including `false` and `0`) lists immediate children only.
 
-#### [Response Fields](#response-fields-33)
+#### [Response Fields](#response-fields-36)
 
 `sha` string
 
@@ -4164,6 +4553,284 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 {  "sha": "string",  "tree": [    {      "path": "string",      "mode": "string",      "type": "string",      "sha": "string",      "size": 0    }  ],  "truncated": false}
 ```
 
+## [Labels](#labels)
+
+A label definition belongs to one repository and is addressed by its name. Assigning labels to a pull request is a separate surface; see [Set Pull Request Labels](#set-pull-request-labels).
+
+### [List Labels](#list-labels)
+
+GET`/v1/origin/repos/{ownerSlug}/{repoName}/labels`
+
+Lists the labels defined on a repository, ordered by name.
+
+Page tokens are bound to the repository they were minted for. A token replayed against a different repository, or any other malformed token, returns `InvalidArgument` (HTTP 400).
+
+#### [Path Parameters](#path-parameters-30)
+
+`ownerSlug` string Required
+
+Owning entity's unique slug.
+
+`repoName` string Required
+
+Repo name, unique to the owner entity.
+
+#### [Query Parameters](#query-parameters-14)
+
+`pageSize` integer
+
+Maximum labels to return. Defaults to 30 when omitted or zero; values above 100 are clamped to 100.
+
+`pageToken` string
+
+Opaque cursor from a previous response's `nextPageToken`. Omit for the first page.
+
+#### [Response Fields](#response-fields-37)
+
+`labels` array
+
+Page of label definitions, ordered by name.
+
+`labels[].id` string
+
+Public identifier for the label.
+
+`labels[].name` string
+
+Label name, unique within the repository. Names address the label in the read and write endpoints.
+
+`labels[].color` string
+
+Six-character hex color without a leading `#`.
+
+`labels[].description` string
+
+Label description. Absent when the label has none.
+
+`nextPageToken` string
+
+Opaque cursor for the next page. Empty when there are no more results.
+
+```
+curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/labels' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN'
+```
+
+**Response shape:**
+
+```
+{  "labels": [    {      "id": "string",      "name": "string",      "color": "string",      "description": "string"    }  ],  "nextPageToken": "string"}
+```
+
+### [Create Label](#create-label)
+
+POST`/v1/origin/repos/{ownerSlug}/{repoName}/labels`
+
+Creates a label on a repository.
+
+A name already used by another label on the repository returns `AlreadyExists` (HTTP 409 Conflict). A `color` that is not six hexadecimal characters, a `name` longer than 50 characters, or a `description` longer than 255 characters returns `InvalidArgument` (HTTP 400).
+
+#### [Path Parameters](#path-parameters-31)
+
+`ownerSlug` string Required
+
+Owning entity's unique slug.
+
+`repoName` string Required
+
+Repo name, unique to the owner entity.
+
+#### [Request Body](#request-body-9)
+
+`name` string Required
+
+Label name. Leading and trailing whitespace is trimmed. Maximum length: 50 characters.
+
+`color` string Required
+
+Six-character hex color without a leading `#`. Uppercase input is stored lowercase.
+
+`description` string
+
+Label description. Maximum length: 255 characters.
+
+#### [Response Fields](#response-fields-38)
+
+`id` string
+
+Public identifier for the label.
+
+`name` string
+
+Label name, unique within the repository. Names address the label in the read and write endpoints.
+
+`color` string
+
+Six-character hex color without a leading `#`.
+
+`description` string
+
+Label description. Absent when the label has none.
+
+```
+curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/labels' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "name": "LABEL_NAME",  "color": "0e8a16"}'
+```
+
+**Response shape:**
+
+```
+{  "id": "string",  "name": "string",  "color": "string",  "description": "string"}
+```
+
+### [Get Label](#get-label)
+
+GET`/v1/origin/repos/{ownerSlug}/{repoName}/labels/{labelName}`
+
+Returns a single repository label by name.
+
+An unknown name returns `404`. An empty `labelName` returns `InvalidArgument` (HTTP 400).
+
+#### [Path Parameters](#path-parameters-32)
+
+`ownerSlug` string Required
+
+Owning entity's unique slug.
+
+`repoName` string Required
+
+Repo name, unique to the owner entity.
+
+`labelName` string Required
+
+Label name. Leading and trailing whitespace is trimmed before lookup.
+
+#### [Response Fields](#response-fields-39)
+
+`id` string
+
+Public identifier for the label.
+
+`name` string
+
+Label name, unique within the repository. Names address the label in the read and write endpoints.
+
+`color` string
+
+Six-character hex color without a leading `#`.
+
+`description` string
+
+Label description. Absent when the label has none.
+
+```
+curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/labels/LABEL_NAME' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN'
+```
+
+**Response shape:**
+
+```
+{  "id": "string",  "name": "string",  "color": "string",  "description": "string"}
+```
+
+### [Delete Label](#delete-label)
+
+DELETE`/v1/origin/repos/{ownerSlug}/{repoName}/labels/{labelName}`
+
+Deletes a repository label by name. The response body is empty.
+
+Deleting a label also removes it from every pull request it was assigned to. An unknown name returns `404`. An empty `labelName` returns `InvalidArgument` (HTTP 400).
+
+#### [Path Parameters](#path-parameters-33)
+
+`ownerSlug` string Required
+
+Owning entity's unique slug.
+
+`repoName` string Required
+
+Repo name, unique to the owner entity.
+
+`labelName` string Required
+
+Label name. Leading and trailing whitespace is trimmed before lookup.
+
+#### [Response Fields](#response-fields-40)
+
+Successful requests return no response body.
+
+```
+curl --request DELETE \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/labels/LABEL_NAME' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN'
+```
+
+**Response:**
+
+```
+204 No Content
+```
+
+### [Update Label](#update-label)
+
+PATCH`/v1/origin/repos/{ownerSlug}/{repoName}/labels/{labelName}`
+
+Updates a repository label identified by its current name.
+
+Omitted fields are left unchanged, and a request that omits all three returns the label as it stands. Renaming to a name another label already uses returns `AlreadyExists` (HTTP 409 Conflict). An unknown `labelName` returns `404`.
+
+#### [Path Parameters](#path-parameters-34)
+
+`ownerSlug` string Required
+
+Owning entity's unique slug.
+
+`repoName` string Required
+
+Repo name, unique to the owner entity.
+
+`labelName` string Required
+
+Current label name. Leading and trailing whitespace is trimmed before lookup.
+
+#### [Request Body](#request-body-10)
+
+`name` string
+
+New label name. Leading and trailing whitespace is trimmed. Maximum length: 50 characters. Omit to leave unchanged.
+
+`color` string
+
+Six-character hex color without a leading `#`. Omit to leave unchanged.
+
+`description` string
+
+Label description. Maximum length: 255 characters. Omit to leave unchanged.
+
+#### [Response Fields](#response-fields-41)
+
+`id` string
+
+Public identifier for the label.
+
+`name` string
+
+Label name, unique within the repository. Names address the label in the read and write endpoints.
+
+`color` string
+
+Six-character hex color without a leading `#`.
+
+`description` string
+
+Label description. Absent when the label has none.
+
+```
+curl --request PATCH \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/labels/LABEL_NAME' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "color": "b60205"}'
+```
+
+**Response shape:**
+
+```
+{  "id": "string",  "name": "string",  "color": "string",  "description": "string"}
+```
+
 ## [Pull requests](#pull-requests)
 
 Closed or merged pull requests may additionally include `closedAt`, `mergedAt`, and `mergeCommitSha`. Treat `head.ref` and `base.ref` as opaque Origin ref strings; they may be short branch names or fully qualified `refs/heads/…` values.
@@ -4176,9 +4843,11 @@ Comments expose a `thread` reference for grouping. Create-comment requests still
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/pulls`
 
-Lists pull requests in a repo, optionally filtered by head branch and state. Each pull request includes its assigned labels.
+Lists pull requests in a repo, optionally filtered by head branch, base branch, author, creation-time range, and state. Each pull request includes its assigned labels.
 
-#### [Path Parameters](#path-parameters-28)
+Results come back in creation order, newest first. Set `direction=asc` for oldest first. Page tokens embed the filters they were minted under, so a token replayed with different filters is rejected; restart pagination when a filter changes.
+
+#### [Path Parameters](#path-parameters-35)
 
 `ownerSlug` string Required
 
@@ -4188,7 +4857,7 @@ Owning entity's unique slug.
 
 Repo name, unique to the owner entity.
 
-#### [Query Parameters](#query-parameters-13)
+#### [Query Parameters](#query-parameters-15)
 
 `head` string
 
@@ -4206,7 +4875,27 @@ Maximum results to return. Defaults to 30; maximum 100.
 
 Opaque token from the preceding page.
 
-#### [Response Fields](#response-fields-34)
+`author` string
+
+Optional author filter. Pass a public actor ID exactly as this endpoint returns it in `pullRequests[].author.user.id`, `pullRequests[].author.app.id`, or `pullRequests[].author.serviceAccount.id` (`user_…`, `app_…`, or `sa_…`). An author with no pull requests returns an empty list. Any other value, including the shared `origin-cursor-managed-actor` ID, returns `InvalidArgument` (HTTP 400).
+
+`base` string
+
+Optional exact base-branch filter. Accepts a short name (`main`) or a fully qualified ref (`refs/heads/main`). Omit to list across every base.
+
+`direction` string
+
+Sort direction by creation order. `"desc"` returns newest first and is the default; `"asc"` returns oldest first. Any other value returns `InvalidArgument` (HTTP 400).
+
+`since` string
+
+Optional inclusive lower bound on creation time, as an RFC 3339 timestamp such as `2026-08-01T00:00:00Z`. Returns only pull requests created at or after that instant. A malformed timestamp returns `InvalidArgument` (HTTP 400).
+
+`until` string
+
+Optional inclusive upper bound on creation time, in the same RFC 3339 format as `since`. Returns only pull requests created at or before that instant. A malformed timestamp returns `InvalidArgument` (HTTP 400).
+
+#### [Response Fields](#response-fields-42)
 
 `pullRequests` array
 
@@ -4394,7 +5083,7 @@ Returns a single pull request, including its assigned labels.
 
 Closed or merged pull requests may additionally include `closedAt`, `mergedAt`, and `mergeCommitSha`. Treat `head.ref` and `base.ref` as opaque Origin ref strings; they may be short branch names or fully qualified `refs/heads/…` values.
 
-#### [Path Parameters](#path-parameters-29)
+#### [Path Parameters](#path-parameters-36)
 
 `ownerSlug` string Required
 
@@ -4406,7 +5095,7 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Response Fields](#response-fields-35)
+#### [Response Fields](#response-fields-43)
 
 `id` string
 
@@ -4586,7 +5275,9 @@ Creates a pull request from `head` into `base`.
 
 Optional `parent_pull_number` stacks this change on another open or draft pull request in the same repository.
 
-#### [Path Parameters](#path-parameters-30)
+A `title` longer than 256 characters, or a `body` longer than 65,536 characters, returns `InvalidArgument` (HTTP 400). Both limits count Unicode code points.
+
+#### [Path Parameters](#path-parameters-37)
 
 `ownerSlug` string Required
 
@@ -4596,15 +5287,15 @@ Owning entity's unique slug.
 
 Repo name, unique to the owner entity.
 
-#### [Request Body](#request-body-7)
+#### [Request Body](#request-body-11)
 
 `title` string Required
 
-Pull request title.
+Pull request title. Maximum length: 256 characters.
 
 `body` string
 
-Pull request body / description. May be empty.
+Pull request body / description. Can be empty. Maximum length: 65,536 characters.
 
 `head` string Required
 
@@ -4622,7 +5313,7 @@ When true, create as a draft. When false or omitted, create as open (ready for r
 
 Optional parent pull request number when stacking this change on another open/draft change in the same repository.
 
-#### [Response Fields](#response-fields-36)
+#### [Response Fields](#response-fields-44)
 
 `id` string
 
@@ -4802,7 +5493,9 @@ Updates a pull request's title, body, base branch, and/or lifecycle state.
 
 Omitted fields are unchanged. Present fields are applied in order: metadata, then reopen/draft/ready-for-review, then base, then close. Close runs last so a same-request retarget can still see an open change; reopen runs before base so a closed pull can be retargeted. If a later step fails, earlier steps may already have been committed.
 
-#### [Path Parameters](#path-parameters-31)
+A `title` longer than 256 characters, or a `body` longer than 65,536 characters, returns `InvalidArgument` (HTTP 400). Both limits count Unicode code points.
+
+#### [Path Parameters](#path-parameters-38)
 
 `ownerSlug` string Required
 
@@ -4814,15 +5507,15 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Request Body](#request-body-8)
+#### [Request Body](#request-body-12)
 
 `title` string
 
-New title. Omitted fields are left unchanged.
+New title. Omitted fields are left unchanged. Maximum length: 256 characters.
 
 `body` string
 
-New body / description. An empty string clears the body.
+New body / description. An empty string clears the body. Maximum length: 65,536 characters.
 
 `state` string
 
@@ -4836,7 +5529,7 @@ New body / description. An empty string clears the body.
 
 New base branch. Retargets the pull request and may update stack parentage when the new base is another change's head (or the default branch).
 
-#### [Response Fields](#response-fields-37)
+#### [Response Fields](#response-fields-45)
 
 `id` string
 
@@ -5014,7 +5707,7 @@ GET`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/comments`
 
 Lists every comment on a pull request in chronological order. Each comment includes its thread id so clients can group the flat response into threads.
 
-#### [Path Parameters](#path-parameters-32)
+#### [Path Parameters](#path-parameters-39)
 
 `ownerSlug` string Required
 
@@ -5026,7 +5719,7 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Query Parameters](#query-parameters-14)
+#### [Query Parameters](#query-parameters-16)
 
 `pageSize` integer
 
@@ -5036,7 +5729,7 @@ Maximum comments to return. Defaults to 30; maximum 100.
 
 Opaque token from the preceding page.
 
-#### [Response Fields](#response-fields-38)
+#### [Response Fields](#response-fields-46)
 
 `comments` array
 
@@ -5162,7 +5855,7 @@ GET`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/comments/{commentId}`
 
 Returns a single pull request comment by its stable Origin id. A comment outside the authorized repository, or a pending-review comment not visible to the caller, returns `404`.
 
-#### [Path Parameters](#path-parameters-33)
+#### [Path Parameters](#path-parameters-40)
 
 `ownerSlug` string Required
 
@@ -5174,7 +5867,7 @@ Repo name, unique to the owner entity.
 
 `commentId` string Required
 
-#### [Response Fields](#response-fields-39)
+#### [Response Fields](#response-fields-47)
 
 `id` string
 
@@ -5250,9 +5943,9 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 
 POST`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/comments`
 
-Creates a general-discussion comment or reply on an Origin pull request. Omitting `thread_id` starts a new thread; providing it replies to that thread. These are general-discussion comments, not diff-anchored review comments.
+Creates a general-discussion comment or reply on an Origin pull request. Omitting `thread_id` starts a new thread; providing it replies to that thread. These are general-discussion comments, not diff-anchored review comments. Bodies longer than 65,536 characters are rejected with `InvalidArgument` (HTTP 400).
 
-#### [Path Parameters](#path-parameters-34)
+#### [Path Parameters](#path-parameters-41)
 
 `ownerSlug` string Required
 
@@ -5264,15 +5957,17 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Request Body](#request-body-9)
+#### [Request Body](#request-body-13)
 
 `body` string Required
+
+Comment text. Maximum length: 65,536 characters, counted as Unicode code points.
 
 `threadId` string
 
 Existing thread id to reply to. Omit to create a new general-discussion thread.
 
-#### [Response Fields](#response-fields-40)
+#### [Response Fields](#response-fields-48)
 
 `id` string
 
@@ -5350,9 +6045,9 @@ PATCH`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/comments/{commentId}`
 
 Updates a pull request comment by its stable Origin id.
 
-Replaces the comment body. The comment must belong to the repository in the path, be visible to the caller, and have been authored by that caller. Cross-repository and hidden pending-review comments return `404`; a visible comment owned by another actor returns `403`.
+Replaces the comment body. The comment must belong to the repository in the path, be visible to the caller, and have been authored by that caller. Cross-repository and hidden pending-review comments return `404`; a visible comment owned by another actor returns `403`. Bodies longer than 65,536 characters are rejected with `InvalidArgument` (HTTP 400).
 
-#### [Path Parameters](#path-parameters-35)
+#### [Path Parameters](#path-parameters-42)
 
 `ownerSlug` string Required
 
@@ -5364,11 +6059,13 @@ Repo name, unique to the owner entity.
 
 `commentId` string Required
 
-#### [Request Body](#request-body-10)
+#### [Request Body](#request-body-14)
 
 `body` string Required
 
-#### [Response Fields](#response-fields-41)
+Replacement comment text. Maximum length: 65,536 characters, counted as Unicode code points.
+
+#### [Response Fields](#response-fields-49)
 
 `id` string
 
@@ -5448,7 +6145,7 @@ Lists the commits in a pull request.
 
 Returns the pull request's commits as sparse `Commit` objects (no `stats`). Results default to 30 and are capped at 100, with at most 250 commits visible overall. A page token fixes the pull request version, page size, and commit cursor; `pageSize` must match the token on later requests, and a token that no longer matches the current head or base returns `400`.
 
-#### [Path Parameters](#path-parameters-36)
+#### [Path Parameters](#path-parameters-43)
 
 `ownerSlug` string Required
 
@@ -5460,7 +6157,7 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Query Parameters](#query-parameters-15)
+#### [Query Parameters](#query-parameters-17)
 
 `pageSize` integer
 
@@ -5470,7 +6167,7 @@ Max commits to return. Defaults to 30 when unset or 0. Values above 100 are clam
 
 Opaque cursor from a previous response's `next_page_token`. Empty for the first page. The token is bound to the repository, pull request version, page size, and commit offset.
 
-#### [Response Fields](#response-fields-42)
+#### [Response Fields](#response-fields-50)
 
 `commits` array
 
@@ -5558,7 +6255,7 @@ Lists the files changed in a pull request.
 
 Returns filename, status, line counts, patch, and optional previous filename. Results default to 30 files and are capped at 100. A page token fixes the pull request version, page size, and file cursor; `pageSize` must match the token on later requests, and a token that no longer matches the current head or base returns `400`.
 
-#### [Path Parameters](#path-parameters-37)
+#### [Path Parameters](#path-parameters-44)
 
 `ownerSlug` string Required
 
@@ -5570,7 +6267,7 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Query Parameters](#query-parameters-16)
+#### [Query Parameters](#query-parameters-18)
 
 `pageSize` integer
 
@@ -5580,7 +6277,7 @@ Max changed files to return. Defaults to 30 when unset or 0. Values above 100 ar
 
 Opaque cursor from a previous response's `next_page_token`. Empty for the first page. The token is bound to the repository, pull request version, page size, and changed-file cursor.
 
-#### [Response Fields](#response-fields-43)
+#### [Response Fields](#response-fields-51)
 
 `files` array
 
@@ -5636,7 +6333,7 @@ Lists every label assigned to a pull request, ordered by name.
 
 The response carries the full assigned list rather than a page of it, so this endpoint takes no pagination parameters. A pull request can have at most 100 labels. An unknown pull request returns `404`.
 
-#### [Path Parameters](#path-parameters-38)
+#### [Path Parameters](#path-parameters-45)
 
 `ownerSlug` string Required
 
@@ -5648,7 +6345,7 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Response Fields](#response-fields-44)
+#### [Response Fields](#response-fields-52)
 
 `labels` array
 
@@ -5688,7 +6385,7 @@ Replaces every label assigned to a pull request with the labels you name.
 
 An empty list removes every assigned label. The labels must already exist in the repository; an unknown name or an unknown pull request returns `404`. A pull request can have at most 100 labels, so naming more than 100 returns `FailedPrecondition` (HTTP 400). The response lists the labels assigned after the replacement, ordered by name.
 
-#### [Path Parameters](#path-parameters-39)
+#### [Path Parameters](#path-parameters-46)
 
 `ownerSlug` string Required
 
@@ -5700,13 +6397,13 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Request Body](#request-body-11)
+#### [Request Body](#request-body-15)
 
 `labels` array
 
 Label names to assign. Maximum 100. An empty list removes every assigned label. Duplicate names are ignored.
 
-#### [Response Fields](#response-fields-45)
+#### [Response Fields](#response-fields-53)
 
 `labels` array
 
@@ -5730,7 +6427,7 @@ Adds existing repository labels to a pull request.
 
 Labels already assigned to the pull request stay assigned. The labels must already exist in the repository; an unknown name or an unknown pull request returns `404`. The request must name between 1 and 100 labels, and a pull request can have at most 100 labels in total, so a request that would take it past that limit returns `FailedPrecondition` (HTTP 400). The response lists the labels you named, not the pull request's full set; read the full set with [List Pull Request Labels](#list-pull-request-labels).
 
-#### [Path Parameters](#path-parameters-40)
+#### [Path Parameters](#path-parameters-47)
 
 `ownerSlug` string Required
 
@@ -5742,13 +6439,13 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Request Body](#request-body-12)
+#### [Request Body](#request-body-16)
 
 `labels` array Required
 
 Label names to add. Maximum 100. Duplicate names are ignored.
 
-#### [Response Fields](#response-fields-46)
+#### [Response Fields](#response-fields-54)
 
 `labels` array
 
@@ -5772,7 +6469,7 @@ Removes every label from a pull request.
 
 The request succeeds when the pull request has no labels. An unknown pull request returns `404`. The response body is empty.
 
-#### [Path Parameters](#path-parameters-41)
+#### [Path Parameters](#path-parameters-48)
 
 `ownerSlug` string Required
 
@@ -5784,7 +6481,7 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Response Fields](#response-fields-47)
+#### [Response Fields](#response-fields-55)
 
 Successful requests return no response body.
 
@@ -5806,7 +6503,7 @@ Removes one label from a pull request.
 
 A label that is not assigned to the pull request returns `404`, as does an unknown pull request. The response lists the labels remaining on the pull request, ordered by name.
 
-#### [Path Parameters](#path-parameters-42)
+#### [Path Parameters](#path-parameters-49)
 
 `ownerSlug` string Required
 
@@ -5822,7 +6519,7 @@ Repo name, unique to the owner entity.
 
 Name of the label to remove.
 
-#### [Response Fields](#response-fields-48)
+#### [Response Fields](#response-fields-56)
 
 `labels` array
 
@@ -5846,7 +6543,7 @@ Merges a pull request into its base.
 
 For a stacked pull request, merges the entire root-to-target prefix ending at this pull number. not only this pull. Supported only on native Origin repositories; mirrored repositories are rejected.
 
-#### [Path Parameters](#path-parameters-43)
+#### [Path Parameters](#path-parameters-50)
 
 `ownerSlug` string Required
 
@@ -5860,13 +6557,13 @@ Repo name, unique to the owner entity.
 
 Pull number to merge. When this pull is stacked, the merge lands every pull from the stack root through this number.
 
-#### [Request Body](#request-body-13)
+#### [Request Body](#request-body-17)
 
 `expectedHeadSha` string
 
 Guard against merging a head your app has not seen: the full commit SHA (40 or 64 hexadecimal characters) expected to be the pull request's current head. When the head has moved, the merge is rejected with `ABORTED` (HTTP 409 Conflict) and nothing merges. Values that are not a full commit SHA are rejected with `InvalidArgument` (HTTP 400). Omit to merge whatever the current head is. Not evaluated when the pull request is already merged, which returns idempotent success.
 
-#### [Response Fields](#response-fields-49)
+#### [Response Fields](#response-fields-57)
 
 `mergeCommitSha` string
 
@@ -6056,7 +6753,7 @@ GET`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/reviews`
 
 Lists submitted reviews on a pull request, ordered by `submitted_at` ascending. Pending reviews are omitted.
 
-#### [Path Parameters](#path-parameters-44)
+#### [Path Parameters](#path-parameters-51)
 
 `ownerSlug` string Required
 
@@ -6068,7 +6765,7 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Query Parameters](#query-parameters-17)
+#### [Query Parameters](#query-parameters-19)
 
 `pageSize` integer
 
@@ -6078,7 +6775,7 @@ Maximum reviews to return. Defaults to 30; maximum 100.
 
 Opaque token from the preceding page.
 
-#### [Response Fields](#response-fields-50)
+#### [Response Fields](#response-fields-58)
 
 `reviews` array
 
@@ -6266,7 +6963,7 @@ Creates and submits a review on a pull request.
 
 The review is submitted immediately. A new `approve` or `request_changes` review supersedes the caller's prior live decision review on the same pull request, which is dismissed. Pull request authors cannot `approve` their own pull request. Fails with FAILED\_PRECONDITION while the caller has an unsubmitted draft review on the pull request.
 
-#### [Path Parameters](#path-parameters-45)
+#### [Path Parameters](#path-parameters-52)
 
 `ownerSlug` string Required
 
@@ -6278,7 +6975,7 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Request Body](#request-body-14)
+#### [Request Body](#request-body-18)
 
 `verdict` string Required
 
@@ -6292,7 +6989,7 @@ Free-text review summary. May be empty.
 
 Pull request version number the review applies to (see `PullRequestVersion.number`). Omit to review the latest version at call time.
 
-#### [Response Fields](#response-fields-51)
+#### [Response Fields](#response-fields-59)
 
 `id` string
 
@@ -6432,7 +7129,7 @@ Updates the body of a review. Only the review author can update it; other caller
 
 Unsubmitted draft reviews can be updated too; a draft's response has no `submitted_at`.
 
-#### [Path Parameters](#path-parameters-46)
+#### [Path Parameters](#path-parameters-53)
 
 `ownerSlug` string Required
 
@@ -6446,13 +7143,13 @@ Repo name, unique to the owner entity.
 
 `reviewId` string Required
 
-#### [Request Body](#request-body-15)
+#### [Request Body](#request-body-19)
 
 `body` string Required
 
 Replacement review summary text; replaces the prior body in full. Must contain a non-whitespace character; INVALID\_ARGUMENT otherwise.
 
-#### [Response Fields](#response-fields-52)
+#### [Response Fields](#response-fields-60)
 
 `id` string
 
@@ -6594,7 +7291,7 @@ Dismissing does not require having authored the review; write permission on the 
 
 Only `approve` and `request_changes` reviews can be dismissed, and only once: a `comment` review, an unsubmitted draft review, or an already-dismissed review returns FAILED\_PRECONDITION, and repeating the call leaves the first dismissal in place. A review that does not belong to the named pull request returns NOT\_FOUND.
 
-#### [Path Parameters](#path-parameters-47)
+#### [Path Parameters](#path-parameters-54)
 
 `ownerSlug` string Required
 
@@ -6610,13 +7307,13 @@ Repo name, unique to the owner entity.
 
 Stable Origin review identifier, as returned by ListPullRequestReviews.
 
-#### [Request Body](#request-body-16)
+#### [Request Body](#request-body-20)
 
 `message` string Required
 
 Reason recorded with the dismissal. Must contain a non-whitespace character; INVALID\_ARGUMENT otherwise.
 
-#### [Response Fields](#response-fields-53)
+#### [Response Fields](#response-fields-61)
 
 `id` string
 
@@ -6758,7 +7455,7 @@ Lists every ruleset configured on a repository.
 
 Rulesets per repository are bounded configuration, so the full set comes back in one response and this endpoint does not paginate. `repository` is hoisted once and describes the repository shared by every ruleset in the response.
 
-#### [Path Parameters](#path-parameters-48)
+#### [Path Parameters](#path-parameters-55)
 
 `ownerSlug` string Required
 
@@ -6768,7 +7465,7 @@ Owning entity's unique slug.
 
 Repo name, unique to the owner entity.
 
-#### [Response Fields](#response-fields-54)
+#### [Response Fields](#response-fields-62)
 
 `rulesets` array
 
@@ -6912,7 +7609,7 @@ Creates a repository ruleset.
 
 The response carries the stored ruleset, including the IDs Origin assigns to each rule and bypass actor. An empty `name` is rejected with `InvalidArgument` (HTTP 400).
 
-#### [Path Parameters](#path-parameters-49)
+#### [Path Parameters](#path-parameters-56)
 
 `ownerSlug` string Required
 
@@ -6922,7 +7619,7 @@ Owning entity's unique slug.
 
 Repo name, unique to the owner entity.
 
-#### [Request Body](#request-body-17)
+#### [Request Body](#request-body-21)
 
 `name` string Required
 
@@ -6956,7 +7653,7 @@ Protection rules to store. Each entry carries `ruleType` and optional `parameter
 
 Bypass principals to store. Each entry carries `bypassMode` and exactly one of `user`, `team`, `app`, or `originRole`; Origin assigns each actor's `id`. Values above 15 entries are rejected with `InvalidArgument` (HTTP 400).
 
-#### [Response Fields](#response-fields-55)
+#### [Response Fields](#response-fields-63)
 
 `id` string
 
@@ -7068,7 +7765,7 @@ Returns a single repository ruleset by its stable Origin ID.
 
 An unknown repository and an unknown ruleset both return `404`; the message distinguishes them.
 
-#### [Path Parameters](#path-parameters-50)
+#### [Path Parameters](#path-parameters-57)
 
 `ownerSlug` string Required
 
@@ -7082,7 +7779,7 @@ Repo name, unique to the owner entity.
 
 Stable Origin ruleset ID.
 
-#### [Response Fields](#response-fields-56)
+#### [Response Fields](#response-fields-64)
 
 `id` string
 
@@ -7194,7 +7891,7 @@ Updates an existing repository ruleset.
 
 The request replaces the whole ruleset configuration. `rules` and `bypassActors` are replaced in full rather than merged, and Origin assigns new IDs to the stored entries, so send every rule and bypass actor you want to keep.
 
-#### [Path Parameters](#path-parameters-51)
+#### [Path Parameters](#path-parameters-58)
 
 `ownerSlug` string Required
 
@@ -7208,7 +7905,7 @@ Repo name, unique to the owner entity.
 
 Stable Origin ruleset ID.
 
-#### [Request Body](#request-body-18)
+#### [Request Body](#request-body-22)
 
 `name` string Required
 
@@ -7242,7 +7939,7 @@ Protection rules to store. Each entry carries `ruleType` and optional `parameter
 
 Bypass principals to store. Each entry carries `bypassMode` and exactly one of `user`, `team`, `app`, or `originRole`; Origin assigns each actor's `id`. Values above 15 entries are rejected with `InvalidArgument` (HTTP 400).
 
-#### [Response Fields](#response-fields-57)
+#### [Response Fields](#response-fields-65)
 
 `id` string
 
@@ -7344,6 +8041,42 @@ curl --request PUT \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 
 ```
 {  "id": "string",  "name": "string",  "description": "string",  "enforcement": "active",  "kind": "merge_branch",  "includedRefNames": [    "string"  ],  "excludedRefNames": [    "string"  ],  "rules": [    {      "id": "string",      "ruleType": "string",      "parameters": {}    }  ],  "bypassActors": [    {      "id": "string",      "bypassMode": "always",      "user": {        "id": "string"      }    }  ]}
+```
+
+### [Delete Ruleset](#delete-ruleset)
+
+DELETE`/v1/origin/repos/{ownerSlug}/{repoName}/rulesets/{rulesetId}`
+
+Deletes a repository ruleset by its stable Origin ID. The response body is empty.
+
+An unknown repository and an unknown ruleset both return `404`; the message distinguishes them. A ruleset stored on a different repository reads as an unknown ruleset. An empty `rulesetId` returns `InvalidArgument` (HTTP 400).
+
+#### [Path Parameters](#path-parameters-59)
+
+`ownerSlug` string Required
+
+Owning entity's unique slug.
+
+`repoName` string Required
+
+Repo name, unique to the owner entity.
+
+`rulesetId` string Required
+
+Stable Origin ruleset ID.
+
+#### [Response Fields](#response-fields-66)
+
+Successful requests return no response body.
+
+```
+curl --request DELETE \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/rulesets/RULESET_ID' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN'
+```
+
+**Response:**
+
+```
+204 No Content
 ```
 
 English

@@ -1,18 +1,14 @@
 ---
 source_url: https://cursor.com/docs/enterprise/opentelemetry-export
-fetched_at: 2026-08-17T02:15:17.947322+00:00
+fetched_at: 2026-08-31T06:29:32.311849+00:00
 fetch_method: mintlify_md
 ---
 
 # OpenTelemetry Export
 
-### Beta
-
-OpenTelemetry Export is in beta. Features and the wire surface may change before general availability.
-
 OpenTelemetry Export streams Cursor usage data for your team to a collector you run. Cursor sends metrics (tokens, tool calls, best-effort cost) and logs (API requests, errors, corrections, skills, hooks, plugins, and cloud agent lifecycle events) to one team-managed destination. Export runs server-side.
 
-The beta is available on the [Enterprise plan](https://cursor.com/contact-sales?source=docs-opentelemetry-export). Admins configure it in **Team Settings > OpenTelemetry Export**.
+OpenTelemetry Export is available on the [Enterprise plan](https://cursor.com/contact-sales?source=docs-opentelemetry-export). Admins configure it in **Team Settings > OpenTelemetry Export**.
 
 The [Wire Reference](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md) documents every metric, log event, and attribute.
 
@@ -203,7 +199,7 @@ Metrics (`cursor.token.usage`, `cursor.tool.calls`, `cursor.cost.usage`) are agg
 
 New metrics and events may appear as coverage expands. `auto_enable_new_families` controls whether they turn on automatically. Renames and removals get explicit notice. The [Wire Reference](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md) documents the full attribute surface.
 
-### The OpenTelemetry Export beta is available on the Enterprise plan
+### OpenTelemetry Export is available on the Enterprise plan
 
 Contact our team to stream Cursor usage into your observability stack.
 

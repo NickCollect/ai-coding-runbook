@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/organizations
-fetched_at: 2026-07-27T04:31:48.739787+00:00
+fetched_at: 2026-08-31T06:29:32.396390+00:00
 fetch_method: mintlify_md
 ---
 
@@ -26,7 +26,11 @@ Organizations support org-level SSO with your identity provider. This is the rec
 
 ### Directory sync with SCIM
 
-At the organization level, SCIM makes directory groups from your identity provider available to Cursor. Nothing syncs automatically: admins can be intentional and choose which directory groups to sync in as [Organization Groups](https://cursor.com/docs/enterprise/organization-groups.md), and those groups can then keep team membership aligned with your directory.
+At the organization level, SCIM syncs directory groups and membership from your identity provider into Cursor. Enable push group provisioning in your identity provider. Each identity provider connection has a **SCIM Directory** section in the Organization's **Settings**. Select **Sync Directory** to register that connection's directory. Membership changes in your identity provider sync automatically.
+
+Admins choose which directory groups to sync in as [Organization Groups](https://cursor.com/docs/enterprise/organization-groups.md). Those groups can then keep team membership aligned with your directory.
+
+**Auto Add Users to Root Team** defaults on. Every synced user is added to the root team automatically. Turn it off in the Organization's **Settings** when group-to-team mappings should control team membership.
 
 An identity provider connection supports one SCIM directory, so an Organization has one directory through its own identity provider. An Organization can still draw from more than one directory when linked teams run their own identity providers, since each of those connections can bring its own SCIM directory.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/enterprise/billing-groups
-fetched_at: 2026-06-29T05:25:12.833756+00:00
+fetched_at: 2026-08-31T06:29:30.273070+00:00
 fetch_method: mintlify_md
 ---
 
@@ -26,7 +26,7 @@ Enterprise admins can view billing groups in the web dashboard under the `Member
 
 Admins can create billing groups by clicking `Create Group`. After naming the group, there are four ways to assign members to that group:
 
-1. **SCIM**: Sync the billing group with an existing [SCIM group](https://cursor.com/docs/account/teams/scim.md#scim).
+1. **SCIM**: Sync the billing group with an existing [SCIM group](https://cursor.com/docs/account/teams/scim.md).
 
 2. **API**: Create groups and add members programmatically via the [Admin API](https://cursor.com/docs/account/teams/admin-api.md#billing-groups).
 

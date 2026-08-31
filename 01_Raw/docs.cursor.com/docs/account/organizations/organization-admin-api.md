@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/organizations/organization-admin-api
-fetched_at: 2026-08-17T02:15:16.910656+00:00
+fetched_at: 2026-08-31T06:29:30.262260+00:00
 fetch_method: mintlify_md
 ---
 
@@ -486,7 +486,7 @@ By default, events from **all** teams in the organization pool are returned. Pas
 
 **Cost Calculation**: Sum the `chargedCents` field across events to reconcile event-level costs with the per-team `usedCents` breakdown from [`/organizations/pooled-usage`](https://cursor.com/docs/account/organizations/organization-admin-api.md#get-pooled-usage). This field includes both the model cost and the Cursor Token Rate when a request is eligible for the rate.
 
-The `cursorTokenFee` field represents the Cursor Token Rate and is only present when the rate applies to a third-party model request. This includes when Auto Balance or Auto Intelligence routes to a third-party model. Auto Cost, first-party Cursor models such as Composer 2.5, Grok 4.6, and Grok 4.5, and request-based enterprise accounts do not include this fee.
+The `cursorTokenFee` field represents the Cursor Token Rate and is only present when the rate applies to a third-party model request. This includes when Auto routes to a third-party model. First-party Cursor models such as Grok and Composer, and request-based enterprise accounts do not include this fee. See [Cursor Token Rate](https://cursor.com/help/models-and-usage/token-rate.md).
 
 #### Request body
 
@@ -550,7 +550,7 @@ Each object in `usageEvents` contains the same fields as the team endpoint, plus
   - `totalCents` number - Total model cost in cents
   - `discountPercentOff` number | undefined - Discount percentage applied, if any
 - `chargedCents` number - Total amount charged in cents for this event. For third-party model requests subject to the Cursor Token Rate, this includes model cost plus the Cursor Token Rate.
-- `cursorTokenFee` number | undefined - Cursor Token Rate in cents. Present only when the rate applies to a third-party model request (including Auto Balance or Auto Intelligence routes to a third-party model).
+- `cursorTokenFee` number | undefined - Cursor Token Rate in cents. Present only when the rate applies to a third-party model request (including when Auto routes to a third-party model).
 
 ```bash
 # Events across all teams in the organization pool

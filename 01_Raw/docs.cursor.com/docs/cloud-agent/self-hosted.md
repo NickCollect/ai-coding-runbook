@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted
-fetched_at: 2026-08-10T03:07:40.514994+00:00
+fetched_at: 2026-08-31T06:29:31.797644+00:00
 fetch_method: mintlify_md
 ---
 
@@ -44,7 +44,9 @@ Managed Cloud Agents take the fleet off your plate. There's no worker pool to si
 
 Cost follows [model pricing](https://cursor.com/docs/models-and-pricing.md#model-pricing). The compute an agent runs on is part of the managed service, so you don't reserve worker capacity or take on a separate cloud infrastructure bill for agent VMs.
 
-Need to run agents on your own infrastructure for a regulated or complex setup? Learn more about our [self-hosted option](https://cursor.com/docs/cloud-agent/self-hosted-guides/pool.md).
+Need to run tools on your own infrastructure for custom hardware, network, or
+policy requirements? See [Bring your own
+machine](https://cursor.com/docs/cloud-agent/bring-your-own-machine.md).
 
 ## Next steps
 

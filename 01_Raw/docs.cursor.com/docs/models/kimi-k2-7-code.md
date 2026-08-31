@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/kimi-k2-7-code
-fetched_at: 2026-08-03T04:24:59.320421+00:00
+fetched_at: 2026-08-31T06:29:33.893659+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ Kimi K2.7 Code is an open-weight model from Moonshot AI. Cursor serves it throug
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Kimi K2.7 Code draws from the third-party **Other Models** pool, which charges at the rates below. Individual plans include at least $20 of third-party Other Models usage each month (more on higher tiers). All prices are per million tokens.
+Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Kimi K2.7 Code draws from the third-party **Other Models** pool, which charges at the rates below. All prices are per million tokens.
 
 
 ---

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/identity-and-access-management
-fetched_at: 2026-07-20T04:31:20.317538+00:00
+fetched_at: 2026-08-31T06:29:32.213575+00:00
 fetch_method: mintlify_md
 ---
 
@@ -131,7 +131,6 @@ See [Deployment Patterns](https://cursor.com/docs/enterprise/deployment-patterns
 When you open a project in Cursor, the editor creates a `.cursor` folder at the root of your repository. This folder contains:
 
 - Project-specific settings
-- Indexing cache
 - Project rules and context
 
 This folder can be checked into source control. Your team members benefit from shared rules and settings, but be aware that these configurations are visible to anyone with repository access.

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/settings
-fetched_at: 2026-08-17T02:15:17.709378+00:00
+fetched_at: 2026-08-31T06:29:31.871199+00:00
 fetch_method: mintlify_md
 ---
 
@@ -36,7 +36,7 @@ The **Builds** tab shows the prepared environment versions available to Cloud Ag
 Control which network resources Cloud Agents can reach. User and team settings support three modes:
 
 - **Allow all network access** – no domain restrictions.
-- **Default + allowlist** – the [default domains](https://cursor.com/docs/agent/tools/terminal.md#default-network-allowlist) plus any domains you add.
+- **Default + allowlist** – the [default domains](https://cursor.com/docs/agent/security/run-modes.md#network-access) plus any domains you add.
 - **Allowlist only** – only domains you explicitly add.
 
 Users, team admins, and environment owners can configure network access. Environment-level settings can inherit user or team policy, add an environment allowlist, or define their own access mode. See [Network Access](https://cursor.com/docs/cloud-agent/security-network.md) for full details.

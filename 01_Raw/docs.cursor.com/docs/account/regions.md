@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/regions
-fetched_at: 2026-07-20T04:31:19.239426+00:00
+fetched_at: 2026-08-31T06:29:30.311734+00:00
 fetch_method: mintlify_md
 ---
 
@@ -49,6 +49,10 @@ Yes. Enterprise customers can enroll in US-only data residency so inference,
 processing, and storage for supported features stay in the US. See
 [Privacy and Data Governance](https://cursor.com/docs/enterprise/privacy-and-data-governance.md#data-residency)
 for supported models, exclusions, pricing, and how to enable it.
+
+## Related
+
+- [Regions help](https://cursor.com/help/security-and-privacy/regions.md)
 
 
 ---

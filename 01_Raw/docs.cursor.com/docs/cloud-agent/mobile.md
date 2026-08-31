@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/mobile
-fetched_at: 2026-08-03T04:24:57.671051+00:00
+fetched_at: 2026-08-31T06:29:31.694355+00:00
 fetch_method: mintlify_md
 ---
 
@@ -51,7 +51,7 @@ Once you're set up, put an agent to work. For example:
 
 You get the full cloud agent workflow from your pocket, not a stripped-down chat box. The same machines, models, and review tools you use on the web come with you.
 
-- **Run agents on cloud machines.** Pick a worker for each run: a Cloud machine, a [Self-Hosted Pool](https://cursor.com/docs/cloud-agent/self-hosted-pool.md), or one of [My Machines](https://cursor.com/docs/cloud-agent/my-machines.md). Agents work in full development environments, so they install dependencies, run tests, and verify their changes.
+- **Run agents on cloud machines.** Pick a worker for each run: a Cloud machine, a [bring-your-own-machine pool](https://cursor.com/docs/cloud-agent/bring-your-own-machine/pools.md), or one of [My Machines](https://cursor.com/docs/cloud-agent/bring-your-own-machine/my-machines.md). Agents work in full development environments, so they install dependencies, run tests, and verify their changes.
 - **Use any model.** Choose any model available for cloud agents. Every run uses the model's maximum supported context window.
 - **Let agents run long.** Start a task, lock your phone, and check back later. Agents keep working in the cloud whether or not your device stays connected.
 - **Follow the work live.** Watch the chat stream as the agent codes, send follow-ups to a running agent, and tap a subagent card to read its child transcript.
@@ -107,7 +107,7 @@ Remote Control and its settings are only available in the [Agents Window](https:
 - **Enable Remote Control in Cursor.** In the Agents Window, turn it on under **Settings > Agents** before handing off a session.
 - **Enable it for your team.** On Teams and Enterprise plans, an admin must enable Remote Control from [Cursor Dashboard → Cloud Agents → Self-Hosted](https://cursor.com/dashboard/cloud-agents#self-hosted) before members can use it.
 - **Allow cloud data storage.** Remote Control isn't available when your privacy settings disable cloud data storage.
-- **Use a Git-backed workspace.** The workspace must have a Git remote. Local and Remote SSH workspaces are supported.
+- **Use a local or Remote SSH workspace.** Both workspace types are supported, and the project doesn't need a Git remote.
 - **Keep your computer available.** Your computer must stay awake and online because tool calls run on it. You can turn on **Keep this computer awake** under **Settings > Agents** to prevent sleep while the computer is plugged in.
 
 ### Hand off a session
@@ -140,7 +140,6 @@ For the trust boundaries that apply when tool calls run on your computer, see [S
 
 ### Current limitations
 
-- **Git-backed workspaces only.** Remote Control requires a workspace with a Git remote.
 - **Your computer must stay available.** Tool calls can't run while your computer is asleep or offline.
 
 ### Team controls

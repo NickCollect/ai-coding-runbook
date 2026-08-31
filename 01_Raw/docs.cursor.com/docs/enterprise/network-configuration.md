@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/network-configuration
-fetched_at: 2026-08-10T03:07:40.813237+00:00
+fetched_at: 2026-08-31T06:29:32.284594+00:00
 fetch_method: mintlify_md
 ---
 
@@ -96,7 +96,7 @@ We generally recommend allowlisting with the domain patterns above. However, if 
 - `api2.cursor.sh`: Used for most API requests.
 - `api5.cursor.sh`: Used for Cursor's agent requests.
 - `api3.cursor.sh`: Used for Cursor Tab requests (HTTP/2 only).
-- `repo42.cursor.sh`: Used for codebase indexing (HTTP/2 only).
+- `repo42.cursor.sh`: Used for codebase search (HTTP/2 only).
 - `api4.cursor.sh`, `us-asia.gcpp.cursor.sh`, `us-eu.gcpp.cursor.sh`, `us-only.gcpp.cursor.sh`: Used for Cursor Tab requests depending on your location (HTTP/2 only).
 - `adminportal42.cursor.sh`: Used to configure SSO and domain verification.
 - `marketplace.cursorapi.com`, `cursor-cdn.com`, `downloads.cursor.com`, `anysphere-binaries.s3.us-east-1.amazonaws.com`: Used for client updates and downloading extensions from the extension marketplace.
@@ -155,7 +155,7 @@ Some enterprises want to route LLM traffic through their own gateways for additi
 
 Custom gateways can introduce additional latency, rate limiting, and compatibility issues. We instead recommend using Cursor's built-in hooks feature to implement your own security controls.
 
-Cursor's [Zero Data Retention policy](https://cursor.com/docs/account/teams/dashboard.md#privacy-settings) does not apply when using your own API keys. Your data handling will be subject to the privacy policies of your chosen AI provider (OpenAI, Anthropic, Google, Azure, or AWS).
+Cursor's [Zero Data Retention policy](https://cursor.com/docs/account/teams/dashboard.md#settings) does not apply when using your own API keys. Your data handling will be subject to the privacy policies of your chosen AI provider (OpenAI, Anthropic, Google, Azure, or AWS).
 
 See [Hooks](https://cursor.com/docs/hooks.md) and [Security Guardrails](https://cursor.com/docs/enterprise/llm-safety-and-controls.md) for details.
 

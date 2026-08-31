@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/llm-safety-and-controls
-fetched_at: 2026-07-13T04:25:38.138627+00:00
+fetched_at: 2026-08-31T06:29:32.277657+00:00
 fetch_method: mintlify_md
 ---
 
@@ -113,7 +113,7 @@ The `.cursorignore` file works like `.gitignore` but controls what Cursor can ac
 
 - Users can manually read ignored files
 - Agents might find ways to access ignored content
-- It doesn't prevent file access, only excludes from indexing
+- Terminal commands and MCP tools can still read ignored files
 
 For true security, use file system permissions or encrypt sensitive data.
 

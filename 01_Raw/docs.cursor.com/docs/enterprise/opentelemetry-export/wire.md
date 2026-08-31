@@ -1,14 +1,10 @@
 ---
 source_url: https://cursor.com/docs/enterprise/opentelemetry-export/wire
-fetched_at: 2026-08-17T02:15:18.099462+00:00
+fetched_at: 2026-08-31T06:29:32.471490+00:00
 fetch_method: mintlify_md
 ---
 
 # OpenTelemetry Export Wire Reference
-
-### Beta
-
-OpenTelemetry Export is in beta, as is the companion [setup page](https://cursor.com/docs/enterprise/opentelemetry-export.md). This wire surface may change before general availability.
 
 Companion to [OpenTelemetry Export](https://cursor.com/docs/enterprise/opentelemetry-export.md). Full wire surface: every metric, log event, attribute, enum, and presence rule.
 

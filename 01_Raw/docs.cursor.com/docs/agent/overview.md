@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/overview
-fetched_at: 2026-08-24T02:18:35.814280+00:00
+fetched_at: 2026-08-31T06:29:30.663815+00:00
 fetch_method: mintlify_md
 ---
 
@@ -74,7 +74,7 @@ Ask clarifying questions during a task. While waiting for your response, the age
 
 Checkpoints save snapshots of your codebase during an Agent session. Agent automatically creates them before making significant changes, capturing the state of all modified files.
 
-If Agent takes a wrong turn, click any checkpoint in the chat timeline to preview your files at that point, then restore to revert all files to that state. You can also restore from the `Restore Checkpoint` button on previous requests or the + button when hovering over a message.
+If Agent takes a wrong turn, click any checkpoint in the chat timeline to preview your files at that point, then restore to revert all files to that state. You can also restore from the `Restore Checkpoint` button on previous requests or the + button when hovering over a message. Restoring a checkpoint reverts files only; it does not remove messages from the conversation.
 
 Checkpoints are useful for exploratory work, complex refactoring, and iterative development where you want safe rollback points.
 
@@ -115,7 +115,7 @@ You can send a follow-up to steer the agent while it's working, without interrup
 
 This is available on [cursor.com/agents](https://cursor.com/agents) now and rolling out in the [Agents Window](https://cursor.com/docs/agent/agents-window.md). Press Tab to queue the message for after the turn instead.
 
-In the [CLI](https://cursor.com/docs/cli.md), pressing Enter while the agent works steers the active run at a safe boundary, and pressing Enter again interrupts the turn.
+In the [CLI](https://cursor.com/docs/cli/overview.md), pressing Enter while the agent works steers the active run at a safe boundary, and pressing Enter again interrupts the turn.
 
 ## Goals with /goal
 
@@ -125,7 +125,7 @@ Agent reads each message as a new job. Use `/goal` to give the agent a long-live
 /goal fix all flaky tests and make CI green
 ```
 
-In the [CLI](https://cursor.com/docs/cli.md), Ctrl+C pauses the goal. Pair a goal with a [Custom Mode](https://cursor.com/docs/agent/prompting.md#custom-modes) when you want the agent to follow a playbook, or with the built-in [`/loop`](https://cursor.com/docs/skills.md#built-in-cursor-skills) skill for recurring check-ins while it pursues the objective.
+In the [CLI](https://cursor.com/docs/cli/overview.md), Ctrl+C pauses the goal. Pair a goal with a [Custom Mode](https://cursor.com/docs/agent/prompting.md#custom-modes) when you want the agent to follow a playbook, or with the built-in [`/loop`](https://cursor.com/docs/skills.md#built-in-cursor-skills) skill for recurring check-ins while it pursues the objective.
 
 `/goal` is rolling out. If you don't see it, try it in a new chat.
 

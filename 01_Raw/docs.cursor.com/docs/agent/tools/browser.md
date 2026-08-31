@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/tools/browser
-fetched_at: 2026-07-20T04:31:19.603194+00:00
+fetched_at: 2026-08-31T06:29:30.651058+00:00
 fetch_method: mintlify_md
 ---
 
@@ -192,6 +192,10 @@ The origin allowlist provides best-effort protection. Be aware of these behavior
 - **JavaScript navigation**: Client-side navigation (via `window.location` or similar) from an allowed origin to a non-allowed origin will succeed
 
 The origin allowlist restricts automatic agent navigation but cannot prevent all navigation paths. Review your allowlist regularly and consider the security implications of allowing access to domains that may redirect or link to external sites.
+
+## Related
+
+- [Browser tool help](https://cursor.com/help/ai-features/browser.md)
 
 
 ---

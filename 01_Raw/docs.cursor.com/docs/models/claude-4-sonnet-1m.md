@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/claude-4-sonnet-1m
-fetched_at: 2026-07-27T04:31:49.071005+00:00
+fetched_at: 2026-08-31T06:29:33.242941+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Claude 4 Sonnet 1M draws from the third-party **Other Models** pool, which charges at the rates below. Individual plans include at least $20 of third-party Other Models usage each month (more on higher tiers). All prices are per million tokens.
+Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Claude 4 Sonnet 1M draws from the third-party **Other Models** pool, which charges at the rates below. All prices are per million tokens.
 
 
 ---

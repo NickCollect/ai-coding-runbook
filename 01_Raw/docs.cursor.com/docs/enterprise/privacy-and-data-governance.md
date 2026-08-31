@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/privacy-and-data-governance
-fetched_at: 2026-08-10T03:07:40.918487+00:00
+fetched_at: 2026-08-31T06:29:32.472712+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ Privacy Mode is on by default for Enterprise teams. See [Privacy Overview](https
 
 ### 2. Cloud Agents
 
-Cloud Agents are the only feature that requires Cursor to store code. Unlike the indexing process or LLM requests, Cloud Agents need access to your repository over time to make changes.
+Cloud Agents are the only feature that requires Cursor to store code. Unlike LLM requests, Cloud Agents need access to your repository over time to make changes.
 
 **Architecture:**
 
@@ -81,7 +81,6 @@ For enhanced security control, enterprise customers can use Customer Managed Enc
 
 With CMEK enabled:
 
-- Embeddings are encrypted using your customer encryption key
 - Cloud Agent data is encrypted using your customer encryption key
 - You control key rotation and access
 - Provides additional layer of security beyond standard encryption
@@ -128,7 +127,7 @@ When US-only data residency is enabled for a team, the following stay on US-base
 - Data processing pipelines that handle your content
 - Storage of your Customer Data
 - Use of Cloud Agents, including inference, processing, and storage
-- Tab, editing, autocomplete, and semantic search
+- Tab, editing, and autocomplete
 
 **Traveling users:** If a user on a US-only team is abroad, their requests still route to US-only infrastructure. This may add latency.
 
@@ -163,7 +162,6 @@ No. Only the eligible model families listed under Model availability are support
 Some functionality depends on external services or on infrastructure Cursor doesn't control, so US data residency can't be provided for it:
 
 - **SSO / authentication** — Routes through Cursor's identity provider (WorkOS) regardless of region.
-- **Codebase indexing** — If your codebase is stored outside of the US, we cannot guarantee US-only indexing.
 - **Bring your own key (BYOK)** — US data residency is not supported for BYOK.
 - **Custom models** — A custom model reached via an OpenAI-compatible base URL override or a third-party gateway carries the region of that gateway or model, which may not be in the US.
 - **MCPs and external integrations** — `@Web` and user-configured MCPs or connectors are separate services, each with its own region.

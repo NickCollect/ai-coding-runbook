@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/claude-opus-4-7
-fetched_at: 2026-07-27T04:31:49.175282+00:00
+fetched_at: 2026-08-31T06:29:33.320845+00:00
 fetch_method: mintlify_md
 ---
 
@@ -28,7 +28,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Opus 4.7 draws from the third-party **Other Models** pool, which charges at the rates below. Individual plans include at least $20 of third-party Other Models usage each month (more on higher tiers). All prices are per million tokens.
+Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Opus 4.7 draws from the third-party **Other Models** pool, which charges at the rates below. All prices are per million tokens.
 
 All Opus 4.7 prompts bill at the base per-token rates in the table above, including when context goes above 300k. There is no separate long-context multiplier for Opus 4.7. Context windows up to 1M tokens use the same rates.
 

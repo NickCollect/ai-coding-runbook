@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/automations
-fetched_at: 2026-08-10T03:07:40.309850+00:00
+fetched_at: 2026-08-31T06:29:31.455589+00:00
 fetch_method: mintlify_md
 ---
 
@@ -271,6 +271,7 @@ Tips:
 - [Slack integration](https://cursor.com/docs/integrations/slack.md)
 - [Microsoft Teams integration](https://cursor.com/docs/integrations/microsoft-teams.md)
 - [Linear integration](https://cursor.com/docs/integrations/linear.md)
+- [Automations help](https://cursor.com/help/ai-features/automations.md)
 
 
 ---

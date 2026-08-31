@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/dashboard
-fetched_at: 2026-08-10T03:07:39.622806+00:00
+fetched_at: 2026-08-31T06:29:30.416838+00:00
 fetch_method: mintlify_md
 ---
 
@@ -100,7 +100,7 @@ policies for code execution.
 
 ### Repository Blocklist
 
-Prevent access to specific repositories for security or compliance reasons. Learn more in [Model and Integration Management](https://cursor.com/docs/enterprise/model-and-integration-management.md#repository-blocklist).
+Prevent access to specific repositories for security or compliance reasons. Learn more in [Model and Integration Management](https://cursor.com/docs/enterprise/model-and-integration-management.md#git-repository-blocklist).
 
 ### MCP Configuration
 

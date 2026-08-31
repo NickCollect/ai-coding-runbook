@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/claude-opus-4-8
-fetched_at: 2026-07-27T04:31:49.210248+00:00
+fetched_at: 2026-08-31T06:29:33.372554+00:00
 fetch_method: mintlify_md
 ---
 
@@ -28,7 +28,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Opus 4.8 draws from the third-party **Other Models** pool, which charges at the rates below. Individual plans include at least $20 of third-party Other Models usage each month (more on higher tiers). All prices are per million tokens.
+Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Opus 4.8 draws from the third-party **Other Models** pool, which charges at the rates below. All prices are per million tokens.
 
 A **Fast mode** tier (`claude-opus-4-8-fast`) is available for roughly 2.5x faster output. On legacy request-based plans, it requires Max Mode. It bills at $10/M input and $50/M output tokens, 3x lower than Opus 4.7 fast mode. Use it selectively for time-sensitive or critical work.
 

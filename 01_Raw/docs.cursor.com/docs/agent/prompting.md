@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/prompting
-fetched_at: 2026-08-24T02:18:35.839418+00:00
+fetched_at: 2026-08-31T06:29:30.571972+00:00
 fetch_method: mintlify_md
 ---
 
@@ -28,7 +28,7 @@ Pick the skill from the `/` menu and press Option+Enter (Mac) or Alt+Enter (Wind
 
 Custom Modes work well for skills that describe how to work rather than a one-shot task. Keep a code-review checklist active while you move through several files, or hold a team playbook like `/tdd` on for an entire feature.
 
-Custom Modes are available in the [Agents Window](https://cursor.com/docs/agent/agents-window.md) and the [CLI](https://cursor.com/docs/cli.md). Any skill with a valid frontmatter block can back a mode, and the optional `icon` and `color` frontmatter fields style the mode's badge. See [Using a skill as a Custom Mode](https://cursor.com/docs/skills.md#using-a-skill-as-a-custom-mode).
+Custom Modes are available in the [Agents Window](https://cursor.com/docs/agent/agents-window.md) and the [CLI](https://cursor.com/docs/cli/overview.md). Any skill with a valid frontmatter block can back a mode, and the optional `icon` and `color` frontmatter fields style the mode's badge. See [Using a skill as a Custom Mode](https://cursor.com/docs/skills.md#using-a-skill-as-a-custom-mode).
 
 ## Image input
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/security-network
-fetched_at: 2026-08-17T02:15:17.916925+00:00
+fetched_at: 2026-08-31T06:29:31.776036+00:00
 fetch_method: mintlify_md
 ---
 
@@ -114,11 +114,11 @@ For private GitHub Enterprise Server, GitLab Enterprise, source control APIs, pa
 
 Three modes control outbound network access for Cloud Agents:
 
-| Mode                         | Behavior                                                                                                                                                            |
-| :--------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Allow all network access** | Cloud Agents can reach any external host. No domain restrictions apply.                                                                                             |
-| **Default + allowlist**      | Cloud Agents can reach the [default domains](https://cursor.com/docs/agent/tools/terminal.md#default-network-allowlist) plus any domains you add to your allowlist. |
-| **Allowlist only**           | Cloud Agents can only reach the domains you explicitly add to your allowlist.                                                                                       |
+| Mode                         | Behavior                                                                                                                                                     |
+| :--------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Allow all network access** | Cloud Agents can reach any external host. No domain restrictions apply.                                                                                      |
+| **Default + allowlist**      | Cloud Agents can reach the [default domains](https://cursor.com/docs/agent/security/run-modes.md#network-access) plus any domains you add to your allowlist. |
+| **Allowlist only**           | Cloud Agents can only reach the domains you explicitly add to your allowlist.                                                                                |
 
 Even in **Allowlist only** mode, a small set of domains remain accessible so Cloud Agents can function. These include Cursor's own services and source control management (SCM) providers.
 
@@ -151,7 +151,7 @@ You can also set an environment directly to **Allow all network access**, **Defa
 
 ### Team-level settings
 
-Team admins can set a default network access mode for the entire team from the same dashboard. The team-level allowlist is the same allowlist that admins configure for the [sandbox default network allowlist](https://cursor.com/docs/agent/tools/terminal.md#default-network-allowlist). There is no separate allowlist to manage; one allowlist controls both Cloud Agent network access and the sandbox defaults.
+Team admins can set a default network access mode for the entire team from the same dashboard. The team-level allowlist is the same allowlist that admins configure for the [sandbox default network allowlist](https://cursor.com/docs/agent/security/run-modes.md#network-access). There is no separate allowlist to manage; one allowlist controls both Cloud Agent network access and the sandbox defaults.
 
 When a team-level setting exists:
 
@@ -172,7 +172,7 @@ This gives admins full control over Cloud Agent network access across the organi
 
 ### Relationship to sandbox network policy
 
-The "Default" domains in the **Default + allowlist** mode are the same [default network allowlist](https://cursor.com/docs/agent/tools/terminal.md#default-network-allowlist) used by the desktop Agent's sandbox. The team-level allowlist is also shared: when an admin configures an allowlist on the dashboard, it applies to both Cloud Agent network access and the [sandbox network policy](https://cursor.com/docs/reference/sandbox.md).
+The "Default" domains in the **Default + allowlist** mode are the same [default network allowlist](https://cursor.com/docs/agent/security/run-modes.md#network-access) used by the desktop Agent's sandbox. The team-level allowlist is also shared: when an admin configures an allowlist on the dashboard, it applies to both Cloud Agent network access and the [sandbox network policy](https://cursor.com/docs/reference/sandbox.md).
 
 ## Egress IP ranges
 
@@ -239,9 +239,9 @@ If you need to add the proxy IPs directly to an allowlist, use these addresses:
 52.44.113.131
 ```
 
-### Cursor Review IPs
+### Origin IPs
 
-If your team uses Cloud Agents alongside [Cursor Review](https://cursor.com/docs/review.md), allowlist these additional IPs on top of the git egress proxy IPs above:
+If your team uses Cloud Agents alongside [Origin](https://cursor.com/docs/origin.md), allowlist these additional IPs on top of the git egress proxy IPs above:
 
 ```text
 34.192.39.182

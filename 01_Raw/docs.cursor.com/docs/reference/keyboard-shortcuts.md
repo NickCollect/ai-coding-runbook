@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/reference/keyboard-shortcuts
-fetched_at: 2026-05-05T19:55:43.452165+00:00
+fetched_at: 2026-08-31T06:29:33.963097+00:00
 fetch_method: mintlify_md
 ---
 
@@ -90,6 +90,10 @@ Shortcuts for the chat input box.
 | Cmd K      | Open terminal prompt bar |
 | Cmd Return | Run generated command    |
 | Escape     | Accept command           |
+
+## Related
+
+- [Keyboard shortcuts help](https://cursor.com/help/customization/keyboard-shortcuts.md)
 
 
 ---

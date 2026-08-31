@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/azure-devops
-fetched_at: 2026-08-24T02:18:37.430051+00:00
+fetched_at: 2026-08-31T06:29:32.584151+00:00
 fetch_method: mintlify_md
 ---
 
@@ -39,19 +39,31 @@ To disconnect your Azure DevOps account, return to the integrations dashboard an
 
 Bugbot on Azure DevOps is in limited availability. Setup needs a Microsoft Entra ID administrator to grant tenant admin consent, and we walk you through that step. [Contact us](https://cursor.com/contact-sales?source=docs-bugbot-azure-devops) to get started.
 
-Bugbot reviews Azure DevOps pull requests under a Microsoft Entra service principal that Cursor provisions in your tenant. That service principal installs the service hooks Bugbot listens to, reads pull request diffs, and posts review comments and build statuses. Setup runs once per Azure DevOps organization.
+Bugbot reviews Azure DevOps pull requests under a Microsoft Entra service principal that Cursor provisions in your tenant. That service principal installs the service hooks Bugbot listens to, reads pull request diffs, and posts review comments and build statuses. Setup runs once per Azure DevOps organization, in this order:
+
+1. A **Project Collection Administrator** connects Azure DevOps from [Integrations in the dashboard](https://cursor.com/dashboard/integrations) and turns Bugbot on for a repository in [Bugbot in Automations](https://cursor.com/automations/from-cursor/bugbot). This discovers your organization's Entra tenant and provisions the Cursor service principal automatically. Provisioning needs the one-time [Microsoft Entra admin consent](https://cursor.com/docs/integrations/azure-devops.md#grant-microsoft-entra-admin-consent).
+2. A **project administrator** adds the Cursor service principal to the **Project Administrators** group of [each project you want reviewed](https://cursor.com/docs/integrations/azure-devops.md#add-the-service-principal-to-your-projects). Bugbot needs project administration to manage its service hooks.
+3. Azure DevOps applies permission changes with a delay of some minutes. A toggle that fails right after a permission change can succeed unchanged a few minutes later.
+
+When a step is missing, the repository toggle fails with an error that names the missing step. Fix it, then turn the repository on again.
 
 Bugbot on Azure DevOps works on team repositories. Personal-scope repositories aren't supported.
 
 ### Grant Microsoft Entra admin consent
 
-Requires a Microsoft Entra ID administrator holding the Global Administrator, Application Administrator, or Cloud Application Administrator role. Consent applies to the whole tenant, so a repository administrator alone can't complete it.
+Before Cursor's service principal can exist in your directory, a Microsoft Entra ID administrator must grant tenant admin consent once. Consent requires the Global Administrator, Application Administrator, or Cloud Application Administrator role. It applies to the whole tenant, so a repository administrator alone can't complete it.
 
-1. Connect Azure DevOps from [Integrations in the dashboard](https://cursor.com/dashboard/integrations) while signed in as an administrator of the Azure DevOps organization
-2. Ask your Entra administrator to grant admin consent for the Cursor application in your tenant
-3. Tell your Cursor contact once consent is granted
+The enable error tells you when consent is missing. You can also build the consent link yourself:
 
-Cursor asks for access to the Azure DevOps API, plus the standard sign-in scopes. It asks for no Microsoft Graph data. Your tenant keeps the service principal, and you can revoke it in Entra at any time.
+```text
+https://login.microsoftonline.com/{your-tenant-id}/v2.0/adminconsent?client_id=29df4809-337a-4255-bd57-d4a1476b0e65&redirect_uri=https://cursor.com/azure-devops-connected&scope=499b84ac-1321-427f-aa17-267ca6975798/.default%20offline_access%20openid%20profile
+```
+
+Replace `{your-tenant-id}` with your tenant ID from the [Microsoft Entra admin center](https://entra.microsoft.com). The `client_id` is Cursor's application ID. The `scope` covers the Azure DevOps API (`499b84ac-1321-427f-aa17-267ca6975798` is Microsoft's identifier for it) plus the standard sign-in scopes. Cursor asks for no Microsoft Graph data. Your tenant keeps the service principal, and you can revoke it in Entra at any time.
+
+After your administrator consents, Microsoft returns them to `cursor.com/azure-devops-connected`, and the page confirms the grant. The grant lives in your tenant, so the next repository enable completes setup.
+
+An earlier consent covers only the permissions Cursor requested at that time. If Cursor has added a permission since your tenant consented, setup fails partway, and reconnecting doesn't fix it. Open the consent link again to refresh the grant.
 
 Azure DevOps organizations backed by a personal Microsoft account can't host the service principal. Connect the organization to Microsoft Entra ID first.
 
@@ -59,11 +71,16 @@ Azure DevOps organizations backed by a personal Microsoft account can't host the
 
 After consent, Cursor adds the service principal to your Azure DevOps organization and requests a Basic access level for it. Both happen automatically, using the administrator account that connected Azure DevOps. The service principal then appears under **Organization settings** → **Users**.
 
-Three things can stop that:
+Two things can stop that:
 
 - **The connected account can't add users to the organization.** Reconnect Azure DevOps as an administrator of the organization.
 - **No Basic access level is available.** Free a Basic seat, or assign one to the service principal under **Organization settings** → **Users**.
-- **The service principal can't read the repository.** Grant it Read permission on that repository under **Project settings** → **Repositories** → **Security**.
+
+### Add the service principal to your projects
+
+Service hooks are how Azure DevOps notifies Bugbot about pull requests, and only project administrators can manage them. Add the Cursor service principal to the **Project Administrators** group of each project you want reviewed, under **Project settings** → **Permissions**. Repository read access is not enough.
+
+Permission changes can take a few minutes to apply, so a toggle that fails right after the grant can succeed unchanged a few minutes later.
 
 ### Enable Bugbot on repositories
 
@@ -77,7 +94,7 @@ Bugbot installs its service hooks when you turn a repository on, and removes the
 
 Bugbot reviews each pull request as it opens and updates. Someone can also ask for a review on demand by commenting `cursor review` or `bugbot run`.
 
-Comment triggers have one Azure DevOps limit. They work for people whose Azure DevOps sign-in address matches a Cursor account in the team that owns the repository. A comment from anyone else is ignored without a reply. Automatic reviews carry no such limit, and they cover every author.
+Comment triggers have one Azure DevOps limit. They work for people whose Azure DevOps sign-in address matches a Cursor account in the team that owns the repository. A comment from anyone else doesn't start a review. Automatic reviews carry no such limit, and they cover every author.
 
 ### Filter which authors get reviewed
 
@@ -112,7 +129,7 @@ If Cursor reports it could not remove the earlier setup, remove it yourself:
 2. Delete the Cursor **Web Hooks** subscriptions that deliver to `https://api2.cursor.sh/azure_devops_webhook`
 3. Turn the repository on again in [Bugbot in Automations](https://cursor.com/automations/from-cursor/bugbot)
 
-The new setup prerequisites apply after migration. Your tenant needs the one-time [Microsoft Entra admin consent](https://cursor.com/docs/integrations/azure-devops.md#grant-microsoft-entra-admin-consent), and the service principal needs [a Basic access level in your organization](https://cursor.com/docs/integrations/azure-devops.md#give-the-service-principal-access-to-your-organization).
+The new setup prerequisites apply after migration. Your tenant needs the one-time [Microsoft Entra admin consent](https://cursor.com/docs/integrations/azure-devops.md#grant-microsoft-entra-admin-consent), and the service principal needs [a Basic access level in your organization](https://cursor.com/docs/integrations/azure-devops.md#give-the-service-principal-access-to-your-organization) and membership in [each project's Project Administrators group](https://cursor.com/docs/integrations/azure-devops.md#add-the-service-principal-to-your-projects).
 
 ## Repository URLs
 
@@ -166,7 +183,7 @@ Use the `dev.azure.com` repository URL from Azure DevOps. Cursor does not accept
 
 - Confirm the repository is turned on in [Bugbot in Automations](https://cursor.com/automations/from-cursor/bugbot).
 - Confirm the repository belongs to a Cursor team. Bugbot on Azure DevOps doesn't review personal-scope repositories.
-- Confirm the Cursor service principal can read the repository under **Project settings** → **Repositories** → **Security**.
+- Confirm the Cursor service principal is in the project's **Project Administrators** group under **Project settings** → **Permissions**.
 - If you filter authors, confirm the pull request author is listed by Azure DevOps sign-in address rather than username.
 
 ### Commenting on a pull request doesn't trigger a review

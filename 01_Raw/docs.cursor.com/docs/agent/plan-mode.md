@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/plan-mode
-fetched_at: 2026-05-05T19:55:36.406201+00:00
+fetched_at: 2026-08-31T06:29:30.550868+00:00
 fetch_method: mintlify_md
 ---
 
@@ -43,6 +43,10 @@ For larger changes, spend extra time creating a precise, well-scoped plan. The h
 
 - Use the mode picker dropdown in Agent
 - Press Shift+Tab for quick switching
+
+## Related
+
+- [Plan mode help](https://cursor.com/help/ai-features/plan-mode.md)
 
 
 ---
