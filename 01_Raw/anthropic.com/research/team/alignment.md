@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/alignment
-fetched_at: 2026-07-13T04:26:47.302897+00:00
+fetched_at: 2026-08-31T06:29:37.931704+00:00
 title: "Alignment Research \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ title: "Alignment Research \\ Anthropic"
 
 Future AI systems will be even more powerful than today’s, likely in ways that break key assumptions behind current safety techniques. That’s why it’s important to develop sophisticated safeguards to ensure models remain helpful, honest, and harmless. The Alignment team works to understand the challenges ahead and create protocols to train, evaluate, and monitor highly-capable models safely.
 
-Research teams:[Alignment](https://www.anthropic.com/research/team/alignment)[Economic Research](https://www.anthropic.com/research/team/economic-research)[Interpretability](https://www.anthropic.com/research/team/interpretability)[Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)[Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
+Research teams:[Alignment](https://www.anthropic.com/research/team/alignment)[Economics](https://www.anthropic.com/research/team/economics)[Interpretability](https://www.anthropic.com/research/team/interpretability)[Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)[Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
 
 ![Video thumbnail](https://cdn.sanity.io/images/4zrzovbb/website/c351e05137a3da7d475af1c36f705cb4ff4b2179-1440x810.png)
 
@@ -54,6 +54,9 @@ Search
 
 DateCategoryTitle
 
+- [Aug 28, 2026Alignment
+
+  Automated researchers can reliably mitigate alignment failures](https://www.anthropic.com/research/automated-researchers-mitigate-alignment-failures)
 - [Jul 8, 2026Alignment
 
   An off switch for dual-use knowledge in AI models](https://www.anthropic.com/research/off-switch-dual-use)
@@ -81,9 +84,6 @@ DateCategoryTitle
 - [Jan 9, 2026Alignment
 
   Next-generation Constitutional Classifiers: More efficient protection against universal jailbreaks](https://www.anthropic.com/research/next-generation-constitutional-classifiers)
-- [Dec 19, 2025Alignment
-
-  Introducing Bloom: an open source tool for automated behavioral evaluations](https://www.anthropic.com/research/bloom)
 
 [See more](#)
 

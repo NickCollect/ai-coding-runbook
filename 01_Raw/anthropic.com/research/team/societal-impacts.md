@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/societal-impacts
-fetched_at: 2026-07-20T04:33:11.415160+00:00
+fetched_at: 2026-08-31T06:29:38.290231+00:00
 title: "Societal Impacts Research \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ title: "Societal Impacts Research \\ Anthropic"
 
 Working closely with the Anthropic Policy and Safeguards teams, Societal Impacts is a technical research team that explores how AI is used in the real world.
 
-Research teams:[Alignment](https://www.anthropic.com/research/team/alignment)[Economic Research](https://www.anthropic.com/research/team/economic-research)[Interpretability](https://www.anthropic.com/research/team/interpretability)[Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)[Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
+Research teams:[Alignment](https://www.anthropic.com/research/team/alignment)[Economics](https://www.anthropic.com/research/team/economics)[Interpretability](https://www.anthropic.com/research/team/interpretability)[Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)[Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
 
 ![Video thumbnail](https://cdn.sanity.io/images/4zrzovbb/website/4f268223739d63a56f89b21a45559ba82392e8e0-1280x720.jpg)
 
@@ -54,6 +54,9 @@ Search
 
 DateCategoryTitle
 
+- [Aug 26, 2026Societal Impacts
+
+  Enabling independent research on how people use Claude](https://www.anthropic.com/research/enabling-independent-research)
 - [Jul 13, 2026Societal Impacts
 
   Claude’s values across models and languages](https://www.anthropic.com/research/claude-values-models-languages)
@@ -81,9 +84,6 @@ DateCategoryTitle
 - [Apr 21, 2025Societal Impacts
 
   Values in the wild: Discovering and analyzing values in real-world language model interactions](https://www.anthropic.com/research/values-wild)
-- [Apr 8, 2025Announcements
-
-  Anthropic Education Report: How university students use Claude](https://www.anthropic.com/news/anthropic-education-report-how-university-students-use-claude)
 
 [See more](#)
 

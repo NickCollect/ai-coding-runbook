@@ -1,7 +1,7 @@
 ---
 source_url: https://www.anthropic.com/research/team/frontier-red-team
-fetched_at: 2026-08-17T02:15:22.728073+00:00
-title: "Frontier Red Team \\ Anthropic"
+fetched_at: 2026-08-31T06:29:38.098966+00:00
+title: "Frontier Red Team Research \\ Anthropic"
 ---
 
 [Back to Overview](https://www.anthropic.com/research)
@@ -10,7 +10,7 @@ title: "Frontier Red Team \\ Anthropic"
 
 The Frontier Red Team stress-tests AI systems to understand the full extent of their current capabilities and anticipate what comes next. We provide evidence-based analysis about AI’s implications for cybersecurity, national security, and autonomous systems.
 
-Research teams:[Alignment](https://www.anthropic.com/research/team/alignment)[Economic Research](https://www.anthropic.com/research/team/economic-research)[Interpretability](https://www.anthropic.com/research/team/interpretability)[Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)[Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
+Research teams:[Alignment](https://www.anthropic.com/research/team/alignment)[Economics](https://www.anthropic.com/research/team/economics)[Interpretability](https://www.anthropic.com/research/team/interpretability)[Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)[Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
 
 Frontier Red Team
 

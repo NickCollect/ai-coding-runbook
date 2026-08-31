@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/interpretability
-fetched_at: 2026-07-13T04:26:46.770830+00:00
+fetched_at: 2026-08-31T06:29:38.082843+00:00
 title: "Interpretability Research \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ title: "Interpretability Research \\ Anthropic"
 
 The mission of the Interpretability team is to discover and understand how large language models work internally, as a foundation for AI safety and positive outcomes.
 
-Research teams:[Alignment](https://www.anthropic.com/research/team/alignment)[Economic Research](https://www.anthropic.com/research/team/economic-research)[Interpretability](https://www.anthropic.com/research/team/interpretability)[Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)[Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
+Research teams:[Alignment](https://www.anthropic.com/research/team/alignment)[Economics](https://www.anthropic.com/research/team/economics)[Interpretability](https://www.anthropic.com/research/team/interpretability)[Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)[Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
 
 ![Video thumbnail](https://cdn.sanity.io/images/4zrzovbb/website/27748c7d4c470d931ef828085ecb870d6a41f0e9-1440x810.png)
 
