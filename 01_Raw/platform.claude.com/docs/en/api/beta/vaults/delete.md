@@ -1,25 +1,20 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/vaults/delete
-fetched_at: 2026-08-24T02:18:43.726765+00:00
+fetched_at: 2026-08-31T06:29:39.317948+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Delete Vault
-url: https://platform.claude.com/docs/en/api/beta/vaults/delete
----
+# Delete Vault
 
-## Delete Vault
-
-**delete** `/v1/vaults/{vault_id}`
+**DELETE** `/v1/vaults/{vault_id}`
 
 Delete Vault
 
-### Path Parameters
+## Path parameters
 
 - `vault_id: string`
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -27,7 +22,7 @@ Delete Vault
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -97,9 +92,23 @@ Delete Vault
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+    - `"compact-2026-01-12"`
 
-- `BetaManagedAgentsDeletedVault object { id, type }`
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Returns
+
+- `BetaManagedAgentsDeletedVault object`
 
   Confirmation of a deleted vault.
 
@@ -109,11 +118,9 @@ Delete Vault
 
   - `type: "vault_deleted"`
 
-    - `"vault_deleted"`
+## Example
 
-### Example
-
-```http
+```bash
 curl https://api.anthropic.com/v1/vaults/$VAULT_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
@@ -121,7 +128,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

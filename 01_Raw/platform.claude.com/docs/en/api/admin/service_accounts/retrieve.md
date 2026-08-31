@@ -1,27 +1,22 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/service_accounts/retrieve
-fetched_at: 2026-08-17T02:15:23.584008+00:00
+fetched_at: 2026-08-31T06:29:45.767473+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Get Service Account
-url: https://platform.claude.com/docs/en/api/admin/service_accounts/retrieve
----
+# Get Service Account
 
-## Get Service Account
-
-**get** `/v1/organizations/service_accounts/{service_account_id}`
+**GET** `/v1/organizations/service_accounts/{service_account_id}`
 
 Retrieve a service account by its ID (`svac_...`).
 
-### Path Parameters
+## Path parameters
 
 - `service_account_id: string`
 
   ID of the service account.
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of string`
 
@@ -29,9 +24,9 @@ Retrieve a service account by its ID (`svac_...`).
 
   To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-### Returns
+## Returns
 
-- `ServiceAccount object { id, archived_at, archived_by_actor_id, 8 more }`
+- `ServiceAccount object`
 
   Named non-human identity within the caller's organization.
 
@@ -46,6 +41,8 @@ Retrieve a service account by its ID (`svac_...`).
 
     If set, this service account is archived.
 
+    format: date-time
+
   - `archived_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that archived this service account.
@@ -53,6 +50,8 @@ Retrieve a service account by its ID (`svac_...`).
   - `created_at: string`
 
     When this service account was created.
+
+    format: date-time
 
   - `created_by_actor_id: string or null`
 
@@ -76,25 +75,27 @@ Retrieve a service account by its ID (`svac_...`).
 
   - `type: "service_account"`
 
-    - `"service_account"`
+    default: service_account
 
   - `updated_at: string`
 
     When this service account was last updated.
 
+    format: date-time
+
   - `updated_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUNT_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

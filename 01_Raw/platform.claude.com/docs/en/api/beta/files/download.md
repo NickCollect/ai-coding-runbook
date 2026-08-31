@@ -1,27 +1,22 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/files/download
-fetched_at: 2026-08-24T02:18:44.664284+00:00
+fetched_at: 2026-08-31T06:29:40.131042+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Download File
-url: https://platform.claude.com/docs/en/api/beta/files/download
----
+# Download File
 
-## Download File
-
-**get** `/v1/files/{file_id}/content`
+**GET** `/v1/files/{file_id}/content`
 
 Download File
 
-### Path Parameters
+## Path parameters
 
 - `file_id: string`
 
   ID of the File.
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -29,7 +24,7 @@ Download File
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -99,11 +94,24 @@ Download File
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Example
+    - `"compact-2026-01-12"`
 
-```http
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Example
+
+```bash
 curl https://api.anthropic.com/v1/files/$FILE_ID/content \
     -H 'anthropic-version: 2023-06-01' \
-    -H 'anthropic-beta: files-api-2025-04-14' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```

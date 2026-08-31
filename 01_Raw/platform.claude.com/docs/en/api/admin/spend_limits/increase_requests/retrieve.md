@@ -1,36 +1,31 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/spend_limits/increase_requests/retrieve
-fetched_at: 2026-08-17T02:15:23.408418+00:00
+fetched_at: 2026-08-31T06:29:45.502560+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Get Spend Limit Increase Request
-url: https://platform.claude.com/docs/en/api/admin/spend_limits/increase_requests/retrieve
----
+# Get Spend Limit Increase Request
 
-## Get Spend Limit Increase Request
-
-**get** `/v1/organizations/spend_limit_increase_requests/{spend_limit_increase_request_id}`
+**GET** `/v1/organizations/spend_limit_increase_requests/{spend_limit_increase_request_id}`
 
 Retrieve a spend limit increase request.
 
 While `pending`, the response includes a live `spend_summary` for the
 requester at the request's period.
 
-### Path Parameters
+## Path parameters
 
 - `spend_limit_increase_request_id: string`
 
   ID of the spend limit increase request.
 
-### Returns
+## Returns
 
-- `SpendLimitIncreaseRequest object { id, actor, created_at, 6 more }`
+- `SpendLimitIncreaseRequest object`
 
   - `id: string`
 
-  - `actor: object { deleted, email_address, name, 2 more }`
+  - `actor: object`
 
     A user within the organization. `name` and `email_address` are
     null when the underlying account is unavailable or has been deleted;
@@ -38,17 +33,31 @@ requester at the request's period.
 
     - `deleted: boolean`
 
+      True only when the underlying account has been deleted.
+
+      default: false
+
     - `email_address: string or null`
+
+      The user's email address. Null when the account is unavailable or has been deleted.
 
     - `name: string or null`
 
+      The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
+
     - `type: "user_actor"`
 
-      - `"user_actor"`
+      Actor type. Always `user_actor`.
+
+      default: user_actor
 
     - `user_id: string`
 
+      Tagged ID of the user.
+
   - `created_at: string`
+
+    format: date-time
 
   - `period: "daily" or "monthly" or "weekly"`
 
@@ -60,13 +69,15 @@ requester at the request's period.
 
   - `resolved_at: string or null`
 
-  - `resolved_by: object { deleted, email_address, name, 2 more }  or object { scoped_api_key_id, type }  or null`
+    format: date-time
+
+  - `resolved_by: object or object or null`
 
     A user within the organization. `name` and `email_address` are
     null when the underlying account is unavailable or has been deleted;
     `deleted` is true only for deleted accounts.
 
-    - `UserActor object { deleted, email_address, name, 2 more }`
+    - `UserActor object`
 
       A user within the organization. `name` and `email_address` are
       null when the underlying account is unavailable or has been deleted;
@@ -74,17 +85,29 @@ requester at the request's period.
 
       - `deleted: boolean`
 
+        True only when the underlying account has been deleted.
+
+        default: false
+
       - `email_address: string or null`
+
+        The user's email address. Null when the account is unavailable or has been deleted.
 
       - `name: string or null`
 
+        The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
+
       - `type: "user_actor"`
 
-        - `"user_actor"`
+        Actor type. Always `user_actor`.
+
+        default: user_actor
 
       - `user_id: string`
 
-    - `ScopedAPIKeyActor object { scoped_api_key_id, type }`
+        Tagged ID of the user.
+
+    - `ScopedAPIKeyActor object`
 
       A scoped Admin API key acting on behalf of the organization.
 
@@ -92,13 +115,13 @@ requester at the request's period.
 
       - `type: "scoped_api_key_actor"`
 
-        - `"scoped_api_key_actor"`
+        default: scoped_api_key_actor
 
   - `spend_summary: SpendSummary or null`
 
-    Per-member effective-limit report row (GET /spend_limits/effective).
+    Per-member effective-limit report row (`GET /spend_limits/effective`).
 
-    - `actor: object { deleted, email_address, name, 2 more }`
+    - `actor: object`
 
       A user within the organization. `name` and `email_address` are
       null when the underlying account is unavailable or has been deleted;
@@ -106,15 +129,27 @@ requester at the request's period.
 
       - `deleted: boolean`
 
+        True only when the underlying account has been deleted.
+
+        default: false
+
       - `email_address: string or null`
+
+        The user's email address. Null when the account is unavailable or has been deleted.
 
       - `name: string or null`
 
+        The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
+
       - `type: "user_actor"`
 
-        - `"user_actor"`
+        Actor type. Always `user_actor`.
+
+        default: user_actor
 
       - `user_id: string`
+
+        Tagged ID of the user.
 
     - `amount: string or null`
 
@@ -126,6 +161,8 @@ requester at the request's period.
 
     - `period: "daily" or "monthly" or "weekly"`
 
+      Period this row's effective limit and spend are reported for.
+
       - `"daily"`
 
       - `"monthly"`
@@ -136,53 +173,67 @@ requester at the request's period.
 
       The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
-    - `scope: object { type, user_id }`
+    - `scope: object`
+
+      Scope selecting a single member of the organization.
 
       - `type: "user"`
 
-        - `"user"`
+        Scope type. Always `user` for this scope.
+
+        default: user
 
       - `user_id: string`
 
-    - `source: object { type, user_id }  or object { seat_tier, type }  or object { rbac_group_id, type }  or 2 more`
+        Tagged ID of the member the spend limit applies to.
 
-      - `User object { type, user_id }`
+    - `source: object or object or object or 2 more`
+
+      Scope selecting a single member of the organization.
+
+      - `User object`
+
+        Scope selecting a single member of the organization.
 
         - `type: "user"`
 
-          - `"user"`
+          Scope type. Always `user` for this scope.
+
+          default: user
 
         - `user_id: string`
 
-      - `SeatTier object { seat_tier, type }`
+          Tagged ID of the member the spend limit applies to.
+
+      - `SeatTier object`
 
         - `seat_tier: string`
 
         - `type: "seat_tier"`
 
-          - `"seat_tier"`
+          default: seat_tier
 
-      - `RbacGroup object { rbac_group_id, type }`
+      - `RbacGroup object`
 
         - `rbac_group_id: string`
 
         - `type: "rbac_group"`
 
-          - `"rbac_group"`
+          default: rbac_group
 
-      - `OrganizationService object { service, type }`
+      - `OrganizationService object`
 
         - `service: string`
 
         - `type: "organization_service"`
 
-          - `"organization_service"`
+          default: organization_service
 
-      - `Organization object { type }`
+      - `Organization object`
 
         - `type: "organization"`
 
-          - `"organization"`
+          default: organization
 
     - `spend_limit_id: string`
 
@@ -196,17 +247,17 @@ requester at the request's period.
 
   - `type: "spend_limit_increase_request"`
 
-    - `"spend_limit_increase_request"`
+    default: spend_limit_increase_request
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$SPEND_LIMIT_INCREASE_REQUEST_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {
@@ -216,7 +267,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
     "email_address": "email_address",
     "name": "name",
     "type": "user_actor",
-    "user_id": "user_id"
+    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
   },
   "created_at": "2019-12-27T18:11:19.117Z",
   "period": "monthly",
@@ -226,7 +277,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
     "email_address": "email_address",
     "name": "name",
     "type": "user_actor",
-    "user_id": "user_id"
+    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
   },
   "spend_summary": {
     "actor": {
@@ -234,7 +285,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
       "email_address": "email_address",
       "name": "name",
       "type": "user_actor",
-      "user_id": "user_id"
+      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
     },
     "amount": "50000",
     "currency": "USD",
@@ -242,11 +293,11 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
     "period_to_date_spend": "12050.5",
     "scope": {
       "type": "user",
-      "user_id": "user_id"
+      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
     },
     "source": {
       "type": "user",
-      "user_id": "user_id"
+      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
     },
     "spend_limit_id": "spend_limit_id"
   },

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool
-fetched_at: 2026-08-24T02:18:36.421265+00:00
+fetched_at: 2026-08-31T06:29:31.652150+00:00
 fetch_method: mintlify_md
 ---
 
@@ -69,7 +69,7 @@ Dynamic filtering runs web search from inside [code execution](https://platform.
 To call web search directly, without dynamic filtering, set `allowed_callers: ["direct"]`. Models that don't support programmatic tool calling require this setting. Without it, the API returns a 400 error that tells you to set it.
 
 <Note>
-  The web search tool (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry). On Microsoft Foundry, web search requires a [Hosted on Anthropic deployment](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry#additional-features-not-supported-when-hosted-on-azure). On Google Cloud, only the basic web search tool (without dynamic filtering) is available. Web search is not available on Amazon Bedrock.
+  The web search tool (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry). On Microsoft Foundry, deployments [hosted on Azure](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry#additional-features-not-supported-when-hosted-on-azure) support only the basic web search tool (`web_search_20250305`, without dynamic filtering). Deployments hosted on Anthropic support all versions. On Google Cloud, only the basic web search tool (without dynamic filtering) is available. Web search is not available on Amazon Bedrock.
 </Note>
 
 The following examples use `web_search_20260318`:

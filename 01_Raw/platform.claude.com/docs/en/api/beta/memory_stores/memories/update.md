@@ -1,27 +1,22 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/memory_stores/memories/update
-fetched_at: 2026-08-24T02:18:44.419790+00:00
+fetched_at: 2026-08-31T06:29:39.952954+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Update a memory
-url: https://platform.claude.com/docs/en/api/beta/memory_stores/memories/update
----
+# Update a memory
 
-## Update a memory
-
-**post** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+**POST** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
 Update a memory
 
-### Path Parameters
+## Path parameters
 
 - `memory_store_id: string`
 
 - `memory_id: string`
 
-### Query Parameters
+## Query parameters
 
 - `view: optional BetaManagedAgentsMemoryView`
 
@@ -31,7 +26,7 @@ Update a memory
 
   - `"full"`
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -39,7 +34,7 @@ Update a memory
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -109,7 +104,21 @@ Update a memory
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Body Parameters
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Body parameters
 
 - `content: optional string or null`
 
@@ -119,21 +128,21 @@ Update a memory
 
   New path for the memory (a rename). Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, and must be NFC-normalized. Paths are case-sensitive. The memory's `id` is preserved across renames. Omit to leave the path unchanged.
 
+  minLength: 2, maxLength: 1024
+
 - `precondition: optional BetaManagedAgentsPrecondition`
 
   Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
 
   - `type: "content_sha256"`
 
-    - `"content_sha256"`
-
   - `content_sha256: optional string`
 
     Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
 
-### Returns
+## Returns
 
-- `BetaManagedAgentsMemory object { id, content_sha256, content_size_bytes, 7 more }`
+- `BetaManagedAgentsMemory object`
 
   A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
@@ -149,9 +158,13 @@ Update a memory
 
     Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
+    format: int32
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `memory_store_id: string`
 
@@ -159,7 +172,7 @@ Update a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list).
 
   - `path: string`
 
@@ -167,19 +180,19 @@ Update a memory
 
   - `type: "memory"`
 
-    - `"memory"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `content: optional string or null`
 
     The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMORY_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -188,7 +201,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
     -d '{}'
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

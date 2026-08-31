@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy
-fetched_at: 2026-08-24T02:18:37.534503+00:00
+fetched_at: 2026-08-31T06:29:32.768603+00:00
 fetch_method: mintlify_md
 ---
 
@@ -60,14 +60,14 @@ Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries
   <Tab title="Java">
     <CodeGroup>
       ```groovy Gradle
-      implementation("com.anthropic:anthropic-java-bedrock:2.57.0")
+      implementation("com.anthropic:anthropic-java-bedrock:2.58.0")
       ```
 
       ```xml Maven
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java-bedrock</artifactId>
-          <version>2.57.0</version>
+          <version>2.58.0</version>
       </dependency>
       ```
 

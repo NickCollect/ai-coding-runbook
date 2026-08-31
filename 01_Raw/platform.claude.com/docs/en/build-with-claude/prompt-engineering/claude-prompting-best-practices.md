@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
-fetched_at: 2026-08-24T02:18:39.160726+00:00
+fetched_at: 2026-08-31T06:29:34.367084+00:00
 fetch_method: mintlify_md
 ---
 
@@ -17,7 +17,7 @@ This is the reference for prompt engineering with Claude's latest models, includ
 * **Migration considerations** last, for prompts moving from earlier generations.
 
 <Tip>
-  For an overview of model capabilities, see the [models overview](https://platform.claude.com/docs/en/about-claude/models/overview). For Claude Fable 5 capabilities and API changes, see [Introducing Claude Fable 5 and Claude Mythos 5](https://platform.claude.com/docs/en/about-claude/models/introducing-claude-fable-5-and-claude-mythos-5). For details on what's new in Claude Sonnet 5, see [What's new in Claude Sonnet 5](https://platform.claude.com/docs/en/about-claude/models/whats-new-sonnet-5). For details on what's new in Claude Opus 5, see [What's new in Claude Opus 5](https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5). For migration guidance, see the [Migration guide](https://platform.claude.com/docs/en/about-claude/models/migration-guide).
+  For an overview of model capabilities, see the [models overview](https://platform.claude.com/docs/en/models/overview). For Claude Fable 5 capabilities and API changes, see [Introducing Claude Fable 5 and Claude Mythos 5](https://platform.claude.com/docs/en/models/fable-5/introducing-claude-fable-5-and-claude-mythos-5). For details on what's new in Claude Sonnet 5, see [What's new in Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5/whats-new-sonnet-5). For details on what's new in Claude Opus 5, see [What's new in Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/whats-new-opus-5). For migration guidance, see the [Migration guide](https://platform.claude.com/docs/en/about-claude/models/migration-guide).
 </Tip>
 
 ## Claude Fable 5
@@ -1090,7 +1090,7 @@ For detailed migration steps, see the [Migration guide](https://platform.claude.
 
 ### Migrating to Claude Sonnet 5 from Claude Sonnet 4.5 or earlier
 
-See [Migrating to Claude Sonnet 5 from Claude Sonnet 4.5 or earlier](https://platform.claude.com/docs/en/about-claude/models/migration-guide#migrating-from-sonnet-45) in the migration guide, which covers the effort default change and the removal of manual extended thinking (`budget_tokens`).
+See [Migrating to Claude Sonnet 5 from Claude Sonnet 4.5 or earlier](https://platform.claude.com/docs/en/models/sonnet-5/migration-guide#migrating-from-sonnet-45) in the migration guide, which covers the effort default change and the removal of manual extended thinking (`budget_tokens`).
 
 ## Next steps
 

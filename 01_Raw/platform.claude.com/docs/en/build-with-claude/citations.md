@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/citations
-fetched_at: 2026-08-24T02:18:35.844568+00:00
+fetched_at: 2026-08-31T06:29:31.080545+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ description: Ground Claude's responses in your source documents. Citations retur
 
 Claude can provide detailed citations when answering questions about documents, helping you track and verify the sources behind each response.
 
-All [active models](https://platform.claude.com/docs/en/about-claude/models/overview) support citations.
+All [active models](https://platform.claude.com/docs/en/models/overview) support citations.
 
 <Tip>
   Share your feedback and suggestions about the citations feature using the [citations feedback form](https://forms.gle/9n9hSrKnKe3rpowH9).

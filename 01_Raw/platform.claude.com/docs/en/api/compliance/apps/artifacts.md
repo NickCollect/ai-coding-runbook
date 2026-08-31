@@ -1,19 +1,14 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/artifacts
-fetched_at: 2026-08-17T02:15:25.058157+00:00
+fetched_at: 2026-08-31T06:29:47.867422+00:00
 fetch_method: mintlify_md
----
-
----
-title: Artifacts
-url: https://platform.claude.com/docs/en/api/compliance/apps/artifacts
 ---
 
 # Artifacts
 
 ## Get artifact metadata
 
-**get** `/v1/compliance/apps/artifacts/{artifact_version_id}`
+**GET** `/v1/compliance/apps/artifacts/{artifact_version_id}`
 
 Returns metadata for an artifact version, without the content body.
 
@@ -22,13 +17,13 @@ Use the sibling `/content` endpoint to fetch the artifact text. The
 encoding of that text, so a DLP consumer can dedupe or match hashes
 without downloading every artifact.
 
-### Path Parameters
+### Path parameters
 
 - `artifact_version_id: string`
 
   The artifact version ID (tagged ID, e.g., claude_artifact_version_abc123)
 
-### Header Parameters
+### Headers
 
 - `"x-api-key": optional string`
 
@@ -50,6 +45,8 @@ without downloading every artifact.
 
   Artifact version creation timestamp
 
+  format: date-time
+
 - `md5: string`
 
   Lowercase hex MD5 of the artifact content (UTF-8 encoded). Matches the `content` field returned by the sibling `/content` endpoint.
@@ -68,12 +65,12 @@ without downloading every artifact.
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/artifacts/$ARTIFACT_VERSION_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -90,34 +87,34 @@ curl https://api.anthropic.com/v1/compliance/apps/artifacts/$ARTIFACT_VERSION_ID
 
 ## Download artifact content
 
-**get** `/v1/compliance/apps/artifacts/{artifact_version_id}/content`
+**GET** `/v1/compliance/apps/artifacts/{artifact_version_id}/content`
 
 Download the content of an artifact version for compliance purposes.
 
 Returns the full text content of the artifact version.
 
-### Path Parameters
+### Path parameters
 
 - `artifact_version_id: string`
 
   The artifact version ID (tagged ID, e.g., claude_artifact_version_abc123)
 
-### Header Parameters
+### Headers
 
 - `"x-api-key": optional string`
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/artifacts/$ARTIFACT_VERSION_ID/content \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-## Domain Types
+## Domain types
 
 ### Artifact Retrieve Response
 
-- `ArtifactRetrieveResponse object { id, artifact_type, claude_chat_id, 5 more }`
+- `ArtifactRetrieveResponse object`
 
   Artifact version metadata for GET /v1/compliance/apps/artifacts/{artifact_version_id}.
 
@@ -139,6 +136,8 @@ curl https://api.anthropic.com/v1/compliance/apps/artifacts/$ARTIFACT_VERSION_ID
   - `created_at: string`
 
     Artifact version creation timestamp
+
+    format: date-time
 
   - `md5: string`
 

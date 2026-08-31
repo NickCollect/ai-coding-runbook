@@ -1,17 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/federation_rules/workspaces/create
-fetched_at: 2026-08-17T02:15:23.952855+00:00
+fetched_at: 2026-08-31T06:29:46.317844+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Add Federation Rule Workspace
-url: https://platform.claude.com/docs/en/api/admin/federation_rules/workspaces/create
----
+# Add Federation Rule Workspace
 
-## Add Federation Rule Workspace
-
-**post** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces`
+**POST** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces`
 
 Enable a federation rule for a workspace.
 
@@ -24,13 +19,13 @@ Archived rules are rejected with 400. OAuth callers may only manage rules whose
 `oauth_scope` is `workspace:developer` or `workspace:inference`; other
 scopes require a Console session. Admin API keys are not accepted.
 
-### Path Parameters
+## Path parameters
 
 - `federation_rule_id: string`
 
   ID of the federation rule.
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of string`
 
@@ -38,17 +33,19 @@ scopes require a Console session. Admin API keys are not accepted.
 
   To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-### Body Parameters
+## Body parameters
 
 - `workspace_id: string`
 
   Tagged ID of the workspace to enable this rule for.
 
-### Returns
+## Returns
 
 - `created_at: string`
 
   When this workspace was enabled for the rule.
+
+  format: date-time
 
 - `created_by_actor_id: string or null`
 
@@ -60,7 +57,7 @@ scopes require a Console session. Admin API keys are not accepted.
 
 - `type: "federation_rule_workspace"`
 
-  - `"federation_rule_workspace"`
+  default: federation_rule_workspace
 
 - `workspace_id: string`
 
@@ -70,9 +67,9 @@ scopes require a Console session. Admin API keys are not accepted.
 
   Workspace display name. Populated when listing; null in the enable response.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RULE_ID/workspaces \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -82,7 +79,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RUL
         }'
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

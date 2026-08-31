@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/php
-fetched_at: 2026-08-17T02:15:18.524942+00:00
+fetched_at: 2026-08-31T06:29:35.903016+00:00
 fetch_method: mintlify_md
 ---
 
@@ -49,7 +49,7 @@ $textBlock = array_find($message->content, static fn ($block): bool => $block->t
 echo $textBlock->text;
 ```
 
-For authentication options including Workload Identity Federation, see [Authentication](https://platform.claude.com/docs/en/manage-claude/authentication).
+For authentication options including Workload Identity Federation, see [Authentication](https://platform.claude.com/docs/en/manage-claude/authentication). If your API key is a [personal or service account key](https://platform.claude.com/docs/en/manage-claude/authentication#key-types) with access to multiple workspaces, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](https://platform.claude.com/docs/en/manage-claude/authentication#select-a-workspace) shows the per-request option for this SDK.
 
 ## Value objects
 

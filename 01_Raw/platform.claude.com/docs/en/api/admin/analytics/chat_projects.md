@@ -1,45 +1,48 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/analytics/chat_projects
-fetched_at: 2026-08-24T02:18:47.967779+00:00
+fetched_at: 2026-08-31T06:29:45.158883+00:00
 fetch_method: mintlify_md
----
-
----
-title: Chat Projects
-url: https://platform.claude.com/docs/en/api/admin/analytics/chat_projects
 ---
 
 # Chat Projects
 
 ## Get Chat Project Usage
 
-**get** `/v1/organizations/analytics/apps/chat/projects`
+**GET** `/v1/organizations/analytics/apps/chat/projects`
 
 Get per-project activity for a given day, with cursor-based pagination.
 
 Returns activity metrics for each project in the organization, sorted by
-project ID. Use group_by[] to break projects out per member or per RBAC
-group, and filter[] to scope results; the parameter descriptions list the
+project ID. Use `group_by[]` to break projects out per member or per RBAC
+group, and `filter[]` to scope results; the parameter descriptions list the
 supported dimensions. Available to organizations on a Claude Enterprise
 plan. Requires an API key with the `read:analytics` scope.
 
-### Query Parameters
+### Query parameters
 
 - `date: optional string`
 
   UTC date in YYYY-MM-DD format. The day to get project activity for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
+  format: date
+
 - `ending_date: optional string`
 
-  UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with starting_date. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after starting_date.
+  UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with `starting_date`. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after `starting_date`.
+
+  format: date
 
 - `filter: optional array of string`
 
-  Filters as 'dimension:value', e.g. filter[]=rbac_group_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: project_id, rbac_group_id, user_id. Value forms: project_id takes a tagged project id (claude_proj_...); rbac_group_id takes the tagged id (rbac_group_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); user_id takes a tagged user id (user_...), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
+  Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `project_id`, `rbac_group_id`, `user_id`. Value forms: `project_id` takes a tagged project id (`claude_proj_...`); `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
+
+  maxItems: 100
 
 - `group_by: optional array of "rbac_group_id" or "user_id"`
 
-  Dimensions to break results out by (e.g. group_by[]=user_id). Supported on this endpoint: rbac_group_id, user_id. Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via next_page; an unsupported dimension returns 400. rbac_group_id attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+  Dimensions to break results out by (e.g. `group_by[]=user_id`). Supported on this endpoint: `rbac_group_id`, `user_id`. Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via `next_page`; an unsupported dimension returns 400. `rbac_group_id` attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+
+  maxItems: 100
 
   - `"rbac_group_id"`
 
@@ -49,9 +52,11 @@ plan. Requires an API key with the `read:analytics` scope.
 
   Number of results per page (1-1000, default 100).
 
+  minimum: 1, maximum: 1000
+
 - `order: optional "asc" or "desc"`
 
-  Sort direction: 'asc' or 'desc'. Defaults to 'asc' for the endpoint's sort column and to 'desc' when order_by names a metric (a top-N ranking). Applies to order_by, or to the endpoint's default sort field when order_by is omitted.
+  Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort column and to `desc` when `order_by` names a metric (a top-N ranking). Applies to `order_by`, or to the endpoint's default sort field when `order_by` is omitted.
 
   - `"asc"`
 
@@ -63,19 +68,21 @@ plan. Requires an API key with the `read:analytics` scope.
 
 - `page: optional string`
 
-  Opaque cursor from a previous response's next_page field.
+  Opaque cursor from a previous response's `next_page` field.
 
 - `starting_date: optional string`
 
-  UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either date or starting_date, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
+  UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
+
+  format: date
 
 ### Returns
 
-- `ChatProjectUsage object { data, next_page }`
+- `ChatProjectUsage object`
 
   Response for GET /v1/organizations/analytics/apps/chat/projects.
 
-  - `data: array of object { distinct_user_count, message_count, project_id, 8 more }`
+  - `data: array of object`
 
     - `distinct_user_count: number`
 
@@ -87,7 +94,7 @@ plan. Requires an API key with the `read:analytics` scope.
 
     - `project_id: string`
 
-      Tagged project identifier (e.g. claude_proj_...)
+      Tagged project identifier (e.g. `claude_proj_...`)
 
     - `project_name: string`
 
@@ -95,11 +102,13 @@ plan. Requires an API key with the `read:analytics` scope.
 
     - `created_at: optional string or null`
 
-      Project creation timestamp, RFC 3339. Null if the project was deleted before attribution was recorded.
+      Project creation timestamp in RFC 3339 format. Null if the project was deleted before attribution was recorded.
+
+      format: date-time
 
     - `created_by: optional AnalyticsUser or null`
 
-      User identifier.
+      A user in the organization, identified by tagged id and email address.
 
       - `id: string`
 
@@ -109,11 +118,11 @@ plan. Requires an API key with the `read:analytics` scope.
 
         Email address of the user
 
-      - `type: optional "user"`
+      - `type: "user"`
 
         Object type. Always `user`.
 
-        - `"user"`
+        default: user
 
     - `distinct_conversation_count: optional number or null`
 
@@ -121,7 +130,7 @@ plan. Requires an API key with the `read:analytics` scope.
 
     - `product: optional string or null`
 
-      Product that produced this row's activity: one of chat, claude_code, cowork, or office_agent (the canonical Cost & Usage product naming; an office_agent row's per-surface breakdown is in its office_metrics). On /plugins only cowork and claude_code occur (the only surfaces with plugin attribution); /artifacts and /apps/chat/projects do not support the product dimension (a product `group_by[]` or `filter[]` there is rejected). Present only when the request grouped by product.
+      Product that produced this row's activity: one of `chat`, `claude_code`, `cowork`, or `office_agent` (the canonical Cost & Usage product naming; an `office_agent` row's per-surface breakdown is in its `office_metrics`). On `/plugins` only `cowork` and `claude_code` occur (the only surfaces with plugin attribution); on `/artifacts` only `chat`, `claude_code`, and `cowork` occur (the surfaces that create artifacts); `/apps/chat/projects` does not support the product dimension (a `product` entry in `group_by[]` or `filter[]` there is rejected). Present only when the request grouped by `product`.
 
     - `rbac_group_id: optional string or null`
 
@@ -141,13 +150,13 @@ plan. Requires an API key with the `read:analytics` scope.
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/analytics/apps/chat/projects \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -157,7 +166,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/apps/chat/projects \
       "message_count": 0,
       "project_id": "project_id",
       "project_name": "project_name",
-      "created_at": "created_at",
+      "created_at": "2019-12-27T18:11:19.117Z",
       "created_by": {
         "id": "id",
         "email_address": "email_address",
@@ -174,15 +183,15 @@ curl https://api.anthropic.com/v1/organizations/analytics/apps/chat/projects \
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Chat Project Usage
 
-- `ChatProjectUsage object { data, next_page }`
+- `ChatProjectUsage object`
 
   Response for GET /v1/organizations/analytics/apps/chat/projects.
 
-  - `data: array of object { distinct_user_count, message_count, project_id, 8 more }`
+  - `data: array of object`
 
     - `distinct_user_count: number`
 
@@ -194,7 +203,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/apps/chat/projects \
 
     - `project_id: string`
 
-      Tagged project identifier (e.g. claude_proj_...)
+      Tagged project identifier (e.g. `claude_proj_...`)
 
     - `project_name: string`
 
@@ -202,11 +211,13 @@ curl https://api.anthropic.com/v1/organizations/analytics/apps/chat/projects \
 
     - `created_at: optional string or null`
 
-      Project creation timestamp, RFC 3339. Null if the project was deleted before attribution was recorded.
+      Project creation timestamp in RFC 3339 format. Null if the project was deleted before attribution was recorded.
+
+      format: date-time
 
     - `created_by: optional AnalyticsUser or null`
 
-      User identifier.
+      A user in the organization, identified by tagged id and email address.
 
       - `id: string`
 
@@ -216,11 +227,11 @@ curl https://api.anthropic.com/v1/organizations/analytics/apps/chat/projects \
 
         Email address of the user
 
-      - `type: optional "user"`
+      - `type: "user"`
 
         Object type. Always `user`.
 
-        - `"user"`
+        default: user
 
     - `distinct_conversation_count: optional number or null`
 
@@ -228,7 +239,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/apps/chat/projects \
 
     - `product: optional string or null`
 
-      Product that produced this row's activity: one of chat, claude_code, cowork, or office_agent (the canonical Cost & Usage product naming; an office_agent row's per-surface breakdown is in its office_metrics). On /plugins only cowork and claude_code occur (the only surfaces with plugin attribution); /artifacts and /apps/chat/projects do not support the product dimension (a product `group_by[]` or `filter[]` there is rejected). Present only when the request grouped by product.
+      Product that produced this row's activity: one of `chat`, `claude_code`, `cowork`, or `office_agent` (the canonical Cost & Usage product naming; an `office_agent` row's per-surface breakdown is in its `office_metrics`). On `/plugins` only `cowork` and `claude_code` occur (the only surfaces with plugin attribution); on `/artifacts` only `chat`, `claude_code`, and `cowork` occur (the surfaces that create artifacts); `/apps/chat/projects` does not support the product dimension (a `product` entry in `group_by[]` or `filter[]` there is rejected). Present only when the request grouped by `product`.
 
     - `rbac_group_id: optional string or null`
 

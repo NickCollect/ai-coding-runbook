@@ -1,27 +1,22 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/memory_stores/memories/retrieve
-fetched_at: 2026-08-24T02:18:44.389044+00:00
+fetched_at: 2026-08-31T06:29:39.812716+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Retrieve a memory
-url: https://platform.claude.com/docs/en/api/beta/memory_stores/memories/retrieve
----
+# Retrieve a memory
 
-## Retrieve a memory
-
-**get** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+**GET** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
 Retrieve a memory
 
-### Path Parameters
+## Path parameters
 
 - `memory_store_id: string`
 
 - `memory_id: string`
 
-### Query Parameters
+## Query parameters
 
 - `view: optional BetaManagedAgentsMemoryView`
 
@@ -31,7 +26,7 @@ Retrieve a memory
 
   - `"full"`
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -39,7 +34,7 @@ Retrieve a memory
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -109,9 +104,23 @@ Retrieve a memory
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+    - `"compact-2026-01-12"`
 
-- `BetaManagedAgentsMemory object { id, content_sha256, content_size_bytes, 7 more }`
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Returns
+
+- `BetaManagedAgentsMemory object`
 
   A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
@@ -127,9 +136,13 @@ Retrieve a memory
 
     Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
 
+    format: int32
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `memory_store_id: string`
 
@@ -137,7 +150,7 @@ Retrieve a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the full history via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](/docs/en/api/beta/memory_stores/memory_versions/list).
 
   - `path: string`
 
@@ -145,26 +158,26 @@ Retrieve a memory
 
   - `type: "memory"`
 
-    - `"memory"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `content: optional string or null`
 
     The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMORY_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: agent-memory-2026-07-22' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

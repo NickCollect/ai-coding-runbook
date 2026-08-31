@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/typescript
-fetched_at: 2026-08-24T02:18:39.811588+00:00
+fetched_at: 2026-08-31T06:29:35.817892+00:00
 fetch_method: mintlify_md
 ---
 
@@ -61,7 +61,7 @@ for (const block of message.content) {
 }
 ```
 
-For authentication options including Workload Identity Federation, see [Authentication](https://platform.claude.com/docs/en/manage-claude/authentication).
+For authentication options including Workload Identity Federation, see [Authentication](https://platform.claude.com/docs/en/manage-claude/authentication). If your API key is a [personal or service account key](https://platform.claude.com/docs/en/manage-claude/authentication#key-types) with access to multiple workspaces, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](https://platform.claude.com/docs/en/manage-claude/authentication#select-a-workspace) shows the per-request option for this SDK.
 
 ## Request and response types
 

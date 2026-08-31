@@ -1,21 +1,16 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/vaults/list
-fetched_at: 2026-08-24T02:18:43.614957+00:00
+fetched_at: 2026-08-31T06:29:39.232230+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: List Vaults
-url: https://platform.claude.com/docs/en/api/beta/vaults/list
----
+# List Vaults
 
-## List Vaults
-
-**get** `/v1/vaults`
+**GET** `/v1/vaults`
 
 List Vaults
 
-### Query Parameters
+## Query parameters
 
 - `include_archived: optional boolean`
 
@@ -25,11 +20,13 @@ List Vaults
 
   Maximum number of vaults to return per page. Defaults to 20, maximum 100.
 
+  format: int32
+
 - `page: optional string`
 
   Opaque pagination token from a previous `list_vaults` response.
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -37,7 +34,7 @@ List Vaults
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -107,7 +104,21 @@ List Vaults
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Returns
 
 - `data: optional array of BetaManagedAgentsVault`
 
@@ -121,9 +132,13 @@ List Vaults
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `display_name: string`
 
@@ -135,26 +150,26 @@ List Vaults
 
   - `type: "vault"`
 
-    - `"vault"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
 - `next_page: optional string or null`
 
   Pagination token for the next page, or null if no more results.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/vaults \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

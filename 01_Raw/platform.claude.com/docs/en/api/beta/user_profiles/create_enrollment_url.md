@@ -1,25 +1,20 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/user_profiles/create_enrollment_url
-fetched_at: 2026-08-24T02:18:45.216310+00:00
+fetched_at: 2026-08-31T06:29:40.658797+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Create Enrollment URL
-url: https://platform.claude.com/docs/en/api/beta/user_profiles/create_enrollment_url
----
+# Create Enrollment URL
 
-## Create Enrollment URL
-
-**post** `/v1/user_profiles/{user_profile_id}/enrollment_url`
+**POST** `/v1/user_profiles/{user_profile_id}/enrollment_url`
 
 Create Enrollment URL
 
-### Path Parameters
+## Path parameters
 
 - `user_profile_id: string`
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -27,7 +22,7 @@ Create Enrollment URL
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -97,27 +92,41 @@ Create Enrollment URL
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+    - `"compact-2026-01-12"`
 
-- `BetaUserProfileEnrollmentURL object { expires_at, type, url }`
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Returns
+
+- `BetaUserProfileEnrollmentURL object`
 
   - `expires_at: string`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `type: "enrollment_url"`
 
     Object type. Always `enrollment_url`.
-
-    - `"enrollment_url"`
 
   - `url: string`
 
     Enrollment URL to send to the end user. Valid until `expires_at`.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID/enrollment_url \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
@@ -125,7 +134,7 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID/enrollment_url 
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

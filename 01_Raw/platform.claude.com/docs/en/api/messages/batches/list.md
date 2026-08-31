@@ -1,23 +1,18 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages/batches/list
-fetched_at: 2026-08-17T02:15:19.030885+00:00
+fetched_at: 2026-08-31T06:29:36.493205+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: List Message Batches
-url: https://platform.claude.com/docs/en/api/messages/batches/list
----
+# List Message Batches
 
-## List Message Batches
-
-**get** `/v1/messages/batches`
+**GET** `/v1/messages/batches`
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
 Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
-### Query Parameters
+## Query parameters
 
 - `after_id: optional string`
 
@@ -33,7 +28,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
-### Returns
+  default: 20, maximum: 1000, minimum: 1
+
+## Returns
 
 - `data: array of MessageBatch`
 
@@ -47,13 +44,19 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
+    format: date-time
+
   - `cancel_initiated_at: string or null`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
+    format: date-time
+
   - `created_at: string`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+    format: date-time
 
   - `ended_at: string or null`
 
@@ -61,9 +64,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
+    format: date-time
+
   - `expires_at: string`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+    format: date-time
 
   - `processing_status: "in_progress" or "canceling" or "ended"`
 
@@ -87,11 +94,15 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       This is zero until processing of the entire Message Batch has ended.
 
+      default: 0
+
     - `errored: number`
 
       Number of requests in the Message Batch that encountered an error.
 
       This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
 
     - `expired: number`
 
@@ -99,15 +110,21 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       This is zero until processing of the entire Message Batch has ended.
 
+      default: 0
+
     - `processing: number`
 
       Number of requests in the Message Batch that are processing.
+
+      default: 0
 
     - `succeeded: number`
 
       Number of requests in the Message Batch that have completed successfully.
 
       This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
 
   - `results_url: string or null`
 
@@ -121,7 +138,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     For Message Batches, this is always `"message_batch"`.
 
-    - `"message_batch"`
+    default: message_batch
 
 - `first_id: string or null`
 
@@ -135,15 +152,15 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/messages/batches \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

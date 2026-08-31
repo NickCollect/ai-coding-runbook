@@ -1,29 +1,24 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/rbac_groups/members/list
-fetched_at: 2026-08-17T02:15:22.212001+00:00
+fetched_at: 2026-08-31T06:29:43.688592+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: List RBAC Group Members
-url: https://platform.claude.com/docs/en/api/admin/rbac_groups/members/list
----
+# List RBAC Group Members
 
-## List RBAC Group Members
-
-**get** `/v1/organizations/rbac_groups/{group_id}/members`
+**GET** `/v1/organizations/rbac_groups/{group_id}/members`
 
 List members of an RBAC Group.
 
-The RBAC Groups API is in beta and available to Claude Enterprise organizations only. Requests must send the `ce-user-management-2026-07-13` value in the `anthropic-beta` header.
+The RBAC Groups API is available to Claude Enterprise organizations only.
 
-### Path Parameters
+## Path parameters
 
 - `group_id: string`
 
   ID of the RBAC Group.
 
-### Query Parameters
+## Query parameters
 
 - `limit: optional number`
 
@@ -31,25 +26,21 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
+  default: 20, maximum: 1000, minimum: 1
+
 - `page: optional string`
 
   Optionally set to the `next_page` token from the previous response.
 
-### Header Parameters
-
-- `"anthropic-beta": optional array of string`
-
-  Optional header to specify the beta version(s) you want to use.
-
-  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
-
-### Returns
+## Returns
 
 - `data: array of RbacGroupMember`
 
   - `created_at: string`
 
     RFC 3339 timestamp of when the User was added to the RBAC Group.
+
+    format: date-time
 
   - `email: string`
 
@@ -65,7 +56,7 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
     For RBAC Group Members, this is always `"rbac_group_member"`.
 
-    - `"rbac_group_member"`
+    default: rbac_group_member
 
   - `user_id: string`
 
@@ -79,15 +70,15 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
   Token to provide in as `page` in the subsequent request to retrieve the next page of data.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

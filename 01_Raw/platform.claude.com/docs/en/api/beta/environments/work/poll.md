@@ -1,37 +1,36 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/work/poll
-fetched_at: 2026-08-24T02:18:42.273313+00:00
+fetched_at: 2026-08-31T06:29:38.052148+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Poll for Work
-url: https://platform.claude.com/docs/en/api/beta/environments/work/poll
----
+# Poll for Work
 
-## Poll for Work
-
-**get** `/v1/environments/{environment_id}/work/poll`
+**GET** `/v1/environments/{environment_id}/work/poll`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Long poll for work items in the queue.
 
-### Path Parameters
+## Path parameters
 
 - `environment_id: string`
 
-### Query Parameters
+## Query parameters
 
 - `block_ms: optional number`
 
   How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
 
+  minimum: 1
+
 - `reclaim_older_than_ms: optional number`
 
   Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
 
-### Header Parameters
+  minimum: 1
+
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -39,7 +38,7 @@ Long poll for work items in the queue.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -109,13 +108,27 @@ Long poll for work items in the queue.
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
 - `"Anthropic-Worker-ID": optional string`
 
   Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
 
-### Returns
+## Returns
 
-- `BetaSelfHostedWork object { id, acknowledged_at, created_at, 10 more }`
+- `BetaSelfHostedWork object`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -146,8 +159,6 @@ Long poll for work items in the queue.
     - `type: "session"`
 
       Type of work data
-
-      - `"session"`
 
   - `environment_id: string`
 
@@ -195,18 +206,18 @@ Long poll for work items in the queue.
 
     The type of object (always 'work')
 
-    - `"work"`
+    default: work
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/poll \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

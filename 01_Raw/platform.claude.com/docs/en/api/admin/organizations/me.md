@@ -1,27 +1,24 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/organizations/me
-fetched_at: 2026-08-17T02:15:21.942694+00:00
+fetched_at: 2026-08-31T06:29:43.168951+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Get Current Organization
-url: https://platform.claude.com/docs/en/api/admin/organizations/me
----
+# Get Current Organization
 
-## Get Current Organization
-
-**get** `/v1/organizations/me`
+**GET** `/v1/organizations/me`
 
 Retrieve information about the organization associated with the authenticated API key.
 
-### Returns
+## Returns
 
-- `Organization object { id, name, type }`
+- `Organization object`
 
   - `id: string`
 
     ID of the Organization.
+
+    format: uuid
 
   - `name: string`
 
@@ -33,17 +30,17 @@ Retrieve information about the organization associated with the authenticated AP
 
     For Organizations, this is always `"organization"`.
 
-    - `"organization"`
+    default: organization
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/me \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

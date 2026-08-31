@@ -1,21 +1,16 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/skills/versions/create
-fetched_at: 2026-08-24T02:18:44.911216+00:00
+fetched_at: 2026-08-31T06:29:40.385616+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Create Skill Version
-url: https://platform.claude.com/docs/en/api/beta/skills/versions/create
----
+# Create Skill Version
 
-## Create Skill Version
-
-**post** `/v1/skills/{skill_id}/versions`
+**POST** `/v1/skills/{skill_id}/versions`
 
 Create Skill Version
 
-### Path Parameters
+## Path parameters
 
 - `skill_id: string`
 
@@ -23,7 +18,7 @@ Create Skill Version
 
   The format and length of IDs may change over time.
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -31,7 +26,7 @@ Create Skill Version
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -101,74 +96,89 @@ Create Skill Version
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+    - `"compact-2026-01-12"`
 
-- `id: string`
+    - `"computer-use-2025-11-24"`
 
-  Unique identifier for the skill version.
+    - `"mcp-tunnels-2026-06-22"`
 
-  The format and length of IDs may change over time.
+    - `"structured-outputs-2025-11-13"`
 
-- `created_at: string`
+    - `"task-budgets-2026-03-13"`
 
-  ISO 8601 timestamp of when the skill version was created.
+    - `"thinking-display-updates-2026-08-18"`
 
-- `description: string`
+    - `"ce-user-management-2026-07-13"`
 
-  Description of the skill version.
+## Body parameters (form-data)
 
-  This is extracted from the SKILL.md file in the skill upload.
+- `files: array of string`
 
-- `directory: string`
+  Files to upload for the skill.
 
-  Directory name of the skill version.
+  All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
-  This is the top-level directory name that was extracted from the uploaded files.
+## Returns
 
-- `name: string`
+- `BetaSkillVersion object`
 
-  Human-readable name of the skill version.
+  - `id: string`
 
-  This is extracted from the SKILL.md file in the skill upload.
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
 
-- `skill_id: string`
+  - `created_at: string`
 
-  Identifier for the skill that this version belongs to.
+    ISO 8601 timestamp of when the skill was created.
 
-- `type: string`
+    format: date-time
 
-  Object type.
+  - `description: string`
 
-  For Skill Versions, this is always `"skill_version"`.
+    Description of the skill version.
 
-- `version: string`
+    This is extracted from the SKILL.md file in the skill upload.
 
-  Version identifier for the skill.
+  - `name: string`
 
-  Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+    The Skill's immutable kebab-case slug, set at creation from the first
+    upload's SKILL.md frontmatter `name` (or its enclosing directory). Every
+    later upload must resolve to the same value. Also the top-level directory
+    of the Skill's mounted files and the base name of a downloaded archive.
 
-### Example
+  - `skill_id: string`
 
-```http
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
+  - `type: "skill_version"`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
+
+    default: skill_version
+
+## Example
+
+```bash
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions \
     -H 'Content-Type: multipart/form-data' \
     -H 'anthropic-version: 2023-06-01' \
-    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -F files='["Example data"]'
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {
-  "id": "skillver_01JAbcdefghijklmnopqrstuvw",
+  "id": "id",
   "created_at": "2024-10-30T23:58:27.427722Z",
-  "description": "A custom skill for doing something useful",
-  "directory": "my-skill",
-  "name": "my-skill",
+  "description": "description",
+  "name": "name",
   "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
-  "type": "type",
-  "version": "1759178010641129"
+  "type": "skill_version"
 }
 ```

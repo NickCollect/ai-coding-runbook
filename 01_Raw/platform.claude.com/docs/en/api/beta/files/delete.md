@@ -1,27 +1,22 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/files/delete
-fetched_at: 2026-08-24T02:18:44.774903+00:00
+fetched_at: 2026-08-31T06:29:40.266851+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Delete File
-url: https://platform.claude.com/docs/en/api/beta/files/delete
----
+# Delete File
 
-## Delete File
-
-**delete** `/v1/files/{file_id}`
+**DELETE** `/v1/files/{file_id}`
 
 Delete File
 
-### Path Parameters
+## Path parameters
 
 - `file_id: string`
 
   ID of the File.
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -29,7 +24,7 @@ Delete File
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -99,9 +94,23 @@ Delete File
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+    - `"compact-2026-01-12"`
 
-- `BetaDeletedFile object { id, type }`
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Returns
+
+- `BetaDeletedFile object`
 
   - `id: string`
 
@@ -113,19 +122,18 @@ Delete File
 
     For file deletion, this is always `"file_deleted"`.
 
-    - `"file_deleted"`
+    default: file_deleted
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/files/$FILE_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
-    -H 'anthropic-beta: files-api-2025-04-14' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

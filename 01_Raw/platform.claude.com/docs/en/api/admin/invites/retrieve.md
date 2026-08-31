@@ -1,29 +1,24 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/invites/retrieve
-fetched_at: 2026-08-17T02:15:21.953085+00:00
+fetched_at: 2026-08-31T06:29:43.301673+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Get Invite
-url: https://platform.claude.com/docs/en/api/admin/invites/retrieve
----
+# Get Invite
 
-## Get Invite
+**GET** `/v1/organizations/invites/{invite_id}`
 
-**get** `/v1/organizations/invites/{invite_id}`
+Retrieve an invite by ID.
 
-For Claude Enterprise organizations, this endpoint's availability is in beta.
-
-### Path Parameters
+## Path parameters
 
 - `invite_id: string`
 
   ID of the Invite.
 
-### Returns
+## Returns
 
-- `Invite object { id, accepted_at, email, 6 more }`
+- `Invite object`
 
   - `id: string`
 
@@ -33,6 +28,8 @@ For Claude Enterprise organizations, this endpoint's availability is in beta.
 
     RFC 3339 datetime string indicating when the Invite was accepted, or null.
 
+    format: date-time
+
   - `email: string`
 
     Email of the User being invited.
@@ -41,13 +38,17 @@ For Claude Enterprise organizations, this endpoint's availability is in beta.
 
     RFC 3339 datetime string indicating when the Invite expires.
 
+    format: date-time
+
   - `invited_at: string`
 
     RFC 3339 datetime string indicating when the Invite was created.
 
+    format: date-time
+
   - `rbac_group_ids: array of string`
 
-    RBAC group IDs recorded on the Invite (beta, Claude Enterprise organizations), to be assigned to the User when the Invite is accepted. `[]` when none.
+    RBAC group IDs recorded on the Invite (Claude Enterprise organizations), to be assigned to the User when the Invite is accepted. `[]` when none.
 
   - `role: "admin" or "billing" or "claude_code_user" or 6 more`
 
@@ -89,17 +90,17 @@ For Claude Enterprise organizations, this endpoint's availability is in beta.
 
     For Invites, this is always `"invite"`.
 
-    - `"invite"`
+    default: invite
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

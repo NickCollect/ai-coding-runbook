@@ -1,25 +1,20 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/vaults/retrieve
-fetched_at: 2026-08-24T02:18:43.732519+00:00
+fetched_at: 2026-08-31T06:29:39.332410+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Get Vault
-url: https://platform.claude.com/docs/en/api/beta/vaults/retrieve
----
+# Get Vault
 
-## Get Vault
-
-**get** `/v1/vaults/{vault_id}`
+**GET** `/v1/vaults/{vault_id}`
 
 Get Vault
 
-### Path Parameters
+## Path parameters
 
 - `vault_id: string`
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -27,7 +22,7 @@ Get Vault
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -97,9 +92,23 @@ Get Vault
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+    - `"compact-2026-01-12"`
 
-- `BetaManagedAgentsVault object { id, archived_at, created_at, 4 more }`
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Returns
+
+- `BetaManagedAgentsVault object`
 
   A vault that stores credentials for use by agents during sessions.
 
@@ -111,9 +120,13 @@ Get Vault
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `display_name: string`
 
@@ -125,22 +138,22 @@ Get Vault
 
   - `type: "vault"`
 
-    - `"vault"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
 
-### Example
+    format: date-time
 
-```http
+## Example
+
+```bash
 curl https://api.anthropic.com/v1/vaults/$VAULT_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

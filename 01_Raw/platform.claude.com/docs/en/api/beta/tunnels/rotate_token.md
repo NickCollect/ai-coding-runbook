@@ -1,27 +1,22 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/tunnels/rotate_token
-fetched_at: 2026-08-24T02:18:45.609147+00:00
+fetched_at: 2026-08-31T06:29:41.007396+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Rotate Tunnel Token
-url: https://platform.claude.com/docs/en/api/beta/tunnels/rotate_token
----
+# Rotate Tunnel Token
 
-## Rotate Tunnel Token
-
-**post** `/v1/tunnels/{tunnel_id}/rotate_token`
+**POST** `/v1/tunnels/{tunnel_id}/rotate_token`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
 Rotates a tunnel's connector token. Rotation invalidates the current token for new connections and returns a fresh value; established connections are not severed. A connector restarted after rotation must use the new value.
 
-### Path Parameters
+## Path parameters
 
 - `tunnel_id: string`
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -29,7 +24,7 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -99,15 +94,31 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Body Parameters
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Body parameters
 
 - `reason: optional string or null`
 
   Optional free-text reason for the rotation, recorded for audit.
 
-### Returns
+  maxLength: 1024
 
-- `BetaTunnelToken object { id, tunnel_token, type }`
+## Returns
+
+- `BetaTunnelToken object`
 
   A tunnel's connector token.
 
@@ -121,11 +132,9 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
   - `type: "tunnel_token"`
 
-    - `"tunnel_token"`
+## Example
 
-### Example
-
-```http
+```bash
 curl https://api.anthropic.com/v1/tunnels/$TUNNEL_ID/rotate_token \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -134,7 +143,7 @@ curl https://api.anthropic.com/v1/tunnels/$TUNNEL_ID/rotate_token \
     -d '{}'
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

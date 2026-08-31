@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/multilingual-support
-fetched_at: 2026-08-17T02:15:14.315921+00:00
+fetched_at: 2026-08-31T06:29:31.239536+00:00
 fetch_method: mintlify_md
 ---
 
@@ -215,7 +215,7 @@ Also follow the general guidance in [Prompt engineering overview](https://platfo
     Build a localized support chatbot using a language-constrained system prompt.
   </Card>
 
-  <Card title="Models overview" icon="table" href="https://platform.claude.com/docs/en/about-claude/models/overview">
+  <Card title="Models overview" icon="table" href="https://platform.claude.com/docs/en/models/overview">
     Compare model tiers to balance multilingual quality against cost and latency.
   </Card>
 

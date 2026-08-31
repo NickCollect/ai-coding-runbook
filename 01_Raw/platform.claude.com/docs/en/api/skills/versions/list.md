@@ -1,21 +1,16 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/skills/versions/list
-fetched_at: 2026-08-24T02:18:41.112213+00:00
+fetched_at: 2026-08-31T06:29:37.075242+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: List Skill Versions
-url: https://platform.claude.com/docs/en/api/skills/versions/list
----
+# List Skill Versions
 
-## List Skill Versions
-
-**get** `/v1/skills/{skill_id}/versions`
+**GET** `/v1/skills/{skill_id}/versions`
 
 List Skill Versions
 
-### Path Parameters
+## Path parameters
 
 - `skill_id: string`
 
@@ -23,7 +18,7 @@ List Skill Versions
 
   The format and length of IDs may change over time.
 
-### Query Parameters
+## Query parameters
 
 - `limit: optional number`
 
@@ -31,11 +26,13 @@ List Skill Versions
 
   Ranges from `1` to `1000`. Defaults to `20`.
 
+  default: 20, minimum: 1, maximum: 1000
+
 - `page: optional string`
 
   Optionally set to the `next_page` token from the previous response.
 
-### Returns
+## Returns
 
 - `data: array of SkillVersion`
 
@@ -49,6 +46,8 @@ List Skill Versions
   - `created_at: string`
 
     ISO 8601 timestamp of when the skill was created.
+
+    format: date-time
 
   - `description: string`
 
@@ -75,7 +74,7 @@ List Skill Versions
 
     For Skill Versions, this is always `"skill_version"`.
 
-    - `"skill_version"`
+    default: skill_version
 
 - `next_page: string or null`
 
@@ -83,15 +82,15 @@ List Skill Versions
 
   If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

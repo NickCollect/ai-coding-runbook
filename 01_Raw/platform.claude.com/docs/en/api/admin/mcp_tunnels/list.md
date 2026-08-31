@@ -1,17 +1,14 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/mcp_tunnels/list
-fetched_at: 2026-08-17T02:15:23.984582+00:00
+fetched_at: 2026-08-31T06:29:46.383945+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: List Tunnels
-url: https://platform.claude.com/docs/en/api/admin/mcp_tunnels/list
----
+# List Tunnels
 
-## List Tunnels
+**GET** `/v1/organizations/tunnels`
 
-**get** `/v1/organizations/tunnels`
+**Deprecated**
 
 **Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](/docs/en/api/beta/tunnels) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
@@ -21,16 +18,20 @@ Results span the caller's organization, ordered by creation time
 (newest first). Use `workspace_id` to filter to a single workspace;
 archived tunnels are excluded unless `include_archived` is set.
 
-### Query Parameters
+## Query parameters
 
 - `include_archived: optional boolean`
 
   Include archived tunnels in the results. Archived tunnels are excluded by
   default.
 
+  default: false
+
 - `limit: optional number`
 
   Maximum number of tunnels to return in a single page.
+
+  default: 20, maximum: 1000, minimum: 1
 
 - `page: optional string`
 
@@ -42,17 +43,15 @@ archived tunnels are excluded unless `include_archived` is set.
   Return only tunnels in this Workspace. Accepts a `wrkspc_`-prefixed
   Workspace ID; omit to list tunnels across all Workspaces.
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": array of "mcp-tunnels-2026-05-19"`
 
   Required for all Tunnel endpoints.
 
-  - `"mcp-tunnels-2026-05-19"`
+## Returns
 
-### Returns
-
-- `data: array of object { id, archived_at, created_at, 4 more }`
+- `data: array of object`
 
   - `id: string`
 
@@ -63,9 +62,13 @@ archived tunnels are excluded unless `include_archived` is set.
     RFC 3339 datetime string indicating when the Tunnel was archived, or
     `null` if it is not archived.
 
+    format: date-time
+
   - `created_at: string`
 
     RFC 3339 datetime string indicating when the Tunnel was created.
+
+    format: date-time
 
   - `display_name: string or null`
 
@@ -81,7 +84,7 @@ archived tunnels are excluded unless `include_archived` is set.
 
     Object type. Always `tunnel` for Tunnels.
 
-    - `"tunnel"`
+    default: tunnel
 
   - `workspace_id: string or null`
 
@@ -92,15 +95,15 @@ archived tunnels are excluded unless `include_archived` is set.
 
   Opaque cursor for the next page, or `null` if there are no more results.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/tunnels \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

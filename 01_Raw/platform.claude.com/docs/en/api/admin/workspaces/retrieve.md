@@ -1,29 +1,24 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/workspaces/retrieve
-fetched_at: 2026-08-17T02:15:22.358264+00:00
+fetched_at: 2026-08-31T06:29:43.994758+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Get Workspace
-url: https://platform.claude.com/docs/en/api/admin/workspaces/retrieve
----
+# Get Workspace
 
-## Get Workspace
-
-**get** `/v1/organizations/workspaces/{workspace_id}`
+**GET** `/v1/organizations/workspaces/{workspace_id}`
 
 Get Workspace
 
-### Path Parameters
+## Path parameters
 
 - `workspace_id: string`
 
   ID of the Workspace.
 
-### Returns
+## Returns
 
-- `Workspace object { id, archived_at, compartment_id, 7 more }`
+- `Workspace object`
 
   - `id: string`
 
@@ -32,6 +27,8 @@ Get Workspace
   - `archived_at: string or null`
 
     RFC 3339 datetime string indicating when the Workspace was archived, or `null` if the Workspace is not archived.
+
+    format: date-time
 
   - `compartment_id: string`
 
@@ -46,7 +43,9 @@ Get Workspace
 
     RFC 3339 datetime string indicating when the Workspace was created.
 
-  - `data_residency: object { allowed_inference_geos, default_inference_geo, workspace_geo }`
+    format: date-time
+
+  - `data_residency: object`
 
     Data residency configuration.
 
@@ -57,8 +56,6 @@ Get Workspace
       - `array of string`
 
       - `"unrestricted"`
-
-        - `"unrestricted"`
 
     - `default_inference_geo: string`
 
@@ -96,17 +93,17 @@ Get Workspace
 
     For Workspaces, this is always `"workspace"`.
 
-    - `"workspace"`
+    default: workspace
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

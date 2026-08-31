@@ -1,17 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/service_accounts/list
-fetched_at: 2026-08-17T02:15:23.542201+00:00
+fetched_at: 2026-08-31T06:29:45.730579+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: List Service Accounts
-url: https://platform.claude.com/docs/en/api/admin/service_accounts/list
----
+# List Service Accounts
 
-## List Service Accounts
-
-**get** `/v1/organizations/service_accounts`
+**GET** `/v1/organizations/service_accounts`
 
 List service accounts in the caller's organization.
 
@@ -19,21 +14,25 @@ Results are ordered by creation time, newest first. Use `limit` and the
 `next_page` cursor to paginate; set `include_archived=true` to include
 archived service accounts.
 
-### Query Parameters
+## Query parameters
 
 - `include_archived: optional boolean`
 
   Include archived resources. Defaults to false.
 
+  default: false
+
 - `limit: optional number`
 
   Number of results per page.
+
+  default: 20, maximum: 100, minimum: 1
 
 - `page: optional string`
 
   Opaque cursor from a previous response's `next_page`.
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of string`
 
@@ -41,7 +40,7 @@ archived service accounts.
 
   To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-### Returns
+## Returns
 
 - `data: array of ServiceAccount`
 
@@ -53,6 +52,8 @@ archived service accounts.
 
     If set, this service account is archived.
 
+    format: date-time
+
   - `archived_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that archived this service account.
@@ -60,6 +61,8 @@ archived service accounts.
   - `created_at: string`
 
     When this service account was created.
+
+    format: date-time
 
   - `created_by_actor_id: string or null`
 
@@ -83,11 +86,13 @@ archived service accounts.
 
   - `type: "service_account"`
 
-    - `"service_account"`
+    default: service_account
 
   - `updated_at: string`
 
     When this service account was last updated.
+
+    format: date-time
 
   - `updated_by_actor_id: string or null`
 
@@ -97,15 +102,15 @@ archived service accounts.
 
   Opaque cursor for the next page, or null if no more results.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/service_accounts \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

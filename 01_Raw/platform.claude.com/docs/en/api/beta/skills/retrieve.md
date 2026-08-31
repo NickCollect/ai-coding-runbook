@@ -1,21 +1,16 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/skills/retrieve
-fetched_at: 2026-08-24T02:18:44.991870+00:00
+fetched_at: 2026-08-31T06:29:40.297485+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Get Skill
-url: https://platform.claude.com/docs/en/api/beta/skills/retrieve
----
+# Get Skill
 
-## Get Skill
-
-**get** `/v1/skills/{skill_id}`
+**GET** `/v1/skills/{skill_id}`
 
 Get Skill
 
-### Path Parameters
+## Path parameters
 
 - `skill_id: string`
 
@@ -23,7 +18,7 @@ Get Skill
 
   The format and length of IDs may change over time.
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -31,7 +26,7 @@ Get Skill
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -101,68 +96,110 @@ Get Skill
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+    - `"compact-2026-01-12"`
 
-- `id: string`
+    - `"computer-use-2025-11-24"`
 
-  Unique identifier for the skill.
+    - `"mcp-tunnels-2026-06-22"`
 
-  The format and length of IDs may change over time.
+    - `"structured-outputs-2025-11-13"`
 
-- `created_at: string`
+    - `"task-budgets-2026-03-13"`
 
-  ISO 8601 timestamp of when the skill was created.
+    - `"thinking-display-updates-2026-08-18"`
 
-- `display_title: string or null`
+    - `"ce-user-management-2026-07-13"`
 
-  Display title for the skill.
+## Returns
 
-  This is a human-readable label that is not included in the prompt sent to the model.
+- `BetaSkill object`
 
-- `latest_version: string or null`
+  - `id: string`
 
-  The latest version identifier for the skill.
+    Unique identifier for the skill.
 
-  This represents the most recent version of the skill that has been created.
+    The format and length of IDs may change over time.
 
-- `source: string`
+  - `created_at: string`
 
-  Source of the skill.
+    ISO 8601 timestamp of when the skill was created.
 
-  This may be one of the following values:
+    format: date-time
 
-  * `"custom"`: the skill was created by a user
-  * `"anthropic"`: the skill was created by Anthropic
+  - `display_name: string`
 
-- `type: string`
+    Human-readable, single-line label for the Skill. Maximum 255 characters.
+    Always set: derived from the SKILL.md frontmatter `name` when omitted at
+    creation. Not unique.
 
-  Object type.
+  - `latest_version_id: string`
 
-  For Skills, this is always `"skill"`.
+    ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
 
-- `updated_at: string`
+  - `source: BetaSkillSource`
 
-  ISO 8601 timestamp of when the skill was last updated.
+    Where the Skill comes from.
 
-### Example
+    Possible values:
 
-```http
+    * `"custom"`: authored by the platform user; private to their workspace
+    * `"anthropic"`: published by Anthropic; shared and read-only
+    * `"anthropic_example"`: Anthropic-published sample Skill
+    * `"plugin"`: resolved from an installed plugin
+
+    - `type: "custom" or "anthropic" or "anthropic_example" or "plugin"`
+
+      Where the Skill comes from.
+
+      Possible values:
+
+      * `"custom"`: authored by the platform user; private to their workspace
+      * `"anthropic"`: published by Anthropic; shared and read-only
+      * `"anthropic_example"`: Anthropic-published sample Skill
+      * `"plugin"`: resolved from an installed plugin
+
+      - `"custom"`
+
+      - `"anthropic"`
+
+      - `"anthropic_example"`
+
+      - `"plugin"`
+
+  - `type: "skill"`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
+
+    default: skill
+
+  - `updated_at: string`
+
+    ISO 8601 timestamp of when the skill was last updated.
+
+    format: date-time
+
+## Example
+
+```bash
 curl https://api.anthropic.com/v1/skills/$SKILL_ID \
     -H 'anthropic-version: 2023-06-01' \
-    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {
   "id": "skill_01JAbcdefghijklmnopqrstuvw",
   "created_at": "2024-10-30T23:58:27.427722Z",
-  "display_title": "My Custom Skill",
-  "latest_version": "1759178010641129",
-  "source": "custom",
-  "type": "type",
+  "display_name": "display_name",
+  "latest_version_id": "latest_version_id",
+  "source": {
+    "type": "custom"
+  },
+  "type": "skill",
   "updated_at": "2024-10-30T23:58:27.427722Z"
 }
 ```

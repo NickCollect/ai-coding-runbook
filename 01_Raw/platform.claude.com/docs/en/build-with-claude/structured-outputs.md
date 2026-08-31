@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/structured-outputs
-fetched_at: 2026-08-24T02:18:35.912100+00:00
+fetched_at: 2026-08-31T06:29:31.173473+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,9 +13,8 @@ description: Get validated JSON results from agent workflows
 ## Compatibility
 - [ZDR](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention): eligible (excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements))
 - Supported models: `claude-fable-5`, `claude-mythos-5`, `claude-mythos-preview`, `claude-opus-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6`, `claude-sonnet-5`, `claude-sonnet-4-6`, `claude-sonnet-4-5-20250929`, `claude-opus-4-5-20251101`, `claude-haiku-4-5-20251001`
-- Platforms: Claude API, Claude Platform on AWS, Amazon Bedrock [1], Google Cloud, Microsoft Foundry [2]
+- Platforms: Claude API, Claude Platform on AWS, Amazon Bedrock [1], Google Cloud, Microsoft Foundry
 1. On Amazon Bedrock, structured outputs are available for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5.
-2. On [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry), structured outputs require a [Hosted on Anthropic deployment](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry#additional-features-not-supported-when-hosted-on-azure).
 
 Structured outputs constrain Claude's responses to follow a specific schema, ensuring valid, parseable output for downstream processing. Structured outputs provide two complementary features:
 
@@ -1413,7 +1412,7 @@ This means Claude receives a simplified schema, but your code still enforces all
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
         -d '{
-          "model": "claude-opus-4-8",
+          "model": "claude-opus-5",
           "max_tokens": 4096,
           "messages": [
             {
@@ -1747,7 +1746,7 @@ This means Claude receives a simplified schema, but your code still enforces all
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
         -d '{
-          "model": "claude-opus-4-8",
+          "model": "claude-opus-5",
           "max_tokens": 1024,
           "messages": [
             {
@@ -2034,7 +2033,7 @@ This means Claude receives a simplified schema, but your code still enforces all
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
         -d '{
-          "model": "claude-opus-4-8",
+          "model": "claude-opus-5",
           "max_tokens": 1024,
           "messages": [
             {
@@ -2386,7 +2385,7 @@ When combined, Claude can call tools with guaranteed-valid parameters AND return
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "messages": [
         {

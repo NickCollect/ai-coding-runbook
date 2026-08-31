@@ -1,23 +1,18 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/models/list
-fetched_at: 2026-08-24T02:18:40.763108+00:00
+fetched_at: 2026-08-31T06:29:36.615010+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: List Models
-url: https://platform.claude.com/docs/en/api/models/list
----
+# List Models
 
-## List Models
-
-**get** `/v1/models`
+**GET** `/v1/models`
 
 List available models.
 
 The Models API response can be used to determine which models are available for use in the API. More recently released models are listed first.
 
-### Query Parameters
+## Query parameters
 
 - `after_id: optional string`
 
@@ -33,7 +28,9 @@ The Models API response can be used to determine which models are available for 
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
-### Header Parameters
+  default: 20, maximum: 1000, minimum: 1
+
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -41,7 +38,7 @@ The Models API response can be used to determine which models are available for 
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -111,7 +108,21 @@ The Models API response can be used to determine which models are available for 
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Returns
 
 - `data: array of ModelInfo`
 
@@ -223,6 +234,8 @@ The Models API response can be used to determine which models are available for 
 
     RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
+    format: date-time
+
   - `display_name: string`
 
     A human-readable name for the model.
@@ -241,7 +254,7 @@ The Models API response can be used to determine which models are available for 
 
     For Models, this is always `"model"`.
 
-    - `"model"`
+    default: model
 
 - `first_id: string or null`
 
@@ -255,15 +268,15 @@ The Models API response can be used to determine which models are available for 
 
   Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/models \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

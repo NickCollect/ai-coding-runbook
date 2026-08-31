@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/libraries/apple-foundation-models
-fetched_at: 2026-08-24T02:18:39.916375+00:00
+fetched_at: 2026-08-31T06:29:35.931449+00:00
 fetch_method: mintlify_md
 ---
 
@@ -77,7 +77,7 @@ Model identifiers are values of `ClaudeModel`. Use a compiled-in constant, or co
 ClaudeLanguageModel(name: .opus5, auth: auth)
 ```
 
-Constants mirror API model IDs (`.opus5` is `claude-opus-5`) and carry each model's capabilities. New models ship as new constants in package releases; check `ClaudeModel` in Xcode for the current list, and the [Models overview](https://platform.claude.com/docs/en/about-claude/models/overview) to compare models.
+Constants mirror API model IDs (`.opus5` is `claude-opus-5`) and carry each model's capabilities. New models ship as new constants in package releases; check `ClaudeModel` in Xcode for the current list, and the [Models overview](https://platform.claude.com/docs/en/models/overview) to compare models.
 
 ### Capabilities
 

@@ -1,25 +1,20 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/work/stats
-fetched_at: 2026-08-24T02:18:42.395893+00:00
+fetched_at: 2026-08-31T06:29:38.219527+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Get Queue Statistics
-url: https://platform.claude.com/docs/en/api/beta/environments/work/stats
----
+# Get Queue Statistics
 
-## Get Queue Statistics
-
-**get** `/v1/environments/{environment_id}/work/stats`
+**GET** `/v1/environments/{environment_id}/work/stats`
 
 Get statistics about the work queue for an environment.
 
-### Path Parameters
+## Path parameters
 
 - `environment_id: string`
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -27,7 +22,7 @@ Get statistics about the work queue for an environment.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -97,9 +92,23 @@ Get statistics about the work queue for an environment.
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+    - `"compact-2026-01-12"`
 
-- `BetaSelfHostedWorkQueueStats object { depth, oldest_queued_at, pending, 2 more }`
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Returns
+
+- `BetaSelfHostedWorkQueueStats object`
 
   Statistics about the work queue for an environment.
 
@@ -117,26 +126,28 @@ Get statistics about the work queue for an environment.
 
     Number of work items being processed (polled but not acknowledged)
 
+    default: 0
+
   - `type: "work_queue_stats"`
 
     The type of object
 
-    - `"work_queue_stats"`
+    default: work_queue_stats
 
   - `workers_polling: number or null`
 
     Number of workers that have polled for work in the last 30 seconds. Requires worker_id to be sent with poll requests.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

@@ -1,31 +1,30 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/spend_limits/retrieve
-fetched_at: 2026-08-17T02:15:23.329207+00:00
+fetched_at: 2026-08-31T06:29:45.378450+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Get Spend Limit
-url: https://platform.claude.com/docs/en/api/admin/spend_limits/retrieve
----
+# Get Spend Limit
 
-## Get Spend Limit
-
-**get** `/v1/organizations/spend_limits/{spend_limit_id}`
+**GET** `/v1/organizations/spend_limits/{spend_limit_id}`
 
 Retrieve a spend limit by ID.
 
-### Path Parameters
+## Path parameters
 
 - `spend_limit_id: string`
 
   ID of the Spend Limit.
 
-### Returns
+## Returns
 
-- `SpendLimit object { id, amount, created_at, 5 more }`
+- `SpendLimit object`
+
+  A configured spend limit: a cap on metered spend for one scope and period.
 
   - `id: string`
+
+    Unique tagged ID of the spend limit (`spl_...`).
 
   - `amount: string or null`
 
@@ -33,11 +32,17 @@ Retrieve a spend limit by ID.
 
   - `created_at: string`
 
+    RFC 3339 datetime at which the spend limit was created.
+
+    format: date-time
+
   - `currency: string`
 
     ISO 4217 code of the organization's billing currency; the unit for `amount`.
 
   - `period: "daily" or "monthly" or "weekly"`
+
+    Length of the window the limit resets over. `amount` caps spend within each period.
 
     - `"daily"`
 
@@ -45,61 +50,75 @@ Retrieve a spend limit by ID.
 
     - `"weekly"`
 
-  - `scope: object { type, user_id }  or object { seat_tier, type }  or object { rbac_group_id, type }  or 2 more`
+  - `scope: object or object or object or 2 more`
 
-    - `User object { type, user_id }`
+    What the limit applies to. A tagged union on `type`; each variant carries the identifier for its scope.
+
+    - `User object`
+
+      Scope selecting a single member of the organization.
 
       - `type: "user"`
 
-        - `"user"`
+        Scope type. Always `user` for this scope.
+
+        default: user
 
       - `user_id: string`
 
-    - `SeatTier object { seat_tier, type }`
+        Tagged ID of the member the spend limit applies to.
+
+    - `SeatTier object`
 
       - `seat_tier: string`
 
       - `type: "seat_tier"`
 
-        - `"seat_tier"`
+        default: seat_tier
 
-    - `RbacGroup object { rbac_group_id, type }`
+    - `RbacGroup object`
 
       - `rbac_group_id: string`
 
       - `type: "rbac_group"`
 
-        - `"rbac_group"`
+        default: rbac_group
 
-    - `OrganizationService object { service, type }`
+    - `OrganizationService object`
 
       - `service: string`
 
       - `type: "organization_service"`
 
-        - `"organization_service"`
+        default: organization_service
 
-    - `Organization object { type }`
+    - `Organization object`
 
       - `type: "organization"`
 
-        - `"organization"`
+        default: organization
 
   - `type: "spend_limit"`
 
-    - `"spend_limit"`
+    Object type. Always `spend_limit`.
+
+    default: spend_limit
 
   - `updated_at: string`
 
-### Example
+    RFC 3339 datetime at which the spend limit was last modified.
 
-```http
+    format: date-time
+
+## Example
+
+```bash
 curl https://api.anthropic.com/v1/organizations/spend_limits/$SPEND_LIMIT_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {
@@ -110,7 +129,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limits/$SPEND_LIMIT_ID \
   "period": "monthly",
   "scope": {
     "type": "user",
-    "user_id": "user_id"
+    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
   },
   "type": "spend_limit",
   "updated_at": "2019-12-27T18:11:19.117Z"

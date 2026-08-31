@@ -1,29 +1,24 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/work/heartbeat
-fetched_at: 2026-08-24T02:18:42.282594+00:00
+fetched_at: 2026-08-31T06:29:38.106020+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Record Heartbeat
-url: https://platform.claude.com/docs/en/api/beta/environments/work/heartbeat
----
+# Record Heartbeat
 
-## Record Heartbeat
-
-**post** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
+**POST** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Record a heartbeat for a work item to maintain the lease.
 
-### Path Parameters
+## Path parameters
 
 - `environment_id: string`
 
 - `work_id: string`
 
-### Query Parameters
+## Query parameters
 
 - `desired_ttl_seconds: optional number`
 
@@ -33,7 +28,7 @@ Record a heartbeat for a work item to maintain the lease.
 
   Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -41,7 +36,7 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -111,9 +106,23 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+    - `"compact-2026-01-12"`
 
-- `BetaSelfHostedWorkHeartbeatResponse object { last_heartbeat, lease_extended, state, 2 more }`
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Returns
+
+- `BetaSelfHostedWorkHeartbeatResponse object`
 
   Response after recording a heartbeat for a work item.
 
@@ -147,11 +156,11 @@ Record a heartbeat for a work item to maintain the lease.
 
     The type of response
 
-    - `"work_heartbeat"`
+    default: work_heartbeat
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID/heartbeat \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
@@ -159,7 +168,7 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID/hea
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

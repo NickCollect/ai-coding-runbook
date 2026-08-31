@@ -1,32 +1,27 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/chats/files/delete
-fetched_at: 2026-08-17T02:15:24.745384+00:00
+fetched_at: 2026-08-31T06:29:47.421598+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Delete file
-url: https://platform.claude.com/docs/en/api/compliance/apps/chats/files/delete
----
+# Delete file
 
-## Delete file
-
-**delete** `/v1/compliance/apps/chats/files/{claude_file_id}`
+**DELETE** `/v1/compliance/apps/chats/files/{claude_file_id}`
 
 Permanently deletes a specific file. This is a destructive
 operation that cannot be undone.
 
-### Path Parameters
+## Path parameters
 
 - `claude_file_id: string`
 
   The file ID (tagged ID, e.g., claude_file_abc123)
 
-### Header Parameters
+## Headers
 
 - `"x-api-key": optional string`
 
-### Returns
+## Returns
 
 - `id: string`
 
@@ -36,17 +31,17 @@ operation that cannot be undone.
 
   Constant string confirming deletion
 
-  - `"claude_file_deleted"`
+  default: claude_file_deleted
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID \
     -X DELETE \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

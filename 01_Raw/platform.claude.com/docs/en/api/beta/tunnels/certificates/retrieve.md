@@ -1,29 +1,24 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/tunnels/certificates/retrieve
-fetched_at: 2026-08-24T02:18:45.703071+00:00
+fetched_at: 2026-08-31T06:29:41.105480+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Get Tunnel Certificate
-url: https://platform.claude.com/docs/en/api/beta/tunnels/certificates/retrieve
----
+# Get Tunnel Certificate
 
-## Get Tunnel Certificate
-
-**get** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}`
+**GET** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
 Fetches a tunnel certificate by ID.
 
-### Path Parameters
+## Path parameters
 
 - `tunnel_id: string`
 
 - `certificate_id: string`
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -31,7 +26,7 @@ Fetches a tunnel certificate by ID.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -101,9 +96,23 @@ Fetches a tunnel certificate by ID.
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+    - `"compact-2026-01-12"`
 
-- `BetaTunnelCertificate object { id, archived_at, created_at, 4 more }`
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Returns
+
+- `BetaTunnelCertificate object`
 
   A CA certificate attached to a tunnel.
 
@@ -115,13 +124,19 @@ Fetches a tunnel certificate by ID.
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `expires_at: string or null`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `fingerprint: string`
 
@@ -133,18 +148,16 @@ Fetches a tunnel certificate by ID.
 
   - `type: "tunnel_certificate"`
 
-    - `"tunnel_certificate"`
+## Example
 
-### Example
-
-```http
+```bash
 curl https://api.anthropic.com/v1/tunnels/$TUNNEL_ID/certificates/$CERTIFICATE_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: mcp-tunnels-2026-06-22' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

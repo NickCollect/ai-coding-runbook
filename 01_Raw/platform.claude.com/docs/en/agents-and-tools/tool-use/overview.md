@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview
-fetched_at: 2026-08-24T02:18:36.147536+00:00
+fetched_at: 2026-08-31T06:29:31.483508+00:00
 fetch_method: mintlify_md
 ---
 
@@ -888,7 +888,7 @@ When you use `tools`, the API also automatically includes a special system promp
 
 These token counts are added to your normal input and output tokens to calculate the total cost of a request.
 
-See the [Models overview](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison) table for current per-model prices.
+See the [Models overview](https://platform.claude.com/docs/en/models/overview#latest-models-comparison) table for current per-model prices.
 
 When you send a tool use prompt, like any other API request, the response includes both input and output token counts in the reported `usage` metrics.
 

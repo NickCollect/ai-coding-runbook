@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/go
-fetched_at: 2026-08-24T02:18:39.827584+00:00
+fetched_at: 2026-08-31T06:29:35.843560+00:00
 fetch_method: mintlify_md
 ---
 
@@ -69,7 +69,7 @@ func main() {
 }
 ```
 
-For authentication options including Workload Identity Federation, see [Authentication](https://platform.claude.com/docs/en/manage-claude/authentication).
+For authentication options including Workload Identity Federation, see [Authentication](https://platform.claude.com/docs/en/manage-claude/authentication). If your API key is a [personal or service account key](https://platform.claude.com/docs/en/manage-claude/authentication#key-types) with access to multiple workspaces, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](https://platform.claude.com/docs/en/manage-claude/authentication#select-a-workspace) shows the per-request option for this SDK.
 
 <AccordionGroup>
   <Accordion title="Conversations">

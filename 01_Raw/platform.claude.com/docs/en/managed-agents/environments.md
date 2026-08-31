@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/environments
-fetched_at: 2026-08-24T02:18:37.814514+00:00
+fetched_at: 2026-08-31T06:29:33.052228+00:00
 fetch_method: mintlify_md
 ---
 
@@ -230,7 +230,7 @@ Pass the environment ID as a string when [creating a session](https://platform.c
 
 ### Packages
 
-The `packages` field pre-installs packages into the sandbox before the agent starts. Packages are installed by their respective package managers and cached across sessions that share the same environment. When multiple package managers are specified, they run in alphabetical order (apt, cargo, gem, go, npm, pip). You can optionally pin specific versions. Unpinned packages install the latest version.
+The `packages` field pre-installs packages into the sandbox before the agent starts. Packages are installed by their respective package managers and cached across sessions that share the same environment. When multiple package managers are specified, they run in alphabetical order (apt, cargo, gem, go, npm, pip). You can optionally pin specific versions. Unpinned packages install the latest version. If the environment uses `limited` [networking](https://platform.claude.com/docs/en/managed-agents/environments#networking), also set `networking.allow_package_managers` to `true`; otherwise the request is rejected with a 400 error.
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
@@ -577,7 +577,7 @@ When using `limited` networking:
 
 * `allowed_hosts` specifies domains the sandbox can reach. Specify bare hostnames or wildcard patterns (such as `*.example.com`). Do not include a URL scheme, port, or path.
 * `allow_mcp_servers` allows outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
-* `allow_package_managers` allows outbound access to public package registries (such as PyPI and npm) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+* `allow_package_managers` allows outbound access to public package registries (such as PyPI and npm) beyond those listed in the `allowed_hosts` array. Defaults to `false`. Set it to `true` whenever the environment specifies `packages`; otherwise the request is rejected with a 400 error, even if the registry hosts are listed in `allowed_hosts`.
 
 ## Environment lifecycle
 

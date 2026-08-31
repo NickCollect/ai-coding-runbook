@@ -1,19 +1,14 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/completions
-fetched_at: 2026-08-24T02:18:40.251863+00:00
+fetched_at: 2026-08-31T06:29:36.267495+00:00
 fetch_method: mintlify_md
----
-
----
-title: Completions
-url: https://platform.claude.com/docs/en/api/completions
 ---
 
 # Completions
 
 ## Create a Text Completion
 
-**post** `/v1/complete`
+**POST** `/v1/complete`
 
 [Legacy] Create a Text Completion.
 
@@ -21,7 +16,7 @@ The Text Completions API is a legacy API. We recommend using the [Messages API](
 
 Future models and features will not be compatible with Text Completions. See our [migration guide](https://platform.claude.com/docs/en/build-with-claude/working-with-messages) for guidance in migrating from Text Completions to Messages.
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -29,7 +24,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -99,13 +94,29 @@ Future models and features will not be compatible with Text Completions. See our
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Body Parameters
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+### Body parameters
 
 - `max_tokens_to_sample: number`
 
   The maximum number of tokens to generate before stopping.
 
   Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
+
+  minimum: 1
 
 - `model: Model`
 
@@ -201,6 +212,8 @@ Future models and features will not be compatible with Text Completions. See our
 
   See [prompt validation](https://platform.claude.com/docs/en/build-with-claude/working-with-messages) and our guide to [prompt design](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview) for more details.
 
+  minLength: 1
+
 - `metadata: optional Metadata`
 
   An object describing metadata about the request.
@@ -210,6 +223,8 @@ Future models and features will not be compatible with Text Completions. See our
     An external identifier for the user who is associated with the request.
 
     This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
+
+    maxLength: 512
 
 - `stop_sequences: optional array of string`
 
@@ -227,13 +242,19 @@ Future models and features will not be compatible with Text Completions. See our
 
 - `temperature: optional number`
 
+  **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+
   Amount of randomness injected into the response.
 
   Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
 
   Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
+  maximum: 1, minimum: 0
+
 - `top_k: optional number`
+
+  **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not accept top_k; any value will be rejected with a 400 error.
 
   Only sample from the top K options for each subsequent token.
 
@@ -241,7 +262,11 @@ Future models and features will not be compatible with Text Completions. See our
 
   Recommended for advanced use cases only.
 
+  minimum: 0
+
 - `top_p: optional number`
+
+  **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting top_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
   Use nucleus sampling.
 
@@ -249,9 +274,11 @@ Future models and features will not be compatible with Text Completions. See our
 
   Recommended for advanced use cases only.
 
+  maximum: 1, minimum: 0
+
 ### Returns
 
-- `Completion object { id, completion, model, 2 more }`
+- `Completion object`
 
   - `id: string`
 
@@ -352,11 +379,13 @@ Future models and features will not be compatible with Text Completions. See our
 
     For Text Completions, this is always `"completion"`.
 
-    - `"completion"`
+    default: completion
+
+- `Completion object`
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/complete \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -372,7 +401,7 @@ curl https://api.anthropic.com/v1/complete \
         }'
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -384,11 +413,11 @@ curl https://api.anthropic.com/v1/complete \
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Completion
 
-- `Completion object { id, completion, model, 2 more }`
+- `Completion object`
 
   - `id: string`
 
@@ -489,4 +518,4 @@ curl https://api.anthropic.com/v1/complete \
 
     For Text Completions, this is always `"completion"`.
 
-    - `"completion"`
+    default: completion

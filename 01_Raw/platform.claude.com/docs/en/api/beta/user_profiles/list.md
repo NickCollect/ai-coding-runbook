@@ -1,25 +1,22 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/user_profiles/list
-fetched_at: 2026-08-24T02:18:45.160202+00:00
+fetched_at: 2026-08-31T06:29:40.536566+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: List User Profiles
-url: https://platform.claude.com/docs/en/api/beta/user_profiles/list
----
+# List User Profiles
 
-## List User Profiles
-
-**get** `/v1/user_profiles`
+**GET** `/v1/user_profiles`
 
 List User Profiles
 
-### Query Parameters
+## Query parameters
 
 - `limit: optional number`
 
   Query parameter for limit
+
+  format: int32
 
 - `order: optional "asc" or "desc"`
 
@@ -33,7 +30,7 @@ List User Profiles
 
   Query parameter for page
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -41,7 +38,7 @@ List User Profiles
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -111,7 +108,21 @@ List User Profiles
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Returns
 
 - `data: array of BetaUserProfile`
 
@@ -124,6 +135,8 @@ List User Profiles
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: map[string]`
 
@@ -147,11 +160,11 @@ List User Profiles
 
     Object type. Always `user_profile`.
 
-    - `"user_profile"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `access_type: optional "application" or "passthrough"`
 
@@ -183,16 +196,16 @@ List User Profiles
 
   Cursor for the next page, or `null` when there are no more results.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/user_profiles \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: user-profiles-2026-08-18' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

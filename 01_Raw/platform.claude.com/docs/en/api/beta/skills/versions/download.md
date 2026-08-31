@@ -1,21 +1,16 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/skills/versions/download
-fetched_at: 2026-08-24T02:18:45.023886+00:00
+fetched_at: 2026-08-31T06:29:40.422524+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Download Skill Version Content
-url: https://platform.claude.com/docs/en/api/beta/skills/versions/download
----
+# Download Skill Version Content
 
-## Download Skill Version Content
-
-**get** `/v1/skills/{skill_id}/versions/{version}/content`
+**GET** `/v1/skills/{skill_id}/versions/{version}/content`
 
 Download a skill version's content as a zip archive.
 
-### Path Parameters
+## Path parameters
 
 - `skill_id: string`
 
@@ -25,11 +20,11 @@ Download a skill version's content as a zip archive.
 
 - `version: string`
 
-  Version identifier for the skill.
+  Identifies the skill version by its version ID.
 
-  Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+  Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -37,7 +32,7 @@ Download a skill version's content as a zip archive.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -107,11 +102,24 @@ Download a skill version's content as a zip archive.
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Example
+    - `"compact-2026-01-12"`
 
-```http
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Example
+
+```bash
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION/content \
     -H 'anthropic-version: 2023-06-01' \
-    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```

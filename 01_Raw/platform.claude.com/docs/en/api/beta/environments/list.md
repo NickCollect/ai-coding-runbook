@@ -1,35 +1,34 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/list
-fetched_at: 2026-08-24T02:18:42.002274+00:00
+fetched_at: 2026-08-31T06:29:37.877879+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: List Environments
-url: https://platform.claude.com/docs/en/api/beta/environments/list
----
+# List Environments
 
-## List Environments
-
-**get** `/v1/environments`
+**GET** `/v1/environments`
 
 List environments with pagination support.
 
-### Query Parameters
+## Query parameters
 
 - `include_archived: optional boolean`
 
   Include archived environments in the response
 
+  default: false
+
 - `limit: optional number`
 
   Maximum number of environments to return
+
+  default: 20, maximum: 1000, minimum: 1
 
 - `page: optional string`
 
   Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -37,7 +36,7 @@ List environments with pagination support.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -107,7 +106,21 @@ List environments with pagination support.
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Returns
 
 - `data: array of BetaEnvironment`
 
@@ -125,7 +138,7 @@ List environments with pagination support.
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `BetaCloudConfig object { networking, packages, type }`
+    - `BetaCloudConfig object`
 
       `cloud` environment configuration.
 
@@ -133,7 +146,7 @@ List environments with pagination support.
 
         Network configuration policy.
 
-        - `BetaUnrestrictedNetwork object { type }`
+        - `BetaUnrestrictedNetwork object`
 
           Unrestricted network access.
 
@@ -141,9 +154,7 @@ List environments with pagination support.
 
             Network policy type
 
-            - `"unrestricted"`
-
-        - `BetaLimitedNetwork object { allow_mcp_servers, allow_package_managers, allowed_hosts, type }`
+        - `BetaLimitedNetwork object`
 
           Limited network access.
 
@@ -162,8 +173,6 @@ List environments with pagination support.
           - `type: "limited"`
 
             Network policy type
-
-            - `"limited"`
 
       - `packages: BetaPackages`
 
@@ -197,23 +206,19 @@ List environments with pagination support.
 
           Package configuration type
 
-          - `"packages"`
+          default: packages
 
       - `type: "cloud"`
 
         Environment type
 
-        - `"cloud"`
-
-    - `BetaSelfHostedConfig object { type }`
+    - `BetaSelfHostedConfig object`
 
       Configuration for self-hosted environments.
 
       - `type: "self_hosted"`
 
         Environment type
-
-        - `"self_hosted"`
 
   - `created_at: string`
 
@@ -235,7 +240,7 @@ List environments with pagination support.
 
     The type of object (always 'environment')
 
-    - `"environment"`
+    default: environment
 
   - `updated_at: string`
 
@@ -253,16 +258,16 @@ List environments with pagination support.
 
   Token for fetching the next page of results. If `null`, there are no more results available. Pass this value to the `page` parameter in the next request.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/environments \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

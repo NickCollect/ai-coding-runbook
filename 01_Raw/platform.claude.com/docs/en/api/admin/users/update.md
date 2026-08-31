@@ -1,33 +1,28 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/users/update
-fetched_at: 2026-08-17T02:15:22.070323+00:00
+fetched_at: 2026-08-31T06:29:43.423050+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Update User
-url: https://platform.claude.com/docs/en/api/admin/users/update
----
+# Update User
 
-## Update User
+**POST** `/v1/organizations/users/{user_id}`
 
-**post** `/v1/organizations/users/{user_id}`
+Update a member's organization role.
 
-For Claude Enterprise organizations, this endpoint's availability is in beta.
-
-### Path Parameters
+## Path parameters
 
 - `user_id: string`
 
   ID of the User.
 
-### Body Parameters
+## Body parameters
 
 - `role: "billing" or "claude_code_user" or "developer" or 2 more`
 
   New role for the User.
 
-  The accepted values depend on the organization type. Console and API organizations accept `user`, `developer`, `billing`, and `claude_code_user`; `admin` cannot be assigned through the API. Claude Enterprise organizations (beta) accept `user` and `managed`.
+  The accepted values depend on the organization type. Console and API organizations accept `user`, `developer`, `billing`, and `claude_code_user`; `admin` cannot be assigned through the API. Claude Enterprise organizations accept `user` and `managed`.
 
   - `"billing"`
 
@@ -39,9 +34,9 @@ For Claude Enterprise organizations, this endpoint's availability is in beta.
 
   - `"user"`
 
-### Returns
+## Returns
 
-- `User object { id, added_at, email, 3 more }`
+- `User object`
 
   - `id: string`
 
@@ -50,6 +45,8 @@ For Claude Enterprise organizations, this endpoint's availability is in beta.
   - `added_at: string`
 
     RFC 3339 datetime string indicating when the User joined the Organization.
+
+    format: date-time
 
   - `email: string`
 
@@ -87,11 +84,11 @@ For Claude Enterprise organizations, this endpoint's availability is in beta.
 
     For Users, this is always `"user"`.
 
-    - `"user"`
+    default: user
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -101,7 +98,7 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
         }'
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

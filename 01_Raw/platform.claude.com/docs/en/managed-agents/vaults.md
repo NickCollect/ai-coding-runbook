@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/vaults
-fetched_at: 2026-08-24T02:18:38.057456+00:00
+fetched_at: 2026-08-31T06:29:33.261092+00:00
 fetch_method: mintlify_md
 ---
 
@@ -21,7 +21,7 @@ The vault reference is a per-session parameter, so you can manage your product a
 ## Create a vault
 
 <Warning>
-  Vaults and credentials are workspace-scoped, meaning anyone with an API key for the same workspace can reference them when creating a session. To revoke access, delete the vault or credential.
+  Vaults and credentials are workspace-scoped, meaning any API key with workspace access can reference them when creating a session. To revoke access, delete the vault or credential.
 </Warning>
 
 A vault is the collection of `credentials` associated with an end user. Give it a `display_name` and optionally tag it with `metadata` so you can map it back to your own user records.

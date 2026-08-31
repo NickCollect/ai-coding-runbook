@@ -1,29 +1,26 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/external_keys/delete
-fetched_at: 2026-08-17T02:15:22.841215+00:00
+fetched_at: 2026-08-31T06:29:44.685729+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Delete External Key
-url: https://platform.claude.com/docs/en/api/admin/external_keys/delete
----
+# Delete External Key
 
-## Delete External Key
-
-**delete** `/v1/organizations/external_keys/{external_key_id}`
+**DELETE** `/v1/organizations/external_keys/{external_key_id}`
 
 Delete an external key config.
 
 The request is rejected if any workspace still references this config.
 
-### Path Parameters
+## Path parameters
 
 - `external_key_id: string`
 
   ID of the External Key.
 
-### Returns
+  maxLength: 2048
+
+## Returns
 
 - `id: string`
 
@@ -31,18 +28,18 @@ The request is rejected if any workspace still references this config.
 
 - `type: "external_key_deleted"`
 
-  - `"external_key_deleted"`
+  default: external_key_deleted
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

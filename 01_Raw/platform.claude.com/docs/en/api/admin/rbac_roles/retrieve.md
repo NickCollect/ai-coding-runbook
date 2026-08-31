@@ -1,39 +1,26 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/rbac_roles/retrieve
-fetched_at: 2026-08-17T02:15:22.282785+00:00
+fetched_at: 2026-08-31T06:29:43.863624+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Get RBAC Role
-url: https://platform.claude.com/docs/en/api/admin/rbac_roles/retrieve
----
+# Get RBAC Role
 
-## Get RBAC Role
-
-**get** `/v1/organizations/rbac_roles/{role_id}`
+**GET** `/v1/organizations/rbac_roles/{role_id}`
 
 Retrieve an RBAC Role by ID.
 
-The RBAC Roles API is in beta and available to Claude Enterprise organizations only. Requests must send the `ce-user-management-2026-07-13` value in the `anthropic-beta` header.
+The RBAC Roles API is available to Claude Enterprise organizations only.
 
-### Path Parameters
+## Path parameters
 
 - `role_id: string`
 
   ID of the RBAC Role.
 
-### Header Parameters
+## Returns
 
-- `"anthropic-beta": optional array of string`
-
-  Optional header to specify the beta version(s) you want to use.
-
-  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
-
-### Returns
-
-- `RbacRole object { id, created_at, name, 2 more }`
+- `RbacRole object`
 
   - `id: string`
 
@@ -42,6 +29,8 @@ The RBAC Roles API is in beta and available to Claude Enterprise organizations o
   - `created_at: string`
 
     RFC 3339 datetime string indicating when the RBAC Role was created.
+
+    format: date-time
 
   - `name: string`
 
@@ -53,21 +42,23 @@ The RBAC Roles API is in beta and available to Claude Enterprise organizations o
 
     For RBAC Roles, this is always `"rbac_role"`.
 
-    - `"rbac_role"`
+    default: rbac_role
 
   - `updated_at: string`
 
     RFC 3339 datetime string indicating when the RBAC Role was last updated.
 
-### Example
+    format: date-time
 
-```http
+## Example
+
+```bash
 curl https://api.anthropic.com/v1/organizations/rbac_roles/$ROLE_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

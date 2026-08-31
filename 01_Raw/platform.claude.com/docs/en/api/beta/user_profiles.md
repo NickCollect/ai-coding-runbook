@@ -1,23 +1,18 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/user_profiles
-fetched_at: 2026-08-24T02:18:45.073067+00:00
+fetched_at: 2026-08-31T06:29:40.507764+00:00
 fetch_method: mintlify_md
----
-
----
-title: User Profiles
-url: https://platform.claude.com/docs/en/api/beta/user_profiles
 ---
 
 # User Profiles
 
 ## Create User Profile
 
-**post** `/v1/user_profiles`
+**POST** `/v1/user_profiles`
 
 Create User Profile
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -25,7 +20,7 @@ Create User Profile
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -95,7 +90,21 @@ Create User Profile
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Body Parameters
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+### Body parameters
 
 - `access_type: optional "application" or "passthrough"`
 
@@ -109,6 +118,8 @@ Create User Profile
 
   Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
 
+  minLength: 1, maxLength: 255
+
 - `metadata: optional map[string]`
 
   Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
@@ -116,6 +127,8 @@ Create User Profile
 - `name: optional string or null`
 
   Optional for all profiles. Real-world name of the entity this profile represents (company or individual); for a resold-to company (`relationship` `resold` / `access_type` `passthrough`), that company's name where known. Maximum 255 characters.
+
+  minLength: 1, maxLength: 255
 
 - `relationship: optional "external" or "resold" or "internal"`
 
@@ -129,7 +142,7 @@ Create User Profile
 
 ### Returns
 
-- `BetaUserProfile object { id, created_at, metadata, 7 more }`
+- `BetaUserProfile object`
 
   - `id: string`
 
@@ -138,6 +151,8 @@ Create User Profile
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: map[string]`
 
@@ -161,11 +176,11 @@ Create User Profile
 
     Object type. Always `user_profile`.
 
-    - `"user_profile"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `access_type: optional "application" or "passthrough"`
 
@@ -195,7 +210,7 @@ Create User Profile
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/user_profiles \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -207,7 +222,7 @@ curl https://api.anthropic.com/v1/user_profiles \
         }'
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -230,15 +245,17 @@ curl https://api.anthropic.com/v1/user_profiles \
 
 ## List User Profiles
 
-**get** `/v1/user_profiles`
+**GET** `/v1/user_profiles`
 
 List User Profiles
 
-### Query Parameters
+### Query parameters
 
 - `limit: optional number`
 
   Query parameter for limit
+
+  format: int32
 
 - `order: optional "asc" or "desc"`
 
@@ -252,7 +269,7 @@ List User Profiles
 
   Query parameter for page
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -260,7 +277,7 @@ List User Profiles
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -330,6 +347,20 @@ List User Profiles
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
 ### Returns
 
 - `data: array of BetaUserProfile`
@@ -343,6 +374,8 @@ List User Profiles
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: map[string]`
 
@@ -366,11 +399,11 @@ List User Profiles
 
     Object type. Always `user_profile`.
 
-    - `"user_profile"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `access_type: optional "application" or "passthrough"`
 
@@ -404,14 +437,14 @@ List User Profiles
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/user_profiles \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: user-profiles-2026-08-18' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -439,15 +472,15 @@ curl https://api.anthropic.com/v1/user_profiles \
 
 ## Get User Profile
 
-**get** `/v1/user_profiles/{user_profile_id}`
+**GET** `/v1/user_profiles/{user_profile_id}`
 
 Get User Profile
 
-### Path Parameters
+### Path parameters
 
 - `user_profile_id: string`
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -455,7 +488,7 @@ Get User Profile
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -525,9 +558,23 @@ Get User Profile
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
 ### Returns
 
-- `BetaUserProfile object { id, created_at, metadata, 7 more }`
+- `BetaUserProfile object`
 
   - `id: string`
 
@@ -536,6 +583,8 @@ Get User Profile
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: map[string]`
 
@@ -559,11 +608,11 @@ Get User Profile
 
     Object type. Always `user_profile`.
 
-    - `"user_profile"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `access_type: optional "application" or "passthrough"`
 
@@ -593,14 +642,14 @@ Get User Profile
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: user-profiles-2026-08-18' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -623,15 +672,15 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID \
 
 ## Update User Profile
 
-**post** `/v1/user_profiles/{user_profile_id}`
+**POST** `/v1/user_profiles/{user_profile_id}`
 
 Update User Profile
 
-### Path Parameters
+### Path parameters
 
 - `user_profile_id: string`
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -639,7 +688,7 @@ Update User Profile
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -709,7 +758,21 @@ Update User Profile
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Body Parameters
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+### Body parameters
 
 - `access_type: optional "application" or "passthrough" or null`
 
@@ -723,6 +786,8 @@ Update User Profile
 
   If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters.
 
+  minLength: 1, maxLength: 255
+
 - `metadata: optional map[string]`
 
   Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
@@ -730,6 +795,8 @@ Update User Profile
 - `name: optional string or null`
 
   If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
+
+  minLength: 1, maxLength: 255
 
 - `relationship: optional "external" or "resold" or "internal" or null`
 
@@ -743,7 +810,7 @@ Update User Profile
 
 ### Returns
 
-- `BetaUserProfile object { id, created_at, metadata, 7 more }`
+- `BetaUserProfile object`
 
   - `id: string`
 
@@ -752,6 +819,8 @@ Update User Profile
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: map[string]`
 
@@ -775,11 +844,11 @@ Update User Profile
 
     Object type. Always `user_profile`.
 
-    - `"user_profile"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `access_type: optional "application" or "passthrough"`
 
@@ -809,7 +878,7 @@ Update User Profile
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -820,7 +889,7 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID \
         }'
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -843,15 +912,15 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID \
 
 ## Create Enrollment URL
 
-**post** `/v1/user_profiles/{user_profile_id}/enrollment_url`
+**POST** `/v1/user_profiles/{user_profile_id}/enrollment_url`
 
 Create Enrollment URL
 
-### Path Parameters
+### Path parameters
 
 - `user_profile_id: string`
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -859,7 +928,7 @@ Create Enrollment URL
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -929,19 +998,33 @@ Create Enrollment URL
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
 ### Returns
 
-- `BetaUserProfileEnrollmentURL object { expires_at, type, url }`
+- `BetaUserProfileEnrollmentURL object`
 
   - `expires_at: string`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `type: "enrollment_url"`
 
     Object type. Always `enrollment_url`.
-
-    - `"enrollment_url"`
 
   - `url: string`
 
@@ -949,7 +1032,7 @@ Create Enrollment URL
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID/enrollment_url \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
@@ -957,7 +1040,7 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID/enrollment_url 
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -967,11 +1050,11 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID/enrollment_url 
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta User Profile
 
-- `BetaUserProfile object { id, created_at, metadata, 7 more }`
+- `BetaUserProfile object`
 
   - `id: string`
 
@@ -980,6 +1063,8 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID/enrollment_url 
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: map[string]`
 
@@ -1003,11 +1088,11 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID/enrollment_url 
 
     Object type. Always `user_profile`.
 
-    - `"user_profile"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `access_type: optional "application" or "passthrough"`
 
@@ -1037,17 +1122,17 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID/enrollment_url 
 
 ### Beta User Profile Enrollment URL
 
-- `BetaUserProfileEnrollmentURL object { expires_at, type, url }`
+- `BetaUserProfileEnrollmentURL object`
 
   - `expires_at: string`
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `type: "enrollment_url"`
 
     Object type. Always `enrollment_url`.
-
-    - `"enrollment_url"`
 
   - `url: string`
 
@@ -1055,7 +1140,7 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID/enrollment_url 
 
 ### Beta User Profile Trust Grant
 
-- `BetaUserProfileTrustGrant object { status }`
+- `BetaUserProfileTrustGrant object`
 
   - `status: "active" or "pending" or "rejected"`
 

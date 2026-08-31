@@ -1,17 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/spend_limits/create
-fetched_at: 2026-08-17T02:15:23.322539+00:00
+fetched_at: 2026-08-31T06:29:45.347371+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Set Spend Limit
-url: https://platform.claude.com/docs/en/api/admin/spend_limits/create
----
+# Set Spend Limit
 
-## Set Spend Limit
-
-**post** `/v1/organizations/spend_limits`
+**POST** `/v1/organizations/spend_limits`
 
 Set a per-user spend limit override.
 
@@ -19,19 +14,25 @@ Upsert keyed on (scope, period): setting a limit that already exists
 overwrites it in place. Only `scope.type: "user"` is accepted; seat-tier,
 group, and organization-level defaults are configured in claude.ai.
 
-### Body Parameters
+## Body parameters
 
 - `amount: string or null`
 
   Limit amount as a non-negative integer decimal string in the minor unit of the organization's billing currency (cents for USD): "50000" is $500.00. `null` sets an explicit no-limit override for this scope and `period` only — each period resolves independently, so caps for other periods still apply.
 
-- `scope: object { type, user_id }`
+- `scope: object`
+
+  Scope selecting a single member of the organization.
 
   - `type: "user"`
 
-    - `"user"`
+    Scope type. Always `user` for this scope.
+
+    default: user
 
   - `user_id: string`
+
+    Tagged ID of the member the spend limit applies to.
 
 - `period: optional "daily" or "monthly" or "weekly"`
 
@@ -41,11 +42,15 @@ group, and organization-level defaults are configured in claude.ai.
 
   - `"weekly"`
 
-### Returns
+## Returns
 
-- `SpendLimit object { id, amount, created_at, 5 more }`
+- `SpendLimit object`
+
+  A configured spend limit: a cap on metered spend for one scope and period.
 
   - `id: string`
+
+    Unique tagged ID of the spend limit (`spl_...`).
 
   - `amount: string or null`
 
@@ -53,11 +58,17 @@ group, and organization-level defaults are configured in claude.ai.
 
   - `created_at: string`
 
+    RFC 3339 datetime at which the spend limit was created.
+
+    format: date-time
+
   - `currency: string`
 
     ISO 4217 code of the organization's billing currency; the unit for `amount`.
 
   - `period: "daily" or "monthly" or "weekly"`
+
+    Length of the window the limit resets over. `amount` caps spend within each period.
 
     - `"daily"`
 
@@ -65,55 +76,69 @@ group, and organization-level defaults are configured in claude.ai.
 
     - `"weekly"`
 
-  - `scope: object { type, user_id }  or object { seat_tier, type }  or object { rbac_group_id, type }  or 2 more`
+  - `scope: object or object or object or 2 more`
 
-    - `User object { type, user_id }`
+    What the limit applies to. A tagged union on `type`; each variant carries the identifier for its scope.
+
+    - `User object`
+
+      Scope selecting a single member of the organization.
 
       - `type: "user"`
 
-        - `"user"`
+        Scope type. Always `user` for this scope.
+
+        default: user
 
       - `user_id: string`
 
-    - `SeatTier object { seat_tier, type }`
+        Tagged ID of the member the spend limit applies to.
+
+    - `SeatTier object`
 
       - `seat_tier: string`
 
       - `type: "seat_tier"`
 
-        - `"seat_tier"`
+        default: seat_tier
 
-    - `RbacGroup object { rbac_group_id, type }`
+    - `RbacGroup object`
 
       - `rbac_group_id: string`
 
       - `type: "rbac_group"`
 
-        - `"rbac_group"`
+        default: rbac_group
 
-    - `OrganizationService object { service, type }`
+    - `OrganizationService object`
 
       - `service: string`
 
       - `type: "organization_service"`
 
-        - `"organization_service"`
+        default: organization_service
 
-    - `Organization object { type }`
+    - `Organization object`
 
       - `type: "organization"`
 
-        - `"organization"`
+        default: organization
 
   - `type: "spend_limit"`
 
-    - `"spend_limit"`
+    Object type. Always `spend_limit`.
+
+    default: spend_limit
 
   - `updated_at: string`
 
-### Example
+    RFC 3339 datetime at which the spend limit was last modified.
 
-```http
+    format: date-time
+
+## Example
+
+```bash
 curl https://api.anthropic.com/v1/organizations/spend_limits \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -122,13 +147,13 @@ curl https://api.anthropic.com/v1/organizations/spend_limits \
           "amount": "50000",
           "scope": {
             "type": "user",
-            "user_id": "user_id"
+            "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
           },
           "period": "monthly"
         }'
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {
@@ -139,7 +164,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limits \
   "period": "monthly",
   "scope": {
     "type": "user",
-    "user_id": "user_id"
+    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
   },
   "type": "spend_limit",
   "updated_at": "2019-12-27T18:11:19.117Z"

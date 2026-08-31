@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/intro
-fetched_at: 2026-08-24T02:18:35.566661+00:00
+fetched_at: 2026-08-31T06:29:30.744620+00:00
 fetch_method: mintlify_md
 ---
 
@@ -63,7 +63,7 @@ Follow these steps to go from zero to a working Claude integration.
   <Step title="Choose the right model">
     Compare Claude models by capability and cost to pick the best fit for your use case.
 
-    [See the models overview](https://platform.claude.com/docs/en/about-claude/models/overview)
+    [See the models overview](https://platform.claude.com/docs/en/models/overview)
   </Step>
 
   <Step title="Explore features and tools">
@@ -81,7 +81,7 @@ Anthropic provides developer tools to help you build and scale applications with
 
 <CardGroup cols={3}>
   <Card title="Developer Console" icon="computer" href="https://platform.claude.com/">
-    Explore and understand the API in your browser with Playground.
+    Explore and understand the API in your browser with playground.
   </Card>
 
   <Card title="API Reference" icon="code" href="https://platform.claude.com/docs/en/api/overview">

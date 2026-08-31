@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai
-fetched_at: 2026-08-24T02:18:37.599771+00:00
+fetched_at: 2026-08-31T06:29:32.799983+00:00
 fetch_method: mintlify_md
 ---
 
@@ -51,20 +51,20 @@ First, install Anthropic's [client SDK](https://platform.claude.com/docs/en/cli-
   <Tab title="Java">
     <CodeGroup exclude="shell, python, typescript, csharp, go, php, ruby">
       ```groovy Gradle
-      implementation("com.anthropic:anthropic-java:2.57.0")
-      implementation("com.anthropic:anthropic-java-vertex:2.57.0")
+      implementation("com.anthropic:anthropic-java:2.58.0")
+      implementation("com.anthropic:anthropic-java-vertex:2.58.0")
       ```
 
       ```xml Maven
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java</artifactId>
-          <version>2.57.0</version>
+          <version>2.58.0</version>
       </dependency>
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java-vertex</artifactId>
-          <version>2.57.0</version>
+          <version>2.58.0</version>
       </dependency>
       ```
 
@@ -355,7 +355,7 @@ For the full feature list with Google Cloud availability, see [Features overview
 * [Messages API](https://platform.claude.com/docs/en/api/messages/create)
 * [Prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching)
 * [Thinking](https://platform.claude.com/docs/en/build-with-claude/thinking)
-* [Tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview), including the [Bash tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/bash-tool), [Computer use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool), [Memory tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool), and [Text editor tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool)
+* [Tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview), including the [Bash tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/bash-tool), [Browser use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool), [Computer use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool), [Memory tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool), and [Text editor tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool)
 * [Web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool)
 * [Citations](https://platform.claude.com/docs/en/build-with-claude/citations)
 * [Structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
@@ -368,7 +368,6 @@ For the full feature list with Google Cloud availability, see [Features overview
 * API endpoints (Message Batches, Models, Admin, Compliance, Usage and Cost)
 * Claude Managed Agents
 * Server-side fallback (the [`fallbacks` parameter](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback); use the [client-side fallback pattern](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#client-side-fallback) instead)
-* [Computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool) and [browser use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool) toolsets (`computer_toolset_20260801` and `browser_toolset_20260801` are not currently available on Google Cloud; the beta computer use tool versions remain available)
 
 ### Context window
 

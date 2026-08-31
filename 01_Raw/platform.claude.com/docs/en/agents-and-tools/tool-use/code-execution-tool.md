@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool
-fetched_at: 2026-08-24T02:18:36.523536+00:00
+fetched_at: 2026-08-31T06:29:31.707116+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1119,7 +1119,7 @@ The code execution tool runs in a secure, containerized environment designed spe
 * **External connections:** No outbound network requests permitted
 * **Sandbox isolation:** Full isolation from host system and other containers
 * **File access:** Limited to workspace directory only
-* **Workspace scoping:** Like the [Files API](https://platform.claude.com/docs/en/build-with-claude/files), containers are scoped to the workspace of the API key
+* **Workspace scoping:** Like the [Files API](https://platform.claude.com/docs/en/build-with-claude/files), containers are scoped to the request's workspace
 * **Expiration:** Containers expire 30 days after creation
 
 ### Pre-installed libraries

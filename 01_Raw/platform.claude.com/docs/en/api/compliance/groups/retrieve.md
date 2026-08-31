@@ -1,31 +1,26 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/groups/retrieve
-fetched_at: 2026-08-17T02:15:24.581120+00:00
+fetched_at: 2026-08-31T06:29:47.137343+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Get Compliance Group
-url: https://platform.claude.com/docs/en/api/compliance/groups/retrieve
----
+# Get Compliance Group
 
-## Get Compliance Group
-
-**get** `/v1/compliance/groups/{group_id}`
+**GET** `/v1/compliance/groups/{group_id}`
 
 Get Compliance Group
 
-### Path Parameters
+## Path parameters
 
 - `group_id: string`
 
   The group ID (tagged ID, e.g., rbac_group_abc123)
 
-### Header Parameters
+## Headers
 
 - `"x-api-key": optional string`
 
-### Returns
+## Returns
 
 - `id: string`
 
@@ -55,14 +50,14 @@ Get Compliance Group
 
   Group last-updated timestamp (ISO 8601)
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

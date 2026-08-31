@@ -1,23 +1,18 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/messages/batches/list
-fetched_at: 2026-08-24T02:18:41.648839+00:00
+fetched_at: 2026-08-31T06:29:37.521574+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: List Message Batches
-url: https://platform.claude.com/docs/en/api/beta/messages/batches/list
----
+# List Message Batches
 
-## List Message Batches
-
-**get** `/v1/messages/batches`
+**GET** `/v1/messages/batches`
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
 Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
-### Query Parameters
+## Query parameters
 
 - `after_id: optional string`
 
@@ -33,7 +28,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
-### Header Parameters
+  default: 20, maximum: 1000, minimum: 1
+
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -41,7 +38,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -111,7 +108,21 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Returns
 
 - `data: array of BetaMessageBatch`
 
@@ -125,13 +136,19 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
+    format: date-time
+
   - `cancel_initiated_at: string or null`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
+    format: date-time
+
   - `created_at: string`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
+
+    format: date-time
 
   - `ended_at: string or null`
 
@@ -139,9 +156,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     Processing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.
 
+    format: date-time
+
   - `expires_at: string`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
+
+    format: date-time
 
   - `processing_status: "in_progress" or "canceling" or "ended"`
 
@@ -165,11 +186,15 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       This is zero until processing of the entire Message Batch has ended.
 
+      default: 0
+
     - `errored: number`
 
       Number of requests in the Message Batch that encountered an error.
 
       This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
 
     - `expired: number`
 
@@ -177,15 +202,21 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       This is zero until processing of the entire Message Batch has ended.
 
+      default: 0
+
     - `processing: number`
 
       Number of requests in the Message Batch that are processing.
+
+      default: 0
 
     - `succeeded: number`
 
       Number of requests in the Message Batch that have completed successfully.
 
       This is zero until processing of the entire Message Batch has ended.
+
+      default: 0
 
   - `results_url: string or null`
 
@@ -199,7 +230,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     For Message Batches, this is always `"message_batch"`.
 
-    - `"message_batch"`
+    default: message_batch
 
 - `first_id: string or null`
 
@@ -213,16 +244,16 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/messages/batches \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: message-batches-2024-09-24' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

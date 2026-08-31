@@ -1,25 +1,20 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/retrieve
-fetched_at: 2026-08-24T02:18:42.046543+00:00
+fetched_at: 2026-08-31T06:29:37.876613+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Get Environment
-url: https://platform.claude.com/docs/en/api/beta/environments/retrieve
----
+# Get Environment
 
-## Get Environment
-
-**get** `/v1/environments/{environment_id}`
+**GET** `/v1/environments/{environment_id}`
 
 Retrieve a specific environment by ID.
 
-### Path Parameters
+## Path parameters
 
 - `environment_id: string`
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -27,7 +22,7 @@ Retrieve a specific environment by ID.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -97,9 +92,23 @@ Retrieve a specific environment by ID.
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+    - `"compact-2026-01-12"`
 
-- `BetaEnvironment object { id, archived_at, config, 7 more }`
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Returns
+
+- `BetaEnvironment object`
 
   Unified Environment resource for both cloud and self-hosted environments.
 
@@ -115,7 +124,7 @@ Retrieve a specific environment by ID.
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `BetaCloudConfig object { networking, packages, type }`
+    - `BetaCloudConfig object`
 
       `cloud` environment configuration.
 
@@ -123,7 +132,7 @@ Retrieve a specific environment by ID.
 
         Network configuration policy.
 
-        - `BetaUnrestrictedNetwork object { type }`
+        - `BetaUnrestrictedNetwork object`
 
           Unrestricted network access.
 
@@ -131,9 +140,7 @@ Retrieve a specific environment by ID.
 
             Network policy type
 
-            - `"unrestricted"`
-
-        - `BetaLimitedNetwork object { allow_mcp_servers, allow_package_managers, allowed_hosts, type }`
+        - `BetaLimitedNetwork object`
 
           Limited network access.
 
@@ -152,8 +159,6 @@ Retrieve a specific environment by ID.
           - `type: "limited"`
 
             Network policy type
-
-            - `"limited"`
 
       - `packages: BetaPackages`
 
@@ -187,23 +192,19 @@ Retrieve a specific environment by ID.
 
           Package configuration type
 
-          - `"packages"`
+          default: packages
 
       - `type: "cloud"`
 
         Environment type
 
-        - `"cloud"`
-
-    - `BetaSelfHostedConfig object { type }`
+    - `BetaSelfHostedConfig object`
 
       Configuration for self-hosted environments.
 
       - `type: "self_hosted"`
 
         Environment type
-
-        - `"self_hosted"`
 
   - `created_at: string`
 
@@ -225,7 +226,7 @@ Retrieve a specific environment by ID.
 
     The type of object (always 'environment')
 
-    - `"environment"`
+    default: environment
 
   - `updated_at: string`
 
@@ -239,16 +240,16 @@ Retrieve a specific environment by ID.
 
     - `"account"`
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

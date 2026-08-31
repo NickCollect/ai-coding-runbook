@@ -1,17 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/analytics/plugins/list
-fetched_at: 2026-08-24T02:18:48.036864+00:00
+fetched_at: 2026-08-31T06:29:45.248005+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Get Plugin Usage
-url: https://platform.claude.com/docs/en/api/admin/analytics/plugins/list
----
+# Get Plugin Usage
 
-## Get Plugin Usage
-
-**get** `/v1/organizations/analytics/plugins`
+**GET** `/v1/organizations/analytics/plugins`
 
 Get per-plugin install + invocation usage for a given day, with pagination.
 
@@ -20,30 +15,38 @@ Code, sorted by plugin name. The `plugin_name` value `third-party` is
 an aggregate bucket, not a plugin: it collects plugin activity, from
 either surface, for which the reporting client did not provide a plugin
 name — so an organization's own plugins can contribute both to their own
-named rows and to this bucket. Use group_by[] to break usage out per
+named rows and to this bucket. Use `group_by[]` to break usage out per
 member, per RBAC group, or per product surface (Cowork / Claude Code),
-and filter[] to scope results; the parameter descriptions list the
+and `filter[]` to scope results; the parameter descriptions list the
 supported dimensions. Requires an API key with the
 `read:analytics` scope. `starting_date` / `ending_date` select
-range-rollup mode like /skills.
+range-rollup mode like `/skills`.
 
-### Query Parameters
+## Query parameters
 
 - `date: optional string`
 
   UTC date in YYYY-MM-DD format. The day to get plugin usage for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
+  format: date
+
 - `ending_date: optional string`
 
-  UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with starting_date. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after starting_date.
+  UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with `starting_date`. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after `starting_date`.
+
+  format: date
 
 - `filter: optional array of string`
 
-  Filters as 'dimension:value', e.g. filter[]=rbac_group_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: plugin_name, product, rbac_group_id, user_id. Value forms: plugin_name matches case-insensitively; product is claude_code or cowork (the only surfaces with plugin attribution); rbac_group_id takes the tagged id (rbac_group_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); user_id takes a tagged user id (user_...), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
+  Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `plugin_name`, `product`, `rbac_group_id`, `user_id`. Value forms: `plugin_name` matches case-insensitively; `product` is `claude_code` or `cowork` (the only surfaces with plugin attribution); `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
+
+  maxItems: 100
 
 - `group_by: optional array of "product" or "rbac_group_id" or "user_id"`
 
-  Dimensions to break results out by (e.g. group_by[]=user_id). Supported on this endpoint: product, rbac_group_id, user_id. On this endpoint product takes the values claude_code or cowork only (the surfaces with plugin attribution). Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via next_page; an unsupported dimension returns 400. rbac_group_id attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+  Dimensions to break results out by (e.g. `group_by[]=user_id`). Supported on this endpoint: `product`, `rbac_group_id`, `user_id`. On this endpoint `product` takes the values `claude_code` or `cowork` only (the surfaces with plugin attribution). Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via `next_page`; an unsupported dimension returns 400. `rbac_group_id` attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+
+  maxItems: 100
 
   - `"product"`
 
@@ -55,9 +58,11 @@ range-rollup mode like /skills.
 
   Number of results per page (1-1000, default 100).
 
+  minimum: 1, maximum: 1000
+
 - `order: optional "asc" or "desc"`
 
-  Sort direction: 'asc' or 'desc'. Defaults to 'asc' for the endpoint's sort column and to 'desc' when order_by names a metric (a top-N ranking). Applies to order_by, or to the endpoint's default sort field when order_by is omitted.
+  Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort column and to `desc` when `order_by` names a metric (a top-N ranking). Applies to `order_by`, or to the endpoint's default sort field when `order_by` is omitted.
 
   - `"asc"`
 
@@ -69,21 +74,23 @@ range-rollup mode like /skills.
 
 - `page: optional string`
 
-  Opaque cursor from a previous response's next_page field.
+  Opaque cursor from a previous response's `next_page` field.
 
 - `starting_date: optional string`
 
-  UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either date or starting_date, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
+  UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
-### Returns
+  format: date
 
-- `PluginUsage object { data, next_page }`
+## Returns
+
+- `PluginUsage object`
 
   Response for GET /v1/organizations/analytics/plugins.
 
-  - `data: array of object { claude_code_metrics, cowork_metrics, distinct_user_count, 8 more }`
+  - `data: array of object`
 
-    - `claude_code_metrics: object { distinct_session_plugin_used_count }`
+    - `claude_code_metrics: object`
 
       Claude Code activity metrics for a single plugin on a given day.
 
@@ -91,7 +98,7 @@ range-rollup mode like /skills.
 
         Number of distinct Claude Code sessions in which the plugin was invoked. Null on aggregated rows where a distinct count cannot be computed.
 
-    - `cowork_metrics: object { distinct_session_plugin_used_count }`
+    - `cowork_metrics: object`
 
       Cowork activity metrics for a single plugin on a given day.
 
@@ -117,11 +124,11 @@ range-rollup mode like /skills.
 
     - `plugin_id: optional string or null`
 
-      Stable plugin identifier when available (e.g. serena@claude-plugins-official). Null for third-party Claude Code plugins (redacted at the source) and Cowork slash commands that carry only a hashed id.
+      Stable plugin identifier when available (e.g. `serena@claude-plugins-official`). Null for third-party Claude Code plugins (redacted at the source) and Cowork slash commands that carry only a hashed id.
 
     - `product: optional string or null`
 
-      Product that produced this row's activity: one of chat, claude_code, cowork, or office_agent (the canonical Cost & Usage product naming; an office_agent row's per-surface breakdown is in its office_metrics). On /plugins only cowork and claude_code occur (the only surfaces with plugin attribution); /artifacts and /apps/chat/projects do not support the product dimension (a product `group_by[]` or `filter[]` there is rejected). Present only when the request grouped by product.
+      Product that produced this row's activity: one of `chat`, `claude_code`, `cowork`, or `office_agent` (the canonical Cost & Usage product naming; an `office_agent` row's per-surface breakdown is in its `office_metrics`). On `/plugins` only `cowork` and `claude_code` occur (the only surfaces with plugin attribution); on `/artifacts` only `chat`, `claude_code`, and `cowork` occur (the surfaces that create artifacts); `/apps/chat/projects` does not support the product dimension (a `product` entry in `group_by[]` or `filter[]` there is rejected). Present only when the request grouped by `product`.
 
     - `rbac_group_id: optional string or null`
 
@@ -139,15 +146,15 @@ range-rollup mode like /skills.
 
     Opaque cursor for the next page, or null if no more results
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/analytics/plugins \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

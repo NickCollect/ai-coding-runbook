@@ -1,25 +1,20 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/vaults/update
-fetched_at: 2026-08-24T02:18:43.665764+00:00
+fetched_at: 2026-08-31T06:29:39.308584+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Update Vault
-url: https://platform.claude.com/docs/en/api/beta/vaults/update
----
+# Update Vault
 
-## Update Vault
-
-**post** `/v1/vaults/{vault_id}`
+**POST** `/v1/vaults/{vault_id}`
 
 Update Vault
 
-### Path Parameters
+## Path parameters
 
 - `vault_id: string`
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -27,7 +22,7 @@ Update Vault
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -97,19 +92,35 @@ Update Vault
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Body Parameters
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Body parameters
 
 - `display_name: optional string or null`
 
   Updated human-readable name for the vault. 1-255 characters.
 
+  minLength: 1, maxLength: 255
+
 - `metadata: optional map[string] or null`
 
   Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
-### Returns
+## Returns
 
-- `BetaManagedAgentsVault object { id, archived_at, created_at, 4 more }`
+- `BetaManagedAgentsVault object`
 
   A vault that stores credentials for use by agents during sessions.
 
@@ -121,9 +132,13 @@ Update Vault
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `display_name: string`
 
@@ -135,15 +150,15 @@ Update Vault
 
   - `type: "vault"`
 
-    - `"vault"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
 
-### Example
+    format: date-time
 
-```http
+## Example
+
+```bash
 curl https://api.anthropic.com/v1/vaults/$VAULT_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -157,7 +172,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID \
         }'
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

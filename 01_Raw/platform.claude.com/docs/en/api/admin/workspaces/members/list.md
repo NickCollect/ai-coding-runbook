@@ -1,27 +1,22 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/workspaces/members/list
-fetched_at: 2026-08-17T02:15:22.481675+00:00
+fetched_at: 2026-08-31T06:29:44.122287+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: List Workspace Members
-url: https://platform.claude.com/docs/en/api/admin/workspaces/members/list
----
+# List Workspace Members
 
-## List Workspace Members
-
-**get** `/v1/organizations/workspaces/{workspace_id}/members`
+**GET** `/v1/organizations/workspaces/{workspace_id}/members`
 
 List Workspace Members
 
-### Path Parameters
+## Path parameters
 
 - `workspace_id: string`
 
   ID of the Workspace.
 
-### Query Parameters
+## Query parameters
 
 - `after_id: optional string`
 
@@ -37,7 +32,9 @@ List Workspace Members
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
-### Returns
+  default: 20, maximum: 1000, minimum: 1
+
+## Returns
 
 - `data: array of WorkspaceMember`
 
@@ -47,7 +44,7 @@ List Workspace Members
 
     For Workspace Members, this is always `"workspace_member"`.
 
-    - `"workspace_member"`
+    default: workspace_member
 
   - `user_id: string`
 
@@ -83,15 +80,15 @@ List Workspace Members
 
   Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

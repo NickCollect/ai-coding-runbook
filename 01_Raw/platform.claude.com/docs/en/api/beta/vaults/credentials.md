@@ -1,27 +1,22 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/vaults/credentials
-fetched_at: 2026-08-24T02:18:43.811241+00:00
+fetched_at: 2026-08-31T06:29:39.357706+00:00
 fetch_method: mintlify_md
----
-
----
-title: Credentials
-url: https://platform.claude.com/docs/en/api/beta/vaults/credentials
 ---
 
 # Credentials
 
 ## Create Credential
 
-**post** `/v1/vaults/{vault_id}/credentials`
+**POST** `/v1/vaults/{vault_id}/credentials`
 
 Create Credential
 
-### Path Parameters
+### Path parameters
 
 - `vault_id: string`
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -29,7 +24,7 @@ Create Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -99,13 +94,27 @@ Create Credential
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Body Parameters
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+### Body parameters
 
 - `auth: BetaManagedAgentsMCPOAuthCreateParams or BetaManagedAgentsStaticBearerCreateParams or BetaManagedAgentsEnvironmentVariableCreateParams`
 
   Authentication details for creating a credential.
 
-  - `BetaManagedAgentsMCPOAuthCreateParams object { access_token, mcp_server_url, type, 2 more }`
+  - `BetaManagedAgentsMCPOAuthCreateParams object`
 
     Parameters for creating an MCP OAuth credential.
 
@@ -113,17 +122,21 @@ Create Credential
 
       OAuth access token.
 
+      minLength: 1, maxLength: 8192
+
     - `mcp_server_url: string`
 
       URL of the MCP server this credential authenticates against.
 
-    - `type: "mcp_oauth"`
+      minLength: 1, maxLength: 2047
 
-      - `"mcp_oauth"`
+    - `type: "mcp_oauth"`
 
     - `expires_at: optional string or null`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `refresh: optional BetaManagedAgentsMCPOAuthRefreshParams or null`
 
@@ -133,27 +146,31 @@ Create Credential
 
         OAuth client ID.
 
+        minLength: 1, maxLength: 1024
+
       - `refresh_token: string`
 
         OAuth refresh token.
+
+        minLength: 1, maxLength: 4096
 
       - `token_endpoint: string`
 
         Token endpoint URL used to refresh the access token.
 
+        minLength: 1, maxLength: 2047
+
       - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneParam or BetaManagedAgentsTokenEndpointAuthBasicParam or BetaManagedAgentsTokenEndpointAuthPostParam`
 
         Token endpoint requires no client authentication.
 
-        - `BetaManagedAgentsTokenEndpointAuthNoneParam object { type }`
+        - `BetaManagedAgentsTokenEndpointAuthNoneParam object`
 
           Token endpoint requires no client authentication.
 
           - `type: "none"`
 
-            - `"none"`
-
-        - `BetaManagedAgentsTokenEndpointAuthBasicParam object { client_secret, type }`
+        - `BetaManagedAgentsTokenEndpointAuthBasicParam object`
 
           Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -161,11 +178,11 @@ Create Credential
 
             OAuth client secret.
 
+            minLength: 1, maxLength: 512
+
           - `type: "client_secret_basic"`
 
-            - `"client_secret_basic"`
-
-        - `BetaManagedAgentsTokenEndpointAuthPostParam object { client_secret, type }`
+        - `BetaManagedAgentsTokenEndpointAuthPostParam object`
 
           Token endpoint uses POST body authentication with client credentials.
 
@@ -173,19 +190,23 @@ Create Credential
 
             OAuth client secret.
 
-          - `type: "client_secret_post"`
+            minLength: 1, maxLength: 512
 
-            - `"client_secret_post"`
+          - `type: "client_secret_post"`
 
       - `resource: optional string or null`
 
         OAuth resource indicator.
 
+        minLength: 1, maxLength: 2047
+
       - `scope: optional string or null`
 
         OAuth scope for the refresh request.
 
-  - `BetaManagedAgentsStaticBearerCreateParams object { token, mcp_server_url, type }`
+        minLength: 1, maxLength: 8192
+
+  - `BetaManagedAgentsStaticBearerCreateParams object`
 
     Parameters for creating a static bearer token credential.
 
@@ -193,15 +214,17 @@ Create Credential
 
       Static bearer token value.
 
+      minLength: 1, maxLength: 8192
+
     - `mcp_server_url: string`
 
       URL of the MCP server this credential authenticates against.
 
+      minLength: 1, maxLength: 2047
+
     - `type: "static_bearer"`
 
-      - `"static_bearer"`
-
-  - `BetaManagedAgentsEnvironmentVariableCreateParams object { networking, secret_name, secret_value, 2 more }`
+  - `BetaManagedAgentsEnvironmentVariableCreateParams object`
 
     Parameters for creating an environment variable credential.
 
@@ -209,15 +232,13 @@ Create Credential
 
       Outbound hosts the secret value is substituted on.
 
-      - `BetaManagedAgentsUnrestrictedCredentialNetworkingParams object { type }`
+      - `BetaManagedAgentsUnrestrictedCredentialNetworkingParams object`
 
         Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
         - `type: "unrestricted"`
 
-          - `"unrestricted"`
-
-      - `BetaManagedAgentsLimitedCredentialNetworkingParams object { allowed_hosts, type }`
+      - `BetaManagedAgentsLimitedCredentialNetworkingParams object`
 
         Substitute the secret only on requests to the listed hosts.
 
@@ -227,19 +248,19 @@ Create Credential
 
         - `type: "limited"`
 
-          - `"limited"`
-
     - `secret_name: string`
 
       Name of the environment variable. Immutable after create.
+
+      minLength: 1, maxLength: 255
 
     - `secret_value: string`
 
       Secret value. Write-only; never returned in responses.
 
-    - `type: "environment_variable"`
+      minLength: 1, maxLength: 4096
 
-      - `"environment_variable"`
+    - `type: "environment_variable"`
 
     - `injection_location: optional BetaManagedAgentsInjectionLocationParams`
 
@@ -257,13 +278,15 @@ Create Credential
 
   Human-readable name for the credential. Up to 255 characters.
 
+  maxLength: 255
+
 - `metadata: optional map[string]`
 
   Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
 ### Returns
 
-- `BetaManagedAgentsCredential object { id, archived_at, auth, 6 more }`
+- `BetaManagedAgentsCredential object`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -275,11 +298,13 @@ Create Credential
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
-    - `BetaManagedAgentsMCPOAuthAuthResponse object { mcp_server_url, type, expires_at, refresh }`
+    - `BetaManagedAgentsMCPOAuthAuthResponse object`
 
       OAuth credential details for an MCP server.
 
@@ -289,11 +314,11 @@ Create Credential
 
       - `type: "mcp_oauth"`
 
-        - `"mcp_oauth"`
-
       - `expires_at: optional string or null`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse or null`
 
@@ -311,29 +336,23 @@ Create Credential
 
           Token endpoint requires no client authentication.
 
-          - `BetaManagedAgentsTokenEndpointAuthNoneResponse object { type }`
+          - `BetaManagedAgentsTokenEndpointAuthNoneResponse object`
 
             Token endpoint requires no client authentication.
 
             - `type: "none"`
 
-              - `"none"`
-
-          - `BetaManagedAgentsTokenEndpointAuthBasicResponse object { type }`
+          - `BetaManagedAgentsTokenEndpointAuthBasicResponse object`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: "client_secret_basic"`
 
-              - `"client_secret_basic"`
-
-          - `BetaManagedAgentsTokenEndpointAuthPostResponse object { type }`
+          - `BetaManagedAgentsTokenEndpointAuthPostResponse object`
 
             Token endpoint uses POST body authentication with client credentials.
 
             - `type: "client_secret_post"`
-
-              - `"client_secret_post"`
 
         - `resource: optional string or null`
 
@@ -343,7 +362,7 @@ Create Credential
 
           OAuth scope for the refresh request.
 
-    - `BetaManagedAgentsStaticBearerAuthResponse object { mcp_server_url, type }`
+    - `BetaManagedAgentsStaticBearerAuthResponse object`
 
       Static bearer token credential details for an MCP server.
 
@@ -353,9 +372,7 @@ Create Credential
 
       - `type: "static_bearer"`
 
-        - `"static_bearer"`
-
-    - `BetaManagedAgentsEnvironmentVariableAuthResponse object { injection_location, networking, secret_name, type }`
+    - `BetaManagedAgentsEnvironmentVariableAuthResponse object`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -375,15 +392,13 @@ Create Credential
 
         Outbound hosts the secret value is substituted on.
 
-        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object { type }`
+        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `type: "unrestricted"`
 
-            - `"unrestricted"`
-
-        - `BetaManagedAgentsLimitedCredentialNetworkingResponse object { allowed_hosts, type }`
+        - `BetaManagedAgentsLimitedCredentialNetworkingResponse object`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -393,19 +408,17 @@ Create Credential
 
           - `type: "limited"`
 
-            - `"limited"`
-
       - `secret_name: string`
 
         Name of the environment variable.
 
       - `type: "environment_variable"`
 
-        - `"environment_variable"`
-
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: map[string]`
 
@@ -413,11 +426,11 @@ Create Credential
 
   - `type: "vault_credential"`
 
-    - `"vault_credential"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_id: string`
 
@@ -429,7 +442,7 @@ Create Credential
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -448,7 +461,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials \
         }'
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -471,15 +484,15 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials \
 
 ## List Credentials
 
-**get** `/v1/vaults/{vault_id}/credentials`
+**GET** `/v1/vaults/{vault_id}/credentials`
 
 List Credentials
 
-### Path Parameters
+### Path parameters
 
 - `vault_id: string`
 
-### Query Parameters
+### Query parameters
 
 - `include_archived: optional boolean`
 
@@ -489,11 +502,13 @@ List Credentials
 
   Maximum number of credentials to return per page. Defaults to 20, maximum 100.
 
+  format: int32
+
 - `page: optional string`
 
   Opaque pagination token from a previous `list_credentials` response.
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -501,7 +516,7 @@ List Credentials
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -571,6 +586,20 @@ List Credentials
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
 ### Returns
 
 - `data: optional array of BetaManagedAgentsCredential`
@@ -585,11 +614,13 @@ List Credentials
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
-    - `BetaManagedAgentsMCPOAuthAuthResponse object { mcp_server_url, type, expires_at, refresh }`
+    - `BetaManagedAgentsMCPOAuthAuthResponse object`
 
       OAuth credential details for an MCP server.
 
@@ -599,11 +630,11 @@ List Credentials
 
       - `type: "mcp_oauth"`
 
-        - `"mcp_oauth"`
-
       - `expires_at: optional string or null`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse or null`
 
@@ -621,29 +652,23 @@ List Credentials
 
           Token endpoint requires no client authentication.
 
-          - `BetaManagedAgentsTokenEndpointAuthNoneResponse object { type }`
+          - `BetaManagedAgentsTokenEndpointAuthNoneResponse object`
 
             Token endpoint requires no client authentication.
 
             - `type: "none"`
 
-              - `"none"`
-
-          - `BetaManagedAgentsTokenEndpointAuthBasicResponse object { type }`
+          - `BetaManagedAgentsTokenEndpointAuthBasicResponse object`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: "client_secret_basic"`
 
-              - `"client_secret_basic"`
-
-          - `BetaManagedAgentsTokenEndpointAuthPostResponse object { type }`
+          - `BetaManagedAgentsTokenEndpointAuthPostResponse object`
 
             Token endpoint uses POST body authentication with client credentials.
 
             - `type: "client_secret_post"`
-
-              - `"client_secret_post"`
 
         - `resource: optional string or null`
 
@@ -653,7 +678,7 @@ List Credentials
 
           OAuth scope for the refresh request.
 
-    - `BetaManagedAgentsStaticBearerAuthResponse object { mcp_server_url, type }`
+    - `BetaManagedAgentsStaticBearerAuthResponse object`
 
       Static bearer token credential details for an MCP server.
 
@@ -663,9 +688,7 @@ List Credentials
 
       - `type: "static_bearer"`
 
-        - `"static_bearer"`
-
-    - `BetaManagedAgentsEnvironmentVariableAuthResponse object { injection_location, networking, secret_name, type }`
+    - `BetaManagedAgentsEnvironmentVariableAuthResponse object`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -685,15 +708,13 @@ List Credentials
 
         Outbound hosts the secret value is substituted on.
 
-        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object { type }`
+        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `type: "unrestricted"`
 
-            - `"unrestricted"`
-
-        - `BetaManagedAgentsLimitedCredentialNetworkingResponse object { allowed_hosts, type }`
+        - `BetaManagedAgentsLimitedCredentialNetworkingResponse object`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -703,19 +724,17 @@ List Credentials
 
           - `type: "limited"`
 
-            - `"limited"`
-
       - `secret_name: string`
 
         Name of the environment variable.
 
       - `type: "environment_variable"`
 
-        - `"environment_variable"`
-
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: map[string]`
 
@@ -723,11 +742,11 @@ List Credentials
 
   - `type: "vault_credential"`
 
-    - `"vault_credential"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_id: string`
 
@@ -743,14 +762,14 @@ List Credentials
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -778,17 +797,17 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials \
 
 ## Get Credential
 
-**get** `/v1/vaults/{vault_id}/credentials/{credential_id}`
+**GET** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
 Get Credential
 
-### Path Parameters
+### Path parameters
 
 - `vault_id: string`
 
 - `credential_id: string`
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -796,7 +815,7 @@ Get Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -866,9 +885,23 @@ Get Credential
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
 ### Returns
 
-- `BetaManagedAgentsCredential object { id, archived_at, auth, 6 more }`
+- `BetaManagedAgentsCredential object`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -880,11 +913,13 @@ Get Credential
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
-    - `BetaManagedAgentsMCPOAuthAuthResponse object { mcp_server_url, type, expires_at, refresh }`
+    - `BetaManagedAgentsMCPOAuthAuthResponse object`
 
       OAuth credential details for an MCP server.
 
@@ -894,11 +929,11 @@ Get Credential
 
       - `type: "mcp_oauth"`
 
-        - `"mcp_oauth"`
-
       - `expires_at: optional string or null`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse or null`
 
@@ -916,29 +951,23 @@ Get Credential
 
           Token endpoint requires no client authentication.
 
-          - `BetaManagedAgentsTokenEndpointAuthNoneResponse object { type }`
+          - `BetaManagedAgentsTokenEndpointAuthNoneResponse object`
 
             Token endpoint requires no client authentication.
 
             - `type: "none"`
 
-              - `"none"`
-
-          - `BetaManagedAgentsTokenEndpointAuthBasicResponse object { type }`
+          - `BetaManagedAgentsTokenEndpointAuthBasicResponse object`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: "client_secret_basic"`
 
-              - `"client_secret_basic"`
-
-          - `BetaManagedAgentsTokenEndpointAuthPostResponse object { type }`
+          - `BetaManagedAgentsTokenEndpointAuthPostResponse object`
 
             Token endpoint uses POST body authentication with client credentials.
 
             - `type: "client_secret_post"`
-
-              - `"client_secret_post"`
 
         - `resource: optional string or null`
 
@@ -948,7 +977,7 @@ Get Credential
 
           OAuth scope for the refresh request.
 
-    - `BetaManagedAgentsStaticBearerAuthResponse object { mcp_server_url, type }`
+    - `BetaManagedAgentsStaticBearerAuthResponse object`
 
       Static bearer token credential details for an MCP server.
 
@@ -958,9 +987,7 @@ Get Credential
 
       - `type: "static_bearer"`
 
-        - `"static_bearer"`
-
-    - `BetaManagedAgentsEnvironmentVariableAuthResponse object { injection_location, networking, secret_name, type }`
+    - `BetaManagedAgentsEnvironmentVariableAuthResponse object`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -980,15 +1007,13 @@ Get Credential
 
         Outbound hosts the secret value is substituted on.
 
-        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object { type }`
+        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `type: "unrestricted"`
 
-            - `"unrestricted"`
-
-        - `BetaManagedAgentsLimitedCredentialNetworkingResponse object { allowed_hosts, type }`
+        - `BetaManagedAgentsLimitedCredentialNetworkingResponse object`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -998,19 +1023,17 @@ Get Credential
 
           - `type: "limited"`
 
-            - `"limited"`
-
       - `secret_name: string`
 
         Name of the environment variable.
 
       - `type: "environment_variable"`
 
-        - `"environment_variable"`
-
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: map[string]`
 
@@ -1018,11 +1041,11 @@ Get Credential
 
   - `type: "vault_credential"`
 
-    - `"vault_credential"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_id: string`
 
@@ -1034,14 +1057,14 @@ Get Credential
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1064,17 +1087,17 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID \
 
 ## Update Credential
 
-**post** `/v1/vaults/{vault_id}/credentials/{credential_id}`
+**POST** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
 Update Credential
 
-### Path Parameters
+### Path parameters
 
 - `vault_id: string`
 
 - `credential_id: string`
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1082,7 +1105,7 @@ Update Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1152,27 +1175,43 @@ Update Credential
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Body Parameters
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+### Body parameters
 
 - `auth: optional BetaManagedAgentsMCPOAuthUpdateParams or BetaManagedAgentsStaticBearerUpdateParams or BetaManagedAgentsEnvironmentVariableUpdateParams`
 
   Updated authentication details for a credential.
 
-  - `BetaManagedAgentsMCPOAuthUpdateParams object { type, access_token, expires_at, refresh }`
+  - `BetaManagedAgentsMCPOAuthUpdateParams object`
 
     Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
 
     - `type: "mcp_oauth"`
 
-      - `"mcp_oauth"`
-
     - `access_token: optional string or null`
 
       Updated OAuth access token.
 
+      minLength: 1, maxLength: 8192
+
     - `expires_at: optional string or null`
 
       A timestamp in RFC 3339 format
+
+      format: date-time
 
     - `refresh: optional BetaManagedAgentsMCPOAuthRefreshUpdateParams or null`
 
@@ -1182,57 +1221,59 @@ Update Credential
 
         Updated OAuth refresh token.
 
+        minLength: 1, maxLength: 4096
+
       - `scope: optional string or null`
 
         Updated OAuth scope for the refresh request.
+
+        maxLength: 8192
 
       - `token_endpoint_auth: optional BetaManagedAgentsTokenEndpointAuthBasicUpdateParam or BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
         Updated HTTP Basic authentication parameters for the token endpoint.
 
-        - `BetaManagedAgentsTokenEndpointAuthBasicUpdateParam object { type, client_secret }`
+        - `BetaManagedAgentsTokenEndpointAuthBasicUpdateParam object`
 
           Updated HTTP Basic authentication parameters for the token endpoint.
 
           - `type: "client_secret_basic"`
 
-            - `"client_secret_basic"`
-
           - `client_secret: optional string or null`
 
             Updated OAuth client secret.
 
-        - `BetaManagedAgentsTokenEndpointAuthPostUpdateParam object { type, client_secret }`
+            minLength: 1, maxLength: 512
+
+        - `BetaManagedAgentsTokenEndpointAuthPostUpdateParam object`
 
           Updated POST body authentication parameters for the token endpoint.
 
           - `type: "client_secret_post"`
 
-            - `"client_secret_post"`
-
           - `client_secret: optional string or null`
 
             Updated OAuth client secret.
 
-  - `BetaManagedAgentsStaticBearerUpdateParams object { type, token }`
+            minLength: 1, maxLength: 512
+
+  - `BetaManagedAgentsStaticBearerUpdateParams object`
 
     Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
 
     - `type: "static_bearer"`
 
-      - `"static_bearer"`
-
     - `token: optional string or null`
 
       Updated static bearer token value.
 
-  - `BetaManagedAgentsEnvironmentVariableUpdateParams object { type, injection_location, networking, secret_value }`
+      minLength: 1, maxLength: 8192
+
+  - `BetaManagedAgentsEnvironmentVariableUpdateParams object`
 
     Parameters for updating an environment variable credential. `secret_name` is immutable.
 
     - `type: "environment_variable"`
-
-      - `"environment_variable"`
 
     - `injection_location: optional BetaManagedAgentsInjectionLocationUpdateParams`
 
@@ -1250,15 +1291,13 @@ Update Credential
 
       Updated networking scope. Full replacement.
 
-      - `BetaManagedAgentsUnrestrictedCredentialNetworkingParams object { type }`
+      - `BetaManagedAgentsUnrestrictedCredentialNetworkingParams object`
 
         Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
         - `type: "unrestricted"`
 
-          - `"unrestricted"`
-
-      - `BetaManagedAgentsLimitedCredentialNetworkingParams object { allowed_hosts, type }`
+      - `BetaManagedAgentsLimitedCredentialNetworkingParams object`
 
         Substitute the secret only on requests to the listed hosts.
 
@@ -1268,15 +1307,17 @@ Update Credential
 
         - `type: "limited"`
 
-          - `"limited"`
-
     - `secret_value: optional string or null`
 
       Updated secret value.
 
+      minLength: 1, maxLength: 4096
+
 - `display_name: optional string or null`
 
   Updated human-readable name for the credential. 1-255 characters.
+
+  minLength: 1, maxLength: 255
 
 - `metadata: optional map[string] or null`
 
@@ -1284,7 +1325,7 @@ Update Credential
 
 ### Returns
 
-- `BetaManagedAgentsCredential object { id, archived_at, auth, 6 more }`
+- `BetaManagedAgentsCredential object`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -1296,11 +1337,13 @@ Update Credential
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
-    - `BetaManagedAgentsMCPOAuthAuthResponse object { mcp_server_url, type, expires_at, refresh }`
+    - `BetaManagedAgentsMCPOAuthAuthResponse object`
 
       OAuth credential details for an MCP server.
 
@@ -1310,11 +1353,11 @@ Update Credential
 
       - `type: "mcp_oauth"`
 
-        - `"mcp_oauth"`
-
       - `expires_at: optional string or null`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse or null`
 
@@ -1332,29 +1375,23 @@ Update Credential
 
           Token endpoint requires no client authentication.
 
-          - `BetaManagedAgentsTokenEndpointAuthNoneResponse object { type }`
+          - `BetaManagedAgentsTokenEndpointAuthNoneResponse object`
 
             Token endpoint requires no client authentication.
 
             - `type: "none"`
 
-              - `"none"`
-
-          - `BetaManagedAgentsTokenEndpointAuthBasicResponse object { type }`
+          - `BetaManagedAgentsTokenEndpointAuthBasicResponse object`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: "client_secret_basic"`
 
-              - `"client_secret_basic"`
-
-          - `BetaManagedAgentsTokenEndpointAuthPostResponse object { type }`
+          - `BetaManagedAgentsTokenEndpointAuthPostResponse object`
 
             Token endpoint uses POST body authentication with client credentials.
 
             - `type: "client_secret_post"`
-
-              - `"client_secret_post"`
 
         - `resource: optional string or null`
 
@@ -1364,7 +1401,7 @@ Update Credential
 
           OAuth scope for the refresh request.
 
-    - `BetaManagedAgentsStaticBearerAuthResponse object { mcp_server_url, type }`
+    - `BetaManagedAgentsStaticBearerAuthResponse object`
 
       Static bearer token credential details for an MCP server.
 
@@ -1374,9 +1411,7 @@ Update Credential
 
       - `type: "static_bearer"`
 
-        - `"static_bearer"`
-
-    - `BetaManagedAgentsEnvironmentVariableAuthResponse object { injection_location, networking, secret_name, type }`
+    - `BetaManagedAgentsEnvironmentVariableAuthResponse object`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -1396,15 +1431,13 @@ Update Credential
 
         Outbound hosts the secret value is substituted on.
 
-        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object { type }`
+        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `type: "unrestricted"`
 
-            - `"unrestricted"`
-
-        - `BetaManagedAgentsLimitedCredentialNetworkingResponse object { allowed_hosts, type }`
+        - `BetaManagedAgentsLimitedCredentialNetworkingResponse object`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -1414,19 +1447,17 @@ Update Credential
 
           - `type: "limited"`
 
-            - `"limited"`
-
       - `secret_name: string`
 
         Name of the environment variable.
 
       - `type: "environment_variable"`
 
-        - `"environment_variable"`
-
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: map[string]`
 
@@ -1434,11 +1465,11 @@ Update Credential
 
   - `type: "vault_credential"`
 
-    - `"vault_credential"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_id: string`
 
@@ -1450,7 +1481,7 @@ Update Credential
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -1464,7 +1495,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID \
         }'
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1487,17 +1518,17 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID \
 
 ## Delete Credential
 
-**delete** `/v1/vaults/{vault_id}/credentials/{credential_id}`
+**DELETE** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
 Delete Credential
 
-### Path Parameters
+### Path parameters
 
 - `vault_id: string`
 
 - `credential_id: string`
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1505,7 +1536,7 @@ Delete Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1575,9 +1606,23 @@ Delete Credential
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
 ### Returns
 
-- `BetaManagedAgentsDeletedCredential object { id, type }`
+- `BetaManagedAgentsDeletedCredential object`
 
   Confirmation of a deleted credential.
 
@@ -1587,11 +1632,9 @@ Delete Credential
 
   - `type: "vault_credential_deleted"`
 
-    - `"vault_credential_deleted"`
-
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
@@ -1599,7 +1642,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1610,17 +1653,17 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID \
 
 ## Archive Credential
 
-**post** `/v1/vaults/{vault_id}/credentials/{credential_id}/archive`
+**POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/archive`
 
 Archive Credential
 
-### Path Parameters
+### Path parameters
 
 - `vault_id: string`
 
 - `credential_id: string`
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1628,7 +1671,7 @@ Archive Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1698,9 +1741,23 @@ Archive Credential
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
 ### Returns
 
-- `BetaManagedAgentsCredential object { id, archived_at, auth, 6 more }`
+- `BetaManagedAgentsCredential object`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -1712,11 +1769,13 @@ Archive Credential
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
-    - `BetaManagedAgentsMCPOAuthAuthResponse object { mcp_server_url, type, expires_at, refresh }`
+    - `BetaManagedAgentsMCPOAuthAuthResponse object`
 
       OAuth credential details for an MCP server.
 
@@ -1726,11 +1785,11 @@ Archive Credential
 
       - `type: "mcp_oauth"`
 
-        - `"mcp_oauth"`
-
       - `expires_at: optional string or null`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse or null`
 
@@ -1748,29 +1807,23 @@ Archive Credential
 
           Token endpoint requires no client authentication.
 
-          - `BetaManagedAgentsTokenEndpointAuthNoneResponse object { type }`
+          - `BetaManagedAgentsTokenEndpointAuthNoneResponse object`
 
             Token endpoint requires no client authentication.
 
             - `type: "none"`
 
-              - `"none"`
-
-          - `BetaManagedAgentsTokenEndpointAuthBasicResponse object { type }`
+          - `BetaManagedAgentsTokenEndpointAuthBasicResponse object`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: "client_secret_basic"`
 
-              - `"client_secret_basic"`
-
-          - `BetaManagedAgentsTokenEndpointAuthPostResponse object { type }`
+          - `BetaManagedAgentsTokenEndpointAuthPostResponse object`
 
             Token endpoint uses POST body authentication with client credentials.
 
             - `type: "client_secret_post"`
-
-              - `"client_secret_post"`
 
         - `resource: optional string or null`
 
@@ -1780,7 +1833,7 @@ Archive Credential
 
           OAuth scope for the refresh request.
 
-    - `BetaManagedAgentsStaticBearerAuthResponse object { mcp_server_url, type }`
+    - `BetaManagedAgentsStaticBearerAuthResponse object`
 
       Static bearer token credential details for an MCP server.
 
@@ -1790,9 +1843,7 @@ Archive Credential
 
       - `type: "static_bearer"`
 
-        - `"static_bearer"`
-
-    - `BetaManagedAgentsEnvironmentVariableAuthResponse object { injection_location, networking, secret_name, type }`
+    - `BetaManagedAgentsEnvironmentVariableAuthResponse object`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -1812,15 +1863,13 @@ Archive Credential
 
         Outbound hosts the secret value is substituted on.
 
-        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object { type }`
+        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `type: "unrestricted"`
 
-            - `"unrestricted"`
-
-        - `BetaManagedAgentsLimitedCredentialNetworkingResponse object { allowed_hosts, type }`
+        - `BetaManagedAgentsLimitedCredentialNetworkingResponse object`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -1830,19 +1879,17 @@ Archive Credential
 
           - `type: "limited"`
 
-            - `"limited"`
-
       - `secret_name: string`
 
         Name of the environment variable.
 
       - `type: "environment_variable"`
 
-        - `"environment_variable"`
-
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: map[string]`
 
@@ -1850,11 +1897,11 @@ Archive Credential
 
   - `type: "vault_credential"`
 
-    - `"vault_credential"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_id: string`
 
@@ -1866,7 +1913,7 @@ Archive Credential
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/archive \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
@@ -1874,7 +1921,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/ar
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -1897,17 +1944,17 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/ar
 
 ## Validate Credential
 
-**post** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
+**POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
 
 Validate Credential
 
-### Path Parameters
+### Path parameters
 
 - `vault_id: string`
 
 - `credential_id: string`
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1915,7 +1962,7 @@ Validate Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1985,9 +2032,23 @@ Validate Credential
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
 ### Returns
 
-- `BetaManagedAgentsCredentialValidation object { credential_id, has_refresh_token, mcp_probe, 5 more }`
+- `BetaManagedAgentsCredentialValidation object`
 
   Result of live-probing a credential against its configured MCP server.
 
@@ -2022,6 +2083,8 @@ Validate Credential
       - `status_code: number`
 
         HTTP status code.
+
+        format: int32
 
     - `method: string`
 
@@ -2059,11 +2122,11 @@ Validate Credential
 
   - `type: "vault_credential_validation"`
 
-    - `"vault_credential_validation"`
-
   - `validated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_id: string`
 
@@ -2071,7 +2134,7 @@ Validate Credential
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mcp_oauth_validate \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
@@ -2079,7 +2142,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -2110,11 +2173,11 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Beta Managed Agents Credential
 
-- `BetaManagedAgentsCredential object { id, archived_at, auth, 6 more }`
+- `BetaManagedAgentsCredential object`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -2126,11 +2189,13 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     A timestamp in RFC 3339 format
 
+    format: date-time
+
   - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
-    - `BetaManagedAgentsMCPOAuthAuthResponse object { mcp_server_url, type, expires_at, refresh }`
+    - `BetaManagedAgentsMCPOAuthAuthResponse object`
 
       OAuth credential details for an MCP server.
 
@@ -2140,11 +2205,11 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
       - `type: "mcp_oauth"`
 
-        - `"mcp_oauth"`
-
       - `expires_at: optional string or null`
 
         A timestamp in RFC 3339 format
+
+        format: date-time
 
       - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse or null`
 
@@ -2162,29 +2227,23 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
           Token endpoint requires no client authentication.
 
-          - `BetaManagedAgentsTokenEndpointAuthNoneResponse object { type }`
+          - `BetaManagedAgentsTokenEndpointAuthNoneResponse object`
 
             Token endpoint requires no client authentication.
 
             - `type: "none"`
 
-              - `"none"`
-
-          - `BetaManagedAgentsTokenEndpointAuthBasicResponse object { type }`
+          - `BetaManagedAgentsTokenEndpointAuthBasicResponse object`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: "client_secret_basic"`
 
-              - `"client_secret_basic"`
-
-          - `BetaManagedAgentsTokenEndpointAuthPostResponse object { type }`
+          - `BetaManagedAgentsTokenEndpointAuthPostResponse object`
 
             Token endpoint uses POST body authentication with client credentials.
 
             - `type: "client_secret_post"`
-
-              - `"client_secret_post"`
 
         - `resource: optional string or null`
 
@@ -2194,7 +2253,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
           OAuth scope for the refresh request.
 
-    - `BetaManagedAgentsStaticBearerAuthResponse object { mcp_server_url, type }`
+    - `BetaManagedAgentsStaticBearerAuthResponse object`
 
       Static bearer token credential details for an MCP server.
 
@@ -2204,9 +2263,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
       - `type: "static_bearer"`
 
-        - `"static_bearer"`
-
-    - `BetaManagedAgentsEnvironmentVariableAuthResponse object { injection_location, networking, secret_name, type }`
+    - `BetaManagedAgentsEnvironmentVariableAuthResponse object`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -2226,15 +2283,13 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
         Outbound hosts the secret value is substituted on.
 
-        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object { type }`
+        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `type: "unrestricted"`
 
-            - `"unrestricted"`
-
-        - `BetaManagedAgentsLimitedCredentialNetworkingResponse object { allowed_hosts, type }`
+        - `BetaManagedAgentsLimitedCredentialNetworkingResponse object`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -2244,19 +2299,17 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
           - `type: "limited"`
 
-            - `"limited"`
-
       - `secret_name: string`
 
         Name of the environment variable.
 
       - `type: "environment_variable"`
 
-        - `"environment_variable"`
-
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: map[string]`
 
@@ -2264,11 +2317,11 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
   - `type: "vault_credential"`
 
-    - `"vault_credential"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_id: string`
 
@@ -2284,15 +2337,13 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
   Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
-  - `BetaManagedAgentsUnrestrictedCredentialNetworkingParams object { type }`
+  - `BetaManagedAgentsUnrestrictedCredentialNetworkingParams object`
 
     Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
     - `type: "unrestricted"`
 
-      - `"unrestricted"`
-
-  - `BetaManagedAgentsLimitedCredentialNetworkingParams object { allowed_hosts, type }`
+  - `BetaManagedAgentsLimitedCredentialNetworkingParams object`
 
     Substitute the secret only on requests to the listed hosts.
 
@@ -2302,11 +2353,9 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     - `type: "limited"`
 
-      - `"limited"`
-
 ### Beta Managed Agents Credential Validation
 
-- `BetaManagedAgentsCredentialValidation object { credential_id, has_refresh_token, mcp_probe, 5 more }`
+- `BetaManagedAgentsCredentialValidation object`
 
   Result of live-probing a credential against its configured MCP server.
 
@@ -2341,6 +2390,8 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
       - `status_code: number`
 
         HTTP status code.
+
+        format: int32
 
     - `method: string`
 
@@ -2378,11 +2429,11 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
   - `type: "vault_credential_validation"`
 
-    - `"vault_credential_validation"`
-
   - `validated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_id: string`
 
@@ -2402,7 +2453,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
 ### Beta Managed Agents Deleted Credential
 
-- `BetaManagedAgentsDeletedCredential object { id, type }`
+- `BetaManagedAgentsDeletedCredential object`
 
   Confirmation of a deleted credential.
 
@@ -2412,11 +2463,9 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
   - `type: "vault_credential_deleted"`
 
-    - `"vault_credential_deleted"`
-
 ### Beta Managed Agents Environment Variable Auth Response
 
-- `BetaManagedAgentsEnvironmentVariableAuthResponse object { injection_location, networking, secret_name, type }`
+- `BetaManagedAgentsEnvironmentVariableAuthResponse object`
 
   Environment variable credential details. The secret value is never returned.
 
@@ -2436,15 +2485,13 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     Outbound hosts the secret value is substituted on.
 
-    - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object { type }`
+    - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object`
 
       The secret is substituted on any host the session's Environment network policy permits egress to.
 
       - `type: "unrestricted"`
 
-        - `"unrestricted"`
-
-    - `BetaManagedAgentsLimitedCredentialNetworkingResponse object { allowed_hosts, type }`
+    - `BetaManagedAgentsLimitedCredentialNetworkingResponse object`
 
       The secret is substituted only on requests to the listed hosts.
 
@@ -2454,19 +2501,15 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
       - `type: "limited"`
 
-        - `"limited"`
-
   - `secret_name: string`
 
     Name of the environment variable.
 
   - `type: "environment_variable"`
 
-    - `"environment_variable"`
-
 ### Beta Managed Agents Environment Variable Create Params
 
-- `BetaManagedAgentsEnvironmentVariableCreateParams object { networking, secret_name, secret_value, 2 more }`
+- `BetaManagedAgentsEnvironmentVariableCreateParams object`
 
   Parameters for creating an environment variable credential.
 
@@ -2474,15 +2517,13 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     Outbound hosts the secret value is substituted on.
 
-    - `BetaManagedAgentsUnrestrictedCredentialNetworkingParams object { type }`
+    - `BetaManagedAgentsUnrestrictedCredentialNetworkingParams object`
 
       Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
       - `type: "unrestricted"`
 
-        - `"unrestricted"`
-
-    - `BetaManagedAgentsLimitedCredentialNetworkingParams object { allowed_hosts, type }`
+    - `BetaManagedAgentsLimitedCredentialNetworkingParams object`
 
       Substitute the secret only on requests to the listed hosts.
 
@@ -2492,19 +2533,19 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
       - `type: "limited"`
 
-        - `"limited"`
-
   - `secret_name: string`
 
     Name of the environment variable. Immutable after create.
+
+    minLength: 1, maxLength: 255
 
   - `secret_value: string`
 
     Secret value. Write-only; never returned in responses.
 
-  - `type: "environment_variable"`
+    minLength: 1, maxLength: 4096
 
-    - `"environment_variable"`
+  - `type: "environment_variable"`
 
   - `injection_location: optional BetaManagedAgentsInjectionLocationParams`
 
@@ -2520,13 +2561,11 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
 ### Beta Managed Agents Environment Variable Update Params
 
-- `BetaManagedAgentsEnvironmentVariableUpdateParams object { type, injection_location, networking, secret_value }`
+- `BetaManagedAgentsEnvironmentVariableUpdateParams object`
 
   Parameters for updating an environment variable credential. `secret_name` is immutable.
 
   - `type: "environment_variable"`
-
-    - `"environment_variable"`
 
   - `injection_location: optional BetaManagedAgentsInjectionLocationUpdateParams`
 
@@ -2544,15 +2583,13 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     Updated networking scope. Full replacement.
 
-    - `BetaManagedAgentsUnrestrictedCredentialNetworkingParams object { type }`
+    - `BetaManagedAgentsUnrestrictedCredentialNetworkingParams object`
 
       Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
       - `type: "unrestricted"`
 
-        - `"unrestricted"`
-
-    - `BetaManagedAgentsLimitedCredentialNetworkingParams object { allowed_hosts, type }`
+    - `BetaManagedAgentsLimitedCredentialNetworkingParams object`
 
       Substitute the secret only on requests to the listed hosts.
 
@@ -2562,15 +2599,15 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
       - `type: "limited"`
 
-        - `"limited"`
-
   - `secret_value: optional string or null`
 
     Updated secret value.
 
+    minLength: 1, maxLength: 4096
+
 ### Beta Managed Agents Injection Location Params
 
-- `BetaManagedAgentsInjectionLocationParams object { body, header }`
+- `BetaManagedAgentsInjectionLocationParams object`
 
   Where in the outbound request the secret value may be substituted.
 
@@ -2584,7 +2621,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
 ### Beta Managed Agents Injection Location Response
 
-- `BetaManagedAgentsInjectionLocationResponse object { body, header }`
+- `BetaManagedAgentsInjectionLocationResponse object`
 
   Where in the outbound request the secret value is substituted.
 
@@ -2598,7 +2635,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
 ### Beta Managed Agents Injection Location Update Params
 
-- `BetaManagedAgentsInjectionLocationUpdateParams object { body, header }`
+- `BetaManagedAgentsInjectionLocationUpdateParams object`
 
   Updated injection location.
 
@@ -2612,7 +2649,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
 ### Beta Managed Agents Limited Credential Networking Params
 
-- `BetaManagedAgentsLimitedCredentialNetworkingParams object { allowed_hosts, type }`
+- `BetaManagedAgentsLimitedCredentialNetworkingParams object`
 
   Substitute the secret only on requests to the listed hosts.
 
@@ -2622,11 +2659,9 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
   - `type: "limited"`
 
-    - `"limited"`
-
 ### Beta Managed Agents Limited Credential Networking Response
 
-- `BetaManagedAgentsLimitedCredentialNetworkingResponse object { allowed_hosts, type }`
+- `BetaManagedAgentsLimitedCredentialNetworkingResponse object`
 
   The secret is substituted only on requests to the listed hosts.
 
@@ -2636,11 +2671,9 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
   - `type: "limited"`
 
-    - `"limited"`
-
 ### Beta Managed Agents MCP OAuth Auth Response
 
-- `BetaManagedAgentsMCPOAuthAuthResponse object { mcp_server_url, type, expires_at, refresh }`
+- `BetaManagedAgentsMCPOAuthAuthResponse object`
 
   OAuth credential details for an MCP server.
 
@@ -2650,11 +2683,11 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
   - `type: "mcp_oauth"`
 
-    - `"mcp_oauth"`
-
   - `expires_at: optional string or null`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse or null`
 
@@ -2672,29 +2705,23 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
       Token endpoint requires no client authentication.
 
-      - `BetaManagedAgentsTokenEndpointAuthNoneResponse object { type }`
+      - `BetaManagedAgentsTokenEndpointAuthNoneResponse object`
 
         Token endpoint requires no client authentication.
 
         - `type: "none"`
 
-          - `"none"`
-
-      - `BetaManagedAgentsTokenEndpointAuthBasicResponse object { type }`
+      - `BetaManagedAgentsTokenEndpointAuthBasicResponse object`
 
         Token endpoint uses HTTP Basic authentication with client credentials.
 
         - `type: "client_secret_basic"`
 
-          - `"client_secret_basic"`
-
-      - `BetaManagedAgentsTokenEndpointAuthPostResponse object { type }`
+      - `BetaManagedAgentsTokenEndpointAuthPostResponse object`
 
         Token endpoint uses POST body authentication with client credentials.
 
         - `type: "client_secret_post"`
-
-          - `"client_secret_post"`
 
     - `resource: optional string or null`
 
@@ -2706,7 +2733,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
 ### Beta Managed Agents MCP OAuth Create Params
 
-- `BetaManagedAgentsMCPOAuthCreateParams object { access_token, mcp_server_url, type, 2 more }`
+- `BetaManagedAgentsMCPOAuthCreateParams object`
 
   Parameters for creating an MCP OAuth credential.
 
@@ -2714,17 +2741,21 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     OAuth access token.
 
+    minLength: 1, maxLength: 8192
+
   - `mcp_server_url: string`
 
     URL of the MCP server this credential authenticates against.
 
-  - `type: "mcp_oauth"`
+    minLength: 1, maxLength: 2047
 
-    - `"mcp_oauth"`
+  - `type: "mcp_oauth"`
 
   - `expires_at: optional string or null`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `refresh: optional BetaManagedAgentsMCPOAuthRefreshParams or null`
 
@@ -2734,27 +2765,31 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
       OAuth client ID.
 
+      minLength: 1, maxLength: 1024
+
     - `refresh_token: string`
 
       OAuth refresh token.
+
+      minLength: 1, maxLength: 4096
 
     - `token_endpoint: string`
 
       Token endpoint URL used to refresh the access token.
 
+      minLength: 1, maxLength: 2047
+
     - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneParam or BetaManagedAgentsTokenEndpointAuthBasicParam or BetaManagedAgentsTokenEndpointAuthPostParam`
 
       Token endpoint requires no client authentication.
 
-      - `BetaManagedAgentsTokenEndpointAuthNoneParam object { type }`
+      - `BetaManagedAgentsTokenEndpointAuthNoneParam object`
 
         Token endpoint requires no client authentication.
 
         - `type: "none"`
 
-          - `"none"`
-
-      - `BetaManagedAgentsTokenEndpointAuthBasicParam object { client_secret, type }`
+      - `BetaManagedAgentsTokenEndpointAuthBasicParam object`
 
         Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -2762,11 +2797,11 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
           OAuth client secret.
 
+          minLength: 1, maxLength: 512
+
         - `type: "client_secret_basic"`
 
-          - `"client_secret_basic"`
-
-      - `BetaManagedAgentsTokenEndpointAuthPostParam object { client_secret, type }`
+      - `BetaManagedAgentsTokenEndpointAuthPostParam object`
 
         Token endpoint uses POST body authentication with client credentials.
 
@@ -2774,21 +2809,25 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
           OAuth client secret.
 
-        - `type: "client_secret_post"`
+          minLength: 1, maxLength: 512
 
-          - `"client_secret_post"`
+        - `type: "client_secret_post"`
 
     - `resource: optional string or null`
 
       OAuth resource indicator.
 
+      minLength: 1, maxLength: 2047
+
     - `scope: optional string or null`
 
       OAuth scope for the refresh request.
 
+      minLength: 1, maxLength: 8192
+
 ### Beta Managed Agents MCP OAuth Refresh Params
 
-- `BetaManagedAgentsMCPOAuthRefreshParams object { client_id, refresh_token, token_endpoint, 3 more }`
+- `BetaManagedAgentsMCPOAuthRefreshParams object`
 
   OAuth refresh token parameters for creating a credential with refresh support.
 
@@ -2796,27 +2835,31 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     OAuth client ID.
 
+    minLength: 1, maxLength: 1024
+
   - `refresh_token: string`
 
     OAuth refresh token.
+
+    minLength: 1, maxLength: 4096
 
   - `token_endpoint: string`
 
     Token endpoint URL used to refresh the access token.
 
+    minLength: 1, maxLength: 2047
+
   - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneParam or BetaManagedAgentsTokenEndpointAuthBasicParam or BetaManagedAgentsTokenEndpointAuthPostParam`
 
     Token endpoint requires no client authentication.
 
-    - `BetaManagedAgentsTokenEndpointAuthNoneParam object { type }`
+    - `BetaManagedAgentsTokenEndpointAuthNoneParam object`
 
       Token endpoint requires no client authentication.
 
       - `type: "none"`
 
-        - `"none"`
-
-    - `BetaManagedAgentsTokenEndpointAuthBasicParam object { client_secret, type }`
+    - `BetaManagedAgentsTokenEndpointAuthBasicParam object`
 
       Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -2824,11 +2867,11 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
         OAuth client secret.
 
+        minLength: 1, maxLength: 512
+
       - `type: "client_secret_basic"`
 
-        - `"client_secret_basic"`
-
-    - `BetaManagedAgentsTokenEndpointAuthPostParam object { client_secret, type }`
+    - `BetaManagedAgentsTokenEndpointAuthPostParam object`
 
       Token endpoint uses POST body authentication with client credentials.
 
@@ -2836,21 +2879,25 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
         OAuth client secret.
 
-      - `type: "client_secret_post"`
+        minLength: 1, maxLength: 512
 
-        - `"client_secret_post"`
+      - `type: "client_secret_post"`
 
   - `resource: optional string or null`
 
     OAuth resource indicator.
 
+    minLength: 1, maxLength: 2047
+
   - `scope: optional string or null`
 
     OAuth scope for the refresh request.
 
+    minLength: 1, maxLength: 8192
+
 ### Beta Managed Agents MCP OAuth Refresh Response
 
-- `BetaManagedAgentsMCPOAuthRefreshResponse object { client_id, token_endpoint, token_endpoint_auth, 2 more }`
+- `BetaManagedAgentsMCPOAuthRefreshResponse object`
 
   OAuth refresh token configuration returned in credential responses.
 
@@ -2866,29 +2913,23 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     Token endpoint requires no client authentication.
 
-    - `BetaManagedAgentsTokenEndpointAuthNoneResponse object { type }`
+    - `BetaManagedAgentsTokenEndpointAuthNoneResponse object`
 
       Token endpoint requires no client authentication.
 
       - `type: "none"`
 
-        - `"none"`
-
-    - `BetaManagedAgentsTokenEndpointAuthBasicResponse object { type }`
+    - `BetaManagedAgentsTokenEndpointAuthBasicResponse object`
 
       Token endpoint uses HTTP Basic authentication with client credentials.
 
       - `type: "client_secret_basic"`
 
-        - `"client_secret_basic"`
-
-    - `BetaManagedAgentsTokenEndpointAuthPostResponse object { type }`
+    - `BetaManagedAgentsTokenEndpointAuthPostResponse object`
 
       Token endpoint uses POST body authentication with client credentials.
 
       - `type: "client_secret_post"`
-
-        - `"client_secret_post"`
 
   - `resource: optional string or null`
 
@@ -2900,7 +2941,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
 ### Beta Managed Agents MCP OAuth Refresh Update Params
 
-- `BetaManagedAgentsMCPOAuthRefreshUpdateParams object { refresh_token, scope, token_endpoint_auth }`
+- `BetaManagedAgentsMCPOAuthRefreshUpdateParams object`
 
   Parameters for updating OAuth refresh token configuration.
 
@@ -2908,55 +2949,61 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     Updated OAuth refresh token.
 
+    minLength: 1, maxLength: 4096
+
   - `scope: optional string or null`
 
     Updated OAuth scope for the refresh request.
+
+    maxLength: 8192
 
   - `token_endpoint_auth: optional BetaManagedAgentsTokenEndpointAuthBasicUpdateParam or BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
     Updated HTTP Basic authentication parameters for the token endpoint.
 
-    - `BetaManagedAgentsTokenEndpointAuthBasicUpdateParam object { type, client_secret }`
+    - `BetaManagedAgentsTokenEndpointAuthBasicUpdateParam object`
 
       Updated HTTP Basic authentication parameters for the token endpoint.
 
       - `type: "client_secret_basic"`
 
-        - `"client_secret_basic"`
-
       - `client_secret: optional string or null`
 
         Updated OAuth client secret.
 
-    - `BetaManagedAgentsTokenEndpointAuthPostUpdateParam object { type, client_secret }`
+        minLength: 1, maxLength: 512
+
+    - `BetaManagedAgentsTokenEndpointAuthPostUpdateParam object`
 
       Updated POST body authentication parameters for the token endpoint.
 
       - `type: "client_secret_post"`
 
-        - `"client_secret_post"`
-
       - `client_secret: optional string or null`
 
         Updated OAuth client secret.
 
+        minLength: 1, maxLength: 512
+
 ### Beta Managed Agents MCP OAuth Update Params
 
-- `BetaManagedAgentsMCPOAuthUpdateParams object { type, access_token, expires_at, refresh }`
+- `BetaManagedAgentsMCPOAuthUpdateParams object`
 
   Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
 
   - `type: "mcp_oauth"`
 
-    - `"mcp_oauth"`
-
   - `access_token: optional string or null`
 
     Updated OAuth access token.
 
+    minLength: 1, maxLength: 8192
+
   - `expires_at: optional string or null`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `refresh: optional BetaManagedAgentsMCPOAuthRefreshUpdateParams or null`
 
@@ -2966,41 +3013,45 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
       Updated OAuth refresh token.
 
+      minLength: 1, maxLength: 4096
+
     - `scope: optional string or null`
 
       Updated OAuth scope for the refresh request.
+
+      maxLength: 8192
 
     - `token_endpoint_auth: optional BetaManagedAgentsTokenEndpointAuthBasicUpdateParam or BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
       Updated HTTP Basic authentication parameters for the token endpoint.
 
-      - `BetaManagedAgentsTokenEndpointAuthBasicUpdateParam object { type, client_secret }`
+      - `BetaManagedAgentsTokenEndpointAuthBasicUpdateParam object`
 
         Updated HTTP Basic authentication parameters for the token endpoint.
 
         - `type: "client_secret_basic"`
 
-          - `"client_secret_basic"`
-
         - `client_secret: optional string or null`
 
           Updated OAuth client secret.
 
-      - `BetaManagedAgentsTokenEndpointAuthPostUpdateParam object { type, client_secret }`
+          minLength: 1, maxLength: 512
+
+      - `BetaManagedAgentsTokenEndpointAuthPostUpdateParam object`
 
         Updated POST body authentication parameters for the token endpoint.
 
         - `type: "client_secret_post"`
 
-          - `"client_secret_post"`
-
         - `client_secret: optional string or null`
 
           Updated OAuth client secret.
 
+          minLength: 1, maxLength: 512
+
 ### Beta Managed Agents MCP Probe
 
-- `BetaManagedAgentsMCPProbe object { http_response, method }`
+- `BetaManagedAgentsMCPProbe object`
 
   The failing step of an MCP validation probe.
 
@@ -3024,13 +3075,15 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
       HTTP status code.
 
+      format: int32
+
   - `method: string`
 
     The MCP method that failed (for example `initialize` or `tools/list`).
 
 ### Beta Managed Agents Refresh HTTP Response
 
-- `BetaManagedAgentsRefreshHTTPResponse object { body, body_truncated, content_type, status_code }`
+- `BetaManagedAgentsRefreshHTTPResponse object`
 
   An HTTP response captured during a credential validation probe.
 
@@ -3050,9 +3103,11 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     HTTP status code.
 
+    format: int32
+
 ### Beta Managed Agents Refresh Object
 
-- `BetaManagedAgentsRefreshObject object { http_response, status }`
+- `BetaManagedAgentsRefreshObject object`
 
   Outcome of a refresh-token exchange attempted during credential validation.
 
@@ -3076,6 +3131,8 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
       HTTP status code.
 
+      format: int32
+
   - `status: "succeeded" or "failed" or "connect_error" or "no_refresh_token"`
 
     Outcome of a refresh-token exchange attempted during credential validation.
@@ -3090,7 +3147,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
 ### Beta Managed Agents Static Bearer Auth Response
 
-- `BetaManagedAgentsStaticBearerAuthResponse object { mcp_server_url, type }`
+- `BetaManagedAgentsStaticBearerAuthResponse object`
 
   Static bearer token credential details for an MCP server.
 
@@ -3100,11 +3157,9 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
   - `type: "static_bearer"`
 
-    - `"static_bearer"`
-
 ### Beta Managed Agents Static Bearer Create Params
 
-- `BetaManagedAgentsStaticBearerCreateParams object { token, mcp_server_url, type }`
+- `BetaManagedAgentsStaticBearerCreateParams object`
 
   Parameters for creating a static bearer token credential.
 
@@ -3112,31 +3167,33 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     Static bearer token value.
 
+    minLength: 1, maxLength: 8192
+
   - `mcp_server_url: string`
 
     URL of the MCP server this credential authenticates against.
 
-  - `type: "static_bearer"`
+    minLength: 1, maxLength: 2047
 
-    - `"static_bearer"`
+  - `type: "static_bearer"`
 
 ### Beta Managed Agents Static Bearer Update Params
 
-- `BetaManagedAgentsStaticBearerUpdateParams object { type, token }`
+- `BetaManagedAgentsStaticBearerUpdateParams object`
 
   Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
 
   - `type: "static_bearer"`
 
-    - `"static_bearer"`
-
   - `token: optional string or null`
 
     Updated static bearer token value.
 
+    minLength: 1, maxLength: 8192
+
 ### Beta Managed Agents Token Endpoint Auth Basic Param
 
-- `BetaManagedAgentsTokenEndpointAuthBasicParam object { client_secret, type }`
+- `BetaManagedAgentsTokenEndpointAuthBasicParam object`
 
   Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -3144,57 +3201,51 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     OAuth client secret.
 
-  - `type: "client_secret_basic"`
+    minLength: 1, maxLength: 512
 
-    - `"client_secret_basic"`
+  - `type: "client_secret_basic"`
 
 ### Beta Managed Agents Token Endpoint Auth Basic Response
 
-- `BetaManagedAgentsTokenEndpointAuthBasicResponse object { type }`
+- `BetaManagedAgentsTokenEndpointAuthBasicResponse object`
 
   Token endpoint uses HTTP Basic authentication with client credentials.
 
   - `type: "client_secret_basic"`
 
-    - `"client_secret_basic"`
-
 ### Beta Managed Agents Token Endpoint Auth Basic Update Param
 
-- `BetaManagedAgentsTokenEndpointAuthBasicUpdateParam object { type, client_secret }`
+- `BetaManagedAgentsTokenEndpointAuthBasicUpdateParam object`
 
   Updated HTTP Basic authentication parameters for the token endpoint.
 
   - `type: "client_secret_basic"`
 
-    - `"client_secret_basic"`
-
   - `client_secret: optional string or null`
 
     Updated OAuth client secret.
 
+    minLength: 1, maxLength: 512
+
 ### Beta Managed Agents Token Endpoint Auth None Param
 
-- `BetaManagedAgentsTokenEndpointAuthNoneParam object { type }`
+- `BetaManagedAgentsTokenEndpointAuthNoneParam object`
 
   Token endpoint requires no client authentication.
 
   - `type: "none"`
-
-    - `"none"`
 
 ### Beta Managed Agents Token Endpoint Auth None Response
 
-- `BetaManagedAgentsTokenEndpointAuthNoneResponse object { type }`
+- `BetaManagedAgentsTokenEndpointAuthNoneResponse object`
 
   Token endpoint requires no client authentication.
 
   - `type: "none"`
 
-    - `"none"`
-
 ### Beta Managed Agents Token Endpoint Auth Post Param
 
-- `BetaManagedAgentsTokenEndpointAuthPostParam object { client_secret, type }`
+- `BetaManagedAgentsTokenEndpointAuthPostParam object`
 
   Token endpoint uses POST body authentication with client credentials.
 
@@ -3202,50 +3253,44 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     OAuth client secret.
 
-  - `type: "client_secret_post"`
+    minLength: 1, maxLength: 512
 
-    - `"client_secret_post"`
+  - `type: "client_secret_post"`
 
 ### Beta Managed Agents Token Endpoint Auth Post Response
 
-- `BetaManagedAgentsTokenEndpointAuthPostResponse object { type }`
+- `BetaManagedAgentsTokenEndpointAuthPostResponse object`
 
   Token endpoint uses POST body authentication with client credentials.
 
   - `type: "client_secret_post"`
 
-    - `"client_secret_post"`
-
 ### Beta Managed Agents Token Endpoint Auth Post Update Param
 
-- `BetaManagedAgentsTokenEndpointAuthPostUpdateParam object { type, client_secret }`
+- `BetaManagedAgentsTokenEndpointAuthPostUpdateParam object`
 
   Updated POST body authentication parameters for the token endpoint.
 
   - `type: "client_secret_post"`
 
-    - `"client_secret_post"`
-
   - `client_secret: optional string or null`
 
     Updated OAuth client secret.
 
+    minLength: 1, maxLength: 512
+
 ### Beta Managed Agents Unrestricted Credential Networking Params
 
-- `BetaManagedAgentsUnrestrictedCredentialNetworkingParams object { type }`
+- `BetaManagedAgentsUnrestrictedCredentialNetworkingParams object`
 
   Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
   - `type: "unrestricted"`
 
-    - `"unrestricted"`
-
 ### Beta Managed Agents Unrestricted Credential Networking Response
 
-- `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object { type }`
+- `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse object`
 
   The secret is substituted on any host the session's Environment network policy permits egress to.
 
   - `type: "unrestricted"`
-
-    - `"unrestricted"`

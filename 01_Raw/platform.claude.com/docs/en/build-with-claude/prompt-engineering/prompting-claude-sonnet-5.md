@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5
-fetched_at: 2026-08-24T02:18:39.182808+00:00
+fetched_at: 2026-08-31T06:29:34.390576+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,12 +10,12 @@ url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/pr
 description: Behavioral differences and prompting patterns for Claude Sonnet 5, covering effort, adaptive thinking defaults, tool use, and migration from Claude Sonnet 4.6.
 ---
 
-This guide covers the prompting patterns specific to Claude Sonnet 5. For the model's capabilities and API changes, see [What's new in Claude Sonnet 5](https://platform.claude.com/docs/en/about-claude/models/whats-new-sonnet-5). For techniques that apply across all current Claude models, see [Prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices).
+This guide covers the prompting patterns specific to Claude Sonnet 5. For the model's capabilities and API changes, see [What's new in Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5/whats-new-sonnet-5). For techniques that apply across all current Claude models, see [Prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices).
 
 Claude Sonnet 5 has particular strengths in coding and agentic tasks. It performs well out of the box on existing Claude Sonnet 4.6 prompts. The patterns in this guide cover the behaviors that most often require tuning.
 
 <Note>
-  For API parameter changes when migrating from Claude Sonnet 4.6 (adaptive thinking on by default, sampling parameters not accepted, manual extended thinking removed, and the new tokenizer), see the [migration guide](https://platform.claude.com/docs/en/about-claude/models/migration-guide#migrating-from-claude-sonnet-4-6-to-claude-sonnet-5).
+  For API parameter changes when migrating from Claude Sonnet 4.6 (adaptive thinking on by default, sampling parameters not accepted, manual extended thinking removed, and the new tokenizer), see the [migration guide](https://platform.claude.com/docs/en/models/sonnet-5/migration-guide#migrating-from-claude-sonnet-4-6-to-claude-sonnet-5).
 </Note>
 
 ## Response length and verbosity
@@ -63,7 +63,7 @@ Conversely, if you're running hard workloads at `medium` and seeing under-thinki
 Manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) is not supported on Claude Sonnet 5 and returns a 400 error. It was deprecated on Claude Sonnet 4.6 and is now removed. Use adaptive thinking with the effort parameter instead.
 
 <Note>
-  If you are running Claude Sonnet 5 at `high`, `xhigh`, or `max` effort, leave headroom in `max_tokens` so the model has room for thinking and tool calls. On long tasks, adaptive thinking can use a large share of the budget; if the budget is tight, you may see a response that is almost entirely thinking followed by a truncated answer and `stop_reason: "max_tokens"`. Raising `max_tokens` or dropping to `medium` effort resolves this. Because Claude Sonnet 5 uses a [new tokenizer](https://platform.claude.com/docs/en/about-claude/models/whats-new-sonnet-5#new-tokenizer) that produces approximately 30% more tokens for the same text, `max_tokens` limits tuned for Claude Sonnet 4.6 may truncate equivalent output. The exact increase depends on the content and workload shape.
+  If you are running Claude Sonnet 5 at `high`, `xhigh`, or `max` effort, leave headroom in `max_tokens` so the model has room for thinking and tool calls. On long tasks, adaptive thinking can use a large share of the budget; if the budget is tight, you may see a response that is almost entirely thinking followed by a truncated answer and `stop_reason: "max_tokens"`. Raising `max_tokens` or dropping to `medium` effort resolves this. Because Claude Sonnet 5 uses a [new tokenizer](https://platform.claude.com/docs/en/models/sonnet-5/whats-new-sonnet-5#new-tokenizer) that produces approximately 30% more tokens for the same text, `max_tokens` limits tuned for Claude Sonnet 4.6 may truncate equivalent output. The exact increase depends on the content and workload shape.
 </Note>
 
 ## Tool use triggering
@@ -159,6 +159,6 @@ Iterate on prompts against a subset of your evals or test cases to validate reca
 
 ## Computer use
 
-On the Claude API, Claude Sonnet 5 supports the `computer_toolset_20260801` toolset and the earlier `computer_20251124` tool version. For tasks inside webpages, Claude Sonnet 5 also supports the [browser use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool) (`browser_toolset_20260801`). [Computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool) capability works across resolutions, up to a maximum resolution of 2576px / 3.75MP. Internal computer use testing shows that sending images at 1080p provides a good balance of performance and cost.
+Claude Sonnet 5 supports the `computer_toolset_20260801` toolset (on the Claude API and Google Cloud) and the earlier `computer_20251124` tool version. For tasks inside webpages, Claude Sonnet 5 also supports the [browser use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool) (`browser_toolset_20260801`). [Computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool) capability works across resolutions, up to a maximum resolution of 2576px / 3.75MP. Internal computer use testing shows that sending images at 1080p provides a good balance of performance and cost.
 
 For particularly cost-sensitive workloads, 720p or 1366×768 are lower-cost options with strong performance. Conduct your own testing to find the ideal settings for your use case; experimenting with effort settings can also help tune the model's behavior.

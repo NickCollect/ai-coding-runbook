@@ -1,21 +1,16 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/user_profiles/create
-fetched_at: 2026-08-24T02:18:45.180061+00:00
+fetched_at: 2026-08-31T06:29:40.506068+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Create User Profile
-url: https://platform.claude.com/docs/en/api/beta/user_profiles/create
----
+# Create User Profile
 
-## Create User Profile
-
-**post** `/v1/user_profiles`
+**POST** `/v1/user_profiles`
 
 Create User Profile
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -23,7 +18,7 @@ Create User Profile
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -93,7 +88,21 @@ Create User Profile
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Body Parameters
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Body parameters
 
 - `access_type: optional "application" or "passthrough"`
 
@@ -107,6 +116,8 @@ Create User Profile
 
   Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
 
+  minLength: 1, maxLength: 255
+
 - `metadata: optional map[string]`
 
   Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
@@ -114,6 +125,8 @@ Create User Profile
 - `name: optional string or null`
 
   Optional for all profiles. Real-world name of the entity this profile represents (company or individual); for a resold-to company (`relationship` `resold` / `access_type` `passthrough`), that company's name where known. Maximum 255 characters.
+
+  minLength: 1, maxLength: 255
 
 - `relationship: optional "external" or "resold" or "internal"`
 
@@ -125,9 +138,9 @@ Create User Profile
 
   - `"internal"`
 
-### Returns
+## Returns
 
-- `BetaUserProfile object { id, created_at, metadata, 7 more }`
+- `BetaUserProfile object`
 
   - `id: string`
 
@@ -136,6 +149,8 @@ Create User Profile
   - `created_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `metadata: map[string]`
 
@@ -159,11 +174,11 @@ Create User Profile
 
     Object type. Always `user_profile`.
 
-    - `"user_profile"`
-
   - `updated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `access_type: optional "application" or "passthrough"`
 
@@ -191,9 +206,9 @@ Create User Profile
 
     - `"internal"`
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/user_profiles \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -205,7 +220,7 @@ curl https://api.anthropic.com/v1/user_profiles \
         }'
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

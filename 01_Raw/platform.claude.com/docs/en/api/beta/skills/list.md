@@ -1,27 +1,24 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/skills/list
-fetched_at: 2026-08-24T02:18:44.807573+00:00
+fetched_at: 2026-08-31T06:29:40.245287+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: List Skills
-url: https://platform.claude.com/docs/en/api/beta/skills/list
----
+# List Skills
 
-## List Skills
-
-**get** `/v1/skills`
+**GET** `/v1/skills`
 
 List Skills
 
-### Query Parameters
+## Query parameters
 
 - `limit: optional number`
 
   Number of results to return per page.
 
-  Maximum value is 100. Defaults to 20.
+  Ranges from `1` to `1000`. Defaults to `20`.
+
+  default: 20, minimum: 1, maximum: 1000
 
 - `page: optional string`
 
@@ -38,7 +35,7 @@ List Skills
   * `"custom"`: only return user-created skills
   * `"anthropic"`: only return Anthropic-created skills
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -46,7 +43,7 @@ List Skills
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -116,9 +113,23 @@ List Skills
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+    - `"compact-2026-01-12"`
 
-- `data: array of object { id, created_at, display_title, 4 more }`
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Returns
+
+- `data: array of BetaSkill`
 
   List of skills.
 
@@ -132,42 +143,61 @@ List Skills
 
     ISO 8601 timestamp of when the skill was created.
 
-  - `display_title: string or null`
+    format: date-time
 
-    Display title for the skill.
+  - `display_name: string`
 
-    This is a human-readable label that is not included in the prompt sent to the model.
+    Human-readable, single-line label for the Skill. Maximum 255 characters.
+    Always set: derived from the SKILL.md frontmatter `name` when omitted at
+    creation. Not unique.
 
-  - `latest_version: string or null`
+  - `latest_version_id: string`
 
-    The latest version identifier for the skill.
+    ID of the newest Skill Version — what `latest` references resolve to. Always set: a Skill holds at least one version.
 
-    This represents the most recent version of the skill that has been created.
+  - `source: BetaSkillSource`
 
-  - `source: string`
+    Where the Skill comes from.
 
-    Source of the skill.
+    Possible values:
 
-    This may be one of the following values:
+    * `"custom"`: authored by the platform user; private to their workspace
+    * `"anthropic"`: published by Anthropic; shared and read-only
+    * `"anthropic_example"`: Anthropic-published sample Skill
+    * `"plugin"`: resolved from an installed plugin
 
-    * `"custom"`: the skill was created by a user
-    * `"anthropic"`: the skill was created by Anthropic
+    - `type: "custom" or "anthropic" or "anthropic_example" or "plugin"`
 
-  - `type: string`
+      Where the Skill comes from.
+
+      Possible values:
+
+      * `"custom"`: authored by the platform user; private to their workspace
+      * `"anthropic"`: published by Anthropic; shared and read-only
+      * `"anthropic_example"`: Anthropic-published sample Skill
+      * `"plugin"`: resolved from an installed plugin
+
+      - `"custom"`
+
+      - `"anthropic"`
+
+      - `"anthropic_example"`
+
+      - `"plugin"`
+
+  - `type: "skill"`
 
     Object type.
 
     For Skills, this is always `"skill"`.
 
+    default: skill
+
   - `updated_at: string`
 
     ISO 8601 timestamp of when the skill was last updated.
 
-- `has_more: boolean`
-
-  Whether there are more results available.
-
-  If `true`, there are additional results that can be fetched using the `next_page` token.
+    format: date-time
 
 - `next_page: string or null`
 
@@ -175,16 +205,15 @@ List Skills
 
   If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/skills \
     -H 'anthropic-version: 2023-06-01' \
-    -H 'anthropic-beta: skills-2025-10-02' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {
@@ -192,14 +221,15 @@ curl https://api.anthropic.com/v1/skills \
     {
       "id": "skill_01JAbcdefghijklmnopqrstuvw",
       "created_at": "2024-10-30T23:58:27.427722Z",
-      "display_title": "My Custom Skill",
-      "latest_version": "1759178010641129",
-      "source": "custom",
-      "type": "type",
+      "display_name": "display_name",
+      "latest_version_id": "latest_version_id",
+      "source": {
+        "type": "custom"
+      },
+      "type": "skill",
       "updated_at": "2024-10-30T23:58:27.427722Z"
     }
   ],
-  "has_more": true,
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+  "next_page": "next_page"
 }
 ```

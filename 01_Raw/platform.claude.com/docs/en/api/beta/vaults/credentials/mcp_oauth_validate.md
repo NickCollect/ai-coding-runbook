@@ -1,27 +1,22 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/vaults/credentials/mcp_oauth_validate
-fetched_at: 2026-08-24T02:18:43.982685+00:00
+fetched_at: 2026-08-31T06:29:39.571305+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Validate Credential
-url: https://platform.claude.com/docs/en/api/beta/vaults/credentials/mcp_oauth_validate
----
+# Validate Credential
 
-## Validate Credential
-
-**post** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
+**POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
 
 Validate Credential
 
-### Path Parameters
+## Path parameters
 
 - `vault_id: string`
 
 - `credential_id: string`
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -29,7 +24,7 @@ Validate Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -99,9 +94,23 @@ Validate Credential
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+    - `"compact-2026-01-12"`
 
-- `BetaManagedAgentsCredentialValidation object { credential_id, has_refresh_token, mcp_probe, 5 more }`
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Returns
+
+- `BetaManagedAgentsCredentialValidation object`
 
   Result of live-probing a credential against its configured MCP server.
 
@@ -136,6 +145,8 @@ Validate Credential
       - `status_code: number`
 
         HTTP status code.
+
+        format: int32
 
     - `method: string`
 
@@ -173,19 +184,19 @@ Validate Credential
 
   - `type: "vault_credential_validation"`
 
-    - `"vault_credential_validation"`
-
   - `validated_at: string`
 
     A timestamp in RFC 3339 format
+
+    format: date-time
 
   - `vault_id: string`
 
     Identifier of the vault containing the credential.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mcp_oauth_validate \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
@@ -193,7 +204,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

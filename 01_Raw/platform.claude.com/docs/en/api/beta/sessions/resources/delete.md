@@ -1,27 +1,22 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/sessions/resources/delete
-fetched_at: 2026-08-24T02:18:43.006724+00:00
+fetched_at: 2026-08-31T06:29:38.664501+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Delete Session Resource
-url: https://platform.claude.com/docs/en/api/beta/sessions/resources/delete
----
+# Delete Session Resource
 
-## Delete Session Resource
-
-**delete** `/v1/sessions/{session_id}/resources/{resource_id}`
+**DELETE** `/v1/sessions/{session_id}/resources/{resource_id}`
 
 Delete Session Resource
 
-### Path Parameters
+## Path parameters
 
 - `session_id: string`
 
 - `resource_id: string`
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -29,7 +24,7 @@ Delete Session Resource
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -99,9 +94,23 @@ Delete Session Resource
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+    - `"compact-2026-01-12"`
 
-- `BetaManagedAgentsDeleteSessionResource object { id, type }`
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Returns
+
+- `BetaManagedAgentsDeleteSessionResource object`
 
   Confirmation of resource deletion.
 
@@ -109,11 +118,9 @@ Delete Session Resource
 
   - `type: "session_resource_deleted"`
 
-    - `"session_resource_deleted"`
+## Example
 
-### Example
-
-```http
+```bash
 curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources/$RESOURCE_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
@@ -121,7 +128,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources/$RESOURCE_ID \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

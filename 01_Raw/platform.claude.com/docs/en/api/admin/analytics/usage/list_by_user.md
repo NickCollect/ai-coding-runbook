@@ -1,17 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/analytics/usage/list_by_user
-fetched_at: 2026-08-24T02:18:47.683460+00:00
+fetched_at: 2026-08-31T06:29:44.904655+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Get Per-User Token Usage
-url: https://platform.claude.com/docs/en/api/admin/analytics/usage/list_by_user
----
+# Get Per-User Token Usage
 
-## Get Per-User Token Usage
-
-**get** `/v1/organizations/analytics/user_usage_report`
+**GET** `/v1/organizations/analytics/user_usage_report`
 
 Get per-user token usage across a date range.
 
@@ -23,11 +18,13 @@ API-key and automation traffic, use the bucketed
 organizations on a Claude Enterprise plan. Requires an API key with the
 `read:analytics` scope.
 
-### Query Parameters
+## Query parameters
 
 - `starting_at: string`
 
   Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
+
+  format: date-time
 
 - `bucket_width: optional "1d" or "1h" or "1m"`
 
@@ -43,6 +40,8 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
 
+  maxItems: 100
+
   - `"0-200k"`
 
   - `"200k-1M"`
@@ -51,13 +50,19 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   End of range, exclusive. When omitted, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
 
+  format: date-time
+
 - `exclude_deleted_users: optional boolean`
 
   If true, omit rows for users who are deleted (`deleted: true`). A page may contain fewer than `limit` rows; use `has_more` and `next_page` to paginate as usual.
 
+  default: false
+
 - `group_by: optional array of "context_window" or "inference_geo" or "model" or 4 more`
 
   Break each actor's row out by the given dimensions. Accepts the same values as the bucketed `/usage_report` endpoint. `limit` bounds (actor × time bucket × dimension) rows — with dimensions or `bucket_width` present, one actor may span several rows.
+
+  maxItems: 100
 
   - `"context_window"`
 
@@ -77,6 +82,8 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
 
+  maxItems: 100
+
   - `"global"`
 
   - `"not_available"`
@@ -87,13 +94,19 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   Number of rows per page (1-1000, default 20). One row per actor unless `group_by[]` or `bucket_width` splits an actor across rows; `cost_type`/`token_type` fan-out rows (cost endpoint only) are the exception — they do not count toward this limit, so `data` can exceed it.
 
+  default: 20, maximum: 1000, minimum: 1
+
 - `models: optional array of string`
 
   Models to include. Defaults to all models. Use `group_by[]=model` to break out per-model values.
 
+  maxItems: 100
+
 - `order: optional "asc" or "desc"`
 
   Sort direction. Defaults to `desc`.
+
+  default: desc
 
   - `"asc"`
 
@@ -102,6 +115,8 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 - `order_by: optional "output_tokens" or "requests" or "total_tokens" or "uncached_input_tokens"`
 
   Metric to rank actors by. Defaults to `total_tokens`.
+
+  default: total_tokens
 
   - `"output_tokens"`
 
@@ -115,21 +130,43 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   Opaque cursor from a previous response's `next_page` field.
 
-- `products: optional array of string`
+- `products: optional array of "chat" or "claude-tag" or "claude_code" or 4 more`
 
-  Product surfaces to include. Defaults to all products. Values include "chat", "claude_code", "cowork", "office_agent", "claude_in_chrome", "claude_design", and "claude-in-slack". "claude-in-slack" (with hyphens) is Claude Tag, the Claude product in Slack. A similarly spelled legacy value (underscores instead of hyphens) identifies the retiring v1 Slack chat bot and appears only for organizations that used it.
+  Product surfaces to include. Defaults to all products.
+
+  maxItems: 100
+
+  - `"chat"`
+
+  - `"claude-tag"`
+
+  - `"claude_code"`
+
+  - `"claude_design"`
+
+  - `"claude_in_chrome"`
+
+  - `"cowork"`
+
+  - `"office_agent"`
 
 - `rbac_group_ids: optional array of string`
 
   Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
 
+  maxItems: 100
+
 - `slack_channel_ids: optional array of string`
 
   Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
 
+  maxItems: 100
+
 - `speeds: optional array of "fast" or "standard"`
 
   Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
+
+  maxItems: 100
 
   - `"fast"`
 
@@ -139,11 +176,13 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   Filter to specific users by tagged user ID.
 
-### Returns
+  maxItems: 100
 
-- `UserUsage object { data, data_refreshed_at, has_more, 2 more }`
+## Returns
 
-  - `data: array of object { actor, cache_creation, cache_read_input_tokens, 14 more }`
+- `UserUsage object`
+
+  - `data: array of object`
 
     Rows for this page, ranked by `order_by` in the `order` direction. One row per user, or several per user when `group_by[]` or `bucket_width` breaks that user's usage or cost out across rows. Rows split out by `cost_type` or `token_type` (cost endpoint only) stay adjacent and are ranked as one unit.
 
@@ -153,7 +192,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
       - `deleted: boolean`
 
-        True when the user is no longer a member of the organization or its associated organizations: either their membership was removed (for example, deprovisioned via your identity provider) or the account itself has been deleted. The flag reflects organization membership, not account status. `name` and `email` stay populated for removed members; `name` is `"Deleted User"` and `email` null when the account has been deleted. The `user_id` is still populated for reconciliation.
+        True when the account has been deleted, or when the user is no longer a member of the organization or its associated organizations (for example, their membership was removed or they were deprovisioned via your identity provider). `email` stays populated for removed users and is null when the account has been deleted. `name` follows the rules described on that field. The `user_id` is still populated for reconciliation.
 
       - `email: string or null`
 
@@ -161,19 +200,17 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
       - `name: string or null`
 
-        The user's current name, including for users who are no longer members of the organization or its associated organizations. Null when the user has not set a name. Returns `"Deleted User"` when the account itself has been deleted. Rows for system-minted service accounts render the service name (for example, `"Claude Security"` for usage by Anthropic's security-patching service) or null.
+        The user's full name. Null when the user has not set a name. Returns `"Deleted User"` when the account itself has been deleted, or when the user is no longer a member of the organization or its associated organizations and the organization has chosen to hide the names of removed users. Otherwise, the name stays populated for removed users. Rows for system-minted service accounts render the service name (for example, `"Claude Security"` for usage by Anthropic's security-patching service) or null.
 
       - `type: "user_actor"`
 
         Actor type. Always `"user_actor"`.
 
-        - `"user_actor"`
-
       - `user_id: string`
 
         Tagged user ID.
 
-    - `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
+    - `cache_creation: object`
 
       The number of input tokens for cache creation.
 
@@ -201,6 +238,8 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
       End of the row's UTC time bucket (exclusive), as an RFC 3339 timestamp; equal to `starting_at` plus one `bucket_width`. Null unless `bucket_width` is set.
 
+      format: date-time
+
     - `inference_geo: "global" or "us" or null`
 
       Inference region of the usage or cost. Null unless `inference_geo` is in `group_by[]`; it can also be null on grouped rows where the region is not set (the rows that `inference_geos[]=not_available` matches).
@@ -211,7 +250,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `model: string or null`
 
-      Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-4-6`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
+      Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
 
     - `output_tokens: number`
 
@@ -219,17 +258,17 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `product: string or null`
 
-      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include "chat", "claude_code", "cowork", "office_agent", "claude_in_chrome", "claude_design", and "claude-in-slack". "claude-in-slack" (with hyphens) is Claude Tag, the Claude product in Slack. A similarly spelled legacy value (underscores instead of hyphens) identifies the retiring v1 Slack chat bot and appears only for organizations that used it. Some unattributed usage is reported as "other".
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, and `claude-tag`. `claude-tag` is Claude Tag, the Claude product in Slack. Some unattributed usage is reported as "other".
 
     - `rbac_group_id: string or null`
 
-      RBAC group (team) the usage is attributed to, in the public tagged `rbac_group_...` spelling — the same spelling the activity resources use for this key, so the same team has ONE id across resources and it round-trips as an `rbac_group_ids[]` filter value. Populated only when `rbac_group_id` is in `group_by[]`. Any-membership semantics: a user in several groups contributes their full usage to each of those groups' rows, so the named-group rows overlap and their sum can exceed the org total. A null value is the single unassigned row: users in no group on that (UTC) day. For the true org total, run the same query with no group_by.
+      RBAC group (team) the usage is attributed to, in the public tagged `rbac_group_...` spelling — the same spelling the activity resources use for this key, so the same team has one id across resources and it round-trips as an `rbac_group_ids[]` filter value. Populated only when `rbac_group_id` is in `group_by[]`. Any-membership semantics: a user in several groups contributes their full usage to each of those groups' rows, so the named-group rows overlap and their sum can exceed the org total. A null value is the single unassigned row: users in no group on that (UTC) day. For the true org total, run the same query without `group_by[]`.
 
     - `requests: number or null`
 
       Number of API requests in this row's scope. For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
 
-    - `server_tool_use: object { web_search_requests }`
+    - `server_tool_use: object`
 
       Server-side tool usage metrics.
 
@@ -253,9 +292,11 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
       Start of the row's UTC time bucket (inclusive), as an RFC 3339 timestamp. Null unless `bucket_width` is set; without `bucket_width`, each row aggregates the full requested range.
 
+      format: date-time
+
     - `total_tokens: number`
 
-      Total token count across all token types. This is the value the default order_by='total_tokens' sorts on.
+      Total token count across all token types. This is the value the default `order_by` (`total_tokens`) sorts on.
 
     - `uncached_input_tokens: number`
 
@@ -264,6 +305,8 @@ organizations on a Claude Enterprise plan. Requires an API key with the
   - `data_refreshed_at: string or null`
 
     RFC 3339 timestamp of the export this response was served from. Null when no export yet covers any part of the requested range, in which case `data` is empty. Data beyond this watermark is incomplete; for stable results, set `ending_at` to this value or earlier. Data is typically refreshed every 4 hours but not final until about 30 days after the usage date (late-arriving events, reconciliation adjustments).
+
+    format: date-time
 
   - `has_more: boolean`
 
@@ -277,15 +320,15 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     ID of the Organization.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/analytics/user_usage_report \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {
@@ -306,7 +349,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/user_usage_report \
       "context_window": "0-200k",
       "ending_at": "2019-12-27T18:11:19.117Z",
       "inference_geo": "global",
-      "model": "claude-opus-4-6",
+      "model": "claude-opus-5",
       "output_tokens": 891000,
       "product": "chat",
       "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",

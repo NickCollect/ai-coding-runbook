@@ -1,17 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/messages/batches/delete
-fetched_at: 2026-08-24T02:18:41.657941+00:00
+fetched_at: 2026-08-31T06:29:37.524029+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Delete a Message Batch
-url: https://platform.claude.com/docs/en/api/beta/messages/batches/delete
----
+# Delete a Message Batch
 
-## Delete a Message Batch
-
-**delete** `/v1/messages/batches/{message_batch_id}`
+**DELETE** `/v1/messages/batches/{message_batch_id}`
 
 Delete a Message Batch.
 
@@ -19,13 +14,13 @@ Message Batches can only be deleted once they've finished processing. If you'd l
 
 Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
-### Path Parameters
+## Path parameters
 
 - `message_batch_id: string`
 
   ID of the Message Batch.
 
-### Header Parameters
+## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -33,7 +28,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -103,9 +98,23 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `"mid-conversation-tool-changes-2026-07-01"`
 
-### Returns
+    - `"compact-2026-01-12"`
 
-- `BetaDeletedMessageBatch object { id, type }`
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+## Returns
+
+- `BetaDeletedMessageBatch object`
 
   - `id: string`
 
@@ -117,11 +126,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     For Message Batches, this is always `"message_batch_deleted"`.
 
-    - `"message_batch_deleted"`
+    default: message_batch_deleted
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
@@ -129,7 +138,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

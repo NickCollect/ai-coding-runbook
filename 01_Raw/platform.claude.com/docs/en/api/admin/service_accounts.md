@@ -1,19 +1,14 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/service_accounts
-fetched_at: 2026-08-17T02:15:23.494448+00:00
+fetched_at: 2026-08-31T06:29:45.652901+00:00
 fetch_method: mintlify_md
----
-
----
-title: Service Accounts
-url: https://platform.claude.com/docs/en/api/admin/service_accounts
 ---
 
 # Service Accounts
 
 ## Create Service Account
 
-**post** `/v1/organizations/service_accounts`
+**POST** `/v1/organizations/service_accounts`
 
 Create a service account.
 
@@ -26,7 +21,7 @@ keys are not accepted. Creating an `admin`-role service account requires
 an interactive credential (a user OAuth token or a Console session) — a
 workload may only create `developer`-role service accounts.
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of string`
 
@@ -34,15 +29,19 @@ workload may only create `developer`-role service accounts.
 
   To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-### Body Parameters
+### Body parameters
 
 - `name: string`
 
   Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
+  maxLength: 255, minLength: 1
+
 - `description: optional string or null`
 
   Optional free-text description.
+
+  maxLength: 2000
 
 - `organization_role: optional "admin" or "developer"`
 
@@ -54,7 +53,7 @@ workload may only create `developer`-role service accounts.
 
 ### Returns
 
-- `ServiceAccount object { id, archived_at, archived_by_actor_id, 8 more }`
+- `ServiceAccount object`
 
   Named non-human identity within the caller's organization.
 
@@ -69,6 +68,8 @@ workload may only create `developer`-role service accounts.
 
     If set, this service account is archived.
 
+    format: date-time
+
   - `archived_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that archived this service account.
@@ -76,6 +77,8 @@ workload may only create `developer`-role service accounts.
   - `created_at: string`
 
     When this service account was created.
+
+    format: date-time
 
   - `created_by_actor_id: string or null`
 
@@ -99,11 +102,13 @@ workload may only create `developer`-role service accounts.
 
   - `type: "service_account"`
 
-    - `"service_account"`
+    default: service_account
 
   - `updated_at: string`
 
     When this service account was last updated.
+
+    format: date-time
 
   - `updated_by_actor_id: string or null`
 
@@ -111,7 +116,7 @@ workload may only create `developer`-role service accounts.
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/service_accounts \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -121,7 +126,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts \
         }'
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -141,17 +146,17 @@ curl https://api.anthropic.com/v1/organizations/service_accounts \
 
 ## Get Service Account
 
-**get** `/v1/organizations/service_accounts/{service_account_id}`
+**GET** `/v1/organizations/service_accounts/{service_account_id}`
 
 Retrieve a service account by its ID (`svac_...`).
 
-### Path Parameters
+### Path parameters
 
 - `service_account_id: string`
 
   ID of the service account.
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of string`
 
@@ -161,7 +166,7 @@ Retrieve a service account by its ID (`svac_...`).
 
 ### Returns
 
-- `ServiceAccount object { id, archived_at, archived_by_actor_id, 8 more }`
+- `ServiceAccount object`
 
   Named non-human identity within the caller's organization.
 
@@ -176,6 +181,8 @@ Retrieve a service account by its ID (`svac_...`).
 
     If set, this service account is archived.
 
+    format: date-time
+
   - `archived_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that archived this service account.
@@ -183,6 +190,8 @@ Retrieve a service account by its ID (`svac_...`).
   - `created_at: string`
 
     When this service account was created.
+
+    format: date-time
 
   - `created_by_actor_id: string or null`
 
@@ -206,11 +215,13 @@ Retrieve a service account by its ID (`svac_...`).
 
   - `type: "service_account"`
 
-    - `"service_account"`
+    default: service_account
 
   - `updated_at: string`
 
     When this service account was last updated.
+
+    format: date-time
 
   - `updated_by_actor_id: string or null`
 
@@ -218,13 +229,13 @@ Retrieve a service account by its ID (`svac_...`).
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUNT_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -244,7 +255,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
 ## List Service Accounts
 
-**get** `/v1/organizations/service_accounts`
+**GET** `/v1/organizations/service_accounts`
 
 List service accounts in the caller's organization.
 
@@ -252,21 +263,25 @@ Results are ordered by creation time, newest first. Use `limit` and the
 `next_page` cursor to paginate; set `include_archived=true` to include
 archived service accounts.
 
-### Query Parameters
+### Query parameters
 
 - `include_archived: optional boolean`
 
   Include archived resources. Defaults to false.
 
+  default: false
+
 - `limit: optional number`
 
   Number of results per page.
+
+  default: 20, maximum: 100, minimum: 1
 
 - `page: optional string`
 
   Opaque cursor from a previous response's `next_page`.
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of string`
 
@@ -286,6 +301,8 @@ archived service accounts.
 
     If set, this service account is archived.
 
+    format: date-time
+
   - `archived_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that archived this service account.
@@ -293,6 +310,8 @@ archived service accounts.
   - `created_at: string`
 
     When this service account was created.
+
+    format: date-time
 
   - `created_by_actor_id: string or null`
 
@@ -316,11 +335,13 @@ archived service accounts.
 
   - `type: "service_account"`
 
-    - `"service_account"`
+    default: service_account
 
   - `updated_at: string`
 
     When this service account was last updated.
+
+    format: date-time
 
   - `updated_by_actor_id: string or null`
 
@@ -332,13 +353,13 @@ archived service accounts.
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/service_accounts \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -363,7 +384,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts \
 
 ## Update Service Account
 
-**post** `/v1/organizations/service_accounts/{service_account_id}`
+**POST** `/v1/organizations/service_accounts/{service_account_id}`
 
 Update a service account.
 
@@ -373,13 +394,13 @@ Setting `organization_role` to `admin` (even when unchanged) requires an
 interactive credential (a user OAuth token or a Console session). Admin
 API keys are not accepted.
 
-### Path Parameters
+### Path parameters
 
 - `service_account_id: string`
 
   ID of the service account to update.
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of string`
 
@@ -387,11 +408,13 @@ API keys are not accepted.
 
   To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-### Body Parameters
+### Body parameters
 
 - `description: optional string or null`
 
   Replaces the description. Omit to leave unchanged; send `null` to clear (the field is stored as an empty string).
+
+  maxLength: 2000
 
 - `organization_role: optional "admin" or "developer" or null`
 
@@ -403,7 +426,7 @@ API keys are not accepted.
 
 ### Returns
 
-- `ServiceAccount object { id, archived_at, archived_by_actor_id, 8 more }`
+- `ServiceAccount object`
 
   Named non-human identity within the caller's organization.
 
@@ -418,6 +441,8 @@ API keys are not accepted.
 
     If set, this service account is archived.
 
+    format: date-time
+
   - `archived_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that archived this service account.
@@ -425,6 +450,8 @@ API keys are not accepted.
   - `created_at: string`
 
     When this service account was created.
+
+    format: date-time
 
   - `created_by_actor_id: string or null`
 
@@ -448,11 +475,13 @@ API keys are not accepted.
 
   - `type: "service_account"`
 
-    - `"service_account"`
+    default: service_account
 
   - `updated_at: string`
 
     When this service account was last updated.
+
+    format: date-time
 
   - `updated_by_actor_id: string or null`
 
@@ -460,7 +489,7 @@ API keys are not accepted.
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUNT_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -468,7 +497,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
     -d '{}'
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -488,7 +517,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
 ## Archive Service Account
 
-**post** `/v1/organizations/service_accounts/{service_account_id}/archive`
+**POST** `/v1/organizations/service_accounts/{service_account_id}/archive`
 
 Archive a service account.
 
@@ -500,13 +529,13 @@ those rules first or change their target to another service account.
 Requires an OAuth bearer or Console session; Admin API keys are not
 accepted.
 
-### Path Parameters
+### Path parameters
 
 - `service_account_id: string`
 
   ID of the service account to archive.
 
-### Header Parameters
+### Headers
 
 - `"anthropic-beta": optional array of string`
 
@@ -516,7 +545,7 @@ accepted.
 
 ### Returns
 
-- `ServiceAccount object { id, archived_at, archived_by_actor_id, 8 more }`
+- `ServiceAccount object`
 
   Named non-human identity within the caller's organization.
 
@@ -531,6 +560,8 @@ accepted.
 
     If set, this service account is archived.
 
+    format: date-time
+
   - `archived_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that archived this service account.
@@ -538,6 +569,8 @@ accepted.
   - `created_at: string`
 
     When this service account was created.
+
+    format: date-time
 
   - `created_by_actor_id: string or null`
 
@@ -561,11 +594,13 @@ accepted.
 
   - `type: "service_account"`
 
-    - `"service_account"`
+    default: service_account
 
   - `updated_at: string`
 
     When this service account was last updated.
+
+    format: date-time
 
   - `updated_by_actor_id: string or null`
 
@@ -573,14 +608,14 @@ accepted.
 
 ### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUNT_ID/archive \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+#### Response (200)
 
 ```json
 {
@@ -598,11 +633,11 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 }
 ```
 
-## Domain Types
+## Domain types
 
 ### Service Account
 
-- `ServiceAccount object { id, archived_at, archived_by_actor_id, 8 more }`
+- `ServiceAccount object`
 
   Named non-human identity within the caller's organization.
 
@@ -617,6 +652,8 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
     If set, this service account is archived.
 
+    format: date-time
+
   - `archived_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that archived this service account.
@@ -624,6 +661,8 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
   - `created_at: string`
 
     When this service account was created.
+
+    format: date-time
 
   - `created_by_actor_id: string or null`
 
@@ -647,21 +686,23 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
   - `type: "service_account"`
 
-    - `"service_account"`
+    default: service_account
 
   - `updated_at: string`
 
     When this service account was last updated.
 
+    format: date-time
+
   - `updated_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
 
-# Workspaces
+## Service Accounts › Workspaces
 
-## Add Workspace To Service Account
+### Add Workspace To Service Account
 
-**post** `/v1/organizations/service_accounts/{service_account_id}/workspaces`
+**POST** `/v1/organizations/service_accounts/{service_account_id}/workspaces`
 
 Add a service account to a workspace with the given `workspace_role`.
 
@@ -673,13 +714,13 @@ workspaces return 400. Archived service accounts cannot be added and are
 rejected. Requires an OAuth bearer or Console session; Admin API keys
 are not accepted.
 
-### Path Parameters
+#### Path parameters
 
 - `service_account_id: string`
 
   ID of the service account.
 
-### Header Parameters
+#### Headers
 
 - `"anthropic-beta": optional array of string`
 
@@ -687,7 +728,7 @@ are not accepted.
 
   To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-### Body Parameters
+#### Body parameters
 
 - `workspace_id: string`
 
@@ -705,7 +746,7 @@ are not accepted.
 
   - `"workspace_user"`
 
-### Returns
+#### Returns
 
 - `created_by_actor_id: string or null`
 
@@ -713,7 +754,7 @@ are not accepted.
 
 - `implicit: boolean or null`
 
-  True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace_user and cannot be removed.
+  True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
 
 - `service_account_id: string`
 
@@ -721,7 +762,7 @@ are not accepted.
 
 - `type: "service_account_workspace_member"`
 
-  - `"service_account_workspace_member"`
+  default: service_account_workspace_member
 
 - `workspace_id: string`
 
@@ -741,9 +782,9 @@ are not accepted.
 
   - `"workspace_user"`
 
-### Example
+#### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUNT_ID/workspaces \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
@@ -754,7 +795,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
         }'
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -767,9 +808,9 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 }
 ```
 
-## List Workspaces For Service Account
+### List Workspaces For Service Account
 
-**get** `/v1/organizations/service_accounts/{service_account_id}/workspaces`
+**GET** `/v1/organizations/service_accounts/{service_account_id}/workspaces`
 
 List the workspaces a service account is a member of.
 
@@ -783,23 +824,25 @@ can be derived. Memberships are returned only while
 the service account is active; an archived service account returns an
 empty list.
 
-### Path Parameters
+#### Path parameters
 
 - `service_account_id: string`
 
   ID of the service account.
 
-### Query Parameters
+#### Query parameters
 
 - `limit: optional number`
 
   Number of results per page.
 
+  default: 20, maximum: 100, minimum: 1
+
 - `page: optional string`
 
   Opaque cursor from a previous response's `next_page`.
 
-### Header Parameters
+#### Headers
 
 - `"anthropic-beta": optional array of string`
 
@@ -807,9 +850,9 @@ empty list.
 
   To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-### Returns
+#### Returns
 
-- `data: array of object { created_by_actor_id, implicit, service_account_id, 3 more }`
+- `data: array of object`
 
   - `created_by_actor_id: string or null`
 
@@ -817,7 +860,7 @@ empty list.
 
   - `implicit: boolean or null`
 
-    True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace_user and cannot be removed.
+    True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role `workspace_user` and cannot be removed.
 
   - `service_account_id: string`
 
@@ -825,7 +868,7 @@ empty list.
 
   - `type: "service_account_workspace_member"`
 
-    - `"service_account_workspace_member"`
+    default: service_account_workspace_member
 
   - `workspace_id: string`
 
@@ -849,15 +892,15 @@ empty list.
 
   Opaque cursor for the next page, or null if no more results.
 
-### Example
+#### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUNT_ID/workspaces \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -875,9 +918,9 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 }
 ```
 
-## Remove Workspace From Service Account
+### Remove Workspace From Service Account
 
-**delete** `/v1/organizations/service_accounts/{service_account_id}/workspaces/{workspace_id}`
+**DELETE** `/v1/organizations/service_accounts/{service_account_id}/workspaces/{workspace_id}`
 
 Remove a service account from a workspace.
 
@@ -890,7 +933,7 @@ to the implicit `workspace_user` membership. Archived workspaces return
 400. Requires an OAuth bearer or Console session; Admin API keys are not
 accepted.
 
-### Path Parameters
+#### Path parameters
 
 - `service_account_id: string`
 
@@ -900,7 +943,7 @@ accepted.
 
   ID of the workspace.
 
-### Header Parameters
+#### Headers
 
 - `"anthropic-beta": optional array of string`
 
@@ -908,7 +951,7 @@ accepted.
 
   To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
 
-### Returns
+#### Returns
 
 - `service_account_id: string`
 
@@ -916,22 +959,22 @@ accepted.
 
 - `type: "service_account_workspace_member_deleted"`
 
-  - `"service_account_workspace_member_deleted"`
+  default: service_account_workspace_member_deleted
 
 - `workspace_id: string`
 
   Tagged workspace ID (`wrkspc_...`) named in the delete request.
 
-### Example
+#### Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUNT_ID/workspaces/$WORKSPACE_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+##### Response (200)
 
 ```json
 {
@@ -940,97 +983,3 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
   "workspace_id": "workspace_id"
 }
 ```
-
-## Domain Types
-
-### Workspace Create Response
-
-- `WorkspaceCreateResponse object { created_by_actor_id, implicit, service_account_id, 3 more }`
-
-  - `created_by_actor_id: string or null`
-
-    Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
-
-  - `implicit: boolean or null`
-
-    True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace_user and cannot be removed.
-
-  - `service_account_id: string`
-
-    Tagged service account ID (`svac_...`).
-
-  - `type: "service_account_workspace_member"`
-
-    - `"service_account_workspace_member"`
-
-  - `workspace_id: string`
-
-    Tagged workspace ID (`wrkspc_...`).
-
-  - `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
-
-    Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
-
-    - `"workspace_admin"`
-
-    - `"workspace_billing"`
-
-    - `"workspace_developer"`
-
-    - `"workspace_restricted_developer"`
-
-    - `"workspace_user"`
-
-### Workspace List Response
-
-- `WorkspaceListResponse object { created_by_actor_id, implicit, service_account_id, 3 more }`
-
-  - `created_by_actor_id: string or null`
-
-    Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
-
-  - `implicit: boolean or null`
-
-    True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace_user and cannot be removed.
-
-  - `service_account_id: string`
-
-    Tagged service account ID (`svac_...`).
-
-  - `type: "service_account_workspace_member"`
-
-    - `"service_account_workspace_member"`
-
-  - `workspace_id: string`
-
-    Tagged workspace ID (`wrkspc_...`).
-
-  - `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
-
-    Role of the service account in this workspace. Service accounts cannot hold the `workspace_billing` role.
-
-    - `"workspace_admin"`
-
-    - `"workspace_billing"`
-
-    - `"workspace_developer"`
-
-    - `"workspace_restricted_developer"`
-
-    - `"workspace_user"`
-
-### Workspace Delete Response
-
-- `WorkspaceDeleteResponse object { service_account_id, type, workspace_id }`
-
-  - `service_account_id: string`
-
-    Tagged service account ID (`svac_...`) named in the delete request. Removal is idempotent; see the endpoint description for the implicit-membership no-op.
-
-  - `type: "service_account_workspace_member_deleted"`
-
-    - `"service_account_workspace_member_deleted"`
-
-  - `workspace_id: string`
-
-    Tagged workspace ID (`wrkspc_...`) named in the delete request.

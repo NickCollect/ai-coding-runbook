@@ -1,21 +1,16 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/workspaces/members/retrieve
-fetched_at: 2026-08-17T02:15:22.485662+00:00
+fetched_at: 2026-08-31T06:29:44.134105+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Get Workspace Member
-url: https://platform.claude.com/docs/en/api/admin/workspaces/members/retrieve
----
+# Get Workspace Member
 
-## Get Workspace Member
-
-**get** `/v1/organizations/workspaces/{workspace_id}/members/{user_id}`
+**GET** `/v1/organizations/workspaces/{workspace_id}/members/{user_id}`
 
 Get Workspace Member
 
-### Path Parameters
+## Path parameters
 
 - `workspace_id: string`
 
@@ -25,9 +20,9 @@ Get Workspace Member
 
   ID of the User.
 
-### Returns
+## Returns
 
-- `WorkspaceMember object { type, user_id, workspace_id, workspace_role }`
+- `WorkspaceMember object`
 
   - `type: "workspace_member"`
 
@@ -35,7 +30,7 @@ Get Workspace Member
 
     For Workspace Members, this is always `"workspace_member"`.
 
-    - `"workspace_member"`
+    default: workspace_member
 
   - `user_id: string`
 
@@ -59,15 +54,15 @@ Get Workspace Member
 
     - `"workspace_user"`
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members/$USER_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

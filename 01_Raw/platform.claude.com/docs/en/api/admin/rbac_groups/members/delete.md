@@ -1,23 +1,18 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/rbac_groups/members/delete
-fetched_at: 2026-08-17T02:15:22.210744+00:00
+fetched_at: 2026-08-31T06:29:43.786478+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Remove RBAC Group Member
-url: https://platform.claude.com/docs/en/api/admin/rbac_groups/members/delete
----
+# Remove RBAC Group Member
 
-## Remove RBAC Group Member
-
-**delete** `/v1/organizations/rbac_groups/{group_id}/members/{user_id}`
+**DELETE** `/v1/organizations/rbac_groups/{group_id}/members/{user_id}`
 
 Remove a User from an RBAC Group. Membership of groups provisioned by an identity provider (source type `"scim"`) cannot be modified via the API.
 
-The RBAC Groups API is in beta and available to Claude Enterprise organizations only. Requests must send the `ce-user-management-2026-07-13` value in the `anthropic-beta` header.
+The RBAC Groups API is available to Claude Enterprise organizations only.
 
-### Path Parameters
+## Path parameters
 
 - `group_id: string`
 
@@ -27,17 +22,9 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
   ID of the User.
 
-### Header Parameters
+## Returns
 
-- `"anthropic-beta": optional array of string`
-
-  Optional header to specify the beta version(s) you want to use.
-
-  To use multiple betas, use a comma separated list like `beta1,beta2` or specify the header multiple times for each beta.
-
-### Returns
-
-- `RbacGroupMemberDeleted object { group_id, type, user_id }`
+- `RbacGroupMemberDeleted object`
 
   - `group_id: string`
 
@@ -47,22 +34,22 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
     Deleted object type. For RBAC Group Members, this is always `"rbac_group_member_deleted"`.
 
-    - `"rbac_group_member_deleted"`
+    default: rbac_group_member_deleted
 
   - `user_id: string`
 
     ID of the User.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members/$USER_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {

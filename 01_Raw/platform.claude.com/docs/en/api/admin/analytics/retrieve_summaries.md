@@ -1,49 +1,51 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/analytics/retrieve_summaries
-fetched_at: 2026-08-24T02:18:47.601999+00:00
+fetched_at: 2026-08-31T06:29:44.895456+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Get Activity Summaries
-url: https://platform.claude.com/docs/en/api/admin/analytics/retrieve_summaries
----
+# Get Activity Summaries
 
-## Get Activity Summaries
-
-**get** `/v1/organizations/analytics/summaries`
+**GET** `/v1/organizations/analytics/summaries`
 
 Get organization-wide activity summaries for a date range.
 
-Returns one entry per day in [starting_date, ending_date). Data is
-typically available with a 1-day lag and may be revised by a few percent
-over the following days: when ending_date is omitted it defaults to the
-most recent available day + 1, so the last entry covers the most recent
-available day. The series can be scoped to an RBAC group via
-filter[]=rbac_group_id:<id>. Available to organizations on a Claude
-Enterprise plan. Requires an API key with the `read:analytics` scope.
+Returns one entry per day from `starting_date` (inclusive) to `ending_date`
+(exclusive). Data is typically available with a 1-day lag and may be
+revised by a few percent over the following days: when `ending_date` is
+omitted it defaults to the most recent available day + 1, so the last
+entry covers the most recent available day. The series can be scoped to
+an RBAC group via `filter[]=rbac_group_id:{id}`. Available to
+organizations on a Claude Enterprise plan. Requires an API key with the
+`read:analytics` scope.
 
-### Query Parameters
+## Query parameters
 
 - `starting_date: string`
 
   UTC date in YYYY-MM-DD format. Start of the date range (inclusive). Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
+  format: date
+
 - `ending_date: optional string`
 
   UTC date in YYYY-MM-DD format. End of the date range (exclusive). Data is typically available with a 1-day lag, so this can be at most today — which is also the default when omitted, making the last entry cover the most recent available day. Data may be revised by a few percent over the following days. The range may span at most 366 days.
 
+  format: date
+
 - `filter: optional array of string`
 
-  Filters as 'dimension:value'. Only rbac_group_id is supported (e.g. filter[]=rbac_group_id:<id>); repeat the param to OR across groups. Scopes the whole day series to members of the matching group(s), re-aggregated from member-level activity — org-wide seat/invite fields and the adoption rates derived from them are null on scoped rows. rbac_group_id accepts the tagged id (rbac_group_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each UTC day (time-of-usage attribution). At most 100 entries.
+  Filters as `dimension:value`. Only `rbac_group_id` is supported (e.g. `filter[]=rbac_group_id:{id}`); repeat the param to OR across groups. Scopes the whole day series to members of the matching group(s), re-aggregated from member-level activity — org-wide seat/invite fields and the adoption rates derived from them are null on scoped rows. `rbac_group_id` accepts the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each UTC day (time-of-usage attribution). At most 100 entries.
 
-### Returns
+  maxItems: 100
 
-- `ActivitySummary object { summaries }`
+## Returns
+
+- `ActivitySummary object`
 
   Response for GET /v1/organizations/analytics/summaries.
 
-  - `summaries: array of object { assigned_seat_count, cowork_daily_active_user_count, cowork_monthly_active_user_count, 26 more }`
+  - `summaries: array of object`
 
     - `assigned_seat_count: number or null`
 
@@ -71,7 +73,9 @@ Enterprise plan. Requires an API key with the `read:analytics` scope.
 
     - `ending_at: string`
 
-      End time in UTC of aggregation period (e.g. 2026-01-16T00:00:00Z)
+      End of the aggregation period (exclusive), UTC midnight in RFC 3339 format (e.g. `2026-01-16T00:00:00Z`).
+
+      format: date-time
 
     - `monthly_active_user_count: number`
 
@@ -87,7 +91,9 @@ Enterprise plan. Requires an API key with the `read:analytics` scope.
 
     - `starting_at: string`
 
-      Start time in UTC of aggregation period (e.g. 2026-01-15T00:00:00Z)
+      Start of the aggregation period (inclusive), UTC midnight in RFC 3339 format (e.g. `2026-01-15T00:00:00Z`).
+
+      format: date-time
 
     - `weekly_active_user_count: number`
 
@@ -161,15 +167,15 @@ Enterprise plan. Requires an API key with the `read:analytics` scope.
 
       Number of users with Claude Science activity in the 7-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/organizations/analytics/summaries \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {
@@ -181,11 +187,11 @@ curl https://api.anthropic.com/v1/organizations/analytics/summaries \
       "cowork_weekly_active_user_count": 0,
       "daily_active_user_count": 0,
       "daily_adoption_rate": 0,
-      "ending_at": "ending_at",
+      "ending_at": "2019-12-27T18:11:19.117Z",
       "monthly_active_user_count": 0,
       "monthly_adoption_rate": 0,
       "pending_invite_count": 0,
-      "starting_at": "starting_at",
+      "starting_at": "2019-12-27T18:11:19.117Z",
       "weekly_active_user_count": 0,
       "weekly_adoption_rate": 0,
       "chat_daily_active_user_count": 0,

@@ -1,21 +1,16 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/skills/versions/retrieve
-fetched_at: 2026-08-24T02:18:41.153974+00:00
+fetched_at: 2026-08-31T06:29:37.066453+00:00
 fetch_method: mintlify_md
 ---
 
----
-title: Get Skill Version
-url: https://platform.claude.com/docs/en/api/skills/versions/retrieve
----
+# Get Skill Version
 
-## Get Skill Version
-
-**get** `/v1/skills/{skill_id}/versions/{version}`
+**GET** `/v1/skills/{skill_id}/versions/{version}`
 
 Get Skill Version
 
-### Path Parameters
+## Path parameters
 
 - `skill_id: string`
 
@@ -25,13 +20,13 @@ Get Skill Version
 
 - `version: string`
 
-  Identifies the skill version: a version ID, or — where the endpoint accepts it — the literal `latest` for the skill's most recent version.
+  Identifies the skill version: a version ID, or the literal `latest` for the skill's most recent version.
 
   Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
-### Returns
+## Returns
 
-- `SkillVersion object { id, created_at, description, 3 more }`
+- `SkillVersion object`
 
   - `id: string`
 
@@ -41,6 +36,8 @@ Get Skill Version
   - `created_at: string`
 
     ISO 8601 timestamp of when the skill was created.
+
+    format: date-time
 
   - `description: string`
 
@@ -67,17 +64,17 @@ Get Skill Version
 
     For Skill Versions, this is always `"skill_version"`.
 
-    - `"skill_version"`
+    default: skill_version
 
-### Example
+## Example
 
-```http
+```bash
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 
-#### Response
+### Response (200)
 
 ```json
 {
