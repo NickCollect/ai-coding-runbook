@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/video-understanding?hl=pt-BR
-fetched_at: 2026-08-24T02:37:53.629803+00:00
+fetched_at: 2026-08-31T06:38:31.884763+00:00
 title: "Compreens\u00e3o do v\u00eddeo \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

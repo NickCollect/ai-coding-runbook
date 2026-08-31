@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/thought-signatures?hl=es-419
-fetched_at: 2026-08-24T02:23:30.432802+00:00
+fetched_at: 2026-08-31T06:35:08.669399+00:00
 title: "Firmas de razonamiento \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

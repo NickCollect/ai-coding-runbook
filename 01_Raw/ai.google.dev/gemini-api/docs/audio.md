@@ -1,24 +1,24 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/audio?hl=ja
-fetched_at: 2026-08-24T02:21:14.831381+00:00
-title: "\u97f3\u58f0\u306e\u7406\u89e3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/audio?hl=th
+fetched_at: 2026-08-31T06:35:01.367211+00:00
+title: "\u0e04\u0e27\u0e32\u0e21\u0e40\u0e02\u0e49\u0e32\u0e43\u0e08\u0e40\u0e01\u0e35\u0e48\u0e22\u0e27\u0e01\u0e31\u0e1a\u0e40\u0e2a\u0e35\u0e22\u0e07 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-フィードバックを送信
+ส่งความคิดเห็น
 
-# 音声の理解
+# ความเข้าใจเกี่ยวกับเสียง
 
-Gemini は音声入力を分析してテキスト レスポンスを生成できます。
+Gemini สามารถวิเคราะห์อินพุตเสียงและสร้างการตอบกลับเป็นข้อความได้
 
 ### Python
 
@@ -31,7 +31,7 @@ client = genai.Client()
 uploaded_file = client.files.upload(file="path/to/sample.mp3")
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.7-flash",
     input=[
         {"type": "text", "text": "Describe this audio clip"},
         {
@@ -57,7 +57,7 @@ const uploadedFile = await client.files.upload({
 });
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.7-flash",
     input: [
         {type: "text", text: "Describe this audio clip"},
         {
@@ -70,6 +70,45 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AudioContent;
+import com.google.genai.gaos.models.interactions.AudioContentMimeType;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+import java.util.List;
+
+Client client = new Client();
+
+Content textContent = TextContent.builder().text("Provide a transcript and summary of this audio.").build();
+Content audioContent =
+    AudioContent.builder()
+        .uri("gs://cloud-samples-data/generative-ai/audio/pixel.mp3")
+        .mimeType(AudioContentMimeType.AUDIO_MP3)
+        .build();
+
+List<Content> contents = Arrays.asList(textContent, audioContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.7-flash"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -78,7 +117,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.7-flash",
     "input": [
       {"type": "text", "text": "Describe this audio clip"},
       {
@@ -90,26 +129,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 概要
+## ภาพรวม
 
-Gemini は音声入力を分析して理解し、テキスト レスポンスを生成できます。これにより、次のようなユースケースが可能になります。
+Gemini สามารถวิเคราะห์และทำความเข้าใจอินพุตเสียง รวมถึงสร้างการตอบกลับเป็นข้อความ ซึ่งช่วยให้ใช้ในกรณีต่อไปนี้ได้
 
-- 音声コンテンツの説明、要約、質問への回答
-- 音声文字変換と翻訳（音声からテキスト）
-- 話者ダイアライゼーション（異なる話者の識別）
-- 音声と音楽の感情検出
-- タイムスタンプ付きの特定のセグメントの分析
+- อธิบาย สรุป หรือตอบคำถามเกี่ยวกับเนื้อหาเสียง
+- การถอดเสียงและการแปล (เสียงพูดเป็นข้อความ)
+- การแยกแยะเสียงผู้พูด (ระบุผู้พูดแต่ละคน)
+- การตรวจจับอารมณ์ในเสียงพูดและเพลง
+- การวิเคราะห์ส่วนที่เฉพาะเจาะจงด้วยการประทับเวลา
 
-リアルタイムの音声と動画のインタラクションについては、
-[Live API](https://ai.google.dev/gemini-api/docs/live?hl=ja)をご覧ください。
-リアルタイムの音声文字変換をサポートする専用の音声文字変換モデルについては、
-[Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=ja)を使用してください。
+หากต้องการดูการโต้ตอบด้วยเสียงและวิดีโอแบบเรียลไทม์ โปรดดู
+[Live API](https://ai.google.dev/gemini-api/docs/live?hl=th)
+หากต้องการใช้โมเดลเสียงพูดเป็นข้อความโดยเฉพาะที่รองรับการถอดเสียงแบบเรียลไทม์
+ให้ใช้ [Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=th)
 
-## 音声をテキストに変換する
+## ถอดเสียงพูดเป็นข้อความ
 
-この例では、
-タイムスタンプ、話者ダイアライゼーション、感情検出を使用して音声を文字変換、翻訳、要約する方法を
-[構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)を使用して示します。
+ตัวอย่างนี้แสดงวิธีถอดเสียง แปล และสรุปเสียงพูดพร้อม
+การประทับเวลา การแยกแยะเสียงผู้พูด และการตรวจจับอารมณ์โดยใช้
+[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)
 
 ### Python
 
@@ -158,7 +197,7 @@ response_schema = {
 }
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.7-flash",
     input=[
         {"type": "video", "uri": YOUTUBE_URL, "mime_type": "video/mp4"},
         {"type": "text", "text": prompt}
@@ -216,7 +255,7 @@ const responseSchema = {
 };
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.7-flash",
     input: [
         { type: "video", uri: YOUTUBE_URL, mime_type: "video/mp4" },
         { type: "text", text: prompt }
@@ -227,6 +266,45 @@ const interaction = await client.interactions.create({
 console.log(JSON.parse(interaction.output_text));
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AudioContent;
+import com.google.genai.gaos.models.interactions.AudioContentMimeType;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+import java.util.List;
+
+Client client = new Client();
+
+Content textContent = TextContent.builder().text("Provide a transcript and summary of this audio.").build();
+Content audioContent =
+    AudioContent.builder()
+        .uri("gs://cloud-samples-data/generative-ai/audio/pixel.mp3")
+        .mimeType(AudioContentMimeType.AUDIO_MP3)
+        .build();
+
+List<Content> contents = Arrays.asList(textContent, audioContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.7-flash"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -234,7 +312,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.7-flash",
     "input": [
       {
         "type": "video",
@@ -267,18 +345,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-![多言語音声文字変換 Gemini アプリ](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=ja)
+![แอป Gemini ที่ถอดเสียงแบบหลายภาษา](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=th)
 
-## 入力音声
+## อินพุตเสียง
 
-音声データは次の方法で提供できます。
+คุณระบุข้อมูลเสียงได้ด้วยวิธีต่อไปนี้
 
-- [音声ファイルをアップロードします](#upload-audio) リクエストを行う前に。
-- [インライン音声データ](#inline-audio)をリクエストとともに渡します。
+- [อัปโหลดไฟล์เสียง](#upload-audio)ก่อนส่งคำขอ
+- [ส่งข้อมูลเสียงแบบอินไลน์](#inline-audio) พร้อมกับคำขอ
 
-### 音声ファイルをアップロードする
+### อัปโหลดไฟล์เสียง
 
-20 MB を超えるファイルには [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja) を使用します。
+ใช้ [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th) สำหรับไฟล์ที่มีขนาดใหญ่กว่า 20 MB
 
 ### Python
 
@@ -290,7 +368,7 @@ client = genai.Client()
 uploaded_file = client.files.upload(file="path/to/sample.mp3")
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.7-flash",
     input=[
         {"type": "text", "text": "Describe this audio clip"},
         {
@@ -316,7 +394,7 @@ const uploadedFile = await client.files.upload({
 });
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.7-flash",
     input: [
         {type: "text", text: "Describe this audio clip"},
         {
@@ -329,6 +407,45 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AudioContent;
+import com.google.genai.gaos.models.interactions.AudioContentMimeType;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+import java.util.List;
+
+Client client = new Client();
+
+Content textContent = TextContent.builder().text("Provide a transcript and summary of this audio.").build();
+Content audioContent =
+    AudioContent.builder()
+        .uri("gs://cloud-samples-data/generative-ai/audio/pixel.mp3")
+        .mimeType(AudioContentMimeType.AUDIO_MP3)
+        .build();
+
+List<Content> contents = Arrays.asList(textContent, audioContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.7-flash"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -337,7 +454,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.7-flash",
     "input": [
       {"type": "text", "text": "Describe this audio clip"},
       {
@@ -349,9 +466,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### 音声データをインラインで渡す
+### ส่งข้อมูลเสียงแบบอินไลน์
 
-リクエストの合計サイズが 20 MB 未満の小さな音声ファイルの場合:
+สำหรับไฟล์เสียงขนาดเล็กที่มีขนาดคำขอรวมไม่เกิน 20 MB ให้ทำดังนี้
 
 ### Python
 
@@ -365,7 +482,7 @@ with open('path/to/small-sample.mp3', 'rb') as f:
     audio_bytes = f.read()
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.7-flash",
     input=[
         {"type": "text", "text": "Describe this audio clip"},
         {
@@ -391,7 +508,7 @@ const audioData = fs.readFileSync("path/to/small-sample.mp3", {
 });
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.7-flash",
     input: [
         {type: "text", text: "Describe this audio clip"},
         {
@@ -402,6 +519,45 @@ const interaction = await client.interactions.create({
     ]
 });
 console.log(interaction.output_text);
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AudioContent;
+import com.google.genai.gaos.models.interactions.AudioContentMimeType;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+import java.util.List;
+
+Client client = new Client();
+
+Content textContent = TextContent.builder().text("Provide a transcript and summary of this audio.").build();
+Content audioContent =
+    AudioContent.builder()
+        .uri("gs://cloud-samples-data/generative-ai/audio/pixel.mp3")
+        .mimeType(AudioContentMimeType.AUDIO_MP3)
+        .build();
+
+List<Content> contents = Arrays.asList(textContent, audioContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.7-flash"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
 ```
 
 ### REST
@@ -419,7 +575,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.7-flash",
     "input": [
       {"type": "text", "text": "Describe this audio clip"},
       {
@@ -431,19 +587,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-インライン音声データに関する注意事項:
-\* リクエストの最大サイズは合計 20 MB（プロンプトとすべてのファイルを含む）です。
-\* 再利用する場合は、代わりに[ファイルをアップロード](#upload-audio)してください。
+หมายเหตุเกี่ยวกับข้อมูลเสียงแบบอินไลน์:
+\* ขนาดคำขอสูงสุดคือ 20 MB โดยรวม (รวมถึงพรอมต์และไฟล์ทั้งหมด)
+\* หากต้องการใช้ซ้ำ [ให้อัปโหลดไฟล์](#upload-audio) แทน
 
-## 文字起こしを取得する
+## ดูข้อความถอดเสียง
 
-文字起こしを取得するには、プロンプトでリクエストします。
+หากต้องการดูข้อความถอดเสียง ให้ขอในพรอมต์ดังนี้
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.7-flash",
     input=[
         {"type": "text", "text": "Generate a transcript of the speech."},
         {
@@ -460,7 +616,7 @@ print(interaction.output_text)
 
 ```
 const interaction = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.7-flash",
     input: [
         { type: "text", text: "Generate a transcript of the speech." },
         {
@@ -473,15 +629,54 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-## タイムスタンプを参照する
+### Java
 
-`MM:SS` 形式を使用して、特定のセクションを参照します。
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AudioContent;
+import com.google.genai.gaos.models.interactions.AudioContentMimeType;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+import java.util.List;
+
+Client client = new Client();
+
+Content textContent = TextContent.builder().text("Provide a transcript and summary of this audio.").build();
+Content audioContent =
+    AudioContent.builder()
+        .uri("gs://cloud-samples-data/generative-ai/audio/pixel.mp3")
+        .mimeType(AudioContentMimeType.AUDIO_MP3)
+        .build();
+
+List<Content> contents = Arrays.asList(textContent, audioContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.7-flash"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
+## อ้างอิงการประทับเวลา
+
+ใช้รูปแบบ `MM:SS` เพื่ออ้างอิงส่วนที่เฉพาะเจาะจง
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.7-flash",
     input=[
         {"type": "text", "text": "Provide a transcript from 02:30 to 03:29."},
         {
@@ -497,7 +692,7 @@ interaction = client.interactions.create(
 
 ```
 const interaction = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.7-flash",
     input: [
         { type: "text", text: "Provide a transcript from 02:30 to 03:29." },
         { type: "audio", uri: uploadedFile.uri, mime_type: "audio/mp3" }
@@ -505,15 +700,54 @@ const interaction = await client.interactions.create({
 });
 ```
 
-## トークンをカウントする
+### Java
 
-音声ファイル内のトークンをカウントします。
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AudioContent;
+import com.google.genai.gaos.models.interactions.AudioContentMimeType;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+import java.util.List;
+
+Client client = new Client();
+
+Content textContent = TextContent.builder().text("Provide a transcript and summary of this audio.").build();
+Content audioContent =
+    AudioContent.builder()
+        .uri("gs://cloud-samples-data/generative-ai/audio/pixel.mp3")
+        .mimeType(AudioContentMimeType.AUDIO_MP3)
+        .build();
+
+List<Content> contents = Arrays.asList(textContent, audioContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.7-flash"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
+## นับโทเค็น
+
+นับโทเค็นในไฟล์เสียง
 
 ### Python
 
 ```
 response = client.models.count_tokens(
-    model="gemini-3.6-flash",
+    model="gemini-3.7-flash",
     contents=[uploaded_file]
 )
 print(response)
@@ -523,7 +757,7 @@ print(response)
 
 ```
 const response = await client.models.countTokens({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.7-flash",
     contents: [
         { fileData: { fileUri: uploadedFile.uri, mimeType: uploadedFile.mimeType } }
     ]
@@ -531,37 +765,87 @@ const response = await client.models.countTokens({
 console.log(response.totalTokens);
 ```
 
-## サポートされているオーディオ形式
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AudioContent;
+import com.google.genai.gaos.models.interactions.AudioContentMimeType;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+import java.util.List;
+
+Client client = new Client();
+
+Content textContent = TextContent.builder().text("Provide a transcript and summary of this audio.").build();
+Content audioContent =
+    AudioContent.builder()
+        .uri("gs://cloud-samples-data/generative-ai/audio/pixel.mp3")
+        .mimeType(AudioContentMimeType.AUDIO_MP3)
+        .build();
+
+List<Content> contents = Arrays.asList(textContent, audioContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.7-flash"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
+## รูปแบบเสียงที่รองรับ
+
+Gemini รองรับประเภท MIME ของรูปแบบเสียงต่อไปนี้
 
 - WAV - `audio/wav`
 - MP3 - `audio/mp3`
 - AIFF - `audio/aiff`
 - AAC - `audio/aac`
-- OGG Vorbis - `audio/ogg`
+- OGG - `audio/ogg`
 - FLAC - `audio/flac`
+- MPEG - `audio/mpeg`
+- M4A - `audio/m4a`
+- L16 - `audio/l16`
+- Opus - `audio/opus`
+- ALAW - `audio/alaw`
+- MULAW - `audio/mulaw`
+- WebM - `audio/webm`
 
-## 音声に関する技術的な詳細
+ดูรายการประเภท MIME และสคีมาพารามิเตอร์ทั้งหมดที่รองรับได้ที่[ข้อมูลอ้างอิง Interactions API](https://ai.google.dev/api/interactions-api?hl=th#Resource:Content)
 
-- **トークン**: 音声 1 秒あたり 32 トークン（1 分 = 1,920 トークン）
-- **会話以外の音声**: Gemini は会話以外の音声（鳥の鳴き声、サイレンなど）を理解します。
-- **最大長**: プロンプトあたり 9.5 時間の音声
-- **解像度**: 16 Kbps にダウンサンプリング
-- **チャンネル**: マルチチャンネル音声をシングル チャンネルに結合
+## รายละเอียดทางเทคนิคเกี่ยวกับเสียง
 
-## 次のステップ
+- **โทเค็น**: 32 โทเค็นต่อเสียง 1 วินาที (1 นาที = 1,920 โทเค็น)
+- **เสียงที่ไม่ใช่เสียงพูด**: Gemini เข้าใจเสียงที่ไม่ใช่เสียงพูด (เสียงนกร้อง เสียงไซเรน ฯลฯ)
+- **ความยาวสูงสุด**: เสียง 9.5 ชั่วโมงต่อพรอมต์
+- **ความละเอียด**: ลดตัวอย่างลงเหลือ 16 Kbps
+- **ช่อง**: รวมเสียงหลายช่องเป็นช่องเดียว
 
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja): 音声ファイルをアップロードして管理する
-- [システム指示](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja#system-instructions):
-  モデルの動作をカスタマイズする
-- [構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja):
-  文字起こし結果を JSON 形式で取得する
+## ขั้นตอนถัดไป
 
-フィードバックを送信
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th): อัปโหลดและจัดการไฟล์เสียง
+- [คำแนะนำของระบบ](https://ai.google.dev/gemini-api/docs/text-generation?hl=th#system-instructions):
+  ปรับแต่งลักษณะการทำงานของโมเดล
+- [เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th):
+  ดูผลการถอดเสียงในรูปแบบ JSON
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+ส่งความคิดเห็น
 
-最終更新日 2026-07-30 UTC。
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-ご意見をお聞かせください
+อัปเดตล่าสุด 2026-08-28 UTC
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-30 UTC。"],[],[]]
+หากต้องการบอกให้เราทราบเพิ่มเติม
+
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-08-28 UTC"],[],[]]

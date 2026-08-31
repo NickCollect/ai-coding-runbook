@@ -1,100 +1,100 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agents?hl=vi
-fetched_at: 2026-08-24T02:36:40.485760+00:00
-title: "T\u1ed5ng quan v\u1ec1 nh\u00e2n vi\u00ean h\u1ed7 tr\u1ee3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agents?hl=he
+fetched_at: 2026-08-31T06:38:58.495912+00:00
+title: "\u05e1\u05e7\u05d9\u05e8\u05d4 \u05db\u05dc\u05dc\u05d9\u05ea \u05e9\u05dc \u05d4\u05e0\u05e6\u05d9\u05d2\u05d9\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Gửi ý kiến phản hồi
+שליחת משוב
 
-# Tổng quan về nhân viên hỗ trợ
+# סקירה כללית של הנציגים
 
-Các tác nhân được quản lý trên Gemini API cung cấp cho bạn một bộ khung tác nhân có thể định cấu hình. Một lệnh gọi API duy nhất sẽ cung cấp một hộp cát Linux, nơi tác nhân suy luận, thực thi mã, quản lý tệp và duyệt web một cách độc lập.
+סוכנים מנוהלים ב-Gemini API מספקים לכם מסגרת סוכנים שניתנת להגדרה. קריאה אחת ל-API מספקת ארגז חול של Linux שבו הסוכן מסיק מסקנות, מריץ קוד, מנהל קבצים וגולש באינטרנט באופן אוטונומי.
 
 [rocket\_launch
 
-Bắt đầu nhanh
+מדריך למתחילים
 
-Thực hiện cuộc gọi đầu tiên cho tác nhân, truyền trực tuyến các câu trả lời và tạo tác nhân tuỳ chỉnh.](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=vi)
+איך מבצעים את השיחה הראשונה עם סוכן, משדרים תשובות ויוצרים סוכן בהתאמה אישית](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=he)
 [smart\_toy
 
-Tác nhân Antigravity
+Antigravity Agent
 
-Các chức năng, công cụ, chế độ nhập đa phương thức và giá của tác nhân mặc định.](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=vi)
+יכולות, כלים, קלט מולטימודאלי ותמחור של הסוכן שמוגדר כברירת מחדל.](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=he)
 [experiment
 
-Tác nhân trong AI Studio
+סוכנים ב-AI Studio
 
-Sân chơi trực quan để tạo mẫu tác nhân mà không cần viết mã.](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=vi)
+סביבת משחקים ויזואלית ליצירת אב טיפוס של סוכנים בלי לכתוב קוד.](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=he)
 
-## Các tác nhân được quản lý có sẵn
+## סוכנים מנוהלים זמינים
 
-- **[Tác nhân Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=vi)**: Tác nhân được quản lý đa năng dựa trên Gemini 3.7 Flash. Chạy mã, quản lý tệp và tìm kiếm trên web trong một hộp cát Linux an toàn do Google lưu trữ. Bạn có thể định cấu hình mô hình cơ bản (chẳng hạn như Gemini 3.7 Flash, Gemini 3.6 Flash hoặc Gemini 3.5 Flash) bằng cách sử dụng `agent_config` và mở rộng mô hình đó bằng các hướng dẫn, kỹ năng và dữ liệu của riêng bạn để [xây dựng tác nhân tùy chỉnh](https://ai.google.dev/gemini-api/docs/custom-agents?hl=vi).
-- **[Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi)**: Tác nhân nghiên cứu tự động lập kế hoạch, thực hiện và tổng hợp các nhiệm vụ nghiên cứu nhiều bước cho các trường hợp sử dụng như phân tích thị trường, thẩm định và đánh giá tài liệu.
+- ‫**[סוכן Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=he)**: סוכן מנוהל לשימוש כללי שמבוסס על Gemini 3.7 Flash. מריץ קוד, מנהל קבצים ומבצע חיפושים באינטרנט בתוך ארגז חול מאובטח של Linux שמארחת Google. אתם יכולים להגדיר את המודל הבסיסי (כמו Gemini 3.7 Flash,‏ Gemini 3.6 Flash או Gemini 3.5 Flash) באמצעות `agent_config`, ולהרחיב אותו עם הוראות, מיומנויות ונתונים משלכם כדי [ליצור סוכן בהתאמה אישית](https://ai.google.dev/gemini-api/docs/custom-agents?hl=he).
+- ‫**[Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he)**: סוכן מחקר אוטונומי שתכנן, מבצע ומסכם משימות מחקר רב-שלביות לתרחישי שימוש כמו ניתוח שוק, בדיקת נאותות וסקירת ספרות.
 
-## Bảo mật và các phương pháp hay nhất
+## אבטחה ושיטות מומלצות
 
-Mọi tác nhân đều chạy trong một môi trường hộp cát được cách ly ở cấp hệ điều hành.
-Theo mặc định, hộp cát có quyền truy cập không hạn chế vào mạng bên ngoài. Bạn có thể hạn chế hoặc tắt quyền truy cập vào mạng bằng danh sách cho phép.
+כל סוכן פועל בסביבת ארגז חול שמבודדת ברמת מערכת ההפעלה.
+כברירת מחדל, לארגז החול יש גישה בלתי מוגבלת לרשת יוצאת. אתם יכולים להגביל או להשבית את הגישה לרשת באמצעות רשימת היתרים.
 
-### Quyền truy cập mạng
+### גישה לרשת
 
-Theo mặc định, các môi trường có quyền truy cập không hạn chế vào mạng bên ngoài. Sử dụng danh sách cho phép `network` để hạn chế lưu lượng truy cập đi đến các miền cụ thể hoặc mẫu ký tự đại diện. Để biết thông tin chi tiết về cấu hình, hãy xem [Danh sách cho phép mạng](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=vi#network_allow_list) (AI Studio) hoặc [Quy tắc mạng](https://ai.google.dev/gemini-api/docs/custom-agents?hl=vi#with_network_rules) (API).
+하십시오. כברירת מחדל, לסביבות יש גישה בלתי מוגבלת לרשת יוצאת. אפשר להשתמש ב`network` רשימת היתרים כדי להגביל את התנועה היוצאת לדומיינים ספציפיים או לדפוסי wildcard. פרטים על ההגדרה מופיעים במאמרים [רשימת כתובות IP ברשת שאפשר לגשת אליהן](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=he#network_allow_list) (AI Studio) או [כללי רשת](https://ai.google.dev/gemini-api/docs/custom-agents?hl=he#with_network_rules) (API).
 
-### Công cụ và API bên ngoài
+### כלים חיצוניים וממשקי API
 
-Bạn có thể kết nối các công cụ và API bên ngoài để mở rộng tác nhân. Chỉ sử dụng các công cụ từ các nguồn đáng tin cậy và giới hạn quyền ở mức tối thiểu cần thiết. Thông tin đăng nhập có thể được chèn một cách an toàn thông qua các biến đổi tiêu đề proxy truyền dữ liệu ra và không bao giờ bị lộ trong hộp cát. Tác nhân có thể sử dụng mọi thông tin đăng nhập mà tác nhân có quyền truy cập, vì vậy, bạn chỉ nên cung cấp thông tin đăng nhập mà bạn sẵn sàng cấp toàn bộ quyền.
+כדי להרחיב את היכולות של הסוכן, אפשר לקשר אותו לכלים חיצוניים ולממשקי API. מומלץ להשתמש רק בכלים ממקורות מהימנים ולהגדיר את ההרשאות למינימום הנדרש. אפשר להחדיר את פרטי הכניסה בצורה מאובטחת באמצעות שינויים בכותרות של שרת proxy ליציאה, והם אף פעם לא נחשפים בתוך ארגז החול. הסוכן יכול להשתמש בכל פרטי כניסה שיש לו גישה אליהם, לכן כדאי לספק רק פרטי כניסה שאתם מוכנים להעניק להם גישה מלאה.
 
-- Sử dụng tài khoản dịch vụ hoặc khoá API có đặc quyền tối thiểu.
-- Ưu tiên mã thông báo có thời gian tồn tại ngắn hơn khoá có thời gian tồn tại dài.
-- Chỉ cung cấp thông tin đăng nhập mà bạn sẵn sàng cấp toàn bộ phạm vi.
-- Thay đổi thông tin xác thực theo lịch trình đều đặn.
+- משתמשים בחשבונות שירות או במפתחות API עם הרשאות מינימליות.
+- עדיף להשתמש בטוקנים לטווח קצר במקום במפתחות לטווח ארוך.
+- חשוב לספק פרטי כניסה רק אם אתם מוכנים להעניק את ההיקף המלא של ההרשאות.
+- עדכון של פרטי הכניסה לפי לוח זמנים קבוע.
 
-Để biết thông tin chi tiết về cách định cấu hình các phép biến đổi tiêu đề, hãy xem phần [Thông tin đăng nhập](https://ai.google.dev/gemini-api/docs/agent-environment?hl=vi#credentials).
+פרטים על הגדרת שינויים בכותרות מופיעים במאמר בנושא [אישורים](https://ai.google.dev/gemini-api/docs/agent-environment?hl=he#credentials).
 
-### Sự giám sát của con người
+### פיקוח אנושי
 
-Luôn xác minh kết quả (mã được tạo, các phép biến đổi dữ liệu, thay đổi cấu hình) trước khi triển khai, đặc biệt là đối với những tác vụ sửa đổi dữ liệu hoặc tương tác với các hệ thống bên ngoài.
+תמיד צריך לאמת את הפלט (קוד שנוצר, טרנספורמציות של נתונים, שינויים בהגדרות) לפני הפריסה, במיוחד במשימות שמשנות נתונים או יוצרות אינטראקציה עם מערכות חיצוניות.
 
-## Giá
+## תמחור
 
-Các tác nhân được quản lý sử dụng [mô hình trả tiền theo mức dùng](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#pricing-for-agents) dựa trên token mô hình Gemini và mức sử dụng công cụ. Một tương tác có thể kích hoạt nhiều vòng lặp suy luận, thường tiêu thụ từ 100 nghìn đến 3 triệu mã thông báo. Điện toán môi trường **không được tính phí** trong thời gian xem trước. Xem [chi phí ước tính](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=vi#availability-and-pricing) cho thông tin chi tiết về từng tác vụ. Các tác nhân được quản lý cũng có trong gói miễn phí với hạn mức tốc độ và hạn mức sử dụng miễn phí.
+סוכנים מנוהלים משתמשים ב[מודל של תשלום לפי שימוש](https://ai.google.dev/gemini-api/docs/pricing?hl=he#pricing-for-agents) שמבוסס על טוקנים של מודל Gemini ועל שימוש בכלי. אינטראקציה אחת יכולה להפעיל כמה לולאות של ניתוח, ובדרך כלל היא צורכת 100,000 עד 3 מיליון טוקנים. החישוב של הסביבה **לא מחויב** במהלך תקופת התצוגה המקדימה. [כאן](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=he#availability-and-pricing) אפשר לראות פירוט של העלויות לכל משימה. סוכנים מנוהלים זמינים גם בתוכנית בחינם, עם מכסת שימוש ומגבלת קצב בחינם.
 
-## Giới hạn
+## מגבלות
 
-| Hạn mức | Mô tả |
+| מגבלה | תיאור |
 | --- | --- |
-| **Vòng đời môi trường** | Các môi trường sẽ bị xoá vĩnh viễn sau 7 ngày không hoạt động. |
-| **Tắt VM** | Các VM sẽ tắt sau một khoảng thời gian ngắn không hoạt động để tiết kiệm tài nguyên. Yêu cầu tiếp theo sẽ khôi phục trạng thái (với một lần khởi động nguội). |
-| **Phần mềm cài đặt sẵn** | Môi trường dựa trên Ubuntu có Python 3.12 và Node.js 22. Để biết thêm thông tin về hình ảnh cơ sở của môi trường, hãy xem phần [Phần mềm được cài đặt sẵn](https://ai.google.dev/gemini-api/docs/agent-environment?hl=vi#pre-installed-software). |
-| **Số nhân viên tối đa** | Bạn có thể có tối đa 1.000 nhân viên hỗ trợ được quản lý. |
+| **משך החיים של הסביבה** | סביבות נמחקות סופית אחרי 7 ימים של חוסר פעילות. |
+| **VM Spin-down** | מכונות וירטואליות מושבתות אחרי פרק זמן קצר של חוסר פעילות כדי לחסוך במשאבים. הבקשה הבאה משחזרת את המצב (עם הפעלה במצב התחלתי). |
+| **תוכנות שהותקנו מראש** | סביבה מבוססת-Ubuntu עם Python 3.12 ו-Node.js 22. מידע נוסף על תמונת הבסיס של הסביבה זמין במאמר בנושא [תוכנות שהותקנו מראש](https://ai.google.dev/gemini-api/docs/agent-environment?hl=he#pre-installed-software). |
+| **מספר הנציגים המקסימלי** | אפשר להוסיף עד 1,000 סוכנים מנוהלים. |
 
-## Khung tác nhân
+## מסגרות של סוכנים
 
-Bạn cũng có thể tạo tác nhân bằng Gemini thông qua các khung và SDK sau:
+אפשר גם ליצור סוכנים באמצעות Gemini בעזרת המסגרות וערכות ה-SDK הבאות:
 
-- [**LangChain / LangGraph**](https://ai.google.dev/gemini-api/docs/langgraph-example?hl=vi): Xây dựng các luồng ứng dụng phức tạp, có trạng thái và hệ thống nhiều tác nhân bằng cách sử dụng cấu trúc đồ thị.
-- [**LlamaIndex**](https://ai.google.dev/gemini-api/docs/llama-index?hl=vi): Kết nối các tác nhân Gemini với dữ liệu riêng tư của bạn để có quy trình làm việc nâng cao bằng RAG.
-- [**CrewAI**](https://ai.google.dev/gemini-api/docs/crewai-example?hl=vi): Điều phối các tác nhân AI tự động, cộng tác và nhập vai.
-- [**Vercel AI SDK**](https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=vi): Xây dựng giao diện người dùng và tác nhân dựa trên AI bằng JavaScript/TypeScript.
-- [**Google ADK**](https://google.github.io/adk-docs/get-started/python/): Một khung mã nguồn mở để xây dựng và điều phối các tác nhân AI có khả năng tương tác.
-- [**Antigravity SDK**](https://antigravity.google/product/antigravity-sdk?hl=vi): Xây dựng các tác nhân AI tự động bằng cách sử dụng cùng các công cụ, vòng lặp tác nhân và tính năng quản lý bối cảnh hỗ trợ Google Antigravity, có thể lập trình bằng Python.
+- ‫[**LangChain / LangGraph**](https://ai.google.dev/gemini-api/docs/langgraph-example?hl=he): יצירת תהליכי עבודה מורכבים של אפליקציות ומערכות מרובות סוכנים באמצעות מבני גרפים.
+- ‫[**LlamaIndex**](https://ai.google.dev/gemini-api/docs/llama-index?hl=he): קישור סוכני Gemini לנתונים פרטיים כדי לשפר את תהליכי העבודה באמצעות RAG.
+- ‫[**CrewAI**](https://ai.google.dev/gemini-api/docs/crewai-example?hl=he): כלי לתזמור של סוכני AI אוטונומיים שמשתפים פעולה ומגלמים תפקידים.
+- ‫[**Vercel AI SDK**](https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=he): פיתוח ממשקי משתמש וסוכנים מבוססי-AI ב-JavaScript/TypeScript.
+- ‫[**Google ADK**](https://google.github.io/adk-docs/get-started/python/): מסגרת קוד פתוח ליצירה ולתיאום של סוכני AI עם יכולת פעולה הדדית.
+- ‫[**Antigravity SDK**](https://antigravity.google/product/antigravity-sdk?hl=he): יצירה של סוכני AI אוטונומיים באמצעות אותם כלים, לולאת סוכן וניהול הקשר שמופעלים על ידי Google Antigravity, ניתנים לתכנות ב-Python.
 
-Gửi ý kiến phản hồi
+שליחת משוב
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Cập nhật lần gần đây nhất: 2026-08-19 UTC.
+עדכון אחרון: 2026-08-19 (שעון UTC).
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+רוצה לתת לנו משוב?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-08-19 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-08-19 (שעון UTC)."],[],[]]

@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/video?hl=es-419
-fetched_at: 2026-08-24T02:24:53.883296+00:00
+fetched_at: 2026-08-31T06:32:21.603018+00:00
 title: "Generaci\u00f3n de video en la API de Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

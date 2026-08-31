@@ -1,110 +1,100 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tools?hl=pl
-fetched_at: 2026-08-24T02:24:42.624210+00:00
-title: "Korzystanie z\u00a0narz\u0119dzi za pomoc\u0105 interfejsu Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tools?hl=hi
+fetched_at: 2026-08-31T06:31:44.136078+00:00
+title: "Gemini API \u0915\u0947 \u0938\u093e\u0925 \u091f\u0942\u0932 \u0907\u0938\u094d\u0924\u0947\u092e\u093e\u0932 \u0915\u0930\u0928\u093e \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Prześlij opinię
+सुझाव भेजें
 
-# Korzystanie z narzędzi za pomocą interfejsu Gemini API
+# Gemini API के साथ टूल इस्तेमाल करना
 
-Narzędzia rozszerzają możliwości modeli Gemini, umożliwiając im podejmowanie działań w świecie rzeczywistym, dostęp do informacji w czasie rzeczywistym i wykonywanie złożonych zadań obliczeniowych. Modele mogą korzystać z narzędzi zarówno w standardowych interakcjach typu żądanie-odpowiedź, jak i
-w sesjach przesyłania strumieniowego w czasie rzeczywistym za pomocą interfejsu [Live API](https://ai.google.dev/gemini-api/docs/live-tools?hl=pl).
+टूल, Gemini मॉडल की क्षमताओं को बढ़ाते हैं. इससे वे दुनिया में कार्रवाई कर पाते हैं, रीयल-टाइम में जानकारी ऐक्सेस कर पाते हैं, और मुश्किल कंप्यूटेशनल टास्क पूरे कर पाते हैं. मॉडल, स्टैंडर्ड अनुरोध-जवाब इंटरैक्शन और [Live API](https://ai.google.dev/gemini-api/docs/live-tools?hl=hi) का इस्तेमाल करके, रीयल-टाइम स्ट्रीमिंग सेशन में टूल इस्तेमाल कर सकते हैं.
 
-Narzędzia to konkretne funkcje (takie jak wyszukiwarka Google czy wykonywanie kodu), których model może używać do odpowiadania na zapytania. Interfejs Gemini API udostępnia zestaw w pełni
-zarządzanych, wbudowanych narzędzi. Możesz też zdefiniować narzędzia niestandardowe za pomocą [wywoływania
-funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl).
+टूल, खास क्षमताएं होती हैं. जैसे, Google Search या कोड एक्ज़ीक्यूशन. इनका इस्तेमाल करके, मॉडल सवालों के जवाब दे सकता है. Gemini API में, पूरी तरह से मैनेज किए जाने वाले बिल्ट-इन टूल का एक सुइट उपलब्ध होता है. इसके अलावा, [फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi) का इस्तेमाल करके, कस्टम टूल तय किए जा सकते हैं.
 
-Aby tworzyć systemy wieloetapowe zorientowane na cel, zapoznaj się z omówieniem [agentów](https://ai.google.dev/gemini-api/docs/agents?hl=pl).
+एक से ज़्यादा चरणों वाले, लक्ष्य-उन्मुख सिस्टम बनाने के लिए, [एजेंट की खास जानकारी](https://ai.google.dev/gemini-api/docs/agents?hl=hi) देखें.
 
-## Dostępne narzędzia wbudowane
+## पहले से मौजूद टूल
 
-| Narzędzie | Opis | Przypadki użycia |
+| टूल | ब्यौरा | उपयोग के उदाहरण |
 | --- | --- | --- |
-| [Wyszukiwarka Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pl) | Ugruntuj odpowiedzi na podstawie bieżących wydarzeń i faktów z internetu, aby ograniczyć halucynacje. | Odpowiadanie na pytania o najnowsze wydarzenia, weryfikowanie faktów za pomocą różnych źródeł. |
-| [Mapy Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pl) | Twórz asystentów rozpoznających lokalizację, którzy mogą znajdować miejsca, wyznaczać trasy i dostarczać bogaty kontekst lokalny. | Planowanie tras podróży z wieloma przystankami, znajdowanie lokalnych firm na podstawie kryteriów użytkownika. |
-| [Wykonywanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl) | Zezwól modelowi na pisanie i uruchamianie kodu w Pythonie, aby rozwiązywać problemy matematyczne lub dokładnie przetwarzać dane. | Rozwiązywanie złożonych równań matematycznych, dokładne przetwarzanie i analizowanie danych tekstowych. |
-| [Kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl) | Poproś model o odczytanie i analizowanie treści z określonych stron internetowych lub dokumentów. | Odpowiadanie na pytania na podstawie konkretnych adresów URL lub dokumentów, pobieranie informacji z różnych stron internetowych. |
-| [Korzystanie z komputera (wersja testowa)](https://ai.google.dev/gemini-api/docs/computer-use?hl=pl) | Zezwól Gemini na wyświetlanie ekranu i generowanie działań w celu interakcji z interfejsami przeglądarki internetowej (wykonywanie po stronie klienta). | Automatyzowanie powtarzalnych przepływów pracy w internecie, testowanie interfejsów aplikacji internetowych. |
-| [Wyszukiwanie plików](https://ai.google.dev/gemini-api/docs/file-search?hl=pl) | Indeksuj i przeszukuj własne dokumenty, aby włączyć generowanie wspomagane wyszukiwaniem (RAG). | Przeszukiwanie instrukcji technicznych, odpowiadanie na pytania na podstawie danych zastrzeżonych. |
+| [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=hi) | जवाबों में, मौजूदा घटनाओं और वेब पर मौजूद तथ्यों के बारे में सटीक जानकारी शामिल करना, ताकि गलत जानकारी देने की समस्या कम हो. | हाल के इवेंट के बारे में सवालों के जवाब देना और अलग-अलग सोर्स से तथ्यों की पुष्टि करना. |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi) | जगह की जानकारी के हिसाब से काम करने वाली ऐसी Assistant बनाएं जो जगहें ढूंढ सके, दिशाओं के लिए निर्देश पा सके, और स्थानीय जानकारी दे सके. | एक से ज़्यादा स्टॉप वाली यात्रा की योजना बनाना और उपयोगकर्ता की शर्तों के आधार पर स्थानीय कारोबारों को ढूंढना. |
+| [कोड चलाने की सुविधा](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi) | मॉडल को गणित की समस्याओं को हल करने या डेटा को सटीक तरीके से प्रोसेस करने के लिए, Python कोड लिखने और चलाने की अनुमति दें. | जटिल गणितीय समीकरणों को हल करना, टेक्स्ट डेटा को सटीक तरीके से प्रोसेस और उसका विश्लेषण करना. |
+| [यूआरएल का कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi) | मॉडल को किसी वेब पेज या दस्तावेज़ से कॉन्टेंट पढ़ने और उसका विश्लेषण करने का निर्देश दें. | किसी यूआरएल या दस्तावेज़ के आधार पर सवालों के जवाब देना और अलग-अलग वेब पेजों से जानकारी पाना. |
+| [कंप्यूटर का इस्तेमाल (प्रीव्यू)](https://ai.google.dev/gemini-api/docs/computer-use?hl=hi) | Gemini को स्क्रीन देखने और वेब ब्राउज़र के यूज़र इंटरफ़ेस (क्लाइंट-साइड एक्ज़ीक्यूशन) के साथ इंटरैक्ट करने के लिए कार्रवाइयां जनरेट करने की अनुमति देता है. | वेब पर बार-बार किए जाने वाले वर्कफ़्लो को ऑटोमेट करना, वेब ऐप्लिकेशन के यूज़र इंटरफ़ेस की टेस्टिंग करना. |
+| [फ़ाइल खोजना](https://ai.google.dev/gemini-api/docs/file-search?hl=hi) | रिट्रीवल ऑगमेंटेड जनरेशन (आरएजी) को चालू करने के लिए, अपने दस्तावेज़ों को इंडेक्स करें और उनमें खोज करें. | तकनीकी मैन्युअल खोजना, मालिकाना हक वाले डेटा के आधार पर सवालों के जवाब देना. |
 
-Szczegółowe informacje o kosztach związanych z konkretnymi narzędziami znajdziesz na stronie [Cennik](https://ai.google.dev/gemini-api/docs/pricing?hl=pl#pricing_for_tools).
+किसी टूल से जुड़ी लागत के बारे में जानकारी पाने के लिए, [कीमत की जानकारी वाला पेज](https://ai.google.dev/gemini-api/docs/pricing?hl=hi#pricing_for_tools) देखें.
 
-## Jak działa wykonywanie narzędzi
+## टूल के इस्तेमाल की सुविधा कैसे काम करती है
 
-Narzędzia umożliwiają modelowi żądanie działań podczas rozmowy. Przepływ różni się w zależności od tego, czy narzędzie jest wbudowane (zarządzane przez Google) czy niestandardowe (zarządzane przez Ciebie).
+टूल की मदद से मॉडल, बातचीत के दौरान कार्रवाइयों का अनुरोध कर सकता है. यह फ़्लो इस बात पर निर्भर करता है कि टूल, डिवाइस में पहले से मौजूद है (Google इसे मैनेज करता है) या कस्टम टूल है (इसे मैनेज करने का अधिकार आपके पास है).
 
-### Przepływ narzędzia wbudowanego
+### पहले से मौजूद टूल फ़्लो
 
-W przypadku narzędzi wbudowanych (wyszukiwarka Google, Mapy Google, kontekst adresu URL, wyszukiwanie plików, wykonywanie kodu) cały proces odbywa się w ramach jednego wywołania interfejsu API:
+Google Search, Google Maps, यूआरएल का कॉन्टेक्स्ट, फ़ाइल खोजने की सुविधा, और कोड एक्ज़ीक्यूट करने जैसे बिल्ट-इन टूल के लिए, पूरी प्रोसेस एक ही एपीआई कॉल में होती है:
 
-1. **Ty** wysyłasz prompta: „Ile wynosi pierwiastek kwadratowy z najnowszej ceny akcji GOOG?”
-2. **Gemini** stwierdza, że potrzebuje narzędzi, i uruchamia je na serwerach Google (np. wyszukuje cenę akcji, a następnie uruchamia kod w Pythonie, aby obliczyć pierwiastek kwadratowy).
-3. **Gemini** odsyła ostateczną odpowiedź opartą na wynikach narzędzia.
+1. **आपने** यह प्रॉम्प्ट भेजा: "GOOG के मौजूदा स्टॉक की कीमत का वर्गमूल क्या है?"
+2. **Gemini** यह तय करता है कि उसे टूल की ज़रूरत है या नहीं. इसके बाद, वह Google के सर्वर पर उन टूल को इस्तेमाल करता है. उदाहरण के लिए, शेयर की कीमत खोजता है. इसके बाद, वर्गमूल का हिसाब लगाने के लिए Python कोड चलाता है.
+3. **Gemini**, टूल से मिले नतीजों के आधार पर जवाब देता है.
 
-### Przepływ narzędzia niestandardowego (wywoływanie funkcji)
+### कस्टम टूल फ़्लो (फ़ंक्शन कॉलिंग)
 
-W przypadku narzędzi niestandardowych i korzystania z komputera wykonywanie jest obsługiwane przez Twoją aplikację:
+कस्टम टूल और कंप्यूटर के इस्तेमाल के लिए, आपका ऐप्लिकेशन ही प्रोसेस को पूरा करता है:
 
-1. **Ty** wysyłasz prompta wraz z deklaracjami funkcji (narzędzi).
-2. **Gemini** może odesłać uporządkowany kod JSON, aby wywołać konkretną funkcję
-   (np. `{"name": "get_order_status", "args": {"order_id": "123"}}`),
-   zawsze z unikalnym `id`.
-3. **Ty** uruchamiasz funkcję w swojej aplikacji lub środowisku.
-4. **Ty** odsyłasz wyniki funkcji do Gemini z tym samym `id` co wywołanie funkcji.
-5. **Gemini** używa wyników do wygenerowania ostatecznej odpowiedzi lub innego wywołania narzędzia.
+1. **आप** फ़ंक्शन (टूल) के एलान के साथ एक प्रॉम्प्ट भेजते हैं.
+2. **Gemini**, किसी फ़ंक्शन को कॉल करने के लिए स्ट्रक्चर्ड JSON वापस भेज सकता है
+   (उदाहरण के लिए, `{"name": "get_order_status", "args": {"order_id": "123"}}`),
+   जो हमेशा एक यूनीक `id` के साथ होता है.
+3. **आपको** अपने ऐप्लिकेशन या एनवायरमेंट में फ़ंक्शन को लागू करना होगा.
+4. **आप**, फ़ंक्शन कॉल के `id` के साथ, फ़ंक्शन के नतीजे Gemini को वापस भेजते हैं.
+5. **Gemini**, नतीजों का इस्तेमाल करके फ़ाइनल जवाब जनरेट करता है या किसी दूसरे टूल को कॉल करता है.
 
-Więcej informacji znajdziesz w [przewodniku po wywoływaniu funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl).
+ज़्यादा जानकारी के लिए, [फ़ंक्शन कॉल करने से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi) देखें.
 
-### Łączenie przepływu narzędzi wbudowanych i niestandardowych
+### पहले से मौजूद और कस्टम टूल को एक साथ इस्तेमाल करने का फ़्लो
 
-W przypadku żądań, które łączą narzędzia wbudowane i narzędzia niestandardowe (wywołania funkcji), model używa [obiegu kontekstu narzędzia](https://ai.google.dev/gemini-api/docs/tool-combination?hl=pl) do koordynowania wykonywania w różnych środowiskach:
+ऐसे अनुरोधों के लिए जिनमें बिल्ट-इन टूल और कस्टम टूल (फ़ंक्शन कॉल) का इस्तेमाल किया जाता है, मॉडल [टूल कॉन्टेक्स्ट सर्कुलेशन](https://ai.google.dev/gemini-api/docs/tool-combination?hl=hi) का इस्तेमाल करता है. इससे अलग-अलग एनवायरमेंट में अनुरोधों को पूरा करने में मदद मिलती है:
 
-1. **Ty** wysyłasz prompta i deklarujesz narzędzia wbudowane oraz funkcje niestandardowe, które chcesz włączyć, ustawiając flagę, aby włączyć obsługę kombinacji.
-2. **Gemini** uruchamia narzędzia wbudowane i przekazuje kontrolę użytkownikowi, jeśli zostaną wygenerowane wywołania funkcji po stronie klienta (to, co zostanie wykonane jako pierwsze, zależy od prompta i decyzji modelu). Odsyła odpowiedź z:
-   - potwierdzeniem wywołania narzędzia,
-   - wynikami odpowiedzi narzędzia (mogą one pojawić się po kodzie JSON, jeśli model wygenerował 2 równoległe wywołania funkcji),
-   - uporządkowanym kodem JSON do wywołania funkcji,
-   - zaszyfrowanymi sygnaturami myśli, aby zachować kontekst.
-3. **Ty** uruchamiasz funkcję w swojej aplikacji lub środowisku.
-4. **Ty** zwracasz wszystkie części odpowiedzi Gemini oraz wyniki wywołania funkcji.
-5. **Gemini** generuje ostateczną odpowiedź, używając całego połączonego kontekstu.
+1. **आपको** एक प्रॉम्प्ट भेजना होगा. साथ ही, आपको यह एलान करना होगा कि आपको कौनसे बिल्ट-इन टूल और कस्टम फ़ंक्शन चालू करने हैं. इसके बाद, आपको एक फ़्लैग सेट करना होगा, ताकि कॉम्बिनेशन सपोर्ट चालू हो सके.
+2. **Gemini** में पहले से मौजूद टूल इस्तेमाल किए जाते हैं. साथ ही, अगर क्लाइंट-साइड फ़ंक्शन कॉल जनरेट होते हैं, तो Gemini उपयोगकर्ता को जवाब देता है. कौनसे फ़ंक्शन कॉल पहले जनरेट होंगे, यह प्रॉम्प्ट और मॉडल के फ़ैसले पर निर्भर करता है. यह फ़ंक्शन, इन चीज़ों के साथ जवाब भेजता है:
+   - टूल कॉल की पुष्टि करना
+   - टूल के जवाब के नतीजे. अगर मॉडल ने दो फ़ंक्शन कॉल जनरेट किए हैं, तो यह JSON के बाद दिख सकता है
+   - आपके फ़ंक्शन को कॉल करने के लिए स्ट्रक्चर्ड JSON
+   - कॉन्टेक्स्ट को बनाए रखने के लिए, एन्क्रिप्ट (सुरक्षित) किए गए थॉट सिग्नेचर
+3. **आपको** अपने ऐप्लिकेशन या एनवायरमेंट में फ़ंक्शन को लागू करना होगा.
+4. **आपको** Gemini के जवाब के सभी हिस्सों के साथ-साथ, फ़ंक्शन कॉल के नतीजे भी वापस भेजने होंगे.
+5. **Gemini**, सभी कॉन्टेक्स्ट को मिलाकर जवाब जनरेट करता है.
 
-Aby dowiedzieć się, jak włączyć obsługę łączenia narzędzi wbudowanych i niestandardowych, oraz poznać przykłady obiegu kontekstu, przeczytaj [przewodnik po łączeniu narzędzi](https://ai.google.dev/gemini-api/docs/tool-combination?hl=pl).
+बिल्ट-इन और कस्टम टूल के कॉम्बिनेशन की सुविधा चालू करने का तरीका जानने के लिए, [टूल कॉम्बिनेशन गाइड](https://ai.google.dev/gemini-api/docs/tool-combination?hl=hi) पढ़ें. साथ ही, कॉन्टेक्स्ट सर्कुलेशन के उदाहरण देखें.
 
-## Uporządkowane dane wyjściowe a wywoływanie funkcji
+## स्ट्रक्चर्ड आउटपुट और फ़ंक्शन कॉलिंग के बीच अंतर
 
-Gemini oferuje 2 metody generowania uporządkowanych danych wyjściowych. Używaj [wywoływania funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl) gdy model musi wykonać
-krok pośredni, łącząc się z Twoimi narzędziami lub systemami danych. Używaj
-[uporządkowanych danych wyjściowych](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl), gdy ostateczna odpowiedź modelu musi być ściśle zgodna z określonym schematem, np. w celu renderowania
-niestandardowego interfejsu.
+Gemini में, स्ट्रक्चर्ड आउटपुट जनरेट करने के लिए दो तरीके उपलब्ध हैं. जब मॉडल को आपके टूल या डेटा सिस्टम से कनेक्ट करके, कोई इंटरमीडिएट चरण पूरा करना हो, तब [फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi) का इस्तेमाल करें. अगर आपको मॉडल के फ़ाइनल जवाब को किसी खास स्कीमा के मुताबिक बनाना है, तो [स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi) का इस्तेमाल करें. जैसे, कस्टम यूज़र इंटरफ़ेस (यूआई) रेंडर करने के लिए.
 
-## Uporządkowane dane wyjściowe z narzędziami
+## टूल की मदद से स्ट्रक्चर्ड आउटपुट जनरेट करना
 
- 
+[स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi) को बिल्ट-इन टूल के साथ जोड़ा जा सकता है. इससे यह पक्का किया जा सकता है कि बाहरी डेटा या कंप्यूटेशन पर आधारित मॉडल के जवाब, अब भी सख्त स्कीमा का पालन करते हों.
 
-Możesz łączyć [uporządkowane dane wyjściowe](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl) z
-narzędziami wbudowanymi, aby mieć pewność, że odpowiedzi modelu oparte na danych zewnętrznych lub
-obliczeniach nadal będą zgodne z określonym schematem.
+कोड के उदाहरणों के लिए, [टूल की मदद से स्ट्रक्चर्ड आउटपुट जनरेट करना](https://ai.google.dev/gemini-api/docs/structured-output?example=recipe&hl=hi#structured_outputs_with_tools) लेख पढ़ें.
 
-Przykłady kodu znajdziesz w artykule [Uporządkowane dane wyjściowe z narzędziami](https://ai.google.dev/gemini-api/docs/structured-output?example=recipe&hl=pl#structured_outputs_with_tools).
+सुझाव भेजें
 
-Prześlij opinię
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+आखिरी बार 2026-08-19 (UTC) को अपडेट किया गया.
 
-Ostatnia aktualizacja: 2026-08-19 UTC.
+क्या आपको हमें और कुछ बताना है?
 
-Chcesz przekazać coś jeszcze?
-
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-08-19 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-08-19 (UTC) को अपडेट किया गया."],[],[]]

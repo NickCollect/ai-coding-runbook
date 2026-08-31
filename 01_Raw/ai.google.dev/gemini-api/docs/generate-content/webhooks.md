@@ -1,51 +1,52 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/webhooks?hl=ko
-fetched_at: 2026-08-24T02:24:31.079541+00:00
-title: "\uc6f9\ud6c5 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/webhooks?hl=fr
+fetched_at: 2026-08-31T06:31:54.534869+00:00
+title: "Webhooks \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-의견 보내기
+Envoyer des commentaires
 
-# 웹훅
+# Webhooks
 
-웹훅을 사용하면 비동기식 또는 장기 실행 작업 (LRO)이 완료될 때 Gemini API가 서버에 실시간 알림을 푸시할 수 있습니다. 이렇게 하면 상태 업데이트를 위해 API를 폴링할 필요가 없어 지연 시간과 오버헤드가 줄어듭니다.
+Les webhooks permettent à l'API Gemini d'envoyer des notifications en temps réel à votre serveur lorsque des opérations asynchrones ou de longue durée (LRO) sont terminées. Vous n'avez plus besoin d'interroger l'API pour obtenir des mises à jour de l'état, ce qui réduit la latence et la surcharge.
 
-웹훅은 [일괄](https://ai.google.dev/gemini-api/docs/batch-api?hl=ko) 작업,
-[상호작용](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko) 및 [동영상 생성](https://ai.google.dev/gemini-api/docs/video?hl=ko)과 같은 작업에 사용할 수 있습니다.
+Les webhooks sont disponibles pour des opérations telles que les tâches [par lot](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr),
+[les interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) et [la génération de vidéos](https://ai.google.dev/gemini-api/docs/video?hl=fr).
 
-## 작동 방식
+## Fonctionnement
 
-작업이 완료되었는지 확인하기 위해 `GET /operations`를 반복적으로 폴링하는 대신 Gemini API 웹훅을 구성하여 이벤트 트리거 시 리스너 URL에 HTTP POST 요청을 즉시 전송할 수 있습니다.
+Au lieu d'interroger `GET /operations` de manière répétée pour vérifier si une tâche est terminée, vous pouvez configurer les webhooks de l'API Gemini pour qu'ils envoient une requête HTTP POST à l'URL de votre écouteur immédiatement après le déclenchement d'un événement.
 
-Gemini API는 웹훅을 구성하는 두 가지 방법을 지원합니다.
+L'API Gemini permet de configurer les webhooks de deux manières :
 
-- [**정적 웹훅**](#static-webhooks): Gemini [WebhookService API](https://ai.google.dev/api?hl=ko)로 구성된 프로젝트 수준 엔드포인트입니다. 전역 통합 (예: Slack에 알림, 데이터베이스 동기화 등)에 적합합니다.
-- [**동적 웹훅**](#dynamic-webhooks): 특정 작업 호출의 구성 페이로드에서
-  웹훅 URL을 전달하는 요청 수준 재정의입니다. 특정 작업을 전용 엔드포인트로 라우팅하는 데 적합합니다.
+- [**Webhooks statiques**](#static-webhooks) : points de terminaison au niveau du projet configurés
+  avec l'API Gemini [WebhookService](https://ai.google.dev/api?hl=fr). Idéal pour les intégrations globales (par exemple, pour envoyer des notifications à Slack, synchroniser une base de données, etc.).
+- [**Webhooks dynamiques**](#dynamic-webhooks) : remplacements au niveau de la requête qui transmettent une
+  URL de webhook dans la charge utile de configuration d'un appel de tâches spécifique. Idéal pour acheminer des tâches spécifiques vers des points de terminaison dédiés.
 
-## 정적 웹훅
+## Webhooks statiques
 
-정적 웹훅은 전체 [프로젝트](https://ai.google.dev/gemini-api/docs/api-key?hl=ko#google-cloud-projects)에 등록되며 일치하는
-이벤트에 대해 트리거됩니다.
+Les webhooks statiques sont enregistrés pour l'ensemble d'un [projet](https://ai.google.dev/gemini-api/docs/api-key?hl=fr#google-cloud-projects) et se déclenchent pour tout événement
+correspondant.
 
-### 웹훅 만들기
+### Créer un webhook
 
-SDK 또는 REST API를 사용하여 엔드포인트를 만들 수 있습니다.
+Vous pouvez créer des points de terminaison à l'aide du SDK ou de l'API REST.
 
-**중요**: 웹훅을 만들 때 API는 **서명 보안 비밀**
-**한 번만** 반환합니다. 나중에 서명을 확인하려면 이 보안 비밀을 안전하게 저장해야 합니다 (예: 환경 변수에 저장). 서명 보안 비밀을 분실하면
-[순환](#rotate-signing-secret)해야 합니다.
+**IMPORTANT** : Lorsque vous créez un webhook, l'API renvoie un **secret de signature**
+**une seule fois**. Vous devez le stocker de manière sécurisée (par exemple, dans vos variables d'environnement) pour vérifier les signatures ultérieurement. Si vous perdez le secret de signature, vous devrez le faire
+[alterner](#rotate-signing-secret).
 
 ### Python
 
@@ -101,12 +102,12 @@ curl -X POST \
   }'
 ```
 
-데이터를 수신하도록 서버를 설정하는 방법에 관한 자세한 내용은
-[웹훅 요청 처리](#handle-webhook-requests) 섹션을 참고하세요.
+Pour savoir comment configurer votre serveur afin qu'il reçoive des données, consultez la
+[section Gérer les requêtes de webhook](#handle-webhook-requests).
 
-### 웹훅 가져오기
+### Obtenir un webhook
 
-리소스 이름으로 특정 웹훅에 관한 세부정보를 가져옵니다.
+Récupérez les détails d'un webhook spécifique à l'aide de son nom de ressource.
 
 ### Python
 
@@ -148,9 +149,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### 웹훅 나열
+### Répertorier les webhooks
 
-현재 프로젝트에 대해 구성된 모든 웹훅을 나열합니다(선택적 페이지 나누기 포함).
+Répertoriez tous les webhooks configurés pour le projet en cours, avec pagination facultative.
 
 ### Python
 
@@ -191,9 +192,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### 웹훅 업데이트
+### Mettre à jour un webhook
 
-표시 이름, 타겟 URI, 구독된 이벤트와 같은 기존 웹훅의 속성을 업데이트합니다.
+Mettez à jour les propriétés d'un webhook existant, telles que le nom à afficher, l'URI cible ou les événements auxquels il est abonné.
 
 ### Python
 
@@ -243,9 +244,9 @@ curl -X PATCH \
   }'
 ```
 
-### 웹훅 삭제
+### Supprimer un webhook
 
-프로젝트에서 웹훅 엔드포인트를 삭제합니다. 이렇게 하면 향후 해당 엔드포인트로의 이벤트 전달이 중지됩니다.
+Supprimez un point de terminaison de webhook du projet. Cela empêche les futures livraisons d'événements à ce point de terminaison.
 
 ### Python
 
@@ -283,12 +284,11 @@ curl -X DELETE \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### 서명 보안 비밀 순환
+### Faire alterner un secret de signature
 
-웹훅의 서명 보안 비밀을 순환합니다. 이전에 활성 상태였던 보안 비밀을 즉시 취소할지 아니면 24시간의 유예 기간 후에 취소할지 구성할 수 있습니다.
+Faites alterner le secret de signature d'un webhook. Vous pouvez configurer si les secrets précédemment actifs sont révoqués immédiatement ou après un délai de grâce de 24 heures.
 
-**중요**: 새 서명 보안 비밀은 순환
-시 **한 번만** 반환됩니다. 확인 로직을 업데이트하기 전에 안전하게 저장하세요.
+**IMPORTANT** : Le nouveau secret de signature n'est renvoyé qu'**une seule fois** lors de l'alternance. Stockez-le de manière sécurisée avant de mettre à jour votre logique de validation.
 
 ### Python
 
@@ -341,14 +341,14 @@ curl -X POST \
   }'
 ```
 
-### 서버에서 웹훅 요청 처리
+### Gérer les requêtes de webhook sur un serveur
 
-구독한 이벤트가 발생하면 웹훅 URL이 HTTP POST 요청을 수신합니다. 재시도를 방지하려면 엔드포인트가 몇 초 이내에 2xx 상태 코드로 응답해야 합니다. 전달을 보장하기 위해 Gemini API는 지수 백오프를 사용하여 실패한 요청을 24시간 동안 자동으로 재시도합니다.
+Lorsqu'un événement auquel vous êtes abonné se produit, votre URL de webhook reçoit une requête HTTP POST. Votre point de terminaison doit répondre avec un code d'état 2xx dans les quelques secondes qui suivent pour éviter une nouvelle tentative. Pour garantir la livraison, l'API Gemini relance automatiquement les requêtes ayant échoué pendant 24 heures à l'aide d'un intervalle exponentiel entre les tentatives.
 
-Gemini는 보안 헤더에 관한 [표준 웹훅](https://github.com/standard-webhooks/standard-webhooks) 사양을
-엄격하게 준수합니다. 서명된 헤더 서명과 저장된 정적 서명 보안 비밀을 사용하여 서버에서 페이로드를 확인합니다. 페이로드 정보는 [웹훅 봉투](#webhook-envelope) 섹션을 참고하세요.
+Gemini respecte strictement la spécification [Standard Webhooks](https://github.com/standard-webhooks/standard-webhooks) pour les
+en-têtes de sécurité. Vérifiez la charge utile sur votre serveur à l'aide des signatures d'en-tête signées et de votre secret de signature statique stocké. Pour obtenir des informations sur la charge utile, consultez la section [Enveloppe de webhook](#webhook-envelope).
 
-다음은 HTTP 리스너에 Flask를 사용하는 예입니다.
+Voici un exemple d'utilisation de Flask pour l'écouteur HTTP :
 
 ### Python
 
@@ -437,14 +437,14 @@ app.listen(8000, () => {
 });
 ```
 
-## 동적 웹훅
+## Webhooks dynamiques
 
-동적 웹훅을 사용하면 웹훅 엔드포인트를 **특정 요청
-구성**에 바인딩할 수 있습니다. 이는 에이전트 오케스트레이션 큐에 적합합니다. 동적 웹훅은 대칭 보안 비밀 대신 비대칭 공개 키 JWKS 서명을 활용합니다.
+Les webhooks dynamiques vous permettent de lier un point de terminaison de webhook à une **configuration de requête
+spécifique**, ce qui est idéal pour les files d'attente d'orchestration d'agents. Les webhooks dynamiques utilisent des signatures JWKS de clé publique asymétriques au lieu de secrets symétriques.
 
-### 동적 요청 제출
+### Envoyer une requête dynamique
 
-비동기식 작업 (예: 일괄 작업 만들기)을 트리거할 때 `webhook_config`를 추가합니다.
+Ajoutez un `webhook_config` lorsque vous déclenchez une tâche asynchrone (par exemple, lorsque vous créez un lot).
 
 ### Python
 
@@ -508,9 +508,10 @@ curl -X POST \
   }'
 ```
 
-### 동적 서명 (JWKS) 확인
+### Vérifier les signatures dynamiques (JWKS)
 
-동적 웹훅 요청은 JSON 웹 토큰 (JWT) 서명을 내보냅니다. [리스너는 서명을 추출하고 Google의 공개 인증서 엔드포인트를 사용하여 서명을 확인해야 합니다.](https://www.googleapis.com/oauth2/v3/certs)
+Les requêtes de webhook dynamiques émettent une signature de jeton Web JSON (JWT). Votre écouteur
+doit extraire la signature et la vérifier à l'aide des points de terminaison de certificat public de [Google](https://www.googleapis.com/oauth2/v3/certs).
 
 ### Python
 
@@ -611,11 +612,11 @@ app.post('/gemini-webhook-dynamic', (req, res) => {
 });
 ```
 
-## 웹훅 봉투
+## Enveloppe de webhook
 
-대역폭 정체를 방지하기 위해 Gemini 웹훅은 **얇은 페이로드** 모델을 사용하여 데이터를 전달합니다. 전달은 원시 출력 파일 자체가 아닌 상태 세부정보와 결과 포인터가 포함된 스냅샷을 전송합니다.
+Pour éviter la congestion de la bande passante, les webhooks Gemini utilisent un modèle de **charge utile légère** pour fournir des données. Les livraisons envoient un instantané contenant des détails sur l'état et des pointeurs vers les résultats, plutôt que le fichier de sortie brut lui-même.
 
-다음은 페이로드 형식의 예입니다.
+Voici un exemple de format de charge utile :
 
 ```
 {
@@ -629,42 +630,41 @@ app.post('/gemini-webhook-dynamic', (req, res) => {
 }
 ```
 
-## 이벤트 카탈로그 참조
+## Documentation de référence sur le catalogue d'événements
 
-지원 작업에 대해 다음 이벤트가 트리거됩니다.
+Les événements suivants sont déclenchés pour les tâches compatibles :
 
-| 이벤트 유형 | 트리거 | 페이로드 항목 (`data`) |
+| Type d'événement | Déclencheur | Élément de charge utile (`data`) |
 | --- | --- | --- |
-| `batch.succeeded` | 처리가 완료되었습니다. | `id`, `output_file_uri` |
-| `batch.cancelled` | 사용자가 요청을 취소했습니다. | `id` |
-| `batch.expired` | 일괄 작업이 24시간 이내에 처리 (완료)되지 않았습니다. | `id` |
-| `batch.failed` | 일괄 작업이 실패했습니다 (시스템 또는 유효성 검사 오류). | `id`, `error_code`, `error_message` |
-| `interaction.requires_action` | 함수 호출, 사용자가 작업을 해야 함 | `id` |
-| `interaction.completed` | 상호작용 API의 LRO가 성공했습니다. | `id` |
-| `interaction.failed` | 상호작용 API의 LRO가 실패했습니다 (시스템 또는 유효성 검사 오류). | `id`, `error_code`, `error_message` |
-| `interaction.cancelled` | 상호작용 API의 LRO가 취소되었습니다. | `id` |
-| `video.generated` | 동영상 생성 LRO가 완료되었습니다. | `id`, `output_file_uri`, `file_name` |
+| `batch.succeeded` | Le traitement s'est terminé correctement. | `id`, `output_file_uri` |
+| `batch.cancelled` | Requête annulée par l'utilisateur | `id` |
+| `batch.expired` | Le lot n'a pas été traité (terminé) dans un délai de 24 heures | `id` |
+| `batch.failed` | Échec du job par lot (erreur système ou de validation). | `id`, `error_code`, `error_message` |
+| `interaction.requires_action` | Appel de fonction, l'utilisateur doit effectuer une action | `id` |
+| `interaction.completed` | LRO dans l'API Interactions réussi | `id` |
+| `interaction.failed` | Échec de la LRO dans l'API Interactions (erreur système ou de validation). | `id`, `error_code`, `error_message` |
+| `interaction.cancelled` | LRO dans l'API Interactions annulé | `id` |
+| `video.generated` | LRO de génération de vidéo terminée. | `id`, `output_file_uri`, `file_name` |
 
-## 권장사항
+## Bonnes pratiques
 
-신뢰할 수 있고 확장 가능한 운영을 보장하려면 다음 안내를 따르세요.
+Pour garantir un fonctionnement fiable et évolutif :
 
-- **엄격한 재생 보호 확인**: 모든 요청에는 `webhook-timestamp`
-  헤더가 포함됩니다. 재생 공격을 완화하기 위해 **5분** 보다 오래된 페이로드를 거부하도록 서버 구성 레이어에서 이 타임스탬프를 항상 확인하세요.
-- **비동기식으로 처리**: 유효한
-  서명이 감지되면 즉시 `2xx OK`로 응답하고 내부적으로 파싱 작업을 대기열에 추가합니다. 리스너 대기 시간이 길어지면 전달 재시도 주기가 트리거됩니다.
-- **중복 삭제 처리**: 표준 웹훅은 "최소 한 번" 전달합니다. 일관된 `webhook-id` 헤더를 사용하여 혼잡도가 높은 흐름에서 발생할 수 있는 중복을 처리합니다.
+- **Vérification stricte de la protection contre la relecture** : toutes les requêtes comportent un en-tête `webhook-timestamp`. Validez toujours cet horodatage dans la couche de configuration de votre serveur pour rejeter les charges utiles datant de plus de **5 minutes** (afin d'atténuer les attaques par relecture).
+- **Traitement asynchrone** : répondez avec `2xx OK` immédiatement après la détection d'une signature valide
+  et mettez en file d'attente les opérations d'analyse en interne. Des temps d'attente prolongés de l'écouteur déclenchent un cycle de nouvelles tentatives de livraison.
+- **Gestion de la déduplication** : les webhooks standards sont livrés "au moins une fois". Utilisez l'en-tête `webhook-id` cohérent pour gérer les doublons potentiels dans les flux de congestion plus élevés.
 
-## 다음 단계
+## Étape suivante
 
-- [Batch API](https://ai.google.dev/gemini-api/docs/batch?hl=ko): 웹훅을 활용하여 대용량 엔드포인트를 자동화합니다.
+- [API Batch](https://ai.google.dev/gemini-api/docs/batch?hl=fr) : utilisez des webhooks pour automatiser les points de terminaison à volume élevé.
 
-의견 보내기
+Envoyer des commentaires
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-최종 업데이트: 2026-07-30(UTC)
+Dernière mise à jour le 2026/07/30 (UTC).
 
-의견을 전달하고 싶나요?
+Voulez-vous nous donner plus d'informations ?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-30(UTC)"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/30 (UTC)."],[],[]]

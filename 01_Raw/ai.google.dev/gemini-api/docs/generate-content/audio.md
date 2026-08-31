@@ -1,25 +1,25 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=tr
-fetched_at: 2026-08-24T02:29:09.956692+00:00
-title: "Sesleri anlama \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=de
+fetched_at: 2026-08-31T06:39:56.279869+00:00
+title: "Audioinhalte verstehen \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Geri bildirim gönderin
+Feedback geben
 
-# Sesleri anlama
+# Audioinhalte verstehen
 
-Gemini, ses girişini analiz edip metin yanıtları oluşturabilir.
+Gemini kann Audioeingaben analysieren und Textantworten generieren.
 
 ### Python
 
@@ -31,7 +31,7 @@ client = genai.Client()
 myfile = client.files.upload(file="path/to/sample.mp3")
 
 response = client.models.generate_content(
-    model="gemini-3.6-flash", contents=["Describe this audio clip", myfile]
+    model="gemini-3.7-flash", contents=["Describe this audio clip", myfile]
 )
 
 print(response.text)
@@ -55,7 +55,7 @@ async function main() {
   });
 
   const response = await ai.models.generateContent({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.7-flash",
     contents: createUserContent([
       createPartFromUri(myfile.uri, myfile.mimeType),
       "Describe this audio clip",
@@ -67,7 +67,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -103,7 +103,7 @@ func main() {
 
     result, _ := client.Models.GenerateContent(
         ctx,
-        "gemini-3.6-flash",
+        "gemini-3.7-flash",
         contents,
         nil,
     )
@@ -148,7 +148,7 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 
 # Now generate content using that file
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.7-flash:generateContent" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -X POST \
@@ -166,22 +166,25 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## Genel Bakış
+## Übersicht
 
-Gemini, ses girişini analiz edip anlayabilir ve buna metin yanıtları oluşturabilir. Bu sayede aşağıdaki gibi kullanım alanları ortaya çıkar:
+Gemini kann Audioeingaben analysieren und verstehen und Textantworten darauf generieren. Dadurch werden Anwendungsfälle wie die folgenden ermöglicht:
 
-- Ses içeriğini açıklama, özetleme veya ses içeriğiyle ilgili soruları yanıtlama
-- Sesin (konuşmadan metne) transkriptini ve çevirisini sağlama
-- Konuşma ve müzikteki duyguları algılama
-- Sesin belirli segmentlerini analiz et ve zaman damgalarını sağla.
+- Audioinhalte beschreiben, zusammenfassen oder Fragen dazu beantworten.
+- Transkription und Übersetzung des Audios bereitstellen (Sprache zu Text).
+- Emotionen in Sprache und Musik erkennen.
+- Bestimmte Segmente des Audios analysieren und Zeitstempel angeben.
 
-Gemini API şu anda anlık transkripsiyon kullanım alanlarını desteklememektedir.
-Gerçek zamanlı ses ve video etkileşimleri için [Live API](https://ai.google.dev/gemini-api/docs/live?hl=tr)'ye bakın.
-Gerçek zamanlı transkripsiyonu destekleyen özel konuşmayı metne dönüştürme modelleri için [Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=tr)'yi kullanın.
+Derzeit werden in der Gemini API keine Anwendungsfälle für die Echtzeit-Transkription unterstützt.
+Für Echtzeit-Sprach- und Videointeraktionen verwenden Sie die [Live API](https://ai.google.dev/gemini-api/docs/live?hl=de).
+Für spezielle Modelle für die Spracherkennung mit Unterstützung für die Echtzeit-Transkription,
+verwenden Sie die [Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=de).
 
-## Konuşmayı metne dönüştürme
+## Sprache zu Text transkribieren
 
-Bu örnek uygulama, [yapılandırılmış çıkışlar](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr) kullanarak Gemini API'ye zaman damgaları ve duygu algılama dahil olmak üzere konuşmayı metne dönüştürme, çevirme ve özetleme isteminin nasıl gönderileceğini gösterir.
+In dieser Beispielanwendung wird gezeigt, wie Sie die Gemini API auffordern, Sprache zu transkribieren,
+zu übersetzen und zusammenzufassen, einschließlich Zeitstempeln und Emotionserkennung
+mithilfe [strukturierter Ausgaben](https://ai.google.dev/gemini-api/docs/structured-output?hl=de).
 
 ### Python
 
@@ -206,7 +209,7 @@ def main():
   """
 
   response = client.models.generate_content(
-    model="gemini-3.6-flash",
+    model="gemini-3.7-flash",
     contents=[
       types.Content(
         parts=[
@@ -293,7 +296,7 @@ async function main() {
   };
 
   const response = await ai.models.generateContent({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.7-flash",
     contents: {
       parts: [
         {
@@ -349,7 +352,7 @@ await main();
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.7-flash:generateContent" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -X POST \
@@ -409,26 +412,28 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-Tek bir tıklamayla [AI Studio Build](https://aistudio.google.com/apps?e=0&hl=tr)'a [bu örnek transkripsiyon uygulamasına](https://aistudio.google.com/apps/bundled/echoscript?hl=tr) benzer bir uygulama oluşturmasını isteyebilirsiniz.
+Sie können [AI Studio Build](https://aistudio.google.com/apps?e=0&hl=de) auffordern, mit einem Klick eine App wie [diese Beispiel-Transkriptions-App](https://aistudio.google.com/apps/bundled/echoscript?hl=de) zu erstellen.
 
-![Çok dilli sesli transkripsiyon Gemini uygulaması](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=tr)
+![Eine mehrsprachige Audio-Transkriptions-Gemini-App](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=de)
 
-## Giriş sesi
+## Eingabeaudio
 
-Gemini'a ses verilerini aşağıdaki şekillerde sağlayabilirsiniz:
+Sie können Gemini auf folgende Weise Audiodaten zur Verfügung stellen:
 
-- `generateContent` adresine istekte bulunmadan önce [ses dosyası yükleyin](#upload-audio).
-- İsteği kullanarak [satır içi ses verilerini iletin](#inline-audio)
+- [Laden Sie eine Audiodatei hoch](#upload-audio), bevor Sie eine Anfrage an
+  `generateContent` senden.
+- [Übergeben Sie Inline-Audiodaten](#inline-audio) mit der Anfrage an
   `generateContent`.
 
-Diğer dosya giriş yöntemleri hakkında bilgi edinmek için [Dosya giriş yöntemleri](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=tr) kılavuzuna bakın.
+Weitere Informationen zu anderen Methoden für die Dateieingabe finden Sie im
+[Leitfaden Methoden für die Dateieingabe](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=de).
 
-### Ses dosyası yükleme
+### Audiodatei hochladen
 
-Ses dosyası yüklemek için [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr)'yi kullanabilirsiniz.
-Toplam istek boyutu (dosyalar, metin istemi, sistem talimatları vb. dahil) 20 MB'tan büyük olduğunda her zaman Files API'yi kullanın.
+Sie können die [Files API](https://ai.google.dev/gemini-api/docs/files?hl=de) verwenden, um eine Audiodatei hochzuladen.
+Verwenden Sie immer die Files API, wenn die Gesamtgröße der Anfrage (einschließlich der Dateien, des Text-Prompts, der Systemanweisungen usw.) größer als 20 MB ist.
 
-Aşağıdaki kod, bir ses dosyasını yükler ve ardından dosyayı `generateContent` numarasına yapılan bir görüşmede kullanır.
+Mit dem folgenden Code wird eine Audiodatei hochgeladen und dann in einem Aufruf von `generateContent` verwendet.
 
 ### Python
 
@@ -440,7 +445,7 @@ client = genai.Client()
 myfile = client.files.upload(file="path/to/sample.mp3")
 
 response = client.models.generate_content(
-    model="gemini-3.6-flash", contents=["Describe this audio clip", myfile]
+    model="gemini-3.7-flash", contents=["Describe this audio clip", myfile]
 )
 
 print(response.text)
@@ -464,7 +469,7 @@ async function main() {
   });
 
   const response = await ai.models.generateContent({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.7-flash",
     contents: createUserContent([
       createPartFromUri(myfile.uri, myfile.mimeType),
       "Describe this audio clip",
@@ -476,7 +481,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -512,7 +517,7 @@ func main() {
 
   result, _ := client.Models.GenerateContent(
       ctx,
-      "gemini-3.6-flash",
+      "gemini-3.7-flash",
       contents,
       nil,
   )
@@ -557,7 +562,7 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 
 # Now generate content using that file
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.7-flash:generateContent" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -X POST \
@@ -575,11 +580,12 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-Medya dosyalarıyla çalışma hakkında daha fazla bilgi edinmek için [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr)'yi inceleyin.
+Weitere Informationen zum Arbeiten mit Mediendateien finden Sie unter
+[Files API](https://ai.google.dev/gemini-api/docs/files?hl=de).
 
-### Ses verilerini satır içi olarak iletme
+### Audiodaten inline übergeben
 
-Ses dosyası yüklemek yerine, `generateContent` isteğinde satır içi ses verileri iletebilirsiniz:
+Anstatt eine Audiodatei hochzuladen, können Sie Inline-Audiodaten in der Anfrage an `generateContent` übergeben:
 
 ### Python
 
@@ -592,7 +598,7 @@ with open('path/to/small-sample.mp3', 'rb') as f:
 
 client = genai.Client()
 response = client.models.generate_content(
-  model='gemini-3.6-flash',
+  model='gemini-3.7-flash',
   contents=[
     'Describe this audio clip',
     types.Part.from_bytes(
@@ -627,13 +633,13 @@ const contents = [
 ];
 
 const response = await ai.models.generateContent({
-  model: "gemini-3.6-flash",
+  model: "gemini-3.7-flash",
   contents: contents,
 });
 console.log(response.text);
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -669,7 +675,7 @@ func main() {
 
   result, _ := client.Models.GenerateContent(
       ctx,
-      "gemini-3.6-flash",
+      "gemini-3.7-flash",
       contents,
       nil,
   )
@@ -678,14 +684,18 @@ func main() {
 }
 ```
 
-Satır içi ses verileriyle ilgili unutulmaması gereken birkaç nokta:
+Einige Hinweise zu Inline-Audiodaten:
 
-- Maksimum istek boyutu 20 MB'tır. Bu boyuta metin istemleri, sistem talimatları ve satır içi olarak sağlanan dosyalar dahildir. Dosyanızın boyutu *toplam istek boyutunun* 20 MB'ı aşmasına neden olacaksa istekte kullanılacak [ses dosyasını yüklemek](#upload-audio) için Files API'yi kullanın.
-- Bir ses örneğini birden çok kez kullanıyorsanız [ses dosyası yüklemek](#upload-audio) daha verimli olur.
+- Die maximale Anfragengröße beträgt 20 MB. Dazu gehören Text-Prompts, Systemanweisungen und Inline-Dateien. Wenn die Größe
+  Ihrer Datei dazu führt, dass die *Gesamtgröße der Anfrage* 20 MB überschreitet,
+  verwenden Sie die Files API, um [eine Audiodatei](#upload-audio) für die Verwendung in
+  der Anfrage hochzuladen.
+- Wenn Sie ein Audiobeispiel mehrmals verwenden, ist es effizienter
+  , [eine Audiodatei hochzuladen](#upload-audio).
 
-## Transkript alma
+## Transkript erstellen
 
-Ses verilerinin transkriptini almak için istemde bunu belirtmeniz yeterlidir:
+Wenn Sie ein Transkript von Audiodaten erhalten möchten, fragen Sie einfach im Prompt danach:
 
 ### Python
 
@@ -697,7 +707,7 @@ myfile = client.files.upload(file='path/to/sample.mp3')
 prompt = 'Generate a transcript of the speech.'
 
 response = client.models.generate_content(
-  model='gemini-3.6-flash',
+  model='gemini-3.7-flash',
   contents=[prompt, myfile]
 )
 
@@ -720,7 +730,7 @@ const myfile = await ai.files.upload({
 });
 
 const result = await ai.models.generateContent({
-  model: "gemini-3.6-flash",
+  model: "gemini-3.7-flash",
   contents: createUserContent([
     createPartFromUri(myfile.uri, myfile.mimeType),
     "Generate a transcript of the speech.",
@@ -729,7 +739,7 @@ const result = await ai.models.generateContent({
 console.log("result.text=", result.text);
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -765,7 +775,7 @@ func main() {
 
   result, _ := client.Models.GenerateContent(
       ctx,
-      "gemini-3.6-flash",
+      "gemini-3.7-flash",
       contents,
       nil,
   )
@@ -774,12 +784,12 @@ func main() {
 }
 ```
 
-## Zaman damgalarına bakın
+## Auf Zeitstempel verweisen
 
-`MM:SS` biçimindeki zaman damgalarını kullanarak bir ses dosyasının belirli bölümlerine atıfta bulunabilirsiniz. Örneğin, aşağıdaki istemde,
+Sie können mit Zeitstempeln im Format `MM:SS` auf bestimmte Abschnitte einer Audiodatei verweisen. Im folgenden Prompt wird beispielsweise ein Transkript angefordert, das
 
-- Dosyanın başlangıcından 2 dakika 30 saniye sonra başlar.
-- Dosyanın başlangıcından itibaren 3 dakika 29 saniyede sona erer.
+- bei 2 Minuten und 30 Sekunden ab Beginn der Datei beginnt.
+- bei 3 Minuten und 29 Sekunden ab Beginn der Datei endet.
 
 ### Python
 
@@ -795,7 +805,7 @@ prompt = "Provide a transcript of the speech from 02:30 to 03:29."
 const prompt = "Provide a transcript of the speech from 02:30 to 03:29."
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -832,7 +842,7 @@ func main() {
 
   result, _ := client.Models.GenerateContent(
       ctx,
-      "gemini-3.6-flash",
+      "gemini-3.7-flash",
       contents,
       nil,
   )
@@ -841,9 +851,9 @@ func main() {
 }
 ```
 
-## Parça sayma
+## Tokens zählen
 
-Bir ses dosyasındaki jeton sayısını almak için `countTokens` yöntemini çağırın. Örneğin:
+Rufen Sie die Methode `countTokens` auf, um die Anzahl der Tokens in einer Audiodatei zu ermitteln. Beispiel:
 
 ### Python
 
@@ -852,7 +862,7 @@ from google import genai
 
 client = genai.Client()
 response = client.models.count_tokens(
-  model='gemini-3.6-flash',
+  model='gemini-3.7-flash',
   contents=[myfile]
 )
 
@@ -875,7 +885,7 @@ const myfile = await ai.files.upload({
 });
 
 const countTokensResponse = await ai.models.countTokens({
-  model: "gemini-3.6-flash",
+  model: "gemini-3.7-flash",
   contents: createUserContent([
     createPartFromUri(myfile.uri, myfile.mimeType),
   ]),
@@ -883,7 +893,7 @@ const countTokensResponse = await ai.models.countTokens({
 console.log(countTokensResponse.totalTokens);
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -918,7 +928,7 @@ func main() {
 
   tokens, _ := client.Models.CountTokens(
       ctx,
-      "gemini-3.6-flash",
+      "gemini-3.7-flash",
       contents,
       nil,
   )
@@ -927,41 +937,54 @@ func main() {
 }
 ```
 
-## Desteklenen ses biçimleri
+## Unterstützte Audioformate
 
-Gemini aşağıdaki ses biçimi MIME türlerini destekler:
+Gemini unterstützt die folgenden MIME-Typen für Audioformate:
 
-- WAV - `audio/wav`
-- MP3 - `audio/mp3`
-- AIFF - `audio/aiff`
-- AAC - `audio/aac`
-- OGG Vorbis - `audio/ogg`
-- FLAC - `audio/flac`
+- WAV – `audio/wav`
+- MP3 – `audio/mp3`
+- AIFF – `audio/aiff`
+- AAC – `audio/aac`
+- OGG – `audio/ogg`
+- FLAC – `audio/flac`
+- MPEG – `audio/mpeg`
+- M4A – `audio/m4a`
+- L16 – `audio/l16`
+- Opus – `audio/opus`
+- ALAW – `audio/alaw`
+- MULAW – `audio/mulaw`
+- WebM – `audio/webm`
 
-## Sesle ilgili teknik ayrıntılar
+Die vollständige Liste der unterstützten MIME-Typen und Parameterschemas finden Sie in der [Referenz zur Interactions API](https://ai.google.dev/api/interactions-api?hl=de#Resource:Content).
 
-- Gemini, sesin her saniyesini 32 jeton olarak temsil eder. Örneğin,bir dakikalık ses 1.920 jeton olarak temsil edilir.
-- Gemini, konuşma dışı bileşenleri (ör. kuş sesi veya siren) "anlayabilir".
-- Tek bir istemde desteklenen maksimum ses verisi uzunluğu 9,5 saattir.
-  Gemini, tek bir istemdeki ses dosyalarının *sayısını* sınırlamaz ancak tek bir istemdeki tüm ses dosyalarının toplam uzunluğu 9,5 saati aşamaz.
-- Gemini, ses dosyalarını 16 Kb/sn veri çözünürlüğüne indirir.
-- Ses kaynağı birden fazla kanal içeriyorsa Gemini bu kanalları tek bir kanalda birleştirir.
+## Technische Details zu Audio
 
-## Sırada ne var?
+- Gemini stellt jede Sekunde Audio als 32 Tokens dar. Eine Minute Audio entspricht beispielsweise 1.920 Tokens.
+- Gemini kann auch Nicht-Sprachkomponenten wie Vogelgesang oder Sirenen „verstehen“.
+- Die maximal unterstützte Länge von Audiodaten in einem einzelnen Prompt beträgt 9,5 Stunden.
+  Gemini beschränkt die *Anzahl* der Audiodateien in einem einzelnen Prompt nicht.Die kombinierte Gesamtlänge aller Audiodateien in einem einzelnen Prompt darf jedoch 9,5 Stunden nicht überschreiten.
+- Gemini führt ein Downsampling von Audiodateien auf eine Datenauflösung von 16 kbit/s durch.
+- Wenn die Audioquelle mehrere Kanäle enthält, kombiniert Gemini diese Kanäle zu einem einzigen Kanal.
 
-Bu kılavuzda, ses verilerine yanıt olarak nasıl metin oluşturulacağı gösterilmektedir. Daha fazla bilgi edinmek için aşağıdaki kaynakları inceleyin:
+## Nächste Schritte
 
-- [Dosya istemi stratejileri](https://ai.google.dev/gemini-api/docs/files?hl=tr#prompt-guide): Gemini API, çok formatlı istem olarak da bilinen metin, resim, ses ve video verileriyle istem oluşturmayı destekler.
-- [Sistem talimatları](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr#system-instructions):
-  Sistem talimatları, modelin davranışını özel ihtiyaçlarınıza ve kullanım alanlarınıza göre yönlendirmenizi sağlar.
-- [Güvenlikle ilgili rehberlik](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=tr): Üretken yapay zeka modelleri bazen yanlış, taraflı veya rahatsız edici gibi beklenmedik çıktılar üretebilir. Bu tür çıkışlardan kaynaklanan zarar riskini sınırlamak için sonradan işleme ve insan değerlendirmesi gereklidir.
+In diesem Leitfaden wird gezeigt, wie Sie Text als Antwort auf Audiodaten generieren. Weitere Informationen finden Sie in den folgenden Ressourcen:
 
-Geri bildirim gönderin
+- [Strategien für Prompts mit Dateien](https://ai.google.dev/gemini-api/docs/files?hl=de#prompt-guide): Die
+  Gemini API unterstützt Prompts mit Text-, Bild-, Audio- und Videodaten, auch
+  multimodale Prompts genannt.
+- [Systemanweisungen](https://ai.google.dev/gemini-api/docs/text-generation?hl=de#system-instructions):
+  Mit Systemanweisungen können Sie das Verhalten des Modells entsprechend Ihren
+  spezifischen Anforderungen und Anwendungsfällen steuern.
+- [Sicherheitshinweise](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=de): Generative KI
+  Modelle geben manchmal unerwartete Ausgaben aus, z. B. Ausgaben, die ungenau, voreingenommen oder anstößig sind. Nachbearbeitung und menschliche Bewertung sind unerlässlich, um das Risiko von Schäden durch solche Ausgaben zu begrenzen.
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Feedback geben
 
-Son güncelleme tarihi: 2026-07-30 UTC.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Zuletzt aktualisiert: 2026-08-28 (UTC).
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]
+Haben Sie Feedback für uns?
+
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-08-28 (UTC)."],[],[]]

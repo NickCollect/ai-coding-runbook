@@ -1,44 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=tr
-fetched_at: 2026-08-24T02:34:29.066602+00:00
-title: "Gemini Live API ile canl\u0131 \u00e7eviri \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=fr
+fetched_at: 2026-08-31T06:39:09.330198+00:00
+title: "Traduction instantan\u00e9e avec l'API Gemini\u00a0Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Geri bildirim gönderin
+Envoyer des commentaires
 
-# Gemini Live API ile canlı çeviri
+# Traduction instantanée avec l'API Gemini Live
 
-Gemini Live API, [`gemini-3.5-live-translate-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=tr) modelini kullanarak 70'ten fazla dil arasında düşük gecikmeli, anlık sesli çeviri yapılmasını destekler. Live API'yi çeviri ayarlarıyla yapılandırarak sesi bir dilde yayınlayabilir ve çevrilmiş ses çıkışını başka bir dilde alabilirsiniz. Böylece, anlık ve sorunsuz bir şekilde sesli çeviri yapabilirsiniz.
+L'API Gemini Live est compatible avec la traduction vocale en temps réel et à faible latence entre plus de 70 langues à l'aide du [`gemini-3.5-live-translate-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=fr) modèle. En configurant l'API Live avec des paramètres de traduction, vous pouvez diffuser de l'audio dans une langue et recevoir une sortie audio traduite dans une autre langue, ce qui permet une traduction vocale en temps réel fluide.
 
-[Google AI Studio'da Anında Çeviri'yi deneyinmic](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=tr)
-[Örnek uygulamayı GitHub'dan klonlayıncode](https://github.com/google-gemini/gemini-live-api-examples)
-[Kodlama aracısı becerilerini kullanınterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=tr#gemini-live-api-dev)
+[Essayer la traduction instantanée dans Google AI Studiomic](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=fr)
+[Cloner l'exemple d'application depuis GitHubcode](https://github.com/google-gemini/gemini-live-api-examples)
+[Utiliser les compétences de l'agent de codageterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=fr#gemini-live-api-dev)
 
-## Canlı Müşteri Temsilcisi ve Canlı Çeviri
+## Agent en direct ou traduction instantanée
 
-Her ikisi de Live API'yi kullanırken Canlı Çeviri'nin zihinsel modeli, sohbet tarzında anlık temsilci etkileşimlerinden farklıdır.
+Bien que les deux utilisent l'API Live, le modèle mental de la traduction instantanée est différent des interactions conversationnelles en temps réel avec un agent.
 
-| Canlı Müşteri Temsilcisi | Canlı Çeviri |
+| Agent en direct | Traduction instantanée |
 | --- | --- |
-| **Model, asistan olarak hareket eder.** Dinler, akıl yürütür ve sizin adınıza işlem yapar. | **Model, çevirmen gibi davranır.** Gerçek zamanlı çeviri ardışık düzeni gibi çalışır. |
-| **Sıra tabanlı etkileşimler kullanır.** Duraklamalara, amaç algılamaya dayanır ve kesintileri yönetir. | **Sürekli akış işleme kullanır.** Konuşmacının konuşmasını beklemeden, konuşma sırasında çeviri yapar. |
-| **Araçları ve temsilcileri destekler.** İşlev çağrısı, Google Arama ve talimatlar için yerel destek. | **Yalnızca çeviriyi destekler.** Tamamen düşük gecikmeli çeviri; araçlar veya talimatlar desteklenmez. |
-| **Tamamen çok formatlı.** Metin, ses, video ve resim girişlerini destekler. | **Ses kısıtlanmış.** Sıkı anlık gecikme eşiklerini sağlamak için giriş yalnızca sesle sınırlıdır. |
-| **Ayrıntılı yapılandırma.** Üretim, konuşma, araçlar ve sistem talimatlarını kullanır. | **Basitleştirilmiş yapılandırma.** `target_language_code` ve `echo_target_language` gibi açma/kapatma düğmelerini ayarlayın. |
+| **Le modèle agit comme un assistant.** Il écoute, raisonne et effectue des actions en votre nom. | **Le modèle agit comme un interprète.** Il se comporte comme un pipeline de traduction en temps réel. |
+| **Utilise des interactions basées sur les tours de parole.** S'appuie sur les pauses, la détection d'intention et gère les interruptions. | **Utilise le traitement continu des flux.** Traduit pendant que l'orateur parle sans attendre son tour. |
+| **Compatible avec les outils et les agents.** Compatibilité native avec les appels de fonction, la recherche Google et les instructions. | **Compatible uniquement avec la traduction.** Traduction pure à faible latence, sans compatibilité avec les outils ni les instructions. |
+| **Entièrement multimodal.** Compatible avec les entrées de texte, audio, vidéo et image. | **Audio limité.** L'entrée est limitée à l'audio pour garantir des seuils de latence en temps réel stricts. |
+| **Configuration précise.** Utilise la génération, la parole, les outils et les instructions système. | **Configuration simplifiée.** Définissez `target_language_code` et des boutons à bascule comme `echo_target_language`. |
 
-## Başlayın
+## Premiers pas
 
-Aşağıdaki örneklerde, bir istemcinin nasıl başlatılacağı ve çeviri yapılandırmasıyla Live API'ye nasıl bağlanılacağı gösterilmektedir.
+Les exemples suivants montrent comment initialiser un client et se connecter à l'API Live avec une configuration de traduction.
 
 ### Python
 
@@ -185,15 +185,15 @@ websocket.onmessage = (event) => {
 };
 ```
 
-## Ses gönderme
+## Envoyer l'audio
 
-Çeviri için ses girişlerini yayınlamak üzere ham, little-endian, 16 bit PCM ses gönderirsiniz.
+Pour diffuser des entrées vocales à traduire, envoyez de l'audio PCM 16 bits brut, little-endian.
 
-- **Giriş ses biçimi**: 16 kHz'de (mono, little-endian) ham 16 bit PCM.
-- **Çıkış ses biçimi**: 24 kHz'de (mono, little-endian) ham 16 bit PCM.
-- **Yığın Boyutu ve Gecikme**: Sesleri 100 ms'lik yığınlar halinde gönderin.
+- **Format audio d'entrée** : PCM 16 bits brut à 16 kHz (mono, little-endian).
+- **Format audio de sortie** : PCM 16 bits brut à 24 kHz (mono, little-endian).
+- **Taille des blocs et latence** : envoyez l'audio par blocs de 100 ms.
 
-Aşağıdaki örneklerde, ses parçalarının oturuma nasıl gönderileceği gösterilmektedir.
+Les exemples suivants montrent comment envoyer des blocs audio à la session.
 
 ### Python
 
@@ -238,23 +238,23 @@ function sendAudioChunk(chunk) {
 }
 ```
 
-## Yapılandırma
+## Configuration
 
-Çeviriyi etkinleştirmek için oturum kurulumu sırasında `translationConfig` öğesini `generationConfig` içinde belirtmeniz gerekir.
+Pour activer la traduction, vous devez spécifier `translationConfig` dans `generationConfig` lors de la configuration de la session.
 
-### Kurulum mesajı yapılandırması
+### Configurer les messages de configuration
 
-`generationConfig`, transkriptleri etkinleştirmek için aşağıdaki alanları destekler:
+`generationConfig` accepte les champs suivants pour activer les transcriptions :
 
-- **`inputAudioTranscription`**: Mevcut olduğunda modelin, giriş sesinin metin transkriptlerini göndermesini sağlayan bir nesne.
-- **`outputAudioTranscription`**: Mevcut olduğunda modelin, çıkış (çevrilmiş) sesin metin transkriptlerini göndermesini sağlayan bir nesne.
+- **`inputAudioTranscription`**: objet qui, lorsqu'il est présent, permet au modèle d'envoyer des transcriptions textuelles de l'audio d'entrée.
+- **`outputAudioTranscription`**: objet qui, lorsqu'il est présent, permet au modèle d'envoyer des transcriptions textuelles de l'audio de sortie (traduit).
 
-`translationConfig` aşağıdaki alanları destekler:
+`translationConfig` accepte les champs suivants :
 
-- **`targetLanguageCode`**: Modelin çevirmesini istediğiniz dilin [BCP-47 dil kodu](#supported-languages) (ör. Lehçe için `"pl"`, İspanyolca için `"es"`). Varsayılan olarak `"en"` değerine ayarlanır.
-- **`echoTargetLanguage`**: Hedef dildeki giriş sesinin nasıl işleneceğini belirten bir boole. `true` olarak ayarlanırsa model, hedef dildeki giriş sesini tekrarlar. `false` olarak ayarlanırsa model, giriş konuşması zaten hedef dilde olduğunda sessiz kalır. Varsayılan olarak `false` değerine ayarlanır.
+- **`targetLanguageCode`** : le [code de langue BCP-47](#supported-languages) de la langue dans laquelle vous souhaitez que le modèle traduise (par exemple, `"pl"` pour le polonais, `"es"` pour l'espagnol). La valeur par défaut est `"en"`.
+- **`echoTargetLanguage`**: valeur booléenne indiquant comment gérer l'audio d'entrée qui est déjà dans la langue cible. Si la valeur est `true`, le modèle répète l'audio d'entrée qui est déjà dans la langue cible. Si la valeur est `false`, le modèle reste silencieux lorsque la parole d'entrée est déjà dans la langue cible. La valeur par défaut est `false`.
 
-Aşağıda, kurulum mesajı yapısı örneği verilmiştir:
+Voici un exemple de structure de message de configuration :
 
 ```
 "setup": {
@@ -273,19 +273,19 @@ Aşağıda, kurulum mesajı yapısı örneği verilmiştir:
 }
 ```
 
-## İstemci tarafı uygulamalarda kısa ömürlü jetonları kullanma
+## Utiliser des jetons éphémères dans les applications côté client
 
-İstemciden sunucuya uygulamalarda, API anahtarınızı açığa çıkarmamak için [kısa ömürlü jetonlar](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=tr) (şu anda `v1beta` aşamasında) kullanabilirsiniz.
+Pour les applications client-serveur, vous pouvez utiliser [des jetons éphémères](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=fr) (actuellement en `v1beta`) pour éviter d'exposer votre clé API.
 
-Canlı Çeviri ile geçici jetonlar kullanılırken:
+Lorsque vous utilisez des jetons éphémères avec la traduction instantanée :
 
-1. `v1beta` uç noktasını kullanmanız gerekir.
-2. **Kilitleme yapılandırması:** Varsayılan olarak, sunucunuzdaki jeton oluşturma kısıtlamalarında `translationConfig` değerini belirtmeniz gerekir. Bu sayede çeviri yapılandırması kilitlenir ve istemci tarafından değiştirilemez.
-3. **Yapılandırmanın kilidini açma:** `translationConfig` değerini istemci tarafında ayarlayabilmek istiyorsanız (ör. kullanıcının kendi hedef dilini seçmesine izin vermek için) bu değeri jeton oluşturma isteğinden çıkarmanız ve bunun yerine `"lock_additional_fields": []` değerini ayarlamanız gerekir. Bu işlem, `translationConfig` öğesinin istemci tarafında ayarlanabilmesini sağlar.
+1. Vous devez utiliser le point de terminaison `v1beta`.
+2. **Verrouillage de la configuration** : par défaut, vous devez spécifier `translationConfig` dans les contraintes de création de jeton sur votre serveur. Cela garantit que la configuration de traduction est verrouillée et ne peut pas être falsifiée par le client.
+3. **Déverrouillage de la configuration** : si vous souhaitez pouvoir définir `translationConfig` côté client (par exemple, pour permettre à un utilisateur de choisir sa propre langue cible), vous devez l'omettre de la requête de création de jeton et définir `"lock_additional_fields": []` à la place. Cela déverrouillera `translationConfig` pour qu'il soit défini côté client.
 
-### Kısıtlanmış geçici jeton oluşturma
+### Créer un jeton éphémère contraint
 
-Aşağıdaki örneklerde, çeviri kısıtlamaları içeren geçici jetonun nasıl oluşturulacağı gösterilmektedir.
+Les exemples suivants montrent comment créer un jeton éphémère avec des contraintes de traduction.
 
 ### Python
 
@@ -366,74 +366,74 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/auth_tokens" \
   }'
 ```
 
-## Sınırlamalar
+## Limites
 
-- **Giriş Biçimleri**: Çeviri için yalnızca ses girişi desteklenir. Metin girişi desteklenmez.
-- **Ses Çoğaltma**: Ses çoğaltma tutarsız olabilir. Sesler, uzun aralardan sonra değişebilir, konuşmanın başlangıcına göre yanlış cinsiyet atanabilir veya hızlı çok konuşmacılı sohbetlerde tek bir seste takılabilir.
-- **Dil algılama**: Dil algılama, yoğun aksanlar, benzer diller (ör. İspanyolca ve Portekizce) veya hızlı dil geçişleri konusunda zorlanır. **Not:** Bu durum yalnızca giriş transkriptini etkiler. Dil kodları ve nihai çeviri doğru olmalıdır.
-- **Arka plan sesi**: Model, temiz konuşma üretmek için gürültüyü ve müziği filtreleyecek şekilde tasarlanmıştır ancak tüm arka plan sesleri göz ardı edilmeyebilir.
-- **Hedef Dili Tekrar Et**: `echoTargetLanguage: true` seçildiğinde, giriş sesi zaten hedef dildeyse arka plan gürültüsü veya müzik, çevrilen seste yapaylıklar oluşturabilir.
+- **Modalités d'entrée** : seule l'entrée audio est acceptée pour la traduction. L'entrée de texte n'est pas acceptée.
+- **Réplication vocale** : la réplication vocale peut être incohérente. Les voix peuvent changer après de longues pauses, attribuer le mauvais genre en fonction du début de la parole ou rester bloquées sur une seule voix lors de conversations rapides entre plusieurs personnes.
+- **Détection de la langue** : la détection de la langue a du mal avec les accents prononcés, les langues similaires (par exemple, l'espagnol et le portugolais) ou les changements de langue rapides. **Remarque** : Cela ne devrait avoir d'impact que sur la transcription d'entrée. Les codes de langue et la traduction finale doivent toujours être précis.
+- **Audio de fond** : le modèle est conçu pour filtrer le bruit et la musique afin de produire une parole claire, mais il est possible que l'audio de fond ne soit pas entièrement ignoré.
+- **Écho de la langue cible** : lorsque `echoTargetLanguage: true`, le bruit de fond ou la musique peuvent introduire des artefacts dans l'audio traduit lorsque l'audio d'entrée est déjà dans la langue cible.
 
-## Desteklenen diller
+## Langues disponibles
 
-Canlı Çeviri için aşağıdaki diller desteklenir.
+Les langues suivantes sont disponibles pour la traduction instantanée.
 
-| Dil | BCP-47 Kodu | Dil | BCP-47 Kodu |
+| Langue | Code BCP-47 | Langue | Code BCP-47 |
 | --- | --- | --- | --- |
-| Afrikaanca | af | Kazakça | kk |
-| Akan | ak | Kmerce | km |
-| Arnavutça | sq | Ruandaca | rw |
-| Amharca | öö | Korece | ko |
-| Arapça | ar | Laoca | lo |
-| Ermenice | hy | Letonca | lv |
-| Azerbaycanca | az | Litvanca | lt |
-| Baskça | eu | Makedonca | mk |
-| Belarusça | be | Malayca | ms |
+| Afrikaans | af | Kazakh | kk |
+| Akan | ak | Khmer | km |
+| Albanais | sq | Kinyarwanda | rw |
+| Amharique | am | Coréen | ko |
+| Arabe | ar | Laotien | lo |
+| Arménien | hy | Letton | lv |
+| Azéri | az | Lituanien | lt |
+| Basque | eu | Macédonien | mk |
+| Biélorusse | be | Malaisien | ms |
 | Bengali | bn | Malayalam | ml |
-| Bulgarca | bg | Marathi | mr |
-| Birmanca (Myanmar) | my | Moğolca | mn |
-| Katalanca | ca | Nepalce | ne |
-| Çince (Basitleştirilmiş) | zh-Hans | Norwegian | no, nb |
-| Çince (Geleneksel) | zh-Hant | Farsça | fa |
-| Hırvatça | s | Lehçe | pl |
-| Çekya | cs | Portekizce (Brezilya) | pt-BR |
-| Danca | da | Portekizce (Portekiz) | pt-PT |
-| Felemenkçe | nl | Punjabi | pa |
-| İngilizce | en | Rumence | ro |
-| Estonca | et | Rusça | ru |
-| Filipince | fil | Sırpça | sr |
-| Finnish | fi | Sindice | sd |
-| Fransızca | fr | Seylanca | si |
-| Galiçyaca | gl | Slovakça | sk |
-| Gürcüce | ka | Slovence | sl |
-| Almanca | de | İspanyolca | es |
-| Greek | el | Sundaca | su |
-| Güceratça | gu | Swahili | sw |
-| Hausaca | ha | İsveççe | sv |
-| İbranice | o | Tamilce | ta |
-| Hindi | hi | Telugu dili | te |
-| Macarca | hu | Tayca | th |
-| İzlandaca | is | Türkçe | tr |
-| Endonezce | id | Ukraynaca | uk |
-| Italian | it | Urduca | UR |
-| Japonca | ja | Özbekçe | uz |
-| Cavaca | jv | Vietnamca | vi |
-| Kannada | kn | Zulu | zu |
+| Bulgare | bg | Marathi | mr |
+| Birman (Myanmar) | my | Mongol | mn |
+| Catalan | ca | Népalais | ne |
+| Chinois (simplifié) | zh-Hans | Norvégien | no, nb |
+| Chinois (traditionnel) | zh-Hant | Persan | fa |
+| Croate | hr | Polonais | pl |
+| Tchèque | cs | Portugais (Brésil) | pt-BR |
+| Danois | da | Portugais (Portugal) | pt-PT |
+| Néerlandais | nl | Panjabi | pa |
+| Anglais | en | Roumain | ro |
+| Estonien | et | Russe | ru |
+| Tagalog | fil | Serbe | sr |
+| Finnois | fi | Sindhî | sd |
+| Français | fr | Cingalais | si |
+| Galicien | gl | Slovaque | sk |
+| Géorgien | ka | Slovène | sl |
+| Allemand | de | Espagnol | es |
+| Grec | el | Soundanais | su |
+| Gujarati | gu | Swahili | sw |
+| Haoussa | ha | Suédois | sv |
+| Hébreu | he | Tamoul | ta |
+| Hindi | hi | Telugu | te |
+| Hongrois | hu | Thaï | th |
+| Islandais | is | Turc | tr |
+| Indonésien | id | Ukrainien | uk |
+| Italien | it | Urdu | ur |
+| Japonais | ja | Ouzbek | uz |
+| Javanais | jv | Vietnamien | vi |
+| Kannada | kn | Zoulou | zu |
 
-## Sırada ne var?
+## Étape suivante
 
-- Live API [Özellikleri](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=tr) kılavuzunun tamamını okuyun.
-- [SDK'yı kullanmaya başlama](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=tr) kılavuzunu okuyun.
-- [WebSocket'leri kullanmaya başlama](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=tr) kılavuzunu okuyun.
-- İstemciden sunucuya uygulamalarda güvenli kimlik doğrulama için [Geçici jetonlar](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=tr) kılavuzunu okuyun.
-- GitHub'dan [Live API examples](https://github.com/google-gemini/gemini-live-api-examples)'ı (Canlı API örnekleri) kopyalayın.
+- Consultez le guide complet sur les fonctionnalités de l'API Live [Capabilities](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=fr).
+- Consultez le guide [Premiers pas avec le SDK](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=fr).
+- Consultez le guide [Premiers pas avec WebSockets](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=fr).
+- Consultez le guide [Jetons éphémères](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=fr) pour une authentification sécurisée dans les applications client-serveur.
+- Clonez les [exemples d'API Live](https://github.com/google-gemini/gemini-live-api-examples) depuis GitHub.
 
-Geri bildirim gönderin
+Envoyer des commentaires
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Son güncelleme tarihi: 2026-07-23 UTC.
+Dernière mise à jour le 2026/07/23 (UTC).
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-23 UTC."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/23 (UTC)."],[],[]]

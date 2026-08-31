@@ -1,46 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/api-errors?hl=ko
-fetched_at: 2026-08-24T02:31:27.622526+00:00
-title: "API \uc624\ub958 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/api-errors?hl=th
+fetched_at: 2026-08-31T06:43:02.378530+00:00
+title: "\u0e02\u0e49\u0e2d\u0e1c\u0e34\u0e14\u0e1e\u0e25\u0e32\u0e14\u0e02\u0e2d\u0e07 API \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-의견 보내기
+ส่งความคิดเห็น
 
-# API 오류
+# ข้อผิดพลาดของ API
 
-이 페이지에서는 `GenerateContent` API에서 반환되는 백엔드 오류 코드에 대한 참조를 제공하고, gRPC 오류 응답 형식을 설명하며, 문제 해결 단계를 제공합니다.
+หน้านี้แสดงข้อมูลอ้างอิงสำหรับรหัสข้อผิดพลาดของแบ็กเอนด์ที่ API `GenerateContent` แสดงผล อธิบายรูปแบบการตอบกลับข้อผิดพลาดของ gRPC และระบุขั้นตอนการแก้ปัญหา
 
-## HTTP 오류 코드
+## รหัสข้อผิดพลาด HTTP
 
-다음 표에는 일반적인 백엔드 오류 코드, 원인에 대한 설명, 권장되는 해결 방법이 나와 있습니다.
+ตารางต่อไปนี้แสดงรหัสข้อผิดพลาดของแบ็กเอนด์ที่พบบ่อย คำอธิบายสาเหตุ และวิธีแก้ปัญหาที่แนะนำ
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **HTTP 코드** | **상태** | **설명** | **예** | **솔루션** |
-| 400 | INVALID\_ARGUMENT | 요청 본문의 형식이 잘못되었습니다. | 요청에 오타가 있거나 필수 입력란이 누락되었습니다. | 요청 형식, 예, 지원되는 버전은 [API 참조](https://ai.google.dev/api?hl=ko)를 확인하세요. 이전 엔드포인트에서 최신 API 버전의 기능을 사용하면 오류가 발생할 수 있습니다. |
-| 400 | FAILED\_PRECONDITION | 거주 국가에서는 Gemini API 무료 등급을 이용할 수 없습니다. Google AI Studio에서 프로젝트에 결제를 사용 설정하세요. | 무료 등급이 지원되지 않는 리전에서 요청을 하고 있으며 Google AI Studio에서 프로젝트에 결제를 사용 설정하지 않았습니다. | Gemini API를 사용하려면 [Google AI Studio](https://aistudio.google.com/apikey?hl=ko)를 사용하여 유료 요금제를 설정해야 합니다. |
-| 403 | PERMISSION\_DENIED | API 키에 필요한 권한이 없습니다. | [잘못된 API 키를 사용하고 있습니다. 적절한 인증을 거치지 않고 미세 조정된 모델을 사용하려고 합니다.](https://ai.google.dev/gemini-api/docs/model-tuning?hl=ko) | API 키가 설정되어 있고 올바른 액세스 권한이 있는지 확인합니다. 미세 조정된 모델을 사용하려면 적절한 인증을 거쳐야 합니다. |
-| 404 | NOT\_FOUND | 요청한 리소스를 찾을 수 없습니다. | 요청에서 참조된 이미지, 오디오 또는 동영상 파일을 찾을 수 없습니다. | 요청의 모든 매개변수가 API 버전에 유효한지 확인합니다. |
-| 429 | RESOURCE\_EXHAUSTED | API의 비율 제한 (RPM, TPM, RPD, 지출 등) 중 하나를 초과했습니다. | 요청을 너무 많이 보내거나, 토큰을 너무 많이 사용하거나, 계정의 결제 내역 및 등급에 대한 지출 기반 한도를 초과하고 있습니다. | 모델의 [비율 제한](https://ai.google.dev/gemini-api/docs/rate-limits?hl=ko) 내에 있는지 확인합니다. 잠시 기다렸다가 다시 시도합니다. 요청의 비율 또는 크기를 줄입니다. [필요한 경우 비율 제한 상향 조정을 요청합니다.](https://ai.google.dev/gemini-api/docs/rate-limits?hl=ko#request-rate-limit-increase) |
-| 499 | CANCELLED | 작업이 취소되었습니다. 대개 호출자에 의해 취소됩니다. | API가 응답을 완료하기 전에 클라이언트가 연결을 닫았습니다. | 클라이언트 또는 네트워크 인프라가 클라이언트 측 제한 시간으로 인해 연결을 너무 일찍 닫는지 확인합니다. |
-| 500 | 내부 | Google 측에서 예기치 않은 오류가 발생했습니다. | 입력 컨텍스트가 너무 깁니다. | [Gemini API 상태 페이지](https://aistudio.google.com/status?hl=ko)에서 진행 중인 인시던트를 확인합니다. 입력 컨텍스트를 줄이거나 다른 모델로 일시적으로 전환 (예: Gemini 2.5 Pro에서 Gemini 2.5 Flash로)하여 작동하는지 확인합니다. 또는 잠시 기다렸다가 요청을 다시 시도합니다. 다시 시도한 후에도 문제가 지속되면 Google AI Studio의 **의견 보내기** 버튼을 사용하여 신고해 주세요. |
-| 503 | 현재 구매할 수 없음 | 서비스가 일시적으로 과부하되거나 다운되었을 수 있습니다. | 서비스의 용량이 일시적으로 부족합니다. | [Gemini API 상태 페이지](https://aistudio.google.com/status?hl=ko)에서 진행 중인 인시던트를 확인합니다. 다른 모델로 일시적으로 전환 (예: Gemini 2.5 Pro에서 Gemini 2.5 Flash로)하여 작동하는지 확인합니다. 또는 잠시 기다렸다가 요청을 다시 시도합니다. 다시 시도한 후에도 문제가 지속되면 Google AI Studio의 **의견 보내기** 버튼을 사용하여 신고해 주세요. |
-| 504 | DEADLINE\_EXCEEDED | 서비스가 기한 내에 처리를 완료할 수 없습니다. | 프롬프트 (또는 컨텍스트)가 너무 커서 제때 처리할 수 없습니다. | 이 오류를 방지하려면 클라이언트 요청에서 '제한 시간'을 더 크게 설정하세요. |
+| **รหัส HTTP** | **สถานะ** | **คำอธิบาย** | **ตัวอย่าง** | **Solution** |
+| 400 | INVALID\_ARGUMENT | เนื้อหาของคำขอมีรูปแบบไม่ถูกต้อง | คำขอของคุณมีการพิมพ์ผิดหรือไม่มีข้อมูลในช่องที่ต้องกรอก | ตรวจสอบ[เอกสารอ้างอิง API](https://ai.google.dev/api?hl=th) เพื่อดูรูปแบบคำขอ ตัวอย่าง และเวอร์ชันที่รองรับ การใช้ฟีเจอร์จาก API เวอร์ชันใหม่กว่ากับปลายทางเวอร์ชันเก่าอาจทำให้เกิดข้อผิดพลาด |
+| 400 | FAILED\_PRECONDITION | Gemini API ระดับฟรีไม่พร้อมให้บริการในประเทศของคุณ โปรดเปิดใช้การเรียกเก็บเงินในโปรเจ็กต์ของคุณใน Google AI Studio | คุณส่งคำขอในภูมิภาคที่ไม่รองรับระดับฟรี และคุณไม่ได้เปิดใช้การเรียกเก็บเงินในโปรเจ็กต์ของคุณใน Google AI Studio | หากต้องการใช้ Gemini API คุณจะต้องตั้งค่าแพ็กเกจแบบชำระเงินโดยใช้ [Google AI Studio](https://aistudio.google.com/apikey?hl=th) |
+| 403 | PERMISSION\_DENIED | คีย์ API ของคุณไม่มีสิทธิ์ที่จำเป็น | คุณใช้คีย์ API ที่ไม่ถูกต้อง หรือพยายามใช้โมเดลที่ปรับแต่งแล้วโดยไม่ได้ผ่านการตรวจสอบสิทธิ์ที่[เหมาะสม](https://ai.google.dev/gemini-api/docs/model-tuning?hl=th) | ตรวจสอบว่าได้ตั้งค่าคีย์ API และคีย์ API มีสิทธิ์เข้าถึงที่ถูกต้อง และตรวจสอบว่าได้ผ่านการตรวจสอบสิทธิ์ที่เหมาะสมเพื่อใช้โมเดลที่ปรับแต่งแล้ว |
+| 404 | NOT\_FOUND | ไม่พบทรัพยากรที่ขอ | ไม่พบไฟล์รูปภาพ เสียง หรือวิดีโอที่อ้างอิงในคำขอ | ตรวจสอบว่าพารามิเตอร์ทั้งหมดในคำขอใช้ได้กับ API เวอร์ชันของคุณ |
+| 429 | RESOURCE\_EXHAUSTED | คุณใช้เกินขีดจำกัดอัตราอย่างน้อย 1 รายการของ API (RPM, TPM, RPD, ค่าใช้จ่าย ฯลฯ) | คุณส่งคำขอมากเกินไป ใช้โทเค็นมากเกินไป หรือใช้เกินขีดจำกัดตามค่าใช้จ่ายสำหรับประวัติการเรียกเก็บเงินและระดับของบัญชี | ตรวจสอบว่าคุณอยู่ภายใน[ขีดจำกัดอัตรา](https://ai.google.dev/gemini-api/docs/rate-limits?hl=th)ของโมเดล รอสักครู่แล้วลองอีกครั้ง ลดอัตราหรือขนาดของคำขอ [ขอเพิ่มขีดจำกัดอัตรา](https://ai.google.dev/gemini-api/docs/rate-limits?hl=th#request-rate-limit-increase) หากจำเป็น |
+| 499 | CANCELLED | การดำเนินการถูกยกเลิก ซึ่งโดยปกติแล้วจะเป็นผู้เรียก | ไคลเอ็นต์ปิดการเชื่อมต่อก่อนที่ API จะตอบกลับเสร็จ | ตรวจสอบว่าโครงสร้างพื้นฐานของไคลเอ็นต์หรือเครือข่ายปิดการเชื่อมต่อก่อนเวลาอันควร (เช่น เนื่องจากไทม์เอาต์ฝั่งไคลเอ็นต์) |
+| 500 | ภายใน | เกิดข้อผิดพลาดที่ไม่คาดคิดจากทางฝั่ง Google | บริบทอินพุตยาวเกินไป | ตรวจสอบ[หน้าสถานะ Gemini API](https://aistudio.google.com/status?hl=th) เพื่อดูเหตุการณ์ที่เกิดขึ้น ลดบริบทอินพุตหรือเปลี่ยนไปใช้โมเดลอื่นชั่วคราว (เช่น จาก Gemini 2.5 Pro เป็น Gemini 2.5 Flash) แล้วดูว่าได้ผลหรือไม่ หรือรอสักครู่แล้วลองส่งคำขออีกครั้ง หากปัญหายังคงอยู่หลังจากลองอีกครั้ง โปรดรายงานปัญหาโดยใช้ปุ่ม**ส่งความคิดเห็น** ใน Google AI Studio |
+| 503 | UNAVAILABLE | บริการอาจทำงานหนักเกินไปหรือหยุดทำงานชั่วคราว | บริการมีขีดความสามารถไม่เพียงพอชั่วคราว | ตรวจสอบ[หน้าสถานะ Gemini API](https://aistudio.google.com/status?hl=th) เพื่อดูเหตุการณ์ที่เกิดขึ้น เปลี่ยนไปใช้โมเดลอื่นชั่วคราว (เช่น จาก Gemini 2.5 Pro เป็น Gemini 2.5 Flash) แล้วดูว่าได้ผลหรือไม่ หรือรอสักครู่แล้วลองส่งคำขออีกครั้ง หากปัญหายังคงอยู่หลังจากลองอีกครั้ง โปรดรายงานปัญหาโดยใช้ปุ่ม**ส่งความคิดเห็น** ใน Google AI Studio |
+| 504 | DEADLINE\_EXCEEDED | บริการไม่สามารถประมวลผลให้เสร็จสิ้นภายในกำหนดเวลา | พรอมต์ (หรือบริบท) มีขนาดใหญ่เกินกว่าจะประมวลผลได้ทันเวลา | ตั้งค่า "ไทม์เอาต์" ที่ใหญ่ขึ้นในคำขอของไคลเอ็นต์เพื่อหลีกเลี่ยงข้อผิดพลาดนี้ |
 
-## 오류 응답 형식
+## รูปแบบการตอบกลับข้อผิดพลาด
 
-`GenerateContent` 요청이 실패하면 API는 HTTP 상태 코드 (예: `400 Bad Request`, `403 Forbidden`, `429 Too Many Requests`)를 설정하고 gRPC 상태 세부정보가 포함된 JSON 응답 본문을 반환합니다.
+เมื่อคำขอ `GenerateContent` ล้มเหลว API จะตั้งค่ารหัสสถานะ HTTP (เช่น `400 Bad Request`, `403 Forbidden` หรือ `429 Too Many Requests`) และแสดงผลเนื้อหาการตอบกลับ JSON ที่มีรายละเอียดสถานะ gRPC ดังนี้
 
 ```
 {
@@ -67,24 +67,24 @@ Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 �
 }
 ```
 
-| 필드 | 유형 | 설명 |
+| ช่อง | ประเภท | คำอธิบาย |
 | --- | --- | --- |
-| `code` | 정수 | HTTP 상태 코드 |
-| `message` | 문자열 | 사람이 읽을 수 있는 오류 설명 |
-| `status` | 문자열 | `SCREAMING_CASE`의 gRPC 상태 코드 |
-| `details` | 배열 | `ErrorInfo` 또는 `LocalizedMessage`와 같은 추가 오류 컨텍스트 |
+| `code` | จำนวนเต็ม | รหัสสถานะ HTTP |
+| `message` | สตริง | คำอธิบายข้อผิดพลาดที่มนุษย์อ่านได้ |
+| `status` | สตริง | รหัสสถานะ gRPC ใน `SCREAMING_CASE` |
+| `details` | อาร์เรย์ | บริบทข้อผิดพลาดเพิ่มเติม เช่น `ErrorInfo` หรือ `LocalizedMessage` |
 
-## 다음 단계
+## ขั้นตอนถัดไป
 
-- [API 문제 해결](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=ko): 일반적인 문제 및 오류 시나리오를 해결합니다.
-- [비율 제한](https://ai.google.dev/gemini-api/docs/rate-limits?hl=ko): 요청 한도 및 할당량 처리에 대해 알아봅니다.
+- [การแก้ปัญหา API](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=th): แก้ปัญหาและสถานการณ์ข้อผิดพลาดที่พบบ่อย
+- [ขีดจำกัดอัตรา](https://ai.google.dev/gemini-api/docs/rate-limits?hl=th): ดูข้อมูลเกี่ยวกับขีดจำกัดคำขอและการจัดการโควต้า
 
-의견 보내기
+ส่งความคิดเห็น
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-최종 업데이트: 2026-07-30(UTC)
+อัปเดตล่าสุด 2026-07-30 UTC
 
-의견을 전달하고 싶나요?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-30(UTC)"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-30 UTC"],[],[]]

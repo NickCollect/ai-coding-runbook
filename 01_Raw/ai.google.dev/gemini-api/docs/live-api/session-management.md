@@ -1,48 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=pt-BR
-fetched_at: 2026-08-24T02:33:48.357810+00:00
-title: "Gerenciamento de sess\u00f5es com a API Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=hi
+fetched_at: 2026-08-31T06:38:41.903221+00:00
+title: "Live API \u0915\u0940 \u092e\u0926\u0926 \u0938\u0947 \u0938\u0947\u0936\u0928 \u092e\u0948\u0928\u0947\u091c \u0915\u0930\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Envie comentários
+सुझाव भेजें
 
-# Gerenciamento de sessões com a API Live
+# Live API की मदद से सेशन मैनेज करना
 
-Na API Live, uma sessão se refere a uma conexão
-persistente em que a entrada e a saída são transmitidas continuamente pela mesma
-conexão. Leia mais sobre [como ela funciona](https://ai.google.dev/gemini-api/docs/live?hl=pt-br).
-Esse design de sessão exclusivo permite baixa latência e oferece suporte a recursos exclusivos, mas
-também pode apresentar desafios, como limites de tempo de sessão e encerramento antecipado.
-Este guia aborda estratégias para superar os desafios de gerenciamento de sessões
-que podem surgir ao usar a API Live.
+लाइव एपीआई में, सेशन का मतलब है ऐसा कनेक्शन जो लगातार बना रहता है. इसमें, एक ही कनेक्शन पर इनपुट और आउटपुट की स्ट्रीमिंग लगातार होती रहती है. इस बारे में ज़्यादा जानें कि [यह कैसे काम करता है](https://ai.google.dev/gemini-api/docs/live?hl=hi).
+सेशन के इस यूनीक डिज़ाइन की वजह से, कम समय में डेटा ट्रांसफ़र किया जा सकता है. साथ ही, इसमें यूनीक सुविधाएं भी मिलती हैं. हालांकि, इससे कुछ समस्याएं भी आ सकती हैं. जैसे, सेशन की समयसीमा तय होना और सेशन का समय से पहले खत्म हो जाना.
+इस गाइड में, सेशन के मैनेजमेंट से जुड़ी उन समस्याओं को हल करने की रणनीतियों के बारे में बताया गया है जो Live API का इस्तेमाल करते समय आ सकती हैं.
 
-## Ciclo de vida da sessão
+## सेशन की समयसीमा
 
-Sem compressão, as sessões somente de áudio são limitadas a 15 minutos, e as sessões de áudio e vídeo são limitadas a 2 minutos. Exceder esses limites
-encerra a sessão (e, portanto, a conexão), mas é possível usar a [compressão da janela de contexto](#context-window-compression) para estender as sessões por
-um período ilimitado.
+कंप्रेशन के बिना, सिर्फ़ ऑडियो वाले सेशन 15 मिनट तक और ऑडियो-वीडियो वाले सेशन दो मिनट तक ही चल सकते हैं. इन सीमाओं से ज़्यादा समय तक सेशन चलाने पर
+सेशन खत्म हो जाएगा. साथ ही, कनेक्शन भी खत्म हो जाएगा. हालांकि,
+[कॉन्टेक्स्ट विंडो कंप्रेशन](#context-window-compression) का इस्तेमाल करके,
+सेशन को अनलिमिटेड समय तक चलाया जा सकता है.
 
-A vida útil de uma conexão também é limitada a cerca de 10 minutos. Quando a conexão termina, a sessão também é encerrada. Nesse caso, é possível
-configurar uma única sessão para ficar ativa em várias conexões usando a
-[retomada de sessão](#session-resumption).
-Você também vai receber uma [mensagem GoAway](#goaway-message) antes do
-término da conexão, permitindo que você tome outras medidas.
+कनेक्शन की समयसीमा भी सीमित होती है. यह करीब 10 मिनट तक ही चल सकता है. कनेक्शन खत्म होने पर, सेशन भी खत्म हो जाता है. [ऐसे में, सेशन को फिर से शुरू करने की सुविधा का इस्तेमाल करके, एक सेशन को कई कनेक्शन पर चालू रखा जा सकता है.](#session-resumption)
+कनेक्शन खत्म होने से पहले, आपको [GoAway मैसेज](#goaway-message) भी मिलेगा.
+इससे आपको आगे की कार्रवाई करने में मदद मिलेगी.
 
-## Compactação da janela de contexto
+## कॉन्टेक्स्ट विंडो कंप्रेशन
 
-Para ativar sessões mais longas e evitar o encerramento abrupto da conexão, é possível ativar a compactação da janela de contexto definindo o campo [contextWindowCompression](https://ai.google.dev/api/live?hl=pt-br#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression) como parte da configuração da sessão.
+सेशन को ज़्यादा समय तक चलाने और कनेक्शन के अचानक खत्म होने से बचने के लिए, सेशन के कॉन्फ़िगरेशन के हिस्से के तौर पर,
+[contextWindowCompression](https://ai.google.dev/api/live?hl=hi#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression)
+फ़ील्ड सेट करके, कॉन्टेक्स्ट विंडो कंप्रेशन की सुविधा चालू की जा सकती है.
 
-Em [ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=pt-br#contextwindowcompressionconfig), é possível configurar um [mecanismo de janela deslizante](https://ai.google.dev/api/live?hl=pt-br#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window) e o [número de tokens](https://ai.google.dev/api/live?hl=pt-br#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens) que aciona a compactação.
+[ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=hi#contextwindowcompressionconfig) में, [स्लाइडिंग-विंडो मैकेनिज़्म](https://ai.google.dev/api/live?hl=hi#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window)
+और [टोकन की संख्या](https://ai.google.dev/api/live?hl=hi#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens)
+को कॉन्फ़िगर किया जा सकता है. इससे कंप्रेशन ट्रिगर होता है.
 
 ### Python
 
@@ -69,15 +68,19 @@ const config = {
 };
 ```
 
-## Retomada da sessão
+## सेशन को फिर से शुरू करना
 
-Para evitar o encerramento da sessão quando o servidor redefine periodicamente a conexão
-WebSocket, configure o campo [sessionResumption](https://ai.google.dev/api/live?hl=pt-br#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption)
-na [configuração de configuração](https://ai.google.dev/api/live?hl=pt-br#BidiGenerateContentSetup).
+सर्वर के समय-समय पर WebSocket
+कनेक्शन रीसेट करने पर, सेशन को खत्म होने से रोकने के लिए, [sessionResumption](https://ai.google.dev/api/live?hl=hi#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption)
+फ़ील्ड को [सेटअप कॉन्फ़िगरेशन](https://ai.google.dev/api/live?hl=hi#BidiGenerateContentSetup) में कॉन्फ़िगर करें.
 
-Ao transmitir essa configuração, o servidor envia mensagens [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=pt-br#SessionResumptionUpdate), que podem ser usadas para retomar a sessão transmitindo o último token de retomada como o [`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=pt-br#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle) da conexão subsequente.
+इस कॉन्फ़िगरेशन को पास करने पर,
+सर्वर [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=hi#SessionResumptionUpdate)
+मैसेज भेजता है. इसका इस्तेमाल, अगले कनेक्शन के [`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=hi#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle)
+के तौर पर, पिछले रेज़्युमशन
+टोकन को पास करके, सेशन को फिर से शुरू करने के लिए किया जा सकता है.
 
-Os tokens de retomada são válidos por duas horas após o término das últimas sessões.
+रेज़्युमशन टोकन, पिछले सेशन के खत्म होने के दो घंटे बाद तक मान्य होते हैं.
 
 ### Python
 
@@ -212,10 +215,10 @@ async function main() {
 main();
 ```
 
-## Receber uma mensagem antes de a sessão ser desconectada
+## सेशन डिसकनेक्ट होने से पहले मैसेज पाना
 
-O servidor envia uma mensagem [GoAway](https://ai.google.dev/api/live?hl=pt-br#GoAway) que indica que a conexão
-atual será encerrada em breve. Essa mensagem inclui o [timeLeft](https://ai.google.dev/api/live?hl=pt-br#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left), que indica o tempo restante e permite que você tome outras medidas antes que a conexão seja encerrada como ABORTED.
+सर्वर एक [GoAway](https://ai.google.dev/api/live?hl=hi#GoAway) मैसेज भेजता है. इससे पता चलता है कि मौजूदा
+कनेक्शन जल्द ही खत्म हो जाएगा. इस मैसेज में [timeLeft](https://ai.google.dev/api/live?hl=hi#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left) शामिल होता है. इससे पता चलता है कि कनेक्शन खत्म होने में कितना समय बचा है. साथ ही, इससे आपको कनेक्शन के ABORTED के तौर पर खत्म होने से पहले, आगे की कार्रवाई करने में मदद मिलती है.
 
 ### Python
 
@@ -238,10 +241,10 @@ for (const turn of turns) {
 }
 ```
 
-## Receber uma mensagem quando a geração for concluída
+## जनरेशन पूरा होने पर मैसेज पाना
 
-O servidor envia uma mensagem [generationComplete](https://ai.google.dev/api/live?hl=pt-br#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete)
-que indica que o modelo terminou de gerar a resposta.
+सर्वर एक [generationComplete](https://ai.google.dev/api/live?hl=hi#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete)
+मैसेज भेजता है. इससे पता चलता है कि मॉडल ने जवाब जनरेट कर लिया है.
 
 ### Python
 
@@ -263,19 +266,18 @@ for (const turn of turns) {
 }
 ```
 
-## A seguir
+## आगे क्या करना है
 
-Confira mais maneiras de trabalhar com a API Live no guia completo de
-[Recursos](https://ai.google.dev/gemini-api/docs/live?hl=pt-br),
-na página [Uso de ferramentas](https://ai.google.dev/gemini-api/docs/live-tools?hl=pt-br) ou no
-[Cookbook da API Live](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=pt-br).
+लाइव एपीआई के साथ काम करने के अन्य तरीकों के बारे में जानने के लिए, सुविधाओं की पूरी
+[गाइड](https://ai.google.dev/gemini-api/docs/live?hl=hi), टूल के [इस्तेमाल वाला](https://ai.google.dev/gemini-api/docs/live-tools?hl=hi) पेज या
+[Live API कुकबुक](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=hi) देखें.
 
-Envie comentários
+सुझाव भेजें
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Última atualização 2026-06-01 UTC.
+आखिरी बार 2026-06-01 (UTC) को अपडेट किया गया.
 
-Quer enviar seu feedback?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-01 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-06-01 (UTC) को अपडेट किया गया."],[],[]]

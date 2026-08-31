@@ -1,61 +1,61 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=zh-TW
-fetched_at: 2026-08-24T02:28:57.827090+00:00
-title: "Gemini 3.1 Flash Lite \u6620\u50cf\u6a94 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=vi
+fetched_at: 2026-08-31T06:43:32.264971+00:00
+title: "Aware AI Gemini 3.1 Flash Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-提供意見
+Gửi ý kiến phản hồi
 
-# Gemini 3.1 Flash Lite 映像檔
+# Aware AI Gemini 3.1 Flash Lite
 
-**Nano Banana 2 Lite** 是圖像生成系列模型中的效率專家，可提供超低延遲，並以具成本效益的方式生成及編輯圖像。這個模型以低於 2 秒的延遲為目標，並大幅降低 TPU 運算成本，可支援大量互動式開發人員用途和即時消費者應用程式。
+**Nano Banana 2 Lite** được thiết kế để trở thành chuyên gia hiệu quả trong nhóm mô hình tạo hình ảnh, mang đến độ trễ cực thấp cũng như khả năng tạo và chỉnh sửa hình ảnh tiết kiệm chi phí. Bằng cách nhắm đến độ trễ dưới 2 giây và giảm đáng kể chi phí điện toán TPU, mô hình này cho phép các trường hợp sử dụng tương tác với nhà phát triển có khối lượng lớn và các ứng dụng tiêu dùng theo thời gian thực.
 
-**主要功能：**
+**Các khả năng chính:**
 
-- **端對端延遲時間低於 2 秒**
-- **交錯生成和編輯**，原生支援「文字 -> 文字 + 圖片」和「圖片 + 文字 -> 文字 + 圖片」。
-- **已針對 1K (1024x1024 像素) 的低解析度進行最佳化調整**。
-- 支援一組離散的 **14 種顯示比例**，包括標準格式。
-- **快速進行多輪本機編輯** (更換顏色、建立貼紙、調整背景)。
-- 維持高字元對齊度，符合原始 Nano Banana 標準。
-- 新的 `1:1`、`3:2`、`2:3`、`3:4`、`4:3`、`4:5`、`5:4`、`9:16`、`16:9`、`21:9` 螢幕比例。
-- 支援的 `image_size` 值：`1024px` (1K)。*(注意：不支援 2K 和 4K)。*
-- **SynthID 浮水印 (一律啟用) + C2PA**。
+- **Độ trễ từ đầu đến cuối dưới 2 giây**
+- **Tạo và chỉnh sửa nội dung xen kẽ** với khả năng hỗ trợ gốc cho Văn bản -> Văn bản + Hình ảnh và Hình ảnh + Văn bản -> Văn bản + Hình ảnh.
+- **Được tối ưu hoá cho độ phân giải thấp hơn** là 1K (1024x1024px).
+- Hỗ trợ một tập hợp riêng biệt gồm **14 tỷ lệ khung hình**, bao gồm cả các định dạng chuẩn.
+- **Chỉnh sửa nhanh nhiều lượt tại địa phương** (đổi màu, tạo hình dán, điều chỉnh nền).
+- Duy trì độ chính xác cao về ký tự, đáp ứng các tiêu chuẩn ban đầu của Nano Banana.
+- Tỷ lệ khung hình mới `1:1`, `3:2`, `2:3`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9`.
+- Giá trị `image_size` được hỗ trợ: `1024px` (1K). *(Lưu ý: Không hỗ trợ độ phân giải 2K và 4K).*
+- **Tạo hình mờ bằng SynthID (Luôn bật) + C2PA**.
 
-[在 Google AI Studio 中試用](https://aistudio.google.com?model=gemini-3.1-flash-lite-image&hl=zh-tw)
+[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=gemini-3.1-flash-lite-image&hl=vi)
 
-## 說明文件
+## Tài liệu
 
-如要全面瞭解功能和特色，請前往「[圖像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw)」頁面。
+Truy cập trang [Tạo ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi) để xem thông tin đầy đủ về các tính năng và chức năng.
 
 ## gemini-3.1-flash-lite-image
 
-| 屬性 | 說明 |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_card 模型代碼 | `gemini-3.1-flash-lite-image` |
-| save支援的資料類型 | **輸入裝置**  文字和圖像  **輸出內容**  圖片和文字 |
-| token\_auto 代幣限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw) | **輸入權杖限制**  65,536  **輸出詞元限制**  4,096 |
-| handyman功能 | **生成音訊**  不支援  **批次 API**  支援  **快取**  不支援  **執行程式碼**  不支援  **檔案搜尋**  不支援  **函式呼叫**  支援  **利用 Google 地圖建立基準**  不支援  **以 Google 搜尋強化事實基礎**  不支援  **圖片編輯**  支援  **圖像生成**  支援  **Live API**  不支援  **以搜尋為基準**  不支援  **結構化輸出內容**  不支援  **思考**  支援 (最低和最高)  **網址內容**  不支援 |
-| 123 個版本 | 如要瞭解詳情，請參閱[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw#model-versions)。  - 穩定：`gemini-3.1-flash-lite-image` |
-| calendar\_month最新更新 | 2026 年 6 月 |
-| id\_card模型資訊卡 | [模型資訊卡](https://deepmind.google/models/model-cards/gemini-3-1-flash-lite-image/?hl=zh-tw) |
+| Mã kiểu id\_card | `gemini-3.1-flash-lite-image` |
+| saveCác loại dữ liệu được hỗ trợ | **Thông tin đầu vào**  Văn bản và hình ảnh  **Đầu ra**  Hình ảnh và văn bản |
+| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  65.536  **Giới hạn mã thông báo đầu ra**  4.096 |
+| handymanChức năng | **Tạo âm thanh**  Không được hỗ trợ  **Batch API**  Được hỗ trợ  **Lưu vào bộ nhớ đệm**  Không được hỗ trợ  **Thực thi mã**  Không được hỗ trợ  **Tìm kiếm tệp**  Không được hỗ trợ  **Gọi hàm**  Được hỗ trợ  **Neo bám vào Google Maps**  Không được hỗ trợ  **Neo bám vào Google Tìm kiếm**  Không được hỗ trợ  **Chỉnh sửa hình ảnh**  Được hỗ trợ  **Tạo hình ảnh**  Được hỗ trợ  **Live API**  Không được hỗ trợ  **Tìm trong phần liên kết thực tế**  Không được hỗ trợ  **Đầu ra có cấu trúc**  Không được hỗ trợ  **Tư duy**  Được hỗ trợ (tối thiểu và tối đa)  **Bối cảnh URL**  Không được hỗ trợ |
+| 123Phiên bản | Đọc [các mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm thông tin chi tiết.  - Ổn định: `gemini-3.1-flash-lite-image` |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 6/2026 |
+| Thẻ mô hình id\_card | [Thẻ mô hình](https://deepmind.google/models/model-cards/gemini-3-1-flash-lite-image/?hl=vi) |
 
-提供意見
+Gửi ý kiến phản hồi
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-上次更新時間：2026-08-19 (世界標準時間)。
+Cập nhật lần gần đây nhất: 2026-08-19 UTC.
 
-想進一步說明嗎？
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-08-19 (世界標準時間)。"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-08-19 UTC."],[],[]]

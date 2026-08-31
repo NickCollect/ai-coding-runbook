@@ -1,41 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/veo?hl=pl
-fetched_at: 2026-08-24T02:33:15.380512+00:00
-title: "Generowanie film\u00f3w za pomoc\u0105 Veo\u00a03.1 w\u00a0interfejsie Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/veo?hl=vi
+fetched_at: 2026-08-31T06:38:01.540860+00:00
+title: "T\u1ea1o video b\u1eb1ng Veo 3.1 trong Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Prześlij opinię
+Gửi ý kiến phản hồi
 
-# Generowanie filmów za pomocą Veo 3.1 w interfejsie Gemini API
+# Tạo video bằng Veo 3.1 trong Gemini API
 
-> Więcej informacji o rozumieniu filmów znajdziesz w przewodniku [Rozumienie filmów](https://ai.google.dev/gemini-api/docs/video-understanding?hl=pl).
+> Để tìm hiểu về tính năng hiểu video, hãy xem hướng dẫn về [Tính năng hiểu video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi).
 
-[Veo 3.1](https://deepmind.google/models/veo/?hl=pl) to model do generowania 8-sekundowych filmów (720p, 1080p lub 4K) z natywnie generowanym dźwiękiem. Dostęp do tego modelu możesz uzyskać w sposób zautomatyzowany za pomocą interfejsu Gemini API. Więcej informacji o dostępnych wariantach modelu Veo znajdziesz w sekcji [Wersje modelu](#model-versions).
+[Veo 3.1](https://deepmind.google/models/veo/?hl=vi) là một mô hình tạo video dài 8 giây (720p, 1080p hoặc 4k) có âm thanh được tạo tự nhiên. Bạn có thể truy cập vào mô hình này theo cách lập trình bằng Gemini API. Để tìm hiểu thêm về các biến thể mô hình Veo hiện có, hãy xem phần [Các phiên bản mô hình](#model-versions).
 
-Veo 3.1 doskonale radzi sobie z różnymi stylami wizualnymi i filmowymi oraz wprowadza kilka nowych funkcji:
+Veo 3.1 có khả năng tạo ra nhiều phong cách hình ảnh và điện ảnh, đồng thời có một số tính năng mới:
 
-- **Filmy w orientacji pionowej:** wybierz filmy w orientacji poziomej (`16:9`) lub pionowej (`9:16`).
-- **Rozszerzenie wideo:** rozszerzaj filmy, które zostały wcześniej wygenerowane za pomocą Veo.
-- **Generowanie konkretnych klatek:** wygeneruj film, określając pierwszą i ostatnią klatkę.
-- **Kierowanie na podstawie obrazu:** użyj maksymalnie 3 obrazów referencyjnych, aby określić zawartość generowanego filmu.
+- **Video dọc**: Chọn giữa video ngang (`16:9`) và video dọc (`9:16`).
+- **Phần mở rộng video**: Kéo dài thời lượng của những video đã được tạo trước đó bằng Veo.
+- **Tạo video theo khung hình cụ thể**: Tạo video bằng cách chỉ định khung hình đầu tiên và khung hình cuối cùng.
+- **Chỉ dẫn dựa trên hình ảnh**: Sử dụng tối đa 3 hình ảnh tham khảo để định hướng nội dung cho video bạn tạo.
 
-Więcej informacji o pisaniu skutecznych promptów tekstowych do generowania filmów znajdziesz w [przewodniku po tworzeniu promptów Veo](#prompt-guide).
+Để biết thêm thông tin về cách viết câu lệnh dạng văn bản hiệu quả để tạo video, hãy xem [hướng dẫn về câu lệnh cho Veo](#prompt-guide)
 
-## Generowanie filmu na podstawie tekstu
+## Tạo video từ văn bản
 
-Poniższe przykłady pokazują, jak wygenerować film z [dialogami](#dialogue), [kinowym realizmem](#realism) lub [kreatywną animacją](#style):
+Các ví dụ sau đây cho thấy cách bạn có thể tạo video có [lời thoại](#dialogue), [mức độ chân thực như phim điện ảnh](#realism) hoặc [ảnh động sáng tạo](#style):
 
-### Dialogi i efekty dźwiękowe
+### Hội thoại và hiệu ứng âm thanh
 
 ### Python
 
@@ -62,8 +62,7 @@ while not operation.done:
 
 # Download the generated video.
 generated_video = operation.response.generated_videos[0]
-client.files.download(file=generated_video.video)
-generated_video.video.save("dialogue_example.mp4")
+client.files.download(file=generated_video.video, destination="dialogue_example.mp4")
 print("Generated video saved to dialogue_example.mp4")
 ```
 
@@ -227,7 +226,7 @@ while true; do
 done
 ```
 
-### Realizm filmowy
+### Tính chân thực đậm chất điện ảnh
 
 ### Python
 
@@ -254,8 +253,7 @@ while not operation.done:
 
 # Download the generated video.
 generated_video = operation.response.generated_videos[0]
-client.files.download(file=generated_video.video)
-generated_video.video.save("realism_example.mp4")
+client.files.download(file=generated_video.video, destination="realism_example.mp4")
 print("Generated video saved to realism_example.mp4")
 ```
 
@@ -419,7 +417,7 @@ while true; do
 done
 ```
 
-### Animacja kreacji
+### Ảnh động sáng tạo
 
 ### Python
 
@@ -443,8 +441,7 @@ while not operation.done:
 
 # Download the generated video.
 generated_video = operation.response.generated_videos[0]
-client.files.download(file=generated_video.video)
-generated_video.video.save("style_example.mp4")
+client.files.download(file=generated_video.video, destination="style_example.mp4")
 print("Generated video saved to style_example.mp4")
 ```
 
@@ -605,10 +602,9 @@ while true; do
 done
 ```
 
-## Kontrolowanie formatu obrazu
+## Kiểm soát tỷ lệ khung hình
 
-Veo 3.1 umożliwia tworzenie filmów w orientacji poziomej (`16:9`, domyślne ustawienie) lub pionowej (`9:16`). Możesz wskazać model, którego chcesz użyć, za pomocą parametru
-`aspect_ratio`:
+Veo 3.1 cho phép bạn tạo video ở chế độ ngang (`16:9`, chế độ cài đặt mặc định) hoặc dọc (`9:16`). Bạn có thể cho mô hình biết bạn muốn sử dụng mô hình nào bằng cách dùng tham số `aspect_ratio`:
 
 ### Python
 
@@ -637,8 +633,7 @@ while not operation.done:
 
 # Download the generated video.
 generated_video = operation.response.generated_videos[0]
-client.files.download(file=generated_video.video)
-generated_video.video.save("pizza_making.mp4")
+client.files.download(file=generated_video.video, destination="pizza_making.mp4")
 print("Generated video saved to pizza_making.mp4")
 ```
 
@@ -771,13 +766,13 @@ while true; do
 done
 ```
 
-## Kontrolowanie rozdzielczości
+## Kiểm soát độ phân giải
 
-Veo 3.1 może też bezpośrednio generować filmy w rozdzielczości 720p, 1080p lub 4K (4K nie jest dostępne w przypadku Veo 3.1 Lite).
+Veo 3.1 cũng có thể trực tiếp tạo video 720p, 1080p hoặc 4k (Veo 3.1 Lite không hỗ trợ video 4k).
 
-Pamiętaj, że im wyższa rozdzielczość, tym większe opóźnienie. Filmy w rozdzielczości 4K są też droższe (zobacz [cennik](https://ai.google.dev/gemini-api/docs/pricing?hl=pl#veo-3.1)).
+Xin lưu ý rằng độ phân giải càng cao thì độ trễ càng lớn. Video 4K cũng có giá cao hơn (xem [giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#veo-3.1)).
 
-[Rozszerzenie z filmem](#extending_veo_videos) jest też ograniczone do filmów w rozdzielczości 720p.
+[Phần mở rộng video](#extending_veo_videos) cũng chỉ hỗ trợ video 720p.
 
 ### Python
 
@@ -806,8 +801,7 @@ while not operation.done:
 
 # Download the generated video.
 generated_video = operation.response.generated_videos[0]
-client.files.download(file=generated_video.video)
-generated_video.video.save("4k_grand_canyon.mp4")
+client.files.download(file=generated_video.video, destination="4k_grand_canyon.mp4")
 print("Generated video saved to 4k_grand_canyon.mp4")
 ```
 
@@ -940,9 +934,9 @@ while true; do
 done
 ```
 
-## Generowanie filmu na podstawie obrazu
+## Tạo video từ hình ảnh
 
-Poniższy kod pokazuje, jak wygenerować obraz za pomocą [Gemini 3.1 Flash Image, czyli Nano Banana 2](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl), a następnie użyć go jako klatki początkowej do wygenerowania filmu za pomocą Veo 3.1.
+Đoạn mã sau đây minh hoạ cách tạo hình ảnh bằng [Gemini 3.1 Flash Image (còn gọi là Nano Banana 2)](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi), sau đó dùng hình ảnh đó làm khung hình bắt đầu để tạo video bằng Veo 3.1.
 
 ### Python
 
@@ -976,8 +970,7 @@ while not operation.done:
 
 # Download the video.
 video = operation.response.generated_videos[0]
-client.files.download(file=video.video)
-video.video.save("veo3_with_image_input.mp4")
+client.files.download(file=video.video, destination="veo3_with_image_input.mp4")
 print("Generated video saved to veo3_with_image_input.mp4")
 ```
 
@@ -1130,15 +1123,15 @@ class GenerateVideoFromImage {
 }
 ```
 
-### Korzystanie z obrazów referencyjnych
+### Sử dụng hình ảnh tham khảo
 
-Veo 3.1 akceptuje teraz do 3 obrazów referencyjnych, które pomagają w generowaniu treści filmu. Prześlij zdjęcia osoby, postaci lub produktu, aby zachować wygląd obiektu w wygenerowanym filmie.
+Giờ đây, Veo 3.1 chấp nhận tối đa 3 hình ảnh tham khảo để hướng dẫn nội dung của video được tạo. Cung cấp hình ảnh về một người, nhân vật hoặc sản phẩm để giữ nguyên diện mạo của chủ thể trong video đầu ra.
 
-Na przykład użycie tych 3 obrazów wygenerowanych za pomocą [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl) jako odniesień z [dobrze napisanym promptem](#use-reference-images) spowoduje utworzenie tego filmu:
+Ví dụ: khi dùng 3 hình ảnh được tạo bằng [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi) làm tài liệu tham khảo cùng với một [câu lệnh được viết rõ ràng](#use-reference-images), bạn sẽ tạo được video sau:
 
 | `` `dress_image` `` | `` `woman_image` `` | `` `glasses_image` `` |
 | --- | --- | --- |
-| Sukienka w stylu haute couture z motywem flaminga z warstwami różowych i fuksjowych piór | Piękna kobieta z ciemnymi włosami i ciepłymi brązowymi oczami | Fantazyjne różowe okulary przeciwsłoneczne w kształcie serca |
+| Đầm hồng hạc cao cấp với nhiều lớp lông màu hồng và màu cánh sen | Người phụ nữ xinh đẹp với mái tóc sẫm màu và đôi mắt nâu ấm áp | Kính râm hình trái tim màu hồng độc đáo |
 
 ### Python
 
@@ -1181,8 +1174,7 @@ while not operation.done:
 
 # Download the video.
 video = operation.response.generated_videos[0]
-client.files.download(file=video.video)
-video.video.save("veo3.1_with_reference_images.mp4")
+client.files.download(file=video.video, destination="veo3.1_with_reference_images.mp4")
 print("Generated video saved to veo3.1_with_reference_images.mp4")
 ```
 
@@ -1366,9 +1358,9 @@ while true; do
 done
 ```
 
-### Korzystanie z pierwszej i ostatniej klatki
+### Sử dụng khung hình đầu tiên và cuối cùng
 
-Veo 3.1 umożliwia tworzenie filmów za pomocą interpolacji lub określania pierwszej i ostatniej klatki filmu. Informacje o pisaniu skutecznych promptów tekstowych do generowania filmów znajdziesz w [przewodniku po tworzeniu promptów Veo](#use-reference-images).
+Veo 3.1 cho phép bạn tạo video bằng cách sử dụng phương pháp nội suy hoặc chỉ định khung hình đầu tiên và cuối cùng của video. Để biết thông tin về cách viết câu lệnh dạng văn bản hiệu quả để tạo video, hãy xem [hướng dẫn về câu lệnh cho Veo](#use-reference-images).
 
 ### Python
 
@@ -1397,8 +1389,7 @@ while not operation.done:
 
 # Download the video.
 video = operation.response.generated_videos[0]
-client.files.download(file=video.video)
-video.video.save("veo3.1_with_interpolation.mp4")
+client.files.download(file=video.video, destination="veo3.1_with_interpolation.mp4")
 print("Generated video saved to veo3.1_with_interpolation.mp4")
 ```
 
@@ -1541,31 +1532,31 @@ done
 
 | `` `first_image` `` | `` `last_image` `` | *veo3.1\_with\_interpolation.mp4* |
 | --- | --- | --- |
-| Duch kobiety z długimi białymi włosami i powiewającą sukienką delikatnie huśta się na huśtawce linowej. | Duch kobiety znika z huśtawki | Kinowy, niepokojący film przedstawiający upiorną kobietę znikającą z huśtawki we mgle |
+| Một người phụ nữ ma quái với mái tóc dài màu trắng và chiếc váy bồng bềnh nhẹ nhàng đu đưa trên chiếc đu dây | Người phụ nữ ma biến mất khỏi xích đu | Một video điện ảnh, ám ảnh về một người phụ nữ kỳ lạ biến mất khỏi chiếc xích đu trong sương mù |
 
-## Rozszerzanie filmów wygenerowanych przez Veo
+## Kéo dài video trên Veo
 
-Za pomocą Veo 3.1 możesz wydłużyć filmy wygenerowane wcześniej za pomocą Veo o 7 sekund i nawet 20 razy.
+Sử dụng Veo 3.1 để kéo dài video mà bạn đã tạo trước đó bằng Veo thêm 7 giây và tối đa 20 lần.
 
-Ograniczenia dotyczące filmu wejściowego:
+Giới hạn đối với video đầu vào:
 
-- Filmy wygenerowane przez Veo mogą trwać maksymalnie 141 sekund.
-- Interfejs Gemini API obsługuje wydłużanie filmów tylko w przypadku filmów wygenerowanych przez Veo.
-- Film powinien pochodzić z poprzedniej generacji, np.
+- Video do Veo tạo chỉ dài tối đa 141 giây.
+- Gemini API chỉ hỗ trợ tiện ích video cho video do Veo tạo.
+- Video phải thuộc thế hệ trước, chẳng hạn như
   `operation.response.generated_videos[0].video`
-- Filmy są przechowywane przez 2 dni, ale jeśli film jest używany jako odniesienie do rozszerzenia, licznik czasu przechowywania resetuje się. Możesz wydłużać tylko filmy wygenerowane lub przywołane w ciągu ostatnich 2 dni.
-- Filmy wejściowe powinny mieć określoną długość, format obrazu i wymiary:
-  - Format obrazu: 9:16 lub 16:9
-  - Rozdzielczość: 720p
-  - Długość wideo: maksymalnie 141 sekund
+- Video được lưu trữ trong 2 ngày, nhưng nếu được dùng làm tài liệu tham khảo để mở rộng, thì bộ hẹn giờ lưu trữ 2 ngày của video sẽ được đặt lại. Bạn chỉ có thể kéo dài thời lượng của những video được tạo hoặc tham chiếu trong 2 ngày qua.
+- Video đầu vào phải có độ dài, tỷ lệ khung hình và kích thước nhất định:
+  - Tỷ lệ khung hình: 9:16 hoặc 16:9
+  - Độ phân giải: 720p
+  - Thời lượng video: Tối đa 141 giây
 
-Wynikiem działania rozszerzenia jest jeden film łączący dane wejściowe użytkownika z wygenerowanym rozszerzonym filmem o długości do 148 sekund.
+Đầu ra của tiện ích này là một video duy nhất kết hợp video đầu vào của người dùng và video mở rộng được tạo với thời lượng tối đa là 148 giây.
 
-W tym przykładzie wykorzystujemy film wygenerowany przez Veo (widoczny tutaj z oryginalnym promptem) i rozszerzamy go za pomocą parametru `video` oraz nowego prompta:
+Ví dụ này lấy một video do Veo tạo (được minh hoạ ở đây cùng với câu lệnh gốc) và mở rộng video đó bằng cách sử dụng tham số `video` và một câu lệnh mới:
 
-| Prompt | Wyjście: `butterfly_video` |
+| Câu lệnh | Đầu ra: `butterfly_video` |
 | --- | --- |
-| Motyl origami macha skrzydłami i wylatuje przez drzwi balkonowe do ogrodu. | Motyl origami macha skrzydłami i wylatuje przez drzwi balkonowe do ogrodu. |
+| Một con bướm giấy vỗ cánh và bay ra khỏi cửa ra vào kiểu Pháp vào vườn. | Một con bướm làm bằng giấy xếp vỗ cánh và bay ra khỏi cửa sổ kiểu Pháp vào vườn. |
 
 ### Python
 
@@ -1595,8 +1586,7 @@ while not operation.done:
 
 # Download the video.
 video = operation.response.generated_videos[0]
-client.files.download(file=video.video)
-video.video.save("veo3.1_extension.mp4")
+client.files.download(file=video.video, destination="veo3.1_extension.mp4")
 print("Generated video saved to veo3.1_extension.mp4")
 ```
 
@@ -1741,13 +1731,13 @@ while true; do
 done
 ```
 
-Informacje o tworzeniu skutecznych promptów tekstowych do generowania filmów znajdziesz w [przewodniku po tworzeniu promptów Veo](#extend-prompt).
+Để biết thông tin về cách viết câu lệnh dạng văn bản hiệu quả để tạo video, hãy xem [hướng dẫn về câu lệnh cho Veo](#extend-prompt).
 
-## Obsługa operacji asynchronicznych
+## Xử lý các thao tác không đồng bộ
 
-Generowanie filmów jest zadaniem wymagającym dużej mocy obliczeniowej. Gdy wyślesz żądanie do interfejsu API, rozpocznie on długotrwałe zadanie i natychmiast zwróci obiekt `operation`. Następnie musisz wysyłać zapytania, dopóki film nie będzie gotowy. Wskazuje na to stan `done`.
+Tạo video là một tác vụ đòi hỏi nhiều tài nguyên tính toán. Khi bạn gửi yêu cầu đến API, API sẽ bắt đầu một công việc chạy trong thời gian dài và trả về ngay một đối tượng `operation`. Sau đó, bạn phải thăm dò cho đến khi video sẵn sàng, được biểu thị bằng trạng thái `done` là true.
 
-Podstawą tego procesu jest pętla sondowania, która okresowo sprawdza stan zadania.
+Cốt lõi của quy trình này là một vòng lặp thăm dò ý kiến, định kỳ kiểm tra trạng thái của công việc.
 
 ### Python
 
@@ -1926,304 +1916,303 @@ while true; do
 done
 ```
 
-## Parametry i specyfikacje interfejsu Veo API
+## Thông số và quy cách của Veo API
 
-Są to parametry, które możesz ustawić w żądaniu do interfejsu API, aby kontrolować proces generowania filmu.
+Đây là những tham số mà bạn có thể đặt trong yêu cầu API để kiểm soát quy trình tạo video.
 
-| Parametr | Veo 3.1 i Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 i Veo 3 Fast | Veo 2 |
+| Tham số | Veo 3.1 và Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 và Veo 3 Fast | Veo 2 |
 | --- | --- | --- | --- | --- |
-| Instancje | | | | |
-| `prompt`: opis tekstowy filmu. Obsługuje wskazówki audio. | `string` | `string` | `string` | `string` |
-| `image`: początkowy obraz do animacji; | `Image` obiekt | `Image` obiekt | `Image` obiekt | `Image` obiekt |
-| `lastFrame`: Obraz końcowy filmu z interpolacją, do którego ma nastąpić przejście. Musi być używany w połączeniu z parametrem `image`. | `Image` obiekt | `Image` obiekt | `Image` obiekt | `Image` obiekt |
-| `referenceImages`: maksymalnie 3 obrazy, które będą służyć jako odniesienia do stylu i treści; | `VideoGenerationReferenceImage` obiekt | `n/a` obiekt | nie dotyczy | nie dotyczy |
-| `video`: film, który ma być używany w rozszerzeniu o film. | `Video` obiekt z poprzedniej generacji | nie dotyczy | nie dotyczy | nie dotyczy |
-| Parametry | | | | |
-| `aspectRatio`: współczynnik proporcji filmu. | `"16:9"` (domyślny), `"9:16"` | `"16:9"` (domyślny), `"9:16"` | `"16:9"` (domyślny), `"9:16"` | `"16:9"` (domyślny), `"9:16"` |
-| `durationSeconds`: długość wygenerowanego filmu; | `"4"`, `"6"`, `"8"`.   *Musi mieć wartość „8”, jeśli używasz rozszerzenia, obrazów referencyjnych lub rozdzielczości 1080p i 4K* | `"4"`, `"6"`, `"8"`.   *W przypadku używania obrazów referencyjnych lub rozdzielczości 1080p musi mieć wartość „8”.* | `"4"`, `"6"`, `"8"`.   *Musi mieć wartość „8”, jeśli używasz rozszerzenia, obrazów referencyjnych lub rozdzielczości 1080p i 4K* | `"5"`, `"6"`, `"8"` |
-| `personGeneration`: określa, czy mają być generowane osoby. (Ograniczenia regionalne znajdziesz w sekcji [Ograniczenia](#limitations)). | Zamiana tekstu na film i rozszerzenie: `"allow_all"` tylko   Zamiana obrazu na film, interpolacja i obrazy referencyjne: `"allow_adult"` tylko | Zamiana tekstu na film: `"allow_all"` tylko   Zamiana obrazu na film, interpolacja i obrazy referencyjne: `"allow_adult"` tylko | Tekst na film: `"allow_all"` tylko   Obraz na film: `"allow_adult"` tylko | Tekst na film:  `"allow_all"`, `"allow_adult"`, `"dont_allow"`   Obraz na film:  `"allow_adult"` i `"dont_allow"` |
-| `resolution`: rozdzielczość filmu. | `"720p"` (domyślnie),  `"1080p"` (obsługuje tylko filmy 8-sekundowe), `"4k"` (obsługuje tylko filmy 8-sekundowe)   *`"720p"` tylko w przypadku rozszerzenia* | `"720p"` (domyślne),  `"1080p"` (obsługuje tylko 8-sekundowe nagrania) | `"720p"` (domyślnie),  `"1080p"` (obsługuje tylko filmy 8-sekundowe), `"4k"` (obsługuje tylko filmy 8-sekundowe)   *`"720p"` tylko w przypadku rozszerzenia* | Nieobsługiwany |
+| Nhiều mảnh ghép | | | | |
+| `prompt`: Nội dung mô tả bằng văn bản cho video. Hỗ trợ dấu hiệu âm thanh. | `string` | `string` | `string` | `string` |
+| `image`: Một hình ảnh ban đầu để tạo ảnh động. | Đối tượng `Image` | Đối tượng `Image` | Đối tượng `Image` | Đối tượng `Image` |
+| `lastFrame`: Hình ảnh cuối cùng của video nội suy để chuyển đổi. Bạn phải sử dụng thông số này cùng với thông số `image`. | Đối tượng `Image` | Đối tượng `Image` | Đối tượng `Image` | Đối tượng `Image` |
+| `referenceImages`: Tối đa 3 hình ảnh được dùng làm tài liệu tham khảo về kiểu và nội dung. | Đối tượng `VideoGenerationReferenceImage` | Đối tượng `n/a` | Không có | Không có |
+| `video`: Video sẽ được dùng cho tiện ích video. | Đối tượng `Video` từ thế hệ trước | Không có | Không áp dụng | Không có |
+| Thông số | | | | |
+| `aspectRatio`: Tỷ lệ khung hình của video. | `"16:9"` (mặc định), `"9:16"` | `"16:9"` (mặc định), `"9:16"` | `"16:9"` (mặc định), `"9:16"` | `"16:9"` (mặc định), `"9:16"` |
+| `durationSeconds`: Thời lượng của video được tạo. | `"4"`, `"6"`, `"8"`.   *Phải là "8" khi sử dụng phần mở rộng, hình ảnh tham khảo hoặc có độ phân giải 1080p và 4K* | `"4"`, `"6"`, `"8"`.   *Phải là "8" khi sử dụng hình ảnh tham khảo hoặc có độ phân giải 1080p* | `"4"`, `"6"`, `"8"`.   *Phải là "8" khi sử dụng phần mở rộng, hình ảnh tham khảo hoặc có độ phân giải 1080p và 4K* | `"5"`, `"6"`, `"8"` |
+| `personGeneration`: Kiểm soát việc tạo hình ảnh có người. (Xem phần [Các điểm hạn chế](#limitations) để biết các quy định hạn chế theo khu vực) | Chuyển văn bản thành video và tiện ích: `"allow_all"` chỉ   Chuyển hình ảnh thành video, Nội suy và Hình ảnh tham khảo: `"allow_adult"` chỉ | Chuyển văn bản thành video: `"allow_all"` chỉ   Chuyển hình ảnh thành video, Nội suy và Hình ảnh tham khảo: `"allow_adult"` chỉ | Chuyển văn bản thành video: `"allow_all"` chỉ có   Chuyển hình ảnh thành video: `"allow_adult"` chỉ có | Văn bản thành video:  `"allow_all"`, `"allow_adult"`, `"dont_allow"`   Hình ảnh thành video:  `"allow_adult"` và `"dont_allow"` |
+| `resolution`: Độ phân giải của video. | `"720p"` (mặc định),  `"1080p"` (chỉ hỗ trợ thời lượng 8 giây), `"4k"` (chỉ hỗ trợ thời lượng 8 giây)   *`"720p"` chỉ dành cho tiện ích* | `"720p"` (mặc định),  `"1080p"` (chỉ hỗ trợ thời lượng 8 giây) | `"720p"` (mặc định),  `"1080p"` (chỉ hỗ trợ thời lượng 8 giây), `"4k"` (chỉ hỗ trợ thời lượng 8 giây)   *`"720p"` chỉ dành cho tiện ích* | Không được hỗ trợ |
 
-Pamiętaj, że parametr `seed` jest też dostępny w przypadku modeli Veo 3.
-Nie gwarantuje to determinizmu, ale nieco go poprawia.
+Xin lưu ý rằng tham số `seed` cũng có sẵn cho các mô hình Veo 3.
+Điều này không đảm bảo tính xác định, nhưng sẽ cải thiện một chút.
 
-## Funkcje modelu
+## Các tính năng của mô hình
 
-| Funkcja | Veo 3.1 i Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 i Veo 3 Fast | Veo 2 |
+| Tính năng | Veo 3.1 và Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 và Veo 3 Fast | Veo 2 |
 | --- | --- | --- | --- | --- |
-| **Dźwięk:** generuje dźwięk natywnie wraz z filmem. | ✔️ Zawsze włączone | ✔️ Zawsze włączone | ✔️ Zawsze włączone | ❌ Tylko cichy |
-| **Rodzaje danych wejściowych:**  typ danych wejściowych użytych do wygenerowania odpowiedzi. | Zamiana tekstu na film, obrazu na film i filmu na film | Zamiana tekstu na film, zamiana obrazu na film | Zamiana tekstu na film, zamiana obrazu na film | Zamiana tekstu na film, zamiana obrazu na film |
-| **Rozdzielczość:**  rozdzielczość wyjściowa filmu. | 720p, 1080p (tylko 8 s), 4K (tylko 8 s)  *Tylko 720p w przypadku korzystania z wydłużania filmów.* | 720p, 1080p (tylko 8 s) | 720p i 1080p (tylko 16:9) | 720p |
-| **Liczba klatek:**  liczba klatek wyjściowych filmu. | 24 kl./s | 24 kl./s | 24 kl./s | 24 kl./s |
-| **Czas trwania filmu:**  długość wygenerowanego filmu. | 8 sekund, 6 sekund, 4 sekundy  *8 sekund tylko w przypadku rozdzielczości 1080p lub 4K albo korzystania z obrazów referencyjnych* | 8 sekund, 6 sekund, 4 sekundy  *8 sekund tylko w przypadku rozdzielczości 1080p lub korzystania z obrazów referencyjnych* | 8 sekund | 5–8 sekund |
-| **Filmy na żądanie:**  liczba filmów wygenerowanych na żądanie. | 1 | 1 | 1 | 1 lub 2 |
-| **Stan:**  dostępność modelu | [Podgląd](https://ai.google.dev/gemini-api/docs/models?hl=pl#preview) | [Podgląd](https://ai.google.dev/gemini-api/docs/models?hl=pl#preview) | [Stabilna](https://ai.google.dev/gemini-api/docs/models?hl=pl#stable) | [Stabilna](https://ai.google.dev/gemini-api/docs/models?hl=pl#latest-stable) |
+| **Âm thanh:** Tạo âm thanh gốc cùng với video. | ✔️ Luôn bật | ✔️ Luôn bật | ✔️ Luôn bật | ❌ Chỉ im lặng |
+| **Phương thức nhập:** Loại phương thức nhập được dùng để tạo. | Chuyển văn bản thành video, chuyển hình ảnh thành video, chuyển video thành video | Chuyển văn bản thành video, chuyển hình ảnh thành video | Chuyển văn bản thành video, chuyển hình ảnh thành video | Chuyển văn bản thành video, chuyển hình ảnh thành video |
+| **Độ phân giải:** Độ phân giải đầu ra của video. | 720p, 1080p (chỉ dài 8 giây), 4k (chỉ dài 8 giây)  *Chỉ 720p khi sử dụng tiện ích video.* | 720p, 1080p (chỉ dài 8 giây) | 720p và 1080p (chỉ tỷ lệ khung hình 16:9) | 720p |
+| **Tốc độ khung hình:** Tốc độ khung hình đầu ra của video. | 24fps | 24fps | 24fps | 24fps |
+| **Thời lượng video:** Thời lượng của video được tạo. | 8 giây, 6 giây, 4 giây  *Chỉ 8 giây nếu là video 1080p hoặc 4k hoặc sử dụng hình ảnh tham khảo* | 8 giây, 6 giây, 4 giây  *8 giây chỉ khi ở độ phân giải 1080p hoặc sử dụng hình ảnh tham khảo* | 8 giây | 5 – 8 giây |
+| **Số video trên mỗi yêu cầu:** Số lượng video được tạo trên mỗi yêu cầu. | 1 | 1 | 1 | 1 hoặc 2 |
+| **Trạng thái:** Phạm vi cung cấp mô hình | [Xem trước](https://ai.google.dev/gemini-api/docs/models?hl=vi#preview) | [Xem trước](https://ai.google.dev/gemini-api/docs/models?hl=vi#preview) | [Ổn định](https://ai.google.dev/gemini-api/docs/models?hl=vi#stable) | [Ổn định](https://ai.google.dev/gemini-api/docs/models?hl=vi#latest-stable) |
 
-## Ograniczenia
+## Các điểm hạn chế
 
-- **Prompty dotyczące wielu filmów:** odwoływanie się do wielu filmów lub wnioskowanie na ich podstawie nie jest obecnie obsługiwane. Próba użycia promptów z wieloma filmami może spowodować pogorszenie wydajności modelu lub nieoczekiwane wyniki.
-- **Obsługa języków:** język angielski (EN) jest w pełni obsługiwany, ale inne języki nie zostały jeszcze ocenione, więc mogą działać, ale wyniki mogą się różnić.
-- **Czas oczekiwania na żądanie:** min.: 11 sekund; maks.: 6 minut (w godzinach szczytu).
-- **Ograniczenia regionalne:** w UE, Wielkiej Brytanii, Szwajcarii i regionie MENA dozwolone wartości w przypadku parametru `personGeneration` to:
-  - Veo 3 i 3.1: `allow_adult`.
-  - Veo 2: `dont_allow` i `allow_adult`. Wartość domyślna to `dont_allow`.
-- **Przechowywanie filmów:** wygenerowane filmy są przechowywane na serwerze przez 2 dni, a następnie usuwane. Aby zapisać kopię lokalną, musisz pobrać film w ciągu 2 dni od jego wygenerowania. Rozszerzone filmy są traktowane jako nowo wygenerowane filmy.
-- **Znaki wodne:** filmy utworzone za pomocą Veo są oznaczane znakiem wodnym [SynthID](https://deepmind.google/technologies/synthid/?hl=pl), czyli naszym narzędziem do dodawania znaków wodnych i identyfikowania treści generowanych przez AI. Filmy można weryfikować za pomocą platformy weryfikacyjnej [SynthID](https://deepmind.google/science/synthid/?hl=pl).
-- **Bezpieczeństwo:** wygenerowane filmy są sprawdzane przez filtry bezpieczeństwa i procesy weryfikacji zapamiętywania, które pomagają ograniczać ryzyko związane z prywatnością, prawami autorskimi i stronniczością.
-- **Błąd dźwięku:** Veo 3.1 czasami blokuje generowanie filmu z powodu filtrów bezpieczeństwa lub innych problemów z przetwarzaniem dźwięku. Jeśli wygenerowanie filmu zostanie zablokowane, nie zostaną naliczone żadne opłaty.
+- **Câu lệnh cho nhiều video:** Chúng tôi hiện không hỗ trợ việc tham chiếu hoặc suy luận trên nhiều video. Việc thử tạo câu lệnh cho nhiều video có thể làm giảm hiệu suất của mô hình hoặc tạo ra kết quả không mong muốn.
+- **Hỗ trợ ngôn ngữ:** Chúng tôi hỗ trợ đầy đủ tiếng Anh (EN), nhưng chưa đánh giá các ngôn ngữ khác. Vì vậy, các ngôn ngữ khác có thể hoạt động nhưng kết quả có thể khác nhau.
+- **Độ trễ của yêu cầu:** Tối thiểu: 11 giây; Tối đa: 6 phút (trong giờ cao điểm).
+- **Giới hạn theo khu vực:** Ở các vị trí thuộc Liên minh Châu Âu, Vương quốc Anh, Thuỵ Sĩ, Trung Đông và Bắc Phi, các giá trị được phép cho `personGeneration` là:
+  - Veo 3 và 3.1: Chỉ có `allow_adult`.
+  - Veo 2: `dont_allow` và `allow_adult`. Giá trị mặc định là `dont_allow`.
+- **Thời gian lưu giữ video:** Các video được tạo sẽ được lưu trữ trên máy chủ trong 2 ngày, sau đó sẽ bị xoá. Để lưu một bản sao cục bộ, bạn phải tải video xuống trong vòng 2 ngày kể từ khi video được tạo. Video mở rộng được coi là video mới tạo.
+- **Thêm hình mờ:** Các video do Veo tạo đều được thêm hình mờ bằng [SynthID](https://deepmind.google/technologies/synthid/?hl=vi), công cụ của chúng tôi để thêm hình mờ và xác định nội dung do AI tạo. Bạn có thể xác minh video bằng nền tảng xác minh [SynthID](https://deepmind.google/science/synthid/?hl=vi).
+- **An toàn:** Các video được tạo sẽ trải qua bộ lọc an toàn và quy trình kiểm tra khả năng ghi nhớ để giúp giảm thiểu các rủi ro về quyền riêng tư, bản quyền và thiên kiến.
+- **Lỗi âm thanh:** Đôi khi, Veo 3.1 sẽ chặn video được tạo do bộ lọc an toàn hoặc các vấn đề khác về xử lý âm thanh. Bạn sẽ không bị tính phí nếu video của bạn bị chặn tạo.
 
-## Przewodnik po tworzeniu promptów w Veo
+## Hướng dẫn về câu lệnh cho Veo
 
-W tej sekcji znajdziesz przykłady filmów, które możesz utworzyć za pomocą Veo, oraz dowiesz się, jak modyfikować prompty, aby uzyskać różne wyniki.
+Phần này chứa các ví dụ về video bạn có thể tạo bằng Veo và hướng dẫn bạn cách sửa đổi câu lệnh để tạo ra kết quả riêng biệt.
 
-### Filtry bezpieczeństwa
+### Bộ lọc an toàn
 
-Veo stosuje w Gemini filtry bezpieczeństwa, aby mieć pewność, że wygenerowane filmy i przesłane zdjęcia nie zawierają obraźliwych treści.
-Prompty, które naruszają nasze [warunki i wytyczne](https://ai.google.dev/gemini-api/docs/usage-policies?hl=pl#abuse-monitoring), są blokowane.
+Veo áp dụng các bộ lọc an toàn trên Gemini để giúp đảm bảo rằng video được tạo và ảnh được tải lên không chứa nội dung phản cảm.
+Những câu lệnh vi phạm [điều khoản và nguyên tắc](https://ai.google.dev/gemini-api/docs/usage-policies?hl=vi#abuse-monitoring) của chúng tôi sẽ bị chặn.
 
-### Podstawowe informacje o pisaniu promptów
+### Kiến thức cơ bản về cách viết câu lệnh
 
-Dobre prompty są opisowe i jasne. Aby w pełni wykorzystać możliwości Veo, zacznij od określenia głównego pomysłu, dopracuj go, dodając słowa kluczowe i modyfikatory, a także uwzględnij w promptach terminologię związaną z wideo.
+Câu lệnh hiệu quả là câu lệnh mô tả và rõ ràng. Để khai thác tối đa Veo, hãy bắt đầu bằng cách xác định ý tưởng cốt lõi, tinh chỉnh ý tưởng bằng cách thêm từ khoá và bộ sửa đổi, đồng thời đưa thuật ngữ dành riêng cho video vào câu lệnh.
 
-Prompt powinien zawierać te elementy:
+Câu lệnh của bạn phải có những thành phần sau:
 
-- **Temat:** obiekt, osoba, zwierzę lub sceneria, które chcesz umieścić w filmie, np. *pejzaż miejski*, *przyroda*, *pojazdy* lub *szczenięta*.
-- **Działanie:** co robi obiekt (np. *idzie*, *biegnie* lub *obraca głowę*).
-- **Styl:** określ kierunek kreatywny, używając słów kluczowych związanych z określonym stylem filmowym, np. *science fiction*, *horror*, *film noir* lub style animowane, takie jak *kreskówka*.
-- **Położenie i ruch kamery:** [Opcjonalnie] steruj położeniem i ruchem kamery, używając określeń takich jak *widok z lotu ptaka*, *na poziomie oczu*, *zdjęcie z góry*, *zdjęcie z wózka* lub *z perspektywy żabiej*.
-- **Kompozycja:** [opcjonalnie] sposób kadrowania ujęcia, np. *szerokie ujęcie*, *zbliżenie*, *jedno ujęcie* lub *dwa ujęcia*.
-- **Ostrość i efekty obiektywu:** [opcjonalnie] użyj terminów takich jak *mała głębia ostrości*, *duża głębia ostrości*, *nieostrość*, *obiektyw makro* i *obiektyw szerokokątny*, aby uzyskać określone efekty wizualne.
-- **Atmosfera:** [Opcjonalnie] jak kolor i światło wpływają na scenerię, np. *niebieskie odcienie*, *noc* lub *ciepłe odcienie*.
+- **Chủ thể**: Đối tượng, người, động vật hoặc cảnh vật mà bạn muốn xuất hiện trong video, chẳng hạn như *cảnh quan thành phố*, *thiên nhiên*, *xe cộ* hoặc *chó con*.
+- **Hành động**: Hành động của chủ thể (ví dụ: *đi bộ*, *chạy* hoặc *quay đầu*).
+- **Phong cách**: Chỉ định hướng sáng tạo bằng cách sử dụng các từ khoá cụ thể về phong cách phim, chẳng hạn như *khoa học viễn tưởng*, *phim kinh dị*, *phim đen* hoặc các phong cách hoạt hình như *hoạt hình*.
+- **Vị trí và chuyển động của camera**: [Không bắt buộc] Kiểm soát vị trí và chuyển động của camera bằng các thuật ngữ như *góc nhìn từ trên cao*, *góc ngang tầm mắt*, *cảnh quay từ trên xuống*, *cảnh quay di chuyển* hoặc *góc nhìn từ dưới lên*.
+- **Bố cục**: [Không bắt buộc] Cách đặt máy quay, chẳng hạn như *quay toàn cảnh*, *quay cận cảnh*, *quay một cảnh* hoặc *quay hai cảnh*.
+- **Hiệu ứng tiêu cự và ống kính**: [Không bắt buộc] Sử dụng các thuật ngữ như *tiêu cự nông*, *tiêu cự sâu*, *tiêu điểm mềm*, *ống kính macro* và *ống kính góc rộng* để đạt được các hiệu ứng hình ảnh cụ thể.
+- **Môi trường**: [Không bắt buộc] Cách màu sắc và ánh sáng góp phần tạo nên cảnh, chẳng hạn như *tông màu xanh dương*, *ban đêm* hoặc *tông màu ấm*.
 
-#### Więcej wskazówek dotyczących pisania promptów
+#### Các mẹo khác để viết câu lệnh
 
-- **Używaj opisowego języka:** używaj przymiotników i przysłówków, aby dokładnie opisać, czego oczekujesz od Veo.
-- **Popraw szczegóły twarzy:** określ szczegóły twarzy jako główny element zdjęcia, np. używając słowa *portret* w prompcie.
+- **Sử dụng ngôn ngữ mô tả**: Sử dụng tính từ và trạng từ để giúp Veo hình dung rõ ràng.
+- **Cải thiện chi tiết trên khuôn mặt**: Chỉ định chi tiết trên khuôn mặt làm tiêu điểm của bức ảnh, chẳng hạn như dùng từ *chân dung* trong câu lệnh.
 
-*Bardziej szczegółowe strategie tworzenia promptów znajdziesz w [artykule wprowadzającym do projektowania promptów](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=pl).*
+*Để biết các chiến lược tạo câu lệnh toàn diện hơn, hãy truy cập vào bài viết [Giới thiệu về thiết kế câu lệnh](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=vi).*
 
-### Prośba o dźwięk
+### Nhắc nhở về âm thanh
 
-Możesz podać Veo wskazówki dotyczące efektów dźwiękowych, szumu otoczenia i dialogów.
-Model wychwytuje niuanse tych wskazówek, aby wygenerować zsynchronizowaną ścieżkę dźwiękową.
+Bạn có thể cung cấp cho Veo các tín hiệu về hiệu ứng âm thanh, tiếng ồn xung quanh và lời thoại.
+Mô hình này nắm bắt sắc thái của những tín hiệu này để tạo ra một bản nhạc đồng bộ.
 
-- **Dialog:** używaj cudzysłowów, aby wyróżnić konkretne wypowiedzi. (Przykład: „To musi być klucz”, mruknął).
-- **Efekty dźwiękowe:** dokładnie opisz dźwięki. (Przykład: opony
-  głośno piszczą, silnik ryczy).
-- **Szum otoczenia:** opisz dźwięki otoczenia. (Przykład: w tle słychać cichy, upiorny szum).
+- **Lời thoại:** Sử dụng dấu ngoặc kép cho lời nói cụ thể. (Ví dụ: "Đây chắc chắn là chìa khoá," anh lẩm bẩm.)
+- **Hiệu ứng âm thanh (SFX):** Mô tả rõ ràng âm thanh. (Ví dụ: tiếng lốp xe rít lên, tiếng động cơ gầm rú.)
+- **Tiếng ồn xung quanh:** Mô tả không gian âm thanh của môi trường. (Ví dụ: Một tiếng ù ù nhỏ, rợn người vang vọng ở phía sau.)
 
-Te filmy pokazują, jak za pomocą coraz bardziej szczegółowych promptów można generować dźwięk w Veo 3.
+Những video này minh hoạ cách nhắc Veo 3 tạo âm thanh với mức độ chi tiết tăng dần.
 
-| **Prompt** | **Wygenerowane dane wyjściowe** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **Więcej szczegółów (dialogi i otoczenie)** Szerokie ujęcie zamglonego lasu w północno-zachodniej części Stanów Zjednoczonych. Dwoje wyczerpanych wędrowców, mężczyzna i kobieta, przedzierają się przez paprocie. Nagle mężczyzna zatrzymuje się i wpatruje w drzewo. Zbliżenie: na korze drzewa widać świeże, głębokie ślady pazurów. Mężczyzna: (kładzie rękę na nożu myśliwskim) „To nie jest zwykły niedźwiedź”. Kobieta: (głos drży ze strachu, rozgląda się po lesie) „To co to jest?”. Szorstka kora, łamiące się gałązki, kroki na wilgotnej ziemi. Ćwierka samotny ptak. | Dwie osoby w lesie natrafiają na ślady niedźwiedzia. |
-| **Mniej szczegółów (dialog)**  animacja wycinankowa. Nowy bibliotekarz: „Gdzie trzymacie zakazane książki?” Stary kurator: „Nie. Zostawią je sobie”. | Animowane bibliotekarki rozmawiające o zakazanych książkach |
+| **Chi tiết hơn (Đối thoại và không gian xung quanh)** Cảnh quay rộng về một khu rừng mờ sương ở vùng Tây Bắc Thái Bình Dương. Hai người đi bộ đường dài mệt mỏi, một nam và một nữ, đang cố gắng vượt qua những cây dương xỉ thì người đàn ông đột ngột dừng lại, nhìn chằm chằm vào một cái cây. Cận cảnh: Vỏ cây bị cào xước bằng những vết móng vuốt sâu và còn mới. Người đàn ông: (Tay cầm dao săn) "Đó không phải là một con gấu bình thường." Người phụ nữ: (Giọng lo sợ, nhìn quanh khu rừng) "Vậy đó là gì?" Tiếng vỏ cây sần sùi, tiếng cành cây gãy, tiếng bước chân trên đất ẩm. Một chú chim hót líu lo. | Hai người trong rừng phát hiện dấu hiệu của một con gấu. |
+| **Ít chi tiết (Đối thoại)** Ảnh động cắt giấy. Thủ thư mới: "Bạn cất những cuốn sách bị cấm ở đâu?" Người tuyển chọn cũ: "Không. Họ giữ chúng ta." | Các thủ thư hoạt hình thảo luận về những cuốn sách bị cấm |
 
-Wypróbuj te prompty, aby usłyszeć dźwięk.
-[Wypróbuj Veo](https://deepmind.google/models/veo/?hl=pl)
+Hãy tự mình thử các câu lệnh này để nghe âm thanh!
+[Dùng thử Veo](https://deepmind.google/models/veo/?hl=vi)
 
-### Promptowanie z użyciem obrazów referencyjnych
+### Đặt câu lệnh bằng hình ảnh tham khảo
 
-Możesz użyć co najmniej 1 obrazu jako danych wejściowych, aby kierować generowanymi filmami, korzystając z funkcji [obrazu do filmu](https://ai.google.dev/gemini-api/docs/veo?hl=pl#generate-from-images) w Veo. Veo używa obrazu wejściowego jako klatki początkowej. Wybierz obraz, który najbardziej przypomina pierwszą scenę filmu, aby animować przedmioty codziennego użytku, ożywiać rysunki i obrazy oraz dodawać ruch i dźwięk do scen przyrodniczych.
+Bạn có thể dùng một hoặc nhiều hình ảnh làm dữ liệu đầu vào để hướng dẫn video được tạo bằng các tính năng [chuyển đổi hình ảnh sang video](https://ai.google.dev/gemini-api/docs/veo?hl=vi#generate-from-images) của Veo. Veo dùng hình ảnh đầu vào làm khung hình ban đầu. Chọn một hình ảnh gần giống nhất với cảnh đầu tiên mà bạn hình dung trong video để tạo hiệu ứng chuyển động cho các đồ vật hằng ngày, thổi hồn vào các bức vẽ và bức tranh, đồng thời thêm hiệu ứng chuyển động và âm thanh cho các cảnh thiên nhiên.
 
-| **Prompt** | **Wygenerowane dane wyjściowe** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **Obraz wejściowy (wygenerowany przez Nano Banana)** Hiperrealistyczne makro zdjęcie przedstawiające małych, miniaturowych surferów pływających na falach oceanu w rustykalnej kamiennej umywalce w łazience. Z mosiężnego kranu w stylu retro leje się woda, tworząc nieustanną falę. Surrealistyczne, fantazyjne, jasne naturalne oświetlenie. | Malutcy surferzy na falach oceanu w rustykalnej kamiennej umywalce. |
-| **Film wyjściowy (wygenerowany przez Veo 3.1)** Surrealistyczny, kinowy film makro. Mali surferzy pływają na nieustannie pojawiających się falach w kamiennej umywalce. Niekończące się fale generuje działający zabytkowy mosiężny kran. Kamera powoli przesuwa się po fantazyjnej, oświetlonej słońcem scenie, a miniaturowe figurki sprawnie pokonują turkusową wodę. | Małe figurki surferów krążące po falach w umywalce. |
+| **Hình ảnh đầu vào (Do Nano Banana tạo)** Ảnh chụp cận cảnh siêu thực về những người lướt sóng thu nhỏ đang cưỡi sóng biển trong một bồn rửa mặt bằng đá mộc mạc. Một vòi nước bằng đồng thau cổ điển đang chảy, tạo ra dòng nước chảy liên tục. Siêu thực, kỳ ảo, ánh sáng tự nhiên rực rỡ. | Những người lướt sóng tí hon đang cưỡi trên những con sóng biển bên trong một bồn rửa mặt bằng đá mộc mạc. |
+| **Video đầu ra (Do Veo 3.1 tạo)** Một video siêu thực, đậm chất điện ảnh ở chế độ cận cảnh. Những người lướt sóng tí hon cưỡi trên những con sóng liên tục trong một bồn rửa bằng đá trong phòng tắm. Một vòi nước bằng đồng thau cổ điển đang chảy tạo ra tiếng sóng biển bất tận. Máy quay từ từ quét qua cảnh vật độc đáo, ngập tràn ánh nắng khi những nhân vật thu nhỏ khéo léo lướt trên làn nước xanh ngọc. | Những người lướt sóng tí hon đang lướt trên những con sóng trong bồn rửa mặt. |
 
-Veo 3.1 umożliwia [odwoływanie się do obrazów](https://ai.google.dev/gemini-api/docs/veo?hl=pl#reference-images) lub elementów, aby określać zawartość generowanego filmu. Prześlij maksymalnie 3 obrazy pojedynczej osoby, postaci lub produktu. Veo zachowuje wygląd obiektu w filmie wyjściowym.
+Veo 3.1 cho phép bạn [tham khảo hình ảnh](https://ai.google.dev/gemini-api/docs/veo?hl=vi#reference-images) hoặc các thành phần để định hướng nội dung của video được tạo. Cung cấp tối đa 3 hình ảnh tài sản của một người, nhân vật hoặc sản phẩm. Veo giữ nguyên diện mạo của chủ thể trong video đầu ra.
 
-| **Prompt** | **Wygenerowane dane wyjściowe** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **Obraz referencyjny (wygenerowany przez Nano Banana)** Żabnica głębinowa czai się w ciemnej toni oceanu, pokazując zęby i świecąc przynętą. | Ciemna, świecąca ryba żabnica |
-| **Obraz referencyjny (wygenerowany przez Nano Banana)** Różowy kostium księżniczki dla dziecka z różdżką i tiarą na jednolitym tle produktu. | Różowy kostium księżniczki dla dziecka |
-| **Film wyjściowy (wygenerowany przez Veo 3.1)** Utwórz zabawną kreskówkową wersję ryby w kostiumie, która pływa i machając różdżką. | Żabnica w kostiumie księżniczki |
+| **Hình ảnh tham khảo (Do Nano Banana tạo)** Một con cá vây chân biển sâu ẩn nấp trong vùng nước sâu tối tăm, răng nanh lộ ra và mồi nhử phát sáng. | Một con cá cần câu tối tăm và phát sáng |
+| **Hình ảnh tham khảo (Do Nano Banana tạo)** Một bộ trang phục công chúa màu hồng dành cho trẻ em, bao gồm cả đũa phép và vương miện, trên một phông nền sản phẩm đơn giản. | Trang phục công chúa màu hồng dành cho trẻ em |
+| **Video đầu ra (Do Veo 3.1 tạo)** Tạo một phiên bản hoạt hình ngộ nghĩnh về chú cá đang mặc trang phục, bơi và vẫy đũa phép. | Một con cá cần câu mặc trang phục công chúa |
 
-Za pomocą Veo 3.1 możesz też generować filmy, określając [pierwszą i ostatnią klatkę](https://ai.google.dev/gemini-api/docs/veo?hl=pl#using-first-and-last-video-frames) filmu.
+Khi dùng Veo 3.1, bạn cũng có thể tạo video bằng cách chỉ định [khung hình đầu tiên và cuối cùng](https://ai.google.dev/gemini-api/docs/veo?hl=vi#using-first-and-last-video-frames) của video.
 
-| **Prompt** | **Wygenerowane dane wyjściowe** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **Pierwszy obraz (wygenerowany przez Nano Banana)** Fotorealistyczny obraz wysokiej jakości przedstawiający rudego kota prowadzącego czerwony kabriolet wyścigowy na Riwierze Francuskiej. | Rudy kot prowadzący czerwony kabriolet |
-| **Ostatni obraz (wygenerowany przez Nano Banana)** Pokaż, co się stanie, gdy samochód zjedzie z klifu. | Rudy kot jadący czerwonym kabrioletem spada z klifu |
-| **Film wyjściowy (wygenerowany przez Veo 3.1)** Opcjonalnie | Kot zjeżdża z klifu i odlatuje |
+| **Hình ảnh đầu tiên (Do Nano Banana tạo)** Hình ảnh chân thực, chất lượng cao về một chú mèo tam thể đang lái chiếc xe đua mui trần màu đỏ trên bờ biển Riviera của Pháp. | Một chú mèo mướp lái chiếc xe đua mui trần màu đỏ |
+| **Hình ảnh cuối cùng (Do Nano Banana tạo)** Cho biết điều gì xảy ra khi chiếc xe lao xuống vách đá. | Một chú mèo vàng lái chiếc xe mui trần màu đỏ lao xuống vách đá |
+| **Video đầu ra (Do Veo 3.1 tạo)** Không bắt buộc | Một chú mèo lái xe lao xuống vách đá và cất cánh |
 
-Ta funkcja zapewnia precyzyjną kontrolę nad kompozycją ujęcia, ponieważ pozwala określić klatkę początkową i końcową. Prześlij obraz lub użyj klatki z wcześniej wygenerowanego filmu, aby mieć pewność, że scena zaczyna się i kończy dokładnie tak, jak chcesz.
+Tính năng này giúp bạn kiểm soát chính xác bố cục của cảnh quay bằng cách cho phép bạn xác định khung hình bắt đầu và kết thúc. Tải một hình ảnh lên hoặc dùng một khung hình từ video được tạo trước đó để đảm bảo cảnh của bạn bắt đầu và kết thúc đúng như bạn hình dung.
 
-### Promptowanie rozszerzenia
+### Câu lệnh cho tiện ích
 
-Aby [wydłużyć](https://ai.google.dev/gemini-api/docs/veo?hl=pl#extending_veo_videos) wygenerowany przez Veo film za pomocą Veo 3.1 (niedostępne w przypadku Veo 3.1 Lite), użyj filmu jako danych wejściowych wraz z opcjonalnym promptem tekstowym. Wydłużenie kończy ostatnią sekundę lub 24 klatki filmu i pozwala scenie rozwijać się naturalnie, bez przerywania akcji.
+Để [kéo dài](https://ai.google.dev/gemini-api/docs/veo?hl=vi#extending_veo_videos) video do Veo tạo bằng Veo 3.1 (không dùng được cho Veo 3.1 Lite), hãy dùng video đó làm dữ liệu đầu vào cùng với một câu lệnh văn bản (không bắt buộc). Kéo dài sẽ hoàn tất giây cuối cùng hoặc 24 khung hình cuối cùng của video và tiếp tục hành động.
 
-Pamiętaj, że nie można skutecznie przedłużyć głosu, jeśli nie występuje on w ostatniej sekundzie filmu.
+Xin lưu ý rằng bạn không thể mở rộng giọng nói một cách hiệu quả nếu giọng nói không xuất hiện trong 1 giây cuối cùng của video.
 
-| **Prompt** | **Wygenerowane dane wyjściowe** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **Film wejściowy (wygenerowany przez Veo 3.1)** Paralotniarz startuje ze szczytu góry i zaczyna szybować w dół, nad dolinami pokrytymi kwiatami. | Paralotniarz startuje ze szczytu góry |
-| **Film wyjściowy (wygenerowany przez Veo 3.1)** Przedłuż ten film, dodając scenę, w której paralotniarz powoli opada. | Paralotniarz startuje ze szczytu góry, a potem powoli opada. |
+| **Video đầu vào (Do Veo 3.1 tạo)** Người chơi dù lượn cất cánh từ đỉnh núi và bắt đầu lượn xuống núi, nhìn ra những thung lũng phủ đầy hoa bên dưới. | Một người dù lượn cất cánh từ đỉnh núi |
+| **Video đầu ra (Do Veo 3.1 tạo)** Kéo dài video này với cảnh người dù lượn từ từ hạ xuống. | Một người dù lượn cất cánh từ đỉnh núi, sau đó từ từ hạ xuống |
 
-### Przykładowe prompty i dane wyjściowe
+### Ví dụ về câu lệnh và kết quả
 
-W tej sekcji znajdziesz kilka promptów, które pokazują, jak szczegółowe opisy mogą poprawić jakość każdego filmu.
+Phần này trình bày một số câu lệnh, nêu bật cách thông tin chi tiết mang tính mô tả có thể nâng cao kết quả của mỗi video.
 
-#### Sople
+#### Sôi động
 
-Z tego filmu dowiesz się, jak w prompcie wykorzystać elementy [podstaw pisania promptów](#basics).
+Video này minh hoạ cách bạn có thể sử dụng các thành phần của [kiến thức cơ bản về cách viết câu lệnh](#basics) trong câu lệnh của mình.
 
-| **Prompt** | **Wygenerowane dane wyjściowe** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| Zbliżenie (kompozycja) topniejących sopli (obiekt) na zamarzniętej (kontekst) kamiennej ścianie w chłodnych, niebieskich odcieniach (atmosfera), z przybliżeniem (ruch kamery) zachowującym szczegóły kropel wody (akcja). | Kapiące sople lodu na niebieskim tle. |
+| Ảnh cận cảnh (bố cục) của những cột băng tan chảy (chủ thể) trên một bức tường đá đóng băng (bối cảnh) với tông màu xanh dương lạnh (bầu không khí), phóng to (chuyển động của camera) duy trì chi tiết cận cảnh của những giọt nước (hành động). | Những chiếc măng đá đang nhỏ giọt trên nền xanh dương. |
 
-#### Mężczyzna rozmawia przez telefon
+#### Người đàn ông đang nói chuyện điện thoại
 
-Te filmy pokazują, jak możesz poprawiać prompt, dodając coraz bardziej szczegółowe informacje, aby Veo dostosował wygenerowany film do Twoich potrzeb.
+Những video này minh hoạ cách bạn có thể sửa đổi câu lệnh bằng cách cung cấp thông tin chi tiết ngày càng cụ thể để Veo tinh chỉnh kết quả theo ý bạn.
 
-| **Prompt** | **Wygenerowane dane wyjściowe** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **Mniej szczegółów**  Kamera przesuwa się, aby pokazać zbliżenie na zdesperowanego mężczyznę w zielonym prochowcu. Dzwoni z telefonu ściennego z tarczą, który jest oświetlony zielonym neonem. Wygląda jak scena z filmu. | Mężczyzna rozmawia przez telefon. |
-| **Więcej szczegółów** Zbliżenie w stylu filmowym przedstawia zdesperowanego mężczyznę w spranym zielonym prochowcu, który wybiera numer na telefonie z tarczą zamontowanym na szorstkiej ceglanej ścianie, oświetlonej upiornym blaskiem zielonego neonu. Kamera zbliża się do niego, ukazując napięcie w jego szczęce i desperację na twarzy, gdy próbuje zadzwonić. Płytka głębia ostrości skupia się na jego zmarszczonym czole i czarnym telefonie obrotowym, rozmywając tło w morze neonowych kolorów i nieokreślonych cieni, co tworzy poczucie pilności i izolacji. | Mężczyzna rozmawia przez telefon |
+| **Ít chi tiết** Camera di chuyển để cho thấy cận cảnh một người đàn ông tuyệt vọng mặc áo khoác măng tô màu xanh lục. Anh ấy đang gọi điện thoại quay số gắn trên tường dưới ánh đèn neon màu xanh lục. Có vẻ như đây là một cảnh trong phim. | Người đàn ông đang nói chuyện điện thoại. |
+| **Chi tiết khác** Cảnh quay cận cảnh theo phong cách điện ảnh cho thấy một người đàn ông tuyệt vọng mặc áo khoác măng tô màu xanh lục cũ kỹ đang quay số trên một chiếc điện thoại quay số gắn trên bức tường gạch thô ráp, chìm trong ánh sáng kỳ lạ của một biển hiệu neon màu xanh lục. Máy quay di chuyển vào gần, cho thấy sự căng thẳng ở quai hàm và vẻ tuyệt vọng hằn trên khuôn mặt khi anh cố gắng gọi điện. Độ sâu trường ảnh nông tập trung vào vầng trán nhăn nhó và chiếc điện thoại quay số màu đen của anh, làm mờ hậu cảnh thành một biển màu neon và những bóng mờ không rõ ràng, tạo cảm giác thôi thúc và cô lập. | Người đàn ông nói chuyện điện thoại |
 
-#### Irbis śnieżny
+#### Báo tuyết
 
-| **Prompt** | **Wygenerowane dane wyjściowe** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **Prosty prompt:** Urocze stworzenie z futrem podobnym do futra irbisa śnieżnego idzie przez zimowy las, render w stylu kreskówki 3D. | Lampart śnieżny jest ospały. |
-| **Szczegółowy prompt:** Utwórz krótką animowaną scenę 3D w radosnym stylu kreskówkowym. Urocze stworzenie z futrem podobnym do futra pantery śnieżnej, dużymi, wyrazistymi oczami i przyjazną, zaokrągloną sylwetką radośnie kica po fantastycznym zimowym lesie. Scena powinna przedstawiać zaokrąglone, pokryte śniegiem drzewa, delikatnie padające płatki śniegu i ciepłe światło słoneczne przenikające przez gałęzie. Skoczne ruchy i szeroki uśmiech stworzenia powinny wyrażać czystą radość. Postaw na optymistyczny, wzruszający ton, jasne, wesołe kolory i zabawne animacje. | Irbis śnieżny biegnie szybciej. |
+| **Câu lệnh đơn giản:** Một sinh vật dễ thương có bộ lông giống như báo tuyết đang đi bộ trong rừng mùa đông, ảnh kết xuất theo phong cách hoạt hình 3D. | Báo tuyết đang uể oải. |
+| **Câu lệnh chi tiết:** Tạo một cảnh hoạt hoạ 3D ngắn theo phong cách hoạt hình vui nhộn. Một sinh vật dễ thương có bộ lông giống như báo tuyết, đôi mắt to biểu cảm và dáng vẻ tròn trịa, thân thiện đang vui vẻ tung tăng trong một khu rừng mùa đông kỳ diệu. Cảnh này phải có những cây tròn, phủ đầy tuyết, những bông tuyết rơi nhẹ nhàng và ánh nắng ấm áp xuyên qua các cành cây. Chuyển động nảy của sinh vật và nụ cười tươi tắn phải thể hiện niềm vui thuần khiết. Hãy sử dụng giọng điệu lạc quan, ấm áp với màu sắc tươi sáng, vui vẻ và ảnh động sinh động. | Báo tuyết đang chạy nhanh hơn. |
 
-### Przykłady według elementów tekstu
+### Ví dụ theo thành phần viết
 
-Te przykłady pokazują, jak doprecyzować prompty za pomocą poszczególnych elementów podstawowych.
+Những ví dụ này cho thấy cách tinh chỉnh câu lệnh theo từng phần tử cơ bản.
 
-#### Temat i kontekst
+#### Chủ đề và bối cảnh
 
-Określ główny obiekt (temat) oraz tło lub otoczenie (kontekst).
+Xác định tiêu điểm chính (chủ thể) và nền hoặc môi trường (bối cảnh).
 
-| **Prompt** | **Wygenerowane dane wyjściowe** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| Render architektoniczny białego betonowego budynku mieszkalnego o płynnych, organicznych kształtach, płynnie łączącego się z bujną zielenią i futurystycznymi elementami. | Obiekt zastępczy. |
-| Satelita unoszący się w kosmosie z księżycem i gwiazdami w tle. | Satelita unoszący się w atmosferze. |
+| Bản dựng kiến trúc của một toà nhà chung cư bằng bê tông trắng với các hình dạng hữu cơ uyển chuyển, hoà quyện liền mạch với cây xanh tươi tốt và các yếu tố tương lai | Phần giữ chỗ. |
+| Một vệ tinh trôi nổi trong không gian vũ trụ, với mặt trăng và một số ngôi sao ở phía sau. | Vệ tinh trôi nổi trong bầu khí quyển. |
 
-#### Działanie
+#### Hành động
 
-Określ, co robi obiekt (np. idzie, biegnie lub obraca głowę).
+Nêu rõ hành động của đối tượng (ví dụ: đi bộ, chạy bộ hoặc quay đầu).
 
-| **Prompt** | **Wygenerowane dane wyjściowe** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| Szeroki kadr przedstawiający kobietę spacerującą po plaży. Jest zadowolona i zrelaksowana, patrzy w stronę horyzontu o zachodzie słońca. | Zachód słońca jest absolutnie piękny. |
+| Ảnh chụp toàn cảnh một người phụ nữ đang đi bộ dọc bãi biển, trông có vẻ hài lòng và thư thái khi nhìn về phía đường chân trời lúc hoàng hôn. | Hoàng hôn tuyệt đẹp. |
 
-#### Styl
+#### Kiểu
 
-Dodaj słowa kluczowe, aby ukierunkować generowanie na konkretną estetykę (np. surrealistyczną, vintage, futurystyczną, film noir).
+Thêm từ khoá để hướng quá trình tạo đến một phong cách thẩm mỹ cụ thể (ví dụ: siêu thực, cổ điển, tương lai, phim đen).
 
-| **Prompt** | **Wygenerowane dane wyjściowe** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| Styl film noir, mężczyzna i kobieta idą ulicą, tajemnica, kinowy, czarno-biały. | Styl film noir jest absolutnie piękny. |
+| Phong cách phim đen trắng, người đàn ông và phụ nữ đi bộ trên đường, bí ẩn, điện ảnh, đen trắng. | Phong cách phim đen trắng vô cùng đẹp mắt. |
 
-#### Ruch kamery i kompozycja
+#### Chuyển động và bố cục của camera
 
-Określ, jak porusza się kamera (ujęcie z perspektywy pierwszej osoby, widok z lotu ptaka, ujęcie z drona śledzącego) i jak jest nakręcone ujęcie (szeroki kadr, zbliżenie, z niskiego kąta).
+Nêu rõ cách camera di chuyển (cảnh quay từ góc nhìn thứ nhất, cảnh quay từ trên không, cảnh quay bằng máy bay không người lái) và cách đặt máy quay (cảnh quay toàn cảnh, cảnh quay cận cảnh, cảnh quay từ góc thấp).
 
-| **Prompt** | **Wygenerowane dane wyjściowe** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| Ujęcie z perspektywy pierwszej osoby z samochodu w stylu vintage jadącego w deszczu w Kanadzie w nocy, w stylu filmowym. | Zachód słońca jest absolutnie piękny. |
-| Ekstremalne zbliżenie oka, w którym odbija się miasto. | Zachód słońca jest absolutnie piękny. |
+| Cảnh quay theo góc nhìn của nhân vật (POV) từ một chiếc ô tô cổ đang lái xe dưới trời mưa, Canada vào ban đêm, mang phong cách điện ảnh. | Hoàng hôn tuyệt đẹp. |
+| Cảnh cận siêu gần của một con mắt phản chiếu hình ảnh thành phố. | Hoàng hôn tuyệt đẹp. |
 
-#### Atmosfera
+#### Môi trường
 
-Palety kolorów i oświetlenie wpływają na nastrój. Spróbuj użyć terminów takich jak „przygaszony pomarańczowy, ciepłe odcienie”, „naturalne światło”, „wschód słońca” lub „chłodne niebieskie odcienie”.
+Bảng màu và ánh sáng ảnh hưởng đến tâm trạng. Hãy thử dùng các cụm từ như "tông màu cam nhạt ấm áp", "ánh sáng tự nhiên", "bình minh" hoặc "tông màu xanh dương lạnh".
 
-| **Prompt** | **Wygenerowane dane wyjściowe** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| Zbliżenie na dziewczynkę trzymającą uroczego szczeniaka rasy golden retriever w parku, w promieniach słońca. | Szczeniak w ramionach dziewczynki. |
-| Filmowe zbliżenie na smutną kobietę jadącą autobusem w deszczu, chłodne niebieskie odcienie, smutny nastrój. | Kobieta jadąca autobusem, która jest smutna. |
+| Ảnh cận cảnh một cô gái đang bế chú chó con golden retriever đáng yêu trong công viên, dưới ánh nắng mặt trời. | Một chú cún trong vòng tay của một cô bé. |
+| Cảnh quay cận cảnh theo phong cách điện ảnh về một người phụ nữ buồn bã đang đi xe buýt dưới mưa, tông màu xanh dương lạnh, tâm trạng buồn bã. | Một người phụ nữ đang đi xe buýt cảm thấy buồn. |
 
-### Formaty obrazu
+### Tỷ lệ khung hình
 
-Veo umożliwia określenie formatu obrazu filmu.
+Veo cho phép bạn chỉ định tỷ lệ khung hình cho video.
 
-| **Prompt** | **Wygenerowane dane wyjściowe** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **Panoramiczny (16:9)** Utwórz film z widokiem z drona śledzącego mężczyznę jadącego czerwonym kabrioletem w Palm Springs w latach 70. XX wieku. Ciepłe światło słoneczne, długie cienie. | Mężczyzna prowadzący czerwony kabriolet w Palm Springs w stylu lat 70. |
-| **Orientacja pionowa (9:16)**  Utwórz film przedstawiający płynny ruch majestatycznego hawajskiego wodospadu w bujnym lesie deszczowym. Skup się na realistycznym przepływie wody, szczegółowych liściach i naturalnym oświetleniu, aby przekazać spokój. Uchwyć szumiącą wodę, mglistą atmosferę i plamki światła słonecznego, które przenikają przez gęsty baldachim. Użyj płynnych, filmowych ruchów kamery, aby pokazać wodospad i jego otoczenie. Postaw na spokojny, realistyczny ton, który przeniesie widza w spokojne piękno hawajskiego lasu deszczowego. | Majestatyczny hawajski wodospad w bujnym lesie deszczowym. |
+| **Màn hình rộng (16:9)** Tạo một video có góc nhìn từ trên cao của một chiếc máy bay không người lái đang theo dõi một người đàn ông lái chiếc xe mui trần màu đỏ ở Palm Springs, thập niên 1970, ánh nắng ấm áp, bóng đổ dài. | Một người đàn ông lái chiếc xe mui trần màu đỏ ở Palm Springs, theo phong cách những năm 1970. |
+| **Dọc (9:16)** Tạo video làm nổi bật chuyển động mượt mà của một thác nước hùng vĩ ở Hawaii trong một khu rừng nhiệt đới tươi tốt. Tập trung vào dòng nước chảy chân thực, tán lá chi tiết và ánh sáng tự nhiên để truyền tải sự yên bình. Ghi lại cảnh nước chảy xiết, bầu không khí mờ sương và ánh nắng lốm đốm xuyên qua tán cây rậm rạp. Sử dụng các chuyển động mượt mà và mang tính điện ảnh của camera để giới thiệu thác nước và cảnh vật xung quanh. Hãy hướng đến một giọng điệu bình dị và chân thực, đưa người xem đến với vẻ đẹp thanh bình của rừng mưa nhiệt đới ở Hawaii. | Một thác nước hùng vĩ ở Hawaii trong một khu rừng mưa tươi tốt. |
 
-## Wersje modelu
+## Phiên bản mô hình
 
-Więcej informacji o używaniu modeli Veo znajdziesz na stronie [Ceny](https://ai.google.dev/gemini-api/docs/pricing?hl=pl#veo-3.1) i w sekcji [Limity żądań](https://aistudio.google.com/rate-limit?hl=pl).
+Hãy xem trang [Định giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#veo-3.1) và [Hạn mức sử dụng](https://aistudio.google.com/rate-limit?hl=vi) để biết thêm thông tin chi tiết về việc sử dụng mô hình Veo.
 
-### Veo 3.1 (wersja testowa)
+### Veo 3.1 (Bản dùng thử)
 
-| Właściwość | Opis |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardKod modelu | **Gemini API**  `veo-3.1-generate-preview` |
-| saveObsługiwane typy danych | **Wejście**  Tekst, obraz  **Dane wyjściowe**  Film z dźwiękiem |
-| Limity token\_auto | **Wpisywanie tekstu**  1024 tokeny  **Film wyjściowy**  1 |
-| calendar\_monthOstatnia aktualizacja | Styczeń 2026 |
+| id\_cardMã kiểu máy | **Gemini API**  `veo-3.1-generate-preview` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, hình ảnh  **Đầu ra**  Video có âm thanh |
+| Giới hạn token\_auto | **Nhập văn bản**  1.024 token  **Video đầu ra**  1 |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 1 năm 2026 |
 
-### Veo 3.1 Fast (wersja testowa)
+### Veo 3.1 Fast Preview
 
-| Właściwość | Opis |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardKod modelu | **Gemini API**  `veo-3.1-fast-generate-preview` |
-| saveObsługiwane typy danych | **Wejście**  Tekst, obraz  **Dane wyjściowe**  Film z dźwiękiem |
-| Limity token\_auto | **Wpisywanie tekstu**  1024 tokeny  **Film wyjściowy**  1 |
-| calendar\_monthOstatnia aktualizacja | Styczeń 2026 |
+| id\_cardMã kiểu máy | **Gemini API**  `veo-3.1-fast-generate-preview` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, hình ảnh  **Đầu ra**  Video có âm thanh |
+| Giới hạn token\_auto | **Nhập văn bản**  1.024 token  **Video đầu ra**  1 |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 1 năm 2026 |
 
-### Veo 3.1 Lite (wersja testowa)
+### Veo 3.1 Lite (Bản xem trước)
 
-| Właściwość | Opis |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardKod modelu | **Gemini API**  `veo-3.1-lite-generate-preview` |
-| saveObsługiwane typy danych | **Wejście**  Tekst, obraz  **Dane wyjściowe**  Film z dźwiękiem |
-| Limity token\_auto | **Wpisywanie tekstu**  1024 tokeny  **Film wyjściowy**  1 |
-| calendar\_monthOstatnia aktualizacja | Marzec 2026 r. |
+| id\_cardMã kiểu máy | **Gemini API**  `veo-3.1-lite-generate-preview` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, hình ảnh  **Đầu ra**  Video có âm thanh |
+| Giới hạn token\_auto | **Nhập văn bản**  1.024 token  **Video đầu ra**  1 |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 3 năm 2026 |
 
-### Veo 3 (wycofane)
+### Veo 3 (Không dùng nữa)
 
-| Właściwość | Opis |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardKod modelu | **Gemini API**  `veo-3.0-generate-001` |
-| saveObsługiwane typy danych | **Wejście**  Tekst, obraz  **Dane wyjściowe**  Film z dźwiękiem |
-| Limity token\_auto | **Wpisywanie tekstu**  1024 tokeny  **Film wyjściowy**  1 |
-| calendar\_monthOstatnia aktualizacja | Lipiec 2025 r. |
+| id\_cardMã kiểu máy | **Gemini API**  `veo-3.0-generate-001` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, hình ảnh  **Đầu ra**  Video có âm thanh |
+| Giới hạn token\_auto | **Nhập văn bản**  1.024 token  **Video đầu ra**  1 |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 7 năm 2025 |
 
-### Veo 3 Fast (wycofana)
+### Veo 3 Fast (Đã ngừng hoạt động)
 
-| Właściwość | Opis |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardKod modelu | **Gemini API**  `veo-3.0-fast-generate-001` |
-| saveObsługiwane typy danych | **Wejście**  Tekst, obraz  **Dane wyjściowe**  Film z dźwiękiem |
-| Limity token\_auto | **Wpisywanie tekstu**  1024 tokeny  **Film wyjściowy**  1 |
-| calendar\_monthOstatnia aktualizacja | Lipiec 2025 r. |
+| id\_cardMã kiểu máy | **Gemini API**  `veo-3.0-fast-generate-001` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, hình ảnh  **Đầu ra**  Video có âm thanh |
+| Giới hạn token\_auto | **Nhập văn bản**  1.024 token  **Video đầu ra**  1 |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 7 năm 2025 |
 
-### Veo 2 (wycofane)
+### Veo 2 (Đã ngừng hoạt động)
 
-| Właściwość | Opis |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardKod modelu | **Gemini API**  `veo-2.0-generate-001` |
-| saveObsługiwane typy danych | **Wejście**  Tekst, obraz  **Dane wyjściowe**  Wideo |
-| Limity token\_auto | **Wpisywanie tekstu**  Nie dotyczy  **Wejście obrazu**  Dowolna rozdzielczość i format obrazu, rozmiar pliku do 20 MB  **Film wyjściowy**  Do 2 |
-| calendar\_monthOstatnia aktualizacja | Kwiecień 2025 r. |
+| id\_cardMã kiểu máy | **Gemini API**  `veo-2.0-generate-001` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, hình ảnh  **Đầu ra**  Video |
+| Giới hạn token\_auto | **Nhập văn bản**  Không áp dụng  **Đầu vào hình ảnh**  Mọi độ phân giải và tỷ lệ khung hình của hình ảnh đều được chấp nhận, miễn là kích thước tệp không quá 20 MB  **Video đầu ra**  Tối đa 2 |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 4 năm 2025 |
 
-### Veo 2 (wycofane)
+### Veo 2 (Đã ngừng hoạt động)
 
-| Właściwość | Opis |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardKod modelu | **Gemini API**  `veo-2.0-generate-001` |
-| saveObsługiwane typy danych | **Wejście**  Tekst, obraz  **Dane wyjściowe**  Wideo |
-| Limity token\_auto | **Wpisywanie tekstu**  Nie dotyczy  **Wejście obrazu**  Dowolna rozdzielczość i format obrazu, rozmiar pliku do 20 MB  **Film wyjściowy**  Do 2 |
-| calendar\_monthOstatnia aktualizacja | Kwiecień 2025 r. |
+| id\_cardMã kiểu máy | **Gemini API**  `veo-2.0-generate-001` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, hình ảnh  **Đầu ra**  Video |
+| Giới hạn token\_auto | **Nhập văn bản**  Không áp dụng  **Đầu vào hình ảnh**  Mọi độ phân giải và tỷ lệ khung hình của hình ảnh đều được chấp nhận, miễn là kích thước tệp không quá 20 MB  **Video đầu ra**  Tối đa 2 |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 4 năm 2025 |
 
-Wersje Veo Fast umożliwiają deweloperom tworzenie filmów z dźwiękiem przy zachowaniu wysokiej jakości i optymalizacji pod kątem szybkości oraz zastosowań biznesowych. Są one idealne w przypadku usług backendowych, które programowo generują reklamy, narzędzi do szybkiego testowania A/B koncepcji kreatywnych lub aplikacji, które muszą szybko tworzyć treści do mediów społecznościowych.
+Các phiên bản Veo Fast cho phép nhà phát triển tạo video có âm thanh trong khi vẫn duy trì chất lượng cao và tối ưu hoá tốc độ cũng như các trường hợp sử dụng cho doanh nghiệp. Các công cụ này rất phù hợp với những dịch vụ phụ trợ tạo quảng cáo theo chương trình, các công cụ để kiểm thử A/B nhanh các ý tưởng sáng tạo hoặc những ứng dụng cần nhanh chóng tạo nội dung trên mạng xã hội.
 
-## Co dalej?
+## Bước tiếp theo
 
-- Zacznij korzystać z interfejsu Veo 3.1 API, eksperymentując w [Veo Quickstart Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Veo.ipynb?hl=pl) i [aplecie Veo 3.1](https://aistudio.google.com/apps/bundled/veo_studio?hl=pl).
-- Dowiedz się, jak pisać jeszcze lepsze prompty, korzystając z naszego [wprowadzenia do projektowania promptów](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=pl).
+- Bắt đầu sử dụng Veo 3.1 API bằng cách thử nghiệm trong [Veo Quickstart Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Veo.ipynb?hl=vi) và [tiện ích Veo 3.1](https://aistudio.google.com/apps/bundled/veo_studio?hl=vi).
+- Tìm hiểu cách viết câu lệnh hiệu quả hơn nữa qua bài viết [Giới thiệu về thiết kế câu lệnh](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=vi).
 
-Prześlij opinię
+Gửi ý kiến phản hồi
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Ostatnia aktualizacja: 2026-07-30 UTC.
+Cập nhật lần gần đây nhất: 2026-08-30 UTC.
 
-Chcesz przekazać coś jeszcze?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-08-30 UTC."],[],[]]

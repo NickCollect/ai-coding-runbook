@@ -1,50 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/webhooks?hl=id
-fetched_at: 2026-08-24T02:34:24.165118+00:00
+source_url: https://ai.google.dev/gemini-api/docs/webhooks?hl=vi
+fetched_at: 2026-08-31T06:38:08.243121+00:00
 title: "Webhook \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Kirim masukan
+Gửi ý kiến phản hồi
 
 # Webhook
 
-Webhook memungkinkan Gemini API mengirim notifikasi real-time ke server Anda saat Operasi Asinkron atau Operasi yang Berjalan Lama (LRO) selesai. Hal ini menggantikan kebutuhan untuk melakukan polling API guna mendapatkan update status, sehingga mengurangi latensi dan overhead.
+Webhook cho phép Gemini API gửi thông báo theo thời gian thực đến máy chủ của bạn khi các Thao tác không đồng bộ hoặc Thao tác kéo dài (LRO) hoàn tất. Điều này giúp bạn không cần phải thăm dò API để biết thông tin cập nhật về trạng thái, giảm độ trễ và chi phí.
 
-Webhook tersedia untuk operasi seperti [Tugas batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=id),
-[Interaksi](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id), dan [pembuatan video](https://ai.google.dev/gemini-api/docs/video?hl=id).
+Webhook có sẵn cho các thao tác như [Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi) jobs (Công việc hàng loạt), [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) (Tương tác) và [video generation](https://ai.google.dev/gemini-api/docs/video?hl=vi) (tạo video).
 
-## Cara kerjanya
+## Cách hoạt động
 
-Daripada melakukan polling `GET /operations` berulang kali untuk memeriksa apakah tugas telah selesai, Anda dapat mengonfigurasi Webhook Gemini API untuk mengirim permintaan POST HTTP ke URL pemroses Anda segera setelah pemicu peristiwa.
+Thay vì liên tục thăm dò `GET /operations` để kiểm tra xem một công việc đã hoàn tất hay chưa, bạn có thể định cấu hình Webhook của Gemini API để gửi yêu cầu POST qua HTTP đến URL trình nghe của bạn ngay khi có sự kiện kích hoạt.
 
-Gemini API mendukung dua cara untuk mengonfigurasi webhook:
+Gemini API hỗ trợ 2 cách định cấu hình webhook:
 
-- [**Webhook statis**](#static-webhooks): Endpoint tingkat project yang dikonfigurasi
-  dengan Gemini [WebhookService API](https://ai.google.dev/api?hl=id). Baik untuk integrasi global (misalnya, memberi tahu Slack, menyinkronkan database, dll.).
-- [**Webhook dinamis**](#dynamic-webhooks): Penggantian tingkat permintaan yang meneruskan
-  URL webhook dalam payload konfigurasi panggilan tugas tertentu. Ideal untuk merutekan tugas tertentu ke endpoint khusus.
+- [**Webhook tĩnh**](#static-webhooks): Các điểm cuối ở cấp dự án được định cấu hình bằng [Gemini WebhookService API](https://ai.google.dev/api?hl=vi). Phù hợp với các hoạt động tích hợp trên toàn cầu (ví dụ: thông báo cho Slack, đồng bộ hoá cơ sở dữ liệu, v.v.).
+- [**Webhook động**](#dynamic-webhooks): Các chế độ ghi đè ở cấp yêu cầu sẽ truyền một URL webhook trong tải trọng cấu hình của một lệnh gọi công việc cụ thể. Lý tưởng cho việc định tuyến các công việc cụ thể đến các điểm cuối chuyên dụng.
 
-## Webhook statis
+## Webhook tĩnh
 
-Webhook statis terdaftar untuk seluruh [project](https://ai.google.dev/gemini-api/docs/api-key?hl=id#google-cloud-projects) dan dipicu untuk peristiwa yang cocok.
+Webhook tĩnh được đăng ký cho toàn bộ [dự án](https://ai.google.dev/gemini-api/docs/api-key?hl=vi#google-cloud-projects) và kích hoạt cho mọi sự kiện trùng khớp.
 
-### Membuat webhook
+### Tạo webhook
 
-Anda dapat membuat endpoint menggunakan SDK atau REST API.
+Bạn có thể tạo điểm cuối bằng SDK hoặc API REST.
 
-**PENTING**: Saat membuat webhook, API hanya menampilkan **secret penandatanganan**
-**satu kali**. Anda harus menyimpannya dengan aman (misalnya, dalam variabel lingkungan) untuk memverifikasi tanda tangan nanti. Jika kehilangan secret penandatanganan, Anda harus
-[merotasi](#rotate-signing-secret)nya.
+**QUAN TRỌNG**: Khi tạo một webhook, API chỉ trả về **khoá bí mật ký**
+**một lần**. Bạn phải lưu trữ khoá này một cách an toàn (ví dụ: trong các biến môi trường) để xác minh chữ ký sau này. Nếu mất khoá bí mật để ký, bạn sẽ phải [xoay vòng](#rotate-signing-secret) khoá đó.
 
 ### Python
 
@@ -100,12 +96,11 @@ curl -X POST \
   }'
 ```
 
-Untuk mengetahui detail tentang cara menyiapkan server untuk menerima data, lihat bagian
-[Menangani permintaan webhook](#handle-webhook-requests).
+Để biết thông tin chi tiết về cách thiết lập máy chủ để nhận dữ liệu, hãy xem phần [Xử lý các yêu cầu webhook](#handle-webhook-requests).
 
-### Mendapatkan webhook
+### Nhận webhook
 
-Ambil detail tentang webhook tertentu berdasarkan nama resource-nya.
+Truy xuất thông tin chi tiết về một webhook cụ thể theo tên tài nguyên của webhook đó.
 
 ### Python
 
@@ -147,9 +142,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Mencantumkan webhook
+### Liệt kê webhook
 
-Cantumkan semua webhook yang dikonfigurasi untuk project saat ini, dengan penomoran halaman opsional.
+Liệt kê tất cả webhook đã định cấu hình cho dự án hiện tại, có thể phân trang.
 
 ### Python
 
@@ -190,9 +185,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Memperbarui webhook
+### Cập nhật webhook
 
-Perbarui properti webhook yang ada seperti nama tampilan, URI target, atau peristiwa yang diikuti.
+Cập nhật các thuộc tính của webhook hiện có, chẳng hạn như tên hiển thị, URI mục tiêu hoặc các sự kiện đã đăng ký.
 
 ### Python
 
@@ -242,9 +237,9 @@ curl -X PATCH \
   }'
 ```
 
-### Menghapus webhook
+### Xoá webhook
 
-Hapus endpoint webhook dari project. Tindakan ini akan menghentikan pengiriman peristiwa di masa mendatang ke endpoint tersebut.
+Xoá một điểm cuối webhook khỏi dự án. Thao tác này sẽ dừng việc gửi các sự kiện trong tương lai đến điểm cuối đó.
 
 ### Python
 
@@ -282,12 +277,11 @@ curl -X DELETE \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Merotasi secret penandatanganan
+### Xoay vòng khoá bí mật ký
 
-Rotasi secret penandatanganan untuk webhook. Anda dapat mengonfigurasi apakah secret yang sebelumnya aktif akan dicabut segera atau setelah masa tenggang 24 jam.
+Xoay vòng khoá bí mật ký cho webhook. Bạn có thể định cấu hình xem các bí mật đã hoạt động trước đó có bị thu hồi ngay lập tức hay sau thời gian gia hạn 24 giờ.
 
-**PENTING**: Secret penandatanganan baru hanya ditampilkan **satu kali** pada waktu rotasi
-time. Simpan dengan aman sebelum memperbarui logika verifikasi Anda.
+**QUAN TRỌNG**: Khoá bí mật ký mới chỉ được trả về **một lần** tại thời điểm xoay vòng. Hãy lưu trữ khoá này một cách an toàn trước khi cập nhật logic xác minh.
 
 ### Python
 
@@ -340,14 +334,13 @@ curl -X POST \
   }'
 ```
 
-### Menangani permintaan webhook di server
+### Xử lý các yêu cầu webhook trên máy chủ
 
-Saat peristiwa yang Anda ikuti terjadi, URL webhook Anda akan menerima permintaan POST HTTP. Endpoint Anda harus merespons dengan kode status 2xx dalam beberapa detik untuk menghindari percobaan ulang. Untuk memastikan pengiriman, Gemini API secara otomatis mencoba ulang permintaan yang gagal selama 24 jam menggunakan backoff eksponensial.
+Khi một sự kiện mà bạn đã đăng ký xảy ra, URL webhook của bạn sẽ nhận được một yêu cầu HTTP POST. Điểm cuối của bạn phải phản hồi bằng mã trạng thái 2xx trong vòng vài giây để tránh thử lại. Để đảm bảo việc phân phối, Gemini API sẽ tự động thử lại các yêu cầu không thành công trong 24 giờ bằng cách sử dụng thuật toán thời gian đợi luỹ thừa.
 
-Gemini secara ketat mengikuti spesifikasi [Webhook Standar](https://github.com/standard-webhooks/standard-webhooks) untuk
-header keamanan. Verifikasi payload di server Anda menggunakan tanda tangan header yang ditandatangani dan secret penandatanganan statis yang disimpan. Lihat bagian [Amplop webhook](#webhook-envelope) untuk mengetahui informasi payload.
+Gemini tuân thủ nghiêm ngặt quy cách [Standard Webhooks](https://github.com/standard-webhooks/standard-webhooks) (Webhook tiêu chuẩn) đối với tiêu đề bảo mật. Xác minh tải trọng trên máy chủ bằng cách sử dụng chữ ký tiêu đề đã ký và khoá bí mật ký tĩnh đã lưu trữ. Hãy xem phần [Gói webhook](#webhook-envelope) để biết thông tin về tải trọng.
 
-Berikut adalah contoh penggunaan Flask untuk pemroses HTTP:
+Sau đây là ví dụ sử dụng Flask cho trình nghe HTTP:
 
 ### Python
 
@@ -440,14 +433,13 @@ app.listen(8000, () => {
 });
 ```
 
-## Webhook dinamis
+## Webhook động
 
-Webhook dinamis memungkinkan Anda mengikat endpoint webhook ke **konfigurasi
-permintaan tertentu**, yang ideal untuk antrean orkestrasi agen. Webhook dinamis memanfaatkan tanda tangan JWKS kunci publik asimetris, bukan secret simetris.
+Webhook động cho phép bạn liên kết một điểm cuối webhook với một **cấu hình yêu cầu cụ thể**, phù hợp với các hàng đợi điều phối tác nhân. Webhook động tận dụng chữ ký JWKS khoá công khai bất đối xứng thay vì các bí mật đối xứng.
 
-### Mengirim permintaan dinamis
+### Gửi yêu cầu linh hoạt
 
-Tambahkan `webhook_config` saat memicu tugas asinkron (misalnya, membuat Batch).
+Thêm một `webhook_config` khi kích hoạt một công việc không đồng bộ (ví dụ: tạo một Batch).
 
 ### Python
 
@@ -516,10 +508,9 @@ curl -X POST \
   }'
 ```
 
-### Memverifikasi tanda tangan dinamis (JWKS)
+### Xác minh chữ ký động (JWKS)
 
-Permintaan webhook dinamis memancarkan tanda tangan JSON Web Token (JWT). Pemroses Anda
-harus mengekstrak tanda tangan dan memverifikasinya menggunakan [endpoint sertifikat publik Google](https://www.googleapis.com/oauth2/v3/certs).
+Các yêu cầu webhook động phát ra chữ ký Mã thông báo web JSON (JWT). Trình nghe của bạn phải trích xuất chữ ký và xác minh chữ ký đó bằng cách sử dụng [các điểm cuối chứng chỉ công khai của Google](https://www.googleapis.com/oauth2/v3/certs).
 
 ### Python
 
@@ -620,11 +611,11 @@ app.post('/gemini-webhook-dynamic', (req, res) => {
 });
 ```
 
-## Amplop webhook
+## Phong bì webhook
 
-Untuk menghindari kemacetan bandwidth, webhook Gemini menggunakan model **payload tipis** untuk mengirimkan data. pengiriman mengirimkan snapshot yang berisi detail status dan pointer ke hasil, bukan file output mentah itu sendiri.
+Để tránh tình trạng tắc nghẽn băng thông, webhook của Gemini sử dụng mô hình **tải trọng mỏng** để phân phối dữ liệu. Các lượt phân phối sẽ gửi một ảnh chụp nhanh chứa thông tin chi tiết về trạng thái và con trỏ đến kết quả, thay vì chính tệp đầu ra thô.
 
-Berikut adalah contoh format payload:
+Sau đây là ví dụ về định dạng tải trọng:
 
 ```
 {
@@ -638,41 +629,40 @@ Berikut adalah contoh format payload:
 }
 ```
 
-## Referensi katalog peristiwa
+## Tài liệu tham khảo về danh mục sự kiện
 
-Peristiwa berikut dipicu untuk mendukung tugas:
+Các sự kiện sau đây được kích hoạt cho các công việc hỗ trợ:
 
-| Jenis peristiwa | Pemicu | Item payload (`data`) |
+| Loại sự kiện | Trigger | Mục tải trọng (`data`) |
 | --- | --- | --- |
-| `batch.succeeded` | Pemrosesan berhasil diselesaikan. | `id`, `output_file_uri` |
-| `batch.cancelled` | Pengguna membatalkan permintaan | `id` |
-| `batch.expired` | Batch belum diproses (selesai) dalam jangka waktu 24 jam | `id` |
-| `batch.failed` | Tugas batch gagal (error sistem atau validasi). | `id`, `error_code`, `error_message` |
-| `interaction.requires_action` | Panggilan fungsi, pengguna harus melakukan sesuatu | `id` |
-| `interaction.completed` | LRO di interactions API berhasil | `id` |
-| `interaction.failed` | LRO di interactions API gagal (error sistem atau validasi). | `id`, `error_code`, `error_message` |
-| `interaction.cancelled` | LRO di interactions API dibatalkan | `id` |
-| `video.generated` | LRO pembuatan video selesai. | `id`, `output_file_uri`, `file_name` |
+| `batch.succeeded` | Đã xử lý xong. | `id`, `output_file_uri` |
+| `batch.cancelled` | Người dùng đã huỷ yêu cầu | `id` |
+| `batch.expired` | Lô chưa được xử lý (hoàn tất) trong khung thời gian 24 giờ | `id` |
+| `batch.failed` | Thao tác hàng loạt không thành công (lỗi hệ thống hoặc lỗi xác thực). | `id`, `error_code`, `error_message` |
+| `interaction.requires_action` | Lệnh gọi hàm, người dùng cần làm gì đó | `id` |
+| `interaction.completed` | LRO trong API tương tác đã thành công | `id` |
+| `interaction.failed` | LRO trong API tương tác không thành công (lỗi hệ thống hoặc lỗi xác thực). | `id`, `error_code`, `error_message` |
+| `interaction.cancelled` | LRO trong API tương tác bị huỷ | `id` |
+| `video.generated` | Đã hoàn tất LRO tạo video. | `id`, `output_file_uri`, `file_name` |
 
-## Praktik terbaik
+## Các phương pháp hay nhất
 
-Untuk memastikan operasi yang andal dan skalabel:
+Để đảm bảo hoạt động đáng tin cậy và có khả năng mở rộng:
 
-- **Pemeriksaan perlindungan replay yang ketat**: Semua permintaan membawa `webhook-timestamp`
-  header. Selalu validasi stempel waktu ini di lapisan konfigurasi server Anda untuk menolak payload yang lebih lama dari **5 menit** (untuk mengurangi serangan replay).
-- **Proses secara asinkron**: Langsung respons dengan `2xx OK` setelah deteksi tanda tangan yang valid, dan antrekan operasi penguraian secara internal. Waktu tunggu pemroses yang terlalu lama akan memicu siklus percobaan ulang pengiriman.
-- **Penanganan penghapusan duplikat**: Webhook standar mengirimkan "Setidaknya sekali". Gunakan header `webhook-id` yang konsisten untuk menangani potensi duplikat dalam aliran kemacetan yang lebih tinggi.
+- **Kiểm tra nghiêm ngặt khả năng bảo vệ chống phát lại**: Tất cả các yêu cầu đều có một tiêu đề `webhook-timestamp`. Luôn xác thực dấu thời gian này trên lớp cấu hình máy chủ để từ chối các tải trọng cũ hơn **5 phút** (để giảm thiểu các cuộc tấn công phát lại).
+- **Xử lý không đồng bộ**: Phản hồi bằng `2xx OK` ngay khi phát hiện chữ ký hợp lệ và xếp hàng các thao tác phân tích cú pháp nội bộ. Thời gian giữ máy của người nghe quá lâu sẽ kích hoạt một chu kỳ thử lại việc gửi.
+- **Xử lý việc loại bỏ dữ liệu trùng lặp**: Webhook tiêu chuẩn phân phối "Ít nhất một lần". Sử dụng tiêu đề `webhook-id` nhất quán để xử lý các bản sao tiềm ẩn trong các luồng tắc nghẽn cao hơn.
 
-## Apa langkah selanjutnya?
+## Tiếp theo là gì?
 
-- [Batch API](https://ai.google.dev/gemini-api/docs/batch?hl=id): Manfaatkan webhook untuk mengotomatiskan endpoint volume tinggi.
+- [Batch API](https://ai.google.dev/gemini-api/docs/batch?hl=vi): Sử dụng webhook để tự động hoá các điểm cuối có số lượng lớn.
 
-Kirim masukan
+Gửi ý kiến phản hồi
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Terakhir diperbarui pada 2026-07-30 UTC.
+Cập nhật lần gần đây nhất: 2026-07-30 UTC.
 
-Ada masukan untuk kami?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-30 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-30 UTC."],[],[]]

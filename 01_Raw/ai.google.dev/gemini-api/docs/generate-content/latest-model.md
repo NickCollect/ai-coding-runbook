@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=tr
-fetched_at: 2026-08-24T02:26:40.082717+00:00
+fetched_at: 2026-08-31T06:39:40.500912+00:00
 title: "En yeni Gemini modellerini kullanma \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 

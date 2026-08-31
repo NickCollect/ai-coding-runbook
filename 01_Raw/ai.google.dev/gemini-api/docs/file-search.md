@@ -1,35 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/file-search?hl=id
-fetched_at: 2026-08-24T02:29:34.768605+00:00
-title: "Penelusuran file \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/file-search?hl=zh-CN
+fetched_at: 2026-08-31T06:41:33.921256+00:00
+title: "\u6587\u4ef6\u641c\u7d22 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Kirim masukan
+发送反馈
 
-# Penelusuran file
+# 文件搜索
 
-Gemini API memungkinkan Retrieval-Augmented Generation ("RAG") melalui alat Penelusuran File. Penelusuran File mengimpor, membagi, dan mengindeks data Anda untuk memungkinkan pengambilan informasi yang relevan dengan cepat berdasarkan perintah yang diberikan. Informasi yang diambil ini kemudian digunakan sebagai konteks untuk model, sehingga model dapat memberikan jawaban yang lebih akurat dan relevan. Penelusuran file juga dapat
-memberikan kemampuan multimodal dengan embedding teks yang didukung oleh
-`gemini-embedding-001`, dan embedding gambar/multimodal yang didukung oleh `gemini-embedding-2`.
+Gemini API 通过文件搜索工具实现检索增强生成 ("RAG")。文件搜索功能会导入、分块和索引您的数据，以便根据您提供的提示快速检索相关信息。然后，将检索到的信息用作模型的上下文，以便模型提供更准确且更相关的回答。文件搜索还能够提供多模态功能，该功能支持 `gemini-embedding-001` 提供的文本嵌入，以及 `gemini-embedding-2` 提供的图片/多模态嵌入。
 
-Penyimpanan file dan pembuatan sematan pada waktu kueri gratis, dan Anda hanya akan membayar
-pembuatan sematan saat pertama kali mengindeks file dan biaya token input / output model Gemini
-yang normal. Paradigma penagihan baru ini membuat Alat Penelusuran File lebih mudah dan hemat biaya untuk dibangun dan diskalakan. Lihat bagian [harga](#pricing) untuk mengetahui detailnya.
+在查询时进行文件存储和生成嵌入内容是免费的，您只需在首次为文件编制索引时支付创建嵌入内容的费用，以及支付正常的 Gemini 模型输入 / 输出 token 费用。这种新的结算模式使得文件搜索工具的构建和扩展更加简单且更具成本效益。如需了解详情，请参阅[价格](#pricing)部分。
 
-## Mengupload langsung ke penyimpanan Penelusuran File
+## মহিলা
 
-Contoh ini menunjukkan cara mengupload file secara langsung ke
-[penyimpanan penelusuran file](https://ai.google.dev/api/file-search/file-search-stores?hl=id#method:-media.uploadtofilesearchstore):
+此示例展示了如何直接将文件上传到[文件搜索存储区](https://ai.google.dev/api/file-search/file-search-stores?hl=zh-cn#method:-media.uploadtofilesearchstore)：
 
 ### Python
 
@@ -188,11 +183,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-Lihat referensi API untuk [`uploadToFileSearchStore`](https://ai.google.dev/api/file-search/file-search-stores?hl=id#method:-media.uploadtofilesearchstore) untuk mengetahui informasi selengkapnya.
+如需了解详情，请参阅 [`uploadToFileSearchStore`](https://ai.google.dev/api/file-search/file-search-stores?hl=zh-cn#method:-media.uploadtofilesearchstore) 的 API 参考文档。
 
-## Mengimpor file
+## 导入文件
 
-Atau, Anda dapat mengupload file yang ada dan [mengimpornya ke penyimpanan penelusuran file Anda](https://ai.google.dev/api/file-search/file-search-stores?hl=id#method:-filesearchstores.importfile):
+或者，您也可以上传现有文件，然后[将其导入文件搜索存储区](https://ai.google.dev/api/file-search/file-search-stores?hl=zh-cn#method:-filesearchstores.importfile)：
 
 ### Python
 
@@ -344,14 +339,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-Lihat referensi API untuk [`importFile`](https://ai.google.dev/api/file-search/file-search-stores?hl=id#method:-filesearchstores.importfile) untuk mengetahui informasi selengkapnya.
+如需了解详情，请参阅 [`importFile`](https://ai.google.dev/api/file-search/file-search-stores?hl=zh-cn#method:-filesearchstores.importfile) 的 API 参考文档。
 
-## Konfigurasi pemotongan
+## 分块配置
 
-Saat Anda mengimpor file ke penyimpanan Penelusuran File, file tersebut akan otomatis dipecah menjadi beberapa bagian, disematkan, diindeks, dan diupload ke penyimpanan Penelusuran File Anda. Jika Anda
-membutuhkan kontrol yang lebih besar atas strategi chunking, Anda dapat menentukan setelan
-[`chunking_config`](https://ai.google.dev/api/file-search/file-search-stores?hl=id#request-body_5)
-untuk menetapkan jumlah maksimum token per chunk dan jumlah maksimum token yang tumpang-tindih.
+将文件导入到文件搜索存储区后，系统会自动将其分解为块、嵌入、编入索引，然后上传到您的文件搜索存储区。如果您需要更精细地控制分块策略，可以指定 [`chunking_config`](https://ai.google.dev/api/file-search/file-search-stores?hl=zh-cn#request-body_5) 设置，以设置每个块的 token 数上限和重叠 token 数上限。
 
 ### Python
 
@@ -443,51 +435,37 @@ curl "${upload_url}" \
 cat upload_response.json
 ```
 
-Untuk menggunakan penyimpanan Penelusuran File, teruskan sebagai alat ke metode `interactions.create`, seperti yang ditunjukkan dalam contoh [Upload](#upload) dan [Impor](#importing-files).
+如需使用文件搜索存储区，请将其作为工具传递给 `interactions.create` 方法，如[上传](#upload)和[导入](#importing-files)示例所示。
 
-## Cara kerjanya
+## 运作方式
 
-Penelusuran File menggunakan teknik yang disebut penelusuran semantik untuk menemukan informasi yang relevan dengan perintah pengguna. Tidak seperti penelusuran berbasis kata kunci standar, penelusuran semantik memahami makna dan konteks kueri Anda.
+文件搜索功能使用一种称为语义搜索的技术来查找与用户提示相关的信息。与基于标准关键字的搜索不同，语义搜索能够理解查询的含义和上下文。
 
-Saat Anda mengimpor file, file tersebut akan dikonversi menjadi representasi numerik yang disebut
-[embedding](https://ai.google.dev/gemini-api/docs/embeddings?hl=id), yang menangkap makna semantik
-konten yang diupload. きたいEmbeddings ini disimpan dalam database Penelusuran File khusus.
-Saat Anda membuat kueri, kueri tersebut juga dikonversi menjadi embedding. Kemudian, sistem
-melakukan Penelusuran File untuk menemukan potongan dokumen yang paling mirip dan relevan
-dari penyimpanan Penelusuran File.
+导入文件时，系统会将其转换为称为[嵌入](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-cn)的数值表示形式，以捕捉上传内容的语义。这些嵌入会存储在专门的文件搜索数据库中。
+当您提出查询时，系统也会将其转换为嵌入。然后，系统会执行文件搜索，以从文件搜索存储区中找到最相似且最相关的文档块。
 
-Tidak ada Time To Live (TTL) untuk penyematan;
-penyematan akan tetap ada hingga dihapus secara manual, atau saat model tidak digunakan lagi. Namun, file akan dihapus setelah 48 jam.
+嵌入向量没有存留时间 (TTL)；它们会一直留存，直到被手动删除或模型被弃用为止。不过，文件会在 48 小时后被删除。
 
-Berikut perincian proses penggunaan File Search
-`uploadToFileSearchStore` API:
+下面详细介绍了使用文件搜索 `uploadToFileSearchStore` API 的流程：
 
-1. **Membuat penyimpanan Penelusuran File**: Penyimpanan Penelusuran File berisi data yang diproses dari file Anda. Ini adalah penampung persisten untuk sematan yang akan digunakan oleh penelusuran semantik.
-2. **Mengupload file dan mengimpor ke penyimpanan Penelusuran File**: Mengupload file dan mengimpor hasil ke penyimpanan Penelusuran File secara bersamaan. Tindakan ini akan membuat objek `File`
-   sementara, yang merupakan referensi ke dokumen mentah Anda. Data tersebut kemudian dibagi-bagi, dikonversi menjadi embedding Penelusuran File, dan diindeks. `File`
-   Objek akan dihapus setelah 48 jam, sedangkan data yang diimpor ke penyimpanan
-   Penelusuran File akan disimpan tanpa batas waktu hingga Anda memilih untuk menghapusnya.
-3. **Kueri dengan Penelusuran File**: Terakhir, Anda menggunakan alat `FileSearch` dalam panggilan `generateContent`. Dalam konfigurasi alat, Anda menentukan
-   `FileSearchRetrievalResource`, yang mengarah ke `FileSearchStore` yang ingin
-   Anda telusuri. Hal ini memberi tahu model untuk melakukan penelusuran semantik di penyimpanan Penelusuran File tertentu tersebut guna menemukan informasi yang relevan untuk mendasari responsnya.
+1. **创建文件搜索存储区**：文件搜索存储区包含来自文件的处理后数据。它是语义搜索将使用的嵌入的持久性容器。
+2. **上传文件并导入到文件搜索存储区**：同时上传文件并将结果导入到文件搜索存储区。 মহিলা creates a
+   temporary `File` object, which is a reference to your raw document. 然后，该数据会被分块、转换为 File Search 嵌入并编入索引。`File`对象会在 48 小时后被删除，而导入到文件搜索存储区的数据会无限期存储，直到您选择删除为止。
+3. **使用文件搜索进行查询**：最后，您可以在 `generateContent` 调用中使用 `FileSearch` 工具。在工具配置中，您需要指定一个
+   `FileSearchRetrievalResource`，该 `FileSearchStore` 指向您要
+   搜索的。这会指示模型对该特定文件搜索存储区执行语义搜索，以查找相关信息来为回答提供依据。
 
-![Proses pengindeksan dan pembuatan kueri Penelusuran File](https://ai.google.dev/static/gemini-api/docs/images/File-search.png?hl=id)
+![文件搜索的索引编制和查询流程](https://ai.google.dev/static/gemini-api/docs/images/File-search.png?hl=zh-cn)
 
-Proses pengindeksan dan pembuatan kueri Penelusuran File
+文件搜索的索引和查询过程
 
-Dalam diagram ini, garis putus-putus dari *Documents* ke *Embedding model*
-(menggunakan [`gemini-embedding-001`](https://ai.google.dev/gemini-api/docs/embeddings?hl=id))
-merepresentasikan `uploadToFileSearchStore` API (melewati *File storage*).
-Jika tidak, menggunakan [Files API](https://ai.google.dev/gemini-api/docs/files?hl=id) untuk membuat
-dan mengimpor file secara terpisah akan memindahkan proses pengindeksan dari *Dokumen* ke
-*Penyimpanan file*, lalu ke *Model sematan*.
+在此图中，从*文档*到*嵌入模型*（使用 [`gemini-embedding-001`](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-cn)）的虚线表示 `uploadToFileSearchStore` API（绕过*文件存储*）。否则，使用 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn) 单独创建文件，然后导入文件，会将索引编制流程从*文档*移至*文件存储*，然后再移至*嵌入模型*。
 
-## Menyimpan Penelusuran File
+## 文件搜索存储区
 
-Penyimpanan Penelusuran File adalah container untuk embedding dokumen Anda. Meskipun file mentah yang diupload melalui File API akan dihapus setelah 48 jam, data yang diimpor ke penyimpanan Penelusuran File akan disimpan tanpa batas waktu hingga Anda menghapusnya secara manual. Anda dapat membuat beberapa penyimpanan Penelusuran File untuk mengatur dokumen Anda. API
-`FileSearchStore` memungkinkan Anda membuat, mencantumkan, mendapatkan, dan menghapus untuk mengelola toko penelusuran file. Nama toko Penelusuran File memiliki cakupan global.
+文件搜索存储区是文档嵌入的容器。虽然通过 File API 上传的原始文件会在 48 小时后被删除，但导入到文件搜索存储区的数据会无限期存储，直到您手动将其删除。您可以创建多个文件搜索存储区来整理文档。借助 `FileSearchStore` API，您可以创建、列出、获取和删除文件搜索存储区，从而管理这些存储区。文件搜索存储区名称的范围是全局的。
 
-Berikut beberapa contoh cara mengelola toko Penelusuran File Anda:
+以下是一些有关如何管理文件搜索商店的示例：
 
 ### Python
 
@@ -546,12 +524,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilese
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilesearchstore123?key=${GEMINI_API_KEY}"
 ```
 
-## Dokumen Penelusuran File
+## 文件搜索文档
 
-Anda dapat mengelola setiap dokumen di penyimpanan file dengan API
-[File Search Documents](https://ai.google.dev/api/file-search/documents?hl=id) untuk `list` setiap dokumen
-di penyimpanan penelusuran file, `get` informasi tentang dokumen, dan `delete`
-dokumen berdasarkan nama.
+Bella 可以在文件存储区中使用 [File Search Documents](https://ai.google.dev/api/file-search/documents?hl=zh-cn) API 管理各个文档，以`list` 文件搜索存储区中的每个文档、`get` 文档的相关信息，以及按名称`delete` 文档。
 
 ### Python
 
@@ -595,10 +570,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilese
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilesearchstore123/documents/sampletxt123?key=${GEMINI_API_KEY}&force=true"
 ```
 
-## Metadata file
+## 文件元数据
 
-Anda dapat menambahkan metadata kustom ke file untuk membantu memfilter atau memberikan
-konteks tambahan. Metadata adalah sekumpulan key-value pair.
+您可以为文件添加自定义元数据，以便过滤文件或提供更多背景信息。元数据是一组键值对。
 
 ### Python
 
@@ -630,8 +604,7 @@ let operation = await ai.fileSearchStores.importFile({
 });
 ```
 
-Hal ini berguna jika Anda memiliki beberapa dokumen di penyimpanan Penelusuran File dan ingin
-menelusuri hanya sebagian dokumen tersebut.
+如果您在文件搜索存储区中有多个文档，并且只想搜索其中的一部分，此参数会非常有用。
 
 ### Python
 
@@ -697,17 +670,15 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
 cat response.json
 ```
 
-Panduan tentang penerapan sintaksis filter daftar untuk `metadata_filter` dapat ditemukan
-di [google.aip.dev/160](https://google.aip.dev/160)
+有关为 `metadata_filter` 实现列表过滤条件语法的指南，请访问 [google.aip.dev/160](https://google.aip.dev/160)
 
-## Penelusuran File Multimodal
+## 多模态文件搜索
 
-Penelusuran File Multimodal memungkinkan Anda menyematkan dan menelusuri gambar secara native, sehingga memungkinkan aplikasi RAG multimodal yang kaya.
+借助多模态文件搜索，您可以原生嵌入和搜索图片，从而实现丰富的多模态 RAG 应用。
 
-### Mengonfigurasi model embedding
+### 配置嵌入模型
 
-Saat membuat `FileSearchStore`, Anda harus mengganti model embedding default khusus teks untuk menggunakan model multimodal. Gunakan `models/gemini-embedding-2` untuk
-memproses teks dan gambar.
+创建 `FileSearchStore` 时，您必须替换默认的纯文本嵌入模型，以使用多模态模型。使用 `models/gemini-embedding-2` 处理文本和图片。
 
 ### Python
 
@@ -742,24 +713,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/fileSearchStores?
     }'
 ```
 
-### Upload gambar
+### 上传图片
 
-Setelah membuat penyimpanan dengan model penyematan multimodal, Anda dapat mengupload
-file gambar secara langsung menggunakan API upload yang sama seperti yang dijelaskan dalam
-[Mengupload langsung ke penyimpanan Penelusuran File](#upload) atau [Mengimpor file](#importing-files).
+使用多模态嵌入模型创建存储区后，您可以直接使用[直接上传到文件搜索存储区](#upload)或[导入文件](#importing-files)中所述的相同上传 API 来上传图片文件。
 
-**Persyaratan file gambar:**
+**图片文件要求**：
 
-- File gambar harus memiliki resolusi maksimal 4K x 4K piksel.
-- Format yang didukung adalah PNG, JPEG.
+- 图片文件的分辨率不得超过 4K x 4K 像素。
+- 支持的格式包括 PNG、JPEG。
 
-## Kutipan
+## 引用
 
-Saat Anda menggunakan Penelusuran File, respons model dapat menyertakan kutipan yang
-menentukan bagian dokumen yang Anda upload yang digunakan untuk membuat
-jawaban. Hal ini membantu dalam pengecekan fakta dan verifikasi.
+使用文件搜索功能时，模型的回答可能包含引用，指明上传的文档中哪些部分用于生成回答。这有助于进行事实核查和验证。
 
-Anda dapat mengakses informasi kutipan melalui atribut `annotations` di dalam blok `content` langkah `model_output` dalam respons.
+您可以通过回答中 `model_output` 步骤的 `content` 代码块内的 `annotations` 属性访问引用信息。
 
 ### Python
 
@@ -810,14 +777,11 @@ for (const step of interaction.steps) {
 }
 ```
 
-Untuk mengetahui informasi mendetail tentang struktur kutipan, lihat
-[referensi API untuk Interaksi](https://ai.google.dev/api/interactions-api?hl=id#Resource:FileCitation).
+如需详细了解引用的结构，请参阅 [Interactions API 参考文档](https://ai.google.dev/api/interactions-api?hl=zh-cn#Resource:FileCitation)。
 
-### Nomor halaman
+### 页码
 
-Saat Anda menggunakan Penelusuran File dengan dokumen yang memiliki halaman (seperti PDF), respons model dapat menyertakan nomor halaman tempat informasi ditemukan.
-Anda dapat mengakses informasi ini melalui atribut `page_number` dari anotasi
-`file_citation`.
+如果您在搜索文件时使用了包含页面的文档（例如 PDF），模型给出的回答可能会包含找到相关信息的页码。您可以通过 `file_citation` 注释的 `page_number` 属性访问此信息。
 
 ### Python
 
@@ -875,11 +839,11 @@ for (const step of interaction.steps) {
 }
 ```
 
-### Kutipan media
+### 媒体引用
 
-Saat model mereferensikan potongan gambar selama pembuatan, API akan menampilkan anotasi jenis `file_citation` dalam anotasi yang menyertakan `media_id`. Anda dapat menggunakan ID ini untuk mendownload potongan gambar persis yang dirujuk model. `media_id` ini bersifat persisten di beberapa panggilan penelusuran, sehingga Anda dapat mengambil gambar yang sama atau menyimpannya dalam cache menggunakan ID dengan andal.
+当模型在生成过程中引用图片块时，API 会在注解中返回类型为 `file_citation` 的注解，其中包含 `media_id`。您可以使用此 ID 下载模型引用的确切图片块。此 `media_id` 在多次搜索调用中保持不变，因此您可以可靠地检索同一图片或使用该 ID 缓存图片。
 
-Cuplikan berikut adalah contoh langkah respons REST:
+以下代码段是一个 REST 响应步骤示例：
 
 ```
 {
@@ -900,7 +864,7 @@ Cuplikan berikut adalah contoh langkah respons REST:
 }
 ```
 
-Cuplikan kode berikut menunjukkan cara mengambil `media_id` dan mendownload media:
+以下代码段演示了如何检索 `media_id` 和下载媒体：
 
 ### Python
 
@@ -943,11 +907,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1/fileSearchStores/my-st
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Metadata kustom
+## 自定义元数据
 
-Jika telah menambahkan metadata kustom ke file, Anda dapat mengaksesnya di
-anotasi respons model. Hal ini berguna untuk meneruskan konteks tambahan (seperti URL, nomor halaman, atau penulis) dari dokumen sumber ke logika aplikasi Anda. Setiap anotasi kutipan berjenis `file_citation`
-berisi metadata kustom ini.
+如果您已向文件添加自定义元数据，则可以在模型回答的注释中访问该元数据。这有助于将其他上下文（例如网址、页码或作者）从源文档传递到应用逻辑。类型为 `file_citation` 的每个引用注释都包含此自定义元数据。
 
 ### Python
 
@@ -1028,10 +990,9 @@ for (const step of interaction.steps) {
 }
 ```
 
-## Output terstruktur
+## 结构化输出
 
-Mulai dari model Gemini 3, Anda dapat menggabungkan alat penelusuran file dengan
-[output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id).
+从 Gemini 3 模型开始，您可以将文件搜索工具与[结构化输出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)相结合。
 
 ### Python
 
@@ -1126,25 +1087,25 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Model yang didukung
+## 支持的模型
 
-Model berikut mendukung Penelusuran File:
+以下模型支持文件搜索：
 
-| Model | Penelusuran File |
+| 模型 | 文件搜索 |
 | --- | --- |
-| [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=id) | ✔️ |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=id) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=id) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=id) | ✔️ |
-| [Pratinjau Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=id) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=id) | ✔️ |
-| [Pratinjau Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=id) | ✔️ |
+| [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=zh-cn) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=zh-cn) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-cn) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=zh-cn) | ✔️ |
+| [Gemini 3.1 Pro 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-cn) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-cn) | ✔️ |
+| [Gemini 3 Flash 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-cn) | ✔️ |
 
-## Jenis file yang didukung
+## 支持的文件类型
 
-Penelusuran File mendukung berbagai format file, yang tercantum di bagian berikut.
+文件搜索支持多种文件格式，详见以下各部分。
 
-### Jenis file aplikasi
+### 应用文件类型
 
 - `application/dart`
 - `application/ecmascript`
@@ -1177,7 +1138,7 @@ Penelusuran File mendukung berbagai format file, yang tercantum di bagian beriku
 - `application/xml`
 - `application/zip`
 
-### Jenis file teks
+### 文本文件类型
 
 - `text/1d-interleaved-parityfec`
 - `text/RED`
@@ -1336,43 +1297,40 @@ Penelusuran File mendukung berbagai format file, yang tercantum di bagian beriku
 - `text/xml-external-parsed-entity`
 - `text/yaml`
 
-## Batasan
+## 限制
 
-- **Live API:** Penelusuran File tidak didukung di
-  [Live API](https://ai.google.dev/gemini-api/docs/live?hl=id).
-- **Ketidakcocokan alat:** Alat perujukan bawaan tidak dapat digabungkan satu sama lain;
-  misalnya, Penelusuran File tidak dapat digunakan secara bersamaan dengan [Perujukan dengan Google Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id) atau
-  [Konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id) dalam permintaan yang sama.
+- **Live API**：[Live API](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn) 不支持文件搜索。
+- **工具不兼容**：内置接地工具无法相互结合使用；例如，在同一请求中，文件搜索无法同时与[依托 Google 搜索进行接地](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)或 [网址上下文](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn)搭配使用。
 
-### Batas kapasitas
+### 速率限制
 
-File Search API memiliki batas berikut untuk menerapkan stabilitas layanan:
+为了确保服务稳定性，文件搜索 API 具有以下限制：
 
-- **Ukuran file maksimum / batas per dokumen**: 100 MB
-- **Total ukuran penyimpanan Penelusuran File project** (berdasarkan tingkat pengguna):
-  - **Gratis**: 1 GB
-  - **Tingkat 1**: 10 GB
-  - **Tingkat 2**: 100 GB
-  - **Tingkat 3**: 1 TB
-- **Rekomendasi**: Batasi ukuran setiap penyimpanan Penelusuran File hingga di bawah 20 GB untuk memastikan latensi pengambilan yang optimal.
+- **文件大小上限 / 每个文档的限制**：100 MB
+- **项目文件搜索存储空间总大小**（取决于用户层级）：
+  - **免费**：1 GB
+  - **1 级**：10 GB
+  - **第 2 级**：100 GB
+  - **第 3 级**：1 TB
+- **建议**：将每个文件搜索存储区的大小限制在 20 GB 以下，以确保最佳检索延迟时间。
 
-## Harga
+## 价格
 
-- Anda akan ditagih untuk penyematan pada waktu pengindeksan berdasarkan [harga penyematan](https://ai.google.dev/gemini-api/docs/pricing?hl=id#gemini-embedding-2) yang ada.
-- Penyimpanan tidak dikenai biaya.
-- Penyematan waktu kueri tidak dikenai biaya.
-- Token dokumen yang diambil akan ditagih sebagai [token konteks](https://ai.google.dev/gemini-api/docs/tokens?hl=id) reguler.
+- 系统会在建立索引时根据现有的[嵌入价格](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn#gemini-embedding-2)向您收取嵌入费用。
+- 存储空间免费。
+- 查询时嵌入是免费的。
+- 检索到的文档 token 会按常规[上下文 token](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) 计费。
 
-## Langkah berikutnya
+## 后续步骤
 
-- Baca referensi API untuk [Penyimpanan Penelusuran File](https://ai.google.dev/api/file-search/file-search-stores?hl=id) dan [Dokumen](https://ai.google.dev/api/file-search/documents?hl=id) Penelusuran File.
+- 访问 [File Search Stores](https://ai.google.dev/api/file-search/file-search-stores?hl=zh-cn) 和 File Search [Documents](https://ai.google.dev/api/file-search/documents?hl=zh-cn) 的 API 参考文档。
 
-Kirim masukan
+发送反馈
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Terakhir diperbarui pada 2026-08-19 UTC.
+最后更新时间 (UTC)：2026-08-19。
 
-Ada masukan untuk kami?
+需要向我们提供更多信息？
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-08-19 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-08-19。"],[],[]]

@@ -1,36 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/url-context?hl=ko
-fetched_at: 2026-08-24T02:27:09.663910+00:00
-title: "URL \ucee8\ud14d\uc2a4\ud2b8 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/url-context?hl=ja
+fetched_at: 2026-08-31T06:42:33.552115+00:00
+title: "URL \u30b3\u30f3\u30c6\u30ad\u30b9\u30c8 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-의견 보내기
+フィードバックを送信
 
-# URL 컨텍스트
+# URL コンテキスト
 
-[URL 컨텍스트 도구를 사용하면 URL 형식으로 모델에 추가 컨텍스트를 제공할 수 있습니다. 요청에 URL을 포함하면 모델은 제한사항 섹션에 나열된 URL 유형이 아닌 한 해당 페이지의 콘텐츠에 액세스하여 응답에 정보를 제공하고 응답을 개선합니다.](#limitations)
+URL コンテキスト ツールを使用すると、URL の形式でモデルに追加のコンテキストを提供できます。リクエストに URL を含めると、モデルはそれらのページのコンテンツにアクセスし（[制限事項のセクション](#limitations)に記載されている URL タイプでない限り）、レスポンスを形成して強化します。
 
-URL 컨텍스트 도구는 다음과 같은 태스크에 유용합니다.
+URL コンテキスト ツールは、次のようなタスクに役立ちます。
 
-- **데이터 추출**: 여러 URL에서 가격, 이름 또는 주요
-  결과와 같은 특정 정보를 가져옵니다.
-- **문서 비교**: 여러 보고서, 기사 또는 PDF를 분석하여
-  차이점을 파악하고 추세를 추적합니다.
-- **콘텐츠 종합 및 생성**: 여러 소스 URL의 정보를 결합하여 정확한 요약, 블로그 게시물 또는 보고서를 생성합니다.
-- **코드 및 문서 분석**: GitHub 저장소 또는 기술 문서를 가리켜 코드를 설명하거나, 설정 안내를 생성하거나, 질문에 답변합니다.
+- **データの抽出**: 複数の URL から価格、名前、主な調査結果などの特定の情報を取得します。
+- **ドキュメントの比較**: 複数のレポート、記事、PDF を分析して、違いを特定し、トレンドを追跡します。
+- **コンテンツの統合と作成**: 複数のソース URL からの情報を組み合わせて、正確な要約、ブログ投稿、レポートを生成します。
+- **コードとドキュメントを分析**: GitHub リポジトリまたは技術ドキュメントを指定して、コードの説明、設定手順の生成、質問への回答を行います。
 
-다음 예에서는 서로 다른 웹사이트의 두 가지 레시피를 비교하는 방법을 보여줍니다.
+次の例は、異なるウェブサイトの 2 つのレシピを比較する方法を示しています。
 
 ### Python
 
@@ -63,7 +61,7 @@ for each in response.candidates[0].content.parts:
 print(response.candidates[0].url_context_metadata)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -113,26 +111,19 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 cat result.json
 ```
 
-## 작동 방식
+## 仕組み
 
-URL 컨텍스트 도구는 2단계 검색 프로세스를 사용하여 속도, 비용, 최신 데이터 액세스의 균형을 맞춥니다. URL을 제공하면 도구는 먼저 내부 색인 캐시에서 콘텐츠를 가져오려고 시도합니다. 이는 고도로 최적화된 캐시 역할을 합니다. URL이 색인에서 제공되지 않는 경우 (예: 매우 새로운 페이지인 경우) 도구는 자동으로 대체하여 실시간 가져오기를 실행합니다.
-이렇게 하면 URL에 직접 액세스하여 콘텐츠를 실시간으로 가져올 수 있습니다.
+URL コンテキスト ツールは、速度、コスト、最新データへのアクセスのバランスを取るために、2 段階の取得プロセスを使用します。URL を指定すると、ツールはまず内部インデックス キャッシュからコンテンツを取得しようとします。これは、高度に最適化されたキャッシュとして機能します。URL がインデックスに登録されていない場合（たとえば、非常に新しいページの場合）、ツールは自動的にライブ取得にフォールバックします。これにより、URL に直接アクセスしてコンテンツをリアルタイムで取得します。
 
-## 다른 도구와 결합
+## 他のツールとの組み合わせ
 
-URL 컨텍스트 도구를 다른 도구와 결합하여 더 강력한 워크플로를 만들 수 있습니다.
+URL コンテキスト ツールを他のツールと組み合わせて、より強力なワークフローを作成できます。
 
-[Gemini 3 모델](#supported-models)은 기본 제공 도구
-(URL 컨텍스트와 같은)를 맞춤 도구 (함수 호출)와 결합하는 것을 지원합니다. 도구 조합
- 페이지에서 자세히 알아보세요.
+[Gemini 3 モデル](#supported-models)は、組み込みツール（URL コンテキストなど）とカスタムツール（関数呼び出し）の組み合わせをサポートしています。詳しくは、[ツールの組み合わせ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ja)のページをご覧ください。
 
-### 검색으로 그라운딩
+### 検索によるグラウンディング
 
-URL 컨텍스트와
-[Google 검색을 사용한 그라운딩](https://ai.google.dev/gemini-api/docs/grounding?hl=ko)이 모두 사용 설정되면
-모델은 검색 기능을 사용하여 온라인에서
-관련 정보를 찾은 다음 URL 컨텍스트 도구를 사용하여 찾은 페이지를 더
-심층적으로 이해할 수 있습니다. 이 접근 방식은 광범위한 검색과 특정 페이지의 심층 분석이 모두 필요한 프롬프트에 유용합니다.
+URL コンテキストと [Google 検索によるグラウンディング](https://ai.google.dev/gemini-api/docs/grounding?hl=ja)の両方が有効になっている場合、モデルは検索機能を使用してオンラインで関連情報を探し、URL コンテキスト ツールを使用して見つけたページをより深く理解できます。このアプローチは、広範な検索と特定のページの詳細な分析の両方を必要とするプロンプトに有効です。
 
 ### Python
 
@@ -162,7 +153,7 @@ for each in response.candidates[0].content.parts:
 print(response.candidates[0].url_context_metadata)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -217,11 +208,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 cat result.json
 ```
 
-## 응답 이해
+## レスポンスについて
 
-모델이 URL 컨텍스트 도구를 사용하면 응답에 `url_context_metadata` 객체가 포함됩니다. 이 객체는 모델이 콘텐츠를 가져온 URL과 각 가져오기 시도의 상태를 나열하며, 이는 확인 및 디버깅에 유용합니다.
+モデルが URL コンテキスト ツールを使用すると、レスポンスに `url_context_metadata` オブジェクトが含まれます。このオブジェクトには、モデルがコンテンツを取得した URL と、各取得試行のステータスが一覧表示されます。これは、検証とデバッグに役立ちます。
 
-다음은 응답의 해당 부분에 대한 예입니다(간결성을 위해 응답의 일부는 생략됨).
+レスポンスのその部分の例を次に示します（簡潔にするため、レスポンスの一部は省略しています）。
 
 ```
 {
@@ -253,17 +244,15 @@ cat result.json
 }
 ```
 
-이 객체에 관한 자세한 내용은
-[`UrlContextMetadata` API 참조를 확인하세요](https://ai.google.dev/api/generate-content?hl=ko#UrlContextMetadata).
+このオブジェクトの詳細については、[`UrlContextMetadata` API リファレンス](https://ai.google.dev/api/generate-content?hl=ja#UrlContextMetadata)をご覧ください。
 
-### 안전 확인
+### 安全チェック
 
-시스템은 URL이 안전 표준을 충족하는지 확인하기 위해 URL에 대한 콘텐츠 검토를 수행합니다. 제공한 URL이 이 검사를 통과하지 못하면 `url_retrieval_status`가 `URL_RETRIEVAL_STATUS_UNSAFE`로 표시됩니다.
+システムは URL が安全基準を満たしていることを確認するため、URL に対してコンテンツ モデレーション チェックを実行します。指定した URL がこのチェックに失敗すると、`url_retrieval_status` は `URL_RETRIEVAL_STATUS_UNSAFE` になります。
 
-### 토큰 수
+### トークン数
 
-프롬프트에 지정한 URL에서 가져온 콘텐츠는 입력 토큰의 일부로 계산됩니다. 모델 출력의 [`usage_metadata`](https://ai.google.dev/api/generate-content?hl=ko#UsageMetadata)객체에서 프롬프트 및
-도구 사용량의 토큰 수를 확인할 수 있습니다. 다음은 출력 예입니다.
+プロンプトで指定した URL から取得されたコンテンツは、入力トークンの一部としてカウントされます。プロンプトとツールの使用状況のトークン数は、モデル出力の [`usage_metadata`](https://ai.google.dev/api/generate-content?hl=ja#UsageMetadata) オブジェクトで確認できます。出力例を次に示します。
 
 ```
 'usage_metadata': {
@@ -279,66 +268,60 @@ cat result.json
   }
 ```
 
-토큰당 가격은 사용된 모델에 따라 다릅니다. 자세한 내용은
-[가격 책정](https://ai.google.dev/gemini-api/docs/pricing?hl=ko) 페이지를 참고하세요.
+トークンあたりの料金は、使用するモデルによって異なります。詳細については、[料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja)のページをご覧ください。
 
-## 지원되는 모델
+## サポートされているモデル
 
-| 모델 | URL 컨텍스트 |
+| モデル | URL コンテキスト |
 | --- | --- |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=ko) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=ko) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ko) | ✔️ |
-| [Gemini 3.1 Pro 미리보기](https://ai.google.dev/gemini-api/docs/generate-content/gemini-3.1-pro-preview?hl=ko) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ko) | ✔️ |
-| [Gemini 3 Flash 미리보기](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ko) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ko) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ko) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ko) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=ja) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=ja) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ja) | ✔️ |
+| [Gemini 3.1 Pro プレビュー版](https://ai.google.dev/gemini-api/docs/generate-content/gemini-3.1-pro-preview?hl=ja) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ja) | ✔️ |
+| [Gemini 3 Flash プレビュー](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ja) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ja) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ja) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ja) | ✔️ |
 
-## 권장사항
+## ベスト プラクティス
 
-- **특정 URL 제공**: 최상의 결과를 얻으려면 모델이 분석할 콘텐츠의 직접 URL을 제공하세요. 모델은 중첩된 링크의 콘텐츠가 아닌 제공된 URL의 콘텐츠만 가져옵니다.
-- **접근성 확인**: 제공한 URL이 로그인해야 하거나 페이월 뒤에 있는
-  페이지로 연결되지 않는지 확인합니다.
-- **전체 URL 사용**: 프로토콜을 포함한 전체 URL을 제공합니다
-  (예: google.com 대신 https://www.google.com).
+- **特定の URL を指定する**: 最良の結果を得るには、モデルで分析するコンテンツの直接 URL を指定します。モデルは、指定した URL のコンテンツのみを取得し、ネストされたリンクのコンテンツは取得しません。
+- **アクセシビリティを確認する**: 指定した URL が、ログインが必要なページやペイウォールの背後にあるページにリンクしていないことを確認します。
+- **完全な URL を使用する**: プロトコルを含む完全な URL を指定します（例: google.com ではなく https://www.google.com）。
 
-## 제한사항
+## 制限事項
 
-- 함수 호출: 함수 호출을 통한 도구 사용 (URL 컨텍스트, Google 검색을 사용한 그라운딩 등)은 현재 지원되지 않습니다.
-- 요청 한도: 이 도구는 요청당 최대 20개의 URL을 처리할 수 있습니다.
-- URL 콘텐츠 크기: 단일 URL에서 가져온 콘텐츠의 최대 크기는 34MB입니다.
-- 공개 접근성: URL은 웹에서 공개적으로 액세스할 수 있어야 합니다.
-  로컬 호스트 주소 (예: localhost, 127.0.0.1), 비공개 네트워크, 터널링 서비스 (예: ngrok, pinggy)는 지원되지 않습니다.
+- 関数呼び出し: 関数呼び出しでのツール使用（URL コンテキスト、Google 検索によるグラウンディングなど）は現在サポートされていません。
+- リクエストの上限: このツールでは、リクエストごとに最大 20 個の URL を処理できます。
+- URL コンテンツのサイズ: 単一の URL から取得されるコンテンツの最大サイズは 34 MB です。
+- 一般公開: URL はウェブ上で一般公開されている必要があります。ローカルホスト アドレス（localhost、127.0.0.1 など）、プライベート ネットワーク、トンネリング サービス（ngrok、pinggy など）はサポートされていません。
 
-### 지원되는 콘텐츠 유형과 지원되지 않는 콘텐츠 유형
+### サポートされているコンテンツ タイプとサポートされていないコンテンツ タイプ
 
-이 도구는 다음 콘텐츠 유형의 URL에서 콘텐츠를 추출할 수 있습니다.
+このツールは、次のコンテンツ タイプの URL からコンテンツを抽出できます。
 
-- 텍스트 (text/html, application/json, text/plain, text/xml, text/css, text/javascript , text/csv, text/rtf)
-- 이미지 (image/png, image/jpeg, image/bmp, image/webp)
-- PDF (application/pdf)
+- テキスト（text/html、application/json、text/plain、text/xml、text/css、text/javascript、text/csv、text/rtf）
+- 画像（image/png、image/jpeg、image/bmp、image/webp）
+- PDF（application/pdf）
 
-다음 콘텐츠 유형은 지원되지 **않습니다**.
+次のコンテンツ タイプはサポートされていません。
 
-- 페이월 콘텐츠
-- YouTube 동영상 ([동영상 이해](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ko#youtube) 참고
-  YouTube URL을 처리하는 방법은)
-- Google Docs 또는 스프레드시트와 같은 Google Workspace 파일
-- 동영상 및 오디오 파일
+- ペイウォール コンテンツ
+- YouTube 動画（YouTube URL の処理方法については、[動画の理解](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja#youtube)をご覧ください）
+- Google Workspace ファイル（Google ドキュメントやスプレッドシートなど）
+- 動画ファイルと音声ファイル
 
-## 다음 단계
+## 次のステップ
 
-- [URL 컨텍스트 Cookbook](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Grounding.ipynb?hl=ko#url-context)
-  에서 더 많은 예를 살펴보세요.
+- その他の例については、[URL コンテキストのクックブック](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Grounding.ipynb?hl=ja#url-context)をご覧ください。
 
-의견 보내기
+フィードバックを送信
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-최종 업데이트: 2026-07-31(UTC)
+最終更新日 2026-07-31 UTC。
 
-의견을 전달하고 싶나요?
+ご意見をお聞かせください
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-31(UTC)"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-31 UTC。"],[],[]]

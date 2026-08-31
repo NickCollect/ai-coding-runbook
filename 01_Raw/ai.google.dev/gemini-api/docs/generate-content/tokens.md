@@ -1,65 +1,71 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=tr
-fetched_at: 2026-08-24T02:28:54.744165+00:00
-title: "Jetonlar\u0131 anlama ve sayma \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=pl
+fetched_at: 2026-08-31T06:39:48.694116+00:00
+title: "Zrozumienie i liczenie token\u00f3w \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Geri bildirim gönderin
+Prześlij opinię
 
-# Jetonları anlama ve sayma
+# Zrozumienie i liczenie tokenów
 
-Gemini ve diğer üretken yapay zeka modelleri, giriş ve çıkışı *token* adı verilen bir ayrıntı düzeyinde işler.
+Gemini i inne modele generatywnej AI przetwarzają dane wejściowe i wyjściowe z dokładnością do *tokena*.
 
-**Gemini modellerinde bir jeton yaklaşık 4 karaktere eşittir.
-100 jeton yaklaşık 60-80 İngilizce kelimeye eşittir.**
+**W przypadku modeli Gemini token odpowiada około 4 znakom.
+100 tokenów to około 60–80 słów w języku angielskim.**
 
-## Jetonlar hakkında
+## Informacje o tokenach
 
-Jetonlar, `z` gibi tek karakterler veya `cat` gibi tam kelimeler olabilir. Uzun kelimeler
-birkaç jetona ayrılır. Model tarafından kullanılan tüm jetonlar kümesine kelime hazinesi, metni jetonlara bölme işlemine ise *jetonlaştırma* adı verilir.
+Tokeny mogą być pojedynczymi znakami, np. `z`, lub całymi słowami, np. `cat`. Długie słowa są dzielone na kilka tokenów. Zbiór wszystkich tokenów używanych przez model nazywa się słownikiem, a proces dzielenia tekstu na tokeny – *tokenizacją*.
 
-Faturalandırma etkinleştirildiğinde [Gemini API'ye yapılan bir çağrının maliyeti](https://ai.google.dev/pricing?hl=tr) kısmen giriş ve çıkış jetonlarının sayısına göre belirlenir. Bu nedenle, jetonları nasıl sayacağınızı bilmek faydalı olabilir.
+Gdy włączone jest rozliczanie, [koszt wywołania interfejsu Gemini API](https://ai.google.dev/pricing?hl=pl) jest
+częściowo określany przez liczbę tokenów wejściowych i wyjściowych, dlatego warto wiedzieć, jak je
+zliczać.
 
-Colab'imizde jeton saymayı deneyebilirsiniz.
+Możesz wypróbować zliczanie tokenów w Colab.
 
 |  |  |  |
 | --- | --- | --- |
-| [ai.google.dev adresinde görüntüle](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | [Colab not defterini deneyin](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=tr) | [Not defterini GitHub'da görüntüleyin](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=tr) |
+| [Wyświetl na ai.google.dev](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | [Wypróbuj notatnik Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=pl) | [Wyświetl notatnik na GitHubie](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=pl) |
 
-## Parça sayma
+## Zliczanie tokenów
 
-Metin, resim dosyaları ve metin dışı diğer formatlar da dahil olmak üzere Gemini API'ye yapılan tüm girişler ve API'den alınan tüm çıkışlar jetonlaştırılır.
+Wszystkie dane wejściowe i wyjściowe interfejsu Gemini API są tokenizowane, w tym tekst, pliki graficzne i inne formaty nietekstowe.
 
-Jetonları aşağıdaki şekillerde sayabilirsiniz:
+Tokeny możesz zliczać na te sposoby:
 
-- **İsteğin girişiyle [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=tr) işlevini çağırın.**  
-   Bu işlev, *yalnızca giriş* bölümündeki toplam jeton sayısını döndürür. Bu aramayı, isteklerinizin boyutunu kontrol etmek için girişi modele göndermeden önce yapabilirsiniz.
-- **`generate_content` işlevi çağrıldıktan sonra `response` nesnesinde `usage_metadata` özelliğini kullanın.**  
-   Bu işlev, *hem girişte hem de çıkışta* toplam jeton sayısını döndürür: `total_token_count`.  
-   Ayrıca giriş ve çıkışın jeton sayılarını ayrı ayrı döndürür: `prompt_token_count` (giriş jetonları) ve `candidates_token_count` (çıkış jetonları).
+- **Wywołaj funkcję [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=pl) z danymi wejściowymi
+  żądania.**  
+   Zwraca ona łączną liczbę tokenów *tylko w danych wejściowych*. Możesz wywołać tę funkcję przed wysłaniem danych wejściowych do modelu, aby sprawdzić rozmiar żądań.
+- **Po wywołaniu funkcji `generate_content` użyj atrybutu `usage_metadata` w obiekcie `response`**  
+   Zwraca on łączną liczbę
+  tokenów *zarówno w danych wejściowych, jak i wyjściowych*: `total_token_count`.  
+   Zwraca też oddzielnie liczbę tokenów w danych wejściowych i wyjściowych: `prompt_token_count` (tokeny wejściowe) i `candidates_token_count` (tokeny wyjściowe).
 
-  [Düşünen modeli](https://ai.google.dev/gemini-api/docs/thinking?hl=tr) kullanıyorsanız düşünme süreci sırasında kullanılan jetonlar `thoughts_token_count` içinde döndürülür. [Bağlamı önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr) özelliğini kullanıyorsanız önbelleğe alınan jeton sayısı `cached_content_token_count` içinde gösterilir.
+  Jeśli używasz modelu [myślącego, tokeny użyte podczas procesu myślenia
+  są zwracane w polu `thoughts_token_count`.](https://ai.google.dev/gemini-api/docs/thinking?hl=pl) A jeśli używasz
+  [buforowania kontekstu](https://ai.google.dev/gemini-api/docs/caching?hl=pl), liczba tokenów w pamięci podręcznej
+  będzie w polu `cached_content_token_count`.
 
-### Metin jetonlarını sayma
+### Zliczanie tokenów tekstowych
 
-`count_tokens` işlevini yalnızca metin içeren bir girişle çağırırsanız *yalnızca girişteki* metnin jeton sayısını (`total_tokens`) döndürür. İsteklerinizin boyutunu kontrol etmek için `generate_content` işlevini çağırmadan önce bu çağrıyı yapabilirsiniz.
+Jeśli wywołasz funkcję `count_tokens` z danymi wejściowymi zawierającymi tylko tekst, zwróci ona liczbę tokenów tekstu *tylko w danych wejściowych* (`total_tokens`). Możesz wywołać tę funkcję przed wywołaniem funkcji `generate_content`, aby sprawdzić rozmiar żądań.
 
-Diğer bir seçenek ise `generate_content` işlevini çağırmak ve ardından `usage_metadata` özelliğini `response` nesnesinde kullanarak aşağıdakileri elde etmektir:
+Inną opcją jest wywołanie funkcji `generate_content`, a następnie użycie atrybutu `usage_metadata` w obiekcie `response`, aby uzyskać te informacje:
 
-- Giriş (`prompt_token_count`), önbelleğe alınmış içerik (`cached_content_token_count`) ve çıkışın (`candidates_token_count`) ayrı jeton sayıları
-- Düşünme süreci için jeton sayısı (`thoughts_token_count`)
-- *Hem girişte hem de çıkışta* toplam jeton sayısı (`total_token_count`)
+- oddzielne liczby tokenów w danych wejściowych (`prompt_token_count`), treści w pamięci podręcznej (`cached_content_token_count`) i danych wyjściowych (`candidates_token_count`);
+- liczba tokenów w procesie myślenia (`thoughts_token_count`);
+- łączna liczba tokenów *zarówno w danych wejściowych, jak i wyjściowych* (`total_token_count`).
 
 ### Python
 
@@ -134,17 +140,17 @@ fmt.Println(string(usageMetadata))
     ```
 ```
 
-### Çok aşamalı etkileşim (sohbet) jetonlarını sayma
+### Zliczanie tokenów w czacie wieloetapowym
 
-Sohbet geçmişiyle birlikte `count_tokens` işlevini çağırırsanız sohbetteki her rolden gelen metnin toplam jeton sayısını (`total_tokens`) döndürür.
+Jeśli wywołasz funkcję `count_tokens` z historią czatu, zwróci ona łączną liczbę tokenów tekstu z każdej roli w czacie (`total_tokens`).
 
-Diğer bir seçenek ise `send_message` işlevini çağırmak ve ardından `usage_metadata` özelliğini `response` nesnesinde kullanarak aşağıdakileri elde etmektir:
+Inną opcją jest wywołanie funkcji `send_message`, a następnie użycie atrybutu `usage_metadata` w obiekcie `response`, aby uzyskać te informacje:
 
-- Giriş (`prompt_token_count`), önbelleğe alınmış içerik (`cached_content_token_count`) ve çıkışın (`candidates_token_count`) ayrı jeton sayıları
-- Düşünme süreci için jeton sayısı (`thoughts_token_count`)
-- *Hem girişte hem de çıkışta* toplam jeton sayısı (`total_token_count`)
+- oddzielne liczby tokenów w danych wejściowych (`prompt_token_count`), treści w pamięci podręcznej (`cached_content_token_count`) i danych wyjściowych (`candidates_token_count`);
+- liczba tokenów w procesie myślenia (`thoughts_token_count`);
+- łączna liczba tokenów *zarówno w danych wejściowych, jak i wyjściowych* (`total_token_count`).
 
-Bir sonraki etkileşiminizin ne kadar büyük olacağını anlamak için `count_tokens` işlevini çağırdığınızda bunu geçmişe eklemeniz gerekir.
+Aby dowiedzieć się, jak duży będzie następny etap rozmowy, musisz dołączyć go do historii, gdy wywołujesz funkcję `count_tokens`.
 
 ### Python
 
@@ -270,32 +276,33 @@ if err != nil {
 fmt.Println(secondTokenResp.TotalTokens)
 ```
 
-### Çok formatlı jetonları sayma
+### Zliczanie tokenów multimodalnych
 
-Gemini API'ye yapılan tüm girişler (metin, resim dosyaları ve diğer metin dışı biçimler dahil) jetonlaştırılır. Gemini API tarafından işleme sırasında çok formatlı girişin jetonlaştırılmasıyla ilgili aşağıdaki üst düzey önemli noktaları unutmayın:
+Wszystkie dane wejściowe interfejsu Gemini API są tokenizowane, w tym tekst, pliki graficzne i inne formaty nietekstowe. Podczas przetwarzania przez interfejs Gemini API pamiętaj o tych najważniejszych kwestiach dotyczących tokenizacji danych wejściowych multimodalnych:
 
-- Her iki boyutu da <=384 piksel olan resim girişleri 258 jeton olarak sayılır. Bir veya iki boyutta daha büyük olan resimler, gerektiğinde 768x768 piksellik parçalar halinde kırpılıp ölçeklendirilir ve her biri 258 jeton olarak sayılır.
-- Video ve ses dosyaları, aşağıdaki sabit oranlarda jetonlara dönüştürülür:
-  Video: Saniyede 263 jeton, ses: saniyede 32 jeton.
+- Dane wejściowe w postaci obrazów, których oba wymiary są mniejsze lub równe 384 pikselom, są liczone jako 258 tokenów. Obrazy większe w jednym lub obu wymiarach są w razie potrzeby przycinane i skalowane do kafelków o wymiarach 768 x 768 pikseli, z których każdy jest liczony jako 258 tokenów.
+- Pliki wideo i audio są konwertowane na tokeny według tych stałych stawek: wideo – 263 tokeny na sekundę, audio – 32 tokeny na sekundę.
 
-#### Medya çözünürlükleri
+#### Rozdzielczości multimediów
 
-[Gemini 3 modelleri](https://ai.google.dev/gemini-api/docs/models?hl=tr#gemini-3), `media_resolution` parametresiyle çok formatlı görüntü işleme üzerinde ayrıntılı kontrol sağlar. `media_resolution` parametresi, **giriş resim veya video karesi başına ayrılan maksimum jeton sayısını** belirler.
-Daha yüksek çözünürlükler, modelin küçük metinleri okuma veya küçük ayrıntıları tanımlama becerisini artırır ancak jeton kullanımını ve gecikmeyi de artırır.
+[Modele Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=pl#gemini-3) wprowadzają szczegółową kontrolę nad
+przetwarzaniem obrazu multimodalnego za pomocą parametru `media_resolution`. Parametr `media_resolution` określa **maksymalną liczbę tokenów przydzielonych na obraz wejściowy lub klatkę wideo**.
+Wyższe rozdzielczości poprawiają zdolność modelu do odczytywania drobnego tekstu lub identyfikowania małych szczegółów, ale zwiększają zużycie tokenów i opóźnienie.
 
-Parametre ve jeton hesaplamalarını nasıl etkileyebileceği hakkında daha fazla bilgi için [medya çözünürlüğü](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=tr) kılavuzuna bakın.
+Więcej informacji o tym parametrze i jego wpływie na obliczenia tokenów znajdziesz w przewodniku po rozdzielczości multimediów.
+Zobacz przewodnik po [rozdzielczości multimediów](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=pl).
 
-#### Resim dosyaları
+#### Pliki graficzne
 
-`count_tokens` işlevini metin ve resim girişiyle çağırırsanız *yalnızca girişteki* (`total_tokens`) metin ve resmin birleştirilmiş jeton sayısını döndürür. İsteklerinizin boyutunu kontrol etmek için `generate_content` işlevini çağırmadan önce bu işlevi çağırabilirsiniz. İsteğe bağlı olarak metin ve dosya üzerinde ayrı ayrı `count_tokens` işlevini de çağırabilirsiniz.
+Jeśli wywołasz funkcję `count_tokens` z danymi wejściowymi zawierającymi tekst i obraz, zwróci ona łączną liczbę tokenów tekstu i obrazu *tylko w danych wejściowych* (`total_tokens`). Możesz wywołać tę funkcję przed wywołaniem funkcji `generate_content`, aby sprawdzić rozmiar żądań. Opcjonalnie możesz też wywołać funkcję `count_tokens` oddzielnie dla tekstu i pliku.
 
-Diğer bir seçenek ise `generate_content` işlevini çağırmak ve ardından `usage_metadata` özelliğini `response` nesnesinde kullanarak aşağıdakileri elde etmektir:
+Inną opcją jest wywołanie funkcji `generate_content`, a następnie użycie atrybutu `usage_metadata` w obiekcie `response`, aby uzyskać te informacje:
 
-- Giriş (`prompt_token_count`), önbelleğe alınmış içerik (`cached_content_token_count`) ve çıkışın (`candidates_token_count`) ayrı jeton sayıları
-- Düşünme süreci için jeton sayısı (`thoughts_token_count`)
-- *Hem girişte hem de çıkışta* toplam jeton sayısı (`total_token_count`)
+- oddzielne liczby tokenów w danych wejściowych (`prompt_token_count`), treści w pamięci podręcznej (`cached_content_token_count`) i danych wyjściowych (`candidates_token_count`);
+- liczba tokenów w procesie myślenia (`thoughts_token_count`);
+- łączna liczba tokenów *zarówno w danych wejściowych, jak i wyjściowych* (`total_token_count`).
 
-File API'den yüklenen bir görüntünün kullanıldığı örnek:
+Przykład użycia przesłanego obrazu z interfejsu File API:
 
 ### Python
 
@@ -395,7 +402,7 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-Resmi satır içi veri olarak sağlayan örnek:
+Przykład, w którym obraz jest podawany jako dane wbudowane:
 
 ### Python
 
@@ -492,20 +499,20 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-#### Video veya ses dosyaları
+#### Pliki wideo lub audio
 
-Ses ve video, aşağıdaki sabit oranlarda jetonlara dönüştürülür:
+Audio i wideo są konwertowane na tokeny według tych stałych stawek:
 
-- Video: Saniyede 263 jeton
-- Ses: Saniyede 32 jeton
+- Wideo: 263 tokeny na sekundę
+- Audio: 32 tokeny na sekundę
 
-`count_tokens` işlevini metin ve video/ses girişiyle çağırırsanız *yalnızca girişteki* metin ve video/ses dosyasının birleştirilmiş jeton sayısını döndürür (`total_tokens`). İsteklerinizin boyutunu kontrol etmek için `generate_content` işlevini çağırmadan önce bu çağrıyı yapabilirsiniz. İsterseniz metni ve dosyayı ayrı ayrı `count_tokens` çağırabilirsiniz.
+Jeśli wywołasz funkcję `count_tokens` z danymi wejściowymi zawierającymi tekst i wideo/audio, zwróci ona łączną liczbę tokenów tekstu i pliku wideo/audio *tylko w danych wejściowych* (`total_tokens`). Możesz wywołać tę funkcję przed wywołaniem funkcji `generate_content`, aby sprawdzić rozmiar żądań. Opcjonalnie możesz też wywołać funkcję `count_tokens` oddzielnie dla tekstu i pliku.
 
-Diğer bir seçenek ise `generate_content` işlevini çağırmak ve ardından `usage_metadata` özelliğini `response` nesnesinde kullanarak aşağıdakileri elde etmektir:
+Inną opcją jest wywołanie funkcji `generate_content`, a następnie użycie atrybutu `usage_metadata` w obiekcie `response`, aby uzyskać te informacje:
 
-- Giriş (`prompt_token_count`), önbelleğe alınmış içerik (`cached_content_token_count`) ve çıkışın (`candidates_token_count`) ayrı jeton sayıları
-- Düşünme süreci için jeton sayısı (`thoughts_token_count`)
-- *Hem girişte hem de çıkışta* toplam jeton sayısıdır (`total_token_count`).
+- oddzielne liczby tokenów w danych wejściowych (`prompt_token_count`), treści w pamięci podręcznej (`cached_content_token_count`) i danych wyjściowych (`candidates_token_count`);
+- liczba tokenów w procesie myślenia (`thoughts_token_count`);
+- łączna liczba tokenów *zarówno w danych wejściowych, jak i wyjściowych* (`total_token_count`).
 
 ### Python
 
@@ -630,9 +637,9 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-### Düşünce parçalarını sayma
+### Zliczanie tokenów myśli
 
-Düşünme özelliğini etkinleştirdiğinizde yanıt fiyatı, çıkış jetonları ile düşünme jetonlarının toplamı olur. Oluşturulan düşünce jetonlarının toplam sayısını `thoughtsTokenCount` alanından (veya SDK eşdeğeri) alabilirsiniz.
+Gdy włączysz myślenie, cena odpowiedzi jest sumą tokenów wyjściowych i tokenów myśli. Łączną liczbę wygenerowanych tokenów myśli możesz pobrać z pola `thoughtsTokenCount` (lub odpowiednika w pakiecie SDK).
 
 ### Python
 
@@ -658,13 +665,13 @@ fmt.Println("Thoughts tokens:", response.UsageMetadata.ThoughtsTokenCount)
 fmt.Println("Output tokens:", response.UsageMetadata.CandidatesTokenCount)
 ```
 
-Düşünme modelleri, nihai yanıtın kalitesini artırmak için tam düşünceler üretir ve ardından düşünce süreci hakkında bilgi vermek için [özetler](https://ai.google.dev/gemini-api/docs/thinking?hl=tr#summaries) oluşturur. Bu nedenle, API yalnızca özeti çıkış olarak verse de fiyatlandırma, modelin özet oluşturmak için ürettiği tüm düşünce jetonlarına göre yapılır.
+Modele myślące generują pełne myśli, aby poprawić jakość ostatecznej odpowiedzi, a następnie podają [podsumowania](https://ai.google.dev/gemini-api/docs/thinking?hl=pl#summaries), aby zapewnić wgląd w proces myślenia. Dlatego interfejs API ustala cenę na podstawie pełnych tokenów myśli, które model generuje w celu utworzenia podsumowania, mimo że interfejs API zwraca tylko podsumowanie.
 
-Düşünme özelliğini nasıl yapılandıracağınız hakkında daha fazla bilgiyi [Gemini düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr) kılavuzunda bulabilirsiniz.
+Więcej informacji o konfigurowaniu myślenia znajdziesz w przewodniku po myśleniu w [Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=pl).
 
-## Bağlam pencereleri
+## Okna kontekstu
 
-Gemini API aracılığıyla kullanılabilen modellerin bağlam pencereleri jetonlarla ölçülür. Bağlam penceresi, ne kadar giriş sağlayabileceğinizi ve modelin ne kadar çıkış üretebileceğini tanımlar. Bağlam penceresinin boyutunu [`models.get` uç noktasını](https://ai.google.dev/api/rest/v1/models/get?hl=tr) çağırarak veya [modeller belgelerine](https://ai.google.dev/gemini-api/docs/models?hl=tr) bakarak belirleyebilirsiniz.
+Modele dostępne za pomocą interfejsu Gemini API mają okna kontekstu, które są mierzone w tokenach. Okno kontekstu określa, ile danych wejściowych możesz podać i ile danych wyjściowych może wygenerować model. Rozmiar okna kontekstu możesz określić, wywołując punkt końcowy [`models.get` lub sprawdzając [dokumentację modeli](https://ai.google.dev/gemini-api/docs/models?hl=pl).](https://ai.google.dev/api/rest/v1/models/get?hl=pl)
 
 ### Python
 
@@ -709,12 +716,12 @@ fmt.Println("input token limit:", modelInfo.InputTokenLimit)
 fmt.Println("output token limit:", modelInfo.OutputTokenLimit)
 ```
 
-Geri bildirim gönderin
+Prześlij opinię
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Son güncelleme tarihi: 2026-07-30 UTC.
+Ostatnia aktualizacja: 2026-07-30 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Chcesz przekazać coś jeszcze?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]

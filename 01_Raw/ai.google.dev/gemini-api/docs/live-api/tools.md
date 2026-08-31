@@ -1,46 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=ko
-fetched_at: 2026-08-24T02:26:26.497179+00:00
-title: "Live API\ub97c \uc0ac\uc6a9\ud55c \ub3c4\uad6c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=it
+fetched_at: 2026-08-31T06:31:41.465598+00:00
+title: "Utilizzo dello strumento con l'API Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-의견 보내기
+Invia feedback
 
-# Live API를 사용한 도구
+# Utilizzo dello strumento con l'API Live
 
-도구 사용을 통해 Live API는 실시간 연결을 유지하면서 실제 작업을 수행하고 외부 컨텍스트를 가져올 수 있으므로 단순한 대화를 넘어설 수 있습니다.
-Live API를 사용하여 [함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko) 및 [Google 검색](https://ai.google.dev/gemini-api/docs/grounding?hl=ko)과 같은 도구를 정의할 수 있습니다.
+L'utilizzo degli strumenti consente all'API Live di andare oltre la semplice conversazione, permettendole di
+eseguire azioni nel mondo reale e recuperare il contesto esterno mantenendo
+una connessione in tempo reale.
+Puoi definire strumenti come la [chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it)
+e la [Ricerca Google](https://ai.google.dev/gemini-api/docs/grounding?hl=it) con l'API Live.
 
-## 지원되는 도구 개요
+## Panoramica degli strumenti supportati
 
-다음은 Live API 모델에 사용할 수 있는 도구에 대한 간략한 개요입니다.
+Ecco una breve panoramica degli strumenti disponibili per i modelli dell'API Live:
 
-| 도구 | Gemini 3.1 Flash 실시간 미리보기 | Gemini 2.5 Flash 실시간 미리보기 |
+| Strumento | Gemini 3.1 Flash Live Preview | Anteprima live di Gemini 2.5 Flash |
 | --- | --- | --- |
-| **검색** | 지원됨 | 지원됨 |
-| **함수 호출** | 지원됨 (동기만 해당) | 지원됨 (동기 및 [비동기](#async-function-calling)) |
-| **Google 지도** | 지원되지 않음 | 지원되지 않음 |
-| **코드 실행** | 지원되지 않음 | 지원되지 않음 |
-| **URL 컨텍스트** | 지원되지 않음 | 지원되지 않음 |
+| **Ricerca** | Supportato | Supportato |
+| **Chiamata di funzione** | Supportato (solo sincrono) | Supportato (sincrono e [asincrono](#async-function-calling)) |
+| **Google Maps** | Non supportato | Non supportato |
+| **Esecuzione di codice** | Non supportato | Non supportato |
+| **Contesto URL** | Non supportato | Non supportato |
 
-## 함수 호출
+## Chiamata di funzione
 
-Live API는 일반 콘텐츠 생성 요청과 마찬가지로 함수 호출을 지원합니다. 함수 호출을 사용하면 Live API가 외부 데이터 및 프로그램과 상호작용하여 애플리케이션이 할 수 있는 작업을 크게 늘릴 수 있습니다.
+L'API Live supporta la chiamata di funzioni, proprio come le normali richieste di generazione di contenuti. La chiamata di funzioni consente all'API Live di interagire con dati e programmi esterni, aumentando notevolmente le funzionalità delle tue applicazioni.
 
-세션 구성의 일부로 함수 선언을 정의할 수 있습니다.
-도구 호출을 수신한 후 클라이언트는 `session.send_tool_response` 메서드를 사용하여 `FunctionResponse` 객체 목록으로 응답해야 합니다.
+Puoi definire le dichiarazioni di funzioni nell'ambito della configurazione della sessione.
+Dopo aver ricevuto le chiamate di strumenti, il client deve rispondere con un elenco di
+oggetti `FunctionResponse` utilizzando il metodo `session.send_tool_response`.
 
-자세한 내용은 [함수 호출 튜토리얼](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)을 참고하세요.
+Per saperne di più, consulta il [tutorial sulla chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it).
 
 ### Python
 
@@ -93,7 +97,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI, Modality } from '@google/genai';
@@ -217,13 +221,16 @@ async function main() {
 main();
 ```
 
-모델은 단일 프롬프트에서 여러 함수 호출과 출력을 연결하는 데 필요한 코드를 생성할 수 있습니다. 이 코드는 샌드박스 환경에서 실행되어 후속 [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=ko#bidigeneratecontenttoolcall) 메시지를 생성합니다.
+Da un singolo prompt, il modello può generare più chiamate di funzioni e il
+codice necessario per concatenare i relativi output. Questo codice viene eseguito in un ambiente sandbox, generando messaggi [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=it#bidigeneratecontenttoolcall) successivi.
 
-## 비동기 함수 호출
+## Chiamata di funzioni asincrone
 
-함수 호출은 기본적으로 순차적으로 실행됩니다. 즉, 각 함수 호출의 결과가 나올 때까지 실행이 일시중지됩니다. 이렇게 하면 순차적 처리가 보장되므로 함수가 실행되는 동안 모델과 계속 상호작용할 수 없습니다.
+Per impostazione predefinita, la chiamata di funzione viene eseguita in sequenza, il che significa che l'esecuzione si interrompe
+finché non sono disponibili i risultati di ogni chiamata di funzione. Ciò garantisce l'elaborazione sequenziale, il che significa che non potrai continuare a interagire con il modello mentre le funzioni sono in esecuzione.
 
-대화를 차단하지 않으려면 모델에 함수를 비동기적으로 실행하도록 요청하면 됩니다. 이렇게 하려면 먼저 함수 정의에 `behavior`을 추가해야 합니다.
+Se non vuoi bloccare la conversazione, puoi chiedere al modello di eseguire le
+funzioni in modo asincrono. Per farlo, devi prima aggiungere un `behavior` alle definizioni di funzione:
 
 ### Python
 
@@ -233,7 +240,7 @@ turn_on_the_lights = {"name": "turn_on_the_lights", "behavior": "NON_BLOCKING"} 
 turn_off_the_lights = {"name": "turn_off_the_lights"} # turn_off_the_lights will still pause all interactions with the model
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI, Modality, Behavior } from '@google/genai';
@@ -247,13 +254,18 @@ const turn_off_the_lights = {name: "turn_off_the_lights"}
 const tools = [{ functionDeclarations: [turn_on_the_lights, turn_off_the_lights] }]
 ```
 
-`NON-BLOCKING`는 함수가 비동기적으로 실행되도록 보장하며, 사용자는 모델과 계속 상호작용할 수 있습니다.
+`NON-BLOCKING` garantisce l'esecuzione asincrona della funzione mentre puoi
+continuare a interagire con il modello.
 
-그런 다음 `scheduling` 매개변수를 사용하여 모델이 `FunctionResponse`를 수신할 때 어떻게 작동해야 하는지 알려야 합니다. 다음 중 하나일 수 있습니다.
+Poi devi indicare al modello come comportarsi quando riceve il
+`FunctionResponse` utilizzando il parametro `scheduling`. Può:
 
-- 진행 중인 작업을 중단하고 즉시 받은 대답을 알려줍니다(`scheduling="INTERRUPT"`).
-- 현재 실행 중인 작업(`scheduling="WHEN_IDLE"`)이 완료될 때까지 기다립니다.
-- 또는 아무것도 하지 않고 나중에 토론에서 해당 지식을 사용합니다(`scheduling="SILENT"`).
+- Interrompere ciò che sta facendo e comunicarti immediatamente la risposta ricevuta
+  (`scheduling="INTERRUPT"`),
+- Attendi che termini l'operazione in corso
+  (`scheduling="WHEN_IDLE"`),
+- Oppure non fare nulla e utilizzare queste informazioni in un secondo momento nella discussione
+  (`scheduling="SILENT"`)
 
 ### Python
 
@@ -269,7 +281,7 @@ const tools = [{ functionDeclarations: [turn_on_the_lights, turn_off_the_lights]
   )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI, Modality, Behavior, FunctionResponseScheduling } from '@google/genai';
@@ -285,9 +297,10 @@ const functionResponse = {
 }
 ```
 
-## Google 검색을 사용하는 그라운딩
+## Grounding con la Ricerca Google
 
-세션 구성의 일부로 Google 검색을 사용한 그라운딩을 사용 설정할 수 있습니다. 이렇게 하면 Live API의 정확도가 높아지고 엉뚱한 대답이 방지됩니다. 자세한 내용은 [그라운딩 튜토리얼](https://ai.google.dev/gemini-api/docs/grounding?hl=ko)을 참고하세요.
+Puoi attivare il grounding con la Ricerca Google nell'ambito della configurazione della sessione. In questo modo, aumenta l'accuratezza dell'API Live e si evitano
+allucinazioni. Per saperne di più, consulta il [tutorial sulla messa a terra](https://ai.google.dev/gemini-api/docs/grounding?hl=it).
 
 ### Python
 
@@ -335,7 +348,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI, Modality } from '@google/genai';
@@ -446,9 +459,10 @@ async function main() {
 main();
 ```
 
-## 여러 도구 결합
+## Combinare più strumenti
 
-Live API 내에서 여러 도구를 결합하여 애플리케이션의 기능을 더욱 강화할 수 있습니다.
+Puoi combinare più strumenti all'interno dell'API Live,
+aumentando ulteriormente le funzionalità della tua applicazione:
 
 ### Python
 
@@ -472,7 +486,7 @@ config = {"response_modalities": ["AUDIO"], "tools": tools}
 # ... remaining model call
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const prompt = `Hey, I need you to do two things for me.
@@ -496,17 +510,19 @@ const config = {
 // ... remaining model call
 ```
 
-## 다음 단계
+## Passaggi successivi
 
-- [도구 사용 쿠크북](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=ko)에서 Live API로 도구를 사용하는 예시를 자세히 확인하세요.
-- [Live API 기능 가이드](https://ai.google.dev/gemini-api/docs/live-guide?hl=ko)에서 기능 및 구성에 관한 전체 내용을 확인하세요.
+- Scopri altri esempi di utilizzo degli strumenti con l'API Live nel
+  [cookbook sull'utilizzo degli strumenti](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=it).
+- Scopri tutti i dettagli su funzionalità e configurazioni nella
+  [guida alle funzionalità delle API live](https://ai.google.dev/gemini-api/docs/live-guide?hl=it).
 
-의견 보내기
+Invia feedback
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-최종 업데이트: 2026-06-01(UTC)
+Ultimo aggiornamento 2026-06-01 UTC.
 
-의견을 전달하고 싶나요?
+Vuoi dirci altro?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-01(UTC)"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-06-01 UTC."],[],[]]

@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/background-execution?hl=fr
-fetched_at: 2026-08-24T02:28:37.140762+00:00
-title: "Ex\u00e9cution en arri\u00e8re-plan \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/background-execution?hl=zh-CN
+fetched_at: 2026-08-31T06:39:59.527906+00:00
+title: "\u540e\u53f0\u6267\u884c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Envoyer des commentaires
+发送反馈
 
-# Exécution en arrière-plan
+# 后台执行
 
-Pour les tâches de longue durée, telles que la recherche approfondie, le raisonnement complexe ou les exécutions d'agents en plusieurs étapes, les délais d'expiration des connexions peuvent interrompre les requêtes HTTP standards (qui se ferment généralement après 60 secondes). L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) fournit une **exécution en arrière-plan** pour exécuter ces tâches de manière asynchrone.
+对于长时间运行的任务（例如深度研究、复杂推理或多步智能体执行），连接超时可能会中断标准 HTTP 请求（通常在 60 秒后关闭）。[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 提供**后台执行**功能，以异步运行这些任务。
 
-Pour que l'interaction s'exécute jusqu'à ce qu'elle termine la tâche sur le serveur, définissez `"background": true` lors de la création de l'interaction. L'API renvoie immédiatement un ID d'interaction, que les applications clientes peuvent utiliser pour interroger l'état, diffuser la progression ou se reconnecter à un flux déconnecté.
+如需让互动运行到在服务器上完成任务，请在创建互动时设置 `"background": true`。该 API 会立即返回互动 ID，客户端应用可以使用该 ID 来轮询状态、流式传输进度或重新连接到断开的流。
 
-L'exécution en arrière-plan est compatible avec les modèles Gemini standards (tels que `gemini-3.6-flash` et `gemini-3.1-pro-preview`) et les agents gérés (tels que `antigravity-preview-05-2026`).
+标准 Gemini 模型（例如 `gemini-3.6-flash` 和 `gemini-3.1-pro-preview`）和托管式智能体（例如 `antigravity-preview-05-2026`）支持后台执行。
 
-## Créer une interaction en arrière-plan
+## 创建后台互动
 
-Pour démarrer une interaction en arrière-plan, définissez le paramètre `background` sur `true` lors de la création de la ressource.
+如需启动后台互动，请在创建资源时将 `background` 参数设置为 `true`。
 
 ### Python
 
@@ -72,31 +72,31 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Fonctionnement de l'exécution en arrière-plan
+## 后台执行的工作原理
 
-Lorsque vous créez une interaction en arrière-plan, la tâche s'exécute de manière asynchrone sur le serveur. L'interaction passe par différents états d'exécution :
+创建后台互动后，任务会在服务器上异步运行。互动会经历各种执行状态：
 
-- `in_progress` : le serveur exécute activement l'interaction (par exemple, en exécutant du code ou en effectuant des recherches).
-- `requires_action` : l'interaction est mise en pause et attend une entrée du client (par exemple, la confirmation de l'exécution d'un outil ou la réponse à une question).
-- `completed` : l'interaction s'est terminée correctement et la sortie est disponible.
-- `failed` : une erreur s'est produite lors de l'exécution (par exemple, un échec d'outil ou des limites de débit).
-- `cancelled` : une requête client a arrêté l'exécution.
+- `in_progress`：服务器正在积极执行互动（例如运行代码或研究）。
+- `requires_action`：互动已暂停，正在等待客户端输入（例如确认工具执行或回答问题）。
+- `completed`：互动已成功完成，输出可用。
+- `failed`：执行期间发生错误（例如工具失败或速率限制）。
+- `cancelled`：客户端请求停止了执行。
 
-### Cas d'utilisation
+### 使用场景
 
-Utilisez l'exécution en arrière-plan pour :
+将后台执行用于：
 
-- **Exécutions d'agents** : tâches nécessitant l'exécution de code, la navigation sur le Web ou l'orchestration de sous-agents (telles que `antigravity-preview-05-2026`).
-- **Recherche approfondie** : exécutions utilisant `deep-research-preview-04-2026` ou `deep-research-max-preview-04-2026`, qui prennent plusieurs minutes.
-- **Raisonnement long** : tâches dans lesquelles les étapes de réflexion du modèle dépassent les limites de connexion HTTP standards.
+- **智能体执行** ：需要执行代码、浏览网页或编排子智能体（例如 `antigravity-preview-05-2026`）的任务。
+- **深度研究** ：使用 `deep-research-preview-04-2026` 或 `deep-research-max-preview-04-2026` 运行，需要几分钟时间。
+- **长时间推理** ：模型思考步骤超出标准 HTTP 连接限制的任务。
 
-## Récupérer les résultats
+## 检索结果
 
-Obtenez les résultats d'une interaction en arrière-plan à l'aide de **l'interrogation** ou du **streaming**.
+使用**轮询** 或**流式传输** 获取后台互动结果。
 
-### Modèle d'interrogation (non bloquant)
+### 轮询模式（非阻塞）
 
-L'interrogation vérifie régulièrement l'état de l'interaction à l'aide de requêtes GET non bloquantes jusqu'à ce qu'elle atteigne un état final.
+轮询使用非阻塞 GET 请求定期检查互动状态，直到互动达到终止状态。
 
 ### Python
 
@@ -147,9 +147,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/YOUR_
   -H "Api-Revision: 2026-05-20"
 ```
 
-### Modèle de streaming
+### 流式传输模式
 
-Si une interruption du réseau déconnecte un flux, le streaming peut reprendre à partir du dernier événement reçu. Chaque delta contient un `event_id` unique dans sa charge utile. Le fait de transmettre cet ID en tant que `last_event_id` reprend le flux à partir de cet événement.
+如果网络中断导致流断开，流式传输可以从上次收到的事件恢复。每个增量都包含载荷中的唯一 `event_id`。将此 ID 作为 `last_event_id` 传递会从该事件恢复流。
 
 ### Python
 
@@ -240,14 +240,14 @@ curl -N -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/YO
   -H "Api-Revision: 2026-05-20"
 ```
 
-## Conversations multitours
+## 多轮对话
 
-Les interactions suivantes peuvent être enchaînées à une conversation en arrière-plan à l'aide de `previous_interaction_id`, sous réserve des contraintes suivantes :
+后续互动可以使用 `previous_interaction_id` 链接到后台对话，但需遵守以下限制：
 
-1. **Les exécutions actives sont bloquées** : l'enchaînement d'une interaction suivante à une interaction dont l'état est `in_progress` renvoie une erreur `400 Bad Request`. Attendez que l'interaction atteigne l'état `completed` avant de démarrer la suivante.
-2. **Paramètre d'environnement pour les agents gérés** : lorsque vous enchaînez des interactions pour des agents gérés (tels que `antigravity-preview-05-2026`), les requêtes doivent inclure à la fois `previous_interaction_id` et `environment`.
+1. **活跃执行被阻止** ：将后续互动链接到状态为 `in_progress` 的互动会返回 `400 Bad Request` 错误。请等待互动达到 `completed` 状态，然后再开始下一个互动。
+2. **托管式智能体的环境参数** ：为托管式智能体（例如 `antigravity-preview-05-2026`）链接互动时，请求必须同时包含 `previous_interaction_id` 和 `environment`。
 
-Les exemples suivants montrent comment enchaîner des interactions :
+以下示例展示了如何链接互动：
 
 ### Python
 
@@ -335,12 +335,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Annulation et suppression
+## 取消和删除
 
-Contrôlez les exécutions en cours et gérez le stockage à l'aide des requêtes d'annulation et de suppression :
+使用取消和删除请求控制正在运行的执行并管理存储：
 
-- **Annuler (`POST /interactions/{id}/cancel`)** : arrête la tâche en cours d'exécution. L'état passe à `cancelled`. Les actions de nettoyage sur le serveur peuvent entraîner un léger délai avant que l'état ne soit mis à jour dans les requêtes GET.
-- **Supprimer (`DELETE /interactions/{id}`)** : supprime les enregistrements d'interaction du serveur. Les requêtes GET suivantes renvoient une erreur `404 Not Found`.
+- **取消 (`POST /interactions/{id}/cancel`)** ：停止正在运行的任务。状态转换为 `cancelled`。服务器上的清理操作可能会导致 GET 请求中的状态更新略有延迟。
+- **删除 (`DELETE /interactions/{id}`)** ：从服务器中移除互动记录。后续 GET 请求会返回 `404 Not Found` 错误。
 
 ### Python
 
@@ -384,18 +384,18 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/interactions/YO
   -H "Api-Revision: 2026-05-20"
 ```
 
-## Étapes suivantes
+## 后续步骤
 
-- Consultez la [présentation de l'API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) pour comprendre la gestion des sessions et des états.
-- Consultez le guide [Interactions de streaming](https://ai.google.dev/gemini-api/docs/streaming?hl=fr) pour en savoir plus sur les mises à jour des événements en temps réel.
-- Découvrez le [guide de démarrage rapide Agents gérés](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=fr) pour créer des agents multitours avec état.
+- 阅读 [Interactions API 概览](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn)，了解会话和状态管理。
+- 如需详细了解实时事件更新，请参阅[流式传输互动](https://ai.google.dev/gemini-api/docs/streaming?hl=zh-cn)指南。
+- 探索[托管式智能体快速入门](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=zh-cn)，构建有状态的多轮智能体。
 
-Envoyer des commentaires
+发送反馈
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Dernière mise à jour le 2026/07/30 (UTC).
+最后更新时间 (UTC)：2026-07-30。
 
-Voulez-vous nous donner plus d'informations ?
+需要向我们提供更多信息？
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/30 (UTC)."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-30。"],[],[]]

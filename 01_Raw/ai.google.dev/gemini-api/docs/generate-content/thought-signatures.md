@@ -1,102 +1,107 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=pt-BR
-fetched_at: 2026-08-24T02:26:58.279443+00:00
-title: "Assinaturas de racioc\u00ednio \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=id
+fetched_at: 2026-08-31T06:42:02.059236+00:00
+title: "Tanda tangan penalaran \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Envie comentários
+Kirim masukan
 
-# Assinaturas de raciocínio
+# Tanda tangan penalaran
 
-As assinaturas de pensamento são representações criptografadas do processo de pensamento interno do modelo e são usadas para preservar o contexto de raciocínio em interações de várias etapas.
-Ao usar modelos de pensamento (como as séries Gemini 3 e 2.5), a API pode
-retornar um campo `thoughtSignature` nas [partes de conteúdo](https://ai.google.dev/api/caching?hl=pt-br#Part)
-da resposta (por exemplo, partes `text` ou `functionCall`).
+resmi dan menambahkan objek respons model lengkap langsung ke histori. **Anda
+hanya perlu menggunakan tanda tangan pemikiran secara langsung saat menggunakan REST API**, atau
+jika Anda *mengekstraksi dan menampilkan histori bagian secara manual dalam percakapan multi-giliran
+percapan*.
 
-Como regra geral, se você receber uma assinatura de pensamento em uma resposta do modelo, transmita-a exatamente como recebida ao enviar o histórico da conversa na próxima interação.
-**Ao usar modelos do Gemini 3, é necessário transmitir assinaturas de pensamento durante a chamada de função. Caso contrário, você receberá um erro de validação** (código de status 4xx).
-Isso inclui o uso da configuração de `minimal`
-[nível de pensamento](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br#thinking-levels) para o Gemini 3
+Tanda tangan pemikiran adalah representasi terenkripsi dari proses pemikiran internal model dan digunakan untuk mempertahankan konteks penalaran di seluruh interaksi multi-langkah.
+Saat menggunakan model penalaran (seperti seri Gemini 3 dan 2.5), API dapat
+menampilkan kolom `thoughtSignature` dalam [bagian konten](https://ai.google.dev/api/caching?hl=id#Part)
+respons (misalnya, bagian `text` atau `functionCall`).
+
+Sebagai aturan umum, jika Anda menerima tanda tangan pemikiran dalam respons model, Anda harus meneruskannya kembali persis seperti yang diterima saat mengirim histori percakapan pada giliran berikutnya.
+**Saat menggunakan model Gemini 3, Anda harus meneruskan kembali tanda tangan pemikiran selama panggilan fungsi, jika tidak, Anda akan mendapatkan error validasi** (kode status 4xx).
+Hal ini mencakup saat menggunakan setelan tingkat `minimal`
+[penalaran](https://ai.google.dev/gemini-api/docs/thinking?hl=id#thinking-levels) untuk Gemini 3
 Flash.
 
-## Como funciona
+## Cara kerjanya
 
-O gráfico abaixo mostra o significado de "interação" e "etapa" em relação a
-[chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br) na API Gemini. Uma "interação" é uma troca única e completa em uma conversa entre um usuário e um modelo. Uma "etapa" é uma ação ou operação mais detalhada realizada pelo modelo, geralmente como parte de um processo maior para concluir uma interação.
+Grafik di bawah memvisualisasikan arti "giliran" dan "langkah" sebagaimana terkait dengan
+[panggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id) di Gemini API. "Giliran" adalah satu pertukaran lengkap dalam percakapan antara pengguna dan model. "Langkah" adalah tindakan atau operasi yang lebih mendetail yang dilakukan oleh model, sering kali sebagai bagian dari proses yang lebih besar untuk menyelesaikan giliran.
 
-![Diagrama de turnos e etapas de chamada de função](https://ai.google.dev/static/gemini-api/docs/images/fc-turns.png?hl=pt-br)
+![Diagram langkah dan giliran pemanggilan fungsi](https://ai.google.dev/static/gemini-api/docs/images/fc-turns.png?hl=id)
 
-*Este documento se concentra no processamento de chamadas de função para modelos do Gemini 3. Consulte
-a seção sobre o [comportamento do modelo](#model-behavior) para conferir discrepâncias com a versão 2.5.*
+*Dokumen ini berfokus pada penanganan panggilan fungsi untuk model Gemini 3. Lihat
+bagian [perilaku model](#model-behavior) untuk mengetahui perbedaan dengan 2.5.*
 
-O Gemini 3 retorna assinaturas de pensamento para todas as respostas do modelo (respostas da API) com uma chamada de função. As assinaturas de pensamento aparecem nos seguintes casos:
+Gemini 3 menampilkan tanda tangan pemikiran untuk semua respons model (respons dari API) dengan panggilan fungsi. Tanda tangan pemikiran muncul dalam kasus berikut:
 
-- Quando há [chamadas de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br#parallel_function_calling)
-  paralelas, a primeira parte da chamada de função retornada pela resposta do modelo terá uma
-  assinatura de pensamento.
-- Quando há chamadas de função sequenciais (várias etapas), cada chamada de função terá uma assinatura, e você precisará transmitir todas as assinaturas.
-- As respostas do modelo sem uma chamada de função vão retornar uma assinatura de pensamento na última parte retornada pelo modelo.
+- Jika ada [panggilan fungsi paralel](https://ai.google.dev/gemini-api/docs/function-calling?hl=id#parallel_function_calling), bagian panggilan fungsi pertama yang ditampilkan oleh respons model akan memiliki
+  tanda tangan pemikiran.
+- Jika ada panggilan fungsi berurutan (multi-langkah), setiap panggilan fungsi akan memiliki tanda tangan dan Anda harus meneruskan kembali semua tanda tangan.
+- Respons model tanpa panggilan fungsi akan menampilkan tanda tangan pemikiran di dalam bagian terakhir yang ditampilkan oleh model.
 
-A tabela a seguir oferece uma visualização para chamadas de função de várias etapas, combinando as definições de interações e etapas com o conceito de assinaturas apresentado acima:
+Tabel berikut memberikan visualisasi untuk panggilan fungsi multi-langkah, menggabungkan definisi giliran dan langkah dengan konsep tanda tangan yang diperkenalkan di atas:
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Interação** | **Etapa** | **Solicitação do usuário** | **Resposta do modelo** | **FunctionResponse** |
+| **Giliran** | **Langkah** | **Permintaan Pengguna** | **Respons Model** | **FunctionResponse** |
 | 1 | 1 | `request1 = user_prompt` | `FC1 + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + (FC1 + signature) + FR1` | `FC2 + signature` | `FR2` |
-| 1 | 3 | `request3 = request2 + (FC2 + signature) + FR2` | `text_output`  `(no FCs)` | Nenhum |
+| 1 | 3 | `request3 = request2 + (FC2 + signature) + FR2` | `text_output`  `(no FCs)` | Tidak ada |
 
-## Assinaturas em partes de chamada de função
+## Tanda tangan di bagian panggilan fungsi
 
-Quando o Gemini gera um `functionCall`, ele depende da `thought_signature` para processar a saída da ferramenta corretamente na próxima interação.
+Saat Gemini membuat `functionCall`, Gemini mengandalkan `thought_signature` untuk memproses output alat dengan benar pada giliran berikutnya.
 
-- **Comportamento**:
-  - **Chamada de função única**: a parte `functionCall` vai conter uma `thought_signature`.
-  - **Chamadas de função paralelas**: se o modelo gerar chamadas de função paralelas
-    em uma resposta, a `thought_signature` será anexada **apenas à primeira**
-    `functionCall` parte. As partes `functionCall` subsequentes na mesma resposta **não** vão conter uma assinatura.
-- **Requisito**: você **precisa** retornar essa assinatura na parte exata em que ela
-  foi recebida ao enviar o histórico da conversa de volta.
-- **Validação**: a validação estrita é aplicada a todas as chamadas de função na
-  interação atual . Apenas a interação atual é necessária. Não validamos as interações anteriores.
-  - A API volta no histórico (do mais recente ao mais antigo) para encontrar a mensagem **do usuário** mais recente que contém conteúdo padrão (por exemplo, `text`) ( que seria o início da interação atual). Essa mensagem **be** será uma `functionResponse`.
-  - **Todas** as interações `functionCall` do modelo que ocorrem após essa mensagem de uso específica são consideradas parte da interação.
-  - A **primeira** parte `functionCall` em **cada etapa** da interação atual **precisa** incluir a `thought_signature`.
-  - Se você omitir uma `thought_signature` para a primeira parte `functionCall` em qualquer etapa da interação atual, a solicitação vai falhar com um erro 400.
-- **Se as assinaturas adequadas não forem retornadas, veja como você vai receber um erro**
-  - Modelos do Gemini 3: a falha ao incluir assinaturas vai resultar em um erro 400. A redação será do formulário:
-    - A chamada de função `<Function Call>` no bloco de conteúdo `<index of contents array>`
-      está sem um `thought_signature`. Por exemplo, *a chamada de função `FC1` no bloco de conteúdo `1.` está sem um `thought_signature`.*
+- **Perilaku**:
+  - **Panggilan Fungsi Tunggal**: Bagian `functionCall` akan berisi `thought_signature`.
+  - **Panggilan Fungsi Paralel**: Jika model membuat panggilan fungsi paralel
+    dalam respons, `thought_signature` akan dilampirkan **hanya ke bagian**
+    `functionCall` pertama. Bagian `functionCall` berikutnya dalam respons yang sama **tidak** akan berisi tanda tangan.
+- **Persyaratan**: Anda **harus** menampilkan tanda tangan ini di bagian yang sama persis dengan tempat tanda tangan
+  diterima saat mengirim kembali histori percakapan.
+- **Validasi**: Validasi ketat diterapkan untuk semua panggilan fungsi dalam
+  giliran saat ini . (Hanya giliran saat ini yang diperlukan; kami tidak memvalidasi giliran sebelumnya)
+  - API akan kembali ke histori (terbaru hingga terlama) untuk menemukan pesan **Pengguna** terbaru yang berisi konten standar (misalnya, `text`) ( yang akan menjadi awal giliran saat ini). Ini tidak akan **be** `functionResponse`.
+  - **Semua** giliran `functionCall` model yang terjadi setelah pesan penggunaan tertentu tersebut dianggap sebagai bagian dari giliran.
+  - Bagian `functionCall` **pertama** di **setiap langkah** giliran saat ini **harus** menyertakan `thought_signature`.
+  - Jika Anda menghapus `thought_signature` untuk bagian `functionCall` pertama di langkah mana pun pada giliran saat ini, permintaan akan gagal dengan error 400.
+- **Jika tanda tangan yang tepat tidak ditampilkan, berikut cara Anda akan mengalami error**
+  - Model Gemini 3: Kegagalan menyertakan tanda tangan akan menghasilkan error 400. Kata-katanya akan berbentuk:
+    - Panggilan fungsi `<Function Call>` di blok konten `<index of contents array>`
+      tidak memiliki `thought_signature`. Misalnya, *Panggilan
+      fungsi `FC1` di blok konten `1.` tidak memiliki `thought_signature`.*
 
-### Exemplo de chamada de função sequencial
+### Contoh panggilan fungsi berurutan
 
-Esta seção mostra um exemplo de várias chamadas de função em que o usuário faz uma pergunta complexa que exige várias tarefas.
+Bagian ini menunjukkan contoh beberapa panggilan fungsi saat pengguna mengajukan pertanyaan kompleks yang memerlukan beberapa tugas.
 
-Vamos analisar um exemplo de chamada de função de várias interações em que o usuário faz
-uma pergunta complexa que exige várias tarefas: `"Check flight status for AA100 and
+Mari kita lihat contoh panggilan fungsi multi-giliran saat pengguna mengajukan
+pertanyaan kompleks yang memerlukan beberapa tugas: `"Check flight status for AA100 and
 book a taxi if delayed"`.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Interação** | **Etapa** | **Solicitação do usuário** | **Resposta do modelo** | **FunctionResponse** |
+| **Giliran** | **Langkah** | **Permintaan Pengguna** | **Respons Model** | **FunctionResponse** |
 | 1 | 1 | `request1="Check flight status for AA100 and book a taxi 2 hours before if delayed."` | `FC1 ("check_flight") + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + FC1 ("check_flight") + signature + FR1` | `FC2("book_taxi") + signature` | `FR2` |
 | 1 | 3 | `request3 = request2 + FC2 ("book_taxi") + signature + FR2` | `text_output`  `(no FCs)` | `None` |
 
-O código a seguir ilustra a sequência na tabela acima.
+Kode berikut mengilustrasikan urutan dalam tabel di atas.
 
-**Interação 1, etapa 1 (solicitação do usuário)**
+**Giliran 1, Langkah 1 (Permintaan pengguna)**
 
 ```
 {
@@ -151,7 +156,7 @@ O código a seguir ilustra a sequência na tabela acima.
 }
 ```
 
-**Interação 1, etapa 1 (resposta do modelo)**
+**Giliran 1, Langkah 1 (Respons model)**
 
 ```
 {
@@ -172,8 +177,8 @@ O código a seguir ilustra a sequência na tabela acima.
 }
 ```
 
-**Interação 1, etapa 2 (resposta do usuário: envio de saídas de ferramentas)** Como essa interação do usuário contém apenas uma `functionResponse` (sem texto novo), ainda estamos na interação 1. Precisamos
-preservar `<Signature_A>`.
+**Giliran 1, Langkah 2 (Respons pengguna - Mengirim output alat)** Karena giliran pengguna ini hanya berisi `functionResponse` (tidak ada teks baru), kita masih berada di Giliran 1. Kita
+harus mempertahankan `<Signature_A>`.
 
 ```
 {
@@ -214,7 +219,7 @@ preservar `<Signature_A>`.
 }
 ```
 
-**Interação 1, etapa 2 (modelo)** O modelo agora decide reservar um táxi com base na saída da ferramenta anterior.
+**Giliran 1, Langkah 2 (Model)** Model kini memutuskan untuk memesan taksi berdasarkan output alat sebelumnya.
 
 ```
 {
@@ -235,7 +240,7 @@ preservar `<Signature_A>`.
 }
 ```
 
-**Interação 1, etapa 3 (usuário: envio da saída da ferramenta)** Para enviar a confirmação da reserva de táxi, precisamos incluir assinaturas para **TODAS** as chamadas de função neste loop
+**Giliran 1, Langkah 3 (Pengguna - Mengirim output alat)** Untuk mengirim konfirmasi pemesanan taksi, kita harus menyertakan tanda tangan untuk **SEMUA** panggilan fungsi dalam loop ini
 (`<Signature A>` + `<Signature B>`).
 
 ```
@@ -305,19 +310,19 @@ preservar `<Signature_A>`.
 }
 ```
 
-### Exemplo de chamada de função paralela
+### Contoh panggilan fungsi paralel
 
-Vamos analisar um exemplo de chamada de função paralela em que o usuário pergunta
-`"Check weather in Paris and London"` para ver onde o modelo faz a validação.
+Mari kita lihat contoh panggilan fungsi paralel saat pengguna bertanya
+`"Check weather in Paris and London"` untuk melihat tempat model melakukan validasi.
 
-| **Interação** | **Etapa** | **Solicitação do usuário** | **Resposta do modelo** | **FunctionResponse** |
+| **Giliran** | **Langkah** | **Permintaan Pengguna** | **Respons Model** | **FunctionResponse** |
 | --- | --- | --- | --- | --- |
 | 1 | 1 | `request1="Check the weather in Paris and London"` | FC1 ("Paris") + signature  FC2 ("London") | FR1 |
-| 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | text\_output  (no FCs) | Nenhum |
+| 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | text\_output  (no FCs) | Tidak ada |
 
-O código a seguir ilustra a sequência na tabela acima.
+Kode berikut mengilustrasikan urutan dalam tabel di atas.
 
-**Interação 1, etapa 1 (solicitação do usuário)**
+**Giliran 1, Langkah 1 (Permintaan pengguna)**
 
 ```
 {
@@ -356,7 +361,7 @@ O código a seguir ilustra a sequência na tabela acima.
 }
 ```
 
-**Interação 1, etapa 1 (resposta do modelo)**
+**Giliran 1, Langkah 1 (Respons model)**
 
 ```
 {
@@ -384,8 +389,8 @@ O código a seguir ilustra a sequência na tabela acima.
 }
 ```
 
-**Interação 1, etapa 2 (resposta do usuário: envio de saídas de ferramentas)** Precisamos preservar
-`<Signature_A>` na primeira parte exatamente como recebida.
+**Giliran 1, Langkah 2 (Respons pengguna - Mengirim output alat)** Kita harus mempertahankan
+`<Signature_A>` di bagian pertama persis seperti yang diterima.
 
 ```
 [
@@ -443,20 +448,20 @@ O código a seguir ilustra a sequência na tabela acima.
 ]
 ```
 
-## Assinaturas em partes não `functionCall`
+## Tanda tangan di bagian non `functionCall`
 
-O Gemini também pode retornar `thought_signatures` na parte final da resposta em partes que não são de chamada de função.
+Gemini juga dapat menampilkan `thought_signatures` di bagian akhir respons di bagian non-panggilan fungsi.
 
-- **Comportamento**: a parte de conteúdo final (`text, inlineData…`) retornada pelo
-  modelo pode conter um `thought_signature`.
-- **Recomendação**: o retorno dessas assinaturas é **recomendado** para garantir que
-  o modelo mantenha um raciocínio de alta qualidade, especialmente para instruções complexas
-  seguindo ou fluxos de trabalho de agente simulados.
-- **Validação**: a API **não** aplica a validação de forma estrita. Você não vai receber um erro de bloqueio se omiti-las, embora a performance possa ser reduzida.
+- **Perilaku**: Bagian konten akhir (`text, inlineData…`) yang ditampilkan oleh
+  model dapat berisi `thought_signature`.
+- **Rekomendasi**: Menampilkan tanda tangan ini **direkomendasikan** untuk memastikan
+  model mempertahankan penalaran berkualitas tinggi, terutama untuk mengikuti instruksi
+  yang kompleks atau alur kerja agen yang disimulasikan.
+- **Validasi**: API **tidak** menerapkan validasi secara ketat. Anda tidak akan menerima error pemblokiran jika menghapusnya, meskipun performa dapat menurun.
 
-### Raciocínio de texto/no contexto (sem validação)
+### Penalaran teks/dalam konteks (Tidak ada validasi)
 
-**Interação 1, etapa 1 (resposta do modelo)**
+**Giliran 1, Langkah 1 (Respons model)**
 
 ```
 {
@@ -470,7 +475,7 @@ O Gemini também pode retornar `thought_signatures` na parte final da resposta e
 }
 ```
 
-**Interação 2, etapa 1 (usuário)**
+**Giliran 2, Langkah 1 (Pengguna)**
 
 ```
 [
@@ -488,27 +493,27 @@ O Gemini também pode retornar `thought_signatures` na parte final da resposta e
 ]
 ```
 
-## Assinaturas para compatibilidade com OpenAI
+## Tanda tangan untuk kompatibilitas OpenAI
 
-Os exemplos a seguir mostram como processar assinaturas de pensamento para uma API de conclusão de chat
-usando [compatibilidade com OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=pt-br).
+Contoh berikut menunjukkan cara menangani tanda tangan pemikiran untuk API penyelesaian chat
+menggunakan [kompatibilitas OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=id).
 
-### Exemplo de chamada de função sequencial
+### Contoh panggilan fungsi berurutan
 
-Este é um exemplo de várias chamadas de função em que o usuário faz uma pergunta complexa que exige várias tarefas.
+Ini adalah contoh beberapa panggilan fungsi saat pengguna mengajukan pertanyaan kompleks yang memerlukan beberapa tugas.
 
-Vamos analisar um exemplo de chamada de função de várias interações em que o usuário pergunta `Check flight status for AA100 and book a taxi if delayed` e você pode ver o que acontece quando o usuário faz uma pergunta complexa que exige várias tarefas.
+Mari kita lihat contoh panggilan fungsi multi-giliran saat pengguna bertanya `Check flight status for AA100 and book a taxi if delayed` dan Anda dapat melihat apa yang terjadi saat pengguna mengajukan pertanyaan kompleks yang memerlukan beberapa tugas.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Interação** | **Etapa** | **Solicitação do usuário** | **Resposta do modelo** | **FunctionResponse** |
+| **Giliran** | **Langkah** | **Permintaan Pengguna** | **Respons Model** | **FunctionResponse** |
 | 1 | 1 | `request1 = "Check flight status for AA100 and book a taxi 2 hours before if delayed."` | `FC1 ("check_flight") + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + FC1 ("check_flight") + signature + FR1` | `FC2("book_taxi") + signature` | `FR2` |
 | 1 | 3 | `request3 = request2 + FC2 ("book_taxi") + signature + FR2` | `text_output`  `(no FCs)` | `None` |
 
-O código a seguir mostra a sequência fornecida.
+Kode berikut menjelaskan urutan yang diberikan.
 
-**Interação 1, etapa 1 (solicitação do usuário)**
+**Giliran 1, Langkah 1 (Permintaan Pengguna)**
 
 ```
 {
@@ -562,7 +567,7 @@ O código a seguir mostra a sequência fornecida.
 }
 ```
 
-**Interação 1, etapa 1 (resposta do modelo)**
+**Giliran 1, Langkah 1 (Respons Model)**
 
 ```
 {
@@ -585,10 +590,9 @@ O código a seguir mostra a sequência fornecida.
     }
 ```
 
-**Interação 1, etapa 2 (resposta do usuário: envio de saídas de ferramentas)**
+**Giliran 1, Langkah 2 (Respons Pengguna - Mengirim Output Alat)**
 
-Como essa interação do usuário contém apenas um `functionResponse` (sem texto novo), ainda estamos
-na interação 1 e precisamos preservar `<Signature_A>`.
+Karena giliran pengguna ini hanya berisi `functionResponse` (tidak ada teks baru), kita masih berada di Giliran 1 dan harus mempertahankan `<Signature_A>`.
 
 ```
 "messages": [
@@ -623,9 +627,9 @@ na interação 1 e precisamos preservar `<Signature_A>`.
   ]
 ```
 
-**Interação 1, etapa 2 (modelo)**
+**Giliran 1, Langkah 2 (Model)**
 
-O modelo agora decide reservar um táxi com base na saída da ferramenta anterior.
+Model kini memutuskan untuk memesan taksi berdasarkan output alat sebelumnya.
 
 ```
 {
@@ -648,10 +652,10 @@ O modelo agora decide reservar um táxi com base na saída da ferramenta anterio
 }
 ```
 
-**Interação 1, etapa 3 (usuário: envio da saída da ferramenta)**
+**Giliran 1, Langkah 3 (Pengguna - Mengirim Output Alat)**
 
-Para enviar a confirmação da reserva de táxi, precisamos incluir assinaturas para TODAS as
-chamadas de função neste loop (`<Signature A>` + `<Signature B>`).
+Untuk mengirim konfirmasi pemesanan taksi, kita harus menyertakan tanda tangan untuk SEMUA
+panggilan fungsi dalam loop ini (`<Signature A>` + `<Signature B>`).
 
 ```
 "messages": [
@@ -710,21 +714,21 @@ chamadas de função neste loop (`<Signature A>` + `<Signature B>`).
   ]
 ```
 
-### Exemplo de chamada de função paralela
+### Contoh panggilan fungsi paralel
 
-Vamos analisar um exemplo de chamada de função paralela em que o usuário pergunta
-`"Check weather in Paris and London"` e você pode ver onde o modelo faz
-validação.
+Mari kita lihat contoh panggilan fungsi paralel saat pengguna bertanya
+`"Check weather in Paris and London"` dan Anda dapat melihat tempat model melakukan
+validasi.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Interação** | **Etapa** | **Solicitação do usuário** | **Resposta do modelo** | **FunctionResponse** |
+| **Giliran** | **Langkah** | **Permintaan Pengguna** | **Respons Model** | **FunctionResponse** |
 | 1 | 1 | `request1="Check the weather in Paris and London"` | `FC1 ("Paris") + signature`  `FC2 ("London")` | `FR1` |
 | 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | `text_output`  `(no FCs)` | `None` |
 
-Confira o código para analisar a sequência fornecida.
+Berikut kode untuk menjelaskan urutan yang diberikan.
 
-**Interação 1, etapa 1 (solicitação do usuário)**
+**Giliran 1, Langkah 1 (Permintaan Pengguna)**
 
 ```
 {
@@ -763,7 +767,7 @@ Confira o código para analisar a sequência fornecida.
 }
 ```
 
-**Interação 1, etapa 1 (resposta do modelo)**
+**Giliran 1, Langkah 1 (Respons Model)**
 
 ```
 {
@@ -794,9 +798,9 @@ Confira o código para analisar a sequência fornecida.
 }
 ```
 
-**Interação 1, etapa 2 (resposta do usuário: envio de saídas de ferramentas)**
+**Giliran 1, Langkah 2 (Respons Pengguna - Mengirim Output Alat)**
 
-É necessário preservar `<Signature_A>` na primeira parte exatamente como recebida.
+Anda harus mempertahankan `<Signature_A>` di bagian pertama persis seperti yang diterima.
 
 ```
 "messages": [
@@ -845,52 +849,48 @@ Confira o código para analisar a sequência fornecida.
   ]
 ```
 
-## Perguntas frequentes
+## FAQ
 
-1. **Como faço para transferir o histórico de um modelo diferente para o Gemini 3 com uma parte de chamada de função na interação e etapa atuais? Preciso fornecer partes de chamada de função
-   que não foram geradas pela API e, portanto, não têm uma assinatura de pensamento associada
+1. **Bagaimana cara mentransfer histori dari model lain ke Gemini 3 dengan bagian panggilan fungsi di giliran dan langkah saat ini? Saya perlu menyediakan bagian panggilan fungsi
+   yang tidak dibuat oleh API dan oleh karena itu tidak memiliki tanda tangan pemikiran terkait
    ?**
 
-   Embora a injeção de blocos de chamada de função personalizados na solicitação seja fortemente
-   desencorajada, em casos em que não é possível evitá-la, por exemplo, fornecer informações
-   ao modelo sobre chamadas de função e respostas que foram executadas
-   de forma determinística pelo cliente ou transferir um rastreamento de um modelo diferente
-   que não inclui assinaturas de pensamento, é possível definir as seguintes
-   assinaturas fictícias de `"context_engineering_is_the_way_to_go"` ou
-   `"skip_thought_signature_validator"` no campo de assinatura de pensamento para ignorar a
-   validação.
-2. **Estou enviando chamadas e respostas de função paralelas intercaladas, e a API está retornando um erro 400. Por quê?**
+   Meskipun sangat tidak disarankan untuk menyisipkan blok panggilan fungsi kustom ke dalam permintaan, dalam kasus yang tidak dapat dihindari, misalnya memberikan informasi
+   kepada model tentang panggilan fungsi dan respons yang dieksekusi
+   secara deterministik oleh klien, atau mentransfer pelacakan dari model lain yang tidak menyertakan tanda tangan pemikiran, Anda dapat menetapkan tanda tangan dummy berikut `"context_engineering_is_the_way_to_go"` atau
+   `"skip_thought_signature_validator"` di kolom tanda tangan pemikiran untuk melewati
+   validasi.
+2. **Saya mengirim kembali panggilan dan respons fungsi paralel yang disisipkan dan API menampilkan 400. Mengapa?**
 
-   Quando a API retorna chamadas de função paralelas "FC1 + assinatura, FC2", a resposta do usuário esperada é "FC1 + assinatura, FC2, FR1, FR2". Se você as tiver intercaladas como "FC1 + assinatura, FR1, FC2, FR2", a API vai retornar um erro 400.
-3. **Ao fazer streaming, e o modelo não retornar uma chamada de função, não consigo encontrar
-   a assinatura de pensamento**
+   Saat API menampilkan panggilan fungsi paralel "FC1 + signature, FC2", respons pengguna yang diharapkan adalah "FC1+ signature, FC2, FR1, FR2". Jika Anda menyisipkannya sebagai "FC1 + signature, FR1, FC2, FR2", API akan menampilkan error 400.
+3. **Saat melakukan streaming dan model tidak menampilkan panggilan fungsi, saya tidak dapat menemukan
+   tanda tangan pemikiran**
 
-   Durante uma resposta do modelo que não contém uma FC com uma solicitação de streaming, o modelo pode retornar a assinatura de pensamento em uma parte com uma parte de conteúdo de texto vazia. É recomendável analisar toda a solicitação até que o `finish_reason` seja retornado pelo modelo.
+   Selama respons model yang tidak berisi FC dengan permintaan streaming, model dapat menampilkan tanda tangan pemikiran di bagian dengan bagian konten teks kosong. Sebaiknya analisis seluruh permintaan hingga `finish_reason` ditampilkan oleh model.
 
-## Assinaturas de pensamento para diferentes modelos
+## Tanda tangan pemikiran untuk model yang berbeda
 
-[Os modelos do Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=pt-br#gemini-3) e do Gemini 2.5
-se comportam de maneira diferente com assinaturas de pensamento em chamadas de função:
+[Model Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=id#gemini-3) dan model Gemini 2.5
+berperilaku berbeda dengan tanda tangan pemikiran dalam panggilan fungsi:
 
-- Se houver chamadas de função em uma resposta,
-  - O Gemini 3 sempre terá a assinatura na primeira parte da chamada de função.
-    É **obrigatório** retornar essa parte.
-  - O Gemini 2.5 terá a assinatura na primeira parte (independente do tipo). É **opcional** retornar essa parte.
-- Se não houver chamadas de função em uma resposta,
-  - O Gemini 3 terá a assinatura na última parte se o modelo gerar um pensamento.
-  - O Gemini 2.5 não terá uma assinatura em nenhuma parte.
+- Jika ada panggilan fungsi dalam respons,
+  - Gemini 3 akan selalu memiliki tanda tangan di bagian panggilan fungsi pertama.
+    **Wajib** untuk menampilkan bagian tersebut.
+  - Gemini 2.5 akan memiliki tanda tangan di bagian pertama (terlepas dari jenisnya). **Opsional** untuk menampilkan bagian tersebut.
+- Jika tidak ada panggilan fungsi dalam respons,
+  - Gemini 3 akan memiliki tanda tangan di bagian terakhir jika model membuat pemikiran.
+  - Gemini 2.5 tidak akan memiliki tanda tangan di bagian mana pun.
 
-Consulte a página [Pensamento](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br#signatures) para mais
-detalhes sobre a comparação.
-Para modelos de imagem do Gemini 3, consulte a seção processo de pensamento do
-[guia de geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br#thinking-process).
+Lihat halaman [Penalaran](https://ai.google.dev/gemini-api/docs/thinking?hl=id#signatures) untuk mengetahui detail perbandingan selengkapnya.
+Untuk model Gambar Gemini 3, lihat bagian proses penalaran di
+[panduan Pembuatan gambar](https://ai.google.dev/gemini-api/docs/image-generation?hl=id#thinking-process).
 
-Envie comentários
+Kirim masukan
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Última atualização 2026-08-19 UTC.
+Terakhir diperbarui pada 2026-08-19 UTC.
 
-Quer enviar seu feedback?
+Ada masukan untuk kami?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-08-19 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-08-19 UTC."],[],[]]

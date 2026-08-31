@@ -1,36 +1,36 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-agentic?hl=de
-fetched_at: 2026-08-24T02:24:49.660538+00:00
-title: "Agentische Vision-Funktionen \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-agentic?hl=id
+fetched_at: 2026-08-31T06:31:37.442162+00:00
+title: "Kemampuan visi agentik \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Feedback geben
+Kirim masukan
 
-# Agentische Vision-Funktionen
+# Kemampuan visi agentik
 
-Gemini Robotics ER-Modelle können Python-Code schreiben und ausführen, um Bilder zu bearbeiten und Logik anzuwenden, bevor sie antworten. Auf dieser Seite finden Sie Beispiele für die Code-Ausführung: Objekterkennung mit Zoom und Zuschneiden, Instrumentenablesung, Flüssigkeitsmessung, Lesen von Leiterplatten und Bildannotation.
+Model Gemini Robotics ER dapat menulis dan menjalankan kode Python untuk memanipulasi gambar dan menerapkan logika sebelum menjawab. Halaman ini membahas contoh eksekusi kode: deteksi objek dengan zoom dan pangkas, pembacaan instrumen, pengukuran cairan, pembacaan papan sirkuit, dan anotasi gambar.
 
-Wenn Sie diese Beispiele an Ihren eigenen Anwendungsfall anpassen möchten, ersetzen Sie den Prompt-Text und die hochgeladene Bilddatei durch Ihre eigenen. Sie können auch das angeforderte JSON-Schema im Prompt an die Ausgabestruktur anpassen, die Ihre Anwendung benötigt, oder eine `system_instruction` hinzufügen, um das Ausgabeformat und die Genauigkeit zu erzwingen.
+Untuk mengadaptasi contoh ini ke kasus penggunaan Anda sendiri, ganti teks perintah dan file gambar yang diupload dengan milik Anda sendiri. Anda juga dapat menyesuaikan skema JSON yang diminta dalam perintah agar sesuai dengan struktur output yang dibutuhkan aplikasi Anda, atau menambahkan `system_instruction` untuk menerapkan format dan presisi output.
 
-Vollständigen ausführbaren Code finden Sie im
-[Robotics-Kochbuch](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+Untuk kode yang dapat dijalankan sepenuhnya, lihat
+[Cookbook Robotics](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-## Denkaufwand
+## Tingkat penalaran
 
-Sie können den Denkaufwand steuern, um Latenz gegen Genauigkeit abzuwägen. Räumliche Aufgaben wie die Objekterkennung funktionieren gut mit einem niedrigen Denkaufwand. Komplexe Aufgaben wie das Zählen oder die Gewichtsschätzung profitieren von einem höheren Denkaufwand.
+Anda dapat mengontrol tingkat penalaran untuk menukar latensi dengan akurasi. Tugas spasial seperti deteksi objek berperforma baik dengan tingkat penalaran yang rendah. Tugas kompleks seperti penghitungan atau estimasi berat akan mendapatkan manfaat dari tingkat penalaran yang lebih tinggi.
 
-Im folgenden Beispiel wird der Denkaufwand für eine komplexe Zählaufgabe auf `high` gesetzt:
+Contoh berikut menetapkan tingkat penalaran ke `high` untuk tugas penghitungan yang kompleks:
 
 ### Python
 
@@ -60,11 +60,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Weitere Informationen finden Sie unter [Denkaufwand](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=de).
+Lihat [Penalaran](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=id) untuk mengetahui detailnya.
 
-## Objekterkennung (Zoom und Zuschneiden)
+## Deteksi objek (Zoom dan pangkas)
 
-Im folgenden Beispiel wird gezeigt, wie Sie die Codeausführung verwenden, um ein Bild zu zoomen und zuzuschneiden, um eine klarere Ansicht zu erhalten, wenn Sie Objekte erkennen und Begrenzungsrahmen zurückgeben.
+Contoh berikut menunjukkan cara menggunakan eksekusi kode untuk memperbesar dan memangkas gambar agar tampilan lebih jelas saat mendeteksi objek dan menampilkan kotak pembatas.
 
 ### Python
 
@@ -102,7 +102,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Die Modellausgabe würde in etwa so aussehen:
+Output model akan mirip dengan respons json berikut:
 
 ```
 [
@@ -114,13 +114,13 @@ Die Modellausgabe würde in etwa so aussehen:
 ]
 ```
 
-Das folgende Bild zeigt die vom Modell zurückgegebenen Rahmen.
+Gambar berikut menampilkan kotak yang ditampilkan dari model.
 
-![Beispiel für Begrenzungsrahmen für gefundene Objekte](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=de)
+![Contoh yang menampilkan kotak pembatas untuk objek yang ditemukan](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=id)
 
-## Analoges Messgerät ablesen und Logik anwenden
+## Membaca pengukur analog dan menerapkan logika
 
-Im folgenden Beispiel wird gezeigt, wie Sie das Modell verwenden, um ein analoges Messgerät abzulesen und Zeitberechnungen durchzuführen. Dabei wird eine Systemanweisung verwendet, um eine JSON-Ausgabe zu erzwingen.
+Contoh berikut menunjukkan cara menggunakan model untuk membaca pengukur analog dan melakukan penghitungan waktu. Contoh ini menggunakan instruksi sistem untuk menerapkan output JSON.
 
 ### Python
 
@@ -156,9 +156,9 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-## Flüssigkeit in einem Behälter messen
+## Mengukur cairan dalam wadah
 
-Im folgenden Beispiel wird gezeigt, wie Sie die Codeausführung verwenden, um den Flüssigkeitsstand in einem Behälter zu messen.
+Contoh berikut menunjukkan cara menggunakan eksekusi kode untuk mengukur tingkat cairan dalam wadah.
 
 ### Python
 
@@ -193,9 +193,9 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-## Markierungen auf einer Leiterplatte lesen
+## Membaca tanda pada papan sirkuit
 
-Im folgenden Beispiel wird gezeigt, wie Sie die Codeausführung verwenden, um die Markierungen auf einer Leiterplatte zu lesen.
+Contoh berikut menunjukkan cara menggunakan eksekusi kode untuk membaca tanda pada papan sirkuit.
 
 ### Python
 
@@ -230,11 +230,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-![Beispiel für Markierungen auf einer Leiterplatte](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=de)
+![Contoh yang menampilkan tanda pada papan sirkuit](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=id)
 
-## Bildannotation
+## Anotasi gambar
 
-Im folgenden Beispiel wird gezeigt, wie Sie die Codeausführung verwenden, um ein Bild zu annotieren (z.B. Pfeile für Entsorgungsanweisungen zu zeichnen) und das geänderte Bild zurückzugeben.
+Contoh berikut menunjukkan cara menggunakan eksekusi kode untuk menganotasi gambar (misalnya, menggambar panah untuk petunjuk pembuangan) dan menampilkan gambar yang diubah.
 
 ### Python
 
@@ -271,11 +271,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Im Folgenden finden Sie ein Beispiel für eine Bildeingabe.
+Berikut adalah contoh input gambar.
 
-![Beispiel für eine Uhr zum Ablesen](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=de)
+![Contoh yang menunjukkan jam untuk dibaca](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=id)
 
-Die Modellausgabe würde in etwa so aussehen:
+Output model akan mirip dengan berikut ini:
 
 ```
   The annotated image shows the suggested disposal locations for the items on the table:
@@ -284,18 +284,18 @@ Die Modellausgabe würde in etwa so aussehen:
   - **Black bin (Trash)**: Chocolate bar wrapper, Welch's packet, and white tissue.
 ```
 
-## Nächste Schritte
+## Langkah berikutnya
 
-- [Aufgabenorchestrierung](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=de) – Aufgaben mit langer Laufzeit mit benutzerdefinierten Roboter-APIs.
-- [Robotik mit Streaming](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=de) – bidirektionales Streaming in Echtzeit (nur Gemini Robotics ER 2).
-- [Videoanalyse](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=de) – Momente finden und Fortschritt klassifizieren (nur Gemini Robotics ER 2).
+- [Orkestrasi tugas](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=id) — tugas jangka panjang dengan API robot kustom.
+- [Robotika dengan streaming](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=id) — streaming dua arah real-time (khusus Gemini Robotics ER 2).
+- [Pemahaman video](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=id) — menemukan momen dan klasifikasi progres (khusus Gemini Robotics ER 2).
 
-Feedback geben
+Kirim masukan
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Zuletzt aktualisiert: 2026-07-30 (UTC).
+Terakhir diperbarui pada 2026-07-30 UTC.
 
-Haben Sie Feedback für uns?
+Ada masukan untuk kami?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-30 (UTC)."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-30 UTC."],[],[]]

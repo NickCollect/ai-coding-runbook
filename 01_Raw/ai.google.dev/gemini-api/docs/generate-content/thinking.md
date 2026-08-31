@@ -1,36 +1,36 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=it
-fetched_at: 2026-08-24T02:24:04.056309+00:00
-title: "Pensiero di Gemini \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=pl
+fetched_at: 2026-08-31T06:34:10.980209+00:00
+title: "Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Invia feedback
+Prześlij opinię
 
-# Pensiero di Gemini
+# Gemini
 
-I modelli delle serie [Gemini 3 e 2.5](https://ai.google.dev/gemini-api/docs/models?hl=it) utilizzano un
-"processo di pensiero" interno che migliora notevolmente le loro capacità di ragionamento e pianificazione in più passaggi,
-rendendoli altamente efficaci per attività complesse come la
-programmazione, la matematica avanzata e l'analisi dei dati.
+Modele z serii [Gemini 3 i 2.5](https://ai.google.dev/gemini-api/docs/models?hl=pl) korzystają z wewnętrznego
+„procesu myślowego”, który znacznie poprawia ich zdolność do rozumowania i planowania wieloetapowego,
+dzięki czemu są bardzo skuteczne w złożonych zadaniach, takich jak
+kodowanie, zaawansowana matematyka i analiza danych.
 
-Questa guida mostra come utilizzare le funzionalità di pensiero di Gemini utilizzando l'API Gemini.
+Z tego przewodnika dowiesz się, jak korzystać z funkcji myślenia Gemini za pomocą interfejsu Gemini API.
 
-## Generare contenuti con il pensiero
+## Generowanie treści z myśleniem
 
-L'avvio di una richiesta con un modello di ragionamento è simile a qualsiasi altra richiesta di generazione di contenuti. La differenza fondamentale consiste nello specificare uno dei
-[modelli con supporto per il pensiero](#supported-models) nel campo `model`, come
-mostrato nel seguente [esempio di generazione di testo](https://ai.google.dev/gemini-api/docs/text-generation?hl=it#text-input):
+Wysyłanie żądania do modelu myślącego jest podobne do każdego innego żądania generowania treści. Kluczowa różnica polega na określeniu w polu `model` jednego z
+[modeli obsługujących myślenie](#supported-models), jak
+pokazano w tym przykładzie [generowania tekstu](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl#text-input):
 
 ### Python
 
@@ -68,7 +68,7 @@ async function main() {
 main();
 ```
 
-### Vai
+### Go
 
 ```
 package main
@@ -118,13 +118,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
  ```
 ```
 
-## Riepiloghi del pensiero
+## Podsumowania myśli
 
-I riepiloghi del pensiero sono versioni riassunte dei pensieri non elaborati del modello e offrono informazioni sul processo di ragionamento interno del modello. Tieni presente che i livelli e i budget di pensiero si applicano ai pensieri non elaborati del modello e non ai riepiloghi del pensiero.
+Podsumowania myśli to skrócone wersje surowych myśli modelu, które pozwalają zrozumieć wewnętrzny proces rozumowania modelu. Pamiętaj, że poziomy i budżety myślenia dotyczą surowych myśli modelu, a nie podsumowań myśli.
 
-Puoi attivare i riepiloghi del pensiero impostando `includeThoughts` su `true` nella configurazione della richiesta. Puoi quindi accedere al riepilogo scorrendo i `parts` del parametro `response` e controllando il valore booleano `thought`.
+Podsumowania myśli możesz włączyć, ustawiając w konfiguracji żądania wartość `includeThoughts` na `true`. Następnie możesz uzyskać dostęp do podsumowania, iterując po `parts` parametru `response` i sprawdzając wartość logiczną `thought`.
 
-Ecco un esempio che mostra come attivare e recuperare i riepiloghi del pensiero senza streaming, che restituisce un unico riepilogo del pensiero finale con la risposta:
+Oto przykład pokazujący, jak włączyć i pobrać podsumowania myśli bez przesyłania strumieniowego, co powoduje zwrócenie w odpowiedzi pojedynczego, końcowego podsumowania myśli:
 
 ### Python
 
@@ -193,7 +193,7 @@ async function main() {
 main();
 ```
 
-### Vai
+### Go
 
 ```
 package main
@@ -234,7 +234,7 @@ func main() {
 }
 ```
 
-Ecco un esempio di utilizzo del pensiero con lo streaming, che restituisce riepiloghi incrementali durante la generazione:
+A oto przykład użycia myślenia z przesyłaniem strumieniowym, które podczas generowania zwraca stopniowe, przyrostowe podsumowania:
 
 ### Python
 
@@ -332,7 +332,7 @@ async function main() {
 await main();
 ```
 
-### Vai
+### Go
 
 ```
 package main
@@ -387,25 +387,25 @@ func main() {
 }
 ```
 
-## Controllare il pensiero
+## Kontrolowanie myślenia
 
-Per impostazione predefinita, i modelli Gemini utilizzano il pensiero dinamico, regolando automaticamente la quantità di ragionamento in base alla complessità della richiesta dell'utente.
-Tuttavia, se hai vincoli di latenza specifici o richiedi che il modello utilizzi un ragionamento più approfondito del solito, puoi facoltativamente utilizzare i parametri per controllare il comportamento del pensiero.
+Modele Gemini domyślnie korzystają z myślenia dynamicznego, automatycznie dostosowując ilość wysiłku związanego z rozumowaniem do złożoności żądania użytkownika.
+Jeśli jednak masz określone ograniczenia dotyczące opóźnienia lub chcesz, aby model przeprowadzał bardziej szczegółowe rozumowanie niż zwykle, możesz opcjonalnie użyć parametrów do kontrolowania zachowania myślenia.
 
-### Livelli di pensiero (Gemini 3)
+### Poziomy myślenia (Gemini 3)
 
-Il parametro `thinkingLevel`, consigliato per i modelli Gemini 3 e versioni successive, consente di controllare il comportamento del ragionamento.
+Parametr `thinkingLevel`, zalecany w przypadku modeli Gemini 3 i nowszych, umożliwia kontrolowanie zachowania rozumowania.
 
-La tabella seguente descrive in dettaglio le impostazioni di `thinkingLevel` per ogni tipo di modello:
+W tabeli poniżej znajdziesz szczegółowe informacje o ustawieniach `thinkingLevel` dla każdego typu modelu:
 
-| Livello di pensiero | Gemini 3.6 e 3.5 Flash | Gemini 3.1 Pro | Gemini 3.5 e 3.1 Flash-Lite | Gemini 3.1 Flash-Lite Image | Gemini 3 Flash | Descrizione |
+| Poziom myślenia | Gemini 3.6 i 3.5 Flash | Gemini 3.1 Pro | Gemini 3.5 i 3.1 Flash-Lite | Gemini 3.1 Flash-Lite Image | Gemini 3 Flash | Opis |
 | --- | --- | --- | --- | --- | --- | --- |
-| **`minimal`** | Supportato | Non supportato | Supportato (valore predefinito) | Supportato (valore predefinito) | Supportato | Corrisponde all'impostazione "nessun pensiero" per la maggior parte delle query. Tieni presente che `minimal` non garantisce che il pensiero sia disattivato, il modello potrebbe ragionare in modo molto minimo per attività complesse. |
-| **`low`** | Supportato | Supportato | Supportato | Non supportato | Supportato | Riduce al minimo la latenza e i costi. |
-| **`medium`** | Supportato (valore predefinito) | Supportato | Supportato | Non supportato | Supportato | Pensiero bilanciato per la maggior parte delle attività. |
-| **`high`** | Supportato (dinamico) | Supportato (valore predefinito, dinamico) | Supportato (dinamico) | Supportato (dinamico) | Supportato (valore predefinito, dinamico) | Massimizza la profondità del ragionamento. Il modello potrebbe impiegare molto più tempo per raggiungere un primo token di output (non di pensiero), ma l'output sarà più accurato. |
+| **`minimal`** | Obsługiwane | Nieobsługiwane | Obsługiwane (domyślnie) | Obsługiwane (domyślnie) | Obsługiwane | W przypadku większości zapytań odpowiada ustawieniu „bez myślenia”. Pamiętaj, że `minimal` nie gwarantuje wyłączenia myślenia. W przypadku złożonych zadań model może przeprowadzać bardzo minimalne rozumowanie. |
+| **`low`** | Obsługiwane | Obsługiwane | Obsługiwane | Nieobsługiwane | Obsługiwane | Minimalizuje opóźnienie i koszt. |
+| **`medium`** | Obsługiwane (domyślnie) | Obsługiwane | Obsługiwane | Nieobsługiwane | Obsługiwane | Zrównoważone myślenie w przypadku większości zadań. |
+| **`high`** | Obsługiwane (dynamiczne) | Obsługiwane (domyślnie, dynamiczne) | Obsługiwane (dynamiczne) | Obsługiwane (dynamiczne) | Obsługiwane (domyślnie, dynamiczne) | Maksymalizuje głębokość rozumowania. Model może znacznie dłużej generować pierwszy token wyjściowy (nie wymagający myślenia), ale wynik będzie bardziej starannie przemyślany. |
 
-Il seguente esempio mostra come impostare il livello di pensiero.
+Poniższy przykład pokazuje, jak ustawić poziom myślenia.
 
 ### Python
 
@@ -450,7 +450,7 @@ async function main() {
 main();
 ```
 
-### Vai
+### Go
 
 ```
 package main
@@ -508,29 +508,31 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }'
 ```
 
-Non puoi disattivare il pensiero per Gemini 3.1 Pro. Anche Gemini 3 Flash e Flash-Lite
-non supportano la disattivazione completa del pensiero.
-Se non specifichi un livello di pensiero, Gemini utilizzerà il livello di pensiero predefinito dei modelli Gemini 3 (ad es. `"high"` per Gemini 3.1 Pro e `"medium"` per Gemini 3.5 Flash).
+Nie możesz wyłączyć myślenia w przypadku modelu Gemini 3.1 Pro. Modele Gemini 3 Flash i Flash-Lite
+również nie obsługują pełnego wyłączenia myślenia.
+Jeśli nie określisz poziomu myślenia, Gemini użyje domyślnego poziomu myślenia modeli Gemini 3 (np. `"high"` w przypadku Gemini 3.1 Pro i `"medium"` w przypadku Gemini 3.5 Flash).
 
-I modelli della serie Gemini 2.5 non supportano `thinkingLevel`; utilizza invece `thinkingBudget`.
+Modele z serii Gemini 2.5 nie obsługują parametru `thinkingLevel`. Zamiast niego użyj parametru `thinkingBudget`.
 
-### Budget di pensiero
+### Budżety na myślenie
 
-Il parametro `thinkingBudget`, introdotto con la serie Gemini 2.5, indica al modello il numero specifico di token di pensiero da utilizzare per il ragionamento.
+Parametr `thinkingBudget`, wprowadzony w serii Gemini 2.5, informuje model o konkretnej liczbie tokenów myśli, które mają być używane do rozumowania.
 
-Di seguito sono riportati i dettagli di configurazione di `thinkingBudget` per ogni tipo di modello.
-Puoi disattivare il pensiero impostando `thinkingBudget` su 0.
-Se imposti `thinkingBudget` su -1, viene attivato il **pensiero dinamico**, il che significa che il modello regolerà il budget in base alla complessità della richiesta.
+Poniżej znajdziesz szczegóły konfiguracji parametru `thinkingBudget` dla każdego typu modelu.
+Myślenie możesz wyłączyć, ustawiając wartość `thinkingBudget` na 0.
+Ustawienie wartości `thinkingBudget` na -1 włącza
+**myślenie dynamiczne**, co oznacza, że model dostosuje budżet do
+złożoności żądania.
 
-| Modello | Impostazione predefinita (il budget di pensiero non è impostato) | Intervallo | Disattiva il pensiero | Attiva il pensiero dinamico |
+| Model | Ustawienie domyślne (budżet na myślenie nie jest ustawiony) | Zakres | Wyłącz myślenie | Włącz myślenie dynamiczne |
 | --- | --- | --- | --- | --- |
-| **2.5 Pro** | Pensiero dinamico | Da `128` a `32768` | N/A: non è possibile disattivare il pensiero | `thinkingBudget = -1` (valore predefinito) |
-| **2.5 Flash** | Pensiero dinamico | Da `0` a `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (valore predefinito) |
-| **2.5 Flash Preview** | Pensiero dinamico | Da `0` a `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (valore predefinito) |
-| **2.5 Flash Lite** | Il modello non pensa | Da `512` a `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
-| **2.5 Flash Lite Preview** | Il modello non pensa | Da `512` a `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
-| **Robotics-ER 1.6 Preview** | Pensiero dinamico | Da `0` a `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (valore predefinito) |
-| **2.5 Flash Live Native Audio Preview (09-2025)** | Pensiero dinamico | Da `0` a `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (valore predefinito) |
+| **2.5 Pro** | Myślenie dynamiczne | `128` do `32768` | Nie dotyczy: nie można wyłączyć myślenia | `thinkingBudget = -1` (domyślnie) |
+| **2.5 Flash** | Myślenie dynamiczne | `0` do `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (domyślnie) |
+| **2.5 Flash (wersja testowa)** | Myślenie dynamiczne | `0` do `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (domyślnie) |
+| **2.5 Flash Lite** | Model nie myśli | `512` do `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
+| **2.5 Flash Lite (wersja testowa)** | Model nie myśli | `512` do `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
+| **Robotics-ER 1.6 (wersja testowa)** | Myślenie dynamiczne | `0` do `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (domyślnie) |
+| **2.5 Flash Live Native Audio (wersja testowa) (09-2025)** | Myślenie dynamiczne | `0` do `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (domyślnie) |
 
 ### Python
 
@@ -583,7 +585,7 @@ async function main() {
 main();
 ```
 
-### Vai
+### Go
 
 ```
 package main
@@ -645,32 +647,32 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:g
 }'
 ```
 
-A seconda del prompt, il modello potrebbe superare o non raggiungere il budget di token.
+W zależności od prompta model może przekroczyć lub nie wykorzystać w pełni budżetu tokenów.
 
-## Firme del pensiero
+## Podpisy myśli
 
-L'API Gemini è senza stato, quindi il modello tratta ogni richiesta API in modo indipendente e non ha accesso al contesto di pensiero dei turni precedenti nelle interazioni in più turni.
+Interfejs Gemini API jest bezstanowy, więc model traktuje każde żądanie do interfejsu API niezależnie i nie ma dostępu do kontekstu myśli z poprzednich tur interakcji wieloetapowych.
 
-Per consentire il mantenimento del contesto di pensiero nelle interazioni multi-turno, Gemini restituisce le firme del pensiero, che sono rappresentazioni criptate del processo di pensiero interno del modello.
+Aby umożliwić zachowanie kontekstu myśli w interakcjach wieloetapowych, Gemini zwraca podpisy myśli, które są zaszyfrowanymi reprezentacjami wewnętrznego procesu myślowego modelu.
 
-- **I modelli Gemini 2.5** restituiscono le firme del pensiero quando il pensiero è attivato e
-  la richiesta include la [chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it#thinking),
-  in particolare le [dichiarazione di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it#step-2).
-- **I modelli Gemini 3** possono restituire le firme del pensiero per tutti i tipi di [parti](https://ai.google.dev/api/caching?hl=it#Part).
-  Ti consigliamo di restituire sempre tutte le firme così come le hai ricevute, ma è *obbligatorio* per le firme di chiamata di funzione. Per saperne di più, consulta la pagina
-  [Firme del pensiero](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=it).
+- **Modele Gemini 2.5** zwracają podpisy myśli, gdy myślenie jest włączone i
+  żądanie zawiera [wywołanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl#thinking),
+  w szczególności [deklaracje funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl#step-2).
+- **Modele Gemini 3** mogą zwracać podpisy myśli dla wszystkich typów [części](https://ai.google.dev/api/caching?hl=pl#Part).
+  Zalecamy, aby zawsze przekazywać wszystkie podpisy w takiej postaci, w jakiej zostały odebrane, ale w przypadku podpisów wywołań funkcji jest to *wymagane*. Więcej informacji znajdziesz na stronie
+  [Podpisy myśli](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=pl).
 
-Altre limitazioni di utilizzo da considerare con la chiamata di funzione includono:
+Inne ograniczenia dotyczące użycia, które należy wziąć pod uwagę w przypadku wywoływania funkcji:
 
-- Le firme vengono restituite dal modello all'interno di altre parti della risposta, ad esempio le parti di chiamata di funzione o di testo.
-  [Restituisci l'intera risposta](https://ai.google.dev/gemini-api/docs/function-calling?hl=it#step-4)
-  con tutte le parti al modello nei turni successivi.
-- Non concatenare le parti con le firme.
-- Non unire una parte con una firma con un'altra parte senza firma.
+- Podpisy są zwracane przez model w innych częściach odpowiedzi, np. w częściach wywołania funkcji lub tekstu.
+  [Przekaż modelowi całą odpowiedź](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl#step-4)
+  ze wszystkimi częściami w kolejnych turach.
+- Nie łącz części z podpisami.
+- Nie łącz części z podpisem z inną częścią bez podpisu.
 
-## Prezzi
+## Ceny
 
-Quando il pensiero è attivato, il prezzo della risposta è la somma dei token di output e dei token di pensiero. Puoi ottenere il numero totale di token di pensiero generati dal campo `thoughtsTokenCount`.
+Gdy myślenie jest włączone, cena odpowiedzi jest sumą tokenów wyjściowych i tokenów myśli. Łączną liczbę wygenerowanych tokenów myśli możesz uzyskać z pola `thoughtsTokenCount`.
 
 ### Python
 
@@ -688,7 +690,7 @@ console.log(`Thoughts tokens: ${response.usageMetadata.thoughtsTokenCount}`);
 console.log(`Output tokens: ${response.usageMetadata.candidatesTokenCount}`);
 ```
 
-### Vai
+### Go
 
 ```
 // ...
@@ -696,61 +698,60 @@ fmt.Println("Thoughts tokens:", response.UsageMetadata.ThoughtsTokenCount)
 fmt.Println("Output tokens:", response.UsageMetadata.CandidatesTokenCount)
 ```
 
-I modelli di pensiero generano pensieri completi per migliorare la qualità della risposta
-finale, quindi restituiscono [i riepiloghi](#summaries) per fornire informazioni sul
-processo di pensiero. Pertanto, il prezzo si basa sui token di pensiero completi che il modello deve generare per creare un riepilogo, anche se dall'API viene restituito solo il riepilogo.
+[Modele myślące generują pełne myśli, aby poprawić jakość ostatecznej
+odpowiedzi, a następnie podsumowania](#summaries) aby zapewnić wgląd w
+proces myślowy. Dlatego cena jest oparta na pełnych tokenach myśli, które model musi wygenerować, aby utworzyć podsumowanie, mimo że z interfejsu API jest zwracane tylko podsumowanie.
 
-Per saperne di più sui token, consulta la [guida](https://ai.google.dev/gemini-api/docs/tokens?hl=it)
-al conteggio dei token.
+Więcej informacji o tokenach znajdziesz w przewodniku [Liczenie tokenów](https://ai.google.dev/gemini-api/docs/tokens?hl=pl).
 
-## Best practice
+## Sprawdzone metody
 
-Questa sezione include alcune indicazioni per l'utilizzo efficiente dei modelli di pensiero.
-Come sempre, seguendo le nostre [indicazioni e best practice per i prompt](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=it) otterrai i risultati migliori.
+W tej sekcji znajdziesz wskazówki dotyczące efektywnego korzystania z modeli myślących.
+Jak zawsze, najlepsze wyniki uzyskasz, jeśli będziesz postępować zgodnie z naszymi [wskazówkami dotyczącymi promptów i sprawdzonymi metodami](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=pl).
 
-### Debug e orientamento
+### Debugowanie i sterowanie
 
-- **Esamina il ragionamento**: quando non ricevi la risposta prevista dai
-  modelli di pensiero, può essere utile analizzare attentamente i riepiloghi del pensiero di Gemini.
-  Puoi vedere come ha suddiviso l'attività e come è arrivato alla sua conclusione e utilizzare queste informazioni per correggere i risultati corretti.
-- **Fornisci indicazioni nel ragionamento**: se prevedi un output particolarmente lungo, potresti voler fornire indicazioni nel prompt per limitare la
-  [quantità di pensiero](#set-budget) utilizzata dal modello. In questo modo, puoi riservare più token di output per la risposta.
+- **Sprawdzanie rozumowania**: jeśli nie otrzymujesz oczekiwanej odpowiedzi od modeli myślących, warto dokładnie przeanalizować podsumowania myśli Gemini.
+  Możesz zobaczyć, jak model podzielił zadanie i doszedł do wniosku, oraz wykorzystać te informacje, aby uzyskać prawidłowe wyniki.
+- **Wskazówki dotyczące rozumowania**: jeśli oczekujesz szczególnie długiego
+  wyniku, możesz podać w prompcie wskazówki, aby ograniczyć
+  [ilość myślenia](#set-budget), z której korzysta model. Dzięki temu możesz zarezerwować więcej tokenów wyjściowych na potrzeby odpowiedzi.
 
-### Complessità dell'attività
+### Złożoność zadania
 
-- **Attività semplici (il pensiero potrebbe essere disattivato):** per le richieste semplici in cui non è richiesto un ragionamento complesso, come il recupero o la classificazione dei fatti, il pensiero non è necessario. Esempi:
-  - "Dove è stata fondata DeepMind?"
-  - "Questa email chiede un incontro o fornisce solo informazioni?"
-- **Attività di livello medio (pensiero predefinito/parziale):** molte richieste comuni traggono vantaggio da un certo grado di elaborazione passo passo o da una comprensione più approfondita. Gemini può utilizzare in modo flessibile la funzionalità di pensiero per attività come:
-  - Analogizzare la fotosintesi e la crescita.
-  - Confrontare e contrapporre auto elettriche e auto ibride.
-- **Attività difficili (capacità di pensiero massima):** per le sfide veramente complesse, come la risoluzione di problemi di matematica complessi o attività di programmazione, ti consigliamo di impostare un budget di pensiero elevato. Questi tipi di attività richiedono che il modello utilizzi tutte le sue capacità di ragionamento e pianificazione, spesso con molti passaggi interni prima di fornire una risposta. Esempi:
-  - Risolvi il problema 1 in AIME 2025: trova la somma di tutte le basi intere b > 9 per
-    le quali 17b è un divisore di 97b.
-  - Scrivi codice Python per un'applicazione web che visualizzi i dati del mercato azionario in tempo reale, inclusa l'autenticazione utente. Rendilo il più efficiente possibile.
+- **Łatwe zadania (myślenie może być wyłączone):** w przypadku prostych żądań, które nie wymagają złożonego rozumowania, takich jak wyszukiwanie faktów lub klasyfikacja, myślenie nie jest wymagane. Przykłady:
+  - „Gdzie założono DeepMind?”
+  - „Czy ten e-mail zawiera prośbę o spotkanie, czy tylko informacje?”
+- **Średnio trudne zadania (domyślne/częściowe myślenie):** wiele typowych żądań wymaga pewnego stopnia przetwarzania krok po kroku lub głębszego zrozumienia. Gemini może elastycznie korzystać z funkcji myślenia w przypadku takich zadań jak:
+  - Porównanie fotosyntezy i dorastania.
+  - Porównanie samochodów elektrycznych i hybrydowych.
+- **Trudne zadania (maksymalna zdolność myślenia):** w przypadku naprawdę złożonych wyzwań, takich jak rozwiązywanie złożonych problemów matematycznych lub zadań związanych z kodowaniem, zalecamy ustawienie wysokiego budżetu na myślenie. Tego typu zadania wymagają od modelu pełnego wykorzystania możliwości rozumowania i planowania, często obejmującego wiele wewnętrznych kroków przed udzieleniem odpowiedzi. Przykłady:
+  - Rozwiąż zadanie 1 w AIME 2025: znajdź sumę wszystkich podstaw całkowitych b > 9, dla
+    których 17b jest dzielnikiem 97b.
+  - Napisz kod w Pythonie dla aplikacji internetowej, która wizualizuje dane z giełdy w czasie rzeczywistym, w tym uwierzytelnianie użytkowników. Zadbaj o jak największą wydajność.
 
-## Modelli, strumenti e funzionalità supportati
+## Obsługiwane modele, narzędzia i funkcje
 
-Le funzionalità di pensiero sono supportate su tutti i modelli delle serie 3 e 2.5.
-Puoi trovare tutte le funzionalità del modello nella
-[pagina di panoramica del modello](https://ai.google.dev/gemini-api/docs/models?hl=it).
+Funkcje myślenia są obsługiwane we wszystkich modelach z serii 3 i 2.5.
+Wszystkie możliwości modelu znajdziesz na
+[stronie przeglądu modelu](https://ai.google.dev/gemini-api/docs/models?hl=pl).
 
-I modelli di pensiero funzionano con tutti gli strumenti e le funzionalità di Gemini. In questo modo, i modelli possono interagire con sistemi esterni, eseguire codice o accedere a informazioni in tempo reale, incorporando i risultati nel loro ragionamento e nella risposta finale.
+Modele myślące współpracują ze wszystkimi narzędziami i funkcjami Gemini. Dzięki temu modele mogą wchodzić w interakcje z systemami zewnętrznymi, wykonywać kod lub uzyskiwać dostęp do informacji w czasie rzeczywistym, włączając wyniki do swojego rozumowania i ostatecznej odpowiedzi.
 
-Puoi provare esempi di utilizzo degli strumenti con i modelli di pensiero nel [ricettario di pensiero][Colab].
+Przykłady użycia narzędzi z modelami myślącymi znajdziesz w [Thinking cookbook][Colab].
 
-## Passaggi successivi
+## Co dalej?
 
-- La copertura del pensiero è disponibile nella nostra guida alla compatibilità con [OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=it#thinking).
+- Informacje o myśleniu znajdziesz w przewodniku [Zgodność z OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=pl#thinking).
 
 [Colab]: https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get\_started\_thinking.ipynb
 
-Invia feedback
+Prześlij opinię
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Ultimo aggiornamento 2026-07-30 UTC.
+Ostatnia aktualizacja: 2026-07-30 UTC.
 
-Vuoi dirci altro?
+Chcesz przekazać coś jeszcze?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]

@@ -1,66 +1,66 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/get-started?hl=vi
-fetched_at: 2026-08-24T02:32:45.564112+00:00
-title: "B\u1eaft \u0111\u1ea7u \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/get-started?hl=tr
+fetched_at: 2026-08-31T06:37:47.417388+00:00
+title: "Ba\u015flang\u0131\u00e7 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Gửi ý kiến phản hồi
+Geri bildirim gönderin
 
-# Bắt đầu
+# Başlangıç
 
-Hướng dẫn này giúp bạn bắt đầu sử dụng Gemini API bằng [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi). Bạn sẽ thực hiện lệnh gọi API đầu tiên trong vòng chưa đầy một phút và khám phá tính năng tạo văn bản, khả năng hiểu đa phương thức, tạo hình ảnh, đầu ra có cấu trúc, công cụ, gọi hàm, tác nhân và thực thi ở chế độ nền.
+Bu kılavuz, [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr)'yi kullanarak Gemini API'yi kullanmaya başlamanıza yardımcı olur. Bir dakikadan kısa sürede ilk API çağrınızı yapacak ve metin üretme, çok formatlı anlama, görüntü üretme, yapılandırılmış çıkış, araçlar, işlev çağrısı, ajanlar ve arka planda yürütme özelliklerini keşfedeceksiniz.
 
-Bạn có thể sử dụng Interactions API thông qua SDK [Python](https://github.com/googleapis/python-genai) và [JavaScript](https://github.com/googleapis/js-genai), cũng như thông qua REST.
+Etkileşimler API'si [Python](https://github.com/googleapis/python-genai) ve [JavaScript](https://github.com/googleapis/js-genai) SDK'ları ile REST aracılığıyla kullanılabilir.
 
-## 1. Lấy khoá API
+## 1. API anahtarı alma
 
-Để sử dụng Gemini API, bạn cần có một khoá API để xác thực các yêu cầu, thực thi giới hạn bảo mật và theo dõi mức sử dụng cho tài khoản của bạn.
+Gemini API'yi kullanmak için isteklerinizin kimliğini doğrulamak, güvenlik sınırlarını zorunlu kılmak ve hesabınızdaki kullanımı izlemek üzere bir API anahtarınızın olması gerekir.
 
-- Google AI Studio sẽ tự động tạo một dự án và khoá API cho người dùng mới.
-  Bạn có thể sao chép khoá này từ [trang khoá API](https://aistudio.google.com/api-keys?hl=vi).
-- Nếu bạn cần một khoá mới, hãy nhấp vào **Tạo khoá API** trong AI Studio rồi làm theo hộp thoại để thêm một cặp khoá-dự án mới.
+- Google AI Studio, yeni kullanıcılar için otomatik olarak bir proje ve API anahtarı oluşturur.
+  Bu anahtarı [API anahtarları sayfasından](https://aistudio.google.com/api-keys?hl=tr) kopyalayabilirsiniz.
+- Yeni bir anahtara ihtiyacınız varsa AI Studio'da **API anahtarı oluştur**'u tıklayın ve yeni bir anahtar-proje çifti eklemek için iletişim kutusunu takip edin.
 
-[Tạo khoá Gemini API](https://aistudio.google.com/apikey?hl=vi)
+[Gemini API anahtarı oluşturma](https://aistudio.google.com/apikey?hl=tr)
 
-Đặt khoá của bạn làm biến môi trường:
+Anahtarınızı ortam değişkeni olarak ayarlayın:
 
 ```
 export GEMINI_API_KEY="YOUR_API_KEY"
 ```
 
-### Nâng cấp lên gói trả phí
+### Ücretli katmana yükseltme
 
-Việc nâng cấp lên gói trả phí sẽ giúp bạn tăng hạn mức sử dụng và yêu cầu bạn thiết lập dịch vụ Thanh toán trên đám mây.
+Ücretli katmana yükseltme, hız sınırlarınızı artırır ve Cloud Billing'in ayarlanmasını gerektirir.
 
-- Nhấp vào **Thiết lập thông tin thanh toán** trên trang [Khoá API](https://aistudio.google.com/api-keys?hl=vi) hoặc [Dự án](https://aistudio.google.com/projects?hl=vi) của AI Studio.
-- Làm theo hộp thoại Thanh toán trên Cloud để tạo hoặc liên kết một tài khoản thanh toán, thêm một phương thức thanh toán và trả trước tối thiểu 10 USD (hoặc số tiền tương đương bằng đơn vị tiền tệ khác) dưới dạng tín dụng có tính phí.
-- Xem mức sử dụng API trong [Google AI Studio](https://aistudio.google.com/usage?hl=vi) trong mục **Trang tổng quan** > **Mức sử dụng**.
+- AI Studio [API anahtarları](https://aistudio.google.com/api-keys?hl=tr) veya [Projeler](https://aistudio.google.com/projects?hl=tr) sayfalarında **Faturalandırma ayarlarını yap**'ı tıklayın.
+- Faturalandırma hesabı oluşturmak veya bağlamak, ödeme yöntemi eklemek ve ücretli kredilerle en az 10 ABD doları (veya eşdeğeri) tutarında ön ödeme yapmak için Cloud Billing iletişim kutusundaki talimatları uygulayın.
+- API kullanımınızı [Google AI Studio](https://aistudio.google.com/usage?hl=tr)'da **Kontrol Paneli** > **Kullanım** bölümünde görüntüleyebilirsiniz.
 
-Hãy xem [trang Thanh toán](https://ai.google.dev/gemini-api/docs/billing?hl=vi) để biết thêm thông tin.
+Daha fazla bilgi için [Faturalandırma sayfası](https://ai.google.dev/gemini-api/docs/billing?hl=tr)'na bakın.
 
-## 2. Cài đặt SDK và thực hiện cuộc gọi đầu tiên
+## 2. SDK'yı yükleme ve ilk görüşmenizi yapma
 
-Cài đặt SDK và tạo văn bản bằng một lệnh gọi API duy nhất.
+SDK'yı yükleyin ve tek bir API çağrısıyla metin oluşturun.
 
 ### Python
 
-Cài đặt SDK:
+SDK'yı yükleyin:
 
 ```
 pip install -U google-genai
 ```
 
-Khởi động ứng dụng và đưa ra yêu cầu:
+İstemciyi başlatın ve istekte bulunun:
 
 ```
 from google import genai
@@ -76,13 +76,13 @@ print(interaction.output_text)
 
 ### JavaScript
 
-Cài đặt SDK:
+SDK'yı yükleyin:
 
 ```
 npm install @google/genai
 ```
 
-Khởi động ứng dụng và đưa ra yêu cầu:
+İstemciyi başlatın ve istekte bulunun:
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -108,7 +108,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**Câu trả lời:**
+**Yanıt:**
 
 ```
 {
@@ -140,13 +140,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-Khi sử dụng REST, API sẽ trả về tài nguyên `Interaction` đầy đủ chứa siêu dữ liệu, số liệu thống kê về mức sử dụng và nhật ký từng bước của lượt tương tác.
+REST kullanılırken API, meta verileri, kullanım istatistiklerini ve dönüşün adım adım geçmişini içeren tam `Interaction` kaynağını döndürür.
 
-Mặc dù các SDK này hiển thị toàn bộ phản hồi, nhưng chúng cũng cung cấp các thuộc tính tiện lợi như `interaction.output_text` và `interaction.output_image` để truy cập trực tiếp vào đầu ra cuối cùng. Tìm hiểu thêm về cấu trúc phản hồi trong phần [Tổng quan về các lượt tương tác](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hoặc đọc [hướng dẫn tạo văn bản](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi) để biết thông tin chi tiết về hướng dẫn hệ thống và cấu hình tạo.
+SDK'lar tam yanıtı kullanıma sunarken nihai çıktılara doğrudan erişmek için `interaction.output_text` ve `interaction.output_image` gibi kolaylık sağlayan özellikler de sunar. Yanıt yapısı hakkında daha fazla bilgi edinmek için [Etkileşime genel bakış](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) başlıklı makaleyi inceleyin veya sistem talimatları ve oluşturma yapılandırmasıyla ilgili ayrıntılar için [metin oluşturma kılavuzunu](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr) okuyun.
 
-## 3. Hiện câu trả lời theo thời gian thực
+## 3. Yanıtı akış şeklinde gösterme
 
-Để có các lượt tương tác mượt mà hơn, hãy truyền trực tuyến câu trả lời khi câu trả lời được tạo. Mỗi sự kiện `step.delta` sẽ gửi một đoạn văn bản mà bạn có thể hiển thị ngay lập tức.
+Daha akıcı etkileşimler için yanıtı oluşturulurken yayınlayın. Her `step.delta` etkinliği, hemen gösterebileceğiniz bir metin parçası sunar.
 
 ### Python
 
@@ -196,9 +196,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-Khi phát trực tuyến, máy chủ sẽ phản hồi bằng một luồng sự kiện do máy chủ gửi (SSE). Mỗi sự kiện đều có một loại và dữ liệu JSON.
+Akış sırasında sunucu, sunucu tarafından gönderilen etkinlikler (SSE) akışıyla yanıt verir. Her etkinlikte bir tür ve JSON verileri bulunur.
 
-**Câu trả lời:**
+**Yanıt:**
 
 ```
 event: interaction.created
@@ -229,18 +229,18 @@ event: interaction.completed
 data: {"interaction":{"id":"v1_Chd...","status":"completed","usage":{"total_tokens":197}},"event_type":"interaction.completed"}
 ```
 
-Để xem chi tiết về cách xử lý các sự kiện truyền phát trực tiếp và các loại delta, hãy xem [hướng dẫn về các tương tác truyền phát trực tiếp](https://ai.google.dev/gemini-api/docs/streaming?hl=vi).
+Yayın etkinliklerinin ve delta türlerinin işlenmesiyle ilgili ayrıntılı bilgi için [yayın etkileşimleri kılavuzuna](https://ai.google.dev/gemini-api/docs/streaming?hl=tr) bakın.
 
-## 4. Cuộc trò chuyện nhiều lượt
+## 4. Çok aşamalı etkileşimli görüşmeler
 
-Interactions API hỗ trợ các cuộc trò chuyện nhiều lượt với 2 phương pháp:
+Interactions API'si, iki yaklaşımla çok aşamalı etkileşimleri destekler:
 
-- **Có trạng thái (nên dùng)**: Tiếp tục cuộc trò chuyện trên máy chủ bằng cách sử dụng `previous_interaction_id`. Lý tưởng cho hầu hết các quy trình trò chuyện và quy trình dựa trên tác nhân mà bạn muốn máy chủ quản lý nhật ký và tối ưu hoá việc lưu vào bộ nhớ đệm.
-- **Không trạng thái**: Quản lý nhật ký cuộc trò chuyện trên ứng dụng bằng cách truyền tất cả các lượt trước đó (bao gồm cả suy nghĩ và các bước sử dụng công cụ của mô hình trung gian) trong mỗi yêu cầu.
+- **Durum bilgili (önerilir)**: `previous_interaction_id` kullanarak sunucudaki bir görüşmeye devam edin. Sunucunun geçmişi yönetmesini ve önbelleğe almayı optimize etmesini istediğiniz çoğu sohbet ve aracı iş akışı için idealdir.
+- **Durumsuz**: Önceki tüm aşamaları (ara model düşüncesi ve araç adımları dahil) her isteğe ileterek istemcideki sohbet geçmişini yönetin.
 
-### Có trạng thái (nên dùng)
+### Durumlu (önerilen)
 
-Tạo chuỗi tương tác bằng cách truyền `previous_interaction_id`. Máy chủ sẽ quản lý toàn bộ nhật ký trò chuyện cho bạn.
+`previous_interaction_id` ileterek etkileşimleri zincirleyin. Sunucu, görüşme geçmişinin tamamını sizin için yönetir.
 
 ### Python
 
@@ -310,9 +310,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Không có trạng thái
+### Durum bilgisiz
 
-Đặt `store=false` và quản lý nhật ký cuộc trò chuyện ở phía máy khách. Bạn phải giữ nguyên và gửi lại tất cả các bước do mô hình tạo (bao gồm cả các bước `thought` và `function_call`) đúng như những gì bạn nhận được.
+İstemci tarafında `store=false` ve etkileşim geçmişini yönetin. Model tarafından oluşturulan tüm adımları (`thought` ve `function_call` adımları dahil) olduğu gibi koruyup yeniden göndermeniz gerekir.
 
 ### Python
 
@@ -424,7 +424,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-**Câu trả lời:**
+**Yanıt:**
 
 ```
 {
@@ -451,11 +451,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-Lần tương tác thứ hai sẽ trả về một đối tượng phản hồi hoàn chỉnh chỉ bao gồm các bước mới, nhưng dựa trên ngữ cảnh của lượt tương tác trước đó. Tìm hiểu thêm về cách duy trì trạng thái trong [hướng dẫn về cuộc trò chuyện nhiều lượt](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi#multi-turn-conversations) hoặc khám phá [chế độ không trạng thái](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi#stateless-conversations) để quản lý nhật ký phía máy khách.
+İkinci etkileşim, yalnızca yeni adımları içeren ancak önceki dönüşün bağlamına dayanan eksiksiz bir yanıt nesnesi döndürür. [Çok aşamalı etkileşimler kılavuzunda](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr#multi-turn-conversations) durumu koruma hakkında daha fazla bilgi edinin veya istemci taraflı geçmiş yönetimi için [durum bilgisiz modu](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr#stateless-conversations) keşfedin.
 
-## 5. Khả năng hiểu đa phương thức
+## 5. Çok formatlı anlama
 
-Các mô hình Gemini có thể hiểu được hình ảnh, âm thanh, video và tài liệu một cách tự nhiên. Truyền nội dung nghe nhìn cùng với văn bản trong một yêu cầu duy nhất.
+Gemini modelleri, görüntüleri, sesleri, videoları ve dokümanları doğal olarak anlar. Tek bir istekte metinle birlikte medya geçirin.
 
 ### Python
 
@@ -547,7 +547,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions"   -
   }'
 ```
 
-**Câu trả lời:**
+**Yanıt:**
 
 ```
 {
@@ -572,27 +572,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions"   -
 }
 ```
 
-Khám phá cách truyền tệp hình ảnh, video và âm thanh trong [hướng dẫn về việc hiểu hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi).
+Resim, video ve ses dosyalarını nasıl ileteceğinizi öğrenmek için [görüntü anlama kılavuzu](https://ai.google.dev/gemini-api/docs/image-understanding?hl=tr)'nu inceleyin.
 
 [hearing
 
-Hiểu được âm thanh
+Ses yorumlama
 
-Chép lời, tóm tắt hoặc trả lời câu hỏi về tệp âm thanh.](https://ai.google.dev/gemini-api/docs/audio?hl=vi)
+Ses dosyalarını metne dönüştürme, özetleme veya ses dosyalarıyla ilgili soruları yanıtlama](https://ai.google.dev/gemini-api/docs/audio?hl=tr)
 [videocam
 
-Hiểu video
+Video anlama
 
-Phân tích nội dung video, xác định vị trí của các sự kiện và mô tả các hành động.](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi)
+Video içeriğini analiz etme, etkinlikleri bulma ve işlemleri açıklama](https://ai.google.dev/gemini-api/docs/video-understanding?hl=tr)
 [description
 
-Xử lý tài liệu
+Belge işleme
 
-Trích xuất thông tin từ tệp PDF và các định dạng tài liệu khác.](https://ai.google.dev/gemini-api/docs/document-processing?hl=vi)
+PDF'lerden ve diğer belge biçimlerinden bilgi ayıklama](https://ai.google.dev/gemini-api/docs/document-processing?hl=tr)
 
-## 6. Tạo nội dung đa phương thức
+## 6. Çok formatlı üretim
 
-Gemini có thể tạo hình ảnh một cách tự nhiên bằng cách sử dụng mô hình tạo ảnh [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi).
+Gemini, [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr) görüntü modellerini kullanarak yerel olarak görüntü oluşturabilir.
 
 ### Python
 
@@ -645,7 +645,7 @@ curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
   }'
 ```
 
-**Câu trả lời:**
+**Yanıt:**
 
 ```
 {
@@ -668,22 +668,22 @@ curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
 }
 ```
 
-Khi tạo một hình ảnh, mô hình sẽ trả về dữ liệu hình ảnh được mã hoá bằng base64 trong một bước trong mảng `steps`, cũng như thông qua thuộc tính tiện lợi `output_image`. Hãy xem [hướng dẫn tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi) để tìm hiểu về tỷ lệ khung hình, cách chỉnh sửa hình ảnh và nguồn tham khảo.
+Model bir resim oluşturduğunda, base64 olarak kodlanmış resim verilerini `steps` dizisindeki bir adımda ve `output_image` kolaylık özelliği aracılığıyla döndürür. En boy oranları, resim düzenleme ve referanslar hakkında bilgi edinmek için [görüntü üretme kılavuzuna](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr) göz atın.
 
 [record\_voice\_over
 
-Tạo lời nói
+Konuşma üretme
 
-Tạo lời nói biểu cảm của nhiều người nói bằng công nghệ chuyển văn bản sang lời nói Gemini 3.1 Flash.](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi)
+Gemini 3.1 Flash TTS ile etkileyici ve çok konuşmacılı konuşmalar üretin.](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr)
 [music\_note
 
-Tạo nhạc
+Müzik üretme
 
-Tạo đoạn video và bài hát có thời lượng đầy đủ bằng Lyria 3.](https://ai.google.dev/gemini-api/docs/music-generation?hl=vi)
+Lyria 3 ile klipler ve tam uzunlukta şarkılar oluşturun.](https://ai.google.dev/gemini-api/docs/music-generation?hl=tr)
 
-## 7. Sử dụng đầu ra có cấu trúc
+## 7. Yapılandırılmış çıkış kullanma
 
-Định cấu hình mô hình để trả về JSON phù hợp với giản đồ mà bạn xác định. Đầu ra có cấu trúc hoạt động với [Pydantic](https://docs.pydantic.dev/latest/) (Python) và [Zod](https://zod.dev/) (JavaScript).
+Modeli, tanımladığınız bir şemayla eşleşen JSON döndürecek şekilde yapılandırın. Yapılandırılmış çıkış, [Pydantic](https://docs.pydantic.dev/latest/) (Python) ve [Zod](https://zod.dev/) (JavaScript) ile çalışır.
 
 ### Python
 
@@ -786,7 +786,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**Câu trả lời:**
+**Yanıt:**
 
 ```
 {
@@ -808,11 +808,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-Khối văn bản đầu ra chứa một chuỗi JSON hợp lệ tuân thủ chính xác giản đồ được yêu cầu. Để tìm hiểu cách xác định các cấu trúc phức tạp hơn và lược đồ đệ quy, hãy xem [hướng dẫn về đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi).
+Çıkış metin bloğu, istenen şemaya tam olarak uyan geçerli bir JSON dizesi içeriyor. Daha karmaşık yapıları ve yinelemeli şemaları nasıl tanımlayacağınızı öğrenmek için [yapılandırılmış çıkış kılavuzuna](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr) bakın.
 
-## 8. Sử dụng công cụ
+## 8. Araçları kullanma
 
-Dựa vào thông tin theo thời gian thực trên Google Tìm kiếm để đưa ra câu trả lời cho mô hình. API này tự động tìm kiếm, xử lý kết quả và trả về trích dẫn.
+Modelin yanıtını Google Arama ile gerçek zamanlı bilgilerle temellendirin. API, otomatik olarak arama yapar, sonuçları işler ve alıntıları döndürür.
 
 ### Python
 
@@ -885,7 +885,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**Câu trả lời:**
+**Yanıt:**
 
 ```
 {
@@ -935,41 +935,41 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-Các bước tìm kiếm được trình bày chi tiết trong nhật ký tương tác và kết quả cuối cùng bao gồm các trích dẫn nội dòng trỏ đến các nguồn trên web.
+Arama adımları, etkileşim geçmişinde ayrıntılı olarak açıklanır. Son çıktı, web kaynaklarına işaret eden satır içi alıntılar içerir.
 
-Bạn có thể tìm hiểu cách trích xuất thông tin trích dẫn từ kết quả tìm kiếm trong [hướng dẫn về cơ sở dữ liệu của Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi) hoặc xem cách kết hợp nhiều công cụ trong [hướng dẫn kết hợp công cụ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi).
+Arama alıntılarını nasıl çıkaracağınızı [Google Arama'da temellendirme kılavuzundan](https://ai.google.dev/gemini-api/docs/google-search?hl=tr), birden fazla aracı nasıl birleştireceğinizi ise [araç kombinasyonu kılavuzundan](https://ai.google.dev/gemini-api/docs/tool-combination?hl=tr) öğrenebilirsiniz.
 
 [code
 
-Thực thi mã
+Kod yürütme
 
-Chạy mã Python trong môi trường Borg hộp cát bảo mật.](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi)
+Güvenli bir korumalı alan Borg ortamında Python kodu çalıştırın.](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr)
 [link
 
-Bối cảnh URL
+URL bağlamı
 
-Truyền trực tiếp các URL trang web công khai để đưa ra câu trả lời dựa trên nội dung trang web.](https://ai.google.dev/gemini-api/docs/url-context?hl=vi)
+Yanıtları doğrudan web sayfası içeriğine dayandırmak için herkese açık web URL'lerini iletin.](https://ai.google.dev/gemini-api/docs/url-context?hl=tr)
 [search
 
-Tìm kiếm tệp
+Dosya arama
 
-Lập chỉ mục và tìm kiếm trong các tài liệu và tệp đa phương tiện đã tải lên.](https://ai.google.dev/gemini-api/docs/file-search?hl=vi)
+Yüklenen dokümanlar ve medya dosyalarında dizine ekleme ve arama yapma](https://ai.google.dev/gemini-api/docs/file-search?hl=tr)
 [map
 
-Google Maps
+Google Haritalar
 
-Đưa ra câu trả lời dựa trên dữ liệu vị trí và không gian địa lý trong thế giới thực.](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi)
+Yanıtları gerçek dünyadaki coğrafi ve konum verileriyle temellendirin.](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr)
 [computer
 
-Sử dụng máy tính
+Bilgisayar kullanımı
 
-Tự động hoá trình duyệt và tương tác trên màn hình.](https://ai.google.dev/gemini-api/docs/computer-use?hl=vi)
+Tarayıcı otomasyonu ve ekran etkileşimi.](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr)
 
-## 9. Gọi hàm riêng của bạn
+## 9. Kendi işlevlerinizi çağırma
 
-Tính năng gọi hàm cho phép bạn kết nối mô hình với mã của mình. Bạn khai báo tên và các tham số của hàm, mô hình sẽ quyết định thời điểm gọi hàm và trả về các đối số có cấu trúc, đồng thời bạn sẽ thực thi hàm cục bộ và gửi kết quả trở lại.
+İşlev çağrısı, modeli kodunuza bağlamanıza olanak tanır. Bir işlevin adını ve parametrelerini tanımlarsınız, model ne zaman çağrılacağına karar verir ve yapılandırılmış bağımsız değişkenler döndürür. Siz de işlevi yerel olarak yürütür ve sonucu geri gönderirsiniz.
 
-### Có trạng thái (nên dùng)
+### Durumlu (önerilen)
 
 ### Python
 
@@ -1154,13 +1154,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Không có trạng thái
+### Durum bilgisiz
 
-Bạn cũng có thể sử dụng tính năng gọi hàm ở chế độ không trạng thái bằng cách quản lý nhật ký trò chuyện ở phía máy khách và đặt `store=false`. Ở chế độ không trạng thái, bạn phải truyền toàn bộ nhật ký cuộc trò chuyện trong trường `input` của mỗi yêu cầu tiếp theo. Nhật ký này phải bao gồm:
+Ayrıca, istemci tarafında sohbet geçmişini yönetip `store=false` ayarını yaparak işlev çağrısını durumsuz modda da kullanabilirsiniz. Durum bilgisiz modda, görüşmenin tam geçmişini sonraki her isteğin `input` alanına iletmeniz gerekir. Bu geçmişte şunlar yer almalıdır:
 
-1. Bước `user_input` ban đầu.
-2. Tất cả các bước do mô hình tạo được trả về trong Lượt 1 (bao gồm cả các bước `thought` và `function_call`) chính xác như đã nhận.
-3. Bước `function_result` chứa kết quả của hàm mà bạn đã thực thi.
+1. İlk `user_input` adım.
+2. 1. dönüşte döndürülen tüm model tarafından oluşturulan adımlar (`thought` ve `function_call` adımları dahil) alındığı gibi.
+3. Çalıştırılan işlevinizin çıkışını içeren `function_result` adımı.
 
 ### Python
 
@@ -1368,9 +1368,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-**Câu trả lời:**
+**Yanıt:**
 
-Trong Lượt 1, mô hình sẽ trả về một phản hồi có trạng thái `requires_action` và bước `function_call`:
+1. turda model, `requires_action` durumuna ve `function_call` adımına sahip bir yanıt döndürür:
 
 ```
 {
@@ -1391,7 +1391,7 @@ Trong Lượt 1, mô hình sẽ trả về một phản hồi có trạng thái 
 }
 ```
 
-Sau khi bạn chạy hàm cục bộ và gửi kết quả (Lượt 2), lượt tương tác hoàn tất cuối cùng sẽ trả về:
+İşlevi yerel olarak çalıştırıp sonucu gönderdikten sonra (2. adım) son tamamlanmış etkileşim döndürülür:
 
 ```
 {
@@ -1421,11 +1421,11 @@ Sau khi bạn chạy hàm cục bộ và gửi kết quả (Lượt 2), lượt 
 }
 ```
 
-Để biết các tính năng nâng cao như gọi hàm song song hoặc chế độ chọn hàm, hãy xem [hướng dẫn gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi).
+Paralel işlev çağrısı veya işlev seçimi modları gibi ileri seviye özellikler için [işlev çağırma kılavuzuna](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) bakın.
 
-## 10. Chạy tác nhân được quản lý
+## 10. Yönetilen bir temsilciyi çalıştırma
 
-Các tác nhân được quản lý chạy trong một hộp cát từ xa và có quyền truy cập vào các công cụ như thực thi mã và quản lý tệp. Truyền `agent` thay vì `model` và đặt `environment="remote"`.
+Yönetilen aracılar, kod yürütme ve dosya yönetimi gibi araçlara erişimi olan uzak bir sanal alanda çalışır. `model` yerine `agent` iletin ve `environment="remote"` değerini ayarlayın.
 
 ### Python
 
@@ -1472,27 +1472,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Bạn cũng có thể xác định và lưu [các trợ lý tuỳ chỉnh](https://ai.google.dev/gemini-api/docs/custom-agents?hl=vi) bằng chỉ dẫn, kỹ năng và nguồn dữ liệu của riêng mình.
+Ayrıca kendi talimatlarınız, becerileriniz ve veri kaynaklarınızla [özel aracıları](https://ai.google.dev/gemini-api/docs/custom-agents?hl=tr) tanımlayıp kaydedebilirsiniz.
 
 [rocket\_launch
 
-Bắt đầu nhanh
+Hızlı başlangıç kılavuzu
 
-Thực hiện cuộc gọi đầu tiên cho tác nhân, truyền trực tuyến các câu trả lời và tạo tác nhân tuỳ chỉnh.](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=vi)
+İlk temsilci çağrınızı yapın, yanıtları yayınlayın ve özel bir temsilci oluşturun.](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=tr)
 [smart\_toy
 
-Tác nhân Antigravity
+Antigravity Agent
 
-Các chức năng, công cụ, chế độ nhập đa phương thức và giá của tác nhân mặc định.](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=vi)
+Varsayılan aracının özellikleri, araçları, çok formatlı girişi ve fiyatlandırması.](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr)
 [experiment
 
-Tác nhân trong AI Studio
+AI Studio'daki temsilciler
 
-Sân chơi trực quan để tạo mẫu tác nhân mà không cần viết mã.](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=vi)
+Kod yazmadan aracı prototipi oluşturmak için görsel deneme alanı.](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=tr)
 
-## 11. Chạy các tác vụ ở chế độ nền
+## 11. Görevleri arka planda çalıştırma
 
-Đặt `background=True` để chạy các tác vụ dài theo cách không đồng bộ. Thăm dò ý kiến về kết quả bằng `interactions.get()`. Để biết thêm thông tin chi tiết, hãy xem [Hướng dẫn thực thi ở chế độ nền](https://ai.google.dev/gemini-api/docs/background-execution?hl=vi).
+Uzun görevleri eşzamansız olarak çalıştırmak için `background=True`'ı ayarlayın. `interactions.get()` ile sonuçlar için anket yapın. Daha fazla bilgi için [Arka planda yürütme kılavuzu](https://ai.google.dev/gemini-api/docs/background-execution?hl=tr)'na bakın.
 
 ### Python
 
@@ -1587,9 +1587,9 @@ while true; do
 done
 ```
 
-**Câu trả lời:**
+**Yanıt:**
 
-Phản hồi ban đầu sẽ trả về ngay lập tức với trạng thái `in_progress`:
+İlk yanıt, `in_progress` durumuyla hemen döndürülür:
 
 ```
 {
@@ -1600,7 +1600,7 @@ Phản hồi ban đầu sẽ trả về ngay lập tức với trạng thái `in
 }
 ```
 
-Sau khi tác vụ ở chế độ nền được thực thi hoàn toàn, việc kiểm tra trạng thái tương tác sẽ trả về:
+Arka plan görevi tamamen yürütüldüğünde, etkileşim durumunu kontrol etmek şu sonucu verir:
 
 ```
 {
@@ -1622,27 +1622,27 @@ Sau khi tác vụ ở chế độ nền được thực thi hoàn toàn, việc 
 }
 ```
 
-Đọc về các mô hình và tác nhân chạy không đồng bộ trong [hướng dẫn thực thi trong nền](https://ai.google.dev/gemini-api/docs/background-execution?hl=vi).
+Modelleri ve aracıları eşzamansız olarak çalıştırma hakkında bilgi edinmek için [arka planda yürütme kılavuzunu](https://ai.google.dev/gemini-api/docs/background-execution?hl=tr) inceleyin.
 
-## Bước tiếp theo
+## Sırada ne var?
 
-- [Thực thi ở chế độ nền](https://ai.google.dev/gemini-api/docs/background-execution?hl=vi): Chạy các tác vụ dài hạn không đồng bộ và quản lý trạng thái.
-- [Tạo văn bản](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi): Hướng dẫn của hệ thống, cấu hình tạo và các mẫu văn bản nâng cao.
-- [Tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi): Tỷ lệ khung hình, chỉnh sửa hình ảnh và tham chiếu kiểu.
-- [Hiểu hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi): Phân loại, phát hiện đối tượng và hỏi đáp bằng hình ảnh.
-- [Tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi): Sử dụng phương pháp suy luận theo chuỗi suy nghĩ cho các nhiệm vụ phức tạp.
-- [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi): Chế độ hàm song song, thành phần và bị hạn chế.
-- [Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi): Nền tảng, trích dẫn và đề xuất tìm kiếm.
-- [Tác nhân được quản lý](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=vi): Các tác nhân được tạo sẵn có chức năng thực thi mã và quản lý tệp.
-- [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi): Nghiên cứu nhiều bước một cách tự động, có lập kế hoạch và tổng hợp.
-- [Đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi): Giản đồ JSON, enum và định nghĩa loại đệ quy.
+- [Arka planda yürütme](https://ai.google.dev/gemini-api/docs/background-execution?hl=tr): Uzun süren görevleri eşzamansız olarak çalıştırın ve durumu yönetin.
+- [Metin oluşturma](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr): Sistem talimatları, oluşturma yapılandırması ve gelişmiş metin kalıpları.
+- [Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr): En-boy oranları, görüntü düzenleme ve stil referansları.
+- [Görüntü anlama](https://ai.google.dev/gemini-api/docs/image-understanding?hl=tr): Sınıflandırma, nesne tespit etme ve görsel Soru-Cevap.
+- [Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr): Karmaşık görevler için zincirleme düşünme yöntemini kullanın.
+- [İşlev çağrısı](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr): Paralel, bileşik ve sınırlı işlev modları.
+- [Google Arama](https://ai.google.dev/gemini-api/docs/google-search?hl=tr): Temellendirme, alıntılar ve arama önerileri.
+- [Yönetilen Ajanlar](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=tr): Kod yürütme ve dosya yönetimi özelliklerine sahip, önceden oluşturulmuş ajanlar.
+- [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr): Planlama ve sentezleme özellikleriyle çok adımlı otonom araştırma.
+- [Yapılandırılmış çıkış](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr): JSON şemaları, numaralandırmalar ve yinelemeli tür tanımları.
 
-Gửi ý kiến phản hồi
+Geri bildirim gönderin
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Cập nhật lần gần đây nhất: 2026-07-30 UTC.
+Son güncelleme tarihi: 2026-07-30 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-30 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]

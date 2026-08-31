@@ -1,0 +1,109 @@
+---
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe
+fetched_at: 2026-08-31T06:42:39.524302+00:00
+title: "Gemini 3.5 Transcribe \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+---
+
+Gemini 3.7 Flash is now available. [Try it out](https://aistudio.google.com/prompts/new_chat?model=gemini-3.7-flash).
+
+- [Home](https://ai.google.dev/)
+- [Gemini API](https://ai.google.dev/gemini-api)
+- [Docs](https://ai.google.dev/gemini-api/docs)
+
+Send feedback
+
+# Gemini 3.5 Transcribe
+
+Gemini 3.5 Transcribe is a speech-to-text model based on Gemini's audio understanding capabilities. It provides low-latency, accurate transcription with utterance-based language detection, speaker diarization, word-level timestamps, Smart transcription, and custom vocabulary speech biasing.
+
+[Try in Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-transcribe)
+
+## Documentation
+
+Gemini 3.5 Transcribe converts speech to text from audio files. It automatically detects 85+ languages, handles multi-language code-switching, identifies individual speakers, outputs word-level timestamps, and adapts to domain-specific terms through custom vocabulary biasing.
+
+Visit the [Audio transcription](https://ai.google.dev/gemini-api/docs/transcribe) guide for full coverage of non-streaming features. For real-time, low-latency streaming transcription over WebSockets, visit the [Live transcription](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe) guide using `gemini-3.5-transcribe-live`. For detailed pricing, see the [Pricing page](https://ai.google.dev/gemini-api/docs/pricing#gemini-3.5-transcribe).
+
+## gemini-3.5-transcribe
+
+| Property | Description |
+| --- | --- |
+| id\_cardModel code | `gemini-3.5-transcribe` |
+| saveSupported data types | **Inputs**  Audio (up to 1 hour)  **Output**  Text, Word annotations |
+| token\_autoAudio limits | **Unary audio limit**  Up to 1 hour per request (up to 30 minutes when speaker diarization or word-level timestamps are enabled) |
+| handymanCapabilities | **[Audio transcription](https://ai.google.dev/gemini-api/docs/transcribe)**  Supported  **[Speaker diarization](https://ai.google.dev/gemini-api/docs/transcribe#speaker-diarization)**  Supported  **[Word-level timestamps](https://ai.google.dev/gemini-api/docs/transcribe#word-timestamps)**  Supported  **[Custom vocabulary](https://ai.google.dev/gemini-api/docs/transcribe#custom-vocabulary)**  Supported  **[Smart transcription](https://ai.google.dev/gemini-api/docs/transcribe#transcription-modes)**  Supported  **[Caching](https://ai.google.dev/gemini-api/docs/caching)**  Not supported  **[Code execution](https://ai.google.dev/gemini-api/docs/code-execution)**  Not supported  **[File search](https://ai.google.dev/gemini-api/docs/file-search)**  Not supported  **[Function calling](https://ai.google.dev/gemini-api/docs/function-calling)**  Not supported  **[Image generation](https://ai.google.dev/gemini-api/docs/image-generation)**  Not supported  **[Thinking](https://ai.google.dev/gemini-api/docs/thinking)**  Not supported |
+| speedConsumption options | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api)**  Not supported  **[Flex inference](https://ai.google.dev/gemini-api/docs/flex-inference)**  Not supported  **[Priority inference](https://ai.google.dev/gemini-api/docs/priority-inference)**  Not supported |
+| 123Versions | Read the [model version patterns](https://ai.google.dev/gemini-api/docs/models/gemini#model-versions) for more details.  - `gemini-3.5-transcribe` (Unary) - `gemini-3.5-transcribe-live` (Live API) |
+| calendar\_monthLatest update | August 2026 |
+
+## Feature support and limitations
+
+Gemini 3.5 Transcribe supports the following features across its two endpoints:
+
+| Feature | Live Streaming (`gemini-3.5-transcribe-live`) | Audio File Processing (`gemini-3.5-transcribe`) | Notes / Limitations |
+| --- | --- | --- | --- |
+| **Language Auto-detection** | Supported (85+ languages) | Supported (85+ languages) | Includes mid-session code-mixing. |
+| **Word-level Timestamps** | Not Supported | Supported | Degrades transcription accuracy. |
+| **Custom Vocabulary Biasing** | Supported (up to 1,000 terms) | Supported (up to 1,000 terms) | Customers typically see best results with up to 100 terms. |
+| **Smart Dictation & Formatting** | Supported | Supported | Includes filler word removal and intent-aware alphanumeric formatting. |
+| **Speaker Diarization** | Not Supported | Supported (up to 8 speakers) | Attribution for 3+ speakers is experimental. |
+| **Max Audio Duration** | 10 minutes per session. | Up to 1 hour | File processing is limited to 30 minutes when features like diarization or timestamps are enabled. |
+
+## Supported languages
+
+The following languages and BCP-47 language codes are supported for Gemini 3.5 Transcribe:
+
+| Language | BCP-47 Code | Language | BCP-47 Code |
+| --- | --- | --- | --- |
+| Afrikaans | `af-ZA` | Japanese | `ja-JP` |
+| Amharic | `am-ET` | Javanese | `jv-ID` |
+| Arabic (Egypt) | `ar-EG` | Kabuverdianu | `kea-CV` |
+| Armenian | `hy-AM` | Kannada | `kn-IN` |
+| Assamese | `as-IN` | Kazakh | `kk-KZ` |
+| Azerbaijani | `az-AZ` | Korean | `ko-KR` |
+| Belarusian | `be-BY` | Kyrgyz | `ky-KG` |
+| Bengali (Bangladesh) | `bn-BD` | Latvian | `lv-LV` |
+| Bengali (India) | `bn-IN` | Lingala | `ln-CD` |
+| Bosnian | `bs-BA` | Lithuanian | `lt-LT` |
+| Bulgarian | `bg-BG` | Macedonian | `mk-MK` |
+| Bulgarian (Aromanian) | `rup-BG` | Malay | `ms-MY` |
+| Burmese | `my-MM` | Malayalam | `ml-IN` |
+| Cantonese (Traditional) | `yue-Hant-HK` | Maltese | `mt-MT` |
+| Catalan | `ca-ES` | Mandarin Chinese (Simplified) | `cmn-Hans-CN` |
+| Cebuano | `ceb` | Marathi | `mr-IN` |
+| Central Khmer | `km-KH` | Mongolian | `mn-MN` |
+| Croatian | `hr-HR` | Nepali | `ne-NP` |
+| Czech | `cs-CZ` | Norwegian | `nb-NO` |
+| Danish | `da-DK` | Oriya | `or-IN` |
+| Dutch | `nl-NL` | Polish | `pl-PL` |
+| English (Great Britain) | `en-GB` | Portuguese (Brazil) | `pt-BR` |
+| English (India) | `en-IN` | Portuguese (Portugal) | `pt-PT` |
+| English (United States) | `en-US` | Punjabi | `pa-IN` |
+| Estonian | `et-EE` | Punjabi (Gurmukhi script) | `pa-Guru-IN` |
+| Farsi | `fa-IR` | Romanian | `ro-RO` |
+| Filipino | `fil-PH` | Russian | `ru-RU` |
+| Finnish | `fi-FI` | Serbian | `sr-RS` |
+| French | `fr-FR` | Sindhi (Arabic script) | `sd-Arab-IN` |
+| Galician | `gl-ES` | Slovak | `sk-SK` |
+| Georgian | `ka-GE` | Slovenian | `sl-SI` |
+| German | `de-DE` | Spanish (Latin America) | `es-419` |
+| Greek | `el-GR` | Spanish (United States) | `es-US` |
+| Gujarati | `gu-IN` | Swahili (Kenya) | `sw-KE` |
+| Hausa | `ha-NG` | Swedish | `sv-SE` |
+| Hebrew | `he-IL` | Tajik | `tg-TJ` |
+| Hindi | `hi-IN` | Telugu | `te-IN` |
+| Hungarian | `hu-HU` | Thai | `th-TH` |
+| Icelandic | `is-IS` | Turkish | `tr-TR` |
+| Indian English | `en-IN` | Ukrainian | `uk-UA` |
+| Indonesian | `id-ID` | Uzbek | `uz-UZ` |
+| Italian | `it-IT` | Vietnamese | `vi-VN` |
+
+Send feedback
+
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
+
+Last updated 2026-08-26 UTC.
+
+Need to tell us more?
+
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-08-26 UTC."],[],[]]

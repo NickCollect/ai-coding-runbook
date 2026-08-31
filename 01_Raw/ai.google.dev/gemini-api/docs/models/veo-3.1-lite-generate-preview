@@ -1,48 +1,52 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=de
-fetched_at: 2026-08-24T02:31:42.887024+00:00
-title: "Veo\u00a03.1 Lite (Vorabversion) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=fr
+fetched_at: 2026-08-31T06:40:37.172128+00:00
+title: "Preview de Veo\u00a03.1 Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Feedback geben
+Envoyer des commentaires
 
-# Veo 3.1 Lite (Vorabversion)
+# Preview de Veo 3.1 Lite
 
-Veo 3.1 Lite Preview ist ein hocheffizientes Videomodell für Entwickler, das eine hochwertige Videogenerierung und ‑bearbeitung sowie eine kinoreife Steuerung bietet. Es nutzt das hochmoderne Modell Veo 3.1, um professionelle Video AI zu demokratisieren, indem es eine skalierbare, programmierbare Schnittstelle für Creator und Unternehmen bietet.
+Veo 3.1 Lite Preview est un modèle vidéo très efficace et conçu pour les développeurs. Il permet de générer et de modifier des vidéos haute fidélité, et offre un contrôle cinématographique. Il s'appuie sur le modèle Veo 3.1 de pointe pour démocratiser l'IA vidéo de qualité professionnelle en proposant une interface évolutive et programmable aux créateurs et aux entreprises.
 
-[In Google AI Studio ausprobieren](https://aistudio.google.com?model=veo-3.1-lite-generate-preview&hl=de)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=veo-3.1-lite-generate-preview&hl=fr)
 
-## Dokumentation
+## Documentation
 
-Veo 3.1 Lite bietet die besten Preise für Entwickler und Unternehmen, die Videobearbeitungsanwendungen und ‑workflows mit hohem Volumen entwickeln. Weitere Informationen und einen Vergleich mit anderen Veo 3.1-Modellen finden Sie auf der Seite [Preise](https://ai.google.dev/gemini-api/docs/pricing?hl=de#veo-3.1).
+Veo 3.1 Lite offre les meilleurs prix aux développeurs et aux entreprises qui créent des applications et des workflows vidéo à grande échelle. Pour en savoir plus et comparer les différents modèles
+Veo 3.1, consultez la page [Tarifs](https://ai.google.dev/gemini-api/docs/pricing?hl=fr#veo-3.1).
 
-Auf der Seite [Videoerstellung](https://ai.google.dev/gemini-api/docs/video?hl=de) finden Sie eine vollständige Übersicht über die Funktionen. Die Veo 3.1 Lite-Vorschau unterstützt keine [4K-Ausgabe](https://ai.google.dev/gemini-api/docs/video?hl=de#resolution) oder [Erweiterung](https://ai.google.dev/gemini-api/docs/video?hl=de#extending-veo-videos).
+Pour en savoir plus sur les
+fonctionnalités, consultez la page [Génération de vidéos](https://ai.google.dev/gemini-api/docs/video?hl=fr). Notez que Veo 3.1 Lite Preview n'est pas compatible avec les sorties
+[4K](https://ai.google.dev/gemini-api/docs/video?hl=fr#resolution) ni avec l'extension
+.
 
 ## veo-3.1-lite-generate-preview
 
-| Attribut | Beschreibung |
+| Propriété | Description |
 | --- | --- |
-| id\_cardModellcode | **Gemini API**  `veo-3.1-lite-generate-preview` |
-| saveUnterstützte Datentypen | **Eingabe**  Text, Bild  **Ausgabe**  Video mit Audio |
-| token\_auto-Limits | **Texteingabe**  1.024 Tokens  **Ausgabe-Video**  1 |
-| calendar\_monthLetzte Aktualisierung | März 2026 |
+| id\_cardCode du modèle | **API Gemini**  `veo-3.1-lite-generate-preview` |
+| saveTypes de données acceptés | **Entrée**  Texte, image  **Résultat**  Vidéo avec audio |
+| token\_autoLimites | **Entrée de texte**  1 024 jetons  **Vidéo de sortie**  1 |
+| calendar\_monthDernière mise à jour | Mars 2026 |
 
-Feedback geben
+Envoyer des commentaires
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Zuletzt aktualisiert: 2026-08-19 (UTC).
+Dernière mise à jour le 2026/08/19 (UTC).
 
-Haben Sie Feedback für uns?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-08-19 (UTC)."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/08/19 (UTC)."],[],[]]

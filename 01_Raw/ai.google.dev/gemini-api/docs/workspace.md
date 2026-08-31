@@ -1,51 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/workspace?hl=he
-fetched_at: 2026-08-24T02:22:56.570665+00:00
-title: "\u05d2\u05d9\u05e9\u05d4 \u05dc-Google AI Studio \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea \u05d7\u05e9\u05d1\u05d5\u05df Workspace \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/workspace?hl=ko
+fetched_at: 2026-08-31T06:34:53.074642+00:00
+title: "Workspace \uacc4\uc815\uc73c\ub85c Google AI \uc2a4\ud29c\ub514\uc624\uc5d0 \uc561\uc138\uc2a4 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-שליחת משוב
+의견 보내기
 
-# גישה ל-Google AI Studio באמצעות חשבון Workspace
+# Workspace 계정으로 Google AI 스튜디오에 액세스
 
-לכל משתמשי [Google Workspace](https://workspace.google.com?hl=he) יש גישה ל-AI
-Studio כברירת מחדל. אם אתם משתמשים ב-Workspace ורוצים להתחיל להשתמש ב-AI Studio, כדאי לעיין ב[מדריך למתחילים בנושא AI Studio](https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=he).
+모든 [Google Workspace](https://workspace.google.com?hl=ko) 사용자는 기본적으로 AI Studio에 액세스할 수 있습니다. Workspace 사용자이고 AI Studio를 시작하려면 [AI Studio 빠른 시작](https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=ko)을 확인하세요.
 
-## פתרון בעיות
+## 문제 해결
 
-אם הגישה ל-AI Studio מושבתת בחשבון Google Workspace שלכם, יכול להיות שתופיע שגיאה כמו זו שבהמשך:
+Google Workspace 계정에서 AI Studio 액세스가 사용 중지된 경우 다음과 같은 오류가 표시될 수 있습니다.
 
 `We are sorry, but you do not have access to Google AI Studio. Please contact
 your Organization Administrator for access.`
 
-אם לדעתכם צריכה להיות לכם גישה ל-AI Studio, אתם צריכים לפנות לאדמין שלכם ב-Workspace.
+AI Studio에 액세스할 수 있어야 한다고 생각되면 Workspace 관리자에게 문의하세요.
 
-## הפעלת AI Studio למשתמשי Workspace
+## Workspace 사용자를 위한 AI Studio 사용 설정
 
-אדמינים ב-Google Workspace יכולים לקבוע מי יכול להשתמש ב-AI Studio:
+Google Workspace 관리자는 AI Studio를 사용할 수 있는 사용자를 관리할 수 있습니다.
 
-- ‫AI Studio מופעל כברירת מחדל בכל המהדורות.
-- אתם יכולים להפעיל או להשבית את AI Studio לקבוצות של משתמשים ביחידות ארגוניות שונות או בתוך יחידה ארגונית מסוימת.
-- מהדורות של Google Workspace for Education: משתמשים מתחת לגיל 18 לא יכולים להשתמש ב-AI Studio בחשבונות שלהם ב-Google Workspace for Education. זה נכון גם כשההגדרה AI Studio מופעלת. פרטים נוספים זמינים במאמר בנושא [הגדרת הגישה לשירותי Google לפי גיל](https://support.google.com/a/answer/10651918?hl=he).
+- AI Studio는 모든 버전에서 기본적으로 사용 설정되어 있습니다.
+- 조직 단위 전체 또는 조직 단위 내에서 사용자 집합에 대해 AI Studio를 사용 중지하거나 사용 설정할 수 있습니다.
+- Google Workspace for Education 버전: 만 18세 미만의 사용자는 Google Workspace for Education 계정으로 AI Studio를 사용할 수 없습니다. AI Studio 설정이 사용 설정된 경우에도 마찬가지입니다. 자세한 내용은 [연령별로 Google 서비스에 대한 액세스 권한 관리하기](https://support.google.com/a/answer/10651918?hl=ko)를 참고하세요.
 
-כדי להפעיל או להשבית את AI Studio למשתמשים בארגון, אפשר לעיין במאמר בנושא [הפעלה או השבתה של Google AI Studio למשתמשים](https://support.google.com/a/answer/15004095?hl=he).
+조직의 사용자에 대해 AI Studio를 사용 설정 또는 사용 중지하려면 [사용자별로 Google AI Studio 사용 설정 또는 사용 중지하기](https://support.google.com/a/answer/15004095?hl=ko)를 참고하세요.
 
-שליחת משוב
+의견 보내기
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-עדכון אחרון: 2026-04-29 (שעון UTC).
+최종 업데이트: 2026-04-29(UTC)
 
-רוצה לתת לנו משוב?
+의견을 전달하고 싶나요?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]

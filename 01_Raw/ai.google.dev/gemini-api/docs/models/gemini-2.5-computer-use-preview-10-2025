@@ -1,45 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=ja
-fetched_at: 2026-08-24T02:27:36.802368+00:00
-title: "Gemini 2.5 \u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u4f7f\u7528\u30e2\u30c7\u30eb \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=ko
+fetched_at: 2026-08-31T06:39:33.523413+00:00
+title: "Gemini 2.5 \ucef4\ud4e8\ud130 \uc0ac\uc6a9 \ubaa8\ub378 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-フィードバックを送信
+의견 보내기
 
-# Gemini 2.5 コンピュータ使用モデル
+# Gemini 2.5 컴퓨터 사용 모델
 
-直接インターフェース操作用に設計されたエージェント機能モデル。Gemini がデジタル環境を認識して操作できます。Gemini 2.5 Computer Use は、視覚的推論と正確なカーソル操作を必要とするブラウザの自動化、複数ステップのソフトウェア タスク、UI テストに最適です。
+Gemini가 디지털 환경을 인식하고 탐색할 수 있도록 직접 인터페이스 상호작용을 위해 설계된 에이전트 기능 모델입니다. Gemini 2.5 Computer Use는 시각적 추론과 정확한 커서 제어가 필요한 브라우저 자동화, 다단계 소프트웨어 작업, UI 테스트에 가장 적합합니다.
 
-## ドキュメント
+## 문서
 
-機能の詳細については、[コンピュータ使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=ja)のページをご覧ください。
+기능 및 기능에 대한 전체 내용은 [컴퓨터 사용](https://ai.google.dev/gemini-api/docs/computer-use?hl=ko) 페이지를 참고하세요.
 
 ## gemini-2.5-computer-use-preview-10-2025
 
-| プロパティ | 説明 |
+| 속성 | 설명 |
 | --- | --- |
-| id\_cardモデルコード | **Gemini API**  `gemini-2.5-computer-use-preview-10-2025` |
-| saveサポートされるデータタイプ | **入力**  画像、テキスト  **出力**  テキスト |
-| token\_autoトークン上限[[\*](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)] | **入力トークンの上限**  128,000  **出力トークンの上限**  64,000 |
-| 123バージョン | 詳細については、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja#model-versions)をご覧ください。  - プレビュー: `gemini-2.5-computer-use-preview-10-2025` |
-| calendar\_month最終更新日 | 2025 年 10 月 |
+| id\_card모델 코드 | **Gemini API**  `gemini-2.5-computer-use-preview-10-2025` |
+| save지원되는 데이터 유형 | **입력**  이미지, 텍스트  **출력**  텍스트 |
+| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 토큰 한도**  128,000  **출력 토큰 한도**  64,000 |
+| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - 미리보기: `gemini-2.5-computer-use-preview-10-2025` |
+| calendar\_month최근 업데이트 | 2025년 10월 |
 
-フィードバックを送信
+의견 보내기
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-最終更新日 2026-08-19 UTC。
+최종 업데이트: 2026-08-19(UTC)
 
-ご意見をお聞かせください
+의견을 전달하고 싶나요?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-08-19 UTC。"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-08-19(UTC)"],[],[]]

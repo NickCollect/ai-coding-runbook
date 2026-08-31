@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja
-fetched_at: 2026-08-24T02:33:40.710998+00:00
+fetched_at: 2026-08-31T06:35:34.280270+00:00
 title: "Interactions API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

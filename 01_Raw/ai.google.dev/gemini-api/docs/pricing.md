@@ -1,1199 +1,1199 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/pricing?hl=vi
-fetched_at: 2026-08-24T02:24:19.729626+00:00
-title: "Gi\u00e1 c\u1ee7a Gemini Developer API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/pricing?hl=fr
+fetched_at: 2026-08-31T06:31:01.629181+00:00
+title: "Tarifs de l'API Gemini\u00a0Developer \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-# Giá của Gemini Developer API
+# Tarifs de l'API Gemini Developer
 
-Bắt đầu xây dựng miễn phí với hạn mức hào phóng, sau đó mở rộng quy mô với mức giá trả trước rồi trả tiền theo mức dùng cho các ứng dụng sẵn sàng sản xuất của bạn.
+Commencez à créer des applications sans frais avec des limites généreuses, puis passez à une tarification prépayée, puis au paiement à l'usage pour vos applications prêtes pour la production.
 
-### Miễn phí
+### Disponible
 
-Dành cho những nhà phát triển và dự án nhỏ mới bắt đầu sử dụng Gemini API.
+Pour les développeurs et les petits projets qui débutent avec l'API Gemini.
 
-- check\_circleQuyền truy cập có giới hạn vào một số mô hình
-- check\_circleMã thông báo đầu vào và đầu ra miễn phí
-- check\_circleQuyền truy cập vào Google AI Studio
-- check\_circleNội dung được dùng để cải thiện sản phẩm của chúng tôi[\*](https://ai.google.dev/gemini-api/terms?hl=vi)
+- check\_circle Accès limité à certains modèles
+- check\_circleJetons d'entrée et de sortie sans frais
+- check\_circleAccès à Google AI Studio
+- check\_circle Contenu utilisé pour améliorer nos produits[\*](https://ai.google.dev/gemini-api/terms?hl=fr)
 
-[Bắt đầu miễn phí](https://aistudio.google.com?hl=vi)
+[Profiter d'un essai sans frais](https://aistudio.google.com?hl=fr)
 
-### Có trả tiền
+### Payant
 
-Đối với các ứng dụng sản xuất yêu cầu khối lượng lớn hơn và các tính năng nâng cao.
+Pour les applications de production qui nécessitent des volumes plus élevés et des fonctionnalités avancées.
 
-- check\_circleHạn mức yêu cầu cao hơn cho việc triển khai sản xuất
-- check\_circleQuyền truy cập vào tính năng lưu vào bộ nhớ đệm theo bối cảnh
-- check\_circleAPI theo lô (giảm 50% chi phí)
-- check\_circleQuyền truy cập vào các mô hình tiên tiến nhất của Google
-- check\_circleNội dung **không** được dùng để cải thiện sản phẩm của chúng tôi[\*](https://ai.google.dev/gemini-api/terms?hl=vi)
+- check\_circleLimites de débit plus élevées pour les déploiements en production
+- check\_circleAccès à la mise en cache du contexte
+- check\_circle API Batch (coût réduit de 50 %)
+- check\_circle Accès aux modèles les plus avancés de Google
+- check\_circleContenu **non** utilisé pour améliorer nos produits[\*](https://ai.google.dev/gemini-api/terms?hl=fr)
 
-[Nâng cấp lên tài khoản Trả phí](https://aistudio.google.com/api-keys?hl=vi)
+[Passer à un compte payant](https://aistudio.google.com/api-keys?hl=fr)
 
-### Doanh nghiệp
+### Enterprise
 
-Đối với các hoạt động triển khai quy mô lớn có nhu cầu tuỳ chỉnh về bảo mật, hỗ trợ và tuân thủ, được hỗ trợ bởi [Nền tảng tác nhân Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform?hl=vi).
+Pour les déploiements à grande échelle avec des besoins personnalisés en termes de sécurité, d'assistance et de conformité, optimisés par [Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform?hl=fr).
 
-- check\_circleTất cả tính năng trong gói Trả phí, cộng thêm quyền truy cập (không bắt buộc) vào:
-- check\_circleCác kênh hỗ trợ chuyên biệt
-- check\_circleTính tuân thủ và khả năng bảo mật nâng cao
-- check\_circleCông suất được cấp phép
-- check\_circleChiết khấu dựa trên số lượng (dựa trên mức sử dụng)
-- check\_circleHoạt động ML, vườn mô hình và nhiều nội dung khác
+- check\_circle Toutes les fonctionnalités de la version payante, ainsi qu'un accès facultatif à :
+- check\_circle Canaux d'assistance dédiés
+- check\_circleSécurité et conformité avancées
+- check\_circle Débit provisionné
+- check\_circle Remises basées sur le volume (en fonction de l'utilisation)
+- check\_circleMLOps, Model Garden et plus
 
-[Liên hệ với nhóm bán hàng](https://cloud.google.com/contact?hl=vi)
+[Contacter le service commercial](https://cloud.google.com/contact?hl=fr)
 
-## Gemini 3.6 Flash
+## Gemini 3.6 Flash
 
 *`gemini-3.6-flash`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=gemini-3.6-flash&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-3.6-flash&hl=fr)
 
-Mô hình thông minh nhất của chúng tôi được xây dựng để có tốc độ xử lý nhanh, kết hợp trí thông minh đột phá với khả năng tìm kiếm và tiếp cận thông tin vượt trội.
+Notre modèle le plus intelligent, conçu pour la rapidité, qui combine une intelligence de pointe avec des capacités de recherche et d'ancrage supérieures.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | $1,5 |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | 7,5 USD |
-| Giá trong bộ nhớ đệm theo bối cảnh | Miễn phí | 0,15 1,00 đô la / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 câu lệnh mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 1,50 $ |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 7,50 $ |
+| Tarifs de la mise en cache du contexte | Sans frais | 0,15 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | $0,75 |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Không có | 3,75 USD |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,075 1.000.000 mã thông báo / giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 yêu cầu mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,75 € |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 3,75 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,075 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Gập
+### Flex
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | $0,75 |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Không có | 3,75 USD |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,075 1.000.000 mã thông báo / giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 yêu cầu mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,75 € |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 3,75 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,075 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Mức độ ưu tiên
+### Priorité
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 2,7 USD |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | 13,5 USD |
-| Giá trong bộ nhớ đệm theo bối cảnh | Miễn phí | 0,27 1,00 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 câu lệnh mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 2,70 $ |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 13,50 $ |
+| Tarifs de la mise en cache du contexte | Sans frais | 0,27  1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* Yêu cầu mà khách hàng gửi cho Gemini có thể dẫn đến một hoặc nhiều câu hỏi trên Google Tìm kiếm. Bạn sẽ bị tính phí cho từng cụm từ tìm kiếm riêng lẻ mà bạn thực hiện.
+\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche effectuée.
 
-\*\* Có thể được kiểm thử trong Google AI Studio.
+\*\* Peut être testé dans Google AI Studio.
 
-## Gemini 3.5 Flash
+## Gemini 3.5 Flash
 
 *`gemini-3.5-flash`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=gemini-3.5-flash&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-3.5-flash&hl=fr)
 
-Mô hình thông minh nhất của chúng tôi được xây dựng để có tốc độ xử lý nhanh, kết hợp trí thông minh đột phá với khả năng tìm kiếm và tiếp cận thông tin vượt trội.
+Notre modèle le plus intelligent, conçu pour la rapidité, qui combine une intelligence de pointe avec des capacités de recherche et d'ancrage supérieures.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | $1,5 |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | $9,00 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Miễn phí | 0,15 1,00 đô la / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 câu lệnh mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 1,50 $ |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 9 $ |
+| Tarifs de la mise en cache du contexte | Sans frais | 0,15 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | $0,75 |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Không có | 4,5 đô la |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,075 1.000.000 mã thông báo / giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 yêu cầu mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,75 € |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 4,50 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,075 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Gập
+### Flex
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | $0,75 |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Không có | 4,5 đô la |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,08 1.000.000 mã thông báo / giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 yêu cầu mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,75 € |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 4,50 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,08 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Mức độ ưu tiên
+### Priorité
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 2,7 USD |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | 16,20 USD |
-| Giá trong bộ nhớ đệm theo bối cảnh | Miễn phí | 0,27 1,00 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 câu lệnh mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 2,70 $ |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 16,20 $ |
+| Tarifs de la mise en cache du contexte | Sans frais | 0,27  1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* Yêu cầu mà khách hàng gửi cho Gemini có thể dẫn đến một hoặc nhiều câu hỏi trên Google Tìm kiếm. Bạn sẽ bị tính phí cho từng cụm từ tìm kiếm riêng lẻ mà bạn thực hiện.
+\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche effectuée.
 
-\*\* Có thể được kiểm thử trong Google AI Studio.
+\*\* Peut être testé dans Google AI Studio.
 
-## Gemini 3.5 Live Translate
+## Gemini 3.5 Live Translate
 
 *`gemini-3.5-live-translate-preview`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-live-translate-preview&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-live-translate-preview&hl=fr)
 
-Mô hình dịch lời nói sang lời nói theo thời gian thực với độ trễ thấp, hỗ trợ hơn 70 ngôn ngữ.
+Notre modèle de traduction vocale en temps réel à faible latence, qui prend en charge plus de 70 langues.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | $3,50 hoặc $0,0053/phút\* (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | 21 USD hoặc 0,0315 USD/phút\* (âm thanh) |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 3,50 $ ou 0,0053 $/min\* (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 21,00 $ ou 0,0315 $/min\* (audio) |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* Việc thanh toán dựa trên tổng mức sử dụng mã thông báo âm thanh đầu vào và đầu ra, được tính theo tỷ lệ 25 mã thông báo trên mỗi giây âm thanh, tương đương với mức giá hiệu quả là khoảng 0,0368 USD mỗi phút.
+\* La facturation est basée sur la consommation totale de jetons audio d'entrée et de sortie, calculée à un taux de 25 jetons par seconde d'audio, ce qui équivaut à un prix effectif d'environ 0,0368 $ par minute.
 
-## Gemini 3.5 Flash-Lite
+## Gemini 3.5 Flash-Lite
 
 *`gemini-3.5-flash-lite`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash-lite&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash-lite&hl=fr)
 
-Mô hình GA tiết kiệm chi phí nhất của chúng tôi, được tối ưu hoá cho các tác vụ có số lượng lớn của tác nhân, bản dịch và quy trình xử lý dữ liệu đơn giản.
+Notre modèle GA le plus économique, optimisé pour les tâches agentiques à volume élevé, la traduction et le traitement de données simples.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 0,30 USD (văn bản / hình ảnh / video / âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | $2,50 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,03 1,00 / 1.000.000 mã thông báo mỗi giờ (giá bộ nhớ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 yêu cầu mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 0,30 $ (texte / image / vidéo / audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 2,50 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,03 $ 1,00 $ par million de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 0,15 USD (văn bản / hình ảnh / video / âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | 1.25 USD |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,02 USD 1 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 câu lệnh mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 0,15 $ (texte / image / vidéo / audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 1,25 € |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,02 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Gập
+### Flex
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 0,15 USD (văn bản / hình ảnh / video / âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | 1.25 USD |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,02 USD 1 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 câu lệnh mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 0,15 $ (texte / image / vidéo / audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 1,25 € |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,02 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Mức độ ưu tiên
+### Priorité
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 0,54 USD (văn bản / hình ảnh / video / âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | 4,5 đô la |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,05 1,00 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 câu lệnh mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 0,54 € (texte / image / vidéo / audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 4,50 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,05 $ à 1 $ par million de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* Yêu cầu mà khách hàng gửi cho Gemini có thể dẫn đến một hoặc nhiều câu hỏi trên Google Tìm kiếm. Bạn sẽ bị tính phí cho từng cụm từ tìm kiếm riêng lẻ mà bạn thực hiện.
+\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche effectuée.
 
-\*\* Có thể được kiểm thử trong Google AI Studio.
+\*\* Peut être testé dans Google AI Studio.
 
-\*\* Có thể được kiểm thử trong Google AI Studio.
+\*\* Peut être testé dans Google AI Studio.
 
-## Gemini 3.1 Flash-Lite
+## Gemini 3.1 Flash-Lite
 
 *`gemini-3.1-flash-lite`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=fr)
 
-Mô hình tiết kiệm chi phí nhất của chúng tôi, được tối ưu hoá cho các tác vụ có số lượng lớn, bản dịch và quy trình xử lý dữ liệu đơn giản.
+Notre modèle le plus économique, optimisé pour les tâches agentiques à volume élevé, la traduction et le traitement de données simples.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 0,25 USD (văn bản / hình ảnh / video) 0,5 USD (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | $1,5 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,025 USD (văn bản / hình ảnh / video) 0,05 USD (âm thanh) 1 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 câu lệnh mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 0,25 $ (texte / image / vidéo) 0,50 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 1,50 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,025 $ (texte/image/vidéo) 0,05 $ (audio) 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 0,125 USD (văn bản / hình ảnh / video) 0,25 USD (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | $0,75 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,0125 USD (văn bản / hình ảnh / video) 0,025 USD (âm thanh) 0,5 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 câu lệnh mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 0,125 $ (texte / image / vidéo) 0,25 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 0,75 € |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,0125 $ (texte/image/vidéo) 0,025 $ (audio) 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Gập
+### Flex
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 0,125 USD (văn bản / hình ảnh / video) 0,25 USD (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | $0,75 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,0125 USD (văn bản / hình ảnh / video) 0,025 USD (âm thanh) 0,5 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 câu lệnh mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 0,125 $ (texte / image / vidéo) 0,25 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 0,75 € |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,0125 $ (texte/image/vidéo) 0,025 $ (audio) 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Mức độ ưu tiên
+### Priorité
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 0,45 USD (văn bản / hình ảnh / video) 0,90 USD (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | 2,7 USD |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,045 USD (văn bản / hình ảnh / video) 0,09 USD (âm thanh) 1,80 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 câu lệnh mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 0,45 $ (texte / image / vidéo) 0,90 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 2,70 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,045 $ (texte/image/vidéo) 0,09 $ (audio) 1,80 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* Yêu cầu mà khách hàng gửi cho Gemini có thể dẫn đến một hoặc nhiều câu hỏi trên Google Tìm kiếm. Bạn sẽ bị tính phí cho từng cụm từ tìm kiếm riêng lẻ mà bạn thực hiện.
+\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche effectuée.
 
-\*\* Có thể được kiểm thử trong Google AI Studio.
+\*\* Peut être testé dans Google AI Studio.
 
-## Bản xem trước Gemini Omni Flash
+## Preview Gemini Omni Flash
 
 *`gemini-omni-flash-preview`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-flash-preview&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-flash-preview&hl=fr)
 
-Mô hình tạo và chỉnh sửa video thế hệ mới của chúng tôi, được cung cấp cho các nhà phát triển trong cấp có tính phí của Gemini API.
+Notre modèle de génération et de retouche vidéo nouvelle génération, disponible pour les développeurs avec le forfait payant de l'API Gemini.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 1,5 USD (văn bản / hình ảnh / video / âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Không có | 90.000 VND (văn bản) 175.000 VND (video)\* |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 1,50 $ (texte / image / vidéo / audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 9,00 $ (texte) 17,50 $ (vidéo)\* |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* Phí được tính dựa trên tổng số mã thông báo đầu ra đã sử dụng, được tính theo tỷ lệ 5.792 mã thông báo cho mỗi giây của video 720p. Theo mức giá tiêu chuẩn, mức giá này tương đương với mức giá hiệu quả là khoảng 0,10 USD/giây.
+\* La facturation est basée sur la consommation totale de jetons de sortie, calculée à un taux de 5 792 jetons par seconde de vidéo 720p. Avec la tarification standard, cela équivaut à un prix effectif d'environ 0,10 $ par seconde.
 
-## Gemini 3.1 Pro (Bản xem trước)
+## Preview Gemini 3.1 Pro
 
-*`gemini-3.1-pro-preview` và `gemini-3.1-pro-preview-customtools`*
+*`gemini-3.1-pro-preview` et `gemini-3.1-pro-preview-customtools`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=fr)
 
-Những điểm cải tiến mới nhất về hiệu suất, trí thông minh và tính hữu dụng đối với dòng mô hình tốt nhất trên thế giới về khả năng hiểu đa phương thức, các tính năng tác nhân và khả năng lập trình theo cảm quan.
+Les dernières améliorations apportées aux performances, à l'intelligence et à la facilité d'utilisation de la meilleure famille de modèles au monde pour la compréhension multimodale, les capacités agentiques et le vibe coding.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 2 USD, câu lệnh <= 200.000 token 4 USD, câu lệnh > 200.000 token |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Không có | 12.000 VND, câu lệnh <= 200.000 mã thông báo 18.000 VND, câu lệnh > 200.000 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,2 USD, câu lệnh <= 200.000 mã thông báo 0,4 USD, câu lệnh > 200.000 mã thông báo 4,5 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 câu lệnh mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 2 $, requêtes <= 200 000 jetons 4 $, requêtes > 200 000 jetons |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 12 $, requêtes <= 200 000 jetons 18 $, requêtes > 200 000 jetons |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,20 $ pour les requêtes <= 200 000 jetons 0,40 $ pour les requêtes > 200 000 jetons 4,50 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 1 đô la, câu lệnh <= 200.000 token 2 đô la, câu lệnh > 200.000 token |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Không có | 6 USD, câu lệnh <= 200.000 mã thông báo 9 USD, câu lệnh > 200.000 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | *Tương tự như Standard*  0,20 USD, câu lệnh <= 200.000 mã thông báo 0,40 USD, câu lệnh > 200.000 mã thông báo 4,5 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 yêu cầu mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 1 $, requêtes ≤ 200 000 jetons 2 $, requêtes > 200 000 jetons |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 6 $, requêtes <= 200 000 jetons 9 $, requêtes > 200 000 jetons |
+| Tarifs de la mise en cache du contexte | Non disponible | *Identique à Standard*  0,20 $, requêtes <= 200 000 jetons 0,40 $, requêtes > 200 000 jetons 4,50 $ / 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Gập
+### Flex
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 1 đô la, câu lệnh <= 200.000 token 2 đô la, câu lệnh > 200.000 token |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Không có | 6 USD, câu lệnh <= 200.000 mã thông báo 9 USD, câu lệnh > 200.000 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | *Tương tự như Standard*  0,20 USD, câu lệnh <= 200.000 mã thông báo 0,40 USD, câu lệnh > 200.000 mã thông báo 4,5 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 yêu cầu mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 1 $, requêtes ≤ 200 000 jetons 2 $, requêtes > 200 000 jetons |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 6 $, requêtes <= 200 000 jetons 9 $, requêtes > 200 000 jetons |
+| Tarifs de la mise en cache du contexte | Non disponible | *Identique à Standard*  0,20 $, requêtes <= 200 000 jetons 0,40 $, requêtes > 200 000 jetons 4,50 $ / 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Mức độ ưu tiên
+### Priorité
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 3,60 USD, câu lệnh <= 200.000 token 7,20 USD, câu lệnh > 200.000 token |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Không có | 21,60 USD, câu lệnh <= 200.000 mã thông báo 32,40 USD, câu lệnh > 200.000 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,36 USD, câu lệnh <= 200.000 mã thông báo 0,72 USD, câu lệnh > 200.000 mã thông báo 8,10 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 câu lệnh mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 3,60 $, requêtes <= 200 000 jetons 7,20 $, requêtes > 200 000 jetons |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 21,60 $, requêtes <= 200 000 jetons 32,40 $, requêtes > 200 000 jetons |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,36 $ pour les requêtes <= 200 000 jetons 0,72 $ pour les requêtes > 200 000 jetons 8,10 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* Yêu cầu mà khách hàng gửi cho Gemini có thể dẫn đến một hoặc nhiều câu hỏi trên Google Tìm kiếm. Bạn sẽ bị tính phí cho từng cụm từ tìm kiếm riêng lẻ mà bạn thực hiện.
+\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche effectuée.
 
-\*\* Có thể được kiểm thử trong Google AI Studio.
+\*\* Peut être testé dans Google AI Studio.
 
-## Bản xem trước trực tiếp Gemini 3.1 Flash
+## Preview Gemini 3.1 Flash Live
 
 *`gemini-3.1-flash-live-preview`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-live-preview&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-live-preview&hl=fr)
 
-Mô hình âm thanh sang âm thanh có độ trễ thấp được tối ưu hoá cho cuộc trò chuyện theo thời gian thực với khả năng phát hiện sắc thái âm thanh, độ chính xác về số và nhận thức đa phương thức.
+Notre modèle audio-à-audio à faible latence est optimisé pour le dialogue en temps réel avec détection des nuances acoustiques, précision numérique et conscience multimodale.
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 0,75 USD (văn bản) 3 USD hoặc 0,005 USD/phút (âm thanh) 1 USD hoặc 0,002 USD/phút (hình ảnh/video) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | 4,5 USD (văn bản) 12 USD hoặc 0,018 USD/phút (âm thanh) |
-| Neo bám vào Google Tìm kiếm\* | Được hỗ trợ | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 0,75 $ (texte) 3 $ ou 0,005 $/min (audio) 1 $ ou 0,002 $/min (image/vidéo) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 4,50 $ (texte) 12,00 $ ou 0,018 $/min (audio) |
+| Ancrage avec la recherche Google\* | Compatible | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* Yêu cầu mà khách hàng gửi cho Gemini có thể dẫn đến một hoặc nhiều câu hỏi trên Google Tìm kiếm. Bạn sẽ bị tính phí cho từng cụm từ tìm kiếm riêng lẻ mà bạn thực hiện.
+\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche effectuée.
 
-## Hình ảnh Gemini 3.1 Flash (Nano Banana 2) 🍌
+## Gemini 3.1 Flash Image (Nano Banana 2) 🍌
 
 *`gemini-3.1-flash-image`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-image&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-image&hl=fr)
 
-Được thiết kế để có tốc độ và hiệu quả cao, mô hình Gemini 3.1 Flash Image Generation (Tạo hình ảnh) mang lại câu trả lời nhanh chóng, mang tính tương tác và có thông lượng cao.
+Conçu pour la vitesse et l'efficacité, le modèle de génération d'images Gemini 3.1 Flash Image est efficace pour les réponses rapides et interactives, et pour le haut débit.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 0,5 USD (văn bản/hình ảnh) |
-| Giá đầu ra | Không có | 3 đô la (văn bản và suy nghĩ)  60 đô la (hình ảnh)  Tương đương với 0,045 đô la cho 500 hình ảnh\*  0,067 đô la cho 1.000 hình ảnh\*, 0,101 đô la cho 2.000 hình ảnh\* và 0,151 đô la cho 4.000 hình ảnh\*. |
-| Neo bám vào Google Tìm kiếm trên web và Tìm kiếm bằng hình ảnh\*\* | Không có sẵn\*\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu để xác thực dựa trên văn bản và hình ảnh. |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,50 $ (texte/image) |
+| Prix de sortie | Non disponible | 3 $ (texte et réflexion)  60 $ (images)  Équivaut à 0,045 $ par tranche de 0,5 K images\*  0,067 $ par tranche de 1 K images\*, 0,101 $ par tranche de 2 K images\*, et 0,151 $ par tranche de 4 K images\*. |
+| Ancrage avec la recherche Google sur le Web et par images\*\* | Non disponible\*\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes pour l'ancrage basé sur du texte et des images. |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 0,25 USD (văn bản, hình ảnh) |
-| Giá đầu ra | Không có | 1,5 USD (văn bản và suy nghĩ)  30 USD (hình ảnh)  Tương đương với 0,022 USD cho 500 hình ảnh\*  0,034 USD cho 1.000 hình ảnh\*,  0,050 USD cho 2.000 hình ảnh\*,  và 0,076 USD cho 4.000 hình ảnh\*. |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,25 $ (texte, image) |
+| Prix de sortie | Non disponible | 1,50 $ (texte et réflexion)  30,00 $ (images)  Équivaut à 0,022 $ par image de 0,5 K\*  0,034 $ par image de 1 K\*,  0,050 $ par image de 2 K\*,  et 0,076 $ par image de 4 K\*. |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* Đầu ra là hình ảnh có giá 60 USD cho mỗi 1.000.000 mã thông báo.
-Hình ảnh đầu ra ở độ phân giải 0,5K (512px) tiêu thụ 747 mã thông báo và tương đương với 0,045 USD cho mỗi hình ảnh. Hình ảnh đầu ra ở độ phân giải 1K (1024x1024px) tiêu thụ 1.120 mã thông báo và tương đương với 0,067 USD/hình ảnh. Hình ảnh đầu ra ở độ phân giải 2K (2048x2048px) tiêu thụ 1.680 mã thông báo và tương đương với 0,101 USD cho mỗi hình ảnh. Hình ảnh đầu ra ở độ phân giải 4K (4096x4096px) tiêu thụ 2520 mã thông báo và tương đương với 0,151 USD mỗi hình ảnh.
+\* Les images générées sont facturées 60 $ par million de jetons.
+Les images de sortie à 0,5 K (512 px) consomment 747 jetons et coûtent 0,045 $ par image. Les images de sortie en 1K (1 024 x 1 024 px) consomment 1 120 jetons et coûtent 0,067 $ par image. Les images de sortie en 2K (2 048 x 2 048 pixels) consomment 1 680 jetons et coûtent 0,101 $ par image. Les images de sortie en 4K (4 096 x 4 096 px) consomment 2 520 jetons et coûtent 0,151 $ par image.
 
-\*\* Yêu cầu mà khách hàng gửi cho Gemini có thể dẫn đến một hoặc nhiều câu hỏi được gửi đến Google Tìm kiếm. Bạn sẽ bị tính phí cho từng cụm từ tìm kiếm riêng lẻ mà bạn thực hiện. Ngữ cảnh được truy xuất (văn bản hoặc hình ảnh) do tính năng Grounding with Google Search cung cấp không bị tính phí dưới dạng mã thông báo đầu vào.
+\*\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche effectuée. Le contexte récupéré (texte ou images) fourni par l'ancrage avec la recherche Google n'est pas facturé en tant que jetons d'entrée.
 
-\*\*\* Có thể được kiểm thử trong Google AI Studio.
+\*\*\* Peut être testé dans Google AI Studio.
 
-## Hình ảnh Gemini 3.1 Flash Lite (Nano Banana 2 Lite) 🍌
+## Gemini 3.1 Flash-Lite Image (Nano Banana 2 Lite) 🍌
 
 *`gemini-3.1-flash-lite-image`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-image&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-image&hl=fr)
 
-Được thiết kế để chuyên tạo hình ảnh hiệu quả, mô hình Gemini 3.1 Flash Lite Image được thiết kế để tạo và chỉnh sửa hình ảnh với độ trễ thấp nhất và chi phí hợp lý.
+Conçu comme le spécialiste de l'efficacité de la famille de modèles de génération d'images, le modèle Gemini 3.1 Flash-Lite Image est conçu pour la génération et la retouche d'images à latence ultra-faible et à faible coût.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 0,25 USD (văn bản/hình ảnh/video) |
-| Giá đầu ra | Không có | 1,5 USD (văn bản và suy nghĩ)  30 USD (hình ảnh)  Tương đương với 0,0336 USD cho mỗi hình ảnh có độ phân giải 1K\* |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,25 $ (texte/image/vidéo) |
+| Prix de sortie | Non disponible | 1,50 $ (texte et réflexion)  30,00 $ (images)  Équivaut à 0,0336 $ par image de résolution 1K\* |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 0,125 USD (văn bản/hình ảnh/video) |
-| Giá đầu ra | Không có | 0,75 USD (văn bản và suy nghĩ)  15 USD (hình ảnh)  Tương đương 0,0168 USD cho mỗi hình ảnh có độ phân giải 1K\* |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,125 $ (texte/image/vidéo) |
+| Prix de sortie | Non disponible | 0,75 $ (texte et réflexion)  15,00 $ (images)  Équivaut à 0,0168 $ par image de résolution 1K\* |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* Đầu ra hình ảnh có giá là 30 USD cho mỗi 1.000.000 mã thông báo. Hình ảnh đầu ra ở độ phân giải 1K (1024x1024px) tiêu thụ 1.120 mã thông báo và tương đương với 0,0336 USD cho mỗi hình ảnh.
+\* Les images générées sont facturées 30 $ par million de jetons. Les images de sortie en 1K (1 024 x 1 024 px) consomment 1 120 jetons et coûtent 0,0336 $ par image.
 
-## Bản xem trước Gemini 3.1 Flash TTS
+## Preview Gemini 3.1 Flash TTS
 
 *`gemini-3.1-flash-tts-preview`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-tts-preview&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-tts-preview&hl=fr)
 
-Mô hình âm thanh 3.1 Flash Text-to-Speech được tối ưu hoá để tạo lời nói có thể kiểm soát, độ trễ thấp và hiệu suất cao về giá.
+Notre modèle audio 3.1 Flash Text-to-Speech est optimisé pour la génération de voix contrôlable, à faible latence et offrant un bon rapport qualité/prix.
 
-Các mô hình xem trước có thể thay đổi trước khi trở nên ổn định và có giới hạn tốc độ hạn chế hơn.
+Les modèles en aperçu peuvent changer avant de devenir stables et avoir des limites de débit plus restrictives.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 1 đô la Mỹ (văn bản) |
-| Giá đầu ra | Miễn phí | 200.000 VND (âm thanh) |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 1,00 $ (texte) |
+| Prix de sortie | Sans frais | 20,00 $ (audio) |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 0,5 USD (văn bản) |
-| Giá đầu ra | Không có | 10 USD (âm thanh) |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,50 € (texte) |
+| Prix de sortie | Non disponible | 10,00 $ (audio) |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* Mã thông báo âm thanh tương ứng với 25 mã thông báo cho mỗi giây âm thanh.
+\* Les jetons audio correspondent à 25 jetons par seconde d'audio.
 
-## Bản xem trước Gemini 3 Flash
+## Preview Gemini 3 Flash
 
 *`gemini-3-flash-preview`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=gemini-3-flash-preview&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-3-flash-preview&hl=fr)
 
-Mô hình thông minh nhất của chúng tôi được xây dựng để có tốc độ xử lý nhanh, kết hợp trí thông minh đột phá với khả năng tìm kiếm và tiếp cận thông tin vượt trội.
+Notre modèle le plus intelligent, conçu pour la rapidité, qui combine une intelligence de pointe avec des capacités de recherche et d'ancrage supérieures.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 0,5 USD (văn bản / hình ảnh / video) 1 USD (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | 3 đô la |
-| Giá trong bộ nhớ đệm theo bối cảnh | Miễn phí | 0,05 USD (văn bản / hình ảnh / video) 0,10 USD (âm thanh) 1 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 câu lệnh mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 0,50 $ (texte / image / vidéo) 1,00 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 3 $ |
+| Tarifs de la mise en cache du contexte | Sans frais | 0,05 $ (texte/image/vidéo) 0,10 $ (audio) 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 0,25 USD (văn bản / hình ảnh / video) 0,5 USD (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Không có | $1,5 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | *Tương tự như gói Chuẩn*  0,05 USD (văn bản / hình ảnh / video)  0,10 USD (âm thanh)  1 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 yêu cầu mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,25 $ (texte / image / vidéo) 0,50 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1,50 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | *Identique à Standard*  0,05 $ (texte/image/vidéo)  0,10 $ (audio)  1 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Gập
+### Flex
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 0,25 USD (văn bản / hình ảnh / video) 0,5 USD (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Không có | $1,5 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | *Tương tự như gói Chuẩn*  0,05 USD (văn bản / hình ảnh / video)  0,10 USD (âm thanh)  1 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 yêu cầu mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,25 $ (texte / image / vidéo) 0,50 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1,50 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | *Identique à Standard*  0,05 $ (texte/image/vidéo)  0,10 $ (audio)  1 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Mức độ ưu tiên
+### Priorité
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 0,90 USD (văn bản / hình ảnh / video) 1,80 USD (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | 5,40 USD |
-| Giá trong bộ nhớ đệm theo bối cảnh | Miễn phí | 0,09 USD (văn bản / hình ảnh / video) 0,18 USD (âm thanh) 1,80 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Neo bám vào Google Tìm kiếm\* | Không có sẵn\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Neo bám vào Google Maps | Không có sẵn\*\* | 5.000 câu lệnh mỗi tháng (miễn phí, dùng chung trên Gemini 3), sau đó là 14 USD / 1.000 cụm từ tìm kiếm |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 0,90 $ (texte / image / vidéo) 1,80 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 5,40 $ |
+| Tarifs de la mise en cache du contexte | Sans frais | 0,09 $ (texte/image/vidéo) 0,18 $ (audio) 1,80 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* Yêu cầu mà khách hàng gửi cho Gemini có thể dẫn đến một hoặc nhiều câu hỏi trên Google Tìm kiếm. Bạn sẽ bị tính phí cho từng cụm từ tìm kiếm riêng lẻ mà bạn thực hiện.
+\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche effectuée.
 
-\*\* Có thể được kiểm thử trong Google AI Studio.
+\*\* Peut être testé dans Google AI Studio.
 
-## Hình ảnh Gemini 3 Pro (Nano Banana Pro) 🍌
+## Gemini 3 Pro Image (Nano Banana Pro) 🍌
 
 *`gemini-3-pro-image`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3-pro-image&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3-pro-image&hl=fr)
 
-Mô hình tạo hình ảnh gốc của chúng tôi, được tối ưu hoá về tốc độ, tính linh hoạt và khả năng hiểu ngữ cảnh. **Đầu vào và đầu ra là văn bản** có giá tương đương với [Gemini 3.1 Pro](#gemini-3.1-pro-preview).
+Notre modèle natif de génération d'images, optimisé pour la vitesse, la flexibilité et la compréhension contextuelle. Les **entrées et sorties textuelles** sont facturées au même prix que [Gemini 3.1 Pro](#gemini-3.1-pro-preview).
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 2 USD (văn bản/hình ảnh),  tương đương với 0,0011 USD cho mỗi hình ảnh\* |
-| Giá đầu ra | Không có | 12 USD (văn bản và suy nghĩ)  120 USD (hình ảnh)  Tương đương với 0,134 USD cho mỗi 1.000/2.000 hình ảnh\*\*  và 0,24 USD cho mỗi hình ảnh 4K\*\* |
-| Neo bám vào Google Tìm kiếm\*\*\* | Không có sẵn\*\*\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 2,00 $ (texte/image),  soit 0,0011 $ par image\* |
+| Prix de sortie | Non disponible | 12 $ (texte et réflexion)  120 $ (images)  Équivalent à 0,134 $ par image 1K/2K\*\*  et 0,24 $ par image 4K\*\* |
+| Ancrage avec la recherche Google\*\*\* | Non disponible\*\*\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 10.000 VND (văn bản), 6 VND (hình ảnh)\* |
-| Giá đầu ra | Không có | 6 đô la (văn bản và suy nghĩ)  0,067 đô la cho mỗi 1.000/2.000 hình ảnh\*\*  0,12 đô la cho mỗi hình ảnh 4K\*\* |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 1,00 $ (texte), 0,0006 $ (image)\* |
+| Prix de sortie | Non disponible | 6,00 $ (texte et réflexion)  0,067 $ par image de 1 K/2 K\*\*  0,12 $ par image de 4 K\*\* |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Gập
+### Flex
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 10.000 VND (văn bản), 6 VND (hình ảnh)\* |
-| Giá đầu ra | Không có | 6 đô la (văn bản và suy nghĩ)  0,067 đô la cho mỗi 1.000/2.000 hình ảnh\*\*  0,12 đô la cho mỗi hình ảnh 4K\*\* |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 1,00 $ (texte), 0,0006 $ (image)\* |
+| Prix de sortie | Non disponible | 6,00 $ (texte et réflexion)  0,067 $ par image de 1 K/2 K\*\*  0,12 $ par image de 4 K\*\* |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Mức độ ưu tiên
+### Priorité
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 3,6 USD (văn bản/hình ảnh) |
-| Giá đầu ra | Không có | 21,6 USD (văn bản và suy nghĩ)  216 USD (hình ảnh) |
-| Neo bám vào Google Tìm kiếm\*\*\* | Không có sẵn\*\*\*\* | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 3,60 $ (texte/image) |
+| Prix de sortie | Non disponible | 21,60 $ (texte et réflexion)  216,00 $ (images) |
+| Ancrage avec la recherche Google\*\*\* | Non disponible\*\*\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* Đầu vào hình ảnh được đặt ở mức 560 mã thông báo hoặc 0,0011 USD cho mỗi hình ảnh.
+\* L'entrée d'image est définie sur 560 jetons ou 0,0011 $ par image.
 
-\*\* Đầu ra là hình ảnh có giá 120 USD cho mỗi 1.000.000 mã thông báo. Hình ảnh đầu ra từ 1024x1024px (1K) đến 2048x2048px (2K) tiêu thụ 1120 mã thông báo và tương đương với 0,134 USD cho mỗi hình ảnh. Hình ảnh đầu ra có kích thước lên đến 4096x4096px (4K) tiêu thụ 2000 mã thông báo và tương đương với 0,24 USD cho mỗi hình ảnh.
+\*\* Le prix des images générées est de 120 $ par million de jetons. Les images de sortie de 1 024 x 1 024 px (1K) à 2 048 x 2 048 px (2K) consomment 1 120 jetons et coûtent 0,134 $ par image. Les images de sortie jusqu'à 4 096 x 4 096 px (4K) consomment 2 000 jetons et coûtent 0,24 $ par image.
 
-\*\*\* Yêu cầu mà khách hàng gửi cho Gemini có thể dẫn đến một hoặc nhiều câu hỏi trên Google Tìm kiếm. Bạn sẽ bị tính phí cho từng cụm từ tìm kiếm riêng lẻ mà bạn thực hiện.
+\*\*\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes sur la recherche Google. Des frais vous seront facturés pour chaque requête de recherche effectuée.
 
-\*\*\*\* Có thể được kiểm thử trong Google AI Studio.
+\*\*\*\* Peut être testé dans Google AI Studio.
 
-## Gemini 2.5 Pro
+## Gemini 2.5 Pro
 
 *`gemini-2.5-pro`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=gemini-2.5-pro&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-2.5-pro&hl=fr)
 
-Mô hình đa năng tiên tiến nhất của chúng tôi, vượt trội trong việc lập trình và xử lý các tác vụ suy luận phức tạp.
+Notre modèle polyvalent de pointe, qui excelle dans les tâches de codage et de raisonnement complexe.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 1,25 USD, câu lệnh <= 200.000 mã thông báo 2,5 USD, câu lệnh > 200.000 mã thông báo |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | 10 USD, câu lệnh <= 200.000 mã thông báo 15 USD, câu lệnh > 200.000 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,125 USD, câu lệnh <= 200.000 mã thông báo 0,25 USD, câu lệnh > 200.000 4,5 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Bám sát nguồn bằng Google Tìm kiếm | Không có | 1.500 RPD (miễn phí), sau đó là 35 USD / 1.000 câu lệnh cơ bản |
-| Neo bám vào Google Maps | Không có | 10.000 RPD (miễn phí), sau đó là 25 USD / 1.000 câu lệnh bị hạn chế |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 1,25 $, requêtes ≤ 200 000 jetons 2,50 $, requêtes > 200 000 jetons |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 10 $, requêtes <= 200 000 jetons 15 $, requêtes > 200 000 |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,125 $ pour les requêtes <= 200 000 jetons 0,25 $ pour les requêtes > 200 000 jetons 4,50 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Non disponible | 1 500 RPD (sans frais), puis 35 $ pour 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | Non disponible | 10 000 RPD (sans frais), puis 25 $ pour 1 000 requêtes ancrées |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 0,625 USD, câu lệnh <= 200.000 token 1,25 USD, câu lệnh > 200.000 token |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Không có | 50.000 VND, câu lệnh <= 200.000 mã thông báo 75.000 VND, câu lệnh > 200.000 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,125 USD, câu lệnh <= 200.000 mã thông báo 0,25 USD, câu lệnh > 200.000 4,5 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Bám sát nguồn bằng Google Tìm kiếm | Không có | 1.500 RPD (miễn phí), sau đó là 35 USD / 1.000 câu lệnh cơ bản |
-| Neo bám vào Google Maps | Không có | Không có |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0, 625 $ pour les requêtes <= 200 000 jetons 1, 25 $ pour les requêtes > 200 000 jetons |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 5 $, requêtes <= 200 000 jetons 7,50 $, requêtes > 200 000 jetons |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,125 $ pour les requêtes <= 200 000 jetons 0,25 $ pour les requêtes > 200 000 jetons 4,50 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Non disponible | 1 500 RPD (sans frais), puis 35 $ pour 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | Non disponible | Non disponible |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Gập
+### Flex
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 0,625 USD, câu lệnh <= 200.000 token 1,25 USD, câu lệnh > 200.000 token |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Không có | 50.000 VND, câu lệnh <= 200.000 mã thông báo 75.000 VND, câu lệnh > 200.000 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,125 USD, câu lệnh <= 200.000 mã thông báo 0,25 USD, câu lệnh > 200.000 4,5 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Bám sát nguồn bằng Google Tìm kiếm | Không có | 1.500 RPD (miễn phí), sau đó là 35 USD / 1.000 câu lệnh cơ bản |
-| Neo bám vào Google Maps | Không có | Không có |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0, 625 $ pour les requêtes <= 200 000 jetons 1, 25 $ pour les requêtes > 200 000 jetons |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 5 $, requêtes <= 200 000 jetons 7,50 $, requêtes > 200 000 jetons |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,125 $ pour les requêtes <= 200 000 jetons 0,25 $ pour les requêtes > 200 000 jetons 4,50 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Non disponible | 1 500 RPD (sans frais), puis 35 $ pour 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | Non disponible | Non disponible |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Mức độ ưu tiên
+### Priorité
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 2,25 USD, câu lệnh <= 200.000 token 4,5 USD, câu lệnh > 200.000 token |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | 18 đô la, câu lệnh <= 200.000 mã thông báo 27 đô la, câu lệnh > 200.000 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,225 USD, câu lệnh <= 200.000 mã thông báo 0,45 USD, câu lệnh > 200.000 mã thông báo 8,10 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Bám sát nguồn bằng Google Tìm kiếm | Không có | 1.500 RPD (miễn phí), sau đó là 35 USD / 1.000 câu lệnh cơ bản |
-| Neo bám vào Google Maps | Không có | 10.000 RPD (miễn phí), sau đó là 25 USD / 1.000 câu lệnh bị hạn chế |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 2, 25 $ pour les requêtes <= 200 000 jetons 4, 50 $ pour les requêtes > 200 000 jetons |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 18 $, requêtes <= 200 000 jetons 27 $, requêtes > 200 000 jetons |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,225 $ pour les requêtes <= 200 000 jetons 0,45 $ pour les requêtes > 200 000 jetons 8,10 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Non disponible | 1 500 RPD (sans frais), puis 35 $ pour 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | Non disponible | 10 000 RPD (sans frais), puis 25 $ pour 1 000 requêtes ancrées |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Gemini 2.5 Flash
+## Gemini 2.5 Flash
 
 *`gemini-2.5-flash`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash&hl=fr)
 
-Mô hình suy luận kết hợp đầu tiên của chúng tôi hỗ trợ cửa sổ ngữ cảnh 1 triệu token và có ngân sách suy nghĩ.
+Notre premier modèle de raisonnement hybride, qui accepte une fenêtre de contexte d'un million de jetons et dispose de budgets de réflexion.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 0,30 USD (văn bản / hình ảnh / video) 1 USD (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | $2,50 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,03 USD (văn bản / hình ảnh / video) 0,1 USD (âm thanh) 1 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Bám sát nguồn bằng Google Tìm kiếm | Miễn phí, tối đa 500 RPD (giới hạn này được dùng chung với RPD của Flash-Lite) | 1.500 RPD (miễn phí, hạn mức dùng chung với Flash-Lite RPD), sau đó là 35 USD / 1.000 câu lệnh bị hạn chế |
-| Neo bám vào Google Maps | 500 RPD | 1.500 RPD (miễn phí), sau đó là 25 USD / 1.000 câu lệnh cơ bản |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 0,30 $ (texte / image / vidéo) 1,00 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 2,50 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,03 $ (texte/image/vidéo) 0,1 $ (audio) 1 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Sans frais, jusqu'à 500 RPD (limite partagée avec les RPD Flash-Lite) | 1 500 RPD (sans frais, limite partagée avec les RPD Flash-Lite), puis 35 $ / 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | 500 RPD | 1 500 RPD (sans frais), puis 25 $ pour 1 000 requêtes ancrées |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 0,15 USD (văn bản / hình ảnh / video) 0,5 USD (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Không có | 1.25 USD |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,03 USD (văn bản / hình ảnh / video) 0,1 USD (âm thanh) 1 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Bám sát nguồn bằng Google Tìm kiếm | Không có | 1.500 RPD (miễn phí, hạn mức dùng chung với Flash-Lite RPD), sau đó là 35 USD / 1.000 câu lệnh bị hạn chế |
-| Neo bám vào Google Maps | Không có | Không có |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,15 $ (texte / image / vidéo) 0,50 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1,25 € |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,03 $ (texte/image/vidéo) 0,1 $ (audio) 1 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Non disponible | 1 500 RPD (sans frais, limite partagée avec les RPD Flash-Lite), puis 35 $ / 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | Non disponible | Non disponible |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Gập
+### Flex
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 0,15 USD (văn bản / hình ảnh / video) 0,5 USD (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Không có | 1.25 USD |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,03 USD (văn bản / hình ảnh / video) 0,1 USD (âm thanh) 1 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Bám sát nguồn bằng Google Tìm kiếm | Không có | 1.500 RPD (miễn phí, hạn mức dùng chung với Flash-Lite RPD), sau đó là 35 USD / 1.000 câu lệnh bị hạn chế |
-| Neo bám vào Google Maps | Không có | Không có |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,15 $ (texte / image / vidéo) 0,50 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1,25 € |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,03 $ (texte/image/vidéo) 0,1 $ (audio) 1 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Non disponible | 1 500 RPD (sans frais, limite partagée avec les RPD Flash-Lite), puis 35 $ / 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | Non disponible | Non disponible |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Mức độ ưu tiên
+### Priorité
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 0,54 USD (văn bản / hình ảnh / video) 1,8 USD (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | 4,5 đô la |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,054 USD (văn bản / hình ảnh / video) 0,18 USD (âm thanh) 1,80 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Bám sát nguồn bằng Google Tìm kiếm | Miễn phí, tối đa 500 RPD (giới hạn này được dùng chung với RPD của Flash-Lite) | 1.500 RPD (miễn phí, hạn mức dùng chung với Flash-Lite RPD), sau đó là 35 USD / 1.000 câu lệnh bị hạn chế |
-| Neo bám vào Google Maps | 500 RPD | 1.500 RPD (miễn phí), sau đó là 25 USD / 1.000 câu lệnh cơ bản |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 0,54 $ (texte / image / vidéo) 1,80 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 4,50 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,054 $ (texte/image/vidéo) 0,18 $ (audio) 1,80 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Sans frais, jusqu'à 500 RPD (limite partagée avec les RPD Flash-Lite) | 1 500 RPD (sans frais, limite partagée avec les RPD Flash-Lite), puis 35 $ / 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | 500 RPD | 1 500 RPD (sans frais), puis 25 $ pour 1 000 requêtes ancrées |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Gemini 2.5 Flash-Lite
+## Gemini 2.5 Flash-Lite
 
 *`gemini-2.5-flash-lite`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=fr)
 
-Đây là mô hình nhỏ nhất và tiết kiệm chi phí nhất của chúng tôi, được xây dựng để sử dụng ở quy mô lớn.
+Notre modèle le plus petit et le plus économique, conçu pour une utilisation à grande échelle.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Giá nhập (văn bản, hình ảnh, video) | Miễn phí | 0,1 USD (văn bản / hình ảnh / video) 0,3 USD (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | $0,40 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,01 USD (văn bản / hình ảnh / video) 0,03 USD (âm thanh) 1 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Bám sát nguồn bằng Google Tìm kiếm | Miễn phí, tối đa 500 RPD (giới hạn này được chia sẻ với Flash RPD) | 1.500 RPD (miễn phí, hạn mức dùng chung với Flash RPD), sau đó là 35 USD / 1.000 câu lệnh bị hạn chế |
-| Neo bám vào Google Maps | 500 RPD | 1.500 RPD (miễn phí), sau đó là 25 USD / 1.000 câu lệnh cơ bản |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de l'entrée (texte, image, vidéo) | Sans frais | 0,10 $ (texte / image / vidéo) 0,30 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 0,40 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,01 $ (texte/image/vidéo) 0,03 $ (audio) 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Sans frais, jusqu'à 500 RPD (limite partagée avec les RPD Flash) | 1 500 RPJ (sans frais, limite partagée avec Flash RPJ), puis 35 $ / 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | 500 RPD | 1 500 RPD (sans frais), puis 25 $ pour 1 000 requêtes ancrées |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Giá nhập (văn bản, hình ảnh, video) | Không có | 0,05 USD (văn bản / hình ảnh / video) 0,15 USD (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Không có | $0,20 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,01 USD (văn bản / hình ảnh / video) 0,03 USD (âm thanh) 1 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Bám sát nguồn bằng Google Tìm kiếm | Không có | 1.500 RPD (miễn phí, hạn mức dùng chung với Flash RPD), sau đó là 35 USD / 1.000 câu lệnh bị hạn chế |
-| Neo bám vào Google Maps | Không có | Không có |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de l'entrée (texte, image, vidéo) | Non disponible | 0,05 $ (texte / image / vidéo) 0,15 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 0,20 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,01 $ (texte/image/vidéo) 0,03 $ (audio) 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Non disponible | 1 500 RPJ (sans frais, limite partagée avec Flash RPJ), puis 35 $ / 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | Non disponible | Non disponible |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Gập
+### Flex
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Giá nhập (văn bản, hình ảnh, video) | Không có | 0,05 USD (văn bản / hình ảnh / video) 0,15 USD (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Không có | $0,20 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,01 USD (văn bản / hình ảnh / video) 0,03 USD (âm thanh) 1 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Bám sát nguồn bằng Google Tìm kiếm | Không có | 1.500 RPD (miễn phí, hạn mức dùng chung với Flash RPD), sau đó là 35 USD / 1.000 câu lệnh bị hạn chế |
-| Neo bám vào Google Maps | Không có | Không có |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de l'entrée (texte, image, vidéo) | Non disponible | 0,05 $ (texte / image / vidéo) 0,15 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 0,20 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,01 $ (texte/image/vidéo) 0,03 $ (audio) 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Non disponible | 1 500 RPJ (sans frais, limite partagée avec Flash RPJ), puis 35 $ / 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | Non disponible | Non disponible |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Mức độ ưu tiên
+### Priorité
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Giá nhập (văn bản, hình ảnh, video) | Miễn phí | 0,18 USD (văn bản / hình ảnh / video) 0,54 USD (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | $0,72 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,018 USD (văn bản / hình ảnh / video) 0,054 USD (âm thanh) 1,80 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Bám sát nguồn bằng Google Tìm kiếm | Miễn phí, tối đa 500 RPD (giới hạn này được chia sẻ với Flash RPD) | 1.500 RPD (miễn phí, hạn mức dùng chung với Flash RPD), sau đó là 35 USD / 1.000 câu lệnh bị hạn chế |
-| Neo bám vào Google Maps | 500 RPD | 1.500 RPD (miễn phí), sau đó là 25 USD / 1.000 câu lệnh cơ bản |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de l'entrée (texte, image, vidéo) | Sans frais | 0,18 $ (texte / image / vidéo) 0,54 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 0,72 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,018 $ (texte/image/vidéo) 0,054 $ (audio) 1,80 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Sans frais, jusqu'à 500 RPD (limite partagée avec les RPD Flash) | 1 500 RPJ (sans frais, limite partagée avec Flash RPJ), puis 35 $ / 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | 500 RPD | 1 500 RPD (sans frais), puis 25 $ pour 1 000 requêtes ancrées |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Bản xem trước Gemini 2.5 Flash-Lite
+## Preview Gemini 2.5 Flash-Lite
 
 *`gemini-2.5-flash-lite-preview-09-2025`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite-preview-09-2025&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite-preview-09-2025&hl=fr)
 
-Mô hình mới nhất dựa trên Gemini 2.5 Flash Lite được tối ưu hoá để tiết kiệm chi phí, có thông lượng cao và chất lượng cao.
+Dernier modèle basé sur Gemini 2.5 Flash-Lite, optimisé pour la rentabilité, le haut débit et la qualité.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Giá nhập (văn bản, hình ảnh, video) | Miễn phí | 0,1 USD (văn bản / hình ảnh / video) 0,3 USD (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | $0,40 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,01 USD (văn bản / hình ảnh / video) 0,03 USD (âm thanh) 1 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Bám sát nguồn bằng Google Tìm kiếm | Miễn phí, tối đa 500 RPD (giới hạn này được chia sẻ với Flash RPD) | 1.500 RPD (miễn phí, hạn mức dùng chung với Flash RPD), sau đó là 35 USD / 1.000 câu lệnh bị hạn chế |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de l'entrée (texte, image, vidéo) | Sans frais | 0,10 $ (texte / image / vidéo) 0,30 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 0,40 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,01 $ (texte/image/vidéo) 0,03 $ (audio) 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Sans frais, jusqu'à 500 RPD (limite partagée avec les RPD Flash) | 1 500 RPJ (sans frais, limite partagée avec Flash RPJ), puis 35 $ / 1 000 requêtes ancrées |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Giá nhập (văn bản, hình ảnh, video) | Không có | 0,05 USD (văn bản / hình ảnh / video) 0,15 USD (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Không có | $0,20 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,01 USD (văn bản / hình ảnh / video) 0,03 USD (âm thanh) 1 USD / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Bám sát nguồn bằng Google Tìm kiếm | Không có | 1.500 RPD (miễn phí, hạn mức dùng chung với Flash RPD), sau đó là 35 USD / 1.000 câu lệnh bị hạn chế |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de l'entrée (texte, image, vidéo) | Non disponible | 0,05 $ (texte / image / vidéo) 0,15 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 0,20 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,01 $ (texte/image/vidéo) 0,03 $ (audio) 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Non disponible | 1 500 RPJ (sans frais, limite partagée avec les RPJ de Flash), puis 35 $ / 1 000 requêtes ancrées |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Gemini 2.5 Flash Native Audio (Live API)
+## Entrée audio native Gemini 2.5 Flash (API Live)
 
 *`gemini-2.5-flash-native-audio-preview-12-2025`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com/app/live?hl=vi#gemini-2.5-flash-native-audio-preview-12-2025)
+[Essayer dans Google AI Studio](https://aistudio.google.com/app/live?hl=fr#gemini-2.5-flash-native-audio-preview-12-2025)
 
-Các mô hình âm thanh gốc [Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi) được tối ưu hoá để mang đến đầu ra âm thanh chất lượng cao hơn với tốc độ, giọng nói tự nhiên, độ chi tiết và tâm trạng phù hợp hơn.
+Nos modèles audio natifs de l'[API Live](https://ai.google.dev/gemini-api/docs/live?hl=fr) sont optimisés pour des sorties audio de meilleure qualité, avec un rythme, une voix, une verbosité et une humeur plus naturels.
 
-Các mô hình xem trước có thể thay đổi trước khi trở nên ổn định và có giới hạn tốc độ hạn chế hơn.
+Les modèles en aperçu peuvent changer avant de devenir stables et avoir des limites de débit plus restrictives.
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 0,5 USD (văn bản) 3 USD (âm thanh / video) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | 2 USD (văn bản) 12 USD (âm thanh) |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 0,50 $ (texte) 3,00 $ (audio / vidéo) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 2,00 $ (texte) 12,00 $ (audio) |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Hình ảnh Gemini 2.5 Flash (Nano Banana) 🍌
+## Gemini 2.5 Flash Image (Nano Banana) 🍌
 
 *`gemini-2.5-flash-image`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=fr)
 
-Mô hình tạo hình ảnh gốc của chúng tôi, được tối ưu hoá về tốc độ, tính linh hoạt và khả năng hiểu ngữ cảnh. Đầu vào và đầu ra dạng văn bản có giá tương đương với [2.5 Flash](#gemini-2.5-flash).
+Notre modèle natif de génération d'images, optimisé pour la vitesse, la flexibilité et la compréhension contextuelle. Les entrées et sorties textuelles sont facturées au même prix que [2.5 Flash](#gemini-2.5-flash).
 
-Các mô hình xem trước có thể thay đổi trước khi trở nên ổn định và có giới hạn tốc độ hạn chế hơn.
+Les modèles en aperçu peuvent changer avant de devenir stables et avoir des limites de débit plus restrictives.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 0,30 USD (văn bản / hình ảnh) |
-| Giá đầu ra | Không có | 0,039 USD cho mỗi hình ảnh\* |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,30 $ (texte / image) |
+| Prix de sortie | Non disponible | 0,039 $ par image\* |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 0,15 USD (văn bản / hình ảnh) |
-| Giá đầu ra | Không có | 0,0195 USD cho mỗi hình ảnh\* |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,15 $ (texte / image) |
+| Prix de sortie | Non disponible | 0,0195 $ par image\* |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Gập
+### Flex
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 0,15 USD (văn bản / hình ảnh) |
-| Giá đầu ra | Không có | 0,0195 USD cho mỗi hình ảnh\* |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,15 $ (texte / image) |
+| Prix de sortie | Non disponible | 0,0195 $ par image\* |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Mức độ ưu tiên
+### Priorité
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 0,54 USD (văn bản / hình ảnh) |
-| Giá đầu ra | Không có | 0,0702 USD cho mỗi hình ảnh\* |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,54 $ (texte / image) |
+| Prix de sortie | Non disponible | 0,0702 $ par image\* |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-[\*] Đầu ra là hình ảnh có giá 30 USD cho mỗi 1.000.000 mã thông báo. Hình ảnh đầu ra có kích thước tối đa 1024x1024px tiêu thụ 1290 mã thông báo và tương đương với 0,039 USD cho mỗi hình ảnh.
+[\*] La génération d'images est facturée 30 $ par tranche de 1 000 000 de jetons. Les images de sortie jusqu'à 1 024 x 1 024 px consomment 1 290 jetons et coûtent 0,039 $ par image.
 
-## Bản xem trước Gemini 2.5 Flash TTS
+## Preview Gemini 2.5 Flash TTS
 
 *`gemini-2.5-flash-preview-tts`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com/generate-speech?hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com/generate-speech?hl=fr)
 
-Mô hình âm thanh chuyển văn bản thành lời nói 2.5 Flash được tối ưu hoá để tạo lời nói có thể kiểm soát, độ trễ thấp và hiệu suất cao so với giá.
+Notre modèle audio de synthèse vocale 2.5 Flash est optimisé pour la génération de voix contrôlable, à faible latence et offrant un bon rapport qualité/prix.
 
-Các mô hình xem trước có thể thay đổi trước khi trở nên ổn định và có giới hạn tốc độ hạn chế hơn.
+Les modèles en aperçu peuvent changer avant de devenir stables et avoir des limites de débit plus restrictives.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 0,5 USD (văn bản) |
-| Giá đầu ra | Miễn phí | 10 USD (âm thanh) |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 0,50 € (texte) |
+| Prix de sortie | Sans frais | 10,00 $ (audio) |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 0,25 USD (văn bản) |
-| Giá đầu ra | Không có | 5 USD (âm thanh) |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,25 $ (texte) |
+| Prix de sortie | Non disponible | 5,00 $ (audio) |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Gemini 2.5 Pro Preview TTS
+## Preview Gemini 2.5 Pro TTS
 
 *`gemini-2.5-pro-preview-tts`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com/generate-speech?hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com/generate-speech?hl=fr)
 
-Mô hình âm thanh chuyển văn bản sang lời nói 2.5 Pro được tối ưu hoá để tạo lời nói mạnh mẽ, có độ trễ thấp, mang lại kết quả tự nhiên hơn và dễ dàng điều hướng câu lệnh hơn.
+Notre modèle audio de synthèse vocale 2.5 Pro est optimisé pour générer des voix puissantes et à faible latence, pour des résultats plus naturels et des requêtes plus faciles à orienter.
 
-Các mô hình xem trước có thể thay đổi trước khi trở nên ổn định và có giới hạn tốc độ hạn chế hơn.
+Les modèles en aperçu peuvent changer avant de devenir stables et avoir des limites de débit plus restrictives.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 1 đô la Mỹ (văn bản) |
-| Giá đầu ra | Không có | 200.000 VND (âm thanh) |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 1,00 $ (texte) |
+| Prix de sortie | Non disponible | 20,00 $ (audio) |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 0,5 USD (văn bản) |
-| Giá đầu ra | Không có | 10 USD (âm thanh) |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,50 € (texte) |
+| Prix de sortie | Non disponible | 10,00 $ (audio) |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Gemini 2.0 Flash
+## Gemini 2.0 Flash
 
 *`gemini-2.0-flash`*
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 0,1 USD (văn bản / hình ảnh / video) 0,7 USD (âm thanh) |
-| Giá đầu ra | Miễn phí | $0,40 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Miễn phí | 0,025 USD / 1.000.000 mã thông báo (văn bản/hình ảnh/video) 0,175 USD / 1.000.000 mã thông báo (âm thanh) |
-| Lưu vào bộ nhớ đệm theo bối cảnh (bộ nhớ) | Không có | 1 USD / 1.000.000 mã thông báo mỗi giờ |
-| Giá của tính năng tạo hình ảnh | Không có ([đã tắt](https://ai.google.dev/gemini-api/docs/deprecations?hl=vi#gemini-2.0-models)) | Không có ([đã tắt](https://ai.google.dev/gemini-api/docs/deprecations?hl=vi#gemini-2.0-models)) |
-| Giá điều chỉnh | Không có | Không có |
-| Bám sát nguồn bằng Google Tìm kiếm | Miễn phí, tối đa 500 RPD | 1.500 RPD (miễn phí), sau đó là 35 USD / 1.000 câu lệnh cơ bản |
-| Neo bám vào Google Maps | 500 RPD | 1.500 RPD (miễn phí), sau đó là 25 USD / 1.000 câu lệnh cơ bản |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 0,10 $ (texte / image / vidéo) 0,70 $ (audio) |
+| Prix de sortie | Sans frais | 0,40 $ |
+| Tarifs de la mise en cache du contexte | Sans frais | 0,025 $ pour 1 000 000 de jetons (texte/image/vidéo) 0,175 $ pour 1 000 000 de jetons (audio) |
+| Mise en cache du contexte (stockage) | Non disponible | 1 $ / 1 000 000 de jetons par heure |
+| Tarifs de la génération d'images | Non disponible ([arrêtée](https://ai.google.dev/gemini-api/docs/deprecations?hl=fr#gemini-2.0-models)) | Non disponible ([arrêtée](https://ai.google.dev/gemini-api/docs/deprecations?hl=fr#gemini-2.0-models)) |
+| Prix de l'optimisation | Non disponible | Non disponible |
+| Ancrage avec la recherche Google | Sans frais, jusqu'à 500 RPD | 1 500 RPD (sans frais), puis 35 $ pour 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | 500 RPD | 1 500 RPD (sans frais), puis 25 $ pour 1 000 requêtes ancrées |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | $0,05 (văn bản / hình ảnh / video) $0,35 (âm thanh) |
-| Giá đầu ra | Không có | $0,20 |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,025 USD / 1.000.000 mã thông báo (văn bản/hình ảnh/video) 0,175 USD / 1.000.000 mã thông báo (âm thanh) |
-| Lưu vào bộ nhớ đệm theo bối cảnh (bộ nhớ) | Không có | 1 USD / 1.000.000 mã thông báo mỗi giờ |
-| Giá của tính năng tạo hình ảnh | Không có ([đã tắt](https://ai.google.dev/gemini-api/docs/deprecations?hl=vi#gemini-2.0-models)) | Không có ([đã tắt](https://ai.google.dev/gemini-api/docs/deprecations?hl=vi#gemini-2.0-models)) |
-| Giá điều chỉnh | Không có | Không có |
-| Bám sát nguồn bằng Google Tìm kiếm | Không có | 1.500 RPD (miễn phí), sau đó là 35 USD / 1.000 câu lệnh cơ bản |
-| Neo bám vào Google Maps | Không có | Không có |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,05 $ (texte / image / vidéo) 0,35 $ (audio) |
+| Prix de sortie | Non disponible | 0,20 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,025 $ pour 1 000 000 de jetons (texte/image/vidéo) 0,175 $ pour 1 000 000 de jetons (audio) |
+| Mise en cache du contexte (stockage) | Non disponible | 1 $ / 1 000 000 de jetons par heure |
+| Tarifs de la génération d'images | Non disponible ([arrêtée](https://ai.google.dev/gemini-api/docs/deprecations?hl=fr#gemini-2.0-models)) | Non disponible ([arrêtée](https://ai.google.dev/gemini-api/docs/deprecations?hl=fr#gemini-2.0-models)) |
+| Prix de l'optimisation | Non disponible | Non disponible |
+| Ancrage avec la recherche Google | Non disponible | 1 500 RPD (sans frais), puis 35 $ pour 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | Non disponible | Non disponible |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-[\*] Đầu ra là hình ảnh có giá 30 USD cho mỗi 1.000.000 mã thông báo. Hình ảnh đầu ra có kích thước tối đa 1024x1024px tiêu thụ 1290 mã thông báo và tương đương với 0,039 USD cho mỗi hình ảnh.
+[\*] La génération d'images est facturée 30 $ par tranche de 1 000 000 de jetons. Les images de sortie jusqu'à 1 024 x 1 024 px consomment 1 290 jetons et coûtent 0,039 $ par image.
 
-## Gemini 2.0 Flash-Lite
+## Gemini 2.0 Flash-Lite
 
 *`gemini-2.0-flash-lite`*
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 0,075 USD |
-| Giá đầu ra | Miễn phí | 0,3 USD |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | Không có |
-| Lưu vào bộ nhớ đệm theo bối cảnh (bộ nhớ) | Không có | Không có |
-| Giá điều chỉnh | Không có | Không có |
-| Bám sát nguồn bằng Google Tìm kiếm | Không có | Không có |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 0,075 $ |
+| Prix de sortie | Sans frais | 0,30 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | Non disponible |
+| Mise en cache du contexte (stockage) | Non disponible | Non disponible |
+| Prix de l'optimisation | Non disponible | Non disponible |
+| Ancrage avec la recherche Google | Non disponible | Non disponible |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 0,0375 USD |
-| Giá đầu ra | Không có | 0,15 USD |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | Không có |
-| Lưu vào bộ nhớ đệm theo bối cảnh (bộ nhớ) | Không có | Không có |
-| Giá điều chỉnh | Không có | Không có |
-| Bám sát nguồn bằng Google Tìm kiếm | Không có | Không có |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,0375 $ |
+| Prix de sortie | Non disponible | 0,15 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | Non disponible |
+| Mise en cache du contexte (stockage) | Non disponible | Non disponible |
+| Prix de l'optimisation | Non disponible | Non disponible |
+| Ancrage avec la recherche Google | Non disponible | Non disponible |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Imagen 4
+## Imagen 4
 
 *`imagen-4.0-generate-001`, `imagen-4.0-ultra-generate-001`, `imagen-4.0-fast-generate-001`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com/generate-image?hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com/generate-image?hl=fr)
 
-Mô hình tạo hình ảnh mới nhất của chúng tôi, có khả năng hiển thị văn bản tốt hơn đáng kể và chất lượng hình ảnh tổng thể tốt hơn.
+Notre dernier modèle de génération d'images, avec un rendu de texte et une qualité d'image globale nettement améliorés.
 
-Các mô hình xem trước có thể thay đổi trước khi trở nên ổn định và có giới hạn tốc độ hạn chế hơn.
+Les modèles en aperçu peuvent changer avant de devenir stables et avoir des limites de débit plus restrictives.
 
-|  | Bậc miễn phí | Gói trả phí, tính theo USD cho mỗi hình ảnh |
+|  | Niveau sans frais | Niveau payant, par image en USD |
 | --- | --- | --- |
-| Giá hình ảnh do Imagen 4 Fast tạo | Không có | 0,02 USD |
-| Giá hình ảnh tiêu chuẩn của Imagen 4 | Không có | 0,04 USD |
-| Giá hình ảnh của Imagen 4 Ultra | Không có | 0,06 USD |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix des images Imagen 4 Fast | Non disponible | 0,02 $ |
+| Prix des images standards Imagen 4 | Non disponible | 0,04 $ |
+| Prix des images Imagen 4 Ultra | Non disponible | 0,06 $ |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Veo 3.1
+## Veo 3.1
 
 *`veo-3.1-generate-preview`, `veo-3.1-fast-generate-preview`, `veo-3.1-lite-generate-preview`*
 
-[Dùng thử Veo 3.1](https://deepmind.google/models/veo/?hl=vi)
+[Essayer Veo 3.1](https://deepmind.google/models/veo/?hl=fr)
 
-Mô hình tạo video mới nhất của chúng tôi, được cung cấp cho các nhà phát triển trong cấp trả phí của Gemini API.
+Notre dernier modèle de génération de vidéos, disponible pour les développeurs avec le forfait payant de l'API Gemini.
 
-Các mô hình xem trước có thể thay đổi trước khi trở nên ổn định và có giới hạn tốc độ hạn chế hơn.
+Les modèles en aperçu peuvent changer avant de devenir stables et avoir des limites de débit plus restrictives.
 
-|  | Bậc miễn phí | Cấp có tính phí, tính theo giây bằng USD |
+|  | Niveau sans frais | Niveau payant, par seconde en USD |
 | --- | --- | --- |
-| Giá video Veo 3.1 Standard có âm thanh (mặc định) | Không có | 0,40 USD (720p và 1080p) 0,60 USD (4K) |
-| Giá video Veo 3.1 Fast có âm thanh (mặc định) | Không có | 0,1 USD (720p) 0,12 USD (1080p) 0,3 USD (4K) |
-| Giá video Veo 3.1 Lite có âm thanh (mặc định) | Không có | 0,05 USD (720p) 0,08 USD (1080p) (không hỗ trợ đầu ra 4K) |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix par défaut pour une vidéo Veo 3.1 Standard avec audio | Non disponible | 0,40 $ (720p et 1080p) 0,60 $ (4K) |
+| Prix par défaut pour une vidéo Veo 3.1 Fast avec audio | Non disponible | 0,10 $ (720p) 0,12 $ (1080p) 0,30 $ (4K) |
+| Vidéo Veo 3.1 Lite avec prix audio (par défaut) | Non disponible | 0,05 $ (720p) 0,08 $ (1080p) (sortie 4K non disponible) |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Veo 3
+## Veo 3
 
 *`veo-3.0-generate-001`, `veo-3.0-fast-generate-001`*
 
-[Dùng thử Veo 3](https://deepmind.google/models/veo/?hl=vi)
+[Essayer Veo 3](https://deepmind.google/models/veo/?hl=fr)
 
-Mô hình tạo video ổn định của chúng tôi, được cung cấp cho các nhà phát triển trong cấp trả phí của Gemini API.
+Notre modèle stable de génération de vidéos, disponible pour les développeurs dans le niveau payant de l'API Gemini.
 
-|  | Bậc miễn phí | Cấp có tính phí, tính theo giây bằng USD |
+|  | Niveau sans frais | Niveau payant, par seconde en USD |
 | --- | --- | --- |
-| Giá video có âm thanh của Veo 3 Standard (mặc định) | Không có | $0,40 |
-| Giá video có âm thanh của Veo 3 Fast (mặc định) | Không có | 0,1 USD (720p) 0,12 USD (1080p) 0,3 USD (4K) |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix par défaut pour une vidéo Veo 3 Standard avec audio | Non disponible | 0,40 $ |
+| Prix par défaut pour une vidéo Veo 3 Fast avec audio | Non disponible | 0,10 $ (720p) 0,12 $ (1080p) 0,30 $ (4K) |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Veo 2
+## Veo 2
 
 *`veo-2.0-generate-001`*
 
-[Dùng thử API](https://ai.google.dev/gemini-api/docs/video?hl=vi)
+[Essayer l'API](https://ai.google.dev/gemini-api/docs/video?hl=fr)
 
-Mô hình tạo video tiên tiến của chúng tôi, được cung cấp cho các nhà phát triển trong cấp trả phí của Gemini API.
+Notre modèle de génération de vidéos de pointe, disponible pour les développeurs dans le niveau payant de l'API Gemini.
 
-|  | Bậc miễn phí | Cấp có tính phí, tính theo giây bằng USD |
+|  | Niveau sans frais | Niveau payant, par seconde en USD |
 | --- | --- | --- |
-| Giá video | Không có | $0,35 |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de la vidéo | Non disponible | 0,35 $ |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Lyria 3
+## Lyria 3
 
-*`lyria-3-clip-preview` và `lyria-3-pro-preview`*
+*`lyria-3-clip-preview` et `lyria-3-pro-preview`*
 
-Bộ mô hình tạo nhạc của Google. Các mô hình xem trước có thể thay đổi trước khi trở nên ổn định và có giới hạn về tốc độ chặt chẽ hơn.
+Famille de modèles de génération de musique de Google. Les modèles en version Preview peuvent changer avant de devenir stables et avoir des limites de débit plus restrictives.
 
-|  | Bậc miễn phí | Cấp có tính phí, mỗi yêu cầu tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par requête en USD |
 | --- | --- | --- |
-| Bản xem trước đoạn video do Lyria 3 tạo (30 giây) | Không có | 0,04 USD cho mỗi bài hát |
-| Bản xem trước Lyria 3 Pro (Bài hát hoàn chỉnh) | Không có | 0,08 USD cho mỗi bài hát |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Aperçu de Lyria 3 (30 s) | Non disponible | 0,04 $ par titre |
+| Preview Lyria 3 Pro (titre complet) | Non disponible | 0,08 $ par titre |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Gemini Embedding 2
+## Embedding Gemini 2
 
 *`gemini-embedding-2`*
 
-[Dùng thử API](https://ai.google.dev/gemini-api/docs/embeddings?hl=vi)
+[Essayer l'API](https://ai.google.dev/gemini-api/docs/embeddings?hl=fr)
 
-Mô hình nhúng đa phương thức đầu tiên của chúng tôi, ánh xạ văn bản, hình ảnh, video, âm thanh và tệp PDF vào một không gian nhúng hợp nhất.
+Notre premier modèle d'embedding multimodal, qui mappe le texte, les images, les vidéos, l'audio et les PDF dans un espace d'embedding unifié.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Giá nhập văn bản | Miễn phí | $0,20 |
-| Giá nhập hình ảnh | Miễn phí | 0,45 USD (0,00012 USD cho mỗi hình ảnh) |
-| Giá đầu vào âm thanh | Miễn phí | 6,5 USD (0,00016 USD mỗi giây) |
-| Giá đầu vào của video | Miễn phí | 12 USD (0,00079 USD/khung hình) |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de la saisie de texte | Sans frais | 0,20 $ |
+| Prix de l'entrée d'image | Sans frais | 0,45 $ (0,00012 $ par image) |
+| Prix de l'entrée audio | Sans frais | 6,50 $ (0,00016 $ par seconde) |
+| Prix de l'entrée vidéo | Sans frais | 12 $ (0,00079 $ par frame) |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Giá nhập văn bản | Không có | $0,10 |
-| Giá nhập hình ảnh | Không có | 0,225 USD (0,00006 USD cho mỗi hình ảnh) |
-| Giá đầu vào âm thanh | Không có | 3,25 USD (0,00008 USD mỗi giây) |
-| Giá đầu vào của video | Không có | 6 USD (0,000395 USD/khung hình) |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de la saisie de texte | Non disponible | 0,10 $ |
+| Prix de l'entrée d'image | Non disponible | 0,225 $ (0,00006 $ par image) |
+| Prix de l'entrée audio | Non disponible | 3,25 $ (0,00008 $ par seconde) |
+| Prix de l'entrée vidéo | Non disponible | 6 $ (0,000395 $ par frame) |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Gemini Embedding
+## Embedding Gemini
 
 *`gemini-embedding-001`*
 
-[Dùng thử API](https://ai.google.dev/gemini-api/docs/embeddings?hl=vi)
+[Essayer l'API](https://ai.google.dev/gemini-api/docs/embeddings?hl=fr)
 
-Mô hình Gemini Embeddings của chúng tôi dành cho các trường hợp sử dụng chỉ văn bản, được cung cấp cho các nhà phát triển ở bậc miễn phí và có tính phí của Gemini API.
+Notre modèle Gemini Embeddings pour les cas d'utilisation uniquement basés sur du texte, disponible pour les développeurs dans les niveaux sans frais et payant de l'API Gemini.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 0,15 USD |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 0,15 $ |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 0,075 USD |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,075 $ |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Bản xem trước Gemini Robotics ER 2
+## Gemini Robotics ER 2 Preview
 
 *`gemini-robotics-er-2-preview`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-preview&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-preview&hl=fr)
 
-Gemini Robotics ER 2 (viết tắt của Gemini Robotics Embodied Reasoning 2) là một điểm cuối mô hình thị giác-ngôn ngữ, cho phép robot hiểu chính xác môi trường xung quanh, hỗ trợ việc điều phối các tác nhân của robot, hiểu tiến trình video, cộng tác giữa nhiều robot và suy luận không gian nâng cao.
+Gemini Robotics ER 2, abréviation de Gemini Robotics Embodied Reasoning 2, est un point de terminaison de modèle vision-langage qui permet aux robots de comprendre précisément leur environnement. Il prend en charge l'orchestration agentive des robots, la compréhension de la progression vidéo, la collaboration entre plusieurs robots et le raisonnement spatial avancé.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 2 USD (văn bản / hình ảnh / video / âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | 10 USD |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,20 1,00 / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Bám sát nguồn bằng Google Tìm kiếm | Không có | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 2,00 $ (texte / image / vidéo / audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 10 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,20 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Non disponible | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 1 USD (văn bản / hình ảnh / video / âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Không có | 5 USD |
-| Giá trong bộ nhớ đệm theo bối cảnh | Không có | 0,10 1,00 / 1.000.000 mã thông báo mỗi giờ (giá lưu trữ) |
-| Bám sát nguồn bằng Google Tìm kiếm | Không có | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 1,00 $ (texte / image / vidéo / audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 5 $ |
+| Tarifs de la mise en cache du contexte | Non disponible | 0,10 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Non disponible | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Bản xem trước Gemini Robotics ER 2 Streaming
+## Aperçu du streaming Gemini Robotics ER 2
 
 *`gemini-robotics-er-2-streaming-preview`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-streaming-preview&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-streaming-preview&hl=fr)
 
-Gemini Robotics ER 2 Streaming là một điểm cuối mô hình thị giác-ngôn ngữ cho robot, được tối ưu hoá để truyền văn bản theo thời gian thực bằng Live API. Gemini Pro chấp nhận thông tin đầu vào ở dạng văn bản, hình ảnh, video và âm thanh, đồng thời hỗ trợ truyền trực tuyến hai chiều bằng tính năng gọi hàm.
+Gemini Robotics ER 2 Streaming est un point de terminaison de modèle vision-langage pour la robotique, optimisé pour le streaming de texte en temps réel à l'aide de l'API Live. Elle accepte du texte, des images, des vidéos et de l'audio en entrée, et prend en charge le streaming bidirectionnel avec l'appel de fonction.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 2 USD (văn bản / hình ảnh / video / âm thanh) |
-| Giá đầu ra | Miễn phí | 10 USD |
-| Bám sát nguồn bằng Google Tìm kiếm | Không có | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 2,00 $ (texte / image / vidéo / audio) |
+| Prix de sortie | Sans frais | 10 $ |
+| Ancrage avec la recherche Google | Non disponible | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Bản xem trước Gemini Robotics ER 1.6
+## Gemini Robotics ER 1.6 (preview)
 
 *`gemini-robotics-er-1.6-preview`*
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-1.6-preview&hl=vi)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-1.6-preview&hl=fr)
 
-Gemini Robotics ER (viết tắt của Gemini Robotics – Embodied Reasoning) là một mô hình tư duy giúp tăng cường khả năng hiểu và tương tác của robot với thế giới thực.
+Gemini Robotics ER, abréviation de Gemini Robotics-Embodied Reasoning, est un modèle de réflexion qui améliore la capacité des robots à comprendre le monde physique et à interagir avec lui.
 
-### Chuẩn
+### Standard
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | 1 USD (văn bản / hình ảnh / video) 2 USD (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Miễn phí | 5 USD |
-| Bám sát nguồn bằng Google Tìm kiếm | Không có | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | 1,00 $ (texte / image / vidéo) 2,00 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 5 $ |
+| Ancrage avec la recherche Google | Non disponible | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### Theo nhóm
+### Lot
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 0,5 USD (văn bản / hình ảnh / video) 1 USD (âm thanh) |
-| Giá đầu ra (bao gồm cả mã thông báo suy nghĩ) | Không có | $2,50 |
-| Bám sát nguồn bằng Google Tìm kiếm | Không có | 5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả các mô hình Gemini 3.x), sau đó là 14 USD cho mỗi 1.000 yêu cầu. |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 0,50 $ (texte / image / vidéo) 1,00 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 2,50 $ |
+| Ancrage avec la recherche Google | Non disponible | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Bản xem trước Gemini 2.5 về việc sử dụng máy tính
+## Preview Gemini 2.5 Computer Use
 
 *`gemini-2.5-computer-use-preview-10-2025`*
 
-Mô hình Sử dụng máy tính của chúng tôi được tối ưu hoá để xây dựng các tác nhân kiểm soát trình duyệt nhằm tự động hoá các tác vụ.
+Notre modèle d'utilisation de l'ordinateur est optimisé pour la création d'agents de contrôle du navigateur qui automatisent les tâches.
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Không có | 1,25 USD, câu lệnh <= 200.000 mã thông báo 2,50 USD, câu lệnh > 200.000 mã thông báo |
-| Giá đầu ra | Không có | 10 USD, câu lệnh <= 200.000 mã thông báo 15 USD, câu lệnh > 200.000 |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Non disponible | 1, 25 $ pour les requêtes de 200 000 jetons ou moins 2, 50 $ pour les requêtes de plus de 200 000 jetons |
+| Prix de sortie | Non disponible | 10 $, requêtes <= 200 000 jetons 15 $, requêtes > 200 000 |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
 ## Gemma 4
 
-Mô hình mở gọn nhẹ, tiên tiến của chúng tôi được xây dựng dựa trên cùng một công nghệ hỗ trợ các mô hình Gemini.
+Notre modèle ouvert, léger et de pointe, basé sur la même technologie que celle de nos modèles Gemini.
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| Nhập giá | Miễn phí | Không có |
-| Giá đầu ra | Miễn phí | Không có |
-| Giá trong bộ nhớ đệm theo bối cảnh | Miễn phí | Không có |
-| Lưu vào bộ nhớ đệm theo bối cảnh (bộ nhớ) | Miễn phí | Không có |
-| Giá điều chỉnh | Không có | Không có |
-| Bám sát nguồn bằng Google Tìm kiếm | Không có | Không có |
-| Được dùng để cải thiện các sản phẩm của chúng tôi | [Có](https://ai.google.dev/gemini-api/terms?hl=vi) | [Không](https://ai.google.dev/gemini-api/terms?hl=vi) |
+| Prix de saisie | Sans frais | Non disponible |
+| Prix de sortie | Sans frais | Non disponible |
+| Tarifs de la mise en cache du contexte | Sans frais | Non disponible |
+| Mise en cache du contexte (stockage) | Sans frais | Non disponible |
+| Prix de l'optimisation | Non disponible | Non disponible |
+| Ancrage avec la recherche Google | Non disponible | Non disponible |
+| Utilisées pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Giá cho các công cụ
+## Tarifs des outils
 
-Các công cụ được định giá theo mức giá riêng và được áp dụng cho mô hình sử dụng các công cụ đó.
-Hãy xem trang [Mô hình](https://ai.google.dev/gemini-api/docs/models?hl=vi) để biết những công cụ có sẵn cho từng mô hình.
+Les outils sont facturés à leurs propres tarifs, appliqués au modèle qui les utilise.
+Consultez la page [Modèles](https://ai.google.dev/gemini-api/docs/models?hl=fr) pour connaître les outils disponibles pour chaque modèle.
 
-|  | Bậc miễn phí | Bậc có tính phí, cho mỗi 1 triệu mã thông báo tính bằng USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| [Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi#pricing) | 500 RPD miễn phí (hạn mức dùng chung cho Flash và Flash-Lite). Không áp dụng cho Pro. | Mô hình Gemini 2.5:  1.500 RPD miễn phí (hạn mức dùng chung cho Flash và Flash-Lite). Sau đó, 35 USD/1.000 câu lệnh có căn cứ   Mô hình Gemini 3:  5.000 yêu cầu tìm kiếm miễn phí mỗi tháng (dùng chung cho tất cả mô hình Gemini), sau đó là 14 USD/1.000 yêu cầu. |
-| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi#pricing_and_rate_limits) | 500 RPD Không có trong phiên bản Pro. | 1.500 RPD miễn phí (giới hạn dùng chung cho Flash và Flash-Lite) 10.000 RPD miễn phí cho Pro. Sau đó, bạn sẽ phải trả 25 USD cho 1.000 câu lệnh bị hạn chế |
-| [Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi#billing) | Miễn phí | Việc thực thi mã được tính phí theo mức giá mã thông báo tiêu chuẩn cho mô hình đã chọn. Chi phí chỉ được xác định dựa trên mức sử dụng công cụ, không có khoản phí nào được tích luỹ cho thời gian chạy phiên. Mã và kết quả thực thi được tạo sẽ được tính phí dưới dạng **Mã thông báo đầu ra** khi được tạo và dưới dạng **Mã thông báo đầu vào** khi mô hình sử dụng chúng trong quy trình suy luận lặp đi lặp lại. |
-| [Bối cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi#limitations) | Miễn phí | Tính phí theo số lượng mã thông báo đầu vào cho mỗi mô hình định giá. |
-| [Sử dụng máy tính](https://ai.google.dev/gemini-api/docs/computer-use?hl=vi) | Không có | Tính phí theo giá thông thường của mỗi mô hình (ví dụ: giá [Gemini 3.5 Flash](#gemini-3.6-flash) tiêu chuẩn). Hãy xem bảng giá [Gemini 2.5 Computer Use Preview](#gemini-2.5-computer-use-preview-10-2025) để biết mức giá của mô hình cũ. |
-| [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi#pricing) | Miễn phí | Tính phí cho [các mục nhúng](#gemini-embedding) ở mức 0,15 USD / 1 triệu mã thông báo. Mã thông báo tài liệu được truy xuất sẽ bị tính phí như mã thông báo thông thường theo mức giá của mô hình. |
-| [Điểm cuối Công cụ tuỳ chỉnh (Bản dùng thử Gemini 3.1 Pro)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=vi) | Không có | Tương tự như mức giá của [Gemini 3.1 Pro Preview](#gemini-3.1-pro-preview) |
+| [La recherche Google](https://ai.google.dev/gemini-api/docs/google-search?hl=fr#pricing) | 500 RPD sans frais (limite partagée pour Flash et Flash-Lite). Non disponible pour Pro. | Modèles Gemini 2.5 :  1 500 RPD sans frais (limite partagée pour Flash et Flash-Lite). Ensuite, 35 $ pour 1 000 requêtes ancrées   Modèles Gemini 3 :  5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini), puis 14 $ pour 1 000 requêtes. |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fr#pricing_and_rate_limits) | 500 RPD Non disponible pour Pro. | 1 500 RPD sans frais (limite partagée pour Flash et Flash-Lite) 10 000 RPD sans frais pour Pro. Puis 25 $ / 1 000 requêtes ancrées |
+| [Exécution de code](https://ai.google.dev/gemini-api/docs/code-execution?hl=fr#billing) | Sans frais | L'exécution de code est facturée aux tarifs standards des jetons pour le modèle sélectionné. Les coûts sont déterminés uniquement par l'utilisation de l'outil. Aucun frais n'est facturé pour la durée d'exécution de la session. Le code généré et les résultats de l'exécution sont facturés en tant que **jetons de sortie** lors de leur création, et en tant que **jetons d'entrée** lorsque le modèle les utilise dans le cadre de son processus de raisonnement itératif. |
+| [Contexte de l'URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr#limitations) | Sans frais | Facturé en tant que jetons d'entrée selon la tarification par modèle. |
+| [Utilisation de l'ordinateur](https://ai.google.dev/gemini-api/docs/computer-use?hl=fr) | Non disponible | Facturés comme des jetons standards selon la tarification du modèle (par exemple, la tarification standard de [Gemini 3.5 Flash](#gemini-3.6-flash)). Consultez le tableau des tarifs de l'[aperçu de Gemini 2.5 Computer Use](#gemini-2.5-computer-use-preview-10-2025) pour connaître les tarifs des anciens modèles. |
+| [Recherche de fichiers](https://ai.google.dev/gemini-api/docs/file-search?hl=fr#pricing) | Sans frais | Les [embeddings](#gemini-embedding) sont facturés 0,15 $ pour 1 million de jetons. Les jetons de documents récupérés sont facturés comme des jetons standards, selon la tarification du modèle. |
+| [Point de terminaison Custom Tools (version preview de Gemini 3.1 Pro)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=fr) | Non disponible | Identique aux tarifs de [Gemini 3.1 Pro Preview](#gemini-3.1-pro-preview) |
 
-## Giá dành cho đại lý
+## Tarifs pour les agents
 
-Chi phí sử dụng tác nhân được tính dựa trên mức tiêu thụ mã thông báo cơ bản và mức sử dụng các công cụ.
+Les coûts d'utilisation des agents sont calculés en fonction de la consommation de jetons sous-jacente et de l'utilisation des outils.
 
-|  | Mô hình | Công cụ |
+|  | Modèle | Outils |
 | --- | --- | --- |
-| [Tác nhân Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) | Tất cả hoạt động suy luận mô hình đều được tính phí theo mức giá tiêu chuẩn của danh sách Gemini, bao gồm cả mã thông báo đầu vào, đầu ra và đầu vào / lý luận trung gian được tạo trong các vòng lặp dựa trên tác nhân. | Phí sử dụng công cụ được áp dụng theo cấu trúc giá hiện tại, duy trì sự khác biệt tiêu chuẩn cho tính năng Nền tảng tìm kiếm (không bao gồm các mã thông báo đã truy xuất) so với Url\_context / Tìm kiếm tệp (các mã thông báo đã truy xuất được đưa vào tất cả các công cụ khác). |
-| [Tác nhân được quản lý trong Gemini API](https://ai.google.dev/gemini-api/docs/agents?hl=vi) | Tất cả hoạt động suy luận mô hình đều được tính phí theo mức giá tiêu chuẩn của danh sách Gemini, bao gồm cả token đầu vào, đầu ra và đầu vào / lý luận trung gian được tạo trong các vòng lặp có tác nhân. (Xem [thông tin chi tiết về giá](https://ai.google.dev/gemini-api/docs/agents?hl=vi#pricing)). | Bạn sẽ không bị tính phí cho hoạt động điện toán môi trường (CPU, bộ nhớ, thực thi hộp cát) trong thời gian xem trước. |
-| [Tác nhân Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=vi) | Tất cả hoạt động suy luận mô hình đều được tính phí theo mức giá tiêu chuẩn của danh sách Gemini, bao gồm cả token đầu vào, đầu ra và đầu vào / lý luận trung gian được tạo trong các vòng lặp có tác nhân. (Xem [thông tin chi tiết về giá](https://ai.google.dev/gemini-api/docs/agents?hl=vi#pricing)). | Bạn sẽ không bị tính phí cho hoạt động điện toán môi trường (CPU, bộ nhớ, thực thi hộp cát) trong thời gian xem trước. |
+| [Agent Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) | Toute inférence de modèle est facturée aux tarifs standards de Gemini, y compris les jetons d'entrée, de sortie et d'entrée / de raisonnement intermédiaires générés lors des boucles agentiques. | Les frais d'utilisation des outils s'appliquent selon la structure tarifaire existante, en conservant les distinctions standards entre l'ancrage de recherche (jetons récupérés exclus) et Url\_context / Recherche de fichiers (jetons récupérés inclus dans tous les autres outils). |
+| [Managed Agents dans l'API Gemini](https://ai.google.dev/gemini-api/docs/agents?hl=fr) | Toute inférence de modèle est facturée aux tarifs standards de Gemini, y compris les jetons d'entrée, de sortie et d'entrée / de raisonnement intermédiaires générés lors des boucles agentiques. (Consultez les [informations tarifaires](https://ai.google.dev/gemini-api/docs/agents?hl=fr#pricing).) | Le calcul de l'environnement (CPU, mémoire, exécution du bac à sable) n'est pas facturé pendant la période de preview. |
+| [Agent Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr) | Toute inférence de modèle est facturée aux tarifs standards de Gemini, y compris les jetons d'entrée, de sortie et d'entrée / de raisonnement intermédiaires générés lors des boucles agentiques. (Consultez les [informations tarifaires](https://ai.google.dev/gemini-api/docs/agents?hl=fr#pricing).) | Le calcul de l'environnement (CPU, mémoire, exécution du bac à sable) n'est pas facturé pendant la période de preview. |
 
-## Ghi chú
+## Remarques
 
-- **Tính phí theo mã thông báo tài liệu:** Mã thông báo cho phương thức `DOCUMENT` (ví dụ: tệp PDF) được tính phí theo tỷ lệ mã thông báo hình ảnh. Trong các phản hồi của API, những mã thông báo này xuất hiện trong phương thức `DOCUMENT` trong `promptTokensDetails`.
-- Bạn có thể sử dụng Google AI Studio miễn phí ở tất cả [các khu vực được hỗ trợ](https://ai.google.dev/gemini-api/docs/available-regions?hl=vi). Hãy xem phần [Câu hỏi thường gặp về việc thanh toán](https://ai.google.dev/gemini-api/docs/billing?hl=vi) để biết thêm thông tin chi tiết.
-- Giá có thể khác với giá niêm yết tại đây và giá được cung cấp trên Nền tảng Gemini Enterprise Agent. Để biết giá của Nền tảng tác nhân Gemini Enterprise, hãy xem [trang định giá Nền tảng tác nhân Gemini Enterprise](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=vi).
-- Nếu bạn đang sử dụng tính năng [truy xuất động](https://ai.google.dev/gemini-api/docs/grounding?hl=vi) để tối ưu hoá chi phí, thì chỉ những yêu cầu có chứa ít nhất một URL hỗ trợ neo bám từ web trong câu trả lời mới bị tính phí cho tính năng Neo bám vào Google Tìm kiếm.
-  Luôn áp dụng chi phí cho Gemini. Hạn mức tốc độ có thể thay đổi.
+- **Facturation des jetons de document** : les jetons pour la modalité `DOCUMENT` (par exemple, les PDF) sont facturés au tarif des jetons d'image. Dans les réponses de l'API, ces jetons apparaissent sous la modalité `DOCUMENT` dans `promptTokensDetails`.
+- L'utilisation de Google AI Studio est sans frais dans toutes les [régions disponibles](https://ai.google.dev/gemini-api/docs/available-regions?hl=fr). Pour en savoir plus, consultez les [questions fréquentes sur la facturation](https://ai.google.dev/gemini-api/docs/billing?hl=fr).
+- Les prix peuvent différer de ceux indiqués ici et de ceux proposés sur Gemini Enterprise Agent Platform. Pour connaître les tarifs de Gemini Enterprise Agent Platform, consultez la [page des tarifs de Gemini Enterprise Agent Platform](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=fr).
+- Si vous utilisez la [récupération dynamique](https://ai.google.dev/gemini-api/docs/grounding?hl=fr) pour optimiser les coûts, l'ancrage avec la recherche Google n'est facturé que pour les requêtes qui contiennent au moins une URL d'ancrage issue du Web dans leur réponse.
+  Les coûts de Gemini s'appliquent toujours. Les limites de débit sont susceptibles d'être modifiées.
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Cập nhật lần gần đây nhất: 2026-08-11 UTC.
+Dernière mise à jour le 2026/08/11 (UTC).
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-08-11 UTC."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/08/11 (UTC)."],[],[]]

@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/coding-agents?hl=tr
-fetched_at: 2026-08-24T02:23:26.109096+00:00
+fetched_at: 2026-08-31T06:33:41.584565+00:00
 title: "Gemini MCP ve Skills ile kodlama asistan\u0131n\u0131z\u0131 ayarlama \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

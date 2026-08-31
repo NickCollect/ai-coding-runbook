@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/flex-inference?hl=ko
-fetched_at: 2026-08-24T02:34:53.001022+00:00
-title: "\ud50c\ub809\uc2a4 \ucd94\ub860 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/flex-inference?hl=it
+fetched_at: 2026-08-31T06:37:03.561330+00:00
+title: "Inferenza flessibile \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-의견 보내기
+Invia feedback
 
-# 플렉스 추론
+# Inferenza flessibile
 
-설명: Flex 추론 등급으로 비용을 최적화하는 방법을 알아봅니다.
+Descrizione: scopri come ottimizzare i costi con il livello di inferenza Flex
 
-Gemini Flex API는 가변 지연 시간과 최선형 가용성을 제공하는 대신 표준 요금보다 50% 저렴한 추론 등급입니다. 동기식 처리가 필요하지만 표준 API의 실시간 성능은 필요하지 않은 지연 시간 허용 워크로드용으로 설계되었습니다.
+L'API Gemini Flex è un livello di inferenza che offre una riduzione dei costi del 50% rispetto alle tariffe standard, in cambio di latenza variabile e disponibilità best effort. È progettata per i carichi di lavoro tolleranti alla latenza che richiedono l'elaborazione sincrona, ma non le prestazioni in tempo reale dell'API standard.
 
-## Flex 사용 방법
+## Come utilizzare Flex
 
-Flex 등급을 사용하려면 요청 본문에서 `service_tier`를 `flex`로 지정합니다. 기본적으로 이 필드를 생략하면 요청에서 표준 등급을 사용합니다.
+Per utilizzare il livello Flex, specifica `service_tier` come `flex` nel corpo della richiesta. Per impostazione predefinita, le richieste utilizzano il livello standard se questo campo viene omesso.
 
 ### Python
 
@@ -68,7 +68,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### Vai
 
 ```
 package main
@@ -116,62 +116,65 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
 }'
 ```
 
-## Flex 추론 작동 방식
+## Come funziona l'inferenza Flex
 
-[Gemini Flex 추론은 표준 API와 Batch API의 24시간
-처리 시간 간의 격차를 해소합니다.](https://ai.google.dev/gemini-api/docs/batch-api?hl=ko) 비수기 '삭제 가능한' 컴퓨팅 용량을 활용하여 백그라운드 작업 및 순차적 워크플로를 위한 비용 효율적인 솔루션을 제공합니다.
+L'inferenza Gemini Flex colma il divario tra l'API standard e il tempo di risposta di 24 ore
+dell'[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=it). Utilizza la capacità di calcolo "sheddable" non di punta per fornire una soluzione conveniente per le attività in background e i flussi di lavoro sequenziali.
 
-| 기능 | Flex | 우선순위 | 표준 | 일괄 |
+| Funzionalità | Flex | Priorità | Standard | Batch |
 | --- | --- | --- | --- | --- |
-| **가격 책정** | 50% 할인 | 표준보다 75~100% 더 높음 | 정상가 | 50% 할인 |
-| **지연 시간** | 분 (1~15분 목표) | 낮음 (초) | 수 초에서 수 분 | 최대 24시간 |
-| **안정성** | 최선형 (삭제 가능) | 높음 (삭제 불가) | 높음/보통/높음 | 높음 (처리량) |
-| **인터페이스** | 동기식 | 동기식 | 동기식 | 비동기식 |
+| **Prezzi** | Sconto del 50% | 75-100% in più rispetto allo standard | Intero | Sconto del 50% |
+| **Latenza** | Minuti (target 1-15 min) | Bassa (secondi) | Da secondi a minuti | Fino a 24 ore |
+| **Affidabilità** | Best effort (sheddable) | Elevata (non sheddable) | Elevata / medio alta | Elevata (per il throughput) |
+| **Interfaccia** | Sincrona | Sincrona | Sincrona | Asincrona |
 
-### 주요 이점
+### Vantaggi principali
 
-- **비용 효율성**: 비프로덕션 평가, 백그라운드 에이전트, 데이터 보강에 상당한 비용 절감 효과가 있습니다.
-- **낮은 마찰**: 일괄 객체, 작업 ID, 폴링을 관리할 필요가 없습니다. 기존 요청에 단일 매개변수를 추가하기만 하면 됩니다.
-- **동기식 워크플로**: 다음 요청이 이전 요청의 출력에 종속되는 순차적 API 체인에 적합하므로 에이전트 워크플로에 일괄 처리보다 더 유연합니다.
+- **Efficienza dei costi**: risparmi significativi per le valutazioni non di produzione, gli agenti in background e l'arricchimento dei dati.
+- **Basso attrito**: non è necessario gestire oggetti batch, ID job o polling; basta aggiungere un singolo parametro alle richieste esistenti.
+- **Flussi di lavoro sincroni**: ideale per le catene di API sequenziali in cui la richiesta successiva dipende dall'output di quella precedente, il che la rende più flessibile rispetto a Batch per i flussi di lavoro agentici.
 
-### 사용 사례
+### Casi d'uso
 
-- **오프라인 평가**: 'LLM-as-a-judge' 회귀 테스트 또는 리더보드 실행
-- **백그라운드 에이전트**: 지연 시간이 허용되는 CRM 업데이트, 프로필 작성, 콘텐츠 조정과 같은 순차적 작업
-- **예산 제약이 있는 연구**: 제한된 예산으로 많은 토큰이 필요한 학술 실험
+- **Valutazioni offline**: esecuzione di test di regressione o classifiche "LLM-as-a-judge".
+- **Agenti in background**: attività sequenziali come aggiornamenti CRM, creazione di profili o moderazione dei contenuti in cui sono accettabili minuti di ritardo.
+- **Ricerca con limiti di budget**: esperimenti accademici che richiedono un volume elevato di token con un budget limitato.
 
-### 비율 제한
+### Limiti di frequenza
 
-[Flex 추론 트래픽은 일반 [비율 제한](https://aistudio.google.com/rate-limit?hl=ko)에 포함되며
-Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ko)와 같은 확장된 비율 제한을 제공하지 않습니다.
+Il traffico di inferenza Flex viene conteggiato ai fini dei limiti di frequenza [generali](https://aistudio.google.com/rate-limit?hl=it); non
+offre limiti di frequenza estesi come l'API [Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=it).
 
-### 삭제 가능한 용량
+### Capacità sheddable
 
-Flex 트래픽은 우선순위가 낮게 처리됩니다. 표준 트래픽이 급증하면 우선순위가 높은 사용자의 용량을 확보하기 위해 Flex 요청이 선점되거나 삭제될 수 있습니다. 우선순위가 높은 추론을 찾고 있다면
-[우선순위 추론](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ko)을 확인하세요.
+Il traffico Flex viene trattato con una priorità inferiore. Se si verifica un picco di traffico standard, le richieste Flex potrebbero essere interrotte o eliminate per garantire la capacità agli utenti con priorità elevata. Se stai cercando un'inferenza con priorità elevata, consulta
+[Inferenza con priorità](https://ai.google.dev/gemini-api/docs/priority-inference?hl=it)
 
-### 오류 코드
+### Codici di errore
 
-Flex 용량을 사용할 수 없거나 시스템이 정체된 경우 API는 표준 오류 코드를 반환합니다.
+Quando la capacità Flex non è disponibile o il sistema è congestionato, l'API restituisce i codici di errore standard:
 
-- **503 서비스를 사용할 수 없음**: 현재 시스템이 사용 한도에 도달했습니다.
-- **429 너무 많은 요청**: 비율 제한 또는 리소스 소진
+- **503 - Servizio non disponibile**: al momento il sistema ha raggiunto la capacità massima.
+- **429 - Troppe richieste**: limiti di frequenza o esaurimento delle risorse.
 
-### 클라이언트 책임
+### Responsabilità del cliente
 
-- **서버 측 대체 없음**: 예기치 않은 요금이 청구되지 않도록 Flex 용량이
-  가득 차면 시스템에서 Flex 요청을 표준 등급으로
-  자동 업그레이드하지 않습니다.
-- **재시도**: 지수 백오프를 사용하여 자체 클라이언트 측 재시도 로직을 구현해야 합니다.
-- **제한 시간**: Flex 요청이 대기열에 있을 수 있으므로 연결이 조기에 종료되지 않도록 클라이언트 측 제한 시간을 10분 이상으로 늘리는 것이 좋습니다.
+- **Nessun fallback lato server**: per evitare addebiti imprevisti, il sistema non
+  esegue automaticamente l'upgrade di una richiesta Flex al livello Standard se la capacità Flex è
+  piena.
+- **Nuovi tentativi**: devi implementare la tua logica di nuovi tentativi lato client con
+  backoff esponenziale.
+- **Timeout**: poiché le richieste Flex potrebbero rimanere in una coda, ti consigliamo
+  di aumentare i timeout lato client a 10 minuti o più per evitare la chiusura prematura
+  della connessione.
 
-## 제한 시간 창 조정
+## Regolare le finestre di timeout
 
-REST API 및 클라이언트 라이브러리에 요청별 제한 시간을 구성할 수 있으며 클라이언트 라이브러리를 사용하는 경우에만 전역 제한 시간을 구성할 수 있습니다.
+Puoi configurare i timeout per richiesta per l'API REST e le librerie client e i timeout globali solo quando utilizzi le librerie client.
 
-클라이언트 측 제한 시간이 의도한 서버 대기 창 (예: Flex 대기열의 경우 600초 이상)을 포함하는지 항상 확인하세요. SDK는 제한 시간 값을 밀리초 단위로 예상합니다.
+Assicurati sempre che il timeout lato client copra la finestra di attesa del server prevista (ad es. 600 secondi o più per le code di attesa Flex). Gli SDK prevedono valori di timeout in millisecondi.
 
-### 요청별 제한 시간
+### Timeout per richiesta
 
 ### Python
 
@@ -252,7 +255,7 @@ except Exception as e:
  await main();
 ```
 
-### Go
+### Vai
 
 ```
 package main
@@ -318,12 +321,12 @@ func main() {
 
 ### REST
 
-REST 호출을 할 때 HTTP 헤더와 `curl` 옵션을 조합하여 제한 시간을 제어할 수 있습니다.
+Quando effettui chiamate REST, puoi controllare i timeout utilizzando una combinazione di intestazioni HTTP e opzioni `curl`:
 
-- **`X-Server-Timeout` 헤더 (서버 측 제한 시간)**: 이 헤더는 Gemini API 서버에 선호하는 제한 시간 (기본값 600초)을 제안합니다. 서버는 이를 준수하려고 시도하지만 보장되지는 않습니다. 값은 초 단위여야 합니다.
-- **`--max-time`의 `curl`(클라이언트 측 제한 시간)**: `curl --max-time
-  <seconds>` 옵션은 전체 작업이 완료될 때까지 `curl`
-  이(가) 대기하는 총 시간(초)에 대한 엄격한 한도를 설정합니다. 이는 클라이언트 측 보호 조치입니다.
+- **Intestazione `X-Server-Timeout` (timeout lato server)**: questa intestazione suggerisce una durata di timeout preferita (valore predefinito 600 secondi) al server dell'API Gemini. Il server tenterà di rispettarla, ma non è garantito. Il valore deve essere espresso in secondi.
+- **`--max-time` in `curl` (timeout lato client)**: l'opzione `curl --max-time
+  <seconds>` imposta un limite rigido al tempo totale (in secondi) che `curl`
+  attenderà per il completamento dell'intera operazione. Si tratta di una salvaguardia lato client.
 
 ```
  # Set a server timeout hint of 120 seconds and a client-side curl timeout of 125 seconds.
@@ -339,9 +342,9 @@ REST 호출을 할 때 HTTP 헤더와 `curl` 옵션을 조합하여 제한 시�
  }'
 ```
 
-### 전역 제한 시간
+### Timeout globali
 
-특정 `genai.Client` 인스턴스(클라이언트 라이브러리만 해당)를 통해 이루어진 모든 API 호출에 기본 제한 시간을 적용하려면 `http_options` 및 `genai.types.HttpOptions`를 사용하여 클라이언트를 초기화할 때 이를 구성할 수 있습니다.
+Se vuoi che tutte le chiamate API effettuate tramite un'istanza `genai.Client` specifica (solo librerie client) abbiano un timeout predefinito, puoi configurarlo durante l'inizializzazione del client utilizzando `http_options` e `genai.types.HttpOptions`.
 
 ### Python
 
@@ -431,7 +434,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### Vai
 
 ```
  package main
@@ -488,9 +491,9 @@ await main();
  }
 ```
 
-## 재시도 구현
+## Implementare i nuovi tentativi
 
-Flex는 삭제 가능하고 503 오류로 인해 실패하므로 실패한 요청을 계속하기 위해 재시도 로직을 선택적으로 구현하는 예는 다음과 같습니다.
+Poiché Flex è sheddable e non riesce a eseguire le richieste con errori 503, ecco un esempio di implementazione facoltativa della logica di nuovi tentativi per continuare con le richieste non riuscite:
 
 ### Python
 
@@ -573,7 +576,7 @@ print(response.text)
  await main();
 ```
 
-### Go
+### Vai
 
 ```
  package main
@@ -632,43 +635,43 @@ print(response.text)
  }
 ```
 
-## 가격 책정
+## Prezzi
 
-Flex 추론은 [표준 API](https://ai.google.dev/gemini-api/docs/pricing?hl=ko)의 50% 로 가격이 책정되며
-토큰당 청구됩니다.
+L'inferenza Flex ha un prezzo pari al 50% dell'[API standard](https://ai.google.dev/gemini-api/docs/pricing?hl=it)
+e viene fatturata per token.
 
-## 지원되는 모델
+## Modelli supportati
 
-다음 모델은 Flex 추론을 지원합니다.
+I seguenti modelli supportano l'inferenza Flex:
 
-| 모델 | Flex 추론 |
+| Modello | Inferenza Flex |
 | --- | --- |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=ko) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=ko) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=ko) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ko) | ✔️ |
-| [Gemini 3.1 Pro 프리뷰](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ko) | ✔️ |
-| [Gemini 3 Flash 프리뷰](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ko) | ✔️ |
-| [Gemini 3 Pro Image 프리뷰](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=ko) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ko) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ko) | ✔️ |
-| [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=ko) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ko) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=it) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=it) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=it) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=it) | ✔️ |
+| [Gemini 3.1 Pro (anteprima)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=it) | ✔️ |
+| [Gemini 3 Flash (anteprima)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=it) | ✔️ |
+| [Gemini 3 Pro Image (anteprima)](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=it) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=it) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=it) | ✔️ |
+| [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=it) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=it) | ✔️ |
 
-## 다음 단계
+## Passaggi successivi
 
-Gemini의 다른 [추론 및 최적화](https://ai.google.dev/gemini-api/docs/optimization?hl=ko) 옵션에 대해 알아보세요.
+[Scopri di più sulle altre op0}zioni di inferenza e ottimizzazione](https://ai.google.dev/gemini-api/docs/optimization?hl=it) di Gemini:
 
-- [매우 짧은 지연 시간을 위한](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ko) 우선순위 추론
-- [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ko) 24시간 이내 비동기 처리를 위한
-- [입력 토큰 비용 절감을 위한 컨텍스트 캐싱](https://ai.google.dev/gemini-api/docs/caching?hl=ko)
+- [Inferenza con priorità](https://ai.google.dev/gemini-api/docs/priority-inference?hl=it) per una latenza molto bassa.
+- [API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=it) per l'elaborazione asincrona entro 24 ore.
+- [Memorizzazione nella cache del contesto](https://ai.google.dev/gemini-api/docs/caching?hl=it) per ridurre i costi dei token di input.
 
-의견 보내기
+Invia feedback
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-최종 업데이트: 2026-07-30(UTC)
+Ultimo aggiornamento 2026-07-30 UTC.
 
-의견을 전달하고 싶나요?
+Vuoi dirci altro?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-30(UTC)"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]

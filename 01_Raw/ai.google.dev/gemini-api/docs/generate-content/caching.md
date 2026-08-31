@@ -1,66 +1,66 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=it
-fetched_at: 2026-08-24T02:26:16.985918+00:00
-title: "Memorizzazione nella cache del contesto \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=pt-BR
+fetched_at: 2026-08-31T06:31:16.367538+00:00
+title: "O armazenamento em cache de contexto \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Invia feedback
+Envie comentários
 
-# Memorizzazione nella cache del contesto
+# O armazenamento em cache de contexto
 
-In un flusso di lavoro di AI tipico, potresti passare gli stessi token di input più e più volte a un modello. L'API Gemini offre due meccanismi di memorizzazione nella cache diversi:
+Em um fluxo de trabalho de IA típico, você pode transmitir os mesmos tokens de entrada várias vezes para um modelo. A API Gemini oferece dois mecanismos de armazenamento em cache diferentes:
 
-- Memorizzazione nella cache implicita (abilitata automaticamente su Gemini 2.5 e modelli più recenti, senza garanzia di risparmio sui costi)
-- Memorizzazione nella cache esplicita (può essere abilitata manualmente sulla maggior parte dei modelli, con garanzia di risparmio sui costi)
+- Armazenamento em cache implícito (ativado automaticamente nos modelos do Gemini 2.5 e mais recentes, sem garantia de economia de custos)
+- Armazenamento em cache explícito (pode ser ativado manualmente na maioria dos modelos, com garantia de economia de custos)
 
-La memorizzazione nella cache esplicita è utile nei casi in cui vuoi garantire un risparmio sui costi, ma con un po' di lavoro di sviluppo in più.
+O armazenamento em cache explícito é útil nos casos em que você quer garantir economia de custos, mas com algum trabalho extra do desenvolvedor.
 
-## Memorizzazione nella cache implicita
+## Armazenamento em cache implícito
 
-La memorizzazione nella cache implicita è abilitata per impostazione predefinita per tutti i modelli Gemini 2.5 e successivi. Trasmettiamo automaticamente i risparmi sui costi se la tua richiesta raggiunge le cache. Non devi fare nulla per abilitare questa funzionalità. Il conteggio minimo dei token di input per la memorizzazione nella cache del contesto è riportato nella tabella seguente per ogni modello:
+O armazenamento em cache implícito é ativado por padrão para todos os modelos do Gemini 2.5 e mais recentes. Transmitimos automaticamente a economia de custos se a solicitação atingir os caches. Não é necessário fazer nada para ativar isso. A contagem mínima de tokens de entrada para o armazenamento em cache de contexto está listada na tabela a seguir para cada modelo:
 
-| Modello | Limite minimo di token |
+| Modelo | Limite mínimo de tokens |
 | --- | --- |
 | Gemini 3.5 Flash | 4096 |
-| Gemini 3.1 Pro (anteprima) | 4096 |
+| Pré-lançamento do Gemini 3.1 Pro | 4096 |
 | Gemini 2.5 Flash | 2048 |
 | Gemini 2.5 Pro | 2048 |
 
-Per aumentare la probabilità di un successo della cache implicita:
+Para aumentar a chance de uma ocorrência em cache implícita:
 
-- Prova a inserire contenuti di grandi dimensioni e comuni all'inizio del prompt
-- Prova a inviare richieste con prefisso simile in un breve periodo di tempo
+- Tente colocar conteúdos grandes e comuns no início do comando
+- Tente enviar solicitações com prefixo semelhante em um curto período
 
-Puoi visualizzare il numero di token che sono stati hit della cache nel campo `usage_metadata` dell'oggetto della risposta.
+Você pode conferir o número de tokens que foram acertos de cache no campo `usage_metadata` do objeto de resposta.
 
-## Memorizzazione nella cache esplicita
+## Armazenamento em cache explícito
 
-Utilizzando la funzionalità di memorizzazione nella cache esplicita dell'API Gemini, puoi passare alcuni contenuti al modello una sola volta, memorizzare nella cache i token di input e poi fare riferimento ai token memorizzati nella cache per le richieste successive. Per determinati volumi, l'utilizzo di token memorizzati nella cache è meno costoso rispetto al passaggio ripetuto dello stesso corpus di token.
+Usando o recurso de armazenamento em cache explícito da API Gemini, você pode transmitir algum conteúdo para o modelo uma vez, armazenar os tokens de entrada em cache e, em seguida, consultar os tokens armazenados em cache para solicitações subsequentes. Em determinados volumes, o uso de tokens armazenados em cache é mais barato do que transmitir o mesmo corpus de tokens repetidamente.
 
-Quando memorizzi nella cache un insieme di token, puoi scegliere per quanto tempo vuoi che la cache esista prima che i token vengano eliminati automaticamente. Questa durata della memorizzazione nella cache è chiamata *durata (TTL)*. Se non viene impostata, la durata (TTL) è di 1 ora per impostazione predefinita. Il costo della memorizzazione nella cache dipende dalle dimensioni dei token di input e dalla durata di persistenza dei token.
+Ao armazenar um conjunto de tokens em cache, você pode escolher por quanto tempo quer que o cache exista antes que os tokens sejam excluídos automaticamente. Essa duração do armazenamento em cache é chamada de *tempo de vida útil* (TTL, na sigla em inglês). Se não for definido, o TTL será de 1 hora por padrão. O custo do armazenamento em cache depende do tamanho do token de entrada e de quanto tempo você quer que os tokens persistam.
 
-Questa sezione presuppone che tu abbia installato un SDK Gemini (o curl)
-e che tu abbia configurato una chiave API, come mostrato nella
-[Guida introduttiva](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=it).
+Esta seção pressupõe que você instalou um SDK do Gemini (ou tem o curl instalado)
+e configurou uma chave de API, conforme mostrado no
+[guia de introdução](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br).
 
-### Generare contenuti utilizzando una cache
+### Gerar conteúdo usando um cache
 
 ### Python
 
-L'esempio seguente mostra come generare contenuti utilizzando un'istruzione di sistema e un file video memorizzati nella cache.
+O exemplo a seguir mostra como gerar conteúdo usando uma instrução do sistema armazenada em cache e um arquivo de vídeo.
 
-### Video
+### Vídeos
 
 ```
 import os
@@ -119,7 +119,7 @@ print(response.usage_metadata)
 print(response.text)
 ```
 
-### PDF
+### PDFs
 
 ```
 from google import genai
@@ -167,7 +167,7 @@ print('\n\n', response.text)
 
 ### JavaScript
 
-L'esempio seguente mostra come generare contenuti utilizzando un'istruzione di sistema e un file di testo memorizzati nella cache.
+O exemplo a seguir mostra como gerar conteúdo usando uma instrução do sistema armazenada em cache e um arquivo de texto.
 
 ```
 import {
@@ -206,9 +206,9 @@ async function main() {
 await main();
 ```
 
-### Vai
+### Go
 
-L'esempio seguente mostra come generare contenuti utilizzando una cache.
+O exemplo a seguir mostra como gerar conteúdo usando um cache.
 
 ```
 package main
@@ -278,9 +278,9 @@ func main() {
 
 ### REST
 
-L'esempio seguente mostra come creare una cache e poi utilizzarla per generare contenuti.
+O exemplo a seguir mostra como criar um cache e usá-lo para gerar conteúdo.
 
-### Video
+### Vídeos
 
 ```
 wget https://storage.googleapis.com/generativeai-downloads/data/a11.txt
@@ -331,7 +331,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
     }'
 ```
 
-### PDF
+### PDFs
 
 ```
 DOC_URL="https://sma.nasa.gov/SignificantIncidents/assets/a11_missionreport.pdf"
@@ -429,22 +429,22 @@ cat response.json
 echo jq ".candidates[].content.parts[].text" response.json
 ```
 
-### Elencare le cache
+### Listar caches
 
-Non è possibile recuperare o visualizzare i contenuti memorizzati nella cache, ma puoi recuperare
-i metadati della cache (`name`, `model`, `display_name`, `usage_metadata`,
+Não é possível recuperar ou visualizar o conteúdo armazenado em cache, mas você pode recuperar
+metadados de cache (`name`, `model`, `display_name`, `usage_metadata`,
 `create_time`, `update_time` e `expire_time`).
 
 ### Python
 
-Per elencare i metadati di tutte le cache caricate, utilizza `CachedContent.list()`:
+Para listar os metadados de todos os caches enviados, use `CachedContent.list()`:
 
 ```
 for cache in client.caches.list():
   print(cache)
 ```
 
-Per recuperare i metadati di un oggetto cache, se ne conosci il nome, utilizza `get`:
+Para buscar os metadados de um objeto de cache, se você souber o nome dele, use `get`:
 
 ```
 client.caches.get(name=name)
@@ -452,7 +452,7 @@ client.caches.get(name=name)
 
 ### JavaScript
 
-Per elencare i metadati di tutte le cache caricate, utilizza `GoogleGenAI.caches.list()`:
+Para listar os metadados de todos os caches enviados, use `GoogleGenAI.caches.list()`:
 
 ```
 console.log("My caches:");
@@ -467,9 +467,9 @@ while (true) {
 }
 ```
 
-### Vai
+### Go
 
-L'esempio seguente elenca tutte le cache.
+O exemplo a seguir lista todos os caches.
 
 ```
 caches, err := client.Caches.All(ctx)
@@ -482,7 +482,7 @@ for _, item := range caches {
 }
 ```
 
-L'esempio seguente elenca le cache utilizzando una dimensione della pagina di 2.
+O exemplo a seguir lista caches usando um tamanho de página de 2.
 
 ```
 page, err := client.Caches.List(ctx, &genai.ListCachedContentsConfig{PageSize: 2})
@@ -515,13 +515,13 @@ for {
 curl "https://generativelanguage.googleapis.com/v1beta/cachedContents?key=$GEMINI_API_KEY"
 ```
 
-### Aggiornare una cache
+### Atualizar um cache
 
-Puoi impostare una nuova `ttl` o `expire_time` per una cache. La modifica di qualsiasi altro aspetto della cache non è supportata.
+Você pode definir um novo `ttl` ou `expire_time` para um cache. Não é possível mudar mais nada sobre o cache.
 
 ### Python
 
-L'esempio seguente mostra come aggiornare la `ttl` di una cache utilizzando `client.caches.update()`.
+O exemplo a seguir mostra como atualizar o `ttl` de um cache usando `client.caches.update()`.
 
 ```
 from google import genai
@@ -535,10 +535,11 @@ client.caches.update(
 )
 ```
 
-Per impostare la data di scadenza, accetta un oggetto `datetime`o una stringa datetime in formato ISO (`dt.isoformat()`, ad esempio
-`2025-01-27T16:02:36.473528+00:00`). L'ora deve includere un fuso orario
-(`datetime.utcnow()` non associa un fuso orario,
-`datetime.now(datetime.timezone.utc)` associa un fuso orario).
+Para definir o expiry time, ele aceita um objeto `datetime`
+ou uma string de data e hora formatada em ISO (`dt.isoformat()`, como
+`2025-01-27T16:02:36.473528+00:00`). O horário precisa incluir um fuso horário
+(`datetime.utcnow()` não anexa um fuso horário,
+`datetime.now(datetime.timezone.utc)` anexa um fuso horário).
 
 ```
 from google import genai
@@ -558,7 +559,7 @@ client.caches.update(
 
 ### JavaScript
 
-L'esempio seguente mostra come aggiornare la `ttl` di una cache utilizzando `GoogleGenAI.caches.update()`.
+O exemplo a seguir mostra como atualizar o `ttl` de um cache usando `GoogleGenAI.caches.update()`.
 
 ```
 const ttl = `${2 * 3600}s`; // 2 hours in seconds
@@ -569,9 +570,9 @@ const updatedCache = await ai.caches.update({
 console.log("After update (TTL):", updatedCache);
 ```
 
-### Vai
+### Go
 
-L'esempio seguente mostra come aggiornare la `TTL` di una cache.
+O exemplo a seguir mostra como atualizar o `TTL` de um cache.
 
 ```
 // Update the TTL (2 hours).
@@ -587,7 +588,7 @@ fmt.Println(cache)
 
 ### REST
 
-L'esempio seguente mostra come aggiornare la `ttl` di una cache.
+O exemplo a seguir mostra como atualizar o `ttl` de um cache.
 
 ```
 curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY" \
@@ -595,9 +596,9 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=
 -d '{"ttl": "600s"}'
 ```
 
-### Eliminare una cache
+### Excluir um cache
 
-Il servizio di memorizzazione nella cache fornisce un'operazione di eliminazione per rimuovere manualmente i contenuti dalla cache. L'esempio seguente mostra come eliminare una cache:
+O serviço de armazenamento em cache oferece uma operação de exclusão para remover manualmente o conteúdo do cache. O exemplo a seguir mostra como excluir um cache:
 
 ### Python
 
@@ -611,7 +612,7 @@ client.caches.delete(cache.name)
 await ai.caches.delete({ name: cache.name });
 ```
 
-### Vai
+### Go
 
 ```
 _, err = client.Caches.Delete(ctx, cache.Name, &genai.DeleteCachedContentConfig{})
@@ -627,49 +628,49 @@ fmt.Println("Cache deleted:", cache.Name)
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY"
 ```
 
-### Memorizzazione nella cache esplicita utilizzando la libreria OpenAI
+### Armazenamento em cache explícito usando a biblioteca OpenAI
 
-Se utilizzi una [libreria OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=it), puoi abilitare la
-memorizzazione nella cache esplicita utilizzando la proprietà `cached_content` su
-[`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=it#extra-body).
+Se você estiver usando uma [biblioteca OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=pt-br), poderá ativar o
+armazenamento em cache explícito usando a propriedade `cached_content` em
+[`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=pt-br#extra-body).
 
-## Quando utilizzare la memorizzazione nella cache esplicita
+## Quando usar o armazenamento em cache explícito
 
-La memorizzazione nella cache del contesto è particolarmente adatta agli scenari in cui un contesto iniziale sostanziale viene referenziato ripetutamente da richieste più brevi. Valuta la possibilità di utilizzare la memorizzazione nella cache del contesto per casi d'uso come:
+O armazenamento em cache de contexto é particularmente adequado para cenários em que um contexto inicial substancial é referenciado repetidamente por solicitações mais curtas. Use armazenamento em cache de contexto para casos de uso como estes:
 
-- Chatbot con istruzioni di sistema estese [system instructions](https://ai.google.dev/gemini-api/docs/system-instructions?hl=it)
-- Analisi ripetitiva di file video lunghi
-- Query ricorrenti su grandi set di documenti
-- Analisi frequente del repository di codice o correzione di bug
+- Chatbots com instruções [abrangentes do sistema](https://ai.google.dev/gemini-api/docs/system-instructions?hl=pt-br)
+- Análise repetitiva de arquivos de vídeo longos
+- Consultas recorrentes em grandes conjuntos de documentos
+- Análise frequente do repositório de código ou correção de bugs
 
-### In che modo la memorizzazione nella cache esplicita riduce i costi
+### Como o armazenamento em cache explícito reduz os custos
 
-La memorizzazione nella cache del contesto è una funzionalità a pagamento progettata per ridurre i costi. La fatturazione si basa sui seguenti fattori:
+O armazenamento em cache de contexto é um recurso pago projetado para reduzir o custo. O faturamento é baseado nos seguintes fatores:
 
-1. **Conteggio dei token della cache:** il numero di token di input memorizzati nella cache, fatturati a una tariffa ridotta se inclusi nei prompt successivi.
-2. **Durata di archiviazione:** il periodo di tempo in cui i token memorizzati nella cache vengono archiviati (durata (TTL)), fatturati in base alla durata (TTL) del conteggio dei token memorizzati nella cache. Non esistono limiti minimi o massimi per la durata (TTL).
-3. **Altri fattori:** si applicano altri addebiti, ad esempio per i token di input e di output non memorizzati nella cache.
+1. **Contagem de tokens de cache**:o número de tokens de entrada armazenados em cache, faturados com uma taxa reduzida quando incluído nos comandos subsequentes.
+2. **Duração do armazenamento**:o tempo de armazenamento e cobrança dos tokens em cache (TTL), faturado com base na duração do TTL da contagem de tokens armazenados em cache. Não há limites mínimos ou máximos no TTL.
+3. **Outros fatores**:outras cobranças se aplicam, como tokens de entrada não armazenados em cache e tokens de saída.
 
-Per informazioni aggiornate sui prezzi, consulta la pagina dei prezzi dell'API Gemini [pricing
-page](https://ai.google.dev/pricing?hl=it). Per scoprire come contare i token, consulta la [Token
-guide](https://ai.google.dev/gemini-api/docs/tokens?hl=it).
+Para detalhes de preços atualizados, consulte a página de preços da API Gemini [pricing
+page](https://ai.google.dev/pricing?hl=pt-br). Para saber como contar tokens, consulte o [guia
+de tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br).
 
-### Considerazioni aggiuntive
+### Outras considerações
 
-Tieni presente le seguenti considerazioni quando utilizzi la memorizzazione nella cache del contesto:
+Considere o seguinte ao usar o armazenamento em cache de contexto:
 
-- Il conteggio dei token di input *minimo* per la memorizzazione nella cache del contesto varia in base al modello. Il valore *massimo* è lo stesso del valore massimo per il modello specificato. Per ulteriori informazioni sul conteggio dei token,
-  consulta la [guida ai token](https://ai.google.dev/gemini-api/docs/tokens?hl=it)).
-- Il modello non fa distinzione tra token memorizzati nella cache e token di input normali. I contenuti memorizzati nella cache sono un prefisso del prompt.
-- Non esistono limiti di tariffa o di utilizzo speciali per la memorizzazione nella cache del contesto; si applicano i limiti di frequenza standard per `GenerateContent` e i limiti di token includono i token memorizzati nella cache.
-- Il numero di token memorizzati nella cache viene restituito in `usage_metadata` dalle operazioni di creazione, recupero ed elenco del servizio di memorizzazione nella cache, nonché in `GenerateContent` quando si utilizza la cache.
+- A contagem *mínima* de tokens de entrada para o armazenamento em cache de contexto varia de acordo com o modelo. O *máximo* é o mesmo do modelo em questão. Para mais informações sobre como contar tokens,
+  consulte o [guia de tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br)).
+- O modelo não faz distinção entre tokens armazenados em cache e tokens de entrada normais. O conteúdo armazenado em cache é um prefixo do comando.
+- Não há limites de taxa ou uso especiais no armazenamento em cache de contexto. Os limites de taxa padrão para `GenerateContent` se aplicam, e os limites de tokens incluem tokens armazenados em cache.
+- O número de tokens armazenados em cache é retornado no `usage_metadata` das operações de criação, recebimento e listagem do serviço de cache, e também em `GenerateContent` ao usar o cache.
 
-Invia feedback
+Envie comentários
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Ultimo aggiornamento 2026-07-30 UTC.
+Última atualização 2026-07-30 UTC.
 
-Vuoi dirci altro?
+Quer enviar seu feedback?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-07-30 UTC."],[],[]]

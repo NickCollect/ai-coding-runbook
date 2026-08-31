@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=fr
-fetched_at: 2026-08-24T02:25:57.302418+00:00
+fetched_at: 2026-08-31T06:32:34.162478+00:00
 title: "URLs de contexte \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

@@ -1,138 +1,138 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=ko
-fetched_at: 2026-08-24T02:33:44.176415+00:00
-title: "AI Studio Playground\uc758 \uc5d0\uc774\uc804\ud2b8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=de
+fetched_at: 2026-08-31T06:37:32.852638+00:00
+title: "KI-Agenten im AI\u00a0Studio-Playground \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-의견 보내기
+Feedback geben
 
-# AI Studio Playground의 에이전트
+# KI-Agenten im AI Studio-Playground
 
-Google AI Studio Playground는 API 호출을 만들고 작성하지 않고도 관리형 에이전트를 빌드하는 방법을 프로토타입으로 만들고 학습할 수 있는 시각적 인터페이스를 제공합니다.
+Google AI Studio Playground bietet eine visuelle Oberfläche, mit der Sie Prototypen erstellen und lernen können, wie Sie verwaltete Agents entwickeln, ohne API-Aufrufe erstellen und schreiben zu müssen.
 
-시작하려면 Google AI Studio의 탐색 패널에서 **Playground** 탭으로 이동하고 전환 버튼을 **Agents**로 전환합니다.
+Rufen Sie dazu in der Navigationsleiste von Google AI Studio den Tab **Playground** auf und stellen Sie den Schalter auf **Agents**.
 
-## 사전 빌드된 템플릿
+## Vordefinierte Vorlagen
 
-**에이전트** 탭에는 도구 및 환경 구성을 설정하여 기본 Antigravity 에이전트를 사전 구성하는 일련의 템플릿이 있습니다. 모든 템플릿은 오픈소스이며 [google-gemini/gemini-managed-agents-templates](https://github.com/google-gemini/gemini-managed-agents-templates/) 저장소에 게시됩니다. 이러한 템플릿을 살펴보면 자체 관리 에이전트를 빌드하고 구조화하는 방법을 알 수 있습니다.
+Auf dem Tab **Agents** (KI-Agenten) finden Sie eine Reihe von Vorlagen, mit denen der Antigravity-Basis-KI-Agent durch Festlegen von Tool- und Umgebungskonfigurationen vorkonfiguriert wird. Alle Vorlagen sind Open Source und werden im Repository [google-gemini/gemini-managed-agents-templates](https://github.com/google-gemini/gemini-managed-agents-templates/) veröffentlicht. Wenn Sie sich diese Vorlagen ansehen, können Sie lernen, wie Sie Ihren eigenen verwalteten Agent erstellen und strukturieren.
 
-예를 들어 AI Radio 템플릿을 선택하면 허용된 모든 도구가 사용 설정되고 라디오 프로그램 제작을 위한 전문 `AGENTS.md` 파일과 기능이 연결됩니다. **소스** 버튼을 클릭하면 플레이그라운드 UI의 **환경** 섹션에서 이러한 설정을 확인할 수 있습니다.
+Wenn Sie beispielsweise die Vorlage „KI‑Radio“ auswählen, werden alle zulässigen Tools aktiviert und eine spezielle `AGENTS.md`-Datei sowie Skills für die Produktion von Radiosendungen verknüpft. Sie können diese Einstellungen in der Playground-Benutzeroberfläche im Bereich **Environment** (Umgebung) aufrufen, indem Sie auf die Schaltfläche **Sources** (Quellen) klicken.
 
-## 도구 구성
+## Toolkonfiguration
 
-Playground의 에이전트 설정에서 다음 기본 제공 도구에 대한 액세스를 전환할 수 있습니다.
+In den Agent-Einstellungen im Playground können Sie den Zugriff auf die folgenden integrierten Tools aktivieren oder deaktivieren:
 
-- **Google 검색:** 오픈 웹에 액세스하여 실시간 정보 그라운딩을 수행합니다.
-- **URL 컨텍스트:** 특정 웹페이지 URL의 텍스트 콘텐츠를 가져와 파싱합니다.
-- **코드 실행:** 격리된 샌드박스 환경 내에서 직접 Bash 및 Python 명령어를 실행합니다.
-- **파일 시스템 도구:** 작업공간 내에서 파일을 읽고, 쓰고, 나열하고, 삭제합니다.
+- **Google Suche**:Auf das öffentliche Web zugreifen, um Echtzeitinformationen zu erhalten.
+- **URL-Kontext**:Textinhalte bestimmter Webseiten-URLs abrufen und parsen.
+- **Codeausführung**:Bash- und Python-Befehle direkt in der isolierten Sandbox-Umgebung ausführen.
+- **Dateisystemtools**:Dateien im Arbeitsbereich lesen, schreiben, auflisten und löschen.
 
-## 환경 구성
+## Umgebung konfigurieren
 
-관리 에이전트는 작업에 필요한 작업공간과 도구를 제공하는 안전한 임시 Linux 샌드박스 (환경) 내에서 실행됩니다. 자세한 내용은 [관리 에이전트 환경](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko) 가이드를 참고하세요.
+Verwaltete Agents werden in einer sicheren, kurzlebigen Linux-Sandbox (der Umgebung) ausgeführt, die den Arbeitsbereich und die Tools bereitstellt, die sie für ihre Arbeit benötigen. Weitere Informationen finden Sie im Leitfaden zur [verwalteten Agent-Umgebung](https://ai.google.dev/gemini-api/docs/agent-environment?hl=de).
 
-### 에이전트 동작 제어
+### Agent-Verhalten steuern
 
-에이전트의 동작, 페르소나, 기능은 환경에 있는 파일에 의해 주로 결정됩니다. 에이전트는 특수 `.agents` 폴더에서 구성을 자동으로 감지하고 로드합니다.
+Das Verhalten, die Persona und die Funktionen des Agenten werden hauptsächlich durch die Dateien in seiner Umgebung bestimmt. Der Agent erkennt und lädt Konfigurationen automatisch aus einem speziellen `.agents`-Ordner:
 
-- **`AGENTS.md`**: 시스템 요청 사항과 페르소나를 정의하기 위해 에이전트의 컨텍스트에 미리 로드됩니다.
-- **`SKILL.md`**: 특정 기능과 워크플로를 정의하기 위해 각 스킬 폴더 (예: `.agents/skills/my-skill/SKILL.md`) 아래에 있습니다.
+- **`AGENTS.md`**: Vorgegeben im Kontext des Agenten, um Systemanweisungen und Persona zu definieren.
+- **`SKILL.md`**: Diese Dateien befinden sich in den jeweiligen Skill-Ordnern (z.B. `.agents/skills/my-skill/SKILL.md`), um bestimmte Funktionen und Workflows zu definieren.
 
-### 환경 프로비저닝
+### Umgebung bereitstellen
 
-세션을 시작하기 전에 환경에 파일을 마운트하여 에이전트에서 사용할 환경을 구성할 수 있습니다. 소스를 마운트하여 새 환경을 빌드하거나 이전 환경을 복원할 수 있습니다.
+Sie können die vom Agent verwendete Umgebung konfigurieren, indem Sie Dateien in die Umgebung einbinden, bevor Sie eine Sitzung starten. Sie können entweder eine neue Umgebung erstellen, indem Sie Quellen einbinden, oder eine vorherige Umgebung wiederherstellen:
 
-- **새 환경을 만들려면** 환경 설정 패널에서 **소스 추가**를 클릭하고 다음 소스 유형 중에서 선택합니다.
+- **So erstellen Sie eine neue Umgebung**: Klicken Sie im Bereich „Umgebungseinstellungen“ auf **Quellen hinzufügen** und wählen Sie einen der folgenden Quelltypen aus:
 
-| 소스 유형 | 설명 | 마운트 경로 |
+| Quelltyp | Beschreibung | Bereitstellungspfad |
 | --- | --- | --- |
-| **인라인 파일** | 구성 파일, 모의 데이터 세트 또는 유틸리티 스크립트 (최대 100KB)를 Playground UI에 직접 작성하거나 붙여넣습니다. | 사용자 정의 대상 경로 (예: `/workspace/scripts/parser.py`) |
-| **Google Cloud Storage** | 공개 또는 비공개 Cloud Storage 버킷을 마운트합니다.  비공개 버킷에는 표준 OAuth 2.0 Bearer 토큰이 필요합니다. 자세한 내용은 [비공개 소스](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko#private-sources)를 참고하세요. | GCS 버킷 경로 (예: `gs://your-bucket-name/data/`)를 워크스페이스 디렉터리 (예: `/workspace/data/`)에 매핑합니다. |
-| **GitHub 저장소** | 공개 또는 비공개 코드베이스를 클론합니다.  비공개 저장소에는 GitHub 개인 액세스 토큰 (PAT)을 사용한 기본 인증이 필요합니다. 자세한 내용은 [비공개 소스](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko#private-sources)를 참고하세요. | `/workspace/` (일반적으로 `/workspace/<repo-name>` 아래)에 직접 클론됩니다. |
+| **Inline-Dateien** | Konfigurationsdateien, Mock-Datasets oder Utility-Scripts (bis zu 100 KB) können direkt in die Playground-Benutzeroberfläche geschrieben oder eingefügt werden. | Benutzerdefinierter Zielpfad (z.B. `/workspace/scripts/parser.py`). |
+| **Google Cloud Storage** | Einen öffentlichen oder privaten Cloud Storage-Bucket einbinden  Für private Buckets ist ein standardmäßiges OAuth 2.0-Inhabertoken erforderlich. Weitere Informationen finden Sie unter [Private Quellen](https://ai.google.dev/gemini-api/docs/agent-environment?hl=de#private-sources). | Ordnet einen GCS-Bucket-Pfad (z.B. `gs://your-bucket-name/data/`) einem Workspace-Verzeichnis (z.B. `/workspace/data/`) zu. |
+| **GitHub-Repositories** | Öffentliche oder private Codebases klonen  Für private Repositories ist die Standardauthentifizierung mit Ihrem persönlichen GitHub-Zugriffstoken (Personal Access Token, PAT) erforderlich. Weitere Informationen finden Sie unter [Private Quellen](https://ai.google.dev/gemini-api/docs/agent-environment?hl=de#private-sources). | Direkt in `/workspace/` geklont (in der Regel unter `/workspace/<repo-name>`). |
 
-- **이전 환경을 복원**하려면 [기존 환경 ID를 재사용](#reusing-an-existing-environment-id)하여 정확한 상태를 클론하고 포크하면 됩니다.
+- **Wenn Sie eine frühere Umgebung wiederherstellen möchten**, können Sie [eine vorhandene Umgebungs-ID wiederverwenden](#reusing-an-existing-environment-id), um ihren genauen Status zu klonen und zu forken.
 
-### 기존 환경 ID 재사용
+### Vorhandene Umgebungs-ID wiederverwenden
 
-샌드박스 환경을 이미 설정한 경우 처음부터 시작하지 않아도 됩니다. 기존 환경을 사용하려면 다음 단계를 따르세요.
+Wenn Sie bereits eine Sandbox-Umgebung eingerichtet haben, müssen Sie nicht von vorn beginnen. So verwenden Sie eine vorhandene Umgebung:
 
-1. AI Studio의 환경 패널로 이동하여 **유형**을 **기존**으로 전환합니다.
-2. **환경 ID** (예: `env_abc123`)를 입력합니다.
+1. Rufen Sie in AI Studio den Bereich „Umgebungen“ auf und stellen Sie **Typ** auf **Vorhanden** um.
+2. Geben Sie die **Umgebungs-ID** ein, z. B. `env_abc123`.
 
-자세한 내용은 [환경 구성](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko#configure-an-environment)을 참고하세요. UI의 환경 탭에서 현재 세션의 환경 ID를 검색할 수도 있습니다.
+Weitere Informationen finden Sie unter [Umgebung konfigurieren](https://ai.google.dev/gemini-api/docs/agent-environment?hl=de#configure-an-environment). Sie können die Umgebungs-ID der aktuellen Sitzung auch auf dem Tab „Umgebung“ in der Benutzeroberfläche abrufen.
 
-상담사에게 첫 번째 메시지를 보내면 해당 세션의 환경 구성이 고정됩니다. 상호작용이 활성 상태로 실행되는 동안에는 새 소스를 마운트하거나 네트워크 허용 목록을 수정할 수 없습니다.
+Sobald Sie Ihre erste Nachricht an den Agent senden, ist die Umgebungskonfiguration für diese Sitzung festgelegt. Sie können keine neuen Quellen einbinden oder die Zulassungsliste für das Netzwerk ändern, während die Interaktion aktiv ausgeführt wird.
 
-## 환경 다운로드
+## Umgebung herunterladen
 
-환경이 생성되면 AI Studio Playground의 환경 설정에서 **다운로드** 버튼을 사용하여 언제든지 환경 스냅샷을 다운로드하여 환경 파일을 tarball로 가져올 수 있습니다.
+Nachdem eine Umgebung erstellt wurde, können Sie den Umgebungs-Snapshot jederzeit über die Schaltfläche **Herunterladen** in den Umgebungseinstellungen des AI Studio Playgrounds herunterladen, um Umgebungsdateien als Tarball abzurufen.
 
-## 안전 및 비용 관리
+## Sicherheit und Kostenverwaltung
 
-### 토큰 사용량 관리
+### Tokenverbrauch verwalten
 
-단일 출력을 생성하는 표준 채팅 요청과 달리 Antigravity Agent는 자율 워크플로를 실행합니다. 계획을 세우고, 코드를 실행하고, 결과를 관찰하고, 반복합니다. 즉, 단일 프롬프트로 인해 무제한 토큰 소비가 발생할 수 있습니다.
+Im Gegensatz zu einer Standard-Chatanfrage, die eine einzelne Ausgabe erzeugt, führt der Antigravity-Agent einen autonomen Workflow aus. Es plant, führt Code aus, beobachtet Ergebnisse und wiederholt den Vorgang. Das bedeutet, dass ein einzelner Prompt zu einem unbegrenzten Tokenverbrauch führen kann.
 
-비용을 관리하려면 **프롬프트에 명확한 종료 기준을 제공하고 에이전트의 작업을 좁은 범위로 지정하세요**. 좋은 예로는 *pull 요청을 검토하고 마크다운 요약을 생성한 후 중지해.
-직접 수정사항을 작성하려고 하지 마세요*.
+Um die Kosten zu verwalten, **geben Sie in Ihren Prompts klare Beendigungskriterien an und begrenzen Sie die Aufgaben für den Agenten**. Ein gutes Beispiel ist der Prompt: *Überprüfe die Pull-Anfrage und stoppe, sobald du die Markdown-Zusammenfassung erstellt hast.
+Versuchen Sie nicht, die Korrektur selbst zu schreiben.*
 
-### 추가 비용
+### Zusätzliche Kosten
 
-기본적으로 Playground의 모든 에이전트 템플릿은 Gemini API 서비스에 액세스할 수 있으며 요청을 처리하기 위해 환경에서 API 호출을 할 수 있습니다. 이러한 작업에는 추가 비용이 발생할 수 있으며, 이는 토큰 사용량에 반영되지 않습니다.
+Standardmäßig haben alle Agent-Vorlagen im Playground Zugriff auf den Gemini API-Dienst und können API-Aufrufe aus der Umgebung ausführen, um Anfragen zu bearbeiten. Dabei können zusätzliche Kosten anfallen, die nicht im Tokenverbrauch berücksichtigt werden.
 
-마찬가지로 다른 외부 서비스를 추가하면 에이전트가 사용자를 대신하여 이러한 서비스를 호출하여 추가 비용이 발생할 수 있습니다.
+Wenn Sie andere externe Dienste hinzufügen, können für den Agenten zusätzliche Kosten anfallen, da er diese Dienste in Ihrem Namen aufruft.
 
-### 네트워크 허용 목록
+### Zulassungsliste für Netzwerke
 
-기본적으로 AI Studio에서는 에이전트의 샌드박스 환경에서 발생하는 모든 아웃바운드 네트워크 요청이 보안을 위해 엄격하게 제어되고 제한됩니다. 에이전트가 외부 API, 웹 서비스 또는 패키지 관리자에 도달할 수 있도록 하려면 다음을 명시적으로 선언해야 합니다.
+Standardmäßig werden in AI Studio alle ausgehenden Netzwerkanfragen aus der Sandbox-Umgebung Ihres Agents streng kontrolliert und eingeschränkt, um die Sicherheit zu gewährleisten. Damit Ihr Agent externe APIs, Webservices oder Paketmanager erreichen kann, müssen Sie diese explizit deklarieren:
 
-1. AI Studio의 환경 패널로 이동합니다.
-2. **네트워크** 옆에 있는 **규칙** 버튼을 선택합니다.
-3. **네트워크 구성** 패널에서 **허용 목록에 추가**를 클릭하고 관련 세부정보를 입력합니다.
-   - **도메인 제한:** 목록에 추가된 특정 도메인 또는 와일드카드 패턴만 에이전트의 가상 머신에서 액세스할 수 있습니다. 예를 들어 `api.github.com`과 같은 정확한 도메인이나 `*.googleapis.com`과 같은 광범위한 패턴을 입력할 수 있습니다.
-   - **HTTP 헤더 및 토큰 삽입 추가:** **HTTP 헤더 추가** 옵션을 사용하여 특정 도메인에 필요한 사용자 인증 정보 (예: API 토큰)를 안전하게 삽입합니다. 이러한 사용자 인증 정보는 이그레스 프록시를 통해 안전하게 전달되며 에이전트 샌드박스 내에서 원시 텍스트로 직접 노출되지 않습니다.
+1. Rufen Sie in AI Studio das Feld „Umgebungen“ auf.
+2. Klicken Sie neben **Netzwerk** auf die Schaltfläche **Regeln**.
+3. Klicken Sie im Bereich **Netzwerkkonfiguration** auf **Zur Zulassungsliste hinzufügen** und geben Sie die entsprechenden Details ein:
+   - **Domainbeschränkung**:Nur auf die bestimmten Domains oder Platzhaltermuster, die der Liste hinzugefügt wurden, kann über die virtuelle Maschine des Agents zugegriffen werden. Sie können beispielsweise genaue Domains wie `api.github.com` oder allgemeine Muster wie `*.googleapis.com` eingeben.
+   - **HTTP-Header und Token-Injection hinzufügen**:Mit der Option **HTTP-Header hinzufügen** können Sie erforderliche Anmeldedaten (z. B. ein API-Token) für eine bestimmte Domain sicher einfügen. Diese Anmeldedaten werden sicher über einen Egress-Proxy weitergeleitet und niemals direkt als Rohtext in der Agent-Sandbox offengelegt.
 
-허용 목록에 도메인을 추가할 때는 항상 주의해야 합니다. 인증된 서비스에 에이전트 액세스 권한을 부여하면 에이전트가 사용자를 대신하여 작업을 수행할 수 있으므로 신중하게 모니터링하지 않으면 의도치 않은 작업이 발생할 수 있습니다.
+Seien Sie immer vorsichtig, wenn Sie Domains auf die Zulassungsliste setzen. Wenn Sie dem Agent Zugriff auf authentifizierte Dienste gewähren, kann er in Ihrem Namen handeln. Wenn Sie das nicht sorgfältig überwachen, kann das zu unbeabsichtigten Aktionen führen.
 
-### 사용자 인증 정보 권장사항
+### Best Practices für Anmeldedaten
 
-워크플로에서 에이전트가 외부 서비스로 인증해야 하는 경우 이러한 사용자 인증 정보를 프로비저닝하고 범위를 지정해야 합니다. 위험을 줄이려면 다음 가이드라인을 따르세요.
+Wenn für Ihren Workflow eine Authentifizierung des Agenten bei externen Diensten erforderlich ist, sind Sie für die Bereitstellung und den Umfang dieser Anmeldedaten verantwortlich. Befolgen Sie diese Richtlinien, um das Risiko zu verringern:
 
-- **최소 권한 사용자 인증 정보 사용:** 에이전트에 필요한 권한만 있는 서비스 계정 또는 API 키를 만듭니다. 광범위한 액세스 권한 또는 관리 액세스 권한이 있는 사용자 인증 정보를 전달하지 마세요.
-- **단기 토큰 사용:** 가능하면 장기 API 키 대신 시간 제한이 있는 사용자 인증 정보나 만료되는 토큰을 사용합니다.
-- **전체 액세스 권한 가정:** 에이전트는 부여된 작업을 완료하기 위해 액세스할 수 있는 모든 사용자 인증 정보를 사용할 수 있습니다. 전체 액세스 범위를 부여할 의향이 있는 사용자 인증 정보만 제공하세요.
-- **사용자 인증 정보를 정기적으로 순환:** 에이전트와 공유된 사용자 인증 정보를 프로그래매틱 사용자 인증 정보와 동일하게 취급하여 정기적으로 순환합니다.
+- **Anmeldedaten mit geringsten Berechtigungen verwenden**:Erstellen Sie Dienstkonten oder API-Schlüssel mit nur den Berechtigungen, die Ihr Agent benötigt. Vermeiden Sie die Übergabe von Anmeldedaten mit umfassendem oder administrativem Zugriff.
+- **Kurzlebige Tokens bevorzugen**:Verwenden Sie nach Möglichkeit zeitlich begrenzte Anmeldedaten oder Tokens, die ablaufen, anstatt langlebiger API-Schlüssel.
+- **Vollzugriff annehmen**:Der Agent kann alle Anmeldedaten verwenden, auf die er Zugriff hat, um die von Ihnen erteilte Aufgabe auszuführen. Geben Sie nur Anmeldedaten an, deren vollständigen Zugriffsbereich Sie gewähren möchten.
+- **Anmeldedaten regelmäßig rotieren**:Behandeln Sie Anmeldedaten, die für den Agenten freigegeben wurden, genauso wie alle anderen programmatischen Anmeldedaten. Rotieren Sie sie regelmäßig.
 
-### 외부 도구 및 API 연결
+### Verbindung zu externen Tools und APIs herstellen
 
-외부 도구 및 API (예: 모델 컨텍스트 프로토콜 / MCP 서버)를 연결하여 에이전트의 기능을 확장할 수 있습니다. 이 경우 다음 사항을 고려하세요.
+Sie können externe Tools und APIs (z. B. Model Context Protocol-/MCP-Server) verbinden, um die Funktionen des Agenten zu erweitern. Dabei gilt:
 
-- 신뢰할 수 있는 소스의 도구만 연결하세요. 악의적이거나 잘못 작성된 도구는 데이터를 노출하거나 의도하지 않은 작업을 실행할 수 있습니다.
-- 사용 사례에 필요한 최소 권한으로 도구를 구성합니다. 도구가 읽기 전용 모드를 지원하는 경우 쓰기가 엄격하게 필요하지 않는 한 읽기 전용 모드를 사용하는 것이 좋습니다.
-- 도구를 프로덕션 데이터 소스에 연결하기 전에 샘플 또는 합성 데이터를 사용하여 테스트하여 에이전트가 예상대로 사용하는지 확인하세요.
+- Verbinden Sie nur Tools von Quellen, denen Sie vertrauen. Ein böswilliges oder schlecht geschriebenes Tool kann Daten offenlegen oder unbeabsichtigte Aktionen ausführen.
+- Konfigurieren Sie Tools mit den für Ihren Anwendungsfall erforderlichen Mindestberechtigungen. Wenn ein Tool den schreibgeschützten Modus unterstützt, sollten Sie diesen bevorzugen, es sei denn, Schreibvorgänge sind unbedingt erforderlich.
+- Bevor Sie ein Tool mit einer Produktionsdatenquelle verbinden, sollten Sie es mit Beispiel- oder synthetischen Daten testen, um zu prüfen, ob der Agent es wie erwartet verwendet.
 
-### 인간의 감독
+### Menschliche Aufsicht
 
-에이전트는 높은 수준의 자율성을 가지고 다단계 워크플로를 추론, 계획, 실행할 수 있습니다. 이 기능은 강력하지만 데이터 수정이나 외부 시스템과의 상호작용과 같은 작업에는 적절한 감독이 필요합니다.
+KI-Agenten können mehrstufige Workflows mit einem hohen Maß an Autonomie planen, begründen und ausführen. Das ist zwar leistungsstark, bedeutet aber auch, dass Sie für eine angemessene Aufsicht sorgen müssen, insbesondere bei Aufgaben, die Daten ändern oder mit externen Systemen interagieren.
 
-생성된 코드, 데이터 변환, 구성 변경사항과 같은 중요한 출력은 배포하기 전에 항상 확인하세요.
+Prüfen Sie immer kritische Ausgaben wie generierten Code, Datentransformationen oder Konfigurationsänderungen, bevor Sie sie bereitstellen.
 
-의견 보내기
+Feedback geben
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-최종 업데이트: 2026-08-19(UTC)
+Zuletzt aktualisiert: 2026-08-19 (UTC).
 
-의견을 전달하고 싶나요?
+Haben Sie Feedback für uns?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-08-19(UTC)"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-08-19 (UTC)."],[],[]]

@@ -1,35 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=zh-CN
-fetched_at: 2026-08-24T02:36:33.781970+00:00
-title: "\u5a92\u4f53\u5206\u8fa8\u7387 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=hi
+fetched_at: 2026-08-31T06:37:06.336522+00:00
+title: "\u092e\u0940\u0921\u093f\u092f\u093e \u0915\u093e \u0930\u093f\u091c\u093c\u0949\u0932\u094d\u092f\u0942\u0936\u0928 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-发送反馈
+सुझाव भेजें
 
-# 媒体分辨率
+# मीडिया का रिज़ॉल्यूशन
 
-`media_resolution` 参数用于控制 Gemini API 处理图片、视频和 PDF 文档等媒体输入的方式，方法是确定为媒体输入分配的
-**token 数量上限** ，让您能够在回答质量、延迟时间和费用之间取得平衡。如需了解不同设置、默认值及其与 token 的对应关系，请参阅[token 数量](#token-counts)部分。
+`media_resolution` पैरामीटर से यह कंट्रोल किया जाता है कि Gemini API, मीडिया इनपुट को कैसे प्रोसेस करता है. जैसे, इमेज, वीडियो, और PDF दस्तावेज़. इसके लिए, यह पैरामीटर मीडिया इनपुट के लिए **ज़्यादा से ज़्यादा टोकन की संख्या** तय करता है. इससे, रिस्पॉन्स की क्वालिटी, इंतज़ार का समय, और लागत के बीच बैलेंस बनाया जा सकता है. अलग-अलग सेटिंग के लिए, डिफ़ॉल्ट वैल्यू और वे टोकन से कैसे जुड़ी हैं, यह जानने के लिए [टोकन की संख्या](#token-counts) सेक्शन देखें.
 
-您可以通过以下两种方式配置媒体分辨率：
+मीडिया रिज़ॉल्यूशन को दो तरीकों से कॉन्फ़िगर किया जा सकता है:
 
-- [按部分](https://ai.google.dev/gemini-api/docs/media-resolution?hl=zh-cn#per-part-media-resolution)（仅限 Gemini 3）
-- [针对整个](https://ai.google.dev/gemini-api/docs/media-resolution?hl=zh-cn#global-media-resolution) `generateContent` 请求全局配置（所有多模态模型）
+- [हर हिस्से के लिए](https://ai.google.dev/gemini-api/docs/media-resolution?hl=hi#per-part-media-resolution) (सिर्फ़ Gemini 3)
+- [विश्व स्तर पर](https://ai.google.dev/gemini-api/docs/media-resolution?hl=hi#global-media-resolution) पूरे `generateContent` अनुरोध के लिए (सभी मल्टीमॉडल मॉडल)
 
-## 按部分配置媒体分辨率（仅限 Gemini 3）
+## हर हिस्से के लिए मीडिया रिज़ॉल्यूशन (सिर्फ़ Gemini 3)
 
-Gemini 3 允许您为请求中的各个媒体对象设置媒体分辨率，从而对 token 用量进行精细优化。您可以在单个请求中混合使用不同的分辨率级别。例如，对复杂的图表使用高分辨率，对简单的上下文图片使用低分辨率。此设置会覆盖特定部分的任何全局配置。如需了解默认设置，请参阅 [token 数量](https://ai.google.dev/gemini-api/docs/media-resolution?hl=zh-cn#token-counts) 部分。
+Gemini 3 की मदद से, अनुरोध में शामिल हर मीडिया ऑब्जेक्ट के लिए मीडिया रिज़ॉल्यूशन सेट किया जा सकता है. इससे, टोकन के इस्तेमाल को बेहतर तरीके से ऑप्टिमाइज़ किया जा सकता है. एक ही अनुरोध में, अलग-अलग रिज़ॉल्यूशन लेवल का इस्तेमाल किया जा सकता है. उदाहरण के लिए, किसी जटिल डायग्राम के लिए हाई रिज़ॉल्यूशन और किसी सामान्य कॉन्टेक्चुअल इमेज के लिए लो रिज़ॉल्यूशन का इस्तेमाल किया जा सकता है. यह सेटिंग, किसी खास हिस्से के लिए ग्लोबल कॉन्फ़िगरेशन को ओवरराइड करती है. डिफ़ॉल्ट सेटिंग के लिए, [टोकन की संख्या](https://ai.google.dev/gemini-api/docs/media-resolution?hl=hi#token-counts) सेक्शन देखें.
 
 ### Python
 
@@ -132,10 +131,10 @@ curl -s -X POST \
   -d @request.json
 ```
 
-## 全局媒体分辨率
+## ग्लोबल मीडिया रिज़ॉल्यूशन
 
-您可以使用 `GenerationConfig` 为请求中的所有媒体部分设置默认分辨率。所有多模态模型都支持此功能。如果请求
-同时包含全局设置和[按部分设置](https://ai.google.dev/gemini-api/docs/media-resolution?hl=zh-cn#per-part-media-resolution)，则对于该特定项，按部分设置优先。
+`GenerationConfig` का इस्तेमाल करके, किसी अनुरोध में शामिल सभी मीडिया हिस्सों के लिए डिफ़ॉल्ट रिज़ॉल्यूशन सेट किया जा सकता है. यह सुविधा, सभी मल्टीमॉडल मॉडल के साथ काम करती है. अगर किसी अनुरोध
+में ग्लोबल और [हर हिस्से के लिए, दोनों तरह की सेटिंग शामिल हैं](https://ai.google.dev/gemini-api/docs/media-resolution?hl=hi#per-part-media-resolution), तो उस खास आइटम के लिए, हर हिस्से के लिए सेट की गई सेटिंग को प्राथमिकता दी जाती है.
 
 ### Python
 
@@ -203,86 +202,85 @@ curl -s -X POST \
   }'
 ```
 
-## 可用的分辨率值
+## उपलब्ध रिज़ॉल्यूशन वैल्यू
 
-Gemini API 为媒体分辨率定义了以下级别：
+Gemini API, मीडिया रिज़ॉल्यूशन के लिए ये लेवल तय करता है:
 
-- `MEDIA_RESOLUTION_UNSPECIFIED`：默认设置。对于此级别，Gemini 3 和更早版本的 Gemini 模型之间的 token 数量差异很大。
-- `MEDIA_RESOLUTION_LOW`：token 数量较少，因此处理速度更快，费用更低，但细节较少。
-- `MEDIA_RESOLUTION_MEDIUM`：在细节、费用和延迟时间之间取得平衡。
-- `MEDIA_RESOLUTION_HIGH`：token 数量较多，为模型提供了更多细节，但延迟时间和费用也会增加。
-- `MEDIA_RESOLUTION_ULTRA_HIGH`（仅限按部分）：token 数量最多，某些特定
-  用例（例如[计算机使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-cn)）需要此级别。
+- `MEDIA_RESOLUTION_UNSPECIFIED`: यह डिफ़ॉल्ट सेटिंग है. इस लेवल के लिए टोकन की गिनती, Gemini 3 और उससे पहले के Gemini मॉडल के बीच काफ़ी अलग-अलग होती है.
+- `MEDIA_RESOLUTION_LOW`: इसमें टोकन की गिनती कम होती है. इससे, प्रोसेसिंग की स्पीड बढ़ती है और लागत कम होती है. हालांकि, इसमें कम जानकारी मिलती है.
+- `MEDIA_RESOLUTION_MEDIUM`: इसमें जानकारी, लागत, और इंतज़ार के समय के बीच बैलेंस बना रहता है.
+- `MEDIA_RESOLUTION_HIGH`: इसमें टोकन की गिनती ज़्यादा होती है. इससे मॉडल को काम करने के लिए ज़्यादा जानकारी मिलती है. हालांकि, इसमें इंतज़ार का समय और लागत बढ़ जाती है.
+- `MEDIA_RESOLUTION_ULTRA_HIGH` (सिर्फ़ हर हिस्से के लिए): इसमें टोकन की गिनती सबसे ज़्यादा होती है. यह सेटिंग, इस्तेमाल के कुछ खास उदाहरणों के लिए ज़रूरी होती है. जैसे, [कंप्यूटर का इस्तेमाल](https://ai.google.dev/gemini-api/docs/computer-use?hl=hi).
 
-请注意，`MEDIA_RESOLUTION_HIGH` 可为大多数用例提供最佳性能。
+ध्यान दें कि `MEDIA_RESOLUTION_HIGH` सेटिंग, ज़्यादातर इस्तेमाल के उदाहरणों के लिए सबसे अच्छी परफ़ॉर्मेंस देती है.
 
-为每个级别生成的 token 的确切数量取决于**媒体类型** （图片、视频、PDF）和**模型版本** 。
+इनमें से हर लेवल के लिए जनरेट होने वाले टोकन की सटीक संख्या, **मीडिया के टाइप** (इमेज, वीडियो, PDF) और **मॉडल के वर्शन**, दोनों पर निर्भर करती है.
 
-## token 数量
+## टोकन की संख्या
 
-下表总结了每个模型系列中每个 `media_resolution` 值和媒体类型对应的大致 token 数量。
+यहां दी गई टेबल में, मॉडल के हर परिवार के लिए, `media_resolution` की हर वैल्यू और मीडिया के टाइप के हिसाब से, टोकन की अनुमानित संख्या की खास जानकारी दी गई है.
 
-**Gemini 3 模型**
+**Gemini 3 मॉडल**
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| **MediaResolution** | **图片** | **视频** | **PDF** |
-| `MEDIA_RESOLUTION_UNSPECIFIED` （默认） | 1120 | 70 | 560 |
-| `MEDIA_RESOLUTION_LOW` | 280 | 70 | 280 + 原生文本 |
-| `MEDIA_RESOLUTION_MEDIUM` | 560 | 70 | 560 + 原生文本 |
-| `MEDIA_RESOLUTION_HIGH` | 1120 | 280 | 1120 + 原生文本 |
-| `MEDIA_RESOLUTION_ULTRA_HIGH` | 2240 | 不适用 | 不适用 |
+| **MediaResolution** | **इमेज** | **वीडियो** | **PDF** |
+| `MEDIA_RESOLUTION_UNSPECIFIED` (डिफ़ॉल्ट) | 1120 | 70 | 560 |
+| `MEDIA_RESOLUTION_LOW` | 280 | 70 | 280 + मौलिक टेक्स्ट |
+| `MEDIA_RESOLUTION_MEDIUM` | 560 | 70 | 560 + मौलिक टेक्स्ट |
+| `MEDIA_RESOLUTION_HIGH` | 1120 | 280 | 1120 + मौलिक टेक्स्ट |
+| `MEDIA_RESOLUTION_ULTRA_HIGH` | 2240 | लागू नहीं | लागू नहीं |
 
-**Gemini 2.5 模型**
+**Gemini 2.5 मॉडल**
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **MediaResolution** | **图片** | **视频** | **PDF（扫描）** | **PDF（原生）** |
-| `MEDIA_RESOLUTION_UNSPECIFIED` （默认） | 256 + 平移和扫描（约 2048） | 256 | 256 + OCR | 256 + 原生文本 |
-| `MEDIA_RESOLUTION_LOW` | 64 | 64 | 64 + OCR | 64 + 原生文本 |
-| `MEDIA_RESOLUTION_MEDIUM` | 256 | 256 | 256 + OCR | 256 + 原生文本 |
-| `MEDIA_RESOLUTION_HIGH` | 256 + 平移和扫描 | 256 | 256 + OCR | 256 + 原生文本 |
+| **MediaResolution** | **इमेज** | **वीडियो** | **PDF (स्कैन किया गया)** | **PDF (मौलिक)** |
+| `MEDIA_RESOLUTION_UNSPECIFIED` (डिफ़ॉल्ट) | 256 + पैन और स्कैन (~2048) | 256 | 256 + ओसीआर | 256 + मौलिक टेक्स्ट |
+| `MEDIA_RESOLUTION_LOW` | 64 | 64 | 64 + ओसीआर | 64 + मौलिक टेक्स्ट |
+| `MEDIA_RESOLUTION_MEDIUM` | 256 | 256 | 256 + ओसीआर | 256 + मौलिक टेक्स्ट |
+| `MEDIA_RESOLUTION_HIGH` | 256 + पैन और स्कैन | 256 | 256 + ओसीआर | 256 + मौलिक टेक्स्ट |
 
-## 选择合适的分辨率
+## सही रिज़ॉल्यूशन चुनना
 
-- **默认 (`UNSPECIFIED`)**： 从默认设置开始。此设置经过调整，可在大多数常见用例中实现质量、延迟时间和费用之间的良好平衡。
-- **`LOW`**： 适用于费用和延迟时间至关重要，而精细细节不太重要的场景。
-- **`MEDIUM` / `HIGH`**： 如果任务需要了解媒体中的复杂细节，请提高分辨率。这通常适用于复杂的视觉分析、图表阅读或密集文档理解。
-- **`ULTRA HIGH`** - 仅适用于按部分设置。建议用于特定用例（例如计算机使用），或测试表明此设置比 `HIGH` 有明显提升时。
-- **按部分控制（Gemini 3）**： 优化 token 用量。例如，在包含多张图片的提示中，对复杂的图表使用 `HIGH`，对简单的上下文图片使用 `LOW` 或 `MEDIUM`。
+- **डिफ़ॉल्ट (`UNSPECIFIED`):** डिफ़ॉल्ट सेटिंग से शुरू करें. इसे, इस्तेमाल के ज़्यादातर उदाहरणों के लिए, क्वालिटी, इंतज़ार के समय, और लागत के बीच बेहतर बैलेंस के लिए ऑप्टिमाइज़ किया गया है.
+- **`LOW`:** इसका इस्तेमाल उन स्थितियों में करें जहां लागत और इंतज़ार का समय सबसे अहम हो और बारीक जानकारी कम ज़रूरी हो.
+- **`MEDIUM` / `HIGH`:** जब टास्क के लिए, मीडिया में मौजूद जटिल जानकारी को समझना ज़रूरी हो, तब रिज़ॉल्यूशन बढ़ाएं. आम तौर पर, इसकी ज़रूरत जटिल विज़ुअल विश्लेषण, चार्ट पढ़ने या ज़्यादा जानकारी वाले दस्तावेज़ को समझने के लिए होती है.
+- **`ULTRA HIGH`** - यह सेटिंग सिर्फ़ हर हिस्से के लिए उपलब्ध है. इसका सुझाव, इस्तेमाल के कुछ खास उदाहरणों के लिए दिया जाता है. जैसे, कंप्यूटर का इस्तेमाल या जहां टेस्टिंग से पता चलता है कि `HIGH` के मुकाबले, इसमें साफ़ तौर पर बेहतर नतीजे मिलते हैं.
+- **हर हिस्से के लिए कंट्रोल (Gemini 3):** इससे टोकन के इस्तेमाल को ऑप्टिमाइज़ किया जाता है. उदाहरण के लिए, एक ऐसे प्रॉम्प्ट में जिसमें कई इमेज शामिल हैं, किसी जटिल डायग्राम के लिए `HIGH` और सामान्य कॉन्टेक्चुअल इमेज के लिए `LOW` या `MEDIUM` का इस्तेमाल करें.
 
-**推荐设置**
+**सुझाई गई सेटिंग**
 
-以下列出了每种受支持媒体类型的推荐媒体分辨率设置。
+यहां, मीडिया के हर टाइप के लिए, मीडिया रिज़ॉल्यूशन की सुझाई गई सेटिंग दी गई हैं.
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| **媒体类型** | **推荐设置** | **token 数量上限** | **使用指南** |
-| **Google 图片** | `MEDIA_RESOLUTION_HIGH` | 1120 | 建议用于大多数图片分析任务，以确保获得最高质量。 |
-| **PDF** | `MEDIA_RESOLUTION_MEDIUM` | 560 | 最适合文档理解；质量通常在 `medium` 级别达到饱和。对于标准文档，提高到 `high` 级别很少能改善 OCR 结果。 |
-| **视频** （常规） | `MEDIA_RESOLUTION_LOW` （或 `MEDIA_RESOLUTION_MEDIUM`） | 70（每帧） | **注意** ：对于视频，`low` 和 `medium` 设置的处理方式相同（70 个 token），以优化上下文使用。这对于大多数动作识别和描述任务来说已经足够。 |
-| **视频** （文本密集） | `MEDIA_RESOLUTION_HIGH` | 280（每帧） | 仅当用例涉及读取密集文本 (OCR) 或视频帧中的小细节时才需要。 |
+| **मीडिया का टाइप** | **सुझाई गई सेटिंग** | **ज़्यादा से ज़्यादा टोकन** | **इस्तेमाल करने के लिए दिशा-निर्देश** |
+| **इमेज** | `MEDIA_RESOLUTION_HIGH` | 1120 | इमेज के विश्लेषण से जुड़े ज़्यादातर टास्क के लिए, इसका सुझाव दिया जाता है, ताकि सबसे अच्छी क्वालिटी पक्का की जा सके. |
+| **PDF** | `MEDIA_RESOLUTION_MEDIUM` | 560 | दस्तावेज़ को समझने के लिए, यह सेटिंग सबसे अच्छी है. आम तौर पर, `medium` सेटिंग पर क्वालिटी सबसे अच्छी होती है. सामान्य दस्तावेज़ों के लिए, `high` सेटिंग पर जाने से ओसीआर के नतीजों में शायद ही कोई सुधार होता है. |
+| **वीडियो** (सामान्य) | `MEDIA_RESOLUTION_LOW` (या `MEDIA_RESOLUTION_MEDIUM`) | 70 (हर फ़्रेम के लिए) | **ध्यान दें:** वीडियो के लिए, `low` और `medium` सेटिंग को एक जैसा (70 टोकन) माना जाता है, ताकि कॉन्टेक्स्ट के इस्तेमाल को ऑप्टिमाइज़ किया जा सके. कार्रवाई की पहचान और जानकारी देने से जुड़े ज़्यादातर टास्क के लिए, यह सेटिंग काफ़ी है. |
+| **वीडियो** (जिसमें ज़्यादा टेक्स्ट हो) | `MEDIA_RESOLUTION_HIGH` | 280 (हर फ़्रेम के लिए) | इसकी ज़रूरत सिर्फ़ तब होती है, जब इस्तेमाल के उदाहरण में ज़्यादा टेक्स्ट (ओसीआर) या वीडियो फ़्रेम में मौजूद छोटी-छोटी जानकारी को पढ़ना शामिल हो. |
 
-请务必测试和评估不同分辨率设置对特定应用的影响，以便在质量、延迟时间和费用之间找到最佳平衡点。
+क्वालिटी, इंतज़ार के समय, और लागत के बीच सबसे अच्छा बैलेंस पाने के लिए, अपने ऐप्लिकेशन पर अलग-अलग रिज़ॉल्यूशन सेटिंग की जांच और आकलन करें.
 
-## 版本兼容性摘要
+## वर्शन के साथ काम करने वाली सुविधाओं की खास जानकारी
 
-- 所有支持媒体输入的模型都可以使用 `MediaResolution` 枚举。
-- 与每个枚举级别关联的 token 数量在 Gemini 3 模型和更早版本的 Gemini 之间**有所不同** 。
-- 在各个 `Part` 对象上设置 `media_resolution` **仅适用于 Gemini 3 模型** 。
+- `MediaResolution` एनम, मीडिया इनपुट की सुविधा वाले सभी मॉडल के लिए उपलब्ध है.
+- Gemini 3 मॉडल और Gemini के पुराने वर्शन के लिए, हर एनम लेवल से जुड़े टोकन की संख्या **अलग-अलग** होती है.
+- `Part` के अलग-अलग ऑब्जेक्ट पर `media_resolution` सेट करने की सुविधा **सिर्फ़ Gemini 3 मॉडल के लिए उपलब्ध है**.
 
-## 后续步骤
+## अगले चरण
 
-- 如需详细了解 Gemini API 的多模态功能，请参阅
-  [图片理解](https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=zh-cn)、[视频理解](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=zh-cn)和
-  [文档理解](https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=zh-cn)指南。
+- Gemini API की मल्टीमॉडल क्षमताओं के बारे में ज़्यादा जानने के लिए,
+  [इमेज को समझने](https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=hi), [वीडियो को समझने](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=hi) और
+  [दस्तावेज़ को समझने](https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=hi) से जुड़ी गाइड पढ़ें.
 
-发送反馈
+सुझाव भेजें
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-最后更新时间 (UTC)：2026-07-30。
+आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया.
 
-需要向我们提供更多信息？
+क्या आपको हमें और कुछ बताना है?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-30。"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया."],[],[]]

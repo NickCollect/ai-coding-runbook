@@ -1,77 +1,79 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-policy?hl=ko
-fetched_at: 2026-08-24T02:23:22.551219+00:00
-title: "\ub370\uc774\ud130 \ub85c\uae45 \ubc0f \uacf5\uc720 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-policy?hl=vi
+fetched_at: 2026-08-31T06:34:56.905229+00:00
+title: "Ghi nh\u1eadt k\u00fd v\u00e0 chia s\u1ebb d\u1eef li\u1ec7u \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-의견 보내기
+Gửi ý kiến phản hồi
 
-# 데이터 로깅 및 공유
+# Ghi nhật ký và chia sẻ dữ liệu
 
-이 페이지에서는 결제가 사용 설정된 프로젝트의 지원되는 Gemini API 호출에서 개발자가 소유한
-API 데이터인
-[Gemini API 로그](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=ko)의 저장 및 관리에 대해 설명합니다. 로그는 사용자의 요청부터 모델의 응답까지 전체 프로세스를 포함합니다.
-[Google Cloud 프로젝트에 비공개인 이러한 로그는 악용 모니터링 목적으로만 보유되는 로그와는 별개입니다.](https://ai.google.dev/gemini-api/docs/usage-policies?hl=ko)
+Trang này trình bày cách lưu trữ và quản lý
+[nhật ký Gemini API](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=vi). Đây là dữ liệu API thuộc sở hữu của nhà phát triển
+từ các lệnh gọi Gemini API được hỗ trợ cho các dự án đã bật tính năng thanh toán. Nhật ký bao gồm toàn bộ quy trình từ yêu cầu của người dùng đến phản hồi của mô hình.
+Những nhật ký này (riêng tư đối với dự án Google Cloud của bạn) tách biệt với mọi
+nhật ký chỉ được lưu giữ cho mục đích [giám sát hành vi sử dụng sai mục đích](https://ai.google.dev/gemini-api/docs/usage-policies?hl=vi).
 
-## 공유할 수 있는 데이터
+## Dữ liệu có thể được chia sẻ
 
-프로젝트 소유자는 자체 사용을 위해 또는 Google에 의견을 제공하고 공유하여 Google이 모델을 지속적으로 개선할 수 있도록 Gemini API 호출의 로깅을 선택할 수 있습니다.
+Là chủ sở hữu dự án, bạn có thể chọn bật tính năng ghi nhật ký các lệnh gọi Gemini API cho mục đích sử dụng riêng hoặc để phản hồi và chia sẻ với Google nhằm giúp chúng tôi liên tục cải thiện các mô hình của mình.
 
-로깅을 사용 설정하면 제품 개선 및 모델 학습을 위해 다음 데이터를 제공하여 다양한 분야와 사용 사례에서 개발자에게 계속해서 유용한 AI 시스템을 구축하는 데 도움이 될 수 있습니다.
+Khi bật tính năng ghi nhật ký, bạn có thể giúp chúng tôi xây dựng các hệ thống AI tiếp tục mang lại giá trị cho nhà phát triển trong nhiều lĩnh vực và trường hợp sử dụng bằng cách chọn đóng góp dữ liệu sau đây để cải thiện sản phẩm và huấn luyện mô hình:
 
-- **데이터 세트:** Google AI Studio의 로그 및 데이터 세트 인터페이스를 사용하여 지원되는 Gemini API 호출에서 관심 있는 로그 (요청, 응답, 메타데이터 등)를 선택합니다. 데이터 세트에 포함하여 제공되며 데이터 세트 생성 중에 선택 해제할 수 있습니다.
-- **의견:** 로그를 검토할 때 의견을 제공할 수 있습니다. 여기에는 좋아요 및 싫어요 평가와 작성한 의견이 포함됩니다.
+- **Tập dữ liệu:** Sử dụng giao diện Nhật ký và tập dữ liệu của Google AI Studio để chọn nhật ký (yêu cầu, phản hồi, siêu dữ liệu, v.v.) mà bạn quan tâm từ các lệnh gọi Gemini API được hỗ trợ; đóng góp thông qua việc đưa vào tập dữ liệu, với tuỳ chọn không tham gia trong quá trình tạo tập dữ liệu.
+- **Ý kiến phản hồi:** Khi xem xét nhật ký, bạn có thể đưa ra ý kiến phản hồi, bao gồm cả việc đánh giá thích và không thích cũng như mọi nhận xét bằng văn bản mà bạn cung cấp.
 
-데이터 세트를 Google과 공유하면 요청 및 응답을 포함한 해당 데이터 세트의 로그가
-저희
-[약관](https://developers.google.com/terms?hl=ko)의
-"[무료 서비스](https://ai.google.dev/gemini-api/terms?hl=ko#data-use-unpaid)"에 따라 처리됩니다.
-즉, 데이터 세트는 모델 개선 및
-학습을 포함하여 Google
-제품, 서비스, 머신러닝 기술을 개발하고 개선하는 데 사용될 수 있습니다. **개인 정보, 민감한 정보 또는 기밀 정보를 포함하지 마세요.**
+Khi bạn chia sẻ một tập dữ liệu với Google, nhật ký của bạn trong tập dữ liệu đó (bao gồm cả
+yêu cầu và phản hồi) sẽ được xử lý theo
+[Điều khoản](https://developers.google.com/terms?hl=vi) của chúng tôi đối với
+"[Dịch vụ không tính phí](https://ai.google.dev/gemini-api/terms?hl=vi#data-use-unpaid),"
+Điều này có nghĩa là tập dữ liệu có thể được dùng để phát triển và cải thiện các
+sản phẩm, dịch vụ và công nghệ học máy của Google, bao gồm cả việc cải thiện và
+huấn luyện các mô hình của chúng tôi. **Đừng thêm thông tin cá nhân, thông tin nhạy cảm hoặc thông tin mật.**
 
-## Google에서 데이터를 사용하는 방식
+## Cách chúng tôi sử dụng dữ liệu của bạn
 
-로그는 기본적으로 최대 55일 동안 보관됩니다. 이 기간이 지나면 로그는 삭제 대상으로 자동 표시됩니다. AI Studio에서 프로젝트의 저장소 보관 기간을 업데이트하여 7일, 14일, 28일 또는 55일 후에 로그를 삭제 대상으로 자동 표시할 수 있습니다.
+Nhật ký được giữ lại trong khoảng thời gian tối đa mặc định là 55 ngày. Sau khoảng thời gian này, nhật ký sẽ tự động được đánh dấu để xoá. Bạn có thể cập nhật khoảng thời gian lưu giữ bộ nhớ cho một dự án trong AI Studio để tự động đánh dấu nhật ký để xoá sau 7, 14, 28 hoặc 55 ngày.
 
-[데이터 세트](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=ko)를 만들어 다운스트림 사용 사례에 대한 설정된 보관 기간을 초과하여 관심 있는 로그를 보관하고
-모델 개선에 선택적으로 기여할 수 있습니다. 데이터 세트에 저장된 로그에는 설정된 보관 기간이 없습니다.
+[Bạn có thể tạo](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=vi)tập dữ liệu để giữ lại nhật ký mà bạn quan tâm ngoài khoảng thời gian lưu giữ đã đặt cho các trường hợp sử dụng ở hạ nguồn và đóng góp không bắt buộc để cải thiện mô hình. Nhật ký được lưu trữ trong tập dữ liệu không có khoảng thời gian lưu giữ đã đặt.
 
-기본적으로 로깅은 결제가 사용 설정된 프로젝트에서만 사용할 수 있으므로
-로그 내의 프롬프트와 응답은 제품 개선 또는
-개발에 사용되지 않습니다. 이는 데이터 사용에 관한 [약관](https://developers.google.com/terms?hl=ko)
-에 따릅니다.
+Theo mặc định, vì tính năng ghi nhật ký chỉ có sẵn cho các dự án đã bật tính năng thanh toán,
+nên các câu lệnh và phản hồi trong nhật ký không được dùng để cải thiện hoặc
+phát triển sản phẩm theo [Điều khoản](https://developers.google.com/terms?hl=vi)
+của chúng tôi về việc sử dụng dữ liệu.
 
-로그의 데이터 세트를 Google과 공유하도록 선택하면 이러한 데이터 세트는 AI 시스템 및 애플리케이션이 사용되는 다양한 도메인과 컨텍스트를 더 잘 이해하기 위한 실제 데모 데이터로 사용됩니다. 이 데이터는 모델 품질을 개선하고 향후 모델 및 서비스의 학습 및 평가에 영향을 미칠 수 있습니다. [이 데이터는 무료 서비스의 데이터 사용
-약관에 따라 처리됩니다.](https://ai.google.dev/gemini-api/terms?hl=ko#data-use-unpaid)
+Nếu bạn chọn chia sẻ tập dữ liệu nhật ký của mình với Google, thì những tập dữ liệu đó sẽ được dùng làm dữ liệu minh hoạ trong thế giới thực để hiểu rõ hơn về sự đa dạng của các miền và bối cảnh mà hệ thống và ứng dụng AI được dùng. Dữ liệu này có thể được dùng để cải thiện chất lượng mô hình và cung cấp thông tin cho việc huấn luyện và đánh giá các mô hình và dịch vụ trong tương lai. Dữ liệu này được xử lý theo các điều khoản sử dụng dữ liệu của chúng tôi đối với [Dịch vụ không tính phí](https://ai.google.dev/gemini-api/terms?hl=vi#data-use-unpaid).
 
-따라서 인적 검토자는 공유하는 API 입력 및 출력을 읽고, 주석을 달고, 처리할 수 있습니다. 데이터가 모델 개선에 사용되기 전에 Google은 이러한 과정에서 사용자 개인 정보를 보호하기 위한 조치를 취합니다. 여기에는 검토자가 이 데이터를 보거나 주석을 작성하기 전에 Google 계정, API 키, Cloud 프로젝트에서 이 데이터의 연결을 해제하는 조치가 포함됩니다.
+Theo đó, nhân viên đánh giá có thể đọc, chú thích và xử lý dữ liệu đầu vào và đầu ra của API mà bạn chia sẻ. Trước khi dữ liệu được dùng để cải thiện mô hình, Google sẽ thực hiện các bước để bảo vệ quyền riêng tư của người dùng trong quá trình này. Chẳng hạn như huỷ mối liên kết giữa dữ liệu này với Tài khoản Google, khoá API và dự án trên Cloud của bạn trước khi nhân viên đánh giá xem hoặc chú thích.
 
-## 데이터 권한
+## Quyền đối với dữ liệu
 
-API 데이터 제공을 선택하면 Google이 이 문서에 설명된 대로 데이터를 처리하고 사용할 수 있는 필요한 권한이 있음을 확인하는 것입니다. **유료 서비스를 통해 얻은 민감한 정보, 기밀 정보 또는 독점 정보가 포함된 로그는 제공하지 마세요**.
-'[콘텐츠 제출](https://developers.google.com/terms?hl=ko#b_submission_of_content)' 조항에 따라 Google에 부여한 라이선스도 Google의 사용에 대한 관련 법규에 따라 요구되는 범위 내에서 '서비스' 및 생성된 답변에 제출한 콘텐츠 (예: 이미지, 동영상, 문서 등 관련 파일, 캐시된 콘텐츠, 시스템 안내를 포함한 프롬프트)로 확장됩니다.
+Bằng cách chọn đóng góp dữ liệu API, bạn xác nhận rằng bạn có các quyền cần thiết để Google xử lý và sử dụng dữ liệu như mô tả trong tài liệu này. **Vui lòng không đóng góp nhật ký chứa thông tin nhạy cảm, thông tin mật hoặc thông tin độc quyền thu được thông qua dịch vụ có tính phí**.
+Giấy phép mà bạn cấp cho Google theo phần "[Gửi nội dung](https://developers.google.com/terms?hl=vi#b_submission_of_content)"
+trong Điều khoản API cũng mở rộng (trong phạm vi cần thiết theo luật hiện hành để chúng tôi sử dụng)
+đối với mọi nội dung (ví dụ: câu lệnh, bao gồm cả hướng dẫn hệ thống liên quan, nội dung được lưu vào bộ nhớ đệm và các tệp như hình ảnh, video hoặc tài liệu)
+mà bạn gửi đến Dịch vụ và mọi phản hồi được tạo.
 
-## 데이터 공유 및 의견
+## Chia sẻ dữ liệu và ý kiến phản hồi
 
-데이터를 예시로 공유하도록 선택하면 AI 연구, Gemini API, Google AI Studio의 발전에 도움이 될 수 있습니다. 이를 통해 다양한 컨텍스트에서 모델을 지속적으로 개선하고 다양한 분야와 사용 사례에서 개발자에게 계속해서 유용한 AI 시스템을 구축할 수 있습니다.
+Bạn có thể giúp chúng tôi tiến xa hơn trong nghiên cứu về AI, Gemini API và Google AI Studio bằng cách chọn chia sẻ dữ liệu của bạn làm ví dụ, cho phép chúng tôi liên tục cải thiện các mô hình của mình trong nhiều bối cảnh và xây dựng các hệ thống AI tiếp tục mang lại giá trị cho nhà phát triển trong nhiều lĩnh vực và trường hợp sử dụng.
 
-의견 보내기
+Gửi ý kiến phản hồi
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-최종 업데이트: 2026-08-19(UTC)
+Cập nhật lần gần đây nhất: 2026-08-19 UTC.
 
-의견을 전달하고 싶나요?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-08-19(UTC)"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-08-19 UTC."],[],[]]

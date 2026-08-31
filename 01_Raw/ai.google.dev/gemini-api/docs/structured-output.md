@@ -1,38 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=tr
-fetched_at: 2026-08-24T02:37:03.574819+00:00
-title: "Yap\u0131land\u0131r\u0131lm\u0131\u015f \u00e7\u0131k\u0131\u015flar \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=ja
+fetched_at: 2026-08-31T06:38:49.014880+00:00
+title: "\u69cb\u9020\u5316\u51fa\u529b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Geri bildirim gönderin
+フィードバックを送信
 
-# Yapılandırılmış çıkışlar
+# 構造化出力
 
-Gemini modellerini, sağlanan bir JSON şemasına uygun yanıtlar oluşturacak şekilde yapılandırabilirsiniz. Bu sayede, tahmin edilebilir ve tür açısından güvenli sonuçlar elde edilir. Ayrıca, yapılandırılmamış metinlerden yapılandırılmış verilerin ayıklanması kolaylaşır.
+指定された JSON スキーマに準拠したレスポンスを生成するように Gemini モデルを構成できます。これにより、予測可能で型安全な結果が保証され、非構造化テキストから構造化データを抽出するプロセスが簡素化されます。
 
-Yapılandırılmış çıkışlar şu durumlarda idealdir:
+構造化出力の使用は、次のような場合に最適です。
 
-- **Veri ayıklama:** Metinden adlar ve tarihler gibi belirli bilgileri alın.
-- **Yapılandırılmış sınıflandırma:** Metni önceden tanımlanmış kategorilere göre sınıflandırın.
-- **Ajan tabanlı iş akışları:** Araçlar veya API'ler için yapılandırılmış girişler oluşturun.
+- **データ抽出:** テキストから名前や日付などの特定の情報を抽出します。
+- **構造化分類:** テキストを事前定義されたカテゴリに分類します。
+- **Agentic ワークフロー:** ツールまたは API の構造化された入力を生成します。
 
-Google GenAI SDK'ları, REST API'de JSON şemasını desteklemenin yanı sıra [Pydantic](https://docs.pydantic.dev/latest/) (Python) ve [Zod](https://zod.dev/) (JavaScript) kullanılarak şemaların tanımlanmasına da olanak tanır.
+REST API での JSON スキーマのサポートに加えて、Google GenAI SDK では、[Pydantic](https://docs.pydantic.dev/latest/)（Python）と [Zod](https://zod.dev/)（JavaScript）を使用してスキーマを定義できます。
 
-## Yapılandırılmış çıkış örnekleri
+## 構造化された出力の例
 
-### Recipe Extractor
+### レシピ エクストラクタ
 
-Bu örnekte, `object`, `array`, `string` ve `integer` gibi temel JSON şema türlerini kullanarak metinden yapılandırılmış verilerin nasıl ayıklanacağı gösterilmektedir.
+この例では、`object`、`array`、`string`、`integer` などの基本的な JSON スキーマ型を使用して、テキストから構造化データを抽出する方法を示します。
 
 ### Python
 
@@ -196,7 +196,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Örnek Yanıt:**
+**レスポンスの例:**
 
 ```
 {
@@ -224,9 +224,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### İçerik Denetimi
+### コンテンツの管理
 
-Bu örnekte, koşullu şemalar için `anyOf`, sınıflandırma için `enum` gösterilmektedir. Böylece, çıkış yapısının içeriğe göre değişmesine olanak tanınır.
+この例では、条件付きスキーマの `anyOf` と分類の `enum` を示しています。これにより、コンテンツに基づいて出力構造を変化させることができます。
 
 ### Python
 
@@ -375,7 +375,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Örnek Yanıt:**
+**レスポンスの例:**
 
 ```
 {
@@ -386,9 +386,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### Yinelemeli Yapılar
+### 再帰的構造
 
-Bu örnekte, kuruluş şeması gibi yinelemeli bir şemanın nasıl tanımlanacağı gösterilmektedir.
+この例は、組織図などの再帰的スキーマを定義する方法を示しています。
 
 ### Python
 
@@ -505,7 +505,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Örnek Yanıt:**
+**レスポンスの例:**
 
 ```
 {
@@ -532,9 +532,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-## Yayın sonuçları
+## ストリーミング結果
 
-Yapılandırılmış çıkışları yayınlayarak yanıt oluşturulurken işlemeye başlamanıza olanak tanır. Yayınlanan parçalar, son JSON nesnesini oluşturmak için birleştirilebilen geçerli kısmi JSON dizeleridir.
+構造化された出力をストリーミングできるため、レスポンスの生成中に処理を開始できます。ストリーミングされたチャンクは、最終的な JSON オブジェクトを形成するために連結できる有効な部分 JSON 文字列です。
 
 ### Python
 
@@ -631,9 +631,9 @@ curl -N -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
     }'
 ```
 
-## Araçlarla yapılandırılmış çıkışlar
+## ツールを使用した構造化出力
 
-Gemini 3, Yapılandırılmış Çıkışları [Google Arama ile Temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr), [URL Bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr), [Kod Yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr), [Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr#structured-output) ve [İşlev Çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) gibi yerleşik araçlarla birleştirmenize olanak tanır.
+Gemini 3 では、構造化出力を [Google 検索によるグラウンディング](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)、[URL コンテキスト](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)、[コード実行](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)、[ファイル検索](https://ai.google.dev/gemini-api/docs/file-search?hl=ja#structured-output)、[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)などの組み込みツールと組み合わせることができます。
 
 ### Python
 
@@ -726,79 +726,79 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## JSON şeması desteği
+## JSON スキーマのサポート
 
-JSON nesnesi oluşturmak için `response_format` öğesini `text` türünde bir nesneyle (veya nesne içeren bir diziyle) yapılandırın ve `mime_type` özelliğini `application/json` olarak ayarlayın. Şema, `schema` alanında sağlanmalıdır.
+JSON オブジェクトを生成するには、`response_format` を `text` 型のオブジェクト（またはオブジェクトを含む配列）で構成し、その `mime_type` を `application/json` に設定します。スキーマは `schema` フィールドで指定する必要があります。
 
-Gemini'ın yapılandırılmış çıkış modu, [JSON Şeması](https://json-schema.org/) spesifikasyonunun bir alt kümesini destekler.
+Gemini の構造化出力モードは、[JSON スキーマ](https://json-schema.org/)仕様のサブセットをサポートしています。
 
-`type` için aşağıdaki değerler desteklenir:
+次の `type` 値がサポートされます。
 
-- **`string`**: Metin için.
-- **`number`**: Kayan noktalı sayılar için.
-- **`integer`**: Tam sayılar için.
-- **`boolean`**: Doğru veya yanlış değerler için.
-- **`object`**: Anahtar/değer çiftleri içeren yapılandırılmış veriler için.
-- **`array`**: Öğe listeleri için.
-- **`null`**: Bir özelliğin null olmasına izin vermek için tür dizisine `"null"` değerini ekleyin (ör. `{"type": ["string", "null"]}`).
+- **`string`**: テキストの場合。
+- **`number`**: 浮動小数点数。
+- **`integer`**: 整数の場合。
+- **`boolean`**: true または false の値。
+- **`object`**: Key-Value ペアを含む構造化データの場合。
+- **`array`**: 項目のリストの場合。
+- **`null`**: プロパティを null にするには、型配列に `"null"` を含めます（例: `{"type": ["string", "null"]}`）。
 
-Bu açıklayıcı özellikler, modele yol göstermeye yardımcı olur:
+これらの説明プロパティは、モデルのガイドに役立ちます。
 
-- **`title`**: Bir mülkün kısa açıklaması.
-- **`description`**: Bir mülkün daha uzun ve ayrıntılı açıklaması.
+- **`title`**: プロパティの簡単な説明。
+- **`description`**: プロパティの詳細な説明。
 
-### Türe özel özellikler
+### 型固有のプロパティ
 
-**`object` değerleri için:**
+**`object` 値の場合:**
 
-- **`properties`**: Her anahtarın bir özellik adı, her değerin ise söz konusu özelliğin şeması olduğu bir nesne.
-- **`required`**: Hangi özelliklerin zorunlu olduğunu listeleyen bir dizeler dizisi.
-- **`additionalProperties`**: `properties` içinde listelenmeyen özelliklere izin verilip verilmeyeceğini kontrol eder. Boole veya şema olabilir.
+- **`properties`**: 各キーがプロパティ名で、各値がそのプロパティのスキーマであるオブジェクト。
+- **`required`**: 必須のプロパティを列挙した文字列の配列。
+- **`additionalProperties`**: `properties` にリストされていないプロパティを許可するかどうかを制御します。ブール値またはスキーマを指定できます。
 
-**`string` değerleri için:**
+**`string` 値の場合:**
 
-- **`enum`**: Sınıflandırma görevleri için olası dizelerin belirli bir kümesini listeler.
-- **`format`**: Dize için `date-time`, `date`, `time` gibi bir söz dizimi belirtir.
+- **`enum`**: 分類タスクで使用できる文字列の特定のセットを一覧表示します。
+- **`format`**: 文字列の構文（`date-time`、`date`、`time` など）を指定します。
 
-**`number` ve `integer` değerleri için:**
+**`number` と `integer` の値の場合:**
 
-- **`enum`**: Olası sayısal değerlerin belirli bir kümesini listeler.
-- **`minimum`**: Minimum dahil edilen değer.
-- **`maximum`**: Maksimum dahil edilen değer.
+- **`enum`**: 可能性のある数値の特定のセットを一覧表示します。
+- **`minimum`**: 最小値（包括的）。
+- **`maximum`**: 最大値（包括的）。
 
-**`array` değerleri için:**
+**`array` 値の場合:**
 
-- **`items`**: Dizideki tüm öğelerin şemasını tanımlar.
-- **`prefixItems`**: İlk N öğe için bir şema listesi tanımlar ve demet benzeri yapılara izin verir.
-- **`minItems`**: Dizideki minimum öğe sayısı.
-- **`maxItems`**: Dizideki maksimum öğe sayısı.
+- **`items`**: 配列内のすべての項目のスキーマを定義します。
+- **`prefixItems`**: 最初の N 個の項目のスキーマのリストを定義し、タプルのような構造を許可します。
+- **`minItems`**: 配列内のアイテムの最小数。
+- **`maxItems`**: 配列内のアイテムの最大数。
 
-## Yapılandırılmış çıkışlar ve işlev çağrısı
+## 構造化出力と関数呼び出し
 
-| Özellik | Birincil Kullanım Alanı |
+| 機能 | 主なユースケース |
 | --- | --- |
-| **Yapılandırılmış Çıkışlar** | **Son yanıtı biçimlendirme** Modelin *yanıtının* belirli bir biçimde olmasını istediğinizde kullanın. |
-| **İşlev Çağırma** | **Sohbet sırasında işlem yapma** Modelin nihai yanıtı vermeden önce bir görevi *yapmanızı istemesi* gerektiğinde kullanılır. |
+| **構造化出力** | **最終的な回答のフォーマット設定。**モデルの*回答*を特定の形式で取得する場合に使用します。 |
+| **関数呼び出し** | **会話中にアクションを実行する。**最終的な回答を提供する前に、モデルがタスクの実行を*ユーザーに求める*必要がある場合に使用します。 |
 
-## En iyi uygulamalar
+## ベスト プラクティス
 
-- **Net açıklamalar:** Modeli yönlendirmek için `description` alanını kullanın.
-- **Güçlü tür:** Belirli türleri (`integer`, `string`, `enum`) kullanın.
-- **İstem mühendisliği:** Modelin ne yapmasını istediğinizi açıkça belirtin.
-- **Doğrulama:** Çıkış söz dizimi açısından doğru JSON olsa da uygulamanızdaki değerleri her zaman doğrulayın.
-- **Hata yönetimi:** Şemaya uygun ancak semantik olarak yanlış çıktılar için etkili hata yönetimi uygulayın.
+- **明確な説明:** `description` フィールドを使用してモデルをガイドします。
+- **強い型付け:** 特定の型（`integer`、`string`、`enum`）を使用します。
+- **プロンプト エンジニアリング:** モデルに実行させたいことを明確に記述します。
+- **検証:** 出力は構文的に正しい JSON ですが、アプリケーションで常に値を検証してください。
+- **エラー処理:** スキーマに準拠しているが意味的に正しくない出力に対して、堅牢なエラー処理を実装します。
 
-## Sınırlamalar
+## 制限事項
 
-- **Şema alt kümesi:** Tüm JSON şema özellikleri desteklenmez.
-- **Şema karmaşıklığı:** Çok büyük veya derin şekilde iç içe yerleştirilmiş şemalar reddedilebilir.
+- **スキーマのサブセット:** JSON スキーマのすべての機能がサポートされているわけではありません。
+- **スキーマの複雑さ:** 非常に大きいスキーマやネストが深いスキーマは拒否されることがあります。
 
-Geri bildirim gönderin
+フィードバックを送信
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Son güncelleme tarihi: 2026-07-30 UTC.
+最終更新日 2026-07-30 UTC。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+ご意見をお聞かせください
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-30 UTC。"],[],[]]

@@ -1,89 +1,87 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/optimization?hl=es-419
-fetched_at: 2026-08-24T02:29:51.511222+00:00
-title: "Optimizaci\u00f3n e inferencia de la API de Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/optimization?hl=ja
+fetched_at: 2026-08-31T06:41:47.007416+00:00
+title: "Gemini API \u306e\u6700\u9069\u5316\u3068\u63a8\u8ad6 \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Enviar comentarios
+フィードバックを送信
 
-# Optimización e inferencia de la API de Gemini
+# Gemini API の最適化と推論
 
-La API de Gemini ofrece una variedad de mecanismos de optimización para ayudarte a equilibrar la velocidad, el costo y la confiabilidad según las necesidades específicas de tu carga de trabajo.
-Ya sea que estés creando bots conversacionales en tiempo real o ejecutando canalizaciones de procesamiento de datos sin conexión pesadas, elegir el paradigma adecuado puede reducir significativamente los costos o aumentar el rendimiento.
+Gemini API には、特定のワークロードのニーズに基づいて速度、コスト、信頼性のバランスを取るのに役立つさまざまな最適化メカニズムが用意されています。リアルタイムの会話型ボットを構築する場合でも、オフラインで大量のデータ処理パイプラインを実行する場合でも、適切なパラダイムを選択することで、コストを大幅に削減したり、パフォーマンスを向上させたりできます。
 
-| Función | Estándar | Flexible | Prioridad | Lote | Almacenamiento en caché |
+| 機能 | 標準 | Flex | 候補 | バッチ | キャッシュ |
 | --- | --- | --- | --- | --- | --- |
-| **Precios** | Precio completo | 50% de descuento | Entre un 75% y un 100% más que el estándar | 50% de descuento | 90% de descuento + almacenamiento de tokens prorrateado |
-| **Latencia** | De segundos a minutos | Minutos (objetivo de 1 a 15 min) | Segundos | Hasta 24 horas | Tiempo hasta el primer token más rápido |
-| **Confiabilidad** | Alta / media-alta | Mejor esfuerzo (descartable) | Alta (no se desprende) | Alta (para la capacidad de procesamiento) | N/A |
-| **Interfaz** | Síncrona | Síncrona | Síncrona | Asíncrono | Estado guardado |
-| **Mejor caso de uso** | Flujos de trabajo generales de la aplicación | Cadenas secuenciales no urgentes | Apps de producción para el usuario | Conjuntos de datos masivos y evaluaciones sin conexión | Consultas recurrentes sobre el mismo archivo |
+| **料金** | 正規料金 | 50% 割引 | 標準の 75% ～ 100% 増 | 50% 割引 | 90% 割引 + トークン ストレージの比例配分 |
+| **レイテンシ** | 数秒～数分 | 数分（目標 1 ～ 15 分） | 秒 | 最大 24 時間 | 最初のトークンまでの時間を短縮 |
+| **信頼性** | 高 / 中～高 | ベスト エフォート（削減可能） | 高（削減不可） | 高（スループットの場合） | なし |
+| **インターフェース** | 同期 | 同期 | 同期 | 非同期 | 保存された状態 |
+| **最適なユースケース** | 一般的なアプリケーション ワークフロー | 緊急性の低いシーケンシャル チェーン | 本番環境のユーザー向けアプリ | 大規模なデータセット、オフライン評価 | 同じファイルに対する繰り返しクエリ |
 
-## Niveles de servicio de inferencia (síncronos)
+## 推論サービスティア（同期）
 
-Puedes cambiar entre el tráfico síncrono optimizado para la confiabilidad y el optimizado para el costo pasando el parámetro `service_tier` en tus llamadas de generación estándar.
+標準生成呼び出しで `service_tier` パラメータを渡すことで、信頼性最適化と費用最適化の同期トラフィックを切り替えることができます。
 
-### Inferencia estándar (predeterminada)
+### 標準推論（デフォルト）
 
-El nivel estándar es la opción predeterminada para la generación de contenido secuencial.
-Proporciona tiempos de respuesta normales sin primas adicionales ni largas filas.
+標準ティアは、シーケンシャル コンテンツ生成のデフォルト オプションです。追加料金や大量のキューイングなしで、通常のレスポンス時間を実現します。
 
-- **Confiabilidad:** Criticidad estándar
-- **Precio:** Precios estándar.
-- **Ideal para:** La mayoría de las aplicaciones interactivas cotidianas.
+- **信頼性:** 標準の重要度
+- **料金:** 標準料金。
+- **最適な用途:** ほとんどのインタラクティブな日常業務アプリケーション。
 
-### Inferencia prioritaria (optimización de latencia)
+### 優先度推論（レイテンシ最適化）
 
-El procesamiento con [prioridad](https://ai.google.dev/gemini-api/docs/priority-inference?hl=es-419) dirige tus solicitudes a colas de procesamiento de alta criticidad.
-Este tráfico es estrictamente no descartable (nunca se interrumpe por otros niveles) y ofrece la mayor confiabilidad. Si superas los límites de prioridad dinámica, el sistema degradará correctamente la solicitud al procesamiento estándar en lugar de fallar con un error.
+[優先度](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ja)処理では、リクエストが高重要度のコンピューティング キューにルーティングされます。このトラフィックは厳密に削減不可（他のティアによってプリエンプトされない）で、最高の信頼性を提供します。動的な優先度の上限を超過した場合、エラーで失敗する代わりに、リクエストは標準処理に正常にダウングレードされます。
 
-- **Confiabilidad:** Criticidad más alta
-- **Precio:** Entre un 75% y un 100% más que las tarifas estándar.
-- **Ideal para:** Chatbots de atención al cliente, detección de fraudes en tiempo real y copilotos fundamentales para la empresa.
+- **信頼性:** 最も高い重要度
+- **料金:** 標準料金の 75% ～ 100% 増。
+- **最適な用途:** カスタマー chatbot、リアルタイムの不正使用検出、ビジネスに不可欠なコパイロット。
 
-### Inferencia flexible (con optimización de costos)
+### Flex 推論（費用最適化）
 
-[Flex inference](https://ai.google.dev/gemini-api/docs/flex-inference?hl=es-419) ofrece un 50% de descuento en comparación con las tarifas estándar, ya que utiliza capacidad de procesamiento oportunista fuera de las horas pico. Las solicitudes se procesan de forma síncrona, lo que significa que no es necesario que reescribas el código para administrar objetos por lotes.
-Dado que es tráfico "descartable", es posible que las solicitudes se interrumpan si el sistema experimenta picos de tráfico estándar.
+[Flex 推論](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ja)では、機会的なオフピーク コンピューティング容量を利用することで、標準料金と比較して 50% の割引が適用されます。リクエストは同期的に処理されるため、バッチ オブジェクトを管理するためにコードを書き換える必要はありません。
+「削減可能」なトラフィックであるため、システムで標準トラフィックの急増が発生すると、リクエストがプリエンプトされる可能性があります。
 
-- **Confiabilidad:** Criticidad descartable y no garantizada
-- **Precio:** El 50% del precio estándar (se factura por token).
-- **Ideal para:** Flujos de trabajo de agentes de varios pasos en los que la llamada N+1 depende del resultado de la llamada N, actualizaciones del CRM en segundo plano y evaluaciones sin conexión.
+- **信頼性:** 非保証型、削減可能な重要度
+- **料金:** 標準料金の 50%（トークン単位で課金）。
+- **最適な用途:** 呼び出し N+1 が呼び出し N の出力に依存するマルチステップ エージェント ワークフロー、バックグラウンド CRM の更新、オフライン評価。
 
-## API de Batch (masiva y asíncrona)
+## Batch API（一括、非同期）
 
-[La API de Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=es-419) está diseñada para procesar grandes volúmenes de solicitudes de forma asíncrona con el 50% del costo estándar. Puedes enviar solicitudes como diccionarios intercalados o con un archivo de entrada JSONL (hasta 2 GB). Procesa las solicitudes con colas de capacidad de procesamiento en segundo plano con un tiempo de respuesta objetivo de 24 horas.
+[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja) は、大量のリクエストを標準料金の 50% で非同期的に処理するように設計されています。リクエストは、インライン ディクショナリとして送信することも、JSONL 入力ファイル（最大 2 GB）を使用して送信することもできます。リクエストは、バックグラウンド スループット キューを使用して処理され、目標のターンアラウンド時間は 24 時間です。
 
-- **Confiabilidad:** Descartable, pero con reintentos automáticos y sistema de filas de espera las 24 horas
-- **Precio:** El 50% del precio estándar.
-- **Ideal para:** Realizar el procesamiento previo de conjuntos de datos masivos, ejecutar conjuntos de pruebas de regresión periódicas y generar grandes volúmenes de imágenes o incorporaciones
+- **信頼性:** 削減可能ですが、24 時間の自動再試行とキューイング システムがあります
+- **料金:** 標準料金の 50%。
+- **最適な用途:** 大規模なデータセットの事前処理、定期的な回帰テスト スイートの実行、大量の画像または埋め込みの生成。
 
-## Almacenamiento de contexto en caché (ahorro de entradas)
+## コンテキスト キャッシュ保存（入力の削減）
 
-El [almacenamiento en caché de contexto](https://ai.google.dev/gemini-api/docs/caching?hl=es-419) se usa cuando las solicitudes más cortas hacen referencia repetidamente a un contexto inicial sustancial.
+[コンテキスト キャッシュ保存](https://ai.google.dev/gemini-api/docs/caching?hl=ja)は、初期
+コンテキストの実体部分が、短いリクエストで繰り返し参照される場合に使用されます。
 
-- **Almacenamiento en caché implícito:** Se habilita automáticamente en los modelos de Gemini 2.5 y versiones posteriores.
-  El sistema transfiere los ahorros de costos si tu solicitud alcanza las cachés existentes basadas en prefijos de instrucciones comunes.
-- **Almacenamiento en caché explícito:** Puedes crear manualmente un objeto de caché con un tiempo de actividad (TTL) específico. Una vez creados, puedes consultar los tokens almacenados en caché para las solicitudes posteriores y evitar pasar la misma carga útil del corpus de forma repetida.
-- **Precio:** Se factura según la cantidad de tokens de caché y la duración del almacenamiento (TTL).
-- **Ideal para:** Chatbots con instrucciones del sistema extensas, análisis repetitivos de archivos de video largos o consultas en grandes conjuntos de documentos
+- **暗黙的キャッシュ保存:** Gemini 2.5 以降のモデルで自動的に有効になります。
+  リクエストが一般的なプロンプト プレフィックスに基づいて既存のキャッシュにヒットした場合、システムはコスト削減を転送します。
+- **明示的なキャッシュ保存:** 特定の有効期間（TTL）でキャッシュ オブジェクトを手動で作成できます。作成したら、後続のリクエストでキャッシュに保存されたトークンを参照して、同じコーパス ペイロードを繰り返し渡さないようにします。
+- **料金:** キャッシュ トークン数と保存期間（TTL）に基づいて課金されます。
+- **最適な用途:** 広範なシステム指示を伴う chatbot、長い動画ファイルの繰り返し分析、大規模なドキュメント セットに対するクエリ。
 
-Enviar comentarios
+フィードバックを送信
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Última actualización: 2026-04-29 (UTC)
+最終更新日 2026-04-29 UTC。
 
-¿Quieres brindar más información?
+ご意見をお聞かせください
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]

@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=fr
-fetched_at: 2026-08-24T02:20:16.173103+00:00
+fetched_at: 2026-08-31T06:34:20.503128+00:00
 title: "Combiner les outils int\u00e9gr\u00e9s et l'appel de fonction \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

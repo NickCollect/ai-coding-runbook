@@ -1,135 +1,134 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-android?hl=hi
-fetched_at: 2026-08-24T02:29:25.210129+00:00
-title: "Google AI Studio \u092e\u0947\u0902 Android \u0910\u092a\u094d\u0932\u093f\u0915\u0947\u0936\u0928 \u092c\u0928\u093e\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-android?hl=zh-TW
+fetched_at: 2026-08-31T06:42:30.402305+00:00
+title: "\u5728 Google AI Studio \u4e2d\u5efa\u69cb Android \u61c9\u7528\u7a0b\u5f0f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-सुझाव भेजें
+提供意見
 
-# Google AI Studio में Android ऐप्लिकेशन बनाना
+# 在 Google AI Studio 中建構 Android 應用程式
 
-Google AI Studio की मदद से, नैचुरल लैंग्वेज वाले प्रॉम्प्ट का इस्तेमाल करके नेटिव Android ऐप्लिकेशन बनाए जा सकते हैं. आपको जिस तरह का ऐप्लिकेशन चाहिए उसके बारे में बताएं. इसके बाद, [Antigravity Agent](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=hi#antigravity-agent), Kotlin और [Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=hi) का पूरा प्रोजेक्ट जनरेट करता है. अपने ब्राउज़र से, ब्राउज़र पर आधारित Android एम्युलेटर में अपने ऐप्लिकेशन का पूर्वावलोकन किया जा सकता है. साथ ही, इसे किसी फ़िज़िकल डिवाइस पर इंस्टॉल किया जा सकता है और टेस्टिंग के लिए पब्लिश किया जा सकता है.
+Google AI Studio 可讓您根據自然語言提示建構原生 Android 應用程式。說明您想要的應用程式，[Antigravity Agent](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=zh-tw#antigravity-agent) 就會生成完整的 Kotlin 和 [Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=zh-tw) 專案。您可以在瀏覽器中預覽應用程式，透過瀏覽器型 Android 模擬器安裝應用程式到實體裝置，並發布應用程式以進行測試。
 
-## अपनी प्रोफ़ाइल बनाना शुरू करें
+## 開始使用
 
-Android ऐप्लिकेशन बनाना शुरू करने के लिए:
+如要開始建構 Android 應用程式，請按照下列步驟操作：
 
-1. बाईं ओर मौजूद नेविगेशन पैनल का इस्तेमाल करके, Google AI Studio में [बिल्ड मोड](https://aistudio.google.com/apps?hl=hi) पर जाएं.
-2. प्लैटफ़ॉर्म पिकर से **Android** चुनें.
-3. आपको जिस तरह का ऐप्लिकेशन बनाना है उसके बारे में बताने के लिए, प्रॉम्प्ट डालें. उदाहरण के लिए, *"लोकल स्टोरेज की सुविधा वाला, रोज़ के टास्क ट्रैक करने वाला ऐप्लिकेशन बनाओ"* या *"एक सामान्य कैल्क्यूलेटर बनाओ"*.
-4. एजेंट, प्रोजेक्ट जनरेट करता है और उसे ब्राउज़र पर आधारित Android एम्युलेटर में लॉन्च करता है.
+1. 使用左側導覽面板，前往 Google AI Studio 的[建構模式](https://aistudio.google.com/apps?hl=zh-tw)。
+2. 從平台挑選器中選取「Android」**Android**。
+3. 輸入提示詞，描述要建構的應用程式 (例如*「建立具有本機儲存空間的每日工作追蹤表」*或*「建立簡易計算機」*)。
+4. 代理程式會產生專案，並在以瀏覽器為基礎的 Android 模擬器中啟動專案。
 
-इसके बाद, चैट पैनल का इस्तेमाल करके अपने ऐप्लिकेशन को बेहतर बनाया जा सकता है. यह ठीक वैसा ही होगा जैसा वेब पर किया जाता है. यह एजेंट, आपके Android प्रोजेक्ट की सभी फ़ाइलों को मैनेज करता है. साथ ही, कोडबेस में बदलावों को लागू करता है.
+接著，您就能使用聊天面板反覆改良應用程式，就像在網頁上操作一樣。代理程式會管理 Android 專案中的所有檔案，並在程式碼集內傳播變更。
 
-## ब्राउज़र पर आधारित Android Emulator
+## 瀏覽器式 Android 模擬器
 
-Android एम्युलेटर पूरी तरह से क्लाउड में चलता है और आपके ब्राउज़र पर स्ट्रीम होता है.
-आपको Android SDK, Android Studio या लोकल एम्युलेटर इंस्टॉल करने की ज़रूरत नहीं है.
+Android 模擬器完全在雲端執行，並串流至瀏覽器。
+您不需要安裝 Android SDK、Android Studio 或本機模擬器。
 
-एम्युलेटर में ये सुविधाएं मिलती हैं:
+模擬器提供以下功能：
 
-- **Pixel जैसे डिवाइस का सिम्युलेशन**: किसी असली डिवाइस की तरह, अपने ऐप्लिकेशन पर टैप करें, स्क्रोल करें, और उसके साथ इंटरैक्ट करें.
-- **स्क्रीन घुमाने की सुविधा**: पोर्ट्रेट और लैंडस्केप ओरिएंटेशन के बीच टॉगल करें.
-- **लाइव झलक**: जब एजेंट कोड में बदलाव करता है, तो ऐप्लिकेशन फिर से बनता है और एम्युलेटर अपने-आप रीफ़्रेश हो जाता है.
+- **模擬 Pixel 裝置**：輕觸、捲動及與應用程式互動，就像在實際裝置上操作一樣。
+- **支援旋轉**：切換直向和橫向模式。
+- **即時預覽**：當代理程式變更程式碼時，應用程式會重建，模擬器也會自動重新整理。
 
-### एम्युलेटर की सीमाएं
+### 模擬器限制
 
-ब्राउज़र पर आधारित एम्युलेटर में, हार्डवेयर की सभी सुविधाएं काम नहीं करती हैं. ये सुविधाएं, एम्युलेटर में उपलब्ध नहीं हैं:
+瀏覽器型模擬器不支援所有硬體功能。模擬器不支援下列功能：
 
-- कैमरा और फ़ोटो कैप्चर करने की सुविधा
-- एनएफ़सी और ब्लूटूथ
-- जीपीएस (जगह की जानकारी सिम्युलेट की गई है)
-- Google Play services (Google साइन-इन, Maps, और Play services की अन्य सुविधाएं असली डिवाइस पर काम करती हैं, लेकिन एम्युलेटर में नहीं)
+- 拍攝相片
+- NFC 和藍牙
+- GPS (模擬位置)
+- Google Play 服務 (Google 登入、地圖和其他 Play 服務功能可在實體裝置上運作，但無法在模擬器中運作)
 
-## ADB की सुविधा वाले डिवाइस पर इंस्टॉल करना
+## 透過 ADB 安裝到裝置
 
-बनाए गए APK को सीधे तौर पर, किसी ऐसे Android डिवाइस पर इंस्टॉल किया जा सकता है जो यूएसबी के ज़रिए आपके कंप्यूटर से कनेक्ट हो. यह ब्राउज़र के ज़रिए आपके डिवाइस से कम्यूनिकेट करने के लिए, [WebUSB](https://developer.chrome.com/docs/capabilities/usb?hl=hi) का इस्तेमाल करता है. ADB को स्थानीय तौर पर इंस्टॉल करने की ज़रूरत नहीं है.
+您可以直接在透過 USB 連接至電腦的實體 Android 裝置上安裝建構的 APK。這項功能會使用 [WebUSB](https://developer.chrome.com/docs/capabilities/usb?hl=zh-tw)，透過瀏覽器與裝置通訊。您無需在本機安裝 ADB。
 
-### ज़रूरी शर्तें
+### 必要條件
 
-- WebUSB के साथ काम करने वाला Chrome या Edge ब्राउज़र.
-- Android डिवाइस पर [डेवलपर के लिए सेटिंग और टूल और यूएसबी डीबग करने की सुविधा](https://developer.android.com/studio/debug/dev-options?hl=hi) चालू होनी चाहिए.
-- आपके डिवाइस को कंप्यूटर से कनेक्ट करने वाली यूएसबी केबल.
+- 支援 WebUSB 的 Chrome 或 Edge 瀏覽器。
+- 已啟用[開發人員選項和 USB 偵錯](https://developer.android.com/studio/debug/dev-options?hl=zh-tw)的 Android 裝置。
+- 將裝置連接到電腦的 USB 傳輸線。
 
-### अपने डिवाइस पर ऐप्लिकेशन इंस्टॉल करना
+### 在裝置上安裝應用程式
 
-1. झलक दिखाने वाले पैनल में, **डिवाइस पर इंस्टॉल करें** पर क्लिक करें.
-2. ब्राउज़र के यूएसबी डिवाइस पिकर से, अपना Android डिवाइस चुनें.
-3. एपीके को आपके डिवाइस पर ट्रांसफ़र करके इंस्टॉल कर दिया जाता है.
-4. ऐप्लिकेशन अपने-आप लॉन्च हो जाता है.
+1. 在預覽面板中，按一下「在裝置上安裝」。
+2. 在瀏覽器的 USB 裝置選擇器中選取 Android 裝置。
+3. APK 會傳輸到裝置並安裝。
+4. 應用程式會自動啟動。
 
-## Play Store पर पब्लिश करना
+## 發布至 Play 商店
 
-अपने Android ऐप्लिकेशन को [Google Play Console](https://play.google.com/console?hl=hi) के इंटरनल टेस्टिंग ट्रैक पर पब्लिश किया जा सकता है. इससे, ऐप्लिकेशन को ज़्यादा से ज़्यादा 100 टेस्टर के साथ शेयर किया जा सकता है.
+您可以將 Android 應用程式發布至 [Google Play 管理中心](https://play.google.com/console?hl=zh-tw)的內部測試群組，最多可將應用程式發布給 100 位測試人員。
 
-### ज़रूरी शर्तें
+### 必要條件
 
-- [Google Play डेवलपर खाता](https://play.google.com/console/signup?hl=hi) (इसके लिए, रजिस्ट्रेशन के लिए एक बार में 25 डॉलर का शुल्क देना होगा).
-- Play Console में डेवलपर प्रोफ़ाइल पूरी की गई हो.
+- [Google Play 開發人員帳戶](https://play.google.com/console/signup?hl=zh-tw) (需支付 $25 美元的單次註冊費)。
+- 在 Play 管理中心填妥開發人員設定檔。
 
-### ऐप्लिकेशन पब्लिश करना
+### 發布應用程式
 
-1. Google AI Studio में **सेटिंग > पब्लिश करें** खोलें.
-2. **Play Store पर पब्लिश करें** पर क्लिक करें.
-3. अपने Google Play डेवलपर खाते से पुष्टि करें.
-4. AI Studio, APK पर हस्ताक्षर करता है, ऐप्लिकेशन की लिस्टिंग बनाता है (या नया वर्शन अपलोड करता है),
-   और उसे इंटरनल टेस्टिंग ट्रैक पर पब्लिश करता है.
-5. आपको एक लिंक मिलता है, जिसे टेस्टर के साथ शेयर किया जा सकता है.
+1. 在 Google AI Studio 中開啟「設定」>「發布」。
+2. 按一下「發布至 Play 商店」。
+3. 使用 Google Play 開發人員帳戶進行驗證。
+4. AI Studio 會簽署 APK、建立應用程式資訊 (或上傳新版本)，並發布至內部測試群組。
+5. 您會收到一個連結，可分享給測試人員。
 
-AI Studio, मैनेज किए गए कीस्टोर का इस्तेमाल करके, APK साइनिंग को अपने-आप मैनेज करता है. Play Console में जाकर, ऐप्लिकेशन की लिस्टिंग (आइकॉन, स्क्रीनशॉट, जानकारी) को बाद में भी अपनी पसंद के मुताबिक बनाया जा सकता है.
+AI Studio 會使用代管的 KeyStore 自動管理 APK 簽署作業。您可以在 Play 管理中心自訂應用程式資訊 (圖示、螢幕截圖、說明)。
 
-## क्या जनरेट किया गया है
+## 生成內容
 
-Android ऐप्लिकेशन बनाने पर, एजेंट एक स्टैंडर्ड Gradle-आधारित प्रोजेक्ट जनरेट करता है. इसका स्ट्रक्चर इस तरह होता है:
+建構 Android 應用程式時，代理程式會產生標準的 Gradle 專案，結構如下：
 
-- **बिल्ड कॉन्फ़िगरेशन**: Kotlin DSL का इस्तेमाल करके `build.gradle.kts` फ़ाइलें (प्रोजेक्ट और ऐप्लिकेशन लेवल).
-- **यूज़र इंटरफ़ेस (यूआई) लेयर**: [Material 3](https://m3.material.io/) थीमिंग वाले [Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=hi) कॉम्पोनेंट.
-- **आर्किटेक्चर**: ViewModels और डेटा क्लास के साथ सिंगल-ऐक्टिविटी आर्किटेक्चर.
-- **संसाधन**: `AndroidManifest.xml`, ड्रॉएबल, स्ट्रिंग, और अन्य Android संसाधन.
+- **建構設定**：使用 Kotlin DSL 的 `build.gradle.kts` 檔案 (專案和應用程式層級)。
+- **UI 層**：使用 [Material 3](https://m3.material.io/) 主題設定的 [Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=zh-tw) 元件。
+- **架構**：單一活動架構，包含 ViewModel 和資料類別。
+- **資源**：`AndroidManifest.xml`、可繪項目、字串和其他 Android 資源。
 
-यह एजेंट, Gradle डिपेंडेंसी को अपने-आप मैनेज करता है. साथ ही, ज़रूरत के हिसाब से Maven और Google रिपॉज़िटरी से पैकेज जोड़ता है.
+代理程式會自動管理 Gradle 依附元件，並視需要從 Maven 和 Google 存放區新增套件。
 
-झलक वाले पैनल में मौजूद **कोड** टैब का इस्तेमाल करके, जनरेट किए गए कोड को देखा और उसमें बदलाव किया जा सकता है. Android Studio में डेवलपमेंट जारी रखने के लिए, प्रोजेक्ट को **ZIP फ़ाइल** के तौर पर डाउनलोड करें.
+您可以使用預覽面板中的「程式碼」分頁，查看及編輯產生的程式碼。如要在 Android Studio 中繼續開發，請將專案下載為 **ZIP 檔案**。
 
-## सीमाएं
+## 限制
 
-AI Studio में Android ऐप्लिकेशन बनाने से जुड़ी ये सीमाएं हैं:
+在 AI Studio 中建構 Android 應用程式時，有下列限制：
 
-### प्लैटफ़ॉर्म से जुड़ी सीमाएं
+### 平台限制
 
-- **सिर्फ़ क्लाइंट-साइड**: Android ऐप्लिकेशन में सर्वर-साइड कॉम्पोनेंट शामिल नहीं होता.
-  सर्वर रनटाइम की ज़रूरत वाली सुविधाएं (जैसे, सीक्रेट मैनेजमेंट, मल्टीप्लेयर, Firebase, Google Workspace API) उपलब्ध नहीं हैं.
-- **सिंगल-ऐक्टिविटी आर्किटेक्चर**: सिर्फ़ सिंगल-ऐक्टिविटी और सिंगल-मॉड्यूल वाले प्रोजेक्ट काम करते हैं.
-- **सिर्फ़ Jetpack Compose**: ऐप्लिकेशन, Kotlin और Jetpack Compose का इस्तेमाल करते हैं. Java और XML लेआउट इस्तेमाल नहीं किए जा सकते.
-- **कोई NDK या नेटिव कोड नहीं**: C और C++ कोड काम नहीं करता.
-- **Wear OS या Android TV पर काम नहीं करता**: यह सिर्फ़ फ़ोन और टैबलेट पर काम करता है.
+- **僅限用戶端**：Android 應用程式不含伺服器端元件。
+  需要伺服器執行階段的功能 (密鑰管理、多人遊戲、Firebase、Google Workspace API) 無法使用。
+- **單一活動架構**：僅支援單一活動、單一模組專案。
+- **僅限 Jetpack Compose**：應用程式使用 Kotlin 和 Jetpack Compose。不支援 Java 和 XML 版面配置。
+- **不含 NDK 或原生程式碼**：不支援 C 和 C++ 程式碼。
+- **不支援 Wear OS 或 Android TV**：僅支援手機和平板電腦板型規格。
 
-### एक्सपोर्ट करने से जुड़ी सीमाएं
+### 匯出限制
 
-- **सिर्फ़ ZIP फ़ाइल डाउनलोड करें**: प्रोजेक्ट को ZIP फ़ाइल के तौर पर डाउनलोड किया जा सकता है. GitHub पर एक्सपोर्ट करने की सुविधा, अभी Android प्रोजेक्ट के लिए उपलब्ध नहीं है.
+- **僅下載 ZIP 檔**：您可以將專案下載為 ZIP 檔案。Android 專案目前無法匯出至 GitHub。
 
-## आगे क्या करना है
+## 後續步驟
 
-- [Google AI Studio में ऐप्लिकेशन बनाना](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=hi)
-- [फ़ुल-स्टैक ऐप्लिकेशन डेवलप करना](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=hi) (वेब)
-- [App Gallery](https://aistudio.google.com/apps?source=showcase&hl=hi) में उदाहरण देखें.
+- [在 Google AI Studio 中建構應用程式](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=zh-tw)
+- [開發全端應用程式](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=zh-tw) (網頁)
+- 請參閱[應用程式庫](https://aistudio.google.com/apps?source=showcase&hl=zh-tw)中的範例。
 
-सुझाव भेजें
+提供意見
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-आखिरी बार 2026-08-19 (UTC) को अपडेट किया गया.
+上次更新時間：2026-08-19 (世界標準時間)。
 
-क्या आपको हमें और कुछ बताना है?
+想進一步說明嗎？
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-08-19 (UTC) को अपडेट किया गया."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-08-19 (世界標準時間)。"],[],[]]

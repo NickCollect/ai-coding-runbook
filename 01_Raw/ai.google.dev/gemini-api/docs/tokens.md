@@ -1,46 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=es-419
-fetched_at: 2026-08-24T02:33:30.438386+00:00
-title: "Comprender y contar tokens \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=zh-CN
+fetched_at: 2026-08-31T06:38:44.901548+00:00
+title: "\u4e86\u89e3\u8bcd\u5143\u5e76\u8ba1\u7b97\u8bcd\u5143\u6570\u91cf \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Enviar comentarios
+发送反馈
 
-# Comprender y contar tokens
+# 了解词元并计算词元数量
 
-Gemini y otros modelos de IA generativa procesan la entrada y la salida con una granularidad llamada *token*.
+Gemini 和其他生成式 AI 模型会以一种称为“token”的粒度处理输入和输出。
 
-**En el caso de los modelos de Gemini, un token equivale a aproximadamente 4 caracteres.
-100 tokens equivalen a entre 60 y 80 palabras en inglés.**
+**对于 Gemini 模型，一个 token 大致相当于 4 个字符。
+100 个 token 大约相当于 60-80 个英文单词。**
 
-## Acerca de los tokens
+## 令牌简介
 
-Los tokens pueden ser caracteres individuales, como `z`, o palabras completas, como `cat`. Las palabras largas se dividen en varios tokens. El conjunto de todos los tokens que usa el modelo se denomina vocabulario, y el proceso de dividir el texto en tokens se denomina *tokenización*.
+词元可以是单个字符（例如 `z`），也可以是整个字词（例如 `cat`）。长字词会被拆分为多个 token。模型使用的所有 token 的集合称为词汇，将文本拆分为 token 的过程称为*分词*。
 
-Cuando la facturación está habilitada, el [costo de una llamada a la API de Gemini](https://ai.google.dev/pricing?hl=es-419) se
-determina, en parte, por la cantidad de tokens de entrada y salida, por lo que saber cómo
-contarlos puede ser útil.
+启用结算功能后，[调用 Gemini API 的费用](https://ai.google.dev/pricing?hl=zh-cn)部分取决于输入和输出词元的数量，因此了解如何计算词元数量会很有帮助。
 
-## Cuenta tokens
+## 统计 token 数量
 
-Toda la entrada y la salida de la API de Gemini se tokeniza, incluido el texto, los archivos de imagen y otras modalidades que no son de texto.
+Gemini API 的所有输入和输出（包括文本、图片文件和其他非文本模态）都会进行分词。
 
-Puedes contar tokens de las siguientes maneras:
+您可以通过以下方式统计令牌数量：
 
-- **Llama `count_tokens` con la entrada de la solicitud.** Muestra la cantidad total de tokens *solo en la entrada*. Realiza esta llamada antes de enviar la entrada para verificar el tamaño de tus solicitudes.
-- **Usa el `usage` en la respuesta de interacción.** Muestra los recuentos de tokens para la entrada (`total_input_tokens`), la salida (`total_output_tokens`), el pensamiento (`total_thought_tokens`), el contenido almacenado en caché (`total_cached_tokens`), el uso de herramientas (`total_tool_use_tokens`) y el total (`total_tokens`).
+- **使用请求的输入调用 `count_tokens`。**返回*仅输入*中的词元总数。在发送输入之前调用此方法，以检查请求的大小。
+- **在互动响应中使用 `usage`。**返回输入 (`total_input_tokens`)、输出 (`total_output_tokens`)、思考 (`total_thought_tokens`)、缓存内容 (`total_cached_tokens`)、工具使用 (`total_tool_use_tokens`) 和总计 (`total_tokens`) 的 token 数。
 
-### Cuenta tokens de texto
+### 统计文本 token
 
 ### Python
 
@@ -100,9 +98,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
   -d '{"contents": [{"parts": [{"text": "The quick brown fox."}]}]}'
 ```
 
-### Cuenta tokens de varias turnos
+### 统计多轮对话的 token 数量
 
-Cuenta tokens en el historial de conversaciones con `previous_interaction_id`:
+使用 `previous_interaction_id` 统计整个对话历史记录中的 token 数量：
 
 ### Python
 
@@ -148,16 +146,16 @@ console.log(`Input tokens: ${interaction2.usage.total_input_tokens}`);
 console.log(`Output tokens: ${interaction2.usage.total_output_tokens}`);
 ```
 
-### Cuenta tokens multimodales
+### 统计多模态 token
 
-Toda la entrada a la API de Gemini se tokeniza, incluidas las imágenes, el video y el audio.
-Puntos clave sobre la tokenización:
+Gemini API 的所有输入内容（包括图片、视频和音频）都会被分词。
+有关分词的关键点：
 
-- **Imágenes**: Las imágenes de ≤384 píxeles en ambas dimensiones cuentan como 258 tokens. Las imágenes más grandes se dividen en tarjetas de 768 × 768 píxeles, cada una de las cuales cuenta como 258 tokens.
-- **Video**: 263 tokens por segundo
-- **Audio**: 32 tokens por segundo
+- **图片**：如果图片的两个尺寸均小于或等于 384 像素，则计为 258 个 token。较大的图片会被平铺为 768x768 像素的图块，每个图块计为 258 个 token。
+- **视频**：每秒 263 个 token
+- **音频**：每秒 32 个 token
 
-#### Tokens de imagen
+#### 图片 token
 
 ### Python
 
@@ -203,7 +201,7 @@ const countResponse = await client.models.countTokens({
 console.log(countResponse.totalTokens);
 ```
 
-**Ejemplo de datos intercalados:**
+**内嵌数据示例**：
 
 ### Python
 
@@ -228,7 +226,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### Tokens de video
+#### 视频 token
 
 ### Python
 
@@ -261,7 +259,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### Tokens de audio
+#### 音频令牌
 
 ### Python
 
@@ -287,9 +285,9 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-### Cuenta tokens de instrucciones del sistema
+### 统计系统指令 token
 
-Las instrucciones del sistema se cuentan como parte de los tokens de entrada:
+系统指令计为输入词元的一部分：
 
 ### Python
 
@@ -305,9 +303,9 @@ interaction = client.interactions.create(
 print(f"Input tokens: {interaction.usage.total_input_tokens}")
 ```
 
-### Cuenta tokens de herramientas
+### 统计工具 token
 
-También se cuentan las herramientas (funciones, ejecución de código, Búsqueda de Google):
+工具（函数、代码执行、Google 搜索）也会计入：
 
 ### Python
 
@@ -337,11 +335,11 @@ print(f"Input tokens: {interaction.usage.total_input_tokens}")
 print(f"Tool use tokens: {interaction.usage.total_tool_use_tokens}")
 ```
 
-## Ventana de contexto
+## 上下文窗口
 
-Cada modelo de Gemini tiene una cantidad máxima de tokens que puede manejar. La ventana de contexto define el límite combinado de tokens de entrada y salida.
+每种 Gemini 模型都有其可处理的词元数上限。上下文窗口定义了输入和输出 token 的总限制。
 
-### Obtén el tamaño de la ventana de contexto de forma programática
+### 以编程方式获取上下文窗口大小
 
 ### Python
 
@@ -361,20 +359,20 @@ console.log(`Input token limit: ${modelInfo.inputTokenLimit}`);
 console.log(`Output token limit: ${modelInfo.outputTokenLimit}`);
 ```
 
-Encuentra los tamaños de la ventana de contexto en la página de [modelos](https://ai.google.dev/gemini-api/docs/models?hl=es-419).
+在[模型](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn)页面上查找上下文窗口大小。
 
-## ¿Qué sigue?
+## 后续步骤
 
-- [Generación de texto](https://ai.google.dev/gemini-api/docs/text-generation?hl=es-419): Conceptos básicos de la generación
-- [Almacenamiento en caché](https://ai.google.dev/gemini-api/docs/caching?hl=es-419): Reduce los costos con el almacenamiento en caché
-- [Precios](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419): Comprende los costos
+- [文本生成](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-cn)：生成基础知识
+- [缓存](https://ai.google.dev/gemini-api/docs/caching?hl=zh-cn)：通过缓存降低费用
+- [价格](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn)：了解费用
 
-Enviar comentarios
+发送反馈
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Última actualización: 2026-07-30 (UTC)
+最后更新时间 (UTC)：2026-07-30。
 
-¿Quieres brindar más información?
+需要向我们提供更多信息？
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-07-30 (UTC)"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-30。"],[],[]]

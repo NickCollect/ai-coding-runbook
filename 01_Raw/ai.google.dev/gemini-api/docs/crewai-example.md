@@ -1,45 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=pt-BR
-fetched_at: 2026-08-24T02:25:39.305741+00:00
-title: "An\u00e1lise de suporte ao cliente com o Gemini e a CrewAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=pl
+fetched_at: 2026-08-31T06:30:56.023990+00:00
+title: "Analiza obs\u0142ugi klienta za pomoc\u0105 Gemini i CrewAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Envie comentários
+Prześlij opinię
 
-# Análise de suporte ao cliente com o Gemini e a CrewAI
+# Analiza obsługi klienta za pomocą Gemini i CrewAI
 
-[CrewAI](https://docs.crewai.com/introduction) é um framework para orquestrar
-agentes de IA autônomos que colaboram para alcançar metas complexas. Ele permite
-definir agentes especificando papéis, metas e histórias de fundo e, em seguida, definir tarefas
-para eles.
+[CrewAI](https://docs.crewai.com/introduction) to platforma do koordynowania autonomicznych agentów AI, którzy współpracują ze sobą, aby osiągać złożone cele. Umożliwia ona definiowanie agentów przez określanie ról, celów i historii, a następnie definiowanie dla nich zadań.
 
-Este exemplo demonstra como criar um sistema multiagente para analisar dados de suporte ao cliente para identificar problemas e propor melhorias de processo usando o Gemini 3 Flash, gerando um relatório destinado a ser lido por um diretor de operações (COO).
+Ten przykład pokazuje, jak utworzyć system wielu agentów do analizowania danych obsługi klienta w celu identyfikowania problemów i proponowania ulepszeń procesów przy użyciu Gemini 3 Flash. System generuje raport przeznaczony dla dyrektora operacyjnego.
 
-O guia mostra como criar uma "equipe" de agentes de IA que podem realizar as seguintes tarefas:
+Z tego przewodnika dowiesz się, jak utworzyć „zespół” agentów AI, którzy mogą wykonywać te zadania:
 
-1. Buscar e analisar dados de suporte ao cliente (simulados neste exemplo).
-2. Identificar problemas recorrentes e gargalos de processo.
-3. Sugerir melhorias práticas.
-4. Compilar as descobertas em um relatório conciso adequado para um COO.
+1. Pobieranie i analizowanie danych obsługi klienta (symulowane w tym przykładzie).
+2. Identyfikuj powtarzające się problemy i wąskie gardła w procesie.
+3. sugerować praktyczne ulepszenia,
+4. Zbierz wyniki w zwięzłym raporcie odpowiednim dla dyrektora operacyjnego.
 
-Você precisa de uma chave da API Gemini. Se ainda não tiver, você pode [conseguir uma no
-Google AI Studio](https://aistudio.google.com/apikey?hl=pt-br).
+Potrzebujesz klucza interfejsu Gemini API. Jeśli jeszcze go nie masz, możesz [uzyskać go w Google AI Studio](https://aistudio.google.com/apikey?hl=pl).
 
 ```
 pip install "crewai[tools]"
 ```
 
-Defina a chave da API Gemini como uma variável de ambiente chamada `GEMINI_API_KEY` e configure o CrewAI para usar o modelo do Gemini.
+Ustaw klucz interfejsu Gemini API jako zmienną środowiskową o nazwie `GEMINI_API_KEY`, a następnie skonfiguruj CrewAI tak, aby używał modelu Gemini.
 
 ```
 import os
@@ -54,15 +50,13 @@ gemini_llm = LLM(
 )
 ```
 
-## Definir componentes
+## Definiowanie komponentów
 
-Crie aplicativos do CrewAI usando **ferramentas**, **agentes**, **tarefas** e a
-**equipe**. As seções a seguir explicam cada um desses componentes.
+Twórz aplikacje CrewAI za pomocą **narzędzi**, **agentów**, **zadań** i samej **ekipy**. W sekcjach poniżej znajdziesz opis każdego z tych komponentów.
 
-### Ferramentas
+### Narzędzia
 
-As ferramentas são recursos que os agentes podem usar para interagir com o mundo externo ou realizar ações específicas. Aqui, você define uma ferramenta de marcador de posição para simular a busca de dados de suporte ao cliente. Em um aplicativo real, você se conectaria a um banco de dados, API ou sistema de arquivos. Para mais informações sobre ferramentas, consulte o [guia de ferramentas
-do CrewAI](https://docs.crewai.com/concepts/tools).
+Narzędzia to funkcje, których agenci mogą używać do interakcji ze światem zewnętrznym lub wykonywania określonych działań. W tym miejscu definiujesz narzędzie zastępcze, które symuluje pobieranie danych obsługi klienta. W prawdziwej aplikacji połączysz się z bazą danych, interfejsem API lub systemem plików. Więcej informacji o narzędziach znajdziesz w [przewodniku po narzędziach CrewAI](https://docs.crewai.com/concepts/tools).
 
 ```
 from crewai.tools import BaseTool
@@ -92,10 +86,9 @@ class CustomerSupportDataTool(BaseTool):
 support_data_tool = CustomerSupportDataTool()
 ```
 
-### Agentes
+### Agenty
 
-Os agentes são os trabalhadores de IA individuais na sua equipe. Cada agente tem um `role`, `goal`, `backstory`, `llm` atribuído e `tools` opcionais. Para mais
-informações sobre agentes, consulte o [guia de agentes do CrewAI](https://docs.crewai.com/concepts/agents).
+Agenci to poszczególne instancje robocze AI w Twoim zespole. Każdy agent ma określony `role`, `goal`, `backstory`, przypisany `llm` i opcjonalny `tools`. Więcej informacji o agentach znajdziesz w [przewodniku po agentach CrewAI](https://docs.crewai.com/concepts/agents).
 
 ```
 from crewai import Agent
@@ -142,10 +135,9 @@ report_writer = Agent(
 )
 ```
 
-### Tarefas
+### Lista zadań
 
-As tarefas definem as atribuições específicas para os agentes. Cada tarefa tem uma `description`, `expected_output` e é atribuída a um `agent`. As tarefas são executadas sequencialmente por padrão e incluem o contexto da tarefa anterior. Para mais
-informações sobre tarefas, consulte o [guia de tarefas do CrewAI](https://docs.crewai.com/concepts/tasks).
+Zadania określają konkretne przypisania dla agentów. Każde zadanie ma `description`, `expected_output` i jest przypisane do `agent`. Zadania są domyślnie wykonywane sekwencyjnie i uwzględniają kontekst poprzedniego zadania. Więcej informacji o zadaniach znajdziesz w [przewodniku po zadaniach CrewAI](https://docs.crewai.com/concepts/tasks).
 
 ```
 from crewai import Task
@@ -204,9 +196,9 @@ Ensure the report is easy to understand, focuses on actionable insights, and is 
 )
 ```
 
-### Gangue
+### Ekipa
 
-A `Crew` reúne os agentes e as tarefas, definindo o processo de fluxo de trabalho (como "sequencial").
+Element `Crew` łączy agenty i zadania, definiując proces przepływu pracy (np. „sekwencyjny”).
 
 ```
 from crewai import Crew, Process
@@ -219,9 +211,9 @@ support_analysis_crew = Crew(
 )
 ```
 
-## Executar a equipe
+## Uruchamianie ekipy
 
-Por fim, inicie a execução da equipe com as entradas necessárias.
+Na koniec uruchom wykonanie przez grupę, podając niezbędne dane wejściowe.
 
 ```
 # Start the crew's work
@@ -235,19 +227,17 @@ print("--- Final Report for COO ---")
 print(result)
 ```
 
-O script será executado. O `Data Analyst` vai usar a ferramenta, o `Process
-Optimizer` vai analisar as descobertas e o `Report Writer` vai compilar o
-relatório final, que será impresso no console. A configuração `verbose=True` mostra o processo de pensamento detalhado e as ações de cada agente.
+Skrypt zostanie uruchomiony. `Data Analyst` używa narzędzia, `Process
+Optimizer` analizuje wyniki, a `Report Writer` kompiluje raport końcowy, który jest następnie drukowany w konsoli. Ustawienie `verbose=True` wyświetli szczegółowy proces myślowy i działania każdego agenta.
 
-Para saber mais sobre o CrewAI, confira a [introdução
-do CrewAI](https://docs.crewai.com/introduction).
+Więcej informacji o CrewAI znajdziesz we [wprowadzeniu do CrewAI](https://docs.crewai.com/introduction).
 
-Envie comentários
+Prześlij opinię
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Última atualização 2026-06-10 UTC.
+Ostatnia aktualizacja: 2026-06-10 UTC.
 
-Quer enviar seu feedback?
+Chcesz przekazać coś jeszcze?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-10 UTC."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-06-10 UTC."],[],[]]

@@ -1,10 +1,10 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash
-fetched_at: 2026-08-17T02:20:02.105555+00:00
+fetched_at: 2026-08-31T06:36:38.237067+00:00
 title: "Gemini 3.7 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-The [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview) is now generally available. We recommend using this API for access to all the latest features and models.
+Gemini 3.7 Flash is now available. [Try it out](https://aistudio.google.com/prompts/new_chat?model=gemini-3.7-flash).
 
 - [Home](https://ai.google.dev/)
 - [Gemini API](https://ai.google.dev/gemini-api)

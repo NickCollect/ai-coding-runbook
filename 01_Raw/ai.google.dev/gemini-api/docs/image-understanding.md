@@ -1,42 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/image-understanding?hl=pl
-fetched_at: 2026-08-24T02:30:39.129700+00:00
-title: "Interpretacja obrazu \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/image-understanding?hl=th
+fetched_at: 2026-08-31T06:40:31.624654+00:00
+title: "\u0e01\u0e32\u0e23\u0e17\u0e33\u0e04\u0e27\u0e32\u0e21\u0e40\u0e02\u0e49\u0e32\u0e43\u0e08\u0e23\u0e39\u0e1b\u0e20\u0e32\u0e1e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Prześlij opinię
+ส่งความคิดเห็น
 
-# Interpretacja obrazu
+# การทำความเข้าใจรูปภาพ
 
-Modele Gemini są budowane od podstaw z myślą o multimodalności, co umożliwia wykonywanie wielu zadań związanych z przetwarzaniem obrazów i widzeniem komputerowym, w tym m.in. tworzenie podpisów do obrazów, klasyfikację i wizualne odpowiedzi na pytania, bez konieczności trenowania wyspecjalizowanych modeli ML.
+โมเดล Gemini ถูกสร้างขึ้นตั้งแต่เริ่มต้นให้เป็นแบบหลายรูปแบบ ซึ่งจะปลดล็อกงานประมวลผลรูปภาพและคอมพิวเตอร์วิชันซิสเต็มที่หลากหลาย รวมถึงการใส่คำบรรยายรูปภาพ การจัดหมวดหมู่ และการตอบคำถามเกี่ยวกับภาพโดยไม่ต้องฝึกโมเดล ML เฉพาะ
 
-Oprócz ogólnych możliwości multimodalnych modele Gemini oferują
-**większą dokładność** w konkretnych przypadkach użycia, takich jak [wykrywanie obiektów](#object-detection)
-i [segmentacja](#segmentation), dzięki dodatkowemu trenowaniu.
+นอกจากความสามารถแบบหลายรูปแบบทั่วไปแล้ว โมเดล Gemini ยังมี
+**ความแม่นยำที่เพิ่มขึ้น** สำหรับกรณีการใช้งานที่เฉพาะเจาะจง เช่น [การตรวจจับออบเจ็กต์](#object-detection)
+และ [การแบ่งกลุ่ม](#segmentation) ผ่านการฝึกเพิ่มเติม
 
-## Przekazywanie obrazów do Gemini
+## การส่งรูปภาพไปยัง Gemini
 
-Obrazy możesz przekazywać do Gemini na kilka sposobów:
+คุณสามารถระบุรูปภาพเป็นอินพุตไปยัง Gemini ได้หลายวิธีดังนี้
 
-- [Przekazywanie obrazu za pomocą adresu URL](#url-image): idealne rozwiązanie w przypadku obrazów dostępnych publicznie.
-- [Przekazywanie danych obrazu w tekście](#inline-image): w przypadku danych obrazu zakodowanych w formacie Base64.
-- [Przesyłanie obrazów za pomocą interfejsu File API](#upload-image): zalecane w przypadku
-  większych plików lub ponownego używania obrazów w wielu żądaniach.
+- [การส่งรูปภาพโดยใช้ URL](#url-image): เหมาะสำหรับรูปภาพที่เข้าถึงได้แบบสาธารณะ
+- [การส่งข้อมูลรูปภาพแบบอินไลน์](#inline-image): สำหรับข้อมูลรูปภาพที่เข้ารหัส Base64
+- [การอัปโหลดรูปภาพโดยใช้ File API](#upload-image): แนะนำให้ใช้กับ
+  ไฟล์ขนาดใหญ่หรือเพื่อนำรูปภาพกลับมาใช้ซ้ำในคำขอหลายรายการ
 
-### Przekazywanie obrazu za pomocą adresu URL
+### การส่งรูปภาพโดยใช้ URL
 
-Obraz możesz przesłać za pomocą interfejsu [Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl) i przekazać go
-w żądaniu:
+คุณสามารถอัปโหลดรูปภาพโดยใช้ [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th) และส่งรูปภาพ
+ในคำขอได้ดังนี้
 
 ### Python
 
@@ -107,9 +107,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Przekazywanie danych obrazu w tekście
+### การส่งข้อมูลรูปภาพแบบอินไลน์
 
-Dane obrazu możesz przekazywać jako ciągi tekstowe zakodowane w formacie Base64:
+คุณสามารถระบุข้อมูลรูปภาพเป็นสตริงที่เข้ารหัส Base64 ได้ดังนี้
 
 ### Python
 
@@ -188,9 +188,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Przesyłanie obrazów za pomocą interfejsu File API
+### การอัปโหลดรูปภาพโดยใช้ File API
 
-W przypadku dużych plików lub aby móc wielokrotnie używać tego samego pliku obrazu, użyj interfejsu Files API. Zapoznaj się z przewodnikiem po interfejsie [Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl).
+หากต้องการใช้ไฟล์ขนาดใหญ่หรือใช้ไฟล์รูปภาพเดิมซ้ำๆ ให้ใช้ Files API ดูคู่มือ [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th)
 
 ### Python
 
@@ -263,9 +263,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Promptowanie za pomocą wielu obrazów
+## การใช้พรอมต์ที่มีรูปภาพหลายรูป
 
-W jednym prompcie możesz podać kilka obrazów, dodając do tablicy `input` kilka obiektów obrazu:
+คุณสามารถระบุรูปภาพหลายรูปในพรอมต์เดียวได้โดยการรวมออบเจ็กต์รูปภาพหลายรายการไว้ในอาร์เรย์ `input`
 
 ### Python
 
@@ -343,9 +343,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Wykrywanie obiektów
+## การตรวจจับออบเจ็กต์
 
-Modele są trenowane do wykrywania obiektów na obrazie i uzyskiwania ich współrzędnych ramki ograniczającej. Współrzędne względem wymiarów obrazu są skalowane do zakresu [0, 1000]. Musisz przeskalować te współrzędne na podstawie oryginalnego rozmiaru obrazu.
+โมเดลได้รับการฝึกให้ตรวจจับออบเจ็กต์ในรูปภาพและรับพิกัดกรอบล้อมรอบของออบเจ็กต์ พิกัดจะปรับขนาดเป็น [0, 1000] โดยอิงตามขนาดรูปภาพ คุณต้องปรับขนาดพิกัดเหล่านี้ตามขนาดรูปภาพเดิม
 
 ### Python
 
@@ -466,13 +466,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Więcej przykładów znajdziesz w [Gemini Cookbook](https://github.com/google-gemini/cookbook).
+ดูตัวอย่างเพิ่มเติมได้ที่ [สูตรการแก้ปัญหาของ Gemini](https://github.com/google-gemini/cookbook)
 
-## Podział na segmenty
+## การแบ่งกลุ่ม
 
-Modele Gemini nie tylko wykrywają obiekty, ale też je segmentują i udostępniają ich maski konturów.
+โมเดล Gemini ไม่เพียงแต่ตรวจจับรายการต่างๆ เท่านั้น แต่ยังแบ่งกลุ่มรายการเหล่านั้นและระบุมาสก์เส้นขอบด้วย
 
-Model przewiduje listę JSON, w której każdy element reprezentuje maskę segmentacji. Każdy element ma ramkę ograniczającą („`box_2d`”) w formacie `[ymin, xmin, ymax, xmax]` ze znormalizowanymi współrzędnymi od 0 do 1000, etykietę („`label`”) identyfikującą obiekt oraz maskę segmentacji w ramce ograniczającej jako wielokąt ze współrzędnymi `[x, y]` znormalizowanymi do zakresu 0–1000.
+โมเดลจะคาดการณ์รายการ JSON โดยแต่ละรายการจะแสดงมาสก์การแบ่งกลุ่ม แต่ละรายการจะมีกรอบล้อมรอบ ("`box_2d`") ในรูปแบบ `[ymin, xmin, ymax, xmax]` ที่มีพิกัดปกติระหว่าง 0 ถึง 1000, ป้ายกำกับ ("`label`") ที่ระบุออบเจ็กต์ และสุดท้ายคือมาสก์การแบ่งกลุ่มภายในกรอบล้อมรอบเป็นรูปหลายเหลี่ยมที่มีพิกัด `[x, y]` ที่ปรับให้เป็นปกติเป็น 0-1000
 
 ### Python
 
@@ -613,81 +613,81 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-![Stół z babeczkami, na którym wyróżniono drewniane i szklane przedmioty](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=pl)
+![โต๊ะที่มีคัพเค้ก โดยไฮไลต์วัตถุที่ทำจากไม้และแก้ว](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=th)
 
-Przykład danych wyjściowych segmentacji z obiektami i maskami segmentacji
+ตัวอย่างเอาต์พุตการแบ่งกลุ่มที่มีออบเจ็กต์และมาสก์การแบ่งกลุ่ม
 
-## Obsługiwane formaty obrazów
+## รูปแบบรูปภาพที่รองรับ
 
-Gemini obsługuje te typy MIME formatów obrazów:
+Gemini รองรับประเภท MIME ของรูปแบบรูปภาพต่อไปนี้
 
-- PNG – `image/png`
-- JPEG – `image/jpeg`
-- WEBP – `image/webp`
-- HEIC – `image/heic`
-- HEIF – `image/heif`
+- PNG - `image/png`
+- JPEG - `image/jpeg`
+- WebP - `image/webp`
+- HEIC - `image/heic`
+- HEIF - `image/heif`
 
-Więcej informacji o innych metodach wprowadzania plików znajdziesz w
-[przewodniku po metodach wprowadzania plików](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=pl).
+ดูข้อมูลเกี่ยวกับวิธีการป้อนไฟล์อื่นๆ ได้ที่
+[คู่มือวิธีการป้อนไฟล์](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=th)
 
-## Uprawnienia
+## ความสามารถ
 
-Wszystkie wersje modelu Gemini są multimodalne i mogą być używane w wielu zadaniach związanych z przetwarzaniem obrazów i widzeniem komputerowym, w tym m.in. tworzeniem podpisów do obrazów, odpowiadaniem na pytania dotyczące obrazów, klasyfikowaniem obrazów, wykrywaniem obiektów i segmentacją obiektów.
+โมเดล Gemini ทุกเวอร์ชันเป็นแบบหลายรูปแบบและสามารถใช้ในงานประมวลผลรูปภาพและคอมพิวเตอร์วิชันซิสเต็มที่หลากหลาย ซึ่งรวมถึงแต่ไม่จำกัดเพียง การใส่คำบรรยายรูปภาพ การตอบคำถามเกี่ยวกับภาพ การจัดหมวดหมู่รูปภาพ การตรวจจับออบเจ็กต์ และการแบ่งกลุ่มออบเจ็กต์
 
-W zależności od wymagań dotyczących jakości i skuteczności Gemini może ograniczyć konieczność używania wyspecjalizowanych modeli ML.
+Gemini สามารถลดความจำเป็นในการใช้โมเดล ML เฉพาะได้ ทั้งนี้ขึ้นอยู่กับข้อกำหนดด้านคุณภาพและประสิทธิภาพ
 
-Najnowsze wersje modelu są specjalnie trenowane, aby oprócz ogólnych możliwości, takich jak ulepszone
-[wykrywanie obiektów](#object-detection) i [segmentacja](#segmentation), zwiększać dokładność w przypadku
-wyspecjalizowanych zadań.
+โมเดลเวอร์ชันล่าสุดได้รับการฝึกมาโดยเฉพาะเพื่อปรับปรุงความแม่นยำของ
+งานเฉพาะทาง นอกเหนือจากความสามารถทั่วไป เช่น การตรวจจับ
+[ออบเจ็กต์](#object-detection)ที่ได้รับการปรับปรุง และ [การแบ่งกลุ่ม](#segmentation)
 
-## Ograniczenia i najważniejsze informacje techniczne
+## ข้อจำกัดและข้อมูลทางเทคนิคที่สำคัญ
 
-### Limit pliku
+### ขีดจำกัดของไฟล์
 
-Modele Gemini obsługują maksymalnie 3600 plików obrazów na żądanie.
+โมเดล Gemini รองรับไฟล์รูปภาพสูงสุด 3,600 ไฟล์ต่อคำขอ
 
-### Obliczanie liczby tokenów
+### การคำนวณโทเค็น
 
-- 258 tokenów, jeśli oba wymiary są mniejsze lub równe 384 piksele.
-  Większe obrazy są dzielone na kafelki o wymiarach 768 x 768 pikseli, z których każdy kosztuje 258 tokenów.
+- 258 โทเค็นหากทั้ง 2 ด้านมีขนาด <= 384 พิกเซล
+  รูปภาพขนาดใหญ่จะถูกแบ่งเป็นรูปภาพขนาด 768x768 พิกเซล โดยแต่ละรูปภาพใช้โทเค็น 258 รายการ
 
-Przybliżony wzór na obliczanie liczby kafelków jest taki:
+สูตรคร่าวๆ สำหรับการคำนวณจำนวนรูปภาพที่แบ่งมีดังนี้
 
-- Oblicz rozmiar jednostki przycinania, który wynosi w przybliżeniu: `floor(min(width, height)` / 1,5).
-- Podziel każdy wymiar przez rozmiar jednostki przycinania i pomnóż przez siebie, aby uzyskać liczbę kafelków.
+- คำนวณขนาดหน่วยครอบตัดซึ่งมีค่าประมาณ `floor(min(width, height)` / 1.5)
+- หารแต่ละด้านด้วยขนาดหน่วยครอบตัดแล้วคูณกันเพื่อหาจำนวนรูปภาพที่แบ่ง
 
-Na przykład obraz o wymiarach 960 x 540 będzie miał rozmiar jednostki przycinania równy 360. Podziel każdy wymiar przez 360, a liczba kafelków wyniesie 3 \* 2 = 6.
+ตัวอย่างเช่น รูปภาพขนาด 960x540 จะมีขนาดหน่วยครอบตัด 360 หารแต่ละด้านด้วย 360 และจำนวนรูปภาพที่แบ่งคือ 3 \* 2 = 6
 
-### Rozdzielczość multimediów
+### ความละเอียดของสื่อ
 
-Gemini 3 wprowadza szczegółową kontrolę nad przetwarzaniem multimodalnego widzenia za pomocą parametru `media_resolution`. Parametr `media_resolution` określa **maksymalną liczbę tokenów przydzielonych na obraz wejściowy lub klatkę wideo**.
-Wyższe rozdzielczości zwiększają zdolność modelu do odczytywania drobnego tekstu lub identyfikowania małych szczegółów, ale zwiększają zużycie tokenów i opóźnienie.
+Gemini 3 มีการควบคุมแบบละเอียดเกี่ยวกับการประมวลผลภาพแบบหลายรูปแบบด้วยพารามิเตอร์ `media_resolution` พารามิเตอร์ `media_resolution` จะกำหนด**จำนวนโทเค็นสูงสุดที่จัดสรรต่อรูปภาพอินพุตหรือเฟรมวิดีโอ**
+ความละเอียดที่สูงขึ้นจะช่วยเพิ่มความสามารถของโมเดลในการอ่านข้อความขนาดเล็กหรือระบุรายละเอียดเล็กๆ แต่จะเพิ่มการใช้โทเค็นและเวลาในการตอบสนอง
 
-## Porady i sprawdzone metody
+## เคล็ดลับและแนวทางปฏิบัติแนะนำ
 
-- Sprawdź, czy obrazy są prawidłowo obrócone.
-- Używaj wyraźnych obrazów bez rozmycia.
-- Jeśli używasz jednego obrazu z tekstem, umieść prompt tekstowy *przed* obrazem w tablicy `input`.
+- ตรวจสอบว่ารูปภาพหมุนอย่างถูกต้อง
+- ใช้รูปภาพที่ชัดเจนและไม่เบลอ
+- เมื่อใช้รูปภาพเดียวที่มีข้อความ ให้วางพรอมต์ข้อความ *ก่อน* รูปภาพในอาร์เรย์ `input`
 
-## Co dalej?
+## ขั้นตอนถัดไป
 
-Z tego przewodnika dowiesz się, jak przesyłać pliki obrazów i generować dane wyjściowe tekstowe na podstawie danych wejściowych obrazów. Więcej informacji znajdziesz w tych materiałach:
+คู่มือนี้จะแสดงวิธีอัปโหลดไฟล์รูปภาพและสร้างเอาต์พุตข้อความจากอินพุตรูปภาพ ดูข้อมูลเพิ่มเติมได้ที่แหล่งข้อมูลต่อไปนี้
 
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl): dowiedz się więcej o przesyłaniu plików i zarządzaniu nimi na potrzeby Gemini.
-- [Instrukcje systemowe](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl#system-instructions):
-  Instrukcje systemowe pozwalają sterować działaniem modelu na podstawie
-  konkretnych potrzeb i przypadków użycia.
-- [Strategie tworzenia promptów za pomocą plików](https://ai.google.dev/gemini-api/docs/files?hl=pl#prompt-guide): interfejs Gemini API obsługuje tworzenie promptów za pomocą danych tekstowych, obrazów, dźwięku i wideo, czyli tworzenie promptów multimodalnych.
-- [Wskazówki dotyczące bezpieczeństwa](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=pl): modele generatywnej
-  AI czasami generują nieoczekiwane dane wyjściowe, np. niedokładne,
-  stronnicze lub obraźliwe. Przetwarzanie końcowe i ocena przez człowieka są niezbędne, aby ograniczyć ryzyko szkód spowodowanych takimi danymi wyjściowymi.
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th): ดูข้อมูลเพิ่มเติมเกี่ยวกับการอัปโหลดและจัดการไฟล์เพื่อใช้กับ Gemini
+- [คำแนะนำระบบ](https://ai.google.dev/gemini-api/docs/text-generation?hl=th#system-instructions):
+  คำแนะนำระบบช่วยให้คุณกำหนดลักษณะการทำงานของโมเดลตาม
+  ความต้องการและกรณีการใช้งานที่เฉพาะเจาะจง
+- [กลยุทธ์การเขียนพรอมต์กับไฟล์](https://ai.google.dev/gemini-api/docs/files?hl=th#prompt-guide): Gemini API รองรับการเขียนพรอมต์กับข้อมูลข้อความ รูปภาพ เสียง และวิดีโอ ซึ่งเรียกอีกอย่างว่าการเขียนพรอมต์แบบหลายรูปแบบ
+- [คำแนะนำด้านความปลอดภัย](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=th): บางครั้งโมเดล Generative
+  AI จะสร้างเอาต์พุตที่ไม่คาดคิด เช่น เอาต์พุตที่ไม่ถูกต้อง
+  มีอคติ หรือไม่เหมาะสม การประมวลผลภายหลังและการประเมินโดยเจ้าหน้าที่เป็นสิ่งสำคัญในการจำกัดความเสี่ยงที่จะเกิดอันตรายจากเอาต์พุตดังกล่าว
 
-Prześlij opinię
+ส่งความคิดเห็น
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Ostatnia aktualizacja: 2026-07-30 UTC.
+อัปเดตล่าสุด 2026-07-30 UTC
 
-Chcesz przekazać coś jeszcze?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-30 UTC"],[],[]]

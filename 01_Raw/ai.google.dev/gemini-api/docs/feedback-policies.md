@@ -1,55 +1,55 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/feedback-policies?hl=fr
-fetched_at: 2026-08-24T02:24:00.094176+00:00
-title: "Commentaires \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/feedback-policies?hl=tr
+fetched_at: 2026-08-31T06:35:22.296197+00:00
+title: "Geri bildirim \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Envoyer des commentaires
+Geri bildirim gönderin
 
-# Commentaires
+# Geri bildirim
 
-## Vote par préférence intégré
+## Satır İçi Tercih Oylaması
 
-Dans Google AI Studio, vous pouvez parfois voir une comparaison côte à côte de deux réponses différentes à votre requête. Cela fait partie de notre système de vote des préférences intégré. Vous serez invité à choisir la réponse que vous préférez. Cela nous aide à comprendre quelles sorties de modèle les utilisateurs trouvent les plus utiles.
+Google AI Studio'da, isteminize verilen iki farklı yanıtın yan yana karşılaştırmasını görebilirsiniz. Bu, satır içi tercih oylama sistemimizin bir parçasıdır. Hangi yanıtı tercih ettiğinizi seçmeniz istenir. Bu sayede, kullanıcıların en faydalı bulduğu model çıkışlarını anlayabiliriz.
 
-### Quel est l'objectif ?
+### Bunu neden yapıyoruz?
 
-Nous nous efforçons constamment d'améliorer nos modèles et services d'IA. Vos commentaires via le vote sur les préférences intégrées nous aident à fournir, améliorer et développer les produits et services de Google, ainsi que ses technologies de machine learning, y compris les fonctionnalités, produits et services pour les entreprises de Google, conformément aux [Conditions d'utilisation supplémentaires de l'API Gemini](https://ai.google.dev/gemini-api/terms?hl=fr) et aux [Règles de confidentialité](https://policies.google.com/privacy?hl=fr).
+Yapay zeka modellerimizi ve hizmetlerimizi iyileştirmek için sürekli olarak çalışıyoruz. Satır İçi Tercih Oylama özelliği aracılığıyla gönderdiğiniz geri bildirimler, [Gemini API Ek Hizmet Şartları](https://ai.google.dev/gemini-api/terms?hl=tr) ve [Gizlilik Politikası](https://policies.google.com/privacy?hl=tr)'na uygun olarak Google'ın kurumsal özellikleri, ürünleri ve hizmetleri de dahil olmak üzere Google ürünlerini, hizmetlerini ve makine öğrenimi teknolojilerini sunmamıza, iyileştirmemize ve geliştirmemize yardımcı olur.
 
-### Quelles données sont incluses dans les commentaires ?
+### Geri bildirime hangi veriler dahil edilir?
 
-Pour prendre des décisions éclairées concernant nos modèles, nous collectons certaines données lorsque vous participez au vote des préférences intégré :
+Modellerimiz hakkında bilinçli kararlar vermek için satır içi tercih oylamasına katıldığınızda belirli veriler toplarız:
 
-- **Requêtes et réponses** : nous enregistrons toutes les requêtes et réponses, y compris les contenus importés, dans la conversation sur laquelle vous avez envoyé des commentaires. Nous enregistrons également les deux options de réponse que vous avez sélectionnées. Cela nous aide à comprendre le contexte de votre préférence.
-- **Votre vote** : nous enregistrons la réponse que vous avez préférée. Il s'agit du cœur des commentaires que nous recueillons.
-- **Détails d'utilisation** : incluent des informations sur le modèle qui a généré la réponse, ainsi que d'autres détails techniques et opérationnels sur votre utilisation de cette fonctionnalité.
+- **İstemler ve Yanıtlar:** Geri bildirim gönderdiğiniz etkileşimdeki yüklenen içerikler de dahil olmak üzere tüm istemleri ve yanıtları kaydederiz. Ayrıca, seçtiğiniz iki yanıt seçeneğini de kaydederiz. Bu sayede tercihinizi hangi bağlamda yaptığınızı anlayabiliriz.
+- **Oyunuz:** Hangi yanıtı tercih ettiğiniz kaydedilir. Topladığımız geri bildirimlerin temelinde bu yer alıyor.
+- **Kullanım Ayrıntıları:** Bu, yanıtı hangi modelin oluşturduğu ve bu özelliği kullanımınızla ilgili diğer teknik ve operasyonel ayrıntılar hakkındaki bilgileri içerir.
 
-### Confidentialité
+### Gizliliğiniz
 
-Nous prenons votre confidentialité très au sérieux. Lors de ce processus, Google prend les mesures nécessaires pour protéger la confidentialité de vos données. Entre autres, ces données sont dissociées de votre compte Google, de votre clé API et de votre projet Cloud avant que les réviseurs les voient ou les annotent. **N'envoyez pas de commentaires sur les conversations qui incluent des informations sensibles, confidentielles ou personnelles.**
+Gizlilik konusunu ciddiyetle ele alıyoruz. Google, bu işlem kapsamında gizliliğinizi korumak için gerekli önlemleri alır. Örneğin, inceleme uzmanları görmeden veya açıklama eklemeden önce bu verilerin Google Hesabınız, API anahtarınız ve Cloud projenizle bağlantısını kaldırıyoruz. **Hassas, gizli veya kişisel bilgiler içeren görüşmelerle ilgili geri bildirim göndermeyin.**
 
-### Désactivation
+### Özelliği Devre Dışı Bırakma
 
-Vous pouvez ignorer le vote des préférences intégrées lorsqu'il s'affiche.
+Görüntülenen satır içi tercih oylamasını atlayabilirsiniz.
 
-Merci de nous aider à améliorer Google AI Studio !
+Google AI Studio'yu iyileştirmemize yardımcı olduğunuz için teşekkür ederiz.
 
-Envoyer des commentaires
+Geri bildirim gönderin
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Dernière mise à jour le 2026/04/29 (UTC).
+Son güncelleme tarihi: 2026-04-29 UTC.
 
-Voulez-vous nous donner plus d'informations ?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/04/29 (UTC)."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]

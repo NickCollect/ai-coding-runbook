@@ -1,142 +1,163 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/long-context?hl=ar
-fetched_at: 2026-08-24T02:23:49.757647+00:00
-title: "\u0633\u064a\u0627\u0642 \u0637\u0648\u064a\u0644 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/long-context?hl=id
+fetched_at: 2026-08-31T06:35:19.336181+00:00
+title: "Konteks panjang \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-إرسال ملاحظات
+Kirim masukan
 
-# سياق طويل
+# Konteks panjang
 
-تتضمّن العديد من طُرز Gemini قدرة استيعاب كبيرة تصل إلى مليون رمز مميّز أو أكثر.
-في السابق، كانت النماذج اللغوية الكبيرة (LLM) محدودة بشكل كبير بسبب كمية النص (أو الرموز المميزة) التي يمكن تمريرها إلى النموذج في وقت واحد.
-تتيح قدرة الاستيعاب الموسَّعة في Gemini العديد من حالات الاستخدام الجديدة ونماذج المطوّرين.
+Banyak model Gemini dilengkapi dengan jendela konteks besar sebesar 1 juta token atau lebih.
+Sebelumnya, model bahasa besar (LLM) sangat dibatasi oleh
+jumlah teks (atau token) yang dapat diteruskan ke model dalam satu waktu.
+Jendela konteks panjang Gemini memungkinkan banyak kasus penggunaan baru dan paradigma developer.
 
-سيعمل الرمز الذي تستخدمه حاليًا في حالات مثل [إنشاء
-النصوص](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar) أو [المدخلات
-المتعددة الوسائط](https://ai.google.dev/gemini-api/docs/vision?hl=ar) بدون أي تغييرات مع السياق الطويل.
+Kode yang sudah Anda gunakan untuk kasus seperti [pembuatan
+teks](https://ai.google.dev/gemini-api/docs/text-generation?hl=id) atau [input multimodal](https://ai.google.dev/gemini-api/docs/vision?hl=id) akan berfungsi tanpa perubahan apa pun dengan konteks panjang.
 
-يقدّم لك هذا المستند نظرة عامة على ما يمكنك تحقيقه باستخدام نماذج تتضمّن نوافذ سياق تتضمّن مليون رمز مميّز أو أكثر. تقدّم الصفحة نظرة عامة موجزة حول قدرة الاستيعاب، وتستكشف كيفية الاستفادة من قدرة الاستيعاب الموسَّعة، وحالات الاستخدام المختلفة في العالم الواقعي، وطرق تحسين الاستخدام.
+Dokumen ini memberi Anda ringkasan tentang apa yang dapat Anda capai menggunakan model dengan jendela konteks 1 juta token dan lebih banyak lagi. Halaman ini memberikan ringkasan singkat tentang jendela konteks, dan mempelajari cara developer harus memikirkan konteks panjang, berbagai kasus penggunaan dunia nyata untuk konteks panjang, dan cara mengoptimalkan penggunaan konteks panjang.
 
-للاطّلاع على أحجام قدرة استيعاب نماذج معيّنة، يُرجى الانتقال إلى صفحة [النماذج](https://ai.google.dev/gemini-api/docs/models?hl=ar).
+Untuk ukuran jendela konteks model tertentu, lihat halaman [Model](https://ai.google.dev/gemini-api/docs/models?hl=id).
 
-## ما هي قدرة الاستيعاب؟
+## Apa itu jendela konteks?
 
-تتمثّل الطريقة الأساسية لاستخدام نماذج Gemini في تمرير المعلومات (السياق) إلى النموذج، الذي سينشئ بعد ذلك ردًا. يمكن تشبيه قدرة استيعاب السياق بالذاكرة قصيرة المدى. هناك كمية محدودة من المعلومات التي يمكن تخزينها في الذاكرة القصيرة المدى لدى الشخص، وينطبق الأمر نفسه على النماذج التوليدية.
+Cara dasar Anda menggunakan model Gemini adalah dengan meneruskan informasi (konteks) ke model, yang selanjutnya akan menghasilkan respons. Analogi untuk jendela konteks adalah memori jangka pendek. Jumlah informasi yang dapat disimpan dalam memori jangka pendek seseorang terbatas, dan hal yang sama berlaku untuk model generatif.
 
-يمكنك الاطّلاع على مزيد من المعلومات حول طريقة عمل النماذج في [دليل النماذج التوليدية](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ar#under-the-hood).
+Anda dapat membaca lebih lanjut cara kerja model di balik layar dalam [panduan model generatif](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=id#under-the-hood) kami.
 
-## بدء استخدام ميزة "السياق الطويل"
+## Mulai menggunakan konteks panjang
 
-في السابق، كانت الإصدارات الأقدم من النماذج التوليدية قادرة على معالجة 8,000 رمز مميز فقط في المرة الواحدة. وقد ذهبت الطُرز الأحدث إلى أبعد من ذلك من خلال قبول 32,000 أو حتى 128,000 رمز مميز. ‫Gemini هو أول نموذج يمكنه قبول مليون رمز مميّز.
+Versi model generatif sebelumnya hanya dapat memproses 8.000 token sekaligus. Model yang lebih baru mendorong batas ini lebih jauh dengan menerima 32.000 atau bahkan 128.000 token. Gemini adalah model pertama yang mampu menerima 1 juta token.
 
-في الواقع، سيبدو مليون رمز مميز على النحو التالي:
+Dalam praktiknya, 1 juta token akan terlihat seperti:
 
-- ‫50,000 سطر من التعليمات البرمجية (مع 80 حرفًا قياسيًا لكل سطر)
-- جميع الرسائل النصية التي أرسلتها في آخر 5 سنوات
-- 8 روايات إنجليزية متوسطة الطول
-- نصوص لأكثر من 200 حلقة بودكاست بمتوسط طول
+- 50.000 baris kode (dengan 80 karakter per baris standar)
+- Semua pesan teks yang telah Anda kirim dalam 5 tahun terakhir
+- 8 novel berbahasa Inggris dengan panjang rata-rata
+- Transkrip lebih dari 200 episode podcast dengan durasi rata-rata
 
-تتطلّب قدرات الاستيعاب الأكثر محدودية الشائعة في العديد من النماذج الأخرى غالبًا استراتيجيات مثل حذف الرسائل القديمة بشكل عشوائي أو تلخيص المحتوى أو استخدام RAG مع قواعد بيانات المتّجهات أو فلترة الطلبات لحفظ الرموز المميزة.
+Jendela konteks yang lebih terbatas yang umum di banyak model lain sering kali memerlukan
+strategi seperti menghapus pesan lama secara acak, meringkas konten, menggunakan
+RAG dengan database vektor, atau memfilter perintah untuk menghemat token.
 
-على الرغم من أنّ هذه الأساليب لا تزال مفيدة في سيناريوهات معيّنة، فإنّ قدرة استيعاب السياق الواسعة في Gemini تتيح اتّباع أسلوب أكثر مباشرةً، وهو تقديم جميع المعلومات ذات الصلة مسبقًا. بما أنّ نماذج Gemini مصمّمة خصيصًا لتوفير إمكانات سياقية هائلة، فإنّها تقدّم أداءً قويًا في التعلّم السياقي. على سبيل المثال، باستخدام مواد تعليمية ضمن السياق فقط (مرجع نحوي من 500 صفحة وقاموس ونحو 400 جملة متوازية)، [تعلّم Gemini
-الترجمة](https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf)
-من الإنجليزية إلى لغة كالامانغ، وهي لغة بابوا يتحدث بها أقل من 200 شخص، وبجودة مماثلة لجودة الترجمة التي يقدمها متعلّم بشري يستخدم المواد نفسها. يوضّح ذلك التحوّل النموذجي الذي يتيحه سياق Gemini الطويل، ما يفتح آفاقًا جديدة من خلال التعلّم القوي داخل السياق.
+Meskipun teknik ini tetap berharga dalam skenario tertentu, jendela konteks Gemini yang luas mendorong pendekatan yang lebih langsung: memberikan semua informasi yang relevan di awal. Karena model Gemini dibuat khusus dengan kemampuan konteks yang sangat besar, model ini menunjukkan pembelajaran dalam konteks yang efektif. Misalnya, hanya dengan menggunakan materi pengajaran dalam konteks (tata bahasa referensi 500 halaman, kamus, dan ≈400 kalimat paralel), Gemini [belajar menerjemahkan](https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf) dari bahasa Inggris ke Kalamang—bahasa Papua dengan kurang dari 200 penutur—dengan kualitas yang serupa dengan kualitas pelajar manusia yang menggunakan materi yang sama. Hal ini menggambarkan perubahan paradigma yang dimungkinkan oleh konteks panjang Gemini, yang membuka kemungkinan baru melalui pembelajaran dalam konteks yang andal.
 
-## حالات استخدام السياق الطويل
+## Kasus penggunaan konteks panjang
 
-على الرغم من أنّ حالة الاستخدام العادية لمعظم النماذج التوليدية لا تزال هي إدخال النص، تتيح مجموعة نماذج Gemini نموذجًا جديدًا لحالات الاستخدام المتعدّدة الوسائط. يمكن لهذه النماذج فهم النصوص والفيديوهات والمقاطع الصوتية والصور بشكلٍ مباشر. وتتضمّن هذه النماذج [Gemini API التي تقبل أنواع ملفات متعدّدة الوسائط](https://ai.google.dev/gemini-api/docs/prompting_with_media?hl=ar) لتوفير المزيد من الراحة.
+Meskipun kasus penggunaan standar untuk sebagian besar model generatif masih berupa input teks, serangkaian model Gemini memungkinkan paradigma baru kasus penggunaan multimodal. Model ini dapat memahami teks, video, audio, dan gambar secara native. File tersebut
+disertai dengan [Gemini API yang menerima jenis file multi-modal](https://ai.google.dev/gemini-api/docs/prompting_with_media?hl=id) untuk
+memudahkan.
 
-### نص طويل
+### Teks panjang
 
-وقد أثبت النص أنّه طبقة الذكاء التي تستند إليها الكثير من التطورات في مجال النماذج اللغوية الكبيرة. كما ذكرنا سابقًا، يعود الكثير من القيود العملية المفروضة على النماذج اللغوية الكبيرة إلى عدم توفّر قدرة استيعاب كبيرة بما يكفي لتنفيذ مهام معيّنة. أدّى ذلك إلى اعتماد سريع للتوليد المعزّز بالاسترجاع (RAG) وتقنيات أخرى تقدّم للنموذج بشكل ديناميكي معلومات سياقية ذات صلة. أما الآن، ومع توفّر قدرات استيعاب أكبر فأكبر، أصبحت هناك تقنيات جديدة تتيح حالات استخدام جديدة.
+Teks telah terbukti menjadi lapisan kecerdasan yang mendasari sebagian besar momentum seputar LLM. Seperti yang disebutkan sebelumnya, sebagian besar batasan praktis LLM disebabkan oleh tidak adanya jendela konteks yang cukup besar untuk melakukan tugas tertentu. Hal ini menyebabkan adopsi cepat retrieval augmented generation (RAG) dan teknik lainnya yang secara dinamis memberikan informasi kontekstual yang relevan kepada model. Sekarang, dengan jendela konteks yang semakin besar, ada teknik baru yang tersedia dan memungkinkan kasus penggunaan baru.
 
-في ما يلي بعض حالات الاستخدام الناشئة والعادية للنصوص الطويلة المستندة إلى السياق:
+Beberapa kasus penggunaan baru dan standar untuk konteks panjang berbasis teks meliputi:
 
-- تلخيص مجموعات كبيرة من النصوص
-  - كانت خيارات التلخيص السابقة التي تستخدم نماذج سياق أصغر تتطلّب
-    نافذة منزلقة أو أسلوبًا آخر للاحتفاظ بحالة الأقسام السابقة
-    أثناء تمرير الرموز المميزة الجديدة إلى النموذج
-- طرح الأسئلة والإجابة عنها
-  - في السابق، كان ذلك ممكنًا فقط باستخدام التوليد المعزّز بالاسترجاع (RAG) بسبب الكمية المحدودة من السياق وانخفاض قدرة النماذج على استرجاع المعلومات الواقعية.
-- عمليات سير العمل المستندة إلى الذكاء الاصطناعي الوكيل
-  - يشكّل النص الأساس الذي تستند إليه البرامج في تتبُّع ما أنجزته وما عليها إنجازه، ويُعدّ عدم توفّر معلومات كافية حول العالم وهدف البرنامج من القيود التي تحدّ من موثوقية البرامج.
+- Meringkas korpus teks besar
+  - Opsi ringkasan sebelumnya dengan model konteks yang lebih kecil akan memerlukan
+    jendela geser atau teknik lain untuk mempertahankan status bagian sebelumnya
+    saat token baru diteruskan ke model
+- Tanya jawab
+  - Sebelumnya, hal ini hanya dapat dilakukan dengan RAG mengingat jumlah konteks yang terbatas dan ingatan faktual model yang rendah
+- Alur kerja agentic
+  - Teks adalah dasar dari cara agen mempertahankan status tindakan yang telah dilakukan dan yang perlu dilakukan; tidak memiliki informasi yang cukup tentang dunia dan tujuan agen adalah batasan pada keandalan agen
 
-[التعلّم داخل السياق باستخدام أمثلة متعددة](https://arxiv.org/pdf/2404.11018) هو إحدى الإمكانات الفريدة التي تتيحها النماذج ذات السياق الطويل. أظهرت الأبحاث أنّ استخدام نموذج "اللقطة الواحدة" أو "اللقطات المتعددة" الشائع، حيث يتم تزويد النموذج بمثال واحد أو بضعة أمثلة على مهمة ما، وتوسيع نطاق ذلك إلى مئات أو آلاف أو حتى مئات الآلاف من الأمثلة، يمكن أن يؤدي إلى إمكانات جديدة للنموذج. وقد تبيّن أيضًا أنّ هذا النهج الذي يتضمّن عدة لقطات يحقّق أداءً مشابهًا للنماذج التي تم تحسينها لتنفيذ مهمة معيّنة. في حالات الاستخدام التي لا يكون فيها أداء أحد نماذج Gemini كافيًا لطرحه في مرحلة الإنتاج، يمكنك تجربة أسلوب "اللقطات المتعددة". كما ستتعرّف لاحقًا في قسم تحسين السياق الطويل، يتيح التخزين المؤقت للسياق إمكانية تنفيذ هذا النوع من أحمال العمل العالية لرموز الإدخال بشكل أكثر فعالية من حيث التكلفة، وحتى مع وقت استجابة أقل في بعض الحالات.
+[Pembelajaran dalam konteks banyak contoh](https://arxiv.org/pdf/2404.11018) adalah salah satu kemampuan paling unik yang dihadirkan oleh model konteks panjang. Riset telah menunjukkan
+bahwa mengambil paradigma contoh "sekali coba" atau "beberapa kali coba" yang umum, di mana
+model disajikan dengan satu atau beberapa contoh tugas, dan menskalakannya hingga
+ratusan, ribuan, atau bahkan ratusan ribu contoh, dapat menghasilkan
+kemampuan model baru. Pendekatan multi-shot ini juga terbukti berperforma
+serupa dengan model yang disesuaikan untuk tugas tertentu. Untuk kasus penggunaan yang performa model Gemini-nya belum cukup untuk peluncuran produksi, Anda dapat mencoba pendekatan banyak contoh. Seperti yang mungkin Anda pelajari nanti di bagian pengoptimalan konteks panjang, penyiapan cache konteks membuat jenis workload token input tinggi ini jauh lebih layak secara ekonomis dan bahkan memiliki latensi yang lebih rendah dalam beberapa kasus.
 
-### فيديو طويل
+### Video panjang
 
-لطالما كانت فائدة محتوى الفيديو محدودة بسبب عدم توفّر إمكانية الوصول إلى الوسيط نفسه. كان من الصعب التصفح السريع للمحتوى، وغالبًا ما كانت النصوص لا تنقل المعنى الدقيق للفيديو، كما أنّ معظم الأدوات لا تعالج الصور والنصوص والمقاطع الصوتية معًا. باستخدام Gemini، تتيح إمكانات التعامل مع النصوص الطويلة الاستنتاج والإجابة عن الأسئلة حول المدخلات المتعددة الوسائط بأداء ثابت.
+Kegunaan konten video telah lama dibatasi oleh kurangnya aksesibilitas media itu sendiri. Konten sulit dibaca sekilas, transkrip sering gagal
+menangkap nuansa video, dan sebagian besar alat tidak memproses gambar, teks, dan
+audio secara bersamaan. Dengan Gemini, kemampuan teks panjang konteks diterjemahkan menjadi
+kemampuan untuk memahami dan menjawab pertanyaan tentang input multimodal dengan
+performa yang berkelanjutan.
 
-في ما يلي بعض حالات الاستخدام الناشئة والعادية لسياق الفيديو الطويل:
+Beberapa kasus penggunaan baru dan standar untuk konteks panjang video mencakup:
 
-- الإجابة عن الأسئلة في الفيديوهات
-- ذاكرة الفيديو، كما هو موضّح في [Project Astra من Google](https://deepmind.google/technologies/gemini/project-astra/?hl=ar)
-- إضافة ترجمة وشرح إلى الفيديو
-- أنظمة اقتراح الفيديوهات، من خلال إثراء البيانات الوصفية الحالية بفهم جديد متعدد الوسائط
-- تخصيص الفيديوهات من خلال تحليل مجموعة من البيانات وبيانات الفيديو الوصفية المرتبطة بها، ثم إزالة أجزاء الفيديوهات التي لا تهمّ المشاهد
-- الإشراف على محتوى الفيديو
-- معالجة الفيديو في الوقت الفعلي
+- Pertanyaan dan jawaban video
+- Memori video, seperti yang ditunjukkan dengan [Project Astra Google](https://deepmind.google/technologies/gemini/project-astra/?hl=id)
+- Teks video
+- Sistem rekomendasi video, dengan memperkaya metadata yang ada menggunakan pemahaman multimodal baru
+- Penyesuaian video, dengan melihat kumpulan data dan metadata video terkait, lalu menghapus bagian video yang tidak relevan bagi penonton
+- Moderasi konten video
+- Pemrosesan video real-time
 
-عند العمل مع الفيديوهات، من المهم مراعاة كيفية [معالجة الفيديوهات وتحويلها إلى رموز مميزة](https://ai.google.dev/gemini-api/docs/tokens?hl=ar#media-token)، لأنّ ذلك يؤثر في الفوترة وحدود الاستخدام. يمكنك الاطّلاع على مزيد من المعلومات حول استخدام ملفات الفيديو في الطلبات في [دليل الطلبات](https://ai.google.dev/gemini-api/docs/prompting_with_media?lang=python&hl=ar#prompting-with-videos).
+Saat bekerja dengan video, penting untuk mempertimbangkan cara [video diproses menjadi token](https://ai.google.dev/gemini-api/docs/tokens?hl=id#media-token), yang memengaruhi penagihan dan batas penggunaan. Anda dapat mempelajari lebih lanjut cara membuat perintah dengan file video di
+[panduan
+Perintah](https://ai.google.dev/gemini-api/docs/prompting_with_media?lang=python&hl=id#prompting-with-videos).
 
-### المحتوى الصوتي الطويل
+### Audio panjang
 
-كانت نماذج Gemini أول نماذج لغوية كبيرة متعدّدة الوسائط بشكل أصلي
-يمكنها فهم الصوت. في السابق، كان مسار عمل المطوّر النموذجي يتضمّن ربط نماذج متعددة خاصة بمجالات معيّنة، مثل نموذج تحويل الكلام إلى نص وطلبات وردود نصية، وذلك لمعالجة الصوت. وقد أدّى ذلك إلى زيادة وقت الاستجابة المطلوب من خلال تنفيذ طلبات متعدّدة ذهابًا وإيابًا، وانخفاض الأداء الذي يُعزى عادةً إلى البُنى غير المتصلة لإعداد النماذج المتعدّدة.
+Model Gemini adalah model bahasa besar multimodal pertama yang secara native dapat memahami audio. Sebelumnya, alur kerja developer yang umum akan melibatkan penggabungan beberapa model khusus domain, seperti model speech-to-text dan model text-to-text, untuk memproses audio. Hal ini menyebabkan latensi tambahan yang diperlukan dengan melakukan beberapa permintaan pulang-pergi dan penurunan performa yang biasanya disebabkan oleh arsitektur yang terputus dari penyiapan beberapa model.
 
-في ما يلي بعض حالات الاستخدام الناشئة والعادية لسياق الصوت:
+Beberapa kasus penggunaan baru dan standar untuk konteks audio mencakup:
 
-- الترجمة وتحويل الصوت إلى نص في الوقت الفعلي
-- الإجابة عن الأسئلة في البودكاست أو الفيديو
-- تحويل الصوت إلى نص وتلخيص الاجتماعات
-- المساعدون الصوتيون
+- Transkripsi dan terjemahan real-time
+- Tanya jawab podcast / video
+- Transkripsi dan peringkasan rapat
+- Asisten suara
 
-يمكنك الاطّلاع على مزيد من المعلومات حول توجيه الطلبات باستخدام الملفات الصوتية في [دليل توجيه الطلبات](https://ai.google.dev/gemini-api/docs/prompting_with_media?lang=python&hl=ar#prompting-with-videos).
+Anda dapat mempelajari lebih lanjut cara membuat perintah dengan file audio di [panduan
+Perintah](https://ai.google.dev/gemini-api/docs/prompting_with_media?lang=python&hl=id#prompting-with-videos).
 
-## تحسينات على السياقات الطويلة
+## Pengoptimalan konteks panjang
 
-عند العمل مع سياق طويل ونماذج Gemini، يكون التحسين الأساسي هو استخدام [التخزين المؤقت للسياق](https://ai.google.dev/gemini-api/docs/caching?hl=ar). بالإضافة إلى استحالة معالجة عدد كبير من الرموز المميزة في طلب واحد، كان القيد الرئيسي الآخر هو التكلفة. إذا كان لديك تطبيق "الدردشة مع بياناتك" يتيح للمستخدم تحميل 10 ملفات PDF وفيديو وبعض مستندات العمل، كان عليك في السابق استخدام أداة أو إطار عمل أكثر تعقيدًا للتوليد المعزّز بالاسترجاع (RAG) من أجل معالجة هذه الطلبات ودفع مبلغ كبير مقابل الرموز المميزة التي تم نقلها إلى قدرة الاستيعاب. يمكنك الآن تخزين الملفات التي يحمّلها المستخدم مؤقتًا والدفع مقابل تخزينها على أساس كل ساعة. على سبيل المثال، تبلغ تكلفة الإدخال / الإخراج لكل طلب باستخدام Gemini Flash حوالي ربع تكلفة الإدخال / الإخراج العادية، لذا إذا كان المستخدم يتحدث مع بياناته بشكل كافٍ، سيوفّر لك ذلك الكثير من التكاليف بصفتك مطوّرًا.
+Pengoptimalan utama saat bekerja dengan konteks panjang dan model Gemini adalah menggunakan [penyimpanan cache konteks](https://ai.google.dev/gemini-api/docs/caching?hl=id). Selain tidak mungkinnya memproses banyak token dalam satu permintaan, batasan utama lainnya adalah biaya. Jika Anda memiliki aplikasi "chat dengan data Anda" tempat pengguna mengupload 10 PDF, satu video, dan beberapa dokumen kerja, Anda harus menggunakan alat/framework pembuatan dengan pengoptimalan pengambilan (RAG) yang lebih kompleks untuk memproses permintaan ini dan membayar sejumlah besar token yang dipindahkan ke jendela konteks. Sekarang, Anda dapat menyimpan dalam cache file yang diupload pengguna dan membayar untuk menyimpannya per jam. Biaya input / output per permintaan dengan Gemini Flash, misalnya, ~4x lebih rendah daripada biaya input / output standar. Jadi, jika pengguna cukup sering melakukan percakapan dengan datanya, Anda sebagai developer akan menghemat biaya yang sangat besar.
 
-## محدودية قدرة الاستيعاب الموسَّعة
+## Batasan konteks panjang
 
-في أقسام مختلفة من هذا الدليل، تحدّثنا عن كيفية تحقيق نماذج Gemini
-أداءً عاليًا في مختلف عمليات التقييم المتعلقة باسترجاع المعلومات من مستندات طويلة. تأخذ هذه الاختبارات في الاعتبار الإعداد الأساسي، حيث يكون لديك إبرة واحدة تبحث عنها. في الحالات التي قد يكون لديك فيها عدة "إبر" أو معلومات محددة تبحث عنها، لا يحقّق النموذج الدقة نفسها. يمكن أن يختلف الأداء بشكل كبير حسب السياق. من المهم مراعاة ذلك لأنّ هناك مفاضلة بين الحصول على المعلومات الصحيحة وتكلفة ذلك. يمكنك الحصول على دقة تبلغ% 99 تقريبًا في طلب بحث واحد، ولكن عليك دفع تكلفة الرموز المميزة للإدخال في كل مرة ترسل فيها طلب البحث هذا. لذا، لاسترداد 100 جزء من المعلومات، إذا كنت بحاجة إلى أداء بنسبة% 99، من المحتمل أن تحتاج إلى إرسال 100 طلب. هذا مثال جيد على الحالات التي يمكن أن يؤدي فيها التخزين المؤقت للسياق إلى خفض التكلفة المرتبطة باستخدام نماذج Gemini بشكل كبير مع الحفاظ على مستوى الأداء العالي.
+Di berbagai bagian panduan ini, kami membahas cara model Gemini mencapai performa tinggi di berbagai evaluasi pengambilan informasi dalam tugas mencari jarum dalam tumpukan jerami. Pengujian
+ini mempertimbangkan penyiapan paling dasar, yaitu Anda memiliki satu jarum yang
+Anda cari. Dalam kasus di mana Anda mungkin memiliki beberapa "jarum" atau informasi spesifik yang Anda cari, model tidak akan berperforma dengan akurasi yang sama. Performa dapat sangat bervariasi, bergantung pada konteksnya. Hal ini
+penting untuk dipertimbangkan karena ada pertukaran yang melekat antara mendapatkan
+informasi yang tepat yang diambil dan biaya. Anda bisa mendapatkan akurasi ~99% pada satu kueri, tetapi Anda harus membayar biaya token input setiap kali Anda mengirim kueri tersebut. Jadi, untuk mengambil 100 informasi, jika Anda memerlukan performa 99%, Anda mungkin perlu mengirim 100 permintaan. Ini adalah contoh yang baik tentang tempat penyimpanan cache konteks dapat secara signifikan mengurangi biaya yang terkait dengan penggunaan model Gemini sekaligus menjaga performa tetap tinggi.
 
-## الأسئلة الشائعة
+## FAQ
 
-### أين أفضل مكان لوضع استعلامي في قدرة الاستيعاب؟
+### Di mana tempat terbaik untuk menempatkan kueri saya di jendela konteks?
 
-في معظم الحالات، خاصةً إذا كان السياق الإجمالي طويلاً، سيكون أداء النموذج أفضل إذا وضعت طلبك أو سؤالك في نهاية الطلب (بعد كل السياق الآخر).
+Dalam sebagian besar kasus, terutama jika total konteksnya panjang, performa model akan lebih baik jika Anda menempatkan kueri / pertanyaan di akhir perintah (setelah semua konteks lainnya).
 
-### هل ينخفض أداء النموذج عند إضافة المزيد من الرموز المميزة إلى طلب بحث؟
+### Apakah performa model menurun saat saya menambahkan lebih banyak token ke kueri?
 
-بشكل عام، إذا لم تكن بحاجة إلى تمرير الرموز المميّزة إلى النموذج، من الأفضل تجنُّب تمريرها. ومع ذلك، إذا كان لديك عدد كبير من الرموز المميزة تتضمّن بعض المعلومات وأردت طرح أسئلة حول هذه المعلومات، سيكون النموذج قادرًا بشكل كبير على استخراج هذه المعلومات (بدقة تصل إلى% 99 في العديد من الحالات).
+Secara umum, jika Anda tidak memerlukan token untuk diteruskan ke model, sebaiknya
+hindari meneruskannya. Namun, jika Anda memiliki sejumlah besar token dengan beberapa
+informasi dan ingin mengajukan pertanyaan tentang informasi tersebut, model ini
+sangat mampu mengekstrak informasi tersebut (dengan akurasi hingga 99% dalam banyak
+kasus).
 
-### كيف يمكنني خفض التكلفة باستخدام طلبات البحث ذات السياق الطويل؟
+### Bagaimana cara menurunkan biaya dengan kueri konteks panjang?
 
-إذا كان لديك مجموعة مماثلة من الرموز المميزة أو السياق الذي تريد إعادة استخدامه عدة مرات، يمكن أن يساعدك [تخزين السياق مؤقتًا](https://ai.google.dev/gemini-api/docs/caching?hl=ar) في تقليل التكاليف المرتبطة بطرح أسئلة حول هذه المعلومات.
+Jika Anda memiliki kumpulan token / konteks serupa yang ingin digunakan kembali berkali-kali, [penyimpanan cache konteks](https://ai.google.dev/gemini-api/docs/caching?hl=id) dapat membantu mengurangi biaya yang terkait dengan mengajukan pertanyaan tentang informasi tersebut.
 
-### هل يؤثر طول السياق في وقت استجابة النموذج؟
+### Apakah panjang konteks memengaruhi latensi model?
 
-هناك مقدار ثابت من وقت الاستجابة في أي طلب، بغض النظر عن الحجم، ولكن بشكل عام، ستستغرق طلبات البحث الأطول وقت استجابة أطول (الوقت اللازم لظهور الرمز المميز الأول).
+Ada sejumlah latensi tetap dalam setiap permintaan tertentu, terlepas dari
+ukurannya, tetapi umumnya kueri yang lebih panjang akan memiliki latensi yang lebih tinggi (waktu untuk token pertama).
 
-إرسال ملاحظات
+Kirim masukan
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-تاريخ التعديل الأخير: 2026-06-22 (حسب التوقيت العالمي المتفَّق عليه)
+Terakhir diperbarui pada 2026-06-22 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Ada masukan untuk kami?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-22 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-22 UTC."],[],[]]

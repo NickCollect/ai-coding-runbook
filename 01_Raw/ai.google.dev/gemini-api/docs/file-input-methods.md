@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/file-input-methods?hl=fr
-fetched_at: 2026-08-24T02:35:48.621152+00:00
+fetched_at: 2026-08-31T06:37:40.052070+00:00
 title: "M\u00e9thodes de saisie de fichiers \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

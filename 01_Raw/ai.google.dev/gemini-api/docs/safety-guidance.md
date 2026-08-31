@@ -1,115 +1,113 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/safety-guidance?hl=tr
-fetched_at: 2026-08-24T02:37:21.930055+00:00
-title: "G\u00fcvenlik ve do\u011frulukla ilgili rehber \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/safety-guidance?hl=zh-CN
+fetched_at: 2026-08-31T06:36:41.659566+00:00
+title: "\u5b89\u5168\u6027\u548c\u4e8b\u5b9e\u6027\u6307\u5357 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Geri bildirim gönderin
+发送反馈
 
-# Güvenlik ve doğrulukla ilgili rehber
+# 安全性和事实性指南
 
-Üretken yapay zeka modelleri güçlü araçlar olsa da sınırlamaları vardır. Çok yönlülükleri ve uygulanabilirlikleri bazen yanlış, taraflı veya rahatsız edici gibi beklenmedik sonuçlara yol açabilir. Bu tür çıkışlardan kaynaklanan zarar riskini sınırlamak için sonradan işleme ve titiz bir manuel değerlendirme gereklidir.
+生成式人工智能模型是一种强大的工具，但并非没有局限性。它们的多功能性和适用性有时会导致意外的输出结果，例如不准确、有偏见或冒犯性的输出结果。后处理和严格的人工评估对于限制此类输出结果造成的危害风险至关重要。
 
-Gemini API tarafından sağlanan modeller, çok çeşitli üretken yapay zeka ve doğal dil işleme (NLP) uygulamalarında kullanılabilir. Bu işlevler yalnızca Gemini API veya Google AI Studio web uygulaması üzerinden kullanılabilir. Gemini API'yi kullanımınız [Üretken Yapay Zeka Yasaklanan Kullanım Politikası](https://policies.google.com/terms/generative-ai/use-policy?hl=tr) ve [Gemini API Hizmet Şartları](https://ai.google.dev/terms?hl=tr)'na tabidir.
+Gemini API 提供的模型可用于各种生成式 AI 和自然语言处理 (NLP) 应用。这些功能只能通过 Gemini API 或 Google AI Studio Web 应用使用。使用 Gemini API 时还须遵守[《生成式 AI 使用限制政策》](https://policies.google.com/terms/generative-ai/use-policy?hl=zh-cn)和[《Gemini API 服务条款》](https://ai.google.dev/terms?hl=zh-cn)。
 
-Büyük dil modellerini (LLM'ler) bu kadar kullanışlı kılan özelliklerden biri, birçok farklı dil görevini ele alabilen yaratıcı araçlar olmalarıdır. Maalesef bu durum, büyük dil modellerinin rahatsız edici, duyarsız veya olgusal olarak yanlış metinler de dahil olmak üzere beklemediğiniz çıktılar üretebileceği anlamına da geliyor.
-Ayrıca, bu modellerin inanılmaz çok yönlülüğü, tam olarak ne tür istenmeyen sonuçlar üretebileceklerini tahmin etmeyi de zorlaştırır. Gemini API, [Google'ın yapay zeka ilkeleri](https://ai.google/principles/?hl=tr) göz önünde bulundurularak tasarlanmış olsa da bu modelleri sorumlu bir şekilde uygulamak geliştiricilerin sorumluluğundadır. Gemini API, geliştiricilerin güvenli ve sorumlu uygulamalar oluşturmasına yardımcı olmak için yerleşik içerik filtreleme özelliğinin yanı sıra 4 zarar boyutunda ayarlanabilir güvenlik ayarlarına sahiptir. Daha fazla bilgi edinmek için [güvenlik ayarları](https://ai.google.dev/gemini-api/docs/safety-settings?hl=tr) kılavuzuna bakın. Ayrıca, doğruluk oranını artırmak için Google Arama ile Temellendirme özelliği de sunar. Ancak bu özellik, kullanım alanları daha yaratıcı olan ve bilgi edinmeye yönelik olmayan geliştiriciler için devre dışı bırakılabilir.
+大语言模型 (LLM) 之所以如此实用，部分原因在于它们是创意工具，可以处理许多不同的语言任务。遗憾的是，这也意味着大语言模型可能会生成意料之外的输出，包括令人反感、不顾他人感受或事实上不正确的文本。更重要的是，这些模型用途广泛，但也正因如此，我们很难准确预测它们可能会生成哪些不良输出。虽然 Gemini API 在设计时考虑到了 [Google 的 AI 原则](https://ai.google/principles/?hl=zh-cn)，但开发者有责任以负责任的方式应用这些模型。为了帮助开发者创建安全可靠的应用，Gemini API 内置了内容过滤功能，并提供了 4 个方面的可调节安全设置。如需了解详情，请参阅[安全设置](https://ai.google.dev/gemini-api/docs/safety-settings?hl=zh-cn)指南。此外，它还提供启用了 Google 搜索的 Grounding 功能，以提高事实准确性，不过对于用例更具创意性而非信息搜索性的开发者，可以停用此功能。
 
-Bu belgenin amacı, LLM'leri kullanırken ortaya çıkabilecek bazı güvenlik riskleri hakkında sizi bilgilendirmek ve yeni güvenlik tasarımı ve geliştirme önerileri sunmaktır. (Yasa ve yönetmeliklerin de kısıtlamalar getirebileceğini ancak bu tür hususların bu kılavuzun kapsamı dışında olduğunu unutmayın.)
+本文档旨在向您介绍使用 LLM 时可能会出现的一些安全风险，并推荐新兴的安全设计和开发建议。（请注意，法律法规也可能会施加限制，但此类考虑因素不在本指南的讨论范围内。）
 
-Büyük dil modelleriyle uygulama geliştirirken aşağıdaki adımların uygulanması önerilir:
+建议在构建基于 LLM 的应用时遵循以下步骤：
 
-- Uygulamanızın güvenlik risklerini anlama
-- Güvenlik risklerini azaltmak için düzenlemeler yapmayı düşünün.
-- Kullanım alanınıza uygun güvenlik testi yapma
-- Kullanıcılardan geri bildirim isteme ve kullanımı izleme
+- 了解应用的安全风险
+- 考虑进行调整，以降低安全风险
+- 执行适合您应用场景的安全测试
+- 征求用户反馈和监控使用情况
 
-Uygulamanız için uygun performansa ulaşana kadar ayarlama ve test aşamaları tekrarlanmalıdır.
+调整和测试阶段应反复进行，直到达到适合应用的性能。
 
-![Model uygulama döngüsü](https://ai.google.dev/static/gemini-api/docs/images/safety_diagram.png?hl=tr)
+![模型实施周期](https://ai.google.dev/static/gemini-api/docs/images/safety_diagram.png?hl=zh-cn)
 
-## Uygulamanızın güvenlik risklerini anlama
+## 了解应用的安全风险
 
-Bu bağlamda güvenlik, bir LLM'nin kullanıcılarına zarar vermekten kaçınma yeteneği olarak tanımlanır. Örneğin, toksik dil veya kalıplaşmış düşünceleri teşvik eden içerik oluşturmaktan kaçınma. Gemini API aracılığıyla kullanılabilen modeller, [Google'ın Yapay Zeka İlkeleri](https://ai.google/principles/?hl=tr) dikkate alınarak tasarlanmıştır ve bu modelleri kullanımınız [Üretken Yapay Zeka Yasaklanan Kullanım Politikası](https://policies.google.com/terms/generative-ai/use-policy?hl=tr)'na tabidir. API, toksik dil ve nefret söylemi gibi bazı yaygın dil modeli sorunlarını ele almaya yardımcı olmak ve kapsayıcılık ile kalıplaşmış düşüncelerin önlenmesi için yerleşik güvenlik filtreleri sağlar. Ancak her uygulama, kullanıcıları için farklı bir risk grubu oluşturabilir. Bu nedenle, uygulama sahibi olarak kullanıcılarınızı ve uygulamanızın neden olabileceği olası zararları bilmekten ve uygulamanızın LLM'leri güvenli ve sorumlu bir şekilde kullanmasını sağlamaktan siz sorumlusunuz.
+在此背景下，安全性是指 LLM 避免对用户造成伤害的能力，例如避免生成有害的语言或宣扬刻板印象的内容。通过 Gemini API 提供的模型在设计时考虑了 [Google 的 AI 原则](https://ai.google/principles/?hl=zh-cn)，并且您对这些模型的使用受[生成式 AI 禁止的使用政策](https://policies.google.com/terms/generative-ai/use-policy?hl=zh-cn)的约束。该 API 提供内置的安全过滤条件，可帮助解决一些常见的语言模型问题，例如有害的语言和仇恨言论，并努力实现包容性并避免刻板印象。不过，每款应用都可能会给用户带来不同的风险。因此，作为应用所有者，您有责任了解您的用户以及您的应用可能造成的潜在危害，并确保您的应用以安全且负责任的方式使用 LLM。
 
-Bu değerlendirme kapsamında, zararın meydana gelme olasılığını göz önünde bulundurmalı, ciddiyetini ve azaltma adımlarını belirlemelisiniz. Örneğin, gerçek olaylara dayalı denemeler oluşturan bir uygulamanın, eğlence amaçlı kurgusal hikayeler oluşturan bir uygulamaya kıyasla yanlış bilgilendirmeyi önleme konusunda daha dikkatli olması gerekir. Potansiyel güvenlik risklerini keşfetmeye başlamanın iyi bir yolu, son kullanıcılarınızı ve uygulamanızın sonuçlarından etkilenebilecek diğer kişileri araştırmaktır. Bu, uygulama alanınızdaki en yeni çalışmaları araştırma, kullanıcıların benzer uygulamaları nasıl kullandığını gözlemleme veya kullanıcı çalışması, anket yapma ya da potansiyel kullanıcılarla gayri resmi görüşmeler yapma gibi birçok şekilde olabilir.
+在进行此评估时，您应考虑可能发生的危害，并确定其严重程度和缓解措施。例如，与生成虚构故事以供娱乐的应用相比，基于事实事件生成文章的应用需要更加谨慎地避免虚假信息。探索潜在安全风险的一个好方法是研究您的最终用户以及可能受到应用结果影响的其他人员。这可以采取多种形式，包括研究应用领域中的前沿研究、观察人们如何使用类似应用，或者进行用户调研、调查问卷或与潜在用户进行非正式访谈。
 
-### Gelişmiş ipuçları
+### 高级提示
 
-- Uygulamanız ve kullanım amacı hakkında hedef kitlenizdeki çeşitli potansiyel kullanıcılarla konuşarak olası riskler hakkında daha geniş bir bakış açısı elde edin ve çeşitlilik ölçütlerini gerektiği gibi ayarlayın.
-- ABD hükümetinin Ulusal Standartlar ve Teknoloji Enstitüsü (NIST) tarafından yayınlanan [Yapay Zeka Risk Yönetimi Çerçevesi](https://www.nist.gov/itl/ai-risk-management-framework), yapay zeka risk yönetimi için daha ayrıntılı rehberlik ve ek öğrenme kaynakları sunar.
-- DeepMind'ın [dil modellerinden kaynaklanan etik ve sosyal zarar riskleri](https://arxiv.org/abs/2112.04359) hakkındaki yayını, dil modeli uygulamalarının zarar verebileceği yolları ayrıntılı olarak açıklar.
+- 与目标人群中不同类型的潜在用户交流，了解他们对您的应用及其预期用途的看法，以便更全面地了解潜在风险，并根据需要调整多样性标准。
+- 美国政府国家标准与技术研究院 (NIST) 发布的 [AI 风险管理框架](https://www.nist.gov/itl/ai-risk-management-framework)为 AI 风险管理提供了更详细的指南和更多学习资源。
+- DeepMind 发布的关于[语言模型造成伤害的伦理和社会风险](https://arxiv.org/abs/2112.04359)的出版物详细介绍了语言模型应用可能造成伤害的方式。
 
-## Güvenlik ve doğruluk risklerini azaltmak için ayarlamalar yapma
+## 考虑进行调整，以降低安全性和事实性风险
 
-Riskleri anladığınıza göre, bunları nasıl azaltacağınıza karar verebilirsiniz. Hangi risklere öncelik verileceğini ve bunları önlemeye çalışmak için ne kadar çaba göstermeniz gerektiğini belirlemek, bir yazılım projesindeki hataları öncelik sırasına koymaya benzer şekilde kritik bir karardır. Öncelikleri belirledikten sonra en uygun azaltma türlerini düşünmeye başlayabilirsiniz. Genellikle basit değişiklikler fark yaratabilir ve riskleri azaltabilir.
+现在，您已经了解了风险，可以决定如何缓解这些风险。确定要优先处理哪些风险以及应采取哪些措施来尽可能避免这些风险是一项关键决策，类似于对软件项目中的 bug 进行分级。确定优先级后，您可以开始考虑最合适的缓解措施类型。通常，简单的更改就能带来显著效果并降低风险。
 
-Örneğin, bir uygulama tasarlarken şunları göz önünde bulundurun:
+例如，在设计应用时，请考虑以下事项：
 
-- Uygulama bağlamınızda kabul edilebilir olanı daha iyi yansıtmak için **model çıkışını ayarlama**. İnce ayar, modelin çıkışını daha tahmin edilebilir ve tutarlı hale getirebilir. Bu nedenle, belirli risklerin azaltılmasına yardımcı olabilir.
-- **Daha güvenli çıkışlar sağlayan bir giriş yöntemi sunma.** Büyük dil modeline verdiğiniz girişin tam olarak ne olduğu, çıktının kalitesinde fark yaratabilir.
-  Kullanım alanınızda en güvenli şekilde çalışan istemleri bulmak için denemeler yapmak, kullanıcı deneyimini kolaylaştıracak bir UX sunmanızı sağlayacağından çabalarınıza değecektir. Örneğin, kullanıcıların yalnızca bir giriş istemi açılır listesinden seçim yapmasını kısıtlayabilir veya uygulama bağlamınızda güvenli bir şekilde çalıştığını tespit ettiğiniz açıklayıcı ifadeler içeren pop-up öneriler sunabilirsiniz.
-- **Güvenli olmayan girişleri engelleme ve çıkışı kullanıcıya gösterilmeden önce filtreleme** Basit durumlarda, istemlerde veya yanıtlarda güvenli olmayan kelimeleri ya da ifadeleri belirleyip engellemek veya bu tür içeriklerin uzman incelemeciler tarafından manuel olarak değiştirilmesini ya da engellenmesini zorunlu kılmak için engelleme listeleri kullanılabilir.
-- **Her istemi olası zararlar veya saldırgan sinyallerle etiketlemek için eğitilmiş sınıflandırıcılar kullanma.** Ardından, tespit edilen zararın türüne bağlı olarak isteğin nasıl işleneceği konusunda farklı stratejiler uygulanabilir. Örneğin, giriş açıkça saldırgan veya kötüye kullanıma yönelikse engellenebilir ve bunun yerine önceden hazırlanmış bir yanıt verilebilir. **İleri düzey ipucu:** Sinyaller, çıkışın zararlı olduğunu belirlerse uygulama aşağıdaki seçenekleri kullanabilir:
+- **调整模型输出**，使其更好地反映应用上下文中的可接受内容。通过调整，可以使模型的输出更具可预测性和一致性，从而有助于降低某些风险。
+- **提供有助于生成更安全输出的输入方法。**您向 LLM 提供的确切输入内容可能会影响输出质量。尝试使用不同的输入提示，找到在您的使用情形下最安全的输入提示，这非常值得，因为这样一来，您就可以提供有助于生成更安全输出的 UX。例如，您可以限制用户只能从下拉列表中选择输入提示，或者提供包含描述性短语的弹出式建议，这些短语在您的应用上下文中表现安全。
+- **在向用户显示输出内容之前，阻止不安全的输入并过滤输出内容。**在简单的情况下，可以使用屏蔽名单来识别和屏蔽提示或回答中的不安全字词或短语，或者要求人工审核员手动更改或屏蔽此类内容。
+- **使用经过训练的分类器，逐一标记可能包含潜在危害或对抗性信号的提示。**然后，您可以根据检测到的危害类型应用不同的策略来处理请求。例如，如果输入具有明显的对抗性或辱骂性，系统可能会屏蔽该输入，而是输出预编写的回答。
+  **高级提示**：如果信号确定输出有害，应用可以采用以下选项：
 
-  - Hata mesajı veya önceden hazırlanmış çıkış sunma
-  - Aynı istem bazen farklı çıkışlar ürettiğinden, alternatif bir güvenli çıkış oluşturulması ihtimaline karşı istemi tekrar deneyin.
-- **Kasıtlı kötüye kullanıma karşı koruma önlemleri alma** (ör. her kullanıcıya benzersiz bir kimlik atama ve belirli bir dönemde gönderilebilecek kullanıcı sorgularının hacmine sınır koyma). Diğer bir önlem de olası istem enjeksiyonuna karşı koruma sağlamaya çalışmaktır. SQL enjeksiyonu gibi istem enjeksiyonu da kötü amaçlı kullanıcıların, modelin çıkışını manipüle eden bir giriş istemi tasarlamasına olanak tanır. Örneğin, modele önceki örnekleri yok saymasını söyleyen bir giriş istemi gönderilebilir. Kasıtlı hatalı kullanım hakkında ayrıntılı bilgi için [Üretken Yapay Zeka Yasaklanan Kullanım Politikası](https://policies.google.com/terms/generative-ai/use-policy?hl=tr)'nı inceleyin.
-- **İşlevselliği, doğası gereği daha düşük riskli bir şeye göre ayarlama.**
-  Kapsamı daha dar olan (ör. metin parçalarından anahtar kelimeler çıkarma) veya daha fazla insan gözetimi olan (ör. bir insan tarafından incelenecek kısa içerikler oluşturma) görevler genellikle daha düşük risk taşır. Örneğin, sıfırdan e-posta yanıtı yazmak için bir uygulama oluşturmak yerine, uygulamayı bir taslağı genişletmek veya alternatif ifadeler önermekle sınırlayabilirsiniz.
-- **Zararlı içerik güvenlik ayarlarını, zararlı olabilecek yanıtları görme olasılığınızı azaltacak şekilde ayarlama** Gemini API, prototip oluşturma aşamasında ayarlayabileceğiniz güvenlik ayarları sunar. Bu ayarlar, uygulamanızın daha kısıtlayıcı veya daha az kısıtlayıcı bir güvenlik yapılandırması gerektirip gerektirmediğini belirlemenize yardımcı olur. Belirli içerik türlerini kısıtlamak veya bunlara izin vermek için bu ayarları beş filtre kategorisinde ayarlayabilirsiniz. Gemini API aracılığıyla kullanılabilen ayarlanabilir güvenlik ayarları hakkında bilgi edinmek için [güvenlik ayarları kılavuzuna](https://ai.google.dev/gemini-api/docs/safety-settings?hl=tr) bakın.
-- **Google Arama ile Temellendirme'yi etkinleştirerek olası gerçeklik hatalarını veya halüsinasyonları azaltın**. Birçok yapay zeka modelinin deneysel olduğunu ve gerçeklik hataları içeren bilgiler sunabileceğini, halüsinasyonlar üretebileceğini veya başka sorunlu çıktılar oluşturabileceğini unutmayın. Google Arama ile Temellendirme özelliği, Gemini modelini gerçek zamanlı web içeriğine bağlar ve tüm dillerde kullanılabilir. Bu sayede Gemini, daha doğru yanıtlar verebilir ve modelin bilgi kesme tarihinin ötesinde doğrulanabilir kaynaklar alıntılayabilir.
+  - 提供错误消息或预编写的输出内容。
+  - 再次尝试该提示，看看是否会生成其他安全输出，因为有时同一提示会生成不同的输出。
+- **采取防范蓄意滥用的措施**，例如为每位用户分配唯一 ID，并限制用户在给定时间段内可提交的查询量。另一项保护措施是尝试防范可能的提示注入。提示注入与 SQL 注入非常相似，是一种恶意用户设计输入提示来操纵模型输出的方式，例如，通过发送指示模型忽略任何先前示例的输入提示。如需详细了解蓄意滥用，请参阅[生成式 AI 禁用的使用政策](https://policies.google.com/terms/generative-ai/use-policy?hl=zh-cn)。
+- **将功能调整为风险较低的类型。**范围较窄的任务（例如，从文本段落中提取关键字）或需要更多人工监督的任务（例如，生成将由人工审核的短内容）通常风险较低。因此，举例来说，您可以将应用的功能限制为扩展大纲或建议替代措辞，而不是从头开始编写电子邮件回复。
+- **调整有害内容安全设置，以降低看到可能有害的回答的可能性。**Gemini API 提供了安全设置，您可以在原型设计阶段进行调整，以确定您的应用需要更严格还是更宽松的安全配置。您可以在五个过滤条件类别中调整这些设置，以限制或允许某些类型的内容。请参阅[安全设置指南](https://ai.google.dev/gemini-api/docs/safety-settings?hl=zh-cn)，了解可通过 Gemini API 调整的安全设置。
+- **启用“依托 Google 搜索进行接地”功能，可减少潜在的事实不准确或幻觉问题**。请注意，许多 AI 模型仍处于实验阶段，可能会提供不准确的事实信息、产生幻觉或以其他方式生成有问题的内容。“依托 Google 搜索进行接地”功能可将 Gemini 模型与实时 Web 内容连接起来，并支持所有可用语言。这让 Gemini 能够提供更准确的回答，并引用模型知识截点之外的可验证来源。
 
-## Kullanım alanınıza uygun güvenlik testi yapın
+## 执行适合您应用场景的安全测试
 
-Test, sağlam ve güvenli uygulamalar oluşturmanın önemli bir parçasıdır ancak testin kapsamı, boyutu ve stratejileri değişiklik gösterir. Örneğin, sadece eğlence amaçlı bir haiku oluşturucunun, hukuk firmaları tarafından yasal belgeleri özetlemek ve sözleşme taslakları hazırlamak için kullanılmak üzere tasarlanmış bir uygulamaya kıyasla daha az ciddi riskler oluşturması muhtemeldir. Ancak haiku oluşturucu daha geniş bir kullanıcı kitlesi tarafından kullanılabileceğinden, saldırı amaçlı girişimlerin veya istenmeden girilen zararlı girişlerin olasılığı daha yüksek olabilir. Uygulama bağlamı da önemlidir. Örneğin, herhangi bir işlem yapılmadan önce çıkışları uzmanlar tarafından incelenen bir uygulamanın, aynı denetim mekanizmasına sahip olmayan aynı uygulamanın zararlı çıkışlar üretme olasılığı daha düşük kabul edilebilir.
+测试是构建稳健安全的应用的关键环节，但测试的范围、规模和策略会有所不同。例如，仅供娱乐的俳句生成器可能比律师事务所用来总结法律文件和帮助起草合同的应用风险更低。但俳句生成器的用户群体可能更广泛，这意味着发生对抗性尝试甚至意外有害输入的可能性更大。实现背景也很重要。例如，如果应用在采取任何行动之前会由人类专家审核输出内容，那么与没有此类监督的相同应用相比，该应用产生有害输出的可能性可能更低。
 
-Nispeten düşük riskli uygulamalar için bile yayınlamaya hazır olduğunuzdan emin olmadan önce birkaç kez değişiklik yapıp test etmeniz yaygın bir durumdur. Yapay zeka uygulamaları için özellikle iki tür test yararlıdır:
+即使是风险相对较低的应用，在确信可以发布之前，也需要经历多次更改和测试迭代。以下两种测试对于 AI 应用特别有用：
 
-- **Güvenlik karşılaştırması**, uygulamanızın nasıl kullanılabileceği bağlamında güvenli olmayabileceği yolları yansıtan güvenlik metrikleri tasarlamayı ve ardından değerlendirme veri kümelerini kullanarak uygulamanızın bu metriklerde ne kadar iyi performans gösterdiğini test etmeyi içerir. Test etmeden önce güvenlik metriklerinin kabul edilebilir minimum düzeylerini düşünmek iyi bir uygulamadır. Böylece 1) test sonuçlarını bu beklentilere göre değerlendirebilir ve 2) en çok önem verdiğiniz metrikleri değerlendiren testlere göre değerlendirme veri kümesini toplayabilirsiniz.
+- **安全基准比较**是指设计安全指标，以反映应用在可能的使用方式方面可能存在的不安全情况，然后使用评估数据集测试应用在这些指标上的表现。在测试之前，最好先考虑安全指标的最低可接受水平，以便 1) 根据这些预期评估测试结果，以及 2) 根据评估您最关心的指标的测试来收集评估数据集。
 
-  **Gelişmiş ipuçları:**
+  **高级提示**：
 
-  - Uygulamanızın bağlamına tam olarak uyması için kendi test veri kümelerinizi insan değerlendiricilerle oluşturmanız gerekeceğinden, "hazır" yaklaşımlara aşırı güvenmekten kaçının.
-  - Birden fazla metriğiniz varsa bir değişiklik bir metrikte iyileşmeye yol açarken diğerinde kötüleşmeye neden olursa nasıl bir denge kuracağınıza karar vermeniz gerekir. Diğer performans mühendisliği çalışmalarında olduğu gibi, ortalama performans yerine değerlendirme kümenizdeki en kötü performans durumuna odaklanmak isteyebilirsiniz.
-- **Çekişmeli test**, uygulamanızı proaktif bir şekilde bozmaya çalışmayı içerir. Buradaki amaç, zayıf noktaları belirleyerek uygun şekilde düzeltici adımlar atmanızı sağlamaktır. Saldırgan test, uygulamanız konusunda uzman olan değerlendiricilerden önemli ölçüde zaman/çaba gerektirebilir. Ancak ne kadar çok test yaparsanız sorunları, özellikle de nadiren veya yalnızca uygulamanın tekrar tekrar çalıştırılmasından sonra ortaya çıkan sorunları tespit etme olasılığınız o kadar artar.
+  - 请注意，不要过度依赖“现成”的方法，因为您可能需要使用人工评估者构建自己的测试数据集，才能完全符合应用的上下文。
+  - 如果您有多个指标，则需要确定，如果某项更改导致一个指标有所改进，但另一个指标有所下降，您将如何权衡。与其他性能工程一样，您可能需要关注评估集中的最坏情况性能，而不是平均性能。
+- **对抗性测试**是指主动尝试破坏应用。目的是找出薄弱环节，以便您采取适当的措施来弥补这些环节。对抗性测试可能需要评估人员花费大量时间/精力，但测试次数越多，发现问题的机会就越大，尤其是那些很少发生或仅在应用重复运行后才发生的问题。
 
-  - Çekişmeli test, kötü niyetli veya istemeden zararlı girişler sağlandığında nasıl davrandığını öğrenmek amacıyla bir makine öğrenimi modelini sistematik olarak değerlendirme yöntemidir:
-    - Girişin açıkça güvenli olmayan veya zararlı bir çıkış üretecek şekilde tasarlanması durumunda giriş kötü amaçlı olabilir. Örneğin, bir metin üretme modelinden belirli bir din hakkında nefret dolu bir söylem oluşturmasını istemek.
-    - Girişin kendisi zararsız olsa da zararlı çıkış ürettiğinde giriş, istemeden zararlı olur. Örneğin, bir metin oluşturma modelinden belirli bir etnik kökenden olan bir kişiyi tanımlamasını istemek ve ırkçı bir çıkış almak.
-  - Bir saldırı testini standart değerlendirmeden ayıran şey, test için kullanılan verilerin bileşimidir. Saldırgan testler için modelden sorunlu çıkış elde etme olasılığı en yüksek olan test verilerini seçin. Bu, nadir veya sıra dışı örnekler ve güvenlik politikalarıyla alakalı uç durumlar da dahil olmak üzere, olası tüm zarar türleri açısından modelin davranışını incelemek anlamına gelir. Ayrıca, cümlelerin yapısı, anlamı ve uzunluğu gibi farklı boyutlarında çeşitlilik de içermelidir. Test veri kümesi oluştururken nelere dikkat etmeniz gerektiğiyle ilgili daha fazla bilgi için [Google'ın adaletle ilgili sorumlu yapay zeka uygulamaları](https://ai.google/responsibilities/responsible-ai-practices/?category=fairness&hl=tr) başlıklı makaleyi inceleyebilirsiniz.
-    **Gelişmiş ipuçları:**
-  - Uygulamanızı kırmaya çalışmak için geleneksel olarak "kırmızı takımlara" insanları dahil etme yöntemi yerine [otomatik testleri](https://www.deepmind.com/blog/red-teaming-language-models-with-language-models?hl=tr) kullanın. Otomatik testlerde "kırmızı takım", test edilen modelden zararlı çıkışlar elde eden giriş metinlerini bulan başka bir dil modelidir.
+  - 对抗性测试是一种系统性评估方法，用来了解在用户恶意或无意输入有害内容时，机器学习模型将如何应对：
+    - 如果输入内容明显是为了产生不安全或有害输出，那么该输入内容可能属于恶意输入内容。例如，要求文本生成模型生成针对特定宗教的仇恨咆哮。
+    - 如果输入内容本身可能无害，但会产生有害输出，那就属于无意的有害输入内容。例如，要求文本生成模型描述特定种族的人，但模型输出种族主义内容。
+  - 对抗性测试与标准评估的区别在于用于测试的数据的构成。对于对抗性测试，请选择最有可能让模型生成问题输出的测试数据。这意味着要探测模型在所有可能类型的危害方面的行为，包括与安全政策相关的罕见或不寻常的示例和极端情况。还应包含句子不同维度（例如结构、含义和长度）的多样性。如需详细了解在构建测试数据集时应考虑哪些因素，您可以参阅 [Google 在公平性方面的 Responsible AI 实践](https://ai.google/responsibilities/responsible-ai-practices/?category=fairness&hl=zh-cn)。
+    **高级提示**：
+  - 使用[自动化测试](https://www.deepmind.com/blog/red-teaming-language-models-with-language-models?hl=zh-cn)，而不是采用传统方法，即招募“红队”人员来尝试破解您的应用。在自动化测试中，“红队”是另一个语言模型，用于查找会使被测模型生成有害输出的输入文本。
 
-## Sorunları izleme
+## 监控问题
 
-Ne kadar çok test edip azaltırsanız azaltın, mükemmelliği asla garanti edemezsiniz. Bu nedenle, ortaya çıkan sorunları nasıl tespit edeceğinizi ve nasıl ele alacağınızı önceden planlayın. Kullanıcıların geri bildirimlerini paylaşmaları için izlenen bir kanal oluşturmak (ör.beğeni/beğenmeme puanı) ve çeşitli kullanıcılardan proaktif olarak geri bildirim almak için bir kullanıcı çalışması yürütmek, yaygın yaklaşımlar arasındadır. Bu yaklaşım, özellikle kullanım kalıpları beklentilerden farklıysa değerlidir.
+无论您进行多少测试和缓解，都无法保证完美无缺，因此请提前规划好如何发现和处理出现的问题。常见的方法包括设置一个受监控的渠道供用户分享反馈（例如，赞/踩评分），以及开展用户研究以主动征求各种用户的反馈意见，如果使用模式与预期不同，这一点尤其重要。
 
-### Gelişmiş ipuçları
+### 高级提示
 
-- Kullanıcılar yapay zeka ürünlerine geri bildirim verdiğinde, yapay zeka performansını ve kullanıcı deneyimini zaman içinde büyük ölçüde iyileştirebilir. Örneğin, istem ayarlama için daha iyi örnekler seçmenize yardımcı olabilir. [Google'ın İnsan ve Yapay Zeka Rehberi](https://pair.withgoogle.com/guidebook/chapters)'ndeki [Geri Bildirim ve Kontrol bölümünde](https://pair.withgoogle.com/chapter/feedback-controls/), geri bildirim mekanizmaları tasarlarken dikkate alınması gereken önemli noktalar vurgulanmaktadır.
+- 当用户向 AI 产品提供反馈时，随着时间的推移，这可以极大地提升 AI 性能和用户体验，例如，帮助您为提示调整选择更好的示例。[《Google 的人与 AI 指南》](https://pair.withgoogle.com/guidebook/chapters)中的[“反馈与控制”一章](https://pair.withgoogle.com/chapter/feedback-controls/)重点介绍了设计反馈机制时需要考虑的关键因素。
 
-## Sonraki adımlar
+## 后续步骤
 
-- Gemini API'si aracılığıyla kullanılabilen ayarlanabilir güvenlik ayarları hakkında bilgi edinmek için [güvenlik ayarları](https://ai.google.dev/gemini-api/docs/safety-settings?hl=tr) kılavuzuna bakın.
-- İlk istemlerinizi yazmaya başlamak için [istem yazmaya giriş](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=tr) bölümüne bakın.
+- 请参阅[安全设置](https://ai.google.dev/gemini-api/docs/safety-settings?hl=zh-cn)指南，了解可通过 Gemini API 调整的安全设置。
+- 请参阅[提示简介](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=zh-cn)，开始撰写您的第一个提示。
 
-Geri bildirim gönderin
+发送反馈
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Son güncelleme tarihi: 2026-06-05 UTC.
+最后更新时间 (UTC)：2026-06-05。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+需要向我们提供更多信息？
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-05 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-05。"],[],[]]

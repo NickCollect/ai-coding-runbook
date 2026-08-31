@@ -1,34 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/omni?hl=hi
-fetched_at: 2026-08-24T02:21:31.352876+00:00
-title: "Gemini Omni Flash \u0915\u0940 \u092e\u0926\u0926 \u0938\u0947 \u0935\u0940\u0921\u093f\u092f\u094b \u091c\u0928\u0930\u0947\u091f \u0914\u0930 \u090f\u0921\u093f\u091f \u0915\u0930\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/omni?hl=tr
+fetched_at: 2026-08-31T06:33:16.495731+00:00
+title: "Gemini Omni Flash ile video \u00fcretme ve d\u00fczenleme \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-सुझाव भेजें
+Geri bildirim gönderin
 
-# Gemini Omni Flash की मदद से वीडियो जनरेट और एडिट करना
+# Gemini Omni Flash ile video üretme ve düzenleme
 
-Gemini Omni Flash (`gemini-omni-flash-preview`) एक हाई-परफ़ॉर्मेंस मल्टीमॉडल है. इसे वीडियो जनरेट करने, एडिट करने, और सिनेमैटिक कंट्रोल के लिए डिज़ाइन किया गया है. यह मॉडल, इन कामों को तेज़ी से करता है.
-Gemini Omni को इन मुख्य क्षमताओं के आधार पर बनाया गया है. ये क्षमताएं, इसे वीडियो के पिछले मॉडल से अलग बनाती हैं:
+Gemini Omni Flash (`gemini-omni-1.1-flash`), yüksek hızlı video üretimi, düzenleme ve sinematik kontrol için tasarlanmış yüksek performanslı bir çok formatlı modeldir.
+Gemini Omni, önceki video modellerinden ayıran aşağıdaki temel özellikler üzerine kurulmuştur:
 
-- **नेटिव मल्टीमॉडल:** यह टेक्स्ट, इमेज, ऑडियो, और वीडियो को एक साथ प्रोसेस करता है. इससे आपको ज़्यादा कोहेसिव, एक जैसा, और कंट्रोल किया जा सकने वाला आउटपुट मिलता है.
-- **बातचीत के ज़रिए एडिटिंग:** यह सुविधा, [Interactions
-  API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) की मदद से उपलब्ध कराई जाती है. इसकी मदद से, नैचुरल लैंग्वेज में बातचीत करके, वीडियो को बार-बार बेहतर बनाया जा सकता है और उनमें बदलाव किया जा सकता है. बताएं कि आपको किस तरह के बदलाव करने हैं. मॉडल, वीडियो के उन हिस्सों को बनाए रखते हुए बदलाव करता है जिन्हें आपको रखना है.
-- **दुनिया के बारे में जानकारी:** Gemini Omni, फ़िज़िक्स की समझ को इतिहास, विज्ञान, और सांस्कृतिक संदर्भ के बारे में Gemini की जानकारी के साथ जोड़ता है. इससे, फ़ोटोरेलिज़्म से लेकर कहानी कहने के मकसद तक के बीच के अंतर को कम किया जा सकता है.
+- **Doğal çok formatlılık:** Metin, resim, ses ve videoyu aynı anda işleyerek daha tutarlı, tutarlı ve kontrol edilebilir bir çıkış sağlar.
+- **Sohbet ederek düzenleme:** [Etkileşimler API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) ile etkinleştirilen bu özellik, doğal dil sohbeti aracılığıyla videolarınızı yinelemeli olarak iyileştirmenize ve düzenlemenize olanak tanır. Değiştirmek istediğiniz şeyi açıklayın. Model, düzenlemeyi uygularken videonun korumak istediğiniz kısımlarını da korur.
+- **Dünya bilgisi:** Gemini Omni, fizik anlayışını Gemini'ın tarih, bilim ve kültürel bağlam bilgisiyle birleştirerek fotorealizmden anlamlı hikaye anlatımına geçişi sağlar.
 
-## टेक्स्ट से वीडियो जनरेट करने की सुविधा
+## Metinden video üretme
 
-टेक्स्ट प्रॉम्प्ट की मदद से वीडियो जनरेट करें. मॉडल, आपके टेक्स्ट के ब्यौरे के आधार पर ऑडियो वाला वीडियो जनरेट करता है. बेहतर नतीजे पाने के लिए, सीन के ब्यौरे, कैमरा मूवमेंट, लाइटिंग, और मूड जैसी जानकारी के साथ प्रॉम्प्ट लिखें.
+Metin isteminden video oluşturma Model, metin açıklamanıza göre sesli bir video oluşturur. En iyi sonuçları almak için sahne açıklaması, kamera hareketi, ışıklandırma ve atmosfer gibi ayrıntıları içeren istemler yazın.
 
 ### Python
 
@@ -39,7 +38,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-omni-flash-preview",
+    model="gemini-omni-1.1-flash",
     input="A marble rolling fast on a chain reaction style track, continuous smooth shot."
 )
 with open("marble.mp4", "wb") as f:
@@ -53,8 +52,8 @@ import { GoogleGenAI } from '@google/genai';
 import * as fs from 'fs';
 const ai = new GoogleGenAI({});
 
-const interaction = await ai.interactions.create({  
-  model: 'gemini-omni-flash-preview',  
+const interaction = await ai.interactions.create({
+  model: 'gemini-omni-1.1-flash',
   input: 'A marble rolling fast on a chain reaction style track, continuous smooth shot.',
 });
 
@@ -69,17 +68,17 @@ if (interaction.output_video?.data) {
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$API_KEY" \
 -H "Content-Type: application/json" \
 -d '{
- "model": "gemini-omni-flash-preview",
+ "model": "gemini-omni-1.1-flash",
  "input": "A marble rolling fast on a chain reaction style track, continuous smooth shot."
 }'
 ```
 
-### REST रिस्पॉन्स स्कीमा
+### REST yanıt şeması
 
-सुविधा वाला फ़ील्ड `interaction.output_video` **सिर्फ़ एसडीके** के लिए उपलब्ध है.
-REST API का सीधे तौर पर इस्तेमाल करने पर, `steps` कलेक्शन से वीडियो आउटपुट पाएं.
+Kolaylık alanı `interaction.output_video` **yalnızca SDK**'dır.
+REST API'yi doğrudan kullanırken `steps` dizisinden video çıkışını alın.
 
-**REST JSON का रॉ स्ट्रक्चर:**
+**Ham REST JSON yapısı:**
 
 ```
 {
@@ -99,14 +98,14 @@ REST API का सीधे तौर पर इस्तेमाल करन
   ],
   "id": "v1_...",
   "status": "completed",
-  "model": "gemini-omni-flash-preview",
+  "model": "gemini-omni-1.1-flash",
   "object": "interaction"
 }
 ```
 
-### आसपेक्ट रेशियो (चौड़ाई-ऊंचाई का अनुपात) कंट्रोल करना
+### En boy oranını kontrol etme
 
-पोर्ट्रेट वीडियो बनाने के लिए, `aspect_ratio` को `"9:16"` पर सेट करें. डिफ़ॉल्ट रूप से, लैंडस्केप (16:9) सेट होता है.
+Dikey videolar oluşturmak için `aspect_ratio` simgesini `"9:16"` olarak ayarlayın. Varsayılan yön Yatay (16:9)'dur.
 
 ### Python
 
@@ -117,7 +116,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-omni-flash-preview",
+    model="gemini-omni-1.1-flash",
     input="A futuristic city with neon lights and flying cars, cyberpunk style",
     response_format={
         "type": "video",  # optional
@@ -136,7 +135,7 @@ import * as fs from 'fs';
 const ai = new GoogleGenAI({});
 
 const interaction = await ai.interactions.create({
-  model: 'gemini-omni-flash-preview',
+  model: 'gemini-omni-1.1-flash',
   input: 'A futuristic city with neon lights and flying cars, cyberpunk style',
   response_format: {
     type: 'video', // optional
@@ -155,7 +154,7 @@ if (interaction.output_video?.data) {
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$API_KEY" \
 -H "Content-Type: application/json" \
 -d '{
- "model": "gemini-omni-flash-preview",
+ "model": "gemini-omni-1.1-flash",
  "input": "A futuristic city with neon lights and flying cars, cyberpunk style",
  "response_format": {
    "type": "video",
@@ -164,21 +163,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-## इमेज से वीडियो जनरेट करने की सुविधा
+### Çıkış çözünürlüğü
 
-टेक्स्ट प्रॉम्प्ट के साथ, रेफ़रंस इमेज दी जा सकती है. आपके प्रॉम्प्ट के आधार पर, मॉडल तय करेगा कि इमेज का इस्तेमाल कैसे करना है. यह सुविधा, प्रॉडक्ट की तस्वीरों, इलस्ट्रेशन या फ़ोटोग्राफ़ को असली जैसा दिखाने में मददगार है.
+`response_format` uygulamasında `resolution` parametresini kullanarak oluşturulan videonuzun çıkış çözünürlüğünü kontrol edin. Varsayılan çözünürlük 720p'dir.
 
-यहां दिए गए उदाहरण में, पानी से छलांग लगाती मछली के ड्रॉइंग की रेफ़रंस इमेज का इस्तेमाल करने का तरीका बताया गया है:
-
-![पानी से बाहर छलांग लगाती हुई मछली का ड्रॉइंग](https://ai.google.dev/static/gemini-api/docs/images/fish-jumping-inputimage.png?hl=hi)
-
-इस प्रॉम्प्ट के साथ:
-
-```
-turn this into realistic footage, using the drawing only as a guide for movement, do not show the drawing in the final video
-```
-
-ड्रॉइंग का असली जैसा दिखने वाला वीडियो जनरेट करने के लिए.
+| Değer | Açıklama |
+| --- | --- |
+| `360p` | 360p çıkış çözünürlüğü |
+| `720p` | 720p çıkış çözünürlüğü (varsayılan) |
+| `1080p` | 1080p çıkış (çözünürlüğü artırılmış) |
+| `4k` | 4K çıkış (yukarı ölçeklenmiş) |
 
 ### Python
 
@@ -189,7 +183,79 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-omni-flash-preview",
+    model="gemini-omni-1.1-flash",
+    input="A drone shot of a mountain landscape at sunrise.",
+    response_format={
+        "type": "video",
+        "resolution": "1080p",
+    },
+)
+with open("hires.mp4", "wb") as f:
+    f.write(base64.b64decode(interaction.output_video.data))
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from '@google/genai';
+import * as fs from 'fs';
+const ai = new GoogleGenAI({});
+
+const interaction = await ai.interactions.create({
+  model: 'gemini-omni-1.1-flash',
+  input: 'A drone shot of a mountain landscape at sunrise.',
+  response_format: {
+    type: 'video',
+    resolution: '1080p',
+  },
+});
+
+if (interaction.output_video?.data) {
+  fs.writeFileSync('hires.mp4', Buffer.from(interaction.output_video.data, 'base64'));
+}
+```
+
+### REST
+
+```
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$API_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+ "model": "gemini-omni-1.1-flash",
+ "input": "A drone shot of a mountain landscape at sunrise.",
+ "response_format": {
+   "type": "video",
+   "resolution": "1080p"
+ }
+}'
+```
+
+## Görüntüden video üretme
+
+Metin isteminizle birlikte bir referans görsel sağlayabilirsiniz. Modele verdiğiniz isteme bağlı olarak, model görüntüyü nasıl kullanacağına karar verir. Bu özellik, ürün çekimlerini, çizimleri veya fotoğrafları canlandırmak için kullanışlıdır.
+
+Aşağıdaki örnekte, sudan çıkan bir balık çiziminin referans görselinin nasıl kullanılacağı gösterilmektedir:
+
+![Sudan zıplayan balık çizimi](https://ai.google.dev/static/gemini-api/docs/images/fish-jumping-inputimage.png?hl=tr)
+
+Aşağıdaki istemle:
+
+```
+turn this into realistic footage, using the drawing only as a guide for movement, do not show the drawing in the final video
+```
+
+Çizimin gerçekçi bir videosunu oluşturmak için.
+
+### Python
+
+```
+import base64
+from google import genai
+
+client = genai.Client()
+
+interaction = client.interactions.create(
+    model="gemini-omni-1.1-flash",
     input=[
         {"type": "image", "data": base64_image, "mime_type": "image/jpeg"},
         {"type": "text", "text": "turn this into realistic footage, using the drawing only as a guide for movement, do not show the drawing in the final video"}
@@ -207,7 +273,7 @@ import * as fs from 'fs';
 const ai = new GoogleGenAI({});
 
 const interaction = await ai.interactions.create({
-  model: 'gemini-omni-flash-preview',
+  model: 'gemini-omni-1.1-flash',
   input: [
     { type: 'image', data: base64Image, mime_type: 'image/jpeg' },
     { type: 'text', text: 'turn this into realistic footage, using the drawing only as a guide for movement, do not show the drawing in the final video' }
@@ -225,7 +291,7 @@ if (interaction.output_video?.data) {
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$API_KEY" \
 -H "Content-Type: application/json" \
 -d '{
- "model": "gemini-omni-flash-preview",
+ "model": "gemini-omni-1.1-flash",
  "input": [
    {"type": "image", "data": "'"$BASE64_IMAGE"'", "mime_type": "image/jpeg"},
    {"type": "text", "text": "turn this into realistic footage, using the drawing only as a guide for movement, do not show the drawing in the final video"}
@@ -233,10 +299,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### सब्जेक्ट रेफ़रंस
+### İlk ve son kare interpolasyonu
 
-रेफ़रंस इमेज के तौर पर दिए गए खास सब्जेक्ट को शामिल करके, वीडियो जनरेट किया जा सकता है.
-उदाहरण के लिए, यहां दिए गए कोड में, बिल्ली और ऊन की दो इमेज दी गई हैं. इससे, बिल्ली के ऊन से खेलने का वीडियो जनरेट किया जा सकता है.
+Gemini Omni Flash, video ara karesi oluşturmayı destekler. Bu sayede, başlangıç resmi (ilk kare) ile bitiş resmi (son kare) arasında sorunsuz geçiş yapan videolar oluşturabilirsiniz.
+
+`input` listesinde iki resim sağlayın ve isteminizde istediğiniz geçişi açıklayın. Model, sahneyi ilk kareden son kareye kadar animasyon haline getirir.
 
 ### Python
 
@@ -247,7 +314,68 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-omni-flash-preview",
+    model="gemini-omni-1.1-flash",
+    input=[
+        {"type": "image", "data": first_frame_b64, "mime_type": "image/jpeg"},
+        {"type": "image", "data": last_frame_b64, "mime_type": "image/jpeg"},
+        {"type": "text", "text": "A smooth cinematic transition from a lush green forest at sunrise to a snowy forest under a starry night sky."}
+    ],
+)
+with open("interpolation.mp4", "wb") as f:
+    f.write(base64.b64decode(interaction.output_video.data))
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from '@google/genai';
+import * as fs from 'fs';
+const ai = new GoogleGenAI({});
+
+const interaction = await ai.interactions.create({
+  model: 'gemini-omni-1.1-flash',
+  input: [
+    { type: 'image', data: firstFrameB64, mime_type: 'image/jpeg' },
+    { type: 'image', data: lastFrameB64, mime_type: 'image/jpeg' },
+    { type: 'text', text: 'A smooth cinematic transition from a lush green forest at sunrise to a snowy forest under a starry night sky.' }
+  ]
+});
+
+if (interaction.output_video?.data) {
+  fs.writeFileSync('interpolation.mp4', Buffer.from(interaction.output_video.data, 'base64'));
+}
+```
+
+### REST
+
+```
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$API_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+ "model": "gemini-omni-1.1-flash",
+ "input": [
+   {"type": "image", "data": "'"$FIRST_FRAME_B64"'", "mime_type": "image/jpeg"},
+   {"type": "image", "data": "'"$LAST_FRAME_B64"'", "mime_type": "image/jpeg"},
+   {"type": "text", "text": "A smooth cinematic transition from a lush green forest at sunrise to a snowy forest under a starry night sky."}
+ ]
+}'
+```
+
+### Konu referansı
+
+Referans resim olarak sağlanan belirli konuları içeren bir video oluşturabilirsiniz.
+Örneğin, aşağıdaki kodda, kedinin iple oynadığı bir video oluşturmak için kedi ve ipin 2 resminin nasıl sağlanacağı gösterilmektedir.
+
+### Python
+
+```
+import base64
+from google import genai
+
+client = genai.Client()
+
+interaction = client.interactions.create(
+    model="gemini-omni-1.1-flash",
     input=[
         {"type": "image", "data": cat_b64, "mime_type": "image/png"},
         {"type": "image", "data": yarn_b64, "mime_type": "image/png"},
@@ -266,7 +394,7 @@ import * as fs from 'fs';
 const ai = new GoogleGenAI({});
 
 const interaction = await ai.interactions.create({
-  model: 'gemini-omni-flash-preview',
+  model: 'gemini-omni-1.1-flash',
   input: [
     { type: 'image', data: catData, mime_type: 'image/png' },
     { type: 'image', data: yarnData, mime_type: 'image/png' },
@@ -285,7 +413,7 @@ if (interaction.output_video?.data) {
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$API_KEY" \
 -H "Content-Type: application/json" \
 -d '{
- "model": "gemini-omni-flash-preview",
+ "model": "gemini-omni-1.1-flash",
  "input": [
    {"type": "image", "data": "'"$CAT_B64"'", "mime_type": "image/png"},
    {"type": "image", "data": "'"$YARN_B64"'", "mime_type": "image/png"},
@@ -294,19 +422,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### टास्क पैरामीटर
+### Görevler parametresi
 
-वीडियो-कॉन्फ़िगरेशन में, `task` पैरामीटर का इस्तेमाल करके, वीडियो जनरेट करने के मकसद के बारे में साफ़ तौर पर बताया जा सकता है. उदाहरण के लिए, अगर आपको मॉडल से किसी इमेज से वीडियो जनरेट कराना है,
-तो पैरामीटर को `image_to_video` पर सेट किया जा सकता है.`video-config` अगर यह सेट नहीं किया जाता है, तो मॉडल प्रॉम्प्ट से यह अनुमान लगाएगा कि आपको क्या चाहिए.
+`video_config` composable'ında `task` parametresini kullanarak amaçlanan davranışı açıkça belirtebilirsiniz. Örneğin, modelin bir resimden video oluşturmasını istiyorsanız parametreyi `image_to_video` olarak ayarlayabilirsiniz. Bu ayar yapılmazsa model, istemden ne istediğinizi çıkarır.
 
-ये वैल्यू इस्तेमाल की जा सकती हैं:
+İzin verilen değerler şunlardır:
 
 - `text_to_video`
 - `image_to_video`
 - `reference_to_video`
 - `edit`
+- `extend`
 
-यहां दिए गए उदाहरण में, पहले दिखाई गई इमेज से वीडियो बनाने के उदाहरण के लिए, इसे सेट करने का तरीका बताया गया है.
+Aşağıdaki örnekte, daha önce gösterilen resimden videoya örneği için bu ayarın nasıl yapılacağı gösterilmektedir.
 
 ### Python
 
@@ -317,7 +445,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-omni-flash-preview",
+    model="gemini-omni-1.1-flash",
     input=[
         {"type": "image", "data": base64_image, "mime_type": "image/jpeg"},
         {"type": "text", "text": "turn this into realistic footage, using the drawing only as a guide for movement, do not show the drawing in the final video"}
@@ -340,7 +468,7 @@ import * as fs from 'fs';
 const ai = new GoogleGenAI({});
 
 const interaction = await ai.interactions.create({
-  model: 'gemini-omni-flash-preview',
+  model: 'gemini-omni-1.1-flash',
   input: [
     { type: 'image', data: base64Image, mime_type: 'image/jpeg' },
     { type: 'text', text: 'turn this into realistic footage, using the drawing only as a guide for movement, do not show the drawing in the final video' }
@@ -364,7 +492,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-omni-flash-preview",
+    "model": "gemini-omni-1.1-flash",
     "input": [
       {
         "type": "image",
@@ -384,11 +512,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## स्टेटफ़ुल वीडियो एडिटिंग
+## Durumlu video düzenleme
 
-फ़ॉलो-अप प्रॉम्प्ट का इस्तेमाल करके, वीडियो जनरेट करें और उसे बार-बार एडिट करें. हर बार, पिछले नतीजे के आधार पर वीडियो में बदलाव किया जाता है. मॉडल, वीडियो के कॉन्टेक्स्ट को याद रखता है. साथ ही, आपके बदलावों को लागू करते समय, उन एलिमेंट को बनाए रखता है जिनके बारे में आपने नहीं बताया है. `previous_interaction_id` का इस्तेमाल करके, बातचीत के इतिहास और जनरेट किए गए वीडियो की स्थिति को ट्रैक किया जा सकता है. इसके लिए, पिछले वीडियो को दोबारा अपलोड करने की ज़रूरत नहीं होती.
+Video oluşturun ve takip istemlerini kullanarak videoyu yinelemeli olarak düzenleyin. Her dönüş, önceki sonucun üzerine kurulur. Model, video bağlamını hatırlar ve değişikliklerinizi uygularken bahsetmediğiniz öğeleri korur. Önceki videoyu yeniden yüklemeden sohbet geçmişini ve oluşturulan video durumunu izlemek için `previous_interaction_id` simgesini kullanın.
 
-यहां दिए गए उदाहरण में, पहले वीडियो जनरेट करने और फिर उसे एडिट करने का तरीका बताया गया है:
+Aşağıdaki örnekte, ilk videonun nasıl oluşturulacağı ve düzenleneceği gösterilmektedir:
 
 ### Python
 
@@ -399,11 +527,11 @@ from google import genai
 client = genai.Client()
 
 # Turn 1: Generate initial video
-res1 = client.interactions.create(model="gemini-omni-flash-preview", input="A woman playing violin outdoors.")
+res1 = client.interactions.create(model="gemini-omni-1.1-flash", input="A woman playing violin outdoors.")
 
 # Turn 2: Edit the previous video
 res2 = client.interactions.create(
-    model="gemini-omni-flash-preview",
+    model="gemini-omni-1.1-flash",
     previous_interaction_id=res1.id,
     input="Make the violin invisible."
 )
@@ -420,13 +548,13 @@ const ai = new GoogleGenAI({});
 
 // Turn 1: Generate initial video
 const res1 = await ai.interactions.create({
-  model: 'gemini-omni-flash-preview',
+  model: 'gemini-omni-1.1-flash',
   input: 'A woman playing violin outdoors.',
 });
 
 // Turn 2: Edit the previous video
 const res2 = await ai.interactions.create({
-  model: 'gemini-omni-flash-preview',
+  model: 'gemini-omni-1.1-flash',
   previous_interaction_id: res1.id,
   input: 'Make the violin invisible.',
 });
@@ -442,24 +570,23 @@ if (res2.output_video?.data) {
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$API_KEY" \
 -H "Content-Type: application/json" \
 -d '{
- "model": "gemini-omni-flash-preview",
+ "model": "gemini-omni-1.1-flash",
  "previous_interaction_id": "'"$PREVIOUS_ID"'",
  "input": "Make the violin invisible."
 }'
 ```
 
-शुरुआती वीडियो का उदाहरण:
+İlk video örneği:
 
-एडिट किए गए वीडियो का उदाहरण:
+Düzenlenmiş video örneği:
 
-बातचीत में हर बार, एक नया वीडियो जनरेट होता है. मॉडल, पिछली बातचीत के कॉन्टेक्स्ट को समझता है. इससे, लाइटिंग को अडजस्ट करने और बैकग्राउंड बदलने जैसे बदलाव किए जा सकते हैं. इसके लिए, पूरे सीन के बारे में दोबारा बताने की ज़रूरत नहीं होती.
+Sohbetteki her dönüş yeni bir video oluşturur. Model, önceki dönüşlerdeki bağlamı anlar. Bu sayede, sahnenin tamamını yeniden tanımlamadan ışığı ayarlama ve arka planları değiştirme gibi artımlı değişiklikler yapabilirsiniz.
 
-### अपने वीडियो एडिट करना
+### Kendi videolarınızı düzenleme
 
-अपने वीडियो अपलोड करने के लिए, [Files API](https://ai.google.dev/gemini-api/docs/files?hl=hi) का इस्तेमाल करें. इसके बाद, उन्हें एडिट करने के लिए
-Gemini Omni Flash की मदद लें.
+Videolarınızı [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr)'yi kullanarak yükleyip Gemini Omni Flash ile düzenleyin.
 
-यहां दिए गए उदाहरण में, इस ओरिजनल वीडियो को एडिट करने का तरीका बताया गया है:
+Aşağıdaki örnekte, orijinal videonun nasıl düzenleneceği gösterilmektedir:
 
 ### Python
 
@@ -484,7 +611,7 @@ print(f'Video processing complete: ' + video_file.uri)
 
 # Edit your video
 interaction = client.interactions.create(
-    model="gemini-omni-flash-preview",
+    model="gemini-omni-1.1-flash",
     input=[
         {"type": "document", "uri": video_file.uri},
         {"type": "text", "text": "When the person touches the mirror, make the mirror ripple beautifully like liquid, and the person's arm turns into reflective mirror material"}
@@ -519,7 +646,7 @@ console.log('Video processing complete: ' + videoFile.uri);
 
 // Edit your video
 const interaction = await ai.interactions.create({
-  model: 'gemini-omni-flash-preview',
+  model: 'gemini-omni-1.1-flash',
   input: [
     { type: 'document', uri: videoFile.uri },
     { type: 'text', text: "When the person touches the mirror, make the mirror ripple beautifully like liquid, and the person's arm turns into reflective mirror material" }
@@ -542,7 +669,7 @@ curl -sS -w "\n[HTTP %{http_code}]\n" "https://generativelanguage.googleapis.com
   -H "Content-Type: application/json" \
   -d @- <<EOF > video_editing_response.json
 {
-  "model": "gemini-omni-flash-preview",
+  "model": "gemini-omni-1.1-flash",
   "input": [
     {
       "type": "user_input",
@@ -564,15 +691,12 @@ curl -sS -w "\n[HTTP %{http_code}]\n" "https://generativelanguage.googleapis.com
 EOF
 ```
 
-एडिट किए गए वीडियो का उदाहरण:
+Düzenlenmiş video örneği:
 
- 
+## URI ile video alma
 
-## यूआरआई की मदद से वीडियो वापस पाना
-
-जनरेट किए गए ऐसे वीडियो वापस पाने के लिए जो 4 एमबी से बड़े हैं,
-`response_format` में `delivery="uri"` पैरामीटर का इस्तेमाल करें.
-इससे, Google पर होस्ट किया गया यूआरआई मिलता है. इसे डाउनलोड करने से पहले, वीडियो के `ACTIVE` होने तक पोल किया जा सकता है.
+Oluşturulan 4 MB'tan büyük videoları almak için `delivery="uri"` parametresini `response_format` içinde kullanın.
+Bu işlem, indirmeden önce video `ACTIVE` olana kadar yoklayabileceğiniz Google tarafından barındırılan bir URI döndürür.
 
 ### Python
 
@@ -584,7 +708,7 @@ client = genai.Client()
 
 # 1. Request video via URI delivery
 interaction = client.interactions.create(
-    model="gemini-omni-flash-preview",
+    model="gemini-omni-1.1-flash",
     input="A beautiful sunset.",
     response_format={"type": "video", "delivery": "uri"}
 )
@@ -603,9 +727,7 @@ while True:
     time.sleep(5)
 
 # 3. Download the final video
-video_bytes = client.files.download(file=video_output.uri)
-with open("output.mp4", "wb") as f:
-    f.write(video_bytes)
+client.files.download(file=video_output.uri, destination="output.mp4")
 ```
 
 ### JavaScript
@@ -616,7 +738,7 @@ const ai = new GoogleGenAI({});
 
 // 1. Request video via URI delivery
 const interaction = await ai.interactions.create({
-  model: 'gemini-omni-flash-preview',
+  model: 'gemini-omni-1.1-flash',
   input: 'A beautiful sunset.',
   response_format: { type: 'video', delivery: 'uri' },
 });
@@ -651,7 +773,7 @@ console.log("💾 Saved video to output.mp4");
 RESPONSE=$(curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$API_KEY" \
 -H "Content-Type: application/json" \
 -d '{
- "model": "gemini-omni-flash-preview",
+ "model": "gemini-omni-1.1-flash",
  "input": "A beautiful sunset over a calm ocean.",
  "response_format": {"type": "video", "delivery": "uri"}
 }')
@@ -687,7 +809,7 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/files/$FILE_ID:
 echo "Done! Video saved to output.mp4"
 ```
 
-**REST JSON का रॉ स्ट्रक्चर (यूआरआई):**
+**Ham REST JSON yapısı (URI):**
 
 ```
 {
@@ -707,114 +829,275 @@ echo "Done! Video saved to output.mp4"
   ],
   "id": "v1_...",
   "status": "completed",
-  "model": "gemini-omni-flash-preview",
+  "model": "gemini-omni-1.1-flash",
   "object": "interaction"
 }
 ```
 
-## सबसे सही तरीके
+## Video uzantısı
 
-- **बड़े वीडियो के लिए यूआरआई डिलीवरी का इस्तेमाल करना:** 4 एमबी से बड़े वीडियो (>720p
-  उपलब्ध होने पर) के लिए, पेलोड
-  साइज़ की सीमाओं से बचने के लिए, `delivery="uri"` में `response_format` का इस्तेमाल करें.
-- **ऑप्टिमाइज़ की गई परफ़ॉर्मेंस:** तेज़ और सिंक्रोनस यूनरी जनरेशन के लिए, `background=false`, `store=false`, और `stream=false` सेट करें. ध्यान दें कि `store=false` सेट करने का मतलब है कि जनरेट किए गए वीडियो को, `previous_interaction_id` का इस्तेमाल करके, बाद में एडिट नहीं किया जा सकेगा.
-- **प्रॉम्प्ट की सटीक जानकारी:** ज़्यादा जानकारी के लिए, [प्रॉम्प्ट के लिए गाइडेंस](#prompt-guide) सेक्शन देखें.
+Klipin sonuna sorunsuz bir devam niteliğinde içerik oluşturarak mevcut bir videoyu uzatın. İsteminizde videonun nasıl devam etmesini istediğinizi açıklayın. Örneğin, `"Extend this video"` veya `"Continue the scene: the camera pans across the mountains"`.
+Model, 3-10 saniyelik bir devam niteliğinde video oluşturmak için giriş videosunu analiz eder.
 
-## सीमाएं
+Şunları uzatabilirsiniz:
 
-- यूरोपियन इकनॉमिक एरिया, स्विट्ज़रलैंड, और यूनाइटेड किंगडम में, नाबालिगों की इमेज अपलोड और एडिट नहीं की जा सकतीं.
-- कुछ पहचाने जा सकने वाले लोगों की इमेज अपलोड और एडिट नहीं की जा सकतीं.
-- फ़िलहाल, यूरोपियन इकनॉमिक एरिया (ईईए), स्विट्ज़रलैंड, और यूनाइटेड किंगडम में रहने वाले लोग, अपलोड किए गए वीडियो को एडिट नहीं कर सकते. हालांकि, मॉडल से जनरेट किए गए वीडियो को एडिट किया जा सकता है.
-- एपीआई के मौजूदा वर्शन में, ऑडियो रेफ़रंस अपलोड नहीं किए जा सकते.
-- एपीआई स्कीमा में, तीन सेकंड तक की अवधि वाले वीडियो रेफ़रंस स्वीकार किए जाते हैं. हालांकि, फ़िलहाल मॉडल इन्हें सही तरीके से प्रोसेस नहीं करता.
-- एक से ज़्यादा वीडियो के लिए रेफ़रंस या तर्क देने की सुविधा उपलब्ध नहीं है. एक से ज़्यादा वीडियो के लिए प्रॉम्प्ट देने की कोशिश करने पर, मॉडल की परफ़ॉर्मेंस खराब हो सकती है या अनचाहे आउटपुट मिल सकते हैं.
-- वीडियो एक्सटेंशन और वीडियो इंटरपोलेशन (पहले और आखिरी फ़्रेम के बीच वीडियो जनरेट करना) की सुविधा उपलब्ध नहीं है.
-- आवाज़ में बदलाव करने की सुविधा उपलब्ध नहीं है.
-- प्रोविज़न किए गए थ्रूपुट की सुविधा उपलब्ध नहीं है.
-- सिस्टम के निर्देश, तापमान, `top_p`, स्टॉप सीक्वेंस, और नेगेटिव प्रॉम्प्ट की सुविधा उपलब्ध नहीं है.हालांकि, नेगेटिव प्रॉम्प्ट को सामान्य प्रॉम्प्ट में शामिल किया जा सकता है. जैसे, "X न करें".
-- YouTube वीडियो को मीडिया सोर्स के तौर पर इस्तेमाल करने की सुविधा उपलब्ध नहीं है.
+- **Model tarafından oluşturulan videolar (çok aşamalı etkileşim)**: Daha önce oluşturulmuş bir videoyu `previous_interaction_id` referans alarak genişletin.
+- **Yüklenen videolar**: Uzantı isteminizle birlikte yüklenen bir video dosyası (Files API aracılığıyla) sağlayın.
 
-## तकनीकी जानकारी
+### Python
 
-- जनरेट किए गए सभी वीडियो में SynthID वॉटरमार्क शामिल होता है. यह वॉटरमार्क, दर्शकों को नहीं दिखता. हालांकि, ओरिजन की पुष्टि करने के लिए, इसे प्रोग्राम के ज़रिए डिटेक्ट किया जा सकता है.
-- वीडियो जनरेट होने में लगने वाला समय, अवधि, रिज़ॉल्यूशन, और एपीआई के मौजूदा लोड के आधार पर अलग-अलग होता है. ज़्यादा अवधि और ज़्यादा रिज़ॉल्यूशन वाले वीडियो जनरेट होने में ज़्यादा समय लगता है.
-- इनपुट प्रॉम्प्ट और जनरेट किए गए वीडियो, दोनों पर कॉन्टेंट की सुरक्षा के फ़िल्टर लागू होते हैं. ये फ़िल्टर, आपके देश/इलाके के हिसाब से लागू होते हैं. इस्तेमाल की नीतियों का उल्लंघन करने वाले प्रॉम्प्ट ब्लॉक कर दिए जाएंगे.
-- अंग्रेज़ी (ईएन) पूरी तरह से काम करती है. हालांकि, अन्य भाषाओं की जांच नहीं की गई है. इसलिए, वे काम कर सकती हैं, लेकिन नतीजे अलग-अलग हो सकते हैं.
+```
+import base64
+from google import genai
 
-## Gemini Omni Flash के लिए प्रॉम्प्ट गाइड
+client = genai.Client()
 
-इस सेक्शन में, Gemini Omni Flash के लिए असरदार तरीके से प्रॉम्प्ट लिखने के बारे में सलाह और उदाहरण दिए गए हैं.
+# Upload your video using the Files API
+video_file = client.files.upload(file="my_video.mp4")
 
-### एक सीन
+# Extend the video using prompt-based extension
+interaction = client.interactions.create(
+    model="gemini-omni-1.1-flash",
+    input=[
+        {"type": "document", "uri": video_file.uri},
+        {"type": "text", "text": "Continue the scene."}
+    ],
+)
+with open("extended.mp4", "wb") as f:
+    f.write(base64.b64decode(interaction.output_video.data))
+```
 
-डिफ़ॉल्ट रूप से, Omni Flash कुछ अलग-अलग शॉट वाला वीडियो बनाने की कोशिश करेगा.
-यह प्रॉम्प्ट के आधार पर, दिलचस्प कहानी बनाने की कोशिश करेगा.
+### JavaScript
 
-अगर आपको आउटपुट वीडियो में एक ही सीन चाहिए, तो इसके लिए प्रॉम्प्ट में यह जानकारी शामिल करें:
+```
+import { GoogleGenAI } from '@google/genai';
+import * as fs from 'fs';
+const ai = new GoogleGenAI({});
 
-- एक ही सीन में
-- एक ही शॉट में
-- सीन में कोई कट नहीं
+// Upload your video using the Files API
+let videoFile = await ai.files.upload({
+  file: 'my_video.mp4',
+});
 
-उदाहरण के लिए:
+while (videoFile.state === 'PROCESSING') {
+  await new Promise(r => setTimeout(r, 10000));
+  videoFile = await ai.files.get({ name: videoFile.name });
+}
+
+// Extend the video using prompt-based extension
+const interaction = await ai.interactions.create({
+  model: 'gemini-omni-1.1-flash',
+  input: [
+    { type: 'document', uri: videoFile.uri },
+    { type: 'text', text: 'Continue the scene.' }
+  ],
+});
+
+if (interaction.output_video?.data) {
+  fs.writeFileSync('extended.mp4', Buffer.from(interaction.output_video.data, 'base64'));
+}
+```
+
+### REST
+
+```
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$API_KEY"     -H "Content-Type: application/json"     -d '{
+ "model": "gemini-omni-1.1-flash",
+ "input": [
+   {"type": "document", "uri": "'"$VIDEO_URI"'"},
+   {"type": "text", "text": "Continue the scene."}
+ ]
+}'
+```
+
+### Referans medyayla genişletme
+
+Genişletilmiş videoya yeni karakterler veya öğeler eklemek için isteminizle birlikte `input` dizisinde referans görseller sağlayabilirsiniz:
+
+### Python
+
+```
+import base64
+from google import genai
+
+client = genai.Client()
+
+# Upload base video and reference image using the Files API
+video_file = client.files.upload(file="my_video.mp4")
+character_img = client.files.upload(file="character.png")
+
+# Extend the video while introducing the reference character
+interaction = client.interactions.create(
+    model="gemini-omni-1.1-flash",
+    input=[
+        {"type": "document", "uri": video_file.uri},
+        {"type": "document", "uri": character_img.uri},
+        {"type": "text", "text": "Extend this video: have the character shown in <IMAGE_REF_0> enter the scene and wave."}
+    ],
+)
+with open("extended_with_character.mp4", "wb") as f:
+    f.write(base64.b64decode(interaction.output_video.data))
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from '@google/genai';
+import * as fs from 'fs';
+const ai = new GoogleGenAI({});
+
+// Upload base video and reference image using the Files API
+let videoFile = await ai.files.upload({ file: 'my_video.mp4' });
+let characterImg = await ai.files.upload({ file: 'character.png' });
+
+while (videoFile.state === 'PROCESSING' || characterImg.state === 'PROCESSING') {
+  await new Promise(r => setTimeout(r, 10000));
+  videoFile = await ai.files.get({ name: videoFile.name });
+  characterImg = await ai.files.get({ name: characterImg.name });
+}
+
+// Extend the video while introducing the reference character
+const interaction = await ai.interactions.create({
+  model: 'gemini-omni-1.1-flash',
+  input: [
+    { type: 'document', uri: videoFile.uri },
+    { type: 'document', uri: characterImg.uri },
+    { type: 'text', text: 'Extend this video: have the character shown in <IMAGE_REF_0> enter the scene and wave.' }
+  ],
+});
+
+if (interaction.output_video?.data) {
+  fs.writeFileSync('extended_with_character.mp4', Buffer.from(interaction.output_video.data, 'base64'));
+}
+```
+
+### REST
+
+```
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$API_KEY"     -H "Content-Type: application/json"     -d '{
+ "model": "gemini-omni-1.1-flash",
+ "input": [
+   {"type": "document", "uri": "'$VIDEO_URI'"},
+   {"type": "document", "uri": "'$CHARACTER_IMG_URI'"},
+   {"type": "text", "text": "Extend this video: have the character shown in <IMAGE_REF_0> enter the scene and wave."}
+ ]
+}'
+```
+
+### Uzantılarla ilgili kısıtlamalar ve yönergeler
+
+Videoları uzatırken aşağıdaki kuralları ve kısıtlamaları göz önünde bulundurun:
+
+- **Yüklenen videolardaki konuşma diyalogları**: Şu anda, konuşan birinin yer aldığı yüklenmiş bir videoyu ek diyalog eklemek için uzatamazsınız (karakter sessiz kalırsa veya istem diyalog eklemezse bu işlem desteklenir).
+- **Çok aşamalı etkileşimli ses uzantısı**: Daha önce oluşturulan videoları çok aşamalı etkileşimli (`previous_interaction_id`) olarak genişletirken konuşma diyaloğu veya konuşma oluşturma desteklenir.
+- **Yalnızca klibin sonu**: Uzantı, yalnızca videonun sonuna ekleme yapmakla sınırlıdır.
+  İçerik ekleyemez veya klibin ortasını uzatamazsınız.
+- **Süre sınırı**: Uzantı için giriş videoları, yüklenirken (çok aşamalı etkileşim kullanılmadığı sürece) 10 saniye veya daha kısa olmalıdır.
+- **Bölgesel kullanılabilirlik**: Yüklenen videoları uzatma özelliği şu anda Avrupa Ekonomik Alanı (AEA), İsviçre ve Birleşik Krallık'taki kullanıcılar tarafından kullanılamamaktadır (model tarafından oluşturulan videoları uzatma özelliği, kullanılabilir olan tüm bölgelerde desteklenir).
+
+## En iyi uygulamalar
+
+- **Büyük videolar için URI teslimini kullanın:** 4 MB'tan büyük videolar için (varsa >720p) yük boyutu sınırlarını aşmamak amacıyla `response_format` içinde `delivery="uri"` kullanın.
+- **Optimize edilmiş performans:** Daha hızlı ve senkron tekli oluşturma için `background=false`, `store=false` ve `stream=false` değerlerini ayarlayın. `store=false` ayarının, oluşturulan videonun sonraki dönüşlerde `previous_interaction_id` kullanılarak düzenlenemeyeceği anlamına geldiğini unutmayın.
+- **İstem hassasiyeti:** Ayrıntılar için [istem rehberliği](#prompt-guide) bölümüne bakın.
+
+## Sınırlamalar
+
+- Küçüklerin yer aldığı resimleri yükleme ve düzenleme özelliği Avrupa Ekonomik Alanı, İsviçre ve Birleşik Krallık'ta desteklenmez.
+- Tanınabilir kişilerin yer aldığı resimlerin yüklenmesi ve düzenlenmesi desteklenmez.
+- Yüklenen videoları düzenleme veya uzatma özelliği şu anda Avrupa Ekonomik Alanı (AEA), İsviçre ve Birleşik Krallık'taki kullanıcılar tarafından kullanılamamaktadır (model tarafından oluşturulan videoları düzenleme veya uzatma özelliği desteklenir).
+- Düzenleme ve uzatma için giriş videoları, yüklenirken 10 saniye veya daha kısa olmalıdır (çok aşamalı etkileşim model tarafından oluşturulan videolar uzatılmadığı sürece).
+- Video uzatma, yalnızca videonun sonuna ekleme ile sınırlıdır. Klibin başına ekleme veya ortasını uzatma desteklenmez.
+- Yüklenen ve birinin konuştuğu videolara ek diyalog eklemek için videoyu uzatamazsınız (karakterler sessiz kalabilir veya `previous_interaction_id` ile çok aşamalı etkileşim uzatma kullanılabilir).
+- Sesle düzenleme desteklenmez.
+- Ses referanslarının yüklenmesi, API'nin mevcut sürümünde desteklenmemektedir.
+- Video referansları, benzerliklerle en iyi şekilde çalışır. Video referansındaki sesler dikkate alınmaz. Video referansları, her biri en fazla 3 saniye uzunluğunda olmak üzere en fazla 3 klip destekler.
+- Birden fazla videoda referans verme veya akıl yürütme desteklenmez. Çok videolu istem denemek, model performansının düşmesine veya beklenmedik çıktılara neden olabilir.
+- Sağlanan işleme hızı desteklenmez.
+- Sistem talimatları, sıcaklık, `top_p`, durdurma dizileri ve olumsuz istemler desteklenmez (olumsuz istemlerinizi normal isteme ekleyebilirsiniz: ör. "X yapma").
+- YouTube videolarının medya kaynağı olarak kullanılması desteklenmez.
+
+## Teknik ayrıntılar
+
+- Üretilen tüm videolarda, izleyiciler tarafından görünmeyen ancak kaynağın doğrulanması için programatik olarak algılanabilen SynthID filigranı bulunur.
+- Video oluşturma süreleri; süreye, çözünürlüğe ve mevcut API yüküne göre değişir. Daha uzun ve daha yüksek çözünürlüklü videoların oluşturulması daha uzun sürer.
+- Omni, hem giriş istemlerine hem de oluşturulan videoya (bölgeye göre değişir) içerik güvenliği filtreleri uygular. Kullanım politikalarını ihlal eden istemler engellenir.
+- İngilizce (EN) tam olarak desteklenir ancak diğer diller değerlendirilmediğinden çalışabilir ancak sonuçlar değişebilir.
+
+## Gemini Omni Flash istem rehberi
+
+Bu bölümde, Gemini Omni Flash'e etkili istemler yazmayla ilgili ipuçları ve örnekler yer almaktadır.
+
+### Tek sahne
+
+Omni Flash, varsayılan olarak birkaç farklı çekimden oluşan bir video oluşturmaya çalışır.
+İstemden yola çıkarak ilgi çekici bir anlatı oluşturmaya çalışır.
+
+Çıkış videosunun tek bir sahne içermesini istiyorsanız bunu istemde belirtmeniz gerekir:
+
+- Tek bir kesintisiz sahnede
+- Tek kesintisiz çekimde
+- Sahne kesintisi yok
+
+Örneğin:
 
 ```
 Continuous, unbroken handheld shot of a fluffy tabby cat sitting on a sunny windowsill, looking out into a leafy garden. The cat's tail twitches slowly, and its ears rotate slightly toward ambient noises. Sunbeams illuminate dust motes in the air. Sound design: Gentle breeze, distant bird chirps. No dialogue.
 ```
 
-### अनचाहे एलिमेंट हटाना
+### İstenmeyen öğeleri kaldırma
 
-अगर जनरेट किए गए वीडियो में ऐसी चीज़ें शामिल हैं जो आपको नहीं चाहिए, तो उन्हें हटाने के लिए, सामान्य नेगेटिव प्रॉम्प्ट शामिल करें:
+Oluşturulan videoda istemediğiniz şeyler varsa bunları önlemek için basit olumsuz istemler ekleyin:
 
-- कोई डायलॉग नहीं
-- कोई सजावट नहीं
-- कोई अतिरिक्त साउंड इफ़ेक्ट नहीं
+- Diyalog yok
+- Süsleme yok
+- Ek ses efektleri yok
 
-### एडिटिंग के लिए प्रॉम्प्ट
+### Düzenleme istemleri
 
-वीडियो एडिटिंग के लिए, सामान्य प्रॉम्प्ट सबसे सही तरीके से काम करते हैं. ज़्यादा जानकारी वाले प्रॉम्प्ट से, अनचाहे बदलाव हो सकते हैं.
+Video düzenleme için en iyi sonucu basit istemler verir. Aşırı açıklayıcı istemler, istenmeyen değişikliklere yol açabilir.
 
-यहां एडिटिंग के लिए सामान्य प्रॉम्प्ट के कुछ और उदाहरण दिए गए हैं:
+Aşağıda, basit düzenleme istemlerine dair daha fazla örnek verilmiştir:
 
-- इस वीडियो को ऐनिमे में बदलो
-- इस व्यक्ति को फ़ैशन वाला हैट पहनाओ
-- लाइटिंग को ज़्यादा ड्रामैटिक बनाओ
-- साइन पर मौजूद टेक्स्ट को बदलकर "Omni Flash" लिखो
+- Bu videoyu animeye dönüştür
+- Bu kişiye şık bir şapka tak
+- Işıklandırmayı daha dramatik hale getirme
+- Tabeladaki metni "Omni Flash" olarak değiştirin.
 
-वीडियो के किसी खास पहलू को एडिट करते समय, विज़ुअल कंसिस्टेंसी बनाए रखने के लिए, `"Keep everything else the same"` शामिल करें.
+Videonun belirli bir yönünü düzenlerken görsel tutarlılığı korumak için `"Keep everything else the same"` simgesini ekleyin.
 
-यहां कुछ उदाहरण दिए गए हैं, जिनसे पता चलता है कि इस तकनीक को कैसे लागू किया जाता है:
+Bu tekniğin nasıl uygulanacağını gösteren bazı örnekleri aşağıda bulabilirsiniz:
 
-- **ऐसा करने से बचें:** `In the video of the man sitting on the sofa, please add a small
+- **Kaçınılması gerekenler:** `In the video of the man sitting on the sofa, please add a small
   black cat that runs from the right side of the screen, jumps onto his lap,
   and then he starts to stroke its head while looking down.`
-  - **आसान बनाएं:** `Add a cat that jumps onto his lap, he begins to pet it.
+  - **Basitleştirin:** `Add a cat that jumps onto his lap, he begins to pet it.
     Keep everything else the same.`
-- **ऐसा करने से बचें:** `Please remove the cell phone that the person is holding in
+- **Kaçınılması gerekenler:** `Please remove the cell phone that the person is holding in
   their hand and fill in the background so it looks like they are just holding
   their hand empty.`
-  - **आसान बनाएं:** `Make the phone invisible. Keep everything else the
+  - **Basitleştirin:** `Make the phone invisible. Keep everything else the
     same.`
 
-### ऑडियो के लिए प्रॉम्प्ट
+### Ses istemi
 
-डिफ़ॉल्ट रूप से, मॉडल किसी वीडियो के लिए सही ऑडियो ट्रैक जनरेट करने की कोशिश करेगा. यह हमेशा आपकी ज़रूरत के हिसाब से नहीं हो सकता. प्रॉम्प्ट का इस्तेमाल करके, यह बताया जा सकता है कि आपको किस तरह का ऑडियो चाहिए. अगर आपको अपने वीडियो में संगीत चाहिए, तो यह खास तौर पर ज़रूरी है:
+Model, varsayılan olarak bir video için uygun bir ses parçası oluşturmaya çalışır. Bu her zaman istediğiniz sonuç olmayabilir. İsteminizi kullanarak istediğiniz ses türünü açıklayabilirsiniz. Bu durum, özellikle videonuzda müzik kullanmak istiyorsanız önemlidir:
 
-- शांत बैकग्राउंड संगीत शामिल करें
-- वीडियो में हाई एनर्जी वाला टेक्नो बीट है
-- ऑडियो, बैकग्राउंड में बजने वाला कम क्वालिटी वाला रेडियो ब्रॉडकास्ट है, जिसमें एक गाना बज रहा है
+- Sakinleştirici arka plan müziği ekleyin
+- Videoda yüksek enerjili bir tekno ritmi var.
+- Arka planda, şarkı çalan düşük kaliteli bir radyo yayını duyuluyor.
 
-### इवेंट का समय तय करना
+### Zamanlama etkinlikleri
 
-वीडियो में किसी खास समय पर होने वाली चीज़ों के लिए प्रॉम्प्ट दिया जा सकता है. इसके लिए, सटीक सिंटैक्स की ज़रूरत नहीं होती. साथ ही, नैचुरल लैंग्वेज का इस्तेमाल किया जा सकता है. यह सुविधा, सीन कट, रिदम या रैपिड फ़ायर सीक्वेंस बनाने में खास तौर पर काम आती है.
-उदाहरण के लिए, यह देखें:
+Videoda belirli zamanlarda gerçekleşmesini istediğiniz olayları istemek için doğal dil kullanabilirsiniz. Bu özellik, özellikle kendi sahne kesimlerinizi, ritminizi veya hızlı çekim dizilerinizi oluştururken kullanışlıdır.
+Örnekler için aşağıdakilere bakın:
 
-- तीन सेकंड बाद, एक महिला सीन में आती है.
-- पांचवें सेकंड पर, बैकग्राउंड ऑडियो में कोरस शुरू होता है.
-- हर दो सेकंड में, नया फ़्रेम दिखाएं.
-- रैपिड फ़ायर सीक्वेंस में, हर आधे सेकंड (24fps पर 12 फ़्रेम) में सीन को नई जगह पर बदलें.
+- 3 saniye sonra bir kadın sahneye giriyor.
+- 5. saniyede arka plan sesinde koro başlıyor.
+- Her 2 saniyede bir yeni kareye geçiş yapın.
+- Hızlı çekim dizisinde, her yarım saniyede (24 kare/sn hızında 12 kare) sahneyi yeni bir konuma değiştirin.
 
-टाइमकोड सिंटैक्स का भी इस्तेमाल किया जा सकता है:
+Ayrıca bir zaman kodu söz dizimi de kullanabilirsiniz:
 
 ```
 [0-3s] A person is walking
@@ -822,38 +1105,54 @@ Continuous, unbroken handheld shot of a fluffy tabby cat sitting on a sunny wind
 [6-10s] They start running
 ```
 
-### मेटा प्रॉम्प्टिंग
+### Meta istem
 
-Gemini Omni Flash से, वीडियो जनरेट करने की सामान्य क्वालिटी या सिद्धांतों पर ध्यान देने के लिए कहा जा सकता है:
+Gemini Omni Flash'ten video oluşturmayla ilgili genel niteliklere veya ilkelere dikkat etmesini isteyebilirsiniz:
 
-- बहुत ज़्यादा जानकारी वाला, लेकिन पूरी तरह से असली दिखने वाला सीन बनाने के लिए, माइक्रो-डिटेल, एक्सप्रेशन, और टाइमिंग का ध्यान रखें.
-- किरदारों और एनवायरमेंट के ब्यौरे में ज़्यादा से ज़्यादा जानकारी दें.
-  किरदारों पर कॉस्ट्यूम डिज़ाइन के सिद्धांत लागू करें. सीन में मौजूद लोगों, आइटम, और ऑब्जेक्ट के बारे में साफ़ तौर पर जानकारी दें.
-- सीन को असली और नैचुरल दिखाने के लिए, बैकग्राउंड एलिमेंट में सही जानकारी शामिल करें.
-- रैपिड फ़ायर वीडियो बनाएं, जिसमें हर एक सेकंड में एक अलग और दुर्लभ `[thing]` दिखे. इसमें अपबीट संगीत शामिल करें. साथ ही, चीज़ को लेबल करने के लिए टेक्स्ट शामिल करें.
+- Çok zengin ve ayrıntılı ancak tamamen doğal bir sahne oluşturmak için mikro ayrıntıları, ifadeyi ve zamanlamayı göz önünde bulundurun.
+- Karakter ve ortam açıklamalarınızda son derece ayrıntılı olun.
+  Karakterlere kostüm tasarım ilkelerini uygulayın. Sahnedeki kişiler, öğeler ve nesneler hakkında çok net olun.
+- Sahnenin gerçekçi ve doğal görünmesi için arka plan öğelerine uygun ayrıntılar ekleyin.
+- Her saniyede farklı bir nadir `[thing]` gösteren, hızlı tempolu müzik içeren ve öğeleri etiketlemek için metin eklenmiş bir video oluştur.
 
-### वीडियो में टेक्स्ट
+### Videolardaki metinler
 
-वीडियो में टेक्स्ट शामिल करने के लिए प्रॉम्प्ट दिया जा सकता है. Gemini Omni, टेक्स्ट को सही और पढ़ने लायक तरीके से रेंडर करेगा. अगर आपके वीडियो में नैचुरल तरीके से टेक्स्ट दिखेगा, तो यह तय करने में मदद मिल सकती है कि उसे क्या कहना चाहिए. भले ही, यह टेक्स्ट बैकग्राउंड एलिमेंट में हो.
+Videonuzda metin olmasını isteyebilirsiniz. Gemini Omni, metni doğru ve okunabilir şekilde oluşturur. Videonuzda arka plan öğelerinde bile doğal olarak oluşan metinler varsa ne söylemesi gerektiğini tanımlamak faydalı olabilir.
 
-- स्क्रीन पर एक बार में एक शब्द: "did, you, know, that, Omni, can, do, awesome, text?" हर शब्द, एक सेकंड के लिए अलग-अलग ऐनिमेटेड स्टाइल में दिखता है. कोई डायलॉग नहीं.
-- सड़क पर एक साइन है, जिस पर लिखा है: "This is an AI generation by Omni". एक स्टोरफ़्रंट है, जिस पर लिखा है: "All you need AI". एक कार है, जिसकी नंबर प्लेट पर लिखा है: "OMN111"
+- Ekranda tek seferde bir kelime: "did, you, know, that, Omni, can, do,
+  awesome, text?" ("Omni'nin, harika, metinler, oluşturabildiğini, biliyor, muydunuz?") Her kelime, farklı bir animasyon stiliyle 1 saniye boyunca görünür. Diyalog yok.
+- "Bu, Omni tarafından üretilen bir yapay zeka görüntüsüdür" yazan bir sokak tabelası, "İhtiyacınız olan tüm yapay zeka" yazan bir vitrin ve "OMNI1.1" plakalı bir araba var.
 
-### इमेज के रोल सेट करने के लिए, प्रॉम्प्ट में टैग का इस्तेमाल करना
+### Videoları uzatmaya yönelik istemler
 
-अपलोड किए गए मीडिया को जनरेशन के खास रोल से बाइंड करने के लिए, टैग का इस्तेमाल किया जा सकता है. इससे, यह तय किया जा सकता है कि हर इमेज, शुरुआती फ़्रेम है या रेफ़रंस.
+Gemini Omni 1.1 Flash ile `"Extend this video"` veya `"The scene continues"` gibi istemlerle videoları uzatabilirsiniz. Videoları 10 saniye uzatarak toplam uzunluğu 40 saniyeye çıkarabilirsiniz.
 
-#### 1. सामान्य टैग (सुझाया गया)
+Omni, orijinal videonuzun son 10 saniyesini bağlam olarak kullanarak video, hareket, karakter ve sesin tutarlı olmasını sağlayan bir uzantı oluşturur. Giriş videonuzdaki son karelerden bazıları, geçişin sorunsuz olması için düzenlenir.
 
-ऐसे सामान्य मामलों में जहां प्रॉम्प्ट से इमेज के रोल साफ़ तौर पर पता चलते हैं, वहां इमेज को सीधे रोल से बाइंड किया जा सकता है:
+Uzatma işlemi yaparken bu kılavuzdaki tüm Omni istemi ipuçları geçerliliğini korur:
 
-- **`<FIRST_FRAME>`**: वीडियो के शुरुआती फ़्रेम के तौर पर इमेज का इस्तेमाल करें. उदाहरण के लिए: `<FIRST_FRAME> a woman is walking`
-- **`<IMAGE_REF_N>`**: रेफ़रंस के तौर पर इमेज का इस्तेमाल करें. उदाहरण के लिए: `in the
-  style of <IMAGE_REF_0> a woman <IMAGE_REF_1> is walking` (पहली इमेज से स्टाइल
-  रेफ़रंस और दूसरी इमेज से सब्जेक्ट रेफ़रंस को जोड़ता है).
-  इमेज रेफ़रंस की शुरुआत 0 से होती है.
+- Genişletilmiş sahnenizdeki sesi açıklayın. Özellikle değiştirilmesi gerekiyorsa bu açıklamayı yapın: `"The music continues into the chorus"`
+- Sahnenin devam edip etmediğini veya yeni bir sahneye geçiş yapılıp yapılmadığını (belki aynı karakterlerle) açıklayın: `"Show the same characters in the next scene"`
+- Çıkışlarınızın doğru olmasını sağlamak veya yeni karakterler tanıtmak için genişletme yaparken referans olarak resim ve video ekleyin: `"The person shown in the reference image enters the scene"`, `"The dog in the reference video <VIDEO_REF_0> jumps onto the sofa"`
+- Zaman damgaları veya zaman kodu söz dizimi kullanılıyorsa 0s, videonun uzatılmış kısmının başlangıcını ifade eder. 10 saniyelik bir videoyu uzatıyorsanız bu istemdeki sahne kesimi 12 saniye sonra gerçekleşir: `"After 2s cut to a new scene with the same characters"`
 
-यहां छह रेफ़रंस इमेज वाला उदाहरण दिया गया है:
+### İstemlerde etiket kullanarak resim ve video rollerini ayarlama
+
+Yüklenen medyaları belirli üretim rollerine bağlamak için etiketleri kullanabilirsiniz. Bu sayede her resmin veya videonun başlangıç karesi, son kare ya da referans olup olmadığını belirleyebilirsiniz.
+
+#### 1. Basit etiketler (önerilen)
+
+Medya rollerinin istemden açıkça anlaşıldığı basit durumlarda, resimleri ve videoları doğrudan rollere bağlayabilirsiniz:
+
+- **`<FIRST_FRAME>`**: Örneğin, `<FIRST_FRAME> a woman is walking` gibi durumlarda videonun başlangıç karesi olarak resmi kullanın.
+- **`<LAST_FRAME>`**: Geçiş yapılacak videonun son karesi olarak kullanın. `<FIRST_FRAME>` ile birlikte kullanılmalıdır. Örneğin: `<FIRST_FRAME> <LAST_FRAME> a woman is walking`
+- **`<IMAGE_REF_N>`**: Resmi referans olarak kullanın. Örneğin: `in the
+  style of <IMAGE_REF_0> a woman <IMAGE_REF_1> is walking` (ilk resimdeki stil referansını ve ikinci resimdeki özne referansını birleştirir).
+  Resim referansları 0'dan başlar.
+- **`<VIDEO_REF_N>`**: Videoyu karakter veya nesne referansı olarak kullanma (örneğin:
+  `the person in <VIDEO_REF_0> is playing the violin`). Video referansları da 0'dan başlar.
+
+Aşağıda 6 referans resim içeren bir örnek verilmiştir:
 
 ```
 [0-3s] A studio fashion sequence. Starting with woman <IMAGE_REF_0>, she is holding <IMAGE_REF_1>
@@ -861,37 +1160,54 @@ Gemini Omni Flash से, वीडियो जनरेट करने की
 [6-10s] And finally another woman <IMAGE_REF_4> who is holding <IMAGE_REF_5> while walking.
 ```
 
-#### 2. साफ़ तौर पर एलान
+#### 2. Kaynakları ve referansları belirtme
 
-एक से ज़्यादा इमेज और एक से ज़्यादा रोल वाले ज़्यादा मुश्किल मामलों के लिए, नैचुरल लैंग्वेज वाले निर्देश सफ़िक्स के साथ, साफ़ तौर पर प्रीफ़िक्स टैग का इस्तेमाल किया जा सकता है.
+Birden fazla medya girişi ve birden fazla rol içeren daha karmaşık durumlarda, doğal dil talimatlarıyla eşleştirilmiş açık önek etiketlerini kullanabilirsiniz. Bu kaynakları ve referansları isteminizin başında belirtmeniz gerekir.
 
-- **सोर्स और रेफ़रंस इमेज का एलान करना**:
-  - `[# Sources <FIRST_FRAME>@Image1]` पहली इमेज को शुरुआती फ़्रेम के तौर पर इस्तेमाल करेगा.
-  - `[# References <IMAGE_REF_0>@Image1]` पहली इमेज को रेफ़रंस के तौर पर इस्तेमाल करेगा.
-  - `[# References <IMAGE_REF_1>@Image2]` दूसरी इमेज को रेफ़रंस के तौर पर इस्तेमाल करेगा.
-  - `[# References <IMAGE_REF_0>@Image1 <IMAGE_REF_1>@Image2]` दोनों इमेज को रेफ़रंस के तौर पर इस्तेमाल करेगा.
-  - `[# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2]` पहली इमेज को शुरुआती फ़्रेम के तौर पर और दूसरी इमेज को रेफ़रंस के तौर पर इस्तेमाल करेगा.
-- **निर्देश**: अपने प्रॉम्प्ट के आखिर में निर्देश जोड़ें:
-  - शुरुआती फ़्रेम के लिए: `"Use this image as the starting frame."`
-  - रेफ़रंस इमेज के लिए: `"Use the given image(s) as references for video generation. The images should not be used as literal initial frames."`
+- `[# Sources <FIRST_FRAME>@Image1]`, başlangıç karesi olarak ilk resmi kullanır.
+- `[# Sources <FIRST_FRAME>@Image1 <LAST_FRAME>@Image2]`, ilk resmi başlangıç karesi, ikinci resmi ise son kare olarak kullanır.
+- `[# Sources <FIRST_FRAME>@Image1 <LAST_FRAME>@Image1]`, ilk resmi hem ilk kare hem de son kare olarak kullanarak döngüye giren bir video oluşturur.
+- `[# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2]`, ilk resmi başlangıç karesi, ikinci resmi ise referans olarak kullanır.
+- `[# Sources <VIDEO_0>@Video1]`, düzenleme veya değiştirme için videoyu birincil kaynak video olarak kullanır.
+- `[# Sources <PREVIOUS_VIDEO>@Video1]`, önceki dönüşteki videoyu uzatmak için kullanacak.
+- `[# References <IMAGE_REF_0>@Image1]`, ilk resmi referans olarak kullanır.
+- `[# References <IMAGE_REF_1>@Image2]`, ikinci resmi referans olarak kullanır.
+- `[# References <IMAGE_REF_0>@Image1 <IMAGE_REF_1>@Image2]`, her iki resmi de referans olarak kullanır.
+- `[# References <VIDEO_REF_0>@Video1]`, ilk videoyu referans olarak kullanır.
+- `[# References <IMAGE_REF_0>@Image1 <VIDEO_REF_0>@Video1]`, hem resmi hem de videoyu referans olarak kullanır.
 
-प्रॉम्प्ट का बड़ा उदाहरण:
+İsteminize yönlendirici talimatlar ekleyin:
+
+- Başlangıç karesi için: `"Use this image as the starting frame."`
+- Başlangıç ve bitiş kareleriyle döngüye alınan video için: `"Use this image as the first frame and the last frame."`
+- Referans resimler için: `"Use the given image(s) as references for video generation. The images should not be used as literal initial frames."`
+- Referans videolar için: `"Use the given video(s) as references. Do not use them as a source for video editing."`
+
+Kaynak ve referans beyanları içeren istemlere dair bazı örnekler:
+
+**Başlangıç karesi, referans resimle birleştirildi:**
 
 ```
 [# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2] a woman <IMAGE_REF_0> is walking. Use Image1 as the starting frame. Use Image2 as a reference for the video generation.
 ```
 
-## आगे क्या करना है
+**Karakter referans videosu ile nesne referans görselinin birleştirilmesi:**
 
-- [Omni Quickstart Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Omni.ipynb?hl=hi) में एक्सपेरिमेंट करके, Gemini Omni Flash का इस्तेमाल शुरू करें.
-- प्रॉम्प्ट डिज़ाइन के बारे में जानकारी देने वाले हमारे [लेख](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=hi) की मदद से, और भी बेहतर प्रॉम्प्ट लिखने का तरीका जानें.
+```
+[# References <IMAGE_REF_0>@Image1 <VIDEO_REF_0>@Video1] The woman in <VIDEO_REF_0> is playing the violin shown in <IMAGE_REF_0>. Use Video1 as a character reference and Image1 as an object reference.
+```
 
-सुझाव भेजें
+## Sırada ne var?
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+- [Omni Quickstart Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Omni.ipynb?hl=tr)'de denemeler yaparak Gemini Omni Flash'i kullanmaya başlayın.
+- [İstem tasarımına giriş](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=tr) başlıklı makalemizden yararlanarak daha iyi istemler yazmayı öğrenin.
 
-आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया.
+Geri bildirim gönderin
 
-क्या आपको हमें और कुछ बताना है?
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया."],[],[]]
+Son güncelleme tarihi: 2026-08-30 UTC.
+
+Bize geri bildirimde bulunmak mı istiyorsunuz?
+
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-08-30 UTC."],[],[]]

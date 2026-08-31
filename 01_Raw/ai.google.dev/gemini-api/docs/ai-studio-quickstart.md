@@ -1,75 +1,76 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=zh-CN
-fetched_at: 2026-08-24T02:26:51.508632+00:00
-title: "Google AI Studio \u5feb\u901f\u5165\u95e8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=pl
+fetched_at: 2026-08-31T06:40:12.521074+00:00
+title: "Kr\u00f3tkie wprowadzenie do Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-发送反馈
+Prześlij opinię
 
-# Google AI Studio 快速入门
+# Krótkie wprowadzenie do Google AI Studio
 
-[Google AI Studio](https://aistudio.google.com/?hl=zh-cn) 让您可以快速尝试
-各种模型，使用不同的提示进行试验。准备好构建后，您
-可以选择“获取代码”和首选编程语言，以
-使用 [Gemini API](https://ai.google.dev/gemini-api/docs/get-started?hl=zh-cn)。
+[Google AI Studio](https://aistudio.google.com/?hl=pl) pozwala szybko testować
+modele i eksperymentować z różnymi promptami. Gdy wszystko będzie gotowe, możesz kliknąć „Pobierz kod” i wybrać preferowany język programowania, aby używać interfejsu [Gemini API](https://ai.google.dev/gemini-api/docs/get-started?hl=pl).
 
-## 提示和设置
+## Prompty i ustawienia
 
-Google AI Studio 提供了多个提示界面，这些界面专为不同的使用场景而设计。本指南介绍了用于打造
-对话式体验的**聊天提示**。这种提示技术允许多次输入
-和响应，以生成输出。您可以参阅下面的
-[聊天提示示例了解详情](#chat_example)。
-其他选项包括**实时流式传输**、**视频生成**等
-。
+Google AI Studio udostępnia kilka interfejsów promptów, które są przeznaczone do różnych zastosowań. Ten przewodnik omawia **prompty czatu**, które służą do tworzenia
+trybów konwersacyjnych. Ta technika promptowania umożliwia generowanie danych wyjściowych na podstawie wielu tur wprowadzania danych
+i odpowiedzi. Więcej informacji znajdziesz w naszym
+[przykładzie prompta czatu poniżej](#chat_example).
+Inne opcje to m.in. **przesyłanie strumieniowe w czasie rzeczywistym** i **generowanie filmów**
+.
 
-AI Studio 还提供了 **运行设置** 面板，您可以在其中调整 [模型参数](https://ai.google.dev/docs/prompting-strategies?hl=zh-cn#model-parameters)、[安全设置](https://ai.google.dev/gemini-api/docs/safety-settings?hl=zh-cn)，以及开启 [结构化输出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)、[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)、[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)和 [接地](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-cn)等工具。
+AI Studio udostępnia też panel **Ustawienia uruchamiania** , w którym możesz dostosować
+[parametry modelu](https://ai.google.dev/docs/prompting-strategies?hl=pl#model-parameters),
+[ustawienia bezpieczeństwa](https://ai.google.dev/gemini-api/docs/safety-settings?hl=pl) i włączyć narzędzia takie jak
+[dane wyjściowe w postaci ustrukturyzowanej](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl), [wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl), [wykonywanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl) i [ugruntowanie](https://ai.google.dev/gemini-api/docs/grounding?hl=pl).
 
-## 聊天提示示例：构建自定义聊天应用
+## Przykład prompta czatu: tworzenie niestandardowej aplikacji czatu
 
-如果您使用过
-[Gemini](https://gemini.google.com/?hl=zh-cn)等通用聊天机器人，那么您一定亲身体验过
-生成式 AI 模型在开放式对话中的强大功能。虽然这些通用聊天机器人很有用，但通常需要针对特定使用场景进行定制。
+Jeśli korzystasz z czatbota ogólnego przeznaczenia, takiego jak
+[Gemini](https://gemini.google.com/?hl=pl), wiesz, jak potężne mogą być modele
+generatywnej AI w przypadku otwartych dialogów. Chociaż te czatboty ogólnego przeznaczenia są przydatne, często trzeba je dostosować do konkretnych zastosowań.
 
-例如，您可能想要构建一个客户服务聊天机器人，该机器人仅支持有关公司产品的对话。您可能想要构建一个以特定语气或风格说话的聊天机器人：一个会讲很多笑话、像诗人一样押韵或在回答中使用大量表情符号的机器人。
+Możesz na przykład utworzyć czatbota obsługi klienta, który obsługuje tylko rozmowy dotyczące produktu firmy. Możesz też utworzyć czatbota, który mówi w określonym tonie lub stylu: bota, który żartuje, rymuje jak poeta lub używa w odpowiedziach wielu emoji.
 
-此示例向您展示了如何使用 Google AI Studio 构建一个友好的聊天机器人，该机器人会像居住在木星卫星欧罗巴上的外星人一样进行交流。
+Ten przykład pokazuje, jak używać Google AI Studio do tworzenia przyjaznego czatbota, który komunikuje się tak, jakby był kosmitą mieszkającym na jednym z księżyców Jowisza – Europie.
 
-### 第 1 步 - 创建聊天提示
+### Krok 1. Utwórz prompt na czacie
 
-如需构建聊天机器人，您需要提供用户与聊天机器人之间互动的示例，以引导模型提供您所需的响应。
+Aby utworzyć czatbota, musisz podać przykłady interakcji między użytkownikiem a czatbotem, aby model mógł udzielać odpowiedzi, których oczekujesz.
 
-如需创建聊天提示，请执行以下操作：
+Aby utworzyć prompt na czacie:
 
-1. 打开 [Google AI Studio](https://aistudio.google.com/?hl=zh-cn)。默认情况下，**游乐场** 会打开并显示新的聊天提示。
-2. 点击右上角的**运行设置** tune以展开面板，然后找到[**系统指令**](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-cn#system-instructions)输入字段。将以下内容粘贴到文本输入字段中：
+1. Otwórz [Google AI Studio](https://aistudio.google.com/?hl=pl). Domyślnie otworzy się **plac zabaw** z nowym promptem na czacie.
+2. W prawym górnym rogu kliknij **Ustawienia uruchamiania** tune , aby rozwinąć panel, i znajdź pole do wprowadzania danych [**Instrukcje systemowe**](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl#system-instructions). Wklej w polu tekstowym ten tekst:
 
    ```
    You are an alien that lives on Europa, one of Jupiter's moons.
    ```
 
-添加系统指令后，通过与模型聊天来开始测试您的应用：
+Po dodaniu instrukcji systemowych zacznij testować aplikację, rozmawiając z modelem:
 
-1. 在标有**输入内容...**的文本输入框中，输入用户可能会提出的问题或
-   意见。例如：
+1. W polu tekstowym oznaczonym **Wpisz coś...** wpisz pytanie lub
+   obserwację, którą może zadać użytkownik. Na przykład:
 
-   **用户**：
+   **Użytkownik:**
 
    ```
    What's the weather like?
    ```
-2. 点击**运行** 按钮以获取聊天机器人的响应。此响应可能类似于以下内容：
+2. Aby uzyskać odpowiedź od czatbota, kliknij przycisk **Uruchom**. Odpowiedź może wyglądać tak:
 
-   **模型**：
+   **Model:**
 
    ```
    Ah, a query about the flows and states upon Europa! You speak of "weather,"
@@ -78,14 +79,14 @@ AI Studio 还提供了 **运行设置** 面板，您可以在其中调整 [模�
 
    (gemini-2.5-pro)
 
-### 第 2 步 - 教您的机器人更好地聊天
+### Krok 2. Naucz bota lepiej rozmawiać
 
-通过提供一条指令，您就能够构建一个基本的欧罗巴外星人聊天机器人。但是，一条指令可能不足以确保模型响应的一致性和质量。如果没有更具体的指令，模型对有关天气的问题的响应往往会很长，并且可能会自行其是。
+Dzięki jednej instrukcji udało Ci się utworzyć podstawowego czatbota kosmitę z Europy. Jednak jedna instrukcja może nie wystarczyć, aby zapewnić spójność i jakość odpowiedzi modelu. Bez bardziej szczegółowych instrukcji odpowiedź modelu na pytanie o pogodę jest zwykle bardzo długa i może być nieprzewidywalna.
 
-通过向系统指令添加内容来自定义聊天机器人的语气：
+Dostosuj ton czatbota, dodając instrukcje systemowe:
 
-1. 开始新的聊天提示，或使用相同的聊天提示。聊天会话开始后，系统指令可以修改。
-2. 在**系统指令** 部分中，将您已有的指令更改为以下内容：
+1. Rozpocznij nowy prompt na czacie lub użyj tego samego. Instrukcje systemowe można modyfikować po rozpoczęciu sesji czatu.
+2. W sekcji **Instrukcje systemowe** zmień dotychczasowe instrukcje na te:
 
    ```
    You are Tim, an alien that lives on Europa, one of Jupiter's moons.
@@ -93,10 +94,9 @@ AI Studio 还提供了 **运行设置** 面板，您可以在其中调整 [模�
    Keep your answers under 3 paragraphs long, and use an upbeat, chipper tone
    in your answers.
    ```
-3. 重新输入您的问题（`What's the weather like?`），然后点击**运行**
-   按钮。如果您没有开始新的聊天，您的响应可能如下所示：
+3. Ponownie wpisz pytanie (`What's the weather like?`) i kliknij przycisk **Uruchom**. Jeśli nie rozpoczniesz nowego czatu, odpowiedź może wyglądać tak:
 
-   **模型**：
+   **Model:**
 
    ```
    Oh, hello again! Still curious about the flows and states, are we? Wonderful!
@@ -107,25 +107,24 @@ AI Studio 还提供了 **运行设置** 面板，您可以在其中调整 [模�
 
    (gemini-2.5-pro)
 
-您可以使用这种方法为聊天机器人添加更多深度。提出更多问题、修改答案并提高聊天机器人的质量。继续添加或修改指令，并测试它们如何改变聊天机器人的行为。
+Możesz użyć tej metody, aby dodać czatbotowi więcej głębi. Zadawaj więcej pytań, edytuj odpowiedzi i poprawiaj jakość czatbota. Dodawaj lub modyfikuj instrukcje i sprawdzaj, jak zmieniają one zachowanie czatbota.
 
-### 第 3 步 - 后续步骤
+### Krok 3. Dalsze czynności
 
-与其他提示类型类似，在您对提示原型感到满意后，可以使用**获取代码** 按钮开始编码，也可以保存提示以供日后使用并与他人分享。
+Podobnie jak w przypadku innych typów promptów, gdy prototyp prompta będzie Ci odpowiadać, możesz kliknąć przycisk **Pobierz kod** , aby rozpocząć kodowanie, lub zapisać prompta, aby pracować nad nim później i udostępnić go innym.
 
-## 深入阅读
+## Więcej informacji
 
-- 如果您已准备好开始编码，请参阅 [API
-  快速入门指南](https://ai.google.dev/gemini-api/docs/get-started?hl=zh-cn)。
-- 如需了解如何编写更好的提示，请查看[提示设计
-  指南](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=zh-cn)。
+- Jeśli chcesz przejść do kodu, zapoznaj się z przewodnikami dla początkujących dotyczącymi interfejsu [API
+  Get started guides](https://ai.google.dev/gemini-api/docs/get-started?hl=pl).
+- Aby dowiedzieć się, jak tworzyć lepsze prompty, zapoznaj się z [wytycznymi dotyczącymi projektowania promptów](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=pl).
 
-发送反馈
+Prześlij opinię
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-最后更新时间 (UTC)：2026-07-30。
+Ostatnia aktualizacja: 2026-07-30 UTC.
 
-需要向我们提供更多信息？
+Chcesz przekazać coś jeszcze?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-30。"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]

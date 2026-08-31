@@ -1,115 +1,114 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/image-generation?hl=fr
-fetched_at: 2026-08-24T02:22:44.299664+00:00
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/image-generation?hl=he
+fetched_at: 2026-08-31T06:34:06.489962+00:00
 title: "Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Envoyer des commentaires
+שליחת משוב
 
-# Génération d'images Nano Banana
+# יצירת תמונות באמצעות Nano Banana
 
-Créez des applications entièrement fonctionnelles avec une interface utilisateur complète à l'aide de requêtes, et découvrez
-Nano Banana 2 intégré à des outils, des données et l'écosystème Gemini réels. le tout sans écrire une seule ligne de code.
+הנחיה ליצירת אב טיפוס של אפליקציות פונקציונליות לחלוטין עם ממשק משתמש מלא, וצפייה ב-Nano Banana 2 שמשולב עם כלים, נתונים ומערכת אקולוגית של Gemini מהעולם האמיתי. וכל זה בלי לכתוב אפילו שורת קוד אחת.
 
-- [Essayer une application Nano Banana 2](https://aistudio.google.com/apps/bundled/pet_passport?hl=fr)
-- Ou créez la vôtre à partir de requêtes :
+- [איך מנסים אפליקציית Nano Banana 2](https://aistudio.google.com/apps/bundled/pet_passport?hl=he)
+- או ליצור תרחיש משלכם בעזרת הנחיות:
 
-- ![magazine](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
-  ![Londres](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
-  ![restaurer](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
-  ![banana](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
-  ![café](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
-  ![article](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
-  ![chien](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
-  ![isométrique](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
-- ![magazine](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+- ![כתב עת](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+  ![london](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
+  ![שחזור](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
+  ![בננה](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
+  ![בית קפה](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
+  ![מאמר](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
+  ![כלב](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
+  ![איזומטרי](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
+- ![כתב עת](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
 
-  Généré par Nano Banana 2
+  נוצר על ידי Nano Banana 2
 
-  **Requête** : "Photo d'une couverture de magazine brillant, la couverture bleue minimaliste comporte les mots Nano Banana en gros et en gras. Le texte est écrit dans une police avec empattement et remplit la vue. Aucun autre texte. Devant le texte se trouve le portrait d'une personne portant une robe élégante et minimaliste. Elle tient le chiffre 2 de manière ludique, qui est le point focal.
+  **הנחיה:** "תמונה של שער מבריק של מגזין. השער הכחול המינימליסטי כולל את המילים Nano Banana בגדול ובאותיות מודגשות. הטקסט מוצג בגופן עם תגים וממלא את התצוגה. בלי טקסט אחר. לפני הטקסט יש דיוקן של אדם בשמלה אלגנטית ומינימלית. היא מחזיקה בצורה שובבה את המספר 2, שהוא נקודת המיקוד.
     
-   Mets le numéro du problème et la date "février 2026" dans l'angle, avec un code-barres. Le magazine est posé sur une étagère contre un mur orange crépi, dans une boutique de créateurs."
+  ממקמים את מספר הגיליון ואת התאריך 'פברואר 2026' בפינה, יחד עם ברקוד. המגזין מונח על מדף בחנות מעצבים, על רקע קיר כתום עם טיח."
 
-  Créez des [photos de produits professionnelles](#4_product_mockups_commercial_photography) dans [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=fr)
-- ![Londres](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
+  יצירת [תמונות מוצר מקצועיות](#4_product_mockups_commercial_photography) ב-[AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=he)
+- ![london](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
 
-  Généré par Nano Banana Pro
+  נוצרה על ידי Nano Banana Pro
 
-  **Requête** : "Présente une scène de dessin animé 3D miniature, isométrique et claire, vue de dessus à 45°, de Londres, avec ses monuments et éléments architecturaux les plus emblématiques. Utilisez des textures douces et raffinées avec des matériaux PBR réalistes, ainsi que des éclairages et des ombres doux et réalistes. Intégrez les conditions météorologiques actuelles directement dans l'environnement urbain pour créer une ambiance immersive. Utilise une composition épurée et minimaliste avec un arrière-plan uni et doux. En haut au centre, placez le titre "Londres" en gros caractères gras, une icône météo bien visible en dessous, puis la date (en petits caractères) et la température (en caractères moyens). Tout le texte doit être centré avec un espacement cohérent et peut chevaucher légèrement le haut des bâtiments."
+  **הנחיה:** "תיצור סצנה מצוירת תלת-ממדית, מיניאטורית, ברורה ואיזומטרית של לונדון, במבט על מזווית של 45 מעלות, שתכלול את ציוני הדרך והאלמנטים האדריכליים הכי אייקוניים שלה. תשתמשו במרקמים רכים ומעודנים עם חומרים ריאליסטיים של PBR ותאורה וצללים עדינים שנראים כמו במציאות. תשלב את תנאי מזג האוויר הנוכחיים ישירות בסביבה העירונית כדי ליצור אווירה סוחפת. השתמשו בקומפוזיציה נקייה ומינימליסטית עם רקע רך בצבע אחיד. במרכז העליון, מציבים את הכותרת 'לונדון' בטקסט מודגש גדול, מתחתיה סמל מזג אוויר בולט, ואז את התאריך (טקסט קטן) ואת הטמפרטורה (טקסט בינוני). כל הטקסט צריך להיות מיושר למרכז עם ריווח עקבי, ויכול להיות שהוא יחפוף מעט את החלק העליון של הבניינים".
 
-  En savoir plus sur l'[ancrage dans la recherche](#use-with-grounding) et l'essayer dans [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=fr)
-- ![quetzal](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
+  [מידע נוסף על ביסוס על חיפוש](#use-with-grounding) ועל ניסיון השימוש בו ב-[AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=he)
+- ![קצל](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
 
-  Généré par Nano Banana 2
+  נוצר על ידי Nano Banana 2
 
-  **Requête** : "Utilise la recherche d'images pour trouver des images précises d'un quetzal resplendissant. Crée un magnifique fond d'écran au format 3:2 de cet oiseau, avec un dégradé naturel de haut en bas et une composition minimaliste."
+  **פרומפט:** "השתמשו בחיפוש תמונות כדי למצוא תמונות מדויקות של ציפור קצאל מפוארת. צור טפט יפהפה ביחס רוחב-גובה של 3:2 של הציפור הזו, עם מעבר צבע טבעי מלמעלה למטה וקומפוזיציה מינימלית".
 
-  Utilisez l'ancrage de la [recherche d'images](#image-search) Google avec Nano Banana 2. Essayer dans [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=fr)
-- ![banana](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
+  שימוש בהארקה של [חיפוש תמונות](#image-search) ב-Google עם Nano Banana 2. רוצים לנסות את זה ב-[AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=he)?
+- ![בננה](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
 
-  Généré par Nano Banana Pro
+  נוצר על ידי Nano Banana Pro
 
-  **Requête** : "Place ce logo sur une publicité haut de gamme pour un parfum à la banane. Le logo est parfaitement intégré à la bouteille."
+  **הנחיה:** "תשים את הלוגו הזה על מודעה יוקרתית לבושם עם ריח של בננה. הלוגו משולב בצורה מושלמת בבקבוק".
 
-  Essayez la [préservation des détails haute fidélité](#5_high-fidelity_detail_preservation) de Nano Banana dans [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=fr)
-- ![café](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
+  כדאי לנסות את [שמירת הפרטים ברמת דיוק גבוהה](#5_high-fidelity_detail_preservation) של Nano Banana ב-[AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=he)
+- ![בית קפה](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
 
-  Généré par Nano Banana Pro
+  נוצר על ידי Nano Banana Pro
 
-  **Requête** : "Photo d'une scène de la vie quotidienne dans un café animé servant le petit-déjeuner. Au premier plan, un homme d'anime aux cheveux bleus, l'une des personnes est un croquis au crayon, l'autre est une personne en pâte à modeler"
+  **הנחיה:** "תמונה של סצנה יומיומית בבית קפה הומה שמוגשת בו ארוחת בוקר. בחזית התמונה, גבר אנימה עם שיער כחול. אחד מהאנשים הוא סקיצה בעיפרון, ואדם אחר הוא דמות בסטופ-מושן"
 
-  Testez différents [styles artistiques](#3_style_transfer) avec Nano Banana dans [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=fr).
-- ![article](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
+  התנסות ב[סגנונות אמנותיים](#3_style_transfer) שונים עם Nano Banana ב-[AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=he)
+- ![מאמר](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
 
-  Généré par Nano Banana Pro
+  נוצרה על ידי Nano Banana Pro
 
-  **Requête** : "Utilise la recherche pour savoir comment le lancement de Gemini 3 Flash a été accueilli. Utilise ces informations pour écrire un court article à ce sujet (avec des titres). Retourne une photo de l'article tel qu'il est apparu dans un magazine brillant axé sur le design. Il s'agit d'une photo d'une seule page pliée, montrant l'article sur Gemini 3 Flash. Une photo principale. Titre en serif."
+  **פרומפט:** "תשתמש בחיפוש כדי לגלות איך התקבלה ההשקה של Gemini 3 Flash. תשתמש במידע הזה כדי לכתוב מאמר קצר בנושא (עם כותרות). תחזיר תמונה של המאמר כפי שהוא הופיע במגזין מבריק עם עיצוב מוקפד. זו תמונה של דף אחד מקופל, שמוצג בו מאמר על Gemini 3 Flash. תמונה ראשית אחת. כותרת בגופן סריף".
 
-  Générez du [texte précis](#3_accurate_text_in_images) à partir de la [recherche](#use-with-grounding). Essayer Nano Banana dans [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=fr)
-- ![chien](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
+  ליצור [טקסט מדויק](#3_accurate_text_in_images) מ[חיפוש](#use-with-grounding). כדאי לנסות את Nano Banana ב-[AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=he)
+- ![כלב](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
 
-  Généré par Nano Banana Pro
+  נוצרה על ידי Nano Banana Pro
 
-  **Requête** : "Une icône représentant un chien mignon. L'arrière-plan est blanc. Crée des icônes dans un style 3D coloré et tactile. Pas de texte."
+  **הנחיה:** "סמל שמייצג כלב חמוד. הר רקע לבן. תיצור סמלים בסגנון תלת-ממדי צבעוני ומוחשי. אין טקסט".
 
-  Créez des [icônes, des autocollants et des composants](#2_stylized_illustrations_stickers) avec Nano Banana dans [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=fr)
-- ![isométrique](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
+  איך יוצרים [סמלים, סטיקרים ונכסים](#2_stylized_illustrations_stickers) באמצעות Nano Banana ב-[AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=he)
+- ![איזומטרי](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
 
-  Généré par Nano Banana 2
+  נוצר על ידי Nano Banana 2
 
-  **Requête** : "Crée une photo parfaitement isométrique. Il ne s'agit pas d'une miniature, mais d'une photo qui s'est avérée parfaitement isométrique. Il s'agit d'une photo d'un magnifique jardin moderne. Il y a une grande piscine en forme de 2 et les mots "Nano Banana 2"."
+  **הנחיה:** "צור תמונה איזומטרית מושלמת. זו לא תמונה ממוזערת, אלא תמונה שצולמה במקרה בצורה איזומטרית מושלמת. זו תמונה של גן מודרני יפהפה. יש בריכה גדולה בצורת הספרה 2 והמילים: Nano Banana 2."
 
-  Essayez la [génération d'images photoréalistes](#1_photorealistic_scenes) dans [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=fr)
+  כדאי לנסות [ליצור תמונות פוטוריאליסטיות](#1_photorealistic_scenes) ב-[AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=he)
 
-**Nano Banana** est le nom des fonctionnalités de génération d'images natives de Gemini.
-Gemini peut générer et traiter des images de manière conversationnelle avec du texte, des images, des vidéos ou une combinaison de ces éléments. Vous pouvez ainsi créer, modifier et itérer des éléments visuels avec un contrôle sans précédent.
+‫**Nano Banana** הוא השם של יכולות יצירת התמונות המובנות של Gemini.
+‫Gemini יכול ליצור ולעבד תמונות בשיחה עם טקסט, תמונות, סרטונים או שילוב שלהם. כך תוכלו ליצור ולערוך רכיבים חזותיים ולשפר אותם, עם שליטה חסרת תקדים.
 
-Nano Banana fait référence à quatre modèles distincts disponibles dans l'API Gemini :
+‫Nano Banana מתייחס לארבעה מודלים שונים שזמינים ב-Gemini API:
 
-- **Nano Banana 2 Lite ([Gemini 3.1 Flash Lite Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=fr))
-  (`gemini-3.1-flash-lite-image`)** : notre modèle Gemini pour les images le plus rapide et le moins cher, conçu pour la vitesse et l'évolutivité lorsque la rapidité et le coût sont les principales contraintes opérationnelles. Non optimisé pour plusieurs entrées de référence ni pour l'édition séquentielle multitour.
-- **Nano Banana 2 ([Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=fr))
-  (`gemini-3.1-flash-image`)** : modèle polyvalent et généraliste pour toutes les tâches. Il équilibre la vitesse avec une génération 4K de pointe, une connaissance du monde et un rendu fiable du texte. Exceller dans le traitement et la cohérence de plusieurs images de référence.
-- **Nano Banana Pro ([Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=fr))
-  (`gemini-3-pro-image`)** : le choix Premium pour les tâches visuelles les plus complexes. Il offre le plus haut niveau de connaissances sur le monde, une localisation avancée, une cohérence de marque précise et un contrôle créatif de haute précision.
-- **Nano Banana ([Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=fr))
-  (`gemini-2.5-flash-image`)** : le pionnier de la série Nano Banana.
-  Bien qu'il ait été un outil fiable, nous recommandons vivement aux clients de passer à Nano Banana 2 Lite pour bénéficier d'une qualité améliorée, de vitesses de génération plus rapides et de tarifs d'API plus bas.
+- ‫**Nano Banana 2 Lite ([Gemini 3.1 Flash Lite Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=he))
+  (`gemini-3.1-flash-lite-image`):** מודל Gemini ליצירת תמונות הכי מהיר והכי זול שלנו, שנועד לתת מענה לצרכים של מהירות וקנה מידה, כשמהירות ועלות הן המגבלות התפעוליות העיקריות. התכונה לא מותאמת להזנת כמה תמונות לדוגמה או לעריכה רציפה רב-שלבית.
+- ‫**Nano Banana 2 ([Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=he))
+  (`gemini-3.1-flash-image`):** המודל הכי רב-תכליתי, מודל כללי לכל המשימות. הוא משלב בין מהירות ליצירה של תמונות באיכות 4K המתקדמת ביותר, ידע רחב על העולם ועיבוד טקסט אמין. יכולת מצוינת לעבד תמונות לדוגמה מרובות ולשמור על עקביות.
+- ‫**Nano Banana Pro ([Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=he))
+  (`gemini-3-pro-image`):** הבחירה המובחרת למשימות ויזואליות מורכבות ביותר, עם רמת הידע הכי גבוהה בעולם, לוקליזציה מתקדמת, עקביות מדויקת של המותג ושליטה מדויקת ביצירתיות.
+- ‫**Nano Banana ([Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=he))
+  (`gemini-2.5-flash-image`):** הגרסה הקודמת של Nano Banana.
+  המודל הזה היה אמין ושימושי, אבל אנחנו ממליצים ללקוחות לעבור ל-Nano Banana 2 Lite כדי ליהנות מאיכות משופרת, ממהירויות יצירה גבוהות יותר וממחירים נמוכים יותר של API.
 
-Toutes les images générées incluent un [filigrane SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=fr).
+כל התמונות שנוצרו כוללות [סימן מים של SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=he).
 
-## Génération d'images (texte vers image)
+## יצירת תמונות לפי טקסט
 
 ### Python
 
@@ -246,7 +245,7 @@ public class TextToImage {
 }
 ```
 
-### C#
+### C#‎
 
 ```
 using Google.GenAI;
@@ -298,15 +297,16 @@ curl -s -X POST \
   }'
 ```
 
-## Retouche d'images (texte et image vers image)
+## עריכת תמונות (יצירת תמונה לפי טקסט ותמונה)
 
-**Rappel** : Assurez-vous de disposer des droits nécessaires sur toutes les images que vous importez.
-Ne générez aucun contenu qui porte atteinte aux droits d'autrui, y compris des vidéos ou images trompeuses, ou qui harcèlent ou nuisent à autrui. L'utilisation de ce service d'IA générative est soumise à notre [Règlement sur les utilisations interdites](https://policies.google.com/terms/generative-ai/use-policy?hl=fr).
+**תזכורת**: לפני העלאת תמונה חשוב לוודא שיש לכם את הזכויות הנדרשות לשימוש בה.
+אסור ליצור תוכן שמפר את הזכויות של אנשים אחרים, כולל תמונות או סרטונים מטעים, מטרידים או פוגעים. השימוש שלך בשירות הזה של AI גנרטיבי כפוף [למדיניות שלנו בנושא שימוש אסור](https://policies.google.com/terms/generative-ai/use-policy?hl=he).
 
-Fournissez une image et utilisez des requêtes textuelles pour ajouter, supprimer ou modifier des éléments, changer le style ou ajuster la correction colorimétrique.
+מספקים תמונה ומשתמשים בהנחיות טקסט כדי להוסיף, להסיר או לשנות רכיבים,
+לשנות את הסגנון או להתאים את דירוג הצבעים.
 
-L'exemple suivant montre comment importer des images encodées au format `base64`.
-Pour en savoir plus sur les images multiples, les charges utiles plus importantes et les types MIME acceptés, consultez la page [Compréhension des images](https://ai.google.dev/gemini-api/docs/image-understanding?hl=fr).
+בדוגמה הבאה מוצגת העלאה של תמונות מקודדות בפורמט `base64`.
+למידע על כמה תמונות, מטען ייעודי גדול יותר וסוגי MIME נתמכים, אפשר לעיין בדף [הבנת תמונות](https://ai.google.dev/gemini-api/docs/image-understanding?hl=he).
 
 ### Python
 
@@ -487,7 +487,7 @@ public class TextAndImageToImage {
 }
 ```
 
-### C#
+### C#‎
 
 ```
 using Google.GenAI;
@@ -549,9 +549,9 @@ curl -s -X POST \
     }"
 ```
 
-### Édition d'images multitour
+### עריכת תמונות רב-שלבית
 
-Continuez à générer et à modifier des images de manière conversationnelle. Le chat ou la conversation multitour sont la méthode recommandée pour itérer sur les images. L'exemple suivant montre une requête permettant de générer une infographie sur la photosynthèse.
+ממשיכים ליצור ולערוך תמונות בשיחה. הדרך המומלצת לשפר את התמונות היא באמצעות שיחה ב-Chat או שיחה רב-שלבית. בדוגמה הבאה מוצג פרומפט ליצירת אינפוגרפיקה בנושא פוטוסינתזה.
 
 ### Python
 
@@ -722,7 +722,7 @@ public class MultiturnImageEditing {
 }
 ```
 
-### C#
+### C#‎
 
 ```
 using Google.GenAI;
@@ -783,11 +783,11 @@ curl -s -X POST \
   }'
 ```
 
-![Infographie générée par IA sur la photosynthèse](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=fr)
+![אינפוגרפיקה שנוצרה על ידי AI בנושא פוטוסינתזה](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=he)
 
-Infographie générée par IA sur la photosynthèse
+אינפוגרפיקה שנוצרה על ידי AI בנושא פוטוסינתזה
 
-Vous pouvez ensuite utiliser la même discussion pour modifier la langue du graphique et la passer en espagnol.
+אחר כך אפשר להשתמש באותו צ'אט כדי לשנות את השפה בגרפיקה לספרדית.
 
 ### Python
 
@@ -901,7 +901,7 @@ for (Part part : response.parts()) {
 }
 ```
 
-### C#
+### C#‎
 
 ```
 using Google.GenAI;
@@ -981,35 +981,36 @@ curl -s -X POST \
   }'
 ```
 
-![Infographie sur la photosynthèse générée par l'IA en espagnol](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=fr)
+![אינפוגרפיקה שנוצרה על ידי AI בנושא פוטוסינתזה בספרדית](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=he)
 
-Infographie sur la photosynthèse générée par IA en espagnol
+אינפוגרפיקה שנוצרה על ידי AI בנושא פוטוסינתזה בספרדית
 
-## Nouveautés des modèles d'images Gemini 3
+## חדש במודלים של Gemini 3 ליצירת תמונות
 
-Gemini 3 propose des modèles de pointe pour la génération et la retouche d'images. Gemini 3.1 Flash Image est optimisé pour la vitesse et les cas d'utilisation à fort volume, tandis que Gemini 3 Pro Image est optimisé pour la production d'assets professionnels.
-Conçus pour gérer les workflows les plus complexes grâce à un raisonnement avancé, ils excellent dans les tâches complexes de création et de modification multitour.
+‫Gemini 3 מציע מודלים המתקדמים ביותר (SOTA) ליצירה ולעריכה של תמונות. ‫Gemini 3.1 Flash Image מותאם למהירות ולתרחישי שימוש בכמויות גדולות, ו-Gemini 3 Pro Image מותאם ליצירת נכסים מקצועיים.
+הם נועדו להתמודד עם תהליכי העבודה המאתגרים ביותר באמצעות חשיבה רציונלית משופרת, והם מצטיינים במשימות מורכבות של יצירה ושינוי רב-שלביות.
 
-- **Sortie haute résolution** : fonctionnalités de génération intégrées pour les visuels 1K, 2K et 4K.
-  - **Gemini 3.1 Flash Image** ajoute la résolution plus petite de 512 pixels (0,5K).
-  - L'**image Gemini 3.1 Flash-Lite** n'est compatible qu'avec la résolution 1K.
-- **Rendu de texte avancé** : permet de générer du texte lisible et stylisé pour les infographies, les menus, les diagrammes et les supports marketing.
-- **Ancrage avec la recherche Google** : le modèle peut utiliser la recherche Google comme outil pour vérifier des faits et générer des images basées sur des données en temps réel (par exemple, des cartes météo actuelles, des graphiques boursiers ou des événements récents).
-  - **Non compatible avec le modèle Gemini 3.1 Flash Lite Image.**
-  - **Gemini 3.1 Flash Image** intègre l'ancrage avec la recherche Google pour les images et la recherche sur le Web.
-- **Mode Raisonnement** : le modèle utilise un processus de "réflexion" pour raisonner sur les requêtes complexes. Il génère des "images de réflexion" intermédiaires (visibles dans le backend, mais non facturées) pour affiner la composition avant de produire le résultat final de haute qualité.
-- **Jusqu'à 14 images de référence** : vous pouvez désormais combiner jusqu'à 14 images de référence pour générer l'image finale.
-- **Nouveaux formats** : Gemini 3.1 Flash Lite Image ajoute les [formats](#aspect_ratios_and_image_size) `1:1`, `3:2`, `2:3`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9` et `21:9`.
+- **פלט ברזולוציה גבוהה**: יכולות מובנות ליצירת תמונות ברזולוציות של 1K,‏ 2K ו-4K.
+  - **Gemini 3.1 Flash Image** מוסיף את הרזולוציה הקטנה יותר של 512 (0.5K).
+  - **תמונה של Gemini 3.1 Flash Lite** תומכת רק ברזולוציה של 1K.
+- **רינדור מתקדם של טקסט**: המערכת יכולה ליצור טקסט קריא ומעוצב לאינפוגרפיקות, לתפריטים, לדיאגרמות ולנכסי שיווק.
+- ‫**עיגון באמצעות חיפוש Google**: המודל יכול להשתמש בחיפוש Google ככלי לאימות עובדות וליצירת תמונות על סמך נתונים בזמן אמת (למשל, מפות מזג אוויר עדכניות, תרשימי מניות, אירועים מהזמן האחרון).
+  - **לא נתמך על ידי מודל התמונות Gemini 3.1 Flash Lite.**
+  - ‫**Gemini 3.1 Flash Image** מוסיף את השילוב של Grounding עם חיפוש Google לתמונות לצד חיפוש באינטרנט.
+- ‫**Thinking mode**: המודל משתמש בתהליך של 'חשיבה' כדי להסיק מסקנות מהנחיות מורכבות. הוא יוצר 'תמונות ביניים של מחשבות' (שגלויות בקצה העורפי אבל לא מחויבות) כדי לשפר את הקומפוזיציה לפני שהוא יוצר את הפלט הסופי האיכותי.
+- **עד 14 תמונות לדוגמה**: עכשיו אפשר לשלב עד 14 תמונות לדוגמה כדי ליצור את התמונה הסופית.
+- **יחסי גובה-רוחב חדשים**: מודל Gemini 3.1 Flash Lite Image מוסיף `1:1`, `3:2`,
+  `2:3`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9` [יחסי גובה-רוחב](#aspect_ratios_and_image_size).
 
-### Utiliser jusqu'à 14 images de référence
+### אפשר להשתמש בעד 14 תמונות לדוגמה
 
-Les modèles d'image Gemini 3 vous permettent de combiner jusqu'à 14 images de référence. Ces 14 images peuvent inclure les éléments suivants :
+מודלים של תמונות ב-Gemini 3 מאפשרים לכם לערבב עד 14 תמונות לדוגמה. 14 התמונות האלה יכולות לכלול:
 
-| Image Gemini 3.1 Flash-Lite | Image Gemini 3.1 Flash | Gemini 3 Pro Image |
+| תמונה של Gemini 3.1 Flash Lite | תמונה של Gemini 3.1 Flash | ‫Gemini 3 Pro Image |
 | --- | --- | --- |
-| Jusqu'à 14 images d'objets haute fidélité à inclure dans l'image finale | Jusqu'à 10 images d'objets haute fidélité à inclure dans l'image finale | Jusqu'à six images d'objets haute fidélité à inclure dans l'image finale |
-| N/A | Jusqu'à quatre images de personnages pour assurer leur cohérence | Jusqu'à cinq images de personnages pour assurer leur cohérence |
-| N/A | N/A | Jusqu'à trois images à utiliser comme références de style |
+| עד 14 תמונות של אובייקטים ברמת דיוק גבוהה שייכללו בתמונה הסופית | עד 10 תמונות של אובייקטים עם רמת דיוק גבוהה שייכללו בתמונה הסופית | עד 6 תמונות של אובייקטים ברמת דיוק גבוהה שייכללו בתמונה הסופית |
+| לא רלוונטי | עד 4 תמונות של דמויות כדי לשמור על עקביות הדמויות | עד 5 תמונות של דמויות כדי לשמור על עקביות הדמויות |
+| לא רלוונטי | לא רלוונטי | עד 3 תמונות שישמשו כדוגמאות לסגנון |
 
 ### Python
 
@@ -1248,7 +1249,7 @@ public class GroupPhoto {
 }
 ```
 
-### C#
+### C#‎
 
 ```
 using Google.GenAI;
@@ -1328,15 +1329,15 @@ curl -s -X POST \
     }"
 ```
 
-![Photo de groupe au bureau générée par l'IA](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=fr)
+![תמונה קבוצתית של עובדים במשרד שנוצרה על ידי AI](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=he)
 
-Photo de groupe au bureau générée par IA
+תמונה קבוצתית של עובדים במשרד שנוצרה על ידי AI
 
-### Ancrage avec la recherche Google
+### עיגון באמצעות חיפוש Google
 
-Utilise l'[outil de recherche Google](https://ai.google.dev/gemini-api/docs/google-search?hl=fr) pour générer des images basées sur des informations en temps réel, comme les prévisions météo, les graphiques boursiers ou les événements récents.
+אתם יכולים להשתמש ב[כלי חיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he) כדי ליצור תמונות על סמך מידע בזמן אמת, כמו תחזיות מזג אוויר, תרשימי מניות או אירועים מהזמן האחרון.
 
-Notez que lorsque vous utilisez l'ancrage avec la recherche Google pour générer des images, les résultats de recherche basés sur des images ne sont pas transmis au modèle de génération et sont exclus de la réponse (voir [Ancrer avec la recherche Google pour les images](#image-search)).
+שימו לב: כשמשתמשים בעיגון באמצעות חיפוש Google ליצירת תמונות, תוצאות החיפוש שמבוססות על תמונות לא מועברות למודל הגנרטיבי ולא נכללות בתשובה (ראו [עיגון באמצעות חיפוש Google לתמונות](#image-search)).
 
 ### Python
 
@@ -1461,7 +1462,7 @@ public class SearchGrounding {
 }
 ```
 
-### C#
+### C#‎
 
 ```
 using Google.GenAI;
@@ -1525,22 +1526,22 @@ curl -s -X POST \
   }'
 ```
 
-![Graphique météo sur cinq jours généré par IA pour San Francisco](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=fr)
+![תרשים מזג אוויר לחמישה ימים בסן פרנסיסקו שנוצר על ידי AI](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=he)
 
-Tableau météo sur cinq jours généré par l'IA pour San Francisco
+תרשים מזג אוויר לחמישה ימים בסן פרנסיסקו שנוצר על ידי AI
 
-La réponse inclut `groundingMetadata`, qui contient les champs obligatoires suivants :
+התשובה כוללת את `groundingMetadata` שמכיל את השדות הנדרשים הבאים:
 
-- **`searchEntryPoint`** : contient le code HTML et CSS permettant d'afficher les suggestions de recherche requises.
-- **`groundingChunks`** : renvoie les trois principales sources Web utilisées pour ancrer l'image générée.
+- ‫**`searchEntryPoint`**: מכיל את ה-HTML ואת ה-CSS לעיבוד הצעות החיפוש הנדרשות.
+- ‫**`groundingChunks`**: מחזירה את 3 המקורות המובילים באינטרנט ששימשו להארקה של התמונה שנוצרה
 
-### Ancrage avec la recherche Google pour les images (3.1 Flash)
+### עיגון באמצעות חיפוש Google לתמונות (3.1 Flash)
 
-L'ancrage avec la recherche Google pour les images permet aux modèles d'utiliser les images Web récupérées via la recherche Google comme contexte visuel pour la génération d'images. La recherche d'images est un nouveau type de recherche au sein de l'outil existant d'ancrage avec la recherche Google. Elle fonctionne en parallèle de la [recherche sur le Web](#use-with-grounding) standard.
+עיגון באמצעות חיפוש Google לתמונות מאפשר למודלים להשתמש בתמונות מהאינטרנט שאוחזרו באמצעות חיפוש Google כהקשר חזותי ליצירת תמונות. חיפוש תמונות הוא סוג חיפוש חדש בכלי הקיים 'עיגון באמצעות חיפוש Google', והוא פועל לצד [חיפוש Google](#use-with-grounding).
 
-Pour activer la recherche d'images, configurez l'outil `googleSearch` dans votre requête d'API et spécifiez `imageSearch` dans l'objet `searchTypes`. La recherche d'images peut être utilisée indépendamment ou en même temps que la recherche sur le Web.
+כדי להפעיל את חיפוש התמונות, צריך להגדיר את הכלי `googleSearch` בבקשת ה-API ולציין את `imageSearch` באובייקט `searchTypes`. אפשר להשתמש בחיפוש תמונות בנפרד או יחד עם חיפוש באינטרנט.
 
-Notez que l'ancrage avec la recherche Google pour les images ne peut pas être utilisé pour rechercher des personnes.
+הערה: אי אפשר להשתמש בעיגון באמצעות חיפוש Google כדי לחפש אנשים.
 
 ### Python
 
@@ -1704,7 +1705,7 @@ public class ImageSearchGrounding {
 }
 ```
 
-### C#
+### C#‎
 
 ```
 using Google.GenAI;
@@ -1767,33 +1768,34 @@ curl -s -X POST \
   }'
 ```
 
-**Conditions requises pour l'affichage**
+**דרישות להצגה**
 
-Lorsque vous utilisez la recherche d'images dans l'ancrage avec la recherche Google, vous devez respecter les conditions suivantes :
+כשמשתמשים בחיפוש תמונות במסגרת עיגון באמצעות חיפוש Google, צריך לפעול בהתאם לתנאים הבאים:
 
-- **Attribution de la source** : vous devez fournir un lien vers la page Web contenant l'image source (la "page contenant l'image", et non le fichier image lui-même) de manière à ce que l'utilisateur puisse l'identifier comme un lien.
-- **Navigation directe** : si vous choisissez également d'afficher les images sources, vous devez fournir un chemin d'accès direct en un seul clic depuis les images sources vers la page Web source qui les contient. Toute autre implémentation qui retarde ou abstrait l'accès de l'utilisateur final à la page Web source, y compris, mais sans s'y limiter, tout chemin à plusieurs clics ou l'utilisation d'une visionneuse d'images intermédiaire, n'est pas autorisée.
+- **ציון המקור**: אתם צריכים לספק קישור לדף האינטרנט שבו נמצאת תמונת המקור ('הדף המכיל', לא קובץ התמונה עצמו) באופן שהמשתמש יזהה כקישור.
+- **ניווט ישיר**: אם בחרתם גם להציג את תמונות המקור, אתם צריכים לספק נתיב ישיר בלחיצה אחת מתמונות המקור לדף האינטרנט המכיל שלהן. אסור להשתמש בהטמעה אחרת שמעכבת או מסתירה את הגישה של משתמש הקצה לדף האינטרנט המקורי, כולל, בין היתר, נתיב שכולל כמה קליקים או שימוש בכלי ביניים לצפייה בתמונות.
 
-**Réponse**
+**תשובה**
 
-Pour les réponses ancrées utilisant la recherche d'images, l'API fournit une attribution et des métadonnées claires pour associer sa sortie à des sources validées. Voici les principaux champs de l'objet `groundingMetadata` :
+כדי להציג תשובות מבוססות-מקור באמצעות חיפוש תמונות, ה-API מספק שיוך ברור ומטא-נתונים כדי לקשר את הפלט שלו למקורות מאומתים. שדות המפתח באובייקט `groundingMetadata` כוללים:
 
-- **`imageSearchQueries`** : requêtes spécifiques utilisées par le modèle pour le contexte visuel (recherche d'images).
-- **`groundingChunks`** : contient des informations sur la source des résultats récupérés.
-  Pour les sources d'images, elles seront renvoyées sous forme d'URL de redirection à l'aide d'un nouveau type de bloc d'image. Ce bloc comprend :
+- ‫**`imageSearchQueries`**: השאילתות הספציפיות שבהן המודל משתמש כדי להבין את ההקשר החזותי (חיפוש תמונות).
+- ‫**`groundingChunks`**: מכיל מידע על המקור של התוצאות שאוחזרו.
+  במקורות תמונות, כתובות ה-URL האלה יוחזרו ככתובות URL להפניה אוטומטית באמצעות סוג חדש של נתח תמונה. החלק הזה כולל:
 
-  - **`uri`** : URL de la page Web pour l'attribution (page de destination).
-  - **`image_uri`** : URL directe de l'image.
-- **`groundingSupports`** : fournit des mappages spécifiques qui associent le contenu généré à sa source de citation pertinente dans les blocs.
-- **`searchEntryPoint`** : inclut le chip "Recherche Google" contenant du code HTML et CSS conforme pour afficher les suggestions de recherche.
+  - ‫**`uri`**: כתובת ה-URL של דף האינטרנט לצורך שיוך (דף הנחיתה).
+  - ‫**`image_uri`**: כתובת ה-URL הישירה של התמונה.
+- ‫**`groundingSupports`**: מספק מיפויים ספציפיים שמקשרים את התוכן שנוצר למקור הציטוט הרלוונטי שלו בחלקים.
+- ‫**`searchEntryPoint`**: כולל את הצ'יפ 'חיפוש Google' שמכיל HTML ו-CSS תואמים לעיבוד של הצעות לחיפוש.
 
-### Génération d'images à partir de vidéos (3.1 Flash)
+### יצירת תמונות מסרטונים (3.1 Flash)
 
-La génération d'images à partir de vidéos vous permet de créer des images en utilisant le contexte d'une vidéo comme référence multimodale. Cela est utile pour créer des miniatures vidéo de haute qualité, des affiches de films, des infographies récapitulatives ou de nouvelles illustrations inspirées d'une scène vidéo.
+יצירת תמונות מסרטונים מאפשרת ליצור תמונות חדשות באמצעות ההקשר של סרטון כהפניה מרובת-אופנים. התכונה הזו שימושית ליצירת תמונות ממוזערות באיכות גבוהה לסרטונים, פוסטרים בסגנון קולנועי, אינפוגרפיקות סיכום או יצירות אומנות חדשות בהשראת סצנה מסרטון.
 
-Lors de la génération, le modèle analyse les images vidéo dans leur contexte (jusqu'à la limite de jetons d'entrée du modèle, soit 131 072 jetons) pour extraire les thèmes visuels et les événements clés. Il les utilise ensuite avec votre requête textuelle pour synthétiser l'image de sortie.
+במהלך היצירה, המודל מנתח את מסגרות הסרטון בהקשר (עד למגבלת טוקנים של 131,072 טוקנים של המודל), כדי לחלץ נושאים חזותיים ואירועים מרכזיים, ואז משתמש בהם לצד הנחיית הטקסט כדי לסנתז את תמונת הפלט.
 
-Vous pouvez transmettre des [URL YouTube](https://ai.google.dev/gemini-api/docs/video-understanding?hl=fr#youtube) publiques directement dans votre requête d'API ou importer des fichiers vidéo locaux à l'aide de l'[API Files](https://ai.google.dev/gemini-api/docs/files?hl=fr).
+אפשר להעביר [כתובות URL ציבוריות של סרטונים ב-YouTube](https://ai.google.dev/gemini-api/docs/video-understanding?hl=he#youtube)
+ישירות בבקשת ה-API או להעלות קובצי וידאו מקומיים באמצעות [Files API](https://ai.google.dev/gemini-api/docs/files?hl=he).
 
 ### Python
 
@@ -1978,7 +1980,7 @@ public class VideoToImage {
 }
 ```
 
-### C#
+### C#‎
 
 ```
 using Google.GenAI;
@@ -2049,15 +2051,15 @@ curl -s -X POST \
   }'
 ```
 
-![Infographie générée par IA à partir d'une vidéo YouTube](https://ai.google.dev/static/gemini-api/docs/images/youtube_infographics.png?hl=fr)
+![אינפוגרפיקה שנוצרה על ידי AI מסרטון ב-YouTube](https://ai.google.dev/static/gemini-api/docs/images/youtube_infographics.png?hl=he)
 
-Infographie générée par IA à partir d'une vidéo YouTube
+אינפוגרפיקה שנוצרה על ידי AI מתוך סרטון ב-YouTube
 
-### Générer des images jusqu'à la résolution 4K
+### יצירת תמונות ברזולוציה של עד 4K
 
-Les modèles d'images Gemini 3 génèrent 1 000 images par défaut, mais peuvent également générer des images de 2 000, 4 000 et 512 pixels (0,5 K) (Gemini 3.1 Flash Image uniquement). Pour générer des composants de résolution supérieure, spécifiez `image_size` dans `generation_config`.
+מודלים של Gemini 3 ליצירת תמונות יוצרים כברירת מחדל תמונות באיכות 1K, אבל יכולים גם ליצור תמונות באיכות 2K, ‏ 4K ו-512 (0.5K) (רק ב-Gemini 3.1 Flash Image). כדי ליצור נכסים ברזולוציה גבוהה יותר, מציינים את `image_size` ב-`generation_config`.
 
-Vous devez utiliser un "K" en majuscule (par exemple, 1K, 2K, 4K). La valeur `512` n'utilise pas de suffixe "K". Les paramètres en minuscules (par exemple, 1k) seront refusés.
+חובה להשתמש באות K גדולה (לדוגמה: 1K, ‏ 2K, ‏ 4K). הערך של `512` לא מסתיים בסיומת 'K'. פרמטרים באותיות קטנות (למשל, 1k) יידחו.
 
 ### Python
 
@@ -2232,7 +2234,7 @@ public class HiRes {
 }
 ```
 
-### C#
+### C#‎
 
 ```
 using Google.GenAI;
@@ -2296,19 +2298,19 @@ curl -s -X POST \
   }'
 ```
 
-Voici un exemple d'image générée à partir de cette requête :
+זוהי תמונה לדוגמה שנוצרה מההנחיה הזו:
 
-![Croquis anatomique d'un monarque disséqué, dans le style de Léonard de Vinci, généré par IA.](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=fr)
+![סקיצה אנטומית בסגנון דה וינצ'י של דנאית מלכותית מנותחת, שנוצרה על ידי AI.](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=he)
 
-Dessin anatomique d'un papillon monarque disséqué, généré par IA dans le style de Léonard de Vinci.
+סקיצה אנטומית בסגנון דה וינצ'י של פרפר דנאית מלכותית מפורק שנוצרה על ידי AI.
 
-### Processus de raisonnement
+### תהליך החשיבה
 
-Les modèles d'images Gemini 3 sont des modèles de réflexion qui utilisent un processus de raisonnement ("Réflexion") pour les requêtes complexes. Cette fonctionnalité est activée par défaut et ne peut pas être désactivée dans l'API. Pour en savoir plus sur le processus de réflexion, consultez le guide [Réflexion de Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=fr).
+מודלים של Gemini 3 ליצירת תמונות הם מודלים עם יכולות מתקדמות שמשתמשים בתהליך חשיבה רציונלית ("Thinking") כדי לענות על פרומפטים מורכבים. התכונה הזו מופעלת כברירת מחדל ואי אפשר להשבית אותה ב-API. מידע נוסף על תהליך החשיבה זמין במדריך [תהליך החשיבה של Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=he).
 
-Le modèle génère jusqu'à deux images intermédiaires pour tester la composition et la logique. La dernière image de la section "Réflexion" est également l'image finale rendue.
+המודל יוצר עד שתי תמונות ביניים כדי לבדוק את הקומפוזיציה והלוגיקה. התמונה האחרונה בתהליך החשיבה היא גם התמונה הסופית שעברה רינדור.
 
-Vous pouvez consulter les réflexions qui ont conduit à la production de l'image finale.
+אתם יכולים לבדוק את המחשבות שהובילו ליצירת התמונה הסופית.
 
 ### Python
 
@@ -2356,7 +2358,7 @@ for (Part part : response.parts()) {
 }
 ```
 
-### C#
+### C#‎
 
 ```
 foreach (var candidate in response.Candidates) {
@@ -2374,11 +2376,11 @@ foreach (var candidate in response.Candidates) {
 }
 ```
 
-#### Contrôler les niveaux de réflexion
+#### שליטה ברמות החשיבה
 
-Avec Gemini 3.1 Flash Image et Gemini 3.1 Flash Lite Image, vous pouvez contrôler la quantité de réflexion utilisée par le modèle pour équilibrer la qualité et la latence. La valeur par défaut de `thinkingLevel` est `minimal`, et les niveaux acceptés sont `minimal` et `high`. Définir `thinkingLevel` sur `minimal` permet d'obtenir les réponses avec la latence la plus faible. Notez que la pensée minimale ne signifie pas que le modèle ne réfléchit pas du tout.
+עם Gemini 3.1 Flash Image ו-Gemini 3.1 Flash Lite Image, אתם יכולים לשלוט בכמות החשיבה שהמודל משתמש בה כדי לאזן בין איכות לבין זמן האחזור. ערך ברירת המחדל `thinkingLevel` הוא `minimal`, והרמות הנתמכות הן `minimal` ו-`high`. הגדרת הערך של `thinkingLevel` ל-`minimal` מספקת את התשובות עם זמן האחזור הנמוך ביותר. חשוב לציין שחשיבה מינימלית לא אומרת שהמודל לא משתמש בחשיבה בכלל.
 
-Vous pouvez ajouter le booléen `includeThoughts` pour déterminer si les réflexions générées par le modèle sont renvoyées dans la réponse ou restent masquées.
+אפשר להוסיף את הערך הבוליאני `includeThoughts` כדי לקבוע אם המחשבות שנוצרו על ידי המודל יוחזרו בתשובה או יישארו מוסתרות.
 
 ### Python
 
@@ -2549,7 +2551,7 @@ public class ThinkingLevels {
 }
 ```
 
-### C#
+### C#‎
 
 ```
 using Google.GenAI;
@@ -2617,19 +2619,20 @@ curl -s -X POST \
   }'
 ```
 
-Notez que les jetons de réflexion sont facturés, que `includeThoughts` soit défini sur `true` ou `false`, car le [processus de réflexion](#thinking-process) a toujours lieu par défaut, que vous le consultiez ou non.
+חשוב לזכור: החיוב על אסימוני חשיבה מתבצע בלי קשר להגדרה של `includeThoughts` (`true` או `false`), כי [תהליך החשיבה](#thinking-process) תמיד מתבצע כברירת מחדל, גם אם אתם לא צופים בתהליך.
 
-#### Signatures de réflexion
+#### חתימות של מחשבות
 
-Les signatures de pensée sont des représentations chiffrées du processus de réflexion interne du modèle. Elles sont utilisées pour préserver le contexte de raisonnement lors des interactions multitours. Toutes les réponses incluent un champ `thought_signature`. En règle générale, si vous recevez une signature de pensée dans une réponse du modèle, vous devez la renvoyer exactement telle qu'elle a été reçue lorsque vous envoyez l'historique des conversations au tour suivant. Si les signatures de pensée ne sont pas diffusées, la réponse peut échouer. Pour en savoir plus sur les signatures en général, consultez la documentation sur la [signature de pensée](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=fr).
+חתימות מחשבה הן ייצוגים מוצפנים של תהליך החשיבה הפנימי של המודל, והן משמשות לשמירה על הקשר של הנימוקים באינטראקציות מרובות. כל התשובות כוללות את השדה `thought_signature`. ככלל, אם אתם מקבלים חתימה של מחשבה בתשובה של מודל, אתם צריכים להעביר אותה בדיוק כמו שהיא התקבלה כשאתם שולחים את היסטוריית השיחות בתור הבא. אם לא יופצו חתימות מחשבה, יכול להיות שהתשובה תיכשל. במאמר בנושא [חתימת מחשבה](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=he) יש הסברים נוספים על חתימות באופן כללי.
 
-Voici comment fonctionnent les signatures de pensée :
+כך פועלות חתימות מחשבה:
 
-- Toutes les parties `inline_data` avec l'image `mimetype` qui font partie de la réponse doivent comporter une signature.
-- S'il y a des parties de texte au début (avant toute image) juste après les pensées, la première partie de texte doit également avoir une signature.
-- Si des parties `inline_data` avec l'image `mimetype` font partie de réflexions, elles n'auront pas de signatures.
+- לכל `inline_data` החלקים עם התמונה `mimetype` שהם חלק מהתשובה צריכה להיות חתימה.
+- אם יש חלקים של טקסט בהתחלה (לפני כל תמונה) מיד אחרי
+  המחשבות, גם לחלק הטקסט הראשון צריכה להיות חתימה.
+- אם `inline_data` חלקים עם תמונה `mimetype` הם חלק ממחשבות, לא יהיו להם חתימות.
 
-Le code suivant montre un exemple d'emplacement des signatures de pensée :
+בדוגמה הבאה אפשר לראות איפה נכללים חתימות המחשבה:
 
 ```
 [
@@ -2689,179 +2692,180 @@ Le code suivant montre un exemple d'emplacement des signatures de pensée :
 ]
 ```
 
-## Autres modes de génération d'images
+## מצבים אחרים ליצירת תמונות
 
-Gemini est compatible avec d'autres modes d'interaction avec les images en fonction de la structure et du contexte de la requête, y compris :
+‫Gemini תומך במצבי אינטראקציה אחרים עם תמונות על סמך מבנה ההנחיה וההקשר, כולל:
 
-- **Texte vers image(s) et texte (entrelacé)** : génère des images avec du texte associé.
-  - Exemple de requête : "Génère une recette illustrée de paella."
-- **Image(s) et texte vers image(s) et texte (entrelacés)** : utilise des images et du texte en entrée pour créer de nouvelles images et du texte associés.
-  - Exemple de requête : (avec l'image d'une pièce meublée) "Quelles autres couleurs de canapés conviendraient dans ma pièce ? Peux-tu modifier l'image ?"
+- **טקסט לתמונה(או לתמונות) וטקסט (משולב):** יצירת תמונות עם טקסט שקשור אליהן.
+  - הנחיה לדוגמה: "צור מתכון מאויר לפאייה".
+- **תמונה/תמונות וטקסט לתמונה/תמונות וטקסט (משולבים)**: משתמש בתמונות ובטקסט שמוזנים כדי ליצור תמונות וטקסט חדשים שקשורים אליהם.
+  - פרומפט לדוגמה: (עם תמונה של חדר מרוהט) "אילו ספות בצבעים אחרים יתאימו לחדר שלי? אפשר לעדכן את התמונה?"
 
-## Générer des images par lot
+## יצירה של קבוצת תמונות
 
-Si vous devez générer de nombreuses images, vous pouvez utiliser l'[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr). Vous bénéficiez de [limites de fréquence](https://ai.google.dev/gemini-api/docs/rate-limits?hl=fr) plus élevées en échange d'un délai de traitement pouvant aller jusqu'à 24 heures.
+אם אתם צריכים ליצור הרבה תמונות, אתם יכולים להשתמש ב-[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he). בתמורה לזמן טיפול של עד 24 שעות, תקבלו [מגבלות קצב](https://ai.google.dev/gemini-api/docs/rate-limits?hl=he) גבוהות יותר.
 
-Consultez la [documentation sur la génération d'images avec l'API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr#image-generation) et le [cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=fr) pour obtenir des exemples d'images et de code avec l'API Batch.
+כדי לראות דוגמאות וקוד של תמונות שנוצרו באמצעות Batch API, אפשר לעיין ב[מאמרי העזרה של Batch API ליצירת תמונות](https://ai.google.dev/gemini-api/docs/batch-api?hl=he#image-generation) וב[אוסף פתרונות](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=he).
 
-## Guide et stratégies de requête
+## מדריך לכתיבת פרומפטים ואסטרטגיות
 
-Pour maîtriser la génération d'images, vous devez d'abord comprendre un principe fondamental :
+כדי ליצור תמונות באמצעות AI, צריך להבין עיקרון בסיסי אחד:
 
-> **Décrivez la scène, ne vous contentez pas de lister des mots clés.**
-> La principale force du modèle réside dans sa compréhension approfondie du langage. Un paragraphe descriptif et narratif produira presque toujours une image de meilleure qualité et plus cohérente qu'une liste de mots isolés.
+> **צריך לתאר את הסצנה, לא רק לכלול רשימה של מילות מפתח.**
+> החוזקה העיקרית של המודל היא ההבנה העמוקה שלו של השפה. פסקה נרטיבית ותיאורית כמעט תמיד תניב תמונה טובה ועקבית יותר מרשימה של מילים לא קשורות.
 
-### Requêtes pour générer des images
+### פרומפטים ליצירת תמונות
 
-Les stratégies suivantes vous aideront à créer des requêtes efficaces pour générer exactement les images que vous recherchez.
+השיטות הבאות יעזרו לכם ליצור הנחיות יעילות כדי ליצור בדיוק את התמונות שאתם מחפשים.
 
-#### Photographie
+#### צילום
 
-Pour obtenir des images réalistes, utilisez des termes de photographie. Mentionnez les angles de caméra, les types d'objectif, l'éclairage et les détails pour guider le modèle vers un résultat réaliste.
+כדי ליצור תמונות ריאליסטיות, כדאי להשתמש במונחים מעולם הצילום. כדי להנחות את המודל ליצור תוצאה ריאליסטית, כדאי לציין זוויות צילום, סוגי עדשות, תאורה ופרטים קטנים.
 
-| **Prompt** (Requête) | **Résultat généré** |
+| **פרומפט** | **פלט שנוצר באמצעות AI** |
 | --- | --- |
-| Photo en gros plan d'un céramiste japonais âgé, au visage ridé par le soleil et au sourire chaleureux et complice. Il examine attentivement un bol à thé fraîchement émaillé. L'action se déroule dans son atelier rustique et ensoleillé. La scène est éclairée par la lumière douce de l'heure dorée qui entre par une fenêtre, mettant en valeur la texture fine de l'argile. L'image doit être capturée avec un objectif pour portrait de 85 mm, ce qui donne un arrière-plan flou et doux (bokeh). L'ambiance générale est sereine et magistrale. Orientation portrait verticale. | Céramiste japonais âgé |
+| תמונה של פורטרט בתקריב של אמן קרמיקה יפני מבוגר עם קמטים עמוקים שנוצרו מחשיפה לשמש וחיוך חם ומבין. הוא בודק בקפידה קערת תה חדשה עם זיגוג. הרקע הוא סדנה כפרית שטופת שמש. הסצנה מוארת בתאורה רכה של שעת הזהב שנכנסת דרך חלון ומבליטה את המרקם העדין של החמר. צולם בעדשת פורטרט של 85 מ"מ, והתוצאה היא רקע רך ומטושטש (אפקט בוקה). האווירה הכללית היא שלווה ומקצועית. כיוון לאורך. | קדר יפני מבוגר |
 
-#### Illustrations et autocollants stylisés
+#### איורים וסטיקרים מעוצבים
 
-Pour créer des autocollants, des icônes ou des composants, soyez explicite sur le style et demandez un arrière-plan blanc.
+כדי ליצור סטיקרים, סמלים או נכסים, צריך לציין במפורש את הסגנון ולבקש רקע לבן.
 
-| **Prompt** (Requête) | **Résultat généré** |
+| **פרומפט** | **פלט שנוצר באמצעות AI** |
 | --- | --- |
-| Autocollant de style kawaii représentant un panda roux joyeux portant un petit chapeau de bambou. Il est en train de manger une feuille de bambou verte. Le design se caractérise par des contours épais et nets, une simple technique de cel-shading et une palette de couleurs vives. L'arrière-plan doit être blanc. | Autocollant panda roux kawaii |
+| סטיקר בסגנון קוואי של פנדה אדומה שמחה שעוטה כובע קטן מבמבוק. הוא לועס עלה במבוק ירוק. העיצוב כולל קווי מתאר בולטים ונקיים, הצללה פשוטה ופלטת צבעים עשירה. הר רקע חייב להיות לבן. | סטיקר של פנדה אדומה בסגנון קוואיי |
 
-#### Texte précis dans les images
+#### טקסט מדויק בתמונות
 
-Gemini excelle dans le rendu de texte. Décrivez clairement le texte, le style de police et la conception globale. Utilisez Gemini 3 Pro Image pour produire des assets professionnels.
+‫Gemini מצטיין ברינדור טקסט. חשוב לתת הנחיות ברורות לגבי הטקסט, סגנון הגופן (תיאורית) והעיצוב הכללי. שימוש ב-Gemini 3 Pro Image ליצירת נכסים מקצועיים.
 
-| **Prompt** (Requête) | **Résultat généré** |
+| **פרומפט** | **פלט שנוצר באמצעות AI** |
 | --- | --- |
-| Crée un logo moderne et minimaliste pour un café appelé "The Daily Grind". Le texte doit être écrit dans une police Sans Serif propre et en gras. La palette de couleurs est en noir et blanc. Placez le logo dans un cercle. Utilise un grain de café de manière astucieuse. | Logo de café |
+| צור לוגו מודרני ומינימליסטי לבית קפה בשם The Daily Grind. הטקסט צריך להיות בגופן sans-serif נקי ומודגש. ערכת הצבעים היא שחור ולבן. מכניסים את הלוגו לעיגול. תשתמש בפולי קפה בצורה חכמה. | לוגו של בית קפה |
 
-#### Maquettes de produits et photographie commerciale
+#### מודלים של מוצרים וצילום מסחרי
 
-Idéal pour créer des photos de produits claires et professionnelles pour l'e-commerce, la publicité ou le branding.
+מושלם ליצירת צילומי מוצר נקיים ומקצועיים למסחר אלקטרוני, לפרסום או למיתוג.
 
-| **Prompt** (Requête) | **Résultat généré** |
+| **פרומפט** | **פלט שנוצר באמצעות AI** |
 | --- | --- |
-| Photo de produit en haute résolution et éclairée en studio montrant une tasse à café minimaliste en céramique noire mate, présentée sur une surface en béton poli. L'éclairage est une configuration à trois points avec boîte à lumière conçue pour créer des lumières douces et diffuses, et éliminer les ombres trop marquées. L'angle de la caméra est légèrement surélevé à 45 degrés pour mettre en valeur ses lignes épurées. Ultra-réaliste, avec une mise au point nette sur la vapeur qui s'échappe du café. Image carrée. | Photo de produit d'une tasse à café en céramique |
+| צילום מוצר ברזולוציה גבוהה עם תאורת סטודיו של ספל קפה מקרמיקה שחורה מט, שמוצג על משטח בטון מלוטש. התאורה היא מערך של שלושה סופטבוקסים שנועד ליצור אזורים בהירים רכים ומפוזרים ולמנוע צללים חדים. זווית המצלמה היא צילום קצת מוגבה בזווית של 45 מעלות, כדי להציג את הקווים הנקיים של המכשיר. תמונה אולטרה-ריאליסטית עם פוקוס חד על האדים שעולים מהקפה. תמונה ריבועית. | תמונת מוצר של ספל קפה מקרמיקה |
 
-#### Design minimaliste et espace négatif
+#### עיצוב מינימליסטי עם שטח ריק
 
-Idéal pour créer des arrière-plans pour des sites Web, des présentations ou des supports marketing sur lesquels du texte sera superposé.
+אפשר ליצור איתה רקעים מצוינים לאתרים, למצגות או לחומרי שיווק שיוצג עליהם טקסט.
 
-| **Prompt** (Requête) | **Résultat généré** |
+| **פרומפט** | **פלט שנוצר באמצעות AI** |
 | --- | --- |
-| Composition minimaliste avec une seule et délicate feuille d'érable rouge placée en bas à droite du cadre. L'arrière-plan est une vaste toile blanc cassé vide, créant un espace négatif important pour le texte. Éclairage doux et diffus en haut à gauche. Image carrée. | Design minimaliste avec une feuille d'érable rouge |
+| קומפוזיציה מינימליסטית שכוללת עלה מייפל אדום אחד ועדין שממוקם בפינה הימנית התחתונה של הפריים. הר רקע הוא קנבס גדול וריק בצבע שמנת, שיוצר שטח שלילי משמעותי לטקסט. תאורה רכה ומפוזרת מהפינה השמאלית העליונה. תמונה ריבועית. | עיצוב מינימליסטי עם עלה מייפל אדום |
 
-#### Art séquentiel (bande dessinée / storyboard)
+#### אומנות רציפה (פאנל קומיקס / סטוריבורד)
 
-S'appuie sur la cohérence des personnages et la description des scènes pour créer des panneaux de narration visuelle. Pour obtenir des résultats précis avec du texte et des capacités de narration, ces requêtes fonctionnent mieux avec Gemini 3.1 Pro et Gemini 3.1 Flash Image.
+הוא מתבסס על עקביות הדמויות ותיאור הסצנה כדי ליצור חלוניות לסיפור חזותי. כדי לקבל תוצאות מדויקות עם טקסט ויכולת סיפור סיפורים, ההנחיות האלה פועלות הכי טוב עם Gemini 3.1 Pro ו-Gemini 3.1 Flash Image.
 
-| **Prompt** (Requête) | **Résultat généré** |
+| **פרומפט** | **פלט שנוצר באמצעות AI** |
 | --- | --- |
-| **Image d'entrée** :  Homme portant des lunettes blanches   Image d'entrée   **Requête** : Crée une bande dessinée en trois cases dans un style artistique noir et réaliste, avec des encres en noir et blanc à fort contraste. Place le personnage dans une scène humoristique. | Bande dessinée noire et réaliste |
+| **תמונת קלט:**  גבר עם משקפיים לבנים   תמונת קלט   **הנחיה:** תיצור קומיקס עם 3 פאנלים בסגנון אמנות נואר קשוח עם דיו שחור ולבן בניגודיות גבוהה. הכנסת הדמות לסצנה הומוריסטית. | לוח קומיקס בסגנון נואר קשוח |
 
-#### Ancrage avec la recherche Google
+#### עיגון באמצעות חיפוש Google
 
-Utilisez la recherche Google pour générer des images basées sur des informations récentes ou en temps réel.
-Cela est utile pour les actualités, la météo et d'autres sujets urgents.
+אפשר להשתמש בחיפוש Google כדי ליצור תמונות על סמך מידע עדכני או מידע בזמן אמת.
+האפשרות הזו שימושית לחדשות, למזג האוויר ולנושאים אחרים שרלוונטיים לזמן מסוים.
 
-| **Prompt** (Requête) | **Résultat généré** |
+| **פרומפט** | **פלט שנוצר באמצעות AI** |
 | --- | --- |
-| Crée un graphique simple, mais élégant, du match d'Arsenal d'hier soir en Ligue des champions. | Graphique des scores de football d'Arsenal |
+| תיצור גרפיקה פשוטה אבל מסוגננת של משחק ארסנל בליגת האלופות מאתמול בלילה | גרפיקה של תוצאת משחק כדורגל של ארסנל |
 
-### Requêtes pour modifier des images
+### הנחיות לעריכת תמונות
 
-Ces exemples montrent comment fournir des images en plus de vos requêtes textuelles pour l'édition, la composition et le transfert de style.
+בדוגמאות האלה מוסבר איך להוסיף תמונות לצד הנחיות טקסט כדי לערוך תמונות, לשנות את הקומפוזיציה שלהן ולהעביר סגנונות.
 
-#### Ajouter et supprimer des éléments
+#### הוספה והסרה של רכיבים
 
-Fournissez une image et décrivez votre modification. Le modèle correspondra au style, à la luminosité et à la perspective de l'image d'origine.
+מספקים תמונה ומתארים את השינוי. המודל יתאים את הסגנון, התאורה והפרספקטיבה של התמונה המקורית.
 
-| **Prompt** (Requête) | **Résultat généré** |
+| **פרומפט** | **פלט שנוצר באמצעות AI** |
 | --- | --- |
-| **Image d'entrée** :  Image photoréaliste d'un chat roux et duveteux…   Image d'entrée   **Requête** : À partir de l'image fournie de mon chat, veuillez ajouter un petit chapeau de sorcier tricoté sur sa tête. Faites en sorte qu'il semble assis confortablement et que l'éclairage corresponde à celui de la photo. | Chat avec un chapeau de sorcier |
+| **תמונת קלט:**  תמונה פוטו-ריאליסטית של חתול ג'ינג'י פרוותי…   תמונת קלט   **הנחיה:** באמצעות התמונה שסיפקתי של החתול שלי, תוסיף בבקשה כובע קטן סרוג של קוסם על הראש שלו. תגרום לזה להיראות כאילו הוא יושב בנוחות ומתאים לתאורה הרכה של התמונה. | חתול עם כובע מכשפים |
 
-#### Inpainting (masquage sémantique)
+#### ציור ומחיקה (סימון סמנטי)
 
-Définissez de manière conversationnelle un "masque" pour modifier une partie spécifique d'une image tout en laissant le reste intact.
+אפשר להגדיר 'מסכה' בשיחה כדי לערוך חלק ספציפי בתמונה בלי לשנות את שאר התמונה.
 
-| **Prompt** (Requête) | **Résultat généré** |
+| **פרומפט** | **פלט שנוצר באמצעות AI** |
 | --- | --- |
-| **Image d'entrée** :  Un plan large d'un salon moderne et bien éclairé…   Image d'entrée   **Requête** : À partir de l'image fournie d'un salon, remplace uniquement le canapé bleu par un canapé Chesterfield vintage en cuir marron. Ne modifiez pas le reste de la pièce, y compris les coussins sur le canapé et l'éclairage. | Salle de séjour avec un canapé en cuir marron |
+| **תמונת קלט:**  צילום רחב של סלון מודרני ומואר היטב…   תמונת קלט   **הנחיה:** באמצעות התמונה שסופקה של סלון, תשנה רק את הספה הכחולה לספה בסגנון וינטג', ספת צ'סטרפילד מעור חום. משאירים את שאר החדר ללא שינוי, כולל הכריות על הספה והתאורה. | סלון עם ספת עור חומה |
 
-#### Transfert de style
+#### העברת סגנון
 
-Fournissez une image et demandez au modèle de recréer son contenu dans un autre style artistique.
+מספקים תמונה ומבקשים מהמודל ליצור מחדש את התוכן שלה בסגנון אמנותי אחר.
 
-| **Prompt** (Requête) | **Résultat généré** |
+| **פרומפט** | **פלט שנוצר באמצעות AI** |
 | --- | --- |
-| **Image d'entrée** :  Photo haute résolution et photoréaliste d'une rue animée…   Image d'entrée   **Requête** : Transforme la photo fournie d'une rue moderne en ville la nuit dans le style artistique de "La Nuit étoilée" de Vincent van Gogh. Conserve la composition d'origine des bâtiments et des voitures, mais rend tous les éléments avec des coups de pinceau tourbillonnants et empâtés, et une palette spectaculaire de bleus profonds et de jaunes vifs. | Rue de la ville dans le style Nuit étoilée |
+| **תמונת קלט:**  תמונה פוטו-ריאליסטית ברזולוציה גבוהה של רחוב עירוני הומה...   תמונת קלט   **פרומפט:** תן לתמונה שצירפתי של רחוב בעיר מודרנית בלילה סגנון אומנותי כמו בציור 'ליל כוכבים' של וינסנט ואן גוך. שמור על הקומפוזיציה המקורית של הבניינים והמכוניות, אבל צור את כל האלמנטים באמצעות משיכות מכחול עבות ומערבולות, ופלטת צבעים דרמטית של כחולים עמוקים וצהובים בהירים. | רחוב בעיר בסגנון 'לילה מלא כוכבים' |
 
-#### Composition avancée : combiner plusieurs images
+#### קומפוזיציה מתקדמת: שילוב של כמה תמונות
 
-Fournissez plusieurs images comme contexte pour créer une nouvelle scène composite. C'est l'outil idéal pour les maquettes de produits ou les collages créatifs.
+אתם יכולים לספק כמה תמונות כהקשר כדי ליצור סצנה מורכבת חדשה. האפשרות הזו מושלמת ליצירת מוקאפים של מוצרים או קולאז'ים קריאייטיביים.
 
-| **Prompt** (Requête) | **Résultat généré** |
+| **פרומפט** | **פלט שנוצר באמצעות AI** |
 | --- | --- |
-| **Images d'entrée** :  Une photo professionnelle d'une robe d'été bleue à fleurs…   Entrée 1 : Robe   Photo en pied d'une femme aux cheveux attachés en chignon…   Entrée 2 : Mannequin   **Requête** : Crée une photo de mode professionnelle pour l'e-commerce. Prends la robe à fleurs bleue de la première image et fais-la porter à la femme de la deuxième image. Génère une photo réaliste de la femme portant la robe, en ajustant la luminosité et les ombres pour qu'elles correspondent à l'environnement extérieur. | Photo de mode pour l'e-commerce |
+| **תמונות קלט:**  תמונה מקצועית של שמלת קיץ פרחונית כחולה…   Input 1: Dress   תמונה של אישה עם שיער אסוף...   Input 2: Model   **הנחיה:** תיצור תמונה מקצועית של אופנה למסחר אלקטרוני. קח את השמלה הכחולה עם הדוגמה הפרחונית מהתמונה הראשונה ותן לאישה מהתמונה השנייה ללבוש אותה. תיצור תמונה ריאליסטית של אישה לבושה בשמלה, כשהיא מצולמת לכל אורך הגוף והתאורה והצללים מותאמים לסביבה החיצונית. | צילום של מסחר אלקטרוני בתחום האופנה |
 
-#### Préservation des détails haute fidélité
+#### שמירה על פרטים ברמת דיוק גבוהה
 
-Pour vous assurer que les détails importants (comme un visage ou un logo) sont conservés lors d'une modification, décrivez-les en détail dans votre demande de modification.
+כדי לוודא שפרטים חשובים (כמו פנים או לוגו) יישמרו במהלך העריכה,
+חשוב לתאר אותם בפירוט רב יחד עם בקשת העריכה.
 
-| **Prompt** (Requête) | **Résultat généré** |
+| **פרומפט** | **פלט שנוצר באמצעות AI** |
 | --- | --- |
-| **Images d'entrée** :  Un portrait professionnel d'une femme aux cheveux bruns et aux yeux bleus…   Entrée 1 : Femme   Un logo simple et moderne avec les lettres &quot;G&quot; et &quot;A&quot;…   Entrée 2 : Logo   **Requête** : Prends la première image de la femme aux cheveux bruns, aux yeux bleus et à l'expression neutre. Ajoute le logo de la deuxième image sur son T-shirt noir. Assure-toi que le visage et les traits de la femme restent complètement inchangés. Le logo doit avoir l'air d'être imprimé naturellement sur le tissu, en suivant les plis de la chemise. | Femme portant un t-shirt avec un logo |
+| **תמונות קלט:**  תמונת פרופיל מקצועית של אישה עם שיער חום ועיניים כחולות…   קלט 1: אישה   לוגו פשוט ומודרני עם האותיות G ו-A...   קלט 2: לוגו   **פרומפט:** צור את התמונה הראשונה של האישה עם שיער חום, עיניים כחולות והבעה ניטרלית. הוספת הלוגו מהתמונה השנייה לחולצת הטריקו השחורה שלה. חשוב לוודא שתווי הפנים של האישה לא משתנים בכלל. הלוגו צריך להיראות כאילו הוא מודפס באופן טבעי על הבד, בהתאם לקפלים של החולצה. | אישה עם לוגו על חולצת טישרט |
 
-#### Donner vie à quelque chose
+#### להפיח חיים במשהו
 
-Importez un croquis ou un dessin et demandez au modèle de le transformer en image finie.
+מעלים סקיצה או ציור ומבקשים מהמודל לשפר אותם לתמונה סופית.
 
-| **Prompt** (Requête) | **Résultat généré** |
+| **פרומפט** | **פלט שנוצר באמצעות AI** |
 | --- | --- |
-| **Image d'entrée** :  Croquis d'une voiture   Croquis approximatif d'une voiture   **Requête** : Transforme cette ébauche au crayon d'une voiture futuriste en photo soignée du concept car final dans un showroom. Conserve les lignes épurées et le profil bas de l'esquisse, mais ajoute une peinture bleu métallisé et un éclairage néon sur les jantes. | Photo retouchée d'un concept car |
+| **תמונת קלט:**  סקיצה של מכונית   Rough sketch of a car   **הנחיה:** תהפוך את הרישום הגס הזה בעיפרון של מכונית עתידנית לתמונה מלוטשת של מכונית קונספט מוכנה באולם תצוגה. שומרים על הקווים החלקים והפרופיל הנמוך מהסקיצה, אבל מוסיפים צבע כחול מתכתי ותאורה היקפית בצבע ניאון. | תמונה מלוטשת של מכונית קונספט |
 
-#### Cohérence des personnages : vue à 360°
+#### עקביות הדמויות: תצוגת 360
 
-Vous pouvez générer des vues à 360 degrés d'un personnage en demandant de manière itérative différents angles. Pour obtenir les meilleurs résultats, incluez les images générées précédemment dans les requêtes suivantes afin de maintenir la cohérence. Pour les poses complexes, incluez une image de référence de la pose souhaitée.
+אתם יכולים ליצור תצוגות של דמות ב-360 מעלות על ידי הזנת הנחיות חוזרות לזוויות שונות. כדי לקבל את התוצאות הטובות ביותר, כדאי לכלול בהנחיות הבאות תמונות שנוצרו קודם כדי לשמור על עקביות. לתנוחות מורכבות, כדאי לכלול תמונה לדוגמה של התנוחה הרצויה.
 
-| **Prompt** (Requête) | **Résultat généré** |
+| **פרומפט** | **פלט שנוצר באמצעות AI** |
 | --- | --- |
-| **Image d'entrée** :  Entrée d'origine d'un homme portant des lunettes blanches   Image d'origine   **Prompt** : Portrait studio de cet homme sur fond blanc, de profil, regardant vers la droite | Sortie d'un homme portant des lunettes blanches et regardant vers la droite   Homme portant des lunettes blanches et regardant vers la droite   Sortie d'un homme portant des lunettes blanches et regardant droit devant lui   Homme portant des lunettes blanches et regardant vers l'avant |
+| **תמונת קלט:**  קלט מקורי של גבר עם משקפיים לבנים   Original image   **הנחיה:** תמונת סטודיו של הגבר הזה על רקע לבן, בפרופיל, כשהוא מסתכל ימינה | פלט של גבר עם משקפיים לבנים שמסתכל ימינה   גבר עם משקפיים לבנים שמסתכל ימינה   פלט של גבר עם משקפיים לבנים שמביט קדימה   גבר עם משקפיים לבנים שמסתכל קדימה |
 
-### Bonnes pratiques
+### שיטות מומלצות
 
-Pour passer de bons à excellents résultats, intégrez ces stratégies professionnelles à votre workflow.
+כדי לשפר את התוצאות שלכם מרמה טובה לרמה מצוינת, כדאי לשלב את האסטרטגיות המקצועיות האלה בתהליך העבודה.
 
-- **Soyez très précis** : plus vous fournissez de détails, plus vous avez de contrôle. Au lieu de "armure fantastique", décrivez-la : "armure de plates elfique ornée, gravée de motifs en feuille d'argent, avec un col montant et des épaulières en forme d'ailes de faucon".
-- **Fournissez le contexte et l'intention** : expliquez l'*objectif* de l'image. La compréhension du contexte par le modèle influencera le résultat final. Par exemple, "Crée un logo pour une marque de soins de la peau haut de gamme et minimaliste" donnera de meilleurs résultats que "Crée un logo".
-- **Répétez et affinez** : ne vous attendez pas à obtenir une image parfaite du premier coup. Utilisez la nature conversationnelle du modèle pour apporter de petites modifications. Faites un suivi avec des requêtes telles que "C'est super, mais peux-tu rendre l'éclairage un peu plus chaud ?" ou "Garde tout pareil, mais rends l'expression du personnage plus sérieuse".
-- **Utilisez des instructions détaillées** : pour les scènes complexes comportant de nombreux éléments, divisez votre requête en étapes. "Crée d'abord un arrière-plan représentant une forêt sereine et brumeuse à l'aube. Ensuite, au premier plan, ajoutez un ancien autel de pierre recouvert de mousse.
-  Enfin, placez une épée lumineuse sur l'autel."
-- **Utilisez des "requêtes négatives sémantiques"** : au lieu de dire "pas de voitures", décrivez la scène souhaitée de manière positive : "une rue vide et déserte sans aucun signe de circulation".
-- **Contrôlez la caméra** : utilisez le langage photographique et cinématographique pour contrôler la composition. Termes tels que `wide-angle shot`, `macro shot`, `low-angle
+- **היו ספציפיים מאוד:** ככל שתספקו יותר פרטים, כך תהיה לכם יותר שליטה. במקום "שריון פנטזיה", תאר אותו: "שריון לוחות אלפי מעוטר, עם דוגמאות של עלי כסף חרוטים, צווארון גבוה ומגני כתפיים בצורת כנפי בז".
+- **מספקים הקשר וכוונות:** מסבירים את *המטרה* של התמונה. ההבנה של המודל לגבי ההקשר תשפיע על הפלט הסופי. לדוגמה, התוצאות של ההנחיה "צור לוגו למותג טיפוח עור יוקרתי ומינימליסטי" יהיו טובות יותר מהתוצאות של ההנחיה "צור לוגו".
+- **חזרה על הפעולה ושיפור:** אל תצפו לקבל תמונה מושלמת בניסיון הראשון. אפשר להשתמש במודל כדי לבצע שינויים קטנים בשיחה. אפשר להוסיף הנחיות כמו "זה נהדר, אבל אפשר להפוך את התאורה לקצת יותר חמה?" או "תשאיר הכול כמו שזה, אבל תשנה את הבעת הפנים של הדמות כך שתיראה יותר רצינית".
+- **שימוש בהוראות מפורטות:** בסצנות מורכבות עם הרבה אלמנטים, כדאי לחלק את ההנחיה לשלבים. "קודם, תיצור רקע של יער שקט ומעורפל עם שחר. אחר כך, בחזית, תוסיף מזבח עתיק מאבן שמכוסה בטחב.
+  לבסוף, מניחים חרב אחת זוהרת על המזבח".
+- **משתמשים בהנחיות שליליות סמנטיות:** במקום לומר "אין מכוניות", מתארים את הסצנה הרצויה באופן חיובי: "רחוב ריק ושומם ללא סימני תנועה".
+- **שליטה במצלמה:** שימוש בשפה צילומית וקולנועית כדי לשלוט בקומפוזיציה. מונחים כמו `wide-angle shot`, `macro shot`, `low-angle
   perspective`.
 
-## Limites
+## מגבלות
 
-- Pour des performances optimales, utilisez les langues suivantes : EN, ar-EG, de-DE, es-MX, fr-FR, hi-IN, id-ID, it-IT, ja-JP, ko-KR, pt-BR, ru-RU, ua-UA, vi-VN, zh-CN.
-- La génération d'images n'accepte pas les entrées audio. Les entrées vidéo ne sont acceptées que pour l'image Gemini 3.1 Flash.
-- Le modèle ne respecte pas toujours le nombre exact d'images de sortie que l'utilisateur demande explicitement.
-- `gemini-2.5-flash-image` fonctionne mieux avec un maximum de trois images en entrée, tandis que `gemini-3-pro-image` prend en charge cinq images haute fidélité et jusqu'à 14 images au total. `gemini-3.1-flash-image` accepte une ressemblance de caractères allant jusqu'à quatre caractères et une fidélité allant jusqu'à 10 objets dans un même workflow.
-- Lorsque vous générez du texte pour une image, Gemini fonctionne mieux si vous générez d'abord le texte, puis demandez une image avec le texte.
-- `gemini-3.1-flash-image` L'ancrage avec la recherche Google ne permet pas d'utiliser des images de personnes issues de la recherche sur le Web pour le moment.
-- Toutes les images générées incluent un [filigrane SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=fr).
+- כדי לקבל את הביצועים הכי טובים, מומלץ להשתמש בשפות הבאות: EN, ‏ ar-EG, ‏ de-DE, ‏ es-MX,‏ fr-FR, ‏ hi-IN, ‏ id-ID, ‏ it-IT, ‏ ja-JP, ‏ ko-KR, ‏ pt-BR, ‏ ru-RU, ‏ ua-UA, ‏ vi-VN, ‏ zh-CN.
+- יצירת תמונות לא תומכת בקלט אודיו. יש תמיכה בהזנת סרטונים רק ב-Gemini 3.1 Flash Image.
+- המודל לא תמיד יפעל לפי המספר המדויק של תמונות הפלט שהמשתמש ביקש במפורש.
+- `gemini-2.5-flash-image` עובד הכי טוב עם עד 3 תמונות כקלט, ואילו `gemini-3-pro-image` תומך ב-5 תמונות באיכות גבוהה, ועד 14 תמונות בסך הכול. `gemini-3.1-flash-image` תומך בדמיון של עד 4 תווים ובדיוק של עד 10 אובייקטים בתהליך עבודה יחיד.
+- כשמבקשים מ-Gemini ליצור טקסט לתמונה, מומלץ קודם ליצור את הטקסט ואז לבקש תמונה עם הטקסט.
+- `gemini-3.1-flash-image` בשלב הזה, העיגון באמצעות חיפוש Google לא תומך בשימוש בתמונות של אנשים מהעולם האמיתי מחיפוש באינטרנט.
+- כל התמונות שנוצרו כוללות [סימן מים של SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=he).
 
-## Configurations facultatives
+## הגדרות אופציונליות
 
-Vous pouvez éventuellement configurer les modalités de réponse et le format de la sortie du modèle dans le champ `config` des appels `generate_content`.
+אפשר גם להגדיר את אופני התגובה ואת יחס הגובה-רוחב של הפלט של המודל בשדה `config` של קריאות ל-`generate_content`.
 
-### Types de sortie
+### סוגי פלט
 
-Par défaut, le modèle renvoie des réponses textuelles et imagées (c'est-à-dire `response_modalities=['Text', 'Image']`). Vous pouvez configurer la réponse pour qu'elle ne renvoie que des images sans texte à l'aide de `response_modalities=['Image']`.
+כברירת מחדל, המודל מחזיר תשובות של טקסט ותמונות (כלומר `response_modalities=['Text', 'Image']`). אפשר להגדיר את התשובה כך שתחזיר רק תמונות בלי טקסט באמצעות `response_modalities=['Image']`.
 
 ### Python
 
@@ -2912,7 +2916,7 @@ response = client.models.generateContent(
         .build());
 ```
 
-### C#
+### C#‎
 
 ```
 var response = await client.Models.GenerateContentAsync(
@@ -2944,10 +2948,11 @@ curl -s -X POST \
   }'
 ```
 
-### Formats et taille d'image
+### יחסי גובה-רוחב וגודל תמונה
 
-Par défaut, le modèle fait correspondre la taille de l'image de sortie à celle de votre image d'entrée, ou génère des carrés au format 1:1.
-Vous pouvez contrôler le format de l'image de sortie à l'aide du champ `aspect_ratio` sous `response_format` dans la demande de réponse, comme indiqué ici :
+כברירת מחדל, המודל מתאים את גודל תמונת הפלט לגודל תמונת הקלט, או יוצר ריבועים ביחס של 1:1.
+אפשר לשלוט ביחס הגובה-רוחב של תמונת הפלט באמצעות השדה `aspect_ratio`
+שמופיע בקטע `response_format` בבקשת התשובה, כמו שמוצג כאן:
 
 ### Python
 
@@ -3058,7 +3063,7 @@ response_gemini3 = client.models.generateContent(
         .build());
 ```
 
-### C#
+### C#‎
 
 ```
 // For gemini-2.5-flash-image
@@ -3134,102 +3139,102 @@ curl -s -X POST \
   }'
 ```
 
-Les différents ratios disponibles et la taille de l'image générée sont listés dans les tableaux suivants :
+בטבלאות הבאות מפורטים היחסים השונים שזמינים וגודל התמונה שנוצרת:
 
-### 3.1 Image Flash
+### ‫3.1 Flash Image
 
-| Format | Résolution 512 | 0,5 k jetons | Résolution 1K | 1 000 jetons | Résolution 2K | 2 000 jetons | Résolution 4K | 4 000 jetons |
+| יחס גובה-רוחב | רזולוציה של 512 | ‫0.5K טוקנים | רזולוציית 1K | ‫1K טוקנים | רזולוציית 2K | ‫2,000 טוקנים | רזולוציה של 4K | ‫4K טוקנים |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **1:1** | 512 x 512 | 747 | 1024x1024 | 1120 | 2048 x 2048 | 1680 | 4 096 x 4 096 | 2520 |
-| **1:4** | 256 x 1 024 | 747 | 512 x 2 048 | 1120 | 1024x4096 | 1680 | 2048 x 8192 | 2520 |
-| **1:8** | 192 x 1 536 | 747 | 384 x 3 072 | 1120 | 768 x 6 144 | 1680 | 1536 x 12288 | 2520 |
-| **2:3** | 424 x 632 | 747 | 848 x 1 264 | 1120 | 1696 x 2528 | 1680 | 3392 x 5056 | 2520 |
-| **3:2** | 632 x 424 | 747 | 1 264 x 848 | 1120 | 2528 x 1696 | 1680 | 5056 x 3392 | 2520 |
-| **3:4** | 448 x 600 | 747 | 896 x 1200 | 1120 | 1792x2400 | 1680 | 3584 x 4800 | 2520 |
-| **4:1** | 1024x256 | 747 | 2048 x 512 | 1120 | 4 096 x 1 024 | 1680 | 8192 x 2048 | 2520 |
-| **4:3** | 600 x 448 | 747 | 1 200 x 896 | 1120 | 2400x1792 | 1680 | 4 800 x 3 584 | 2520 |
-| **4:5** | 464 x 576 | 747 | 928 x 1 152 | 1120 | 1856 x 2304 | 1680 | 3712 x 4608 | 2520 |
-| **5:4** | 576 x 464 | 747 | 1152x928 | 1120 | 2304 x 1856 | 1680 | 4608 x 3712 | 2520 |
-| **8:1** | 1536x192 | 747 | 3072 x 384 | 1120 | 6 144 x 768 | 1680 | 12 288 x 1 536 | 2520 |
-| **9:16** | 384 x 688 | 747 | 768 x 1 376 | 1120 | 1536 x 2752 | 1680 | 3072 x 5504 | 2520 |
-| **16:9** | 688x384 | 747 | 1 376 x 768 | 1120 | 2752 x 1536 | 1680 | 5504 x 3072 | 2520 |
-| **21:9** | 792 x 168 | 747 | 1 584 x 672 | 1120 | 3168x1344 | 1680 | 6336 x 2688 | 2520 |
+| ‫**1:1** | ‫512x512 | 747 | ‫1024x1024 | 1120 | ‫2048x2048 | 1680 | 4096x4096 | 2520 |
+| **1:4** | 256x1024 | 747 | ‎512x2048 | 1120 | 1024x4096 | 1680 | 2048x8192 | 2520 |
+| ‫**1:8** | ‫192x1536 | 747 | 384x3072 | 1120 | ‫768x6144 | 1680 | ‫1536x12288 | 2520 |
+| **2:3** | ‫424x632 | 747 | 848x1264 | 1120 | 1696x2528 | 1680 | 3392x5056 | 2520 |
+| **3:2** | ‫632x424 | 747 | 1264x848 | 1120 | 2528x1696 | 1680 | 5056x3392 | 2520 |
+| **3:4** | 448x600 | 747 | ‫896x1200 | 1120 | 1792x2400 | 1680 | 3584x4800 | 2520 |
+| **4:1** | ‫1024x256 | 747 | 2048x512 | 1120 | 4096x1024 | 1680 | ‫8192x2048 | 2520 |
+| **4:3** | 600x448 | 747 | ‫1,200x896 | 1120 | 2400x1792 | 1680 | 4800x3584 | 2520 |
+| ‫**4:5** | 464x576 | 747 | 928x1152 | 1120 | 1856x2304 | 1680 | 3712x4608 | 2520 |
+| **5:4** | ‫576x464 | 747 | ‫1152x928 | 1120 | 2304x1856 | 1680 | 4608x3712 | 2520 |
+| **8:1** | ‫1536x192 | 747 | 3072x384 | 1120 | ‫6,144x768 | 1680 | 12288x1536 | 2520 |
+| **9:16** | 384x688 | 747 | ‫768x1376 | 1120 | 1536x2752 | 1680 | 3072x5504 | 2520 |
+| ‫**16:9** | ‫688x384 | 747 | ‫1,376x768 | 1120 | ‫2752x1536 | 1680 | 5504x3072 | 2520 |
+| **21:9** | ‫792x168 | 747 | 1584x672 | 1120 | ‫3,168x1,344 | 1680 | 6336x2688 | 2520 |
 
-### 3.1 Image Flash Lite
+### ‫3.1 Flash Lite Image
 
-| Format | Résolution 512 | 0,5 k jetons | Résolution 1K | 1 000 jetons |
+| יחס גובה-רוחב | רזולוציה של 512 | ‫0.5K טוקנים | רזולוציית 1K | ‫1K טוקנים |
 | --- | --- | --- | --- | --- |
-| **1:1** | 512 x 512 | 747 | 1024x1024 | 1120 |
-| **1:4** | 256 x 1 024 | 747 | 512 x 2 048 | 1120 |
-| **1:8** | 192 x 1 536 | 747 | 384 x 3 072 | 1120 |
-| **2:3** | 424 x 632 | 747 | 848 x 1 264 | 1120 |
-| **3:2** | 632 x 424 | 747 | 1 264 x 848 | 1120 |
-| **3:4** | 448 x 600 | 747 | 896 x 1200 | 1120 |
-| **4:1** | 1024x256 | 747 | 2048 x 512 | 1120 |
-| **4:3** | 600 x 448 | 747 | 1 200 x 896 | 1120 |
-| **4:5** | 464 x 576 | 747 | 928 x 1 152 | 1120 |
-| **5:4** | 576 x 464 | 747 | 1152x928 | 1120 |
-| **8:1** | 1536x192 | 747 | 3072 x 384 | 1120 |
-| **9:16** | 384 x 688 | 747 | 768 x 1 376 | 1120 |
-| **16:9** | 688x384 | 747 | 1 376 x 768 | 1120 |
-| **21:9** | 792 x 168 | 747 | 1 584 x 672 | 1120 |
+| ‫**1:1** | ‫512x512 | 747 | ‫1024x1024 | 1120 |
+| **1:4** | 256x1024 | 747 | ‎512x2048 | 1120 |
+| ‫**1:8** | ‫192x1536 | 747 | 384x3072 | 1120 |
+| **2:3** | ‫424x632 | 747 | 848x1264 | 1120 |
+| **3:2** | ‫632x424 | 747 | 1264x848 | 1120 |
+| **3:4** | 448x600 | 747 | ‫896x1200 | 1120 |
+| **4:1** | ‫1024x256 | 747 | 2048x512 | 1120 |
+| **4:3** | 600x448 | 747 | ‫1,200x896 | 1120 |
+| ‫**4:5** | 464x576 | 747 | 928x1152 | 1120 |
+| **5:4** | ‫576x464 | 747 | ‫1152x928 | 1120 |
+| **8:1** | ‫1536x192 | 747 | 3072x384 | 1120 |
+| **9:16** | 384x688 | 747 | ‫768x1376 | 1120 |
+| ‫**16:9** | ‫688x384 | 747 | ‫1,376x768 | 1120 |
+| **21:9** | ‫792x168 | 747 | 1584x672 | 1120 |
 
-### 3.1 Pro Image
+### ‫3.1 Pro Image
 
-| Format | Résolution 1K | 1 000 jetons | Résolution 2K | 2 000 jetons | Résolution 4K | 4 000 jetons |
+| יחס גובה-רוחב | רזולוציית 1K | ‫1K טוקנים | רזולוציית 2K | ‫2,000 טוקנים | רזולוציה של 4K | ‫4K טוקנים |
 | --- | --- | --- | --- | --- | --- | --- |
-| **1:1** | 1024x1024 | 1120 | 2048 x 2048 | 1120 | 4 096 x 4 096 | 2000 |
-| **2:3** | 848 x 1 264 | 1120 | 1696 x 2528 | 1120 | 3392 x 5056 | 2000 |
-| **3:2** | 1 264 x 848 | 1120 | 2528 x 1696 | 1120 | 5056 x 3392 | 2000 |
-| **3:4** | 896 x 1200 | 1120 | 1792x2400 | 1120 | 3584 x 4800 | 2000 |
-| **4:3** | 1 200 x 896 | 1120 | 2400x1792 | 1120 | 4 800 x 3 584 | 2000 |
-| **4:5** | 928 x 1 152 | 1120 | 1856 x 2304 | 1120 | 3712 x 4608 | 2000 |
-| **5:4** | 1152x928 | 1120 | 2304 x 1856 | 1120 | 4608 x 3712 | 2000 |
-| **9:16** | 768 x 1 376 | 1120 | 1536 x 2752 | 1120 | 3072 x 5504 | 2000 |
-| **16:9** | 1 376 x 768 | 1120 | 2752 x 1536 | 1120 | 5504 x 3072 | 2000 |
-| **21:9** | 1 584 x 672 | 1120 | 3168x1344 | 1120 | 6336 x 2688 | 2000 |
+| ‫**1:1** | ‫1024x1024 | 1120 | ‫2048x2048 | 1120 | 4096x4096 | 2000 |
+| **2:3** | 848x1264 | 1120 | 1696x2528 | 1120 | 3392x5056 | 2000 |
+| **3:2** | 1264x848 | 1120 | 2528x1696 | 1120 | 5056x3392 | 2000 |
+| **3:4** | ‫896x1200 | 1120 | 1792x2400 | 1120 | 3584x4800 | 2000 |
+| **4:3** | ‫1,200x896 | 1120 | 2400x1792 | 1120 | 4800x3584 | 2000 |
+| ‫**4:5** | 928x1152 | 1120 | 1856x2304 | 1120 | 3712x4608 | 2000 |
+| **5:4** | ‫1152x928 | 1120 | 2304x1856 | 1120 | 4608x3712 | 2000 |
+| **9:16** | ‫768x1376 | 1120 | 1536x2752 | 1120 | 3072x5504 | 2000 |
+| ‫**16:9** | ‫1,376x768 | 1120 | ‫2752x1536 | 1120 | 5504x3072 | 2000 |
+| **21:9** | 1584x672 | 1120 | ‫3,168x1,344 | 1120 | 6336x2688 | 2000 |
 
-### Gemini 2.5 Flash Image
+### ‫Gemini 2.5 Flash Image
 
-| Format | Solution | Jetons |
+| יחס גובה-רוחב | רזולוציה | טוקנים |
 | --- | --- | --- |
-| 1:1 | 1024x1024 | 1290 |
-| 2:3 | 832 x 1 248 | 1290 |
-| 3:2 | 1 248 x 832 | 1290 |
-| 3:4 | 864 x 1 184 | 1290 |
-| 4:3 | 1 184 x 864 | 1290 |
-| 4:5 | 896 x 1 152 | 1290 |
-| 5:4 | 1152x896 | 1290 |
-| 9:16 | 768 x 1 344 | 1290 |
-| 16:9 | 1 344 x 768 | 1290 |
-| 21:9 | 1 536 x 672 | 1290 |
+| 1:1 | ‫1024x1024 | 1290 |
+| 2:3 | ‫832x1248 | 1290 |
+| ‎3:2 | ‫1248x832 | 1290 |
+| 3:4 | ‫864x1184 | 1290 |
+| 4:3 | 1184x864 | 1290 |
+| 4:5 | 896x1152 | 1290 |
+| 5:4 | ‫1152x896 | 1290 |
+| 9:16 | ‫768x1344 | 1290 |
+| 16:9 | ‫1,344x768 | 1290 |
+| 21:9 | ‫1536x672 | 1290 |
 
-## Sélection du modèle
+## בחירת מודל
 
-Choisissez le modèle le mieux adapté à votre cas d'utilisation spécifique.
+בוחרים את המודל שהכי מתאים לתרחיש השימוש הספציפי שלכם.
 
-- **Gemini 3.1 Flash Image (Nano Banana 2)** devrait être votre modèle de génération d'images de référence, car il offre le meilleur équilibre entre performances globales, intelligence, coût et latence. Pour en savoir plus, consultez la page des [tarifs](https://ai.google.dev/gemini-api/docs/pricing?hl=fr#gemini-3.1-flash-image) et des [fonctionnalités](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=fr) des modèles.
-- **Gemini 3.1 Flash Lite Image (Nano Banana 2 Lite)** est conçu pour être le spécialiste de l'efficacité de la famille de modèles de génération d'images. Il offre une latence ultra-faible ainsi qu'une génération et une retouche d'images rentables.
-  Pour en savoir plus, consultez la page [Tarifs](https://ai.google.dev/gemini-api/docs/pricing?hl=fr#gemini-3.1-flash-lite-image) et [Fonctionnalités](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=fr) des modèles.
-- **Gemini 3 Pro Image (Nano Banana Pro)** est conçu pour la production d'assets professionnels et les instructions complexes. Ce modèle est ancré dans le monde réel grâce à la recherche Google. Il dispose d'un processus de "réflexion" par défaut qui affine la composition avant la génération et peut générer des images d'une résolution allant jusqu'à 4K. Pour en savoir plus, consultez la page des [tarifs](https://ai.google.dev/gemini-api/docs/pricing?hl=fr#gemini-3-pro-image) et des [fonctionnalités](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=fr) des modèles.
-- **Gemini 2.5 Flash Image (Nano Banana)** est conçu pour la rapidité et l'efficacité. Ce modèle est optimisé pour les tâches à faible latence et à volume élevé. Il génère des images d'une résolution de 1 024 px. Pour en savoir plus, consultez la page des [tarifs](https://ai.google.dev/gemini-api/docs/pricing?hl=fr#gemini-2.5-flash-image) et des [fonctionnalités](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=fr) des modèles.
+- ‫**Gemini 3.1 Flash Image (Nano Banana 2)** הוא מודל יצירת התמונות המומלץ ביותר, כי הוא מציע את הביצועים הכי טובים ואת האיזון הכי טוב בין עלות לזמן אחזור. פרטים נוספים זמינים בדף [המחירים](https://ai.google.dev/gemini-api/docs/pricing?hl=he#gemini-3.1-flash-image) ו[היכולות](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=he) של המודל.
+- ‫**Gemini 3.1 Flash Lite Image (Nano Banana 2 Lite)** נועד להיות המומחה ליעילות במשפחת מודלים ליצירת תמונות. הוא מציע יצירה ועריכה של תמונות עם זמן טעינה קצר במיוחד ועלות משתלמת.
+  פרטים נוספים זמינים בדף [המחירים](https://ai.google.dev/gemini-api/docs/pricing?hl=he#gemini-3.1-flash-lite-image) ו[היכולות](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=he) של המודל.
+- ‫**Gemini 3 Pro Image (Nano Banana Pro)** מיועד ליצירת נכסים מקצועיים ולהוראות מורכבות. המודל הזה כולל עיגון בעולם האמיתי באמצעות חיפוש Google, תהליך ברירת מחדל של 'חשיבה' שמשפר את הקומפוזיציה לפני היצירה, ויכול ליצור תמונות ברזולוציה של עד 4K. פרטים נוספים זמינים בדף [המחירים](https://ai.google.dev/gemini-api/docs/pricing?hl=he#gemini-3-pro-image) ו[היכולות](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=he) של המודל.
+- ‫**Gemini 2.5 Flash Image (Nano Banana)** מיועד למהירות ויעילות. המודל הזה מותאם למשימות שדורשות נפח גדול של נתונים וזמן טעינה קצר, והוא יוצר תמונות ברזולוציה של 1,024 פיקסלים. פרטים נוספים זמינים בדף [המחירים](https://ai.google.dev/gemini-api/docs/pricing?hl=he#gemini-2.5-flash-image) ו[היכולות](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=he) של המודל.
 
-### Quand utiliser Imagen ?
+### מתי כדאי להשתמש ב-Imagen
 
-En plus d'utiliser les fonctionnalités de génération d'images intégrées à Gemini, vous pouvez également accéder à [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=fr), notre modèle de génération d'images spécialisé, via l'API Gemini. Prévoyez de migrer avant la date d'arrêt.
+בנוסף לשימוש ביכולות המובנות של Gemini ליצירת תמונות, אפשר גם לגשת אל [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=he), המודל הייעודי שלנו ליצירת תמונות, דרך Gemini API. כדאי לתכנן את ההעברה לפני תאריך ההשבתה.
 
-## Étape suivante
+## המאמרים הבאים
 
-- Vous trouverez d'autres exemples et extraits de code dans le [guide Cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_Started_Nano_Banana.ipynb?hl=fr).
-- Consultez le [guide Veo](https://ai.google.dev/gemini-api/docs/video?hl=fr) pour découvrir comment générer des vidéos avec l'API Gemini.
-- Pour en savoir plus sur les modèles Gemini, consultez [Modèles Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr).
+- [במדריך אוסף הפתרונות](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_Started_Nano_Banana.ipynb?hl=he) יש עוד דוגמאות ודוגמאות קוד.
+- ב[מדריך ל-Veo](https://ai.google.dev/gemini-api/docs/video?hl=he) מוסבר איך ליצור סרטונים באמצעות Gemini API.
+- מידע נוסף על מודלים של Gemini זמין במאמר [מודלים של Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he).
 
-Envoyer des commentaires
+שליחת משוב
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Dernière mise à jour le 2026/07/30 (UTC).
+עדכון אחרון: 2026-07-30 (שעון UTC).
 
-Voulez-vous nous donner plus d'informations ?
+רוצה לתת לנו משוב?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/30 (UTC)."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-30 (שעון UTC)."],[],[]]

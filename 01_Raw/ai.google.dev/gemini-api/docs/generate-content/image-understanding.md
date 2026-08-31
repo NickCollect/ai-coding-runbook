@@ -1,40 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=zh-TW
-fetched_at: 2026-08-24T02:36:52.463743+00:00
-title: "\u5716\u50cf\u89e3\u8b80 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=fr
+fetched_at: 2026-08-31T06:36:09.669493+00:00
+title: "Compr\u00e9hension des images \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-提供意見
+Envoyer des commentaires
 
-# 圖像解讀
+# Compréhension des images
 
-Gemini 模型從一開始就建構於多模態的基礎上，因此可執行各種圖像處理和電腦視覺工作，包括但不限於生成圖像說明文字、分類和回答圖像問題，無須訓練專門的機器學習模型。
+Les modèles Gemini sont conçus dès le départ pour être multimodaux, ce qui permet d'effectuer un large éventail de tâches de traitement d'images et de vision par ordinateur, y compris, mais sans s'y limiter, la légende d'images, la classification et la réponse visuelle à des questions, sans avoir à entraîner de modèles de ML spécialisés.
 
-除了提供一般多模態功能，Gemini 模型還經過額外訓練，可**提升準確度**，適用於[物體偵測](#object-detection)等特定用途。
+En plus de leurs capacités multimodales générales, les modèles Gemini offrent
+**une précision accrue** pour des cas d'utilisation spécifiques tels que [la détection d'objets](#object-detection), grâce à un entraînement supplémentaire.
 
-## 將圖片傳送給 Gemini
+## Transmettre des images à Gemini
 
-你可以透過下列兩種方式，將圖片做為 Gemini 的輸入內容：
+Vous pouvez fournir des images comme entrées à Gemini à l'aide de deux méthodes :
 
-- [傳遞內嵌圖片資料](#inline-image)：適合較小的檔案 (包括提示在內，要求總大小小於 20 MB)。
-- [使用 File API 上傳圖片](#upload-image)：建議用於較大的檔案，或在多個要求中重複使用圖片。
+- [Transmettre des données d'image intégrées](#inline-image) : idéal pour les fichiers plus petits (taille totale de la requête
+  inférieure à 20 Mo, y compris les requêtes).
+- [Importer des images à l'aide de l'API Files](#upload-image) : recommandé pour les fichiers plus volumineux ou pour
+  réutiliser des images dans plusieurs requêtes.
 
-### 傳遞內嵌圖片資料
+### Transmettre des données d'image intégrées
 
-您可以在對 `generateContent` 的要求中傳遞內嵌圖片資料。您可以提供 Base64 編碼字串形式的圖片資料，也可以直接讀取本機檔案 (視語言而定)。
+Vous pouvez transmettre des données d'image intégrées dans la requête à `generateContent`. Vous pouvez fournir des données d'image sous forme de chaînes encodées en base64 ou en lisant directement des fichiers locaux (selon le langage).
 
-以下範例說明如何從本機檔案讀取圖片，並傳遞至 `generateContent` API 進行處理。
+L'exemple suivant montre comment lire une image à partir d'un fichier local et la transmettre à l'API `generateContent` pour traitement.
 
 ### Python
 
@@ -142,7 +145,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }' 2> /dev/null
 ```
 
-您也可以從網址擷取圖片、轉換為位元組，然後傳遞至 `generateContent`，如以下範例所示。
+Vous pouvez également récupérer une image à partir d'une URL, la convertir en octets et la transmettre à `generateContent`, comme illustré dans les exemples suivants.
 
 ### Python
 
@@ -284,9 +287,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
     }' 2> /dev/null
 ```
 
-### 使用 File API 上傳圖片
+### Importer des images à l'aide de l'API Files
 
-如要處理大型檔案或重複使用同一張圖片，請使用 Files API。下列程式碼會上傳圖片檔案，然後在呼叫 `generateContent` 時使用該檔案。如需更多資訊和範例，請參閱 [Files API 指南](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw)。
+Pour les fichiers volumineux ou pour pouvoir utiliser le même fichier image à plusieurs reprises, utilisez l'API Files. Le code suivant importe un fichier image, puis l'utilise dans un appel à `generateContent`. Pour en savoir plus et obtenir des exemples, consultez le [guide de l'API Files](https://ai.google.dev/gemini-api/docs/files?hl=fr) pour.
 
 ### Python
 
@@ -431,9 +434,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## 使用多張圖片提示
+## Requêtes avec plusieurs images
 
-您可以在單一提示中提供多張圖片，方法是在 `contents` 陣列中加入多個圖片 `Part` 物件。這些可以是內嵌資料 (本機檔案或網址) 和 File API 參照的組合。
+Vous pouvez fournir plusieurs images dans une seule requête en incluant plusieurs objets `Part` d'image dans le tableau `contents`. Il peut s'agir d'un mélange de données intégrées (fichiers locaux ou URL) et de références à l'API Files.
 
 ### Python
 
@@ -618,9 +621,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## 物件偵測
+## Détection d'objets
 
-模型經過訓練後，可偵測圖片中的物件並取得定界框座標。座標會根據圖片尺寸縮放至 [0, 1000]。您需要根據原始圖片大小，縮放這些座標。
+Les modèles sont entraînés pour détecter des objets dans une image et obtenir les coordonnées de leur cadre de délimitation. Les coordonnées, par rapport aux dimensions de l'image, sont mises à l'échelle de [0, 1000]. Vous devez mettre à l'échelle ces coordonnées en fonction de la taille d'image d'origine.
 
 ### Python
 
@@ -822,78 +825,87 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }' 2> /dev/null
 ```
 
-如需更多範例，請參閱 [Gemini 教戰手冊](https://github.com/google-gemini/cookbook)中的下列筆記本：
+Pour obtenir d'autres exemples, consultez les notebooks suivants dans le [Gemini Cookbook](https://github.com/google-gemini/cookbook) :
 
-- [2D 空間理解筆記本](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Spatial_understanding.ipynb?hl=zh-tw)
-- [實驗性 3D 指向筆記型電腦](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/examples/Spatial_understanding_3d.ipynb?hl=zh-tw)
+- [Notebook sur la compréhension spatiale 2D](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Spatial_understanding.ipynb?hl=fr)
+- [Notebook expérimental sur le pointage 3D](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/examples/Spatial_understanding_3d.ipynb?hl=fr)
 
-## 支援的圖片格式
+## Formats d'image compatibles
 
-Gemini 支援下列圖片格式 MIME 類型：
+Gemini est compatible avec les types MIME de format d'image suivants :
 
 - PNG - `image/png`
 - JPEG - `image/jpeg`
-- WebP - `image/webp`
+- WEBP - `image/webp`
 - HEIC - `image/heic`
 - HEIF - `image/heif`
 
-如要瞭解其他檔案輸入方式，請參閱「[檔案輸入方式](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-tw)」指南。
+Pour en savoir plus sur les autres méthodes d'entrée de fichiers, consultez le
+[guide Méthodes d'entrée de fichiers](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=fr).
 
-## 功能
+## Capacités
 
-所有 Gemini 模型版本都是多模態模型，可用於各種圖像處理和電腦視覺工作，包括但不限於圖像說明文字、視覺問答、圖片分類和物件偵測。
+Toutes les versions du modèle Gemini sont multimodales et peuvent être utilisées dans un large éventail de tâches de traitement d'images et de vision par ordinateur, y compris, mais sans s'y limiter, la description d'images, la réponse visuelle à des questions, la classification d'images et la détection d'objets.
 
-視品質和效能需求而定，Gemini 可減少使用專業機器學習模型的需求。
+Gemini peut réduire le besoin d'utiliser des modèles de ML spécialisés en fonction de vos exigences en termes de qualité et de performances.
 
-最新模型版本經過特別訓練，除了強化[物件偵測](#object-detection)等一般功能外，還能提升特定工作的準確度。
+Les dernières versions du modèle sont spécifiquement entraînées pour améliorer la précision des
+tâches spécialisées en plus des capacités génériques, comme la détection d'objets améliorée
+.
 
-## 限制和重要技術資訊
+## Limites et informations techniques clés
 
-### 檔案限制
+### Limite de fichiers
 
-Gemini 模型每項要求最多可支援 3,600 個圖片檔案。
+Les modèles Gemini acceptent un maximum de 3 600 fichiers image par requête.
 
-### 代幣計算
+### Calcul des jetons
 
-- 如果兩個維度都 <= 384 像素，則為 258 個權杖。
-  較大的圖片會分割成 768x768 像素的圖塊，每個圖塊需支付 258 個權杖。
+- 258 jetons si les deux dimensions sont inférieures ou égales à 384 pixels.
+  Les images plus grandes sont divisées en vignettes de 768 x 768 pixels, chacune coûtant 258 jetons.
 
-計算圖塊數量的粗略公式如下：
+Voici une formule approximative pour calculer le nombre de vignettes :
 
-- 計算裁剪單元大小，大約是：floor(min(width, height) / 1.5)。
-- 將每個維度除以裁剪單元大小，然後相乘，即可取得圖塊數量。
+- Calculez la taille de l'unité de recadrage, qui est approximativement : floor(min(width, height) / 1.5).
+- Divisez chaque dimension par la taille de l'unité de recadrage et multipliez-les pour obtenir le nombre de vignettes.
 
-舉例來說，如果圖片尺寸為 960x540，裁剪單位大小為 360。將每個維度除以 360，圖塊數量為 3 \* 2 = 6。
+Par exemple, une image de dimensions 960 x 540 aurait une taille d'unité de recadrage de 360. Divisez chaque dimension par 360. Le nombre de vignettes est de 3 \* 2 = 6.
 
-### 媒體解析度
+### Résolution des contenus multimédias
 
-Gemini 3 推出 `media_resolution` 參數，可精細控管多模態視覺處理作業。`media_resolution` 參數會決定**每個輸入圖片或影片影格分配到的詞元數量上限。**
-解析度越高，模型就越能辨識細小文字或細節，但也會增加權杖用量和延遲時間。
+Gemini 3 introduit un contrôle précis du traitement de la vision multimodale avec le paramètre `media_resolution`. Le paramètre `media_resolution` détermine le **nombre maximal de jetons alloués par image d'entrée ou par image vidéo**.
+Les résolutions plus élevées améliorent la capacité du modèle à lire du texte fin ou à identifier de petits détails, mais augmentent l'utilisation des jetons et la latence.
 
-如要進一步瞭解參數及其對權杖計算的影響，請參閱[媒體解析度](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=zh-tw)指南。
+Pour en savoir plus sur le paramètre et son impact sur les calculs de jetons,
+consultez le guide sur la [résolution des contenus multimédias](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=fr).
 
-## 提示與最佳做法
+## Conseils et bonnes pratiques
 
-- 確認圖片已正確旋轉。
-- 使用清晰的圖片，避免模糊不清。
-- 使用含有文字的單一圖片時，請將文字提示詞放在 `contents` 陣列的圖片部分*之後*。
+- Vérifiez que les images sont correctement pivotées.
+- Utilisez des images claires et non floues.
+- Lorsque vous utilisez une seule image avec du texte, placez le prompt textuel *après* la partie image dans le tableau `contents`.
 
-## 後續步驟
+## Étape suivante
 
-本指南說明如何上傳圖片檔案，以及如何從圖片輸入內容生成文字輸出內容。如要進一步瞭解相關內容，請參閱下列資源：
+Ce guide explique comment importer des fichiers image et générer des sorties de texte à partir d'entrées d'image. Pour en savoir plus, consultez les ressources suivantes :
 
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw)：進一步瞭解如何上傳及管理檔案，以便搭配 Gemini 使用。
-- [系統指令](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-tw#system-instructions)：
-  系統指令可根據特定需求和用途，引導模型行為。
-- [檔案提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw#prompt-guide)：Gemini API 支援使用文字、圖片、音訊和影片資料提示，也稱為多模態提示。
-- [安全指引](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=zh-tw)：生成式 AI 模型有時會產生出乎意料的輸出內容，例如不準確、有偏見或令人反感的內容。後續處理和人工評估是不可或缺的環節，有助於降低這類輸出內容造成危害的風險。
+- [API Files](https://ai.google.dev/gemini-api/docs/files?hl=fr) : découvrez comment importer et gérer des fichiers à utiliser avec Gemini.
+- [Instructions système](https://ai.google.dev/gemini-api/docs/text-generation?hl=fr#system-instructions) :
+  les instructions système vous permettent d'orienter le comportement du modèle en fonction de vos
+  besoins et de vos cas d'utilisation spécifiques.
+- [Stratégies de prompt de fichiers](https://ai.google.dev/gemini-api/docs/files?hl=fr#prompt-guide) : l'
+  API Gemini est compatible avec les prompts contenant des données de texte, d'image, audio et vidéo, également
+  appelés prompts multimodaux.
+- [Consignes de sécurité](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=fr) : les modèles d'IA générative
+  produisent parfois des résultats inattendus, tels que des résultats inexacts,
+  biaisés ou choquants. Le post-traitement et l'évaluation humaine sont essentiels pour limiter le risque de préjudice lié à ces résultats.
 
-提供意見
+Envoyer des commentaires
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-上次更新時間：2026-07-30 (世界標準時間)。
+Dernière mise à jour le 2026/07/30 (UTC).
 
-想進一步說明嗎？
+Voulez-vous nous donner plus d'informations ?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-30 (世界標準時間)。"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/30 (UTC)."],[],[]]

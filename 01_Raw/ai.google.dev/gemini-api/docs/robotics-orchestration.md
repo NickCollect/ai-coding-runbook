@@ -1,34 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=zh-TW
-fetched_at: 2026-08-24T02:29:01.900285+00:00
-title: "\u5de5\u4f5c\u81ea\u52d5\u5316\u8abf\u5ea6\u7ba1\u7406 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=hi
+fetched_at: 2026-08-31T06:40:34.237170+00:00
+title: "\u091f\u093e\u0938\u094d\u0915 \u0911\u0930\u094d\u0915\u0947\u0938\u094d\u091f\u094d\u0930\u0947\u0936\u0928 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-提供意見
+सुझाव भेजें
 
-# 工作自動化調度管理
+# टास्क ऑर्केस्ट्रेशन
 
-Gemini Robotics ER 模型可以規劃工作和推論空間，推斷要採取哪些動作和移動哪些物體，才能達成目標。本頁提供範例，說明如何透過自訂機器人 API 驅動取放作業，協調將物品放入碗中的工作。這個範例使用標準 Gemini ER 2 模型。如需串流範例，請參閱 [Gemini ER 2 串流指南](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=zh-tw)。
+Gemini Robotics ER मॉडल, टास्क प्लान कर सकते हैं. साथ ही, यह अनुमान लगा सकते हैं कि किसी लक्ष्य को पूरा करने के लिए, कौनसे ऑब्जेक्ट को कहाँ ले जाना है और कौनसे ऐक्शन लेने हैं. इस पेज पर, [पिक-एंड-प्लेस की प्रोसेस को कंट्रोल करने](https://ai.google.dev/gemini-api/docs/calling-custom-robot-api?hl=hi) का उदाहरण दिखाया गया है. इसके लिए, कस्टम रोबोट एपीआई का इस्तेमाल किया गया है, ताकि किसी आइटम को कटोरे में रखने के टास्क को मैनेज किया जा सके. इस उदाहरण में, Gemini ER 2 के स्टैंडर्ड मॉडल का इस्तेमाल किया गया है. स्ट्रीमिंग के उदाहरण के लिए, [Gemini ER 2 की स्ट्रीमिंग से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=hi) देखें.
 
-如需完整的可執行程式碼，請參閱「[機器人食譜](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)」。
+पूरे रन करने लायक कोड के लिए, [रोबोटिक्स कुकबुक](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb) देखें.
 
-## 使用自訂機器人 API
+## कस्टम रोबोट एपीआई का इस्तेमाल करना
 
-這個範例說明如何使用自訂機器人 API 編排工作。這個 API 專為取放作業設計，這項工作的目標是拿起藍色積木，然後放入橘色碗中：
+इस उदाहरण में, कस्टम रोबोट एपीआई की मदद से टास्क ऑर्केस्ट्रेशन के बारे में बताया गया है. इसमें पिक-एंड-प्लेस ऑपरेशन के लिए डिज़ाइन किया गया मॉक एपीआई शामिल है. टास्क में, नीले रंग के ब्लॉक को उठाकर नारंगी रंग के कटोरे में रखना है:
 
-![木塊和碗的圖片](https://ai.google.dev/static/gemini-api/docs/images/robotics/robot-api-example.png?hl=zh-tw)
+![ब्लॉक और कटोरे की इमेज](https://ai.google.dev/static/gemini-api/docs/images/robotics/robot-api-example.png?hl=hi)
 
-本範例使用下列模擬機器人 API：
+इस उदाहरण में, रोबोट के एपीआई के इस मॉक का इस्तेमाल किया गया है:
 
 ### Python
 
@@ -71,7 +71,7 @@ set_gripper_state_function = {
 }
 ```
 
-以下範例會將提示和圖片連同工具定義傳送給模型。接著執行代理程式迴圈：在每次模型回覆後，執行任何要求的函式呼叫 (`move`、`setGripperState`)，使用 `previous_interaction_id` 將結果傳回模型，並重複執行，直到模型停止呼叫函式或達到步驟限制為止。
+यहां दिए गए उदाहरण में, टूल की परिभाषाओं के साथ मॉडल को प्रॉम्प्ट और इमेज भेजी जाती है. इसके बाद, यह एजेंटिक लूप चलाता है: हर मॉडल रिस्पॉन्स के बाद, यह अनुरोध किए गए किसी भी फ़ंक्शन कॉल (`move`, `setGripperState`) को एक्ज़ीक्यूट करता है. साथ ही, `previous_interaction_id` का इस्तेमाल करके, नतीजों को मॉडल पर वापस भेजता है. यह प्रोसेस तब तक दोहराई जाती है, जब तक मॉडल फ़ंक्शन कॉल करना बंद नहीं कर देता या चरण की सीमा पूरी नहीं हो जाती.
 
 ### Python
 
@@ -147,7 +147,7 @@ while step_count < max_steps:
     )
 ```
 
-以下是根據提示和模擬機器人 API，模型可能產生的輸出內容。輸出內容包含模型依序執行的機器人函式呼叫輸出內容。
+यहां प्रॉम्प्ट और मॉक रोबोट एपीआई के आधार पर, मॉडल का संभावित आउटपुट दिखाया गया है. आउटपुट में, रोबोट फ़ंक्शन कॉल का आउटपुट शामिल होता है. मॉडल ने इन फ़ंक्शन कॉल को एक साथ क्रम से लगाया है.
 
 ```
 --- Executing Orchestrated Plan ---
@@ -164,18 +164,18 @@ Sequence complete.
 Model Summary: I have completed the task of picking up the blue block and placing it into the orange bowl.
 ```
 
-## 後續步驟
+## आगे क्या करना है
 
-- [串流機器人](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=zh-tw)：透過函式呼叫進行即時串流 (僅限 Gemini Robotics ER 2)。
-- [影片理解](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=zh-tw)：追蹤影片中的工作進度 (僅限 ER 2)。
-- [空間推論](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=zh-tw)：指向、追蹤和定界框範例。
+- [स्ट्रीमिंग के साथ रोबोटिक्स](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=hi) — फ़ंक्शन कॉलिंग के साथ रीयल-टाइम स्ट्रीमिंग (सिर्फ़ Gemini Robotics ER 2).
+- [वीडियो को समझना](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=hi) — वीडियो से टास्क की प्रोग्रेस को ट्रैक करना (सिर्फ़ ER 2).
+- [स्पेशल रीज़निंग](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=hi) — पॉइंटिंग, ट्रैकिंग, और बाउंडिंग बॉक्स के उदाहरण.
 
-提供意見
+सुझाव भेजें
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-上次更新時間：2026-07-30 (世界標準時間)。
+आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया.
 
-想進一步說明嗎？
+क्या आपको हमें और कुछ बताना है?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-30 (世界標準時間)。"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया."],[],[]]

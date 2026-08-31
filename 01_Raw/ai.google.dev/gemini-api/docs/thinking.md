@@ -1,40 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=fr
-fetched_at: 2026-08-24T02:37:26.739769+00:00
-title: "Gemini avec r\u00e9flexion \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=ja
+fetched_at: 2026-08-31T06:37:29.644544+00:00
+title: "Gemini \u306e\u601d\u8003 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Envoyer des commentaires
+フィードバックを送信
 
-# Gemini avec réflexion
+# Gemini の思考
 
-Les modèles des séries [Gemini 3 et 2.5](https://ai.google.dev/gemini-api/docs/models?hl=fr) utilisent un
-"processus de réflexion" qui améliore considérablement leurs capacités de raisonnement et de planification en plusieurs étapes,
-ce qui les rend très efficaces pour les tâches complexes telles que
-la programmation, les mathématiques avancées et l'analyse de données.
+[Gemini 3 シリーズと 2.5 シリーズのモデル](https://ai.google.dev/gemini-api/docs/models?hl=ja)は
+「思考プロセス」を使用しており、推論能力とマルチステップ
+プランニング能力が大幅に向上しているため、コーディング、高度な数学、データ分析などの複雑なタスクに非常に効果的です。
 
-Lorsque vous utilisez un modèle de réflexion, Gemini raisonne en interne avant de répondre. L'API Interactions met en évidence ce raisonnement via des étapes `thought` dédiées qui apparaissent de manière chronologique à côté des appels de fonction, des entrées utilisateur ou des sorties de modèle dans le tableau `steps`.
+思考モデルを使用する場合、Gemini はレスポンスを返す前に内部で推論を行います。Interactions API は、この推論を `thought` ステップとして公開します。これは、`steps` 配列内の関数呼び出し、ユーザー入力、モデル出力とともに時系列で表示される専用のステップです。
 
-Chaque étape de réflexion contient deux champs :
+すべての思考ステップには、次の 2 つのフィールドが含まれています。
 
-| Champ | Obligatoire | Description |
+| フィールド | 必須 | 説明 |
 | --- | --- | --- |
-| `signature` | ✅ Oui | Représentation chiffrée de l'état de raisonnement interne du modèle. Toujours présent, même lorsque le modèle effectue un raisonnement minimal. |
-| `summary` | ❌ Non | Tableau de contenu (texte et/ou images) résumant le raisonnement. Peut être vide en fonction de la [`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=fr) config, du fait que le modèle a effectué suffisamment de raisonnement ou du type de contenu (par exemple, les latents d'image peuvent ne pas avoir de résumés de texte). |
+| `signature` | ✅ はい | モデルの内部推論状態を暗号化したもの。モデルが最小限の推論を行う場合でも常に存在します。 |
+| `summary` | ❌ いいえ | 推論を要約するコンテンツ（テキストや画像）の配列。[`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=ja) 構成、モデルが十分な推論を行ったかどうか、コンテンツ タイプ（画像レイテンシにテキストの要約がない場合など）によって空になることがあります。 |
 
-## Interactions avec la réflexion
+## 思考とのインタラクション
 
-Lancer une interaction avec un modèle de réflexion est semblable à toute autre requête d'interaction. Spécifiez l'un des [modèles compatibles avec la réflexion](#thinking-levels) dans le `model` champ :
+思考モデルとのインタラクションを開始する手順は、他のインタラクション リクエストと同様です。`model` フィールドで、[思考をサポートするモデル](#thinking-levels)のいずれかを指定します。
 
 ### Python
 
@@ -76,10 +75,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Résumés des réflexions
+## 思考の要約
 
-Les résumés des réflexions fournissent des insights sur le processus de raisonnement interne du modèle.
-Par défaut, seule la sortie finale est renvoyée. Vous pouvez activer les résumés des réflexions avec `thinking_summaries` :
+思考の要約は、モデルの内部推論プロセスに関する分析情報を提供します。
+デフォルトでは、最終出力のみが返されます。`thinking_summaries` を使用して思考の要約を有効にできます。
 
 ### Python
 
@@ -161,23 +160,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Un bloc de réflexion peut contenir **uniquement une signature sans résumé** dans les cas suivants :
+思考ブロックには、次のような場合に**要約のない署名のみ** が含まれることがあります。
 
-- Requêtes simples, où le modèle n'a pas suffisamment raisonné pour générer un résumé
-- `thinking_summaries: "none"`, où les résumés sont explicitement désactivés
-- Certains types de contenu de réflexion, tels que les images, peuvent ne pas avoir de résumés de texte
+- モデルが要約を生成するのに十分な推論を行わなかった簡単なリクエスト
+- `thinking_summaries: "none"`: 要約が明示的に無効になっている場合
+- 画像など、特定の思考コンテンツ タイプにはテキストの要約がない場合がある
 
-Votre code doit toujours gérer les blocs de réflexion où `summary` est vide ou absent.
+コードでは、`summary` が空または存在しない思考ブロックを常に処理する必要があります。
 
-## Streaming avec réflexion
+## 思考を伴うストリーミング
 
-Utilisez le streaming pour recevoir des résumés de réflexion incrémentiels lors de la génération.
-Les blocs de réflexion sont fournis à l'aide d'événements envoyés par le serveur (SSE) avec deux types de delta distincts :
+ストリーミングを使用して、生成中に増分思考の要約を受け取ります。
+思考ブロックは、サーバー送信イベント（SSE）を使用して配信され、2 つの異なるデルタタイプがあります。
 
-| Type de delta | Contient | Quand les données sont envoyées |
+| デルタタイプ | 次を含む | 送信されるタイミング |
 | --- | --- | --- |
-| `thought_summary` | Contenu du résumé de texte ou d'image | Un ou plusieurs deltas avec un résumé incrémentiel |
-| `thought_signature` | La signature cryptographique | le dernier delta avant `step.stop` |
+| `thought_summary` | テキストまたは画像の要約コンテンツ | 増分要約を含む 1 つ以上のデルタ |
+| `thought_signature` | 暗号署名 | `step.stop` の前の最後のデルタ |
 
 ### Python
 
@@ -279,7 +278,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-La réponse en streaming utilise des événements envoyés par le serveur (SSE) et se compose d'étapes et d'événements, par exemple :
+ストリーミング レスポンスはサーバー送信イベント（SSE）を使用し、ステップとイベントで構成されます。例:
 
 ```
 event: interaction.created
@@ -310,22 +309,22 @@ event: done
 data: [DONE]
 ```
 
-## Contrôler la réflexion
+## 思考の制御
 
-Les modèles Gemini s'engagent dans une réflexion dynamique par défaut, en ajustant automatiquement la quantité d'efforts de raisonnement en fonction de la complexité de la requête. Vous pouvez contrôler ce comportement à l'aide du paramètre `thinking_level`.
+Gemini モデルはデフォルトで動的思考を行い、リクエストの複雑さに応じて推論の労力を自動的に調整します。この動作は、`thinking_level` パラメータを使用して制御できます。
 
-| Modèle | Réflexion par défaut | Niveaux compatibles |
+| モデル | デフォルトの思考 | サポートされているレベル |
 | --- | --- | --- |
-| gemini-3.6-flash | Activé (moyen) | minimal, faible, moyen, élevé |
-| gemini-3.5-flash-lite | Activé (minimal) | minimal, faible, moyen, élevé |
-| gemini-3.1-pro-preview | Activé (élevé) | faible, moyen, élevé |
-| gemini-3.1-flash-lite-image | Activé (minimal) | minimal, élevé |
-| gemini-3-flash-preview | Activé (élevé) | minimal, faible, moyen, élevé |
-| gemini-3-pro-preview | Activé (élevé) | faible, élevé |
-| gemini-3.5-flash | Activé (moyen) | minimal, faible, moyen, élevé |
-| gemini-2.5-pro | Activé | faible, moyen, élevé |
-| gemini-2.5-flash | Activé | faible, moyen, élevé |
-| gemini-2.5-flash-lite | Désactivé | faible, moyen, élevé |
+| gemini-3.6-flash | オン（中） | ミニマル、低、中、高 |
+| gemini-3.5-flash-lite | オン（ミニマル） | ミニマル、低、中、高 |
+| gemini-3.1-pro-preview | オン（高） | 低、中、高 |
+| gemini-3.1-flash-lite-image | オン（ミニマル） | ミニマル、高 |
+| gemini-3-flash-preview | オン（高） | ミニマル、低、中、高 |
+| gemini-3-pro-preview | オン（高） | 低、高 |
+| gemini-3.5-flash | オン（中） | ミニマル、低、中、高 |
+| gemini-2.5-pro | オン | 低、中、高 |
+| gemini-2.5-flash | オン | 低、中、高 |
+| gemini-2.5-flash-lite | オフ | 低、中、高 |
 
 ### Python
 
@@ -376,27 +375,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Signatures de réflexion
+## 思考シグネチャ
 
-Les signatures de réflexion sont des représentations chiffrées du raisonnement interne du modèle. Elles sont nécessaires pour maintenir la continuité du raisonnement dans les interactions multitours.
+思考シグネチャは、モデルの内部推論を暗号化したものです。マルチターン インタラクションで推論の継続性を維持するために必要です。
 
-L'API Interactions simplifie considérablement la gestion des signatures de réflexion par rapport à l'API `generateContent`.
+Interactions API を使用すると、`generateContent` API よりも思考シグネチャの処理がはるかに簡単になります。
 
-### Mode avec état (recommandé)
+### ステートフル モード（推奨）
 
-Par défaut, lorsque vous utilisez l'API Interactions en mode avec état (en définissant `store: true` et en transmettant le `previous_interaction_id` dans les tours suivants), le serveur gère automatiquement l'état de la conversation, y compris tous les blocs de réflexion et les signatures. Dans ce mode, vous n'avez rien à faire concernant les signatures. Elles sont entièrement gérées côté serveur.
+デフォルトでは、ステートフル モードで Interactions API を使用する場合（`store: true` を設定し、後続のターンで `previous_interaction_id` を渡す場合）、サーバーはすべての思考ブロックと署名を含む会話の状態を自動的に管理します。このモードでは、署名に関して何もする必要はありません。サーバー側で完全に処理されます。
 
-### Mode sans état
+### ステートレス モード
 
-Si vous gérez vous-même l'état de la conversation (mode sans état) et que vous transmettez l'historique complet des entrées et des sorties dans chaque requête :
+会話の状態を自分で管理し（ステートレス モード）、各リクエストで入力と出力の完全な履歴を渡す場合:
 
-- Vous **DEVEZ** toujours renvoyer tous les blocs `thought` exactement tels qu'ils ont été reçus du modèle.
-- Vous **NE DEVEZ PAS** supprimer ni modifier les blocs de réflexion de l'historique, car ils contiennent les signatures requises pour que le modèle poursuive son raisonnement.
-- Lorsque vous changez de modèle au cours d'une session, vous devez toujours renvoyer les blocs de réflexion du modèle précédent. Le backend gère la compatibilité.
+- モデルから受信したとおりに、すべての `thought` ブロックを常に再送信する**必要があります** 。
+- 思考ブロックには、モデルが推論を続行するために必要な署名が含まれているため、履歴から思考ブロックを削除または変更**しないでください** 。
+- セッション内でモデルを切り替える場合は、前のモデルの思考ブロックを再送信する必要があります。バックエンドで互換性が管理されます。
 
-## Tarifs
+## 料金
 
-Lorsque la réflexion est activée, le prix de la réponse correspond à la somme des jetons de sortie et des jetons de réflexion. Vous pouvez obtenir le nombre total de jetons de réflexion générés à partir du champ `total_thought_tokens`.
+思考がオンの場合、レスポンスの料金は出力トークンと思考トークンの合計です。生成された思考トークンの合計数は、`total_thought_tokens` フィールドから取得できます。
 
 ### Python
 
@@ -412,32 +411,32 @@ console.log(`Thoughts tokens: ${interaction.usage.total_thought_tokens}`);
 console.log(`Output tokens: ${interaction.usage.total_output_tokens}`);
 ```
 
-Les modèles de réflexion génèrent des réflexions complètes pour améliorer la qualité de la réponse finale, puis génèrent des [résumés](#summaries) pour fournir des insights sur le processus de réflexion. La tarification est basée sur les jetons de réflexion complets que le modèle doit générer, même si seul le résumé est généré par l'API.
+[思考モデルは、最終的なレスポンスの質を高めるために完全な思考を生成し、思考プロセスに関する分析情報を提供するために要約を出力します。](#summaries)料金は、API から出力されるのは要約のみですが、モデルが生成する必要がある完全な思考トークンに基づきます。
 
-Pour en savoir plus sur les jetons, consultez le guide sur le [comptage des jetons](https://ai.google.dev/gemini-api/docs/tokens?hl=fr).
+トークンの詳細については、[トークン数のカウント](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)ガイドをご覧ください。
 
-## Bonnes pratiques
+## ベスト プラクティス
 
-Utilisez efficacement les modèles de réflexion en suivant ces consignes.
+次のガイドラインに沿って、思考モデルを効率的に使用してください。
 
-- **Examiner le raisonnement** : analysez les résumés des réflexions pour comprendre les échecs et améliorer les requêtes.
-- **Contrôler le budget de réflexion** : demandez au modèle de moins réfléchir pour les sorties longues afin d'économiser des jetons.
-- **Tâches simples** : utilisez une réflexion minimale ou faible pour la récupération ou la classification de faits (par exemple, « Où DeepMind a-t-il été fondé ? »).
-- **Tâches modérées** : utilisez la réflexion par défaut pour comparer des concepts ou un raisonnement créatif (par exemple, comparer les voitures électriques et hybrides).
-- **Tâches complexes** : utilisez une réflexion maximale pour la programmation avancée, les mathématiques ou la planification en plusieurs étapes (par exemple, résoudre des problèmes mathématiques AIME).
+- **推論を確認する**: 思考の要約を分析して、失敗の原因を把握し、プロンプトを改善します。
+- **思考予算を管理する**: 長い出力の場合は、トークンを節約するために、モデルの思考を減らすようにプロンプトを設定します。
+- **簡単なタスク**: 事実の取得や分類には、最小限または低レベルの思考を使用します（例: 「DeepMind はどこで設立されましたか？」）。
+- **中程度のタスク**: 概念の比較や創造的な推論には、デフォルトの思考を使用します（例: 電気自動車とハイブリッド車の比較）。
+- **複雑なタスク**: 高度なコーディング、数学、マルチステップ プランニングには、最大限の思考を使用します（例: AIME の数学の問題を解く）。
 
-## Étape suivante
+## 次のステップ
 
-- [Génération de texte](https://ai.google.dev/gemini-api/docs/text-generation?hl=fr) : réponses textuelles de base
-- [Appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr) : se connecter à des outils
-- [Guide Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=fr) : fonctionnalités spécifiques au modèle
+- [テキスト生成](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja): 基本的なテキスト レスポンス
+- [関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja): ツールに接続する
+- [Gemini 3 ガイド](https://ai.google.dev/gemini-api/docs/gemini-3?hl=ja): モデル固有の機能
 
-Envoyer des commentaires
+フィードバックを送信
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Dernière mise à jour le 2026/07/30 (UTC).
+最終更新日 2026-07-30 UTC。
 
-Voulez-vous nous donner plus d'informations ?
+ご意見をお聞かせください
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/30 (UTC)."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-30 UTC。"],[],[]]
