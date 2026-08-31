@@ -24,20 +24,25 @@ const DEFAULT_PROVIDER_CHAIN_RESOLVER: (
   logger?: Logger | undefined,
 ) => Promise<AwsCredentialIdentityProvider> = (logger) =>
   import('@aws-sdk/credential-providers')
-    .then(({ fromNodeProviderChain }) =>
-      fromNodeProviderChain({
-        ...(logger != null ? { logger } : {}),
-        clientConfig: {
+    .then(({ createCredentialChain, fromEnv, fromNodeProviderChain }) =>
+      // The Node default chain skips env credentials whenever `AWS_PROFILE` is set;
+      // the AWS CLI and the other Anthropic SDKs let env credentials win.
+      createCredentialChain(
+        fromEnv(logger != null ? { logger } : {}),
+        fromNodeProviderChain({
           ...(logger != null ? { logger } : {}),
-          requestHandler: new FetchHttpHandler({
-            requestInit: (httpRequest) => {
-              return {
-                ...httpRequest,
-              } as RequestInit;
-            },
-          }),
-        },
-      }),
+          clientConfig: {
+            ...(logger != null ? { logger } : {}),
+            requestHandler: new FetchHttpHandler({
+              requestInit: (httpRequest) => {
+                return {
+                  ...httpRequest,
+                } as RequestInit;
+              },
+            }),
+          },
+        }),
+      ),
     )
     .catch((error) => {
       throw new Error(
@@ -94,12 +99,11 @@ export const getAuthHeaders = async (req: RequestInit, props: AuthProps): Promis
   // of this message may not see this header, so we remove it from the set of headers
   // that are signed.
   delete headers['connection'];
-  headers['host'] = url.hostname;
+  headers['host'] = url.host;
 
-  const query: Record<string, string> = {};
-  url.searchParams.forEach((value, key) => {
-    query[key] = value;
-  });
+  const query: Record<string, string[]> = Object.fromEntries(
+    [...new Set(url.searchParams.keys())].map((key) => [key, url.searchParams.getAll(key)]),
+  );
 
   const request = new HttpRequest({
     method: req.method.toUpperCase(),

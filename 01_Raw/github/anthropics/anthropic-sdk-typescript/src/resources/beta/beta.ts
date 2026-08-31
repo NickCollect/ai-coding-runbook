@@ -103,7 +103,7 @@ import * as FilesAPI from './files';
 import {
   BetaDeletedFile,
   BetaFileMetadata,
-  BetaFileMetadataPage,
+  BetaFileMetadataPageCursor,
   BetaFileScope,
   FileDeleteParams,
   FileDownloadParams,
@@ -427,6 +427,7 @@ import {
   BetaComputerZoomConfig,
   BetaContainer,
   BetaContainerParams,
+  BetaContainerSkill,
   BetaContainerUploadBlock,
   BetaContainerUploadBlockParam,
   BetaContentBlock,
@@ -507,7 +508,6 @@ import {
   BetaServerToolUseBlock,
   BetaServerToolUseBlockParam,
   BetaSignatureDelta,
-  BetaSkill,
   BetaSkillParams,
   BetaStopReason,
   BetaTextBlock,
@@ -595,6 +595,8 @@ import {
   BetaMCPToolConfig,
   BetaMCPToolDefaultConfig,
 } from './messages/messages';
+import * as OrganizationAPI from './organization/organization';
+import { BetaOrganization, BetaOrganizationRole, Organization } from './organization/organization';
 import * as SessionsAPI from './sessions/sessions';
 import {
   BetaManagedAgentsAdvisorParams,
@@ -642,15 +644,14 @@ import {
 } from './sessions/sessions';
 import * as SkillsAPI from './skills/skills';
 import {
+  BetaDeletedSkill,
+  BetaSkill,
+  BetaSkillSource,
+  BetaSkillsPageCursor,
   SkillCreateParams,
-  SkillCreateResponse,
   SkillDeleteParams,
-  SkillDeleteResponse,
   SkillListParams,
-  SkillListResponse,
-  SkillListResponsesPageCursor,
   SkillRetrieveParams,
-  SkillRetrieveResponse,
   Skills,
 } from './skills/skills';
 import * as TunnelsAPI from './tunnels/tunnels';
@@ -696,6 +697,7 @@ export class Beta extends APIResource {
   userProfiles: UserProfilesAPI.UserProfiles = new UserProfilesAPI.UserProfiles(this._client);
   dreams: DreamsAPI.Dreams = new DreamsAPI.Dreams(this._client);
   tunnels: TunnelsAPI.Tunnels = new TunnelsAPI.Tunnels(this._client);
+  organization: OrganizationAPI.Organization = new OrganizationAPI.Organization(this._client);
 }
 
 export type AnthropicBeta =
@@ -733,7 +735,14 @@ export type AnthropicBeta =
   | 'fallback-credit-2026-06-01'
   | 'fallback-credit-2026-07-01'
   | 'agent-memory-2026-07-22'
-  | 'mid-conversation-tool-changes-2026-07-01';
+  | 'mid-conversation-tool-changes-2026-07-01'
+  | 'compact-2026-01-12'
+  | 'computer-use-2025-11-24'
+  | 'mcp-tunnels-2026-06-22'
+  | 'structured-outputs-2025-11-13'
+  | 'task-budgets-2026-03-13'
+  | 'thinking-display-updates-2026-08-18'
+  | 'ce-user-management-2026-07-13';
 
 export interface BetaAPIError {
   message: string;
@@ -844,6 +853,7 @@ Beta.Webhooks = Webhooks;
 Beta.UserProfiles = UserProfiles;
 Beta.Dreams = Dreams;
 Beta.Tunnels = Tunnels;
+Beta.Organization = Organization;
 
 export declare namespace Beta {
   export {
@@ -1006,6 +1016,7 @@ export declare namespace Beta {
     type BetaComputerZoomConfig as BetaComputerZoomConfig,
     type BetaContainer as BetaContainer,
     type BetaContainerParams as BetaContainerParams,
+    type BetaContainerSkill as BetaContainerSkill,
     type BetaContainerUploadBlock as BetaContainerUploadBlock,
     type BetaContainerUploadBlockParam as BetaContainerUploadBlockParam,
     type BetaContentBlock as BetaContentBlock,
@@ -1088,7 +1099,6 @@ export declare namespace Beta {
     type BetaServerToolUseBlock as BetaServerToolUseBlock,
     type BetaServerToolUseBlockParam as BetaServerToolUseBlockParam,
     type BetaSignatureDelta as BetaSignatureDelta,
-    type BetaSkill as BetaSkill,
     type BetaSkillParams as BetaSkillParams,
     type BetaStopReason as BetaStopReason,
     type BetaTextBlock as BetaTextBlock,
@@ -1419,7 +1429,7 @@ export declare namespace Beta {
     type BetaDeletedFile as BetaDeletedFile,
     type BetaFileMetadata as BetaFileMetadata,
     type BetaFileScope as BetaFileScope,
-    type BetaFileMetadataPage as BetaFileMetadataPage,
+    type BetaFileMetadataPageCursor as BetaFileMetadataPageCursor,
     type FileListParams as FileListParams,
     type FileDeleteParams as FileDeleteParams,
     type FileDownloadParams as FileDownloadParams,
@@ -1429,11 +1439,10 @@ export declare namespace Beta {
 
   export {
     Skills as Skills,
-    type SkillCreateResponse as SkillCreateResponse,
-    type SkillRetrieveResponse as SkillRetrieveResponse,
-    type SkillListResponse as SkillListResponse,
-    type SkillDeleteResponse as SkillDeleteResponse,
-    type SkillListResponsesPageCursor as SkillListResponsesPageCursor,
+    type BetaDeletedSkill as BetaDeletedSkill,
+    type BetaSkill as BetaSkill,
+    type BetaSkillSource as BetaSkillSource,
+    type BetaSkillsPageCursor as BetaSkillsPageCursor,
     type SkillCreateParams as SkillCreateParams,
     type SkillRetrieveParams as SkillRetrieveParams,
     type SkillListParams as SkillListParams,
@@ -1539,5 +1548,11 @@ export declare namespace Beta {
     type TunnelArchiveParams as TunnelArchiveParams,
     type TunnelRevealTokenParams as TunnelRevealTokenParams,
     type TunnelRotateTokenParams as TunnelRotateTokenParams,
+  };
+
+  export {
+    Organization as Organization,
+    type BetaOrganization as BetaOrganization,
+    type BetaOrganizationRole as BetaOrganizationRole,
   };
 }

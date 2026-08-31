@@ -3,7 +3,7 @@ import threading
 from typing import Dict, List, cast
 from typing_extensions import Protocol
 
-import httpx2 as httpx
+import httpx2
 import pytest
 from respx import MockRouter
 
@@ -13,7 +13,7 @@ from anthropic.lib.credentials import StaticToken
 
 
 class MockRequestCall(Protocol):
-    request: httpx.Request
+    request: httpx2.Request
 
 
 # --- Initialization ---
@@ -138,7 +138,7 @@ def test_skip_auth_async(monkeypatch: pytest.MonkeyPatch) -> None:
 @pytest.mark.respx()
 def test_skip_auth_no_auth_headers(respx_mock: MockRouter) -> None:
     respx_mock.post(re.compile(r"https://custom\.example\.com/.*")).mock(
-        return_value=httpx.Response(200, json={"foo": "bar"})
+        return_value=httpx2.Response(200, json={"foo": "bar"})
     )
 
     client = AnthropicAWS(skip_auth=True, base_url="https://custom.example.com")
@@ -274,7 +274,7 @@ def test_async_has_all_resources() -> None:
 @pytest.mark.respx()
 def test_api_key_request(respx_mock: MockRouter) -> None:
     respx_mock.post(re.compile(r"https://aws-external-anthropic\.us-east-1\.api\.aws/.*")).mock(
-        return_value=httpx.Response(200, json={"foo": "bar"})
+        return_value=httpx2.Response(200, json={"foo": "bar"})
     )
 
     client = AnthropicAWS(api_key="test-key", aws_region="us-east-1", workspace_id="ws-123")
@@ -295,7 +295,7 @@ def test_api_key_request(respx_mock: MockRouter) -> None:
 @pytest.mark.asyncio()
 async def test_api_key_request_async(respx_mock: MockRouter) -> None:
     respx_mock.post(re.compile(r"https://aws-external-anthropic\.us-east-1\.api\.aws/.*")).mock(
-        return_value=httpx.Response(200, json={"foo": "bar"})
+        return_value=httpx2.Response(200, json={"foo": "bar"})
     )
 
     client = AsyncAnthropicAWS(api_key="test-key", aws_region="us-east-1", workspace_id="ws-123")
@@ -316,8 +316,8 @@ async def test_api_key_request_async(respx_mock: MockRouter) -> None:
 def test_retries(respx_mock: MockRouter) -> None:
     respx_mock.post(re.compile(r"https://aws-external-anthropic\.us-east-1\.api\.aws/.*")).mock(
         side_effect=[
-            httpx.Response(500, json={"error": "server error"}, headers={"retry-after-ms": "10"}),
-            httpx.Response(200, json={"foo": "bar"}),
+            httpx2.Response(500, json={"error": "server error"}, headers={"retry-after-ms": "10"}),
+            httpx2.Response(200, json={"foo": "bar"}),
         ]
     )
 
@@ -330,6 +330,34 @@ def test_retries(respx_mock: MockRouter) -> None:
 
     calls = cast("list[MockRequestCall]", respx_mock.calls)
     assert len(calls) == 2
+
+
+# --- Request behavior (SigV4 mode) ---
+
+
+@pytest.mark.respx()
+@pytest.mark.asyncio()
+@pytest.mark.parametrize("sync", [True, False], ids=["sync", "async"])
+async def test_sigv4_binary_file_upload(sync: bool, respx_mock: MockRouter) -> None:
+    respx_mock.post(re.compile(r"https://aws-external-anthropic\.us-east-1\.api\.aws/.*")).mock(
+        return_value=httpx2.Response(200, json={"id": "file_123", "type": "file"})
+    )
+    png = b"\x89PNG\r\n\x1a\n\x00\xff\xfe"
+
+    if sync:
+        AnthropicAWS(
+            aws_access_key="AKID", aws_secret_key="secret", aws_region="us-east-1", workspace_id="ws-123"
+        ).files.upload(file=("x.png", png, "image/png"))
+    else:
+        await AsyncAnthropicAWS(
+            aws_access_key="AKID", aws_secret_key="secret", aws_region="us-east-1", workspace_id="ws-123"
+        ).files.upload(file=("x.png", png, "image/png"))
+
+    calls = cast("list[MockRequestCall]", respx_mock.calls)
+    assert len(calls) == 1
+    assert str(calls[0].request.url) == "https://aws-external-anthropic.us-east-1.api.aws/v1/files"
+    assert png in calls[0].request.content
+    assert calls[0].request.headers["Authorization"].startswith("AWS4-HMAC-SHA256 ")
 
 
 # --- copy / with_options ---
@@ -472,7 +500,7 @@ async def test_sigv4_signing_runs_off_event_loop_async(monkeypatch: pytest.Monke
 
     monkeypatch.setattr("anthropic.lib.aws._auth.get_auth_headers", fake_get_auth_headers)
 
-    request = httpx.Request("POST", "https://aws-external-anthropic.us-east-1.api.aws/v1/messages", content=b"{}")
+    request = httpx2.Request("POST", "https://aws-external-anthropic.us-east-1.api.aws/v1/messages", content=b"{}")
     await client._prepare_request(request)
 
     assert len(signing_threads) == 1

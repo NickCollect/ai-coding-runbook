@@ -1,0 +1,11 @@
+{
+  "description": "jest 29 native ESM (--experimental-vm-modules) via ts-jest, including the ESM/CJS dual-package instanceof behaviour",
+  "requires": ["node"],
+  "packageManager": "npm",
+  "perNodeVersion": true,
+  "minNodeVersion": 20,
+  "steps": [
+    ["npx", "tsc", "--noEmit"],
+    ["node", "--experimental-vm-modules", "node_modules/jest/bin/jest.js"]
+  ]
+}

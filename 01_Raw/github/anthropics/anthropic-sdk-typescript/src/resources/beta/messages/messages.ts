@@ -2675,7 +2675,7 @@ export interface BetaContainer {
   /**
    * Skills loaded in the container
    */
-  skills: Array<BetaSkill> | null;
+  skills: Array<BetaContainerSkill> | null;
 }
 
 /**
@@ -2691,6 +2691,26 @@ export interface BetaContainerParams {
    * List of skills to load in the container
    */
   skills?: Array<BetaSkillParams> | null;
+}
+
+/**
+ * A skill that was loaded in a container (response model).
+ */
+export interface BetaContainerSkill {
+  /**
+   * Skill ID
+   */
+  skill_id: string;
+
+  /**
+   * Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
+   */
+  type: 'anthropic' | 'custom';
+
+  /**
+   * The resolved version: a skill version ID for custom skills.
+   */
+  version: string;
 }
 
 /**
@@ -3256,11 +3276,25 @@ export interface BetaInputTokensTrigger {
  * Per-iteration token usage breakdown.
  *
  * Each entry represents one sampling iteration, with its own input/output token
- * counts and cache statistics. This allows you to:
+ * counts and cache statistics, discriminated by `type`. For `message` entries
+ * (model sampling iterations, such as the turns of a server-side tool use loop),
+ * this allows you to:
  *
  * - Determine which iterations exceeded long context thresholds (>=200k tokens)
- * - Calculate the true context window size from the last iteration
+ * - Calculate the context window size from the last `message` entry
  * - Understand token accumulation across server-side tool use loops
+ *
+ * A `compaction` entry reports the token usage of the compaction operation itself
+ * — the server-side request that summarizes the context being closed — NOT the
+ * size of the context that was compacted away, and its token counts can be much
+ * smaller than that closed context (for example, a compaction that closes a
+ * ~200k-token context can report only a few thousand tokens). Do not derive the
+ * context window size from a `compaction` entry, even when it is the last entry. A
+ * `compaction` entry's tokens are not included in the top-level `usage` fields.
+ * When an input-token trigger is in effect (the default — 150,000 tokens unless
+ * configured otherwise), each `compaction` entry closes a context that had reached
+ * at least that threshold, though the context can exceed it by the final
+ * iteration's output and tool results.
  */
 export type BetaIterationsUsage = Array<
   | BetaMessageIterationUsage
@@ -3685,11 +3719,25 @@ export interface BetaMessageDeltaUsage {
    * Per-iteration token usage breakdown.
    *
    * Each entry represents one sampling iteration, with its own input/output token
-   * counts and cache statistics. This allows you to:
+   * counts and cache statistics, discriminated by `type`. For `message` entries
+   * (model sampling iterations, such as the turns of a server-side tool use loop),
+   * this allows you to:
    *
    * - Determine which iterations exceeded long context thresholds (>=200k tokens)
-   * - Calculate the true context window size from the last iteration
+   * - Calculate the context window size from the last `message` entry
    * - Understand token accumulation across server-side tool use loops
+   *
+   * A `compaction` entry reports the token usage of the compaction operation itself
+   * — the server-side request that summarizes the context being closed — NOT the
+   * size of the context that was compacted away, and its token counts can be much
+   * smaller than that closed context (for example, a compaction that closes a
+   * ~200k-token context can report only a few thousand tokens). Do not derive the
+   * context window size from a `compaction` entry, even when it is the last entry. A
+   * `compaction` entry's tokens are not included in the top-level `usage` fields.
+   * When an input-token trigger is in effect (the default — 150,000 tokens unless
+   * configured otherwise), each `compaction` entry closes a context that had reached
+   * at least that threshold, though the context can exceed it by the final
+   * iteration's output and tool results.
    */
   iterations: BetaIterationsUsage | null;
 
@@ -4266,26 +4314,6 @@ export interface BetaSignatureDelta {
 }
 
 /**
- * A skill that was loaded in a container (response model).
- */
-export interface BetaSkill {
-  /**
-   * Skill ID
-   */
-  skill_id: string;
-
-  /**
-   * Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
-   */
-  type: 'anthropic' | 'custom';
-
-  /**
-   * The resolved version: a skill version ID for custom skills.
-   */
-  version: string;
-}
-
-/**
  * Specification for a skill to be loaded in a container (request model).
  */
 export interface BetaSkillParams {
@@ -4536,7 +4564,7 @@ export interface BetaThinkingConfigAdaptive {
    * redacted but a signature is returned for multi-turn continuity. Defaults to
    * `summarized`.
    */
-  display?: 'summarized' | 'omitted' | null;
+  display?: 'summarized' | 'omitted' | 'updates' | null;
 }
 
 export interface BetaThinkingConfigDisabled {
@@ -4565,7 +4593,7 @@ export interface BetaThinkingConfigEnabled {
    * redacted but a signature is returned for multi-turn continuity. Defaults to
    * `summarized`.
    */
-  display?: 'summarized' | 'omitted' | null;
+  display?: 'summarized' | 'omitted' | 'updates' | null;
 }
 
 /**
@@ -5460,11 +5488,25 @@ export interface BetaUsage {
    * Per-iteration token usage breakdown.
    *
    * Each entry represents one sampling iteration, with its own input/output token
-   * counts and cache statistics. This allows you to:
+   * counts and cache statistics, discriminated by `type`. For `message` entries
+   * (model sampling iterations, such as the turns of a server-side tool use loop),
+   * this allows you to:
    *
    * - Determine which iterations exceeded long context thresholds (>=200k tokens)
-   * - Calculate the true context window size from the last iteration
+   * - Calculate the context window size from the last `message` entry
    * - Understand token accumulation across server-side tool use loops
+   *
+   * A `compaction` entry reports the token usage of the compaction operation itself
+   * — the server-side request that summarizes the context being closed — NOT the
+   * size of the context that was compacted away, and its token counts can be much
+   * smaller than that closed context (for example, a compaction that closes a
+   * ~200k-token context can report only a few thousand tokens). Do not derive the
+   * context window size from a `compaction` entry, even when it is the last entry. A
+   * `compaction` entry's tokens are not included in the top-level `usage` fields.
+   * When an input-token trigger is in effect (the default — 150,000 tokens unless
+   * configured otherwise), each `compaction` entry closes a context that had reached
+   * at least that threshold, though the context can exceed it by the final
+   * iteration's output and tool results.
    */
   iterations: BetaIterationsUsage | null;
 
@@ -6932,6 +6974,7 @@ export declare namespace Messages {
     type BetaComputerZoomConfig as BetaComputerZoomConfig,
     type BetaContainer as BetaContainer,
     type BetaContainerParams as BetaContainerParams,
+    type BetaContainerSkill as BetaContainerSkill,
     type BetaContainerUploadBlock as BetaContainerUploadBlock,
     type BetaContainerUploadBlockParam as BetaContainerUploadBlockParam,
     type BetaContentBlock as BetaContentBlock,
@@ -7015,7 +7058,6 @@ export declare namespace Messages {
     type BetaServerToolUseBlock as BetaServerToolUseBlock,
     type BetaServerToolUseBlockParam as BetaServerToolUseBlockParam,
     type BetaSignatureDelta as BetaSignatureDelta,
-    type BetaSkill as BetaSkill,
     type BetaSkillParams as BetaSkillParams,
     type BetaStopReason as BetaStopReason,
     type BetaTextBlock as BetaTextBlock,
