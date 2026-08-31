@@ -23,7 +23,7 @@ from pydantic import (
 )
 from pydantic.fields import FieldInfo
 from pydantic.json_schema import GenerateJsonSchema, JsonSchemaWarningKind
-from typing_extensions import NotRequired, ReadOnly, TypedDict, get_type_hints, is_typeddict
+from typing_extensions import NotRequired, ReadOnly, TypedDict, deprecated, get_type_hints, is_typeddict
 from typing_inspection.introspection import (
     UNKNOWN,
     AnnotationSource,
@@ -35,6 +35,7 @@ from typing_inspection.introspection import (
 from mcp.server.mcpserver.exceptions import InvalidSignature
 from mcp.server.mcpserver.utilities.logging import get_logger
 from mcp.server.mcpserver.utilities.types import Audio, Image
+from mcp.shared.exceptions import MCPDeprecationWarning
 
 logger = get_logger(__name__)
 
@@ -73,6 +74,25 @@ class StrictJsonSchema(GenerateJsonSchema):
         raise ValueError(f"JSON schema warning: {kind} - {detail}")
 
 
+_LOCAL_DEFS_PREFIX = "#/$defs/"
+
+
+def _inline_root_ref(schema: dict[str, Any]) -> dict[str, Any]:
+    """Give a schema whose root is a bare `$ref` into `$defs` an inline root.
+
+    pydantic emits a self-referential model as `{"$defs": {...}, "$ref": "#/$defs/Model"}`, with no
+    `type` at the root; `Tool.outputSchema` needs an object root (required on the wire through
+    2025-11-25). The referenced definition is copied onto the root and `$defs` is kept, since nested
+    references still point into it. Root siblings of the `$ref` win over the definition's keys.
+    """
+    ref = schema.get("$ref")
+    if not isinstance(ref, str) or not ref.startswith(_LOCAL_DEFS_PREFIX):
+        return schema
+    definition = cast(dict[str, Any], schema["$defs"][ref.removeprefix(_LOCAL_DEFS_PREFIX)])
+    siblings = {key: value for key, value in schema.items() if key != "$ref"}
+    return {**definition, **siblings}
+
+
 class ArgModelBase(BaseModel):
     """A model representing the arguments to a function."""
 
@@ -107,7 +127,8 @@ class FuncMetadata(BaseModel):
     def model_post_init(self, context: Any, /) -> None:
         if self.output_model is not None and self.output_schema is None:
             # StrictJsonSchema raises instead of warning, so an unserializable return type fails construction.
-            self.output_schema = self._output_adapter(self.output_model).json_schema(schema_generator=StrictJsonSchema)
+            schema = self._output_adapter(self.output_model).json_schema(schema_generator=StrictJsonSchema)
+            self.output_schema = _inline_root_ref(schema)
 
     def _output_adapter(self, output_model: type[Any]) -> TypeAdapter[Any]:
         """The validator/serializer for `output_model`, built once and rebuilt only if the field is reassigned."""
@@ -125,6 +146,28 @@ class FuncMetadata(BaseModel):
         arguments_parsed_model = self.arg_model.model_validate(arguments_pre_parsed)
         return arguments_parsed_model.model_dump_one_level()
 
+    async def call_fn(
+        self,
+        fn: Callable[..., Any | Awaitable[Any]],
+        fn_is_async: bool,
+        arguments: dict[str, Any],
+        arguments_to_pass_directly: dict[str, Any] | None = None,
+    ) -> Any:
+        """Call the function with already-validated `arguments` plus `arguments_to_pass_directly`.
+
+        `arguments` is the output of `validate_arguments`. A sync function runs on a
+        worker thread.
+        """
+        kwargs = arguments | (arguments_to_pass_directly or {})
+        if fn_is_async:
+            return await fn(**kwargs)
+        return await anyio.to_thread.run_sync(functools.partial(fn, **kwargs))
+
+    @deprecated(
+        "FuncMetadata.call_fn_with_arg_validation() is deprecated and will be removed in 3.0; "
+        "call validate_arguments() and then call_fn() instead.",
+        category=MCPDeprecationWarning,
+    )
     async def call_fn_with_arg_validation(
         self,
         fn: Callable[..., Any | Awaitable[Any]],
@@ -133,25 +176,12 @@ class FuncMetadata(BaseModel):
         arguments_to_pass_directly: dict[str, Any] | None,
         pre_validated: dict[str, Any] | None = None,
     ) -> Any:
-        """Call the given function with arguments validated and injected.
+        """Validate `arguments_to_validate` (unless `pre_validated` is given) and call the function.
 
-        Arguments are first attempted to be parsed from JSON, then validated against
-        the argument model, before being passed to the function. Pass `pre_validated`
-        (the output of `validate_arguments`) to reuse an earlier validation pass -
-        validating twice can re-run `default_factory`/stateful validators and hand the
-        function different values than a caller already observed.
+        Deprecated: call `validate_arguments` and then `call_fn`.
         """
-        # Copy so a caller-provided `pre_validated` dict is never mutated in place.
-        arguments_parsed_dict = dict(
-            pre_validated if pre_validated is not None else self.validate_arguments(arguments_to_validate)
-        )
-
-        arguments_parsed_dict |= arguments_to_pass_directly or {}
-
-        if fn_is_async:
-            return await fn(**arguments_parsed_dict)
-        else:
-            return await anyio.to_thread.run_sync(functools.partial(fn, **arguments_parsed_dict))
+        arguments = pre_validated if pre_validated is not None else self.validate_arguments(arguments_to_validate)
+        return await self.call_fn(fn, fn_is_async, arguments, arguments_to_pass_directly)
 
     def convert_result(self, result: Any) -> CallToolResult | InputRequiredResult:
         """Convert a function call result into a `CallToolResult`.
@@ -172,7 +202,7 @@ class FuncMetadata(BaseModel):
         # A schema published without a model (hand-built metadata) is advertised but not validated here.
         output_model = self.output_model if self.output_schema is not None else None
         if isinstance(result, CallToolResult):
-            if output_model is not None:
+            if output_model is not None and not result.is_error:
                 self._output_adapter(output_model).validate_python(result.structured_content)
             return result
 
@@ -224,8 +254,10 @@ class FuncMetadata(BaseModel):
             if isinstance(data_value, str) and field_info.annotation is not str:
                 try:
                     pre_parsed = json.loads(data_value)
-                except json.JSONDecodeError:
-                    continue  # Not JSON - skip
+                except (ValueError, RecursionError):
+                    # Not JSON, or JSON the parser refuses (over-long integers, deep
+                    # nesting): leave the string for validation to accept or reject.
+                    continue
                 if isinstance(pre_parsed, str | int | float):
                     # This is likely that the raw value is e.g. `"hello"` which we
                     # Should really be parsed as '"hello"' in Python - but if we parse
