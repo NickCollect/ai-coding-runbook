@@ -180,6 +180,7 @@ impl ChatWidget {
                     self.flush_completed_command_activity();
                 }
                 let input_result = self.bottom_pane.handle_key_event(key_event);
+                self.sync_backend_banner_view();
                 if should_pause_active_goal {
                     self.pause_active_goal_for_interrupt();
                 }
@@ -417,7 +418,10 @@ impl ChatWidget {
         } else {
             "Name thread"
         };
-        let view = CustomPromptView::new(
+        let suggestion_request = self
+            .thread_id
+            .map(|thread_id| (thread_id, uuid::Uuid::new_v4()));
+        let mut view = CustomPromptView::new(
             title.to_string(),
             "Type a name and press Enter".to_string(),
             /*initial_text*/ existing_name.unwrap_or_default().to_string(),
@@ -432,7 +436,32 @@ impl ChatWidget {
                 tx.set_thread_name(name);
             }),
         );
+        if let Some((_, request_id)) = suggestion_request {
+            view = view.with_text_suggestion(
+                request_id,
+                "Generating a title suggestion…".to_string(),
+                "Suggested from this conversation".to_string(),
+            );
+        }
         self.bottom_pane.show_text_prompt(view);
+        if let Some((thread_id, request_id)) = suggestion_request {
+            self.app_event_tx.send(AppEvent::SuggestThreadName {
+                thread_id,
+                request_id,
+            });
+        }
+    }
+
+    pub(crate) fn apply_thread_name_suggestion(
+        &mut self,
+        thread_id: ThreadId,
+        request_id: uuid::Uuid,
+        suggestion: Option<&str>,
+    ) {
+        if self.thread_id == Some(thread_id) {
+            self.bottom_pane
+                .apply_text_suggestion(request_id, suggestion);
+        }
     }
 
     pub(super) fn ensure_thread_rename_allowed(&mut self) -> bool {

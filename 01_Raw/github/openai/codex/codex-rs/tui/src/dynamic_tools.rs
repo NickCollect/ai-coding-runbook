@@ -46,8 +46,10 @@ use codex_app_server_protocol::Turn;
 use codex_app_server_protocol::TurnItemsView;
 use codex_app_server_protocol::TurnStartParams;
 use codex_app_server_protocol::TurnStartResponse;
+use codex_app_server_protocol::TurnToolOutput;
 use codex_app_server_protocol::UserInput;
 use codex_protocol::ThreadId;
+use codex_protocol::models::FunctionCallOutputBody;
 use serde::Deserialize;
 use serde::de::DeserializeOwned;
 use serde_json::Value;
@@ -630,7 +632,7 @@ async fn execute_inner(
             if let Some(model) = arguments.model {
                 thread_start_params.model = Some(model);
             }
-            let (started, _) =
+            let (started, _, task_tools_available) =
                 crate::app_server_session::request_thread_start_with_history_fallback(
                     &handle,
                     RequestId::String(format!("tui-dynamic-{}", Uuid::new_v4())),
@@ -639,7 +641,7 @@ async fn execute_inner(
                 .await
                 .map_err(|error| error.to_string())?;
             let thread_id = started.thread.id;
-            register_background_thread(app_event_tx, &thread_id).await?;
+            register_background_thread(app_event_tx, &thread_id, task_tools_available).await?;
             if let Some(title) = arguments.title
                 && let Err(error) = request::<ThreadSetNameResponse>(&handle, |request_id| {
                     ClientRequest::ThreadSetName {
@@ -657,6 +659,7 @@ async fn execute_inner(
             start_turn(
                 &handle,
                 &thread_id,
+                "create_thread",
                 prompt,
                 /*model*/ None,
                 sandbox_policy,
@@ -760,10 +763,16 @@ async fn execute_inner(
                 },
             )
             .await?;
-            register_background_thread(app_event_tx, &arguments.thread_id).await?;
+            register_background_thread(
+                app_event_tx,
+                &arguments.thread_id,
+                /*task_tools_available*/ false,
+            )
+            .await?;
             start_turn(
                 &handle,
                 &arguments.thread_id,
+                "send_message_to_thread",
                 prompt,
                 arguments.model,
                 /*sandbox_policy*/ None,
@@ -1056,6 +1065,7 @@ async fn execute_inner(
                                         "name": "webSearch", "status": null
                                     })),
                                     ThreadItem::UserMessage { .. }
+                                    | ThreadItem::FunctionCallOutput { .. }
                                     | ThreadItem::HookPrompt { .. }
                                     | ThreadItem::AgentMessage { .. }
                                     | ThreadItem::Plan { .. }
@@ -1161,6 +1171,32 @@ fn delegated_prompt(source_thread_id: &str, prompt: &str) -> String {
     )
 }
 
+fn parse_delegated_prompt(prompt: &str) -> Option<(String, String)> {
+    let delegation = prompt.strip_prefix("<codex_delegation>\n  <source_thread_id>")?;
+    let (source, delegated) = delegation.split_once("</source_thread_id>\n  <input>")?;
+    let delegated = delegated.strip_suffix("</input>\n</codex_delegation>")?;
+    let unescape = |value: &str| {
+        value
+            .replace("&lt;", "<")
+            .replace("&gt;", ">")
+            .replace("&amp;", "&")
+    };
+    Some((unescape(source), unescape(delegated)))
+}
+
+pub(crate) fn parse_delegated_tool_output(
+    name: &str,
+    namespace: Option<&str>,
+    output: &FunctionCallOutputBody,
+) -> Option<(String, String)> {
+    if !matches!(namespace, Some(NAMESPACE | "codex_app"))
+        || !matches!(name, "create_thread" | "send_message_to_thread")
+    {
+        return None;
+    }
+    parse_delegated_prompt(output.to_text().as_deref()?)
+}
+
 fn same_thread_id(first: &str, second: &str) -> bool {
     ThreadId::from_string(first)
         .ok()
@@ -1171,11 +1207,13 @@ fn same_thread_id(first: &str, second: &str) -> bool {
 async fn register_background_thread(
     app_event_tx: Option<&AppEventSender>,
     thread_id: &str,
+    task_tools_available: bool,
 ) -> Result<(), String> {
     if let Some(app_event_tx) = app_event_tx {
         let (registered, registration) = tokio::sync::oneshot::channel();
         app_event_tx.send(AppEvent::DynamicToolThreadStarted {
             thread_id: ThreadId::from_string(thread_id).map_err(|error| error.to_string())?,
+            task_tools_available,
             registered,
         });
         registration
@@ -1236,6 +1274,7 @@ async fn read_thread(handle: &AppServerRequestHandle, thread_id: &str) -> Result
 async fn start_turn(
     handle: &AppServerRequestHandle,
     thread_id: &str,
+    tool: &str,
     prompt: String,
     model: Option<String>,
     sandbox_policy: Option<SandboxPolicy>,
@@ -1244,10 +1283,14 @@ async fn start_turn(
         request_id,
         params: TurnStartParams {
             thread_id: thread_id.to_string(),
-            input: vec![UserInput::Text {
-                text: prompt,
-                text_elements: Vec::new(),
-            }],
+            input: Vec::new(),
+            // Older app-server/TUI versions are intentionally unsupported:
+            // preserving tool authority takes precedence over legacy fallback.
+            tool_output: Some(Box::new(TurnToolOutput {
+                name: tool.to_string(),
+                namespace: Some(NAMESPACE.to_string()),
+                output: FunctionCallOutputBody::Text(prompt),
+            })),
             model,
             sandbox_policy,
             ..TurnStartParams::default()
@@ -1286,14 +1329,11 @@ fn turn_summary(turn: &Turn, include_outputs: bool, output_chars: usize) -> Valu
                 "content": content.iter().map(|input| match input {
                     UserInput::Text { text, .. } => {
                         let mut input = json!({"type": "text", "text": truncate(text, DEFAULT_OUTPUT_CHARS)});
-                        if let Some(delegation) = text.strip_prefix("<codex_delegation>\n  <source_thread_id>")
-                            && let Some((source, delegated)) = delegation.split_once("</source_thread_id>\n  <input>")
-                            && let Some(delegated) = delegated.strip_suffix("</input>\n</codex_delegation>")
+                        if let Some((source_thread_id, delegated)) = parse_delegated_prompt(text)
                         {
-                            let unescape = |value: &str| value.replace("&lt;", "<").replace("&gt;", ">").replace("&amp;", "&");
                             input["codexDelegation"] = json!({
-                                "sourceThreadId": unescape(source),
-                                "input": truncate(&unescape(delegated), DEFAULT_OUTPUT_CHARS)
+                                "sourceThreadId": source_thread_id,
+                                "input": truncate(&delegated, DEFAULT_OUTPUT_CHARS)
                             });
                         }
                         input
@@ -1309,6 +1349,31 @@ fn turn_summary(turn: &Turn, include_outputs: bool, output_chars: usize) -> Valu
             ThreadItem::HookPrompt { id, fragments } => json!({
                 "type": "hookPrompt", "id": id, "fragmentCount": fragments.len()
             }),
+            ThreadItem::FunctionCallOutput {
+                id,
+                name,
+                namespace,
+                output,
+            } => {
+                let mut item = json!({
+                    "type": "functionCallOutput", "id": id, "name": name, "namespace": namespace
+                });
+                if let Some((source_thread_id, delegated)) =
+                    parse_delegated_tool_output(name, namespace.as_deref(), output)
+                {
+                    item["codexDelegation"] = json!({
+                        "sourceThreadId": source_thread_id,
+                        "input": truncate(&delegated, DEFAULT_OUTPUT_CHARS)
+                    });
+                }
+                if include_outputs {
+                    item["output"] = output_summary(
+                        output.to_text().as_deref().unwrap_or("[non-text output]"),
+                        output_chars,
+                    );
+                }
+                item
+            }
             ThreadItem::AgentMessage { id, text, phase, .. } => json!({
                 "type": "agentMessage", "id": id, "text": truncate(text, DEFAULT_OUTPUT_CHARS), "phase": phase
             }),

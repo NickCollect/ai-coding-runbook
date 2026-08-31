@@ -2,7 +2,11 @@ import * as Errors from './error';
 import { OpenAI } from './client';
 import type { ApiKeySetter, ClientOptions } from './client';
 import { assertNoDataResidency } from './internal/data-residency';
-import { assertBedrockRequestOrigin, brand_privateBedrockClient } from './internal/bedrock';
+import {
+  assertBedrockRequestOrigin,
+  assertValidBedrockBearerCredential,
+  brand_privateBedrockClient,
+} from './internal/bedrock';
 import type { RequestInit } from './internal/builtin-types';
 import type { NullableHeaders } from './internal/headers';
 import { buildHeaders } from './internal/headers';
@@ -16,7 +20,7 @@ import type * as ResponsesAPI from './resources/responses/responses';
 /** Configures Amazon Bedrock's OpenAI-compatible endpoint and bearer-token authentication. */
 export interface BedrockClientOptions extends Omit<
   ClientOptions,
-  'apiKey' | 'adminAPIKey' | 'baseURL' | 'workloadIdentity' | 'dataResidency'
+  'apiKey' | 'adminAPIKey' | 'baseURL' | 'credential' | 'workloadIdentity' | 'x509Transport' | 'dataResidency'
 > {
   /**
    * Bedrock bearer token used for authentication.
@@ -42,10 +46,16 @@ export interface BedrockClientOptions extends Omit<
   /** OpenAI data residency cannot be combined with Bedrock routing. */
   dataResidency?: never;
 
+  /** Bedrock cannot receive an SDK-owned OpenAI X.509 certificate credential. */
+  credential?: never;
+
   /**
    * BedrockOpenAI only supports Bedrock bearer token authentication.
    */
   workloadIdentity?: never;
+
+  /** Bedrock cannot receive OpenAI X.509 workload-identity certificate transports. */
+  x509Transport?: never;
 
   /**
    * AWS region used to derive the default Bedrock Mantle endpoint.
@@ -138,11 +148,12 @@ export class BedrockOpenAI extends OpenAI {
     bedrockTokenProvider,
     adminAPIKey,
     workloadIdentity,
+    x509Transport,
     dataResidency,
     ...opts
   }: BedrockClientOptions = {}) {
     assertNoDataResidency(dataResidency, 'BedrockOpenAI');
-    if (adminAPIKey || workloadIdentity) {
+    if (adminAPIKey || workloadIdentity || x509Transport) {
       throw new Errors.OpenAIError('BedrockOpenAI only supports Bedrock bearer token authentication.');
     }
 
@@ -175,6 +186,21 @@ export class BedrockOpenAI extends OpenAI {
       adminAPIKey: null,
       baseURL: normalizeBedrockBaseURL(configuredBaseURL),
       ...opts,
+    });
+
+    let currentApiKey = this.apiKey;
+    Object.defineProperty(this, 'apiKey', {
+      enumerable: true,
+      configurable: true,
+      get() {
+        if (currentApiKey !== null) {
+          assertValidBedrockBearerCredential(currentApiKey);
+        }
+        return currentApiKey;
+      },
+      set(nextApiKey: string | null) {
+        currentApiKey = nextApiKey;
+      },
     });
 
     const trustedBaseURL = this.baseURL;
@@ -222,8 +248,18 @@ export class BedrockOpenAI extends OpenAI {
     schemes?: { bearerAuth?: boolean; adminAPIKeyAuth?: boolean },
   ): Promise<NullableHeaders | undefined> {
     const security = schemes ?? { bearerAuth: true, adminAPIKeyAuth: true };
-    if ((security.bearerAuth || security.adminAPIKeyAuth) && this.apiKey !== null) {
-      return buildHeaders([{ Authorization: `Bearer ${this.apiKey}` }]);
+    const credential = this.apiKey;
+    if ((security.bearerAuth || security.adminAPIKeyAuth) && credential !== null) {
+      assertValidBedrockBearerCredential(credential);
+      try {
+        return buildHeaders([{ Authorization: `Bearer ${credential}` }]);
+      } catch (error) {
+        if (error instanceof TypeError) {
+          // oxlint-disable-next-line eslint/preserve-caught-error -- The original error contains the bearer credential.
+          throw new TypeError('Bedrock bearer credential contains an invalid HTTP header value.');
+        }
+        throw error;
+      }
     }
 
     return super.authHeaders(opts, security);

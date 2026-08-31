@@ -104,7 +104,25 @@ async fn app_server_cyber_policy_error_renders_dedicated_notice() {
     let rendered = lines_to_single_string(&cells[0]);
     assert!(rendered.contains("This content can't be shown"));
     assert!(rendered.contains("extra caution with cybersecurity requests"));
+    assert!(rendered.contains("openai.com/form/enterprise-trusted-access-for-cyber"));
     assert!(!rendered.contains("server fallback message"));
+}
+
+#[tokio::test]
+async fn app_server_cyber_policy_error_uses_individual_link_for_personal_plan() {
+    let (mut chat, mut rx, _ops) = make_chatwidget_manual(/*model_override*/ None).await;
+    chat.plan_type = Some(PlanType::Free);
+    chat.has_chatgpt_account = true;
+
+    handle_error(
+        &mut chat,
+        "server fallback message",
+        Some(CodexErrorInfo::CyberPolicy),
+    );
+
+    let cells = drain_insert_history(&mut rx);
+    assert_eq!(cells.len(), 1);
+    assert!(lines_to_single_string(&cells[0]).contains("https://chatgpt.com/cyber/"));
 }
 
 #[tokio::test]
@@ -1900,8 +1918,10 @@ async fn workspace_owner_credits_nudge_completion_renders_feedback() {
     let mut rendered_cases = Vec::new();
     for (result, expected) in cases {
         let (mut chat, mut rx, _op_rx) = make_chatwidget_manual(/*model_override*/ None).await;
-        chat.start_add_credits_nudge_email_request(AddCreditsNudgeCreditType::Credits);
-        chat.finish_add_credits_nudge_email_request(result);
+        let request_id = chat
+            .start_add_credits_nudge_email_request(AddCreditsNudgeCreditType::Credits)
+            .expect("start notification");
+        chat.finish_add_credits_nudge_email_request(request_id, result);
         let rendered = drain_insert_history(&mut rx)
             .into_iter()
             .map(|lines| lines_to_single_string(&lines))
@@ -1936,14 +1956,24 @@ async fn workspace_owner_usage_limit_nudge_completion_renders_feedback() {
     let mut rendered_cases = Vec::new();
     for (result, expected) in cases {
         let (mut chat, mut rx, _op_rx) = make_chatwidget_manual(/*model_override*/ None).await;
-        chat.start_add_credits_nudge_email_request(AddCreditsNudgeCreditType::UsageLimit);
-        chat.finish_add_credits_nudge_email_request(result);
+        let request_id = chat
+            .start_add_credits_nudge_email_request(AddCreditsNudgeCreditType::UsageLimit)
+            .expect("start notification");
+        assert!(
+            chat.start_add_credits_nudge_email_request(AddCreditsNudgeCreditType::Credits)
+                .is_none()
+        );
+        chat.finish_add_credits_nudge_email_request(request_id, result);
         let rendered = drain_insert_history(&mut rx)
             .into_iter()
             .map(|lines| lines_to_single_string(&lines))
             .collect::<String>();
         assert!(rendered.contains(expected), "rendered: {rendered}");
         rendered_cases.push(rendered);
+        assert!(
+            chat.start_add_credits_nudge_email_request(AddCreditsNudgeCreditType::Credits)
+                .is_some()
+        );
     }
 
     assert_chatwidget_snapshot!(
@@ -2622,6 +2652,7 @@ async fn status_widget_and_approval_modal_snapshot() {
 
     // Now show an approval modal (e.g. exec approval).
     let ev = ExecApprovalRequestEvent {
+        kind: Default::default(),
         call_id: "call-approve-exec".into(),
         approval_id: Some("call-approve-exec".into()),
         turn_id: "turn-approve-exec".into(),
@@ -4790,6 +4821,17 @@ async fn user_prompt_submit_app_server_hook_notifications_render_snapshot() {
         combined
     );
     assert!(!chat.bottom_pane.status_indicator_visible());
+}
+
+#[tokio::test]
+async fn interrupt_hook_events_render_snapshot() {
+    assert_hook_events_snapshot(
+        codex_app_server_protocol::HookEventName::Interrupt,
+        "interrupt:0:/tmp/hooks.json",
+        "cleaning up the interrupted turn",
+        "interrupt_hook_events_render_snapshot",
+    )
+    .await;
 }
 
 #[tokio::test]

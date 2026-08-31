@@ -4,6 +4,12 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 
 const root = process.cwd();
+const protectedMainCondition =
+  "github.repository == 'openai/openai-node' && github.event_name == 'push' && github.ref == 'refs/heads/main' && github.actor != 'dependabot[bot]'";
+
+function normalizeLineEndings(value: string) {
+  return value.split(/\r\n?/u).join('\n');
+}
 
 function runCli(args: string[], cwd = root, env: Partial<NodeJS.ProcessEnv> = {}) {
   return spawnSync(
@@ -32,7 +38,8 @@ function runCli(args: string[], cwd = root, env: Partial<NodeJS.ProcessEnv> = {}
 }
 
 function workflowJob(workflow: string, name: string) {
-  return workflow.split(`\n  ${name}:\n`)[1]?.split(/\n {2}[a-z_]+:\n/u)[0] ?? '';
+  const normalizedWorkflow = normalizeLineEndings(workflow);
+  return normalizedWorkflow.split(`\n  ${name}:\n`)[1]?.split(/\n {2}[a-z_]+:\n/u)[0] ?? '';
 }
 
 function workflowCondition(job: string) {
@@ -45,15 +52,19 @@ function workflowCondition(job: string) {
     .join(' ');
 }
 
+function writeSuccessfulNpmStub(bin: string) {
+  const filename = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+  const contents = process.platform === 'win32' ? '@exit /b 0\r\n' : '#!/bin/sh\nexit 0\n';
+  writeFileSync(path.join(bin, filename), contents, { mode: 0o755 });
+}
+
 describe('ecosystem test CLI', () => {
   test('limits live examples and ecosystem credentials to protected main pushes', () => {
     const workflow = readFileSync(path.join(root, '.github/workflows/ci.yml'), 'utf-8');
     const liveJob = workflowJob(workflow, 'examples');
     const ecosystemJob = workflowJob(workflow, 'ecosystem_tests');
 
-    expect(workflowCondition(liveJob)).toBe(
-      "github.repository == 'openai/openai-node' && github.event_name == 'push' && github.ref == 'refs/heads/main' && github.actor != 'dependabot[bot]'",
-    );
+    expect(workflowCondition(liveJob)).toBe(protectedMainCondition);
     expect(liveJob).toContain('\n    environment: ci\n');
     expect(liveJob).toContain('pnpm tsn examples/chat-completions/demo.ts');
     expect(liveJob).toContain(
@@ -66,6 +77,14 @@ describe('ecosystem test CLI', () => {
     expect(ecosystemJob).not.toContain('OPENAI_API_KEY');
     expect(ecosystemJob).not.toContain('environment: ci');
     expect(workflow.match(/secrets\.OPENAI_API_KEY/gu)).toHaveLength(1);
+  });
+
+  test('reads protected workflow conditions from CRLF checkouts', () => {
+    const workflow = normalizeLineEndings(readFileSync(path.join(root, '.github/workflows/ci.yml'), 'utf-8'))
+      .split('\n')
+      .join('\r\n');
+
+    expect(workflowCondition(workflowJob(workflow, 'examples'))).toBe(protectedMainCondition);
   });
 
   test.each([
@@ -150,6 +169,101 @@ describe('ecosystem test CLI', () => {
     }
   });
 
+  test.each([
+    {
+      projectName: 'node-ts-cjs',
+      option: '--live',
+      phase: 'live-test',
+      scripts: { tsc: 'node observe.cjs typecheck', test: 'node observe.cjs live-test' },
+    },
+    {
+      projectName: 'cloudflare-worker',
+      option: '--deploy',
+      phase: 'deploy',
+      scripts: { tsc: 'node observe.cjs typecheck', deploy: 'node observe.cjs deploy' },
+    },
+  ])(
+    'provides API credentials and case variants only to the $phase ecosystem command',
+    ({ projectName, option, phase, scripts }) => {
+      const fixture = mkdtempSync(path.join(tmpdir(), 'openai-node-ecosystem-cli-'));
+      const project = path.join(fixture, 'ecosystem-tests', projectName);
+      const dependency = path.join(fixture, 'local-dependency');
+      const observations = path.join(fixture, 'observations.jsonl');
+      const apiKey = 'synthetic-ecosystem-test-key';
+      const mixedCaseApiKey = 'synthetic-ecosystem-mixed-case-key';
+      const lowercaseApiKey = 'synthetic-ecosystem-lowercase-key';
+      const inheritedApiKeyNames =
+        process.platform === 'win32'
+          ? ['OPENAI_API_KEY']
+          : ['OPENAI_API_KEY', 'OpenAI_API_Key', 'openai_api_key'];
+      const observe = [
+        "const fs = require('node:fs');",
+        'const apiKeyNames = Object.keys(process.env).filter((name) => name.toLowerCase() === "openai_api_key").sort();',
+        'const observation = { phase: process.argv[2], apiKey: process.env.OPENAI_API_KEY ?? null, apiKeyNames, unrelatedValue: process.env.ECOSYSTEM_UNRELATED_VALUE ?? null };',
+        "fs.appendFileSync(process.env.ECOSYSTEM_COMMAND_OBSERVATIONS, JSON.stringify(observation) + '\\n');",
+      ].join('\n');
+
+      try {
+        mkdirSync(project, { recursive: true });
+        mkdirSync(dependency);
+        writeFileSync(path.join(fixture, 'package.json'), '{}\n');
+        writeFileSync(
+          path.join(project, 'package.json'),
+          JSON.stringify({
+            name: 'ecosystem-project',
+            private: true,
+            scripts,
+          }),
+        );
+        writeFileSync(path.join(project, 'observe.cjs'), observe);
+        writeFileSync(
+          path.join(dependency, 'package.json'),
+          JSON.stringify({
+            name: 'openai',
+            version: '0.0.0',
+            scripts: { postinstall: 'node observe.cjs install' },
+          }),
+        );
+        writeFileSync(path.join(dependency, 'observe.cjs'), observe);
+
+        const result = runCli(
+          [projectName, `--fromNpm=${dependency}`, '--skipPack', '--noCleanup', option],
+          fixture,
+          {
+            OPENAI_API_KEY: apiKey,
+            OpenAI_API_Key: mixedCaseApiKey,
+            openai_api_key: lowercaseApiKey,
+            ECOSYSTEM_COMMAND_OBSERVATIONS: observations,
+            ECOSYSTEM_UNRELATED_VALUE: 'preserved-value',
+            npm_config_audit: 'false',
+            npm_config_fund: 'false',
+            npm_config_offline: 'true',
+            npm_config_package_lock: 'false',
+          },
+        );
+
+        expect(result.error).toBeUndefined();
+        expect(result.status).toBe(0);
+        for (const secret of [apiKey, mixedCaseApiKey, lowercaseApiKey]) {
+          expect(result.stdout).not.toContain(secret);
+          expect(result.stderr).not.toContain(secret);
+        }
+        expect(
+          readFileSync(observations, 'utf-8')
+            .trim()
+            .split('\n')
+            .map((observation) => JSON.parse(observation)),
+        ).toEqual([
+          { phase: 'install', apiKey: null, apiKeyNames: [], unrelatedValue: 'preserved-value' },
+          { phase: 'typecheck', apiKey: null, apiKeyNames: [], unrelatedValue: 'preserved-value' },
+          { phase, apiKey, apiKeyNames: inheritedApiKeyNames, unrelatedValue: 'preserved-value' },
+        ]);
+      } finally {
+        rmSync(fixture, { recursive: true, force: true });
+      }
+    },
+  );
+
   const existingCloudflareDevVars = "OPENAI_API_KEY='existing-test-secret'\nANOTHER_VAR='keep-me'\n";
 
   test.each([
@@ -187,7 +301,7 @@ describe('ecosystem test CLI', () => {
       mkdirSync(worker, { recursive: true });
       mkdirSync(bin);
       writeFileSync(path.join(fixture, 'package.json'), '{}\n');
-      writeFileSync(path.join(bin, 'npm'), '#!/bin/sh\nexit 0\n', { mode: 0o755 });
+      writeSuccessfulNpmStub(bin);
 
       if (existingVars !== undefined) {
         writeFileSync(devVars, existingVars);
