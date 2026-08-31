@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-security
-fetched_at: 2026-08-24T02:18:37.902387+00:00
+fetched_at: 2026-08-31T06:29:38.263953+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,8 +22,8 @@ The plugin is also distinct from the review tools already in Claude Code: the [s
 
 To run the plugin, you need:
 
-* Claude Code v2.1.154 or later on a paid plan, for the [dynamic workflows](/docs/en/workflows) the scan uses to orchestrate its agents. On Pro, turn them on from the Dynamic workflows row in `/config`.
-* Python 3.9.6 or later available on your `PATH` as `python3`. Check with `python3 --version`. The plugin's tooling uses only the Python standard library, so nothing is installed.
+* A paid plan, for the [dynamic workflows](/docs/en/workflows) the scan uses to orchestrate its agents. On Pro, turn them on from the Dynamic workflows row in `/config`.
+* Python 3.9 or later available on your `PATH` as `python3`. Check with `python3 --version`. The plugin's tooling uses only the Python standard library, so nothing is installed.
 * Linux, macOS, or Windows.
 * Git, for change scans and for turning findings into patches; those jobs don't support other version control systems. A full scan works in any directory, with or without version control.
 
@@ -34,6 +34,8 @@ In a Claude Code session, install from the [official Anthropic marketplace](/doc
 ```text theme={null}
 /plugin install claude-security@claude-plugins-official
 ```
+
+The command opens the plugin's details, where you choose an [installation scope](/docs/en/discover-plugins#install-plugins) to start the install.
 
 If the install fails, the fix depends on which message Claude Code reports:
 
@@ -100,6 +102,7 @@ Every scan writes its results into a timestamped `CLAUDE-SECURITY-<timestamp>/` 
 
 * **`CLAUDE-SECURITY-RESULTS.md`**: the report, with each finding's ID, such as `F1`, plus its impact, exploit scenario, severity, confidence, and recommendation
 * **`CLAUDE-SECURITY-RESULTS.jsonl`**: the same findings in machine-readable form, one JSON object per line
+* **`CLAUDE-SECURITY-RESULTS.sarif`**: the same findings as a [SARIF 2.1.0](https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html) log for GitHub code scanning and any other tool that reads the standard. The scan classifies findings under their [CWE](https://cwe.mitre.org/) weakness categories
 * **`CLAUDE-SECURITY-REVISION-<commit>.json`**: the revision stamp, recording which commit was scanned, at what effort, whether uncommitted changes were part of the scanned tree, and how thoroughly the run was verified, so a report is always tied to the code it describes. A scan outside version control stamps `UNVERSIONED` in place of the commit
 
 That directory is the only change a scan makes to your checkout, and it carries its own `.gitignore`, so a stray `git add` never sweeps a report into a commit. To keep a report in history for an audit trail, delete that one `.gitignore` file and commit the directory like any other.
@@ -139,7 +142,7 @@ The plugin doesn't replace your existing source-code security tools. Run it alon
 
 ## Troubleshooting
 
-**The `/claude-security` menu opens with a Python warning.** The plugin needs `python3` 3.9.6 or later on your `PATH`. When it can't find `python3` at all, the menu warns that Claude Security won't work until one is installed; when the first `python3` on your `PATH` is older, the warning names the version it found. Install Python 3, or put a newer `python3` first on your `PATH`, then start a new session.
+**The `/claude-security` menu opens with a Python warning.** The plugin needs `python3` 3.9 or later on your `PATH`. When it can't find `python3` at all, the menu warns that Claude Security won't work until one is installed; when the first `python3` on your `PATH` is older, the warning names the version it found. Install Python 3, or put a newer `python3` first on your `PATH`, then start a new session.
 
 **You may see "Fable 5's safeguards flagged this message" when using Fable 5.** Due to Fable 5's cybersecurity safety classifiers, certain model activities will be blocked and automatically downgraded to Opus.  This is expected, and the scan should still complete successfully.
 

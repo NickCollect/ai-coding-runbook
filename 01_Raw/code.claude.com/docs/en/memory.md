@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/memory
-fetched_at: 2026-08-24T02:18:39.735654+00:00
+fetched_at: 2026-08-31T06:29:42.847362+00:00
 fetch_method: mintlify_md
 ---
 
@@ -340,6 +340,8 @@ This example excludes a top-level CLAUDE.md and a rules directory from a parent 
 ```
 
 Patterns are matched against absolute file paths using glob syntax. You can configure `claudeMdExcludes` at any [settings layer](/docs/en/settings#where-settings-live): user, project, local, or managed policy. Arrays merge across layers.
+
+To exclude a rules file you reach through a [symlink](#share-rules-across-projects-with-symlinks), whether the file or its directory is the link, write the pattern against either path: the file's path under `.claude/rules/` or its link target. A pattern that matches either path excludes the file. Before v2.1.239, only a pattern that matched the link target excluded the file.
 
 Managed policy CLAUDE.md files cannot be excluded. This ensures organization-wide instructions always apply regardless of individual settings.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/debug-your-config
-fetched_at: 2026-08-24T02:18:38.176614+00:00
+fetched_at: 2026-08-31T06:29:39.162993+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ For installation, authentication, and connectivity problems, see [Troubleshoot i
 
 ## See what loaded into context
 
-The `/context` command shows everything occupying the context window for the current session, broken down by category: system prompt, system tools, MCP tools, custom subagents with the source each loaded from, memory files, skills, and conversation messages. Run it first to confirm whether your `CLAUDE.md`, rules, or skill descriptions are present at all.
+The `/context` command shows everything occupying the context window for the current session, broken down by category: system prompt, system tools, MCP tools, custom subagents with the source each loaded from, memory files, skills, and conversation messages. Run it first to confirm whether your `CLAUDE.md`, rules, or skill descriptions are present at all. The skills section in `/context` also includes [bundled skills](/docs/en/skills#bundled-skills), which `/skills` doesn't list.
 
 For detail on a specific category, follow up with the dedicated command:
 
@@ -47,9 +47,7 @@ Adherence drops when an instruction is vague enough to interpret multiple ways, 
 
 Settings merge across managed, user, project, and local scopes. Managed settings apply first when present. Among the rest, the closer scope overrides the broader one in the order local, then project, then user. Some settings can also be set by command-line flags or [environment variables](/docs/en/env-vars), which act as another override layer. When a setting doesn't seem to apply, the value you set is usually being overridden by another scope or an environment variable.
 
-Run [`/doctor`](/docs/en/commands#all-commands) to find invalid settings files.
-
-From the terminal, `claude doctor` prints read-only installation and settings diagnostics without starting a session.
+To find invalid settings files, run `claude doctor` from your terminal. It prints read-only installation and settings diagnostics without starting a session. For a full checkup that also proposes fixes and asks before applying them, run [`/doctor`](/docs/en/commands#all-commands) inside a session.
 
 Run `/status` to see which settings sources are active, including whether managed settings are in effect. To understand which scope Claude Code uses for a given key, see [Settings precedence](/docs/en/settings#settings-precedence).
 
@@ -90,8 +88,7 @@ cd /tmp && CLAUDE_CONFIG_DIR=/tmp/claude-clean claude
 The clean session has no user or project settings, hooks, MCP servers, plugins, or memory. On the first launch, expect the first-run setup screens, starting with theme selection. If you see them, the clean configuration directory is in effect. Later launches with the same directory skip these screens because Claude Code saves onboarding state there.
 
 * Managed settings still apply if your organization deploys them. Claude Code reads MDM profiles, registry policy, and `managed-settings.json` from locations outside the configuration directory, and [fetches server-managed settings](/docs/en/server-managed-settings#fetch-and-caching-behavior) again for the clean session once it has credentials
-* On Linux and Windows, you'll be prompted to log in again because credentials are stored under the configuration directory
-* On macOS, credentials are in the Keychain and carry over to the clean session
+* You'll be prompted to log in again
 
 If the problem disappears here, the cause is somewhere in your real `~/.claude` or project `.claude` files. Reintroduce them one at a time, by copying files into the temporary directory or by launching from your project, to find which one. If it persists in the clean session, the cause is outside your user and project configuration. Run `/status` to check whether managed settings are in effect, look for [environment variables](/docs/en/env-vars) that affect Claude Code, then see [Troubleshooting](/docs/en/troubleshooting).
 

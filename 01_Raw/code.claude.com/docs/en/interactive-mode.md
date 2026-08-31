@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/interactive-mode
-fetched_at: 2026-08-24T02:18:39.304377+00:00
+fetched_at: 2026-08-31T06:29:41.937195+00:00
 fetch_method: mintlify_md
 ---
 
@@ -29,7 +29,7 @@ fetch_method: mintlify_md
 | `Ctrl+D`                                                                                     | Exit Claude Code session                                                                                                                                                                                                                                                   | The first press shows a confirmation hint and a second press within 800ms exits. When the prompt has text, `Ctrl+D` deletes the character after the cursor instead                                                                                                                                                                                                                                                                                                                                                               |
 | `Ctrl+G` or `Ctrl+X Ctrl+E`                                                                  | Open in default text editor                                                                                                                                                                                                                                                | Edit your prompt or custom response in your default text editor. `Ctrl+X Ctrl+E` is the readline-native binding. Turn on **Show last response in external editor** in `/config` to prepend Claude's previous reply as `#`-commented context above your prompt; Claude Code strips the comment block when you save                                                                                                                                                                                                                |
 | `Ctrl+L`                                                                                     | Redraw screen                                                                                                                                                                                                                                                              | Forces a full terminal redraw, keeping input and conversation history. Use this to recover if the display becomes garbled or partially blank                                                                                                                                                                                                                                                                                                                                                                                     |
-| `Ctrl+O`                                                                                     | Toggle transcript viewer                                                                                                                                                                                                                                                   | Shows detailed tool usage and execution, with a timestamp and the model used on each assistant message. Also expands MCP calls, which collapse to a single line like "Called slack 3 times" by default                                                                                                                                                                                                                                                                                                                           |
+| `Ctrl+O`                                                                                     | Toggle transcript viewer                                                                                                                                                                                                                                                   | Shows detailed tool usage and execution, with a timestamp and the model used on each assistant message. Also expands lines that collapse by default, such as MCP calls, shown as a single `Called slack 3 times` line, and [messages from your other sessions](/docs/en/cross-session-messaging#what-a-message-looks-like), shown as a one-line `Message from @<sender>` preview                                                                                                                                                      |
 | `Ctrl+R`                                                                                     | Reverse search command history                                                                                                                                                                                                                                             | Search through previous commands interactively                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `Ctrl+V` or `Cmd+V` (iTerm2) or `Alt+V` (Windows and WSL)                                    | Paste image from clipboard                                                                                                                                                                                                                                                 | Inserts an `[Image #N]` chip at the cursor so you can reference it positionally in your prompt. On WSL, both `Ctrl+V` and `Alt+V` are bound; use `Alt+V` if your terminal intercepts `Ctrl+V`                                                                                                                                                                                                                                                                                                                                    |
 | `Ctrl+B`                                                                                     | Background running tasks                                                                                                                                                                                                                                                   | Backgrounds Bash commands and agents. Tmux users press twice                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
@@ -144,17 +144,17 @@ Claude Code keeps your vim mode and cursor position when you toggle the [transcr
 
 ### Mode switching
 
-| Command | Action                                | From mode      |
-| :------ | :------------------------------------ | :------------- |
-| `Esc`   | Enter NORMAL mode                     | INSERT, VISUAL |
-| `i`     | Insert before cursor                  | NORMAL         |
-| `I`     | Insert at beginning of line           | NORMAL         |
-| `a`     | Insert after cursor                   | NORMAL         |
-| `A`     | Insert at end of line                 | NORMAL         |
-| `o`     | Open line below                       | NORMAL         |
-| `O`     | Open line above                       | NORMAL         |
-| `v`     | Start character-wise visual selection | NORMAL         |
-| `V`     | Start line-wise visual selection      | NORMAL         |
+| Command           | Action                                                                                                    | From mode      |
+| :---------------- | :-------------------------------------------------------------------------------------------------------- | :------------- |
+| `Esc` or `Ctrl+[` | Enter NORMAL mode. In terminals that use the Kitty keyboard protocol, `Ctrl+[` requires v2.1.242 or later | INSERT, VISUAL |
+| `i`               | Insert before cursor                                                                                      | NORMAL         |
+| `I`               | Insert at beginning of line                                                                               | NORMAL         |
+| `a`               | Insert after cursor                                                                                       | NORMAL         |
+| `A`               | Insert at end of line                                                                                     | NORMAL         |
+| `o`               | Open line below                                                                                           | NORMAL         |
+| `O`               | Open line above                                                                                           | NORMAL         |
+| `v`               | Start character-wise visual selection                                                                     | NORMAL         |
+| `V`               | Start line-wise visual selection                                                                          | NORMAL         |
 
 ### Remap INSERT-mode key sequences
 
@@ -203,26 +203,27 @@ Claude Code reads this setting from your user settings file, the `--settings` fl
 
 ### Editing (NORMAL mode)
 
-| Command        | Action                                                                                                                    |
-| :------------- | :------------------------------------------------------------------------------------------------------------------------ |
-| `x`            | Delete character                                                                                                          |
-| `dd`           | Delete line                                                                                                               |
-| `D`            | Delete to end of line                                                                                                     |
-| `dw`/`de`/`db` | Delete word/to end/back                                                                                                   |
-| `cc`           | Change line                                                                                                               |
-| `C`            | Change to end of line                                                                                                     |
-| `cw`/`ce`/`cb` | Change word/to end/back                                                                                                   |
-| `s`            | Substitute character: delete the character under the cursor and enter INSERT mode. Requires Claude Code v2.1.211 or later |
-| `S`            | Substitute line: clear the line and enter INSERT mode. Requires Claude Code v2.1.211 or later                             |
-| `yy`/`Y`       | Yank (copy) line                                                                                                          |
-| `yw`/`ye`/`yb` | Yank word/to end/back                                                                                                     |
-| `p`            | Paste after cursor                                                                                                        |
-| `P`            | Paste before cursor                                                                                                       |
-| `>>`           | Indent line                                                                                                               |
-| `<<`           | Dedent line                                                                                                               |
-| `J`            | Join lines                                                                                                                |
-| `u`            | Undo                                                                                                                      |
-| `.`            | Repeat last change                                                                                                        |
+| Command               | Action                                                                                                                    |
+| :-------------------- | :------------------------------------------------------------------------------------------------------------------------ |
+| `x`                   | Delete character                                                                                                          |
+| `dd`                  | Delete line                                                                                                               |
+| `D`                   | Delete to end of line                                                                                                     |
+| `dw`/`de`/`db`        | Delete word/to end/back                                                                                                   |
+| `df{char}`/`dt{char}` | Delete to and including, or up to, the next occurrence of a character                                                     |
+| `cc`                  | Change line                                                                                                               |
+| `C`                   | Change to end of line                                                                                                     |
+| `cw`/`ce`/`cb`        | Change word/to end/back                                                                                                   |
+| `s`                   | Substitute character: delete the character under the cursor and enter INSERT mode. Requires Claude Code v2.1.211 or later |
+| `S`                   | Substitute line: clear the line and enter INSERT mode. Requires Claude Code v2.1.211 or later                             |
+| `yy`/`Y`              | Yank (copy) line                                                                                                          |
+| `yw`/`ye`/`yb`        | Yank word/to end/back                                                                                                     |
+| `p`                   | Paste after cursor                                                                                                        |
+| `P`                   | Paste before cursor                                                                                                       |
+| `>>`                  | Indent line                                                                                                               |
+| `<<`                  | Dedent line                                                                                                               |
+| `J`                   | Join lines                                                                                                                |
+| `u`                   | Undo                                                                                                                      |
+| `.`                   | Repeat last change                                                                                                        |
 
 ### Text objects (NORMAL mode)
 
@@ -349,10 +350,16 @@ Type a message and press `Enter` while Claude is working. Claude Code queues the
 
 When a queued entry reaches Claude depends on what you queued.
 
-* Messages: if you queue a message while Claude is running tool calls, Claude Code passes it to Claude as soon as those tool calls finish, within the same turn. When the turn ends, Claude Code sends the messages that are still queued as the next turn, each as a separate message
+* Messages: if you queue a message while Claude is running tool calls, Claude Code passes it to Claude as soon as those tool calls finish, within the same turn. When the turn ends with messages still queued, Claude Code sends only the oldest as the next turn. The rest stay queued and follow the same rule: Claude Code passes them to Claude when that turn's tool calls finish, or sends the next oldest as the turn after
 * Commands and shell commands: Claude Code holds them until the turn ends, then runs them one at a time
 
 Press `Esc` to interrupt the turn instead. Claude Code keeps what you queued and sends it right away.
+
+Claude Code runs some commands as soon as you send them instead of queueing them, among them `/model`, `/effort`, and `/fast`. Each of the three changes a setting: the model, the effort level, or fast mode. Whether Claude Code applies the new setting to the turn Claude is already working on, or only from your next turn, differs by command:
+
+* [`/model`](/docs/en/model-config#setting-your-model): once you confirm the [cache warning](/docs/en/prompt-caching#switching-models), if Claude Code shows one, Claude Code applies your change to the next request it makes in that turn
+* [`/effort`](/docs/en/model-config#adjust-effort-level): once you confirm the [cache warning](/docs/en/prompt-caching#changing-effort-level), if Claude Code shows one, Claude Code applies your change to the next request it makes in that turn
+* [`/fast`](/docs/en/fast-mode#toggle-fast-mode): Claude Code keeps the fast mode setting that was active when the turn started, so your speed change applies from your next turn. If your current model doesn't support fast mode, turning it on also [switches your model](/docs/en/prompt-caching#turning-on-fast-mode), and Claude Code uses the new model from its next request in that turn
 
 ### Take back what you queued
 
@@ -373,13 +380,7 @@ Claude Code generates each of these next-prompt suggestions with a background re
 
 ### When Claude Code skips suggestions
 
-In interactive mode, Claude Code leaves prompt suggestions off by default and hides the **Prompt suggestions** toggle in `/config` when it doesn't evaluate feature flags. That happens in these cases:
-
-* You use Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, or Microsoft Foundry as the model provider, unless a host platform that embeds Claude Code sets [`CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`](/docs/en/env-vars) to a true value such as `1`
-* You are signed in to a [Claude apps gateway](/docs/en/claude-apps-gateway)
-* You set [`CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`, `DISABLE_TELEMETRY`, `DO_NOT_TRACK`, or `DISABLE_GROWTHBOOK`](/docs/en/env-vars#features-that-need-feature-flag-fetching) to a value that turns off feature-flag evaluation
-
-Outside those cases, if you start a session before Claude Code has ever fetched feature flags, such as your first session after installing on a slow network, Claude Code can also leave suggestions off and hide the **Prompt suggestions** toggle for that session. It shows them starting with the next session after a fetch succeeds.
+In interactive mode, Claude Code leaves prompt suggestions off by default and hides the **Prompt suggestions** toggle in `/config` in a [session that doesn't fetch feature flags](/docs/en/env-vars#features-that-need-feature-flag-fetching), such as one on a third-party provider or through a Claude apps gateway, and in a [first session after an install or upgrade](/docs/en/env-vars#first-session-after-an-install-or-upgrade) whose flags haven't arrived yet.
 
 Claude Code also skips individual suggestions in several situations, including:
 
@@ -545,7 +546,7 @@ Once the answer appears, the overlay accepts these keys.
 | `f`                        | Start a [forked subagent](/docs/en/sub-agents#fork-the-current-conversation) that inherits the parent conversation plus this question and answer, so it can continue with full tool access. You stay in the current session and find the fork in the [panel below your prompt](/docs/en/sub-agents#observe-and-steer-running-forks). Available in local sessions only |
 | `x`                        | Clear the list of earlier `/btw` exchanges shown above the current answer                                                                                                                                                                                                                                                                                   |
 
-`/btw` is the inverse of a [subagent](/docs/en/sub-agents): it sees your full conversation but has no tools. Use `/btw` to ask about what Claude already knows from this session; use a subagent to go find out something new.
+`/btw` sees your full conversation but has no tools. A [subagent](/docs/en/sub-agents) has tools and starts from the prompt it receives, or, for a [fork](/docs/en/sub-agents#fork-the-current-conversation), from a copy of this conversation. Use `/btw` to ask about what Claude already knows from this session; use a subagent to go find out something new.
 
 ## Task list
 
@@ -566,6 +567,58 @@ When you return to the terminal after stepping away, Claude Code shows a one-lin
 Run `/recap` to generate a summary on demand. Claude Code caps both automatic recaps and `/recap` output at 400 characters. To turn automatic recaps off, open `/config` and turn off **Session recap**.
 
 Session recap is on by default for every plan and provider. The recap is always skipped in non-interactive mode.
+
+## Wait for a usage limit to reset
+
+When a claude.ai [usage limit](/docs/en/errors#youve-hit-your-session-limit) stops Claude mid-task, Claude Code waits in the open session and continues the task on its own after the limit resets. Automatic continue is on by default in interactive sessions signed in with a claude.ai subscription. Requires Claude Code v2.1.234 or later.
+
+While Claude Code waits, a line at the bottom of the session shows when it will continue:
+
+```text theme={null}
+Usage limit reached · continuing automatically at 3:45pm · esc to cancel
+```
+
+Keep the session open. What happens next depends on how the wait ends:
+
+* **At the reset**: the line reads `continuing shortly`, then `Usage limit reset · continuing automatically`, and Claude Code sends Claude a fixed prompt to pick the task up where it stopped. It doesn't resend your last message.
+* **After your computer slept**: if it slept for more than about 30 minutes and the limit reset while it slept, the line reads `Your usage limit has reset · press enter to continue`. Press `Enter` to continue. After a shorter sleep, Claude Code continues on its own.
+* **Early**: when you finish adding [usage credits](/docs/en/costs#add-usage-credits-to-your-subscription) with `/usage-credits`, sign back in after `/upgrade`, or switch models with `/model` during the wait, Claude Code checks whether usage is available again and continues right away if it is. It doesn't check after an upgrade or purchase you make in a browser on your own. Under [`opusplan`](/docs/en/model-config#opusplan-model-setting) and other model settings that run plan mode on a different model, Claude Code waits for the reset instead.
+
+The continued task runs like any other turn. Claude Code still asks for [permissions](/docs/en/permissions) as usual, so the task can stop on a prompt while you're away. If it hits the limit again, Claude Code re-arms the wait on its own at most twice in a row, then stops and shows `Automatic continue stopped after repeated usage-limit hits · /rate-limit-options to try again`.
+
+### Cancel the wait
+
+Press `Esc` at an empty prompt, or `Ctrl+C`, while the line shows, or run [`/rate-limit-options`](/docs/en/commands#all-commands) and pick **Don't continue automatically**. Claude Code confirms with a line that starts `Automatic continue cancelled`.
+
+After a cancel, nothing continues until you send a prompt or pick the row that starts **Wait here, then continue automatically** from `/rate-limit-options` again. Claude Code doesn't start a wait on its own again for that reset window; the next reset window starts fresh.
+
+The wait also ends without continuing the task in these cases:
+
+* **You send a prompt**: Claude Code runs your prompt instead of waiting.
+* **You exit Claude Code**: the wait doesn't restart when you resume the session.
+* **The conversation changes hands**: you switch accounts with `/login`, clear or rewind the conversation, `/resume` another session, pull one with `/teleport`, relaunch with `/tui`, or hand the session to Claude Desktop, a background session, or the cloud.
+* **The setting turns off, or the reset moves past 24 hours**: this ends only a wait Claude Code started on its own. A wait you picked from `/rate-limit-options` keeps counting down.
+* **The continuation is blocked**: a [`UserPromptSubmit` hook](/docs/en/hooks#userpromptsubmit) that blocks the continuation prompt, or a failure before it reaches the model, ends the wait. Claude Code tells you the continuation didn't run. Send a prompt to continue.
+
+### Start a wait yourself
+
+Claude Code doesn't start the wait on its own in these cases:
+
+* **Remote Control and agent team teammate sessions**: a person at that terminal can still start one.
+* **A reset more than 24 hours away**: a weekly limit can reset days out.
+* **An Opus or Sonnet limit while you run a model outside that family**: your next turn may not hit that limit. [`opusplan`](/docs/en/model-config#opusplan-model-setting) and other model settings that run plan mode on the limited family don't get this exception.
+
+In those cases, and whenever automatic continue is off, Claude Code opens the usage-limit options menu once per reset window when you hit a limit at your own terminal. Pick the row that starts **Wait here, then continue automatically** to start the wait. In a [Remote Control](/docs/en/remote-control) or [agent team](/docs/en/agent-teams) teammate session, run `/rate-limit-options` yourself to open the menu.
+
+Claude Code doesn't offer the wait at all in these cases:
+
+* **Background sessions and `-p` runs**: the menu row isn't available.
+* **API keys, cloud providers, and usage-based billing**: usage there is metered per request, so there is no reset to wait for.
+* **An [LLM gateway](/docs/en/llm-gateway#subscriptions-and-gateways) without a saved claude.ai login**: Claude Code offers the wait only while a saved claude.ai login is the active credential.
+
+### Turn automatic continue off
+
+In `/config`, turn off **Continue automatically at usage limit**, or set [`autoContinueAtUsageLimit`](/docs/en/settings-reference#autocontinueatusagelimit) to `false` in your user settings. `/config autoContinueAtUsageLimit=false` also works, including with `-p`, but the `key=value` form can't turn it back on, because the setting grants unattended execution. Which settings files Claude Code reads for this key is in the [settings reference](/docs/en/settings-reference#autocontinueatusagelimit).
 
 ## PR review status
 

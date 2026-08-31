@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/quickstart
-fetched_at: 2026-08-10T03:07:46.103560+00:00
+fetched_at: 2026-08-31T06:29:34.573723+00:00
 fetch_method: mintlify_md
 ---
 
@@ -271,7 +271,7 @@ As it works, the agent prints its reasoning and each tool it calls, ending with 
 This is what makes the Agent SDK different: Claude executes tools directly instead of asking you to implement them.
 
 <Note>
-  If you see "API key not found", make sure you've set the `ANTHROPIC_API_KEY` environment variable in the shell where you run your agent. The SDK doesn't load `.env` files automatically. See the [full troubleshooting guide](/docs/en/troubleshooting) for more help.
+  If you see an authentication error such as `Not logged in` or `Invalid API key`, make sure you've set the `ANTHROPIC_API_KEY` environment variable in the shell where you run your agent. The SDK doesn't load `.env` files automatically. See the [full troubleshooting guide](/docs/en/troubleshooting) for more help.
 </Note>
 
 ### Try other prompts
@@ -370,3 +370,4 @@ Now that you've created your first agent, learn how to extend its capabilities a
 * **[MCP servers](/docs/en/agent-sdk/mcp)**: connect to databases, browsers, APIs, and other external systems
 * **[Hosting](/docs/en/agent-sdk/hosting)**: deploy agents to Docker, cloud, and CI/CD
 * **[Example agents](https://github.com/anthropics/claude-agent-sdk-demos)**: see complete examples: email assistant, research agent, and more
+* **[Troubleshooting](/docs/en/agent-sdk/troubleshooting)**: fix Agent SDK errors by the exact message you see

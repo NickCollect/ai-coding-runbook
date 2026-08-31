@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/settings-example
-fetched_at: 2026-08-24T02:18:41.720204+00:00
+fetched_at: 2026-08-31T06:29:45.561131+00:00
 fetch_method: mintlify_md
 ---
 
@@ -62,7 +62,7 @@ One developer's personal settings. It picks a model and effort, adjusts the term
     {
       // Start every session on Sonnet 5
       "model": "claude-sonnet-5",
-      // Reason more deeply than the default high level; /effort saves a new level, and --effort overrides it for one session
+      // Reason more deeply than the default high level on models without a saved level; /effort saves a level per model, and --effort sets one for a single session
       "effortLevel": "xhigh",
       // Vim keybindings in the prompt
       "editorMode": "vim",

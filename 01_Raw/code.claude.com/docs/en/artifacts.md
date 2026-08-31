@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/artifacts
-fetched_at: 2026-08-24T02:18:36.920722+00:00
+fetched_at: 2026-08-31T06:29:35.738573+00:00
 fetch_method: mintlify_md
 ---
 
@@ -37,7 +37,7 @@ See [What you can build](#what-you-can-build) for prompts that match these, and 
 
 ### What an artifact is not
 
-An artifact is a capture of work, not an application. It is one self-contained page with no backend, so it can't store form input or serve multiple routes, and its only path to outside data when someone views it is [calling MCP connectors](#pull-live-data-with-mcp-connectors). For a hosted internal tool with a backend, deploy it on your own infrastructure instead. See [Page constraints](#page-constraints) for the full set of limits.
+An artifact is a capture of work: one self-contained page with no backend, so it can't store form input or serve multiple routes, and its only path to outside data when someone views it is [calling MCP connectors](#pull-live-data-with-mcp-connectors). For a hosted internal tool with a backend, deploy it on your own infrastructure instead. See [Page constraints](#page-constraints) for the full set of limits.
 
 ## Create an artifact
 
@@ -51,9 +51,18 @@ Make an artifact that walks through this PR with the diff annotated inline.
 Build a dashboard artifact of last week's deploy failures by service and keep it updated as you investigate.
 ```
 
-Claude writes the page to an HTML or Markdown file in your project, then publishes it. Before publishing a new artifact, Claude Code asks for permission; it might say something like `Claude wants to publish "Deploy failures by service" (deploy-failures.html) to a private page on claude.ai`. Republishing an artifact you have already approved does not prompt again.
+Unless you name a location, Claude writes the page to an HTML or Markdown file in a temporary directory outside your project, then publishes it. Publishing a new artifact goes through your session's [permission mode](/docs/en/permission-modes):
 
-Select **Yes** to publish. Claude prints the URL, and your browser opens to the new page. Press `Ctrl+]` at any time to reopen the most recent artifact from the terminal.
+* **Auto mode**: the classifier reviews the publish instead of prompting you, so Claude can publish a page without you seeing a prompt. Which mode your sessions start in depends on your plan; see [the starting permission mode](/docs/en/permission-modes#eliminate-prompts-with-auto-mode).
+* **Manual and Accept edits modes**: Claude Code asks for permission; it might say something like `Claude wants to publish deploy-failures.html, uploading it to claude.ai (Anthropic's servers) to host as the page "Deploy failures by service", private to you until you share it`. Select **Yes** to publish.
+
+After you approve an artifact once, Claude Code republishes it without asking, and asks again in some cases, including when:
+
+* Claude declares a runtime capability for the page, such as [connector calls](#pull-live-data-with-mcp-connectors)
+* You have since [shared it publicly](#share-an-artifact)
+* You have since shared it with specific people or your organization with the latest version chosen as the version viewers see
+
+After the first publish, Claude prints the URL, and your browser opens to the new page. Press `Ctrl+]` at any time to reopen the most recent artifact from the terminal.
 
 Claude picks the artifact's title and an emoji for its browser-tab icon. Both appear in your [gallery of artifacts](#share-an-artifact) on claude.ai and in shared links, so ask Claude to use a specific title or icon if you want one.
 
@@ -102,8 +111,10 @@ An editor publishes new versions the same way you [update the artifact from anot
 
 When you share an artifact within your organization, the people you share it with can leave comments on the page, and you can have Claude read those comments and reply to them. You need Claude Code v2.1.221 or later and a Team or Enterprise plan, because only an artifact you [share within your organization](#share-an-artifact) takes comments. Claude reads the comments in two cases:
 
-* **You ask Claude to read them**: give Claude the artifact's URL and ask for the comments. Claude lists each thread and marks the comments a commenter sent to it.
-* **A commenter sends a comment to Claude**: in a thread on the page, the commenter mentions `@claude` or uses the thread's Claude control, where the page offers one. Either gesture activates the thread, and Claude can reply only in a thread someone activated. Viewers see each reply attributed to Claude, via you.
+* **You ask Claude to read them**: give Claude the artifact's URL and ask for the comments. Claude lists each thread and marks the comments someone who can edit the artifact sent to it.
+* **Someone who can edit the artifact sends a comment to Claude**: in a thread on the page, they send a comment with **Send to Claude**, or mention `@claude` in one. Either way, they activate the thread.
+
+Claude can reply to or resolve only an activated thread. Other threads stay open until a person resolves them on the page. Viewers see each reply attributed to Claude, via you.
 
 If you share an artifact publicly, viewers can't comment on it: the page says `Comments aren't available while this Artifact is shared publicly.` To switch an artifact that already has comment threads to a public link, delete the threads first.
 
@@ -116,12 +127,16 @@ Read the comments on https://claude.ai/code/artifact/5fbea6f3-... and make the c
 If Claude tells you it can't read comments, check three things:
 
 * You're running Claude Code v2.1.221 or later.
-* You're not in your first session since you installed Claude Code or upgraded from a version before v2.1.221. In that [first session after an install or upgrade](/docs/en/env-vars#first-session-after-an-install-or-upgrade), Claude can't read comments yet; start a new session and ask again.
-* You haven't turned feature-flag fetching off. If you set `DISABLE_GROWTHBOOK`, `DISABLE_TELEMETRY`, or `DO_NOT_TRACK`, also set [`CLAUDE_CODE_ARTIFACT_COMMENTS=1`](/docs/en/env-vars#features-that-need-feature-flag-fetching) so Claude can read comments without fetching flags.
+* You're not in your first session since you installed Claude Code or upgraded from a version before v2.1.221. In that [first session after an install or upgrade](/docs/en/env-vars#first-session-after-an-install-or-upgrade), Claude might not be able to read comments yet; start a new session and ask again.
+* You haven't turned feature-flag fetching off.
 
 ### Let Claude reply to comments on its own
 
-After your session publishes an artifact, Claude Code watches that artifact for comments for as long as the session runs. When a commenter sends a comment to Claude, it reaches your session right away, and Claude can read the thread and reply without you asking. You need Claude Code v2.1.228 or later. If you turned feature-flag fetching off, also set both [`CLAUDE_CODE_ARTIFACT_COMMENTS=1` and `CLAUDE_CODE_ARTIFACT_COMMENTS_AUTOREACT=1`](/docs/en/env-vars#features-that-need-feature-flag-fetching). Your [permission mode](/docs/en/permission-modes) decides what Claude does when a sent comment arrives:
+After your session publishes an artifact, Claude Code watches that artifact for comments for as long as the session runs. When someone who can edit the artifact sends a comment to Claude, it reaches your session right away, and Claude can read the thread and reply without you asking.
+
+You need Claude Code v2.1.228 or later. If you turned [feature-flag fetching](/docs/en/env-vars#features-that-need-feature-flag-fetching) off, Claude Code doesn't watch for comments.
+
+Your [permission mode](/docs/en/permission-modes) decides what Claude does when a sent comment arrives:
 
 * **Claude replies on its own**: when your permission mode lets Claude post the reply without asking you, Claude reads the thread and replies, and edits the artifact when the comment asks for a change. You see `Auto-replied to comment thread on Artifact: <name>` or `Auto-edited Artifact: <name> in response to a comment thread`.
 * **Claude waits for you**: outside plan mode, when posting the reply would need your approval, you see `Comments are waiting on Artifact: <name>`. Claude then asks you for approval to read the thread, and again to post the reply.
@@ -129,11 +144,13 @@ After your session publishes an artifact, Claude Code watches that artifact for 
 
 Claude also stops replying on its own to an artifact after it handles 60 sent comments or thread activations on that artifact within an hour. You see `Comments are waiting on Artifact: <name>` once, and Claude picks up again as that hour's comments age out.
 
-Run `/tasks` to see each artifact your session is watching, listed as a live-updates task. You can stop Claude from replying on its own in three ways, and each one lasts a different length of time:
+Run `/tasks` to see each artifact your session is watching, listed as a live-updates task. You can stop Claude from replying on its own in any of these ways:
 
-* **Press Ctrl+C once**: Claude stops replying on every artifact your session is watching, and starts again on an artifact when you have your session publish it again.
-* **Stop the task in `/tasks`**: Claude stops replying on that artifact for the rest of the session. Publishing it again doesn't start replies again, and if you resume the session later, Claude still doesn't reply there.
-* **Press `Ctrl+X Ctrl+K` twice within 3 seconds**: the chord that [stops every running background subagent](/docs/en/interactive-mode#general-controls) also stops Claude from replying on every artifact for the rest of the session.
+* **Press Ctrl+C once at an idle prompt**: Claude pauses replying on every artifact your session is watching. Replies start again after you send your next message.
+* **Stop the task in `/tasks`**: Claude stops replying on that artifact until you ask it to resume replies there. Publishing the artifact again doesn't start replies again, and the stop still applies when you resume the session later.
+* **Press `Ctrl+X Ctrl+K` twice within 3 seconds**: the chord that [stops every running background subagent](/docs/en/interactive-mode#general-controls) also stops Claude from replying on every artifact for the rest of the session. Asking Claude to resume replies doesn't undo this stop.
+
+If the service that delivers comments becomes unavailable or stops answering, Claude Code keeps trying to reconnect for a while, then stops watching each artifact your session was watching.
 
 ## Pull live data with MCP connectors
 
@@ -229,17 +246,29 @@ Claude treats your design system as higher precedence than its own choices, and 
 
 For typography, Claude can load a typeface from Google Fonts, the one external font source an artifact page can load from. Claude inlines any other typeface as a `@font-face` data URI and gives every typeface a fallback stack, so the page still renders if a font doesn't load. To use a specific typeface, name it in your prompt or your design system.
 
+## Draft a design canvas
+
+To mock up a UI, a screen flow, a landing page, or a poster rather than build a page, run `/design` with a brief. Claude drafts the design as artboards on one canvas and publishes the canvas as an artifact that runs a research preview of Claude Design's editor. The brief names what you want drawn:
+
+```text wrap theme={null}
+/design a settings screen for a mobile banking app
+```
+
+Open the published artifact to review the artboards. Where saving is enabled for your account, select an element on an artboard, change it, and save to publish a new version; otherwise you view the draft and export it as PNG or PDF.
+
+`/design` requires a session where [artifacts are available](#availability) and Claude Code v2.1.234 or later.
+
 ## Page constraints
 
 Each artifact is one self-contained page. Claude Code wraps the file you publish in an HTML document shell and serves it under a strict Content Security Policy (CSP), which shapes what the page can do.
 
-| Constraint        | Effect                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| :---------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| External requests | Apart from Google Fonts and connector data, nothing reaches the page from outside. The CSP blocks scripts, stylesheets, fonts, and images from other hosts, along with `fetch`, XHR, and WebSocket calls, so Claude inlines CSS and JavaScript and embeds images as data URIs. Google Fonts stylesheets load through a `<link>` tag or a CSS `@import` from `fonts.googleapis.com`, along with the font files they reference from `fonts.gstatic.com`. [Connector calls](#pull-live-data-with-mcp-connectors) go through claude.ai, which makes the network call itself. |
-| No backend        | An artifact is a static page. It can't store data submitted through a form or authenticate viewers itself. Its only way to fetch data when someone views it is [calling MCP connectors](#pull-live-data-with-mcp-connectors), not an API of its own.                                                                                                                                                                                                                                                                                                                     |
-| Single page       | Relative links do not resolve, because nothing is deployed alongside the page. For multi-section content, Claude uses in-page anchors rather than separate files.                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Source file types | The published file must be `.html`, `.htm`, or `.md`. Markdown files render as styled HTML.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Rendered size     | The rendered page must be 16 MiB or smaller. Large embedded images are the usual cause when a publish fails for size.                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Constraint        | Effect                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| :---------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| External requests | The page can load typefaces from Google Fonts, and scripts from [four public CDN hosts](#allowlist-the-viewer-domain): cdnjs, the Tailwind and jQuery CDNs, and selected paths on jsDelivr such as `/npm/`. The CSP blocks every external image and all other external scripts, stylesheets, and fonts, and lets `fetch`, XHR, and WebSocket calls reach only the page's own origin and the Google Fonts hosts. Claude therefore loads any library the page needs from one of those CDNs, inlines all other CSS and JavaScript, and embeds images as data URIs. [Connector calls](#pull-live-data-with-mcp-connectors) go through claude.ai, which makes the network call itself. |
+| No backend        | An artifact is a static page. It can't store data submitted through a form or authenticate viewers itself. Its only way to fetch data when someone views it is [calling MCP connectors](#pull-live-data-with-mcp-connectors), not an API of its own.                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Single page       | Relative links do not resolve, because nothing is deployed alongside the page. For multi-section content, Claude uses in-page anchors rather than separate files.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Source file types | The published file must be `.html`, `.htm`, or `.md`. Markdown files render as styled HTML.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Rendered size     | The rendered page must be 16 MiB or smaller. Large embedded images are the usual cause when a publish fails for size.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 Generating an artifact uses output tokens like any other response, and a styled page is more token-intensive than the same content as terminal text. Inline CSS, JavaScript for interactive controls, and especially images embedded as data URIs are the main contributors. To reduce an artifact's token cost:
 
@@ -263,11 +292,16 @@ Artifacts require every condition below. When one is not met, Claude writes a lo
 
 To turn artifacts off for your own sessions regardless of your organization's setting, use any of:
 
-| Method                               | Setting                              |
-| :----------------------------------- | :----------------------------------- |
-| [Settings file](/docs/en/settings)        | `"disableArtifact": true`            |
-| [Environment variable](/docs/en/env-vars) | `CLAUDE_CODE_DISABLE_ARTIFACT=1`     |
-| [Permission rule](/docs/en/permissions)   | Add `Artifact` to `permissions.deny` |
+| Where                                | What to do                                                                                                                            |
+| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------ |
+| [`/config`](/docs/en/commands)            | Turn the **Artifacts** row off, which writes [`"enableArtifact": false`](/docs/en/settings-reference#enableartifact) to your user settings |
+| [Settings file](/docs/en/settings)        | Set `"enableArtifact": false`. The deprecated `"disableArtifact": true` also turns artifacts off                                      |
+| [Environment variable](/docs/en/env-vars) | Set `CLAUDE_CODE_DISABLE_ARTIFACT=1`                                                                                                  |
+| [Permission rule](/docs/en/permissions)   | Add `Artifact` to `permissions.deny`                                                                                                  |
+
+Once you turn artifacts off in a [`--settings`](/docs/en/cli-reference#cli-flags) file or with `CLAUDE_CODE_DISABLE_ARTIFACT`, or your administrator turns them off in [managed settings](/docs/en/server-managed-settings), no settings file turns them back on. Before v2.1.242, a file higher in the [precedence stack](/docs/en/settings#settings-precedence) could turn artifacts back on even when a lower-precedence file set `"enableArtifact": false`.
+
+You can also set `"enableArtifact": false` in a project's `.claude/settings.json` or `.claude/settings.local.json` to turn artifacts off for sessions in that project. An `"enableArtifact": true` in either file doesn't turn them back on. Honoring the key in project and local settings requires Claude Code v2.1.242 or later.
 
 ## Manage artifacts for your organization
 
@@ -298,6 +332,8 @@ Publishing, sharing, and deleting an artifact each appear in your organization's
 The viewer on claude.ai loads each artifact from a sandboxed `*.claudeusercontent.com` origin. If your organization restricts outbound network access, add that domain to your allowlist alongside `claude.ai`. See [Network access requirements](/docs/en/network-config#network-access-requirements) for the full list.
 
 An artifact that loads a typeface from [Google Fonts](#improve-the-visual-design) also requests `fonts.googleapis.com` and `fonts.gstatic.com`. Both hosts are optional. If you block them, artifacts render in fallback typefaces. Block with a fast rejection rather than a silent drop so the font request fails immediately instead of delaying the page's first render.
+
+Artifacts can also load JavaScript libraries, such as React or a charting package, from `cdnjs.cloudflare.com`, `cdn.jsdelivr.net`, `cdn.tailwindcss.com`, and `code.jquery.com`, and from no other external host. If you block those hosts, the parts of an artifact that depend on a library don't work, and unlike a blocked font, a blocked library has no fallback. Block with a fast rejection here too, so a blocked library request fails at once rather than hanging until it times out.
 
 ### List and delete artifacts with the Compliance API
 

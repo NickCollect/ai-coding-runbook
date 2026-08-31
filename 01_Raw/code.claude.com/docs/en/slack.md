@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/slack
-fetched_at: 2026-08-24T02:18:41.907756+00:00
+fetched_at: 2026-08-31T06:29:45.796599+00:00
 fetch_method: mintlify_md
 ---
 
@@ -183,7 +183,7 @@ for more details.
 
 ### "Claude Code is not enabled for your account"
 
-This error means your Claude account has no cloud environment yet, not that an admin needs to enable anything. Sign in at [claude.ai/code](https://claude.ai/code) once with the same account you connected to Slack. The first visit creates your default cloud environment, and the error clears on your next mention. Each user must do this individually.
+This error means your Claude account has no cloud environment yet. Sign in at [claude.ai/code](https://claude.ai/code) once with the same account you connected to Slack and finish [web onboarding](/docs/en/web-quickstart#connect-github), which creates your default cloud environment or asks you to create it. The error clears on your next mention. Each user must do this individually.
 
 ### Sessions not starting
 

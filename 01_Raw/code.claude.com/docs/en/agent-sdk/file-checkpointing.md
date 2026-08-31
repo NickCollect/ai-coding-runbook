@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/file-checkpointing
-fetched_at: 2026-08-24T02:18:35.126520+00:00
+fetched_at: 2026-08-31T06:29:33.561561+00:00
 fetch_method: mintlify_md
 ---
 
@@ -255,7 +255,7 @@ The following example shows the complete flow: enable checkpointing, capture the
     CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING=true claude -p --resume <session-id> --rewind-files <checkpoint-uuid>
     ```
 
-    The `--rewind-files` flag does not appear in `claude --help` output, but the CLI accepts it as shown.
+    The `--rewind-files` flag doesn't appear in `claude --help` output, but the CLI accepts it as shown. When the rewind succeeds, the command prints `Files rewound to state at message <checkpoint-uuid>` and exits without sending a prompt.
   </Step>
 </Steps>
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/cost-tracking
-fetched_at: 2026-08-17T02:15:18.066138+00:00
+fetched_at: 2026-08-31T06:29:33.663590+00:00
 fetch_method: mintlify_md
 ---
 
@@ -17,11 +17,13 @@ The Claude Agent SDK provides detailed token usage information for each interact
 For complete API documentation, see the [TypeScript SDK reference](/docs/en/agent-sdk/typescript) and [Python SDK reference](/docs/en/agent-sdk/python).
 
 <Warning>
-  The `total_cost_usd` and `costUSD` fields are client-side estimates, not authoritative billing data. The SDK computes them locally from a price table bundled at build time, so they can drift from what you are actually billed when:
+  The `total_cost_usd` and `costUSD` fields are client-side estimates, not authoritative billing data. The SDK computes them locally from a price table bundled at build time, unless a [`modelPricing`](/docs/en/settings-reference#modelpricing) table is in effect. They can drift from what you are actually billed when:
 
   * pricing changes
   * the installed SDK version does not recognize a model
   * billing rules apply that the client cannot model
+
+  One billing rule the SDK does model is [data residency pricing](https://platform.claude.com/docs/en/about-claude/pricing#data-residency-pricing). When a response's `usage` reports `inference_geo: "us"`, the SDK multiplies the list price of that response's tokens by 1.1. Per-request fees such as web search aren't multiplied. Requires TypeScript Agent SDK v0.3.239 or later, or Python Agent SDK v0.2.144 or later.
 
   Use these fields for development insight and approximate budgeting. For authoritative billing, use the [Usage and Cost API](https://platform.claude.com/docs/en/build-with-claude/usage-cost-api) or the Usage page in the [Claude Console](https://platform.claude.com/usage). Do not bill end users or trigger financial decisions from these fields.
 </Warning>
@@ -93,6 +95,8 @@ The three result-level fields differ in what they count when the agent spawns [s
 | `usage`                      | Excluded. Counts only the top-level agent loop, so tokens consumed inside subagents are not added |
 | `total_cost_usd`             | Included. Counts subagent requests alongside the top-level loop                                   |
 | `modelUsage` / `model_usage` | Included. Counts subagent requests alongside the top-level loop, broken down by model             |
+
+In [single message input mode](/docs/en/agent-sdk/streaming-vs-single-mode#single-message-input), when background subagents are still running at the end of the final turn, Claude Code waits for them, up to the cap described in [background tasks at exit](/docs/en/headless#background-tasks-at-exit), before emitting the result. The result's `total_cost_usd`, `duration_api_ms`, and `modelUsage`, or `model_usage` in Python, include the work done during that wait.
 
 The following examples iterate over the message stream from a `query()` call and print the total cost when the `result` message arrives:
 
@@ -190,6 +194,8 @@ console.log(`Output tokens: ${resultOutputTokens}`);
 ### Break down usage per model
 
 The result message includes [`modelUsage`](/docs/en/agent-sdk/typescript#modelusage), a map of model name to per-model token counts and cost. This is useful when you run multiple models (for example, Haiku for subagents and Opus for the main agent) and want to see where tokens are going.
+
+Each entry's `costBasis` says which price table priced that model's latest request: `list` for list price, `managed` for a [`modelPricing`](/docs/en/settings-reference#modelpricing) table, or `unknown` when neither matched the model ID. The field requires Claude Code v2.1.246 or later.
 
 The following example runs a query and prints the cost and token breakdown for each model used:
 
@@ -333,7 +339,9 @@ Track these separately from `input_tokens` to understand caching savings. In Typ
 
 ### Extend the prompt cache TTL to one hour
 
-Cache entries written by the SDK use a 5-minute TTL by default when you authenticate with an API key or run on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry, or [Claude Platform on AWS](/docs/en/claude-platform-on-aws). If your workload runs many short sessions against the same system prompt and context with gaps longer than 5 minutes between them, the cache expires between sessions and each new session pays full input price.
+Your own turns fall in the [main conversation TTL bucket](/docs/en/prompt-caching#which-ttl-each-request-gets), together with the helpers Claude Code runs inline with them. The requests Claude Code makes outside that conversation, such as [subagents](/docs/en/agent-sdk/subagents), have a [separate TTL control](/docs/en/prompt-caching#choose-the-ttl-yourself).
+
+Cache entries for your own turns use a 5-minute TTL by default when you authenticate with an API key or run on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry, or [Claude Platform on AWS](/docs/en/claude-platform-on-aws). If your workload runs many short sessions against the same system prompt and context with gaps longer than 5 minutes between them, the cache expires between sessions and each new session pays full input price.
 
 To request a 1-hour TTL on cache writes, set the [`ENABLE_PROMPT_CACHING_1H`](/docs/en/env-vars) environment variable. You can export it in your shell or container environment, or pass it through `options.env`.
 
@@ -377,7 +385,14 @@ The following example enables 1-hour TTL for an agent running on Amazon Bedrock.
   ```
 </CodeGroup>
 
-Cache writes with a 1-hour TTL are billed at a higher rate than 5-minute writes, so enabling this trades higher write cost for more cache reads. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details. Claude subscription users within included usage receive the 1-hour TTL automatically without setting this variable. When you're drawing on [usage credits](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans), the SDK drops to the 5-minute TTL unless you set `ENABLE_PROMPT_CACHING_1H`.
+Cache writes with a 1-hour TTL are billed at a higher rate than 5-minute writes, so enabling this trades higher write cost for more cache reads. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details. On a Claude subscription within your plan's included usage, you get the 1-hour TTL on your own turns, and on some of the helper requests Claude Code makes beside them, without setting this variable, and Claude Code drops those turns to the 5-minute TTL once you're drawing on [usage credits](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans).
+
+`ENABLE_PROMPT_CACHING_1H` asks for the 1-hour TTL on every request in both buckets. To choose a TTL for each bucket separately, use these controls instead. Each takes `5m` or `1h` and takes precedence over `ENABLE_PROMPT_CACHING_1H`:
+
+* Main conversation: the `CLAUDE_CODE_PROMPT_CACHE_TTL` [environment variable](/docs/en/env-vars), or the [`promptCacheTtl`](/docs/en/settings-reference#promptcachettl) setting
+* Everything else: the `CLAUDE_CODE_SUBAGENT_PROMPT_CACHE_TTL` environment variable, or the [`subagentPromptCacheTtl`](/docs/en/settings-reference#subagentpromptcachettl) setting
+
+Setting `promptCacheTtl` to `1h` keeps the 1-hour cache on the main conversation while you're drawing on usage credits. For the full precedence order, see [choose the TTL yourself](/docs/en/prompt-caching#choose-the-ttl-yourself).
 
 ## Related documentation
 

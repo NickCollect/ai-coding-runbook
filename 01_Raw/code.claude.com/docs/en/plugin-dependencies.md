@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugin-dependencies
-fetched_at: 2026-08-24T02:18:40.386665+00:00
+fetched_at: 2026-08-31T06:29:43.826690+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ fetch_method: mintlify_md
 
 A plugin can depend on other plugins by listing them in `plugin.json` or in its marketplace entry. By default, a dependency tracks the latest available version, so an upstream release can change the dependency under your plugin without warning. Version constraints let you hold a dependency at a tested version range until you choose to move.
 
-When you install a plugin that declares dependencies, Claude Code resolves and installs them automatically. If a dependency later goes missing, `/reload-plugins` and the background plugin auto-update reinstall it, provided its marketplace is already in your configured marketplaces. Re-running `claude plugin install` on the dependent plugin, or adding a marketplace with `claude plugin marketplace add`, also resolves any outstanding missing dependencies. Dependencies from a marketplace you have not added are left unresolved.
+When you install a plugin that declares dependencies, Claude Code resolves and installs them automatically, apart from a dependency whose marketplace entry has a [`command` source](/docs/en/plugin-marketplaces#how-users-accept-the-command) or a [`headersHelper`](/docs/en/plugin-marketplaces#how-users-accept-a-headershelper-command), which you install yourself first. Later, `/reload-plugins`, auto-update of the dependent plugin's marketplace, re-running `claude plugin install` on the dependent plugin, and `claude plugin marketplace add` each install any declared dependency that isn't installed yet, under the same rules; if one stays unresolved, see [Resolve dependency errors](#resolve-dependency-errors).
 
 This guide is for plugin authors who declare dependencies in `plugin.json` and for marketplace maintainers who tag releases. Dependencies here are other plugins; for the npm and Bun packages a plugin itself uses, see [Node.js package dependencies](/docs/en/plugins-reference#node-js-package-dependencies). To install plugins that have dependencies, see [Discover and install plugins](/docs/en/discover-plugins). For the full manifest schema, see the [Plugins reference](/docs/en/plugins-reference).
 
@@ -109,6 +109,21 @@ The following `marketplace.json` allows `deploy-kit` to depend on a plugin from 
 
 If the field is missing or does not include the target marketplace, install fails with a `cross-marketplace` error naming the field to set. Users can still install the dependency manually first, which satisfies the constraint without changing the allowlist.
 
+## Test a plugin and its dependency locally
+
+If you're developing a plugin and the plugin it depends on at the same time, load both with `--plugin-dir`:
+
+```bash theme={null}
+claude --plugin-dir ./my-dependency --plugin-dir ./my-plugin
+```
+
+The local copy of the dependency satisfies your plugin's dependency entry, even when the entry names a marketplace, so you don't need to install the dependency from its marketplace. Claude Code doesn't check a [version constraint](#declare-a-dependency-with-a-version-constraint) against a local copy, so the local `plugin.json` doesn't need a `version`. Before v2.1.242, a dependency entry that named a marketplace never matched the local copy, and Claude Code disabled your plugin at load.
+
+If you haven't installed the dependency from its marketplace, your plugin stops loading when the local copy goes away:
+
+* **You disabled the local copy**: Claude Code disables your plugin at the next plugin load. For a dependency entry that names a marketplace, Claude Code reports `Dependency "<name>@inline" is disabled — enable it or remove the dependency`; for a bare-name entry, it reports the dependency by its bare name. `<name>@inline` is how Claude Code identifies every `--plugin-dir` and `--plugin-url` plugin.
+* **You started a session without the dependency's `--plugin-dir` flag**: Claude Code reports the dependency as not installed. Pass the flag again, or install the dependency from its marketplace.
+
 ## Tag plugin releases for version resolution
 
 Claude Code resolves version constraints against git tags on the repository that hosts the dependency: the plugin's own repository for `github`, `url`, and `git-subdir` [plugin sources](/docs/en/plugin-marketplaces#plugin-sources), or the marketplace repository for a plugin the marketplace references by a relative path. For Claude Code to find a dependency's available versions, the upstream plugin's releases must be tagged using a specific naming convention.
@@ -140,7 +155,9 @@ For a plugin the marketplace references by a relative path, a marketplace added 
 The resolved tag's semver is recorded separately from `plugin.json`'s `version`, so constraint checks use the tag that was actually fetched even if `plugin.json` at that commit has a stale value. The cache directory name for a tag-resolved install includes a 12-character commit-SHA suffix, so if a maintainer force-moves a tag to a different commit, the next install gets a fresh cache directory instead of reusing stale content.
 
 <Note>
-  For dependencies with an `npm`, `archive`, or `command` [plugin source](/docs/en/plugin-marketplaces#plugin-sources), the constraint does not control which version is fetched, since tag-based resolution applies only to git-backed sources. The constraint is still checked at load time, and the dependent plugin is disabled with `dependency-version-unsatisfied` if the installed version does not satisfy it. For a `command` source, Claude Code checks the version in the dependency's `plugin.json` and ignores the content-hash suffix; a dependency whose `plugin.json` sets no version satisfies no constraint, so set one before you constrain it. Claude Code never installs a dependency with a `command` source itself, so users [install it first](/docs/en/plugin-marketplaces#how-users-accept-the-command).
+  For dependencies with an `npm`, `archive`, or `command` [plugin source](/docs/en/plugin-marketplaces#plugin-sources), the constraint does not control which version is fetched, since tag-based resolution applies only to git-backed sources. The constraint is still checked at load time, and the dependent plugin is disabled with `dependency-version-unsatisfied` if the installed version does not satisfy it. For a `command` source, Claude Code checks the version in the dependency's `plugin.json` and ignores the content-hash suffix; a dependency whose `plugin.json` sets no version satisfies no constraint, so set one before you constrain it.
+
+  Claude Code never installs a dependency with a `command` source itself, so users [install it first](/docs/en/plugin-marketplaces#how-users-accept-the-command). Claude Code never runs the `headersHelper` on a dependency's marketplace entry either, so users [install that plugin first](/docs/en/plugin-marketplaces#how-users-accept-a-headershelper-command).
 </Note>
 
 ## How constraints interact
@@ -158,6 +175,8 @@ Auto-update fetches a constrained dependency at the highest git tag that satisfi
 When you uninstall the last plugin that constrains a dependency, the dependency is no longer held and resumes tracking its marketplace entry on the next update.
 
 ## Enable or disable a plugin with dependencies
+
+This section covers plugins installed from a marketplace. For a copy you loaded with `--plugin-dir`, see [Test a plugin and its dependency locally](#test-a-plugin-and-its-dependency-locally).
 
 Enabling a plugin also enables the plugins it depends on, and disabling a plugin is blocked if another enabled plugin still needs it.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins
-fetched_at: 2026-08-17T02:15:28.240794+00:00
+fetched_at: 2026-08-31T06:29:44.057774+00:00
 fetch_method: mintlify_md
 ---
 
@@ -140,7 +140,7 @@ This quickstart walks you through creating a plugin with a custom skill. You'll 
     Greet the user named "$ARGUMENTS" warmly and ask how you can help them today. Make the greeting personal and encouraging.
     ```
 
-    Run `/reload-plugins` to pick up the changes. The skills count in the summary covers only `commands/` directories, so it can report `0 skills` even though the skill you just edited reloaded. Then try the skill with your name:
+    Run `/reload-plugins` to pick up the changes. Then try the skill with your name:
 
     ```shell theme={null}
     /my-first-plugin:hello Alex
@@ -176,18 +176,18 @@ You've created a plugin with a skill, but plugins can include much more: custom 
   The plugin root is the individual plugin's own directory: the one you pass to `--plugin-dir` or that contains `.claude-plugin/plugin.json`. It is never `~/.claude/`. For example, Claude Code doesn't read a `.mcp.json` placed at `~/.claude/.mcp.json`.
 </Warning>
 
-| Directory         | Location    | Purpose                                                                        |
-| :---------------- | :---------- | :----------------------------------------------------------------------------- |
-| `.claude-plugin/` | Plugin root | Contains `plugin.json` manifest (optional if components use default locations) |
-| `skills/`         | Plugin root | Skills as `<name>/SKILL.md` directories                                        |
-| `commands/`       | Plugin root | Skills as flat Markdown files. Use `skills/` for new plugins                   |
-| `agents/`         | Plugin root | Custom agent definitions                                                       |
-| `hooks/`          | Plugin root | Event handlers in `hooks.json`                                                 |
-| `.mcp.json`       | Plugin root | MCP server configurations                                                      |
-| `.lsp.json`       | Plugin root | LSP server configurations for code intelligence                                |
-| `monitors/`       | Plugin root | Background monitor configurations in `monitors.json`                           |
-| `bin/`            | Plugin root | Executables added to the Bash tool's `PATH` while the plugin is enabled        |
-| `settings.json`   | Plugin root | Default [settings](/docs/en/settings) applied when the plugin is enabled            |
+| Directory         | Location    | Purpose                                                                                                                                                                                                                                                     |
+| :---------------- | :---------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.claude-plugin/` | Plugin root | Contains `plugin.json` manifest (optional if components use default locations)                                                                                                                                                                              |
+| `skills/`         | Plugin root | Skills as `<name>/SKILL.md` directories                                                                                                                                                                                                                     |
+| `commands/`       | Plugin root | Skills as flat Markdown files. Use `skills/` for new plugins                                                                                                                                                                                                |
+| `agents/`         | Plugin root | Custom agent definitions                                                                                                                                                                                                                                    |
+| `hooks/`          | Plugin root | Event handlers in `hooks.json`                                                                                                                                                                                                                              |
+| `.mcp.json`       | Plugin root | MCP server configurations                                                                                                                                                                                                                                   |
+| `.lsp.json`       | Plugin root | LSP server configurations for code intelligence                                                                                                                                                                                                             |
+| `monitors/`       | Plugin root | Background monitor configurations in `monitors.json`                                                                                                                                                                                                        |
+| `bin/`            | Plugin root | Executables added to the Bash tool's `PATH` while the plugin is enabled. You can't include this directory in a plugin you [distribute through claude.ai organization settings](/docs/en/plugin-marketplaces#keep-executables-out-of-the-top-level-bin-directory) |
+| `settings.json`   | Plugin root | Default [settings](/docs/en/settings) applied when the plugin is enabled                                                                                                                                                                                         |
 
 A plugin that ships exactly one skill can place `SKILL.md` directly at the plugin root instead of creating a `skills/` directory. Claude Code loads it as a single skill and uses the frontmatter `name` field for the invocation name. Use the `skills/` layout for plugins that may grow to more than one skill.
 
@@ -316,6 +316,8 @@ As you make changes to your plugin, run `/reload-plugins` to pick up the updates
   ```bash theme={null}
   claude --plugin-dir ./plugin-one --plugin-dir ./plugin-two
   ```
+
+  To test a plugin together with a plugin it depends on, see [Test a plugin and its dependency locally](/docs/en/plugin-dependencies#test-a-plugin-and-its-dependency-locally).
 </Tip>
 
 To test a plugin that is already packaged as a `.zip` archive and hosted at a URL, such as a CI build artifact, use `--plugin-url` instead. Claude Code fetches the archive at startup and loads it for that session only. If Claude Code can't fetch the archive, or the archive is invalid, it starts without the plugin and records a plugin load error that you can review in the `/plugin` manager's **Errors** tab. The same [trust considerations](/docs/en/discover-plugins#security) apply as for any plugin source: only point this flag at archives you control or trust.

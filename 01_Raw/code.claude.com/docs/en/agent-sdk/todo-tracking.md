@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/todo-tracking
-fetched_at: 2026-08-24T02:18:36.667430+00:00
+fetched_at: 2026-08-31T06:29:35.145712+00:00
 fetch_method: mintlify_md
 ---
 
@@ -80,7 +80,7 @@ The streamed `tool_use` input is the raw shape the model emitted. Claude Code re
 
   try {
     for await (const message of query({
-      prompt: "Optimize my React app performance and track progress with todos",
+      prompt: "Create a static website with a home page, an about page, and a shared stylesheet, and track progress with todos",
       // Keeps the Task tools on models where Claude Code otherwise doesn't provide them.
       options: { maxTurns: 15, permissionMode: "acceptEdits", env: { ...process.env, CLAUDE_CODE_ENABLE_TODO_TOOLS: "1" } },
     })) {
@@ -116,7 +116,7 @@ The streamed `tool_use` input is the raw shape the model emitted. Claude Code re
   async def main():
       try:
           async for message in query(
-              prompt="Optimize my React app performance and track progress with todos",
+              prompt="Create a static website with a home page, an about page, and a shared stylesheet, and track progress with todos",
               # Keeps the Task tools on models where Claude Code otherwise doesn't provide them.
               options=ClaudeAgentOptions(max_turns=15, permission_mode="acceptEdits", env={"CLAUDE_CODE_ENABLE_TODO_TOOLS": "1"}),
           ):

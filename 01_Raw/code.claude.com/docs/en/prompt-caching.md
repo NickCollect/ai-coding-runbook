@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/prompt-caching
-fetched_at: 2026-08-24T02:18:40.616088+00:00
+fetched_at: 2026-08-31T06:29:44.164269+00:00
 fetch_method: mintlify_md
 ---
 
@@ -56,19 +56,15 @@ Caching happens server-side, in whichever infrastructure serves your model. Wher
 * **Microsoft Foundry**: depends on the deployment's [hosting option](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry#hosting-options). Hosted on Azure deployments are served on Azure infrastructure; Hosted on Anthropic deployments are served on Anthropic's infrastructure
 * **Custom `ANTHROPIC_BASE_URL` or [LLM gateway](/docs/en/llm-gateway)**: the cache lives wherever your requests are forwarded, and whether caching works depends on the gateway
 
-Claude Code also appends system context mid-conversation, such as file-change notices. Whether that block is cached depends on how your requests reach the provider.
+Claude Code also appends system context mid-conversation, such as file-change notices, and marks that block for caching on every provider and connection.
 
-At the provider's own endpoint, Amazon Bedrock and its [Mantle endpoint](/docs/en/amazon-bedrock#use-the-mantle-endpoint), Google Cloud's Agent Platform, and Microsoft Foundry cache the block the same way the Claude API does. For Bedrock, Mantle, and Agent Platform, that means their base-URL variables are unset. For Foundry, it means `ANTHROPIC_FOUNDRY_BASE_URL` is unset or points at your resource's `services.ai.azure.com` host, the standard [Microsoft Foundry setup](/docs/en/microsoft-foundry). Before v2.1.211, these providers billed the block as uncached input tokens on every request.
+At the provider's own endpoint, Amazon Bedrock and its [Mantle endpoint](/docs/en/amazon-bedrock#use-the-mantle-endpoint), Google Cloud's Agent Platform, and Microsoft Foundry cache the block the same way the Claude API does.
 
-Claude Code doesn't mark the block for caching, so it shows up as uncached input on every request, in any of these setups:
+When your requests pass through an [LLM gateway](/docs/en/llm-gateway), a custom `ANTHROPIC_BASE_URL`, or a cloud provider base-URL override such as [`ANTHROPIC_BEDROCK_BASE_URL`](/docs/en/env-vars), what stays cached depends on how the gateway handles the [`cache_control` markers](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#explicit-cache-breakpoints) Claude Code sends:
 
-* [`ANTHROPIC_BEDROCK_BASE_URL`](/docs/en/env-vars), `ANTHROPIC_VERTEX_BASE_URL`, or `ANTHROPIC_BEDROCK_MANTLE_BASE_URL` set to any value, even the provider's own endpoint
-* `ANTHROPIC_FOUNDRY_BASE_URL` pointing at a host outside `services.ai.azure.com`, such as a gateway
-* [`ANTHROPIC_AWS_BASE_URL`](/docs/en/env-vars) set to any value on [Claude Platform on AWS](/docs/en/claude-platform-on-aws), including a custom-region endpoint
-* An [LLM gateway](/docs/en/llm-gateway) or a custom `ANTHROPIC_BASE_URL`
-* A [Claude apps gateway](/docs/en/claude-apps-gateway) session
-
-Claude Code keeps the conversation's own [cache breakpoints](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#explicit-cache-breakpoints) in place, so a gateway that forwards them still caches your conversation. Before v2.1.237, Claude Code marked the block for caching through gateways too, and a gateway that silently removed the marker left the entire conversation billed as uncached input on every turn.
+* **Forwards them unchanged**: the block and your conversation cache the same as at the provider's own endpoint.
+* **Rejects the marked request with a `400` error naming `cache_control`**: Claude Code re-sends the request with the marker moved off the block and onto your last conversation message, and keeps it there for the rest of the conversation. The block bills as uncached input; your conversation stays cached.
+* **Removes the markers while returning success**: your entire conversation history bills as uncached input on every turn. A gateway that converts block-form system content to a plain string drops the marker the same way.
 
 For what each provider stores and processes, see [data usage](/docs/en/data-usage). Wherever the cache lives, entries expire after a period of inactivity, and [Cache lifetime](#cache-lifetime) below covers the TTL and how to extend it.
 
@@ -93,6 +89,8 @@ When you run `/model` at the terminal, Claude Code asks you to confirm the switc
 
 Before v2.1.238, Claude Code didn't check the cache TTL and asked even after the cache had expired.
 
+You can also require this confirmation or skip it with a [PreModelSwitch hook](/docs/en/hooks#premodelswitch-decision-control).
+
 The [`opusplan` model setting](/docs/en/model-config#opusplan-model-setting) resolves to Opus during plan mode and Sonnet during execution, so each plan-mode toggle is a model switch and starts a fresh cache.
 
 [Automatic model fallback](/docs/en/model-config#automatic-model-fallback) on Fable 5 and Opus 5 is also a model switch. When a safety classifier flags a request and the flagged category has a fallback model, Claude Code re-runs the request on that model and the session continues there.
@@ -103,7 +101,7 @@ The cache is keyed by [effort level](/docs/en/model-config#adjust-effort-level) 
 
 ### Turning on fast mode
 
-Enabling [fast mode](/docs/en/fast-mode) adds a request header that is part of the cache key, so the next request reads the entire conversation history with no cache hits. Those uncached input tokens are billed at [fast mode rates](/docs/en/fast-mode#understand-the-cost-tradeoff), which is why turning it on at the start of a session costs less than turning it on deep into a long one. Enabling fast mode from a non-Opus model also [switches your model](#switching-models), which starts a fresh cache on its own.
+Enabling [fast mode](/docs/en/fast-mode) adds a request header that is part of the cache key, so the first request Claude Code sends with fast mode on reads the entire conversation history with no cache hits. Claude Code sets that header once when a turn starts and keeps it for the whole turn, so when you turn fast mode on while Claude is working, the cache miss from the header happens on the first request of your next turn. Those uncached input tokens are billed at [fast mode rates](/docs/en/fast-mode#understand-the-cost-tradeoff), which is why turning it on at the start of a session costs less than turning it on deep into a long one. If your current model doesn't support fast mode, enabling fast mode also [switches your model](#switching-models), and that switch starts a fresh cache on its own from the next request in the running turn.
 
 The cost applies once per conversation. After the first fast mode turn, Claude Code keeps sending the header and varies only the request's speed setting, which is not part of the cache key. Turning fast mode off, the [automatic fallback to standard speed](/docs/en/fast-mode#handle-rate-limits) after a rate limit, and turning it back on later all keep the cache. If you [run out of usage credits](/docs/en/fast-mode#handle-rate-limits) mid-session, Claude Code retries each rejected fast mode request at standard speed the same way, so this fallback also keeps the cache. `/clear` and `/compact` reset this, since they rebuild the cache at those points anyway.
 
@@ -137,20 +135,19 @@ When you enable or disable a plugin that provides [MCP servers](/docs/en/plugins
 
 When you enable a [code intelligence plugin](/docs/en/discover-plugins#code-intelligence), Claude gets the [LSP tool](/docs/en/tools-reference#lsp-tool-behavior).
 
-If you enable one mid-session, Claude Code changes the tool set at most once in that session. Once Claude Code has had a language server available, it keeps the LSP tool in the request for the rest of the session. Claude Code doesn't change the tool set or invalidate the cache when a language server stops, fails, or reconnects later. Before v2.1.235, Claude Code removed the tool from the request whenever every language server had crashed or failed to start and added it back when one recovered.
-
 #### When plugin changes apply
 
-Claude Code applies a plugin change when you run [`/reload-plugins`](/docs/en/discover-plugins#apply-plugin-changes-without-restarting) or start a new session. You pay the cost, whether appended announcements or a full re-read, on the first turn after the change applies, not when you run `/plugin enable` or `/plugin disable`. Claude Code can also apply a change on its own in two cases:
+Claude Code applies a plugin change when you run [`/reload-plugins`](/docs/en/discover-plugins#apply-plugin-changes-without-restarting) or start a new session. You pay the cost, whether appended announcements or a full re-read, on the first turn after the change applies, not when you run `/plugin enable` or `/plugin disable`. Claude Code can also apply a change on its own in three cases:
 
 * For a plugin with a `command` source, Claude Code [can reload the plugin itself](/docs/en/plugin-marketplaces#when-claude-code-re-runs-the-command).
 * When you [install a plugin from the `/plugin` interface](/docs/en/discover-plugins#install-plugins), Claude Code can activate it during the install. Claude Code tells you in the install summary whether it did or whether to run `/reload-plugins`.
+* When you [move the session with `/cd`](/docs/en/permissions#move-the-session-to-another-directory) on v2.1.246 or later, Claude Code applies the plugins the new directory's settings enable as part of the move, without the full re-read warning that holds a `/reload-plugins`.
 
 When you run `/reload-plugins` and the reload would trigger a full re-read, Claude Code shows a warning and doesn't apply the reload. Rerun it with `--force` to apply the reload anyway.
 
 #### Plugins you enable and then disable in one session
 
-When you disable a plugin you enabled earlier in the session, Claude Code restores the previous request shape, apart from the [LSP tool](#code-intelligence-plugins), which Claude Code keeps for the rest of the session. If that prefix is still within its [cache lifetime](#cache-lifetime), the next request reads the older cache entry instead of rebuilding.
+When you disable a plugin you enabled earlier in the session, Claude Code restores the previous request shape. If that prefix is still within its [cache lifetime](#cache-lifetime), the next request reads the older cache entry instead of rebuilding.
 
 ### Denying an entire tool
 
@@ -229,23 +226,47 @@ Cached prefixes expire after a period of inactivity. Each request that hits the 
 
 On a Pro or Max plan, when you resume a large session after a long break, Claude Code [offers to resume from a summary](/docs/en/sessions#resume-from-a-summary) so later requests don't carry the full history.
 
-The time to live (TTL) controls how long a gap the cache survives. The API offers two: a five-minute TTL, and a [one-hour TTL](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#1-hour-cache-duration) that keeps the cache warm through longer breaks but [bills cache writes at a higher rate](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#pricing). Claude Code picks the TTL for you based on how you authenticate, and you can override it with environment variables.
+The time to live (TTL) controls how long a gap the cache survives. The API offers two: a five-minute TTL, and a [one-hour TTL](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#1-hour-cache-duration) that keeps the cache warm through longer breaks but [bills cache writes at a higher rate](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#pricing). The longer TTL helps when you leave a session idle and come back to it, because you skip the reprocessing an expired prefix costs. It costs more on short bursts of work that never idle past five minutes, where the higher write rate applies and the longer cache lifetime goes unused.
 
-### On a Claude subscription
+### Which TTL each request gets
 
-On a Claude subscription, Claude Code requests the one-hour TTL automatically, so the cache survives breaks of up to an hour.
+Claude Code decides the TTL per request, and every request falls in one of two fixed buckets:
 
-If you've gone over your plan's usage limit and Claude Code is drawing on [usage credits](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans), you are billed for that usage. Cache writes cost more at the one-hour TTL than at the five-minute TTL, so Claude Code automatically drops to the shorter one. To keep the one-hour TTL while drawing on usage credits, set `ENABLE_PROMPT_CACHING_1H=1`.
+* **Main conversation**: your interactive turns, non-interactive `-p` runs, and Agent SDK turns, plus the helpers Claude Code runs inline with them
+* **Everything else**: the requests Claude Code makes outside that conversation, such as [subagents](/docs/en/sub-agents), [workflows](/docs/en/workflows), in-process [teammates](/docs/en/agent-teams), forks, compaction, and session titles
 
-### On an API key or third-party provider
+Unless you choose a TTL yourself, Claude Code requests the one-hour TTL only on a Claude subscription within your plan's included usage. There it requests the hour for the main conversation, plus a small set of helper requests that Anthropic controls server-side. This table gives each bucket's default TTL under both kinds of billing.
 
-On an API key, Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry, or Claude Platform on AWS, you pay the per-token rates, so the TTL stays at the cheaper five minutes by default. To opt into the [one-hour TTL](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#1-hour-cache-duration), set `ENABLE_PROMPT_CACHING_1H=1`.
+| Request bucket    | Claude subscription, within plan usage                                         | Usage credits, API key, or cloud provider |
+| ----------------- | ------------------------------------------------------------------------------ | ----------------------------------------- |
+| Main conversation | One hour                                                                       | Five minutes                              |
+| Everything else   | Five minutes, except the server-controlled helper requests, which get one hour | Five minutes                              |
 
-On Amazon Bedrock, prompt caching support, minimum cacheable prefix length, and one-hour TTL availability all vary by model. If cache token counts stay at zero, check [supported models, regions, and limits](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html#prompt-caching-models) in the Amazon Bedrock documentation.
+Once you go over your plan's usage limit and Claude Code draws on [usage credits](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans), you are billed for that usage, so Claude Code drops the main conversation to the cheaper five-minute TTL. To keep the one-hour TTL there, [choose the TTL yourself](#choose-the-ttl-yourself).
 
-### Override the TTL
+### Choose the TTL yourself
 
-Set `FORCE_PROMPT_CACHING_5M=1` to force the five-minute TTL regardless of authentication. This is useful when you're debugging cache behavior, comparing the two TTLs, or overriding an `ENABLE_PROMPT_CACHING_1H` set in [managed settings](/docs/en/managed-settings).
+You can set a TTL for either bucket. Each control takes `5m` or `1h`, and Claude Code ignores any other value.
+
+* **Main conversation**: the [`promptCacheTtl`](/docs/en/settings-reference#promptcachettl) setting, or the `CLAUDE_CODE_PROMPT_CACHE_TTL` [environment variable](/docs/en/env-vars)
+* **Everything else**: the [`subagentPromptCacheTtl`](/docs/en/settings-reference#subagentpromptcachettl) setting, or the `CLAUDE_CODE_SUBAGENT_PROMPT_CACHE_TTL` environment variable
+
+Both settings and both environment variables require Claude Code v2.1.242 or later. If you sign in with an API key or use a cloud provider, set `promptCacheTtl` to `1h` to give the main conversation a one-hour cache. Requests outside it keep the five-minute default until you choose a TTL for that bucket too.
+
+When more than one control applies, Claude Code takes the first match in this order:
+
+1. `FORCE_PROMPT_CACHING_5M=1`, which forces five minutes for both buckets
+2. The bucket's environment variable
+3. The bucket's setting
+4. For a subagent's requests, the `cacheTtl` value in the subagent's [`experimental` frontmatter field](/docs/en/sub-agents#supported-frontmatter-fields), which requires Claude Code v2.1.248 or later. Claude Code ignores a `1h` there while your Claude subscription is using usage credits
+5. `ENABLE_PROMPT_CACHING_1H=1`, which requests one hour for both buckets
+6. The [default for the request's bucket](#which-ttl-each-request-gets)
+
+Set `FORCE_PROMPT_CACHING_5M=1` when you're debugging cache behavior, comparing the two TTLs, or overriding a longer TTL set in [managed settings](/docs/en/managed-settings).
+
+To confirm which TTL your main conversation's cache writes used, run `claude -p "hello" --output-format json` and read `usage.cache_creation` in the result. Claude Code reports one-hour cache writes under `ephemeral_1h_input_tokens` and five-minute cache writes under `ephemeral_5m_input_tokens`.
+
+Through an LLM gateway you set with `ANTHROPIC_BASE_URL`, part of the one-hour request travels in the `anthropic-beta` header, so configure the gateway to [forward that header unchanged](/docs/en/llm-gateway-protocol#request-headers). The one-hour TTL isn't available through the [Claude apps gateway](/docs/en/claude-apps-gateway#availability-and-limitations). On Amazon Bedrock, prompt caching support, minimum cacheable prefix length, and one-hour TTL availability all vary by model. If cache token counts stay at zero, check [supported models, regions, and limits](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html#prompt-caching-models) in the Amazon Bedrock documentation.
 
 ## Cache scope
 
@@ -266,11 +287,13 @@ Cache performance shows up as two token counts the API reports on every response
 
 A high read-to-creation ratio means caching is working well. If creation stays high turn after turn, something is changing in your prefix. The [actions that invalidate the cache](#actions-that-invalidate-the-cache) section lists the usual causes.
 
+For a per-session summary, run `/usage`. After the main conversation's first response, Claude Code adds a [`Prompt cache (main)` line](/docs/en/costs#prompt-cache-statistics) to the Session block, showing the session's hit ratio, miss count, and whether the cache is warm right now. A status line script can read the same numbers from the [`prompt_cache` object](/docs/en/statusline#prompt-cache-fields). Both require Claude Code v2.1.251 or later.
+
 For visibility across an organization, the OpenTelemetry exporter reports cache read and creation tokens per user and session. See [Monitor usage](/docs/en/monitoring-usage) for the metric and event attribute reference.
 
 ## Subagents and the cache
 
-A [subagent](/docs/en/sub-agents) starts its own conversation with its own system prompt and tool set, separate from the parent's. Its first request doesn't read the parent's cache, because the two prefixes differ, and it warms a cache of its own across its turns. Subagents use the five-minute TTL even on a subscription, since the automatic one-hour TTL applies to the main conversation.
+A [subagent](/docs/en/sub-agents) starts its own conversation with its own system prompt and tool set, separate from the parent's. Its first request doesn't read the parent's cache, because the two prefixes differ, and it warms a cache of its own across its turns. Subagents fall outside the main-conversation [TTL bucket](#which-ttl-each-request-gets), so they get five minutes even on a subscription until you [choose a longer one](#choose-the-ttl-yourself).
 
 The parent's cache is unaffected. From the parent's side, the subagent's call and result append to the conversation, leaving the parent's prefix intact.
 

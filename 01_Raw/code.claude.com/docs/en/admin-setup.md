@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/admin-setup
-fetched_at: 2026-08-24T02:18:34.811335+00:00
+fetched_at: 2026-08-31T06:29:32.865087+00:00
 fetch_method: mintlify_md
 ---
 
@@ -48,7 +48,7 @@ Proxy and firewall requirements in [Network configuration](/docs/en/network-conf
 
 ## Decide how settings reach devices
 
-Managed settings define organization policy. Claude Code checks the four sources in the table below in priority order and applies the first one that delivers at least one policy key. [Which managed source Claude Code uses](/docs/en/managed-settings#precedence-within-the-managed-tier) covers what still applies from the other sources and what a policy helper changes; the table is the decision map.
+Managed settings define organization policy. Claude Code checks the four sources in the table below in priority order. [How Claude Code combines managed sources](/docs/en/managed-settings#precedence-within-the-managed-tier) says which of them apply, what a policy helper changes, and how to compose every source. The table is the decision map.
 
 | Mechanism               | Delivery                                                                                                                                                                                              | Priority | Platforms      |
 | :---------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------- | :------------- |
@@ -57,7 +57,7 @@ Managed settings define organization policy. Claude Code checks the four sources
 | File-based managed      | macOS: `/Library/Application Support/ClaudeCode/managed-settings.json`<br />Linux and WSL: `/etc/claude-code/managed-settings.json`<br />Windows: `C:\Program Files\ClaudeCode\managed-settings.json` | Medium   | All            |
 | Windows user registry   | `HKCU\SOFTWARE\Policies\ClaudeCode`                                                                                                                                                                   | Lowest   | Windows only   |
 
-Server-managed settings reach devices at authentication time and refresh hourly during active sessions, with no endpoint infrastructure. Delivery through the claude.ai admin console requires a Claude for Teams or Enterprise plan. Deployments on Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry can get the same remote delivery by running a [Claude apps gateway](/docs/en/claude-apps-gateway), or use one of the file-based or OS-level mechanisms instead.
+Claude Code fetches server-managed settings at startup and refreshes them hourly during the session, with no endpoint infrastructure to deploy. Delivery through the claude.ai admin console requires a Claude for Teams or Enterprise plan. Deployments on Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry can get the same remote delivery by running a [Claude apps gateway](/docs/en/claude-apps-gateway), or use one of the file-based or OS-level mechanisms instead.
 
 If your organization mixes providers, configure [server-managed settings](/docs/en/server-managed-settings) for claude.ai users plus a [file-based or plist/registry fallback](/docs/en/managed-settings#delivery-mechanisms) so other users still receive managed policy.
 
@@ -65,18 +65,29 @@ The plist and HKLM registry locations work with any provider and resist tamperin
 
 By default, WSL reads only the Linux file path at `/etc/claude-code`. To extend your Windows registry and `C:\Program Files\ClaudeCode` policy to WSL on the same machine, set [`wslInheritsWindowsSettings: true`](/docs/en/settings-reference#wslinheritswindowssettings) in either of those admin-only Windows sources.
 
-Whichever mechanism you choose, managed values take precedence over user and project settings, apart from a few security-sensitive [exceptions](/docs/en/settings#exceptions-to-managed-settings-precedence). Array settings such as `permissions.allow` and `permissions.deny` merge entries from all sources, so developers can extend managed lists but not remove from them. For `fallbackModel` and `availableModels`, the managed value replaces lower layers rather than merging.
+Whichever mechanism you choose, managed values take precedence over user and project settings, apart from a few security-sensitive [exceptions](/docs/en/settings#exceptions-to-managed-settings-precedence). Array settings such as `permissions.allow` and `permissions.deny` merge entries from all sources, so developers can extend managed lists but not remove from them. For `fallbackModel`, `availableModels`, and [`modelPicker`](/docs/en/settings-reference#modelpicker), the managed value replaces lower layers rather than merging.
 
 ### WSL sessions in Claude Code Desktop
 
 On Windows, [Claude Code Desktop can run Code sessions inside a WSL 2 distribution](/docs/en/desktop-wsl). The session's Claude Code process runs inside the distribution, so it resolves managed settings through the WSL discovery path above: Windows-only sources don't reach it unless `wslInheritsWindowsSettings: true` is deployed.
 
-On devices where managed settings are present, Desktop WSL sessions are unavailable by default. If your organization wants to enable them, contact your Anthropic account team. When they're enabled:
+Claude Desktop turns off WSL sessions by default on devices it detects as organization-managed, for example when `C:\Program Files\ClaudeCode\managed-settings.json` exists. To turn them on, deploy a Windows registry policy, which requires Claude Desktop v1.19367.0 or later:
+
+* Create a value named `disableWslSessions` under `HKLM\SOFTWARE\Policies\Claude` and set it to the `REG_SZ` string `false` or the `REG_DWORD` `0`. This value sits under the Claude Desktop policy key, separate from the `ClaudeCode` key that carries managed settings. Deploy the value under HKLM, which requires administrator privileges to write. A value under HKCU doesn't enable WSL sessions.
+* Leave `C:\Program Files\ClaudeCode\managed-settings.json` in place if you deploy it. Once `disableWslSessions` is `false` under HKLM, Desktop allows WSL sessions even though that file is present.
+
+Desktop reads the policy each time a WSL session starts, so you don't need to restart the app after deploying it.
+
+If a device still refuses WSL sessions, open **Help > Troubleshooting > Show Logs in Explorer** in Claude Desktop on that device, which saves a copy of its log folder to Downloads. Search `main.log` in that copy for `[wslPolicyGate] denying WSL session`. The reason for the denial follows in parentheses, such as `(cli-file-present)`. If Claude Desktop was installed with the `.exe` installer, you can also read the live file at `%APPDATA%\Claude\logs\main.log`.
+
+After WSL sessions are enabled, extend your managed settings to them:
 
 * Deploy `wslInheritsWindowsSettings: true` through the HKLM registry or the `C:\Program Files\ClaudeCode` file so WSL sessions inherit the same policy as host sessions.
-* Verify by running `/status` inside a WSL session: the `Setting sources` line should show `Enterprise managed settings` with the Windows source you deployed, `(HKLM)` or `(file)`.
+* Verify by running `/status` inside a WSL session and reading the `Setting sources` line. Claude Code names only the [managed source it selected](/docs/en/server-managed-settings#settings-precedence), so what the line tells you depends on the session:
+  * **In a session that [fetches server-managed settings](/docs/en/server-managed-settings#platform-availability) and receives any keys**: `Enterprise managed settings (remote)`, because Claude Code selects them ahead of the Windows sources, so the line doesn't show whether the flag arrived.
+  * **In any other session**: `Enterprise managed settings (HKLM)` confirms a registry deployment. `(file)` names the Windows file or the distribution's own `/etc/claude-code/managed-settings.json`, so it confirms a Windows file deployment only when the distribution has no managed file of its own.
 
-Processes inside the WSL 2 utility VM aren't visible to Windows-side endpoint detection sensors. If you use CrowdStrike Falcon, enable the Falcon sensor for Linux on WSL 2 with the two exclusions CrowdStrike's WSL documentation requires, for the WSL virtual machine process and the VM disk image, so in-distro process and file activity is observable. Claude Code's [OpenTelemetry tool-execution telemetry](/docs/en/monitoring-usage) is emitted identically for WSL and native sessions.
+Processes inside the WSL 2 utility VM aren't visible to Windows-side endpoint detection sensors. To observe in-distro process and file activity, check your endpoint detection vendor's WSL guidance for a Linux sensor you can run inside the distribution and the exclusions it needs. Claude Code's [OpenTelemetry tool-execution telemetry](/docs/en/monitoring-usage) is emitted identically for WSL and native sessions.
 
 ## Decide what to enforce
 

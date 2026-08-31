@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/self-hosted-environments-testing
-fetched_at: 2026-08-24T02:18:41.690186+00:00
+fetched_at: 2026-08-31T06:29:45.284342+00:00
 fetch_method: mintlify_md
 ---
 
@@ -92,7 +92,7 @@ The `--environment` and `--ref` dispatch flags require Claude Code v2.1.224 or l
 
 ### `--environment` dispatch behavior
 
-In a non-interactive run, with `-p` or a piped prompt, Claude Code creates the session, prints the session ID and a link to it, and exits. From a terminal, `claude --environment <id> "task"` starts an attached interactive cloud session on the environment instead.
+Claude Code creates the session, prints the session ID and a link to it, and exits.
 
 The flag takes precedence over the [`remote.defaultEnvironmentId`](/docs/en/settings-reference#remote-defaultenvironmentid) setting. It doesn't support `--output-format stream-json`, and can't be combined with flags that resume, attach to, or preconfigure a session, such as `--resume`, `--continue`, `--teleport`, `--session-id`, or `--init-only`. `--cloud` is rejected with a session ID or URL, and in non-interactive runs when it carries a description. A bare `--cloud` is treated as absent. From a terminal, you can pass the task as the `--cloud` description instead of a positional prompt.
 
@@ -194,7 +194,9 @@ Both `claude -p ... --environment` and `claude -p ... --cloud` authenticate with
 
 ### Long-lived CI host
 
-Run `claude auth login` once interactively on the machine that executes the script, using a dedicated user account for automation. The token lives in the OS keychain on macOS, or in `~/.claude/.credentials.json` on Linux and Windows. The CLI refreshes the short-lived access token automatically on each invocation, but the underlying refresh-token grant is capped at 30 days from the initial login, so re-run `claude auth login` interactively on that host every 30 days.
+Run `claude auth login` once interactively on the machine that executes the script, using a dedicated user account for automation. Claude Code stores the token in the OS keychain on macOS, or in `~/.claude/.credentials.json` on Linux and Windows. On a macOS host whose Keychain can't be written, as is typical in an SSH session where the login Keychain stays locked, Claude Code stores the token in `~/.claude/.credentials.json` there too. See [Credential management](/docs/en/authentication#credential-management).
+
+The CLI refreshes the short-lived access token automatically on each invocation, but the underlying refresh-token grant is capped at 30 days from the initial login, so re-run `claude auth login` interactively on that host every 30 days.
 
 ### Ephemeral CI runners
 
@@ -210,7 +212,7 @@ Create and delete environments programmatically so each CI run gets a clean one;
 
 `$ADMIN_TOKEN` is a claude.ai OAuth access token for an account that holds an Owner role, minted the same way as [Authenticate from CI](#authenticate-from-ci):
 
-* **Mint it**: run `claude auth login` with an account that holds an Owner role, then read the current access token from the OS keychain on macOS or `~/.claude/.credentials.json` on Linux and Windows.
+* **Mint it**: run `claude auth login` with an account that holds an Owner role, then read the current access token from wherever [Long-lived CI host](#long-lived-ci-host) says Claude Code stored it.
 * **Read it fresh each run**: the CLI rotates the access token, and the same 30-day refresh-grant cap applies, so don't store a copy.
 * **Pass it via stdin**: as the example does, so the token never lands in curl's argument list or your build log.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/self-hosted-environments-quickstart
-fetched_at: 2026-08-24T02:18:41.471674+00:00
+fetched_at: 2026-08-31T06:29:45.212397+00:00
 fetch_method: mintlify_md
 ---
 
@@ -105,13 +105,13 @@ The runner exits by design once its active sessions finish; see [Runner lifecycl
 
 ## Send a follow-up message to a running session
 
-Once a session is running on your environment, send it a follow-up from the `claude` CLI on any machine where you're logged in with `claude auth login`; the command doesn't need to run from the machine that started the session. The queue-and-exit form posts one message:
+Once a session is running on your environment, send it a follow-up from the `claude` CLI on any machine where you're logged in with `claude auth login`; the command doesn't need to run from the machine that started the session. The command posts one message:
 
 ```bash theme={null}
 claude -p "your message" --cloud <session-id>
 ```
 
-For `<session-id>`, pass the bare `session_...` or `cse_...` ID or the session's claude.ai/code URL. A successful send prints `Sent to cloud session.` with the session ID and a view link. Accepted ID forms, JSON output, the interactive attach form, the account and policy requirements, and the error reference are on [Send follow-ups from the CLI](/docs/en/claude-code-on-the-web#send-follow-ups-from-the-cli), since the command works the same against Anthropic-hosted sessions.
+For `<session-id>`, pass the bare `session_...` or `cse_...` ID or the session's claude.ai/code URL. A successful send prints `Sent to cloud session.` with the session ID and a view link. Accepted ID forms, JSON output, the account and policy requirements, and the error reference are on [Send follow-ups from the CLI](/docs/en/claude-code-on-the-web#send-follow-ups-from-the-cli), since the command works the same against Anthropic-hosted sessions.
 
 ## What's next
 

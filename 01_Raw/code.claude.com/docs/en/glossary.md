@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/glossary
-fetched_at: 2026-08-24T02:18:38.669515+00:00
+fetched_at: 2026-08-31T06:29:41.410530+00:00
 fetch_method: mintlify_md
 ---
 
@@ -200,7 +200,7 @@ Learn more: [Run Claude Code programmatically](/docs/en/headless)
 
 ### Output style
 
-A configuration that modifies Claude's system prompt to change response behavior, tone, or format. Unlike [CLAUDE.md](#claude-md), which Claude Code delivers as a user message after the system prompt, an output style changes the system prompt itself. Custom styles leave out Claude Code's built-in software engineering instructions unless you set `keep-coding-instructions` to `true`, and the built-in Default, Proactive, Concise, Explanatory, and Learning styles keep them.
+A configuration that modifies Claude's system prompt to change response behavior, tone, or format. Unlike [CLAUDE.md](#claude-md), which Claude Code delivers as a user message after the system prompt, an output style changes the system prompt itself.
 
 Learn more: [Output styles](/docs/en/output-styles)
 
@@ -288,7 +288,7 @@ Learn more: [Extend Claude with skills](/docs/en/skills)
 
 ### Subagent
 
-A specialized AI assistant that runs in its own context window with a custom system prompt, specific tool access, and independent permissions. It works on a delegated task and returns a summary to the main conversation. Use subagents to keep large explorations out of your primary context or to run parallel research. Different from [agent teams](#agent-teams), where each agent is a full independent session you can talk to directly.
+A specialized AI assistant that runs in its own context window with a custom system prompt, specific tool access, and independent permissions. It works on a delegated task and returns a summary to the main conversation. Use subagents to keep large explorations out of your primary context or to run parallel research. A subagent stays inside the session that spawned it. To pass findings between separate sessions you run yourself, use [cross-session messaging](/docs/en/cross-session-messaging).
 
 Built-in subagents include Explore, Plan, and general-purpose.
 

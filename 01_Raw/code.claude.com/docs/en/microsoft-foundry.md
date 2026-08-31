@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/microsoft-foundry
-fetched_at: 2026-08-10T03:07:54.008191+00:00
+fetched_at: 2026-08-31T06:29:43.304228+00:00
 fetch_method: mintlify_md
 ---
 
@@ -193,6 +193,8 @@ For current and legacy model IDs, see [Models overview](https://platform.claude.
 ```bash theme={null}
 export ENABLE_PROMPT_CACHING_1H=1
 ```
+
+To set different TTLs for your main conversation and for the requests Claude Code makes outside it, [choose the TTL yourself](/docs/en/prompt-caching#choose-the-ttl-yourself).
 
 ### 5. Run Claude Code
 

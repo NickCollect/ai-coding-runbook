@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/discover-plugins
-fetched_at: 2026-08-24T02:18:38.353134+00:00
+fetched_at: 2026-08-31T06:29:39.623131+00:00
 fetch_method: mintlify_md
 ---
 
@@ -57,7 +57,7 @@ The official marketplace includes several categories of plugins:
 
 ### Code intelligence
 
-Code intelligence plugins enable Claude Code's built-in LSP tool, giving Claude the ability to jump to definitions, find references, and see type errors immediately after edits. These plugins configure [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) connections, the same technology that powers VS Code's code intelligence.
+Code intelligence plugins enable Claude Code's built-in LSP tool, giving Claude the ability to jump to definitions, find references, and see type errors immediately after edits. These plugins configure [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) connections, the same technology that powers VS Code's code intelligence. In [cloud sessions](/docs/en/claude-code-on-the-web), Claude Code doesn't start plugin language servers, so Claude doesn't get the LSP tool there.
 
 Install the language server binary from the table below before using these plugins; the plugin doesn't install it for you. If you already have a language server installed, Claude may prompt you to install the corresponding plugin when you open a project.
 
@@ -414,7 +414,7 @@ When the [install summary](#install-plugins) reports `Plugin is now active.`, Cl
 
 When the reload would invalidate the prompt cache, the command warns and skips until you rerun it with `--force`.
 
-Claude Code reloads all active plugins and shows counts for plugins, skills, agents, hooks, plugin MCP servers, and plugin LSP servers. The skills count covers only each plugin's `commands/` directory, not its `skills/` directory, so the summary can report `0 skills` even when the plugin's skills reloaded.
+Claude Code reloads all active plugins and shows counts for plugins, skills, agents, hooks, plugin MCP servers, and plugin LSP servers. In the skills count, Claude Code includes every skill a plugin provides: both its `commands/` entries and its `SKILL.md` skills. Before v2.1.246, Claude Code counted only `commands/` entries, so it could reload a plugin's `SKILL.md` skills and still report `0 skills` in the summary.
 
 Reloading has a token cost on the next request: newly loaded components announce themselves in content appended to the conversation, while the existing history still reads from the prompt cache. A plugin that provides MCP servers costs more when its tools aren't deferred by [tool search](/docs/en/mcp#scale-with-mcp-tool-search): the change invalidates the cache and the next request re-reads the entire conversation. See [enabling or disabling a plugin](/docs/en/prompt-caching#enabling-or-disabling-a-plugin) for details.
 
@@ -462,6 +462,8 @@ Remove a marketplace:
 Claude Code can automatically update marketplaces and their installed plugins in the background after startup. When auto-update is enabled for a marketplace, Claude Code refreshes the marketplace data and updates installed plugins to their latest versions on disk.
 
 Claude Code checks for marketplace and plugin updates after your session starts, with a random delay of up to ten minutes, so the running session keeps using the versions it loaded at launch. If any plugins were updated, you'll see a notification prompting you to run `/reload-plugins`, or the new versions load on your next launch.
+
+Auto-update also leaves out a plugin whose marketplace entry declares a `headersHelper`: Claude Code [neither runs the command nor downloads the archive](/docs/en/plugin-marketplaces#installs-and-updates-that-refuse-the-command-instead-of-asking) on that path; that section says when Claude Code lists the plugin in the `/plugin` Errors tab so you can update it from its own view.
 
 Claude Code updates plugins that have a [`command` source](/docs/en/plugin-marketplaces#command-sources) on a separate cadence from the marketplace auto-update setting and from `DISABLE_AUTOUPDATER`. Instead, it [re-runs the command once per session](/docs/en/plugin-marketplaces#when-claude-code-re-runs-the-command) and installs the output as a new plugin version when its [hash](/docs/en/plugins-reference#version-management) has changed.
 

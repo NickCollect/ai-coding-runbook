@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/third-party-integrations
-fetched_at: 2026-08-17T02:15:30.286447+00:00
+fetched_at: 2026-08-31T06:29:46.247166+00:00
 fetch_method: mintlify_md
 ---
 
@@ -157,7 +157,7 @@ If your organization has specific infrastructure requirements, compare the optio
     <tr>
       <td>Authentication</td>
       <td>Claude.ai SSO or email</td>
-      <td>API key</td>
+      <td>API key or a [Console sign-in without one](/docs/en/authentication#sign-in-without-an-api-key)</td>
       <td>API key or AWS credentials</td>
       <td>API key or AWS credentials</td>
       <td>GCP credentials</td>
@@ -219,6 +219,8 @@ Most organizations can use a cloud provider directly without additional configur
 
 For the per-provider environment variables that route Amazon Bedrock, Microsoft Foundry, or Google Cloud's Agent Platform through an LLM gateway, see [route to a cloud provider through a gateway](/docs/en/llm-gateway-connect#route-to-a-cloud-provider-through-a-gateway). Run `/status` in Claude Code to verify which provider, base URL, and proxy a session is using.
 
+If your organization uses [customer-managed encryption keys](https://platform.claude.com/docs/en/manage-claude/cmek) (CMEK) and routes Claude Code through an LLM gateway or a custom `ANTHROPIC_BASE_URL`, CMEK doesn't apply to Claude Code's operational telemetry on those sessions. To turn telemetry off for every developer, deliver `DISABLE_TELEMETRY` through managed settings as shown in [Turn telemetry off for your organization](/docs/en/managed-settings#turn-telemetry-off-for-your-organization).
+
 ## Best practices for organizations
 
 ### Invest in documentation and memory
@@ -246,7 +248,9 @@ If you deploy through [Amazon Bedrock](/docs/en/amazon-bedrock), [Google Cloud's
 
 Security teams can configure managed permissions for what Claude Code is and is not allowed to do, which cannot be overwritten by local configuration. [Learn more](/docs/en/security).
 
-### Leverage MCP for integrations
+<h3 id="leverage-mcp-for-integrations">
+  Use MCP for integrations
+</h3>
 
 MCP is a great way to give Claude Code more information, such as connecting to ticket management systems or error logs. We recommend that one central team configures MCP servers and checks a `.mcp.json` configuration into the codebase so that all users benefit. [Learn more](/docs/en/mcp).
 

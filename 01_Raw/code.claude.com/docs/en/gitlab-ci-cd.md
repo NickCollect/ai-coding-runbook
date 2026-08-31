@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/gitlab-ci-cd
-fetched_at: 2026-08-17T02:15:25.476715+00:00
+fetched_at: 2026-08-31T06:29:41.026960+00:00
 fetch_method: mintlify_md
 ---
 
@@ -48,7 +48,7 @@ Pick regional endpoints to reduce latency and meet data-sovereignty requirements
 
 ## What can Claude do?
 
-Claude Code enables powerful CI/CD workflows that transform how you work with code:
+In a GitLab pipeline, Claude Code can:
 
 * Create and update MRs from issue descriptions or comments
 * Analyze performance regressions and propose optimizations
