@@ -1,33 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/code-execution?hl=es-419
-fetched_at: 2026-08-31T06:41:51.446084+00:00
-title: "Ejecuci\u00f3n de c\u00f3digo \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/code-execution?hl=tr
+fetched_at: 2026-09-07T05:49:07.322496+00:00
+title: "Kod y\u00fcr\u00fctme \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Enviar comentarios
+Geri bildirim gönderin
 
-# Ejecución de código
+# Kod yürütme
 
-La API de Gemini proporciona una herramienta de ejecución de código que permite que el modelo genere y ejecute código de Python. Luego, el modelo puede aprender de forma iterativa a partir de los resultados de la ejecución de código hasta llegar a un resultado final. Puedes usar la ejecución de código para crear aplicaciones que se beneficien del razonamiento basado en código. Por ejemplo, puedes usar la ejecución de código para resolver ecuaciones o procesar texto. También puedes
-usar las [bibliotecas](#supported-libraries) incluidas en el entorno de ejecución de código
-para realizar tareas más especializadas.
+Gemini API, modelin Python kodu oluşturup çalıştırmasını sağlayan bir kod yürütme aracı sunar. Model, nihai bir çıkışa ulaşana kadar kod yürütme sonuçlarından yinelemeli olarak öğrenebilir. Kod yürütme özelliğini kullanarak kod tabanlı akıl yürütmeden yararlanan uygulamalar oluşturabilirsiniz. Örneğin, denklemleri çözmek veya metinleri işlemek için kod yürütmeyi kullanabilirsiniz. Daha özel görevleri gerçekleştirmek için kod yürütme ortamında yer alan [kitaplıkları](#supported-libraries) da kullanabilirsiniz.
 
-Gemini solo puede ejecutar código en Python. Aun así, puedes pedirle a Gemini que genere código en otro lenguaje, pero el modelo no puede usar la herramienta de ejecución de código para ejecutarlo.
+Gemini yalnızca Python'daki kodları çalıştırabilir. Gemini'dan başka bir dilde kod oluşturmasını isteyebilirsiniz ancak model, kodu uygulamak için kod yürütme aracını kullanamaz.
 
-## Habilita la ejecución de código
+## Kod yürütmeyi etkinleştirme
 
-Para habilitar la ejecución de código, configura la herramienta de ejecución de código en el modelo. Esto permite que el modelo genere y ejecute código.
+Kod yürütmeyi etkinleştirmek için modelde kod yürütme aracını yapılandırın. Bu, modelin kod oluşturup çalıştırmasına olanak tanır.
 
 ### Python
 
@@ -145,7 +143,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }'
 ```
 
-El resultado podría ser similar al siguiente, que se formateó para mejorar la legibilidad:
+Çıktı, okunabilirlik için biçimlendirilmiş aşağıdaki gibi görünebilir:
 
 ```
 Okay, I need to calculate the sum of the first 50 prime numbers. Here's how I'll
@@ -194,31 +192,27 @@ sum_of_primes=5117
 The sum of the first 50 prime numbers is 5117.
 ```
 
-Este resultado combina varias partes de contenido que el modelo muestra cuando se usa la ejecución de código:
+Bu çıkış, kod yürütme kullanılırken modelin döndürdüğü çeşitli içerik bölümlerini birleştirir:
 
-- `text`: Texto intercalado generado por el modelo
-- `executableCode`: Código generado por el modelo que se debe ejecutar
-- `codeExecutionResult`: Resultado del código ejecutable
+- `text`: Model tarafından oluşturulan satır içi metin
+- `executableCode`: Model tarafından oluşturulan ve yürütülmesi amaçlanan kod
+- `codeExecutionResult`: Yürütülebilir kodun sonucu
 
-Las convenciones de nomenclatura para estas partes varían según el lenguaje de programación.
+Bu bölümlerin adlandırma kuralları, programlama diline göre değişir.
 
-## Ejecución de código con imágenes (Gemini 3)
+## Görüntülerle kod yürütme (Gemini 3)
 
-El modelo Gemini 3 Flash ahora puede escribir y ejecutar código de Python para manipular y examinar imágenes de forma activa.
+Gemini 3 Flash modeli artık görüntüleri etkin bir şekilde işlemek ve incelemek için Python kodu yazıp çalıştırabilir.
 
-**Casos de uso**
+**Kullanım alanları**
 
-- **Acercar y examinar**: El modelo detecta de forma implícita cuando los detalles son demasiado pequeños
-  (p.ej., leer un indicador distante) y escribe código para recortar y volver a examinar el área
-  con una resolución más alta.
-- **Matemáticas visuales**: El modelo puede ejecutar cálculos de varios pasos con código (p.ej.,
-  sumar los artículos de una factura).
-- **Anotación de imágenes**: El modelo puede anotar imágenes para responder preguntas, como
-  dibujar flechas para mostrar relaciones.
+- **Yakınlaştırma ve inceleme**: Model, ayrıntıların çok küçük olduğunu (ör. uzaktaki bir ölçüm cihazını okuma) örtülü olarak algılar ve alanı kırpıp daha yüksek çözünürlükte yeniden incelemek için kod yazar.
+- **Görsel matematik**: Model, kod kullanarak çok adımlı hesaplamalar yapabilir (ör. bir makbuzdaki satır öğelerini toplama).
+- **Görüntü notlandırma**: Model, soruları yanıtlamak için görüntüleri notlandırabilir (ör. ilişkileri göstermek için oklar çizebilir).
 
-### Habilita la ejecución de código con imágenes
+### Görüntülerle kod yürütmeyi etkinleştirme
 
-La ejecución de código con imágenes se admite oficialmente en Gemini 3 Flash. Puedes activar este comportamiento habilitando la ejecución de código como herramienta y el razonamiento.
+Görüntülerle kod yürütme, Gemini 3 Flash'te resmi olarak desteklenir. Hem "Araç olarak kod yürütme" hem de "Düşünme"yi etkinleştirerek bu davranışı etkinleştirebilirsiniz.
 
 ### Python
 
@@ -433,9 +427,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/$MODEL:generateCon
     }'
 ```
 
-## Usa la ejecución de código en el chat
+## Sohbette kod yürütme özelliğini kullanma
 
-También puedes usar la ejecución de código como parte de un chat.
+Kod yürütmeyi sohbetin bir parçası olarak da kullanabilirsiniz.
 
 ### Python
 
@@ -593,81 +587,73 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }'
 ```
 
-## Entrada y salida (E/S)
+## Giriş/çıkış (G/Ç)
 
-La ejecución de código admite la entrada de archivos y la salida de gráficos. Con estas capacidades de entrada y
-salida, puedes subir archivos CSV y de texto, hacer preguntas sobre los
-archivos y generar gráficos de [Matplotlib](https://matplotlib.org/) como parte
-de la respuesta. Los archivos de salida se muestran como imágenes intercaladas en la respuesta.
+Kod yürütme, dosya girişini ve grafik çıkışını destekler. Bu giriş ve çıkış özelliklerini kullanarak CSV ve metin dosyaları yükleyebilir, dosyalarla ilgili sorular sorabilir ve yanıtın bir parçası olarak [Matplotlib](https://matplotlib.org/) grafikleri oluşturabilirsiniz. Çıkış dosyaları, yanıttaki satır içi resimler olarak döndürülür.
 
-### Precios de E/S
+### G/Ç fiyatlandırması
 
-Cuando usas la E/S de ejecución de código, se te cobra por los tokens de entrada y salida:
+Kod yürütme G/Ç'sini kullanırken giriş jetonları ve çıkış jetonları için ücretlendirilirsiniz:
 
-**Tokens de entrada:**
+**Giriş jetonu sayısı:**
 
-- Instrucción del usuario
+- Kullanıcı istemi
 
-**Tokens de salida:**
+**Çıkış jetonları:**
 
-- Código generado por el modelo
-- Resultado de la ejecución de código en el entorno de código
-- Tokens de razonamiento
-- Resumen generado por el modelo
+- Model tarafından oluşturulan kod
+- Kod ortamında kod yürütme çıkışı
+- Düşünme jetonları
+- Model tarafından oluşturulan özet
 
-### Detalles de E/S
+### G/Ç ayrıntıları
 
-Cuando trabajes con la E/S de ejecución de código, ten en cuenta los siguientes detalles técnicos:
+Kod yürütme G/Ç ile çalışırken aşağıdaki teknik ayrıntılara dikkat edin:
 
-- El tiempo de ejecución máximo del entorno de código es de 30 segundos.
-- Si el entorno de código genera un error, es posible que el modelo decida volver a generar el resultado del código. Esto puede suceder hasta 5 veces.
-- El tamaño máximo de entrada de archivos está limitado por la ventana de tokens del modelo. En AI Studio, el tamaño máximo del archivo de entrada es de 1 millón de tokens (aproximadamente 2 MB para archivos de texto de los tipos de entrada admitidos). Si subes un archivo demasiado grande, AI Studio no te permitirá enviarlo.
-- La ejecución de código funciona mejor con archivos de texto y CSV.
-- El archivo de entrada se puede pasar en `part.inlineData` o `part.fileData` (subido
-  a través de la [API de Files](https://ai.google.dev/gemini-api/docs/files?hl=es-419)), y el archivo de salida siempre
-  se muestra como `part.inlineData`.
+- Kod ortamının maksimum çalışma süresi 30 saniyedir.
+- Kod ortamı hata oluşturursa model, kod çıkışını yeniden oluşturmaya karar verebilir. Bu işlem en fazla 5 kez yapılabilir.
+- Maksimum dosya giriş boyutu, model jetonu penceresiyle sınırlıdır. AI Studio'da maksimum giriş dosyası boyutu 1 milyon jetondur (desteklenen giriş türlerindeki metin dosyaları için yaklaşık 2 MB). Çok büyük bir dosya yüklerseniz AI Studio bu dosyayı göndermenize izin vermez.
+- Kod yürütme, metin ve CSV dosyalarıyla en iyi şekilde çalışır.
+- Giriş dosyası `part.inlineData` veya `part.fileData` olarak iletilebilir ([Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr) aracılığıyla yüklenir) ve çıkış dosyası her zaman `part.inlineData` olarak döndürülür.
 
-## Facturación
+## Faturalandırma
 
-No hay cargos adicionales por habilitar la ejecución de código desde la API de Gemini.
-Se te facturará según la tarifa actual de los tokens de entrada y salida en función del modelo de Gemini que uses.
+Gemini API'den kod yürütmeyi etkinleştirmek için ek ücret alınmaz.
+Kullandığınız Gemini modeline göre giriş ve çıkış jetonlarının mevcut oranı üzerinden faturalandırılırsınız.
 
-Estos son algunos aspectos que debes tener en cuenta sobre la facturación de la ejecución de código:
+Kod yürütme faturalandırması hakkında bilmeniz gereken diğer noktalar:
 
-- Solo se te factura una vez por los tokens de entrada que pasas al modelo, y se te factura por los tokens de salida finales que te muestra el modelo.
-- Los tokens que representan el código generado se cuentan como tokens de salida. El código generado puede incluir texto y salida multimodal, como imágenes.
-- Los resultados de la ejecución de código también se cuentan como tokens de salida.
+- Modele ilettiğiniz giriş jetonları için yalnızca bir kez faturalandırılırsınız ve modelin size döndürdüğü nihai çıkış jetonları için faturalandırılırsınız.
+- Oluşturulan kodu temsil eden jetonlar, çıkış jetonları olarak sayılır. Oluşturulan kod, metin ve görüntü gibi çok formatlı çıkışlar içerebilir.
+- Kod yürütme sonuçları da çıkış jetonu olarak sayılır.
 
-El modelo de facturación se muestra en el siguiente diagrama:
+Faturalandırma modeli aşağıdaki şemada gösterilmektedir:
 
-![Modelo de facturación de ejecución de código](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=es-419)
+![kod yürütme faturalandırma modeli](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=tr)
 
-- Se te facturará según la tarifa actual de los tokens de entrada y salida en función del modelo de Gemini que uses.
-- Si Gemini usa la ejecución de código cuando genera tu respuesta, la instrucción original, el código generado y el resultado del código ejecutado se etiquetan como *tokens intermedios* y se facturan como *tokens de entrada*.
-- Luego, Gemini genera un resumen y muestra el código generado, el resultado del código ejecutado y el resumen final. Estos se facturan como *tokens de salida*.
-- La API de Gemini incluye un recuento de tokens intermedios en la respuesta de la API, por lo que sabes por qué obtienes tokens de entrada adicionales más allá de tu instrucción inicial.
+- Kullandığınız Gemini modeline göre giriş ve çıkış jetonlarının mevcut oranı üzerinden faturalandırılırsınız.
+- Gemini, yanıtınızı oluştururken kod yürütme özelliğini kullanırsa orijinal istem, oluşturulan kod ve yürütülen kodun sonucu *ara jetonları* olarak etiketlenir ve *giriş jetonları* olarak faturalandırılır.
+- Ardından Gemini, bir özet oluşturur ve oluşturulan kodu, çalıştırılan kodun sonucunu ve nihai özeti döndürür. Bunlar *çıkış jetonları* olarak faturalandırılır.
+- Gemini API, API yanıtında ara jeton sayısını içerir. Böylece, ilk isteminizin ötesinde neden ek giriş jetonları aldığınızı bilirsiniz.
 
-## Limitaciones
+## Sınırlamalar
 
-- El modelo solo puede generar y ejecutar código. No puede mostrar otros artefactos, como archivos multimedia.
-- En algunos casos, habilitar la ejecución de código puede provocar regresiones en otras áreas del resultado del modelo (por ejemplo, escribir una historia).
-- Existe cierta variación en la capacidad de los diferentes modelos para usar la ejecución de código de forma correcta.
+- Model yalnızca kod oluşturabilir ve yürütebilir. Medya dosyaları gibi diğer öğeler geri döndürülemez.
+- Bazı durumlarda, kod yürütmenin etkinleştirilmesi model çıktısının diğer alanlarında (ör. hikaye yazma) gerilemelere yol açabilir.
+- Farklı modellerin kod yürütmeyi başarılı bir şekilde kullanma becerisinde bazı farklılıklar vardır.
 
-## Combinaciones de herramientas compatibles
+## Desteklenen araç kombinasyonları
 
-La herramienta de ejecución de código se puede combinar con
-[Fundamentación con la Búsqueda de Google](https://ai.google.dev/gemini-api/docs/google-search?hl=es-419) para
-potenciar casos de uso más complejos.
+Kod yürütme aracı, daha karmaşık kullanım alanlarını desteklemek için [Google Arama ile Temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr) ile birleştirilebilir.
 
-Los modelos de Gemini 3 admiten la combinación de herramientas integradas (como la ejecución de código) con herramientas personalizadas (llamadas a funciones). Debes volver a pasar los campos `id` y `thought_signature` para que funcione la combinación de herramientas. Obtén más información en la
-[página de combinaciones de herramientas](https://ai.google.dev/gemini-api/docs/tool-combination?hl=es-419).
+Gemini 3 modelleri, yerleşik araçların (ör. kod yürütme) özel araçlarla (işlev çağrısı) birlikte kullanılmasını destekler. Araç kombinasyonunun çalışması için `id` ve `thought_signature` alanlarını geri iletmeniz gerekir. [Araç kombinasyonları](https://ai.google.dev/gemini-api/docs/tool-combination?hl=tr) sayfasından daha fazla bilgi edinin.
 
-## Bibliotecas compatibles
+## Desteklenen kitaplıklar
 
-El entorno de ejecución de código incluye las siguientes bibliotecas:
+Kod yürütme ortamı aşağıdaki kitaplıkları içerir:
 
 - attrs
-- ajedrez
+- satranç
 - contourpy
 - fpdf
 - geopandas
@@ -682,9 +668,9 @@ El entorno de ejecución de código incluye las siguientes bibliotecas:
 - numpy
 - opencv-python
 - openpyxl
-- empaquetado
-- pandas
-- almohada
+- paketleme
+- pandalar
+- yastık
 - protobuf
 - pylatex
 - pyparsing
@@ -696,30 +682,29 @@ El entorno de ejecución de código incluye las siguientes bibliotecas:
 - scikit-learn
 - scipy
 - seaborn
-- six
+- altı
 - striprtf
 - sympy
-- tabulate
+- tablolaştırmak
 - tensorflow
 - toolz
 - xlrd
 
-No puedes instalar tus propias bibliotecas.
+Kendi kitaplıklarınızı yükleyemezsiniz.
 
-## ¿Qué sigue?
+## Sırada ne var?
 
-- Prueba el
-  [Colab de ejecución de código](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Code_Execution.ipynb?hl=es-419).
-- Obtén información sobre otras herramientas de la API de Gemini:
-  - [Llamada a función](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419)
-  - [Grounding with Google Search](https://ai.google.dev/gemini-api/docs/grounding?hl=es-419)
+- [Kod yürütme Colab'ini](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Code_Execution.ipynb?hl=tr) deneyin.
+- Diğer Gemini API araçları hakkında bilgi edinin:
+  - [İşlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr)
+  - [Google Arama ile temellendirme](https://ai.google.dev/gemini-api/docs/grounding?hl=tr)
 
-Enviar comentarios
+Geri bildirim gönderin
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Última actualización: 2026-07-30 (UTC)
+Son güncelleme tarihi: 2026-07-30 UTC.
 
-¿Quieres brindar más información?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-07-30 (UTC)"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]

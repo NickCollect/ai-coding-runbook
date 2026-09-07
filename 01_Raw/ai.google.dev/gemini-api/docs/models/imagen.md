@@ -1,46 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/imagen?hl=de
-fetched_at: 2026-08-31T06:31:23.272413+00:00
-title: "Imagen\u00a04 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/imagen?hl=vi
+fetched_at: 2026-09-07T05:34:48.916026+00:00
+title: "Imagen 4 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Feedback geben
+Gửi ý kiến phản hồi
 
-# Imagen 4
+# Imagen 4
 
-Eine leistungsstarke Engine für die erweiterte visuelle Synthese, die eine ausgefeilte kreative Steuerung und fotorealistische Ergebnisse bietet. Verwenden Sie Imagen 4 für professionelles Branding, komplexe Szenenkompositionen und anspruchsvolle Designaufgaben, die eine präzise Textwiedergabe und komplexe Beleuchtung erfordern.
+Một công cụ hiệu suất cao để tổng hợp hình ảnh nâng cao, mang đến khả năng kiểm soát sáng tạo tinh vi và đầu ra chân thực như ảnh chụp. Sử dụng Imagen 4 để xây dựng thương hiệu chuyên nghiệp, bố cục cảnh phức tạp và các tác vụ thiết kế có độ trung thực cao đòi hỏi khả năng hiển thị văn bản chính xác và ánh sáng phức tạp.
 
-[In Google AI Studio ausprobieren](https://aistudio.google.com?model=imagen-4.0-generate-001&hl=de)
+[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=imagen-4.0-generate-001&hl=vi)
 
-## Dokumentation
+## Tài liệu
 
-Eine vollständige Liste der Funktionen finden Sie auf der Seite [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=de).
+Truy cập trang [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=vi) để xem toàn bộ các tính năng và chức năng.
 
 ## imagen-4.0-generate-001
 
-| Attribut | Beschreibung |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardModellcode | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
-| saveUnterstützte Datentypen | **Eingabe**  Text  **Ausgabe**  Bilder |
-| token\_autoToken-Limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=de) | **Eingabetokenlimit**  480 Tokens (Text)  **Ausgabe von Bildern**  1 bis 4 (Ultra/Standard/Schnell) |
-| calendar\_monthLetzte Aktualisierung | Juni 2025 |
+| id\_cardMã kiểu máy | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản  **Đầu ra**  Hình ảnh |
+| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  480 token (văn bản)  **Hình ảnh đầu ra**  1 đến 4 (Ultra/Standard/Fast) |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 6 năm 2025 |
 
-Feedback geben
+Gửi ý kiến phản hồi
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Zuletzt aktualisiert: 2026-06-15 (UTC).
+Cập nhật lần gần đây nhất: 2026-06-15 UTC.
 
-Haben Sie Feedback für uns?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-06-15 (UTC)."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-15 UTC."],[],[]]

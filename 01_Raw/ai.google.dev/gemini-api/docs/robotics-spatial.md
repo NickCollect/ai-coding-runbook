@@ -1,30 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=hi
-fetched_at: 2026-08-31T06:43:25.762213+00:00
-title: "\u0938\u094d\u092a\u0947\u0936\u0932 \u0930\u0940\u091c\u093c\u0928\u093f\u0902\u0917 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=ja
+fetched_at: 2026-09-07T05:46:19.027782+00:00
+title: "\u7a7a\u9593\u63a8\u8ad6 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-सुझाव भेजें
+フィードバックを送信
 
-# स्पेशल रीज़निंग
+# 空間推論
 
-Gemini Robotics ER मॉडल, ऑब्जेक्ट की ओर इशारा कर सकते हैं, वीडियो में उन्हें ट्रैक कर सकते हैं, उन्हें बाउंडिंग बॉक्स के साथ पहचान सकते हैं, और मूवमेंट ट्रैजेक्ट्री जनरेट कर सकते हैं.
+Gemini Robotics ER モデルは、オブジェクトを指し示し、動画内でオブジェクトを追跡し、境界ボックスでオブジェクトを検出し、移動軌跡を生成できます。
 
-पूरे रन करने लायक कोड के लिए, [रोबोटिक्स कुकबुक](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb) देखें.
+実行可能な完全なコードについては、[ロボティクス クックブック](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)をご覧ください。
 
-## ऑब्जेक्ट की ओर पॉइंट करना
+## オブジェクトを指す
 
-इस उदाहरण में, किसी इमेज में मौजूद कुछ ऑब्जेक्ट का पता लगाया जाता है और उनके सामान्य किए गए `[y, x]` कोऑर्डिनेट दिखाए जाते हैं:
+次の例では、画像内の特定のオブジェクトを検出し、正規化された `[y, x]` 座標を返します。
 
 ### Python
 
@@ -92,7 +92,7 @@ curl -X POST \
   }'
 ```
 
-आउटपुट के तौर पर एक JSON कलेक्शन मिलेगा. इसमें ऑब्जेक्ट शामिल होंगे. हर ऑब्जेक्ट में `point` (सामान्य किए गए `[y, x]` कोऑर्डिनेट) और ऑब्जेक्ट की पहचान करने वाला `label` होगा.
+出力は、オブジェクトを含む JSON 配列になります。各オブジェクトには、オブジェクトを識別する `point`（正規化された `[y, x]` 座標）と `label` が含まれます。
 
 ### JSON
 
@@ -111,13 +111,13 @@ curl -X POST \
 ]
 ```
 
-नीचे दी गई इमेज में, इन पॉइंट को दिखाने का तरीका बताया गया है:
+次の図は、これらのポイントを表示する方法の例です。
 
-![इमेज में मौजूद ऑब्जेक्ट के पॉइंट दिखाने वाला उदाहरण](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=hi)
+![画像内のオブジェクトのポイントを表示する例](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=ja)
 
-## वीडियो में ऑब्जेक्ट ट्रैक करना
+## 動画内のオブジェクトのトラッキング
 
-Gemini Robotics ER 2, वीडियो फ़्रेम का विश्लेषण करके, समय के साथ-साथ ऑब्जेक्ट को ट्रैक भी कर सकता है. काम करने वाले वीडियो फ़ॉर्मैट की सूची देखने के लिए, [वीडियो इनपुट](https://ai.google.dev/gemini-api/docs/video-understanding?hl=hi#supported-formats) देखें.
+Gemini Robotics ER 2 は、動画フレームを分析して、オブジェクトを時間経過とともに追跡することもできます。サポートされている動画形式の一覧については、[動画入力](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja#supported-formats)をご覧ください。
 
 ### Python
 
@@ -151,9 +151,9 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-## ऑब्जेक्ट का पता लगाना और बाउंडिंग बॉक्स
+## オブジェクト検出と境界ボックス
 
-पॉइंट के अलावा, मॉडल को 2D बाउंडिंग बॉक्स दिखाने के लिए भी कहा जा सकता है. इससे, पहचाने गए ऑब्जेक्ट के बारे में ज़्यादा जानकारी मिलती है.
+ポイントに加えて、モデルに 2D 境界ボックスを返すようにプロンプトを設定することもできます。これにより、検出されたオブジェクトの空間的な詳細情報が提供されます。
 
 ### Python
 
@@ -187,11 +187,11 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-## ट्रैजेक्ट्री
+## 軌跡
 
-Gemini Robotics ER 2, ऐसे पॉइंट के सीक्वेंस जनरेट कर सकता है जो किसी ट्रैजेक्ट्री को तय करते हैं. ये पॉइंट, रोबोट को मूव करने के लिए गाइड करने में मददगार होते हैं.
+Gemini Robotics ER 2 は、軌跡を定義する一連の点を生成できます。これは、ロボットの動きをガイドするのに役立ちます。
 
-इस उदाहरण में, लाल पेन को किसी ऑर्गेनाइज़र तक ले जाने के लिए, ट्रैजेक्ट्री का अनुरोध किया गया है. इसमें इंटरमीडिएट वेपॉइंट का अनुमान भी शामिल है. कोड को छोटा कर दिया गया है, ताकि सिर्फ़ प्रॉम्प्ट दिखे.
+この例では、赤いペンをオーガナイザーに移動する軌跡をリクエストしています。これには、中間経由地の推定値が含まれます。コードはプロンプトのみを表示するように縮小されています。
 
 ### Python
 
@@ -204,9 +204,9 @@ prompt = """
         """
 ```
 
-## लैपटॉप के लिए जगह बनाना
+## ノートパソコンを置くスペースを確保する
 
-इस उदाहरण में दिखाया गया है कि Gemini Robotics ER, किसी जगह के बारे में कैसे सोच सकता है. प्रॉम्प्ट में मॉडल से यह पता लगाने के लिए कहा गया है कि किस ऑब्जेक्ट को हटाना है, ताकि किसी दूसरे आइटम के लिए जगह बनाई जा सके.
+この例は、Gemini Robotics ER が空間について推論する方法を示しています。プロンプトは、別のアイテムのスペースを確保するために移動する必要があるオブジェクトを特定するようにモデルに指示します。
 
 ### Python
 
@@ -238,7 +238,7 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-जवाब में, उस ऑब्जेक्ट का 2D कोऑर्डिनेट होता है जो उपयोगकर्ता के सवाल का जवाब देता है. इस मामले में, वह ऑब्जेक्ट जो लैपटॉप के लिए जगह बनाने के लिए हिलना चाहिए.
+レスポンスには、ユーザーの質問に答えるオブジェクトの 2D 座標が含まれています。この場合、ノートパソコンを置くために移動する必要があるオブジェクトです。
 
 ```
 [
@@ -246,11 +246,11 @@ print(image_response.output_text)
 ]
 ```
 
-![इस उदाहरण में दिखाया गया है कि किसी ऑब्जेक्ट को दूसरे ऑब्जेक्ट के लिए कहां ले जाना है](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=hi)
+![別のオブジェクトのために移動する必要があるオブジェクトを示す例](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=ja)
 
-## लंच पैक करना
+## お弁当の準備
 
-यह मॉडल, एक से ज़्यादा चरणों वाले टास्क के लिए निर्देश भी दे सकता है. साथ ही, हर चरण के लिए काम की चीज़ों की ओर इशारा कर सकता है. इस उदाहरण में दिखाया गया है कि मॉडल, लंच बैग पैक करने के लिए कई चरणों की योजना कैसे बनाता है.
+モデルは、複数ステップのタスクの手順を提供し、各ステップに関連するオブジェクトを指すこともできます。この例では、モデルがランチバッグを詰める一連の手順を計画する方法を示します。
 
 ### Python
 
@@ -283,13 +283,13 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-इस प्रॉम्प्ट के जवाब में, इमेज इनपुट से लंच बैग पैक करने के बारे में सिलसिलेवार निर्देश दिए गए हैं.
+このプロンプトのレスポンスは、画像入力からランチバッグを詰める方法に関する手順のセットです。
 
-**इनपुट इमेज**
+**入力画像**
 
-![लंच बॉक्स और उसमें रखने के लिए चीज़ों की इमेज](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=hi)
+![お弁当箱と中に入れるものの画像](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=ja)
 
-**मॉडल आउटपुट**
+**モデル出力**
 
 ```
 Based on the image, here is a plan to pack the lunch box and lunch bag:
@@ -312,19 +312,19 @@ Here is the list of objects and their locations:
 *   [{"point": [448, 501], "label": "brown lunch bag"}]
 ```
 
-## आगे क्या करना है
+## 次のステップ
 
-- [एजेंटिक एआई की सुविधाएँ](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=hi) — कोड एक्ज़ीक्यूशन, इंस्ट्रुमेंट को पढ़ना, इमेज की व्याख्या करना.
-- [टास्क ऑर्केस्ट्रेशन](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=hi) — कस्टम रोबोट एपीआई के साथ लंबे समय तक चलने वाले टास्क.
-- [स्ट्रीमिंग के साथ रोबोटिक्स](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=hi) — रीयल-टाइम में दोनों तरफ़ से स्ट्रीमिंग (सिर्फ़ Gemini Robotics ER 2 के लिए).
-- [वीडियो को समझना](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=hi) — वीडियो में किसी खास पल को ढूंढना और प्रोग्रेस को कैटगरी में बांटना (सिर्फ़ Gemini Robotics ER 2 के लिए).
+- [エージェント機能](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=ja) - コード実行、計測器の読み取り、画像アノテーション。
+- [タスク オーケストレーション](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=ja) - カスタム ロボット API を使用した長期的なタスク。
+- [ストリーミングを使用したロボティクス](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=ja) - リアルタイム双方向ストリーミング（Gemini Robotics ER 2 のみ）。
+- [動画の理解](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=ja) - 瞬間検出と進捗状況の分類（Gemini Robotics ER 2 のみ）。
 
-सुझाव भेजें
+フィードバックを送信
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया.
+最終更新日 2026-07-30 UTC。
 
-क्या आपको हमें और कुछ बताना है?
+ご意見をお聞かせください
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-30 UTC。"],[],[]]

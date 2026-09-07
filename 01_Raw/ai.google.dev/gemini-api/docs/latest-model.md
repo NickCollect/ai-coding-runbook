@@ -1,76 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/latest-model?hl=pl
-fetched_at: 2026-08-31T06:41:57.605777+00:00
-title: "Z\u00a0u\u017cyciem najnowszych modeli Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/latest-model?hl=zh-CN
+fetched_at: 2026-09-07T05:45:31.518526+00:00
+title: "Gemini 3.8 Flash \u6709\u54ea\u4e9b\u65b0\u529f\u80fd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Prześlij opinię
+发送反馈
 
-# Z użyciem najnowszych modeli Gemini
+# Gemini 3.8 Flash 有哪些新功能
 
-[Ta strona](#)
-[3.5 Flash](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.5?hl=pl)
+[查看所有模型](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn)
 
-Modele Gemini 3.6 Flash (`gemini-3.6-flash`) i Gemini 3.5 Flash-Lite (`gemini-3.5-flash-lite`) są ogólnie dostępne i gotowe do użycia w środowisku produkcyjnym.
+Gemini 3.8 Flash (`gemini-3.8-flash`) 已正式发布 (GA)，可用于生产环境。它是我们最智能的 Flash
+模型，专为长期软件工程、自主智能体和复杂的企业工作流而设计。
 
-- **Gemini 3.6 Flash**: większa skuteczność w złożonych zadaniach agentowych i multimodalnych przy mniejszym zużyciu tokenów i niższej cenie niż w przypadku modelu 3.5 Flash.
-- **Gemini 3.5 Flash-Lite**: najszybszy i najtańszy model z rodziny 3.5. W przypadku wykonywania zadań z dużą przepustowością przewyższa poprzednie generacje modelu Flash-Lite.
+本指南介绍了 Gemini 3.8 Flash 的新增功能、API 变更、代码示例和迁移指南。
 
-Z tego przewodnika dowiesz się, co nowego jest w każdym modelu, jakie zmiany w interfejsie API wpływają na Twój kod i jak przeprowadzić migrację.
+## 新建模型
 
-### Gemini 3.6 Flash
-
-1. Zainstaluj umiejętność:
-
-   ```
-   npx skills add google-gemini/gemini-skills --skill gemini-interactions-api --global
-   ```
-2. Zastosuj umiejętność:
-
-   ```
-   /gemini-interactions-api migrate my app to Gemini 3.6 Flash
-   ```
-
-### Gemini 3.5 Flash-Lite
-
-1. Zainstaluj umiejętność:
-
-   ```
-   npx skills add google-gemini/gemini-skills --skill gemini-interactions-api --global
-   ```
-2. Zastosuj umiejętność:
-
-   ```
-   /gemini-interactions-api migrate my app to Gemini 3.5 Flash-Lite
-   ```
-
-## Nowe modele
-
-| Model | Identyfikator modelu | Domyślny poziom myślenia | Ceny | Opis |
+| 模型 | 模型 ID | 默认思考级别 | 价格 | 说明 |
 | --- | --- | --- | --- | --- |
-| Gemini 3.6 Flash | `gemini-3.6-flash` | `medium` | 1,50 USD za milion tokenów wejściowych i 7,50 USD za milion tokenów wyjściowych | Łączy szybkość z inteligencją w przypadku zadań agentowych i multimodalnych. |
-| Gemini 3.5 Flash-Lite | `gemini-3.5-flash-lite` | `minimal` | 0,30 USD za milion tokenów wejściowych i 2,50 USD za milion tokenów wyjściowych | Najszybszy i najtańszy model 3.5 do wykonywania zadań z dużą przepustowością. |
+| Gemini 3.8 Flash | `gemini-3.8-flash` | `medium` | 3.8 Flash 将以初次体验价提供至今年年底，每百万输入 token 仅需 0.75 美元，每百万输出 token 仅需 3.75 美元；如需了解详情，请参阅[价格](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn)。 | 我们最智能的 Flash 模型，专为长期软件工程、自主智能体和复杂的企业工作流而设计。 |
 
-Oba modele obsługują okno kontekstu o wielkości 1 mln tokenów, maksymalnie 64 tys. tokenów wyjściowych, myślenie i pełny zestaw wbudowanych narzędzi, w tym [korzystanie z komputera](https://ai.google.dev/gemini-api/docs/computer-use?hl=pl).
+Gemini 3.8 Flash 支持 100 万个 token 的上下文窗口、最多 6.4 万个输出 token、可调的思考级别（`low`、`medium`、`high`）以及相同的全套内置工具。
 
-Pełne specyfikacje znajdziesz na stronach modeli:
+如需了解完整规格，请参阅[Gemini 3.8 Flash 模型页面](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=zh-cn)。如需了解初次体验价详情，请参阅下方的[价格部分](#pricing)或[价格页面](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn#gemini-3.8-flash)。
 
-- [Strona modelu Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=pl)
-- [Strona modelu Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=pl)
-
-Szczegółowe informacje o cenach znajdziesz na [stronie z cennikiem](https://ai.google.dev/gemini-api/docs/pricing?hl=pl).
-
-## Krótkie wprowadzenie
+## 快速入门
 
 ### Python
 
@@ -80,8 +45,8 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
-    input="Write a three.js script that renders an interactive 3D robot."
+    model="gemini-3.8-flash",
+    input="Write a three.js script that renders a realistic 3D black hole."
 )
 
 print(interaction.output_text)
@@ -92,17 +57,34 @@ print(interaction.output_text)
 ```
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({});
+const client = new GoogleGenAI({});
 
-async function main() {
-  const interaction = await ai.interactions.create({
-    model: "gemini-3.6-flash",
-    input: "Write a three.js script that renders an interactive 3D robot.",
-  });
-  console.log(interaction.outputText);
-}
+const interaction = await client.interactions.create({
+  model: "gemini-3.8-flash",
+  input: "Write a three.js script that renders a realistic 3D black hole.",
+});
 
-main();
+console.log(interaction.output_text);
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+CreateModelInteraction req = CreateModelInteraction.builder()
+    .model(Model.of("gemini-3.8-flash"))
+    .input(InteractionsInput.of("Hello world"))
+    .build();
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+System.out.println(interaction.outputText().orElse(""));
 ```
 
 ### REST
@@ -113,49 +95,106 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H 'Content-Type: application/json' \
   -X POST \
   -d '{
-    "model": "gemini-3.6-flash",
-    "input": {
-      "parts": [{"text": "Write a three.js script that renders an interactive 3D robot."}]
+    "model": "gemini-3.8-flash",
+    "input": "Write a three.js script that renders a realistic 3D black hole."
+  }'
+```
+
+## Gemini 3.8 Flash 的新增功能
+
+- **长期软件工程**： 在实际编码基准、复杂的多文件重构和确定性工具执行方面表现出色。如需了解详情，请参阅[评估方法](https://deepmind.google/models/evals-methodology/gemini-3-8-flash/?hl=zh-cn)。
+- **自主智能体**： 可让您构建弹性多步骤规划和工具编排工作流，大幅减少失败循环和错误。
+- **复杂的企业工作流**： 在要求严苛的领域任务和大规模数据流水线中，可提供卓越的准确性、深入的推理能力和高度的事实严谨性。
+- **托管式智能体的默认模型**： 托管式智能体的默认智能体（[Antigravity 智能体](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=zh-cn)）现在使用 Gemini 3.8 Flash。[Antigravity SDK](https://antigravity.google/docs/sdk/overview/?hl=zh-cn) 也默认使用 Gemini 3.8 Flash。
+- **初次体验价**： Gemini 3.8 Flash 将以初次体验价提供至 2026 年 12 月 31 日，每百万输入 token 仅需 0.75 美元，每百万输出 token 仅需 3.75 美元。标准价格（每百万输入 token 1.50 美元，每百万输出 token 7.50 美元）将于 2027 年 1 月 1 日生效。
+
+Gemini 3.8 Flash 经过精心设计，可在长时间运行的复杂任务中使用更多 token。为了在困难的多步骤目标上提供更高质量的结果，该模型会采取较小的推理步骤，迭代调用工具，并在此过程中验证其工作。并非每个工作流都需要这种级别的验证。对于日常任务，您可以降低[推理](#understanding-reasoning-levels)工作量，以减少 token 消耗。或者，您也可以继续使用 Gemini 3.7 Flash，它仍然完全受支持。
+
+## 了解推理级别
+
+Gemini 3.8 Flash 可让您通过调整模型的思考级别，灵活控制延迟时间和智能程度：
+
+- **低思考力度**：缩短延迟时间敏感型任务的回答时间，例如突发事件响应流水线、实时聊天、撰写草稿和快速数据分析。
+- **中等（默认）**： 适用于大多数任务的最佳质量。建议用于复杂的代码和智能体用例，可提供更高的首次准确率。
+- **思考力度**：最大限度地提高模型的推理和工具编排能力。最适合深度推理、数学和困难的多步骤任务。
+
+以下示例将复杂代码分析请求的 `thinking_level` 设置为 `medium`：
+
+### Python
+
+```
+from google import genai
+
+client = genai.Client()
+
+interaction = client.interactions.create(
+    model="gemini-3.8-flash",
+    input="Analyze this payment processing pipeline for race conditions during retry attempts and rewrite the transaction locks safely.",
+    generation_config={
+        "thinking_level": "medium"  # Balanced reasoning effort for complex tasks
+    }
+)
+
+print(interaction.output_text)
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+
+const client = new GoogleGenAI({});
+
+const interaction = await client.interactions.create({
+  model: "gemini-3.8-flash",
+  input: "Analyze this payment processing pipeline for race conditions during retry attempts and rewrite the transaction locks safely.",
+  generation_config: {
+    thinking_level: "medium"
+  }
+});
+
+console.log(interaction.output_text);
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+CreateModelInteraction req = CreateModelInteraction.builder()
+    .model(Model.of("gemini-3.8-flash"))
+    .input(InteractionsInput.of("Hello world"))
+    .build();
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+System.out.println(interaction.outputText().orElse(""));
+```
+
+### REST
+
+```
+curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{
+    "model": "gemini-3.8-flash",
+    "input": "Analyze this payment processing pipeline for race conditions during retry attempts and rewrite the transaction locks safely.",
+    "generation_config": {
+      "thinking_level": "medium"
     }
   }'
 ```
 
-## Co nowego w Gemini 3.6 Flash
+## 更新后的 Antigravity 智能体
 
-- **Mniej tokenów i tur:** wykonuje wieloetapowe przepływy pracy z mniejszą liczbą kroków rozumowania, tur konwersacji i wywołań narzędzi niż Gemini 3.5. Ogranicza też spirale pętli wykonywania.
-- **Ulepszone generowanie kodu:** tworzy kod wyższej jakości, gotowy do użycia w środowisku produkcyjnym, z mniejszą liczbą niechcianych zmian i pętli debugowania.
-- **Lepsze wykonywanie instrukcji**: ogranicza niechciane zmiany plików podczas zadań diagnostycznych.
-- **Zaawansowane rozumowanie multimodalne i przestrzenne:** lepsza skuteczność w interpretacji wykresów, konwersji wizualnych planów i generowaniu układów stron internetowych z wieloma elementami.
-- **Wstępna kontrola programowa:** częściej niż Gemini 3.5 Flash preferuje uruchamianie skryptów kodu diagnostycznego przed wprowadzeniem zmian. Zwiększa to dokładność w przypadku złożonych zadań, ale może dodać dodatkowe kroki eksploracyjne w przypadku prostych prac frontendowych.
-- **Obsługa korzystania z komputera:** obsługiwana jako natywne narzędzie do automatyzacji interfejsu agenta.
-- **Preferencje dotyczące stylizacji interfejsu**: lepiej tworzy kod funkcjonalny, ale osoby oceniające preferowały wcześniejsze modele pod względem układu wizualnego i stylizacji. Możesz temu zapobiec, podając wyraźne wytyczne dotyczące projektowania.
-- **Domyślny poziom myślenia (średni):** używa tego samego domyślnego poziomu myślenia `medium` co Gemini 3.5 Flash.
-- **Niższe ceny**: niższe koszty tokenów wyjściowych (7,50 USD za milion w porównaniu z 9,00 USD za milion w przypadku modelu 3.5 Flash). Tokeny wejściowe nadal kosztują 1,50 USD za milion.
-
-## Co nowego w Gemini 3.5 Flash-Lite
-
-- **Krótszy czas oczekiwania na wykonanie zadania:** najwyższa przepustowość w rodzinie 3.5 w przypadku analizowania dużych ilości danych i wyodrębniania dokumentów.
-- **Ulepszone rozumowanie i skuteczność multimodalna:** dobra ścieżka migracji z Gemini 2.5 Flash, z wyższymi wynikami w zadaniach rozumowania, takich jak HLE (18,0% w porównaniu z 11,0%), i testach porównawczych multimodalnych, takich jak CharXIV (74,5% w porównaniu z 63,7%).
-- **Administrowanie subagentami i niezawodność narzędzi:** zwiększa niezawodność wykonywania narzędzi w przypadku wykonywania kodu, wyszukiwania i przepływów pracy MCP. Zwiększ poziom myślenia w przypadku autonomicznego planowania i złożonych zadań subagentów.
-- **Lepsze rozumienie dokumentów:** zwiększa dokładność analizowania dokumentów i wyodrębniania uporządkowanych danych. W zależności od złożoności dokumentu eksperymentuj z minimalnym i wysokim poziomem myślenia.
-- **Interaktywne kodowanie w internecie i przetwarzanie danych tabelarycznych:** dobrze radzi sobie z przetwarzaniem danych tabelarycznych i JavaScriptu frontendowego dzięki planowaniu za pomocą lekkiego wykonywania kodu.
-- **Chatbot i trwałość persony:** lepsze wykonywanie instrukcji wieloetapowych i spójność persony w porównaniu z Gemini 3.1 Flash-Lite.
-- **Obsługa korzystania z komputera:** obsługiwana jako natywne narzędzie do automatyzacji interfejsu agenta.
-
-## Wybór odpowiedniego modelu Flash lub Flash-Lite
-
-Użyj tej tabeli, aby wybrać odpowiedni model i ścieżkę migracji dla swoich zbiorów zadań.
-
-Oba modele wymagają usunięcia wycofanych parametrów próbkowania (`temperature`, `top_p`, `top_k`) i wstępnie wypełnionych tur modelu. Więcej informacji znajdziesz w sekcji [Zmiany w interfejsie API](#api-changes-and-parameter-updates).
-
-| Model | Główne przypadki użycia | Zalecany cel migracji |
-| --- | --- | --- |
-| **Gemini 3.6 Flash** `gemini-3.6-flash` | Generowanie kodu, wnioskowanie przestrzenne/multimodalne, wieloetapowe przepływy pracy agentów | **Gemini 3.5 Flash**, **Gemini 3 Flash (wersja testowa)** lub **Gemini 3.1 Pro** |
-| **Gemini 3.5 Flash-Lite** `gemini-3.5-flash-lite` | Autonomiczne wykonywanie zadań przez subagentów, analiza dużych ilości danych i wyodrębnianie dokumentów, analizowanie uporządkowanych danych JSON | **Gemini 3.1 Flash-Lite** lub **Gemini 2.5 Flash** |
-
-## Zaktualizowany agent Antigravity
-
-Ze względu na lepszą skuteczność Gemini 3.6 Flash jest teraz nowym modelem domyślnym, który obsługuje agenta [Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pl) w zarządzanych agentach Gemini. Możesz to zmienić, ustawiając nowe pole w interfejsie API.
+由于性能和推理能力有所提升，Gemini Managed Agents 中的 [Antigravity 智能体](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=zh-cn)现在默认使用 Gemini 3.8 Flash 构建。
 
 ### Python
 
@@ -166,7 +205,12 @@ client = genai.Client()
 
 interaction = client.interactions.create(
     agent="antigravity-preview-05-2026",
-    input="Read Hacker News, summarize the top 10 stories, and save the results as a PDF.",
+    input=(
+        "Audit https://web.dev for performance, Core Web Vitals, and SEO. "
+        "Query Google's PageSpeed Insights API for both Mobile and Desktop strategies. "
+        "Check search indexing with Google Search for site:web.dev. "
+        "Format the output as a side-by-side scorecard table with prioritized fixes."
+    ),
     environment="remote",
 )
 
@@ -181,12 +225,32 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
-    input: "Read Hacker News, summarize the top 10 stories, and save the results as a PDF.",
-    environment: "remote",
+  agent: "antigravity-preview-05-2026",
+  input: "Audit https://web.dev for performance, Core Web Vitals, and SEO. Query Google's PageSpeed Insights API for both Mobile and Desktop strategies. Check search indexing with Google Search for site:web.dev. Format the output as a side-by-side scorecard table with prioritized fixes.",
+  environment: "remote",
 }, { timeout: 300000 });
 
 console.log(interaction.output_text);
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+CreateModelInteraction req = CreateModelInteraction.builder()
+    .model(Model.of("gemini-3.8-flash"))
+    .input(InteractionsInput.of("Hello world"))
+    .build();
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+System.out.println(interaction.outputText().orElse(""));
 ```
 
 ### REST
@@ -197,132 +261,52 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
     "agent": "antigravity-preview-05-2026",
-    "input": "Read Hacker News, summarize the top 10 stories, and save the results as a PDF.",
+    "input": "Audit https://web.dev for performance, Core Web Vitals, and SEO. Query Google'\''s PageSpeed Insights API for both Mobile and Desktop strategies. Check search indexing with Google Search for site:web.dev. Format the output as a side-by-side scorecard table with prioritized fixes.",
     "environment": "remote"
 }'
 ```
 
-## Zmiany w interfejsie API i aktualizacje parametrów
+可以使用 `agent_config` 配置底层 Gemini 模型 [can be configured](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=zh-cn#model-selection)。
 
-Począwszy od modeli Gemini 3.6 Flash i Gemini 3.5 Flash-Lite, te zmiany w interfejsie API dotyczą tych modeli i wszystkich przyszłych wersji modeli Gemini.
-
-- **Wycofanie parametrów próbkowania**: parametry `temperature`, `top_p` i `top_k` zostały wycofane. Interfejs API ignoruje te parametry i w przyszłych generacjach modeli zwraca błąd.
-- **Weryfikacja wstępnie wypełnionych tur modelu**: wstępne wypełnianie tur modelu nie jest już obsługiwane. Jeśli ostatnia niepusta tura w żądaniu jest turą `model`, interfejs API zwraca błąd `400`.
-
-Poniżej znajdziesz szczegółowe wyjaśnienia i przykłady kodu dotyczące każdej zmiany w interfejsie API.
-
-### 1. Wycofanie parametrów próbkowania (`temperature`, `top_p`, `top_k`)
-
-Parametry `temperature`, `top_p` i `top_k` zostały wycofane i są ignorowane. W przyszłych generacjach modeli podanie tych parametrów spowoduje zwrócenie błędu HTTP 400. **Usuń te parametry ze wszystkich żądań.**
+## 迁移核对清单
 
 ```
-# ⚠️ Remove these parameters (deprecated)
-generation_config = {
-     "temperature": 0.7,
-     "top_p": 0.9,
-     "top_k": 40,
-}
+  `/gemini-api-dev migrate my app to Gemini 3.8 Flash`
 ```
 
-Aby zwiększyć determinizm, zdefiniuj instrukcję systemową z wyraźnymi regułami dotyczącymi konkretnego przypadku użycia.
+### 迁移到 gemini-3.8-flash
 
-### 2. Weryfikacja wstępnie wypełnionych tur modelu
+- **更新模型 ID**： 将目标模型字符串更改为 `gemini-3.8-flash`。
+- **移除已废弃的采样参数**：
+  - 从生成配置中移除 `temperature`、`top_p` 和 `top_k`。
+  - 将 `thinking_budget` 替换为字符串枚举 `thinking_level`。请注意，3.8 Flash 不支持 `minimal`。
+  - 移除 `candidate_count`（Gemini 3 及更高版本不支持）。
+- **强制执行轮次验证规则**：
+  - 在服务器端 `previous_interaction_id` 上标准化多轮对话。
+  - 移除预填充的模型轮次。
+- **审核函数调用**：
+  - 将多模态素材资源放置在响应载荷内。
+  - 使用 `\n\n` 设置内嵌说明的格式。
+  - 如果您看到与工具前文本相关的 `Malformed_Function_Call` 错误，请参阅 [工具前文本要求的变通方法](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn#workarounds-for-pre-tool-text-requirements)。
+  - 仅在使用 generateContent API 时：确保所有 `FunctionResponse` 对象都包含 `call_id` 和 `name`。
+- **Gemini 3 基准要求**： 如需了解 SDK 更新和思考签名保留，请参阅[Gemini 3.5 迁移核对清单](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.5?hl=zh-cn#migration)。
 
-Żądania API kończące się niepustą turą roli modelu są niedozwolone i zwracają **błąd HTTP 400**.
+## 价格
 
-#### ⚠️ Unikaj
+在 2026 年 12 月 31 日之前，您可以在 Google AI Studio 和 Gemini Enterprise Agent Platform 中享受 Gemini 3.8 Flash、Gemini 3.7 Flash 和 Gemini 3.6 Flash 的初次体验价。标准价格将于 2027 年 1 月 1 日生效。如需了解完整价格层级，请参阅[价格页面](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn#gemini-3.8-flash)。
 
-W starszych wersjach `generateContent` lub surowych ładunkach REST kończenie tury rolą modelu jest teraz niedozwolone:
+## 后续步骤
 
-```
-/* ❌ DO NOT: End payload contents with a 'model' role turn */
-{
-  "contents": [
-    {"role": "user", "parts": [{"text": "Translate 'Hello world' to Spanish."}]},
-    {"role": "model", "parts": [{"text": "Translation:"}]}  /* ❌ Returns error */
-  ]
-}
-```
+- 在[模型概览](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn)中查看 API 规范。
+- 在 [Interactions API 概览](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 中探索多智能体编排。
+- 在 [Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn) 中测试和优化提示。
 
-#### ✅ Zalecana migracja (interfejs Interactions API)
+发送反馈
 
-W interfejsie Interactions API tury modelu nie są wstępnie wypełniane ręcznie. Jeśli Twoja aplikacja wcześniej wstępnie wypełniała turę modelu, aby pominąć wstępy lub wymusić formatowanie JSON, użyj zamiast tego instrukcji systemowej lub [uporządkowanych danych wyjściowych](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl).
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-```
-# ✅ RECOMMENDED: Use system_instruction in the Interactions API to specify output format
-interaction = client.interactions.create(
-    model="gemini-3.6-flash",
-    input="Translate 'Hello world' to Spanish.",
-    system_instruction="Output only the translation without introductory text.",
-)
-```
+最后更新时间 (UTC)：2026-09-03。
 
-## Lista kontrolna migracji
+需要向我们提供更多信息？
 
-### Gemini 3.6 Flash
-
-1. Zainstaluj umiejętność:
-
-   ```
-   npx skills add google-gemini/gemini-skills --skill gemini-interactions-api --global
-   ```
-2. Zastosuj umiejętność:
-
-   ```
-   /gemini-interactions-api migrate my app to Gemini 3.6 Flash
-   ```
-
-### Gemini 3.5 Flash-Lite
-
-1. Zainstaluj umiejętność:
-
-   ```
-   npx skills add google-gemini/gemini-skills --skill gemini-interactions-api --global
-   ```
-2. Zastosuj umiejętność:
-
-   ```
-   /gemini-interactions-api migrate my app to Gemini 3.5 Flash-Lite
-   ```
-
-### Migracja do gemini-3.6-flash
-
-- **Zaktualizuj identyfikator modelu:** zmień ciąg docelowego modelu na `gemini-3.6-flash`.
-- **Usuń wycofane parametry próbkowania:**
-  - Usuń parametry `temperature`, `top_p` i `top_k` z konfiguracji generowania.
-  - Zastąp `thinking_budget` wyliczeniem ciągu znaków `thinking_level` ustawionym na `"medium"` lub `"high"`.
-  - Usuń `candidate_count` (nieobsługiwany w Gemini 3.x).
-- **Wymuś reguły weryfikacji tur:**
-  - Ujednolicaj rozmowy wieloetapowe po stronie serwera `previous_interaction_id`.
-  - Usuń wstępnie wypełnione tury modelu.
-- **Sprawdź wywoływanie funkcji:**
-  - Umieść zasoby multimodalne w ładunku odpowiedzi.
-  - Formatuj instrukcje w tekście za pomocą `\n\n`.
-  - Jeśli widzisz błędy `Malformed_Function_Call` związane z tekstem przed narzędziem, zapoznaj się z sekcją [Obejścia wymagań dotyczących tekstu przed narzędziem](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl#workarounds-for-pre-tool-text-requirements).
-  - Tylko w przypadku korzystania z interfejsu generateContent API: upewnij się, że wszystkie obiekty `FunctionResponse` zawierają `call_id` i `name`.
-- **Podstawowe wymagania Gemini 3.x:** informacje o aktualizacjach pakietu SDK i zachowaniu sygnatury myślenia znajdziesz na [liście kontrolnej migracji do Gemini 3.5](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.5?hl=pl#migration).
-
-### Migracja do gemini-3.5-flash-lite
-
-- **Zaktualizuj identyfikator modelu:** zmień ciąg docelowego modelu na `gemini-3.5-flash-lite`.
-- **Skonfiguruj poziom myślenia:**
-  - W przypadku wyodrębniania, routingu lub klasyfikacji dużych ilości danych: pozostaw `thinking_level` na poziomie `"minimal"` (domyślnym), aby uzyskać maksymalną przepustowość.
-  - W przypadku autonomicznych subagentów z wywołaniami narzędzi, wykonywaniem kodu lub wieloetapowym wnioskowaniem: ustaw `thinking_level` na `"medium"` lub `"high"`, aby zapobiec przedwczesnemu zakończeniu narzędzia.
-- **Usuń wycofane parametry i zweryfikuj wywoływanie funkcji:** zastosuj [te same reguły co w przypadku modelu 3.6 Flash](#migrate-to-gemini-3-6-flash).
-- **Podstawowe wymagania Gemini 3.x:** zapoznaj się z [listą kontrolną migracji do Gemini 3.5](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.5?hl=pl#migration).
-
-## Dalsze kroki
-
-- Zapoznaj się ze specyfikacjami interfejsu API w przeglądzie modeli [Models Overview](https://ai.google.dev/gemini-api/docs/models?hl=pl).
-- Dowiedz się więcej o administrowaniu wieloma agentami w przewodniku po interfejsie [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=pl).
-- Testuj i ulepszaj prompty w [Google AI Studio](https://aistudio.google.com/?hl=pl).
-
-Prześlij opinię
-
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
-
-Ostatnia aktualizacja: 2026-07-30 UTC.
-
-Chcesz przekazać coś jeszcze?
-
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-03。"],[],[]]

@@ -1,10 +1,10 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe
-fetched_at: 2026-08-31T06:42:39.524302+00:00
+fetched_at: 2026-09-07T05:45:42.796585+00:00
 title: "Gemini 3.5 Transcribe \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.7 Flash is now available. [Try it out](https://aistudio.google.com/prompts/new_chat?model=gemini-3.7-flash).
+Gemini 3.8 Flash is now available. [Try it out](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash).
 
 - [Home](https://ai.google.dev/)
 - [Gemini API](https://ai.google.dev/gemini-api)
@@ -43,10 +43,10 @@ Gemini 3.5 Transcribe supports the following features across its two endpoints:
 | Feature | Live Streaming (`gemini-3.5-transcribe-live`) | Audio File Processing (`gemini-3.5-transcribe`) | Notes / Limitations |
 | --- | --- | --- | --- |
 | **Language Auto-detection** | Supported (85+ languages) | Supported (85+ languages) | Includes mid-session code-mixing. |
-| **Word-level Timestamps** | Not Supported | Supported | Degrades transcription accuracy. |
-| **Custom Vocabulary Biasing** | Supported (up to 1,000 terms) | Supported (up to 1,000 terms) | Customers typically see best results with up to 100 terms. |
+| **Word-level Timestamps** | Not Supported | Supported | Degrades transcription accuracy. Incompatible with custom vocabulary. |
+| **Custom Vocabulary Biasing** | Supported (up to 1,000 terms) | Supported (up to 1,000 terms) | Customers typically see best results with up to 100 terms. Incompatible with diarization and timestamps. |
 | **Smart Dictation & Formatting** | Supported | Supported | Includes filler word removal and intent-aware alphanumeric formatting. |
-| **Speaker Diarization** | Not Supported | Supported (up to 8 speakers) | Attribution for 3+ speakers is experimental. |
+| **Speaker Diarization** | Not Supported | Supported (up to 8 speakers) | Attribution for 3+ speakers is experimental. Incompatible with custom vocabulary. |
 | **Max Audio Duration** | 10 minutes per session. | Up to 1 hour | File processing is limited to 30 minutes when features like diarization or timestamps are enabled. |
 
 ## Supported languages
@@ -102,8 +102,8 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-08-26 UTC.
+Last updated 2026-09-01 UTC.
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-08-26 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-09-01 UTC."],[],[]]

@@ -1,274 +1,273 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=de
-fetched_at: 2026-08-31T06:35:31.471220+00:00
-title: "Verf\u00fcgbare Regionen f\u00fcr Google AI Studio und Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=th
+fetched_at: 2026-09-07T05:41:50.009425+00:00
+title: "\u0e20\u0e39\u0e21\u0e34\u0e20\u0e32\u0e04\u0e17\u0e35\u0e48\u0e1e\u0e23\u0e49\u0e2d\u0e21\u0e43\u0e2b\u0e49\u0e1a\u0e23\u0e34\u0e01\u0e32\u0e23\u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a Google AI Studio \u0e41\u0e25\u0e30 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Feedback geben
+ส่งความคิดเห็น
 
-# Verfügbare Regionen für Google AI Studio und Gemini API
+# ภูมิภาคที่พร้อมให้บริการสำหรับ Google AI Studio และ Gemini API
 
-Wenn Sie diese Seite aufgerufen haben, während Sie versucht haben, auf [Google AI Studio](https://aistudio.google.com/?hl=de) zuzugreifen, kann das folgende Ursachen haben:
+หากคุณมาที่หน้านี้ขณะพยายามเข้าถึง [Google AI Studio](https://aistudio.google.com/?hl=th) อาจเกิดจากสาเหตุใดสาเหตุหนึ่งต่อไปนี้
 
-- **Regionale Einschränkungen**: Google AI Studio ist in Ihrer Region nicht verfügbar. Eine Liste der unterstützten Regionen finden Sie unten.
-- **Mindestalter**: Du hast das Mindestalter von 18 Jahren für den Zugriff auf diesen Dienst nicht erreicht.
-- **Kontobestätigung**: Sie haben möglicherweise Zugriff auf den Dienst, haben aber Ihr [Alter in Ihrem Google-Konto noch nicht bestätigt](https://support.google.com/accounts/answer/10071085?hl=de).
+- **ข้อจำกัดระดับภูมิภาค**: Google AI Studio ไม่พร้อมให้บริการในภูมิภาคของคุณ ดูรายการภูมิภาคที่รองรับได้ที่ส่วนด้านล่าง
+- **ข้อกำหนดด้านอายุ**: คุณมีอายุไม่ถึงข้อกำหนดด้านอายุขั้นต่ำ (ตั้งแต่ 18 ปีขึ้นไป) ในการเข้าถึงบริการนี้
+- **การยืนยันบัญชี**: คุณอาจมีสิทธิ์เข้าถึงบริการ แต่ยังไม่ได้[ยืนยันอายุ](https://support.google.com/accounts/answer/10071085?hl=th)ในบัญชี Google
 
-Weitere Informationen zu den Anforderungen finden Sie in unseren [Nutzungsbedingungen](https://ai.google.dev/gemini-api/terms?hl=de).
+ดูรายละเอียดเพิ่มเติมเกี่ยวกับข้อกำหนดได้ใน[ข้อกำหนดในการให้บริการ](https://ai.google.dev/gemini-api/terms?hl=th)
 
-## Verfügbare Regionen
+## ภูมิภาคที่สามารถใช้บริการได้
 
-prüfen.
+Gemini API และ Google AI Studio พร้อมให้บริการในประเทศและเขตแดนต่อไปนี้ หากคุณไม่ได้อยู่ในประเทศหรือเขตแดนเหล่านี้ ให้ลองใช้
+[Gemini API ในแพลตฟอร์ม Agent ของ Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform?hl=th)
 
-Die Gemini API und Google AI Studio sind in den folgenden Ländern und Gebieten verfügbar. Wenn Sie sich nicht in einem dieser Länder oder Gebiete befinden, können Sie die [Gemini API in der Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform?hl=de) ausprobieren:
+- แอลเบเนีย
+- แอลจีเรีย
+- อเมริกันซามัว
+- อันดอร์รา
+- แองโกลา
+- แองกวิลลา
+- แอนตาร์กติกา
+- แอนติกัวและบาร์บูดา
+- อาร์เจนตินา
+- อาร์เมเนีย
+- อารูบา
+- ออสเตรเลีย
+- ออสเตรีย
+- อาเซอร์ไบจาน
+- บาฮามาส
+- บาห์เรน
+- บังกลาเทศ
+- บาร์เบโดส
+- เบลเยียม
+- เบลีซ
+- เบนิน
+- เบอร์มิวดา
+- ภูฏาน
+- โบลิเวีย
+- บอสเนียและเฮอร์เซโกวีนา
+- บอตสวานา
+- บราซิล
+- ดินแดนมหาสมุทรอินเดียของอังกฤษ
+- หมู่เกาะบริติชเวอร์จิน
+- บรูไน
+- บัลแกเรีย
+- บูร์กินาฟาโซ
+- บุรุนดี
+- กาบูเวร์ดี
+- กัมพูชา
+- แคเมอรูน
+- แคนาดา
+- เนเธอร์แลนด์แคริบเบียน
+- หมู่เกาะเคย์แมน
+- สาธารณรัฐแอฟริกากลาง
+- ชาด
+- ชิลี
+- เกาะคริสต์มาส
+- หมู่เกาะโคโคส (คีลิง)
+- โคลอมเบีย
+- คอโมโรส
+- หมู่เกาะคุก
+- คอสตาริกา
+- โกตดิวัวร์
+- โครเอเชีย
+- คูราเซา
+- สาธารณรัฐเช็ก
+- สาธารณรัฐประชาธิปไตยคองโก
+- เดนมาร์ก
+- จิบูตี
+- โดมินิกา
+- สาธารณรัฐโดมินิกัน
+- เอกวาดอร์
+- อียิปต์
+- เอลซัลวาดอร์
+- อิเควทอเรียลกินี
+- เอริเทรีย
+- เอสโตเนีย
+- เอสวาตินี
+- เอธิโอเปีย
+- หมู่เกาะฟอล์กแลนด์ (หมู่เกาะมัลวีนัส)
+- หมู่เกาะแฟโร
+- ฟิจิ
+- ฟินแลนด์
+- ฝรั่งเศส
+- เฟรนช์เกียนา
+- กาบอง
+- แกมเบีย
+- จอร์เจีย
+- เยอรมนี
+- กานา
+- ยิบรอลตาร์
+- กรีซ
+- กรีนแลนด์
+- เกรเนดา
+- กวม
+- กัวเตมาลา
+- เกิร์นซีย์
+- กินี
+- กินี-บิสเซา
+- กายอานา
+- เฮติ
+- เกาะเฮิร์ดและหมู่เกาะแมกดอนัลด์
+- ฮอนดูรัส
+- ฮังการี
+- ไอซ์แลนด์
+- อินเดีย
+- อินโดนีเซีย
+- อิรัก
+- ไอร์แลนด์
+- เกาะแมน
+- อิสราเอล
+- อิตาลี
+- จาเมกา
+- ญี่ปุ่น
+- เจอร์ซี
+- จอร์แดน
+- คาซัคสถาน
+- เคนยา
+- คิริบาส
+- โคโซโว
+- คูเวต
+- คีร์กีซสถาน
+- ลาว
+- ลัตเวีย
+- เลบานอน
+- เลโซโท
+- ไลบีเรีย
+- ลิเบีย
+- ลิกเตนสไตน์
+- ลิทัวเนีย
+- ลักเซมเบิร์ก
+- มาดากัสการ์
+- มาลาวี
+- มาเลเซีย
+- มัลดีฟส์
+- มาลี
+- มอลตา
+- หมู่เกาะมาร์แชล
+- มอริเตเนีย
+- มอริเชียส
+- เม็กซิโก
+- ไมโครนีเชีย
+- มอลโดวา
+- โมนาโก
+- มองโกเลีย
+- มอนเตเนโกร
+- มอนต์เซอร์รัต
+- โมร็อกโก
+- โมซัมบิก
+- นามิเบีย
+- นาอูรู
+- เนปาล
+- เนเธอร์แลนด์
+- นิวแคลิโดเนีย
+- นิวซีแลนด์
+- นิการากัว
+- ไนเจอร์
+- ไนจีเรีย
+- นีอูเอ
+- เกาะนอร์ฟอล์ก
+- มาซิโดเนียเหนือ
+- หมู่เกาะนอร์เทิร์นมาเรียนา
+- นอร์เวย์
+- โอมาน
+- ปากีสถาน
+- ปาเลา
+- ปาเลสไตน์
+- ปานามา
+- ปาปัวนิวกินี
+- ปารากวัย
+- เปรู
+- ฟิลิปปินส์
+- หมู่เกาะพิตแคร์น
+- โปแลนด์
+- โปรตุเกส
+- เปอร์โตริโก
+- กาตาร์
+- สาธารณรัฐไซปรัส
+- สาธารณรัฐคองโก
+- โรมาเนีย
+- รวันดา
+- เรอูนียง
+- เซนต์บาร์เธเลมี
+- เซนต์เฮเลนา แอสเซนชัน และตริสตันดากูนยา
+- เซนต์คิตส์และเนวิส
+- เซนต์ลูเชีย
+- แซงปิแยร์และมีเกอลง
+- เซนต์วินเซนต์และเกรนาดีนส์
+- ซามัว
+- ซานมารีโน
+- เซาโตเมและปรินซิเป
+- ซาอุดีอาระเบีย
+- เซเนกัล
+- เซอร์เบีย
+- เซเชลส์
+- เซียร์ราลีโอน
+- สิงคโปร์
+- สโลวาเกีย
+- สโลวีเนีย
+- หมู่เกาะโซโลมอน
+- โซมาเลีย
+- แอฟริกาใต้
+- เกาะเซาท์จอร์เจียและหมู่เกาะเซาท์แซนด์วิช
+- เกาหลีใต้
+- เซาท์ซูดาน
+- สเปน
+- ศรีลังกา
+- ซูดาน
+- ซูรินาเม
+- สวีเดน
+- สวิตเซอร์แลนด์
+- ไต้หวัน
+- ทาจิกิสถาน
+- แทนซาเนีย
+- ไทย
+- ติมอร์เลสเต
+- โตโก
+- โตเกเลา
+- ตองกา
+- ตรินิแดดและโตเบโก
+- ตูนิเซีย
+- เติร์กเมนิสถาน
+- หมู่เกาะเติกส์และหมู่เกาะเคคอส
+- ตูวาลู
+- ตุรกี
+- ยูกันดา
+- ยูเครน
+- สหรัฐอาหรับเอมิเรตส์
+- สหราชอาณาจักร
+- สหรัฐอเมริกา
+- เกาะเล็กรอบนอกของสหรัฐอเมริกา
+- อุรุกวัย
+- หมู่เกาะเวอร์จินของสหรัฐอเมริกา
+- อุซเบกิสถาน
+- วานูวาตู
+- นครรัฐวาติกัน
+- เวเนซุเอลา
+- เวียดนาม
+- วาลิสและฟูตูนา
+- ซาฮาราตะวันตก
+- เยเมน
+- แซมเบีย
+- ซิมบับเว
+- หมู่เกาะโอลันด์
 
-- Albanien
-- Algerien
-- Amerikanisch-Samoa
-- Andorra
-- Angola
-- Anguilla
-- Antarktis
-- Antigua und Barbuda
-- Argentinien
-- Armenien
-- Aruba
-- Australien
-- Österreich
-- Aserbaidschan
-- Bahamas
-- Bahrain
-- Bangladesch
-- Barbados
-- Belgien
-- Belize
-- Benin
-- Bermuda
-- Bhutan
-- Bolivien
-- Bosnien und Herzegowina
-- Botsuana
-- Brasilien
-- Britisches Territorium im Indischen Ozean
-- Britische Jungferninseln
-- Brunei
-- Bulgarien
-- Burkina Faso
-- Burundi
-- Cabo Verde
-- Kambodscha
-- Kamerun
-- Kanada
-- Karibische Niederlande
-- Kaimaninseln
-- Zentralafrikanische Republik
-- Tschad
-- Chile
-- Weihnachtsinsel
-- Kokosinseln (Keelinginseln)
-- Kolumbien
-- Komoren
-- Cookinseln
-- Costa Rica
-- Côte d'Ivoire
-- Kroatien
-- Curaçao
-- Tschechien
-- Kongo, Demokratische Republik
-- Dänemark
-- Dschibuti
-- Dominica
-- Dominikanische Republik
-- Ecuador
-- Ägypten
-- El Salvador
-- Äquatorialguinea
-- Eritrea
-- Estland
-- Eswatini
-- Äthiopien
-- Falklandinseln (Malwinen)
-- Färöer
-- Fidschi
-- Finnland
-- Frankreich
-- Französisch-Guayana
-- Gabun
-- Gambia
-- Georgien
-- Deutschland
-- Ghana
-- Gibraltar
-- Griechenland
-- Grönland
-- Grenada
-- Guam
-- Guatemala
-- Guernsey
-- Guinea
-- Guinea-Bissau
-- Guyana
-- Haiti
-- Heard und die McDonaldinseln
-- Honduras
-- Ungarn
-- Island
-- Indien
-- Indonesien
-- Irak
-- Irland
-- Insel Man
-- Israel
-- Italien
-- Jamaika
-- Japan
-- Jersey
-- Jordanien
-- Kasachstan
-- Kenia
-- Kiribati
-- Kosovo
-- Kuwait
-- Kirgisistan
-- Laos
-- Lettland
-- Libanon
-- Lesotho
-- Liberia
-- Libyen
-- Liechtenstein
-- Litauen
-- Luxemburg
-- Madagaskar
-- Malawi
-- Malaysia
-- Malediven
-- Mali
-- Malta
-- Marshallinseln
-- Mauretanien
-- Mauritius
-- Mexiko
-- Mikronesien
-- Republik Moldau
-- Monaco
-- Mongolei
-- Montenegro
-- Montserrat
-- Marokko
-- Mosambik
-- Namibia
-- Nauru
-- Nepal
-- Niederlande
-- Neukaledonien
-- Neuseeland
-- Nicaragua
-- Niger
-- Nigeria
-- Niue
-- Norfolkinsel
-- Nordmazedonien
-- Nördliche Marianen
-- Norwegen
-- Oman
-- Pakistan
-- Palau
-- Palästina
-- Panama
-- Papua-Neuguinea
-- Paraguay
-- Peru
-- Philippinen
-- Pitcairninseln
-- Polen
-- Portugal
-- Puerto Rico
-- Katar
-- Zypern
-- Republik Kongo
-- Rumänien
-- Ruanda
-- Réunion
-- Saint-Barthélemy
-- St. Helena, Ascension und Tristan da Cunha
-- Saint Kitts und Nevis
-- St. Lucia
-- St. Pierre und Miquelon
-- St. Vincent und die Grenadinen
-- Samoa
-- San Marino
-- São Tomé und Príncipe
-- Saudi-Arabien
-- Senegal
-- Serbien
-- Seychellen
-- Sierra Leone
-- Singapur
-- Slowakei
-- Slowenien
-- Salomonen
-- Somalia
-- Südafrika
-- Südgeorgien und die Südlichen Sandwichinseln
-- Südkorea
-- Südsudan
-- Spanien
-- Sri Lanka
-- Sudan
-- Suriname
-- Schweden
-- Schweiz
-- Taiwan
-- Tadschikistan
-- Tansania
-- Thailand
-- Timor-Leste
-- Togo
-- Tokelau
-- Tonga
-- Trinidad und Tobago
-- Tunesien
-- Turkmenistan
-- Turks- und Caicosinseln
-- Tuvalu
-- Türkei
-- Uganda
-- Ukraine
-- Vereinigte Arabische Emirate
-- Vereinigtes Königreich
-- USA
-- Kleinere Amerikanische Überseeinseln
-- Uruguay
-- Amerikanische Jungferninseln
-- Usbekistan
-- Vanuatu
-- Vatikanstadt
-- Venezuela
-- Vietnam
-- Wallis und Futuna
-- Westsahara
-- Jemen
-- Sambia
-- Simbabwe
-- Åland
+ส่งความคิดเห็น
 
-Feedback geben
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+อัปเดตล่าสุด 2026-04-29 UTC
 
-Zuletzt aktualisiert: 2026-04-29 (UTC).
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-Haben Sie Feedback für uns?
-
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-04-29 (UTC)."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-29 UTC"],[],[]]

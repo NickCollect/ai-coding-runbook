@@ -1,78 +1,78 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-errors?hl=it
-fetched_at: 2026-08-31T06:41:36.874374+00:00
-title: "Errori API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-errors?hl=ja
+fetched_at: 2026-09-07T05:45:27.646581+00:00
+title: "API \u30a8\u30e9\u30fc \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Invia feedback
+フィードバックを送信
 
-# Errori API
+# API エラー
 
-Questa pagina fornisce un riferimento per tutti i codici di errore dell'API Interactions, descrive il formato della risposta di errore e spiega come l'API restituisce gli errori per i diversi tipi di richiesta.
+このページでは、Interactions API のすべてのエラーコードのリファレンスを提供し、エラー レスポンスの形式について説明します。また、リクエスト タイプごとに API がエラーを配信する方法についても説明します。
 
-## Codici di errore API standard
+## 標準の API エラーコード
 
-Questi codici di errore generali a livello di richiesta corrispondono ai codici di stato HTTP standard.
-Utilizza il campo `code` nella logica dell'applicazione per gestire gli errori a livello di programmazione.
+これらの一般的なリクエストレベルのエラーコードは、標準の HTTP ステータス コードに対応しています。
+アプリケーション ロジックで `code` フィールドを使用して、エラーをプログラムで処理します。
 
-| Codice | Stato HTTP | Descrizione | Comportamento consigliato |
+| コード | HTTP ステータス | 説明 | 推奨される対応 |
 | --- | --- | --- | --- |
-| `invalid_request` | 400 Richiesta non valida | La richiesta non è valida o contiene parametri non validi. | Controlla gli input rispetto al [riferimento API](https://ai.google.dev/api/interactions-api?hl=it). |
-| `parameter_unknown` | 400 Richiesta non valida | La richiesta contiene un parametro sconosciuto. | Rimuovi il parametro non riconosciuto e riprova. |
-| `authentication` | 401 Non autorizzato | La chiave API non è presente o non è valida. | Verifica la [chiave API](https://ai.google.dev/gemini-api/docs/api-key?hl=it). |
-| `permission_denied` | 403 Non consentito | La chiave API non dispone dell'autorizzazione per questa risorsa. | Controlla le autorizzazioni della chiave API e l'accesso al progetto. |
-| `not_found` | 404: non trovato | La risorsa richiesta non è stata trovata. | Verifica il percorso e i parametri della risorsa. |
-| `model_not_found` | 404: non trovato | Il modello specificato non è stato trovato. | Verifica il nome del modello o utilizza un modello diverso. |
-| `rate_limit_exceeded` | 429 Troppe richieste | Hai superato il limite di richieste o token al minuto o al secondo. | Attendi e riprova con un backoff esponenziale. |
-| `quota_exceeded` | 429 Troppe richieste | Hai superato la quota giornaliera. | Attendi il ripristino della quota o richiedi un aumento della quota. |
-| `cancelled` | 499 Richiesta chiusa dal client | Il client ha annullato la richiesta prima del completamento. | Nessuna azione richiesta. In genere, questo significa che il client si è disconnesso. |
-| `api_error` | 500 Errore interno del server | Si è verificato un errore imprevisto sul server. | Riprova a inviare la richiesta. Se il problema persiste, contatta l'assistenza. |
-| `service_unavailable` | 503 Servizio non disponibile | Il servizio è temporaneamente sovraccarico o non è disponibile. | Attendi e riprova con un backoff esponenziale. |
+| `invalid_request` | 400 不正なリクエスト | リクエストの形式が正しくないか、無効なパラメータが含まれています。 | [API リファレンス](https://ai.google.dev/api/interactions-api?hl=ja)に照らして入力を確認してください。 |
+| `parameter_unknown` | 400 不正なリクエスト | リクエストに不明なパラメータが含まれています。 | 認識されないパラメータを削除して、もう一度お試しください。 |
+| `authentication` | 401 Unauthorized（未承認） | API キーがないか、無効です。 | [API キー](https://ai.google.dev/gemini-api/docs/api-key?hl=ja)を確認してください。 |
+| `permission_denied` | 403 Forbidden（アクセス拒否） | API キーにこのリソースに対する権限がありません。 | API キーの権限とプロジェクトへのアクセス権を確認してください。 |
+| `not_found` | 404 見つかりません | リクエストされたリソースが見つかりませんでした。 | リソースパスとパラメータを確認してください。 |
+| `model_not_found` | 404 見つかりません | 指定されたモデルが見つかりませんでした。 | モデル名を確認するか、別のモデルにフォールバックしてください。 |
+| `rate_limit_exceeded` | 429 Too Many Requests（リクエスト数が多すぎる） | 1 分あたりまたは 1 秒あたりのリクエスト数またはトークンの上限を超えました。 | 指数バックオフを利用して、待機と再試行を繰り返してください。 |
+| `quota_exceeded` | 429 Too Many Requests（リクエスト数が多すぎる） | 1 日あたりの割り当てを超過しました。 | 割り当てがリセットされるまで待つか、割り当ての増加をリクエストしてください。 |
+| `cancelled` | 499 クライアントがリクエストをクローズしました | クライアントがリクエストの完了前にキャンセルしました。 | 何もする必要はない。通常、これはクライアントが切断されたことを意味します。 |
+| `api_error` | 500 Internal Server Error（内部サーバーエラー） | サーバーで予期しないエラーが発生しました。 | リクエストを再試行してください。問題が解決しない場合は、サポートにお問い合わせください。 |
+| `service_unavailable` | 503 Service Unavailable（サービス利用不可） | サービスが一時的に過負荷状態になっているか、ダウンしています。 | 指数バックオフを利用して、待機と再試行を繰り返してください。 |
 
-## Codici di generazione bloccati
+## 生成がブロックされたコード
 
-Questi codici di errore indicano che le norme, la sicurezza o le limitazioni dei contenuti hanno bloccato l'output del modello. Quando ricevi uno di questi codici, modifica l'input e riprova.
+これらのエラーコードは、ポリシー、安全性、コンテンツの制限によりモデルの出力がブロックされたことを示します。これらのコードのいずれかを受け取った場合は、入力を変更して再試行してください。
 
-| Codice | Descrizione |
+| コード | 説明 |
 | --- | --- |
-| `safety` | Le violazioni della sicurezza (contenuti dannosi) hanno bloccato la richiesta. |
-| `recitation` | Le limitazioni relative al copyright o alla recitazione hanno bloccato la richiesta. |
-| `language` | Una lingua non supportata ha bloccato la richiesta. |
-| `prohibited_content` | Le linee guida per i contenuti vietati hanno bloccato la richiesta. |
-| `spii` | Le limitazioni relative alle informazioni sensibili che consentono l'identificazione personale hanno bloccato la richiesta. |
-| `blocklist` | I termini vietati in una lista di blocco hanno bloccato la richiesta. |
-| `image_safety` | Le violazioni della sicurezza hanno bloccato la generazione di immagini. |
-| `image_prohibited_content` | Le linee guida per i contenuti vietati hanno bloccato la generazione di immagini. |
-| `image_recitation` | Le limitazioni relative al copyright o alla recitazione hanno bloccato la generazione di immagini. |
-| `image_other` | Motivi non specificati hanno bloccato la generazione di immagini. |
-| `content_blocked` | Un motivo di norme non specificato ha bloccato la richiesta. |
+| `safety` | 安全性の違反（有害なコンテンツ）によりリクエストがブロックされました。 |
+| `recitation` | 著作権または朗読の制限によりリクエストがブロックされました。 |
+| `language` | サポートされていない言語によりリクエストがブロックされました。 |
+| `prohibited_content` | 禁止コンテンツに関するガイドラインによりリクエストがブロックされました。 |
+| `spii` | 個人を特定できる機密情報の制限によりリクエストがブロックされました。 |
+| `blocklist` | ブロックリストの禁止用語によりリクエストがブロックされました。 |
+| `image_safety` | 安全性の違反により画像の生成がブロックされました。 |
+| `image_prohibited_content` | 禁止コンテンツに関するガイドラインにより画像の生成がブロックされました。 |
+| `image_recitation` | 著作権または朗読の制限により画像の生成がブロックされました。 |
+| `image_other` | 不明な理由により画像の生成がブロックされました。 |
+| `content_blocked` | 不明なポリシー上の理由によりリクエストがブロックされました。 |
 
-## Codici di errore di generazione
+## 生成エラーコード
 
-Questi codici di errore indicano un problema strutturale con l'output generato dal modello (ad esempio una chiamata di funzione non valida o una chiamata di strumento non dichiarata).
+これらのエラーコードは、モデルで生成された出力の構造上の問題（形式が正しくない関数呼び出しや、宣言されていないツール呼び出しなど）を示します。
 
-| Codice | Descrizione |
+| コード | 説明 |
 | --- | --- |
-| `malformed_function_call` | Il modello ha prodotto una chiamata di funzione che non è stato possibile analizzare. |
-| `malformed_tool_call` | Il modello ha prodotto una chiamata di strumento che non è stato possibile analizzare. |
-| `unexpected_tool_call` | Il modello ha chiamato uno strumento non dichiarato nella richiesta. |
-| `no_image` | Il modello non è riuscito a generare un'immagine. |
-| `too_many_tool_calls` | Il modello ha generato più chiamate di strumenti di quelle consentite. |
-| `missing_thought_signature` | Nella risposta manca una firma di pensiero obbligatoria. |
+| `malformed_function_call` | モデルが、解析できない関数呼び出しを生成しました。 |
+| `malformed_tool_call` | モデルが、解析できないツール呼び出しを生成しました。 |
+| `unexpected_tool_call` | モデルが、リクエストで宣言されていないツールを呼び出しました。 |
+| `no_image` | モデルが画像を生成できませんでした。 |
+| `too_many_tool_calls` | モデルが、許可されている数よりも多くのツール呼び出しを生成しました。 |
+| `missing_thought_signature` | レスポンスに必要な思考署名がありません。 |
 
-## Formato della risposta di errore
+## エラー レスポンスの形式
 
-Tutti gli errori dell'API Interactions restituiscono un `error` oggetto contenente un `code` e `message`. Ad esempio, il passaggio di un tipo di strumento non supportato restituisce:
+Interactions API からのエラーはすべて、`error` を含む `code` と `message` オブジェクトを返します。たとえば、サポートされていないツールタイプを渡すと、次のようになります。
 
 ```
 {
@@ -83,18 +83,18 @@ Tutti gli errori dell'API Interactions restituiscono un `error` oggetto contenen
 }
 ```
 
-| Campo | Tipo | Descrizione |
+| フィールド | タイプ | 説明 |
 | --- | --- | --- |
-| `code` | stringa | Un codice di errore leggibile dalla macchina in `snake_case`. |
-| `message` | stringa | Una descrizione leggibile di ciò che è andato storto. |
+| `code` | 文字列 | `snake_case` の機械可読形式のエラーコード。 |
+| `message` | 文字列 | 発生した問題の説明（人が読める形式）。 |
 
-## Come vengono restituiti gli errori
+## エラーの配信方法
 
-L'API restituisce gli errori in modo diverso a seconda che tu effettui una richiesta HTTP standard o una richiesta di streaming (SSE).
+API は、標準の HTTP リクエストを行うか、ストリーミング（SSE）リクエストを行うかによって、エラーの配信方法が異なります。
 
-### Richieste HTTP standard
+### 標準の HTTP リクエスト
 
-Per le richieste standard (non di streaming), l'API imposta il codice di stato della risposta HTTP (ad esempio `400 Bad Request`, `401 Unauthorized`, o `429 Too Many Requests`) e restituisce un oggetto `error` nel corpo della risposta JSON:
+標準（非ストリーミング）リクエストの場合、API は HTTP レスポンス ステータス コード（`400 Bad Request`、`401 Unauthorized`、`429 Too Many Requests` など）を設定し、JSON レスポンス本文に `error` オブジェクトを返します。
 
 ```
 {
@@ -105,9 +105,9 @@ Per le richieste standard (non di streaming), l'API imposta il codice di stato d
 }
 ```
 
-### Richieste di streaming (SSE)
+### ストリーミング（SSE）リクエスト
 
-Per le richieste di streaming (`stream: true`), l'API invia eventi di errore tramite il flusso di eventi inviati dal server (SSE) con `event_type` impostato su `"error"`. Il campo `error` contiene la stessa struttura `code` e `message`:
+ストリーミング リクエスト（`stream: true`）の場合、API はサーバー送信イベント（SSE）ストリームを介して `event_type` が `"error"` に設定されたエラーイベントを送信します。`error` フィールドには、同じ `code` と `message` 構造が含まれます。
 
 ```
 {
@@ -119,19 +119,19 @@ Per le richieste di streaming (`stream: true`), l'API invia eventi di errore tra
 }
 ```
 
-Per lo schema completo degli eventi SSE, consulta il [riferimento dell'API Interactions](https://ai.google.dev/api/interactions-api?hl=it).
+SSE イベント スキーマの詳細については、[Interactions API リファレンス](https://ai.google.dev/api/interactions-api?hl=ja)をご覧ください。
 
-## Passaggi successivi
+## 次のステップ
 
-- [Risoluzione dei problemi dell'API](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=it): risolvi i problemi comuni e gli scenari di errore.
-- [Limiti di frequenza](https://ai.google.dev/gemini-api/docs/rate-limits?hl=it): scopri di più sui limiti di richiesta e sulla gestione delle quote.
+- [API のトラブルシューティング](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=ja): よくある問題とエラー シナリオを解決する。
+- [レート制限](https://ai.google.dev/gemini-api/docs/rate-limits?hl=ja): リクエストの上限と割り当ての処理について学習する。
 
-Invia feedback
+フィードバックを送信
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Ultimo aggiornamento 2026-07-30 UTC.
+最終更新日 2026-07-30 UTC。
 
-Vuoi dirci altro?
+ご意見をお聞かせください
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-30 UTC。"],[],[]]

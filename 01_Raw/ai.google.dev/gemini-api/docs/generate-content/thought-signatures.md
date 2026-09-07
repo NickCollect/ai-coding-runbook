@@ -1,107 +1,87 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=id
-fetched_at: 2026-08-31T06:42:02.059236+00:00
-title: "Tanda tangan penalaran \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=zh-CN
+fetched_at: 2026-09-07T05:46:47.549782+00:00
+title: "\u601d\u8003\u7b7e\u540d \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Kirim masukan
+发送反馈
 
-# Tanda tangan penalaran
+# 思考签名
 
-resmi dan menambahkan objek respons model lengkap langsung ke histori. **Anda
-hanya perlu menggunakan tanda tangan pemikiran secara langsung saat menggunakan REST API**, atau
-jika Anda *mengekstraksi dan menampilkan histori bagian secara manual dalam percakapan multi-giliran
-percapan*.
+思考签名是模型内部思考过程的加密表示形式，用于在多步互动中保留推理上下文。使用思维模型（例如 Gemini 3 和 2.5 系列）时，API 可能会在响应的 [content parts](https://ai.google.dev/api/caching?hl=zh-cn#Part)（例如 `text` 或 `functionCall` 部分）中返回 `thoughtSignature` 字段。
 
-Tanda tangan pemikiran adalah representasi terenkripsi dari proses pemikiran internal model dan digunakan untuk mempertahankan konteks penalaran di seluruh interaksi multi-langkah.
-Saat menggunakan model penalaran (seperti seri Gemini 3 dan 2.5), API dapat
-menampilkan kolom `thoughtSignature` dalam [bagian konten](https://ai.google.dev/api/caching?hl=id#Part)
-respons (misalnya, bagian `text` atau `functionCall`).
+一般来说，如果您在模型回答中收到思考签名，则应在下一轮对话中发送对话历史记录时，按原样将其传递回去。
+**使用 Gemini 3 模型时，您必须在函数调用期间传递回思维签名，否则会收到验证错误**（4xx 状态代码）。这包括使用 Gemini 3 Flash 的 `minimal`
+[思考级别](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn#thinking-levels)设置时。
 
-Sebagai aturan umum, jika Anda menerima tanda tangan pemikiran dalam respons model, Anda harus meneruskannya kembali persis seperti yang diterima saat mengirim histori percakapan pada giliran berikutnya.
-**Saat menggunakan model Gemini 3, Anda harus meneruskan kembali tanda tangan pemikiran selama panggilan fungsi, jika tidak, Anda akan mendapatkan error validasi** (kode status 4xx).
-Hal ini mencakup saat menggunakan setelan tingkat `minimal`
-[penalaran](https://ai.google.dev/gemini-api/docs/thinking?hl=id#thinking-levels) untuk Gemini 3
-Flash.
+## 运作方式
 
-## Cara kerjanya
+下图直观地展示了“轮次”和“步骤”的含义，它们与 Gemini API 中的[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)有关。“轮次”是指用户与模型之间一次完整的对话交流。“步骤”是指模型执行的更精细的操作，通常是完成一轮对话的较大流程的一部分。
 
-Grafik di bawah memvisualisasikan arti "giliran" dan "langkah" sebagaimana terkait dengan
-[panggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id) di Gemini API. "Giliran" adalah satu pertukaran lengkap dalam percakapan antara pengguna dan model. "Langkah" adalah tindakan atau operasi yang lebih mendetail yang dilakukan oleh model, sering kali sebagai bagian dari proses yang lebih besar untuk menyelesaikan giliran.
+![函数调用对话轮次和步骤图](https://ai.google.dev/static/gemini-api/docs/images/fc-turns.png?hl=zh-cn)
 
-![Diagram langkah dan giliran pemanggilan fungsi](https://ai.google.dev/static/gemini-api/docs/images/fc-turns.png?hl=id)
+*本文档重点介绍如何处理 Gemini 3 模型的函数调用。如需了解与 2.5 之间的差异，请参阅[模型行为](#model-behavior)部分。*
 
-*Dokumen ini berfokus pada penanganan panggilan fungsi untuk model Gemini 3. Lihat
-bagian [perilaku model](#model-behavior) untuk mengetahui perbedaan dengan 2.5.*
+对于包含函数调用的所有模型回答（来自 API 的回答），Gemini 3 都会返回思考签名。在以下情况下，系统会显示想法签名：
 
-Gemini 3 menampilkan tanda tangan pemikiran untuk semua respons model (respons dari API) dengan panggilan fungsi. Tanda tangan pemikiran muncul dalam kasus berikut:
+- 如果存在[并行函数](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn#parallel_function_calling)调用，模型回答返回的第一个函数调用部分将包含思考签名。
+- 如果存在顺序函数调用（多步），每个函数调用都会有一个签名，您必须将所有签名都传递回去。
+- 不包含函数调用的模型响应会在模型返回的最后一部分中返回思考签名。
 
-- Jika ada [panggilan fungsi paralel](https://ai.google.dev/gemini-api/docs/function-calling?hl=id#parallel_function_calling), bagian panggilan fungsi pertama yang ditampilkan oleh respons model akan memiliki
-  tanda tangan pemikiran.
-- Jika ada panggilan fungsi berurutan (multi-langkah), setiap panggilan fungsi akan memiliki tanda tangan dan Anda harus meneruskan kembali semua tanda tangan.
-- Respons model tanpa panggilan fungsi akan menampilkan tanda tangan pemikiran di dalam bagian terakhir yang ditampilkan oleh model.
-
-Tabel berikut memberikan visualisasi untuk panggilan fungsi multi-langkah, menggabungkan definisi giliran dan langkah dengan konsep tanda tangan yang diperkenalkan di atas:
+下表直观展示了多步函数调用，将对话轮次和步骤的定义与上文介绍的签名概念相结合：
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Giliran** | **Langkah** | **Permintaan Pengguna** | **Respons Model** | **FunctionResponse** |
+| **轮次** | **Step** | **用户请求** | **模型回答** | **FunctionResponse** |
 | 1 | 1 | `request1 = user_prompt` | `FC1 + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + (FC1 + signature) + FR1` | `FC2 + signature` | `FR2` |
-| 1 | 3 | `request3 = request2 + (FC2 + signature) + FR2` | `text_output`  `(no FCs)` | Tidak ada |
+| 1 | 3 | `request3 = request2 + (FC2 + signature) + FR2` | `text_output`  `(no FCs)` | 无 |
 
-## Tanda tangan di bagian panggilan fungsi
+## 函数调用部分中的签名
 
-Saat Gemini membuat `functionCall`, Gemini mengandalkan `thought_signature` untuk memproses output alat dengan benar pada giliran berikutnya.
+当 Gemini 生成 `functionCall` 时，它会依赖 `thought_signature` 在下一轮中正确处理工具的输出。
 
-- **Perilaku**:
-  - **Panggilan Fungsi Tunggal**: Bagian `functionCall` akan berisi `thought_signature`.
-  - **Panggilan Fungsi Paralel**: Jika model membuat panggilan fungsi paralel
-    dalam respons, `thought_signature` akan dilampirkan **hanya ke bagian**
-    `functionCall` pertama. Bagian `functionCall` berikutnya dalam respons yang sama **tidak** akan berisi tanda tangan.
-- **Persyaratan**: Anda **harus** menampilkan tanda tangan ini di bagian yang sama persis dengan tempat tanda tangan
-  diterima saat mengirim kembali histori percakapan.
-- **Validasi**: Validasi ketat diterapkan untuk semua panggilan fungsi dalam
-  giliran saat ini . (Hanya giliran saat ini yang diperlukan; kami tidak memvalidasi giliran sebelumnya)
-  - API akan kembali ke histori (terbaru hingga terlama) untuk menemukan pesan **Pengguna** terbaru yang berisi konten standar (misalnya, `text`) ( yang akan menjadi awal giliran saat ini). Ini tidak akan **be** `functionResponse`.
-  - **Semua** giliran `functionCall` model yang terjadi setelah pesan penggunaan tertentu tersebut dianggap sebagai bagian dari giliran.
-  - Bagian `functionCall` **pertama** di **setiap langkah** giliran saat ini **harus** menyertakan `thought_signature`.
-  - Jika Anda menghapus `thought_signature` untuk bagian `functionCall` pertama di langkah mana pun pada giliran saat ini, permintaan akan gagal dengan error 400.
-- **Jika tanda tangan yang tepat tidak ditampilkan, berikut cara Anda akan mengalami error**
-  - Model Gemini 3: Kegagalan menyertakan tanda tangan akan menghasilkan error 400. Kata-katanya akan berbentuk:
-    - Panggilan fungsi `<Function Call>` di blok konten `<index of contents array>`
-      tidak memiliki `thought_signature`. Misalnya, *Panggilan
-      fungsi `FC1` di blok konten `1.` tidak memiliki `thought_signature`.*
+- **行为**：
+  - **单个函数调用**：`functionCall` 部分将包含 `thought_signature`。
+  - **并行函数调用**：如果模型在回答中生成并行函数调用，则 `thought_signature` 仅附加到第一个 `functionCall` 部分。同一响应中的后续 `functionCall` 部分将**不**包含签名。
+- **要求**：在将对话记录发送回去时，您**必须**在收到此签名时所在的精确位置返回此签名。
+- **验证**：对当前回合中的所有函数调用强制执行严格验证。（仅需要当前轮次；我们不会验证之前的轮次）
+  - 该 API 会按时间顺序（从最新到最旧）查找包含标准内容（例如 `text`）的最新**用户**消息（即当前对话轮次的开始）。这不会是 `functionResponse`。**be**
+  - 在特定使用消息之后发生的所有**所有**模型 `functionCall` 回答都被视为回答的一部分。
+  - 当前轮次中**每个步骤**的**第一个** `functionCall` 部分**必须**包含其 `thought_signature`。
+  - 如果在当前轮次的任何步骤中省略了第一个 `functionCall` 部分所需的 `thought_signature`，请求将失败并显示 400 错误。
+- **如果未返回正确的签名，您将看到以下错误**
+  - Gemini 3 模型：如果未包含签名，将导致 400 错误。措辞将采用以下格式：
+    - `<index of contents array>` 内容块中的函数调用 `<Function Call>` 缺少 `thought_signature`。例如，*`1.` 内容块中的函数调用 `FC1` 缺少 `thought_signature`。*
 
-### Contoh panggilan fungsi berurutan
+### 顺序函数调用示例
 
-Bagian ini menunjukkan contoh beberapa panggilan fungsi saat pengguna mengajukan pertanyaan kompleks yang memerlukan beberapa tugas.
+本部分展示了一个多函数调用示例，其中用户提出了需要执行多项任务的复杂问题。
 
-Mari kita lihat contoh panggilan fungsi multi-giliran saat pengguna mengajukan
-pertanyaan kompleks yang memerlukan beberapa tugas: `"Check flight status for AA100 and
-book a taxi if delayed"`.
+我们来演练一个多轮函数调用示例，其中用户提出了一个需要执行多项任务的复杂问题：`"Check flight status for AA100 and
+book a taxi if delayed"`。
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Giliran** | **Langkah** | **Permintaan Pengguna** | **Respons Model** | **FunctionResponse** |
+| **轮次** | **Step** | **用户请求** | **模型回答** | **FunctionResponse** |
 | 1 | 1 | `request1="Check flight status for AA100 and book a taxi 2 hours before if delayed."` | `FC1 ("check_flight") + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + FC1 ("check_flight") + signature + FR1` | `FC2("book_taxi") + signature` | `FR2` |
 | 1 | 3 | `request3 = request2 + FC2 ("book_taxi") + signature + FR2` | `text_output`  `(no FCs)` | `None` |
 
-Kode berikut mengilustrasikan urutan dalam tabel di atas.
+以下代码展示了上表中的序列。
 
-**Giliran 1, Langkah 1 (Permintaan pengguna)**
+**第 1 轮，第 1 步（用户请求）**
 
 ```
 {
@@ -156,7 +136,7 @@ Kode berikut mengilustrasikan urutan dalam tabel di atas.
 }
 ```
 
-**Giliran 1, Langkah 1 (Respons model)**
+**第 1 轮，第 1 步（模型回答）**
 
 ```
 {
@@ -177,8 +157,7 @@ Kode berikut mengilustrasikan urutan dalam tabel di atas.
 }
 ```
 
-**Giliran 1, Langkah 2 (Respons pengguna - Mengirim output alat)** Karena giliran pengguna ini hanya berisi `functionResponse` (tidak ada teks baru), kita masih berada di Giliran 1. Kita
-harus mempertahankan `<Signature_A>`.
+**第 1 轮，第 2 步（用户响应 - 发送工具输出）**由于此用户轮次仅包含 `functionResponse`（没有新文本），因此我们仍处于第 1 轮。我们必须保留 `<Signature_A>`。
 
 ```
 {
@@ -219,7 +198,7 @@ harus mempertahankan `<Signature_A>`.
 }
 ```
 
-**Giliran 1, Langkah 2 (Model)** Model kini memutuskan untuk memesan taksi berdasarkan output alat sebelumnya.
+**第 1 轮，第 2 步（模型）**模型现在根据上一个工具输出决定预订出租车。
 
 ```
 {
@@ -240,8 +219,7 @@ harus mempertahankan `<Signature_A>`.
 }
 ```
 
-**Giliran 1, Langkah 3 (Pengguna - Mengirim output alat)** Untuk mengirim konfirmasi pemesanan taksi, kita harus menyertakan tanda tangan untuk **SEMUA** panggilan fungsi dalam loop ini
-(`<Signature A>` + `<Signature B>`).
+**第 1 轮，第 3 步（用户 - 发送工具输出）**如要发送出租车预订确认，我们必须包含此循环中所有函数调用的签名（`<Signature A>` + `<Signature B>`）。
 
 ```
 {
@@ -310,19 +288,18 @@ harus mempertahankan `<Signature_A>`.
 }
 ```
 
-### Contoh panggilan fungsi paralel
+### 并行函数调用示例
 
-Mari kita lihat contoh panggilan fungsi paralel saat pengguna bertanya
-`"Check weather in Paris and London"` untuk melihat tempat model melakukan validasi.
+我们来看一个并行函数调用示例，其中用户要求`"Check weather in Paris and London"`，以了解模型在何处进行验证。
 
-| **Giliran** | **Langkah** | **Permintaan Pengguna** | **Respons Model** | **FunctionResponse** |
+| **轮次** | **Step** | **用户请求** | **模型回答** | **FunctionResponse** |
 | --- | --- | --- | --- | --- |
-| 1 | 1 | `request1="Check the weather in Paris and London"` | FC1 ("Paris") + signature  FC2 ("London") | FR1 |
-| 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | text\_output  (no FCs) | Tidak ada |
+| 1 | 1 | `request1="Check the weather in Paris and London"` | FC1（“巴黎”）+ 签名  FC2（“伦敦”） | FR1 |
+| 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | text\_output  （无 FC） | 无 |
 
-Kode berikut mengilustrasikan urutan dalam tabel di atas.
+以下代码展示了上表中的序列。
 
-**Giliran 1, Langkah 1 (Permintaan pengguna)**
+**第 1 轮，第 1 步（用户请求）**
 
 ```
 {
@@ -361,7 +338,7 @@ Kode berikut mengilustrasikan urutan dalam tabel di atas.
 }
 ```
 
-**Giliran 1, Langkah 1 (Respons model)**
+**第 1 轮，第 1 步（模型回答）**
 
 ```
 {
@@ -389,8 +366,7 @@ Kode berikut mengilustrasikan urutan dalam tabel di atas.
 }
 ```
 
-**Giliran 1, Langkah 2 (Respons pengguna - Mengirim output alat)** Kita harus mempertahankan
-`<Signature_A>` di bagian pertama persis seperti yang diterima.
+**第 1 轮，第 2 步（用户响应 - 发送工具输出）**我们必须完全按接收时的原样保留第一部分的 `<Signature_A>`。
 
 ```
 [
@@ -448,20 +424,17 @@ Kode berikut mengilustrasikan urutan dalam tabel di atas.
 ]
 ```
 
-## Tanda tangan di bagian non `functionCall`
+## 非 `functionCall` 部分中的签名
 
-Gemini juga dapat menampilkan `thought_signatures` di bagian akhir respons di bagian non-panggilan fungsi.
+Gemini 还可能会在不包含函数调用的回答的最后一部分中返回 `thought_signatures`。
 
-- **Perilaku**: Bagian konten akhir (`text, inlineData…`) yang ditampilkan oleh
-  model dapat berisi `thought_signature`.
-- **Rekomendasi**: Menampilkan tanda tangan ini **direkomendasikan** untuk memastikan
-  model mempertahankan penalaran berkualitas tinggi, terutama untuk mengikuti instruksi
-  yang kompleks atau alur kerja agen yang disimulasikan.
-- **Validasi**: API **tidak** menerapkan validasi secara ketat. Anda tidak akan menerima error pemblokiran jika menghapusnya, meskipun performa dapat menurun.
+- **行为**：模型返回的最后内容部分 (`text, inlineData…`) 可能包含 `thought_signature`。
+- **建议**：**建议**返回这些签名，以确保模型保持高质量的推理，特别是对于遵循复杂指令或模拟代理工作流的情况。
+- **验证**：API **不会**严格强制验证。如果您省略它们，不会收到阻塞性错误，但性能可能会下降。
 
-### Penalaran teks/dalam konteks (Tidak ada validasi)
+### 文本/上下文推理（无验证）
 
-**Giliran 1, Langkah 1 (Respons model)**
+**第 1 轮，第 1 步（模型回答）**
 
 ```
 {
@@ -475,7 +448,7 @@ Gemini juga dapat menampilkan `thought_signatures` di bagian akhir respons di ba
 }
 ```
 
-**Giliran 2, Langkah 1 (Pengguna)**
+**第 2 轮，第 1 步（用户）**
 
 ```
 [
@@ -493,27 +466,26 @@ Gemini juga dapat menampilkan `thought_signatures` di bagian akhir respons di ba
 ]
 ```
 
-## Tanda tangan untuk kompatibilitas OpenAI
+## OpenAI 兼容性签名
 
-Contoh berikut menunjukkan cara menangani tanda tangan pemikiran untuk API penyelesaian chat
-menggunakan [kompatibilitas OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=id).
+以下示例展示了如何使用 [OpenAI 兼容性](https://ai.google.dev/gemini-api/docs/openai?hl=zh-cn)来处理聊天补全 API 的思考签名。
 
-### Contoh panggilan fungsi berurutan
+### 顺序函数调用示例
 
-Ini adalah contoh beberapa panggilan fungsi saat pengguna mengajukan pertanyaan kompleks yang memerlukan beberapa tugas.
+这是一个多函数调用示例，其中用户提出了需要执行多项任务的复杂问题。
 
-Mari kita lihat contoh panggilan fungsi multi-giliran saat pengguna bertanya `Check flight status for AA100 and book a taxi if delayed` dan Anda dapat melihat apa yang terjadi saat pengguna mengajukan pertanyaan kompleks yang memerlukan beberapa tugas.
+我们来看一个多轮函数调用示例，其中用户提出 `Check flight status for AA100 and book a taxi if delayed`，您可以了解当用户提出需要执行多项任务的复杂问题时会发生什么情况。
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Giliran** | **Langkah** | **Permintaan Pengguna** | **Respons Model** | **FunctionResponse** |
+| **轮次** | **Step** | **用户请求** | **模型回答** | **FunctionResponse** |
 | 1 | 1 | `request1 = "Check flight status for AA100 and book a taxi 2 hours before if delayed."` | `FC1 ("check_flight") + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + FC1 ("check_flight") + signature + FR1` | `FC2("book_taxi") + signature` | `FR2` |
 | 1 | 3 | `request3 = request2 + FC2 ("book_taxi") + signature + FR2` | `text_output`  `(no FCs)` | `None` |
 
-Kode berikut menjelaskan urutan yang diberikan.
+以下代码会遍历给定的序列。
 
-**Giliran 1, Langkah 1 (Permintaan Pengguna)**
+**第 1 轮，第 1 步（用户请求）**
 
 ```
 {
@@ -567,7 +539,7 @@ Kode berikut menjelaskan urutan yang diberikan.
 }
 ```
 
-**Giliran 1, Langkah 1 (Respons Model)**
+**第 1 轮，第 1 步（模型回答）**
 
 ```
 {
@@ -590,9 +562,9 @@ Kode berikut menjelaskan urutan yang diberikan.
     }
 ```
 
-**Giliran 1, Langkah 2 (Respons Pengguna - Mengirim Output Alat)**
+**第 1 轮，第 2 步（用户响应 - 发送工具输出）**
 
-Karena giliran pengguna ini hanya berisi `functionResponse` (tidak ada teks baru), kita masih berada di Giliran 1 dan harus mempertahankan `<Signature_A>`.
+由于此用户轮次仅包含 `functionResponse`（没有新文本），因此我们仍处于第 1 轮，必须保留 `<Signature_A>`。
 
 ```
 "messages": [
@@ -627,9 +599,9 @@ Karena giliran pengguna ini hanya berisi `functionResponse` (tidak ada teks baru
   ]
 ```
 
-**Giliran 1, Langkah 2 (Model)**
+**第 1 轮，第 2 步（模型）**
 
-Model kini memutuskan untuk memesan taksi berdasarkan output alat sebelumnya.
+模型现在根据上一个工具输出决定预订出租车。
 
 ```
 {
@@ -652,10 +624,9 @@ Model kini memutuskan untuk memesan taksi berdasarkan output alat sebelumnya.
 }
 ```
 
-**Giliran 1, Langkah 3 (Pengguna - Mengirim Output Alat)**
+**第 1 轮，第 3 步（用户 - 发送工具输出）**
 
-Untuk mengirim konfirmasi pemesanan taksi, kita harus menyertakan tanda tangan untuk SEMUA
-panggilan fungsi dalam loop ini (`<Signature A>` + `<Signature B>`).
+如要发送出租车预订确认，我们必须包含此循环中所有函数调用的签名（`<Signature A>` + `<Signature B>`）。
 
 ```
 "messages": [
@@ -714,21 +685,19 @@ panggilan fungsi dalam loop ini (`<Signature A>` + `<Signature B>`).
   ]
 ```
 
-### Contoh panggilan fungsi paralel
+### 并行函数调用示例
 
-Mari kita lihat contoh panggilan fungsi paralel saat pengguna bertanya
-`"Check weather in Paris and London"` dan Anda dapat melihat tempat model melakukan
-validasi.
+我们来看一个并行函数调用示例，其中用户要求 `"Check weather in Paris and London"`，您可以了解模型在何处进行验证。
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Giliran** | **Langkah** | **Permintaan Pengguna** | **Respons Model** | **FunctionResponse** |
+| **轮次** | **Step** | **用户请求** | **模型回答** | **FunctionResponse** |
 | 1 | 1 | `request1="Check the weather in Paris and London"` | `FC1 ("Paris") + signature`  `FC2 ("London")` | `FR1` |
 | 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | `text_output`  `(no FCs)` | `None` |
 
-Berikut kode untuk menjelaskan urutan yang diberikan.
+以下是遍历给定序列的代码。
 
-**Giliran 1, Langkah 1 (Permintaan Pengguna)**
+**第 1 轮，第 1 步（用户请求）**
 
 ```
 {
@@ -767,7 +736,7 @@ Berikut kode untuk menjelaskan urutan yang diberikan.
 }
 ```
 
-**Giliran 1, Langkah 1 (Respons Model)**
+**第 1 轮，第 1 步（模型回答）**
 
 ```
 {
@@ -798,9 +767,9 @@ Berikut kode untuk menjelaskan urutan yang diberikan.
 }
 ```
 
-**Giliran 1, Langkah 2 (Respons Pengguna - Mengirim Output Alat)**
+**第 1 轮，第 2 步（用户响应 - 发送工具输出）**
 
-Anda harus mempertahankan `<Signature_A>` di bagian pertama persis seperti yang diterima.
+您必须完全按接收时的原样保留第一部分的 `<Signature_A>`。
 
 ```
 "messages": [
@@ -849,48 +818,39 @@ Anda harus mempertahankan `<Signature_A>` di bagian pertama persis seperti yang 
   ]
 ```
 
-## FAQ
+## 常见问题解答
 
-1. **Bagaimana cara mentransfer histori dari model lain ke Gemini 3 dengan bagian panggilan fungsi di giliran dan langkah saat ini? Saya perlu menyediakan bagian panggilan fungsi
-   yang tidak dibuat oleh API dan oleh karena itu tidak memiliki tanda tangan pemikiran terkait
-   ?**
+1. **如何将历史记录从其他模型转移到 Gemini 3，并在当前轮次和步骤中包含函数调用部分？我是否需要提供并非由 API 生成的函数调用部分，因此这些部分没有关联的思考签名？**
 
-   Meskipun sangat tidak disarankan untuk menyisipkan blok panggilan fungsi kustom ke dalam permintaan, dalam kasus yang tidak dapat dihindari, misalnya memberikan informasi
-   kepada model tentang panggilan fungsi dan respons yang dieksekusi
-   secara deterministik oleh klien, atau mentransfer pelacakan dari model lain yang tidak menyertakan tanda tangan pemikiran, Anda dapat menetapkan tanda tangan dummy berikut `"context_engineering_is_the_way_to_go"` atau
-   `"skip_thought_signature_validator"` di kolom tanda tangan pemikiran untuk melewati
-   validasi.
-2. **Saya mengirim kembali panggilan dan respons fungsi paralel yang disisipkan dan API menampilkan 400. Mengapa?**
+   虽然强烈建议不要将自定义函数调用块注入到请求中，但在无法避免的情况下（例如，向模型提供有关由客户端确定性执行的函数调用和响应的信息，或者转移不包含思路签名的其他模型的轨迹），您可以在思路签名字段中设置以下虚拟签名 `"context_engineering_is_the_way_to_go"` 或 `"skip_thought_signature_validator"`，以跳过验证。
+2. **我发送了交错的并行函数调用和响应，但 API 返回了 400 错误。为什么？**
 
-   Saat API menampilkan panggilan fungsi paralel "FC1 + signature, FC2", respons pengguna yang diharapkan adalah "FC1+ signature, FC2, FR1, FR2". Jika Anda menyisipkannya sebagai "FC1 + signature, FR1, FC2, FR2", API akan menampilkan error 400.
-3. **Saat melakukan streaming dan model tidak menampilkan panggilan fungsi, saya tidak dapat menemukan
-   tanda tangan pemikiran**
+   当 API 返回并行函数调用“FC1 + 签名, FC2”时，预期的用户回答是“FC1 + 签名, FC2, FR1, FR2”。如果您以“FC1 + 签名、FR1、FC2、FR2”的方式交错放置它们，API 将返回 400 错误。
+3. **在流式传输过程中，如果模型未返回函数调用，我找不到思考签名**
 
-   Selama respons model yang tidak berisi FC dengan permintaan streaming, model dapat menampilkan tanda tangan pemikiran di bagian dengan bagian konten teks kosong. Sebaiknya analisis seluruh permintaan hingga `finish_reason` ditampilkan oleh model.
+   在模型回答不包含 FC 的流式传输请求期间，模型可能会在文本内容为空的部分中返回思考签名。建议解析整个请求，直到模型返回 `finish_reason`。
 
-## Tanda tangan pemikiran untuk model yang berbeda
+## 不同模型的思维签名
 
-[Model Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=id#gemini-3) dan model Gemini 2.5
-berperilaku berbeda dengan tanda tangan pemikiran dalam panggilan fungsi:
+[Gemini 3 模型](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#gemini-3)和 Gemini 2.5 模型在函数调用中对思维签名有不同的行为：
 
-- Jika ada panggilan fungsi dalam respons,
-  - Gemini 3 akan selalu memiliki tanda tangan di bagian panggilan fungsi pertama.
-    **Wajib** untuk menampilkan bagian tersebut.
-  - Gemini 2.5 akan memiliki tanda tangan di bagian pertama (terlepas dari jenisnya). **Opsional** untuk menampilkan bagian tersebut.
-- Jika tidak ada panggilan fungsi dalam respons,
-  - Gemini 3 akan memiliki tanda tangan di bagian terakhir jika model membuat pemikiran.
-  - Gemini 2.5 tidak akan memiliki tanda tangan di bagian mana pun.
+- 如果响应中包含函数调用，则
+  - Gemini 3 将始终在第一个函数调用部分中包含签名。
+    必须退回该部件。
+  - Gemini 2.5 将在第一部分中包含签名（无论类型如何）。您可以选择是否退回该部分。
+- 如果响应中没有函数调用，则返回
+  - 如果模型生成了想法，Gemini 3 将在最后一部分添加签名。
+  - Gemini 2.5 不会在任何部分显示签名。
 
-Lihat halaman [Penalaran](https://ai.google.dev/gemini-api/docs/thinking?hl=id#signatures) untuk mengetahui detail perbandingan selengkapnya.
-Untuk model Gambar Gemini 3, lihat bagian proses penalaran di
-[panduan Pembuatan gambar](https://ai.google.dev/gemini-api/docs/image-generation?hl=id#thinking-process).
+如需了解更多比较详情，请参阅[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn#signatures)页面。
+对于 Gemini 3 Image 模型，请参阅[图片生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn#thinking-process)指南的“思考过程”部分。
 
-Kirim masukan
+发送反馈
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Terakhir diperbarui pada 2026-08-19 UTC.
+最后更新时间 (UTC)：2026-08-19。
 
-Ada masukan untuk kami?
+需要向我们提供更多信息？
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-08-19 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-08-19。"],[],[]]

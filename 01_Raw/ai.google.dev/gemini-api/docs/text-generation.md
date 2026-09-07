@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=es-419
-fetched_at: 2026-08-31T06:33:23.366732+00:00
-title: "Generaci\u00f3n de texto \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=pt-BR
+fetched_at: 2026-09-07T05:35:27.160992+00:00
+title: "Gera\u00e7\u00e3o de texto \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Enviar comentarios
+Envie comentários
 
-# Generación de texto
+# Geração de texto
 
-La API de Gemini puede generar texto a partir de texto, imágenes, video y audio.
+A API Gemini pode gerar saída de texto com base em entradas de texto, imagens, vídeo e áudio.
 
-Este es un ejemplo básico:
+Confira um exemplo básico:
 
 ### Python
 
@@ -66,20 +66,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Los SDKs de GenAI de Google proporcionan propiedades de conveniencia directamente en el objeto `Interaction` que se muestra para acceder a la respuesta del modelo.
+Os SDKs do Google GenAI fornecem propriedades de conveniência diretamente no objeto `Interaction` retornado para acessar a resposta do modelo.
 
-El auxiliar más común es **`interaction.output_text`** (String), que muestra los últimos bloques de texto en la respuesta del modelo. Si la respuesta se divide en varios bloques `TextContent` consecutivos, se une automáticamente.
-Ten en cuenta que `.output_text` no incluye bloques de texto anteriores separados por contenido que no sea de texto (como ideas, imágenes, audio o llamadas a herramientas). Para respuestas multimodales complejas o intercaladas, debes iterar manualmente sobre `steps`. Para obtener más información sobre otras propiedades de conveniencia de medios, consulta la
-[descripción general de Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=es-419#convenience-properties).
+O auxiliar mais comum é **`interaction.output_text`** (string), que retorna os últimos blocos de texto na resposta do modelo. Se a resposta for dividida em vários blocos `TextContent` consecutivos, ela será unida automaticamente.
+O `.output_text` não inclui blocos de texto anteriores separados por conteúdo não textual (como pensamentos, imagens, áudio ou chamadas de ferramentas). Para respostas multimodais complexas ou intercaladas, é necessário iterar manualmente em `steps`. Para saber mais sobre outras propriedades de conveniência de mídia, consulte a
+[visão geral das interações](https://ai.google.dev/gemini-api/docs/interactions?hl=pt-br#convenience-properties).
 
-## Razonamiento con Gemini
+## Pensando com o Gemini
 
-Los modelos de Gemini suelen tener ["razonamiento"](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=es-419)
-habilitado de forma predeterminada, lo que permite que el modelo razone antes de responder a una
-solicitud.
+Os modelos do Gemini geralmente têm o ["pensamento"](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=pt-br)
+ativado por padrão, o que permite que o modelo raciocine antes de responder a uma
+solicitação.
 
-Cada modelo admite diferentes configuraciones de razonamiento que te permiten controlar el costo, la latencia y la inteligencia. Para obtener más detalles, consulta la
-[guía de razonamiento](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=es-419#set-budget).
+Cada modelo oferece suporte a diferentes configurações de pensamento, o que permite controlar o custo, a latência e a inteligência. Para mais detalhes, consulte o
+[guia de pensamento](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=pt-br#set-budget).
 
 ### Python
 
@@ -134,9 +134,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Instrucciones del sistema y otras configuraciones
+## Instruções do sistema e outras configurações
 
-Puedes guiar el comportamiento de los modelos de Gemini con instrucciones del sistema. Pasa un parámetro `system_instruction` para configurar el comportamiento del modelo.
+Você pode orientar o comportamento dos modelos do Gemini com instruções do sistema. Transmita um parâmetro `system_instruction` para configurar o comportamento do modelo.
 
 ### Python
 
@@ -186,7 +186,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-También puedes anular los parámetros de generación predeterminados, como la temperatura, con el parámetro `generation_config`.
+Também é possível substituir os parâmetros de geração padrão, como a temperatura, usando o parâmetro `generation_config`.
 
 ### Python
 
@@ -241,13 +241,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Consulta la [referencia de la API de Interactions](https://ai.google.dev/api/interactions-api?hl=es-419)
-para obtener una lista completa de los parámetros configurables y sus
-descripciones.
+Consulte a [referência da API Interactions](https://ai.google.dev/api/interactions-api?hl=pt-br)
+para uma lista completa de parâmetros configuráveis e as
+descrições deles.
 
-## Entradas multimodales
+## Entradas multimodais
 
-La API de Gemini admite entradas multimodales, lo que te permite combinar texto con archivos multimedia. En el siguiente ejemplo, se muestra cómo proporcionar una imagen:
+A API Gemini oferece suporte a entradas multimodais, permitindo combinar texto com arquivos de mídia. O exemplo a seguir demonstra como fornecer uma imagem:
 
 ### Python
 
@@ -322,18 +322,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Para obtener métodos alternativos para proporcionar imágenes y un procesamiento de imágenes más avanzado,
-consulta nuestra [guía de comprensión de imágenes](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=es-419).
-La API también admite la comprensión y las entradas de [documentos](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=es-419), [videos](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=es-419) y
-[audio](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=es-419).
+Para métodos alternativos de fornecimento de imagens e processamento de imagens mais avançado,
+consulte nosso [guia de compreensão de imagens](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=pt-br).
+A API também oferece suporte a [documentos](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=pt-br), [vídeos](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=pt-br) e
+[áudio](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=pt-br) entradas e compreensão.
 
-## Respuestas de transmisión
+## Respostas de streaming
 
-De forma predeterminada, el modelo devuelve una respuesta solo después de que se completa todo el proceso de generación.
+Por padrão, o modelo retorna uma resposta somente após a conclusão de todo o processo de geração.
 
-Para obtener interacciones más fluidas, usa la transmisión para controlar los fragmentos de respuesta a medida que se generan. Para obtener una guía completa que abarque los tipos de eventos,
-la transmisión con herramientas, el razonamiento, los agentes y la generación de imágenes, consulta la
-guía dedicada de [interacciones de transmisión](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=es-419).
+Para interações mais fluidas, use o streaming para processar blocos de resposta à medida que eles são gerados. Para um guia abrangente que abrange tipos de eventos,
+streaming com ferramentas, pensamento, agentes e geração de imagens, consulte o
+guia dedicado [de interações de streaming](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=pt-br).
 
 ### Python
 
@@ -393,9 +393,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-## Conversaciones de varios turnos
+## Conversas multiturno
 
-La API de Interactions admite conversaciones de varios turnos encadenando interacciones con `previous_interaction_id`. Cada turno es una interacción independiente, y la API administra automáticamente el historial de conversaciones.
+A API Interactions oferece suporte a conversas multiturno encadeando interações usando `previous_interaction_id`. Cada turno é uma interação separada, e a API gerencia automaticamente o histórico de conversas.
 
 ### Python
 
@@ -466,7 +466,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-La transmisión también se puede usar para conversaciones de varios turnos combinando `previous_interaction_id` con los métodos de transmisión.
+O streaming também pode ser usado para conversas multiturno combinando `previous_interaction_id` com os métodos de streaming.
 
 ### Python
 
@@ -549,13 +549,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-## Conversaciones sin estado
+## Conversas sem estado
 
-De forma predeterminada, la API de Interactions administra el estado de la conversación del lado del servidor cuando usas `previous_interaction_id`. Sin embargo, también puedes operar en modo sin estado administrando el historial de conversaciones por tu cuenta del lado del cliente.
+Por padrão, a API Interactions gerencia o estado da conversa no lado do servidor quando você usa `previous_interaction_id`. No entanto, também é possível operar no modo sem estado gerenciando o histórico de conversas no lado do cliente.
 
-Para usar el modo sin estado, haz lo siguiente: 1. Configura `store=false` en tu solicitud para inhabilitar el almacenamiento del lado del servidor.
-2. Mantén el historial de conversaciones como un array de **pasos** del lado del cliente.
-3. En las solicitudes posteriores, pasa los pasos acumulados en el campo `input` y agrega tu nuevo turno como un paso `user_input`.
+Para usar o modo sem estado: 1. Defina `store=false` na solicitação para desativar o armazenamento no lado do servidor.
+2. Mantenha o histórico de conversas como uma matriz de **etapas** no lado do cliente.
+3. Em solicitações subsequentes, transmita as etapas acumuladas no campo `input` e anexe seu novo turno como uma etapa `user_input`.
 
 ### Python
 
@@ -676,30 +676,31 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## Sugerencias para escribir instrucciones
+## Dicas de comandos
 
-Consulta nuestra [guía de ingeniería de instrucciones](https://ai.google.dev/gemini/docs/prompting-strategies?hl=es-419) para
-obtener sugerencias sobre cómo aprovechar al máximo Gemini.
+Consulte nosso [guia de engenharia de comandos](https://ai.google.dev/gemini/docs/prompting-strategies?hl=pt-br) para
+sugestões sobre como aproveitar ao máximo o Gemini.
 
-## ¿Qué sigue?
+## A seguir
 
-- Prueba [Gemini en Google AI Studio](https://aistudio.google.com?hl=es-419).
-- Experimenta con
-  [resultados estructurados](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=es-419) para
-  respuestas similares a JSON.
-- Explora las capacidades de comprensión de [imágenes](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=es-419),
-  [videos](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=es-419),
-  [audio](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=es-419) y
-  [documentos](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=es-419) de Gemini.
-- Obtén información sobre las estrategias de instrucciones de archivos multimodales
+- Teste o [Gemini no Google AI Studio](https://aistudio.google.com?hl=pt-br).
+- Faça experimentos com
+  [saídas estruturadas](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=pt-br) para
+  respostas semelhantes a JSON.
+- Conheça os recursos de compreensão de [imagens](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=pt-br),
+  [vídeos](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=pt-br),
+  [áudio](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=pt-br) e
+  [documentos](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=pt-br) do
+  Gemini.
+- Saiba mais sobre as estratégias de comandos de arquivos multimodais
   .
 
-Enviar comentarios
+Envie comentários
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Última actualización: 2026-07-30 (UTC)
+Última atualização 2026-07-30 UTC.
 
-¿Quieres brindar más información?
+Quer enviar seu feedback?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-07-30 (UTC)"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-07-30 UTC."],[],[]]

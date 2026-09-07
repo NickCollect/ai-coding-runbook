@@ -1,49 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=hi
-fetched_at: 2026-08-31T06:39:19.155435+00:00
-title: "Lyria 3 \u0915\u0940 \u0915\u094d\u0932\u093f\u092a \u0915\u0940 \u091d\u0932\u0915 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=he
+fetched_at: 2026-09-07T05:39:40.601590+00:00
+title: "\u05ea\u05e6\u05d5\u05d2\u05d4 \u05de\u05e7\u05d3\u05d9\u05de\u05d4 \u05e9\u05dc \u05e7\u05d8\u05e2 \u05d1-Lyria 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-सुझाव भेजें
+שליחת משוב
 
-# Lyria 3 की क्लिप की झलक
+# תצוגה מקדימה של קטע ב-Lyria 3
 
-Lyria 3 Clip Preview, Google का एक ऐसा मॉडल है जिसे छोटे म्यूज़िकल क्लिप, लूप, और झलक जनरेट करने के लिए ऑप्टिमाइज़ किया गया है. यह टेक्स्ट प्रॉम्प्ट या इमेज इनपुट से, 30 सेकंड का 48kHz स्टीरियो ऑडियो जनरेट करता है. इसकी क्वालिटी बहुत अच्छी होती है.
+‫Lyria 3 Clip Preview הוא מודל של Google שעבר אופטימיזציה ליצירת קליפים קצרים של מוזיקה, לופים ותצוגות מקדימות. הוא יוצר אודיו סטריאו באיכות גבוהה של 48kHz באורך 30 שניות מהנחיות טקסט או מקלט תמונה.
 
-[Google AI Studio में आज़माएं](https://aistudio.google.com/prompts/new_chat?model=lyria-3-clip-preview&hl=hi)
+[לניסיון ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=lyria-3-clip-preview&hl=he)
 
-## दस्तावेज़
+## מאמרי עזרה
 
-सुविधाओं और उनकी उपलब्धता के बारे में पूरी जानकारी पाने के लिए, [संगीत जनरेट करने से जुड़ी](https://ai.google.dev/gemini-api/docs/music-generation?hl=hi) गाइड पर जाएं.
+במדריך [יצירת מוזיקה](https://ai.google.dev/gemini-api/docs/music-generation?hl=he) מוסבר על כל התכונות והיכולות.
 
 ## lyria-3-clip-preview
 
-| प्रॉपर्टी | ब्यौरा |
+| נכס | תיאור |
 | --- | --- |
-| id\_cardमॉडल कोड | `lyria-3-clip-preview` |
-| saveकौन-कौनसे डेटा टाइप इसके साथ काम करते हैं | **इनपुट**  टेक्स्ट और इमेज  **आउटपुट**  ऑडियो (MP3), टेक्स्ट (गाने के बोल) |
-| token\_autoटोकन की सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  1,31,072 |
-| handymanमिलने वाली अनुमतियां | **[ऑडियो जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi)**  काम करता है  **[कैश मेमोरी में सेव होना](https://ai.google.dev/gemini-api/docs/caching?hl=hi)**  काम नहीं करता है  **[कोड एक्ज़ीक्यूशन](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi)**  काम नहीं करता है  **[फ़ाइल खोजने की सुविधा](https://ai.google.dev/gemini-api/docs/file-search?hl=hi)**  काम नहीं करता है  **[फ़ंक्शन कॉल करने की सुविधा](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi)**  काम नहीं करता है  **[Google Maps की मदद से भरोसेमंद स्रोतों से जानकारी लेने की सुविधा](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi)**  काम नहीं करता है  **[इमेज जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi)**  काम नहीं करता है  **[लाइव एपीआई](https://ai.google.dev/gemini-api/docs/live-api?hl=hi)**  काम नहीं करता है  **[भरोसेमंद स्रोतों से जानकारी लें](https://ai.google.dev/gemini-api/docs/google-search?hl=hi)**  काम नहीं करता है  **[स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi)**  काम नहीं करता है  **[प्रोसेस दिखाएं](https://ai.google.dev/gemini-api/docs/thinking?hl=hi)**  काम नहीं करता है  **[यूआरएल के हिसाब से कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi)**  काम नहीं करता है |
-| speedConsumption विकल्प | **[बैच एपीआई](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi)**  काम नहीं करता है  **[Flex अनुमान](https://ai.google.dev/gemini-api/docs/flex-inference?hl=hi)**  काम नहीं करता है  **[प्राथमिकता अनुमान](https://ai.google.dev/gemini-api/docs/priority-inference?hl=hi)**  काम नहीं करता है |
-| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल के वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) के बारे में पढ़ें.  - झलक देखें: `lyria-3-clip-preview` - झलक देखें: `lyria-3-pro-preview` |
-| calendar\_monthअपडेट की तारीख | मार्च 2026 |
+| id\_cardקוד מודל | `lyria-3-clip-preview` |
+| saveסוגי נתונים נתמכים | **קלטים**  טקסט ותמונה  **פלט**  אודיו (MP3), טקסט (מילים) |
+| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  131,072 |
+| handymanיכולות | **[יצירת אודיו](https://ai.google.dev/gemini-api/docs/speech-generation?hl=he)**  נתמך  **[שמירת נתונים במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he)**  לא נתמך  **[הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he)**  לא נתמך  **[חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he)**  לא נתמך  **[בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he)**  לא נתמך  **[עיגון בעזרת מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he)**  לא נתמך  **[יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he)**  לא נתמך  ‫**[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=he)**  לא נתמך  **[חיפוש עם עיגון בנתונים](https://ai.google.dev/gemini-api/docs/google-search?hl=he)**  לא נתמך  **[פלטים מובנים](https://ai.google.dev/gemini-api/docs/structured-output?hl=he)**  לא נתמך  **[חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he)**  לא נתמך  **[הקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he)**  לא נתמך |
+| speedאפשרויות צריכה | ‫**[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he)**  לא נתמך  **[הסקת מסקנות גמישה](https://ai.google.dev/gemini-api/docs/flex-inference?hl=he)**  לא נתמך  **[הסקת עדיפות](https://ai.google.dev/gemini-api/docs/priority-inference?hl=he)**  לא נתמך |
+| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [תבניות של גרסאות מודל](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - תצוגה מקדימה: `lyria-3-clip-preview` - תצוגה מקדימה: `lyria-3-pro-preview` |
+| calendar\_monthהעדכון האחרון | מרץ 2026 |
 
-सुझाव भेजें
+שליחת משוב
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-आखिरी बार 2026-08-19 (UTC) को अपडेट किया गया.
+עדכון אחרון: 2026-08-19 (שעון UTC).
 
-क्या आपको हमें और कुछ बताना है?
+רוצה לתת לנו משוב?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-08-19 (UTC) को अपडेट किया गया."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-08-19 (שעון UTC)."],[],[]]

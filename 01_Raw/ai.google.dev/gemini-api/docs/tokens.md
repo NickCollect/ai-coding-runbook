@@ -1,44 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=zh-CN
-fetched_at: 2026-08-31T06:38:44.901548+00:00
-title: "\u4e86\u89e3\u8bcd\u5143\u5e76\u8ba1\u7b97\u8bcd\u5143\u6570\u91cf \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=hi
+fetched_at: 2026-09-07T05:39:45.938890+00:00
+title: "\u091f\u094b\u0915\u0928 \u0915\u094b \u0938\u092e\u091d\u0947\u0902 \u0914\u0930 \u0909\u0928\u0915\u0940 \u0917\u093f\u0928\u0924\u0940 \u0915\u0930\u0947\u0902 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-发送反馈
+सुझाव भेजें
 
-# 了解词元并计算词元数量
+# टोकन को समझें और उनकी गिनती करें
 
-Gemini 和其他生成式 AI 模型会以一种称为“token”的粒度处理输入和输出。
+Gemini और अन्य जनरेटिव एआई मॉडल, इनपुट और आउटपुट को *टोकन* नाम की एक यूनिट में प्रोसेस करते हैं.
 
-**对于 Gemini 模型，一个 token 大致相当于 4 个字符。
-100 个 token 大约相当于 60-80 个英文单词。**
+**Gemini मॉडल के लिए, एक टोकन का मतलब करीब चार वर्ण होता है.
+100 टोकन, अंग्रेज़ी के करीब 60 से 80 शब्दों के बराबर होते हैं.**
 
-## 令牌简介
+## टोकन के बारे में जानकारी
 
-词元可以是单个字符（例如 `z`），也可以是整个字词（例如 `cat`）。长字词会被拆分为多个 token。模型使用的所有 token 的集合称为词汇，将文本拆分为 token 的过程称为*分词*。
+टोकन, `z` जैसे सिंगल वर्ण या `cat` जैसे पूरे शब्द हो सकते हैं. लंबे शब्दों को कई टोकन में
+बांटा जाता है. मॉडल में इस्तेमाल किए गए सभी टोकन के सेट को शब्दावली कहा जाता है. साथ ही, टेक्स्ट को टोकन में बांटने की प्रोसेस को *टोकनाइज़ेशन* कहा जाता है.
 
-启用结算功能后，[调用 Gemini API 的费用](https://ai.google.dev/pricing?hl=zh-cn)部分取决于输入和输出词元的数量，因此了解如何计算词元数量会很有帮助。
+बिलिंग की सुविधा चालू होने पर, [Gemini API को कॉल करने की लागत](https://ai.google.dev/pricing?hl=hi) का कुछ हिस्सा, इनपुट और आउटपुट टोकन की संख्या से तय होता है. इसलिए, टोकन की गिनती करने का तरीका जानना आपके लिए फ़ायदेमंद हो सकता है.
 
-## 统计 token 数量
+## टोकन गिनें
 
-Gemini API 的所有输入和输出（包括文本、图片文件和其他非文本模态）都会进行分词。
+Gemini API को दिए गए सभी इनपुट और उससे मिले सभी आउटपुट को टोकन में बदला जाता है. इनमें टेक्स्ट, इमेज फ़ाइलें, और बिना टेक्स्ट वाले अन्य मोडल शामिल हैं.
 
-您可以通过以下方式统计令牌数量：
+टोकन को इन तरीकों से गिना जा सकता है:
 
-- **使用请求的输入调用 `count_tokens`。**返回*仅输入*中的词元总数。在发送输入之前调用此方法，以检查请求的大小。
-- **在互动响应中使用 `usage`。**返回输入 (`total_input_tokens`)、输出 (`total_output_tokens`)、思考 (`total_thought_tokens`)、缓存内容 (`total_cached_tokens`)、工具使用 (`total_tool_use_tokens`) 和总计 (`total_tokens`) 的 token 数。
+- **अनुरोध के इनपुट के साथ `count_tokens` को कॉल करें.** यह फ़ंक्शन, *सिर्फ़ इनपुट* में मौजूद टोकन की कुल संख्या दिखाता है. अपने अनुरोधों का साइज़ देखने के लिए, इनपुट भेजने से पहले यह कॉल करें.
+- **इंटरैक्शन के जवाब पर मौजूद `usage` का इस्तेमाल करें.** यह इनपुट (`total_input_tokens`), आउटपुट (`total_output_tokens`),
+  सोचने की प्रोसेस (`total_thought_tokens`), कैश मेमोरी में सेव किया गया कॉन्टेंट (`total_cached_tokens`), टूल का इस्तेमाल (`total_tool_use_tokens`),
+  और कुल (`total_tokens`) के लिए टोकन की संख्या दिखाता है.
 
-### 统计文本 token
+### टेक्स्ट टोकन की गिनती करना
 
 ### Python
 
@@ -98,9 +101,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
   -d '{"contents": [{"parts": [{"text": "The quick brown fox."}]}]}'
 ```
 
-### 统计多轮对话的 token 数量
+### सिलसिलेवार बातचीत के टोकन की गिनती करना
 
-使用 `previous_interaction_id` 统计整个对话历史记录中的 token 数量：
+`previous_interaction_id` का इस्तेमाल करके, बातचीत के इतिहास में मौजूद टोकन की संख्या गिनें:
 
 ### Python
 
@@ -146,16 +149,16 @@ console.log(`Input tokens: ${interaction2.usage.total_input_tokens}`);
 console.log(`Output tokens: ${interaction2.usage.total_output_tokens}`);
 ```
 
-### 统计多模态 token
+### मल्टीमॉडल टोकन की गिनती करना
 
-Gemini API 的所有输入内容（包括图片、视频和音频）都会被分词。
-有关分词的关键点：
+Gemini API को दिए गए सभी इनपुट को टोकन में बदला जाता है. इनमें इमेज, वीडियो, और ऑडियो शामिल हैं.
+टोकनाइज़ेशन के बारे में अहम बातें:
 
-- **图片**：如果图片的两个尺寸均小于或等于 384 像素，则计为 258 个 token。较大的图片会被平铺为 768x768 像素的图块，每个图块计为 258 个 token。
-- **视频**：每秒 263 个 token
-- **音频**：每秒 32 个 token
+- **इमेज**: दोनों डाइमेंशन में 384 पिक्सल से कम या इसके बराबर साइज़ वाली इमेज को 258 टोकन माना जाता है. बड़ी इमेज को 768x768 पिक्सल वाली टाइल में बांटा जाता है. हर टाइल को 258 टोकन के तौर पर गिना जाता है.
+- **वीडियो**: हर सेकंड 263 टोकन
+- **ऑडियो**: हर सेकंड 32 टोकन
 
-#### 图片 token
+#### इमेज टोकन
 
 ### Python
 
@@ -201,7 +204,7 @@ const countResponse = await client.models.countTokens({
 console.log(countResponse.totalTokens);
 ```
 
-**内嵌数据示例**：
+**इनलाइन डेटा का उदाहरण:**
 
 ### Python
 
@@ -226,7 +229,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### 视频 token
+#### वीडियो टोकन
 
 ### Python
 
@@ -259,7 +262,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### 音频令牌
+#### ऑडियो टोकन
 
 ### Python
 
@@ -285,9 +288,9 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-### 统计系统指令 token
+### सिस्टम के निर्देशों वाले टोकन की संख्या गिनना
 
-系统指令计为输入词元的一部分：
+सिस्टम के निर्देशों को इनपुट टोकन के तौर पर गिना जाता है:
 
 ### Python
 
@@ -303,9 +306,9 @@ interaction = client.interactions.create(
 print(f"Input tokens: {interaction.usage.total_input_tokens}")
 ```
 
-### 统计工具 token
+### टूल के टोकन की गिनती करना
 
-工具（函数、代码执行、Google 搜索）也会计入：
+टूल (फ़ंक्शन, कोड एक्ज़ीक्यूशन, Google Search) को भी गिना जाता है:
 
 ### Python
 
@@ -335,11 +338,11 @@ print(f"Input tokens: {interaction.usage.total_input_tokens}")
 print(f"Tool use tokens: {interaction.usage.total_tool_use_tokens}")
 ```
 
-## 上下文窗口
+## कॉन्टेक्स्ट विंडो
 
-每种 Gemini 模型都有其可处理的词元数上限。上下文窗口定义了输入和输出 token 的总限制。
+हर Gemini मॉडल, ज़्यादा से ज़्यादा टोकन हैंडल कर सकता है. कॉन्टेक्स्ट विंडो से, इनपुट और आउटपुट टोकन की कुल सीमा तय होती है.
 
-### 以编程方式获取上下文窗口大小
+### कॉन्टेक्स्ट विंडो का साइज़ प्रोग्राम के हिसाब से पाना
 
 ### Python
 
@@ -359,20 +362,20 @@ console.log(`Input token limit: ${modelInfo.inputTokenLimit}`);
 console.log(`Output token limit: ${modelInfo.outputTokenLimit}`);
 ```
 
-在[模型](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn)页面上查找上下文窗口大小。
+[मॉडल](https://ai.google.dev/gemini-api/docs/models?hl=hi) पेज पर, कॉन्टेक्स्ट विंडो के साइज़ देखें.
 
-## 后续步骤
+## आगे क्या करना है
 
-- [文本生成](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-cn)：生成基础知识
-- [缓存](https://ai.google.dev/gemini-api/docs/caching?hl=zh-cn)：通过缓存降低费用
-- [价格](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn)：了解费用
+- [टेक्स्ट जनरेशन](https://ai.google.dev/gemini-api/docs/text-generation?hl=hi): जनरेशन की बुनियादी बातें
+- [कैश मेमोरी में सेव करना](https://ai.google.dev/gemini-api/docs/caching?hl=hi): कैश मेमोरी में सेव करके लागत कम करना
+- [कीमत](https://ai.google.dev/gemini-api/docs/pricing?hl=hi): लागत के बारे में जानकारी
 
-发送反馈
+सुझाव भेजें
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-最后更新时间 (UTC)：2026-07-30。
+आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया.
 
-需要向我们提供更多信息？
+क्या आपको हमें और कुछ बताना है?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-30。"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया."],[],[]]

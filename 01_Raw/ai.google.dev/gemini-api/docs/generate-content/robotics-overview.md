@@ -1,56 +1,59 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-overview?hl=hi
-fetched_at: 2026-08-31T06:42:54.011709+00:00
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-overview?hl=pt-BR
+fetched_at: 2026-09-07T05:49:46.288738+00:00
 title: "Gemini Robotics ER \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-सुझाव भेजें
+Envie comentários
 
 # Gemini Robotics ER
 
-Gemini Robotics ER (embodied reasoning) मॉडल, विज़न-लैंग्वेज मॉडल (वीएलएम) होते हैं. इनकी मदद से रोबोट, असल दुनिया को समझ पाते हैं और उससे इंटरैक्ट कर पाते हैं. ये विज़ुअल डेटा को समझते हैं, स्पेशल और टेंपोरल रीज़निंग करते हैं, कई चरणों वाले टास्क की योजना बनाते हैं, और रोबोट और टूल को व्यवस्थित करते हैं.
+Os modelos de raciocínio incorporado (ER) do Gemini Robotics são modelos de visão-linguagem (VLMs) que permitem que os robôs percebam e interajam com o mundo físico. Eles interpretam dados visuais, fazem raciocínio espacial e temporal, planejam tarefas com várias etapas e orquestram robôs e ferramentas.
 
-## मॉडल
+## Modelos
 
-Gemini Robotics ER 2 मॉडल, Gemini Robotics का नया मॉडल है.
-यह हमारा अपडेट किया गया रीज़निंग मॉडल है. इसकी मदद से, रोबोट अपने आस-पास के माहौल को सटीक तरीके से समझ पाते हैं. यह एम्बॉडिड रीज़निंग की क्षमताओं में माहिर है. जैसे, रोबोट का एजेंटिक ऑर्केस्ट्रेशन (उदाहरण के लिए, वीएलए का इस्तेमाल करना), रोबोट के वीडियो को समझना, जिसमें प्रोग्रेस को समझना और सफलता का पता लगाना, इंस्ट्रूमेंट पढ़ना, पॉइंट करना, और स्पेशल रीज़निंग शामिल है.
+O modelo Gemini Robotics ER 2 é a versão mais recente do Gemini Robotics.
+É nosso modelo de raciocínio atualizado que permite que os robôs entendam os ambientes com precisão. Ele é especializado em recursos de raciocínio incorporado, como orquestração agêntica de robôs (por exemplo, usando VLAs), compreensão de vídeo de robôs, incluindo compreensão de progresso e detecção de sucesso, leitura de instrumentos, apontamento e raciocínio espacial.
 
-Gemini Robotics ER 2 मॉडल में दो मॉडल एंडपॉइंट शामिल हैं:
+O modelo Gemini Robotics ER 2 apresenta dois endpoints de modelo:
 
-- **`gemini-robotics-er-2-preview`**: यह स्टैंडर्ड ER 2 मॉडल है. यह Gemini 3.5 Flash पर आधारित है. इसमें ये सुविधाएं बेहतर की गई हैं: स्पेस के बारे में तर्क देना, वीडियो में खास पल ढूंढना, वीडियो की प्रोग्रेस को कैटगरी में बांटना, एक साथ कई रोबोट को कंट्रोल करना, और एक से ज़्यादा चरणों में टूल का इस्तेमाल करना.
-- **`gemini-robotics-er-2-streaming-preview`**: इसे [Live API](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=hi) के ज़रिए रीयल-टाइम में स्ट्रीम करने के लिए ऑप्टिमाइज़ किया गया है. इस मॉडल का इस्तेमाल, कम समय में जवाब देने वाले रोबोट एजेंट के लिए करें. यह मॉडल, लगातार ऑडियो और वीडियो इनपुट को प्रोसेस करता है.
+- **`gemini-robotics-er-2-preview`**: o modelo padrão de ER 2. Baseado no Gemini 3.5 Flash com raciocínio espacial aprimorado, localização de descobertas em vídeo, classificação do progresso do vídeo, orquestração de vários robôs e uso de ferramentas em várias etapas.
+- **`gemini-robotics-er-2-streaming-preview`**: otimizado para streaming em tempo real pela [API Live](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=pt-br). Use este modelo para agentes robóticos de baixa latência que processam entrada contínua de áudio e vídeo.
 
-अगर Gemini Robotics ER 1.6 का इस्तेमाल किया जा रहा है, तो Gemini Robotics ER 2 पर अपग्रेड करें. इसके लिए, अपने एपीआई कॉल में `model="gemini-robotics-er-1.6-preview"` को `model="gemini-robotics-er-2-preview"` या `model="gemini-robotics-er-2-streaming-preview"` से बदलें. ध्यान दें कि Gemini Robotics ER 1.6 मॉडल को [अगस्त के आखिर में](https://ai.google.dev/gemini-api/docs/deprecations?hl=hi#robotics-models) बंद कर दिया जाएगा.
+Se você estiver usando o Gemini Robotics ER 1.6, faça upgrade para o Gemini Robotics ER 2 substituindo
+`model="gemini-robotics-er-1.6-preview"` por
+`model="gemini-robotics-er-2-preview"` ou
+`model="gemini-robotics-er-2-streaming-preview"` nas suas chamadas de API. O modelo Gemini Robotics ER 1.6 será desativado no [fim de agosto](https://ai.google.dev/gemini-api/docs/deprecations?hl=pt-br#robotics-models).
 
-[Google AI Studio में Gemini Robotics ER 2 को आज़माएँ](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-preview&hl=hi)
+[Teste o Gemini Robotics ER 2 no Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-preview&hl=pt-br)
 
-## रोबोटिक्स की सुविधाएं
+## Recursos de robótica
 
-Gemini Robotics ER, कई तरह की एम्बॉडीड रिज़निंग की क्षमताओं के साथ काम करता है.
-ज़्यादा जानने के लिए, कोई सुविधा चुनें:
+O Gemini Robotics ER oferece suporte a uma variedade de recursos de raciocínio incorporado.
+Selecione uma funcionalidade para saber mais:
 
-| अनुमति | ब्यौरा | गाइड |
+| Capacidade | Descrição | Guia |
 | --- | --- | --- |
-| स्पेशल रीज़निंग | ऑब्जेक्ट की ओर इशारा करना, वीडियो में उन्हें ट्रैक करना, बाउंडिंग बॉक्स की मदद से उनकी पहचान करना, और ट्रैजेक्ट्री प्लान करना. | [स्पेशल रीज़निंग](https://ai.google.dev/gemini-api/docs/generate-content/robotics-spatial?hl=hi) |
-| एजेंटिक विज़न | इमेज में बदलाव करने वाले टूल का इस्तेमाल करके, अन्य सुविधाओं को बेहतर बनाने के लिए कोड एक्ज़ीक्यूशन का इस्तेमाल करें. | [एजेंटिक विज़न](https://ai.google.dev/gemini-api/docs/generate-content/robotics-agentic?hl=hi) |
-| टास्क ऑर्केस्ट्रेशन | लंबी अवधि के टास्क पूरे करने के लिए, स्पेशल रीज़निंग को कस्टम रोबोट एपीआई के साथ मिलाएं. | [टास्क ऑर्केस्ट्रेशन](https://ai.google.dev/gemini-api/docs/generate-content/robotics-orchestration?hl=hi) |
-| स्ट्रीमिंग (सिर्फ़ Gemini Robotics ER 2 स्ट्रीमिंग एंडपॉइंट) | कम समय में फ़ंक्शन कॉल करने की सुविधा के साथ, रीयल-टाइम में काम करने वाले रोबोट एजेंट के लिए, दोनों दिशाओं में स्ट्रीमिंग की सुविधा. | [रोबोटिक्स के लिए स्ट्रीमिंग](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=hi) |
-| वीडियो की प्रोग्रेस (सिर्फ़ Gemini Robotics ER 2 के लिए) | लगातार वीडियो फ़ीड से, मोमेंट ढूंढना और प्रोग्रेस को कैटगरी में बांटना. | [वीडियो को समझना](https://ai.google.dev/gemini-api/docs/generate-content/robotics-video-progress?hl=hi) |
+| Raciocínio espacial | Aponte para objetos, rastreie-os em vídeos, detecte com caixas delimitadoras e planeje trajetórias. | [Raciocínio espacial](https://ai.google.dev/gemini-api/docs/generate-content/robotics-spatial?hl=pt-br) |
+| Visão agêntica | Use a execução de código para melhorar outros recursos com ferramentas de manipulação de imagens. | [Visão agêntica](https://ai.google.dev/gemini-api/docs/generate-content/robotics-agentic?hl=pt-br) |
+| Orquestração de tarefas | Combine o raciocínio espacial com APIs de robôs personalizados para concluir tarefas de longo prazo. | [Orquestração de tarefas](https://ai.google.dev/gemini-api/docs/generate-content/robotics-orchestration?hl=pt-br) |
+| Streaming (somente endpoint de streaming do Gemini Robotics ER 2) | Streaming bidirecional para agentes robóticos em tempo real com baixa latência e chamadas de função. | [Streaming para robótica](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=pt-br) |
+| Andamento do vídeo (somente no Gemini Robotics ER 2) | Localização de momentos e classificação de progresso com base em feeds de vídeo contínuos. | [Compreensão do vídeo](https://ai.google.dev/gemini-api/docs/generate-content/robotics-video-progress?hl=pt-br) |
 
-## शुरू करना
+## Primeiros passos
 
-यहां दिए गए उदाहरण में, किसी इमेज में मौजूद ऑब्जेक्ट का पता लगाया गया है. साथ ही, उनके सामान्य किए गए 2D कोऑर्डिनेट और लेबल दिखाए गए हैं. रोबोट की कार्रवाइयां जनरेट करने के लिए, इस आउटपुट को सीधे तौर पर रोबोटिक्स एपीआई या वीएलए मॉडल को पास किया जा सकता है.
+O exemplo a seguir encontra objetos em uma imagem e retorna as coordenadas e os rótulos 2D normalizados deles. É possível transmitir essa saída diretamente para uma API de robótica ou um modelo de VLA para gerar ações de robôs.
 
 ### Python
 
@@ -121,7 +124,7 @@ curl -X POST \
   }'
 ```
 
-आउटपुट के तौर पर एक JSON कलेक्शन मिलेगा. इसमें ऑब्जेक्ट शामिल होंगे. हर ऑब्जेक्ट में `point` (सामान्य किए गए `[y, x]` कोऑर्डिनेट) और ऑब्जेक्ट की पहचान करने वाला `label` होगा.
+A saída será uma matriz JSON contendo objetos, cada um com um `point` (coordenadas `[y, x]` normalizadas) e um `label` que identifica o objeto.
 
 ### JSON
 
@@ -140,109 +143,110 @@ curl -X POST \
 ]
 ```
 
-नीचे दी गई इमेज में, इन पॉइंट को दिखाने का तरीका बताया गया है:
+A imagem a seguir é um exemplo de como esses pontos podem ser mostrados:
 
-![इमेज में मौजूद ऑब्जेक्ट के पॉइंट दिखाने वाला उदाहरण](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=hi)
+![Um exemplo que mostra os pontos de objetos em uma imagem](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=pt-br)
 
-## यह कैसे काम करता है
+## Como funciona
 
-Gemini Robotics ER, इमेज, वीडियो या ऑडियो इनपुट लेता है. इसके लिए, नैचुरल लैंग्वेज में प्रॉम्प्ट दिए जाते हैं. यह ऑब्जेक्ट की पहचान करता है, सीन के कॉन्टेक्स्ट और जगह से जुड़े संबंधों के बारे में जानकारी देता है, और स्ट्रक्चर्ड आउटपुट देता है. जैसे, कोऑर्डिनेट या बाउंडिंग बॉक्स.
+O Gemini Robotics ER usa entradas de imagem, vídeo ou áudio com comandos de linguagem natural. Ele identifica objetos, analisa o contexto da cena e as relações espaciais e retorna uma saída estruturada, como coordenadas ou caixas delimitadoras.
 
-Gemini Robotics ER भी एजेंटिक है. यह मुश्किल टास्क को छोटे-छोटे टास्क में बाँटता है और उन्हें पूरा करता है. इसके लिए, यह आपके रोबोट के फ़ंक्शन को कॉल करता है या जनरेट किए गए कोड को चलाता है. उदाहरण के लिए, "सेब को कटोरे में रखो" निर्देश को, ढूंढो, पकड़ो, और रखो जैसे चरणों के क्रम में बदल दिया जाता है.
+O Gemini Robotics ER também é agêntico: ele divide tarefas complexas em subtarefas e as executa chamando as funções do robô ou executando o código gerado. Por exemplo, "coloque a maçã na tigela" se torna uma sequência de etapas de localizar, pegar e colocar.
 
-Gemini, टूल कॉल को कैसे पूरा करता है, इस बारे में ज़्यादा जानने के लिए [फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=hi#how-it-works) देखें.
+Consulte [Chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=pt-br#how-it-works) para saber como o Gemini executa chamadas de ferramentas.
 
-## सुरक्षा
+## Segurança
 
-Gemini Robotics ER को सुरक्षा को ध्यान में रखकर बनाया गया है. हालांकि, यह आपकी ज़िम्मेदारी है कि आप रोबोट के आस-पास सुरक्षित माहौल बनाए रखें. जनरेटिव एआई मॉडल से गलतियां हो सकती हैं. साथ ही, फ़िज़िकल रोबोट से नुकसान हो सकता है. ज़्यादा जानने के लिए, [Google DeepMind के रोबोटिक्स की सुरक्षा से जुड़े पेज](https://deepmind.google/models/gemini-robotics/safety?hl=hi) पर जाएं.
+Embora o Gemini Robotics ER tenha sido criado pensando na segurança, é sua
+responsabilidade manter um ambiente seguro ao redor do robô. Os modelos de IA generativa podem cometer erros, e os robôs físicos podem causar danos. Para saber mais, acesse a [página de segurança de robótica do Google DeepMind](https://deepmind.google/models/gemini-robotics/safety?hl=pt-br).
 
-## सबसे सही तरीके
+## Práticas recomendadas
 
-1. आम बोलचाल की भाषा का इस्तेमाल करें. बताएं कि आपको रोबोट से क्या काम करवाना है. ठीक उसी तरह जैसे किसी व्यक्ति को बताया जाता है. अगर कोई शब्द काम नहीं कर रहा है, तो उसका कोई सामान्य समानार्थी शब्द आज़माएं.
-2. विज़ुअल इनपुट को ऑप्टिमाइज़ करें. इमेज भेजने से पहले, छोटे या साफ़ नहीं दिखने वाले ऑब्जेक्ट को काटें या ज़ूम करें. रोशनी और कम कलर कंट्रास्ट से, इंसान की मौजूदगी का पता लगाने की सुविधा पर असर पड़ सकता है.
-3. मुश्किल टास्क को चरणों में बांटें. हर चरण को अलग-अलग प्रॉम्प्ट के तौर पर भेजें, ताकि मॉडल का फ़ोकस बना रहे और सटीक जवाब मिल सके.
-4. ज़्यादा सटीक जवाब पाने के लिए, एक ही क्वेरी को कई बार करें और मिले हुए जवाबों का औसत निकालें. सहमति के इस तरीके से, जगह की जानकारी से जुड़े आउटपुट में अंतर कम हो जाता है.
+1. Use uma linguagem simples e natural. Descreva o que você quer que o robô faça como se estivesse falando com uma pessoa. Se um termo não funcionar, tente um sinônimo comum.
+2. Otimize a entrada visual. Corte ou faça zoom em objetos pequenos ou pouco claros antes de enviar a imagem. A iluminação e o baixo contraste de cores podem afetar a detecção.
+3. Divida tarefas complexas em etapas. Envie cada etapa como um comando separado para manter o modelo focado e melhorar a precisão.
+4. Consulte várias vezes e faça a média dos resultados para tarefas de alta precisão. Essa abordagem de consenso reduz a variância nas saídas espaciais.
 
-## सीमाएं
+## Limitações
 
-Gemini Robotics ER का इस्तेमाल करके डेवलपमेंट करते समय, इन सीमाओं का ध्यान रखें:
+Considere as seguintes limitações ao desenvolver com o Gemini Robotics ER:
 
-- **एपीआई पासकोड से जुड़ी पाबंदियां:** Gemini API, बिना पाबंदी वाले एपीआई पासकोड से मिले अनुरोधों को स्वीकार नहीं करता है. साथ ही, `403 Forbidden` गड़बड़ी का मैसेज दिखाता है. [AI Studio](https://aistudio.google.com/api-keys?hl=hi) में पाबंदियां लगाकर, अपनी एपीआई कुंजी को सुरक्षित रखें.
-  ज़्यादा जानकारी के लिए, [बिना पाबंदी के इस्तेमाल की अनुमति देने वाली एपीआई कुंजियों को सुरक्षित करना](https://ai.google.dev/gemini-api/docs/api-key?hl=hi#secure-unrestricted-keys) लेख पढ़ें.
-- **लेटेंसी बनाम परफ़ॉर्मेंस:** जटिल क्वेरी, हाई रिज़ॉल्यूशन वाले इनपुट या ज़्यादा सोचने की ज़रूरत वाले सवालों को प्रोसेस करने में ज़्यादा समय लग सकता है. सोचने के लेवल के लिए, इंतज़ार के समय और परफ़ॉर्मेंस के बीच बेहतर संतुलन बनाए रखने के लिए, मीडियम का इस्तेमाल करें.
-- **मनगढ़ंत जानकारी:** सभी लार्ज लैंग्वेज मॉडल की तरह, Gemini Robotics ER मॉडल कभी-कभी "मनगढ़ंत जानकारी" दे सकते हैं या गलत जानकारी दे सकते हैं. ऐसा खास तौर पर, अस्पष्ट प्रॉम्प्ट या आउट-ऑफ़-डिस्ट्रिब्यूशन इनपुट के लिए होता है.
-- **प्रॉम्प्ट की क्वालिटी पर निर्भरता:** आउटपुट की क्वालिटी, इनपुट प्रॉम्प्ट की क्लैरिटी पर निर्भर करती है. सटीक और व्यवस्थित प्रॉम्प्ट का इस्तेमाल करें.
-- **कैलकुलेशन की लागत:** मॉडल को चलाने में, खास तौर पर वीडियो इनपुट या ज़्यादा `thinking_budget` के साथ, कैलकुलेशन के संसाधनों का इस्तेमाल होता है और लागत लगती है.
-  ज़्यादा जानकारी के लिए, [सोचना](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=hi) पेज देखें.
-- **इनपुट टाइप:** हर मोड के लिए तय की गई सीमाओं के बारे में जानने के लिए, यहां दिए गए विषय देखें.
-  - [इमेज इनपुट](https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=hi#technical-details-image)
-  - [वीडियो इनपुट](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=hi#supported-formats)
-  - [ऑडियो इनपुट](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=hi#supported-formats)
+- **Restrições de chave de API**:a API Gemini não aceita solicitações de chaves de API sem restrições e retorna um erro `403 Forbidden`. Proteja sua chave de API adicionando restrições no [AI Studio](https://aistudio.google.com/api-keys?hl=pt-br).
+  Consulte [Proteger chaves de API irrestritas](https://ai.google.dev/gemini-api/docs/api-key?hl=pt-br#secure-unrestricted-keys) para mais detalhes.
+- **Latência x desempenho**:consultas complexas, entradas de alta resolução ou níveis de pensamento elevados podem aumentar os tempos de processamento. Para o nível de pensamento, use "médio" para um bom equilíbrio entre latência e desempenho.
+- **Alucinações**:como todos os modelos de linguagem grandes, os modelos de resposta de emergência da Gemini Robotics podem ocasionalmente "alucinar" ou fornecer informações incorretas, especialmente para comandos ambíguos ou entradas fora da distribuição.
+- **Dependência da qualidade do comando**:a qualidade da saída depende da clareza do comando de entrada. Use comandos específicos e bem estruturados.
+- **Custo computacional**:executar o modelo, principalmente com entradas de vídeo ou `thinking_budget` alto, consome recursos computacionais e gera custos.
+  Consulte a página [Pensamento](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=pt-br) para mais detalhes.
+- **Tipos de entrada**:consulte os tópicos a seguir para saber mais sobre as limitações de cada modo.
+  - [Entradas de imagem](https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=pt-br#technical-details-image)
+  - [Entradas de vídeo](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=pt-br#supported-formats)
+  - [Entradas de áudio](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=pt-br#supported-formats)
 
-## निजता नोटिस
+## Aviso de privacidade
 
-आप स्वीकार करते हैं कि इस दस्तावेज़ में बताए गए मॉडल ("रोबोटिक्स मॉडल") को चलाने और आपके निर्देशों के मुताबिक आपके हार्डवेयर को मूव करने के लिए, वीडियो और ऑडियो डेटा का इस्तेमाल किया जाता है. इसलिए, आपके पास रोबोटिक्स मॉडल को इस तरह से चलाने का विकल्प होता है कि वे पहचान ज़ाहिर करने वाली जानकारी इकट्ठा कर सकें. जैसे, आवाज़, इमेज, और मिलती-जुलती जानकारी ("निजी डेटा"). अगर आपने Robotics Models को इस तरह से इस्तेमाल करने का विकल्प चुना है कि वह निजी डेटा इकट्ठा करता है, तो इसका मतलब है कि आपने इस बात पर सहमति दी है कि आप किसी भी ऐसे व्यक्ति को Robotics Models के साथ इंटरैक्ट करने या उसके आस-पास मौजूद रहने की अनुमति नहीं देंगे जिसकी पहचान की जा सकती है. ऐसा तब तक नहीं किया जा सकेगा, जब तक ऐसे व्यक्ति को यह सूचना न दे दी जाए कि उसका निजी डेटा, Gemini API की सेवा की अतिरिक्त शर्तों में बताए गए तरीके से Google को दिया जा सकता है और Google उसका इस्तेमाल कर सकता है. Gemini API की सेवा की अतिरिक्त शर्तें, [https://ai.google.dev/gemini-api/terms](https://ai.google.dev/gemini-api/terms?hl=hi) पर उपलब्ध हैं. इन्हें "शर्तें" कहा जाता है. इसमें "Google आपके डेटा का इस्तेमाल कैसे करता है" सेक्शन में दी गई जानकारी भी शामिल है. आपको यह पक्का करना होगा कि इस तरह की सूचना में, शर्तों में बताए गए तरीके से निजी डेटा को इकट्ठा करने और इस्तेमाल करने की अनुमति दी गई हो. साथ ही, आपको कारोबार के नज़रिए से सही प्रयास करने होंगे, ताकि निजी डेटा को कम से कम इकट्ठा किया जा सके और उसे कम से कम डिस्ट्रिब्यूट किया जा सके. इसके लिए, आपको चेहरे को धुंधला करने जैसी तकनीकों का इस्तेमाल करना होगा. साथ ही, रोबोटिक्स मॉडल को ऐसे इलाकों में ऑपरेट करना होगा जहां लोगों की पहचान ज़ाहिर न हो.
+Você reconhece que os modelos mencionados neste documento (os "Modelos de robótica") usam dados de vídeo e áudio para operar e mover seu hardware de acordo com suas instruções. Portanto, você pode operar os Modelos de robótica de forma que dados de pessoas identificáveis, como voz, imagens e dados de semelhança ("Dados pessoais"), sejam coletados por eles. Se você optar por operar os modelos de robótica de uma maneira que colete dados pessoais, concorda em não permitir que pessoas identificáveis interajam ou estejam presentes na área ao redor dos modelos de robótica, a menos que essas pessoas identificáveis tenham sido suficientemente notificadas e consentido com o fato de que seus dados pessoais podem ser fornecidos e usados pelo Google conforme descrito nos Termos Adicionais de Serviço da API Gemini, disponíveis em [https://ai.google.dev/gemini-api/terms](https://ai.google.dev/gemini-api/terms?hl=pt-br) (os "Termos"), incluindo de acordo com a seção intitulada "Como o Google usa seus dados". Você vai garantir que esse aviso permita a coleta e o uso de dados pessoais conforme descrito nos Termos e vai usar esforços comercialmente razoáveis para minimizar a coleta e a distribuição de dados pessoais usando técnicas como desfoque de rosto e operando os modelos de robótica em áreas sem pessoas identificáveis, na medida do possível.
 
-## कीमत
+## Preços
 
-कीमत और उपलब्धता वाले देशों के बारे में ज़्यादा जानने के लिए, [कीमत](https://ai.google.dev/gemini-api/docs/pricing?hl=hi) पेज पर जाएं.
+Para informações detalhadas sobre preços e regiões disponíveis, consulte a página de [preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br).
 
-## मॉडल एंडपॉइंट
+## Endpoints de modelos
 
-### Gemini Robotics ER 2 की झलक
+### Pré-lançamento do Gemini Robotics ER 2
 
-| प्रॉपर्टी | ब्यौरा |
+| Propriedade | Descrição |
 | --- | --- |
-| id\_cardमॉडल कोड | `gemini-robotics-er-2-preview` |
-| saveके साथ इस्तेमाल किए जा सकने वाले डेटा टाइप | **इनपुट**  टेक्स्ट, इमेज, वीडियो, ऑडियो  **आउटपुट**  टेक्स्ट |
-| token\_autoटोकन की सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  131,072  **आउटपुट टोकन की सीमा**  65,536 |
-| handymanसुविधाएँ | **[ऑडियो जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi)**  काम नहीं करता है  **[कैश मेमोरी में सेव होना](https://ai.google.dev/gemini-api/docs/caching?hl=hi)**  काम करता है  **[कोड एक्ज़ीक्यूट करना](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi)**  काम करता है  **[कंप्यूटर का इस्तेमाल](https://ai.google.dev/gemini-api/docs/computer-use?hl=hi)**  काम करता है  **[फ़ाइल खोजना](https://ai.google.dev/gemini-api/docs/file-search?hl=hi)**  काम करता है  **[फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi)**  काम करता है  **[Google Maps की मदद से जवाब तैयार करना](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi)**  काम करता है  **[इमेज जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi)**  काम नहीं करता है  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=hi)**  काम नहीं करता है  **[भरोसेमंद स्रोतों से जानकारी लेना](https://ai.google.dev/gemini-api/docs/google-search?hl=hi)**  काम करता है  **[स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi)**  काम करता है  **[सोचना](https://ai.google.dev/gemini-api/docs/thinking?hl=hi)**  काम करता है  **[यूआरएल का कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi)**  काम करता है |
-| speedकॉन्टेंट देखने के विकल्प | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi)**  काम करता है  **[फ़्लेक्स अनुमान](https://ai.google.dev/gemini-api/docs/flex-inference?hl=hi)**  काम नहीं करता है  **[प्राथमिकता का अनुमान लगाना](https://ai.google.dev/gemini-api/docs/priority-inference?hl=hi)**  काम नहीं करता है |
-| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) पढ़ें.  - झलक देखें: `gemini-robotics-er-2-preview` |
-| calendar\_monthनया अपडेट | जुलाई 2026 |
-| id\_cardमॉडल कार्ड | [मॉडल कार्ड](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=hi) |
+| Código do modelo id\_card | `gemini-robotics-er-2-preview` |
+| saveTipos de dados aceitos | **Entradas** (link em inglês)  Texto, imagens, vídeo, áudio  **Saída**  Texto |
+| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de tokens de entrada**  131.072  **Limite de token de saída**  65.536 |
+| handymanRecursos | **[Geração de áudio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br)**  incompatível  **[Armazenamento em cache](https://ai.google.dev/gemini-api/docs/caching?hl=pt-br)**  Compatível  **[Execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br)**  Compatível  **[Uso do computador](https://ai.google.dev/gemini-api/docs/computer-use?hl=pt-br)**  Compatível  **[Pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br)**  Compatível  **[Chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br)**  Compatível  **[Embasamento com o Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pt-br)**  Compatível  **[Geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br)**  incompatível  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=pt-br)**  incompatível  **[Embasamento da pesquisa](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br)**  Compatível  **[Respostas estruturadas](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br)**  Compatível  **[Raciocínio](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br)**  Compatível  **[Contexto do URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br)**  Compatível |
+| speedOpções de consumo | **[API em lote](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br)**  Compatível  **[Inferência flexível](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pt-br)**  incompatível  **[Inferência de prioridade](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pt-br)**  incompatível |
+| Versões 123 | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Visualização: `gemini-robotics-er-2-preview` |
+| calendar\_monthÚltima atualização | Julho de 2026 |
+| id\_cardCard de modelo | [Card de modelo](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=pt-br) |
 
-### Gemini Robotics ER 2 की स्ट्रीमिंग की झलक
+### Pré-lançamento do Gemini Robotics ER 2 Streaming
 
-| प्रॉपर्टी | ब्यौरा |
+| Propriedade | Descrição |
 | --- | --- |
-| id\_cardमॉडल कोड | `gemini-robotics-er-2-streaming-preview` |
-| saveके साथ इस्तेमाल किए जा सकने वाले डेटा टाइप | **इनपुट**  टेक्स्ट, इमेज, वीडियो, ऑडियो  **आउटपुट**  टेक्स्ट |
-| token\_autoटोकन की सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  131,072  **आउटपुट टोकन की सीमा**  65,536 |
-| handymanसुविधाएँ | **[ऑडियो जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi)**  काम नहीं करता है  **[कैश मेमोरी में सेव होना](https://ai.google.dev/gemini-api/docs/caching?hl=hi)**  काम नहीं करता है  **[कोड एक्ज़ीक्यूट करना](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi)**  काम नहीं करता है  **[कंप्यूटर का इस्तेमाल](https://ai.google.dev/gemini-api/docs/computer-use?hl=hi)**  काम नहीं करता है  **[फ़ाइल खोजना](https://ai.google.dev/gemini-api/docs/file-search?hl=hi)**  काम नहीं करता है  **[फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi)**  काम करता है  **[Google Maps की मदद से जवाब तैयार करना](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi)**  काम नहीं करता है  **[इमेज जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi)**  काम नहीं करता है  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=hi)**  काम करता है  **[भरोसेमंद स्रोतों से जानकारी लेना](https://ai.google.dev/gemini-api/docs/google-search?hl=hi)**  काम करता है  **[स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi)**  काम नहीं करता है  **[सोचना](https://ai.google.dev/gemini-api/docs/thinking?hl=hi)**  काम करता है  **[यूआरएल का कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi)**  काम नहीं करता है |
-| speedकॉन्टेंट देखने के विकल्प | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi)**  काम नहीं करता है  **[फ़्लेक्स अनुमान](https://ai.google.dev/gemini-api/docs/flex-inference?hl=hi)**  काम नहीं करता है  **[प्राथमिकता का अनुमान लगाना](https://ai.google.dev/gemini-api/docs/priority-inference?hl=hi)**  काम नहीं करता है |
-| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) पढ़ें.  - झलक देखें: `gemini-robotics-er-2-streaming-preview` |
-| calendar\_monthनया अपडेट | जुलाई 2026 |
-| id\_cardमॉडल कार्ड | [मॉडल कार्ड](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=hi) |
+| Código do modelo id\_card | `gemini-robotics-er-2-streaming-preview` |
+| saveTipos de dados aceitos | **Entradas** (link em inglês)  Texto, imagens, vídeo, áudio  **Saída**  Texto |
+| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de tokens de entrada**  131.072  **Limite de token de saída**  65.536 |
+| handymanRecursos | **[Geração de áudio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br)**  incompatível  **[Armazenamento em cache](https://ai.google.dev/gemini-api/docs/caching?hl=pt-br)**  incompatível  **[Execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br)**  incompatível  **[Uso do computador](https://ai.google.dev/gemini-api/docs/computer-use?hl=pt-br)**  incompatível  **[Pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br)**  incompatível  **[Chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br)**  Compatível  **[Embasamento com o Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pt-br)**  incompatível  **[Geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br)**  incompatível  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=pt-br)**  Compatível  **[Embasamento da pesquisa](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br)**  Compatível  **[Respostas estruturadas](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br)**  incompatível  **[Raciocínio](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br)**  Compatível  **[Contexto do URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br)**  incompatível |
+| speedOpções de consumo | **[API em lote](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br)**  incompatível  **[Inferência flexível](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pt-br)**  incompatível  **[Inferência de prioridade](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pt-br)**  incompatível |
+| Versões 123 | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Visualização: `gemini-robotics-er-2-streaming-preview` |
+| calendar\_monthÚltima atualização | Julho de 2026 |
+| id\_cardCard de modelo | [Card de modelo](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=pt-br) |
 
-### Gemini Robotics ER 1.6 की झलक
+### Pré-lançamento do Gemini Robotics ER 1.6
 
-| प्रॉपर्टी | ब्यौरा |
+| Propriedade | Descrição |
 | --- | --- |
-| id\_cardमॉडल कोड | `gemini-robotics-er-1.6-preview` |
-| saveके साथ इस्तेमाल किए जा सकने वाले डेटा टाइप | **इनपुट**  टेक्स्ट, इमेज, वीडियो, ऑडियो  **आउटपुट**  टेक्स्ट |
-| token\_autoटोकन की सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  131,072  **आउटपुट टोकन की सीमा**  65,536 |
-| handymanसुविधाएँ | **[ऑडियो जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi)**  काम नहीं करता है  **[कैश मेमोरी में सेव होना](https://ai.google.dev/gemini-api/docs/caching?hl=hi)**  काम करता है  **[कोड एक्ज़ीक्यूट करना](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi)**  काम करता है  **[कंप्यूटर का इस्तेमाल](https://ai.google.dev/gemini-api/docs/computer-use?hl=hi)**  काम करता है  **[फ़ाइल खोजना](https://ai.google.dev/gemini-api/docs/file-search?hl=hi)**  काम करता है  **[फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi)**  काम करता है  **[Google Maps की मदद से जवाब तैयार करना](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi)**  काम करता है  **[इमेज जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi)**  काम नहीं करता है  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=hi)**  काम नहीं करता है  **[भरोसेमंद स्रोतों से जानकारी लेना](https://ai.google.dev/gemini-api/docs/google-search?hl=hi)**  काम करता है  **[स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi)**  काम करता है  **[सोचना](https://ai.google.dev/gemini-api/docs/thinking?hl=hi)**  काम करता है  **[यूआरएल का कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi)**  काम करता है |
-| speedकॉन्टेंट देखने के विकल्प | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi)**  काम करता है  **[फ़्लेक्स अनुमान](https://ai.google.dev/gemini-api/docs/flex-inference?hl=hi)**  काम नहीं करता है  **[प्राथमिकता का अनुमान लगाना](https://ai.google.dev/gemini-api/docs/priority-inference?hl=hi)**  काम नहीं करता है |
-| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) पढ़ें.  - झलक देखें: `gemini-robotics-er-1.6-preview` |
-| calendar\_monthनया अपडेट | दिसंबर 2025 |
-| cognition\_2जानकारी उपलब्ध न होना | जनवरी 2025 |
+| Código do modelo id\_card | `gemini-robotics-er-1.6-preview` |
+| saveTipos de dados aceitos | **Entradas** (link em inglês)  Texto, imagens, vídeo, áudio  **Saída**  Texto |
+| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de tokens de entrada**  131.072  **Limite de token de saída**  65.536 |
+| handymanRecursos | **[Geração de áudio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br)**  incompatível  **[Armazenamento em cache](https://ai.google.dev/gemini-api/docs/caching?hl=pt-br)**  Compatível  **[Execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br)**  Compatível  **[Uso do computador](https://ai.google.dev/gemini-api/docs/computer-use?hl=pt-br)**  Compatível  **[Pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br)**  Compatível  **[Chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br)**  Compatível  **[Embasamento com o Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pt-br)**  Compatível  **[Geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br)**  incompatível  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=pt-br)**  incompatível  **[Embasamento da pesquisa](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br)**  Compatível  **[Respostas estruturadas](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br)**  Compatível  **[Raciocínio](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br)**  Compatível  **[Contexto do URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br)**  Compatível |
+| speedOpções de consumo | **[API em lote](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br)**  Compatível  **[Inferência flexível](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pt-br)**  incompatível  **[Inferência de prioridade](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pt-br)**  incompatível |
+| Versões 123 | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Visualização: `gemini-robotics-er-1.6-preview` |
+| calendar\_monthÚltima atualização | Dezembro de 2025 |
+| cognition\_2Limite de conhecimento | Janeiro de 2025 |
 
-## आगे क्या करना है
+## A seguir
 
-- [स्पेशल रीज़निंग](https://ai.google.dev/gemini-api/docs/generate-content/robotics-spatial?hl=hi) — पॉइंट करना, ट्रैक करना, बाउंडिंग बॉक्स, ट्रैजेक्ट्री.
-- [एजेंटिक एआई की सुविधाएँ](https://ai.google.dev/gemini-api/docs/generate-content/robotics-agentic?hl=hi) — कोड एक्ज़ीक्यूशन, इंस्ट्रुमेंट को पढ़ना, इमेज की व्याख्या करना.
-- [टास्क ऑर्केस्ट्रेशन](https://ai.google.dev/gemini-api/docs/generate-content/robotics-orchestration?hl=hi) — कस्टम रोबोट एपीआई के साथ लंबे समय तक चलने वाले टास्क.
-- [स्ट्रीमिंग के साथ रोबोटिक्स](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=hi) — रीयल-टाइम में दोनों तरफ़ से स्ट्रीमिंग (सिर्फ़ Gemini Robotics ER 2 के लिए).
-- [वीडियो को समझना](https://ai.google.dev/gemini-api/docs/generate-content/robotics-video-progress?hl=hi) — वीडियो में किसी खास पल को ढूंढना और प्रोग्रेस को कैटगरी में बांटना (सिर्फ़ Gemini Robotics ER 2 के लिए).
-- [Google DeepMind की रोबोटिक्स सुरक्षा](https://deepmind.google/models/gemini-robotics/safety?hl=hi) — मॉडल फ़ैमिली के पीछे सुरक्षा से जुड़ा रिसर्च.
+- [Raciocínio espacial](https://ai.google.dev/gemini-api/docs/generate-content/robotics-spatial?hl=pt-br): apontamento, rastreamento, caixas delimitadoras, trajetórias.
+- [Recursos agênticos](https://ai.google.dev/gemini-api/docs/generate-content/robotics-agentic?hl=pt-br): execução de código, leitura de instrumentos, anotação de imagens.
+- [Orquestração de tarefas](https://ai.google.dev/gemini-api/docs/generate-content/robotics-orchestration?hl=pt-br): tarefas de longo prazo com APIs de robôs personalizadas.
+- [Robótica com streaming](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=pt-br): streaming bidirecional em tempo real (somente Gemini Robotics ER 2).
+- [Compreensão de vídeo](https://ai.google.dev/gemini-api/docs/generate-content/robotics-video-progress?hl=pt-br): identificação de momentos e classificação de progresso (somente Gemini Robotics ER 2).
+- [Segurança de robótica do Google DeepMind](https://deepmind.google/models/gemini-robotics/safety?hl=pt-br): pesquisa de segurança por trás da família de modelos.
 
-सुझाव भेजें
+Envie comentários
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया.
+Última atualização 2026-09-04 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Quer enviar seu feedback?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-04 UTC."],[],[]]

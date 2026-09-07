@@ -1,24 +1,24 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/audio?hl=th
-fetched_at: 2026-08-31T06:35:01.367211+00:00
-title: "\u0e04\u0e27\u0e32\u0e21\u0e40\u0e02\u0e49\u0e32\u0e43\u0e08\u0e40\u0e01\u0e35\u0e48\u0e22\u0e27\u0e01\u0e31\u0e1a\u0e40\u0e2a\u0e35\u0e22\u0e07 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/audio?hl=it
+fetched_at: 2026-09-07T05:33:26.855613+00:00
+title: "Comprensione dell'audio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-ส่งความคิดเห็น
+Invia feedback
 
-# ความเข้าใจเกี่ยวกับเสียง
+# Comprensione dell'audio
 
-Gemini สามารถวิเคราะห์อินพุตเสียงและสร้างการตอบกลับเป็นข้อความได้
+Gemini può analizzare l'input audio e generare risposte di testo.
 
 ### Python
 
@@ -129,26 +129,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## ภาพรวม
+## Panoramica
 
-Gemini สามารถวิเคราะห์และทำความเข้าใจอินพุตเสียง รวมถึงสร้างการตอบกลับเป็นข้อความ ซึ่งช่วยให้ใช้ในกรณีต่อไปนี้ได้
+Gemini può analizzare e comprendere l'input audio e generare risposte di testo, consentendo casi d'uso come:
 
-- อธิบาย สรุป หรือตอบคำถามเกี่ยวกับเนื้อหาเสียง
-- การถอดเสียงและการแปล (เสียงพูดเป็นข้อความ)
-- การแยกแยะเสียงผู้พูด (ระบุผู้พูดแต่ละคน)
-- การตรวจจับอารมณ์ในเสียงพูดและเพลง
-- การวิเคราะห์ส่วนที่เฉพาะเจาะจงด้วยการประทับเวลา
+- Descrivere, riassumere o rispondere a domande sui contenuti audio
+- Trascrizione e traduzione (conversione della voce in testo)
+- Diarizzazione degli interlocutori (identificazione di diversi interlocutori)
+- Rilevamento delle emozioni nella voce e nella musica
+- Analisi di segmenti specifici con timestamp
 
-หากต้องการดูการโต้ตอบด้วยเสียงและวิดีโอแบบเรียลไทม์ โปรดดู
-[Live API](https://ai.google.dev/gemini-api/docs/live?hl=th)
-หากต้องการใช้โมเดลเสียงพูดเป็นข้อความโดยเฉพาะที่รองรับการถอดเสียงแบบเรียลไทม์
-ให้ใช้ [Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=th)
+Per le interazioni vocali e video in tempo reale, consulta l'
+[API Live](https://ai.google.dev/gemini-api/docs/live?hl=it).
+Per i modelli di conversione della voce in testo dedicati con supporto per la trascrizione in tempo reale,
+utilizza l'[API Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text?hl=it).
 
-## ถอดเสียงพูดเป็นข้อความ
+## Trascrivere la voce in testo
 
-ตัวอย่างนี้แสดงวิธีถอดเสียง แปล และสรุปเสียงพูดพร้อม
-การประทับเวลา การแยกแยะเสียงผู้พูด และการตรวจจับอารมณ์โดยใช้
-[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)
+Questo esempio mostra come trascrivere, tradurre e riassumere la voce con
+timestamp, diarizzazione degli interlocutori e rilevamento delle emozioni utilizzando
+[output strutturati](https://ai.google.dev/gemini-api/docs/structured-output?hl=it).
 
 ### Python
 
@@ -345,18 +345,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-![แอป Gemini ที่ถอดเสียงแบบหลายภาษา](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=th)
+![Un'app Gemini per la trascrizione audio multilingue](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=it)
 
-## อินพุตเสียง
+## Audio di input
 
-คุณระบุข้อมูลเสียงได้ด้วยวิธีต่อไปนี้
+Puoi fornire dati audio nei seguenti modi:
 
-- [อัปโหลดไฟล์เสียง](#upload-audio)ก่อนส่งคำขอ
-- [ส่งข้อมูลเสียงแบบอินไลน์](#inline-audio) พร้อมกับคำขอ
+- [Carica un file audio](#upload-audio) prima di effettuare una richiesta.
+- [Trasmetti i dati audio in linea](#inline-audio) con la richiesta.
 
-### อัปโหลดไฟล์เสียง
+### Caricare un file audio
 
-ใช้ [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th) สำหรับไฟล์ที่มีขนาดใหญ่กว่า 20 MB
+Utilizza l'[API Files](https://ai.google.dev/gemini-api/docs/files?hl=it) per i file di dimensioni superiori a 20 MB.
 
 ### Python
 
@@ -466,9 +466,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### ส่งข้อมูลเสียงแบบอินไลน์
+### Trasmettere i dati audio in linea
 
-สำหรับไฟล์เสียงขนาดเล็กที่มีขนาดคำขอรวมไม่เกิน 20 MB ให้ทำดังนี้
+Per i file audio di piccole dimensioni con una dimensione totale della richiesta inferiore a 20 MB:
 
 ### Python
 
@@ -587,13 +587,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-หมายเหตุเกี่ยวกับข้อมูลเสียงแบบอินไลน์:
-\* ขนาดคำขอสูงสุดคือ 20 MB โดยรวม (รวมถึงพรอมต์และไฟล์ทั้งหมด)
-\* หากต้องการใช้ซ้ำ [ให้อัปโหลดไฟล์](#upload-audio) แทน
+Note sui dati audio in linea:
+\* La dimensione massima della richiesta è di 20 MB in totale (inclusi prompt e tutti i file)
+\* Per il riutilizzo, [carica il file](#upload-audio).
 
-## ดูข้อความถอดเสียง
+## Ottenere una trascrizione
 
-หากต้องการดูข้อความถอดเสียง ให้ขอในพรอมต์ดังนี้
+Per ottenere una trascrizione, richiedila nel prompt:
 
 ### Python
 
@@ -668,9 +668,9 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-## อ้างอิงการประทับเวลา
+## Fare riferimento ai timestamp
 
-ใช้รูปแบบ `MM:SS` เพื่ออ้างอิงส่วนที่เฉพาะเจาะจง
+Utilizza il formato `MM:SS` per fare riferimento a sezioni specifiche:
 
 ### Python
 
@@ -739,9 +739,9 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-## นับโทเค็น
+## Contare i token
 
-นับโทเค็นในไฟล์เสียง
+Conta i token in un file audio:
 
 ### Python
 
@@ -804,9 +804,9 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-## รูปแบบเสียงที่รองรับ
+## Formati audio supportati
 
-Gemini รองรับประเภท MIME ของรูปแบบเสียงต่อไปนี้
+Gemini supporta i seguenti tipi MIME di formato audio:
 
 - WAV - `audio/wav`
 - MP3 - `audio/mp3`
@@ -822,30 +822,30 @@ Gemini รองรับประเภท MIME ของรูปแบบเ�
 - MULAW - `audio/mulaw`
 - WebM - `audio/webm`
 
-ดูรายการประเภท MIME และสคีมาพารามิเตอร์ทั้งหมดที่รองรับได้ที่[ข้อมูลอ้างอิง Interactions API](https://ai.google.dev/api/interactions-api?hl=th#Resource:Content)
+Per l'elenco completo dei tipi MIME supportati e degli schemi dei parametri, consulta il [riferimento dell'API Interactions](https://ai.google.dev/api/interactions-api?hl=it#Resource:Content).
 
-## รายละเอียดทางเทคนิคเกี่ยวกับเสียง
+## Dettagli tecnici sull'audio
 
-- **โทเค็น**: 32 โทเค็นต่อเสียง 1 วินาที (1 นาที = 1,920 โทเค็น)
-- **เสียงที่ไม่ใช่เสียงพูด**: Gemini เข้าใจเสียงที่ไม่ใช่เสียงพูด (เสียงนกร้อง เสียงไซเรน ฯลฯ)
-- **ความยาวสูงสุด**: เสียง 9.5 ชั่วโมงต่อพรอมต์
-- **ความละเอียด**: ลดตัวอย่างลงเหลือ 16 Kbps
-- **ช่อง**: รวมเสียงหลายช่องเป็นช่องเดียว
+- **Token**: 32 token al secondo di audio (1 minuto = 1920 token)
+- **Non vocale**: Gemini comprende i suoni non vocali (canto degli uccelli, sirene e così via)
+- **Durata massima**: 9,5 ore di audio per prompt
+- **Risoluzione**: downsampling a 16 Kbps
+- **Canali**: audio multicanale combinato in un unico canale
 
-## ขั้นตอนถัดไป
+## Passaggi successivi
 
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th): อัปโหลดและจัดการไฟล์เสียง
-- [คำแนะนำของระบบ](https://ai.google.dev/gemini-api/docs/text-generation?hl=th#system-instructions):
-  ปรับแต่งลักษณะการทำงานของโมเดล
-- [เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th):
-  ดูผลการถอดเสียงในรูปแบบ JSON
+- [API Files](https://ai.google.dev/gemini-api/docs/files?hl=it): carica e gestisci i file audio
+- [Istruzioni di sistema](https://ai.google.dev/gemini-api/docs/text-generation?hl=it#system-instructions):
+  Personalizza il comportamento del modello
+- [Output strutturato](https://ai.google.dev/gemini-api/docs/structured-output?hl=it):
+  ottieni i risultati della trascrizione in formato JSON
 
-ส่งความคิดเห็น
+Invia feedback
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-อัปเดตล่าสุด 2026-08-28 UTC
+Ultimo aggiornamento 2026-08-28 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Vuoi dirci altro?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-08-28 UTC"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-08-28 UTC."],[],[]]

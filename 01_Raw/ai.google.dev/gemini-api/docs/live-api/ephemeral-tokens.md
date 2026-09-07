@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=vi
-fetched_at: 2026-08-31T06:43:15.059240+00:00
+fetched_at: 2026-09-07T05:49:16.998283+00:00
 title: "M\u00e3 th\u00f4ng b\u00e1o t\u1ea1m th\u1eddi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

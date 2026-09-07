@@ -1,35 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=it
-fetched_at: 2026-08-31T06:33:38.595853+00:00
-title: "Agente Gemini Deep Research \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=ko
+fetched_at: 2026-09-07T05:33:11.408947+00:00
+title: "Gemini Deep Research \uc5d0\uc774\uc804\ud2b8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Invia feedback
+의견 보내기
 
-# Agente Gemini Deep Research
+# Gemini Deep Research 에이전트
 
-L'agente Gemini Deep Research pianifica, esegue e sintetizza autonomamente
-attività di ricerca in più fasi. Basato su Gemini, esplora paesaggi informativi complessi per produrre report dettagliati e citati. Le nuove
-funzionalità ti consentono di pianificare in collaborazione con l'agente, connetterti a
-strumenti esterni utilizzando i server MCP, includere
-visualizzazioni (come grafici e diagrammi) e fornire documenti direttamente
-come input.
+Gemini Deep Research Agent는 여러 단계로 이루어진 연구 작업을 자율적으로 계획, 실행, 합성합니다. Gemini를 기반으로 복잡한 정보 환경을 탐색하여 인용된 상세 보고서를 생성합니다. 새로운 기능을 사용하면 에이전트와 공동으로 계획하고, MCP 서버를 사용하여 외부 도구에 연결하고, 시각화 (예: 차트 및 그래프)를 포함하고, 문서를 직접 입력으로 제공할 수 있습니다.
 
-Le attività di ricerca comportano la ricerca e la lettura iterative e possono richiedere diversi minuti per essere completate. Devi utilizzare l'[esecuzione in background](https://ai.google.dev/gemini-api/docs/background-execution?hl=it) (imposta `background=true`)
-per eseguire l'agente in modo asincrono e cercare i risultati o trasmettere in streaming gli aggiornamenti. Per saperne di più, consulta [Gestione delle attività a lunga esecuzione](#long-running-tasks).
+조사 작업에는 반복적인 검색과 읽기가 포함되며 완료하는 데 몇 분이 걸릴 수 있습니다. [백그라운드 실행](https://ai.google.dev/gemini-api/docs/background-execution?hl=ko) (`background=true` 설정)을 사용하여 에이전트를 비동기적으로 실행하고 결과를 폴링하거나 업데이트를 스트리밍해야 합니다. 자세한 내용은 [장기 실행 작업 처리](#long-running-tasks)를 참고하세요.
 
-L'esempio seguente mostra come avviare un'attività di ricerca in background
-e eseguire il polling dei risultati.
+다음 예에서는 백그라운드에서 연구 작업을 시작하고 결과를 폴링하는 방법을 보여줍니다.
 
 ### Python
 
@@ -58,7 +51,7 @@ while True:
     time.sleep(10)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -104,23 +97,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Versioni supportate
+## 지원되는 버전
 
-L'agente Deep Research è disponibile in due versioni:
+Deep Research 에이전트는 두 가지 버전으로 제공됩니다.
 
-- **Deep Research** (`deep-research-preview-04-2026`): progettato per velocità ed efficienza, ideale per essere trasmesso in streaming a una UI client.
-- **Deep Research Max** (`deep-research-max-preview-04-2026`): massima completezza per la raccolta e la sintesi automatizzate del contesto.
+- **Deep Research** (`deep-research-preview-04-2026`): 속도와 효율성을 위해 설계되었으며 클라이언트 UI로 다시 스트리밍하는 데 적합합니다.
+- **Deep Research Max** (`deep-research-max-preview-04-2026`): 자동 컨텍스트 수집 및 합성의 최대 포괄성입니다.
 
-## Pianificazione collaborativa
+## 공동 계획
 
-La pianificazione collaborativa ti consente di controllare la direzione della ricerca prima che l'agente inizi il suo lavoro, permettendoti di rivedere e perfezionare il piano di ricerca prima dell'esecuzione. Se questa opzione è abilitata, l'agente restituisce un piano di ricerca proposto anziché
-eseguirlo immediatamente. Puoi quindi rivedere, modificare o approvare il piano tramite
-interazioni in più passaggi.
+협업 계획을 사용하면 에이전트가 작업을 시작하기 전에 조사 계획을 검토하고 수정하여 조사 방향을 제어할 수 있습니다. 사용 설정하면 에이전트가 즉시 실행하는 대신 제안된 조사 계획을 반환합니다. 그런 다음 여러 차례의 상호작용을 통해 계획을 검토, 수정 또는 승인할 수 있습니다.
 
-### Passaggio 1: richiedi un piano
+### 1단계: 요금제 요청
 
-Imposta `collaborative_planning=True` nella prima interazione. L'agente
-restituisce un piano di ricerca anziché un report completo.
+첫 번째 상호작용에서 `collaborative_planning=True`를 설정합니다. 에이전트가 전체 보고서 대신 조사 계획을 반환합니다.
 
 ### Python
 
@@ -147,7 +137,7 @@ while (result := client.interactions.get(id=plan_interaction.id)).status != "com
 print(result.steps[-1].content[0].text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const planInteraction = await client.interactions.create({
@@ -186,10 +176,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Passaggio 2: perfeziona il piano (facoltativo)
+### 2단계: 계획 수정 (선택사항)
 
-Utilizza `previous_interaction_id` per continuare la conversazione e perfezionare il piano. Mantieni `collaborative_planning=True` per rimanere in modalità
-pianificazione.
+`previous_interaction_id`을 사용하여 대화를 계속하고 계획을 반복합니다. 계획 모드를 유지하려면 `collaborative_planning=True`을 유지합니다.
 
 ### Python
 
@@ -212,7 +201,7 @@ while (result := client.interactions.get(id=refined_plan.id)).status != "complet
 print(result.steps[-1].content[0].text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const refinedPlan = await client.interactions.create({
@@ -253,10 +242,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Passaggio 3: approva ed esegui
+### 3단계: 승인 및 실행
 
-Imposta `collaborative_planning=False` (o omettilo) per approvare il piano e
-avviare la ricerca.
+계획을 승인하고 조사를 시작하려면 `collaborative_planning=False`를 설정하거나 생략합니다.
 
 ### Python
 
@@ -279,7 +267,7 @@ while (result := client.interactions.get(id=final_report.id)).status != "complet
 print(result.steps[-1].content[0].text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const finalReport = await client.interactions.create({
@@ -320,15 +308,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Visualizzazione
+## 시각화
 
-Quando `visualization` è impostato su `"auto"`, l'agente può generare grafici e altri elementi visivi per supportare i risultati della ricerca.
-Le immagini generate sono incluse nei passaggi della risposta e vengono trasmesse in streaming come
-delta `image`. Per ottenere risultati ottimali, chiedi esplicitamente immagini nella tua
-query, ad esempio "Includi grafici che mostrano le tendenze nel tempo" o
-"Genera grafici che confrontano la quota di mercato". L'impostazione di `visualization` su
-`"auto"` attiva la funzionalità, ma l'agente genera immagini solo
-quando il prompt le richiede.
+`visualization`이 `"auto"`로 설정되면 에이전트가 연구 결과를 뒷받침하는 차트, 그래프, 기타 시각적 요소를 생성할 수 있습니다.
+생성된 이미지는 대답 단계에 포함되며 `image` 델타로 스트리밍됩니다. 최상의 결과를 얻으려면 질문에 시각적 요소를 명시적으로 요청하세요. 예를 들어 '시간에 따른 추세를 보여주는 차트를 포함해' 또는 '시장 점유율을 비교하는 그래픽을 생성해'와 같이 요청할 수 있습니다. `visualization`을 `"auto"`로 설정하면 기능이 사용 설정되지만, 에이전트는 프롬프트에서 시각적 요소를 요청하는 경우에만 시각적 요소를 생성합니다.
 
 ### Python
 
@@ -365,7 +348,7 @@ for step in result.steps:
                 print(f"Received image: {len(image_bytes)} bytes")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -419,24 +402,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Strumenti supportati
+## 지원되는 도구
 
-Deep Research supporta più strumenti integrati ed esterni. Per impostazione predefinita
-(quando non viene fornito alcun parametro `tools`), l'agente ha accesso a Google
-Search, al contesto URL e all'esecuzione di codice. Puoi specificare
-in modo esplicito gli strumenti per limitare o estendere le funzionalità dell'agente.
+Deep Research는 여러 기본 제공 도구와 외부 도구를 지원합니다. 기본적으로(`tools` 매개변수가 제공되지 않은 경우) 에이전트는 Google 검색, URL 컨텍스트, 코드 실행에 액세스할 수 있습니다. 에이전트의 기능을 제한하거나 확장할 도구를 명시적으로 지정할 수 있습니다.
 
-| Strumento | Tipo di valore | Descrizione |
+| 도구 | 유형 값 | 설명 |
 | --- | --- | --- |
-| Ricerca Google | `google_search` | Ricerca sul web pubblico. Abilitato per impostazione predefinita. |
-| Contesto URL | `url_context` | Leggere e riassumere i contenuti di una pagina web. Abilitato per impostazione predefinita. |
-| Esecuzione del codice | `code_execution` | Esegui il codice per eseguire calcoli e analisi dei dati. Abilitato per impostazione predefinita. |
-| Server MCP | `mcp_server` | Connettiti ai server MCP remoti per l'accesso a strumenti esterni. |
-| Ricerca file | `file_search` | Cerca nei corpora di documenti caricati. |
+| Google 검색 | `google_search` | 공개 웹을 검색합니다. 기본적으로 사용 설정됩니다. |
+| URL 컨텍스트 | `url_context` | 웹페이지 콘텐츠를 읽고 요약합니다. 기본적으로 사용 설정됩니다. |
+| 코드 실행 | `code_execution` | 코드를 실행하여 계산 및 데이터 분석을 수행합니다. 기본적으로 사용 설정됩니다. |
+| MCP 서버 | `mcp_server` | 외부 도구 액세스를 위해 원격 MCP 서버에 연결 |
+| 파일 검색 | `file_search` | 업로드된 문서 코퍼스를 검색합니다. |
 
-### Ricerca Google
+### Google 검색
 
-Abilita esplicitamente la Ricerca Google come unico strumento:
+Google 검색을 유일한 도구로 명시적으로 사용 설정합니다.
 
 ### Python
 
@@ -449,7 +429,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -474,9 +454,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Contesto URL
+### URL 컨텍스트
 
-Concedi all'agente la possibilità di leggere e riassumere pagine web specifiche:
+에이전트가 특정 웹페이지를 읽고 요약할 수 있도록 합니다.
 
 ### Python
 
@@ -489,7 +469,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -514,9 +494,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Esecuzione del codice
+### 코드 실행
 
-Consenti all'agente di eseguire codice per calcoli e analisi dei dati:
+에이전트가 계산 및 데이터 분석을 위해 코드를 실행하도록 허용합니다.
 
 ### Python
 
@@ -529,7 +509,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -554,23 +534,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Server MCP
+### MCP 서버
 
-Connettiti a server MCP remoti per consentire all'agente di accedere a strumenti e
-servizi esterni.
+원격 MCP 서버에 연결하여 에이전트가 외부 도구 및 서비스에 액세스할 수 있도록 합니다.
 
-Fornisci il server `name` e `url` nella configurazione degli strumenti. Puoi anche
-trasferire le credenziali di autenticazione e limitare gli strumenti che l'agente può chiamare.
+도구 구성에서 서버 `name` 및 `url`을 제공합니다. 인증 사용자 인증 정보를 전달하고 에이전트가 호출할 수 있는 도구를 제한할 수도 있습니다.
 
-| Campo | Tipo | Obbligatorio | Descrizione |
+| 필드 | 유형 | 필수 | 설명 |
 | --- | --- | --- | --- |
-| `type` | `string` | Sì | Deve essere `"mcp_server"`. |
-| `name` | `string` | No | Un nome visualizzato per il server MCP. |
-| `url` | `string` | No | L'URL completo dell'endpoint del server MCP. |
-| `headers` | `object` | No | Coppie chiave-valore inviate come intestazioni HTTP con ogni richiesta al server (ad esempio, token di autenticazione). |
-| `allowed_tools` | `array` | No | Limita gli strumenti del server che l'agente può chiamare. |
+| `type` | `string` | 예 | `"mcp_server"`이어야 합니다. |
+| `name` | `string` | 아니요 | MCP 서버의 표시 이름입니다. |
+| `url` | `string` | 아니요 | MCP 서버 엔드포인트의 전체 URL입니다. |
+| `headers` | `object` | 아니요 | 서버에 대한 모든 요청과 함께 HTTP 헤더로 전송되는 키-값 쌍 (예: 인증 토큰)입니다. |
+| `allowed_tools` | `array` | 아니요 | 에이전트가 호출할 수 있는 서버의 도구를 제한합니다. |
 
-#### Utilizzo di base
+#### 기본 사용법
 
 ### Python
 
@@ -590,7 +568,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -629,9 +607,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Ricerca file
+### 파일 검색
 
-Concedi all'agente l'accesso ai tuoi dati utilizzando lo strumento [Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it).
+[파일 검색](https://ai.google.dev/gemini-api/docs/file-search?hl=ko) 도구를 사용하여 에이전트가 자체 데이터에 액세스할 수 있도록 합니다.
 
 ### Python
 
@@ -654,7 +632,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -683,11 +661,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Orientabilità e formattazione
+## 조향성 및 서식
 
-Puoi controllare l'output dell'agente fornendo istruzioni di formattazione specifiche nel prompt. In questo modo puoi strutturare i report in sezioni e sottosezioni specifiche, includere tabelle di dati o regolare il tono per diversi segmenti di pubblico (ad es. "tecnico", "dirigenziale", "informale").
+프롬프트에 구체적인 서식 지정 안내를 제공하여 에이전트의 출력을 유도할 수 있습니다. 이를 통해 보고서를 특정 섹션과 하위 섹션으로 구성하고, 데이터 표를 포함하거나, 다양한 잠재고객 (예: '기술', '임원', '일반')에 맞게 어조를 조정할 수 있습니다.
 
-Definisci esplicitamente il formato di output desiderato nel testo di input.
+입력 텍스트에 원하는 출력 형식을 명시적으로 정의합니다.
 
 ### Python
 
@@ -708,7 +686,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const prompt = `
@@ -740,11 +718,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Input multimodali
+## 멀티모달 입력
 
-Deep Research supporta input multimodali, tra cui immagini e documenti (PDF), consentendo
-all'agente di analizzare i contenuti visivi e condurre ricerche basate sul web
-contestualizzate dagli input forniti.
+Deep Research는 이미지와 문서 (PDF)를 비롯한 멀티모달 입력을 지원하므로 에이전트가 시각적 콘텐츠를 분석하고 제공된 입력에 따라 컨텍스트화된 웹 기반 조사를 수행할 수 있습니다.
 
 ### Python
 
@@ -787,7 +763,7 @@ while True:
     time.sleep(10)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -850,11 +826,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Document understanding
+### 문서 이해
 
-La comprensione dei documenti consente di passare i documenti direttamente come input multimodali.
-L'agente analizza i
-documenti forniti e conduce ricerche basate sui loro contenuti.
+문서 이해를 사용하면 문서를 멀티모달 입력으로 직접 전달할 수 있습니다.
+에이전트는 제공된 문서를 분석하고 콘텐츠에 기반한 조사를 수행합니다.
 
 ### Python
 
@@ -877,7 +852,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -915,35 +890,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Gestione di attività di lunga durata
+## 장기 실행 작업 처리
 
-Deep Research è un processo in più passaggi che prevede pianificazione, ricerca, lettura
-e scrittura. Questo ciclo in genere supera i limiti di timeout standard delle
-chiamate API sincrone.
+Deep Research는 계획, 검색, 읽기, 쓰기와 관련된 다단계 프로세스입니다. 이 주기는 일반적으로 동기 API 호출의 표준 제한 시간을 초과합니다.
 
-Gli agenti sono tenuti a utilizzare `background=True`. L'API restituisce immediatamente un oggetto
-`Interaction` parziale. Puoi utilizzare la proprietà `id` per recuperare un'interazione per il polling. Lo stato dell'interazione passerà da
-`in_progress` a `completed` o `failed`. Per una guida completa alla gestione delle attività in background, consulta [Esecuzione in background](https://ai.google.dev/gemini-api/docs/background-execution?hl=it).
+에이전트는 `background=True`를 사용해야 합니다. API는 부분 `Interaction` 객체를 즉시 반환합니다. `id` 속성을 사용하여 폴링을 위한 상호작용을 가져올 수 있습니다. 상호작용 상태가 `in_progress`에서 `completed` 또는 `failed`로 전환됩니다. 백그라운드 작업 관리에 관한 자세한 가이드는 [백그라운드 실행](https://ai.google.dev/gemini-api/docs/background-execution?hl=ko)을 참고하세요.
 
-### Streaming
+### 스트리밍
 
-Deep Research supporta lo streaming per ricevere aggiornamenti in tempo reale sull'avanzamento della ricerca, inclusi riepiloghi dei pensieri, output di testo e immagini generate.
-Devi impostare `stream=True` e `background=True`.
+Deep Research는 생각 요약, 텍스트 출력, 생성된 이미지 등 연구 진행 상황에 관한 실시간 업데이트를 수신하기 위한 스트리밍을 지원합니다.
+`stream=True` 및 `background=True`를 설정해야 합니다.
 
-Per ricevere passaggi di ragionamento intermedi (pensieri) e aggiornamenti sullo stato di avanzamento,
-devi attivare i **riepiloghi del pensiero** impostando `thinking_summaries` su
-`"auto"` in `agent_config`. Senza questo, lo stream potrebbe fornire solo i risultati finali.
+중간 추론 단계 (생각)와 진행 상황 업데이트를 받으려면 `agent_config`에서 `thinking_summaries`를 `"auto"`로 설정하여 **생각 요약**을 사용 설정해야 합니다. 이 기능이 없으면 스트림에서 최종 결과만 제공할 수 있습니다.
 
-#### Tipi di eventi di stream
+#### 스트림 이벤트 유형
 
-| Tipo di evento | Tipo di delta | Descrizione |
+| 이벤트 유형 | 델타 유형 | 설명 |
 | --- | --- | --- |
-| `step.delta` | `thought` | Passaggio di ragionamento intermedio dell'agente. |
-| `step.delta` | `text` | Parte dell'output di testo finale. |
-| `step.delta` | `image` | Un'immagine generata (con codifica base64). |
+| `step.delta` | `thought` | 에이전트의 중간 추론 단계입니다. |
+| `step.delta` | `text` | 최종 텍스트 출력의 일부입니다. |
+| `step.delta` | `image` | 생성된 이미지 (base64 인코딩) |
 
-L'esempio seguente avvia un'attività di ricerca ed elabora lo stream con
-la riconnessione automatica. Monitora `interaction_id` e `last_event_id` in modo che, se la connessione si interrompe (ad esempio, dopo il timeout di 600 secondi), possa riprendere da dove era stata interrotta.
+다음 예에서는 연구 작업을 시작하고 자동 재연결로 스트림을 처리합니다. 연결이 끊어지면 (예: 600초 시간 제한 후) 중단된 위치에서 다시 시작할 수 있도록 `interaction_id` 및 `last_event_id`를 추적합니다.
 
 ### Python
 
@@ -991,7 +959,7 @@ while not is_complete and interaction_id:
     process_stream(stream)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1064,12 +1032,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/INTER
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Domande aggiuntive e interazioni
+## 후속 질문 및 상호작용
 
-Puoi continuare la conversazione dopo che l'agente ha restituito il report finale
-utilizzando `previous_interaction_id`. In questo modo puoi chiedere chiarimenti,
-riepiloghi o approfondimenti su sezioni specifiche della ricerca senza
-dover ricominciare l'intera attività.
+에이전트가 최종 보고서를 반환한 후 `previous_interaction_id`를 사용하여 대화를 계속할 수 있습니다. 이렇게 하면 전체 작업을 다시 시작하지 않고도 연구의 특정 섹션에 대한 설명, 요약 또는 자세한 설명을 요청할 수 있습니다.
 
 ### Python
 
@@ -1088,7 +1053,7 @@ interaction = client.interactions.create(
 print(interaction.steps[-1].content[0].text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -1112,29 +1077,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Quando utilizzare l'agente Gemini Deep Research
+## Gemini Deep Research Agent를 사용해야 하는 경우
 
-Deep Research è un **agente**, non solo un modello. È più adatta ai workload
-che richiedono un approccio "analista in una scatola" anziché una chat a bassa latenza.
+Deep Research는 모델이 아닌 **에이전트**입니다. 지연 시간이 짧은 채팅보다는 '분석가-인-어-박스' 접근 방식이 필요한 워크로드에 가장 적합합니다.
 
-| Funzionalità | Modelli Gemini standard | Agente Gemini Deep Research |
+| 기능 | 표준 Gemini 모델 | Gemini Deep Research 에이전트 |
 | --- | --- | --- |
-| **Latenza** | Secondi | Minuti (asincrono/in background) |
-| **Procedura** | Genera -> Output | Pianificazione -> Ricerca -> Lettura -> Iterazione -> Output |
-| **Output** | Testo conversazionale, codice, riepiloghi brevi | Report dettagliati, analisi in formato lungo, tabelle comparative |
-| **Ideale per** | Chatbot, estrazione, scrittura creativa | Analisi di mercato, due diligence, revisioni della letteratura, panorama competitivo |
+| **지연 시간** | 초 | 분 (비동기/백그라운드) |
+| **절차** | 생성 -> 출력 | 계획 -> 검색 -> 읽기 -> 반복 -> 출력 |
+| **출력** | 대화형 텍스트, 코드, 짧은 요약 | 자세한 보고서, 긴 형식의 분석, 비교 표 |
+| **용도** | 챗봇, 추출, 창의적 글쓰기 | 시장 분석, 실사, 문헌 검토, 경쟁 환경 |
 
-## Configurazione dell'agente
+## 에이전트 구성
 
-Deep Research utilizza il parametro `agent_config` per controllare il comportamento.
-Trasmettilo come dizionario con i seguenti campi:
+Deep Research는 `agent_config` 매개변수를 사용하여 동작을 제어합니다.
+다음 필드가 포함된 사전으로 전달합니다.
 
-| Campo | Tipo | Predefinito | Descrizione |
+| 필드 | 유형 | 기본값 | 설명 |
 | --- | --- | --- | --- |
-| `type` | `string` | Obbligatorio | Deve essere `"deep-research"`. |
-| `thinking_summaries` | `string` | `"none"` | Imposta `"auto"` per ricevere i passaggi di ragionamento intermedi durante lo streaming. Imposta su `"none"` per disattivarlo. |
-| `visualization` | `string` | `"auto"` | Imposta `"auto"` per attivare grafici e immagini generati dall'agente. Imposta su `"off"` per disattivarlo. |
-| `collaborative_planning` | `boolean` | `false` | Imposta su `true` per attivare la revisione del piano in più turni prima dell'inizio della ricerca. |
+| `type` | `string` | 필수 | `"deep-research"`이어야 합니다. |
+| `thinking_summaries` | `string` | `"none"` | 스트리밍 중에 중간 추론 단계를 수신하려면 `"auto"`로 설정합니다. 사용 중지하려면 `"none"`로 설정합니다. |
+| `visualization` | `string` | `"auto"` | 에이전트 생성 차트 및 이미지를 사용 설정하려면 `"auto"`로 설정합니다. 사용 중지하려면 `"off"`로 설정합니다. |
+| `collaborative_planning` | `boolean` | `false` | 조사가 시작되기 전에 다중 턴 계획 검토를 사용 설정하려면 `true`로 설정합니다. |
 
 ### Python
 
@@ -1154,7 +1118,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -1189,72 +1153,57 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Disponibilità e prezzi
+## 사용 가능 여부 및 가격 책정
 
-Puoi accedere all'agente Gemini Deep Research utilizzando l'API Interactions in Google AI Studio e l'API Gemini.
+Google AI Studio 및 Gemini API의 Interactions API를 사용하여 Gemini Deep Research Agent에 액세스할 수 있습니다.
 
-I prezzi seguono un [modello di pagamento a consumo](https://ai.google.dev/gemini-api/docs/pricing?hl=it#pricing-for-agents) basato sui modelli Gemini sottostanti e sugli strumenti specifici utilizzati dall'agente. A differenza delle richieste di chat standard, in cui una richiesta porta a un output, un'attività Deep Research è un flusso di lavoro agentico. Una singola richiesta attiva un ciclo autonomo di pianificazione, ricerca, lettura e ragionamento.
+가격은 기본 Gemini 모델과 에이전트가 사용하는 특정 도구를 기반으로 [사용한 만큼만 지불 모델](https://ai.google.dev/gemini-api/docs/pricing?hl=ko#pricing-for-agents)을 따릅니다. 요청이 하나의 출력으로 이어지는 표준 채팅 요청과 달리 Deep Research 작업은 에이전트형 워크플로입니다. 단일 요청으로 계획, 검색, 읽기, 추론의 자율 루프가 트리거됩니다.
 
-### Costi stimati
+### 예상 비용
 
-I costi variano in base alla profondità della ricerca richiesta. L'agente determina autonomamente la quantità di lettura e ricerca necessaria per rispondere al prompt.
+비용은 필요한 연구의 깊이에 따라 다릅니다. 에이전트는 프롬프트에 답변하는 데 필요한 읽기 및 검색의 양을 자율적으로 결정합니다.
 
-- **Deep Research** (`deep-research-preview-04-2026`): per una query tipica che richiede un'analisi moderata, l'agente potrebbe utilizzare circa 80 query di ricerca, circa 250.000 token di input (circa il 50-70% memorizzati nella cache) e circa 60.000 token di output.
-  - **Totale stimato:** 1-3 € per attività
-- **Deep Research Max** (`deep-research-max-preview-04-2026`): per un'analisi approfondita del panorama competitivo o una due diligence estesa, l'agente potrebbe utilizzare fino a circa 160 query di ricerca, circa 900.000 token di input (circa il 50-70% memorizzati nella cache) e circa 80.000 token di output.
-  - **Totale stimato:** 3-7 € per attività
+- **Deep Research** (`deep-research-preview-04-2026`): 중간 수준의 분석이 필요한 일반적인 질문의 경우 에이전트가 검색어 약 80개, 입력 토큰 약 250,000개 (50~70% 캐시됨), 출력 토큰 약 60,000개를 사용할 수 있습니다.
+  - **예상 총액:** 작업당$1.00~$3.00
+- **Deep Research Max** (`deep-research-max-preview-04-2026`): 심층적인 경쟁 환경 분석 또는 광범위한 실사를 위해 에이전트는 최대 ~160개의 검색어, ~900,000개의 입력 토큰 (~50~70% 캐시됨), ~80,000개의 출력 토큰을 사용할 수 있습니다.
+  - **예상 총액:** 작업당$3.00~$7.00
 
-## Considerazioni sulla sicurezza
+## 안전 고려사항
 
-Concedere a un agente l'accesso al web e ai tuoi file privati richiede un'attenta
-valutazione dei rischi per la sicurezza.
+에이전트가 웹과 비공개 파일에 액세스하도록 허용하려면 안전 위험을 신중하게 고려해야 합니다.
 
-- **Prompt injection tramite file**:l'agente legge i contenuti dei file
-  che fornisci. Assicurati che i documenti caricati (PDF, file di testo) provengano da
-  fonti attendibili. Un file dannoso potrebbe contenere testo nascosto progettato per
-  manipolare l'output dell'agente.
-- **Rischi dei contenuti web**:l'agente esegue ricerche sul web pubblico. Sebbene implementiamo
-  filtri di sicurezza robusti, esiste il rischio che l'agente possa incontrare ed
-  elaborare pagine web dannose. Ti consigliamo di esaminare le `citations` fornite
-  nella risposta per verificare le fonti.
-- **Esfiltrazione**:fai attenzione quando chiedi all'agente di riassumere dati interni sensibili se gli consenti anche di navigare sul web.
+- **파일을 사용한 프롬프트 삽입:** 에이전트가 제공된 파일의 콘텐츠를 읽습니다. 업로드된 문서 (PDF, 텍스트 파일)가 신뢰할 수 있는 출처에서 제공된 것인지 확인합니다. 악성 파일에는 에이전트의 출력을 조작하기 위해 설계된 숨겨진 텍스트가 포함될 수 있습니다.
+- **웹 콘텐츠 위험:** 에이전트가 공개 웹을 검색합니다. 강력한 안전 필터를 구현하고 있지만 에이전트가 악성 웹페이지를 접하고 처리할 위험이 있습니다. 소스 확인을 위해 대답에 제공된 `citations`를 검토하는 것이 좋습니다.
+- **무단 반출:** 웹 탐색을 허용하는 경우 에이전트에게 민감한 내부 데이터를 요약해 달라고 요청할 때 주의해야 합니다.
 
-## Best practice
+## 권장사항
 
-- **Richiedi sconosciuti**:indica all'agente come gestire i dati mancanti.
-  Ad esempio, aggiungi *"Se non sono disponibili cifre specifiche per il 2025,
-  indica esplicitamente che si tratta di proiezioni o che non sono disponibili anziché
-  stimarle"* al prompt.
-- **Fornisci contesto**:basa la ricerca dell'agente fornendo informazioni di base o vincoli direttamente nel prompt di input.
-- **Utilizza la pianificazione collaborativa**:per le query complesse, attiva la pianificazione collaborativa per rivedere e perfezionare il piano di ricerca prima dell'esecuzione.
-- **Input multimodali:** l'agente Deep Research supporta input multimodali.
-  Utilizza con cautela, in quanto aumenta i costi e il rischio di overflow della finestra contestuale.
+- **알 수 없는 항목에 대한 프롬프트:** 누락된 데이터를 처리하는 방법을 상담사에게 안내합니다.
+  예를 들어 프롬프트에 *'2025년의 구체적인 수치를 사용할 수 없는 경우 추정하지 말고 예측치이거나 사용할 수 없다고 명시하세요'*를 추가합니다.
+- **컨텍스트 제공:** 입력 프롬프트에 배경 정보나 제약 조건을 직접 제공하여 에이전트의 조사를 그라운딩합니다.
+- **공동 계획 사용:** 복잡한 질문의 경우 실행 전에 조사 계획을 검토하고 다듬을 수 있도록 공동 계획을 사용 설정합니다.
+- **멀티모달 입력:** Deep Research Agent는 멀티모달 입력을 지원합니다.
+  비용이 증가하고 컨텍스트 윈도우 오버플로 위험이 있으므로 신중하게 사용하세요.
 
-## Limitazioni
+## 제한사항
 
-- **Strumenti personalizzati**:al momento non puoi fornire strumenti di chiamata di funzioni personalizzati,
-  ma puoi utilizzare server MCP (Model Context Protocol) remoti con l'agente Deep Research.
-- **Output strutturato**:l'agente Deep Research attualmente
-  non supporta gli output strutturati.
-- **Tempo massimo di ricerca**:l'agente Deep Research ha un tempo massimo di ricerca di 60 minuti. La maggior parte delle attività dovrebbe essere completata entro 20 minuti.
-- **Requisito dello store**:l'esecuzione dell'agente utilizzando `background=True` richiede
-  `store=True`.
-- **Ricerca Google**:la [Ricerca
-  Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it) è attivata per
-  impostazione predefinita e ai risultati fondati si applicano [limitazioni
-  specifiche](https://ai.google.dev/gemini-api/terms?hl=it#use-restrictions2).
+- **맞춤 도구:** 현재 맞춤 함수 호출 도구를 제공할 수는 없지만, Deep Research 에이전트와 함께 원격 MCP (모델 컨텍스트 프로토콜) 서버를 사용할 수 있습니다.
+- **구조화된 출력:** 현재 Deep Research 에이전트는 구조화된 출력을 지원하지 않습니다.
+- **최대 조사 시간:** Deep Research 에이전트의 최대 조사 시간은 60분입니다. 대부분의 작업은 20분 이내에 완료됩니다.
+- **저장소 요구사항:** `background=True`를 사용하는 에이전트 실행에는 `store=True`가 필요합니다.
+- **Google 검색:** [Google 검색](https://ai.google.dev/gemini-api/docs/google-search?hl=ko)은 기본적으로 사용 설정되어 있으며 그라운딩된 결과에는 [특정 제한사항](https://ai.google.dev/gemini-api/terms?hl=ko#use-restrictions2)이 적용됩니다.
 
-## Passaggi successivi
+## 다음 단계
 
-- Scopri di più sull'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it).
-- Scopri come utilizzare i tuoi dati con lo strumento [Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it).
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)에 대해 자세히 알아보세요.
+- [파일 검색](https://ai.google.dev/gemini-api/docs/file-search?hl=ko) 도구를 사용하여 자체 데이터를 사용하는 방법을 알아보세요.
 
-Invia feedback
+의견 보내기
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Ultimo aggiornamento 2026-07-14 UTC.
+최종 업데이트: 2026-07-14(UTC)
 
-Vuoi dirci altro?
+의견을 전달하고 싶나요?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-14 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-14(UTC)"],[],[]]

@@ -1,138 +1,139 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=de
-fetched_at: 2026-08-31T06:37:32.852638+00:00
-title: "KI-Agenten im AI\u00a0Studio-Playground \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=ar
+fetched_at: 2026-09-07T05:39:16.541439+00:00
+title: "\u0627\u0644\u0648\u0643\u0644\u0627\u0621 \u0641\u064a \u0645\u0633\u0627\u062d\u0629 \u062a\u062c\u0631\u0628\u0629 AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Feedback geben
+إرسال ملاحظات
 
-# KI-Agenten im AI Studio-Playground
+# الوكلاء في مساحة تجربة AI Studio
 
-Google AI Studio Playground bietet eine visuelle Oberfläche, mit der Sie Prototypen erstellen und lernen können, wie Sie verwaltete Agents entwickeln, ohne API-Aufrufe erstellen und schreiben zu müssen.
+توفّر ساحة لعب Google AI Studio واجهة مرئية لإنشاء نماذج أولية ومعرفة كيفية إنشاء وكلاء مُدارين بدون الحاجة إلى إنشاء طلبات من واجهة برمجة التطبيقات وكتابتها.
 
-Rufen Sie dazu in der Navigationsleiste von Google AI Studio den Tab **Playground** auf und stellen Sie den Schalter auf **Agents**.
+للبدء، انتقِل إلى علامة التبويب **ساحة اللعب** في لوحة التنقّل في Google AI Studio، وغيِّر مفتاح التبديل إلى **الوكلاء**.
 
-## Vordefinierte Vorlagen
+## نماذج مُنشأة مسبقًا
 
-Auf dem Tab **Agents** (KI-Agenten) finden Sie eine Reihe von Vorlagen, mit denen der Antigravity-Basis-KI-Agent durch Festlegen von Tool- und Umgebungskonfigurationen vorkonfiguriert wird. Alle Vorlagen sind Open Source und werden im Repository [google-gemini/gemini-managed-agents-templates](https://github.com/google-gemini/gemini-managed-agents-templates/) veröffentlicht. Wenn Sie sich diese Vorlagen ansehen, können Sie lernen, wie Sie Ihren eigenen verwalteten Agent erstellen und strukturieren.
+تحتوي علامة التبويب **الوكلاء** على سلسلة من النماذج التي تُعدّ مسبقًا "الوكيل الأساسي" من خلال ضبط إعدادات الأدوات والبيئة. جميع النماذج مفتوحة المصدر ومنشورة ضِمن
+مستودع [google-gemini/gemini-managed-agents-templates](https://github.com/google-gemini/gemini-managed-agents-templates/). إنّ استكشاف هذه النماذج طريقة رائعة لمعرفة كيفية إنشاء وكيل مُدار خاص بك وتنظيمه.
 
-Wenn Sie beispielsweise die Vorlage „KI‑Radio“ auswählen, werden alle zulässigen Tools aktiviert und eine spezielle `AGENTS.md`-Datei sowie Skills für die Produktion von Radiosendungen verknüpft. Sie können diese Einstellungen in der Playground-Benutzeroberfläche im Bereich **Environment** (Umgebung) aufrufen, indem Sie auf die Schaltfläche **Sources** (Quellen) klicken.
+على سبيل المثال، عند اختيار نموذج "البرنامج الإذاعي بالذكاء الاصطناعي"، يتم تفعيل جميع الأدوات المسموح بها، ويتم ربط ملف `AGENTS.md` متخصص ومهارات لإنتاج البرامج الإذاعية. يمكنك الاطّلاع على هذه الإعدادات في واجهة مستخدم "ساحة اللعب" ضِمن قسم **البيئة** من خلال النقر على الزر **المصادر**.
 
-## Toolkonfiguration
+## إعدادات الأدوات
 
-In den Agent-Einstellungen im Playground können Sie den Zugriff auf die folgenden integrierten Tools aktivieren oder deaktivieren:
+ضِمن إعدادات الوكيل في "ساحة اللعب"، يمكنك تفعيل الوصول إلى الأدوات المضمّنة التالية أو إيقافه:
 
-- **Google Suche**:Auf das öffentliche Web zugreifen, um Echtzeitinformationen zu erhalten.
-- **URL-Kontext**:Textinhalte bestimmter Webseiten-URLs abrufen und parsen.
-- **Codeausführung**:Bash- und Python-Befehle direkt in der isolierten Sandbox-Umgebung ausführen.
-- **Dateisystemtools**:Dateien im Arbeitsbereich lesen, schreiben, auflisten und löschen.
+- **بحث Google:** يمكنك الوصول إلى الويب المفتوح للحصول على معلومات في الوقت الفعلي.
+- **سياق عنوان URL:** يمكنك جلب المحتوى النصي لعناوين URL لصفحات ويب معيّنة وتحليله.
+- **تنفيذ الرموز البرمجية:** يمكنك تشغيل أوامر Bash وPython مباشرةً ضِمن بيئة الحماية المعزولة.
+- **أدوات نظام الملفات:** يمكنك قراءة الملفات وكتابتها وعرضها وحذفها داخل مساحة العمل.
 
-## Umgebung konfigurieren
+## إعدادات البيئة
 
-Verwaltete Agents werden in einer sicheren, kurzlebigen Linux-Sandbox (der Umgebung) ausgeführt, die den Arbeitsbereich und die Tools bereitstellt, die sie für ihre Arbeit benötigen. Weitere Informationen finden Sie im Leitfaden zur [verwalteten Agent-Umgebung](https://ai.google.dev/gemini-api/docs/agent-environment?hl=de).
+تعمل الوكلاء المُدارون ضِمن بيئة حماية آمنة ومؤقتة على Linux (البيئة) توفّر مساحة العمل والأدوات التي يحتاجون إليها للتشغيل. لمزيد من المعلومات، يُرجى الاطّلاع على دليل بيئة الوكيل المُدار .
 
-### Agent-Verhalten steuern
+### التحكّم في سلوك الوكيل
 
-Das Verhalten, die Persona und die Funktionen des Agenten werden hauptsächlich durch die Dateien in seiner Umgebung bestimmt. Der Agent erkennt und lädt Konfigurationen automatisch aus einem speziellen `.agents`-Ordner:
+يتم تحديد سلوك الوكيل وشخصيته وقدراته بشكل أساسي من خلال الملفات المتوفّرة في بيئته. يرصد الوكيل الإعدادات ويحمّلها تلقائيًا من مجلد خاص باسم `.agents`:
 
-- **`AGENTS.md`**: Vorgegeben im Kontext des Agenten, um Systemanweisungen und Persona zu definieren.
-- **`SKILL.md`**: Diese Dateien befinden sich in den jeweiligen Skill-Ordnern (z.B. `.agents/skills/my-skill/SKILL.md`), um bestimmte Funktionen und Workflows zu definieren.
+- **`AGENTS.md`**: يتم تحميله مسبقًا في سياق الوكيل لتحديد تعليمات النظام وشخصيته.
+- **`SKILL.md`**: يقع ضِمن مجلدات المهارات المعنيّة (مثل `.agents/skills/my-skill/SKILL.md`) لتحديد قدرات وسير عمل معيّنين.
 
-### Umgebung bereitstellen
+### توفير البيئة
 
-Sie können die vom Agent verwendete Umgebung konfigurieren, indem Sie Dateien in die Umgebung einbinden, bevor Sie eine Sitzung starten. Sie können entweder eine neue Umgebung erstellen, indem Sie Quellen einbinden, oder eine vorherige Umgebung wiederherstellen:
+يمكنك ضبط البيئة التي سيستخدمها الوكيل من خلال ربط الملفات بالبيئة قبل بدء الجلسة. يمكنك إنشاء بيئة جديدة من خلال ربط المصادر، أو استعادة بيئة سابقة:
 
-- **So erstellen Sie eine neue Umgebung**: Klicken Sie im Bereich „Umgebungseinstellungen“ auf **Quellen hinzufügen** und wählen Sie einen der folgenden Quelltypen aus:
+- **لإنشاء بيئة جديدة**، انقر على **إضافة مصادر** في لوحة إعدادات البيئة واختَر من بين أنواع المصادر التالية:
 
-| Quelltyp | Beschreibung | Bereitstellungspfad |
+| نوع المصدر | الوصف | مسار الربط |
 | --- | --- | --- |
-| **Inline-Dateien** | Konfigurationsdateien, Mock-Datasets oder Utility-Scripts (bis zu 100 KB) können direkt in die Playground-Benutzeroberfläche geschrieben oder eingefügt werden. | Benutzerdefinierter Zielpfad (z.B. `/workspace/scripts/parser.py`). |
-| **Google Cloud Storage** | Einen öffentlichen oder privaten Cloud Storage-Bucket einbinden  Für private Buckets ist ein standardmäßiges OAuth 2.0-Inhabertoken erforderlich. Weitere Informationen finden Sie unter [Private Quellen](https://ai.google.dev/gemini-api/docs/agent-environment?hl=de#private-sources). | Ordnet einen GCS-Bucket-Pfad (z.B. `gs://your-bucket-name/data/`) einem Workspace-Verzeichnis (z.B. `/workspace/data/`) zu. |
-| **GitHub-Repositories** | Öffentliche oder private Codebases klonen  Für private Repositories ist die Standardauthentifizierung mit Ihrem persönlichen GitHub-Zugriffstoken (Personal Access Token, PAT) erforderlich. Weitere Informationen finden Sie unter [Private Quellen](https://ai.google.dev/gemini-api/docs/agent-environment?hl=de#private-sources). | Direkt in `/workspace/` geklont (in der Regel unter `/workspace/<repo-name>`). |
+| **الملفات المضمّنة** | يمكنك كتابة ملفات الإعدادات أو لصقها أو مجموعات البيانات التجريبية أو النصوص البرمجية للأدوات المساعدة (بحد أقصى 100 كيلوبايت) مباشرةً في واجهة مستخدم "ساحة اللعب". | مسار الوجهة الذي يحدّده المستخدم (مثل `/workspace/scripts/parser.py`) |
+| **Google Cloud Storage** | يمكنك ربط حزمة علنية أو خاصة على Cloud Storage.  تتطلب الحزم الخاصة رمزًا مميزًا عاديًا من نوع OAuth 2.0 Bearer. لمزيد من المعلومات، يُرجى الاطّلاع على [المصادر الخاصة](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ar#private-sources). | يربط مسار حزمة GCS (مثل `gs://your-bucket-name/data/`) بدليل مساحة العمل (مثل `/workspace/data/`) |
+| **مستودعات GitHub** | يمكنك استنساخ قواعد بيانات علنية أو خاصة.  تتطلب المستودعات الخاصة مصادقة أساسية باستخدام رمز الوصول الشخصي (PAT) على GitHub. لمزيد من المعلومات، يُرجى الاطّلاع على [المصادر الخاصة](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ar#private-sources). | يتم استنساخها مباشرةً في `/workspace/` (عادةً ضِمن `/workspace/<repo-name>`). |
 
-- **Wenn Sie eine frühere Umgebung wiederherstellen möchten**, können Sie [eine vorhandene Umgebungs-ID wiederverwenden](#reusing-an-existing-environment-id), um ihren genauen Status zu klonen und zu forken.
+- **لاستعادة بيئة سابقة**، يمكنك [إعادة استخدام معرّف بيئة حالي](#reusing-an-existing-environment-id) لاستنساخ حالتها الدقيقة وإنشاء نسخة منها.
 
-### Vorhandene Umgebungs-ID wiederverwenden
+### إعادة استخدام معرّف بيئة حالي
 
-Wenn Sie bereits eine Sandbox-Umgebung eingerichtet haben, müssen Sie nicht von vorn beginnen. So verwenden Sie eine vorhandene Umgebung:
+إذا سبق لك قضاء بعض الوقت في إعداد بيئة حماية، لن تحتاج إلى البدء من جديد. لاستخدام بيئة حالية:
 
-1. Rufen Sie in AI Studio den Bereich „Umgebungen“ auf und stellen Sie **Typ** auf **Vorhanden** um.
-2. Geben Sie die **Umgebungs-ID** ein, z. B. `env_abc123`.
+1. انتقِل إلى لوحة "البيئات" في AI Studio وغيِّر **النوع** إلى **الحالية**.
+2. أدخِل **معرّف البيئة** (مثل `env_abc123`)
 
-Weitere Informationen finden Sie unter [Umgebung konfigurieren](https://ai.google.dev/gemini-api/docs/agent-environment?hl=de#configure-an-environment). Sie können die Umgebungs-ID der aktuellen Sitzung auch auf dem Tab „Umgebung“ in der Benutzeroberfläche abrufen.
+لمزيد من المعلومات، يُرجى الاطّلاع على مقالة [إعداد بيئة](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ar#configure-an-environment). يمكنك أيضًا استرداد معرّف البيئة للجلسة الحالية من علامة التبويب "البيئة" في واجهة المستخدم.
 
-Sobald Sie Ihre erste Nachricht an den Agent senden, ist die Umgebungskonfiguration für diese Sitzung festgelegt. Sie können keine neuen Quellen einbinden oder die Zulassungsliste für das Netzwerk ändern, während die Interaktion aktiv ausgeführt wird.
+بعد إرسال أول رسالة إلى الوكيل، يصبح إعداد البيئة ثابتًا لتلك الجلسة. لا يمكنك ربط مصادر جديدة أو تعديل القائمة المسموح بها للشبكة أثناء تشغيل التفاعل بنشاط.
 
-## Umgebung herunterladen
+## تنزيل البيئة
 
-Nachdem eine Umgebung erstellt wurde, können Sie den Umgebungs-Snapshot jederzeit über die Schaltfläche **Herunterladen** in den Umgebungseinstellungen des AI Studio Playgrounds herunterladen, um Umgebungsdateien als Tarball abzurufen.
+بعد إنشاء بيئة، يمكنك تنزيل لقطة البيئة في أي وقت باستخدام الزر **تنزيل** في إعدادات البيئة في "ساحة لعب AI Studio" لاسترداد ملفات البيئة كملف tarball.
 
-## Sicherheit und Kostenverwaltung
+## الأمان وإدارة التكاليف
 
-### Tokenverbrauch verwalten
+### إدارة استهلاك الرموز المميّزة
 
-Im Gegensatz zu einer Standard-Chatanfrage, die eine einzelne Ausgabe erzeugt, führt der Antigravity-Agent einen autonomen Workflow aus. Es plant, führt Code aus, beobachtet Ergebnisse und wiederholt den Vorgang. Das bedeutet, dass ein einzelner Prompt zu einem unbegrenzten Tokenverbrauch führen kann.
+على عكس طلب محادثة عادي ينتج عنه رد واحد، يُنفّذ وكيل Antigravity سير عمل تلقائيًا. يخطّط الوكيل وينفّذ الرموز البرمجية ويراقب النتائج ويُجري عمليات تكرار. وهذا يعني أنّ طلبًا واحدًا يمكن أن يؤدي إلى استهلاك غير محدود للرموز المميّزة.
 
-Um die Kosten zu verwalten, **geben Sie in Ihren Prompts klare Beendigungskriterien an und begrenzen Sie die Aufgaben für den Agenten**. Ein gutes Beispiel ist der Prompt: *Überprüfe die Pull-Anfrage und stoppe, sobald du die Markdown-Zusammenfassung erstellt hast.
-Versuchen Sie nicht, die Korrektur selbst zu schreiben.*
+لإدارة التكاليف، **قدِّم معايير إنهاء واضحة في طلباتك وحدِّد نطاق المهام بدقة للوكيل**. يمكن أن يكون مثالاً جيدًا على ذلك طلبًا مثل *راجِع طلب سحب التغييرات وتوقّف بعد إنشاء ملخّص بتنسيق Markdown.
+لا تحاول كتابة الإصلاح بنفسك*.
 
-### Zusätzliche Kosten
+### التكاليف الإضافية
 
-Standardmäßig haben alle Agent-Vorlagen im Playground Zugriff auf den Gemini API-Dienst und können API-Aufrufe aus der Umgebung ausführen, um Anfragen zu bearbeiten. Dabei können zusätzliche Kosten anfallen, die nicht im Tokenverbrauch berücksichtigt werden.
+تلقائيًا، يمكن لجميع نماذج الوكلاء في "ساحة اللعب" الوصول إلى خدمة Gemini API وإجراء طلبات من واجهة برمجة التطبيقات من البيئة لتلبية الطلبات. قد يؤدي ذلك إلى تكاليف إضافية لن تظهر في استهلاك الرموز المميّزة.
 
-Wenn Sie andere externe Dienste hinzufügen, können für den Agenten zusätzliche Kosten anfallen, da er diese Dienste in Ihrem Namen aufruft.
+وبالمثل، إذا أضفت خدمات خارجية أخرى، قد يتحمّل الوكيل تكاليف إضافية من خلال استدعاء هذه الخدمات نيابةً عنك.
 
-### Zulassungsliste für Netzwerke
+### القائمة المسموح بها للشبكة
 
-Standardmäßig werden in AI Studio alle ausgehenden Netzwerkanfragen aus der Sandbox-Umgebung Ihres Agents streng kontrolliert und eingeschränkt, um die Sicherheit zu gewährleisten. Damit Ihr Agent externe APIs, Webservices oder Paketmanager erreichen kann, müssen Sie diese explizit deklarieren:
+تلقائيًا، في AI Studio، يتم التحكّم بإحكام في جميع طلبات الشبكة الصادرة من بيئة الحماية الخاصة بالوكيل ويتم حصرها لضمان الأمان. لمنح الوكيل إمكانية الوصول إلى واجهات برمجة التطبيقات الخارجية أو خدمات الويب أو مديري الحِزم، عليك الإعلان عنها صراحةً:
 
-1. Rufen Sie in AI Studio das Feld „Umgebungen“ auf.
-2. Klicken Sie neben **Netzwerk** auf die Schaltfläche **Regeln**.
-3. Klicken Sie im Bereich **Netzwerkkonfiguration** auf **Zur Zulassungsliste hinzufügen** und geben Sie die entsprechenden Details ein:
-   - **Domainbeschränkung**:Nur auf die bestimmten Domains oder Platzhaltermuster, die der Liste hinzugefügt wurden, kann über die virtuelle Maschine des Agents zugegriffen werden. Sie können beispielsweise genaue Domains wie `api.github.com` oder allgemeine Muster wie `*.googleapis.com` eingeben.
-   - **HTTP-Header und Token-Injection hinzufügen**:Mit der Option **HTTP-Header hinzufügen** können Sie erforderliche Anmeldedaten (z. B. ein API-Token) für eine bestimmte Domain sicher einfügen. Diese Anmeldedaten werden sicher über einen Egress-Proxy weitergeleitet und niemals direkt als Rohtext in der Agent-Sandbox offengelegt.
+1. انتقِل إلى لوحة "البيئات" في AI Studio.
+2. انقر على الزر **القواعد** بجانب **الشبكة**.
+3. في لوحة **إعدادات الشبكة** ، انقر على **الإضافة إلى القائمة المسموح بها** وأدخِل التفاصيل ذات الصلة:
+   - **قيود النطاق:** لا يمكن للجهاز الافتراضي للوكيل الوصول إلا إلى النطاقات المحدّدة أو الأنماط العامة التي تمت إضافتها إلى القائمة. على سبيل المثال، يمكنك إدخال نطاقات دقيقة مثل `api.github.com` أو أنماط عامة مثل `*.googleapis.com`.
+   - **إضافة عنوان HTTP ورمز مميّز:** استخدِم الخيار **إضافة عنوان HTTP** لإدخال بيانات الاعتماد المطلوبة بأمان (مثل رمز مميّز لواجهة برمجة التطبيقات) لنطاق معيّن. تمر بيانات الاعتماد هذه بأمان من خلال وكيل الخروج ولا يتم عرضها مطلقًا مباشرةً كنص عادي داخل بيئة الحماية الخاصة بالوكيل.
 
-Seien Sie immer vorsichtig, wenn Sie Domains auf die Zulassungsliste setzen. Wenn Sie dem Agent Zugriff auf authentifizierte Dienste gewähren, kann er in Ihrem Namen handeln. Wenn Sie das nicht sorgfältig überwachen, kann das zu unbeabsichtigten Aktionen führen.
+يُرجى توخي الحذر دائمًا عند إضافة نطاقات إلى القائمة المسموح بها. إنّ منح الوكيل إمكانية الوصول إلى الخدمات التي تتطلب المصادقة يعني أنّه يمكنه التصرّف نيابةً عنك، ما قد يؤدي إلى إجراءات غير مقصودة إذا لم تتم مراقبته بعناية.
 
-### Best Practices für Anmeldedaten
+### أفضل الممارسات المتعلّقة ببيانات الاعتماد
 
-Wenn für Ihren Workflow eine Authentifizierung des Agenten bei externen Diensten erforderlich ist, sind Sie für die Bereitstellung und den Umfang dieser Anmeldedaten verantwortlich. Befolgen Sie diese Richtlinien, um das Risiko zu verringern:
+إذا كان سير عملك يتطلب من الوكيل المصادقة باستخدام خدمات خارجية، أنت مسؤول عن توفير بيانات الاعتماد هذه وتحديد نطاقها. اتّبِع هذه الإرشادات لتقليل المخاطر:
 
-- **Anmeldedaten mit geringsten Berechtigungen verwenden**:Erstellen Sie Dienstkonten oder API-Schlüssel mit nur den Berechtigungen, die Ihr Agent benötigt. Vermeiden Sie die Übergabe von Anmeldedaten mit umfassendem oder administrativem Zugriff.
-- **Kurzlebige Tokens bevorzugen**:Verwenden Sie nach Möglichkeit zeitlich begrenzte Anmeldedaten oder Tokens, die ablaufen, anstatt langlebiger API-Schlüssel.
-- **Vollzugriff annehmen**:Der Agent kann alle Anmeldedaten verwenden, auf die er Zugriff hat, um die von Ihnen erteilte Aufgabe auszuführen. Geben Sie nur Anmeldedaten an, deren vollständigen Zugriffsbereich Sie gewähren möchten.
-- **Anmeldedaten regelmäßig rotieren**:Behandeln Sie Anmeldedaten, die für den Agenten freigegeben wurden, genauso wie alle anderen programmatischen Anmeldedaten. Rotieren Sie sie regelmäßig.
+- **استخدِم بيانات اعتماد بأقل الامتيازات:** أنشئ حسابات خدمة أو مفاتيح واجهة برمجة تطبيقات لا تتضمّن سوى الأذونات التي يحتاج إليها الوكيل. تجنَّب تمرير بيانات الاعتماد التي تمنح وصولاً واسع النطاق أو وصولاً إداريًا.
+- **استخدِم الرموز المميّزة القصيرة الأجل:** استخدِم بيانات الاعتماد أو الرموز المميّزة التي تنتهي صلاحيتها بعد فترة زمنية محدّدة بدلاً من مفاتيح واجهة برمجة التطبيقات الطويلة الأجل، إذا أمكن ذلك.
+- **افترِض الوصول الكامل:** قد يستخدم الوكيل أي بيانات اعتماد يمكنه الوصول إليها لإكمال المهمة التي أوكلتها إليه. لا تقدّم إلا بيانات الاعتماد التي أنت على استعداد لمنح نطاق الوصول الكامل إليها.
+- **غيِّر بيانات الاعتماد بانتظام:** تعامَل مع بيانات الاعتماد التي تتم مشاركتها مع الوكيل بالطريقة نفسها التي تتعامل بها مع أي بيانات اعتماد برمجية، أي غيِّرها بانتظام.
 
-### Verbindung zu externen Tools und APIs herstellen
+### ربط الأدوات الخارجية وواجهات برمجة التطبيقات
 
-Sie können externe Tools und APIs (z. B. Model Context Protocol-/MCP-Server) verbinden, um die Funktionen des Agenten zu erweitern. Dabei gilt:
+يمكنك ربط الأدوات الخارجية وواجهات برمجة التطبيقات (مثل خوادم بروتوكول سياق النموذج / MCP) لتوسيع إمكانات الوكيل. عند إجراء ذلك:
 
-- Verbinden Sie nur Tools von Quellen, denen Sie vertrauen. Ein böswilliges oder schlecht geschriebenes Tool kann Daten offenlegen oder unbeabsichtigte Aktionen ausführen.
-- Konfigurieren Sie Tools mit den für Ihren Anwendungsfall erforderlichen Mindestberechtigungen. Wenn ein Tool den schreibgeschützten Modus unterstützt, sollten Sie diesen bevorzugen, es sei denn, Schreibvorgänge sind unbedingt erforderlich.
-- Bevor Sie ein Tool mit einer Produktionsdatenquelle verbinden, sollten Sie es mit Beispiel- oder synthetischen Daten testen, um zu prüfen, ob der Agent es wie erwartet verwendet.
+- لا تربط إلا الأدوات من المصادر التي تثق بها. يمكن أن تكشف أداة ضارة أو مكتوبة بشكل سيئ عن البيانات أو تنفّذ إجراءات غير مقصودة.
+- اضبط الأدوات بأقل الأذونات المطلوبة لحالة الاستخدام. إذا كانت الأداة تتيح وضع القراءة فقط، استخدِم هذا الوضع ما لم تكن عمليات الكتابة ضرورية للغاية.
+- قبل ربط أداة بمصدر بيانات الإنتاج، اختبِرها باستخدام بيانات نموذجية أو بيانات اصطناعية للتأكّد من أنّ الوكيل يستخدمها على النحو المتوقّع.
 
-### Menschliche Aufsicht
+### الإشراف البشري
 
-KI-Agenten können mehrstufige Workflows mit einem hohen Maß an Autonomie planen, begründen und ausführen. Das ist zwar leistungsstark, bedeutet aber auch, dass Sie für eine angemessene Aufsicht sorgen müssen, insbesondere bei Aufgaben, die Daten ändern oder mit externen Systemen interagieren.
+يمكن للوكلاء الاستدلال والتخطيط وتنفيذ مهام سير العمل المتعدّدة الخطوات بدرجة عالية من الاستقلالية. على الرغم من أنّ هذه الإمكانية قوية، إلا أنّها تعني أيضًا أنّه عليك تطبيق إشراف مناسب، خاصةً للمهام التي تعدِّل البيانات أو تتفاعل مع الأنظمة الخارجية.
 
-Prüfen Sie immer kritische Ausgaben wie generierten Code, Datentransformationen oder Konfigurationsänderungen, bevor Sie sie bereitstellen.
+تحقَّق دائمًا من النتائج المهمة، مثل الرموز البرمجية التي تم إنشاؤها أو عمليات تحويل البيانات أو تغييرات الإعدادات قبل نشرها.
 
-Feedback geben
+إرسال ملاحظات
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Zuletzt aktualisiert: 2026-08-19 (UTC).
+تاريخ التعديل الأخير: 2026-08-19 (حسب التوقيت العالمي المتفَّق عليه)
 
-Haben Sie Feedback für uns?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-08-19 (UTC)."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-08-19 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

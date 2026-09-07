@@ -1,50 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=it
-fetched_at: 2026-08-31T06:31:41.465598+00:00
-title: "Utilizzo dello strumento con l'API Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=fr
+fetched_at: 2026-09-07T05:35:33.139015+00:00
+title: "Utilisation de l'outil avec l'API\u00a0Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Invia feedback
+Envoyer des commentaires
 
-# Utilizzo dello strumento con l'API Live
+# Utilisation de l'outil avec l'API Live
 
-L'utilizzo degli strumenti consente all'API Live di andare oltre la semplice conversazione, permettendole di
-eseguire azioni nel mondo reale e recuperare il contesto esterno mantenendo
-una connessione in tempo reale.
-Puoi definire strumenti come la [chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it)
-e la [Ricerca Google](https://ai.google.dev/gemini-api/docs/grounding?hl=it) con l'API Live.
+L'utilisation d'outils permet à l'API Live d'aller au-delà de la simple conversation en lui permettant d'effectuer des actions dans le monde réel et d'extraire un contexte externe tout en maintenant une connexion en temps réel.
+Vous pouvez définir des outils tels que [l'appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr)
+et [la recherche Google](https://ai.google.dev/gemini-api/docs/grounding?hl=fr) avec l'API Live.
 
-## Panoramica degli strumenti supportati
+## Présentation des outils compatibles
 
-Ecco una breve panoramica degli strumenti disponibili per i modelli dell'API Live:
+Voici un bref aperçu des outils disponibles pour les modèles d'API Live :
 
-| Strumento | Gemini 3.1 Flash Live Preview | Anteprima live di Gemini 2.5 Flash |
+| Outil | Preview Gemini 3.1 Flash-Live | Preview Gemini 2.5 Flash-Live |
 | --- | --- | --- |
-| **Ricerca** | Supportato | Supportato |
-| **Chiamata di funzione** | Supportato (solo sincrono) | Supportato (sincrono e [asincrono](#async-function-calling)) |
-| **Google Maps** | Non supportato | Non supportato |
-| **Esecuzione di codice** | Non supportato | Non supportato |
-| **Contesto URL** | Non supportato | Non supportato |
+| **Rechercher** | Compatible | Compatible |
+| **Appel de fonction** | Compatible (synchrone uniquement) | Compatible (synchrone et [asynchrone](#async-function-calling)) |
+| **Google Maps** | Non compatible | Non compatible |
+| **Exécution de code** | Non compatible | Non compatible |
+| **Contexte d'URL** | Non compatible | Non compatible |
 
-## Chiamata di funzione
+## Appel de fonction
 
-L'API Live supporta la chiamata di funzioni, proprio come le normali richieste di generazione di contenuti. La chiamata di funzioni consente all'API Live di interagire con dati e programmi esterni, aumentando notevolmente le funzionalità delle tue applicazioni.
+L'API Live est compatible avec l'appel de fonction, tout comme les requêtes de génération de contenu classiques. L'appel de fonction permet à l'API Live d'interagir avec des données et des programmes externes, ce qui augmente considérablement les possibilités de vos applications.
 
-Puoi definire le dichiarazioni di funzioni nell'ambito della configurazione della sessione.
-Dopo aver ricevuto le chiamate di strumenti, il client deve rispondere con un elenco di
-oggetti `FunctionResponse` utilizzando il metodo `session.send_tool_response`.
+Vous pouvez définir des déclarations de fonction dans la configuration de la session.
+Après avoir reçu des appels d'outil, le client doit répondre avec une liste d'objets `FunctionResponse` à l'aide de la méthode `session.send_tool_response`.
 
-Per saperne di più, consulta il [tutorial sulla chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it).
+Pour en savoir
+plus, consultez le [tutoriel sur l'appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr).
 
 ### Python
 
@@ -221,16 +219,13 @@ async function main() {
 main();
 ```
 
-Da un singolo prompt, il modello può generare più chiamate di funzioni e il
-codice necessario per concatenare i relativi output. Questo codice viene eseguito in un ambiente sandbox, generando messaggi [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=it#bidigeneratecontenttoolcall) successivi.
+À partir d'un seul prompt, le modèle peut générer plusieurs appels de fonction et le code nécessaire pour chaîner leurs sorties. Ce code s'exécute dans un environnement de bac à sable, générant par la suite des messages [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=fr#bidigeneratecontenttoolcall).
 
-## Chiamata di funzioni asincrone
+## Appel de fonction asynchrone
 
-Per impostazione predefinita, la chiamata di funzione viene eseguita in sequenza, il che significa che l'esecuzione si interrompe
-finché non sono disponibili i risultati di ogni chiamata di funzione. Ciò garantisce l'elaborazione sequenziale, il che significa che non potrai continuare a interagire con il modello mentre le funzioni sono in esecuzione.
+Par défaut, l'appel de fonction s'exécute de manière séquentielle, ce qui signifie que l'exécution est interrompue jusqu'à ce que les résultats de chaque appel de fonction soient disponibles. Cela garantit un traitement séquentiel, ce qui signifie que vous ne pourrez pas continuer à interagir avec le modèle pendant l'exécution des fonctions.
 
-Se non vuoi bloccare la conversazione, puoi chiedere al modello di eseguire le
-funzioni in modo asincrono. Per farlo, devi prima aggiungere un `behavior` alle definizioni di funzione:
+Si vous ne souhaitez pas bloquer la conversation, vous pouvez demander au modèle d'exécuter les fonctions de manière asynchrone. Pour ce faire, vous devez d'abord ajouter un `behavior` aux définitions de fonction :
 
 ### Python
 
@@ -254,17 +249,15 @@ const turn_off_the_lights = {name: "turn_off_the_lights"}
 const tools = [{ functionDeclarations: [turn_on_the_lights, turn_off_the_lights] }]
 ```
 
-`NON-BLOCKING` garantisce l'esecuzione asincrona della funzione mentre puoi
-continuare a interagire con il modello.
+`NON-BLOCKING` garantit que la fonction s'exécute de manière asynchrone pendant que vous pouvez continuer à interagir avec le modèle.
 
-Poi devi indicare al modello come comportarsi quando riceve il
-`FunctionResponse` utilizzando il parametro `scheduling`. Può:
+Vous devez ensuite indiquer au modèle comment se comporter lorsqu'il reçoit le `FunctionResponse` à l'aide du paramètre `scheduling`. Il peut :
 
-- Interrompere ciò che sta facendo e comunicarti immediatamente la risposta ricevuta
+- interrompre ce qu'il est en train de faire et vous informer immédiatement de la réponse qu'il a reçue
   (`scheduling="INTERRUPT"`),
-- Attendi che termini l'operazione in corso
+- attendre qu'il ait terminé ce qu'il est en train de faire
   (`scheduling="WHEN_IDLE"`),
-- Oppure non fare nulla e utilizzare queste informazioni in un secondo momento nella discussione
+- ou ne rien faire et utiliser ces connaissances plus tard dans la discussion
   (`scheduling="SILENT"`)
 
 ### Python
@@ -297,10 +290,10 @@ const functionResponse = {
 }
 ```
 
-## Grounding con la Ricerca Google
+## Ancrage avec la recherche Google
 
-Puoi attivare il grounding con la Ricerca Google nell'ambito della configurazione della sessione. In questo modo, aumenta l'accuratezza dell'API Live e si evitano
-allucinazioni. Per saperne di più, consulta il [tutorial sulla messa a terra](https://ai.google.dev/gemini-api/docs/grounding?hl=it).
+Vous pouvez activer l'ancrage avec la recherche Google dans la configuration de la session. Cela augmente la précision de l'API Live et évite les hallucinations. Pour en savoir plus, consultez le [tutoriel sur l'ancrage](https://ai.google.dev/gemini-api/docs/grounding?hl=fr) pour
+en savoir plus.
 
 ### Python
 
@@ -459,10 +452,9 @@ async function main() {
 main();
 ```
 
-## Combinare più strumenti
+## Combiner plusieurs outils
 
-Puoi combinare più strumenti all'interno dell'API Live,
-aumentando ulteriormente le funzionalità della tua applicazione:
+Vous pouvez combiner plusieurs outils dans l'API Live, ce qui augmente encore les capacités de votre application :
 
 ### Python
 
@@ -510,19 +502,19 @@ const config = {
 // ... remaining model call
 ```
 
-## Passaggi successivi
+## Étape suivante
 
-- Scopri altri esempi di utilizzo degli strumenti con l'API Live nel
-  [cookbook sull'utilizzo degli strumenti](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=it).
-- Scopri tutti i dettagli su funzionalità e configurazioni nella
-  [guida alle funzionalità delle API live](https://ai.google.dev/gemini-api/docs/live-guide?hl=it).
+- Consultez d'autres exemples d'utilisation d'outils avec l'API Live dans le
+  [guide pratique sur l'utilisation d'outils](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=fr).
+- Pour en savoir plus sur les fonctionnalités et les configurations, consultez le
+  [guide sur les fonctionnalités de l'API Live](https://ai.google.dev/gemini-api/docs/live-guide?hl=fr).
 
-Invia feedback
+Envoyer des commentaires
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Ultimo aggiornamento 2026-06-01 UTC.
+Dernière mise à jour le 2026/09/04 (UTC).
 
-Vuoi dirci altro?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-06-01 UTC."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/04 (UTC)."],[],[]]

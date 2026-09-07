@@ -1,40 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/document-processing?hl=pl
-fetched_at: 2026-08-31T06:37:21.901121+00:00
-title: "rozumienie dokument\u00f3w; \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/document-processing?hl=tr
+fetched_at: 2026-09-07T05:39:24.228395+00:00
+title: "Belge anlama \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Prześlij opinię
+Geri bildirim gönderin
 
-# rozumienie dokumentów;
+# Belge anlama
 
-Modele Gemini mogą przetwarzać dokumenty w formacie PDF, korzystając z natywnego rozpoznawania obrazu, aby zrozumieć cały kontekst dokumentu. To coś więcej niż tylko wyodrębnianie tekstu. Gemini może:
+Gemini modelleri, doküman bağlamlarının tamamını anlamak için yerel görsel işleme özelliğini kullanarak PDF biçimindeki dokümanları işleyebilir. Bu, yalnızca metin ayıklamadan daha fazlasını sunar. Gemini bu sayede:
 
-- analizować i interpretować treści, w tym tekst, obrazy, diagramy, wykresy i tabele, nawet w długich dokumentach do 1000 stron;
-- wyodrębniać informacje do [ustrukturyzowanych formatów wyjściowych](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl);
-- podsumowywać dokumenty i odpowiadać na pytania na podstawie elementów wizualnych i tekstowych w dokumencie;
-- transkrybować zawartość dokumentu (np. do formatu HTML), zachowując układ i formatowanie, do wykorzystania w aplikacjach podrzędnych.
+- Metin, resim, diyagram, grafik ve tablo gibi içerikleri 1.000 sayfaya kadar olan uzun dokümanlarda bile analiz edip yorumlayın.
+- Bilgileri [yapılandırılmış çıkış](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr) biçimlerinde ayıklayın.
+- Bir belgedeki hem görsel hem de metin öğelerini temel alarak özetleme ve soru yanıtlama
+- Aşağı akış uygulamalarında kullanılmak üzere düzenleri ve biçimlendirmeyi koruyarak doküman içeriğini (ör. HTML'ye) transkribe edin.
 
-W ten sam sposób możesz też przekazywać dokumenty w innych formatach niż PDF, ale Gemini będzie je traktować jako zwykły tekst, co spowoduje utratę kontekstu, np. wykresów czy formatowania.
+PDF olmayan dokümanları da aynı şekilde iletebilirsiniz ancak Gemini bunları normal metin olarak görür. Bu durumda grafikler veya biçimlendirme gibi bağlamlar ortadan kalkar.
 
-## Przekazywanie danych PDF w tekście
+## PDF verilerini satır içi olarak iletme
 
-Dane PDF możesz przekazywać w tekście żądania. Jest to najlepsze rozwiązanie w przypadku mniejszych dokumentów lub przetwarzania tymczasowego, gdy nie musisz odwoływać się do pliku w kolejnych żądaniach. W przypadku większych dokumentów, do których musisz się odwoływać w interakcjach wieloetapowych, zalecamy korzystanie z
-[interfejsu Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=pl#large-pdfs)
-, aby
-skrócić czas oczekiwania na odpowiedź i zmniejszyć zużycie przepustowości.
+PDF verilerini istekte satır içi olarak iletebilirsiniz. Bu yöntem, daha küçük belgeler veya dosyaya sonraki isteklerde başvurmanız gerekmeyen geçici işlemler için en uygun yöntemdir. İstek gecikmesini iyileştirmek ve bant genişliği kullanımını azaltmak için çok aşamalı etkileşimlerde başvurmanız gereken daha büyük belgeler için [Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=tr#large-pdfs)'yi kullanmanızı öneririz.
 
-Z tego przykładu dowiesz się, jak przekazywać dane PDF w tekście:
+Aşağıdaki örnekte, PDF verilerinin satır içi olarak nasıl iletileceği gösterilmektedir:
 
 ### Python
 
@@ -119,7 +116,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Możesz też przesłać lokalny plik PDF do przetworzenia:
+İşleme için yerel bir PDF dosyası da yükleyebilirsiniz:
 
 ### Python
 
@@ -221,13 +218,13 @@ echo
 jq -r ".steps[-1].content[0].text" response.json
 ```
 
-## Przesyłanie plików PDF za pomocą interfejsu Files API
+## Files API'yi kullanarak PDF yükleme
 
-W przypadku większych plików lub gdy chcesz użyć dokumentu w wielu żądaniach, zalecamy korzystanie z interfejsu Files API. Pozwala to skrócić czas oczekiwania na odpowiedź i zmniejszyć zużycie przepustowości, ponieważ przesyłanie plików jest oddzielone od żądań do modelu.
+Daha büyük dosyalar için veya bir belgeyi birden fazla istekte yeniden kullanmak istediğinizde Files API'yi kullanmanızı öneririz. Bu sayede, dosya yükleme işlemi model isteklerinden ayrılır ve istek gecikmesi iyileşirken bant genişliği kullanımı azalır.
 
-### Duże pliki PDF z adresów URL
+### URL'lerden alınan büyük PDF'ler
 
-Użyj interfejsu File API, aby uprościć przesyłanie i przetwarzanie dużych plików PDF z adresów URL:
+URL'lerden büyük PDF dosyalarını yükleme ve işleme sürecini basitleştirmek için File API'yi kullanın:
 
 ### Python
 
@@ -380,7 +377,7 @@ rm "${DISPLAY_NAME}.pdf"
 rm payload.json
 ```
 
-### Duże pliki PDF przechowywane lokalnie
+### Yerel olarak depolanan büyük PDF'ler
 
 ### Python
 
@@ -500,8 +497,8 @@ echo
 jq -r ".steps[-1].content[0].text" response.json
 ```
 
-Możesz sprawdzić, czy interfejs API prawidłowo zapisał przesłany plik, i pobrać jego
-metadane, wywołując [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=pl). Unikalne są tylko `name` (a co za tym idzie, `uri`).
+[`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=tr) işlevini çağırarak API'nin yüklenen dosyayı başarıyla sakladığını doğrulayabilir ve dosyanın meta verilerini alabilirsiniz. Yalnızca `name`
+(ve dolayısıyla `uri`) benzersizdir.
 
 ### Python
 
@@ -556,9 +553,9 @@ file_uri=$(jq -r ".uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## Przekazywanie wielu plików PDF
+## Birden fazla PDF'yi iletme
 
-Interfejs Gemini API może przetwarzać wiele dokumentów PDF (do 1000 stron) w jednym żądaniu, o ile łączny rozmiar dokumentów i prompta tekstowego mieści się w oknie kontekstu modelu.
+Gemini API, dokümanların ve metin isteminin toplam boyutu modelin bağlam penceresi içinde kaldığı sürece tek bir istekte birden fazla PDF dokümanını (1.000 sayfaya kadar) işleyebilir.
 
 ### Python
 
@@ -749,56 +746,51 @@ rm "file_info_${DISPLAY_NAME_1}.json"
 rm "file_info_${DISPLAY_NAME_2}.json"
 ```
 
-## Szczegóły techniczne
+## Teknik ayrıntılar
 
-Gemini obsługuje pliki PDF o rozmiarze do 50 MB lub 1000 stron. Ten limit dotyczy zarówno danych w tekście, jak i przesyłania za pomocą interfejsu Files API. Każda strona dokumentu odpowiada 258 tokenom.
+Gemini, 50 MB veya 1.000 sayfaya kadar olan PDF dosyalarını destekler. Bu sınır hem satır içi veriler hem de Files API yüklemeleri için geçerlidir. Her belge sayfası 258 jetona karşılık gelir.
 
-Oprócz
-okna [kontekstu](https://ai.google.dev/gemini-api/docs/long-context?hl=pl) modelu nie ma konkretnych limitów liczby pikseli w dokumencie. Większe strony są
-zmniejszane do maksymalnej rozdzielczości 3072 x 3072 pikseli przy zachowaniu oryginalnych
-proporcji, a mniejsze strony są powiększane do 768 x 768 pikseli. Nie ma obniżki kosztów w przypadku stron o mniejszym rozmiarze (oprócz przepustowości) ani wzrostu wydajności w przypadku stron o wyższej rozdzielczości.
+Modelin [bağlam penceresi](https://ai.google.dev/gemini-api/docs/long-context?hl=tr) dışında bir dokümandaki piksel sayısıyla ilgili belirli bir sınır olmasa da daha büyük sayfalar, orijinal en boy oranları korunarak maksimum 3072 x 3072 çözünürlüğe ölçeklendirilirken daha küçük sayfalar 768 x 768 piksele ölçeklendirilir. Daha küçük boyutlu sayfalar için bant genişliği dışında maliyet düşüşü veya daha yüksek çözünürlüklü sayfalar için performans artışı olmaz.
 
-### Modele Gemini 3
+### Gemini 3 modelleri
 
-W Gemini 3 wprowadzono szczegółową kontrolę nad przetwarzaniem multimodalnym za pomocą parametru `media_resolution`. Teraz możesz ustawić rozdzielczość na niską, średnią lub wysoką dla każdej części multimedialnej. W związku z tym zaktualizowano przetwarzanie dokumentów PDF:
+Gemini 3, `media_resolution` parametresiyle çok formatlı görüntü işleme üzerinde ayrıntılı kontrol sunar. Artık çözünürlüğü her bir medya parçası için ayrı ayrı düşük, orta veya yüksek olarak ayarlayabilirsiniz. Bu eklemeyle birlikte PDF belgelerinin işlenmesi güncellendi:
 
-1. **Natywne uwzględnianie tekstu:** tekst natywnie osadzony w pliku PDF jest wyodrębniany i przekazywany do modelu.
-2. **Rozliczenia i raportowanie tokenów:**
-   - **Nie naliczamy opłat** za tokeny pochodzące z wyodrębnionego **tekstu natywnego** w plikach PDF.
-   - W sekcji `usage_metadata` odpowiedzi interfejsu API tokeny wygenerowane na podstawie przetwarzania stron PDF (jako obrazów) są teraz zliczane w ramach modalności `IMAGE`, a nie w osobnej modalności `DOCUMENT`, jak w niektórych wcześniejszych wersjach.
+1. **Doğal metin ekleme:** PDF'ye doğal olarak yerleştirilmiş metin çıkarılır ve modele sağlanır.
+2. **Faturalandırma ve jeton raporlama:**
+   - PDF'lerdeki çıkarılan **yerel metinden** kaynaklanan jetonlar için **ücretlendirilmezsiniz**.
+   - API yanıtının `usage_metadata` bölümünde, PDF sayfalarının (resim olarak) işlenmesiyle oluşturulan jetonlar artık `IMAGE` biçimi altında sayılıyor. Bazı önceki sürümlerde olduğu gibi ayrı bir `DOCUMENT` biçimi altında sayılmıyor.
 
-Więcej informacji o parametrze rozdzielczości multimediów znajdziesz w
-[przewodniku po rozdzielczości multimediów](https://ai.google.dev/gemini-api/docs/interactions/media-resolution?hl=pl).
+Medya çözünürlüğü parametresi hakkında daha fazla bilgi için [Medya çözünürlüğü](https://ai.google.dev/gemini-api/docs/interactions/media-resolution?hl=tr) kılavuzuna bakın.
 
-### Typy dokumentów
+### Belge türleri
 
-Technicznie możesz przekazywać inne typy MIME do rozpoznawania dokumentów, takie jak TXT, Markdown, HTML, XML itp. Jednak rozpoznawanie dokumentów ***rozumie tylko pliki PDF***. Inne typy będą wyodrębniane jako czysty tekst, a model nie będzie w stanie zinterpretować tego, co widzimy w renderowaniu tych plików. Utracone zostaną wszelkie szczegóły dotyczące typu pliku, takie jak wykresy, diagramy, tagi HTML, formatowanie Markdown itp.
+Teknik olarak, doküman anlama için TXT, Markdown, HTML, XML gibi diğer MIME türlerini iletebilirsiniz. Ancak dokümanla ilgili görsel algılama ***yalnızca PDF'leri anlamlı bir şekilde anlar***. Diğer türler düz metin olarak ayıklanır ve model, bu dosyaların oluşturulmasında gördüklerimizi yorumlayamaz. Grafikler, diyagramlar, HTML etiketleri, Markdown biçimlendirmesi vb. gibi dosya türüne özgü tüm özellikler kaybolur.
 
-Więcej informacji o innych metodach wprowadzania plików znajdziesz w
-[przewodniku po metodach wprowadzania plików](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=pl).
+Diğer dosya giriş yöntemleri hakkında bilgi edinmek için [Dosya giriş yöntemleri](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=tr) kılavuzuna bakın.
 
-### Sprawdzone metody
+### En iyi uygulamalar
 
-Aby uzyskać najlepsze wyniki:
+En iyi sonuçlar için:
 
-- Przed przesłaniem obróć strony do prawidłowej orientacji.
-- Unikaj rozmazanych stron.
-- Jeśli używasz jednej strony, umieść prompta tekstowego za stroną.
+- Yüklemeden önce sayfaları doğru yöne döndürün.
+- Bulanık sayfalardan kaçının.
+- Tek sayfa kullanıyorsanız metin istemini sayfanın sonuna yerleştirin.
 
-## Co dalej?
+## Sırada ne var?
 
-Więcej informacji znajdziesz w tych materiałach:
+Daha fazla bilgi edinmek için aşağıdaki kaynakları inceleyin:
 
-- [Strategie tworzenia promptów z plików](https://ai.google.dev/gemini-api/docs/files?hl=pl#prompt-guide): interfejs Gemini API obsługuje tworzenie promptów za pomocą danych tekstowych, graficznych, dźwiękowych i wideo, czyli tworzenie promptów multimodalnych.
-- [Instrukcje systemowe](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl#system-instructions):
-  Instrukcje systemowe pozwalają sterować zachowaniem modelu na podstawie konkretnych potrzeb i przypadków użycia.
+- [Dosya istemi stratejileri](https://ai.google.dev/gemini-api/docs/files?hl=tr#prompt-guide): Gemini API, çok formatlı istem olarak da bilinen metin, resim, ses ve video verileriyle istem oluşturmayı destekler.
+- [Sistem talimatları](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr#system-instructions):
+  Sistem talimatları, modelin davranışını özel ihtiyaçlarınıza ve kullanım alanlarınıza göre yönlendirmenizi sağlar.
 
-Prześlij opinię
+Geri bildirim gönderin
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Ostatnia aktualizacja: 2026-07-30 UTC.
+Son güncelleme tarihi: 2026-07-30 UTC.
 
-Chcesz przekazać coś jeszcze?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]

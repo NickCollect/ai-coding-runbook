@@ -1,113 +1,143 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/safety-guidance?hl=zh-CN
-fetched_at: 2026-08-31T06:36:41.659566+00:00
-title: "\u5b89\u5168\u6027\u548c\u4e8b\u5b9e\u6027\u6307\u5357 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/safety-guidance?hl=vi
+fetched_at: 2026-09-07T05:42:19.517390+00:00
+title: "H\u01b0\u1edbng d\u1eabn v\u1ec1 \u0111\u1ed9 an to\u00e0n v\u00e0 t\u00ednh x\u00e1c th\u1ef1c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-发送反馈
+Gửi ý kiến phản hồi
 
-# 安全性和事实性指南
+# Hướng dẫn về độ an toàn và tính xác thực
 
-生成式人工智能模型是一种强大的工具，但并非没有局限性。它们的多功能性和适用性有时会导致意外的输出结果，例如不准确、有偏见或冒犯性的输出结果。后处理和严格的人工评估对于限制此类输出结果造成的危害风险至关重要。
+Các mô hình trí tuệ nhân tạo tạo sinh là những công cụ mạnh mẽ, nhưng vẫn tồn tại một số hạn chế. Tính linh hoạt và khả năng áp dụng của các mô hình này đôi khi có thể dẫn đến kết quả không mong muốn, chẳng hạn như kết quả không chính xác, thiên vị hoặc phản cảm. Việc xử lý hậu kỳ và đánh giá thủ công nghiêm ngặt là điều cần thiết để hạn chế nguy cơ gây hại từ những kết quả như vậy.
 
-Gemini API 提供的模型可用于各种生成式 AI 和自然语言处理 (NLP) 应用。这些功能只能通过 Gemini API 或 Google AI Studio Web 应用使用。使用 Gemini API 时还须遵守[《生成式 AI 使用限制政策》](https://policies.google.com/terms/generative-ai/use-policy?hl=zh-cn)和[《Gemini API 服务条款》](https://ai.google.dev/terms?hl=zh-cn)。
+Bạn có thể sử dụng các mô hình do Gemini API cung cấp cho nhiều ứng dụng AI tạo sinh và xử lý ngôn ngữ tự nhiên (NLP). Bạn chỉ có thể sử dụng các
+hàm này thông qua Gemini API hoặc ứng dụng web Google AI Studio. Việc bạn sử dụng Gemini API cũng phải tuân thủ [Chính sách về các hành vi bị cấm khi sử dụng AI tạo sinh
+Policy](https://policies.google.com/terms/generative-ai/use-policy?hl=vi) và các
+[điều khoản dịch vụ của Gemini API](https://ai.google.dev/terms?hl=vi).
 
-大语言模型 (LLM) 之所以如此实用，部分原因在于它们是创意工具，可以处理许多不同的语言任务。遗憾的是，这也意味着大语言模型可能会生成意料之外的输出，包括令人反感、不顾他人感受或事实上不正确的文本。更重要的是，这些模型用途广泛，但也正因如此，我们很难准确预测它们可能会生成哪些不良输出。虽然 Gemini API 在设计时考虑到了 [Google 的 AI 原则](https://ai.google/principles/?hl=zh-cn)，但开发者有责任以负责任的方式应用这些模型。为了帮助开发者创建安全可靠的应用，Gemini API 内置了内容过滤功能，并提供了 4 个方面的可调节安全设置。如需了解详情，请参阅[安全设置](https://ai.google.dev/gemini-api/docs/safety-settings?hl=zh-cn)指南。此外，它还提供启用了 Google 搜索的 Grounding 功能，以提高事实准确性，不过对于用例更具创意性而非信息搜索性的开发者，可以停用此功能。
+Một trong những yếu tố khiến các mô hình ngôn ngữ lớn (LLM) trở nên hữu ích là vì đây là những công cụ sáng tạo có thể giải quyết nhiều tác vụ ngôn ngữ khác nhau. Rất tiếc, điều này cũng có nghĩa là các mô hình ngôn ngữ lớn có thể tạo ra kết quả mà bạn không mong muốn, bao gồm cả văn bản phản cảm, vô tâm hoặc không chính xác về mặt thực tế.
+Hơn nữa, tính linh hoạt đáng kinh ngạc của các mô hình này cũng là yếu tố khiến bạn khó dự đoán chính xác loại kết quả không mong muốn mà các mô hình này có thể tạo ra. Mặc dù
+Gemini API được thiết kế dựa trên [các nguyên tắc AI
+của Google](https://ai.google/principles/?hl=vi), nhưng nhà phát triển phải có trách nhiệm
+áp dụng các mô hình này. Để hỗ trợ nhà phát triển tạo các ứng dụng an toàn và có trách nhiệm, Gemini API có một số tính năng lọc nội dung tích hợp cũng như các chế độ cài đặt an toàn có thể điều chỉnh trên 4 phương diện gây hại. Hãy tham khảo hướng dẫn về
+[chế độ cài đặt an toàn](https://ai.google.dev/gemini-api/docs/safety-settings?hl=vi) để tìm hiểu thêm. API này cũng cung cấp tính năng Bám sát nguồn bằng Google Tìm kiếm để cải thiện tính chính xác về mặt thực tế, mặc dù tính năng này có thể bị tắt đối với những nhà phát triển có trường hợp sử dụng sáng tạo hơn và không tìm kiếm thông tin.
 
-本文档旨在向您介绍使用 LLM 时可能会出现的一些安全风险，并推荐新兴的安全设计和开发建议。（请注意，法律法规也可能会施加限制，但此类考虑因素不在本指南的讨论范围内。）
+Tài liệu này nhằm giới thiệu cho bạn một số rủi ro về an toàn có thể phát sinh khi sử dụng LLM và đề xuất các phương pháp thiết kế và phát triển an toàn mới. (Xin lưu ý rằng luật và quy định cũng có thể áp đặt các hạn chế, nhưng những vấn đề này nằm ngoài phạm vi của hướng dẫn này.)
 
-建议在构建基于 LLM 的应用时遵循以下步骤：
+Bạn nên làm theo các bước sau khi xây dựng ứng dụng bằng LLM:
 
-- 了解应用的安全风险
-- 考虑进行调整，以降低安全风险
-- 执行适合您应用场景的安全测试
-- 征求用户反馈和监控使用情况
+- Tìm hiểu các rủi ro về an toàn của ứng dụng
+- Cân nhắc điều chỉnh để giảm thiểu rủi ro về an toàn
+- Thực hiện kiểm thử an toàn phù hợp với trường hợp sử dụng của bạn
+- Yêu cầu người dùng gửi ý kiến phản hồi và theo dõi mức sử dụng
 
-调整和测试阶段应反复进行，直到达到适合应用的性能。
+Bạn nên lặp lại các giai đoạn điều chỉnh và kiểm thử cho đến khi đạt được hiệu suất phù hợp với ứng dụng của mình.
 
-![模型实施周期](https://ai.google.dev/static/gemini-api/docs/images/safety_diagram.png?hl=zh-cn)
+![Chu kỳ triển khai mô hình](https://ai.google.dev/static/gemini-api/docs/images/safety_diagram.png?hl=vi)
 
-## 了解应用的安全风险
+## Tìm hiểu các rủi ro về an toàn của ứng dụng
 
-在此背景下，安全性是指 LLM 避免对用户造成伤害的能力，例如避免生成有害的语言或宣扬刻板印象的内容。通过 Gemini API 提供的模型在设计时考虑了 [Google 的 AI 原则](https://ai.google/principles/?hl=zh-cn)，并且您对这些模型的使用受[生成式 AI 禁止的使用政策](https://policies.google.com/terms/generative-ai/use-policy?hl=zh-cn)的约束。该 API 提供内置的安全过滤条件，可帮助解决一些常见的语言模型问题，例如有害的语言和仇恨言论，并努力实现包容性并避免刻板印象。不过，每款应用都可能会给用户带来不同的风险。因此，作为应用所有者，您有责任了解您的用户以及您的应用可能造成的潜在危害，并确保您的应用以安全且负责任的方式使用 LLM。
+Trong bối cảnh này, an toàn được định nghĩa là khả năng của LLM trong việc tránh gây hại cho người dùng, chẳng hạn như bằng cách tạo ngôn ngữ độc hại hoặc nội dung thúc đẩy các khuôn mẫu. Các mô hình có sẵn thông qua Gemini API đã được thiết kế dựa trên [Nguyên tắc về trí tuệ nhân tạo của Google](https://ai.google/principles/?hl=vi) và việc bạn sử dụng các mô hình này phải tuân thủ [Chính sách về các hành vi bị cấm khi sử dụng AI tạo sinh](https://policies.google.com/terms/generative-ai/use-policy?hl=vi). API này cung cấp các bộ lọc an toàn tích hợp để giúp giải quyết một số vấn đề thường gặp về mô hình ngôn ngữ, chẳng hạn như ngôn ngữ độc hại và lời nói hận thù, đồng thời nỗ lực hướng đến sự đa dạng và tránh các khuôn mẫu. Tuy nhiên, mỗi ứng dụng có thể gây ra một tập hợp rủi ro khác nhau cho người dùng. Vì vậy, với tư cách là chủ sở hữu ứng dụng, bạn có trách nhiệm biết rõ người dùng và những tác hại tiềm ẩn mà ứng dụng của bạn có thể gây ra, đồng thời đảm bảo rằng ứng dụng của bạn sử dụng LLM một cách an toàn và có trách nhiệm.
 
-在进行此评估时，您应考虑可能发生的危害，并确定其严重程度和缓解措施。例如，与生成虚构故事以供娱乐的应用相比，基于事实事件生成文章的应用需要更加谨慎地避免虚假信息。探索潜在安全风险的一个好方法是研究您的最终用户以及可能受到应用结果影响的其他人员。这可以采取多种形式，包括研究应用领域中的前沿研究、观察人们如何使用类似应用，或者进行用户调研、调查问卷或与潜在用户进行非正式访谈。
+Trong quá trình đánh giá này, bạn nên cân nhắc khả năng gây hại và xác định mức độ nghiêm trọng cũng như các bước giảm thiểu. Ví dụ: một ứng dụng tạo bài luận dựa trên các sự kiện thực tế sẽ cần phải cẩn thận hơn trong việc tránh thông tin sai lệch so với một ứng dụng tạo câu chuyện hư cấu để giải trí. Một cách hay để bắt đầu khám phá các rủi ro tiềm ẩn về an toàn là nghiên cứu người dùng cuối và những người khác có thể bị ảnh hưởng bởi kết quả của ứng dụng. Bạn có thể thực hiện việc này theo nhiều cách, bao gồm nghiên cứu các nghiên cứu hiện đại trong miền ứng dụng của bạn, quan sát cách mọi người sử dụng các ứng dụng tương tự hoặc chạy một nghiên cứu về người dùng, khảo sát hoặc tiến hành phỏng vấn không chính thức với người dùng tiềm năng.
 
-### 高级提示
+### Mẹo nâng cao
 
-- 与目标人群中不同类型的潜在用户交流，了解他们对您的应用及其预期用途的看法，以便更全面地了解潜在风险，并根据需要调整多样性标准。
-- 美国政府国家标准与技术研究院 (NIST) 发布的 [AI 风险管理框架](https://www.nist.gov/itl/ai-risk-management-framework)为 AI 风险管理提供了更详细的指南和更多学习资源。
-- DeepMind 发布的关于[语言模型造成伤害的伦理和社会风险](https://arxiv.org/abs/2112.04359)的出版物详细介绍了语言模型应用可能造成伤害的方式。
+- Trao đổi với nhiều người dùng tiềm năng trong nhóm đối tượng mục tiêu về ứng dụng và mục đích dự kiến của ứng dụng để có cái nhìn rộng hơn về các rủi ro tiềm ẩn và điều chỉnh tiêu chí đa dạng khi cần.
+- Khung quản lý rủi ro về [AI](https://www.nist.gov/itl/ai-risk-management-framework)
+  do Viện Tiêu chuẩn và Công nghệ Quốc gia (NIST) của chính phủ Hoa Kỳ phát hành cung cấp hướng dẫn chi tiết hơn và các tài nguyên học tập bổ sung về quản lý rủi ro về AI.
+- Ấn phẩm của DeepMind về các
+  [rủi ro đạo đức và xã hội về tác hại từ các mô hình ngôn ngữ](https://arxiv.org/abs/2112.04359)
+  mô tả chi tiết những cách mà các ứng dụng mô hình ngôn ngữ
+  có thể gây hại.
 
-## 考虑进行调整，以降低安全性和事实性风险
+## Cân nhắc điều chỉnh để giảm thiểu rủi ro về an toàn và tính chính xác về mặt thực tế
 
-现在，您已经了解了风险，可以决定如何缓解这些风险。确定要优先处理哪些风险以及应采取哪些措施来尽可能避免这些风险是一项关键决策，类似于对软件项目中的 bug 进行分级。确定优先级后，您可以开始考虑最合适的缓解措施类型。通常，简单的更改就能带来显著效果并降低风险。
+Giờ đây, khi đã hiểu rõ các rủi ro, bạn có thể quyết định cách giảm thiểu các rủi ro đó. Việc xác định những rủi ro cần ưu tiên và mức độ cần thiết để cố gắng ngăn chặn các rủi ro đó là một quyết định quan trọng, tương tự như việc phân loại lỗi trong một dự án phần mềm. Sau khi xác định các ưu tiên, bạn có thể bắt đầu suy nghĩ về các loại biện pháp giảm thiểu phù hợp nhất. Thông thường, những thay đổi đơn giản có thể tạo ra sự khác biệt và giảm thiểu rủi ro.
 
-例如，在设计应用时，请考虑以下事项：
+Ví dụ: khi thiết kế một ứng dụng, hãy cân nhắc:
 
-- **调整模型输出**，使其更好地反映应用上下文中的可接受内容。通过调整，可以使模型的输出更具可预测性和一致性，从而有助于降低某些风险。
-- **提供有助于生成更安全输出的输入方法。**您向 LLM 提供的确切输入内容可能会影响输出质量。尝试使用不同的输入提示，找到在您的使用情形下最安全的输入提示，这非常值得，因为这样一来，您就可以提供有助于生成更安全输出的 UX。例如，您可以限制用户只能从下拉列表中选择输入提示，或者提供包含描述性短语的弹出式建议，这些短语在您的应用上下文中表现安全。
-- **在向用户显示输出内容之前，阻止不安全的输入并过滤输出内容。**在简单的情况下，可以使用屏蔽名单来识别和屏蔽提示或回答中的不安全字词或短语，或者要求人工审核员手动更改或屏蔽此类内容。
-- **使用经过训练的分类器，逐一标记可能包含潜在危害或对抗性信号的提示。**然后，您可以根据检测到的危害类型应用不同的策略来处理请求。例如，如果输入具有明显的对抗性或辱骂性，系统可能会屏蔽该输入，而是输出预编写的回答。
-  **高级提示**：如果信号确定输出有害，应用可以采用以下选项：
+- **Tinh chỉnh đầu ra của mô hình** để phản ánh rõ hơn những gì có thể chấp nhận được trong bối cảnh ứng dụng của bạn. Việc tinh chỉnh có thể giúp kết quả của mô hình trở nên dễ dự đoán và nhất quán hơn, từ đó có thể giúp giảm thiểu một số rủi ro.
+- **Cung cấp phương thức nhập giúp tạo ra kết quả an toàn hơn.** Chính xác nội dung bạn nhập vào LLM có thể tạo ra sự khác biệt về chất lượng của kết quả.
+  Việc thử nghiệm các câu lệnh nhập để tìm ra câu lệnh hoạt động an toàn nhất trong trường hợp sử dụng của bạn là điều đáng làm, vì sau đó bạn có thể cung cấp trải nghiệm người dùng giúp tạo điều kiện cho việc này. Ví dụ: bạn có thể hạn chế người dùng chỉ chọn từ danh sách thả xuống các câu lệnh nhập hoặc đưa ra các đề xuất bật lên bằng các cụm từ mô tả mà bạn nhận thấy hoạt động an toàn trong bối cảnh ứng dụng của bạn.
+- **Chặn các nội dung nhập không an toàn và lọc kết quả trước khi hiển thị cho người dùng.** Trong các tình huống đơn giản, bạn có thể sử dụng danh sách chặn để xác định và chặn các từ hoặc cụm từ không an toàn trong câu lệnh hoặc câu trả lời, hoặc yêu cầu nhân viên đánh giá thủ công sửa đổi hoặc chặn nội dung đó.
+- **Sử dụng các bộ phân loại đã được huấn luyện để gắn nhãn cho từng câu lệnh bằng các tác hại tiềm ẩn hoặc tín hiệu đối nghịch.** Sau đó, bạn có thể áp dụng các chiến lược khác nhau về cách xử lý yêu cầu dựa trên loại tác hại được phát hiện. Ví dụ: Nếu nội dung nhập có bản chất đối nghịch hoặc lạm dụng một cách rõ ràng, thì nội dung đó có thể bị chặn và thay vào đó là đưa ra câu trả lời được viết sẵn.
+  **Mẹo nâng cao:** Nếu tín hiệu xác định kết quả là gây hại, thì ứng dụng có thể sử dụng các lựa chọn sau:
 
-  - 提供错误消息或预编写的输出内容。
-  - 再次尝试该提示，看看是否会生成其他安全输出，因为有时同一提示会生成不同的输出。
-- **采取防范蓄意滥用的措施**，例如为每位用户分配唯一 ID，并限制用户在给定时间段内可提交的查询量。另一项保护措施是尝试防范可能的提示注入。提示注入与 SQL 注入非常相似，是一种恶意用户设计输入提示来操纵模型输出的方式，例如，通过发送指示模型忽略任何先前示例的输入提示。如需详细了解蓄意滥用，请参阅[生成式 AI 禁用的使用政策](https://policies.google.com/terms/generative-ai/use-policy?hl=zh-cn)。
-- **将功能调整为风险较低的类型。**范围较窄的任务（例如，从文本段落中提取关键字）或需要更多人工监督的任务（例如，生成将由人工审核的短内容）通常风险较低。因此，举例来说，您可以将应用的功能限制为扩展大纲或建议替代措辞，而不是从头开始编写电子邮件回复。
-- **调整有害内容安全设置，以降低看到可能有害的回答的可能性。**Gemini API 提供了安全设置，您可以在原型设计阶段进行调整，以确定您的应用需要更严格还是更宽松的安全配置。您可以在五个过滤条件类别中调整这些设置，以限制或允许某些类型的内容。请参阅[安全设置指南](https://ai.google.dev/gemini-api/docs/safety-settings?hl=zh-cn)，了解可通过 Gemini API 调整的安全设置。
-- **启用“依托 Google 搜索进行接地”功能，可减少潜在的事实不准确或幻觉问题**。请注意，许多 AI 模型仍处于实验阶段，可能会提供不准确的事实信息、产生幻觉或以其他方式生成有问题的内容。“依托 Google 搜索进行接地”功能可将 Gemini 模型与实时 Web 内容连接起来，并支持所有可用语言。这让 Gemini 能够提供更准确的回答，并引用模型知识截点之外的可验证来源。
+  - Đưa ra thông báo lỗi hoặc kết quả được viết sẵn.
+  - Thử lại câu lệnh, trong trường hợp kết quả an toàn thay thế được tạo, vì đôi khi cùng một câu lệnh sẽ tạo ra các kết quả khác nhau.
+- **Áp dụng các biện pháp bảo vệ chống lại hành vi cố ý sử dụng sai** chẳng hạn như chỉ định cho mỗi người dùng một mã nhận dạng duy nhất và áp đặt giới hạn về số lượng truy vấn của người dùng có thể gửi trong một khoảng thời gian nhất định. Một biện pháp bảo vệ khác là cố gắng bảo vệ chống lại việc tiêm câu lệnh (prompt injection) có thể xảy ra. Việc tiêm câu lệnh (prompt injection), giống như việc chèn SQL, là cách để người dùng độc hại thiết kế một câu lệnh nhập giúp thao túng kết quả của mô hình, chẳng hạn như bằng cách gửi một câu lệnh nhập hướng dẫn mô hình bỏ qua mọi ví dụ trước đó. Hãy xem
+  [Chính sách về các hành vi bị cấm khi sử dụng AI tạo sinh](https://policies.google.com/terms/generative-ai/use-policy?hl=vi)
+  để biết thông tin chi tiết về hành vi cố ý sử dụng sai.
+- **Điều chỉnh chức năng thành chức năng vốn có rủi ro thấp hơn.**
+  Các tác vụ có phạm vi hẹp hơn (ví dụ: trích xuất từ khoá từ các đoạn văn bản) hoặc có sự giám sát chặt chẽ hơn của con người (ví dụ: tạo nội dung dạng ngắn sẽ được con người xem xét) thường có rủi ro thấp hơn. Vì vậy, chẳng hạn, thay vì tạo một ứng dụng để viết câu trả lời email từ đầu, bạn có thể giới hạn ứng dụng này chỉ mở rộng trên một dàn ý hoặc đề xuất các cách diễn đạt thay thế.
+- **Điều chỉnh chế độ cài đặt an toàn cho nội dung gây hại để giảm khả năng bạn thấy các câu trả lời có thể gây hại.** Gemini API cung cấp các chế độ cài đặt an toàn mà bạn có thể điều chỉnh trong giai đoạn tạo mẫu để xác định xem ứng dụng của bạn có yêu cầu cấu hình an toàn hạn chế hơn hay ít hạn chế hơn. Bạn có thể điều chỉnh các chế độ cài đặt này trên 5 danh mục bộ lọc để hạn chế hoặc cho phép một số loại nội dung. Hãy tham khảo [hướng dẫn về chế độ cài đặt an toàn](https://ai.google.dev/gemini-api/docs/safety-settings?hl=vi) để tìm hiểu về
+  các chế độ cài đặt an toàn có thể điều chỉnh thông qua Gemini API.
+- **Giảm các điểm không chính xác về mặt thực tế hoặc ảo giác tiềm ẩn bằng cách bật tính năng Bám sát nguồn bằng Google Tìm kiếm**. Hãy nhớ rằng nhiều mô hình AI đang ở giai đoạn thử nghiệm và có thể đưa ra thông tin không chính xác về mặt thực tế, ảo giác hoặc tạo ra các kết quả có vấn đề khác. Tính năng Bám sát nguồn bằng Google Tìm kiếm kết nối mô hình Gemini với nội dung trên web theo thời gian thực và hỗ trợ tất cả các ngôn ngữ hiện có. Nhờ đó, Gemini có thể đưa ra câu trả lời chính xác hơn và trích dẫn các nguồn có thể xác minh ngoài điểm cắt kiến thức của mô hình.
 
-## 执行适合您应用场景的安全测试
+## Thực hiện kiểm thử an toàn phù hợp với trường hợp sử dụng của bạn
 
-测试是构建稳健安全的应用的关键环节，但测试的范围、规模和策略会有所不同。例如，仅供娱乐的俳句生成器可能比律师事务所用来总结法律文件和帮助起草合同的应用风险更低。但俳句生成器的用户群体可能更广泛，这意味着发生对抗性尝试甚至意外有害输入的可能性更大。实现背景也很重要。例如，如果应用在采取任何行动之前会由人类专家审核输出内容，那么与没有此类监督的相同应用相比，该应用产生有害输出的可能性可能更低。
+Kiểm thử là một phần quan trọng trong việc xây dựng các ứng dụng mạnh mẽ và an toàn, nhưng mức độ, phạm vi và chiến lược kiểm thử sẽ khác nhau. Ví dụ: một trình tạo thơ haiku chỉ để giải trí có khả năng gây ra rủi ro ít nghiêm trọng hơn so với, chẳng hạn như một ứng dụng được thiết kế để các công ty luật sử dụng nhằm tóm tắt các tài liệu pháp lý và giúp soạn thảo hợp đồng. Tuy nhiên, trình tạo thơ haiku có thể được nhiều người dùng sử dụng hơn, điều này có nghĩa là khả năng xảy ra các nỗ lực đối nghịch hoặc thậm chí các nội dung nhập gây hại không chủ ý có thể cao hơn. Bối cảnh triển khai cũng quan trọng. Ví dụ: một ứng dụng có kết quả được các chuyên gia xem xét trước khi thực hiện bất kỳ hành động nào có thể được coi là ít có khả năng tạo ra kết quả gây hại hơn so với ứng dụng giống hệt nhưng không có sự giám sát như vậy.
 
-即使是风险相对较低的应用，在确信可以发布之前，也需要经历多次更改和测试迭代。以下两种测试对于 AI 应用特别有用：
+Bạn thường phải trải qua nhiều lần thay đổi và kiểm thử trước khi cảm thấy tự tin rằng mình đã sẵn sàng ra mắt, ngay cả đối với những ứng dụng có rủi ro tương đối thấp. Hai loại kiểm thử đặc biệt hữu ích cho các ứng dụng AI:
 
-- **安全基准比较**是指设计安全指标，以反映应用在可能的使用方式方面可能存在的不安全情况，然后使用评估数据集测试应用在这些指标上的表现。在测试之前，最好先考虑安全指标的最低可接受水平，以便 1) 根据这些预期评估测试结果，以及 2) 根据评估您最关心的指标的测试来收集评估数据集。
+- **Điểm chuẩn an toàn** bao gồm việc thiết kế các chỉ số an toàn phản ánh những cách mà ứng dụng của bạn có thể không an toàn trong bối cảnh có khả năng được sử dụng, sau đó kiểm thử hiệu suất của ứng dụng dựa trên các chỉ số bằng cách sử dụng tập dữ liệu đánh giá. Bạn nên cân nhắc các mức tối thiểu có thể chấp nhận được của các chỉ số an toàn trước khi kiểm thử để 1) bạn có thể đánh giá kết quả kiểm thử dựa trên những kỳ vọng đó và 2) bạn có thể thu thập tập dữ liệu đánh giá dựa trên các kiểm thử đánh giá các chỉ số mà bạn quan tâm nhất.
 
-  **高级提示**：
+  **Mẹo nâng cao:**
 
-  - 请注意，不要过度依赖“现成”的方法，因为您可能需要使用人工评估者构建自己的测试数据集，才能完全符合应用的上下文。
-  - 如果您有多个指标，则需要确定，如果某项更改导致一个指标有所改进，但另一个指标有所下降，您将如何权衡。与其他性能工程一样，您可能需要关注评估集中的最坏情况性能，而不是平均性能。
-- **对抗性测试**是指主动尝试破坏应用。目的是找出薄弱环节，以便您采取适当的措施来弥补这些环节。对抗性测试可能需要评估人员花费大量时间/精力，但测试次数越多，发现问题的机会就越大，尤其是那些很少发生或仅在应用重复运行后才发生的问题。
+  - Hãy cẩn thận khi quá dựa vào các phương pháp "có sẵn" vì có khả năng bạn sẽ cần xây dựng tập dữ liệu kiểm thử của riêng mình bằng cách sử dụng người đánh giá để phù hợp hoàn toàn với bối cảnh của ứng dụng.
+  - Nếu có nhiều hơn một chỉ số, bạn sẽ cần quyết định cách đánh đổi nếu một thay đổi dẫn đến việc cải thiện một chỉ số nhưng lại gây hại cho chỉ số khác. Giống như các kỹ thuật hiệu suất khác, bạn có thể muốn tập trung vào hiệu suất trong trường hợp xấu nhất trên tập dữ liệu đánh giá thay vì hiệu suất trung bình.
+- **Kiểm thử đối nghịch** bao gồm việc chủ động cố gắng phá vỡ ứng dụng của bạn. Mục tiêu là xác định các điểm yếu để bạn có thể thực hiện các bước khắc phục phù hợp. Việc kiểm thử đối nghịch có thể tốn nhiều thời gian/công sức của người đánh giá có chuyên môn về ứng dụng của bạn – nhưng bạn càng làm nhiều thì càng có nhiều cơ hội phát hiện vấn đề, đặc biệt là những vấn đề hiếm khi xảy ra hoặc chỉ xảy ra sau khi chạy ứng dụng nhiều lần.
 
-  - 对抗性测试是一种系统性评估方法，用来了解在用户恶意或无意输入有害内容时，机器学习模型将如何应对：
-    - 如果输入内容明显是为了产生不安全或有害输出，那么该输入内容可能属于恶意输入内容。例如，要求文本生成模型生成针对特定宗教的仇恨咆哮。
-    - 如果输入内容本身可能无害，但会产生有害输出，那就属于无意的有害输入内容。例如，要求文本生成模型描述特定种族的人，但模型输出种族主义内容。
-  - 对抗性测试与标准评估的区别在于用于测试的数据的构成。对于对抗性测试，请选择最有可能让模型生成问题输出的测试数据。这意味着要探测模型在所有可能类型的危害方面的行为，包括与安全政策相关的罕见或不寻常的示例和极端情况。还应包含句子不同维度（例如结构、含义和长度）的多样性。如需详细了解在构建测试数据集时应考虑哪些因素，您可以参阅 [Google 在公平性方面的 Responsible AI 实践](https://ai.google/responsibilities/responsible-ai-practices/?category=fairness&hl=zh-cn)。
-    **高级提示**：
-  - 使用[自动化测试](https://www.deepmind.com/blog/red-teaming-language-models-with-language-models?hl=zh-cn)，而不是采用传统方法，即招募“红队”人员来尝试破解您的应用。在自动化测试中，“红队”是另一个语言模型，用于查找会使被测模型生成有害输出的输入文本。
+  - Kiểm thử đối nghịch là một phương pháp để đánh giá một cách có hệ thống mô hình học máy với mục đích tìm hiểu cách mô hình này hoạt động khi được cung cấp nội dung nhập độc hại hoặc vô tình gây hại:
+    - Nội dung nhập có thể độc hại khi nội dung nhập được thiết kế rõ ràng để tạo ra kết quả không an toàn hoặc gây hại – ví dụ: yêu cầu mô hình tạo văn bản tạo ra một bài phát biểu hận thù về một tôn giáo cụ thể.
+    - Nội dung nhập vô tình gây hại khi bản thân nội dung nhập có thể vô hại, nhưng lại tạo ra kết quả gây hại – ví dụ: yêu cầu mô hình tạo văn bản mô tả một người thuộc một dân tộc cụ thể và nhận được kết quả phân biệt chủng tộc.
+  - Điểm khác biệt giữa kiểm thử đối nghịch và đánh giá tiêu chuẩn là thành phần của dữ liệu được sử dụng để kiểm thử. Đối với các kiểm thử đối nghịch, hãy chọn
+    dữ liệu kiểm thử có nhiều khả năng tạo ra kết quả có vấn đề từ
+    mô hình nhất. Điều này có nghĩa là thăm dò hành vi của mô hình đối với tất cả các loại tác hại có thể xảy ra, bao gồm cả các ví dụ hiếm gặp hoặc bất thường và các trường hợp đặc biệt có liên quan đến chính sách an toàn. Nội dung này cũng phải bao gồm sự đa dạng trong các phương diện khác nhau của một câu, chẳng hạn như cấu trúc, ý nghĩa và độ dài. Bạn có thể tham khảo các phương pháp AI có trách nhiệm của [Google
+    về tính
+    công bằng](https://ai.google/responsibilities/responsible-ai-practices/?category=fairness&hl=vi)
+    để biết thêm thông tin chi tiết về những điều cần cân nhắc khi xây dựng tập dữ liệu kiểm thử.
+    **Mẹo nâng cao:**
+  - Sử dụng [kiểm thử tự động](https://www.deepmind.com/blog/red-teaming-language-models-with-language-models?hl=vi)
+    thay vì phương pháp truyền thống là tuyển dụng người vào 'nhóm
+    đỏ' để cố gắng phá vỡ ứng dụng của bạn. Trong kiểm thử tự động, 'đội đỏ' là một mô hình ngôn ngữ khác tìm thấy văn bản nhập tạo ra kết quả gây hại từ mô hình đang được kiểm thử.
 
-## 监控问题
+## Theo dõi các vấn đề
 
-无论您进行多少测试和缓解，都无法保证完美无缺，因此请提前规划好如何发现和处理出现的问题。常见的方法包括设置一个受监控的渠道供用户分享反馈（例如，赞/踩评分），以及开展用户研究以主动征求各种用户的反馈意见，如果使用模式与预期不同，这一点尤其重要。
+Dù bạn kiểm thử và giảm thiểu bao nhiêu, bạn cũng không bao giờ có thể đảm bảo sự hoàn hảo. Vì vậy, hãy lên kế hoạch trước về cách phát hiện và xử lý các vấn đề phát sinh. Các phương pháp phổ biến bao gồm thiết lập một kênh được giám sát để người dùng chia sẻ ý kiến phản hồi (ví dụ: xếp hạng thích/không thích) và chạy một nghiên cứu về người dùng để chủ động yêu cầu ý kiến phản hồi từ nhiều người dùng – đặc biệt có giá trị nếu các mẫu sử dụng khác với kỳ vọng.
 
-### 高级提示
+### Mẹo nâng cao
 
-- 当用户向 AI 产品提供反馈时，随着时间的推移，这可以极大地提升 AI 性能和用户体验，例如，帮助您为提示调整选择更好的示例。[《Google 的人与 AI 指南》](https://pair.withgoogle.com/guidebook/chapters)中的[“反馈与控制”一章](https://pair.withgoogle.com/chapter/feedback-controls/)重点介绍了设计反馈机制时需要考虑的关键因素。
+- Khi người dùng đưa ra ý kiến phản hồi cho các sản phẩm AI, ý kiến phản hồi đó có thể cải thiện đáng kể hiệu suất của AI và trải nghiệm người dùng theo thời gian, chẳng hạn như giúp bạn chọn các ví dụ hay hơn để tinh chỉnh câu lệnh. Chương
+  [Phản hồi và Kiểm soát](https://pair.withgoogle.com/chapter/feedback-controls/)
+  trong [Sổ tay về con người và AI của Google](https://pair.withgoogle.com/guidebook/chapters)
+  nêu bật những điểm cần cân nhắc khi thiết kế
+  cơ chế phản hồi.
 
-## 后续步骤
+## Các bước tiếp theo
 
-- 请参阅[安全设置](https://ai.google.dev/gemini-api/docs/safety-settings?hl=zh-cn)指南，了解可通过 Gemini API 调整的安全设置。
-- 请参阅[提示简介](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=zh-cn)，开始撰写您的第一个提示。
+- Hãy tham khảo hướng dẫn về
+  [chế độ cài đặt an toàn](https://ai.google.dev/gemini-api/docs/safety-settings?hl=vi) để tìm hiểu về các chế độ cài đặt an toàn có thể điều chỉnh thông qua Gemini API.
+- Hãy xem phần [giới thiệu về câu lệnh](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=vi) để bắt đầu
+  viết câu lệnh đầu tiên.
 
-发送反馈
+Gửi ý kiến phản hồi
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-最后更新时间 (UTC)：2026-06-05。
+Cập nhật lần gần đây nhất: 2026-06-05 UTC.
 
-需要向我们提供更多信息？
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-05。"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-05 UTC."],[],[]]

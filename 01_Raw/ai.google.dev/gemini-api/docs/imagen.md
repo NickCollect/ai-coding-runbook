@@ -1,44 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=th
-fetched_at: 2026-08-31T06:33:33.120665+00:00
-title: "\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e23\u0e39\u0e1b\u0e20\u0e32\u0e1e\u0e42\u0e14\u0e22\u0e43\u0e0a\u0e49 Imagen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=id
+fetched_at: 2026-09-07T05:36:31.437006+00:00
+title: "Membuat gambar menggunakan Imagen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-ส่งความคิดเห็น
+Kirim masukan
 
-# สร้างรูปภาพโดยใช้ Imagen
+# Membuat gambar menggunakan Imagen
 
-Imagen คือโมเดลการสร้างรูปภาพที่มีความเที่ยงตรงสูงของ Google ซึ่งสามารถสร้าง
-รูปภาพที่สมจริงและมีคุณภาพสูงจากพรอมต์ข้อความ รูปภาพที่สร้างขึ้นทั้งหมด
-จะมีลายน้ำ SynthID ดูข้อมูลเพิ่มเติมเกี่ยวกับโมเดล Imagen
-ที่มีให้ใช้งานได้ในส่วน[เวอร์ชันโมเดล](#model-versions)
+Imagen adalah model pembuatan gambar fidelitas tinggi Google, yang mampu menghasilkan gambar realistis dan berkualitas tinggi dari perintah teks. Semua gambar yang dihasilkan menyertakan watermark SynthID. Untuk mempelajari lebih lanjut varian model Imagen yang tersedia, lihat bagian [Versi model](#model-versions).
 
-## การย้ายข้อมูลไปยัง Nano Banana
+## Migrasi ke Nano Banana
 
-เราเลิกใช้งานโมเดล Imagen แล้วและจะปิดให้บริการในวันที่ 17 สิงหาคม 2026 เราขอแนะนำให้
-ย้ายข้อมูลไปยัง Nano Banana เพื่อตอบสนองความต้องการในการสร้างรูปภาพ
+Model Imagen tidak digunakan lagi dan akan dihentikan pada 17 Agustus 2026. Sebaiknya Anda bermigrasi ke Nano Banana untuk memenuhi kebutuhan pembuatan gambar Anda.
 
-การย้ายข้อมูลจะเกี่ยวข้องกับการเปลี่ยนแปลงต่อไปนี้
+Migrasi melibatkan perubahan berikut:
 
-- **ชื่อโมเดล**: ใช้ `gemini-2.5-flash-image` แทนชื่อโมเดล Imagen
-- **วิธีการ**: ใช้ `client.models.generate_content` แทน `client.models.generate_images`
-- **การจัดการการตอบกลับ**: Nano Banana จะแสดงผลชิ้นส่วนเนื้อหา ซึ่งอาจรวมถึงข้อมูลรูปภาพ แทนที่จะเป็นออบเจ็กต์การตอบกลับรูปภาพที่เฉพาะเจาะจง
+- **Nama model**: Gunakan `gemini-2.5-flash-image`, bukan nama model Imagen.
+- **Metode**: Gunakan `client.models.generate_content`, bukan `client.models.generate_images`.
+- **Penanganan respons**: Nano Banana menampilkan bagian konten, yang dapat mencakup data gambar, bukan objek respons gambar tertentu.
 
-ดูรายละเอียดและตัวอย่างเพิ่มเติมได้ที่[คำแนะนำการสร้างรูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)
+Lihat [Panduan pembuatan gambar](https://ai.google.dev/gemini-api/docs/image-generation?hl=id) untuk mengetahui detail dan contoh selengkapnya.
 
-## สร้างรูปภาพโดยใช้โมเดล Imagen
+## Membuat gambar menggunakan model Imagen
 
-ตัวอย่างนี้แสดงการสร้างรูปภาพด้วย[โมเดล Imagen](https://deepmind.google/technologies/imagen/?hl=th)
+Contoh ini menunjukkan pembuatan gambar dengan [model Imagen](https://deepmind.google/technologies/imagen/?hl=id):
 
 ### Python
 
@@ -148,401 +144,395 @@ curl -X POST \
       }'
 ```
 
-![รูปภาพหุ่นยนต์ถือสเกตบอร์ดสีแดงที่ AI สร้างขึ้น](https://ai.google.dev/static/gemini-api/docs/images/robot-skateboard.png?hl=th)
+![Gambar buatan AI dari robot yang memegang papan seluncur merah](https://ai.google.dev/static/gemini-api/docs/images/robot-skateboard.png?hl=id)
 
-รูปภาพหุ่นยนต์ถือสเกตบอร์ดสีแดงที่ AI สร้างขึ้น
+Gambar buatan AI dari robot yang memegang papan seluncur merah
 
-### การกำหนดค่า Imagen
+### Konfigurasi Imagen
 
-ปัจจุบัน Imagen รองรับเฉพาะพรอมต์ภาษาอังกฤษและพารามิเตอร์ต่อไปนี้
+Saat ini, Imagen hanya mendukung perintah dalam bahasa Inggris dan parameter berikut:
 
-- `numberOfImages`: จำนวนรูปภาพที่จะสร้าง ตั้งแต่ 1 ถึง 4 (รวม)
-  ค่าเริ่มต้นคือ 4
-- `imageSize`: ขนาดของรูปภาพที่สร้างขึ้น ฟีเจอร์นี้รองรับเฉพาะรุ่น Standard และ Ultra ค่าที่รองรับคือ `1K` และ `2K`
-  ค่าเริ่มต้นคือ `1K`
-- `aspectRatio`: เปลี่ยนสัดส่วนภาพของรูปภาพที่สร้างขึ้น ค่าที่รองรับคือ `"1:1"`, `"3:4"`, `"4:3"`, `"9:16"` และ `"16:9"` ค่าเริ่มต้นคือ
-  `"1:1"`
-- `personGeneration`: อนุญาตให้โมเดลสร้างรูปภาพบุคคล ค่าที่รองรับมีดังนี้
+- `numberOfImages`: Jumlah gambar yang akan dibuat, dari 1 hingga 4 (inklusif).
+  Defaultnya adalah 4.
+- `imageSize`: Ukuran gambar yang dihasilkan. Fitur ini hanya didukung untuk model Standard dan Ultra. Nilai yang didukung adalah `1K` dan `2K`.
+  Default-nya adalah `1K`.
+- `aspectRatio`: Mengubah rasio aspek gambar yang dihasilkan. Nilai
+  yang didukung adalah `"1:1"`, `"3:4"`, `"4:3"`, `"9:16"`, dan `"16:9"`. Defaultnya adalah
+  `"1:1"`.
+- `personGeneration`: Mengizinkan model membuat gambar orang. Nilai berikut didukung:
 
-  - `"dont_allow"`: บล็อกการสร้างรูปภาพบุคคล
-  - `"allow_adult"`: สร้างรูปภาพของผู้ใหญ่ แต่ไม่ใช่เด็ก ซึ่งเป็นค่าเริ่มต้น
-  - `"allow_all"`: สร้างรูปภาพที่มีผู้ใหญ่และเด็ก
+  - `"dont_allow"`: Memblokir pembuatan gambar orang.
+  - `"allow_adult"`: Menghasilkan gambar orang dewasa, tetapi bukan anak-anak. Ini adalah
+    defaultnya.
+  - `"allow_all"`: Buat gambar yang menyertakan orang dewasa dan anak-anak.
 
-## คู่มือการใช้พรอมต์ Imagen
+## Panduan perintah Imagen
 
-ส่วนนี้ของคำแนะนำเกี่ยวกับ Imagen จะแสดงให้เห็นว่าการแก้ไขพรอมต์การเปลี่ยนข้อความเป็นรูปภาพ สามารถสร้างผลลัพธ์ที่แตกต่างกันได้อย่างไร พร้อมตัวอย่างรูปภาพที่คุณสร้างได้
+Bagian panduan Imagen ini menunjukkan cara memodifikasi perintah text-to-image
+dapat menghasilkan hasil yang berbeda, beserta contoh gambar yang dapat Anda buat.
 
-### ข้อมูลเบื้องต้นเกี่ยวกับการเขียนพรอมต์
+### Dasar-dasar penulisan perintah
 
-พรอมต์ที่ดีควรสื่อความหมายและชัดเจน รวมถึงใช้คีย์เวิร์ดและตัวแก้ไขที่มีความหมาย
-เริ่มจากการคิดถึง**หัวข้อ** **บริบท** และ**สไตล์**
+Perintah yang baik bersifat deskriptif dan jelas, serta menggunakan kata kunci dan pengubah yang bermakna. Mulailah dengan memikirkan **subjek**, **konteks**, dan **gaya** Anda.
 
-![พรอมต์ที่มีการเน้นเรื่อง หัวข้อ บริบท และสไตล์](https://ai.google.dev/static/gemini-api/docs/images/imagen/style-subject-context.png?hl=th)
+![Perintah dengan subjek, konteks, dan gaya yang ditekankan](https://ai.google.dev/static/gemini-api/docs/images/imagen/style-subject-context.png?hl=id)
 
-ข้อความในรูปภาพ: *ภาพร่าง* (**สไตล์**) ของ*อาคารอพาร์ตเมนต์สมัยใหม่*
-(**เรื่อง**) ที่ล้อมรอบด้วย*ตึกระฟ้า* (**บริบทและพื้นหลัง**)
+Teks gambar: *Sketsa* (**gaya**) dari *gedung apartemen modern*
+(**subjek**) dikelilingi *pilar* (**konteks dan latar belakang**).
 
-1. **ตัวแบบ**: สิ่งแรกที่ต้องพิจารณาเมื่อใช้พรอมต์คือ*ตัวแบบ* ซึ่งก็คือวัตถุ บุคคล สัตว์ หรือทิวทัศน์ที่คุณต้องการให้เป็นรูปภาพ
-2. **บริบทและพื้นหลัง:** *พื้นหลังหรือบริบท*
-   ที่วางวัตถุก็มีความสำคัญเช่นกัน ลองวางวัตถุในพื้นหลังที่หลากหลาย
-   เช่น สตูดิโอที่มีพื้นหลังสีขาว กลางแจ้ง หรือ
-   สภาพแวดล้อมในร่ม
-3. **สไตล์:** สุดท้าย ให้เพิ่มสไตล์ของรูปภาพที่ต้องการ *สไตล์*อาจเป็นแบบทั่วไป
-   (ภาพวาด ภาพถ่าย ภาพร่าง) หรือเฉพาะเจาะจงมาก (ภาพวาดสีพาสเทล ภาพวาดถ่าน
-   ภาพ 3 มิติแบบไอโซเมตริก) นอกจากนี้ คุณยังรวมสไตล์ต่างๆ ได้ด้วย
+1. **Subjek**: Hal pertama yang harus dipikirkan dengan perintah apa pun adalah
+   *subjek*: objek, orang, hewan, atau pemandangan yang Anda inginkan gambarnya.
+2. **Konteks dan latar belakang:** Sama pentingnya adalah *latar belakang atau konteks*
+   tempat subjek akan ditempatkan. Coba tempatkan subjek di berbagai
+   latar belakang. Misalnya, studio dengan latar belakang putih, di luar ruangan, atau
+   di dalam ruangan.
+3. **Gaya:** Terakhir, tambahkan gaya gambar yang Anda inginkan. *Gaya* dapat bersifat umum
+   (lukisan, foto, sketsa) atau yang sangat spesifik (lukisan pastel, gambar arang, 3D isometrik). Anda juga dapat menggabungkan gaya.
 
-หลังจากเขียนพรอมต์เวอร์ชันแรกแล้ว ให้ปรับแต่งพรอมต์โดยเพิ่มรายละเอียด
-เพิ่มเติมจนกว่าจะได้รูปภาพที่ต้องการ การทำซ้ำเป็นสิ่งสำคัญ
-เริ่มจากการสร้างแนวคิดหลัก จากนั้นปรับแต่งและขยายแนวคิดหลักนั้นจนกว่ารูปภาพที่สร้างขึ้นจะใกล้เคียงกับวิสัยทัศน์ของคุณ
+Setelah menulis versi pertama perintah, perbaiki perintah dengan menambahkan
+lebih banyak detail hingga Anda mendapatkan gambar yang diinginkan. Iterasi penting.
+Mulailah dengan menentukan ide inti Anda, lalu sempurnakan dan kembangkan ide inti tersebut hingga gambar yang dihasilkan mendekati visi Anda.
 
 |  |  |  |
 | --- | --- | --- |
-| รูปภาพตัวอย่างสมจริง 1   พรอมต์: สวนสาธารณะในฤดูใบไม้ผลิริมทะเลสาบ | รูปภาพตัวอย่างแบบสมจริง 2   พรอมต์: สวนสาธารณะในฤดูใบไม้ผลิริมทะเลสาบ **พระอาทิตย์ตกข้ามทะเลสาบ ช่วงเวลาแสงสีทอง** | รูปภาพตัวอย่างแบบสมจริง 3   พรอมต์: สวนสาธารณะในฤดูใบไม้ผลิริมทะเลสาบ ***พระอาทิตย์ตกข้ามทะเลสาบ ช่วงเวลาแสงสีทอง ดอกไม้ป่าสีแดง*** |
+| contoh gambar fotorealistik 1   Perintah: Taman di musim semi di samping danau | gambar contoh fotorealistik 2   Perintah: Taman di musim semi di samping danau, **matahari terbenam di seberang danau, golden hour** | gambar contoh fotorealistik 3   Perintah: Taman di musim semi di samping danau, ***matahari terbenam di seberang danau, golden hour, bunga liar merah*** |
 
-โมเดล Imagen สามารถเปลี่ยนไอเดียของคุณให้กลายเป็นรูปภาพที่มีรายละเอียด ไม่ว่าพรอมต์ของคุณจะสั้นหรือยาวและมีรายละเอียดก็ตาม
-ปรับแต่งวิสัยทัศน์
-ผ่านการป้อนพรอมต์แบบวนซ้ำ โดยเพิ่มรายละเอียดจนกว่าจะได้ผลลัพธ์ที่สมบูรณ์แบบ
+Model Imagen dapat mengubah ide Anda menjadi gambar yang mendetail, baik perintah Anda singkat maupun panjang dan mendetail. Sempurnakan visi Anda melalui perintah berulang, tambahkan detail hingga Anda mendapatkan hasil yang sempurna.
 
 |  |  |
 | --- | --- |
-| พรอมต์แบบสั้นช่วยให้คุณสร้างรูปภาพได้อย่างรวดเร็ว  ตัวอย่างพรอมต์สั้นๆ สำหรับ Imagen 4   พรอมต์: ภาพถ่ายระยะใกล้ของผู้หญิงในช่วงอายุ 20 ปี ภาพถ่ายแนวสตรีท ภาพจากภาพยนตร์ โทนสีส้มอบอุ่นแบบนุ่มนวล | พรอมต์ที่ยาวขึ้นจะช่วยให้คุณเพิ่มรายละเอียดที่เฉพาะเจาะจงและสร้างรูปภาพได้  ตัวอย่างพรอมต์ยาวของ Imagen 4   พรอมต์: ภาพถ่ายที่น่าดึงดูดใจของผู้หญิงในช่วงอายุ 20 ปีที่ใช้สไตล์การถ่ายภาพบนท้องถนน รูปภาพควรดูเหมือนภาพนิ่งจากภาพยนตร์ที่มีโทนสีส้ม อบอุ่น |
+| Perintah singkat memungkinkan Anda membuat gambar dengan cepat.  Contoh perintah singkat Imagen 4   Perintah: foto close-up seorang wanita berusia 20-an, fotografi jalanan, cuplikan film, nuansa hangat oranye lembut | Dengan perintah yang lebih panjang, Anda dapat menambahkan detail spesifik dan membuat gambar.  Contoh perintah panjang Imagen 4   Perintah: foto memukau seorang wanita berusia 20-an yang menggunakan gaya fotografi jalanan. Gambar harus terlihat seperti cuplikan film dengan warna hangat oranye yang lembut. |
 
-คำแนะนำเพิ่มเติมสำหรับการเขียนพรอมต์ของ Imagen
+Saran tambahan untuk penulisan perintah Imagen:
 
-- **ใช้ภาษาที่สื่อความหมาย**: ใช้คำคุณศัพท์และคำกริยาวิเศษณ์โดยละเอียดเพื่อ
-  วาดภาพที่ชัดเจนสำหรับ Imagen
-- **ระบุบริบท**: หากจำเป็น ให้ระบุข้อมูลพื้นฐานเพื่อช่วยให้ AI เข้าใจ
-- **อ้างอิงศิลปินหรือสไตล์ที่เฉพาะเจาะจง**: หากคุณมีสุนทรียะที่เฉพาะเจาะจงในใจ การอ้างอิงศิลปินหรือขบวนการศิลปะที่เฉพาะเจาะจงอาจเป็นประโยชน์
-- **ใช้เครื่องมือวิศวกรรมพรอมต์ (Prompt Engineering)**: ลองสำรวจเครื่องมือหรือแหล่งข้อมูลวิศวกรรมพรอมต์ (Prompt Engineering) เพื่อช่วยปรับแต่งพรอมต์และให้ได้ผลลัพธ์ที่ดีที่สุด
-- **ปรับปรุงรายละเอียดใบหน้าในรูปภาพส่วนตัวและรูปภาพกลุ่ม**: ระบุรายละเอียดใบหน้าเป็นจุดโฟกัสของรูปภาพ (เช่น ใช้คำว่า "ภาพบุคคล" ในพรอมต์)
+- **Gunakan bahasa deskriptif**: Gunakan kata sifat dan kata keterangan yang mendetail untuk
+  menggambarkan dengan jelas kepada Imagen.
+- **Berikan konteks**: Jika perlu, sertakan informasi latar belakang untuk membantu AI memahami.
+- **Merujuk pada artis atau gaya tertentu**: Jika Anda memiliki estetika tertentu, merujuk pada artis atau gerakan seni tertentu dapat membantu.
+- **Gunakan alat rekayasa perintah**: Pertimbangkan untuk mempelajari alat atau referensi rekayasa perintah untuk membantu Anda menyempurnakan perintah dan mendapatkan hasil yang optimal.
+- **Meningkatkan kualitas detail wajah dalam gambar pribadi dan grup Anda**: Tentukan detail wajah sebagai fokus foto (misalnya, gunakan kata "potret" dalam perintah).
 
-### สร้างข้อความในรูปภาพ
+### Membuat teks dalam gambar
 
-โมเดล Imagen สามารถเพิ่มข้อความลงในรูปภาพ ซึ่งจะช่วยเปิดโอกาสในการสร้างรูปภาพที่สร้างสรรค์มากขึ้น
-ใช้คำแนะนำต่อไปนี้เพื่อใช้ประโยชน์สูงสุดจากฟีเจอร์นี้
+Model Imagen dapat menambahkan teks ke dalam gambar, sehingga membuka lebih banyak kemungkinan pembuatan gambar yang kreatif. Gunakan panduan berikut untuk mendapatkan hasil maksimal dari fitur ini:
 
-- **ทำซ้ำได้อย่างมั่นใจ**: คุณอาจต้องสร้างรูปภาพใหม่จนกว่าจะได้
-  รูปลักษณ์ที่ต้องการ การผสานรวมข้อความของ Imagen ยังคง
-  พัฒนาต่อไป และบางครั้งการลองหลายๆ ครั้งอาจให้ผลลัพธ์ที่ดีที่สุด
-- **เขียนให้กระชับ**: จำกัดข้อความให้มีอักขระไม่เกิน 25 ตัวเพื่อการสร้างที่เหมาะสมที่สุด
-- **หลายวลี**: ทดลองใช้วลีที่แตกต่างกัน 2-3 วลีเพื่อ
-  ให้ข้อมูลเพิ่มเติม หลีกเลี่ยงการใช้คำมากกว่า 3 คำเพื่อให้
-  องค์ประกอบมีความชัดเจนยิ่งขึ้น
+- **Lakukan iterasi dengan percaya diri**: Anda mungkin harus membuat ulang gambar hingga Anda mendapatkan tampilan yang diinginkan. Integrasi teks Imagen masih
+  berkembang, dan terkadang beberapa upaya akan memberikan hasil terbaik.
+- **Buat teks singkat**: Batasi teks hingga 25 karakter atau kurang untuk generasi yang optimal.
+- **Beberapa frasa**: Bereksperimenlah dengan dua atau tiga frasa berbeda untuk memberikan informasi tambahan. Hindari penggunaan lebih dari tiga frasa untuk komposisi yang lebih bersih.
 
-  ![ตัวอย่างข้อความที่ Imagen 4 สร้างขึ้น](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_generate-text.png?hl=th)
+  ![Contoh teks yang dihasilkan Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_generate-text.png?hl=id)
 
-  พรอมต์: โปสเตอร์ที่มีข้อความ "Summerland" ในแบบอักษรตัวหนาเป็น
-  ชื่อ ใต้ข้อความนี้คือสโลแกน "Summer never felt so good"
-- **การจัดวางข้อความ**: แม้ว่า Imagen จะพยายามจัดวางข้อความตามที่สั่ง
-  แต่ก็อาจมีการเปลี่ยนแปลงบ้างในบางครั้ง ฟีเจอร์นี้ได้รับการปรับปรุงอย่างต่อเนื่อง
-- **รูปแบบแบบอักษรที่สร้างแรงบันดาลใจ**: ระบุรูปแบบแบบอักษรทั่วไปเพื่อมีอิทธิพลต่อตัวเลือกของ Imagen อย่างละเอียด
-  อย่าพึ่งการจำลองแบบอักษรที่แม่นยำ แต่คาดหวังการตีความอย่างสร้างสรรค์
-- **ขนาดแบบอักษร**: ระบุขนาดแบบอักษรหรือข้อบ่งชี้ทั่วไปเกี่ยวกับขนาด (เช่น *เล็ก* *ปานกลาง* *ใหญ่*) เพื่อกำหนดการสร้างขนาดแบบอักษร
+  Perintah: Poster dengan teks "Summerland" dalam font tebal sebagai
+  judul, di bawah teks ini terdapat slogan "Summer never felt so good"
+- **Penempatan Panduan**: Meskipun Imagen dapat mencoba memosisikan teks sesuai arahan, terkadang ada variasi. Fitur ini terus ditingkatkan.
+- **Gaya font Inspire**: Tentukan gaya font umum untuk memengaruhi pilihan Imagen secara halus. Jangan mengandalkan replikasi font yang presisi, tetapi harapkan interpretasi kreatif.
+- **Ukuran font**: Tentukan ukuran font atau indikasi ukuran umum (misalnya, *kecil*, *sedang*, *besar*) untuk memengaruhi pembuatan ukuran font.
 
-### การกำหนดพารามิเตอร์พรอมต์
+### Parameterisasi perintah
 
-หากต้องการควบคุมผลลัพธ์ได้ดียิ่งขึ้น คุณอาจต้องกำหนดพารามิเตอร์
-อินพุตใน Imagen ตัวอย่างเช่น สมมติว่าคุณ
-ต้องการให้ลูกค้าสร้างโลโก้สำหรับธุรกิจของตนเองได้ และคุณ
-ต้องการให้มั่นใจว่าระบบจะสร้างโลโก้บนพื้นหลังสีทึบเสมอ นอกจากนี้ คุณยังอาจต้องการจำกัดตัวเลือกที่ไคลเอ็นต์เลือกได้จากเมนู
+Untuk mengontrol hasil output dengan lebih baik, Anda mungkin merasa terbantu dengan memparameterisasi
+input ke Imagen. Misalnya, Anda ingin pelanggan dapat membuat logo untuk bisnis mereka, dan Anda ingin memastikan logo selalu dibuat dengan latar belakang warna solid. Anda
+juga ingin membatasi opsi yang dapat dipilih klien dari menu.
 
-ในตัวอย่างนี้ คุณสามารถสร้างพรอมต์ที่มีพารามิเตอร์คล้ายกับพรอมต์ต่อไปนี้ได้
+Dalam contoh ini, Anda dapat membuat perintah berparameter yang mirip dengan
+berikut:
 
 ```
 A {logo_style} logo for a {company_area} company on a solid color background. Include the text {company_name}.
 ```
 
-ในอินเทอร์เฟซผู้ใช้ที่กำหนดเอง ลูกค้าจะป้อนพารามิเตอร์ได้โดยใช้
-เมนู และค่าที่เลือกจะป้อนลงในพรอมต์ที่ Imagen ได้รับ
+Di antarmuka pengguna kustom Anda, pelanggan dapat memasukkan parameter menggunakan
+menu, dan nilai yang dipilihnya akan mengisi perintah yang diterima Imagen.
 
-เช่น
+Contoh:
 
-1. พรอมต์: `A minimalist logo for a health care company on a solid color background. Include the text Journey.`
+1. Perintah: `A minimalist logo for a health care company on a solid color background. Include the text Journey.`
 
-   ![ตัวอย่างการกำหนดพารามิเตอร์พรอมต์ของ Imagen 4 ตัวอย่างที่ 1](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_healthcare.png?hl=th)
-2. พรอมต์: `A modern logo for a software company on a solid color background. Include the text Silo.`
+   ![Contoh 1 parameterisasi perintah Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_healthcare.png?hl=id)
+2. Perintah: `A modern logo for a software company on a solid color background. Include the text Silo.`
 
-   ![ตัวอย่างการกำหนดพารามิเตอร์พรอมต์ของ Imagen 4 ตัวอย่างที่ 2](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_software.png?hl=th)
-3. พรอมต์: `A traditional logo for a baking company on a solid color background. Include the text Seed.`
+   ![Contoh parameterisasi perintah Imagen 4 2](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_software.png?hl=id)
+3. Perintah: `A traditional logo for a baking company on a solid color background. Include the text Seed.`
 
-   ![ตัวอย่างการกำหนดพารามิเตอร์พรอมต์ของ Imagen 4 3](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_baking.png?hl=th)
+   ![Contoh parameterisasi perintah Imagen 4 3](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_baking.png?hl=id)
 
-### เทคนิคการเขียนพรอมต์ขั้นสูง
+### Teknik penulisan perintah lanjutan
 
-ใช้ตัวอย่างต่อไปนี้เพื่อสร้างพรอมต์ที่เฉพาะเจาะจงมากขึ้นโดยอิงตามแอตทริบิวต์ เช่น คำอธิบายการถ่ายภาพ รูปร่างและวัสดุ ขบวนการศิลปะในประวัติศาสตร์ และตัวแก้ไขคุณภาพของรูปภาพ
+Gunakan contoh berikut untuk membuat perintah yang lebih spesifik berdasarkan atribut
+seperti deskripsi fotografi, bentuk dan bahan, gerakan seni
+historis, dan pengubah kualitas gambar.
 
-#### การถ่ายภาพ
+#### Fotografi
 
-- พรอมต์มีข้อความว่า *"รูปภาพของ..."*
+- Perintah menyertakan: *"Foto..."*
 
-หากต้องการใช้สไตล์นี้ ให้เริ่มต้นด้วยการใช้คีย์เวิร์ดที่บอก Imagen อย่างชัดเจนว่าคุณกำลังมองหารูปภาพ เริ่มต้นพรอมต์ด้วย
-*"รูปภาพของ . "* เช่น
-
-|  |  |  |
-| --- | --- | --- |
-| รูปภาพตัวอย่างสมจริง 1   พรอมต์: **รูปภาพ**เมล็ดกาแฟในห้องครัวบนพื้นผิวไม้ | รูปภาพตัวอย่างแบบสมจริง 2   พรอมต์: **รูปภาพ**ช็อกโกแลตแท่งบนเคาน์เตอร์ครัว | รูปภาพตัวอย่างแบบสมจริง 3   พรอมต์: **รูปภาพของ**อาคารสมัยใหม่ที่มีน้ำอยู่เบื้องหลัง |
-
-แหล่งที่มาของรูปภาพ: รูปภาพแต่ละรูปสร้างขึ้นโดยใช้พรอมต์ข้อความที่เกี่ยวข้องกับโมเดล Imagen 4
-
-##### ตัวปรับแต่งการถ่ายภาพ
-
-ในตัวอย่างต่อไปนี้ คุณจะเห็นตัวแก้ไขและพารามิเตอร์เฉพาะการถ่ายภาพหลายรายการ
-คุณรวมตัวแก้ไขหลายรายการเพื่อควบคุมได้อย่างแม่นยำยิ่งขึ้น
-
-1. **ระยะใกล้ของกล้อง** - *ถ่ายจากระยะไกลในระยะใกล้*
-
-   |  |  |
-   | --- | --- |
-   | ภาพตัวอย่างกล้องระยะใกล้   พรอมต์: รูปภาพ**ระยะใกล้**ของเมล็ดกาแฟ | ภาพตัวอย่างกล้องที่ซูมออก   พรอมต์: รูปภาพ**ซูมออก**ของถุงเล็กๆ ที่ใส่ เมล็ดกาแฟในครัวที่รก |
-2. **ตำแหน่งกล้อง** - *มุมสูง จากด้านล่าง*
-
-   |  |  |
-   | --- | --- |
-   | ภาพตัวอย่างภาพถ่ายทางอากาศ   พรอมต์: **ภาพถ่ายทางอากาศ**ของเมืองที่มีตึกสูง | ภาพตัวอย่างมุมมองจากด้านล่าง   พรอมต์: ภาพร่มไม้ในป่าที่มีท้องฟ้าสีฟ้า**จากด้านล่าง** |
-3. **แสง** - *ธรรมชาติ สื่ออารมณ์ อบอุ่น เย็น*
-
-   |  |  |
-   | --- | --- |
-   | รูปภาพตัวอย่างแสงธรรมชาติ   พรอมต์: ภาพถ่ายสตูดิโอของอาร์มแชร์สไตล์โมเดิร์น **การปรับแสงแบบธรรมชาติ** | รูปภาพตัวอย่างแสงไฟสื่ออารมณ์   พรอมต์: ภาพถ่ายสตูดิโอของอาร์มแชร์สมัยใหม่ **การจัดแสงที่น่าทึ่ง** |
-4. **การตั้งค่ากล้อง** *- ภาพเบลอจากการเคลื่อนไหว ซอฟต์โฟกัส โบเก้ ภาพบุคคล*
-
-   |  |  |
-   | --- | --- |
-   | รูปภาพตัวอย่างเบลอจากการเคลื่อนไหว   พรอมต์: รูปภาพเมืองที่มีตึกระฟ้าจากภายในรถยนต์ที่มี**ภาพเบลอจากการเคลื่อนไหว** | รูปภาพตัวอย่างซอฟต์โฟกัส   พรอมต์: **ซอฟต์โฟกัส**ภาพถ่ายสะพานในเมืองยามค่ำคืน |
-5. **ประเภทเลนส์** - *35 มม., 50 มม., ฟิชอาย, มุมกว้าง, มาโคร*
-
-   |  |  |
-   | --- | --- |
-   | รูปภาพตัวอย่างจากเลนส์มาโคร   พรอมต์: ภาพใบไม้ **เลนส์มาโคร** | รูปภาพตัวอย่างจากเลนส์ฟิชอาย   พรอมต์: ภาพถ่ายบนท้องถนน, นิวยอร์กซิตี้, **เลนส์ฟิชอาย** |
-6. **ประเภทฟิล์ม** - *ขาวดำ โพลารอยด์*
-
-   |  |  |
-   | --- | --- |
-   | รูปภาพตัวอย่างภาพถ่ายโพลารอยด์   พรอมต์: **ภาพถ่ายโพลารอยด์**ของสุนัขใส่แว่นกันแดด | รูปภาพตัวอย่างภาพถ่ายขาวดำ   พรอมต์: **ภาพถ่ายขาวดำ**ของสุนัขที่ใส่แว่นกันแดด |
-
-แหล่งที่มาของรูปภาพ: รูปภาพแต่ละรูปสร้างขึ้นโดยใช้พรอมต์ข้อความที่เกี่ยวข้องกับโมเดล Imagen 4
-
-### ภาพและงานศิลปะ
-
-- พรอมต์มีข้อความว่า *"painting ของ..."* *"sketch ของ..."*
-
-สไตล์ศิลปะมีตั้งแต่สไตล์ขาวดำ เช่น ภาพสเก็ตช์ดินสอ ไปจนถึงศิลปะดิจิทัลที่สมจริงอย่างมาก
-ตัวอย่างเช่น รูปภาพต่อไปนี้ใช้พรอมต์เดียวกันแต่มีสไตล์แตกต่างกัน
-
-*"[art style or creation technique] ของรถซีดานไฟฟ้าสปอร์ตที่มีเหลี่ยมมุมโดยมีตึกระฟ้าอยู่เบื้องหลัง"*
+Untuk menggunakan gaya ini, mulai dengan menggunakan kata kunci yang dengan jelas memberi tahu
+Imagen bahwa Anda mencari foto. Mulailah perintah Anda dengan *"Foto. . ."*. Misalnya:
 
 |  |  |  |
 | --- | --- | --- |
-| รูปภาพตัวอย่างงานศิลปะ   พรอมต์: **ภาพวาดด้วยดินสอเทคนิค**ของ... | รูปภาพตัวอย่างงานศิลปะ   พรอมต์: **ภาพวาดด้วยดินสอถ่าน**ของ... | รูปภาพตัวอย่างงานศิลปะ   พรอมต์: **ภาพวาดด้วยดินสอสี**ของ... |
+| contoh gambar fotorealistik 1   Perintah: **Foto** biji kopi di dapur pada permukaan kayu | gambar contoh fotorealistik 2   Perintah: **Foto** cokelat batangan di meja dapur | gambar contoh fotorealistik 3   Perintah: **Foto** bangunan modern dengan latar belakang air |
+
+Sumber gambar: Setiap gambar dibuat menggunakan perintah teks yang sesuai dengan model Imagen 4.
+
+##### Pengubah fotografi
+
+Pada contoh berikut, Anda dapat melihat beberapa pengubah dan parameter khusus fotografi. Anda dapat menggabungkan beberapa pengubah untuk kontrol yang lebih akurat.
+
+1. **Kedekatan Kamera** - *Jarak dekat, diambil dari jarak jauh*
+
+   |  |  |
+   | --- | --- |
+   | gambar contoh kamera jarak dekat   Perintah: Foto **jarak dekat** biji kopi | gambar contoh kamera yang diperkecil   Perintah: Foto **diperkecil** sekantong kecil biji kopi  di dapur yang berantakan |
+2. **Posisi Kamera** - *dari atas, dari bawah*
+
+   |  |  |
+   | --- | --- |
+   | gambar contoh foto dari atas   Perintah: **foto dari atas** kota dengan gedung pencakar langit | contoh gambar tampilan dari bawah   Perintah: Foto kanopi hutan dengan langit biru **dari bawah** |
+3. **Pencahayaan** - *alami, dramatis, hangat, dingin*
+
+   |  |  |
+   | --- | --- |
+   | gambar contoh pencahayaan alami   Perintah: foto studio kursi berlengan modern, **cahaya alami** | gambar contoh pencahayaan dramatis   Perintah: foto studio kursi berlengan modern, **cahaya dramatis** |
+4. **Setelan Kamera** *- motion blur, soft focus, bokeh, potret*
+
+   |  |  |
+   | --- | --- |
+   | gambar contoh motion blur   Perintah: foto kota dengan gedung pencakar langit dari dalam mobil dengan **motion blur** | gambar contoh soft focus   Perintah: Foto **soft focus** jembatan di kota perkotaan pada malam hari |
+5. **Jenis lensa** - *35 mm, 50 mm, mata ikan, sudut lebar, makro*
+
+   |  |  |
+   | --- | --- |
+   | gambar contoh lensa makro   Perintah: foto daun, **lensa makro** | gambar contoh lensa mata ikan   Perintah: fotografi jalanan, kota new york, **lensa mata ikan** |
+6. **Jenis film** - *hitam dan putih, polaroid*
+
+   |  |  |
+   | --- | --- |
+   | gambar sampel foto polaroid   Perintah: **potret polaroid** yang memakai kacamata hitam | gambar contoh foto hitam putih   Perintah: **foto hitam putih** yang memakai kacamata hitam |
+
+Sumber gambar: Setiap gambar dibuat menggunakan perintah teks yang sesuai dengan model Imagen 4.
+
+### Ilustrasi dan seni
+
+- Perintah menyertakan: *"painting dari..."*, *"sketch dari..."*
+
+Gaya seni bervariasi mulai dari gaya monokrom seperti sketsa pensil, hingga seni digital
+yang sangat realistis. Misalnya, gambar berikut menggunakan perintah yang sama dengan
+gaya yang berbeda:
+
+*"[art style or creation technique] sedan listrik sporty bersudut dengan
+pencakar langit di latar belakang"*
 
 |  |  |  |
 | --- | --- | --- |
-| รูปภาพตัวอย่างงานศิลปะ   พรอมต์: **ภาพวาดพาสเทล**ของ... | รูปภาพตัวอย่างงานศิลปะ   พรอมต์: **อาร์ตดิจิทัล**ของ... | รูปภาพตัวอย่างงานศิลปะ   พรอมต์: **อาร์ตเดโค (โปสเตอร์)** ของ... |
-
-แหล่งที่มาของรูปภาพ: รูปภาพแต่ละรูปสร้างขึ้นโดยใช้พรอมต์ข้อความที่เกี่ยวข้องกับโมเดล Imagen 2
-
-##### รูปร่างและวัสดุ
-
-- พรอมต์มีข้อความว่า *"...ทำจาก..."* *"...ในรูปของ..."*
-
-จุดแข็งอย่างหนึ่งของเทคโนโลยีนี้คือคุณสามารถสร้างภาพที่
-ทำได้ยากหรือทำไม่ได้เลย เช่น คุณสามารถสร้างโลโก้บริษัทใหม่ในวัสดุและพื้นผิวต่างๆ
+| gambar contoh karya seni   Perintah: **Gambar dengan teknik pensil** dari sebuah sudut... | gambar contoh karya seni   Perintah: **Gambar arang** dari sudut... | gambar contoh karya seni   Perintah: **Gambar pensil warna** dari sudut... |
 
 |  |  |  |
 | --- | --- | --- |
-| ภาพตัวอย่างรูปร่างและวัสดุ 1   พรอมต์: กระเป๋าทรงยาวฐานกลม**ทำจาก**ชีส | ภาพตัวอย่างรูปร่างและวัสดุ 2   พรอมต์: หลอดไฟนีออน**ในรูปทรง**ของนก | ภาพตัวอย่างรูปร่างและวัสดุ 3   พรอมต์: เก้าอี้เท้าแขน**ทำจากกระดาษ** ภาพถ่ายในสตูดิโอ สไตล์โอริกามิ |
+| gambar contoh karya seni   Perintah: **Lukisan pastel** dari sebuah sudut... | gambar contoh karya seni   Perintah: **Seni digital** dari sudut... | gambar contoh karya seni   Perintah: **Art deco (poster)** dari sudut... |
 
-แหล่งที่มาของรูปภาพ: รูปภาพแต่ละรูปสร้างขึ้นโดยใช้พรอมต์ข้อความที่เกี่ยวข้องกับโมเดล Imagen 4
+Sumber gambar: Setiap gambar dibuat menggunakan perintah teks yang sesuai dengan model Imagen 2.
 
-#### ข้อมูลอ้างอิงเกี่ยวกับศิลปะในประวัติศาสตร์
+##### Bentuk dan bahan
 
-- พรอมต์มีข้อความว่า *"...ในสไตล์ของ..."*
+- Perintah mencakup: *"...terbuat dari..."*, *"...dalam bentuk..."*
 
-สไตล์บางอย่างกลายเป็นสัญลักษณ์ที่โดดเด่นในช่วงหลายปีที่ผ่านมา ต่อไปนี้คือไอเดีย
-ของภาพวาดหรือสไตล์ศิลปะในประวัติศาสตร์ที่คุณลองใช้ได้
-
-*"สร้างรูปภาพในสไตล์ของ [art period or movement]
-: กังหันลม"*
+Salah satu keunggulan teknologi ini adalah Anda dapat membuat citra yang
+sulit atau tidak mungkin dilakukan. Misalnya, Anda dapat membuat ulang
+logo perusahaan dengan bahan dan tekstur yang berbeda.
 
 |  |  |  |
 | --- | --- | --- |
-| รูปภาพตัวอย่างลัทธิประทับใจ   พรอมต์: สร้างรูปภาพ**ในสไตล์*ภาพวาดแนวอิมเพรสชันนิสต์***: ฟาร์มกังหันลม | ตัวอย่างรูปภาพยุคฟื้นฟูศิลปะ   พรอมต์: สร้างรูปภาพ**ในสไตล์*ภาพวาดเรเนซองส์***: ฟาร์มกังหันลม | ภาพตัวอย่างป๊อปอาร์ต   พรอมต์: สร้างรูปภาพ**ในสไตล์*ป๊อปอาร์ต***: ฟาร์มกังหันลม |
+| contoh gambar bentuk dan bahan 1   Perintah: tas wol **terbuat dari** keju | contoh gambar bentuk dan bahan 2   Perintah: tabung neon **dalam bentuk** burung | contoh gambar 3 bentuk dan bahan 3   Perintah: kursi berlengan **terbuat dari kertas**, foto studio, gaya origami |
 
-แหล่งที่มาของรูปภาพ: รูปภาพแต่ละรูปสร้างขึ้นโดยใช้พรอมต์ข้อความที่เกี่ยวข้องกับโมเดล Imagen 4
+Sumber gambar: Setiap gambar dibuat menggunakan perintah teks yang sesuai dengan model Imagen 4.
 
-#### ตัวแก้ไขคุณภาพของรูปภาพ
+#### Referensi seni bersejarah
 
-คีย์เวิร์ดบางคำจะช่วยให้โมเดลทราบว่าคุณกำลังมองหาชิ้นงานคุณภาพสูง
-ตัวอย่างตัวแก้ไขคุณภาพมีดังนี้
+- Perintah mencakup: *"...dalam gaya..."*
 
-- **ตัวดัดแปลงทั่วไป** - *คุณภาพสูง สวยงาม มีสไตล์*
-- **รูปภาพ** - *4K, HDR, รูปภาพสตูดิโอ*
-- **อาร์ตเวิร์ก ภาพวาด** - *โดยมืออาชีพ มีรายละเอียด*
+Gaya tertentu telah menjadi ikon selama bertahun-tahun. Berikut adalah beberapa ide
+lukisan sejarah atau gaya seni yang dapat Anda coba.
 
-ต่อไปนี้คือตัวอย่างพรอมต์บางส่วนที่ไม่มีตัวปรับแต่งคุณภาพและพรอมต์เดียวกันที่มีตัวปรับแต่งคุณภาพ
+*"buat gambar dengan gaya [art period or movement]
+: ladang kincir angin"*
+
+|  |  |  |
+| --- | --- | --- |
+| gambar contoh impresionisme   Perintah: buat gambar **dengan gaya *lukisan impresionis***: ladang kincir angin | gambar contoh renaisans   Perintah: buat gambar **dengan gaya *lukisan renaisans***: ladang kincir angin | gambar contoh seni pop   Perintah: buat gambar **dengan gaya *seni pop***: ladang kincir angin |
+
+Sumber gambar: Setiap gambar dibuat menggunakan perintah teks yang sesuai dengan model Imagen 4.
+
+#### Pengubah kualitas gambar
+
+Kata kunci tertentu dapat memberi tahu model bahwa Anda mencari aset berkualitas tinggi. Contoh pengubah kualitas mencakup hal berikut:
+
+- **Pengubah Umum** - *berkualitas tinggi, indah, bergaya*
+- **Foto** - *4K, HDR, Foto Studio*
+- **Seni, Ilustrasi** - *oleh profesional, mendetail*
+
+Berikut adalah beberapa contoh perintah tanpa pengubah kualitas dan
+perintah yang sama dengan pengubah kualitas.
 
 |  |  |
 | --- | --- |
-| รูปภาพตัวอย่างข้าวโพดที่ไม่มีตัวแก้ไข   พรอมต์ (ไม่มีตัวแก้ไขคุณภาพ): รูปภาพต้นข้าวโพด | รูปภาพตัวอย่างข้าวโพดพร้อมตัวแก้ไข   พรอมต์ (พร้อมตัวปรับแต่งคุณภาพ): **4k HDR สวยงาม**   ภาพต้นข้าวโพด**ถ่ายโดย ช่างภาพมืออาชีพ** |
+| gambar contoh jagung tanpa pengubah   Perintah (tanpa pengubah kualitas): foto batang jagung | gambar contoh jagung dengan pengubah   Perintah (dengan pengubah kualitas): **Foto 4k HDR yang indah**   dari sebuah foto batang jagung **diambil oleh   fotografer profesional** |
 
-แหล่งที่มาของรูปภาพ: รูปภาพแต่ละรูปสร้างขึ้นโดยใช้พรอมต์ข้อความที่เกี่ยวข้องกับโมเดล Imagen 4
+Sumber gambar: Setiap gambar dibuat menggunakan perintah teks yang sesuai dengan model Imagen 4.
 
-#### สัดส่วนภาพ
+#### Rasio aspek
 
-การสร้างรูปภาพด้วย Imagen ช่วยให้คุณกำหนดสัดส่วนภาพที่แตกต่างกัน 5 แบบได้
+Pembuatan gambar Imagen memungkinkan Anda menetapkan lima rasio aspek gambar yang berbeda.
 
-1. **สี่เหลี่ยมจัตุรัส** (1:1, ค่าเริ่มต้น) - รูปภาพสี่เหลี่ยมจัตุรัสมาตรฐาน การใช้งานทั่วไปสำหรับ
-   สัดส่วนภาพนี้ ได้แก่ โพสต์ในโซเชียลมีเดีย
-2. **เต็มหน้าจอ** (4:3) - สัดส่วนภาพนี้มักใช้กันโดยทั่วไปในสื่อหรือภาพยนตร์
-   นอกจากนี้ยังเป็นขนาดของทีวีรุ่นเก่า (ไม่ใช่จอกว้าง) ส่วนใหญ่และกล้องฟอร์แมตขนาดกลาง
-   โดยจะจับภาพฉากในแนวนอนได้มากขึ้น (เมื่อเทียบกับ 1:1)
-   จึงเป็นสัดส่วนภาพที่ต้องการสำหรับการถ่ายภาพ
-
-   |  |  |
-   | --- | --- |
-   | ตัวอย่างสัดส่วนภาพ   พรอมต์: ภาพนิ้วมือของนักดนตรีในระยะใกล้ กำลังเล่นเปียโน ฟิล์มขาวดำ วินเทจ (สัดส่วนภาพ 4:3) | ตัวอย่างสัดส่วนภาพ   พรอมต์: ภาพถ่ายในสตูดิโอระดับมืออาชีพของ เฟรนช์ฟรายสำหรับร้านอาหารระดับไฮเอนด์ ในสไตล์ของนิตยสารอาหาร (สัดส่วนภาพ 4:3) |
-3. **เต็มหน้าจอแนวตั้ง** (3:4) - นี่คือสัดส่วนภาพแบบเต็มหน้าจอที่หมุน
-   90 องศา ซึ่งช่วยให้จับภาพฉากในแนวตั้งได้มากขึ้นเมื่อเทียบกับสัดส่วนภาพ 1:1
+1. **Persegi** (1:1, default) - Foto persegi standar. Penggunaan umum untuk rasio aspek ini mencakup postingan media sosial.
+2. **Layar penuh** (4:3) - Rasio aspek ini umumnya digunakan dalam media atau film.
+   Ukuran ini juga merupakan dimensi sebagian besar TV lama (non-layar lebar) dan kamera format
+   sedang. Rasio ini menangkap lebih banyak pemandangan secara horizontal (dibandingkan dengan 1:1),
+   sehingga menjadi rasio aspek pilihan untuk fotografi.
 
    |  |  |
    | --- | --- |
-   | ตัวอย่างสัดส่วนภาพ   พรอมต์: ผู้หญิงเดินป่า ภาพระยะใกล้ของ รองเท้าที่สะท้อนในแอ่งน้ำ ภูเขาขนาดใหญ่เป็นฉากหลัง ใน สไตล์โฆษณา มุมที่น่าทึ่ง (สัดส่วนภาพ 3:4) | ตัวอย่างสัดส่วนภาพ   พรอมต์: ภาพมุมสูงของแม่น้ำที่ไหล ขึ้นไปในหุบเขาลึกลับ (สัดส่วนภาพ 3:4) |
-4. **จอกว้าง** (16:9) - อัตราส่วนนี้มาแทนที่ 4:3 และปัจจุบันเป็นอัตราส่วนที่พบมากที่สุด
-   สำหรับทีวี จอภาพ และหน้าจอโทรศัพท์มือถือ (แนวนอน)
-   ใช้สัดส่วนภาพนี้เมื่อต้องการบันทึกฉากหลังให้มากขึ้น (เช่น ภูมิทัศน์ที่สวยงาม)
+   | contoh rasio aspek   Perintah: close up jari seorang musisi sedang bermain piano, film hitam putih, vintage (rasio aspek 4:3) | contoh rasio aspek   Perintah: Foto studio profesional kentang goreng untuk restoran kelas atas, dengan gaya majalah makanan (rasio aspek 4:3) |
+3. **Layar penuh potret** (3:4) - Ini adalah rasio aspek layar penuh yang diputar 90 derajat. Hal ini memungkinkan Anda merekam lebih banyak bagian pemandangan secara vertikal dibandingkan dengan rasio aspek 1:1.
 
-   ![ตัวอย่างสัดส่วนภาพ](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_16-9_man.png?hl=th)
+   |  |  |
+   | --- | --- |
+   | contoh rasio aspek   Perintah: seorang wanita sedang mendaki, close-up sepatu botnya terpantul di genangan air, pegunungan besar di latar belakang, dengan gaya iklan, sudut dramatis (rasio aspek 3:4) | contoh rasio aspek   Perintah: foto dari atas sungai yang mengalir ke atas lembah mistis (rasio aspek 3:4) |
+4. **Layar lebar** (16:9) - Rasio ini telah menggantikan 4:3 dan kini menjadi rasio aspek yang paling umum untuk TV, monitor, dan layar ponsel (lanskap).
+   Gunakan rasio aspek ini jika Anda ingin mengambil lebih banyak latar belakang (misalnya, pemandangan indah).
 
-   พรอมต์: ชายสวมเสื้อผ้าสีขาวทั้งหมดนั่งอยู่บนชายหาด ถ่ายภาพระยะใกล้ แสงสีช่วงเวลาแสงสีทอง (สัดส่วนภาพ 16:9)
-5. **แนวตั้ง** (9:16) - อัตราส่วนนี้เป็นจอกว้างแต่หมุน สัดส่วนภาพนี้เป็นสัดส่วนภาพที่ค่อนข้างใหม่ซึ่งได้รับความนิยมจากแอปวิดีโอแบบสั้น (เช่น YouTube Shorts) ใช้สำหรับวัตถุสูงที่มีการวางแนวตั้งอย่างชัดเจน เช่น อาคาร ต้นไม้ น้ำตก หรือวัตถุอื่นๆ ที่คล้ายกัน
+   ![contoh rasio aspek](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_16-9_man.png?hl=id)
 
-   ![ตัวอย่างสัดส่วนภาพ](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_9-16_skyscraper.png?hl=th)
+   Perintah: seorang pria yang mengenakan pakaian serba putih sedang duduk di pantai, close up, pencahayaan golden hour (rasio aspek 16:9)
+5. **Potret** (9:16) - Rasio ini adalah layar lebar yang diputar. Rasio aspek ini relatif baru dan telah dipopulerkan oleh aplikasi video pendek (misalnya, YouTube Shorts). Gunakan ini untuk objek tinggi dengan orientasi vertikal yang kuat seperti bangunan, pohon, air terjun, atau objek serupa lainnya.
 
-   พรอมต์: ภาพเรนเดอร์ดิจิทัลของตึกระฟ้าขนาดใหญ่ ทันสมัย
-   ยิ่งใหญ่ อลังการ โดยมีภาพพระอาทิตย์ตกที่สวยงามเป็นพื้นหลัง (สัดส่วนภาพ 9:16)
+   ![contoh rasio aspek](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_9-16_skyscraper.png?hl=id)
 
-#### รูปภาพสมจริง
+   Perintah: rendering digital gedung pencakar langit besar, modern,
+   megah, epik dengan latar belakang matahari terbenam yang indah (rasio aspek 9:16)
 
-โมเดลการสร้างรูปภาพ
-เวอร์ชันต่างๆ อาจให้ผลลัพธ์ทั้งแบบศิลปะและแบบสมจริง ใช้คำต่อไปนี้ในพรอมต์เพื่อสร้างเอาต์พุตที่สมจริงยิ่งขึ้นตามวัตถุที่คุณต้องการสร้าง
+#### Gambar fotorealistik
 
-| กรณีการใช้งาน | ประเภทเลนส์ | ความยาวโฟกัส | รายละเอียดเพิ่มเติม |
+Model pembuatan gambar
+yang berbeda mungkin menawarkan campuran output artistik dan fotorealistik. Gunakan kata-kata berikut dalam perintah untuk menghasilkan output yang lebih fotorealistik, berdasarkan subjek yang ingin Anda buat.
+
+| Kasus penggunaan | Jenis lensa | Panjang fokal | Detail tambahan |
 | --- | --- | --- | --- |
-| บุคคล (ภาพบุคคล) | ไพรม์ ซูม | 24-35 มม. | ฟิล์มขาวดำ, ฟิล์มนัวร์, ระยะชัดลึก, ดูโอโทน (ระบุ 2 สี) |
-| อาหาร แมลง พืช (วัตถุ ภาพหุ่นนิ่ง) | มาโคร | 60-105 มม. | รายละเอียดสูง โฟกัสแม่นยำ แสงที่ควบคุมได้ |
-| กีฬา สัตว์ป่า (การเคลื่อนไหว) | ซูมเทเลโฟโต้ | 100-400 มม. | ความเร็วชัตเตอร์สูง การติดตามการเคลื่อนไหวหรือการเคลื่อนที่ |
-| ดาราศาสตร์, ภูมิทัศน์ (มุมกว้าง) | ไวด์ | 10-24 มม. | เวลาเปิดรับแสงนาน โฟกัสคมชัด เปิดรับแสงนาน น้ำหรือเมฆเรียบ |
+| Orang (potret) | Tanda petik, zoom | 24-35mm | film hitam putih, Film noir, Kedalaman bidang, duoton (sebutkan dua warna) |
+| Makanan, serangga, tanaman (objek, still life) | Makro | 60-105mm | Detail tinggi, fokus yang presisi, pencahayaan yang terkontrol |
+| Olahraga, satwa liar (gerakan) | Zoom telefoto | 100-400mm | Kecepatan shutter cepat, Pelacakan tindakan atau gerakan |
+| Astronomi, lanskap (sudut lebar) | Sudut lebar | 10-24mm | Waktu eksposur panjang, fokus tajam, eksposur panjang, air atau awan yang halus |
 
-##### ภาพพอร์เทรต
+##### Potret
 
-| กรณีการใช้งาน | ประเภทเลนส์ | ความยาวโฟกัส | รายละเอียดเพิ่มเติม |
+| Kasus penggunaan | Jenis lensa | Panjang fokal | Detail tambahan |
 | --- | --- | --- | --- |
-| บุคคล (ภาพบุคคล) | ไพรม์ ซูม | 24-35 มม. | ฟิล์มขาวดำ, ฟิล์มนัวร์, ระยะชัดลึก, ดูโอโทน (ระบุ 2 สี) |
+| Orang (potret) | Tanda petik, zoom | 24-35mm | film hitam putih, Film noir, Kedalaman bidang, duoton (sebutkan dua warna) |
 
-Imagen ใช้คีย์เวิร์ดหลายคำจากตารางเพื่อสร้างภาพบุคคลต่อไปนี้
+Dengan menggunakan beberapa kata kunci dari tabel, Imagen dapat membuat potret berikut:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| ตัวอย่างการถ่ายภาพบุคคล | ตัวอย่างการถ่ายภาพบุคคล | ตัวอย่างการถ่ายภาพบุคคล | ตัวอย่างการถ่ายภาพบุคคล |
+| contoh fotografi potret | contoh fotografi potret | contoh fotografi potret | contoh fotografi potret |
 
-พรอมต์: *ภาพบุคคลขนาด 35 มม. ของผู้หญิงที่มีภาพดูโอโทนสีน้ำเงินและเทา*  
-โมเดล: `imagen-4.0-generate-001`
-
-|  |  |  |  |
-| --- | --- | --- | --- |
-| ตัวอย่างการถ่ายภาพบุคคล | ตัวอย่างการถ่ายภาพบุคคล | ตัวอย่างการถ่ายภาพบุคคล | ตัวอย่างการถ่ายภาพบุคคล |
-
-พรอมต์: *ภาพบุคคลผู้หญิง 35 มม. ฟิล์มนัวร์*  
-โมเดล: `imagen-4.0-generate-001`
-
-##### วัตถุ
-
-| กรณีการใช้งาน | ประเภทเลนส์ | ความยาวโฟกัส | รายละเอียดเพิ่มเติม |
-| --- | --- | --- | --- |
-| อาหาร แมลง พืช (วัตถุ ภาพหุ่นนิ่ง) | มาโคร | 60-105 มม. | รายละเอียดสูง โฟกัสแม่นยำ แสงที่ควบคุมได้ |
-
-Imagen สามารถสร้างรูปภาพออบเจ็กต์ต่อไปนี้ได้โดยใช้คีย์เวิร์ดหลายคำจากตาราง
+Perintah: *Potret wanita, 35 mm, duoton biru dan abu-abu*  
+Model: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| ตัวอย่างการถ่ายภาพวัตถุ | ตัวอย่างการถ่ายภาพวัตถุ | ตัวอย่างการถ่ายภาพวัตถุ | ตัวอย่างการถ่ายภาพวัตถุ |
+| contoh fotografi potret | contoh fotografi potret | contoh fotografi potret | contoh fotografi potret |
 
-พรอมต์: *ใบของต้นอธิษฐาน เลนส์มาโคร 60 มม.*  
-โมเดล: `imagen-4.0-generate-001`
+Perintah: *Potret wanita 35 mm, film noir*  
+Model: `imagen-4.0-generate-001`
+
+##### Objek
+
+| Kasus penggunaan | Jenis lensa | Panjang fokal | Detail tambahan |
+| --- | --- | --- | --- |
+| Makanan, serangga, tanaman (objek, still life) | Makro | 60-105mm | Detail tinggi, fokus yang presisi, pencahayaan yang terkontrol |
+
+Dengan menggunakan beberapa kata kunci dari tabel, Imagen dapat membuat gambar objek berikut:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| ตัวอย่างการถ่ายภาพวัตถุ | ตัวอย่างการถ่ายภาพวัตถุ | ตัวอย่างการถ่ายภาพวัตถุ | ตัวอย่างการถ่ายภาพวัตถุ |
+| contoh fotografi objek | contoh fotografi objek | contoh fotografi objek | contoh fotografi objek |
 
-พรอมต์: *จานพาสต้า เลนส์มาโคร 100 มม.*  
-โมเดล: `imagen-4.0-generate-001`
-
-##### การเคลื่อนไหว
-
-| กรณีการใช้งาน | ประเภทเลนส์ | ความยาวโฟกัส | รายละเอียดเพิ่มเติม |
-| --- | --- | --- | --- |
-| กีฬา สัตว์ป่า (การเคลื่อนไหว) | ซูมเทเลโฟโต้ | 100-400 มม. | ความเร็วชัตเตอร์สูง การติดตามการเคลื่อนไหวหรือการเคลื่อนที่ |
-
-เมื่อใช้คีย์เวิร์ดหลายคำจากตาราง Imagen จะ
-สร้างรูปภาพเคลื่อนไหวต่อไปนี้ได้
+Perintah: *daun tanaman prayer, lensa makro, 60 mm*  
+Model: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| ตัวอย่างการถ่ายภาพเคลื่อนไหว | ตัวอย่างการถ่ายภาพเคลื่อนไหว | ตัวอย่างการถ่ายภาพเคลื่อนไหว | ตัวอย่างการถ่ายภาพเคลื่อนไหว |
+| contoh fotografi objek | contoh fotografi objek | contoh fotografi objek | contoh fotografi objek |
 
-พรอมต์: *ทัชดาวน์ที่ชนะ ความเร็วชัตเตอร์สูง การติดตามการเคลื่อนไหว*  
-โมเดล: `imagen-4.0-generate-001`
+Perintah: *sepiring pasta, lensa Makro 100 mm*  
+Model: `imagen-4.0-generate-001`
+
+##### Gerakan
+
+| Kasus penggunaan | Jenis lensa | Panjang fokal | Detail tambahan |
+| --- | --- | --- | --- |
+| Olahraga, satwa liar (gerakan) | Zoom telefoto | 100-400mm | Kecepatan shutter cepat, Pelacakan tindakan atau gerakan |
+
+Dengan menggunakan beberapa kata kunci dari tabel, Imagen dapat membuat gambar bergerak berikut:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| ตัวอย่างการถ่ายภาพเคลื่อนไหว | ตัวอย่างการถ่ายภาพเคลื่อนไหว | ตัวอย่างการถ่ายภาพเคลื่อนไหว | ตัวอย่างการถ่ายภาพเคลื่อนไหว |
+| contoh fotografi motion | contoh fotografi motion | contoh fotografi motion | contoh fotografi motion |
 
-พรอมต์: *กวางวิ่งในป่า ความเร็วชัตเตอร์สูง การติดตามการเคลื่อนไหว*  
-โมเดล: `imagen-4.0-generate-001`
-
-##### ไวด์
-
-| กรณีการใช้งาน | ประเภทเลนส์ | ความยาวโฟกัส | รายละเอียดเพิ่มเติม |
-| --- | --- | --- | --- |
-| ดาราศาสตร์, ภูมิทัศน์ (มุมกว้าง) | ไวด์ | 10-24 มม. | เวลาเปิดรับแสงนาน โฟกัสคมชัด เปิดรับแสงนาน น้ำหรือเมฆเรียบ |
-
-Imagen สามารถสร้างรูปภาพมุมกว้างต่อไปนี้ได้โดยใช้คีย์เวิร์ดหลายคำจากตาราง
+Perintah: *touchdown kemenangan, kecepatan shutter cepat, pelacakan gerakan*  
+Model: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| ตัวอย่างการถ่ายภาพมุมกว้าง | ตัวอย่างการถ่ายภาพมุมกว้าง | ตัวอย่างการถ่ายภาพมุมกว้าง | ตัวอย่างการถ่ายภาพมุมกว้าง |
+| contoh fotografi motion | contoh fotografi motion | contoh fotografi motion | contoh fotografi motion |
 
-พรอมต์: *เทือกเขากว้างใหญ่ มุมกว้าง 10 มม.*  
-โมเดล: `imagen-4.0-generate-001`
+Perintah: *Seekor rusa berlari di hutan, kecepatan shutter cepat, pelacakan gerakan*  
+Model: `imagen-4.0-generate-001`
+
+##### Sudut lebar
+
+| Kasus penggunaan | Jenis lensa | Panjang fokal | Detail tambahan |
+| --- | --- | --- | --- |
+| Astronomi, lanskap (sudut lebar) | Sudut lebar | 10-24mm | Waktu eksposur panjang, fokus tajam, eksposur panjang, air atau awan yang halus |
+
+Dengan menggunakan beberapa kata kunci dari tabel, Imagen dapat membuat gambar sudut lebar berikut:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| ตัวอย่างการถ่ายภาพมุมกว้าง | ตัวอย่างการถ่ายภาพมุมกว้าง | ตัวอย่างการถ่ายภาพมุมกว้าง | ตัวอย่างการถ่ายภาพมุมกว้าง |
+| contoh fotografi sudut lebar | contoh fotografi sudut lebar | contoh fotografi sudut lebar | contoh fotografi sudut lebar |
 
-พรอมต์: *รูปภาพดวงจันทร์ การถ่ายภาพดวงดาว มุมกว้าง 10 มม.*  
-โมเดล: `imagen-4.0-generate-001`
+Perintah: *pegunungan yang luas, lanskap sudut lebar 10 mm*  
+Model: `imagen-4.0-generate-001`
 
-## เวอร์ชันของโมเดล
+|  |  |  |  |
+| --- | --- | --- | --- |
+| contoh fotografi sudut lebar | contoh fotografi sudut lebar | contoh fotografi sudut lebar | contoh fotografi sudut lebar |
 
-### Imagen 4 (เลิกใช้งานแล้ว)
+Perintah: *foto bulan, fotografi astro, sudut lebar 10 mm*  
+Model: `imagen-4.0-generate-001`
 
-| พร็อพเพอร์ตี้ | คำอธิบาย |
+## Versi model
+
+### Imagen 4 (Tidak digunakan lagi)
+
+| Properti | Deskripsi |
 | --- | --- |
-| รหัสโมเดล id\_card | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
-| บันทึกประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ  **เอาต์พุต**  รูปภาพ |
-| token\_autoขีดจำกัดของโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  480 โทเค็น (ข้อความ)  **รูปภาพเอาต์พุต**  1 ถึง 4 (Ultra/Standard/Fast) |
-| calendar\_monthการอัปเดตล่าสุด | มิถุนายน 2025 |
+| Kode model id\_card | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
+| saveJenis data yang didukung | **Input**  Teks  **Output**  Gambar |
+| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Batas token input**  480 token (teks)  **Output gambar**  1 hingga 4 (Ultra/Standard/Cepat) |
+| calendar\_monthPembaruan terbaru | Juni 2025 |
 
 ### Imagen 3
 
-[ปิด](https://ai.google.dev/gemini-api/docs/deprecations?hl=th)โมเดล Imagen 3 แล้ว
+Model Imagen 3 telah [dinonaktifkan](https://ai.google.dev/gemini-api/docs/deprecations?hl=id).
 
-ส่งความคิดเห็น
+Kirim masukan
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-อัปเดตล่าสุด 2026-07-16 UTC
+Terakhir diperbarui pada 2026-07-16 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Ada masukan untuk kami?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-16 UTC"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-16 UTC."],[],[]]

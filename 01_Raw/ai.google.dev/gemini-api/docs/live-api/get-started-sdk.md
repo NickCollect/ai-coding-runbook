@@ -1,42 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=zh-CN
-fetched_at: 2026-08-31T06:35:55.876293+00:00
-title: "\u901a\u8fc7 Google GenAI SDK \u5f00\u59cb\u4f7f\u7528 Gemini Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=zh-TW
+fetched_at: 2026-09-07T05:44:21.621280+00:00
+title: "\u4f7f\u7528 Google GenAI SDK \u958b\u59cb\u4f7f\u7528 Gemini Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-发送反馈
+提供意見
 
-# 通过 Google GenAI SDK 开始使用 Gemini Live API
+# 使用 Google GenAI SDK 開始使用 Gemini Live API
 
-Gemini Live API 支持与 Gemini 模型进行实时双向互动，并支持音频、视频和文本输入以及原生音频输出。本指南介绍了如何在服务器上使用 Google GenAI SDK 与 API 集成。
+Gemini Live API 支援音訊、影片和文字輸入，以及原生音訊輸出，可與 Gemini 模型進行即時雙向互動。本指南說明如何在伺服器上使用 Google GenAI SDK，與 API 整合。
 
-[在 Google AI Studio 中试用 Live APImic](https://aistudio.google.com/live?hl=zh-cn)
-[从 GitHub 克隆示例应用code](https://github.com/google-gemini/gemini-live-api-examples/tree/main/gemini-live-genai-python-sdk)
-[使用编码代理技能terminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=zh-cn)
+[在 Google AI Studio 中試用 Live APImic](https://aistudio.google.com/live?hl=zh-tw)
+[從 GitHub 複製範例應用程式code](https://github.com/google-gemini/gemini-live-api-examples/tree/main/gemini-live-genai-python-sdk)
+[使用程式碼編寫代理程式技能terminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=zh-tw)
 
-## 概览
+## 總覽
 
-Gemini Live API 使用 WebSocket 进行实时通信。`google-genai` SDK 提供了一个用于管理这些连接的高级异步接口。
+Gemini Live API 使用 WebSocket 進行即時通訊。`google-genai` SDK 提供高階非同步介面，可管理這些連線。
 
-主要概念：
+重要概念：
 
-- **会话**：与模型的持久连接。
-- **配置**：设置模态（音频/文本）、语音和系统指令。
-- **实时输入**：以 blob 形式发送音频和视频帧。
+- **工作階段**：與模型建立的持續連線。
+- **設定**：設定模式 (音訊/文字)、語音和系統指令。
+- **即時輸入**：以 Blob 形式傳送音訊和視訊影格。
 
-## 连接到 Live API
+## 連線至 Live API
 
-使用 API 密钥启动 Live API 会话：
+使用 API 金鑰啟動 Live API 工作階段：
 
 ### Python
 
@@ -97,9 +97,9 @@ async function main() {
 main();
 ```
 
-## 正在发送短信
+## 正在傳送文字內容
 
-您可以使用 `send_realtime_input` (Python) 或 `sendRealtimeInput` (JavaScript) 发送文本。
+您可以使用 `send_realtime_input` (Python) 或 `sendRealtimeInput` (JavaScript) 傳送文字。
 
 ### Python
 
@@ -115,9 +115,9 @@ session.sendRealtimeInput({
 });
 ```
 
-## 发送音频
+## 正在傳送音訊
 
-音频需要以原始 PCM 数据（原始 16 位 PCM 音频，16kHz，小端序）的形式发送。
+音訊必須以原始 PCM 資料 (原始 16 位元 PCM 音訊、16 kHz、小端序) 傳送。
 
 ### Python
 
@@ -143,11 +143,11 @@ session.sendRealtimeInput({
 });
 ```
 
-如需查看如何从客户端设备（例如浏览器）获取音频的示例，请参阅 [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L31-L70) 上的端到端示例。
+如需如何從用戶端裝置 (例如瀏覽器) 取得音訊的範例，請參閱 [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L31-L70) 上的端對端範例。
 
-## 正在发送视频
+## 正在傳送影片
 
-视频帧以特定帧速率（每秒最多 1 帧）作为单独的图片（例如 JPEG 或 PNG）发送。
+系統會以特定影格率 (每秒最多 1 個影格) 傳送影片影格，並以個別圖片 (例如 JPEG 或 PNG) 形式傳送。
 
 ### Python
 
@@ -173,11 +173,11 @@ session.sendRealtimeInput({
 });
 ```
 
-如需查看如何从客户端设备（例如浏览器）获取视频的示例，请参阅 [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L84-L120) 上的端到端示例。
+如需如何從用戶端裝置 (例如瀏覽器) 取得影片的範例，請參閱 [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L84-L120) 上的端對端範例。
 
-## 接收音频
+## 接收音訊
 
-模型以数据块的形式返回音频回答。
+模型會以資料區塊的形式傳送音訊回覆。
 
 ### Python
 
@@ -205,11 +205,11 @@ if (content?.modelTurn?.parts) {
 }
 ```
 
-如需了解如何[在服务器上接收音频](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/gemini_live.py#L86-L98)以及如何[在浏览器中播放音频](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L145-L174)，请参阅 GitHub 上的示例应用。
+如要瞭解如何[在伺服器上接收音訊](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/gemini_live.py#L86-L98)，以及[在瀏覽器中播放音訊](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L145-L174)，請參閱 GitHub 上的範例應用程式。
 
-## 正在接收短信
+## 正在接收文字內容
 
-服务器内容中包含用户输入和模型输出的转写内容。
+伺服器內容會提供使用者輸入內容和模型輸出內容的轉錄稿。
 
 ### Python
 
@@ -236,9 +236,9 @@ if (content?.outputTranscription) {
 }
 ```
 
-## 处理工具调用
+## 處理工具呼叫
 
-该 API 支持工具调用（函数调用）。当模型请求工具调用时，您必须执行该函数并将响应发送回去。
+這個 API 支援工具呼叫 (函式呼叫)。模型要求呼叫工具時，您必須執行函式並傳回回應。
 
 ### Python
 
@@ -279,20 +279,20 @@ if (response.toolCall) {
 }
 ```
 
-## 后续步骤
+## 後續步驟
 
-- 如需了解主要功能和配置（包括语音活动检测和原生音频功能），请参阅完整的 Live API [功能](https://ai.google.dev/gemini-api/docs/live-guide?hl=zh-cn)指南。
-- 请参阅[工具使用](https://ai.google.dev/gemini-api/docs/live-tools?hl=zh-cn)指南，了解如何将 Live API 与工具和函数调用集成。
-- 如需了解如何管理长时间运行的对话，请参阅[会话管理](https://ai.google.dev/gemini-api/docs/live-session?hl=zh-cn)指南。
-- 请参阅[临时令牌](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=zh-cn)指南，了解如何在[客户端到服务器](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-cn#implementation-approach)应用中进行安全身份验证。
-- 如需详细了解底层 WebSockets API，请参阅 [WebSockets API 参考文档](https://ai.google.dev/api/live?hl=zh-cn)。
+- 如要瞭解主要功能和設定，包括語音活動偵測和原生音訊功能，請參閱完整的 Live API [功能](https://ai.google.dev/gemini-api/docs/live-guide?hl=zh-tw)指南。
+- 詳閱[工具使用](https://ai.google.dev/gemini-api/docs/live-tools?hl=zh-tw)指南，瞭解如何整合 Live API 與工具和函式呼叫。
+- 如要管理長時間進行的對話，請參閱[工作階段管理](https://ai.google.dev/gemini-api/docs/live-session?hl=zh-tw)指南。
+- 請參閱[臨時權杖](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=zh-tw)指南，瞭解如何在[用戶端對伺服器](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-tw#implementation-approach)應用程式中安全地進行驗證。
+- 如要進一步瞭解基礎 WebSockets API，請參閱 [WebSockets API 參考資料](https://ai.google.dev/api/live?hl=zh-tw)。
 
-发送反馈
+提供意見
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-最后更新时间 (UTC)：2026-07-08。
+上次更新時間：2026-09-04 (世界標準時間)。
 
-需要向我们提供更多信息？
+想進一步說明嗎？
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-08。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-04 (世界標準時間)。"],[],[]]

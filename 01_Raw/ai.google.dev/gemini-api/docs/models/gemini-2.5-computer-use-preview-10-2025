@@ -1,45 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=ko
-fetched_at: 2026-08-31T06:39:33.523413+00:00
-title: "Gemini 2.5 \ucef4\ud4e8\ud130 \uc0ac\uc6a9 \ubaa8\ub378 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=zh-TW
+fetched_at: 2026-09-07T05:45:46.190635+00:00
+title: "Gemini 2.5 Computer Use \u6a21\u578b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-의견 보내기
+提供意見
 
-# Gemini 2.5 컴퓨터 사용 모델
+# Gemini 2.5 Computer Use 模型
 
-Gemini가 디지털 환경을 인식하고 탐색할 수 있도록 직접 인터페이스 상호작용을 위해 설계된 에이전트 기능 모델입니다. Gemini 2.5 Computer Use는 시각적 추론과 정확한 커서 제어가 필요한 브라우저 자동화, 다단계 소프트웨어 작업, UI 테스트에 가장 적합합니다.
+這項代理功能模型專為直接介面互動而設計，可讓 Gemini 感知及瀏覽數位環境。Gemini 2.5 Computer Use 最適合用於瀏覽器自動化、多步驟軟體工作，以及需要視覺推論和精確游標控制的 UI 測試。
 
-## 문서
+## 說明文件
 
-기능 및 기능에 대한 전체 내용은 [컴퓨터 사용](https://ai.google.dev/gemini-api/docs/computer-use?hl=ko) 페이지를 참고하세요.
+如要瞭解完整的功能和特色，請前往「電腦使用」頁面。
 
 ## gemini-2.5-computer-use-preview-10-2025
 
-| 속성 | 설명 |
+| 屬性 | 說明 |
 | --- | --- |
-| id\_card모델 코드 | **Gemini API**  `gemini-2.5-computer-use-preview-10-2025` |
-| save지원되는 데이터 유형 | **입력**  이미지, 텍스트  **출력**  텍스트 |
-| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 토큰 한도**  128,000  **출력 토큰 한도**  64,000 |
-| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - 미리보기: `gemini-2.5-computer-use-preview-10-2025` |
-| calendar\_month최근 업데이트 | 2025년 10월 |
+| id\_card 模型代碼 | **Gemini API**  `gemini-2.5-computer-use-preview-10-2025` |
+| save支援的資料類型 | **輸入功率**  圖片、文字  **輸出內容**  文字 |
+| token\_auto 代幣限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw) | **輸入權杖限制**  128,000  **輸出詞元限制**  64,000 |
+| 123 個版本 | 如要瞭解詳情，請參閱[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw#model-versions)。  - 預覽：`gemini-2.5-computer-use-preview-10-2025` |
+| calendar\_month最新更新 | 2025 年 10 月 |
 
-의견 보내기
+提供意見
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-최종 업데이트: 2026-08-19(UTC)
+上次更新時間：2026-08-19 (世界標準時間)。
 
-의견을 전달하고 싶나요?
+想進一步說明嗎？
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-08-19(UTC)"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-08-19 (世界標準時間)。"],[],[]]

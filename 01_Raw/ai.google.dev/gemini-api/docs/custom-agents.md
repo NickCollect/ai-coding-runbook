@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=vi
-fetched_at: 2026-08-31T06:37:16.756398+00:00
+fetched_at: 2026-09-07T05:40:46.146512+00:00
 title: "T\u1ea1o t\u00e1c nh\u00e2n \u0111\u01b0\u1ee3c qu\u1ea3n l\u00fd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

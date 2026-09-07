@@ -1,52 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ko
-fetched_at: 2026-08-31T06:42:39.664807+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ja
+fetched_at: 2026-09-07T05:50:09.256382+00:00
 title: "Gemini 3.5 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-의견 보내기
+フィードバックを送信
 
 # Gemini 3.5 Flash
 
-Gemini 3.5 Flash는 실제 작업에 최적화된 지속적인 최첨단 인텔리전스를 더 빠른 속도와 더 낮은 비용으로 제공합니다. 에이전트 시대를 위해 설계되었으며, 하위 에이전트 배포, 다단계 워크플로, 장기 작업에 탁월합니다. 이 모델은 복잡한 코딩 주기와 반복을 포함하는 빠른 에이전트 루프에 특히 효과적입니다.
+Gemini 3.5 Flash は、現実世界のタスク向けに最適化された最先端レベルのインテリジェンスを、より高速かつ低コストで提供します。エージェントの時代向けに設計されており、サブエージェントのデプロイ、マルチステップ ワークフロー、長期的タスクを大規模に実行するのに優れています。このモデルは、複雑なコーディング サイクルと反復処理を伴う迅速なエージェント ループに特に効果的です。
 
-[Google AI Studio에서 사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash&hl=ko)
+[Google AI Studio で試す](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash&hl=ja)
 
-## 문서
+## ドキュメント
 
-기능 및 역량에 관한 전체 내용은
-[Gemini 3.5 Flash의 새로운 기능](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.5?hl=ko)
-을 참고하세요.
+機能と機能の詳細については、[Gemini 3.5 Flash の新機能](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.5?hl=ja)のページをご覧ください。
 
 ## gemini-3.5-flash
 
-| 속성 | 설명 |
+| プロパティ | 説明 |
 | --- | --- |
-| id\_card모델 코드 | `gemini-3.5-flash` |
-| save지원되는 데이터 유형 | **입력**  텍스트, 이미지, 동영상, 오디오, PDF  **출력**  텍스트 |
-| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 토큰 한도**  1,048,576  **출력 토큰 한도**  65,536 |
-| handyman기능 | **[오디오 생성](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ko)**  지원되지 않음  **[캐싱](https://ai.google.dev/gemini-api/docs/caching?hl=ko)**  지원됨  **[코드 실행](https://ai.google.dev/gemini-api/docs/code-execution?hl=ko)**  지원됨  **[컴퓨터 사용](https://ai.google.dev/gemini-api/docs/computer-use?hl=ko)**  지원됨 (미리보기)  **[파일 검색](https://ai.google.dev/gemini-api/docs/file-search?hl=ko)**  지원됨  **[함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)**  지원됨  **[Google 지도 기반 그라운딩](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ko)**  지원됨  **[이미지 생성](https://ai.google.dev/gemini-api/docs/image-generation?hl=ko)**  지원되지 않음  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ko)**  지원되지 않음  **[검색 그라운딩](https://ai.google.dev/gemini-api/docs/google-search?hl=ko)**  지원됨  **[구조화된 출력](https://ai.google.dev/gemini-api/docs/structured-output?hl=ko)**  지원됨  **[사고](https://ai.google.dev/gemini-api/docs/thinking?hl=ko)**  지원됨  **[URL 컨텍스트](https://ai.google.dev/gemini-api/docs/url-context?hl=ko)**  지원됨 |
-| speed소비 옵션 | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ko)**  지원됨  **[가변 추론](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ko)**  지원됨  **[우선순위 추론](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ko)**  지원됨 |
-| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - 안정화 버전: `gemini-3.5-flash` - 미리보기: `gemini-3-flash-preview` |
-| calendar\_month최근 업데이트 | 2026년 5월 |
-| id\_card모델 카드 | [모델 카드](https://deepmind.google/models/model-cards/gemini-3-5-flash/?hl=ko) |
+| id\_cardモデルコード | `gemini-3.5-flash` |
+| save でサポートされるデータ型 | **入力**  テキスト、画像、動画、音声、PDF  **出力**  テキスト |
+| token\_autoトークンの上限[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ja) | **入力トークンの上限**  1,048,576  **出力トークンの上限**  65,536 |
+| handyman機能 | **[音声生成](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja)**  サポート対象外  **[キャッシュ](https://ai.google.dev/gemini-api/docs/caching?hl=ja)**  サポート対象  **[コード実行](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)**  サポート対象  **[パソコンの使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=ja)**  サポート対象（プレビュー）  **[ファイル検索](https://ai.google.dev/gemini-api/docs/file-search?hl=ja)**  サポート対象  **[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)**  サポート対象  **[Google マップによるグラウンディング](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ja)**  サポート対象  **[画像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja)**  サポート対象外  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ja)**  サポート対象外  **[検索によるグラウンディング](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)**  サポート対象  **[構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)**  サポート対象  **[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)**  サポート対象  **[URL コンテキスト](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)**  サポート対象 |
+| speed使用オプション | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja)**  サポート対象  **[Flex 推論](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ja)**  サポート対象  **[優先度推論](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ja)**  サポート対象 |
+| 123 バージョン | 詳しくは、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja#model-versions)をご覧ください。  - 安定版: `gemini-3.5-flash` - プレビュー: `gemini-3-flash-preview` |
+| calendar\_month最新情報 | 2026 年 5 月 |
+| id\_cardモデルカード | [モデルカード](https://deepmind.google/models/model-cards/gemini-3-5-flash/?hl=ja) |
 
-의견 보내기
+フィードバックを送信
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-최종 업데이트: 2026-07-21(UTC)
+最終更新日 2026-07-21 UTC。
 
-의견을 전달하고 싶나요?
+ご意見をお聞かせください
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-21(UTC)"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-21 UTC。"],[],[]]

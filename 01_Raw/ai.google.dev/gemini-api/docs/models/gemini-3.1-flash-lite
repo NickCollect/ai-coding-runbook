@@ -1,46 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=id
-fetched_at: 2026-08-31T06:40:21.832397+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ko
+fetched_at: 2026-09-07T05:48:49.732562+00:00
 title: "Gemini 3.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Kirim masukan
+의견 보내기
 
 # Gemini 3.1 Flash-Lite
 
-Gemini 3.1 Flash-Lite adalah model multimodal berlatensi rendah dan hemat biaya yang dioptimalkan untuk tugas ringan dan berfrekuensi tinggi. Model ini mendukung input teks, gambar, video, audio, dan PDF, serta dirancang untuk alur kerja agentik bervolume tinggi, ekstraksi data sederhana, dan aplikasi yang latensi dan biaya API menjadi batasan utamanya.
+Gemini 3.1 Flash-Lite는 짧은 지연 시간과 비용 효율성을 갖춘 멀티모달 모델로, 고빈도 경량 작업에 최적화되어 있습니다. 이 모델은 텍스트, 이미지, 동영상, 오디오, PDF 입력을 지원하며, 대량 에이전트형 워크플로, 간단한 데이터 추출, 지연 시간과 API 비용이 기본 제약 조건인 애플리케이션을 위해 설계되었습니다.
 
-[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=id)
+[Google AI Studio에서 사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=ko)
 
 ## gemini-3.1-flash-lite
 
-| Properti | Deskripsi |
+| 속성 | 설명 |
 | --- | --- |
-| id\_cardKode model | `gemini-3.1-flash-lite` |
-| saveJenis data yang didukung | **Input**  Teks, Gambar, Video, Audio, dan PDF  **Output**  Teks |
-| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Batas token input**  1.048.576  **Batas token output**  65.536 |
-| handymanKemampuan | **[Pembuatan audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=id)**  Tidak didukung  **[Caching](https://ai.google.dev/gemini-api/docs/caching?hl=id)**  Didukung  **[Eksekusi kode](https://ai.google.dev/gemini-api/docs/code-execution?hl=id)**  Didukung  **[Penggunaan komputer](https://ai.google.dev/gemini-api/docs/computer-use?hl=id)**  Tidak didukung  **[Penelusuran file](https://ai.google.dev/gemini-api/docs/file-search?hl=id)**  Didukung  **[Pemanggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id)**  Didukung  **[Grounding with Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=id)**  Didukung  **[Pembuatan gambar](https://ai.google.dev/gemini-api/docs/image-generation?hl=id)**  Tidak didukung  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=id)**  Tidak didukung  **[Grounding penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id)**  Didukung  **[Output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id)**  Didukung  **[Penalaran](https://ai.google.dev/gemini-api/docs/thinking?hl=id)**  Didukung  **[Konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id)**  Didukung |
-| speedOpsi pemakaian | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=id)**  Didukung  **[Inferensi fleksibel](https://ai.google.dev/gemini-api/docs/flex-inference?hl=id)**  Didukung  **[Inferensi prioritas](https://ai.google.dev/gemini-api/docs/priority-inference?hl=id)**  Didukung |
-| 123Versi | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - `Stable: gemini-3.1-flash-lite` |
-| calendar\_monthPembaruan terbaru | Mei 2026 |
-| id\_cardKartu model | [Kartu model](https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/?hl=id) |
+| id\_card모델 코드 | `gemini-3.1-flash-lite` |
+| save지원되는 데이터 유형 | **입력**  텍스트, 이미지, 동영상, 오디오, PDF  **출력**  텍스트 |
+| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 토큰 한도**  1,048,576  **출력 토큰 한도**  65,536 |
+| handyman기능 | **[오디오 생성](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ko)**  지원되지 않음  **[캐싱](https://ai.google.dev/gemini-api/docs/caching?hl=ko)**  지원됨  **[코드 실행](https://ai.google.dev/gemini-api/docs/code-execution?hl=ko)**  지원됨  **[컴퓨터 사용](https://ai.google.dev/gemini-api/docs/computer-use?hl=ko)**  지원되지 않음  **[파일 검색](https://ai.google.dev/gemini-api/docs/file-search?hl=ko)**  지원됨  **[함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)**  지원됨  **[Google 지도 기반 그라운딩](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ko)**  지원됨  **[이미지 생성](https://ai.google.dev/gemini-api/docs/image-generation?hl=ko)**  지원되지 않음  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ko)**  지원되지 않음  **[검색 그라운딩](https://ai.google.dev/gemini-api/docs/google-search?hl=ko)**  지원됨  **[구조화된 출력](https://ai.google.dev/gemini-api/docs/structured-output?hl=ko)**  지원됨  **[사고](https://ai.google.dev/gemini-api/docs/thinking?hl=ko)**  지원됨  **[URL 컨텍스트](https://ai.google.dev/gemini-api/docs/url-context?hl=ko)**  지원됨 |
+| speed소비 옵션 | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ko)**  지원됨  **[유연한 추론](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ko)**  지원됨  **[우선순위 추론](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ko)**  지원됨 |
+| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - `Stable: gemini-3.1-flash-lite` |
+| calendar\_month최신 업데이트 | 2026년 5월 |
+| id\_card모델 카드 | [모델 카드](https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/?hl=ko) |
 
-## Panduan developer
+## 개발자 가이드
 
-Gemini 3.1 Flash-Lite paling baik dalam menangani tugas sederhana dalam skala besar. Berikut beberapa kasus penggunaan yang paling cocok untuk Gemini 3.1 Flash-Lite:
+Gemini 3.1 Flash-Lite는 대규모의 간단한 작업을 처리하는 데 가장 적합합니다. 다음은 Gemini 3.1 Flash-Lite에 가장 적합한 사용 사례입니다.
 
-- **Terjemahan**: Terjemahan cepat, murah, dan bervolume tinggi, seperti memproses
-  pesan chat, ulasan, dan tiket dukungan dalam skala besar. Anda dapat menggunakan petunjuk sistem untuk membatasi output hanya ke teks yang diterjemahkan tanpa komentar tambahan:
+- **번역**: 대규모로 채팅 메시지, 리뷰, 지원 티켓을 처리하는 등 빠르고 저렴하며 대량의 번역 시스템 명령어를 사용하여 추가 해설 없이 번역된 텍스트만 출력하도록 제한할 수 있습니다.
 
   ```
   from google import genai
@@ -58,9 +57,7 @@ Gemini 3.1 Flash-Lite paling baik dalam menangani tugas sederhana dalam skala be
 
   print(response.text)
   ```
-- **Transkripsi**: Memproses rekaman, catatan suara, atau konten audio apa pun
-  yang memerlukan transkrip teks tanpa perlu menyiapkan
-  pipeline speech-to-text terpisah. Mendukung input multimodal, sehingga Anda dapat meneruskan file audio secara langsung untuk transkripsi:
+- **스크립트 작성**: 별도의 음성 텍스트 변환 파이프라인을 실행하지 않고 텍스트 스크립트가 필요한 녹음 파일, 음성 메모 또는 오디오 콘텐츠를 처리합니다. 멀티모달 입력을 지원하므로 스크립트 작성을 위해 오디오 파일을 직접 전달할 수 있습니다.
 
   ```
   from google import genai
@@ -80,9 +77,7 @@ Gemini 3.1 Flash-Lite paling baik dalam menangani tugas sederhana dalam skala be
 
   print(response.text)
   ```
-- **Tugas agentik ringan dan ekstraksi data**: Pipeline ekstraksi entity,
-  klasifikasi, dan pemrosesan data ringan yang didukung dengan
-  output JSON terstruktur. Misalnya, mengekstrak data terstruktur dari ulasan pelanggan e-commerce:
+- **경량 에이전트 작업 및 데이터 추출**: 구조화된 JSON 출력을 지원하는 항목 추출, 분류, 경량 데이터 처리 파이프라인 예를 들어 이커머스 고객 리뷰에서 구조화된 데이터를 추출하는 경우:
 
   ```
   from google import genai
@@ -110,8 +105,7 @@ Gemini 3.1 Flash-Lite paling baik dalam menangani tugas sederhana dalam skala be
 
   print(response.text)
   ```
-- **Pemrosesan dan ringkasan dokumen**: Mengurai PDF dan menampilkan ringkasan singkat, seperti untuk membuat pipeline pemrosesan dokumen atau dengan cepat
-  memilah file yang masuk:
+- **문서 처리 및 요약**: PDF를 파싱하고 간결한 요약을 반환합니다. 문서 처리 파이프라인을 빌드하거나 수신 파일을 빠르게 분류하는 데 유용합니다.
 
   ```
   from google import genai
@@ -138,8 +132,7 @@ Gemini 3.1 Flash-Lite paling baik dalam menangani tugas sederhana dalam skala be
 
   print(response.text)
   ```
-- **Perutean model**: Menggunakan model berlatensi rendah dan berbiaya rendah sebagai pengklasifikasi yang
-  merutekan kueri ke model yang sesuai berdasarkan kompleksitas tugas. Ini adalah pola nyata dalam produksi — [Gemini CLI](https://geminicli.com/docs/core/#model-fallback) open source menggunakan Flash-Lite untuk mengklasifikasikan kompleksitas tugas dan merutekan ke Flash atau Pro.
+- **모델 라우팅**: 지연 시간이 짧고 비용이 저렴한 모델을 작업 복잡성에 따라 적절한 모델로 쿼리를 라우팅하는 분류기로 사용합니다. 이는 프로덕션의 실제 패턴입니다. 오픈소스 [Gemini CLI](https://geminicli.com/docs/core/#model-fallback)는 Flash-Lite를 사용하여 작업 복잡성을 분류하고 이에 따라 Flash 또는 Pro로 라우팅합니다.
 
   ```
   from google import genai
@@ -192,8 +185,7 @@ Gemini 3.1 Flash-Lite paling baik dalam menangani tugas sederhana dalam skala be
 
   print(response.text)
   ```
-- **Penalaran**: Untuk akurasi yang lebih baik untuk tugas yang diuntungkan dari penalaran langkah demi langkah, konfigurasi penalaran sehingga model menghabiskan komputasi tambahan untuk
-  penalaran internal sebelum menghasilkan output akhir:
+- **사고**: 단계별 추론의 이점을 누릴 수 있는 작업의 정확성을 높이려면 모델이 최종 출력을 생성하기 전에 내부 추론에 추가 컴퓨팅을 사용하도록 사고를 구성하세요.
 
   ```
   from google import genai
@@ -212,12 +204,12 @@ Gemini 3.1 Flash-Lite paling baik dalam menangani tugas sederhana dalam skala be
   print(response.text)
   ```
 
-Kirim masukan
+의견 보내기
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Terakhir diperbarui pada 2026-07-21 UTC.
+최종 업데이트: 2026-07-21(UTC)
 
-Ada masukan untuk kami?
+의견을 전달하고 싶나요?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-21 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-21(UTC)"],[],[]]

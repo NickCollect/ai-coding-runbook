@@ -1,74 +1,63 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=pl
-fetched_at: 2026-08-31T06:40:12.521074+00:00
-title: "Kr\u00f3tkie wprowadzenie do Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=tr
+fetched_at: 2026-09-07T05:45:20.864927+00:00
+title: "Google AI Studio h\u0131zl\u0131 ba\u015flang\u0131\u00e7 k\u0131lavuzu \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Prześlij opinię
+Geri bildirim gönderin
 
-# Krótkie wprowadzenie do Google AI Studio
+# Google AI Studio hızlı başlangıç kılavuzu
 
-[Google AI Studio](https://aistudio.google.com/?hl=pl) pozwala szybko testować
-modele i eksperymentować z różnymi promptami. Gdy wszystko będzie gotowe, możesz kliknąć „Pobierz kod” i wybrać preferowany język programowania, aby używać interfejsu [Gemini API](https://ai.google.dev/gemini-api/docs/get-started?hl=pl).
+[Google AI Studio](https://aistudio.google.com/?hl=tr), modelleri hızlı bir şekilde denemenize ve farklı istemlerle denemeler yapmanıza olanak tanır. Geliştirmeye hazır olduğunuzda [Gemini API](https://ai.google.dev/gemini-api/docs/get-started?hl=tr)'yi kullanmak için "Kodu al"ı ve tercih ettiğiniz programlama dilini seçebilirsiniz.
 
-## Prompty i ustawienia
+## İstemler ve ayarlar
 
-Google AI Studio udostępnia kilka interfejsów promptów, które są przeznaczone do różnych zastosowań. Ten przewodnik omawia **prompty czatu**, które służą do tworzenia
-trybów konwersacyjnych. Ta technika promptowania umożliwia generowanie danych wyjściowych na podstawie wielu tur wprowadzania danych
-i odpowiedzi. Więcej informacji znajdziesz w naszym
-[przykładzie prompta czatu poniżej](#chat_example).
-Inne opcje to m.in. **przesyłanie strumieniowe w czasie rzeczywistym** i **generowanie filmów**
-.
+Google AI Studio, farklı kullanım alanları için tasarlanmış çeşitli istem arayüzleri sunar. Bu kılavuzda, sohbet deneyimleri oluşturmak için kullanılan **sohbet istemleri** ele alınmaktadır. Bu istem tekniği, çıktı oluşturmak için birden fazla giriş ve yanıt etkileşimine olanak tanır. [Aşağıdaki sohbet istemi örneğimizden](#chat_example) daha fazla bilgi edinebilirsiniz.
+Diğer seçenekler arasında **Anlık yayın**, **Video oluşturma** ve daha fazlası yer alır.
 
-AI Studio udostępnia też panel **Ustawienia uruchamiania** , w którym możesz dostosować
-[parametry modelu](https://ai.google.dev/docs/prompting-strategies?hl=pl#model-parameters),
-[ustawienia bezpieczeństwa](https://ai.google.dev/gemini-api/docs/safety-settings?hl=pl) i włączyć narzędzia takie jak
-[dane wyjściowe w postaci ustrukturyzowanej](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl), [wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl), [wykonywanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl) i [ugruntowanie](https://ai.google.dev/gemini-api/docs/grounding?hl=pl).
+AI Studio'da **Çalıştırma ayarları** paneli de bulunur. Bu panelde [model parametrelerinde](https://ai.google.dev/docs/prompting-strategies?hl=tr#model-parameters) ve [güvenlik ayarlarında](https://ai.google.dev/gemini-api/docs/safety-settings?hl=tr) düzenlemeler yapabilir, [yapılandırılmış çıkış](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr), [işlev çağrısı](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr), [kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr) ve [temellendirme](https://ai.google.dev/gemini-api/docs/grounding?hl=tr) gibi araçları etkinleştirebilirsiniz.
 
-## Przykład prompta czatu: tworzenie niestandardowej aplikacji czatu
+## Chat istemi örneği: Özel bir sohbet uygulaması oluşturma
 
-Jeśli korzystasz z czatbota ogólnego przeznaczenia, takiego jak
-[Gemini](https://gemini.google.com/?hl=pl), wiesz, jak potężne mogą być modele
-generatywnej AI w przypadku otwartych dialogów. Chociaż te czatboty ogólnego przeznaczenia są przydatne, często trzeba je dostosować do konkretnych zastosowań.
+[Gemini](https://gemini.google.com/?hl=tr) gibi genel amaçlı bir chatbot kullandıysanız üretken yapay zeka modellerinin açık uçlu diyaloglar için ne kadar güçlü olabileceğini ilk elden deneyimlemişsinizdir. Bu genel amaçlı chatbot'lar faydalı olsa da genellikle belirli kullanım alanlarına göre uyarlanmaları gerekir.
 
-Możesz na przykład utworzyć czatbota obsługi klienta, który obsługuje tylko rozmowy dotyczące produktu firmy. Możesz też utworzyć czatbota, który mówi w określonym tonie lub stylu: bota, który żartuje, rymuje jak poeta lub używa w odpowiedziach wielu emoji.
+Örneğin, yalnızca bir şirketin ürünüyle ilgili görüşmeleri destekleyen bir müşteri hizmetleri chatbot'u oluşturmak isteyebilirsiniz. Belirli bir üslup veya tarzda konuşan bir chatbot oluşturmak isteyebilirsiniz. Örneğin, çok sayıda şaka yapan, şair gibi kafiyeli konuşan veya yanıtlarında çok sayıda emoji kullanan bir bot.
 
-Ten przykład pokazuje, jak używać Google AI Studio do tworzenia przyjaznego czatbota, który komunikuje się tak, jakby był kosmitą mieszkającym na jednym z księżyców Jowisza – Europie.
+Bu örnekte, Google AI Studio'yu kullanarak Jüpiter'in uydularından biri olan Europa'da yaşayan bir uzaylı gibi iletişim kuran samimi bir chatbot oluşturma işlemi gösterilmektedir.
 
-### Krok 1. Utwórz prompt na czacie
+### 1. adım: Sohbet istemi oluşturun
 
-Aby utworzyć czatbota, musisz podać przykłady interakcji między użytkownikiem a czatbotem, aby model mógł udzielać odpowiedzi, których oczekujesz.
+Chatbot oluşturmak için, modeli istediğiniz yanıtları vermeye yönlendirmek üzere kullanıcı ile chatbot arasındaki etkileşim örneklerini sağlamanız gerekir.
 
-Aby utworzyć prompt na czacie:
+Sohbet istemi oluşturmak için:
 
-1. Otwórz [Google AI Studio](https://aistudio.google.com/?hl=pl). Domyślnie otworzy się **plac zabaw** z nowym promptem na czacie.
-2. W prawym górnym rogu kliknij **Ustawienia uruchamiania** tune , aby rozwinąć panel, i znajdź pole do wprowadzania danych [**Instrukcje systemowe**](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl#system-instructions). Wklej w polu tekstowym ten tekst:
+1. [Google AI Studio](https://aistudio.google.com/?hl=tr)'yu açın. **Playground**, yeni bir sohbet istemiyle varsayılan olarak açık olur.
+2. Sağ üst köşedeki **Çalıştırma ayarları**'nı tune tıklayarak paneli genişletin ve [**Sistem Talimatları**](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr#system-instructions) giriş alanını bulun. Aşağıdakileri metin giriş alanına yapıştırın:
 
    ```
    You are an alien that lives on Europa, one of Jupiter's moons.
    ```
 
-Po dodaniu instrukcji systemowych zacznij testować aplikację, rozmawiając z modelem:
+Sistem talimatlarını ekledikten sonra modelle sohbet ederek uygulamanızı test etmeye başlayın:
 
-1. W polu tekstowym oznaczonym **Wpisz coś...** wpisz pytanie lub
-   obserwację, którą może zadać użytkownik. Na przykład:
+1. **Bir şeyler yazın...** etiketli metin giriş kutusuna, kullanıcının sorabileceği bir soru veya yapabileceği bir gözlem yazın. Örneğin:
 
-   **Użytkownik:**
+   **Kullanıcı:**
 
    ```
    What's the weather like?
    ```
-2. Aby uzyskać odpowiedź od czatbota, kliknij przycisk **Uruchom**. Odpowiedź może wyglądać tak:
+2. Chatbot'tan yanıt almak için **Çalıştır** düğmesini tıklayın. Bu yanıt aşağıdakine benzer olabilir:
 
    **Model:**
 
@@ -79,14 +68,14 @@ Po dodaniu instrukcji systemowych zacznij testować aplikację, rozmawiając z m
 
    (gemini-2.5-pro)
 
-### Krok 2. Naucz bota lepiej rozmawiać
+### 2. adım: Botunuza daha iyi sohbet etmeyi öğretin
 
-Dzięki jednej instrukcji udało Ci się utworzyć podstawowego czatbota kosmitę z Europy. Jednak jedna instrukcja może nie wystarczyć, aby zapewnić spójność i jakość odpowiedzi modelu. Bez bardziej szczegółowych instrukcji odpowiedź modelu na pytanie o pogodę jest zwykle bardzo długa i może być nieprzewidywalna.
+Tek bir talimat vererek temel bir Europa uzaylı chatbot'u oluşturabildiniz. Ancak tek bir talimat, modelin yanıtlarında tutarlılık ve kalite sağlamak için yeterli olmayabilir. Daha ayrıntılı talimatlar olmadan modelin hava durumuyla ilgili bir soruya verdiği yanıt çok uzun olma eğilimindedir ve kendi başına hareket edebilir.
 
-Dostosuj ton czatbota, dodając instrukcje systemowe:
+Sistem talimatlarına aşağıdakileri ekleyerek chatbot'unuzun üslubunu özelleştirin:
 
-1. Rozpocznij nowy prompt na czacie lub użyj tego samego. Instrukcje systemowe można modyfikować po rozpoczęciu sesji czatu.
-2. W sekcji **Instrukcje systemowe** zmień dotychczasowe instrukcje na te:
+1. Yeni bir sohbet istemi başlatın veya aynı istemi kullanın. Sistem talimatları, sohbet oturumu başladıktan sonra değiştirilebilir.
+2. **Sistem Talimatları** bölümünde, mevcut talimatları aşağıdaki talimatlarla değiştirin:
 
    ```
    You are Tim, an alien that lives on Europa, one of Jupiter's moons.
@@ -94,7 +83,7 @@ Dostosuj ton czatbota, dodając instrukcje systemowe:
    Keep your answers under 3 paragraphs long, and use an upbeat, chipper tone
    in your answers.
    ```
-3. Ponownie wpisz pytanie (`What's the weather like?`) i kliknij przycisk **Uruchom**. Jeśli nie rozpoczniesz nowego czatu, odpowiedź może wyglądać tak:
+3. Sorunuzu yeniden girin (`What's the weather like?`) ve **Çalıştır** düğmesini tıklayın. Yeni bir sohbet başlatmadıysanız yanıtınız şu şekilde olabilir:
 
    **Model:**
 
@@ -107,24 +96,23 @@ Dostosuj ton czatbota, dodając instrukcje systemowe:
 
    (gemini-2.5-pro)
 
-Możesz użyć tej metody, aby dodać czatbotowi więcej głębi. Zadawaj więcej pytań, edytuj odpowiedzi i poprawiaj jakość czatbota. Dodawaj lub modyfikuj instrukcje i sprawdzaj, jak zmieniają one zachowanie czatbota.
+Bu yaklaşımı kullanarak chatbot'a daha fazla derinlik katabilirsiniz. Daha fazla soru sorun, yanıtları düzenleyin ve chatbot'unuzun kalitesini artırın. Talimatları eklemeye veya değiştirmeye devam edin ve chatbot'unuzun davranışını nasıl değiştirdiklerini test edin.
 
-### Krok 3. Dalsze czynności
+### 3. adım: Sonraki adımlar
 
-Podobnie jak w przypadku innych typów promptów, gdy prototyp prompta będzie Ci odpowiadać, możesz kliknąć przycisk **Pobierz kod** , aby rozpocząć kodowanie, lub zapisać prompta, aby pracować nad nim później i udostępnić go innym.
+Diğer istem türlerine benzer şekilde, isteminizin prototipini istediğiniz gibi oluşturduktan sonra **Kodu al** düğmesini kullanarak kodlamaya başlayabilir veya isteminizi kaydedip daha sonra üzerinde çalışabilir ve başkalarıyla paylaşabilirsiniz.
 
-## Więcej informacji
+## Daha fazla bilgi
 
-- Jeśli chcesz przejść do kodu, zapoznaj się z przewodnikami dla początkujących dotyczącymi interfejsu [API
-  Get started guides](https://ai.google.dev/gemini-api/docs/get-started?hl=pl).
-- Aby dowiedzieć się, jak tworzyć lepsze prompty, zapoznaj się z [wytycznymi dotyczącymi projektowania promptów](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=pl).
+- Koda geçmeye hazırsanız [API'yi kullanmaya başlama kılavuzlarına](https://ai.google.dev/gemini-api/docs/get-started?hl=tr) bakın.
+- Daha iyi istemler oluşturmayı öğrenmek için [İstem tasarımı yönergeleri](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=tr) başlıklı makaleyi inceleyin.
 
-Prześlij opinię
+Geri bildirim gönderin
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Ostatnia aktualizacja: 2026-07-30 UTC.
+Son güncelleme tarihi: 2026-07-30 UTC.
 
-Chcesz przekazać coś jeszcze?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]

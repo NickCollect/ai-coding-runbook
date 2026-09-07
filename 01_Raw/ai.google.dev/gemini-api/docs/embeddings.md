@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/embeddings?hl=tr
-fetched_at: 2026-08-31T06:41:41.493311+00:00
-title: "Yerle\u015ftirmeler \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/embeddings?hl=vi
+fetched_at: 2026-09-07T05:46:55.850855+00:00
+title: "M\u1ee5c nh\u00fang \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Geri bildirim gönderin
+Gửi ý kiến phản hồi
 
-# Yerleştirmeler
+# Mục nhúng
 
-Gemini API, metin, resim, video ve diğer içerikler için yerleştirmeler oluşturmak üzere yerleştirme modelleri sunar. Elde edilen bu yerleştirmeler daha sonra semantik arama, sınıflandırma ve kümeleme gibi görevlerde kullanılabilir. Bu sayede, anahtar kelime tabanlı yaklaşımlara kıyasla daha doğru ve bağlama duyarlı sonuçlar elde edilebilir.
+Gemini API cung cấp các mô hình nhúng để tạo các mục nhúng cho văn bản, hình ảnh, video và nội dung khác. Sau đó, bạn có thể dùng các vectơ nhúng thu được cho những tác vụ như tìm kiếm ngữ nghĩa, phân loại và phân cụm, mang lại kết quả chính xác hơn và nhận biết được ngữ cảnh so với các phương pháp dựa trên từ khoá.
 
-En yeni model olan `gemini-embedding-2`, Gemini API'deki ilk çok formatlı yerleştirme modelidir. Metin, resim, video, ses ve dokümanları birleşik bir yerleştirme alanına eşleyerek 100'den fazla dilde farklı formatlarda arama, sınıflandırma ve kümeleme yapılmasını sağlar. Daha fazla bilgi edinmek için [çok formatlı yerleştirmeler bölümüne](#multimodal) bakın. Yalnızca metin içeren kullanım alanlarında `gemini-embedding-001` kullanılmaya devam eder.
+Mô hình mới nhất, `gemini-embedding-2`, là mô hình nhúng đa phương thức đầu tiên trong Gemini API. Mô hình này ánh xạ văn bản, hình ảnh, video, âm thanh và tài liệu vào một không gian nhúng thống nhất, cho phép tìm kiếm, phân loại và phân cụm đa phương thức trên hơn 100 ngôn ngữ. Hãy xem [phần về các vectơ nhúng đa phương thức](#multimodal) để tìm hiểu thêm. Đối với các trường hợp sử dụng chỉ có văn bản, bạn vẫn có thể dùng `gemini-embedding-001`.
 
-Veriyle artırılmış üretim (RAG) sistemleri oluşturmak, yapay zeka ürünlerinin yaygın kullanım alanlarından biridir. Gömme işlemleri, model çıkışlarını önemli ölçüde iyileştirerek doğruluk, tutarlılık ve bağlamsal zenginlik açısından daha iyi sonuçlar elde edilmesini sağlar. Yönetilen bir RAG çözümü kullanmayı tercih ederseniz RAG'yi yönetmeyi kolaylaştıran ve daha uygun maliyetli hale getiren [Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr) aracını geliştirdik.
+Xây dựng hệ thống Tạo sinh tăng cường truy xuất (RAG) là một trường hợp sử dụng phổ biến cho các sản phẩm AI. Dữ liệu nhúng đóng vai trò quan trọng trong việc cải thiện đáng kể kết quả của mô hình nhờ độ chính xác về thông tin thực tế, tính nhất quán và mức độ phong phú về ngữ cảnh được cải thiện. Nếu bạn muốn sử dụng một giải pháp RAG được quản lý, chúng tôi đã tạo công cụ [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi) để giúp bạn quản lý RAG dễ dàng hơn và tiết kiệm chi phí hơn.
 
-## Yerleştirilmiş öğeler oluşturma
+## Tạo các vectơ nhúng
 
-Metin yerleştirmeleri oluşturmak için `embedContent` yöntemini kullanın:
+Dùng phương thức `embedContent` để tạo các vectơ nhúng văn bản:
 
 ### Python
 
@@ -120,28 +120,28 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-## Performansı artırmak için görev türünü belirtin
+## Chỉ định loại việc cần làm để cải thiện hiệu suất
 
-Sınıflandırmadan belge aramaya kadar çeşitli görevler için gömmeleri kullanabilirsiniz. Doğru görev türünü belirtmek, yerleştirmelerin amaçlanan ilişkiler için optimize edilmesine yardımcı olarak doğruluğu ve verimliliği en üst düzeye çıkarır.
+Bạn có thể sử dụng các vectơ nhúng cho nhiều tác vụ, từ phân loại đến tìm kiếm tài liệu. Việc chỉ định đúng loại tác vụ sẽ giúp tối ưu hoá các mục nhúng cho các mối quan hệ dự kiến, tối đa hoá độ chính xác và hiệu quả.
 
-### Embeddings 2 ile görev türleri
+### Các loại nhiệm vụ có Embeddings 2
 
-`gemini-embedding-2` içeren yalnızca metin görevleri için isteminize görev talimatını eklemenizi önemle tavsiye ederiz. Bu işlem, sorguyu ve dokümanı doğru görev önekiyle biçimlendirerek yapılabilir.
+Đối với các tác vụ chỉ có văn bản có `gemini-embedding-2`, bạn nên thêm hướng dẫn cho tác vụ vào câu lệnh. Bạn có thể thực hiện việc này bằng cách định dạng truy vấn và tài liệu bằng tiền tố nhiệm vụ chính xác.
 
-Aşağıdaki tablolarda, `gemini-embedding-2` modelini kullanarak simetrik ve asimetrik kullanım alanları için sorguların ve dokümanların nasıl biçimlendirileceğine dair örnekler gösterilmektedir.
+Các bảng sau đây cho thấy ví dụ về cách định dạng truy vấn và tài liệu cho các trường hợp sử dụng đối xứng và bất đối xứng bằng mô hình `gemini-embedding-2`.
 
-**Alma kullanım alanları (Asimetrik biçim)**
+**Trường hợp sử dụng truy xuất (Định dạng bất đối xứng)**
 
-Asimetrik kullanım alanlarında, sorguya görev önekini ekleyin ve yerleştirmek ile almak istediğiniz içerik için belge yapısını uygulayın.
+Trong các trường hợp sử dụng không đối xứng, hãy thêm tiền tố tác vụ vào truy vấn và áp dụng cấu trúc tài liệu cho nội dung bạn muốn nhúng và truy xuất.
 
-| Kullanım alanı | Sorgu yapısı | Belge yapısı |
+| Trường hợp sử dụng | Cấu trúc truy vấn | Cấu trúc tài liệu |
 | --- | --- | --- |
-| Arama sorgusu | `task: search result | query: {content}` | `title: {title} | text: {content}` Başlık yoksa `title: none` kullanın. |
-| Soru yanıtlama | `task: question answering | query: {content}` | `title: {title} | text: {content}` |
-| Doğruluk kontrolü | `task: fact checking | query: {content}` | `title: {title} | text: {content}` |
-| Kod alma | `task: code retrieval | query: {content}` | `title: {title} | text: {content}` |
+| Truy vấn tìm kiếm | `task: search result | query: {content}` | `title: {title} | text: {content}` Nếu không có tiêu đề, hãy dùng `title: none`. |
+| Trả lời câu hỏi | `task: question answering | query: {content}` | `title: {title} | text: {content}` |
+| Kiểm chứng thông tin | `task: fact checking | query: {content}` | `title: {title} | text: {content}` |
+| Truy xuất mã | `task: code retrieval | query: {content}` | `title: {title} | text: {content}` |
 
-**Kullanım örneği**
+**Ví dụ về cách sử dụng**
 
 ### Python
 
@@ -160,17 +160,17 @@ def prepare_document(content, title=None):
     return f"title: {title} | text: {content}"
 ```
 
-**Tek girişli kullanım alanları (Simetrik biçim)**
+**Trường hợp sử dụng một đầu vào (Định dạng đối xứng)**
 
-Simetrik kullanım alanlarında, aynı görev için sorgu ve dokümanda aynı biçimlendirmeyi kullanın.
+Trong các trường hợp sử dụng đối xứng, đối với cùng một tác vụ, hãy sử dụng cùng một định dạng cho cụm từ tìm kiếm và tài liệu.
 
-| Kullanım alanı | Giriş yapısı |
+| Trường hợp sử dụng | Cấu trúc đầu vào |
 | --- | --- |
-| Sınıflandırma | `task: classification | query: {content}` |
-| Kümeleme | `task: clustering | query: {content}` |
-| Semantik benzerlik | `task: sentence similarity | query: {content}` Arama veya alma için kullanmayın. Semantik metin benzerliği için tasarlanmıştır. |
+| Phân loại | `task: classification | query: {content}` |
+| Tạo cụm | `task: clustering | query: {content}` |
+| Tính tương đồng về mặt ngữ nghĩa | `task: sentence similarity | query: {content}` Không dùng mã này để tìm kiếm hoặc truy xuất. Mô hình này được thiết kế để đo mức độ tương đồng về ngữ nghĩa giữa các văn bản. |
 
-**Kullanım örneği**
+**Ví dụ về cách sử dụng**
 
 ### Python
 
@@ -182,13 +182,13 @@ def prepare_query_and_document(content):
     return f'task: classification | query: {content}'
 ```
 
-Görevlerin tutarlı bir şekilde kullanılması önemlidir. Örneğin, dokümanlar `f'task: classification | query: {content}'` ile yerleştirilmişse sorgu da bu görev biçimine göre yerleştirilmelidir.
+Điều quan trọng là bạn phải sử dụng tác vụ này một cách nhất quán. Ví dụ: nếu tài liệu được nhúng bằng `f'task: classification | query: {content}'`, thì truy vấn cũng phải được nhúng theo định dạng tác vụ này.
 
-### Embeddings 1 ile görev türleri
+### Các loại nhiệm vụ có tính năng Nhúng 1
 
-`gemini-embedding-001` için `embedContent` yönteminde `task_type` değerini belirtebilirsiniz. Desteklenen görev türlerinin tam listesi için [Desteklenen görev türleri](#supported-task-types) tablosuna bakın.
+Đối với `gemini-embedding-001`, bạn có thể chỉ định `task_type` trong phương thức `embedContent`. Để biết danh sách đầy đủ các loại tác vụ được hỗ trợ, hãy xem bảng [Các loại tác vụ được hỗ trợ](#supported-task-types).
 
-Aşağıdaki örnekte, `SEMANTIC_SIMILARITY` kullanarak metin dizelerinin anlam olarak ne kadar benzer olduğunu nasıl kontrol edebileceğiniz gösterilmektedir.
+Ví dụ sau đây cho thấy cách bạn có thể dùng `SEMANTIC_SIMILARITY` để kiểm tra mức độ tương đồng về ý nghĩa của các chuỗi văn bản.
 
 ### Python
 
@@ -350,28 +350,28 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-0
     }'
 ```
 
-Kod snippet'leri çalıştırıldığında farklı metin parçalarının birbirine ne kadar benzediğini gösterir.
+Các đoạn mã sẽ cho biết mức độ tương đồng giữa các khối văn bản khi chạy.
 
-#### Desteklenen görev türleri
+#### Các loại việc cần làm được hỗ trợ
 
-`gemini-embedding-001` için desteklenen görev türleri:
+Các loại nhiệm vụ được hỗ trợ cho `gemini-embedding-001`:
 
-| Görev türü | Açıklama | Örnekler |
+| Loại việc cần làm | Mô tả | Ví dụ |
 | --- | --- | --- |
-| **SEMANTIC\_SIMILARITY** | Metin benzerliğini değerlendirmek için optimize edilmiş yerleştirmeler. | Öneri sistemleri, yinelenen öğe algılama |
-| **SINIFLANDIRMA** | Metinleri önceden ayarlanmış etiketlere göre sınıflandırmak için optimize edilmiş gömmeler. | Duygu analizi, spam yakalama |
-| **KÜMELEME** | Metinleri benzerliklerine göre kümelemek için optimize edilmiş gömmeler. | Belge düzenleme, pazar araştırması, anormallik algılama |
-| **RETRIEVAL\_DOCUMENT** | Doküman arama için optimize edilmiş gömmeler. | Arama için makaleleri, kitapları veya web sayfalarını dizine ekleme |
-| **RETRIEVAL\_QUERY** | Genel arama sorguları için optimize edilmiş gömmeler. Sorgular için `RETRIEVAL_QUERY`, alınacak dokümanlar için `RETRIEVAL_DOCUMENT` kullanın. | Özel arama ağı |
-| **CODE\_RETRIEVAL\_QUERY** | Doğal dil sorgularına dayalı kod bloklarının alınması için optimize edilmiş gömmeler. Sorgular için `CODE_RETRIEVAL_QUERY`, alınacak kod blokları için `RETRIEVAL_DOCUMENT` kullanın. | Kod önerileri ve arama |
-| **QUESTION\_ANSWERING** | Soru-cevap sistemindeki sorular için, soruyu yanıtlayan dokümanları bulmaya yönelik olarak optimize edilmiş gömmeler. Sorular için `QUESTION_ANSWERING`, alınacak dokümanlar için `RETRIEVAL_DOCUMENT` kullanın. | Chatbox |
-| **FACT\_VERIFICATION** | Doğrulanması gereken ifadeler için yerleştirmeler. İfadeyi destekleyen veya çürüten kanıtlar içeren belgelerin alınması için optimize edilmiştir. Hedef metin için `FACT_VERIFICATION`, alınacak dokümanlar için `RETRIEVAL_DOCUMENT` kullanın. | Otomatik doğruluk kontrolü sistemleri |
+| **SEMANTIC\_SIMILARITY** | Các vectơ nhúng được tối ưu hoá để đánh giá mức độ tương đồng của văn bản. | Hệ thống đề xuất, phát hiện nội dung trùng lặp |
+| **PHÂN LOẠI** | Các vectơ nhúng được tối ưu hoá để phân loại văn bản theo nhãn đặt sẵn. | Phân tích cảm xúc, phát hiện tin nhắn rác |
+| **PHÂN CỤM** | Các vectơ nhúng được tối ưu hoá để phân cụm văn bản dựa trên mức độ tương đồng. | Sắp xếp tài liệu, nghiên cứu thị trường, phát hiện điểm bất thường |
+| **RETRIEVAL\_DOCUMENT** | Các vectơ nhúng được tối ưu hoá cho tính năng tìm kiếm tài liệu. | Lập chỉ mục các bài viết, sách hoặc trang web để tìm kiếm. |
+| **RETRIEVAL\_QUERY** | Các vectơ được tối ưu hoá cho các cụm từ tìm kiếm chung. Sử dụng `RETRIEVAL_QUERY` cho các truy vấn; `RETRIEVAL_DOCUMENT` cho các tài liệu cần truy xuất. | Tìm kiếm tùy chỉnh |
+| **CODE\_RETRIEVAL\_QUERY** | Các vectơ nhúng được tối ưu hoá để truy xuất các khối mã dựa trên truy vấn bằng ngôn ngữ tự nhiên. Sử dụng `CODE_RETRIEVAL_QUERY` cho các câu hỏi; `RETRIEVAL_DOCUMENT` cho các khối mã cần truy xuất. | Đề xuất và tìm kiếm mã |
+| **QUESTION\_ANSWERING** | Các vectơ nhúng cho câu hỏi trong hệ thống trả lời câu hỏi, được tối ưu hoá để tìm tài liệu trả lời câu hỏi. Sử dụng `QUESTION_ANSWERING` cho câu hỏi; `RETRIEVAL_DOCUMENT` cho tài liệu cần truy xuất. | Hộp trò chuyện |
+| **FACT\_VERIFICATION** | Các câu cần được xác minh sẽ được nhúng, tối ưu hoá để truy xuất những tài liệu có bằng chứng hỗ trợ hoặc bác bỏ câu đó. Sử dụng `FACT_VERIFICATION` cho văn bản mục tiêu; `RETRIEVAL_DOCUMENT` cho tài liệu cần truy xuất | Hệ thống kiểm chứng tự động |
 
-## Yerleştirme boyutunu kontrol etme
+## Kiểm soát kích thước nhúng
 
-Hem `gemini-embedding-001` hem de `gemini-embedding-2`, bir modele aynı verilerin faydalı, daha basit sürümleri olan ilk segmentlere (veya öneklere) sahip yüksek boyutlu yerleştirmeleri öğrenmeyi öğreten Matryoshka Representation Learning (MRL) tekniği kullanılarak eğitilir.
+Cả `gemini-embedding-001` và `gemini-embedding-2` đều được huấn luyện bằng kỹ thuật Học biểu diễn Matryoshka (MRL), giúp dạy một mô hình học các mục nhúng có nhiều chiều có các phân đoạn ban đầu (hoặc tiền tố) cũng là các phiên bản đơn giản hơn và hữu ích của cùng một dữ liệu.
 
-Çıkış yerleştirme vektörünün boyutunu kontrol etmek için `output_dimensionality` parametresini kullanın. Daha küçük bir çıkış boyutu seçmek, depolama alanından tasarruf etmenizi ve sonraki uygulamalarda hesaplama verimliliğini artırmanızı sağlayabilir. Bu sırada kaliteden çok az ödün verilir. Her iki model de varsayılan olarak 3072 boyutlu bir yerleştirme çıkışı verir ancak depolama alanından tasarruf etmek için kaliteyi düşürmeden daha küçük bir boyuta kısaltabilirsiniz. 768, 1536 veya 3072 çıkış boyutlarını kullanmanızı öneririz.
+Sử dụng tham số `output_dimensionality` để kiểm soát kích thước của vectơ nhúng đầu ra. Việc chọn một chiều đầu ra nhỏ hơn có thể giúp tiết kiệm dung lượng lưu trữ và tăng hiệu quả tính toán cho các ứng dụng hạ nguồn, đồng thời ít ảnh hưởng đến chất lượng. Theo mặc định, cả hai mô hình đều xuất ra một mục nhúng 3072 chiều, nhưng bạn có thể cắt bớt mục nhúng này thành kích thước nhỏ hơn mà không làm giảm chất lượng để tiết kiệm dung lượng lưu trữ. Bạn nên sử dụng kích thước đầu ra là 768, 1536 hoặc 3072.
 
 ### Python
 
@@ -468,17 +468,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-emb
     }'
 ```
 
-Kod snippet'inden örnek çıkış:
+Ví dụ về đầu ra của đoạn mã:
 
 ```
 Length of embedding: 768
 ```
 
-## Daha küçük boyutlarda kaliteyi sağlama
+## Đảm bảo chất lượng cho các kích thước nhỏ hơn
 
-Varsayılan 3.072 boyutlu yerleştirmeler her zaman normalleştirilirken Gemini Embedding 2, kesilmiş boyutları (ör. 768, 1.536) da otomatik olarak normalleştirir. Bu sayede, semantik benzerliğin büyüklük yerine vektör yönü üzerinden hesaplanması sağlanır ve kutudan çıkar çıkmaz daha doğru sonuçlar elde edilir.
+Mặc dù các mục nhúng 3072 chiều mặc định luôn được chuẩn hoá, nhưng Gemini Embedding 2 cũng tự động chuẩn hoá các chiều bị cắt (ví dụ: 768, 1536). Điều này đảm bảo rằng mức độ tương đồng về ngữ nghĩa được tính toán thông qua hướng vectơ thay vì độ lớn, mang lại kết quả chính xác hơn ngay từ đầu.
 
-**Eski Modeller**: `gemini-embedding-001` kullanıyorsanız 3.072 olmayan boyutları aşağıdaki şekilde manuel olarak normalleştirmeniz gerekir:
+**Các mô hình cũ**: Nếu đang dùng `gemini-embedding-001`, bạn phải chuẩn hoá các phương diện không phải 3072 theo cách thủ công như sau:
 
 ### Python
 
@@ -494,16 +494,16 @@ print(f"Normed embedding length: {len(normed_embedding)}")
 print(f"Norm of normed embedding: {np.linalg.norm(normed_embedding):.6f}") # Should be very close to 1
 ```
 
-Bu kod snippet'inden alınan örnek çıkış:
+Ví dụ về đầu ra từ đoạn mã này:
 
 ```
 Normed embedding length: 768
 Norm of normed embedding: 1.000000
 ```
 
-Aşağıdaki tabloda, farklı boyutlar için yerleştirmelerde en çok tercih edilen bir karşılaştırma ölçütü olan MTEB puanları gösterilmektedir. Sonuç, performansın kesinlikle yerleştirme boyutunun büyüklüğüne bağlı olmadığını, daha düşük boyutların daha yüksek boyutlu benzerleriyle karşılaştırılabilir puanlar elde ettiğini gösteriyor.
+Bảng sau đây cho thấy điểm MTEB (một điểm chuẩn thường dùng cho các mục nhúng) cho nhiều phương diện. Đáng chú ý là kết quả cho thấy hiệu suất không hoàn toàn phụ thuộc vào kích thước của phương diện nhúng, với các phương diện thấp hơn đạt được điểm số tương đương với các phương diện cao hơn.
 
-| MRL Boyutu | MTEB Puanı (Gemini Embedding 001) |
+| Phương diện MRL | Điểm MTEB (Gemini Embedding 001) |
 | --- | --- |
 | 2048 | 68,16 |
 | 1536 | 68,17 |
@@ -512,27 +512,27 @@ Aşağıdaki tabloda, farklı boyutlar için yerleştirmelerde en çok tercih ed
 | 256 | 66,19 |
 | 128 | 63,31 |
 
-## Çok formatlı yerleştirmeler
+## Nhúng đa phương thức
 
-`gemini-embedding-2` modeli, çok formatlı girişi destekler. Bu sayede metnin yanı sıra resim, video, ses ve belge içeriklerini de yerleştirebilirsiniz. Tüm modaliteler aynı yerleştirme alanına eşlenir. Bu sayede, modaliteler arası arama ve karşılaştırma yapılabilir.
+Mô hình `gemini-embedding-2` hỗ trợ dữ liệu đầu vào đa phương thức, cho phép bạn nhúng nội dung hình ảnh, video, âm thanh và tài liệu cùng với văn bản. Tất cả các phương thức đều được ánh xạ vào cùng một không gian nhúng, cho phép tìm kiếm và so sánh đa phương thức.
 
-### Desteklenen yöntemler ve sınırlar
+### Các phương thức và giới hạn được hỗ trợ
 
-Genel maksimum giriş jetonu sınırı 8.192 jetondur.
+Giới hạn tổng số mã thông báo đầu vào tối đa là 8192 mã thông báo.
 
-| Yöntem | Spesifikasyonlar ve sınırlar |
+| Phương thức | Quy cách và giới hạn |
 | --- | --- |
-| **Metin** | En fazla 8.192 jetonu destekler. |
-| **Resim** | İstek başına en fazla 6 resim. Desteklenen biçimler: PNG, JPEG. |
-| **Ses** | Maksimum süre 180 saniyedir. Desteklenen biçimler: MP3, WAV. |
-| **Video** | Maksimum süre 120 saniyedir. Desteklenen biçimler: MP4, MOV. Desteklenen codec'ler: H264, H265, AV1, VP9.  Sistem, video başına en fazla 32 kare işler: Kısa videolar (≤32 sn) 1 FPS'de örneklenirken daha uzun videolar 32 karede eşit şekilde örneklenir. Ses parçaları video dosyalarında işlenmez. |
-| **Belgeler (PDF)** | İstek başına en fazla 1 dosya (6 sayfaya kadar). |
+| **Văn bản** | Hỗ trợ tối đa 8.192 mã thông báo. |
+| **Image** | Tối đa 6 hình ảnh cho mỗi yêu cầu. Các định dạng được hỗ trợ: PNG, JPEG. |
+| **Âm thanh** | Thời lượng tối đa là 180 giây. Các định dạng được hỗ trợ: MP3, WAV. |
+| **Video** | Thời lượng tối đa là 120 giây. Các định dạng được hỗ trợ: MP4, MOV. Các bộ mã hoá và giải mã được hỗ trợ: H264, H265, AV1, VP9.  Hệ thống xử lý tối đa 32 khung hình cho mỗi video: video ngắn (≤32 giây) được lấy mẫu ở tốc độ 1 khung hình/giây, trong khi video dài hơn được lấy mẫu đồng đều thành 32 khung hình. Các tệp video không xử lý bản âm thanh. |
+| **Tài liệu (PDF)** | Mỗi yêu cầu có tối đa 1 tệp, tối đa 6 trang. |
 
-### Resim yerleştirme
+### Nhúng hình ảnh
 
-Aşağıdaki örnekte, `gemini-embedding-2` kullanarak resmin nasıl yerleştirileceği gösterilmektedir.
+Ví dụ sau đây cho thấy cách nhúng hình ảnh bằng `gemini-embedding-2`.
 
-Resimler, satır içi veri olarak veya [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr) üzerinden yüklenen dosyalar olarak sağlanabilir.
+Bạn có thể cung cấp hình ảnh dưới dạng dữ liệu nội tuyến hoặc dưới dạng tệp đã tải lên thông qua [Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi).
 
 ### Python
 
@@ -606,15 +606,15 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### Yerleştirme toplama
+### Tổng hợp dữ liệu nhúng
 
-Çok formatlı içeriklerle çalışırken girişinizi nasıl yapılandırdığınız, yerleştirme çıkışını etkiler:
+Khi làm việc với nội dung đa phương thức, cách bạn cấu trúc dữ liệu đầu vào sẽ ảnh hưởng đến kết quả nhúng:
 
-- **Birden fazla bölüm (toplu):** Doğrudan `contents` parametresine birden fazla giriş eklemek, tüm girişler için toplu bir yerleştirme oluşturur.
-- **Birden fazla `Content` nesne (ayrı):** Her girişi bir `Content` nesnesine sarmalayıp `contents` parametresinde iletmek, her giriş için ayrı yerleştirmeler döndürür.
-- **Gönderi düzeyinde temsil:** Birden fazla medya öğesi içeren sosyal medya gönderileri gibi karmaşık nesneler için tutarlı bir gönderi düzeyinde temsil oluşturmak üzere ayrı yerleştirmeleri (örneğin, ortalama alarak) toplamanızı öneririz.
+- **Nhiều phần (được tổng hợp):** Việc thêm nhiều dữ liệu đầu vào trực tiếp vào tham số `contents` sẽ tạo ra một vectơ nhúng tổng hợp cho tất cả dữ liệu đầu vào.
+- **Nhiều đối tượng `Content` (riêng biệt):** Việc bao bọc từng đầu vào trong một đối tượng `Content` và truyền các đối tượng đó vào tham số `contents` sẽ trả về các mục nhúng riêng biệt cho từng mục.
+- **Biểu diễn ở cấp bài đăng:** Đối với các đối tượng phức tạp như bài đăng trên mạng xã hội có nhiều mục nội dung nghe nhìn, bạn nên tổng hợp các mục nhúng riêng biệt (ví dụ: bằng cách tính trung bình) để tạo một biểu diễn nhất quán ở cấp bài đăng.
 
-Aşağıdaki örnekte, metin ve resim girişi için tek bir toplu yerleştirmenin nasıl oluşturulacağı gösterilmektedir. `contents` parametresine birden fazla giriş eklemeniz yeterlidir:
+Ví dụ sau đây cho thấy cách tạo một vectơ nhúng tổng hợp cho văn bản và dữ liệu đầu vào là hình ảnh. Bạn chỉ cần thêm nhiều dữ liệu đầu vào vào tham số `contents`:
 
 ### Python
 
@@ -700,7 +700,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-Diğer yandan, `contents` parametresinin içinde `Content` nesneleri kullanırsanız ayrı yerleştirmeler döndürülür. Bu örnekte, tek bir yerleştirme çağrısında birden fazla yerleştirme oluşturulur:
+Mặt khác, nếu bạn sử dụng các đối tượng `Content` bên trong tham số `contents`, thì hàm này sẽ trả về các mục nhúng riêng biệt. Ví dụ này tạo nhiều mục nhúng trong một lệnh gọi nhúng:
 
 ### Python
 
@@ -791,11 +791,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### Ses yerleştirme
+### Nhúng âm thanh
 
-Aşağıdaki örnekte, `gemini-embedding-2` kullanarak ses dosyasının nasıl yerleştirileceği gösterilmektedir.
+Ví dụ sau đây cho biết cách nhúng một tệp âm thanh bằng `gemini-embedding-2`.
 
-Ses dosyaları, satır içi veri olarak veya [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr) aracılığıyla yüklenen dosyalar olarak sağlanabilir.
+Bạn có thể cung cấp tệp âm thanh dưới dạng dữ liệu nội tuyến hoặc dưới dạng tệp được tải lên thông qua [Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi).
 
 ### Python
 
@@ -869,11 +869,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### Video yerleştirme
+### Nhúng video
 
-Aşağıdaki örnekte, `gemini-embedding-2` kullanarak video yerleştirme işlemi gösterilmektedir.
+Ví dụ sau đây cho thấy cách nhúng video bằng `gemini-embedding-2`.
 
-Videolar, satır içi veri olarak veya [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr) aracılığıyla yüklenen dosyalar olarak sağlanabilir.
+Bạn có thể cung cấp video dưới dạng dữ liệu nội tuyến hoặc dưới dạng tệp được tải lên thông qua [Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi).
 
 ### Python
 
@@ -947,29 +947,29 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-120 saniyeden uzun videoları yerleştirmeniz gerekiyorsa videoyu çakışan segmentlere ayırabilir ve bu segmentleri ayrı ayrı yerleştirebilirsiniz.
+Nếu cần nhúng video dài hơn 120 giây, bạn có thể chia video thành các đoạn chồng chéo và nhúng từng đoạn.
 
-### Dokümanları yerleştirme
+### Nhúng tài liệu
 
-PDF biçimindeki dokümanlar doğrudan yerleştirilebilir. Model, her sayfanın görsel ve metin içeriğini işler.
+Bạn có thể nhúng trực tiếp tài liệu ở định dạng PDF. Mô hình này xử lý nội dung trực quan và văn bản của từng trang.
 
-PDF'ler, satır içi veri olarak veya [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr) aracılığıyla yüklenen dosyalar olarak sağlanabilir.
+Bạn có thể cung cấp tệp PDF dưới dạng dữ liệu nội tuyến hoặc dưới dạng tệp được tải lên thông qua [Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi).
 
-#### Model, PDF'leri nasıl işler?
+#### Cách mô hình xử lý tệp PDF
 
-Bir PDF'yi yerleştirdiğinizde model, belgeyi hem görsel hem de metin özelliklerini kullanarak işler:
+Khi bạn nhúng một tệp PDF, mô hình sẽ xử lý tài liệu bằng cả tính năng hình ảnh và văn bản:
 
-- **Görsel gösterim:** Model, her sayfayı resim olarak oluşturur. Bu işlem, sayfa başına **258 jeton** tüketir.
-- **Metin çıkarma:** Model, belgedeki metni çıkarır. **Yerel PDF'ler** (dijital metin içerenler) için model, metni doğrudan ayıklar. **Taranmış PDF'lerde** (metin resimleri içeren) metni ayıklamak için model otomatik olarak optik karakter tanıma (OCR) gerçekleştirir.
+- **Biểu diễn trực quan:** Mô hình kết xuất mỗi trang dưới dạng một hình ảnh, tiêu thụ **258 mã thông báo** cho mỗi trang.
+- **Trích xuất văn bản:** Mô hình trích xuất văn bản từ tài liệu. Đối với **tệp PDF gốc** (chứa văn bản kỹ thuật số), mô hình sẽ trích xuất văn bản trực tiếp. Đối với **tệp PDF được quét** (chứa hình ảnh văn bản), mô hình sẽ tự động chạy công nghệ nhận dạng ký tự quang học (OCR) để trích xuất văn bản.
 
-Bir PDF'nin toplam jeton sayısını hesaplamak için görsel jetonları (sayfa başına 258) metin jetonlarına ekleyin. Girişleriniz,modelin **8.192 jetonluk sınırına** (tüm yöntemlerde geçerli) uymalıdır. Sistem, bu sınırı aşan girişleri sessizce keser.
+Để tính tổng số mã thông báo cho một tệp PDF, hãy cộng số mã thông báo trực quan (258 mã thông báo cho mỗi trang) với số mã thông báo văn bản. Thông tin đầu vào của bạn phải nằm trong **giới hạn 8.192 mã thông báo** của mô hình (được chia sẻ trên tất cả các phương thức). Hệ thống sẽ tự động cắt bớt những nội dung đầu vào vượt quá giới hạn này.
 
-#### PDF sınırları
+#### Giới hạn về tệp PDF
 
-- **İstek başına dosya sayısı:** En fazla 1 PDF dosyası gönderebilirsiniz.
-- **Sayfa sınırı:** Dosya başına en fazla 6 sayfa gönderebilirsiniz. En iyi kalite için PDF başına 1 sayfa kullanmanızı önemle tavsiye ederiz.
+- **Số lượng tệp trên mỗi yêu cầu:** Bạn có thể gửi tối đa 1 tệp PDF.
+- **Giới hạn về số trang:** Bạn có thể gửi tối đa 6 trang cho mỗi tệp. Để có chất lượng tốt nhất, bạn nên sử dụng 1 trang cho mỗi tệp PDF.
 
-Aşağıdaki örnekte, `gemini-embedding-2` kullanarak PDF'nin nasıl yerleştirileceği gösterilmektedir:
+Ví dụ sau đây cho thấy cách nhúng một tệp PDF bằng `gemini-embedding-2`:
 
 ### Python
 
@@ -1043,92 +1043,91 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-## Kullanım alanları
+## Trường hợp sử dụng
 
-Metin yerleştirmeleri, aşağıdakiler gibi çeşitli yaygın yapay zeka kullanım alanları için çok önemlidir:
+Vectơ hoá văn bản là yếu tố quan trọng đối với nhiều trường hợp sử dụng AI phổ biến, chẳng hạn như:
 
-- **Veriyle artırılmış üretim (RAG):** Gömme, alakalı bilgileri alıp bir modelin bağlamına dahil ederek oluşturulan metnin kalitesini artırır.
-- **Bilgi alma:** Giriş metni verildiğinde, anlamsal olarak en benzer metni veya belgeleri arayın.
+- **Tạo sinh tăng cường khả năng truy xuất (RAG):** Các vectơ nhúng giúp nâng cao chất lượng của văn bản được tạo bằng cách truy xuất và kết hợp thông tin liên quan vào ngữ cảnh của một mô hình.
+- **Truy xuất thông tin:** Tìm kiếm văn bản hoặc tài liệu có ngữ nghĩa tương tự nhất dựa trên một đoạn văn bản đầu vào.
 
-  [Belge arama eğitimitask](https://github.com/google-gemini/cookbook/blob/main/examples/Talk_to_documents_with_embeddings.ipynb)
-- **Arama sonuçlarını yeniden sıralama**: İlk sonuçları sorguya göre anlamsal olarak puanlayarak en alakalı öğelere öncelik verin.
+  [Hướng dẫn tìm kiếm tài liệutask](https://github.com/google-gemini/cookbook/blob/main/examples/Talk_to_documents_with_embeddings.ipynb)
+- **Sắp xếp lại kết quả tìm kiếm**: Ưu tiên các mục phù hợp nhất bằng cách tính điểm ngữ nghĩa cho kết quả ban đầu dựa trên cụm từ tìm kiếm.
 
-  [Arama sonuçlarını yeniden sıralama eğitimitask](https://github.com/google-gemini/cookbook/blob/main/examples/Search_reranking_using_embeddings.ipynb)
-- **Anormallik algılama:** Yerleştirme gruplarını karşılaştırmak, gizli trendleri veya aykırı değerleri belirlemeye yardımcı olabilir.
+  [Hướng dẫn về việc sắp xếp lại kết quả tìm kiếmtask](https://github.com/google-gemini/cookbook/blob/main/examples/Search_reranking_using_embeddings.ipynb)
+- **Phát hiện điểm bất thường:** Việc so sánh các nhóm vectơ nhúng có thể giúp xác định các xu hướng hoặc điểm ngoại lệ bị ẩn.
 
-  [Anormallik algılama eğitimibubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/Anomaly_detection_with_embeddings.ipynb)
-- **Sınıflandırma:** Metni içeriğine göre otomatik olarak kategorilere ayırın (ör. duygu analizi veya spam algılama).
+  [Hướng dẫn phát hiện hoạt động bất thườngbubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/Anomaly_detection_with_embeddings.ipynb)
+- **Phân loại:** Tự động phân loại văn bản dựa trên nội dung, chẳng hạn như phân tích cảm xúc hoặc phát hiện tin nhắn rác
 
-  [Sınıflandırma eğitimitoken](https://github.com/google-gemini/cookbook/blob/main/examples/Classify_text_with_embeddings.ipynb)
-- **Kümeleme:** Yerleştirmelerinizin kümelerini ve görselleştirmelerini oluşturarak karmaşık ilişkileri etkili bir şekilde kavrayın.
+  [Hướng dẫn phân loạitoken](https://github.com/google-gemini/cookbook/blob/main/examples/Classify_text_with_embeddings.ipynb)
+- **Phân cụm:** Nắm bắt hiệu quả các mối quan hệ phức tạp bằng cách tạo các cụm và hình ảnh trực quan về các thành phần nhúng.
 
-  [Kümeleme görselleştirme eğitimibubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/clustering_with_embeddings.ipynb)
+  [Hướng dẫn về hình ảnh trực quan của việc phân cụmbubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/clustering_with_embeddings.ipynb)
 
-## Yerleştirilmiş öğeleri depolama
+## Lưu trữ mục nhúng
 
-Yerleştirmeleri üretime alırken yüksek boyutlu yerleştirmeleri verimli bir şekilde depolamak, dizine eklemek ve almak için **vektör veritabanlarını** kullanmak yaygın bir uygulamadır. Google Cloud, bu amaçla kullanılabilecek yönetilen veri hizmetleri sunar. Bu hizmetler arasında [Gemini Enterprise Agent Platform Vector Search 2.0](https://docs.cloud.google.com/gemini-enterprise-agent-platform/BUILD/vector-search-2?hl=tr), [BigQuery](https://cloud.google.com/bigquery/docs/introduction?hl=tr), [AlloyDB](https://cloud.google.com/alloydb/docs/overview?hl=tr) ve [Cloud SQL](https://cloud.google.com/sql/docs/postgres/introduction?hl=tr) yer alır.
+Khi đưa các mục nhúng vào sản xuất, bạn thường sử dụng **cơ sở dữ liệu vectơ** để lưu trữ, lập chỉ mục và truy xuất các mục nhúng có nhiều chiều một cách hiệu quả. Google Cloud cung cấp các dịch vụ dữ liệu được quản lý có thể dùng cho mục đích này, bao gồm [Gemini Enterprise Agent Platform Vector Search 2.0](https://docs.cloud.google.com/gemini-enterprise-agent-platform/BUILD/vector-search-2?hl=vi), [BigQuery](https://cloud.google.com/bigquery/docs/introduction?hl=vi), [AlloyDB](https://cloud.google.com/alloydb/docs/overview?hl=vi) và [Cloud SQL](https://cloud.google.com/sql/docs/postgres/introduction?hl=vi).
 
-Aşağıdaki eğitimlerde, Gemini Embedding ile diğer üçüncü taraf vektör veritabanlarının nasıl kullanılacağı gösterilmektedir.
+Các hướng dẫn sau đây cho biết cách sử dụng các cơ sở dữ liệu vectơ của bên thứ ba khác với Gemini Embedding.
 
-- [ChromaDB eğitimleribolt](https://docs.trychroma.com/integrations/embedding-models/google-gemini)
-- [QDrant eğitimleribolt](https://qdrant.tech/documentation/embeddings/gemini/)
-- [Weaviate eğitimleribolt](https://docs.weaviate.io/weaviate/model-providers/google)
-- [Pinecone eğitimleribolt](https://github.com/google-gemini/cookbook/blob/main/examples/langchain/Gemini_LangChain_QA_Pinecone_WebLoad.ipynb)
+- [Hướng dẫn về ChromaDBbolt](https://docs.trychroma.com/integrations/embedding-models/google-gemini)
+- [Hướng dẫn về QDrantbolt](https://qdrant.tech/documentation/embeddings/gemini/)
+- [Hướng dẫn về Weaviatebolt](https://docs.weaviate.io/weaviate/model-providers/google)
+- [Hướng dẫn về Pineconebolt](https://github.com/google-gemini/cookbook/blob/main/examples/langchain/Gemini_LangChain_QA_Pinecone_WebLoad.ipynb)
 
-## Model sürümleri
+## Phiên bản mô hình
 
 ### Gemini Embedding 2
 
-| Mülk | Açıklama |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardModel kodu | **Gemini API**  `gemini-embedding-2` |
-| saveDesteklenen veri türleri | **Giriş**  Metin, resim, video, ses, PDF  **Çıkış**  Metin yerleştirmeleri |
-| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  8.192  **Çıkış boyutu**  Esnek, desteklenen boyutlar: 128 - 3072, Önerilen boyutlar: 768, 1536, 3072 |
-| 123Sürümler | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - Kararlı: `gemini-embedding-2` |
-| calendar\_monthSon güncelleme | Nisan 2026 |
+| id\_cardMã kiểu máy | **Gemini API**  `gemini-embedding-2` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, hình ảnh, video, âm thanh, PDF  **Đầu ra**  Mục nhúng văn bản |
+| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  8.192  **Kích thước phương diện đầu ra**  Linh hoạt, hỗ trợ: 128 – 3072, Nên dùng: 768, 1536, 3072 |
+| 123Phiên bản | Đọc [các mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm thông tin chi tiết.  - Ổn định: `gemini-embedding-2` |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 4 năm 2026 |
 
 ### Gemini Embedding
 
-| Mülk | Açıklama |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardModel kodu | **Gemini API**  `gemini-embedding-001` |
-| saveDesteklenen veri türleri | **Giriş**  Metin  **Çıkış**  Metin yerleştirmeleri |
-| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  2.048  **Çıkış boyutu**  Esnek, desteklenen boyutlar: 128 - 3072, Önerilen boyutlar: 768, 1536, 3072 |
-| 123Sürümler | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - Kararlı: `gemini-embedding-001` |
-| calendar\_monthSon güncelleme | Haziran 2025 |
+| id\_cardMã kiểu máy | **Gemini API**  `gemini-embedding-001` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản  **Đầu ra**  Mục nhúng văn bản |
+| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  2.048  **Kích thước phương diện đầu ra**  Linh hoạt, hỗ trợ: 128 – 3072, Nên dùng: 768, 1536, 3072 |
+| 123Phiên bản | Đọc [các mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm thông tin chi tiết.  - Ổn định: `gemini-embedding-001` |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 6 năm 2025 |
 
-Desteği sonlandırılan Embeddings modelleri için [Desteği Sonlandırılanlar](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr) sayfasını ziyaret edin.
+Đối với các mô hình Nhúng không dùng nữa, hãy truy cập trang [Ngừng cung cấp](https://ai.google.dev/gemini-api/docs/deprecations?hl=vi)
 
-## gemini-embedding-001'den taşıma
+## Di chuyển từ gemini-embedding-001
 
-`gemini-embedding-001` ile `gemini-embedding-2` arasındaki yerleştirme alanları **uyumlu değildir**. Bu nedenle, bir model tarafından oluşturulan yerleştirmeleri doğrudan diğer model tarafından oluşturulan yerleştirmelerle karşılaştıramazsınız. `gemini-embedding-2` sürümüne yükseltiyorsanız mevcut verilerinizin tamamını yeniden yerleştirmeniz gerekir.
+Các khoảng trống nhúng giữa `gemini-embedding-001` và `gemini-embedding-2` là **không tương thích**. Điều này có nghĩa là bạn không thể so sánh trực tiếp các vectơ nhúng do một mô hình tạo ra với các vectơ nhúng do mô hình khác tạo ra. Nếu đang nâng cấp lên `gemini-embedding-2`, bạn phải nhúng lại tất cả dữ liệu hiện có.
 
-Uyumsuzluğun yanı sıra iki model arasında dikkat çekici başka farklılıklar da vardır:
+Ngoài sự không tương thích, còn có một số điểm khác biệt đáng chú ý khác giữa hai mô hình này:
 
-- **Görev türü belirtimi:** `gemini-embedding-001` ile `task_type` parametresini kullanarak görev türünü belirtirsiniz (ör. `SEMANTIC_SIMILARITY`, `RETRIEVAL_DOCUMENT`). `gemini-embedding-2` ile `task_type` parametresi desteklenmez. Bunun yerine, yalnızca metin içeren görevler için görev talimatlarını doğrudan isteme eklemelisiniz. Farklı kullanım alanları için istemleri nasıl biçimlendireceğinizle ilgili ayrıntılar için [Embeddings 2 ile görev türleri](#task-types-embeddings-2) başlıklı makaleyi inceleyin.
-- **Yerleştirme toplama:** `gemini-embedding-001`, giriş listesindeki her dize için ayrı yerleştirmeler oluşturur. Buna karşılık,
-  `gemini-embedding-2` birden fazla giriş (ör. metin ve resimler) doğrudan tek bir istekte sağlandığında tek bir toplu yerleştirme oluşturur. Ayrı girişler için ayrı gömmeler oluşturmak üzere her girişi bir `Content` nesnesine sarmalayın veya [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr#batch-embedding)'yi kullanın. Daha fazla bilgi için [Yerleştirme toplama](#embedding-aggregation) bölümüne bakın.
-- **Normalleştirme:** 3.072'den daha az boyutlu yerleştirmeler istemek için `output_dimensionality` kullanırsanız `gemini-embedding-2` bu kısaltılmış yerleştirmeleri otomatik olarak normalleştirir. `gemini-embedding-001` ile 3072 dışında kalan boyutlar için manuel normalleştirme yapmanız gerekir. Ayrıntılar için [Daha küçük boyutlarda kaliteyi sağlama](#quality-for-smaller-dimensions) başlıklı makaleyi inceleyin.
+- **Quy cách về loại tác vụ:** Với `gemini-embedding-001`, bạn chỉ định loại tác vụ bằng cách sử dụng tham số `task_type` (ví dụ: `SEMANTIC_SIMILARITY`, `RETRIEVAL_DOCUMENT`). Với `gemini-embedding-2`, tham số `task_type` không được hỗ trợ. Thay vào đó, bạn nên đưa hướng dẫn về nhiệm vụ trực tiếp vào câu lệnh cho các nhiệm vụ chỉ có văn bản. Hãy xem [Các loại nhiệm vụ có Embeddings 2](#task-types-embeddings-2) để biết thông tin chi tiết về cách định dạng câu lệnh cho các trường hợp sử dụng khác nhau.
+- **Tổng hợp mục nhúng:** `gemini-embedding-001` tạo các mục nhúng riêng lẻ cho từng chuỗi trong danh sách dữ liệu đầu vào. Ngược lại, `gemini-embedding-2` tạo ra một vectơ nhúng tổng hợp duy nhất khi nhiều dữ liệu đầu vào (chẳng hạn như văn bản và hình ảnh) được cung cấp trực tiếp trong một yêu cầu. Để tạo các vectơ nhúng riêng biệt cho từng đầu vào, hãy bao bọc từng đầu vào trong một đối tượng `Content` hoặc sử dụng [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi#batch-embedding). Hãy xem phần [Nhúng tính năng tổng hợp](#embedding-aggregation) để biết thêm thông tin.
+- **Chuẩn hoá:** Nếu bạn dùng `output_dimensionality` để yêu cầu các mục nhúng có ít hơn 3072 phương diện, thì `gemini-embedding-2` sẽ tự động chuẩn hoá các mục nhúng bị cắt bớt này. Với `gemini-embedding-001`, bạn cần thực hiện chuẩn hoá thủ công cho các phương diện khác ngoài 3072. Hãy xem phần [Đảm bảo chất lượng cho các kích thước nhỏ hơn](#quality-for-smaller-dimensions) để biết thông tin chi tiết.
 
-## Toplu yerleştirmeler
+## Nhúng hàng loạt
 
-Gecikme sorun değilse Gemini Embeddings modellerini [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr#batch-embedding) ile kullanmayı deneyin. Bu sayede, varsayılan yerleştirme fiyatının% 50'siyle çok daha yüksek işleme hızı elde edilebilir.
-Başlangıçla ilgili örnekleri [Batch API çözüm kitabında](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb) bulabilirsiniz.
+Nếu không lo ngại về độ trễ, hãy thử sử dụng các mô hình Gemini Embeddings với [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi#batch-embedding). Điều này cho phép công suất cao hơn nhiều ở mức 50% giá Nhúng mặc định.
+Bạn có thể tìm thấy các ví dụ về cách bắt đầu trong [sổ tay về Batch API](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb).
 
-## Sorumlu kullanım bildirimi
+## Thông báo về việc sử dụng có trách nhiệm
 
-Yeni içerikler oluşturan üretken yapay zeka modellerinin aksine, Gemini Embedding modeli yalnızca giriş verilerinizin biçimini sayısal bir temsile dönüştürmek için tasarlanmıştır. Google, giriş verilerinizin biçimini istenen sayısal biçime dönüştüren bir yerleştirme modeli sağlamaktan sorumlu olsa da kullanıcılar, girdikleri veriler ve ortaya çıkan yerleştirmelerle ilgili tüm sorumluluğu üstlenir. Gemini Embedding modelini kullanarak, yüklediğiniz tüm içeriklerle ilgili gerekli haklara sahip olduğunuzu onaylarsınız. Başkalarının fikri mülkiyet veya gizlilik haklarını ihlal eden içerikler üretmeyin. Bu hizmeti kullanımınız [Yasaklanan Kullanım Politikamıza](https://policies.google.com/terms/generative-ai/use-policy?hl=tr) ve [Google'ın Hizmet Şartları](https://ai.google.dev/gemini-api/terms?hl=tr)'na tabidir.
+Không giống như các mô hình AI tạo sinh tạo ra nội dung mới, Mô hình nhúng Gemini chỉ nhằm mục đích chuyển đổi định dạng dữ liệu đầu vào của bạn thành một biểu diễn bằng số. Mặc dù Google chịu trách nhiệm cung cấp một mô hình nhúng giúp chuyển đổi định dạng dữ liệu đầu vào của bạn sang định dạng số được yêu cầu, nhưng người dùng vẫn hoàn toàn chịu trách nhiệm về dữ liệu mà họ nhập và các mục nhúng thu được. Khi sử dụng mô hình Gemini Embedding, bạn xác nhận rằng bạn có các quyền cần thiết đối với mọi nội dung mình tải lên. Đừng tạo nội dung vi phạm quyền tài sản trí tuệ hoặc quyền riêng tư của người khác. Khi sử dụng dịch vụ này, bạn phải tuân thủ [Chính sách về các hành vi bị cấm khi sử dụng](https://policies.google.com/terms/generative-ai/use-policy?hl=vi) và [Điều khoản dịch vụ của Google](https://ai.google.dev/gemini-api/terms?hl=vi).
 
-## Yerleştirmelerle geliştirmeye başlama
+## Bắt đầu xây dựng bằng các thành phần nhúng
 
-Model özelliklerini keşfetmek ve yerleştirmelerinizi nasıl özelleştirip görselleştireceğinizi öğrenmek için [yerleştirme hızlı başlangıç not defterine](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Embeddings.ipynb) göz atın.
+Hãy xem [notebook bắt đầu nhanh về các vectơ nhúng](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Embeddings.ipynb) để khám phá các chức năng của mô hình và tìm hiểu cách tuỳ chỉnh cũng như trực quan hoá các vectơ nhúng.
 
-Geri bildirim gönderin
+Gửi ý kiến phản hồi
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Son güncelleme tarihi: 2026-06-22 UTC.
+Cập nhật lần gần đây nhất: 2026-06-22 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-22 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-22 UTC."],[],[]]

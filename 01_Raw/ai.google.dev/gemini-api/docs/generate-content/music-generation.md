@@ -1,38 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/music-generation?hl=de
-fetched_at: 2026-08-31T06:33:28.946547+00:00
-title: "Musik mit Lyria\u00a03 generieren \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/music-generation?hl=it
+fetched_at: 2026-09-07T05:37:48.091666+00:00
+title: "Generare musica con Lyria 3.5 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Feedback geben
+Invia feedback
 
-# Musik mit Lyria 3 generieren
+# Generare musica con Lyria 3.5
 
-Lyria 3 ist eine Familie von Modellen zur Musikgenerierung von Google, die über die Gemini API verfügbar ist. Mit Lyria 3 können Sie aus Text-Prompts oder Bildern hochwertiges Stereo-Audio mit 44,1 kHz generieren. Diese Modelle liefern strukturelle Kohärenz, einschließlich Gesang, zeitgesteuerter Songtexte und vollständiger Instrumentalarrangements.
+Lyria 3.5 è la famiglia di modelli di generazione di musica di Google, disponibile
+tramite l'API Gemini. Con Lyria 3.5, puoi generare audio stereo di alta qualità a 44, 1 kHz
+da prompt di testo o da immagini. Questi modelli offrono coerenza strutturale, tra cui voci, testi sincronizzati e arrangiamenti strumentali completi.
 
-Die Lyria 3-Familie umfasst zwei Modelle:
+La famiglia Lyria include i modelli:
 
-| Modell | Modell-ID | Optimal für | Dauer | Ausgabe |
+| Modello | ID modello | Ideale per | Durata | Output |
 | --- | --- | --- | --- | --- |
-| **Lyria 3 Clip** | `lyria-3-clip-preview` | Kurze Clips, Loops, Vorschauen | 30 Sekunden | MP3 |
-| **Lyria 3 Pro** | `lyria-3-pro-preview` | Songs in voller Länge mit Strophen, Refrains und Bridges | Ein paar Minuten (über Prompt steuerbar) | MP3 |
+| **Lyria 3 Clip** | `lyria-3-clip-preview` | Clip corti, loop, anteprime | 30 secondi | MP3 |
+| **Lyria 3.5** | `lyria-3.5` | Brani completi con strofe, ritornelli e ponti | Un paio di minuti (controllabile tramite prompt) | MP3 |
 
-Beide Modelle können mit der Standardmethode `generateContent` und der neuen [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) verwendet werden.Sie unterstützen multimodale Eingaben (Text und Bilder) und erzeugen **Stereo-Audio mit 44,1 kHz**.
+Entrambi i modelli possono essere utilizzati con il metodo standard `generateContent` e con la nuova [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it), supportano input multimodali (testo e immagini) e producono audio stereo ad alta fedeltà a **44,1 kHz**.
 
-## Musikclip erstellen
+## Generare un clip musicale
 
-Das Lyria 3-Clip-Modell generiert immer einen **30-sekündigen** Clip. Rufen Sie zum Generieren eines Clips die Methode `generateContent` mit einem Text-Prompt auf. Die Antwort enthält immer den generierten Text und die Songstruktur sowie das Audio.
+Il modello Lyria 3 Clip genera sempre un clip di **30 secondi**. Per generare un clip, chiama il metodo `generateContent` con un prompt testuale. La risposta include sempre
+il testo e la struttura del brano generati insieme all'audio.
 
 ### Python
 
@@ -87,7 +90,7 @@ async function main() {
 main();
 ```
 
-### Ok
+### Go
 
 ```
 package main
@@ -213,15 +216,18 @@ public class GenerateMusicClip {
 }
 ```
 
-## Song in voller Länge generieren
+## Generare un brano completo
 
-Mit dem `lyria-3-pro-preview`-Modell können Sie vollständige Songs mit einer Länge von mehreren Minuten generieren. Das Pro-Modell versteht musikalische Strukturen und kann Kompositionen mit unterschiedlichen Strophen, Refrains und Bridges erstellen. Sie können die Dauer beeinflussen, indem Sie sie in Ihrem Prompt angeben (z.B. „Erstelle einen 2-minütigen Song“) oder indem Sie [Zeitstempel](#timing) verwenden, um die Struktur zu definieren.
+Utilizza il modello `lyria-3.5` per generare brani di lunga durata che durano un paio di minuti. Il modello Pro comprende la struttura musicale e può creare
+composizioni con strofe, ritornelli e ponti distinti. Puoi influenzare la
+durata specificandola nel prompt (ad es. "crea una canzone di 2 minuti") o utilizzando
+[timestamp](#timing) per definire la struttura.
 
 ### Python
 
 ```
 response = client.models.generate_content(
-    model="lyria-3-pro-preview",
+    model="lyria-3.5",
     contents="An epic cinematic orchestral piece about a journey home. "
              "Starts with a solo piano intro, builds through sweeping "
              "strings, and climaxes with a massive wall of sound.",
@@ -232,7 +238,7 @@ response = client.models.generate_content(
 
 ```
 const response = await ai.models.generateContent({
-  model: "lyria-3-pro-preview",
+  model: "lyria-3.5",
   contents: "An epic cinematic orchestral piece about a journey home. " +
             "Starts with a solo piano intro, builds through sweeping " +
             "strings, and climaxes with a massive wall of sound.",
@@ -240,12 +246,12 @@ const response = await ai.models.generateContent({
 });
 ```
 
-### Ok
+### Go
 
 ```
 result, err := client.Models.GenerateContent(
     ctx,
-    "lyria-3-pro-preview",
+    "lyria-3.5",
     genai.Text("An epic cinematic orchestral piece about a journey " +
                "home. Starts with a solo piano intro, builds through " +
                "sweeping strings, and climaxes with a massive wall of sound."),
@@ -257,7 +263,7 @@ result, err := client.Models.GenerateContent(
 
 ```
 GenerateContentResponse response = client.models.generateContent(
-    "lyria-3-pro-preview",
+    "lyria-3.5",
     "An epic cinematic orchestral piece about a journey home. "
         + "Starts with a solo piano intro, builds through sweeping "
         + "strings, and climaxes with a massive wall of sound.");
@@ -267,7 +273,7 @@ GenerateContentResponse response = client.models.generateContent(
 
 ```
 curl -s -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/lyria-3-pro-preview:generateContent" \
+  "https://generativelanguage.googleapis.com/v1beta/models/lyria-3.5:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -283,22 +289,26 @@ curl -s -X POST \
 
 ```
 var response = await client.Models.GenerateContentAsync(
-  model: "lyria-3-pro-preview",
+  model: "lyria-3.5",
   contents: "An epic cinematic orchestral piece about a journey home. " +
             "Starts with a solo piano intro, builds through sweeping " +
             "strings, and climaxes with a massive wall of sound."
 );
 ```
 
-## Ausgabeformat auswählen
+## Seleziona il formato di output
 
-Standardmäßig generieren die Lyria 3-Modelle Audio im **MP3**-Format. Bei Lyria 3 Pro können Sie die Ausgabe auch im **WAV**-Format anfordern, indem Sie `response_format` in `generationConfig` festlegen.
+Per impostazione predefinita, i modelli Lyria 3.5 generano audio in formato **MP3**. Per
+Lyria 3.5, puoi anche richiedere l'output in formato **WAV** impostando
+`response_format` in `generationConfig`.
 
 ### Python
 
 ```
+from google.genai import types
+
 response = client.models.generate_content(
-    model="lyria-3-pro-preview",
+    model="lyria-3.5",
     contents="An atmospheric ambient track.",
     config=types.GenerateContentConfig(
         response_modalities=["AUDIO", "TEXT"],
@@ -311,7 +321,7 @@ response = client.models.generate_content(
 
 ```
 const response = await ai.models.generateContent({
-  model: "lyria-3-pro-preview",
+  model: "lyria-3.5",
   contents: "An atmospheric ambient track.",
   config: {
     responseModalities: ["AUDIO", "TEXT"],
@@ -320,7 +330,7 @@ const response = await ai.models.generateContent({
 });
 ```
 
-### Ok
+### Go
 
 ```
 config := &genai.GenerateContentConfig{
@@ -330,7 +340,7 @@ config := &genai.GenerateContentConfig{
 
 result, err := client.Models.GenerateContent(
     ctx,
-    "lyria-3-pro-preview",
+    "lyria-3.5",
     genai.Text("An atmospheric ambient track."),
     config,
 )
@@ -345,7 +355,7 @@ GenerateContentConfig config = GenerateContentConfig.builder()
     .build();
 
 GenerateContentResponse response = client.models.generateContent(
-    "lyria-3-pro-preview",
+    "lyria-3.5",
     "An atmospheric ambient track.",
     config);
 ```
@@ -359,7 +369,7 @@ var config = new GenerateContentConfig {
 };
 
 var response = await client.Models.GenerateContentAsync(
-  model: "lyria-3-pro-preview",
+  model: "lyria-3.5",
   contents: "An atmospheric ambient track.",
   config: config
 );
@@ -369,7 +379,7 @@ var response = await client.Models.GenerateContentAsync(
 
 ```
 curl -s -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/lyria-3-pro-preview:generateContent" \
+  "https://generativelanguage.googleapis.com/v1beta/models/lyria-3.5:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -385,9 +395,11 @@ curl -s -X POST \
   }'
 ```
 
-## Antwort analysieren
+## Analizza la risposta
 
-Die Antwort von Lyria 3 besteht aus mehreren Teilen. Textteile enthalten den generierten Songtext oder eine JSON-Beschreibung der Songstruktur. Teile mit `inline_data` enthalten die Audio-Bytes.
+La risposta di Lyria 3.5 contiene più parti. Le parti di testo contengono
+il testo generato o una descrizione in formato JSON della struttura del brano. Le parti con
+`inline_data` contengono i byte audio.
 
 ### Python
 
@@ -432,7 +444,7 @@ if (audioData) {
 }
 ```
 
-### Ok
+### Go
 
 ```
 var lyrics []string
@@ -513,9 +525,9 @@ if (audioData != null) {
 curl ... | jq -r '.candidates[0].content.parts[] | select(.inlineData) | .inlineData.data' | base64 -d > output.mp3
 ```
 
-## Musik aus Bildern generieren
+## Generare musica dalle immagini
 
-Lyria 3 unterstützt multimodale Eingaben. Sie können neben Ihrem Textprompt bis zu **10 Bilder** angeben. Das Modell komponiert dann Musik, die von den visuellen Inhalten inspiriert ist.
+Lyria 3.5 supporta input multimodali: puoi fornire fino a **10 immagini** insieme al prompt testuale e il modello comporrà musica ispirata ai contenuti visivi.
 
 ### Python
 
@@ -525,7 +537,7 @@ from PIL import Image
 image = Image.open("desert_sunset.jpg")
 
 response = client.models.generate_content(
-    model="lyria-3-pro-preview",
+    model="lyria-3.5",
     contents=[
         "An atmospheric ambient track inspired by the mood and "
         "colors in this image.",
@@ -541,7 +553,7 @@ const imageData = fs.readFileSync("desert_sunset.jpg");
 const base64Image = imageData.toString("base64");
 
 const response = await ai.models.generateContent({
-  model: "lyria-3-pro-preview",
+  model: "lyria-3.5",
   contents: [
     { text: "An atmospheric ambient track inspired by the mood " +
             "and colors in this image." },
@@ -556,7 +568,7 @@ const response = await ai.models.generateContent({
 });
 ```
 
-### Ok
+### Go
 
 ```
 imgData, err := os.ReadFile("desert_sunset.jpg")
@@ -581,7 +593,7 @@ contents := []*genai.Content{
 
 result, err := client.Models.GenerateContent(
     ctx,
-    "lyria-3-pro-preview",
+    "lyria-3.5",
     contents,
     nil,
 )
@@ -591,7 +603,7 @@ result, err := client.Models.GenerateContent(
 
 ```
 GenerateContentResponse response = client.models.generateContent(
-    "lyria-3-pro-preview",
+    "lyria-3.5",
     Content.fromParts(
         Part.fromText("An atmospheric ambient track inspired by "
             + "the mood and colors in this image."),
@@ -604,7 +616,7 @@ GenerateContentResponse response = client.models.generateContent(
 
 ```
 curl -s -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/lyria-3-pro-preview:generateContent" \
+  "https://generativelanguage.googleapis.com/v1beta/models/lyria-3.5:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d "{
@@ -626,7 +638,7 @@ curl -s -X POST \
 
 ```
 var response = await client.Models.GenerateContentAsync(
-  model: "lyria-3-pro-preview",
+  model: "lyria-3.5",
   contents: new List<Part> {
     Part.FromText("An atmospheric ambient track inspired by the mood and colors in this image."),
     Part.FromBytes(await File.ReadAllBytesAsync("desert_sunset.jpg"), "image/jpeg")
@@ -636,9 +648,11 @@ var response = await client.Models.GenerateContentAsync(
 
 ![](https://storage.googleapis.com/generativeai-downloads/images/desert_sunset.jpg)
 
-## Benutzerdefinierte Songtexte angeben
+## Fornire testi personalizzati
 
-Sie können Ihren eigenen Songtext schreiben und in den Prompt einfügen. Verwenden Sie Abschnitts-Tags wie `[Verse]`, `[Chorus]` und `[Bridge]`, damit das Modell die Songstruktur besser versteht:
+Puoi scrivere i tuoi testi e includerli nel prompt. Utilizza i tag di sezione
+come `[Verse]`, `[Chorus]` e `[Bridge]` per aiutare il modello a comprendere la
+struttura del brano:
 
 ### Python
 
@@ -666,7 +680,7 @@ dancing through the autumn leaves.
 """
 
 response = client.models.generate_content(
-    model="lyria-3-pro-preview",
+    model="lyria-3.5",
     contents=prompt,
 )
 ```
@@ -697,13 +711,13 @@ dancing through the autumn leaves.
 `;
 
 const response = await ai.models.generateContent({
-  model: "lyria-3-pro-preview",
+  model: "lyria-3.5",
   contents: prompt,
 
 });
 ```
 
-### Ok
+### Go
 
 ```
 prompt := `
@@ -730,7 +744,7 @@ dancing through the autumn leaves.
 
 result, err := client.Models.GenerateContent(
     ctx,
-    "lyria-3-pro-preview",
+    "lyria-3.5",
     genai.Text(prompt),
     nil,
 )
@@ -762,7 +776,7 @@ String prompt = """
     """;
 
 GenerateContentResponse response = client.models.generateContent(
-    "lyria-3-pro-preview",
+    "lyria-3.5",
     prompt);
 ```
 
@@ -792,7 +806,7 @@ dancing through the autumn leaves.
 ";
 
 var response = await client.Models.GenerateContentAsync(
-  model: "lyria-3-pro-preview",
+  model: "lyria-3.5",
   contents: prompt
 );
 ```
@@ -801,7 +815,7 @@ var response = await client.Models.GenerateContentAsync(
 
 ```
 curl -s -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/lyria-3-pro-preview:generateContent" \
+  "https://generativelanguage.googleapis.com/v1beta/models/lyria-3.5:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -817,9 +831,10 @@ curl -s -X POST \
 
 ](https://storage.googleapis.com/generativeai-downloads/songs/Neon%20Echoes_Lyrics.webm)
 
-## Zeitplanung und Struktur steuern
+## Controllare la tempistica e la struttura
 
-Mit Zeitstempeln kannst du genau angeben, was zu bestimmten Zeitpunkten im Song passieren soll. Das ist nützlich, um zu steuern, wann Instrumente einsetzen, wann der Text gesprochen wird und wie sich der Song entwickelt:
+Puoi specificare esattamente cosa succede in momenti specifici del brano utilizzando
+i timestamp. Questo è utile per controllare quando entrano gli strumenti, quando vengono fornite le parole e come procede la canzone:
 
 ### Python
 
@@ -835,7 +850,7 @@ prompt = """
 """
 
 response = client.models.generate_content(
-    model="lyria-3-pro-preview",
+    model="lyria-3.5",
     contents=prompt,
 )
 ```
@@ -854,13 +869,13 @@ const prompt = `
 `;
 
 const response = await ai.models.generateContent({
-  model: "lyria-3-pro-preview",
+  model: "lyria-3.5",
   contents: prompt,
 
 });
 ```
 
-### Ok
+### Go
 
 ```
 prompt := `
@@ -875,7 +890,7 @@ prompt := `
 
 result, err := client.Models.GenerateContent(
     ctx,
-    "lyria-3-pro-preview",
+    "lyria-3.5",
     genai.Text(prompt),
     nil,
 )
@@ -895,7 +910,7 @@ String prompt = """
     """;
 
 GenerateContentResponse response = client.models.generateContent(
-    "lyria-3-pro-preview",
+    "lyria-3.5",
     prompt);
 ```
 
@@ -913,7 +928,7 @@ var prompt = @"
 ";
 
 var response = await client.Models.GenerateContentAsync(
-  model: "lyria-3-pro-preview",
+  model: "lyria-3.5",
   contents: prompt
 );
 ```
@@ -922,7 +937,7 @@ var response = await client.Models.GenerateContentAsync(
 
 ```
 curl -s -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/lyria-3-pro-preview:generateContent" \
+  "https://generativelanguage.googleapis.com/v1beta/models/lyria-3.5:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -934,9 +949,9 @@ curl -s -X POST \
   }'
 ```
 
-## Instrumental-Tracks generieren
+## Generare tracce strumentali
 
-Für Hintergrundmusik, Game-Soundtracks oder jeden Anwendungsfall, in dem kein Gesang erforderlich ist, können Sie das Modell auffordern, nur Instrumental-Tracks zu erstellen:
+Per la musica di sottofondo, le colonne sonore dei giochi o qualsiasi caso d'uso in cui non sono richieste parti vocali, puoi chiedere al modello di produrre tracce solo strumentali:
 
 ### Python
 
@@ -959,7 +974,7 @@ const response = await ai.models.generateContent({
 });
 ```
 
-### Ok
+### Go
 
 ```
 result, err := client.Models.GenerateContent(
@@ -1006,15 +1021,17 @@ curl -s -X POST \
   }'
 ```
 
-## Musik in verschiedenen Sprachen generieren
+## Generare musica in lingue diverse
 
-Lyria 3 generiert Songtexte in der Sprache Ihres Prompts. Wenn Sie einen Song mit französischen Texten generieren möchten, schreiben Sie Ihren Prompt auf Französisch. Das Modell passt seinen Gesangsstil und seine Aussprache an die Sprache an.
+Lyria 3.5 genera testi nella lingua del prompt. Per generare una canzone
+con un testo in francese, scrivi il prompt in francese. Il modello adatta lo stile
+vocale e la pronuncia in base alla lingua.
 
 ### Python
 
 ```
 response = client.models.generate_content(
-    model="lyria-3-pro-preview",
+    model="lyria-3.5",
     contents="Crée une chanson pop romantique en français sur un "
              "coucher de soleil à Paris. Utilise du piano et de "
              "la guitare acoustique.",
@@ -1025,7 +1042,7 @@ response = client.models.generate_content(
 
 ```
 const response = await ai.models.generateContent({
-  model: "lyria-3-pro-preview",
+  model: "lyria-3.5",
   contents: "Crée une chanson pop romantique en français sur un " +
             "coucher de soleil à Paris. Utilise du piano et de " +
             "la guitare acoustique.",
@@ -1033,12 +1050,12 @@ const response = await ai.models.generateContent({
 });
 ```
 
-### Ok
+### Go
 
 ```
 result, err := client.Models.GenerateContent(
     ctx,
-    "lyria-3-pro-preview",
+    "lyria-3.5",
     genai.Text("Crée une chanson pop romantique en français sur un " +
                "coucher de soleil à Paris. Utilise du piano et de " +
                "la guitare acoustique."),
@@ -1050,7 +1067,7 @@ result, err := client.Models.GenerateContent(
 
 ```
 GenerateContentResponse response = client.models.generateContent(
-    "lyria-3-pro-preview",
+    "lyria-3.5",
     "Crée une chanson pop romantique en français sur un "
         + "coucher de soleil à Paris. Utilise du piano et de "
         + "la guitare acoustique.");
@@ -1060,7 +1077,7 @@ GenerateContentResponse response = client.models.generateContent(
 
 ```
 var response = await client.Models.GenerateContentAsync(
-  model: "lyria-3-pro-preview",
+  model: "lyria-3.5",
   contents: "Crée une chanson pop romantique en français sur un " +
             "coucher de soleil à Paris. Utilise du piano et de " +
             "la guitare acoustique."
@@ -1071,7 +1088,7 @@ var response = await client.Models.GenerateContentAsync(
 
 ```
 curl -s -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/lyria-3-pro-preview:generateContent" \
+  "https://generativelanguage.googleapis.com/v1beta/models/lyria-3.5:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -1083,60 +1100,68 @@ curl -s -X POST \
   }'
 ```
 
-## Modellintelligenz
+## Intelligenza del modello
 
-Lyria 3 analysiert Ihren Prompt-Prozess, wobei das Modell basierend auf Ihrem Prompt die musikalische Struktur (Intro, Strophe, Refrain, Bridge usw.) berücksichtigt.
-Das geschieht, bevor das Audio generiert wird, und sorgt für strukturelle Kohärenz und Musikalität.
+Lyria 3.5 analizza il processo di prompt in cui il modello ragiona sulla struttura musicale (intro, strofa, ritornello, bridge e così via) in base al prompt.
+Ciò avviene prima della generazione dell'audio e garantisce coerenza strutturale e
+musicalità.
 
-## Interactions API
+## API Interactions
 
-Sie können Lyria 3-Modelle mit der [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) verwenden. Diese API bietet eine einheitliche Schnittstelle für die Interaktion mit Gemini-Modellen und ‑Agents. Es vereinfacht die Statusverwaltung und die Ausführung von zeitaufwendigen Aufgaben für komplexe multimodale Anwendungsfälle.
+Puoi utilizzare i modelli Lyria 3.5 con l'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it),
+un'interfaccia unificata per interagire con i modelli e gli agenti Gemini. Semplifica
+la gestione dello stato e le attività di lunga durata per casi d'uso multimodali complessi.
 
 ### Python
 
 ```
+import base64
 from google import genai
 
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="lyria-3-pro-preview",
+    model="lyria-3.5",
     input="A melancholic jazz fusion track in D minor, " +
           "featuring a smooth saxophone melody, walking bass line, " +
           "and complex drum rhythms.",
 )
 
-for output in interaction.outputs:
-    if output.text:
-        print(output.text)
-    elif output.inline_data:
-         with open("interaction_output.mp3", "wb") as f:
-            f.write(output.inline_data.data)
-         print("Audio saved to interaction_output.mp3")
+generated_audio = interaction.output_audio
+if generated_audio:
+    with open("interaction_output.mp3", "wb") as f:
+        f.write(base64.b64decode(generated_audio.data))
+    print("Audio saved to interaction_output.mp3")
+
+lyrics = interaction.output_text
+if lyrics:
+    print(f"Lyrics:\n{lyrics}")
 ```
 
 ### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
+import * as fs from 'fs';
 
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-  model: 'lyria-3-pro-preview',
+  model: 'lyria-3.5',
   input: 'A melancholic jazz fusion track in D minor, ' +
          'featuring a smooth saxophone melody, walking bass line, ' +
          'and complex drum rhythms.',
 });
 
-for (const output of interaction.outputs) {
-  if (output.text) {
-    console.log(output.text);
-  } else if (output.inlineData) {
-    const buffer = Buffer.from(output.inlineData.data, 'base64');
-    fs.writeFileSync('interaction_output.mp3', buffer);
-    console.log('Audio saved to interaction_output.mp3');
-  }
+const generatedAudio = interaction.output_audio;
+if (generatedAudio) {
+  fs.writeFileSync('interaction_output.mp3', Buffer.from(generatedAudio.data, 'base64'));
+  console.log('Audio saved to interaction_output.mp3');
+}
+
+const lyrics = interaction.output_text;
+if (lyrics) {
+  console.log(`Lyrics:\n${lyrics}`);
 }
 ```
 
@@ -1147,80 +1172,102 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "lyria-3-pro-preview",
+    "model": "lyria-3.5",
     "input": "A melancholic jazz fusion track in D minor, featuring a smooth saxophone melody, walking bass line, and complex drum rhythms."
 }'
 ```
 
-## Anleitung zu Prompts
+## Guida ai prompt
 
-Ihr Prompt kann so einfach sein wie „ein Folksong über süße Katzen, die Pfützen ausweichen, weiblicher Gesang und das Geräusch von Regen“ oder detailliert und strukturiert wie:
+Il prompt può essere semplice come "una canzone folk su gatti carini che evitano le pozzanghere,
+voce femminile e rumore della pioggia" oppure qualcosa di dettagliato e strutturato
+come:
 
-> Ein Synth-Pop-Track im Stil der 1980er-Jahre mit einem treibenden Beat, schimmernden Synthesizern und einem eingängigen, hymnenhaften Refrain. Der Song soll retrofuturistisch klingen, ähnlich wie klassische Pop-Hits aus den 80er-Jahren, aber mit einem modernen Produktions-Touch. Das Tempo sollte fröhlich und tanzbar sein, etwa 120 BPM, mit einer klaren Strophe-Refrain-Struktur und einem eingängigen instrumentalen Hook. Im Songtext geht es darum, sich für eine Party fertig zu machen.
+> Un brano synth-pop in stile anni '80 con un ritmo incalzante, sintetizzatori brillanti
+> e un ritornello orecchiabile e trascinante. La canzone deve avere un'atmosfera retro-futuristica,
+> che ricorda i classici successi pop degli anni '80, con un tocco di modernità. Il
+> tempo deve essere allegro e ballabile, intorno ai 120 BPM, con una chiara
+> struttura strofa-ritornello e un hook strumentale memorabile. Il testo parla
+> della sensazione di prepararsi per una festa.
 
-Sowohl einfache als auch komplexe Prompts können gute Ergebnisse liefern. Wir empfehlen, diese Tipps auszuprobieren, um herauszufinden, was für Sie am besten funktioniert.
+Prompt semplici e complessi possono fornire buoni risultati. Ti consigliamo di
+sperimentare con questi suggerimenti per trovare la soluzione più adatta a te.
 
-### Genre
+### Genere
 
-Beginnen Sie Ihren Prompt mit dem gewünschten Musikgenre, z. B. Hip-Hop, Rock oder Rap. Sie können eine Mischung aus Genres angeben:
+Inizia il prompt con il genere musicale che preferisci, ad esempio hip hop, rock e
+rap. Puoi specificare un mix di generi:
 
-- Eine Mischung aus Metal und Rap
-- Eine Kombination aus Death Metal und Oper
-- Ein klassisches Stück mit elektronischen Drone-Elementen
-- Moderne elektronische Tanzmusik (EDM) gemischt mit Europop
+- Una fusione di metal e rap
+- Una combinazione di death metal e opera
+- Un brano classico con elementi di droni elettronici
+- Musica dance elettronica (EDM) moderna mixata con Europop
 
-Sie können auch eine Epoche einbeziehen:
+Puoi anche incorporare un'era:
 
-- Hip-Hop der frühen 90er
-- Französischer Yé-Yé-Pop der 1960er
-- Elektronische Experimente der 80er
-- Mainstream-Pop der 2000er
+- Hip hop dei primi anni '90
+- Pop ye-ye francese degli anni '60
+- Sperimentazione elettronica anni '80
+- Pop mainstream degli anni 2000
 
-Wenn Sie nach bestimmten Genres oder regionalen Varianten wie „Berliner Techno“ oder „Bay Area Hyphy“ fragen, versucht das Modell, diese Essenz zu erfassen, aber das gelingt nicht immer.
+Se richiedi generi personalizzati o varianti regionali, come "techno berlinese" o
+"hyphy della Bay Area", il modello tenterà di catturare l'essenza, ma potrebbe
+non riuscirci sempre.
 
-### Instrumente
+### Strumenti
 
-Standardmäßig werden in Lyria 3 Songs mit den Instrumenten und Tools erstellt, die für das jeweilige Genre typisch sind. Sie müssen nicht vorschreibend sein.
+Per impostazione predefinita, Lyria 3.5 crea brani con gli strumenti che ti aspetteresti per il genere. Non è necessario essere prescrittivi.
 
-Ein Dance-Track enthält jedoch kein Saxofon, es sei denn, Sie bitten darum. Wenn Sie also ein Saxofonsolo wünschen, müssen Sie das angeben:
+Tuttavia, una traccia dance non includerà un sassofono a meno che tu non lo chieda. Quindi, se vuoi un assolo di sassofono, devi richiederlo:
 
-> Ein Dance-Track mit einem treibenden Beat, schimmernden Synthesizern und einem eingängigen, hymnenhaften Refrain. Während der Bridge sollte ein Saxofonsolo einsetzen.
+> Una traccia dance con un ritmo incalzante, sintetizzatori scintillanti e un ritornello orecchiabile
+> che fa venire voglia di cantare. Durante il bridge deve entrare un assolo di sassofono.
 
-Ihr Prompt kann bestimmte Instrumente, deren Klang und die Interaktion zwischen ihnen enthalten. Mit dieser Kombination können Sie bestimmte Stimmungen oder Texturen erzeugen:
+Il prompt può includere strumenti specifici, il loro suono e il modo in cui
+interagiscono tra loro. Puoi utilizzare questa combinazione per creare determinati stati d'animo
+o texture:
 
-- Eine schmutzige, verzerrte Basslinie kämpft gegen saubere, knackige Hi-Hats.
-- Warme, analoge Synthesizer-Pads, die unter einer trockenen, intimen Akustikgitarre anschwellen
-- Eine Klangwand aus mehreren Schichten verzerrter Gitarren, mit vergrabenen, entfernten Gesang
+- Una linea di basso sporca e distorta che contrasta con hi-hat puliti e nitidi
+- Pad di sintetizzatore analogico caldi che si gonfiano sotto una chitarra acustica secca e intima
+- Un muro di suono creato da più livelli di chitarre fuzz, con voci lontane e
+  sepolte
 
-### Songstruktur
+### Struttura del brano
 
-Sie können den Verlauf eines Songs in Ihrem Prompt beschreiben. Verwenden Sie Pfeile oder eine Liste, um den Ablauf zu definieren:
+Puoi descrivere la progressione di un brano nel prompt. Utilizza le frecce o un elenco
+per definire il flusso:
 
-- `[Intro]` -> `[Verse 1]` -> `[Chorus]` -> `[Verse 2]` -> `[Chorus]` ->
-  `[Bridge]` -> `[Outro]`
-- Beginne mit einem leisen Klavier-Intro, steigere dich zu einem lauten Vers, falle in die Stille und explodiere dann im Refrain.
+- `[Intro]` -> `[Verse 1]` -> `[Chorus]` -> `[Verse 2]` -> `[Chorus]` ->
+  `[Bridge]` -> `[Outro]`
+- Inizia con un intro di pianoforte tranquillo, passa a una strofa potente, poi a un
+  silenzio e infine esplodi nel ritornello.
 
-Sie können auch angeben, wie sich die Energieniveaus zwischen diesen Abschnitten ändern:
+Puoi anche specificare come cambiano i livelli di energia tra queste sezioni:
 
-- Im Pre-Chorus Spannung aufbauen und dann vor einem massiven, explosiven Chorus in die Stille fallen
-- Ein Crescendo, das sich durch das Hinzufügen eines Instruments nach dem anderen steigert, bis eine chaotische Klangwand entsteht.
-- Plötzlicher Stopp nach der Bridge, gefolgt von einem A-cappella-Refrain
+- Crea tensione nel pre-chorus, poi passa al silenzio prima di un chorus massiccio ed
+  esplosivo
+- Crescendo graduale durante il brano, con l'aggiunta di uno strumento alla volta
+  fino a un muro di suono caotico
+- Interruzione improvvisa dopo il ponte, seguita da un coro a cappella
 
-Sie können auch die genaue Uhrzeit angeben, zu der etwas passieren soll:
+Puoi anche richiedere l'ora esatta in cui vuoi che accada qualcosa:
 
-- Bis zum Drop bei 12 Sekunden
-- Jemand sagt alle 2 Sekunden „Was?“
-- Der Refrain beginnt bei 22 Sekunden
+- Crea un drop a 12 secondi
+- Qualcuno dice "cosa" ogni 2 secondi
+- Il ritornello inizia a 22 secondi
 
-### Songtext
+### Testo
 
-Gesang und Songtexte werden standardmäßig generiert. Sie können einen eigenen Songtext angeben, keinen Songtext (oder ein Instrumental) anfordern oder die Generierung des Songtexts in die gewünschte Richtung lenken.
+La voce e i testi vengono generati per impostazione predefinita. Puoi fornire i tuoi testi,
+richiedere di non includere testi (o una versione strumentale) o indirizzare la generazione dei testi
+nella direzione che preferisci.
 
-Die Lyrics werden in der Sprache verfasst, in der Sie Ihren Prompt eingeben. Du kannst auch angeben, dass der Text in einer anderen Sprache verfasst werden soll, z. B. „Schreibe den Text auf Französisch“.
+I testi saranno nella lingua in cui scrivi il prompt. Puoi anche chiedere
+che il testo sia in un'altra lingua, ad esempio "Scrivi il testo in francese".
 
-#### Eigene Songtexte verwenden
+#### Utilizzo dei propri testi
 
-Wenn Sie dem Modell eigene Songtexte zur Verfügung stellen möchten, fügen Sie sie mit dem Präfix „Lyrics:“ in den Prompt ein:
+Per fornire al modello i tuoi testi, includili nel prompt con il prefisso "Lyrics:":
 
 ```
 Lyrics:
@@ -1237,51 +1284,66 @@ Go with the flow
 ...
 ```
 
-Du kannst Teile des Songs mit Abschnittstiteln wie `[Intro]`, `[Verse 1]`, `[Pre-chorus]`, `[Chorus]` und `[Outro]` kennzeichnen.
+Puoi aggiungere un prefisso alle parti del brano con titoli di sezione come `[Intro]`,
+`[Verse 1]`, `[Pre-chorus]`, `[Chorus]` e `[Outro]`.
 
-Wenn ein Wort oder eine Zeile wiederholt werden soll, z. B. als Echo oder von Backgroundsängern, kannst du es in Klammern setzen: „Let’s go (go)“.
+Se vuoi che una parola o una riga venga ripetuta, come un eco o dai coristi,
+puoi includerla tra parentesi: "Let's go (go)".
 
-#### Modell auffordern, Liedtexte zu schreiben
+#### Chiedere al modello di scrivere i testi
 
-Wenn Sie möchten, dass Lyria 3 Songtexte für Sie erstellt, sollten Sie in Ihrem Prompt Details dazu angeben, worum es in den Texten gehen soll. Andernfalls muss das Modell ein Thema aus Ihrem Musik-Prompt ableiten, was möglicherweise nicht Ihren Vorstellungen entspricht.
+Se vuoi che Lyria 3.5 crei i testi per te, è meglio includere dettagli
+su cosa tratteranno i testi nel prompt. In caso contrario, il modello deve
+dedurre un soggetto dal prompt musicale e potrebbe non essere quello che vuoi.
 
-> Der Text handelt von verlorener Liebe und dem Schmerz des Herzschmerzes. Die Sängerin erinnert sich an eine vergangene Beziehung und die Erinnerungen, die zurückkommen.
+> Il testo parla di un amore perduto e del dolore di una delusione amorosa. Il cantante sta
+> ricordando una relazione passata e i ricordi che gli tornano
+> in mente.
 
-Wenn Sie einen sich wiederholenden Refrain wünschen, sollten Sie das in Ihrem Prompt angeben:
+Se vuoi un ritornello ripetuto, è utile chiederlo nel prompt:
 
-> Der Text handelt von verlorener Liebe und dem Schmerz des Herzschmerzes. Die Sängerin erinnert sich an eine vergangene Beziehung und die Erinnerungen, die zurückkommen. Ein kraftvoller Refrain konzentriert sich darauf, den Schmerz zu überwinden und weiterzumachen.
+> Il testo parla di un amore perduto e del dolore di una delusione amorosa. Il cantante sta
+> ricordando una relazione passata e i ricordi che gli tornano
+> in mente. Un ritornello potente si concentra sul superamento del dolore e sul voltare pagina.
 
-Lyria 3 richtet die Struktur des Liedtextes automatisch auf die Art von Musik aus, die Sie anfordern. Sie können dies aber auch in Ihrem Prompt noch einmal betonen. Beispiel:
+Lyria 3.5 indirizzerà automaticamente la struttura del testo verso il tipo di musica che stai richiedendo, ma puoi riaffermarlo anche nel prompt. Ad esempio:
 
-> Ein EDM-Track, in dem immer wieder dieselbe energiegeladene Phrase wiederholt wird.
+> Un brano di musica elettronica che ripete la stessa frase energica più e più volte.
 
-Sie können auch nach Gesangseffekten fragen, die nicht unbedingt Text sind, z. B.:
+Puoi anche richiedere effetti vocali che non sono strettamente testi, ad esempio:
 
-- Ein sich wiederholendes Sample aus einem Film, in dem im gesamten Song „I can't believe this!“ gesagt wird
-- Ein energiegeladener Techno-Track. Kurz vor dem Drop stoppt der Sound und eine kleine Stimme sagt: „I don't know what I'm doing here“ (Ich weiß nicht, was ich hier mache). Dann setzt die Musik wieder ein.
-- Der Track beginnt mit einer Unterhaltung darüber, dass die Filme in den 90er-Jahren besser waren als heute. Dann geht der Titel in einen Popsong über.
+- Un campione ripetuto di un film dice "Non ci posso credere!" per tutta la durata della canzone
+- Un brano techno ad alta energia, proprio prima del drop la musica si interrompe e una
+  vocina dice "Non so cosa ci faccio qui", poi la musica riprende.
+- La traccia si apre con una conversazione sui film degli anni '90 che erano
+  migliori di quelli di oggi. Poi la traccia si trasforma in un brano pop.
 
-### Gesang
+### Voce
 
-Sie können angeben, wie die Songtexte präsentiert werden sollen. Die besten Ergebnisse erzielen Sie, wenn Sie ein detailliertes Sängerprofil mit Geschlecht, Klangfarbe und Stimmumfang angeben.
+Puoi specificare come vuoi che vengano forniti i testi. Per ottenere i risultati migliori, specifica un profilo dettagliato del cantante che includa genere, timbro ed estensione vocale.
 
-- **Weiblicher Sopran**: Klarer, kristalliner Klang mit einer agilen, schwebenden Qualität. Sie kann pfeifende hohe Töne mit einer luftigen, gehauchten Textur erreichen.
-- **Weiblicher Alt**: Kräftiger, warmer und heiserer tiefer Bereich. Rauchige Klangfarbe mit einem Hauch von Vocal Fry, gefühlvoll und resonierend.
-- **Tenor**: Hell, durchdringend und energiegeladen. Jugendliches Timbre mit einer leichten nasalen Note, das sich mit hoher Belting-Power durch den Mix schneidet.
-- **Herren-Bariton**: Dynamisch, schokoladig und samtweich. Resonante Bruststimme mit sanfter, schmachtender Vortragsweise.
-- **Weathered Rocker (Male)**: Heiser und rau mit einem kiesigen Timbre, das an Grunge aus den 90er-Jahren erinnert. Angespannte obere Grenze für emotionale Intensität.
+- **Soprano femminile**: timbro chiaro e cristallino con una qualità agile e impetuosa. Capace di raggiungere note alte e fischiettanti con una consistenza ariosa e soffice.
+- **Contralto femminile**: gamma bassa ricca, calda e rauca. Timbro fumoso con un
+  tocco di vocal fry, pieno di anima e risonante.
+- **Tenore maschile**: brillante, penetrante ed energico. Timbro giovanile con una
+  leggera sfumatura nasale, che si distingue nel mix con una potenza vocale elevata.
+- **Baritono maschile**: profondo, cioccolatoso e vellutato. Voce profonda
+  con un tono dolce e melodioso.
+- **Weathered Rocker (uomo)**: voce roca e ruvida con un timbro granuloso,
+  che ricorda il grunge degli anni '90. Gamma superiore tesa per l'intensità emotiva.
 
-### Weitere Prompt-Parameter
+### Altri parametri del prompt
 
-Sie können auch die folgenden Parameter einfügen, um Ihren Prompt weiter zu verfeinern:
+Puoi anche includere questi parametri per perfezionare ulteriormente il prompt:
 
-- **Tonart/Skala**: Geben Sie eine Tonart an, z.B. „in G-Dur“ oder „D-Moll“.
-- **Stimmung und Atmosphäre**: Verwenden Sie beschreibende Adjektive (z.B. „nostalgisch“, „aggressiv“, „ätherisch“, „vertäumt“).
-- **Dauer**: Das Clip-Modell erstellt immer 30-sekündige Clips. Geben Sie beim Pro-Modell die gewünschte Länge in Ihrem Prompt an (z.B. „Erstelle einen 2-minütigen Song“) oder verwenden Sie Zeitstempel, um die Dauer zu steuern.
+- **Tonalità/Scala**: specifica una tonalità musicale (ad es. "in sol maggiore", "re minore").
+- **Stato d'animo e atmosfera**: utilizza aggettivi descrittivi (ad es. "nostalgico",
+  "aggressivo", "etereo", "onirico").
+- **Durata**: il modello Clip produce sempre clip di 30 secondi. Per il modello Pro, specifica la durata desiderata nel prompt (ad es. "crea una canzone di 2 minuti") o utilizza i timestamp per controllare la durata.
 
-### Beispiele für Prompts
+### Prompt di esempio
 
-Hier sind einige Beispiele für effektive Prompts:
+Ecco alcuni esempi di prompt efficaci:
 
 - `"A 30-second lofi hip hop beat with dusty vinyl crackle, mellow Rhodes
   piano chords, a slow boom-bap drum pattern at 85 BPM, and a jazzy upright
@@ -1291,37 +1353,51 @@ Hier sind einige Beispiele für effektive Prompts:
 - `"A dark, atmospheric trap beat at 140 BPM with heavy 808 bass, eerie synth
   pads, sharp hi-hats, and a haunting vocal sample. In D minor."`
 
-## Best Practices
+## Best practice
 
-- **Zuerst mit Clip iterieren**: Mit dem schnelleren Modell `lyria-3-clip-preview` können Sie mit Prompts experimentieren, bevor Sie eine vollständige Generierung mit `lyria-3-pro-preview` starten.
-- **Beschreiben Sie das Angebot möglichst genau.** Vage Prompts führen zu allgemeinen Ergebnissen. Geben Sie Instrumente, BPM, Tonart, Stimmung und Struktur an, um das bestmögliche Ergebnis zu erzielen.
-- **Abschnittstags verwenden**: Die Tags `[Verse]`, `[Chorus]` und `[Bridge]` geben dem Modell eine klare Struktur vor.
-- **Trenne Liedtexte von Anweisungen.** Wenn Sie benutzerdefinierte Liedtexte angeben, trennen Sie diese deutlich von den Anweisungen zur musikalischen Ausrichtung.
+- **Esegui l'iterazione con Clip.** Utilizza il modello `lyria-3-clip-preview` più veloce per
+  sperimentare con i prompt prima di eseguire una generazione completa con
+  `lyria-3.5`.
+- **Usa un testo specifico.** I prompt vaghi producono risultati generici. Menziona strumenti,
+  BPM, tonalità, stato d'animo e struttura per ottenere il miglior output.
+- **Utilizza i tag di sezione.** I tag `[Verse]`, `[Chorus]` e `[Bridge]` forniscono al modello
+  una struttura chiara da seguire.
+- **Separa i testi dalle istruzioni.** Quando fornisci testi personalizzati, separali chiaramente
+  dalle istruzioni per la direzione musicale.
 
-## Beschränkungen
+## Limitazioni
 
-- **Sicherheit**: Alle Prompts werden von Sicherheitsfiltern geprüft. Prompts, die die Filter auslösen, werden blockiert. Dazu gehören Prompts, in denen bestimmte Künstlerstimmen angefordert werden oder in denen urheberrechtlich geschützte Texte generiert werden sollen.
-- **Wasserzeichen**: Alle generierten Audioinhalte enthalten ein [SynthID-Audio-Wasserzeichen](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=de) zur Identifizierung. Dieses Wasserzeichen ist für das menschliche Ohr nicht wahrnehmbar und hat keine Auswirkungen auf das Hörerlebnis.
-- **Bearbeitung in mehreren Schritten**: Die Musikgenerierung ist ein Prozess, der in einem Schritt erfolgt.
-  Das iterative Bearbeiten oder Verfeinern eines generierten Clips durch mehrere Prompts wird in der aktuellen Version von Lyria 3 nicht unterstützt.
-- **Länge**: Das Clip-Modell generiert immer 30-sekündige Clips. Das Pro-Modell generiert Songs, die einige Minuten lang sind. Die genaue Dauer kann durch den Prompt beeinflusst werden.
-- **Determinismus**: Die Ergebnisse können je nach Anruf variieren, auch wenn derselbe Prompt verwendet wird.
+- **Sicurezza**: tutti i prompt vengono controllati dai filtri di sicurezza. I prompt che attivano
+  i filtri verranno bloccati. Ciò include i prompt che richiedono voci di artisti specifici o la generazione di testi protetti da copyright.
+- **Filigrana**: tutto l'audio generato include una
+  [filigrana audio SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=it) per
+  l'identificazione. Questa filigrana è impercettibile all'orecchio umano e
+  non influisce sull'esperienza di ascolto.
+- **Modifica multi-turno**: la generazione di musica è un processo in un solo passaggio.
+  L'editing iterativo o il perfezionamento di un clip generato tramite più prompt non è
+  supportato nella versione attuale di Lyria 3.5.
+- **Durata**: il modello Clip genera sempre clip di 30 secondi. Il modello Pro
+  genera brani che durano un paio di minuti; la durata esatta può essere
+  influenzata dal prompt.
+- **Determinismo**: i risultati possono variare tra le chiamate, anche con lo stesso prompt.
 
-## Nächste Schritte
+## Passaggi successivi
 
-- [Preise](https://ai.google.dev/gemini-api/docs/generate-content/pricing?hl=de) für Lyria 3-Modelle
-- Probieren Sie [Musikgenerierung in Echtzeit und Streaming](https://ai.google.dev/gemini-api/docs/generate-content/realtime-music-generation?hl=de) mit Lyria RealTime,
-- Unterhaltungen mit mehreren Sprechern mit den [TTS-Modellen](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=de) generieren
-- [Bilder](https://ai.google.dev/gemini-api/docs/generate-content/image-generation?hl=de) oder [Videos](https://ai.google.dev/gemini-api/docs/generate-content/video?hl=de) generieren
-- [Informationen dazu, wie Gemini Audiodateien analysieren kann](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=de)
-- Mit der [Live API](https://ai.google.dev/gemini-api/docs/generate-content/live?hl=de) können Sie sich in Echtzeit mit Gemini unterhalten.
+- Consulta i [prezzi](https://ai.google.dev/gemini-api/docs/generate-content/pricing?hl=it) dei modelli Lyria 3.5.
+- Prova la [generazione di musica in streaming in tempo reale](https://ai.google.dev/gemini-api/docs/generate-content/realtime-music-generation?hl=it) con
+  Lyria RealTime,
+- Genera conversazioni con più interlocutori con i
+  [modelli TTS](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=it),
+- Scopri come generare [immagini](https://ai.google.dev/gemini-api/docs/generate-content/image-generation?hl=it) o [video](https://ai.google.dev/gemini-api/docs/generate-content/video?hl=it),
+- Scopri come Gemini può [comprendere i file audio](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=it),
+- Avvia una conversazione in tempo reale con Gemini utilizzando l'[API Live](https://ai.google.dev/gemini-api/docs/generate-content/live?hl=it).
 
-Feedback geben
+Invia feedback
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Zuletzt aktualisiert: 2026-07-30 (UTC).
+Ultimo aggiornamento 2026-09-04 UTC.
 
-Haben Sie Feedback für uns?
+Vuoi dirci altro?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-30 (UTC)."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-04 UTC."],[],[]]

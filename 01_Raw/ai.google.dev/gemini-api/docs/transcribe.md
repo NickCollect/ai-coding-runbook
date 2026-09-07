@@ -1,25 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/transcribe?hl=pl
-fetched_at: 2026-08-31T06:41:18.740556+00:00
-title: "Zapis tekstowy \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/transcribe?hl=ko
+fetched_at: 2026-09-07T05:48:09.051883+00:00
+title: "\uc624\ub514\uc624 \uc2a4\ud06c\ub9bd\ud2b8 \uc791\uc131 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Prześlij opinię
+의견 보내기
 
-# Zapis tekstowy
+# 오디오 스크립트 작성
 
-Interfejs Gemini API przekształca mowę w plikach audio na tekst za pomocą modelu Gemini 3.5 Transcribe (`gemini-3.5-transcribe`). Dzięki możliwościom Gemini w zakresie rozumienia dźwięku zapewnia dokładną transkrypcję z automatycznym rozpoznawaniem języka, podziałem na mówców, znacznikami czasu na poziomie słów i wskazówkami dotyczącymi słownictwa niestandardowego. Oferuje też tryb [inteligentnej transkrypcji](#transcription-modes), który usuwa niepłynności i inteligentnie formatuje tekst.
+Gemini API는 Gemini 3.5 Transcribe 모델 (`gemini-3.5-transcribe`)을 사용하여 오디오 파일의 음성을 텍스트로 변환합니다. Gemini의 오디오 이해 기능을 기반으로 자동 언어 식별, 화자 분리, 단어 수준 타임스탬프, 맞춤 어휘 힌트를 사용하여 정확한 변환을 제공합니다. 또한 머뭇거림 삭제 및 스마트 서식 지정 기능이 포함된 [스마트 스크립트](#transcription-modes) 모드도 제공합니다.
 
-Aby utworzyć transkrypcję pliku audio, prześlij go i przekaż do `gemini-3.5-transcribe`:
+오디오 파일을 텍스트로 변환하려면 오디오를 업로드하고 `gemini-3.5-transcribe`에 전달하세요.
 
 ### Python
 
@@ -44,7 +45,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -89,26 +90,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Przegląd
+## 개요
 
-Gemini 3.5 Transcribe jest zoptymalizowany pod kątem zadań związanych z przekształcaniem mowy na tekst. Obsługuje różne akcenty, szumy w tle i rozmowy w wielu językach.
+Gemini 3.5 Transcribe는 음성 텍스트 변환 작업에 최적화되어 있습니다. 다양한 억양, 배경 소음, 다국어 대화를 처리합니다.
 
-Najważniejsze funkcje:
+주요 기능은 다음과 같습니다.
 
-- **Automatyczne rozpoznawanie mowy (ASR):** automatycznie wykrywa języki w [ponad 85 lokalizacjach](#supported-languages). Obsługuje przełączanie języków w obrębie zdania i między zdaniami bez konieczności ręcznej konfiguracji.
-- **Słownictwo niestandardowe:** przekazując do 1000 frazeologizmów, możesz zwiększyć dokładność rozpoznawania terminów, akronimów i nazw własnych związanych z określoną dziedziną.
-- **Rozpoznawanie rozmówców:** rozróżnia poszczególnych rozmówców i przypisuje wypowiadane przez nich segmenty do różnych etykiet.
-- **Sygnatury czasowe na poziomie słów:** generuje dokładne przesunięcia czasu początków i końców każdego rozpoznanego słowa.
-- **Inteligentna transkrypcja:** usuwa niepłynności, wypełniacze i powtórzenia oraz stosuje formatowanie strukturalne.
-- **Formatowanie i normalizacja:** stosuje wielkie litery, interpunkcję i normalizację tekstu odwrotnego, np. przekształca „twenty six million dollars” na „26 mln USD”.
+- **자동 음성 인식 (ASR):** [85개 이상의 언어](#supported-languages)를 자동으로 감지합니다. 수동 구성 없이 문장 내 및 문장 간 코드 전환을 처리합니다.
+- **맞춤 어휘:** 최대 1, 000개의 구문을 전달하여 도메인별 용어, 약어,고유명사에 대한 인식을 편향시킵니다.
+- **화자 분리:** 여러 화자를 구분하고 발화된 세그먼트를 고유한 라벨에 속성으로 지정합니다.
+- **단어 수준 타임스탬프:** 인식된 각 단어의 정확한 시작 및 종료 타임스탬프를 생성합니다.
+- **스마트 스크립트:** 유창하지 않은 부분, 추임새, 반복을 정리하고 구조화된 서식을 적용합니다.
+- **형식 지정 및 정규화:** 대문자, 구두점, 역 텍스트 정규화(예: '2천6백만 달러'를 '2, 600만 달러'로 변환)를 적용합니다.
 
-Jeśli chcesz uzyskać ogólne rozumowanie na podstawie treści audio lub odpowiadanie na pytania dotyczące tych treści, użyj [rozumienia dźwięku](https://ai.google.dev/gemini-api/docs/audio?hl=pl). Do syntezy dźwięku przy zamianie tekstu na mowę użyj funkcji [Zamiana tekstu na mowę](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl).
+오디오 콘텐츠에 대한 일반적인 오디오 추론 또는 질의 응답에는 [오디오 이해](https://ai.google.dev/gemini-api/docs/audio?hl=ko)를 사용하세요. 텍스트 음성 변환 오디오 합성에는 [텍스트 음성 변환](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ko)을 사용합니다.
 
-## Wykrywanie języka i podpowiedzi
+## 언어 감지 및 힌트
 
-Domyślnie model automatycznie wykrywa język, w którym mówisz. Przełącza się między językami dynamicznie, gdy mówcy przechodzą z jednego języka na drugi.
+기본적으로 모델은 음성 언어를 자동으로 감지합니다. 화자가 코드 전환을 하면 언어를 동적으로 전환합니다.
 
-Aby użyć automatycznego wykrywania, pomiń parametr `language_codes` lub podaj pustą listę:
+자동 감지를 사용하려면 `language_codes`를 생략하거나 빈 목록을 제공하세요.
 
 ### Python
 
@@ -130,7 +131,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -173,7 +174,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Jeśli znasz język z wyprzedzeniem, podaj kody języka w standardzie BCP-47 w `language_codes`, aby zwiększyć dokładność transkrypcji (patrz [Obsługiwane języki](#supported-languages)):
+언어를 미리 알고 있는 경우 `language_codes`에 BCP-47 언어 코드를 지정하여 전사 정확도를 높이세요 ([지원되는 언어](#supported-languages) 참고).
 
 ### Python
 
@@ -185,7 +186,7 @@ generation_config = {
 }
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const generationConfig = {
@@ -207,9 +208,9 @@ const generationConfig = {
 }
 ```
 
-## Słownictwo niestandardowe
+## 커스텀 어휘
 
-Możesz nakierować model mowy na rzadko używane słowa, żargon techniczny, nazwy marek lub nazwy własne. Podaj w tablicy `custom_vocabulary` maksymalnie 1000 słów (najlepsze wyniki zwykle uzyskuje się w przypadku maksymalnie 100 słów):
+음성 모델이 흔하지 않은 단어, 전문 용어, 브랜드 이름 또는 고유 명사를 인식하도록 조정할 수 있습니다. `custom_vocabulary` 배열에 최대 1,000개의 용어를 제공합니다 (최상의 결과는 일반적으로 최대 100개의 용어로 달성됨).
 
 ### Python
 
@@ -231,7 +232,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -274,11 +275,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Rozdzielanie rozmówców
+## 화자 분할
 
-Rozdzielanie rozmówców identyfikuje różne głosy w nagraniu i oznacza każdy segment identyfikatorem rozmówcy, np. `spk_1` lub `spk_2`. Obsługiwanych jest maksymalnie 8 głośników (atrybucja w przypadku 3 lub więcej głośników jest eksperymentalna).
+화자 분할은 녹음 파일에서 서로 다른 음성을 식별하고 각 세그먼트에 `spk_1` 또는 `spk_2`와 같은 화자 식별자로 태그를 지정합니다. 최대 8명의 화자가 지원됩니다 (3명 이상의 화자에 대한 속성은 실험적임).
 
-Włącz rozdzielanie rozmówców, konfigurując `diarization_mode` w obszarze `mode`:
+`mode` 내에서 `diarization_mode`를 구성하여 분할을 사용 설정합니다.
 
 ### Python
 
@@ -303,7 +304,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -352,11 +353,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Sygnatury czasowe na poziomie słów
+## 단어 수준 타임스탬프
 
-Sygnatury czasowe na poziomie słów podają dokładne przesunięcia początku i końca każdego rozpoznanego słowa w strumieniu audio.
+단어 수준 타임스탬프는 오디오 스트림에서 인식된 모든 단어의 정확한 시작 및 종료 오프셋을 제공합니다.
 
-Włącz sygnatury czasowe, konfigurując `timestamp_granularities` w sekcji `mode`:
+`mode` 내에서 `timestamp_granularities`를 구성하여 타임스탬프를 사용 설정합니다.
 
 ### Python
 
@@ -381,7 +382,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -430,7 +431,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Możesz połączyć `diarization_mode` i `timestamp_granularities` w `mode`, aby otrzymywać zarówno etykiety rozmówców, jak i sygnatury czasowe słów:
+`mode`에서 `diarization_mode`과 `timestamp_granularities`을 결합하여 화자 라벨과 단어 타임스탬프를 모두 수신할 수 있습니다.
 
 ### Python
 
@@ -447,7 +448,7 @@ generation_config = {
 }
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const generationConfig = {
@@ -479,21 +480,21 @@ const generationConfig = {
 }
 ```
 
-## Tryby transkrypcji
+## 스크립트 작성 모드
 
-Gemini 3.5 Transcribe obsługuje 2 tryby transkrypcji za pomocą parametru `mode`:
+Gemini 3.5 Transcribe는 `mode` 파라미터를 통해 두 가지 스크립트 모드를 지원합니다.
 
-- **`verbatim` (domyślny):** zwraca dokładny zapis słowo w słowo wszystkiego, co zostało powiedziane, zachowując nieprzetworzone wypełniacze („um”, „uh”, „like”, „you know”), powtórzenia, pauzy i fałszywe starty. W tym trybie (`{"type": "verbatim", ...}`) konfiguruje się sygnatury czasowe i rozdzielanie rozmówców.
-- **`smart` (Inteligentna transkrypcja):** optymalizuje transkrypcję pod kątem czytania, stosując inteligentne przetwarzanie końcowe:
-  - **Usuwanie zakłóceń:** usuwa wypełniacze, jąkanie i fałszywe starty.
-  - **Korekty w tekście:** bezpośrednie rozwiązywanie problemów z korektami w wypowiedzi (np. *„Spotkajmy się we wtorek, a nie, w środę o godzinie 14:00”* staje się *„Spotkajmy się w środę o godzinie 14:00”*).
-  - **Automatyczne formatowanie strukturalne:** automatycznie porządkuje wypowiadane myśli w akapitach, listach numerowanych, punktach, sformatowanych datach, walutach i liczbach.
-  - **Poprawki gramatyczne:** stosuje naturalną interpunkcję, wielkie litery na początku zdania i płynność.
+- **`verbatim` (기본값)**: 말한 모든 내용을 단어별로 정확하게 기록하며, 원시 필러 단어 ('음', '어', '그', '알잖아'), 반복, 일시중지, 잘못된 시작을 보존합니다. 타임스탬프와 화자 분할은 이 모드 (`{"type": "verbatim", ...}`) 내에서 구성됩니다.
+- **`smart` (스마트 스크립트)**: 지능형 후처리를 적용하여 읽기용 스크립트를 최적화합니다.
+  - **말더듬기 제거**: 대화형 필러 단어, 말더듬기, 잘못된 시작을 제거합니다.
+  - **인라인 자체 수정**: 말한 수정사항을 직접 해결합니다 (예:*'화요일에 만나자. 아니, 수요일 2시에 만나자'*가 *'수요일 오후 2시에 만나자'*가 됨).
+  - **자동 구조화된 형식 지정**: 음성으로 말한 생각을 단락, 번호 매기기 목록, 글머리 기호, 형식화된 날짜, 통화, 숫자로 자동 구조화합니다.
+  - **문법 정리**: 자연스러운 구두점, 문장 대소문자, 흐름을 적용합니다.
 
-| Tekst mówiony | `verbatim` wynik | `smart` dane wyjściowe (inteligentna transkrypcja) |
+| 음성 오디오 | `verbatim` 출력 | `smart` (스마트 스크립트) 출력 |
 | --- | --- | --- |
-| „Na spotkanie powinniśmy zaprosić Alicję i … nie, Roberta i Karolinę”. | „Um, na spotkanie powinniśmy zaprosić Alicję, nie, Roberta i Karola”. | „Na spotkanie powinniśmy zaprosić Roberta i Karolinę”. |
-| „First item review budget second item finalize timeline third item send recap” | „first item review budget second item finalize timeline third item send recap” | „1. Sprawdź budżet 2. Finalizacja osi czasu 3. Wyślij podsumowanie”. |
+| '음, 회의에는 앨리스를 초대해야 할 것 같아. 아니, 밥과 캐롤을 초대해야 해.' | '음, 회의에는 앨리스를 초대해야 할 것 같아. 아니, 밥과 캐롤을 초대해야 해.' | '회의에 김민수와 이수진을 초대하는 게 좋을 것 같아.' |
+| 'First item review budget second item finalize timeline third item send recap'(첫 번째 항목 예산 검토, 두 번째 항목 일정 확정, 세 번째 항목 요약 보내기) | 'first item review budget second item finalize timeline third item send recap'(첫 번째 항목 예산 검토, 두 번째 항목 타임라인 확정, 세 번째 항목 요약 보내기) | '1. 예산 검토 2. 타임라인을 마무리합니다. 3. 요약 보내기' |
 
 ### Python
 
@@ -516,7 +517,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -560,13 +561,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Analizowanie danych wyjściowych transkrypcji
+## 스크립트 출력 파싱
 
-Pełny tekst transkrypcji jest zwracany w `interaction.output_text`.
+전체 스크립트 텍스트가 `interaction.output_text`에 반환됩니다.
 
-Gdy włączona jest opcja `timestamp_granularities` lub `diarization_mode`, interfejs API zwraca też szczegółowe adnotacje na poziomie słów dołączone do treści interakcji.
+`timestamp_granularities` 또는 `diarization_mode`가 사용 설정되면 API는 상호작용 콘텐츠에 연결된 자세한 단어 수준 주석도 반환합니다.
 
-Oto jak wyodrębnić sygnatury czasowe słów i zmiany mówcy oraz iterować po nich:
+단어 타임스탬프와 화자 전환을 추출하고 반복하는 방법은 다음과 같습니다.
 
 ### Python
 
@@ -590,7 +591,7 @@ for w in words:
     print(f"{speaker}{timing}{w.text}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 function extractWordAnnotations(interaction) {
@@ -653,117 +654,117 @@ for (const w of words) {
 }
 ```
 
-## Obsługiwane języki
+## 지원 언어
 
-Gemini 3.5 Transcribe obsługuje te języki i kody języków w standardzie BCP-47:
+Gemini 3.5 Transcribe에서 지원되는 언어와 BCP-47 언어 코드는 다음과 같습니다.
 
-| Język | Kod BCP-47 | Język | Kod BCP-47 |
+| 언어 | BCP-47 코드 | 언어 | BCP-47 코드 |
 | --- | --- | --- | --- |
-| afrikaans | `af-ZA` | japoński | `ja-JP` |
-| amharski | `am-ET` | jawajski | `jv-ID` |
-| arabski (Egipt) | `ar-EG` | kabuverdianu | `kea-CV` |
-| ormiański | `hy-AM` | kannada | `kn-IN` |
-| asamski | `as-IN` | kazachski | `kk-KZ` |
-| azerski | `az-AZ` | koreański | `ko-KR` |
-| białoruski | `be-BY` | kirgiski | `ky-KG` |
-| bengalski (Bangladesz) | `bn-BD` | łotewski | `lv-LV` |
-| bengalski (Indie) | `bn-IN` | lingala | `ln-CD` |
-| bośniacki | `bs-BA` | litewski | `lt-LT` |
-| bułgarski | `bg-BG` | macedoński | `mk-MK` |
-| bułgarski (arumuński), | `rup-BG` | malajski | `ms-MY` |
-| birmański | `my-MM` | malajalam | `ml-IN` |
-| kantoński (tradycyjny), | `yue-Hant-HK` | maltański | `mt-MT` |
-| kataloński | `ca-ES` | chiński mandaryński (uproszczony), | `cmn-Hans-CN` |
-| cebuański | `ceb` | marathi | `mr-IN` |
-| khmerski | `km-KH` | mongolski | `mn-MN` |
-| chorwacki | `hr-HR` | nepalski | `ne-NP` |
-| czeski | `cs-CZ` | norweski | `nb-NO` |
-| duński | `da-DK` | orija | `or-IN` |
-| niderlandzki | `nl-NL` | polski | `pl-PL` |
-| angielski (Wielka Brytania) | `en-GB` | portugalski (Brazylia) | `pt-BR` |
-| angielski (Indie) | `en-IN` | portugalski (Portugalia) | `pt-PT` |
-| angielski (USA) | `en-US` | pendżabski | `pa-IN` |
-| estoński | `et-EE` | pendżabski (pismo gurmukhi) | `pa-Guru-IN` |
-| perski | `fa-IR` | rumuński | `ro-RO` |
-| filipiński | `fil-PH` | rosyjski | `ru-RU` |
-| fiński | `fi-FI` | serbski | `sr-RS` |
-| francuski | `fr-FR` | sindhi (alfabet arabski) | `sd-Arab-IN` |
-| galicyjski | `gl-ES` | słowacki | `sk-SK` |
-| gruziński | `ka-GE` | słoweński | `sl-SI` |
-| niemiecki | `de-DE` | hiszpański (Ameryka Łacińska) | `es-419` |
-| grecki | `el-GR` | hiszpański (Stany Zjednoczone) | `es-US` |
-| gudżarati | `gu-IN` | suahili (Kenia) | `sw-KE` |
-| hausa | `ha-NG` | szwedzki | `sv-SE` |
-| hebrajski | `he-IL` | tadżycki | `tg-TJ` |
-| hindi | `hi-IN` | telugu | `te-IN` |
-| węgierski | `hu-HU` | tajski | `th-TH` |
-| islandzki | `is-IS` | turecki | `tr-TR` |
-| indyjski angielski | `en-IN` | ukraiński | `uk-UA` |
-| indonezyjski | `id-ID` | uzbecki | `uz-UZ` |
-| włoski | `it-IT` | wietnamski | `vi-VN` |
+| 아프리칸스어 | `af-ZA` | 일본어 | `ja-JP` |
+| 암하라어 | `am-ET` | 자바어 | `jv-ID` |
+| 아랍어(이집트) | `ar-EG` | Kabuverdianu | `kea-CV` |
+| 아르메니아어 | `hy-AM` | 칸나다어 | `kn-IN` |
+| 아삼어 | `as-IN` | 카자흐어 | `kk-KZ` |
+| 아제르바이잔어 | `az-AZ` | 한국어 | `ko-KR` |
+| 벨라루스어 | `be-BY` | 키르기스어 | `ky-KG` |
+| 벵골어(방글라데시) | `bn-BD` | 라트비아어 | `lv-LV` |
+| 벵골어(인도) | `bn-IN` | 링갈라어 | `ln-CD` |
+| 보스니아어 | `bs-BA` | 리투아니아어 | `lt-LT` |
+| 불가리아어 | `bg-BG` | 마케도니아어 | `mk-MK` |
+| 불가리아어 (아로마어) | `rup-BG` | 말레이어 | `ms-MY` |
+| 버마어 | `my-MM` | 말라얄람어 | `ml-IN` |
+| 광둥어 (번체) | `yue-Hant-HK` | 몰타어 | `mt-MT` |
+| 카탈로니아어 | `ca-ES` | 중국어 (간체) | `cmn-Hans-CN` |
+| 세부아노어 | `ceb` | 마라타어 | `mr-IN` |
+| 표준 크메르어 | `km-KH` | 몽골어 | `mn-MN` |
+| 크로아티아어 | `hr-HR` | 네팔어 | `ne-NP` |
+| 체코어 | `cs-CZ` | 노르웨이어 | `nb-NO` |
+| 덴마크어 | `da-DK` | 오리야어 | `or-IN` |
+| 네덜란드어 | `nl-NL` | 폴란드어 | `pl-PL` |
+| 영어(영국) | `en-GB` | 포르투갈어(브라질) | `pt-BR` |
+| 영어(인도) | `en-IN` | 포르투갈어(포르투갈) | `pt-PT` |
+| 영어(미국) | `en-US` | 펀자브어 | `pa-IN` |
+| 에스토니아어 | `et-EE` | 펀자브어 (구르무키 문자) | `pa-Guru-IN` |
+| 페르시아어 | `fa-IR` | 루마니아어 | `ro-RO` |
+| 필리핀어 | `fil-PH` | 러시아어 | `ru-RU` |
+| 핀란드어 | `fi-FI` | 세르비아어 | `sr-RS` |
+| 프랑스어 | `fr-FR` | 신디어 (아랍 문자) | `sd-Arab-IN` |
+| 갈리시아어 | `gl-ES` | 슬로바키아어 | `sk-SK` |
+| 조지아어 | `ka-GE` | 슬로베니아어 | `sl-SI` |
+| 독일어 | `de-DE` | 스페인어(라틴 아메리카) | `es-419` |
+| 그리스어 | `el-GR` | 스페인어(미국) | `es-US` |
+| 구자라트어 | `gu-IN` | 스와힐리어(케냐) | `sw-KE` |
+| 하우사어 | `ha-NG` | 스웨덴어 | `sv-SE` |
+| 히브리어 | `he-IL` | 타지크어 | `tg-TJ` |
+| 힌디어 | `hi-IN` | 텔루구어 | `te-IN` |
+| 헝가리어 | `hu-HU` | 태국어 | `th-TH` |
+| 아이슬란드어 | `is-IS` | 튀르키예어 | `tr-TR` |
+| 인도 영어 | `en-IN` | 우크라이나어 | `uk-UA` |
+| 인도네시아어 | `id-ID` | 우즈베크어 | `uz-UZ` |
+| 이탈리아어 | `it-IT` | 베트남어 | `vi-VN` |
 
-## Obsługiwane formaty audio
+## 지원되는 오디오 형식
 
-Gemini 3.5 Transcribe obsługuje te typy MIME formatów audio:
+Gemini 3.5 Transcribe는 다음 오디오 형식 MIME 유형을 지원합니다.
 
 - WAV - `audio/wav`
-- MP3 – `audio/mp3`
-- AIFF – `audio/aiff`
+- MP3 - `audio/mp3`
+- AIFF - `audio/aiff`
 - AAC - `audio/aac`
-- OGG – `audio/ogg`
-- FLAC – `audio/flac`
+- OGG - `audio/ogg`
+- FLAC - `audio/flac`
 - MPEG - `audio/mpeg`
 - M4A - `audio/m4a`
 - L16 - `audio/l16`
-- Opus – `audio/opus`
+- Opus - `audio/opus`
 - ALAW - `audio/alaw`
 - MULAW - `audio/mulaw`
-- WebM – `audio/webm`
+- WebM - `audio/webm`
 
-Pełną listę obsługiwanych typów MIME i schematów parametrów znajdziesz w [dokumentacji interfejsu Interactions API](https://ai.google.dev/api/interactions-api?hl=pl#Resource:Content).
+지원되는 MIME 유형 및 매개변수 스키마의 전체 목록은 [Interactions API 참조](https://ai.google.dev/api/interactions-api?hl=ko#Resource:Content)를 참고하세요.
 
-## Dodatkowe materiały o tym parametrze
+## 파라미터 참조
 
-Skonfiguruj transkrypcję, ustawiając pola w obiekcie `transcription_config` w `generation_config`:
+`generation_config`에서 `transcription_config` 객체 내 필드를 설정하여 트랜스크립션을 구성합니다.
 
-| Pole | Typ | Opis |
+| 필드 | 유형 | 설명 |
 | --- | --- | --- |
-| `language_codes` | Tablica ciągów znaków | Kody języków w standardzie BCP-47 (np. `["en-US"]`). Jeśli ten parametr zostanie pominięty lub będzie pusty (`[]`), model automatycznie wykryje język i obsłuży przełączanie kodu. |
-| `custom_vocabulary` | Tablica ciągów znaków | Maksymalnie 1000 niestandardowych terminów, akronimów lub nazw własnych, które mają wpływać na rozpoznawanie mowy. |
-| `mode` | Obiekt lub ciąg znaków | Konfiguracja trybu transkrypcji. Akceptuje wartość `"smart"` lub obiekt trybu dosłownego (`{"type": "verbatim", ...}`). Domyślnie jest to transkrypcja dosłowna. |
-| `mode.type` | Ciąg znaków | *(Tylko w trybie dosłownym)* Identyfikator trybu. Zawsze ustawiona na `"verbatim"`. |
-| `mode.timestamp_granularities` | Tablica ciągów znaków | *(Tylko tryb dosłowny)* Szczegółowość sygnatur czasowych do zwrócenia. Przekaż `["word"]`, aby włączyć przesunięcia początku i końca słów. |
-| `mode.diarization_mode` | Ciąg znaków | *(Tylko tryb dosłowny)* Tryb diaryzacji. Przekaż `"speaker"`, aby zidentyfikować poszczególnych rozmówców i oznaczyć ich etykietami. |
+| `language_codes` | 문자열 배열 | BCP-47 언어 코드 (예: `["en-US"]`)입니다. 생략되거나 비어 있는 경우 (`[]`) 모델이 언어를 자동으로 감지하고 코드 전환을 처리합니다. |
+| `custom_vocabulary` | 문자열 배열 | 음성 인식을 편향시킬 수 있는 최대 1,000개의 맞춤 용어, 약어 또는 고유 이름 |
+| `mode` | 객체 또는 문자열 | 스크립트 작성 모드 구성입니다. `"smart"` 또는 있는 그대로 모드 객체 (`{"type": "verbatim", ...}`)를 허용합니다. 기본값은 있는 그대로 전사입니다. |
+| `mode.type` | 문자열 | *(있는 그대로 모드만 해당)* 모드 식별자입니다. 항상 `"verbatim"`로 설정됩니다. |
+| `mode.timestamp_granularities` | 문자열 배열 | *(직접 인용 모드만 해당)* 반환할 타임스탬프의 단위입니다. 단어 시작 및 종료 오프셋을 사용 설정하려면 `["word"]`를 전달합니다. |
+| `mode.diarization_mode` | 문자열 | *(직접 인용 모드만 해당)* 화자 분리 모드입니다. `"speaker"`를 전달하여 명확한 발화자를 식별하고 라벨을 지정합니다. |
 
-## Sprawdzone metody
+## 권장사항
 
-- **Zapewnij czysty dźwięk:** zadbaj o to, aby nagrania audio miały wyraźnie oddzielone głosy i unikaj poważnego obcinania dźwięku.
-- **Podaj wskazówki dotyczące języka, jeśli jest on znany:** jeśli znasz język dźwięku, podaj `language_codes`, aby zmaksymalizować dokładność.
-- **Kierowanie na niestandardowy słownik:** w `custom_vocabulary` umieszczaj tylko unikalne terminy związane z domeną, nazwy marek lub rzeczowniki własne, a nie powszechnie używane słowa.
-- **Używaj interfejsu Files API w przypadku długich nagrań:** w przypadku plików dłuższych niż kilka sekund prześlij plik za pomocą `client.files.upload` i przekaż zwrócony identyfikator URI pliku do modelu.
+- **깔끔한 오디오 제공:** 오디오 녹음에서 음성 분리가 명확하고 심각한 클리핑이 없는지 확인합니다.
+- **언어를 알고 있는 경우 언어 힌트 제공:** 오디오 언어를 미리 알고 있는 경우 `language_codes`를 지정하여 정확도를 극대화하세요.
+- **타겟 맞춤 어휘:** 일반적인 일상 단어 대신 `custom_vocabulary`에 고유한 도메인 용어, 브랜드 이름 또는 고유명사만 포함합니다.
+- **큰 녹음 파일에 Files API 사용:** 몇 초보다 긴 파일의 경우 `client.files.upload`를 사용하여 파일을 업로드하고 반환된 파일 URI를 모델에 전달합니다.
 
-## Ograniczenia
+## 제한사항
 
-- **Czas trwania dźwięku:** standardowe żądania unarne obsługują pliki audio o czasie trwania do 1 godziny. Przetwarzanie dźwięku jest ograniczone do 30 minut, gdy włączone są funkcje takie jak rozdzielanie rozmówców czy sygnatury czasowe na poziomie słów.
-- **Sygnatury czasowe na poziomie słów:** włączenie sygnatur czasowych na poziomie słów może obniżyć ogólną dokładność transkrypcji.
-- **Rozdzielanie rozmówców:** rozdzielanie rozmówców obsługuje maksymalnie 8 osób. Przypisywanie mówców w przypadku co najmniej 3 osób jest funkcją eksperymentalną.
-- **Słownictwo niestandardowe:** możesz podać maksymalnie 1000 terminów w `custom_vocabulary`, ale najlepsze wyniki zwykle uzyskuje się w przypadku maksymalnie 100 terminów.
-- **Zgodność trybów:** inteligentna transkrypcja (`"smart"`) nie może być łączona z `timestamp_granularities` ani `diarization_mode`.
+- **오디오 길이:** 표준 단항 요청은 최대 1시간 길이의 오디오 파일을 지원합니다. 화자 분할 또는 단어 수준 타임스탬프와 같은 기능을 사용 설정하면 오디오 처리가 30분으로 제한됩니다.
+- **단어 수준 타임스탬프:** 단어 수준 타임스탬프를 사용 설정하면 전체 변환 텍스트의 정확도가 저하될 수 있습니다.
+- **화자 분할:** 화자 분할은 최대 8명의 화자를 지원합니다. 3명 이상의 화자에 대한 화자 속성은 실험 단계에 있습니다.
+- **맞춤 어휘:** `custom_vocabulary`에 최대 1,000개의 단어를 제공할 수 있지만 일반적으로 최대 100개의 단어로 최상의 결과를 얻을 수 있습니다.
+- **모드 호환성:** 스마트 스크립트 (`"smart"`)는 `timestamp_granularities` 또는 `diarization_mode`와 함께 사용할 수 없습니다.
 
-## Co dalej?
+## 다음 단계
 
-- Przesyłaj strumieniowo dźwięk w czasie rzeczywistym za pomocą [przewodnika po transkrypcji na żywo](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=pl), korzystając z interfejsu Live API.
-- Poznaj [rozumienie dźwięku](https://ai.google.dev/gemini-api/docs/audio?hl=pl), aby analizować, podsumowywać lub wyszukiwać treści audio.
-- Dowiedz się, jak zsyntetyzować plik audio z tekstu za pomocą [zamiany tekstu na mowę](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl).
-- Ceny modeli i limity tokenów znajdziesz na [stronie z cennikiem](https://ai.google.dev/gemini-api/docs/pricing?hl=pl#gemini-3.5-transcribe).
-- Szczegółowe informacje o przesyłaniu plików multimedialnych i zarządzaniu nimi znajdziesz w przewodniku po [interfejsie Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl).
+- Live API를 사용하여 [실시간 스크립트 가이드](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=ko)로 실시간 오디오를 스트리밍합니다.
+- [오디오 이해](https://ai.google.dev/gemini-api/docs/audio?hl=ko)를 살펴보고 오디오 콘텐츠를 분석, 요약하거나 쿼리하세요.
+- [Text-to-speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ko)를 사용하여 텍스트에서 오디오를 합성하는 방법을 알아봅니다.
+- 모델 가격 및 토큰 한도는 [가격 책정 페이지](https://ai.google.dev/gemini-api/docs/pricing?hl=ko#gemini-3.5-transcribe)를 확인하세요.
+- 미디어 파일 업로드 및 관리에 관한 자세한 내용은 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ko) 가이드를 참고하세요.
 
-Prześlij opinię
+의견 보내기
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Ostatnia aktualizacja: 2026-08-28 UTC.
+최종 업데이트: 2026-08-28(UTC)
 
-Chcesz przekazać coś jeszcze?
+의견을 전달하고 싶나요?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-08-28 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-08-28(UTC)"],[],[]]

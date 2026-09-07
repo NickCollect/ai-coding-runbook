@@ -1,69 +1,67 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=it
-fetched_at: 2026-08-31T06:32:15.219477+00:00
-title: "Guida introduttiva \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl
+fetched_at: 2026-09-07T05:33:38.194222+00:00
+title: "Pierwsze kroki \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Invia feedback
+Prześlij opinię
 
-# Guida introduttiva
+# Pierwsze kroki
 
-Questa guida ti aiuterà a iniziare a utilizzare l'API **generateContent** legacy.
-Per i nuovi progetti e le nuove applicazioni, consigliamo vivamente di utilizzare la nuova **API Interactions**, che è il modo più semplice e migliore per creare con i modelli e gli agenti Gemini.
+Z tego przewodnika dowiesz się, jak zacząć korzystać z starszego interfejsu **generateContent** API.
+W przypadku nowych projektów i aplikacji zdecydowanie zalecamy korzystanie z nowego **interfejsu Interactions API** , który jest najprostszym i najlepszym sposobem na tworzenie aplikacji z wykorzystaniem modeli i agentów Gemini.
 
-Questa guida rapida mostra come installare le nostre
-[librerie](https://ai.google.dev/gemini-api/docs/libraries?hl=it) ed effettuare la prima richiesta, trasmettere
-le risposte, creare conversazioni a più turni e utilizzare gli strumenti utilizzando il metodo standard
-`generateContent`.
+Z tego przewodnika dowiesz się, jak zainstalować nasze
+[biblioteki](https://ai.google.dev/gemini-api/docs/libraries?hl=pl) i wysłać pierwsze żądanie, przesyłać strumieniowo
+odpowiedzi, tworzyć rozmowy wieloetapowe i korzystać z narzędzi za pomocą standardowej
+`generateContent` metody.
 
-## Ottieni una chiave API
+## Uzyskiwanie klucza interfejsu API
 
-Per utilizzare l'API Gemini, devi avere una chiave API per autenticare le richieste, applicare i limiti di sicurezza e monitorare l'utilizzo del tuo account.
+Aby korzystać z Gemini API, musisz mieć klucz interfejsu API, który umożliwi uwierzytelnianie żądań, egzekwowanie limitów bezpieczeństwa i śledzenie wykorzystania na koncie.
 
-- Google AI Studio crea automaticamente un progetto e una chiave API per i nuovi utenti.
-  Puoi copiarla dalla pagina [Chiavi API](https://aistudio.google.com/api-keys?hl=it).
-- Se hai bisogno di una nuova chiave, fai clic su **Crea chiave API** in AI Studio e segui la finestra di dialogo per aggiungere una nuova coppia chiave-progetto.
+- Google AI Studio automatycznie tworzy projekt i klucz interfejsu API dla nowych użytkowników.
+  Możesz go skopiować ze strony [kluczy interfejsów API](https://aistudio.google.com/api-keys?hl=pl).
+- Jeśli potrzebujesz nowego klucza, w AI Studio kliknij **Utwórz klucz interfejsu API** i postępuj zgodnie z instrukcjami w oknie, aby dodać nową parę klucz-projekt.
 
-[Crea una chiave API Gemini](https://aistudio.google.com/apikey?hl=it)
+[Utwórz klucz Gemini API](https://aistudio.google.com/apikey?hl=pl)
 
-Imposta la chiave come variabile di ambiente:
+Ustaw klucz jako zmienną środowiskową:
 
 ```
 export GEMINI_API_KEY="YOUR_API_KEY"
 ```
 
-### Esegui l'upgrade al livello a pagamento
+### Przejście na płatny poziom
 
-L'upgrade al livello a pagamento aumenta i limiti di frequenza e richiede la configurazione della fatturazione Cloud.
+Przejście na płatny poziom zwiększa limity szybkości i wymaga skonfigurowania Rozliczeń usługi Google Cloud.
 
-- Fai clic su **Configura la fatturazione** nelle pagine Chiavi API
-   o
-  [Progetti](https://aistudio.google.com/projects?hl=it) di AI Studio.
-- Segui la finestra di dialogo Fatturazione Cloud per creare o collegare un account di fatturazione, aggiungere un metodo di pagamento e pagare in anticipo un minimo di 10 $ (o l'equivalente in valuta locale) in crediti a pagamento.
-- Visualizza l'utilizzo dell'API in [Google AI Studio](https://aistudio.google.com/usage?hl=it)
-  in **Dashboard** > **Utilizzo**.
+- [[Na stronach kluczy interfejsów API lub projektów w AI Studio kliknij **Skonfiguruj rozliczenia**.](https://aistudio.google.com/api-keys?hl=pl)](https://aistudio.google.com/projects?hl=pl)
+- Postępuj zgodnie z instrukcjami w oknie Cloud Billing, aby utworzyć lub połączyć konto rozliczeniowe, dodać formę płatności i zapłacić z góry co najmniej 10 USD (lub równowartość w innej walucie) w postaci płatnych środków.
+- Wykorzystanie interfejsu API możesz sprawdzić w [Google AI Studio](https://aistudio.google.com/usage?hl=pl)
+  w sekcji **Panel** > **Wykorzystanie**.
 
-Per ulteriori informazioni, consulta la pagina [Fatturazione](https://ai.google.dev/gemini-api/docs/billing?hl=it).
+Więcej informacji znajdziesz na stronie [Rozliczenia](https://ai.google.dev/gemini-api/docs/billing?hl=pl).
 
-## Installa l'SDK Google GenAI
+## Instalowanie pakietu Google GenAI SDK
 
 ### Python
 
-Utilizzando [Python 3.9 o versioni successive](https://www.python.org/downloads/), installa il
-[`google-genai` pacchetto](https://pypi.org/project/google-genai/)
-utilizzando il seguente
-[comando pip](https://packaging.python.org/en/latest/tutorials/installing-packages/):
+W [Pythonie 3.9 lub nowszym](https://www.python.org/downloads/) zainstaluj pakiet
+[`google-genai`](https://pypi.org/project/google-genai/)
+za pomocą tego
+[polecenia pip](https://packaging.python.org/en/latest/tutorials/installing-packages/):
 
 ```
 pip install -q -U google-genai
@@ -71,20 +69,20 @@ pip install -q -U google-genai
 
 ### JavaScript
 
-Utilizzando [Node.js v18+](https://nodejs.org/en/download/package-manager),
-installa l'
-[SDK Google Gen AI per TypeScript e JavaScript](https://www.npmjs.com/package/@google/genai)
-utilizzando il seguente
-[comando npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm):
+W [Node.js w wersji 18 lub nowszej](https://nodejs.org/en/download/package-manager),
+zainstaluj
+[pakiet Google Gen AI SDK dla TypeScript i JavaScript](https://www.npmjs.com/package/@google/genai)
+za pomocą tego
+[polecenia npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm):
 
 ```
 npm install @google/genai
 ```
 
-## Genera testo
+## Generowanie tekstu
 
-Utilizza il metodo `models.generate_content` per
-[generare una risposta di testo](https://ai.google.dev/gemini-api/docs/text-generation?hl=it).
+Aby wygenerować odpowiedź tekstową, użyj metody `models.generate_content`
+.
 
 ### Python
 
@@ -140,11 +138,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-## Risposte dinamiche
+## Odpowiadanie na bieżąco
 
-Per impostazione predefinita, il modello restituisce una risposta solo al termine dell'intero processo di generazione. Per un'esperienza più rapida e interattiva, puoi
-[trasmettere in streaming i blocchi di risposta](https://ai.google.dev/gemini-api/docs/text-generation?hl=it#stream) man mano che
-vengono generati.
+Domyślnie model zwraca odpowiedź dopiero po zakończeniu całego procesu generowania. Aby przyspieszyć działanie i zwiększyć interaktywność, możesz
+[przesyłać strumieniowo fragmenty odpowiedzi](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl#stream) w miarę ich
+generowania.
 
 ### Python
 
@@ -196,11 +194,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:s
   }'
 ```
 
-## Conversazioni multi-turno
+## Rozmowy wieloetapowe
 
-Per le conversazioni multi-turno, gli SDK forniscono un helper `chats` stateful per
-creare un'esperienza di [chat a più turni](https://ai.google.dev/gemini-api/docs/text-generation?hl=it#chat)
-che gestisce automaticamente la cronologia delle conversazioni.
+W przypadku rozmów wieloetapowych pakiety SDK udostępniają pomocniczą funkcję `chats` z informacjami o stanie, która
+umożliwia tworzenie [czatu wieloetapowego](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl#chat)
+automatycznie zarządzającego historią rozmów.
 
 ### Python
 
@@ -256,9 +254,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-## Utilizzare gli strumenti
+## Korzystanie z narzędzi
 
-[Estendi le funzionalità del modello basando le risposte sulla Ricerca Google per accedere ai contenuti web in tempo reale.](https://ai.google.dev/gemini-api/docs/google-search?hl=it) Il modello decide automaticamente quando eseguire la ricerca, esegue le query e sintetizza una risposta.
+[Rozszerz możliwości modelu, powiązując odpowiedzi z wyszukiwarką Google, aby uzyskać dostęp do treści z internetu w czasie rzeczywistości.](https://ai.google.dev/gemini-api/docs/google-search?hl=pl) Model automatycznie decyduje, kiedy wyszukiwać, wykonuje zapytania i syntetyzuje odpowiedź.
 
 ### Python
 
@@ -345,27 +343,26 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-L'API Gemini supporta anche altri strumenti integrati:
+Gemini API obsługuje też inne wbudowane narzędzia:
 
-- **[Esecuzione del codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it)**:
-  consente al modello di scrivere ed eseguire codice Python per risolvere problemi matematici complessi.
-- **[Contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it)**: consente di
-  basare le risposte su URL di pagine web specifici forniti dall'utente.
-- **[Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it)**: consente di
-  caricare file e basare le risposte sui relativi contenuti utilizzando la ricerca semantica.
-- **[Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it)**: consente di
-  basare le risposte sui dati di località e cercare luoghi, indicazioni stradali e
-  mappe.
-- **[Utilizzo del computer](https://ai.google.dev/gemini-api/docs/computer-use?hl=it)**: consente al
-  modello di interagire con lo schermo, la tastiera e il mouse di un computer virtuale per
-  eseguire attività.
+- **[Wykonywanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl)**:
+  umożliwia modelowi pisanie i uruchamianie kodu Pythona w celu rozwiązywania złożonych problemów matematycznych.
+- **[Kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl)**: umożliwia powiązanie odpowiedzi z określonymi adresami URL stron internetowych.
+- **[Wyszukiwanie plików](https://ai.google.dev/gemini-api/docs/file-search?hl=pl)**: umożliwia
+  przesyłanie plików i powiązanie odpowiedzi z ich treścią za pomocą wyszukiwania semantycznego.
+- **[Mapy Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pl)**: umożliwiają
+  powiązanie odpowiedzi z danymi o lokalizacji oraz wyszukiwanie miejsc, tras i
+  map.
+- **[Korzystanie z komputera](https://ai.google.dev/gemini-api/docs/computer-use?hl=pl)**: umożliwia
+  modelowi interakcję z wirtualnym ekranem komputera, klawiaturą i myszą w celu
+  wykonywania zadań.
 
-## Chiamare funzioni personalizzate
+## Wywoływanie funkcji niestandardowych
 
-Utilizza **[la chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it)** per collegare
-i modelli ai tuoi strumenti e alle tue API personalizzati. Il modello determina quando chiamare la funzione e restituisce un `functionCall` nella risposta che l'applicazione deve eseguire.
+Użyj **[wywoływania funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl)** , aby połączyć
+modele z niestandardowymi narzędziami i interfejsami API. Model określa, kiedy wywołać funkcję, i zwraca w odpowiedzi `functionCall`, którą aplikacja ma wykonać.
 
-Questo esempio dichiara una funzione di temperatura fittizia e verifica se il modello vuole chiamarla.
+Ten przykład deklaruje funkcję symulującą temperaturę i sprawdza, czy model chce ją wywołać.
 
 ### Python
 
@@ -527,25 +524,25 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-## Passaggi successivi
+## Co dalej?
 
-Ora che hai iniziato a utilizzare l'API Gemini, esplora le seguenti guide per creare applicazioni più avanzate:
+Teraz, gdy masz już podstawy korzystania z Gemini API, zapoznaj się z tymi przewodnikami, aby tworzyć bardziej zaawansowane aplikacje:
 
-- [Generazione di testo](https://ai.google.dev/gemini-api/docs/text-generation?hl=it)
-- [Generazione di immagini](https://ai.google.dev/gemini-api/docs/image-generation?hl=it)
-- [Comprensione delle immagini](https://ai.google.dev/gemini-api/docs/image-understanding?hl=it)
-- [Pensiero](https://ai.google.dev/gemini-api/docs/thinking?hl=it)
-- [Chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it)
-- [Grounding con la Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it)
-- [Contesto lungo](https://ai.google.dev/gemini-api/docs/long-context?hl=it)
-- [Incorporamenti](https://ai.google.dev/gemini-api/docs/embeddings?hl=it)
+- [Generowanie tekstu](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl)
+- [Generowanie obrazów](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl)
+- [Rozpoznawanie obrazów](https://ai.google.dev/gemini-api/docs/image-understanding?hl=pl)
+- [Myślę](https://ai.google.dev/gemini-api/docs/thinking?hl=pl)
+- [Wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl)
+- [Powiązanie ze źródłami informacji przy użyciu wyszukiwarki Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pl)
+- [Długi kontekst](https://ai.google.dev/gemini-api/docs/long-context?hl=pl)
+- [Osadzanie](https://ai.google.dev/gemini-api/docs/embeddings?hl=pl)
 
-Invia feedback
+Prześlij opinię
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Ultimo aggiornamento 2026-07-30 UTC.
+Ostatnia aktualizacja: 2026-07-30 UTC.
 
-Vuoi dirci altro?
+Chcesz przekazać coś jeszcze?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]

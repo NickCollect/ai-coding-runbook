@@ -1,28 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-hooks?hl=zh-CN
-fetched_at: 2026-08-31T06:31:11.733848+00:00
+source_url: https://ai.google.dev/gemini-api/docs/agent-hooks?hl=zh-TW
+fetched_at: 2026-09-07T05:39:09.170997+00:00
 title: "Hooks \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-发送反馈
+提供意見
 
 # Hooks
 
-借助钩子，您可以在代理在其远程沙盒中执行代码或修改文件之前或之后运行自定义脚本或外部 HTTP 请求。使用钩子通过自动化安全措施和后台工作流来扩展代理循环，例如：
+您可以使用 Hook 在代理程式執行程式碼或修改遠端沙箱內的檔案前後，執行自訂指令碼或外部 HTTP 要求。使用掛鉤擴充代理迴圈，並搭配自動防護措施和背景工作流程，例如：
 
-- 在执行高风险 shell 命令或受限文件读取操作之前，**强制执行安全和访问权限限制**。
-- 在代理创建或修改文件后立即**自动执行数据流水线转换**。
-- 在工具执行后，将企业审核遥测数据**流式传输**到外部监控系统。
+- **強制執行安全和存取防護措施**，再執行高風險的殼層指令或受限的檔案讀取作業。
+- **在代理程式建立或修改檔案後，自動轉換資料管道**。
+- 工具執行後，**將企業稽核遙測資料串流至外部監控系統**。
 
 ### Python
 
@@ -167,20 +167,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 支持的生命周期事件
+## 支援的生命週期事件
 
-钩子支持沙盒内的 2 个事件：
+沙箱中的 Hook 支援 2 個事件：
 
-| 活动 | 触发时间 | 作用 |
+| 事件 | 觸發時機 | 用途 |
 | --- | --- | --- |
-| `pre_tool_execution` | 工具运行前 | 可以在工具执行之前批准 (`allow`) 或屏蔽 (`deny`) 该工具。被屏蔽后，模型会看到您的拒绝原因并进行调整。 |
-| `post_tool_execution` | 工具运行结束后立即执行 | 运行后续任务，例如格式化代码、运行单元测试或记录遥测数据。无法阻止或撤消已完成的操作。 |
+| `pre_tool_execution` | 工具執行前 | 可以在工具執行前核准 (`allow`) 或封鎖 (`deny`) 工具。遭到封鎖時，模型會看到拒絕原因並進行調整。 |
+| `post_tool_execution` | 工具執行完畢後 | 執行後續工作，例如格式化程式碼、執行單元測試或記錄遙測資料。無法封鎖或復原已完成的動作。 |
 
 ### `pre_tool_execution`
 
-在工具执行之前立即触发。脚本从 `stdin` 读取工具调用详细信息，并将其决策 JSON（`allow` 或 `deny`）输出到 `stdout`。
+在工具執行前觸發。您的指令碼會從 `stdin` 讀取工具呼叫詳細資料，並將決策 JSON (`allow` 或 `deny`) 輸出至 `stdout`。
 
-**输入载荷 (`stdin`)**：
+**輸入酬載 (`stdin`)：**
 
 ```
 {
@@ -195,9 +195,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-**输出响应 (`stdout`)**：
+**輸出回覆 (`stdout`)：**
 
-批准工具调用：
+如要核准工具呼叫：
 
 ```
 {
@@ -205,7 +205,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-如需阻止工具调用并向模型返回反馈，请执行以下操作：
+如要封鎖工具呼叫並將意見回饋傳回模型，請執行下列操作：
 
 ```
 {
@@ -214,15 +214,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-如果钩子拒绝了命令，则会立即跳过工具调用。代理会在当前对话轮次中看到包含拒绝原因的错误结果。然后，模型可以通过选择替代命令或向用户说明屏蔽原因来进行自我修正。
+如果掛鉤拒絕指令，系統會立即略過工具呼叫。代理程式會在目前的對話輪次中看到錯誤結果，其中包含拒絕原因。接著，模型可以選擇替代指令或向使用者說明封鎖原因，藉此自我修正。
 
-如果脚本输出无法识别的 JSON、纯文本或除 `{"decision": "deny"}` 之外的任何内容，运行时会将该响应视为审批 (`allow`)。
+如果指令碼輸出無法辨識的 JSON、純文字或 `{"decision": "deny"}` 以外的任何內容，執行階段會將回應視為核准 (`allow`)。
 
 ### `post_tool_execution`
 
-在工具完成时立即触发。您的脚本会从 `stdin` 读取执行详情和任何错误状态。
+工具完成後立即觸發。指令碼會從 `stdin` 讀取執行詳細資料和任何錯誤狀態。
 
-**输入载荷 (`stdin`)**：
+**輸入酬載 (`stdin`)：**
 
 ```
 {
@@ -237,27 +237,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-如果 shell 命令将错误输出到标准错误 (`stderr`) 或文件系统操作失败，则载荷中会包含一个包含错误文本的 `"error"` 字段。如果命令成功执行且未出现错误，则系统会完全省略 `"error"` 字段。
+如果殼層指令將錯誤輸出至標準錯誤 (`stderr`) 或檔案系統作業失敗，酬載中會包含含有錯誤文字的 `"error"` 欄位。如果指令順利執行且未發生錯誤，系統會完全省略 `"error"` 欄位。
 
-**输出响应 (`stdout`)**：
+**輸出回覆 (`stdout`)：**
 
 ```
 {}
 ```
 
-由于后工具钩子仅针对代码格式设置或日志记录等后台任务运行，因此运行时会忽略在 `stdout` 上返回的任何决策值。
+由於工具後續掛鉤僅適用於程式碼格式化或記錄等背景工作，因此執行階段會忽略 `stdout` 傳回的任何決策值。
 
-## 配置发现
+## 設定探索
 
-运行时会自动从沙盒环境中的 `.agents/hooks.json` 或 `/.agents/hooks.json` 中发现钩子定义。您可以使用任何受支持的[环境来源](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-cn#mount_from_a_source)，在自定义脚本旁边提供 `hooks.json`：
+執行階段會自動從沙箱環境中的 `.agents/hooks.json` 或 `/.agents/hooks.json` 探索 Hook 定義。您可以使用任何支援的[環境來源](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-tw#mount_from_a_source)，在自訂指令碼旁提供 `hooks.json`：
 
-- **代码库装载**：包含 `.agents/hooks.json` 和 `AGENTS.md` 的 Git 代码库。
-- **Cloud Storage (`gcs`)**：包含已复制到环境中的 `hooks.json` 的 GCS 存储分区。
-- **内嵌来源**：调用 `client.interactions.create` 时在 `environment.sources` 中传递的原始 JSON 字符串和脚本内容。
+- **存放區掛接**：包含 `.agents/hooks.json` 和 `AGENTS.md` 的 Git 存放區。
+- **Cloud Storage (`gcs`)**：包含複製到環境中的 `hooks.json` 的 GCS bucket。
+- **內嵌來源**：呼叫 `client.interactions.create` 時，以 `environment.sources` 傳遞的原始 JSON 字串和指令碼內容。
 
-### `hooks.json` 个架构
+### `hooks.json` 個結構定義
 
-`hooks.json` 文件用于将事件定义（`pre_tool_execution` 或 `post_tool_execution`）归入自定义名称下。您可以单独启用或停用每个群组：
+`hooks.json` 檔案會將事件定義 (`pre_tool_execution` 或 `post_tool_execution`) 分組到自訂名稱下。你可以分別啟用或停用各個群組：
 
 ```
 {
@@ -293,71 +293,71 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### 匹配器语法和规则
+### 比對器語法和規則
 
-`hooks.json` 中的每个规则组都使用 `matcher` 和 `hooks` 属性定义了处理程序的触发时间和方式：
+`hooks.json` 中的每個規則群組都會使用 `matcher` 和 `hooks` 屬性，定義處理常式觸發的時機和方式：
 
-| 字段 | 类型 | 说明 |
+| 欄位 | 類型 | 說明 |
 | --- | --- | --- |
-| `enabled` | `boolean` | 可选。设置为 `false` 可停用相应群组（默认为 `true`）。 |
-| `matcher` | `string` | 用于匹配容器内目标工具名称的正则表达式模式。 |
-| `hooks` | `array` | 处理程序定义（`command` 或 `http`）的有序列表。处理程序按声明顺序依次运行。 |
+| `enabled` | `boolean` | (選用步驟) 設為 `false` 即可停用群組 (預設為 `true`)。 |
+| `matcher` | `string` | 規則運算式模式，用於比對容器內的目標工具名稱。 |
+| `hooks` | `array` | 處理常式定義的已排序清單 (`command` 或 `http`)。處理常式會依宣告順序依序執行。 |
 
-#### 正则表达式评估的运作方式
+#### 規則運算式評估的運作方式
 
-当代理在沙盒内调用工具时，运行时会使用标准 RE2 正则表达式针对您的 `matcher` 模式评估工具的容器名称。如果正则表达式与工具名称匹配，则 `hooks` 数组中的所有处理程序将按顺序执行。如果多个规则组与同一工具匹配，则所有相应的处理程序数组都会运行。
+當代理在沙箱中叫用工具時，執行階段會使用標準 RE2 規則運算式，根據 `matcher` 模式評估工具的容器名稱。如果規則運算式與工具名稱相符，`hooks` 陣列中的所有處理常式會依序執行。如果多個規則群組符合同一項工具，系統會執行所有對應的處理常式陣列。
 
-您可以指定任何内置容器工具名称：代码执行 (`code_execution`) 或文件系统操作（`read_file`、`write_file`、`list_files` 和 `delete_file`）。
+您可以指定任何內建容器工具名稱：執行程式碼 (`code_execution`) 或檔案系統作業 (`read_file`、`write_file`、`list_files` 和 `delete_file`)。
 
-#### 常见的匹配器表达式
+#### 常見的比對運算式
 
-- `"code_execution"`：针对 shell 命令和脚本执行的精确字符串匹配。
-- `"write_file"`：文件系统文件创建和磁盘写入的完全匹配。
-- `"read_file|write_file"`：竖线分隔符可在单个规则中匹配多个特定工具名称。
-- `".*_file"`：与任何以 `_file` 结尾的工具（例如 `read_file`、`write_file` 或 `delete_file`）匹配的正则表达式通配符。标准 RE2 正则表达式需要 `.*`；简单的 shell glob（例如 `*_file`）是无效的正则表达式语法，将无法匹配。
-- `".*"` 或 `"*"` 或 `""`：捕获容器内每个工具调用的全能型模式。
+- `"code_execution"`：完全比對殼層指令和指令碼執行的字串。
+- `"write_file"`：完全符合檔案系統檔案建立和磁碟寫入作業。
+- `"read_file|write_file"`：以直立線分隔，在單一規則中比對多個特定工具名稱。
+- `".*_file"`：規則運算式萬用字元，可比對任何以 `_file` 結尾的工具 (例如 `read_file`、`write_file` 或 `delete_file`)。標準 RE2 規則運算式需要 `.*`；簡單的殼層 glob (例如 `*_file`) 是無效的規則運算式語法，無法比對。
+- `".*"` 或 `"*"` 或 `""`：攔截容器內每個工具呼叫的萬用模式。
 
-## 处理程序类型
+## 處理常式類型
 
-### 命令钩子
+### 指令掛鉤
 
-命令钩子在沙盒内执行 shell 命令或脚本。该脚本在 `stdin` 上接收事件 JSON，并在 `stdout` 上输出决策 JSON。
+指令掛鉤會在沙箱內執行殼層指令或指令碼。指令碼會在 `stdin` 接收事件 JSON，並在 `stdout` 輸出決策 JSON。
 
-| 字段 | 类型 | 说明 |
+| 欄位 | 類型 | 說明 |
 | --- | --- | --- |
-| `type` | `string` | 必须为 `"command"`。 |
-| `command` | `string` | 要在沙盒内运行的命令行（例如 `python3 /.agents/hooks-scripts/gate.py`）。 |
-| `timeout` | `integer` | 超时时间（以秒为单位）。默认值：`30`。 |
+| `type` | `string` | 必須為 `"command"`。 |
+| `command` | `string` | 要在沙箱內執行的指令列 (例如 `python3 /.agents/hooks-scripts/gate.py`)。 |
+| `timeout` | `integer` | 逾時時間 (以秒為單位)。預設：`30`。 |
 
-### HTTP 钩子
+### HTTP 勾點
 
-HTTP 钩子会直接从沙盒网络内部将事件 JSON 作为 POST 请求发送到外部 HTTPS 网址。目标服务器使用完全相同的 JSON 格式（`{"decision": "allow"}` 或 `{"decision": "deny", "reason": "..."}`）在 HTTP 响应正文中返回其决策。
+HTTP 勾點會從沙箱網路內部，以 POST 要求的形式，將事件 JSON 直接傳送至外部 HTTPS 網址。目標伺服器會使用完全相同的 JSON 格式 (`{"decision": "allow"}` 或 `{"decision": "deny", "reason": "..."}`)，在 HTTP 回應主體中傳回決策。
 
-| 字段 | 类型 | 说明 |
+| 欄位 | 類型 | 說明 |
 | --- | --- | --- |
-| `type` | `string` | 必须为 `"http"`。 |
-| `url` | `string` | 用于向其 POST 事件载荷的外部 HTTPS 端点。 |
-| `headers` | `object` | 非敏感自定义标头（例如 `{"X-Event-Source": "agent-sandbox"}`）的可选键值对。对于身份验证凭据，请改用网络代理。 |
-| `timeout` | `integer` | 超时时间（以秒为单位）。默认值：`30`。 |
+| `type` | `string` | 必須為 `"http"`。 |
+| `url` | `string` | 要將事件酬載 POST 至的外部 HTTPS 端點。 |
+| `headers` | `object` | 非機密自訂標頭的選用鍵/值組合 (例如 `{"X-Event-Source": "agent-sandbox"}`)。如需驗證憑證，請改用網路 Proxy。 |
+| `timeout` | `integer` | 逾時時間 (以秒為單位)。預設：`30`。 |
 
-#### 出站代理和令牌转换
+#### 輸出 Proxy 和權杖轉換
 
-由于 HTTP 钩子直接从沙盒网络命名空间内部执行，因此出站请求会通过透明的出站代理。此架构可为您带来 2 项关键的安全优势：
+由於 HTTP 勾點會直接從沙箱網路命名空間內執行，因此輸出要求會通過透明輸出 Proxy。這種架構可提供 2 項重要安全性優勢：
 
-- **网络许可名单**：必须在环境的 `network.allowlist` 中明确允许目标端点。环回流量（`127.0.0.1` 或 `localhost`）会被代理阻止；请始终以已列入许可名单的外部端点为目标。
-- **令牌转换**：您无需在 `.agents/hooks.json` 中存储 API 密钥或不记名令牌，也无需将其装载到容器中。您可以在[网络配置](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-cn#network-configuration) (`network.allowlist.transform`) 中配置令牌转换规则。出站代理会自动拦截出站 HTTP 钩子流量，并在离开沙盒之前在网络上注入真实的身份验证标头。
+- **網路許可清單：**環境的 `network.allowlist` 必須明確允許目標端點。Proxy 會封鎖迴路流量 (`127.0.0.1` 或 `localhost`)，請一律以許可清單中的外部端點為目標。
+- **權杖轉換：**您不需要在 `.agents/hooks.json` 內儲存 API 金鑰或密鑰持有者權杖，也不必將這些權杖掛接到容器。請改為在[網路設定](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-tw#network-configuration) (`network.allowlist.transform`) 中設定權杖轉換規則。輸出 Proxy 會自動攔截外送 HTTP Hook 流量，並在離開沙箱前，在網路上插入實際的驗證標頭。
 
-## 运行时如何处理决策和失败
+## 執行階段如何處理決策和失敗
 
-- **同步等待**：代理会暂停并等待您的钩子完成，然后再继续。
-- **阻止工具执行**：如果您的工具前钩子返回 `{"decision": "deny", "reason": "<your reason>"}`，运行时会立即取消工具调用。模型会在对话记录中看到您的拒绝原因，然后选择安全的替代方案或向用户说明屏蔽原因，从而进行调整。
-- **处理脚本崩溃、HTTP 错误和超时**：如果命令脚本崩溃（非零退出状态）、HTTP hook 返回非 2xx 状态代码（例如 4xx 或 5xx 服务器错误），或者操作超时或返回无法识别的 JSON，运行时会将其视为批准 (`allow`)。工具执行会正常继续，因此损坏的脚本或无法访问的遥测服务器永远不会导致应用死锁。
+- **同步等待：**代理程式會暫停並等待掛鉤完成，然後再繼續。
+- **封鎖工具執行：**如果工具前置掛鉤傳回 `{"decision": "deny", "reason": "<your reason>"}`，執行階段會立即取消工具呼叫。模型會在對話記錄中看到拒絕原因，並選擇安全替代方案或向使用者說明封鎖原因，藉此調整回應。
+- **處理指令碼當機、HTTP 錯誤和逾時：**如果指令碼當機 (非零結束狀態)、HTTP 勾點傳回非 2xx 狀態碼 (例如 4xx 或 5xx 伺服器錯誤)，或作業逾時或傳回無法辨識的 JSON，執行階段會將其視為核准 (`allow`)。工具執行作業會正常繼續，因此損毀的指令碼或無法連線的遙測伺服器絕不會導致應用程式死結。
 
-## 常见应用场景
+## 常見用途
 
-### 针对数据隐私权和合规性的多轮对话恢复
+### 多輪對話復原功能，確保資料隱私權和法規遵循
 
-当钩子阻止对受限资源（例如包含个人身份信息 [PII] 或机密财务记录的目录）的访问时，您可以在下一次调用中传递 `previous_interaction_id`，以在同一环境中继续执行回合。代理会读取拒绝说明，并通过查询已获批准的公开表自动恢复。
+如果 Hook 封鎖受限資源的存取權 (例如含有個人識別資訊 (PII) 或機密財務記錄的目錄)，您可以在下一次呼叫時傳遞 `previous_interaction_id`，繼續在相同環境中進行回合。代理程式會讀取拒絕說明，並改為查詢核准的公開資料表，自動復原。
 
 ### Python
 
@@ -571,12 +571,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 #   }'
 ```
 
-### 外部审核日志记录和遥测
+### 外部稽核記錄和遙測
 
-在读取或修改文件时，从沙盒内部向外部监控服务器发送实时审核事件。
+每當讀取或修改檔案時，從沙箱內部將即時稽核事件傳送至外部監控伺服器。
 
-- **匹配多个工具**：由于匹配器使用标准正则表达式，因此您可以使用竖线 (`read_file|write_file`) 或通配符 (`.*_file`) 在单个规则中组合多个工具。
-- **不要在配置中包含密钥**：在环境的[网络配置](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-cn#network-configuration) (`network.allowlist.transform`) 中定义身份验证令牌。出站代理会自动在出站请求中注入实际的令牌。
+- **比對多個工具：**由於比對器使用標準規則運算式，因此您可以在單一規則中，使用直立線 (`read_file|write_file`) 或萬用字元 (`.*_file`) 組合多個工具。
+- **避免在設定中加入密鑰：**在環境的[網路設定](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-tw#network-configuration) (`network.allowlist.transform`) 中定義驗證權杖。輸出 Proxy 會在傳送要求時自動插入實際的承載權杖。
 
 ### Python
 
@@ -720,23 +720,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 ## 限制
 
-- **沙盒工具范围**：钩子会拦截沙盒内的内置工具：代码执行 (`code_execution`) 和文件系统操作（`read_file`、`write_file`、`list_files` 和 `delete_file`）。它们不会针对自定义函数调用 (`function`) 或在容器外部处理的外部 Model Context Protocol (`mcp_server`) 工具触发。
-- **网络许可名单**：HTTP hook 在容器网络内运行。您必须在环境的 `network.allowlist` 中明确允许目标网址。环回地址（`localhost`、`127.0.0.1`）被代理屏蔽。
-- **在出现错误时自动批准**：如果钩子脚本崩溃（退出状态不为零）、超时或失败，运行时会记录失败情况，并允许工具调用继续进行。这样可确保损坏的 lint 脚本或挂起的进程永远不会导致应用死锁。
-- **沙盒配置保护**：由于钩子在容器沙盒内执行，因此具有文件系统写入工具或 shell 代码执行权限的代理可以修改可写入工作区中的本地 `.agents/hooks.json` 或脚本。使用容器钩子作为自动化政策指南和操作护栏；如果需要针对不受信任的模型执行提供严格的防篡改功能，请从只读代码库装载配置源。
+- **沙箱工具範圍：**掛鉤會攔截沙箱內的內建工具：執行程式碼 (`code_execution`) 和檔案系統作業 (`read_file`、`write_file`、`list_files` 和 `delete_file`)。掛鉤不會針對自訂函式呼叫 (`function`) 或在容器外處理的外部 Model Context Protocol (`mcp_server`) 工具觸發。
+- **網路許可清單：**HTTP 勾點會在容器網路內執行。您必須在環境的 `network.allowlist` 中明確允許目標網址。Proxy 會封鎖迴路位址 (`localhost`、`127.0.0.1`)。
+- **發生錯誤時自動核准：**如果 Hook 指令碼當機 (非零的結束狀態)、逾時或失敗，執行階段會記錄失敗情形，並允許工具呼叫繼續執行。這樣一來，損毀的 Linter 指令碼或閒置的程序就不會導致應用程式死結。
+- **沙箱設定保護：**由於 Hook 會在容器沙箱內執行，因此具備檔案系統寫入工具或殼層程式碼執行權限的代理程式，可以修改可寫入工作區中的本機 `.agents/hooks.json` 或指令碼。使用容器掛鉤做為自動政策指引和作業防護措施；如果需要嚴格防範不受信任的模型執行作業遭到竄改，請從唯讀存放區掛接設定來源。
 
-## 后续步骤
+## 後續步驟
 
-- 了解如何配置持久性[远程沙盒和环境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-cn)。
-- 探索 [Antigravity 智能体](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=zh-cn)的功能和内置工具。
-- 查看[Interactions API 概览](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn)，了解多轮会话和流式传输。
+- 瞭解如何設定永久[遠端沙箱和環境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-tw)。
+- 探索 [Antigravity 代理程式](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=zh-tw)的功能和內建工具。
+- 如要瞭解多輪對話工作階段和串流，請參閱 [Interactions API 總覽](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw)。
 
-发送反馈
+提供意見
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-最后更新时间 (UTC)：2026-07-30。
+上次更新時間：2026-07-30 (世界標準時間)。
 
-需要向我们提供更多信息？
+想進一步說明嗎？
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-30。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-30 (世界標準時間)。"],[],[]]

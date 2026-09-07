@@ -1,46 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/antigravity-preview-05-2026?hl=ko
-fetched_at: 2026-08-31T06:36:29.003671+00:00
-title: "Antigravity \ubbf8\ub9ac\ubcf4\uae30 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/antigravity-preview-05-2026?hl=zh-CN
+fetched_at: 2026-09-07T05:39:29.740577+00:00
+title: "Antigravity \u9884\u89c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-의견 보내기
+发送反馈
 
-# Antigravity 미리보기
+# Antigravity 预览
 
-자율적인 다단계 워크플로를 위해 설계된 강력한 범용 관리형 에이전트입니다. 이 모델은 Google에서 호스팅하는 안전하고 격리된 Linux 샌드박스 내에서 계획, 추론, 코드 실행, 파일 관리, 웹 검색을 수행합니다.
+功能强大的通用型受管智能体，专为自主多步骤工作流而设计。该模型可在 Google 托管的安全隔离 Linux 沙盒中进行规划、推理、运行代码、管理文件和搜索网络。
 
-## 문서
+## 文档
 
-기능, 기능, 코드 샘플의 전체
-적용 범위는 [Antigravity 에이전트](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ko) 페이지를 참고하세요.
+如需全面了解功能、功能和代码示例，请访问 [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=zh-cn) 页面。
 
 ## antigravity-preview-05-2026
 
-| 속성 | 설명 |
+| 属性 | 说明 |
 | --- | --- |
-| id\_card에이전트 코드 | **상호작용 API**  `antigravity-preview-05-2026` |
-| save지원되는 데이터 유형 | **입력**  텍스트, 이미지  **출력**  텍스트 |
-| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 컨텍스트 윈도우**  1,048,576 (약 135,000으로 압축)  **출력 토큰 한도**  65,536 |
-| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - 미리보기: `antigravity-preview-05-2026` |
-| calendar\_month최근 업데이트 | 2026년 5월 |
+| id\_card 代理代码 | **Interactions API**  `antigravity-preview-05-2026` |
+| 保存支持的数据类型 | **输入**  文字、图片  **输出**  文字 |
+| token\_auto令牌限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入上下文窗口**  1,048,576（压缩后约为 13.5 万）  **输出 token 限制**  65536 |
+| 123 版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 预览：`antigravity-preview-05-2026` |
+| calendar\_month最新更新 | 2026 年 5 月 |
 
-의견 보내기
+发送反馈
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-최종 업데이트: 2026-05-19(UTC)
+最后更新时间 (UTC)：2026-05-19。
 
-의견을 전달하고 싶나요?
+需要向我们提供更多信息？
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-19(UTC)"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-05-19。"],[],[]]

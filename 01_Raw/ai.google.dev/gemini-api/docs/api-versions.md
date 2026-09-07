@@ -1,70 +1,68 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=ar
-fetched_at: 2026-08-31T06:31:26.610695+00:00
-title: "\u0634\u0631\u062d \u0625\u0635\u062f\u0627\u0631\u0627\u062a \u0648\u0627\u062c\u0647\u0629 \u0628\u0631\u0645\u062c\u0629 \u0627\u0644\u062a\u0637\u0628\u064a\u0642\u0627\u062a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=tr
+fetched_at: 2026-09-07T05:32:45.707808+00:00
+title: "API s\u00fcr\u00fcmleriyle ilgili a\u00e7\u0131klama \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [مرجع واجهة برمجة التطبيقات](https://ai.google.dev/api?hl=ar)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [API referansı](https://ai.google.dev/api?hl=tr)
 
-إرسال ملاحظات
+Geri bildirim gönderin
 
-# شرح إصدارات واجهة برمجة التطبيقات
+# API sürümleriyle ilgili açıklama
 
-تقدّم هذه المستندات نظرة عامة عالية المستوى على الاختلافات بين الإصدارَين `v1`
-و `v1beta` من Gemini API.
+Bu belgede, Gemini API'nin `v1` ve `v1beta` sürümleri arasındaki farklarla ilgili üst düzey bir genel bakış sunulmaktadır.
 
-- **v1**: هو إصدار مستقر من واجهة برمجة التطبيقات. تكون الميزات في الإصدار الثابت متوافقة تمامًا طوال فترة رقم الإصدار الرئيسي. في حال إجراء أي تغييرات قد تؤدي إلى عطل، سيتم إنشاء رقم إصدار رئيسي جديد من واجهة برمجة التطبيقات وسيتم إيقاف الإصدار الحالي نهائيًا بعد فترة زمنية معقولة.
-  يمكن إضافة تغييرات متوافقة إلى واجهة برمجة التطبيقات بدون تغيير رقم الإصدار الرئيسي. تتوفّر **‫Interactions API** وميزاتها الأساسية بشكل عام في الإصدار `v1`.
-- **v1beta**: يتضمّن هذا الإصدار ميزات وإمكانات مبكرة قيد التطوير حاليًا. قد تخضع الميزات في الإصدار `v1beta` للتغييرات أثناء تحسينها استنادًا إلى الملاحظات، ولكنها تتيح لك تجربة إمكانات جديدة قبل ترقيتها إلى إصدار مستقر.
+- **v1**: API'nin kararlı sürümü. Kararlı sürümdeki özellikler, ana sürümün kullanım ömrü boyunca tam olarak desteklenir. API'de uyumluluğu bozan değişiklikler varsa API'nin yeni bir ana sürümü oluşturulur ve mevcut sürüm makul bir süre sonra kullanımdan kaldırılır.
+  API'de ana sürüm değiştirilmeden uyumluluğu bozmayan değişiklikler yapılabilir. **Etkileşimler API** ve temel özellikleri, `v1`'da genel kullanıma sunulmuştur.
+- **v1beta**: Bu sürüm, geliştirilme süreci devam eden erken aşamadaki özellikleri ve işlevleri içerir. `v1beta`'daki özellikler, geri bildirimlere göre iyileştirildikçe değişikliklere tabi olabilir. Ancak bu özellikler, yeni işlevleri kararlı sürüme yükseltilmeden önce denemenize olanak tanır.
 
-## الإمكانات والميزات المتوافقة
+## Kapasite ve özellik desteği
 
-يوضّح الجدول التالي مدى توفّر الإمكانات في الإصدارَين `v1` (إصدار عام)
-و `v1beta` (إصدار تجريبي). تنطبق إمكانات وأدوات واجهة برمجة التطبيقات الأساسية على كلٍّ من Interactions API و`generateContent` ما لم يتم تحديد خلاف ذلك:
+Aşağıdaki tabloda, `v1` (GA) ve `v1beta` (Beta) sürümlerindeki özelliklerin kullanılabilirliği ayrıntılı olarak açıklanmaktadır. Aksi belirtilmediği sürece temel API özellikleri ve araçları hem Etkileşimler API'si hem de `generateContent` için geçerlidir:
 
-| الميزة | v1 | v1beta |
+| Özellik | v1 | v1beta |
 | --- | --- | --- |
-| **إمكانات واجهة برمجة التطبيقات الأساسية** |  |  |
-| [‫Interactions API](https://ai.google.dev/gemini-api/docs/get-started?hl=ar) |  |  |
-| [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar) |  |  |
-| [الناتج المنظَّم](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar) |  |  |
-| [التفكير / الاستدلال](https://ai.google.dev/gemini-api/docs/thinking?hl=ar) |  |  |
-| [تعليمات النظام](https://ai.google.dev/gemini-api/docs/system-instructions?hl=ar) |  |  |
-| [إخراج الصوت (إعدادات الكلام)](https://ai.google.dev/gemini-api/docs/audio?hl=ar) |  |  |
-| [مستوى الخدمة (الأولوية / المرونة)](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ar) |  |  |
-| **الأدوات** |  |  |
-| [أداة تنفيذ الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar) |  |  |
-| [الاستناد إلى "بحث Google"](https://ai.google.dev/gemini-api/docs/google-search?hl=ar) |  |  |
-| [الاستناد إلى "خرائط Google"](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ar) |  |  |
-| [أداة سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar) |  |  |
-| [أداة البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar) |  |  |
-| [أداة استخدام الكمبيوتر](https://ai.google.dev/gemini-api/docs/computer-use?hl=ar) |  |  |
-| [أداة خوادم MCP](https://ai.google.dev/gemini-api/docs/eap/remote_mcp?hl=ar) |  |  |
-| **واجهات برمجة التطبيقات في الوقت الفعلي** |  |  |
-| [‫Live API (بروتوكولات WebSockets)](https://ai.google.dev/gemini-api/docs/live-api?hl=ar) |  |  |
-| [‫Live Music API](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=ar) |  |  |
-| [الرموز المميّزة المؤقتة (‫Live API)](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=ar) |  |  |
-| **واجهات برمجة التطبيقات للمنصات** |  |  |
-| [‫Models API](https://ai.google.dev/gemini-api/docs/models?hl=ar) |  |  |
-| [مسار خدمة الملفات](https://ai.google.dev/gemini-api/docs/files?hl=ar) |  |  |
-| [مسار مساحات تخزين البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar) |  |  |
-| [‫Agents API](https://ai.google.dev/gemini-api/docs/agents?hl=ar) |  |  |
-| [‫Webhooks API](https://ai.google.dev/gemini-api/docs/webhooks?hl=ar) |  |  |
-| [تخزين السياق مؤقتًا](https://ai.google.dev/gemini-api/docs/caching?hl=ar) |  |  |
+| **Temel API özellikleri** |  |  |
+| [Interactions API](https://ai.google.dev/gemini-api/docs/get-started?hl=tr) |  |  |
+| [İşlev Çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) |  |  |
+| [Yapılandırılmış Çıkış](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr) |  |  |
+| [Düşünme / Muhakeme Etme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr) (Thinking / Reasoning) |  |  |
+| [Sistem Talimatları](https://ai.google.dev/gemini-api/docs/system-instructions?hl=tr) |  |  |
+| [Ses çıkışı (konuşma yapılandırması)](https://ai.google.dev/gemini-api/docs/audio?hl=tr) |  |  |
+| [Hizmet Katmanı (Öncelikli / Esnek)](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr) |  |  |
+| **Araçlar** |  |  |
+| [Kod Yürütme Aracı](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr) |  |  |
+| [Google Arama Temellendirmesi](https://ai.google.dev/gemini-api/docs/google-search?hl=tr) |  |  |
+| [Google Haritalar'da Temellendirme](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr) (Google Maps Grounding) |  |  |
+| [URL Bağlamı Aracı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr) |  |  |
+| [Dosya Arama Aracı](https://ai.google.dev/gemini-api/docs/file-search?hl=tr) |  |  |
+| [Bilgisayar Kullanımı Aracı](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr) |  |  |
+| [MCP Sunucuları Aracı](https://ai.google.dev/gemini-api/docs/eap/remote_mcp?hl=tr) |  |  |
+| **Anlık API'ler** |  |  |
+| [Live API (WebSockets)](https://ai.google.dev/gemini-api/docs/live-api?hl=tr) |  |  |
+| [Live Music API](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=tr) |  |  |
+| [Kısa Ömürlü Jetonlar (Canlı API)](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=tr) |  |  |
+| **Platform API'leri** |  |  |
+| [Models API](https://ai.google.dev/gemini-api/docs/models?hl=tr) |  |  |
+| [Dosya Hizmeti Rotası](https://ai.google.dev/gemini-api/docs/files?hl=tr) |  |  |
+| [Dosya Arama Mağazaları Rotası](https://ai.google.dev/gemini-api/docs/file-search?hl=tr) |  |  |
+| [Agents API](https://ai.google.dev/gemini-api/docs/agents?hl=tr) |  |  |
+| [Webhooks API](https://ai.google.dev/gemini-api/docs/webhooks?hl=tr) |  |  |
+| [Bağlamı Önbelleğe Alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr) |  |  |
 
-- - متاح
+- - Desteklenir
 
-## ضبط إصدار واجهة برمجة التطبيقات في حزمة تطوير برامج (SDK)
+## SDK'da API sürümünü yapılandırma
 
-تستخدم حزم تطوير البرامج (SDK) الخاصة بـ Gemini API الإصدار `v1beta` تلقائيًا، ولكن يمكنك تحديد الإصدارات بشكلٍ صريح من خلال ضبط إصدار واجهة برمجة التطبيقات كما هو موضّح في عينة التعليمات البرمجية التالية:
+Gemini API SDK'ları varsayılan olarak `v1beta` sürümünü kullanır ancak aşağıdaki kod örneğinde gösterildiği gibi API sürümünü ayarlayarak sürümleri açıkça belirtebilirsiniz:
 
 ### Python
 
@@ -74,7 +72,7 @@ from google import genai
 client = genai.Client(http_options={'api_version': 'v1'})
 
 interaction = client.interactions.create(
-    model='gemini-3.6-flash',
+    model='gemini-3.7-flash',
     input="Explain how AI works",
 )
 
@@ -92,7 +90,7 @@ const ai = new GoogleGenAI({
 
 async function main() {
   const interaction = await ai.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.7-flash",
     input: "Explain how AI works",
   });
   console.log(interaction.output_text);
@@ -101,24 +99,46 @@ async function main() {
 await main();
 ```
 
-### راحة
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.types.HttpOptions;
+
+Client client = Client.builder()
+    .httpOptions(HttpOptions.builder().apiVersion("v1").build())
+    .build();
+
+CreateModelInteraction req = CreateModelInteraction.builder()
+    .model(Model.of("gemini-3.6-flash"))
+    .input(InteractionsInput.of("Explain how AI works"))
+    .build();
+var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+System.out.println(interaction.outputText().orElse(""));
+```
+
+### REST
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.7-flash",
     "input": "Explain how AI works",
   }'
 ```
 
-إرسال ملاحظات
+Geri bildirim gönderin
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-تاريخ التعديل الأخير: 2026-07-28 (حسب التوقيت العالمي المتفَّق عليه)
+Son güncelleme tarihi: 2026-09-01 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-28 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-01 UTC."],[],[]]

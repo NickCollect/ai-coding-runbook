@@ -1,215 +1,225 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/rate-limits?hl=zh-CN
-fetched_at: 2026-08-31T06:38:55.406381+00:00
-title: "\u901f\u7387\u9650\u5236 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/rate-limits?hl=it
+fetched_at: 2026-09-07T05:41:21.605430+00:00
+title: "Limiti di frequenza \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-发送反馈
+Invia feedback
 
-# 速率限制
+# Limiti di frequenza
 
-速率限制用于规范您在给定时间范围内可以向 Gemini API 发出的请求数。这些限制有助于维护公平使用，防范滥用行为，并帮助所有用户维护系统性能。
+I limiti di frequenza regolano il numero di richieste che puoi effettuare all'API Gemini
+in un determinato periodo di tempo. Questi limiti contribuiscono a mantenere un utilizzo equo, proteggere dagli abusi e mantenere le prestazioni del sistema per tutti gli utenti.
 
-[在 AI Studio 中查看有效的速率限制](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=zh-cn)
+[Visualizzare i limiti di frequenza attivi in AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=it)
 
-## 速率限制的运作方式
+## Come funzionano i limiti di frequenza
 
-速率限制通常从以下三个维度进行衡量：
+I limiti di frequenza vengono in genere misurati in tre dimensioni:
 
-- 每分钟请求数 (**RPM**)
-- 每分钟 token 数（输入）(**TPM**)
-- 每日请求数 (**RPD**)
+- Richieste al minuto (**RPM**)
+- Token al minuto (input) (**TPM**)
+- Richieste al giorno (**RPD**)
 
-系统会根据每个限制评估您的用量，超出任何限制都会触发速率限制错误。例如，如果您的 RPM 限制为 20，那么在一分钟内发出 21 个请求就会导致错误，即使您没有超出 TPM 或其他限制也是如此。
+Il tuo utilizzo viene valutato in base a ciascun limite e il superamento di uno qualsiasi di questi limiti
+attiva un errore di limite di frequenza. Ad esempio, se il limite RPM è 20, l'invio di 21
+richieste in un minuto genererà un errore, anche se non hai superato
+il limite TPM o altri limiti.
 
-速率限制是按项目应用，而不是按 API 密钥应用。每日请求数 (**RPD**) 配额会在太平洋时间午夜重置。
+I limiti di frequenza vengono applicati per progetto, non per chiave API. Le quote di richieste al giorno (**RPD**) vengono reimpostate alla mezzanotte del fuso orario del Pacifico.
 
-限制因所使用的具体模型而异，并且某些限制仅适用于特定模型。例如，每分钟图片数 (IPM) 仅针对能够生成图片的模型 (Nano Banana) 计算，但从概念上讲与 TPM 类似。其他模型可能具有每日 token 数限制 (TPD)。
+I limiti variano a seconda del modello specifico utilizzato e alcuni limiti si applicano solo a modelli specifici. Ad esempio, le immagini al minuto (IPM) vengono calcolate solo per i modelli in grado di generare immagini (Nano Banana), ma sono concettualmente simili ai token al minuto (TPM). Altri modelli potrebbero avere un limite di token al giorno (TPD).
 
-对于实验性模型和预览版模型，速率限制更为严格。
+I limiti di frequenza sono più restrittivi per i modelli sperimentali e di anteprima.
 
-### 基于支出的速率限制
+### Limiti di frequenza basati sulla spesa
 
-除了每分钟请求数 (RPM) 和每分钟 token 数 (TPM) 限制之外，Gemini API 还实施基于支出的速率限制，以防范意外费用。这些限制是否适用于您的账号取决于您的结算
-记录和 [使用层级](#usage-tiers)。
+Oltre ai limiti di richieste al minuto (RPM) e token al minuto (TPM), l'API Gemini applica limiti di frequenza basati sulla spesa per proteggersi da addebiti imprevisti. L'applicazione di questi limiti al tuo account dipende dalla cronologia
+della fatturazione e dal [livello di utilizzo](#usage-tiers).
 
-下表显示了每个
-[使用层级](#usage-tiers)的基于支出的速率限制。这些限制是在 10 分钟的滚动窗口中进行评估。这些限制是否适用于您的账号取决于您的结算记录和账号状态。
+La tabella seguente mostra i limiti di frequenza basati sulla spesa per ogni [livello di utilizzo](#usage-tiers). Questi limiti vengono valutati in una finestra mobile di 10 minuti. L'applicazione di questi limiti al tuo account dipende dalla cronologia della fatturazione e dallo stato dell'account.
 
-| 使用层级 | 支出速率限制（每 10 分钟） |
+| Livello di utilizzo | Limite di spesa (ogni 10 minuti) |
 | --- | --- |
-| **免费** | 不适用 |
-| **第 1 层级** | $10 |
-| **第 2 层级** | $200 |
-| **第 3 层级** | $200 |
+| **Nessun costo** | N/D |
+| **Livello 1** | 10 $ |
+| **Livello 2** | 200 $ |
+| **Livello 3** | 200 $ |
 
-如果您达到基于支出的速率限制，API 会返回 `429 RESOURCE_EXHAUSTED` 错误。如需解决此问题，请执行以下操作：
+Se raggiungi un limite di frequenza basato sulla spesa, l'API restituisce un errore `429 RESOURCE_EXHAUSTED`. Per risolvere questo problema:
 
-- **等待一段时间后重试** 。
-- **降低高费用请求的速率**，例如使用较小的
-  上下文窗口或较短的输出。
-- 如果您在正常使用期间一直达到此限制，
-  [请申请提高速率限制](#request-rate-limit-increase)。
+- **Attendi e riprova** dopo un breve periodo di tempo.
+- **Riduci la frequenza delle richieste costose**, ad esempio utilizzando finestre contestuali più piccole o output più brevi.
+- Se raggiungi costantemente questo limite durante l'utilizzo normale,
+  [richiedi un aumento del limite di frequenza](#request-rate-limit-increase).
 
-## 使用层级
+## Livelli di utilizzo
 
-速率限制与项目的使用层级相关联。随着 API 用量和支出的增加，您将自动升级到更高的层级，并获得更高的速率限制。
+I limiti di frequenza sono legati al livello di utilizzo del progetto. Man mano che l'utilizzo e la spesa per l'API aumentano, verrà eseguito automaticamente l'upgrade a un livello superiore con limiti di frequenza più elevati.
 
-第 2 层级和第 3 层级的资格条件基于与您的项目关联的结算账号在 Google Cloud 服务（包括但不限于 Gemini API）上的累计总支出。
+I requisiti per i livelli 2 e 3 si basano sulla spesa cumulativa totale
+per i servizi Google Cloud (inclusa, a titolo esemplificativo, l'API Gemini) per l'account di fatturazione collegato al tuo progetto.
 
-| 使用层级 | 资格条件 | [结算层级上限](https://ai.google.dev/gemini-api/docs/billing?hl=zh-cn#tier-spend-caps) |
+| Livello di utilizzo | Qualificazione | [Limite del livello di fatturazione](https://ai.google.dev/gemini-api/docs/billing?hl=it#tier-spend-caps) |
 | --- | --- | --- |
-| **免费** | [有效项目](https://ai.google.dev/gemini-api/docs/api-key?hl=zh-cn#google-cloud-projects)或免费试用 | 不适用 |
-| **第 1 层级** | [设置并关联有效的结算账号](https://ai.google.dev/gemini-api/docs/billing?hl=zh-cn#setup-billing) | $250 |
-| **第 2 层级** | 已支付 $100 + 自首次成功付款时起已满 3 天 | $2,000 |
-| **第 3 层级** | 已支付 $1,000 + 自首次成功付款时起已满 30 天 | $20,000 - $100,000+ |
+| **Nessun costo** | [Progetto attivo](https://ai.google.dev/gemini-api/docs/api-key?hl=it#google-cloud-projects) o prova senza costi | N/D |
+| **Livello 1** | [Configura e collega un account di fatturazione attivo](https://ai.google.dev/gemini-api/docs/billing?hl=it#setup-billing) | 250 $ |
+| **Livello 2** | Pagamento di 100 $+ 3 giorni dal primo pagamento riuscito | $ 2000 |
+| **Livello 3** | Pagamento di 1000 $+ 30 giorni dal primo pagamento riuscito | 20.000 $-100.000+ $ |
 
-虽然满足所述资格条件通常足以获得批准，但在极少数情况下，升级申请可能会因审核过程中发现的其他因素而被拒绝。
+Sebbene il rispetto dei criteri di qualificazione indicati sia generalmente
+sufficiente per l'approvazione, in rari casi una richiesta di upgrade può essere rifiutata in base
+ad altri fattori identificati durante la procedura di revisione.
 
-此系统有助于维护 Gemini API 平台对所有用户的安全性和完整性。
+Questo sistema contribuisce a mantenere la sicurezza e l'integrità della piattaforma API Gemini
+per tutti gli utenti.
 
-## Gemini API 速率限制
+## Limiti di frequenza dell'API Gemini
 
-速率限制取决于多种因素（例如您的使用层级），并且可以在 Google AI Studio 中查看。随着您的层级和账号状态随时间变化，您的速率限制将自动更新。
+I limiti di frequenza dipendono da una serie di fattori (ad esempio il tuo livello di utilizzo) e possono essere
+visualizzati in Google AI Studio. Man mano che il tuo livello e lo stato dell'account cambiano nel tempo,
+i limiti di frequenza verranno aggiornati automaticamente.
 
-[在 AI Studio 中查看有效的速率限制](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=zh-cn)
+[Visualizzare i limiti di frequenza attivi in AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=it)
 
-指定的速率限制无法保证，实际容量可能会有所不同。
+I limiti di frequenza specificati non sono garantiti e la capacità effettiva potrebbe variare.
 
-## 优先级推理速率限制
+## Limiti di frequenza dell'inferenza della priorità
 
-[优先级](https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-cn)消耗量即使计入整体互动流量
-速率限制，也有自己的速率
-限制。**默认速率限制为：每个模型和层级的 [标准速率限制](https://aistudio.google.com/rate-limit?hl=zh-cn) 的 0.3 倍**
+Il consumo [prioritario](https://ai.google.dev/gemini-api/docs/priority-inference?hl=it) mantiene i propri limiti di frequenza
+anche se il consumo viene conteggiato ai fini dei limiti di frequenza
+complessivi del traffico interattivo. **I limiti di frequenza predefiniti sono: 0,3 volte il [limite di frequenza standard](https://aistudio.google.com/rate-limit?hl=it) per ogni modello e livello**
 
-## 批量 API 速率限制
+## Limiti di frequenza delle richieste API Batch
 
-[批量 API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn) 请求受其自身的速率
-限制约束，与非批量 API 调用分开。
+Le richieste [API batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=it) sono soggette a limiti di frequenza propri, separati dalle chiamate API non batch.
 
-- **并发批量请求数**： 100
-- **输入文件大小限制**： 2GB
-- **文件存储限制**： 20GB
-- **每个模型的加入队列的 token 数**： **批量加入队列的 token 数** 表列出了针对给定模型，所有有效批量作业可以加入队列进行批量处理的最大 token 数。
+- **Richieste batch simultanee:** 100
+- **Limite di dimensione del file di input:** 2 GB
+- **Limite di spazio di archiviazione dei file:** 20 GB
+- **Token in coda per modello**:la tabella **Token batch in coda** elenca il numero massimo di token che possono essere messi in coda per l'elaborazione batch in tutti i job batch attivi per un determinato modello.
 
-### 第 1 层级
+### Livello 1
 
-| 模型 | 批量加入队列的 token 数 |
+| Modello | Token batch in coda |
 | --- | --- |
-| 文本输出模型 | | | | |
+| Modelli di testo | | | | |
 | --- | --- | --- | --- | --- |
-| Gemini 3.1 Pro 预览版 | 5,000,000 |
-| Gemini 3.1 Flash Lite | 10,000,000 |
-| Gemini 3.1 Flash Lite 预览版 | 10,000,000 |
-| Gemini 3.5 Flash | 3,000,000 |
-| Gemini 2.5 Pro | 5,000,000 |
-| Gemini 2.5 Pro TTS | 25,000 |
-| Gemini 2.5 Flash | 3,000,000 |
-| Gemini 2.5 Flash 预览版 | 3,000,000 |
-| Gemini 2.5 Flash Image 预览版 | 3,000,000 |
-| Gemini 2.5 Flash TTS | 100,000 |
-| Gemini 2.5 Flash Lite | 10,000,000 |
-| Gemini 2.5 Flash Lite 预览版 | 10,000,000 |
-| Gemini 2.0 Flash | 10,000,000 |
-| Gemini 2.0 Flash Image | 3,000,000 |
-| Gemini 2.0 Flash Lite | 10,000,000 |
-| 多模态生成模型 | | | | |
-| Gemini 3.1 Flash Image 预览版 🍌 | 1,000,000 |
-| Gemini 3.1 Flash Lite Image 🍌 | 2,000,000 |
-| Gemini 3 Pro Image 预览版 🍌 | 2,000,000 |
-| 嵌入模型 | | | | |
-| Gemini Embedding | 500,000 |
+| Gemini 3.1 Pro (anteprima) | 5.000.000 |
+| Gemini 3.1 Flash Lite | 10.000.000 |
+| Gemini 3.1 Flash Lite (anteprima) | 10.000.000 |
+| Gemini 3.5 Flash | 3.000.000 |
+| Gemini 2.5 Pro | 5.000.000 |
+| Gemini 2.5 Pro TTS | 25.000 |
+| Gemini 2.5 Flash | 3.000.000 |
+| Gemini 2.5 Flash (anteprima) | 3.000.000 |
+| Anteprima di Gemini 2.5 Flash Image | 3.000.000 |
+| Gemini 2.5 Flash TTS | 100.000 |
+| Gemini 2.5 Flash-Lite | 10.000.000 |
+| Gemini 2.5 Flash Lite (anteprima) | 10.000.000 |
+| Gemini 2.0 Flash | 10.000.000 |
+| Gemini 2.0 Flash Image | 3.000.000 |
+| Gemini 2.0 Flash Lite | 10.000.000 |
+| Modelli di generazione multimodali | | | | |
+| Anteprima dell'immagine flash di Gemini 3.1 🍌 | 1.000.000 |
+| Gemini 3.1 Flash Lite Image 🍌 | 2.000.000 |
+| Anteprima di Gemini 3 Pro Image 🍌 | 2.000.000 |
+| Modelli di embedding | | | | |
+| Incorporamento di Gemini | 500.000 |
 
-### 第 2 层级
+### Livello 2
 
-| 模型 | 批量加入队列的 token 数 |
+| Modello | Token batch in coda |
 | --- | --- |
-| 文本输出模型 | | | | |
+| Modelli di testo | | | | |
 | --- | --- | --- | --- | --- |
-| Gemini 3.1 Pro 预览版 | 500,000,000 |
-| Gemini 3.1 Flash Lite | 500,000,000 |
-| Gemini 3.1 Flash Lite 预览版 | 500,000,000 |
-| Gemini 3.5 Flash | 400,000,000 |
-| Gemini 2.5 Pro | 500,000,000 |
-| Gemini 2.5 Pro TTS | 100,000 |
-| Gemini 2.5 Flash | 400,000,000 |
-| Gemini 2.5 Flash 预览版 | 400,000,000 |
-| Gemini 2.5 Flash Image 预览版 | 400,000,000 |
-| Gemini 2.5 Flash TTS | 100,000 |
-| Gemini 2.5 Flash Lite | 500,000,000 |
-| Gemini 2.5 Flash Lite 预览版 | 500,000,000 |
-| Gemini 2.0 Flash | 1,000,000,000 |
-| Gemini 2.0 Flash Image | 400,000,000 |
-| Gemini 2.0 Flash Lite | 1,000,000,000 |
-| 多模态生成模型 | | | | |
-| Gemini 3.1 Flash Image 预览版 🍌 | 250,000,000 |
-| Gemini 3.1 Flash Lite Image 🍌 | 270,000,000 |
-| Gemini 3 Pro Image 预览版 🍌 | 270,000,000 |
-| 嵌入模型 | | | | |
-| Gemini Embedding | 5,000,000 |
+| Gemini 3.1 Pro (anteprima) | 500.000.000 |
+| Gemini 3.1 Flash Lite | 500.000.000 |
+| Gemini 3.1 Flash Lite (anteprima) | 500.000.000 |
+| Gemini 3.5 Flash | 400.000.000 |
+| Gemini 2.5 Pro | 500.000.000 |
+| Gemini 2.5 Pro TTS | 100.000 |
+| Gemini 2.5 Flash | 400.000.000 |
+| Gemini 2.5 Flash (anteprima) | 400.000.000 |
+| Anteprima di Gemini 2.5 Flash Image | 400.000.000 |
+| Gemini 2.5 Flash TTS | 100.000 |
+| Gemini 2.5 Flash-Lite | 500.000.000 |
+| Gemini 2.5 Flash Lite (anteprima) | 500.000.000 |
+| Gemini 2.0 Flash | 1.000.000.000 |
+| Gemini 2.0 Flash Image | 400.000.000 |
+| Gemini 2.0 Flash Lite | 1.000.000.000 |
+| Modelli di generazione multimodali | | | | |
+| Anteprima dell'immagine flash di Gemini 3.1 🍌 | 250.000.000 |
+| Gemini 3.1 Flash Lite Image 🍌 | 270.000.000 |
+| Anteprima di Gemini 3 Pro Image 🍌 | 270.000.000 |
+| Modelli di embedding | | | | |
+| Incorporamento di Gemini | 5.000.000 |
 
-### 第 3 层级
+### Livello 3
 
-| 模型 | 批量加入队列的 token 数 |
+| Modello | Token batch in coda |
 | --- | --- |
-| 文本输出模型 | | | | |
+| Modelli di testo | | | | |
 | --- | --- | --- | --- | --- |
-| Gemini 3.1 Pro 预览版 | 1,000,000,000 |
-| Gemini 3.1 Flash Lite | 1,000,000,000 |
-| Gemini 3.1 Flash Lite 预览版 | 1,000,000,000 |
-| Gemini 3.5 Flash | 1,000,000,000 |
-| Gemini 2.5 Pro | 1,000,000,000 |
-| Gemini 2.5 Pro TTS | 1,000,000 |
-| Gemini 2.5 Flash | 1,000,000,000 |
-| Gemini 2.5 Flash 预览版 | 1,000,000,000 |
-| Gemini 2.5 Flash Image 预览版 | 1,000,000,000 |
-| Gemini 2.5 Flash TTS | 4,000,000 |
-| Gemini 2.5 Flash Lite | 1,000,000,000 |
-| Gemini 2.5 Flash Lite 预览版 | 1,000,000,000 |
-| Gemini 2.0 Flash | 5,000,000,000 |
-| Gemini 2.0 Flash Image | 1,000,000,000 |
-| Gemini 2.0 Flash Lite | 5,000,000,000 |
-| 多模态生成模型 | | | | |
-| Gemini 3.1 Flash Image 预览版 🍌 | 750,000,000 |
-| Gemini 3.1 Flash Lite Image 🍌 | 1,000,000,000 |
-| Gemini 3 Pro Image 预览版 🍌 | 1,000,000,000 |
-| 嵌入模型 | | | | |
-| Gemini Embedding | 10,000,000 |
+| Gemini 3.1 Pro (anteprima) | 1.000.000.000 |
+| Gemini 3.1 Flash Lite | 1.000.000.000 |
+| Gemini 3.1 Flash Lite (anteprima) | 1.000.000.000 |
+| Gemini 3.5 Flash | 1.000.000.000 |
+| Gemini 2.5 Pro | 1.000.000.000 |
+| Gemini 2.5 Pro TTS | 1.000.000 |
+| Gemini 2.5 Flash | 1.000.000.000 |
+| Gemini 2.5 Flash (anteprima) | 1.000.000.000 |
+| Anteprima di Gemini 2.5 Flash Image | 1.000.000.000 |
+| Gemini 2.5 Flash TTS | 4.000.000 |
+| Gemini 2.5 Flash-Lite | 1.000.000.000 |
+| Gemini 2.5 Flash Lite (anteprima) | 1.000.000.000 |
+| Gemini 2.0 Flash | 5.000.000.000 |
+| Gemini 2.0 Flash Image | 1.000.000.000 |
+| Gemini 2.0 Flash Lite | 5.000.000.000 |
+| Modelli di generazione multimodali | | | | |
+| Anteprima dell'immagine flash di Gemini 3.1 🍌 | 750.000.000 |
+| Gemini 3.1 Flash Lite Image 🍌 | 1.000.000.000 |
+| Anteprima di Gemini 3 Pro Image 🍌 | 1.000.000.000 |
+| Modelli di embedding | | | | |
+| Incorporamento di Gemini | 10.000.000 |
 
-## 如何升级到下一层级
+## Come eseguire l'upgrade al livello successivo
 
-如需从免费层级过渡到付费层级，您必须先
-[在 AI Studio 中设置结算](https://ai.google.dev/gemini-api/docs/billing?hl=zh-cn)。
+Per eseguire la transizione dal livello senza costi a un livello a pagamento, devi prima
+[configurare la fatturazione in AI Studio](https://ai.google.dev/gemini-api/docs/billing?hl=it).
 
-一旦您的项目满足[指定条件](#usage-tiers)，系统就会
-自动将其升级到下一层级。从免费层级升级到第 1 层级通常会立即生效，后续层级升级将在 10 分钟内生效。如需查看您的层级，请前往 AI Studio 中的“[项目](https://aistudio.google.com/projects?hl=zh-cn)”页面。
+Una volta che il tuo progetto soddisfa i [criteri specificati](#usage-tiers), verrà
+eseguito automaticamente l'upgrade al livello successivo. Gli upgrade dal Livello senza costi al Livello 1
+in genere hanno effetto immediatamente, mentre gli upgrade successivi
+hanno effetto entro 10 minuti. Vai alla [pagina Progetti](https://aistudio.google.com/projects?hl=it) in AI Studio per controllare i tuoi livelli.
 
-## 申请提高速率限制
+## Richiedi un aumento del limite di frequenza
 
-每个模型变体都有关联的速率限制（每分钟请求数，RPM）。
-如需详细了解这些速率限制，请参阅
-[AI Studio 速率限制](https://aistudio.google.com/rate-limit?hl=zh-cn)页面。
+Ogni variante del modello ha un limite di frequenza associato (richieste al minuto, RPM).
+Per informazioni dettagliate su questi limiti di frequenza, consulta la pagina
+[Limite di frequenza di AI Studio](https://aistudio.google.com/rate-limit?hl=it).
 
-[申请提高付费层级的速率限制](https://forms.gle/ETzX94k8jf7iSotH9)
+[Richiedere un aumento del limite di frequenza per il livello a pagamento](https://forms.gle/ETzX94k8jf7iSotH9)
 
-我们无法保证一定会提高您的速率限制，但我们会尽力审核您的申请。
+Non offriamo garanzie in merito all'aumento del limite di frequenza, ma faremo del nostro meglio
+per esaminare la tua richiesta.
 
-发送反馈
+Invia feedback
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-最后更新时间 (UTC)：2026-07-03。
+Ultimo aggiornamento 2026-07-03 UTC.
 
-需要向我们提供更多信息？
+Vuoi dirci altro?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-03。"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-03 UTC."],[],[]]

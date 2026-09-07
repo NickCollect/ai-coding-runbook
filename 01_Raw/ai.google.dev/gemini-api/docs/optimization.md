@@ -1,87 +1,94 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/optimization?hl=ja
-fetched_at: 2026-08-31T06:41:47.007416+00:00
-title: "Gemini API \u306e\u6700\u9069\u5316\u3068\u63a8\u8ad6 \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/optimization?hl=id
+fetched_at: 2026-09-07T05:49:36.553575+00:00
+title: "Pengoptimalan dan inferensi Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-フィードバックを送信
+Kirim masukan
 
-# Gemini API の最適化と推論
+# Pengoptimalan dan inferensi Gemini API
 
-Gemini API には、特定のワークロードのニーズに基づいて速度、コスト、信頼性のバランスを取るのに役立つさまざまな最適化メカニズムが用意されています。リアルタイムの会話型ボットを構築する場合でも、オフラインで大量のデータ処理パイプラインを実行する場合でも、適切なパラダイムを選択することで、コストを大幅に削減したり、パフォーマンスを向上させたりできます。
+Gemini API menawarkan berbagai mekanisme pengoptimalan untuk membantu Anda menyeimbangkan kecepatan, biaya, dan keandalan berdasarkan kebutuhan workload tertentu.
+Baik Anda membuat bot percakapan real-time atau menjalankan pipeline pemrosesan data offline yang berat, memilih paradigma yang tepat dapat mengurangi biaya atau meningkatkan performa secara signifikan.
 
-| 機能 | 標準 | Flex | 候補 | バッチ | キャッシュ |
+| Fitur | Standar | Fleksibel | Prioritas | Batch | Menyimpan ke cache |
 | --- | --- | --- | --- | --- | --- |
-| **料金** | 正規料金 | 50% 割引 | 標準の 75% ～ 100% 増 | 50% 割引 | 90% 割引 + トークン ストレージの比例配分 |
-| **レイテンシ** | 数秒～数分 | 数分（目標 1 ～ 15 分） | 秒 | 最大 24 時間 | 最初のトークンまでの時間を短縮 |
-| **信頼性** | 高 / 中～高 | ベスト エフォート（削減可能） | 高（削減不可） | 高（スループットの場合） | なし |
-| **インターフェース** | 同期 | 同期 | 同期 | 非同期 | 保存された状態 |
-| **最適なユースケース** | 一般的なアプリケーション ワークフロー | 緊急性の低いシーケンシャル チェーン | 本番環境のユーザー向けアプリ | 大規模なデータセット、オフライン評価 | 同じファイルに対する繰り返しクエリ |
+| **Harga** | Harga Penuh | Diskon 50% | 75% hingga 100% lebih mahal dari standar | Diskon 50% | Diskon 90% + Penyimpanan token prorata |
+| **Latensi** | Detik hingga menit | Menit (target 1–15 menit) | Detik | Hingga 24 jam | Waktu-hingga-token-pertama (TTFT) lebih cepat |
+| **Keandalan** | Tinggi / Sedang-tinggi | Upaya terbaik (Dapat dihentikan) | Tinggi (Tidak dapat dihentikan) | Tinggi (untuk throughput) | T/A |
+| **Antarmuka** | Sinkron | Sinkron | Sinkron | Asinkron | Status tersimpan |
+| **Kasus penggunaan terbaik** | Alur kerja aplikasi umum | Rantai berurutan yang tidak mendesak | Aplikasi produksi yang ditampilkan kepada pengguna | Set data besar, evaluasi offline | Kueri berulang pada file yang sama |
 
-## 推論サービスティア（同期）
+## Tingkat layanan inferensi (Sinkron)
 
-標準生成呼び出しで `service_tier` パラメータを渡すことで、信頼性最適化と費用最適化の同期トラフィックを切り替えることができます。
+Anda dapat beralih antara traffic sinkron yang dioptimalkan untuk keandalan dan yang dioptimalkan untuk biaya dengan meneruskan parameter `service_tier` dalam panggilan pembuatan standar.
 
-### 標準推論（デフォルト）
+### Inferensi standar (Default)
 
-標準ティアは、シーケンシャル コンテンツ生成のデフォルト オプションです。追加料金や大量のキューイングなしで、通常のレスポンス時間を実現します。
+Tingkat standar adalah opsi default untuk pembuatan konten berurutan.
+Tingkat ini memberikan waktu respons normal tanpa premi tambahan atau antrean yang berat.
 
-- **信頼性:** 標準の重要度
-- **料金:** 標準料金。
-- **最適な用途:** ほとんどのインタラクティブな日常業務アプリケーション。
+- **Keandalan:** Tingkat keparahan standar
+- **Harga:** Harga standar.
+- **Terbaik Untuk:** Sebagian besar aplikasi interaktif sehari-hari.
 
-### 優先度推論（レイテンシ最適化）
+### Inferensi prioritas (Dioptimalkan untuk latensi)
 
-[優先度](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ja)処理では、リクエストが高重要度のコンピューティング キューにルーティングされます。このトラフィックは厳密に削減不可（他のティアによってプリエンプトされない）で、最高の信頼性を提供します。動的な優先度の上限を超過した場合、エラーで失敗する代わりに、リクエストは標準処理に正常にダウングレードされます。
+[Pemrosesan](https://ai.google.dev/gemini-api/docs/priority-inference?hl=id)prioritas merutekan permintaan Anda
+ke antrean komputasi dengan tingkat keparahan tinggi.
+Traffic ini bersifat tidak dapat dihentikan (tidak pernah didahulukan oleh tingkat lainnya) dan menawarkan keandalan tertinggi. Jika Anda melebihi batas Prioritas dinamis, sistem akan menurunkan permintaan ke pemrosesan Standar, bukan gagal dengan error.
 
-- **信頼性:** 最も高い重要度
-- **料金:** 標準料金の 75% ～ 100% 増。
-- **最適な用途:** カスタマー chatbot、リアルタイムの不正使用検出、ビジネスに不可欠なコパイロット。
+- **Keandalan:** Tingkat keparahan tertinggi
+- **Harga:** 75% hingga 100% di atas tarif Standar.
+- **Terbaik untuk:** Chatbot pelanggan, deteksi penipuan real-time, dan kopilot penting untuk bisnis.
 
-### Flex 推論（費用最適化）
+### Inferensi fleksibel (Dioptimalkan untuk biaya)
 
-[Flex 推論](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ja)では、機会的なオフピーク コンピューティング容量を利用することで、標準料金と比較して 50% の割引が適用されます。リクエストは同期的に処理されるため、バッチ オブジェクトを管理するためにコードを書き換える必要はありません。
-「削減可能」なトラフィックであるため、システムで標準トラフィックの急増が発生すると、リクエストがプリエンプトされる可能性があります。
+[Inferensi fleksibel](https://ai.google.dev/gemini-api/docs/flex-inference?hl=id) menawarkan diskon 50% dibandingkan tarif standar dengan memanfaatkan
+kapasitas komputasi di luar jam sibuk yang oportunistik. Permintaan diproses secara sinkron, yang berarti Anda tidak perlu menulis ulang kode untuk mengelola objek batch.
+Karena merupakan traffic yang "dapat dihentikan", permintaan dapat didahulukan jika sistem mengalami lonjakan traffic standar.
 
-- **信頼性:** 非保証型、削減可能な重要度
-- **料金:** 標準料金の 50%（トークン単位で課金）。
-- **最適な用途:** 呼び出し N+1 が呼び出し N の出力に依存するマルチステップ エージェント ワークフロー、バックグラウンド CRM の更新、オフライン評価。
+- **Keandalan:** Tingkat keparahan yang tidak dijamin dan dapat dihentikan
+- **Harga:** 50% dari Harga Standar (ditagih per token).
+- **Terbaik untuk:** Alur kerja agen multi-langkah yang bergantung pada output panggilan N, update CRM latar belakang, dan evaluasi offline.
 
-## Batch API（一括、非同期）
+## Batch API (Massal, asinkron)
 
-[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja) は、大量のリクエストを標準料金の 50% で非同期的に処理するように設計されています。リクエストは、インライン ディクショナリとして送信することも、JSONL 入力ファイル（最大 2 GB）を使用して送信することもできます。リクエストは、バックグラウンド スループット キューを使用して処理され、目標のターンアラウンド時間は 24 時間です。
+[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=id) dirancang untuk memproses permintaan dalam jumlah besar
+secara asinkron dengan
+biaya 50% dari biaya standar. Anda dapat mengirimkan permintaan sebagai kamus inline atau menggunakan file input JSONL (hingga 2 GB). API ini memproses permintaan menggunakan antrean throughput latar belakang dengan waktu penyelesaian target 24 jam.
 
-- **信頼性:** 削減可能ですが、24 時間の自動再試行とキューイング システムがあります
-- **料金:** 標準料金の 50%。
-- **最適な用途:** 大規模なデータセットの事前処理、定期的な回帰テスト スイートの実行、大量の画像または埋め込みの生成。
+- **Keandalan:** Dapat dihentikan, tetapi dengan sistem antrean dan percobaan ulang otomatis 24 jam
+- **Harga:** 50% dari harga Standar.
+- **Terbaik untuk:** Pra-pemrosesan set data besar, menjalankan rangkaian pengujian regresi berkala, dan pembuatan gambar atau embedding dalam volume tinggi.
 
-## コンテキスト キャッシュ保存（入力の削減）
+## Context caching (Penghematan input)
 
-[コンテキスト キャッシュ保存](https://ai.google.dev/gemini-api/docs/caching?hl=ja)は、初期
-コンテキストの実体部分が、短いリクエストで繰り返し参照される場合に使用されます。
+[Context caching](https://ai.google.dev/gemini-api/docs/caching?hl=id) digunakan saat konteks awal yang substansial
+dirujuk berulang kali oleh permintaan yang lebih singkat.
 
-- **暗黙的キャッシュ保存:** Gemini 2.5 以降のモデルで自動的に有効になります。
-  リクエストが一般的なプロンプト プレフィックスに基づいて既存のキャッシュにヒットした場合、システムはコスト削減を転送します。
-- **明示的なキャッシュ保存:** 特定の有効期間（TTL）でキャッシュ オブジェクトを手動で作成できます。作成したら、後続のリクエストでキャッシュに保存されたトークンを参照して、同じコーパス ペイロードを繰り返し渡さないようにします。
-- **料金:** キャッシュ トークン数と保存期間（TTL）に基づいて課金されます。
-- **最適な用途:** 広範なシステム指示を伴う chatbot、長い動画ファイルの繰り返し分析、大規模なドキュメント セットに対するクエリ。
+- **Caching implisit:** Diaktifkan secara otomatis pada model Gemini 2.5 dan yang lebih baru.
+  Sistem akan memberikan penghematan biaya jika permintaan Anda cocok dengan cache yang ada berdasarkan awalan prompt umum.
+- **Caching Eksplisit:** Anda dapat membuat objek cache secara manual dengan Time-To-Live (TTL) tertentu. Setelah dibuat, Anda dapat merujuk ke token yang di-cache untuk permintaan berikutnya agar tidak perlu meneruskan payload korpus yang sama berulang kali.
+- **Harga:** Ditagih berdasarkan jumlah token cache dan durasi penyimpanan (TTL).
+- **Terbaik Untuk:** Chatbot dengan petunjuk sistem yang ekstensif, analisis berulang pada file video yang panjang, atau kueri terhadap kumpulan dokumen besar.
 
-フィードバックを送信
+Kirim masukan
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-最終更新日 2026-04-29 UTC。
+Terakhir diperbarui pada 2026-04-29 UTC.
 
-ご意見をお聞かせください
+Ada masukan untuk kami?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]

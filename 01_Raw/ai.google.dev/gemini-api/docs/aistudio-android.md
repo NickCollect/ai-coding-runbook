@@ -1,134 +1,147 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-android?hl=zh-TW
-fetched_at: 2026-08-31T06:42:30.402305+00:00
-title: "\u5728 Google AI Studio \u4e2d\u5efa\u69cb Android \u61c9\u7528\u7a0b\u5f0f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-android?hl=it
+fetched_at: 2026-09-07T05:49:58.553046+00:00
+title: "Crea app per Android in Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-提供意見
+Invia feedback
 
-# 在 Google AI Studio 中建構 Android 應用程式
+# Crea app per Android in Google AI Studio
 
-Google AI Studio 可讓您根據自然語言提示建構原生 Android 應用程式。說明您想要的應用程式，[Antigravity Agent](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=zh-tw#antigravity-agent) 就會生成完整的 Kotlin 和 [Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=zh-tw) 專案。您可以在瀏覽器中預覽應用程式，透過瀏覽器型 Android 模擬器安裝應用程式到實體裝置，並發布應用程式以進行測試。
+Google AI Studio ti consente di creare app Android native da un prompt in linguaggio naturale. Descrivi l'app che vuoi e l'
+[agente Antigravity](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=it#antigravity-agent)
+genera un progetto completo in Kotlin e [Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=it). Dal browser, puoi visualizzare l'anteprima dell'app in un emulatore Android basato su browser, installarla su un dispositivo fisico e pubblicarla per i test.
 
-## 開始使用
+## Inizia
 
-如要開始建構 Android 應用程式，請按照下列步驟操作：
+Per iniziare a creare un'app per Android:
 
-1. 使用左側導覽面板，前往 Google AI Studio 的[建構模式](https://aistudio.google.com/apps?hl=zh-tw)。
-2. 從平台挑選器中選取「Android」**Android**。
-3. 輸入提示詞，描述要建構的應用程式 (例如*「建立具有本機儲存空間的每日工作追蹤表」*或*「建立簡易計算機」*)。
-4. 代理程式會產生專案，並在以瀏覽器為基礎的 Android 模擬器中啟動專案。
+1. Vai alla [modalità di creazione](https://aistudio.google.com/apps?hl=it) in Google AI Studio utilizzando il pannello di navigazione a sinistra.
+2. Seleziona **Android** dal selettore della piattaforma.
+3. Inserisci un prompt che descriva l'app che vuoi creare (ad es. *"Crea un tracker delle attività giornaliere con spazio di archiviazione locale"* o *"Crea una Calcolatrice semplice"*).
+4. L'agente genera il progetto e lo avvia nell'emulatore Android basato su browser.
 
-接著，您就能使用聊天面板反覆改良應用程式，就像在網頁上操作一樣。代理程式會管理 Android 專案中的所有檔案，並在程式碼集內傳播變更。
+Puoi quindi eseguire l'iterazione sull'app utilizzando il riquadro della chat, proprio come nell'esperienza web. L'agente gestisce tutti i file del progetto Android e propaga le modifiche nel codebase.
 
-## 瀏覽器式 Android 模擬器
+## Emulatore Android basato su browser
 
-Android 模擬器完全在雲端執行，並串流至瀏覽器。
-您不需要安裝 Android SDK、Android Studio 或本機模擬器。
+L'emulatore Android viene eseguito interamente nel cloud e viene trasmesso in streaming al browser.
+Non è necessario installare l'SDK Android, Android Studio o un emulatore locale.
 
-模擬器提供以下功能：
+L'emulatore fornisce:
 
-- **模擬 Pixel 裝置**：輕觸、捲動及與應用程式互動，就像在實際裝置上操作一樣。
-- **支援旋轉**：切換直向和橫向模式。
-- **即時預覽**：當代理程式變更程式碼時，應用程式會重建，模擬器也會自動重新整理。
+- **Simulazione di un dispositivo simile a Pixel**: tocca, scorri e interagisci con l'app
+  come su un dispositivo reale.
+- **Supporto della rotazione**: passa dall'orientamento verticale a quello orizzontale.
+- **Anteprima live**: quando l'agente apporta modifiche al codice, l'app viene ricompilata e
+  l'emulatore si aggiorna automaticamente.
 
-### 模擬器限制
+### Limitazioni dell'emulatore
 
-瀏覽器型模擬器不支援所有硬體功能。模擬器不支援下列功能：
+L'emulatore basato su browser non supporta tutte le funzionalità hardware. Le seguenti funzionalità non sono disponibili nell'emulatore:
 
-- 拍攝相片
-- NFC 和藍牙
-- GPS (模擬位置)
-- Google Play 服務 (Google 登入、地圖和其他 Play 服務功能可在實體裝置上運作，但無法在模擬器中運作)
+- Acquisizione di foto e video
+- NFC e Bluetooth
+- GPS (la posizione è simulata)
+- Google Play Services (Accedi con Google, Maps e altre funzionalità di Play Services funzionano su un dispositivo reale, ma non nell'emulatore)
 
-## 透過 ADB 安裝到裝置
+## Installazione su un dispositivo con ADB
 
-您可以直接在透過 USB 連接至電腦的實體 Android 裝置上安裝建構的 APK。這項功能會使用 [WebUSB](https://developer.chrome.com/docs/capabilities/usb?hl=zh-tw)，透過瀏覽器與裝置通訊。您無需在本機安裝 ADB。
+Puoi installare l'APK creato direttamente su un dispositivo Android fisico collegato al computer tramite USB. Viene utilizzato
+[WebUSB](https://developer.chrome.com/docs/capabilities/usb?hl=it) per
+comunicare con il dispositivo tramite il browser. Non è richiesta l'installazione di ADB locale.
 
-### 必要條件
+### Prerequisiti
 
-- 支援 WebUSB 的 Chrome 或 Edge 瀏覽器。
-- 已啟用[開發人員選項和 USB 偵錯](https://developer.android.com/studio/debug/dev-options?hl=zh-tw)的 Android 裝置。
-- 將裝置連接到電腦的 USB 傳輸線。
+- Un browser Chrome o Edge che supporti WebUSB.
+- Un dispositivo Android con
+  [le opzioni sviluppatore e il debug USB](https://developer.android.com/studio/debug/dev-options?hl=it)
+  attivati.
+- Un cavo USB che collega il dispositivo al computer.
 
-### 在裝置上安裝應用程式
+### Installare l'app sul dispositivo
 
-1. 在預覽面板中，按一下「在裝置上安裝」。
-2. 在瀏覽器的 USB 裝置選擇器中選取 Android 裝置。
-3. APK 會傳輸到裝置並安裝。
-4. 應用程式會自動啟動。
+1. Fai clic su **Installa sul dispositivo** nel riquadro di anteprima.
+2. Seleziona il tuo dispositivo Android dal selettore di dispositivi USB del browser.
+3. L'APK viene trasferito e installato sul dispositivo.
+4. L'app si avvia automaticamente.
 
-## 發布至 Play 商店
+## Pubblicazione sul Play Store
 
-您可以將 Android 應用程式發布至 [Google Play 管理中心](https://play.google.com/console?hl=zh-tw)的內部測試群組，最多可將應用程式發布給 100 位測試人員。
+Puoi pubblicare la tua app per Android nel
+[canale di test interno](https://play.google.com/console?hl=it) di
+Google Play Console, che ti consente di distribuire l'app a un massimo di 100 tester.
 
-### 必要條件
+### Prerequisiti
 
-- [Google Play 開發人員帳戶](https://play.google.com/console/signup?hl=zh-tw) (需支付 $25 美元的單次註冊費)。
-- 在 Play 管理中心填妥開發人員設定檔。
+- Un [account sviluppatore Google Play](https://play.google.com/console/signup?hl=it)
+  (richiede una commissione di registrazione una tantum di 25 $).
+- Un profilo sviluppatore completato in Play Console.
 
-### 發布應用程式
+### Pubblicare l'app
 
-1. 在 Google AI Studio 中開啟「設定」>「發布」。
-2. 按一下「發布至 Play 商店」。
-3. 使用 Google Play 開發人員帳戶進行驗證。
-4. AI Studio 會簽署 APK、建立應用程式資訊 (或上傳新版本)，並發布至內部測試群組。
-5. 您會收到一個連結，可分享給測試人員。
+1. Apri **Impostazioni > Pubblica** in Google AI Studio.
+2. Fai clic su **Pubblica sul Play Store**.
+3. Esegui l'autenticazione con il tuo account sviluppatore Google Play.
+4. AI Studio firma l'APK, crea la scheda dell'app (o carica una nuova versione) e la pubblica nel canale di test interno.
+5. Riceverai un link da condividere con i tuoi tester.
 
-AI Studio 會使用代管的 KeyStore 自動管理 APK 簽署作業。您可以在 Play 管理中心自訂應用程式資訊 (圖示、螢幕截圖、說明)。
+AI Studio gestisce automaticamente la firma dell'APK utilizzando un keystore gestito. Puoi personalizzare la scheda dell'app (icona, screenshot, descrizione) in un secondo momento in Play Console.
 
-## 生成內容
+## Cosa viene generato
 
-建構 Android 應用程式時，代理程式會產生標準的 Gradle 專案，結構如下：
+Quando crei un'app per Android, l'agente genera un progetto standard basato su Gradle con la seguente struttura:
 
-- **建構設定**：使用 Kotlin DSL 的 `build.gradle.kts` 檔案 (專案和應用程式層級)。
-- **UI 層**：使用 [Material 3](https://m3.material.io/) 主題設定的 [Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=zh-tw) 元件。
-- **架構**：單一活動架構，包含 ViewModel 和資料類別。
-- **資源**：`AndroidManifest.xml`、可繪項目、字串和其他 Android 資源。
+- **Configurazione di compilazione**: `build.gradle.kts` file (a livello di progetto e app) che utilizzano Kotlin DSL.
+- **Livello UI**: [componenti](https://developer.android.com/develop/ui/compose?hl=it)
+  Jetpack Compose con temi [Material 3](https://m3.material.io/).
+- **Architettura**: architettura a singola attività con ViewModel e classi di
+  dati.
+- **Risorse**: `AndroidManifest.xml`, elementi disegnabili, stringhe e altre risorse Android.
 
-代理程式會自動管理 Gradle 依附元件，並視需要從 Maven 和 Google 存放區新增套件。
+L'agente gestisce automaticamente le dipendenze di Gradle, aggiungendo i pacchetti dai repository Maven e Google in base alle necessità.
 
-您可以使用預覽面板中的「程式碼」分頁，查看及編輯產生的程式碼。如要在 Android Studio 中繼續開發，請將專案下載為 **ZIP 檔案**。
+Puoi visualizzare e modificare il codice generato utilizzando la scheda **Codice** nel riquadro di anteprima. Per continuare lo sviluppo in Android Studio, scarica il progetto come **file ZIP**.
 
-## 限制
+## Limitazioni
 
-在 AI Studio 中建構 Android 應用程式時，有下列限制：
+La creazione di app per Android in AI Studio presenta le seguenti limitazioni:
 
-### 平台限制
+### Limitazioni della piattaforma
 
-- **僅限用戶端**：Android 應用程式不含伺服器端元件。
-  需要伺服器執行階段的功能 (密鑰管理、多人遊戲、Firebase、Google Workspace API) 無法使用。
-- **單一活動架構**：僅支援單一活動、單一模組專案。
-- **僅限 Jetpack Compose**：應用程式使用 Kotlin 和 Jetpack Compose。不支援 Java 和 XML 版面配置。
-- **不含 NDK 或原生程式碼**：不支援 C 和 C++ 程式碼。
-- **不支援 Wear OS 或 Android TV**：僅支援手機和平板電腦板型規格。
+- **Solo lato client**: le app Android non includono un componente lato server.
+  Le funzionalità che richiedono un runtime del server (gestione dei secret, multigiocatore, Firebase, API Google Workspace) non sono disponibili.
+- **Architettura a singola attività**: sono supportati solo i progetti a singola attività e a singolo modulo.
+- **Solo Jetpack Compose**: le app utilizzano Kotlin e Jetpack Compose. I layout Java e XML non sono supportati.
+- **Nessun NDK o codice nativo**: il codice C e C++ non è supportato.
+- **Nessun Wear OS o Android TV**: sono supportati solo i fattori di forma di smartphone e tablet.
 
-### 匯出限制
+### Limitazioni per l'esportazione
 
-- **僅下載 ZIP 檔**：您可以將專案下載為 ZIP 檔案。Android 專案目前無法匯出至 GitHub。
+- **Solo download ZIP**: puoi scaricare il progetto come file ZIP. L'esportazione di GitHub non è ancora disponibile per i progetti Android.
 
-## 後續步驟
+## Passaggi successivi
 
-- [在 Google AI Studio 中建構應用程式](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=zh-tw)
-- [開發全端應用程式](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=zh-tw) (網頁)
-- 請參閱[應用程式庫](https://aistudio.google.com/apps?source=showcase&hl=zh-tw)中的範例。
+- [Crea app in Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=it)
+- [Sviluppo di app full-stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=it) (web)
+- Consulta gli esempi nella [Galleria app](https://aistudio.google.com/apps?source=showcase&hl=it).
 
-提供意見
+Invia feedback
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-上次更新時間：2026-08-19 (世界標準時間)。
+Ultimo aggiornamento 2026-08-19 UTC.
 
-想進一步說明嗎？
+Vuoi dirci altro?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-08-19 (世界標準時間)。"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-08-19 UTC."],[],[]]

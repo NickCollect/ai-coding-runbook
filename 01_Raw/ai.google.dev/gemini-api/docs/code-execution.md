@@ -1,30 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/code-execution?hl=pl
-fetched_at: 2026-08-31T06:43:29.625970+00:00
-title: "Wykonanie kodu \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/code-execution?hl=ja
+fetched_at: 2026-09-07T05:46:41.534033+00:00
+title: "\u30b3\u30fc\u30c9\u306e\u5b9f\u884c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Prześlij opinię
+フィードバックを送信
 
-# Wykonanie kodu
+# コードの実行
 
-Interfejs Gemini API udostępnia narzędzie do wykonywania kodu, które umożliwia modelowi generowanie i uruchamianie kodu Pythona. Model może się uczyć iteracyjnie na podstawie wyników wykonywania kodu, aż uzyska ostateczne dane wyjściowe. Za pomocą wykonywania kodu możesz tworzyć aplikacje, które korzystają z wnioskowania opartego na kodzie. Możesz na przykład używać wykonywania kodu do rozwiązywania równań lub przetwarzania tekstu. Możesz też używać [bibliotek](#supported-libraries) zawartych w środowisku wykonywania kodu do wykonywania bardziej specjalistycznych zadań.
+Gemini API は、モデルが Python コードを生成して実行できるコード実行ツールを提供します。モデルは、最終的な出力に到達するまで、コード実行の結果から反復的に学習できます。コード実行を使用して、コードベースの推論を活用するアプリケーションを構築できます。たとえば、コード実行を使用して方程式を解いたり、テキストを処理したりできます。コード実行環境に含まれている[ライブラリ](#supported-libraries)を使用して、より専門的なタスクを実行することもできます。
 
-Gemini może wykonywać kod tylko w Pythonie. Nadal możesz poprosić Gemini o wygenerowanie kodu w innym języku, ale model nie może użyć narzędzia do wykonywania kodu, aby go uruchomić.
+Gemini は Python でのみコードを実行できます。Gemini に別の言語でコードを生成するようリクエストすることはできますが、モデルはコード実行ツールを使用してコードを実行できません。
 
-## Włączanie wykonywania kodu
+## コード実行を有効にする
 
-Aby włączyć wykonywanie kodu, skonfiguruj narzędzie do wykonywania kodu w modelu. Dzięki temu model może generować i uruchamiać kod.
+コード実行を有効にするには、モデルでコード実行ツールを構成します。これにより、モデルはコードを生成して実行できるようになります。
 
 ### Python
 
@@ -93,7 +93,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Dane wyjściowe mogą wyglądać mniej więcej tak jak poniżej. Zostały one sformatowane w celu zwiększenia czytelności:
+出力は次のようになります（読みやすくするために書式設定されています）。
 
 ```
 Okay, I need to calculate the sum of the first 50 prime numbers. Here's how I'll
@@ -142,29 +142,25 @@ sum_of_primes=5117
 The sum of the first 50 prime numbers is 5117.
 ```
 
-Te dane wyjściowe łączą kilka części treści, które model zwraca podczas wykonywania kodu:
+この出力は、コード実行時にモデルが返す複数のコンテンツ部分を組み合わせたものです。
 
-- `text`: tekst wstawiony wygenerowany przez model
-- `code_execution_call`: kod wygenerowany przez model, który ma zostać wykonany
-- `code_execution_result`: wynik wykonania kodu
+- `text`: モデルによって生成されたインライン テキスト
+- `code_execution_call`: 実行されることを目的とし、モデルによって生成されたコード
+- `code_execution_result`: 実行可能コードの結果
 
-## Wykonywanie kodu z obrazami (Gemini 3)
+## 画像を使用したコード実行（Gemini 3）
 
-Model Gemini 3 Flash może teraz pisać i wykonywać kod Pythona, aby aktywnie manipulować obrazami i je analizować.
+Gemini 3 Flash モデルは、Python コードを記述して実行し、画像をアクティブに操作して検査できるようになりました。
 
-**Przypadki użycia**
+**ユースケース**
 
-- **Powiększanie i sprawdzanie**: model niejawnie wykrywa, kiedy szczegóły są zbyt małe
-  (np. odczytywanie odległego wskaźnika), i pisze kod, aby przyciąć i ponownie sprawdzić obszar
-  w wyższej rozdzielczości.
-- **Matematyka wizualna**: model może wykonywać obliczenia wieloetapowe za pomocą kodu (np.
-  sumowanie pozycji na paragonie).
-- **Adnotacje do obrazów**: model może dodawać adnotacje do obrazów, aby odpowiadać na pytania, np.
-  rysować strzałki wskazujące relacje.
+- **ズームして検査する**: モデルは、詳細が小さすぎる場合（遠くのゲージを読み取るなど）を暗黙的に検出し、コードを記述して領域を切り抜き、高解像度で再検査します。
+- **ビジュアル数学**: モデルは、コードを使用して複数ステップの計算を実行できます（領収書の明細項目の合計など）。
+- **画像アノテーション**: モデルは、画像にアノテーションを付けて質問に回答できます。たとえば、矢印を描画して関係を示すことができます。
 
-## Włączanie wykonywania kodu z obrazami
+## 画像でコード実行を有効にする
 
-Wykonywanie kodu z obrazami jest oficjalnie obsługiwane w Gemini 3 Flash. Możesz aktywować to działanie, włączając zarówno wykonywanie kodu jako narzędzie, jak i myślenie.
+画像を使用したコード実行は、Gemini 3 Flash で正式にサポートされています。この動作を有効にするには、ツールとしてのコード実行と思考の両方を有効にします。
 
 ### Python
 
@@ -286,9 +282,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -d @payload.json
 ```
 
-## Używanie wykonywania kodu w interakcjach wieloetapowych
+## マルチターン インタラクションでコード実行を使用する
 
-Wykonywanie kodu możesz też używać w ramach rozmowy wieloetapowej za pomocą parametru `previous_interaction_id`.
+`previous_interaction_id` を使用して、マルチターン会話の一部としてコード実行を使用することもできます。
 
 ### Python
 
@@ -387,82 +383,72 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Wejście/wyjście (I/O)
+## 入出力（I/O）
 
-W obecnych modelach Gemini, takich jak
-[Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#gemini-3.6-flash), wykonywanie kodu
-obsługuje wejście pliku i wyjście wykresu. Dzięki tym możliwościom wejścia i wyjścia
-możesz przesyłać pliki CSV i tekstowe, zadawać pytania dotyczące tych
-plików oraz generować wykresy [Matplotlib](https://matplotlib.org/) w ramach
-odpowiedzi. Pliki wyjściowe są zwracane jako obrazy wstawione w odpowiedzi.
+[Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja#gemini-3.6-flash) などの現在の Gemini モデルでは、コード実行でファイル入力とグラフ出力がサポートされています。これらの入出力機能を使用すると、CSV ファイルとテキスト ファイルをアップロードし、ファイルに関する質問をしたり、回答の一部として [Matplotlib](https://matplotlib.org/) グラフを生成したりできます。出力ファイルは、レスポンスでインライン画像として返されます。
 
-### Ceny operacji wejścia/wyjścia
+### I/O の料金
 
-Gdy używasz operacji wejścia/wyjścia wykonywania kodu, opłaty są naliczane za tokeny wejściowe i wyjściowe:
+コード実行 I/O を使用すると、入力トークンと出力トークンに対して課金されます。
 
-**Tokeny wejściowe:**
+**入力トークン:**
 
-- Prompt użytkownika
+- ユーザーによるプロンプト
 
-**Tokeny wyjściowe:**
+**出力トークン:**
 
-- Kod wygenerowany przez model
-- Dane wyjściowe wykonywania kodu w środowisku kodu
-- Tokeny myślenia
-- Podsumowanie wygenerowane przez model
+- モデルによって生成されたコード
+- コード環境でのコード実行の出力
+- 思考トークン
+- モデルによって生成された要約
 
-### Szczegóły operacji wejścia/wyjścia
+### I/O の詳細
 
-Podczas pracy z operacjami wejścia/wyjścia wykonywania kodu pamiętaj o tych szczegółach technicznych:
+コード実行 I/O を使用する場合は、次の技術的な詳細に注意してください。
 
-- Maksymalny czas działania środowiska kodu to 30 sekund.
-- Jeśli środowisko kodu wygeneruje błąd, model może zdecydować się na ponowne wygenerowanie danych wyjściowych kodu. Może się to zdarzyć maksymalnie 5 razy.
-- Maksymalny rozmiar pliku wejściowego jest ograniczony przez okno tokena modelu. Jeśli prześlesz plik, który przekracza maksymalne okno kontekstu modelu, interfejs API zwróci błąd.
-- Wykonywanie kodu najlepiej sprawdza się w przypadku plików tekstowych i CSV.
-- Plik wejściowy można przekazać jako dane wstawione lub przesłać za pomocą interfejsu
-  [Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl),
-  a plik wyjściowy jest zawsze zwracany jako dane wstawione.
+- コード環境の最大ランタイムは 30 秒です。
+- コード環境でエラーが発生した場合、モデルはコード出力を再生成する可能性があります。この操作は最大 5 回まで行うことができます。
+- ファイル入力の最大サイズは、モデルのトークン ウィンドウによって制限されます。モデルの最大コンテキスト ウィンドウを超えるファイルをアップロードすると、API はエラーを返します。
+- コード実行は、テキスト ファイルと CSV ファイルで最適に動作します。
+- 入力ファイルはインライン データとして渡すか、[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja) を使用してアップロードできます。出力ファイルは常にインライン データとして返されます。
 
-## Płatności
+## 課金
 
-Włączenie wykonywania kodu z interfejsu Gemini API nie wiąże się z żadnymi dodatkowymi opłatami.
-Opłaty będą naliczane według aktualnej stawki za tokeny wejściowe i wyjściowe na podstawie używanego modelu Gemini.
+Gemini API からのコード実行を有効にしても、追加料金は発生しません。使用している Gemini モデルに基づいて、入力トークンと出力トークンの現在のレートで課金されます。
 
-Oto kilka dodatkowych informacji o płatnościach za wykonywanie kodu:
+コード実行の課金に関するその他の注意事項は次のとおりです。
 
-- Opłata jest naliczana tylko raz za tokeny wejściowe przekazywane do modelu oraz za tokeny wyjściowe zwracane przez model.
-- Tokeny reprezentujące wygenerowany kod są liczone jako tokeny wyjściowe. Wygenerowany kod może zawierać tekst i dane wyjściowe multimodalne, takie jak obrazy.
-- Wyniki wykonywania kodu są również liczone jako tokeny wyjściowe.
+- モデルに渡す入力トークンに対しては一度だけ課金され、モデルから返された最終出力トークンに対して課金されます。
+- 生成されたコードを表すトークンは、出力トークンとしてカウントされます。生成されたコードには、テキストとマルチモーダル出力（画像など）を含めることができます。
+- コード実行の結果も出力トークンとしてカウントされます。
 
-Model płatności jest przedstawiony na tym diagramie:
+次の図に課金モデルを示します。
 
-![model rozliczeniowy wykonania kodu,](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=pl)
+![コード実行の課金モデル](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=ja)
 
-- Opłaty będą naliczane według aktualnej stawki za tokeny wejściowe i wyjściowe na podstawie używanego modelu Gemini.
-- Jeśli Gemini używa wykonywania kodu podczas generowania odpowiedzi, oryginalny prompt, wygenerowany kod i wynik wykonania kodu są oznaczane jako *tokeny pośrednie* i rozliczane jako *tokeny wejściowe*.
-- Następnie Gemini generuje podsumowanie i zwraca wygenerowany kod, wynik wykonania kodu oraz podsumowanie końcowe. Są one rozliczane jako *tokeny wyjściowe*.
-- Interfejs Gemini API zawiera w odpowiedzi API liczbę tokenów pośrednich, dzięki czemu wiesz, dlaczego otrzymujesz dodatkowe tokeny wejściowe poza początkowym promptem.
+- 使用している Gemini モデルに基づいて、入力トークンと出力トークンの現在のレートで課金されます。
+- Gemini がレスポンスの生成時にコード実行を使用する場合、元のプロンプト、生成されたコード、実行されたコードの結果には*中間トークン*というラベルが付けられ、*入力トークン*として課金されます。
+- Gemini は次に要約を生成し、生成されたコード、実行されたコードの結果、最終的な要約を返します。これらは*出力トークン*として課金されます。
+- Gemini API の API レスポンスには中間トークン数が含まれるため、最初のプロンプト以外の追加の入力トークンを取得する理由を把握できます。
 
-## Ograniczenia
+## 制限事項
 
-- Model może tylko generować i wykonywać kod. Nie może zwracać innych artefaktów, takich jak pliki multimedialne.
-- W niektórych przypadkach włączenie wykonywania kodu może prowadzić do regresji w innych obszarach danych wyjściowych modelu (np. pisania opowieści).
-- Różne modele mają różną zdolność do skutecznego wykonywania kodu.
+- モデルはコードの生成と実行のみが可能です。メディア ファイルなど、他のアーティファクトを返すことはできません。
+- コード実行を有効にすると、モデル出力の他の領域（ストーリーの作成など）で回帰が発生することがあります。
+- モデルによって、コード実行を成功させる能力にばらつきがあります。
 
-## Obsługiwane kombinacje narzędzi
+## サポートされているツールの組み合わせ
 
-Narzędzie do wykonywania kodu można łączyć z
-[powiązaniem ze źródłami informacji przy użyciu wyszukiwarki Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pl), aby
-obsługiwać bardziej złożone przypadki użycia.
+コード実行ツールは、[Google 検索によるグラウンディング](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)と組み合わせて、より複雑なユースケースに対応できます。
 
-Modele Gemini 3 obsługują łączenie wbudowanych narzędzi (takich jak wykonywanie kodu) z narzędziami niestandardowymi (wywoływanie funkcji).
+Gemini 3 モデルは、組み込みツール（コード実行など）とカスタムツール（関数呼び出し）の組み合わせをサポートしています。
 
-## Obsługiwane biblioteki
+## サポートされているライブラリ
 
-Środowisko wykonywania kodu zawiera te biblioteki:
+コード実行環境には、次のライブラリが含まれています。
 
 - attrs
-- szachy
+- チェス
 - contourpy
 - fpdf
 - geopandas
@@ -477,9 +463,9 @@ Modele Gemini 3 obsługują łączenie wbudowanych narzędzi (takich jak wykonyw
 - numpy
 - opencv-python
 - openpyxl
-- przygotowywanie pakietów
-- pandy
-- poduszka
+- パッケージ化
+- pandas
+- pillow
 - protobuf
 - pylatex
 - pyparsing
@@ -491,7 +477,7 @@ Modele Gemini 3 obsługują łączenie wbudowanych narzędzi (takich jak wykonyw
 - scikit-learn
 - scipy
 - seaborn
-- sześć
+- six
 - striprtf
 - sympy
 - tabulate
@@ -499,21 +485,21 @@ Modele Gemini 3 obsługują łączenie wbudowanych narzędzi (takich jak wykonyw
 - toolz
 - xlrd
 
-Nie możesz instalować własnych bibliotek.
+独自のライブラリをインストールすることはできません。
 
-## Co dalej?
+## 次のステップ
 
-- Wypróbuj przewodnik [Krótkie wprowadzenie do interfejsu Interactions API](https://ai.google.dev/gemini-api/docs/quickstart?hl=pl).
-- Dowiedz się więcej o innych narzędziach interfejsu Gemini API:
-  - [Wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl)
-  - [Powiązanie ze źródłami informacji przy użyciu wyszukiwarki Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pl)
+- [Interactions API クイックスタート](https://ai.google.dev/gemini-api/docs/quickstart?hl=ja)をお試しください。
+- 他の Gemini API ツールについて学習します。
+  - [関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)
+  - [Google 検索によるグラウンディング](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)
 
-Prześlij opinię
+フィードバックを送信
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Ostatnia aktualizacja: 2026-07-30 UTC.
+最終更新日 2026-07-30 UTC。
 
-Chcesz przekazać coś jeszcze?
+ご意見をお聞かせください
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-30 UTC。"],[],[]]

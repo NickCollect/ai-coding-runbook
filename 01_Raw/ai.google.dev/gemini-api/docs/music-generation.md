@@ -1,38 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/music-generation?hl=th
-fetched_at: 2026-08-31T06:42:50.941665+00:00
-title: "\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e40\u0e1e\u0e25\u0e07\u0e14\u0e49\u0e27\u0e22 Lyria 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/music-generation?hl=pl
+fetched_at: 2026-09-07T05:47:31.123093+00:00
+title: "Generowanie muzyki za pomoc\u0105 Lyrii\u00a03.5 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-ส่งความคิดเห็น
+Prześlij opinię
 
-# สร้างเพลงด้วย Lyria 3
+# Generowanie muzyki za pomocą Lyrii 3.5
 
-Lyria 3 เป็นกลุ่มโมเดลการสร้างเพลงของ Google ซึ่งพร้อมให้บริการผ่าน Gemini API Lyria 3 ช่วยให้คุณสร้างเสียงสเตอริโอคุณภาพสูง 44.1 kHz จากพรอมต์ข้อความหรือจากรูปภาพได้ โมเดลเหล่านี้ให้ความสอดคล้องเชิงโครงสร้าง ซึ่งรวมถึงเสียงร้อง เนื้อเพลงที่กำหนดเวลา และดนตรีบรรเลงแบบเต็ม
+Lyria 3.5 to rodzina modeli generowania muzyki od Google, które są dostępne za pomocą Gemini API. Dzięki Lyrii 3.5 możesz generować wysokiej jakości dźwięk stereo o częstotliwości 44,1 kHz na podstawie promptów tekstowych lub obrazów. Modele te zapewniają spójność strukturalną, w tym wokal, zsynchronizowany tekst i pełne aranżacje instrumentalne.
 
-กลุ่ม Lyria 3 มี 2 โมเดล ได้แก่
+Rodzina modeli Lyria obejmuje te modele:
 
-| รุ่น | รหัสโมเดล | เหมาะสำหรับ | ระยะเวลา | เอาต์พุต |
+| Model | Identyfikator modelu | Urządzenia | Czas trwania | Wyniki |
 | --- | --- | --- | --- | --- |
-| **Lyria 3 Clip** | `lyria-3-clip-preview` | คลิปสั้น ลูป ตัวอย่าง | 30 วินาที | MP3 |
-| **Lyria 3 Pro** | `lyria-3-pro-preview` | เพลงแบบเต็มความยาวที่มีท่อน Verse, Chorus และ Bridge | 2-3 นาที (ควบคุมได้โดยใช้พรอมต์) | MP3 |
+| **Lyria 3 Clip** | `lyria-3-clip-preview` | Krótkie klipy, pętle, zapowiedzi | 30 sekund | MP3 |
+| **Lyria 3.5** | `lyria-3.5` | Pełne utwory ze zwrotkami, refrenami i przejściami | Kilka minut (można kontrolować za pomocą prompta) | MP3 |
 
-คุณสามารถใช้โมเดลทั้ง 2 ได้โดยใช้
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) ใหม่ ซึ่งรองรับอินพุตหลายรูปแบบ (ข้อความและรูปภาพ) และสร้างเสียง **สเตอริโอความสมจริงสูง 44.1 kHz**
+Oba modele można używać za pomocą nowego
+[interfejsu Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl), który obsługuje dane wejściowe multimodalne (tekst i obrazy) i generuje dźwięk **stereo o wysokiej jakości i częstotliwości 44,1 kHz**
+.
 
-## สร้างคลิปเพลง
+## Generowanie klipu muzycznego
 
-โมเดล Lyria 3 Clip จะสร้างคลิปความยาว **30 วินาที** เสมอ หากต้องการสร้างคลิป ให้เรียกใช้เมธอด `interactions.create` ด้วยพรอมต์ข้อความ การตอบกลับจะมีเนื้อเพลงและโครงสร้างเพลงที่สร้างขึ้นเสมอ รวมถึงเสียงในสคีมา `steps`
+Model Lyria 3 Clip zawsze generuje **30-sekundowy** klip. Aby wygenerować klip, wywołaj metodę `interactions.create` z promptem tekstowym. Odpowiedź zawsze zawiera wygenerowany tekst i strukturę utworu wraz z dźwiękiem w schemacie `steps`.
 
 ### Python
 
@@ -81,6 +82,33 @@ if (lyrics) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseModality;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("lyria-3-generate-001"))
+        .responseModalities(Arrays.asList(ResponseModality.AUDIO))
+        .input(InteractionsInput.of("Upbeat electronic synthwave track"))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println("Audio generated: " + interaction.outputAudio().isPresent());
+```
+
 ### REST
 
 ```
@@ -93,20 +121,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-คุณสามารถดึงข้อมูลเพลงที่สร้างขึ้นได้โดยใช้พร็อพเพอร์ตี้ `interaction.output_audio` ซึ่งจะแสดงผลบล็อกเสียงที่สร้างขึ้นล่าสุด นอกจากนี้ คุณยังดึงเนื้อเพลงและโครงสร้างของเพลงได้โดยใช้พร็อพเพอร์ตี้ `interaction.output_text` ดูรายละเอียดเกี่ยวกับพร็อพเพอร์ตี้ที่สะดวกได้ที่
-[ภาพรวมของ Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th#convenience-properties)
+Wygenerowane dane muzyczne możesz pobrać za pomocą właściwości `interaction.output_audio`, która zwraca ostatni wygenerowany blok audio. Możesz też pobrać tekst i strukturę utworu za pomocą właściwości `interaction.output_text`. Więcej informacji o właściwościach ułatwiających pracę znajdziesz w artykule
+[Omówienie interfejsu Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl#convenience-properties).
 
-## สร้างเพลงแบบเต็มความยาว
+## Generowanie pełnego utworu
 
-ใช้โมเดล `lyria-3-pro-preview` เพื่อสร้างเพลงแบบเต็มความยาวที่ใช้เวลา 2-3 นาที โมเดล Pro เข้าใจโครงสร้างเพลงและสามารถสร้างเพลงที่มีท่อน Verse, Chorus และ Bridge ที่แตกต่างกันได้ คุณสามารถกำหนด
-ระยะเวลาได้โดยระบุในพรอมต์ (เช่น "สร้างเพลงความยาว 2 นาที") หรือ
-ใช้ [การประทับเวลา](#timing) เพื่อกำหนดโครงสร้าง
+Użyj modelu `lyria-3.5`, aby generować pełne utwory trwające kilka minut. Model Pro rozumie strukturę muzyczną i może tworzyć kompozycje z wyraźnymi zwrotkami, refrenami i przejściami. Możesz wpływać na
+czas trwania, określając go w prompcie (np. "utwórz 2-minutowy utwór") lub
+używając [sygnatur czasowych](#timing) do zdefiniowania struktury.
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="lyria-3-pro-preview",
+    model="lyria-3.5",
     input="An epic cinematic orchestral piece about a journey home. Starts with a solo piano intro, builds through sweeping strings, and climaxes with a massive wall of sound.",
 )
 ```
@@ -115,9 +143,36 @@ interaction = client.interactions.create(
 
 ```
 const interaction = await client.interactions.create({
-    model: 'lyria-3-pro-preview',
+    model: 'lyria-3.5',
     input: 'A beautiful piano melody.',
 });
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseModality;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("lyria-3-generate-001"))
+        .responseModalities(Arrays.asList(ResponseModality.AUDIO))
+        .input(InteractionsInput.of("Upbeat electronic synthwave track"))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println("Audio generated: " + interaction.outputAudio().isPresent());
 ```
 
 ### REST
@@ -127,20 +182,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "lyria-3-pro-preview",
+    "model": "lyria-3.5",
     "input": "A beautiful piano melody."
 }'
 ```
 
-## เลือกรูปแบบเอาต์พุต
+## Wybieranie formatu wyjściowego
 
-โดยค่าเริ่มต้น โมเดล Lyria 3 จะสร้างเสียงในรูปแบบ **MP3** สำหรับ Lyria 3 Pro คุณยังขอเอาต์พุตในรูปแบบ **WAV** ได้ด้วยโดยตั้งค่า `response_format`
+Domyślnie modele Lyria 3.5 generują dźwięk w formacie **MP3**. W przypadku Lyrii 3.5 możesz też poprosić o dane wyjściowe w formacie **WAV**, ustawiając `response_format`.
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="lyria-3-pro-preview",
+    model="lyria-3.5",
     input="A beautiful piano melody.",
     response_format={"type": "audio"},
 )
@@ -150,12 +205,39 @@ interaction = client.interactions.create(
 
 ```
 const interaction = await client.interactions.create({
-    model: 'lyria-3-pro-preview',
+    model: 'lyria-3.5',
     input: 'A beautiful piano melody.',
     response_format: {
         type: 'audio',
     },
 });
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseModality;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("lyria-3-generate-001"))
+        .responseModalities(Arrays.asList(ResponseModality.AUDIO))
+        .input(InteractionsInput.of("Upbeat electronic synthwave track"))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println("Audio generated: " + interaction.outputAudio().isPresent());
 ```
 
 ### REST
@@ -165,7 +247,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "lyria-3-pro-preview",
+    "model": "lyria-3.5",
     "input": "A beautiful piano melody.",
     "response_format": {
         "type": "audio"
@@ -173,12 +255,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## แยกวิเคราะห์การตอบกลับ
+## Parsowanie odpowiedzi
 
-การตอบกลับจาก Lyria 3 มีบล็อกเนื้อหาหลายรายการภายในสคีมา `steps`
-Interactions จะแสดงผลลำดับขั้นตอน โดยขั้นตอน `model_output` จะมีเนื้อหาที่สร้างขึ้น
-บล็อกเนื้อหาข้อความจะมีเนื้อเพลงที่สร้างขึ้นหรือคำอธิบายโครงสร้างเพลงในรูปแบบ JSON
-บล็อกเนื้อหาที่มีประเภท `audio` จะมีข้อมูลเสียงที่เข้ารหัสแบบ Base64
+Odpowiedź z Lyrii 3.5 zawiera wiele bloków treści w schemacie `steps`.
+Interfejs Interactions API zwraca sekwencję kroków, w których kroki `model_output` zawierają wygenerowaną treść.
+Bloki treści tekstowej zawierają wygenerowany tekst lub opis struktury utworu w formacie JSON.
+Bloki treści typu `audio` zawierają dane audio zakodowane w formacie base64.
 
 ### Python
 
@@ -213,6 +295,33 @@ if (lyrics) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseModality;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("lyria-3-generate-001"))
+        .responseModalities(Arrays.asList(ResponseModality.AUDIO))
+        .input(InteractionsInput.of("Upbeat electronic synthwave track"))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println("Audio generated: " + interaction.outputAudio().isPresent());
+```
+
 ### REST
 
 ```
@@ -222,11 +331,11 @@ if (lyrics) {
 curl ... | jq -r '.steps[] | select(.type=="model_output") | .content[] | select(.type=="audio") | .data' | base64 -d > output.mp3
 ```
 
-#### เนื้อเพลงและเพลงที่สลับกัน
+#### Przeplatany tekst i muzyka
 
-เนื่องจากเอาต์พุตจาก Lyria 3 มีความซับซ้อน โดยมีขั้นตอนและบล็อกแยกกันสำหรับเนื้อเพลง (ข้อความ) และเพลงเอง (เสียง) พร็อพเพอร์ตี้ที่สะดวกจึงเป็นทางลัดที่รวดเร็วและแนะนำ
+Ponieważ dane wyjściowe z Lyrii 3.5 są złożone – zawierają oddzielne kroki i bloki wygenerowanego tekstu (tekst) i samego utworu (dźwięk) – właściwości ułatwiające pracę oferują szybki i zalecany skrót.
 
-อย่างไรก็ตาม หากต้องการควบคุมไทม์ไลน์แบบดิบของขั้นตอนที่เซิร์ฟเวอร์แสดงผลแบบเป็นโปรแกรมอย่างเต็มรูปแบบ (เช่น การบันทึกบล็อกเนื้อหาแต่ละรายการเมื่อได้รับ) คุณสามารถวนซ้ำ `steps` ด้วยตนเองแทนได้ ดังนี้
+Jeśli jednak chcesz mieć pełną, programową kontrolę nad surową osią czasu kroków zwracanych przez serwer (np. rejestrować poszczególne bloki treści w miarę ich otrzymywania), możesz ręcznie iterować po `steps`:
 
 ### Python
 
@@ -277,9 +386,36 @@ if (audioData) {
 }
 ```
 
-## สร้างเพลงจากรูปภาพ
+### Java
 
-Lyria 3 รองรับอินพุตหลายรูปแบบ โดยคุณสามารถใส่รูปภาพได้สูงสุด **10 รูป** พร้อมกับพรอมต์ข้อความในรายการ `input` แล้วโมเดลจะแต่งเพลงที่ได้รับแรงบันดาลใจจากเนื้อหาภาพ
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseModality;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("lyria-3-generate-001"))
+        .responseModalities(Arrays.asList(ResponseModality.AUDIO))
+        .input(InteractionsInput.of("Upbeat electronic synthwave track"))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println("Audio generated: " + interaction.outputAudio().isPresent());
+```
+
+## Generowanie muzyki na podstawie obrazów
+
+Lyria 3.5 obsługuje dane wejściowe multimodalne – w liście `input` możesz podać do **10 obrazów** wraz z promptem tekstowym, a model skomponuje muzykę inspirowaną treściami wizualnymi.
 
 ### Python
 
@@ -291,7 +427,7 @@ with open("desert_sunset.jpg", "rb") as f:
     image_b64 = base64.b64encode(image_bytes).decode("utf-8")
 
 response = client.interactions.create(
-    model="lyria-3-pro-preview",
+    model="lyria-3.5",
     input=[
         {
             "type": "text",
@@ -314,7 +450,7 @@ import * as fs from "fs";
 const imageBytes = fs.readFileSync("desert_sunset.jpg").toString("base64");
 
 const interaction = await client.interactions.create({
-    model: "lyria-3-pro-preview",
+    model: "lyria-3.5",
     input: [
         {
             type: "text",
@@ -329,6 +465,33 @@ const interaction = await client.interactions.create({
 });
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseModality;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("lyria-3-generate-001"))
+        .responseModalities(Arrays.asList(ResponseModality.AUDIO))
+        .input(InteractionsInput.of("Upbeat electronic synthwave track"))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println("Audio generated: " + interaction.outputAudio().isPresent());
+```
+
 ### REST
 
 ```
@@ -337,7 +500,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "lyria-3-pro-preview",
+    "model": "lyria-3.5",
     "input": [
       {"type": "text", "text": "An atmospheric ambient track inspired by the mood and colors in this image."},
       {"type": "image", "mime_type": "image/jpeg", "data": "/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////wgALCAABAAEBAREA/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/aAAgBAQABPxA="}
@@ -345,9 +508,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## ใส่เนื้อเพลงที่กำหนดเอง
+## Podawanie własnego tekstu
 
-คุณสามารถเขียนเนื้อเพลงของคุณเองและใส่ไว้ในพรอมต์ได้ ใช้แท็กส่วนต่างๆ เช่น `[Verse]`, `[Chorus]` และ `[Bridge]` เพื่อช่วยให้โมเดลเข้าใจโครงสร้างเพลง
+Możesz napisać własny tekst i umieścić go w prompcie. Używaj tagów sekcji, takich jak `[Verse]`, `[Chorus]` i `[Bridge]`, aby pomóc modelowi zrozumieć strukturę utworu:
 
 ### Python
 
@@ -375,7 +538,7 @@ dancing through the autumn leaves.
 """
 
 interaction = client.interactions.create(
-    model="lyria-3-pro-preview",
+    model="lyria-3.5",
     input=prompt,
 )
 ```
@@ -406,9 +569,36 @@ dancing through the autumn leaves.
 `;
 
 const interaction = await client.interactions.create({
-    model: 'lyria-3-pro-preview',
+    model: 'lyria-3.5',
     input: prompt,
 });
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseModality;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("lyria-3-generate-001"))
+        .responseModalities(Arrays.asList(ResponseModality.AUDIO))
+        .input(InteractionsInput.of("Upbeat electronic synthwave track"))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println("Audio generated: " + interaction.outputAudio().isPresent());
 ```
 
 ### REST
@@ -418,14 +608,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "lyria-3-pro-preview",
+    "model": "lyria-3.5",
     "input": "Create a dreamy indie pop song with the following lyrics: ..."
   }'
 ```
 
-## ควบคุมเวลาและโครงสร้าง
+## Kontrolowanie czasu i struktury
 
-คุณสามารถระบุสิ่งที่เกิดขึ้นในบางช่วงเวลาของเพลงได้อย่างแม่นยำโดยใช้การประทับเวลา ซึ่งมีประโยชน์สำหรับการควบคุมเวลาที่เครื่องดนตรีเริ่มเล่น เวลาที่เนื้อเพลงเริ่มร้อง และความคืบหน้าของเพลง
+Za pomocą sygnatur czasowych możesz dokładnie określić, co ma się dziać w określonych momentach utworu. Jest to przydatne do kontrolowania, kiedy instrumenty wchodzą, kiedy tekst jest odtwarzany i jak utwór się rozwija:
 
 ### Python
 
@@ -441,7 +631,7 @@ prompt = """
 """
 
 interaction = client.interactions.create(
-    model="lyria-3-pro-preview",
+    model="lyria-3.5",
     input=prompt,
 )
 ```
@@ -460,9 +650,36 @@ const prompt = `
 `;
 
 const interaction = await client.interactions.create({
-    model: 'lyria-3-pro-preview',
+    model: 'lyria-3.5',
     input: prompt,
 });
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseModality;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("lyria-3-generate-001"))
+        .responseModalities(Arrays.asList(ResponseModality.AUDIO))
+        .input(InteractionsInput.of("Upbeat electronic synthwave track"))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println("Audio generated: " + interaction.outputAudio().isPresent());
 ```
 
 ### REST
@@ -472,14 +689,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "lyria-3-pro-preview",
+    "model": "lyria-3.5",
     "input": "[0:00 - 0:10] Intro: ..."
   }'
 ```
 
-## สร้างแทร็กดนตรีบรรเลง
+## Generowanie ścieżek instrumentalnych
 
-สำหรับเพลงประกอบ เกม หรือกรณีการใช้งานที่ไม่จำเป็นต้องมีเสียงร้อง คุณสามารถแจ้งให้โมเดลสร้างแทร็กดนตรีบรรเลงเท่านั้นได้
+W przypadku muzyki w tle, ścieżek dźwiękowych do gier lub innych zastosowań, w których nie jest wymagany wokal, możesz poprosić model o wygenerowanie ścieżek instrumentalnych:
 
 ### Python
 
@@ -499,6 +716,33 @@ const interaction = await client.interactions.create({
 });
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseModality;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("lyria-3-generate-001"))
+        .responseModalities(Arrays.asList(ResponseModality.AUDIO))
+        .input(InteractionsInput.of("Upbeat electronic synthwave track"))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println("Audio generated: " + interaction.outputAudio().isPresent());
+```
+
 ### REST
 
 ```
@@ -511,15 +755,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## สร้างเพลงในภาษาต่างๆ
+## Generowanie muzyki w różnych językach
 
-Lyria 3 จะสร้างเนื้อเพลงในภาษาของพรอมต์ หากต้องการสร้างเพลงที่มีเนื้อเพลงเป็นภาษาฝรั่งเศส ให้เขียนพรอมต์เป็นภาษาฝรั่งเศส โมเดลจะปรับสไตล์การร้องและการออกเสียงให้เข้ากับภาษา
+Lyria 3.5 generuje tekst w języku prompta. Aby wygenerować utwór z tekstem w języku francuskim, napisz prompt w tym języku. Model dostosowuje styl wokalny i wymowę do języka.
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="lyria-3-pro-preview",
+    model="lyria-3.5",
     input="Crée une chanson pop romantique en français sur un coucher de soleil à Paris. Utilise du piano et de la guitare acoustique.",
 )
 ```
@@ -528,9 +772,36 @@ interaction = client.interactions.create(
 
 ```
 const interaction = await client.interactions.create({
-    model: 'lyria-3-pro-preview',
+    model: 'lyria-3.5',
     input: 'Crée une chanson pop romantique en français sur un coucher de soleil à Paris. Utilise du piano et de la guitare acoustique.',
 });
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseModality;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("lyria-3-generate-001"))
+        .responseModalities(Arrays.asList(ResponseModality.AUDIO))
+        .input(InteractionsInput.of("Upbeat electronic synthwave track"))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println("Audio generated: " + interaction.outputAudio().isPresent());
 ```
 
 ### REST
@@ -540,35 +811,35 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "lyria-3-pro-preview",
+    "model": "lyria-3.5",
     "input": "Crée une chanson pop romantique en français sur un coucher de soleil à Paris. Utilise du piano et de la guitare acoustique."
   }'
 ```
 
-## ความสามารถของโมเดล
+## Inteligencja modelu
 
-Lyria 3 จะวิเคราะห์กระบวนการพรอมต์ที่โมเดลใช้เหตุผลผ่านโครงสร้างเพลง (Intro, Verse, Chorus, Bridge ฯลฯ) ตามพรอมต์ของคุณ
-กระบวนการนี้จะเกิดขึ้นก่อนที่จะสร้างเสียง และช่วยให้มั่นใจได้ถึงความสอดคล้องเชิงโครงสร้างและความเป็นเพลง
+Lyria 3.5 analizuje proces prompta, w którym model wnioskuje na podstawie prompta o strukturze muzycznej (intro, zwrotka, refren, przejście itp.).
+Dzieje się to przed wygenerowaniem dźwięku i zapewnia spójność strukturalną oraz muzykalność.
 
-## คำแนะนำในการเขียนพรอมต์
+## Przewodnik po promptach
 
-พรอมต์ที่เฉพาะเจาะจงมากขึ้นจะให้ผลลัพธ์ที่ดีขึ้น สิ่งที่คุณใส่ได้เพื่อแนะนำการสร้างมีดังนี้
+Im bardziej szczegółowy prompt, tym lepsze wyniki. Oto, co możesz uwzględnić, aby kierować generowaniem:
 
-- **ประเภท**: ระบุประเภทหรือการผสมผสานของประเภท (เช่น "Lo-fi Hip Hop",
-  "Jazz Fusion", "Cinematic Orchestral")
-- **เครื่องดนตรี**: ระบุชื่อเครื่องดนตรี (เช่น "เปียโน Fender Rhodes",
-  "กีตาร์สไลด์", "เครื่องดรัม TR-808")
-- **BPM**: กำหนดจังหวะ (เช่น "120 BPM", "จังหวะช้าประมาณ 70 BPM")
-- **คีย์/สเกล**: ระบุคีย์เพลง (เช่น "ในคีย์ G เมเจอร์", "D ไมเนอร์")
-- **อารมณ์และบรรยากาศ**: ใช้คำคุณศัพท์เชิงพรรณนา (เช่น "คิดถึงอดีต",
-  "ดุดัน", "เหนือจริง", "ชวนฝัน")
-- **โครงสร้าง**: ใช้แท็กต่างๆ เช่น `[Verse]`, `[Chorus]`, `[Bridge]`, `[Intro]`,
-  `[Outro]` หรือการประทับเวลาเพื่อควบคุมความคืบหน้าของเพลง
-- **ระยะเวลา**: โมเดล Clip จะสร้างคลิปความยาว 30 วินาทีเสมอ สำหรับโมเดล Pro ให้ระบุความยาวที่ต้องการในพรอมต์ (เช่น "สร้างเพลงความยาว 2 นาที") หรือใช้การประทับเวลาเพื่อควบคุมระยะเวลา
+- **Gatunek**: określ gatunek lub mieszankę gatunków (np. „lo-fi hip hop”,
+  „jazz fusion”, „cinematic orchestral”).
+- **Instrumenty**: wymień konkretne instrumenty (np. "fortepian Fender Rhodes",
+  "gitara slide", "automat perkusyjny TR-808").
+- **BPM**: ustaw tempo (np. „120 BPM”, „wolne tempo około 70 BPM”).
+- **Tonacja/skala**: określ tonację muzyczną (np. „w tonacji G-dur”, „d-moll”).
+- **Nastrój i atmosfera**: używaj przymiotników opisowych (np. „nostalgiczny”,
+  „agresywny”, „etericzny”, „marzycielski”).
+- **Struktura**: używaj tagów takich jak `[Verse]`, `[Chorus]`, `[Bridge]`, `[Intro]`,
+  `[Outro]` lub sygnatur czasowych, aby kontrolować postęp utworu.
+- **Czas trwania**: model Clip zawsze generuje 30-sekundowe klipy. W przypadku modelu Pro określ zamierzoną długość w prompcie (np. „utwórz 2-minutowy utwór”) lub użyj sygnatur czasowych, aby kontrolować czas trwania.
 
-### ตัวอย่างพรอมต์
+### Przykładowe prompty
 
-ตัวอย่างพรอมต์ที่มีประสิทธิภาพมีดังนี้
+Oto kilka przykładów skutecznych promptów:
 
 - `"A 30-second lofi hip hop beat with dusty vinyl crackle, mellow Rhodes
   piano chords, a slow boom-bap drum pattern at 85 BPM, and a jazzy upright
@@ -579,43 +850,43 @@ Lyria 3 จะวิเคราะห์กระบวนการพรอม
 - `"A dark, atmospheric trap beat at 140 BPM with heavy 808 bass, eerie synth
   pads, sharp hi-hats, and a haunting vocal sample. In D minor."`
 
-## แนวทางปฏิบัติแนะนำ
+## Sprawdzone metody
 
-- **วนซ้ำด้วย Clip ก่อน** ใช้โมเดล `lyria-3-clip-preview` ที่เร็วกว่าเพื่อทดลองใช้พรอมต์ก่อนที่จะสร้างเพลงแบบเต็มความยาวด้วย `lyria-3-pro-preview`
-- **ใช้คำที่เฉพาะเจาะจง** พรอมต์ที่คลุมเครือจะให้ผลลัพธ์ทั่วไป ระบุเครื่องดนตรี BPM คีย์ อารมณ์ และโครงสร้างเพื่อให้ได้เอาต์พุตที่ดีที่สุด
-- **ใช้ภาษาที่ต้องการ** เขียนพรอมต์ในภาษาที่ต้องการให้เนื้อเพลงเป็น
-- **ใช้แท็กส่วนต่างๆ** แท็ก `[Verse]`, `[Chorus]`, `[Bridge]` จะให้โครงสร้างที่ชัดเจนแก่โมเดลเพื่อทำตาม
-- **แยกเนื้อเพลงออกจากคำแนะนำ** เมื่อใส่เนื้อเพลงที่กำหนดเอง ให้แยกเนื้อเพลงออกจากคำแนะนำเกี่ยวกับทิศทางดนตรีอย่างชัดเจน
+- **Najpierw iteruj za pomocą modelu Clip.** Użyj szybszego modelu `lyria-3-clip-preview`, aby eksperymentować z promptami, zanim zdecydujesz się na wygenerowanie pełnego utworu za pomocą modelu `lyria-3.5`.
+- **Unikaj ogólników.** Niejasne prompty dają ogólne wyniki. Aby uzyskać najlepsze wyniki, wymień instrumenty, BPM, tonację, nastrój i strukturę.
+- **Dopasuj język.** Prompt powinien być napisany w języku, w którym chcesz uzyskać tekst.
+- **Używaj tagów sekcji.** Tagi `[Verse]`, `[Chorus]` i `[Bridge]` dają modelowi jasną strukturę do naśladowania.
+- **Oddziel tekst od instrukcji.** Podczas podawania własnego tekstu wyraźnie oddziel go od instrukcji dotyczących kierunku muzycznego.
 
-## ข้อจำกัด
+## Ograniczenia
 
-- **ความปลอดภัย**: ระบบจะตรวจสอบพรอมต์ทั้งหมดด้วยตัวกรองความปลอดภัย และจะบล็อกพรอมต์ที่ทริกเกอร์ตัวกรอง ซึ่งรวมถึงพรอมต์ที่ขอเสียงร้องของศิลปินที่เฉพาะเจาะจงหรือการสร้างเนื้อเพลงที่มีลิขสิทธิ์
-- **การใส่ลายน้ำ**: เสียงทั้งหมดที่สร้างขึ้นจะมี
-  [ลายน้ำที่เป็นเสียง SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=th) เพื่อ
-  การระบุ ลายน้ำนี้หูของมนุษย์ไม่สามารถรับรู้ได้และไม่ส่งผลต่อประสบการณ์การฟัง
-- **การแก้ไขแบบผ่านการสนทนาไปมา**: การสร้างเพลงเป็นกระบวนการแบบผ่านการสนทนาไปมาครั้งเดียว
-  ระบบไม่รองรับการแก้ไขซ้ำๆ หรือการปรับแต่งคลิปที่สร้างขึ้นผ่านพรอมต์หลายรายการใน Lyria 3 เวอร์ชันปัจจุบัน
-- **ความยาว**: โมเดล Clip จะสร้างคลิปความยาว 30 วินาทีเสมอ โมเดล Pro จะสร้างเพลงที่ใช้เวลา 2-3 นาที โดยคุณสามารถกำหนดระยะเวลาที่แน่นอนได้ผ่านพรอมต์
-- **ความแน่นอน**: ผลลัพธ์อาจแตกต่างกันไประหว่างการเรียกใช้ แม้ว่าจะใช้พรอมต์เดียวกันก็ตาม
+- **Bezpieczeństwo**: wszystkie prompty są sprawdzane przez filtry bezpieczeństwa. Prompty, które aktywują filtry, zostaną zablokowane. Obejmuje to prompty, które proszą o głosy konkretnych artystów lub wygenerowanie tekstów chronionych prawem autorskim.
+- **Znaki wodne**: wszystkie wygenerowane dźwięki zawierają
+  [znak wodny audio SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=pl) do
+  identyfikacji. Ten znak wodny jest niewidoczny dla ludzkiego ucha i nie wpływa na wrażenia słuchowe.
+- **Edycja wieloetapowa**: generowanie muzyki to proces jednoetapowy.
+  W obecnej wersji Lyrii 3.5 nie jest obsługiwana iteracyjna edycja ani ulepszanie wygenerowanego klipu za pomocą wielu promptów.
+- **Długość**: model Clip zawsze generuje 30-sekundowe klipy. Model Pro generuje utwory trwające kilka minut. Na dokładny czas trwania można wpływać za pomocą prompta.
+- **Determinizm**: wyniki mogą się różnić w zależności od wywołania, nawet w przypadku tego samego prompta.
 
-## ขั้นตอนถัดไป
+## Co dalej?
 
-- ตรวจสอบ[ราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th)ของโมเดล Lyria 3
-- ลองสร้างเพลงแบบสตรีมมิงแบบ[เรียลไทม์](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=th)
-  ด้วย Lyria RealTime
-- สร้างการสนทนาแบบหลายผู้พูดด้วย
-  [โมเดล TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th)
-- ดูวิธีสร้าง[รูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)หรือ[วิดีโอ](https://ai.google.dev/gemini-api/docs/video?hl=th)
-- ดูวิธีที่ Gemini [เข้าใจไฟล์เสียง](https://ai.google.dev/gemini-api/docs/audio?hl=th)
-- สนทนาแบบเรียลไทม์กับ Gemini โดยใช้
-  [Live API](https://ai.google.dev/gemini-api/docs/live?hl=th)
+- Sprawdź [ceny](https://ai.google.dev/gemini-api/docs/pricing?hl=pl) modeli Lyria 3.5.
+- Wypróbuj [generowanie muzyki w czasie rzeczywistym](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=pl)
+  za pomocą Lyrii RealTime.
+- Generuj rozmowy z udziałem wielu osób za pomocą modeli
+  [TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl).
+- Dowiedz się, jak generować [obrazy](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl) lub [filmy](https://ai.google.dev/gemini-api/docs/video?hl=pl).
+- Dowiedz się, jak Gemini może [rozumieć pliki audio](https://ai.google.dev/gemini-api/docs/audio?hl=pl).
+- Prowadź rozmowę w czasie rzeczywistym z Gemini za pomocą interfejsu
+  [Live API](https://ai.google.dev/gemini-api/docs/live?hl=pl).
 
-ส่งความคิดเห็น
+Prześlij opinię
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-อัปเดตล่าสุด 2026-07-30 UTC
+Ostatnia aktualizacja: 2026-09-04 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Chcesz przekazać coś jeszcze?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-30 UTC"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-04 UTC."],[],[]]

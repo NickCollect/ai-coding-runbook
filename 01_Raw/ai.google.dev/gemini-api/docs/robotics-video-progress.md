@@ -1,33 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=de
-fetched_at: 2026-08-31T06:35:16.679337+00:00
-title: "Videos verstehen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=pl
+fetched_at: 2026-09-07T05:35:37.378720+00:00
+title: "Rozpoznawanie film\u00f3w \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Feedback geben
+Prześlij opinię
 
-# Videos verstehen
+# Rozpoznawanie filmów
 
-Gemini Robotics ER 2 kann den Aufgabenfortschritt anhand von kontinuierlichen Video-Feeds mit zwei Funktionen verfolgen:
+Model Gemini Robotics ER 2 może śledzić postępy zadań na podstawie ciągłych strumieni wideo dzięki 2 funkcjom:
 
-- Momenterkennung: Ermittelt den genauen Zeitstempel, an dem ein Schlüsselereignis eintritt.
-- Fortschrittsklassifizierung: Weist jedes Video einer von fünf Abschlusskategorien zu (0–20%, 20–40%, 40–60%, 60–80%, 80–100%).
+- Wyszukiwanie momentów: identyfikuje dokładny znacznik czasu, w którym występuje kluczowe zdarzenie.
+- Klasyfikacja postępów: przypisuje każdy film do jednego z 5 przedziałów ukończenia (0–20%, 20–40%, 40–60%, 60–80%, 80–100%).
 
-## Momenterkennung
+## Wyszukiwanie momentów
 
-Bei der Momenterkennung wird der genaue Videoframe ermittelt, in dem ein kritisches Ereignis eintritt, z. B. wenn eine Tasse voll ist oder ein Knoten gebunden wird. Roboter verwenden diese Funktion, um den Erfolg zu überprüfen, Schritte zu sequenzieren und Korrekturen auszulösen.
+Wyszukiwanie momentów identyfikuje dokładną klatkę wideo, w której występuje krytyczne zdarzenie, np. gdy kubek jest pełny lub gdy zawiązany jest węzeł. Roboty używają tej funkcji do weryfikowania powodzenia, sekwencji kroków i wywoływania korekt.
 
-Im folgenden Beispiel wird das Modell aufgefordert, den Zeitpunkt des Abschlusses einer bestimmten Aufgabe in einem Video zu ermitteln:
+Poniższy przykład prompta prosi model o zidentyfikowanie momentu ukończenia danego zadania w filmie:
 
 ```
 from google import genai
@@ -57,15 +57,15 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-Das folgende Beispiel zeigt Frames aus einem Video zur Momenterkennung, wobei das Modell den Zeitstempel für den Abschluss der Aufgabe ermittelt:
+Poniżej przedstawiamy przykładowe klatki z filmu, w którym model wyszukuje momenty, i identyfikuje znacznik czasu ukończenia zadania:
 
-![Beispiel für Videoframes mit der Ausgabe der Moment-Erkennung und einem Zeitstempel-Overlay](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-moment-finding.png?hl=de)
+![Przykładowe klatki filmu pokazujące moment znalezienia wyniku z nałożoną sygnaturą czasową](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-moment-finding.png?hl=pl)
 
-## Fortschrittsklassifizierung
+## Klasyfikacja postępów
 
-Bei der Fortschrittsklassifizierung wird ein Video einer von fünf Abschlusskategorien zugewiesen: 0–20%, 20–40%, 40–60%, 60–80 % oder 80–100%. So erhalten Roboter in Echtzeit Informationen zur jeweiligen Situation, damit sie Aktionen anpassen oder fehlgeschlagene Schritte wiederholen können, ohne einen gesamten Workflow neu starten zu müssen.
+Klasyfikacja postępów przypisuje film do jednego z 5 przedziałów ukończenia: 0–20%, 20–40%, 40–60%, 60–80% lub 80–100%. Dzięki temu roboty mają świadomość sytuacji w czasie rzeczywistym, co pozwala im dostosowywać działania lub ponawiać nieudane kroki bez konieczności restartowania całego przepływu pracy.
 
-Im folgenden Beispiel wird das Modell aufgefordert, den aktuellen Fortschritt anhand eines Videos zu klassifizieren:
+Poniższy przykład prompta prosi model o sklasyfikowanie bieżącego poziomu postępu na podstawie filmu:
 
 ```
 from google import genai
@@ -95,27 +95,27 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-Das folgende Beispiel zeigt Frames aus einem Video zur Fortschrittsklassifizierung, wobei das Modell eine Fortschrittskategorie zuweist:
+Poniżej przedstawiamy przykładowe klatki z filmu, w którym model klasyfikuje postępy, i przypisuje przedział postępu:
 
-![Beispiel für Videoframes mit der Ausgabe der Fortschrittsklassifizierung und einem Label für die Fortschrittskategorie](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-progress-classification.png?hl=de)
+![Przykładowe klatki filmu pokazujące wynik klasyfikacji postępu z etykietą przedziału postępu](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-progress-classification.png?hl=pl)
 
-## Beispiele
+## Przykłady
 
-Vollständige ausführbare Beispiele, einschließlich der Verfolgung von Aufgaben mit mehreren Schritten, finden Sie im
-[Robotics-Kochbuch](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+Pełne przykłady, które można uruchomić, w tym śledzenie zadań wieloetapowych, znajdziesz w
+[przewodniku Robotics](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-## Nächste Schritte
+## Co dalej?
 
-- [Live API für Robotik](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=de) – bidirektionales Streaming in Echtzeit
-- [Aufgabenorchestrierung](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=de) – Aufgaben mit langer Laufzeit und räumlicher Argumentation
-- [Übersicht über Gemini Robotics ER](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=de) – Modellvergleich und Funktionen
+- [Interfejs Live API dla robotyki](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=pl) – dwukierunkowe przesyłanie strumieniowe w czasie rzeczywistym.
+- [Orkiestracja zadań](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=pl) – zadania długoterminowe z rozumowaniem przestrzennym.
+- [Omówienie modelu Gemini Robotics ER](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=pl) – porównanie modeli i możliwości.
 
-Feedback geben
+Prześlij opinię
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Zuletzt aktualisiert: 2026-07-30 (UTC).
+Ostatnia aktualizacja: 2026-09-04 UTC.
 
-Haben Sie Feedback für uns?
+Chcesz przekazać coś jeszcze?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-30 (UTC)."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-04 UTC."],[],[]]

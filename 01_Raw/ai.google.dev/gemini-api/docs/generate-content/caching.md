@@ -1,66 +1,66 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=pt-BR
-fetched_at: 2026-08-31T06:31:16.367538+00:00
-title: "O armazenamento em cache de contexto \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=pl
+fetched_at: 2026-09-07T05:36:07.026077+00:00
+title: "Buforowanie kontekstu \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Envie comentários
+Prześlij opinię
 
-# O armazenamento em cache de contexto
+# Buforowanie kontekstu
 
-Em um fluxo de trabalho de IA típico, você pode transmitir os mesmos tokens de entrada várias vezes para um modelo. A API Gemini oferece dois mecanismos de armazenamento em cache diferentes:
+W typowym procesie AI możesz wielokrotnie przekazywać te same tokeny wejściowe do modelu. Gemini API oferuje 2 różne mechanizmy buforowania:
 
-- Armazenamento em cache implícito (ativado automaticamente nos modelos do Gemini 2.5 e mais recentes, sem garantia de economia de custos)
-- Armazenamento em cache explícito (pode ser ativado manualmente na maioria dos modelos, com garantia de economia de custos)
+- niejawne buforowanie (automatycznie włączone w modelach Gemini 2.5 i nowszych, bez gwarancji oszczędności kosztów);
+- jawne buforowanie (można je włączyć ręcznie w większości modeli, z gwarancją oszczędności kosztów).
 
-O armazenamento em cache explícito é útil nos casos em que você quer garantir economia de custos, mas com algum trabalho extra do desenvolvedor.
+Jawne buforowanie jest przydatne w przypadkach, gdy chcesz zagwarantować oszczędności kosztów, ale musisz wykonać dodatkowe prace programistyczne.
 
-## Armazenamento em cache implícito
+## Niejawne buforowanie
 
-O armazenamento em cache implícito é ativado por padrão para todos os modelos do Gemini 2.5 e mais recentes. Transmitimos automaticamente a economia de custos se a solicitação atingir os caches. Não é necessário fazer nada para ativar isso. A contagem mínima de tokens de entrada para o armazenamento em cache de contexto está listada na tabela a seguir para cada modelo:
+Niejawne buforowanie jest domyślnie włączone we wszystkich modelach Gemini 2.5 i nowszych. Automatycznie przekazujemy oszczędności kosztów, jeśli Twoje żądanie trafi do pamięci podręcznej. Aby to włączyć, nie musisz nic robić. Minimalna liczba tokenów wejściowych w przypadku buforowania kontekstu jest podana w tabeli poniżej dla każdego modelu:
 
-| Modelo | Limite mínimo de tokens |
+| Model | Minimalny limit tokenów |
 | --- | --- |
 | Gemini 3.5 Flash | 4096 |
-| Pré-lançamento do Gemini 3.1 Pro | 4096 |
+| Gemini 3.1 Pro (wersja testowa) | 4096 |
 | Gemini 2.5 Flash | 2048 |
 | Gemini 2.5 Pro | 2048 |
 
-Para aumentar a chance de uma ocorrência em cache implícita:
+Aby zwiększyć szansę na trafienie do niejawnej pamięci podręcznej:
 
-- Tente colocar conteúdos grandes e comuns no início do comando
-- Tente enviar solicitações com prefixo semelhante em um curto período
+- Spróbuj umieścić duże i popularne treści na początku prompta.
+- Spróbuj wysyłać żądania z podobnym prefiksem w krótkim czasie.
 
-Você pode conferir o número de tokens que foram acertos de cache no campo `usage_metadata` do objeto de resposta.
+Liczbę tokenów, które zostały trafione do pamięci podręcznej, możesz sprawdzić w polu `usage_metadata` obiektu odpowiedzi.
 
-## Armazenamento em cache explícito
+## Jawne buforowanie
 
-Usando o recurso de armazenamento em cache explícito da API Gemini, você pode transmitir algum conteúdo para o modelo uma vez, armazenar os tokens de entrada em cache e, em seguida, consultar os tokens armazenados em cache para solicitações subsequentes. Em determinados volumes, o uso de tokens armazenados em cache é mais barato do que transmitir o mesmo corpus de tokens repetidamente.
+Dzięki funkcji jawnego buforowania Gemini API możesz przekazać modelowi część treści, zapisać tokeny wejściowe w pamięci podręcznej, a następnie odwoływać się do nich w kolejnych żądaniach. W przypadku określonych ilości używanie tokenów z pamięci podręcznej jest tańsze niż wielokrotne przekazywanie tego samego korpusu tokenów.
 
-Ao armazenar um conjunto de tokens em cache, você pode escolher por quanto tempo quer que o cache exista antes que os tokens sejam excluídos automaticamente. Essa duração do armazenamento em cache é chamada de *tempo de vida útil* (TTL, na sigla em inglês). Se não for definido, o TTL será de 1 hora por padrão. O custo do armazenamento em cache depende do tamanho do token de entrada e de quanto tempo você quer que os tokens persistam.
+Gdy zapisujesz w pamięci podręcznej zestaw tokenów, możesz wybrać, jak długo ma ona istnieć, zanim tokeny zostaną automatycznie usunięte. Ten czas buforowania nazywa się *czasem życia danych* (TTL). Jeśli nie jest ustawiony, domyślny czas TTL wynosi 1 godzinę. Koszt buforowania zależy od rozmiaru tokena wejściowego i czasu, przez jaki chcesz przechowywać tokeny.
 
-Esta seção pressupõe que você instalou um SDK do Gemini (ou tem o curl instalado)
-e configurou uma chave de API, conforme mostrado no
-[guia de introdução](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br).
+W tej sekcji zakładamy, że masz zainstalowany pakiet SDK Gemini (lub zainstalowany curl)
+i skonfigurowany klucz interfejsu API zgodnie z instrukcjami w
+[przewodniku dla początkujących](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl).
 
-### Gerar conteúdo usando um cache
+### Generowanie treści za pomocą pamięci podręcznej
 
 ### Python
 
-O exemplo a seguir mostra como gerar conteúdo usando uma instrução do sistema armazenada em cache e um arquivo de vídeo.
+Poniższy przykład pokazuje, jak wygenerować treści za pomocą instrukcji systemowej i pliku wideo z pamięci podręcznej.
 
-### Vídeos
+### Filmy
 
 ```
 import os
@@ -119,7 +119,7 @@ print(response.usage_metadata)
 print(response.text)
 ```
 
-### PDFs
+### Pliki PDF
 
 ```
 from google import genai
@@ -167,7 +167,7 @@ print('\n\n', response.text)
 
 ### JavaScript
 
-O exemplo a seguir mostra como gerar conteúdo usando uma instrução do sistema armazenada em cache e um arquivo de texto.
+Poniższy przykład pokazuje, jak wygenerować treści za pomocą instrukcji systemowej i pliku tekstowego z pamięci podręcznej.
 
 ```
 import {
@@ -208,7 +208,7 @@ await main();
 
 ### Go
 
-O exemplo a seguir mostra como gerar conteúdo usando um cache.
+Poniższy przykład pokazuje, jak wygenerować treści za pomocą pamięci podręcznej.
 
 ```
 package main
@@ -278,9 +278,9 @@ func main() {
 
 ### REST
 
-O exemplo a seguir mostra como criar um cache e usá-lo para gerar conteúdo.
+Poniższy przykład pokazuje, jak utworzyć pamięć podręczną, a następnie użyć jej do wygenerowania treści.
 
-### Vídeos
+### Filmy
 
 ```
 wget https://storage.googleapis.com/generativeai-downloads/data/a11.txt
@@ -331,7 +331,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
     }'
 ```
 
-### PDFs
+### Pliki PDF
 
 ```
 DOC_URL="https://sma.nasa.gov/SignificantIncidents/assets/a11_missionreport.pdf"
@@ -429,22 +429,22 @@ cat response.json
 echo jq ".candidates[].content.parts[].text" response.json
 ```
 
-### Listar caches
+### Wyświetlanie pamięci podręcznych
 
-Não é possível recuperar ou visualizar o conteúdo armazenado em cache, mas você pode recuperar
-metadados de cache (`name`, `model`, `display_name`, `usage_metadata`,
-`create_time`, `update_time` e `expire_time`).
+Nie można pobrać ani wyświetlić treści z pamięci podręcznej, ale można pobrać
+metadane pamięci podręcznej (`name`, `model`, `display_name`, `usage_metadata`,
+`create_time`, `update_time` i `expire_time`).
 
 ### Python
 
-Para listar os metadados de todos os caches enviados, use `CachedContent.list()`:
+Aby wyświetlić metadane wszystkich przesłanych pamięci podręcznych, użyj `CachedContent.list()`:
 
 ```
 for cache in client.caches.list():
   print(cache)
 ```
 
-Para buscar os metadados de um objeto de cache, se você souber o nome dele, use `get`:
+Aby pobrać metadane jednego obiektu pamięci podręcznej, jeśli znasz jego nazwę, użyj `get`:
 
 ```
 client.caches.get(name=name)
@@ -452,7 +452,7 @@ client.caches.get(name=name)
 
 ### JavaScript
 
-Para listar os metadados de todos os caches enviados, use `GoogleGenAI.caches.list()`:
+Aby wyświetlić metadane wszystkich przesłanych pamięci podręcznych, użyj `GoogleGenAI.caches.list()`:
 
 ```
 console.log("My caches:");
@@ -469,7 +469,7 @@ while (true) {
 
 ### Go
 
-O exemplo a seguir lista todos os caches.
+Poniższy przykład pokazuje, jak wyświetlić wszystkie pamięci podręczne.
 
 ```
 caches, err := client.Caches.All(ctx)
@@ -482,7 +482,7 @@ for _, item := range caches {
 }
 ```
 
-O exemplo a seguir lista caches usando um tamanho de página de 2.
+Poniższy przykład pokazuje, jak wyświetlić pamięci podręczne z rozmiarem strony 2.
 
 ```
 page, err := client.Caches.List(ctx, &genai.ListCachedContentsConfig{PageSize: 2})
@@ -515,13 +515,13 @@ for {
 curl "https://generativelanguage.googleapis.com/v1beta/cachedContents?key=$GEMINI_API_KEY"
 ```
 
-### Atualizar um cache
+### Aktualizowanie pamięci podręcznej
 
-Você pode definir um novo `ttl` ou `expire_time` para um cache. Não é possível mudar mais nada sobre o cache.
+Możesz ustawić nowy `ttl` lub `expire_time` dla pamięci podręcznej. Zmiana innych ustawień pamięci podręcznej nie jest obsługiwana.
 
 ### Python
 
-O exemplo a seguir mostra como atualizar o `ttl` de um cache usando `client.caches.update()`.
+Poniższy przykład pokazuje, jak zaktualizować `ttl` pamięci podręcznej za pomocą `client.caches.update()`.
 
 ```
 from google import genai
@@ -535,11 +535,10 @@ client.caches.update(
 )
 ```
 
-Para definir o expiry time, ele aceita um objeto `datetime`
-ou uma string de data e hora formatada em ISO (`dt.isoformat()`, como
-`2025-01-27T16:02:36.473528+00:00`). O horário precisa incluir um fuso horário
-(`datetime.utcnow()` não anexa um fuso horário,
-`datetime.now(datetime.timezone.utc)` anexa um fuso horário).
+Aby ustawić czas wygaśnięcia, możesz użyć obiektu `datetime`lub ciągu daty i godziny w formacie ISO (`dt.isoformat()`, np.
+`2025-01-27T16:02:36.473528+00:00`). Czas musi zawierać strefę czasową
+(`datetime.utcnow()` nie dołącza strefy czasowej,
+`datetime.now(datetime.timezone.utc)` ją dołącza).
 
 ```
 from google import genai
@@ -559,7 +558,7 @@ client.caches.update(
 
 ### JavaScript
 
-O exemplo a seguir mostra como atualizar o `ttl` de um cache usando `GoogleGenAI.caches.update()`.
+Poniższy przykład pokazuje, jak zaktualizować `ttl` pamięci podręcznej za pomocą `GoogleGenAI.caches.update()`.
 
 ```
 const ttl = `${2 * 3600}s`; // 2 hours in seconds
@@ -572,7 +571,7 @@ console.log("After update (TTL):", updatedCache);
 
 ### Go
 
-O exemplo a seguir mostra como atualizar o `TTL` de um cache.
+Poniższy przykład pokazuje, jak zaktualizować `TTL` pamięci podręcznej.
 
 ```
 // Update the TTL (2 hours).
@@ -588,7 +587,7 @@ fmt.Println(cache)
 
 ### REST
 
-O exemplo a seguir mostra como atualizar o `ttl` de um cache.
+Poniższy przykład pokazuje, jak zaktualizować `ttl` pamięci podręcznej.
 
 ```
 curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY" \
@@ -596,9 +595,9 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=
 -d '{"ttl": "600s"}'
 ```
 
-### Excluir um cache
+### Usuwanie pamięci podręcznej
 
-O serviço de armazenamento em cache oferece uma operação de exclusão para remover manualmente o conteúdo do cache. O exemplo a seguir mostra como excluir um cache:
+Usługa buforowania udostępnia operację usuwania, która umożliwia ręczne usuwanie treści z pamięci podręcznej. Poniższy przykład pokazuje, jak usunąć pamięć podręczną:
 
 ### Python
 
@@ -628,49 +627,48 @@ fmt.Println("Cache deleted:", cache.Name)
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY"
 ```
 
-### Armazenamento em cache explícito usando a biblioteca OpenAI
+### Jawne buforowanie za pomocą biblioteki OpenAI
 
-Se você estiver usando uma [biblioteca OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=pt-br), poderá ativar o
-armazenamento em cache explícito usando a propriedade `cached_content` em
-[`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=pt-br#extra-body).
+Jeśli używasz biblioteki [OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=pl), możesz włączyć
+jawne buforowanie za pomocą właściwości `cached_content` w
+[`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=pl#extra-body).
 
-## Quando usar o armazenamento em cache explícito
+## Kiedy używać jawnego buforowania
 
-O armazenamento em cache de contexto é particularmente adequado para cenários em que um contexto inicial substancial é referenciado repetidamente por solicitações mais curtas. Use armazenamento em cache de contexto para casos de uso como estes:
+Buforowanie kontekstu jest szczególnie przydatne w sytuacjach, gdy obszerny kontekst początkowy jest wielokrotnie przywoływany przez krótsze żądania. Rozważ użycie buforowania kontekstu w takich przypadkach:
 
-- Chatbots com instruções [abrangentes do sistema](https://ai.google.dev/gemini-api/docs/system-instructions?hl=pt-br)
-- Análise repetitiva de arquivos de vídeo longos
-- Consultas recorrentes em grandes conjuntos de documentos
-- Análise frequente do repositório de código ou correção de bugs
+- czatboty z rozbudowanymi [instrukcjami systemowymi](https://ai.google.dev/gemini-api/docs/system-instructions?hl=pl)
+- powtarzająca się analiza długich plików wideo;
+- powtarzające się zapytania dotyczące dużych zbiorów dokumentów;
+- częsta analiza repozytorium kodu lub naprawianie błędów.
 
-### Como o armazenamento em cache explícito reduz os custos
+### Jak jawne buforowanie obniża koszty
 
-O armazenamento em cache de contexto é um recurso pago projetado para reduzir o custo. O faturamento é baseado nos seguintes fatores:
+Buforowanie kontekstu to płatna funkcja, która ma na celu obniżenie kosztów. Rozliczenia zależą od tych czynników:
 
-1. **Contagem de tokens de cache**:o número de tokens de entrada armazenados em cache, faturados com uma taxa reduzida quando incluído nos comandos subsequentes.
-2. **Duração do armazenamento**:o tempo de armazenamento e cobrança dos tokens em cache (TTL), faturado com base na duração do TTL da contagem de tokens armazenados em cache. Não há limites mínimos ou máximos no TTL.
-3. **Outros fatores**:outras cobranças se aplicam, como tokens de entrada não armazenados em cache e tokens de saída.
+1. **Liczba tokenów w pamięci podręcznej:** liczba tokenów wejściowych zapisanych w pamięci podręcznej, za które naliczana jest niższa opłata, gdy są one uwzględniane w kolejnych promptach.
+2. **Czas przechowywania:** czas przechowywania tokenów w pamięci podręcznej (TTL), za który naliczana jest opłata na podstawie czasu TTL liczby tokenów w pamięci podręcznej. Nie ma minimalnego ani maksymalnego czasu TTL.
+3. **Inne czynniki:** obowiązują inne opłaty, np. za tokeny wejściowe i wyjściowe, które nie są zapisane w pamięci podręcznej.
 
-Para detalhes de preços atualizados, consulte a página de preços da API Gemini [pricing
-page](https://ai.google.dev/pricing?hl=pt-br). Para saber como contar tokens, consulte o [guia
-de tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br).
+Aktualne informacje o cenach znajdziesz na stronie cennika Gemini API [pricing
+page](https://ai.google.dev/pricing?hl=pl). Aby dowiedzieć się, jak liczyć tokeny, zapoznaj się z przewodnikiem po [tokenach](https://ai.google.dev/gemini-api/docs/tokens?hl=pl).
 
-### Outras considerações
+### Uwagi dodatkowe
 
-Considere o seguinte ao usar o armazenamento em cache de contexto:
+Korzystając z buforowania kontekstu, pamiętaj o tych kwestiach:
 
-- A contagem *mínima* de tokens de entrada para o armazenamento em cache de contexto varia de acordo com o modelo. O *máximo* é o mesmo do modelo em questão. Para mais informações sobre como contar tokens,
-  consulte o [guia de tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br)).
-- O modelo não faz distinção entre tokens armazenados em cache e tokens de entrada normais. O conteúdo armazenado em cache é um prefixo do comando.
-- Não há limites de taxa ou uso especiais no armazenamento em cache de contexto. Os limites de taxa padrão para `GenerateContent` se aplicam, e os limites de tokens incluem tokens armazenados em cache.
-- O número de tokens armazenados em cache é retornado no `usage_metadata` das operações de criação, recebimento e listagem do serviço de cache, e também em `GenerateContent` ao usar o cache.
+- *Minimalna* liczba tokenów wejściowych w przypadku buforowania kontekstu różni się w zależności od modelu. *Maksymalna* liczba tokenów jest taka sama jak maksymalna liczba tokenów w danym modelu. (Więcej informacji o liczeniu tokenów,
+  zobacz [przewodnik po tokenach](https://ai.google.dev/gemini-api/docs/tokens?hl=pl)).
+- Model nie rozróżnia tokenów z pamięci podręcznej i zwykłych tokenów wejściowych. Treści z pamięci podręcznej są prefiksem prompta.
+- W przypadku buforowania kontekstu nie obowiązują żadne specjalne limity stawek ani limity wykorzystania. Obowiązują standardowe limity stawek dla `GenerateContent`, a limity tokenów obejmują tokeny z pamięci podręcznej.
+- Liczba tokenów z pamięci podręcznej jest zwracana w `usage_metadata` z operacji tworzenia, pobierania i wyświetlania usługi pamięci podręcznej, a także w `GenerateContent` podczas korzystania z pamięci podręcznej.
 
-Envie comentários
+Prześlij opinię
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Última atualização 2026-07-30 UTC.
+Ostatnia aktualizacja: 2026-07-30 UTC.
 
-Quer enviar seu feedback?
+Chcesz przekazać coś jeszcze?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-07-30 UTC."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]

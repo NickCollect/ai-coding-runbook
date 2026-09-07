@@ -1,39 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=de
-fetched_at: 2026-08-31T06:36:01.968857+00:00
-title: "Verst\u00e4ndnis von Dokumenten \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=pl
+fetched_at: 2026-09-07T05:42:28.923288+00:00
+title: "rozumienie dokument\u00f3w; \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Feedback geben
+Prześlij opinię
 
-# Verständnis von Dokumenten
+# rozumienie dokumentów;
 
-Gemini-Modelle können Dokumente im PDF-Format verarbeiten und dabei die native Bilderkennung nutzen, um den gesamten Kontext des Dokuments zu verstehen. Das geht über die reine Textextraktion hinaus und ermöglicht Gemini Folgendes:
+Modele Gemini mogą przetwarzać dokumenty w formacie PDF, korzystając z natywnego rozpoznawania obrazu, aby zrozumieć kontekst całego dokumentu. To coś więcej niż tylko wyodrębnianie tekstu. Gemini może:
 
-- Inhalte analysieren und interpretieren, einschließlich Text, Bilder, Diagramme, Grafiken und Tabellen, auch in langen Dokumenten mit bis zu 1.000 Seiten.
-- Informationen in [strukturierte Ausgabe](https://ai.google.dev/gemini-api/docs/structured-output?hl=de)formate extrahieren.
-- Zusammenfassungen erstellen und Fragen beantworten, basierend auf den visuellen und textlichen Elementen in einem Dokument.
-- Dokumentinhalte transkribieren (z.B. in HTML) und dabei Layouts und Formatierungen beibehalten, damit sie in nachgelagerten Anwendungen verwendet werden können.
+- analizować i interpretować treści, w tym tekst, obrazy, diagramy, wykresy i tabele, nawet w długich dokumentach do 1000 stron;
+- wyodrębniać informacje do [ustrukturyzowanych formatów wyjściowych](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl);
+- podsumowywać dokumenty i odpowiadać na pytania na podstawie elementów wizualnych i tekstowych;
+- transkrybować zawartość dokumentu (np. do HTML), zachowując układ i formatowanie, do wykorzystania w aplikacjach podrzędnych.
 
-Sie können auch Nicht-PDF-Dokumente auf dieselbe Weise übergeben. Gemini betrachtet sie dann aber als normalen Text, wodurch Kontext wie Diagramme oder Formatierungen verloren gehen.
+W ten sam sposób możesz też przekazywać dokumenty w innych formatach niż PDF, ale Gemini będzie je traktować jako zwykły tekst, co spowoduje utratę kontekstu, np. wykresów czy formatowania.
 
-## PDF-Daten inline übergeben
+## Przekazywanie danych PDF w tekście
 
-Sie können PDF-Daten inline in der Anfrage an `generateContent` übergeben. Das eignet sich am besten für kleinere Dokumente oder die temporäre Verarbeitung, bei der Sie in nachfolgenden Anfragen nicht auf die Datei verweisen müssen. Für größere Dokumente, auf die Sie in Mehrfachdialog-Interaktionen verweisen müssen, empfehlen wir die Verwendung der [Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=de#large-pdfs)
-um die Latenz der Anfragen zu verbessern und die Bandbreitennutzung zu reduzieren.
+Dane PDF możesz przekazywać w tekście w żądaniu do `generateContent`. Najlepiej sprawdza się to w przypadku mniejszych dokumentów lub przetwarzania tymczasowego, gdy nie musisz odwoływać się do pliku w kolejnych żądaniach. W przypadku większych dokumentów, do których musisz się odwoływać w interakcjach wieloetapowych, zalecamy korzystanie z interfejsu [Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=pl#large-pdfs)
+aby skrócić czas oczekiwania na odpowiedź i zmniejszyć zużycie przepustowości.
 
-Im folgenden Beispiel wird gezeigt, wie Sie eine PDF-Datei von einer URL abrufen und zur Verarbeitung in Byte umwandeln:
+Poniższy przykład pokazuje, jak pobrać plik PDF z adresu URL i przekonwertować go na bajty do przetworzenia:
 
 ### Python
 
@@ -95,7 +95,7 @@ async function main() {
 main();
 ```
 
-### Ok
+### Go
 
 ```
 package main
@@ -191,7 +191,7 @@ jq ".candidates[].content.parts[].text" response.json
 rm "${DISPLAY_NAME}.pdf"
 ```
 
-Sie können eine PDF-Datei auch aus einer lokalen Datei zur Verarbeitung lesen:
+Możesz też odczytać plik PDF z pliku lokalnego do przetworzenia:
 
 ### Python
 
@@ -246,7 +246,7 @@ async function main() {
 main();
 ```
 
-### Ok
+### Go
 
 ```
 package main
@@ -292,13 +292,13 @@ func main() {
 }
 ```
 
-## PDFs mit der Files API hochladen
+## Przesyłanie plików PDF za pomocą interfejsu Files API
 
-Wir empfehlen die Verwendung der Files API für größere Dateien oder wenn Sie ein Dokument in mehreren Anfragen wiederverwenden möchten. Dadurch wird die Latenz der Anfragen verbessert und die Bandbreitennutzung reduziert, da der Dateiupload von den Modellanfragen entkoppelt wird.
+W przypadku większych plików lub gdy chcesz ponownie użyć dokumentu w wielu żądaniach, zalecamy korzystanie z interfejsu Files API. Poprawia to czas oczekiwania na odpowiedź i zmniejsza zużycie przepustowości, ponieważ przesyłanie plików jest oddzielone od żądań do modelu.
 
-### Große PDFs von URLs
+### Duże pliki PDF z adresów URL
 
-Mit der File API können Sie große PDF-Dateien von URLs einfacher hochladen und verarbeiten:
+Użyj interfejsu File API, aby uprościć przesyłanie i przetwarzanie dużych plików PDF z adresów URL:
 
 ### Python
 
@@ -388,7 +388,7 @@ async function main() {
 main();
 ```
 
-### Ok
+### Go
 
 ```
 package main
@@ -506,7 +506,7 @@ jq ".candidates[].content.parts[].text" response.json
 rm "${DISPLAY_NAME}.pdf"
 ```
 
-### Große PDFs, die lokal gespeichert sind
+### Duże pliki PDF przechowywane lokalnie
 
 ### Python
 
@@ -586,7 +586,7 @@ async function main() {
 main();
 ```
 
-### Ok
+### Go
 
 ```
 package main
@@ -678,8 +678,8 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-Sie können prüfen, ob die API die hochgeladene Datei erfolgreich gespeichert hat, und die
-Metadaten abrufen, indem Sie [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=de) aufrufen. Nur `name` (und damit auch `uri`) sind eindeutig.
+Możesz sprawdzić, czy interfejs API prawidłowo zapisał przesłany plik, i pobrać jego
+metadane, wywołując [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=pl). Unikalne są tylko `name` (a co za tym idzie, `uri`).
 
 ### Python
 
@@ -711,9 +711,9 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## Mehrere PDFs übergeben
+## Przekazywanie wielu plików PDF
 
-Die Gemini API kann mehrere PDF-Dokumente (bis zu 1.000 Seiten) in einer einzigen Anfrage verarbeiten, solange die kombinierte Größe der Dokumente und des Text-Prompts innerhalb des Kontextfensters des Modells liegt.
+Interfejs Gemini API może przetwarzać wiele dokumentów PDF (do 1000 stron) w jednym żądaniu, o ile łączny rozmiar dokumentów i prompta tekstowego mieści się w oknie kontekstu modelu.
 
 ### Python
 
@@ -815,7 +815,7 @@ async function main() {
 main();
 ```
 
-### Ok
+### Go
 
 ```
 package main
@@ -965,56 +965,57 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## Technische Details
+## Szczegóły techniczne
 
-Gemini unterstützt PDF-Dateien mit bis zu 50 MB oder 1.000 Seiten. Dieses Limit gilt sowohl für Inline-Daten als auch für Uploads mit der Files API. Jede Dokumentseite entspricht 258 Tokens.
+Gemini obsługuje pliki PDF o rozmiarze do 50 MB lub 1000 stron. Ten limit dotyczy zarówno danych w tekście, jak i przesyłania za pomocą interfejsu Files API. Każda strona dokumentu odpowiada 258 tokenom.
 
-[Abgesehen vom Kontextfenster des Modells gibt es keine spezifischen Limits für die Anzahl der Pixel in einem Dokument. Größere Seiten werden jedoch auf eine maximale Auflösung von 3072 × 3072 Pixel herunterskaliert, wobei ihr ursprüngliches Seitenverhältnis beibehalten wird. Kleinere Seiten werden auf 768 × 768 Pixel hochskaliert.](https://ai.google.dev/gemini-api/docs/long-context?hl=de) Für Seiten mit geringerer Größe gibt es keine Kostensenkung außer bei der Bandbreite und für Seiten mit höherer Auflösung keine Leistungsverbesserung.
+Oprócz
+okna [kontekstu](https://ai.google.dev/gemini-api/docs/long-context?hl=pl) modelu nie ma konkretnych limitów liczby pikseli w dokumencie. Większe strony są
+zmniejszane do maksymalnej rozdzielczości 3072 x 3072 pikseli przy zachowaniu oryginalnych
+proporcji, a mniejsze strony są powiększane do 768 x 768 pikseli. Nie ma obniżki kosztów w przypadku stron o mniejszym rozmiarze (oprócz przepustowości) ani poprawy wydajności w przypadku stron o wyższej rozdzielczości.
 
-### Gemini 3-Modelle
+### Modele Gemini 3
 
-Mit Gemini 3 wird mit dem Parameter `media_resolution` eine detaillierte Steuerung der multimodalen Bildverarbeitung eingeführt. Sie können die Auflösung jetzt für jeden einzelnen Medienteil auf „niedrig“, „mittel“ oder „hoch“ festlegen. Mit dieser Ergänzung wurde die Verarbeitung von PDF-Dokumenten aktualisiert:
+Gemini 3 wprowadza szczegółową kontrolę nad przetwarzaniem obrazu multimodalnego za pomocą parametru `media_resolution`. Teraz możesz ustawić rozdzielczość na niską, średnią lub wysoką dla każdej części multimedialnej. Wraz z tym dodatkiem zaktualizowano przetwarzanie dokumentów PDF:
 
-1. **Native Texte einbeziehen**:In der PDF-Datei nativ eingebetteter Text wird extrahiert und dem Modell zur Verfügung gestellt.
-2. **Abrechnung und Token-Berichte:**
-   - Für Tokens, die aus dem extrahierten **nativen Text** in PDFs stammen, werden **keine Kosten** berechnet.
-   - Im Abschnitt `usage_metadata` der API-Antwort werden Tokens, die durch die Verarbeitung von PDF-Seiten (als Bilder) generiert wurden, jetzt unter der Modalität `IMAGE` gezählt und nicht wie in einigen früheren Versionen unter einer separaten Modalität `DOCUMENT`.
+1. **Natywne uwzględnianie tekstu:** tekst natywnie osadzony w pliku PDF jest wyodrębniany i przekazywany do modelu.
+2. **Rozliczenia i raportowanie tokenów:**
+   - **Nie naliczamy opłat** za tokeny pochodzące z wyodrębnionego **tekstu natywnego** w plikach PDF.
+   - W sekcji `usage_metadata` odpowiedzi interfejsu API tokeny wygenerowane na podstawie przetwarzania stron PDF (jako obrazów) są teraz zliczane w ramach modalności `IMAGE`, a nie w osobnej modalności `DOCUMENT`, jak w niektórych wcześniejszych wersjach.
 
-Weitere Informationen zum Parameter für die Medienauflösung finden Sie im
-[Leitfaden zur Medienauflösung](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=de).
+Więcej informacji o parametrze rozdzielczości multimediów znajdziesz w
+[przewodniku po rozdzielczości multimediów](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=pl).
 
-### Dokumenttypen
+### Typy dokumentów
 
-Technisch gesehen können Sie auch andere MIME-Typen für die Dokumentanalyse übergeben, z. B. TXT, Markdown, HTML, XML usw. Die Dokumentanalyse ***versteht jedoch nur PDFs***. Andere Typen werden als reiner Text extrahiert und das Modell kann nicht interpretieren, was in der Darstellung dieser Dateien zu sehen ist. Alle Besonderheiten des Dateityps wie Diagramme, Grafiken, HTML-Tags, Markdown-Formatierung usw. gehen verloren.
+Technicznie możesz przekazywać inne typy MIME do rozpoznawania dokumentów, takie jak TXT, Markdown, HTML, XML itp. Jednak rozpoznawanie dokumentów ***rozumie tylko pliki PDF***. Inne typy będą wyodrębniane jako czysty tekst, a model nie będzie w stanie zinterpretować tego, co widzimy w renderowaniu tych plików. Utracone zostaną wszelkie szczegóły dotyczące typu pliku, takie jak wykresy, diagramy, tagi HTML, formatowanie Markdown itp.
 
-Weitere Informationen zu anderen Methoden für die Dateieingabe finden Sie im
-[Leitfaden zu Methoden für die Dateieingabe](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=de).
+Więcej informacji o innych metodach wprowadzania plików znajdziesz w
+[przewodniku po metodach wprowadzania plików](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=pl).
 
-### Best Practices
+### Sprawdzone metody
 
-Für optimale Ergebnisse:
+Aby uzyskać najlepsze wyniki:
 
-- Drehen Sie die Seiten vor dem Hochladen in die richtige Ausrichtung.
-- Vermeiden Sie unscharfe Seiten.
-- Wenn Sie eine einzelne Seite verwenden, platzieren Sie den Text-Prompt nach der Seite.
+- Przed przesłaniem obróć strony do prawidłowej orientacji.
+- Unikaj rozmazanych stron.
+- Jeśli używasz jednej strony, umieść prompta tekstowego po stronie.
 
-## Nächste Schritte
+## Co dalej?
 
-Weitere Informationen finden Sie in den folgenden Ressourcen:
+Więcej informacji znajdziesz w tych materiałach:
 
-- [Strategien für Prompts mit Dateien](https://ai.google.dev/gemini-api/docs/files?hl=de#prompt-guide): Die
-  Gemini API unterstützt Prompts mit Text-, Bild-, Audio- und Videodaten, auch
-  multimodale Prompts genannt.
-- [Systemanweisungen](https://ai.google.dev/gemini-api/docs/text-generation?hl=de#system-instructions):
-  Mit Systemanweisungen können Sie das Verhalten des Modells entsprechend Ihren
-  spezifischen Anforderungen und Anwendungsfällen steuern.
+- [Strategie tworzenia promptów z plików](https://ai.google.dev/gemini-api/docs/files?hl=pl#prompt-guide): interfejs Gemini API obsługuje tworzenie promptów za pomocą danych tekstowych, graficznych, dźwiękowych i wideo, czyli tworzenie promptów multimodalnych.
+- [Instrukcje systemowe](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl#system-instructions):
+  Instrukcje systemowe pozwalają sterować działaniem modelu na podstawie
+  konkretnych potrzeb i przypadków użycia.
 
-Feedback geben
+Prześlij opinię
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Zuletzt aktualisiert: 2026-07-30 (UTC).
+Ostatnia aktualizacja: 2026-07-30 UTC.
 
-Haben Sie Feedback für uns?
+Chcesz przekazać coś jeszcze?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-30 (UTC)."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]

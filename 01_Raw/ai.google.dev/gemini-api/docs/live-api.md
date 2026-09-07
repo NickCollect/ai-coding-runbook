@@ -1,143 +1,137 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api?hl=it
-fetched_at: 2026-08-31T06:33:20.298098+00:00
-title: "Panoramica dell'API Gemini Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api?hl=id
+fetched_at: 2026-09-07T05:37:51.592353+00:00
+title: "Ringkasan Gemini Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Invia feedback
+Kirim masukan
 
-# Panoramica dell'API Gemini Live
+# Ringkasan Gemini Live API
 
-L'API Live consente interazioni vocali e visive in tempo reale a bassa latenza con
-Gemini. Elabora flussi continui di audio, immagini e testo per fornire
-risposte immediate e simili a quelle umane, creando un'esperienza
-conversazionale naturale per i tuoi utenti.
+Live API memungkinkan interaksi suara dan visi real-time dengan latensi rendah bersama Gemini. Fitur ini memproses aliran audio, gambar, dan teks yang berkelanjutan untuk menghasilkan respons lisan yang langsung dan mirip manusia, sehingga menciptakan pengalaman percakapan yang alami bagi pengguna Anda.
 
-![Panoramica dell&#39;API Live](https://ai.google.dev/static/gemini-api/docs/images/live-api-overview.png?hl=it)
+![Ringkasan Live API](https://ai.google.dev/static/gemini-api/docs/images/live-api-overview.png?hl=id)
 
-[Prova l'API live in Google AI Studiomic](https://aistudio.google.com/live?hl=it)
-[Clona app di esempio da GitHubcode](https://github.com/google-gemini/gemini-live-api-examples)
-[Utilizza le competenze dell'agente di codificaterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=it)
+[Coba Live API di Google AI Studiomic](https://aistudio.google.com/live?hl=id)
+[Clone aplikasi contoh dari GitHubcode](https://github.com/google-gemini/gemini-live-api-examples)
+[Gunakan keterampilan agen pengodeanterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=id)
 
-## Casi d'uso
+## Kasus penggunaan
 
-L'API Live può essere utilizzata per creare agenti vocali in tempo reale per una
-varietà di settori, tra cui:
+Live API dapat digunakan untuk membangun agen suara real-time untuk berbagai industri, termasuk:
 
-- **E-commerce e vendita al dettaglio:** assistenti per lo shopping che offrono consigli personalizzati e agenti di assistenza che risolvono i problemi dei clienti.
-- **Gaming**:personaggi non giocanti (NPC) interattivi, assistenti di aiuto in-game e traduzione in tempo reale dei contenuti in-game.
-- **Interfacce di nuova generazione**:esperienze abilitate per voce e video in robotica,
-  occhiali smart e veicoli.
-- **Sanità**:assistenti per la salute per l'assistenza e l'istruzione dei pazienti.
-- **Servizi finanziari**:consulenti AI per la gestione patrimoniale e la consulenza
-  sugli investimenti.
-- **Istruzione**:mentori AI e compagni di apprendimento che forniscono istruzioni e feedback personalizzati.
-- **Traduzione e localizzazione**:traduzione in tempo reale e a bassa latenza di conversazioni parlate, consentendo una comunicazione multilingue senza interruzioni.
+- **E-commerce dan retail:** Asisten belanja yang menawarkan rekomendasi yang dipersonalisasi dan agen dukungan yang menyelesaikan masalah pelanggan.
+- **Game:** Karakter non-pemain (NPC) interaktif, asisten bantuan dalam game, dan terjemahan real-time konten dalam game.
+- **Antarmuka generasi berikutnya:** Pengalaman yang mendukung suara dan video dalam robotika, kacamata pintar, dan kendaraan.
+- **Layanan kesehatan:** Pendamping kesehatan untuk dukungan dan edukasi pasien.
+- **Layanan keuangan:** Penasihat AI untuk manajemen kekayaan dan panduan investasi.
+- **Pendidikan:** Mentor AI dan pendamping pelajar yang memberikan instruksi dan masukan yang dipersonalisasi.
+- **Terjemahan dan pelokalan:** Terjemahan real-time dan latensi rendah untuk percakapan lisan, sehingga memungkinkan komunikasi multibahasa yang lancar.
 
-## Funzionalità principali
+## Fitur utama
 
-L'API Live offre un insieme completo di funzionalità per la creazione di agenti vocali robusti:
+Live API menawarkan serangkaian fitur komprehensif untuk membangun agen suara yang andal:
 
-- [**Supporto multilingue**](https://ai.google.dev/gemini-api/docs/live-guide?hl=it#supported-languages):
-  Parla in 70 lingue supportate.
-- [**Interruzione**](https://ai.google.dev/gemini-api/docs/live-guide?hl=it#interruptions):
-  Gli utenti possono interrompere il modello in qualsiasi momento per interazioni reattive.
-- [**Uso di strumenti**](https://ai.google.dev/gemini-api/docs/live-tools?hl=it):
-  Integra strumenti come la chiamata di funzioni e la Ricerca Google per interazioni dinamiche.
-- [**Trascrizioni audio**](https://ai.google.dev/gemini-api/docs/live-guide?hl=it#audio-transcription):
-  Fornisce trascrizioni di testo sia dell'input dell'utente che dell'output del modello.
-- [**Audio proattivo**](https://ai.google.dev/gemini-api/docs/live-guide?hl=it#proactive-audio):
-  Consente di controllare quando e in quali contesti il modello risponde.
-- [**Dialogo empatico**](https://ai.google.dev/gemini-api/docs/live-guide?hl=it#affective-dialog):
-  Adatta lo stile e il tono della risposta in base all'espressione dell'input dell'utente.
-- [**Traduzione dal vivo**](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=it):
-  Traduzione vocale in tempo reale in oltre 70 lingue.
+- [**Dukungan multibahasa**](https://ai.google.dev/gemini-api/docs/live-guide?hl=id#supported-languages):
+  Berkomunikasi dalam 70 bahasa yang didukung.
+- [**Barge-in**](https://ai.google.dev/gemini-api/docs/live-guide?hl=id#interruptions):
+  Pengguna dapat mengganggu model kapan saja untuk interaksi responsif.
+- [**Penggunaan alat**](https://ai.google.dev/gemini-api/docs/live-tools?hl=id):
+  Mengintegrasikan alat seperti panggilan fungsi dan Google Penelusuran untuk interaksi dinamis.
+- [**Transkripsi audio**](https://ai.google.dev/gemini-api/docs/live-guide?hl=id#audio-transcription):
+  Menyediakan transkrip teks untuk input pengguna dan output model.
+- [**Audio proaktif**](https://ai.google.dev/gemini-api/docs/live-guide?hl=id#proactive-audio):
+  Memungkinkan Anda mengontrol kapan model merespons dan dalam konteks apa.
+- [**Dialog afektif**](https://ai.google.dev/gemini-api/docs/live-guide?hl=id#affective-dialog):
+  Menyesuaikan gaya dan nada respons agar sesuai dengan ekspresi input pengguna.
+- [**Terjemahan Langsung**](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=id):
+  Terjemahan suara-ke-suara real-time dalam lebih dari 70 bahasa.
 
-## Specifiche tecniche
+## Spesifikasi teknis
 
-La seguente tabella descrive le specifiche tecniche dell'API Live:
+Tabel berikut menguraikan spesifikasi teknis untuk Live API:
 
-| Categoria | Dettagli |
+| Kategori | Detail |
 | --- | --- |
-| Modalità di input | Audio (audio PCM a 16 bit non elaborato, 16 kHz, little-endian), immagini (JPEG <= 1 FPS), testo |
-| Modalità di output | Audio (audio PCM a 16 bit non elaborato, 24 kHz, little-endian) |
-| Protocollo | Connessione WebSocket con stato (WSS) |
+| Modalitas input | Audio (audio PCM 16-bit mentah, 16 kHz, little-endian), gambar (JPEG <= 1 FPS), teks |
+| Modalitas output | Audio (audio PCM 16-bit mentah, 24 kHz, little-endian) |
+| Protokol | Koneksi WebSocket stateful (WSS) |
 
-## Scegliere un approccio di implementazione
+## Memilih pendekatan implementasi
 
-Quando esegui l'integrazione con l'API Live, devi scegliere uno dei seguenti approcci di implementazione:
+Saat berintegrasi dengan Live API, Anda harus memilih salah satu pendekatan implementasi berikut:
 
-- **Da server a server**: il backend si connette all'API Live utilizzando
-  [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). In genere, il client invia i dati dello stream (audio, video,
-  testo) al server, che a sua volta li inoltra all'API Live.
-- **Da client a server**: il codice frontend si connette direttamente all'API Live utilizzando [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) per trasmettere i dati in streaming, bypassando il backend.
+- **Server-ke-server**: Backend Anda terhubung ke Live API menggunakan
+  [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). Biasanya, klien Anda mengirim data streaming (audio, video, teks) ke server Anda, yang kemudian meneruskannya ke Live API.
+- **Klien-ke-server**: Kode frontend Anda terhubung langsung ke Live API
+  menggunakan [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) untuk men-streaming data, sehingga melewati backend Anda.
 
-## Inizia
+## Mulai
 
-Seleziona la guida corrispondente al tuo ambiente di sviluppo:
+Pilih panduan yang sesuai dengan lingkungan pengembangan Anda:
 
-Server-to-server
+Server-ke-server
 
-### [Tutorial sull'SDK GenAI](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=it)
+### [Tutorial GenAI SDK](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=id)
 
-Connettiti all'API Gemini Live utilizzando l'SDK GenAI per creare un'applicazione multimodale in tempo reale con un backend Python.
+Hubungkan ke Gemini Live API menggunakan GenAI SDK untuk membangun aplikasi multimodal real-time dengan backend Python.
 
-Client-to-server
+Klien-ke-server
 
-### [Tutorial su WebSocket](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=it)
+### [Tutorial WebSocket](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=id)
 
-Connettiti all'API Gemini Live utilizzando WebSockets per creare un'applicazione multimodale in tempo reale con un frontend JavaScript e token effimeri.
+Hubungkan ke Gemini Live API menggunakan WebSockets untuk membangun aplikasi multimodal real-time dengan frontend JavaScript dan token sementara.
 
 Agent Development Kit
 
 ### [Tutorial ADK](https://google.github.io/adk-docs/streaming/)
 
-Crea un agente e utilizza lo streaming dell'Agent Development Kit (ADK) per attivare la comunicazione vocale e video.
+Buat agen dan gunakan Streaming Agent Development Kit (ADK) untuk mengaktifkan komunikasi suara dan video.
 
-## Integrazioni con i partner
+## Integrasi partner
 
-Per semplificare lo sviluppo di app audio e video in tempo reale, puoi utilizzare
-un'integrazione di terze parti che supporta l'API Gemini Live
-tramite WebRTC o WebSocket.
+Untuk menyederhanakan pengembangan aplikasi audio dan video real-time, Anda dapat menggunakan
+integrasi pihak ketiga yang mendukung Gemini Live
+API melalui WebRTC atau WebSockets.
 
 [LiveKit
 
-Utilizza l'API Gemini Live con LiveKit Agents.](https://docs.livekit.io/agents/models/realtime/plugins/gemini/)
-[Pipecat by Daily
+Gunakan Gemini Live API dengan Agen LiveKit.](https://docs.livekit.io/agents/models/realtime/plugins/gemini/)
+[Pipecat dari Daily
 
-Crea un chatbot AI in tempo reale utilizzando Gemini Live e Pipecat.](https://docs.pipecat.ai/guides/features/gemini-live)
-[Fishjam di Software Mansion
+Buat chatbot AI real-time menggunakan Gemini Live dan Pipecat.](https://docs.pipecat.ai/guides/features/gemini-live)
+[Fishjam dari Software Mansion
 
-Crea applicazioni di streaming video e audio in diretta con Fishjam.](https://docs.fishjam.io/tutorials/gemini-live-integration)
-[Vision Agents di Stream
+Buat aplikasi streaming video dan audio live dengan Fishjam.](https://docs.fishjam.io/tutorials/gemini-live-integration)
+[Agen Vision dari Stream
 
-Crea applicazioni AI vocali e video in tempo reale con Vision Agents.](https://visionagents.ai/integrations/gemini)
+Buat aplikasi AI suara dan video real-time dengan Agen Vision.](https://visionagents.ai/integrations/gemini)
 [Voximplant
 
-Collega le chiamate in entrata e in uscita all'API Live con Voximplant.](https://voximplant.com/products/gemini-client)
+Hubungkan panggilan masuk dan keluar ke Live API dengan Voximplant.](https://voximplant.com/products/gemini-client)
 [Agora
 
-Crea applicazioni di AI conversazionale in tempo reale con Agora.](https://docs.agora.io/en/conversational-ai/models/mllm/gemini)
+Buat aplikasi AI percakapan real-time dengan Agora.](https://docs.agora.io/en/conversational-ai/models/mllm/gemini)
 [Firebase AI SDK
 
-Inizia a utilizzare l'API Gemini Live utilizzando Firebase AI Logic.](https://firebase.google.com/docs/ai-logic/live-api?api=dev&hl=it)
+Mulai menggunakan Gemini Live API dengan Firebase AI Logic.](https://firebase.google.com/docs/ai-logic/live-api?api=dev&hl=id)
 
-Invia feedback
+Kirim masukan
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Ultimo aggiornamento 2026-06-12 UTC.
+Terakhir diperbarui pada 2026-06-12 UTC.
 
-Vuoi dirci altro?
+Ada masukan untuk kami?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-06-12 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-12 UTC."],[],[]]

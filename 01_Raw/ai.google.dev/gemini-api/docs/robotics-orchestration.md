@@ -1,34 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=hi
-fetched_at: 2026-08-31T06:40:34.237170+00:00
-title: "\u091f\u093e\u0938\u094d\u0915 \u0911\u0930\u094d\u0915\u0947\u0938\u094d\u091f\u094d\u0930\u0947\u0936\u0928 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=ko
+fetched_at: 2026-09-07T05:46:04.916205+00:00
+title: "\ud0dc\uc2a4\ud06c \uc870\uc815 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-सुझाव भेजें
+의견 보내기
 
-# टास्क ऑर्केस्ट्रेशन
+# 태스크 조정
 
-Gemini Robotics ER मॉडल, टास्क प्लान कर सकते हैं. साथ ही, यह अनुमान लगा सकते हैं कि किसी लक्ष्य को पूरा करने के लिए, कौनसे ऑब्जेक्ट को कहाँ ले जाना है और कौनसे ऐक्शन लेने हैं. इस पेज पर, [पिक-एंड-प्लेस की प्रोसेस को कंट्रोल करने](https://ai.google.dev/gemini-api/docs/calling-custom-robot-api?hl=hi) का उदाहरण दिखाया गया है. इसके लिए, कस्टम रोबोट एपीआई का इस्तेमाल किया गया है, ताकि किसी आइटम को कटोरे में रखने के टास्क को मैनेज किया जा सके. इस उदाहरण में, Gemini ER 2 के स्टैंडर्ड मॉडल का इस्तेमाल किया गया है. स्ट्रीमिंग के उदाहरण के लिए, [Gemini ER 2 की स्ट्रीमिंग से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=hi) देखें.
+Gemini Robotics ER 모델은 작업을 계획하고 공간에 대해 추론하여 목표를 달성하기 위해 취할 작업과 이동할 객체를 추론할 수 있습니다. 이 페이지
+에서는 맞춤 로봇 API를 통해 [선택 및 배치](https://ai.google.dev/gemini-api/docs/calling-custom-robot-api?hl=ko)
+작업을 실행하여 항목을
+그릇에 배치하는 작업을 오케스트레이션하는 예를 보여줍니다. 이 예에서는 표준 Gemini ER 2 모델을 사용합니다. 스트리밍
+예는 [Gemini ER 2 스트리밍 가이드](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=ko)를 참고하세요.
 
-पूरे रन करने लायक कोड के लिए, [रोबोटिक्स कुकबुक](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb) देखें.
+실행 가능한 전체 코드는
+[로봇공학 레시피](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)를 참고하세요.
 
-## कस्टम रोबोट एपीआई का इस्तेमाल करना
+## 맞춤 로봇 API 사용
 
-इस उदाहरण में, कस्टम रोबोट एपीआई की मदद से टास्क ऑर्केस्ट्रेशन के बारे में बताया गया है. इसमें पिक-एंड-प्लेस ऑपरेशन के लिए डिज़ाइन किया गया मॉक एपीआई शामिल है. टास्क में, नीले रंग के ब्लॉक को उठाकर नारंगी रंग के कटोरे में रखना है:
+이 예에서는 맞춤 로봇 API를 사용한 작업 오케스트레이션을 보여줍니다. 선택 및 배치 작업을 위해 설계된 모의 API를 소개합니다. 작업은 파란색 블록을 집어 주황색 그릇에 배치하는 것입니다.
 
-![ब्लॉक और कटोरे की इमेज](https://ai.google.dev/static/gemini-api/docs/images/robotics/robot-api-example.png?hl=hi)
+![블록과 그릇의 이미지](https://ai.google.dev/static/gemini-api/docs/images/robotics/robot-api-example.png?hl=ko)
 
-इस उदाहरण में, रोबोट के एपीआई के इस मॉक का इस्तेमाल किया गया है:
+이 예에서는 다음 모의 로봇 API를 사용합니다.
 
 ### Python
 
@@ -71,7 +76,7 @@ set_gripper_state_function = {
 }
 ```
 
-यहां दिए गए उदाहरण में, टूल की परिभाषाओं के साथ मॉडल को प्रॉम्प्ट और इमेज भेजी जाती है. इसके बाद, यह एजेंटिक लूप चलाता है: हर मॉडल रिस्पॉन्स के बाद, यह अनुरोध किए गए किसी भी फ़ंक्शन कॉल (`move`, `setGripperState`) को एक्ज़ीक्यूट करता है. साथ ही, `previous_interaction_id` का इस्तेमाल करके, नतीजों को मॉडल पर वापस भेजता है. यह प्रोसेस तब तक दोहराई जाती है, जब तक मॉडल फ़ंक्शन कॉल करना बंद नहीं कर देता या चरण की सीमा पूरी नहीं हो जाती.
+다음 예에서는 도구 정의와 함께 프롬프트와 이미지를 모델에 전송합니다. 그런 다음 에이전트 루프를 실행합니다. 각 모델 응답 후 요청된 함수 호출 (`move`, `setGripperState`)을 실행하고 `previous_interaction_id`를 사용하여 결과를 모델에 다시 반환하며 모델이 함수 호출을 중지하거나 단계 제한에 도달할 때까지 반복합니다.
 
 ### Python
 
@@ -147,7 +152,7 @@ while step_count < max_steps:
     )
 ```
 
-यहां प्रॉम्प्ट और मॉक रोबोट एपीआई के आधार पर, मॉडल का संभावित आउटपुट दिखाया गया है. आउटपुट में, रोबोट फ़ंक्शन कॉल का आउटपुट शामिल होता है. मॉडल ने इन फ़ंक्शन कॉल को एक साथ क्रम से लगाया है.
+다음은 프롬프트와 모의 로봇 API를 기반으로 모델의 가능한 출력을 보여줍니다. 출력에는 모델이 함께 시퀀싱한 로봇 함수 호출의 출력이 포함됩니다.
 
 ```
 --- Executing Orchestrated Plan ---
@@ -164,18 +169,18 @@ Sequence complete.
 Model Summary: I have completed the task of picking up the blue block and placing it into the orange bowl.
 ```
 
-## आगे क्या करना है
+## 다음 단계
 
-- [स्ट्रीमिंग के साथ रोबोटिक्स](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=hi) — फ़ंक्शन कॉलिंग के साथ रीयल-टाइम स्ट्रीमिंग (सिर्फ़ Gemini Robotics ER 2).
-- [वीडियो को समझना](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=hi) — वीडियो से टास्क की प्रोग्रेस को ट्रैक करना (सिर्फ़ ER 2).
-- [स्पेशल रीज़निंग](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=hi) — पॉइंटिंग, ट्रैकिंग, और बाउंडिंग बॉक्स के उदाहरण.
+- [스트리밍을 통한 로봇공학](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=ko) - 함수 호출을 통한 실시간 스트리밍 (Gemini Robotics ER 2만 해당)
+- [동영상 이해](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=ko) - 동영상에서 작업 진행률 추적 (ER 2만 해당)
+- [공간 추론](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=ko) - 가리키기, 추적, 경계 상자 예
 
-सुझाव भेजें
+의견 보내기
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया.
+최종 업데이트: 2026-07-30(UTC)
 
-क्या आपको हमें और कुछ बताना है?
+의견을 전달하고 싶나요?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-30(UTC)"],[],[]]

@@ -1,40 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=ja
-fetched_at: 2026-08-31T06:31:57.833754+00:00
-title: "Gemini Developer API \u3068 Gemini Enterprise Agent Platform \u306e\u6bd4\u8f03 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=pt-BR
+fetched_at: 2026-09-07T05:34:07.434497+00:00
+title: "API Gemini Developer x plataforma de agentes do Gemini Enterprise \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-フィードバックを送信
+Envie comentários
 
-# Gemini Developer API と Gemini Enterprise Agent Platform の比較
+# API Gemini Developer x plataforma de agentes do Gemini Enterprise
 
-Gemini を使用して生成 AI ソリューションを開発する場合、Google は [Gemini Developer API](https://ai.google.dev/gemini-api/docs?hl=ja) と [Gemini Enterprise Agent Platform API](https://cloud.google.com/gemini-enterprise-agent-platform/overview?hl=ja) の 2 つの API プロダクトを提供しています。
+Ao desenvolver soluções de IA generativa com o Gemini, o Google oferece dois produtos de API: a [API Gemini Developer](https://ai.google.dev/gemini-api/docs?hl=pt-br) e a [API Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform/overview?hl=pt-br).
 
-Gemini Developer API は、Gemini を活用したアプリケーションの構築、本番環境への移行、スケーリングを迅速に行うための手段です。特定のエンタープライズ コントロールが必要な場合を除き、ほとんどのデベロッパーは Gemini デベロッパー API を使用する必要があります。
+A API Gemini Developer oferece o caminho mais rápido para criar, produzir e dimensionar aplicativos com tecnologia do Gemini. A maioria dos desenvolvedores deve usar a API Gemini Developer, a menos que haja necessidade de controles empresariais específicos.
 
-Gemini Enterprise Agent Platform は、Google Cloud Platform を基盤とする生成 AI アプリケーションの構築とデプロイのための、エンタープライズ対応の機能とサービスの包括的なエコシステムを提供します。
+A plataforma de agentes do Gemini Enterprise oferece um ecossistema abrangente de recursos e serviços prontos para empresas
+para criar e implantar aplicativos de IA generativa com tecnologia do Google Cloud Platform.
 
-Google は最近、これらのサービス間の移行を簡素化しました。Gemini Developer API と Gemini Enterprise Agent Platform API の両方に、統合された [Google Gen AI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=ja) を介してアクセスできるようになりました。
+Recentemente, simplificamos a migração entre esses serviços. Agora, a API Gemini Developer e a API Gemini Enterprise Agent Platform podem ser acessadas pelo [SDK de IA Generativa do Google](https://ai.google.dev/gemini-api/docs/libraries?hl=pt-br) unificado.
 
-## コードの比較
+## Comparação de código
 
-このページでは、テキスト生成用の Gemini Developer API と Gemini Enterprise Agent Platform のクイックスタートのコードを並べて比較しています。
+Esta página tem comparações de código lado a lado entre os guias de início rápido da API Gemini Developer e da plataforma de agentes do Gemini Enterprise para geração de texto.
 
 ### Python
 
-Gemini Developer API と Gemini Enterprise Agent Platform の両方のサービスには、`google-genai` ライブラリを介してアクセスできます。`google-genai` のインストール手順については、[ライブラリ](https://ai.google.dev/gemini-api/docs/libraries?hl=ja)のページをご覧ください。
+Você pode acessar a API Gemini Developer e os serviços da plataforma de agentes do Gemini Enterprise usando a biblioteca `google-genai`. Consulte a página [Bibliotecas](https://ai.google.dev/gemini-api/docs/libraries?hl=pt-br) para instruções sobre como instalar `google-genai`.
 
-### Gemini Developer API
+### API Gemini Developer
 
 ```
 from google import genai
@@ -47,7 +48,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### Gemini Enterprise Agent Platform API
+### API Gemini Enterprise Agent Platform
 
 ```
 from google import genai
@@ -62,11 +63,12 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### JavaScript と TypeScript
+### JavaScript e TypeScript
 
-`@google/genai` ライブラリを介して、Gemini Developer API と Gemini Enterprise Agent Platform の両方のサービスにアクセスできます。`@google/genai` のインストール手順については、[ライブラリ](https://ai.google.dev/gemini-api/docs/libraries?hl=ja)のページをご覧ください。
+Você pode acessar os serviços da API Gemini Developer e da plataforma de agentes do Gemini Enterprise usando a biblioteca `@google/genai`. Consulte a página [bibliotecas](https://ai.google.dev/gemini-api/docs/libraries?hl=pt-br) para instruções sobre como
+instalar `@google/genai`.
 
-### Gemini Developer API
+### API Gemini Developer
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -84,7 +86,7 @@ async function main() {
 main();
 ```
 
-### Gemini Enterprise Agent Platform API
+### API Gemini Enterprise Agent Platform
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -107,9 +109,10 @@ main();
 
 ### Go
 
-`google.golang.org/genai` ライブラリを介して、Gemini Developer API と Gemini Enterprise Agent Platform の両方のサービスにアクセスできます。`google.golang.org/genai` のインストール手順については、[ライブラリ](https://ai.google.dev/gemini-api/docs/libraries?hl=ja)のページをご覧ください。
+Você pode acessar os serviços da API Gemini Developer e da plataforma de agentes do Gemini Enterprise usando a biblioteca `google.golang.org/genai`. Consulte a página [bibliotecas](https://ai.google.dev/gemini-api/docs/libraries?hl=pt-br) para instruções sobre como
+instalar `google.golang.org/genai`.
 
-### Gemini Developer API
+### API Gemini Developer
 
 ```
 import (
@@ -136,7 +139,7 @@ func main() {
 }
 ```
 
-### Gemini Enterprise Agent Platform API
+### API Gemini Enterprise Agent Platform
 
 ```
 import (
@@ -168,40 +171,43 @@ func main() {
 }
 ```
 
-### その他のユースケースとプラットフォーム
+### Outros casos de uso e plataformas
 
-他のプラットフォームとユースケースについては、[Gemini Developer API ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)と [Gemini Enterprise Agent Platform ドキュメント](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=ja)のユースケース固有のガイドをご覧ください。
+Consulte os guias específicos de casos de uso na [documentação da API Gemini Developer](https://ai.google.dev/gemini-api/docs?hl=pt-br) e na [documentação da plataforma de agentes do Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=pt-br) para outras plataformas e casos de uso.
 
-## 移行に関する考慮事項
+## Considerações sobre a migração
 
-移行すると、次のようになります。
+Ao migrar:
 
-- 認証には Google Cloud サービス アカウントを使用する必要があります。詳細については、[Gemini Enterprise Agent Platform のドキュメント](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=ja)をご覧ください。
-- 既存の Google Cloud プロジェクト（API キーの生成に使用したプロジェクト）を使用することも、[新しい Google Cloud プロジェクトを作成](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=ja)することもできます。
-- サポートされているリージョンは、Gemini Developer API と Gemini Enterprise Agent Platform API で異なる場合があります。[Google Cloud の生成 AI でサポートされているリージョン](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/learn/locations-genai?hl=ja)のリストをご覧ください。
-- Google AI Studio で作成したモデルは、Gemini Enterprise Agent Platform で再トレーニングする必要があります。
+- Você precisa usar contas de serviço do Google Cloud para autenticar. Consulte a [documentação da plataforma de agentes do Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=pt-br) para mais informações.
+- É possível usar seu projeto atual do Google Cloud (o mesmo usado para gerar a chave de API) ou [criar um novo projeto do Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=pt-br).
+- As regiões compatíveis podem ser diferentes entre a API Gemini Developer e a API da plataforma de agentes do Gemini Enterprise. Confira a lista de
+  [regiões compatíveis com IA generativa no Google Cloud](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/learn/locations-genai?hl=pt-br).
+- Todos os modelos criados no Google AI Studio precisam ser treinados novamente na plataforma de agentes do Gemini Enterprise.
 
-Gemini Developer API で Gemini API キーを使用する必要がなくなった場合は、セキュリティのベスト プラクティスに従ってキーを削除します。
+Se você não precisar mais usar sua chave de API Gemini para a API Gemini Developer,
+siga as práticas recomendadas de segurança e exclua a chave.
 
-API キーを削除するには:
+Para excluir uma chave de API:
 
-1. [Google Cloud API 認証情報](https://console.cloud.google.com/apis/credentials?hl=ja)ページを開きます。
-2. 削除する API キーを見つけて、[**操作**] アイコンをクリックします。
-3. [**API キーを削除**] を選択します。
-4. [**認証情報の削除**] モーダルで、[**削除**] を選択します。
+1. Abra a página
+   [Credenciais da API Google Cloud](https://console.cloud.google.com/apis/credentials?hl=pt-br).
+2. Encontre a chave de API que você quer excluir e clique no ícone **Ações**.
+3. Selecione **Excluir chave de API**.
+4. No modal **Excluir credencial**, selecione **Excluir**.
 
-   API キーの削除が反映されるまでには数分かかることがあります。削除が反映されると、以降その API キーを使ったトラフィックはすべて拒否されます。
+   A remoção de uma chave de API leva alguns minutos para ser propagada. Após o término da propagação, todo tráfego que usar a chave de API excluída será recusado.
 
-## 次のステップ
+## Próximas etapas
 
-- Gemini Enterprise Agent Platform の生成 AI ソリューションの詳細については、[Gemini Enterprise Agent Platform の生成 AI の概要](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview?hl=ja)をご覧ください。
+- Confira a [visão geral da IA generativa na plataforma de agentes do Gemini Enterprise](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview?hl=pt-br) para saber mais sobre as soluções de IA generativa nessa plataforma.
 
-フィードバックを送信
+Envie comentários
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-最終更新日 2026-06-22 UTC。
+Última atualização 2026-06-22 UTC.
 
-ご意見をお聞かせください
+Quer enviar seu feedback?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-22 UTC。"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-22 UTC."],[],[]]

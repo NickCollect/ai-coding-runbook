@@ -1,37 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-TW
-fetched_at: 2026-08-31T06:34:44.540602+00:00
-title: "Batch API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/batch-api?hl=fr
+fetched_at: 2026-09-07T05:33:01.876962+00:00
+title: "API Batch \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-提供意見
+Envoyer des commentaires
 
-# Batch API
+# API Batch
 
-Gemini Batch API 的設計宗旨，是能以[標準費用的 50%](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw) 非同步處理大量要求。目標處理時間為 24 小時，但大多數情況下，處理速度會更快。
+L'API Gemini Batch est conçue pour traiter de grands volumes de requêtes de manière asynchrone à [50% du coût standard](https://ai.google.dev/gemini-api/docs/pricing?hl=fr).
+Le délai de traitement cible est de 24 heures, mais il est généralement beaucoup plus rapide.
 
-如果工作規模龐大且不緊急，例如資料前處理或執行評估，且不需要立即取得回應，請使用 Batch API。
+Utilisez l'API Batch pour les tâches à grande échelle et non urgentes, telles que le prétraitement des données ou l'exécution d'évaluations pour lesquelles une réponse immédiate n'est pas requise.
 
-## 建立批次工作
+## Créer un job par lot
 
-您可以在 Batch API 中透過兩種方式提交要求：
+Vous pouvez envoyer vos requêtes dans l'API Batch de deux manières :
 
-- **[內嵌要求](#inline-requests)：**[`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=zh-tw#GenerateContentRequest) 物件清單，直接包含在批次建立要求中。這適用於總要求大小不超過 20 MB 的較小批次。模型傳回的 **output** 是 `inlineResponse` 物件清單。
-- **[輸入檔案](#input-file)：**[JSON Lines (JSONL)](https://jsonlines.org/) 檔案，每行包含一個完整的 [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=zh-tw#GenerateContentRequest) 物件。建議您對較大的要求使用這個方法。模型傳回的**輸出內容**是 JSONL 檔案，每行都是 `GenerateContentResponse` 或狀態物件。
+- **[Requêtes intégrées](#inline-requests)** : liste d'objets [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=fr#GenerateContentRequest) directement inclus dans votre demande de création par lot. Cette méthode convient aux petits lots dont la taille totale de la requête est inférieure à 20 Mo. La **sortie** renvoyée par le modèle est une liste d'objets `inlineResponse`.
+- **[Fichier d'entrée](#input-file)** : fichier [JSON Lines (JSONL)](https://jsonlines.org/) dans lequel chaque ligne contient un objet [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=fr#GenerateContentRequest) complet.
+  Cette méthode est recommandée pour les requêtes plus volumineuses. La **sortie** renvoyée par le modèle est un fichier JSONL dans lequel chaque ligne est un objet `GenerateContentResponse` ou un objet d'état.
 
-### 內嵌要求
+### Requêtes intégrées
 
-如果要求數量不多，可以直接在 [`BatchGenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=zh-tw#request-body) 中嵌入 [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=zh-tw#GenerateContentRequest) 物件。以下範例會使用內嵌要求呼叫 [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=zh-tw#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent) 方法：
+Pour un petit nombre de requêtes, vous pouvez intégrer directement les objets [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=fr#GenerateContentRequest) dans votre [`BatchGenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=fr#request-body). L'exemple suivant appelle la méthode [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=fr#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent) avec des requêtes intégrées :
 
 ### Python
 
@@ -133,22 +135,22 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:ba
 }'
 ```
 
-### 輸入檔案
+### Fichier en entrée
 
-如要處理大量要求，請準備 JSON Lines (JSONL) 檔案。這個檔案的每一行都必須是 JSON 物件，其中包含使用者定義的鍵和要求物件，而要求是有效的 [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=zh-tw#GenerateContentRequest) 物件。回應中會使用使用者定義的鍵，指出哪個輸出內容是哪個要求的結果。舉例來說，如果要求中定義的金鑰為 `request-1`，則回應會以相同的金鑰名稱註解。
+Pour les ensembles de requêtes plus volumineux, préparez un fichier JSON Lines (JSONL). Chaque ligne de ce fichier doit être un objet JSON contenant une clé définie par l'utilisateur et un objet de requête, où la requête est un objet [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=fr#GenerateContentRequest) valide. La clé définie par l'utilisateur est utilisée dans la réponse pour indiquer quel résultat correspond à quelle requête. Par exemple, la réponse à une requête dont la clé est définie sur `request-1` sera annotée avec le même nom de clé.
 
-這個檔案是使用 [File API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw) 上傳。輸入檔案的大小上限為 2 GB。
+Ce fichier est importé à l'aide de l'[API File](https://ai.google.dev/gemini-api/docs/files?hl=fr). La taille maximale autorisée pour un fichier d'entrée est de 2 Go.
 
-以下是 JSONL 檔案範例。您可以將其儲存至名為 `my-batch-requests.json` 的檔案：
+Voici un exemple de fichier JSONL. Vous pouvez l'enregistrer dans un fichier nommé `my-batch-requests.json` :
 
 ```
 {"key": "request-1", "request": {"contents": [{"parts": [{"text": "Describe the process of photosynthesis."}]}], "generation_config": {"temperature": 0.7}}}
 {"key": "request-2", "request": {"contents": [{"parts": [{"text": "What are the main ingredients in a Margherita pizza?"}]}]}}
 ```
 
-與內嵌要求類似，您可以在每個要求 JSON 中指定其他參數，例如系統指令、工具或其他設定。
+Comme pour les requêtes intégrées, vous pouvez spécifier d'autres paramètres tels que des instructions système, des outils ou d'autres configurations dans chaque requête JSON.
 
-如以下範例所示，您可以使用 [File API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw) 上傳這個檔案。如果您使用多模態輸入內容，可以在 JSONL 檔案中參照其他上傳的檔案。
+Vous pouvez importer ce fichier à l'aide de l'[API File](https://ai.google.dev/gemini-api/docs/files?hl=fr), comme illustré dans l'exemple suivant. Si vous utilisez une entrée multimodale, vous pouvez faire référence à d'autres fichiers importés dans votre fichier JSONL.
 
 ### Python
 
@@ -269,7 +271,7 @@ curl "${upload_url}" \
 file_uri=$(jq ".file.uri" file_info.json)
 ```
 
-以下範例會使用 File API 上傳的輸入檔案，呼叫 [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=zh-tw#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent) 方法：
+L'exemple suivant appelle la méthode [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=fr#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent) avec le fichier d'entrée importé à l'aide de l'API File :
 
 ### Python
 
@@ -323,17 +325,18 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:ba
 }"
 ```
 
-建立批次工作時，系統會傳回工作名稱。您可以使用這個名稱[監控](#batch-job-status)工作狀態，並在工作完成後[擷取結果](#retrieve-batch-results)。
+Lorsque vous créez un job par lot, un nom de job vous est renvoyé. Utilisez ce nom pour [surveiller](#batch-job-status) l'état du job et [récupérer les résultats](#retrieve-batch-results) une fois le job terminé.
 
-以下是包含工作名稱的輸出範例：
+Voici un exemple de résultat contenant un nom de job :
 
 ```
 Created batch job from file: batches/123456789
 ```
 
-### 支援批次嵌入
+### Compatibilité avec l'embedding par lot
 
-您可以使用 Batch API 與[嵌入模型](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-tw)互動，提高處理量。如要使用[內嵌要求](#inline-requests)或[輸入檔案](#input-file)建立嵌入批次工作，請使用 `batches.create_embeddings` API 並指定嵌入模型。
+Vous pouvez utiliser l'API Batch pour interagir avec le [modèle Embeddings](https://ai.google.dev/gemini-api/docs/embeddings?hl=fr) et obtenir un débit plus élevé.
+Pour créer un job par lot d'embeddings avec des [requêtes intégrées](#inline-requests) ou des [fichiers d'entrée](#input-file), utilisez l'API `batches.create_embeddings` et spécifiez le modèle d'embeddings.
 
 ### Python
 
@@ -381,11 +384,11 @@ batchJob = await client.batches.createEmbeddings({
 console.log(`Created batch job: ${batchJob.name}`);
 ```
 
-如需更多範例，請參閱[批次 API 食譜](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb)的「Embeddings」一節。
+Pour obtenir d'autres exemples, consultez la section "Embeddings" du [cookbook de l'API Batch](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb).
 
-### 要求設定
+### Configurer la requête
 
-您可以加入在標準非批次要求中使用的任何要求設定。例如，你可以指定溫度、系統指令，甚至傳遞其他模式。以下範例顯示內嵌要求，其中包含其中一項要求的系統指令：
+Vous pouvez inclure toutes les configurations de requête que vous utiliseriez dans une requête standard non par lot. Par exemple, vous pouvez spécifier la température, les instructions système ou même transmettre d'autres modalités. L'exemple suivant montre une requête intégrée contenant une instruction système pour l'une des requêtes :
 
 ### Python
 
@@ -413,7 +416,7 @@ inlineRequestsList = [
 ]
 ```
 
-同樣地，您也可以指定要求要使用的工具。以下範例顯示啟用 [Google 搜尋工具](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)的要求：
+De même, vous pouvez spécifier les outils à utiliser pour une requête. L'exemple suivant montre une requête qui active l'[outil de recherche Google](https://ai.google.dev/gemini-api/docs/google-search?hl=fr) :
 
 ### Python
 
@@ -434,8 +437,8 @@ inlineRequestsList = [
 ]
 ```
 
-您也可以指定[結構化輸出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-tw)。
-以下範例說明如何為批次要求指定。
+Vous pouvez également spécifier une [sortie structurée](https://ai.google.dev/gemini-api/docs/structured-output?hl=fr).
+L'exemple suivant montre comment spécifier vos requêtes par lot.
 
 ### Python
 
@@ -586,7 +589,7 @@ const inlinedBatchJob = await ai.batches.create({
 });
 ```
 
-以下是這項工作的輸出內容範例：
+Voici un exemple de résultat de ce job :
 
 ```
 --- Response 1 ---
@@ -682,20 +685,20 @@ const inlinedBatchJob = await ai.batches.create({
 ]
 ```
 
-## 監控工作狀態
+## Surveiller l'état d'un job
 
-建立批次作業時，請使用取得的作業名稱輪詢作業狀態。
-批次工作的狀態欄位會顯示目前狀態。批次工作可能處於下列其中一種狀態：
+Utilisez le nom de l'opération obtenu lors de la création du job par lot pour interroger son état.
+Le champ "state" du job par lot indique son état actuel. Un job par lot peut avoir l'un des états suivants :
 
-- `JOB_STATE_PENDING`：工作已建立，正在等待服務處理。
-- `JOB_STATE_RUNNING`：工作正在進行中。
-- `JOB_STATE_SUCCEEDED`：作業已順利完成。現在可以擷取結果。
-- `JOB_STATE_FAILED`：工作失敗。詳情請參閱錯誤詳細資料。
-- `JOB_STATE_CANCELLED`：使用者已取消工作。
-- `JOB_STATE_EXPIRED`：工作已過期，因為工作已執行或待處理超過 48 小時。這項工作不會有任何結果可供擷取。
-  您可以嘗試再次提交工作，或將要求分割成較小的批次。
+- `JOB_STATE_PENDING` : la tâche a été créée et attend d'être traitée par le service.
+- `JOB_STATE_RUNNING` : la tâche est en cours d'exécution.
+- `JOB_STATE_SUCCEEDED` : la tâche a été effectuée avec succès. Vous pouvez maintenant récupérer les résultats.
+- `JOB_STATE_FAILED` : la tâche a échoué. Pour en savoir plus, consultez les détails de l'erreur.
+- `JOB_STATE_CANCELLED` : la tâche a été annulée par l'utilisateur.
+- `JOB_STATE_EXPIRED` : la tâche a expiré, car elle était en cours d'exécution ou en attente depuis plus de 48 heures. La tâche ne générera aucun résultat à récupérer.
+  Vous pouvez essayer d'envoyer de nouveau le job ou de diviser les requêtes en plus petits lots.
 
-您可以定期輪詢工作狀態，確認工作是否完成。
+Vous pouvez interroger régulièrement l'état du job pour vérifier s'il est terminé.
 
 ### Python
 
@@ -761,9 +764,10 @@ try {
 }
 ```
 
-### 輪詢和 Webhook
+### Interrogation et webhooks
 
-**不想再輪詢？**Gemini 現在支援[Webhook](https://ai.google.dev/gemini-api/docs/webhooks?hl=zh-tw)，可非同步處理完成事項。請訂閱 `batch.succeeded`，而非持續呼叫 `GET / operations`，讓 Gemini API 在非同步或長時間執行的作業完成時，將即時通知推送至伺服器。
+**Vous en avez assez des sondages ?** Gemini prend désormais en charge les [Webhooks](https://ai.google.dev/gemini-api/docs/webhooks?hl=fr) pour traiter les complétions de manière asynchrone.
+Au lieu d'appeler `GET / operations` en continu, abonnez-vous à `batch.succeeded` directement pour permettre à l'API Gemini d'envoyer des notifications en temps réel à votre serveur lorsque des opérations asynchrones ou de longue durée sont terminées.
 
 ### Python
 
@@ -815,9 +819,10 @@ curl -X POST \
   }'
 ```
 
-## 正在擷取結果
+## Récupération des résultats
 
-工作狀態顯示批次工作成功後，結果就會顯示在 `response` 欄位中。批次作業結果預設會儲存 6 週，並開放下載，之後就會永久刪除。
+Une fois que l'état du job par lot indique qu'il a réussi, les résultats sont disponibles dans le champ `response`.
+Par défaut, les résultats des jobs par lot sont stockés et disponibles au téléchargement pendant six semaines avant d'être définitivement supprimés.
 
 ### Python
 
@@ -970,9 +975,9 @@ elif [[ $batch_state == "JOB_STATE_EXPIRED" ]]; then
 fi
 ```
 
-## 列出批次工作
+## Lister les jobs par lot
 
-您可以列出最近的批次工作。
+Vous pouvez lister vos jobs par lot récents.
 
 ### Python
 
@@ -1006,9 +1011,9 @@ curl https://generativelanguage.googleapis.com/v1beta/batches \
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## 取消批次工作
+## Annuler un job par lot
 
-您可以使用名稱取消進行中的批次工作。取消工作後，系統會停止處理新要求。
+Vous pouvez annuler un job par lot en cours à l'aide de son nom. Lorsqu'un job est annulé, il cesse de traiter les nouvelles requêtes.
 
 ### Python
 
@@ -1037,9 +1042,9 @@ curl https://generativelanguage.googleapis.com/v1beta/$BATCH_NAME \
 -H "Content-Type:application/json" 2> /dev/null | jq -r '.metadata.state'
 ```
 
-## 刪除批次工作
+## Supprimer un job par lot
 
-您可以使用現有批次作業的名稱刪除該作業。刪除工作後，系統會停止處理新要求，並從批次工作清單中移除該工作。
+Vous pouvez supprimer un job par lot existant à l'aide de son nom. Lorsqu'un job est supprimé, il cesse de traiter les nouvelles requêtes et est supprimé de la liste des jobs par lot.
 
 ### Python
 
@@ -1063,13 +1068,13 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$BATCH_NAME" \
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## 批次生成圖片
+## Générer des images par lot
 
-如果您使用 [Gemini Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw)，且需要生成大量圖片，可以使用 Batch API 換取更高的[速率限制](https://ai.google.dev/gemini-api/docs/rate-limits?hl=zh-tw)，但處理時間最多可能需要 24 小時。
+Si vous utilisez [Gemini Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=fr) et que vous devez générer de nombreuses images, vous pouvez utiliser l'API Batch pour obtenir des [limites de fréquence](https://ai.google.dev/gemini-api/docs/rate-limits?hl=fr) plus élevées en échange d'un délai de traitement pouvant aller jusqu'à 24 heures.
 
-您可以針對小批要求 (小於 20 MB) 使用[內嵌要求](#inline-requests-images)，也可以針對大批要求使用 [JSONL 輸入檔案](#input-file-images) (建議用於圖片生成)：
+Vous pouvez utiliser des [requêtes intégrées](#inline-requests-images) pour les petits lots de requêtes (moins de 20 Mo) ou un [fichier d'entrée JSONL](#input-file-images) pour les grands lots (recommandé pour la génération d'images) :
 
-### 內嵌圖片要求
+### Demandes d'images intégrées
 
 ### Python
 
@@ -1280,7 +1285,7 @@ if [[ $batch_state = "JOB_STATE_SUCCEEDED" ]]; then
 fi
 ```
 
-### 圖片的輸入檔案
+### Fichier d'entrée pour les images
 
 ### Python
 
@@ -1512,33 +1517,35 @@ if [[ $batch_state = "JOB_STATE_SUCCEEDED" ]]; then
 fi
 ```
 
-## 技術詳細資料
+## Détails techniques
 
-- **支援的模型：**Batch API 支援一系列 Gemini 模型。
-  如要瞭解各模型是否支援 Batch API，請參閱[模型頁面](https://ai.google.dev/gemini-api/docs/models?hl=zh-tw)。Batch API 支援的模態與互動式 (或非批次) API 支援的模態相同。
-- **價格：**批次 API 用量的價格為同等模型標準互動式 API 費用的 50%。詳情請參閱[定價頁面](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw)。如要詳細瞭解這項功能的速率限制，請參閱[速率限制頁面](https://ai.google.dev/gemini-api/docs/rate-limits?hl=zh-tw#batch-mode)。
-- **服務等級目標 (SLO)：**批次工作的設計目標是在 24 小時內完成。視工作大小和目前系統負載而定，許多工作可能會更快完成。
-- **快取：**支援批次要求的[脈絡快取](https://ai.google.dev/gemini-api/docs/caching?hl=zh-tw)。在批次中的個別要求設定中指定`cached_content`資源名稱，即可重複使用快取內容。如果批次中的要求導致快取命中，您需要支付[標準內容快取費率](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw)。
+- **Modèles compatibles** : l'API Batch est compatible avec différents modèles Gemini.
+  Consultez la page [Modèles](https://ai.google.dev/gemini-api/docs/models?hl=fr) pour connaître la compatibilité de chaque modèle avec l'API Batch. Les modalités acceptées pour l'API Batch sont les mêmes que celles acceptées pour l'API interactive (ou non par lot).
+- **Tarifs** : l'utilisation de l'API Batch est facturée à 50% du coût standard de l'API interactive pour le modèle équivalent. Pour en savoir plus, consultez la [page des tarifs](https://ai.google.dev/gemini-api/docs/pricing?hl=fr). Pour en savoir plus sur les limites de débit de cette fonctionnalité, consultez la page [Limites de débit](https://ai.google.dev/gemini-api/docs/rate-limits?hl=fr#batch-mode).
+- **Objectif de niveau de service (SLO)** : les jobs par lot sont conçus pour être traités dans un délai de 24 heures. De nombreux jobs peuvent se terminer beaucoup plus rapidement en fonction de leur taille et de la charge système actuelle.
+- **Mise en cache** : la [mise en cache du contexte](https://ai.google.dev/gemini-api/docs/caching?hl=fr) est compatible avec les requêtes par lot. Réutilisez le contenu mis en cache en spécifiant le nom de ressource `cached_content` dans la configuration des requêtes individuelles de votre lot.
+  Si une requête de votre lot génère un appel de cache, vous payez les [tarifs standard de mise en cache du contexte](https://ai.google.dev/gemini-api/docs/pricing?hl=fr).
 
-## 最佳做法
+## Bonnes pratiques
 
-- **針對大量要求使用輸入檔案：**如要處理大量要求，請務必使用檔案輸入方法，以便更有效率地管理要求，並避免超出 [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=zh-tw#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent) 呼叫本身的要求大小限制。請注意，每個輸入檔案的大小上限為 2 GB。
-- **錯誤處理：**作業完成後，請檢查 `batchStats` 的 `failedRequestCount`。如果使用檔案輸出，請剖析每一行，檢查是否為 `GenerateContentResponse` 或狀態物件，指出該特定要求的錯誤。如需完整的錯誤代碼清單，請參閱[疑難排解指南](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=zh-tw#error-codes)。
-- **提交工作一次：**批次工作建立作業並非冪等運算。
-  如果重複傳送相同的建立要求，系統會建立兩個不同的批次工作。
-- **將大型批次作業分成多個較小的批次：**雖然目標處理時間為 24 小時，但實際處理時間可能會因系統負載和作業大小而異。如果需要盡快取得中繼結果，建議您將大型工作拆成較小的批次。
+- **Utilisez des fichiers d'entrée pour les requêtes volumineuses** : pour un grand nombre de requêtes, utilisez toujours la méthode d'entrée de fichier pour une meilleure gestion et pour éviter d'atteindre les limites de taille des requêtes pour l'appel [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=fr#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent) lui-même. Notez que la taille de chaque fichier d'entrée est limitée à 2 Go.
+- **Gestion des erreurs** : vérifiez le `batchStats` pour `failedRequestCount` une fois le job terminé. Si vous utilisez la sortie de fichier, analysez chaque ligne pour vérifier s'il s'agit d'un `GenerateContentResponse` ou d'un objet d'état indiquant une erreur pour cette requête spécifique. Consultez le [guide de dépannage](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=fr#error-codes) pour obtenir la liste complète des codes d'erreur.
+- **N'envoyez les jobs qu'une seule fois** : la création d'un job par lot n'est pas idempotente.
+  Si vous envoyez la même demande de création deux fois, deux jobs par lot distincts seront créés.
+- **Fractionnez les très grands lots** : bien que le délai de traitement cible soit de 24 heures, le temps de traitement réel peut varier en fonction de la charge du système et de la taille du job.
+  Pour les jobs volumineux, envisagez de les diviser en plus petits lots si vous avez besoin de résultats intermédiaires plus rapidement.
 
-## 後續步驟
+## Étape suivante
 
-- 如需更多範例，請參閱 [Batch API 筆記本](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=zh-tw)。
-- OpenAI 相容層支援 Batch API。請參閱「[OpenAI 相容性](https://ai.google.dev/gemini-api/docs/openai?hl=zh-tw#batch)」頁面的範例。
+- Pour obtenir d'autres exemples, consultez le [notebook de l'API Batch](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=fr).
+- La couche de compatibilité OpenAI est compatible avec l'API Batch. Consultez les exemples sur la page [Compatibilité avec OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=fr#batch).
 
-提供意見
+Envoyer des commentaires
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-上次更新時間：2026-07-02 (世界標準時間)。
+Dernière mise à jour le 2026/07/02 (UTC).
 
-想進一步說明嗎？
+Voulez-vous nous donner plus d'informations ?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-02 (世界標準時間)。"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/02 (UTC)."],[],[]]

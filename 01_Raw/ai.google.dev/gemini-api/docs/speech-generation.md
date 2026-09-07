@@ -1,42 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr
-fetched_at: 2026-08-31T06:42:05.620632+00:00
-title: "Metin okuma \u00fcretimi (TTS) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/speech-generation?hl=th
+fetched_at: 2026-09-07T05:45:17.635010+00:00
+title: "\u0e01\u0e32\u0e23\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e48\u0e32\u0e19\u0e2d\u0e2d\u0e01\u0e40\u0e2a\u0e35\u0e22\u0e07\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21 (TTS) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Geri bildirim gönderin
+ส่งความคิดเห็น
 
-# Metin okuma üretimi (TTS)
+# การสร้างการอ่านออกเสียงข้อความ (TTS)
 
-Gemini API, Gemini metin okuma (TTS) oluşturma özelliklerini kullanarak metin girişini tek veya çok hoparlörlü sese dönüştürebilir.
-Metin okuma (TTS) üretimi *[kontrol edilebilir](#controllable)*. Bu sayede, etkileşimleri yapılandırmak ve sesin *stilini*, *aksanını*, *hızını* ve *tonunu* yönlendirmek için doğal dil kullanabilirsiniz.
+Gemini API สามารถเปลี่ยนอินพุตข้อความเป็นเสียงแบบผู้พูดคนเดียวหรือหลายคน
+โดยใช้ความสามารถในการสร้างข้อความเป็นเสียง (TTS) ของ Gemini
+การสร้างการอ่านออกเสียงข้อความ (TTS) เป็นแบบ*[ควบคุมได้](#controllable)*
+ซึ่งหมายความว่าคุณสามารถใช้ภาษาธรรมชาติเพื่อจัดโครงสร้างการโต้ตอบและกำหนด*สไตล์* *สำเนียง* *จังหวะ* และ*โทนเสียง*ของเสียงได้
 
-TTS özelliği, etkileşimli, yapılandırılmamış ses ve çok formatlı girişler ve çıkışlar için tasarlanan [Live API](https://ai.google.dev/gemini-api/docs/live?hl=tr) aracılığıyla sağlanan konuşma oluşturma özelliğinden farklıdır. Live API, dinamik sohbet bağlamlarında mükemmel performans gösterirken Gemini API aracılığıyla TTS, stil ve ses üzerinde ayrıntılı kontrolle metnin tam olarak okunmasını gerektiren senaryolar (ör. podcast veya sesli kitap oluşturma) için özel olarak tasarlanmıştır.
+ความสามารถของ TTS แตกต่างจากการสร้างคำพูดที่ให้บริการผ่าน [Live API](https://ai.google.dev/gemini-api/docs/live?hl=th) ซึ่งออกแบบมาสำหรับเสียงแบบโต้ตอบที่ไม่มีโครงสร้าง รวมถึงอินพุตและเอาต์พุตแบบหลายรูปแบบ แม้ว่า Live API จะโดดเด่น
+ในบริบทการสนทนาแบบไดนามิก แต่ TTS ผ่าน Gemini API
+ได้รับการปรับแต่งสำหรับสถานการณ์ที่ต้องมีการอ่านข้อความที่แน่นอนพร้อมการควบคุม
+สไตล์และเสียงอย่างละเอียด เช่น การสร้างพอดแคสต์หรือหนังสือเสียง
 
-Bu kılavuzda, metinden tek ve çok konuşmacılı seslerin nasıl oluşturulacağı gösterilmektedir.
+คู่มือนี้จะแสดงวิธีสร้างเสียงแบบผู้พูดคนเดียวและแบบผู้พูดหลายคนจากข้อความ
 
-## Başlamadan önce
+## ก่อนเริ่มต้น
 
-[Desteklenen modeller](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr#supported-models) bölümünde belirtildiği gibi, Gemini metin okuma (TTS) özelliklerine sahip bir Gemini 2.5 model varyantı kullandığınızdan emin olun. En iyi sonuçları elde etmek için hangi modelin kullanım alanınıza en uygun olduğunu belirleyin.
+ตรวจสอบว่าคุณใช้โมเดล Gemini 2.5 ที่มีฟีเจอร์ข้อความเป็นเสียง (TTS) ของ Gemini ตามที่ระบุไว้ในส่วน[โมเดลที่รองรับ](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th#supported-models)
+โปรดพิจารณาว่าโมเดลใดเหมาะกับกรณีการใช้งานเฉพาะของคุณมากที่สุดเพื่อให้ได้ผลลัพธ์ที่ดีที่สุด
 
-Geliştirmeye başlamadan önce [Gemini TTS modellerini AI Studio'da test etmeniz](https://aistudio.google.com/generate-speech?hl=tr) faydalı olabilir.
+คุณอาจเห็นว่าการ[ทดสอบโมเดล TTS ของ Gemini ใน AI Studio](https://aistudio.google.com/generate-speech?hl=th) มีประโยชน์ก่อนที่จะเริ่มสร้าง
 
-## Tek konuşmacılı TTS
+## TTS แบบผู้พูดคนเดียว
 
-Metni tek konuşmacılı sese dönüştürmek için yanıt biçimini "ses" olarak ayarlayın ve ses adıyla birlikte bir `speech_config` nesnesi iletin.
-Önceden oluşturulmuş [çıkış sesleri](#voices) arasından bir ses adı seçmeniz gerekir.
+หากต้องการแปลงข้อความเป็นเสียงแบบลำโพงเดียว ให้ตั้งค่ารูปแบบการตอบกลับเป็น "เสียง"
+และส่งออบเจ็กต์ `speech_config` พร้อมชื่อเสียง
+คุณจะต้องเลือกชื่อเสียงจาก[เสียงเอาต์พุต](#voices)ที่สร้างไว้ล่วงหน้า
 
-Bu örnekte, modelden gelen çıkış sesi bir wave dosyasına kaydedilir:
+ตัวอย่างนี้จะบันทึกเสียงเอาต์พุตจากโมเดลในไฟล์ Wave
 
 ### Python
 
@@ -137,12 +144,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Oluşturulan son ses bloğunu döndüren `interaction.output_audio` özelliğini kullanarak oluşturulan ses verilerini alabilirsiniz. Kolaylık özellikleriyle ilgili ayrıntılar için [Etkileşimlere genel bakış](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr#convenience-properties) başlıklı makaleyi inceleyin.
+คุณสามารถดึงข้อมูลเสียงที่สร้างขึ้นได้โดยใช้พร็อพเพอร์ตี้ `interaction.output_audio`
+ซึ่งจะแสดงผลบล็อกเสียงที่สร้างล่าสุด ดูรายละเอียดเกี่ยวกับพร็อพเพอร์ตี้ความสะดวกได้ที่[ภาพรวมของการโต้ตอบ](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th#convenience-properties)
 
-## Birden fazla konuşmacı için TTS
+## TTS แบบหลายผู้พูด
 
-Birden fazla konuşmacının yer aldığı ses için her konuşmacı (en fazla 2) `speaker_voice_config` olarak yapılandırılmış bir `multi_speaker_voice_config` nesnesi gerekir.
-Her `speaker` öğesini, [istemde](#controllable) kullanılan adlarla tanımlamanız gerekir:
+สำหรับเสียงแบบหลายลำโพง คุณจะต้องมีออบเจ็กต์ `multi_speaker_voice_config` ที่กำหนดค่าลำโพงแต่ละตัว (สูงสุด 2 ตัว) เป็น `speaker_voice_config`
+คุณจะต้องกําหนด `speaker` แต่ละรายการด้วยชื่อเดียวกันกับที่ใช้ใน[พรอมต์](#controllable) ดังนี้
 
 ### Python
 
@@ -255,10 +263,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## İstemlerle konuşma stilini kontrol etme
+## ควบคุมสไตล์การพูดด้วยพรอมต์
 
-Hem tek hem de çok hoparlörlü TTS için doğal dil istemlerini kullanarak stil, ton, vurgu ve hızı kontrol edebilirsiniz.
-Örneğin, tek konuşmacılı bir istemde şunları söyleyebilirsiniz:
+คุณควบคุมสไตล์ น้ำเสียง สำเนียง และจังหวะได้โดยใช้พรอมต์ภาษาธรรมชาติ
+สำหรับการอ่านออกเสียงข้อความ (TTS) แบบเสียงเดียวและหลายเสียง
+ตัวอย่างเช่น ในพรอมต์ที่มีผู้พูดคนเดียว คุณอาจพูดว่า
 
 ```
 Say in an spooky whisper:
@@ -266,7 +275,9 @@ Say in an spooky whisper:
 Something wicked this way comes"
 ```
 
-Birden fazla konuşmacının yer aldığı istemlerde, her konuşmacının adını ve ilgili transkripti modele sağlayın. Ayrıca her hoparlör için ayrı ayrı rehberlik de sağlayabilirsiniz:
+ในพรอมต์ที่มีผู้พูดหลายคน ให้ระบุชื่อของผู้พูดแต่ละคนและ
+ข้อความถอดเสียงที่เกี่ยวข้องแก่โมเดล นอกจากนี้ คุณยังให้คำแนะนำแก่ผู้พูดแต่ละคน
+ได้ด้วย
 
 ```
 Make Speaker1 sound tired and bored, and Speaker2 sound excited and happy:
@@ -275,11 +286,12 @@ Speaker1: So... what's on the agenda today?
 Speaker2: You're never going to guess!
 ```
 
-Daha da vurgulamak için, iletmek istediğiniz stile veya duyguya karşılık gelen bir [ses seçeneği](#voices) kullanmayı deneyin. Örneğin, önceki istemde *Enceladus*'un fısıltılı sesi "yorgun" ve "sıkılmış" kelimelerini vurgulayabilirken *Puck*'ın neşeli tonu "heyecanlı" ve "mutlu" kelimelerini tamamlayabilir.
+ลองใช้[ตัวเลือกเสียง](#voices)ที่สอดคล้องกับสไตล์หรืออารมณ์ที่คุณต้องการสื่อ เพื่อเน้นย้ำให้ชัดเจนยิ่งขึ้น เช่น ในพรอมต์ก่อนหน้า เสียงลมของ *Enceladus* อาจเน้นคำว่า "เหนื่อย" และ "เบื่อ" ในขณะที่โทนเสียงที่ร่าเริงของ *Puck* อาจเสริมคำว่า "ตื่นเต้น" และ "มีความสุข"
 
-## Sese dönüştürmek için istem oluşturma
+## สร้างพรอมต์เพื่อแปลงเป็นเสียง
 
-TTS modelleri yalnızca ses çıkışı verir ancak önce transkript oluşturmak için [diğer modelleri](https://ai.google.dev/gemini-api/docs/models?hl=tr) kullanabilir, ardından bu transkripti TTS modeline aktararak yüksek sesle okutabilirsiniz.
+โมเดล TTS จะแสดงผลเฉพาะเสียง แต่คุณสามารถใช้[โมเดลอื่นๆ](https://ai.google.dev/gemini-api/docs/models?hl=th) เพื่อสร้างข้อความถอดเสียงก่อน
+แล้วส่งข้อความถอดเสียงนั้นไปยังโมเดล TTS เพื่ออ่านออกเสียง
 
 ### Python
 
@@ -339,9 +351,9 @@ const ttsInteraction = await client.interactions.create({
 await main();
 ```
 
-## Gerçek zamanlı konuşma üretme
+## การสร้างคำพูดแบบสตรีมมิง
 
-`stream: true` ayarını yaparak oluşturulan sesi, model tarafından oluşturulurken yayınlayabilirsiniz.
+คุณสามารถสตรีมเสียงที่โมเดลสร้างขึ้นขณะที่โมเดลกำลังสร้างเสียงได้โดยการตั้งค่า `stream: true`
 
 ### Python
 
@@ -420,125 +432,146 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions"    
   }'
 ```
 
-## Ses seçenekleri
+## ตัวเลือกเสียง
 
-TTS modelleri, `voice_name` alanında aşağıdaki 30 ses seçeneğini destekler:
+โมเดล TTS รองรับตัวเลือกเสียง 30 แบบต่อไปนี้ในฟิลด์ `voice_name`
 
 |  |  |  |
 | --- | --- | --- |
-| **Zephyr** -- *Parlak* | **Puck** -- *Upbeat* | **Charon** -- *Bilgilendirici* |
-| **Kore** -- *Firm* | **Fenrir** -- *Heyecanlı* | **Leda** -- *Genç* |
-| **Orus** -- *Firm* | **Aoede** -- *Breezy* | **Callirrhoe** -- *Sakin* |
-| **Autonoe** -- *Parlak* | **Enceladus** -- *Nefesli* | **Iapetus** -- *Temizle* |
-| **Umbriel** -- *Rahat* | **Algieba** -- *Sorunsuz* | **Despina** -- *Akıcı* |
-| **Erinome** -- *Temizle* | **Algenib** -- *Gravelly* | **Rasalgethi** -- *Bilgilendirici* |
+| **Zephyr** -- *Bright* | **Puck** - *Upbeat* | **Charon** - *ให้ข้อมูล* |
+| **เกาหลี** -- *Firm* | **Fenrir** - *ตื่นเต้นง่าย* | **Leda** -- *วัยรุ่น* |
+| **Orus** -- *Firm* | **Aoede** -- *Breezy* | **Callirrhoe** -- *สบายๆ* |
+| **Autonoe** -- *Bright* | **Enceladus** -- *Breathy* | **Iapetus** -- *Clear* |
+| **Umbriel** -- *สบายๆ* | **Algieba** -- *Smooth* | **Despina** -- *Smooth* |
+| **Erinome** -- *ล้าง* | **Algenib** -- *Gravelly* | **Rasalgethi** -- *ให้ข้อมูล* |
 | **Laomedeia** -- *Upbeat* | **Achernar** -- *Soft* | **Alnilam** -- *Firm* |
-| **Schedar** -- *Eşit* | **Gacrux** -- *Yetişkin* | **Pulcherrima** -- *Yönlendir* |
-| **Achird** -- *Dostu* | **Zubenelgenubi** -- *Basit* | **Vindemiatrix** -- *Nazik* |
-| **Sadachbia** -- *Canlı* | **Sadaltager** -- *Bilgili* | **Sulafat** -- *Warm* |
+| **Schedar** -- *Even* | **Gacrux** -- *ผู้ใหญ่* | **Pulcherrima** -- *Forward* |
+| **Achird** -- *เป็นมิตร* | **Zubenelgenubi** -- *สบายๆ* | **Vindemiatrix** -- *อ่อนโยน* |
+| **Sadachbia** -- *มีชีวิตชีวา* | **Sadaltager** -- *มีความรู้* | **Sulafat** -- *Warm* |
 
-Tüm ses seçeneklerini [AI Studio](https://aistudio.google.com/generate-speech?hl=tr)'da dinleyebilirsiniz.
+คุณสามารถฟังตัวเลือกเสียงทั้งหมดได้ใน [AI Studio](https://aistudio.google.com/generate-speech?hl=th)
 
-## Desteklenen diller
+## ภาษาที่รองรับ
 
-TTS modelleri, giriş dilini otomatik olarak algılar. Desteklenen diller:
+โมเดล TTS จะตรวจหาภาษาที่ป้อนโดยอัตโนมัติ ภาษาที่รองรับมีดังนี้
 
-| Dil | BCP-47 Kodu | Dil | BCP-47 Kodu |
+| ภาษา | รหัส BCP-47 | ภาษา | รหัส BCP-47 |
 | --- | --- | --- | --- |
-| Arapça | ar | Filipince | fil |
-| Bengalce | bn | Fince | fi |
-| Felemenkçe | nl | Galiçyaca | gl |
-| İngilizce | en | Gürcüce | ka |
-| Fransızca | fr | Greek | el |
-| Almanca | de | Güceratça | gu |
-| Hintçe | hi | Haiti Creole Dili | ht |
-| Endonezce | id | İbranice | o |
-| İtalyanca | it | Macarca | hu |
-| Japonca | ja | İzlandaca | : |
-| Korece | ko | Cava dili | jv |
-| Marathi | mr | Kannada | kn |
-| Lehçe | pl | Konkani | kok |
-| Portekizce | pt | Laoca | lo |
-| Rumence | ro | Latince | la |
-| Rusça | ru | Letonca | lv |
-| İspanyolca | es | Litvanca | lt |
-| Tamilce | ta | Luxembourgish | lb |
-| Telugu dili | te | Makedonca | mk |
-| Tayca | th | Maithili dili | mai |
-| Türkçe | tr | Malgaşça | mg |
-| Ukraynaca | uk | Malayca | ms |
-| Vietnamca | vi | Malayalamca | ml |
-| Afrikaanca | af | Moğolca | mn |
-| Arnavutça | sq | Nepalce | ne |
-| Amharca | öö | Norveççe, Bokmål | nb |
-| Ermenice | hy | Norveççe, Nynorsk | nn |
-| Azerice | az | Oriya | veya |
-| Baskça | eu | Peştuca | ps |
-| Belarusça | be | Farsça | fa |
-| Bulgarca | bg | Pencapça | pa |
-| Burmaca | my | Sırpça | sr |
-| Katalanca | ca | Sindice | sd |
-| Sabuanca | ceb | Seylanca | si |
-| Çince, Mandarin | cmn | Slovakça | sk |
-| Hırvatça | s | Slovence | sl |
-| Çekya | cs | Swahili | sw |
-| Danca | da | İsveççe | sv |
-| Estonca | et | Urduca | UR |
+| อาหรับ | ar | ฟิลิปปินส์ | fil |
+| เบงกอล | bn | ฟินแลนด์ | fi |
+| ดัตช์ | nl | กาลิเชียน | gl |
+| อังกฤษ | en | จอร์เจีย | ka |
+| ฝรั่งเศส | fr | กรีก | el |
+| เยอรมัน | de | คุชราต | gu |
+| ฮินดี | hi | เฮติครีโอล | ht |
+| อินโดนีเซีย | id | ฮีบรู | เขา |
+| อิตาลี | it | ฮังการี | hu |
+| ญี่ปุ่น | ja | ไอซ์แลนด์ | is |
+| เกาหลี | ko | ชวา | jv |
+| มราฐี | mr | กันนาดา | kn |
+| โปแลนด์ | pl | กงกณี | kok |
+| โปรตุเกส | pt | ภาษาลาว | lo |
+| โรมาเนีย | ro | ลาติน | la |
+| รัสเซีย | ru | ลัตเวีย | lv |
+| สเปน | es | ลิทัวเนีย | lt |
+| ทมิฬ | ta | ลักเซมเบิร์ก | ปอนด์ |
+| เตลูกู | te | มาซีโดเนีย | mk |
+| ไทย | th | ไมถิลี | mai |
+| ตุรกี | tr | มาลากาซี | มก. |
+| ยูเครน | uk | มาเลย์ | มิลลิวินาที |
+| เวียดนาม | vi | มาลายาลัม | ml |
+| อาฟรีกานส์ | af | มองโกเลีย | mn |
+| แอลเบเนีย | sq | เนปาล | ne |
+| อัมฮาริก | am | นอร์เวย์ (บ็อกมอล) | nb |
+| อาร์เมเนีย | hy | นอร์เวย์ (นีนอสก์) | nn |
+| อาร์เซอร์ไบจัน | az | โอเดีย | หรือ |
+| บาสก์ | eu | พาชตู | ps |
+| เบลารุส | be | เปอร์เซีย | fa |
+| บัลแกเรีย | bg | ปัญจาบ | pa |
+| พม่า | my | เซอร์เบีย | sr |
+| คาตาลัน | ca | สินธี | SD |
+| ซีบัวโน | ceb | สิงหล | si |
+| จีนกลาง | cmn | สโลวัก | sk |
+| โครเอเชีย | ชม. | สโลวีเนีย | sl |
+| เช็ก | cs | สวาฮิลี | sw |
+| เดนมาร์ก | da | สวีเดน | sv |
+| เอสโตเนีย | et | อูรดู | ur |
 
-## Desteklenen modeller
+## รุ่นที่รองรับ
 
-| Model | Tek konuşmacı | Çok hoparlörlü |
+| รุ่น | ผู้พูดคนเดียว | Multispeaker |
 | --- | --- | --- |
-| [Gemini 3.1 Flash TTS Önizlemesi](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=tr) | ✔️ | ✔️ |
-| [Gemini 2.5 Flash Preview TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=tr) | ✔️ | ✔️ |
-| [Gemini 2.5 Pro Önizleme TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=tr) | ✔️ | ✔️ |
+| [ตัวอย่าง TTS ของ Gemini 3.1 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=th) | ✔️ | ✔️ |
+| [TTS ของ Gemini 2.5 Flash (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=th) | ✔️ | ✔️ |
+| [TTS เวอร์ชันตัวอย่างของ Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=th) | ✔️ | ✔️ |
 
-## İstem yazma kılavuzu
+## คำแนะนำในการเขียนพรอมต์
 
-**Gemini tümleşik ses üretimi Text-to-Speech (TTS)** modeli, ***ne söyleyeceğini değil, nasıl söyleyeceğini de*** bilen bir büyük dil modeli kullanarak geleneksel TTS modellerinden ayrılır.
+โมเดล**การสร้างเสียงแบบเนทีฟของ Gemini Native Audio Generation Text-to-Speech (TTS)** แตกต่างจากโมเดล TTS ทั่วไปโดยใช้โมเดลภาษาขนาดใหญ่ที่***ไม่เพียงรู้ว่าจะพูดอะไร แต่ยังรู้วิธีพูดด้วย***
 
-Gelişmiş istemleri, modelin uyması gereken bir sistem talimatı olarak düşünebilirsiniz. Bu, modele daha fazla bağlam sunmanın ve performansı kontrol etmenin bir yoludur.
+คุณอาจมองว่าพรอมต์ขั้นสูงเป็นคำสั่งของระบบที่โมเดลต้อง
+ทำตาม ซึ่งเป็นวิธีให้บริบทแก่โมเดลมากขึ้นและควบคุมประสิทธิภาพได้
 
-Bu özelliği kullanmak için kullanıcılar kendilerini, sanal bir seslendirme sanatçısının performans sergileyeceği bir sahne hazırlayan yönetmenler olarak düşünebilir. İstem oluştururken aşağıdaki bileşenleri göz önünde bulundurmanızı öneririz: Karakterin temel kimliğini ve arketipini tanımlayan bir **Ses Profili**; fiziksel ortamı ve duygusal "havayı" belirleyen bir **Sahne Açıklaması**; stil, aksan ve tempo kontrolüyle ilgili daha hassas performans rehberliği sunan **Yönetmen Notları**.
+หากต้องการปลดล็อกความสามารถนี้ ผู้ใช้สามารถคิดว่าตนเองเป็นผู้กำกับที่กำลังจัดฉาก
+ให้ผู้พากย์เสมือนจริงแสดง เราขอแนะนำให้คุณพิจารณาส่วนประกอบต่อไปนี้ในการสร้างพรอมต์
+**โปรไฟล์เสียง**ที่กำหนดตัวตนหลักและต้นแบบของตัวละคร
+**คำอธิบายฉาก**ที่สร้างสภาพแวดล้อมทางกายภาพและ"กลิ่นอาย" ทางอารมณ์ และ**หมายเหตุของผู้กำกับ**ที่ให้คำแนะนำด้านการแสดงที่แม่นยำยิ่งขึ้นเกี่ยวกับสไตล์ สำเนียง และการควบคุมจังหวะ
 
-Kullanıcılar, bölgesel aksan, belirli paralinguistik özellikler (ör. fısıltı) veya tempo gibi ayrıntılı talimatlar vererek modelin bağlam farkındalığından yararlanıp son derece dinamik, doğal ve etkileyici ses performansları oluşturabilir. En iyi performans için **Transkript** ve yönetmenlik istemlerinin uyumlu olması önerilir. *Böylece "kim söylüyor?"* sorusunun cevabı *"ne söyleniyor?"* ve *"nasıl söyleniyor?"* sorularının cevaplarıyla eşleşir.
+การให้คำสั่งที่ละเอียด เช่น สำเนียงเฉพาะภูมิภาค ลักษณะทางภาษาที่เฉพาะเจาะจง (เช่น เสียงลม) หรือจังหวะ จะช่วยให้ผู้ใช้ใช้ประโยชน์จากการรับรู้บริบทของโมเดลเพื่อสร้างเสียงที่มีความเคลื่อนไหว เป็นธรรมชาติ และสื่ออารมณ์สูง เราขอแนะนำให้**ข้อความถอดเสียง**และพรอมต์ของผู้กำกับสอดคล้องกันเพื่อให้  *"ใครเป็นคนพูด"* ตรงกับ *"สิ่งที่พูด"* และ *"วิธีการพูด"* เพื่อให้ได้ประสิทธิภาพสูงสุด
 
-Bu kılavuzun amacı, Gemini TTS ses üretimi kullanılarak ses deneyimleri geliştirilirken temel yönlendirme sağlamak ve fikirler üretmektir. Üreteceğiniz içerikleri merakla bekliyoruz.
+จุดประสงค์ของคู่มือนี้คือการให้คำแนะนำพื้นฐานและจุดประกายไอเดียเมื่อ
+พัฒนาประสบการณ์ด้านเสียงโดยใช้การสร้างเสียง TTS ของ Gemini เราตื่นเต้น
+ที่จะได้เห็นผลงานของคุณ
 
-### Ses etiketleri
+### แท็กเสียง
 
-Etiketler, yayını ayrıntılı bir şekilde kontrol etmenizi sağlayan `[whispers]` veya `[laughs]` gibi satır içi değiştiricilerdir. Bunları, transkriptin bir satırının veya bölümünün tonunu, hızını ve duygusal atmosferini değiştirmek için kullanabilirsiniz. Ayrıca bu sesleri kullanarak performansa ünlem ve birkaç başka sözel olmayan ses de ekleyebilirsiniz. Örneğin, `[cough]`, `[sighs]` veya `[gasp]`.
+แท็กคือตัวแก้ไขในบรรทัด เช่น `[whispers]` หรือ `[laughs]` ที่ช่วยให้คุณควบคุมการนำส่งได้อย่างละเอียด
+คุณสามารถใช้เครื่องหมายเหล่านี้เพื่อเปลี่ยนน้ำเสียง จังหวะ และ
+อารมณ์ของบรรทัดหรือส่วนของข้อความถอดเสียงได้ คุณยังใช้สติกเกอร์เหล่านี้เพื่อ
+เพิ่มคำอุทานและเสียงอื่นๆ ที่ไม่ใช่คำพูดลงในการแสดงได้ด้วย เช่น
+`[cough]`, `[sighs]` หรือ `[gasp]`
 
-Hangi etiketlerin işe yaradığına ve yaramadığına dair kapsamlı bir liste yoktur. Çıkışın nasıl değiştiğini görmek için farklı duygular ve ifadelerle denemeler yapmanızı öneririz.
+ไม่มีรายการที่ครอบคลุมว่าแท็กใดใช้ได้และใช้ไม่ได้ เราขอแนะนําให้
+ทดลองใช้อารมณ์และคำพูดต่างๆ เพื่อดูว่าเอาต์พุต
+เปลี่ยนแปลงไปอย่างไร
 
-Transkriptiniz İngilizce değilse en iyi sonuçları elde etmek için yine de İngilizce ses etiketleri kullanmanızı öneririz.
+หากข้อความถอดเสียงไม่ได้เป็นภาษาอังกฤษ เราขอแนะนำให้คุณ
+ยังคงใช้แท็กเสียงภาษาอังกฤษเพื่อให้ได้ผลลัพธ์ที่ดีที่สุด
 
-**Ses etiketleriyle yaratıcı olun**
+**ใช้แท็กเสียงอย่างสร้างสรรค์**
 
-Ses etiketleriyle elde edebileceğiniz değişkenliği göstermek için, her biri aynı şeyi söyleyen ancak kullanılan etiketlere göre farklı şekilde sunulan bir dizi örnek aşağıda verilmiştir.
+เพื่อแสดงให้เห็นถึงความหลากหลายที่คุณจะได้รับจากแท็กเสียง ต่อไปนี้คือชุด
+ตัวอย่างที่แต่ละตัวอย่างพูดถึงสิ่งเดียวกัน แต่การนำส่งจะเปลี่ยนแปลงไปตาม
+แท็กที่ใช้
 
-Bir satırın başına etiket ekleyerek konuşmacının heyecanlı, sıkılmış veya isteksiz olmasını sağlayıp konuşmanın vurgusunu değiştirebilirsiniz:
+คุณเปลี่ยนการเน้นการนำส่งได้โดยเพิ่มแท็กที่จุดเริ่มต้นของ
+บรรทัดเพื่อให้ผู้พูดตื่นเต้น เบื่อ หรือไม่เต็มใจ
 
-- `[excitedly]` Merhaba, ben yeni bir metin okuma modeliyim ve birçok farklı şekilde konuşabilirim. Bugün size nasıl yardımcı olabilirim?
-- `[bored]` Merhaba, ben yeni bir metin okuma modeliyim…
-- `[reluctantly]` Merhaba, ben yeni bir metin okuma modeliyim…
+- `[excitedly]` สวัสดี ฉันเป็นโมเดลแปลงข้อความเป็นคำพูดตัวใหม่ และพูดได้หลายแบบ
+  วันนี้มีอะไรให้ช่วยบ้าง
+- `[bored]` สวัสดี ฉันเป็นโมเดลข้อความเป็นเสียงพูดใหม่…
+- `[reluctantly]` สวัสดี ฉันเป็นโมเดลข้อความเป็นเสียงพูดใหม่…
 
-Etiketler, yayın hızını değiştirmek veya hızı vurguyla birleştirmek için de kullanılabilir:
+นอกจากนี้ คุณยังใช้แท็กเพื่อเปลี่ยนจังหวะการอ่านหรือรวมจังหวะ
+กับการเน้นได้ด้วย
 
-- `[very fast]` Merhaba, ben yeni bir metin okuma modeliyim…
-- `[very slow]` Merhaba, ben yeni bir metin okuma modeliyim…
-- `[sarcastically, one painfully slow word at a time]` Merhaba, ben yeni bir metin okuma modeliyim…
+- `[very fast]` สวัสดี ฉันเป็นโมเดลข้อความเป็นเสียงพูดใหม่…
+- `[very slow]` สวัสดี ฉันเป็นโมเดลข้อความเป็นเสียงพูดใหม่…
+- `[sarcastically, one painfully slow word at a time]` สวัสดี ฉันเป็นโมเดลใหม่สำหรับ
+  การแปลงข้อความเป็นคำพูด…
 
-Ayrıca belirli bölümler üzerinde hassas kontrol sahibi olursunuz. Yani bir bölümü fısıldayabilir, başka bir bölümü bağırarak söyleyebilirsiniz.
+นอกจากนี้ คุณยังควบคุมส่วนต่างๆ ได้อย่างแม่นยำ ซึ่งหมายความว่าคุณสามารถกระซิบ
+ส่วนหนึ่งและตะโกนอีกส่วนหนึ่งได้
 
-- `[whispers]` Merhaba, ben yeni bir metin okuma modeliyim `[shouting]` ve birçok farklı şekilde konuşabilirim. `[whispers]` Bugün size nasıl yardımcı olabilirim?
+- `[whispers]` สวัสดี ฉันเป็นโมเดลข้อความเป็นเสียงรุ่นใหม่ `[shouting]` และพูดได้หลายแบบ
+  `[whispers]` วันนี้คุณต้องการความช่วยเหลือเรื่องใด
 
-Dilediğiniz reklam öğesi fikrini de deneyebilirsiniz:
+นอกจากนี้ คุณยังทดลองใช้ไอเดียครีเอทีฟโฆษณาที่ต้องการได้ด้วย
 
-- `[like a cartoon dog]` Merhaba, ben yeni bir metin okuma modeliyim…
-- `[like dracula]` Merhaba, ben yeni bir metin okuma modeliyim…
+- `[like a cartoon dog]` สวัสดี ฉันเป็นโมเดลข้อความเป็นเสียงพูดใหม่…
+- `[like dracula]` สวัสดี ฉันเป็นโมเดลข้อความเป็นเสียงพูดใหม่…
 
-En çok tercih edilen etiketler şunlardır:
+แท็กที่ใช้กันโดยทั่วไป ได้แก่
 
 |  |  |  |  |
 | --- | --- | --- | --- |
@@ -547,20 +580,24 @@ En çok tercih edilen etiketler şunlardır:
 | `[mischievously]` | `[panicked]` | `[sarcastic]` | `[serious]` |
 | `[shouting]` | `[tired]` | `[trembling]` | `[whispers]` |
 
-Etiketler, transkriptinizin yayınlanması üzerinde hızlı kontrol sağlar. Daha da fazla kontrol için bunları, performansın genel tonunu ve atmosferini belirlemek üzere bir bağlam istemiyle birleştirebilirsiniz.
+แท็กช่วยให้ควบคุมการส่งข้อความถอดเสียงได้อย่างรวดเร็ว หากต้องการควบคุมมากยิ่งขึ้น คุณสามารถใช้ร่วมกับพรอมต์บริบทเพื่อกำหนดโทนและบรรยากาศโดยรวมของประสิทธิภาพได้
 
-### İstem yapısı
+### โครงสร้างพรอมต์
 
-Güçlü bir istem, ideal olarak mükemmel bir performans oluşturmak için bir araya gelen aşağıdaki öğeleri içerir:
+พรอมต์ที่มีประสิทธิภาพควรมีองค์ประกอบต่อไปนี้ซึ่งทำงานร่วมกันเพื่อ
+สร้างประสิทธิภาพที่ยอดเยี่ยม
 
-- **Ses Profili**: Ses için bir karakter oluşturur. Karakter kimliğini, arketipini ve yaş, geçmiş vb. diğer özellikleri tanımlar.
-- **Sahne**: Ortamı hazırlar. Hem fiziksel ortamı hem de "atmosferi" açıklar.
-- **Yönetmen Notları**: Sanal karakterinizin dikkate alması gereken talimatları ayrıntılı olarak inceleyebileceğiniz performans rehberliği. Örnek olarak stil, nefes, hız, telaffuz ve aksan verilebilir.
-- **Örnek bağlam**: Modele bağlamsal bir başlangıç noktası sağlar. Böylece sanal aktörünüz, oluşturduğunuz sahneye doğal bir şekilde girer.
-- **Transkript**: Modelin seslendireceği metin. En iyi performans için transkript konusunun ve yazım stilinin verdiğiniz talimatlarla ilişkili olması gerektiğini unutmayın.
-- **Ses etiketleri**: Metnin ilgili bölümünün nasıl okunacağını değiştirmek için transkripte ekleyebileceğiniz değiştiricilerdir (ör. `[whispers]` veya `[shouting]`).
+- **โปรไฟล์เสียง** - สร้างลักษณะตัวตนของเสียง โดยกำหนดเอกลักษณ์ของตัวละคร ต้นแบบ และลักษณะอื่นๆ เช่น อายุ ภูมิหลัง ฯลฯ
+- **ฉาก** - เตรียมความพร้อม อธิบายทั้งสภาพแวดล้อมทางกายภาพและ"บรรยากาศ"
+- **หมายเหตุจากผู้กำกับ** - คำแนะนำด้านประสิทธิภาพที่คุณสามารถแจกแจงคำสั่งที่สำคัญสำหรับพรสวรรค์เสมือนให้จดบันทึกได้ ตัวอย่างเช่น
+  สไตล์การพูด การหายใจ การเว้นจังหวะ การออกเสียง และสำเนียง
+- **บริบทตัวอย่าง** - ให้จุดเริ่มต้นตามบริบทแก่โมเดล เพื่อให้
+  นักแสดงเสมือนเข้าสู่ฉากที่คุณตั้งค่าไว้อย่างเป็นธรรมชาติ
+- **ข้อความ** - ข้อความที่โมเดลจะพูด โปรดทราบว่าหัวข้อของข้อความถอดเสียงและรูปแบบการเขียนควรสอดคล้องกับ
+  คำสั่งที่คุณให้เพื่อประสิทธิภาพที่ดีที่สุด
+- **แท็กเสียง** - ตัวแก้ไขที่คุณใส่ลงในข้อความถอดเสียงเพื่อเปลี่ยนวิธีแสดงข้อความบางส่วน เช่น `[whispers]` หรือ `[shouting]`
 
-Tam istem örneği:
+ตัวอย่างพรอมต์แบบเต็ม
 
 ```
 # AUDIO PROFILE: Jaz R.
@@ -598,18 +635,20 @@ there pretending to work... stop it. Seriously, I see you. Turn this up!
 We've got the project roadmap landing in three, two... let's go!
 ```
 
-### Ayrıntılı istem stratejileri
+### กลยุทธ์การแจ้งโดยละเอียด
 
-İstemdeki her bir öğeyi aşağıdaki gibi ayrıntılandırın:
+แยกย่อยแต่ละองค์ประกอบของพรอมต์ดังนี้
 
-#### Ses Profili
+#### โปรไฟล์เสียง
 
-Karakterin kişiliğini kısaca açıklayın.
+อธิบายตัวตนของตัวละครโดยย่อ
 
-- **Ad.** Karakterinize ad vermek, modeli ve performansını bir araya getirmenize yardımcı olur. Sahneyi ve bağlamı ayarlarken karakterden adıyla bahsedin.
-- **Rol** Sahnedeki karakterin temel kimliği ve arketipi. Örneğin, radyo DJ'i, podcast yayıncısı, haber muhabiri vb.
+- **ชื่อ** การตั้งชื่อตัวละครจะช่วยให้โมเดลและ
+  การแสดงเชื่อมโยงกันอย่างใกล้ชิด โปรดอ้างอิงถึงตัวละครด้วยชื่อเมื่อตั้งค่าฉากและ
+  บริบท
+- **บทบาท** ตัวตนหลักและต้นแบบของตัวละครที่กำลังแสดงในฉาก เช่น ดีเจวิทยุ ผู้จัดพอดแคสต์ ผู้สื่อข่าว เป็นต้น
 
-Örnekler:
+ตัวอย่าง
 
 ```
 # AUDIO PROFILE: Jaz R.
@@ -621,11 +660,15 @@ Karakterin kişiliğini kısaca açıklayın.
 ## "The Beauty Influencer"
 ```
 
-#### Sahne
+#### บรรยากาศ
 
-Konum, ruh hali ve ortamla ilgili ayrıntılar da dahil olmak üzere sahnenin bağlamını belirleyin. Bu ayrıntılar, tonu ve atmosferi oluşturur. Karakterin etrafında neler olduğunu ve bunun karakteri nasıl etkilediğini açıklayın. Sahne, etkileşimin tamamı için çevresel bağlamı sağlar ve oyunculuk performansını ince ve doğal bir şekilde yönlendirir.
+กำหนดบริบทของฉาก รวมถึงสถานที่ อารมณ์ และรายละเอียดด้านสิ่งแวดล้อม
+ที่สร้างโทนและบรรยากาศ อธิบายสิ่งที่เกิดขึ้นรอบตัว
+ตัวละครและผลกระทบที่มีต่อตัวละคร ฉากจะให้บริบทด้านสภาพแวดล้อม
+สำหรับการโต้ตอบทั้งหมดและเป็นแนวทางในการแสดง
+อย่างเป็นธรรมชาติ
 
-Örnekler:
+ตัวอย่าง
 
 ```
 ## THE SCENE: The London Studio
@@ -644,15 +687,18 @@ deadened by plush velvet curtains and a heavy rug, but there is a
 distinct "proximity effect."
 ```
 
-#### Yönetmen notları
+#### หมายเหตุของผู้กำกับ
 
-Bu önemli bölümde, performansla ilgili özel yönergeler yer alır. Diğer tüm öğeleri atlayabilirsiniz ancak bu öğeyi eklemenizi öneririz.
+ส่วนสำคัญนี้มีคำแนะนำด้านประสิทธิภาพที่เฉพาะเจาะจง คุณข้ามองค์ประกอบอื่นๆ ทั้งหมดได้ แต่เราขอแนะนำให้รวมองค์ประกอบนี้ไว้
 
-Yalnızca performans için önemli olanı tanımlayın ve aşırı belirtmemeye dikkat edin. Çok fazla katı kural, modellerin yaratıcılığını sınırlar ve daha kötü bir performansa yol açabilir. Rol ve sahne açıklamasını, belirli performans kurallarıyla dengeleyin.
+กำหนดเฉพาะสิ่งที่สำคัญต่อประสิทธิภาพ โดยระมัดระวังไม่ให้
+ระบุมากเกินไป กฎที่เข้มงวดมากเกินไปจะจำกัดความคิดสร้างสรรค์ของโมเดลและอาจ
+ส่งผลให้ประสิทธิภาพแย่ลง ปรับสมดุลบทบาทและคำอธิบายฉากกับ
+กฎการแสดงเฉพาะ
 
-En yaygın talimatlar **Stil, Tempo ve Vurgu**'dur ancak model bunlarla sınırlı değildir ve bunları gerektirmez. Performansınız için önemli olan ek ayrıntıları kapsayacak özel talimatlar ekleyebilir ve gerektiği kadar ayrıntılı veya az bilgi verebilirsiniz.
+คำแนะนำที่พบบ่อยที่สุดคือ**สไตล์ จังหวะ และสำเนียง** แต่โมเดลไม่ได้จำกัดอยู่เพียงคำแนะนำเหล่านี้ และไม่จำเป็นต้องใช้คำแนะนำเหล่านี้ คุณสามารถใส่คำสั่งที่กำหนดเองเพื่อระบุรายละเอียดเพิ่มเติมที่สำคัญต่อประสิทธิภาพ และระบุรายละเอียดมากหรือน้อยเท่าที่จำเป็น
 
-Örneğin:
+เช่น
 
 ```
 ### DIRECTOR'S NOTES
@@ -665,13 +711,17 @@ delivery influencers use in short form videos.
 Accent: Southern california valley girl from Laguna Beach |
 ```
 
-**Stil:**
+**รูปแบบ:**
 
-Oluşturulan konuşmanın üslubunu ve stilini belirler. Performansa yön vermek için neşeli, enerjik, rahat, sıkılmış gibi ifadeler ekleyin. Açıklayıcı olun ve gerektiği kadar ayrıntı verin: *"Bulaşıcı bir coşku. Dinleyici, büyük ve heyecan verici bir topluluk etkinliğinin parçası olduğunu hissetmeli."* ifadesi, *"enerjik ve coşkulu"* ifadesinden daha iyi sonuç veriyor.
+กำหนดโทนและสไตล์ของเสียงพูดที่สร้างขึ้น ระบุอารมณ์ เช่น สดใส
+กระตือรือร้น ผ่อนคลาย เบื่อ ฯลฯ เพื่อเป็นแนวทางในการแสดง อธิบายให้ชัดเจนและ
+ให้รายละเอียดมากที่สุดเท่าที่จำเป็น: *"ความกระตือรือร้นที่แพร่หลาย ผู้ฟัง
+ควรรู้สึกเหมือนเป็นส่วนหนึ่งของกิจกรรมชุมชนที่ยิ่งใหญ่และน่าตื่นเต้น"* ได้ผลดีกว่าการพูดว่า *"กระตือรือร้นและกระปรี้กระเปร่า"*
 
-Hatta seslendirme sektöründe popüler olan "vokal gülümsemesi" gibi terimleri de deneyebilirsiniz. İstediğiniz sayıda stil özelliği ekleyebilirsiniz.
+คุณอาจลองใช้คำที่ได้รับความนิยมในอุตสาหกรรมเสียงบรรยาย เช่น "เสียง
+ยิ้ม" คุณซ้อนลักษณะสไตล์ได้มากเท่าที่ต้องการ
 
-Örnekler:
+ตัวอย่าง
 
 Simple Emotion
 
@@ -682,7 +732,7 @@ Style: Frustrated and angry developer who can't get the build to run.
 ...
 ```
 
-Daha fazla derinlik
+ความลึกมากขึ้น
 
 ```
 DIRECTORS NOTES
@@ -691,7 +741,7 @@ Style: Sassy GenZ beauty YouTuber, who mostly creates content for YouTube Shorts
 ...
 ```
 
-Karmaşık
+ซับซ้อน
 
 ```
 DIRECTORS NOTES
@@ -702,12 +752,12 @@ always raised to keep the tone bright, sunny, and explicitly inviting.
 elongated vowels on excitement words (e.g., "Beauuutiful morning").
 ```
 
-**Aksan:**
+**เครื่องหมายแสดงการเน้นเสียง:**
 
-Seçilen aksanı açıklayın. Ne kadar ayrıntılı olursanız sonuçlar o kadar iyi olur. Örneğin, "*British English accent as heard in Croydon,
-England*" (İngiltere, Croydon'da duyulan İngiliz İngilizcesi aksanı) yerine "*British Accent*" (İngiliz aksanı) ifadesini kullanın.
+อธิบายสำเนียงที่เลือก ยิ่งเจาะจงมากเท่าไหร่ ผลลัพธ์ก็จะยิ่งดีขึ้นเท่านั้น เช่น ใช้ "*สำเนียงภาษาอังกฤษแบบอังกฤษที่ได้ยินในครอยดอน
+ประเทศอังกฤษ*" แทน "*สำเนียงอังกฤษ*"
 
-Örnekler:
+ตัวอย่าง
 
 ```
 ### DIRECTORS NOTES
@@ -723,13 +773,13 @@ Accent: Jaz is a from Brixton, London
 ...
 ```
 
-**İlerleme hızı:**
+**การกำหนดอัตราการแสดงโฆษณา:**
 
-Parça boyunca genel tempo ve tempo değişimi.
+การกำหนดจังหวะโดยรวมและความหลากหลายของจังหวะตลอดทั้งเพลง
 
-Örnekler:
+ตัวอย่าง
 
-Basit
+เรียบง่าย
 
 ```
 ### DIRECTORS NOTES
@@ -738,7 +788,7 @@ Pacing: Speak as fast as possible
 ...
 ```
 
-Daha fazla derinlik
+ความลึกเพิ่มเติม
 
 ```
 ### DIRECTORS NOTES
@@ -747,7 +797,7 @@ Pacing: Speaks at a faster, energetic pace, keeping up with fast paced music.
 ...
 ```
 
-Karmaşık
+ซับซ้อน
 
 ```
 ### DIRECTORS NOTES
@@ -756,39 +806,53 @@ Pacing: The "Drift": The tempo is incredibly slow and liquid. Words bleed into e
 ...
 ```
 
-**Deneyin**
+**ลองใช้เลย**
 
-Bu örneklerden bazılarını [TTS uygulamasında](http://aistudio.google.com/app/apps/bundled/synergy_intro?hl=tr) kendiniz deneyin ve Gemini'ın sizi yönetmen koltuğuna oturtmasına izin verin. Harika vokal performansları için şu ipuçlarını aklınızda bulundurun:
+ลองใช้ตัวอย่างเหล่านี้ด้วยตัวคุณเองใน[แอป TTS](http://aistudio.google.com/app/apps/bundled/synergy_intro?hl=th) แล้วให้ Gemini
+เป็นผู้กำกับ โปรดคำนึงถึงเคล็ดลับต่อไปนี้เพื่อสร้างการแสดงเสียงร้องที่ยอดเยี่ยม
 
-- İsteminizin tamamının tutarlı olmasına dikkat edin. Senaryo ve yönlendirme, harika bir performans oluşturmak için birlikte çalışır.
-- Her şeyi açıklamanız gerekmez. Bazen modelin boşlukları doldurmasına izin vermek, doğal bir sonuç elde etmenize yardımcı olur. (Tıpkı yetenekli bir oyuncu gibi)
-- Takıldığınız noktalarda Gemini'dan yardım alarak senaryonuzu veya performansınızı şekillendirebilirsiniz.
+- อย่าลืมทำให้พรอมต์ทั้งหมดสอดคล้องกัน โดยสคริปต์และคำสั่งจะทำงานร่วมกันในการสร้างการแสดงที่ยอดเยี่ยม
+- คุณไม่จำเป็นต้องอธิบายทุกอย่าง บางครั้งการเว้นช่องว่างให้โมเดลเติมเต็มจะช่วยให้เป็นธรรมชาติมากขึ้น (เหมือนนักแสดงมากความสามารถ)
+- หากคุณรู้สึกตัน ให้ Gemini ช่วยคุณร่างสคริปต์หรือการแสดง
 
-## Sınırlamalar
+## ข้อจำกัด
 
-- TTS modelleri yalnızca metin girişleri alabilir ve ses çıkışları oluşturabilir.
-- TTS oturumunun [bağlam penceresi](https://ai.google.dev/gemini-api/docs/long-context?hl=tr) sınırı 32 bin parçadır.
-- Dil desteği için [Diller](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr#languages) bölümünü inceleyin.
-- TTS, `gemini-3.1-flash-tts-preview` kullanılırken hariç olmak üzere akışı desteklemez.
+- โมเดล TTS รับได้เฉพาะข้อความที่ป้อนและสร้างเอาต์พุตเสียงเท่านั้น
+- เซสชัน TTS มีขีดจำกัด[หน้าต่างบริบท](https://ai.google.dev/gemini-api/docs/long-context?hl=th)ที่ 32,000 โทเค็น
+- ดูส่วน[ภาษา](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th#languages)เพื่อดูการรองรับภาษา
+- TTS ไม่รองรับการสตรีม ยกเว้นเมื่อใช้ `gemini-3.1-flash-tts-preview`
 
-Konuşma üretimi için Gemini 3.1 Flash TTS Önizleme modeli kullanılırken özellikle aşağıdaki kısıtlamalar geçerlidir:
+ข้อจำกัดต่อไปนี้จะมีผลเฉพาะเมื่อใช้โมเดลตัวอย่าง TTS ของ Gemini 3.1 Flash
+สำหรับการสร้างคำพูด
 
-- **İstem talimatlarıyla ses tutarsızlığı:** Modelin çıktısı her zaman seçilen konuşmacıyla tam olarak eşleşmeyebilir. Bu durumda ses, beklenenden farklı duyulur. Uyumsuz tonları (ör. genç bir kız gibi konuşmaya çalışan derin bir erkek sesi) önlemek için isteminizin yazılı tonunun ve bağlamının, seçilen konuşmacının profiliyle doğal olarak uyumlu olduğundan emin olun.
-- **Daha uzun çıktıların kalitesi:** Konuşma kalitesi ve tutarlılığı, birkaç dakikadan uzun olan oluşturulan çıktılarda değişmeye başlayabilir. Transkriptlerinizi daha küçük parçalara bölmenizi öneririz.
-- **Bazen metin belirteçleri döndürülüyor:** Model bazen ses belirteçleri yerine metin belirteçleri döndürerek sunucunun isteği `500` hatasıyla reddetmesine neden oluyor. Bu durum, isteklerin çok küçük bir yüzdesinde rastgele gerçekleştiğinden bunları işlemek için uygulamanızda otomatik yeniden deneme mantığı uygulamanız gerekir.
-- **İstem sınıflandırıcısının yanlış reddetmeleri:** Belirsiz istemler, konuşma sentezi sınıflandırıcısını tetikleyemeyebilir. Bu durumda istek reddedilir (`PROHIBITED_CONTENT`) veya model, stil talimatlarınızı ve yönetmen notlarınızı yüksek sesle okur. Modele konuşma sentezleme talimatı veren net bir giriş ekleyerek ve gerçek konuşulan transkriptin başladığı yeri açıkça etiketleyerek istemlerinizi doğrulayın.
+- **เสียงไม่สอดคล้องกับวิธีการในพรอมต์:** เอาต์พุตของโมเดลอาจไม่ตรงกับ
+  ลำโพงที่เลือกเสมอไป ซึ่งทำให้เสียงที่ได้แตกต่างจากที่คาดไว้
+  หากต้องการหลีกเลี่ยงการใช้เสียงที่ไม่ตรงกัน (เช่น เสียงผู้ชายทุ้ม
+  พยายามพูดเหมือนเด็กผู้หญิง) ให้ตรวจสอบว่าโทนและบริบทที่เขียนในพรอมต์สอดคล้องกับโปรไฟล์ของลำโพงที่เลือกอย่างเป็นธรรมชาติ
+- **คุณภาพของเอาต์พุตที่ยาวขึ้น:** คุณภาพและความสอดคล้องของคำพูดอาจเริ่ม
+  เปลี่ยนแปลงไปเมื่อเอาต์พุตที่สร้างขึ้นยาวกว่า 2-3 นาที เราขอแนะนำให้แบ่งข้อความถอดเสียงออกเป็นส่วนเล็กๆ
+- **การแสดงผลโทเค็นข้อความเป็นครั้งคราว:** โมเดลจะแสดงผลโทเค็นข้อความ
+  แทนโทเค็นเสียงเป็นครั้งคราว ซึ่งทำให้เซิร์ฟเวอร์ไม่สามารถดำเนินการตามคำขอ
+  และแสดงข้อผิดพลาด `500` เนื่องจากปัญหานี้เกิดขึ้นแบบสุ่มในคำขอเพียงไม่กี่เปอร์เซ็นต์ คุณจึงควรใช้ตรรกะการลองใหม่โดยอัตโนมัติในแอปพลิเคชันเพื่อจัดการกับปัญหาเหล่านี้
+- **การปฏิเสธที่ผิดพลาดของเครื่องมือคัดแยกพรอมต์:** พรอมต์ที่คลุมเครืออาจไม่ทริกเกอร์
+  เครื่องมือคัดแยกการสังเคราะห์เสียงพูด ทำให้คำขอถูกปฏิเสธ
+  (`PROHIBITED_CONTENT`) หรือทำให้โมเดลอ่านคำสั่งสไตล์และหมายเหตุของผู้กำกับ
+  ออกมา ตรวจสอบความถูกต้องของพรอมต์โดยเพิ่มคำนำที่ชัดเจน
+  ซึ่งสั่งให้โมเดลสังเคราะห์เสียงพูด และติดป้ายกำกับอย่างชัดเจนว่า
+  ข้อความถอดเสียงที่พูดจริงเริ่มต้นที่ใด
 
-## Sırada ne var?
+## ขั้นตอนถัดไป
 
-- Gemini'ın [Live API](https://ai.google.dev/gemini-api/docs/live?hl=tr)'si, diğer yöntemlerle birlikte kullanabileceğiniz etkileşimli ses üretme seçenekleri sunar.
-- Ses *girişleriyle* çalışma hakkında bilgi edinmek için [Ses yorumlama](https://ai.google.dev/gemini-api/docs/audio?hl=tr) rehberini inceleyin.
+- [Live API](https://ai.google.dev/gemini-api/docs/live?hl=th) ของ Gemini มีตัวเลือกการสร้างเสียงแบบอินเทอร์แอกทีฟ
+  ที่คุณสามารถสลับกับรูปแบบอื่นๆ ได้
+- หากต้องการทำงานกับ*อินพุต*เสียง โปรดไปที่คู่มือ[การทำความเข้าใจเสียง](https://ai.google.dev/gemini-api/docs/audio?hl=th)
 
-Geri bildirim gönderin
+ส่งความคิดเห็น
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Son güncelleme tarihi: 2026-07-30 UTC.
+อัปเดตล่าสุด 2026-07-30 UTC
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-30 UTC"],[],[]]

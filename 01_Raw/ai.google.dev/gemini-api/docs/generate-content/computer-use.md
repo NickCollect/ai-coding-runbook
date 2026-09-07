@@ -1,40 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/computer-use?hl=es-419
-fetched_at: 2026-08-31T06:38:18.451130+00:00
-title: "Uso de la computadora \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/computer-use?hl=hi
+fetched_at: 2026-09-07T05:40:25.719353+00:00
+title: "\u0915\u0902\u092a\u094d\u092f\u0942\u091f\u0930 \u0915\u093e \u0907\u0938\u094d\u0924\u0947\u092e\u093e\u0932 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Enviar comentarios
+सुझाव भेजें
 
-# Uso de la computadora
+# कंप्यूटर का इस्तेमाल
 
-La herramienta Uso de la computadora te permite crear agentes de control para navegadores, dispositivos móviles y computadoras de escritorio que interactúan con tareas y las automatizan. Con las capturas de pantalla, el modelo puede "ver" una pantalla de computadora y "actuar" generando acciones específicas de la IU, como clics del mouse y entradas del teclado. Al igual que con la llamada a funciones, deberás implementar el entorno de ejecución del cliente para recibir y ejecutar las acciones de uso de la computadora.
+कंप्यूटर इस्तेमाल करने वाले टूल की मदद से, ब्राउज़र, मोबाइल, और डेस्कटॉप कंट्रोल एजेंट बनाए जा सकते हैं. ये एजेंट, टास्क को ऑटोमेट करते हैं और उनके साथ इंटरैक्ट करते हैं. स्क्रीनशॉट का इस्तेमाल करके, मॉडल कंप्यूटर स्क्रीन को "देख" सकता है. साथ ही, माउस क्लिक और कीबोर्ड इनपुट जैसे यूज़र इंटरफ़ेस (यूआई) से जुड़ी कार्रवाइयां करके "काम" कर सकता है. फ़ंक्शन कॉलिंग की तरह ही, आपको कंप्यूटर के इस्तेमाल से जुड़ी कार्रवाइयों को पाने और उन्हें पूरा करने के लिए, क्लाइंट-साइड एक्ज़ीक्यूशन एनवायरमेंट लागू करना होगा.
 
-Para obtener la lista de modelos compatibles, consulta [Versiones de modelos](#model-versions). Los modelos de Gemini 3.x admiten varias capacidades avanzadas:
+जिन मॉडल के साथ Gemini 1.5 Pro काम करता है उनकी सूची देखने के लिए, [मॉडल के वर्शन](#model-versions) पर जाएं. Gemini 3.x मॉडल में कई बेहतर सुविधाएँ उपलब्ध हैं:
 
-- **Compatibilidad con múltiples entornos:** Agentes de compilación para entornos de [navegadores, dispositivos móviles y computadoras](#supported-environments)
-- **Acciones optimizadas con intents:** Las acciones incluyen un campo `intent` que explica el razonamiento del modelo detrás de cada paso.
-- **Políticas de seguridad configurables:** Ajusta el [comportamiento de seguridad](#safety-policies) con categorías de políticas y anulaciones integradas.
-- **Detección de inyección de instrucciones:** Habilita la [exploración de capturas de pantalla](#prompt-injection) para detectar instrucciones adversarias ocultas.
+- **एक से ज़्यादा एनवायरमेंट के लिए सहायता:** [ब्राउज़र, मोबाइल, और डेस्कटॉप](#supported-environments) एनवायरमेंट के लिए एजेंट बनाएं.
+- **आसानी से की जा सकने वाली कार्रवाइयां:** कार्रवाइयों में एक `intent` फ़ील्ड शामिल होता है. इसमें मॉडल के हर चरण के पीछे की वजह बताई जाती है.
+- **कॉन्फ़िगर की जा सकने वाली सुरक्षा नीतियां:** पहले से मौजूद नीति की कैटगरी और ओवरराइड की मदद से, [सुरक्षा से जुड़े व्यवहार](#safety-policies) को बेहतर बनाएं.
+- **प्रॉम्प्ट इंजेक्शन का पता लगाना:** छिपे हुए नुकसान पहुंचाने वाले निर्देशों का पता लगाने के लिए, [स्क्रीनशॉट स्कैन करने की सुविधा](#prompt-injection) के लिए ऑप्ट-इन करें.
 
-Con Computer Use, puedes compilar agentes que hagan lo siguiente:
+कंप्यूटर के इस्तेमाल की सुविधा की मदद से, ऐसे एजेंट बनाए जा सकते हैं जो:
 
-- Automatiza el ingreso de datos repetitivos o el llenado de formularios en sitios web.
-- Realiza pruebas automatizadas de aplicaciones web y flujos de usuarios
-- Realizar investigaciones en varios sitios web (p.ej., recopilar información de productos, precios y opiniones de sitios de comercio electrónico para tomar una decisión de compra)
+- वेबसाइटों पर बार-बार होने वाली डेटा एंट्री या फ़ॉर्म भरने की प्रोसेस को अपने-आप होने की सुविधा चालू करें.
+- वेब ऐप्लिकेशन और उपयोगकर्ता फ़्लो की ऑटोमेटेड टेस्टिंग करना
+- अलग-अलग वेबसाइटों पर रिसर्च करना. जैसे, खरीदारी करने से पहले ई-कॉमर्स साइटों से प्रॉडक्ट की जानकारी, कीमतें, और समीक्षाएं इकट्ठा करना
 
-A continuación, se muestra un ejemplo mínimo para habilitar la herramienta Uso de la computadora:
+कंप्यूटर के इस्तेमाल से जुड़ा टूल चालू करने का एक छोटा सा उदाहरण यहां दिया गया है:
 
 ### Python
 
@@ -81,45 +81,45 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-## Cómo funciona el uso de la computadora
+## कंप्यूटर के इस्तेमाल की सुविधा कैसे काम करती है
 
-Para crear un agente con el modelo de Computer Use, debes configurar un bucle continuo entre tu aplicación y la API. Esto es lo que hará tu código en cada paso:
+कंप्यूटर के इस्तेमाल वाले मॉडल के साथ एजेंट बनाने के लिए, आपको अपने ऐप्लिकेशन और एपीआई के बीच एक लूप सेट अप करना होगा. यहां बताया गया है कि हर चरण में आपका कोड क्या करेगा:
 
-1. [**Envía una solicitud al modelo**](#send-request)
-   - Tu aplicación envía una solicitud a la API que contiene la herramienta Uso de la computadora, tu configuración (como el entorno de destino), la instrucción del usuario y una captura de pantalla de la pantalla actual.
-2. [**Recibe la respuesta del modelo**](#model-response)
-   - El modelo analiza la pantalla y la instrucción, y devuelve una respuesta que incluye un `function_call` sugerido que representa una acción de la IU (como un clic, un desplazamiento o una pulsación de tecla).
-   - En el caso de los **modelos de Gemini 3.x**, la respuesta también incluye un razonamiento `intent` que explica por qué el modelo eligió esa acción.
-   - La respuesta también puede incluir un `safety_decision` de un sistema de seguridad interno que clasifica la acción como normal o permitida, `require_confirmation` (que requiere la aprobación del usuario) o bloqueada.
-3. [**Ejecuta la acción recibida**](#execute-actions)
-   - Si se permite la acción (o el usuario la confirma), tu código del cliente analiza el objeto `function_call`, ajusta las coordenadas normalizadas para que coincidan con tu viewport y ejecuta la acción en tu entorno de destino con herramientas de automatización (como Playwright). Si la acción está bloqueada, tu cliente debe detener la ejecución o controlar la interrupción.
-4. [**Captura el estado del entorno nuevo**](#capture-state)
-   - Después de que la acción termina de ejecutarse, tu aplicación captura una nueva captura de pantalla y la envía de vuelta al modelo en un `function_result` para solicitar el siguiente paso.
+1. [**मॉडल को अनुरोध भेजना**](#send-request)
+   - आपका ऐप्लिकेशन, एपीआई अनुरोध भेजता है. इसमें कंप्यूटर इस्तेमाल करने से जुड़ा टूल, कॉन्फ़िगरेशन सेटिंग (जैसे कि टारगेट एनवायरमेंट), उपयोगकर्ता का प्रॉम्प्ट, और मौजूदा स्क्रीन का स्क्रीनशॉट शामिल होता है.
+2. [**मॉडल से जवाब पाना**](#model-response)
+   - मॉडल, स्क्रीन और प्रॉम्प्ट का विश्लेषण करता है. इसके बाद, वह एक जवाब देता है. इस जवाब में, यूज़र इंटरफ़ेस (यूआई) की कार्रवाई को दिखाने वाला `function_call` शामिल होता है. जैसे, क्लिक करना, स्क्रोल करना या कीस्ट्रोक.
+   - **Gemini 3.x मॉडल** के लिए, जवाब में `intent` भी शामिल होता है. इसमें बताया जाता है कि मॉडल ने वह कार्रवाई क्यों चुनी.
+   - जवाब में, `safety_decision` भी शामिल हो सकता है. यह इंटरनल सुरक्षा सिस्टम से मिलता है. इसमें कार्रवाई को सामान्य/अनुमति दी गई, `require_confirmation` (उपयोगकर्ता की अनुमति ज़रूरी है) या ब्लॉक के तौर पर क्लासिफ़ाई किया जाता है.
+3. [**कार्रवाई पूरी करना**](#execute-actions)
+   - अगर कार्रवाई की अनुमति है या उपयोगकर्ता इसकी पुष्टि करता है, तो आपका क्लाइंट-साइड कोड `function_call` को पार्स करता है. इसके बाद, सामान्य किए गए कोऑर्डिनेट को आपके व्यूपोर्ट से मैच करने के लिए स्केल करता है. साथ ही, ऑटोमेशन टूल (जैसे, Playwright) का इस्तेमाल करके, आपकी टारगेट एनवायरमेंट में कार्रवाई को पूरा करता है. अगर कार्रवाई को ब्लॉक कर दिया जाता है, तो आपके क्लाइंट को कार्रवाई रोकनी चाहिए या रुकावट को मैनेज करना चाहिए.
+4. [**नए एनवायरमेंट की स्थिति कैप्चर करना**](#capture-state)
+   - कार्रवाई पूरी होने के बाद, आपका ऐप्लिकेशन एक नया स्क्रीनशॉट कैप्चर करता है और उसे मॉडल को वापस भेजता है. ऐसा `function_result` में अगले चरण का अनुरोध करने के लिए किया जाता है.
 
-Luego, este proceso se repite desde el paso 2, y se solicita continuamente la siguiente acción del modelo hasta que se completa o finaliza la tarea.
+इसके बाद, यह प्रोसेस चरण 2 से फिर शुरू होती है. इसमें मॉडल से लगातार अगली कार्रवाई करने के लिए कहा जाता है. यह तब तक जारी रहता है, जब तक टास्क पूरा नहीं हो जाता या उसे बंद नहीं कर दिया जाता.
 
-![Descripción general del uso de la computadora](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=es-419)
+![कंप्यूटर के इस्तेमाल की खास जानकारी](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=hi)
 
-## Cómo implementar el uso de la computadora
+## कंप्यूटर के इस्तेमाल की सुविधा कैसे लागू करें
 
-Antes de compilar con la herramienta Uso de la computadora, deberás configurar lo siguiente:
+कंप्यूटर के इस्तेमाल से जुड़ी सुविधा का इस्तेमाल करके, टूल बनाने से पहले आपको ये सेट अप करने होंगे:
 
-- **Entorno de ejecución seguro:** Ejecuta tu agente en una VM o un contenedor de zona de pruebas para aislarlo de tu sistema host y limitar su impacto potencial.
-  La [implementación de referencia](https://github.com/google/computer-use-preview/) incluye un entorno de pruebas basado en Docker listo para usar que puedes utilizar como punto de partida.
-- **Controlador de acciones del cliente:** Implementa la lógica del cliente para ejecutar coordenadas, escribir texto y tomar capturas de pantalla.
+- **सुरक्षित एक्ज़ीक्यूशन एनवायरमेंट:** अपने एजेंट को सैंडबॉक्स किए गए वीएम या कंटेनर में चलाएं, ताकि इसे आपके होस्ट सिस्टम से अलग किया जा सके और इसके संभावित असर को कम किया जा सके.
+  [रेफ़रंस इंप्लीमेंटेशन](https://github.com/google/computer-use-preview/) में, इस्तेमाल के लिए तैयार Docker पर आधारित सैंडबॉक्स शामिल होता है. इसका इस्तेमाल शुरुआती तौर पर किया जा सकता है.
+- **क्लाइंट-साइड ऐक्शन हैंडलर:** क्लाइंट-साइड लॉजिक लागू करके, कोऑर्डिनेट लागू करें, टेक्स्ट टाइप करें, और स्क्रीनशॉट लें.
 
-En los siguientes ejemplos, se usa un navegador web como entorno de ejecución y [Playwright](https://playwright.dev/) como controlador del cliente.
+नीचे दिए गए उदाहरणों में, वेब ब्राउज़र को एक्ज़ीक्यूशन एनवायरमेंट के तौर पर और [Playwright](https://playwright.dev/) को क्लाइंट-साइड हैंडलर के तौर पर इस्तेमाल किया गया है.
 
-### 0. Configura Playwright
+### 0. Playwright सेट अप करना
 
-Primero, instala los paquetes requeridos:
+सबसे पहले, ज़रूरी पैकेज इंस्टॉल करें:
 
 ```
 pip install google-genai playwright
 playwright install chromium
 ```
 
-Luego, inicializa una instancia del navegador Playwright para usarla en la ejecución:
+इसके बाद, Playwright ब्राउज़र इंस्टेंस को शुरू करें, ताकि इसका इस्तेमाल एक्ज़ीक्यूशन के लिए किया जा सके:
 
 ```
 from playwright.sync_api import sync_playwright
@@ -147,15 +147,15 @@ page.goto("https://www.google.com")
 # will be used in the steps below.
 ```
 
-### 1. Envía una solicitud al modelo
+### 1. मॉडल को अनुरोध भेजना
 
-Inicializa la biblioteca cliente y configura la herramienta Computer Use. Ten en cuenta que no es necesario especificar el tamaño de visualización cuando se envía una solicitud. El modelo predice las coordenadas de píxeles ajustadas a la altura y el ancho de la pantalla.
+क्लाइंट लाइब्रेरी शुरू करें और कंप्यूटर के इस्तेमाल से जुड़े टूल को कॉन्फ़िगर करें. ध्यान दें कि अनुरोध करते समय, डिसप्ले साइज़ के बारे में बताना ज़रूरी नहीं है. मॉडल, स्क्रीन की ऊंचाई और चौड़ाई के हिसाब से पिक्सल कोऑर्डिनेट का अनुमान लगाता है.
 
-### ?', 'Gemini 3.x
+### Gemini 3.x
 
 ### Python
 
-Usa el SDK de `google-genai` de Python (versión `2.7.0` o posterior) para configurar una solicitud que se oriente al entorno del navegador:
+ब्राउज़र एनवायरमेंट को टारगेट करने वाले अनुरोध को कॉन्फ़िगर करने के लिए, `google-genai` Python SDK (वर्शन `2.7.0` या इसके बाद का वर्शन) का इस्तेमाल करें:
 
 ```
 from google import genai
@@ -201,7 +201,7 @@ print(response.text)
 
 ### JavaScript
 
-Usa el SDK de Node.js de `@google/genai` para configurar una solicitud que se oriente al entorno del navegador:
+ब्राउज़र एनवायरमेंट को टारगेट करने वाले अनुरोध को कॉन्फ़िगर करने के लिए, `@google/genai` Node.js SDK का इस्तेमाल करें:
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -234,7 +234,7 @@ console.log(response.text);
 
 ### REST
 
-Usa curl para enviar una solicitud:
+अनुरोध भेजने के लिए curl का इस्तेमाल करें:
 
 ```
 curl -X POST \
@@ -260,7 +260,7 @@ curl -X POST \
   }'
 ```
 
-### Gemini 2.5 (heredado)
+### Gemini 2.5 (लेगसी)
 
 ### Python
 
@@ -334,11 +334,11 @@ const response = await ai.models.generateContent({
 console.log(response);
 ```
 
-### 2. Recibe la respuesta del modelo
+### 2. मॉडल से जवाब पाना
 
-El modelo de respuesta sugiere una llamada a función. En el caso de los **modelos de Gemini 3.x**, la respuesta contiene una intención de razonamiento personalizada junto con las coordenadas. A continuación, se muestran ejemplos de ambas respuestas:
+जवाब देने वाले मॉडल ने फ़ंक्शन कॉल करने का सुझाव दिया है. **Gemini 3.x मॉडल** के लिए, जवाब में कोऑर्डिनेट के साथ-साथ, गहराई से विश्लेषण के हिसाब से तैयार किया गया इंटेंट भी शामिल होता है. यहां दोनों तरह के जवाबों के उदाहरण दिए गए हैं:
 
-### ?', 'Gemini 3.x
+### Gemini 3.x
 
 ```
 {
@@ -353,7 +353,7 @@ El modelo de respuesta sugiere una llamada a función. En el caso de los **model
 }
 ```
 
-### Gemini 2.5 (heredado)
+### Gemini 2.5 (लेगसी)
 
 ```
 {
@@ -378,11 +378,11 @@ El modelo de respuesta sugiere una llamada a función. En el caso de los **model
 }
 ```
 
-### 3. Ejecuta las acciones recibidas
+### 3. मिली हुई कार्रवाइयों को लागू करना
 
-El código de tu aplicación debe analizar la respuesta del modelo, ejecutar las acciones y recopilar los resultados.
+आपके ऐप्लिकेशन कोड को मॉडल के जवाब को पार्स करना होगा, कार्रवाइयां करनी होंगी, और नतीजे इकट्ठा करने होंगे.
 
-El siguiente código controla los comandos de herramientas heredadas (`click_at`, `type_text_at`) y los comandos modernos optimizados (`click`, `type`).
+नीचे दिया गया कोड, लेगसी टूल के निर्देशों (`click_at`, `type_text_at`) और आधुनिक स्ट्रीमलाइन किए गए निर्देशों (`click`, `type`), दोनों को हैंडल करता है.
 
 ### Python
 
@@ -566,9 +566,9 @@ async function executeFunctionCalls(candidate, page, screenWidth, screenHeight) 
 }
 ```
 
-### 4. Aware of the new environment state
+### 4. नए एनवायरमेंट की स्थिति कैप्चर करना
 
-Captura una representación de la pantalla y la devuelve al modelo.
+स्क्रीन पर मौजूद जानकारी को कैप्चर करता है और उसे मॉडल को भेजता है.
 
 ### Python
 
@@ -628,13 +628,13 @@ async function getFunctionResponses(page, results) {
 }
 ```
 
-Una vez que hayas definido cómo capturar y dar formato al estado del entorno, puedes combinar todos estos pasos en un bucle de ejecución continua.
+एनवायरमेंट की स्थिति को कैप्चर और फ़ॉर्मैट करने का तरीका तय करने के बाद, इन सभी चरणों को लगातार चलने वाले एक्ज़ीक्यूशन लूप में जोड़ा जा सकता है.
 
-## Crea un bucle de agente
+## एजेंट लूप बनाना
 
-Para habilitar las interacciones de varios pasos, combina los cuatro pasos de la sección [Cómo implementar el uso de la computadora](#implement-computer-use) en un solo bucle. Este bucle continúa solicitando acciones y enviando los resultados al modelo hasta que se completa la tarea.
+कई चरणों वाले इंटरैक्शन की सुविधा चालू करने के लिए, [कंप्यूटर का इस्तेमाल कैसे करें](#implement-computer-use) सेक्शन में दिए गए चार चरणों को एक लूप में जोड़ें. यह लूप, टास्क पूरा होने तक कार्रवाइयों का अनुरोध करता रहता है और मॉडल को नतीजे वापस भेजता रहता है.
 
-Recuerda administrar el historial de conversación correctamente agregando las respuestas del modelo y las respuestas de la función al historial en cada paso.
+बातचीत के इतिहास को सही तरीके से मैनेज करना न भूलें. इसके लिए, हर चरण में मॉडल के जवाब और फ़ंक्शन के जवाब, दोनों को इतिहास में जोड़ें.
 
 ### Python
 
@@ -819,107 +819,107 @@ try {
 }
 ```
 
-## Entornos compatibles (Gemini 3.x)
+## सुविधा के साथ काम करने वाले एनवायरमेंट (Gemini 3.x)
 
-Los modelos de Gemini 3.x admiten tres entornos especificados en las configuraciones de `computer_use`:
+Gemini 3.x मॉडल, `computer_use` कॉन्फ़िगरेशन में बताए गए तीन एनवायरमेंट के साथ काम करते हैं:
 
-### Entorno del navegador (`ENVIRONMENT_BROWSER`)
+### ब्राउज़र एनवायरमेंट (`ENVIRONMENT_BROWSER`)
 
-Acciones de acción en la herramienta del navegador:
+ब्राउज़र टूल में मौजूद कार्रवाइयां:
 
-| Nombre del comando | Descripción | Argumentos (en la llamada a la función) |
+| कमांड का नाम | ब्यौरा | आर्ग्युमेंट (फ़ंक्शन कॉल में) |
 | --- | --- | --- |
-| **click** | Hace clic con el botón izquierdo en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **double\_click** | Hace doble clic en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **triple\_click** | Hace tres clics en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **middle\_click** | Se hace clic con el botón central en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **right\_click** | Haz clic con el botón derecho en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_down** | Presiona y mantiene presionado el botón del mouse en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_up** | Suelta el botón del mouse en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **move** | Mueve el cursor a la posición especificada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **type** | Escribe texto. | `text`: str `press_enter`: bool (opcional, el valor predeterminado es `false`) `intent`: str |
-| **drag\_and\_drop** | Arrastra un elemento desde la coordenada de inicio hasta la coordenada de finalización. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
-| **wait** | Pausa la ejecución durante una cantidad específica de segundos. | `seconds`: int (opcional, valor predeterminado `1`) `intent`: str |
-| **press\_key** | Presiona la tecla especificada y la suelta. | `key`: str `intent`: str |
-| **key\_down** | Presiona y mantiene presionada la tecla especificada. | `key`: str `intent`: str |
-| **key\_up** | Suelta la tecla especificada. | `key`: str `intent`: str |
-| **Tecla de acceso rápido** | Presiona la combinación de teclas especificada. | `keys`: `List[str]` `intent`: `str` |
-| **take\_screenshot** | Devuelve una captura de pantalla de la pantalla actual. | `intent`: str |
-| **scroll** | Se desplaza hacia arriba, abajo, izquierda o derecha en una coordenada por una distancia de píxeles. | `y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, opcional, valor predeterminado `300`) `intent`: str |
-| **go\_back** | varez a la página web anterior del historial del navegador. | `intent`: str |
-| **navegar** | Navega directamente a una URL especificada. | `url`: str `intent`: str |
-| **go\_forward** | Navega hacia adelante a la siguiente página web en el historial del navegador. | `intent`: str |
+| **क्लिक** | इस कुकी का इस्तेमाल, दिए गए कोऑर्डिनेट पर बाईं ओर क्लिक करने के लिए किया जाता है. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **double\_click** | निर्देशांक पर दो बार क्लिक करता है. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **triple\_click** | निर्देशांक पर तीन बार क्लिक करता है. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **middle\_click** | मिडिल क्लिक, निर्देशांक पर होता है. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **right\_click** | इस कमांड से, दिए गए कोऑर्डिनेट पर राइट क्लिक किया जाता है. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **mouse\_down** | इस फ़ंक्शन का इस्तेमाल, दिए गए कोऑर्डिनेट पर माउस बटन को दबाकर रखने के लिए किया जाता है. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **mouse\_up** | इस कमांड से, माउस बटन को दिए गए कोऑर्डिनेट पर छोड़ दिया जाता है. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **move** | कर्सर को तय की गई जगह पर ले जाता है. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **टाइप** | टेक्स्ट टाइप करता है. | `text`: str `press_enter`: bool (ज़रूरी नहीं, डिफ़ॉल्ट `false`) `intent`: str |
+| **drag\_and\_drop** | यह फ़ंक्शन, किसी आइटम को शुरुआती निर्देशांक से आखिरी निर्देशांक तक खींचता है. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
+| **wait** | यह फ़ंक्शन, तय की गई संख्या के हिसाब से कुछ सेकंड के लिए एक्ज़ीक्यूशन को रोकता है. | `seconds`: int (ज़रूरी नहीं, डिफ़ॉल्ट `1`) `intent`: str |
+| **press\_key** | यह कमांड, बताई गई कुंजी को दबाती है और छोड़ती है. | `key`: str `intent`: str |
+| **key\_down** | यह कमांड, तय की गई कुंजी को दबाकर रखती है. | `key`: str `intent`: str |
+| **key\_up** | यह कमांड, बताई गई कुंजी को रिलीज़ करती है. | `key`: str `intent`: str |
+| **हॉटकी** | यह कमांड, बटन के बताए गए कॉम्बिनेशन को दबाती है. | `keys`: `List[str]` `intent`: `str` |
+| **take\_screenshot** | इससे मौजूदा स्क्रीन का स्क्रीनशॉट मिलता है. | `intent`: str |
+| **scroll** | यह फ़ंक्शन, किसी पिक्सेल की दूरी पर मौजूद कोऑर्डिनेट पर ऊपर, नीचे, बाएं या दाएं स्क्रोल करता है. | `y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, Optional, default `300`) `intent`: str |
+| **go\_back** | यह कुकी, ब्राउज़र के इतिहास में मौजूद पिछले वेबपेज पर वापस ले जाती है. | `intent`: str |
+| **नेविगेट करें** | यह सीधे तौर पर बताए गए यूआरएल पर ले जाता है. | `url`: str `intent`: str |
+| **go\_forward** | यह कुकी, ब्राउज़र के इतिहास में अगले वेबपेज पर ले जाती है. | `intent`: str |
 
-### Entorno móvil (`ENVIRONMENT_MOBILE`)
+### मोबाइल एनवायरमेंट (`ENVIRONMENT_MOBILE`)
 
-Acciones del entorno optimizado para Android:
+Android के लिए ऑप्टिमाइज़ की गई एनवायरमेंट ऐक्शन:
 
-| Nombre del comando | Descripción | Argumentos (en la llamada a la función) |
+| कमांड का नाम | ब्यौरा | आर्ग्युमेंट (फ़ंक्शन कॉल में) |
 | --- | --- | --- |
-| **open\_app** | Abre una aplicación por su nombre. | `app_name`: str `intent`: str |
-| **click** | Hace clic con el botón izquierdo en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **list\_apps** | Enumera las aplicaciones disponibles en el dispositivo y muestra sus nombres y nombres de paquete. | `intent`: str |
-| **wait** | Pausa la ejecución durante una cantidad específica de segundos. | `seconds`: int (opcional, valor predeterminado `1`) `intent`: str |
-| **go\_back** | CW: Navega de vuelta a la pantalla o página web anterior. | `intent`: str |
-| **type** | Escribe texto. | `text`: str `press_enter`: bool (opcional, el valor predeterminado es `false`) `intent`: str |
-| **drag\_and\_drop** | Arrastra un elemento desde la coordenada de inicio hasta la coordenada de finalización. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
-| **long\_press** | Realiza una presión prolongada en una coordenada de la pantalla. | `y`: int (0-999) `x`: int (0-999) `seconds`: int (opcional, valor predeterminado `2`) `intent`: str |
-| **press\_key** | Presiona la tecla especificada y la suelta. | `key`: str `intent`: str |
-| **take\_screenshot** | Devuelve una captura de pantalla de la pantalla actual. | `intent`: str |
+| **open\_app** | ऐप्लिकेशन को उसके नाम से खोलता है. | `app_name`: str `intent`: str |
+| **क्लिक** | इस कुकी का इस्तेमाल, दिए गए कोऑर्डिनेट पर बाईं ओर क्लिक करने के लिए किया जाता है. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **list\_apps** | यह डिवाइस पर उपलब्ध ऐप्लिकेशन की सूची दिखाता है. साथ ही, उनके नाम और पैकेज के नाम दिखाता है. | `intent`: str |
+| **wait** | यह फ़ंक्शन, तय की गई संख्या के हिसाब से कुछ सेकंड के लिए एक्ज़ीक्यूशन को रोकता है. | `seconds`: int (ज़रूरी नहीं, डिफ़ॉल्ट `1`) `intent`: str |
+| **go\_back** | पिछली स्क्रीन या वेबपेज पर वापस जाता है. | `intent`: str |
+| **टाइप** | टेक्स्ट टाइप करता है. | `text`: str `press_enter`: bool (ज़रूरी नहीं, डिफ़ॉल्ट `false`) `intent`: str |
+| **drag\_and\_drop** | यह फ़ंक्शन, किसी आइटम को शुरुआती निर्देशांक से आखिरी निर्देशांक तक खींचता है. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
+| **long\_press** | स्क्रीन पर किसी जगह को दबाकर रखता है. | `y`: int (0-999) `x`: int (0-999) `seconds`: int (ज़रूरी नहीं, डिफ़ॉल्ट `2`) `intent`: str |
+| **press\_key** | यह कमांड, बताई गई कुंजी को दबाती है और छोड़ती है. | `key`: str `intent`: str |
+| **take\_screenshot** | इससे मौजूदा स्क्रीन का स्क्रीनशॉट मिलता है. | `intent`: str |
 
-### Entorno de escritorio (`ENVIRONMENT_DESKTOP`)
+### डेस्कटॉप एनवायरमेंट (`ENVIRONMENT_DESKTOP`)
 
-Comandos del cursor a nivel del SO de los entornos de escritorio:
+डेस्कटॉप एनवायरमेंट में, ओएस-लेवल पर कर्सर को कंट्रोल करने के लिए इस्तेमाल होने वाले निर्देश:
 
-| Nombre del comando | Descripción | Argumentos (en la llamada a la función) |
+| कमांड का नाम | ब्यौरा | आर्ग्युमेंट (फ़ंक्शन कॉल में) |
 | --- | --- | --- |
-| **click** | Hace clic con el botón izquierdo en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **double\_click** | Hace doble clic en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **triple\_click** | Hace tres clics en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **middle\_click** | Se hace clic con el botón central en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **right\_click** | Haz clic con el botón derecho en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_down** | Presiona y mantiene presionado el botón del mouse en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_up** | Suelta el botón del mouse en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **move** | Mueve el cursor a la posición especificada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **type** | Escribe texto. | `text`: str `press_enter`: bool (opcional, el valor predeterminado es `false`) `intent`: str |
-| **drag\_and\_drop** | Arrastra un elemento desde la coordenada de inicio hasta la coordenada de finalización. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
-| **wait** | Pausa la ejecución durante una cantidad específica de segundos. | `seconds`: int (opcional, valor predeterminado `1`) `intent`: str |
-| **press\_key** | Presiona la tecla especificada y la suelta. | `key`: str `intent`: str |
-| **key\_down** | Presiona y mantiene presionada la tecla especificada. | `key`: str `intent`: str |
-| **key\_up** | Suelta la tecla especificada. | `key`: str `intent`: str |
-| **Tecla de acceso rápido** | Presiona la combinación de teclas especificada. | `keys`: `List[str]` `intent`: `str` |
-| **take\_screenshot** | Devuelve una captura de pantalla de la pantalla actual. | `intent`: str |
-| **scroll** | Se desplaza hacia arriba, abajo, izquierda o derecha en una coordenada por una distancia de píxeles. | `y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, opcional, valor predeterminado `300`) `intent`: str |
+| **क्लिक** | इस कुकी का इस्तेमाल, दिए गए कोऑर्डिनेट पर बाईं ओर क्लिक करने के लिए किया जाता है. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **double\_click** | निर्देशांक पर दो बार क्लिक करता है. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **triple\_click** | निर्देशांक पर तीन बार क्लिक करता है. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **middle\_click** | मिडिल क्लिक, निर्देशांक पर होता है. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **right\_click** | इस कमांड से, दिए गए कोऑर्डिनेट पर राइट क्लिक किया जाता है. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **mouse\_down** | इस फ़ंक्शन का इस्तेमाल, दिए गए कोऑर्डिनेट पर माउस बटन को दबाकर रखने के लिए किया जाता है. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **mouse\_up** | इस कमांड से, माउस बटन को दिए गए कोऑर्डिनेट पर छोड़ दिया जाता है. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **move** | कर्सर को तय की गई जगह पर ले जाता है. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **टाइप** | टेक्स्ट टाइप करता है. | `text`: str `press_enter`: bool (ज़रूरी नहीं, डिफ़ॉल्ट `false`) `intent`: str |
+| **drag\_and\_drop** | यह फ़ंक्शन, किसी आइटम को शुरुआती निर्देशांक से आखिरी निर्देशांक तक खींचता है. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
+| **wait** | यह फ़ंक्शन, तय की गई संख्या के हिसाब से कुछ सेकंड के लिए एक्ज़ीक्यूशन को रोकता है. | `seconds`: int (ज़रूरी नहीं, डिफ़ॉल्ट `1`) `intent`: str |
+| **press\_key** | यह कमांड, बताई गई कुंजी को दबाती है और छोड़ती है. | `key`: str `intent`: str |
+| **key\_down** | यह कमांड, तय की गई कुंजी को दबाकर रखती है. | `key`: str `intent`: str |
+| **key\_up** | यह कमांड, बताई गई कुंजी को रिलीज़ करती है. | `key`: str `intent`: str |
+| **हॉटकी** | यह कमांड, बटन के बताए गए कॉम्बिनेशन को दबाती है. | `keys`: `List[str]` `intent`: `str` |
+| **take\_screenshot** | इससे मौजूदा स्क्रीन का स्क्रीनशॉट मिलता है. | `intent`: str |
+| **scroll** | यह फ़ंक्शन, किसी पिक्सेल की दूरी पर मौजूद कोऑर्डिनेट पर ऊपर, नीचे, बाएं या दाएं स्क्रोल करता है. | `y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, Optional, default `300`) `intent`: str |
 
-## quirrel\_legacy\_supported\_ui\_actions (Gemini 2.5)
+## Aware API के साथ काम करने वाले यूज़र इंटरफ़ेस (यूआई) के लेगसी वर्शन में उपलब्ध सुविधाएँ (Gemini 2.5)
 
-Para los modelos heredados (`gemini-2.5-computer-use-preview-10-2025`), se admiten las siguientes acciones:
+लेगसी मॉडल (`gemini-2.5-computer-use-preview-10-2025`) के लिए, ये कार्रवाइयां की जा सकती हैं:
 
-| Nombre del comando | Descripción | Argumentos (en la llamada a la función) | Ejemplo de llamada a función |
+| कमांड का नाम | ब्यौरा | आर्ग्युमेंट (फ़ंक्शन कॉल में) | फ़ंक्शन कॉल का उदाहरण |
 | --- | --- | --- | --- |
-| **open\_web\_browser** | Abre el navegador web. | Ninguno | `{"name": "open_web_browser", "args": {}}` |
-| **wait\_5\_seconds** | Pausa la ejecución durante 5 segundos. | Ninguno | `{"name": "wait_5_seconds", "args": {}}` |
-| **go\_back** | Navega a la página anterior del historial. | Ninguno | `{"name": "go_back", "args": {}}` |
-| **go\_forward** | Navega a la página siguiente del historial. | Ninguno | `{"name": "go_forward", "args": {}}` |
-| **search** | Navega al motor de búsqueda predeterminado. | Ninguno | `{"name": "search", "args": {}}` |
-| **navegar** | Navega el navegador directamente a la URL especificada. | `url`: str | `{"name": "navigate", "args": {"url": "https://www.wikipedia.org"}}` |
-| **click\_at** | Hace clic en una coordenada específica. | `y`: int (0-999), `x`: int (0-999) | `{"name": "click_at", "args": {"y": 300, "x": 500}}` |
-| **hover\_at** | Coloca el cursor en una coordenada específica. | `y`: int (0-999), `x`: int (0-999) | `{"name": "hover_at", "args": {"y": 150, "x": 250}}` |
-| **type\_text\_at** | Escribe texto en una coordenada. | `y`: int (0 a 999), `x`: int (0 a 999), `text`: str, `press_enter`: bool (opcional, valor predeterminado es True), `clear_before_typing`: bool (opcional, valor predeterminado es True) | `{"name": "type_text_at", "args": {"y": 250, "x": 400, "text": "search", "press_enter": false}}` |
-| **key\_combination** | Presiona teclas o combinaciones. | `keys`: str | `{"name": "key_combination", "args": {"keys": "Control+A"}}` |
-| **scroll\_document** | Desplaza toda la página web. | `direction`: str | `{"name": "scroll_document", "args": {"direction": "down"}}` |
-| **scroll\_at** | Se desplaza en la coordenada (x,y). | `y`: int, `x`: int, `direction`: str, `magnitude`: int (opcional, valor predeterminado 800) | `{"name": "scroll_at", "args": {"y": 500, "x": 500, "direction": "down"}}` |
-| **drag\_and\_drop** | Arrastra entre dos coordenadas. | `y`: int, `x`: int, `destination_y`: int, `destination_x`: int | `{"name": "drag_and_drop", "args": {"y": 100, "destination_y": 500, "destination_x": 500, "x": 100}}` |
+| **open\_web\_browser** | इससे वेब ब्राउज़र खुलता है. | कोई नहीं | `{"name": "open_web_browser", "args": {}}` |
+| **wait\_5\_seconds** | यह फ़ंक्शन, एक्ज़ीक्यूशन को पांच सेकंड के लिए रोकता है. | कोई नहीं | `{"name": "wait_5_seconds", "args": {}}` |
+| **go\_back** | इससे ब्राउज़िंग इतिहास में पिछले पेज पर जाया जा सकता है. | कोई नहीं | `{"name": "go_back", "args": {}}` |
+| **go\_forward** | इससे ब्राउज़िंग इतिहास में अगले पेज पर जाया जा सकता है. | कोई नहीं | `{"name": "go_forward", "args": {}}` |
+| **search** | यह कुकी, डिफ़ॉल्ट सर्च इंजन पर ले जाती है. | कोई नहीं | `{"name": "search", "args": {}}` |
+| **नेविगेट करें** | यह ब्राउज़र को सीधे तौर पर दिए गए यूआरएल पर ले जाता है. | `url`: str | `{"name": "navigate", "args": {"url": "https://www.wikipedia.org"}}` |
+| **click\_at** | किसी खास कोऑर्डिनेट पर क्लिक. | `y`: int (0-999), `x`: int (0-999) | `{"name": "click_at", "args": {"y": 300, "x": 500}}` |
+| **hover\_at** | यह कुकी, माउस को किसी खास कोऑर्डिनेट पर घुमाती है. | `y`: int (0-999), `x`: int (0-999) | `{"name": "hover_at", "args": {"y": 150, "x": 250}}` |
+| **type\_text\_at** | किसी निर्देशांक पर टेक्स्ट टाइप करता है. | `y`: int (0-999), `x`: int (0-999), `text`: str, `press_enter`: bool (वैकल्पिक, डिफ़ॉल्ट रूप से True), `clear_before_typing`: bool (वैकल्पिक, डिफ़ॉल्ट रूप से True) | `{"name": "type_text_at", "args": {"y": 250, "x": 400, "text": "search", "press_enter": false}}` |
+| **key\_combination** | बटन या उनके कॉम्बिनेशन दबाएं. | `keys`: str | `{"name": "key_combination", "args": {"keys": "Control+A"}}` |
+| **scroll\_document** | पूरे वेबपेज को स्क्रोल करता है. | `direction`: str | `{"name": "scroll_document", "args": {"direction": "down"}}` |
+| **scroll\_at** | यह (x,y) कोऑर्डिनेट पर स्क्रोल करता है. | `y`: int, `x`: int, `direction`: str, `magnitude`: int (ज़रूरी नहीं, डिफ़ॉल्ट रूप से 800) | `{"name": "scroll_at", "args": {"y": 500, "x": 500, "direction": "down"}}` |
+| **drag\_and\_drop** | दो निर्देशांकों के बीच खींचता है. | `y`: int, `x`: int, `destination_y`: int, `destination_x`: int | `{"name": "drag_and_drop", "args": {"y": 100, "destination_y": 500, "destination_x": 500, "x": 100}}` |
 
-## Funciones personalizadas definidas por el usuario
+## उपयोगकर्ता के तय किए गए कस्टम फ़ंक्शन
 
-Puedes extender la funcionalidad del modelo incluyendo funciones definidas por el usuario personalizadas. Por ejemplo, en situaciones con interacción humana (HITL), puedes excluir acciones predefinidas predeterminadas y registrar acciones personalizadas.
+कस्टम उपयोगकर्ता-परिभाषित फ़ंक्शन शामिल करके, मॉडल की सुविधाओं को बढ़ाया जा सकता है. उदाहरण के लिए, ह्यूमन-इन-द-लूप (एचआईटीएल) के मामलों में, पहले से तय की गई डिफ़ॉल्ट कार्रवाइयों को बाहर रखा जा सकता है और कस्टम कार्रवाइयों को रजिस्टर किया जा सकता है.
 
-#### Herramientas personalizadas de Gemini 3.x
+#### Gemini 3.x के लिए कस्टम टूलिंग
 
 ### Python
 
-Excluye las acciones predefinidas estándar del navegador (como `click`) y registra una herramienta `yield_to_user` personalizada:
+पहले से तय की गई स्टैंडर्ड ब्राउज़र कार्रवाइयों (जैसे कि `click`) को शामिल न करें और कस्टम `yield_to_user` टूल रजिस्टर करें:
 
 ```
 from google import genai
@@ -959,7 +959,7 @@ response = client.models.generate_content(
 )
 ```
 
-#### Herramientas personalizadas de Gemini 2.5 (heredado)
+#### Gemini 2.5 (लेगसी) के लिए कस्टम टूलिंग
 
 ### Python
 
@@ -989,29 +989,29 @@ def make_generate_content_config():
     return generate_content_config
 ```
 
-## Administra los niveles de pensamiento (Gemini 3.x)
+## सोचने के लेवल मैनेज करना (Gemini 3.x)
 
-En el caso de los agentes de uso de la computadora, puedes configurar diferentes niveles de pensamiento para equilibrar la calidad de la acción y la velocidad de ejecución. Por lo general, los niveles de pensamiento más bajos logran un buen equilibrio para las tareas de automatización estándar.
+कंप्यूटर का इस्तेमाल करने वाले एजेंट के लिए, सोचने के अलग-अलग लेवल कॉन्फ़िगर किए जा सकते हैं. इससे कार्रवाई की क्वालिटी और उसे पूरा करने की स्पीड को बैलेंस किया जा सकता है. आम तौर पर, स्टैंडर्ड ऑटोमेशन टास्क के लिए, थिंकिंग लेवल कम होने पर बेहतर नतीजे मिलते हैं.
 
-## Seguridad y protección
+## सुरक्षा और बचाव
 
-### Configuración de políticas de seguridad (Gemini 3.x)
+### सुरक्षा नीतियां कॉन्फ़िगर करना (Gemini 3.x)
 
-Los modelos de Gemini 3.x incluyen categorías de servicios de seguridad integrados que determinan automáticamente si se requiere la confirmación del usuario.
+Gemini 3.x मॉडल में, सुरक्षा से जुड़ी सेवाओं की कैटगरी पहले से मौजूद होती हैं. ये अपने-आप यह तय करती हैं कि उपयोगकर्ता की पुष्टि करना ज़रूरी है या नहीं.
 
-| Categoría de la política de seguridad | Descripción |
+| सुरक्षा नीति की कैटगरी | ब्यौरा |
 | --- | --- |
-| `FINANCIAL_TRANSACTIONS` | Bloquea o activa la confirmación de acciones que involucran pagos, compras en tiendas o bienes regulados. |
-| `SENSITIVE_DATA_MODIFICATION` | Protege los registros de salud, financieros o gubernamentales contra modificaciones no autorizadas. |
-| `COMMUNICATION_TOOL` | Restringe la capacidad del agente para enviar correos electrónicos, mensajes de chat o borradores de forma autónoma. |
-| `ACCOUNT_CREATION` | Restringe al agente para que no registre de forma autónoma cuentas nuevas en sitios web. |
-| `DATA_MODIFICATION` | Regula las modificaciones generales del sistema de archivos, el uso compartido de datos y la eliminación del almacenamiento. |
-| `USER_CONSENT_MANAGEMENT` | Requiere la intervención del usuario para los banners de consentimiento de uso de cookies y los mensajes de privacidad. |
-| `LEGAL_TERMS_AND_AGREEMENTS` | Evita que el modelo acepte de forma autónoma las Condiciones del Servicio o los contratos legalmente vinculantes. |
+| `FINANCIAL_TRANSACTIONS` | यह कुकी, पेमेंट, खुदरा चेकआउट या बिक्री पर कानूनी नियंत्रण वाले सामान से जुड़ी कार्रवाइयों को ब्लॉक करती है या उनकी पुष्टि करने के लिए ट्रिगर करती है. |
+| `SENSITIVE_DATA_MODIFICATION` | यह स्वास्थ्य, वित्तीय या सरकारी रिकॉर्ड में बिना अनुमति के बदलाव किए जाने से बचाता है. |
+| `COMMUNICATION_TOOL` | इस सेटिंग से, एजेंट को अपने-आप ईमेल, चैट मैसेज या ड्राफ़्ट भेजने से रोका जाता है. |
+| `ACCOUNT_CREATION` | यह कुकी, एजेंट को वेबसाइटों पर नए खाते अपने-आप रजिस्टर करने से रोकती है. |
+| `DATA_MODIFICATION` | यह फ़ाइल सिस्टम में किए जाने वाले सभी बदलावों, डेटा शेयर करने, और स्टोरेज मिटाने की प्रोसेस को कंट्रोल करता है. |
+| `USER_CONSENT_MANAGEMENT` | इसके लिए, कुकी के लिए सहमति वाले बैनर और निजता से जुड़े प्रॉम्प्ट के लिए, उपयोगकर्ता के खाते का ऐक्सेस ज़रूरी होता है. |
+| `LEGAL_TERMS_AND_AGREEMENTS` | यह मॉडल को, सेवा की शर्तों या कानूनी तौर पर बाध्यकारी अनुबंधों को अपने-आप स्वीकार करने से रोकता है. |
 
-#### Anulaciones de seguridad
+#### सुरक्षा से जुड़ी सेटिंग को अनदेखा करने की सुविधा
 
-Puedes anular políticas seleccionadas pasando anulaciones:
+ओवरराइड पास करके, चुनिंदा नीतियों को बदला जा सकता है:
 
 ### Python
 
@@ -1062,13 +1062,13 @@ const response = await ai.models.generateContent({
 });
 ```
 
-### Detección de inyección de instrucciones (Gemini 3.x)
+### प्रॉम्प्ट इंजेक्शन का पता लगाने की सुविधा (Gemini 3.x)
 
-Es un mecanismo de seguridad opcional que analiza los píxeles de las capturas de pantalla en busca de instrucciones ocultas de instrucciones adversarias (p.ej., "Ignora los comandos anteriores") y bloquea la ejecución cuando se detectan.
+सुरक्षा के लिए ऑप्ट-इन करने का तरीका.यह स्क्रीनशॉट के पिक्सल को स्कैन करता है, ताकि नुकसान पहुंचाने वाले छिपे हुए प्रॉम्प्ट के निर्देशों (जैसे, "पिछले निर्देशों को अनदेखा करें") का पता लगाया जा सके. अगर ऐसे निर्देश मिलते हैं, तो उन्हें लागू होने से रोका जाता है.
 
-### Confirma la decisión de seguridad
+### सुरक्षा से जुड़े फ़ैसले को स्वीकार करना
 
-La respuesta puede incluir un parámetro `safety_decision` en los argumentos de la llamada a la función:
+जवाब में, फ़ंक्शन कॉल के तर्कों में `safety_decision` पैरामीटर शामिल हो सकता है:
 
 ```
 {
@@ -1086,7 +1086,7 @@ La respuesta puede incluir un parámetro `safety_decision` en los argumentos de 
 }
 ```
 
-Si `safety_decision` es `require_confirmation`, muestra un mensaje al usuario final. Si el usuario confirma, establece `safety_acknowledgement` en `FunctionResponse`.
+अगर `safety_decision`, `require_confirmation` है, तो असली उपयोगकर्ता को प्रॉम्प्ट दिखाएं. अगर उपयोगकर्ता पुष्टि करता है, तो `safety_acknowledgement` को `FunctionResponse` में सेट करें.
 
 ### Python
 
@@ -1105,14 +1105,14 @@ if 'safety_decision' in function_call.args:
     action_result["safety_acknowledgement"] = True
 ```
 
-### Prácticas recomendadas de seguridad
+### सुरक्षा के सबसे सही तरीके
 
-El uso de la computadora presenta riesgos operativos y de seguridad únicos, ya que un modelo que actúa en nombre de un usuario podría encontrar contenido no confiable en las pantallas o cometer errores al ejecutar acciones. Implementa las siguientes prácticas recomendadas para proteger los datos y los sistemas de los usuarios:
+कंप्यूटर का इस्तेमाल करने पर, सुरक्षा और ऑपरेशन से जुड़े जोखिम हो सकते हैं. ऐसा इसलिए, क्योंकि उपयोगकर्ता की ओर से कार्रवाई करने वाले मॉडल को स्क्रीन पर ऐसा कॉन्टेंट मिल सकता है जिस पर भरोसा नहीं किया जा सकता. इसके अलावा, कार्रवाई करते समय उससे गड़बड़ियां भी हो सकती हैं. उपयोगकर्ता के डेटा और सिस्टम को सुरक्षित रखने के लिए, यहां दिए गए सबसे सही तरीके अपनाएं:
 
-1. **Con interacción humana (HITL):**
+1. **ह्यूमन-इन-द-लूप (एचआईटीएल):**
 
-   - **Exige la confirmación del usuario:** Cuando la respuesta de seguridad indica `require_confirmation` (o la decisión de seguridad heredada lo requiere), solicita la aprobación del usuario.
-   - **Proporciona instrucciones de seguridad personalizadas:** Implementa una instrucción del sistema personalizada para definir y aplicar tus propios límites de seguridad. Por ejemplo:
+   - **उपयोगकर्ता से पुष्टि कराना:** जब सुरक्षा से जुड़े जवाब में `require_confirmation` दिखता है या सुरक्षा से जुड़े पुराने फ़ैसले के लिए इसकी ज़रूरत होती है, तो उपयोगकर्ता को मंज़ूरी देने के लिए कहें.
+   - **सुरक्षा से जुड़े कस्टम निर्देश दें:** सिस्टम के लिए कस्टम निर्देश लागू करें, ताकि सुरक्षा से जुड़ी अपनी सीमाएं तय की जा सकें और उन्हें लागू किया जा सके. उदाहरण के लिए:
 
      ### Python
 
@@ -1327,38 +1327,38 @@ El uso de la computadora presenta riesgos operativos y de seguridad únicos, ya 
        }
      });
      ```
-2. **Entorno de ejecución seguro:** Ejecuta tu agente en un entorno seguro de zona de pruebas para limitar su impacto potencial. Puede ser una máquina virtual (VM) en zona de pruebas, un contenedor (p.ej., Docker) o un perfil de navegador dedicado con permisos limitados. Consulta la [implementación de referencia de GitHub](https://github.com/google/computer-use-preview/) para obtener orientación sobre la configuración de la zona de pruebas con Docker.
-3. **Limpieza de entradas:** Limpia todo el texto generado por el usuario en las instrucciones para mitigar el riesgo de instrucciones no deseadas o inyección de instrucciones. Esta es una capa de seguridad útil, pero no reemplaza un entorno de ejecución seguro.
-4. **Barreras de seguridad del contenido:** Usa barreras de seguridad y APIs de seguridad del contenido para evaluar la adecuación, la inyección de instrucciones y la detección de jailbreak en las entradas del usuario, las entradas y salidas de las herramientas, y las respuestas del agente.
-5. **Listas de entidades permitidas y bloqueadas:** Implementa mecanismos de filtrado para controlar dónde puede navegar el modelo y qué puede hacer. Una lista de entidades bloqueadas de sitios web prohibidos es un buen punto de partida, mientras que una lista de entidades permitidas más restrictiva es aún más segura.
-6. **Observabilidad y registro:** Mantén registros detallados para la depuración, la auditoría y la respuesta ante incidentes. Tu cliente debe registrar las instrucciones, las capturas de pantalla, las acciones sugeridas por el modelo (`function_call`), las respuestas de seguridad y todas las acciones que, en última instancia, ejecute el cliente.
-7. **Administración del entorno:** Asegúrate de que el entorno de la GUI sea coherente.
-   Las ventanas emergentes, las notificaciones o los cambios en el diseño inesperados pueden confundir al modelo. Si es posible, comienza cada tarea nueva desde un estado limpio y conocido.
+2. **सुरक्षित एक्ज़ीक्यूशन एनवायरमेंट:** अपने एजेंट को सुरक्षित और सैंडबॉक्स वाले एनवायरमेंट में चलाएं, ताकि उसके संभावित असर को सीमित किया जा सके. यह सैंडबॉक्स की गई वर्चुअल मशीन (वीएम), कंटेनर (जैसे, Docker) या सीमित अनुमतियों वाली ब्राउज़र प्रोफ़ाइल हो सकती है. Docker का इस्तेमाल करके सैंडबॉक्स सेटअप करने के बारे में दिशा-निर्देश पाने के लिए, [GitHub का रेफ़रंस इंप्लीमेंटेशन](https://github.com/google/computer-use-preview/) देखें.
+3. **इनपुट सैनिटाइज़ेशन:** प्रॉम्प्ट में मौजूद, उपयोगकर्ता के जनरेट किए गए सभी टेक्स्ट को सैनिटाइज़ करें. इससे अनचाहे निर्देशों या प्रॉम्प्ट इंजेक्शन के जोखिम को कम किया जा सकता है. यह सुरक्षा की एक मददगार लेयर है. हालांकि, यह सुरक्षित एक्ज़ीक्यूशन एनवायरमेंट का विकल्प नहीं है.
+4. **कॉन्टेंट से जुड़े सुरक्षा उपाय:** सुरक्षा उपायों और Content Safety API का इस्तेमाल करके, इन चीज़ों का आकलन करें: उपयोगकर्ता के इनपुट, टूल के इनपुट और आउटपुट, और एजेंट के जवाब. यह आकलन इन आधार पर किया जाता है: कॉन्टेंट सही है या नहीं, प्रॉम्प्ट इंजेक्शन, और जेलब्रेक का पता लगाना.
+5. **अनुमति वाली और बिना अनुमति वाली सूचियां:** फ़िल्टर करने के तरीकों को लागू करें, ताकि यह कंट्रोल किया जा सके कि मॉडल किन वेबसाइटों पर जा सकता है और क्या कर सकता है. प्रतिबंधित वेबसाइटों की बिना अनुमति वाली सूची से शुरुआत करना अच्छा विकल्प है. हालांकि, अनुमति वाली सूची को ज़्यादा पाबंदियों के साथ इस्तेमाल करना ज़्यादा सुरक्षित होता है.
+6. **जांचने की क्षमता और लॉगिंग:** डीबग करने, ऑडिट करने, और समस्या हल करने के लिए, ज़्यादा जानकारी वाले लॉग बनाए रखें. आपके क्लाइंट को प्रॉम्प्ट, स्क्रीनशॉट, मॉडल की सुझाई गई कार्रवाइयां (`function_call`), सुरक्षा से जुड़े जवाब, और क्लाइंट की ओर से की गई सभी कार्रवाइयों को लॉग करना चाहिए.
+7. **एनवायरमेंट मैनेजमेंट:** पक्का करें कि जीयूआई एनवायरमेंट एक जैसा हो.
+   अचानक दिखने वाले पॉप-अप, सूचनाएं या लेआउट में होने वाले बदलावों से मॉडल को समझने में मुश्किल हो सकती है. अगर हो सके, तो हर नए टास्क के लिए, जानी-पहचानी और साफ़-सुथरी स्थिति से शुरुआत करें.
 
-## Versiones del modelo
+## मॉडल के वर्शन
 
-Puedes usar Uso del equipo con los siguientes modelos:
+कंप्यूटर पर इस्तेमाल करने की सुविधा, इन मॉडल के साथ इस्तेमाल की जा सकती है:
 
-- [**Gemini 3.7 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=es-419) (`gemini-3.7-flash`): Es el modelo recomendado para el uso en computadoras, ya que incluye acciones optimizadas con intenciones, compatibilidad con entornos de navegador, dispositivos móviles y computadoras, políticas de seguridad configurables y detección de inyección de instrucciones.
-- [**Gemini 3.5 Flash-Lite**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=es-419) (`gemini-3.5-flash-lite`): Un modelo rentable y de baja latencia que admite el uso de computadoras.
-- [**Gemini 3.5 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=es-419) (`gemini-3.5-flash`): Modelo estable anterior que admite el uso de la computadora.
-- [**Versión preliminar de Gemini 3 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=es-419) (`gemini-3-flash-preview`): Modelo de versión preliminar que admite el uso de la computadora.
-- [**Gemini 2.5 (versión preliminar heredada)**](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=es-419) (`gemini-2.5-computer-use-preview-10-2025`): Es un modelo de versión preliminar heredada optimizado para el uso de computadoras basadas en navegadores.
+- [**Gemini 3.7 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=hi) (`gemini-3.7-flash`): कंप्यूटर पर इस्तेमाल करने के लिए सुझाया गया मॉडल. इसमें इंटेंट के साथ कार्रवाइयों को आसान बनाया गया है. साथ ही, यह ब्राउज़र, मोबाइल, और डेस्कटॉप एनवायरमेंट के साथ काम करता है. इसमें सुरक्षा से जुड़ी नीतियों को कॉन्फ़िगर किया जा सकता है. साथ ही, यह प्रॉम्प्ट इंजेक्शन का पता लगाता है.
+- [**Gemini 3.5 Flash-Lite**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=hi) (`gemini-3.5-flash-lite`): यह कम समय में जवाब देने वाला और किफ़ायती मॉडल है. यह कंप्यूटर के इस्तेमाल के लिए उपलब्ध है.
+- [**Gemini 3.5 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=hi) (`gemini-3.5-flash`): यह पिछले स्टेबल मॉडल वाला वर्शन है. इसमें कंप्यूटर का इस्तेमाल किया जा सकता है.
+- [**Gemini 3 Flash की झलक**](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=hi) (`gemini-3-flash-preview`): कंप्यूटर पर इस्तेमाल किए जा सकने वाले मॉडल की झलक.
+- [**Gemini 2.5 (लेगसी प्रीव्यू)**](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=hi) (`gemini-2.5-computer-use-preview-10-2025`): लेगसी प्रीव्यू मॉडल को ब्राउज़र पर कंप्यूटर इस्तेमाल करने के लिए ऑप्टिमाइज़ किया गया है.
 
-## ¿Qué sigue?
+## आगे क्या करना है
 
-- Experimenta con el uso de la computadora en el [entorno de demostración de Browserbase](http://gemini.browserbase.com).
-- Consulta la [implementación de referencia](https://github.com/google/computer-use-preview) para ver un ejemplo de código.
-- Obtén más información sobre otras herramientas de la API de Gemini:
-  - [Llamada a función](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419)
-  - [Grounding with Google Search](https://ai.google.dev/gemini-api/docs/grounding?hl=es-419)
+- [Browserbase के डेमो एनवायरमेंट](http://gemini.browserbase.com) में, कंप्यूटर के इस्तेमाल से जुड़े एक्सपेरिमेंट करें.
+- उदाहरण के लिए कोड देखने के लिए, [रेफ़रंस के तौर पर लागू किया गया कोड](https://github.com/google/computer-use-preview) देखें.
+- Gemini API के अन्य टूल के बारे में जानें:
+  - [फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi)
+  - [Google Search से सटीक जानकारी पाने की सुविधा](https://ai.google.dev/gemini-api/docs/grounding?hl=hi)
 
-Enviar comentarios
+सुझाव भेजें
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Última actualización: 2026-08-19 (UTC)
+आखिरी बार 2026-08-19 (UTC) को अपडेट किया गया.
 
-¿Quieres brindar más información?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-08-19 (UTC)"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-08-19 (UTC) को अपडेट किया गया."],[],[]]

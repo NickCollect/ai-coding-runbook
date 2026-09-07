@@ -1,33 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/omni?hl=tr
-fetched_at: 2026-08-31T06:33:16.495731+00:00
-title: "Gemini Omni Flash ile video \u00fcretme ve d\u00fczenleme \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/omni?hl=pl
+fetched_at: 2026-09-07T05:38:36.299446+00:00
+title: "Generowanie i edytowanie film\u00f3w za pomoc\u0105 Gemini Omni Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Geri bildirim gönderin
+Prześlij opinię
 
-# Gemini Omni Flash ile video üretme ve düzenleme
+# Generowanie i edytowanie filmów za pomocą Gemini Omni Flash
 
-Gemini Omni Flash (`gemini-omni-1.1-flash`), yüksek hızlı video üretimi, düzenleme ve sinematik kontrol için tasarlanmış yüksek performanslı bir çok formatlı modeldir.
-Gemini Omni, önceki video modellerinden ayıran aşağıdaki temel özellikler üzerine kurulmuştur:
+Gemini Omni Flash (`gemini-omni-1.1-flash`) to wydajny model multimodalny zaprojektowany z myślą o szybkim generowaniu i edytowaniu filmów oraz sterowaniu ich charakterem.
+Gemini Omni ma te podstawowe funkcje, które odróżniają go od poprzednich modeli wideo:
 
-- **Doğal çok formatlılık:** Metin, resim, ses ve videoyu aynı anda işleyerek daha tutarlı, tutarlı ve kontrol edilebilir bir çıkış sağlar.
-- **Sohbet ederek düzenleme:** [Etkileşimler API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) ile etkinleştirilen bu özellik, doğal dil sohbeti aracılığıyla videolarınızı yinelemeli olarak iyileştirmenize ve düzenlemenize olanak tanır. Değiştirmek istediğiniz şeyi açıklayın. Model, düzenlemeyi uygularken videonun korumak istediğiniz kısımlarını da korur.
-- **Dünya bilgisi:** Gemini Omni, fizik anlayışını Gemini'ın tarih, bilim ve kültürel bağlam bilgisiyle birleştirerek fotorealizmden anlamlı hikaye anlatımına geçişi sağlar.
+- **Natywna multimodalność:** przetwarza tekst, obrazy, dźwięk i wideo jednocześnie, co zapewnia bardziej spójne, konsekwentne i kontrolowane dane wyjściowe.
+- **Edytowanie w trybie konwersacyjnym:** umożliwia iteracyjne ulepszanie i edytowanie filmów za pomocą rozmowy w języku naturalnym. Jest dostępne dzięki [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl). Opisz, co chcesz zmienić, a model zastosuje zmiany, zachowując te części filmu, które chcesz pozostawić.
+- **Wiedza o świecie:** Gemini Omni łączy zrozumienie fizyki z wiedzą Gemini o historii, nauce i kontekście kulturowym, wypełniając lukę między fotorealizmem a znaczącą narracją.
 
-## Metinden video üretme
+## Generowanie filmu na podstawie tekstu
 
-Metin isteminden video oluşturma Model, metin açıklamanıza göre sesli bir video oluşturur. En iyi sonuçları almak için sahne açıklaması, kamera hareketi, ışıklandırma ve atmosfer gibi ayrıntıları içeren istemler yazın.
+Generowanie filmu na podstawie prompta tekstowego. Model generuje film z dźwiękiem na podstawie opisu tekstowego. Aby uzyskać jak najlepsze wyniki, pisz prompty zawierające szczegóły, takie jak opis sceny, ruch kamery, oświetlenie i nastrój.
 
 ### Python
 
@@ -73,12 +73,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### REST yanıt şeması
+### Schemat odpowiedzi REST
 
-Kolaylık alanı `interaction.output_video` **yalnızca SDK**'dır.
-REST API'yi doğrudan kullanırken `steps` dizisinden video çıkışını alın.
+Pole wygody `interaction.output_video` jest **dostępne tylko w pakiecie SDK**.
+Pobierz dane wyjściowe wideo z tablicy `steps`, gdy używasz bezpośrednio interfejsu API REST.
 
-**Ham REST JSON yapısı:**
+**Nieprzetworzona struktura JSON REST:**
 
 ```
 {
@@ -103,9 +103,9 @@ REST API'yi doğrudan kullanırken `steps` dizisinden video çıkışını alın
 }
 ```
 
-### En boy oranını kontrol etme
+### Sterowanie formatem obrazu
 
-Dikey videolar oluşturmak için `aspect_ratio` simgesini `"9:16"` olarak ayarlayın. Varsayılan yön Yatay (16:9)'dur.
+Ustaw `aspect_ratio` na `"9:16"`, aby tworzyć filmy w orientacji pionowej. Domyślnie jest to orientacja pozioma (16:9).
 
 ### Python
 
@@ -163,16 +163,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### Çıkış çözünürlüğü
+### Rozdzielczość wyjściowa
 
-`response_format` uygulamasında `resolution` parametresini kullanarak oluşturulan videonuzun çıkış çözünürlüğünü kontrol edin. Varsayılan çözünürlük 720p'dir.
+Kontroluj rozdzielczość wyjściową wygenerowanego filmu za pomocą parametru `resolution` w `response_format`. Domyślna rozdzielczość to 720p.
 
-| Değer | Açıklama |
+| Wartość | Opis |
 | --- | --- |
-| `360p` | 360p çıkış çözünürlüğü |
-| `720p` | 720p çıkış çözünürlüğü (varsayılan) |
-| `1080p` | 1080p çıkış (çözünürlüğü artırılmış) |
-| `4k` | 4K çıkış (yukarı ölçeklenmiş) |
+| `360p` | rozdzielczość wyjściowa 360p, |
+| `720p` | rozdzielczość wyjściowa 720p (domyślna), |
+| `1080p` | Wyjście 1080p (zwiększona rozdzielczość) |
+| `4k` | Wyjście 4K (większa rozdzielczość) |
 
 ### Python
 
@@ -230,21 +230,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-## Görüntüden video üretme
+## Generowanie filmu na podstawie obrazu
 
-Metin isteminizle birlikte bir referans görsel sağlayabilirsiniz. Modele verdiğiniz isteme bağlı olarak, model görüntüyü nasıl kullanacağına karar verir. Bu özellik, ürün çekimlerini, çizimleri veya fotoğrafları canlandırmak için kullanışlıdır.
+Do prompta tekstowego możesz dodać obraz referencyjny. W zależności od prompta model zdecyduje, jak wykorzystać obraz. Jest to przydatne w przypadku zdjęć produktów, ilustracji lub fotografii.
 
-Aşağıdaki örnekte, sudan çıkan bir balık çiziminin referans görselinin nasıl kullanılacağı gösterilmektedir:
+Poniższy przykład pokazuje, jak użyć obrazu referencyjnego przedstawiającego rysunek ryby wyskakującej z wody:
 
-![Sudan zıplayan balık çizimi](https://ai.google.dev/static/gemini-api/docs/images/fish-jumping-inputimage.png?hl=tr)
+![Rysunek ryby wyskakującej z wody](https://ai.google.dev/static/gemini-api/docs/images/fish-jumping-inputimage.png?hl=pl)
 
-Aşağıdaki istemle:
+Wpisz ten prompt:
 
 ```
 turn this into realistic footage, using the drawing only as a guide for movement, do not show the drawing in the final video
 ```
 
-Çizimin gerçekçi bir videosunu oluşturmak için.
+Aby wygenerować realistyczny film przedstawiający rysunek.
 
 ### Python
 
@@ -299,11 +299,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### İlk ve son kare interpolasyonu
+### Interpolacja pierwszej i ostatniej klatki
 
-Gemini Omni Flash, video ara karesi oluşturmayı destekler. Bu sayede, başlangıç resmi (ilk kare) ile bitiş resmi (son kare) arasında sorunsuz geçiş yapan videolar oluşturabilirsiniz.
+Gemini Omni Flash obsługuje interpolację wideo, co umożliwia generowanie filmów, które płynnie przechodzą od obrazu początkowego (pierwszej klatki) do obrazu końcowego (ostatniej klatki).
 
-`input` listesinde iki resim sağlayın ve isteminizde istediğiniz geçişi açıklayın. Model, sahneyi ilk kareden son kareye kadar animasyon haline getirir.
+Podaj 2 obrazy na liście `input` i opisz w prompcie pożądane przejście. Model animuje scenę od pierwszej do ostatniej klatki.
 
 ### Python
 
@@ -361,10 +361,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### Konu referansı
+### Odniesienie do obiektu
 
-Referans resim olarak sağlanan belirli konuları içeren bir video oluşturabilirsiniz.
-Örneğin, aşağıdaki kodda, kedinin iple oynadığı bir video oluşturmak için kedi ve ipin 2 resminin nasıl sağlanacağı gösterilmektedir.
+Możesz wygenerować film z określonymi obiektami podanymi jako obrazy referencyjne.
+Na przykład poniższy kod pokazuje, jak podać 2 obrazy kota i włóczki, aby wygenerować film przedstawiający kota bawiącego się włóczką.
 
 ### Python
 
@@ -422,11 +422,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### Görevler parametresi
+### Parametr zadań
 
-`video_config` composable'ında `task` parametresini kullanarak amaçlanan davranışı açıkça belirtebilirsiniz. Örneğin, modelin bir resimden video oluşturmasını istiyorsanız parametreyi `image_to_video` olarak ayarlayabilirsiniz. Bu ayar yapılmazsa model, istemden ne istediğinizi çıkarır.
+Użyj parametru `task` w `video_config`, aby wyraźnie określić zamierzone działanie. Jeśli na przykład chcesz, aby model wygenerował film na podstawie obrazu, możesz ustawić parametr na `image_to_video`. Jeśli nie zostanie ustawiona, model wywnioskuje, czego oczekujesz, na podstawie promptu.
 
-İzin verilen değerler şunlardır:
+Dozwolone wartości:
 
 - `text_to_video`
 - `image_to_video`
@@ -434,7 +434,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 - `edit`
 - `extend`
 
-Aşağıdaki örnekte, daha önce gösterilen resimden videoya örneği için bu ayarın nasıl yapılacağı gösterilmektedir.
+Poniższy przykład pokazuje, jak ustawić tę wartość w przypadku przedstawionego wcześniej przykładu obrazu do filmu.
 
 ### Python
 
@@ -512,11 +512,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Durumlu video düzenleme
+## Edytowanie filmów z zachowaniem stanu
 
-Video oluşturun ve takip istemlerini kullanarak videoyu yinelemeli olarak düzenleyin. Her dönüş, önceki sonucun üzerine kurulur. Model, video bağlamını hatırlar ve değişikliklerinizi uygularken bahsetmediğiniz öğeleri korur. Önceki videoyu yeniden yüklemeden sohbet geçmişini ve oluşturulan video durumunu izlemek için `previous_interaction_id` simgesini kullanın.
+Generuj film i edytuj go iteracyjnie za pomocą dodatkowych promptów. Każda tura
+bazuje na poprzednim wyniku. Model zapamiętuje kontekst filmu i stosuje zmiany, zachowując elementy, o których nie wspominasz. Użyj `previous_interaction_id`, aby śledzić historię rozmowy i stan wygenerowanego filmu bez ponownego przesyłania poprzedniego filmu.
 
-Aşağıdaki örnekte, ilk videonun nasıl oluşturulacağı ve düzenleneceği gösterilmektedir:
+Ten przykład pokazuje, jak wygenerować pierwszy film, a potem go edytować:
 
 ### Python
 
@@ -576,17 +577,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-İlk video örneği:
+Przykład początkowego filmu:
 
-Düzenlenmiş video örneği:
+Przykład edytowanego filmu:
 
-Sohbetteki her dönüş yeni bir video oluşturur. Model, önceki dönüşlerdeki bağlamı anlar. Bu sayede, sahnenin tamamını yeniden tanımlamadan ışığı ayarlama ve arka planları değiştirme gibi artımlı değişiklikler yapabilirsiniz.
+Każda tura rozmowy generuje nowy film. Model rozumie kontekst z poprzednich tur, co pozwala wprowadzać stopniowe zmiany, takie jak dostosowywanie oświetlenia czy zamiana tła, bez konieczności ponownego opisywania całej sceny.
 
-### Kendi videolarınızı düzenleme
+### Edytowanie własnych filmów
 
-Videolarınızı [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr)'yi kullanarak yükleyip Gemini Omni Flash ile düzenleyin.
+Prześlij filmy za pomocą [interfejsu Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl), aby je edytować za pomocą Gemini Omni Flash.
 
-Aşağıdaki örnekte, orijinal videonun nasıl düzenleneceği gösterilmektedir:
+Poniższy przykład pokazuje, jak edytować ten oryginalny film:
 
 ### Python
 
@@ -691,12 +692,12 @@ curl -sS -w "\n[HTTP %{http_code}]\n" "https://generativelanguage.googleapis.com
 EOF
 ```
 
-Düzenlenmiş video örneği:
+Przykład edytowanego filmu:
 
-## URI ile video alma
+## Pobieranie filmów za pomocą identyfikatora URI
 
-Oluşturulan 4 MB'tan büyük videoları almak için `delivery="uri"` parametresini `response_format` içinde kullanın.
-Bu işlem, indirmeden önce video `ACTIVE` olana kadar yoklayabileceğiniz Google tarafından barındırılan bir URI döndürür.
+Użyj parametru `delivery="uri"` w `response_format`, aby pobrać wygenerowane filmy o rozmiarze większym niż 4 MB.
+Zwraca to adres URI hostowany przez Google, który możesz sprawdzać, dopóki film nie będzie `ACTIVE` przed pobraniem.
 
 ### Python
 
@@ -809,7 +810,7 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/files/$FILE_ID:
 echo "Done! Video saved to output.mp4"
 ```
 
-**Ham REST JSON yapısı (URI):**
+**Nieprzetworzona struktura JSON REST (URI):**
 
 ```
 {
@@ -834,15 +835,15 @@ echo "Done! Video saved to output.mp4"
 }
 ```
 
-## Video uzantısı
+## Rozszerzenie wideo
 
-Klipin sonuna sorunsuz bir devam niteliğinde içerik oluşturarak mevcut bir videoyu uzatın. İsteminizde videonun nasıl devam etmesini istediğinizi açıklayın. Örneğin, `"Extend this video"` veya `"Continue the scene: the camera pans across the mountains"`.
-Model, 3-10 saniyelik bir devam niteliğinde video oluşturmak için giriş videosunu analiz eder.
+Wydłużanie istniejącego filmu przez wygenerowanie płynnej kontynuacji na końcu klipu. W prompcie opisz, jak ma się rozwijać film, np. `"Extend this video"` lub `"Continue the scene: the camera pans across the mountains"`.
+Model analizuje film wejściowy, aby wygenerować jego kontynuację trwającą 3–10 sekund.
 
-Şunları uzatabilirsiniz:
+Możesz przedłużyć:
 
-- **Model tarafından oluşturulan videolar (çok aşamalı etkileşim)**: Daha önce oluşturulmuş bir videoyu `previous_interaction_id` referans alarak genişletin.
-- **Yüklenen videolar**: Uzantı isteminizle birlikte yüklenen bir video dosyası (Files API aracılığıyla) sağlayın.
+- **Filmy wygenerowane przez model (wieloetapowe):** przedłuż wcześniej wygenerowany film, odwołując się do jego `previous_interaction_id`.
+- **Przesłane filmy:** podaj przesłany plik wideo (za pomocą interfejsu Files API) wraz z promptem do rozszerzenia.
 
 ### Python
 
@@ -910,9 +911,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### Referans medyayla genişletme
+### Rozszerzanie za pomocą multimediów referencyjnych
 
-Genişletilmiş videoya yeni karakterler veya öğeler eklemek için isteminizle birlikte `input` dizisinde referans görseller sağlayabilirsiniz:
+Obrazy referencyjne możesz podać w tablicy `input` wraz z promptem, aby wprowadzić do dłuższego filmu nowe postacie lub elementy:
 
 ### Python
 
@@ -984,120 +985,122 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### Uzantılarla ilgili kısıtlamalar ve yönergeler
+### Ograniczenia i wytyczne dotyczące rozszerzeń
 
-Videoları uzatırken aşağıdaki kuralları ve kısıtlamaları göz önünde bulundurun:
+Podczas wydłużania filmów pamiętaj o tych zasadach i ograniczeniach:
 
-- **Yüklenen videolardaki konuşma diyalogları**: Şu anda, konuşan birinin yer aldığı yüklenmiş bir videoyu ek diyalog eklemek için uzatamazsınız (karakter sessiz kalırsa veya istem diyalog eklemezse bu işlem desteklenir).
-- **Çok aşamalı etkileşimli ses uzantısı**: Daha önce oluşturulan videoları çok aşamalı etkileşimli (`previous_interaction_id`) olarak genişletirken konuşma diyaloğu veya konuşma oluşturma desteklenir.
-- **Yalnızca klibin sonu**: Uzantı, yalnızca videonun sonuna ekleme yapmakla sınırlıdır.
-  İçerik ekleyemez veya klibin ortasını uzatamazsınız.
-- **Süre sınırı**: Uzantı için giriş videoları, yüklenirken (çok aşamalı etkileşim kullanılmadığı sürece) 10 saniye veya daha kısa olmalıdır.
-- **Bölgesel kullanılabilirlik**: Yüklenen videoları uzatma özelliği şu anda Avrupa Ekonomik Alanı (AEA), İsviçre ve Birleşik Krallık'taki kullanıcılar tarafından kullanılamamaktadır (model tarafından oluşturulan videoları uzatma özelliği, kullanılabilir olan tüm bölgelerde desteklenir).
+- **Wypowiadane dialogi w przesłanych filmach:** obecnie nie możesz wydłużyć przesłanego filmu, w którym ktoś mówi, aby dodać dodatkowy dialog (jest to obsługiwane, jeśli postać milczy lub jeśli prompt nie dodaje dialogu).
+- **Rozszerzenie głosowe z wieloma turami:** generowanie mówionego dialogu lub mowy jest obsługiwane podczas rozszerzania wcześniej wygenerowanych filmów za pomocą funkcji wieloturnowej (`previous_interaction_id`).
+- **Tylko na końcu klipu:** rozszerzenie jest ograniczone do dodawania na końcu filmu.
+  Nie możesz dodawać treści na początku ani wydłużać środka klipu.
+- **Ograniczenie czasu trwania:** przesyłane filmy do rozszerzenia muszą mieć długość nie większą niż 10 sekund (chyba że używasz wieloetapowych odpowiedzi).
+- **Dostępność w poszczególnych regionach:** wydłużanie przesłanych filmów nie jest obecnie dostępne dla użytkowników z Europejskiego Obszaru Gospodarczego (EOG), Szwajcarii i Wielkiej Brytanii (wydłużanie filmów wygenerowanych przez model jest obsługiwane we wszystkich dostępnych regionach).
 
-## En iyi uygulamalar
+## Sprawdzone metody
 
-- **Büyük videolar için URI teslimini kullanın:** 4 MB'tan büyük videolar için (varsa >720p) yük boyutu sınırlarını aşmamak amacıyla `response_format` içinde `delivery="uri"` kullanın.
-- **Optimize edilmiş performans:** Daha hızlı ve senkron tekli oluşturma için `background=false`, `store=false` ve `stream=false` değerlerini ayarlayın. `store=false` ayarının, oluşturulan videonun sonraki dönüşlerde `previous_interaction_id` kullanılarak düzenlenemeyeceği anlamına geldiğini unutmayın.
-- **İstem hassasiyeti:** Ayrıntılar için [istem rehberliği](#prompt-guide) bölümüne bakın.
+- **Używaj dostarczania URI w przypadku dużych filmów:** w przypadku filmów większych niż 4 MB (w razie dostępności – >720p) używaj `delivery="uri"` w `response_format`, aby uniknąć limitów rozmiaru ładunku.
+- **Zoptymalizowana wydajność:** ustaw `background=false`, `store=false` i `stream=false`, aby uzyskać szybsze, synchroniczne generowanie pojedynczych odpowiedzi. Pamiętaj, że ustawienie
+  `store=false` oznacza, że wygenerowanego filmu nie będzie można edytować w kolejnych
+  rundach za pomocą `previous_interaction_id`.
+- **Precyzja promptu:** szczegółowe informacje znajdziesz w sekcji [wskazówki dotyczące promptów](#prompt-guide).
 
-## Sınırlamalar
+## Ograniczenia
 
-- Küçüklerin yer aldığı resimleri yükleme ve düzenleme özelliği Avrupa Ekonomik Alanı, İsviçre ve Birleşik Krallık'ta desteklenmez.
-- Tanınabilir kişilerin yer aldığı resimlerin yüklenmesi ve düzenlenmesi desteklenmez.
-- Yüklenen videoları düzenleme veya uzatma özelliği şu anda Avrupa Ekonomik Alanı (AEA), İsviçre ve Birleşik Krallık'taki kullanıcılar tarafından kullanılamamaktadır (model tarafından oluşturulan videoları düzenleme veya uzatma özelliği desteklenir).
-- Düzenleme ve uzatma için giriş videoları, yüklenirken 10 saniye veya daha kısa olmalıdır (çok aşamalı etkileşim model tarafından oluşturulan videolar uzatılmadığı sürece).
-- Video uzatma, yalnızca videonun sonuna ekleme ile sınırlıdır. Klibin başına ekleme veya ortasını uzatma desteklenmez.
-- Yüklenen ve birinin konuştuğu videolara ek diyalog eklemek için videoyu uzatamazsınız (karakterler sessiz kalabilir veya `previous_interaction_id` ile çok aşamalı etkileşim uzatma kullanılabilir).
-- Sesle düzenleme desteklenmez.
-- Ses referanslarının yüklenmesi, API'nin mevcut sürümünde desteklenmemektedir.
-- Video referansları, benzerliklerle en iyi şekilde çalışır. Video referansındaki sesler dikkate alınmaz. Video referansları, her biri en fazla 3 saniye uzunluğunda olmak üzere en fazla 3 klip destekler.
-- Birden fazla videoda referans verme veya akıl yürütme desteklenmez. Çok videolu istem denemek, model performansının düşmesine veya beklenmedik çıktılara neden olabilir.
-- Sağlanan işleme hızı desteklenmez.
-- Sistem talimatları, sıcaklık, `top_p`, durdurma dizileri ve olumsuz istemler desteklenmez (olumsuz istemlerinizi normal isteme ekleyebilirsiniz: ör. "X yapma").
-- YouTube videolarının medya kaynağı olarak kullanılması desteklenmez.
+- Przesyłanie i edytowanie obrazów przedstawiających osoby niepełnoletnie nie jest obsługiwane w Europejskim Obszarze Gospodarczym, Szwajcarii i Wielkiej Brytanii.
+- Przesyłanie i edytowanie obrazów przedstawiających niektóre rozpoznawalne osoby nie jest obsługiwane.
+- Edytowanie lub wydłużanie przesłanych filmów nie jest obecnie dostępne dla użytkowników z Europejskiego Obszaru Gospodarczego (EOG), Szwajcarii i Wielkiej Brytanii (edytowanie i wydłużanie filmów wygenerowanych przez model jest obsługiwane).
+- Filmy wejściowe do edycji i rozszerzania muszą mieć podczas przesyłania długość maksymalnie 10 sekund (chyba że rozszerzasz filmy wygenerowane przez model w ramach wieloetapowej konwersacji).
+- Rozszerzenie wideo można dodać tylko na końcu filmu. Dodawanie na początku lub w środku klipu nie jest obsługiwane.
+- Nie możesz wydłużyć przesłanego filmu, w którym ktoś mówi, aby dodać dodatkowe dialogi (postacie mogą milczeć lub można użyć wieloetapowego rozszerzenia z `previous_interaction_id`).
+- Edytowanie głosem nie jest obsługiwane.
+- Przesyłanie referencji audio nie jest obsługiwane w bieżącej wersji interfejsu API.
+- Referencje wideo najlepiej sprawdzają się w przypadku podobieństw. Dźwięk w referencji wideo jest ignorowany. Filmy referencyjne mogą zawierać maksymalnie 3 klipy, z których każdy może trwać do 3 sekund.
+- Odwoływanie się do wielu filmów lub wyciąganie z nich wniosków nie jest obsługiwane. Próba użycia promptów z wieloma filmami może spowodować pogorszenie wydajności modelu lub nieoczekiwane wyniki.
+- Udostępniona przepustowość nieobsługiwany.
+- Instrukcje systemowe, temperatura, `top_p`, sekwencje zatrzymania i negatywne prompty nie są obsługiwane (negatywne prompty możesz umieścić w zwykłym prompcie, np. „Nie rób X”).
+- Używanie filmów z YouTube jako źródła multimediów nie jest obsługiwane.
 
-## Teknik ayrıntılar
+## Szczegóły techniczne
 
-- Üretilen tüm videolarda, izleyiciler tarafından görünmeyen ancak kaynağın doğrulanması için programatik olarak algılanabilen SynthID filigranı bulunur.
-- Video oluşturma süreleri; süreye, çözünürlüğe ve mevcut API yüküne göre değişir. Daha uzun ve daha yüksek çözünürlüklü videoların oluşturulması daha uzun sürer.
-- Omni, hem giriş istemlerine hem de oluşturulan videoya (bölgeye göre değişir) içerik güvenliği filtreleri uygular. Kullanım politikalarını ihlal eden istemler engellenir.
-- İngilizce (EN) tam olarak desteklenir ancak diğer diller değerlendirilmediğinden çalışabilir ancak sonuçlar değişebilir.
+- Wszystkie wygenerowane filmy zawierają znak wodny SynthID, który jest niewidoczny dla widzów, ale można go wykryć programowo w celu weryfikacji pochodzenia.
+- Czas generowania filmów zależy od ich długości, rozdzielczości i bieżącego obciążenia interfejsu API. Generowanie dłuższych filmów w wyższej rozdzielczości zajmuje więcej czasu.
+- Omni stosuje filtry bezpieczeństwa treści zarówno do promptów wejściowych, jak i wygenerowanych filmów (różnią się one w zależności od regionu). Prompty, które naruszają zasady użytkowania, są blokowane.
+- Język angielski jest w pełni obsługiwany, ale inne języki nie zostały jeszcze ocenione, więc mogą działać, ale wyniki mogą się różnić.
 
-## Gemini Omni Flash istem rehberi
+## Przewodnik po tworzeniu promptów w Gemini Omni Flash
 
-Bu bölümde, Gemini Omni Flash'e etkili istemler yazmayla ilgili ipuçları ve örnekler yer almaktadır.
+W tej sekcji znajdziesz wskazówki i przykłady dotyczące skutecznego promptowania Gemini Omni Flash.
 
-### Tek sahne
+### Pojedyncza scena
 
-Omni Flash, varsayılan olarak birkaç farklı çekimden oluşan bir video oluşturmaya çalışır.
-İstemden yola çıkarak ilgi çekici bir anlatı oluşturmaya çalışır.
+Domyślnie Omni Flash spróbuje utworzyć film z kilkoma różnymi ujęciami.
+Spróbuje stworzyć ciekawą opowieść na podstawie promptu.
 
-Çıkış videosunun tek bir sahne içermesini istiyorsanız bunu istemde belirtmeniz gerekir:
+Jeśli chcesz, aby wygenerowany film zawierał tylko jedną scenę, musisz to określić w prompcie:
 
-- Tek bir kesintisiz sahnede
-- Tek kesintisiz çekimde
-- Sahne kesintisi yok
+- w jednej nieprzerwanej scenie,
+- w jednym ciągłym ujęciu.
+- Brak cięć scen
 
-Örneğin:
+Na przykład:
 
 ```
 Continuous, unbroken handheld shot of a fluffy tabby cat sitting on a sunny windowsill, looking out into a leafy garden. The cat's tail twitches slowly, and its ears rotate slightly toward ambient noises. Sunbeams illuminate dust motes in the air. Sound design: Gentle breeze, distant bird chirps. No dialogue.
 ```
 
-### İstenmeyen öğeleri kaldırma
+### Usuwanie niechcianych elementów
 
-Oluşturulan videoda istemediğiniz şeyler varsa bunları önlemek için basit olumsuz istemler ekleyin:
+Jeśli wygenerowany film zawiera elementy, których nie chcesz, użyj prostych negatywnych promptów, aby ich uniknąć:
 
-- Diyalog yok
-- Süsleme yok
-- Ek ses efektleri yok
+- Brak dialogów
+- Bez ozdób
+- Brak dodatkowych efektów dźwiękowych
 
-### Düzenleme istemleri
+### Prompty do edycji
 
-Video düzenleme için en iyi sonucu basit istemler verir. Aşırı açıklayıcı istemler, istenmeyen değişikliklere yol açabilir.
+W przypadku edycji wideo najlepiej sprawdzają się proste prompty. Zbyt szczegółowe prompty mogą prowadzić do niezamierzonych zmian.
 
-Aşağıda, basit düzenleme istemlerine dair daha fazla örnek verilmiştir:
+Oto więcej przykładów prostych promptów do edycji:
 
-- Bu videoyu animeye dönüştür
-- Bu kişiye şık bir şapka tak
-- Işıklandırmayı daha dramatik hale getirme
-- Tabeladaki metni "Omni Flash" olarak değiştirin.
+- Przekształć ten film w anime
+- Załóż tej osobie modny kapelusz
+- Zmień oświetlenie, aby było bardziej dramatyczne
+- Zmień tekst na znaku na „Omni Flash”
 
-Videonun belirli bir yönünü düzenlerken görsel tutarlılığı korumak için `"Keep everything else the same"` simgesini ekleyin.
+Podczas edytowania konkretnego aspektu filmu dodaj `"Keep everything else the same"`, aby zachować spójność wizualną.
 
-Bu tekniğin nasıl uygulanacağını gösteren bazı örnekleri aşağıda bulabilirsiniz:
+Oto kilka przykładów, które pokazują, jak zastosować tę technikę:
 
-- **Kaçınılması gerekenler:** `In the video of the man sitting on the sofa, please add a small
+- **Czego unikać:** `In the video of the man sitting on the sofa, please add a small
   black cat that runs from the right side of the screen, jumps onto his lap,
   and then he starts to stroke its head while looking down.`
-  - **Basitleştirin:** `Add a cat that jumps onto his lap, he begins to pet it.
+  - **Uprość:** `Add a cat that jumps onto his lap, he begins to pet it.
     Keep everything else the same.`
-- **Kaçınılması gerekenler:** `Please remove the cell phone that the person is holding in
+- **Czego unikać:** `Please remove the cell phone that the person is holding in
   their hand and fill in the background so it looks like they are just holding
   their hand empty.`
-  - **Basitleştirin:** `Make the phone invisible. Keep everything else the
+  - **Uprość:** `Make the phone invisible. Keep everything else the
     same.`
 
-### Ses istemi
+### Promptowanie dźwięku
 
-Model, varsayılan olarak bir video için uygun bir ses parçası oluşturmaya çalışır. Bu her zaman istediğiniz sonuç olmayabilir. İsteminizi kullanarak istediğiniz ses türünü açıklayabilirsiniz. Bu durum, özellikle videonuzda müzik kullanmak istiyorsanız önemlidir:
+Domyślnie model będzie próbował wygenerować odpowiednią ścieżkę dźwiękową do filmu. Nie zawsze jest to pożądane. W prompcie możesz opisać typ dźwięku, który chcesz uzyskać. Jest to szczególnie ważne, jeśli chcesz użyć w filmie muzyki:
 
-- Sakinleştirici arka plan müziği ekleyin
-- Videoda yüksek enerjili bir tekno ritmi var.
-- Arka planda, şarkı çalan düşük kaliteli bir radyo yayını duyuluyor.
+- Dodaj spokojną muzykę w tle
+- Film ma energetyczny beat techno
+- W tle słychać cichą, metaliczną audycję radiową z odtwarzaną piosenką.
 
-### Zamanlama etkinlikleri
+### Zdarzenia związane z czasem
 
-Videoda belirli zamanlarda gerçekleşmesini istediğiniz olayları istemek için doğal dil kullanabilirsiniz. Bu özellik, özellikle kendi sahne kesimlerinizi, ritminizi veya hızlı çekim dizilerinizi oluştururken kullanışlıdır.
-Örnekler için aşağıdakilere bakın:
+Możesz poprosić o wykonanie określonych czynności w określonych momentach filmu. Nie musisz używać precyzyjnej składni, możesz używać języka naturalnego. Jest to szczególnie przydatne przy tworzeniu własnych cięć scen, rytmu lub szybkich sekwencji.
+Przykłady znajdziesz poniżej:
 
-- 3 saniye sonra bir kadın sahneye giriyor.
-- 5. saniyede arka plan sesinde koro başlıyor.
-- Her 2 saniyede bir yeni kareye geçiş yapın.
-- Hızlı çekim dizisinde, her yarım saniyede (24 kare/sn hızında 12 kare) sahneyi yeni bir konuma değiştirin.
+- Po 3 sekundach na scenie pojawia się kobieta.
+- W 5 sekundzie w tle zaczyna się refren.
+- Co 2 sekundy przełączanie na nową klatkę.
+- W sekwencji szybkiego ognia co pół sekundy (12 klatek przy 24 kl./s) zmieniaj scenę na nową lokalizację.
 
-Ayrıca bir zaman kodu söz dizimi de kullanabilirsiniz:
+Możesz też użyć składni kodu czasowego:
 
 ```
 [0-3s] A person is walking
@@ -1105,54 +1108,52 @@ Ayrıca bir zaman kodu söz dizimi de kullanabilirsiniz:
 [6-10s] They start running
 ```
 
-### Meta istem
+### Tworzenie metapromptów
 
-Gemini Omni Flash'ten video oluşturmayla ilgili genel niteliklere veya ilkelere dikkat etmesini isteyebilirsiniz:
+Możesz poprosić Gemini Omni Flash o zwrócenie uwagi na ogólne cechy lub zasady generowania filmów:
 
-- Çok zengin ve ayrıntılı ancak tamamen doğal bir sahne oluşturmak için mikro ayrıntıları, ifadeyi ve zamanlamayı göz önünde bulundurun.
-- Karakter ve ortam açıklamalarınızda son derece ayrıntılı olun.
-  Karakterlere kostüm tasarım ilkelerini uygulayın. Sahnedeki kişiler, öğeler ve nesneler hakkında çok net olun.
-- Sahnenin gerçekçi ve doğal görünmesi için arka plan öğelerine uygun ayrıntılar ekleyin.
-- Her saniyede farklı bir nadir `[thing]` gösteren, hızlı tempolu müzik içeren ve öğeleri etiketlemek için metin eklenmiş bir video oluştur.
+- Zwróć uwagę na mikrodetale, wyraz i timing, aby stworzyć bardzo bogatą w szczegóły, ale całkowicie naturalną scenę.
+- Opisuj postacie i środowiska bardzo szczegółowo.
+  Stosuj zasady projektowania kostiumów do postaci. Opisz dokładnie osoby, przedmioty i obiekty na scenie.
+- Dodaj do elementów tła wiele odpowiednich szczegółów, aby scena wyglądała realistycznie i naturalnie.
+- Utwórz film z szybko zmieniającymi się ujęciami, w którym co sekundę pojawia się inny rzadki `[thing]`. Dodaj do niego wesołą muzykę i tekst z nazwą obiektu.
 
-### Videolardaki metinler
+### Tekst w filmach
 
-Videonuzda metin olmasını isteyebilirsiniz. Gemini Omni, metni doğru ve okunabilir şekilde oluşturur. Videonuzda arka plan öğelerinde bile doğal olarak oluşan metinler varsa ne söylemesi gerektiğini tanımlamak faydalı olabilir.
+Możesz poprosić o uwzględnienie tekstu w filmie, a Gemini Omni wyrenderuje go w prawidłowy i czytelny sposób. Jeśli w filmie pojawi się tekst, nawet w elementach tła, warto określić, co ma on zawierać.
 
-- Ekranda tek seferde bir kelime: "did, you, know, that, Omni, can, do,
-  awesome, text?" ("Omni'nin, harika, metinler, oluşturabildiğini, biliyor, muydunuz?") Her kelime, farklı bir animasyon stiliyle 1 saniye boyunca görünür. Diyalog yok.
-- "Bu, Omni tarafından üretilen bir yapay zeka görüntüsüdür" yazan bir sokak tabelası, "İhtiyacınız olan tüm yapay zeka" yazan bir vitrin ve "OMNI1.1" plakalı bir araba var.
+- Po jednym słowie na ekranie: „czy, wiesz, że, Omni, potrafi, tworzyć, świetne, teksty?” Każde słowo pojawia się na sekundę w innym stylu animacji. Brak dialogów.
+- Na znaku drogowym widnieje napis: „This is an AI generation by Omni” (To obraz wygenerowany przez AI od Omni), na fasadzie sklepu jest napis: „All you need AI” (AI, której potrzebujesz), a na tablicy rejestracyjnej samochodu widnieje napis: „OMNI1.1”.
 
-### Videoları uzatmaya yönelik istemler
+### Prompty do wydłużania filmu
 
-Gemini Omni 1.1 Flash ile `"Extend this video"` veya `"The scene continues"` gibi istemlerle videoları uzatabilirsiniz. Videoları 10 saniye uzatarak toplam uzunluğu 40 saniyeye çıkarabilirsiniz.
+Dzięki Gemini Omni 1.1 Flash możesz wydłużać filmy za pomocą promptów takich jak `"Extend this video"` lub `"The scene continues"`. Możesz wydłużyć filmy o 10 sekund, do łącznej długości 40 sekund.
 
-Omni, orijinal videonuzun son 10 saniyesini bağlam olarak kullanarak video, hareket, karakter ve sesin tutarlı olmasını sağlayan bir uzantı oluşturur. Giriş videonuzdaki son karelerden bazıları, geçişin sorunsuz olması için düzenlenir.
+Omni tworzy rozszerzenie, które zachowuje spójność filmu, ruchu, postaci i dźwięku, wykorzystując jako kontekst ostatnie 10 sekund oryginalnego filmu. Niektóre z ostatnich klatek filmu wejściowego zostaną zmodyfikowane, aby przejście było płynne.
 
-Uzatma işlemi yaparken bu kılavuzdaki tüm Omni istemi ipuçları geçerliliğini korur:
+Podczas rozszerzania nadal obowiązują wszystkie wskazówki dotyczące promptów Omni z tego przewodnika:
 
-- Genişletilmiş sahnenizdeki sesi açıklayın. Özellikle değiştirilmesi gerekiyorsa bu açıklamayı yapın: `"The music continues into the chorus"`
-- Sahnenin devam edip etmediğini veya yeni bir sahneye geçiş yapılıp yapılmadığını (belki aynı karakterlerle) açıklayın: `"Show the same characters in the next scene"`
-- Çıkışlarınızın doğru olmasını sağlamak veya yeni karakterler tanıtmak için genişletme yaparken referans olarak resim ve video ekleyin: `"The person shown in the reference image enters the scene"`, `"The dog in the reference video <VIDEO_REF_0> jumps onto the sofa"`
-- Zaman damgaları veya zaman kodu söz dizimi kullanılıyorsa 0s, videonun uzatılmış kısmının başlangıcını ifade eder. 10 saniyelik bir videoyu uzatıyorsanız bu istemdeki sahne kesimi 12 saniye sonra gerçekleşir: `"After 2s cut to a new scene with the same characters"`
+- Opisz dźwięk w rozszerzonej scenie, zwłaszcza jeśli chcesz go zmienić: `"The music continues into the chorus"`
+- Opisz, czy scena jest kontynuowana, czy następuje cięcie do nowej sceny (być może z tymi samymi postaciami): `"Show the same characters in the next scene"`
+- Dołączaj obrazy i filmy jako materiały referencyjne, aby zwiększyć dokładność wyników lub wprowadzić nowe postacie: `"The person shown in the reference image enters the scene"`, `"The dog in the reference video <VIDEO_REF_0> jumps onto the sofa"`
+- Jeśli używasz sygnatur czasowych lub składni kodu czasowego, 0s odnosi się do początku rozszerzonej części filmu. Jeśli przedłużasz 10-sekundowy film, cięcie sceny w tym prompcie nastąpi po 12 sekundach: `"After 2s cut to a new scene with the same characters"`
 
-### İstemlerde etiket kullanarak resim ve video rollerini ayarlama
+### Używanie tagów w promptach do określania ról obrazów i filmów
 
-Yüklenen medyaları belirli üretim rollerine bağlamak için etiketleri kullanabilirsiniz. Bu sayede her resmin veya videonun başlangıç karesi, son kare ya da referans olup olmadığını belirleyebilirsiniz.
+Za pomocą tagów możesz powiązać przesłane multimedia z określonymi rolami generowania. Dzięki temu możesz określić, czy każdy obraz lub film jest klatką początkową, klatką końcową czy odniesieniem.
 
-#### 1. Basit etiketler (önerilen)
+#### 1. Proste tagi (zalecane)
 
-Medya rollerinin istemden açıkça anlaşıldığı basit durumlarda, resimleri ve videoları doğrudan rollere bağlayabilirsiniz:
+W prostych przypadkach, gdy role multimediów są jasne na podstawie prompta, możesz bezpośrednio przypisywać obrazy i filmy do ról:
 
-- **`<FIRST_FRAME>`**: Örneğin, `<FIRST_FRAME> a woman is walking` gibi durumlarda videonun başlangıç karesi olarak resmi kullanın.
-- **`<LAST_FRAME>`**: Geçiş yapılacak videonun son karesi olarak kullanın. `<FIRST_FRAME>` ile birlikte kullanılmalıdır. Örneğin: `<FIRST_FRAME> <LAST_FRAME> a woman is walking`
-- **`<IMAGE_REF_N>`**: Resmi referans olarak kullanın. Örneğin: `in the
-  style of <IMAGE_REF_0> a woman <IMAGE_REF_1> is walking` (ilk resimdeki stil referansını ve ikinci resimdeki özne referansını birleştirir).
-  Resim referansları 0'dan başlar.
-- **`<VIDEO_REF_N>`**: Videoyu karakter veya nesne referansı olarak kullanma (örneğin:
-  `the person in <VIDEO_REF_0> is playing the violin`). Video referansları da 0'dan başlar.
+- **`<FIRST_FRAME>`**: użyj obrazu jako klatki początkowej filmu, np. `<FIRST_FRAME> a woman is walking`
+- **`<LAST_FRAME>`**: użyj obrazu jako ostatniej klatki filmu, do której nastąpi przejście. Musi być używany z parametrem `<FIRST_FRAME>`, np. `<FIRST_FRAME> <LAST_FRAME> a woman is walking`
+- **`<IMAGE_REF_N>`**: użyj obrazu jako odniesienia, np. `in the
+  style of <IMAGE_REF_0> a woman <IMAGE_REF_1> is walking` (łączy odniesienie do stylu z pierwszego obrazu i odniesienie do obiektu z drugiego obrazu).
+  Odwołania do obrazów zaczynają się od 0.
+- **`<VIDEO_REF_N>`**: używać filmu jako odniesienia do postaci lub obiektu, np.`the person in <VIDEO_REF_0> is playing the violin`. Wartości odniesień do filmów również zaczynają się od 0.
 
-Aşağıda 6 referans resim içeren bir örnek verilmiştir:
+Oto przykład z 6 obrazami referencyjnymi:
 
 ```
 [0-3s] A studio fashion sequence. Starting with woman <IMAGE_REF_0>, she is holding <IMAGE_REF_1>
@@ -1160,54 +1161,54 @@ Aşağıda 6 referans resim içeren bir örnek verilmiştir:
 [6-10s] And finally another woman <IMAGE_REF_4> who is holding <IMAGE_REF_5> while walking.
 ```
 
-#### 2. Kaynakları ve referansları belirtme
+#### 2. Deklarowanie źródeł i odwołań
 
-Birden fazla medya girişi ve birden fazla rol içeren daha karmaşık durumlarda, doğal dil talimatlarıyla eşleştirilmiş açık önek etiketlerini kullanabilirsiniz. Bu kaynakları ve referansları isteminizin başında belirtmeniz gerekir.
+W bardziej złożonych przypadkach, w których występuje wiele danych wejściowych multimediów i wiele ról, możesz używać jawnych tagów prefiksów w połączeniu z instrukcjami w języku naturalnym. Na początku prompta należy zadeklarować te źródła i odniesienia.
 
-- `[# Sources <FIRST_FRAME>@Image1]`, başlangıç karesi olarak ilk resmi kullanır.
-- `[# Sources <FIRST_FRAME>@Image1 <LAST_FRAME>@Image2]`, ilk resmi başlangıç karesi, ikinci resmi ise son kare olarak kullanır.
-- `[# Sources <FIRST_FRAME>@Image1 <LAST_FRAME>@Image1]`, ilk resmi hem ilk kare hem de son kare olarak kullanarak döngüye giren bir video oluşturur.
-- `[# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2]`, ilk resmi başlangıç karesi, ikinci resmi ise referans olarak kullanır.
-- `[# Sources <VIDEO_0>@Video1]`, düzenleme veya değiştirme için videoyu birincil kaynak video olarak kullanır.
-- `[# Sources <PREVIOUS_VIDEO>@Video1]`, önceki dönüşteki videoyu uzatmak için kullanacak.
-- `[# References <IMAGE_REF_0>@Image1]`, ilk resmi referans olarak kullanır.
-- `[# References <IMAGE_REF_1>@Image2]`, ikinci resmi referans olarak kullanır.
-- `[# References <IMAGE_REF_0>@Image1 <IMAGE_REF_1>@Image2]`, her iki resmi de referans olarak kullanır.
-- `[# References <VIDEO_REF_0>@Video1]`, ilk videoyu referans olarak kullanır.
-- `[# References <IMAGE_REF_0>@Image1 <VIDEO_REF_0>@Video1]`, hem resmi hem de videoyu referans olarak kullanır.
+- `[# Sources <FIRST_FRAME>@Image1]` użyje pierwszego obrazu jako klatki początkowej.
+- `[# Sources <FIRST_FRAME>@Image1 <LAST_FRAME>@Image2]` użyje pierwszego obrazu jako klatki początkowej, a drugiego jako klatki końcowej.
+- `[# Sources <FIRST_FRAME>@Image1 <LAST_FRAME>@Image1]` użyje pierwszego obrazu jako pierwszej i ostatniej klatki, tworząc film, który będzie się zapętlać.
+- `[# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2]` użyje pierwszego obrazu jako klatki początkowej, a drugiego jako obrazu referencyjnego.
+- `[# Sources <VIDEO_0>@Video1]` użyje filmu jako głównego źródła do edycji lub modyfikacji.
+- `[# Sources <PREVIOUS_VIDEO>@Video1]` użyje filmu z poprzedniej tury, aby go przedłużyć.
+- `[# References <IMAGE_REF_0>@Image1]` użyje pierwszego obrazu jako odniesienia.
+- `[# References <IMAGE_REF_1>@Image2]` użyje drugiego obrazu jako referencyjnego.
+- `[# References <IMAGE_REF_0>@Image1 <IMAGE_REF_1>@Image2]` użyje obu obrazów jako przykładów.
+- `[# References <VIDEO_REF_0>@Video1]` użyje pierwszego filmu jako referencyjnego.
+- `[# References <IMAGE_REF_0>@Image1 <VIDEO_REF_0>@Video1]` użyje zarówno obrazu, jak i filmu jako materiałów referencyjnych.
 
-İsteminize yönlendirici talimatlar ekleyin:
+Dodaj instrukcje na końcu prompta:
 
-- Başlangıç karesi için: `"Use this image as the starting frame."`
-- Başlangıç ve bitiş kareleriyle döngüye alınan video için: `"Use this image as the first frame and the last frame."`
-- Referans resimler için: `"Use the given image(s) as references for video generation. The images should not be used as literal initial frames."`
-- Referans videolar için: `"Use the given video(s) as references. Do not use them as a source for video editing."`
+- W przypadku klatki początkowej: `"Use this image as the starting frame."`
+- W przypadku zapętlonego filmu za pomocą klatek początkowej i końcowej: `"Use this image as the first frame and the last frame."`
+- W przypadku obrazów referencyjnych: `"Use the given image(s) as references for video generation. The images should not be used as literal initial frames."`
+- W przypadku filmów referencyjnych: `"Use the given video(s) as references. Do not use them as a source for video editing."`
 
-Kaynak ve referans beyanları içeren istemlere dair bazı örnekler:
+Przykłady promptów z deklaracjami źródła i referencji:
 
-**Başlangıç karesi, referans resimle birleştirildi:**
+**Klatka początkowa połączona z obrazem referencyjnym:**
 
 ```
 [# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2] a woman <IMAGE_REF_0> is walking. Use Image1 as the starting frame. Use Image2 as a reference for the video generation.
 ```
 
-**Karakter referans videosu ile nesne referans görselinin birleştirilmesi:**
+**Film referencyjny z postacią połączony z obrazem referencyjnym obiektu:**
 
 ```
 [# References <IMAGE_REF_0>@Image1 <VIDEO_REF_0>@Video1] The woman in <VIDEO_REF_0> is playing the violin shown in <IMAGE_REF_0>. Use Video1 as a character reference and Image1 as an object reference.
 ```
 
-## Sırada ne var?
+## Co dalej?
 
-- [Omni Quickstart Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Omni.ipynb?hl=tr)'de denemeler yaparak Gemini Omni Flash'i kullanmaya başlayın.
-- [İstem tasarımına giriş](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=tr) başlıklı makalemizden yararlanarak daha iyi istemler yazmayı öğrenin.
+- Zacznij korzystać z Gemini Omni Flash, eksperymentując w [Omni Quickstart Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Omni.ipynb?hl=pl).
+- Dowiedz się, jak pisać jeszcze lepsze prompty, korzystając z naszego [wprowadzenia do projektowania promptów](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=pl).
 
-Geri bildirim gönderin
+Prześlij opinię
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Son güncelleme tarihi: 2026-08-30 UTC.
+Ostatnia aktualizacja: 2026-08-30 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Chcesz przekazać coś jeszcze?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-08-30 UTC."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-08-30 UTC."],[],[]]

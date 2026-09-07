@@ -1,85 +1,85 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/oauth?hl=tr
-fetched_at: 2026-08-31T06:35:05.139232+00:00
-title: "OAuth ile kimlik do\u011frulama h\u0131zl\u0131 ba\u015flang\u0131\u00e7 k\u0131lavuzu \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/oauth?hl=zh-TW
+fetched_at: 2026-09-07T05:36:50.951873+00:00
+title: "\u900f\u904e OAuth \u9032\u884c\u9a57\u8b49\u7684\u5feb\u901f\u5165\u9580\u5c0e\u89bd\u8ab2\u7a0b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Geri bildirim gönderin
+提供意見
 
-# OAuth ile kimlik doğrulama hızlı başlangıç kılavuzu
+# 透過 OAuth 進行驗證的快速入門導覽課程
 
-Gemini API'de kimlik doğrulamanın en kolay yolu, [Gemini API'yi kullanmaya başlama kılavuzunda](https://ai.google.dev/gemini-api/docs/get-started?hl=tr) açıklandığı gibi bir API anahtarı yapılandırmaktır. Daha katı erişim kontrollerine ihtiyacınız varsa bunun yerine OAuth kullanabilirsiniz. Bu kılavuz, OAuth ile kimlik doğrulama ayarlamanıza yardımcı olacaktır.
+如要向 Gemini API 驗證，最簡單的方法是設定 API 金鑰，詳情請參閱 [Gemini API 入門指南](https://ai.google.dev/gemini-api/docs/get-started?hl=zh-tw)。如要使用更嚴格的存取權控管機制，請改用 OAuth。本指南將協助您設定 OAuth 驗證。
 
-Bu kılavuzda, test ortamı için uygun olan basitleştirilmiş bir kimlik doğrulama yaklaşımı kullanılmaktadır. Üretim ortamı için, uygulamanıza uygun [erişim kimlik bilgilerini seçmeden](https://developers.google.com/workspace/guides/create-credentials?hl=tr#choose_the_access_credential_that_is_right_for_you) önce [kimlik doğrulama ve yetkilendirme](https://developers.google.com/workspace/guides/auth-overview?hl=tr) hakkında bilgi edinin.
+本指南會使用簡化的驗證方法，適用於測試環境。在正式環境中，建議您先瞭解[驗證和授權](https://developers.google.com/workspace/guides/auth-overview?hl=zh-tw)，再[選擇適合應用程式的存取憑證](https://developers.google.com/workspace/guides/create-credentials?hl=zh-tw#choose_the_access_credential_that_is_right_for_you)。
 
-## Hedefler
+## 目標
 
-- OAuth için Cloud projenizi ayarlama
-- Uygulama varsayılan kimlik bilgilerini ayarlama
-- `gcloud auth` kullanmak yerine programınızdaki kimlik bilgilerini yönetin
+- 設定 OAuth 的雲端專案
+- 設定應用程式預設憑證
+- 在程式中管理憑證，而非使用 `gcloud auth`
 
-## Ön koşullar
+## 必要條件
 
-Bu hızlı başlangıç kılavuzunu çalıştırmak için ihtiyacınız olanlar:
+如要執行這項快速入門導覽課程，您需要：
 
-- [Google Cloud projesi](https://developers.google.com/workspace/guides/create-project?hl=tr)
-- [gcloud CLI'nın yerel olarak yüklenmiş olması](https://cloud.google.com/sdk/docs/install?hl=tr)
+- [Google Cloud 專案](https://developers.google.com/workspace/guides/create-project?hl=zh-tw)
+- [在本機安裝 gcloud CLI](https://cloud.google.com/sdk/docs/install?hl=zh-tw)
 
-## Cloud projenizi oluşturma
+## 設定雲端專案
 
-Bu hızlı başlangıcı tamamlamak için önce Cloud projenizi ayarlamanız gerekir.
+如要完成本快速入門導覽課程，請先設定雲端專案。
 
-### 1. API'yi etkinleştirme
+### 1. 啟用 API
 
-Google API'lerini kullanmadan önce bir Google Cloud projesinde etkinleştirmeniz gerekir.
+使用 Google API 前，請先在 Google Cloud 專案中啟用這些 API。
 
-- Google Cloud Console'da Google Generative Language API'yi etkinleştirin.
+- 在 Google Cloud 控制台中啟用 Google Generative Language API。
 
-  [API'yi etkinleştirme](https://console.cloud.google.com/flows/enableapi?apiid=generativelanguage.googleapis.com&hl=tr)
+  [啟用 API](https://console.cloud.google.com/flows/enableapi?apiid=generativelanguage.googleapis.com&hl=zh-tw)
 
-### 2. OAuth kullanıcı rızası ekranını yapılandırma
+### 2. 設定 OAuth 同意畫面
 
-Ardından, projenin OAuth kullanıcı rızası ekranını yapılandırın ve kendinizi test kullanıcısı olarak ekleyin. Cloud projeniz için bu adımı zaten tamamladıysanız bir sonraki bölüme geçin.
+接著設定專案的 OAuth 同意畫面，並將自己新增為測試使用者。如果已為 Cloud 專案完成這個步驟，請跳至下一節。
 
-1. Google Cloud Console'da **Menü** > **Google Auth platform** > **Overview**'a (Genel bakış) gidin.
+1. 前往 Google Cloud 控制台，依序選取「選單」 >「Google Auth platform」 >「Overview」。
 
-   [Google Auth platformuna gidin](https://console.developers.google.com/auth/overview?hl=tr)
-2. Proje yapılandırma formunu doldurun ve **Kitle** bölümünde kullanıcı türünü **Harici** olarak ayarlayın.
-3. Formun geri kalanını doldurun, Kullanıcı Verileri Politikası şartlarını kabul edin ve **Oluştur**'u tıklayın.
-4. Şimdilik kapsam eklemeyi atlayıp **Kaydet ve Devam Et**'i tıklayabilirsiniz. Gelecekte, Google Workspace kuruluşunuzun dışında kullanılacak bir uygulama oluşturduğunuzda, uygulamanızın gerektirdiği yetkilendirme kapsamlarını ekleyip doğrulamanız gerekir.
-5. Test kullanıcıları ekleyin:
+   [前往 Google Auth 平台](https://console.developers.google.com/auth/overview?hl=zh-tw)
+2. 填寫專案設定表單，並在「目標對象」部分將使用者類型設為「外部」。
+3. 填妥表單的其餘部分，接受使用者資料政策條款，然後按一下「建立」。
+4. 目前可以略過新增範圍，然後按一下「儲存並繼續」。日後為 Google Workspace 機構以外的環境建立應用程式時，您必須新增並驗證應用程式所需的授權範圍。
+5. 新增測試使用者：
 
-   1. Google Auth platformunun [Kitle sayfasına](https://console.developers.google.com/auth/audience?hl=tr) gidin.
-   2. **Test kullanıcıları** bölümünde **Kullanıcı ekle**'yi tıklayın.
-   3. E-posta adresinizi ve yetkili diğer test kullanıcılarını girip **Kaydet**'i tıklayın.
+   1. 前往 Google Auth Platform 的[目標對象頁面](https://console.developers.google.com/auth/audience?hl=zh-tw)。
+   2. 在「測試使用者」下方，按一下「新增使用者」。
+   3. 輸入您的電子郵件地址和任何其他授權測試使用者，然後按一下「儲存」。
 
-### 3. Masaüstü uygulaması için kimlik bilgilerini yetkilendirme
+### 3. 授權電腦應用程式的憑證
 
-Son kullanıcı olarak kimlik doğrulamak ve uygulamanızdaki kullanıcı verilerine erişmek için bir veya daha fazla OAuth 2.0 istemci kimliği oluşturmanız gerekir. İstemci kimliği, tek bir uygulamanın Google OAuth sunucularına tanıtılması için kullanılır. Uygulamanız birden fazla platformda çalışıyorsa her platform için ayrı bir istemci kimliği oluşturmanız gerekir.
+如要以使用者身分驗證，並存取應用程式中的使用者資料，您需要建立一或多個 OAuth 2.0 用戶端 ID。Google 的 OAuth 伺服器會使用用戶端 ID 來識別個別應用程式。如果您的應用程式在多個平台上執行，則必須為每個平台分別建立用戶端 ID。
 
-1. Google Cloud Console'da **Menü** > **Google Auth platformu** > **İstemciler**'e gidin.
+1. 在 Google Cloud 控制台中，依序前往「選單」 >「Google Auth platform」 >「Clients」。
 
-   [Kimlik Bilgileri'ne gidin](https://console.developers.google.com/auth/clients?hl=tr)
-2. **Create Client**'ı (İstemci Oluştur) tıklayın.
-3. **Uygulama türü** > **Masaüstü uygulaması**'nı tıklayın.
-4. **Ad** alanına, kimliğin adını yazın. Bu ad yalnızca Google Cloud Console'da gösterilir.
-5. **Oluştur**'u tıklayın. Yeni istemci kimliğinizi ve istemci gizli anahtarınızı gösteren, oluşturulan OAuth istemcisi ekranı görünür.
-6. **Tamam**'ı tıklayın. Yeni oluşturulan kimlik bilgisi, **OAuth 2.0 İstemci Kimlikleri** altında görünür.
-7. JSON dosyasını kaydetmek için indir düğmesini tıklayın. `client_secret_<identifier>.json` olarak kaydedilir. `client_secret.json` olarak yeniden adlandırın ve çalışma dizininize taşıyın.
+   [前往「憑證」](https://console.developers.google.com/auth/clients?hl=zh-tw)
+2. 按一下「Create Client」(建立用戶端)。
+3. 依序點選「Application type」(應用程式類型) >「Desktop app」(電腦版應用程式)。
+4. 在「Name」(名稱) 欄位中，輸入憑證名稱。這個名稱只會顯示在 Google Cloud 控制台中。
+5. 按一下「建立」，系統會顯示「已建立 OAuth 用戶端」畫面，其中包含新的用戶端 ID 和用戶端密鑰。
+6. 按一下「確定」。新建立的憑證會顯示在「OAuth 2.0 Client IDs」(OAuth 2.0 用戶端 ID) 下方。
+7. 按一下下載按鈕儲存 JSON 檔案。並儲存為 `client_secret_<identifier>.json`，然後重新命名為 `client_secret.json`，並移至工作目錄。
 
-## Uygulama Varsayılan Kimlik Bilgileri'ni ayarlama
+## 設定應用程式預設憑證
 
-`client_secret.json` dosyasını kullanılabilir kimlik bilgilerine dönüştürmek için dosyanın konumunu `gcloud auth application-default login` komutunun `--client-id-file` bağımsız değişkenine iletin.
+如要將 `client_secret.json` 檔案轉換為可用的憑證，請將檔案位置傳遞至 `gcloud auth application-default login` 指令的 `--client-id-file` 引數。
 
 ```
 gcloud auth application-default login \
@@ -87,9 +87,9 @@ gcloud auth application-default login \
     --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/generative-language.retriever'
 ```
 
-Bu eğitimdeki basitleştirilmiş proje kurulumu, **"Google bu uygulamayı doğrulamadı."** iletişim kutusunu tetikler. Bu normal bir durumdur. **"Devam"**'ı seçin.
+本教學課程中簡化的專案設定會觸發「Google 尚未驗證這個應用程式」對話方塊。這是正常現象，請選擇「繼續」。
 
-Bu işlem, sonuç jetonunu iyi bilinen bir konuma yerleştirir. Böylece jetona `gcloud` veya istemci kitaplıkları tarafından erişilebilir.
+這會將產生的權杖放在已知位置，以便 `gcloud` 或用戶端程式庫存取。
 
 ```` ```
 gcloud auth application-default login   
@@ -100,11 +100,11 @@ gcloud auth application-default login
     --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/generative-language.retriever'
 ``` ````
 
-Uygulama Varsayılan Kimlik Bilgileri (ADC) ayarlandıktan sonra, çoğu dildeki istemci kitaplıklarının bunları bulmak için çok az yardıma veya hiç yardıma ihtiyacı olmaz.
+設定應用程式預設憑證 (ADC) 後，大多數語言的用戶端程式庫幾乎不需要任何協助，就能找到這些憑證。
 
 ### Curl
 
-Bu işlemin çalıştığını test etmenin en hızlı yolu, curl kullanarak REST API'ye erişmek için kullanmaktır:
+如要快速測試這項功能是否正常運作，請使用 curl 存取 REST API：
 
 ```
 access_token=$(gcloud auth application-default print-access-token)
@@ -117,13 +117,13 @@ curl -X GET https://generativelanguage.googleapis.com/v1/models \
 
 ### Python
 
-Python'da istemci kitaplıkları bunları otomatik olarak bulur:
+在 Python 中，用戶端程式庫應會自動找到這些憑證：
 
 ```
 pip install google-genai
 ```
 
-Bunu test etmek için kullanılabilecek minimum komut dosyası:
+測試這項功能的最簡單指令碼可能如下：
 
 ```
 from google import genai
@@ -132,28 +132,28 @@ client = genai.Client()
 print('Available base models:', [m.name for m in client.models.list()])
 ```
 
-## Sonraki adımlar
+## 後續步驟
 
-Bu işlem işe yararsa [metin verilerinizde semantik almayı](https://ai.google.dev/docs/semantic_retriever?hl=tr) deneyebilirsiniz.
+如果運作正常，即可開始嘗試[對文字資料進行語意擷取](https://ai.google.dev/docs/semantic_retriever?hl=zh-tw)。
 
-## Kimlik bilgilerini kendiniz yönetme [Python]
+## 自行管理憑證 [Python]
 
-Çoğu durumda, istemci kimliğinden (`client_secret.json`) erişim jetonu oluşturmak için `gcloud` komutunu kullanamazsınız. Google, bu süreci uygulamanızda yönetmenize olanak tanıyan birçok dilde kitaplıklar sunar. Bu bölümde, süreç Python'da gösterilmektedir. Bu tür bir prosedürün diğer dillerdeki benzer örneklerini [Drive API belgelerinde](https://developers.google.com/drive/api/quickstart/python?hl=tr) bulabilirsiniz.
+在許多情況下，您無法使用 `gcloud` 指令從用戶端 ID (`client_secret.json`) 建立存取權杖。Google 提供多種語言的程式庫，讓您在應用程式中管理該程序。本節將以 Python 示範該程序。如需其他語言的這類程序範例，請參閱 [Drive API 說明文件](https://developers.google.com/drive/api/quickstart/python?hl=zh-tw)。
 
-### 1. Gerekli kitaplıkları yükleme
+### 1. 安裝所需的程式庫
 
-Python için Google istemci kitaplığını ve Gemini istemci kitaplığını yükleyin.
+安裝 Python 適用的 Google 用戶端程式庫和 Gemini 用戶端程式庫。
 
 ```
 pip install --upgrade -q google-api-python-client google-auth-httplib2 google-auth-oauthlib
 pip install google-genai
 ```
 
-### 2. Kimlik bilgisi yöneticisini yazma
+### 2. 編寫憑證管理工具
 
-Yetkilendirme ekranlarını tıklamanız gereken sayıyı en aza indirmek için çalışma dizininizde `load_creds.py` adlı bir dosya oluşturun. Bu dosya, daha sonra yeniden kullanılabilecek veya süresi dolarsa yenilenebilecek bir `token.json` dosyasını önbelleğe alır.
+如要盡量減少授權畫面點選次數，請在工作目錄中建立名為 `load_creds.py` 的檔案，以快取 `token.json` 檔案，供日後重複使用，或在檔案過期時重新整理。
 
-`client_secret.json` dosyasını `genai.configure` ile kullanılabilir bir jetona dönüştürmek için aşağıdaki kodla başlayın:
+請先使用下列程式碼，將 `client_secret.json` 檔案轉換為可搭配 `genai.configure` 使用的權杖：
 
 ```
 import os.path
@@ -190,9 +190,9 @@ def load_creds():
     return creds
 ```
 
-### 3. Programınızı yazma
+### 3. 編寫程式
 
-Şimdi `script.py` özelliğinizi oluşturun:
+現在建立 `script.py`：
 
 ```
 import pprint
@@ -207,27 +207,27 @@ print()
 print('Available base models:', [m.name for m in client.models.list()])
 ```
 
-### 4. Programınızı çalıştırma
+### 4. 執行程式
 
-Çalışma dizininizde örneği çalıştırın:
+在工作目錄中執行範例：
 
 ```
 python script.py
 ```
 
-Komut dosyasını ilk kez çalıştırdığınızda bir tarayıcı penceresi açılır ve erişimi yetkilendirmeniz istenir.
+首次執行指令碼時，系統會開啟瀏覽器視窗，並提示您授權存取權。
 
-1. Henüz Google Hesabınızda oturum açmadıysanız oturum açmanız istenir. Birden fazla hesapta oturum açtıysanız **projenizi yapılandırırken "Test Hesabı" olarak ayarladığınız hesabı seçtiğinizden emin olun.**
-2. Yetkilendirme bilgileri dosya sisteminde saklandığı için örnek kodu bir sonraki çalıştırmanızda yetkilendirme istenmez.
+1. 如果尚未登入 Google 帳戶，系統會提示你登入。如果您登入了多個帳戶，請**務必選取設定專案時設為「測試帳戶」的帳戶。**
+2. 授權資訊會儲存在檔案系統中，因此下次執行程式碼範例時，系統不會提示您授權。
 
-Kimlik doğrulama işlemini başarıyla ayarladınız.
+您已成功設定驗證。
 
-Geri bildirim gönderin
+提供意見
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Son güncelleme tarihi: 2026-07-01 UTC.
+上次更新時間：2026-07-01 (世界標準時間)。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+想進一步說明嗎？
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-01 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-01 (世界標準時間)。"],[],[]]

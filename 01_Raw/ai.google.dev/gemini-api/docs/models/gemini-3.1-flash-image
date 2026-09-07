@@ -1,62 +1,63 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=ja
-fetched_at: 2026-08-31T06:36:32.370274+00:00
-title: "Gemini 3.1 Flash Image \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=pt-BR
+fetched_at: 2026-09-07T05:40:13.697807+00:00
+title: "Imagem do Gemini 3.1 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-フィードバックを送信
+Envie comentários
 
-# Gemini 3.1 Flash Image
+# Imagem do Gemini 3.1 Flash
 
-**Nano Banana 2** は、主流の価格帯と低レイテンシで高品質の画像生成と会話型編集を実現します。[Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=ja) の高効率な対応モデルとして機能し、速度と大容量のデベロッパー ユースケース向けに最適化されています。
+O **Nano Banana 2** oferece geração de imagens de alta qualidade e edição
+conversacional a um preço acessível e com baixa latência. Ele serve como a contraparte de alta eficiência do [Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=pt-br), otimizado para velocidade e casos de uso de alto volume para desenvolvedores.
 
-**主な更新内容:**
+**Atualizações principais:**
 
-- 新しい出力解像度オプション:
-  - 0.5K、2K、4K のサポートを追加、デフォルトは 1K
-- 新しい画像検索のグラウンディング:
-  - テキストと画像の両方の検索結果を統合して、リアルタイムのウェブデータで生成を通知する
-  - 思考対応のオン / オフに対応
-- 新しいアスペクト比 1:4、4:1、1:8、8:1
-- アスペクト比の遵守の改善
-- 画質と一貫性の向上
-- i18n テキスト レンダリングの改善
+- Novas opções de resolução de saída:
+  - Novo suporte para 0,5K, 2K e 4K, padrão 1K
+- Nova ancoragem da Pesquisa de imagens:
+  - Integração de resultados de pesquisa de texto e imagem para informar a geração com dados da Web em tempo real
+  - Com o recurso "Pensando" ativado ou desativado
+- Novas proporções 1:4, 4:1, 1:8 e 8:1
+- Melhor adesão à proporção
+- Qualidade e consistência de imagem aprimoradas
+- Renderização de texto i18n aprimorada
 
-[Google AI Studio で試す](https://aistudio.google.com?model=gemini-3.1-flash-image&hl=ja)
+[Testar no Google AI Studio](https://aistudio.google.com?model=gemini-3.1-flash-image&hl=pt-br)
 
-## ドキュメント
+## Documentação
 
-機能と機能の全容については、[画像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja)のページをご覧ください。
+Acesse a página [Geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br) para conferir a cobertura completa de recursos e funcionalidades.
 
 ## gemini-3.1-flash-image
 
-| プロパティ | 説明 |
+| Propriedade | Descrição |
 | --- | --- |
-| id\_cardモデルコード | `gemini-3.1-flash-image` |
-| save でサポートされるデータ型 | **入力**  テキストと画像 / PDF  **出力**  画像とテキスト |
-| token\_autoトークンの上限[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ja) | **入力トークンの上限**  131,072  **出力トークンの上限**  32,768 |
-| handyman機能 | **[音声生成](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja)**  サポート対象外  **[キャッシュ](https://ai.google.dev/gemini-api/docs/caching?hl=ja)**  サポート対象外  **[コード実行](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)**  サポート対象外  **[ファイル検索](https://ai.google.dev/gemini-api/docs/file-search?hl=ja)**  サポート対象外  **[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)**  サポート対象外  **[Google マップによるグラウンディング](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ja)**  サポート対象外  **[画像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja)**  サポート対象  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ja)**  サポート対象外  **[検索によるグラウンディング](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)**  サポート対象  **[構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)**  サポート対象外  **[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)**  サポート対象  **[URL コンテキスト](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)**  サポート対象外 |
-| speed使用オプション | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja)**  サポート対象  **[Flex 推論](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ja)**  サポート対象外  **[優先度推論](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ja)**  サポート対象外 |
-| 123 バージョン | 詳しくは、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja#model-versions)をご覧ください。  - 安定版: `gemini-3.1-flash-image` |
-| calendar\_month最新情報 | 2026 年 2 月 |
-| id\_cardモデルカード | [モデルカード](https://deepmind.google/models/model-cards/gemini-3-1-flash-image/?hl=ja) |
+| Código do modelo id\_card | `gemini-3.1-flash-image` |
+| saveTipos de dados aceitos | **Entradas** (link em inglês)  Texto e imagem / PDF  **Saída**  Imagem e texto |
+| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de tokens de entrada**  131.072  **Limite de token de saída**  32.768 |
+| handymanRecursos | **[Geração de áudio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br)**  incompatível  **[Armazenamento em cache](https://ai.google.dev/gemini-api/docs/caching?hl=pt-br)**  incompatível  **[Execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br)**  incompatível  **[Pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br)**  incompatível  **[Chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br)**  incompatível  **[Embasamento com o Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pt-br)**  incompatível  **[Geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br)**  Compatível  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=pt-br)**  incompatível  **[Embasamento da pesquisa](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br)**  Compatível  **[Respostas estruturadas](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br)**  incompatível  **[Raciocínio](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br)**  Compatível  **[Contexto do URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br)**  incompatível |
+| speedOpções de consumo | **[API em lote](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br)**  Compatível  **[Inferência flexível](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pt-br)**  incompatível  **[Inferência de prioridade](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pt-br)**  incompatível |
+| Versões 123 | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Estável: `gemini-3.1-flash-image` |
+| calendar\_monthÚltima atualização | Fevereiro de 2026 |
+| id\_cardCard de modelo | [Card de modelo](https://deepmind.google/models/model-cards/gemini-3-1-flash-image/?hl=pt-br) |
 
-フィードバックを送信
+Envie comentários
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-最終更新日 2026-08-19 UTC。
+Última atualização 2026-08-19 UTC.
 
-ご意見をお聞かせください
+Quer enviar seu feedback?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-08-19 UTC。"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-08-19 UTC."],[],[]]

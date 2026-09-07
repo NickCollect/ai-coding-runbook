@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/background-execution?hl=zh-CN
-fetched_at: 2026-08-31T06:39:59.527906+00:00
-title: "\u540e\u53f0\u6267\u884c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/background-execution?hl=pt-BR
+fetched_at: 2026-09-07T05:49:23.547211+00:00
+title: "Execu\u00e7\u00e3o em segundo plano \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-发送反馈
+Envie comentários
 
-# 后台执行
+# Execução em segundo plano
 
-对于长时间运行的任务（例如深度研究、复杂推理或多步智能体执行），连接超时可能会中断标准 HTTP 请求（通常在 60 秒后关闭）。[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 提供**后台执行**功能，以异步运行这些任务。
+Para tarefas de longa duração, como pesquisa detalhada, raciocínio complexo ou execuções de agentes de várias etapas, os tempos limite de conexão podem interromper as solicitações HTTP padrão (que normalmente são fechadas após 60 segundos). A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) oferece **execução em segundo plano** para executar essas tarefas de forma assíncrona.
 
-如需让互动运行到在服务器上完成任务，请在创建互动时设置 `"background": true`。该 API 会立即返回互动 ID，客户端应用可以使用该 ID 来轮询状态、流式传输进度或重新连接到断开的流。
+Para permitir que a interação seja executada até concluir a tarefa no servidor, defina `"background": true` ao criar a interação. A API retorna imediatamente um ID de interação, que os aplicativos cliente podem usar para pesquisar o status, transmitir o progresso ou se reconectar a um stream desconectado.
 
-标准 Gemini 模型（例如 `gemini-3.6-flash` 和 `gemini-3.1-pro-preview`）和托管式智能体（例如 `antigravity-preview-05-2026`）支持后台执行。
+A execução em segundo plano é compatível com modelos padrão do Gemini (como `gemini-3.8-flash` e `gemini-3.1-pro-preview`) e agentes gerenciados (como `antigravity-preview-05-2026`).
 
-## 创建后台互动
+## Criar uma interação em segundo plano
 
-如需启动后台互动，请在创建资源时将 `background` 参数设置为 `true`。
+Para iniciar uma interação em segundo plano, defina o parâmetro `background` como `true` ao criar o recurso.
 
 ### Python
 
@@ -36,7 +36,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="Write a guide on space exploration.",
     background=True,
 )
@@ -51,11 +51,45 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: "Write a guide on space exploration.",
     background: true,
 });
 console.log(`Created background interaction ID: ${interaction.id}`);
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionEnvironment;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.operations.GetInteractionByIdRequest;
+import com.google.genai.gaos.models.operations.GetInteractionByIdResponse;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("Execute this background task."))
+        .background(true)
+        .environment(CreateModelInteractionEnvironment.of("remote"))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+String interactionId = interaction.id().orElse("");
+
+// Poll status using GetInteractionByIdRequest
+GetInteractionByIdResponse getResponse =
+    client.interactions.get(new GetInteractionByIdRequest(interactionId));
+Interaction polled = getResponse.interaction().get();
+System.out.println("Status: " + polled.status().orElse(null));
 ```
 
 ### REST
@@ -66,37 +100,37 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": "Write a guide on space exploration.",
     "background": true
   }'
 ```
 
-## 后台执行的工作原理
+## Como funciona a execução em segundo plano
 
-创建后台互动后，任务会在服务器上异步运行。互动会经历各种执行状态：
+Quando você cria uma interação em segundo plano, a tarefa é executada de forma assíncrona no servidor. A interação passa por vários estados de execução:
 
-- `in_progress`：服务器正在积极执行互动（例如运行代码或研究）。
-- `requires_action`：互动已暂停，正在等待客户端输入（例如确认工具执行或回答问题）。
-- `completed`：互动已成功完成，输出可用。
-- `failed`：执行期间发生错误（例如工具失败或速率限制）。
-- `cancelled`：客户端请求停止了执行。
+- `in_progress`: o servidor está executando ativamente a interação (como executar código ou pesquisar).
+- `requires_action`: a interação foi pausada e está aguardando a entrada do cliente (como confirmar a execução de uma ferramenta ou responder a uma pergunta).
+- `completed`: a interação foi concluída e a saída está disponível.
+- `failed`: ocorreu um erro durante a execução (como falha na ferramenta ou limites de taxa).
+- `cancelled`: uma solicitação do cliente interrompeu a execução.
 
-### 使用场景
+### Casos de uso
 
-将后台执行用于：
+Use a execução em segundo plano para:
 
-- **智能体执行** ：需要执行代码、浏览网页或编排子智能体（例如 `antigravity-preview-05-2026`）的任务。
-- **深度研究** ：使用 `deep-research-preview-04-2026` 或 `deep-research-max-preview-04-2026` 运行，需要几分钟时间。
-- **长时间推理** ：模型思考步骤超出标准 HTTP 连接限制的任务。
+- **Execuções de agentes**:tarefas que exigem execução de código, navegação na Web ou orquestração de subagentes (como `antigravity-preview-05-2026`).
+- **Pesquisa detalhada**:execuções usando `deep-research-preview-04-2026` ou `deep-research-max-preview-04-2026`, que levam vários minutos.
+- **Raciocínio longo**:tarefas em que as etapas de pensamento do modelo excedem os limites de conexão HTTP padrão.
 
-## 检索结果
+## Recuperar resultados
 
-使用**轮询** 或**流式传输** 获取后台互动结果。
+Receba resultados de interação em segundo plano usando **polling** ou **streaming**.
 
-### 轮询模式（非阻塞）
+### Padrão de polling (sem bloqueio)
 
-轮询使用非阻塞 GET 请求定期检查互动状态，直到互动达到终止状态。
+O polling verifica o status da interação periodicamente usando solicitações GET sem bloqueio até que ela atinja um estado terminal.
 
 ### Python
 
@@ -139,6 +173,40 @@ if (interaction.status === "completed") {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionEnvironment;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.operations.GetInteractionByIdRequest;
+import com.google.genai.gaos.models.operations.GetInteractionByIdResponse;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("Execute this background task."))
+        .background(true)
+        .environment(CreateModelInteractionEnvironment.of("remote"))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+String interactionId = interaction.id().orElse("");
+
+// Poll status using GetInteractionByIdRequest
+GetInteractionByIdResponse getResponse =
+    client.interactions.get(new GetInteractionByIdRequest(interactionId));
+Interaction polled = getResponse.interaction().get();
+System.out.println("Status: " + polled.status().orElse(null));
+```
+
 ### REST
 
 ```
@@ -147,9 +215,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/YOUR_
   -H "Api-Revision: 2026-05-20"
 ```
 
-### 流式传输模式
+### Padrão de streaming
 
-如果网络中断导致流断开，流式传输可以从上次收到的事件恢复。每个增量都包含载荷中的唯一 `event_id`。将此 ID 作为 `last_event_id` 传递会从该事件恢复流。
+Se uma interrupção de rede desconectar um stream, o streaming poderá ser retomado do último evento recebido. Cada delta contém um `event_id` exclusivo no payload. A transmissão desse ID como `last_event_id` retoma o stream desse evento.
 
 ### Python
 
@@ -232,6 +300,40 @@ async function streamWithReconnect(id) {
 await streamWithReconnect(interactionId);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionEnvironment;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.operations.GetInteractionByIdRequest;
+import com.google.genai.gaos.models.operations.GetInteractionByIdResponse;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("Execute this background task."))
+        .background(true)
+        .environment(CreateModelInteractionEnvironment.of("remote"))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+String interactionId = interaction.id().orElse("");
+
+// Poll status using GetInteractionByIdRequest
+GetInteractionByIdResponse getResponse =
+    client.interactions.get(new GetInteractionByIdRequest(interactionId));
+Interaction polled = getResponse.interaction().get();
+System.out.println("Status: " + polled.status().orElse(null));
+```
+
 ### REST
 
 ```
@@ -240,14 +342,14 @@ curl -N -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/YO
   -H "Api-Revision: 2026-05-20"
 ```
 
-## 多轮对话
+## Conversas multiturno
 
-后续互动可以使用 `previous_interaction_id` 链接到后台对话，但需遵守以下限制：
+As interações subsequentes podem ser encadeadas a uma conversa em segundo plano usando `previous_interaction_id`, sujeitas a estas restrições:
 
-1. **活跃执行被阻止** ：将后续互动链接到状态为 `in_progress` 的互动会返回 `400 Bad Request` 错误。请等待互动达到 `completed` 状态，然后再开始下一个互动。
-2. **托管式智能体的环境参数** ：为托管式智能体（例如 `antigravity-preview-05-2026`）链接互动时，请求必须同时包含 `previous_interaction_id` 和 `environment`。
+1. **Execuções ativas são bloqueadas**:o encadeamento de uma interação subsequente a uma com status `in_progress` retorna um erro `400 Bad Request`. Aguarde a interação atingir o estado `completed` antes de iniciar a próxima.
+2. **Parâmetro de ambiente para agentes gerenciados**:ao encadear interações para agentes gerenciados (como `antigravity-preview-05-2026`), as solicitações precisam incluir `previous_interaction_id` e `environment`.
 
-以下示例展示了如何链接互动：
+Os exemplos a seguir mostram como encadear interações:
 
 ### Python
 
@@ -318,6 +420,40 @@ const interaction2 = await client.interactions.create({
 });
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionEnvironment;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.operations.GetInteractionByIdRequest;
+import com.google.genai.gaos.models.operations.GetInteractionByIdResponse;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("Execute this background task."))
+        .background(true)
+        .environment(CreateModelInteractionEnvironment.of("remote"))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+String interactionId = interaction.id().orElse("");
+
+// Poll status using GetInteractionByIdRequest
+GetInteractionByIdResponse getResponse =
+    client.interactions.get(new GetInteractionByIdRequest(interactionId));
+Interaction polled = getResponse.interaction().get();
+System.out.println("Status: " + polled.status().orElse(null));
+```
+
 ### REST
 
 ```
@@ -335,12 +471,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 取消和删除
+## Cancelamento e exclusão
 
-使用取消和删除请求控制正在运行的执行并管理存储：
+Controle as execuções em andamento e gerencie o armazenamento usando solicitações de cancelamento e exclusão:
 
-- **取消 (`POST /interactions/{id}/cancel`)** ：停止正在运行的任务。状态转换为 `cancelled`。服务器上的清理操作可能会导致 GET 请求中的状态更新略有延迟。
-- **删除 (`DELETE /interactions/{id}`)** ：从服务器中移除互动记录。后续 GET 请求会返回 `404 Not Found` 错误。
+- **Cancelar (`POST /interactions/{id}/cancel`)** : interrompe a tarefa em execução. O status faz a transição para `cancelled`. As ações de limpeza no servidor podem causar um pequeno atraso antes que o status seja atualizado nas solicitações GET.
+- **Excluir (`DELETE /interactions/{id}`)** : remove os registros de interação do servidor. As solicitações GET subsequentes retornam um erro `404 Not Found`.
 
 ### Python
 
@@ -370,6 +506,40 @@ await client.interactions.cancel("YOUR_INTERACTION_ID");
 await client.interactions.delete("YOUR_INTERACTION_ID");
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionEnvironment;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.operations.GetInteractionByIdRequest;
+import com.google.genai.gaos.models.operations.GetInteractionByIdResponse;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("Execute this background task."))
+        .background(true)
+        .environment(CreateModelInteractionEnvironment.of("remote"))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+String interactionId = interaction.id().orElse("");
+
+// Poll status using GetInteractionByIdRequest
+GetInteractionByIdResponse getResponse =
+    client.interactions.get(new GetInteractionByIdRequest(interactionId));
+Interaction polled = getResponse.interaction().get();
+System.out.println("Status: " + polled.status().orElse(null));
+```
+
 ### REST
 
 ```
@@ -384,18 +554,18 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/interactions/YO
   -H "Api-Revision: 2026-05-20"
 ```
 
-## 后续步骤
+## Próximas etapas
 
-- 阅读 [Interactions API 概览](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn)，了解会话和状态管理。
-- 如需详细了解实时事件更新，请参阅[流式传输互动](https://ai.google.dev/gemini-api/docs/streaming?hl=zh-cn)指南。
-- 探索[托管式智能体快速入门](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=zh-cn)，构建有状态的多轮智能体。
+- Leia a [visão geral da API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) para entender o gerenciamento de sessão e estado.
+- Consulte o guia [Interações de streaming](https://ai.google.dev/gemini-api/docs/streaming?hl=pt-br) para detalhes sobre atualizações de eventos em tempo real.
+- Confira o [guia de início rápido de agentes gerenciados](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=pt-br) para criar agentes com estado multiturno.
 
-发送反馈
+Envie comentários
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-最后更新时间 (UTC)：2026-07-30。
+Última atualização 2026-09-04 UTC.
 
-需要向我们提供更多信息？
+Quer enviar seu feedback?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-30。"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-04 UTC."],[],[]]

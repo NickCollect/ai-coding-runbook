@@ -1,35 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/files?hl=tr
-fetched_at: 2026-08-31T06:32:37.698485+00:00
-title: "Dosyalar API'si \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/files?hl=hi
+fetched_at: 2026-09-07T05:35:11.713477+00:00
+title: "\u092b\u093c\u093e\u0907\u0932 \u090f\u092a\u0940\u0906\u0908 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Geri bildirim gönderin
+सुझाव भेजें
 
-# Dosyalar API'si
+# फ़ाइल एपीआई
 
-Gemini, metin, resim ve ses gibi çeşitli giriş verilerini aynı anda işleyebilir.
+Gemini एक साथ कई तरह के इनपुट डेटा को प्रोसेस कर सकता है. जैसे, टेक्स्ट, इमेज, और ऑडियो.
 
-Bu kılavuzda, Files API'yi kullanarak medya dosyalarıyla nasıl çalışacağınız gösterilmektedir. Ses dosyaları, resimler, videolar, dokümanlar ve desteklenen diğer dosya türleri için temel işlemler aynıdır.
+इस गाइड में, Files API का इस्तेमाल करके मीडिया फ़ाइलों के साथ काम करने का तरीका बताया गया है. ऑडियो फ़ाइलों, इमेज, वीडियो, दस्तावेज़ों, और इस्तेमाल की जा सकने वाली अन्य फ़ाइल टाइप के लिए, बुनियादी कार्रवाइयां एक जैसी होती हैं.
 
-Dosya istemiyle ilgili rehberlik için [Dosya istem rehberi](https://ai.google.dev/gemini-api/docs/files?hl=tr#prompt-guide) bölümüne göz atın.
+फ़ाइल प्रॉम्प्ट के लिए गाइडेंस के लिए, [फ़ाइल प्रॉम्प्ट के लिए गाइड](https://ai.google.dev/gemini-api/docs/files?hl=hi#prompt-guide) सेक्शन देखें.
 
-## Dosya yükleyin
+## फ़ाइल अपलोड करें
 
-Medya dosyası yüklemek için Files API'yi kullanabilirsiniz. Toplam istek boyutu (dosyalar, metin istemi, sistem talimatları vb. dahil) 100 MB'tan büyük olduğunda her zaman Files API'yi kullanın. Bu sınır, PDF dosyaları için 50 MB'tır.
+मीडिया फ़ाइल अपलोड करने के लिए, Files API का इस्तेमाल किया जा सकता है. जब अनुरोध का कुल साइज़ (इसमें फ़ाइलें, टेक्स्ट प्रॉम्प्ट, सिस्टम के निर्देश वगैरह शामिल हैं) 100 एमबी से ज़्यादा हो, तब हमेशा Files API का इस्तेमाल करें. पीडीएफ़ फ़ाइलों के लिए, यह सीमा 50 एमबी है.
 
-Aşağıdaki kod, bir dosyayı yükler ve ardından `generateContent` çağrısında dosyayı kullanır.
+नीचे दिए गए कोड में, एक फ़ाइल अपलोड की जाती है. इसके बाद, इस फ़ाइल का इस्तेमाल `generateContent` को कॉल करने के लिए किया जाता है.
 
 ### Python
 
@@ -77,7 +77,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 file, err := client.Files.UploadFromPath(ctx, "path/to/sample.mp3", nil)
@@ -156,9 +156,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## Dosyanın meta verilerini alma
+## किसी फ़ाइल का मेटाडेटा पाना
 
-`files.get` işlevini çağırarak API'nin yüklenen dosyayı başarıyla depoladığını doğrulayabilir ve dosyanın meta verilerini alabilirsiniz.
+`files.get` को कॉल करके, यह पुष्टि की जा सकती है कि एपीआई ने अपलोड की गई फ़ाइल को सेव कर लिया है. साथ ही, इसका मेटाडेटा भी पाया जा सकता है.
 
 ### Python
 
@@ -196,7 +196,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 file, err := client.Files.UploadFromPath(ctx, "path/to/sample.mp3", nil)
@@ -226,9 +226,9 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## Yüklenen dosyaları listeleme
+## अपलोड की गई फ़ाइलों की सूची
 
-Aşağıdaki kod, yüklenen tüm dosyaların listesini alır:
+नीचे दिए गए कोड से, अपलोड की गई सभी फ़ाइलों की सूची मिलती है:
 
 ### Python
 
@@ -261,7 +261,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 for file, err := range client.Files.All(ctx) {
@@ -281,9 +281,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/files" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Yüklenen dosyaları silme
+## अपलोड की गई फ़ाइलें मिटाना
 
-Dosyalar 48 saat sonra otomatik olarak silinir. Yüklenen bir dosyayı manuel olarak da silebilirsiniz:
+फ़ाइलें 48 घंटे बाद अपने-आप मिट जाती हैं. अपलोड की गई किसी फ़ाइल को मैन्युअल तरीके से भी मिटाया जा सकता है:
 
 ### Python
 
@@ -318,7 +318,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 file, err := client.Files.UploadFromPath(ctx, "path/to/sample.mp3", nil)
@@ -335,192 +335,192 @@ curl --request "DELETE" https://generativelanguage.googleapis.com/v1beta/files/$
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Kullanım bilgileri
+## इस्तेमाल से जुड़ी जानकारी
 
-Medya dosyalarını yüklemek ve bu dosyalarla etkileşim kurmak için Files API'yi kullanabilirsiniz. Files API, proje başına 20 GB'a kadar dosya depolamanıza olanak tanır. Dosya başına maksimum boyut 2 GB'tır. Dosyalar 48 saat boyunca saklanır.
+मीडिया फ़ाइलों को अपलोड करने और उनसे इंटरैक्ट करने के लिए, Files API का इस्तेमाल किया जा सकता है. Files API की मदद से, हर प्रोजेक्ट के लिए 20 जीबी तक की फ़ाइलें सेव की जा सकती हैं. हालांकि, हर फ़ाइल का साइज़ ज़्यादा से ज़्यादा 2 जीबी होना चाहिए. फ़ाइलों को 48 घंटों तक सेव करके रखा जाता है.
 
-Bu süre zarfında, dosyalarla ilgili meta verileri almak için API'yi kullanabilirsiniz. Ancak kullanıcı tarafından yüklenen dosyaları indiremezsiniz. Modeller tarafından oluşturulan dosyaları (ör. videolar) `files.download` yöntemini kullanarak indirebilirsiniz. Files API, Gemini API'nin kullanılabildiği tüm bölgelerde ücretsiz olarak kullanılabilir.
+इस दौरान, एपीआई का इस्तेमाल करके फ़ाइलों के मेटाडेटा के बारे में जानकारी पाई जा सकती है. हालांकि, उपयोगकर्ता की ओर से अपलोड की गई फ़ाइलें डाउनलोड नहीं की जा सकतीं. `files.download` तरीके का इस्तेमाल करके, मॉडल से जनरेट की गई फ़ाइलें डाउनलोड की जा सकती हैं. जैसे, वीडियो. Files API, उन सभी देशों/इलाक़ों में बिना किसी शुल्क के उपलब्ध है जहां Gemini API उपलब्ध है.
 
-## Dosya istemi stratejileri
+## फ़ाइल के लिए प्रॉम्प्ट देने की रणनीतियां
 
-Bu bölümde, Gemini API için istemlerle medya dosyalarını kullanmayla ilgili yol gösterici bilgiler ve en iyi uygulamalar yer almaktadır.
+इस सेक्शन में, Gemini API के लिए प्रॉम्प्ट के साथ मीडिया फ़ाइलों का इस्तेमाल करने के बारे में दिशा-निर्देश और सबसे सही तरीके दिए गए हैं.
 
-İstemlerinizde çeşitli veri türlerini kullanabilmek, Gemini API ile hangi görevleri yapabileceğiniz konusunda daha fazla esneklik sağlar. Örneğin, modele lezzetli bir yemeğin fotoğrafını gönderip yemekle ilgili kısa bir blog yazmasını isteyebilirsiniz.
+अपने प्रॉम्प्ट में अलग-अलग तरह का डेटा इस्तेमाल करने की सुविधा से, आपको यह तय करने में ज़्यादा आसानी होती है कि Gemini API की मदद से कौन-कौनसे काम किए जा सकते हैं. उदाहरण के लिए, मॉडल को किसी स्वादिष्ट खाने की फ़ोटो भेजकर, उसके बारे में एक छोटा ब्लॉग लिखने के लिए कहा जा सकता है.
 
 |  |  |
 | --- | --- |
-| **İstem** | **Yanıt** |
-| Bu resme dayalı olarak kısa ve ilgi çekici bir blog yayını yaz. Fotoğraftaki yemeğin açıklamasını içermeli ve yemek hazırlama yolculuğumdan bahsetmelidir.   Çerezler | Öğün hazırlama, zamandan ve paradan tasarruf etmenin yanı sıra daha sağlıklı beslenmenin de harika bir yoludur. Bu yemek, önceden kolayca hazırlanabilen sağlıklı ve lezzetli bir yemeğin harika bir örneğidir.  Bu öğünde kahverengi pirinç, fırında sebzeler ve teriyaki soslu tavuk bulunur. Esmer pirinç, size uzun süreli enerji verecek sağlıklı ve kompleks bir karbonhidrattır. Kızartılmış sebzeler, günlük vitamin ve mineral ihtiyacınızı karşılamak için harika bir seçenektir. Teriyaki soslu tavuk ise lezzetli ve protein açısından zengin bir alternatiftir.  Bu yemeği hazırlamak da çok kolaydır. Kahverengi pirinci pişirin, sebzeleri fırında kızartın ve teriyaki soslu tavuğu pişirin. Her şey piştikten sonra, yemek hazırlama kaplarına bölüp buzdolabında saklayın. Ardından, yoğun sabahlarınızda bir kap alıp çıkabilirsiniz.  Önceden kolayca hazırlanabilen sağlıklı ve lezzetli bir öğün arıyorsanız bu yemek tam size göre. Besinler ve lezzetle dolu bu yemek, sizi tok ve memnun hissettirecek.  Sağlıklı ve lezzetli yemek hazırlama! |
+| **प्रॉम्प्ट** | **जवाब** |
+| इस तस्वीर के आधार पर, एक छोटी और दिलचस्प ब्लॉग पोस्ट लिखो. इसमें फ़ोटो में मौजूद खाने के बारे में जानकारी होनी चाहिए. साथ ही, इसमें खाने की तैयारी से जुड़ी मेरी यात्रा के बारे में भी बताया जाना चाहिए.   कुकी | खाना तैयार करके रखने से, समय और पैसे की बचत होती है. साथ ही, इससे सेहतमंद खाना खाने में भी मदद मिलती है. यह खाना, सेहतमंद और स्वादिष्ट खाने का एक बेहतरीन उदाहरण है. इसे आसानी से पहले से तैयार किया जा सकता है.  इस खाने में ब्राउन राइस, भुनी हुई सब्ज़ियां, और चिकन टेरियाकी शामिल हैं. ब्राउन राइस एक सेहतमंद और कॉम्प्लेक्स कार्बोहाइड्रेट है. इससे आपको लंबे समय तक एनर्जी मिलती है. भुनी हुई सब्ज़ियों से, आपको रोज़ाना के विटामिन और खनिज मिलते हैं. साथ ही, चिकन टेरियाकी एक स्वादिष्ट और प्रोटीन से भरपूर विकल्प है.  इस खाने को बनाना भी बहुत आसान है. ब्राउन राइस को पकाएं, सब्ज़ियों को भूनें, और चिकन टेरियाकी को पकाएं. जब सब कुछ पक जाए, तो उसे खाने के लिए तैयार किए गए कंटेनर में डालें और फ़्रिज में स्टोर करें. इसके बाद, कंटेनर को अपने साथ ले जाएं और सुबह के समय काफ़ी काम करें!  अगर आपको सेहत के लिए अच्छा और स्वादिष्ट खाना चाहिए, जिसे आसानी से पहले से तैयार किया जा सके, तो यह खाना आपके लिए सबसे सही विकल्प है. इसमें पोषक तत्व और स्वाद भरपूर होता है. इसे खाने के बाद, आपको पेट भरा हुआ और संतुष्ट महसूस होगा.  सेहतमंद और स्वादिष्ट खाना तैयार करने के लिए यहां दिए गए सुझावों को अपनाएं! |
 
-Medya dosyalarının kullanıldığı istemlerden istediğiniz çıkışı almakta zorlanıyorsanız istediğiniz sonuçları elde etmenize yardımcı olabilecek bazı stratejiler vardır. Aşağıdaki bölümlerde, çok formatlı giriş kullanan istemleri iyileştirmeye yönelik tasarım yaklaşımları ve sorun giderme ipuçları verilmektedir.
+अगर आपको मीडिया फ़ाइलों का इस्तेमाल करने वाले प्रॉम्प्ट से, अपनी पसंद के मुताबिक आउटपुट नहीं मिल रहा है, तो यहां कुछ रणनीतियां दी गई हैं. इनकी मदद से, आपको अपनी पसंद के मुताबिक नतीजे मिल सकते हैं. यहां दिए गए सेक्शन में, मल्टीमॉडल इनपुट का इस्तेमाल करने वाले प्रॉम्ट को बेहतर बनाने के लिए, डिज़ाइन के तरीके और समस्या हल करने के सुझाव दिए गए हैं.
 
-Aşağıdaki en iyi uygulamaları izleyerek çok formatlı istemlerinizi iyileştirebilirsiniz:
+इन सबसे सही तरीकों को अपनाकर, मल्टीमॉडल प्रॉम्प्ट को बेहतर बनाया जा सकता है:
 
-- ### [İstem tasarımıyla ilgili temel bilgiler](#specific-instructions)
+- ### [प्रॉम्प्ट डिज़ाइन करने से जुड़ी बुनियादी बातें](#specific-instructions)
 
-  - **Talimatlarınızda net olun**: Yanlış yorumlamaya en az yer bırakacak şekilde net ve kısa talimatlar oluşturun.
-  - **İsteminize birkaç few-shot örneği ekleyin:** Ne elde etmek istediğinizi göstermek için gerçekçi birkaç few-shot örneği kullanın.
-  - **Adım adım ilerleyin**: Karmaşık görevleri yönetilebilir alt hedeflere ayırarak modele süreç boyunca rehberlik edin.
-  - **Çıkış biçimini belirtin**: İsteminizde, çıkışın istediğiniz biçimde (ör. Markdown, JSON, HTML) olmasını isteyin.
-  - **Tek resimli istemlerde resminizi ilk sıraya yerleştirin**: Gemini, resim ve metin girişlerini herhangi bir sırada işleyebilse de tek resim içeren istemlerde, resim (veya video) metin isteminden önce yerleştirilirse daha iyi performans gösterebilir. Ancak, anlamlı olması için resimlerin metinlerle yoğun bir şekilde iç içe geçmesini gerektiren istemlerde en doğal olan sırayı kullanın.
-- ### [Çok formatlı isteminizle ilgili sorunları giderme](#troubleshooting)
+  - **निर्देशों में सटीक जानकारी दें**: साफ़ और कम शब्दों में निर्देश दें, ताकि उन्हें समझने में कोई गड़बड़ी न हो.
+  - **अपने प्रॉम्प्ट में कुछ उदाहरण जोड़ें:** आपको जो नतीजे चाहिए उन्हें पाने के लिए, कुछ ऐसे उदाहरण दें जो असल में खींची गई फ़ोटो जैसे दिखें.
+  - **इसे सिलसिलेवार तरीके से समझाएं**: मुश्किल टास्क को छोटे-छोटे उप-लक्ष्यों में बांटें और मॉडल को प्रोसेस के बारे में बताएं.
+  - **आउटपुट का फ़ॉर्मैट तय करें**: अपने प्रॉम्प्ट में, आउटपुट को अपनी पसंद के फ़ॉर्मैट में पाने के लिए कहें. जैसे, मार्कडाउन, JSON, एचटीएमएल वगैरह.
+  - **एक इमेज वाले प्रॉम्प्ट के लिए, इमेज को सबसे पहले रखें**: Gemini, इमेज और टेक्स्ट वाले इनपुट को किसी भी क्रम में प्रोसेस कर सकता है. हालांकि, एक इमेज वाले प्रॉम्प्ट के लिए, इमेज (या वीडियो) को टेक्स्ट प्रॉम्प्ट से पहले रखने पर, Gemini बेहतर परफ़ॉर्म कर सकता है. हालांकि, ऐसे प्रॉम्प्ट के लिए जिनमें टेक्स्ट के साथ इमेज को इस तरह से इंटरलीव करना ज़रूरी होता है कि वे एक-दूसरे से जुड़े हुए लगें, उस क्रम का इस्तेमाल करें जो सबसे सही हो.
+- ### [टेक्स्ट, इमेज वग़ैरह को प्रोसेस करने वाले मॉडल के लिए दिए गए प्रॉम्प्ट से जुड़ी समस्या हल करना](#troubleshooting)
 
-  - **Model, resmin ilgili bölümünden bilgi almıyorsa:** İstemden, resmin hangi yönleriyle ilgili bilgi almasını istediğinize dair ipuçları verin.
-  - **Model çıktısı çok genel ise (resim/video girişine yeterince uyarlanmamışsa):** İstemin başında, görev talimatını vermeden önce modelden resimleri veya videoyu açıklamasını ya da modelden resimdeki içeriğe atıfta bulunmasını isteyin.
-  - **Hangi bölümün başarısız olduğunu belirlemek için:** Modelin ilk anlayışını ölçmek amacıyla, modelden resmi açıklamasını veya gerekçesini açıklamasını isteyin.
-  - **İsteminiz halüsinasyon içeren içeriklerle sonuçlanıyorsa:** Sıcaklık ayarını düşürmeyi veya modelden daha kısa açıklamalar istemeyi deneyin. Böylece modelin ek ayrıntılar üretme olasılığı azalır.
-  - **Örnekleme parametrelerini ayarlama:** Modelin yaratıcılığını ayarlamak için farklı sıcaklık ayarları ve top-k seçimleriyle denemeler yapın.
+  - **अगर मॉडल, इमेज के काम के हिस्से से जानकारी नहीं ले रहा है, तो:** इमेज के उन पहलुओं के बारे में कुछ संकेत दें जिनसे आपको प्रॉम्प्ट के लिए जानकारी चाहिए.
+  - **अगर मॉडल आउटपुट बहुत सामान्य है (इमेज/वीडियो इनपुट के हिसाब से नहीं है):** प्रॉम्प्ट की शुरुआत में, मॉडल को टास्क के बारे में बताने से पहले, इमेज या वीडियो के बारे में बताने के लिए कहें. इसके अलावा, मॉडल को इमेज में मौजूद चीज़ों के बारे में बताने के लिए भी कहा जा सकता है.
+  - **यह पता लगाने के लिए कि किस हिस्से में समस्या हुई:** मॉडल से इमेज के बारे में बताने के लिए कहें या मॉडल से गहराई से विश्लेषण करने के लिए कहें, ताकि मॉडल की शुरुआती समझ का पता लगाया जा सके.
+  - **अगर आपके प्रॉम्प्ट के जवाब में, ग़लत या गुमराह करने वाली जानकारी शामिल है, तो:** टेंपरेचर की सेटिंग को कम करके देखें या मॉडल से छोटे जवाब देने के लिए कहें. इससे, मॉडल के अतिरिक्त जानकारी देने की संभावना कम हो जाएगी.
+  - **सैंपलिंग पैरामीटर को ट्यून करना:** मॉडल की क्रिएटिविटी को अपने हिसाब से बनाने के लिए, अलग-अलग टेंपरेचर सेटिंग और टॉप-के सिलेक्शन के साथ एक्सपेरिमेंट करें.
 
-### Talimatlarınızda ayrıntılı bilgi verin
+### निर्देशों में सटीक जानकारी दें
 
-İstemler en iyi sonucu net ve ayrıntılı olduğunda verir. Aklınızda belirli bir çıktı varsa istediğiniz çıktıyı elde etmek için bu şartı isteme eklemeniz daha iyi olur.
+अगर प्रॉम्प्ट साफ़ तौर पर और पूरी जानकारी के साथ दिए जाते हैं, तो उनसे सबसे अच्छे नतीजे मिलते हैं. अगर आपको कोई खास आउटपुट चाहिए, तो बेहतर होगा कि आप उस ज़रूरत को प्रॉम्प्ट में शामिल करें. इससे आपको अपनी पसंद का आउटपुट मिलेगा.
 
-Havaalanı panosunun yer aldığı bu resim için modele yalnızca "bu resmi açıkla" komutunu verdiğinizde genel bir açıklama oluşturulabilir. Modelin resimdeki saati ve şehri ayrıştırmasını istiyorsanız bu isteği doğrudan isteminize ekleyebilirsiniz.
+एयरपोर्ट के बोर्ड की इस इमेज के लिए, मॉडल से सिर्फ़ "इस इमेज के बारे में जानकारी दो" कहने पर, सामान्य जानकारी मिल सकती है. अगर आपको मॉडल से इमेज में मौजूद समय और शहर की जानकारी पार्स करवानी है, तो अपने प्रॉम्प्ट में सीधे तौर पर यह अनुरोध शामिल करें.
 
-| İstem | Model yanıtı |
+| प्रॉम्प्ट | मॉडल का जवाब |
 | --- | --- |
-| Bu resmi tanımla. | Resimde, havalimanındaki gelen ve giden uçuşlar tabelası gösteriliyor. |
+| इस इमेज के बारे में बताएं. | इस इमेज में, हवाई अड्डे पर फ़्लाइट के आने और जाने की जानकारी देने वाला बोर्ड दिखाया गया है. |
 
-| **Güncellenen istem** | **İyileştirilmiş yanıt** |
+| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
 | --- | --- |
-| Seyahat zaman çizelgesi Bu resimde gösterilen havaalanı panosundaki saati ve şehri ayrıştırarak listeleyin. | - 10:50 Moskova - 11:05 Edinburgh - 11:05 Londra - 11:10 Bükreş - 11:30 Kiev - 11:35 Dublin - 11:45 East Midlands - 12:15 Sofya - 12:30 Londra - 12:30 Newcastle - 12:40 St Petersburg - 12:40 Londra - 12:45 Manchester |
+| यात्रा का टाइमटेबल इस इमेज में दिखाए गए एयरपोर्ट बोर्ड से, समय और शहर की जानकारी को सूची में शामिल करो. | - 10:50 मॉस्को - एडिनबर्ग 11:05 - 11:05 लंदन - 11:10 बुखारेस्ट - कीव में सुबह 11:30 बजे - डब्लिन में 11:35 - 11:45 ईस्ट मिडलैंड्स - 12:15 सोफ़िया - लंदन में दोपहर 12:30 बजे - न्यूकैसल में दोपहर 12:30 बजे - 12:40 सेंट पीटर्सबर्ग - दोपहर 12:40 बजे लंदन - 12:45 मैनचेस्टर |
 
-### Birkaç örnek ekleyin
+### कुछ उदाहरण जोड़ना
 
-Gemini modeli, istediğiniz çıktıyı anlamak için örnek olarak kullanabileceği birden fazla giriş kabul edebilir. Bu örnekleri eklemek, modelin kalıpları belirlemesine ve verilen resimler ile yanıtlar arasındaki ilişkiyi yeni örneğe uygulamasına yardımcı olabilir. Bu, "few-shot" öğrenme olarak da adlandırılır.
+Gemini मॉडल, कई इनपुट स्वीकार कर सकता है. इनका इस्तेमाल वह उदाहरण के तौर पर कर सकता है, ताकि यह समझ सके कि आपको किस तरह का आउटपुट चाहिए. इन उदाहरणों को जोड़ने से, मॉडल को पैटर्न की पहचान करने में मदद मिल सकती है. साथ ही, दी गई इमेज और जवाबों के बीच के संबंध को नए उदाहरण पर लागू किया जा सकता है. इसे "फ़्यू-शॉट" लर्निंग भी कहा जाता है.
 
-Aşağıdaki örnekte, ilk çıkış cümle şeklinde yazılmış ve ülkeyi (Brezilya) de içeriyor. Çıkışın farklı bir biçimde veya stilde olmasını ve yalnızca şehri (ülkeyi değil) istiyorsunuz. İsteminize few-shot örnekleri eklemek, modelin istediğiniz şekilde yanıt vermesini sağlayabilir.
+नीचे दिए गए उदाहरण में, शुरुआती आउटपुट को वाक्य के तौर पर लिखा गया है. इसमें देश (ब्राज़ील) का नाम भी शामिल है. मान लें कि आपको आउटपुट किसी दूसरे फ़ॉर्मैट या स्टाइल में चाहिए. साथ ही, आपको सिर्फ़ शहर का नाम चाहिए, देश का नाम नहीं. अपने प्रॉम्प्ट में कुछ इनपुट-आउटपुट उदाहरणों के साथ दिया गया प्रॉम्प्ट जोड़कर, मॉडल को अपनी पसंद के मुताबिक जवाब देने के लिए कहा जा सकता है.
 
-| **İstem** | **Model yanıtı** |
+| **प्रॉम्प्ट** | **मॉडल का जवाब** |
 | --- | --- |
-| Seyahat zaman çizelgesi Simge yapıyla birlikte şehri belirleyin. | Bu simge yapı, Brezilya'nın Rio de Janeiro şehrindeki Kurtarıcı İsa heykelidir. |
+| यात्रा का टाइमटेबल लैंडमार्क के साथ-साथ शहर का नाम भी पता करें. | यह लैंडमार्क, ब्राज़ील के रियो डि जेनेरो में मौजूद क्राइस्ट द रीडीमर की मूर्ति है. |
 
-| **Güncellenen istem** | **İyileştirilmiş yanıt** |
+| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
 | --- | --- |
-| Simge yapıyla birlikte şehri belirleyin. colosseum | city: Rome, landmark: the Colosseum. |
-| Yasak Şehir | city: Beijing, landmark: Forbidden City |
-| forbidden-city | city: Rio de Janeiro, landmark: Christ the Redeemer statue |
+| मशहूर जगह के साथ-साथ शहर का नाम भी पता करें. कोलोसियम | शहर: रोम, लैंडमार्क: कलॉसियम. |
+| फ़ॉर्बिडन सिटी | शहर: बीजिंग, लैंडमार्क: फ़ॉर्बिडन सिटी |
+| forbidden-city | शहर: रियो डि जेनेरो, लैंडमार्क: क्राइस्ट द रीडीमर की मूर्ति |
 
-### Adım adım açıklama
+### इसे सिलसिलेवार तरीके से समझाओ
 
-Hem görsel anlama hem de muhakeme gerektiren görevler gibi karmaşık görevlerde, görevi daha küçük ve basit adımlara bölmek faydalı olabilir. Alternatif olarak, isteminizde doğrudan modelden "adım adım düşünmesini" istemek de etkili olabilir.
+मुश्किल टास्क के लिए, टास्क को छोटे-छोटे और आसान चरणों में बांटना मददगार हो सकता है. जैसे, ऐसे टास्क जिनमें विज़ुअल को समझने के साथ-साथ तर्क देने की भी ज़रूरत होती है. इसके अलावा, अगर आपने प्रॉम्प्ट में सीधे तौर पर मॉडल से “एक-एक करके सोचो” कहा है, तो भी यह तरीका असरदार हो सकता है.
 
-| İstem | Model yanıtı |
+| प्रॉम्प्ट | मॉडल का जवाब |
 | --- | --- |
-| Tuvalet kağıdım ne zaman bitecek? | Yakında yalnızca 3 makara hakkınız kalacak. |
+| मेरे पास टॉयलेट पेपर कब तक रहेगा? | जल्द ही, आपके पास सिर्फ़ तीन रोल बचे होंगे. |
 
-| **Güncellenen istem** | **İyileştirilmiş yanıt** |
+| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
 | --- | --- |
-| 1. Öncelikle bu resimde kaç rulo tuvalet kağıdı olduğunu sayın.  2. Ardından, bir kişinin günde ne kadar tuvalet kağıdı kullandığını belirleyin.  3. Bu tuvalet kağıdı rulolarının ne kadar süre dayanacağını hesaplayın. | 1. Bu resimde 3 rulo tuvalet kağıdı var.  2. Tipik bir kişi günde yaklaşık 20 yaprak tuvalet kağıdı kullanır.  3. Her ruloda 200 yaprak varsa her rulo yaklaşık 10 gün dayanır. Bu nedenle, 3 rulo yaklaşık bir ay dayanır. |
+| 1. सबसे पहले, इस तस्वीर में मौजूद टॉयलेट पेपर रोल की संख्या गिनें.  2. इसके बाद, यह तय करें कि एक सामान्य व्यक्ति हर दिन कितना टॉयलेट पेपर इस्तेमाल करता है.  3. यह हिसाब लगाएं कि टॉयलेट पेपर के ये रोल कितने दिन तक चलेंगे. | 1. इस तस्वीर में टॉयलेट पेपर के तीन रोल हैं.  2. आम तौर पर, एक व्यक्ति हर दिन करीब 20 शीट टॉयलेट पेपर का इस्तेमाल करता है.  3. अगर हर रोल में 200 शीट हैं, तो हर रोल करीब 10 दिनों तक चलेगा. इसलिए, ये तीन रोल करीब एक महीने तक चलेंगे. |
 
-Matematik problemleri veya diğer sözel problemler, modelden adım adım düşünmesini istemek için idealdir.
+गणित के सवालों या अन्य तरह के इबारती सवालों के लिए, मॉडल से सिलसिलेवार तरीके से सोचने के लिए कहा जा सकता है.
 
-| **İstem** | **Yanıt** |
+| **प्रॉम्प्ट** | **जवाब** |
 | --- | --- |
-| Dizideki 4. terim nedir? | -135 |
+| इस क्रम में चौथा पद क्या है? | -135 |
 
-Modelin yanıtı yanlış. Bunu iyileştirmenin bazı yolları, modelden isteme yanıt vermeden önce sorunu ayrıştırmasını istemektir.
+मॉडल से मिला जवाब गलत है. इसे बेहतर बनाने के लिए, मॉडल से प्रॉम्प्ट का जवाब देने से पहले समस्या को पार्स करने के लिए कहा जा सकता है.
 
-| **İstem** | **Yanıt** |
+| **प्रॉम्प्ट** | **जवाब** |
 | --- | --- |
-| Önce resimdeki formülü ayrıştırın.  Ardından, formüle göre "Dizideki 4. terim nedir?" sorusunu yanıtlayın. | *Sonucu genişletmek için tıklayın* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. n = 4 değerini formülde yerine koyun:  $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. b(3) değerini bilmiyoruz. Bu nedenle, n = 3 değerini formülde yerine koyun:  $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. b(2) değerini bilmiyoruz. Bu nedenle, n = 2 değerini formülde yerine koyun:  $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. b(1) değerinin 15 olduğunu biliyoruz. Bu nedenle, formülde yerine koyalım:  $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. b(2) değerini bildiğimize göre bunu b(3) formülünde yerine koyalım:  $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. Artık b(3) değerini bildiğimize göre bu değeri b(4) formülünde yerine koyabiliriz:  $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   Bu nedenle, dizideki 4. terim -405'tir. |
+| सबसे पहले, इमेज में दिए गए फ़ॉर्मूले को पार्स करो.  इसके बाद, फ़ॉर्मूले के आधार पर जवाब दें कि "सीक्वेंस में चौथा पद क्या है?". | *नतीजे को बड़ा करने के लिए क्लिक करें* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. फ़ॉर्मूले में n = 4 को बदलें:  $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. हमें b(3) की वैल्यू नहीं पता है. इसलिए, फ़ॉर्मूले में n = 3 को बदलें:  $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. हमें b(2) की वैल्यू नहीं पता है. इसलिए, फ़ॉर्मूले में n = 2 को बदलें:  $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. हमें पता है कि b(1) की वैल्यू 15 है. इसलिए, इसे फ़ॉर्मूले में इस तरह से बदलें:  $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. अब हमें b(2) की वैल्यू पता है. इसलिए, इसे b(3) के फ़ॉर्मूले में डालें:  $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. अब हमें b(3) की वैल्यू पता है. इसलिए, इसे b(4) के फ़ॉर्मूले में बदलें:  $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   इसलिए, क्रम में चौथा पद -405 है. |
 
-Bu model yanıtı doğru. Yanıtı daha da kolaylaştırmak için modelden adım adım düşünmesini isteyebilirsiniz.
+इस मॉडल का जवाब सही है. अब जवाब को और भी बेहतर बनाने के लिए, मॉडल से चरण-दर-चरण सोचने के लिए कहा जा सकता है.
 
-| **Güncellenen istem** | **İyileştirilmiş yanıt** |
+| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
 | --- | --- |
-| Dizideki 4. terim nedir? Adım adım düşünün. | İlk terim 15'tir.  İkinci terim b(1) \* (-3) = 15 \* (-3) = -45 olur.  Üçüncü terim b(2) \* (-3) = -45 \* (-3) = 135'tir.  Dördüncü terim b(3) \* (-3) = 135 \* (-3) = -405'tir. |
+| इस क्रम में चौथा पद क्या है? सिलसिलेवार तरीके से सोचें. | पहला पद 15 है.  दूसरा पद b(1) \* (-3) = 15 \* (-3) = -45 है.  तीसरा पद b(2) \* (-3) = -45 \* (-3) = 135 है.  चौथा पद b(3) \* (-3) = 135 \* (-3) = -405 है. |
 
-### Çıkış biçimini belirtin
+### आउटपुट का फ़ॉर्मैट तय करना
 
-Model çıkışının belirli bir biçimde (ör.Markdown, JSON, HTML) olması gerektiğinde yaygın bir sorunla karşılaşılır. Bu durum, özellikle model çıkışının sonraki bir görevde kullanılması gerektiğinde geçerlidir. İstemde modeli bu biçimde çıkış üretmeye yönlendirerek bu biçimde çıkış üretmeyi deneyebilirsiniz. Aşağıda iki örnek verilmiştir:
+एक आम समस्या यह है कि मॉडल के आउटपुट को किसी खास फ़ॉर्मैट (जैसे, मार्कडाउन, JSON, एचटीएमएल) में होना चाहिए. ऐसा खास तौर पर तब होता है, जब मॉडल के आउटपुट को डाउनस्ट्रीम टास्क में शामिल करना हो. मॉडल को प्रॉम्प्ट में ऐसा करने का निर्देश देकर, उस फ़ॉर्मैट में आउटपुट जनरेट करने की कोशिश की जा सकती है. यहां दो उदाहरण दिए गए हैं:
 
-| İstem | Model yanıtı |
+| प्रॉम्प्ट | मॉडल का जवाब |
 | --- | --- |
-| Bu resimdeki tabloyu Markdown biçiminde ayrıştır | | Konu | Durum | Saat | Başlangıç tarihi | Son tarih |  | ------- | ------ | ---- | ---------- | ------ |  | Matematik | Tamamlandı | 1,5 saat | 29.11.2023 | 01.12.2023 |  | Coğrafya | Tamamlandı | 30 dakika | 2.12.2023 | 4.12.2023 |  | Fizik | Devam ediyor | 2 saat | 3.12.2023 | 5.12.2023 |  | Biyoloji | Başlamadı | 6 saat | 02.11.2016 | 06.12.2023 | |
+| इस इमेज में मौजूद टेबल को मार्कडाउन फ़ॉर्मैट में पार्स करो | | विषय | स्थिति | समय | शुरू होने की तारीख | इस तारीख तक पूरा करना है |  | ------- | ------ | ---- | ---------- | ------ |  | गणित | हो गया | 1.5 घंटे | 29/11/2023 | 1/12/2023 |  | भूगोल | हो गया | 30 मिनट | 2/12/2023 | 4/12/2023 |  | भौतिक विज्ञान | जारी है | दो घंटे | 3/12/2023 | 5/12/2023 |  | जीव विज्ञान | Not started | 6 hrs | 11/2/2016 | 12/6/2023 | |
 
-| **İstem** | **Model yanıtı** |
+| **प्रॉम्प्ट** | **मॉडल का जवाब** |
 | --- | --- |
-| Aşağıdaki tüm özelliklerin listesini sağlayın:  Malzemeler, mutfak türü, vejetaryen olup olmadığı (JSON biçiminde) | ```` ```json ````  `{`  `"ingredients": [`  `"rice",`  `"shrimp",`  `"clams",`  `"mussels",`  `"peas",`  `"tomatoes",`  `"onions",`  `"garlic",`  `"olive oil",`  `"paprika",`  `"salt",`  `"pepper"`  `],`  `"type of cuisine": "Spanish",`  `"vegetarian": false`  `}`  ```` ``` ```` |
+| यहां दिए गए सभी एट्रिब्यूट की सूची दें:  सामग्री, पकवान का टाइप, शाकाहारी है या नहीं, JSON फ़ॉर्मैट में | ```` ```json ````  `{`  `"ingredients": [`  `"rice",`  `"shrimp",`  `"clams",`  `"mussels",`  `"peas",`  `"tomatoes",`  `"onions",`  `"garlic",`  `"olive oil",`  `"paprika",`  `"salt",`  `"pepper"`  `],`  `"type of cuisine": "Spanish",`  `"vegetarian": false`  `}`  ```` ``` ```` |
 
-### Tek resim içeren istemlerde resminizi ön plana çıkarın
+### एक इमेज वाले प्रॉम्प्ट के लिए, इमेज को सबसे पहले रखें
 
-Gemini, istemdeki görüntü ve metni herhangi bir sırada yorumlayabilir ancak metin isteminden önce tek bir görüntü yerleştirmek daha iyi sonuçlar verebilir.
-Aşağıdaki örneklerde, her istemde önce resmin, ardından metnin geldiğini göreceksiniz.
+Gemini, प्रॉम्प्ट में इमेज और टेक्स्ट को किसी भी क्रम में समझ सकता है. हालांकि, टेक्स्ट प्रॉम्प्ट से पहले एक इमेज रखने से बेहतर नतीजे मिल सकते हैं.
+यहां दिए गए सैंपल में, आपको दिखेगा कि हर प्रॉम्प्ट में टेक्स्ट से पहले इमेज दी गई है.
 
-### Çok formatlı isteminizle ilgili sorunları giderme
+### टेक्स्ट, इमेज वग़ैरह को प्रोसेस करने वाले मॉडल की मदद से प्रॉम्प्ट बनाने से जुड़ी समस्या हल करना
 
-Faydalı bir yanıt alamıyorsanız isteminizle ilgili sorunları gidermeniz gerekebilir. Deneyebileceğiniz birkaç strateji:
+अगर आपको काम का जवाब नहीं मिल रहा है, तो हो सकता है कि आपको अपने प्रॉम्प्ट से जुड़ी समस्या हल करनी पड़े. यहां कुछ रणनीतियां दी गई हैं, जिन्हें आज़माया जा सकता है.
 
-#### Model, resmin ilgili bölümünden bilgi almıyorsa
+#### अगर मॉडल, इमेज के काम के हिस्से से जानकारी नहीं ले रहा है
 
-Daha ayrıntılı bir yanıt almak için istemin, yanıtını oluştururken hangi resim öğelerinden bilgi almasını istediğinizi belirtebilirsiniz.
+ज़्यादा सटीक जवाब पाने के लिए, यह बताया जा सकता है कि आपको इमेज के किन पहलुओं के बारे में जानकारी चाहिए, ताकि प्रॉम्प्ट के जवाब में वह जानकारी शामिल की जा सके.
 
-| İstem | Model yanıtı |
+| प्रॉम्प्ट | मॉडल का जवाब |
 | --- | --- |
-| Bu bezler bir bebeğe kaç gün yeter? | Bezler bitmeden 198 gün boyunca kullanılabilir. |
+| ये डायपर, बच्चे के लिए कितने दिनों तक चलेंगे? | ये डायपर 198 दिनों तक चलेंगे. |
 
-| **Güncellenen istem** | **İyileştirilmiş yanıt** |
+| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
 | --- | --- |
-| Bu bezler bitmeden ne kadar süre dayanır?  Çocuğun yaşını belirlemek için kutuda gösterilen ağırlığı ve kutudaki toplam bebek bezi sayısını kullanın.  Toplam sayıyı, çocuğun günde kullandığı bez sayısına bölün. | Kutuda 198 adet bez bulunur. Kutuda, bezlerin 10-17 kg ağırlığındaki çocuklar için olduğu belirtiliyor.  Bu ağırlık aralığındaki ortalama bir çocuk muhtemelen 1-2 yaşlarındadır.  2 yaşındaki bir çocuk genellikle günde 6 bez kullanır. Bu nedenle, bezler yaklaşık 33 gün (198/6) dayanır. |
+| ये डायपर कितने समय तक चलेंगे?  बच्चे की उम्र का पता लगाने के लिए, बॉक्स पर दिया गया वज़न देखें. साथ ही, बॉक्स में मौजूद डायपर की कुल संख्या का इस्तेमाल करें.  कुल संख्या को, बच्चे के हर दिन इस्तेमाल किए जाने वाले डायपर की संख्या से भाग दें. | इस बॉक्स में 198 डायपर हैं. बॉक्स पर लिखा है कि ये डायपर, 22 से 37 पाउंड वज़न वाले बच्चे के लिए हैं.  इस वज़न सीमा वाले बच्चे की उम्र एक से दो साल के बीच हो सकती है.  आम तौर पर, दो साल का बच्चा हर दिन छह डायपर इस्तेमाल करता है. इसलिए, 198 डायपर करीब 33 दिन (198/6) तक चलेंगे. |
 
-#### Model çıkışı çok genel ve resim girişine yeterince uyarlanmamışsa
+#### अगर मॉडल का आउटपुट बहुत सामान्य है और इमेज इनपुट के हिसाब से नहीं है
 
-Modelin yanıtını resimlere göre uyarlamasına yardımcı olmak için akıl yürütme görevini gerçekleştirmeden önce resimleri açıklamasını isteyin.
+मॉडल को इमेज के हिसाब से जवाब देने में मदद करने के लिए, उससे तर्क देने से पहले इमेज के बारे में बताने के लिए कहें.
 
-| İstem | Model yanıtı |
+| प्रॉम्प्ट | मॉडल का जवाब |
 | --- | --- |
-| Bu resimlerin ortak noktası nedir? | Dört resmin tamamı manzara fotoğrafı örnekleridir. |
+| इन इमेज में क्या चीज़ें कॉमन हैं? | ये चारों इमेज, लैंडस्केप फ़ोटोग्राफ़ी के उदाहरण हैं. |
 
-| **Güncellenen istem** | **İyileştirilmiş yanıt** |
+| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
 | --- | --- |
-| Öncelikle her resimde ne olduğunu ayrıntılı olarak açıklayın. Bu resimlerin ortak noktası nedir? | İlk resimde, bir kişinin bavul hazırladığı gösteriliyor. İkinci resimde, bir alışveriş merkezindeki boş koridor gösteriliyor. Üçüncü resimde bir rulo tuvalet kağıdı gösteriliyor. Dördüncü resimde karanlık ve fırtınalı bir deniz gösteriliyor.  Bu resimlerin ortak özelliği, hepsinin geçiş alanlarına örnek olmasıdır. Geçiş alanları, iki yer veya durum arasında kalan yerler ya da durumlardır. Genellikle belirsizlik veya muğlaklık hissiyle karakterize edilirler.  İlk resimde, kişinin evde ve seyahatte olduğu gösteriliyor. İkinci resimde, iki mağaza arasındaki koridor gösteriliyor. Üçüncü resimde, banyoyu temsil edebilecek tuvalet kağıdı gösteriliyor. Banyo, özel ve kamusal alanlar arasında geçiş yapılan bir yerdir. Dış dünyaya girmeye veya dış dünyadan ayrılmaya hazırlandığımız bir yerdir.  Dördüncü resimde, sakin ve fırtınalı deniz arasında bir geçiş gösteriliyor.  Geçiş alanları hem heyecan verici hem de rahatsız edici olabilir. Yeni başlangıçların veya sonların yeri olabilirler. Bunlar, düşünme veya harekete geçme yeri olabilir. |
+| सबसे पहले, हर इमेज में मौजूद चीज़ों के बारे में पूरी जानकारी दो. इन इमेज में क्या चीज़ें कॉमन हैं? | पहली इमेज में, एक व्यक्ति को सूटकेस पैक करते हुए दिखाया गया है. दूसरी इमेज में, शॉपिंग मॉल का खाली हॉलवे दिखाया गया है. तीसरी इमेज में टॉयलेट पेपर का रोल दिखाया गया है. चौथी इमेज में, तूफ़ानी समुद्र दिखाया गया है.  इन सभी इमेज में एक बात समान है. ये सभी इमेज, लिमिनल स्पेस के उदाहरण हैं. लिमिनल स्पेस ऐसी जगहें या स्थितियां होती हैं जो दो अन्य जगहों या स्थितियों के बीच में होती हैं. इनमें अक्सर अनिश्चितता या अस्पष्टता होती है.  पहली इमेज में दिखाया गया है कि व्यक्ति घर पर है और यात्रा पर है. दूसरी इमेज में, दो स्टोर के बीच का हॉलवे दिखाया गया है. तीसरी इमेज टॉयलेट पेपर की है, जो बाथरूम को दिखा सकती है. बाथरूम, निजी और सार्वजनिक जगहों के बीच की जगह होती है. यह एक ऐसी जगह है जहां हम बाहर की दुनिया में जाने या वहां से आने के लिए खुद को तैयार करते हैं.  चौथी इमेज में, समुद्र को शांत और तूफ़ानी दिखाया गया है.  लिमिनल स्पेस, रोमांचक और परेशान करने वाले, दोनों हो सकते हैं. ये नई शुरुआत या अंत की जगह हो सकती हैं. ये जगहें, सोचने-समझने या कुछ करने की जगह हो सकती हैं. |
 
-Ayrıca modelden, resimdeki içeriğe açıkça atıfta bulunmasını da isteyebilirsiniz.
+मॉडल से साफ़ तौर पर यह भी कहा जा सकता है कि वह इमेज में मौजूद जानकारी का इस्तेमाल करे.
 
-| **Güncellenen istem** | **İyileştirilmiş yanıt** |
+| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
 | --- | --- |
-| Bu resimlerin ortak noktası nedir? Yanıtınızda resimlerdeki içeriklere atıfta bulunun. | Resimlerin tamamı seyahatle ilgili. İlk resimde valiz hazırlayan bir kişi, ikinci resimde alışveriş merkezindeki boş bir koridor, üçüncü resimde bir rulo tuvalet kağıdı, dördüncü resimde ise karanlık ve fırtınalı bir deniz gösteriliyor.  Bu resimlerin hepsi seyahatle ilgili çünkü seyahat edenlerin ihtiyaç duyduğu veya kullandığı şeyler. İlk resimde, bir kişinin valiz hazırladığı görülüyor. Bu, insanların seyahate çıkarken yaptığı bir şeydir. İkinci resimde, insanların seyahatleri için eşya satın almak üzere sık sık gittiği bir yer olan alışveriş merkezindeki boş bir koridor gösteriliyor. Üçüncü resimde, insanların seyahat ederken sıkça kullandığı bir ürün olan tuvalet kağıdı rulosu gösteriliyor. Dördüncü resimde, insanların seyahat ederken sıkça karşılaştığı bir durum olan karanlık ve fırtınalı bir deniz gösteriliyor. |
+| इन इमेज में क्या चीज़ें कॉमन हैं? अपने जवाब में, इमेज में मौजूद जानकारी का इस्तेमाल करें. | सभी इमेज, यात्रा से जुड़ी हैं. पहली इमेज में एक व्यक्ति को सूटकेस पैक करते हुए दिखाया गया है. दूसरी इमेज में शॉपिंग मॉल का खाली हॉलवे दिखाया गया है. तीसरी इमेज में टॉयलेट पेपर का ढेर दिखाया गया है. चौथी इमेज में तूफ़ानी समुद्र दिखाया गया है.  ये सभी इमेज यात्रा से जुड़ी हैं, क्योंकि ये सभी ऐसी चीज़ें हैं जिनकी लोगों को यात्रा के दौरान ज़रूरत होती है या जिनका वे इस्तेमाल करते हैं. पहली इमेज में एक व्यक्ति को सूटकेस पैक करते हुए दिखाया गया है. लोग ऐसा तब करते हैं, जब वे यात्रा पर जा रहे हों. दूसरी इमेज में, शॉपिंग मॉल का खाली हॉलवे दिखाया गया है. यह ऐसी जगह है जहां लोग अक्सर यात्रा के लिए सामान खरीदने जाते हैं. तीसरी इमेज में टॉयलेट पेपर का एक बंडल दिखाया गया है. लोग अक्सर यात्रा के दौरान इसका इस्तेमाल करते हैं. चौथी इमेज में, तूफ़ानी समुद्र दिखाया गया है. यह ऐसी चीज़ है जो लोगों को अक्सर यात्रा के दौरान दिखती है. |
 
-Aynı ipuçları, resimlerden elde edilen reklam öğesi çıkışları için de geçerlidir. Tavşanın yer aldığı aşağıdaki örnekte, modelden resimdeki unsurları dahil etmesini açıkça istemek çıkışı iyileştirebilir.
+इमेज से क्रिएटिव आउटपुट पाने के लिए भी यही सलाह काम करती है. खरगोश वाली इस इमेज के उदाहरण में, मॉडल से साफ़ तौर पर इमेज के पहलुओं को शामिल करने के लिए कहने से, आउटपुट को बेहतर बनाया जा सकता है.
 
-| İstem | Model yanıtı |
+| प्रॉम्प्ट | मॉडल का जवाब |
 | --- | --- |
-| Bu görsel hakkında bir şiir yazabilir misin? | Küçük tavşan, yumuşacık ve kahverengi,  Tarlada zıplıyor, yukarı ve aşağı.  Kulakların uzun, kuyruğun küçük,  Sen hepsinin en tatlısısın.  Yeşil ve tatlı çimleri yersin,  Beni görünce de zıplayarak uzaklaşırsın.  Ama her zaman arkadaşın olacağım,  Küçük tavşan, sonuna kadar. |
+| क्या तुम इस इमेज के बारे में मेरे लिए एक कविता लिख सकते हो? | छोटा खरगोश, इतना मुलायम और भूरा,  खेत में ऊपर और नीचे कूद रहा है.  तुम्हारे कान इतने लंबे, तुम्हारी पूंछ इतनी छोटी,  तुम सबसे प्यारे जीव हो.  तुम हरी-भरी और मीठी घास खाते हो,  और मुझे देखते ही कूदकर भाग जाते हो.  लेकिन मैं हमेशा तुम्हारा दोस्त रहूंगा,  छोटे खरगोश, आखिर तक. |
 
-| **Güncellenen istem** | **İyileştirilmiş yanıt** |
+| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
 | --- | --- |
-| Bu görsel hakkında, yeri de belirterek betimleyici ve etkileyici bir şiir yazabilir misin? | Çimlerde küçük bir tavşan,  Kulakları çok uzun, çok keskin.  Ne görüyorsun orada,  Uzakta, baktığın yerde?  Is it the ocean blue,  Sparkling in the sun's hue?  Ya da dalgaların çarpıp kükremesi,  Bayıldığınız bir ritim?  Küçük tavşan, doğruyu söyle bana,  Neyle ilgileniyorsun bu kadar?  Tuzlu esinti mi,  Yoksa martıların çığlıkları mı hoşunuza gidiyor?  Belki de her şeyin büyüklüğüdür,  Dünya hem çok büyük hem de çok küçük.  Hayallerin dolaşabileceği,  Maceraların tohumlarının atılabileceği bir yer.  Küçük tavşan, ne hayal ettiğini merak ediyorum,  Çimlerin üzerinde otururken, çok sakinsin.  Derinlikleri keşfetmek mi istersin,  Yoksa karada kalıp zıplamayı mı?  Ne olursa olsun, küçük tavşan,  Merak kıvılcımını parlak bir şekilde yakmaya devam et.  Çünkü hayallerinizde ve arzularınızda,  Yaratılmayı bekleyen bir dünya var. |
+| क्या तुम इस इमेज की जानकारी के बारे में एक कविता लिख सकते हो, जिसमें इस जगह के बारे में जानकारी दी गई हो और जो काफ़ी दिलचस्प हो? | हरा-भरा मैदान, छोटा सा खरगोश,  कान इतने लंबे, इतने तेज़.  तुम वहां क्या देख रहे हो,  दूर, जहां तुम देख रहे हो?  क्या यह समुद्र का नीला रंग है,  जो सूरज की रोशनी में चमक रहा है?  या फिर लहरों के टकराने और गरजने की आवाज़,  क्या आपको पसंद है कोई ऐसी आवाज़?  छोटे खरगोश, मुझे सच बताओ,  किस चीज़ ने तुम्हारा ध्यान खींचा है?  क्या यह नमकीन हवा है,  या सीगल की आवाज़ है जो आपको पसंद है?  शायद यह सब कुछ बहुत बड़ा है,  एक दुनिया इतनी बड़ी और छोटी.  एक ऐसी जगह जहां सपने घूम सकते हैं,  और रोमांच बोया जा सकता है.  छोटे खरगोश, मुझे लगता है कि तुम सपने देख रहे हो,  जब तुम घास पर बैठे हो, तो बहुत शांत हो.  क्या आपको गहरे पानी में गोता लगाना है,  या ज़मीन पर ही रहना है, जहां आप कूद सकते हैं?  चाहे कुछ भी हो, छोटे खरगोश,  अपने अंदर की जिज्ञासा को हमेशा ज़िंदा रखो.  तुम्हारे सपनों और आकांक्षाओं में,  एक ऐसी दुनिया छिपी है जो तुम्हारी रचना का इंतज़ार कर रही है. |
 
-#### İstemin hangi bölümünün başarısız olduğunu belirleme
+#### यह पता लगाना कि प्रॉम्प्ट का कौन-सा हिस्सा काम नहीं कर रहा है
 
-Bir istemin başarısız olmasının nedeni, modelin **görüntüyü anlamaması** mı yoksa görüntüyü anlamasına rağmen doğru **akıl yürütme adımlarını** uygulamaması mı, bunu anlamak zor olabilir.
-Bu nedenleri netleştirmek için modele resimde ne olduğunu sorun.
+यह जानना मुश्किल हो सकता है कि प्रॉम्प्ट इसलिए पूरा नहीं हुआ, क्योंकि मॉडल **इमेज को समझ नहीं पाया** या इसलिए पूरा नहीं हुआ, क्योंकि मॉडल इमेज को समझ तो गया, लेकिन **तर्क के सही चरण** पूरे नहीं कर पाया.
+इन वजहों के बीच अंतर करने के लिए, मॉडल से पूछें कि इमेज में क्या है.
 
-Aşağıdaki örnekte, model çayla birlikte şaşırtıcı görünen bir atıştırmalıkla (ör. patlamış mısır) yanıt verirse önce modelin resimde çay olduğunu doğru tanıyıp tanımadığını belirlemek için sorun giderme işlemi yapabilirsiniz.
+यहां दिए गए उदाहरण में, अगर मॉडल चाय के साथ खाने के लिए कोई ऐसी चीज़ सुझाता है जो हैरान करने वाली है (जैसे, पॉपकॉर्न), तो पहले यह पता लगाएं कि मॉडल ने इमेज में मौजूद चाय की पहचान सही तरीके से की है या नहीं.
 
-| İstem | Sorun giderme istemi |
+| प्रॉम्प्ट | समस्या हल करने के लिए सूचना |
 | --- | --- |
-| Bununla iyi gidecek, 1 dakikada hazırlayabileceğim bir atıştırmalık önerir misin? | Bu resimde ne olduğunu açıklayın. |
+| इसके साथ खाने के लिए, एक मिनट में कौनसा स्नैक बनाया जा सकता है? | बताएं कि इस इमेज में क्या है. |
 
-Diğer bir strateji ise modelden gerekçesini açıklamasını istemektir. Bu, muhakemenin hangi kısmının (varsa) bozulduğunu daraltmanıza yardımcı olabilir.
+एक और तरीका यह है कि मॉडल से, जवाब देने की वजह पूछी जाए. इससे आपको यह पता लगाने में मदद मिल सकती है कि जवाब देने के लिए इस्तेमाल की गई जानकारी का कौन-सा हिस्सा सही नहीं है.
 
-| İstem | Sorun giderme istemi |
+| प्रॉम्प्ट | समस्या हल करने के लिए सूचना |
 | --- | --- |
-| Bununla iyi gidecek, 1 dakikada hazırlayabileceğim bir atıştırmalık önerir misin? | Bununla iyi gidecek, 1 dakikada hazırlayabileceğim bir atıştırmalık önerir misin? Lütfen nedeniyle birlikte açıklayın. |
+| इसके साथ खाने के लिए, एक मिनट में कौनसा स्नैक बनाया जा सकता है? | मुझे एक मिनट में बनने वाला ऐसा स्नैक बताओ जो इसके साथ अच्छा लगे? कृपया इसकी वजह बताएं. |
 
-## Sırada ne var?
+## आगे क्या करना है
 
-- [Google AI Studio](http://aistudio.google.com?hl=tr)'yu kullanarak kendi çok formatlı istemlerinizi yazmayı deneyin.
-- Medya dosyalarını yüklemek ve istemlerinize dahil etmek için Gemini Files API'yi kullanma hakkında bilgi edinmek üzere [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=tr), [Ses](https://ai.google.dev/gemini-api/docs/audio?hl=tr) ve [Belge işleme](https://ai.google.dev/gemini-api/docs/document-processing?hl=tr) kılavuzlarına bakın.
-- İstem tasarımıyla ilgili daha fazla bilgi (ör. örnekleme parametrelerini ayarlama) için [İstem stratejileri](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=tr) sayfasına bakın.
+- [Google AI Studio](http://aistudio.google.com?hl=hi) का इस्तेमाल करके, मल्टीमॉडल प्रॉम्प्ट लिखने की कोशिश करें.
+- मीडिया फ़ाइलें अपलोड करने और उन्हें अपने प्रॉम्प्ट में शामिल करने के लिए, Gemini Files API का इस्तेमाल करने के बारे में जानकारी पाने के लिए, [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=hi), [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=hi), और [Document processing](https://ai.google.dev/gemini-api/docs/document-processing?hl=hi) गाइड देखें.
+- प्रॉम्प्ट डिज़ाइन करने के बारे में ज़्यादा जानकारी के लिए, जैसे कि सैंपलिंग पैरामीटर को ट्यून करना, [प्रॉम्प्ट से जुड़ी रणनीतियां](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=hi) पेज देखें.
 
-Geri bildirim gönderin
+सुझाव भेजें
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Son güncelleme tarihi: 2026-08-30 UTC.
+आखिरी बार 2026-08-30 (UTC) को अपडेट किया गया.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-08-30 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-08-30 (UTC) को अपडेट किया गया."],[],[]]
