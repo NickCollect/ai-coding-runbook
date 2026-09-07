@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/about-claude/model-deprecations
-fetched_at: 2026-08-31T06:29:35.283540+00:00
+fetched_at: 2026-09-07T05:31:30.596689+00:00
 fetch_method: mintlify_md
 ---
 
@@ -78,6 +78,7 @@ Current and recently retired models are listed in the following table with their
 
 | API model name             | Current state | Deprecated        | Tentative retirement date          |
 | -------------------------- | ------------- | ----------------- | ---------------------------------- |
+| claude-fable-5-1           | Active        | N/A               | Not sooner than September 1, 2027  |
 | claude-fable-5             | Active        | N/A               | Not sooner than June 9, 2027       |
 | claude-opus-5              | Active        | N/A               | Not sooner than July 24, 2027      |
 | claude-opus-4-8            | Active        | N/A               | Not sooner than May 28, 2027       |

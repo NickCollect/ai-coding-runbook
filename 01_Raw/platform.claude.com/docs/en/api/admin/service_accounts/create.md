@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/service_accounts/create
-fetched_at: 2026-08-31T06:29:45.699040+00:00
+fetched_at: 2026-09-07T05:31:45.379971+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,16 +8,17 @@ fetch_method: mintlify_md
 
 **POST** `/v1/organizations/service_accounts`
 
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](/docs/en/manage-claude/wif-admin-api).
+
 Create a service account.
 
 A service account is a named workload identity that federation rules
 target. `organization_role` is `developer` (default) or `admin`; a rule
 may only be created or retargeted to grant `org:admin` scope when the
-target's `organization_role` is `admin`. Requires an OAuth bearer (user
-or WIF-minted service account token) or a Console session; Admin API
-keys are not accepted. Creating an `admin`-role service account requires
-an interactive credential (a user OAuth token or a Console session) — a
-workload may only create `developer`-role service accounts.
+target's `organization_role` is `admin`. Creating an `admin`-role service
+account requires an interactive credential (a user OAuth token or a
+Console session) — a workload may only create `developer`-role service
+accounts.
 
 ## Headers
 
@@ -118,7 +119,7 @@ workload may only create `developer`-role service accounts.
 curl https://api.anthropic.com/v1/organizations/service_accounts \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
     -d '{
           "name": "ci-deploy-bot"
         }'

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/mcp_tunnels/tunnel_certificates/archive
-fetched_at: 2026-08-31T06:29:46.621679+00:00
+fetched_at: 2026-09-07T05:31:46.793792+00:00
 fetch_method: mintlify_md
 ---
 
@@ -80,7 +80,7 @@ certificate is added.
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/$CERTIFICATE_ID/archive \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
 ### Response (200)

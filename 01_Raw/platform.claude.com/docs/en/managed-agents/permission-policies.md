@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/permission-policies
-fetched_at: 2026-08-24T02:18:37.777305+00:00
+fetched_at: 2026-09-07T05:31:27.372494+00:00
 fetch_method: mintlify_md
 ---
 
@@ -58,11 +58,12 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
 
   <MultiFileExample language="cli" label="CLI">
     ```bash CLI
-    ant beta:agents create < agent.yaml
+    ant apply agent.md
     ```
 
-    <File filename="agent.yaml">
-      ```yaml
+    <File filename="agent.md">
+      ```markdown
+      ---
       name: Coding Assistant
       model: claude-opus-5
       tools:
@@ -70,6 +71,7 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
           default_config:
             permission_policy:
               type: always_ask
+      ---
       ```
     </File>
   </MultiFileExample>
@@ -248,11 +250,12 @@ This example connects a GitHub MCP server and allows its tools to run without co
 
   <MultiFileExample language="cli" label="CLI">
     ```bash CLI
-    ant beta:agents create < agent.yaml
+    ant apply agent.md
     ```
 
-    <File filename="agent.yaml">
-      ```yaml
+    <File filename="agent.md">
+      ```markdown
+      ---
       name: Dev Assistant
       model: claude-opus-5
       mcp_servers:
@@ -266,6 +269,7 @@ This example connects a GitHub MCP server and allows its tools to run without co
           default_config:
             permission_policy:
               type: always_allow
+      ---
       ```
     </File>
   </MultiFileExample>

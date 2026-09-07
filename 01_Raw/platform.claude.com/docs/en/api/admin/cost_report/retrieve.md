@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/cost_report/retrieve
-fetched_at: 2026-08-31T06:29:44.802332+00:00
+fetched_at: 2026-09-07T05:31:44.254297+00:00
 fetch_method: mintlify_md
 ---
 
@@ -167,7 +167,7 @@ Get Cost Report
 ```bash
 curl https://api.anthropic.com/v1/organizations/cost_report \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
 ### Response (200)

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/federation_issuers/archive
-fetched_at: 2026-08-31T06:29:46.049934+00:00
+fetched_at: 2026-09-07T05:31:46.013980+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,15 +8,14 @@ fetch_method: mintlify_md
 
 **POST** `/v1/organizations/federation_issuers/{federation_issuer_id}/archive`
 
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](/docs/en/manage-claude/wif-admin-api).
+
 Archive a federation issuer.
 
 Idempotent; re-archiving returns the issuer with its original
 `archived_at`. Rejected with 400 if any live (non-archived) federation
 rule still references the issuer; archive those rules first (a rule's
 issuer cannot be changed), or recreate them against another issuer.
-
-Requires an OAuth bearer or Console session; Admin API keys are not
-accepted.
 
 ## Path parameters
 
@@ -181,7 +180,7 @@ accepted.
 curl https://api.anthropic.com/v1/organizations/federation_issuers/$FEDERATION_ISSUER_ID/archive \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
 ### Response (200)

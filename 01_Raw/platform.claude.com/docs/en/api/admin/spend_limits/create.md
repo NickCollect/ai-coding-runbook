@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/spend_limits/create
-fetched_at: 2026-08-31T06:29:45.347371+00:00
+fetched_at: 2026-09-07T05:31:44.972742+00:00
 fetch_method: mintlify_md
 ---
 
@@ -142,7 +142,7 @@ group, and organization-level defaults are configured in claude.ai.
 curl https://api.anthropic.com/v1/organizations/spend_limits \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
     -d '{
           "amount": "50000",
           "scope": {

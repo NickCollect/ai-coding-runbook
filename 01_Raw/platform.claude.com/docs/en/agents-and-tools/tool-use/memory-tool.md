@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool
-fetched_at: 2026-08-24T02:18:36.512039+00:00
+fetched_at: 2026-09-07T05:31:25.575698+00:00
 fetch_method: mintlify_md
 ---
 
@@ -21,7 +21,7 @@ The memory tool operates client-side: Claude requests file operations, and your 
 </Note>
 
 <Note>
-  For how zero data retention (ZDR) applies to this feature, see [API and data retention](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention).
+  To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention).
 </Note>
 
 ## Use cases

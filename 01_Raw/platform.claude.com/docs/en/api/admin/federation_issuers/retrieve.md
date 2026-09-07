@@ -1,12 +1,14 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/federation_issuers/retrieve
-fetched_at: 2026-08-31T06:29:45.957872+00:00
+fetched_at: 2026-09-07T05:31:45.806005+00:00
 fetch_method: mintlify_md
 ---
 
 # Get Federation Issuer
 
 **GET** `/v1/organizations/federation_issuers/{federation_issuer_id}`
+
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](/docs/en/manage-claude/wif-admin-api).
 
 Retrieve a federation issuer by its ID (`fdis_...`).
 
@@ -172,7 +174,7 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 ```bash
 curl https://api.anthropic.com/v1/organizations/federation_issuers/$FEDERATION_ISSUER_ID \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
 ### Response (200)

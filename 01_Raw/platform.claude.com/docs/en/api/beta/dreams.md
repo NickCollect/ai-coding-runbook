@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/dreams
-fetched_at: 2026-08-31T06:29:40.668976+00:00
+fetched_at: 2026-09-07T05:31:38.473091+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,7 +20,7 @@ Create a Dream
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -103,6 +103,12 @@ Create a Dream
     - `"thinking-display-updates-2026-08-18"`
 
     - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
 ### Body parameters
 
@@ -439,7 +445,7 @@ List Dreams
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -522,6 +528,12 @@ List Dreams
     - `"thinking-display-updates-2026-08-18"`
 
     - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
 ### Returns
 
@@ -745,7 +757,7 @@ Get a Dream
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -828,6 +840,12 @@ Get a Dream
     - `"thinking-display-updates-2026-08-18"`
 
     - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
 ### Returns
 
@@ -1046,7 +1064,7 @@ Cancel a Dream
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1129,6 +1147,12 @@ Cancel a Dream
     - `"thinking-display-updates-2026-08-18"`
 
     - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
 ### Returns
 
@@ -1348,7 +1372,7 @@ Archive a Dream
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 38 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1431,6 +1455,12 @@ Archive a Dream
     - `"thinking-display-updates-2026-08-18"`
 
     - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
 
 ### Returns
 
@@ -1942,6 +1972,112 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
     format: int32
 
+### Beta Dreaming Error
+
+- `BetaDreamingError = BetaInvalidRequestError or BetaAuthenticationError or BetaBillingError or 7 more`
+
+  The `output_behavior.memory_store_id` target is still held by a prior `{type: "update_existing"}` dream — one that is `pending` or `running`, or was canceled with its final writes still landing. Rarely the named dream has just finished (`completed`/`failed`) and its execution is still closing; an immediate retry then almost always succeeds. The message names the holding dream when the server can identify it (rarely omitted); poll it to a terminal state or cancel it, then retry. Carried with `x-should-retry: false`.
+
+  - `BetaInvalidRequestError object`
+
+    - `message: string`
+
+      default: Invalid request
+
+    - `type: "invalid_request_error"`
+
+      default: invalid_request_error
+
+  - `BetaAuthenticationError object`
+
+    - `message: string`
+
+      default: Authentication error
+
+    - `type: "authentication_error"`
+
+      default: authentication_error
+
+  - `BetaBillingError object`
+
+    - `message: string`
+
+      default: Billing error
+
+    - `type: "billing_error"`
+
+      default: billing_error
+
+  - `BetaPermissionError object`
+
+    - `message: string`
+
+      default: Permission denied
+
+    - `type: "permission_error"`
+
+      default: permission_error
+
+  - `BetaNotFoundError object`
+
+    - `message: string`
+
+      default: Not found
+
+    - `type: "not_found_error"`
+
+      default: not_found_error
+
+  - `BetaRateLimitError object`
+
+    - `message: string`
+
+      default: Rate limited
+
+    - `type: "rate_limit_error"`
+
+      default: rate_limit_error
+
+  - `BetaGatewayTimeoutError object`
+
+    - `message: string`
+
+      default: Request timeout
+
+    - `type: "timeout_error"`
+
+      default: timeout_error
+
+  - `BetaAPIError object`
+
+    - `message: string`
+
+      default: Internal server error
+
+    - `type: "api_error"`
+
+      default: api_error
+
+  - `BetaOverloadedError object`
+
+    - `message: string`
+
+      default: Overloaded
+
+    - `type: "overloaded_error"`
+
+      default: overloaded_error
+
+  - `BetaTargetStoreHeldError object`
+
+    The `output_behavior.memory_store_id` target is still held by a prior `{type: "update_existing"}` dream — one that is `pending` or `running`, or was canceled with its final writes still landing. Rarely the named dream has just finished (`completed`/`failed`) and its execution is still closing; an immediate retry then almost always succeeds. The message names the holding dream when the server can identify it (rarely omitted); poll it to a terminal state or cancel it, then retry. Carried with `x-should-retry: false`.
+
+    - `type: "conflict_error"`
+
+    - `message: optional string`
+
+      Human-readable description of the conflict, naming the dream that holds the target store when the server can identify it.
+
 ### Beta Output Behavior
 
 - `BetaOutputBehavior = BetaOutputBehaviorCreateNew or BetaOutputBehaviorUpdateExisting`
@@ -1983,3 +2119,15 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
     minLength: 1
 
   - `type: "update_existing"`
+
+### Beta Target Store Held Error
+
+- `BetaTargetStoreHeldError object`
+
+  The `output_behavior.memory_store_id` target is still held by a prior `{type: "update_existing"}` dream — one that is `pending` or `running`, or was canceled with its final writes still landing. Rarely the named dream has just finished (`completed`/`failed`) and its execution is still closing; an immediate retry then almost always succeeds. The message names the holding dream when the server can identify it (rarely omitted); poll it to a terminal state or cancel it, then retry. Carried with `x-should-retry: false`.
+
+  - `type: "conflict_error"`
+
+  - `message: optional string`
+
+    Human-readable description of the conflict, naming the dream that holds the target store when the server can identify it.

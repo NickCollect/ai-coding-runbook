@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/spend_limits/increase_requests/retrieve
-fetched_at: 2026-08-31T06:29:45.502560+00:00
+fetched_at: 2026-09-07T05:31:45.222317+00:00
 fetch_method: mintlify_md
 ---
 
@@ -254,7 +254,7 @@ requester at the request's period.
 ```bash
 curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$SPEND_LIMIT_INCREASE_REQUEST_ID \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
 ### Response (200)

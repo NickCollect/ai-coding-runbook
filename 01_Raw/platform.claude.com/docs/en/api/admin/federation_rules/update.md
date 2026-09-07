@@ -1,12 +1,14 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/federation_rules/update
-fetched_at: 2026-08-31T06:29:46.195013+00:00
+fetched_at: 2026-09-07T05:31:46.106593+00:00
 fetch_method: mintlify_md
 ---
 
 # Update Federation Rule
 
 **POST** `/v1/organizations/federation_rules/{federation_rule_id}`
+
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](/docs/en/manage-claude/wif-admin-api).
 
 Partially update a federation rule.
 
@@ -24,7 +26,7 @@ match does not yet constrain tenant identity, any update (even a rename
 or description change) must also supply a conforming `match` in the same
 request. OAuth callers may only manage rules whose `oauth_scope` is
 `workspace:developer` or `workspace:inference`; other scopes require a
-Console session. Admin API keys are not accepted.
+Console session.
 
 ## Path parameters
 
@@ -261,7 +263,7 @@ Console session. Admin API keys are not accepted.
 curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RULE_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
     -d '{}'
 ```
 

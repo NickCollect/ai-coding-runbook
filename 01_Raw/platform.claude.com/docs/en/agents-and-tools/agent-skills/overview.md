@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
-fetched_at: 2026-08-24T02:18:37.174939+00:00
+fetched_at: 2026-09-07T05:31:26.382221+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,7 +11,7 @@ description: Agent Skills are modular capabilities that extend Claude's function
 ---
 
 <Note>
-  For how zero data retention (ZDR) applies to this feature, see [API and data retention](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention).
+  To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention).
 </Note>
 
 ## Why use Skills

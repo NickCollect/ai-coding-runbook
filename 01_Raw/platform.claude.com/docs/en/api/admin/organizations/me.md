@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/organizations/me
-fetched_at: 2026-08-31T06:29:43.168951+00:00
+fetched_at: 2026-09-07T05:31:41.808771+00:00
 fetch_method: mintlify_md
 ---
 
@@ -37,7 +37,7 @@ Retrieve information about the organization associated with the authenticated AP
 ```bash
 curl https://api.anthropic.com/v1/organizations/me \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
 ### Response (200)

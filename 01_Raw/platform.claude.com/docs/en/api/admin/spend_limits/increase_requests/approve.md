@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/spend_limits/increase_requests/approve
-fetched_at: 2026-08-31T06:29:45.581511+00:00
+fetched_at: 2026-09-07T05:31:45.230486+00:00
 fetch_method: mintlify_md
 ---
 
@@ -363,7 +363,7 @@ the member was blocked on. Anthropic emails the requester unless
 curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$SPEND_LIMIT_INCREASE_REQUEST_ID/approve \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
     -d '{
           "amount": "50000",
           "period": "monthly"

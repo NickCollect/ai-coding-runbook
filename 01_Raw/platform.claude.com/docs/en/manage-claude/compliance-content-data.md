@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/compliance-content-data
-fetched_at: 2026-08-31T06:29:34.116523+00:00
+fetched_at: 2026-09-07T05:31:29.025581+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,7 +11,7 @@ description: Access chat content, file attachments, and projects for claude.ai o
 ---
 
 <Note>
-  The endpoints on this page are available only to Claude Enterprise organizations. They retrieve and delete claude.ai chats, files, and projects; Cowork and Claude Code session transcripts are covered on [Retrieve session transcripts](https://platform.claude.com/docs/en/manage-claude/compliance-sessions). See [Set up the Compliance API](https://platform.claude.com/docs/en/manage-claude/compliance-api-access).
+  The endpoints on this page are available only to Claude Enterprise organizations. They retrieve and delete claude.ai chats, files, and projects; transcripts of sessions in apps such as Cowork and Claude Code are covered on [Retrieve session transcripts](https://platform.claude.com/docs/en/manage-claude/compliance-sessions). See [Set up the Compliance API](https://platform.claude.com/docs/en/manage-claude/compliance-api-access).
 </Note>
 
 <Check>
@@ -36,6 +36,7 @@ The chat list endpoint defaults to organization-wide scope: leave off `user_ids[
 curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/apps/chats" \
   --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  --header "anthropic-version: 2023-06-01" \
   --data-urlencode "order_by=updated_at" \
   --data-urlencode "updated_at.gte=2025-06-01T00:00:00Z" \
   --data-urlencode "limit=100"
@@ -78,6 +79,7 @@ To scope the list to specific users instead (for example, a legal hold on named 
 curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/apps/chats" \
   --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  --header "anthropic-version: 2023-06-01" \
   --data-urlencode "user_ids[]=user_01XyDMpzjS89pFZXqSFUBDr6" \
   --data-urlencode "created_at.gte=2025-06-01T00:00:00Z" \
   --data-urlencode "limit=100"
@@ -90,7 +92,8 @@ chat_id="claude_chat_01H5CWunD7RpVJ5bHa8RCkja"
 
 curl --fail-with-body -sS \
   "https://api.anthropic.com/v1/compliance/apps/chats/$chat_id/messages" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  --header "anthropic-version: 2023-06-01"
 ```
 
 The messages endpoint returns the chat's metadata plus a `chat_messages` array sorted by `created_at`. When `limit` is omitted, the full message set is returned in one response; pass `limit`, `after_id`, or `before_id` to page through very long chats. The endpoint also accepts `created_at.*` and `updated_at.*` range bounds (`gt`, `gte`, `lt`, `lte`) and an `order` parameter (`asc` or `desc`). See [Get chat messages](https://platform.claude.com/docs/en/api/compliance/apps/chats/messages/list) for the full parameter list. For user messages, `created_at` is when the message was sent; for assistant messages, it is when Claude finished generating the message. Each message carries its text content and, when present, any uploaded files (typically on user messages), any tool-generated files, and any artifacts the assistant produced or updated (typically on assistant messages):
@@ -200,6 +203,7 @@ file_id="claude_file_01UaT9wBcDfGhJkLmNpQrSv7"
 
 curl --fail-with-body -sS -OJ \
   --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  --header "anthropic-version: 2023-06-01" \
   "https://api.anthropic.com/v1/compliance/apps/chats/files/$file_id/content"
 ```
 
@@ -231,7 +235,8 @@ project_id="claude_proj_01KGp4eZNug9ri4kE35RSppq"
 
 curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/apps/projects/$project_id/attachments" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  --header "anthropic-version: 2023-06-01"
 ```
 
 ```json Response
@@ -287,7 +292,8 @@ chat_id="claude_chat_01H5CWunD7RpVJ5bHa8RCkja"
 
 curl --fail-with-body -sS -X DELETE \
   "https://api.anthropic.com/v1/compliance/apps/chats/$chat_id" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  --header "anthropic-version: 2023-06-01"
 ```
 
 ```json Response

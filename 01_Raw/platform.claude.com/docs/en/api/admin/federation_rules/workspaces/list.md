@@ -1,12 +1,14 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/federation_rules/workspaces/list
-fetched_at: 2026-08-31T06:29:46.237923+00:00
+fetched_at: 2026-09-07T05:31:46.335174+00:00
 fetch_method: mintlify_md
 ---
 
 # List Federation Rule Workspaces
 
 **GET** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces`
+
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](/docs/en/manage-claude/wif-admin-api).
 
 List workspaces where this federation rule is enabled.
 
@@ -81,7 +83,7 @@ rules with `applies_to_all_workspaces` or a legacy single
 ```bash
 curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RULE_ID/workspaces \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
 ### Response (200)

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/fast-mode
-fetched_at: 2026-08-31T06:29:31.031062+00:00
+fetched_at: 2026-09-07T05:31:24.669304+00:00
 fetch_method: mintlify_md
 ---
 
@@ -17,7 +17,7 @@ Fast mode delivers up to 2.5x higher output tokens per second from Claude Opus 5
 </Note>
 
 <Note>
-  For how zero data retention (ZDR) applies to this feature, see [API and data retention](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention).
+  To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention).
 </Note>
 
 ## Supported models

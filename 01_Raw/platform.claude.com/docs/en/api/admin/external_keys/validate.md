@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/external_keys/validate
-fetched_at: 2026-08-31T06:29:44.688599+00:00
+fetched_at: 2026-09-07T05:31:43.994484+00:00
 fetch_method: mintlify_md
 ---
 
@@ -47,7 +47,7 @@ message if it failed or timed out.
 curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID/validate \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN"
 ```
 
 ### Response (200)

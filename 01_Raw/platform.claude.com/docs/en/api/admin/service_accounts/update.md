@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/service_accounts/update
-fetched_at: 2026-08-31T06:29:45.740769+00:00
+fetched_at: 2026-09-07T05:31:45.583372+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,13 +8,14 @@ fetch_method: mintlify_md
 
 **POST** `/v1/organizations/service_accounts/{service_account_id}`
 
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](/docs/en/manage-claude/wif-admin-api).
+
 Update a service account.
 
 Only `description` and `organization_role` are mutable; `name` cannot be
 changed. Archived service accounts cannot be updated; this returns 400.
 Setting `organization_role` to `admin` (even when unchanged) requires an
-interactive credential (a user OAuth token or a Console session). Admin
-API keys are not accepted.
+interactive credential (a user OAuth token or a Console session).
 
 ## Path parameters
 
@@ -115,7 +116,7 @@ API keys are not accepted.
 curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUNT_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
     -d '{}'
 ```
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/github
-fetched_at: 2026-08-24T02:18:38.041536+00:00
+fetched_at: 2026-09-07T05:31:27.756219+00:00
 fetch_method: mintlify_md
 ---
 
@@ -55,15 +55,14 @@ First, create an agent that declares the GitHub MCP server. The agent definition
 
   <MultiFileExample language="cli" label="CLI">
     ```bash CLI
-    AGENT_ID=$(ant beta:agents create --transform id --raw-output < code-reviewer.agent.yaml)
+    ant apply code-reviewer.md
     ```
 
-    <File filename="code-reviewer.agent.yaml">
-      ```yaml
+    <File filename="code-reviewer.md">
+      ```markdown
+      ---
       name: Code Reviewer
-      model:
-        id: claude-opus-5
-      system: You are a code review assistant with access to GitHub.
+      model: claude-opus-5
       mcp_servers:
         - type: url
           name: github
@@ -72,6 +71,9 @@ First, create an agent that declares the GitHub MCP server. The agent definition
         - type: agent_toolset_20260401
         - type: mcp_toolset
           mcp_server_name: github
+      ---
+
+      You are a code review assistant with access to GitHub.
       ```
     </File>
   </MultiFileExample>

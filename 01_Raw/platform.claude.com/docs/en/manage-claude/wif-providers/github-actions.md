@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/wif-providers/github-actions
-fetched_at: 2026-08-24T02:18:38.381388+00:00
+fetched_at: 2026-09-07T05:31:28.227820+00:00
 fetch_method: mintlify_md
 ---
 
@@ -251,9 +251,10 @@ Set the federation environment variables on the job and call the SDK normally. `
   ```
 
   ```csharp C#
-  var result = AnthropicCredentials.Resolve()
-      ?? throw new InvalidOperationException("No federation credentials found in environment");
-  using var client = new AnthropicOidcClient(result);
+  // Reads ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
+  // ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and ANTHROPIC_IDENTITY_TOKEN_FILE
+  // from the job environment.
+  using var client = new AnthropicClient();
 
   var message = await client.Messages.Create(new()
   {

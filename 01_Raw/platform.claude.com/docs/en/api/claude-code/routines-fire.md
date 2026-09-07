@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/claude-code/routines-fire
-fetched_at: 2026-08-17T02:15:18.642899+00:00
+fetched_at: 2026-09-07T05:31:32.080603+00:00
 fetch_method: mintlify_md
 ---
 
@@ -156,7 +156,7 @@ Each successful request creates a new session. There is no idempotency key. If a
 
 Routine runs count against a per-account daily allowance that varies by plan, and the resulting sessions draw down the same Claude Code subscription usage as interactive sessions. When either limit is reached, the endpoint returns `429 rate_limit_error` with a `Retry-After` header. Organizations with extra usage enabled continue past the included allowance on metered overage.
 
-View your remaining daily runs at [claude.ai/code/routines](https://claude.ai/code/routines). For how routine usage interacts with subscription limits and extra usage billing, see [Usage and limits](https://code.claude.com/docs/en/routines#usage-and-limits) in the Claude Code documentation.
+View your remaining daily runs at [claude.ai/code/routines](https://claude.ai/code/routines). To learn how routine usage interacts with subscription limits and extra usage billing, see [Usage and limits](https://code.claude.com/docs/en/routines#usage-and-limits) in the Claude Code documentation.
 
 ## SDK support
 

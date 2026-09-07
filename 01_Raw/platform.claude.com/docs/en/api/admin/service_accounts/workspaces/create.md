@@ -1,12 +1,14 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/service_accounts/workspaces/create
-fetched_at: 2026-08-31T06:29:45.840495+00:00
+fetched_at: 2026-09-07T05:31:45.621066+00:00
 fetch_method: mintlify_md
 ---
 
 # Add Workspace To Service Account
 
 **POST** `/v1/organizations/service_accounts/{service_account_id}/workspaces`
+
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](/docs/en/manage-claude/wif-admin-api).
 
 Add a service account to a workspace with the given `workspace_role`.
 
@@ -15,8 +17,7 @@ from the service-account side; both create the same membership. If the
 service account is already an explicit member of the workspace, its
 `workspace_role` is replaced with the value supplied here. Archived
 workspaces return 400. Archived service accounts cannot be added and are
-rejected. Requires an OAuth bearer or Console session; Admin API keys
-are not accepted.
+rejected.
 
 ## Path parameters
 
@@ -92,7 +93,7 @@ are not accepted.
 curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUNT_ID/workspaces \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
+    -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
     -d '{
           "workspace_id": "workspace_id",
           "workspace_role": "workspace_admin"

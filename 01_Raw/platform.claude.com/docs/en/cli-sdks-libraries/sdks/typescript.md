@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/typescript
-fetched_at: 2026-08-31T06:29:35.817892+00:00
+fetched_at: 2026-09-07T05:31:31.547903+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,7 +24,7 @@ npm install @anthropic-ai/sdk
 
 ## Requirements
 
-TypeScript >= 4.9 is supported.
+TypeScript >= 5.0 is supported.
 
 The following runtimes are supported:
 

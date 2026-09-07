@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/skills
-fetched_at: 2026-08-24T02:18:37.812175+00:00
+fetched_at: 2026-09-07T05:31:27.353323+00:00
 fetch_method: mintlify_md
 ---
 
@@ -225,20 +225,23 @@ Each entry in the `skills` array uses the following fields:
 
   <MultiFileExample language="cli" label="CLI">
     ```bash CLI
-    ant beta:agents create < agent.yaml
+    ant apply agent.md
     ```
 
-    <File filename="agent.yaml">
-      ```yaml
+    <File filename="agent.md">
+      ```markdown
+      ---
       name: Financial Analyst
       model: claude-opus-5
-      system: You are a financial analysis agent.
       skills:
         - type: anthropic
           skill_id: xlsx
         - type: custom
           skill_id: skill_01AbCdEfGhIjKlMnOpQrStUv
           version: latest
+      ---
+
+      You are a financial analysis agent.
       ```
     </File>
   </MultiFileExample>
