@@ -21,12 +21,15 @@ export class Dreams extends APIResource {
    * ```
    */
   create(params: DreamCreateParams, options?: RequestOptions): APIPromise<BetaDream> {
-    const { betas, ...body } = params;
+    const { betas, workspace_id, ...body } = params;
     return this._client.post('/v1/dreams?beta=true', {
       body,
       ...options,
       headers: buildHeaders([
-        { 'anthropic-beta': [...(betas ?? []), 'dreaming-2026-04-21'].toString() },
+        {
+          'anthropic-beta': [...(betas ?? []), 'dreaming-2026-04-21'].toString(),
+          ...(workspace_id != null ? { 'anthropic-workspace-id': workspace_id } : undefined),
+        },
         options?.headers,
       ]),
     });
@@ -47,11 +50,14 @@ export class Dreams extends APIResource {
     params: DreamRetrieveParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BetaDream> {
-    const { betas } = params ?? {};
+    const { betas, workspace_id } = params ?? {};
     return this._client.get(path`/v1/dreams/${dreamID}?beta=true`, {
       ...options,
       headers: buildHeaders([
-        { 'anthropic-beta': [...(betas ?? []), 'dreaming-2026-04-21'].toString() },
+        {
+          'anthropic-beta': [...(betas ?? []), 'dreaming-2026-04-21'].toString(),
+          ...(workspace_id != null ? { 'anthropic-workspace-id': workspace_id } : undefined),
+        },
         options?.headers,
       ]),
     });
@@ -72,12 +78,15 @@ export class Dreams extends APIResource {
     params: DreamListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<BetaDreamsPageCursor, BetaDream> {
-    const { betas, ...query } = params ?? {};
+    const { betas, workspace_id, ...query } = params ?? {};
     return this._client.getAPIList('/v1/dreams?beta=true', PageCursor<BetaDream>, {
       query,
       ...options,
       headers: buildHeaders([
-        { 'anthropic-beta': [...(betas ?? []), 'dreaming-2026-04-21'].toString() },
+        {
+          'anthropic-beta': [...(betas ?? []), 'dreaming-2026-04-21'].toString(),
+          ...(workspace_id != null ? { 'anthropic-workspace-id': workspace_id } : undefined),
+        },
         options?.headers,
       ]),
     });
@@ -98,11 +107,14 @@ export class Dreams extends APIResource {
     params: DreamArchiveParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BetaDream> {
-    const { betas } = params ?? {};
+    const { betas, workspace_id } = params ?? {};
     return this._client.post(path`/v1/dreams/${dreamID}/archive?beta=true`, {
       ...options,
       headers: buildHeaders([
-        { 'anthropic-beta': [...(betas ?? []), 'dreaming-2026-04-21'].toString() },
+        {
+          'anthropic-beta': [...(betas ?? []), 'dreaming-2026-04-21'].toString(),
+          ...(workspace_id != null ? { 'anthropic-workspace-id': workspace_id } : undefined),
+        },
         options?.headers,
       ]),
     });
@@ -123,11 +135,14 @@ export class Dreams extends APIResource {
     params: DreamCancelParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BetaDream> {
-    const { betas } = params ?? {};
+    const { betas, workspace_id } = params ?? {};
     return this._client.post(path`/v1/dreams/${dreamID}/cancel?beta=true`, {
       ...options,
       headers: buildHeaders([
-        { 'anthropic-beta': [...(betas ?? []), 'dreaming-2026-04-21'].toString() },
+        {
+          'anthropic-beta': [...(betas ?? []), 'dreaming-2026-04-21'].toString(),
+          ...(workspace_id != null ? { 'anthropic-workspace-id': workspace_id } : undefined),
+        },
         options?.headers,
       ]),
     });
@@ -321,6 +336,27 @@ export interface BetaDreamUsage {
 }
 
 /**
+ * The `output_behavior.memory_store_id` target is still held by a prior
+ * `{type: "update_existing"}` dream — one that is `pending` or `running`, or was
+ * canceled with its final writes still landing. Rarely the named dream has just
+ * finished (`completed`/`failed`) and its execution is still closing; an immediate
+ * retry then almost always succeeds. The message names the holding dream when the
+ * server can identify it (rarely omitted); poll it to a terminal state or cancel
+ * it, then retry. Carried with `x-should-retry: false`.
+ */
+export type BetaDreamingError =
+  | BetaAPI.BetaInvalidRequestError
+  | BetaAPI.BetaAuthenticationError
+  | BetaAPI.BetaBillingError
+  | BetaAPI.BetaPermissionError
+  | BetaAPI.BetaNotFoundError
+  | BetaAPI.BetaRateLimitError
+  | BetaAPI.BetaGatewayTimeoutError
+  | BetaAPI.BetaAPIError
+  | BetaAPI.BetaOverloadedError
+  | BetaTargetStoreHeldError;
+
+/**
  * The default destination: the job creates a new output memory store as a clone of
  * the memory_store input and writes the consolidated memories into it. The input
  * store is never mutated.
@@ -345,6 +381,25 @@ export interface BetaOutputBehaviorUpdateExisting {
   memory_store_id: string;
 
   type: 'update_existing';
+}
+
+/**
+ * The `output_behavior.memory_store_id` target is still held by a prior
+ * `{type: "update_existing"}` dream — one that is `pending` or `running`, or was
+ * canceled with its final writes still landing. Rarely the named dream has just
+ * finished (`completed`/`failed`) and its execution is still closing; an immediate
+ * retry then almost always succeeds. The message names the holding dream when the
+ * server can identify it (rarely omitted); poll it to a terminal state or cancel
+ * it, then retry. Carried with `x-should-retry: false`.
+ */
+export interface BetaTargetStoreHeldError {
+  type: 'conflict_error';
+
+  /**
+   * Human-readable description of the conflict, naming the dream that holds the
+   * target store when the server can identify it.
+   */
+  message?: string;
 }
 
 export interface DreamCreateParams {
@@ -374,6 +429,16 @@ export interface DreamCreateParams {
    * Header param: Optional header to specify the beta version(s) you want to use.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
+
+  /**
+   * Header param: Optional header to select the Workspace for this request. The
+   * value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+   *
+   * Only needed for credentials that can act on more than one Workspace. A
+   * credential that belongs to a specific Workspace may omit it; if sent, it must
+   * match that Workspace.
+   */
+  workspace_id?: string;
 }
 
 export interface DreamRetrieveParams {
@@ -381,6 +446,16 @@ export interface DreamRetrieveParams {
    * Optional header to specify the beta version(s) you want to use.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
+
+  /**
+   * Optional header to select the Workspace for this request. The value is a
+   * Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+   *
+   * Only needed for credentials that can act on more than one Workspace. A
+   * credential that belongs to a specific Workspace may omit it; if sent, it must
+   * match that Workspace.
+   */
+  workspace_id?: string;
 }
 
 export interface DreamListParams extends PageCursorParams {
@@ -411,6 +486,16 @@ export interface DreamListParams extends PageCursorParams {
    * Header param: Optional header to specify the beta version(s) you want to use.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
+
+  /**
+   * Header param: Optional header to select the Workspace for this request. The
+   * value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+   *
+   * Only needed for credentials that can act on more than one Workspace. A
+   * credential that belongs to a specific Workspace may omit it; if sent, it must
+   * match that Workspace.
+   */
+  workspace_id?: string;
 }
 
 export interface DreamArchiveParams {
@@ -418,6 +503,16 @@ export interface DreamArchiveParams {
    * Optional header to specify the beta version(s) you want to use.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
+
+  /**
+   * Optional header to select the Workspace for this request. The value is a
+   * Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+   *
+   * Only needed for credentials that can act on more than one Workspace. A
+   * credential that belongs to a specific Workspace may omit it; if sent, it must
+   * match that Workspace.
+   */
+  workspace_id?: string;
 }
 
 export interface DreamCancelParams {
@@ -425,6 +520,16 @@ export interface DreamCancelParams {
    * Optional header to specify the beta version(s) you want to use.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
+
+  /**
+   * Optional header to select the Workspace for this request. The value is a
+   * Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+   *
+   * Only needed for credentials that can act on more than one Workspace. A
+   * credential that belongs to a specific Workspace may omit it; if sent, it must
+   * match that Workspace.
+   */
+  workspace_id?: string;
 }
 
 export declare namespace Dreams {
@@ -440,9 +545,11 @@ export declare namespace Dreams {
     type BetaDreamSessionsInput as BetaDreamSessionsInput,
     type BetaDreamStatus as BetaDreamStatus,
     type BetaDreamUsage as BetaDreamUsage,
+    type BetaDreamingError as BetaDreamingError,
     type BetaOutputBehavior as BetaOutputBehavior,
     type BetaOutputBehaviorCreateNew as BetaOutputBehaviorCreateNew,
     type BetaOutputBehaviorUpdateExisting as BetaOutputBehaviorUpdateExisting,
+    type BetaTargetStoreHeldError as BetaTargetStoreHeldError,
     type BetaDreamsPageCursor as BetaDreamsPageCursor,
     type DreamCreateParams as DreamCreateParams,
     type DreamRetrieveParams as DreamRetrieveParams,

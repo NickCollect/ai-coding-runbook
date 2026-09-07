@@ -146,12 +146,15 @@ export class Sessions extends APIResource {
    * ```
    */
   create(params: SessionCreateParams, options?: RequestOptions): APIPromise<BetaManagedAgentsSession> {
-    const { betas, ...body } = params;
+    const { betas, workspace_id, ...body } = params;
     return this._client.post('/v1/sessions?beta=true', {
       body,
       ...options,
       headers: buildHeaders([
-        { 'anthropic-beta': [...(betas ?? []), 'managed-agents-2026-04-01'].toString() },
+        {
+          'anthropic-beta': [...(betas ?? []), 'managed-agents-2026-04-01'].toString(),
+          ...(workspace_id != null ? { 'anthropic-workspace-id': workspace_id } : undefined),
+        },
         options?.headers,
       ]),
     });
@@ -173,11 +176,14 @@ export class Sessions extends APIResource {
     params: SessionRetrieveParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BetaManagedAgentsSession> {
-    const { betas } = params ?? {};
+    const { betas, workspace_id } = params ?? {};
     return this._client.get(path`/v1/sessions/${sessionID}?beta=true`, {
       ...options,
       headers: buildHeaders([
-        { 'anthropic-beta': [...(betas ?? []), 'managed-agents-2026-04-01'].toString() },
+        {
+          'anthropic-beta': [...(betas ?? []), 'managed-agents-2026-04-01'].toString(),
+          ...(workspace_id != null ? { 'anthropic-workspace-id': workspace_id } : undefined),
+        },
         options?.headers,
       ]),
     });
@@ -199,12 +205,15 @@ export class Sessions extends APIResource {
     params: SessionUpdateParams,
     options?: RequestOptions,
   ): APIPromise<BetaManagedAgentsSession> {
-    const { betas, ...body } = params;
+    const { betas, workspace_id, ...body } = params;
     return this._client.post(path`/v1/sessions/${sessionID}?beta=true`, {
       body,
       ...options,
       headers: buildHeaders([
-        { 'anthropic-beta': [...(betas ?? []), 'managed-agents-2026-04-01'].toString() },
+        {
+          'anthropic-beta': [...(betas ?? []), 'managed-agents-2026-04-01'].toString(),
+          ...(workspace_id != null ? { 'anthropic-workspace-id': workspace_id } : undefined),
+        },
         options?.headers,
       ]),
     });
@@ -225,7 +234,7 @@ export class Sessions extends APIResource {
     params: SessionListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<BetaManagedAgentsSessionsBidirectionalPageCursor, BetaManagedAgentsSession> {
-    const { betas, ...query } = params ?? {};
+    const { betas, workspace_id, ...query } = params ?? {};
     return this._client.getAPIList(
       '/v1/sessions?beta=true',
       BidirectionalPageCursor<BetaManagedAgentsSession>,
@@ -233,7 +242,10 @@ export class Sessions extends APIResource {
         query,
         ...options,
         headers: buildHeaders([
-          { 'anthropic-beta': [...(betas ?? []), 'managed-agents-2026-04-01'].toString() },
+          {
+            'anthropic-beta': [...(betas ?? []), 'managed-agents-2026-04-01'].toString(),
+            ...(workspace_id != null ? { 'anthropic-workspace-id': workspace_id } : undefined),
+          },
           options?.headers,
         ]),
       },
@@ -256,11 +268,14 @@ export class Sessions extends APIResource {
     params: SessionDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BetaManagedAgentsDeletedSession> {
-    const { betas } = params ?? {};
+    const { betas, workspace_id } = params ?? {};
     return this._client.delete(path`/v1/sessions/${sessionID}?beta=true`, {
       ...options,
       headers: buildHeaders([
-        { 'anthropic-beta': [...(betas ?? []), 'managed-agents-2026-04-01'].toString() },
+        {
+          'anthropic-beta': [...(betas ?? []), 'managed-agents-2026-04-01'].toString(),
+          ...(workspace_id != null ? { 'anthropic-workspace-id': workspace_id } : undefined),
+        },
         options?.headers,
       ]),
     });
@@ -282,11 +297,14 @@ export class Sessions extends APIResource {
     params: SessionArchiveParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BetaManagedAgentsSession> {
-    const { betas } = params ?? {};
+    const { betas, workspace_id } = params ?? {};
     return this._client.post(path`/v1/sessions/${sessionID}/archive?beta=true`, {
       ...options,
       headers: buildHeaders([
-        { 'anthropic-beta': [...(betas ?? []), 'managed-agents-2026-04-01'].toString() },
+        {
+          'anthropic-beta': [...(betas ?? []), 'managed-agents-2026-04-01'].toString(),
+          ...(workspace_id != null ? { 'anthropic-workspace-id': workspace_id } : undefined),
+        },
         options?.headers,
       ]),
     });
@@ -614,7 +632,7 @@ export type BetaManagedAgentsMultiagentRosterEntryParams =
   | BetaManagedAgentsAdvisorParams;
 
 /**
- * Evaluation state for a single outcome defined via a define_outcome event.
+ * Evaluation state for a single outcome defined via a `define_outcome` event.
  */
 export interface BetaManagedAgentsOutcomeEvaluationResource {
   /**
@@ -628,9 +646,9 @@ export interface BetaManagedAgentsOutcomeEvaluationResource {
   description: string;
 
   /**
-   * Grader's verdict text from the most recent evaluation. For satisfied, explains
-   * why criteria are met; for needs_revision (intermediate), what's missing; for
-   * failed, why unrecoverable.
+   * Grader's verdict text from the most recent evaluation. For `satisfied`, explains
+   * why criteria are met; for `needs_revision` (intermediate), what's missing; for
+   * `failed`, why unrecoverable.
    */
   explanation: string | null;
 
@@ -702,7 +720,7 @@ export interface BetaManagedAgentsSession {
   metadata: { [key: string]: string };
 
   /**
-   * Per-outcome evaluation state. One entry per define_outcome event sent to the
+   * Per-outcome evaluation state. One entry per `define_outcome` event sent to the
    * session.
    */
   outcome_evaluations: Array<BetaManagedAgentsOutcomeEvaluationResource>;
@@ -826,7 +844,7 @@ export interface BetaManagedAgentsSessionMultiagentCoordinator {
  */
 export interface BetaManagedAgentsSessionStats {
   /**
-   * Cumulative time in seconds the session spent in running status. Excludes idle
+   * Cumulative time in seconds the session spent in `running` status. Excludes idle
    * time.
    */
   active_seconds?: number;
@@ -1119,6 +1137,16 @@ export interface SessionCreateParams {
    * Header param: Optional header to specify the beta version(s) you want to use.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
+
+  /**
+   * Header param: Optional header to select the Workspace for this request. The
+   * value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+   *
+   * Only needed for credentials that can act on more than one Workspace. A
+   * credential that belongs to a specific Workspace may omit it; if sent, it must
+   * match that Workspace.
+   */
+  workspace_id?: string;
 }
 
 export interface SessionRetrieveParams {
@@ -1126,6 +1154,16 @@ export interface SessionRetrieveParams {
    * Optional header to specify the beta version(s) you want to use.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
+
+  /**
+   * Optional header to select the Workspace for this request. The value is a
+   * Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+   *
+   * Only needed for credentials that can act on more than one Workspace. A
+   * credential that belongs to a specific Workspace may omit it; if sent, it must
+   * match that Workspace.
+   */
+  workspace_id?: string;
 }
 
 export interface SessionUpdateParams {
@@ -1164,6 +1202,16 @@ export interface SessionUpdateParams {
    * Header param: Optional header to specify the beta version(s) you want to use.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
+
+  /**
+   * Header param: Optional header to select the Workspace for this request. The
+   * value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+   *
+   * Only needed for credentials that can act on more than one Workspace. A
+   * credential that belongs to a specific Workspace may omit it; if sent, it must
+   * match that Workspace.
+   */
+  workspace_id?: string;
 }
 
 export interface SessionListParams extends BidirectionalPageCursorParams {
@@ -1173,7 +1221,7 @@ export interface SessionListParams extends BidirectionalPageCursorParams {
   agent_id?: string;
 
   /**
-   * Query param: Filter by agent version. Only applies when agent_id is also set.
+   * Query param: Filter by agent version. Only applies when `agent_id` is also set.
    */
   agent_version?: number;
 
@@ -1209,14 +1257,14 @@ export interface SessionListParams extends BidirectionalPageCursorParams {
   include_archived?: boolean;
 
   /**
-   * Query param: Filter sessions whose resources contain a memory_store with this
+   * Query param: Filter sessions whose resources contain a `memory_store` with this
    * memory store ID.
    */
   memory_store_id?: string;
 
   /**
-   * Query param: Sort direction for results, ordered by created_at. Defaults to desc
-   * (newest first).
+   * Query param: Sort direction for results, ordered by `created_at`. Defaults to
+   * `desc` (newest first).
    */
   order?: 'asc' | 'desc';
 
@@ -1230,6 +1278,16 @@ export interface SessionListParams extends BidirectionalPageCursorParams {
    * Header param: Optional header to specify the beta version(s) you want to use.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
+
+  /**
+   * Header param: Optional header to select the Workspace for this request. The
+   * value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+   *
+   * Only needed for credentials that can act on more than one Workspace. A
+   * credential that belongs to a specific Workspace may omit it; if sent, it must
+   * match that Workspace.
+   */
+  workspace_id?: string;
 }
 
 export interface SessionDeleteParams {
@@ -1237,6 +1295,16 @@ export interface SessionDeleteParams {
    * Optional header to specify the beta version(s) you want to use.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
+
+  /**
+   * Optional header to select the Workspace for this request. The value is a
+   * Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+   *
+   * Only needed for credentials that can act on more than one Workspace. A
+   * credential that belongs to a specific Workspace may omit it; if sent, it must
+   * match that Workspace.
+   */
+  workspace_id?: string;
 }
 
 export interface SessionArchiveParams {
@@ -1244,6 +1312,16 @@ export interface SessionArchiveParams {
    * Optional header to specify the beta version(s) you want to use.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
+
+  /**
+   * Optional header to select the Workspace for this request. The value is a
+   * Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+   *
+   * Only needed for credentials that can act on more than one Workspace. A
+   * credential that belongs to a specific Workspace may omit it; if sent, it must
+   * match that Workspace.
+   */
+  workspace_id?: string;
 }
 
 Sessions.Events = Events;

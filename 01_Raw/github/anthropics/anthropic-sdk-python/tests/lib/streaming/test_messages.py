@@ -9,11 +9,13 @@ from respx import MockRouter
 
 from anthropic import Stream, Anthropic, AsyncStream, AsyncAnthropic
 from anthropic._utils import assert_signatures_in_sync
-from anthropic._compat import PYDANTIC_V1
+from anthropic._compat import PYDANTIC_V1, get_model_fields
 from anthropic.lib.streaming import InputJsonEvent, ParsedMessageStreamEvent
 from anthropic.types.message import Message
 from anthropic.resources.messages import DEPRECATED_MODELS
 from anthropic.lib.streaming._messages import TRACKS_TOOL_INPUT
+from anthropic.types.message_delta_usage import MessageDeltaUsage
+from anthropic.types.raw_message_delta_event import Delta as RawMessageDelta, RawMessageDeltaEvent
 
 from .helpers import get_response, to_async_iter
 
@@ -584,6 +586,29 @@ class TestAsyncMessages:
         stop_event.model_dump_json()
 
 
+def test_message_delta_fields_are_all_accumulated() -> None:
+    # tripwire: handle a new field in accumulate_event (src/anthropic/lib/streaming/_messages.py), then list it here
+    assert set(get_model_fields(RawMessageDeltaEvent)) == {
+        "delta",
+        "type",
+        "usage",
+    }
+    assert set(get_model_fields(RawMessageDelta)) == {
+        "container",
+        "stop_details",
+        "stop_reason",
+        "stop_sequence",
+    }
+    assert set(get_model_fields(MessageDeltaUsage)) == {
+        "cache_creation_input_tokens",
+        "cache_read_input_tokens",
+        "input_tokens",
+        "output_tokens",
+        "output_tokens_details",
+        "server_tool_use",
+    }
+
+
 @pytest.mark.parametrize("sync", [True, False], ids=["sync", "async"])
 def test_stream_method_definition_in_sync(sync: bool) -> None:
     client: Anthropic | AsyncAnthropic = sync_client if sync else async_client
@@ -604,24 +629,18 @@ def test_tracks_tool_input_type_alias_is_up_to_date() -> None:
 
     from anthropic.types.content_block import ContentBlock
 
-    # Get the content block union type
     content_block_union = get_args(ContentBlock)[0]
 
-    # Get all types from ContentBlock union
     content_block_types = get_args(content_block_union)
 
-    # Types that should have an input property
     types_with_input: Set[Any] = set()
 
-    # Check each type to see if it has an input property in its model_fields
     for block_type in content_block_types:
         if issubclass(block_type, BaseModel) and "input" in block_type.model_fields:
             types_with_input.add(block_type)
 
-    # Get the types included in TRACKS_TOOL_INPUT
     tracked_types = TRACKS_TOOL_INPUT
 
-    # Make sure all types with input are tracked
     for block_type in types_with_input:
         assert block_type in tracked_types, (
             f"ContentBlock type {block_type.__name__} has an input property, "

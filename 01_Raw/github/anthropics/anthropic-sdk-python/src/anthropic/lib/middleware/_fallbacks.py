@@ -722,9 +722,6 @@ class BetaRefusalFallbackMiddleware(Middleware):
                 await current.aclose()
 
 
-# --- hop consumption ---------------------------------------------------------
-
-
 class _Refusal(BaseModel):
     token: Optional[str]
     """The minted credit token; `None` for a token-less start-of-stream refusal."""
@@ -737,6 +734,11 @@ class _Refusal(BaseModel):
     event: Dict[str, Any]
     """The suppressed refusal `message_delta` event, verbatim — replayed if every
     remaining entry fails over HTTP."""
+
+    suppressed_start_message: Optional[Dict[str, Any]] = None
+    """The `message` object from a spliced fallback hop's suppressed `message_start`
+    event. Retained so its `input_transformations` field can be forwarded onto the
+    replayed refusal `message_delta` event."""
 
 
 class _SpliceInfo(BaseModel):
@@ -795,7 +797,8 @@ class _HopReader:
 
     A spliced hop has its block indices shifted by `index_base` and its
     terminal message_delta's usage rewritten to the `usage.iterations` chain
-    shape.
+    shape. When its `message_start` was not re-emitted, its
+    `input_transformations` are copied onto that message_delta.
 
     A refusal that can be chained — an entry remains, and either a
     `fallback_credit_token` was minted or nothing has streamed yet — ends the
@@ -907,6 +910,7 @@ class _HopReader:
                             has_prefill_claim=details is not None and details.get("fallback_has_prefill_claim") is True,
                             usage=usage,
                             event=event,
+                            suppressed_start_message=self._suppressed_start_message(),
                         ),
                         model=self._model,
                         start_event=self._start_event,
@@ -948,6 +952,7 @@ class _HopReader:
                     _serving_iteration_entry(usage, splice.model),
                 ]
                 event["usage"] = usage
+                _forward_input_transformations(event, self._suppressed_start_message())
                 return [*frames, _emit("message_delta", event)]
             return [*frames, _passthrough_sse(sse)]
 
@@ -958,6 +963,14 @@ class _HopReader:
         # message_stop, ping, error, unrecognised — and for stream A every
         # event — pass through in their original wire bytes.
         return [_passthrough_sse(sse)]
+
+    def _suppressed_start_message(self) -> dict[str, Any] | None:
+        """`message` from this fallback's `message_start` when it was not
+        re-emitted because the caller already received a `message_start`.
+        `None` for stream A, whose start is always emitted."""
+        if self._splice is None or not self._wire_open or self._start_event is None:
+            return None
+        return _as_dict(self._start_event.get("message"))
 
     def _open(self) -> list[bytes]:
         """Open the wire for this hop: its message_start (raw for stream A;
@@ -1162,8 +1175,9 @@ class _ChainState:
         """Degrade to the suppressed refusal when every remaining entry failed
         over HTTP: replay its message_delta verbatim — `recommended_model`
         stamped from the final failure (the failed model for capacity errors,
-        `null` otherwise) and `usage.iterations` carrying the recorded chain —
-        then message_stop.
+        `null` otherwise), `usage.iterations` carrying the recorded chain, and
+        `input_transformations` copied from a `message_start` that was not
+        re-emitted — then message_stop.
         """
         frames: list[bytes] = []
         if not self.wire_open and self.last_start_event is not None:
@@ -1183,9 +1197,20 @@ class _ChainState:
         usage = _as_dict(event.get("usage")) or {}
         usage["iterations"] = _copy.deepcopy(self.iterations)
         event["usage"] = usage
+        _forward_input_transformations(event, self.last_refusal.suppressed_start_message)
         frames.append(_emit("message_delta", event))
         frames.append(_emit("message_stop", {"type": "message_stop"}))
         return frames
+
+
+def _forward_input_transformations(event: dict[str, Any], suppressed_start_message: dict[str, Any] | None) -> None:
+    """Copy `input_transformations` from a fallback's `message_start` that was
+    not re-emitted onto the emitted `message_delta`, matching what a server-side
+    mid-stream fallback sends. A list already on the delta is kept."""
+    if suppressed_start_message is None or "input_transformations" in event:
+        return
+    if "input_transformations" in suppressed_start_message:
+        event["input_transformations"] = _copy.deepcopy(suppressed_start_message["input_transformations"])
 
 
 def _declined_iteration_entries(refusal: _Refusal, model_label: str) -> list[dict[str, Any]]:
@@ -1283,9 +1308,6 @@ class _BlockTracker:
         self._open.clear()
 
 
-# --- block accumulation & prefill conversion -------------------------------
-
-
 def _apply_delta(blocks: list[tuple[int, dict[str, Any]]], index: int, delta: dict[str, Any]) -> None:
     """Apply a content_block_delta to the accumulating block at `index`."""
     block = next((block for block_index, block in blocks if block_index == index), None)
@@ -1336,9 +1358,6 @@ def _to_prefill_blocks(response_blocks: list[dict[str, Any]]) -> list[Any]:
     while out and out[-1].get("type") in ("thinking", "redacted_thinking"):
         out.pop()
     return out
-
-
-# --- helpers --------------------------------------------------------------
 
 
 def _strip_seam_blocks(body: dict[str, Any]) -> dict[str, Any]:

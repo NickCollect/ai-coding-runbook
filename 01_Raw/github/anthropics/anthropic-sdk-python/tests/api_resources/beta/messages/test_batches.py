@@ -58,6 +58,8 @@ class TestBatches:
                             {
                                 "content": "Hello, world",
                                 "role": "user",
+                                "clear_at": "next_user_message",
+                                "output_config": {"effort": "low"},
                             }
                         ],
                         "model": "claude-opus-5",
@@ -151,6 +153,7 @@ class TestBatches:
                         ],
                         "thinking": {
                             "type": "adaptive",
+                            "block_binding": {"prefix_mismatch_behavior": "error"},
                             "display": "summarized",
                         },
                         "tool_choice": {
@@ -186,6 +189,7 @@ class TestBatches:
             ],
             betas=["string"],
             user_profile_id="anthropic-user-profile-id",
+            workspace_id="wrkspc_011CZkZaBF1tNoB5wlCeusgy",
         )
         assert_matches_type(BetaMessageBatch, batch, path=["response"])
 
@@ -518,6 +522,8 @@ class TestAsyncBatches:
                             {
                                 "content": "Hello, world",
                                 "role": "user",
+                                "clear_at": "next_user_message",
+                                "output_config": {"effort": "low"},
                             }
                         ],
                         "model": "claude-opus-5",
@@ -611,6 +617,7 @@ class TestAsyncBatches:
                         ],
                         "thinking": {
                             "type": "adaptive",
+                            "block_binding": {"prefix_mismatch_behavior": "error"},
                             "display": "summarized",
                         },
                         "tool_choice": {
@@ -646,6 +653,7 @@ class TestAsyncBatches:
             ],
             betas=["string"],
             user_profile_id="anthropic-user-profile-id",
+            workspace_id="wrkspc_011CZkZaBF1tNoB5wlCeusgy",
         )
         assert_matches_type(BetaMessageBatch, batch, path=["response"])
 

@@ -45,5 +45,7 @@ class MemoryVersionListParams(TypedDict, total=False):
     view: BetaManagedAgentsMemoryView
     """Query parameter for view"""
 
-    betas: Annotated[List[AnthropicBetaParam], PropertyInfo(alias="anthropic-beta")]
+    betas: List[AnthropicBetaParam]
     """Optional header to specify the beta version(s) you want to use."""
+
+    workspace_id: str

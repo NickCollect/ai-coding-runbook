@@ -3,10 +3,9 @@
 from __future__ import annotations
 
 from typing import List
-from typing_extensions import Required, Annotated, TypedDict
+from typing_extensions import Required, TypedDict
 
 from ..._types import FileTypes
-from ..._utils import PropertyInfo
 from ..anthropic_beta_param import AnthropicBetaParam
 
 __all__ = ["FileUploadParams"]
@@ -14,7 +13,12 @@ __all__ = ["FileUploadParams"]
 
 class FileUploadParams(TypedDict, total=False):
     file: Required[FileTypes]
-    """The file to upload"""
+    """The file to upload.
+
+    Only the final path component of the part's `filename` is kept; an absent or
+    empty `filename` is replaced with `unnamed` plus the extension for the file's
+    stored `mime_type`, when known.
+    """
 
     expires_in_seconds: int
     """
@@ -22,5 +26,7 @@ class FileUploadParams(TypedDict, total=False):
     unavailable. Must be between 3600 (one hour) and 7776000 (ninety days).
     """
 
-    betas: Annotated[List[AnthropicBetaParam], PropertyInfo(alias="anthropic-beta")]
+    betas: List[AnthropicBetaParam]
     """Optional header to specify the beta version(s) you want to use."""
+
+    workspace_id: str

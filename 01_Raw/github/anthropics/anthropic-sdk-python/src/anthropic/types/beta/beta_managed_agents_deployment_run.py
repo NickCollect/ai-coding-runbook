@@ -4,8 +4,7 @@ from typing import Union, Optional
 from datetime import datetime
 from typing_extensions import Literal, Annotated, TypeAlias
 
-from ..._utils import PropertyInfo
-from ..._models import BaseModel
+from ..._models import BaseModel, UnionDiscriminator
 from .beta_managed_agents_agent_reference import BetaManagedAgentsAgentReference
 from .beta_managed_agents_trigger_context import BetaManagedAgentsTriggerContext
 from .beta_managed_agents_unknown_run_error import BetaManagedAgentsUnknownRunError
@@ -49,7 +48,7 @@ Error: TypeAlias = Annotated[
         BetaManagedAgentsMCPEgressBlockedRunError,
         None,
     ],
-    PropertyInfo(discriminator="type"),
+    UnionDiscriminator("type"),
 ]
 
 
@@ -80,7 +79,7 @@ class BetaManagedAgentsDeploymentRun(BaseModel):
     session_id: Optional[str] = None
     """Populated on success.
 
-    Null on creation failure. Exactly one of session_id or error is non-null.
+    Null on creation failure. Exactly one of `session_id` or `error` is non-null.
     """
 
     trigger_context: BetaManagedAgentsTriggerContext

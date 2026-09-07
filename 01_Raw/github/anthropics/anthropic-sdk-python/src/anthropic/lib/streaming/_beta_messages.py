@@ -126,7 +126,6 @@ class BetaMessageStream(Generic[ResponseFormatT]):
         """Blocks until the stream has been consumed"""
         consume_sync_iterator(self)
 
-    # properties
     @property
     def current_message_snapshot(self) -> ParsedBetaMessage[ResponseFormatT]:
         assert self.__final_message_snapshot is not None
@@ -279,7 +278,6 @@ class BetaAsyncMessageStream(Generic[ResponseFormatT]):
         """Waits until the stream has been consumed"""
         await consume_async_iterator(self)
 
-    # properties
     @property
     def current_message_snapshot(self) -> ParsedBetaMessage[ResponseFormatT]:
         assert self.__final_message_snapshot is not None
@@ -556,6 +554,10 @@ def accumulate_event(
         current_snapshot.usage.output_tokens = event.usage.output_tokens
         if event.context_management is not None:
             current_snapshot.context_management = event.context_management
+        # only sent on `message_delta` after a mid-stream fallback, in which case it
+        # replaces the `message_start` value; otherwise that value must survive
+        if event.input_transformations is not None:
+            current_snapshot.input_transformations = event.input_transformations
 
         # Usage counts on a message_delta are cumulative totals, so they overwrite rather
         # than add; optional ones are omitted when not applicable, in which case the
