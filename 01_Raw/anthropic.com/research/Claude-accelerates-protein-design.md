@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/Claude-accelerates-protein-design
-fetched_at: 2026-08-31T06:29:33.645031+00:00
+fetched_at: 2026-09-07T05:31:27.906519+00:00
 title: "How Claude is accelerating protein design and analytical chemistry \\ Anthropic"
 ---
 
@@ -163,6 +163,12 @@ Below is a list of documents that provide further technical depth and more detai
 
 ## Related content
 
+### Formalizing Fermat's Last Theorem
+
+We are sharing the first complete computer-checked proof of Fermat’s Last Theorem. Claude worked largely autonomously over 11 days to write the proof in the Lean programming language. Below, we describe how the formalization was done and share some thoughts about what this work could mean for research mathematics.
+
+[Read more](https://www.anthropic.com/research/formalizing-fermats-last-theorem)
+
 ### Automated researchers can reliably mitigate alignment failures
 
 We had Claude autonomously train models to improve their performance on several public benchmarks that measure 10 categories of alignment failure. For all 10, Claude found fixes that improved the target benchmarks without degrading capabilities.
@@ -174,12 +180,6 @@ We had Claude autonomously train models to improve their performance on several 
 Earlier this year, we ran a pilot giving external researchers access to aggregate, real-world Claude usage data. Three research groups designed their own studies for Anthropic Insights, our privacy-preserving analysis tool. In this post, we share high-level results from those studies and what we learned running this pilot.
 
 [Read more](https://www.anthropic.com/research/enabling-independent-research)
-
-### Patterns and problems in emerging multiagent systems
-
-Here, we identify a few examples of behavioral tendencies in current frontier models and show how they can produce unexpected systemic failures, in hopes of starting a conversation about mitigating these risks.
-
-[Read more](https://www.anthropic.com/research/multiagent-systems)
 
 ## Subscribe to Anthropic Science
 

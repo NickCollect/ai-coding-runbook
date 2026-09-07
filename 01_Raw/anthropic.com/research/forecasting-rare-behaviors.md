@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/forecasting-rare-behaviors
-fetched_at: 2026-08-31T06:29:35.324366+00:00
+fetched_at: 2026-09-07T05:31:30.294494+00:00
 title: "Forecasting rare language model behaviors \\ Anthropic"
 ---
 
@@ -56,6 +56,12 @@ If you’re interested in working on problems like deployment evaluations or jai
 
 ## Related content
 
+### Formalizing Fermat's Last Theorem
+
+We are sharing the first complete computer-checked proof of Fermat’s Last Theorem. Claude worked largely autonomously over 11 days to write the proof in the Lean programming language. Below, we describe how the formalization was done and share some thoughts about what this work could mean for research mathematics.
+
+[Read more](https://www.anthropic.com/research/formalizing-fermats-last-theorem)
+
 ### Automated researchers can reliably mitigate alignment failures
 
 We had Claude autonomously train models to improve their performance on several public benchmarks that measure 10 categories of alignment failure. For all 10, Claude found fixes that improved the target benchmarks without degrading capabilities.
@@ -67,9 +73,3 @@ We had Claude autonomously train models to improve their performance on several 
 Earlier this year, we ran a pilot giving external researchers access to aggregate, real-world Claude usage data. Three research groups designed their own studies for Anthropic Insights, our privacy-preserving analysis tool. In this post, we share high-level results from those studies and what we learned running this pilot.
 
 [Read more](https://www.anthropic.com/research/enabling-independent-research)
-
-### How Claude is accelerating protein design and analytical chemistry
-
-In this post, we share two results that show how Claude can help life scientists increase the pace of their research.
-
-[Read more](https://www.anthropic.com/research/Claude-accelerates-protein-design)
