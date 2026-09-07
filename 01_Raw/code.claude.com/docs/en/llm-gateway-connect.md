@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/llm-gateway-connect
-fetched_at: 2026-08-31T06:29:42.385900+00:00
+fetched_at: 2026-09-07T05:31:24.036451+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ This page is for developers running Claude Code through a gateway their organiza
 
 <Note>
   * To deploy a gateway for your organization, see [Roll out an LLM gateway](/docs/en/llm-gateway-rollout)
-  * For what Claude Code sends to a gateway, see the [gateway protocol reference](/docs/en/llm-gateway-protocol)
+  * For what Claude Code sends to a gateway, see the [gateway compatibility guide](/docs/en/llm-gateway-protocol)
 </Note>
 
 ## Check for an existing configuration
@@ -99,7 +99,7 @@ Replace the values with the ones your gateway team gave you:
 
 Shell exports apply only to that terminal session and programs started from it. An editor launched from the dock or Start menu won't see them. To make the values persist across new terminals, add the same lines to your shell profile, such as `~/.zshrc`, `~/.bashrc`, or your PowerShell `$PROFILE`.
 
-If you export the gateway only in your shell, it doesn't reliably reach background agents hosted by the [supervisor](/docs/en/agent-view#how-background-sessions-are-hosted); see [how each background session sources its gateway](/docs/en/agent-view#the-supervisor-process). Use a settings file for any gateway that background agents must always route through.
+If you export the gateway only in your shell, it doesn't reliably reach background agents hosted by the [supervisor](/docs/en/agent-view#how-background-sessions-are-hosted); see [how each background session sources its gateway](/docs/en/agent-view#llm-gateway). Use a settings file for any gateway that background agents must always route through.
 
 #### Set in a settings file
 
@@ -305,6 +305,8 @@ You can also set `ANTHROPIC_CUSTOM_HEADERS` in the `env` block of a settings fil
 }
 ```
 
+Routing and tenant header names like these count as [headers that need approval](/docs/en/server-managed-settings#environment-variables-and-the-approval-dialog). When the headers come from a project settings file, Claude Code applies them under the [rules for when it applies `env` values](/docs/en/settings-reference#when-claude-code-applies-env-values).
+
 ### Add gateway models to the model picker
 
 With model discovery enabled, Claude Code queries the gateway for its model list at startup and adds those names to the `/model` picker alongside the built-in entries. If you or your administrator set `replaceBuiltInOptions` in a [`modelPicker`](/docs/en/settings-reference#modelpicker) lineup, Claude Code hides the discovered names too. It keeps a row for the model the session is already using.
@@ -313,7 +315,9 @@ Enable it if your gateway serves model names that aren't in Claude Code's built-
 
 To enable it, set `CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1` in your shell or in the `env` block of `~/.claude/settings.json`.
 
-Discovered models appear as additional `/model` entries labeled `From gateway`. To confirm discovery ran, start `claude --debug` and look for the `[gatewayDiscovery]` lines in the debug log at `~/.claude/debug/<session-id>.txt`: Claude Code logs how many models it cached the first time discovery succeeds and again only when the gateway's list changes, and a `404`, timeout, or redirect is recorded there too. For when discovery runs, what it filters, and the response format gateways serve, see the [model discovery reference](/docs/en/llm-gateway-protocol#model-discovery).
+Discovered models appear as additional `/model` entries. Each entry shows the description your gateway supplies for the model, or `From gateway` when it doesn't supply one.
+
+To confirm discovery ran, start `claude --debug` and look for the `[gatewayDiscovery]` lines in the debug log at `~/.claude/debug/<session-id>.txt`. The first time discovery succeeds, Claude Code logs how many models it cached, and it logs again only when the gateway's list changes. A `404`, timeout, or redirect appears there too. For when discovery runs, what it filters, and the response format gateways serve, see the [model discovery reference](/docs/en/llm-gateway-protocol#model-discovery).
 
 ### Rotate credentials with apiKeyHelper
 
@@ -390,7 +394,7 @@ Setting the variable has these effects and limits:
 
 * It disables auto-updates, so plan for another update path, such as your package manager or managed distribution.
 * It suppresses the [fast mode](/docs/en/fast-mode) availability check. Unless a previous check already enabled fast mode on the machine, `/fast` reports that fast mode is unavailable.
-* It turns off [gateway model discovery](#add-gateway-models-to-the-model-picker), even though discovery queries the gateway itself. Previously discovered models stay available from the local cache, but the list isn't refreshed.
+* It doesn't affect [gateway model discovery](#add-gateway-models-to-the-model-picker), which queries only your gateway. Before v2.1.257, the variable also stopped discovery from refreshing, so the picker kept the previously cached list.
 * The WebFetch tool's [domain safety check](/docs/en/data-usage#webfetch-domain-safety-check) isn't affected and still calls `api.anthropic.com`. Turn it off separately with `skipWebFetchPreflight: true` in [settings](/docs/en/settings) if your network blocks that host.
 * For each telemetry stream and the variable that controls it, see [telemetry services](/docs/en/data-usage#telemetry-services).
 
@@ -535,6 +539,6 @@ If Claude Code prompts you to log in repeatedly after removing gateway configura
 
 * [LLM gateways overview](/docs/en/llm-gateway): what a gateway is and how it interacts with claude.ai subscriptions
 * [Roll out an LLM gateway for your organization](/docs/en/llm-gateway-rollout): the admin-facing checklist for deploying and distributing gateway configuration
-* [Gateway protocol reference](/docs/en/llm-gateway-protocol): what Claude Code sends to a gateway, including the headers and fields the gateway must forward
+* [Gateway compatibility guide](/docs/en/llm-gateway-protocol): what Claude Code sends to a gateway, including the headers and fields the gateway must forward
 * [Settings](/docs/en/settings): where settings files live and how the `env` block is read
 * [Authentication](/docs/en/authentication): how credential variables, `apiKeyHelper`, and OAuth login interact

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/settings-example
-fetched_at: 2026-08-31T06:29:45.561131+00:00
+fetched_at: 2026-09-07T05:31:24.607451+00:00
 fetch_method: mintlify_md
 ---
 
@@ -258,7 +258,7 @@ A `managed-settings.json` file that shows the shape of the managed keys, with on
 * `forceLoginMethod` and `forceLoginOrgUUID` pin the login method and organization
 * `availableModels` and `enforceAvailableModels` restrict which models sessions can use
 * `permissions.deny` blocks two file reads and `curl`, and `disableBypassPermissionsMode` removes the bypass permission mode
-* `allowManagedPermissionRulesOnly` and `allowManagedMcpServersOnly` make the managed permission and MCP allowlists the only ones that apply
+* [`allowManagedPermissionRulesOnly`](/docs/en/settings-reference#allowmanagedpermissionrulesonly) and [`allowManagedMcpServersOnly`](/docs/en/settings-reference#allowmanagedmcpserversonly) make the managed permission and MCP allowlists the only ones that apply
 * `allowedMcpServers` pins the MCP server by URL
 * `strictKnownMarketplaces` allows one plugin marketplace
 * `sandbox` sandboxes commands with a fixed network allowlist and no unsandboxed retry
@@ -351,7 +351,7 @@ Administrators deploy a file like this as `managed-settings.json`, or the same J
         // Remove the bypass-permissions mode from every session
         "disableBypassPermissionsMode": "disable"
       },
-      // Only managed permission rules apply
+      // Ignore permission rules from user, project, and local settings
       "allowManagedPermissionRulesOnly": true,
       // Only the GitHub MCP server, matched by URL rather than by name, since a user can
       // name any server "github". Servers that don't match don't load, which includes every
@@ -370,9 +370,9 @@ Administrators deploy a file like this as `managed-settings.json`, or the same J
           "repo": "acme-corp/approved-plugins"
         }
       ],
-      // Sandbox every command, refuse to start if the sandbox can't be set up, and
-      // never let a blocked command retry outside the sandbox; network limited to
-      // npm and GitHub, and users can't add domains
+      // Sandbox every command Claude runs, refuse to start if the sandbox can't be
+      // set up, and never let a blocked command retry outside the sandbox; network
+      // limited to npm and GitHub, and users can't add domains
       "sandbox": {
         "enabled": true,
         "failIfUnavailable": true,

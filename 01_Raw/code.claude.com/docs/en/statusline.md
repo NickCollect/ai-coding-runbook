@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/statusline
-fetched_at: 2026-08-31T06:29:45.979072+00:00
+fetched_at: 2026-09-07T05:31:24.658150+00:00
 fetch_method: mintlify_md
 ---
 
@@ -279,6 +279,14 @@ Claude Code sends the following JSON fields to your script via stdin:
       "cache_write_tokens": 352000,
       "miss_recache_tokens": 310200,
       "last_miss_at": 1738425230,
+      "last_miss_cause": {
+        "causes": ["tools_changed"],
+        "tools_added": 2,
+        "tools_removed": 0
+      },
+      "miss_causes": {
+        "tools_changed": 2
+      },
       "recache_tokens_if_cold": 45000
     },
     "fast_mode": false,
@@ -388,9 +396,22 @@ The table lists each field with its meaning. Timestamps are Unix epoch seconds, 
 | `cache_write_tokens`     | All tokens written to the cache this session, the first request's initial write included                                                                                                                                             |
 | `miss_recache_tokens`    | Tokens written to the cache by the requests counted as misses                                                                                                                                                                        |
 | `last_miss_at`           | When the last miss happened, in epoch seconds. `null` while the session has no misses                                                                                                                                                |
+| `last_miss_cause`        | What Claude Code identified as the likely cause of the last miss, described under [Last miss cause](#last-miss-cause). Requires Claude Code v2.1.260 or later                                                                        |
+| `miss_causes`            | How many of this session's diagnosed misses had each cause, keyed by the same cause names as `last_miss_cause`. Requires Claude Code v2.1.260 or later                                                                               |
 | `recache_tokens_if_cold` | Tokens the next request re-caches if the cache has gone cold by then. `null` right after a compaction or a clearing of old tool results, until the next request records the rewritten conversation's size                            |
 
 Claude Code shows the same statistics in the terminal, on the [`/usage` command's `Prompt cache (main)` line](/docs/en/costs#prompt-cache-statistics).
+
+<h4 id="last-miss-cause">
+  Last miss cause
+</h4>
+
+The `last_miss_cause` object reports what Claude Code identified as the likely cause of the most recent miss. Its `causes` array holds one or more cause names, such as `tools_changed`, `system_prompt_changed`, `ttl_expired_5m`, or `likely_server_side`. The object is `null` until the session's first miss, and again whenever Claude Code couldn't identify a cause for the most recent miss. Requires Claude Code v2.1.260 or later.
+
+Two causes add counts to the object:
+
+* `tools_added` and `tools_removed`: with `tools_changed`, how many tools were added to or removed from the request
+* `system_char_delta`: with `system_prompt_changed`, the change in the system prompt's length, in characters
 
 ## Examples
 

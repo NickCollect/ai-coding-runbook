@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-apps-gateway
-fetched_at: 2026-08-31T06:29:36.453789+00:00
+fetched_at: 2026-09-07T05:31:23.304224+00:00
 fetch_method: mintlify_md
 ---
 
@@ -53,7 +53,7 @@ For which Claude Code features work through the gateway and what the server itse
 
 If you already run an LLM gateway or API gateway that meets your needs, keep using it; [Other LLM gateways](/docs/en/llm-gateway) covers configuring Claude Code against it.
 
-The [gateway protocol reference](/docs/en/llm-gateway-protocol) documents the contract Claude Code expects from any gateway: the endpoints it calls, the headers and body fields to forward, and what stops working when they're stripped. A running Claude apps gateway serves a superset of that contract at `GET /protocol`, adding the Claude apps gateway-specific endpoints for SSO sign-in, managed settings delivery, and telemetry. Fetch it with `curl https://claude-gateway.internal.example.com/protocol` from any deployed gateway, such as the one the [quickstart](#quickstart) below produces.
+The [gateway compatibility guide](/docs/en/llm-gateway-protocol) documents what Claude Code expects from any gateway: the endpoints it calls, the headers and body fields to forward, and what stops working when they're stripped. A running Claude apps gateway also serves its own protocol reference at `GET /protocol`, which describes the endpoints it exposes to Claude Code clients: SSO sign-in, inference, managed settings delivery, model discovery, and telemetry. Fetch it with `curl https://claude-gateway.internal.example.com/protocol` from any deployed gateway, such as the one the [quickstart](#quickstart) below produces.
 
 Breaking changes to the protocol are announced in advance, but indefinite backwards compatibility isn't guaranteed.
 
@@ -259,7 +259,7 @@ The CLI fingerprints the gateway's TLS leaf certificate on first connect and pin
 openssl x509 -noout -fingerprint -sha256 -in cert.pem | cut -d= -f2 | tr -d : | tr 'A-F' 'a-f'
 ```
 
-When the certificate rotates, every developer sees the trust prompt again, so treat rotations as a planned event and republish the fingerprint.
+When the certificate rotates, every developer sees the trust prompt again, so treat rotations as a planned event and republish the fingerprint. If your gateway policy includes [settings that need approval](/docs/en/server-managed-settings#security-approval-dialogs), the developer also sees that approval dialog again after accepting the new certificate, because Claude Code keys [approval memory](/docs/en/server-managed-settings#approval-memory) to the pinned certificate.
 
 Once signed in, the [model picker](/docs/en/model-config) shows the models in the developer's `availableModels` allowlist, managed settings apply at startup and refresh hourly, and telemetry routes to your collector. Sessions refresh silently before `ttl_hours` expiry, and a failed refresh after IdP deprovisioning prompts a re-login.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/gateways
-fetched_at: 2026-08-31T06:29:40.442556+00:00
+fetched_at: 2026-09-07T05:31:23.808043+00:00
 fetch_method: mintlify_md
 ---
 
@@ -68,14 +68,14 @@ A gateway routes model API requests. A few things you might expect it to handle 
 
 * **Which model answers**: pick the model with the `/model` command or [model environment variables](/docs/en/model-config#setting-your-model). The gateway decides where requests go, not which model the developer selects. Claude apps gateway can bound the choice with a per-group `availableModels` allowlist, but the developer still picks within it.
 * **Other network traffic**: Claude Code itself sends version checks and downloads directly to Anthropic, separate from the gateway path. Your network still needs egress to the [required domains](/docs/en/network-config), or set [`CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`](/docs/en/env-vars) to turn off the optional streams.
-* **Client telemetry**: Claude Code disables its Anthropic-bound client analytics when a session signs in to a Claude apps gateway. To keep pre-sign-in startup analytics off as well, deliver [`DISABLE_TELEMETRY` through managed settings](/docs/en/managed-settings#turn-telemetry-off-for-your-organization).
+* **Client telemetry**: Claude Code disables its Anthropic-bound client analytics when a session signs in to a Claude apps gateway. To keep pre-sign-in startup analytics off as well, deliver [`DISABLE_TELEMETRY`](/docs/en/managed-settings#turn-telemetry-off-for-your-organization) in the [client-side managed settings](/docs/en/claude-apps-gateway-config#client-side-managed-settings) on each device.
 * **Client telemetry on other gateways**: whether Claude Code sends the optional client telemetry stream depends on your provider, and the [telemetry defaults table](/docs/en/data-usage#default-behaviors-by-api-provider) covers each case.
 * **Telemetry destinations**: where Claude Code sends a gateway session's telemetry depends on how the session signed in, and [What's enforced on developers](/docs/en/claude-apps-gateway#whats-enforced-on-developers) says where each kind of session's exports go.
 * **Corporate HTTP proxies**: an `HTTPS_PROXY` sits between Claude Code and every server it talks to, including the gateway. If your network requires one, [configure the proxy](/docs/en/network-config) in addition to the gateway. For a Claude apps gateway you host, [sign-in checks that the proxy host is also on a private network](/docs/en/claude-apps-gateway#prerequisites); if it isn't, add the gateway host to `NO_PROXY` so the CLI connects to it directly.
 
 ## Next steps
 
-The next page depends on who runs the gateway. Anthropic's gateway runs from the `claude` binary and has its own setup guide; a gateway your organization already runs has a protocol to implement and an admin rollout checklist.
+The next page depends on who runs the gateway. Anthropic's gateway runs from the `claude` binary and has its own setup guide; a gateway your organization already runs has a compatibility guide to follow and an admin rollout checklist.
 
 * [Claude apps gateway](/docs/en/claude-apps-gateway) to deploy Anthropic's self-hosted gateway with SSO sign-in and OTLP telemetry
 * [Other LLM gateways](/docs/en/llm-gateway) for what a gateway your organization already runs must implement, and how to point Claude Code at it

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/migration-guide
-fetched_at: 2026-08-31T06:29:34.027555+00:00
+fetched_at: 2026-09-07T05:31:22.195366+00:00
 fetch_method: mintlify_md
 ---
 
@@ -15,6 +15,8 @@ fetch_method: mintlify_md
 ## Overview
 
 The Claude Code SDK has been renamed to the **Claude Agent SDK** and its documentation has been reorganized. This change reflects the SDK's broader capabilities for building AI agents beyond just coding tasks.
+
+Migrating from the OpenAI Agents SDK instead? The [OpenAI Agents SDK migration recipe](https://platform.claude.com/cookbook/claude-agent-sdk-04-migrating-from-openai-agents-sdk) maps each primitive onto the Claude Agent SDK through a single worked example.
 
 ## What's Changed
 
