@@ -34,15 +34,21 @@ use codex_login::ExternalAuthRefreshContext;
 use codex_model_provider_info::ModelProviderInfo;
 use codex_protocol::ResponseItemId;
 use codex_protocol::ThreadId;
+use codex_protocol::config_types::ApprovalsReviewer;
 use codex_protocol::models::ContentItem;
 use codex_protocol::models::FunctionCallOutputContentItem;
 use codex_protocol::models::FunctionCallOutputPayload;
 use codex_protocol::models::ImageDetail;
 use codex_protocol::models::InternalChatMessageMetadataPassthrough;
+use codex_protocol::models::LocalShellAction;
+use codex_protocol::models::LocalShellExecAction;
+use codex_protocol::models::LocalShellStatus;
 use codex_protocol::models::MessagePhase;
 use codex_protocol::models::ReasoningItemReasoningSummary;
+use codex_protocol::openai_models::GuardianScope;
 use codex_protocol::openai_models::GuardianV2ModelConfig;
 use codex_protocol::openai_models::GuardianV2TranscriptModelConfig;
+use codex_protocol::openai_models::ModelInfo;
 use codex_protocol::openai_models::ReasoningEffort;
 use codex_protocol::protocol::EventMsg;
 use codex_protocol::protocol::Op;
@@ -66,11 +72,12 @@ use super::GuardianV2ScoreProgress;
 use super::ParentCompactionError;
 use super::StrictReviewReason;
 use super::encrypted_parent_compaction;
-use super::should_classify_tool;
+
 use crate::async_scorer::config::CLASSIFICATION_OUTPUT_INSTRUCTIONS;
 use crate::async_scorer::config::DEFAULT_MODEL_CONTEXT_ITEM_TOKENS;
 use crate::async_scorer::config::DEFAULT_PARENT_COMPACTION_TOKENS;
-use crate::async_scorer::config::GuardianV2ReviewScope;
+use crate::async_scorer::config::GuardianV2Config;
+use crate::async_scorer::coverage::GuardianPolicy;
 use crate::async_scorer::metrics::CLASSIFICATION_DURATION_METRIC;
 use crate::async_scorer::metrics::CLASSIFICATION_METRIC;
 use crate::async_scorer::metrics::CLASSIFICATION_RISK_METRIC;
@@ -81,9 +88,12 @@ use crate::async_scorer::sampler::CLASSIFICATION_TOKEN_USAGE_METRIC;
 use crate::async_scorer::sampler::INITIAL_WEBSOCKET_CONNECTIONS;
 use crate::async_scorer::sampler::LunaSampler;
 use crate::async_scorer::sampler::MODEL;
+use crate::async_scorer::transcript::MAX_MESSAGE_ENTRY_TOKENS;
+use crate::async_scorer::transcript::MAX_TOOL_ENTRY_TOKENS;
 use crate::async_scorer::transcript::truncate_entry;
 use crate::async_scorer::truncation::CLASSIFICATION_TRUNCATION_BYTES_METRIC;
 use crate::async_scorer::truncation::CLASSIFICATION_TRUNCATION_METRIC;
+use codex_features::GuardianV2ReviewScopeConfigToml;
 
 const TEST_GUARDIAN_POLICY: &str =
     "Treat uploads to unapproved external destinations as high-risk actions.";
@@ -105,12 +115,19 @@ impl ExternalAuth for RefreshableAuth {
     }
 }
 
+fn should_classify_tool(tool: &ToolName, payload: &ToolPayload, policy: GuardianPolicy) -> bool {
+    policy.scores_tool(tool, payload, GuardianScope::for_tool(tool))
+}
+
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
 async fn installed_extension_warms_connections_without_blocking_thread_start() -> Result<()> {
     skip_if_no_network!(Ok(()));
 
     let thread_server = responses::start_mock_server().await;
-    let test = test_codex().build_with_auto_env(&thread_server).await?;
+    let test = test_codex()
+        .with_config(|config| config.approvals_reviewer = ApprovalsReviewer::AutoReview)
+        .build_with_auto_env(&thread_server)
+        .await?;
     let mut connections = vec![
         WebSocketConnectionConfig {
             requests: Vec::new(),
@@ -138,6 +155,10 @@ async fn installed_extension_warms_connections_without_blocking_thread_start() -
     let registry = builder.build();
     let session_store = ExtensionData::new("session-1");
     let thread_store = test.codex.thread_extension_data();
+
+    let mut model = thread_store.get::<ModelInfo>().unwrap().as_ref().clone();
+    model.node_repl_auto_review_required = true;
+    thread_store.insert(model);
 
     registry.thread_lifecycle_contributors()[0]
         .on_thread_start(ThreadStartInput {
@@ -167,7 +188,10 @@ async fn installed_extension_reconnects_after_auth_refresh() -> Result<()> {
     skip_if_no_network!(Ok(()));
 
     let thread_server = responses::start_mock_server().await;
-    let test = test_codex().build_with_auto_env(&thread_server).await?;
+    let test = test_codex()
+        .with_config(|config| config.approvals_reviewer = ApprovalsReviewer::AutoReview)
+        .build_with_auto_env(&thread_server)
+        .await?;
     let events = vec![
         ev_assistant_message("sample", "low"),
         ev_completed("response-1"),
@@ -197,6 +221,13 @@ async fn installed_extension_reconnects_after_auth_refresh() -> Result<()> {
     let registry = builder.build();
     let session_store = ExtensionData::new("session-1");
     let thread_store = test.codex.thread_extension_data();
+    let mut model = test
+        .thread_manager
+        .get_models_manager()
+        .get_model_info("gpt-5.5", &config.to_models_manager_config())
+        .await;
+    model.node_repl_auto_review_required = true;
+    thread_store.insert(model);
     registry.thread_lifecycle_contributors()[0]
         .on_thread_start(ThreadStartInput {
             config: &config,
@@ -332,6 +363,9 @@ impl ExtensionMetrics for RecordingMetrics {
     }
 
     fn histogram(&self, name: &str, value: i64, tags: &[(&str, &str)]) {
+        if name == "codex.guardian_v2.connection.duration_ms" {
+            return;
+        }
         self.0.lock().unwrap().push(RecordedMetric::Histogram(
             name.to_owned(),
             value,
@@ -342,7 +376,51 @@ impl ExtensionMetrics for RecordingMetrics {
     }
 }
 
+fn user_instruction(text: &str) -> ResponseItem {
+    ResponseItem::Message {
+        id: Some(ResponseItemId::new("msg")),
+        role: "user".to_owned(),
+        content: vec![ContentItem::InputText {
+            text: text.to_owned(),
+        }],
+        phase: None,
+        internal_chat_message_metadata_passthrough: Some(InternalChatMessageMetadataPassthrough {
+            content_item_kinds: Some(vec![codex_protocol::models::ContentItemKind(
+                "user.text".to_owned(),
+            )]),
+            ..Default::default()
+        }),
+    }
+}
+
 struct TestConversationHistory(Vec<ResponseItem>);
+
+struct TestRetainedHistory {
+    current: TestConversationHistory,
+    retained: Vec<ResponseItem>,
+    compaction_model_hash: Option<String>,
+}
+
+impl ConversationHistorySnapshot for TestRetainedHistory {
+    fn latest_compaction_model_hash(&self) -> Option<&str> {
+        self.compaction_model_hash.as_deref()
+    }
+    fn history_version(&self) -> u64 {
+        self.current.history_version()
+    }
+
+    fn user_message_revision(&self) -> u64 {
+        self.current.user_message_revision()
+    }
+
+    fn items(&self) -> Box<dyn Iterator<Item = &ResponseItem> + Send + '_> {
+        self.current.items()
+    }
+
+    fn review_items(&self) -> Box<dyn Iterator<Item = &ResponseItem> + Send + '_> {
+        Box::new(self.retained.iter())
+    }
+}
 
 impl ConversationHistorySnapshot for TestConversationHistory {
     fn history_version(&self) -> u64 {
@@ -407,40 +485,42 @@ async fn sandboxed_shell_classification_respects_review_scope() -> Result<()> {
     };
 
     let tool_name = ToolName::plain("exec_command");
-    let standard_scope = GuardianV2ReviewScope::Standard {
-        sandboxed_exec_commands: false,
-    };
+    let standard_scope = GuardianPolicy::from_legacy(Some(&GuardianV2ReviewScopeConfigToml {
+        computer_use_only: Some(false),
+        sandboxed_exec_commands: Some(false),
+    }));
     assert!(!should_classify_tool(
         &tool_name,
         &sandboxed,
-        standard_scope,
+        standard_scope.clone(),
     ));
     assert!(!should_classify_tool(
         &tool_name,
         &additional_permissions,
-        standard_scope,
+        standard_scope.clone(),
     ));
     assert!(should_classify_tool(
         &tool_name,
         &unsandboxed,
-        standard_scope,
+        standard_scope.clone(),
     ));
     assert!(should_classify_tool(
         &tool_name,
         &sandboxed,
-        GuardianV2ReviewScope::Standard {
-            sandboxed_exec_commands: true,
-        },
+        GuardianPolicy::from_legacy(Some(&GuardianV2ReviewScopeConfigToml {
+            computer_use_only: Some(false),
+            sandboxed_exec_commands: Some(true),
+        })),
     ));
     assert!(should_classify_tool(
         &ToolName::plain("read_file"),
         &sandboxed,
-        standard_scope,
+        standard_scope.clone(),
     ));
     assert!(should_classify_tool(
         &ToolName::namespaced("mcp", "exec_command"),
         &sandboxed,
-        standard_scope,
+        standard_scope.clone(),
     ));
     skip_if_no_network!(Ok(()));
 
@@ -502,7 +582,11 @@ fn computer_use_only_classification_recognizes_direct_and_code_mode_tools() {
         (ToolName::plain("exec_command"), false),
     ] {
         assert_eq!(
-            should_classify_tool(&tool_name, &payload, GuardianV2ReviewScope::ComputerUseOnly),
+            should_classify_tool(
+                &tool_name,
+                &payload,
+                GuardianPolicy::from_legacy(/*scope*/ None)
+            ),
             expected,
             "unexpected classification scope for {tool_name}"
         );
@@ -515,12 +599,15 @@ async fn computer_use_only_scores_cannot_approve_other_actions() -> Result<()> {
 
     let fixture = GuardianFailureFixture::new().await?;
     let thread_store = fixture.test.codex.thread_extension_data();
+    let mut model = thread_store.get::<ModelInfo>().unwrap().as_ref().clone();
+    model.node_repl_auto_review_required = true;
+    thread_store.insert(model);
     let mut config = thread_store
         .get::<crate::async_scorer::config::GuardianV2Config>()
         .expect("Guardian v2 should have initialized")
         .as_ref()
         .clone();
-    config.review_scope = GuardianV2ReviewScope::ComputerUseOnly;
+    config.policy = GuardianPolicy::from_legacy(/*scope*/ None);
     thread_store.insert(config);
     thread_store.insert(SecurityRiskScore {
         scores: BTreeMap::from([("action_risk".to_owned(), 0.25)]),
@@ -532,6 +619,10 @@ async fn computer_use_only_scores_cannot_approve_other_actions() -> Result<()> {
     let progress = thread_store
         .get::<GuardianV2ScoreProgress>()
         .expect("Guardian v2 should track score progress per thread");
+    // The seeded low score belongs to the model selected above.
+    let authorization =
+        super::super::authorization::ScoreAuthorization::current(&fixture.test.codex).await;
+    *progress.authorization.lock().unwrap() = Some(authorization);
     let latest_tool_call = progress.latest_tool_call.load(Ordering::Acquire);
     let turn_store = ExtensionData::new("turn-1");
     let ordinary_tool = ToolName::namespaced("mcp__ordinary__", "write_record");
@@ -609,22 +700,31 @@ async fn computer_use_only_scores_cannot_approve_other_actions() -> Result<()> {
         None,
         "malformed approval actions must not reuse a browser score"
     );
-    thread_store.remove::<SecurityRiskScore>();
+    let mut changed_model = fixture
+        .test
+        .thread_manager
+        .get_models_manager()
+        .get_model_info("gpt-5.5", &fixture.test.config.to_models_manager_config())
+        .await;
+    changed_model.guardian = Some(codex_protocol::openai_models::GuardianModelPolicy {
+        computer_use: Some(codex_protocol::openai_models::GuardianReviewMode::Adaptive),
+        ..Default::default()
+    });
+    thread_store.insert(changed_model);
     assert_eq!(
         fixture
             .registry
             .fast_approval_decision(
                 &fixture.session_store,
                 thread_store,
-                &json!({"tool": "mcp_tool_call", "server": "node_repl"}).to_string(),
-                thread_store
-                    .get::<RecordingMetrics>()
-                    .map(|metrics| metrics as Arc<dyn ExtensionMetrics>),
+                &json!({"tool": "mcp_tool_call", "server": "node_repl", "tool_name": "js"})
+                    .to_string(),
+                /*extension_metrics*/ None,
             )
             .await,
-        None
+        None,
+        "a score from the previous model policy must not approve a call"
     );
-
     let fast_decisions = thread_store
         .get::<RecordingMetrics>()
         .unwrap()
@@ -648,9 +748,44 @@ async fn computer_use_only_scores_cannot_approve_other_actions() -> Result<()> {
             fast_decision_metric("deferred", "out_of_scope"),
             fast_decision_metric("deferred", "out_of_scope"),
             fast_decision_metric("deferred", "out_of_scope"),
-            fast_decision_metric("deferred", "missing_score"),
         ]
     );
+
+    let mut model = thread_store.get::<ModelInfo>().unwrap().as_ref().clone();
+    model.guardian = None; // Exercise the legacy fallback after the catalog case above.
+    model.node_repl_auto_review_required = false;
+    thread_store.insert(model.clone());
+    fixture
+        .score_tool(ToolName::namespaced("mcp__node_repl__", "js"))
+        .await;
+    assert!(
+        progress.latest_failed_tool_call.load(Ordering::Acquire)
+            > progress.latest_scored_tool_call.load(Ordering::Acquire)
+    );
+    for required in [false, true] {
+        model.node_repl_auto_review_required = required;
+        thread_store.insert(model.clone());
+        // Also reject a low score published by an older, in-flight classifier.
+        thread_store.insert(SecurityRiskScore {
+            scores: BTreeMap::from([("action_risk".to_owned(), 0.0)]),
+            call_id: None,
+            action: None,
+            sampled_at: None,
+        });
+        assert_eq!(
+            fixture
+                .registry
+                .fast_approval_decision(
+                    &fixture.session_store,
+                    thread_store,
+                    r#"{"tool":"mcp_tool_call","server":"node_repl","tool_name":"js"}"#,
+                    /*extension_metrics*/ None,
+                )
+                .await,
+            None,
+            "switching back to a reviewed model must not revive a skipped score"
+        );
+    }
 
     Ok(())
 }
@@ -725,7 +860,7 @@ fn encrypted_parent_compaction_rejects_invalid_latest_item() {
                 [&older, latest].into_iter(),
                 DEFAULT_PARENT_COMPACTION_TOKENS,
             ),
-            Ok(None),
+            Err(ParentCompactionError::Unusable),
             "an unusable latest summary must not resurrect older context"
         );
     }
@@ -875,7 +1010,10 @@ async fn sample_configured_conversation_history_with_source(
                 .policy = Some(TEST_CATALOG_GUARDIAN_POLICY.to_owned());
         })
         .with_model("gpt-5.5")
-        .with_config(move |config| config.guardian_policy_config = guardian_policy)
+        .with_config(move |config| {
+            config.approvals_reviewer = ApprovalsReviewer::AutoReview;
+            config.guardian_policy_config = guardian_policy;
+        })
         .with_pre_build_hook(move |home| {
             std::fs::write(home.join("config.toml"), guardian_config)
                 .expect("Guardian v2 configuration should be written");
@@ -971,7 +1109,7 @@ async fn sample_configured_conversation_history_with_source(
         )
         .await?;
     }
-    let conversation_history = TestConversationHistory(conversation_history);
+    let conversation_history = test.codex.conversation_history_snapshot().await;
 
     registry.tool_lifecycle_contributors()[0]
         .on_tool_start(ToolStartInput {
@@ -984,7 +1122,7 @@ async fn sample_configured_conversation_history_with_source(
             tool_name: &tool_name,
             mcp_tool: None,
             payload: &tool_payload,
-            conversation_history: Arc::new(conversation_history),
+            conversation_history,
             source,
         })
         .await;
@@ -1006,12 +1144,70 @@ struct GuardianFailureFixture {
     session_store: ExtensionData,
 }
 
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn disabled_code_mode_invalidates_cached_scores() -> Result<()> {
+    skip_if_no_network!(Ok(()));
+    let fixture = GuardianFailureFixture::new().await?;
+    let thread_store = fixture.test.codex.thread_extension_data();
+    let mut model = thread_store
+        .get::<codex_protocol::openai_models::ModelInfo>()
+        .expect("resolved model")
+        .as_ref()
+        .clone();
+    model.guardian = Some(codex_protocol::openai_models::GuardianModelPolicy {
+        computer_use: Some(codex_protocol::openai_models::GuardianReviewMode::Adaptive),
+        ..Default::default()
+    });
+    thread_store.insert(model);
+    let progress = thread_store
+        .get::<GuardianV2ScoreProgress>()
+        .expect("score progress");
+    let before = (
+        progress.latest_tool_call.load(Ordering::Acquire),
+        progress.latest_failed_tool_call.load(Ordering::Acquire),
+    );
+    fixture.score_tool(ToolName::plain("wait")).await;
+    assert_eq!(
+        (
+            progress.latest_tool_call.load(Ordering::Acquire),
+            progress.latest_failed_tool_call.load(Ordering::Acquire),
+        ),
+        before,
+    );
+    fixture.score_tool(ToolName::plain("exec")).await;
+    assert_eq!(
+        (
+            progress.latest_tool_call.load(Ordering::Acquire),
+            progress.latest_failed_tool_call.load(Ordering::Acquire),
+        ),
+        (before.0 + 1, before.0 + 1),
+    );
+    // An MCP tool with the same name remains in the MCP category.
+    fixture
+        .score_tool(ToolName::namespaced("mcp__ordinary", "wait"))
+        .await;
+    assert_eq!(
+        (
+            progress.latest_tool_call.load(Ordering::Acquire),
+            progress.latest_failed_tool_call.load(Ordering::Acquire),
+        ),
+        (before.0 + 2, before.0 + 2),
+    );
+    Ok(())
+}
+
 impl GuardianFailureFixture {
     async fn new() -> Result<Self> {
-        let (_, test, registry) = sample_conversation_history(
+        Self::with_config("").await
+    }
+
+    async fn with_config(guardian_config: &str) -> Result<Self> {
+        let (_, test, registry) = sample_configured_conversation_history(
             Vec::new(),
             r#"{"path":"README.md"}"#,
             Some(TEST_GUARDIAN_POLICY),
+            guardian_config,
+            /*model_defaults*/ None,
         )
         .await?;
         let thread_store = test.codex.thread_extension_data();
@@ -1315,15 +1511,7 @@ max_tool_transcript_tokens = 128
 max_recent_non_user_entries = 8
 "#;
     let conversation_history = vec![
-        ResponseItem::Message {
-            id: None,
-            role: "user".to_owned(),
-            content: vec![ContentItem::InputText {
-                text: "Review the pending action.".to_owned(),
-            }],
-            phase: None,
-            internal_chat_message_metadata_passthrough: None,
-        },
+        user_instruction("Review the pending action."),
         ResponseItem::Reasoning {
             id: None,
             summary: vec![ReasoningItemReasoningSummary::SummaryText {
@@ -1418,7 +1606,7 @@ max_recent_non_user_entries = 8
             .latest_scored_tool_call
             .load(Ordering::Acquire)
             == 0
-            || metrics.0.lock().unwrap().len() < 10
+            || metrics.0.lock().unwrap().len() < 14
         {
             tokio::task::yield_now().await;
         }
@@ -1636,6 +1824,8 @@ max_recent_non_user_entries = 8
 async fn contributor_includes_transcript_images_by_default() -> Result<()> {
     skip_if_no_network!(Ok(()));
 
+    let user_image = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGPgEpEDAABoAD1UCKP3AAAAAElFTkSuQmCC";
+    let tool_image = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGOQE+ECAACQAD304kFaAAAAAElFTkSuQmCC";
     let history = vec![
         ResponseItem::Message {
             id: None,
@@ -1645,11 +1835,20 @@ async fn contributor_includes_transcript_images_by_default() -> Result<()> {
                     text: "Review what is shown on screen.".to_owned(),
                 },
                 ContentItem::InputImage {
-                    image_url: "data:image/png;base64,user-screenshot".to_owned(),
+                    image_url: user_image.to_owned(),
                     detail: Some(ImageDetail::High),
                 },
             ],
             phase: None,
+            internal_chat_message_metadata_passthrough: None,
+        },
+        ResponseItem::FunctionCall {
+            id: None,
+            name: "screenshot".to_owned(),
+            namespace: None,
+            arguments: "{}".to_owned(),
+            encrypted_function_args: None,
+            call_id: "previous-call".to_owned(),
             internal_chat_message_metadata_passthrough: None,
         },
         ResponseItem::FunctionCallOutput {
@@ -1662,8 +1861,8 @@ async fn contributor_includes_transcript_images_by_default() -> Result<()> {
                     text: "Screenshot captured.".to_owned(),
                 },
                 FunctionCallOutputContentItem::InputImage {
-                    image_url: "data:image/png;base64,tool-screenshot".to_owned(),
-                    detail: Some(ImageDetail::Low),
+                    image_url: tool_image.to_owned(),
+                    detail: Some(ImageDetail::High),
                 },
             ]),
             internal_chat_message_metadata_passthrough: None,
@@ -1690,11 +1889,11 @@ enabled = true
         [
             json!({
                 "type": "input_image",
-                "image_url": "data:image/png;base64,user-screenshot",
+                "image_url": user_image,
             }),
             json!({
                 "type": "input_image",
-                "image_url": "data:image/png;base64,tool-screenshot",
+                "image_url": tool_image,
             }),
         ]
     );
@@ -1724,15 +1923,7 @@ async fn contributor_uses_model_defaults_and_preserves_local_overrides() -> Resu
         max_parent_compaction_tokens: Some(384),
     };
     let conversation_history = vec![
-        ResponseItem::Message {
-            id: None,
-            role: "user".to_owned(),
-            content: vec![ContentItem::InputText {
-                text: "Review the pending action.".to_owned(),
-            }],
-            phase: None,
-            internal_chat_message_metadata_passthrough: None,
-        },
+        user_instruction("Review the pending action."),
         ResponseItem::Reasoning {
             id: None,
             summary: vec![ReasoningItemReasoningSummary::SummaryText {
@@ -1843,18 +2034,19 @@ async fn contributor_uses_model_defaults_and_preserves_local_overrides() -> Resu
 
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
 async fn contributor_samples_tool_calls_with_the_existing_luna_pool() -> Result<()> {
+    assert_luna_pool_context(/*thread_context_enabled*/ true).await
+}
+
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn legacy_contributor_samples_tool_calls_with_the_existing_luna_pool() -> Result<()> {
+    assert_luna_pool_context(/*thread_context_enabled*/ false).await
+}
+
+async fn assert_luna_pool_context(thread_context_enabled: bool) -> Result<()> {
     skip_if_no_network!(Ok(()));
 
     let conversation_history = vec![
-        ResponseItem::Message {
-            id: None,
-            role: "user".to_owned(),
-            content: vec![ContentItem::InputText {
-                text: "Inspect the repository guidelines.".to_owned(),
-            }],
-            phase: None,
-            internal_chat_message_metadata_passthrough: None,
-        },
+        user_instruction("Inspect the repository guidelines."),
         ResponseItem::Reasoning {
             id: None,
             summary: vec![ReasoningItemReasoningSummary::SummaryText {
@@ -1891,10 +2083,12 @@ async fn contributor_samples_tool_calls_with_the_existing_luna_pool() -> Result<
             internal_chat_message_metadata_passthrough: None,
         },
     ];
-    let (request, test, registry) = sample_conversation_history(
+    let (request, test, registry) = sample_configured_conversation_history(
         conversation_history,
         r#"{"path":"README.md"}"#,
         Some(TEST_GUARDIAN_POLICY),
+        &format!("[features.guardianv2]\nthread_context = {thread_context_enabled}\n"),
+        /*model_defaults*/ None,
     )
     .await?;
     let thread_id = test.session_configured.thread_id;
@@ -1950,28 +2144,35 @@ async fn contributor_samples_tool_calls_with_the_existing_luna_pool() -> Result<
             }],
         })
     );
-    assert_eq!(
-        request["input"][2]["content"],
-        json!([
-            {"type": "input_text", "text": ">>> TRANSCRIPT START\n"},
-            {"type": "input_text", "text": "[1] user: Inspect the repository guidelines.\n"},
-            {"type": "input_text", "text": "[2] tool list_dir call: {\"path\":\".\"}\n"},
-            {"type": "input_text", "text": "[3] tool list_dir result: README.md\n"},
-            {"type": "input_text", "text": "[4] tool read_file call: {\"path\":\"README.md\"}\n"},
-            {"type": "input_text", "text": ">>> TRANSCRIPT END\n\n"},
-            {
-                "type": "input_text",
-                "text": "The Codex agent has requested the following action:\n"
-            },
-            {"type": "input_text", "text": ">>> APPROVAL REQUEST START\n"},
-            {"type": "input_text", "text": "Planned action JSON:\n"},
-            {
-                "type": "input_text",
-                "text": "{\n  \"path\": \"README.md\",\n  \"tool\": \"read_file\"\n}\n"
-            },
-            {"type": "input_text", "text": ">>> APPROVAL REQUEST END\n"},
-        ])
-    );
+    let mut expected_content = json!([
+        {"type": "input_text", "text": ">>> RETAINED USER INSTRUCTIONS START\nHost: Retained source order labels across instructions and verified answers reflect original acceptance, not section order. Later instructions may revoke earlier grants.\n"},
+        {"type": "input_text", "text": "Retained source order: 0\nuser: Inspect the repository guidelines.\n"},
+        {"type": "input_text", "text": ">>> RETAINED USER INSTRUCTIONS END\n"},
+        {"type": "input_text", "text": ">>> TRANSCRIPT START\n"},
+        {"type": "input_text", "text": "[1] user: Inspect the repository guidelines.\n"},
+        {"type": "input_text", "text": "[2] tool list_dir call: {\"path\":\".\"}\n"},
+        {"type": "input_text", "text": "[3] tool list_dir result: README.md\n"},
+        {"type": "input_text", "text": "[4] tool read_file call: {\"path\":\"README.md\"}\n"},
+        {"type": "input_text", "text": ">>> TRANSCRIPT END\n\n"},
+        {
+            "type": "input_text",
+            "text": "The Codex agent has requested the following action:\n"
+        },
+        {"type": "input_text", "text": ">>> APPROVAL REQUEST START\n"},
+        {"type": "input_text", "text": "Planned action JSON:\n"},
+        {
+            "type": "input_text",
+            "text": "{\n  \"path\": \"README.md\",\n  \"tool\": \"read_file\"\n}\n"
+        },
+        {"type": "input_text", "text": ">>> APPROVAL REQUEST END\n"},
+    ]);
+    if !thread_context_enabled {
+        expected_content
+            .as_array_mut()
+            .expect("content array")
+            .drain(..3);
+    }
+    assert_eq!(request["input"][2]["content"], expected_content);
     let score = tokio::time::timeout(ASYNC_TEST_TIMEOUT, async {
         loop {
             if let Some(score) = thread_store.get::<SecurityRiskScore>() {
@@ -2143,6 +2344,7 @@ async fn contributor_skips_required_models_in_standard_scope() -> Result<()> {
     let test = test_codex()
         .with_home(Arc::clone(&initial.home))
         .with_config(move |config| {
+            config.approvals_reviewer = ApprovalsReviewer::AutoReview;
             config.config_layer_stack = config_layer_stack;
             config
                 .features
@@ -2188,9 +2390,10 @@ async fn contributor_skips_required_models_in_standard_scope() -> Result<()> {
         .expect("Guardian v2 should have initialized")
         .as_ref()
         .clone();
-    guardian_config.review_scope = GuardianV2ReviewScope::Standard {
-        sandboxed_exec_commands: false,
-    };
+    guardian_config.policy = GuardianPolicy::from_legacy(Some(&GuardianV2ReviewScopeConfigToml {
+        computer_use_only: Some(false),
+        sandboxed_exec_commands: Some(false),
+    }));
     thread_store.insert(guardian_config);
 
     let mut model_info = test
@@ -2337,6 +2540,115 @@ async fn cached_score_survives_compaction_and_internal_context_but_not_user_inpu
             .await,
         None,
     );
+    Ok(())
+}
+
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn incompatible_compaction_blocks_cached_score_and_initial_cua_allowance() -> Result<()> {
+    assert_compaction_approval_policy(/*thread_context_enabled*/ true).await
+}
+
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn legacy_incompatible_compaction_preserves_cached_score_and_initial_cua_allowance()
+-> Result<()> {
+    assert_compaction_approval_policy(/*thread_context_enabled*/ false).await
+}
+
+async fn assert_compaction_approval_policy(thread_context_enabled: bool) -> Result<()> {
+    skip_if_no_network!(Ok(()));
+
+    let fixture = GuardianFailureFixture::with_config(&format!(
+        "[features.guardianv2]\nthread_context = {thread_context_enabled}\n"
+    ))
+    .await?;
+    let thread_store = fixture.test.codex.thread_extension_data();
+    thread_store.insert(SecurityRiskScore {
+        scores: BTreeMap::from([("action_risk".to_owned(), 0.0)]),
+        call_id: None,
+        action: None,
+        sampled_at: None,
+    });
+    assert_eq!(
+        fixture
+            .registry
+            .fast_approval_decision(
+                &fixture.session_store,
+                thread_store,
+                "review action",
+                /*extension_metrics*/ None
+            )
+            .await,
+        Some(ReviewDecision::Approved)
+    );
+    let authorization = fixture.test.codex.guardian_authorization_version().await;
+    fixture
+        .test
+        .codex
+        .inject_response_items(vec![ResponseItem::Compaction {
+            id: Some(ResponseItemId::from_server(
+                "incompatible-checkpoint".to_owned(),
+            )),
+            encrypted_content: "opaque parent summary".to_owned(),
+            internal_chat_message_metadata_passthrough: None,
+        }])
+        .await?;
+    let mut model = (*thread_store
+        .get::<ModelInfo>()
+        .expect("parent model metadata"))
+    .clone();
+    model.comp_hash = Some("incompatible-parent".to_owned());
+    model.node_repl_auto_review_required = true;
+    thread_store.insert(model);
+    assert_eq!(
+        fixture.test.codex.guardian_authorization_version().await,
+        authorization
+    );
+    let score_authorization = super::ScoreAuthorization::current(&fixture.test.codex).await;
+    *thread_store
+        .get::<GuardianV2ScoreProgress>()
+        .expect("score progress")
+        .authorization
+        .lock()
+        .unwrap() = Some(score_authorization);
+    // No new sample runs: only the enabled path rejects cached and initial-call approvals.
+    for (computer_use_only, prompt) in [
+        (false, "review action"),
+        (
+            true,
+            r#"{"tool":"mcp_tool_call","server":"node_repl","connector_id":"node_repl","tool_name":"js"}"#,
+        ),
+    ] {
+        let mut config = (*thread_store
+            .get::<GuardianV2Config>()
+            .expect("Guardian configuration"))
+        .clone();
+        config.policy = GuardianPolicy::from_legacy(Some(&GuardianV2ReviewScopeConfigToml {
+            computer_use_only: Some(computer_use_only),
+            sandboxed_exec_commands: Some(true),
+        }));
+        thread_store.insert(config);
+        thread_store
+            .get::<GuardianV2ScoreProgress>()
+            .expect("score progress")
+            .js_executions
+            .store(/*val*/ 1, Ordering::Release);
+        assert_eq!(
+            fixture
+                .registry
+                .fast_approval_decision(
+                    &fixture.session_store,
+                    thread_store,
+                    prompt,
+                    /*extension_metrics*/ None
+                )
+                .await,
+            (!thread_context_enabled).then_some(ReviewDecision::Approved)
+        );
+        assert_eq!(
+            thread_store.remove::<StrictReviewReason>().as_deref(),
+            thread_context_enabled.then_some(&StrictReviewReason::IncompatibleCompaction)
+        );
+    }
     Ok(())
 }
 
@@ -2643,6 +2955,56 @@ async fn contributor_sends_compacted_conversation_history_to_luna() -> Result<()
             },
         ]
     }));
+    history.extend(
+        [
+            (None, None, "unattributed anonymous output"),
+            (Some("missing-call"), None, "unattributed orphaned output"),
+            (
+                Some("missing-named-call"),
+                Some("notifications"),
+                "named orphaned output",
+            ),
+            (None, Some("notifications"), "attributed notification"),
+        ]
+        .map(|(call_id, name, text)| ResponseItem::FunctionCallOutput {
+            id: None,
+            call_id: call_id.map(str::to_string),
+            name: name.map(str::to_string),
+            namespace: Some("slack".to_string()),
+            output: FunctionCallOutputPayload::from_text(text.to_string()),
+            internal_chat_message_metadata_passthrough: None,
+        }),
+    );
+    history.push(ResponseItem::CustomToolCallOutput {
+        id: None,
+        call_id: "missing-custom-call".to_string(),
+        name: None,
+        output: FunctionCallOutputPayload::from_text("unattributed custom output".to_string()),
+        internal_chat_message_metadata_passthrough: None,
+    });
+    history.extend([
+        ResponseItem::LocalShellCall {
+            id: None,
+            call_id: Some("shell-1".to_string()),
+            status: LocalShellStatus::Completed,
+            action: LocalShellAction::Exec(LocalShellExecAction {
+                command: vec!["echo".to_string(), "hello".to_string()],
+                timeout_ms: None,
+                working_directory: None,
+                env: None,
+                user: None,
+            }),
+            internal_chat_message_metadata_passthrough: None,
+        },
+        ResponseItem::FunctionCallOutput {
+            id: None,
+            call_id: Some("shell-1".to_string()),
+            name: None,
+            namespace: None,
+            output: FunctionCallOutputPayload::from_text("local shell evidence".to_string()),
+            internal_chat_message_metadata_passthrough: None,
+        },
+    ]);
 
     let (request, _test, _registry) = sample_conversation_history(
         history,
@@ -2682,16 +3044,68 @@ async fn contributor_sends_compacted_conversation_history_to_luna() -> Result<()
             .any(|entry| entry.contains("result evidence 0:"))
     );
     assert!(entries.iter().any(|entry| entry.contains("<truncated")));
+    assert!(
+        !entries
+            .iter()
+            .any(|entry| entry.contains("unattributed anonymous output"))
+    );
+    for output in [
+        "tool result: unattributed orphaned output",
+        "tool result: named orphaned output",
+        "tool result: unattributed custom output",
+        "tool result: local shell evidence",
+    ] {
+        assert!(
+            entries.iter().any(|entry| entry.contains(output)),
+            "missing {output}"
+        );
+    }
+    assert!(
+        entries
+            .iter()
+            .any(|entry| entry.contains("tool shell call:"))
+    );
+    assert!(entries.iter().any(|entry| {
+        entry.contains("tool slack.notifications result: attributed notification")
+    }));
+
+    for entry in entries.into_iter().filter(|entry| entry.starts_with('[')) {
+        let (label, text) = entry.split_once(": ").expect("numbered transcript entry");
+        let max_tokens = if label.contains("tool ") {
+            MAX_TOOL_ENTRY_TOKENS
+        } else {
+            MAX_MESSAGE_ENTRY_TOKENS
+        };
+        assert!(
+            text.trim_end_matches('\n').len() <= TruncationPolicy::Tokens(max_tokens).byte_budget()
+        );
+    }
 
     Ok(())
 }
 
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
 async fn contributor_reuses_the_latest_compatible_parent_compaction() -> Result<()> {
+    assert_parent_compaction_reuse(/*thread_context_enabled*/ true).await
+}
+
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn legacy_contributor_reuses_the_latest_compatible_parent_compaction() -> Result<()> {
+    assert_parent_compaction_reuse(/*thread_context_enabled*/ false).await
+}
+
+async fn assert_parent_compaction_reuse(thread_context_enabled: bool) -> Result<()> {
     skip_if_no_network!(Ok(()));
 
     let thread_server = responses::start_mock_server().await;
     let test = test_codex()
+        .with_config(move |config| {
+            config.approvals_reviewer = ApprovalsReviewer::AutoReview;
+            config
+                .features
+                .set_enabled(Feature::GuardianThreadContext, thread_context_enabled)
+                .expect("test context mode");
+        })
         .with_pre_build_hook(|home| {
             std::fs::write(
                 home.join("config.toml"),
@@ -2765,15 +3179,7 @@ async fn contributor_reuses_the_latest_compatible_parent_compaction() -> Result<
             internal_chat_message_metadata_passthrough: None,
         },
         latest_compaction.clone(),
-        ResponseItem::Message {
-            id: None,
-            role: "user".to_owned(),
-            content: vec![ContentItem::InputText {
-                text: "Inspect the repository guidelines.".to_owned(),
-            }],
-            phase: None,
-            internal_chat_message_metadata_passthrough: None,
-        },
+        user_instruction("Inspect the repository guidelines."),
     ]);
 
     Box::pin(
@@ -2781,6 +3187,16 @@ async fn contributor_reuses_the_latest_compatible_parent_compaction() -> Result<
             .inject_response_items(conversation_history.0.clone()),
     )
     .await?;
+    let mut retained: Vec<ResponseItem> = serde_json::from_value(json!([
+        {"type":"function_call", "name":"check_repository", "arguments":"{}", "call_id":"before"},
+        {"type":"function_call_output", "call_id":"before", "output":"repository is private"}
+    ]))?;
+    retained.extend(conversation_history.0.clone());
+    let conversation_history = TestRetainedHistory {
+        retained,
+        current: conversation_history,
+        compaction_model_hash: parent_model.comp_hash.clone(),
+    };
     thread_store.insert(parent_model);
 
     registry.tool_lifecycle_contributors()[0]
@@ -2826,6 +3242,9 @@ async fn contributor_reuses_the_latest_compatible_parent_compaction() -> Result<
         serde_json::to_value(&latest_compaction)?
     );
     assert_eq!(request["input"][3]["role"], "user");
+    let transcript = serde_json::to_string(&request["input"][3])?;
+    assert!(transcript.contains("tool check_repository call"));
+    assert!(transcript.contains("tool check_repository result: repository is private"));
 
     let previous_score = tokio::time::timeout(ASYNC_TEST_TIMEOUT, async {
         loop {
@@ -2837,6 +3256,8 @@ async fn contributor_reuses_the_latest_compatible_parent_compaction() -> Result<
     })
     .await?;
     assert_eq!(previous_score.scores.get("action_risk"), Some(&0.0));
+    // Raw injection did not attach producer provenance to the live checkpoint.
+    // The sample's mock snapshot cannot make that live checkpoint safe for approval.
     assert_eq!(
         registry
             .fast_approval_decision(
@@ -2846,7 +3267,7 @@ async fn contributor_reuses_the_latest_compatible_parent_compaction() -> Result<
                 /*extension_metrics*/ None,
             )
             .await,
-        Some(ReviewDecision::Approved)
+        (!thread_context_enabled).then_some(ReviewDecision::Approved),
     );
 
     let oversized_compaction = ResponseItem::Compaction {
@@ -2865,10 +3286,13 @@ async fn contributor_reuses_the_latest_compatible_parent_compaction() -> Result<
             tool_name: &tool_name,
             mcp_tool: None,
             payload: &tool_payload,
-            conversation_history: Arc::new(TestConversationHistory(vec![
-                latest_compaction,
-                oversized_compaction,
-            ])),
+            conversation_history: Arc::new(TestRetainedHistory {
+                current: TestConversationHistory(vec![latest_compaction, oversized_compaction]),
+                retained: Vec::new(),
+                compaction_model_hash: thread_store
+                    .get::<ModelInfo>()
+                    .and_then(|model| model.comp_hash.clone()),
+            }),
             source: ToolCallSource::Direct,
         })
         .await;
@@ -2906,7 +3330,7 @@ async fn contributor_reuses_the_latest_compatible_parent_compaction() -> Result<
             sample,
             RecordedMetric::Counter(name, 1, tags)
                 if name == CLASSIFICATION_METRIC
-                    && tags == &[("outcome".to_owned(), "failure".to_owned())]
+                    && tags.contains(&("outcome".to_owned(), "failure".to_owned()))
         )
     }));
 
@@ -2914,7 +3338,7 @@ async fn contributor_reuses_the_latest_compatible_parent_compaction() -> Result<
 }
 
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
-async fn contributor_can_disable_parent_compaction_reuse() -> Result<()> {
+async fn legacy_contributor_can_disable_parent_compaction_reuse() -> Result<()> {
     skip_if_no_network!(Ok(()));
 
     let oversized_compaction = ResponseItem::Compaction {
@@ -2924,17 +3348,9 @@ async fn contributor_can_disable_parent_compaction_reuse() -> Result<()> {
     };
     let conversation_history = vec![
         oversized_compaction,
-        ResponseItem::Message {
-            id: None,
-            role: "user".to_owned(),
-            content: vec![ContentItem::InputText {
-                text: "Inspect the repository guidelines.".to_owned(),
-            }],
-            phase: None,
-            internal_chat_message_metadata_passthrough: None,
-        },
+        user_instruction("Inspect the repository guidelines."),
     ];
-    let configuration = "[features.guardianv2]\nenabled = true\nreuse_parent_compaction = false\nmax_parent_compaction_tokens = 256\n";
+    let configuration = "[features.guardianv2]\nthread_context = false\nenabled = true\nreuse_parent_compaction = false\nmax_parent_compaction_tokens = 256\n";
     let (request, test, _registry) = sample_configured_conversation_history(
         conversation_history,
         r#"{"path":"README.md"}"#,

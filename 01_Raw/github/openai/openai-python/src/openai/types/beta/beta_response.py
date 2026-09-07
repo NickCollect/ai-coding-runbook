@@ -36,6 +36,11 @@ __all__ = [
     "ModerationOutput",
     "ModerationOutputModerationResult",
     "ModerationOutputError",
+    "PromptCacheDiagnostics",
+    "PromptCacheDiagnosticsCacheMiss",
+    "PromptCacheDiagnosticsCacheHit",
+    "PromptCacheDiagnosticsComparisonResponseNotFound",
+    "PromptCacheDiagnosticsUnavailable",
     "PromptCacheOptions",
     "Reasoning",
 ]
@@ -44,8 +49,13 @@ __all__ = [
 class IncompleteDetails(BaseModel):
     """Details about why the response is incomplete."""
 
-    reason: Optional[Literal["max_output_tokens", "content_filter"]] = None
-    """The reason why the response is incomplete."""
+    reason: Optional[Literal["max_output_tokens", "max_messages", "content_filter", "steered"]] = None
+    """The reason why the response is incomplete.
+
+    `steered` means the response stopped at a safe output boundary after a WebSocket
+    `response.steer` event. The server can then create a successor response
+    automatically with the queued input.
+    """
 
 
 class ToolChoiceBetaSpecificProgrammaticToolCallingParam(BaseModel):
@@ -180,6 +190,55 @@ class Moderation(BaseModel):
     """Moderation for the response output."""
 
 
+class PromptCacheDiagnosticsCacheMiss(BaseModel):
+    cache_missed_tokens: int
+    """
+    The estimated number of input tokens affected after the first detected
+    divergence.
+    """
+
+    reason: Literal[
+        "model_changed",
+        "prompt_cache_key_changed",
+        "tools_changed",
+        "text_format_changed",
+        "reasoning_effort_changed",
+        "verbosity_changed",
+        "context_compacted",
+        "input_changed",
+        "service_tier_changed",
+    ]
+    """The reason prompt cache reuse did not occur."""
+
+    type: Literal["cache_miss"]
+
+    comparison_reusable_tokens: Optional[int] = None
+    """The raw token count of the reusable prefix in the compared response."""
+
+
+class PromptCacheDiagnosticsCacheHit(BaseModel):
+    type: Literal["cache_hit"]
+
+
+class PromptCacheDiagnosticsComparisonResponseNotFound(BaseModel):
+    type: Literal["comparison_response_not_found"]
+
+
+class PromptCacheDiagnosticsUnavailable(BaseModel):
+    type: Literal["unavailable"]
+
+
+PromptCacheDiagnostics: TypeAlias = Annotated[
+    Union[
+        PromptCacheDiagnosticsCacheMiss,
+        PromptCacheDiagnosticsCacheHit,
+        PromptCacheDiagnosticsComparisonResponseNotFound,
+        PromptCacheDiagnosticsUnavailable,
+    ],
+    PropertyInfo(discriminator="type"),
+]
+
+
 class PromptCacheOptions(BaseModel):
     """The prompt-caching options that were applied to the response.
 
@@ -192,10 +251,12 @@ class PromptCacheOptions(BaseModel):
     ttl: Literal["30m"]
     """The minimum lifetime applied to each cache breakpoint."""
 
+    comparison_response_id: Optional[str] = None
+    """The response ID supplied as the prompt cache diagnostics comparison."""
+
 
 class Reasoning(BaseModel):
-    """**gpt-5 and o-series models only**
-
+    """
     Configuration options for
     [reasoning models](https://platform.openai.com/docs/guides/reasoning).
     """
@@ -279,6 +340,7 @@ class BetaResponse(BaseModel):
 
     model: Union[
         Literal[
+            "gpt-6-astra",
             "gpt-5.6-sol",
             "gpt-5.6-terra",
             "gpt-5.6-luna",
@@ -384,7 +446,7 @@ class BetaResponse(BaseModel):
         ],
         str,
     ]
-    """Model ID used to generate the response, like `gpt-4o` or `o3`.
+    """Model ID used to generate the response, like `gpt-6-astra`.
 
     OpenAI offers a wide range of models with different capabilities, performance
     characteristics, and price points. Refer to the
@@ -509,6 +571,9 @@ class BetaResponse(BaseModel):
     [Learn more](https://platform.openai.com/docs/guides/text?api-mode=responses#reusable-prompts).
     """
 
+    prompt_cache_diagnostics: Optional[PromptCacheDiagnostics] = None
+    """Prompt cache diagnostics requested for this response."""
+
     prompt_cache_key: Optional[str] = None
     """
     Used by OpenAI to cache responses for similar requests to optimize your cache
@@ -543,8 +608,7 @@ class BetaResponse(BaseModel):
     """
 
     reasoning: Optional[Reasoning] = None
-    """**gpt-5 and o-series models only**
-
+    """
     Configuration options for
     [reasoning models](https://platform.openai.com/docs/guides/reasoning).
     """

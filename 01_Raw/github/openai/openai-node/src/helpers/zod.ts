@@ -333,18 +333,8 @@ export function zodTextFormat<ZodInput extends ZodTypeLike>(
   );
 }
 
-/**
- * Creates a chat completion `function` tool that can be invoked
- * automatically by the chat completion `.runTools()` method or automatically
- * parsed by `.parse()` / `.stream()`.
- *
- * Arguments are converted to strict JSON Schema and validated with the supplied
- * Zod schema before the optional callback receives them.
- *
- * @param options Model-visible function name, Zod parameter schema, description,
- * and optional callback used by `chat.completions.runTools()`.
- */
-export function zodFunction<Parameters extends ZodTypeLike>(options: {
+/** Model-facing settings and an optional execution callback for a Zod function tool. */
+interface ZodFunctionOptions<Parameters extends ZodTypeLike> {
   /** Model-visible function name used to identify matching tool calls. */
   name: string;
 
@@ -356,19 +346,53 @@ export function zodFunction<Parameters extends ZodTypeLike>(options: {
 
   /** Optional model-visible explanation of when and how the function should be used. */
   description?: string | undefined;
-}): AutoParseableTool<{
+}
+
+/** A Zod function tool retaining its inferred argument and callback types. */
+type ZodFunctionTool<
+  Parameters extends ZodTypeLike,
+  Callback extends ZodFunctionOptions<Parameters>['function'],
+> = AutoParseableTool<{
   /** Inferred argument type produced by the Zod parameter schema. */
   arguments: InferZodType<Parameters>;
-
   /** Model-visible name used to match generated function calls. */
   name: string;
+  /** Callback availability determines whether the tool can be executed. */
+  function: Callback;
+}>;
 
-  /** Callback signature associated with validated function-call arguments. */
-  function: (args: InferZodType<Parameters>) => unknown;
-}> {
-  const zodSchema = options.parameters as unknown as ZodSchema;
+/**
+ * Creates a chat completion `function` tool that can be invoked automatically
+ * by `.runTools()` or parsed by `.parse()` / `.stream()`.
+ *
+ * Arguments are converted to strict JSON Schema and validated with the supplied
+ * Zod schema before the callback receives them.
+ *
+ * @param options Model-visible function name, Zod parameter schema, description,
+ * and callback used by `chat.completions.runTools()`.
+ */
+export function zodFunction<Parameters extends ZodTypeLike>(
+  options: ZodFunctionOptions<Parameters> & {
+    /** Callback invoked with validated arguments by chat `runTools()`. */
+    function: NonNullable<ZodFunctionOptions<Parameters>['function']>;
+  },
+): ZodFunctionTool<Parameters, NonNullable<ZodFunctionOptions<Parameters>['function']>>;
 
-  // @ts-expect-error TODO
+/**
+ * Creates a strict chat completion function tool for `.parse()` / `.stream()`.
+ * Without a guaranteed callback, the tool cannot be executed by `.runTools()`.
+ *
+ * @param options Model-visible function details and an optional callback.
+ */
+export function zodFunction<Parameters extends ZodTypeLike>(
+  options: ZodFunctionOptions<Parameters>,
+): ZodFunctionTool<Parameters, ZodFunctionOptions<Parameters>['function']>;
+
+/** Builds a strict Chat Completions function tool from the supplied Zod schema. */
+export function zodFunction<Parameters extends ZodTypeLike>(options: ZodFunctionOptions<Parameters>) {
+  const parameters = options.parameters;
+  const zodSchema = parameters as unknown as ZodSchema;
+
   return makeParseableTool<any>(
     {
       type: 'function',
@@ -383,7 +407,7 @@ export function zodFunction<Parameters extends ZodTypeLike>(options: {
     },
     {
       callback: options.function,
-      parser: (args) => parseZodObject(options.parameters, args),
+      parser: (args) => parseZodObject(parameters, args),
     },
   );
 }
@@ -421,7 +445,8 @@ export function zodResponsesFunction<Parameters extends ZodTypeLike>(options: {
   /** Callback signature associated with validated function-call arguments. */
   function: (args: InferZodType<Parameters>) => unknown;
 }> {
-  const zodSchema = options.parameters as unknown as ZodSchema;
+  const parameters = options.parameters;
+  const zodSchema = parameters as unknown as ZodSchema;
 
   return makeParseableResponseTool<any>(
     {
@@ -435,7 +460,7 @@ export function zodResponsesFunction<Parameters extends ZodTypeLike>(options: {
     },
     {
       callback: options.function,
-      parser: (args) => parseZodObject(options.parameters, args),
+      parser: (args) => parseZodObject(parameters, args),
     },
   );
 }

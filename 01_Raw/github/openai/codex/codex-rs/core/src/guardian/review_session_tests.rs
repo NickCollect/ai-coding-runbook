@@ -1,4 +1,6 @@
 use super::*;
+use codex_history::CodexHarnessMetadata;
+use codex_history::ResponseItemEnvelope;
 use codex_protocol::openai_models::AutoReviewMessages;
 use codex_protocol::protocol::AgentStatus;
 use codex_protocol::protocol::ErrorEvent;
@@ -100,10 +102,13 @@ async fn test_review_params() -> GuardianReviewSessionParams {
         parent_session: Arc::new(session),
         parent_context: GuardianReviewContext::from(Arc::new(turn)),
         spawn_config,
+        node_repl_policy: GuardianNodeReplPolicy::from_model_messages(/*messages*/ None),
         request: GuardianApprovalRequest::ExecCommand {
             id: "shell-1".to_string(),
+            environment_id: codex_exec_server::LOCAL_ENVIRONMENT_ID.to_string(),
             command: vec!["git".to_string(), "status".to_string()],
-            cwd,
+            cwd: cwd.clone().into(),
+            guardian_cwd: codex_utils_path_uri::LegacyAppPathString::from_abs_path(&cwd),
             sandbox_permissions: crate::sandboxing::SandboxPermissions::UseDefault,
             additional_permissions: None,
             justification: Some("Inspect repo state.".to_string()),
@@ -112,6 +117,7 @@ async fn test_review_params() -> GuardianReviewSessionParams {
         reasons: ApprovalRequestReasons::default(),
         schema: super::super::prompt::guardian_output_schema(),
         model,
+        compaction_model_hash: None,
         reasoning_effort,
         guardian_default_review_model_id: "codex-auto-review".to_string(),
         guardian_catalog_contains_auto_review: true,
@@ -212,8 +218,23 @@ async fn guardian_review_session_config_change_invalidates_cached_session() {
         cached_reuse_key
             .clone()
             .with_node_repl_policy_eligibility(/*required*/ false),
-        cached_reuse_key.with_node_repl_policy_eligibility(/*required*/ true),
+        cached_reuse_key
+            .clone()
+            .with_node_repl_policy_eligibility(/*required*/ true),
         "switching parent-model Node REPL eligibility must invalidate reviewer history"
+    );
+    let messages = serde_json::from_value(serde_json::json!({
+        "auto_review": { "node_repl_policy": "Catalog REPL policy." }
+    }))
+    .expect("catalog model messages");
+    assert_ne!(
+        cached_reuse_key.clone().with_node_repl_policy(
+            &GuardianNodeReplPolicy::from_model_messages(/*messages*/ None),
+        ),
+        cached_reuse_key.with_node_repl_policy(&GuardianNodeReplPolicy::from_model_messages(Some(
+            &messages
+        )),),
+        "changing the effective Node REPL policy must invalidate reviewer history"
     );
 
     let mut compaction_enabled_config = cached_spawn_config;
@@ -235,8 +256,18 @@ async fn guardian_review_session_config_change_invalidates_cached_session() {
     );
 }
 
-#[test]
-fn encrypted_parent_compaction_requires_original_item_id() {
+#[test_case::test_case(true; "thread owned")]
+#[test_case::test_case(false; "legacy")]
+#[tokio::test]
+async fn encrypted_parent_compaction_requires_original_item_id(thread_context_enabled: bool) {
+    let (session, _) = crate::session::tests::make_session_and_context().await;
+    let mut features = session.get_config().await.features.clone();
+    features
+        .enable(Feature::GuardianReuseParentCompaction)
+        .expect("legacy reuse");
+    features
+        .set_enabled(Feature::GuardianThreadContext, thread_context_enabled)
+        .expect("context mode");
     let item = ResponseItem::Compaction {
         id: Some(codex_protocol::ResponseItemId::from_server(
             "cmp_guardian_parent_summary".to_string(),
@@ -245,18 +276,36 @@ fn encrypted_parent_compaction_requires_original_item_id() {
         internal_chat_message_metadata_passthrough: None,
     };
 
+    let mut history = ContextManager::new();
+    history.replace_annotated(vec![ResponseItemEnvelope {
+        item: item.clone(),
+        metadata: Some(CodexHarnessMetadata {
+            compaction_model_hash: Some("compatible".to_owned()),
+            ..Default::default()
+        }),
+    }]);
     assert_eq!(
-        encrypted_parent_compaction(std::slice::from_ref(&item)),
+        encrypted_parent_compaction(&history, &features, Some("compatible"))
+            .expect("valid checkpoint"),
         Some(item)
     );
-    assert_eq!(
-        encrypted_parent_compaction(&[ResponseItem::Compaction {
+    // The latest unusable checkpoint must not fall back to the older valid one.
+    let mut items = history.annotated_items().to_vec();
+    items.push(
+        ResponseItem::Compaction {
             id: None,
             encrypted_content: "encrypted guardian parent summary".to_string(),
             internal_chat_message_metadata_passthrough: None,
-        }]),
-        None
+        }
+        .into(),
     );
+    history.replace_annotated(items);
+    let result = encrypted_parent_compaction(&history, &features, Some("compatible"));
+    if thread_context_enabled {
+        assert!(result.is_err());
+    } else {
+        assert_eq!(result.expect("legacy omission"), None);
+    }
 }
 
 #[tokio::test]
@@ -385,6 +434,7 @@ async fn guardian_review_session_config_prefers_managed_policy_and_uses_catalog_
         auto_review: Some(AutoReviewMessages {
             policy: Some("Use the catalog Guardian policy.".to_string()),
             policy_template: Some(catalog_template.to_string()),
+            node_repl_policy: None,
             rejection_instructions: None,
             timeout_instructions: None,
         }),
@@ -426,6 +476,7 @@ async fn guardian_review_session_config_preserves_explicit_empty_catalog_policy(
         auto_review: Some(AutoReviewMessages {
             policy: Some(String::new()),
             policy_template: None,
+            node_repl_policy: None,
             rejection_instructions: None,
             timeout_instructions: None,
         }),
@@ -475,6 +526,7 @@ async fn guardian_review_session_config_preserves_explicit_empty_catalog_templat
         auto_review: Some(AutoReviewMessages {
             policy: Some(catalog_policy.to_string()),
             policy_template: Some(String::new()),
+            node_repl_policy: None,
             rejection_instructions: None,
             timeout_instructions: None,
         }),
@@ -721,7 +773,8 @@ async fn run_review_removes_trunk_when_event_stream_is_broken() {
             .await
             .history_version(),
     )
-    .with_environments(params.parent_context.environments());
+    .with_environments(params.parent_context.environments())
+    .with_node_repl_policy(&params.node_repl_policy);
     let manager = Arc::new(GuardianReviewSessionManager {
         state: Arc::new(Mutex::new(GuardianReviewSessionState {
             trunk: Some(Arc::new(review_session)),

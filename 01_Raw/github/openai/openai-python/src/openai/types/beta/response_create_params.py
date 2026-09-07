@@ -128,6 +128,7 @@ class ResponseCreateParamsBase(TypedDict, total=False):
 
     model: Union[
         Literal[
+            "gpt-6-astra",
             "gpt-5.6-sol",
             "gpt-5.6-terra",
             "gpt-5.6-luna",
@@ -233,7 +234,7 @@ class ResponseCreateParamsBase(TypedDict, total=False):
         ],
         str,
     ]
-    """Model ID used to generate the response, like `gpt-4o` or `o3`.
+    """Model ID used to generate the response, like `gpt-6-astra`.
 
     OpenAI offers a wide range of models with different capabilities, performance
     characteristics, and price points. Refer to the
@@ -306,8 +307,7 @@ class ResponseCreateParamsBase(TypedDict, total=False):
     """
 
     reasoning: Optional[Reasoning]
-    """**gpt-5 and o-series models only**
-
+    """
     Configuration options for
     [reasoning models](https://platform.openai.com/docs/guides/reasoning).
     """
@@ -509,6 +509,13 @@ class PromptCacheOptions(TypedDict, total=False):
     Supported for `gpt-5.6` and later models. By default, OpenAI automatically chooses one implicit cache breakpoint. You can add explicit breakpoints to content blocks with `prompt_cache_breakpoint`. Each request can write up to four breakpoints. For cache matching, OpenAI considers up to the latest 80 breakpoints in the conversation, without a content-block lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The `ttl` defaults to `30m`, which is currently the only supported value. See the [prompt caching guide](https://platform.openai.com/docs/guides/prompt-caching) for current details.
     """
 
+    comparison_response_id: Optional[str]
+    """The ID of a response to compare when diagnosing prompt cache reuse.
+
+    Supplying this field requests prompt cache diagnostics when the feature is
+    enabled.
+    """
+
     mode: Literal["implicit", "explicit"]
     """Controls whether OpenAI automatically creates an implicit cache breakpoint.
 
@@ -528,8 +535,7 @@ class PromptCacheOptions(TypedDict, total=False):
 
 
 class Reasoning(TypedDict, total=False):
-    """**gpt-5 and o-series models only**
-
+    """
     Configuration options for
     [reasoning models](https://platform.openai.com/docs/guides/reasoning).
     """

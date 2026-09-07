@@ -1,11 +1,58 @@
-import { vi } from 'vitest';
+import { expectTypeOf, vi } from 'vitest';
 import OpenAI, { APIError, APIUserAbortError, OpenAIError } from 'openai';
 import { ReadableStreamFrom } from 'openai/internal/shims';
 import { ResponseStream } from 'openai/lib/responses/ResponseStream';
-import type { Response, ResponseStreamEvent } from 'openai/resources/responses/responses';
+import type {
+  ParsedResponseStreamEvent,
+  ResponseFunctionCallArgumentsDeltaEvent,
+  ResponseTextDeltaEvent,
+} from 'openai/lib/responses/EventTypes';
+import type { Response as APIResponse, ResponseStreamEvent } from 'openai/resources/responses/responses';
 import { makeStreamSnapshotRequest } from '../utils/mock-snapshots';
 
+test('parsed response events include every API event with unchanged non-delta shapes', () => {
+  type SnapshotDelta = ResponseTextDeltaEvent | ResponseFunctionCallArgumentsDeltaEvent;
+
+  expectTypeOf<ParsedResponseStreamEvent['type']>().toEqualTypeOf<ResponseStreamEvent['type']>();
+  expectTypeOf<Exclude<ParsedResponseStreamEvent, { type: SnapshotDelta['type'] }>>().toEqualTypeOf<
+    Exclude<ResponseStreamEvent, { type: SnapshotDelta['type'] }>
+  >();
+});
+
+test('parsed response deltas retain their required snapshots', () => {
+  expectTypeOf<ResponseTextDeltaEvent['snapshot']>().toEqualTypeOf<string>();
+  expectTypeOf<ResponseFunctionCallArgumentsDeltaEvent['snapshot']>().toEqualTypeOf<string>();
+  expectTypeOf<
+    Extract<ParsedResponseStreamEvent, { type: 'response.output_text.delta' }>
+  >().toEqualTypeOf<ResponseTextDeltaEvent>();
+  expectTypeOf<
+    Extract<ParsedResponseStreamEvent, { type: 'response.function_call_arguments.delta' }>
+  >().toEqualTypeOf<ResponseFunctionCallArgumentsDeltaEvent>();
+});
+
 describe('.stream()', () => {
+  it.each(['on', 'once'] as const)('preserves callback receivers for %s listeners', async (method) => {
+    const events: ResponseStreamEvent[] = [
+      { type: 'response.created', sequence_number: 0, response: makeResponse() },
+      { type: 'response.completed', sequence_number: 1, response: makeResponse({ status: 'completed' }) },
+    ];
+    const stream = ResponseStream.fromReadableStream(readableStreamFromEvents(events));
+    const unbound = vi.fn();
+    const bound = vi.fn();
+    const context = { name: 'caller-owned context' };
+
+    stream[method]('event', unbound);
+    stream[method]('event', bound.bind(context));
+    await stream.done();
+
+    const calls = (method === 'once' ? events.slice(0, 1) : events).map((event) => [event]);
+    expect(bound.mock.calls).toEqual(calls);
+    expect(bound.mock.contexts).toEqual(calls.map(() => context));
+    expect(unbound.mock.calls).toEqual(calls);
+    expect(unbound.mock.contexts).toHaveLength(calls.length);
+    expect(unbound.mock.contexts.every((receiver) => receiver === undefined)).toBe(true);
+  });
+
   it('replays prior events when resuming by ID so snapshots stay complete', async () => {
     const requests: string[] = [];
     const response = {
@@ -164,7 +211,7 @@ describe('.stream()', () => {
   ] as const)(
     'dispatches the originally validated text route when a raw listener $mutation $field',
     async ({ field, mutation }) => {
-      const output: Response['output'] = [
+      const output: APIResponse['output'] = [
         {
           id: 'msg_first',
           type: 'message',
@@ -231,7 +278,7 @@ describe('.stream()', () => {
   );
 
   it('dispatches validated function-call routes even when raw listeners alter their identities', async () => {
-    const output: Response['output'] = [
+    const output: APIResponse['output'] = [
       {
         id: 'function_first',
         type: 'function_call',
@@ -282,7 +329,7 @@ describe('.stream()', () => {
   });
 
   it('captures a custom-transport routing accessor exactly once for accumulation and dispatch', async () => {
-    const output: Response['output'] = [
+    const output: APIResponse['output'] = [
       {
         id: 'msg_first',
         type: 'message',
@@ -488,7 +535,7 @@ describe('.stream()', () => {
       (['message', 'reasoning', 'shell_call_output'] as const).map((itemType) => ({ type, itemType })),
     ),
   )('rejects public $type targeting $itemType before any emission', async ({ type, itemType }) => {
-    const outputByType: Record<typeof itemType, Response['output'][number]> = {
+    const outputByType: Record<typeof itemType, APIResponse['output'][number]> = {
       message: {
         id: 'msg_123',
         type: 'message',
@@ -1068,7 +1115,7 @@ function readableStreamFromEvents(events: ResponseStreamEvent[]) {
   return ReadableStreamFrom(events.map((event) => encoder.encode(JSON.stringify(event) + '\n')));
 }
 
-function makeResponse(overrides: Partial<Response> = {}): Response {
+function makeResponse(overrides: Partial<APIResponse> = {}): APIResponse {
   return {
     id: 'resp_123',
     object: 'response',
@@ -1096,5 +1143,5 @@ function makeResponse(overrides: Partial<Response> = {}): Response {
     usage: null,
     user: null,
     ...overrides,
-  } as Response;
+  } as APIResponse;
 }

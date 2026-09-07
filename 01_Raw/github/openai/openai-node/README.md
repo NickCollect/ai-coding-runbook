@@ -96,6 +96,7 @@ const response = await client.responses.create({
         { type: 'input_text', text: 'What is in this image?' },
         {
           type: 'input_image',
+          detail: 'auto',
           image_url:
             'https://api.nga.gov/iiif/a2e6da57-3cd1-4235-b20e-95dcaefed6c8/full/!800,800/0/default.jpg',
         },
@@ -318,7 +319,7 @@ const client = new OpenAI({
 });
 
 export async function webhook(request: Request) {
-  const headersList = headers();
+  const headersList = await headers();
   const body = await request.text();
 
   try {
@@ -358,7 +359,7 @@ const client = new OpenAI({
 });
 
 export async function webhook(request: Request) {
-  const headersList = headers();
+  const headersList = await headers();
   const body = await request.text();
 
   try {
@@ -388,10 +389,10 @@ const job = await client.fineTuning.jobs
   .create({ model: 'gpt-4o', training_file: 'file-abc123' })
   .catch(async (err) => {
     if (err instanceof OpenAI.APIError) {
-      console.log(err.request_id);
+      console.log(err.requestID);
       console.log(err.status); // 400
-      console.log(err.name); // BadRequestError
-      console.log(err.headers); // {server: 'nginx', ...}
+      console.log(err instanceof OpenAI.BadRequestError); // true for an HTTP 400 response
+      console.log(err.headers); // response Headers
     } else {
       throw err;
     }
@@ -406,6 +407,7 @@ Error codes are as follows:
 | 401         | `AuthenticationError`      |
 | 403         | `PermissionDeniedError`    |
 | 404         | `NotFoundError`            |
+| 409         | `ConflictError`            |
 | 422         | `UnprocessableEntityError` |
 | 429         | `RateLimitError`           |
 | >=500       | `InternalServerError`      |

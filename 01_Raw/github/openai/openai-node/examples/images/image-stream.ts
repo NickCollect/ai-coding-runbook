@@ -16,6 +16,7 @@ const main = async () => {
     partial_images: 3,
   });
 
+  let receivedFinalImage = false;
   for await (const event of stream) {
     let filename: string;
     let imageBuffer: Buffer;
@@ -39,6 +40,7 @@ const main = async () => {
         filename = 'final_image.png';
         imageBuffer = Buffer.from(event.b64_json, 'base64');
         fs.writeFileSync(filename, imageBuffer);
+        receivedFinalImage = true;
         console.log(`    Saved to: ${path.resolve(filename)}`);
         break;
       }
@@ -47,8 +49,13 @@ const main = async () => {
       }
     }
   }
+
+  if (!receivedFinalImage) {
+    throw new Error('Image stream ended without a final image.');
+  }
 };
 
 main().catch((error) => {
   console.error('Error generating image:', error);
+  process.exitCode = 1;
 });

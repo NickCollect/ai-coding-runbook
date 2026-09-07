@@ -16,6 +16,7 @@ from .beta_tool_choice_custom import BetaToolChoiceCustom
 from .beta_response_includable import BetaResponseIncludable
 from .beta_tool_choice_allowed import BetaToolChoiceAllowed
 from .beta_tool_choice_options import BetaToolChoiceOptions
+from .beta_response_steer_event import BetaResponseSteerEvent
 from .beta_response_text_config import BetaResponseTextConfig
 from .beta_tool_choice_function import BetaToolChoiceFunction
 from .beta_response_inject_event import BetaResponseInjectEvent
@@ -109,6 +110,13 @@ class ResponseCreatePromptCacheOptions(BaseModel):
     Supported for `gpt-5.6` and later models. By default, OpenAI automatically chooses one implicit cache breakpoint. You can add explicit breakpoints to content blocks with `prompt_cache_breakpoint`. Each request can write up to four breakpoints. For cache matching, OpenAI considers up to the latest 80 breakpoints in the conversation, without a content-block lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The `ttl` defaults to `30m`, which is currently the only supported value. See the [prompt caching guide](https://platform.openai.com/docs/guides/prompt-caching) for current details.
     """
 
+    comparison_response_id: Optional[str] = None
+    """The ID of a response to compare when diagnosing prompt cache reuse.
+
+    Supplying this field requests prompt cache diagnostics when the feature is
+    enabled.
+    """
+
     mode: Optional[Literal["implicit", "explicit"]] = None
     """Controls whether OpenAI automatically creates an implicit cache breakpoint.
 
@@ -128,8 +136,7 @@ class ResponseCreatePromptCacheOptions(BaseModel):
 
 
 class ResponseCreateReasoning(BaseModel):
-    """**gpt-5 and o-series models only**
-
+    """
     Configuration options for
     [reasoning models](https://platform.openai.com/docs/guides/reasoning).
     """
@@ -314,6 +321,7 @@ class ResponseCreate(BaseModel):
 
     model: Union[
         Literal[
+            "gpt-6-astra",
             "gpt-5.6-sol",
             "gpt-5.6-terra",
             "gpt-5.6-luna",
@@ -420,7 +428,7 @@ class ResponseCreate(BaseModel):
         str,
         None,
     ] = None
-    """Model ID used to generate the response, like `gpt-4o` or `o3`.
+    """Model ID used to generate the response, like `gpt-6-astra`.
 
     OpenAI offers a wide range of models with different capabilities, performance
     characteristics, and price points. Refer to the
@@ -493,8 +501,7 @@ class ResponseCreate(BaseModel):
     """
 
     reasoning: Optional[ResponseCreateReasoning] = None
-    """**gpt-5 and o-series models only**
-
+    """
     Configuration options for
     [reasoning models](https://platform.openai.com/docs/guides/reasoning).
     """
@@ -646,5 +653,5 @@ class ResponseCreate(BaseModel):
 
 
 BetaResponsesClientEvent: TypeAlias = Annotated[
-    Union[ResponseCreate, BetaResponseInjectEvent], PropertyInfo(discriminator="type")
+    Union[ResponseCreate, BetaResponseSteerEvent, BetaResponseInjectEvent], PropertyInfo(discriminator="type")
 ]

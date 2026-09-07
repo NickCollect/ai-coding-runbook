@@ -46,6 +46,7 @@ use tokio::sync::Semaphore;
 use tokio::sync::oneshot;
 use uuid::Uuid;
 
+use super::metrics::sampler_failure_reason;
 use super::trusted_skills::GuardianTrustedSkillsFragment;
 use super::trusted_tools::GuardianTrustedToolFragment;
 
@@ -90,6 +91,8 @@ pub struct LunaSamplerConfig {
 
 /// One tool-less Luna classification request over an already-open connection.
 pub struct LunaSamplingRequest {
+    /// ID of the response handling the classified tool.
+    pub parent_response_id: Option<String>,
     /// Trusted instructions describing the requested classification.
     pub instructions: String,
     /// Host-supplied Guardian reviews isolated from untrusted transcript entries.
@@ -104,7 +107,7 @@ pub struct LunaSamplingRequest {
     pub images: Vec<ContentItem>,
     /// Opaque parent compaction to reuse only for compatible model configurations.
     pub parent_compaction: Option<ResponseItem>,
-    /// Current parent model's encrypted-compaction compatibility hash.
+    /// Host-selected compatibility hash for the supplied parent checkpoint.
     pub parent_compaction_hash: Option<String>,
     /// Reasoning budget explicitly selected for this request.
     pub reasoning_effort: ReasoningEffort,
@@ -135,6 +138,9 @@ pub enum LunaSamplerError {
     /// A newer classification replaced this request when the pool was full.
     #[error("Luna request was superseded by a newer classification")]
     Superseded,
+    /// The supplied parent checkpoint cannot be consumed by this Luna configuration.
+    #[error("parent compaction is incompatible with Luna")]
+    IncompatibleCompaction,
 }
 
 struct PooledConnection {
@@ -203,6 +209,15 @@ pub struct LunaSampler {
 }
 
 impl LunaSampler {
+    /// A checkpoint is reusable only when both models declare the same nonempty hash.
+    pub(super) fn supports_parent_compaction(&self, parent_hash: Option<&str>) -> bool {
+        parent_hash
+            .zip(self.config.luna_compaction_hash.as_deref())
+            .is_some_and(|(parent_hash, luna_hash)| {
+                !parent_hash.is_empty() && parent_hash == luna_hash
+            })
+    }
+
     pub(super) fn new(config: LunaSamplerConfig) -> Self {
         Self {
             config,
@@ -315,10 +330,24 @@ impl LunaSampler {
             /*turn_state*/ None,
             /*telemetry*/ None,
         );
-        let connection = tokio::time::timeout(provider_info.websocket_connect_timeout(), connect)
+        let started_at = Instant::now();
+        let result = tokio::time::timeout(provider_info.websocket_connect_timeout(), connect)
             .await
-            .map_err(|_| LunaSamplerError::ConnectionTimeout)?
-            .map_err(LunaSamplerError::Api)?;
+            .map_err(|_| LunaSamplerError::ConnectionTimeout)
+            .and_then(|result| result.map_err(LunaSamplerError::Api));
+        if let Some(metrics) = self.config.metrics.as_deref() {
+            let outcome = if result.is_ok() { "success" } else { "failure" };
+            let mut tags = vec![("endpoint", endpoint.path()), ("outcome", outcome)];
+            if let Err(error) = &result {
+                tags.push(("failure_reason", sampler_failure_reason(error)));
+            }
+            metrics.histogram(
+                "codex.guardian_v2.connection.duration_ms",
+                i64::try_from(started_at.elapsed().as_millis()).unwrap_or(i64::MAX),
+                &tags,
+            );
+        }
+        let connection = result?;
         if auth_changes
             .as_ref()
             .is_some_and(|auth| auth.has_changed().unwrap_or(true))
@@ -412,6 +441,7 @@ impl LunaSampler {
             | LunaSamplerError::MissingOutput
             | LunaSamplerError::OutputTooLarge
             | LunaSamplerError::Superseded
+            | LunaSamplerError::IncompatibleCompaction
             | LunaSamplerError::Api(
                 ApiError::Transport(TransportError::Build(_))
                 | ApiError::ContextWindowExceeded
@@ -432,8 +462,14 @@ impl LunaSampler {
 
     /// Sends one tool-less classification request on an exclusively leased WebSocket.
     pub async fn sample(&self, request: LunaSamplingRequest) -> Result<String, LunaSamplerError> {
+        if request.parent_compaction.is_some()
+            && !self.supports_parent_compaction(request.parent_compaction_hash.as_deref())
+        {
+            return Err(LunaSamplerError::IncompatibleCompaction);
+        }
         // A classification is its own inference turn; retries keep that identity.
         let turn_id = Uuid::now_v7().to_string();
+        let parent_response_id = request.parent_response_id;
         let parent_turn_id = request.parent_turn_id;
         let root_turn_id = request.root_turn_id;
         let mut input = vec![
@@ -452,15 +488,7 @@ impl LunaSampler {
                 internal_chat_message_metadata_passthrough: None,
             },
         ];
-        if request
-            .parent_compaction_hash
-            .as_deref()
-            .zip(self.config.luna_compaction_hash.as_deref())
-            .is_some_and(|(parent_hash, luna_hash)| {
-                !parent_hash.is_empty() && parent_hash == luna_hash
-            })
-            && let Some(parent_compaction) = request.parent_compaction
-        {
+        if let Some(parent_compaction) = request.parent_compaction {
             input.push(parent_compaction);
         }
         if !request.trusted_review_evidence.is_empty() {
@@ -616,6 +644,11 @@ impl LunaSampler {
                 turn_metadata["root_turn_id"] = json!(root_turn_id);
             }
             client_metadata.insert(TURN_METADATA_KEY.to_owned(), turn_metadata.to_string());
+            if lease.connection.endpoint == ResponsesEndpoint::GuardianClassifier
+                && let Some(parent_response_id) = &parent_response_id
+            {
+                client_metadata.insert("parent_response_id".to_owned(), parent_response_id.clone());
+            }
             request.client_metadata = Some(client_metadata);
             let mut stream = match lease
                 .connection

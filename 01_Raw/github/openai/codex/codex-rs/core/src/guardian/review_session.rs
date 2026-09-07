@@ -54,6 +54,7 @@ use crate::config::Permissions;
 use crate::context::ContextualUserFragment;
 use crate::context::GuardianFollowupReviewReminder;
 use crate::context::GuardianNodeReplPolicy;
+use crate::context_manager::ContextManager;
 use crate::environment_selection::TurnEnvironmentSnapshot;
 use crate::image_preparation::ImagePreparationMode;
 use crate::image_preparation::ImageResizeNoticeMode;
@@ -79,6 +80,7 @@ use super::ApprovalRequestReasons;
 use super::GUARDIAN_REVIEWER_NAME;
 use super::GuardianApprovalRequest;
 use super::GuardianReviewContext;
+use super::feedback::record_failed_review;
 #[cfg(test)]
 use super::prompt::BUNDLED_GUARDIAN_POLICY;
 use super::prompt::BUNDLED_GUARDIAN_POLICY_TEMPLATE;
@@ -107,10 +109,12 @@ pub(crate) struct GuardianReviewSessionParams {
     pub(crate) parent_session: Arc<Session>,
     pub(crate) parent_context: GuardianReviewContext,
     pub(crate) spawn_config: Config,
+    pub(crate) node_repl_policy: GuardianNodeReplPolicy,
     pub(crate) request: GuardianApprovalRequest,
     pub(crate) reasons: ApprovalRequestReasons,
     pub(crate) schema: Value,
     pub(crate) model: String,
+    pub(crate) compaction_model_hash: Option<String>,
     pub(crate) reasoning_effort: Option<ReasoningEffortConfig>,
     pub(crate) guardian_default_review_model_id: String,
     pub(crate) guardian_catalog_contains_auto_review: bool,
@@ -192,7 +196,9 @@ struct GuardianReviewSessionReuseKey {
     // Only include settings that affect spawned-session behavior and parent
     // history rewrites that invalidate existing reviewer context.
     parent_history_version: u64,
+    root_authorization_version: Option<crate::codex_thread::GuardianAuthorizationVersion>,
     node_repl_auto_review_required: bool,
+    node_repl_policy: String,
     model: Option<String>,
     model_provider_id: String,
     model_provider: ModelProviderInfo,
@@ -222,15 +228,20 @@ impl GuardianReviewSessionReuseKey {
         parent_history_version: u64,
     ) -> Self {
         Self {
+            root_authorization_version: None,
             parent_history_version: if spawn_config
                 .features
                 .enabled(Feature::GuardianReuseParentCompaction)
+                || spawn_config
+                    .features
+                    .enabled(Feature::GuardianThreadContext)
             {
                 parent_history_version
             } else {
                 0
             },
             node_repl_auto_review_required: false,
+            node_repl_policy: String::new(),
             model: spawn_config.model.clone(),
             model_provider_id: spawn_config.model_provider_id.clone(),
             model_provider: spawn_config.model_provider.clone(),
@@ -267,33 +278,69 @@ impl GuardianReviewSessionReuseKey {
         self.node_repl_auto_review_required = required;
         self
     }
+
+    fn with_node_repl_policy(mut self, policy: &GuardianNodeReplPolicy) -> Self {
+        self.node_repl_policy = policy.body();
+        self
+    }
 }
 
-fn encrypted_parent_compaction<'a, I>(items: I) -> Option<ResponseItem>
-where
-    I: IntoIterator<Item = &'a ResponseItem>,
-    I::IntoIter: DoubleEndedIterator,
-{
-    let item = items.into_iter().rev().find(|item| {
+fn encrypted_parent_compaction(
+    history: &ContextManager,
+    features: &ManagedFeatures,
+    reviewer_compaction_hash: Option<&str>,
+) -> anyhow::Result<Option<ResponseItem>> {
+    let strict = features.enabled(Feature::GuardianThreadContext);
+    if !strict && !features.enabled(Feature::GuardianReuseParentCompaction) {
+        return Ok(None);
+    }
+    let Some(envelope) = history.annotated_items().iter().rev().find(|envelope| {
         matches!(
-            item,
+            envelope.item,
             ResponseItem::Compaction { .. } | ResponseItem::ContextCompaction { .. }
         )
-    })?;
+    }) else {
+        return Ok(None);
+    };
 
-    match item {
+    let item = &envelope.item;
+    let valid = match item {
         ResponseItem::Compaction {
             id: Some(_),
             encrypted_content,
             ..
-        } if !encrypted_content.is_empty() => Some(item.clone()),
+        } if !encrypted_content.is_empty() => true,
         ResponseItem::ContextCompaction {
             id: Some(_),
             encrypted_content: Some(encrypted_content),
             ..
-        } if !encrypted_content.is_empty() => Some(item.clone()),
-        _ => None,
+        } if !encrypted_content.is_empty() => true,
+        _ => false,
+    };
+    if !valid && !strict {
+        return Ok(None);
     }
+    anyhow::ensure!(
+        valid,
+        "parent compaction checkpoint is unusable for Guardian review"
+    );
+    if strict {
+        // A resumed parent may now use a different model. Compare the actual
+        // checkpoint producer with the selected reviewer, not the live parent model.
+        let producer_hash = envelope
+            .metadata
+            .as_ref()
+            .and_then(|metadata| metadata.compaction_model_hash.as_deref());
+        anyhow::ensure!(
+            producer_hash
+                .zip(reviewer_compaction_hash)
+                .is_some_and(|(producer, reviewer)| {
+                    !producer.is_empty() && producer == reviewer
+                }),
+            "parent compaction checkpoint is incompatible with the Guardian review model or its compatibility is unknown"
+        );
+    }
+    Ok(Some(item.clone()))
 }
 
 pub(crate) fn prompt_cache_key_override_for_review_session(
@@ -420,17 +467,28 @@ impl GuardianReviewSessionManager {
     ) -> BoxFuture<'_, anyhow::Result<()>> {
         // Boxing breaks the Session::new -> Guardian -> Session::new future recursion.
         Box::pin(async move {
-            let spawn_config = guardian_review_session_config(&parent_session, &parent_turn)
-                .await?
-                .spawn_config;
+            let session_config =
+                guardian_review_session_config(&parent_session, &parent_turn).await?;
+            let spawn_config = session_config.spawn_config;
             let parent_history = parent_session.clone_history().await;
-            let parent_compaction = spawn_config
-                .features
-                .enabled(Feature::GuardianReuseParentCompaction)
-                .then(|| encrypted_parent_compaction(parent_history.raw_items()))
-                .flatten();
+            let root_authorization_version =
+                if parent_session.enabled(Feature::GuardianThreadContext) {
+                    parent_session
+                        .services
+                        .agent_control
+                        .root_user_authorization(parent_session.thread_id)
+                        .await
+                        .map(|snapshot| snapshot.authorization_version)
+                } else {
+                    None
+                };
+            let parent_compaction = encrypted_parent_compaction(
+                &parent_history,
+                &spawn_config.features,
+                session_config.compaction_model_hash.as_deref(),
+            )?;
             let parent_context = GuardianReviewContext::from(parent_turn);
-            let reuse_key = GuardianReviewSessionReuseKey::from_spawn_config(
+            let mut reuse_key = GuardianReviewSessionReuseKey::from_spawn_config(
                 &spawn_config,
                 parent_session.user_instructions().await,
                 parent_history.history_version(),
@@ -441,7 +499,9 @@ impl GuardianReviewSessionManager {
                     .turn()
                     .model_info()
                     .node_repl_auto_review_required,
-            );
+            )
+            .with_node_repl_policy(&session_config.node_repl_policy);
+            reuse_key.root_authorization_version = root_authorization_version;
             let spawn_cancel_token = self.cancellation_token.child_token();
             let spawn_cancel_guard = spawn_cancel_token.clone().drop_guard();
             let review_session = spawn_guardian_review_session(
@@ -482,10 +542,10 @@ impl GuardianReviewSessionManager {
 
     pub(crate) async fn shutdown(&self) {
         self.cancellation_token.cancel();
-        self.invalidate_for_node_repl_evidence().await;
+        self.invalidate().await;
     }
 
-    pub(crate) async fn invalidate_for_node_repl_evidence(&self) {
+    pub(crate) async fn invalidate(&self) {
         let (review_session, ephemeral_reviews) = {
             let mut state = self.state.lock().await;
             (
@@ -513,12 +573,33 @@ impl GuardianReviewSessionManager {
     ) -> (GuardianReviewSessionOutcome, GuardianReviewAnalyticsResult) {
         let deadline = params.deadline;
         let parent_history = params.parent_session.clone_history().await;
-        let parent_compaction = params
-            .spawn_config
-            .features
-            .enabled(Feature::GuardianReuseParentCompaction)
-            .then(|| encrypted_parent_compaction(parent_history.raw_items()))
-            .flatten();
+        let root_authorization_version = if params
+            .parent_session
+            .enabled(Feature::GuardianThreadContext)
+        {
+            params
+                .parent_session
+                .services
+                .agent_control
+                .root_user_authorization(params.parent_session.thread_id)
+                .await
+                .map(|snapshot| snapshot.authorization_version)
+        } else {
+            None
+        };
+        let parent_compaction = match encrypted_parent_compaction(
+            &parent_history,
+            &params.spawn_config.features,
+            params.compaction_model_hash.as_deref(),
+        ) {
+            Ok(checkpoint) => checkpoint,
+            Err(error) => {
+                return (
+                    GuardianReviewSessionOutcome::PromptBuildFailed(error),
+                    GuardianReviewAnalyticsResult::without_session(),
+                );
+            }
+        };
         let mut next_reuse_key = GuardianReviewSessionReuseKey::from_spawn_config(
             &params.spawn_config,
             params.parent_session.user_instructions().await,
@@ -531,7 +612,9 @@ impl GuardianReviewSessionManager {
                 .turn()
                 .model_info()
                 .node_repl_auto_review_required,
-        );
+        )
+        .with_node_repl_policy(&params.node_repl_policy);
+        next_reuse_key.root_authorization_version = root_authorization_version;
         let mut spawned_trunk = false;
         let trunk_candidate = match run_before_review_deadline(
             deadline,
@@ -541,7 +624,10 @@ impl GuardianReviewSessionManager {
         .await
         {
             Ok(mut state) => {
-                if parent_compaction.is_none()
+                if !params
+                    .parent_session
+                    .enabled(Feature::GuardianThreadContext)
+                    && parent_compaction.is_none()
                     && let Some(trunk) = state.trunk.as_ref()
                 {
                     // Without a decryptable summary, the existing reviewer may
@@ -642,6 +728,7 @@ impl GuardianReviewSessionManager {
             deadline,
         ))
         .await;
+        record_failed_review(&trunk.session, &params, &outcome).await;
         if keep_review_session && matches!(outcome, GuardianReviewSessionOutcome::Completed(_)) {
             trunk.refresh_last_committed_fork_snapshot().await;
         }
@@ -816,6 +903,7 @@ impl GuardianReviewSessionManager {
             deadline,
         ))
         .await;
+        record_failed_review(&review_session.session, &params, &outcome).await;
         if let Some(review_session) = self.take_active_ephemeral(&review_session).await {
             cleanup.disarm();
             review_session.shutdown_in_background();
@@ -1212,6 +1300,13 @@ async fn run_review_on_session(
                 }),
                 ..Default::default()
             })
+            .with_responses_metadata(
+                params
+                    .parent_context
+                    .parent_response_id
+                    .as_ref()
+                    .map(|id| HashMap::from([("parent_response_id".to_owned(), id.clone())])),
+            )
             .on_start(TurnStartOptions {
                 final_output_json_schema: Some(params.schema.clone()),
                 service_tier: None,
@@ -1328,8 +1423,11 @@ async fn ensure_guardian_node_repl_policy(
         return Ok(());
     }
 
-    let policy = GuardianNodeReplPolicy;
+    let policy = &params.node_repl_policy;
     let policy_body = policy.body();
+    if policy_body.is_empty() {
+        return Ok(());
+    }
     let already_injected = review_session
         .session
         .clone_history()
@@ -1367,7 +1465,7 @@ async fn ensure_guardian_node_repl_policy(
         initialize_context.await?;
     }
 
-    let item: ResponseItem = ContextualUserFragment::into(policy);
+    let item: ResponseItem = ContextualUserFragment::into(policy.clone());
     review_session
         .session
         .inject_client_response_items(vec![item], turn_context.as_ref())
