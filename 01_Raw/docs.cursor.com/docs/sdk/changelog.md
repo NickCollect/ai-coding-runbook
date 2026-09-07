@@ -1,12 +1,31 @@
 ---
 source_url: https://cursor.com/docs/sdk/changelog
-fetched_at: 2026-08-10T03:07:42.074099+00:00
+fetched_at: 2026-09-07T05:31:30.891678+00:00
 fetch_method: mintlify_md
 ---
 
 # SDK Changelog
 
 The latest features, improvements, and fixes shipping to the Cursor SDK, covering `@cursor/sdk` on npm and `cursor-sdk` on PyPI.
+
+## 1.0.31
+
+- **Replace the system prompt.** `systemPrompt` on `Agent.create()` replaces Cursor's built-in system prompt for the main agent loop with your own text. Rules, skills, and tool schemas still load, and subagents keep their own prompts. TypeScript local agents only; pass it again on `Agent.resume()`, and access is enabled per account.
+- **Steer a run while it is running.** `run.steer(text)` injects a message into the turn in flight and resolves `complete_delivered`, or `revert_to_followup` when you should send it as a normal follow-up instead. It works while a foreground subagent is running, and that subagent moves to the background and keeps going. TypeScript local runs only; cloud runs resolve `revert_to_followup`.
+- **Background subagents report back.** When the agent runs a subagent in the background, its result now returns to the parent as a follow-up turn on the same run instead of being dropped when the parent turn ends. `run.stream()` keeps yielding through those turns and `run.wait()` resolves after them. Local agents, in TypeScript and Python.
+- **Annotate custom tools.** `annotations` on a `local.customTools` entry passes MCP tool annotations (`title`, `readOnlyHint`, `destructiveHint`, `idempotentHint`, `openWorldHint`) through to the model. They are descriptive hints only; the SDK does not enforce them. TypeScript only.
+
+## 1.0.30
+
+- **Long-running local agents keep their credentials fresh.** Local runs in TypeScript and Python refresh the short-lived access token before it expires, so agents that run for more than an hour no longer fail with authentication errors. Cloud runs are unaffected.
+
+## 1.0.29
+
+- **Output schemas on custom tools.** `outputSchema` in TypeScript and `output_schema` in Python declare a JSON Schema for a custom tool's structured result, advertised to the model as the tool's MCP output schema. Results are not validated against it. Local agents only.
+
+## 1.0.28
+
+- **Ship the SDK as a single file.** Under Bun, `@cursor/sdk` now resolves to a flat single-file bundle, so `bun build --compile` works with no import change and no more `Cannot find module './986.js'`. `@cursor/sdk/bundled` and `@cursor/sdk/bundled/sqlite` expose the same build as explicit entries for other single-file bundlers such as esbuild. TypeScript only.
 
 ## 1.0.27
 

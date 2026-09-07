@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/opentelemetry-export/wire
-fetched_at: 2026-08-31T06:29:32.471490+00:00
+fetched_at: 2026-09-07T05:31:28.663278+00:00
 fetch_method: mintlify_md
 ---
 
@@ -25,7 +25,7 @@ One resource per (team, user, surface, entrypoint, surface version) grouping.
 | `service.name`      | string | Always   | Constant `cursor`                                                                                                        |
 | `service.version`   | string | Optional | Client version when source is desktop/CLI; usually absent on `cloud_agent` / `bugbot`                                    |
 | `cursor.team.id`    | int    | Always   | Your team id                                                                                                             |
-| `cursor.surface`    | string | Always   | `unspecified` \| `desktop` \| `cli` \| `cloud_agent` \| `bugbot`                                                         |
+| `cursor.surface`    | string | Always   | `unspecified` \| `desktop` \| `cli` \| `cloud_agent` \| `bugbot` \| `grok_bot`                                           |
 | `cursor.entrypoint` | string | Always   | `unspecified` \| `desktop` \| `cli` \| `web` \| `mobile` \| `sdk_ts` \| `sdk_py` \| `api` \| `automation` \| `github_pr` |
 | `cursor.user.id`    | int    | Optional | Opaque team-scoped user id when the source has one. Often absent on cloud agent. Do not require presence.                |
 
@@ -33,12 +33,13 @@ One resource per (team, user, surface, entrypoint, surface version) grouping.
 
 Family ids match the toggles in Team Settings. All default on for a new destination.
 
-| Family id              | Signals        | Covers                                                                                                |
-| ---------------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
-| `model_usage`          | metrics + logs | `token.usage`, `cost.usage`; `api.request`, `api.error`, `api.correction`                             |
-| `tool_calls`           | metrics        | `tool.calls`                                                                                          |
-| `skills_hooks_plugins` | logs           | `skill.activated`, `hook.execution_complete`, `plugin.installed`                                      |
-| `cloud_agents`         | logs           | `cloud_agent.pull_request`, `cloud_agent.setup`, `cloud_agent.artifact`, `cloud_agent.mcp_auth_error` |
+| Family id                | Signals        | Covers                                                                                                             |
+| ------------------------ | -------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `model_usage`            | metrics + logs | `token.usage`, `cost.usage`; `api.request`, `api.error`, `api.correction`                                          |
+| `tool_calls`             | metrics        | `tool.calls`                                                                                                       |
+| `skills_hooks_plugins`   | logs           | `skill.activated`, `hook.execution_complete`, `plugin.installed`                                                   |
+| `cloud_agents`           | logs           | `cloud_agent.pull_request`, `cloud_agent.setup`, `cloud_agent.artifact`, `cloud_agent.mcp_auth_error`              |
+| `grok_bot_agent_actions` | logs           | `grok_bot.mcp_tool_call`, `grok_bot.shell_command`, `grok_bot.browser_navigation`, `grok_bot.computer_use_session` |
 
 ## Metrics
 
@@ -82,13 +83,13 @@ Severities: INFO=9, WARN=13, ERROR=17.
 
 ### Common log attributes
 
-| Attribute                | Type   | Presence | Notes                                                                                                                                                                           |
-| ------------------------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `cursor.event.id`        | string | Always   | **Dedupe key.** Opaque. Deterministic across retries, worker restarts, and Cursor Kafka replay. Prefix `customer-telemetry:v1:...` is stable; treat the whole string as opaque. |
-| `cursor.source_event.id` | string | Always   | Opaque internal source identity. Several signals may share one value.                                                                                                           |
-| `cursor.request.id`      | string | Optional | On `api.request`, `api.error`, `skill.activated`, `hook.execution_complete`, `plugin.installed`. Never on `api.correction` or `cloud_agent.*`.                                  |
-| `cursor.conversation.id` | string | Optional | IDE/CLI: composer UUID. Cloud agent: customer-visible `bc-...` agent id. Join key for session reconstruction across api, skill/hook, and cloud\_agent logs.                     |
-| `cursor.usage_event.id`  | string | Optional | `api.request` / `api.error` / `api.correction` only. Request-grain key against Cursor usage and billing exports.                                                                |
+| Attribute                | Type   | Presence | Notes                                                                                                                                                                                                                          |
+| ------------------------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `cursor.event.id`        | string | Always   | **Dedupe key.** Opaque. Deterministic across retries, worker restarts, and Cursor Kafka replay. Prefix `customer-telemetry:v1:...` is stable; treat the whole string as opaque.                                                |
+| `cursor.source_event.id` | string | Always   | Opaque internal source identity. Several signals may share one value.                                                                                                                                                          |
+| `cursor.request.id`      | string | Optional | On `api.request`, `api.error`, `skill.activated`, `hook.execution_complete`, `plugin.installed`. Never on `api.correction`, `cloud_agent.*`, or `grok_bot.*`.                                                                  |
+| `cursor.conversation.id` | string | Optional | IDE/CLI: composer UUID. Cloud agent: customer-visible `bc-...` agent id. Grok Bot `grok_bot.*` events: Grok Bot conversation id. Join key for session reconstruction across api, skill/hook, cloud\_agent, and grok\_bot logs. |
+| `cursor.usage_event.id`  | string | Optional | `api.request` / `api.error` / `api.correction` only. Request-grain key against Cursor usage and billing exports.                                                                                                               |
 
 ### `cursor.api.request`
 
@@ -193,10 +194,67 @@ An MCP server you connected rejected the run's credentials. That server's tool c
 | ------------------------ | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `cursor.mcp.server.name` | string | Always   | Customer-defined server display name (open), e.g. `github`. Same value space as the `cursor.tool.calls` datapoint attribute. |
 
+### Shared `grok_bot.*` attributes
+
+The `grok_bot.*` events carry Bot actions from Action Recording, secret-scrubbed before export. Family `grok_bot_agent_actions`. Every record has `cursor.surface=grok_bot`. Each event also carries:
+
+| Attribute                    | Type   | Presence | Values / notes                                                            |
+| ---------------------------- | ------ | -------- | ------------------------------------------------------------------------- |
+| `cursor.grok_bot.provenance` | string | Always   | `client` (reported by the Grok Bot host) \| `server` (observed by Cursor) |
+| `cursor.grok_bot.turn.id`    | string | Optional | Turn id within the conversation                                           |
+| `cursor.grok_bot.box.id`     | string | Optional | Grok Bot computer id. Absent on `server` provenance                       |
+
+### `cursor.grok_bot.mcp_tool_call`
+
+INFO (ERROR for `failure` status), body `grok_bot_mcp_tool_call`. Family `grok_bot_agent_actions`. One MCP tool call made by a Bot. Tool arguments and results are never exported.
+
+| Attribute                         | Type   | Presence | Values / notes                                        |
+| --------------------------------- | ------ | -------- | ----------------------------------------------------- |
+| `cursor.tool.name`                | string | Always   | Customer-defined MCP tool name (open)                 |
+| `cursor.tool.status`              | string | Always   | `success` \| `failure`                                |
+| `cursor.grok_bot.mcp.transport`   | string | Always   | `http` (server-observed) \| `stdio` (on the computer) |
+| `cursor.grok_bot.mcp.duration_ms` | int    | Always   |                                                       |
+| `cursor.mcp.server.name`          | string | Optional | Customer-defined server display name (open)           |
+| `cursor.grok_bot.tool_call.id`    | string | Optional | Grok Bot tool-call id                                 |
+
+### `cursor.grok_bot.shell_command`
+
+INFO (WARN when blocked), body `grok_bot_shell_command`. Family `grok_bot_agent_actions`. A shell command a Bot ran or was blocked from running.
+
+| Attribute                                      | Type      | Presence | Values / notes                                                   |
+| ---------------------------------------------- | --------- | -------- | ---------------------------------------------------------------- |
+| `cursor.grok_bot.shell.command`                | string    | Always   | Secret-scrubbed command text, at most 8 KiB (open)               |
+| `cursor.grok_bot.shell.command_truncated`      | bool      | Always   | True when the source command exceeded the cap                    |
+| `cursor.grok_bot.shell.kind`                   | string    | Always   | `foreground` \| `background`                                     |
+| `cursor.grok_bot.shell.target`                 | string    | Always   | `box` (the Grok Bot computer) \| `user_machine`                  |
+| `cursor.grok_bot.shell.allowed`                | bool      | Always   | Shell policy decision                                            |
+| `cursor.grok_bot.shell.blocked_reason`         | string    | Optional | Policy reason when blocked; secret-scrubbed (open)               |
+| `cursor.grok_bot.shell.classification_reasons` | string\[] | Optional | At most 10 policy classification reasons; secret-scrubbed (open) |
+
+### `cursor.grok_bot.browser_navigation`
+
+INFO, body `grok_bot_browser_navigation`. Family `grok_bot_agent_actions`. `conversation.id` is the Grok Bot conversation id.
+
+| Attribute                            | Type   | Presence | Values / notes                                                                |
+| ------------------------------------ | ------ | -------- | ----------------------------------------------------------------------------- |
+| `cursor.grok_bot.browser.url`        | string | Always   | Normalized `scheme://host/path` (open). Non-hierarchical schemes never export |
+| `cursor.grok_bot.browser.page_title` | string | Optional | Secret-scrubbed (open)                                                        |
+
+### `cursor.grok_bot.computer_use_session`
+
+INFO, body `grok_bot_computer_use_session`. Family `grok_bot_agent_actions`. Counts and wall time only. No coordinates, typed text, or screenshots.
+
+| Attribute                                       | Type   | Presence | Values / notes                          |
+| ----------------------------------------------- | ------ | -------- | --------------------------------------- |
+| `cursor.grok_bot.computer_use.action_count`     | int    | Always   |                                         |
+| `cursor.grok_bot.computer_use.duration_ms`      | int    | Always   |                                         |
+| `cursor.grok_bot.computer_use.screenshot_count` | int    | Always   |                                         |
+| `cursor.grok_bot.tool_call.id`                  | string | Optional | Tool-call id of the subagent invocation |
+
 ## Identity and joins
 
 - **Dedupe logs** on `cursor.event.id`.
-- **Session reconstruction:** group logs by `cursor.conversation.id` (composer UUID or `bc-...`).
+- **Session reconstruction:** group logs by `cursor.conversation.id` (composer UUID, `bc-...`, or Grok Bot conversation id).
 - **Billing reconcile grain:** `cursor.usage_event.id` across `api.request` / `api.error` / `api.correction`.
 - Metrics do not carry these ids. Use `api.request` logs for per-conversation token totals.
 

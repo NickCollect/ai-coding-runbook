@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/compliance-and-monitoring
-fetched_at: 2026-08-31T06:29:32.148656+00:00
+fetched_at: 2026-09-07T05:31:28.247009+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,6 +24,8 @@ We log the following events:
 - **Privacy settings:** Privacy Mode changes at user or team level
 - **Team rules:** Team rule management (including Bugbot rules) for custom workflows
 - **Team commands:** Custom command creation, updates, and deletion
+- **Grok Bot:** Bot creation, member access changes, Team Setup manifests, and routines
+- **Integrations:** MCP authentication and Slack account links
 
 We do not log agent responses or generated code content.
 
@@ -42,7 +44,7 @@ For compliance and security monitoring, stream audit logs to your existing syste
 - S3 buckets for long-term retention
 - Log aggregators like Elasticsearch or CloudWatch
 
-Please contact [hi@cursor.com](mailto:hi@cursor.com) if you would like to receive streaming audit logs.
+Please contact [hi@cursor.com](mailto:hi@cursor.com) if you would like to receive streaming audit logs. Streamed events include `application_type`.
 
 ### Log format
 
@@ -57,9 +59,12 @@ Audit logs are delivered as JSON and include metadata and event-specific fields:
   "team_id": "team_xyz789",
   "ip_address": "203.0.113.42",
   "user_email": "alice@company.com",
+  "application_type": "grok_bot",
   "event": { /* event-specific fields */ }
 }
 ```
+
+`application_type` is the product that performed the action: `grok_bot` for Grok Bot, or `cursor` for Cursor desktop, iOS, CLI, the Agent SDK, cursor.com, and the Admin API. It is an empty string when the application cannot be determined, and on rows written before the field existed. Older rows are not backfilled.
 
 The `event_type` values include:
 
@@ -102,6 +107,14 @@ The `event_type` values include:
 - `bugbot_team_settings` - Bugbot team settings changes
 - `bugbot_bulk_repo_update` - Bugbot bulk repository update events
 - `team_command` - Custom team command management (create, update, delete)
+- `grok_bot_created` - Bot creation (blank, from a template, or via the Agent SDK)
+- `grok_bot_access_changed` - Grok Bot member access changes (all members or specific groups)
+- `grok_bot_team_setup_manifest` - Team Setup manifest actions (save, delete)
+- `mcp_authentication` - MCP OAuth logins (as a user credential or a team service account)
+- `slack_account_link` - Slack account linking (link, relink)
+- `grok_bot_routine` - Grok Bot routine management (create, update)
+
+Rows written as `automation` before the rename keep that name in the API, CSV, and SIEM. New routine rows use `grok_bot_routine`. Cloud Agent automations are not recorded.
 
 ### Searching and filtering
 
@@ -110,12 +123,15 @@ Filter audit logs in the dashboard by:
 - Date range
 - Event type (authentication, user management, settings)
 - Actor (specific user)
+- Application (all applications, or Grok Bot)
 
-Export filtered results to CSV for analysis or compliance reports.
+Grok Bot event types appear in the filter as Bot Created, Grok Bot Access Updated, Grok Bot Team Setup, MCP Server Authenticated, Slack Account Link, and Routines.
+
+Export filtered results to CSV for analysis or compliance reports. The export includes an Application column.
 
 ## Usage telemetry over OpenTelemetry
 
-Audit logs cover administrative and security events. If you want usage data instead, such as token, tool call, and cost metrics plus API request and cloud agent logs delivered over OTLP to your own collector, use [OpenTelemetry Export](https://cursor.com/docs/enterprise/opentelemetry-export.md). It's a separate pipeline from audit-log SIEM streaming and is available on the Enterprise plan.
+Audit logs cover administrative and security events. If you want usage or activity data instead, such as token, tool call, and cost metrics, API request and cloud agent logs, and recorded Grok Bot actions (with [Action Recording](https://cursor.com/docs/grok-bot/security.md#logging-and-audit) enabled) delivered over OTLP to your own collector, use [OpenTelemetry Export](https://cursor.com/docs/enterprise/opentelemetry-export.md). It's a separate pipeline from audit-log SIEM streaming and is available on the Enterprise plan.
 
 ## Using hooks for compliance logging
 

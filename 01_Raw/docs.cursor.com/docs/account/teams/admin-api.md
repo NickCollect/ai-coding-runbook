@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/admin-api
-fetched_at: 2026-08-31T06:29:30.303259+00:00
+fetched_at: 2026-09-07T05:31:25.452409+00:00
 fetch_method: mintlify_md
 ---
 
@@ -79,7 +79,7 @@ End time (defaults to now). See [Date Formats](https://cursor.com/docs/account/t
 
 `eventTypes` string
 
-Comma-separated event types to filter by. Possible values: `login`, `logout`, `add_user`, `remove_user`, `update_user_role`, `team_settings`, `mcp_server_config`, `team_api_key`, `user_api_key`, `privacy_mode`, `user_spend_limit`, `team_rule`, `team_repo`, `team_hook`, `team_command`, `create_directory_group`, `delete_directory_group`, `update_directory_group`, `update_directory_group_permissions`, `add_user_to_directory_group`, `remove_user_from_directory_group`, `bugbot_installation`, `bugbot_installation_settings`, `bugbot_repo_settings`, `bugbot_team_rule`, `bugbot_team_settings`, `bugbot_bulk_repo_update`
+Comma-separated event types to filter by. Possible values: `login`, `logout`, `add_user`, `remove_user`, `update_user_role`, `team_settings`, `mcp_server_config`, `team_api_key`, `user_api_key`, `privacy_mode`, `user_spend_limit`, `team_rule`, `team_repo`, `team_hook`, `team_command`, `create_directory_group`, `delete_directory_group`, `update_directory_group`, `update_directory_group_permissions`, `add_user_to_directory_group`, `remove_user_from_directory_group`, `bugbot_installation`, `bugbot_installation_settings`, `bugbot_repo_settings`, `bugbot_team_rule`, `bugbot_team_settings`, `bugbot_bulk_repo_update`, `grok_bot_created`, `grok_bot_access_changed`, `grok_bot_team_setup_manifest`, `mcp_authentication`, `slack_account_link`, `grok_bot_routine`
 
 `search` string
 
@@ -133,6 +133,8 @@ curl -X GET "https://api.cursor.com/teams/audit-logs?users=admin@company.com,dev
 
 **Response:**
 
+Each object in `events` includes `application_type`: `grok_bot` for Grok Bot, `cursor` for other Cursor surfaces, or an empty string when the application cannot be determined (including rows written before this field existed).
+
 ```json
 {
   "events": [
@@ -142,6 +144,7 @@ curl -X GET "https://api.cursor.com/teams/audit-logs?users=admin@company.com,dev
       "ip_address": "203.0.113.42",
       "user_email": "admin@company.com",
       "event_type": "add_user",
+      "application_type": "cursor",
       "event_data": {
         "email": "admin@company.com",
         "method": "manual"
@@ -153,6 +156,7 @@ curl -X GET "https://api.cursor.com/teams/audit-logs?users=admin@company.com,dev
       "ip_address": "192.168.1.1",
       "user_email": "developer@company.com",
       "event_type": "login",
+      "application_type": "grok_bot",
       "event_data": {
         "ip_address": "192.168.1.1",
         "user_agent": "Cursor/0.42.0"
@@ -529,8 +533,8 @@ Filter by a specific automation UUID. Pass `*` to return events from all automat
 Filter cloud agent (background agent) runs by where they executed. Use this to isolate inference spend for self-hosted agents from Cursor-hosted runs. Accepted values:
 
 - `CLOUD` - Cursor-hosted runs
-- `SELF_HOSTED` - any self-hosted run (a self-hosted pool worker or a personal "My Machine" worker)
-- `SELF_HOSTED_POOL` - team self-hosted pool workers only
+- `SELF_HOSTED` - any self-hosted run (a Team Pool worker or a My Machines worker)
+- `SELF_HOSTED_POOL` - Team Pool workers only
 - `SELF_HOSTED_MACHINE` - personal "My Machine" workers only
 
 An unrecognized `hostingType` value returns a `400` error rather than an empty result, so a typo can't be mistaken for genuinely zero self-hosted spend. This filter covers inference spend only; self-hosted compute runs on your own machines and is never metered by Cursor.
@@ -753,6 +757,8 @@ curl -X POST https://api.cursor.com/teams/filtered-usage-events \
 
 Set spending limits for individual team members. This allows you to control how much each user can spend on AI usage within your team. Rate limited to 250 requests per minute per team. See [rate limits](https://cursor.com/docs/api.md#rate-limits).
 
+To update up to 100 members per request, use [Set User Spend Limits in Bulk (Preview)](https://cursor.com/docs/account/teams/admin-api.md#set-user-spend-limits-in-bulk-preview).
+
 #### Parameters
 
 `userEmail` string Required
@@ -794,6 +800,84 @@ curl -X POST https://api.cursor.com/teams/user-spend-limit \
 {
   "outcome": "error",
   "message": "Invalid email format"
+}
+```
+
+### Set User Spend Limits in Bulk (Preview)
+
+/teams/user-spend-limits
+
+Set spending limits for up to 100 team members in one request. Rate limited to 20 requests per minute per team. See [rate limits](https://cursor.com/docs/api.md#rate-limits).
+
+This bulk route is in preview and may change. Request shape, response fields, and error behavior can shift before general availability.
+
+#### Parameters
+
+`updates` array Required
+
+One to 100 user spend limit updates. Each update contains:
+
+- `userEmail` string - Email address of the team member
+- `spendLimitDollars` number | null - Integer spending limit in dollars. Set to `null` to remove the limit.
+
+#### Response Fields
+
+- `requestedCount` number - Number of updates in the request
+- `updatedCount` number - Number of limits that changed
+- `unchangedCount` number - Number of limits already set to the requested value
+- `failedCount` number - Number of updates Cursor could not apply
+- `results` array - Results in request order. Each result includes `userEmail` and a status of `updated`, `unchanged`, or `failed`. Failed results also include an `error` message.
+
+* **Availability**: Enterprise only. The bulk endpoint is rolling out; teams that are not yet enabled receive a `403` response
+* A missing team member produces a `failed` result without blocking other updates
+* Invalid request fields, duplicate emails, or more than 100 updates return a `400` response without applying any updates
+* Repeating a successful update returns `unchanged` and does not create another audit event
+
+```bash
+curl -X POST https://api.cursor.com/teams/user-spend-limits \
+  -u YOUR_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{
+    "updates": [
+      {
+        "userEmail": "developer@company.com",
+        "spendLimitDollars": 100
+      },
+      {
+        "userEmail": "contractor@company.com",
+        "spendLimitDollars": null
+      },
+      {
+        "userEmail": "former-employee@company.com",
+        "spendLimitDollars": 50
+      }
+    ]
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "requestedCount": 3,
+  "updatedCount": 1,
+  "unchangedCount": 1,
+  "failedCount": 1,
+  "results": [
+    {
+      "userEmail": "developer@company.com",
+      "status": "updated"
+    },
+    {
+      "userEmail": "contractor@company.com",
+      "status": "unchanged"
+    },
+    {
+      "userEmail": "former-employee@company.com",
+      "status": "failed",
+      "error": "User not found in team"
+    }
+  ]
 }
 ```
 

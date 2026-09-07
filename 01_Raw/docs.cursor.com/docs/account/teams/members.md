@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/members
-fetched_at: 2026-08-31T06:29:30.409467+00:00
+fetched_at: 2026-09-07T05:31:25.549591+00:00
 fetch_method: mintlify_md
 ---
 
@@ -112,9 +112,8 @@ Admins can remove members anytime via context menu → "Remove".
 - If a member has used any credits, their seat remains occupied until the end of the billing cycle
 - Billing is automatically adjusted with pro-rated credit for removed members applied to the next invoice
 
-**Data deletion:**
+Removing a member removes their access to the team. It does not delete their Cursor account or the data attached to that account.
 
-- When a user is removed from the team, their data (including Memories and Cloud Agent data) is permanently deleted
 - When an entire team is deleted, all associated data is permanently deleted
 - There must be at least one Admin and one paid member on the team at all times
 

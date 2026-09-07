@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/best-practices
-fetched_at: 2026-08-10T03:07:40.295952+00:00
+fetched_at: 2026-09-07T05:31:27.031821+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ Before running a Cloud Agent, verify these prerequisites:
 
 ## Use skills and agents.md to configure your agent
 
-If the cloud agent is having difficulty testing its changes, we recommend using [skills](https://cursor.com/docs/skills.md) and agents.md to configure your agent.
+If the cloud agent is having difficulty testing its changes, we recommend using [skills](https://cursor.com/docs/skills.md) and agents.md to configure your agent. Commit project skills to the repo, [sync personal skills](https://cursor.com/docs/skills.md#use-personal-skills-with-cloud-agents) for your own Cloud Agents, or [publish a skill](https://cursor.com/docs/plugins.md#publish-a-skill-to-your-team) so teammates can install it.
 
 Think of the agent as a smart, but low-context human developer. The best way to make sure it does the right thing is to give it the context it needs to understand what to do.
 

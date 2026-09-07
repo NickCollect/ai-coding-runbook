@@ -1,12 +1,23 @@
 ---
 source_url: https://cursor.com/docs/cli/changelog
-fetched_at: 2026-08-17T02:15:17.287166+00:00
+fetched_at: 2026-09-07T05:31:26.145735+00:00
 fetch_method: mintlify_md
 ---
 
 # CLI Changelog
 
 The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent --version` to check your installed version, and `agent update` to upgrade in place.
+
+## August 26, 2026 release
+
+### Persistent sessions
+
+- **Keep agents running after you disconnect.** Start a persistent session with `agent persist`, detach with `/detach`, and reconnect later with `agent persist attach`. Use `agent persist list|stop` to manage sessions or `agent persist --resume` to continue an existing chat.
+
+### Self-hosted workers
+
+- **Viewers watch the agent's live desktop.** Workers started with `--computer-use --share-desktop` now share the managed desktop the agent uses instead of a separate session. Cursor clears stale worker-owned displays so later sessions start clean.
+- **Wake hibernated workers for follow-ups.** `agent worker controller` can wake a claimed, hibernated worker through the `--spawn` hook, so a follow-up returns to the same workspace during the reconnect window. Its queue watch now uses server-sent events to reduce polling and handle rate limits.
 
 ## August 11, 2026 release
 

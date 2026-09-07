@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/gpt-5-6-terra
-fetched_at: 2026-08-31T06:29:33.848951+00:00
+fetched_at: 2026-09-07T05:31:30.474443+00:00
 fetch_method: mintlify_md
 ---
 
@@ -28,6 +28,8 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. GPT-5.6 Terra draws from the third-party **Other Models** pool, which charges at the rates below. All prices are per million tokens.
 
 A **Fast mode** tier (`gpt-5.6-terra-fast`) is available for priority processing at 2x the standard rates.
+
+When input exceeds 272k tokens (long context), input pricing doubles and output pricing is 1.5x the standard rate. The same multipliers apply in Fast mode: long-context requests bill at 2x the Fast input, cache write, and cache read rates, and 1.5x the Fast output rate.
 
 
 ---

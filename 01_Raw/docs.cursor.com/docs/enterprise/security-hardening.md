@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/security-hardening
-fetched_at: 2026-08-31T06:29:32.775749+00:00
+fetched_at: 2026-09-07T05:31:28.907360+00:00
 fetch_method: mintlify_md
 ---
 
@@ -95,11 +95,12 @@ The hard boundaries on what agents can do. Steering belongs with these, never in
 
 Guidance and add-ons shape behavior and expand capability. Both are non-deterministic and are trust decisions.
 
-| Control     | Recommendation                                                                                                                        | Learn more                                                                                                                                                                |
-| :---------- | :------------------------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Rules**   | Steer behavior org-wide with Team Rules, but treat them as suggestions and pair them with the deterministic controls above.           | [Rules](https://cursor.com/docs/rules.md#team-rules)                                                                                                                      |
-| **Plugins** | A plugin can bundle MCP servers, skills, subagents, rules, and hooks, so review what it installs and favor private team marketplaces. | [Plugins](https://cursor.com/docs/plugins.md), [Marketplace security](https://cursor.com/help/security-and-privacy/marketplace-security.md)                               |
-| **MCP**     | Approve servers with the allowlist, restrict per-server tools, and apply network modes; review each server before enabling.           | [MCP allowlist](https://cursor.com/docs/enterprise/model-and-integration-management.md#mcp-allowlist), [Security](https://cursor.com/docs/mcp.md#security-considerations) |
+| Control     | Recommendation                                                                                                                                                                                                                                        | Learn more                                                                                                                                                                |
+| :---------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Rules**   | Steer behavior org-wide with Team Rules, but treat them as suggestions and pair them with the deterministic controls above.                                                                                                                           | [Rules](https://cursor.com/docs/rules.md#team-rules)                                                                                                                      |
+| **Plugins** | A plugin can bundle MCP servers, skills, subagents, rules, and hooks, so review what it installs and favor private team marketplaces. Use **Allow Members to Publish** on the Default marketplace if you want to limit who can share personal skills. | [Plugins](https://cursor.com/docs/plugins.md), [Marketplace security](https://cursor.com/help/security-and-privacy/marketplace-security.md)                               |
+| **Skills**  | Members can publish personal skills to the team marketplace or sync `~/.cursor/skills/` for their own Cloud Agents. Publishing stores a team-hosted copy. Sync stays private to the author. Both have admin opt-outs.                                 | [Publish a skill](https://cursor.com/docs/plugins.md#publish-a-skill-to-your-team), [Skill sync](https://cursor.com/docs/skills.md#use-personal-skills-with-cloud-agents) |
+| **MCP**     | Approve servers with the allowlist, restrict per-server tools, and apply network modes; review each server before enabling.                                                                                                                           | [MCP allowlist](https://cursor.com/docs/enterprise/model-and-integration-management.md#mcp-allowlist), [Security](https://cursor.com/docs/mcp.md#security-considerations) |
 
 ## Monitor and respond
 

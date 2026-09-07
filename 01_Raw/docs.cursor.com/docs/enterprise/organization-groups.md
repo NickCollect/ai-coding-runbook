@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/organization-groups
-fetched_at: 2026-08-03T04:24:58.024308+00:00
+fetched_at: 2026-09-07T05:31:28.710368+00:00
 fetch_method: mintlify_md
 ---
 
@@ -208,7 +208,7 @@ For model access specifically, neither the team nor a group fully supersedes the
 
 ## Manage groups with the API
 
-List groups, read members, and add or remove members through the [Organization API](https://cursor.com/docs/account/organizations/organization-admin-api.md#organization-groups). Group routes use Organization API keys, and group IDs use the `g_` prefix.
+Create, list, update, and delete groups through the [Organization API](https://cursor.com/docs/account/organizations/organization-admin-api.md#organization-groups). The API also lists group members and adds or removes members of manual groups. Group routes use Organization API keys, and group IDs use the `g_` prefix.
 
 ## Related docs
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/capabilities
-fetched_at: 2026-08-31T06:29:31.596661+00:00
+fetched_at: 2026-09-07T05:31:27.232530+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,6 +11,8 @@ fetch_method: mintlify_md
 Each cloud agent runs in its own isolated VM with a full desktop environment. Agents can use a mouse and keyboard to control the desktop and browser, allowing them to interact with the software they build like a human developer.
 
 This means agents can start dev servers, open the app in a browser, click through UI flows, and verify their changes work before pushing a PR. Read more in the [announcement blog post](/blog/agent-computer-use).
+
+On [Self-Hosted Machines](https://cursor.com/docs/cloud-agent/self-hosted.md), start the worker with `--computer-use` to let the agent drive that machine's desktop. macOS workers use the Cursor Computer Use helper app; Linux workers use an X11 display. See [Computer use and desktop sharing](https://cursor.com/docs/cloud-agent/self-hosted/computer-use.md).
 
 ## Demos and Artifacts
 
@@ -124,11 +126,11 @@ Agent tasks rarely end with the last commit. CI has to pass. Reviewers leave com
 
 The agent subscribes to an event source, ends its turn, and wakes when a matching event arrives. Events land as follow-ups in the same conversation, so the agent continues with full context:
 
-- Open a PR, then respond to review comments and CI failures until it merges
+- Open a PR, then respond to review comments and CI failures
 - Ask a question in Slack and continue once someone replies
 - Check back on a long-running job with a timer
 
-To subscribe, describe the wait in your prompt. For example, "open a PR and keep it green until merge" or "ask in #releases and wait for approval". You can also invoke the built-in `/subscribe` skill, which works the same way: tell it what to watch and the agent picks the right subscription.
+To subscribe, describe the wait in your prompt. For example, "open a PR and keep CI green" or "ask in #releases and wait for approval". You can also invoke the built-in `/subscribe` skill, which works the same way: tell it what to watch and the agent picks the right subscription.
 
 Agents can subscribe to events from these integrations:
 

@@ -1,10 +1,10 @@
 ---
 source_url: https://cursor.com/docs/models/gemini-2-5-flash
-fetched_at: 2026-08-31T06:29:33.829955+00:00
+fetched_at: 2026-09-07T05:31:29.779739+00:00
 fetch_method: mintlify_md
 ---
 
-We recommend using [Gemini 3.7 Flash](https://cursor.com/docs/models/gemini-3-7-flash.md). It's Google's latest speed-tier model.
+We recommend using [Gemini 3.8 Flash](https://cursor.com/docs/models/gemini-3-8-flash.md). It's Google's latest speed-tier model.
 
 ## Tools
 

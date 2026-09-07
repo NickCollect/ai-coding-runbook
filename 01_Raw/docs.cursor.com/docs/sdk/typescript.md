@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/sdk/typescript
-fetched_at: 2026-08-31T06:29:34.138681+00:00
+fetched_at: 2026-09-07T05:31:31.037457+00:00
 fetch_method: mintlify_md
 ---
 
@@ -89,17 +89,12 @@ Importing `@cursor/sdk` does not eagerly load the local agent stack. The local e
 
 ### Single-file bundles and compiled executables
 
-`@cursor/sdk/bundled` is a self-contained, single-file build of the SDK with the same public API as `@cursor/sdk`. Use it when your app ships as one file: a standalone binary from `bun build --compile`, or a single-file bundle from esbuild.
+The default build loads parts of itself lazily at runtime. Single-file bundlers can't follow those loads, so a compiled app fails on the first `Agent.create()` with an error like `Cannot find module './986.js'`. The SDK also ships a flat, single-file build with the same public API. It puts everything in one file, so your bundler embeds the whole SDK up front.
 
-The default build loads parts of itself lazily at runtime. Single-file bundlers can't follow those loads, so a compiled app fails on the first `Agent.create()` with an error like `Cannot find module './986.js'`. The bundled entries put everything in one file, so your bundler embeds the whole SDK up front.
-
-| Entry                        | Contents                                                |
-| :--------------------------- | :------------------------------------------------------ |
-| `@cursor/sdk/bundled`        | Everything `@cursor/sdk` exports.                       |
-| `@cursor/sdk/bundled/sqlite` | `SqliteLocalAgentStore`, matching `@cursor/sdk/sqlite`. |
+Under Bun, `@cursor/sdk` resolves to the flat build on its own. Import it as usual and compile:
 
 ```typescript
-import { Agent } from "@cursor/sdk/bundled";
+import { Agent } from "@cursor/sdk";
 
 const agent = await Agent.create({
   apiKey: process.env.CURSOR_API_KEY!,
@@ -108,15 +103,20 @@ const agent = await Agent.create({
 });
 ```
 
-Compile with Bun as usual:
-
 ```bash
 bun build --compile main.ts --outfile my-agent
 ```
 
+For other single-file bundlers such as esbuild, or to pin the flat build explicitly, import the bundled entries instead:
+
+| Entry                        | Contents                                                |
+| :--------------------------- | :------------------------------------------------------ |
+| `@cursor/sdk/bundled`        | Everything `@cursor/sdk` exports.                       |
+| `@cursor/sdk/bundled/sqlite` | `SqliteLocalAgentStore`, matching `@cursor/sdk/sqlite`. |
+
 A few things to know:
 
-- **The bundled entries run on Bun**, including executables from `bun build --compile`. They load on Node too, but the SQLite store is unavailable there, so the default [local agent store](https://cursor.com/docs/sdk/typescript.md#local-agent-stores) falls back to JSONL. Keep importing `@cursor/sdk` in Node apps that don't ship as one file.
+- **The flat build runs on Bun**, including executables from `bun build --compile`. It loads on Node too, but the SQLite store is unavailable there, so configure `JsonlLocalAgentStore` through [`local.store`](https://cursor.com/docs/sdk/typescript.md#local-agent-stores) or `Agent.create()` throws a `ConfigurationError`. Keep importing `@cursor/sdk` in Node apps that don't ship as one file.
 - **`zod`, `@bufbuild/protobuf`, and the `@connectrpc/*` packages resolve from your own install.** They come with `@cursor/sdk`, and your bundler embeds one shared copy, so Zod schemas you pass to [custom tools](https://cursor.com/docs/sdk/typescript.md#custom-tools) keep working.
 - **Native binaries can't live inside a JavaScript bundle.** Sandboxing and the built-in ripgrep ship in the per-platform `@cursor/sdk-<os>-<arch>` packages. Place `node_modules/@cursor/sdk-<os>-<arch>/` next to your compiled executable and the SDK finds it there. Without it, search falls back to `rg` on `PATH`, and enabling [`sandboxOptions`](https://cursor.com/docs/sdk/typescript.md#sandbox-options) throws a `ConfigurationError`.
 
@@ -218,7 +218,7 @@ const agent = await Agent.create({
 });
 ```
 
-These values are encrypted at rest, injected into the cloud agent's shell, and deleted with the agent. `envVars` can't be used with a caller-supplied `agentId`; omit `agentId` and read the server-minted ID from `agent.agentId`. Variable names can't start with `CURSOR_`.
+These values are encrypted at rest, injected into the cloud agent's shell, and deleted with the agent. `envVars` can't be used with a caller-supplied `agentId`; omit `agentId` and read the server-minted ID from `agent.agentId` after the first `send()`. Variable names can't start with `CURSOR_`.
 
 For values that should only exist during a single run, pass them on `agent.send()` instead. See [Per-run environment variables](https://cursor.com/docs/sdk/typescript.md#per-run-environment-variables).
 
@@ -386,6 +386,25 @@ If `auto-smart` is missing or an optimization mode is rejected:
 5. If you belong to multiple teams, confirm the key is operating in the intended team context.
 6. Check team model-access policy if Router is unavailable or cannot choose a valid underlying model.
 
+### Replacing the system prompt
+
+`systemPrompt` replaces Cursor's built-in system prompt for the main agent loop with your own text. The model loses the coding-assistant identity, tool-use protocol, and communication guidance, so restate whatever the agent still needs. Tool schemas, rules, and skills still load, and subagents keep their own prompts.
+
+```typescript
+const agent = await Agent.create({
+  apiKey: process.env.CURSOR_API_KEY!,
+  model: { id: "composer-2.5" },
+  systemPrompt:
+    "You are a release manager. Only edit CHANGELOG.md, and answer in one paragraph.",
+  local: { cwd: process.cwd() },
+});
+```
+
+- Local agents only. Combining `systemPrompt` with `cloud` throws a `ConfigurationError`.
+- Must be non-empty. Whitespace-only text throws a `ConfigurationError` at `Agent.create()` or `Agent.resume()`.
+- Not persisted on the agent. Pass `systemPrompt` again on `Agent.resume()` to keep it for follow-up runs.
+- Access is enabled per account. Without it, the first `send()` fails with an error naming `--system-prompt`.
+
 ### SDKAgent
 
 The handle returned by `Agent.create()` and `Agent.resume()`.
@@ -443,6 +462,7 @@ Each `agent.send()` returns a `Run`. The agent retains conversation context acro
 ```typescript
 type RunStatus = "running" | "finished" | "error" | "cancelled";
 type RunOperation = "stream" | "wait" | "cancel" | "conversation";
+type SteerAckOutcome = "complete_delivered" | "revert_to_followup";
 
 interface Run {
   readonly id: string;
@@ -460,6 +480,7 @@ interface Run {
   stream(): AsyncGenerator<SDKMessage, void>;
   wait(): Promise<RunResult>;
   cancel(): Promise<void>;
+  steer?(text: string): Promise<SteerAckOutcome>;
   conversation(): Promise<ConversationTurn[]>;
 
   supports(operation: RunOperation): boolean;
@@ -575,6 +596,24 @@ await run.cancel();
 Cancels the run. The status moves to `"cancelled"`, the live stream aborts, in-flight tool calls stop, and `run.wait()` resolves with `status: "cancelled"`. Partial output (assistant text written so far) stays on the Run object.
 
 Cancel is supported on running local and cloud runs and is a no-op if the run already finished.
+
+### Steering a run in flight
+
+`run.steer(text)` injects a message into the turn that is already running instead of waiting for it to finish. The promise settles once the turn confirms whether it appended the text. `complete_delivered` means the turn has the message, so don't resend it. `revert_to_followup` means the turn didn't take it, so deliver it with `agent.send()` after the run.
+
+```typescript
+const run = await agent.send("Migrate the auth module to the new session API");
+
+const outcome = await run.steer?.("Skip the admin routes for now");
+if (outcome !== "complete_delivered") {
+  await run.wait();
+  await agent.send("Skip the admin routes for now");
+}
+```
+
+- Local runs only. Cloud runs and detached local handles expose `steer` but always resolve `revert_to_followup`.
+- Steering works while a foreground subagent is running. The subagent moves to the background and keeps running so the parent turn can take the message.
+- `steer` is optional on `Run` and isn't a `RunOperation`. Check `run.steer` before calling it instead of `run.supports()`.
 
 ### Reading run state
 
@@ -1337,7 +1376,7 @@ Set defaults for local agents that apply to later `Agent.*` calls. Fields on an 
 
 | Option                          | Description                                                                                                                                                                                                                                                                                                                                                                               |
 | :------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `local.store`                   | Default [local agent store](https://cursor.com/docs/sdk/typescript.md#local-agent-stores) when a call omits `local.store`. The SDK uses on-disk SQLite when the SQLite backend is available and falls back to `JsonlLocalAgentStore` otherwise.                                                                                                                                           |
+| `local.store`                   | Default [local agent store](https://cursor.com/docs/sdk/typescript.md#local-agent-stores) when a call omits `local.store`. The SDK uses on-disk SQLite through `node:sqlite`; when that module is unavailable, `Agent.create()` throws a `ConfigurationError` unless you configure `JsonlLocalAgentStore` or another store here.                                                          |
 | `local.useHttp1ForAgent`        | Force local agent backend streams to use HTTP/1.1 with SSE instead of HTTP/2. Useful behind proxies or on fetch stacks that don't support HTTP/2.Bun defaults to HTTP/1.1 due to upstream HTTP/2 compatibility issues.                                                                                                                                                                    |
 | `local.workspaceScanCacheTtlMs` | How long the SDK reuses a workspace scan (rules, skills, `AGENTS.md`, ignore files), in milliseconds. Defaults to 20 seconds. Raise it in a long-lived host serving a checkout that only changes on deploy; the trade is freshness, since a rule added after the process started can go unseen for this long. The `CURSOR_RIPWALK_CACHE_TTL_MS` environment variable sets the same value. |
 
@@ -1614,6 +1653,10 @@ Subagents committed to the repo at `.cursor/agents/*.md` (with `name`, `descript
 
 Subagents can spawn their own subagents, within a nesting limit. When a subagent uses the `Agent` tool, the SDK hands it the same subagent executor the parent has, so a parent can delegate to a subagent that delegates further. Each level reaches the same set of named subagents and [custom tools](https://cursor.com/docs/sdk/typescript.md#custom-tools). The top-level agent and its direct subagents can launch subagents, but a subagent launched by another subagent can't launch further ones.
 
+### Background subagents
+
+When the agent runs a subagent in the background, the subagent's result returns to the parent as a follow-up turn on the same run instead of being dropped when the parent turn ends. `run.stream()` keeps yielding events through those turns, and `run.wait()` resolves after them with the last turn's text as `result`. Local agents only.
+
 ## Restricting the toolset
 
 `tools` allowlists the built-in tools offered to the model; `disallowedTools` removes tools and keeps the rest, including tools added to the platform after your SDK version was released. Both are local agents only for now, and neither persists on the agent: pass them again on `Agent.resume()` to keep the restriction for follow-up runs.
@@ -1645,7 +1688,7 @@ const noShell = await Agent.create({
 
 Custom tools let you expose your own functions to the agent without standing up a separate MCP server. Pass them on `local.customTools` and the SDK registers them as an MCP server named `custom-user-tools`. The agent discovers and calls them through the same MCP path as any other server. Deny rules and [sandbox](https://cursor.com/docs/sdk/typescript.md#sandbox-options) limits still apply, but custom tools skip interactive approval, so [sandboxed](https://cursor.com/docs/sdk/typescript.md#sandbox-options) and [auto-review](https://cursor.com/docs/sdk/typescript.md#auto-review) runs call them without prompting. Custom tools reach [subagents](https://cursor.com/docs/sdk/typescript.md#subagents) (including nested ones) too.
 
-Custom tools are local agents only. Passing `local.customTools` to a cloud agent throws a `ConfigurationError`.
+Custom tools are local agents only. Cloud agents ignore `local.customTools` at creation and throw a `ConfigurationError` when you pass it on `send()`.
 
 ```typescript
 const agent = await Agent.create({
@@ -1700,10 +1743,20 @@ await agent.send("Roll forward if the canary is healthy", {
 interface SDKCustomTool {
   description?: string;
   inputSchema?: Record<string, SDKJsonValue>;
+  outputSchema?: Record<string, SDKJsonValue>;
+  annotations?: SDKToolAnnotations;
   execute: (
     args: Record<string, SDKJsonValue>,
     context: SDKCustomToolContext
   ) => SDKCustomToolResult | Promise<SDKCustomToolResult>;
+}
+
+interface SDKToolAnnotations {
+  title?: string;
+  readOnlyHint?: boolean;
+  destructiveHint?: boolean;
+  idempotentHint?: boolean;
+  openWorldHint?: boolean;
 }
 
 interface SDKCustomToolContext {
@@ -1711,11 +1764,13 @@ interface SDKCustomToolContext {
 }
 ```
 
-| Field         | Description                                                                                                                                    |
-| :------------ | :--------------------------------------------------------------------------------------------------------------------------------------------- |
-| `description` | Shown to the model so it knows when to call the tool. Defaults to an empty string.                                                             |
-| `inputSchema` | JSON Schema for the arguments. Defaults to an open object that accepts any properties.                                                         |
-| `execute`     | Your callback. Receives the parsed `args` and a `context` with the `toolCallId`. Runs in your process, so it can reach anything your code can. |
+| Field          | Description                                                                                                                                                                                 |
+| :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `description`  | Shown to the model so it knows when to call the tool. Defaults to an empty string.                                                                                                          |
+| `inputSchema`  | JSON Schema for the arguments. Defaults to an open object that accepts any properties.                                                                                                      |
+| `outputSchema` | JSON Schema for the tool's structured result, advertised to the model as the MCP `Tool.outputSchema`. Results are not validated against it.                                                 |
+| `annotations`  | MCP tool annotations (`title`, `readOnlyHint`, `destructiveHint`, `idempotentHint`, `openWorldHint`) passed through to the model. Descriptive hints only; nothing in the SDK enforces them. |
+| `execute`      | Your callback. Receives the parsed `args` and a `context` with the `toolCallId`. Runs in your process, so it can reach anything your code can.                                              |
 
 ### Tool results
 
@@ -1755,9 +1810,9 @@ Local agents run with `local.sandboxOptions.enabled: false` by default. The agen
 
 When you enable the sandbox, the SDK constrains every shell tool call and shell-spawned process:
 
-- **Filesystem** — Writes are limited to the working directory (`local.cwd`) and a small set of allowed paths. Reads outside the workspace are blocked.
-- **Shell** — Commands run inside a platform sandbox (`bubblewrap` on Linux, `seatbelt` on macOS, the bundled `@cursor/sdk-<os>-<arch>` helper). Privileged operations are denied.
-- **Network** — Outbound network is denied by default. To allow specific hosts, drop a `.cursor/sandbox.json` in the workspace listing the allowed hosts. The SDK reads the same per-user policy at `~/.cursor/sandbox.json` if present.
+- **Filesystem.** Writes are limited to the working directory (`local.cwd`), temp directories, and paths you allow in [`sandbox.json`](https://cursor.com/docs/reference/sandbox.md). Reads are not restricted to the workspace.
+- **Shell.** Commands run inside a platform sandbox (`bubblewrap` on Linux, `seatbelt` on macOS, the bundled `@cursor/sdk-<os>-<arch>` helper). Privileged operations are denied.
+- **Network.** Outbound network is denied by default. To allow specific hosts, drop a `.cursor/sandbox.json` in the workspace listing the allowed hosts. The SDK reads the same per-user policy at `~/.cursor/sandbox.json` if present.
 
 ```typescript
 const agent = await Agent.create({
@@ -1921,7 +1976,7 @@ Cloud SSE streams retain backlog for a window after the run starts, so a dispatc
 
 ## Local agent stores
 
-Local agents persist agent metadata, conversation checkpoints, runs, and run events to disk so that follow-ups and `Agent.resume()` survive process restarts. By default the SDK uses on-disk SQLite when the SQLite backend is available and falls back to `JsonlLocalAgentStore` otherwise. You can swap in a different backend with `local.store`.
+Local agents persist agent metadata, conversation checkpoints, runs, and run events to disk so that follow-ups and `Agent.resume()` survive process restarts. By default the SDK uses on-disk SQLite through `node:sqlite`. When that module is unavailable, `Agent.create()` throws a `ConfigurationError` instead of falling back. You can swap in a different backend with `local.store`.
 
 The SDK ships two backends and lets you bring your own:
 
@@ -2002,20 +2057,21 @@ The substores mirror the default SQLite tables: `agents` holds one row per agent
 
 ### AgentOptions
 
-| Property          | Type                              | Default                                                             | Description                                                                                                                                                                                          |
-| :---------------- | :-------------------------------- | :------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `model`           | `ModelSelection`                  | Required for local; cloud falls back to the server-resolved default | Model to use. See [`ModelSelection`](https://cursor.com/docs/sdk/typescript.md#modelselection).                                                                                                      |
-| `apiKey`          | `string`                          | `CURSOR_API_KEY` env                                                | User API key or service account key. Team Admin keys are not yet supported.                                                                                                                          |
-| `name`            | `string`                          | Auto-generated                                                      | Human-readable agent name returned as `name` in `Agent.list()` / `Agent.get()`.                                                                                                                      |
-| `local`           | `LocalAgentOptions`               |                                                                     | Local agent config. See [`LocalAgentOptions`](https://cursor.com/docs/sdk/typescript.md#localagentoptions).                                                                                          |
-| `cloud`           | `CloudAgentOptions`               |                                                                     | Cloud agent config.                                                                                                                                                                                  |
-| `mcpServers`      | `Record<string, McpServerConfig>` |                                                                     | Inline MCP server definitions.                                                                                                                                                                       |
-| `agents`          | `Record<string, AgentDefinition>` |                                                                     | Subagent definitions.                                                                                                                                                                                |
-| `tools`           | `ToolName[]`                      | Default toolset                                                     | [Restrict the toolset](https://cursor.com/docs/sdk/typescript.md#restricting-the-toolset): only the listed built-in tools are offered to the model. `[]` means no built-in tools. Local agents only. |
-| `disallowedTools` | `ToolName[]`                      |                                                                     | [Remove tools](https://cursor.com/docs/sdk/typescript.md#restricting-the-toolset) from the toolset; everything else stays available. Deny wins when combined with `tools`. Local agents only.        |
-| `agentId`         | `string`                          | Auto-generated                                                      | Durable agent ID. Pass to keep a stable ID across invocations.                                                                                                                                       |
-| `idempotencyKey`  | `string`                          | Auto-generated for cloud                                            | Optional client-generated idempotency key.                                                                                                                                                           |
-| `mode`            | `"agent" \| "plan"`               | `"agent"`                                                           | Initial conversation mode for the agent's first run. See [Conversation mode](https://cursor.com/docs/sdk/typescript.md#conversation-mode).                                                           |
+| Property          | Type                              | Default                                                                                   | Description                                                                                                                                                                                                  |
+| :---------------- | :-------------------------------- | :---------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `model`           | `ModelSelection`                  | Required before the first local `send()`; cloud falls back to the server-resolved default | Model to use. See [`ModelSelection`](https://cursor.com/docs/sdk/typescript.md#modelselection).                                                                                                              |
+| `apiKey`          | `string`                          | `CURSOR_API_KEY` env                                                                      | User API key or service account key. Team Admin keys are not yet supported.                                                                                                                                  |
+| `name`            | `string`                          | Auto-generated                                                                            | Human-readable agent name returned as `name` in `Agent.list()` / `Agent.get()`.                                                                                                                              |
+| `local`           | `LocalAgentOptions`               |                                                                                           | Local agent config. See [`LocalAgentOptions`](https://cursor.com/docs/sdk/typescript.md#localagentoptions).                                                                                                  |
+| `cloud`           | `CloudAgentOptions`               |                                                                                           | Cloud agent config.                                                                                                                                                                                          |
+| `mcpServers`      | `Record<string, McpServerConfig>` |                                                                                           | Inline MCP server definitions.                                                                                                                                                                               |
+| `agents`          | `Record<string, AgentDefinition>` |                                                                                           | Subagent definitions.                                                                                                                                                                                        |
+| `tools`           | `ToolName[]`                      | Default toolset                                                                           | [Restrict the toolset](https://cursor.com/docs/sdk/typescript.md#restricting-the-toolset): only the listed built-in tools are offered to the model. `[]` means no built-in tools. Local agents only.         |
+| `disallowedTools` | `ToolName[]`                      |                                                                                           | [Remove tools](https://cursor.com/docs/sdk/typescript.md#restricting-the-toolset) from the toolset; everything else stays available. Deny wins when combined with `tools`. Local agents only.                |
+| `systemPrompt`    | `string`                          | Cursor's built-in prompt                                                                  | [Replace the system prompt](https://cursor.com/docs/sdk/typescript.md#replacing-the-system-prompt) for the main agent loop. Must be non-empty. Local agents only, and not persisted across `Agent.resume()`. |
+| `agentId`         | `string`                          | Auto-generated                                                                            | Durable agent ID. Pass to keep a stable ID across invocations.                                                                                                                                               |
+| `idempotencyKey`  | `string`                          | Auto-generated for cloud                                                                  | Optional client-generated idempotency key.                                                                                                                                                                   |
+| `mode`            | `"agent" \| "plan"`               | `"agent"`                                                                                 | Initial conversation mode for the agent's first run. See [Conversation mode](https://cursor.com/docs/sdk/typescript.md#conversation-mode).                                                                   |
 
 ### LocalAgentOptions
 
@@ -2047,12 +2103,12 @@ Config for local agents, passed as `local` on `Agent.create()`. Also exported as
 
 ### AgentDefinition
 
-| Property      | Type                                               | Default     | Description                                                                                     |
-| :------------ | :------------------------------------------------- | :---------- | :---------------------------------------------------------------------------------------------- |
-| `description` | `string`                                           | *required*  | When to use this subagent. Shown to the parent agent so it knows when to spawn.                 |
-| `prompt`      | `string`                                           | *required*  | System prompt for the subagent.                                                                 |
-| `model`       | `ModelSelection \| "inherit"`                      | `"inherit"` | Model override. Pass `"inherit"` to use the parent's selection.                                 |
-| `mcpServers`  | `Array<string \| Record<string, McpServerConfig>>` |             | MCP servers available to this subagent. Names reference servers from the parent's `mcpServers`. |
+| Property      | Type                                               | Default     | Description                                                                                                                                                    |
+| :------------ | :------------------------------------------------- | :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `description` | `string`                                           | *required*  | When to use this subagent. Shown to the parent agent so it knows when to spawn.                                                                                |
+| `prompt`      | `string`                                           | *required*  | System prompt for the subagent.                                                                                                                                |
+| `model`       | `ModelSelection \| "inherit"`                      | `"inherit"` | Model override. Pass `"inherit"` to use the parent's selection.                                                                                                |
+| `mcpServers`  | `Array<string \| Record<string, McpServerConfig>>` |             | Accepted for forward compatibility. String references are ignored and inline configs throw a `ConfigurationError`; subagents inherit the parent's MCP servers. |
 
 ### ModelSelection
 
@@ -2196,7 +2252,7 @@ to the user.
 
 ```typescript
 class IntegrationNotConnectedError extends ConfigurationError {
-  readonly provider: string;   // e.g. "github", "gitlab", "azuredevops"
+  readonly provider: string;   // e.g. "github", "gitlab", "azure-devops"
   readonly helpUrl: string;    // dashboard link to reconnect
 }
 ```
@@ -2266,13 +2322,13 @@ Thrown when a `Run` operation isn't available on the current runtime. Use `run.s
 ## Known limitations
 
 - Inline `mcpServers` are not persisted across `Agent.resume()`. Pass them again on resume if needed.
-- Custom tools (`local.customTools`), Auto-review (`local.autoReview`), custom stores (`local.store`), and toolset restrictions (`tools`, `disallowedTools`) are local agents only. Cloud agents reject `local.customTools` and persist server-side.
-- `tools` and `disallowedTools` are not persisted on the agent. Pass them again on `Agent.resume()` to keep the restriction.
+- Custom tools (`local.customTools`), Auto-review (`local.autoReview`), custom stores (`local.store`), toolset restrictions (`tools`, `disallowedTools`), and `systemPrompt` are local agents only. Cloud agents reject `local.customTools` on `send()` and persist server-side.
+- `tools`, `disallowedTools`, and `systemPrompt` are not persisted on the agent. Pass them again on `Agent.resume()` to keep them.
 - Artifact download is not implemented for local agents (`agent.listArtifacts()` returns an empty list and `agent.downloadArtifact()` throws).
 - `local.settingSources` (and the file-based MCP / subagent paths it gates) does not apply to cloud agents. Cloud always loads `project` / `team` / `plugins`.
 - Hooks are file-based only (`.cursor/hooks.json`). No programmatic callbacks.
 - The SDK doesn't auto-discover credentials from a local Cursor app installation. Set `CURSOR_API_KEY` (or pass `apiKey`) explicitly, or mint a key with [`Cursor.auth.login()`](https://cursor.com/docs/sdk/typescript.md#cursorauth).
-- Local mode requires Node.js 22.13 or later and platform sandbox-helper support. The default store falls back to `JsonlLocalAgentStore` when the SQLite backend isn't available.
+- Local mode requires Node.js 22.13 or later and platform sandbox-helper support. The default store needs `node:sqlite`; when it's unavailable, `Agent.create()` throws a `ConfigurationError` until you configure `JsonlLocalAgentStore` or another store.
 
 
 ---

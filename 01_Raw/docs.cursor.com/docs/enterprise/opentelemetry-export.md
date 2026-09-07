@@ -1,12 +1,12 @@
 ---
 source_url: https://cursor.com/docs/enterprise/opentelemetry-export
-fetched_at: 2026-08-31T06:29:32.311849+00:00
+fetched_at: 2026-09-07T05:31:28.610186+00:00
 fetch_method: mintlify_md
 ---
 
 # OpenTelemetry Export
 
-OpenTelemetry Export streams Cursor usage data for your team to a collector you run. Cursor sends metrics (tokens, tool calls, best-effort cost) and logs (API requests, errors, corrections, skills, hooks, plugins, and cloud agent lifecycle events) to one team-managed destination. Export runs server-side.
+OpenTelemetry Export streams Cursor usage data for your team to a collector you run. Cursor sends metrics (tokens, tool calls, best-effort cost) and logs (API requests, errors, corrections, skills, hooks, plugins, cloud agent lifecycle events, and recorded Grok Bot actions) to one team-managed destination. Export runs server-side.
 
 OpenTelemetry Export is available on the [Enterprise plan](https://cursor.com/contact-sales?source=docs-opentelemetry-export). Admins configure it in **Team Settings > OpenTelemetry Export**.
 
@@ -128,6 +128,12 @@ Everything below is on by default for a new destination. Turn individual familie
 - `cursor.cloud_agent.artifact`
 - `cursor.cloud_agent.pull_request`: `opened` / `creation_failed`
 - `cursor.cloud_agent.mcp_auth_error`: an MCP server rejected the run's credentials
+- `cursor.grok_bot.mcp_tool_call`: a Grok Bot connector (MCP) tool call
+- `cursor.grok_bot.shell_command`: a Grok Bot shell command, secrets scrubbed
+- `cursor.grok_bot.browser_navigation`: a page the Grok Bot browser navigated to
+- `cursor.grok_bot.computer_use_session`: a Grok Bot computer use session summary
+
+The `cursor.grok_bot.*` events carry [Action Recording](https://cursor.com/docs/grok-bot/security.md#logging-and-audit) data, so they flow only after a team admin enables Action Recording on the dashboard Grok Bot page. Events are sanitized before export: shell commands are secret-scrubbed and browser URLs are stripped of query strings and fragments.
 
 **Families** (admin toggles; all default on)
 
@@ -135,10 +141,11 @@ Everything below is on by default for a new destination. Turn individual familie
 - `tool_calls`: tool.calls metric
 - `skills_hooks_plugins`: skill / hook / plugin logs
 - `cloud_agents`: cloud\_agent.\* logs
+- `grok_bot_agent_actions`: grok\_bot.\* action logs; requires Action Recording (Enterprise)
 
 **Useful attributes**
 
-- Resource: `service.name=cursor`, `cursor.team.id`, optional `cursor.user.id`, surface/entrypoint
+- Resource: `service.name=cursor`, `cursor.team.id`, optional `cursor.user.id`, surface/entrypoint. Grok Bot traffic exports as `cursor.surface=grok_bot` across all families; `desktop` no longer includes it.
 - Logs: `cursor.event.id` (dedupe), and `cursor.request.id` / `cursor.conversation.id` / `cursor.usage_event.id` when present
 
 ## Delivery
@@ -167,9 +174,9 @@ Metrics (`cursor.token.usage`, `cursor.tool.calls`, `cursor.cost.usage`) are agg
 
 **What each id means**
 
-- `cursor.conversation.id` is the session key. In the IDE and CLI it's the composer chat UUID. For cloud agents it's the customer-visible `bc-...` agent id. The same value appears on that run's `api.request`, `api.error`, `skill.activated`, `hook.execution_complete`, and `cloud_agent.*` logs when present.
+- `cursor.conversation.id` is the session key. In the IDE and CLI it's the composer chat UUID. For cloud agents it's the customer-visible `bc-...` agent id. For `grok_bot.*` logs it's the Grok Bot conversation id. The same value appears on that run's `api.request`, `api.error`, `skill.activated`, `hook.execution_complete`, `cloud_agent.*`, and `grok_bot.*` logs when present.
 - `cursor.usage_event.id` is the request-grain key on `api.request`, `api.error`, and `api.correction`. Use it to reconcile against Cursor usage and billing exports and to apply corrections.
-- `cursor.request.id` is an optional per-call id on most logs. It never appears on `api.correction` or `cloud_agent.*`.
+- `cursor.request.id` is an optional per-call id on most logs. It never appears on `api.correction`, `cloud_agent.*`, or `grok_bot.*`.
 - `cursor.event.id` is a dedupe key only, not a join key across event types.
 
 **Recipe: rank sessions by tokens, then attach skills and tools**

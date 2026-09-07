@@ -1,14 +1,10 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/mobile
-fetched_at: 2026-08-31T06:29:31.694355+00:00
+fetched_at: 2026-09-07T05:31:27.439231+00:00
 fetch_method: mintlify_md
 ---
 
 # Cursor for iOS
-
-### Beta
-
-Cursor for iOS is in beta. Features may change before general availability.
 
 Cursor for iOS is a native mobile app for controlling agents running [in the cloud](https://cursor.com/docs/cloud-agent.md) and on your local computer. Start agents, follow their work in real time, and review and merge their pull requests from your iPhone or iPad. It runs on the same backend as [cursor.com/agents](https://cursor.com/agents) and the desktop Agents Window, so the agents you start on mobile show up everywhere you work.
 
@@ -51,7 +47,7 @@ Once you're set up, put an agent to work. For example:
 
 You get the full cloud agent workflow from your pocket, not a stripped-down chat box. The same machines, models, and review tools you use on the web come with you.
 
-- **Run agents on cloud machines.** Pick a worker for each run: a Cloud machine, a [bring-your-own-machine pool](https://cursor.com/docs/cloud-agent/bring-your-own-machine/pools.md), or one of [My Machines](https://cursor.com/docs/cloud-agent/bring-your-own-machine/my-machines.md). Agents work in full development environments, so they install dependencies, run tests, and verify their changes.
+- **Run agents on cloud machines.** Pick a worker for each run: a Cloud machine, a [Team Pool](https://cursor.com/docs/cloud-agent/self-hosted/pool.md), or one of [My Machines](https://cursor.com/docs/cloud-agent/self-hosted/my-machines.md). Agents work in full development environments, so they install dependencies, run tests, and verify their changes.
 - **Use any model.** Choose any model available for cloud agents. Every run uses the model's maximum supported context window.
 - **Let agents run long.** Start a task, lock your phone, and check back later. Agents keep working in the cloud whether or not your device stays connected.
 - **Follow the work live.** Watch the chat stream as the agent codes, send follow-ups to a running agent, and tap a subagent card to read its child transcript.
@@ -81,7 +77,7 @@ The app focuses on directing and reviewing agents. It isn't an IDE, and it isn't
 - **Secrets and environments.** Configure [cloud agent environments](https://cursor.com/docs/cloud-agent/setup.md) and secrets on the web. Agents on mobile use what's already set up.
 - **MCP server management.** Pick servers per run on mobile; add and manage them on the web.
 - **Source control setup.** Connect or reconnect [GitHub](https://cursor.com/docs/integrations/github.md) and [GitLab](https://cursor.com/docs/integrations/gitlab.md) from the dashboard.
-- **Automations, rules, and skills config.** Manage these on the web. Agents pick up whatever the repo already contains.
+- **Automations, rules, and skills config.** Manage these on the web. Agents pick up project skills from the repo and any personal skills you have synced.
 - **Admin, billing, and usage.** Web only.
 
 ## Move between devices

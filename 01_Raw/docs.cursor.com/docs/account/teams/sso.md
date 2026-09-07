@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/sso
-fetched_at: 2026-08-17T02:15:17.092484+00:00
+fetched_at: 2026-09-07T05:31:25.704969+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,17 +10,23 @@ fetch_method: mintlify_md
 
 SAML 2.0 SSO is available at no additional cost on Teams and Enterprise plans. Use your existing identity provider (IdP) to authenticate team members without separate Cursor accounts.
 
+This page covers team-level SSO in Team Settings. Use it on a Teams plan, or
+on a team that still has its own identity provider. Enterprise org admins
+configure SSO in the Organization's Settings. See
+[Organizations](https://cursor.com/docs/enterprise/organizations.md#identity-model) and
+[Identity and access management](https://cursor.com/docs/enterprise/identity-and-access-management.md#single-sign-on-sso-and-saml).
+
 ## Prerequisites
 
-- Cursor Team plan
+- Cursor Teams plan, or a team that still uses team-level SSO
 - Admin access to your identity provider (e.g., Okta)
-- Admin access to your Cursor organization
+- Admin access to your Cursor team
 
 ## Configuration Steps
 
 ### Sign in to your Cursor account
 
-Navigate to the [Single Sign-On (SSO) settings](https://cursor.com/dashboard/team-settings#single-sign-on-sso) with an admin account.
+Navigate to the [Single Sign-On (SSO) settings](https://cursor.com/dashboard/team-settings#single-sign-on-sso) with a team admin account.
 
 ### Locate the SSO configuration
 
@@ -44,13 +50,13 @@ Click "Configure" next to "Domain Verification Settings" to verify your users' d
 
 ## View your SSO configuration
 
-Admins can review an existing SSO connection and its domains at any time:
+Team admins can review a team-level SSO connection and its domains at any time:
 
-1. Go to [Single Sign-On (SSO) settings](https://cursor.com/dashboard/team-settings#single-sign-on-sso) with an admin account.
+1. Go to [Single Sign-On (SSO) settings](https://cursor.com/dashboard/team-settings#single-sign-on-sso) with a team admin account.
 2. Click "Configure" next to "SSO-Provider Connection Settings" to view the provider connection details.
 3. Click "Configure" next to "Domain Verification Settings" to view or manage verified domains.
 
-These settings are available to team admins.
+These settings are for team-level SSO. Enterprise org admins review org-level SSO in the Organization's Settings. See [Organizations](https://cursor.com/docs/enterprise/organizations.md#identity-model).
 
 ### Identity Provider Setup Guides
 

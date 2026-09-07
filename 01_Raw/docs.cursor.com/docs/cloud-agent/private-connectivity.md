@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/private-connectivity
-fetched_at: 2026-08-10T03:07:40.460827+00:00
+fetched_at: 2026-09-07T05:31:27.395941+00:00
 fetch_method: mintlify_md
 ---
 
@@ -74,7 +74,7 @@ If your endpoint service is outside `us-east-1`, enable cross-region access on t
 Cursor will provide the AWS principal to add to your endpoint service allowed principals. Add the exact principal Cursor provides:
 
 ```text
-arn:aws:iam::<cursor-aws-account-id>:role/<cursor-provided-role>
+arn:aws:iam::<cursor-aws-account-id>:root
 ```
 
 Cursor cannot create its interface endpoint until this principal is allowed. If the principal is missing or does not match exactly, AWS returns `InvalidServiceName`.

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/scim
-fetched_at: 2026-07-20T04:31:19.504580+00:00
+fetched_at: 2026-09-07T05:31:25.551534+00:00
 fetch_method: mintlify_md
 ---
 
@@ -79,9 +79,9 @@ Setup instructions for Okta, Azure AD, Google Workspace, and more.
 
 ## Managing users and groups
 
-All user and group management must be done through your identity provider.
-Changes made in your identity provider will automatically sync to Cursor, but
-you cannot modify users or groups directly in Cursor.
+SCIM-provisioned users and groups are managed in your identity provider.
+Cursor shows that directory data as read-only. Users who were already on the
+team before SCIM can still be removed from the Members dashboard.
 
 ### User management
 
@@ -121,7 +121,7 @@ Confirm users are properly assigned to the expected groups in your identity prov
 
 ### Can I manage SCIM users and groups directly in Cursor?
 
-No. All user and group management must be done through your identity provider. Cursor displays this information as read-only.
+SCIM-provisioned users and groups are read-only in Cursor. Add, remove, or update them in your identity provider. Users who were already on the team before SCIM can still be removed from the Members dashboard.
 
 ### How quickly do changes sync?
 
@@ -135,7 +135,7 @@ The role on a mapping also controls dashboard editing. When a group is connected
 
 ### Why are there users on my Members dashboard that aren't in the provisioned groups?
 
-When team-level SCIM is set up, existing users are not automatically removed from Cursor. Either remove them manually, or sync them with SCIM once and deprovision them from your identity provider to have them removed from Cursor.
+When team-level SCIM is set up, existing users are not automatically removed from Cursor. Remove them from the Members dashboard, or sync them with SCIM once and deprovision them from your identity provider.
 
 ### Why don't the users from my synced groups match the users on the Cursor Members dashboard?
 

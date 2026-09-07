@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/reference/parameters
-fetched_at: 2026-06-29T05:25:13.449540+00:00
+fetched_at: 2026-09-07T05:31:26.719123+00:00
 fetch_method: mintlify_md
 ---
 
@@ -112,22 +112,25 @@ Start a private cloud worker that connects to Cursor and runs agents in your env
 | `debug`          | Run private worker preflight diagnostics for auth, privacy, and routing | `agent worker debug` |
 | `help [command]` | Display help for command                                                | `agent worker help`  |
 
-| Command        | Option                             | Description                                                                                         |
-| -------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `worker`       | `--auth-token-file <path>`         | Path to a file containing the worker auth token                                                     |
-| `worker`       | `--worker-dir <path>`              | Workspace root to expose to agents. Repeatable. The first value is the assignment identity.         |
-| `worker`       | `--management-addr <address>`      | Listen address for `/healthz`, `/readyz`, and `/metrics`                                            |
-| `worker`       | `--label <key=value>`              | Add a worker label. Can be used multiple times. Can't be used with `--labels-file`.                 |
-| `worker`       | `--labels-file <path>`             | Path to a JSON or TOML labels file. Can also use `CURSOR_WORKER_LABELS_FILE`.                       |
-| `worker`       | `--idle-release-timeout <seconds>` | Seconds the worker may stay connected after becoming idle. Default `0` disables idle-based release. |
-| `worker`       | `--pool`                           | Register for pool assignment. One cloud agent claims the worker at a time.                          |
-| `worker`       | `--single-use`                     | Legacy alias for `--pool`                                                                           |
-| `worker`       | `--pool-name <name>`               | Pool label for pool workers. Requires `--pool` or `--single-use`. Defaults to `default`.            |
-| `worker`       | `--name <name>`                    | Custom display name. Defaults to the machine hostname.                                              |
-| `worker`       | `--data-dir <path>`                | Base directory for logs, artifacts, and recording data                                              |
-| `worker`       | `--debug`                          | Print worker debug diagnostics before starting bridge mode                                          |
-| `worker start` | `--verbose`                        | Enable verbose startup logs                                                                         |
-| `worker debug` | `--json`                           | Output the debug report as JSON                                                                     |
+| Command        | Option                             | Description                                                                                                                                                                                    |
+| -------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `worker`       | `--auth-token-file <path>`         | Path to a file containing the worker auth token                                                                                                                                                |
+| `worker`       | `--worker-dir <path>`              | Workspace root to expose to agents. Repeatable. The first value is the assignment identity.                                                                                                    |
+| `worker`       | `--management-addr <address>`      | Listen address for `/healthz`, `/readyz`, and `/metrics`                                                                                                                                       |
+| `worker`       | `--label <key=value>`              | Add a worker label. Can be used multiple times. Can't be used with `--labels-file`.                                                                                                            |
+| `worker`       | `--labels-file <path>`             | Path to a JSON or TOML labels file. Can also use `CURSOR_WORKER_LABELS_FILE`.                                                                                                                  |
+| `worker`       | `--idle-release-timeout <seconds>` | Seconds the worker may stay connected after becoming idle. Default `0` disables idle-based release.                                                                                            |
+| `worker`       | `--pool`                           | Register for pool assignment. One cloud agent claims the worker at a time.                                                                                                                     |
+| `worker`       | `--single-use`                     | Legacy alias for `--pool`                                                                                                                                                                      |
+| `worker`       | `--pool-name <name>`               | Pool label for pool workers. Requires `--pool` or `--single-use`. Defaults to `default`.                                                                                                       |
+| `worker`       | `--name <name>`                    | Custom display name. Defaults to the machine hostname.                                                                                                                                         |
+| `worker`       | `--data-dir <path>`                | Base directory for logs, artifacts, and recording data                                                                                                                                         |
+| `worker`       | `--debug`                          | Print worker debug diagnostics before starting bridge mode                                                                                                                                     |
+| `worker`       | `--computer-use`                   | Let agents drive this machine's desktop. On macOS, installs the Cursor Computer Use helper app if needed. See [Computer use](https://cursor.com/docs/cloud-agent/self-hosted/computer-use.md). |
+| `worker`       | `--display <display>`              | Linux only. Existing X11 display to require for `--computer-use`, for example `:0`.                                                                                                            |
+| `worker`       | `--share-desktop [mode]`           | Linux only. Let authorized viewers watch or control the agent desktop: `view` or `view_and_control`. Separate from computer use.                                                               |
+| `worker start` | `--verbose`                        | Enable verbose startup logs                                                                                                                                                                    |
+| `worker debug` | `--json`                           | Output the debug report as JSON                                                                                                                                                                |
 
 ## Command-specific options
 

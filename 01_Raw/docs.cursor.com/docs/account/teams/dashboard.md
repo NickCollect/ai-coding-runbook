@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/dashboard
-fetched_at: 2026-08-31T06:29:30.416838+00:00
+fetched_at: 2026-09-07T05:31:25.514304+00:00
 fetch_method: mintlify_md
 ---
 
@@ -40,11 +40,22 @@ default. Learn more in [Cursor Router](https://cursor.com/docs/cursor-router.md)
 ### Team Marketplaces
 
 Import private marketplaces from GitHub or use the Default marketplace to
-distribute shared Team MCP servers. Set **Marketplace Access** for the whole
-team, selected Organization Groups, or an existing SCIM directory-group
-configuration. Teams plans can add up to 1 team marketplace. Enterprise plans
-can add unlimited team marketplaces. Learn more in [Team
-Marketplaces](https://cursor.com/docs/plugins.md#team-marketplaces).
+distribute shared Team MCP servers and member-published skills. Set
+**Marketplace Access** for the whole team, selected Organization Groups, or
+an existing SCIM directory-group configuration. On the Default marketplace,
+**Allow Members to Publish** controls whether members can publish personal
+skills. Teams plans can add up to 1 team marketplace. Enterprise plans can
+add unlimited team marketplaces. Learn more in [Team
+Marketplaces](https://cursor.com/docs/plugins.md#team-marketplaces) and [Publish a skill to your
+team](https://cursor.com/docs/plugins.md#publish-a-skill-to-your-team).
+
+### Sync Skills for Cloud Agents
+
+Let members opt in to sync `~/.cursor/skills/` so their own Cloud Agents can
+use those personal skills. Synced skills stay private to the author. Admins
+can turn the team setting off under **Security & Identity**, which disables
+sync for everyone. Learn more in [Use personal skills with Cloud
+Agents](https://cursor.com/docs/skills.md#use-personal-skills-with-cloud-agents).
 
 ### Bedrock IAM Role
 
@@ -123,7 +134,7 @@ Access detailed AI-generated code analytics for your team's repositories. Retrie
 
 ### Audit Log
 
-View comprehensive, tamper-proof records of security events and administrative actions. Track authentication, team changes, permission updates, API key actions, settings modifications, and more. Requires an Enterprise subscription. Learn more in [Compliance and Monitoring](https://cursor.com/docs/enterprise/compliance-and-monitoring.md#audit-logs).
+View comprehensive, tamper-proof records of security events and administrative actions. Track authentication, team changes, permission updates, API key actions, settings modifications, and more. Filter by application. CSV export includes the application. Requires an Enterprise subscription. Learn more in [Compliance and Monitoring](https://cursor.com/docs/enterprise/compliance-and-monitoring.md#audit-logs).
 
 **SCIM** (System for Cross-domain Identity Management) provisioning is also
 available for [Enterprise](https://cursor.com/docs/enterprise.md) plans. See our [SCIM
@@ -137,7 +148,7 @@ Manage your team members, invite new users, and control access permissions. Set 
 
 ## Audit Log
 
-Track security events, administrative actions, and team changes with comprehensive audit logs. View detailed records of who did what, when, and from where. Audit logs capture authentication events, membership changes, permission updates, API key actions, settings modifications, and more.
+Track security events, administrative actions, and team changes with comprehensive audit logs. View detailed records of who did what, when, and from where. Audit logs capture authentication events, membership changes, permission updates, API key actions, settings modifications, and more. Filter by application. CSV export includes the application.
 
 ![Audit Log](/docs-static/images/account/team/audit-log.png)
 

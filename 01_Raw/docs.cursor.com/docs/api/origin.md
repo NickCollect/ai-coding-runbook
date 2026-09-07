@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin
-fetched_at: 2026-08-31T06:29:33.319378+00:00
+fetched_at: 2026-09-07T05:31:28.757634+00:00
 title: "Origin API | Cursor Docs"
 ---
 
@@ -36,6 +36,8 @@ Endpoint paths in the [reference](#endpoint-reference) include the full `/v1/ori
 ### [Protocol conventions](#protocol-conventions)
 
 Requests and responses use `application/json`. JSON field names are **camelCase**. Timestamps are RFC 3339 strings. Protobuf 64-bit integers, including pull request numbers and version numbers, are encoded as JSON strings.
+
+Responses carry fields that sit at their default value rather than dropping them, so a `false` boolean, a `0` number, an empty string, and an empty array are all present in the body. Read the value itself instead of treating a missing key as the default. Fields documented as absent or omitted are optional in the contract and stay out of the body when they are unset.
 
 ## [Getting started](#getting-started)
 
@@ -110,12 +112,12 @@ JOSE header:
 Claims:
 
 ```
-{  "iss": "https://api.cursor.com/v1/origin",  "aud": "app_01...",  "sub": "i_01...",  "namespace_id": "ns_01...",  "iat": 1786465200,  "exp": 1786465500,  "jti": "RECEIPT_UUID",  "installedBy": {    "id": "user_01...",    "email": "installer@example.com"  },  "state": "ORIGINAL_VALUE"}
+{  "iss": "https://api.cursor.com/v1/origin",  "aud": "app_01...",  "sub": "i_01...",  "namespace_id": "ns_01...",  "iat": 1786465200,  "exp": 1786465500,  "jti": "RECEIPT_UUID",  "installedBy": {    "id": "user_01...",    "email": "installer@example.com",    "displayName": "Jane Doe"  },  "state": "ORIGINAL_VALUE"}
 ```
 
 - `aud` is your app ID and `sub` is the installation ID to use when minting installation access tokens.
 - `namespace_id` is the stable ID of the namespace the app was installed into.
-- `installedBy` identifies the user who performed this install or re-consent. It describes the current action, so on a re-consent it can differ from the durable `installedBy` on [Get App Installation](#get-app-installation).
+- `installedBy` identifies the user who performed this install or re-consent. It describes the current action, so on a re-consent it can differ from the durable `installedBy` on [Get App Installation](#get-app-installation). It carries `displayName` when the account has a name, and never carries `handle`; read the handle from a REST response or a webhook payload instead.
 - Receipts expire five minutes after issuance. `jti` is unique per receipt.
 - `state` is present only when the install URL carried a non-empty `state`, and echoes that value. Match it against the anti-forgery value you generated before redirecting.
 
@@ -245,7 +247,9 @@ curl https://api.cursor.com/v1/origin/keys
 {  "keys": [    {      "kty": "OKP",      "crv": "Ed25519",      "use": "sig",      "alg": "EdDSA",      "kid": "origin-key-id",      "x": "PUBLIC_KEY_MATERIAL"    }  ]}
 ```
 
-Cache the JWKS. Webhook signatures do not carry a key ID, so verification should try each active Ed25519 key. Installation receipts carry the signing key's `kid` in their JOSE header, so receipt verification can resolve the key directly.
+Cache the JWKS. `/keys` sends `Cache-Control: public, max-age=600, stale-if-error=600`, so reuse a cached response for 10 minutes, then refresh; if a refresh fails, keep the last good keys for at most another 10 minutes before failing verification. Also refresh on a signature that no key verifies, which drops a retired key ID. Keys rotate weekly.
+
+Webhook signatures do not carry a key ID, so verification should try each active Ed25519 key. Installation receipts carry the signing key's `kid` in their JOSE header, so receipt verification can resolve the key directly.
 
 ## [Scopes](#scopes)
 
@@ -254,12 +258,12 @@ Request only the minimum scopes your app needs. `repository:metadata:read` and a
 | Scope | Allows |
 | --- | --- |
 | `repository:metadata:read` | Read repository metadata. Added automatically. |
-| `repository:contents:read` | Read commits, branches, contents, and low-level Git objects. Clone, fetch, and pull over Git HTTPS. Sync a mirrored repository from its upstream source. |
-| `repository:contents:write` | Push over Git HTTPS. Merge pull requests. |
+| `repository:contents:read` | Read commits, branches, contents, comparison files, and low-level Git objects. Download a repository archive. Clone, fetch, and pull over Git HTTPS. Sync a mirrored repository from its upstream source. |
+| `repository:contents:write` | Push over Git HTTPS. Merge pull requests. Create branches and commit file changes through the Git data endpoints. |
 | `repository:pull_requests:read` | Read pull requests, changed files, pull request commits, and assigned labels. |
 | `repository:pull_requests:write` | Create and update pull requests. Assign and remove pull request labels. |
-| `repository:pull_requests:reviews:read` | Read pull request comments and submitted reviews. |
-| `repository:pull_requests:reviews:write` | Create and update comments; create, update, and dismiss reviews. |
+| `repository:pull_requests:reviews:read` | Read pull request comments, comment threads, submitted reviews, and requested reviewers. |
+| `repository:pull_requests:reviews:write` | Create and update comments; resolve and reopen comment threads; create, update, and dismiss reviews; request and remove reviewers. |
 | `repository:checks:read` | Read check suites, runs, and check run annotations. |
 | `repository:checks:write` | Create and update check suites and runs. Append check run annotations. |
 | `repository:labels:read` | Read the label definitions a repository owns. |
@@ -267,7 +271,11 @@ Request only the minimum scopes your app needs. `repository:metadata:read` and a
 | `repository:rulesets:read` | Read repository rulesets. |
 | `repository:rulesets:write` | Create, update, and delete repository rulesets. |
 
+Requesting a `:write` scope also grants the matching `:read` scope, so `repository:labels:write` covers `repository:labels:read` and you do not have to list both. The reverse does not hold: a read scope never grants writes.
+
 The installation token can only narrow these grants. It cannot add a scope or repository the workspace admin did not approve.
+
+The table covers the scopes an app requests at installation. To look up the scope a single operation requires, read its `x-origin-scopes` extension in the [OpenAPI specification](https://cursor.com/docs/api/origin/openapi.yaml). That extension covers every operation, including the `app`, `installation`, and `namespace` scopes that come with the credential itself rather than from an installation grant. An operation whose scopes all come with the credential marks its extension `ambient: true`: there is nothing to request for it, and presenting the right credential is enough.
 
 ### [Mirrored repositories](#mirrored-repositories)
 
@@ -296,8 +304,8 @@ Every endpoint charges a fixed cost against that budget before the handler runs.
 | --- | --- |
 | 0 | [Get Rate Limit](#get-rate-limit). Status only; does not consume points. |
 | 1 | Most read endpoints, plus [Create Installation Access Token](#create-installation-access-token) |
-| 5 | Ordinary writes, plus these heavier reads: [Get Commit](#get-commit), [List Commit Files](#list-commit-files), and [List Pull Request Files](#list-pull-request-files) |
-| 10 | [Create Repo](#create-repo) and [Merge Pull Request](#merge-pull-request) |
+| 5 | Ordinary writes, plus these heavier reads: [Get Commit](#get-commit), [List Commit Files](#list-commit-files), [List Comparison Files](#list-comparison-files), [List Pull Request Files](#list-pull-request-files), and [Get Repo Tarball](#get-repo-tarball) |
+| 10 | [Create Repo](#create-repo), [Create Commit From Files](#create-commit-from-files), and [Merge Pull Request](#merge-pull-request) |
 
 Cursor can raise per-app minute budgets for design partners. Contact Cursor if your integration needs a higher limit.
 
@@ -338,7 +346,7 @@ Origin sends signed HTTP `POST` requests to the app's registered HTTPS webhook U
 
 Delivery is at least once. Deduplicate retries with `webhook-id`, durably accept the request, return `2xx` quickly, and process the event asynchronously.
 
-Origin retries transport errors, `429`, and `5xx` responses up to six total attempts. Retry delays are 30 seconds, 1 minute, 2 minutes, 4 minutes, and 8 minutes. Other `4xx` responses are terminal.
+Origin retries transport errors, `429`, and `5xx` responses up to seven total attempts. Retry delays are 5 seconds, 30 seconds, 1 minute, 2 minutes, 4 minutes, and 8 minutes. Other `4xx` responses are terminal.
 
 To confirm a receiver works before any real event reaches it, call [Ping Webhook](#ping-webhook).
 
@@ -388,12 +396,15 @@ Each request wraps the event payload with delivery, app, and installation identi
 
 | Event | Delivered when |
 | --- | --- |
+| `repository.created` | A repository is created. |
+| `repository.deleted` | A repository is deleted. |
 | `repository.pushed` | One or more refs change in a push. |
+| `repository.metadata.updated` | A repository's default branch changes. |
 | `pull_request.created` | A pull request opens. |
 | `pull_request.head_ref.pushed` | The pull request head advances. |
 | `pull_request.base_ref.updated` | The base ref or resolved base commit changes. |
 | `pull_request.metadata.updated` | The title or description changes. |
-| `pull_request.closed` | A pull request closes without merging. |
+| `pull_request.closed` | A pull request closes without merging, including when Origin closes it because a push left its head with no history in common with its base. |
 | `pull_request.merged` | A pull request merges. |
 | `pull_request.reopened` | A closed pull request reopens. |
 | `pull_request.published` | A draft becomes open. |
@@ -406,22 +417,25 @@ Each request wraps the event payload with delivery, app, and installation identi
 | `repository.check_run.created` | A check run is created. |
 | `repository.check_run.completed` | A check run completes. |
 | `installation.created` | The app is installed. |
-| `installation.updated` | Scopes or repository selection change. |
+| `installation.updated` | Scopes, repository selection, or the owner namespace slug change. |
 | `installation.suspended` | The installation is suspended. |
 | `installation.unsuspended` | A suspended installation is restored. |
 | `installation.deleted` | The app is uninstalled. |
 
 The five `installation.*` events go to the app itself rather than to a repository subscription. Origin always sends them, so they do not appear in the app's selectable event list. Every other event in this table is a repository-scoped subscription.
 
+Origin does not deliver `repository.pushed` for a repository it mirrors from GitHub. GitHub owns those pushes and sends its own push webhooks, so an Origin delivery would duplicate them. Pushes to native Origin repositories and to outbound mirrors are delivered as usual, and the mirror state does not affect any other event. `repository.deleted` is delivered for a repository mirrored from GitHub: stopping the sync deletes the Cursor-side repository only, and GitHub sends nothing for it.
+
 ### [Payload families](#payload-families)
 
 - Pull request lifecycle events contain a `pullRequest` snapshot and `repository` reference. Route on `event.type`; there is no separate action field. The snapshot omits the pull request's assigned `labels`; read them from [Get Pull Request](#get-pull-request) or [List Pull Requests](#list-pull-requests).
-- Comment events contain a `pullRequest` reference and the affected `comment`.
+- Comment events contain a `pullRequest` reference and the affected `comment`. A comment that opened its thread carries the thread's anchor inline: `comment.thread` holds the filed-against `version`, `path`, `side`, `startLine`, and `endLine`, so a receiver can materialize the thread without a follow-up read. A reply carries `comment.thread.id` only. Resolution state is not part of the event; read it from [Get Pull Request Comment](#get-pull-request-comment) or [List Pull Request Comments](#list-pull-request-comments). Comments filed with a review stay silent until the review submits, and then each one emits its own event.
 - Review events contain a `pullRequest` reference and the affected `review`. Both `pull_request.review.submitted` and `pull_request.review.dismissed` use this shape; on a dismissal the review carries `review.dismissal` with the dismissing actor, timestamp, and message. A review superseded by a newer decision carries a server-generated message.
-- Reviewer events contain a `pullRequest` reference, a `reviewer`, how the request was created, an optional actor, and a timestamp. Exactly one of `reviewer.user` or `reviewer.group` is present: `reviewer.user.id` is the encoded user ID (`user_…`, the same format as the organization API), and `reviewer.group.id` is the group public ID (`grp_…`). There is no public HTTP API to add, remove, or rerequest reviewers.
+- Reviewer events contain a `pullRequest` reference, a `reviewer`, how the request was created, an optional actor, and a timestamp. Exactly one of `reviewer.user` or `reviewer.group` is present: `reviewer.user` carries the encoded user ID (`user_…`, the same format as the organization API), the account `email`, and the optional `displayName` and `handle`, and `reviewer.group.id` is the group public ID (`grp_…`). Read the current pending set with [List Pull Request Requested Reviewers](#list-pull-request-requested-reviewers), and change it with [Request Pull Request Reviewers](#request-pull-request-reviewers) or [Remove Pull Request Requested Reviewers](#remove-pull-request-requested-reviewers).
 - Check events contain `repository`, `checkSuite`, `checkRun`, and `actor`.
 - Push events contain one repository snapshot and up to 100 `refUpdates`. `refUpdatesCount` is authoritative. Optional tip metadata is best effort and does not provide a complete commits array. Merging a pull request advances the base ref, and that update is delivered as a push event; because Origin itself performs the merge push, the event names no pusher.
-- Installation events contain the installation snapshot and app identity. The snapshot carries `installedBy`, the user who originally installed the app, on all five `installation.*` events. Selected repository arrays may be capped at 5,000; `repositoriesCount` is authoritative.
+- Repository events split by shape. `repository.created` and `repository.metadata.updated` carry a full `repository` snapshot with no delta and no updating actor, so compare successive snapshots or refetch the repository to see what moved. `repository.deleted` carries a `repository` reference and `deletedAt` instead of a snapshot, because a deleted repository no longer resolves through the API.
+- Installation events contain the installation snapshot and app identity. The `app` object carries `id` and the app's registered `displayName`, which is omitted when the app cannot be resolved at enqueue time. The snapshot carries `installedBy`, the user who originally installed the app, on all five `installation.*` events. Selected repository arrays may be capped at 5,000; `repositoriesCount` is authoritative.
 
 ### [Recovery](#recovery)
 
@@ -452,6 +466,10 @@ Common HTTP statuses are `400`, `401`, `403`, `404`, `429`, `500`, and `503`. So
 
 Use the HTTP status and `code` to branch on errors. Treat `message` as developer-facing text.
 
+A `404` never distinguishes a resource that does not exist from one your app cannot reach. Read it as "not available to this installation" rather than as proof the resource is absent.
+
+`details` carries typed entries: `google.rpc.BadRequest` field violations on an invalid argument, and a `google.rpc.RequestInfo` entry on every error. Origin can add detail types at any time, so ignore entries your integration does not recognize.
+
 Every error response carries the request ID twice: in an `X-Request-ID` response header, and as a `google.rpc.RequestInfo` entry in `details`. Origin echoes the `x-request-id` you sent, or generates one when you send none. The `RequestInfo` entry is present even when `message` is an opaque internal error, so quote the request ID when you contact Cursor about a failed call.
 
 Unmatched paths under `/v1/origin`, and requests that use the wrong method on a known path, return this same body rather than a generic router error. The message names the method and path and never echoes the query string.
@@ -476,9 +494,8 @@ Resource snapshots contain the resource's current fields. Container context uses
 ## [Current limitations](#current-limitations)
 
 - Namespace-wide repository listing and repository creation are not part of the partner API. Discover repositories through the installation.
-- Commit comparison returns summary data rather than a paginated compare-file or compare-commit stream.
-- Pull request comments expose thread IDs, but there is no first-class thread or resolution API.
-- Reviewer add, remove, and rerequest operations are webhook-only.
+- Commit comparison returns summary data rather than an embedded commit list. Changed files have their own paginated endpoint, [List Comparison Files](#list-comparison-files).
+- Threads are addressable only for resolution. There is no endpoint that lists threads directly; read them from the comments they contain.
 - Push webhooks do not include a complete commit list.
 - Pull request merge supports native Origin repositories. Mirrored repositories are rejected.
 - A mirrored repository is read-only for an installation until it becomes a stable outbound mirror. See [Mirrored repositories](#mirrored-repositories).
@@ -499,7 +516,7 @@ Resource snapshots contain the resource's current fields. Container context uses
 
 ## [Endpoint reference](#endpoint-reference)
 
-Download the [OpenAPI specification](https://cursor.com/docs/api/origin/openapi.yaml) for the complete component schemas. The document declares `https://api.cursor.com` as its server and a `bearerAuth` HTTP bearer security scheme, and every operation lists `400`, `401`, `403`, and `429` responses alongside its success response. Path parameters carry the same names the URLs use, `ownerSlug` and `repoName`.
+Download the [OpenAPI specification](https://cursor.com/docs/api/origin/openapi.yaml) for the complete component schemas. The document declares `https://api.cursor.com` as its server and a `bearerAuth` HTTP bearer security scheme, and each operation lists the response codes that operation can return, plus a request and response example. Every operation also carries an `x-origin-scopes` extension: `scopes` holds the scope the operation requires, and `tokenTypes` holds the credential kinds it accepts. Path parameters carry the same names the URLs use, `ownerSlug` and `repoName`. Every operation carries a unique `operationId`; where one operation answers two URL shapes, the second shape's id takes a `_2` suffix, as in `OriginService_GetRepoTarball_2`.
 
 The JSON snippets show schema-shaped placeholder values. Response field descriptions reflect the OpenAPI schema and current platform contract.
 
@@ -508,6 +525,8 @@ The JSON snippets show schema-shaped placeholder values. Response field descript
 ### [Get Rate Limit](#get-rate-limit)
 
 GET`/v1/origin/rate_limit`
+
+AuthApp JWTInstallation tokenUser credential
 
 Returns the authenticated principal's current public API rate limit status.
 
@@ -550,12 +569,14 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/rate_limit' \  --h
 **Response shape:**
 
 ```
-{  "resources": {    "core": {      "limit": 0,      "remaining": 0,      "reset": 0,      "used": 0    }  },  "rate": {    "limit": 0,    "remaining": 0,    "reset": 0,    "used": 0  }}
+{  "resources": {    "core": {      "limit": 6000,      "remaining": 5994,      "reset": 1785682800,      "used": 6    }  },  "rate": {    "limit": 6000,    "remaining": 5994,    "reset": 1785682800,    "used": 6  }}
 ```
 
 ### [Get Authenticated App](#get-authenticated-app)
 
 GET`/v1/origin/app`
+
+AuthApp JWT
 
 Returns metadata for the authenticated app.
 
@@ -564,10 +585,6 @@ Returns metadata for the authenticated app.
 `id` string
 
 Origin app identifier used as the JWT issuer and key ID.
-
-`slug` string
-
-Unique app slug.
 
 `displayName` string
 
@@ -600,12 +617,14 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/app' \  --header '
 **Response shape:**
 
 ```
-{  "id": "string",  "slug": "string",  "displayName": "string",  "webhookUrl": "string",  "events": [    "string"  ],  "createdAt": "2026-01-01T00:00:00Z",  "updatedAt": "2026-01-01T00:00:00Z",  "installationRedirectUris": [    "string"  ]}
+{  "id": "app_01k2ja2000e0080000000000a1",  "displayName": "CI Status Bot",  "webhookUrl": "https://ci.acme.dev/webhooks/origin",  "events": [    "pull_request.created",    "pull_request.merged"  ],  "createdAt": "2026-08-01T09:30:00Z",  "updatedAt": "2026-08-02T14:45:00Z",  "installationRedirectUris": [    "https://ci.acme.dev/origin/setup"  ]}
 ```
 
 ### [List App Installations](#list-app-installations)
 
 GET`/v1/origin/app/installations`
+
+AuthApp JWT
 
 Lists installations for the authenticated app.
 
@@ -677,6 +696,14 @@ Public identifier for the user, prefixed `user_`.
 
 Email address of the user.
 
+`installations[].installedBy.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`installations[].installedBy.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `nextPageToken` string
 
 Opaque cursor for the next page; empty when there are no more pages.
@@ -688,12 +715,14 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/app/installations'
 **Response shape:**
 
 ```
-{  "installations": [    {      "id": "string",      "appId": "string",      "target": {        "slug": "string",        "id": "string",        "type": "team"      },      "createdAt": "2026-01-01T00:00:00Z",      "updatedAt": "2026-01-01T00:00:00Z",      "repoSelectionMode": "all",      "scopes": [        "string"      ],      "installedBy": {        "id": "string",        "email": "string"      }    }  ],  "nextPageToken": "string"}
+{  "installations": [    {      "id": "inst_01k2ja2000e0080000000000b2",      "appId": "app_01k2ja2000e0080000000000a1",      "target": {        "slug": "acme",        "id": "ns_01k2ja2000e0080000000000p3",        "type": "team"      },      "createdAt": "2026-08-01T09:30:00Z",      "updatedAt": "2026-08-02T14:45:00Z",      "repoSelectionMode": "selected",      "scopes": [        "repository:contents:read",        "repository:pull_requests:read"      ]    }  ]}
 ```
 
 ### [Get App Installation](#get-app-installation)
 
 GET`/v1/origin/app/installations/{installationId}`
+
+AuthApp JWT
 
 Returns a single installation for the authenticated app.
 
@@ -759,6 +788,14 @@ Public identifier for the user, prefixed `user_`.
 
 Email address of the user.
 
+`installedBy.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`installedBy.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 ```
 curl --request GET \  --url 'https://api.cursor.com/v1/origin/app/installations/INSTALLATION_ID' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN'
 ```
@@ -766,12 +803,14 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/app/installations/
 **Response shape:**
 
 ```
-{  "id": "string",  "appId": "string",  "target": {    "slug": "string",    "id": "string",    "type": "team"  },  "createdAt": "2026-01-01T00:00:00Z",  "updatedAt": "2026-01-01T00:00:00Z",  "repoSelectionMode": "all",  "scopes": [    "string"  ],  "installedBy": {    "id": "string",    "email": "string"  }}
+{  "id": "inst_01k2ja2000e0080000000000b2",  "appId": "app_01k2ja2000e0080000000000a1",  "target": {    "slug": "acme",    "id": "ns_01k2ja2000e0080000000000p3",    "type": "team"  },  "createdAt": "2026-08-01T09:30:00Z",  "updatedAt": "2026-08-02T14:45:00Z",  "repoSelectionMode": "selected",  "scopes": [    "repository:contents:read",    "repository:pull_requests:read"  ]}
 ```
 
 ### [Delete App Installation](#delete-app-installation)
 
 DELETE`/v1/origin/app/installations/{installationId}`
+
+AuthApp JWT
 
 Deletes an installation that belongs to the authenticated app and prevents new installation tokens from being minted. Already-issued short-lived tokens may remain valid until they expire (at most 15 minutes). The response body is empty.
 
@@ -798,6 +837,8 @@ curl --request DELETE \  --url 'https://api.cursor.com/v1/origin/app/installatio
 ### [Create Installation Access Token](#create-installation-access-token)
 
 POST`/v1/origin/app/installations/{installationId}/access_tokens`
+
+AuthApp JWT
 
 Creates an installation access token for the authenticated app.
 
@@ -832,18 +873,20 @@ Short-lived installation credential with the oit\_ prefix.
 RFC 3339 expiration time; the token expires after at most 15 minutes and never outlives the app JWT used to mint it.
 
 ```
-curl --request POST \  --url 'https://api.cursor.com/v1/origin/app/installations/INSTALLATION_ID/access_tokens' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{}'
+curl --request POST \  --url 'https://api.cursor.com/v1/origin/app/installations/INSTALLATION_ID/access_tokens' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "scopes": [    "repository:contents:read",    "repository:pull_requests:read"  ],  "repositoryIds": [    "repo_01k2ja2000e0080000000000q4"  ]}'
 ```
 
 **Response shape:**
 
 ```
-{  "token": "string",  "expiresAt": "2026-01-01T00:00:00Z"}
+{  "token": "oit_2v8xkq4m1c7p9t3w5y0z6r4b",  "expiresAt": "2026-08-01T10:30:00Z"}
 ```
 
 ### [List App Installation Repositories](#list-app-installation-repositories)
 
 GET`/v1/origin/installation/repos`
+
+AuthInstallation token
 
 Lists repositories accessible to the authenticated app installation.
 
@@ -932,12 +975,14 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/installation/repos
 **Response shape:**
 
 ```
-{  "repositories": [    {      "id": "string",      "name": "string",      "fullName": "string",      "owner": {        "slug": "string",        "id": "string",        "type": "team"      },      "defaultBranch": "string",      "mirror": {        "source": "github",        "sourceId": "string",        "status": "inbound"      }    }  ],  "nextPageToken": "string",  "repoSelectionMode": "all"}
+{  "repositories": [    {      "id": "repo_01k2ja2000e0080000000000q4",      "name": "rocket",      "fullName": "acme/rocket",      "owner": {        "slug": "acme",        "id": "ns_01k2ja2000e0080000000000p3",        "type": "team"      },      "defaultBranch": "main",      "createdAt": "2026-08-01T09:30:00Z",      "updatedAt": "2026-08-02T14:45:00Z",      "pushedAt": "2026-08-02T14:45:00Z",      "cloneUrl": "https://origin.cursor.com/git/acme/rocket.git"    }  ],  "repoSelectionMode": "selected"}
 ```
 
 ### [List Webhook Deliveries](#list-webhook-deliveries)
 
 GET`/v1/origin/app/webhook/deliveries`
+
+AuthApp JWT
 
 Lists webhook deliveries for the authenticated app, newest first.
 
@@ -1070,12 +1115,14 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/app/webhook/delive
 **Response shape:**
 
 ```
-{  "deliveries": [    {      "id": "string",      "event": {        "id": "string",        "type": "string"      },      "installation": {        "id": "string",        "target": {          "slug": "string",          "id": "string",          "type": "team"        }      },      "createdAt": "2026-01-01T00:00:00Z",      "deliveredAt": "2026-01-01T00:00:00Z",      "lastAttempt": {        "id": "string",        "deliveryId": "string",        "trigger": "automatic",        "responseStatusCode": 0,        "latencyMs": 0,        "errorMessage": "string",        "attemptedAt": "2026-01-01T00:00:00Z"      }    }  ],  "nextPageToken": "string"}
+{  "deliveries": [    {      "id": "whd_01k2ja2000e0080000000000j9",      "event": {        "id": "evt_01k2ja2000e0080000000000r5",        "type": "pull_request.created"      },      "installation": {        "id": "inst_01k2ja2000e0080000000000b2",        "target": {          "slug": "acme",          "id": "ns_01k2ja2000e0080000000000p3",          "type": "team"        }      },      "createdAt": "2026-08-01T09:30:00Z",      "deliveredAt": "2026-08-02T14:45:05Z",      "lastAttempt": {        "id": "wha_01k2ja2000e0080000000000k0",        "deliveryId": "whd_01k2ja2000e0080000000000j9",        "trigger": "automatic",        "responseStatusCode": 200,        "latencyMs": 182,        "attemptedAt": "2026-08-02T14:45:05Z"      }    }  ]}
 ```
 
 ### [Batch Redeliver Webhook Deliveries](#batch-redeliver-webhook-deliveries)
 
 POST`/v1/origin/app/webhook/deliveries:batchRedeliver`
+
+AuthApp JWT
 
 Asks Origin to send deliveries again.
 
@@ -1102,18 +1149,20 @@ Requested stable delivery ID corresponding to this batch result.
 Redelivery disposition: `queued` when a send was created, `already_in_flight` when a send was already running, and `not_found` otherwise. `already_in_flight` is a success, not an error. `not_found` covers unknown IDs, IDs older than the seven-day retention window, and namespaces where your app is no longer installed.
 
 ```
-curl --request POST \  --url 'https://api.cursor.com/v1/origin/app/webhook/deliveries:batchRedeliver' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "deliveryIds": [    "DELIVERY_ID"  ]}'
+curl --request POST \  --url 'https://api.cursor.com/v1/origin/app/webhook/deliveries:batchRedeliver' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "deliveryIds": [    "whd_01k2ja2000e0080000000000j9"  ]}'
 ```
 
 **Response shape:**
 
 ```
-{  "results": [    {      "deliveryId": "string",      "outcome": "queued"    }  ]}
+{  "results": [    {      "deliveryId": "whd_01k2ja2000e0080000000000j9",      "outcome": "queued"    }  ]}
 ```
 
 ### [Ping Webhook](#ping-webhook)
 
 POST`/v1/origin/app/webhook/pings`
+
+AuthApp JWT
 
 Sends a test delivery to the authenticated app's webhook URL and reports what the receiver answered.
 
@@ -1152,7 +1201,7 @@ curl --request POST \  --url 'https://api.cursor.com/v1/origin/app/webhook/pings
 **Response shape:**
 
 ```
-{  "deliveryId": "string",  "eventId": "string",  "delivered": true,  "responseStatusCode": 200}
+{  "deliveryId": "whd_01k2ja2000e0080000000000j9",  "eventId": "evt_01k2ja2000e0080000000000r5",  "delivered": true,  "responseStatusCode": 200}
 ```
 
 ## [Repositories](#repositories)
@@ -1164,6 +1213,8 @@ Partners discover their repositories through [List App Installation Repositories
 ### [List Repos](#list-repos)
 
 GET`/v1/origin/repos/{ownerSlug}`
+
+Scope[namespace:repositories:read](#scopes)AuthUser credential
 
 Lists repos belonging to an owner entity.
 
@@ -1268,12 +1319,14 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG' 
 **Response shape:**
 
 ```
-{  "repositories": [    {      "id": "string",      "name": "string",      "fullName": "string",      "owner": {        "slug": "string",        "id": "string",        "type": "team"      },      "defaultBranch": "string",      "createdAt": "2026-01-01T00:00:00Z",      "updatedAt": "2026-01-01T00:00:00Z",      "pushedAt": "2026-01-01T00:00:00Z",      "cloneUrl": "string",      "mirror": {        "source": "github",        "sourceId": "string",        "status": "inbound"      }    }  ],  "nextPageToken": "string"}
+{  "repositories": [    {      "id": "repo_01k2ja2000e0080000000000q4",      "name": "rocket",      "fullName": "acme/rocket",      "owner": {        "slug": "acme",        "id": "ns_01k2ja2000e0080000000000p3",        "type": "team"      },      "defaultBranch": "main",      "createdAt": "2026-08-01T09:30:00Z",      "updatedAt": "2026-08-02T14:45:00Z",      "pushedAt": "2026-08-02T14:45:00Z",      "cloneUrl": "https://origin.cursor.com/git/acme/rocket.git"    }  ]}
 ```
 
 ### [Get Repo](#get-repo)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}`
+
+Scope[repository:metadata:read](#scopes)AuthInstallation tokenUser credential
 
 Returns a single repo by its `(owner_id, name)` identifier.
 
@@ -1362,12 +1415,14 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "id": "string",  "name": "string",  "fullName": "string",  "owner": {    "slug": "string",    "id": "string",    "type": "team"  },  "defaultBranch": "string",  "createdAt": "2026-01-01T00:00:00Z",  "updatedAt": "2026-01-01T00:00:00Z",  "pushedAt": "2026-01-01T00:00:00Z",  "cloneUrl": "string",  "mirror": {    "source": "github",    "sourceId": "string",    "status": "inbound"  }}
+{  "id": "repo_01k2ja2000e0080000000000q4",  "name": "rocket",  "fullName": "acme/rocket",  "owner": {    "slug": "acme",    "id": "ns_01k2ja2000e0080000000000p3",    "type": "team"  },  "defaultBranch": "main",  "createdAt": "2026-08-01T09:30:00Z",  "updatedAt": "2026-08-02T14:45:00Z",  "pushedAt": "2026-08-02T14:45:00Z",  "cloneUrl": "https://origin.cursor.com/git/acme/rocket.git"}
 ```
 
 ### [Create Repo](#create-repo)
 
 POST`/v1/origin/repos/{ownerSlug}`
+
+Scope[namespace:new\_repository:write](#scopes)AuthUser credential
 
 Creates a repo belonging to an owner.
 
@@ -1460,18 +1515,20 @@ Opaque repository identifier assigned by the source.
 Effective mirror direction during a transition, until cutover completes. Allowed values: `inbound`, `outbound`.
 
 ```
-curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "name": "NAME"}'
+curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "name": "rocket",  "defaultBranch": "main"}'
 ```
 
 **Response shape:**
 
 ```
-{  "id": "string",  "name": "string",  "fullName": "string",  "owner": {    "slug": "string",    "id": "string",    "type": "team"  },  "defaultBranch": "string",  "createdAt": "2026-01-01T00:00:00Z",  "updatedAt": "2026-01-01T00:00:00Z",  "pushedAt": "2026-01-01T00:00:00Z",  "cloneUrl": "string",  "mirror": {    "source": "github",    "sourceId": "string",    "status": "inbound"  }}
+{  "id": "repo_01k2ja2000e0080000000000q4",  "name": "rocket",  "fullName": "acme/rocket",  "owner": {    "slug": "acme",    "id": "ns_01k2ja2000e0080000000000p3",    "type": "team"  },  "defaultBranch": "main",  "createdAt": "2026-08-01T09:30:00Z",  "updatedAt": "2026-08-02T14:45:00Z",  "pushedAt": "2026-08-02T14:45:00Z",  "cloneUrl": "https://origin.cursor.com/git/acme/rocket.git"}
 ```
 
 ### [List Branches](#list-branches)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/branches`
+
+Scope[repository:contents:read](#scopes)AuthInstallation tokenUser credential
 
 Lists the repo's branches and tip commits in ascending name order, paginated with `page_size` and `page_token`.
 
@@ -1524,16 +1581,64 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "branches": [    {      "name": "string",      "commit": {        "sha": "string"      }    }  ],  "nextPageToken": "string"}
+{  "branches": [    {      "name": "main",      "commit": {        "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4"      }    }  ]}
+```
+
+### [Get Repo Tarball](#get-repo-tarball)
+
+GET`/v1/origin/repos/{ownerSlug}/{repoName}/tarball/{ref}`
+
+Scope[repository:contents:read](#scopes)AuthInstallation tokenUser credential
+
+Downloads a gzip-compressed tar of the repository tree at `ref`.
+
+Origin keys the archive on the repository and the commit `ref` resolves to. The first request for a given commit responds `200` with `Content-Type: application/gzip` and streams the archive as the response body. Later requests for the same commit respond `302` with an empty body and a signed download URL in `Location`, valid for 15 minutes; follow the redirect to fetch the bytes. Archive entries sit at the root of the tar, with no wrapping directory. An empty repository returns `ABORTED` (HTTP 409 Conflict), and a ref that does not resolve returns `404`.
+
+Send the ref as a query parameter instead of a path segment to address a ref containing "/": `GET /v1/origin/repos/{ownerSlug}/{repoName}/tarball?ref=refs/heads/main`. Omit it to archive the repository's default branch.
+
+#### [Path Parameters](#path-parameters-7)
+
+`ownerSlug` string Required
+
+Owning entity's unique slug.
+
+`repoName` string Required
+
+Repo name, unique to the owner entity.
+
+`ref` string Required
+
+Commit SHA (full or abbreviated hex), bare branch or tag name, fully qualified `refs/heads/...` or `refs/tags/...`, or symbolic `HEAD`. Not a glob or revspec, so `<rev>~3` is rejected. Empty uses the repository default branch.
+
+#### [Response Fields](#response-fields-14)
+
+`sha` string
+
+Resolved commit object ID: 40- or 64-character hex. Returned to Connect and JSON callers; over REST, read it from the archive filename or the signed URL.
+
+`downloadUrl` string
+
+Short-lived signed download URL, valid for 15 minutes. Empty when the response streams the archive inline, which is the first request for this repository and commit. Over REST the same URL is sent as the `Location` header on the `302`.
+
+```
+curl --request GET --location --output repo.tar.gz \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/tarball/HEAD' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN'
+```
+
+**Response shape:**
+
+```
+{  "downloadUrl": "https://artifacts.origin.cursor.com/tarballs/0192f7a4-6c1e-7b3a-9f21-3d54c9a7e6b0/9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4.tar.gz?Expires=1767225600&Signature=EXAMPLE&Key-Pair-Id=KEXAMPLE123",  "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4"}
 ```
 
 ### [Sync Mirror](#sync-mirror)
 
 POST`/v1/origin/repos/{ownerSlug}/{repoName}:syncMirror`
 
+Scope[repository:contents:read](#scopes)AuthInstallation tokenUser credential
+
 Synchronizes one ref of a mirrored repository from its upstream source. Returns HTTP `200` when the sync target is satisfied, or HTTP `202` when the sync is still pending. `wait=false` (the default) schedules the sync and usually returns `202`; it returns `200` immediately when `sha` is already reachable from `ref`. `wait=true` blocks until satisfied or the wait budget (~2 minutes) expires; expiry still returns `202` and the sync continues in the background. Repositories that do not pull from an upstream source are rejected.
 
-#### [Path Parameters](#path-parameters-7)
+#### [Path Parameters](#path-parameters-8)
 
 `ownerSlug` string Required
 
@@ -1557,7 +1662,7 @@ When true, block until synced or the wait budget expires. Defaults to false.
 
 Optional full commit object ID: 40- or 64-character hex. Omit or leave empty to wait on the tip of `ref`. When set and reachable from `ref`, the call returns early without waiting for other mirror work to drain. Other values are rejected with `INVALID_ARGUMENT`.
 
-#### [Response Fields](#response-fields-14)
+#### [Response Fields](#response-fields-15)
 
 `synced` boolean
 
@@ -1589,13 +1694,17 @@ curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/
 
 POST`/v1/origin/repos/{ownerSlug}/{repoName}/check-runs`
 
+Scope[repository:checks:write](#scopes)AuthInstallation token
+
 Upserts a check suite + check run using an installation access token with `repository:checks:write`. The write is attributed to the app that owns the authenticated installation. A repeated call with the same `(repo, head_sha, suite.key, check.key)` updates the existing check run in place rather than creating a duplicate.
 
 The endpoint atomically resolves or creates the suite attempt and upserts one run attempt. `externalUpdatedAt` orders updates to the same run identity; stale retries cannot overwrite newer state.
 
-`deadlineAt` records an optional deadline on the run. Origin stores it, returns it on reads, and clears it once the run reaches `completed`; it does not change a run's status when the deadline passes. A deadline more than 24 hours in the future is rejected with `InvalidArgument` (HTTP 400) rather than clamped.
+`deadlineAt` records an optional deadline on the run. Origin stores it, returns it on reads, and clears it once the run reaches `completed`. A deadline more than 24 hours in the future is rejected with `InvalidArgument` (HTTP 400) rather than clamped.
 
-#### [Path Parameters](#path-parameters-8)
+When the deadline passes on a run still `in_progress`, Origin completes the run itself with a `timed_out` conclusion and delivers `repository.check_run.completed`. Expiry runs as a periodic sweep rather than on a per-run timer, so a run can sit past its deadline briefly before Origin closes it. A `queued` run never expires, and neither does a run that carries no `deadlineAt`. Completing the run yourself before the deadline clears it. Origin leaves the run's `externalUpdatedAt` untouched when it times a run out, so a later completion from your provider can still overwrite the `timed_out` conclusion.
+
+#### [Path Parameters](#path-parameters-9)
 
 `ownerSlug` string Required
 
@@ -1691,7 +1800,7 @@ Detailed output. May contain Markdown. Maximum UTF-8 size: 65535 bytes.
 
 Deadline for the check run, as an RFC 3339 timestamp. Values more than 24 hours in the future are rejected with `InvalidArgument` (HTTP 400) rather than clamped. Omit it on a create to record no deadline; omit it on an update to leave the stored deadline unchanged.
 
-#### [Response Fields](#response-fields-15)
+#### [Response Fields](#response-fields-16)
 
 `checkSuite` object
 
@@ -1773,6 +1882,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`checkSuite.actor.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`checkSuite.actor.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `checkSuite.actor.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -1781,9 +1898,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`checkSuite.actor.app.slug` string
+`checkSuite.actor.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `checkSuite.actor.serviceAccount` object
 
@@ -1901,6 +2018,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`checkRun.actor.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`checkRun.actor.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `checkRun.actor.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -1909,9 +2034,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`checkRun.actor.app.slug` string
+`checkRun.actor.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `checkRun.actor.serviceAccount` object
 
@@ -1942,24 +2067,26 @@ Detailed output. May contain Markdown. Maximum UTF-8 size: 65535 bytes.
 Deadline recorded for the check run, as an RFC 3339 timestamp. Absent when the run has no deadline, including after the run completes.
 
 ```
-curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/check-runs' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "headSha": "HEAD_SHA",  "checkSuite": {    "key": "KEY",    "name": "NAME",    "externalId": "EXTERNAL_ID"  },  "checkRun": {    "key": "KEY",    "name": "NAME",    "status": "queued",    "externalUpdatedAt": "2026-01-01T00:00:00Z",    "externalId": "EXTERNAL_ID"  }}'
+curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/check-runs' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "headSha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",  "checkSuite": {    "key": "ci-8842",    "name": "CI",    "detailsUrl": "https://ci.acme.dev/runs/8842",    "externalId": "build-8842"  },  "checkRun": {    "key": "ci-8842-unit-tests",    "name": "unit-tests",    "status": "completed",    "conclusion": "success",    "externalUpdatedAt": "2026-08-02T14:44:30Z",    "startedAt": "2026-08-02T14:40:00Z",    "completedAt": "2026-08-02T14:44:30Z",    "detailsUrl": "https://ci.acme.dev/runs/8842",    "externalId": "run-8842",    "output": {      "title": "Unit tests",      "summary": "128 tests passed.",      "text": "All suites green."    }  }}'
 ```
 
 **Response shape:**
 
 ```
-{  "checkSuite": {    "id": "string",    "repository": {      "id": "string",      "name": "string",      "owner": {        "slug": "string",        "id": "string",        "type": "team"      }    },    "sha": "string",    "key": "string",    "name": "string",    "detailsUrl": "string",    "createdAt": "2026-01-01T00:00:00Z",    "updatedAt": "2026-01-01T00:00:00Z",    "externalId": "string",    "actor": {      "user": {        "id": "string",        "email": "string"      }    }  },  "checkRun": {    "id": "string",    "repository": {      "id": "string",      "name": "string",      "owner": {        "slug": "string",        "id": "string",        "type": "team"      }    },    "checkSuite": {      "id": "string"    },    "sha": "string",    "key": "string",    "name": "string",    "status": "queued",    "conclusion": "success",    "detailsUrl": "string",    "externalUpdatedAt": "2026-01-01T00:00:00Z",    "startedAt": "2026-01-01T00:00:00Z",    "completedAt": "2026-01-01T00:00:00Z",    "createdAt": "2026-01-01T00:00:00Z",    "updatedAt": "2026-01-01T00:00:00Z",    "externalId": "string",    "actor": {      "user": {        "id": "string",        "email": "string"      }    },    "output": {      "title": "string",      "summary": "string",      "text": "string"    },    "deadlineAt": "2026-01-01T00:00:00Z"  }}
+{  "checkSuite": {    "id": "crg_01k2ja2000e0080000000000h8",    "repository": {      "id": "repo_01k2ja2000e0080000000000q4",      "name": "rocket",      "owner": {        "slug": "acme",        "id": "ns_01k2ja2000e0080000000000p3",        "type": "team"      }    },    "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",    "key": "ci-8842",    "name": "CI",    "detailsUrl": "https://ci.acme.dev/runs/8842",    "createdAt": "2026-08-01T09:30:00Z",    "updatedAt": "2026-08-02T14:45:00Z",    "externalId": "build-8842",    "actor": {      "user": {        "id": "user_01k2ja2000e0080000000000c3",        "email": "jane@acme.dev"      }    }  },  "checkRun": {    "id": "cr_01k2ja2000e0080000000000g7",    "repository": {      "id": "repo_01k2ja2000e0080000000000q4",      "name": "rocket",      "owner": {        "slug": "acme",        "id": "ns_01k2ja2000e0080000000000p3",        "type": "team"      }    },    "checkSuite": {      "id": "crg_01k2ja2000e0080000000000h8"    },    "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",    "key": "ci-8842-unit-tests",    "name": "unit-tests",    "status": "completed",    "conclusion": "success",    "detailsUrl": "https://ci.acme.dev/runs/8842",    "externalUpdatedAt": "2026-08-02T14:44:30Z",    "startedAt": "2026-08-02T14:40:00Z",    "completedAt": "2026-08-02T14:44:30Z",    "createdAt": "2026-08-01T09:30:00Z",    "updatedAt": "2026-08-02T14:45:00Z",    "externalId": "run-8842",    "actor": {      "user": {        "id": "user_01k2ja2000e0080000000000c3",        "email": "jane@acme.dev"      }    },    "output": {      "title": "Unit tests",      "summary": "128 tests passed.",      "text": "All suites green."    }  }}
 ```
 
 ### [Batch Upsert Check Runs](#batch-upsert-check-runs)
 
 POST`/v1/origin/repos/{ownerSlug}/{repoName}/check-runs:batchUpsert`
 
+Scope[repository:checks:write](#scopes)AuthInstallation token
+
 Atomically upserts several check runs belonging to one suite. The request accepts at most 10 runs and rejects duplicate `(external_id, key)` identities. Every run is committed or the entire request is rolled back.
 
 Each run accepts the same optional `deadlineAt` as [Post Check Run](#post-check-run).
 
-#### [Path Parameters](#path-parameters-9)
+#### [Path Parameters](#path-parameters-10)
 
 `ownerSlug` string Required
 
@@ -2055,7 +2182,7 @@ Detailed output. May contain Markdown. Maximum UTF-8 size: 65535 bytes.
 
 Deadline for the check run, as an RFC 3339 timestamp. Values more than 24 hours in the future are rejected with `InvalidArgument` (HTTP 400) rather than clamped. Omit it on a create to record no deadline; omit it on an update to leave the stored deadline unchanged.
 
-#### [Response Fields](#response-fields-16)
+#### [Response Fields](#response-fields-17)
 
 `checkSuite` object
 
@@ -2137,6 +2264,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`checkSuite.actor.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`checkSuite.actor.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `checkSuite.actor.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -2145,9 +2280,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`checkSuite.actor.app.slug` string
+`checkSuite.actor.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `checkSuite.actor.serviceAccount` object
 
@@ -2265,6 +2400,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`checkRuns[].actor.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`checkRuns[].actor.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `checkRuns[].actor.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -2273,9 +2416,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`checkRuns[].actor.app.slug` string
+`checkRuns[].actor.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `checkRuns[].actor.serviceAccount` object
 
@@ -2306,22 +2449,24 @@ Detailed output. May contain Markdown. Maximum UTF-8 size: 65535 bytes.
 Deadline recorded for the check run, as an RFC 3339 timestamp. Absent when the run has no deadline, including after the run completes.
 
 ```
-curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/check-runs:batchUpsert' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "headSha": "HEAD_SHA",  "checkSuite": {    "key": "KEY",    "name": "NAME",    "externalId": "EXTERNAL_ID"  },  "checkRuns": [    {      "key": "KEY",      "name": "NAME",      "status": "queued",      "externalUpdatedAt": "2026-01-01T00:00:00Z",      "externalId": "EXTERNAL_ID"    }  ]}'
+curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/check-runs:batchUpsert' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "headSha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",  "checkSuite": {    "key": "ci-8842",    "name": "CI",    "detailsUrl": "https://ci.acme.dev/runs/8842",    "externalId": "build-8842"  },  "checkRuns": [    {      "key": "ci-8842-unit-tests",      "name": "unit-tests",      "status": "completed",      "conclusion": "success",      "externalUpdatedAt": "2026-08-02T14:44:30Z",      "startedAt": "2026-08-02T14:40:00Z",      "completedAt": "2026-08-02T14:44:30Z",      "detailsUrl": "https://ci.acme.dev/runs/8842",      "externalId": "run-8842",      "output": {        "title": "Unit tests",        "summary": "128 tests passed.",        "text": "All suites green."      }    }  ]}'
 ```
 
 **Response shape:**
 
 ```
-{  "checkSuite": {    "id": "string",    "repository": {      "id": "string",      "name": "string",      "owner": {        "slug": "string",        "id": "string",        "type": "team"      }    },    "sha": "string",    "key": "string",    "name": "string",    "detailsUrl": "string",    "createdAt": "2026-01-01T00:00:00Z",    "updatedAt": "2026-01-01T00:00:00Z",    "externalId": "string",    "actor": {      "user": {        "id": "string",        "email": "string"      }    }  },  "checkRuns": [    {      "id": "string",      "repository": {        "id": "string",        "name": "string",        "owner": {          "slug": "string",          "id": "string",          "type": "team"        }      },      "checkSuite": {        "id": "string"      },      "sha": "string",      "key": "string",      "name": "string",      "status": "queued",      "conclusion": "success",      "detailsUrl": "string",      "externalUpdatedAt": "2026-01-01T00:00:00Z",      "startedAt": "2026-01-01T00:00:00Z",      "completedAt": "2026-01-01T00:00:00Z",      "createdAt": "2026-01-01T00:00:00Z",      "updatedAt": "2026-01-01T00:00:00Z",      "externalId": "string",      "actor": {        "user": {          "id": "string",          "email": "string"        }      },      "output": {        "title": "string",        "summary": "string",        "text": "string"      },      "deadlineAt": "2026-01-01T00:00:00Z"    }  ]}
+{  "checkSuite": {    "id": "crg_01k2ja2000e0080000000000h8",    "repository": {      "id": "repo_01k2ja2000e0080000000000q4",      "name": "rocket",      "owner": {        "slug": "acme",        "id": "ns_01k2ja2000e0080000000000p3",        "type": "team"      }    },    "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",    "key": "ci-8842",    "name": "CI",    "detailsUrl": "https://ci.acme.dev/runs/8842",    "createdAt": "2026-08-01T09:30:00Z",    "updatedAt": "2026-08-02T14:45:00Z",    "externalId": "build-8842",    "actor": {      "user": {        "id": "user_01k2ja2000e0080000000000c3",        "email": "jane@acme.dev"      }    }  },  "checkRuns": [    {      "id": "cr_01k2ja2000e0080000000000g7",      "repository": {        "id": "repo_01k2ja2000e0080000000000q4",        "name": "rocket",        "owner": {          "slug": "acme",          "id": "ns_01k2ja2000e0080000000000p3",          "type": "team"        }      },      "checkSuite": {        "id": "crg_01k2ja2000e0080000000000h8"      },      "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",      "key": "ci-8842-unit-tests",      "name": "unit-tests",      "status": "completed",      "conclusion": "success",      "detailsUrl": "https://ci.acme.dev/runs/8842",      "externalUpdatedAt": "2026-08-02T14:44:30Z",      "startedAt": "2026-08-02T14:40:00Z",      "completedAt": "2026-08-02T14:44:30Z",      "createdAt": "2026-08-01T09:30:00Z",      "updatedAt": "2026-08-02T14:45:00Z",      "externalId": "run-8842",      "actor": {        "user": {          "id": "user_01k2ja2000e0080000000000c3",          "email": "jane@acme.dev"        }      },      "output": {        "title": "Unit tests",        "summary": "128 tests passed.",        "text": "All suites green."      }    }  ]}
 ```
 
 ### [Get Check Run](#get-check-run)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/check-runs/{checkRunId}`
 
+Scope[repository:checks:read](#scopes)AuthInstallation tokenUser credential
+
 Returns a single check run by server-assigned id (`cr_...`).
 
-#### [Path Parameters](#path-parameters-10)
+#### [Path Parameters](#path-parameters-11)
 
 `ownerSlug` string Required
 
@@ -2335,7 +2480,7 @@ Repo name, unique to the owner entity.
 
 Server-assigned check-run id (`cr_...`).
 
-#### [Response Fields](#response-fields-17)
+#### [Response Fields](#response-fields-18)
 
 `id` string
 
@@ -2441,6 +2586,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`actor.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`actor.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `actor.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -2449,9 +2602,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`actor.app.slug` string
+`actor.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `actor.serviceAccount` object
 
@@ -2488,18 +2641,20 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "id": "string",  "repository": {    "id": "string",    "name": "string",    "owner": {      "slug": "string",      "id": "string",      "type": "team"    }  },  "checkSuite": {    "id": "string"  },  "sha": "string",  "key": "string",  "name": "string",  "status": "queued",  "conclusion": "success",  "detailsUrl": "string",  "externalUpdatedAt": "2026-01-01T00:00:00Z",  "startedAt": "2026-01-01T00:00:00Z",  "completedAt": "2026-01-01T00:00:00Z",  "createdAt": "2026-01-01T00:00:00Z",  "updatedAt": "2026-01-01T00:00:00Z",  "externalId": "string",  "actor": {    "user": {      "id": "string",      "email": "string"    }  },  "output": {    "title": "string",    "summary": "string",    "text": "string"  },  "deadlineAt": "2026-01-01T00:00:00Z"}
+{  "id": "cr_01k2ja2000e0080000000000g7",  "repository": {    "id": "repo_01k2ja2000e0080000000000q4",    "name": "rocket",    "owner": {      "slug": "acme",      "id": "ns_01k2ja2000e0080000000000p3",      "type": "team"    }  },  "checkSuite": {    "id": "crg_01k2ja2000e0080000000000h8"  },  "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",  "key": "ci-8842-unit-tests",  "name": "unit-tests",  "status": "completed",  "conclusion": "success",  "detailsUrl": "https://ci.acme.dev/runs/8842",  "externalUpdatedAt": "2026-08-02T14:44:30Z",  "startedAt": "2026-08-02T14:40:00Z",  "completedAt": "2026-08-02T14:44:30Z",  "createdAt": "2026-08-01T09:30:00Z",  "updatedAt": "2026-08-02T14:45:00Z",  "externalId": "run-8842",  "actor": {    "user": {      "id": "user_01k2ja2000e0080000000000c3",      "email": "jane@acme.dev"    }  },  "output": {    "title": "Unit tests",    "summary": "128 tests passed.",    "text": "All suites green."  }}
 ```
 
 ### [List Check Run Annotations](#list-check-run-annotations)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/check-runs/{checkRunId}/annotations`
 
+Scope[repository:checks:read](#scopes)AuthInstallation tokenUser credential
+
 Lists a check run's annotations in ascending ID order.
 
 Annotation IDs are time-sortable, so ascending ID order is also creation order. A page token fixes the page size and scope for the rest of the sequence, so `pageSize` is ignored once you send one.
 
-#### [Path Parameters](#path-parameters-11)
+#### [Path Parameters](#path-parameters-12)
 
 `ownerSlug` string Required
 
@@ -2523,7 +2678,7 @@ Maximum annotations to return. Defaults to 30 when omitted or zero; values above
 
 Opaque cursor from a previous response's `nextPageToken`. Omit for the first page.
 
-#### [Response Fields](#response-fields-18)
+#### [Response Fields](#response-fields-19)
 
 `annotations` array
 
@@ -2600,18 +2755,20 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "annotations": [    {      "id": "string",      "checkRunId": "string",      "annotationLevel": "warning",      "message": "string",      "title": "string",      "rawDetails": "string",      "createdAt": "2026-01-01T00:00:00Z",      "updatedAt": "2026-01-01T00:00:00Z",      "location": {        "path": "string",        "startLine": 0,        "endLine": 0,        "columns": {          "startColumn": 0,          "endColumn": 0        }      }    }  ],  "nextPageToken": "string"}
+{  "annotations": [    {      "id": "cra_01k2ja2000e0080000000000v1",      "checkRunId": "cr_01k2ja2000e0080000000000g7",      "annotationLevel": "warning",      "message": "Deprecated API usage; migrate to the v2 client.",      "title": "Deprecated API",      "createdAt": "2026-08-02T14:45:00Z",      "updatedAt": "2026-08-02T14:45:00Z",      "location": {        "path": "src/telemetry.ts",        "startLine": 42,        "endLine": 42      }    }  ]}
 ```
 
 ### [Create Check Run Annotations](#create-check-run-annotations)
 
 POST`/v1/origin/repos/{ownerSlug}/{repoName}/check-runs/{checkRunId}/annotations`
 
+Scope[repository:checks:write](#scopes)AuthInstallation token
+
 Appends between 1 and 25 annotations to a check run in a single atomic batch.
 
 A check run holds at most 100 annotations. A batch that would take it past that limit is rejected with `ResourceExhausted` (HTTP 429) and nothing is written; a batch outside the 1 to 25 range is rejected with `InvalidArgument` (HTTP 400). The operation is append-only and is not idempotent, so retrying after an ambiguous transport failure can append duplicates and consume capacity. Identical content is allowed.
 
-#### [Path Parameters](#path-parameters-12)
+#### [Path Parameters](#path-parameters-13)
 
 `ownerSlug` string Required
 
@@ -2675,7 +2832,7 @@ First column of the range. 1-based and inclusive.
 
 Last column of the range. 1-based and inclusive, and at or after `startColumn`.
 
-#### [Response Fields](#response-fields-19)
+#### [Response Fields](#response-fields-20)
 
 `annotations` array
 
@@ -2742,22 +2899,24 @@ First column of the range. 1-based and inclusive.
 Last column of the range. 1-based and inclusive.
 
 ```
-curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/check-runs/CHECK_RUN_ID/annotations' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "annotations": [    {      "annotationLevel": "warning",      "message": "MESSAGE",      "location": {        "path": "src/index.ts",        "startLine": 12,        "endLine": 12      }    }  ]}'
+curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/check-runs/CHECK_RUN_ID/annotations' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "annotations": [    {      "annotationLevel": "warning",      "message": "Deprecated API usage; migrate to the v2 client.",      "title": "Deprecated API",      "location": {        "path": "src/telemetry.ts",        "startLine": 42,        "endLine": 42      }    }  ]}'
 ```
 
 **Response shape:**
 
 ```
-{  "annotations": [    {      "id": "string",      "checkRunId": "string",      "annotationLevel": "warning",      "message": "string",      "title": "string",      "rawDetails": "string",      "createdAt": "2026-01-01T00:00:00Z",      "updatedAt": "2026-01-01T00:00:00Z",      "location": {        "path": "string",        "startLine": 0,        "endLine": 0,        "columns": {          "startColumn": 0,          "endColumn": 0        }      }    }  ]}
+{  "annotations": [    {      "id": "cra_01k2ja2000e0080000000000v1",      "checkRunId": "cr_01k2ja2000e0080000000000g7",      "annotationLevel": "warning",      "message": "Deprecated API usage; migrate to the v2 client.",      "title": "Deprecated API",      "createdAt": "2026-08-02T14:45:00Z",      "updatedAt": "2026-08-02T14:45:00Z",      "location": {        "path": "src/telemetry.ts",        "startLine": 42,        "endLine": 42      }    }  ]}
 ```
 
 ### [Get Check Suite](#get-check-suite)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/check-suites/{checkSuiteId}`
 
+Scope[repository:checks:read](#scopes)AuthInstallation tokenUser credential
+
 Returns check suite metadata by server-assigned id (`crg_...`). Does not embed check runs; use `ListCheckRunsForSuite` for the suite's runs.
 
-#### [Path Parameters](#path-parameters-13)
+#### [Path Parameters](#path-parameters-14)
 
 `ownerSlug` string Required
 
@@ -2771,7 +2930,7 @@ Repo name, unique to the owner entity.
 
 Server-assigned check suite id (`crg_...`).
 
-#### [Response Fields](#response-fields-20)
+#### [Response Fields](#response-fields-21)
 
 `id` string
 
@@ -2849,6 +3008,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`actor.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`actor.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `actor.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -2857,9 +3024,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`actor.app.slug` string
+`actor.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `actor.serviceAccount` object
 
@@ -2876,16 +3043,18 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "id": "string",  "repository": {    "id": "string",    "name": "string",    "owner": {      "slug": "string",      "id": "string",      "type": "team"    }  },  "sha": "string",  "key": "string",  "name": "string",  "detailsUrl": "string",  "createdAt": "2026-01-01T00:00:00Z",  "updatedAt": "2026-01-01T00:00:00Z",  "externalId": "string",  "actor": {    "user": {      "id": "string",      "email": "string"    }  }}
+{  "id": "crg_01k2ja2000e0080000000000h8",  "repository": {    "id": "repo_01k2ja2000e0080000000000q4",    "name": "rocket",    "owner": {      "slug": "acme",      "id": "ns_01k2ja2000e0080000000000p3",      "type": "team"    }  },  "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",  "key": "ci-8842",  "name": "CI",  "detailsUrl": "https://ci.acme.dev/runs/8842",  "createdAt": "2026-08-01T09:30:00Z",  "updatedAt": "2026-08-02T14:45:00Z",  "externalId": "build-8842",  "actor": {    "user": {      "id": "user_01k2ja2000e0080000000000c3",      "email": "jane@acme.dev"    }  }}
 ```
 
 ### [List Check Runs For Suite](#list-check-runs-for-suite)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/check-suites/{checkSuiteId}/check-runs`
 
-Lists check runs belonging to a suite. Paginated.
+Scope[repository:checks:read](#scopes)AuthInstallation tokenUser credential
 
-#### [Path Parameters](#path-parameters-14)
+Lists a suite's current check runs. When a run key was reported more than once in the suite, only the latest attempt for that key is returned; superseded attempts are omitted. Read a superseded attempt by its own id with [Get Check Run](#get-check-run). Paginated.
+
+#### [Path Parameters](#path-parameters-15)
 
 `ownerSlug` string Required
 
@@ -2909,7 +3078,7 @@ Max check runs to return. Defaults to 30 when unset or 0. Values above 100 are c
 
 Opaque cursor from a previous response's `next_page_token`. Empty for the first page. Encodes the last-seen check-run id scoped to this suite, so `page_size` on a follow-up request is ignored when a token is supplied.
 
-#### [Response Fields](#response-fields-21)
+#### [Response Fields](#response-fields-22)
 
 `checkRuns` array
 
@@ -3019,6 +3188,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`checkRuns[].actor.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`checkRuns[].actor.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `checkRuns[].actor.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -3027,9 +3204,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`checkRuns[].actor.app.slug` string
+`checkRuns[].actor.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `checkRuns[].actor.serviceAccount` object
 
@@ -3070,16 +3247,20 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "checkRuns": [    {      "id": "string",      "repository": {        "id": "string",        "name": "string",        "owner": {          "slug": "string",          "id": "string",          "type": "team"        }      },      "checkSuite": {        "id": "string"      },      "sha": "string",      "key": "string",      "name": "string",      "status": "queued",      "conclusion": "success",      "detailsUrl": "string",      "externalUpdatedAt": "2026-01-01T00:00:00Z",      "startedAt": "2026-01-01T00:00:00Z",      "completedAt": "2026-01-01T00:00:00Z",      "createdAt": "2026-01-01T00:00:00Z",      "updatedAt": "2026-01-01T00:00:00Z",      "externalId": "string",      "actor": {        "user": {          "id": "string",          "email": "string"        }      },      "output": {        "title": "string",        "summary": "string",        "text": "string"      },      "deadlineAt": "2026-01-01T00:00:00Z"    }  ],  "nextPageToken": "string"}
+{  "checkRuns": [    {      "id": "cr_01k2ja2000e0080000000000g7",      "repository": {        "id": "repo_01k2ja2000e0080000000000q4",        "name": "rocket",        "owner": {          "slug": "acme",          "id": "ns_01k2ja2000e0080000000000p3",          "type": "team"        }      },      "checkSuite": {        "id": "crg_01k2ja2000e0080000000000h8"      },      "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",      "key": "ci-8842-unit-tests",      "name": "unit-tests",      "status": "completed",      "conclusion": "success",      "detailsUrl": "https://ci.acme.dev/runs/8842",      "externalUpdatedAt": "2026-08-02T14:44:30Z",      "startedAt": "2026-08-02T14:40:00Z",      "completedAt": "2026-08-02T14:44:30Z",      "createdAt": "2026-08-01T09:30:00Z",      "updatedAt": "2026-08-02T14:45:00Z",      "externalId": "run-8842",      "actor": {        "user": {          "id": "user_01k2ja2000e0080000000000c3",          "email": "jane@acme.dev"        }      },      "output": {        "title": "Unit tests",        "summary": "128 tests passed.",        "text": "All suites green."      }    }  ]}
 ```
 
 ### [List Check Runs For Commit](#list-check-runs-for-commit)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/commits/{sha}/check-runs`
 
-Lists every check run reported against a commit, across all suites. Paginated.
+Scope[repository:checks:read](#scopes)AuthInstallation tokenUser credential
 
-#### [Path Parameters](#path-parameters-15)
+Lists a commit's current check runs across all suites: only runs belonging to each suite's latest attempt, and within each suite only the latest attempt per run key. Superseded attempts are omitted. Read a superseded attempt by its own id with [Get Check Run](#get-check-run). Optionally filtered by check name and status. Paginated.
+
+Filters apply to the collapsed set, so a run matches on its latest attempt's status and a filter never resurfaces a superseded attempt. Page tokens embed the filters they were minted under, so a token replayed under different filters is rejected; restart pagination when a filter changes.
+
+#### [Path Parameters](#path-parameters-16)
 
 `ownerSlug` string Required
 
@@ -3101,9 +3282,17 @@ Max check runs to return. Defaults to 30 when unset or 0. Values above 100 are c
 
 `pageToken` string
 
-Opaque cursor from a previous response's `next_page_token`. Empty for the first page. Encodes the last-seen check-run id scoped to this commit, so `page_size` on a follow-up request is ignored when a token is supplied.
+Opaque cursor from a previous response's `next_page_token`. Empty for the first page. Encodes the last-seen check-run id scoped to this commit and to the filters below, so `page_size` on a follow-up request is ignored when a token is supplied, and reusing a token under different filters returns `InvalidArgument` (HTTP 400).
 
-#### [Response Fields](#response-fields-22)
+`checkName` string
+
+Optional exact check-run name filter, matched against `checkRuns[].name`. Omit to list runs under any name.
+
+`status` string
+
+Optional status filter. Allowed values: `queued`, `in_progress`, `completed`. Any other value returns `InvalidArgument` (HTTP 400). Omit to list runs in any status.
+
+#### [Response Fields](#response-fields-23)
 
 `checkRuns` array
 
@@ -3213,6 +3402,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`checkRuns[].actor.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`checkRuns[].actor.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `checkRuns[].actor.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -3221,9 +3418,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`checkRuns[].actor.app.slug` string
+`checkRuns[].actor.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `checkRuns[].actor.serviceAccount` object
 
@@ -3264,16 +3461,18 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "checkRuns": [    {      "id": "string",      "repository": {        "id": "string",        "name": "string",        "owner": {          "slug": "string",          "id": "string",          "type": "team"        }      },      "checkSuite": {        "id": "string"      },      "sha": "string",      "key": "string",      "name": "string",      "status": "queued",      "conclusion": "success",      "detailsUrl": "string",      "externalUpdatedAt": "2026-01-01T00:00:00Z",      "startedAt": "2026-01-01T00:00:00Z",      "completedAt": "2026-01-01T00:00:00Z",      "createdAt": "2026-01-01T00:00:00Z",      "updatedAt": "2026-01-01T00:00:00Z",      "externalId": "string",      "actor": {        "user": {          "id": "string",          "email": "string"        }      },      "output": {        "title": "string",        "summary": "string",        "text": "string"      },      "deadlineAt": "2026-01-01T00:00:00Z"    }  ],  "nextPageToken": "string"}
+{  "checkRuns": [    {      "id": "cr_01k2ja2000e0080000000000g7",      "repository": {        "id": "repo_01k2ja2000e0080000000000q4",        "name": "rocket",        "owner": {          "slug": "acme",          "id": "ns_01k2ja2000e0080000000000p3",          "type": "team"        }      },      "checkSuite": {        "id": "crg_01k2ja2000e0080000000000h8"      },      "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",      "key": "ci-8842-unit-tests",      "name": "unit-tests",      "status": "completed",      "conclusion": "success",      "detailsUrl": "https://ci.acme.dev/runs/8842",      "externalUpdatedAt": "2026-08-02T14:44:30Z",      "startedAt": "2026-08-02T14:40:00Z",      "completedAt": "2026-08-02T14:44:30Z",      "createdAt": "2026-08-01T09:30:00Z",      "updatedAt": "2026-08-02T14:45:00Z",      "externalId": "run-8842",      "actor": {        "user": {          "id": "user_01k2ja2000e0080000000000c3",          "email": "jane@acme.dev"        }      },      "output": {        "title": "Unit tests",        "summary": "128 tests passed.",        "text": "All suites green."      }    }  ]}
 ```
 
 ### [List Check Suites For Commit](#list-check-suites-for-commit)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/commits/{sha}/check-suites`
 
-Lists check suites reported against a commit. Returns suite metadata only (no embedded runs). Paginated.
+Scope[repository:checks:read](#scopes)AuthInstallation tokenUser credential
 
-#### [Path Parameters](#path-parameters-16)
+Lists check suites reported against a commit. Returns only the latest attempt of each suite, per reporting actor and suite key; superseded attempts are omitted. Read a superseded attempt by its own id with [Get Check Suite](#get-check-suite). Returns suite metadata only (no embedded runs). Paginated.
+
+#### [Path Parameters](#path-parameters-17)
 
 `ownerSlug` string Required
 
@@ -3297,7 +3496,7 @@ Max suites to return. Defaults to 30 when unset or 0. Values above 100 are clamp
 
 Opaque cursor from a previous response's `next_page_token`. Empty for the first page. Encodes the last-seen check-suite id scoped to this commit, so `page_size` on a follow-up request is ignored when a token is supplied.
 
-#### [Response Fields](#response-fields-23)
+#### [Response Fields](#response-fields-24)
 
 `checkSuites` array
 
@@ -3379,6 +3578,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`checkSuites[].actor.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`checkSuites[].actor.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `checkSuites[].actor.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -3387,9 +3594,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`checkSuites[].actor.app.slug` string
+`checkSuites[].actor.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `checkSuites[].actor.serviceAccount` object
 
@@ -3410,7 +3617,7 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "checkSuites": [    {      "id": "string",      "repository": {        "id": "string",        "name": "string",        "owner": {          "slug": "string",          "id": "string",          "type": "team"        }      },      "sha": "string",      "key": "string",      "name": "string",      "detailsUrl": "string",      "createdAt": "2026-01-01T00:00:00Z",      "updatedAt": "2026-01-01T00:00:00Z",      "externalId": "string",      "actor": {        "user": {          "id": "string",          "email": "string"        }      }    }  ],  "nextPageToken": "string"}
+{  "checkSuites": [    {      "id": "crg_01k2ja2000e0080000000000h8",      "repository": {        "id": "repo_01k2ja2000e0080000000000q4",        "name": "rocket",        "owner": {          "slug": "acme",          "id": "ns_01k2ja2000e0080000000000p3",          "type": "team"        }      },      "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",      "key": "ci-8842",      "name": "CI",      "detailsUrl": "https://ci.acme.dev/runs/8842",      "createdAt": "2026-08-01T09:30:00Z",      "updatedAt": "2026-08-02T14:45:00Z",      "externalId": "build-8842",      "actor": {        "user": {          "id": "user_01k2ja2000e0080000000000c3",          "email": "jane@acme.dev"        }      }    }  ]}
 ```
 
 ## [Commits and contents](#commits-and-contents)
@@ -3423,11 +3630,13 @@ A comparison is a summary only: it never embeds commit lists or file diffs. `sta
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/commits`
 
+Scope[repository:contents:read](#scopes)AuthInstallation tokenUser credential
+
 Lists commits on a branch or starting ref.
 
 List results omit `stats`. Use [Get Commit](#get-commit) for aggregate stats and [List Commit Files](#list-commit-files) for the paginated file diff.
 
-#### [Path Parameters](#path-parameters-17)
+#### [Path Parameters](#path-parameters-18)
 
 `ownerSlug` string Required
 
@@ -3451,7 +3660,7 @@ Max commits to return. Defaults to 30 when unset or 0. Values above 100 are clam
 
 Opaque cursor from a previous response's `next_page_token`. Empty for the first page. Encodes the starting ref and page, so `sha`/`page_size` on a follow-up request are ignored when a token is supplied.
 
-#### [Response Fields](#response-fields-24)
+#### [Response Fields](#response-fields-25)
 
 `commits` array
 
@@ -3528,18 +3737,20 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "commits": [    {      "sha": "string",      "commit": {        "author": {          "name": "string",          "email": "string",          "date": "string"        },        "committer": {          "name": "string",          "email": "string",          "date": "string"        },        "message": "string",        "tree": {          "sha": "string"        }      },      "parents": [        {          "sha": "string"        }      ]    }  ],  "nextPageToken": "string"}
+{  "commits": [    {      "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",      "commit": {        "author": {          "name": "Jane Doe",          "email": "jane@acme.dev",          "date": "2026-08-01T09:30:00Z"        },        "committer": {          "name": "Jane Doe",          "email": "jane@acme.dev",          "date": "2026-08-01T09:30:00Z"        },        "message": "Add launch telemetry",        "tree": {          "sha": "a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8"        }      },      "parents": [        {          "sha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8"        }      ],      "stats": {        "additions": 128,        "deletions": 46,        "total": 174      }    }  ]}
 ```
 
 ### [Get Commit](#get-commit)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/commits/{sha}`
 
+Scope[repository:contents:read](#scopes)AuthInstallation tokenUser credential
+
 Returns a single commit by SHA or ref with whole-commit aggregate `stats`. It does not include changed files; use [List Commit Files](#list-commit-files).
 
 `author` and `committer` are git identities recorded in the commit, not Origin user objects.
 
-#### [Path Parameters](#path-parameters-18)
+#### [Path Parameters](#path-parameters-19)
 
 `ownerSlug` string Required
 
@@ -3553,7 +3764,7 @@ Repo name, unique to the owner entity.
 
 SHA, branch, tag, or symbolic ref (for example `HEAD`) of the commit to fetch.
 
-#### [Response Fields](#response-fields-25)
+#### [Response Fields](#response-fields-26)
 
 `sha` string
 
@@ -3638,18 +3849,20 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "sha": "string",  "commit": {    "author": {      "name": "string",      "email": "string",      "date": "string"    },    "committer": {      "name": "string",      "email": "string",      "date": "string"    },    "message": "string",    "tree": {      "sha": "string"    }  },  "parents": [    {      "sha": "string"    }  ],  "stats": {    "additions": 0,    "deletions": 0,    "total": 0  }}
+{  "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",  "commit": {    "author": {      "name": "Jane Doe",      "email": "jane@acme.dev",      "date": "2026-08-01T09:30:00Z"    },    "committer": {      "name": "Jane Doe",      "email": "jane@acme.dev",      "date": "2026-08-01T09:30:00Z"    },    "message": "Add launch telemetry",    "tree": {      "sha": "a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8"    }  },  "parents": [    {      "sha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8"    }  ],  "stats": {    "additions": 128,    "deletions": 46,    "total": 174  }}
 ```
 
 ### [List Commit Files](#list-commit-files)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/commits/{sha}/files`
 
+Scope[repository:contents:read](#scopes)AuthInstallation tokenUser credential
+
 Lists the files changed by a commit.
 
 `sha` may be a commit SHA, branch, tag, or symbolic ref such as `HEAD`. Results default to 30 files and are capped at 100. A page token fixes the resolved commit, page size, and file cursor; on later requests, `sha` and `pageSize` must match the token. Each file includes `filename`, `status`, `additions`, `deletions`, `changes`, `patch`, and `previousFilename` when renamed or copied. `patch` is empty for binary files.
 
-#### [Path Parameters](#path-parameters-19)
+#### [Path Parameters](#path-parameters-20)
 
 `ownerSlug` string Required
 
@@ -3673,7 +3886,7 @@ Max changed files to return. Defaults to 30 when unset or 0. Values above 100 ar
 
 Opaque cursor from a previous response's `next_page_token`. Empty for the first page. The token fixes the resolved commit, page size, and file cursor, so `sha` and `page_size` on a follow-up request must match the token.
 
-#### [Response Fields](#response-fields-26)
+#### [Response Fields](#response-fields-27)
 
 `files` array
 
@@ -3718,18 +3931,20 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "files": [    {      "filename": "string",      "status": "string",      "additions": 0,      "deletions": 0,      "changes": 0,      "patch": "string",      "previousFilename": "string"    }  ],  "nextPageToken": "string"}
+{  "files": [    {      "filename": "src/telemetry.ts",      "status": "modified",      "additions": 6,      "deletions": 3,      "changes": 9,      "patch": "@@ -12,6 +12,9 @@\n import { ignite } from \"./ignition\";\n+import { emitLaunchTelemetry } from \"./telemetry\";\n"    }  ]}
 ```
 
 ### [Compare Commits](#compare-commits)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/compare/{basehead}`
 
+Scope[repository:contents:read](#scopes)AuthInstallation tokenUser credential
+
 Compares commits, refs, or tags relative to their merge base. `basehead` is `"{base}...{head}"`; refs containing "/" must use their SHA.
 
 `base` and `head` may each be a SHA, branch, tag, or symbolic ref such as `HEAD`. The response is an unpaginated summary: `status` is `identical`, `ahead`, `behind`, or `diverged`; the three commit objects are sparse and omit `stats` and files. No `totalCommits`, embedded `commits`, or `files` fields are returned. Unrelated histories return `404`.
 
-#### [Path Parameters](#path-parameters-20)
+#### [Path Parameters](#path-parameters-21)
 
 `ownerSlug` string Required
 
@@ -3743,7 +3958,7 @@ Repo name, unique to the owner entity.
 
 `"{base}...{head}"`, where either revision may be a SHA, branch, tag, or symbolic ref such as `HEAD`.
 
-#### [Response Fields](#response-fields-27)
+#### [Response Fields](#response-fields-28)
 
 `status` string
 
@@ -3956,18 +4171,20 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "status": "identical",  "aheadBy": 0,  "behindBy": 0,  "baseCommit": {    "sha": "string",    "commit": {      "author": {        "name": "string",        "email": "string",        "date": "string"      },      "committer": {        "name": "string",        "email": "string",        "date": "string"      },      "message": "string",      "tree": {        "sha": "string"      }    },    "parents": [      {        "sha": "string"      }    ]  },  "headCommit": {    "sha": "string",    "commit": {      "author": {        "name": "string",        "email": "string",        "date": "string"      },      "committer": {        "name": "string",        "email": "string",        "date": "string"      },      "message": "string",      "tree": {        "sha": "string"      }    },    "parents": [      {        "sha": "string"      }    ]  },  "mergeBaseCommit": {    "sha": "string",    "commit": {      "author": {        "name": "string",        "email": "string",        "date": "string"      },      "committer": {        "name": "string",        "email": "string",        "date": "string"      },      "message": "string",      "tree": {        "sha": "string"      }    },    "parents": [      {        "sha": "string"      }    ]  }}
+{  "status": "ahead",  "aheadBy": 2,  "behindBy": 0,  "baseCommit": {    "sha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8",    "commit": {      "author": {        "name": "Jane Doe",        "email": "jane@acme.dev",        "date": "2026-08-01T09:30:00Z"      },      "committer": {        "name": "Jane Doe",        "email": "jane@acme.dev",        "date": "2026-08-01T09:30:00Z"      },      "message": "Add launch telemetry",      "tree": {        "sha": "a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8"      }    },    "parents": [      {        "sha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8"      }    ],    "stats": {      "additions": 128,      "deletions": 46,      "total": 174    }  },  "headCommit": {    "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",    "commit": {      "author": {        "name": "Jane Doe",        "email": "jane@acme.dev",        "date": "2026-08-01T09:30:00Z"      },      "committer": {        "name": "Jane Doe",        "email": "jane@acme.dev",        "date": "2026-08-01T09:30:00Z"      },      "message": "Add launch telemetry",      "tree": {        "sha": "a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8"      }    },    "parents": [      {        "sha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8"      }    ],    "stats": {      "additions": 128,      "deletions": 46,      "total": 174    }  },  "mergeBaseCommit": {    "sha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8",    "commit": {      "author": {        "name": "Jane Doe",        "email": "jane@acme.dev",        "date": "2026-08-01T09:30:00Z"      },      "committer": {        "name": "Jane Doe",        "email": "jane@acme.dev",        "date": "2026-08-01T09:30:00Z"      },      "message": "Add launch telemetry",      "tree": {        "sha": "a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8"      }    },    "parents": [      {        "sha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8"      }    ],    "stats": {      "additions": 128,      "deletions": 46,      "total": 174    }  }}
 ```
 
-### [Get Contents](#get-contents)
+### [List Comparison Files](#list-comparison-files)
 
-GET`/v1/origin/repos/{ownerSlug}/{repoName}/contents`
+GET`/v1/origin/repos/{ownerSlug}/{repoName}/compare/{basehead}/files`
 
-Returns file or directory contents at a ref. The file path is passed as the `path` query parameter (supports nested paths); omit or leave empty for the repository root directory. Files larger than 1 MiB (decoded) are rejected with `FailedPrecondition` (HTTP 400).
+Scope[repository:contents:read](#scopes)AuthInstallation tokenUser credential
 
-Files contain base64 content. Directories contain immediate children in `entries`. Directory entries are sparse children containing `type`, `name`, `path`, `sha`, and `size`; fetch a child path to read its content.
+Lists the files changed by a comparison: the diff of `head` against the merge base of `base` and `head`.
 
-#### [Path Parameters](#path-parameters-21)
+`basehead` is `"{base}...{head}"`; refs containing "/" must use their SHA. The file list always agrees with the summary from [Compare Commits](#compare-commits), so an `identical` or `behind` comparison returns an empty list, and unrelated histories return `404`. Results default to 30 files and are capped at 100. Each file carries the same fields as [List Commit Files](#list-commit-files).
+
+#### [Path Parameters](#path-parameters-22)
 
 `ownerSlug` string Required
 
@@ -3977,7 +4194,89 @@ Owning entity's unique slug.
 
 Repo name, unique to the owner entity.
 
+`basehead` string Required
+
+`"{base}...{head}"`, where either revision may be a SHA, branch, tag, or symbolic ref such as `HEAD`.
+
 #### [Query Parameters](#query-parameters-11)
+
+`pageSize` integer
+
+Max changed files to return. Defaults to 30 when unset or 0. Values above 100 are clamped to 100.
+
+`pageToken` string
+
+Opaque cursor from a previous response's `next_page_token`. Empty for the first page. The token is bound to the resolved comparison, page size, and file cursor, so `basehead` and `page_size` on a follow-up request must match the token. Origin re-resolves the comparison on every page; when its commits have moved since the token was issued, the request returns `InvalidArgument` (HTTP 400) and listing must restart from the first page.
+
+#### [Response Fields](#response-fields-29)
+
+`files` array
+
+Paginated changed files with filename, status, line counts, patch, and previousFilename for renamed or copied files. Binary patches are empty.
+
+`files[].filename` string
+
+Path of the changed file.
+
+`files[].status` string
+
+Change status; added, removed, modified, renamed, or copied.
+
+`files[].additions` integer
+
+Added line count for the file.
+
+`files[].deletions` integer
+
+Deleted line count for the file.
+
+`files[].changes` integer
+
+Total changed line count for the file.
+
+`files[].patch` string
+
+Unified patch; empty for binary files.
+
+`files[].previousFilename` string
+
+Previous path when the file was renamed or copied.
+
+`nextPageToken` string
+
+Opaque cursor for the next page; empty when there are no more files.
+
+```
+curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/compare/BASE...HEAD/files' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN'
+```
+
+**Response shape:**
+
+```
+{  "files": [    {      "filename": "src/telemetry.ts",      "status": "modified",      "additions": 6,      "deletions": 3,      "changes": 9,      "patch": "@@ -12,6 +12,9 @@\n import { ignite } from \"./ignition\";\n+import { emitLaunchTelemetry } from \"./telemetry\";\n"    }  ]}
+```
+
+### [Get Contents](#get-contents)
+
+GET`/v1/origin/repos/{ownerSlug}/{repoName}/contents`
+
+Scope[repository:contents:read](#scopes)AuthInstallation tokenUser credential
+
+Returns file or directory contents at a ref. The file path is passed as the `path` query parameter (supports nested paths); omit or leave empty for the repository root directory. Files larger than 1 MiB (decoded) are rejected with `FailedPrecondition` (HTTP 400).
+
+Files contain base64 content. Directories contain immediate children in `entries`. Directory entries are sparse children containing `type`, `name`, `path`, `sha`, and `size`; fetch a child path to read its content.
+
+#### [Path Parameters](#path-parameters-23)
+
+`ownerSlug` string Required
+
+Owning entity's unique slug.
+
+`repoName` string Required
+
+Repo name, unique to the owner entity.
+
+#### [Query Parameters](#query-parameters-12)
 
 `path` string
 
@@ -3987,7 +4286,7 @@ Path to the file or directory relative to the repository root. Empty requests th
 
 Commit, branch, tag, or symbolic ref (for example `HEAD`) to read from. Empty means the repository's default branch.
 
-#### [Response Fields](#response-fields-28)
+#### [Response Fields](#response-fields-30)
 
 `type` string
 
@@ -4028,16 +4327,18 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "type": "string",  "encoding": "string",  "size": "string",  "name": "string",  "path": "string",  "sha": "string",  "content": "string",  "entries": [    {      "type": "string",      "encoding": "string",      "size": "string",      "name": "string",      "path": "string",      "sha": "string",      "content": "string",      "entries": [        {          "type": "string",          "encoding": "string",          "size": "string",          "name": "string",          "path": "string",          "sha": "string",          "content": "string",          "entries": [            {}          ]        }      ]    }  ]}
+{  "type": "file",  "encoding": "base64",  "size": "312",  "name": "telemetry.ts",  "path": "src/telemetry.ts",  "sha": "c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0",  "content": "Y29uc29sZS5sb2coImxhdW5jaCIpOwo="}
 ```
 
 ### [Batch Get Contents](#batch-get-contents)
 
 POST`/v1/origin/repos/{ownerSlug}/{repoName}/contents:batchGet`
 
+Scope[repository:contents:read](#scopes)AuthInstallation tokenUser credential
+
 Returns the contents of several explicit paths at a ref in one request. Each requested path yields a result marking whether it was found; a found path carries the same `Content` shape as `GetContents` (files as base64, directories as immediate `entries`, symlinks as files). Paths are matched exactly, with no globs or patterns, and at most 20 may be requested; duplicates are removed. Response results preserve first-seen request order. A single file larger than the [Get Contents](#get-contents) 1 MiB cap fails the whole batch with `FailedPrecondition` (HTTP 400). Uses POST because the path list travels in the request body.
 
-#### [Path Parameters](#path-parameters-22)
+#### [Path Parameters](#path-parameters-24)
 
 `ownerSlug` string Required
 
@@ -4057,7 +4358,7 @@ Exact paths to fetch, relative to the repository root (no globs or patterns). At
 
 Commit, branch, tag, or symbolic ref (for example `HEAD`) to read from. Empty means the repository's default branch.
 
-#### [Response Fields](#response-fields-29)
+#### [Response Fields](#response-fields-31)
 
 `results` array
 
@@ -4112,26 +4413,28 @@ Immediate sparse children of a directory. Entries contain type, name, path, sha,
 Commit SHA to which the requested ref resolved.
 
 ```
-curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/contents:batchGet' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "paths": [    "PATH"  ]}'
+curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/contents:batchGet' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "paths": [    "src/telemetry.ts"  ],  "ref": "main"}'
 ```
 
 **Response shape:**
 
 ```
-{  "results": [    {      "path": "string",      "found": false,      "content": {        "type": "string",        "encoding": "string",        "size": "string",        "name": "string",        "path": "string",        "sha": "string",        "content": "string",        "entries": [          {}        ]      }    }  ],  "resolvedCommitSha": "string"}
+{  "results": [    {      "path": "src/telemetry.ts",      "found": true,      "content": {        "type": "file",        "encoding": "base64",        "size": "312",        "name": "telemetry.ts",        "path": "src/telemetry.ts",        "sha": "c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0",        "content": "Y29uc29sZS5sb2coImxhdW5jaCIpOwo="      }    }  ],  "resolvedCommitSha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4"}
 ```
 
 ## [Git data](#git-data)
 
-Low-level git objects. Scope: `repository:contents:read`. Empty repositories return `409`.
+Low-level git objects. Reads need `repository:contents:read`, and an empty repository returns `409`. [Create Commit From Files](#create-commit-from-files) and [Create Git Ref](#create-git-ref) write git objects and need `repository:contents:write`.
 
 ### [Get Blob](#get-blob)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/git/blobs/{sha}`
 
+Scope[repository:contents:read](#scopes)AuthInstallation tokenUser credential
+
 Returns a Git blob object by SHA. Default response is JSON with MIME-wrapped base64 `content`. Pass `Accept: application/vnd.origin.raw+json` (or `application/vnd.origin.raw`) on the REST surface to receive raw blob bytes instead. Blobs larger than 4 MiB (decoded) are rejected; fetch larger files by cloning the repository over [Git HTTPS](#git-https-authentication). Empty repositories return 409 Conflict.
 
-#### [Path Parameters](#path-parameters-23)
+#### [Path Parameters](#path-parameters-25)
 
 `ownerSlug` string Required
 
@@ -4145,7 +4448,7 @@ Repo name, unique to the owner entity.
 
 Full or abbreviated hex SHA of the blob object.
 
-#### [Response Fields](#response-fields-30)
+#### [Response Fields](#response-fields-32)
 
 `sha` string
 
@@ -4170,16 +4473,18 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "sha": "string",  "size": 0,  "encoding": "string",  "content": "string"}
+{  "sha": "c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0",  "size": 312,  "encoding": "base64",  "content": "Y29uc29sZS5sb2coImxhdW5jaCIpOwo="}
 ```
 
 ### [Get Git Commit](#get-git-commit)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/git/commits/{sha}`
 
+Scope[repository:contents:read](#scopes)AuthInstallation tokenUser credential
+
 Returns a Git commit object by SHA (or resolvable revision). This is the low-level Git Database commit shape (flat author/message/tree), not the higher-level `GetCommit` resource under `/commits/{sha}`. `sha` accepts a commit SHA, branch, tag, or symbolic ref such as `HEAD`. Empty repositories return 409 Conflict.
 
-#### [Path Parameters](#path-parameters-24)
+#### [Path Parameters](#path-parameters-26)
 
 `ownerSlug` string Required
 
@@ -4193,7 +4498,7 @@ Repo name, unique to the owner entity.
 
 Full or abbreviated hex SHA of the commit object, or a branch, tag, or symbolic ref such as `HEAD`.
 
-#### [Response Fields](#response-fields-31)
+#### [Response Fields](#response-fields-33)
 
 `sha` string
 
@@ -4258,16 +4563,128 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "sha": "string",  "author": {    "name": "string",    "email": "string",    "date": "string"  },  "committer": {    "name": "string",    "email": "string",    "date": "string"  },  "message": "string",  "tree": {    "sha": "string"  },  "parents": [    {      "sha": "string"    }  ]}
+{  "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",  "author": {    "name": "Jane Doe",    "email": "jane@acme.dev",    "date": "2026-08-01T09:30:00Z"  },  "committer": {    "name": "Jane Doe",    "email": "jane@acme.dev",    "date": "2026-08-01T09:30:00Z"  },  "message": "Add launch telemetry",  "tree": {    "sha": "a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8"  },  "parents": [    {      "sha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8"    }  ]}
+```
+
+### [Create Commit From Files](#create-commit-from-files)
+
+POST`/v1/origin/repos/{ownerSlug}/{repoName}/git/commits:createFromFiles`
+
+Scope[repository:contents:write](#scopes)AuthInstallation tokenUser credential
+
+Creates a commit on a branch from inline file changes and advances the branch to it.
+
+The changes apply to the tree at `expectedHeadSha`, which becomes the new commit's parent. A branch that has moved or does not exist, a set of changes that leaves the tree unchanged, a delete of a path the tree does not hold, a write a push ruleset blocks, and a repository whose contents are mirrored from another host each return `FailedPrecondition` (HTTP 400).
+
+One request carries at most 1,000 file changes, 8 MiB per file, and 32 MiB of content in total. Exceeding a limit, repeating a path, or sending a malformed field returns `InvalidArgument` (HTTP 400), with `google.rpc.BadRequest` field violations naming the offending `files[i]` entry.
+
+The branch must already exist. Create it with [Create Git Ref](#create-git-ref) first, then commit onto it.
+
+#### [Path Parameters](#path-parameters-27)
+
+`ownerSlug` string Required
+
+Owning entity's unique slug.
+
+`repoName` string Required
+
+Repo name, unique to the owner entity.
+
+#### [Request Body](#request-body-9)
+
+`targetBranch` string Required
+
+Branch that receives the commit, as `<branch>`, `heads/<branch>`, or `refs/heads/<branch>`. The branch must already exist. `HEAD` is rejected in every spelling.
+
+`expectedHeadSha` string Required
+
+Full hex SHA the target branch must currently point at. It becomes the new commit's parent. The all-zeros SHA is rejected.
+
+`message` string Required
+
+Commit message.
+
+`author` object Required
+
+Commit author. Timestamps are assigned by the server.
+
+`author.name` string Required
+
+Name recorded in the Git identity.
+
+`author.email` string Required
+
+Email recorded in the Git identity.
+
+`committer` object
+
+Commit committer. Defaults to `author` when omitted.
+
+`committer.name` string
+
+Name recorded in the Git identity. Required when `committer` is present.
+
+`committer.email` string
+
+Email recorded in the Git identity. Required when `committer` is present.
+
+`files` array Required
+
+File changes applied to the branch tip's tree. At least one change is required, and paths must be unique within a request.
+
+`files[].path` string Required
+
+Repository-relative path using `/` separators, for example `docs/changelog.md`.
+
+`files[].content` string
+
+New file contents, encoded per `files[].encoding`. Creates the file or replaces its contents. Set exactly one of `files[].content` and `files[].delete`.
+
+`files[].delete` boolean
+
+Removes the file. Must be `true` when set. Set exactly one of `files[].content` and `files[].delete`.
+
+`files[].encoding` string
+
+Encoding of `files[].content`. Allowed values: `utf-8` (default), `base64`. Ignored for a delete.
+
+`files[].mode` string
+
+File mode for `files[].content`. Allowed values: `file` (default), `executable`, `symlink`, where the contents are the link target. Ignored for a delete.
+
+#### [Response Fields](#response-fields-34)
+
+`sha` string
+
+SHA of the new commit, now the branch tip.
+
+`treeSha` string
+
+SHA of the new commit's root tree.
+
+`previousHeadSha` string
+
+Branch tip before the write; the new commit's parent.
+
+```
+curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/git/commits:createFromFiles' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "targetBranch": "feature/login",  "expectedHeadSha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",  "message": "Add login telemetry",  "author": {    "name": "Jane Doe",    "email": "jane@acme.dev"  },  "files": [    {      "path": "src/login/telemetry.ts",      "content": "export const LOGIN_EVENT = 1;"    },    {      "path": "assets/login.png",      "content": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==",      "encoding": "base64"    },    {      "path": "src/login/legacy.ts",      "delete": true    }  ]}'
+```
+
+**Response shape:**
+
+```
+{  "sha": "5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d",  "treeSha": "a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8",  "previousHeadSha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4"}
 ```
 
 ### [Get Git Ref](#get-git-ref)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/git/ref/{ref}`
 
+Scope[repository:contents:read](#scopes)AuthInstallation tokenUser credential
+
 Returns a single Git reference by name. `ref` is typically `heads/<branch>` or `tags/<tag>` (with or without a leading `refs/`), or the symbolic `HEAD`. Exact match only; use ListMatchingGitRefs for prefixes. Empty repositories return 409 Conflict.
 
-#### [Path Parameters](#path-parameters-25)
+#### [Path Parameters](#path-parameters-28)
 
 `ownerSlug` string Required
 
@@ -4281,7 +4698,7 @@ Repo name, unique to the owner entity.
 
 Git reference name. Typically `heads/<branch>` or `tags/<tag>`; a leading `refs/` is accepted and normalized. The symbolic `HEAD` is also accepted (returned as `ref: "HEAD"` with the tip commit). Exact match on the full ref name.
 
-#### [Response Fields](#response-fields-32)
+#### [Response Fields](#response-fields-35)
 
 `ref` string
 
@@ -4306,16 +4723,20 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "ref": "string",  "object": {    "sha": "string",    "type": "string"  }}
+{  "ref": "refs/heads/main",  "object": {    "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",    "type": "commit"  }}
 ```
 
-### [List Matching Git Refs](#list-matching-git-refs)
+### [Create Git Ref](#create-git-ref)
 
-GET`/v1/origin/repos/{ownerSlug}/{repoName}/git/matching-refs`
+POST`/v1/origin/repos/{ownerSlug}/{repoName}/git/refs`
 
-Lists Git references whose names start with the given prefix. REST responses unwrap to a JSON array (via `response_body`). A trailing slash on `ref` is preserved (`heads/` → `refs/heads/`). The symbolic `HEAD` is matched exactly (it is not under `refs/`). Empty repositories return 409 Conflict.
+Scope[repository:contents:write](#scopes)AuthInstallation tokenUser credential
 
-#### [Path Parameters](#path-parameters-26)
+Creates a branch reference pointing at an existing commit.
+
+Only branch references can be created. A tag or any other reference namespace, and a `sha` that is not the full hex SHA of a commit in the repository, return `InvalidArgument` (HTTP 400). Creating a branch that already points at `sha` succeeds and returns the existing reference; a branch that exists at any other commit returns `AlreadyExists` (HTTP 409 Conflict). A create a push ruleset blocks, or one on a repository whose contents are mirrored from another host, returns `FailedPrecondition` (HTTP 400).
+
+#### [Path Parameters](#path-parameters-29)
 
 `ownerSlug` string Required
 
@@ -4325,13 +4746,69 @@ Owning entity's unique slug.
 
 Repo name, unique to the owner entity.
 
-#### [Query Parameters](#query-parameters-12)
+#### [Request Body](#request-body-10)
+
+`ref` string Required
+
+Branch reference to create, as `refs/heads/<branch>` or `heads/<branch>`.
+
+`sha` string Required
+
+Full hex SHA of an existing commit that the new branch points at.
+
+#### [Response Fields](#response-fields-36)
+
+`ref` string
+
+Full ref name, e.g. "refs/heads/main".
+
+`object` object
+
+Object this ref points at directly (unpeeled). For a branch, `object.type` is "commit".
+
+`object.sha` string
+
+Hex SHA of the target object.
+
+`object.type` string
+
+One of "commit", "tree", "blob", or "tag".
+
+```
+curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/git/refs' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "ref": "refs/heads/feature/login",  "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4"}'
+```
+
+**Response shape:**
+
+```
+{  "ref": "refs/heads/feature/login",  "object": {    "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",    "type": "commit"  }}
+```
+
+### [List Matching Git Refs](#list-matching-git-refs)
+
+GET`/v1/origin/repos/{ownerSlug}/{repoName}/git/matching-refs`
+
+Scope[repository:contents:read](#scopes)AuthInstallation tokenUser credential
+
+Lists Git references whose names start with the given prefix. REST responses unwrap to a JSON array (via `response_body`). A trailing slash on `ref` is preserved (`heads/` → `refs/heads/`). The symbolic `HEAD` is matched exactly (it is not under `refs/`). Empty repositories return 409 Conflict.
+
+#### [Path Parameters](#path-parameters-30)
+
+`ownerSlug` string Required
+
+Owning entity's unique slug.
+
+`repoName` string Required
+
+Repo name, unique to the owner entity.
+
+#### [Query Parameters](#query-parameters-13)
 
 `ref` string
 
 Prefix to match. Typically `heads/<prefix>` or `tags/<prefix>`; a leading `refs/` is accepted and normalized. Empty lists all refs (REST binding without a trailing path segment).
 
-#### [Response Fields](#response-fields-33)
+#### [Response Fields](#response-fields-37)
 
 The response is an array. Each item contains:
 
@@ -4358,16 +4835,18 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-[  {    "ref": "string",    "object": {      "sha": "string",      "type": "string"    }  }]
+{  "refs": [    {      "ref": "refs/heads/main",      "object": {        "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",        "type": "commit"      }    }  ]}
 ```
 
 ### [List Matching Git Refs by Path](#list-matching-git-refs-by-path)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/git/matching-refs/{ref}`
 
+Scope[repository:contents:read](#scopes)AuthInstallation tokenUser credential
+
 Lists Git references whose names start with the given prefix. REST responses unwrap to a JSON array (via `response_body`). A trailing slash on `ref` is preserved (`heads/` → `refs/heads/`). The symbolic `HEAD` is matched exactly (it is not under `refs/`). Empty repositories return 409 Conflict.
 
-#### [Path Parameters](#path-parameters-27)
+#### [Path Parameters](#path-parameters-31)
 
 `ownerSlug` string Required
 
@@ -4381,7 +4860,7 @@ Repo name, unique to the owner entity.
 
 Prefix to match. Typically `heads/<prefix>` or `tags/<prefix>`; a leading `refs/` is accepted and normalized. Empty lists all refs (REST binding without a trailing path segment).
 
-#### [Response Fields](#response-fields-34)
+#### [Response Fields](#response-fields-38)
 
 The response is an array. Each item contains:
 
@@ -4408,16 +4887,18 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-[  {    "ref": "string",    "object": {      "sha": "string",      "type": "string"    }  }]
+{  "refs": [    {      "ref": "refs/heads/main",      "object": {        "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",        "type": "commit"      }    }  ]}
 ```
 
 ### [Get Tag](#get-tag)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/git/tags/{sha}`
 
+Scope[repository:contents:read](#scopes)AuthInstallation tokenUser credential
+
 Returns an annotated Git tag object by SHA. Lightweight tags are not tag objects and return NotFound. Empty repositories return 409 Conflict.
 
-#### [Path Parameters](#path-parameters-28)
+#### [Path Parameters](#path-parameters-32)
 
 `ownerSlug` string Required
 
@@ -4431,7 +4912,7 @@ Repo name, unique to the owner entity.
 
 Full or abbreviated hex SHA of the annotated tag object.
 
-#### [Response Fields](#response-fields-35)
+#### [Response Fields](#response-fields-39)
 
 `sha` string
 
@@ -4480,16 +4961,18 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "sha": "string",  "tag": "string",  "message": "string",  "tagger": {    "name": "string",    "email": "string",    "date": "string"  },  "object": {    "sha": "string",    "type": "string"  }}
+{  "sha": "e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3f2",  "tag": "v1.2.0",  "message": "Release v1.2.0",  "tagger": {    "name": "Jane Doe",    "email": "jane@acme.dev",    "date": "2026-08-01T09:30:00Z"  },  "object": {    "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",    "type": "commit"  }}
 ```
 
 ### [Get Tree](#get-tree)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/git/trees/{sha}`
 
+Scope[repository:contents:read](#scopes)AuthInstallation tokenUser credential
+
 Returns a Git tree object by SHA or resolvable revision. `sha` accepts a tree SHA, commit SHA, branch, tag, or symbolic ref such as `HEAD`. Set `recursive=true` (or `1`) to walk the whole tree; omitting the parameter or passing any other value lists immediate children only. Recursive listings truncate at 100,000 entries or 7 MiB and set `truncated=true`. Empty repositories return 409 Conflict.
 
-#### [Path Parameters](#path-parameters-29)
+#### [Path Parameters](#path-parameters-33)
 
 `ownerSlug` string Required
 
@@ -4503,13 +4986,13 @@ Repo name, unique to the owner entity.
 
 Tree SHA, commit SHA, branch, tag, or symbolic ref such as `HEAD`.
 
-#### [Query Parameters](#query-parameters-13)
+#### [Query Parameters](#query-parameters-14)
 
 `recursive` boolean
 
 When true, returns the full recursive walk of the tree. Query values `true` and `1` enable recursion; omitting the parameter or passing any other value (including `false` and `0`) lists immediate children only.
 
-#### [Response Fields](#response-fields-36)
+#### [Response Fields](#response-fields-40)
 
 `sha` string
 
@@ -4550,7 +5033,7 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "sha": "string",  "tree": [    {      "path": "string",      "mode": "string",      "type": "string",      "sha": "string",      "size": 0    }  ],  "truncated": false}
+{  "sha": "a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8",  "tree": [    {      "path": "src/telemetry.ts",      "mode": "100644",      "type": "blob",      "sha": "c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0",      "size": 312    }  ],  "truncated": false}
 ```
 
 ## [Labels](#labels)
@@ -4561,11 +5044,13 @@ A label definition belongs to one repository and is addressed by its name. Assig
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/labels`
 
+Scope[repository:labels:read](#scopes)AuthInstallation tokenUser credential
+
 Lists the labels defined on a repository, ordered by name.
 
 Page tokens are bound to the repository they were minted for. A token replayed against a different repository, or any other malformed token, returns `InvalidArgument` (HTTP 400).
 
-#### [Path Parameters](#path-parameters-30)
+#### [Path Parameters](#path-parameters-34)
 
 `ownerSlug` string Required
 
@@ -4575,7 +5060,7 @@ Owning entity's unique slug.
 
 Repo name, unique to the owner entity.
 
-#### [Query Parameters](#query-parameters-14)
+#### [Query Parameters](#query-parameters-15)
 
 `pageSize` integer
 
@@ -4585,7 +5070,7 @@ Maximum labels to return. Defaults to 30 when omitted or zero; values above 100 
 
 Opaque cursor from a previous response's `nextPageToken`. Omit for the first page.
 
-#### [Response Fields](#response-fields-37)
+#### [Response Fields](#response-fields-41)
 
 `labels` array
 
@@ -4618,18 +5103,20 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "labels": [    {      "id": "string",      "name": "string",      "color": "string",      "description": "string"    }  ],  "nextPageToken": "string"}
+{  "labels": [    {      "id": "lbl_01k2ja2000e0080000000000m1",      "name": "bug",      "color": "d73a4a",      "description": "Something isn't working"    }  ]}
 ```
 
 ### [Create Label](#create-label)
 
 POST`/v1/origin/repos/{ownerSlug}/{repoName}/labels`
 
+Scope[repository:labels:write](#scopes)AuthInstallation tokenUser credential
+
 Creates a label on a repository.
 
 A name already used by another label on the repository returns `AlreadyExists` (HTTP 409 Conflict). A `color` that is not six hexadecimal characters, a `name` longer than 50 characters, or a `description` longer than 255 characters returns `InvalidArgument` (HTTP 400).
 
-#### [Path Parameters](#path-parameters-31)
+#### [Path Parameters](#path-parameters-35)
 
 `ownerSlug` string Required
 
@@ -4639,7 +5126,7 @@ Owning entity's unique slug.
 
 Repo name, unique to the owner entity.
 
-#### [Request Body](#request-body-9)
+#### [Request Body](#request-body-11)
 
 `name` string Required
 
@@ -4653,7 +5140,7 @@ Six-character hex color without a leading `#`. Uppercase input is stored lowerca
 
 Label description. Maximum length: 255 characters.
 
-#### [Response Fields](#response-fields-38)
+#### [Response Fields](#response-fields-42)
 
 `id` string
 
@@ -4672,24 +5159,26 @@ Six-character hex color without a leading `#`.
 Label description. Absent when the label has none.
 
 ```
-curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/labels' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "name": "LABEL_NAME",  "color": "0e8a16"}'
+curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/labels' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "name": "bug",  "color": "d73a4a",  "description": "Something isn'\''t working"}'
 ```
 
 **Response shape:**
 
 ```
-{  "id": "string",  "name": "string",  "color": "string",  "description": "string"}
+{  "id": "lbl_01k2ja2000e0080000000000m1",  "name": "bug",  "color": "d73a4a",  "description": "Something isn't working"}
 ```
 
 ### [Get Label](#get-label)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/labels/{labelName}`
 
+Scope[repository:labels:read](#scopes)AuthInstallation tokenUser credential
+
 Returns a single repository label by name.
 
 An unknown name returns `404`. An empty `labelName` returns `InvalidArgument` (HTTP 400).
 
-#### [Path Parameters](#path-parameters-32)
+#### [Path Parameters](#path-parameters-36)
 
 `ownerSlug` string Required
 
@@ -4703,7 +5192,7 @@ Repo name, unique to the owner entity.
 
 Label name. Leading and trailing whitespace is trimmed before lookup.
 
-#### [Response Fields](#response-fields-39)
+#### [Response Fields](#response-fields-43)
 
 `id` string
 
@@ -4728,18 +5217,20 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "id": "string",  "name": "string",  "color": "string",  "description": "string"}
+{  "id": "lbl_01k2ja2000e0080000000000m1",  "name": "bug",  "color": "d73a4a",  "description": "Something isn't working"}
 ```
 
 ### [Delete Label](#delete-label)
 
 DELETE`/v1/origin/repos/{ownerSlug}/{repoName}/labels/{labelName}`
 
+Scope[repository:labels:write](#scopes)AuthInstallation tokenUser credential
+
 Deletes a repository label by name. The response body is empty.
 
 Deleting a label also removes it from every pull request it was assigned to. An unknown name returns `404`. An empty `labelName` returns `InvalidArgument` (HTTP 400).
 
-#### [Path Parameters](#path-parameters-33)
+#### [Path Parameters](#path-parameters-37)
 
 `ownerSlug` string Required
 
@@ -4753,7 +5244,7 @@ Repo name, unique to the owner entity.
 
 Label name. Leading and trailing whitespace is trimmed before lookup.
 
-#### [Response Fields](#response-fields-40)
+#### [Response Fields](#response-fields-44)
 
 Successful requests return no response body.
 
@@ -4771,11 +5262,13 @@ curl --request DELETE \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLU
 
 PATCH`/v1/origin/repos/{ownerSlug}/{repoName}/labels/{labelName}`
 
+Scope[repository:labels:write](#scopes)AuthInstallation tokenUser credential
+
 Updates a repository label identified by its current name.
 
 Omitted fields are left unchanged, and a request that omits all three returns the label as it stands. Renaming to a name another label already uses returns `AlreadyExists` (HTTP 409 Conflict). An unknown `labelName` returns `404`.
 
-#### [Path Parameters](#path-parameters-34)
+#### [Path Parameters](#path-parameters-38)
 
 `ownerSlug` string Required
 
@@ -4789,7 +5282,7 @@ Repo name, unique to the owner entity.
 
 Current label name. Leading and trailing whitespace is trimmed before lookup.
 
-#### [Request Body](#request-body-10)
+#### [Request Body](#request-body-12)
 
 `name` string
 
@@ -4803,7 +5296,7 @@ Six-character hex color without a leading `#`. Omit to leave unchanged.
 
 Label description. Maximum length: 255 characters. Omit to leave unchanged.
 
-#### [Response Fields](#response-fields-41)
+#### [Response Fields](#response-fields-45)
 
 `id` string
 
@@ -4828,7 +5321,7 @@ curl --request PATCH \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG
 **Response shape:**
 
 ```
-{  "id": "string",  "name": "string",  "color": "string",  "description": "string"}
+{  "id": "lbl_01k2ja2000e0080000000000m1",  "name": "bug",  "color": "b60205",  "description": "Something isn't working"}
 ```
 
 ## [Pull requests](#pull-requests)
@@ -4837,17 +5330,19 @@ Closed or merged pull requests may additionally include `closedAt`, `mergedAt`, 
 
 Review `verdict` is `approve`, `request_changes`, or `comment`. `submittedAt` is absent for an unsubmitted draft review. `dismissal` is absent while the verdict remains active. Dismissed reviews remain visible in review listings. Reviews automatically superseded by a newer decision carry a server-generated message.
 
-Comments expose a `thread` reference for grouping. Create-comment requests still accept the scalar `threadId` command parameter when replying. First-class thread resources and resolution APIs are not part of this release.
+Comments expose a `thread` reference for grouping. Create-comment requests still accept the scalar `threadId` command parameter when replying. Resolve or reopen a thread with [Update Pull Request Thread](#update-pull-request-thread).
 
 ### [List Pull Requests](#list-pull-requests)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/pulls`
 
+Scope[repository:pull\_requests:read](#scopes)AuthInstallation tokenUser credential
+
 Lists pull requests in a repo, optionally filtered by head branch, base branch, author, creation-time range, and state. Each pull request includes its assigned labels.
 
 Results come back in creation order, newest first. Set `direction=asc` for oldest first. Page tokens embed the filters they were minted under, so a token replayed with different filters is rejected; restart pagination when a filter changes.
 
-#### [Path Parameters](#path-parameters-35)
+#### [Path Parameters](#path-parameters-39)
 
 `ownerSlug` string Required
 
@@ -4857,7 +5352,7 @@ Owning entity's unique slug.
 
 Repo name, unique to the owner entity.
 
-#### [Query Parameters](#query-parameters-15)
+#### [Query Parameters](#query-parameters-16)
 
 `head` string
 
@@ -4877,7 +5372,7 @@ Opaque token from the preceding page.
 
 `author` string
 
-Optional author filter. Pass a public actor ID exactly as this endpoint returns it in `pullRequests[].author.user.id`, `pullRequests[].author.app.id`, or `pullRequests[].author.serviceAccount.id` (`user_…`, `app_…`, or `sa_…`). An author with no pull requests returns an empty list. Any other value, including the shared `origin-cursor-managed-actor` ID, returns `InvalidArgument` (HTTP 400).
+Optional author filter. Pass a public actor ID exactly as this endpoint returns it in `pullRequests[].author.user.id`, `pullRequests[].author.app.id`, or `pullRequests[].author.serviceAccount.id` (`user_…`, `app_…`, or `sa_…`), or the exact email address of a user. Email matching is case-insensitive. Apps and service accounts have no email identity, so only user authors can be selected that way. An author with no pull requests returns an empty list, as does an email that resolves to no single user. Any other value, including the shared `origin-cursor-managed-actor` ID, returns `InvalidArgument` (HTTP 400).
 
 `base` string
 
@@ -4895,7 +5390,7 @@ Optional inclusive lower bound on creation time, as an RFC 3339 timestamp such a
 
 Optional inclusive upper bound on creation time, in the same RFC 3339 format as `since`. Returns only pull requests created at or before that instant. A malformed timestamp returns `InvalidArgument` (HTTP 400).
 
-#### [Response Fields](#response-fields-42)
+#### [Response Fields](#response-fields-46)
 
 `pullRequests` array
 
@@ -4969,6 +5464,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`pullRequests[].author.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`pullRequests[].author.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `pullRequests[].author.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -4977,9 +5480,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`pullRequests[].author.app.slug` string
+`pullRequests[].author.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `pullRequests[].author.serviceAccount` object
 
@@ -5072,18 +5575,20 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "pullRequests": [    {      "id": "string",      "number": "string",      "state": "string",      "draft": false,      "merged": false,      "title": "string",      "body": "string",      "head": {        "ref": "string",        "sha": "string"      },      "base": {        "ref": "string",        "sha": "string"      },      "author": {        "user": {          "id": "string",          "email": "string"        }      },      "createdAt": "2026-01-01T00:00:00Z",      "updatedAt": "2026-01-01T00:00:00Z",      "closedAt": "2026-01-01T00:00:00Z",      "mergedAt": "2026-01-01T00:00:00Z",      "mergeCommitSha": "string",      "additions": 0,      "deletions": 0,      "changedFiles": 0,      "labels": [        {          "id": "string",          "name": "string",          "color": "string",          "description": "string"        }      ],      "version": {        "number": "string",        "headSha": "string",        "baseSha": "string",        "createdAt": "2026-01-01T00:00:00Z"      }    }  ],  "nextPageToken": "string"}
+{  "pullRequests": [    {      "id": "pr_01k2ja2000e0080000000000d4",      "number": "17",      "state": "open",      "draft": false,      "merged": false,      "title": "Add launch telemetry",      "body": "Adds structured launch telemetry to the ignition path.",      "head": {        "ref": "add-telemetry",        "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4"      },      "base": {        "ref": "main",        "sha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8"      },      "author": {        "user": {          "id": "user_01k2ja2000e0080000000000c3",          "email": "jane@acme.dev"        }      },      "createdAt": "2026-08-01T09:30:00Z",      "updatedAt": "2026-08-02T14:45:00Z",      "additions": 128,      "deletions": 46,      "changedFiles": 5,      "labels": [        {          "id": "lbl_01k2ja2000e0080000000000m1",          "name": "bug",          "color": "d73a4a",          "description": "Something isn't working"        }      ],      "version": {        "number": "3",        "headSha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",        "baseSha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8",        "createdAt": "2026-08-01T09:30:00Z"      }    }  ]}
 ```
 
 ### [Get Pull Request](#get-pull-request)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}`
 
+Scope[repository:pull\_requests:read](#scopes)AuthInstallation tokenUser credential
+
 Returns a single pull request, including its assigned labels.
 
 Closed or merged pull requests may additionally include `closedAt`, `mergedAt`, and `mergeCommitSha`. Treat `head.ref` and `base.ref` as opaque Origin ref strings; they may be short branch names or fully qualified `refs/heads/…` values.
 
-#### [Path Parameters](#path-parameters-36)
+#### [Path Parameters](#path-parameters-40)
 
 `ownerSlug` string Required
 
@@ -5095,7 +5600,7 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Response Fields](#response-fields-43)
+#### [Response Fields](#response-fields-47)
 
 `id` string
 
@@ -5165,6 +5670,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`author.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`author.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `author.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -5173,9 +5686,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`author.app.slug` string
+`author.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `author.serviceAccount` object
 
@@ -5264,12 +5777,14 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "id": "string",  "number": "string",  "state": "string",  "draft": false,  "merged": false,  "title": "string",  "body": "string",  "head": {    "ref": "string",    "sha": "string"  },  "base": {    "ref": "string",    "sha": "string"  },  "author": {    "user": {      "id": "string",      "email": "string"    }  },  "createdAt": "2026-01-01T00:00:00Z",  "updatedAt": "2026-01-01T00:00:00Z",  "closedAt": "2026-01-01T00:00:00Z",  "mergedAt": "2026-01-01T00:00:00Z",  "mergeCommitSha": "string",  "additions": 0,  "deletions": 0,  "changedFiles": 0,  "labels": [    {      "id": "string",      "name": "string",      "color": "string",      "description": "string"    }  ],  "version": {    "number": "string",    "headSha": "string",    "baseSha": "string",    "createdAt": "2026-01-01T00:00:00Z"  }}
+{  "id": "pr_01k2ja2000e0080000000000d4",  "number": "17",  "state": "open",  "draft": false,  "merged": false,  "title": "Add launch telemetry",  "body": "Adds structured launch telemetry to the ignition path.",  "head": {    "ref": "add-telemetry",    "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4"  },  "base": {    "ref": "main",    "sha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8"  },  "author": {    "user": {      "id": "user_01k2ja2000e0080000000000c3",      "email": "jane@acme.dev"    }  },  "createdAt": "2026-08-01T09:30:00Z",  "updatedAt": "2026-08-02T14:45:00Z",  "additions": 128,  "deletions": 46,  "changedFiles": 5,  "labels": [    {      "id": "lbl_01k2ja2000e0080000000000m1",      "name": "bug",      "color": "d73a4a",      "description": "Something isn't working"    }  ],  "version": {    "number": "3",    "headSha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",    "baseSha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8",    "createdAt": "2026-08-01T09:30:00Z"  }}
 ```
 
 ### [Create Pull Request](#create-pull-request)
 
 POST`/v1/origin/repos/{ownerSlug}/{repoName}/pulls`
+
+Scope[repository:pull\_requests:write](#scopes)AuthInstallation tokenUser credential
 
 Creates a pull request from `head` into `base`.
 
@@ -5277,7 +5792,9 @@ Optional `parent_pull_number` stacks this change on another open or draft pull r
 
 A `title` longer than 256 characters, or a `body` longer than 65,536 characters, returns `InvalidArgument` (HTTP 400). Both limits count Unicode code points.
 
-#### [Path Parameters](#path-parameters-37)
+A `head` with no history in common with `base` returns `InvalidArgument` (HTTP 400) and creates nothing. If a later push leaves an open pull request's head disjoint from its base, Origin closes the pull request and delivers [`pull_request.closed`](#events); a subsequent related push does not reopen it.
+
+#### [Path Parameters](#path-parameters-41)
 
 `ownerSlug` string Required
 
@@ -5287,7 +5804,7 @@ Owning entity's unique slug.
 
 Repo name, unique to the owner entity.
 
-#### [Request Body](#request-body-11)
+#### [Request Body](#request-body-13)
 
 `title` string Required
 
@@ -5313,7 +5830,7 @@ When true, create as a draft. When false or omitted, create as open (ready for r
 
 Optional parent pull request number when stacking this change on another open/draft change in the same repository.
 
-#### [Response Fields](#response-fields-44)
+#### [Response Fields](#response-fields-48)
 
 `id` string
 
@@ -5383,6 +5900,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`author.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`author.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `author.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -5391,9 +5916,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`author.app.slug` string
+`author.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `author.serviceAccount` object
 
@@ -5476,18 +6001,20 @@ Base SHA captured by this pull request version.
 RFC 3339 timestamp for creation of this pull request version.
 
 ```
-curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "title": "TITLE",  "head": "HEAD_BRANCH",  "base": "BASE_BRANCH"}'
+curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "title": "Add launch telemetry",  "body": "Adds structured launch telemetry to the ignition path.",  "head": "add-telemetry",  "base": "main",  "draft": false}'
 ```
 
 **Response shape:**
 
 ```
-{  "id": "string",  "number": "string",  "state": "string",  "draft": false,  "merged": false,  "title": "string",  "body": "string",  "head": {    "ref": "string",    "sha": "string"  },  "base": {    "ref": "string",    "sha": "string"  },  "author": {    "user": {      "id": "string",      "email": "string"    }  },  "createdAt": "2026-01-01T00:00:00Z",  "updatedAt": "2026-01-01T00:00:00Z",  "closedAt": "2026-01-01T00:00:00Z",  "mergedAt": "2026-01-01T00:00:00Z",  "mergeCommitSha": "string",  "additions": 0,  "deletions": 0,  "changedFiles": 0,  "labels": [    {      "id": "string",      "name": "string",      "color": "string",      "description": "string"    }  ],  "version": {    "number": "string",    "headSha": "string",    "baseSha": "string",    "createdAt": "2026-01-01T00:00:00Z"  }}
+{  "id": "pr_01k2ja2000e0080000000000d4",  "number": "17",  "state": "open",  "draft": false,  "merged": false,  "title": "Add launch telemetry",  "body": "Adds structured launch telemetry to the ignition path.",  "head": {    "ref": "add-telemetry",    "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4"  },  "base": {    "ref": "main",    "sha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8"  },  "author": {    "user": {      "id": "user_01k2ja2000e0080000000000c3",      "email": "jane@acme.dev"    }  },  "createdAt": "2026-08-01T09:30:00Z",  "updatedAt": "2026-08-02T14:45:00Z",  "additions": 128,  "deletions": 46,  "changedFiles": 5,  "labels": [    {      "id": "lbl_01k2ja2000e0080000000000m1",      "name": "bug",      "color": "d73a4a",      "description": "Something isn't working"    }  ],  "version": {    "number": "3",    "headSha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",    "baseSha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8",    "createdAt": "2026-08-01T09:30:00Z"  }}
 ```
 
 ### [Update Pull Request](#update-pull-request)
 
 PATCH`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}`
+
+Scope[repository:pull\_requests:write](#scopes)AuthInstallation tokenUser credential
 
 Updates a pull request's title, body, base branch, and/or lifecycle state.
 
@@ -5495,7 +6022,7 @@ Omitted fields are unchanged. Present fields are applied in order: metadata, the
 
 A `title` longer than 256 characters, or a `body` longer than 65,536 characters, returns `InvalidArgument` (HTTP 400). Both limits count Unicode code points.
 
-#### [Path Parameters](#path-parameters-38)
+#### [Path Parameters](#path-parameters-42)
 
 `ownerSlug` string Required
 
@@ -5507,7 +6034,7 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Request Body](#request-body-12)
+#### [Request Body](#request-body-14)
 
 `title` string
 
@@ -5529,7 +6056,7 @@ New body / description. An empty string clears the body. Maximum length: 65,536 
 
 New base branch. Retargets the pull request and may update stack parentage when the new base is another change's head (or the default branch).
 
-#### [Response Fields](#response-fields-45)
+#### [Response Fields](#response-fields-49)
 
 `id` string
 
@@ -5599,6 +6126,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`author.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`author.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `author.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -5607,9 +6142,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`author.app.slug` string
+`author.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `author.serviceAccount` object
 
@@ -5692,22 +6227,26 @@ Base SHA captured by this pull request version.
 RFC 3339 timestamp for creation of this pull request version.
 
 ```
-curl --request PATCH \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/PULL_NUMBER' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "title": "TITLE"}'
+curl --request PATCH \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/PULL_NUMBER' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "title": "Add launch telemetry",  "body": "Adds structured launch telemetry to the ignition path.",  "state": "open",  "draft": false,  "base": "main"}'
 ```
 
 **Response shape:**
 
 ```
-{  "id": "string",  "number": "string",  "state": "string",  "draft": false,  "merged": false,  "title": "string",  "body": "string",  "head": {    "ref": "string",    "sha": "string"  },  "base": {    "ref": "string",    "sha": "string"  },  "author": {    "user": {      "id": "string",      "email": "string"    }  },  "createdAt": "2026-01-01T00:00:00Z",  "updatedAt": "2026-01-01T00:00:00Z",  "closedAt": "2026-01-01T00:00:00Z",  "mergedAt": "2026-01-01T00:00:00Z",  "mergeCommitSha": "string",  "additions": 0,  "deletions": 0,  "changedFiles": 0,  "labels": [    {      "id": "string",      "name": "string",      "color": "string",      "description": "string"    }  ],  "version": {    "number": "string",    "headSha": "string",    "baseSha": "string",    "createdAt": "2026-01-01T00:00:00Z"  }}
+{  "id": "pr_01k2ja2000e0080000000000d4",  "number": "17",  "state": "open",  "draft": false,  "merged": false,  "title": "Add launch telemetry",  "body": "Adds structured launch telemetry to the ignition path.",  "head": {    "ref": "add-telemetry",    "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4"  },  "base": {    "ref": "main",    "sha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8"  },  "author": {    "user": {      "id": "user_01k2ja2000e0080000000000c3",      "email": "jane@acme.dev"    }  },  "createdAt": "2026-08-01T09:30:00Z",  "updatedAt": "2026-08-02T14:45:00Z",  "additions": 128,  "deletions": 46,  "changedFiles": 5,  "labels": [    {      "id": "lbl_01k2ja2000e0080000000000m1",      "name": "bug",      "color": "d73a4a",      "description": "Something isn't working"    }  ],  "version": {    "number": "3",    "headSha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",    "baseSha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8",    "createdAt": "2026-08-01T09:30:00Z"  }}
 ```
 
 ### [List Pull Request Comments](#list-pull-request-comments)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/comments`
 
-Lists every comment on a pull request in chronological order. Each comment includes its thread id so clients can group the flat response into threads.
+Scope[repository:pull\_requests:reviews:read](#scopes)AuthInstallation tokenUser credential
 
-#### [Path Parameters](#path-parameters-39)
+Lists every comment on a pull request in chronological order, optionally bounded to a creation-time window. Each comment carries its full thread: id, diff anchor, and resolution state. Group the flat response by `thread.id` without a second request.
+
+Page tokens embed the filters they were minted under, so a token replayed with different filters is rejected; restart pagination when a filter changes.
+
+#### [Path Parameters](#path-parameters-43)
 
 `ownerSlug` string Required
 
@@ -5719,7 +6258,7 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Query Parameters](#query-parameters-16)
+#### [Query Parameters](#query-parameters-17)
 
 `pageSize` integer
 
@@ -5729,7 +6268,19 @@ Maximum comments to return. Defaults to 30; maximum 100.
 
 Opaque token from the preceding page.
 
-#### [Response Fields](#response-fields-46)
+`since` string
+
+Optional inclusive lower bound on comment creation time, as an RFC 3339 timestamp such as `2026-08-01T00:00:00Z`. Returns only comments created at or after that instant. A malformed timestamp returns `InvalidArgument` (HTTP 400).
+
+`until` string
+
+Optional inclusive upper bound on comment creation time, in the same RFC 3339 format as `since`. Returns only comments created at or before that instant. A malformed timestamp returns `InvalidArgument` (HTTP 400).
+
+`threadIds` array
+
+Optional thread IDs that restrict the listing to comments in those threads. Omit to return every comment on the pull request. Duplicates are ignored, so the limit of 20 applies to distinct IDs. A longer list, or an empty ID, returns `InvalidArgument` (HTTP 400).
+
+#### [Response Fields](#response-fields-50)
 
 `comments` array
 
@@ -5741,11 +6292,59 @@ Stable pull request comment identifier.
 
 `comments[].thread` object
 
-Thread reference used to group related comments.
+The thread this comment belongs to, including its diff anchor and resolution state.
 
 `comments[].thread.id` string
 
-Identifier used to group comments in one pull request discussion thread.
+Stable identity of the thread. Group comments in one discussion by this value.
+
+`comments[].thread.version` object
+
+Pull request version the thread was filed against, including its head and base SHAs. The anchor is fixed to this version and does not move as the pull request gains versions.
+
+`comments[].thread.version.number` string
+
+Monotonic pull request version number encoded as a JSON string.
+
+`comments[].thread.version.headSha` string
+
+Head SHA captured by this pull request version.
+
+`comments[].thread.version.baseSha` string
+
+Base SHA captured by this pull request version.
+
+`comments[].thread.version.createdAt` string
+
+RFC 3339 timestamp for creation of this pull request version.
+
+`comments[].thread.path` string
+
+File path of the thread's diff anchor. Empty for general-discussion threads.
+
+`comments[].thread.side` string
+
+Diff side of the anchor. Allowed values: `left`, `right`. Unset for general-discussion threads.
+
+`comments[].thread.startLine` integer
+
+First line of the anchored range in the `side` version of the file. `0` for file-level and general-discussion threads.
+
+`comments[].thread.endLine` integer
+
+Inclusive last line of the anchored range. `0` when the anchor is a single line or has no line range.
+
+`comments[].thread.resolvedAt` string
+
+RFC 3339 timestamp for when the thread was resolved. Unset while the thread is open.
+
+`comments[].thread.createdAt` string
+
+RFC 3339 thread creation timestamp.
+
+`comments[].thread.updatedAt` string
+
+RFC 3339 timestamp for the latest thread update.
 
 `comments[].body` string
 
@@ -5767,6 +6366,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`comments[].author.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`comments[].author.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `comments[].author.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -5775,9 +6382,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`comments[].author.app.slug` string
+`comments[].author.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `comments[].author.serviceAccount` object
 
@@ -5846,16 +6453,18 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "comments": [    {      "id": "string",      "thread": {        "id": "string"      },      "body": "string",      "author": {        "user": {          "id": "string",          "email": "string"        }      },      "createdAt": "2026-01-01T00:00:00Z",      "updatedAt": "2026-01-01T00:00:00Z"    }  ],  "pullRequest": {    "id": "string",    "number": "string",    "repository": {      "id": "string",      "name": "string",      "owner": {        "slug": "string",        "id": "string",        "type": "team"      }    }  },  "nextPageToken": "string"}
+{  "comments": [    {      "id": "cmt_01k2ja2000e0080000000000e5",      "thread": {        "id": "cth_01k2ja2000e0080000000000s6",        "version": {          "number": "3",          "headSha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",          "baseSha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8",          "createdAt": "2026-08-01T09:30:00Z"        },        "path": "src/telemetry/retry.ts",        "side": "right",        "startLine": 42,        "endLine": 45,        "createdAt": "2026-08-01T09:30:00Z",        "updatedAt": "2026-08-02T14:45:00Z"      },      "body": "Should the retry budget be configurable?",      "author": {        "user": {          "id": "user_01k2ja2000e0080000000000c3",          "email": "jane@acme.dev"        }      },      "createdAt": "2026-08-01T09:30:00Z",      "updatedAt": "2026-08-02T14:45:00Z"    }  ],  "pullRequest": {    "id": "pr_01k2ja2000e0080000000000d4",    "number": "17",    "repository": {      "id": "repo_01k2ja2000e0080000000000q4",      "name": "rocket",      "owner": {        "slug": "acme",        "id": "ns_01k2ja2000e0080000000000p3",        "type": "team"      }    }  }}
 ```
 
 ### [Get Pull Request Comment](#get-pull-request-comment)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/comments/{commentId}`
 
+Scope[repository:pull\_requests:reviews:read](#scopes)AuthInstallation tokenUser credential
+
 Returns a single pull request comment by its stable Origin id. A comment outside the authorized repository, or a pending-review comment not visible to the caller, returns `404`.
 
-#### [Path Parameters](#path-parameters-40)
+#### [Path Parameters](#path-parameters-44)
 
 `ownerSlug` string Required
 
@@ -5867,7 +6476,7 @@ Repo name, unique to the owner entity.
 
 `commentId` string Required
 
-#### [Response Fields](#response-fields-47)
+#### [Response Fields](#response-fields-51)
 
 `id` string
 
@@ -5875,11 +6484,59 @@ Stable pull request comment identifier.
 
 `thread` object
 
-Thread reference used to group related comments.
+The thread this comment belongs to, including its diff anchor and resolution state.
 
 `thread.id` string
 
-Identifier used to group comments in one pull request discussion thread.
+Stable identity of the thread. Group comments in one discussion by this value.
+
+`thread.version` object
+
+Pull request version the thread was filed against, including its head and base SHAs. The anchor is fixed to this version and does not move as the pull request gains versions.
+
+`thread.version.number` string
+
+Monotonic pull request version number encoded as a JSON string.
+
+`thread.version.headSha` string
+
+Head SHA captured by this pull request version.
+
+`thread.version.baseSha` string
+
+Base SHA captured by this pull request version.
+
+`thread.version.createdAt` string
+
+RFC 3339 timestamp for creation of this pull request version.
+
+`thread.path` string
+
+File path of the thread's diff anchor. Empty for general-discussion threads.
+
+`thread.side` string
+
+Diff side of the anchor. Allowed values: `left`, `right`. Unset for general-discussion threads.
+
+`thread.startLine` integer
+
+First line of the anchored range in the `side` version of the file. `0` for file-level and general-discussion threads.
+
+`thread.endLine` integer
+
+Inclusive last line of the anchored range. `0` when the anchor is a single line or has no line range.
+
+`thread.resolvedAt` string
+
+RFC 3339 timestamp for when the thread was resolved. Unset while the thread is open.
+
+`thread.createdAt` string
+
+RFC 3339 thread creation timestamp.
+
+`thread.updatedAt` string
+
+RFC 3339 timestamp for the latest thread update.
 
 `body` string
 
@@ -5901,6 +6558,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`author.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`author.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `author.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -5909,9 +6574,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`author.app.slug` string
+`author.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `author.serviceAccount` object
 
@@ -5936,16 +6601,22 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "id": "string",  "thread": {    "id": "string"  },  "body": "string",  "author": {    "user": {      "id": "string",      "email": "string"    }  },  "createdAt": "2026-01-01T00:00:00Z",  "updatedAt": "2026-01-01T00:00:00Z"}
+{  "id": "cmt_01k2ja2000e0080000000000e5",  "thread": {    "id": "cth_01k2ja2000e0080000000000s6",    "version": {      "number": "3",      "headSha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",      "baseSha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8",      "createdAt": "2026-08-01T09:30:00Z"    },    "path": "src/telemetry/retry.ts",    "side": "right",    "startLine": 42,    "endLine": 45,    "createdAt": "2026-08-01T09:30:00Z",    "updatedAt": "2026-08-02T14:45:00Z"  },  "body": "Should the retry budget be configurable?",  "author": {    "user": {      "id": "user_01k2ja2000e0080000000000c3",      "email": "jane@acme.dev"    }  },  "createdAt": "2026-08-01T09:30:00Z",  "updatedAt": "2026-08-02T14:45:00Z"}
 ```
 
 ### [Create Pull Request Comment](#create-pull-request-comment)
 
 POST`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/comments`
 
-Creates a general-discussion comment or reply on an Origin pull request. Omitting `thread_id` starts a new thread; providing it replies to that thread. These are general-discussion comments, not diff-anchored review comments. Bodies longer than 65,536 characters are rejected with `InvalidArgument` (HTTP 400).
+Scope[repository:pull\_requests:reviews:write](#scopes)AuthInstallation tokenUser credential
 
-#### [Path Parameters](#path-parameters-41)
+Creates a comment on an Origin pull request. The comment targets exactly one of four things: `threadId` replies to an existing thread, general-discussion and inline alike; `inline` opens a new thread anchored to a line range in the pull request version's diff; `file` opens a new thread on a whole file in that diff; supplying none of them opens a new general-discussion thread. Bodies longer than 65,536 characters are rejected with `InvalidArgument` (HTTP 400).
+
+An `inline` anchor must reference the version's diff. The `path` must be part of that diff, and the `side` must have content there, so anchoring `left` on an added file or `right` on a deleted file is rejected with `InvalidArgument` (HTTP 400). Any line of a changed file anchors; the range is not restricted to the diff's hunks. Origin never falls back to a general-discussion comment when an anchor is invalid.
+
+A `file` anchor carries the path alone. Origin derives the side from the file's change kind, the base version for a deleted file and the head version otherwise, and returns it on `thread.side`. Send the deleted path for a deletion and the head path for every other change. A path outside the diff is rejected with `InvalidArgument` (HTTP 400), as is a renamed file's pre-rename source path.
+
+#### [Path Parameters](#path-parameters-45)
 
 `ownerSlug` string Required
 
@@ -5957,7 +6628,7 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Request Body](#request-body-13)
+#### [Request Body](#request-body-15)
 
 `body` string Required
 
@@ -5965,9 +6636,41 @@ Comment text. Maximum length: 65,536 characters, counted as Unicode code points.
 
 `threadId` string
 
-Existing thread id to reply to. Omit to create a new general-discussion thread.
+Existing thread id to reply to. Omit to open a new thread. Cannot be combined with `versionNumber`.
 
-#### [Response Fields](#response-fields-48)
+`inline` object
+
+Diff anchor for a new inline thread. Cannot be combined with `threadId`.
+
+`inline.path` string Required
+
+File path in the pull request version's diff.
+
+`inline.side` string Required
+
+Diff side of the anchor. Allowed values: `left` for the base version of the file, `right` for the head version.
+
+`inline.startLine` integer Required
+
+First 1-based line of the anchored range in the `side` version of the file.
+
+`inline.endLine` integer
+
+Inclusive last line of the anchored range. Must be greater than or equal to `startLine`. Omit for a single-line anchor.
+
+`file` object
+
+Anchor for a new file-level thread on a whole file in the pull request version's diff. Cannot be combined with `threadId` or `inline`.
+
+`file.path` string Required
+
+File path in the pull request version's diff: the deleted path for a deletion, the head path otherwise.
+
+`versionNumber` string
+
+Pull request version number to file a new thread against. `0` or unset means the latest version at call time. Only meaningful for new threads.
+
+#### [Response Fields](#response-fields-52)
 
 `id` string
 
@@ -5975,11 +6678,59 @@ Stable pull request comment identifier.
 
 `thread` object
 
-Thread reference used to group related comments.
+The thread this comment belongs to. A reply carries the thread id only, and a new general-discussion thread carries the id and timestamps; a new inline thread carries the full anchor. Read [Get Pull Request Comment](#get-pull-request-comment) or [List Pull Request Comments](#list-pull-request-comments) for complete thread state.
 
 `thread.id` string
 
-Identifier used to group comments in one pull request discussion thread.
+Stable identity of the thread. Group comments in one discussion by this value.
+
+`thread.version` object
+
+Pull request version the thread was filed against, including its head and base SHAs. The anchor is fixed to this version and does not move as the pull request gains versions.
+
+`thread.version.number` string
+
+Monotonic pull request version number encoded as a JSON string.
+
+`thread.version.headSha` string
+
+Head SHA captured by this pull request version.
+
+`thread.version.baseSha` string
+
+Base SHA captured by this pull request version.
+
+`thread.version.createdAt` string
+
+RFC 3339 timestamp for creation of this pull request version.
+
+`thread.path` string
+
+File path of the thread's diff anchor. Empty for general-discussion threads.
+
+`thread.side` string
+
+Diff side of the anchor. Allowed values: `left`, `right`. Unset for general-discussion threads.
+
+`thread.startLine` integer
+
+First line of the anchored range in the `side` version of the file. `0` for file-level and general-discussion threads.
+
+`thread.endLine` integer
+
+Inclusive last line of the anchored range. `0` when the anchor is a single line or has no line range.
+
+`thread.resolvedAt` string
+
+RFC 3339 timestamp for when the thread was resolved. Unset while the thread is open.
+
+`thread.createdAt` string
+
+RFC 3339 thread creation timestamp.
+
+`thread.updatedAt` string
+
+RFC 3339 timestamp for the latest thread update.
 
 `body` string
 
@@ -6001,6 +6752,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`author.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`author.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `author.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -6009,9 +6768,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`author.app.slug` string
+`author.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `author.serviceAccount` object
 
@@ -6030,24 +6789,26 @@ RFC 3339 comment creation timestamp.
 RFC 3339 timestamp for the latest comment edit.
 
 ```
-curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/PULL_NUMBER/comments' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "body": "BODY"}'
+curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/PULL_NUMBER/comments' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "body": "Should the retry budget be configurable?"}'
 ```
 
 **Response shape:**
 
 ```
-{  "id": "string",  "thread": {    "id": "string"  },  "body": "string",  "author": {    "user": {      "id": "string",      "email": "string"    }  },  "createdAt": "2026-01-01T00:00:00Z",  "updatedAt": "2026-01-01T00:00:00Z"}
+{  "id": "cmt_01k2ja2000e0080000000000e5",  "thread": {    "id": "cth_01k2ja2000e0080000000000s6",    "version": {      "number": "3",      "headSha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",      "baseSha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8",      "createdAt": "2026-08-01T09:30:00Z"    },    "path": "src/telemetry/retry.ts",    "side": "right",    "startLine": 42,    "endLine": 45,    "createdAt": "2026-08-01T09:30:00Z",    "updatedAt": "2026-08-02T14:45:00Z"  },  "body": "Should the retry budget be configurable?",  "author": {    "user": {      "id": "user_01k2ja2000e0080000000000c3",      "email": "jane@acme.dev"    }  },  "createdAt": "2026-08-01T09:30:00Z",  "updatedAt": "2026-08-02T14:45:00Z"}
 ```
 
 ### [Update Pull Request Comment](#update-pull-request-comment)
 
 PATCH`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/comments/{commentId}`
 
+Scope[repository:pull\_requests:reviews:write](#scopes)AuthInstallation tokenUser credential
+
 Updates a pull request comment by its stable Origin id.
 
 Replaces the comment body. The comment must belong to the repository in the path, be visible to the caller, and have been authored by that caller. Cross-repository and hidden pending-review comments return `404`; a visible comment owned by another actor returns `403`. Bodies longer than 65,536 characters are rejected with `InvalidArgument` (HTTP 400).
 
-#### [Path Parameters](#path-parameters-42)
+#### [Path Parameters](#path-parameters-46)
 
 `ownerSlug` string Required
 
@@ -6059,13 +6820,13 @@ Repo name, unique to the owner entity.
 
 `commentId` string Required
 
-#### [Request Body](#request-body-14)
+#### [Request Body](#request-body-16)
 
 `body` string Required
 
 Replacement comment text. Maximum length: 65,536 characters, counted as Unicode code points.
 
-#### [Response Fields](#response-fields-49)
+#### [Response Fields](#response-fields-53)
 
 `id` string
 
@@ -6073,11 +6834,59 @@ Stable pull request comment identifier.
 
 `thread` object
 
-Thread reference used to group related comments.
+The thread this comment belongs to, including its diff anchor and resolution state.
 
 `thread.id` string
 
-Identifier used to group comments in one pull request discussion thread.
+Stable identity of the thread. Group comments in one discussion by this value.
+
+`thread.version` object
+
+Pull request version the thread was filed against, including its head and base SHAs. The anchor is fixed to this version and does not move as the pull request gains versions.
+
+`thread.version.number` string
+
+Monotonic pull request version number encoded as a JSON string.
+
+`thread.version.headSha` string
+
+Head SHA captured by this pull request version.
+
+`thread.version.baseSha` string
+
+Base SHA captured by this pull request version.
+
+`thread.version.createdAt` string
+
+RFC 3339 timestamp for creation of this pull request version.
+
+`thread.path` string
+
+File path of the thread's diff anchor. Empty for general-discussion threads.
+
+`thread.side` string
+
+Diff side of the anchor. Allowed values: `left`, `right`. Unset for general-discussion threads.
+
+`thread.startLine` integer
+
+First line of the anchored range in the `side` version of the file. `0` for file-level and general-discussion threads.
+
+`thread.endLine` integer
+
+Inclusive last line of the anchored range. `0` when the anchor is a single line or has no line range.
+
+`thread.resolvedAt` string
+
+RFC 3339 timestamp for when the thread was resolved. Unset while the thread is open.
+
+`thread.createdAt` string
+
+RFC 3339 thread creation timestamp.
+
+`thread.updatedAt` string
+
+RFC 3339 timestamp for the latest thread update.
 
 `body` string
 
@@ -6099,6 +6908,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`author.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`author.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `author.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -6107,9 +6924,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`author.app.slug` string
+`author.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `author.serviceAccount` object
 
@@ -6128,24 +6945,120 @@ RFC 3339 comment creation timestamp.
 RFC 3339 timestamp for the latest comment edit.
 
 ```
-curl --request PATCH \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/comments/COMMENT_ID' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "body": "BODY"}'
+curl --request PATCH \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/comments/COMMENT_ID' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "body": "Should the retry budget be configurable?"}'
 ```
 
 **Response shape:**
 
 ```
-{  "id": "string",  "thread": {    "id": "string"  },  "body": "string",  "author": {    "user": {      "id": "string",      "email": "string"    }  },  "createdAt": "2026-01-01T00:00:00Z",  "updatedAt": "2026-01-01T00:00:00Z"}
+{  "id": "cmt_01k2ja2000e0080000000000e5",  "thread": {    "id": "cth_01k2ja2000e0080000000000s6",    "version": {      "number": "3",      "headSha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",      "baseSha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8",      "createdAt": "2026-08-01T09:30:00Z"    },    "path": "src/telemetry/retry.ts",    "side": "right",    "startLine": 42,    "endLine": 45,    "createdAt": "2026-08-01T09:30:00Z",    "updatedAt": "2026-08-02T14:45:00Z"  },  "body": "Should the retry budget be configurable?",  "author": {    "user": {      "id": "user_01k2ja2000e0080000000000c3",      "email": "jane@acme.dev"    }  },  "createdAt": "2026-08-01T09:30:00Z",  "updatedAt": "2026-08-02T14:45:00Z"}
+```
+
+### [Update Pull Request Thread](#update-pull-request-thread)
+
+PATCH`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/threads/{threadId}`
+
+Scope[repository:pull\_requests:reviews:write](#scopes)AuthInstallation tokenUser credential
+
+Resolves or reopens a pull request comment thread and returns the thread's updated state. Resolving an already-resolved thread, or reopening an already-open one, is a no-op.
+
+The thread must belong to the repository in the path; a thread stored on another repository returns `404`. Replying to a resolved thread with [Create Pull Request Comment](#create-pull-request-comment) is allowed and does not reopen it.
+
+#### [Path Parameters](#path-parameters-47)
+
+`ownerSlug` string Required
+
+Owning entity's unique slug.
+
+`repoName` string Required
+
+Repo name, unique to the owner entity.
+
+`threadId` string Required
+
+Stable Origin thread ID.
+
+#### [Request Body](#request-body-17)
+
+`resolved` boolean Required
+
+Target resolution state. `true` resolves the thread; `false` reopens it.
+
+#### [Response Fields](#response-fields-54)
+
+`id` string
+
+Stable identity of the thread. Group comments in one discussion by this value.
+
+`version` object
+
+Pull request version the thread was filed against, including its head and base SHAs. The anchor is fixed to this version and does not move as the pull request gains versions.
+
+`version.number` string
+
+Monotonic pull request version number encoded as a JSON string.
+
+`version.headSha` string
+
+Head SHA captured by this pull request version.
+
+`version.baseSha` string
+
+Base SHA captured by this pull request version.
+
+`version.createdAt` string
+
+RFC 3339 timestamp for creation of this pull request version.
+
+`path` string
+
+File path of the thread's diff anchor. Empty for general-discussion threads.
+
+`side` string
+
+Diff side of the anchor. Allowed values: `left`, `right`. Unset for general-discussion threads.
+
+`startLine` integer
+
+First line of the anchored range in the `side` version of the file. `0` for file-level and general-discussion threads.
+
+`endLine` integer
+
+Inclusive last line of the anchored range. `0` when the anchor is a single line or has no line range.
+
+`resolvedAt` string
+
+RFC 3339 timestamp for when the thread was resolved. Unset while the thread is open.
+
+`createdAt` string
+
+RFC 3339 thread creation timestamp.
+
+`updatedAt` string
+
+RFC 3339 timestamp for the latest thread update.
+
+```
+curl --request PATCH \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/threads/THREAD_ID' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "resolved": true}'
+```
+
+**Response shape:**
+
+```
+{  "id": "cth_01k2ja2000e0080000000000s6",  "version": {    "number": "3",    "headSha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",    "baseSha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8",    "createdAt": "2026-08-01T09:30:00Z"  },  "path": "src/telemetry/retry.ts",  "side": "right",  "startLine": 42,  "endLine": 45,  "resolvedAt": "2026-08-03T10:00:00Z",  "createdAt": "2026-08-01T09:30:00Z",  "updatedAt": "2026-08-03T10:00:00Z"}
 ```
 
 ### [List Pull Request Commits](#list-pull-request-commits)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/commits`
 
+Scope[repository:pull\_requests:read](#scopes)AuthInstallation tokenUser credential
+
 Lists the commits in a pull request.
 
 Returns the pull request's commits as sparse `Commit` objects (no `stats`). Results default to 30 and are capped at 100, with at most 250 commits visible overall. A page token fixes the pull request version, page size, and commit cursor; `pageSize` must match the token on later requests, and a token that no longer matches the current head or base returns `400`.
 
-#### [Path Parameters](#path-parameters-43)
+#### [Path Parameters](#path-parameters-48)
 
 `ownerSlug` string Required
 
@@ -6157,7 +7070,7 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Query Parameters](#query-parameters-17)
+#### [Query Parameters](#query-parameters-18)
 
 `pageSize` integer
 
@@ -6167,7 +7080,7 @@ Max commits to return. Defaults to 30 when unset or 0. Values above 100 are clam
 
 Opaque cursor from a previous response's `next_page_token`. Empty for the first page. The token is bound to the repository, pull request version, page size, and commit offset.
 
-#### [Response Fields](#response-fields-50)
+#### [Response Fields](#response-fields-55)
 
 `commits` array
 
@@ -6244,18 +7157,20 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "commits": [    {      "sha": "string",      "commit": {        "author": {          "name": "string",          "email": "string",          "date": "string"        },        "committer": {          "name": "string",          "email": "string",          "date": "string"        },        "message": "string",        "tree": {          "sha": "string"        }      },      "parents": [        {          "sha": "string"        }      ]    }  ],  "nextPageToken": "string"}
+{  "commits": [    {      "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",      "commit": {        "author": {          "name": "Jane Doe",          "email": "jane@acme.dev",          "date": "2026-08-01T09:30:00Z"        },        "committer": {          "name": "Jane Doe",          "email": "jane@acme.dev",          "date": "2026-08-01T09:30:00Z"        },        "message": "Add launch telemetry",        "tree": {          "sha": "a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8"        }      },      "parents": [        {          "sha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8"        }      ],      "stats": {        "additions": 128,        "deletions": 46,        "total": 174      }    }  ]}
 ```
 
 ### [List Pull Request Files](#list-pull-request-files)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/files`
 
+Scope[repository:pull\_requests:read](#scopes)AuthInstallation tokenUser credential
+
 Lists the files changed in a pull request.
 
 Returns filename, status, line counts, patch, and optional previous filename. Results default to 30 files and are capped at 100. A page token fixes the pull request version, page size, and file cursor; `pageSize` must match the token on later requests, and a token that no longer matches the current head or base returns `400`.
 
-#### [Path Parameters](#path-parameters-44)
+#### [Path Parameters](#path-parameters-49)
 
 `ownerSlug` string Required
 
@@ -6267,7 +7182,7 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Query Parameters](#query-parameters-18)
+#### [Query Parameters](#query-parameters-19)
 
 `pageSize` integer
 
@@ -6277,7 +7192,7 @@ Max changed files to return. Defaults to 30 when unset or 0. Values above 100 ar
 
 Opaque cursor from a previous response's `next_page_token`. Empty for the first page. The token is bound to the repository, pull request version, page size, and changed-file cursor.
 
-#### [Response Fields](#response-fields-51)
+#### [Response Fields](#response-fields-56)
 
 `files` array
 
@@ -6322,18 +7237,20 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "files": [    {      "filename": "string",      "status": "string",      "additions": 0,      "deletions": 0,      "changes": 0,      "patch": "string",      "previousFilename": "string"    }  ],  "nextPageToken": "string"}
+{  "files": [    {      "filename": "src/telemetry.ts",      "status": "modified",      "additions": 6,      "deletions": 3,      "changes": 9,      "patch": "@@ -12,6 +12,9 @@\n import { ignite } from \"./ignition\";\n+import { emitLaunchTelemetry } from \"./telemetry\";\n"    }  ]}
 ```
 
 ### [List Pull Request Labels](#list-pull-request-labels)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/labels`
 
+Scope[repository:pull\_requests:read](#scopes)AuthInstallation tokenUser credential
+
 Lists every label assigned to a pull request, ordered by name.
 
 The response carries the full assigned list rather than a page of it, so this endpoint takes no pagination parameters. A pull request can have at most 100 labels. An unknown pull request returns `404`.
 
-#### [Path Parameters](#path-parameters-45)
+#### [Path Parameters](#path-parameters-50)
 
 `ownerSlug` string Required
 
@@ -6345,7 +7262,7 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Response Fields](#response-fields-52)
+#### [Response Fields](#response-fields-57)
 
 `labels` array
 
@@ -6374,18 +7291,20 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "labels": [    {      "id": "string",      "name": "string",      "color": "string",      "description": "string"    }  ]}
+{  "labels": [    {      "id": "lbl_01k2ja2000e0080000000000m1",      "name": "bug",      "color": "d73a4a",      "description": "Something isn't working"    }  ]}
 ```
 
 ### [Set Pull Request Labels](#set-pull-request-labels)
 
 PUT`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/labels`
 
+Scope[repository:pull\_requests:write](#scopes)AuthInstallation tokenUser credential
+
 Replaces every label assigned to a pull request with the labels you name.
 
 An empty list removes every assigned label. The labels must already exist in the repository; an unknown name or an unknown pull request returns `404`. A pull request can have at most 100 labels, so naming more than 100 returns `FailedPrecondition` (HTTP 400). The response lists the labels assigned after the replacement, ordered by name.
 
-#### [Path Parameters](#path-parameters-46)
+#### [Path Parameters](#path-parameters-51)
 
 `ownerSlug` string Required
 
@@ -6397,37 +7316,39 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Request Body](#request-body-15)
+#### [Request Body](#request-body-18)
 
 `labels` array
 
 Label names to assign. Maximum 100. An empty list removes every assigned label. Duplicate names are ignored.
 
-#### [Response Fields](#response-fields-53)
+#### [Response Fields](#response-fields-58)
 
 `labels` array
 
 Labels assigned after the replacement, ordered by name. Each entry carries `id`, `name`, `color`, and `description`.
 
 ```
-curl --request PUT \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/PULL_NUMBER/labels' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "labels": [    "LABEL_NAME"  ]}'
+curl --request PUT \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/PULL_NUMBER/labels' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "labels": [    "bug"  ]}'
 ```
 
 **Response shape:**
 
 ```
-{  "labels": [    {      "id": "string",      "name": "string",      "color": "string",      "description": "string"    }  ]}
+{  "labels": [    {      "id": "lbl_01k2ja2000e0080000000000m1",      "name": "bug",      "color": "d73a4a",      "description": "Something isn't working"    }  ]}
 ```
 
 ### [Add Pull Request Labels](#add-pull-request-labels)
 
 POST`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/labels`
 
+Scope[repository:pull\_requests:write](#scopes)AuthInstallation tokenUser credential
+
 Adds existing repository labels to a pull request.
 
 Labels already assigned to the pull request stay assigned. The labels must already exist in the repository; an unknown name or an unknown pull request returns `404`. The request must name between 1 and 100 labels, and a pull request can have at most 100 labels in total, so a request that would take it past that limit returns `FailedPrecondition` (HTTP 400). The response lists the labels you named, not the pull request's full set; read the full set with [List Pull Request Labels](#list-pull-request-labels).
 
-#### [Path Parameters](#path-parameters-47)
+#### [Path Parameters](#path-parameters-52)
 
 `ownerSlug` string Required
 
@@ -6439,37 +7360,39 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Request Body](#request-body-16)
+#### [Request Body](#request-body-19)
 
 `labels` array Required
 
 Label names to add. Maximum 100. Duplicate names are ignored.
 
-#### [Response Fields](#response-fields-54)
+#### [Response Fields](#response-fields-59)
 
 `labels` array
 
 Labels named in the request. Each entry carries `id`, `name`, `color`, and `description`.
 
 ```
-curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/PULL_NUMBER/labels' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "labels": [    "LABEL_NAME"  ]}'
+curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/PULL_NUMBER/labels' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "labels": [    "bug"  ]}'
 ```
 
 **Response shape:**
 
 ```
-{  "labels": [    {      "id": "string",      "name": "string",      "color": "string",      "description": "string"    }  ]}
+{  "labels": [    {      "id": "lbl_01k2ja2000e0080000000000m1",      "name": "bug",      "color": "d73a4a",      "description": "Something isn't working"    }  ]}
 ```
 
 ### [Remove All Pull Request Labels](#remove-all-pull-request-labels)
 
 DELETE`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/labels`
 
+Scope[repository:pull\_requests:write](#scopes)AuthInstallation tokenUser credential
+
 Removes every label from a pull request.
 
 The request succeeds when the pull request has no labels. An unknown pull request returns `404`. The response body is empty.
 
-#### [Path Parameters](#path-parameters-48)
+#### [Path Parameters](#path-parameters-53)
 
 `ownerSlug` string Required
 
@@ -6481,7 +7404,7 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Response Fields](#response-fields-55)
+#### [Response Fields](#response-fields-60)
 
 Successful requests return no response body.
 
@@ -6499,11 +7422,13 @@ curl --request DELETE \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLU
 
 DELETE`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/labels/{labelName}`
 
+Scope[repository:pull\_requests:write](#scopes)AuthInstallation tokenUser credential
+
 Removes one label from a pull request.
 
 A label that is not assigned to the pull request returns `404`, as does an unknown pull request. The response lists the labels remaining on the pull request, ordered by name.
 
-#### [Path Parameters](#path-parameters-49)
+#### [Path Parameters](#path-parameters-54)
 
 `ownerSlug` string Required
 
@@ -6519,7 +7444,7 @@ Repo name, unique to the owner entity.
 
 Name of the label to remove.
 
-#### [Response Fields](#response-fields-56)
+#### [Response Fields](#response-fields-61)
 
 `labels` array
 
@@ -6532,18 +7457,20 @@ curl --request DELETE \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLU
 **Response shape:**
 
 ```
-{  "labels": [    {      "id": "string",      "name": "string",      "color": "string",      "description": "string"    }  ]}
+{  "labels": [    {      "id": "lbl_01k2ja2000e0080000000000m1",      "name": "bug",      "color": "d73a4a",      "description": "Something isn't working"    }  ]}
 ```
 
 ### [Merge Pull Request](#merge-pull-request)
 
 POST`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/merge`
 
+Scope[repository:contents:write](#scopes)AuthInstallation tokenUser credential
+
 Merges a pull request into its base.
 
 For a stacked pull request, merges the entire root-to-target prefix ending at this pull number. not only this pull. Supported only on native Origin repositories; mirrored repositories are rejected.
 
-#### [Path Parameters](#path-parameters-50)
+#### [Path Parameters](#path-parameters-55)
 
 `ownerSlug` string Required
 
@@ -6557,13 +7484,13 @@ Repo name, unique to the owner entity.
 
 Pull number to merge. When this pull is stacked, the merge lands every pull from the stack root through this number.
 
-#### [Request Body](#request-body-17)
+#### [Request Body](#request-body-20)
 
 `expectedHeadSha` string
 
 Guard against merging a head your app has not seen: the full commit SHA (40 or 64 hexadecimal characters) expected to be the pull request's current head. When the head has moved, the merge is rejected with `ABORTED` (HTTP 409 Conflict) and nothing merges. Values that are not a full commit SHA are rejected with `InvalidArgument` (HTTP 400). Omit to merge whatever the current head is. Not evaluated when the pull request is already merged, which returns idempotent success.
 
-#### [Response Fields](#response-fields-57)
+#### [Response Fields](#response-fields-62)
 
 `mergeCommitSha` string
 
@@ -6645,6 +7572,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`pullRequest.author.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`pullRequest.author.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `pullRequest.author.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -6653,9 +7588,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`pullRequest.author.app.slug` string
+`pullRequest.author.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `pullRequest.author.serviceAccount` object
 
@@ -6738,22 +7673,26 @@ Base SHA captured by this pull request version.
 RFC 3339 timestamp for creation of this pull request version.
 
 ```
-curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/PULL_NUMBER/merge' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{    "expectedHeadSha": "EXPECTED_HEAD_SHA"  }'
+curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/PULL_NUMBER/merge' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "expectedHeadSha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4"}'
 ```
 
 **Response shape:**
 
 ```
-{  "mergeCommitSha": "string",  "mergedPullNumbers": [    "string"  ],  "pullRequest": {    "id": "string",    "number": "string",    "state": "string",    "draft": false,    "merged": false,    "title": "string",    "body": "string",    "head": {      "ref": "string",      "sha": "string"    },    "base": {      "ref": "string",      "sha": "string"    },    "author": {      "user": {        "id": "string",        "email": "string"      }    },    "createdAt": "2026-01-01T00:00:00Z",    "updatedAt": "2026-01-01T00:00:00Z",    "closedAt": "2026-01-01T00:00:00Z",    "mergedAt": "2026-01-01T00:00:00Z",    "mergeCommitSha": "string",    "additions": 0,    "deletions": 0,    "changedFiles": 0,    "labels": [      {        "id": "string",        "name": "string",        "color": "string",        "description": "string"      }    ],    "version": {      "number": "string",      "headSha": "string",      "baseSha": "string",      "createdAt": "2026-01-01T00:00:00Z"    }  }}
+{  "mergeCommitSha": "5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d",  "mergedPullNumbers": [    "17"  ],  "pullRequest": {    "id": "pr_01k2ja2000e0080000000000d4",    "number": "17",    "state": "closed",    "draft": false,    "merged": true,    "title": "Add launch telemetry",    "body": "Adds structured launch telemetry to the ignition path.",    "head": {      "ref": "add-telemetry",      "sha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4"    },    "base": {      "ref": "main",      "sha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8"    },    "author": {      "user": {        "id": "user_01k2ja2000e0080000000000c3",        "email": "jane@acme.dev"      }    },    "createdAt": "2026-08-01T09:30:00Z",    "updatedAt": "2026-08-02T14:45:00Z",    "closedAt": "2026-08-03T10:15:00Z",    "mergedAt": "2026-08-03T10:15:00Z",    "mergeCommitSha": "5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d",    "additions": 128,    "deletions": 46,    "changedFiles": 5,    "labels": [      {        "id": "lbl_01k2ja2000e0080000000000m1",        "name": "bug",        "color": "d73a4a",        "description": "Something isn't working"      }    ],    "version": {      "number": "3",      "headSha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",      "baseSha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8",      "createdAt": "2026-08-01T09:30:00Z"    }  }}
 ```
 
-### [List Pull Request Reviews](#list-pull-request-reviews)
+### [List Pull Request Requested Reviewers](#list-pull-request-requested-reviewers)
 
-GET`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/reviews`
+GET`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/requested_reviewers`
 
-Lists submitted reviews on a pull request, ordered by `submitted_at` ascending. Pending reviews are omitted.
+Scope[repository:pull\_requests:reviews:read](#scopes)AuthInstallation tokenUser credential
 
-#### [Path Parameters](#path-parameters-51)
+Lists the users and groups whose review is currently requested on a pull request.
+
+A direct request clears when that user submits a review, and a group request clears when any current member of the group submits. Unsubmitted draft reviews leave the request pending, and requesting review again after a submission returns the reviewer to this list. Groups without a readable public identifier are omitted.
+
+#### [Path Parameters](#path-parameters-56)
 
 `ownerSlug` string Required
 
@@ -6765,7 +7704,195 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Query Parameters](#query-parameters-19)
+Repository-local pull request number.
+
+#### [Response Fields](#response-fields-63)
+
+`users` array
+
+Users whose review is requested. Empty when none are pending.
+
+`users[].id` string
+
+Encoded user identifier (`user_…`), the same format the organization API uses.
+
+`users[].email` string
+
+Email address of the user. Empty when the account has none.
+
+`users[].displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`users[].handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
+`groups` array
+
+Groups whose review is requested. Empty when none are pending.
+
+`groups[].id` string
+
+Group public identifier (`grp_…`).
+
+```
+curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/PULL_NUMBER/requested_reviewers' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN'
+```
+
+**Response shape:**
+
+```
+{  "users": [    {      "id": "user_01k2ja2000e0080000000000c3",      "email": "jane@acme.dev"    }  ],  "groups": [    {      "id": "grp_01k2ja2000e0080000000000n2"    }  ]}
+```
+
+### [Request Pull Request Reviewers](#request-pull-request-reviewers)
+
+POST`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/requested_reviewers`
+
+Scope[repository:pull\_requests:reviews:write](#scopes)AuthInstallation tokenUser credential
+
+Requests reviews from the given users and groups on a pull request, and returns the reviewers this call requested.
+
+Identifiers resolve against the repository's reviewer candidates by public id, user email, or group slug. Display names do not resolve. An unknown or ambiguous identifier returns `InvalidArgument` (HTTP 400) naming the identifier, and at least one non-empty entry is required across `users` and `groups`.
+
+Requesting an already-requested reviewer bumps the request timestamp, so a reviewer who had submitted a review reappears as pending. A reviewer who is not a candidate for the repository returns `PermissionDenied` (HTTP 403).
+
+#### [Path Parameters](#path-parameters-57)
+
+`ownerSlug` string Required
+
+Owning entity's unique slug.
+
+`repoName` string Required
+
+Repo name, unique to the owner entity.
+
+`pullNumber` string Required
+
+Repository-local pull request number.
+
+#### [Request Body](#request-body-21)
+
+`users` array
+
+User identifiers to request. Each entry must uniquely match a user candidate for the repository by public `user_…` id or email.
+
+`groups` array
+
+Group identifiers to request. Each entry must uniquely match a group candidate for the repository by public `grp_…` id, qualified group slug, or group slug.
+
+#### [Response Fields](#response-fields-64)
+
+`users` array
+
+Users this call requested.
+
+`users[].id` string
+
+Encoded user identifier (`user_…`), the same format the organization API uses.
+
+`users[].email` string
+
+Email address of the user. Empty when the account has none.
+
+`users[].displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`users[].handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
+`groups` array
+
+Groups this call requested.
+
+`groups[].id` string
+
+Group public identifier (`grp_…`).
+
+```
+curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/PULL_NUMBER/requested_reviewers' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "users": [    "user_01k2ja2000e0080000000000c3"  ],  "groups": [    "grp_01k2ja2000e0080000000000n2"  ]}'
+```
+
+**Response shape:**
+
+```
+{  "users": [    {      "id": "user_01k2ja2000e0080000000000c3",      "email": "jane@acme.dev"    }  ],  "groups": [    {      "id": "grp_01k2ja2000e0080000000000n2"    }  ]}
+```
+
+### [Remove Pull Request Requested Reviewers](#remove-pull-request-requested-reviewers)
+
+DELETE`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/requested_reviewers`
+
+Scope[repository:pull\_requests:reviews:write](#scopes)AuthInstallation tokenUser credential
+
+Removes requested reviews from the given users and groups on a pull request. The response body is empty.
+
+Identifiers resolve against the repository's reviewer candidates by public id, user email, or group slug. Display names do not resolve. An unknown or ambiguous identifier returns `InvalidArgument` (HTTP 400) naming the identifier, and at least one non-empty entry is required across `users` and `groups`.
+
+Removing a user or group that is not currently requested is a no-op. An identifier that is no longer a reviewer candidate is still accepted when it is a stable public id (`user_…` or `grp_…`), so a reviewer who left the repository can be cleared.
+
+#### [Path Parameters](#path-parameters-58)
+
+`ownerSlug` string Required
+
+Owning entity's unique slug.
+
+`repoName` string Required
+
+Repo name, unique to the owner entity.
+
+`pullNumber` string Required
+
+Repository-local pull request number.
+
+#### [Request Body](#request-body-22)
+
+`users` array
+
+User identifiers to remove. Each entry must uniquely match a user candidate for the repository by public `user_…` id or email.
+
+`groups` array
+
+Group identifiers to remove. Each entry must uniquely match a group candidate for the repository by public `grp_…` id, qualified group slug, or group slug.
+
+#### [Response Fields](#response-fields-65)
+
+Successful requests return no response body.
+
+```
+curl --request DELETE \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/PULL_NUMBER/requested_reviewers' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "users": [    "user_01k2ja2000e0080000000000c3"  ],  "groups": [    "grp_01k2ja2000e0080000000000n2"  ]}'
+```
+
+**Response:**
+
+```
+204 No Content
+```
+
+### [List Pull Request Reviews](#list-pull-request-reviews)
+
+GET`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/reviews`
+
+Scope[repository:pull\_requests:reviews:read](#scopes)AuthInstallation tokenUser credential
+
+Lists submitted reviews on a pull request, ordered by `submitted_at` ascending. Pending reviews are omitted.
+
+#### [Path Parameters](#path-parameters-59)
+
+`ownerSlug` string Required
+
+Owning entity's unique slug.
+
+`repoName` string Required
+
+Repo name, unique to the owner entity.
+
+`pullNumber` string Required
+
+#### [Query Parameters](#query-parameters-20)
 
 `pageSize` integer
 
@@ -6775,7 +7902,7 @@ Maximum reviews to return. Defaults to 30; maximum 100.
 
 Opaque token from the preceding page.
 
-#### [Response Fields](#response-fields-58)
+#### [Response Fields](#response-fields-66)
 
 `reviews` array
 
@@ -6801,6 +7928,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`reviews[].author.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`reviews[].author.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `reviews[].author.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -6809,9 +7944,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`reviews[].author.app.slug` string
+`reviews[].author.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `reviews[].author.serviceAccount` object
 
@@ -6873,6 +8008,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`reviews[].dismissal.dismissedBy.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`reviews[].dismissal.dismissedBy.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `reviews[].dismissal.dismissedBy.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -6881,9 +8024,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`reviews[].dismissal.dismissedBy.app.slug` string
+`reviews[].dismissal.dismissedBy.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `reviews[].dismissal.dismissedBy.serviceAccount` object
 
@@ -6952,18 +8095,24 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "reviews": [    {      "id": "string",      "author": {        "user": {          "id": "string",          "email": "string"        }      },      "verdict": "approve",      "body": "string",      "submittedAt": "2026-01-01T00:00:00Z",      "pullRequestVersion": {        "number": "string",        "headSha": "string",        "baseSha": "string",        "createdAt": "2026-01-01T00:00:00Z"      },      "dismissal": {        "dismissedBy": {          "user": {            "id": "string",            "email": "string"          }        },        "dismissedAt": "2026-01-01T00:00:00Z",        "message": "string"      }    }  ],  "pullRequest": {    "id": "string",    "number": "string",    "repository": {      "id": "string",      "name": "string",      "owner": {        "slug": "string",        "id": "string",        "type": "team"      }    }  },  "nextPageToken": "string"}
+{  "reviews": [    {      "id": "rev_01k2ja2000e0080000000000f6",      "author": {        "user": {          "id": "user_01k2ja2000e0080000000000c3",          "email": "jane@acme.dev"        }      },      "verdict": "approve",      "body": "Approving. The telemetry schema matches the spec.",      "submittedAt": "2026-08-02T15:00:00Z",      "pullRequestVersion": {        "number": "3",        "headSha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",        "baseSha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8",        "createdAt": "2026-08-01T09:30:00Z"      }    }  ],  "pullRequest": {    "id": "pr_01k2ja2000e0080000000000d4",    "number": "17",    "repository": {      "id": "repo_01k2ja2000e0080000000000q4",      "name": "rocket",      "owner": {        "slug": "acme",        "id": "ns_01k2ja2000e0080000000000p3",        "type": "team"      }    }  }}
 ```
 
 ### [Create Pull Request Review](#create-pull-request-review)
 
 POST`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/reviews`
 
-Creates and submits a review on a pull request.
+Scope[repository:pull\_requests:reviews:write](#scopes)AuthInstallation tokenUser credential
+
+Creates and submits a review on a pull request, optionally together with its comments in one atomic request. Each comment takes the same targets [Create Pull Request Comment](#create-pull-request-comment) takes: `comments[].inline` for a line range, `comments[].file` for a whole file, `comments[].threadId` for a reply, and none of them for general discussion.
 
 The review is submitted immediately. A new `approve` or `request_changes` review supersedes the caller's prior live decision review on the same pull request, which is dismissed. Pull request authors cannot `approve` their own pull request. Fails with FAILED\_PRECONDITION while the caller has an unsubmitted draft review on the pull request.
 
-#### [Path Parameters](#path-parameters-52)
+When `comments` is set, every anchor is validated against the reviewed version's diff before anything is written, using the same in-diff check as [Create Pull Request Comment](#create-pull-request-comment). If one comment fails, the whole request fails with `InvalidArgument` (HTTP 400) and nothing is published. Comments become visible atomically with the review: no comment or event is observable until the review submits, and then each comment emits its own [pull\_request.comment.created](#events) webhook alongside the review's event.
+
+The operation carries no idempotency key, so a retry after an ambiguous transport failure can create a second review. Call [List Pull Request Reviews](#list-pull-request-reviews) before retrying.
+
+#### [Path Parameters](#path-parameters-60)
 
 `ownerSlug` string Required
 
@@ -6975,7 +8124,7 @@ Repo name, unique to the owner entity.
 
 `pullNumber` string Required
 
-#### [Request Body](#request-body-18)
+#### [Request Body](#request-body-23)
 
 `verdict` string Required
 
@@ -6987,9 +8136,49 @@ Free-text review summary. May be empty.
 
 `versionNumber` string
 
-Pull request version number the review applies to (see `PullRequestVersion.number`). Omit to review the latest version at call time.
+Pull request version number the review applies to (see `PullRequestVersion.number`). Omit to review the latest version at call time. Comments anchor against this same version.
 
-#### [Response Fields](#response-fields-59)
+`comments` array
+
+Comments published atomically with the review. Maximum 50 per request.
+
+`comments[].body` string Required
+
+Comment text. Must contain a non-whitespace character.
+
+`comments[].inline` object
+
+Diff anchor for a new inline thread on the reviewed version's diff. Same shape and validation as `inline` on [Create Pull Request Comment](#create-pull-request-comment). Cannot be combined with `comments[].threadId`.
+
+`comments[].inline.path` string Required
+
+File path in the reviewed version's diff.
+
+`comments[].inline.side` string Required
+
+Diff side of the anchor. Allowed values: `left` for the base version of the file, `right` for the head version.
+
+`comments[].inline.startLine` integer Required
+
+First 1-based line of the anchored range in the `side` version of the file.
+
+`comments[].inline.endLine` integer
+
+Inclusive last line of the anchored range. Must be greater than or equal to `startLine`. Omit for a single-line anchor.
+
+`comments[].threadId` string
+
+Existing thread id on this pull request to reply to. The reply stays hidden until the review publishes. Omit `comments[].inline`, `comments[].file`, and this field to open a new general-discussion thread.
+
+`comments[].file` object
+
+Anchor for a new file-level thread on a whole file in the reviewed version's diff. Same shape, side derivation, and validation as `file` on [Create Pull Request Comment](#create-pull-request-comment). Cannot be combined with `comments[].inline` or `comments[].threadId`.
+
+`comments[].file.path` string Required
+
+File path in the reviewed version's diff: the deleted path for a deletion, the head path otherwise.
+
+#### [Response Fields](#response-fields-67)
 
 `id` string
 
@@ -7011,6 +8200,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`author.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`author.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `author.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -7019,9 +8216,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`author.app.slug` string
+`author.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `author.serviceAccount` object
 
@@ -7083,6 +8280,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`dismissal.dismissedBy.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`dismissal.dismissedBy.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `dismissal.dismissedBy.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -7091,9 +8296,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`dismissal.dismissedBy.app.slug` string
+`dismissal.dismissedBy.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `dismissal.dismissedBy.serviceAccount` object
 
@@ -7112,24 +8317,26 @@ RFC 3339 dismissal timestamp.
 Dismissal reason; automatic supersession uses a server-generated message.
 
 ```
-curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/PULL_NUMBER/reviews' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "verdict": "approve"}'
+curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/PULL_NUMBER/reviews' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "verdict": "approve",  "body": "Approving. The telemetry schema matches the spec.",  "versionNumber": "3"}'
 ```
 
 **Response shape:**
 
 ```
-{  "id": "string",  "author": {    "user": {      "id": "string",      "email": "string"    }  },  "verdict": "approve",  "body": "string",  "submittedAt": "2026-01-01T00:00:00Z",  "pullRequestVersion": {    "number": "string",    "headSha": "string",    "baseSha": "string",    "createdAt": "2026-01-01T00:00:00Z"  },  "dismissal": {    "dismissedBy": {      "user": {        "id": "string",        "email": "string"      }    },    "dismissedAt": "2026-01-01T00:00:00Z",    "message": "string"  }}
+{  "id": "rev_01k2ja2000e0080000000000f6",  "author": {    "user": {      "id": "user_01k2ja2000e0080000000000c3",      "email": "jane@acme.dev"    }  },  "verdict": "approve",  "body": "Approving. The telemetry schema matches the spec.",  "submittedAt": "2026-08-02T15:00:00Z",  "pullRequestVersion": {    "number": "3",    "headSha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",    "baseSha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8",    "createdAt": "2026-08-01T09:30:00Z"  }}
 ```
 
 ### [Update Pull Request Review](#update-pull-request-review)
 
 PATCH`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/reviews/{reviewId}`
 
+Scope[repository:pull\_requests:reviews:write](#scopes)AuthInstallation tokenUser credential
+
 Updates the body of a review. Only the review author can update it; other callers receive PERMISSION\_DENIED. A review that does not belong to the named pull request returns NOT\_FOUND.
 
 Unsubmitted draft reviews can be updated too; a draft's response has no `submitted_at`.
 
-#### [Path Parameters](#path-parameters-53)
+#### [Path Parameters](#path-parameters-61)
 
 `ownerSlug` string Required
 
@@ -7143,13 +8350,13 @@ Repo name, unique to the owner entity.
 
 `reviewId` string Required
 
-#### [Request Body](#request-body-19)
+#### [Request Body](#request-body-24)
 
 `body` string Required
 
 Replacement review summary text; replaces the prior body in full. Must contain a non-whitespace character; INVALID\_ARGUMENT otherwise.
 
-#### [Response Fields](#response-fields-60)
+#### [Response Fields](#response-fields-68)
 
 `id` string
 
@@ -7171,6 +8378,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`author.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`author.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `author.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -7179,9 +8394,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`author.app.slug` string
+`author.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `author.serviceAccount` object
 
@@ -7243,6 +8458,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`dismissal.dismissedBy.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`dismissal.dismissedBy.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `dismissal.dismissedBy.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -7251,9 +8474,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`dismissal.dismissedBy.app.slug` string
+`dismissal.dismissedBy.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `dismissal.dismissedBy.serviceAccount` object
 
@@ -7272,18 +8495,20 @@ RFC 3339 dismissal timestamp.
 Dismissal reason; automatic supersession uses a server-generated message.
 
 ```
-curl --request PATCH \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/PULL_NUMBER/reviews/REVIEW_ID' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "body": "BODY"}'
+curl --request PATCH \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/PULL_NUMBER/reviews/REVIEW_ID' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "body": "Approving. The telemetry schema matches the spec."}'
 ```
 
 **Response shape:**
 
 ```
-{  "id": "string",  "author": {    "user": {      "id": "string",      "email": "string"    }  },  "verdict": "approve",  "body": "string",  "submittedAt": "2026-01-01T00:00:00Z",  "pullRequestVersion": {    "number": "string",    "headSha": "string",    "baseSha": "string",    "createdAt": "2026-01-01T00:00:00Z"  },  "dismissal": {    "dismissedBy": {      "user": {        "id": "string",        "email": "string"      }    },    "dismissedAt": "2026-01-01T00:00:00Z",    "message": "string"  }}
+{  "id": "rev_01k2ja2000e0080000000000f6",  "author": {    "user": {      "id": "user_01k2ja2000e0080000000000c3",      "email": "jane@acme.dev"    }  },  "verdict": "approve",  "body": "Approving. The telemetry schema matches the spec.",  "submittedAt": "2026-08-02T15:00:00Z",  "pullRequestVersion": {    "number": "3",    "headSha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",    "baseSha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8",    "createdAt": "2026-08-01T09:30:00Z"  }}
 ```
 
 ### [Dismiss Pull Request Review](#dismiss-pull-request-review)
 
 PUT`/v1/origin/repos/{ownerSlug}/{repoName}/pulls/{pullNumber}/reviews/{reviewId}/dismissals`
+
+Scope[repository:pull\_requests:reviews:write](#scopes)AuthInstallation tokenUser credential
 
 Dismisses a submitted review so its verdict no longer counts toward the pull request's review state. The review itself is retained and keeps appearing in ListPullRequestReviews, with `dismissal` set.
 
@@ -7291,7 +8516,7 @@ Dismissing does not require having authored the review; write permission on the 
 
 Only `approve` and `request_changes` reviews can be dismissed, and only once: a `comment` review, an unsubmitted draft review, or an already-dismissed review returns FAILED\_PRECONDITION, and repeating the call leaves the first dismissal in place. A review that does not belong to the named pull request returns NOT\_FOUND.
 
-#### [Path Parameters](#path-parameters-54)
+#### [Path Parameters](#path-parameters-62)
 
 `ownerSlug` string Required
 
@@ -7307,13 +8532,13 @@ Repo name, unique to the owner entity.
 
 Stable Origin review identifier, as returned by ListPullRequestReviews.
 
-#### [Request Body](#request-body-20)
+#### [Request Body](#request-body-25)
 
 `message` string Required
 
 Reason recorded with the dismissal. Must contain a non-whitespace character; INVALID\_ARGUMENT otherwise.
 
-#### [Response Fields](#response-fields-61)
+#### [Response Fields](#response-fields-69)
 
 `id` string
 
@@ -7335,6 +8560,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`author.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`author.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `author.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -7343,9 +8576,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`author.app.slug` string
+`author.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `author.serviceAccount` object
 
@@ -7407,6 +8640,14 @@ Public identifier for the user.
 
 Email address of the user. Always set when the user variant is present.
 
+`dismissal.dismissedBy.user.displayName` string
+
+Display name of the user: the account's first and last name joined with a space, the same name the product renders. Omitted when the account has no name.
+
+`dismissal.dismissedBy.user.handle` string
+
+The user's claimed profile handle, without the `@` prefix. Present only while that profile is publicly visible; omitted otherwise.
+
 `dismissal.dismissedBy.app` object
 
 App variant of the actor. Set when an app performed the action.
@@ -7415,9 +8656,9 @@ App variant of the actor. Set when an app performed the action.
 
 Public identifier for the app.
 
-`dismissal.dismissedBy.app.slug` string
+`dismissal.dismissedBy.app.displayName` string
 
-URL-friendly name of the app. Always set when the app variant is present.
+The app's registered display name. Omitted when the app cannot be resolved and on Cursor's first-party managed actor.
 
 `dismissal.dismissedBy.serviceAccount` object
 
@@ -7436,13 +8677,13 @@ RFC 3339 dismissal timestamp.
 Dismissal reason; automatic supersession uses a server-generated message.
 
 ```
-curl --request PUT \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/PULL_NUMBER/reviews/REVIEW_ID/dismissals' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "message": "MESSAGE"}'
+curl --request PUT \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/pulls/PULL_NUMBER/reviews/REVIEW_ID/dismissals' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "message": "Superseded by a newer review."}'
 ```
 
 **Response shape:**
 
 ```
-{  "id": "string",  "author": {    "user": {      "id": "string",      "email": "string"    }  },  "verdict": "approve",  "body": "string",  "submittedAt": "2026-01-01T00:00:00Z",  "pullRequestVersion": {    "number": "string",    "headSha": "string",    "baseSha": "string",    "createdAt": "2026-01-01T00:00:00Z"  },  "dismissal": {    "dismissedBy": {      "user": {        "id": "string",        "email": "string"      }    },    "dismissedAt": "2026-01-01T00:00:00Z",    "message": "string"  }}
+{  "id": "rev_01k2ja2000e0080000000000f6",  "author": {    "user": {      "id": "user_01k2ja2000e0080000000000c3",      "email": "jane@acme.dev"    }  },  "verdict": "approve",  "body": "Approving. The telemetry schema matches the spec.",  "submittedAt": "2026-08-02T15:00:00Z",  "pullRequestVersion": {    "number": "3",    "headSha": "9a41f0c3d2b8e7f6a5c4d3e2f1b0a9c8d7e6f5a4",    "baseSha": "3b1f9c2d8a7e6f5049c8b7a6d5e4f3a2b1c0d9e8",    "createdAt": "2026-08-01T09:30:00Z"  },  "dismissal": {    "dismissedBy": {      "user": {        "id": "user_01k2ja2000e0080000000000c3",        "email": "jane@acme.dev"      }    },    "dismissedAt": "2026-08-02T15:00:00Z",    "message": "Superseded by a newer review."  }}
 ```
 
 ## [Rulesets](#rulesets)
@@ -7451,11 +8692,13 @@ curl --request PUT \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/rulesets`
 
+Scope[repository:rulesets:read](#scopes)AuthInstallation tokenUser credential
+
 Lists every ruleset configured on a repository.
 
 Rulesets per repository are bounded configuration, so the full set comes back in one response and this endpoint does not paginate. `repository` is hoisted once and describes the repository shared by every ruleset in the response.
 
-#### [Path Parameters](#path-parameters-55)
+#### [Path Parameters](#path-parameters-63)
 
 `ownerSlug` string Required
 
@@ -7465,7 +8708,7 @@ Owning entity's unique slug.
 
 Repo name, unique to the owner entity.
 
-#### [Response Fields](#response-fields-62)
+#### [Response Fields](#response-fields-70)
 
 `rulesets` array
 
@@ -7598,18 +8841,20 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "rulesets": [    {      "id": "string",      "name": "string",      "description": "string",      "enforcement": "active",      "kind": "merge_branch",      "includedRefNames": [        "string"      ],      "excludedRefNames": [        "string"      ],      "rules": [        {          "id": "string",          "ruleType": "string",          "parameters": {}        }      ],      "bypassActors": [        {          "id": "string",          "bypassMode": "always",          "user": {            "id": "string"          }        }      ]    }  ],  "repository": {    "id": "string",    "name": "string",    "owner": {      "slug": "string",      "id": "string",      "type": "team"    }  }}
+{  "rulesets": [    {      "id": "rs_01k2ja2000e0080000000000t7",      "name": "require-review",      "description": "Require an approving review before merging to main.",      "enforcement": "active",      "kind": "merge_branch",      "includedRefNames": [        "refs/heads/main"      ],      "rules": [        {          "id": "rsr_01k2ja2000e0080000000000v8",          "ruleType": "pull_request",          "parameters": {            "requiredApprovingReviewCount": 1          }        }      ],      "bypassActors": [        {          "id": "rsba_01k2ja2000e0080000000000w9",          "bypassMode": "always",          "user": {            "id": "act_01k2ja2000e0080000000000x0"          }        }      ]    }  ],  "repository": {    "id": "repo_01k2ja2000e0080000000000q4",    "name": "rocket",    "owner": {      "slug": "acme",      "id": "ns_01k2ja2000e0080000000000p3",      "type": "team"    }  }}
 ```
 
 ### [Create Ruleset](#create-ruleset)
 
 POST`/v1/origin/repos/{ownerSlug}/{repoName}/rulesets`
 
+Scope[repository:rulesets:write](#scopes)AuthInstallation tokenUser credential
+
 Creates a repository ruleset.
 
 The response carries the stored ruleset, including the IDs Origin assigns to each rule and bypass actor. An empty `name` is rejected with `InvalidArgument` (HTTP 400).
 
-#### [Path Parameters](#path-parameters-56)
+#### [Path Parameters](#path-parameters-64)
 
 `ownerSlug` string Required
 
@@ -7619,7 +8864,7 @@ Owning entity's unique slug.
 
 Repo name, unique to the owner entity.
 
-#### [Request Body](#request-body-21)
+#### [Request Body](#request-body-26)
 
 `name` string Required
 
@@ -7653,7 +8898,7 @@ Protection rules to store. Each entry carries `ruleType` and optional `parameter
 
 Bypass principals to store. Each entry carries `bypassMode` and exactly one of `user`, `team`, `app`, or `originRole`; Origin assigns each actor's `id`. Values above 15 entries are rejected with `InvalidArgument` (HTTP 400).
 
-#### [Response Fields](#response-fields-63)
+#### [Response Fields](#response-fields-71)
 
 `id` string
 
@@ -7748,24 +8993,26 @@ A principal holding an Origin role.
 Allowed values: `namespace_admin`, `repository_admin`, `repository_write`.
 
 ```
-curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/rulesets' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "name": "RULESET_NAME",  "description": "RULESET_DESCRIPTION",  "enforcement": "active",  "kind": "merge_branch",  "includedRefNames": [    "~DEFAULT_BRANCH"  ],  "excludedRefNames": [],  "rules": [    {      "ruleType": "pull_request",      "parameters": {}    }  ],  "bypassActors": [    {      "bypassMode": "always",      "app": {        "id": "APP_ID"      }    }  ]}'
+curl --request POST \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/rulesets' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "name": "require-review",  "description": "Require an approving review before merging to main.",  "enforcement": "active",  "kind": "merge_branch",  "includedRefNames": [    "refs/heads/main"  ],  "rules": [    {      "ruleType": "pull_request",      "parameters": {        "requiredApprovingReviewCount": 1      }    }  ],  "bypassActors": [    {      "bypassMode": "always",      "user": {        "id": "act_01k2ja2000e0080000000000x0"      }    }  ]}'
 ```
 
 **Response shape:**
 
 ```
-{  "id": "string",  "name": "string",  "description": "string",  "enforcement": "active",  "kind": "merge_branch",  "includedRefNames": [    "string"  ],  "excludedRefNames": [    "string"  ],  "rules": [    {      "id": "string",      "ruleType": "string",      "parameters": {}    }  ],  "bypassActors": [    {      "id": "string",      "bypassMode": "always",      "user": {        "id": "string"      }    }  ]}
+{  "id": "rs_01k2ja2000e0080000000000t7",  "name": "require-review",  "description": "Require an approving review before merging to main.",  "enforcement": "active",  "kind": "merge_branch",  "includedRefNames": [    "refs/heads/main"  ],  "rules": [    {      "id": "rsr_01k2ja2000e0080000000000v8",      "ruleType": "pull_request",      "parameters": {        "requiredApprovingReviewCount": 1      }    }  ],  "bypassActors": [    {      "id": "rsba_01k2ja2000e0080000000000w9",      "bypassMode": "always",      "user": {        "id": "act_01k2ja2000e0080000000000x0"      }    }  ]}
 ```
 
 ### [Get Ruleset](#get-ruleset)
 
 GET`/v1/origin/repos/{ownerSlug}/{repoName}/rulesets/{rulesetId}`
 
+Scope[repository:rulesets:read](#scopes)AuthInstallation tokenUser credential
+
 Returns a single repository ruleset by its stable Origin ID.
 
 An unknown repository and an unknown ruleset both return `404`; the message distinguishes them.
 
-#### [Path Parameters](#path-parameters-57)
+#### [Path Parameters](#path-parameters-65)
 
 `ownerSlug` string Required
 
@@ -7779,7 +9026,7 @@ Repo name, unique to the owner entity.
 
 Stable Origin ruleset ID.
 
-#### [Response Fields](#response-fields-64)
+#### [Response Fields](#response-fields-72)
 
 `id` string
 
@@ -7880,18 +9127,20 @@ curl --request GET \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/R
 **Response shape:**
 
 ```
-{  "id": "string",  "name": "string",  "description": "string",  "enforcement": "active",  "kind": "merge_branch",  "includedRefNames": [    "string"  ],  "excludedRefNames": [    "string"  ],  "rules": [    {      "id": "string",      "ruleType": "string",      "parameters": {}    }  ],  "bypassActors": [    {      "id": "string",      "bypassMode": "always",      "user": {        "id": "string"      }    }  ]}
+{  "id": "rs_01k2ja2000e0080000000000t7",  "name": "require-review",  "description": "Require an approving review before merging to main.",  "enforcement": "active",  "kind": "merge_branch",  "includedRefNames": [    "refs/heads/main"  ],  "rules": [    {      "id": "rsr_01k2ja2000e0080000000000v8",      "ruleType": "pull_request",      "parameters": {        "requiredApprovingReviewCount": 1      }    }  ],  "bypassActors": [    {      "id": "rsba_01k2ja2000e0080000000000w9",      "bypassMode": "always",      "user": {        "id": "act_01k2ja2000e0080000000000x0"      }    }  ]}
 ```
 
 ### [Update Ruleset](#update-ruleset)
 
 PUT`/v1/origin/repos/{ownerSlug}/{repoName}/rulesets/{rulesetId}`
 
+Scope[repository:rulesets:write](#scopes)AuthInstallation tokenUser credential
+
 Updates an existing repository ruleset.
 
 The request replaces the whole ruleset configuration. `rules` and `bypassActors` are replaced in full rather than merged, and Origin assigns new IDs to the stored entries, so send every rule and bypass actor you want to keep.
 
-#### [Path Parameters](#path-parameters-58)
+#### [Path Parameters](#path-parameters-66)
 
 `ownerSlug` string Required
 
@@ -7905,7 +9154,7 @@ Repo name, unique to the owner entity.
 
 Stable Origin ruleset ID.
 
-#### [Request Body](#request-body-22)
+#### [Request Body](#request-body-27)
 
 `name` string Required
 
@@ -7939,7 +9188,7 @@ Protection rules to store. Each entry carries `ruleType` and optional `parameter
 
 Bypass principals to store. Each entry carries `bypassMode` and exactly one of `user`, `team`, `app`, or `originRole`; Origin assigns each actor's `id`. Values above 15 entries are rejected with `InvalidArgument` (HTTP 400).
 
-#### [Response Fields](#response-fields-65)
+#### [Response Fields](#response-fields-73)
 
 `id` string
 
@@ -8034,24 +9283,26 @@ A principal holding an Origin role.
 Allowed values: `namespace_admin`, `repository_admin`, `repository_write`.
 
 ```
-curl --request PUT \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/rulesets/RULESET_ID' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "name": "RULESET_NAME",  "description": "RULESET_DESCRIPTION",  "enforcement": "active",  "kind": "merge_branch",  "includedRefNames": [    "~DEFAULT_BRANCH"  ],  "excludedRefNames": [],  "rules": [    {      "ruleType": "pull_request",      "parameters": {}    }  ],  "bypassActors": [    {      "bypassMode": "always",      "app": {        "id": "APP_ID"      }    }  ]}'
+curl --request PUT \  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/rulesets/RULESET_ID' \  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \  --header 'Content-Type: application/json' \  --data '{  "name": "require-review",  "description": "Require an approving review before merging to main.",  "enforcement": "active",  "kind": "merge_branch",  "includedRefNames": [    "refs/heads/main"  ],  "rules": [    {      "ruleType": "pull_request",      "parameters": {        "requiredApprovingReviewCount": 1      }    }  ],  "bypassActors": [    {      "bypassMode": "always",      "user": {        "id": "act_01k2ja2000e0080000000000x0"      }    }  ]}'
 ```
 
 **Response shape:**
 
 ```
-{  "id": "string",  "name": "string",  "description": "string",  "enforcement": "active",  "kind": "merge_branch",  "includedRefNames": [    "string"  ],  "excludedRefNames": [    "string"  ],  "rules": [    {      "id": "string",      "ruleType": "string",      "parameters": {}    }  ],  "bypassActors": [    {      "id": "string",      "bypassMode": "always",      "user": {        "id": "string"      }    }  ]}
+{  "id": "rs_01k2ja2000e0080000000000t7",  "name": "require-review",  "description": "Require an approving review before merging to main.",  "enforcement": "active",  "kind": "merge_branch",  "includedRefNames": [    "refs/heads/main"  ],  "rules": [    {      "id": "rsr_01k2ja2000e0080000000000v8",      "ruleType": "pull_request",      "parameters": {        "requiredApprovingReviewCount": 1      }    }  ],  "bypassActors": [    {      "id": "rsba_01k2ja2000e0080000000000w9",      "bypassMode": "always",      "user": {        "id": "act_01k2ja2000e0080000000000x0"      }    }  ]}
 ```
 
 ### [Delete Ruleset](#delete-ruleset)
 
 DELETE`/v1/origin/repos/{ownerSlug}/{repoName}/rulesets/{rulesetId}`
 
+Scope[repository:rulesets:write](#scopes)AuthInstallation tokenUser credential
+
 Deletes a repository ruleset by its stable Origin ID. The response body is empty.
 
 An unknown repository and an unknown ruleset both return `404`; the message distinguishes them. A ruleset stored on a different repository reads as an unknown ruleset. An empty `rulesetId` returns `InvalidArgument` (HTTP 400).
 
-#### [Path Parameters](#path-parameters-59)
+#### [Path Parameters](#path-parameters-67)
 
 `ownerSlug` string Required
 
@@ -8065,7 +9316,7 @@ Repo name, unique to the owner entity.
 
 Stable Origin ruleset ID.
 
-#### [Response Fields](#response-fields-66)
+#### [Response Fields](#response-fields-74)
 
 Successful requests return no response body.
 
