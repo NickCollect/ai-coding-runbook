@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/frontier-red-team
-fetched_at: 2026-08-31T06:29:38.098966+00:00
+fetched_at: 2026-09-14T05:36:14.481164+00:00
 title: "Frontier Red Team Research \\ Anthropic"
 ---
 
@@ -28,6 +28,9 @@ Search
 
 DateCategoryTitle
 
+- [Sep 10, 2026Frontier Red Team
+
+  Measuring tactical intelligence targeting and conventional weapons capabilities of AI models](https://www.anthropic.com/research/intelligence-targeting-conventional-weapons-capabilities)
 - [Aug 13, 2026Frontier Red Team
 
   Patterns and problems in emerging multiagent systems](https://www.anthropic.com/research/multiagent-systems)
@@ -49,14 +52,11 @@ DateCategoryTitle
 - [Jun 3, 2026Frontier Red Team
 
   Mapping AI-enabled cyber threats: Insights from the LLM ATT&CK Navigator](https://www.anthropic.com/research/attack-navigator)
-- [Jun 3, 2026Policy
+- [Jun 3, 2026Announcements
 
   What we learned mapping a year’s worth of AI-enabled cyber threats](https://www.anthropic.com/news/AI-enabled-cyber-threats-mitre-attack)
 - [May 22, 2026Frontier Red Team
 
   Measuring LLMs’ ability to develop exploits](https://www.anthropic.com/research/exploit-evals)
-- [Apr 7, 2026Frontier Red Team
-
-  Assessing Claude Mythos Preview’s cybersecurity capabilities](https://www.anthropic.com/research/mythos-preview)
 
 [See more](#)

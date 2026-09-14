@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/engineering/claude-code-best-practices
-fetched_at: 2026-08-31T06:29:31.389375+00:00
+fetched_at: 2026-09-14T05:36:07.806648+00:00
 title: "Best practices for Claude Code - Claude Code Docs"
 ---
 
@@ -370,7 +370,7 @@ You can also use subagents for verification after Claude implements something. S
 
 ### [​](#rewind-with-checkpoints) Rewind with checkpoints
 
-Every prompt you send creates a checkpoint. You can restore conversation, code, or both to any previous checkpoint.
+Every prompt you send that starts a turn creates a checkpoint. You can restore conversation, code, or both to any previous checkpoint.
 
 Claude automatically snapshots files before each change so a checkpoint can restore them. Double-tap `Escape` or run `/rewind` to open the rewind menu. You can restore conversation only, restore code only, restore both, or summarize from a selected message. See [Checkpointing](https://www.anthropic.com/docs/en/checkpointing) for details.
 Instead of carefully planning every move, you can tell Claude to try something risky. If it doesn’t work, rewind and try a different approach. Checkpoints are saved with the conversation, so you can close your terminal, resume the session later, and still rewind.
@@ -416,7 +416,7 @@ Pick the parallel approach that fits how much coordination you want to do yourse
 
 - [Worktrees](https://www.anthropic.com/docs/en/worktrees): run separate CLI sessions in isolated git checkouts so edits don’t collide
 - [Cross-session messaging](https://www.anthropic.com/docs/en/cross-session-messaging): let the sessions you run yourself pass findings to each other
-- [Desktop app](https://www.anthropic.com/docs/en/desktop#work-in-parallel-with-sessions): manage multiple local sessions visually, each in its own worktree
+- [Desktop app](https://www.anthropic.com/docs/en/desktop#work-in-parallel-with-sessions): manage multiple local sessions visually, optionally each in its own worktree
 - [Claude Code on the web](https://www.anthropic.com/docs/en/claude-code-on-the-web): run sessions in the cloud, on Anthropic-managed infrastructure by default
 - [Agent view](https://www.anthropic.com/docs/en/agent-view): research preview. Run `claude agents` to dispatch sessions that keep running in the background and watch them from one screen
 - [Agent teams](https://www.anthropic.com/docs/en/agent-teams): experimental and disabled by default. Automated coordination of multiple sessions with shared tasks, messaging, and a team lead

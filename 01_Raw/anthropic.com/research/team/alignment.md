@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/alignment
-fetched_at: 2026-08-31T06:29:37.931704+00:00
+fetched_at: 2026-09-14T05:36:14.450373+00:00
 title: "Alignment Research \\ Anthropic"
 ---
 
@@ -22,15 +22,19 @@ Alignment researchers validate that models are harmless and honest even under ve
 
 Alignment researchers also systematically look for situations in which models might behave badly, and check whether our existing safeguards are sufficient to deal with risks that human-level capabilities may bring.
 
-![Teaching Claude why](https://www-cdn.anthropic.com/images/4zrzovbb/website/6380b3c2dc9e4011a3cd96fec382bd9197511e31-1000x1000.svg)
+![An alignment assessment of recent cybersecurity incidents](https://www-cdn.anthropic.com/images/4zrzovbb/website/25a7c99743ebfb3b79cb98ffa2b9e928ad7e712b-2000x1125.webp)
 
-[## Teaching Claude why
+[## An alignment assessment of recent cybersecurity incidents
 
-AlignmentMay 8, 2026
+AlignmentSep 9, 2026
 
-New research on how we've reduced agentic misalignment.](https://www.anthropic.com/research/teaching-claude-why)
+We present an alignment assessment of four incidents in which Claude models gained unauthorized access to real third-party systems.](https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents)
 
-[AlignmentApr 14, 2026
+[AlignmentMay 8, 2026
+
+#### Teaching Claude why
+
+New research on how we've reduced agentic misalignment.](https://www.anthropic.com/research/teaching-claude-why)[AlignmentApr 14, 2026
 
 #### Automated Alignment Researchers: Using large language models to scale scalable oversight
 
@@ -38,11 +42,7 @@ Can Claude develop, test, and analyze alignment ideas of its own? We ran an expe
 
 #### The persona selection model
 
-Why do AI assistants like Claude sometimes seem surprisingly human. We advance a theory.](https://www.anthropic.com/research/persona-selection-model)[AlignmentJan 9, 2026
-
-#### Next-generation Constitutional Classifiers: More efficient protection against universal jailbreaks
-
-Last year, we described a new approach to defend against jailbreaks, which we called Constitutional Classifiers. We’ve now developed the next generation.](https://www.anthropic.com/research/next-generation-constitutional-classifiers)[AlignmentNov 21, 2025
+Why do AI assistants like Claude sometimes seem surprisingly human. We advance a theory.](https://www.anthropic.com/research/persona-selection-model)[AlignmentNov 21, 2025
 
 #### From shortcuts to sabotage: natural emergent misalignment from reward hacking
 
@@ -54,6 +54,9 @@ Search
 
 DateCategoryTitle
 
+- [Sep 9, 2026Alignment
+
+  An alignment assessment of recent cybersecurity incidents](https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents)
 - [Aug 28, 2026Alignment
 
   Automated researchers can reliably mitigate alignment failures](https://www.anthropic.com/research/automated-researchers-mitigate-alignment-failures)
@@ -81,9 +84,6 @@ DateCategoryTitle
 - [Jan 28, 2026Alignment
 
   Disempowerment patterns in real-world AI usage](https://www.anthropic.com/research/disempowerment-patterns)
-- [Jan 9, 2026Alignment
-
-  Next-generation Constitutional Classifiers: More efficient protection against universal jailbreaks](https://www.anthropic.com/research/next-generation-constitutional-classifiers)
 
 [See more](#)
 

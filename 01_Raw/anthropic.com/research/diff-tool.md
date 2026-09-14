@@ -1,7 +1,7 @@
 ---
 source_url: https://www.anthropic.com/research/diff-tool
-fetched_at: 2026-09-07T05:31:28.718773+00:00
-title: "A \u201cdiff\u201d tool for AI: Finding behavioral differences in new models \\ Anthropic"
+fetched_at: 2026-09-14T05:36:10.860637+00:00
+title: "A \"diff\" tool for AI models \\ Anthropic"
 ---
 
 Interpretability
@@ -12,7 +12,7 @@ Mar 13, 2026
 
 [Read the paper](https://arxiv.org/abs/2602.11729)
 
-![A “diff” tool for AI: Finding behavioral differences in new models](https://www-cdn.anthropic.com/images/4zrzovbb/website/710b64c2542329ce05316098b4e405bb1c11e4d4-1000x1000.svg)
+![A “diff” tool for AI: Finding behavioral differences in new models ](https://www-cdn.anthropic.com/images/4zrzovbb/website/a93218bbcbc4a3ada031c78fb5fbd62d42fb7eb9-1920x1080.png)
 
 Every time a new AI model is released, its developers run a suite of evaluations to measure its performance and safety. These tests are essential, but they are somewhat limited. Because these benchmarks are human-authored, they can only test for risks we have already conceptualized and learned to measure.
 
@@ -26,7 +26,7 @@ Our new [Anthropic Fellows](https://alignment.anthropic.com/2025/anthropic-fello
 
 It's important to note that this method is not a silver bullet. A single diff can surface thousands of unique features (the basic units into which we decompose the model), and only a small fraction of these may correspond to meaningful behavioral risks. However, by acting as a high-recall screening tool, it allows us to identify areas in which the models may diverge.
 
-Among the thousands of candidates our tool flagged, we've identified and validated several concepts that act like switches for specific model behaviors.1 For example, we discovered:
+Among the thousands of candidates our tool flagged, we've identified and validated several concepts that act like switches for specific model behaviors.[1](#footnote-1) For example, we discovered:
 
 - A **“Chinese Communist Party Alignment” feature** found in the Qwen3-8B and DeepSeek-R1-0528-Qwen3-8B models. This controls pro-government censorship and propaganda in these Chinese-developed models, and is absent in the American models we compared them against.
 - An **“American Exceptionalism” feature** found in Meta’s Llama-3.1-8B-Instruct. It controls the model’s tendency to generate assertions of US superiority, a control absent in the Chinese model it was compared against.
@@ -114,20 +114,20 @@ This post was authored by Thomas Jiralerspong (Anthropic Fellows Program) and Tr
 
 ## Related content
 
+### Measuring tactical intelligence targeting and conventional weapons capabilities of AI models
+
+Anthropic’s Frontier Red Team developed new evaluations to measure AI capabilities in tactical intelligence targeting and conventional weapons development.
+
+[Read more](https://www.anthropic.com/research/intelligence-targeting-conventional-weapons-capabilities)
+
+### An alignment assessment of recent cybersecurity incidents
+
+We present an alignment assessment of four incidents in which Claude models gained unauthorized access to real third-party systems.
+
+[Read more](https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents)
+
 ### Formalizing Fermat's Last Theorem
 
-We are sharing the first complete computer-checked proof of Fermat’s Last Theorem. Claude worked largely autonomously over 11 days to write the proof in the Lean programming language. Below, we describe how the formalization was done and share some thoughts about what this work could mean for research mathematics.
+We are sharing the first complete computer-checked proof of Fermat’s Last Theorem. Claude worked largely autonomously over 11 days to write the proof in the Lean programming language.
 
 [Read more](https://www.anthropic.com/research/formalizing-fermats-last-theorem)
-
-### Automated researchers can reliably mitigate alignment failures
-
-We had Claude autonomously train models to improve their performance on several public benchmarks that measure 10 categories of alignment failure. For all 10, Claude found fixes that improved the target benchmarks without degrading capabilities.
-
-[Read more](https://www.anthropic.com/research/automated-researchers-mitigate-alignment-failures)
-
-### Enabling independent research on how people use Claude
-
-Earlier this year, we ran a pilot giving external researchers access to aggregate, real-world Claude usage data. Three research groups designed their own studies for Anthropic Insights, our privacy-preserving analysis tool. In this post, we share high-level results from those studies and what we learned running this pilot.
-
-[Read more](https://www.anthropic.com/research/enabling-independent-research)
