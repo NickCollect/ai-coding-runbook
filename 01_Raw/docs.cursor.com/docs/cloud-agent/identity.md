@@ -1,12 +1,12 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/identity
-fetched_at: 2026-08-17T02:15:17.609388+00:00
+fetched_at: 2026-09-14T05:36:06.969920+00:00
 fetch_method: mintlify_md
 ---
 
 # OIDC tokens
 
-Cloud Agents can mint short-lived [OIDC](https://openid.net/specs/openid-connect-core-1_0.html) JWTs from inside the VM and use them to assume cloud roles or call internal services without storing long-lived credentials in [Secrets](https://cursor.com/docs/cloud-agent/security-network.md#secret-protection).
+Cloud Agents can mint short-lived [OIDC](https://openid.net/specs/openid-connect-core-1_0.html) JWTs from the machine where the agent runs and use them to assume cloud roles or call internal services without storing long-lived credentials in [Secrets](https://cursor.com/docs/cloud-agent/security-network.md#secret-protection).
 
 Agents call this API with their terminal tools. You don't need to run these requests yourself.
 
@@ -17,9 +17,9 @@ To mint OIDC tokens, follow the instructions at
 https://cursor.com/docs/cloud-agent/identity
 ```
 
-This API is local to the agent VM. It is unrelated to the [Cloud Agents API](https://cursor.com/docs/cloud-agent/api/endpoints.md), which uses Cursor API keys and manages agents from outside the VM. The same socket also serves [agent metadata](https://cursor.com/docs/cloud-agent/metadata.md) for values that don't belong in a credential.
+This API is local to the machine running the agent. It is unrelated to the [Cloud Agents API](https://cursor.com/docs/cloud-agent/api/endpoints.md), which uses Cursor API keys and manages agents from outside that machine. On a Cursor-managed VM, this socket also serves [agent metadata](https://cursor.com/docs/cloud-agent/metadata.md).
 
-Cursor-managed Cloud Agent VMs serve the token socket. Every token they mint carries `agent_runtime: managed`.
+Cursor-managed Cloud Agent VMs serve the token socket. Every token they mint carries `agent_runtime: managed`. [Self-Hosted Machines](https://cursor.com/docs/cloud-agent/self-hosted.md) workers serve it when you start them with `--identity-socket`. Their tokens carry `agent_runtime: self_hosted`. See [Self-hosted workers](https://cursor.com/docs/cloud-agent/identity.md#self-hosted-workers).
 
 ## How it works
 
@@ -30,10 +30,10 @@ Cursor-managed Cloud Agent VMs serve the token socket. Every token they mint car
 
 ## Mint a token
 
-The agent mints a token over the Unix socket at `CURSOR_AGENT_SOCKET`. On Cursor-managed VMs the default is `/run/cursor/api.sock`.
+The agent mints a token over the Unix socket at the path in `CURSOR_AGENT_SOCKET` (on a Cursor-managed VM this is always set to `/run/cursor/api.sock`; on a self-hosted worker this path changes per claimed agent).
 
 ```bash
-curl --unix-socket "${CURSOR_AGENT_SOCKET:-/run/cursor/api.sock}" \
+curl --unix-socket "${CURSOR_AGENT_SOCKET}" \
   -H 'Content-Type: application/json' \
   -d '{"aud":"sts.amazonaws.com"}' \
   http://cursor-agent/v1/tokens/oidc
@@ -44,7 +44,7 @@ Requests are HTTP over a Unix socket. The hostname in the URL is ignored.
 Include an optional `nonce` when the verifier expects replay binding:
 
 ```bash
-curl --unix-socket "${CURSOR_AGENT_SOCKET:-/run/cursor/api.sock}" \
+curl --unix-socket "${CURSOR_AGENT_SOCKET}" \
   -H 'Content-Type: application/json' \
   -d '{"aud":"https://oidc.example.com","nonce":"unpredictable-value"}' \
   http://cursor-agent/v1/tokens/oidc
@@ -54,11 +54,11 @@ curl --unix-socket "${CURSOR_AGENT_SOCKET:-/run/cursor/api.sock}" \
 
 `POST /v1/tokens/oidc` over the Unix socket. `Content-Type: application/json` is required. Maximum body size is 4 KB.
 
-| Field       | Required | Description                                                                                                                                                                                                                                                                                                                                                                                        |
-| :---------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `aud`       | Yes      | Audience string your verifier checks. Printable ASCII, no whitespace, up to 512 characters. Examples: `sts.amazonaws.com`, `https://oidc.example.com`.                                                                                                                                                                                                                                             |
-| `nonce`     | No       | Opaque string echoed into the JWT `nonce` claim. Up to 512 characters.                                                                                                                                                                                                                                                                                                                             |
-| `sub_claim` | No       | Claim name to put in `sub` as `<name>:<value>`, for verifiers that only match `sub` and `aud`. Up to 64 characters. Discovery lists the supported names in `x_cursor_sub_claims_supported`; currently `team_id`. Unsupported names are rejected. If the claim has no value for this agent, such as `team_id` on a personal account, the mint fails instead of falling back to the default subject. |
+| Field       | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| :---------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `aud`       | Yes      | Audience string your verifier checks. Printable ASCII, no whitespace, up to 512 characters. Examples: `sts.amazonaws.com`, `https://oidc.example.com`.                                                                                                                                                                                                                                                                                      |
+| `nonce`     | No       | Opaque string echoed into the JWT `nonce` claim. Up to 512 characters.                                                                                                                                                                                                                                                                                                                                                                      |
+| `sub_claim` | No       | Claim name to put in `sub` as `<name>:<value>`, for verifiers that only match `sub` and `aud`. Up to 64 characters. Discovery lists the supported names in `x_cursor_sub_claims_supported`; currently `team_id`, `organization_id`, and `environment_id`. Unsupported names are rejected. If the claim has no value for this agent, such as `team_id` on a personal account, the mint fails instead of falling back to the default subject. |
 
 Cursor doesn't allowlist audiences. Your verifier must reject unexpected `aud` values.
 
@@ -83,6 +83,24 @@ Tokens are valid for **5 minutes**. There is no refresh endpoint. Mint again whe
 [Install scripts](https://cursor.com/docs/cloud-agent/setup.md) can mint on the same socket. A token only includes claims that have a value when it is minted: `turn_id` and `turn_start` are absent until a coding turn starts, and `branch_name` is absent until the run records a branch. Owner, team, and repository claims are set from agent creation onward.
 
 If the socket is missing right after boot, retry the connection.
+
+## Self-hosted workers
+
+A [Self-Hosted Machines](https://cursor.com/docs/cloud-agent/self-hosted.md) worker serves the same API when you start it with `--identity-socket`:
+
+```bash
+agent worker --pool gpu --identity-socket start
+```
+
+The flag is off by default. Pass it on the worker command, before `start`. Pool workers and [My Machines](https://cursor.com/docs/cloud-agent/self-hosted/my-machines.md) workers use the same flag. Omit `--pool` on a My Machines worker:
+
+```bash
+agent worker --identity-socket start
+```
+
+With the flag set, the worker opens one socket per claimed agent and sets `CURSOR_AGENT_SOCKET` to the socket's path in the agent's shells. The request and response contract, error codes, and rate limits match Cursor-managed VMs.
+
+These tokens carry `agent_runtime: self_hosted` and the same owner, team, and repository claims. The worker serves the token API. It doesn't serve [agent metadata](https://cursor.com/docs/cloud-agent/metadata.md). Any process running as the worker's OS user can mint on that claim's socket. See [Trust model](https://cursor.com/docs/cloud-agent/identity.md#trust-model).
 
 ## Verify a token
 
@@ -132,7 +150,7 @@ Header: `alg=RS256`, `typ=JWT`, plus `kid`.
 | `jti`                      | Yes                   | Unique id per mint.                                                                                                                                                                                                          |
 | `cloud_agent_id`           | Yes                   | Cloud Agent id (`bcId`).                                                                                                                                                                                                     |
 | `nonce`                    | No                    | Present only when the mint request included one.                                                                                                                                                                             |
-| `agent_runtime`            | Yes                   | `managed` on Cursor-managed Cloud Agent VMs.                                                                                                                                                                                 |
+| `agent_runtime`            | Yes                   | `managed` on Cursor-managed Cloud Agent VMs, `self_hosted` on [Self-Hosted Machines](https://cursor.com/docs/cloud-agent/identity.md#self-hosted-workers) workers.                                                           |
 | `owner_email`              | When known            | Lowercased user email. Prefer `sub` or `owner_user_id` for allowlists; email can change.                                                                                                                                     |
 | `owner_user_id`            | When known            | Cursor user id, as a decimal string.                                                                                                                                                                                         |
 | `owner_service_account_id` | When known            | Service account id when a service account owns the agent.                                                                                                                                                                    |
@@ -151,13 +169,15 @@ Header: `alg=RS256`, `typ=JWT`, plus `kid`.
 
 ## Trust model
 
-The token identifies the Cloud Agent run, not a specific process inside the VM. Any process that can reach the socket can mint a token: the agent, code it runs, and hooks. Scope permissions to what you would grant that run as a whole.
+The token identifies the Cloud Agent run, not a specific process on the machine. Any process that can reach the socket can mint a token: the agent, code it runs, and hooks. Scope permissions to what you would grant that run as a whole.
 
-You don't choose which agent the token is for. Cursor fills claims from this run, so a process in the VM can't mint a token for a different agent.
+You don't choose which agent the token is for. Cursor fills claims from this run, so a process on the machine can't mint a token for a different agent.
+
+On a self-hosted worker, the agent and the worker process run as the same OS user. Any process running as that user can mint a token for the claimed run. Scope the role to what you would grant that user on the machine.
 
 ## Rate limits and errors
 
-Each agent VM can mint **30 tokens per minute**, in bursts of up to 10. The socket also accepts at most 8 connections at once. That cap is shared with [agent metadata](https://cursor.com/docs/cloud-agent/metadata.md). Cache a token until it expires instead of minting per call.
+Each claimed agent can mint **30 tokens per minute**, in bursts of up to 10. The socket accepts at most 8 connections at once. On a Cursor-managed VM, those 8 connections are shared with [agent metadata](https://cursor.com/docs/cloud-agent/metadata.md). Cache a token until it expires instead of minting per call.
 
 Retry `429`, `503`, `500`, `502`, and `504` with backoff. Treat `403` as fatal: this agent isn't allowed to mint.
 
@@ -226,6 +246,8 @@ Tighten this with an exact `sub`, such as `user:42` for one user or `service_acc
 }
 ```
 
+A trust policy sees the same `aud` and `sub` on a Cursor-managed token and a self-hosted token. You can't put `agent_runtime` in `sub`.
+
 Follow current [AWS IAM OIDC](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html) instructions for provider creation and thumbprints.
 
 The agent mints with `"aud":"sts.amazonaws.com"` (plus `"sub_claim":"team_id"` when the trust policy matches the team subject) and passes the JWT to STS. If you use [network allowlists](https://cursor.com/docs/cloud-agent/security-network.md#network-access), allow `sts.amazonaws.com` (and any regional STS host you call).
@@ -245,7 +267,7 @@ Minting uses the local socket only. Exchanging the JWT with AWS, GCP, Azure, or 
 
 ## Related pages
 
-- [Agent metadata](https://cursor.com/docs/cloud-agent/metadata.md) for key-value run metadata on the same socket
+- [Agent metadata](https://cursor.com/docs/cloud-agent/metadata.md) for key-value run metadata on a Cursor-managed VM's socket
 - [Secrets & Network](https://cursor.com/docs/cloud-agent/security-network.md) for dashboard secrets and egress controls
 - [Cloud agent setup](https://cursor.com/docs/cloud-agent/setup.md#using-aws-iam-roles) for Cursor-managed AWS role assumption
 - [Security overview](https://cursor.com/docs/cloud-agent/security.md) for isolation and access model

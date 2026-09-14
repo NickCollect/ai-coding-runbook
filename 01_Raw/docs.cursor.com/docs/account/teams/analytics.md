@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/analytics
-fetched_at: 2026-08-31T06:29:30.419724+00:00
+fetched_at: 2026-09-14T05:36:04.652272+00:00
 fetch_method: mintlify_md
 ---
 
@@ -144,7 +144,7 @@ Conversation Insights is enabled by default for Enterprise customers. You can di
 
 Cursor analyzes the code and context in each agent session to understand what kind of work is occurring. This makes Cursor the first self-aware software engineering platform, synthesizing the type of work happening across your team.
 
-Teams no longer need high-toil, lossy analysis of tickets or low-response surveys to understand engineering work. Conversation Insights lets you deeply understand the type of work being done with Cursor.
+Teams no longer need high-toil, lossy analysis of tickets or low-response surveys to understand engineering work. Conversation Insights lets you deeply understand the type of work being done with Cursor. For work your team hands to Bots, see [Grok Bot Conversation Insights](https://cursor.com/docs/account/teams/analytics.md#grok-bot-conversation-insights).
 
 ![Conversation Insights dashboard showing categories and work type charts](/docs-static/images/account/team/analytics/conversation-insights-dashboard.png)
 
@@ -173,6 +173,39 @@ All classification runs on-device. Default classifiers ensure no PII or sensitiv
 ### Pricing
 
 Conversation Insights is free during the preview period. Starting January 1st, 2026, customers will be charged for inference. The Cursor Token Rate applies when the underlying request is a third-party model request subject to the rate, including when Auto routes to a third-party model.
+
+## Grok Bot Conversation Insights
+
+Grok Bot Conversation Insights is rolling out to Enterprise teams with [Grok Bot enabled](https://cursor.com/docs/grok-bot/teams.md). When it's on for your team, a **Cursor** / **Grok Bot** source toggle appears at the top of Conversation Insights in the [Analytics dashboard](https://cursor.com/dashboard/analytics). If you don't see the toggle, ask your account team.
+
+Grok Bot Conversation Insights applies the same idea as [Conversation Insights](https://cursor.com/docs/account/teams/analytics.md#conversation-insights) to the Bots your team runs. Cursor classifies each Grok Bot conversation so admins can see what kind of work Bots handle across the team, without reading the conversations themselves.
+
+Bots handle office work rather than editor sessions, so the Grok Bot view uses its own dimensions:
+
+|                    | Cursor                                     | Grok Bot                                                      |
+| ------------------ | ------------------------------------------ | ------------------------------------------------------------- |
+| What is classified | Agent sessions in the editor               | Bot conversations                                             |
+| Primary dimension  | Category and Work Type (coding categories) | Type of Work (jobs like Customer Support or Sales & Pipeline) |
+| Other dimensions   | Complexity, Specificity                    | Level of Automation                                           |
+
+### Classification Dimensions
+
+Grok Bot Conversation Insights classifies each conversation across these dimensions:
+
+- **Type of Work**: The job the Bot handled. Inbox & Briefings, Calendar & Meetings, Sales & Pipeline, Customer Support, Marketing & Content, Finance & Back Office, People & Recruiting, Engineering & Product, Research & Documents, Errands & Purchases, Setup & Exploration, Other
+
+- **Level of Automation**: How far the Bot acted on its own.
+  - **Not automated**: The Bot answered or recommended. A person did the work.
+  - **Semi-automated with human review**: The Bot drafted or staged a change and waited for approval.
+  - **Fully automated**: The Bot completed the action in the target tool.
+
+### Compare
+
+Compare works with the Grok Bot dimensions. Select teams or members to compare which jobs their Bots handle and how much of that work runs fully automated.
+
+### Privacy and Data Handling
+
+Grok Bot Conversation Insights reports aggregate counts per dimension. The dashboard doesn't show or export conversation content. Your team's Privacy Mode setting governs whether Grok Bot conversation data is used for training. See [Grok Bot security](https://cursor.com/docs/grok-bot/security.md#models-and-data).
 
 ## Cloud Agent Usage
 

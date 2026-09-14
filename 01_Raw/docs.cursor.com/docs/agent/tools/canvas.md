@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/tools/canvas
-fetched_at: 2026-06-01T05:54:48.205288+00:00
+fetched_at: 2026-09-14T05:36:05.153772+00:00
 fetch_method: mintlify_md
 ---
 
@@ -27,9 +27,11 @@ Each canvas appears in your workspace's canvas list, so you can jump back to pas
 
 ## Sharing canvases
 
-Shared canvases turn an interactive artifact into something your whole team can open, not just you. When you share a canvas, Cursor uploads a live snapshot of the view and gives you a link teammates can open in the browser — same layout, charts, and tables, without rerunning the agent or digging through chat history. Use **Publish** from the canvas toolbar to publish or refresh a share; browse everything your team has published from **Shared Canvases** on the [dashboard](https://cursor.com/dashboard).
+Sharing a canvas gives teammates a link to a live snapshot of the view: same layout, charts, and tables, without rerunning the agent or digging through chat history. Use **Publish** from the canvas toolbar to publish or refresh a share, then copy the link from the toolbar and send it to the teammates who need it. Anyone on your team can open the link in the browser with read-only access.
 
-Shared canvases are available on paid plans (Pro, Teams, and Enterprise). Free accounts cannot create shares. Because each share is team-visible, you need to be on a team — Pro users on a team can share too. Sharing also requires a privacy mode that allows data storage (Legacy Privacy Mode blocks it).
+The **Shared Canvases** page on the [dashboard](https://cursor.com/dashboard/shared-canvases) lists the canvases you published yourself, so you can reopen, copy, or delete your own shares. It does not list canvases published by teammates. To open a teammate's canvas, ask them for its share link.
+
+Shared canvases are available on paid plans (Pro, Teams, and Enterprise). Free accounts cannot create shares. Because only members of your team can open a share, you need to be on a team; Pro users on a team can share too. Sharing also requires a privacy mode that allows data storage (Legacy Privacy Mode blocks it).
 
 Team admins can turn shared canvases off for the organization from [team settings](https://cursor.com/dashboard/settings#shared-canvases) under **Shared Canvases**.
 

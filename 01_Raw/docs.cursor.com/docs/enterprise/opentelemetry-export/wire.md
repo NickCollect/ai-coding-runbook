@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/opentelemetry-export/wire
-fetched_at: 2026-09-07T05:31:28.663278+00:00
+fetched_at: 2026-09-14T05:36:08.270832+00:00
 fetch_method: mintlify_md
 ---
 
@@ -253,10 +253,15 @@ INFO, body `grok_bot_computer_use_session`. Family `grok_bot_agent_actions`. Cou
 
 ## Identity and joins
 
-- **Dedupe logs** on `cursor.event.id`.
-- **Session reconstruction:** group logs by `cursor.conversation.id` (composer UUID, `bc-...`, or Grok Bot conversation id).
-- **Billing reconcile grain:** `cursor.usage_event.id` across `api.request` / `api.error` / `api.correction`.
-- Metrics do not carry these ids. Use `api.request` logs for per-conversation token totals.
+| Goal                           | Field                               | Coverage                                                                    |
+| ------------------------------ | ----------------------------------- | --------------------------------------------------------------------------- |
+| Dedupe logs                    | `cursor.event.id`                   | Every log record                                                            |
+| Group by session or Bot        | `cursor.conversation.id`            | Logs when present. For Grok Bot, this value identifies the Bot.             |
+| Group Grok Bot actions by turn | `cursor.grok_bot.turn.id`           | `grok_bot.*` logs when present. `api.request` logs do not carry this field. |
+| Group by user                  | Resource attribute `cursor.user.id` | Logs and metrics when present. This is an opaque id.                        |
+| Reconcile billing              | `cursor.usage_event.id`             | `api.request`, `api.error`, and `api.correction` logs                       |
+
+Exported logs do not carry OpenTelemetry `trace_id` or `span_id` fields. Use `cursor.conversation.id` and `cursor.grok_bot.turn.id` for Bot and turn correlation. Metrics do not carry correlation ids; use `api.request` logs for per-conversation token totals.
 
 See [Joining sessions](https://cursor.com/docs/enterprise/opentelemetry-export.md#joining-sessions) on the setup page for recipes.
 

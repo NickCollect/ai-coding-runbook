@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/opentelemetry-export
-fetched_at: 2026-09-07T05:31:28.610186+00:00
+fetched_at: 2026-09-14T05:36:08.216105+00:00
 fetch_method: mintlify_md
 ---
 
@@ -164,7 +164,7 @@ Cursor stores headers encrypted. To rotate credentials, edit the destination and
 - **Cost is not billing.** `cursor.cost.usage` is a best-effort estimate. One series covers both included-quota drawdown and on-demand usage. For BYOK it reflects the **Cursor Token Rate** only, not provider spend. Use the Admin and billing APIs for invoices.
 - **Disabling or deleting a destination drops in-flight data.** Rotate credentials by editing the destination instead of deleting and re-adding it.
 - **Logs can arrive more than once.** Delivery is at-least-once. Dedupe on `cursor.event.id`.
-- **No prompt content, no traces, and no historical backfill.** Export starts when you enable the destination.
+- **No prompt content, trace context, or historical backfill.** Exported logs don't carry OpenTelemetry `trace_id` or `span_id` fields, and Cursor doesn't send traces. Export starts when you enable the destination.
 - **Metric datapoints carry no correlation IDs.** Use log attributes for per-conversation joins. See [Joining sessions](https://cursor.com/docs/enterprise/opentelemetry-export.md#joining-sessions).
 - **Metrics are delta-only.** Sum deltas per series. A strict delta-to-cumulative processor may drop end-time-inverted points.
 
@@ -174,10 +174,31 @@ Metrics (`cursor.token.usage`, `cursor.tool.calls`, `cursor.cost.usage`) are agg
 
 **What each id means**
 
-- `cursor.conversation.id` is the session key. In the IDE and CLI it's the composer chat UUID. For cloud agents it's the customer-visible `bc-...` agent id. For `grok_bot.*` logs it's the Grok Bot conversation id. The same value appears on that run's `api.request`, `api.error`, `skill.activated`, `hook.execution_complete`, `cloud_agent.*`, and `grok_bot.*` logs when present.
+- `cursor.conversation.id` is the session key. In the IDE and CLI it's the composer chat UUID. For cloud agents it's the customer-visible `bc-...` agent id. For `grok_bot.*` logs it identifies the Bot. The same value appears on that run's `api.request`, `api.error`, `skill.activated`, `hook.execution_complete`, `cloud_agent.*`, and `grok_bot.*` logs when present.
 - `cursor.usage_event.id` is the request-grain key on `api.request`, `api.error`, and `api.correction`. Use it to reconcile against Cursor usage and billing exports and to apply corrections.
 - `cursor.request.id` is an optional per-call id on most logs. It never appears on `api.correction`, `cloud_agent.*`, or `grok_bot.*`.
 - `cursor.event.id` is a dedupe key only, not a join key across event types.
+
+**Group Grok Bot activity**
+
+| Goal     | Group by                            | Coverage                                                            |
+| -------- | ----------------------------------- | ------------------------------------------------------------------- |
+| One Bot  | `cursor.conversation.id`            | Action Recording and model request logs for the Bot                 |
+| One turn | `cursor.grok_bot.turn.id`           | Action Recording logs from the turn when the source provides the id |
+| One user | Resource attribute `cursor.user.id` | Logs and metrics when the source provides the id                    |
+
+`cursor.grok_bot.turn.id` appears on `grok_bot.*` Action Recording logs. It does not appear on `api.request`, so model requests join to Grok Bot activity per Bot, not per turn. `cursor.user.id` is an optional opaque id. Don't require it on every record. Subagents use their own `cursor.conversation.id`; parent rollup is not exported.
+
+For example, a turn can produce these records:
+
+| Log event                            | `cursor.conversation.id` | `cursor.grok_bot.turn.id` | `cursor.grok_bot.tool_call.id` |
+| ------------------------------------ | ------------------------ | ------------------------- | ------------------------------ |
+| `cursor.api.request`                 | `bot-a`                  | Not present               | Not present                    |
+| `cursor.grok_bot.shell_command`      | `bot-a`                  | `turn-1`                  | Not present                    |
+| `cursor.grok_bot.browser_navigation` | `bot-a`                  | `turn-1`                  | Not present                    |
+| `cursor.grok_bot.mcp_tool_call`      | `bot-a`                  | `turn-1`                  | `tool-call-1` when present     |
+
+Group the `grok_bot.*` records by `turn-1` to reconstruct the recorded actions from the turn. Group all four records by `bot-a` to combine model requests and actions for the Bot. These fields are custom log attributes, not OpenTelemetry trace or span ids.
 
 **Recipe: rank sessions by tokens, then attach skills and tools**
 

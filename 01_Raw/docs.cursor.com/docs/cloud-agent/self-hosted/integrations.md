@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted/integrations
-fetched_at: 2026-09-07T05:31:27.606477+00:00
+fetched_at: 2026-09-14T05:36:07.361588+00:00
 fetch_method: mintlify_md
 ---
 
@@ -21,6 +21,7 @@ Each partner maintains its own guide for running Self-Hosted Machines workers on
 - **Daytona.** [Cursor Self-Hosted Machines on Daytona](https://www.daytona.io/docs/en/guides/cursor/cursor-self-hosted-machines)
 - **E2B.** [Cursor agents on E2B](https://docs.e2b.dev/agents/cursor)
 - **Vercel.** [Cursor with Vercel Sandbox](https://vercel.com/kb/guide/cursor-vercel-sandbox)
+- **Tensorlake.** [Cursor Cloud Agents on Tensorlake Sandboxes](https://docs.tensorlake.ai/sandboxes/cursor-cloud-agents)
 - **Coder.** [Agent Relay for Cursor](https://coder.com/docs/@main/ai-coder/agent-relay)
 
 ## Reference templates

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted/pool
-fetched_at: 2026-09-07T05:31:27.949987+00:00
+fetched_at: 2026-09-14T05:36:07.572282+00:00
 fetch_method: mintlify_md
 ---
 
@@ -400,7 +400,7 @@ deprecated. If your cluster already runs the operator, it keeps working, and
 the [operator reference](https://cursor.com/docs/cloud-agent/self-hosted/kubernetes.md) stays
 available. New Kubernetes deployments should use the k8s-workers template.
 
-Other hosts work the same way: any VM, container, or bare-metal machine that can install the Cursor CLI and reach Cursor over outbound HTTPS can run a pool worker under `systemd`, Docker, or your own process manager. For partner guides and reference templates covering AWS Lambda, Cloudflare, Namespace, Modal, Daytona, E2B, Vercel, and Coder, see [Integrations](https://cursor.com/docs/cloud-agent/self-hosted/integrations.md).
+Other hosts work the same way: any VM, container, or bare-metal machine that can install the Cursor CLI and reach Cursor over outbound HTTPS can run a pool worker under `systemd`, Docker, or your own process manager. For partner guides and reference templates covering AWS Lambda, Cloudflare, Namespace, Modal, Daytona, E2B, Vercel, Tensorlake, and Coder, see [Integrations](https://cursor.com/docs/cloud-agent/self-hosted/integrations.md).
 
 ## Worker controller
 
@@ -733,6 +733,7 @@ agent worker [options] start
 | `--clone-git-repos`            | On claim, clone the agent's GitHub repos into the workspace. Any-repo named pools only (not `default`, and not a bound repo or named machine). Implies `--mint-github-token`. Requires `git` on `PATH`. Default: off.                                              |
 | `--mint-github-token`          | Receive short-lived GitHub tokens during claimed runs. Pool workers only. Requires team-admin enablement. At most one credential-enabled worker per OS user or container.                                                                                          |
 | `--sync-dashboard-secrets`     | Receive eligible dashboard Cloud Agent secrets as environment variables during claimed runs. Pool workers only. Same one-worker-per-user rule.                                                                                                                     |
+| `--identity-socket`            | Serve a per-claim [OIDC token](https://cursor.com/docs/cloud-agent/identity.md#self-hosted-workers) socket to claimed agents. Sets `CURSOR_AGENT_SOCKET` to the socket's path in their shells. Off by default.                                                     |
 | `--worker-id <id>`             | Stable worker id used with [claim](https://cursor.com/docs/cloud-agent/api/endpoints.md#claim-a-pending-request). Prefer the env var so older CLI builds ignore an unknown flag. Env var: `CURSOR_AGENT_WORKER_ID`.                                                |
 | `-e, --endpoint <url>`         | API endpoint. Default: `https://api2.cursor.sh`.                                                                                                                                                                                                                   |
 

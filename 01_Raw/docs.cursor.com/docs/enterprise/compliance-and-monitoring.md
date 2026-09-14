@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/compliance-and-monitoring
-fetched_at: 2026-09-07T05:31:28.247009+00:00
+fetched_at: 2026-09-14T05:36:07.943589+00:00
 fetch_method: mintlify_md
 ---
 
@@ -63,6 +63,8 @@ Audit logs are delivered as JSON and include metadata and event-specific fields:
   "event": { /* event-specific fields */ }
 }
 ```
+
+Audit logs do not include OpenTelemetry trace or span ids. `metadata.event_id` identifies one audit event; it does not group related events. To group recorded Grok Bot actions by Bot or turn, use [OpenTelemetry Export](https://cursor.com/docs/enterprise/opentelemetry-export.md#joining-sessions).
 
 `application_type` is the product that performed the action: `grok_bot` for Grok Bot, or `cursor` for Cursor desktop, iOS, CLI, the Agent SDK, cursor.com, and the Admin API. It is an empty string when the application cannot be determined, and on rows written before the field existed. Older rows are not backfilled.
 

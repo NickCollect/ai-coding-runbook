@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted/my-machines
-fetched_at: 2026-09-07T05:31:27.612393+00:00
+fetched_at: 2026-09-14T05:36:07.485268+00:00
 fetch_method: mintlify_md
 ---
 
@@ -125,6 +125,14 @@ agent worker start --auth-token-file /var/run/cursor/token
 ```
 
 This is useful in Kubernetes because environment variables from Secrets are fixed when the pod starts. Secret volumes update while the pod runs, while mounted token paths can be live updated within the pod giving you the chance to refresh the token while the pod is running.
+
+### Mint identity tokens
+
+Let claimed agents mint short-lived OIDC tokens by passing `--identity-socket` before `start`. The worker sets `CURSOR_AGENT_SOCKET` to the socket path. The token identifies the owner of that run. See [OIDC tokens](https://cursor.com/docs/cloud-agent/identity.md#self-hosted-workers) for the socket contract, the trust model, and AWS.
+
+```bash
+agent worker --identity-socket start
+```
 
 ### Enable computer use
 
