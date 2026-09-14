@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/workspaces
-fetched_at: 2026-09-07T05:31:40.894878+00:00
+fetched_at: 2026-09-14T05:36:18.692743+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Workspaces
+url: https://platform.claude.com/docs/en/api/beta/organization/workspaces
 ---
 
 # Workspaces
@@ -39,6 +44,14 @@ List Workspaces
 ### Returns
 
 - `data: array of BetaWorkspace`
+
+  - `type: "workspace"`
+
+    Object type.
+
+    For Workspaces, this is always `"workspace"`.
+
+    default: workspace
 
   - `id: string`
 
@@ -116,14 +129,6 @@ List Workspaces
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
-  - `type: "workspace"`
-
-    Object type.
-
-    For Workspaces, this is always `"workspace"`.
-
-    default: workspace
-
 - `first_id: string or null`
 
   First ID in the `data` list. Can be used as the `before_id` for the previous page.
@@ -189,7 +194,7 @@ Create Workspace
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -236,6 +241,8 @@ Create Workspace
     - `"user-profiles-2026-03-24"`
 
     - `"user-profiles-2026-08-18"`
+
+    - `"user-profiles-2026-09-04"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -343,6 +350,14 @@ Create Workspace
 
 - `BetaWorkspace object`
 
+  - `type: "workspace"`
+
+    Object type.
+
+    For Workspaces, this is always `"workspace"`.
+
+    default: workspace
+
   - `id: string`
 
     ID of the Workspace.
@@ -418,14 +433,6 @@ Create Workspace
   - `tags: map[string]`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
-
-  - `type: "workspace"`
-
-    Object type.
-
-    For Workspaces, this is always `"workspace"`.
-
-    default: workspace
 
 ### Example
 
@@ -485,6 +492,14 @@ Get Workspace
 
 - `BetaWorkspace object`
 
+  - `type: "workspace"`
+
+    Object type.
+
+    For Workspaces, this is always `"workspace"`.
+
+    default: workspace
+
   - `id: string`
 
     ID of the Workspace.
@@ -560,14 +575,6 @@ Get Workspace
   - `tags: map[string]`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
-
-  - `type: "workspace"`
-
-    Object type.
-
-    For Workspaces, this is always `"workspace"`.
-
-    default: workspace
 
 ### Example
 
@@ -671,6 +678,14 @@ Update Workspace
 
 - `BetaWorkspace object`
 
+  - `type: "workspace"`
+
+    Object type.
+
+    For Workspaces, this is always `"workspace"`.
+
+    default: workspace
+
   - `id: string`
 
     ID of the Workspace.
@@ -746,14 +761,6 @@ Update Workspace
   - `tags: map[string]`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
-
-  - `type: "workspace"`
-
-    Object type.
-
-    For Workspaces, this is always `"workspace"`.
-
-    default: workspace
 
 ### Example
 
@@ -810,6 +817,14 @@ Archive Workspace
 
 - `BetaWorkspace object`
 
+  - `type: "workspace"`
+
+    Object type.
+
+    For Workspaces, this is always `"workspace"`.
+
+    default: workspace
+
   - `id: string`
 
     ID of the Workspace.
@@ -885,14 +900,6 @@ Archive Workspace
   - `tags: map[string]`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
-
-  - `type: "workspace"`
-
-    Object type.
-
-    For Workspaces, this is always `"workspace"`.
-
-    default: workspace
 
 ### Example
 
@@ -1025,6 +1032,14 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/archive
 
 - `BetaWorkspace object`
 
+  - `type: "workspace"`
+
+    Object type.
+
+    For Workspaces, this is always `"workspace"`.
+
+    default: workspace
+
   - `id: string`
 
     ID of the Workspace.
@@ -1100,14 +1115,6 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/archive
   - `tags: map[string]`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
-
-  - `type: "workspace"`
-
-    Object type.
-
-    For Workspaces, this is always `"workspace"`.
-
-    default: workspace
 
 ### Beta Workspace Member
 
@@ -1215,6 +1222,12 @@ the remaining entries.
 
   Rate-limit entries for the workspace, one per group that has at least one override.
 
+  - `type: "workspace_rate_limit"`
+
+    Object type. Always `workspace_rate_limit` for workspace rate-limit entries.
+
+    default: workspace_rate_limit
+
   - `group_type: "batch" or "files" or "model_group" or 3 more`
 
     The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
@@ -1235,13 +1248,13 @@ the remaining entries.
 
     The limiter values overridden for this group in this workspace. Limiter types without a workspace override are omitted and inherit the organization value.
 
-    - `org_limit: number or null`
-
-      The organization-level value for the same limiter type, for reference. `null` when the organization has no limit configured for this limiter type.
-
     - `type: string`
 
       The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+
+    - `org_limit: number or null`
+
+      The organization-level value for the same limiter type, for reference. `null` when the organization has no limit configured for this limiter type.
 
     - `value: number`
 
@@ -1254,12 +1267,6 @@ the remaining entries.
   - `rate_limit_id: string`
 
     The `id` of the RateLimit group this override applies to.
-
-  - `type: "workspace_rate_limit"`
-
-    Object type. Always `workspace_rate_limit` for workspace rate-limit entries.
-
-    default: workspace_rate_limit
 
   - `workspace_id: string`
 
@@ -1749,7 +1756,7 @@ omitted from the results.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1797,6 +1804,8 @@ omitted from the results.
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -1843,6 +1852,10 @@ omitted from the results.
 
 - `data: array of BetaServiceAccountWorkspaceMember`
 
+  - `type: "service_account_workspace_member"`
+
+    default: service_account_workspace_member
+
   - `created_by_actor_id: string or null`
 
     Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
@@ -1854,10 +1867,6 @@ omitted from the results.
   - `service_account_id: string`
 
     Tagged service account ID (`svac_...`).
-
-  - `type: "service_account_workspace_member"`
-
-    default: service_account_workspace_member
 
   - `workspace_id: string`
 
@@ -1938,7 +1947,7 @@ accounts cannot be added and are rejected.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1985,6 +1994,8 @@ accounts cannot be added and are rejected.
     - `"user-profiles-2026-03-24"`
 
     - `"user-profiles-2026-08-18"`
+
+    - `"user-profiles-2026-09-04"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -2050,6 +2061,10 @@ accounts cannot be added and are rejected.
 
 - `BetaServiceAccountWorkspaceMember object`
 
+  - `type: "service_account_workspace_member"`
+
+    default: service_account_workspace_member
+
   - `created_by_actor_id: string or null`
 
     Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
@@ -2061,10 +2076,6 @@ accounts cannot be added and are rejected.
   - `service_account_id: string`
 
     Tagged service account ID (`svac_...`).
-
-  - `type: "service_account_workspace_member"`
-
-    default: service_account_workspace_member
 
   - `workspace_id: string`
 
@@ -2143,7 +2154,7 @@ account returns 404.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2191,6 +2202,8 @@ account returns 404.
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -2237,6 +2250,10 @@ account returns 404.
 
 - `BetaServiceAccountWorkspaceMember object`
 
+  - `type: "service_account_workspace_member"`
+
+    default: service_account_workspace_member
+
   - `created_by_actor_id: string or null`
 
     Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
@@ -2248,10 +2265,6 @@ account returns 404.
   - `service_account_id: string`
 
     Tagged service account ID (`svac_...`).
-
-  - `type: "service_account_workspace_member"`
-
-    default: service_account_workspace_member
 
   - `workspace_id: string`
 
@@ -2325,7 +2338,7 @@ rejected.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2372,6 +2385,8 @@ rejected.
     - `"user-profiles-2026-03-24"`
 
     - `"user-profiles-2026-08-18"`
+
+    - `"user-profiles-2026-09-04"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -2433,6 +2448,10 @@ rejected.
 
 - `BetaServiceAccountWorkspaceMember object`
 
+  - `type: "service_account_workspace_member"`
+
+    default: service_account_workspace_member
+
   - `created_by_actor_id: string or null`
 
     Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
@@ -2444,10 +2463,6 @@ rejected.
   - `service_account_id: string`
 
     Tagged service account ID (`svac_...`).
-
-  - `type: "service_account_workspace_member"`
-
-    default: service_account_workspace_member
 
   - `workspace_id: string`
 
@@ -2524,7 +2539,7 @@ membership. Archived workspaces return 400.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2572,6 +2587,8 @@ membership. Archived workspaces return 400.
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -2616,13 +2633,13 @@ membership. Archived workspaces return 400.
 
 #### Returns
 
-- `service_account_id: string`
-
-  Tagged service account ID (`svac_...`) named in the delete request. Removal is idempotent; see the endpoint description for the implicit-membership no-op.
-
 - `type: "service_account_workspace_member_deleted"`
 
   default: service_account_workspace_member_deleted
+
+- `service_account_id: string`
+
+  Tagged service account ID (`svac_...`) named in the delete request. Removal is idempotent; see the endpoint description for the implicit-membership no-op.
 
 - `workspace_id: string`
 

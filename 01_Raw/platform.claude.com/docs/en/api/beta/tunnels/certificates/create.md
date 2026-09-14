@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/tunnels/certificates/create
-fetched_at: 2026-09-07T05:31:38.861108+00:00
+fetched_at: 2026-09-14T05:36:16.873485+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Create Tunnel Certificate
+url: https://platform.claude.com/docs/en/api/beta/tunnels/certificates/create
 ---
 
 # Create Tunnel Certificate
@@ -24,7 +29,7 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -72,6 +77,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -114,6 +121,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ## Body parameters
 
 - `ca_certificate_pem: string`
@@ -127,6 +136,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 - `BetaTunnelCertificate object`
 
   A CA certificate attached to a tunnel.
+
+  - `type: "tunnel_certificate"`
 
   - `id: string`
 
@@ -157,8 +168,6 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
   - `tunnel_id: string`
 
     ID of the tunnel the certificate is registered against.
-
-  - `type: "tunnel_certificate"`
 
 ## Example
 

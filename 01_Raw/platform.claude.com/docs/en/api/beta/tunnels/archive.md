@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/tunnels/archive
-fetched_at: 2026-09-07T05:31:38.639974+00:00
+fetched_at: 2026-09-14T05:36:16.735503+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Archive Tunnel
+url: https://platform.claude.com/docs/en/api/beta/tunnels/archive
 ---
 
 # Archive Tunnel
@@ -24,7 +29,7 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -72,6 +77,8 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -114,11 +121,15 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ## Returns
 
 - `BetaTunnel object`
 
   An MCP tunnel.
+
+  - `type: "tunnel"`
 
   - `id: string`
 
@@ -143,8 +154,6 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
   - `domain: string`
 
     Anthropic-assigned hostname for the tunnel. MCP server URLs whose host is a subdomain of this value are routed through the tunnel. Globally unique and never reused, even after the tunnel is archived.
-
-  - `type: "tunnel"`
 
 ## Example
 

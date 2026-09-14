@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/files/download
-fetched_at: 2026-08-31T06:29:36.767855+00:00
+fetched_at: 2026-09-14T05:36:11.484710+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Download File
+url: https://platform.claude.com/docs/en/api/files/download
 ---
 
 # Download File
@@ -15,6 +20,10 @@ Download File
 - `file_id: string`
 
   ID of the File.
+
+## Headers
+
+- `"anthropic-workspace-id": optional string`
 
 ## Example
 

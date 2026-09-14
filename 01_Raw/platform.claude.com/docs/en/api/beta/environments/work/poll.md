@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/work/poll
-fetched_at: 2026-09-07T05:31:34.550463+00:00
+fetched_at: 2026-09-14T05:36:13.097227+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Poll for Work
+url: https://platform.claude.com/docs/en/api/beta/environments/work/poll
 ---
 
 # Poll for Work
@@ -38,7 +43,7 @@ Long poll for work items in the queue.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -85,6 +90,8 @@ Long poll for work items in the queue.
     - `"user-profiles-2026-03-24"`
 
     - `"user-profiles-2026-08-18"`
+
+    - `"user-profiles-2026-09-04"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -142,6 +149,12 @@ Long poll for work items in the queue.
   receive new messages. The environment worker polls for work to execute in a
   self-hosted sandbox.
 
+  - `type: "work"`
+
+    The type of object (always 'work')
+
+    default: work
+
   - `id: string`
 
     Work identifier (e.g., 'work_...')
@@ -158,13 +171,13 @@ Long poll for work items in the queue.
 
     The actual work to be performed
 
-    - `id: string`
-
-      Session identifier (e.g., 'session_...')
-
     - `type: "session"`
 
       Type of work data
+
+    - `id: string`
+
+      Session identifier (e.g., 'session_...')
 
   - `environment_id: string`
 
@@ -207,12 +220,6 @@ Long poll for work items in the queue.
   - `stopped_at: string or null`
 
     RFC 3339 timestamp when work execution stopped
-
-  - `type: "work"`
-
-    The type of object (always 'work')
-
-    default: work
 
 ## Example
 

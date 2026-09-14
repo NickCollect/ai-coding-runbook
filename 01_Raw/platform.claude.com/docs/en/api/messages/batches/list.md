@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages/batches/list
-fetched_at: 2026-08-31T06:29:36.493205+00:00
+fetched_at: 2026-09-14T05:36:11.108762+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: List Message Batches
+url: https://platform.claude.com/docs/en/api/messages/batches/list
 ---
 
 # List Message Batches
@@ -30,9 +35,21 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   default: 20, maximum: 1000, minimum: 1
 
+## Headers
+
+- `"anthropic-workspace-id": optional string`
+
 ## Returns
 
 - `data: array of MessageBatch`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
 
   - `id: string`
 
@@ -131,14 +148,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
-    default: message_batch
 
 - `first_id: string or null`
 

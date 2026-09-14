@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/models/fable-5-1/migration-guide
-fetched_at: 2026-09-07T05:31:29.820816+00:00
+fetched_at: 2026-09-14T05:36:08.450238+00:00
 fetch_method: mintlify_md
 ---
 
@@ -952,7 +952,7 @@ model = "claude-mythos-5-1"  # After
 
 2. **Thinking blocks are preserved only for the model that produced them, or a newer one:** Every `thinking` block records which model produced it. Claude Fable 5.1 reads its own blocks and those from Claude Mythos 5.1, Claude Opus 5, Claude Fable 5, Claude Mythos 5, and earlier Claude models. A conversation moving onto `claude-fable-5-1` from any of those keeps its earlier reasoning. The condition is one-way: apart from Claude Mythos 5.1, none of those models can read Claude Fable 5.1's blocks.
 
-   A conversation that ran on Claude Fable 5.1 can land on an older model through a router switch, a client-side retry, or a [classifier refusal fallback](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback), including a [server-side fallback](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback). The API removes the blocks that model can't read before it sees them, the request succeeds, and you aren't billed for the dropped input tokens. The target model re-plans without that reasoning, which can raise cost and latency on the first turn after the switch. To see what was dropped, send the `thinking-binding-controls-2026-08-01` [beta header](https://platform.claude.com/docs/en/api/beta-headers): responses then carry an `input_transformations` array naming each dropped block with `reason: "model_binding_mismatch"`. See [Preserved thinking](https://platform.claude.com/docs/en/build-with-claude/thinking#preserved-for-model).
+   A conversation that ran on Claude Fable 5.1 can land on an older model through a router switch, a client-side retry, or a [classifier refusal fallback](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback), including a [server-side fallback](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback). The API removes the blocks that model can't read before it sees them, the request succeeds, and you aren't billed for the dropped input tokens. The target model re-plans without that reasoning, which can raise cost and latency on the first turn after the switch. To see what was dropped, send the `thinking-binding-controls-2026-08-01` [beta header](https://platform.claude.com/docs/en/api/beta-headers): responses then carry an `input_transformations` array naming each dropped block with `reason: "model_binding_mismatch"`. See [Switching models mid-conversation](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#switching-models).
 
 3. **Editing earlier turns invalidates thinking blocks:** Each `thinking` block from Claude Fable 5.1 is valid only against the `system` prompt, `tools`, and conversation history that preceded it. If Claude Code, claude.ai, [Claude Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview), or the [Claude Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview) manages your conversation history, it already keeps that prefix intact. If your code builds the `messages` array itself, this item applies to you, and [Preserved thinking](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking) is the full integration guide. Where the check is enforced, a request that sends the block back after any of those changed is rejected with a 400 error:
 
@@ -1567,7 +1567,7 @@ These changes aren't required, but each one lowers cost or latency or removes a 
 * If your interface renders progress text between tool calls, set `thinking.display` to `"updates"` (beta) or `"summarized"` and prompt for updates.
 * If you change effort between requests, move the change to a [per-message effort](https://platform.claude.com/docs/en/build-with-claude/effort#change-effort-mid-conversation-beta) `role: "system"` message (beta) to keep cache hits.
 * Handle `stop_reason: "refusal"` and read `stop_details.category`. Consider `fallbacks: "default"` (beta).
-* Re-evaluate `effort` with a fresh sweep, starting at `high`, and re-baseline cost and latency on your own workloads. Token counts are roughly unchanged. Prompt cache reads cost a quarter of the Claude Fable 5 rate.
+* Re-evaluate `effort` with a fresh sweep, starting at `high`, and re-baseline cost and latency on your own workloads. The tokenizer is unchanged. Prompt cache reads cost a quarter of the Claude Fable 5 rate.
 
 ## Migrating to Claude Fable 5.1 from Claude Opus 5
 
@@ -1607,7 +1607,7 @@ model = "claude-mythos-5-1"  # After
 * Replace forced `tool_choice` (`any` or `tool`) with `auto` plus an explicit instruction (`user` turn or mid-conversation system message) and `strict: true` tools, or with JSON outputs.
 * If your interface renders text between tool calls, set `display: "updates"` (beta) or `"summarized"` and render the non-empty `thinking` blocks.
 * Apply the preserved-thinking, history-editing, behavior, effort, and fallback items from the [Claude Fable 5 checklist](https://platform.claude.com/docs/en/models/fable-5-1/migration-guide#migration-checklist-fable-5-1-from-fable-5).
-* Re-baseline cost on your own workloads. Token counts are roughly unchanged. Per-token pricing differs.
+* Re-baseline cost on your own workloads. The tokenizer is unchanged. Per-token pricing differs.
 
 ## Migrating to Claude Fable 5.1 from Claude Opus 4.8 or earlier
 

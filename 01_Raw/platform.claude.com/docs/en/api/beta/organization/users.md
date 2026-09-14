@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/users
-fetched_at: 2026-08-31T06:29:42.424562+00:00
+fetched_at: 2026-09-14T05:36:18.475376+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Users
+url: https://platform.claude.com/docs/en/api/beta/organization/users
 ---
 
 # Users
@@ -46,6 +51,14 @@ List the organization's members.
 
 - `data: array of BetaOrganizationUser`
 
+  - `type: "user"`
+
+    Object type.
+
+    For Users, this is always `"user"`.
+
+    default: user
+
   - `id: string`
 
     ID of the User.
@@ -85,14 +98,6 @@ List the organization's members.
     - `"primary_owner"`
 
     - `"user"`
-
-  - `type: "user"`
-
-    Object type.
-
-    For Users, this is always `"user"`.
-
-    default: user
 
 - `first_id: string or null`
 
@@ -150,6 +155,14 @@ Retrieve a member of the organization by user ID.
 
 - `BetaOrganizationUser object`
 
+  - `type: "user"`
+
+    Object type.
+
+    For Users, this is always `"user"`.
+
+    default: user
+
   - `id: string`
 
     ID of the User.
@@ -189,14 +202,6 @@ Retrieve a member of the organization by user ID.
     - `"primary_owner"`
 
     - `"user"`
-
-  - `type: "user"`
-
-    Object type.
-
-    For Users, this is always `"user"`.
-
-    default: user
 
 ### Example
 
@@ -253,6 +258,14 @@ Update a member's organization role.
 
 - `BetaOrganizationUser object`
 
+  - `type: "user"`
+
+    Object type.
+
+    For Users, this is always `"user"`.
+
+    default: user
+
   - `id: string`
 
     ID of the User.
@@ -292,14 +305,6 @@ Update a member's organization role.
     - `"primary_owner"`
 
     - `"user"`
-
-  - `type: "user"`
-
-    Object type.
-
-    For Users, this is always `"user"`.
-
-    default: user
 
 ### Example
 
@@ -340,10 +345,6 @@ Remove a member from the organization.
 
 ### Returns
 
-- `id: string`
-
-  ID of the User.
-
 - `type: "user_deleted"`
 
   Deleted object type.
@@ -351,6 +352,10 @@ Remove a member from the organization.
   For Users, this is always `"user_deleted"`.
 
   default: user_deleted
+
+- `id: string`
+
+  ID of the User.
 
 ### Example
 
@@ -375,6 +380,14 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
 ### Beta Organization User
 
 - `BetaOrganizationUser object`
+
+  - `type: "user"`
+
+    Object type.
+
+    For Users, this is always `"user"`.
+
+    default: user
 
   - `id: string`
 
@@ -416,21 +429,9 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
 
     - `"user"`
 
-  - `type: "user"`
-
-    Object type.
-
-    For Users, this is always `"user"`.
-
-    default: user
-
 ### User Remove Response
 
 - `UserRemoveResponse object`
-
-  - `id: string`
-
-    ID of the User.
 
   - `type: "user_deleted"`
 
@@ -439,3 +440,7 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
     For Users, this is always `"user_deleted"`.
 
     default: user_deleted
+
+  - `id: string`
+
+    ID of the User.

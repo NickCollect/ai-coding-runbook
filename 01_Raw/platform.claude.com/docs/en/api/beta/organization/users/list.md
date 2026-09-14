@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/users/list
-fetched_at: 2026-08-31T06:29:42.422980+00:00
+fetched_at: 2026-09-14T05:36:18.460257+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: List Users
+url: https://platform.claude.com/docs/en/api/beta/organization/users/list
 ---
 
 # List Users
@@ -44,6 +49,14 @@ List the organization's members.
 
 - `data: array of BetaOrganizationUser`
 
+  - `type: "user"`
+
+    Object type.
+
+    For Users, this is always `"user"`.
+
+    default: user
+
   - `id: string`
 
     ID of the User.
@@ -83,14 +96,6 @@ List the organization's members.
     - `"primary_owner"`
 
     - `"user"`
-
-  - `type: "user"`
-
-    Object type.
-
-    For Users, this is always `"user"`.
-
-    default: user
 
 - `first_id: string or null`
 

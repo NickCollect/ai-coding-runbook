@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/skills/delete
-fetched_at: 2026-09-07T05:31:37.878643+00:00
+fetched_at: 2026-09-14T05:36:15.922012+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Delete Skill
+url: https://platform.claude.com/docs/en/api/beta/skills/delete
 ---
 
 # Delete Skill
@@ -26,7 +31,7 @@ Delete Skill
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -74,6 +79,8 @@ Delete Skill
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -116,15 +123,11 @@ Delete Skill
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ## Returns
 
 - `BetaDeletedSkill object`
-
-  - `id: string`
-
-    Unique identifier for the skill.
-
-    The format and length of IDs may change over time.
 
   - `type: "skill_deleted"`
 
@@ -133,6 +136,12 @@ Delete Skill
     For Skills, this is always `"skill_deleted"`.
 
     default: skill_deleted
+
+  - `id: string`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
 
 ## Example
 

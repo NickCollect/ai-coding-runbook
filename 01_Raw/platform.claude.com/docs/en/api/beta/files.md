@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/files
-fetched_at: 2026-09-07T05:31:37.574542+00:00
+fetched_at: 2026-09-14T05:36:15.587746+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Files
+url: https://platform.claude.com/docs/en/api/beta/files
 ---
 
 # Files
@@ -20,7 +25,7 @@ Upload File
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -68,6 +73,8 @@ Upload File
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -110,11 +117,13 @@ Upload File
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ### Body parameters (form-data)
 
 - `file: string`
 
-  The file to upload
+  The file to upload. Only the final path component of the part's `filename` is kept; an absent or empty `filename` is replaced with `unnamed` plus the extension for the file's stored `mime_type`, when known.
 
   format: binary
 
@@ -127,6 +136,12 @@ Upload File
 ### Returns
 
 - `BetaFileMetadata object`
+
+  - `type: "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `id: string`
 
@@ -158,12 +173,6 @@ Upload File
 
     minimum: 0
 
-  - `type: "file"`
-
-    Object type.
-
-    For files, this is always `"file"`.
-
   - `downloadable: optional boolean`
 
     Whether the file can be downloaded.
@@ -180,13 +189,13 @@ Upload File
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
-    - `id: string`
-
-      The ID of the scoping resource (e.g., the session ID).
-
     - `type: "session"`
 
       The type of scope (e.g., `"session"`).
+
+    - `id: string`
+
+      The ID of the scoping resource (e.g., the session ID).
 
 ### Example
 
@@ -253,7 +262,7 @@ List Files
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -301,6 +310,8 @@ List Files
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -343,11 +354,19 @@ List Files
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ### Returns
 
 - `data: array of BetaFileMetadata`
 
   List of file metadata objects.
+
+  - `type: "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `id: string`
 
@@ -379,12 +398,6 @@ List Files
 
     minimum: 0
 
-  - `type: "file"`
-
-    Object type.
-
-    For files, this is always `"file"`.
-
   - `downloadable: optional boolean`
 
     Whether the file can be downloaded.
@@ -401,13 +414,13 @@ List Files
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
-    - `id: string`
-
-      The ID of the scoping resource (e.g., the session ID).
-
     - `type: "session"`
 
       The type of scope (e.g., `"session"`).
+
+    - `id: string`
+
+      The ID of the scoping resource (e.g., the session ID).
 
 - `next_page: optional string or null`
 
@@ -465,7 +478,7 @@ Download File
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -513,6 +526,8 @@ Download File
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -554,6 +569,8 @@ Download File
     - `"thinking-binding-controls-2026-08-01"`
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
+
+- `"anthropic-workspace-id": optional string`
 
 ### Example
 
@@ -583,7 +600,7 @@ Get File Metadata
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -631,6 +648,8 @@ Get File Metadata
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -673,9 +692,17 @@ Get File Metadata
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ### Returns
 
 - `BetaFileMetadata object`
+
+  - `type: "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `id: string`
 
@@ -707,12 +734,6 @@ Get File Metadata
 
     minimum: 0
 
-  - `type: "file"`
-
-    Object type.
-
-    For files, this is always `"file"`.
-
   - `downloadable: optional boolean`
 
     Whether the file can be downloaded.
@@ -729,13 +750,13 @@ Get File Metadata
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
-    - `id: string`
-
-      The ID of the scoping resource (e.g., the session ID).
-
     - `type: "session"`
 
       The type of scope (e.g., `"session"`).
+
+    - `id: string`
+
+      The ID of the scoping resource (e.g., the session ID).
 
 ### Example
 
@@ -784,7 +805,7 @@ Delete File
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -832,6 +853,8 @@ Delete File
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -874,13 +897,11 @@ Delete File
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ### Returns
 
 - `BetaDeletedFile object`
-
-  - `id: string`
-
-    ID of the deleted file.
 
   - `type: optional "file_deleted"`
 
@@ -889,6 +910,10 @@ Delete File
     For file deletion, this is always `"file_deleted"`.
 
     default: file_deleted
+
+  - `id: string`
+
+    ID of the deleted file.
 
 ### Example
 
@@ -914,10 +939,6 @@ curl https://api.anthropic.com/v1/files/$FILE_ID \
 
 - `BetaDeletedFile object`
 
-  - `id: string`
-
-    ID of the deleted file.
-
   - `type: optional "file_deleted"`
 
     Deleted object type.
@@ -926,9 +947,19 @@ curl https://api.anthropic.com/v1/files/$FILE_ID \
 
     default: file_deleted
 
+  - `id: string`
+
+    ID of the deleted file.
+
 ### Beta File Metadata
 
 - `BetaFileMetadata object`
+
+  - `type: "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `id: string`
 
@@ -960,12 +991,6 @@ curl https://api.anthropic.com/v1/files/$FILE_ID \
 
     minimum: 0
 
-  - `type: "file"`
-
-    Object type.
-
-    For files, this is always `"file"`.
-
   - `downloadable: optional boolean`
 
     Whether the file can be downloaded.
@@ -982,22 +1007,22 @@ curl https://api.anthropic.com/v1/files/$FILE_ID \
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
-    - `id: string`
-
-      The ID of the scoping resource (e.g., the session ID).
-
     - `type: "session"`
 
       The type of scope (e.g., `"session"`).
+
+    - `id: string`
+
+      The ID of the scoping resource (e.g., the session ID).
 
 ### Beta File Scope
 
 - `BetaFileScope object`
 
-  - `id: string`
-
-    The ID of the scoping resource (e.g., the session ID).
-
   - `type: "session"`
 
     The type of scope (e.g., `"session"`).
+
+  - `id: string`
+
+    The ID of the scoping resource (e.g., the session ID).

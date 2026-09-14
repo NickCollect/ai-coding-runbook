@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/invites/delete
-fetched_at: 2026-08-31T06:29:42.044717+00:00
+fetched_at: 2026-09-14T05:36:18.109476+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Delete Invite
+url: https://platform.claude.com/docs/en/api/beta/organization/invites/delete
 ---
 
 # Delete Invite
@@ -18,10 +23,6 @@ Delete a pending invite.
 
 ## Returns
 
-- `id: string`
-
-  ID of the Invite.
-
 - `type: "invite_deleted"`
 
   Deleted object type.
@@ -29,6 +30,10 @@ Delete a pending invite.
   For Invites, this is always `"invite_deleted"`.
 
   default: invite_deleted
+
+- `id: string`
+
+  ID of the Invite.
 
 ## Example
 

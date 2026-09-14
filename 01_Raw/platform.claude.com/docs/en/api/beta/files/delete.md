@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/files/delete
-fetched_at: 2026-09-07T05:31:37.696335+00:00
+fetched_at: 2026-09-14T05:36:15.714018+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Delete File
+url: https://platform.claude.com/docs/en/api/beta/files/delete
 ---
 
 # Delete File
@@ -24,7 +29,7 @@ Delete File
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -72,6 +77,8 @@ Delete File
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -114,13 +121,11 @@ Delete File
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ## Returns
 
 - `BetaDeletedFile object`
-
-  - `id: string`
-
-    ID of the deleted file.
 
   - `type: optional "file_deleted"`
 
@@ -129,6 +134,10 @@ Delete File
     For file deletion, this is always `"file_deleted"`.
 
     default: file_deleted
+
+  - `id: string`
+
+    ID of the deleted file.
 
 ## Example
 

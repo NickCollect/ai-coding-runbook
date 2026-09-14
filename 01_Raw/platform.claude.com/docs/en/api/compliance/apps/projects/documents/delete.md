@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/projects/documents/delete
-fetched_at: 2026-08-31T06:29:47.859220+00:00
+fetched_at: 2026-09-14T05:36:23.138174+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Delete project document
+url: https://platform.claude.com/docs/en/api/compliance/apps/projects/documents/delete
 ---
 
 # Delete project document
@@ -20,19 +25,25 @@ Hard-deletes the project document permanently.
 
 ## Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
+
 - `"x-api-key": optional string`
 
 ## Returns
-
-- `id: string`
-
-  The ID of the project document that was deleted
 
 - `type: "claude_project_document_deleted"`
 
   Constant string confirming deletion.
 
   default: claude_project_document_deleted
+
+- `id: string`
+
+  The ID of the project document that was deleted
 
 ## Example
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/events-and-streaming
-fetched_at: 2026-09-07T05:31:27.556268+00:00
+fetched_at: 2026-09-14T05:36:06.579379+00:00
 fetch_method: mintlify_md
 ---
 
@@ -511,7 +511,10 @@ Every persisted event includes a `processed_at` timestamp set when the event fin
           {
               foreach (var block in message.Content)
               {
-                  Console.Write(block.Text);
+                  if (block.Value is BetaManagedAgentsTextBlock textBlock)
+                  {
+                      Console.Write(textBlock.Text);
+                  }
               }
           }
           else if (streamEvent.Value is BetaManagedAgentsSessionStatusIdleEvent)
@@ -783,7 +786,10 @@ Every persisted event includes a `processed_at` timestamp set when the event fin
           {
               foreach (var block in message.Content)
               {
-                  Console.Write(block.Text);
+                  if (block.Value is BetaManagedAgentsTextBlock textBlock)
+                  {
+                      Console.Write(textBlock.Text);
+                  }
               }
           }
           else if (streamEvent.Value is BetaManagedAgentsSessionStatusIdleEvent)
@@ -1286,14 +1292,18 @@ Guarantees the pattern relies on:
       const preview = accumulateManagedAgentsEvent(previews.get(event.event_id), event);
       if (preview) {
         previews.set(event.event_id, preview);
-        const text = preview.content.map((block) => block.text).join("");
+        const text = preview.content
+          .map((block) => (block.type === "text" ? block.text : ""))
+          .join("");
         console.log(`event_delta             preview: ${JSON.stringify(text)}`);
       }
     } else if (event.type === "agent.message") {
       // 3. The buffered event is the record: it replaces and closes the preview
       const message = accumulateManagedAgentsEvent(previews.get(event.id), event);
       previews.delete(event.id);
-      const text = message.content.map((block) => block.text).join("");
+      const text = message.content
+        .map((block) => (block.type === "text" ? block.text : ""))
+        .join("");
       console.log(`agent.message           ${event.id} ${JSON.stringify(text)}`);
     } else if (event.type === "span.model_request_end") {
       // 4. No more deltas are coming. Close any preview that was never reconciled.
@@ -1365,7 +1375,9 @@ Guarantees the pattern relies on:
       {
           // Deltas are best-effort: discard the preview and use the buffered event
           previews.Remove(message.ID);
-          Console.WriteLine($"agent.message           {message.ID} {string.Concat(message.Content.Select(block => block.Text))}");
+          var text = string.Concat(message.Content.Select(block =>
+              block.TryPickBetaManagedAgentsTextBlock(out var textBlock) ? textBlock.Text : ""));
+          Console.WriteLine($"agent.message           {message.ID} {text}");
       }
       else if (streamEvent.TryPickSpanModelRequestEndEvent(out _))
       {
@@ -1694,7 +1706,9 @@ The preview events themselves don't change. `event_start` and `event_delta` have
     } else if (event.type === "agent.message") {
       // The buffered event is the authoritative record; render its content.
       process.stdout.write("\n");
-      const text = event.content.map((block) => block.text).join("");
+      const text = event.content
+        .map((block) => (block.type === "text" ? block.text : ""))
+        .join("");
       console.log(text);
     } else if (event.type === "session.thread_status_idle") {
       break;
@@ -1726,7 +1740,9 @@ The preview events themselves don't change. `event_start` and `event_delta` have
       {
           // The buffered event is the authoritative record; render its content.
           Console.WriteLine();
-          Console.WriteLine(string.Concat(message.Content.Select(block => block.Text)));
+          var text = string.Concat(message.Content.Select(block =>
+              block.TryPickBetaManagedAgentsTextBlock(out var textBlock) ? textBlock.Text : ""));
+          Console.WriteLine(text);
       }
       else if (streamEvent.TryPickSessionThreadStatusIdleEvent(out _))
       {
@@ -2152,12 +2168,30 @@ When the agent invokes a [custom tool](https://platform.claude.com/docs/en/manag
 
 ### Tool confirmation
 
-When a [permission policy](https://platform.claude.com/docs/en/managed-agents/permission-policies) requires confirmation before a tool executes:
+A tool call waits for your confirmation under an `always_ask` [permission policy](https://platform.claude.com/docs/en/managed-agents/permission-policies), or under `auto` when the server reaches no determination. When that happens:
 
 1. The session emits an `agent.tool_use` or `agent.mcp_tool_use` event.
-2. The session pauses with a `session.status_idle` event containing `stop_reason: requires_action`. The blocking event IDs are in the `stop_reason.event_ids` array.
+2. The session pauses with a `session.status_idle` event whose `stop_reason.type` is `requires_action`. The blocking event IDs are in the `stop_reason.event_ids` array.
 3. Send a `user.tool_confirmation` event for each, passing the event ID in the `tool_use_id` parameter. Set `result` to `"allow"` or `"deny"`. Use `deny_message` to explain a denial.
 4. Once all blocking events are resolved, the session transitions back to `running`.
+
+Each `agent.tool_use` and `agent.mcp_tool_use` event carries `evaluated_permission` (`allow`, `ask`, or `deny`), and only events whose `evaluated_permission` is `"ask"` wait for a confirmation. Most events also carry an `evaluation` object that records which policy produced that outcome, described under [See how each call was evaluated](https://platform.claude.com/docs/en/managed-agents/permission-policies#see-how-each-call-was-evaluated). For example, a `bash` call paused under an `always_ask` policy appears on the stream as follows:
+
+```json
+{
+  "type": "agent.tool_use",
+  "id": "sevt_01def...",
+  "name": "bash",
+  "input": {
+    "command": "pip install -r requirements.txt"
+  },
+  "evaluated_permission": "ask",
+  "evaluation": {
+    "type": "always_ask"
+  },
+  "processed_at": "2026-03-25T14:01:45Z"
+}
+```
 
 <CodeGroup>
   ```bash cURL
@@ -2774,6 +2808,8 @@ The Claude Console includes a session viewer for inspecting what an agent did wi
   * **Threads** lists every thread with its status, context size, and cost. Select a thread to view its details, such as the agent, model, context usage, and cost.
 
 Append `?event={event_id}` to a session URL to open the session at a specific event.
+
+With `ant beta:sessions connect`, you can open the same viewer from the `ant` CLI or follow the session in your terminal. See [Connect to a Managed Agents session from your terminal](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/sessions-connect).
 
 ## Debugging tips
 

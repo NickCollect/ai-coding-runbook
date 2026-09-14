@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/compliance_settings/update
-fetched_at: 2026-09-07T05:31:41.713481+00:00
+fetched_at: 2026-09-14T05:36:19.374178+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Update Compliance Settings
+url: https://platform.claude.com/docs/en/api/beta/organization/compliance_settings/update
 ---
 
 # Update Compliance Settings
@@ -25,7 +30,7 @@ compliance settings.
 
 ## Body parameters
 
-- `state: BetaComplianceSettingsStateEnabledParam or BetaComplianceSettingsStateDisabledParam`
+- `state: BetaComplianceSettingsStateParam`
 
   Desired state. Accepts the string shorthand "enabled" or "disabled" in place of the object form; the response always returns the canonical object form.
 
@@ -41,7 +46,11 @@ compliance settings.
 
 - `BetaComplianceSettings object`
 
-  - `state: BetaComplianceSettingsStateEnabled or BetaComplianceSettingsStateDisabled`
+  - `type: "compliance_settings"`
+
+    default: compliance_settings
+
+  - `state: BetaComplianceSettingsState`
 
     Whether the Compliance API is enabled for this organization.
 
@@ -56,10 +65,6 @@ compliance settings.
       - `type: "disabled"`
 
         default: disabled
-
-  - `type: "compliance_settings"`
-
-    default: compliance_settings
 
 ## Example
 

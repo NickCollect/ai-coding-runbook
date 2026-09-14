@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/users/remove
-fetched_at: 2026-08-31T06:29:42.465919+00:00
+fetched_at: 2026-09-14T05:36:18.571623+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Remove User
+url: https://platform.claude.com/docs/en/api/beta/organization/users/remove
 ---
 
 # Remove User
@@ -18,10 +23,6 @@ Remove a member from the organization.
 
 ## Returns
 
-- `id: string`
-
-  ID of the User.
-
 - `type: "user_deleted"`
 
   Deleted object type.
@@ -29,6 +30,10 @@ Remove a member from the organization.
   For Users, this is always `"user_deleted"`.
 
   default: user_deleted
+
+- `id: string`
+
+  ID of the User.
 
 ## Example
 

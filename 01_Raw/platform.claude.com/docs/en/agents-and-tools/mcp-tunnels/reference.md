@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/reference
-fetched_at: 2026-08-17T02:15:15.763309+00:00
+fetched_at: 2026-09-14T05:36:05.820544+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,7 +11,7 @@ description: Proxy configuration fields, the Tunnels REST API, certificate requi
 ---
 
 <Note>
-  MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
+  MCP tunnels are in research preview. [Request access](https://claude.com/form/mcp-tunnels) to try them.
 </Note>
 
 ## Proxy configuration

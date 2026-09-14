@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/skills/list
-fetched_at: 2026-08-31T06:29:36.884541+00:00
+fetched_at: 2026-09-14T05:36:11.657562+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: List Skills
+url: https://platform.claude.com/docs/en/api/skills/list
 ---
 
 # List Skills
@@ -35,11 +40,23 @@ List Skills
   * `"custom"`: only return user-created skills
   * `"anthropic"`: only return Anthropic-created skills
 
+## Headers
+
+- `"anthropic-workspace-id": optional string`
+
 ## Returns
 
 - `data: array of Skill`
 
   List of skills.
+
+  - `type: "skill"`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
+
+    default: skill
 
   - `id: string`
 
@@ -92,14 +109,6 @@ List Skills
       - `"anthropic_example"`
 
       - `"plugin"`
-
-  - `type: "skill"`
-
-    Object type.
-
-    For Skills, this is always `"skill"`.
-
-    default: skill
 
   - `updated_at: string`
 

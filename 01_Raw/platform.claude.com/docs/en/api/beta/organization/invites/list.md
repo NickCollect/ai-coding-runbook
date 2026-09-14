@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/invites/list
-fetched_at: 2026-08-31T06:29:42.011685+00:00
+fetched_at: 2026-09-14T05:36:18.071674+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: List Invites
+url: https://platform.claude.com/docs/en/api/beta/organization/invites/list
 ---
 
 # List Invites
@@ -53,6 +58,14 @@ List the organization's invites.
 ## Returns
 
 - `data: array of BetaOrganizationInvite`
+
+  - `type: "invite"`
+
+    Object type.
+
+    For Invites, this is always `"invite"`.
+
+    default: invite
 
   - `id: string`
 
@@ -117,14 +130,6 @@ List the organization's invites.
     - `"expired"`
 
     - `"pending"`
-
-  - `type: "invite"`
-
-    Object type.
-
-    For Invites, this is always `"invite"`.
-
-    default: invite
 
 - `first_id: string or null`
 

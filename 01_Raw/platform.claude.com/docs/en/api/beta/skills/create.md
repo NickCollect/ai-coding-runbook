@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/skills/create
-fetched_at: 2026-09-07T05:31:37.758976+00:00
+fetched_at: 2026-09-14T05:36:15.802922+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Create Skill
+url: https://platform.claude.com/docs/en/api/beta/skills/create
 ---
 
 # Create Skill
@@ -18,7 +23,7 @@ Create Skill
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -66,6 +71,8 @@ Create Skill
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -108,6 +115,8 @@ Create Skill
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ## Body parameters (form-data)
 
 - `files: array of string`
@@ -125,6 +134,14 @@ Create Skill
 ## Returns
 
 - `BetaSkill object`
+
+  - `type: "skill"`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
+
+    default: skill
 
   - `id: string`
 
@@ -177,14 +194,6 @@ Create Skill
       - `"anthropic_example"`
 
       - `"plugin"`
-
-  - `type: "skill"`
-
-    Object type.
-
-    For Skills, this is always `"skill"`.
-
-    default: skill
 
   - `updated_at: string`
 

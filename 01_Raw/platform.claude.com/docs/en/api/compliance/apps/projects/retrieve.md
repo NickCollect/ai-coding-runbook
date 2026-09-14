@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/projects/retrieve
-fetched_at: 2026-08-31T06:29:47.604523+00:00
+fetched_at: 2026-09-14T05:36:22.780491+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get project details
+url: https://platform.claude.com/docs/en/api/compliance/apps/projects/retrieve
 ---
 
 # Get project details
@@ -17,6 +22,12 @@ Get detailed information for a specific project.
   The project ID (tagged ID, e.g., claude_proj_abc123)
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
 
 - `"x-api-key": optional string`
 

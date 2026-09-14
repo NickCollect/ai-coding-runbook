@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/inference-hooks
-fetched_at: 2026-09-07T05:31:28.776466+00:00
+fetched_at: 2026-09-14T05:36:07.504484+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,7 +11,7 @@ description: Send each governed prompt to your organization's AI security server
 ---
 
 <Note>
-  Inference hooks are in beta and available to Claude Enterprise organizations. Configuring them requires the `organization:manage` permission in claude.ai, which the built-in Admin, Owner, and Primary owner roles hold; see [Configure Inference hooks](https://platform.claude.com/docs/en/manage-claude/inference-hooks-configuration).
+  Inference hooks are in beta and available to Claude Enterprise organizations. Configuring them requires the `organization:manage` permission in claude.ai, which only the Owner and Primary owner roles hold; see [Configure Inference hooks](https://platform.claude.com/docs/en/manage-claude/inference-hooks-configuration).
 </Note>
 
 Inference hooks let a Claude Enterprise organization route every governed prompt through an AI security server, an HTTPS service that the organization or its security vendor operates, before inference runs. When a user submits a prompt, Anthropic sends the conversation transcript to your AI security server and waits for an allow or deny verdict; a denied request never reaches the model. Security and compliance teams use Inference hooks to enforce data policies inline, and developers build the AI security server that evaluates each request.
@@ -29,9 +29,9 @@ Today the only hook event is `prompt`, which fires once per governed inference r
 3. Your AI security server evaluates the content and responds with a verdict within the verdict timeout your organization configures (5 seconds by default).
 4. On `allow`, inference proceeds normally. On `deny`, the request is rejected and the user sees a blocked-by-policy message assembled from two parts: the per-request reason your AI security server supplied in the verdict's `deny_reason` field, followed by a standing message your administrators configure (for example, who to contact or where to request an exception). If your administrators haven't configured one, a built-in default directs the user to contact them. Each denial is also recorded in your organization's [Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed).
 
-The following diagram traces one example (a Cowork request where Claude also calls an O365 tool) to illustrate which parts of the flow are hooked. The hooked points are the diagram's steps 1 and 5, where the prompt arrives and the tool result returns; each results in the validation exchange with your AI security server shown in steps 2 and 6.
+The following diagram traces one example (a Cowork request where Claude also calls an O365 tool) to illustrate which parts of the flow are hooked. The hooked points are the diagram's steps 1 and 6, where the prompt arrives and the tool result returns; each results in the validation exchange with your AI security server shown in steps 2–3 and 7–8.
 
-![Flow diagram: the AI security server validates both the prompt and the tool result before inference proceeds](https://platform.claude.com/docs/images/inference-hooks-flow.svg)
+![Flow diagram: the AI security server validates both the prompt and the tool result before inference proceeds](https://platform.claude.com/docs/images/inference-hooks-flow.png)
 
 A verdict is a small JSON object: `{"action": "allow"}` lets the request proceed, and a deny carries the user-facing reason. For the full verdict schema, see [Return a verdict](https://platform.claude.com/docs/en/manage-claude/inference-hooks-endpoint#return-a-verdict).
 
@@ -64,7 +64,7 @@ For the full request and response schemas, signature verification, and operation
 
 ## Availability
 
-Inference hooks are available to Claude Enterprise organizations. Configuring them requires the `organization:manage` permission, which the built-in Admin, Owner, and Primary owner roles hold, as does any custom role granted it.
+Inference hooks are available to Claude Enterprise organizations. Configuring them requires the `organization:manage` permission, which only the Owner and Primary owner roles hold.
 
 One hook governs conversations across claude.ai, Cowork, and Claude Code sessions in your Claude Enterprise organization, whether they run on the web, in the desktop or mobile apps, or in the CLI. Inference hooks are not available on Amazon Bedrock or Google Cloud.
 

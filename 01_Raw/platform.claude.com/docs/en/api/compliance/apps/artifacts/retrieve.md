@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/artifacts/retrieve
-fetched_at: 2026-08-31T06:29:47.909445+00:00
+fetched_at: 2026-09-14T05:36:23.301350+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get artifact metadata
+url: https://platform.claude.com/docs/en/api/compliance/apps/artifacts/retrieve
 ---
 
 # Get artifact metadata
@@ -22,6 +27,12 @@ without downloading every artifact.
   The artifact version ID (tagged ID, e.g., claude_artifact_version_abc123)
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
 
 - `"x-api-key": optional string`
 

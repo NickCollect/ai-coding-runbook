@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/deploy-helm
-fetched_at: 2026-08-17T02:15:15.673872+00:00
+fetched_at: 2026-09-14T05:36:05.681127+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,7 +11,7 @@ description: Install the tunnel stack on a Kubernetes cluster using the Anthropi
 ---
 
 <Note>
-  MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
+  MCP tunnels are in research preview. [Request access](https://claude.com/form/mcp-tunnels) to try them.
 </Note>
 
 The Anthropic Helm chart installs the [tunnel stack](https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/concepts#components) as a single Deployment and attaches it to your tunnel: one the chart's setup hook creates for you, or an existing tunnel you created in the [Console](https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/console#create-a-tunnel).

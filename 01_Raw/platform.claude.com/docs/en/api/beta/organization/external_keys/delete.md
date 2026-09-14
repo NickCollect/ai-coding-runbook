@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/external_keys/delete
-fetched_at: 2026-08-31T06:29:41.525166+00:00
+fetched_at: 2026-09-14T05:36:17.365090+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Delete External Key
+url: https://platform.claude.com/docs/en/api/beta/organization/external_keys/delete
 ---
 
 # Delete External Key
@@ -22,13 +27,13 @@ The request is rejected if any workspace still references this config.
 
 ## Returns
 
-- `id: string`
-
-  ID of the deleted External Key.
-
 - `type: "external_key_deleted"`
 
   default: external_key_deleted
+
+- `id: string`
+
+  ID of the deleted External Key.
 
 ## Example
 

@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages/batches/delete
-fetched_at: 2026-08-31T06:29:36.547672+00:00
+fetched_at: 2026-09-14T05:36:11.179858+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Delete a Message Batch
+url: https://platform.claude.com/docs/en/api/messages/batches/delete
 ---
 
 # Delete a Message Batch
@@ -20,13 +25,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   ID of the Message Batch.
 
+## Headers
+
+- `"anthropic-workspace-id": optional string`
+
 ## Returns
 
 - `DeletedMessageBatch object`
-
-  - `id: string`
-
-    ID of the Message Batch.
 
   - `type: "message_batch_deleted"`
 
@@ -35,6 +40,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
     For Message Batches, this is always `"message_batch_deleted"`.
 
     default: message_batch_deleted
+
+  - `id: string`
+
+    ID of the Message Batch.
 
 ## Example
 

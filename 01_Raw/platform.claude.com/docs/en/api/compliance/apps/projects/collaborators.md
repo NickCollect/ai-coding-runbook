@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/projects/collaborators
-fetched_at: 2026-08-31T06:29:47.734501+00:00
+fetched_at: 2026-09-14T05:36:22.964119+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Collaborators
+url: https://platform.claude.com/docs/en/api/compliance/apps/projects/collaborators
 ---
 
 # Collaborators
@@ -37,6 +42,12 @@ role.
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
+
 - `"x-api-key": optional string`
 
 ### Returns
@@ -48,6 +59,12 @@ role.
   - `ComplianceProjectUserCollaborator object`
 
     An individual user granted a role on a project.
+
+    - `type: "user"`
+
+      Discriminator marking this as an individual user collaborator
+
+      default: user
 
     - `granted_at: string`
 
@@ -67,12 +84,6 @@ role.
 
       - `"viewer"`
 
-    - `type: "user"`
-
-      Discriminator marking this as an individual user collaborator
-
-      default: user
-
     - `user_id: string or null`
 
       Identifier of the user granted access (tagged ID), or null if their account has since been deleted
@@ -80,6 +91,12 @@ role.
   - `ComplianceProjectGroupCollaborator object`
 
     An RBAC group granted a role on a project.
+
+    - `type: "group"`
+
+      Discriminator marking this as a group collaborator
+
+      default: group
 
     - `granted_at: string`
 
@@ -103,15 +120,15 @@ role.
 
       - `"viewer"`
 
-    - `type: "group"`
-
-      Discriminator marking this as a group collaborator
-
-      default: group
-
   - `ComplianceProjectOrganizationCollaborator object`
 
     An entire organization granted a role on a project.
+
+    - `type: "organization"`
+
+      Discriminator marking this as an organization-wide grant
+
+      default: organization
 
     - `granted_at: string`
 
@@ -135,15 +152,15 @@ role.
 
       - `"viewer"`
 
-    - `type: "organization"`
-
-      Discriminator marking this as an organization-wide grant
-
-      default: organization
-
   - `ComplianceProjectOrganizationRoleCollaborator object`
 
     All holders of an organization-level role granted a role on a project.
+
+    - `type: "organization_role"`
+
+      Discriminator marking this as a grant to all organization members holding a specific org-level role
+
+      default: organization_role
 
     - `granted_at: string`
 
@@ -166,12 +183,6 @@ role.
       - `"owner"`
 
       - `"viewer"`
-
-    - `type: "organization_role"`
-
-      Discriminator marking this as a grant to all organization members holding a specific org-level role
-
-      default: organization_role
 
 - `has_more: boolean`
 
@@ -211,11 +222,15 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/collabora
 
 - `CollaboratorListResponse = object or object or object or object`
 
-  An individual user granted a role on a project.
-
   - `ComplianceProjectUserCollaborator object`
 
     An individual user granted a role on a project.
+
+    - `type: "user"`
+
+      Discriminator marking this as an individual user collaborator
+
+      default: user
 
     - `granted_at: string`
 
@@ -235,12 +250,6 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/collabora
 
       - `"viewer"`
 
-    - `type: "user"`
-
-      Discriminator marking this as an individual user collaborator
-
-      default: user
-
     - `user_id: string or null`
 
       Identifier of the user granted access (tagged ID), or null if their account has since been deleted
@@ -248,6 +257,12 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/collabora
   - `ComplianceProjectGroupCollaborator object`
 
     An RBAC group granted a role on a project.
+
+    - `type: "group"`
+
+      Discriminator marking this as a group collaborator
+
+      default: group
 
     - `granted_at: string`
 
@@ -271,15 +286,15 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/collabora
 
       - `"viewer"`
 
-    - `type: "group"`
-
-      Discriminator marking this as a group collaborator
-
-      default: group
-
   - `ComplianceProjectOrganizationCollaborator object`
 
     An entire organization granted a role on a project.
+
+    - `type: "organization"`
+
+      Discriminator marking this as an organization-wide grant
+
+      default: organization
 
     - `granted_at: string`
 
@@ -303,15 +318,15 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/collabora
 
       - `"viewer"`
 
-    - `type: "organization"`
-
-      Discriminator marking this as an organization-wide grant
-
-      default: organization
-
   - `ComplianceProjectOrganizationRoleCollaborator object`
 
     All holders of an organization-level role granted a role on a project.
+
+    - `type: "organization_role"`
+
+      Discriminator marking this as a grant to all organization members holding a specific org-level role
+
+      default: organization_role
 
     - `granted_at: string`
 
@@ -334,9 +349,3 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/collabora
       - `"owner"`
 
       - `"viewer"`
-
-    - `type: "organization_role"`
-
-      Discriminator marking this as a grant to all organization members holding a specific org-level role
-
-      default: organization_role

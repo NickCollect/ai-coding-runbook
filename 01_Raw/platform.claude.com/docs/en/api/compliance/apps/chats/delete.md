@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/chats/delete
-fetched_at: 2026-08-31T06:29:47.292609+00:00
+fetched_at: 2026-09-14T05:36:22.433213+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Delete chat
+url: https://platform.claude.com/docs/en/api/compliance/apps/chats/delete
 ---
 
 # Delete chat
@@ -19,19 +24,25 @@ files. This is a destructive operation that cannot be undone.
 
 ## Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
+
 - `"x-api-key": optional string`
 
 ## Returns
-
-- `id: string`
-
-  The ID of the Claude chat that was deleted
 
 - `type: optional "claude_chat_deleted"`
 
   Constant string confirming deletion
 
   default: claude_chat_deleted
+
+- `id: string`
+
+  The ID of the Claude chat that was deleted
 
 ## Example
 

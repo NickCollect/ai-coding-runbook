@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/claude_api_primer
-fetched_at: 2026-09-07T05:31:49.302911+00:00
+fetched_at: 2026-09-14T05:36:23.812085+00:00
 fetch_method: mintlify_md
 ---
 
@@ -555,7 +555,7 @@ Client tools are specified in the `tools` top-level parameter of the API request
 
 | Parameter      | Description                                                                                         |
 | -------------- | --------------------------------------------------------------------------------------------------- |
-| `name`         | The name of the tool. Must match the regex `^[a-zA-Z0-9_-]{1,64}$`.                                 |
+| `name`         | The name of the tool. Must match the regex `^[a-zA-Z0-9_-]{1,128}$`.                                |
 | `description`  | A detailed plaintext description of what the tool does, when it should be used, and how it behaves. |
 | `input_schema` | A [JSON Schema](https://json-schema.org/) object defining the expected parameters for the tool.     |
 

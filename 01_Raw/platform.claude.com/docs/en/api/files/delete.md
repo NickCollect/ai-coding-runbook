@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/files/delete
-fetched_at: 2026-08-31T06:29:36.853131+00:00
+fetched_at: 2026-09-14T05:36:11.591802+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Delete File
+url: https://platform.claude.com/docs/en/api/files/delete
 ---
 
 # Delete File
@@ -16,13 +21,13 @@ Delete File
 
   ID of the File.
 
+## Headers
+
+- `"anthropic-workspace-id": optional string`
+
 ## Returns
 
 - `DeletedFile object`
-
-  - `id: string`
-
-    ID of the deleted file.
 
   - `type: optional "file_deleted"`
 
@@ -31,6 +36,10 @@ Delete File
     For file deletion, this is always `"file_deleted"`.
 
     default: file_deleted
+
+  - `id: string`
+
+    ID of the deleted file.
 
 ## Example
 

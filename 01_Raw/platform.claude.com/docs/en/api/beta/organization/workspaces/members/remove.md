@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/remove
-fetched_at: 2026-08-31T06:29:42.813644+00:00
+fetched_at: 2026-09-14T05:36:19.043942+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Delete Workspace Member
+url: https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/remove
 ---
 
 # Delete Workspace Member

@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/federation/rules/update
-fetched_at: 2026-09-07T05:31:39.820544+00:00
+fetched_at: 2026-09-14T05:36:17.788471+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Update Federation Rule
+url: https://platform.claude.com/docs/en/api/beta/organization/federation/rules/update
 ---
 
 # Update Federation Rule
@@ -42,7 +47,7 @@ Console session.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -89,6 +94,8 @@ Console session.
     - `"user-profiles-2026-03-24"`
 
     - `"user-profiles-2026-08-18"`
+
+    - `"user-profiles-2026-09-04"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -194,11 +201,11 @@ Console session.
 
   Bind to a fixed service account by ID.
 
+  - `type: "service_account"`
+
   - `service_account_id: string`
 
     Tagged ID of the service account to mint tokens for.
-
-  - `type: "service_account"`
 
   - `service_account_name: optional string or null`
 
@@ -228,6 +235,10 @@ Console session.
   of that workspace (it is implicitly a member of the default workspace);
   rules carrying only the legacy `workspace_id` binding do not enforce
   this.
+
+  - `type: "federation_rule"`
+
+    default: federation_rule
 
   - `id: string`
 
@@ -311,11 +322,11 @@ Console session.
 
     Identity that tokens minted via this rule act as. Currently always a `service_account` target.
 
+    - `type: "service_account"`
+
     - `service_account_id: string`
 
       Tagged ID of the service account to mint tokens for.
-
-    - `type: "service_account"`
 
     - `service_account_name: optional string or null`
 
@@ -324,10 +335,6 @@ Console session.
   - `token_lifetime_seconds: number`
 
     Lifetime in seconds of access tokens minted via this rule. Minted tokens are capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.
-
-  - `type: "federation_rule"`
-
-    default: federation_rule
 
   - `updated_at: string`
 

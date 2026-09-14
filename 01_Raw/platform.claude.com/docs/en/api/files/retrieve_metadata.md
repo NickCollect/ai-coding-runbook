@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/files/retrieve_metadata
-fetched_at: 2026-08-31T06:29:36.792379+00:00
+fetched_at: 2026-09-14T05:36:11.481759+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get File Metadata
+url: https://platform.claude.com/docs/en/api/files/retrieve_metadata
 ---
 
 # Get File Metadata
@@ -16,9 +21,19 @@ Get File Metadata
 
   ID of the File.
 
+## Headers
+
+- `"anthropic-workspace-id": optional string`
+
 ## Returns
 
 - `FileMetadata object`
+
+  - `type: "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `id: string`
 
@@ -49,12 +64,6 @@ Get File Metadata
     Size of the file in bytes.
 
     minimum: 0
-
-  - `type: "file"`
-
-    Object type.
-
-    For files, this is always `"file"`.
 
   - `downloadable: optional boolean`
 

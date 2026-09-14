@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/messages/batches/delete
-fetched_at: 2026-09-07T05:31:33.854502+00:00
+fetched_at: 2026-09-14T05:36:12.355685+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Delete a Message Batch
+url: https://platform.claude.com/docs/en/api/beta/messages/batches/delete
 ---
 
 # Delete a Message Batch
@@ -28,7 +33,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -76,6 +81,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -118,13 +125,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ## Returns
 
 - `BetaDeletedMessageBatch object`
-
-  - `id: string`
-
-    ID of the Message Batch.
 
   - `type: "message_batch_deleted"`
 
@@ -133,6 +138,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
     For Message Batches, this is always `"message_batch_deleted"`.
 
     default: message_batch_deleted
+
+  - `id: string`
+
+    ID of the Message Batch.
 
 ## Example
 

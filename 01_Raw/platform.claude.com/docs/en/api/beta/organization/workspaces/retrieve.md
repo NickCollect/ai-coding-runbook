@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/workspaces/retrieve
-fetched_at: 2026-09-07T05:31:40.949592+00:00
+fetched_at: 2026-09-14T05:36:18.696777+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get Workspace
+url: https://platform.claude.com/docs/en/api/beta/organization/workspaces/retrieve
 ---
 
 # Get Workspace
@@ -19,6 +24,14 @@ Get Workspace
 ## Returns
 
 - `BetaWorkspace object`
+
+  - `type: "workspace"`
+
+    Object type.
+
+    For Workspaces, this is always `"workspace"`.
+
+    default: workspace
 
   - `id: string`
 
@@ -95,14 +108,6 @@ Get Workspace
   - `tags: map[string]`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
-
-  - `type: "workspace"`
-
-    Object type.
-
-    For Workspaces, this is always `"workspace"`.
-
-    default: workspace
 
 ## Example
 

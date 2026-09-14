@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/files/retrieve_metadata
-fetched_at: 2026-09-07T05:31:37.657689+00:00
+fetched_at: 2026-09-14T05:36:15.758943+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get File Metadata
+url: https://platform.claude.com/docs/en/api/beta/files/retrieve_metadata
 ---
 
 # Get File Metadata
@@ -24,7 +29,7 @@ Get File Metadata
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -72,6 +77,8 @@ Get File Metadata
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -114,9 +121,17 @@ Get File Metadata
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ## Returns
 
 - `BetaFileMetadata object`
+
+  - `type: "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `id: string`
 
@@ -148,12 +163,6 @@ Get File Metadata
 
     minimum: 0
 
-  - `type: "file"`
-
-    Object type.
-
-    For files, this is always `"file"`.
-
   - `downloadable: optional boolean`
 
     Whether the file can be downloaded.
@@ -170,13 +179,13 @@ Get File Metadata
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
-    - `id: string`
-
-      The ID of the scoping resource (e.g., the session ID).
-
     - `type: "session"`
 
       The type of scope (e.g., `"session"`).
+
+    - `id: string`
+
+      The ID of the scoping resource (e.g., the session ID).
 
 ## Example
 

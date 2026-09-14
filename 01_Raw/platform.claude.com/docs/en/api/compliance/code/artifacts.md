@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/code/artifacts
-fetched_at: 2026-08-31T06:29:48.280552+00:00
+fetched_at: 2026-09-14T05:36:23.762801+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Artifacts
+url: https://platform.claude.com/docs/en/api/compliance/code/artifacts
 ---
 
 # Artifacts
@@ -74,6 +79,12 @@ returned.
   maxItems: 200
 
 ### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
 
 - `"x-api-key": optional string`
 
@@ -226,6 +237,12 @@ only for identity-stored content; validate against it when present.
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
+
 - `"x-api-key": optional string`
 
 ### Example
@@ -256,19 +273,25 @@ Artifact.
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
+
 - `"x-api-key": optional string`
 
 ### Returns
-
-- `id: string`
-
-  The ID of the Artifact that was deleted
 
 - `type: "code_artifact_deleted"`
 
   Constant string confirming deletion
 
   default: code_artifact_deleted
+
+- `id: string`
+
+  The ID of the Artifact that was deleted
 
 ### Example
 
@@ -370,12 +393,12 @@ curl https://api.anthropic.com/v1/compliance/apps/code/artifacts/$ARTIFACT_ID \
 
   Response for deleting a Code Artifact.
 
-  - `id: string`
-
-    The ID of the Artifact that was deleted
-
   - `type: "code_artifact_deleted"`
 
     Constant string confirming deletion
 
     default: code_artifact_deleted
+
+  - `id: string`
+
+    The ID of the Artifact that was deleted

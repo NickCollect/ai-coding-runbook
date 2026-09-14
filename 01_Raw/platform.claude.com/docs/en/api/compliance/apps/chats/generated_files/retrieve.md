@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/chats/generated_files/retrieve
-fetched_at: 2026-08-31T06:29:47.534459+00:00
+fetched_at: 2026-09-14T05:36:22.721455+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get Claude-generated file metadata
+url: https://platform.claude.com/docs/en/api/compliance/apps/chats/generated_files/retrieve
 ---
 
 # Get Claude-generated file metadata
@@ -19,6 +24,12 @@ Use the sibling `/content` endpoint to download the bytes.
   The generated-file id (e.g., 'claude_gen_file_abc123') as returned in `chat_messages[].generated_files[].id` from GET /apps/chats/{claude_chat_id}/messages.
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
 
 - `"x-api-key": optional string`
 

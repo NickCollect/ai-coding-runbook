@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/skills/retrieve
-fetched_at: 2026-08-31T06:29:36.896553+00:00
+fetched_at: 2026-09-14T05:36:11.668698+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get Skill
+url: https://platform.claude.com/docs/en/api/skills/retrieve
 ---
 
 # Get Skill
@@ -18,9 +23,21 @@ Get Skill
 
   The format and length of IDs may change over time.
 
+## Headers
+
+- `"anthropic-workspace-id": optional string`
+
 ## Returns
 
 - `Skill object`
+
+  - `type: "skill"`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
+
+    default: skill
 
   - `id: string`
 
@@ -73,14 +90,6 @@ Get Skill
       - `"anthropic_example"`
 
       - `"plugin"`
-
-  - `type: "skill"`
-
-    Object type.
-
-    For Skills, this is always `"skill"`.
-
-    default: skill
 
   - `updated_at: string`
 

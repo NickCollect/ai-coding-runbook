@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/invites/retrieve
-fetched_at: 2026-08-31T06:29:42.025538+00:00
+fetched_at: 2026-09-14T05:36:18.063646+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get Invite
+url: https://platform.claude.com/docs/en/api/beta/organization/invites/retrieve
 ---
 
 # Get Invite
@@ -19,6 +24,14 @@ Retrieve an invite by ID.
 ## Returns
 
 - `BetaOrganizationInvite object`
+
+  - `type: "invite"`
+
+    Object type.
+
+    For Invites, this is always `"invite"`.
+
+    default: invite
 
   - `id: string`
 
@@ -83,14 +96,6 @@ Retrieve an invite by ID.
     - `"expired"`
 
     - `"pending"`
-
-  - `type: "invite"`
-
-    Object type.
-
-    For Invites, this is always `"invite"`.
-
-    default: invite
 
 ## Example
 

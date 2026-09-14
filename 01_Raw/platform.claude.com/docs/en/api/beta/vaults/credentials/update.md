@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/vaults/credentials/update
-fetched_at: 2026-09-07T05:31:36.804600+00:00
+fetched_at: 2026-09-14T05:36:14.975354+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Update Credential
+url: https://platform.claude.com/docs/en/api/beta/vaults/credentials/update
 ---
 
 # Update Credential
@@ -24,7 +29,7 @@ Update Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -72,6 +77,8 @@ Update Credential
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -114,6 +121,8 @@ Update Credential
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ## Body parameters
 
 - `auth: optional BetaManagedAgentsMCPOAuthUpdateParams or BetaManagedAgentsStaticBearerUpdateParams or BetaManagedAgentsEnvironmentVariableUpdateParams`
@@ -146,7 +155,7 @@ Update Credential
 
         Updated OAuth refresh token.
 
-        minLength: 1, maxLength: 4096
+        minLength: 1, maxLength: 8192
 
       - `scope: optional string or null`
 
@@ -155,8 +164,6 @@ Update Credential
         maxLength: 8192
 
       - `token_endpoint_auth: optional BetaManagedAgentsTokenEndpointAuthBasicUpdateParam or BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
-
-        Updated HTTP Basic authentication parameters for the token endpoint.
 
         - `BetaManagedAgentsTokenEndpointAuthBasicUpdateParam object`
 
@@ -226,11 +233,11 @@ Update Credential
 
         Substitute the secret only on requests to the listed hosts.
 
+        - `type: "limited"`
+
         - `allowed_hosts: array of string`
 
           Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
-
-        - `type: "limited"`
 
     - `secret_value: optional string or null`
 
@@ -254,6 +261,8 @@ Update Credential
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
+  - `type: "vault_credential"`
+
   - `id: string`
 
     Unique identifier for the credential.
@@ -272,11 +281,11 @@ Update Credential
 
       OAuth credential details for an MCP server.
 
+      - `type: "mcp_oauth"`
+
       - `mcp_server_url: string`
 
         URL of the MCP server this credential authenticates against.
-
-      - `type: "mcp_oauth"`
 
       - `expires_at: optional string or null`
 
@@ -297,8 +306,6 @@ Update Credential
           Token endpoint URL used to refresh the access token.
 
         - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse or BetaManagedAgentsTokenEndpointAuthBasicResponse or BetaManagedAgentsTokenEndpointAuthPostResponse`
-
-          Token endpoint requires no client authentication.
 
           - `BetaManagedAgentsTokenEndpointAuthNoneResponse object`
 
@@ -330,15 +337,17 @@ Update Credential
 
       Static bearer token credential details for an MCP server.
 
+      - `type: "static_bearer"`
+
       - `mcp_server_url: string`
 
         URL of the MCP server this credential authenticates against.
 
-      - `type: "static_bearer"`
-
     - `BetaManagedAgentsEnvironmentVariableAuthResponse object`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `type: "environment_variable"`
 
       - `injection_location: BetaManagedAgentsInjectionLocationResponse`
 
@@ -366,17 +375,15 @@ Update Credential
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `type: "limited"`
+
           - `allowed_hosts: array of string`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `type: "limited"`
-
       - `secret_name: string`
 
         Name of the environment variable.
-
-      - `type: "environment_variable"`
 
   - `created_at: string`
 
@@ -387,8 +394,6 @@ Update Credential
   - `metadata: map[string]`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `type: "vault_credential"`
 
   - `updated_at: string`
 

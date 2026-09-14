@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/tunnels/list
-fetched_at: 2026-09-07T05:31:38.748801+00:00
+fetched_at: 2026-09-14T05:36:16.730306+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: List Tunnels
+url: https://platform.claude.com/docs/en/api/beta/tunnels/list
 ---
 
 # List Tunnels
@@ -36,7 +41,7 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -84,6 +89,8 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -126,11 +133,15 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ## Returns
 
 - `data: array of BetaTunnel`
 
   List of tunnels, ordered by created_at descending.
+
+  - `type: "tunnel"`
 
   - `id: string`
 
@@ -155,8 +166,6 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
   - `domain: string`
 
     Anthropic-assigned hostname for the tunnel. MCP server URLs whose host is a subdomain of this value are routed through the tunnel. Globally unique and never reused, even after the tunnel is archived.
-
-  - `type: "tunnel"`
 
 - `next_page: string or null`
 

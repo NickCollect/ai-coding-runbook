@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/files
-fetched_at: 2026-08-24T02:18:38.052034+00:00
+fetched_at: 2026-09-14T05:36:06.644514+00:00
 fetch_method: mintlify_md
 ---
 
@@ -248,26 +248,57 @@ A new `file_id` is created that references the instance of the file in the sessi
 Mount multiple files by adding entries to the `resources` array:
 
 <CodeGroup>
-  ```json cURL
-  "resources": [
-    { "type": "file", "file_id": "file_abc123", "mount_path": "/data.csv" },
-    { "type": "file", "file_id": "file_def456", "mount_path": "/config.json" },
-    { "type": "file", "file_id": "file_ghi789", "mount_path": "/src/main.py" }
-  ]
+  ```bash cURL
+  curl -fsSL https://api.anthropic.com/v1/sessions \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "agent": "agent_01J8XkN5uT3vHpLqRfWdY2",
+      "environment_id": "env_01K2mPsT7hNwR4jXuLvCqD8",
+      "resources": [
+        {
+          "type": "file",
+          "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+          "mount_path": "/data.csv"
+        },
+        {
+          "type": "file",
+          "file_id": "file_011CPMxVD3fHLUhvTqtsQA5w",
+          "mount_path": "/config.json"
+        },
+        {
+          "type": "file",
+          "file_id": "file_011CRb3kQ7tWx9ZsLmDe2Vh4",
+          "mount_path": "/src/main.py"
+        }
+      ]
+    }'
   ```
 
-  ```yaml CLI
-  resources:
-    - type: file
-      file_id: file_abc123
-      mount_path: /data.csv
-    - type: file
-      file_id: file_def456
-      mount_path: /config.json
-    - type: file
-      file_id: file_ghi789
-      mount_path: /src/main.py
-  ```
+  <MultiFileExample language="cli" label="CLI">
+    ```bash CLI
+    ant beta:sessions create \
+      --agent agent_01J8XkN5uT3vHpLqRfWdY2 \
+      --environment-id env_01K2mPsT7hNwR4jXuLvCqD8 < session.yaml
+    ```
+
+    <File filename="session.yaml">
+      ```yaml
+      resources:
+        - type: file
+          file_id: file_011CNha8iCJcU1wXNR6q4V8w
+          mount_path: /data.csv
+        - type: file
+          file_id: file_011CPMxVD3fHLUhvTqtsQA5w
+          mount_path: /config.json
+        - type: file
+          file_id: file_011CRb3kQ7tWx9ZsLmDe2Vh4
+          mount_path: /src/main.py
+      ```
+    </File>
+  </MultiFileExample>
 
   ```python Python
   resources = [

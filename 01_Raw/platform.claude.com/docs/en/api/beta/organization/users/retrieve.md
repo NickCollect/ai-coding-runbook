@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/users/retrieve
-fetched_at: 2026-08-31T06:29:42.450799+00:00
+fetched_at: 2026-09-14T05:36:18.517826+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get User
+url: https://platform.claude.com/docs/en/api/beta/organization/users/retrieve
 ---
 
 # Get User
@@ -19,6 +24,14 @@ Retrieve a member of the organization by user ID.
 ## Returns
 
 - `BetaOrganizationUser object`
+
+  - `type: "user"`
+
+    Object type.
+
+    For Users, this is always `"user"`.
+
+    default: user
 
   - `id: string`
 
@@ -59,14 +72,6 @@ Retrieve a member of the organization by user ID.
     - `"primary_owner"`
 
     - `"user"`
-
-  - `type: "user"`
-
-    Object type.
-
-    For Users, this is always `"user"`.
-
-    default: user
 
 ## Example
 

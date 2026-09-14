@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/cli/apply
-fetched_at: 2026-09-07T05:31:31.372017+00:00
+fetched_at: 2026-09-14T05:36:09.736551+00:00
 fetch_method: mintlify_md
 ---
 
@@ -110,13 +110,9 @@ You can declaratively define the other resources as files as well. A file holds 
 
 Any resource except a skill can be written as YAML, JSON, or Markdown. In Markdown, the frontmatter is the body and the prose fills the kind's text field: an agent's `system`, an environment's or memory store's `description`, a deployment's first message.
 
-Resources refer to each other by path. Wherever the API expects another resource's ID, write the relative path to that resource's file instead. In this project, the reviewer agent lists `../skills/pr-summary` under `skills`, the lead agent lists `./reviewer.md` in its roster, and the deployment names its agent, environment, and memory store by path. `ant apply` creates them in dependency order and fills in the real IDs. Apply the whole directory:
+Resources refer to each other by path. Wherever the API expects another resource's ID, write the relative path to that resource's file instead. In this project, the reviewer agent lists `../skills/pr-summary` under `skills`, the lead agent lists `./reviewer.md` in its roster, and the deployment names its agent, environment, and memory store by path. `ant apply` creates them in dependency order and fills in the real IDs. The project has six files:
 
-<MultiFileExample language="cli" label="CLI">
-  ```bash CLI
-  ant apply .
-  ```
-
+<MultiFileExample variant="explorer">
   <File filename="agents/reviewer.md">
     ```markdown
     ---
@@ -197,6 +193,12 @@ Resources refer to each other by path. Wherever the API expects another resource
     ```
   </File>
 </MultiFileExample>
+
+Apply the whole directory:
+
+```bash CLI
+ant apply .
+```
 
 `claude-lock.json` then has an entry for every file in the project.
 

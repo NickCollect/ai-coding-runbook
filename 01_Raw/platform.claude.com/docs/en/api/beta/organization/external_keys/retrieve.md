@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/external_keys/retrieve
-fetched_at: 2026-09-07T05:31:39.481278+00:00
+fetched_at: 2026-09-14T05:36:17.278898+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get External Key
+url: https://platform.claude.com/docs/en/api/beta/organization/external_keys/retrieve
 ---
 
 # Get External Key
@@ -27,6 +32,10 @@ Retrieve a single external key config in the caller's organization by ID.
   Configs are organization-scoped. Workspaces attach to a config; once any
   workspace references it, the provider fields become effectively immutable
   (existing encrypted data needs the config for decrypt).
+
+  - `type: "external_key"`
+
+    default: external_key
 
   - `id: string`
 
@@ -66,13 +75,13 @@ Retrieve a single external key config in the caller's organization by ID.
 
     - `BetaAWSExternalKeyConfig object`
 
+      - `type: "aws"`
+
       - `kms_arn: string`
 
         Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a single-Region key in your organization's own AWS account; cross-account keys, multi-Region keys, and alias ARNs are rejected.
 
         maxLength: 2048
-
-      - `type: "aws"`
 
       - `region: optional string or null`
 
@@ -86,13 +95,15 @@ Retrieve a single external key config in the caller's organization by ID.
 
     - `BetaGCPExternalKeyConfig object`
 
+      - `type: "gcp"`
+
       - `key_name: string`
 
         Full resource name of the Cloud KMS key.
 
-      - `type: "gcp"`
-
     - `BetaAzureExternalKeyConfig object`
+
+      - `type: "azure"`
 
       - `key_name: string`
 
@@ -102,8 +113,6 @@ Retrieve a single external key config in the caller's organization by ID.
 
         Azure AD tenant ID.
 
-      - `type: "azure"`
-
       - `vault_uri: string`
 
         Key Vault data-plane URI — `https://{vault-name}.vault.azure.net` or `https://{hsm-name}.managedhsm.azure.net`.
@@ -111,10 +120,6 @@ Retrieve a single external key config in the caller's organization by ID.
       - `client_id: optional string or null`
 
         Azure AD application (client) ID. Omit to use Anthropic's multitenant app. Provide only if using a single-tenant app registration in the customer's directory.
-
-  - `type: "external_key"`
-
-    default: external_key
 
   - `updated_at: string`
 

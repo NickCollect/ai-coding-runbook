@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/organizations/roles/permissions
-fetched_at: 2026-08-31T06:29:47.000330+00:00
+fetched_at: 2026-09-14T05:36:22.009116+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Permissions
+url: https://platform.claude.com/docs/en/api/compliance/organizations/roles/permissions
 ---
 
 # Permissions
@@ -35,6 +40,12 @@ List Compliance Role Permissions
   Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
 ### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
 
 - `"x-api-key": optional string`
 

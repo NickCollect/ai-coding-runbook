@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/skills/create
-fetched_at: 2026-08-31T06:29:36.883015+00:00
+fetched_at: 2026-09-14T05:36:11.646975+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Create Skill
+url: https://platform.claude.com/docs/en/api/skills/create
 ---
 
 # Create Skill
@@ -9,6 +14,10 @@ fetch_method: mintlify_md
 **POST** `/v1/skills`
 
 Create Skill
+
+## Headers
+
+- `"anthropic-workspace-id": optional string`
 
 ## Body parameters (form-data)
 
@@ -27,6 +36,14 @@ Create Skill
 ## Returns
 
 - `Skill object`
+
+  - `type: "skill"`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
+
+    default: skill
 
   - `id: string`
 
@@ -79,14 +96,6 @@ Create Skill
       - `"anthropic_example"`
 
       - `"plugin"`
-
-  - `type: "skill"`
-
-    Object type.
-
-    For Skills, this is always `"skill"`.
-
-    default: skill
 
   - `updated_at: string`
 

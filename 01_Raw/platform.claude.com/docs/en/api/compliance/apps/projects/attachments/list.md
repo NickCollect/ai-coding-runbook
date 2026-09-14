@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/projects/attachments/list
-fetched_at: 2026-08-31T06:29:47.733537+00:00
+fetched_at: 2026-09-14T05:36:23.008413+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: List project attachments
+url: https://platform.claude.com/docs/en/api/compliance/apps/projects/attachments/list
 ---
 
 # List project attachments
@@ -39,6 +44,12 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
 ## Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
+
 - `"x-api-key": optional string`
 
 ## Returns
@@ -50,6 +61,12 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
   - `ComplianceProjectFileReference object`
 
     File attachment reference for compliance responses.
+
+    - `type: "project_file"`
+
+      Discriminator marking this as a binary file
+
+      default: project_file
 
     - `id: string`
 
@@ -77,15 +94,15 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
       Size in bytes of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
 
-    - `type: "project_file"`
-
-      Discriminator marking this as a binary file
-
-      default: project_file
-
   - `ComplianceProjectDocReference object`
 
     Project document attachment reference for compliance responses.
+
+    - `type: "project_doc"`
+
+      Discriminator marking this as a plain text document
+
+      default: project_doc
 
     - `id: string`
 
@@ -106,12 +123,6 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
       MIME type of the project document, always set to plain text
 
       default: text/plain
-
-    - `type: "project_doc"`
-
-      Discriminator marking this as a plain text document
-
-      default: project_doc
 
     - `updated_at: string or null`
 

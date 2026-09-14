@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration
-fetched_at: 2026-09-07T05:31:27.883782+00:00
+fetched_at: 2026-09-14T05:36:06.862401+00:00
 fetch_method: mintlify_md
 ---
 
@@ -264,7 +264,7 @@ When [defining your agent](https://platform.claude.com/docs/en/managed-agents/ag
 * `{"type": "self"}` allows the coordinator to spawn copies of itself. If the session was created with [agent configuration overrides](https://platform.claude.com/docs/en/managed-agents/sessions#override-agent-configuration-for-a-session), those overrides also apply to these copies; roster entries referenced by ID are unaffected.
 * `{"type": "advisor", "model": "<model id>"}` gives the session's primary thread an advisor it can consult mid-turn. At most one advisor entry per roster. See [Give the session an advisor](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#give-the-session-an-advisor).
 
-In an [`ant apply`](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/scripting#version-controlling-api-resources) agent file (the CLI tab), a roster entry can also be the path to another agent's file, such as `./reviewer.md`. Apply creates that agent first and replaces the path with a pinned `{"type": "agent", "id": ..., "version": ...}` reference.
+In an [`ant apply`](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/apply) agent file (the CLI tab), a roster entry can also be the path to another agent's file, such as `./reviewer.md`. Apply creates that agent first and replaces the path with a pinned `{"type": "agent", "id": ..., "version": ...}` reference.
 
 The coordinator's configuration, including its `multiagent.agents` roster, is snapshotted when the coordinator is created or updated. Referenced agents stay pinned to the versions resolved at that time and do not automatically pick up later updates to their definitions. To delegate to a newer version of a referenced agent, [update the coordinator](https://platform.claude.com/docs/en/managed-agents/agent-setup#update-an-agent) so its roster references that version.
 
@@ -827,7 +827,8 @@ A [session budget](https://platform.claude.com/docs/en/managed-agents/budgets) i
 
       ```typescript TypeScript
       for await (const thread of client.beta.sessions.threads.list(session.id)) {
-        console.log(`[${thread.agent.name}] ${thread.status}`);
+        const name = thread.agent.type === "agent" ? thread.agent.name : "advisor";
+        console.log(`[${name}] ${thread.status}`);
       }
       ```
 
@@ -1420,7 +1421,7 @@ Each session thread has its own event stream at `/v1/sessions/{session_id}/threa
 
 ### Tool permissions and custom tools
 
-If a subagent needs something from your client, such as [permission](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#tool-confirmation) to run an `always_ask` tool, or the [result of a custom tool](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#handling-custom-tool-calls), the event is cross-posted to the **primary thread** with `session_thread_id` identifying the originating session thread.
+If a subagent needs something from your client, such as [permission](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#tool-confirmation) to run a tool call or the [result of a custom tool](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#handling-custom-tool-calls), the event is cross-posted to the **primary thread** with `session_thread_id` identifying the originating session thread. A tool call needs your permission under `always_ask`, or under [`auto`](https://platform.claude.com/docs/en/managed-agents/permission-policies#let-the-server-evaluate-each-call-with-auto) when the server reaches no determination.
 
 ```json
 {
@@ -1436,6 +1437,8 @@ If a subagent needs something from your client, such as [permission](https://pla
 ```
 
 Post `user.tool_confirmation` (with `tool_use_id`) or `user.custom_tool_result` (with `custom_tool_use_id`); the server routes the response to the correct thread automatically.
+
+Under `auto`, your `user.message` events can lead the server to allow a call it would otherwise deny. Nothing in a subagent's thread counts as your intent: your client posts no messages there, and the coordinator's messages to the subagent do not count. When the server denies a call under `auto`, nothing is cross-posted: the event and the error tool result appear only on the subagent's own [thread stream](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#session-thread-events), and the subagent keeps running.
 
 The following example extends the [tool confirmation handler](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#tool-confirmation) to route replies. The same pattern applies to `user.custom_tool_result`.
 

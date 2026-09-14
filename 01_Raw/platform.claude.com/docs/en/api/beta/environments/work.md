@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/work
-fetched_at: 2026-09-07T05:31:34.532811+00:00
+fetched_at: 2026-09-14T05:36:13.063123+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Work
+url: https://platform.claude.com/docs/en/api/beta/environments/work
 ---
 
 # Work
@@ -28,7 +33,7 @@ Retrieve detailed information about a specific work item.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -76,6 +81,8 @@ Retrieve detailed information about a specific work item.
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -118,6 +125,8 @@ Retrieve detailed information about a specific work item.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ### Returns
 
 - `BetaSelfHostedWork object`
@@ -127,6 +136,12 @@ Retrieve detailed information about a specific work item.
   Work items are queued when sessions are created or when long-dormant sessions
   receive new messages. The environment worker polls for work to execute in a
   self-hosted sandbox.
+
+  - `type: "work"`
+
+    The type of object (always 'work')
+
+    default: work
 
   - `id: string`
 
@@ -144,13 +159,13 @@ Retrieve detailed information about a specific work item.
 
     The actual work to be performed
 
-    - `id: string`
-
-      Session identifier (e.g., 'session_...')
-
     - `type: "session"`
 
       Type of work data
+
+    - `id: string`
+
+      Session identifier (e.g., 'session_...')
 
   - `environment_id: string`
 
@@ -193,12 +208,6 @@ Retrieve detailed information about a specific work item.
   - `stopped_at: string or null`
 
     RFC 3339 timestamp when work execution stopped
-
-  - `type: "work"`
-
-    The type of object (always 'work')
-
-    default: work
 
 ### Example
 
@@ -268,7 +277,7 @@ Long poll for work items in the queue.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -315,6 +324,8 @@ Long poll for work items in the queue.
     - `"user-profiles-2026-03-24"`
 
     - `"user-profiles-2026-08-18"`
+
+    - `"user-profiles-2026-09-04"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -372,6 +383,12 @@ Long poll for work items in the queue.
   receive new messages. The environment worker polls for work to execute in a
   self-hosted sandbox.
 
+  - `type: "work"`
+
+    The type of object (always 'work')
+
+    default: work
+
   - `id: string`
 
     Work identifier (e.g., 'work_...')
@@ -388,13 +405,13 @@ Long poll for work items in the queue.
 
     The actual work to be performed
 
-    - `id: string`
-
-      Session identifier (e.g., 'session_...')
-
     - `type: "session"`
 
       Type of work data
+
+    - `id: string`
+
+      Session identifier (e.g., 'session_...')
 
   - `environment_id: string`
 
@@ -437,12 +454,6 @@ Long poll for work items in the queue.
   - `stopped_at: string or null`
 
     RFC 3339 timestamp when work execution stopped
-
-  - `type: "work"`
-
-    The type of object (always 'work')
-
-    default: work
 
 ### Example
 
@@ -500,7 +511,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -547,6 +558,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `"user-profiles-2026-03-24"`
 
     - `"user-profiles-2026-08-18"`
+
+    - `"user-profiles-2026-09-04"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -600,6 +613,12 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
   receive new messages. The environment worker polls for work to execute in a
   self-hosted sandbox.
 
+  - `type: "work"`
+
+    The type of object (always 'work')
+
+    default: work
+
   - `id: string`
 
     Work identifier (e.g., 'work_...')
@@ -616,13 +635,13 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     The actual work to be performed
 
-    - `id: string`
-
-      Session identifier (e.g., 'session_...')
-
     - `type: "session"`
 
       Type of work data
+
+    - `id: string`
+
+      Session identifier (e.g., 'session_...')
 
   - `environment_id: string`
 
@@ -665,12 +684,6 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
   - `stopped_at: string or null`
 
     RFC 3339 timestamp when work execution stopped
-
-  - `type: "work"`
-
-    The type of object (always 'work')
-
-    default: work
 
 ### Example
 
@@ -739,7 +752,7 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -786,6 +799,8 @@ Record a heartbeat for a work item to maintain the lease.
     - `"user-profiles-2026-03-24"`
 
     - `"user-profiles-2026-08-18"`
+
+    - `"user-profiles-2026-09-04"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -835,6 +850,12 @@ Record a heartbeat for a work item to maintain the lease.
 
   Response after recording a heartbeat for a work item.
 
+  - `type: "work_heartbeat"`
+
+    The type of response
+
+    default: work_heartbeat
+
   - `last_heartbeat: string`
 
     RFC 3339 timestamp of the actual heartbeat from DB
@@ -860,12 +881,6 @@ Record a heartbeat for a work item to maintain the lease.
   - `ttl_seconds: number`
 
     Effective TTL applied to the lease
-
-  - `type: "work_heartbeat"`
-
-    The type of response
-
-    default: work_heartbeat
 
 ### Example
 
@@ -911,7 +926,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -959,6 +974,8 @@ Stop a work item, initiating graceful or forced shutdown.
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -1001,6 +1018,8 @@ Stop a work item, initiating graceful or forced shutdown.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ### Body parameters
 
 - `force: optional boolean`
@@ -1019,6 +1038,12 @@ Stop a work item, initiating graceful or forced shutdown.
   receive new messages. The environment worker polls for work to execute in a
   self-hosted sandbox.
 
+  - `type: "work"`
+
+    The type of object (always 'work')
+
+    default: work
+
   - `id: string`
 
     Work identifier (e.g., 'work_...')
@@ -1035,13 +1060,13 @@ Stop a work item, initiating graceful or forced shutdown.
 
     The actual work to be performed
 
-    - `id: string`
-
-      Session identifier (e.g., 'session_...')
-
     - `type: "session"`
 
       Type of work data
+
+    - `id: string`
+
+      Session identifier (e.g., 'session_...')
 
   - `environment_id: string`
 
@@ -1084,12 +1109,6 @@ Stop a work item, initiating graceful or forced shutdown.
   - `stopped_at: string or null`
 
     RFC 3339 timestamp when work execution stopped
-
-  - `type: "work"`
-
-    The type of object (always 'work')
-
-    default: work
 
 ### Example
 
@@ -1159,7 +1178,7 @@ List work items in an environment.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1206,6 +1225,8 @@ List work items in an environment.
     - `"user-profiles-2026-03-24"`
 
     - `"user-profiles-2026-08-18"`
+
+    - `"user-profiles-2026-09-04"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -1259,6 +1280,12 @@ List work items in an environment.
 
     List of work items
 
+    - `type: "work"`
+
+      The type of object (always 'work')
+
+      default: work
+
     - `id: string`
 
       Work identifier (e.g., 'work_...')
@@ -1275,13 +1302,13 @@ List work items in an environment.
 
       The actual work to be performed
 
-      - `id: string`
-
-        Session identifier (e.g., 'session_...')
-
       - `type: "session"`
 
         Type of work data
+
+      - `id: string`
+
+        Session identifier (e.g., 'session_...')
 
     - `environment_id: string`
 
@@ -1324,12 +1351,6 @@ List work items in an environment.
     - `stopped_at: string or null`
 
       RFC 3339 timestamp when work execution stopped
-
-    - `type: "work"`
-
-      The type of object (always 'work')
-
-      default: work
 
   - `next_page: string or null`
 
@@ -1396,7 +1417,7 @@ Update work item metadata with merge semantics.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1444,6 +1465,8 @@ Update work item metadata with merge semantics.
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -1486,6 +1509,8 @@ Update work item metadata with merge semantics.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ### Body parameters
 
 - `metadata: map[string]`
@@ -1501,6 +1526,12 @@ Update work item metadata with merge semantics.
   Work items are queued when sessions are created or when long-dormant sessions
   receive new messages. The environment worker polls for work to execute in a
   self-hosted sandbox.
+
+  - `type: "work"`
+
+    The type of object (always 'work')
+
+    default: work
 
   - `id: string`
 
@@ -1518,13 +1549,13 @@ Update work item metadata with merge semantics.
 
     The actual work to be performed
 
-    - `id: string`
-
-      Session identifier (e.g., 'session_...')
-
     - `type: "session"`
 
       Type of work data
+
+    - `id: string`
+
+      Session identifier (e.g., 'session_...')
 
   - `environment_id: string`
 
@@ -1567,12 +1598,6 @@ Update work item metadata with merge semantics.
   - `stopped_at: string or null`
 
     RFC 3339 timestamp when work execution stopped
-
-  - `type: "work"`
-
-    The type of object (always 'work')
-
-    default: work
 
 ### Example
 
@@ -1632,7 +1657,7 @@ Get statistics about the work queue for an environment.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1680,6 +1705,8 @@ Get statistics about the work queue for an environment.
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -1722,6 +1749,8 @@ Get statistics about the work queue for an environment.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ### Returns
 
 - `BetaSelfHostedWorkQueueStats object`
@@ -1729,6 +1758,12 @@ Get statistics about the work queue for an environment.
   Statistics about the work queue for an environment.
 
   Uses Redis Stream consumer group metrics for O(1) queries.
+
+  - `type: "work_queue_stats"`
+
+    The type of object
+
+    default: work_queue_stats
 
   - `depth: number`
 
@@ -1743,12 +1778,6 @@ Get statistics about the work queue for an environment.
     Number of work items being processed (polled but not acknowledged)
 
     default: 0
-
-  - `type: "work_queue_stats"`
-
-    The type of object
-
-    default: work_queue_stats
 
   - `workers_polling: number or null`
 
@@ -1787,6 +1816,12 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
   receive new messages. The environment worker polls for work to execute in a
   self-hosted sandbox.
 
+  - `type: "work"`
+
+    The type of object (always 'work')
+
+    default: work
+
   - `id: string`
 
     Work identifier (e.g., 'work_...')
@@ -1803,13 +1838,13 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
 
     The actual work to be performed
 
-    - `id: string`
-
-      Session identifier (e.g., 'session_...')
-
     - `type: "session"`
 
       Type of work data
+
+    - `id: string`
+
+      Session identifier (e.g., 'session_...')
 
   - `environment_id: string`
 
@@ -1853,17 +1888,17 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
 
     RFC 3339 timestamp when work execution stopped
 
-  - `type: "work"`
-
-    The type of object (always 'work')
-
-    default: work
-
 ### Beta Self Hosted Work Heartbeat Response
 
 - `BetaSelfHostedWorkHeartbeatResponse object`
 
   Response after recording a heartbeat for a work item.
+
+  - `type: "work_heartbeat"`
+
+    The type of response
+
+    default: work_heartbeat
 
   - `last_heartbeat: string`
 
@@ -1891,12 +1926,6 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
 
     Effective TTL applied to the lease
 
-  - `type: "work_heartbeat"`
-
-    The type of response
-
-    default: work_heartbeat
-
 ### Beta Self Hosted Work List Response
 
 - `BetaSelfHostedWorkListResponse object`
@@ -1906,6 +1935,12 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
   - `data: array of BetaSelfHostedWork`
 
     List of work items
+
+    - `type: "work"`
+
+      The type of object (always 'work')
+
+      default: work
 
     - `id: string`
 
@@ -1923,13 +1958,13 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
 
       The actual work to be performed
 
-      - `id: string`
-
-        Session identifier (e.g., 'session_...')
-
       - `type: "session"`
 
         Type of work data
+
+      - `id: string`
+
+        Session identifier (e.g., 'session_...')
 
     - `environment_id: string`
 
@@ -1973,12 +2008,6 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
 
       RFC 3339 timestamp when work execution stopped
 
-    - `type: "work"`
-
-      The type of object (always 'work')
-
-      default: work
-
   - `next_page: string or null`
 
     Opaque cursor for fetching the next page of results
@@ -1990,6 +2019,12 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
   Statistics about the work queue for an environment.
 
   Uses Redis Stream consumer group metrics for O(1) queries.
+
+  - `type: "work_queue_stats"`
+
+    The type of object
+
+    default: work_queue_stats
 
   - `depth: number`
 
@@ -2004,12 +2039,6 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
     Number of work items being processed (polled but not acknowledged)
 
     default: 0
-
-  - `type: "work_queue_stats"`
-
-    The type of object
-
-    default: work_queue_stats
 
   - `workers_polling: number or null`
 
@@ -2046,10 +2075,10 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
   This resource type is used when work represents a session that needs to be executed
   in a self-hosted environment.
 
-  - `id: string`
-
-    Session identifier (e.g., 'session_...')
-
   - `type: "session"`
 
     Type of work data
+
+  - `id: string`
+
+    Session identifier (e.g., 'session_...')
