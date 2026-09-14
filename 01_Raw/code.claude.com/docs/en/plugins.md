@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins
-fetched_at: 2026-08-31T06:29:44.057774+00:00
+fetched_at: 2026-09-14T05:36:03.579102+00:00
 fetch_method: mintlify_md
 ---
 
@@ -173,7 +173,7 @@ You've created a plugin with a skill, but plugins can include much more: custom 
 <Warning>
   **Common mistake**: Don't put `commands/`, `agents/`, `skills/`, or `hooks/` inside the `.claude-plugin/` directory. Only `plugin.json` goes inside `.claude-plugin/`. All other directories must be at the plugin root level.
 
-  The plugin root is the individual plugin's own directory: the one you pass to `--plugin-dir` or that contains `.claude-plugin/plugin.json`. It is never `~/.claude/`. For example, Claude Code doesn't read a `.mcp.json` placed at `~/.claude/.mcp.json`.
+  The plugin root is the individual plugin's own directory, such as `my-first-plugin/` from the [quickstart](#quickstart). It is never `~/.claude/`. For example, Claude Code doesn't read a `.mcp.json` placed at `~/.claude/.mcp.json`.
 </Warning>
 
 | Directory         | Location    | Purpose                                                                                                                                                                                                                                                     |
@@ -224,7 +224,7 @@ When reviewing code, check for:
 4. Test coverage
 ```
 
-After you install the plugin, check the install summary: if it reports `Run /reload-plugins to activate.`, run that command to load the Skills. For complete Skill authoring guidance including progressive disclosure and tool restrictions, see [Agent Skills](/docs/en/skills).
+After you install the plugin, check the install summary: if it reports `Run /reload-plugins to activate.`, see [Apply plugin changes without restarting](/docs/en/discover-plugins#apply-plugin-changes-without-restarting) to load the Skills in your current session. For complete Skill authoring guidance including progressive disclosure and tool restrictions, see [Agent Skills](/docs/en/skills).
 
 ### Add LSP servers to your plugin
 
@@ -304,7 +304,7 @@ claude --plugin-dir ./my-plugin.zip
 
 When a `--plugin-dir` plugin has the same name as an installed marketplace plugin, the local copy takes precedence for that session. This lets you test changes to a plugin you already have installed without uninstalling it first. The exception is plugins that managed settings force-enable or force-disable: `--plugin-dir` cannot override those.
 
-As you make changes to your plugin, run `/reload-plugins` to pick up the updates without restarting. This reloads plugins, skills, agents, hooks, plugin MCP servers, and plugin LSP servers. Test your plugin components:
+As you make changes to your plugin, run `/reload-plugins` to pick up the updates without restarting. This reloads plugins, skills, agents, hooks, plugin MCP servers, and plugin LSP servers; in a session without an interactive terminal, plugin MCP server changes [wait for your next session](/docs/en/discover-plugins#apply-plugin-changes-without-restarting). Test your plugin components:
 
 * Try your skills with `/plugin-name:skill-name`
 * Check that agents appear in `/context` under Custom Agents, or @-mention one by its scoped name
@@ -319,6 +319,13 @@ As you make changes to your plugin, run `/reload-plugins` to pick up the updates
 
   To test a plugin together with a plugin it depends on, see [Test a plugin and its dependency locally](/docs/en/plugin-dependencies#test-a-plugin-and-its-dependency-locally).
 </Tip>
+
+Trying the plugin with `--plugin-dir` tells you it can work. To find out how often Claude actually reaches for it and gets the right result, run it against a set of test prompts with [`claude plugin eval`](/docs/en/plugin-evals). Each prompt runs several times with and without the plugin loaded, so you can see what the plugin contributes and catch regressions when you change it or a new model ships.
+
+To load several plugins from one place, pass a folder that holds them, such as `--plugin-dir ./plugins`. Loading a folder of plugins requires Claude Code v2.1.265 or later. Claude Code reads the folder's top level to decide which plugins load, and in an interactive session it also watches the folder for later changes:
+
+* **What loads**: if the folder has no manifest or plugin components at its top level, Claude Code treats it as a folder of plugins. Each immediate subfolder that has a `.claude-plugin/plugin.json` manifest loads as a separate plugin. Claude Code skips everything else in the folder without reporting an error, including plugins that have no manifest.
+* **Changes during an interactive session**: a subfolder you add loads as a new plugin once its manifest is in place, and when you remove a subfolder, its plugin unloads. Claude Code prints a line in the session for each change. If applying a change mid-conversation would [invalidate the prompt cache](/docs/en/prompt-caching#enabling-or-disabling-a-plugin), Claude Code holds it, and the line says to run `/reload-plugins` to apply it.
 
 To test a plugin that is already packaged as a `.zip` archive and hosted at a URL, such as a CI build artifact, use `--plugin-url` instead. Claude Code fetches the archive at startup and loads it for that session only. If Claude Code can't fetch the archive, or the archive is invalid, it starts without the plugin and records a plugin load error that you can review in the `/plugin` manager's **Errors** tab. The same [trust considerations](/docs/en/discover-plugins#security) apply as for any plugin source: only point this flag at archives you control or trust.
 
@@ -472,6 +479,7 @@ Now that you understand Claude Code's plugin system, here are suggested paths fo
 
 ### For plugin developers
 
+* [Test plugins with evals](/docs/en/plugin-evals): measure what your plugin changes and gate CI on it
 * [Create and distribute a marketplace](/docs/en/plugin-marketplaces): package and share your plugins
 * [Plugins reference](/docs/en/plugins-reference): complete technical specifications
 * Dive deeper into specific plugin components:

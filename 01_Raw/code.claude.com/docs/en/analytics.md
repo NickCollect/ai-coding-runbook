@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/analytics
-fetched_at: 2026-07-27T04:31:47.440224+00:00
+fetched_at: 2026-09-14T05:36:02.324125+00:00
 fetch_method: mintlify_md
 ---
 
@@ -126,10 +126,6 @@ Click **Export all users** to download complete contribution data for all users 
 ### PR attribution
 
 When contribution metrics are enabled, Claude Code analyzes merged pull requests to determine which code was written with Claude Code assistance. This is done by matching Claude Code session activity against the code in each PR.
-
-#### Tagging criteria
-
-PRs are tagged as "with Claude Code" if they contain at least one line of code written during a Claude Code session. The system uses conservative matching: only code where there is high confidence in Claude Code's involvement is counted as assisted.
 
 #### Attribution process
 

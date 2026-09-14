@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/github-enterprise-server
-fetched_at: 2026-08-31T06:29:41.034141+00:00
+fetched_at: 2026-09-14T05:36:03.111714+00:00
 fetch_method: mintlify_md
 ---
 
@@ -110,7 +110,7 @@ Then start a web session. Claude detects the GHES host from your git remote and 
 claude --cloud "Add retry logic to the payment webhook handler"
 ```
 
-The session clones your repository from GHES and pushes changes back to a branch. Monitor progress with `/tasks` or at [claude.ai/code](https://claude.ai/code). See [Claude Code on the web](/docs/en/claude-code-on-the-web) for the full cloud session workflow including diff review, auto-fix, and routines.
+The session clones your repository from GHES and pushes changes back to a branch. Monitor progress at [claude.ai/code](https://claude.ai/code). See [Claude Code on the web](/docs/en/claude-code-on-the-web) for the full cloud session workflow including diff review, auto-fix, and routines.
 
 ### Teleport sessions to your terminal
 

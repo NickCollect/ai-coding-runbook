@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/costs
-fetched_at: 2026-09-07T05:31:23.571863+00:00
+fetched_at: 2026-09-14T05:36:02.808525+00:00
 fetch_method: mintlify_md
 ---
 
@@ -198,11 +198,12 @@ For per-user cost attribution, you have three options:
 
 ### When a developer asks about a limit
 
-Developers usually bring limit questions to their admin, so it helps to know which ceiling they hit. The four situations mean different things:
+Developers usually bring limit questions to their admin, so it helps to know which ceiling they hit. These situations mean different things:
 
 * **"You've hit your session limit" or "You've hit your weekly limit"**: a seat-based usage window on a subscription plan, shared across all models, so the developer can't restore access by switching models with `/model`. The message shows when the window resets. After the model-specific "You've hit your Opus limit" or "You've hit your Sonnet limit" message, switching to a model outside that family with `/model` does keep the developer working. See [usage limit errors](/docs/en/errors#youve-hit-your-session-limit). What the developer can do in the meantime:
   * Run `/usage-credits` to request usage beyond the allowance, if you have [usage credits](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans) turned on.
   * On Claude Code v2.1.234 or later, [wait and continue the interrupted task automatically after the reset](/docs/en/interactive-mode#wait-for-a-usage-limit-to-reset); that section lists when Claude Code starts the wait on its own and when the developer picks it from `/rate-limit-options`. To control for your fleet whether Claude Code starts that wait on its own, set [`autoContinueAtUsageLimit`](/docs/en/settings-reference#autocontinueatusagelimit) in [managed settings](/docs/en/settings#settings-precedence).
+* **"You've hit your individual spend limit", "org's monthly spend limit", or "team's shared budget"**: the developer's request would be billed to usage credits, and those credits have reached a spend limit you set. To let the developer continue, go to [**Admin settings > Usage**](https://claude.ai/admin-settings/usage) and increase the limit the message names. When the message also names a plan reset time, the developer can instead wait until then. See [the error reference](/docs/en/errors#youve-hit-your-monthly-spend-limit) for each variant.
 * **A spend limit message from a [Claude apps gateway](/docs/en/claude-apps-gateway)**: the developer passed a spend cap you set on your self-hosted gateway, and the gateway blocks their requests until the period resets or you raise the cap. See [gateway spend limits](/docs/en/claude-apps-gateway-spend-limits) for caps, reset schedules, and the message the developer sees.
 * **A context or auto-compact warning**: not a usage limit. The conversation has grown close to the session's [auto-compact window](/docs/en/model-config#set-the-auto-compact-window), the threshold where Claude Code summarizes older history to free space. Point the developer at [reduce token usage](#reduce-token-usage).
 * **Unexpectedly high spend on an API or cloud-provider plan**: usually traces back to long sessions that were never cleared or to Opus left as the default model. The highest-impact habits to share are clearing between unrelated tasks and matching the model to the job, both covered in [reduce token usage](#reduce-token-usage).
@@ -314,7 +315,11 @@ Your [CLAUDE.md](/docs/en/memory) file is loaded into context at session start. 
 
 ### Adjust extended thinking
 
-Extended thinking is enabled by default because it significantly improves performance on complex planning and reasoning tasks. Thinking tokens are billed as output tokens, and the default budget can be tens of thousands of tokens per request depending on the model. For simpler tasks where deep reasoning isn't needed, you can reduce costs by lowering the [effort level](/docs/en/model-config#adjust-effort-level) with `/effort` or in `/model`, disabling thinking in `/config`, or, on models with a [fixed thinking budget](/docs/en/model-config#adaptive-reasoning-and-fixed-thinking-budgets), lowering the budget by setting the `MAX_THINKING_TOKENS` [environment variable](/docs/en/env-vars), for example `MAX_THINKING_TOKENS=8000`. Adaptive-reasoning models ignore nonzero budgets, so use effort levels there instead. Disabling thinking is not available on Fable models, which always use extended thinking.
+Extended thinking is enabled by default because it significantly improves performance on complex planning and reasoning tasks. Thinking tokens are billed as output tokens, and the default budget can be tens of thousands of tokens per request depending on the model.
+
+For simpler tasks where deep reasoning isn't needed, you can reduce costs by lowering the [effort level](/docs/en/model-config#adjust-effort-level) with `/effort` or in `/model`, or by disabling thinking in `/config`. You can't turn off thinking on Fable models, which always use extended thinking.
+
+On models with a [fixed thinking budget](/docs/en/model-config#adaptive-reasoning-and-fixed-thinking-budgets), you can also lower the budget by setting the `MAX_THINKING_TOKENS` [environment variable](/docs/en/env-vars), for example `MAX_THINKING_TOKENS=8000`. Adaptive-reasoning models ignore nonzero budgets, so use effort levels there instead.
 
 ### Delegate verbose operations to subagents
 

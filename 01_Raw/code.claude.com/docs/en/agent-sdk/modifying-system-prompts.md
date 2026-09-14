@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/modifying-system-prompts
-fetched_at: 2026-08-31T06:29:33.823245+00:00
+fetched_at: 2026-09-14T05:36:01.787505+00:00
 fetch_method: mintlify_md
 ---
 
@@ -44,7 +44,7 @@ The [comparison table](#compare-the-four-approaches) shows what each customizati
 
 ## Customize agent behavior
 
-Output styles, `append`, and a custom prompt string each change the system prompt directly. CLAUDE.md takes a different path: the SDK reads it and injects its content into the conversation as project context, not into the system prompt, so it shapes behavior alongside whichever system prompt you choose. [Skills](/docs/en/agent-sdk/skills), [hooks](/docs/en/agent-sdk/hooks), and [permissions](/docs/en/agent-sdk/permissions) also shape behavior outside the system prompt and are covered on their own pages.
+`append` and a custom prompt string each change the system prompt directly, and an output style changes the instructions Claude Code gives Claude for every response. CLAUDE.md takes a different path: the SDK reads it and injects its content into the conversation as project context, so it shapes behavior alongside whichever system prompt you choose. [Skills](/docs/en/agent-sdk/skills), [hooks](/docs/en/agent-sdk/hooks), and [permissions](/docs/en/agent-sdk/permissions) also shape behavior outside the system prompt and are covered on their own pages.
 
 ### CLAUDE.md files for project-level instructions
 
@@ -112,7 +112,7 @@ CLAUDE.md is persistent across all sessions in a project, shared with your team 
 
 ### Output styles for persistent configurations
 
-Output styles are saved configurations that modify Claude's system prompt. They're stored as markdown files and can be reused across sessions and projects.
+Output styles are saved sets of instructions that change Claude's role, tone, and output format. They're stored as markdown files and can be reused across sessions and projects.
 
 #### Create an output style
 
@@ -150,7 +150,7 @@ Once created, activate output styles via:
   const options = { settings: { outputStyle: "Explanatory" } };
   ```
 
-The Python SDK does not have an option to select an output style programmatically. For code-only deployments where you can't write to `.claude/settings.local.json`, use `append` or a custom prompt string instead.
+In the Python SDK, set `outputStyle` through the `settings` option, which takes a JSON string such as `'{"outputStyle": "Explanatory"}'` or a path to a settings file that sets it.
 
 **Note for SDK users:** Output styles are loaded when you include `settingSources: ['user']` or `settingSources: ['project']` (TypeScript) / `setting_sources=["user"]` or `setting_sources=["project"]` (Python) in your options.
 
@@ -368,6 +368,14 @@ The SDK assembles the blocks from the array as follows:
 * The SDK joins the strings on each side of the marker with a blank line between them and removes the marker itself, so the marker text doesn't reach Claude.
 * If you include the marker more than once, the first one is the split and the SDK removes the others.
 * If you leave the marker out, the SDK joins all the strings into one block, the same as passing one string.
+
+### Change the prompt of an existing session
+
+By default, Claude Code builds the system prompt once, on a session's first request, with your `append` text or custom prompt included, and records it in the session. Until the session is compacted, every later request uses that recorded prompt, including after you return to the session with `resume` or `continue`. If you pass a different `append` or custom prompt on that later call, it takes effect once the session is compacted or in a new session.
+
+If you start Claude Code in [bare mode](/docs/en/headless#start-faster-with-bare-mode) by passing `--bare` through `extraArgs` or setting `CLAUDE_CODE_SIMPLE=1`, recording stays off unless you set `snapshot: true` on the object form of `systemPrompt`. Recording an `append` or custom prompt by default requires Claude Code v2.1.265 or later, which the TypeScript Agent SDK bundles from v0.3.265. Before Claude Code v2.1.268, sessions that don't [fetch feature flags](/docs/en/env-vars#features-that-need-feature-flag-fetching), including sessions on Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry, rebuilt the prompt on every request and `snapshot` had no effect.
+
+To rebuild the prompt on every request instead, set `snapshot: false` on the object form of `systemPrompt` in the TypeScript SDK: `{ type: "preset", preset: "claude_code", append, snapshot: false }` or `{ type: "custom", prompt, snapshot: false }`. Use this form while you iterate on prompt wording, or when your application changes `append` between calls that resume the same session. The `snapshot` field requires `@anthropic-ai/claude-agent-sdk` v0.3.257 or later.
 
 ## Compare the four approaches
 

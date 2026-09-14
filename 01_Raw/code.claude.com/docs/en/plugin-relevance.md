@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugin-relevance
-fetched_at: 2026-08-31T06:29:43.943909+00:00
+fetched_at: 2026-09-14T05:36:03.569978+00:00
 fetch_method: mintlify_md
 ---
 
@@ -171,4 +171,4 @@ The validator reports unknown keys under `relevance` and `relevance.signals` as 
 
 * [Create and distribute a plugin marketplace](/docs/en/plugin-marketplaces): build the marketplace that hosts your plugins
 * [Recommend your plugin from your CLI](/docs/en/plugin-hints): prompt users from your own CLI instead of from Claude Code's session signals
-* [Settings reference](/docs/en/settings-reference#pluginsuggestionmarketplaces): `pluginSuggestionMarketplaces` and `extraKnownMarketplaces`
+* [All settings](/docs/en/settings-reference#pluginsuggestionmarketplaces): `pluginSuggestionMarketplaces` and `extraKnownMarketplaces`

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/artifacts
-fetched_at: 2026-08-31T06:29:35.738573+00:00
+fetched_at: 2026-09-14T05:36:02.405928+00:00
 fetch_method: mintlify_md
 ---
 
@@ -37,7 +37,7 @@ See [What you can build](#what-you-can-build) for prompts that match these, and 
 
 ### What an artifact is not
 
-An artifact is a capture of work: one self-contained page with no backend, so it can't store form input or serve multiple routes, and its only path to outside data when someone views it is [calling MCP connectors](#pull-live-data-with-mcp-connectors). For a hosted internal tool with a backend, deploy it on your own infrastructure instead. See [Page constraints](#page-constraints) for the full set of limits.
+An artifact is a capture of work: one self-contained page with no backend, so it can't serve multiple routes. For a hosted internal tool with a backend, deploy it on your own infrastructure instead. See [Page constraints](#page-constraints) for the full set of limits.
 
 ## Create an artifact
 
@@ -58,13 +58,13 @@ Unless you name a location, Claude writes the page to an HTML or Markdown file i
 
 After you approve an artifact once, Claude Code republishes it without asking, and asks again in some cases, including when:
 
-* Claude declares a runtime capability for the page, such as [connector calls](#pull-live-data-with-mcp-connectors)
+* Claude declares a runtime capability for the page, such as [connector calls](#pull-live-data-with-mcp-connectors) or [file downloads](#offer-a-file-download)
 * You have since [shared it publicly](#share-an-artifact)
 * You have since shared it with specific people or your organization with the latest version chosen as the version viewers see
 
-After the first publish, Claude prints the URL, and your browser opens to the new page. Press `Ctrl+]` at any time to reopen the most recent artifact from the terminal.
+After the first publish, Claude prints the URL, and your browser opens to the new page. If you sent the prompt through [Remote Control](/docs/en/remote-control) from claude.ai, Claude Desktop, or the Claude mobile app, no tab opens on the machine running the session. The browser opens there the next time Claude publishes the artifact from a prompt you type at the terminal. Press `Ctrl+]` at any time to reopen the session's most recent artifact.
 
-Claude picks the artifact's title and an emoji for its browser-tab icon. Both appear in your [gallery of artifacts](#share-an-artifact) on claude.ai and in shared links, so ask Claude to use a specific title or icon if you want one.
+Claude picks the artifact's title and an emoji, and both appear in your [gallery of artifacts](#share-an-artifact) on claude.ai and in shared links. Claude can also pick a browser-tab icon that matches what the page is, such as a chart or a calendar. Ask Claude for a specific title, emoji, or tab icon if you want one.
 
 To stop the browser from opening automatically when a new artifact is published, set `CLAUDE_CODE_ARTIFACT_AUTO_OPEN=0` in your environment.
 
@@ -106,6 +106,12 @@ Who you can share with depends on your plan:
 People you share with are viewers by default: they see each version you publish but can't change the page. On Team and Enterprise plans, you can also make someone an editor. In the share dialog, add a person and switch their role from **viewer** to **editor**.
 
 An editor publishes new versions the same way you [update the artifact from another session](#update-an-artifact): they give Claude the artifact's URL, or attach it from [`/artifacts`](#find-an-artifact-again), and Claude pulls the current content and republishes with their changes. Everyone with the page open sees each update live.
+
+## Read an artifact shared with you
+
+When someone shares an artifact with you, you can have Claude read it: give Claude its URL, or attach it from [`/artifacts`](#find-an-artifact-again).
+
+Claude reads a page someone else wrote the way it reads a web page with [WebFetch](/docs/en/tools-reference#webfetch-tool-behavior): it gets a summary of what it asked about rather than the raw page, and the summary reports instructions written into the page instead of relaying them. Claude Code also saves the page's full source to a local file, which Claude can open when it needs the exact content, such as to republish the artifact as an [editor](#let-someone-edit-with-you).
 
 ## Collect comments on an artifact
 
@@ -185,6 +191,23 @@ When a connector-backed page renders but its live sections stay empty for someon
 * **The viewer hasn't connected the connector**: connectors are per-account, so each viewer needs their own connection to every connector the page calls. They can add one under **Settings > Connectors** on claude.ai, then reload the page.
 * **The viewer declined the permission ask**: a denial lasts for the rest of that page load. Reloading the page brings the permission ask back.
 * **Connector calls are turned off for the organization**: an Owner controls the [**Enable artifact connectors** toggle](#control-connector-calls-from-artifacts) in admin settings.
+* **The page calls tool names the connector doesn't expose**: the affected sections stay empty for everyone, including you. This can happen when a page names the individual tools behind a gateway-style connector that exposes only a few tools of its own. Ask Claude to fix the tool names the page calls and publish it again.
+
+  When Claude publishes the page and that connector's tools are available in your session, Claude Code checks the tool names the page declares against them, warns Claude about names that don't match, and refuses the publish when none do. Before v2.1.265, it published the page without checking them.
+
+## Offer a file download
+
+An artifact can offer viewers a file the page generates, such as a CSV export of a table or a PNG of a chart. The viewer saves it through a download control on the page, such as a button. File downloads are a runtime capability that claude.ai enables per account, so Claude checks whether your account has it before it builds the control.
+
+Viewers can't save a file from an ordinary download link or a script on the page, because the artifact viewer on claude.ai blocks any download the page starts itself, including links to `data:` or `blob:` URLs. If a page has download buttons built that way, ask Claude to rebuild them with the downloads capability.
+
+To offer a file, ask for the control and the file format in your prompt:
+
+```text wrap theme={null}
+Add a button that downloads this table as a CSV file.
+```
+
+Claude declares the downloads capability as part of publishing, the same way it [declares connectors](#pull-live-data-with-mcp-connectors).
 
 ## What you can build
 
@@ -265,9 +288,10 @@ Each artifact is one self-contained page. Claude Code wraps the file you publish
 | Constraint        | Effect                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | :---------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | External requests | The page can load typefaces from Google Fonts, and scripts from [four public CDN hosts](#allowlist-the-viewer-domain): cdnjs, the Tailwind and jQuery CDNs, and selected paths on jsDelivr such as `/npm/`. The CSP blocks every external image and all other external scripts, stylesheets, and fonts, and lets `fetch`, XHR, and WebSocket calls reach only the page's own origin and the Google Fonts hosts. Claude therefore loads any library the page needs from one of those CDNs, inlines all other CSS and JavaScript, and embeds images as data URIs. [Connector calls](#pull-live-data-with-mcp-connectors) go through claude.ai, which makes the network call itself. |
-| No backend        | An artifact is a static page. It can't store data submitted through a form or authenticate viewers itself. Its only way to fetch data when someone views it is [calling MCP connectors](#pull-live-data-with-mcp-connectors), not an API of its own.                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| No backend        | An artifact is a static page. It can't authenticate viewers itself.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Downloads         | The page can't start a download itself. To let viewers save a file the page generates, Claude declares the downloads capability. See [Offer a file download](#offer-a-file-download).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | Single page       | Relative links do not resolve, because nothing is deployed alongside the page. For multi-section content, Claude uses in-page anchors rather than separate files.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| Source file types | The published file must be `.html`, `.htm`, or `.md`. Markdown files render as styled HTML.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Source file types | The published file must be `.html`, `.htm`, or `.md`, and must decode as UTF-8, or as little-endian UTF-16 by its byte-order mark. Markdown files render as styled HTML. A file that doesn't decode, or that contains the replacement character `U+FFFD`, is [refused with the line and column to fix](/docs/en/errors#the-source-file-is-not-valid-utf-8-text).                                                                                                                                                                                                                                                                                                                       |
 | Rendered size     | The rendered page must be 16 MiB or smaller. Large embedded images are the usual cause when a publish fails for size.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 Generating an artifact uses output tokens like any other response, and a styled page is more token-intensive than the same content as terminal text. Inline CSS, JavaScript for interactive controls, and especially images embedded as data URIs are the main contributors. To reduce an artifact's token cost:
@@ -302,6 +326,8 @@ To turn artifacts off for your own sessions regardless of your organization's se
 Once you turn artifacts off in a [`--settings`](/docs/en/cli-reference#cli-flags) file or with `CLAUDE_CODE_DISABLE_ARTIFACT`, or your administrator turns them off in [managed settings](/docs/en/server-managed-settings), no settings file turns them back on. Before v2.1.242, a file higher in the [precedence stack](/docs/en/settings#settings-precedence) could turn artifacts back on even when a lower-precedence file set `"enableArtifact": false`.
 
 You can also set `"enableArtifact": false` in a project's `.claude/settings.json` or `.claude/settings.local.json` to turn artifacts off for sessions in that project. An `"enableArtifact": true` in either file doesn't turn them back on. Honoring the key in project and local settings requires Claude Code v2.1.242 or later.
+
+If you add a `WebFetch` deny or ask rule with no `domain:` part, it doesn't turn artifacts off or block artifact reads. A [`WebFetch(domain:claude.ai)` rule in `deny` or `ask` does apply to artifact reads](/docs/en/permissions#allow-or-deny-every-fetch).
 
 ## Manage artifacts for your organization
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/headless
-fetched_at: 2026-09-07T05:31:23.934231+00:00
+fetched_at: 2026-09-14T05:36:03.171687+00:00
 fetch_method: mintlify_md
 ---
 
@@ -193,9 +193,14 @@ For programmatic streaming with callbacks and message objects, see [Stream respo
 
 Messages from [subagents](/docs/en/sub-agents) appear in the stream as `assistant` and `user` messages whose `parent_tool_use_id` field is the ID of the tool call that spawned the subagent. Messages from the main conversation carry `null` in that field.
 
-By default, Claude Code emits only subagent `tool_use` and `tool_result` blocks. Pass [`--forward-subagent-text`](/docs/en/cli-reference#cli-flags) or set [`CLAUDE_CODE_FORWARD_SUBAGENT_TEXT`](/docs/en/env-vars) to also emit subagent text and thinking blocks, so you can reconstruct each subagent's transcript. This requires Claude Code v2.1.211 or later.
+The first message from a subagent running in the [foreground](/docs/en/sub-agents#run-subagents-in-foreground-or-background) is a `user` message carrying the prompt that drives it. After that first message, Claude Code emits:
+
+* **By default**: the subagent's `tool_use` and `tool_result` blocks.
+* **With [`--forward-subagent-text`](/docs/en/cli-reference#cli-flags) or [`CLAUDE_CODE_FORWARD_SUBAGENT_TEXT`](/docs/en/env-vars)**: the subagent's text and thinking blocks too, so you can reconstruct each subagent's transcript. This requires Claude Code v2.1.211 or later.
 
 When you enable either option, Claude Code forwards messages from [subagents at every nesting depth](/docs/en/sub-agents#let-subagents-spawn-their-own-subagents): when a subagent spawns its own subagent, the nested subagent's messages carry the ID of the Agent tool call that spawned it in `parent_tool_use_id`, so you can rebuild the full nesting tree by following those IDs. Before v2.1.219, messages from nested subagents didn't appear in the stream.
+
+Skills that [run in a subagent](/docs/en/skills#run-skills-in-a-subagent) appear in the stream the same way: the forked skill's first message is a `user` message carrying the skill content that drives the run. If you enable either option, the stream also carries the forked skill's text and thinking blocks. Before v2.1.265, only a forked skill's `tool_use` and `tool_result` blocks appeared in the stream.
 
 #### Handle API retries
 
@@ -206,11 +211,11 @@ When an API request fails with a retryable error, Claude Code emits a `system/ap
 | `type`           | `"system"`       | message type                                                                                                                                                                                                                                                                                                                                                  |
 | `subtype`        | `"api_retry"`    | identifies this as a retry event                                                                                                                                                                                                                                                                                                                              |
 | `attempt`        | integer          | current attempt number, starting at 1                                                                                                                                                                                                                                                                                                                         |
-| `max_retries`    | integer          | total retries permitted                                                                                                                                                                                                                                                                                                                                       |
+| `max_retries`    | integer          | total retries permitted for this failure's cause, which can be fewer than the session-wide budget                                                                                                                                                                                                                                                             |
 | `retry_delay_ms` | integer          | milliseconds until the next attempt                                                                                                                                                                                                                                                                                                                           |
-| `error_status`   | integer or null  | HTTP status code, or `null` for connection errors with no HTTP response                                                                                                                                                                                                                                                                                       |
+| `error_status`   | integer or null  | HTTP status code of the failed attempt, or `null` when the attempt got no HTTP response from the API                                                                                                                                                                                                                                                          |
 | `no_response`    | object, optional | present only when the failed attempt got [no response headers in time](/docs/en/errors#no-response-from-api). `waited_ms` is how long that attempt waited and `retry_wait_ms` is how long the retry will wait. In these events, `max_retries` reflects the one retry this cause normally gets, not the session-wide budget. Requires Claude Code v2.1.261 or later |
-| `error`          | string           | error category: `authentication_failed`, `oauth_org_not_allowed`, `billing_error`, `rate_limit`, `overloaded`, `invalid_request`, `model_not_found`, `server_error`, `max_output_tokens`, or `unknown`                                                                                                                                                        |
+| `error`          | string           | error category: `authentication_failed`, `oauth_org_not_allowed`, `account_on_hold`, `billing_error`, `rate_limit`, `overloaded`, `invalid_request`, `model_not_found`, `server_error`, `max_output_tokens`, `cloud_credential_error`, or `unknown`                                                                                                           |
 | `uuid`           | string           | unique event identifier                                                                                                                                                                                                                                                                                                                                       |
 | `session_id`     | string           | session the event belongs to                                                                                                                                                                                                                                                                                                                                  |
 
@@ -269,7 +274,7 @@ claude -p "Run the test suite and fix any failures" \
 To set a baseline for the whole session instead of listing individual tools, pass a [permission mode](/docs/en/permission-modes). For `-p`, the [built-in starting permission mode](/docs/en/permission-modes#which-mode-a-session-starts-in) is Manual on every plan, so pass the permission mode you want:
 
 * **`auto`**: pass `--permission-mode auto` to have a classifier review most actions instead of you
-* **`dontAsk`**: Claude Code denies anything not in your `permissions.allow` rules or the [read-only command set](/docs/en/permissions#read-only-commands), which is useful for locked-down CI runs. `AskUserQuestion`, connector tools [your organization set to `ask`](/docs/en/mcp#organization-controls-on-connector-tools), and MCP tools marked [`requiresUserInteraction`](/docs/en/mcp#require-approval-for-a-specific-tool) are denied even when an allow rule matches
+* **`dontAsk`**: Claude Code denies every call that would otherwise prompt, which is useful for locked-down CI runs. Actions that need no approval in Manual mode still run, such as file reads in your working directories and the [read-only command set](/docs/en/permissions#read-only-commands), and so do actions your `--allowedTools` entries or `permissions.allow` rules cover. `AskUserQuestion`, connector tools [your organization set to `ask`](/docs/en/mcp#organization-controls-on-connector-tools), and MCP tools marked [`requiresUserInteraction`](/docs/en/mcp#require-approval-for-a-specific-tool) are denied even when an allow rule matches
 * **`acceptEdits`**: Claude writes files without prompting, and Claude Code auto-approves common filesystem commands such as `mkdir`, `touch`, `mv`, and `cp`. The [actions no mode auto-approves](/docs/en/permission-modes#actions-no-mode-auto-approves) still apply. Apart from the read-only command set, other shell commands and network requests still need an `--allowedTools` entry or a `permissions.allow` rule. See [what `acceptEdits` auto-approves](/docs/en/permission-modes#auto-approve-file-edits-with-acceptedits-mode) for the full list
 
 This example applies lint fixes with `acceptEdits` as the baseline:
@@ -329,7 +334,7 @@ See [system prompt flags](/docs/en/cli-reference#system-prompt-flags) for more o
 
 ### Continue conversations
 
-Use `--continue` to continue the most recent conversation, or `--resume` with a session ID to continue a specific conversation. `--continue` skips [background sessions](/docs/en/sessions#resume-a-session). This example runs a review, then sends follow-up prompts:
+Use `--continue` to continue the most recent conversation, or `--resume` with a session ID to continue a specific conversation. On Claude Code v2.1.257 or later, when you pass `--continue`, Claude Code opens a [background session](/docs/en/sessions#resume-a-session) that has finished, but not one that is still running. This example runs a review, then sends follow-up prompts:
 
 ```bash theme={null}
 # First request
@@ -348,6 +353,8 @@ claude -p "Continue that review" --resume "$session_id"
 ```
 
 You can run the two commands from different directories: Claude Code [finds the session by its ID](/docs/en/sessions#resume-a-session) in any project on this machine. Before v2.1.223, Claude Code looked for the ID only in the current project directory and its git worktrees, so you had to run both commands from the same directory.
+
+In place of the session ID, you can pass `--resume` the absolute path to a session's `.jsonl` [transcript file](/docs/en/sessions#where-transcripts-are-stored), and Claude Code continues the conversation stored in that file.
 
 ## Next steps
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/ultrareview
-fetched_at: 2026-09-07T05:31:24.757831+00:00
+fetched_at: 2026-09-14T05:36:04.108783+00:00
 fetch_method: mintlify_md
 ---
 
@@ -159,7 +159,7 @@ Progress messages and the live session URL go to stderr so stdout stays parseabl
 | Flag                  | Description                                                                                                                                                                                                                                                                        |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--json`              | Print the raw `bugs.json` payload instead of the formatted findings                                                                                                                                                                                                                |
-| `--timeout <minutes>` | Maximum minutes to wait for the review to finish. Defaults to 30                                                                                                                                                                                                                   |
+| `--timeout <minutes>` | Maximum minutes to wait for the review to finish. Defaults to 45                                                                                                                                                                                                                   |
 | `--post`              | [Post the finished findings](#post-findings-to-the-pull-request) to the pull request as one plain comment from your GitHub account. Works on `github.com` pull request targets; on other targets, Claude Code ignores the flag and says so. Requires Claude Code v2.1.227 or later |
 | `--no-post`           | Don't post the findings. This is the default, and if you pass both flags, Claude Code doesn't post. Requires Claude Code v2.1.227 or later                                                                                                                                         |
 

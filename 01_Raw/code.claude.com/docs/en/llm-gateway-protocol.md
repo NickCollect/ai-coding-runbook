@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/llm-gateway-protocol
-fetched_at: 2026-09-07T05:31:24.063195+00:00
+fetched_at: 2026-09-14T05:36:03.313549+00:00
 fetch_method: mintlify_md
 ---
 
@@ -54,7 +54,12 @@ Microsoft Foundry and the [Claude Platform on AWS](/docs/en/claude-platform-on-a
 
 ### Optional endpoints and startup traffic
 
-Token-counting endpoints are the only optional ones: when they're absent, Claude Code falls back to counting context usage through the inference endpoint instead. Inference requests post to `/v1/messages?beta=true`, so match on the path, not the full URL. The Google Cloud's Agent Platform method suffixes attach to the publisher model path, as in `/projects/{project}/locations/{location}/publishers/anthropic/models/{model}:streamRawPredict`.
+Token-counting endpoints are the only optional ones: when they're absent, Claude Code falls back to a character-based estimate of context usage.
+
+Match on the path, not the full URL:
+
+* Inference requests post to `/v1/messages?beta=true`
+* The Google Cloud's Agent Platform method suffixes attach to the publisher model path, as in `/projects/{project}/locations/{location}/publishers/anthropic/models/{model}:streamRawPredict`
 
 A gateway also sees best-effort startup traffic it can reject without breaking anything. An Anthropic Messages-format gateway receives a `HEAD /api/hello` connection-warming probe, which Claude Code skips when an HTTP proxy or client certificate is configured. An Amazon Bedrock-format gateway receives a `GET /inference-profiles?type=SYSTEM_DEFINED` request and, when the configured model is an inference profile, `GET /inference-profiles/{profile}` lookups.
 
@@ -140,13 +145,17 @@ Fine-grained tool streaming is one of the direct-connection defaults: it is off 
 | Beta [tool fields](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)                                                                                                                                                       | Tool-related beta headers pair with tool schema fields such as `strict` and `defer_loading`                                                                                                                 | `400` naming the unrecognized tool schema field when the body passes through without its header                                              | Forward both, or [`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1`](#disable-pre-release-capabilities)                                 |
 | [Effort](https://platform.claude.com/docs/en/build-with-claude/effort) and [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)                                                                        | The `output_config` body field carries effort, structured-output format, and task budget settings; each pairs with its own beta header                                                                      | `400` naming `output_config`, often `Extra inputs are not permitted`, on Amazon Bedrock and Google Cloud's Agent Platform upstreams          | Forward the field and its headers together                                                                                       |
 | [Prompt caching](/docs/en/prompt-caching)                                                                                                                                                                                                             | No beta pairing. Claude Code attaches `cache_control` markers to `system` blocks and to `messages` entries, including `role: "system"` entries appended mid-conversation                                    | No error: the conversation bills as uncached input on every turn, visible as high `input_tokens` with little or no cache activity in `usage` | Forward `cache_control` unchanged wherever it appears, and don't convert block-form `system` or message content to plain strings |
-| [Token counting](https://platform.claude.com/docs/en/build-with-claude/token-counting)                                                                                                                                                           | No beta pairing; uses the `count_tokens` endpoint                                                                                                                                                           | Claude Code falls back to counting context usage through the messages endpoint                                                               | Expose the endpoint so token counts don't consume inference requests                                                             |
+| [Token counting](https://platform.claude.com/docs/en/build-with-claude/token-counting)                                                                                                                                                           | No beta pairing; uses the `count_tokens` endpoint                                                                                                                                                           | No error: Claude Code falls back to a character-based estimate, so `/context` shows approximate counts                                       | Expose the endpoint for exact token counts                                                                                       |
 
 The `ANTHROPIC_DEFAULT_*_MODEL_SUPPORTED_CAPABILITIES` [variables](/docs/en/model-config) declare model capabilities only in the provider configurations: `CLAUDE_CODE_USE_BEDROCK`, `CLAUDE_CODE_USE_VERTEX`, `CLAUDE_CODE_USE_FOUNDRY`, and [`CLAUDE_CODE_USE_MANTLE`](/docs/en/amazon-bedrock#use-the-mantle-endpoint). They have no effect behind an `ANTHROPIC_BASE_URL` gateway.
 
 ### Automatic retry and error forwarding
 
-When the upstream rejects the `thinking` field, a [thinking signature](https://platform.claude.com/docs/en/build-with-claude/extended-thinking), a mid-conversation system message, or the `cache_control` marker on one of those messages, Claude Code retries the request and disables the rejected capability for the rest of the conversation. Claude Code doesn't retry context management or tool schema field rejections; those `400` errors reach the developer.
+What Claude Code does after an upstream rejection depends on what was rejected:
+
+* When the upstream rejects the `thinking` field, a mid-conversation system message, or the `cache_control` marker on such a message, Claude Code retries the request and disables the rejected capability for the rest of the conversation
+* When the upstream rejects a [thinking signature](https://platform.claude.com/docs/en/build-with-claude/extended-thinking), Claude Code retries the request without the conversation's earlier thinking blocks and keeps them out of every later request. New responses still include thinking
+* Claude Code doesn't retry rejections of context management or tool schema fields, so those `400` errors reach the developer
 
 The retry logic matches on the upstream's error wording, so forward error response bodies unmodified. A gateway that wraps upstream errors in its own envelope breaks the recovery path, even when it preserves the status code, unless the envelope's message carries a stable `capability_rejected:` token. [Claude apps gateway substitutes those tokens for cloud providers' error wording](/docs/en/claude-apps-gateway-config#upstream-error-messages), for example `capability_rejected: prompt_too_long`.
 
@@ -208,7 +217,9 @@ Claude Code keeps an entry when its `id` contains `claude` or `anthropic` anywhe
 
 ### Picker entries and caching
 
-The picker is the interactive model list that opens when a developer runs `/model` in Claude Code. Each discovered entry uses `display_name` as its name when the gateway sends one, and the model's `id` otherwise. Discovery adds only models that the [`availableModels` managed setting](/docs/en/settings-reference#availablemodels) allows.
+The picker is the interactive model list that opens when a developer runs `/model` in Claude Code. Each discovered entry uses `display_name` as its name when the gateway sends one that differs from the `id`. Otherwise the entry shows the model's name when Claude Code [recognizes the `id`](/docs/en/model-config#customize-pinned-model-display-and-capabilities), and the `id` when it doesn't. For example, an entry with the `id` `my-gateway-claude-sonnet-4-6` and no `display_name` appears as `Sonnet 4.6`.
+
+Discovery adds only models that the [`availableModels` managed setting](/docs/en/settings-reference#availablemodels) allows.
 
 Each entry also shows the model's `description`, collapsed to one line. An entry without a `description` reads "From gateway" instead. Before v2.1.257, every discovered entry read "From gateway".
 

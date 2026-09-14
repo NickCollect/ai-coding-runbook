@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/voice-dictation
-fetched_at: 2026-08-31T06:29:46.607606+00:00
+fetched_at: 2026-09-14T05:36:04.130161+00:00
 fetch_method: mintlify_md
 ---
 
@@ -204,6 +204,6 @@ If your terminal app does not appear under System Settings → Privacy & Securit
 ## See also
 
 * [Customize keyboard shortcuts](/docs/en/keybindings): rebind `voice:pushToTalk` and other CLI keyboard actions
-* [Settings reference](/docs/en/settings-reference#voice): the `voice`, `language`, and other settings keys
+* [All settings](/docs/en/settings-reference#voice): the `voice`, `language`, and other settings keys
 * [Interactive mode](/docs/en/interactive-mode): keyboard shortcuts, input modes, and session controls
 * [Commands](/docs/en/commands): reference for `/voice`, `/config`, and all other commands

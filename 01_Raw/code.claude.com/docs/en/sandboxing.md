@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/sandboxing
-fetched_at: 2026-09-07T05:31:24.417692+00:00
+fetched_at: 2026-09-14T05:36:03.728201+00:00
 fetch_method: mintlify_md
 ---
 
@@ -55,6 +55,12 @@ On macOS, there is nothing to install: sandboxing uses the built-in Seatbelt fra
 </Steps>
 
 When you select a mode in the panel, Claude Code saves it to your project's local settings at `.claude/settings.local.json`, which apply to the current project. Claude Code adds that file to your global gitignore when it saves a setting there. To enable the sandbox across all of your projects, set [`sandbox.enabled`](/docs/en/settings-reference#sandbox-enabled) to `true` in your user settings at `~/.claude/settings.json`. To enforce sandboxing for every developer in an organization, use [managed settings](#enforce-sandboxing-with-managed-settings).
+
+To change the sandbox for one session without writing to a settings file, start Claude Code with [`--settings`](/docs/en/settings#change-a-setting-for-one-session). For example, this command starts a sandboxed session in which Claude can't retry a blocked command outside the sandbox:
+
+```bash theme={null}
+claude --settings '{"sandbox": {"enabled": true, "allowUnsandboxedCommands": false}}'
+```
 
 <Warning>
   By default, if the sandbox cannot start because dependencies are missing or the platform is unsupported, Claude Code shows a warning and runs commands without sandboxing. To make this a hard failure instead, set [`sandbox.failIfUnavailable`](/docs/en/settings-reference#sandbox-failifunavailable) to `true`. This is intended for managed deployments that require sandboxing as a security gate.
@@ -673,6 +679,9 @@ Some commands fail inside the sandbox even though they work outside it. The fixe
 
   After the failure, Claude may [offer to rerun the command outside the sandbox](#the-unsandboxed-retry-escape-hatch); approve that retry, or run the git command yourself in another terminal. If you've set `allowUnsandboxedCommands` to `false`, Claude can't offer the retry, so run the command yourself. If the same git command fails often, add it to [`excludedCommands`](/docs/en/settings-reference#sandbox-excludedcommands).
 * **Bubblewrap fails to start inside a container**: in an unprivileged container, bubblewrap can't mount a fresh `/proc` filesystem, so sandboxed commands fail with a `bwrap` error such as `Can't mount proc on /newroot/proc: Operation not permitted`. Set [`enableWeakerNestedSandbox`](/docs/en/settings-reference#sandbox-enableweakernestedsandbox) to `true` so the inner sandbox bind-mounts the container's existing `/proc` instead. Only use this setting when the outer container already provides the isolation boundary you need, since it exposes process information to sandboxed commands that a fresh `/proc` mount would hide.
+* **0-byte read-only files appear at `.claude` settings paths, and "Yes, and don't ask again" doesn't save**: on Linux and WSL2, the sandbox holds a write denial on a file that doesn't exist yet by creating a 0-byte read-only placeholder there while a sandboxed command runs. The sandbox removes the placeholder afterward. If a session is killed before that cleanup runs, for example by SIGKILL, the placeholders stay behind. Later sessions bind them read-only again on every start, so a settings write such as saving a permission choice fails where one sits.
+
+  Run `claude doctor` to list the leftover placeholder files. The [`Stale sandbox mask files left by a killed session`](/docs/en/errors#stale-sandbox-mask-files-left-by-a-killed-session) warning names up to three of them and counts the rest. Delete each file with `rm` while no other Claude Code session is running in that project. Before v2.1.257, Claude Code left the same placeholders behind without flagging them.
 * **`--dangerously-skip-permissions` fails as root**: this flag is blocked when running as root or via sudo on Linux and macOS, because root access combined with no permission prompts can modify any file or service on the system. The check is skipped automatically inside a recognized sandbox. To run autonomously in a container, use the [dev container](/docs/en/devcontainer) configuration, which runs Claude Code as a non-root user.
 
 ## Limitations
@@ -716,5 +725,5 @@ The sandbox isolates Bash subprocesses. Other tools operate under different boun
 * [Sandbox environments](/docs/en/sandbox-environments): compare the built-in sandbox with dev containers, containers, and VMs
 * [Security](/docs/en/security): comprehensive security features and best practices
 * [Permissions](/docs/en/permissions): permission configuration and access control
-* [Settings reference](/docs/en/settings-reference): every settings key
+* [All settings](/docs/en/settings-reference): every settings key
 * [CLI reference](/docs/en/cli-reference): command-line options

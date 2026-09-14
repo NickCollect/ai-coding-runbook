@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/streaming-output
-fetched_at: 2026-08-17T02:15:19.492679+00:00
+fetched_at: 2026-09-14T05:36:02.093649+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ fetch_method: mintlify_md
 
 > Get real-time responses from the Agent SDK as text and tool calls stream in
 
-By default, the Agent SDK yields complete `AssistantMessage` objects after Claude finishes generating each response. To receive incremental updates as text and tool calls are generated, enable partial message streaming.
+By default, the Agent SDK yields a complete `AssistantMessage` for each non-empty content block, such as a text block or a tool call, after Claude finishes generating that block. To receive incremental updates as text and tool calls are generated, enable partial message streaming.
 
 <Tip>
   This page covers output streaming (receiving tokens in real-time). For input modes (how you send messages), see [Send messages to agents](/docs/en/agent-sdk/streaming-vs-single-mode). You can also [stream responses using the Agent SDK via the CLI](/docs/en/headless).
@@ -81,34 +81,14 @@ The example below enables streaming and prints text chunks as they arrive. Notic
 
 When partial messages are enabled, you receive raw Claude API streaming events wrapped in an object. The type has different names in each SDK:
 
-* **Python**: `StreamEvent` (import from `claude_agent_sdk.types`)
-* **TypeScript**: `SDKPartialAssistantMessage` with `type: 'stream_event'`
+* **Python**: [`StreamEvent`](/docs/en/agent-sdk/python#streamevent) (import from `claude_agent_sdk.types`)
+* **TypeScript**: [`SDKPartialAssistantMessage`](/docs/en/agent-sdk/typescript#sdkpartialassistantmessage) with `type: 'stream_event'`
 
-Both contain raw Claude API events, not accumulated text. You need to extract and accumulate text deltas yourself. Here's the structure of each type:
-
-<CodeGroup>
-  ```python Python theme={null}
-  @dataclass
-  class StreamEvent:
-      uuid: str  # Unique identifier for this event
-      session_id: str  # Session identifier
-      event: dict[str, Any]  # The raw Claude API stream event
-      parent_tool_use_id: str | None  # Always None
-  ```
-
-  ```typescript TypeScript theme={null}
-  type SDKPartialAssistantMessage = {
-    type: "stream_event";
-    event: BetaRawMessageStreamEvent; // From Anthropic SDK
-    parent_tool_use_id: string | null;
-    uuid: UUID;
-    session_id: string;
-    ttft_ms?: number; // Time to first token in ms, present only on message_start events
-  };
-  ```
-</CodeGroup>
+Both contain raw Claude API events, not accumulated text. You need to extract and accumulate text deltas yourself.
 
 The `parent_tool_use_id` field is always `None` in Python and `null` in TypeScript. Stream events are emitted for the main session only; token-level deltas from subagents aren't forwarded. To attribute output to a subagent, use complete messages, which carry `parent_tool_use_id`. See [Detect subagent invocation](/docs/en/agent-sdk/subagents#detect-subagent-invocation).
+
+Claude Code sets `user_message_uuid` on the turn's first non-ping stream event, and again when the message the turn is answering changes, under the conditions in [`user_message_uuid`](/docs/en/agent-sdk/typescript#user_message_uuid). The Python `StreamEvent` doesn't expose this field.
 
 The `event` field contains the raw streaming event from the [Claude API](https://platform.claude.com/docs/en/build-with-claude/streaming#event-types). Common event types include:
 
@@ -123,25 +103,26 @@ The `event` field contains the raw streaming event from the [Claude API](https:/
 
 ## Message flow
 
-With partial messages enabled, you receive messages in this order:
+Claude Code emits an `AssistantMessage` as each non-empty content block completes, so a response with a text block and a tool call yields two `AssistantMessage` objects. Each one carries only its own content block, and both share the same message ID, which you read as `message.message.id` in TypeScript and `message.message_id` in Python. With partial messages enabled, each `AssistantMessage` arrives before that block's `content_block_stop` event, and you receive messages in this order:
 
 ```text theme={null}
 StreamEvent (message_start)
 StreamEvent (content_block_start) - text block
 StreamEvent (content_block_delta) - text chunks...
+AssistantMessage - complete text block
 StreamEvent (content_block_stop)
 StreamEvent (content_block_start) - tool_use block
 StreamEvent (content_block_delta) - tool input chunks...
+AssistantMessage - complete tool_use block
 StreamEvent (content_block_stop)
 StreamEvent (message_delta)
 StreamEvent (message_stop)
-AssistantMessage - complete message with all content
 ... tool executes ...
 ... more streaming events for next turn ...
 ResultMessage - final result
 ```
 
-Without partial messages enabled, you receive all message types except `StreamEvent`. Common types include `SystemMessage` (session initialization), `AssistantMessage` (complete responses), `ResultMessage` (final result), and a compact boundary message indicating when conversation history was compacted (`SDKCompactBoundaryMessage` in TypeScript; `SystemMessage` with subtype `"compact_boundary"` in Python).
+Without partial messages enabled, you receive all message types except `StreamEvent`. Common types include `SystemMessage` (session initialization), `AssistantMessage` (complete content blocks), `ResultMessage` (final result), and a compact boundary message indicating when conversation history was compacted (`SDKCompactBoundaryMessage` in TypeScript; `SystemMessage` with subtype `"compact_boundary"` in Python).
 
 ## Stream tool calls
 

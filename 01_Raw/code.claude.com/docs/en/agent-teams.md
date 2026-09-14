@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-teams
-fetched_at: 2026-09-07T05:31:22.982716+00:00
+fetched_at: 2026-09-14T05:36:02.282845+00:00
 fetch_method: mintlify_md
 ---
 
@@ -155,7 +155,7 @@ Claude Code picks each teammate's model from the first of these that applies:
 3. [`CLAUDE_CODE_SUBAGENT_MODEL`](/docs/en/model-config#environment-variables), when it's set to anything other than `inherit`.
 4. The lead's current model.
 
-[`CLAUDE_CODE_SUBAGENT_MODEL_FORCE`](/docs/en/sub-agents#run-every-subagent-on-one-model) applies to teammates as well as to subagents.
+If you set [`CLAUDE_CODE_SUBAGENT_MODEL_FORCE=1`](/docs/en/sub-agents#run-every-subagent-on-one-model), the first two sources don't apply. Claude Code picks every teammate's model from `CLAUDE_CODE_SUBAGENT_MODEL` when it's set to anything other than `inherit`, and from the lead's current model otherwise. Requires Claude Code v2.1.257 or later.
 
 Before v2.1.251, `CLAUDE_CODE_SUBAGENT_MODEL` came first in this order.
 
@@ -230,9 +230,9 @@ This section covers the architecture and mechanics behind agent teams. If you wa
 
 ### How Claude starts agent teams
 
-To start a team, ask Claude for teammates. Claude launches a teammate when it calls the [Agent tool](/docs/en/tools-reference) with a [`name`](/docs/en/sub-agents#subagent-names) while agent teams are enabled, and Claude Code doesn't ask you to confirm. Claude also names ordinary subagents on its own so it can message them later, and while agent teams are enabled, a named subagent launches as a teammate, so teams can form even when you didn't ask for one.
+To start a team, ask Claude for teammates. Claude launches a teammate when it calls the [Agent tool](/docs/en/tools-reference) with a [`name`](/docs/en/sub-agents#subagent-names) while agent teams are enabled, unless the call is a [fork](/docs/en/sub-agents#fork-the-current-conversation) or passes `isolation` on the call itself. Claude Code doesn't ask you to confirm the launch.
 
-If you want subagents instead, [turn agent teams off](#claude-spawns-teammates-instead-of-subagents).
+Claude also names ordinary subagents on its own so it can message them later. Those calls follow the same rule, so teams can form even when you didn't ask for one. If you want subagents instead, [turn agent teams off](#claude-spawns-teammates-instead-of-subagents).
 
 ### Architecture
 
@@ -268,7 +268,7 @@ There is no project-level equivalent of the team config. A file like `.claude/te
 
 ### Use subagent definitions for teammates
 
-When spawning a teammate, you can reference a [subagent](/docs/en/sub-agents) type from any [subagent scope](/docs/en/sub-agents#choose-the-subagent-scope): project, user, plugin, or CLI-defined. This lets you define a role once, such as a security-reviewer or test-runner, and reuse it both as a delegated subagent and as an agent team teammate.
+When spawning a teammate in either display mode, you can reference a [subagent](/docs/en/sub-agents) type from the project, user, or managed [subagent scope](/docs/en/sub-agents#choose-the-subagent-scope). This lets you define a role once, such as a security-reviewer or test-runner, and reuse it both as a delegated subagent and as an agent team teammate.
 
 To use a subagent definition, name it when you ask Claude to spawn the teammate:
 
@@ -286,7 +286,7 @@ Claude Code reads the subagent definition you named and applies these parts of i
 
 ### Permissions
 
-Teammates start with the lead's permission settings. If the lead runs with `--dangerously-skip-permissions`, all teammates do too. After spawning, you can change individual teammate modes, but you can't set per-teammate modes at spawn time.
+Teammates start with the lead's permission mode, except [`dontAsk` mode](/docs/en/permission-modes#allow-only-pre-approved-tools-with-dontask-mode), which they don't inherit. If the lead runs with `--dangerously-skip-permissions`, all teammates do too. After spawning, you can change an individual teammate's permission mode, but you can't set per-teammate permission modes at spawn time.
 
 Teammate permission prompts appear in the lead session, so approve them there yourself. [Plan approval](#have-teammates-plan-before-implementing) is the designed exception: the lead session grants teammate plan approvals without a separate prompt to you.
 
@@ -479,7 +479,7 @@ Agent teams are experimental. Current limitations to be aware of:
 * **No nested teams**: teammates cannot spawn their own teammates. Only the lead can manage the team.
 * **No background subagents from in-process teammates**: an in-process teammate's own subagents run in the foreground, because a teammate's background work can't outlive the lead's process. Claude Code returns an error when a teammate spawns a subagent whose definition sets `background: true`. A teammate's `run_in_background: true` request also fails, either with an error or by running silently in the foreground, as described in [how Claude Code picks foreground or background](/docs/en/sub-agents#run-subagents-in-foreground-or-background). Subagents launched from the main conversation follow the [background default](/docs/en/sub-agents#run-subagents-in-foreground-or-background).
 * **Lead is fixed**: the main session is the lead for its lifetime. You can't promote a teammate to lead or transfer leadership.
-* **Permissions set at spawn**: all teammates start with the lead's permission mode. You can change individual teammate modes after spawning, but you can't set per-teammate modes at spawn time.
+* **Permissions set at spawn**: teammates start with the permission mode described under [Permissions](#permissions). You can change an individual teammate's permission mode after spawning, but you can't set per-teammate permission modes at spawn time.
 * **Split panes require tmux or iTerm2**: the default in-process mode works in any terminal. Split-pane mode isn't supported in VS Code's integrated terminal, Windows Terminal, or Ghostty.
 
 ## Next steps

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/python
-fetched_at: 2026-09-07T05:31:22.455512+00:00
+fetched_at: 2026-09-14T05:36:01.942599+00:00
 fetch_method: mintlify_md
 ---
 
@@ -258,18 +258,18 @@ def list_sessions(
 
 #### Return type: `SDKSessionInfo`
 
-| Property        | Type          | Description                                                          |
-| :-------------- | :------------ | :------------------------------------------------------------------- |
-| `session_id`    | `str`         | Unique session identifier                                            |
-| `summary`       | `str`         | Display title: custom title, auto-generated summary, or first prompt |
-| `last_modified` | `int`         | Last modified time in milliseconds since epoch                       |
-| `file_size`     | `int \| None` | Session file size in bytes (`None` for remote storage backends)      |
-| `custom_title`  | `str \| None` | User-set session title                                               |
-| `first_prompt`  | `str \| None` | First meaningful user prompt in the session                          |
-| `git_branch`    | `str \| None` | Git branch at the end of the session                                 |
-| `cwd`           | `str \| None` | Working directory for the session                                    |
-| `tag`           | `str \| None` | User-set session tag (see [`tag_session()`](#tag_session))           |
-| `created_at`    | `int \| None` | Session creation time in milliseconds since epoch                    |
+| Property        | Type          | Description                                                                     |
+| :-------------- | :------------ | :------------------------------------------------------------------------------ |
+| `session_id`    | `str`         | Unique session identifier                                                       |
+| `summary`       | `str`         | Display title: custom title, auto-generated summary, or first prompt            |
+| `last_modified` | `int`         | Last modified time in milliseconds since epoch                                  |
+| `file_size`     | `int \| None` | Session file size in bytes (`None` for remote storage backends)                 |
+| `custom_title`  | `str \| None` | Session title: the user-set title, or the auto-generated title when none is set |
+| `first_prompt`  | `str \| None` | First meaningful user prompt in the session                                     |
+| `git_branch`    | `str \| None` | Git branch at the end of the session                                            |
+| `cwd`           | `str \| None` | Working directory for the session                                               |
+| `tag`           | `str \| None` | User-set session tag (see [`tag_session()`](#tag_session))                      |
+| `created_at`    | `int \| None` | Session creation time in milliseconds since epoch                               |
 
 #### Example
 
@@ -447,7 +447,7 @@ class ClaudeSDKClient:
     async def receive_messages(self) -> AsyncIterator[Message]
     async def receive_response(self) -> AsyncIterator[Message]
     async def interrupt(self) -> None
-    async def set_permission_mode(self, mode: str) -> None
+    async def set_permission_mode(self, mode: PermissionMode) -> None
     async def set_model(self, model: str | None = None) -> None
     async def rewind_files(self, user_message_id: str) -> None
     async def get_mcp_status(self) -> McpStatusResponse
@@ -475,7 +475,7 @@ class ClaudeSDKClient:
 | `reconnect_mcp_server(server_name)`       | Retry connecting to an MCP server that failed or was disconnected                                                                                                 |
 | `toggle_mcp_server(server_name, enabled)` | Enable or disable an MCP server mid-session. Disabling removes its tools                                                                                          |
 | `stop_task(task_id)`                      | Stop a running background task. A [`TaskNotificationMessage`](#tasknotificationmessage) with status `"stopped"` follows in the message stream                     |
-| `get_server_info()`                       | Get server information including session ID and capabilities                                                                                                      |
+| `get_server_info()`                       | Get the server's initialization info, including available commands and output styles                                                                              |
 | `disconnect()`                            | Disconnect from Claude                                                                                                                                            |
 
 #### Context Manager Support
@@ -820,7 +820,7 @@ class ClaudeAgentOptions:
 | `session_id`                  | `str \| None`                                                                         | `None`                             | Use a specific session ID instead of an auto-generated one. Must be a valid UUID. Can't be combined with `continue_conversation` or `resume` unless `fork_session` is also set                                                                                                                                                                                                                                                                                              |
 | `max_turns`                   | `int \| None`                                                                         | `None`                             | Maximum agentic turns (tool-use round trips)                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `max_budget_usd`              | `float \| None`                                                                       | `None`                             | Stop the query when the client-side cost estimate reaches this USD value. Compared against the same estimate as `total_cost_usd`; see [Track cost and usage](/docs/en/agent-sdk/cost-tracking) for accuracy caveats                                                                                                                                                                                                                                                              |
-| `disallowed_tools`            | `list[str]`                                                                           | `[]`                               | Tools to deny. A bare name such as `"Bash"` removes the tool from Claude's context. A scoped rule such as `"Bash(rm *)"` leaves the tool available and denies matching calls in every permission mode, including `bypassPermissions`. See [Permissions](/docs/en/agent-sdk/permissions#allow-and-deny-rules)                                                                                                                                                                     |
+| `disallowed_tools`            | `list[str]`                                                                           | `[]`                               | Tools to deny. A bare name such as `"Bash"` removes the tool from Claude's context. A scoped rule such as `"Bash(rm *)"` leaves the tool available and denies matching calls in every permission mode, including `bypassPermissions`, for the command [as written](/docs/en/permissions#bash-rule-limits). See [Permissions](/docs/en/agent-sdk/permissions#allow-and-deny-rules)                                                                                                     |
 | `enable_file_checkpointing`   | `bool`                                                                                | `False`                            | Enable file change tracking for rewinding. See [File checkpointing](/docs/en/agent-sdk/file-checkpointing)                                                                                                                                                                                                                                                                                                                                                                       |
 | `model`                       | `str \| None`                                                                         | `None`                             | Claude model alias or full model name. See [accepted values and provider-specific IDs](/docs/en/model-config#available-models)                                                                                                                                                                                                                                                                                                                                                   |
 | `fallback_model`              | `str \| None`                                                                         | `None`                             | Fallback model to use if the primary model fails                                                                                                                                                                                                                                                                                                                                                                                                                            |
@@ -841,7 +841,7 @@ class ClaudeAgentOptions:
 | `user`                        | `str \| None`                                                                         | `None`                             | User identifier                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `include_partial_messages`    | `bool`                                                                                | `False`                            | Include partial message streaming events. When enabled, [`StreamEvent`](#streamevent) messages are yielded                                                                                                                                                                                                                                                                                                                                                                  |
 | `include_hook_events`         | `bool`                                                                                | `False`                            | Include hook lifecycle events in the message stream as `HookEventMessage` objects                                                                                                                                                                                                                                                                                                                                                                                           |
-| `forward_subagent_text`       | `bool`                                                                                | `False`                            | Forward subagent text and thinking blocks in the message stream. By default only subagent `tool_use` and `tool_result` blocks are emitted. Requires Python Agent SDK 0.2.140 or later                                                                                                                                                                                                                                                                                       |
+| `forward_subagent_text`       | `bool`                                                                                | `False`                            | Forward subagent text and thinking blocks in the message stream. Without this option, Claude Code emits subagent `tool_use` and `tool_result` blocks but not text or thinking. Requires Python Agent SDK 0.2.140 or later                                                                                                                                                                                                                                                   |
 | `fork_session`                | `bool`                                                                                | `False`                            | When resuming with `resume`, fork to a new session ID instead of continuing the original session                                                                                                                                                                                                                                                                                                                                                                            |
 | `resume_session_at`           | `str \| None`                                                                         | `None`                             | When resuming, load the conversation only up to and including the message with this UUID. Use with `resume`, and usually `fork_session`, to branch from an earlier point. Requires Python Agent SDK 0.2.137 or later                                                                                                                                                                                                                                                        |
 | `resume_drops_turn`           | `str \| None`                                                                         | `None`                             | UUID of the user prompt whose turn a `resume_session_at` truncation discards. When set, the CLI refuses the resume if the discarded range holds entries not attributable to that turn. Requires Python Agent SDK 0.2.137 or later and Claude Code v2.1.223 or later; the CLI bundled with those SDK versions satisfies the Claude Code requirement                                                                                                                          |
@@ -1077,7 +1077,7 @@ class AgentDefinition:
 | `maxTurns`        | No       | Maximum number of agentic turns before the agent stops                                                                                                                                                                                  |
 | `background`      | No       | Run this agent as a non-blocking background task when invoked                                                                                                                                                                           |
 | `effort`          | No       | Reasoning effort level for this agent. Accepts a named level or an integer. See [`EffortLevel`](#effortlevel)                                                                                                                           |
-| `permissionMode`  | No       | Permission mode for tool execution within this agent. See [`PermissionMode`](#permissionmode)                                                                                                                                           |
+| `permissionMode`  | No       | Permission mode for tool execution within this agent. The [subagent inheritance rules](/docs/en/agent-sdk/permissions#available-modes) decide when it applies. See [`PermissionMode`](#permissionmode)                                       |
 
 <Note>
   `AgentDefinition` field names use camelCase, such as `disallowedTools`, `permissionMode`, and `maxTurns`. These names map directly to the wire format shared with the TypeScript SDK. This differs from `ClaudeAgentOptions`, which uses Python snake\_case for the equivalent top-level fields such as `disallowed_tools` and `permission_mode`. Because `AgentDefinition` is a dataclass, passing a snake\_case keyword raises a `TypeError` at construction time.
@@ -1824,7 +1824,14 @@ The dataclass has no field for `resource_links`. Read it from the `data` dict th
 Union type of all content blocks.
 
 ```python theme={null}
-ContentBlock = TextBlock | ThinkingBlock | ToolUseBlock | ToolResultBlock
+ContentBlock = (
+    TextBlock
+    | ThinkingBlock
+    | ToolUseBlock
+    | ToolResultBlock
+    | ServerToolUseBlock
+    | ServerToolResultBlock
+)
 ```
 
 ### `TextBlock`
@@ -2447,7 +2454,7 @@ Documentation of input/output schemas for all built-in Claude Code tools. While 
     "run_in_background": bool | None,  # Agents run in the background by default; set to False to run synchronously
     "name": str | None,  # Name for the spawned agent
     "team_name": str | None,  # Deprecated; ignored
-    "mode": "acceptEdits" | "auto" | "bypassPermissions" | "default" | "dontAsk" | "plan" | None,  # Deprecated; ignored. Subagents inherit the parent session's permission mode; agent-definition frontmatter may override it
+    "mode": "acceptEdits" | "auto" | "bypassPermissions" | "default" | "dontAsk" | "plan" | None,  # Deprecated; ignored. The subagent inheritance rules decide a subagent's permission mode
     "isolation": "worktree" | "remote" | None,  # Isolation mode for the agent's changes
 }
 ```
@@ -2888,9 +2895,7 @@ When Monitor runs a command, it follows the same permission rules as Bash; a Web
 **Tool name:** `TodoWrite`
 
 <Note>
-  On Python Agent SDK 0.2.139 and later, the following restriction applies.
-
-  The following tools aren't available on Opus 4.8, Sonnet 5, Fable 5, Mythos 5, or later versions of those families unless you opt in:
+  The following tools are available by default only on Claude 3.x models, Opus 4 through 4.7, Sonnet 4 through 4.6, and Haiku 4.5. On every other model, including model IDs Claude Code doesn't recognize, they aren't available unless you opt in:
 
   * `TodoWrite`
   * `TaskCreate`
@@ -2898,7 +2903,9 @@ When Monitor runs a command, it follows the same permission rules as Bash; a Web
   * `TaskUpdate`
   * `TaskList`
 
-  On other models, Claude Code provides the Task tools by default and `TodoWrite` only when you set `CLAUDE_CODE_ENABLE_TASKS=0`.
+  Wherever the tools are available, Claude Code provides the four Task tools, or `TodoWrite` instead when you set `CLAUDE_CODE_ENABLE_TASKS=0`.
+
+  This default set applies in Claude Code v2.1.268 and later, which the TypeScript Agent SDK bundles from v0.3.268.
 
   See [Model availability](/docs/en/agent-sdk/todo-tracking#model-availability) to opt in.
 </Note>
@@ -3371,7 +3378,7 @@ class SandboxNetworkConfig(TypedDict, total=False):
 | `allowedDomains`          | `list[str]` | `[]`    | Domain names that sandboxed processes can access                                                                                                                                              |
 | `deniedDomains`           | `list[str]` | `[]`    | Domain names that sandboxed processes cannot access. Takes precedence over `allowedDomains`                                                                                                   |
 | `allowManagedDomainsOnly` | `bool`      | `False` | Managed-settings only: when set in managed settings, ignore `allowedDomains` and `WebFetch(domain:...)` allow rules from non-managed settings sources. Has no effect when set via SDK options |
-| `allowUnixSockets`        | `list[str]` | `[]`    | Unix socket paths that processes can access (e.g., Docker socket)                                                                                                                             |
+| `allowUnixSockets`        | `list[str]` | `[]`    | macOS only: Unix socket paths that processes can access, such as the Docker socket. Ignored on Linux                                                                                          |
 | `allowAllUnixSockets`     | `bool`      | `False` | Allow access to all Unix sockets                                                                                                                                                              |
 | `allowLocalBinding`       | `bool`      | `False` | Allow processes to bind to local ports (e.g., for dev servers)                                                                                                                                |
 | `allowMachLookup`         | `list[str]` | `[]`    | macOS only: XPC/Mach service names to allow. Supports a trailing wildcard                                                                                                                     |

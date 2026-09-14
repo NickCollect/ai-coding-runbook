@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/mcp
-fetched_at: 2026-08-31T06:29:33.811361+00:00
+fetched_at: 2026-09-14T05:36:01.784192+00:00
 fetch_method: mintlify_md
 ---
 
@@ -158,7 +158,7 @@ Claude Code registers the servers you pass in `options.mcpServers` at startup an
 | :------------------------------------------------------------------------------------- | :----------------------------------------------------- | :------------------------------------------------------------------------------------------ |
 | stdio server, or HTTP/SSE server without a cached tool list                            | Yes, until it connects                                 | [`MCP_TIMEOUT`](/docs/en/env-vars), 30 seconds by default; the connection fails at that deadline |
 | Remote server with a cached tool list, saved by Claude Code from a previous connection | No; the cached tools are available from the first turn | None; connects on its first tool call, and that deferred connect has its own timeout        |
-| In-process [SDK server](#sdk-mcp-servers)                                              | No; never delays the first turn                        | None                                                                                        |
+| In-process [SDK server](#sdk-mcp-servers)                                              | Yes, until it connects and lists its tools             | None; the connect and tool listing requests each have their own timeout                     |
 
 To block startup itself at a separate, earlier phase than the first-turn wait, before the init message is sent:
 
@@ -876,7 +876,9 @@ In TypeScript, you can set the tool-call limit for a single [SDK MCP server](#sd
 
 ### Tool output exceeds maximum allowed tokens
 
-The SDK applies the same MCP output limit as Claude Code. When a tool result is larger than 25,000 tokens, the full output is saved to a file and the tool result is replaced with an error message that names the file path, so the agent can read the output back in portions. Raise the limit with the [`MAX_MCP_OUTPUT_TOKENS`](/docs/en/env-vars) environment variable. See [MCP output limits and warnings](/docs/en/mcp#mcp-output-limits-and-warnings) for the full behavior, including how a server can declare a higher per-tool limit with the `anthropic/maxResultSizeChars` annotation.
+The SDK applies the same MCP output limit as Claude Code. When a tool result with no image content is larger than 25,000 tokens, Claude Code saves the output to a file and replaces the tool result with an error message that names the file path, so the agent can read the output back in portions.
+
+Raise the limit with the [`MAX_MCP_OUTPUT_TOKENS`](/docs/en/env-vars) environment variable. See [MCP output limits and warnings](/docs/en/mcp#mcp-output-limits-and-warnings) for the full behavior, including how a server can declare a higher per-tool limit with the `anthropic/maxResultSizeChars` annotation.
 
 ## Related resources
 

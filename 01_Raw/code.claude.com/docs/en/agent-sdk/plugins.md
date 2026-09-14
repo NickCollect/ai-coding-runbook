@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/plugins
-fetched_at: 2026-08-24T02:18:35.445951+00:00
+fetched_at: 2026-09-14T05:36:01.888875+00:00
 fetch_method: mintlify_md
 ---
 
@@ -71,7 +71,7 @@ To use a plugin distributed through a [marketplace](/docs/en/plugin-marketplaces
 
 Plugin paths can be:
 
-* **Relative paths**: resolved relative to your current working directory (for example, `"./plugins/my-plugin"`)
+* **Relative paths**: resolved relative to the `cwd` option (for example, `"./plugins/my-plugin"`)
 * **Absolute paths**: full file system paths (for example, `"/home/user/plugins/my-plugin"`)
 
 <Note>

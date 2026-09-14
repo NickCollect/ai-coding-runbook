@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/desktop-quickstart
-fetched_at: 2026-08-17T02:15:24.479574+00:00
+fetched_at: 2026-09-14T05:36:02.872990+00:00
 fetch_method: mintlify_md
 ---
 
@@ -67,7 +67,7 @@ With the Code tab open, choose a project and give Claude something to do.
     Select **Local** to run Claude on your machine using your files directly. Click **Select folder** and choose your project directory.
 
     <Tip>
-      Start with a small project you know well. It's the fastest way to see what Claude Code can do. On Windows, [Git](https://git-scm.com/downloads/win) must be installed for local sessions to work. Most Macs include Git by default.
+      Start with a small project you know well. It's the fastest way to see what Claude Code can do.
     </Tip>
 
     You can also select:
@@ -88,7 +88,7 @@ With the Code tab open, choose a project and give Claude something to do.
     * `Add tests for the main function`
     * `Create a CLAUDE.md with instructions for this codebase`
 
-    A [session](/docs/en/desktop#work-in-parallel-with-sessions) is a conversation with Claude about your code. Each session tracks its own context and changes, so you can work on multiple tasks without them interfering with each other.
+    A [session](/docs/en/desktop#work-in-parallel-with-sessions) is a conversation with Claude about your code. Each session tracks its own context and changes.
   </Step>
 
   <Step title="Review and accept changes">
@@ -134,15 +134,12 @@ You've made your first edit. For the full reference on everything Desktop can do
 
 **Put Claude on a schedule.** Set up [scheduled tasks](/docs/en/desktop-scheduled-tasks) to run Claude automatically on a recurring basis: a daily code review every morning, a weekly dependency audit, or a briefing that pulls from your connected tools.
 
-**Scale up when you're ready.** Open [parallel sessions](/docs/en/desktop#work-in-parallel-with-sessions) from the sidebar to work on multiple tasks at once, each in its own Git worktree, and open the [tasks pane](/docs/en/desktop#watch-background-tasks) to watch the subagents and background commands a session has running. Open a [side chat](/docs/en/desktop#ask-a-side-question-without-derailing-the-session) to ask a question without derailing the main thread. Send [long-running work to the cloud](/docs/en/desktop#run-long-running-tasks-remotely) so it continues even if you close the app, or [continue a session on the web or in your IDE](/docs/en/desktop#continue-in-another-surface) if a task takes longer than expected. [Connect external tools](/docs/en/desktop#extend-claude-code) like GitHub, Slack, and Linear to bring your workflow together.
-
-## Coming from the CLI?
-
-Desktop runs the same engine as the CLI with a graphical interface. You can run both simultaneously on the same project, and they share configuration (CLAUDE.md files, MCP servers, hooks, skills, and settings). For a full comparison of features, flag equivalents, and what's not available in Desktop, see [CLI comparison](/docs/en/desktop#coming-from-the-cli).
+**Scale up when you're ready.** Open [parallel sessions](/docs/en/desktop#work-in-parallel-with-sessions) from the sidebar to work on multiple tasks at once, optionally each in its own Git worktree, and open the [tasks pane](/docs/en/desktop#watch-background-tasks) to watch the subagents and background commands a session has running. Open a [side chat](/docs/en/desktop#ask-a-side-question-without-derailing-the-session) to ask a question without derailing the main thread. Send [long-running work to the cloud](/docs/en/desktop#run-long-running-tasks-remotely) so it continues even if you close the app, or [continue a session on the web or in your IDE](/docs/en/desktop#continue-in-another-surface) if a task takes longer than expected. [Connect external tools](/docs/en/desktop#extend-claude-code) like GitHub, Slack, and Linear to bring your workflow together.
 
 ## What's next
 
 * [Use Claude Code Desktop](/docs/en/desktop): permission modes, parallel sessions, diff view, connectors, and enterprise configuration
+* [Coming from the CLI?](/docs/en/desktop#coming-from-the-cli): run Desktop and the CLI on the same project, and compare features, flag equivalents, and what's not available in Desktop
 * [Troubleshooting](/docs/en/desktop#troubleshooting): solutions to common errors and setup issues
 * [Best practices](/docs/en/best-practices): tips for writing effective prompts and getting the most out of Claude Code
 * [Common workflows](/docs/en/common-workflows): tutorials for debugging, refactoring, testing, and more

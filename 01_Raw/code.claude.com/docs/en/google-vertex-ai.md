@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/google-vertex-ai
-fetched_at: 2026-08-31T06:29:41.289951+00:00
+fetched_at: 2026-09-14T05:36:03.153347+00:00
 fetch_method: mintlify_md
 ---
 
@@ -110,7 +110,7 @@ If you have Google Cloud credentials and want to start using Claude Code through
   </Step>
 
   <Step title="Follow the wizard prompts">
-    Choose how you authenticate to Google Cloud: Application Default Credentials from `gcloud`, a service account key file, or credentials already in your environment. The wizard detects your project and region, verifies which Claude models your project can invoke, and lets you pin them. It saves the result to the `env` block of your [user settings file](/docs/en/settings), so you don't need to export environment variables yourself.
+    Choose how you authenticate to Google Cloud: Application Default Credentials from `gcloud`, a service account key file, or credentials already in your environment. The wizard asks for your project and region, verifies which Claude models your project can invoke, and lets you pin them. It saves the result to the `env` block of your [user settings file](/docs/en/settings), so you don't need to export environment variables yourself.
   </Step>
 </Steps>
 
@@ -158,7 +158,7 @@ For more information, see [Google Cloud authentication documentation](https://cl
 Claude Code supports [X.509 certificate-based Workload Identity Federation](https://cloud.google.com/iam/docs/workload-identity-federation-with-x509-certificates) through the same Application Default Credentials chain. Set `GOOGLE_APPLICATION_CREDENTIALS` to the path of your credential configuration file.
 
 <Note>
-  Claude Code uses `ANTHROPIC_VERTEX_PROJECT_ID` as the project ID for Google Cloud's Agent Platform requests. The `GCLOUD_PROJECT` and `GOOGLE_CLOUD_PROJECT` environment variables and the credential file referenced by `GOOGLE_APPLICATION_CREDENTIALS` take precedence over it. If none of these are set, the project ID is resolved from your `gcloud` configuration or the attached service account.
+  Claude Code addresses Google Cloud's Agent Platform requests to the project in `ANTHROPIC_VERTEX_PROJECT_ID`, even when `GCLOUD_PROJECT`, `GOOGLE_CLOUD_PROJECT`, or the credential file referenced by `GOOGLE_APPLICATION_CREDENTIALS` carries a different project.
 </Note>
 
 #### Advanced credential configuration
@@ -173,6 +173,10 @@ Claude Code supports automatic credential refresh for GCP through the `gcpAuthRe
   }
 }
 ```
+
+Before running the command, Claude Code requests an access token with your current credentials to confirm they're actually expired, and skips the command when they still work.
+
+If the check doesn't finish within five seconds, Claude Code also skips the command and runs it only after a request fails with a credential error. Before v2.1.261, a check that timed out counted as an expired credential, so the command could open your browser at startup even though your credentials were still valid.
 
 Claude Code shows you the command's output, but can't send the command interactive input. This works well for browser-based authentication flows where the CLI shows a URL and you complete authentication in the browser. The refresh command times out after three minutes if authentication does not complete. If you set `gcpAuthRefresh` in project settings such as `.claude/settings.json`, Claude Code runs it under the same [workspace trust rule as hooks in settings files](/docs/en/permissions#what-runs-before-you-trust-a-folder), which includes `-p` sessions in folders you've never trusted.
 

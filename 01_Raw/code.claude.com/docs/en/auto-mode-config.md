@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/auto-mode-config
-fetched_at: 2026-09-07T05:31:23.259712+00:00
+fetched_at: 2026-09-14T05:36:02.357033+00:00
 fetch_method: mintlify_md
 ---
 
@@ -40,7 +40,7 @@ Auto mode allows pushes to any branch of the repository you're working in, inclu
 
 <Info>Before v2.1.211, the classifier allowed pushes only to your working branch, branches Claude created, and routine pushes to the default branch.</Info>
 
-If you want a human checkpoint before every push or pull request, add permission rules: the [recipes below](#add-a-human-checkpoint) keep auto mode on for everything else.
+If you want a human checkpoint before Claude's push and pull request commands, add permission rules: the [recipes below](#add-a-human-checkpoint) keep auto mode on for everything else.
 
 ### Add a human checkpoint
 
@@ -57,11 +57,13 @@ The most direct mechanism is [`permissions.ask`](/docs/en/permissions#permission
 }
 ```
 
+These rules match commands that begin with `git push` or `gh pr create`. A push Claude writes another way, such as `git -C <dir> push` or `git -c <key>=<value> push`, [doesn't match the rule](/docs/en/permissions#bash-rule-limits), so it isn't checkpointed. For a checkpoint that inspects the full command text, add a [PreToolUse hook](/docs/en/hooks#pretooluse).
+
 Pick the mechanism that matches how firm the boundary needs to be:
 
 | Boundary                          | Mechanism                                                  | Behavior in auto mode                                                                                                                                                                                           |
 | :-------------------------------- | :--------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Prompt before the action          | `permissions.ask`                                          | Always prompts for content-scoped rules like the recipe above. The classifier cannot auto-approve a matching action.                                                                                            |
+| Prompt before the action          | `permissions.ask`                                          | Always prompts for a command that matches a content-scoped rule like the recipe above. The classifier cannot auto-approve a matching action.                                                                    |
 | Never run the action              | `permissions.deny`                                         | Blocks before the classifier is consulted. Neither the classifier nor user intent can override it.                                                                                                              |
 | One-off boundary for this session | State it in conversation, like "don't push until I review" | The classifier blocks matching actions, but the boundary can be lost if [context compaction](/docs/en/costs#reduce-token-usage) removes the message that stated it. Use an ask or deny rule for a durable guarantee. |
 
@@ -381,9 +383,9 @@ When the classifier produces [no verdict on the action](/docs/en/errors#auto-mod
 
 To see what the classifier blocked, find the tool call in the conversation. If the call appears shortened or folded into a summary line such as `Ran 3 shell commands`, press `Ctrl+O` to open the [transcript viewer](/docs/en/interactive-mode#transcript-viewer), which expands it.
 
-Two other places on screen that report denials leave out the command or URL: the notice near the input box, such as `bash denied by auto mode · Blocked by classifier · /permissions`, gives the tool and the reason, and the **Recently denied** tab lists a shell command by the description Claude wrote for it. To capture the exact input of these denials programmatically, add a [`PermissionDenied` hook](/docs/en/hooks#permissiondenied), which receives it as `tool_input`.
+Two other places on screen that report denials leave out the command or URL: the notice near the input box, such as `bash denied by auto mode · [Data Exfiltration] · /permissions`, gives the tool and the reason, and the **Recently denied** tab lists a shell command by the description Claude wrote for it. To capture the exact input of these denials programmatically, add a [`PermissionDenied` hook](/docs/en/hooks#permissiondenied), which receives it as `tool_input`.
 
-The text beneath the call tells you whether there is anything to fix. Text that reports a problem with the classifier itself, such as a model that `is temporarily unavailable` or a classifier error, means Claude Code blocked the call without a final verdict from the classifier; see [Auto mode cannot determine the safety of an action](/docs/en/errors#auto-mode-cannot-determine-the-safety-of-an-action) for what to do. Otherwise, a line reading `Denied by auto mode classifier` with a reason such as `Blocked by classifier` means the classifier judged the call unsafe, so pick the fix from what the call was trying to reach or do:
+The text beneath the call tells you whether there is anything to fix. Text that reports a problem with the classifier itself, such as a model that `is temporarily unavailable` or a classifier error, means Claude Code blocked the call without a final verdict from the classifier; see [Auto mode cannot determine the safety of an action](/docs/en/errors#auto-mode-cannot-determine-the-safety-of-an-action) for what to do. Otherwise, a line reading `Denied by auto mode classifier` with a reason such as `[Production Deploy]` or `Blocked by classifier` means the classifier judged the call unsafe, so pick the fix from what the call was trying to reach or do:
 
 * A destination Claude needs throughout the task, such as a package registry, an internal domain, or a repository host: add it to `autoMode.environment`.
 * A command you want to run without review from now on: add an `allow` rule.
@@ -391,7 +393,7 @@ The text beneath the call tells you whether there is anything to fix. Text that 
 
 You can add the environment entry or `allow` rule from the `/permissions` dialog's [**Auto mode** tab](#edit-rules-from-permissions).
 
-The reason shown with the call is the fixed text `Blocked by classifier` in most sessions, in Claude Code v2.1.208 and later: the classifier scores each action on an internal severity scale rather than writing an explanation. Some sessions run a classifier model that writes a short explanation instead, in v2.1.193 and later; when one appears, treat it as a hint about which destination or intent the classifier was missing. Claude Code selects the classifier model, so which reason you see isn't something you configure.
+In most sessions the reason names the rule the classifier matched, in square brackets, such as `[Data Exfiltration]` or `[Production Deploy]`, and some sessions run a classifier model that adds a short explanation. Claude Code selects the classifier model, so which form you see isn't something you configure.
 
 ### Fix repeated denials
 
@@ -404,4 +406,4 @@ To react to denials programmatically, use the [`PermissionDenied` hook](/docs/en
 * [Permission modes](/docs/en/permission-modes#eliminate-prompts-with-auto-mode): what auto mode is, what it blocks by default, and which sessions start in it
 * [Managed settings](/docs/en/server-managed-settings): deploy `autoMode` configuration across your organization
 * [Permissions](/docs/en/permissions): allow, ask, and deny rules that apply before the classifier runs
-* [Settings reference](/docs/en/settings-reference#automode): every settings key, including `autoMode`
+* [All settings](/docs/en/settings-reference#automode): every settings key, including `autoMode`

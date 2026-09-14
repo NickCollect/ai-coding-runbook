@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/troubleshooting
-fetched_at: 2026-09-07T05:31:24.835565+00:00
+fetched_at: 2026-09-14T05:36:04.090198+00:00
 fetch_method: mintlify_md
 ---
 
@@ -99,6 +99,17 @@ When [sandboxing](/docs/en/sandboxing) is on, clipboard utilities such as `pbcop
 To put Claude's output on your clipboard, ask Claude to print the content in its response, then run [`/copy`](/docs/en/commands). `/copy` writes to the clipboard from the Claude Code process itself rather than from a sandboxed command, so sandboxing doesn't block it. It can copy a single code block instead of the whole response, and it also writes what it copied to a file and prints the path, which gives you a fallback when the clipboard write doesn't reach your terminal, for example over SSH.
 
 To let a piped command reach the clipboard directly instead, add `pbcopy *`, `wl-copy *`, or `xclip *` to [`excludedCommands`](/docs/en/settings-reference#sandbox-excludedcommands) so the command runs outside the sandbox.
+
+### Copied text doesn't reach your local clipboard over SSH
+
+When Claude Code runs on a remote machine over SSH, it can't run a clipboard tool on your local machine. Outside tmux, when you select text in [fullscreen rendering](/docs/en/fullscreen) or run `/copy`, Claude Code sends the text to your terminal as an OSC 52 escape sequence instead. Your terminal decides whether to put it on your clipboard. `/copy` reports `Copied to clipboard` whether or not the text arrived, and outside tmux the selection notice reads `sent N chars via OSC 52`.
+
+Some terminals don't act on OSC 52. iTerm2 ignores it until you turn on **Settings > General > Selection > Applications in terminal may access clipboard**, and macOS Terminal.app doesn't support it.
+
+To get the text without OSC 52:
+
+* Hold your terminal's native-selection key while you drag, then copy with your terminal's usual shortcut, such as `Cmd+C`. The key is `Fn` in Terminal.app and `Option` in iTerm2. [Keep native text selection](/docs/en/fullscreen#keep-native-text-selection) lists it for other terminals.
+* Set [`CLAUDE_CODE_DISABLE_MOUSE=1`](/docs/en/env-vars) on the remote machine so your terminal handles selection for the whole session.
 
 ### Search and discovery issues
 

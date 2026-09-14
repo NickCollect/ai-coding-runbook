@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/channels-reference
-fetched_at: 2026-08-31T06:29:36.214188+00:00
+fetched_at: 2026-09-14T05:36:02.459407+00:00
 fetch_method: mintlify_md
 ---
 
@@ -170,7 +170,7 @@ This example uses [Bun](https://bun.sh) as the runtime for its built-in HTTP ser
 
     If the event doesn't arrive, the diagnosis depends on what `curl` returned:
 
-    * **`curl` succeeds but nothing reaches Claude**: run `/mcp` in your session to check the server's status. A `failed` status usually means a dependency or import error in your server file; check the debug log at `~/.claude/debug/<session-id>.txt` for the stderr trace.
+    * **`curl` succeeds but nothing reaches Claude**: run `/mcp` in your session to check the server's status. A `failed` status usually means a dependency or import error in your server file. To see the stderr trace, restart with `claude --debug --dangerously-load-development-channels server:webhook` and check the debug log at `~/.claude/debug/<session-id>.txt`.
     * **`curl` fails with "connection refused"**: the port is either not bound yet or a stale process from an earlier run is holding it. `lsof -i :<port>` shows what's listening; `kill` the stale process before restarting your session.
   </Step>
 </Steps>

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/mobile
-fetched_at: 2026-08-24T02:18:39.902561+00:00
+fetched_at: 2026-09-14T05:36:03.406077+00:00
 fetch_method: mintlify_md
 ---
 
@@ -62,7 +62,7 @@ Open a session in the app to check progress, answer Claude's questions, or steer
 
 ### Continue a local session with Remote Control
 
-Remote Control connects the Claude app to a Claude Code session running on your machine, so code execution and filesystem access stay local while you drive the session from your phone. Start the session on your computer with `claude remote-control`, or run `/remote-control` in a session that's already open. Then scan the session QR code the terminal can display, or open the Claude app, tap **Code**, and pick the session from the list. See [connect from another device](/docs/en/remote-control#connect-from-another-device) for each option.
+Remote Control connects the Claude app to a Claude Code session running on your machine, so code execution and filesystem access stay local while you drive the session from your phone. Start the session on your computer with `claude remote-control`, or run `/remote-control` in a session that's already open. Then scan the QR code the terminal can display, or open the Claude app, tap **Code**, and pick the session from the list. See [connect from another device](/docs/en/remote-control#connect-from-another-device) for each option.
 
 When you add an attachment in the Claude app, it reaches the local session too:
 
