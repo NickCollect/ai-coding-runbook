@@ -99,6 +99,12 @@ pub struct EnvironmentInfo {
     /// `0.0.0` when unknown, including responses from legacy executors.
     #[serde(default = "unknown_executor_version")]
     pub executor_version: String,
+    /// Opaque executor build identity for looking up behavioral verification.
+    /// Derived from the compiled commit and target for standard builds;
+    /// absent for legacy or unstamped builds. This is not an artifact checksum
+    /// or a security attestation, and evidence must not be shared across build variants.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub provider_id: Option<String>,
     /// Working directory inherited by the exec-server process.
     #[serde(default)]
     pub cwd: Option<PathUri>,
@@ -146,6 +152,9 @@ pub struct EnvironmentCapabilities {
     /// Whether shell state can be cached and restored entirely inside the executor.
     #[serde(default)]
     pub shell_snapshot_v2: bool,
+    /// Whether requests may explicitly select the MXC Windows sandbox backend.
+    #[serde(default)]
+    pub windows_mxc: bool,
 }
 
 /// Status returned by an initialized exec-server connection.
@@ -224,6 +233,7 @@ impl EnvironmentInfo {
         Self {
             shell: codex_shell_command::shell_detect::default_user_shell().into(),
             executor_version: unknown_executor_version(),
+            provider_id: None,
             cwd: cwd.and_then(|cwd| PathUri::from_host_native_path(cwd).ok()),
             user_home_dir: PathUri::from_host_native_path("~").ok(),
             platform_os: Some(std::env::consts::OS.to_string()),
@@ -236,6 +246,7 @@ impl EnvironmentInfo {
                 http_header_env_vars: true,
                 sandboxed_file_streaming: true,
                 shell_snapshot_v2: cfg!(unix),
+                windows_mxc: false,
             },
         }
     }
@@ -351,6 +362,7 @@ pub enum ProcessSandboxType {
     MacosSeatbelt,
     LinuxSeccomp,
     WindowsRestrictedToken,
+    WindowsMxc,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -1022,6 +1034,7 @@ mod tests {
                     path: "/bin/zsh".to_string(),
                 },
                 executor_version: "0.0.0".to_string(),
+                provider_id: None,
                 cwd: None,
                 user_home_dir: None,
                 platform_os: None,
@@ -1049,6 +1062,7 @@ mod tests {
                 http_header_env_vars: false,
                 sandboxed_file_streaming: false,
                 shell_snapshot_v2: false,
+                windows_mxc: false,
             }
         );
     }
@@ -1058,6 +1072,7 @@ mod tests {
         let expected = serde_json::json!({
             "shell": { "name": "powershell", "path": "powershell.exe" },
             "executorVersion": "1.2.3-alpha.4",
+            "providerId": "sha256:e0a0cebe63ab8189ffe3eed378ccf6aa89ef15bc75e39dbbf1fc55951ec6888b",
             "cwd": null,
             "userHomeDir": "file:///C:/Users/remote",
             "platformOs": "windows",
@@ -1069,6 +1084,7 @@ mod tests {
                 "httpHeaderEnvVars": false,
                 "sandboxedFileStreaming": false,
                 "shellSnapshotV2": false,
+                "windowsMxc": false,
             },
         });
         let info: EnvironmentInfo = serde_json::from_value(expected.clone())

@@ -21,6 +21,8 @@ use ctor::ctor;
 
 pub(crate) mod exec_server;
 
+pub(crate) const TEST_BUILD_COMMIT: &str = "0123456789abcdef0123456789abcdef01234567";
+
 pub(crate) const DELAYED_OUTPUT_AFTER_EXIT_PARENT_ARG: &str =
     "--codex-test-delayed-output-after-exit-parent";
 pub(crate) const SYSTEM_PROXY_REQUEST_URL_ENV: &str =
@@ -40,6 +42,9 @@ pub static TEST_BINARY_DISPATCH_GUARD: Option<TestBinaryDispatchGuard> = {
             return TestBinaryDispatchMode::DispatchArg0Only;
         }
         if argv1 == Some(CODEX_WINDOWS_SANDBOX_ARG1) {
+            return TestBinaryDispatchMode::DispatchArg0Only;
+        }
+        if argv1 == Some(codex_sandboxing::CODEX_WINDOWS_MXC_ARG1) {
             return TestBinaryDispatchMode::DispatchArg0Only;
         }
         if exe_name == CODEX_LINUX_SANDBOX_ARG0 {
@@ -150,6 +155,8 @@ fn maybe_run_exec_server_from_test_binary(guard: Option<&TestBinaryDispatchGuard
     if command != "exec-server" {
         return;
     }
+    // Initialize in the executor child, just as the real CLI does at startup.
+    codex_build_info::BuildInfo::initialize(TEST_BUILD_COMMIT);
 
     let Some(flag) = args.next() else {
         eprintln!("expected --listen");

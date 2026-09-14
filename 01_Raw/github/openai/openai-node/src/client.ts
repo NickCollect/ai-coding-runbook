@@ -41,6 +41,8 @@ import {
   type NextCursorPageParams,
   NextCursorPageResponse,
   PageResponse,
+  type TokenPageParams,
+  TokenPageResponse,
 } from './core/pagination';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
@@ -166,6 +168,7 @@ import {
 } from './resources/evals/evals';
 import { FineTuning } from './resources/fine-tuning/fine-tuning';
 import { Graders } from './resources/graders/graders';
+import { Live } from './resources/live/live';
 import { Realtime } from './resources/realtime/realtime';
 import { Responses } from './resources/responses/responses';
 import { Safety } from './resources/safety/safety';
@@ -849,11 +852,25 @@ export class OpenAI {
     return Errors.APIError.generate(status, normalizedError, message, headers);
   }
 
-  async _callApiKey(): Promise<boolean> {
-    if (this._provider) return false;
+  /**
+   * Resolves a function-based API key and retains the resolved value on this client.
+   * Returns whether a provider was invoked. Internal callers can capture this
+   * invocation's key before another request updates the shared `apiKey` property.
+   * Overrides should forward `capture` or invoke it with their own resolved key
+   * to preserve connection-local credentials in concurrent Realtime factories.
+   * @internal
+   */
+  async _callApiKey(capture?: (apiKey: string | null) => void): Promise<boolean> {
+    if (this._provider) {
+      capture?.(this.apiKey);
+      return false;
+    }
 
     const apiKey = this._options.apiKey;
-    if (typeof apiKey !== 'function') return false;
+    if (typeof apiKey !== 'function') {
+      capture?.(this.apiKey);
+      return false;
+    }
 
     let token: unknown;
     try {
@@ -873,6 +890,7 @@ export class OpenAI {
       );
     }
     this.apiKey = token;
+    capture?.(this.apiKey);
     return true;
   }
 
@@ -1535,7 +1553,7 @@ export class OpenAI {
     if (this._workloadIdentityAuth && !this.#x509Fetch && schemes.bearerAuth) {
       const headers = init.headers as Headers;
       const authHeader = headers.get('Authorization');
-      if (!authHeader || authHeader === `Bearer ${WORKLOAD_IDENTITY_API_KEY_PLACEHOLDER}`) {
+      if (authHeader === `Bearer ${WORKLOAD_IDENTITY_API_KEY_PLACEHOLDER}`) {
         const token = await this._workloadIdentityAuth.getToken();
         headers.set('Authorization', `Bearer ${token}`);
       }
@@ -1962,6 +1980,7 @@ export class OpenAI {
   uploads: API.Uploads = new API.Uploads(this);
   admin: API.Admin = new API.Admin(this);
   responses: API.Responses = new API.Responses(this);
+  live: API.Live = new API.Live(this);
   realtime: API.Realtime = new API.Realtime(this);
   /**
    * Manage conversations and conversation items.
@@ -1998,6 +2017,7 @@ OpenAI.Batches = Batches;
 OpenAI.Uploads = UploadsAPIUploads;
 OpenAI.Admin = Admin;
 OpenAI.Responses = Responses;
+OpenAI.Live = Live;
 OpenAI.Realtime = Realtime;
 OpenAI.Conversations = Conversations;
 OpenAI.Evals = Evals;
@@ -2090,6 +2110,9 @@ export declare namespace OpenAI {
     type NextCursorPageParams as NextCursorPageParams,
     type NextCursorPageResponse as NextCursorPageResponse,
   };
+
+  export import TokenPage = Pagination.TokenPage;
+  export { type TokenPageParams as TokenPageParams, type TokenPageResponse as TokenPageResponse };
 
   export {
     Completions as Completions,
@@ -2264,6 +2287,8 @@ export declare namespace OpenAI {
   export { Admin as Admin };
 
   export { Responses as Responses };
+
+  export { Live as Live };
 
   export { Realtime as Realtime };
 
