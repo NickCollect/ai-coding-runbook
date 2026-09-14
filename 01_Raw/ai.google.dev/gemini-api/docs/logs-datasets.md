@@ -1,48 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=id
-fetched_at: 2026-09-07T05:48:30.826924+00:00
-title: "Log dan set data \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=zh-TW
+fetched_at: 2026-09-14T05:41:04.489499+00:00
+title: "\u8a18\u9304\u548c\u8cc7\u6599\u96c6 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Kirim masukan
+提供意見
 
-# Log dan set data
+# 記錄和資料集
 
-Dalam panduan ini, Anda akan mempelajari cara
-melihat log dari penggunaan Gemini API di dasbor Google AI Studio
-untuk lebih memahami perilaku model dan cara pengguna berinteraksi dengan
-aplikasi Anda. Gunakan logging untuk mengamati, men-debug, dan *secara opsional membagikan masukan penggunaan
-kepada Google untuk membantu meningkatkan kualitas Gemini di berbagai kasus penggunaan developer*.[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=id)
+本指南說明如何透過 Google AI Studio 資訊主頁查看 Gemini API 使用記錄，進一步瞭解模型行為，以及使用者與應用程式的互動方式。您可以使用記錄功能觀察及偵錯，並*視需要與 Google 分享使用意見回饋，協助改善 Gemini 的開發人員用途*。[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=zh-tw)
 
-Semua panggilan API `GenerateContent`, `BatchGenerateContent`, `StreamGenerateContent`, dan panggilan API [Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=id), kecuali Agen Terkelola, didukung. Hal ini mencakup panggilan yang dilakukan melalui endpoint [kompatibilitas OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=id).
+系統支援所有 `GenerateContent`、`BatchGenerateContent`、`StreamGenerateContent` API 呼叫，以及 [Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-tw) API 呼叫 (不含受管理代理程式)。包括透過 [OpenAI 相容性](https://ai.google.dev/gemini-api/docs/openai?hl=zh-tw)端點發出的呼叫。
 
-## Mengonfigurasi logging project
+## 設定專案記錄
 
-Secara default, API menyimpan semua objek interaksi (`store=true`) untuk
-menyederhanakan penggunaan fitur pengelolaan status sisi server. Sebaliknya, Generate Content API tidak menyimpan permintaan secara default, dan memerlukan penyimpanan diaktifkan per permintaan atau di tingkat project dari AI Studio.
+根據預設，API 會儲存所有互動物件 (`store=true`)，以簡化伺服器端狀態管理功能的使用。相較之下，Generate Content API 預設不會儲存要求，且必須從 AI Studio 啟用每個要求或專案層級的儲存功能。
 
-Di [AI Studio](https://aistudio.google.com/logs?hl=id) Google, Anda dapat mengaktifkan atau menonaktifkan logging untuk semua project atau untuk project tertentu dan mengubah preferensi ini kapan saja melalui panel **Setelan** di halaman [Log dan Kumpulan Data](https://aistudio.google.com/logs?hl=id). Logging dapat diaktifkan atau dinonaktifkan secara terpisah untuk `generateContent` API dan [Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=id) API untuk mengubah perilaku penyimpanan default untuk project.
+在 Google [AI Studio](https://aistudio.google.com/logs?hl=zh-tw) 中，您可以為所有專案或特定專案啟用或停用記錄功能，並隨時透過「記錄和資料集」頁面中的「設定」面板變更這些偏好設定。您可以分別為 `generateContent` API 和[互動](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-tw) API 開啟或關閉記錄功能，藉此變更專案的預設儲存行為。
 
-### Logging tingkat permintaan
+### 要求層級記錄
 
-Perilaku penyimpanan dan logging berbeda menurut API:
+不同 API 的儲存和記錄行為有所不同：
 
-- **[Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=id):** Menyimpan permintaan secara default (`store=true`) untuk menyederhanakan pengelolaan status sisi server.
-- **Generate Content API (`generateContent`):** Tidak menyimpan permintaan secara default (`store=false`).
+- **[Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-tw)：**預設會儲存要求 (`store=true`)，簡化伺服器端狀態管理。
+- **生成 Content API (`generateContent`)：**預設不會儲存要求 (`store=false`)。
 
-Berikut cara menetapkan properti `store`:
+以下說明如何設定 `store` 屬性：
 
-**GenerateContent API**
+**`generateContent` API**
 
 ### Python
 
@@ -112,61 +107,59 @@ const interaction = await client.interactions.create({
 console.log(interaction.outputs[interaction.outputs.length - 1].text);
 ```
 
-## Melihat log project di AI Studio
+## 在 AI Studio 中查看專案記錄
 
-1. Buka halaman Logs di [AI Studio](https://aistudio.google.com/logs?hl=id).
-2. Pilih project dari menu drop-down.
-3. Log akan muncul dalam tabel dalam urutan kronologis terbalik untuk Interactions API, jika ada.
-4. Untuk mengamati log project untuk Generate Content API, aktifkan terlebih dahulu di [panel setelan](#configure-logging).
+1. 前往 [AI Studio](https://aistudio.google.com/logs?hl=zh-tw) 的「記錄」頁面。
+2. 從下拉式選單中選取專案。
+3. 如果存在記錄，表格會以逆時序顯示 Interactions API 的記錄。
+4. 如要觀察 Generate Content API 的專案記錄，請先在[設定面板](#configure-logging)中啟用這項功能。
 
-Klik entri untuk melihat pratinjau payload. Anda dapat memeriksa perintah dan respons lengkap dari Gemini, serta konteks dari pernyataan sebelumnya. Untuk permintaan **Interactions API**, log juga menyertakan link
-langsung ke `previous_interaction_id`.
+按一下項目即可預覽酬載。您可以檢查 Gemini 的完整提示和回覆，以及先前對話的脈絡。如果是 **Interactions API** 要求，記錄也會包含 `previous_interaction_id` 的直接連結。
 
-## Mengonfigurasi retensi penyimpanan project
+## 設定專案儲存空間保留期限
 
-Log akan berakhir dan ditandai untuk dihapus setelah periode retensi default selama 55 hari (kecuali jika [disimpan ke set data](#create), yang tidak akan berakhir).
-Anda dapat mengonfigurasi periode retensi log project hingga maksimum 7, 14, 28, atau 55 hari.
+記錄會在預設保留期限 (55 天) 過後失效，並標示為待刪除 (除非[儲存至資料集](#create)，否則不會失效)。您可以將專案記錄的保留期限設為最多 7、14、28 或 55 天。
 
-## Membuat dan membagikan set data
+## 建立及共用資料集
 
-Anda dapat menyimpan log ke set data untuk mengelola dan mengekspornya secara lebih efektif.
+您可以將記錄檔儲存至資料集，以便更有效率地整理及匯出記錄檔。
 
-- Dari [halaman Log](https://aistudio.google.com/logs?hl=id), temukan panel filter di bagian atas untuk memilih properti yang akan difilter.
-- Dari tampilan yang difilter, gunakan kotak centang untuk memilih semua atau masing-masing log.
-- Klik tombol **Buat set data** yang muncul di bagian atas daftar.
-- Beri nama dan deskripsi opsional untuk set data baru Anda.
-- Anda akan melihat set data yang baru saja dibuat dengan kumpulan log yang telah dikurasi.
-- Ekspor set data Anda untuk analisis lebih lanjut sebagai file CSV, JSONL, atau ke Google Spreadsheet.
+- 在「記錄」頁面中，找出頂端的篩選列，然後選取要篩選的屬性。
+- 在篩選後的檢視畫面中，使用核取方塊選取所有或個別記錄。
+- 按一下清單頂端的「建立資料集」按鈕。
+- 為新資料集命名，並視需要新增說明。
+- 您會看到剛才建立的資料集，其中包含精選的記錄集。
+- 將資料集匯出為 CSV、JSONL 檔案或 Google 試算表，以供進一步分析。
 
-Set data dapat berguna untuk sejumlah kasus penggunaan yang berbeda.
+資料集可協助您處理多種用途。
 
-- **Susun set tantangan:** Dorong peningkatan di masa mendatang yang menargetkan area tempat Anda ingin AI ditingkatkan.
-- **Menyusun set sampel:** Misalnya, sampel dari penggunaan nyata untuk menghasilkan respons dari model lain, atau kumpulan kasus ekstrem untuk pemeriksaan rutin sebelum deployment.
-- **Set evaluasi:** Set yang mewakili penggunaan nyata di seluruh kemampuan penting, untuk perbandingan di seluruh model atau iterasi petunjuk sistem lainnya.
+- **策劃挑戰集：**針對您希望 AI 改進的領域，推動未來的改善措施。
+- **策劃樣本集：**例如，從實際使用情況中取得樣本，以便透過其他模型生成回應，或是收集極端案例，以便在部署前進行例行檢查。
+- **評估集：**這類資料集代表重要功能的實際使用情況，可用於比較其他模型或系統指令疊代版本。
 
-Anda dapat berkontribusi pada riset dan pengembangan Gemini dengan memilih untuk membagikan set data Anda kepada Google sebagai contoh demonstrasi.
+您可以選擇將資料集提供給 Google 做為示範範例，協助我們進行 Gemini 研究與開發。
 
-## Batasan
+## 限制
 
-Pencatatan saat ini tidak didukung untuk hal berikut:
+目前系統不支援記錄下列項目：
 
-- Model Imagen dan Veo
-- Model embedding Gemini
-- Model Gemini Robotics
-- Input yang berisi video, GIF, atau PDF
-- Agen Pratinjau Publik di Gemini API
+- Imagen 和 Veo 模型
+- Gemini 嵌入模型
+- Gemini Robotics 模型
+- 含有影片、GIF 或 PDF 的輸入內容
+- Gemini API 中的公開預先發布版代理
 
-## Langkah berikutnya
+## 後續步驟
 
-- **Membuat prototipe dengan histori sesi:** Gunakan [Build AI Studio](https://aistudio.google.com/apps?hl=id) untuk melakukan vibe coding aplikasi dan menambahkan kunci API Anda untuk mengaktifkan histori log Gemini API untuk fitur AI.
-- **Menjalankan ulang log dengan Gemini Batch API:** Gunakan set data untuk pengambilan sampel respons dan evaluasi model atau logika aplikasi dengan menjalankan ulang log menggunakan [Gemini Batch API](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb).
+- **使用工作階段記錄設計原型：**使用 [AI Studio Build](https://aistudio.google.com/apps?hl=zh-tw) 直覺式程式開發應用程式，並新增 API 金鑰，啟用 AI 功能的 Gemini API 記錄。
+- **使用 Gemini Batch API 重新執行記錄：**使用資料集進行回應取樣，並透過 [Gemini Batch API](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb) 重新執行記錄，評估模型或應用程式邏輯。
 
-Kirim masukan
+提供意見
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Terakhir diperbarui pada 2026-07-22 UTC.
+上次更新時間：2026-09-12 (世界標準時間)。
 
-Ada masukan untuk kami?
+想進一步說明嗎？
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-22 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-12 (世界標準時間)。"],[],[]]

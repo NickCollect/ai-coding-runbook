@@ -1,32 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate?hl=zh-CN
-fetched_at: 2026-09-07T05:36:48.086250+00:00
-title: "\u8fc1\u79fb\u5230 Google GenAI SDK \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate?hl=de
+fetched_at: 2026-09-14T05:44:02.621831+00:00
+title: "Zum Google GenAI\u00a0SDK migrieren \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-发送反馈
+Feedback geben
 
-# 迁移到 Google GenAI SDK
+# Zum Google GenAI SDK migrieren
 
-从 2024 年末发布的 Gemini 2.0 开始，我们推出了一组名为 [Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-cn) 的新库。它通过[更新的客户端架构](https://ai.google.dev/gemini-api/docs/migrate?hl=zh-cn#client)提供改进的开发者体验，并[简化开发者工作流程与企业工作流程之间的过渡](https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=zh-cn)。
+Mit der Einführung von Gemini 2.0 Ende 2024 haben wir eine neue Reihe von
+Bibliotheken eingeführt, das [Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=de). Es bietet
+eine verbesserte Entwicklererfahrung durch
+eine [aktualisierte Clientarchitektur](https://ai.google.dev/gemini-api/docs/migrate?hl=de#client) und
+[vereinfacht den Überg3ang](https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=de) zwischen Entwickler
+und Unternehmensworkflows.
 
-Google GenAI SDK 现已在所有受支持的平台上[正式发布 (GA)](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-cn#new-libraries)。如果您使用的是我们的某个[旧版库](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-cn#previous-sdks)，我们强烈建议您进行迁移。
+Das Google GenAI SDK ist jetzt auf allen unterstützten
+Plattformen [allgemein verfügbar](https://ai.google.dev/gemini-api/docs/libraries?hl=de#new-libraries). Wenn Sie eine unserer [älteren Bibliotheken](https://ai.google.dev/gemini-api/docs/libraries?hl=de#previous-sdks) verwenden, empfehlen wir Ihnen dringend, zu
+migrieren.
 
-本指南提供了迁移前后的代码示例，可帮助您入门。
+In dieser Anleitung finden Sie Vorher-nachher-Beispiele für migrierten Code, die Ihnen den Einstieg erleichtern.
 
-## 安装
+## Installation
 
-**之前**
+**Vorher**
 
 ### Python
 
@@ -40,13 +47,13 @@ pip install -U -q "google-generativeai"
 npm install @google/generative-ai
 ```
 
-### Go
+### Ok
 
 ```
 go get github.com/google/generative-ai-go
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
@@ -60,35 +67,35 @@ pip install -U -q "google-genai"
 npm install @google/genai
 ```
 
-### Go
+### Ok
 
 ```
 go get google.golang.org/genai
 ```
 
-## API 访问权限
+## API-Zugriff
 
-旧版 SDK 使用各种临时方法在后台隐式处理 API 客户端。这使得管理客户端和凭据变得困难。
-现在，您可以通过中央 `Client` 对象进行互动。此 `Client` 对象充当各种 API 服务（例如 `models`、`chats`、`files`、`tunings`）的单一入口点，有助于在不同的 API 调用中保持一致性，并简化凭据和配置管理。
+Das alte SDK hat den API-Client im Hintergrund implizit mit einer Vielzahl von Ad-hoc-Methoden verarbeitet. Dadurch war es schwierig, den Client und die Anmeldedaten zu verwalten.
+Jetzt interagieren Sie über ein zentrales `Client`-Objekt. Dieses `Client`-Objekt dient als einziger Einstiegspunkt für verschiedene API-Dienste (z.B. `models`, `chats`, `files`, `tunings`), wodurch die Konsistenz gefördert und die Verwaltung von Anmeldedaten und Konfigurationen bei verschiedenen API-Aufrufen vereinfacht wird.
 
-**之前（API 访问权限不太集中）**
+**Vorher (weniger zentralisierter API-Zugriff)**
 
 ### Python
 
-旧版 SDK 未明确使用顶级客户端对象来处理大多数 API 调用。您将直接实例化 `GenerativeModel` 对象并与之交互。
+Das alte SDK hat für die meisten API-Aufrufe kein Clientobjekt der obersten Ebene verwendet. Sie haben `GenerativeModel`-Objekte direkt instanziiert und mit ihnen interagiert.
 
 ```
 import google.generativeai as genai
 
 # Directly create and use model objects
-model = genai.GenerativeModel('gemini-3.5-flash')
+model = genai.GenerativeModel('gemini-3.6-flash')
 response = model.generate_content(...)
 chat = model.start_chat(...)
 ```
 
 ### JavaScript
 
-虽然 `GoogleGenerativeAI` 是模型和聊天功能的中心点，但文件和缓存管理等其他功能通常需要导入和实例化完全独立的客户端类。
+`GoogleGenerativeAI` war zwar ein zentraler Punkt für Modelle und Chats, für andere Funktionen wie die Datei- und Cacheverwaltung mussten jedoch oft völlig separate Clientklassen importiert und instanziiert werden.
 
 ```
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -99,7 +106,7 @@ const fileManager = new GoogleAIFileManager("GEMINI_API_KEY");
 const cacheManager = new GoogleAICacheManager("GEMINI_API_KEY");
 
 // Get a model instance, then call methods on it
-const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-3.6-flash" });
 const result = await model.generateContent(...);
 const chat = model.startChat(...);
 
@@ -108,9 +115,9 @@ const uploadedFile = await fileManager.uploadFile(...);
 const cache = await cacheManager.create(...);
 ```
 
-### Go
+### Ok
 
-`genai.NewClient` 函数创建了一个客户端，但生成模型操作通常是在从该客户端获取的单独 `GenerativeModel` 实例上调用的。其他服务可能通过不同的软件包或模式进行访问。
+Die Funktion `genai.NewClient` hat einen Client erstellt, generative Modellvorgänge wurden jedoch in der Regel für eine separate `GenerativeModel`-Instanz aufgerufen, die von diesem Client abgerufen wurde. Auf andere Dienste wurde möglicherweise über separate Pakete oder Muster zugegriffen.
 
 ```
 import (
@@ -123,7 +130,7 @@ client, err := genai.NewClient(ctx, option.WithAPIKey("GEMINI_API_KEY"))
 fileClient, err := fileman.NewClient(ctx, option.WithAPIKey("GEMINI_API_KEY"))
 
 // Get a model instance, then call methods on it
-model := client.GenerativeModel("gemini-3.5-flash")
+model := client.GenerativeModel("gemini-3.6-flash")
 resp, err := model.GenerateContent(...)
 cs := model.StartChat()
 
@@ -131,7 +138,7 @@ cs := model.StartChat()
 uploadedFile, err := fileClient.UploadFile(...)
 ```
 
-**之后（集中式客户端对象）**
+**Nachher (zentralisiertes Clientobjekt)**
 
 ### Python
 
@@ -163,7 +170,7 @@ const uploadedFile = await ai.files.upload(...);
 const cache = await ai.caches.create(...);
 ```
 
-### Go
+### Ok
 
 ```
 import "google.golang.org/genai"
@@ -178,15 +185,17 @@ uploadedFile, err := client.Files.Upload(...)
 tuningJob, err := client.Tunings.Tune(...)
 ```
 
-## 身份验证
+## Authentifizierung
 
-旧版库和新版库均使用 API 密钥进行身份验证。您可以在 Google AI Studio 中[创建](https://aistudio.google.com/apikey?hl=zh-cn) API 密钥。
+Sowohl ältere als auch neue Bibliotheken werden mit API-Schlüsseln authentifiziert. Sie können
+[Ihren API-Schlüssel](https://aistudio.google.com/apikey?hl=de) in Google AI
+Studio erstellen.
 
-**之前**
+**Vorher**
 
 ### Python
 
-旧版 SDK 会隐式处理 API 客户端对象。
+Das alte SDK hat das API-Clientobjekt implizit verarbeitet.
 
 ```
 import google.generativeai as genai
@@ -202,9 +211,9 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
 ```
 
-### Go
+### Ok
 
-导入 Google 库：
+Importieren Sie die Google-Bibliotheken:
 
 ```
 import (
@@ -213,18 +222,18 @@ import (
 )
 ```
 
-创建客户端：
+Erstellen Sie den Client:
 
 ```
 client, err := genai.NewClient(ctx, option.WithAPIKey("GEMINI_API_KEY"))
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
-借助 Google GenAI SDK，您可以先创建一个 API 客户端，然后使用该客户端调用 API。
-如果您未向客户端传递 API 密钥，新 SDK 将从 `GEMINI_API_KEY` 环境变量中获取您的 API 密钥。
+Mit dem Google GenAI SDK erstellen Sie zuerst einen API-Client, der zum Aufrufen der API verwendet wird.
+Das neue SDK ruft Ihren API-Schlüssel aus den Umgebungsvariablen `GEMINI_API_KEY` ab, wenn Sie keinen an den Client übergeben.
 
 ```
 export GEMINI_API_KEY="YOUR_API_KEY"
@@ -246,15 +255,15 @@ import { GoogleGenAI } from "@google/genai";
 const ai = new GoogleGenAI({apiKey: "GEMINI_API_KEY"});
 ```
 
-### Go
+### Ok
 
-导入 GenAI 库：
+Importieren Sie die GenAI-Bibliothek:
 
 ```
 import "google.golang.org/genai"
 ```
 
-创建客户端：
+Erstellen Sie den Client:
 
 ```
 client, err := genai.NewClient(ctx, &genai.ClientConfig{
@@ -262,20 +271,20 @@ client, err := genai.NewClient(ctx, &genai.ClientConfig{
 })
 ```
 
-## 生成内容
+## Inhaltserstellung
 
-### 文字
+### Text
 
-**之前**
+**Vorher**
 
 ### Python
 
-之前，没有客户端对象，您可以通过 `GenerativeModel` 对象直接访问 API。
+Bisher gab es keine Clientobjekte. Sie haben über `GenerativeModel`-Objekte direkt auf APIs zugegriffen.
 
 ```
 import google.generativeai as genai
 
-model = genai.GenerativeModel('gemini-3.5-flash')
+model = genai.GenerativeModel('gemini-3.6-flash')
 response = model.generate_content(
     'Tell me a story in 300 words'
 )
@@ -288,14 +297,14 @@ print(response.text)
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-3.6-flash" });
 const prompt = "Tell me a story in 300 words";
 
 const result = await model.generateContent(prompt);
 console.log(result.response.text());
 ```
 
-### Go
+### Ok
 
 ```
 ctx := context.Background()
@@ -305,7 +314,7 @@ if err != nil {
 }
 defer client.Close()
 
-model := client.GenerativeModel("gemini-3.5-flash")
+model := client.GenerativeModel("gemini-3.6-flash")
 resp, err := model.GenerateContent(ctx, genai.Text("Tell me a story in 300 words."))
 if err != nil {
     log.Fatal(err)
@@ -314,18 +323,18 @@ if err != nil {
 printResponse(resp) // utility for printing response parts
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
-新的 Google GenAI SDK 通过 `Client` 对象提供对所有 API 方法的访问权限。除了少数有状态的特殊情况（`chat` 和实时 API `session`），这些都是无状态函数。为了实用性和一致性，返回的对象是 `pydantic` 类。
+Das neue Google GenAI SDK bietet über das `Client`-Objekt Zugriff auf alle API-Methoden. Mit Ausnahme einiger zustandsbehafteter Sonderfälle (`chat` und Live-API-`session`s) sind dies alles zustandslose Funktionen. Aus Gründen der Nützlichkeit und Einheitlichkeit sind die zurückgegebenen Objekte `pydantic`-Klassen.
 
 ```
 from google import genai
 client = genai.Client()
 
 response = client.models.generate_content(
-    model='gemini-3.5-flash',
+    model='gemini-3.6-flash',
     contents='Tell me a story in 300 words.'
 )
 print(response.text)
@@ -342,13 +351,13 @@ import { GoogleGenAI } from "@google/genai";
 const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
 
 const response = await ai.models.generateContent({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   contents: "Tell me a story in 300 words.",
 });
 console.log(response.text);
 ```
 
-### Go
+### Ok
 
 ```
 ctx := context.Background()
@@ -357,23 +366,23 @@ if err != nil {
     log.Fatal(err)
 }
 
-result, err := client.Models.GenerateContent(ctx, "gemini-3.5-flash", genai.Text("Tell me a story in 300 words."), nil)
+result, err := client.Models.GenerateContent(ctx, "gemini-3.6-flash", genai.Text("Tell me a story in 300 words."), nil)
 if err != nil {
     log.Fatal(err)
 }
 debugPrint(result) // utility for printing result
 ```
 
-### 图片
+### Bild
 
-**之前**
+**Vorher**
 
 ### Python
 
 ```
 import google.generativeai as genai
 
-model = genai.GenerativeModel('gemini-3.5-flash')
+model = genai.GenerativeModel('gemini-3.6-flash')
 response = model.generate_content([
     'Tell me a story based on this image',
     Image.open(image_path)
@@ -387,7 +396,7 @@ print(response.text)
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
-const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-3.6-flash" });
 
 function fileToGenerativePart(path, mimeType) {
   return {
@@ -409,7 +418,7 @@ const result = await model.generateContent([prompt, imagePart]);
 console.log(result.response.text());
 ```
 
-### Go
+### Ok
 
 ```
 ctx := context.Background()
@@ -419,7 +428,7 @@ if err != nil {
 }
 defer client.Close()
 
-model := client.GenerativeModel("gemini-3.5-flash")
+model := client.GenerativeModel("gemini-3.6-flash")
 
 imgData, err := os.ReadFile("path/to/organ.jpg")
 if err != nil {
@@ -436,11 +445,11 @@ if err != nil {
 printResponse(resp) // utility for printing response
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
-新版 SDK 中包含许多相同的便利功能。例如，系统会自动转换 `PIL.Image` 对象。
+Viele der praktischen Funktionen sind auch im neuen SDK verfügbar. So werden beispielsweise `PIL.Image`-Objekte automatisch konvertiert.
 
 ```
 from google import genai
@@ -449,7 +458,7 @@ from PIL import Image
 client = genai.Client()
 
 response = client.models.generate_content(
-    model='gemini-3.5-flash',
+    model='gemini-3.6-flash',
     contents=[
         'Tell me a story based on this image',
         Image.open(image_path)
@@ -470,7 +479,7 @@ const organ = await ai.files.upload({
 });
 
 const response = await ai.models.generateContent({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   contents: [
     createUserContent([
       "Tell me a story based on this image",
@@ -481,7 +490,7 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-### Go
+### Ok
 
 ```
 ctx := context.Background()
@@ -503,16 +512,16 @@ contents := []*genai.Content{
     {Parts: parts},
 }
 
-result, err := client.Models.GenerateContent(ctx, "gemini-3.5-flash", contents, nil)
+result, err := client.Models.GenerateContent(ctx, "gemini-3.6-flash", contents, nil)
 if err != nil {
     log.Fatal(err)
 }
 debugPrint(result) // utility for printing result
 ```
 
-### 流式
+### Streaming
 
-**之前**
+**Vorher**
 
 ### Python
 
@@ -532,7 +541,7 @@ for chunk in response:
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
-const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-3.6-flash" });
 
 const prompt = "Write a story about a magic backpack.";
 
@@ -545,7 +554,7 @@ for await (const chunk of result.stream) {
 }
 ```
 
-### Go
+### Ok
 
 ```
 ctx := context.Background()
@@ -555,7 +564,7 @@ if err != nil {
 }
 defer client.Close()
 
-model := client.GenerativeModel("gemini-3.5-flash")
+model := client.GenerativeModel("gemini-3.6-flash")
 iter := model.GenerateContentStream(ctx, genai.Text("Write a story about a magic backpack."))
 for {
     resp, err := iter.Next()
@@ -569,7 +578,7 @@ for {
 }
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
@@ -579,7 +588,7 @@ from google import genai
 client = genai.Client()
 
 for chunk in client.models.generate_content_stream(
-  model='gemini-3.5-flash',
+  model='gemini-3.6-flash',
   contents='Tell me a story in 300 words.'
 ):
     print(chunk.text)
@@ -593,7 +602,7 @@ import {GoogleGenAI} from '@google/genai';
 const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
 
 const response = await ai.models.generateContentStream({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   contents: "Write a story about a magic backpack.",
 });
 let text = "";
@@ -603,7 +612,7 @@ for await (const chunk of response) {
 }
 ```
 
-### Go
+### Ok
 
 ```
 ctx := context.Background()
@@ -614,7 +623,7 @@ if err != nil {
 
 for result, err := range client.Models.GenerateContentStream(
     ctx,
-    "gemini-3.5-flash",
+    "gemini-3.6-flash",
     genai.Text("Write a story about a magic backpack."),
     nil,
 ) {
@@ -625,9 +634,9 @@ for result, err := range client.Models.GenerateContentStream(
 }
 ```
 
-## 配置
+## Konfiguration
 
-**之前**
+**Vorher**
 
 ### Python
 
@@ -635,7 +644,7 @@ for result, err := range client.Models.GenerateContentStream(
 import google.generativeai as genai
 
 model = genai.GenerativeModel(
-  'gemini-3.5-flash',
+  'gemini-3.6-flash',
     system_instruction='you are a story teller for kids under 5 years old',
     generation_config=genai.GenerationConfig(
       max_output_tokens=400,
@@ -656,7 +665,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
 const model = genAI.getGenerativeModel({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   generationConfig: {
     candidateCount: 1,
     stopSequences: ["x"],
@@ -671,7 +680,7 @@ const result = await model.generateContent(
 console.log(result.response.text())
 ```
 
-### Go
+### Ok
 
 ```
 ctx := context.Background()
@@ -681,7 +690,7 @@ if err != nil {
 }
 defer client.Close()
 
-model := client.GenerativeModel("gemini-3.5-flash")
+model := client.GenerativeModel("gemini-3.6-flash")
 model.SetTemperature(0.5)
 model.SetTopP(0.5)
 model.SetTopK(2.0)
@@ -694,11 +703,11 @@ if err != nil {
 printResponse(resp) // utility for printing response
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
-对于新 SDK 中的所有方法，必需实参都以关键字实参的形式提供。所有可选输入都通过 `config` 实参提供。配置实参可以指定为 Python 字典或 `google.genai.types` 命名空间中的 `Config` 类。为了实现实用性和一致性，`types` 模块中的所有定义都是 `pydantic` 类。
+Für alle Methoden im neuen SDK werden die erforderlichen Argumente als Schlüsselwortargumente angegeben. Alle optionalen Eingaben werden im Argument `config` angegeben. Konfigurationsargumente können entweder als Python-Wörterbücher oder als `Config`-Klassen im Namespace `google.genai.types` angegeben werden. Aus Gründen der Nützlichkeit und Einheitlichkeit sind alle Definitionen im Modul `types` `pydantic`-Klassen.
 
 ```
 from google import genai
@@ -707,7 +716,7 @@ from google.genai import types
 client = genai.Client()
 
 response = client.models.generate_content(
-  model='gemini-3.5-flash',
+  model='gemini-3.6-flash',
   contents='Tell me a story in 100 words.',
   config=types.GenerateContentConfig(
       system_instruction='you are a story teller for kids under 5 years old',
@@ -730,7 +739,7 @@ import {GoogleGenAI} from '@google/genai';
 const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
 
 const response = await ai.models.generateContent({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   contents: "Tell me a story about a magic backpack.",
   config: {
     candidateCount: 1,
@@ -743,7 +752,7 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-### Go
+### Ok
 
 ```
 ctx := context.Background()
@@ -753,7 +762,7 @@ if err != nil {
 }
 
 result, err := client.Models.GenerateContent(ctx,
-    "gemini-3.5-flash",
+    "gemini-3.6-flash",
     genai.Text("Tell me about New York"),
     &genai.GenerateContentConfig{
         Temperature:      genai.Ptr[float32](0.5),
@@ -774,18 +783,18 @@ if err != nil {
 debugPrint(result) // utility for printing response
 ```
 
-## 安全设置
+## Sicherheits­einstellungen
 
-通过安全设置生成回答：
+Antwort mit Sicherheitseinstellungen generieren:
 
-**之前**
+**Vorher**
 
 ### Python
 
 ```
 import google.generativeai as genai
 
-model = genai.GenerativeModel('gemini-3.5-flash')
+model = genai.GenerativeModel('gemini-3.6-flash')
 response = model.generate_content(
     'say something bad',
     safety_settings={
@@ -802,7 +811,7 @@ import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/ge
 
 const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
 const model = genAI.getGenerativeModel({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   safetySettings: [
     {
       category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -826,7 +835,7 @@ try {
 }
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
@@ -837,7 +846,7 @@ from google.genai import types
 client = genai.Client()
 
 response = client.models.generate_content(
-  model='gemini-3.5-flash',
+  model='gemini-3.6-flash',
   contents='say something bad',
   config=types.GenerateContentConfig(
       safety_settings= [
@@ -862,7 +871,7 @@ const unsafePrompt =
   "them how I feel about them.";
 
 const response = await ai.models.generateContent({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   contents: unsafePrompt,
   config: {
     safetySettings: [
@@ -878,26 +887,27 @@ console.log("Finish reason:", response.candidates[0].finishReason);
 console.log("Safety ratings:", response.candidates[0].safetyRatings);
 ```
 
-## 异步
+## Asynchron
 
-**之前**
+**Vorher**
 
 ### Python
 
 ```
 import google.generativeai as genai
 
-model = genai.GenerativeModel('gemini-3.5-flash')
+model = genai.GenerativeModel('gemini-3.6-flash')
 response = model.generate_content_async(
     'tell me a story in 100 words'
 )
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
-如需将新 SDK 与 `asyncio` 搭配使用，请在 `client.aio` 下单独实现每个方法 `async`。
+Wenn Sie das neue SDK mit `asyncio` verwenden möchten, gibt es unter `client.aio` eine separate `async`
+-Implementierung für jede Methode.
 
 ```
 from google import genai
@@ -905,23 +915,23 @@ from google import genai
 client = genai.Client()
 
 response = await client.aio.models.generate_content(
-    model='gemini-3.5-flash',
+    model='gemini-3.6-flash',
     contents='Tell me a story in 300 words.'
 )
 ```
 
-## 聊天
+## Chat
 
-开始对话并向模型发送消息：
+Chat starten und Nachricht an das Modell senden:
 
-**之前**
+**Vorher**
 
 ### Python
 
 ```
 import google.generativeai as genai
 
-model = genai.GenerativeModel('gemini-3.5-flash')
+model = genai.GenerativeModel('gemini-3.6-flash')
 chat = model.start_chat()
 
 response = chat.send_message(
@@ -936,7 +946,7 @@ response = chat.send_message(
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
-const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-3.6-flash" });
 const chat = model.startChat({
   history: [
     {
@@ -955,7 +965,7 @@ result = await chat.sendMessage("How many paws are in my house?");
 console.log(result.response.text());
 ```
 
-### Go
+### Ok
 
 ```
 ctx := context.Background()
@@ -965,7 +975,7 @@ if err != nil {
 }
 defer client.Close()
 
-model := client.GenerativeModel("gemini-3.5-flash")
+model := client.GenerativeModel("gemini-3.6-flash")
 cs := model.StartChat()
 
 cs.History = []*genai.Content{
@@ -990,7 +1000,7 @@ if err != nil {
 printResponse(res) // utility for printing the response
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
@@ -999,7 +1009,7 @@ from google import genai
 
 client = genai.Client()
 
-chat = client.chats.create(model='gemini-3.5-flash')
+chat = client.chats.create(model='gemini-3.6-flash')
 
 response = chat.send_message(
     message='Tell me a story in 100 words')
@@ -1014,7 +1024,7 @@ import {GoogleGenAI} from '@google/genai';
 
 const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
 const chat = ai.chats.create({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   history: [
     {
       role: "user",
@@ -1038,7 +1048,7 @@ const response2 = await chat.sendMessage({
 console.log("Chat response 2:", response2.text);
 ```
 
-### Go
+### Ok
 
 ```
 ctx := context.Background()
@@ -1047,7 +1057,7 @@ if err != nil {
     log.Fatal(err)
 }
 
-chat, err := client.Chats.Create(ctx, "gemini-3.5-flash", nil, nil)
+chat, err := client.Chats.Create(ctx, "gemini-3.6-flash", nil, nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -1065,9 +1075,9 @@ if err != nil {
 debugPrint(result) // utility for printing result
 ```
 
-## 函数调用
+## Funktionsaufrufe
 
-**之前**
+**Vorher**
 
 ### Python
 
@@ -1086,7 +1096,7 @@ def get_current_weather(location: str) -> str:
     return "23C"
 
 model = genai.GenerativeModel(
-    model_name="gemini-3.5-flash",
+    model_name="gemini-3.6-flash",
     tools=[get_current_weather]
 )
 
@@ -1094,11 +1104,11 @@ response = model.generate_content("What is the weather in San Francisco?")
 function_call = response.candidates[0].parts[0].function_call
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
-在新 SDK 中，自动函数调用是默认设置。在此处，您可以停用该功能。
+Im neuen SDK ist der automatische Funktionsaufruf die Standardeinstellung. Hier deaktivieren Sie ihn.
 
 ```
 from google import genai
@@ -1117,7 +1127,7 @@ def get_current_weather(location: str) -> str:
     return "23C"
 
 response = client.models.generate_content(
-  model='gemini-3.5-flash',
+  model='gemini-3.6-flash',
   contents="What is the weather like in Boston?",
   config=types.GenerateContentConfig(
       tools=[get_current_weather],
@@ -1128,13 +1138,13 @@ response = client.models.generate_content(
 function_call = response.candidates[0].content.parts[0].function_call
 ```
 
-### 自动函数调用
+### Automatischer Funktionsaufruf
 
-**之前**
+**Vorher**
 
 ### Python
 
-旧版 SDK 仅支持在聊天中自动调用函数。在新版 SDK 中，这是 `generate_content` 中的默认行为。
+Das alte SDK unterstützt den automatischen Funktionsaufruf nur im Chat. Im neuen SDK ist dies das Standardverhalten in `generate_content`.
 
 ```
 import google.generativeai as genai
@@ -1143,7 +1153,7 @@ def get_current_weather(city: str) -> str:
     return "23C"
 
 model = genai.GenerativeModel(
-    model_name="gemini-3.5-flash",
+    model_name="gemini-3.6-flash",
     tools=[get_current_weather]
 )
 
@@ -1152,7 +1162,7 @@ chat = model.start_chat(
 result = chat.send_message("What is the weather in San Francisco?")
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
@@ -1165,7 +1175,7 @@ def get_current_weather(city: str) -> str:
     return "23C"
 
 response = client.models.generate_content(
-  model='gemini-3.5-flash',
+  model='gemini-3.6-flash',
   contents="What is the weather like in Boston?",
   config=types.GenerateContentConfig(
       tools=[get_current_weather]
@@ -1173,11 +1183,11 @@ response = client.models.generate_content(
 )
 ```
 
-## 代码执行
+## Codeausführung
 
-代码执行是一种工具，可让模型生成 Python 代码、运行代码并返回结果。
+Die Codeausführung ist ein Tool, mit dem das Modell Python-Code generieren, ausführen und das Ergebnis zurückgeben kann.
 
-**之前**
+**Vorher**
 
 ### Python
 
@@ -1185,7 +1195,7 @@ response = client.models.generate_content(
 import google.generativeai as genai
 
 model = genai.GenerativeModel(
-    model_name="gemini-3.5-flash",
+    model_name="gemini-3.6-flash",
     tools="code_execution"
 )
 
@@ -1201,7 +1211,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
 const model = genAI.getGenerativeModel({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   tools: [{ codeExecution: {} }],
 });
 
@@ -1214,7 +1224,7 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
@@ -1225,7 +1235,7 @@ from google.genai import types
 client = genai.Client()
 
 response = client.models.generate_content(
-    model='gemini-3.5-flash',
+    model='gemini-3.6-flash',
     contents='What is the sum of the first 50 prime numbers? Generate and run '
             'code for the calculation, and make sure you get all 50.',
     config=types.GenerateContentConfig(
@@ -1242,7 +1252,7 @@ import {GoogleGenAI} from '@google/genai';
 const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
 
 const response = await ai.models.generateContent({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   contents: `Write and execute code that calculates the sum of the first 50 prime numbers.
             Ensure that only the executable code and its resulting output are generated.`,
 });
@@ -1258,25 +1268,27 @@ console.log("-".repeat(80));
 console.log("\n", response.text);
 ```
 
-## 搜索接地
+## Suchfundierung
 
-`GoogleSearch`（Gemini>=2.0）和 `GoogleSearchRetrieval`（Gemini < 2.0）是可让模型检索公开网络数据以进行接地处理的工具，由 Google 提供支持。
+`GoogleSearch` (Gemini>=2.0) und `GoogleSearchRetrieval` (Gemini < 2.0) sind
+Tools, mit denen das Modell öffentliche Webdaten für die Fundierung abrufen kann. Sie werden von
+Google bereitgestellt.
 
-**之前**
+**Vorher**
 
 ### Python
 
 ```
 import google.generativeai as genai
 
-model = genai.GenerativeModel('gemini-3.5-flash')
+model = genai.GenerativeModel('gemini-3.6-flash')
 response = model.generate_content(
     contents="what is the Google stock price?",
     tools='google_search_retrieval'
 )
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
@@ -1287,7 +1299,7 @@ from google.genai import types
 client = genai.Client()
 
 response = client.models.generate_content(
-    model='gemini-3.5-flash',
+    model='gemini-3.6-flash',
     contents='What is the Google stock price?',
     config=types.GenerateContentConfig(
         tools=[
@@ -1299,15 +1311,17 @@ response = client.models.generate_content(
 )
 ```
 
-## JSON 响应
+## JSON-Antwort
 
-以 JSON 格式生成答案。
+Antworten im JSON-Format generieren.
 
-**之前**
+**Vorher**
 
 ### Python
 
-通过指定 `response_schema` 并设置 `response_mime_type="application/json"`，用户可以限制模型生成遵循给定结构的 `JSON` 回答。
+Durch Angabe eines `response_schema` und Festlegen
+`response_mime_type="application/json"` können Nutzer das Modell so einschränken, dass es
+eine `JSON` Antwort mit einer bestimmten Struktur erzeugt.
 
 ```
 import google.generativeai as genai
@@ -1323,7 +1337,7 @@ class CountryInfo(typing.TypedDict):
     official_language: str
     total_area_sq_mi: int
 
-model = genai.GenerativeModel(model_name="gemini-3.5-flash")
+model = genai.GenerativeModel(model_name="gemini-3.6-flash")
 result = model.generate_content(
     "Give me information of the United States",
     generation_config=genai.GenerationConfig(
@@ -1357,7 +1371,7 @@ const schema = {
 };
 
 const model = genAI.getGenerativeModel({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   generationConfig: {
     responseMimeType: "application/json",
     responseSchema: schema,
@@ -1370,11 +1384,11 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
-新版 SDK 使用 `pydantic` 类来提供架构（不过您可以传递 `genai.types.Schema` 或等效的 `dict`）。如果可能，SDK 会解析返回的 JSON，并以 `response.parsed` 形式返回结果。如果您提供 `pydantic` 类作为架构，SDK 会将该 `JSON` 转换为该类的实例。
+Das neue SDK verwendet `pydantic`-Klassen, um das Schema bereitzustellen (Sie können aber auch ein `genai.types.Schema` oder ein entsprechendes `dict` übergeben). Wenn möglich, parst das SDK das zurückgegebene JSON und gibt das Ergebnis in `response.parsed` zurück. Wenn Sie eine `pydantic`-Klasse als Schema angegeben haben, konvertiert das SDK dieses `JSON` in eine Instanz der Klasse.
 
 ```
 from google import genai
@@ -1393,7 +1407,7 @@ class CountryInfo(BaseModel):
     total_area_sq_mi: int
 
 response = client.models.generate_content(
-    model='gemini-3.5-flash',
+    model='gemini-3.6-flash',
     contents='Give me information of the United States.',
     config={
         'response_mime_type': 'application/json',
@@ -1411,7 +1425,7 @@ import {GoogleGenAI} from '@google/genai';
 
 const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
 const response = await ai.models.generateContent({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   contents: "List a few popular cookie recipes.",
   config: {
     responseMimeType: "application/json",
@@ -1431,13 +1445,13 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-## 文件
+## Dateien
 
-### 上传
+### Hochladen
 
-上传文件：
+Datei hochladen:
 
-**之前**
+**Vorher**
 
 ### Python
 
@@ -1453,7 +1467,7 @@ pathlib.Path('a11.txt').write_text(response.text)
 
 file = genai.upload_file(path='a11.txt')
 
-model = genai.GenerativeModel('gemini-3.5-flash')
+model = genai.GenerativeModel('gemini-3.6-flash')
 response = model.generate_content([
     'Can you summarize this file:',
     my_file
@@ -1461,7 +1475,7 @@ response = model.generate_content([
 print(response.text)
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
@@ -1480,7 +1494,7 @@ pathlib.Path('a11.txt').write_text(response.text)
 my_file = client.files.upload(file='a11.txt')
 
 response = client.models.generate_content(
-    model='gemini-3.5-flash',
+    model='gemini-3.6-flash',
     contents=[
         'Can you summarize this file:',
         my_file
@@ -1489,11 +1503,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### 列出和获取
+### Auflisten und abrufen
 
-列出已上传的文件并获取具有特定文件名的已上传文件：
+Hochgeladene Dateien auflisten und eine hochgeladene Datei mit einem Dateinamen abrufen:
 
-**之前**
+**Vorher**
 
 ### Python
 
@@ -1506,7 +1520,7 @@ for file in genai.list_files():
 file = genai.get_file(name=file.name)
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
@@ -1520,11 +1534,11 @@ for file in client.files.list():
 file = client.files.get(name=file.name)
 ```
 
-### 删除
+### Löschen
 
-删除文件：
+Datei löschen:
 
-**之前**
+**Vorher**
 
 ### Python
 
@@ -1538,7 +1552,7 @@ dummy_file = genai.upload_file(path='dummy.txt')
 file = genai.delete_file(name=dummy_file.name)
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
@@ -1554,11 +1568,11 @@ dummy_file = client.files.upload(file='dummy.txt')
 response = client.files.delete(name=dummy_file.name)
 ```
 
-## 上下文缓存
+## Kontext-Caching
 
-借助上下文缓存，用户只需将内容传递给模型一次，即可缓存输入 token，然后在后续调用中引用缓存的 token，从而降低费用。
+Mit dem Kontext-Caching kann der Nutzer den Inhalt einmal an das Modell übergeben, die Eingabetokens im Cache speichern und dann in nachfolgenden Aufrufen auf die im Cache gespeicherten Tokens verweisen, um die Kosten zu senken.
 
-**之前**
+**Vorher**
 
 ### Python
 
@@ -1578,7 +1592,7 @@ document = genai.upload_file(path="a11.txt")
 
 # Create cache
 apollo_cache = caching.CachedContent.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     system_instruction="You are an expert at analyzing transcripts.",
     contents=[document],
 )
@@ -1604,7 +1618,7 @@ const uploadResult = await fileManager.uploadFile("path/to/a11.txt", {
 });
 
 const cacheResult = await cacheManager.create({
-  model: "models/gemini-3.5-flash",
+  model: "models/gemini-3.6-flash",
   contents: [
     {
       role: "user",
@@ -1630,7 +1644,7 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
@@ -1658,7 +1672,7 @@ pathlib.Path('a11.txt').write_text(response.text)
 document = client.files.upload(file='a11.txt')
 
 # Create cache
-model='gemini-3.5-flash'
+model='gemini-3.6-flash'
 apollo_cache = client.caches.create(
       model=model,
       config={
@@ -1689,7 +1703,7 @@ const document = await ai.files.upload({
   config: { mimeType: "text/plain" },
 });
 console.log("Uploaded file name:", document.name);
-const modelName = "gemini-3.5-flash";
+const modelName = "gemini-3.6-flash";
 
 const contents = [
   createUserContent(createPartFromUri(document.uri, document.mimeType)),
@@ -1712,18 +1726,18 @@ const response = await ai.models.generateContent({
 console.log("Response text:", response.text);
 ```
 
-## 统计 token 数量
+## Tokens zählen
 
-统计请求中的 token 数量。
+Anzahl der Tokens in einer Anfrage zählen.
 
-**之前**
+**Vorher**
 
 ### Python
 
 ```
 import google.generativeai as genai
 
-model = genai.GenerativeModel('gemini-3.5-flash')
+model = genai.GenerativeModel('gemini-3.6-flash')
 response = model.count_tokens(
     'The quick brown fox jumps over the lazy dog.')
 ```
@@ -1735,7 +1749,7 @@ response = model.count_tokens(
 
  const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
  const model = genAI.getGenerativeModel({
-   model: "gemini-3.5-flash",
+   model: "gemini-3.6-flash",
  });
 
  // Count tokens in a prompt without calling text generation.
@@ -1758,7 +1772,7 @@ response = model.count_tokens(
  // { promptTokenCount: 11, candidatesTokenCount: 124, totalTokenCount: 135 }
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
@@ -1768,7 +1782,7 @@ from google import genai
 client = genai.Client()
 
 response = client.models.count_tokens(
-    model='gemini-3.5-flash',
+    model='gemini-3.6-flash',
     contents='The quick brown fox jumps over the lazy dog.',
 )
 ```
@@ -1781,23 +1795,23 @@ import {GoogleGenAI} from '@google/genai';
 const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
 const prompt = "The quick brown fox jumps over the lazy dog.";
 const countTokensResponse = await ai.models.countTokens({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   contents: prompt,
 });
 console.log(countTokensResponse.totalTokens);
 
 const generateResponse = await ai.models.generateContent({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   contents: prompt,
 });
 console.log(generateResponse.usageMetadata);
 ```
 
-## 生成图片
+## Bilder erstellen
 
-生成图片：
+Bilder erstellen:
 
-**之前**
+**Vorher**
 
 ### Python
 
@@ -1816,7 +1830,7 @@ gen_images = imagen.generate_images(
 )
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
@@ -1841,11 +1855,11 @@ for n, image in enumerate(gen_images.generated_images):
         image.image.image_bytes)
 ```
 
-## 嵌入内容
+## Inhalte einbetten
 
-生成内容嵌入。
+Inhaltseinbettungen generieren.
 
-**之前**
+**Vorher**
 
 ### Python
 
@@ -1873,7 +1887,7 @@ const result = await model.embedContent("Hello world!");
 console.log(result.embedding);
 ```
 
-**之后**
+**Nachher**
 
 ### Python
 
@@ -1903,12 +1917,12 @@ const result = await ai.models.embedContent({
 console.log(result.embeddings);
 ```
 
-发送反馈
+Feedback geben
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-最后更新时间 (UTC)：2026-06-22。
+Zuletzt aktualisiert: 2026-09-12 (UTC).
 
-需要向我们提供更多信息？
+Haben Sie Feedback für uns?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-22。"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-12 (UTC)."],[],[]]

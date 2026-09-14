@@ -1,66 +1,73 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/usage-policies?hl=he
-fetched_at: 2026-09-07T05:41:52.613438+00:00
-title: "\u05de\u05e2\u05e7\u05d1 \u05d0\u05d7\u05e8 \u05de\u05e7\u05e8\u05d9\u05dd \u05e9\u05dc \u05e9\u05d9\u05de\u05d5\u05e9 \u05dc\u05e8\u05e2\u05d4 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/usage-policies?hl=it
+fetched_at: 2026-09-14T05:47:15.540715+00:00
+title: "Monitoraggio degli abusi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-שליחת משוב
+Invia feedback
 
-# מעקב אחר מקרים של שימוש לרעה
+# Monitoraggio degli abusi
 
-‫Google מחויבת לפיתוח ולשימוש אחראיים ב-AI. כדי להבטיח את הבטיחות והיושרה של Gemini API, יצרנו את הנחיות המדיניות האלה.
-השימוש ב-Gemini API כפוף להנחיות הבאות, [לתנאים ולהגבלות הנוספים של Gemini API](https://ai.google.dev/gemini-api/terms?hl=he) ול[מדיניות בנושא שימוש אסור](https://policies.google.com/terms/generative-ai/use-policy?hl=he) ב-AI גנרטיבי.
+Google si impegna a sviluppare e utilizzare l'AI in modo responsabile. Per garantire la
+sicurezza e l'integrità dell'API Gemini, abbiamo creato queste linee guida sulle norme.
+Utilizzando l'API Gemini, accetti le seguenti linee guida, i [Termini di servizio aggiuntivi dell'API Gemini](https://ai.google.dev/gemini-api/terms?hl=it) e le [Norme relative all'uso vietato dell'AI generativa](https://policies.google.com/terms/generative-ai/use-policy?hl=it).
 
-## איך אנחנו עוקבים אחרי שימוש לרעה
+## Come monitoriamo l'uso improprio
 
-צוות האמון והבטיחות של Google משתמש בשילוב של תהליכים אוטומטיים וידניים כדי לזהות שימוש לרעה פוטנציאלי ב-Gemini API וב-Google AI Studio, במטרה לאכוף את המדיניות שלנו.
+Il team Trust and Safety di Google utilizza una combinazione di processi automatici e manuali per rilevare potenziali usi illeciti dell'API Gemini e di Google AI Studio al fine di applicare le nostre norme.
 
-- **זיהוי אוטומטי:** מערכות אוטומטיות סורקות את השימוש ב-API כדי לזהות הפרות של המדיניות שלנו בנושא שימוש אסור, כמו דברי שטנה, הטרדה, תוכן מיני בוטה ותוכן מסוכן.
-- **זיהוי ידני:** אם בפרויקט מסוים מזוהה פעילות חשודה באופן עקבי, יכול להיות שהוא יסומן לבדיקה ידנית על ידי צוות מורשה של Google.
+- **Rilevamento automatico**:i sistemi automatizzati analizzano l'utilizzo delle API per rilevare violazioni delle
+  nostre Norme relative all'uso vietato, come incitamento all'odio, molestie, contenuti
+  sessualmente espliciti e pericolosi.
+- **Rilevamento manuale**:se un progetto mostra costantemente attività sospette, potrebbe essere segnalato per la revisione manuale da parte del personale Google autorizzato.
 
-## איך אנחנו מטפלים בנתונים
+## Come gestiamo i dati
 
-‫Google שומרת את הנתונים הבאים למשך חמישים וחמישה (55) ימים למטרות זיהוי ומניעה של הפרות של מדיניות השימוש האסור, כדי לשמור על הבטיחות והאבטחה של השירותים, ולכל גילוי נאות משפטי או רגולטורי שנדרש:
+Google conserva i seguenti dati per cinquantacinque (55) giorni allo scopo di rilevare e prevenire violazioni delle Norme sull'uso vietato per mantenere la sicurezza dei Servizi e qualsiasi divulgazione legale o normativa richiesta:
 
-- **הנחיות:** הנחיות הטקסט שאתם שולחים ל-API.
-- **מידע הקשרי:** כל הקשר נוסף שאתם מספקים בהנחיות.
-- **פלט:** התשובות שנוצרו על ידי Gemini API.
+- **Prompt**:i prompt di testo che invii all'API.
+- **Informazioni contestuali**:qualsiasi contesto aggiuntivo che fornisci con i tuoi
+  prompt.
+- **Output**:le risposte generate dall'API Gemini.
 
-## איך אנחנו בודקים בעיות פוטנציאליות
+## Come esaminiamo i potenziali problemi
 
-כשמסנני הבטיחות ומערכות זיהוי ההתנהלות הפוגעת שתוארו למעלה מסמנים הנחיות או פלט של מודלים, עובדי Google מורשים יכולים להעריך את התוכן המסומן, ולאשר או לתקן את הסיווג או את ההחלטה על סמך הנחיות ומדיניות מוגדרות מראש. רק עובדי Google מורשים יכולים לגשת לנתונים לצורך בדיקה אנושית, באמצעות פלטפורמה פנימית לניהול הערכות ובדיקות. כשנתונים נרשמים לצורך מעקב אחרי התנהלות פוגעת, הם משמשים אך ורק לאכיפת מדיניות ולמניעת הפרות מדיניות. הם לא משמשים לאימון או לשיפור של מודלים של AI/ML, מלבד אלה שמשמשים ספציפית לאכיפת מדיניות.
+Quando i prompt o gli output del modello vengono segnalati dai filtri di sicurezza e dai sistemi di rilevamento di abusi descritti sopra, i dipendenti Google autorizzati possono valutare i contenuti segnalati e confermare o correggere la classificazione o la determinazione in base a linee guida e norme predefinite. I dati possono essere consultati per la revisione umana solo da dipendenti Google autorizzati tramite una piattaforma interna di gestione della valutazione e della revisione della governance. Quando i dati vengono registrati per il monitoraggio degli abusi, vengono utilizzati esclusivamente allo scopo di applicare le norme e prevenire le violazioni delle norme. Non vengono utilizzati per addestrare o perfezionare modelli di AI/ML, ad eccezione di quelli utilizzati specificamente per l'applicazione delle norme.
 
-## עבודה איתכם בנושא עמידה בדרישות המדיניות
+## Collaborare con te per la conformità alle norme
 
-אם השימוש שלכם ב-Gemini לא תואם למדיניות שלנו, יכול להיות שננקוט את הפעולות הבאות:
+Se il tuo utilizzo di Gemini non è in linea con le nostre norme, potremmo adottare i seguenti
+passaggi:
 
-- **יצירת קשר:** יכול להיות שנפנה אליך באימייל כדי להבין את תרחיש השימוש שלך ולבדוק דרכים להבטיח שהשימוש שלך יעמוד בדרישות.
-- **מגבלות שימוש זמניות:** יכול להיות שנצטרך להגביל את הגישה שלכם ל-Gemini API על ידי התאמת המכסות לקצב שליחת בקשות או שינוי המודל שמשיב לבקשה ספציפית, למשל.
-- **השעיה זמנית:** יכול להיות שנשהה באופן זמני את הגישה שלכם ל-Gemini API.
-- **סגירת החשבון:** כמוצא אחרון, ובמקרים של הפרות חמורות, אנחנו עשויים לסגור באופן סופי את הגישה שלכם ל-Gemini API ולשירותי Google אחרים.
+- **Contattaci**:potremmo contattarti via email per comprendere il tuo caso d'uso ed esplorare modi per rendere il tuo utilizzo conforme.
+- **Limiti di utilizzo temporanei**:potremmo limitare il tuo accesso all'API Gemini modificando i limiti di frequenza o il modello che risponde a una richiesta specifica, ad esempio.
+- **Sospensione temporanea:** potremmo sospendere temporaneamente il tuo accesso all'API Gemini.
+- **Chiusura dell'account:** come ultima risorsa e in caso di violazioni gravi, potremmo
+  chiudere definitivamente il tuo accesso all'API Gemini e ad altri servizi Google.
 
-אם ניצור איתכם קשר לגבי השעיה או סגירה של חשבון, נספק גם קישור שדרכו תוכלו לערער.
+Se ti contattiamo in merito a una sospensione o alla chiusura dell'account, ti forniremo anche
+un link da cui potrai presentare ricorso.
 
-## היקף
+## Ambito
 
-ההנחיות האלה בנושא מדיניות חלות על השימוש ב-Gemini API וב-AI Studio.
+Queste linee guida sulle norme si applicano all'utilizzo dell'API Gemini e di AI Studio.
 
-שליחת משוב
+Invia feedback
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-עדכון אחרון: 2026-06-09 (שעון UTC).
+Ultimo aggiornamento 2026-06-09 UTC.
 
-רוצה לתת לנו משוב?
+Vuoi dirci altro?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-09 (שעון UTC)."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-06-09 UTC."],[],[]]

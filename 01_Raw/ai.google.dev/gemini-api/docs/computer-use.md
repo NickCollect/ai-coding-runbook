@@ -1,39 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/computer-use?hl=es-419
-fetched_at: 2026-09-07T05:44:41.792687+00:00
-title: "Uso de la computadora \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/computer-use?hl=pt-BR
+fetched_at: 2026-09-14T05:39:51.848468+00:00
+title: "Uso de computador \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Enviar comentarios
+Envie comentários
 
-# Uso de la computadora
+# Uso de computador
 
-La herramienta Uso de la computadora te permite crear agentes de control para navegadores, dispositivos móviles y computadoras de escritorio que interactúan con tareas y las automatizan. Con las capturas de pantalla, el modelo puede "ver" una pantalla de computadora y "actuar" generando acciones específicas de la IU, como clics del mouse y entradas del teclado. Al igual que con la llamada a funciones, deberás implementar el entorno de ejecución del cliente para recibir y ejecutar las acciones de uso de la computadora.
+Com a ferramenta Uso do computador, você cria agentes de controle para navegadores, dispositivos móveis e computadores que interagem e automatizam tarefas. Usando capturas de tela, o modelo pode "ver" uma tela de computador e "agir" gerando ações específicas da interface, como cliques do mouse e entradas de teclado. Assim como na chamada de função, você precisa implementar o ambiente de execução do lado do cliente para receber e executar as ações de uso do computador.
 
-Para obtener la lista de modelos compatibles, consulta [Versiones de modelos](#model-versions). Los modelos de Gemini 3.x admiten varias capacidades avanzadas:
+O Gemini 3.5 Flash é o modelo recomendado para uso em computadores e apresenta várias novas funcionalidades:
 
-- **Compatibilidad con múltiples entornos:** Agentes de compilación para entornos de [navegadores, dispositivos móviles y computadoras](#supported-environments)
-- **Acciones optimizadas con intents:** Las acciones incluyen un campo `intent` que explica el razonamiento del modelo detrás de cada paso.
-- **Políticas de seguridad configurables:** Ajusta el [comportamiento de seguridad](#safety-policies) con categorías de políticas y anulaciones integradas.
-- **Detección de inyección de instrucciones:** Habilita la [exploración de capturas de pantalla](#prompt-injection) para detectar instrucciones adversarias ocultas.
+- **Suporte a vários ambientes**:crie agentes de build para ambientes de [navegador, dispositivos móveis e computadores](#supported-environments).
+- **Ações simplificadas com intents**:as ações incluem um campo `intent` que explica o raciocínio do modelo por trás de cada etapa.
+- **Políticas de segurança configuráveis**:ajuste o [comportamento de segurança](#safety-policies) com categorias e substituições de políticas integradas.
+- **Detecção de injeção de comandos**:ative a [verificação de capturas de tela](#prompt-injection) para detectar instruções adversárias ocultas.
 
-Con Computer Use, puedes compilar agentes que hagan lo siguiente:
+Com o uso do computador, é possível criar agentes que:
 
-- Automatiza el ingreso de datos repetitivos o el llenado de formularios en sitios web.
-- Realiza pruebas automatizadas de aplicaciones web y flujos de usuarios
-- Realizar investigaciones en varios sitios web (p.ej., recopilar información de productos, precios y opiniones de sitios de comercio electrónico para tomar una decisión de compra)
+- Automatizar a entrada de dados repetitivos ou o preenchimento de formulários em sites.
+- Realizar testes automatizados de aplicativos da Web e fluxos de usuários
+- Fazer pesquisas em vários sites (por exemplo, coletar informações de produtos, preços e avaliações de sites de e-commerce para informar uma compra)
 
-Este es un ejemplo mínimo de cómo inicializar el cliente y enviar una instrucción al modelo con la herramienta `computer_use` habilitada para un entorno de navegador:
+Confira um exemplo mínimo de inicialização do cliente e envio de um comando ao modelo com a ferramenta `computer_use` ativada para um ambiente de navegador:
 
 ### Python
 
@@ -43,7 +43,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.7-flash",
+    model="gemini-3.6-flash",
     input="Search for 'Gemini API' on Google.",
     tools=[{"type": "computer_use", "environment": "browser"}]
 )
@@ -59,7 +59,7 @@ import { GoogleGenAI } from '@google/genai';
 const ai = new GoogleGenAI();
 
 const interaction = await ai.interactions.create({
-  model: 'gemini-3.7-flash',
+  model: 'gemini-3.6-flash',
   input: "Search for 'Gemini API' on Google.",
   tools: [{ type: "computer_use", environment: "browser" }]
 });
@@ -67,45 +67,54 @@ const interaction = await ai.interactions.create({
 console.log(interaction);
 ```
 
-## Cómo funciona el uso de la computadora
+## Como o uso de computador funciona
 
-Para crear un agente con el modelo de Computer Use, debes configurar un bucle continuo entre tu aplicación y la API. Esto es lo que hará tu código en cada paso:
+Para criar um agente com o modelo de uso de computador, é necessário configurar um loop contínuo entre o aplicativo e a API. Confira o que seu código
+vai fazer em cada etapa:
 
-1. [**Envía una solicitud al modelo**](#send-request)
-   - Tu aplicación envía una solicitud a la API que contiene la herramienta Uso de la computadora, tu configuración (como el entorno de destino), la instrucción del usuario y una captura de pantalla de la pantalla actual.
-2. [**Recibe la respuesta del modelo**](#model-response)
-   - El modelo analiza la pantalla y la instrucción, y devuelve una respuesta que incluye un `function_call` sugerido que representa una acción de la IU (como un clic, un desplazamiento o una pulsación de tecla).
-   - En el caso de los **modelos de Gemini 3.x**, la respuesta también incluye un razonamiento `intent` que explica por qué el modelo eligió esa acción.
-   - La respuesta también puede incluir un `safety_decision` de un sistema de seguridad interno que clasifica la acción como normal o permitida, `require_confirmation` (que requiere la aprobación del usuario) o bloqueada.
-3. [**Ejecuta la acción recibida**](#execute-actions)
-   - Si se permite la acción (o el usuario la confirma), tu código del cliente analiza el objeto `function_call`, ajusta las coordenadas normalizadas para que coincidan con tu viewport y ejecuta la acción en tu entorno de destino con herramientas de automatización (como Playwright). Si la acción está bloqueada, tu cliente debe detener la ejecución o controlar la interrupción.
-4. [**Captura el estado del entorno nuevo**](#capture-state)
-   - Después de que la acción termina de ejecutarse, tu aplicación captura una nueva captura de pantalla y la envía de vuelta al modelo en un `function_result` para solicitar el siguiente paso.
+1. [**Enviar uma solicitação para o modelo**](#send-request)
+   - O aplicativo envia uma solicitação de API que contém a ferramenta de uso do computador, as configurações de configuração (como o ambiente de destino), o comando do usuário e uma captura de tela da tela atual.
+2. [**Receber a resposta do modelo**](#model-response)
+   - O modelo analisa a tela e o comando, retornando uma resposta que inclui um `function_call` sugerido representando uma ação da interface (como um clique, rolagem ou pressionamento de tecla).
+   - Para o **Gemini 3.5 Flash**, a resposta também inclui um raciocínio `intent`
+     explicando por que o modelo escolheu essa ação.
+   - A resposta também pode incluir um `safety_decision` de um sistema de segurança interno que classifica a ação como regular/permitida, `require_confirmation` (exigindo aprovação do usuário) ou bloqueada.
+3. [**Execute a ação recebida**](#execute-actions)
+   - Se a ação for permitida (ou o usuário confirmar), seu código do lado do cliente vai analisar o `function_call`, dimensionar as coordenadas normalizadas para corresponder à sua janela de visualização e executar a ação no ambiente de destino usando ferramentas de automação (como o Playwright). Se a ação for bloqueada, o
+     cliente vai interromper a execução ou processar a interrupção.
+4. [**Capturar o novo estado do ambiente**](#capture-state)
+   - Depois que a ação termina de ser executada, o aplicativo captura uma nova
+     captura de tela e a envia de volta ao modelo em um `function_result` para
+     solicitar a próxima etapa.
 
-Luego, este proceso se repite desde el paso 2, y se solicita continuamente la siguiente acción del modelo hasta que se completa o finaliza la tarea.
+Esse processo se repete desde a etapa 2, solicitando continuamente a próxima ação
+do modelo até que a tarefa seja concluída ou encerrada.
 
-![Descripción general del uso de la computadora](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=es-419)
+![Visão geral do uso de computador](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=pt-br)
 
-## Cómo implementar el uso de la computadora
+## Como implementar o uso do computador
 
-Antes de compilar con la herramienta Uso de la computadora, deberás configurar lo siguiente:
+Antes de criar com a ferramenta "Uso do computador", você precisa configurar:
 
-- **Entorno de ejecución seguro:** Ejecuta tu agente en una VM o un contenedor de zona de pruebas para aislarlo de tu sistema host y limitar su impacto potencial.
-  La [implementación de referencia](https://github.com/google/computer-use-preview/) incluye un entorno de pruebas basado en Docker listo para usar que puedes utilizar como punto de partida.
-- **Controlador de acciones del cliente:** Implementa la lógica del cliente para ejecutar coordenadas, escribir texto y tomar capturas de pantalla.
+- **Ambiente de execução seguro**:execute o agente em uma VM ou
+  contêiner em sandbox para isolá-lo do sistema host e limitar o impacto potencial.
+  A [implementação de referência](https://github.com/google/computer-use-preview/)
+  inclui um sandbox baseado em Docker pronto para uso que você pode usar como ponto de partida.
+- **Gerenciador de ações do lado do cliente**:implemente a lógica do lado do cliente para executar coordenadas, digitar texto e fazer capturas de tela.
 
-En los siguientes ejemplos, se usa un navegador web como entorno de ejecución y [Playwright](https://playwright.dev/) como controlador del cliente.
+Os exemplos abaixo usam um navegador da Web como ambiente de execução e o
+[Playwright](https://playwright.dev/) como manipulador do lado do cliente.
 
-### 0. Configura Playwright
+### 0. Configurar o Playwright
 
-Primero, instala los paquetes requeridos:
+Primeiro, instale os pacotes necessários:
 
 ```
 pip install google-genai playwright
 playwright install chromium
 ```
 
-Luego, inicializa una instancia del navegador Playwright para usarla en la ejecución:
+Em seguida, inicialize uma instância do navegador Playwright para usar na execução:
 
 ```
 from playwright.sync_api import sync_playwright
@@ -133,15 +142,15 @@ page.goto("https://www.google.com")
 # will be used in the steps below.
 ```
 
-### 1. Envía una solicitud al modelo
+### 1. Enviar uma solicitação ao modelo
 
-Inicializa la biblioteca cliente y configura la herramienta Computer Use. Ten en cuenta que no es necesario especificar el tamaño de visualización cuando se envía una solicitud. El modelo predice las coordenadas de píxeles ajustadas a la altura y el ancho de la pantalla.
+Inicialize a biblioteca de cliente e configure a ferramenta "Uso do computador". Não é necessário especificar o tamanho da tela ao fazer uma solicitação. O modelo prevê coordenadas de pixel dimensionadas para a altura e a largura da tela.
 
-### ?', 'Gemini 3.x
+### Gemini 3.5 Flash (recomendado)
 
 ### Python
 
-Usa el SDK de `google-genai` de Python (versión `2.7.0` o posterior) para configurar una solicitud que se oriente al entorno del navegador:
+Use o SDK do Python `google-genai` (versão `2.7.0` ou mais recente) para configurar uma solicitação direcionada ao ambiente do navegador:
 
 ```
 from google import genai
@@ -149,7 +158,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model='gemini-3.7-flash',
+    model='gemini-3.6-flash',
     input="Find a flight from SF to Hawaii on Jun 30th, coming back on Jul 6th",
     tools=[
         {
@@ -165,7 +174,7 @@ print(interaction)
 
 ### JavaScript
 
-Usa el SDK de Node.js de `@google/genai` para configurar una solicitud que se oriente al entorno del navegador:
+Use o SDK do Node.js `@google/genai` para configurar uma solicitação direcionada ao ambiente do navegador:
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -173,7 +182,7 @@ import { GoogleGenAI } from '@google/genai';
 const ai = new GoogleGenAI();
 
 const interaction = await ai.interactions.create({
-  model: 'gemini-3.7-flash',
+  model: 'gemini-3.6-flash',
   input: "Find a flight from SF to Hawaii on Jun 30th, coming back on Jul 6th",
   tools: [
     {
@@ -189,7 +198,7 @@ console.log(interaction);
 
 ### REST
 
-Usa curl para enviar una solicitud:
+Use curl para enviar uma solicitação:
 
 ```
 curl -X POST \
@@ -197,7 +206,7 @@ curl -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.7-flash",
+    "model": "gemini-3.6-flash",
     "input": "Find me a flight from SF to Hawaii on Jun 30th, coming back on Jul 6th. Start by navigating directly to flights.google.com",
     "tools": [
       {
@@ -209,7 +218,7 @@ curl -X POST \
   }'
 ```
 
-### Gemini 2.5 (heredado)
+### Gemini 2.5 (legado)
 
 ### Python
 
@@ -261,11 +270,11 @@ const interaction = await ai.interactions.create({
 console.log(interaction);
 ```
 
-### 2. Recibe la respuesta del modelo
+### 2. Receber a resposta do modelo
 
-El modelo de respuesta sugiere una llamada a función. En el caso de los **modelos de Gemini 3.x**, la respuesta contiene una intención de razonamiento personalizada junto con las coordenadas. A continuación, se muestran ejemplos de ambas respuestas:
+O modelo de resposta sugere uma chamada de função. Para o **Gemini 3.5 Flash**, a resposta contém uma intent de raciocínio personalizada com coordenadas. Confira exemplos das duas respostas:
 
-### Gemini 3.x
+### Gemini 3.5 Flash
 
 ```
 {
@@ -283,7 +292,7 @@ El modelo de respuesta sugiere una llamada a función. En el caso de los **model
 }
 ```
 
-### Gemini 2.5 (heredado)
+### Gemini 2.5 (legado)
 
 ```
 {
@@ -311,11 +320,11 @@ El modelo de respuesta sugiere una llamada a función. En el caso de los **model
 }
 ```
 
-### 3. Ejecuta las acciones recibidas
+### 3. Executar as ações recebidas
 
-Tu aplicación debe analizar las coordenadas de respuesta, ejecutar la acción y ajustarlas a partir de las coordenadas normalizadas de 1,000 x 1,000.
+Seu aplicativo precisa analisar as coordenadas de resposta, executar a ação e dimensioná-las com base nas coordenadas normalizadas de 1000 x 1000.
 
-El siguiente código controla los comandos de herramientas heredadas (`click_at`, `type_text_at`) y los comandos modernos optimizados (`click`, `type`).
+O código abaixo processa comandos de ferramentas legadas (`click_at`, `type_text_at`) e comandos simplificados do Gemini 3.5 Flash (`click`, `type`).
 
 ### Python
 
@@ -480,9 +489,9 @@ async function executeFunctionCalls(interaction, page, screenWidth, screenHeight
 }
 ```
 
-### 4. Aware of the new environment state
+### 4. Capturar o estado do novo ambiente
 
-Después de ejecutar las acciones, envía el resultado de la ejecución de la función al modelo para que pueda usar esta información para generar la siguiente acción. Si se ejecutaron varias acciones (llamadas paralelas), debes enviar un `function_result` para cada una en el turno del usuario subsiguiente.
+Depois de executar as ações, envie o resultado da execução da função de volta ao modelo para que ele possa usar essas informações e gerar a próxima ação. Se várias ações (chamadas paralelas) foram executadas, envie um `function_result` para cada uma delas na próxima vez que o usuário falar.
 
 ### Python
 
@@ -545,14 +554,16 @@ async function getFunctionResponses(page, results) {
 }
 ```
 
-Una vez que hayas definido cómo capturar y dar formato al estado del entorno, puedes combinar todos estos pasos en un bucle de ejecución continua.
+Depois de definir como capturar e formatar o estado do ambiente, você pode
+combinar todas essas etapas em um loop de execução contínua.
 
-## Crea un bucle de agente
+## Criar um loop do agente
 
-Para habilitar las interacciones de varios pasos, combina los cuatro pasos de la sección [Cómo implementar el uso de la computadora](#implement-computer-use) en un solo bucle.
-Este bucle continúa solicitando acciones y devolviendo los resultados al modelo hasta que se completa la tarea.
+Para ativar interações de várias etapas, combine as quatro etapas da seção [Como implementar o uso do computador](#implement-computer-use) em um único loop.
+Esse loop continua solicitando ações e enviando os resultados de volta ao modelo
+até que a tarefa seja concluída.
 
-Recuerda administrar el historial de conversación correctamente agregando las respuestas del modelo y las de tu función al historial en cada paso.
+Não se esqueça de gerenciar o histórico de conversas corretamente, anexando as respostas do modelo e da função ao histórico em cada etapa.
 
 ### Python
 
@@ -593,7 +604,7 @@ try:
 
     # First interaction
     interaction = client.interactions.create(
-        model='gemini-3.7-flash',
+        model='gemini-3.6-flash',
         input=[
             {"type": "text", "text": USER_PROMPT},
             {"type": "image", "data": base64.b64encode(initial_screenshot).decode("utf-8"), "mime_type": "image/png"}
@@ -630,7 +641,7 @@ try:
 
         # Continue conversation with function responses
         interaction = client.interactions.create(
-            model='gemini-3.7-flash',
+            model='gemini-3.6-flash',
             previous_interaction_id=interaction.id,
             input=function_responses,
             tools=[{
@@ -684,7 +695,7 @@ try {
 
     // First interaction
     let interaction = await ai.interactions.create({
-        model: 'gemini-3.7-flash',
+        model: 'gemini-3.6-flash',
         input: [
             { type: 'text', text: USER_PROMPT },
             { type: 'image', data: initialScreenshotBase64, mime_type: 'image/png' }
@@ -725,7 +736,7 @@ try {
 
         // Continue conversation with function responses
         interaction = await ai.interactions.create({
-            model: 'gemini-3.7-flash',
+            model: 'gemini-3.6-flash',
             previous_interaction_id: interaction.id,
             input: functionResponses,
             tools: [{
@@ -742,107 +753,107 @@ try {
 }
 ```
 
-## Entornos compatibles (Gemini 3.x)
+## Ambientes compatíveis (Gemini 3.5 Flash)
 
-Los modelos de Gemini 3.x admiten tres entornos especificados en las configuraciones de `computer_use`:
+O Gemini 3.5 Flash é compatível com três ambientes especificados nas configurações de `computer_use`:
 
-### Entorno del navegador (`ENVIRONMENT_BROWSER`)
+### Ambiente do navegador (`ENVIRONMENT_BROWSER`)
 
-Acciones disponibles en la herramienta del navegador:
+Ações disponíveis na ferramenta do navegador:
 
-| Nombre del comando | Descripción | Argumentos (en la llamada a la función) |
+| Nome do comando | Descrição | Argumentos (na chamada de função) |
 | --- | --- | --- |
-| **click** | Hace clic con el botón izquierdo en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **double\_click** | Hace doble clic en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **triple\_click** | Hace tres clics en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **middle\_click** | Se hace clic con el botón central en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **right\_click** | Haz clic con el botón derecho en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_down** | Presiona y mantiene presionado el botón del mouse en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_up** | Suelta el botón del mouse en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **move** | Mueve el cursor a la posición especificada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **type** | Escribe texto. | `text`: str `press_enter`: bool (opcional, el valor predeterminado es `false`) `intent`: str |
-| **drag\_and\_drop** | Arrastra un elemento desde la coordenada de inicio hasta la coordenada de finalización. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
-| **wait** | Pausa la ejecución durante una cantidad específica de segundos. | `seconds`: int (opcional, valor predeterminado `1`) `intent`: str |
-| **press\_key** | Presiona la tecla especificada y la suelta. | `key`: str `intent`: str |
-| **key\_down** | Presiona y mantiene presionada la tecla especificada. | `key`: str `intent`: str |
-| **key\_up** | Suelta la tecla especificada. | `key`: str `intent`: str |
-| **Tecla de acceso rápido** | Presiona la combinación de teclas especificada. | `keys`: `List[str]` `intent`: `str` |
-| **take\_screenshot** | Devuelve una captura de pantalla de la pantalla actual. | `intent`: str |
-| **scroll** | Se desplaza hacia arriba, abajo, izquierda o derecha en una coordenada por una distancia de píxeles. | `y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, opcional, valor predeterminado `300`) `intent`: str |
-| **go\_back** | varez a la página web anterior del historial del navegador. | `intent`: str |
-| **navegar** | Navega directamente a una URL especificada. | `url`: str `intent`: str |
-| **go\_forward** | Navega hacia adelante a la siguiente página web en el historial del navegador. | `intent`: str |
+| **click** | Clique com o botão esquerdo na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **double\_click** | Clique duas vezes na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **triple\_click** | Clica três vezes na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **middle\_click** | Clique com o botão do meio na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **right\_click** | Clica com o botão direito do mouse na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **mouse\_down** | Toca e mantém pressionado o botão do mouse na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **mouse\_up** | Solta o botão do mouse na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **move** | Move o cursor para a posição especificada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **type** | Digita texto. | `text`: str `press_enter`: bool (opcional, padrão `false`) `intent`: str |
+| **drag\_and\_drop** | Arrasta um item da coordenada inicial até a coordenada final. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
+| **wait** | Pausa a execução por um número especificado de segundos. | `seconds`: int (opcional, padrão `1`) `intent`: str |
+| **press\_key** | Pressiona e solta a tecla especificada. | `key`: str `intent`: str |
+| **key\_down** | Pressiona e mantém pressionada a tecla especificada. | `key`: str `intent`: str |
+| **key\_up** | Libera a chave especificada. | `key`: str `intent`: str |
+| **tecla de atalho** | Pressiona a combinação de teclas especificada. | `keys`: `List[str]` `intent`: `str` |
+| **take\_screenshot** | Retorna uma captura de tela da tela atual. | `intent`: str |
+| **scroll** | Rola para cima, para baixo, para a esquerda ou para a direita em uma coordenada por uma distância de pixel. | `y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, opcional, padrão `300`) `intent`: str |
+| **go\_back** | Volta para a página da Web anterior no histórico do navegador. | `intent`: str |
+| **navigate** | Navega diretamente para um URL especificado. | `url`: str `intent`: str |
+| **go\_forward** | Navega para a próxima página da Web no histórico do navegador. | `intent`: str |
 
-### Entorno móvil (`ENVIRONMENT_MOBILE`)
+### Ambiente móvel (`ENVIRONMENT_MOBILE`)
 
-Acciones del entorno optimizado para Android:
+Ações de ambiente otimizado para Android:
 
-| Nombre del comando | Descripción | Argumentos (en la llamada a la función) |
+| Nome do comando | Descrição | Argumentos (na chamada de função) |
 | --- | --- | --- |
-| **open\_app** | Abre una aplicación por su nombre. | `app_name`: str `intent`: str |
-| **click** | Hace clic con el botón izquierdo en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **list\_apps** | Enumera las aplicaciones disponibles en el dispositivo y muestra sus nombres y nombres de paquete. | `intent`: str |
-| **wait** | Pausa la ejecución durante una cantidad específica de segundos. | `seconds`: int (opcional, valor predeterminado `1`) `intent`: str |
-| **go\_back** | CW: Navega de vuelta a la pantalla o página web anterior. | `intent`: str |
-| **type** | Escribe texto. | `text`: str `press_enter`: bool (opcional, el valor predeterminado es `false`) `intent`: str |
-| **drag\_and\_drop** | Arrastra un elemento desde la coordenada de inicio hasta la coordenada de finalización. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
-| **long\_press** | Realiza una presión prolongada en una coordenada de la pantalla. | `y`: int (0-999) `x`: int (0-999) `seconds`: int (opcional, valor predeterminado `2`) `intent`: str |
-| **press\_key** | Presiona la tecla especificada y la suelta. | `key`: str `intent`: str |
-| **take\_screenshot** | Devuelve una captura de pantalla de la pantalla actual. | `intent`: str |
+| **open\_app** | Abre um aplicativo pelo nome. | `app_name`: str `intent`: str |
+| **click** | Clique com o botão esquerdo na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **list\_apps** | Lista os aplicativos disponíveis no dispositivo, retornando os nomes e nomes de pacotes. | `intent`: str |
+| **wait** | Pausa a execução por um número especificado de segundos. | `seconds`: int (opcional, padrão `1`) `intent`: str |
+| **go\_back** | Volta para a tela ou página da Web anterior. | `intent`: str |
+| **type** | Digita texto. | `text`: str `press_enter`: bool (opcional, padrão `false`) `intent`: str |
+| **drag\_and\_drop** | Arrasta um item da coordenada inicial até a coordenada final. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
+| **long\_press** | Realiza um toque longo em uma coordenada na tela. | `y`: int (0-999) `x`: int (0-999) `seconds`: int (opcional, padrão `2`) `intent`: str |
+| **press\_key** | Pressiona e solta a tecla especificada. | `key`: str `intent`: str |
+| **take\_screenshot** | Retorna uma captura de tela da tela atual. | `intent`: str |
 
-### Entorno de escritorio (`ENVIRONMENT_DESKTOP`)
+### Ambiente de trabalho (`ENVIRONMENT_DESKTOP`)
 
-Comandos del cursor a nivel del SO de los entornos de escritorio:
+Comandos de cursor no nível do SO para ambientes de desktop:
 
-| Nombre del comando | Descripción | Argumentos (en la llamada a la función) |
+| Nome do comando | Descrição | Argumentos (na chamada de função) |
 | --- | --- | --- |
-| **click** | Hace clic con el botón izquierdo en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **double\_click** | Hace doble clic en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **triple\_click** | Hace tres clics en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **middle\_click** | Se hace clic con el botón central en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **right\_click** | Haz clic con el botón derecho en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_down** | Presiona y mantiene presionado el botón del mouse en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_up** | Suelta el botón del mouse en la coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **move** | Mueve el cursor a la posición especificada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **type** | Escribe texto. | `text`: str `press_enter`: bool (opcional, el valor predeterminado es `false`) `intent`: str |
-| **drag\_and\_drop** | Arrastra un elemento desde la coordenada de inicio hasta la coordenada de finalización. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
-| **wait** | Pausa la ejecución durante una cantidad específica de segundos. | `seconds`: int (opcional, valor predeterminado `1`) `intent`: str |
-| **press\_key** | Presiona la tecla especificada y la suelta. | `key`: str `intent`: str |
-| **key\_down** | Presiona y mantiene presionada la tecla especificada. | `key`: str `intent`: str |
-| **key\_up** | Suelta la tecla especificada. | `key`: str `intent`: str |
-| **Tecla de acceso rápido** | Presiona la combinación de teclas especificada. | `keys`: `List[str]` `intent`: `str` |
-| **take\_screenshot** | Devuelve una captura de pantalla de la pantalla actual. | `intent`: str |
-| **scroll** | Se desplaza hacia arriba, abajo, izquierda o derecha en una coordenada por una distancia de píxeles. | `y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, opcional, valor predeterminado `300`) `intent`: str |
+| **click** | Clique com o botão esquerdo na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **double\_click** | Clique duas vezes na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **triple\_click** | Clica três vezes na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **middle\_click** | Clique com o botão do meio na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **right\_click** | Clica com o botão direito do mouse na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **mouse\_down** | Toca e mantém pressionado o botão do mouse na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **mouse\_up** | Solta o botão do mouse na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **move** | Move o cursor para a posição especificada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **type** | Digita texto. | `text`: str `press_enter`: bool (opcional, padrão `false`) `intent`: str |
+| **drag\_and\_drop** | Arrasta um item da coordenada inicial até a coordenada final. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
+| **wait** | Pausa a execução por um número especificado de segundos. | `seconds`: int (opcional, padrão `1`) `intent`: str |
+| **press\_key** | Pressiona e solta a tecla especificada. | `key`: str `intent`: str |
+| **key\_down** | Pressiona e mantém pressionada a tecla especificada. | `key`: str `intent`: str |
+| **key\_up** | Libera a chave especificada. | `key`: str `intent`: str |
+| **tecla de atalho** | Pressiona a combinação de teclas especificada. | `keys`: `List[str]` `intent`: `str` |
+| **take\_screenshot** | Retorna uma captura de tela da tela atual. | `intent`: str |
+| **scroll** | Rola para cima, para baixo, para a esquerda ou para a direita em uma coordenada por uma distância de pixel. | `y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, opcional, padrão `300`) `intent`: str |
 
-## quirrel\_legacy\_supported\_ui\_actions (Gemini 2.5)
+## Ações legadas da interface compatíveis (Gemini 2.5)
 
-Para los modelos heredados (`gemini-2.5-computer-use-preview-10-2025`), se admiten las siguientes acciones:
+Para modelos legados (`gemini-2.5-computer-use-preview-10-2025`), as seguintes ações são compatíveis:
 
-| Nombre del comando | Descripción | Argumentos (en la llamada a la función) | Ejemplo de llamada a función |
+| Nome do comando | Descrição | Argumentos (na chamada de função) | Exemplo de chamada de função |
 | --- | --- | --- | --- |
-| **open\_web\_browser** | Abre el navegador web. | Ninguno | `{"name": "open_web_browser", "arguments": {}}` |
-| **wait\_5\_seconds** | Pausa la ejecución durante 5 segundos. | Ninguno | `{"name": "wait_5_seconds", "arguments": {}}` |
-| **go\_back** | Navega a la página anterior del historial. | Ninguno | `{"name": "go_back", "arguments": {}}` |
-| **go\_forward** | Navega a la página siguiente del historial. | Ninguno | `{"name": "go_forward", "arguments": {}}` |
-| **search** | Navega al motor de búsqueda predeterminado. | Ninguno | `{"name": "search", "arguments": {}}` |
-| **navegar** | Navega el navegador directamente a la URL especificada. | `url`: str | `{"name": "navigate", "arguments": {"url": "https://www.wikipedia.org"}}` |
-| **click\_at** | Hace clic en una coordenada específica. | `y`: int (0-999), `x`: int (0-999) | `{"name": "click_at", "arguments": {"y": 300, "x": 500}}` |
-| **hover\_at** | Coloca el cursor en una coordenada específica. | `y`: int (0-999), `x`: int (0-999) | `{"name": "hover_at", "arguments": {"y": 150, "x": 250}}` |
-| **type\_text\_at** | Escribe texto en una coordenada. | `y`: int (0 a 999), `x`: int (0 a 999), `text`: str, `press_enter`: bool (opcional, valor predeterminado es True), `clear_before_typing`: bool (opcional, valor predeterminado es True) | `{"name": "type_text_at", "arguments": {"y": 250, "x": 400, "text": "search", "press_enter": false}}` |
-| **key\_combination** | Presiona teclas o combinaciones. | `keys`: str | `{"name": "key_combination", "arguments": {"keys": "Control+A"}}` |
-| **scroll\_document** | Desplaza toda la página web. | `direction`: str | `{"name": "scroll_document", "arguments": {"direction": "down"}}` |
-| **scroll\_at** | Se desplaza en la coordenada (x,y). | `y`: int, `x`: int, `direction`: str, `magnitude`: int (opcional, valor predeterminado 800) | `{"name": "scroll_at", "arguments": {"y": 500, "x": 500, "direction": "down"}}` |
-| **drag\_and\_drop** | Arrastra entre dos coordenadas. | `y`: int, `x`: int, `destination_y`: int, `destination_x`: int | `{"name": "drag_and_drop", "arguments": {"y": 100, "destination_y": 500, "destination_x": 500, "x": 100}}` |
+| **open\_web\_browser** | Abre o navegador da Web. | Nenhum | `{"name": "open_web_browser", "arguments": {}}` |
+| **wait\_5\_seconds** | Pausa a execução por 5 segundos. | Nenhum | `{"name": "wait_5_seconds", "arguments": {}}` |
+| **go\_back** | Navega para a página anterior no histórico. | Nenhum | `{"name": "go_back", "arguments": {}}` |
+| **go\_forward** | Navega para a próxima página no histórico. | Nenhum | `{"name": "go_forward", "arguments": {}}` |
+| **search** | Navega até o mecanismo de pesquisa padrão. | Nenhum | `{"name": "search", "arguments": {}}` |
+| **navigate** | Navega o navegador diretamente para o URL especificado. | `url`: str | `{"name": "navigate", "arguments": {"url": "https://www.wikipedia.org"}}` |
+| **click\_at** | Clica em uma coordenada específica. | `y`: int (0-999), `x`: int (0-999) | `{"name": "click_at", "arguments": {"y": 300, "x": 500}}` |
+| **hover\_at** | Passa o cursor do mouse em uma coordenada específica. | `y`: int (0-999), `x`: int (0-999) | `{"name": "hover_at", "arguments": {"y": 150, "x": 250}}` |
+| **type\_text\_at** | Digita texto em uma coordenada. | `y`: int (0 a 999), `x`: int (0 a 999), `text`: str, `press_enter`: bool (opcional, padrão é True), `clear_before_typing`: bool (opcional, padrão é True) | `{"name": "type_text_at", "arguments": {"y": 250, "x": 400, "text": "search", "press_enter": false}}` |
+| **key\_combination** | Pressione teclas ou combinações. | `keys`: str | `{"name": "key_combination", "arguments": {"keys": "Control+A"}}` |
+| **scroll\_document** | Rola a página da Web inteira. | `direction`: str | `{"name": "scroll_document", "arguments": {"direction": "down"}}` |
+| **scroll\_at** | Rola na coordenada (x,y). | `y`: int, `x`: int, `direction`: str, `magnitude`: int (opcional, padrão 800) | `{"name": "scroll_at", "arguments": {"y": 500, "x": 500, "direction": "down"}}` |
+| **drag\_and\_drop** | Arrasta entre duas coordenadas. | `y`: int, `x`: int, `destination_y`: int, `destination_x`: int | `{"name": "drag_and_drop", "arguments": {"y": 100, "destination_y": 500, "destination_x": 500, "x": 100}}` |
 
-## Funciones personalizadas definidas por el usuario
+## Funções personalizadas definidas pelo usuário
 
-Puedes extender la funcionalidad del modelo incluyendo funciones definidas por el usuario personalizadas. Por ejemplo, en situaciones con interacción humana (HITL), puedes excluir acciones predefinidas predeterminadas y registrar acciones personalizadas.
+É possível estender a funcionalidade do modelo incluindo funções personalizadas definidas pelo usuário. Por exemplo, em cenários de human-in-the-loop (HITL), é possível excluir ações predefinidas padrão e registrar ações personalizadas.
 
-#### Herramientas personalizadas de Gemini 3.x
+#### Ferramentas personalizadas do Gemini 3.5 Flash
 
 ### Python
 
-Excluye las acciones predefinidas estándar del navegador (como `click`) y registra una herramienta `yield_to_user` personalizada:
+Exclua as ações padrão predefinidas do navegador (como `click`) e registre uma ferramenta `yield_to_user` personalizada:
 
 ```
 from google import genai
@@ -866,7 +877,7 @@ yield_to_user_tool = {
 }
 
 interaction = client.interactions.create(
-    model="gemini-3.7-flash",
+    model="gemini-3.6-flash",
     input="Click the submit button. If you need a second factor authentication code, ask me.",
     tools=[
         {
@@ -881,7 +892,7 @@ interaction = client.interactions.create(
 
 ### JavaScript
 
-Excluye las acciones predefinidas estándar del navegador (como `click`) y registra una herramienta `yield_to_user` personalizada:
+Exclua as ações padrão predefinidas do navegador (como `click`) e registre uma ferramenta `yield_to_user` personalizada:
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -905,7 +916,7 @@ const yieldToUserTool = {
 };
 
 const interaction = await ai.interactions.create({
-    model: "gemini-3.7-flash",
+    model: "gemini-3.6-flash",
     input: "Click the submit button. If you need a second factor authentication code, ask me.",
     tools: [
         {
@@ -918,7 +929,7 @@ const interaction = await ai.interactions.create({
 });
 ```
 
-#### Herramientas personalizadas de Gemini 2.5 (heredado)
+#### Ferramentas personalizadas do Gemini 2.5 (legado)
 
 ### Python
 
@@ -998,29 +1009,29 @@ const interaction = await ai.interactions.create({
 console.log(interaction);
 ```
 
-## Administra los niveles de pensamiento (Gemini 3.x)
+## Gerenciar níveis de pensamento (Gemini 3.5 Flash)
 
-En el caso de los agentes de uso de la computadora, puedes configurar diferentes niveles de pensamiento para equilibrar la calidad de la acción y la velocidad de ejecución. Por lo general, los niveles de pensamiento más bajos logran un buen equilibrio para las tareas de automatización estándar.
+Para agentes de uso de computador, é possível configurar diferentes níveis de pensamento para equilibrar a qualidade da ação e a velocidade de execução. Níveis de pensamento mais baixos geralmente alcançam um bom equilíbrio para tarefas de automação padrão.
 
-## Seguridad y protección
+## Segurança e proteção
 
-### Configuración de políticas de seguridad (Gemini 3.x)
+### Como configurar políticas de segurança (Gemini 3.5 Flash)
 
-Los modelos de Gemini 3.x incluyen categorías de servicios de seguridad integrados que determinan automáticamente si se requiere la confirmación del usuario.
+O modelo Gemini 3.5 Flash inclui categorias de serviços de segurança integrados que determinam automaticamente se a confirmação do usuário é necessária.
 
-| Categoría de la política de seguridad | Descripción |
+| Categoria da política de segurança | Descrição |
 | --- | --- |
-| `FINANCIAL_TRANSACTIONS` | Bloquea o activa la confirmación de acciones que involucran pagos, compras en tiendas o bienes regulados. |
-| `SENSITIVE_DATA_MODIFICATION` | Protege los registros de salud, financieros o gubernamentales contra modificaciones no autorizadas. |
-| `COMMUNICATION_TOOL` | Restringe la capacidad del agente para enviar correos electrónicos, mensajes de chat o borradores de forma autónoma. |
-| `ACCOUNT_CREATION` | Restringe al agente para que no registre de forma autónoma cuentas nuevas en sitios web. |
-| `DATA_MODIFICATION` | Regula las modificaciones generales del sistema de archivos, el uso compartido de datos y la eliminación del almacenamiento. |
-| `USER_CONSENT_MANAGEMENT` | Requiere la intervención del usuario para los banners de consentimiento de uso de cookies y los mensajes de privacidad. |
-| `LEGAL_TERMS_AND_AGREEMENTS` | Evita que el modelo acepte de forma autónoma las Condiciones del Servicio o los contratos legalmente vinculantes. |
+| `FINANCIAL_TRANSACTIONS` | Bloqueia ou aciona a confirmação de ações envolvendo pagamentos, finalização de compras no varejo ou produtos regulamentados. |
+| `SENSITIVE_DATA_MODIFICATION` | Protege registros de saúde, financeiros ou governamentais contra modificações não autorizadas. |
+| `COMMUNICATION_TOOL` | Impede que o agente envie e-mails, mensagens de chat ou rascunhos de forma autônoma. |
+| `ACCOUNT_CREATION` | Impede que o agente registre novas contas de forma autônoma em sites. |
+| `DATA_MODIFICATION` | Regula as modificações gerais do sistema de arquivos, o compartilhamento de dados e a exclusão de armazenamento. |
+| `USER_CONSENT_MANAGEMENT` | Exige a substituição do usuário para banners de consentimento de cookies e solicitações de privacidade. |
+| `LEGAL_TERMS_AND_AGREEMENTS` | Impede que o modelo aceite de forma autônoma Termos de Serviço ou contratos juridicamente vinculativos. |
 
-#### Anulaciones de seguridad
+#### Substituições de segurança
 
-Puedes anular políticas seleccionadas pasando anulaciones:
+É possível substituir políticas selecionadas transmitindo substituições:
 
 ### Python
 
@@ -1030,7 +1041,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.7-flash",
+    model="gemini-3.6-flash",
     input="Clean up the local folder by archiving old logs.",
     tools=[
         {
@@ -1052,7 +1063,7 @@ import { GoogleGenAI } from '@google/genai';
 const ai = new GoogleGenAI();
 
 const interaction = await ai.interactions.create({
-    model: "gemini-3.7-flash",
+    model: "gemini-3.6-flash",
     input: "Clean up the local folder by archiving old logs.",
     tools: [
         {
@@ -1066,13 +1077,13 @@ const interaction = await ai.interactions.create({
 });
 ```
 
-### Detección de inyección de instrucciones (Gemini 3.x)
+### Detecção de injeção de comandos (Gemini 3.5 Flash)
 
-Es un mecanismo de seguridad opcional que analiza los píxeles de las capturas de pantalla para detectar instrucciones ocultas de instrucciones adversarias (p.ej., "Ignora los comandos anteriores") y bloquea la ejecución cuando se detectan.
+Mecanismo de segurança de ativação que verifica os pixels da captura de tela em busca de instruções de comando malicioso ocultas (por exemplo, "Ignore os comandos anteriores") e bloqueia a execução quando detectadas.
 
-### Confirma la decisión de seguridad
+### Confirmar decisão de segurança
 
-La respuesta puede incluir un parámetro `safety_decision` en los argumentos de la llamada a la función:
+A resposta pode incluir um parâmetro `safety_decision` nos argumentos da chamada de função:
 
 ```
 {
@@ -1093,7 +1104,7 @@ La respuesta puede incluir un parámetro `safety_decision` en los argumentos de 
 }
 ```
 
-Si `safety_decision` es `require_confirmation`, muestra un mensaje al usuario final. Si el usuario confirma, establece `safety_acknowledgement` en `function_result`.
+Se `safety_decision` for `require_confirmation`, peça ao usuário final. Se o usuário confirmar, defina `safety_acknowledgement` em `function_result`.
 
 ### Python
 
@@ -1112,14 +1123,15 @@ if 'safety_decision' in function_call.arguments:
     action_result["safety_acknowledgement"] = True
 ```
 
-### Prácticas recomendadas de seguridad
+### Práticas recomendadas de segurança
 
-El uso de la computadora presenta riesgos operativos y de seguridad únicos, ya que un modelo que actúa en nombre de un usuario podría encontrar contenido no confiable en las pantallas o cometer errores al ejecutar acciones. Implementa las siguientes prácticas recomendadas para proteger los datos y los sistemas de los usuarios:
+O uso de computadores apresenta riscos operacionais e de segurança exclusivos, já que um modelo que age em nome de um usuário pode encontrar conteúdo não confiável nas telas ou cometer erros ao executar ações. Implemente as seguintes práticas recomendadas para proteger os dados e sistemas dos usuários:
 
-1. **Con interacción humana (HITL):**
+1. **Human-in-the-loop (HITL)**:
 
-   - **Exige la confirmación del usuario:** Cuando la respuesta de seguridad indica `require_confirmation` (o la decisión de seguridad heredada lo requiere), solicita la aprobación del usuario.
-   - **Proporciona instrucciones de seguridad personalizadas:** Implementa una instrucción del sistema personalizada para definir y aplicar tus propios límites de seguridad. Por ejemplo:
+   - **Exigir confirmação do usuário**:quando a resposta de segurança indica
+     `require_confirmation` (ou uma decisão de segurança legada exige isso), peça a aprovação do usuário.
+   - **Forneça instruções de segurança personalizadas**:implemente uma instrução de sistema personalizada para definir e aplicar seus próprios limites de segurança. Exemplo:
 
      ### Python
 
@@ -1217,7 +1229,7 @@ El uso de la computadora presenta riesgos operativos y de seguridad únicos, ya 
      """
 
      interaction = client.interactions.create(
-         model="gemini-3.7-flash",
+         model="gemini-3.6-flash",
          system_instruction=system_instruction,
          input="Prepare a draft but do not send.",
          tools=[{
@@ -1323,7 +1335,7 @@ El uso de la computadora presenta riesgos operativos y de seguridad únicos, ya 
      `;
 
      const interaction = await ai.interactions.create({
-         model: "gemini-3.7-flash",
+         model: "gemini-3.6-flash",
          system_instruction: systemInstruction,
          input: "Prepare a draft but do not send.",
          tools: [{
@@ -1332,38 +1344,44 @@ El uso de la computadora presenta riesgos operativos y de seguridad únicos, ya 
          }]
      });
      ```
-2. **Entorno de ejecución seguro:** Ejecuta tu agente en un entorno seguro de zona de pruebas para limitar su impacto potencial. Puede ser una máquina virtual (VM) en zona de pruebas, un contenedor (p.ej., Docker) o un perfil de navegador dedicado con permisos limitados. Consulta la [implementación de referencia de GitHub](https://github.com/google/computer-use-preview/) para obtener orientación sobre la configuración de la zona de pruebas con Docker.
-3. **Limpieza de entradas:** Limpia todo el texto generado por el usuario en las instrucciones para mitigar el riesgo de instrucciones no deseadas o inyección de instrucciones. Esta es una capa de seguridad útil, pero no reemplaza un entorno de ejecución seguro.
-4. **Barreras de seguridad del contenido:** Usa barreras de seguridad y APIs de seguridad del contenido para evaluar la adecuación, la inyección de instrucciones y la detección de jailbreak en las entradas del usuario, las entradas y salidas de las herramientas, y las respuestas del agente.
-5. **Listas de entidades permitidas y bloqueadas:** Implementa mecanismos de filtrado para controlar dónde puede navegar el modelo y qué puede hacer. Una lista de entidades bloqueadas de sitios web prohibidos es un buen punto de partida, mientras que una lista de entidades permitidas más restrictiva es aún más segura.
-6. **Observabilidad y registro:** Mantén registros detallados para la depuración, la auditoría y la respuesta ante incidentes. Tu cliente debe registrar las instrucciones, las capturas de pantalla, las acciones sugeridas por el modelo (`function_call`), las respuestas de seguridad y todas las acciones que, en última instancia, ejecute el cliente.
-7. **Administración del entorno:** Asegúrate de que el entorno de la GUI sea coherente.
-   Las ventanas emergentes, las notificaciones o los cambios en el diseño inesperados pueden confundir al modelo. Si es posible, comienza cada tarea nueva desde un estado limpio y conocido.
+2. **Ambiente de execução seguro**:execute o agente em um ambiente seguro de sandbox para limitar o impacto potencial dele. Pode ser uma máquina virtual (VM) em sandbox, um contêiner (por exemplo, Docker) ou um perfil de navegador dedicado com permissões limitadas. Consulte a
+   [implementação de referência do GitHub](https://github.com/google/computer-use-preview/)
+   para orientações de configuração do sandbox usando o Docker.
+3. **Sanitização de entrada**:sanitizar todo o texto gerado pelo usuário em comandos para
+   reduzir o risco de instruções não intencionais ou injeção de comandos. Essa é uma camada útil de segurança, mas não substitui um ambiente de execução seguro.
+4. **Barreiras de proteção de conteúdo**:use barreiras de proteção e APIs de segurança de conteúdo para avaliar entradas do usuário, entradas e saídas de ferramentas e as respostas do agente quanto à adequação, injeção de comandos e detecção de jailbreak.
+5. **Listas de permissões e de bloqueio**:implemente mecanismos de filtragem para controlar onde o modelo pode navegar e o que ele pode fazer. Uma lista de bloqueio de sites proibidos é um bom ponto de partida, mas uma lista de permissões mais restritiva é ainda mais segura.
+6. **Observabilidade e geração de registros**:mantenha registros detalhados para depuração, auditoria e resposta a incidentes. Seu cliente precisa registrar comandos,
+   capturas de tela, ações sugeridas pelo modelo (`function_call`), respostas de segurança e
+   todas as ações executadas pelo cliente.
+7. **Gerenciamento de ambiente**:garanta que o ambiente da GUI seja consistente.
+   Pop-ups, notificações ou mudanças inesperadas no layout podem confundir o modelo. Se possível, comece de um estado limpo e conhecido para cada nova tarefa.
 
-## Versiones del modelo
+## Versões do modelo
 
-Puedes usar Uso del equipo con los siguientes modelos:
+É possível usar o recurso "Uso do computador" com os seguintes modelos:
 
-- [**Gemini 3.7 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=es-419) (`gemini-3.7-flash`): Es el modelo recomendado para el uso en computadoras, ya que incluye acciones optimizadas con intenciones, compatibilidad con entornos de navegador, dispositivos móviles y computadoras, políticas de seguridad configurables y detección de inyección de instrucciones.
-- [**Gemini 3.5 Flash-Lite**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=es-419) (`gemini-3.5-flash-lite`): Un modelo rentable y de baja latencia que admite el uso de computadoras.
-- [**Gemini 3.5 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=es-419) (`gemini-3.5-flash`): Modelo estable anterior que admite el uso de la computadora.
-- [**Versión preliminar de Gemini 3 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=es-419) (`gemini-3-flash-preview`): Modelo de versión preliminar que admite el uso de la computadora.
-- [**Gemini 2.5 (versión preliminar heredada)**](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=es-419) (`gemini-2.5-computer-use-preview-10-2025`): Es un modelo de versión preliminar heredada optimizado para el uso de computadoras basadas en navegadores.
+- [**Gemini 3.6 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=pt-br) (`gemini-3.6-flash`): o modelo recomendado para uso em computadores, com ações simplificadas com intents, suporte a ambientes de navegador, dispositivos móveis e computadores, políticas de segurança configuráveis e detecção de injeção de comandos.
+- [**Gemini 3.5 Flash-Lite**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=pt-br): um modelo econômico e de baixa latência que oferece suporte ao uso de computadores.
+- [**Gemini 3.5 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=pt-br) (`gemini-3.5-flash`): modelo estável anterior que oferece suporte ao uso de computadores.
+- [**Pré-lançamento do Gemini 3 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=pt-br) (`gemini-3-flash-preview`): modelo de pré-lançamento
+  que oferece suporte ao uso de computadores.
+- [**Gemini 2.5 (pré-lançamento legado)**](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=pt-br) (`gemini-2.5-computer-use-preview-10-2025`): modelo de pré-lançamento legado otimizado para uso de computador baseado em navegador.
 
-## ¿Qué sigue?
+## A seguir
 
-- Experimenta con el uso de la computadora en el [entorno de demostración de Browserbase](http://gemini.browserbase.com).
-- Consulta la [implementación de referencia](https://github.com/google/computer-use-preview) para ver un ejemplo de código.
-- Obtén más información sobre otras herramientas de la API de Gemini:
-  - [Llamada a función](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419)
-  - [Grounding with Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=es-419)
+- Teste o uso do computador no [ambiente de demonstração do Browserbase](http://gemini.browserbase.com).
+- Confira a [implementação de referência](https://github.com/google/computer-use-preview) para ver um exemplo de código.
+- Conheça outras ferramentas da API Gemini:
+  - [Chamadas de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br)
+  - [Embasamento com a Pesquisa Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br)
 
-Enviar comentarios
+Envie comentários
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Última actualización: 2026-08-19 (UTC)
+Última atualização 2026-09-12 UTC.
 
-¿Quieres brindar más información?
+Quer enviar seu feedback?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-08-19 (UTC)"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-12 UTC."],[],[]]

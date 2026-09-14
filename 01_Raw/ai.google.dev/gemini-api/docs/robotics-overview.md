@@ -1,71 +1,55 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-overview?hl=it
-fetched_at: 2026-09-07T05:38:54.277863+00:00
-title: "Gemini Robotics ER \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-overview?hl=de
+fetched_at: 2026-09-14T05:42:45.068127+00:00
+title: "Gemini Robotics\u00a0ER \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Invia feedback
+Feedback geben
 
-# Gemini Robotics ER
+# Gemini Robotics ER
 
-I modelli Gemini Robotics ER (embodied reasoning) sono modelli di visione e linguaggio
-(VLM) che consentono ai robot
-di percepire e interagire con il mondo fisico. Interpretano i dati visivi,
-eseguono ragionamenti spaziali e temporali, pianificano attività in più fasi e coordinano
-robot e strumenti.
+Gemini Robotics ER-Modelle (Embodied Reasoning) sind Vision-Language-Modelle (VLMs), mit denen Roboter die physische Welt wahrnehmen und mit ihr interagieren können. Sie interpretieren visuelle Daten, führen räumliche und zeitliche Schlussfolgerungen durch, planen mehrstufige Aufgaben und koordinieren Roboter und Tools.
 
-## Modelli
+## Modelle
 
-Il modello Gemini Robotics ER 2 è l'ultimo modello di Gemini Robotics.
-Si tratta del nostro modello di ragionamento aggiornato che consente ai robot di
-comprendere con precisione il loro ambiente. È specializzato in funzionalità di ragionamento basate sull'interazione con il mondo fisico, come l'orchestrazione di robot da parte di agenti (ad es. tramite VLA), la comprensione di video di robot, inclusi la comprensione dello stato di avanzamento e il rilevamento del successo, la lettura di strumenti, il puntamento e il ragionamento spaziale.
+Das Gemini Robotics ER 2-Modell ist das neueste Modell von Gemini Robotics.
+Es ist unser aktualisiertes Logikmodell, das es Robotern ermöglicht, ihre Umgebung genau zu erfassen. Es ist auf Funktionen für verkörpertes Denken spezialisiert, z. B. die Orchestrierung von Robotern durch Agenten (z. B. mit VLAs), das Verständnis von Robotervideos, einschließlich des Fortschritts und der Erkennung von Erfolgen, das Lesen von Instrumenten, das Zeigen und das räumliche Denken.
 
-Il modello Gemini Robotics ER 2 introduce due endpoint del modello:
+Das Gemini Robotics ER2-Modell bietet zwei Modellendpunkte:
 
-- **`gemini-robotics-er-2-preview`**: il modello ER 2 standard. Si basa su
-  Gemini 3.5 Flash con ragionamento spaziale migliorato, ricerca di momenti video,
-  classificazione dell'avanzamento dei video, orchestrazione multi-robot e utilizzo di strumenti
-  in più passaggi.
-- **`gemini-robotics-er-2-streaming-preview`**: ottimizzato per lo streaming in tempo reale tramite l'[API Live](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=it). Utilizza questo
-  modello per agenti robot a bassa latenza che elaborano input audio e video
-  continui.
+- **`gemini-robotics-er-2-preview`**: Das Standardmodell für erweiterte Reichweite 2. Basiert auf Gemini 3.5 Flash und bietet verbessertes räumliches Denken, das Auffinden von Videomomenten, die Klassifizierung des Videofortschritts, die Orchestrierung mehrerer Roboter und die Nutzung von Tools in mehreren Schritten.
+- **`gemini-robotics-er-2-streaming-preview`**: Optimiert für Echtzeit-Streaming über die [Live API](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=de). Verwenden Sie dieses Modell für Roboter-Agents mit niedriger Latenz, die kontinuierliche Audio- und Videoeingaben verarbeiten.
 
-Se utilizzi Gemini Robotics ER 1.6, esegui l'upgrade a Gemini Robotics ER 2 sostituendo
-`model="gemini-robotics-er-1.6-preview"` con
-`model="gemini-robotics-er-2-preview"` o
-`model="gemini-robotics-er-2-streaming-preview"` nelle chiamate API. Tieni presente che
-il modello Gemini Robotics ER 1.6 verrà ritirato alla
-[fine di agosto](https://ai.google.dev/gemini-api/docs/deprecations?hl=it#robotics-models).
+Wenn Sie Gemini Robotics ER 1.6 verwenden, führen Sie ein Upgrade auf Gemini Robotics ER 2 durch, indem Sie in Ihren API-Aufrufen `model="gemini-robotics-er-1.6-preview"` durch `model="gemini-robotics-er-2-preview"` oder `model="gemini-robotics-er-2-streaming-preview"` ersetzen. Das Modell Gemini Robotics ER 1.6 wird [Ende August](https://ai.google.dev/gemini-api/docs/deprecations?hl=de#robotics-models) eingestellt.
 
-[Prova Gemini Robotics ER 2 in Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-preview&hl=it)
+[Gemini Robotics ER 2 in Google AI Studio ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-preview&hl=de)
 
-## Funzionalità di robotica
+## Robotikfunktionen
 
-Gemini Robotics ER supporta una serie di funzionalità di ragionamento basate sull'interazione con il mondo fisico.
-Seleziona una funzionalità per saperne di più:
+Gemini Robotics ER unterstützt eine Reihe von Funktionen für verkörpertes Denken.
+Wählen Sie eine Funktion aus, um mehr zu erfahren:
 
-| Capacità | Descrizione | Guida |
+| Funktion | Beschreibung | Leitfaden |
 | --- | --- | --- |
-| Ragionamento spaziale | Punta agli oggetti, monitorali nel video, rilevati con riquadri di delimitazione, pianifica le traiettorie. | [Ragionamento spaziale](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=it) |
-| Agentic Vision | Utilizza l'esecuzione del codice per migliorare altre funzionalità sfruttando gli strumenti di manipolazione delle immagini. | [Visione agentica](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=it) |
-| Orchestrazione delle attività | Combina il ragionamento spaziale con le API robot personalizzate per completare attività a lungo termine. | [Orchestrazione delle attività](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=it) |
-| Streaming (solo endpoint di streaming Gemini Robotics ER 2) | Streaming bidirezionale per agenti robot in tempo reale con chiamate di funzioni a bassa latenza. | [Streaming per la robotica](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=it) |
-| Avanzamento video (solo Gemini Robotics ER 2) | Ricerca dei momenti e classificazione dei progressi dai feed video continui. | [Comprensione dei video](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=it) |
+| Räumliches Denken | Auf Objekte zeigen, sie in Videos verfolgen, mit Begrenzungsrahmen erkennen und Trajektorien planen. | [Räumliches Denken](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=de) |
+| Agentic Vision | Code-Ausführung nutzen, um andere Funktionen mithilfe von Bildbearbeitungstools zu optimieren | [Agentic Vision](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=de) |
+| Aufgabenorchestrierung | Kombinieren Sie räumliches Denken mit benutzerdefinierten Roboter-APIs, um Aufgaben mit langer Zeitspanne zu erledigen. | [Aufgaben-Orchestrierung](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=de) |
+| Streaming (nur Gemini Robotics ER 2-Streamingendpunkt) | Bidirektionales Streaming für Echtzeit-Roboter-Agents mit Funktionsaufrufen mit niedriger Latenz. | [Streaming für Robotik](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=de) |
+| Videofortschritt (nur Gemini Robotics ER 2) | Momentsuche und Fortschrittsklassifizierung aus kontinuierlichen Videofeeds. | [Video-Understanding](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=de) |
 
-## Per iniziare
+## Erste Schritte
 
-L'esempio seguente trova gli oggetti in un'immagine e restituisce le relative coordinate e le relative etichette 2D normalizzate. Puoi passare questo output direttamente a un'API di robotica o a un
-modello VLA per generare azioni del robot.
+Im folgenden Beispiel werden Objekte in einem Bild gesucht und ihre normalisierten 2D-Koordinaten und Labels zurückgegeben. Sie können diese Ausgabe direkt an eine Robotics API oder ein VLA-Modell übergeben, um Roboteraktionen zu generieren.
 
 ### Python
 
@@ -133,8 +117,7 @@ curl -X POST \
   }'
 ```
 
-L'output sarà un array JSON contenente oggetti, ognuno con un `point`
-(coordinate `[y, x]` normalizzate) e un `label` che identifica l'oggetto.
+Die Ausgabe ist ein JSON-Array mit Objekten, die jeweils ein `point` (normalisierte `[y, x]`-Koordinaten) und ein `label` zur Identifizierung des Objekts enthalten.
 
 ### JSON
 
@@ -153,129 +136,109 @@ L'output sarà un array JSON contenente oggetti, ognuno con un `point`
 ]
 ```
 
-L'immagine seguente è un esempio di come possono essere visualizzati questi punti:
+Das folgende Bild zeigt ein Beispiel dafür, wie diese Punkte dargestellt werden können:
 
-![Un esempio che mostra i punti degli oggetti in un'immagine](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=it)
+![Beispiel für die Darstellung der Punkte von Objekten in einem Bild](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=de)
 
-## Come funziona
+## Funktionsweise
 
-Gemini Robotics ER accetta input di immagini, video o audio con prompt in linguaggio naturale. Identifica gli oggetti, ragiona sul contesto della scena e sulle relazioni spaziali e restituisce un output strutturato come coordinate o riquadri di delimitazione.
+Gemini Robotics ER verarbeitet Bild-, Video- oder Audioeingaben mit Prompts in natürlicher Sprache. Es werden Objekte identifiziert, der Szenenkontext und räumliche Beziehungen werden analysiert und strukturierte Ausgaben wie Koordinaten oder Begrenzungsrahmen werden zurückgegeben.
 
-Gemini Robotics ER è anche agentico: suddivide le attività complesse in sottoattività e
-le esegue chiamando le funzioni del robot o eseguendo il codice generato. Ad esempio, "metti la mela nella ciotola" diventa una sequenza di passaggi per individuare, afferrare e posizionare.
+Gemini Robotics ER ist auch agentisch: Es zerlegt komplexe Aufgaben in Teilaufgaben und führt sie aus, indem es Ihre Roboterfunktionen aufruft oder generierten Code ausführt. Beispiel: „Lege den Apfel in die Schüssel“ wird zu einer Folge von Schritten zum Lokalisieren, Greifen und Platzieren.
 
-Consulta [Chiamata
-di funzioni](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=it#how-it-works) per
-informazioni dettagliate su come Gemini esegue le chiamate di strumenti.
+Weitere Informationen dazu, wie Gemini Tool-Aufrufe ausführt, finden Sie unter [Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=de#how-it-works).
 
-## Sicurezza
+## Sicherheit
 
-Sebbene Gemini Robotics ER sia stato progettato pensando alla sicurezza, è tua
-responsabilità mantenere un ambiente sicuro intorno al robot. I modelli di AI generativa possono commettere errori e i robot fisici possono causare danni. Per saperne di più,
-visita la
-[pagina sulla sicurezza della robotica di Google DeepMind](https://deepmind.google/models/gemini-robotics/safety?hl=it).
+Gemini Robotics ER wurde zwar mit Blick auf die Sicherheit entwickelt, es liegt jedoch in Ihrer Verantwortung, für eine sichere Umgebung rund um den Roboter zu sorgen. Generative KI-Modelle können Fehler machen und physische Roboter können Schäden verursachen. Weitere Informationen finden Sie auf der [Google DeepMind-Seite zur Robotersicherheit](https://deepmind.google/models/gemini-robotics/safety?hl=de).
 
-## Best practice
+## Best Practices
 
-1. Usa un linguaggio semplice e naturale. Descrivi cosa vuoi che faccia il robot come se
-   ti rivolgessi a una persona. Se un termine non funziona, prova un sinonimo comune.
-2. Ottimizza l'input visivo. Ritaglia o ingrandisci oggetti piccoli o non chiari prima di inviare l'immagine. L'illuminazione e il basso contrasto cromatico possono influire sul rilevamento.
-3. Suddividi le attività complesse in passaggi. Invia ogni passaggio come prompt separato per
-   mantenere il modello concentrato e migliorare l'accuratezza.
-4. Esegui query più volte e calcola la media dei risultati per attività ad alta precisione. Questo
-   approccio di consenso riduce la varianza degli output spaziali.
+1. Verwenden Sie eine einfache, natürliche Sprache. Beschreiben Sie, was der Roboter tun soll, so, als würden Sie mit einer Person sprechen. Wenn ein Begriff nicht funktioniert, versuchen Sie es mit einem gängigen Synonym.
+2. Visuelle Eingabe optimieren Schneiden Sie kleine oder unklare Objekte zu oder zoomen Sie sie heran, bevor Sie das Bild senden. Die Beleuchtung und ein geringer Farbkontrast können sich auf die Erkennung auswirken.
+3. Teilen Sie komplexe Aufgaben in Schritte auf. Senden Sie jeden Schritt als separaten Prompt, damit das Modell fokussiert bleibt und die Genauigkeit verbessert wird.
+4. Führen Sie die Abfrage mehrmals aus und bilden Sie den Durchschnitt der Ergebnisse für Aufgaben, die eine hohe Präzision erfordern. Dieser Konsensansatz reduziert die Varianz bei räumlichen Ausgaben.
 
-## Limitazioni
+## Beschränkungen
 
-Tieni presenti le seguenti limitazioni quando sviluppi con Gemini Robotics ER:
+Beachten Sie beim Entwickeln mit Gemini Robotics ER die folgenden Einschränkungen:
 
-- **Limitazioni relative alle chiavi API**:l'API Gemini non accetta richieste da chiavi API senza limitazioni e restituisce un errore `403 Forbidden`. Proteggi la tua chiave API aggiungendo limitazioni in [AI Studio](https://aistudio.google.com/api-keys?hl=it).
-  Per informazioni dettagliate, consulta la sezione [Proteggere le chiavi API senza limitazioni](https://ai.google.dev/gemini-api/docs/api-key?hl=it#secure-unrestricted-keys).
-- **Latenza e prestazioni**:query complesse, input ad alta risoluzione o livelli di pensiero elevati possono comportare un aumento dei tempi di elaborazione. Per il livello di pensiero,
-  utilizza il livello medio per un buon equilibrio tra latenza e rendimento.
-- **Allucinazioni:** come tutti i modelli linguistici di grandi dimensioni, i modelli Gemini Robotics ER
-  possono occasionalmente "avere allucinazioni" o fornire informazioni errate, soprattutto
-  per prompt ambigui o input fuori distribuzione.
-- **Dipendenza dalla qualità del prompt:** la qualità dell'output dipende dalla chiarezza
-  del prompt di input. Utilizza prompt specifici e ben strutturati.
-- **Costo di calcolo**:l'esecuzione del modello, soprattutto con input video o
-  `thinking_budget` elevati, consuma risorse di calcolo e comporta costi.
-  Per ulteriori dettagli, consulta la pagina [Pensiero](https://ai.google.dev/gemini-api/docs/thinking?hl=it).
-- **Tipi di input**:consulta i seguenti argomenti per informazioni dettagliate sulle limitazioni per ogni modalità.
-  - [Input immagine](https://ai.google.dev/gemini-api/docs/image-understanding?hl=it#technical-details-image)
-  - [Input video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=it#supported-formats)
-  - [Input audio](https://ai.google.dev/gemini-api/docs/audio?hl=it#supported-formats)
+- **Einschränkungen für API-Schlüssel**:Die Gemini API akzeptiert keine Anfragen von uneingeschränkten API-Schlüsseln und gibt einen `403 Forbidden`-Fehler zurück. Sichern Sie Ihren API-Schlüssel, indem Sie in [AI Studio](https://aistudio.google.com/api-keys?hl=de) Einschränkungen hinzufügen.
+  Weitere Informationen finden Sie unter [Uneingeschränkte API-Schlüssel sichern](https://ai.google.dev/gemini-api/docs/api-key?hl=de#secure-unrestricted-keys).
+- **Latenz im Vergleich zur Leistung**:Komplexe Anfragen, Eingaben mit hoher Auflösung oder ein hohes Maß an Denkleistung können zu längeren Verarbeitungszeiten führen. Verwenden Sie für die Denkebene „Mittel“, um ein gutes Gleichgewicht zwischen Latenz und Leistung zu erzielen.
+- **Halluzinationen**:Wie alle Large Language Models können Gemini Robotics ER-Modelle gelegentlich „halluzinieren“ oder falsche Informationen liefern, insbesondere bei mehrdeutigen Prompts oder Out-of-Distribution-Eingaben.
+- **Abhängigkeit von der Promptqualität**:Die Qualität der Ausgabe hängt von der Klarheit des Eingabe-Prompts ab. Verwenden Sie spezifische, gut strukturierte Prompts.
+- **Rechenkosten**:Die Ausführung des Modells, insbesondere mit Videoeingaben oder hohem `thinking_budget`, verbraucht Rechenressourcen und verursacht Kosten.
+  Weitere Informationen finden Sie auf der Seite [Thinking](https://ai.google.dev/gemini-api/docs/thinking?hl=de).
+- **Eingabetypen**:In den folgenden Abschnitten finden Sie Details zu den Einschränkungen für die einzelnen Modi.
+  - [Bildeingaben](https://ai.google.dev/gemini-api/docs/image-understanding?hl=de#technical-details-image)
+  - [Videoeingänge](https://ai.google.dev/gemini-api/docs/video-understanding?hl=de#supported-formats)
+  - [Audioeingänge](https://ai.google.dev/gemini-api/docs/audio?hl=de#supported-formats)
 
-## Informativa sulla privacy
+## Datenschutzhinweise
 
-Riconosci che i modelli a cui viene fatto riferimento in questo documento (i "Modelli di robotica") sfruttano i dati video e audio per funzionare e spostare l'hardware in conformità con le tue istruzioni. Pertanto, puoi utilizzare i
-Modelli di robotica in modo che i dati di persone identificabili, come voce, immagini e dati di somiglianza ("Dati personali"), vengano raccolti dai Modelli di robotica. Se scegli di utilizzare i Modelli di robotica in modo da raccogliere dati personali, accetti di non consentire a persone identificabili di interagire con i Modelli di robotica o di trovarsi nell'area circostante, a meno che e fino a quando queste persone identificabili non siano state informate in modo sufficiente e non abbiano acconsentito al fatto che i loro dati personali possano essere forniti e utilizzati da Google come descritto nei Termini di servizio aggiuntivi dell'API Gemini disponibili all'indirizzo [https://ai.google.dev/gemini-api/terms](https://ai.google.dev/gemini-api/terms?hl=it) (i "Termini"), anche in conformità con la sezione intitolata "Modalità di utilizzo dei dati da parte di Google". Ti assicurerai che tale
-avviso consenta la raccolta e l'utilizzo dei dati personali come descritto nei Termini
-e farai ogni sforzo commercialmente ragionevole per ridurre al minimo la raccolta e
-la distribuzione dei dati personali utilizzando tecniche come la sfocatura dei volti e
-utilizzando i modelli di robotica in aree che non contengono persone identificabili
-nella misura in cui ciò sia praticabile.
+Sie bestätigen, dass die in diesem Dokument genannten Modelle (die „Robotikmodelle“) Video- und Audiodaten verwenden, um Ihre Hardware gemäß Ihren Anweisungen zu betreiben und zu bewegen. Sie dürfen die Robotikmodelle daher so betreiben, dass Daten von identifizierbaren Personen, z. B. Sprach-, Bild- und Ähnlichkeitsdaten („personenbezogene Daten“), von den Robotikmodellen erhoben werden. Wenn Sie die Robotikmodelle so betreiben, dass personenbezogene Daten erhoben werden, stimmen Sie zu, dass Sie keine identifizierbaren Personen mit den Robotikmodellen interagieren lassen oder sich in der Umgebung der Robotikmodelle aufhalten lassen, es sei denn, diese identifizierbaren Personen wurden ausreichend darüber informiert und haben zugestimmt, dass ihre personenbezogenen Daten an Google weitergegeben und von Google verwendet werden dürfen, wie in den zusätzlichen Nutzungsbedingungen für Gemini API unter [https://ai.google.dev/gemini-api/terms](https://ai.google.dev/gemini-api/terms?hl=de) (den „Nutzungsbedingungen“) beschrieben, einschließlich gemäß dem Abschnitt „Wie Google Ihre Daten verwendet“. Sie sorgen dafür, dass diese Mitteilung die Erhebung und Nutzung personenbezogener Daten gemäß den Nutzungsbedingungen erlaubt, und unternehmen in wirtschaftlich angemessener Weise Anstrengungen, um die Erhebung und Weitergabe personenbezogener Daten zu minimieren, indem Sie Techniken wie das Unkenntlichmachen von Gesichtern verwenden und die Robotikmodelle nach Möglichkeit in Bereichen betreiben, in denen sich keine identifizierbaren Personen aufhalten.
 
-## Prezzi
+## Preise
 
-Per informazioni dettagliate sui prezzi e sulle regioni disponibili, consulta la pagina dei [prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it).
+Detaillierte Informationen zu Preisen und verfügbaren Regionen finden Sie auf der Seite [Preise](https://ai.google.dev/gemini-api/docs/pricing?hl=de).
 
-## Endpoint del modello
+## Modellendpunkte
 
-### Gemini Robotics ER 2 (anteprima)
+### Gemini Robotics ER 2 (Vorabversion)
 
-| Proprietà | Descrizione |
+| Attribut | Beschreibung |
 | --- | --- |
-| Codice modello id\_card | `gemini-robotics-er-2-preview` |
-| saveTipi di dati supportati | **Input**  Testo, immagini, video, audio  **Output**  Testo |
-| token\_autoLimiti dei token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Limite di token di input**  131.072  **Limite di token di output**  65.536 |
-| handymanFunzionalità | **[Generazione di audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=it)**  Non supportato  **[Memorizzazione nella cache](https://ai.google.dev/gemini-api/docs/caching?hl=it)**  Supportato  **[Esecuzione di codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it)**  Supportato  **[Utilizzo del computer](https://ai.google.dev/gemini-api/docs/computer-use?hl=it)**  Supportato  **[Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it)**  Supportato  **[Chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it)**  Supportato  **[Grounding con Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it)**  Supportato  **[Generazione di immagini](https://ai.google.dev/gemini-api/docs/image-generation?hl=it)**  Non supportato  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=it)**  Non supportato  **[Fondatezza della Ricerca](https://ai.google.dev/gemini-api/docs/google-search?hl=it)**  Supportato  **[Output strutturati](https://ai.google.dev/gemini-api/docs/structured-output?hl=it)**  Supportato  **[Pensiero](https://ai.google.dev/gemini-api/docs/thinking?hl=it)**  Supportato  **[Contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it)**  Supportato |
-| speedOpzioni di consumo | **[API batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=it)**  Supportato  **[Inferenza Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=it)**  Non supportato  **[Inferenza prioritaria](https://ai.google.dev/gemini-api/docs/priority-inference?hl=it)**  Non supportato |
-| Versioni 123 | Leggi i [pattern delle versioni del modello](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#model-versions) per maggiori dettagli.  - Anteprima: `gemini-robotics-er-2-preview` |
-| calendar\_monthUltimo aggiornamento | Luglio 2026 |
-| id\_cardScheda del modello | [Scheda del modello](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=it) |
+| id\_cardModellcode | `gemini-robotics-er-2-preview` |
+| saveUnterstützte Datentypen | **Eingaben**  Text, Bilder, Video, Audio  **Ausgabe**  Text |
+| token\_autoToken-Limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=de) | **Eingabetokenlimit**  131.072  **Tokenausgabelimit**  65.536 |
+| handymanFunktionen | **[Audiogenerierung](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de)**  Nicht unterstützt  **[Caching](https://ai.google.dev/gemini-api/docs/caching?hl=de)**  Unterstützt  **[Code-Ausführung](https://ai.google.dev/gemini-api/docs/code-execution?hl=de)**  Unterstützt  **[Computernutzung](https://ai.google.dev/gemini-api/docs/computer-use?hl=de)**  Unterstützt  **[Dateisuche](https://ai.google.dev/gemini-api/docs/file-search?hl=de)**  Unterstützt  **[Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/function-calling?hl=de)**  Unterstützt  **[Fundierung mit Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=de)**  Unterstützt  **[Bildgenerierung](https://ai.google.dev/gemini-api/docs/image-generation?hl=de)**  Nicht unterstützt  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=de)**  Nicht unterstützt  **[Suchfundierung](https://ai.google.dev/gemini-api/docs/google-search?hl=de)**  Unterstützt  **[Strukturierte Ausgaben](https://ai.google.dev/gemini-api/docs/structured-output?hl=de)**  Unterstützt  **[Antwort wird generiert](https://ai.google.dev/gemini-api/docs/thinking?hl=de)**  Unterstützt  **[URL-Kontext](https://ai.google.dev/gemini-api/docs/url-context?hl=de)**  Unterstützt |
+| speedNutzungsoptionen | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=de)**  Unterstützt  **[Flex-Inferenz](https://ai.google.dev/gemini-api/docs/flex-inference?hl=de)**  Nicht unterstützt  **[Prioritätsinferenz](https://ai.google.dev/gemini-api/docs/priority-inference?hl=de)**  Nicht unterstützt |
+| 123-Versionen | Weitere Informationen finden Sie unter [Muster für Modellversionen](https://ai.google.dev/gemini-api/docs/models/gemini?hl=de#model-versions).  - Vorschau für: `gemini-robotics-er-2-preview` |
+| calendar\_monthLetzte Aktualisierung | Juli 2026 |
+| id\_cardModellkarte | [Modellkarte](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=de) |
 
-### Gemini Robotics ER 2 Streaming Preview
+### Gemini Robotics ER 2 – Streaming-Vorabversion
 
-| Proprietà | Descrizione |
+| Attribut | Beschreibung |
 | --- | --- |
-| Codice modello id\_card | `gemini-robotics-er-2-streaming-preview` |
-| saveTipi di dati supportati | **Input**  Testo, immagini, video, audio  **Output**  Testo |
-| token\_autoLimiti dei token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Limite di token di input**  131.072  **Limite di token di output**  65.536 |
-| handymanFunzionalità | **[Generazione di audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=it)**  Non supportato  **[Memorizzazione nella cache](https://ai.google.dev/gemini-api/docs/caching?hl=it)**  Non supportato  **[Esecuzione di codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it)**  Non supportato  **[Utilizzo del computer](https://ai.google.dev/gemini-api/docs/computer-use?hl=it)**  Non supportato  **[Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it)**  Non supportato  **[Chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it)**  Supportato  **[Grounding con Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it)**  Non supportato  **[Generazione di immagini](https://ai.google.dev/gemini-api/docs/image-generation?hl=it)**  Non supportato  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=it)**  Supportato  **[Fondatezza della Ricerca](https://ai.google.dev/gemini-api/docs/google-search?hl=it)**  Supportato  **[Output strutturati](https://ai.google.dev/gemini-api/docs/structured-output?hl=it)**  Non supportato  **[Pensiero](https://ai.google.dev/gemini-api/docs/thinking?hl=it)**  Supportato  **[Contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it)**  Non supportato |
-| speedOpzioni di consumo | **[API batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=it)**  Non supportato  **[Inferenza Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=it)**  Non supportato  **[Inferenza prioritaria](https://ai.google.dev/gemini-api/docs/priority-inference?hl=it)**  Non supportato |
-| Versioni 123 | Leggi i [pattern delle versioni del modello](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#model-versions) per maggiori dettagli.  - Anteprima: `gemini-robotics-er-2-streaming-preview` |
-| calendar\_monthUltimo aggiornamento | Luglio 2026 |
-| id\_cardScheda del modello | [Scheda del modello](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=it) |
+| id\_cardModellcode | `gemini-robotics-er-2-streaming-preview` |
+| saveUnterstützte Datentypen | **Eingaben**  Text, Bilder, Video, Audio  **Ausgabe**  Text |
+| token\_autoToken-Limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=de) | **Eingabetokenlimit**  131.072  **Tokenausgabelimit**  65.536 |
+| handymanFunktionen | **[Audiogenerierung](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de)**  Nicht unterstützt  **[Caching](https://ai.google.dev/gemini-api/docs/caching?hl=de)**  Nicht unterstützt  **[Code-Ausführung](https://ai.google.dev/gemini-api/docs/code-execution?hl=de)**  Nicht unterstützt  **[Computernutzung](https://ai.google.dev/gemini-api/docs/computer-use?hl=de)**  Nicht unterstützt  **[Dateisuche](https://ai.google.dev/gemini-api/docs/file-search?hl=de)**  Nicht unterstützt  **[Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/function-calling?hl=de)**  Unterstützt  **[Fundierung mit Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=de)**  Nicht unterstützt  **[Bildgenerierung](https://ai.google.dev/gemini-api/docs/image-generation?hl=de)**  Nicht unterstützt  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=de)**  Unterstützt  **[Suchfundierung](https://ai.google.dev/gemini-api/docs/google-search?hl=de)**  Unterstützt  **[Strukturierte Ausgaben](https://ai.google.dev/gemini-api/docs/structured-output?hl=de)**  Nicht unterstützt  **[Antwort wird generiert](https://ai.google.dev/gemini-api/docs/thinking?hl=de)**  Unterstützt  **[URL-Kontext](https://ai.google.dev/gemini-api/docs/url-context?hl=de)**  Nicht unterstützt |
+| speedNutzungsoptionen | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=de)**  Nicht unterstützt  **[Flex-Inferenz](https://ai.google.dev/gemini-api/docs/flex-inference?hl=de)**  Nicht unterstützt  **[Prioritätsinferenz](https://ai.google.dev/gemini-api/docs/priority-inference?hl=de)**  Nicht unterstützt |
+| 123-Versionen | Weitere Informationen finden Sie unter [Muster für Modellversionen](https://ai.google.dev/gemini-api/docs/models/gemini?hl=de#model-versions).  - Vorschau für: `gemini-robotics-er-2-streaming-preview` |
+| calendar\_monthLetzte Aktualisierung | Juli 2026 |
+| id\_cardModellkarte | [Modellkarte](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=de) |
 
-### Gemini Robotics ER 1.6 (anteprima)
+### Gemini Robotics ER 1.6 (Vorabversion)
 
-| Proprietà | Descrizione |
+| Attribut | Beschreibung |
 | --- | --- |
-| Codice modello id\_card | `gemini-robotics-er-1.6-preview` |
-| saveTipi di dati supportati | **Input**  Testo, immagini, video, audio  **Output**  Testo |
-| token\_autoLimiti dei token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Limite di token di input**  131.072  **Limite di token di output**  65.536 |
-| handymanFunzionalità | **[Generazione di audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=it)**  Non supportato  **[Memorizzazione nella cache](https://ai.google.dev/gemini-api/docs/caching?hl=it)**  Supportato  **[Esecuzione di codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it)**  Supportato  **[Utilizzo del computer](https://ai.google.dev/gemini-api/docs/computer-use?hl=it)**  Supportato  **[Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it)**  Supportato  **[Chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it)**  Supportato  **[Grounding con Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it)**  Supportato  **[Generazione di immagini](https://ai.google.dev/gemini-api/docs/image-generation?hl=it)**  Non supportato  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=it)**  Non supportato  **[Fondatezza della Ricerca](https://ai.google.dev/gemini-api/docs/google-search?hl=it)**  Supportato  **[Output strutturati](https://ai.google.dev/gemini-api/docs/structured-output?hl=it)**  Supportato  **[Pensiero](https://ai.google.dev/gemini-api/docs/thinking?hl=it)**  Supportato  **[Contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it)**  Supportato |
-| speedOpzioni di consumo | **[API batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=it)**  Supportato  **[Inferenza Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=it)**  Non supportato  **[Inferenza prioritaria](https://ai.google.dev/gemini-api/docs/priority-inference?hl=it)**  Non supportato |
-| Versioni 123 | Leggi i [pattern delle versioni del modello](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#model-versions) per maggiori dettagli.  - Anteprima: `gemini-robotics-er-1.6-preview` |
-| calendar\_monthUltimo aggiornamento | Dicembre 2025 |
-| cognition\_2Knowledge cutoff | Gennaio 2025 |
+| id\_cardModellcode | `gemini-robotics-er-1.6-preview` |
+| saveUnterstützte Datentypen | **Eingaben**  Text, Bilder, Video, Audio  **Ausgabe**  Text |
+| token\_autoToken-Limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=de) | **Eingabetokenlimit**  131.072  **Tokenausgabelimit**  65.536 |
+| handymanFunktionen | **[Audiogenerierung](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de)**  Nicht unterstützt  **[Caching](https://ai.google.dev/gemini-api/docs/caching?hl=de)**  Unterstützt  **[Code-Ausführung](https://ai.google.dev/gemini-api/docs/code-execution?hl=de)**  Unterstützt  **[Computernutzung](https://ai.google.dev/gemini-api/docs/computer-use?hl=de)**  Unterstützt  **[Dateisuche](https://ai.google.dev/gemini-api/docs/file-search?hl=de)**  Unterstützt  **[Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/function-calling?hl=de)**  Unterstützt  **[Fundierung mit Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=de)**  Unterstützt  **[Bildgenerierung](https://ai.google.dev/gemini-api/docs/image-generation?hl=de)**  Nicht unterstützt  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=de)**  Nicht unterstützt  **[Suchfundierung](https://ai.google.dev/gemini-api/docs/google-search?hl=de)**  Unterstützt  **[Strukturierte Ausgaben](https://ai.google.dev/gemini-api/docs/structured-output?hl=de)**  Unterstützt  **[Antwort wird generiert](https://ai.google.dev/gemini-api/docs/thinking?hl=de)**  Unterstützt  **[URL-Kontext](https://ai.google.dev/gemini-api/docs/url-context?hl=de)**  Unterstützt |
+| speedNutzungsoptionen | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=de)**  Unterstützt  **[Flex-Inferenz](https://ai.google.dev/gemini-api/docs/flex-inference?hl=de)**  Nicht unterstützt  **[Prioritätsinferenz](https://ai.google.dev/gemini-api/docs/priority-inference?hl=de)**  Nicht unterstützt |
+| 123-Versionen | Weitere Informationen finden Sie unter [Muster für Modellversionen](https://ai.google.dev/gemini-api/docs/models/gemini?hl=de#model-versions).  - Vorschau für: `gemini-robotics-er-1.6-preview` |
+| calendar\_monthLetzte Aktualisierung | Dezember 2025 |
+| cognition\_2Wissensstichtag | Januar 2025 |
 
-## Passaggi successivi
+## Nächste Schritte
 
-- [Ragionamento spaziale](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=it): puntamento, monitoraggio, riquadri di delimitazione, traiettorie.
-- [Capacità agentiche](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=it): esecuzione di codice, lettura degli strumenti, annotazione delle immagini.
-- [Orchestrazione delle attività](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=it): attività a lungo termine con API robot personalizzate.
-- [Robotica con streaming](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=it): streaming bidirezionale in tempo reale (solo Gemini Robotics ER 2).
-- [Comprensione dei video](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=it): ricerca dei momenti e classificazione dei progressi (solo Gemini Robotics ER 2).
-- [Google DeepMind robotics safety](https://deepmind.google/models/gemini-robotics/safety?hl=it): la ricerca sulla sicurezza alla base della famiglia di modelli.
+- [Räumliches Denken](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=de): Zeigen, Tracking, Begrenzungsrahmen, Trajektorien.
+- [Agentische Funktionen](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=de): Code-Ausführung, Instrumentenablesung, Bildanmerkungen.
+- [Aufgabenorchestration](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=de): Aufgaben mit langer Zeitspanne mit benutzerdefinierten Roboter-APIs.
+- [Robotik mit Streaming](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=de): bidirektionales Streaming in Echtzeit (nur Gemini Robotics ER 2).
+- [Videoanalyse](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=de): Suche nach Momenten und Fortschrittsklassifizierung (nur Gemini Robotics ER 2).
+- [Google DeepMind Robotics Safety](https://deepmind.google/models/gemini-robotics/safety?hl=de) – Sicherheitsforschung hinter der Modellfamilie.
 
-Invia feedback
+Feedback geben
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Ultimo aggiornamento 2026-07-30 UTC.
+Zuletzt aktualisiert: 2026-09-08 (UTC).
 
-Vuoi dirci altro?
+Haben Sie Feedback für uns?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-08 (UTC)."],[],[]]

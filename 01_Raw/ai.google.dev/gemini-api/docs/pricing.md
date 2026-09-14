@@ -1,1212 +1,1130 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/pricing?hl=id
-fetched_at: 2026-09-07T05:38:59.577478+00:00
-title: "Harga Gemini Developer API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/pricing?hl=zh-CN
+fetched_at: 2026-09-14T05:40:41.405611+00:00
+title: "Gemini Developer API \u4ef7\u683c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+Gemini 3.8 Flash 现已推出。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-# Harga Gemini Developer API
+# Gemini Developer API 价格
 
-Mulai membangun aplikasi tanpa biaya dengan batas yang besar, lalu tingkatkan skala dengan harga prabayar, kemudian bayar sesuai penggunaan untuk aplikasi yang siap produksi.
+免费开始构建，享受宽裕的额度；待应用准备好投入生产后，可先选用预付费模式，再按需切换为随用随付模式进行扩容。
 
-### Gratis
+### 免费
 
-Untuk developer dan project kecil yang baru mulai menggunakan Gemini API.
+适用于刚开始使用 Gemini API 的开发者和小型项目。
 
-- check\_circleAkses terbatas ke model tertentu
-- check\_circleToken input & output gratis
-- check\_circleAkses Google AI Studio
-- check\_circleKonten yang digunakan untuk meningkatkan kualitas produk kami[\*](https://ai.google.dev/gemini-api/terms?hl=id)
+- check\_circle对特定模型的访问权限有限
+- check\_circle免费输入和输出 token
+- check\_circleGoogle AI Studio 访问权限
+- check\_circle内容会用于改进 Google 产品[\*](https://ai.google.dev/gemini-api/terms?hl=zh-cn)
 
-[Mulai secara Gratis](https://aistudio.google.com?hl=id)
+[免费开始使用](https://aistudio.google.com?hl=zh-cn)
 
-### Berbayar
+### 付费
 
-Untuk aplikasi produksi yang memerlukan volume lebih tinggi dan fitur lanjutan.
+适用于需要更高调用量和高级功能的生产级应用。
 
-- check\_circleBatas kapasitas yang lebih tinggi untuk deployment produksi
-- check\_circleAkses ke Cache konteks
-- check\_circleBatch API (pengurangan biaya sebesar 50%)
-- check\_circleAkses ke model tercanggih Google
-- check\_circleKonten **tidak** digunakan untuk meningkatkan kualitas produk kami[\*](https://ai.google.dev/gemini-api/terms?hl=id)
+- check\_circle针对生产部署放宽了速率限制
+- check\_circle可访问上下文缓存
+- check\_circleBatch API（成本降低 50%）
+- check\_circle使用 Google 的先进模型
+- check\_circle内容**不会**用于改进 Google 产品[\*](https://ai.google.dev/gemini-api/terms?hl=zh-cn)
 
-[Upgrade ke Akun Berbayar](https://aistudio.google.com/api-keys?hl=id)
+[升级到付费层级](https://aistudio.google.com/api-keys?hl=zh-cn)
 
-### Enterprise
+### 企业
 
-Untuk deployment skala besar dengan kebutuhan khusus terkait keamanan, dukungan, dan kepatuhan, yang didukung oleh [Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform?hl=id).
+适用于在安全性、支持及合规性方面有自定义需求的大规模部署，由 [Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform?hl=zh-cn) 提供支持。
 
-- check\_circleSemua fitur di Berbayar, ditambah akses opsional ke:
-- check\_circleSaluran dukungan khusus
-- check\_circleKeamanan & kepatuhan lanjutan
-- check\_circleThroughput yang disediakan
-- check\_circleDiskon berbasis volume (berdasarkan penggunaan)
-- check\_circleOperasi ML, model garden, dan lainnya
+- check\_circle付费层级的所有功能，以及以下可选功能：
+- check\_circle专属支持渠道
+- check\_circle高级安全与合规功能
+- check\_circle预配吞吐量
+- check\_circle阶梯折扣（基于用量）
+- check\_circleMLOps、Model Garden 等
 
-[Hubungi Bagian Penjualan](https://cloud.google.com/contact?hl=id)
+[联系销售团队](https://cloud.google.com/contact?hl=zh-cn)
 
 ## Gemini 3.6 Flash
 
 *`gemini-3.6-flash`*
 
-[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-3.6-flash&hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com?model=gemini-3.6-flash&hl=zh-cn)
 
-Model tercerdas kami yang dibuat untuk kecepatan, menggabungkan kecerdasan terdepan dengan penelusuran dan perujukan yang unggul.
+Google 最智能的模型，专为速度而打造，将前沿智能与卓越的搜索和接地能力完美结合。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $1,50 |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $7,50 |
-| Harga context caching | Tanpa biaya | $0,15 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | $1.50 |
+| 输出价格（包括思考 token） | 免费 | $7.50 |
+| 上下文缓存价格 | 免费 | 0.15 美元 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,75 |
-| Harga output (termasuk token pemikiran) | Tidak tersedia | $3,75 |
-| Harga context caching | Tidak tersedia | $0,075 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 permintaan per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | $0.75 |
+| 输出价格（包括思考 token） | 不可用 | $3.75 |
+| 上下文缓存价格 | 不可用 | 0.075 美元 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 个请求（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 个请求（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Lipat
+### Flex
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,75 |
-| Harga output (termasuk token pemikiran) | Tidak tersedia | $3,75 |
-| Harga context caching | Tidak tersedia | $0,075 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 permintaan per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | $0.75 |
+| 输出价格（包括思考 token） | 不可用 | $3.75 |
+| 上下文缓存价格 | 不可用 | 0.075 美元 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 个请求（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 个请求（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Prioritas
+### 优先级
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $2,70 |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $13,50 |
-| Harga context caching | Tanpa biaya | $0,27 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | $2.70 |
+| 输出价格（包括思考 token） | 免费 | $13.50 |
+| 上下文缓存价格 | 免费 | 0.27 美元 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-\* Permintaan yang dikirimkan pelanggan ke Gemini dapat menghasilkan satu atau beberapa
-kueri ke Google Penelusuran. Anda akan dikenai biaya untuk setiap kueri penelusuran individual yang dilakukan.
-
-\*\* Dapat diuji di Google AI Studio.
+\* 客户向 Gemini 提交的请求可能会触发一次或多次 Google 搜索查询。每执行一次搜索查询，系统都会单独收取费用。
 
 ## Gemini 3.5 Flash
 
 *`gemini-3.5-flash`*
 
-[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-3.5-flash&hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com?model=gemini-3.5-flash&hl=zh-cn)
 
-Model tercerdas kami yang dibuat untuk kecepatan, menggabungkan kecerdasan terdepan dengan penelusuran dan perujukan yang unggul.
+Google 最智能的模型，专为速度而打造，将前沿智能与卓越的搜索和接地能力完美结合。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $1,50 |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $9,00 |
-| Harga context caching | Tanpa biaya | $0,15 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | $1.50 |
+| 输出价格（包括思考 token） | 免费 | 9.00 美元 |
+| 上下文缓存价格 | 免费 | 0.15 美元 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,75 |
-| Harga output (termasuk token pemikiran) | Tidak tersedia | $4,50 |
-| Harga context caching | Tidak tersedia | $0,075 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 permintaan per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | $0.75 |
+| 输出价格（包括思考 token） | 不可用 | $4.50 |
+| 上下文缓存价格 | 不可用 | 0.075 美元 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 个请求（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 个请求（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Lipat
+### Flex
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,75 |
-| Harga output (termasuk token pemikiran) | Tidak tersedia | $4,50 |
-| Harga context caching | Tidak tersedia | $0,08 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 permintaan per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | $0.75 |
+| 输出价格（包括思考 token） | 不可用 | $4.50 |
+| 上下文缓存价格 | 不可用 | 0.08 美元 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 个请求（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 个请求（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Prioritas
+### 优先级
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $2,70 |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $16,20 |
-| Harga context caching | Tanpa biaya | $0,27 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | $2.70 |
+| 输出价格（包括思考 token） | 免费 | 16.20 美元 |
+| 上下文缓存价格 | 免费 | 0.27 美元 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-\* Permintaan yang dikirimkan pelanggan ke Gemini dapat menghasilkan satu atau beberapa
-kueri ke Google Penelusuran. Anda akan dikenai biaya untuk setiap kueri penelusuran individual yang dilakukan.
+\* 客户向 Gemini 提交的请求可能会触发一次或多次 Google 搜索查询。每执行一次搜索查询，系统都会单独收取费用。
 
-\*\* Dapat diuji di Google AI Studio.
-
-## Gemini 3.5 Live Translate
+## Gemini 3.5 实时翻译
 
 *`gemini-3.5-live-translate-preview`*
 
-[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-live-translate-preview&hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-live-translate-preview&hl=zh-cn)
 
-Model terjemahan ucapan ke ucapan real-time latensi rendah kami yang mendukung lebih dari 70 bahasa.
+Google 的低延迟实时语音翻译模型，支持 70 多种语言。
 
-### Standar
-
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $3,50 atau $0,0053/mnt\* (audio) |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $21,00 atau $0,0315/mnt\* (audio) |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 3.50 美元或 0.0053 美元/分钟\*（音频） |
+| 输出价格（包括思考 token） | 免费 | 21.00 美元或 0.0315 美元/分钟\*（音频） |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-\* Penagihan didasarkan pada total konsumsi token audio input dan output, yang dihitung dengan tarif 25 token per detik audio, yang setara dengan harga efektif sekitar $0,0368 per menit.
+\* 费用根据输入和输出音频 token 的总消耗量计算，换算标准为每秒音频 25 个 token，相当于每分钟的有效价格约为 0.0368 美元。
 
 ## Gemini 3.5 Flash-Lite
 
 *`gemini-3.5-flash-lite`*
 
-[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash-lite&hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash-lite&hl=zh-cn)
 
-Model GA kami yang paling hemat biaya, dioptimalkan untuk tugas agentic bervolume tinggi, terjemahan, dan pemrosesan data sederhana.
+Google 最具成本效益的正式版模型，针对高调用量智能体任务、翻译和简单的数据处理进行了优化。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $0,30 (teks / gambar / video / audio) |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $2,50 |
-| Harga context caching | Tidak tersedia | $0,03 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 permintaan per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 0.30 美元（文本 / 图片 / 视频 / 音频） |
+| 输出价格（包括思考 token） | 免费 | $2.50 |
+| 上下文缓存价格 | 不可用 | 0.03 美元 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $0,15 (teks / gambar / video / audio) |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $1.25 |
-| Harga context caching | Tidak tersedia | $0,02 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 0.15 美元（文本 / 图片 / 视频 / 音频） |
+| 输出价格（包括思考 token） | 免费 | $1.25 |
+| 上下文缓存价格 | 不可用 | 0.02 美元 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Lipat
+### Flex
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $0,15 (teks / gambar / video / audio) |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $1.25 |
-| Harga context caching | Tidak tersedia | $0,02 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 0.15 美元（文本 / 图片 / 视频 / 音频） |
+| 输出价格（包括思考 token） | 免费 | $1.25 |
+| 上下文缓存价格 | 不可用 | 0.02 美元 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Prioritas
+### 优先级
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $0,54 (teks / gambar / video / audio) |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $4,50 |
-| Harga context caching | Tidak tersedia | $0,05 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
-
-\* Permintaan yang dikirimkan pelanggan ke Gemini dapat menghasilkan satu atau beberapa
-kueri ke Google Penelusuran. Anda akan dikenai biaya untuk setiap kueri penelusuran individual yang dilakukan.
-
-\*\* Dapat diuji di Google AI Studio.
-
-\*\* Dapat diuji di Google AI Studio.
+| 输入价格 | 免费 | 0.54 美元（文本 / 图片 / 视频 / 音频） |
+| 输出价格（包括思考 token） | 免费 | $4.50 |
+| 上下文缓存价格 | 不可用 | 0.05 美元 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
 ## Gemini 3.1 Flash-Lite
 
 *`gemini-3.1-flash-lite`*
 
-[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=zh-cn)
 
-Model kami yang paling hemat biaya, dioptimalkan untuk tugas agentic bervolume tinggi, terjemahan, dan pemrosesan data sederhana.
+Google 最具成本效益的模型，针对高调用量智能体任务、翻译和简单的数据处理进行了优化。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $0,25 (teks / gambar / video) $0,50 (audio) |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $1,50 |
-| Harga context caching | Tidak tersedia | $0,025 (teks / gambar / video) $0,05 (audio) $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 0.25 美元（文本 / 图片 / 视频） 0.50 美元（音频） |
+| 输出价格（包括思考 token） | 免费 | $1.50 |
+| 上下文缓存价格 | 不可用 | 0.025 美元（文本/图片/视频） 0.05 美元（音频） 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $0,125 (teks / gambar / video) $0,25 (audio) |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $0,75 |
-| Harga context caching | Tidak tersedia | $0,0125 (teks / gambar / video) $0,025 (audio) $0,50 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 0.125 美元（文本 / 图片 / 视频） 0.25 美元（音频） |
+| 输出价格（包括思考 token） | 免费 | $0.75 |
+| 上下文缓存价格 | 不可用 | 0.0125 美元（文本/图片/视频） 0.025 美元（音频） 0.50 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Lipat
+### Flex
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $0,125 (teks / gambar / video) $0,25 (audio) |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $0,75 |
-| Harga context caching | Tidak tersedia | $0,0125 (teks / gambar / video) $0,025 (audio) $0,50 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 0.125 美元（文本 / 图片 / 视频） 0.25 美元（音频） |
+| 输出价格（包括思考 token） | 免费 | $0.75 |
+| 上下文缓存价格 | 不可用 | 0.0125 美元（文本/图片/视频） 0.025 美元（音频） 0.50 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Prioritas
+### 优先级
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $0,45 (teks / gambar / video) $0,90 (audio) |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $2,70 |
-| Harga context caching | Tidak tersedia | $0,045 (teks / gambar / video) $0,09 (audio) $1,80 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 0.45 美元（文本 / 图片 / 视频） 0.90 美元（音频） |
+| 输出价格（包括思考 token） | 免费 | $2.70 |
+| 上下文缓存价格 | 不可用 | 0.045 美元（文本/图片/视频） 0.09 美元（音频） 1.80 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-\* Permintaan yang dikirimkan pelanggan ke Gemini dapat menghasilkan satu atau beberapa
-kueri ke Google Penelusuran. Anda akan dikenai biaya untuk setiap kueri penelusuran individual yang dilakukan.
+\* 客户向 Gemini 提交的请求可能会触发一次或多次 Google 搜索查询。每执行一次搜索查询，系统都会单独收取费用。
 
-\*\* Dapat diuji di Google AI Studio.
-
-## Pratinjau Gemini Omni Flash
+## Gemini Omni Flash 预览版
 
 *`gemini-omni-flash-preview`*
 
-[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-flash-preview&hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-flash-preview&hl=zh-cn)
 
-Model pengeditan dan pembuatan video generasi berikutnya kami, yang tersedia bagi developer di tingkat berbayar Gemini API.
+Google 的新一代视频生成和编辑模型，现已面向使用 Gemini API 付费层级的开发者开放。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $1,50 (teks / gambar / video / audio) |
-| Harga output (termasuk token pemikiran) | Tidak tersedia | $9,00 (teks) $17,50 (video)\* |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 1.50 美元（文本 / 图片 / 视频 / 音频） |
+| 输出价格（包括思考 token） | 不可用 | 9.00 美元（文本） 17.50 美元（视频）\* |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-\* Penagihan didasarkan pada total konsumsi token output, yang dihitung dengan kecepatan 5.792 token per detik video 720p. Dengan harga Standar, ini setara dengan harga efektif sekitar $0,10 per detik.
+\* 结算依据是总输出 token 消耗量，按每秒 720p 视频 5,792 个 token 的费率计算。在标准价格下，这相当于每秒约 0.10 美元的有效价格。
 
-## Pratinjau Gemini 3.1 Pro
+## Gemini 3 Pro 预览版
 
-*`gemini-3.1-pro-preview` dan `gemini-3.1-pro-preview-customtools`*
+*`gemini-3.1-pro-preview` 和 `gemini-3.1-pro-preview-customtools`*
 
-[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=zh-cn)
 
-Peningkatan terbaru pada performa, kecerdasan, dan kegunaan untuk rangkaian model terbaik di dunia untuk pemahaman multimodal, kemampuan agentic, dan vibe-coding.
+针对全球领先的多模态理解能力、智能体功能和氛围编程 (vibe coding) 模型系列，在性能、智能和易用性方面进行了全新升级。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $2,00, perintah <= 200 ribu token $4,00, perintah > 200 ribu token |
-| Harga output (termasuk token pemikiran) | Tidak tersedia | $12,00, perintah <= 200 ribu token $18,00, perintah > 200 ribu |
-| Harga context caching | Tidak tersedia | $0,20, perintah <= 200 ribu token $0,40, perintah > 200 ribu $4,50 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 2.00 美元：提示 <= 20 万个 token 4.00 美元：提示 > 20 万个 token |
+| 输出价格（包括思考 token） | 不可用 | 12.00 美元：提示 <= 20 万个 token 18.00 美元：提示 > 20 万个 token |
+| 上下文缓存价格 | 不可用 | 0.20 美元：提示 <= 20 万个 token 0.40 美元：提示 > 20 万个 token 4.50 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $1,00, perintah <= 200 ribu token $2,00, perintah > 200 ribu token |
-| Harga output (termasuk token pemikiran) | Tidak tersedia | $6,00, perintah <= 200 ribu token $9,00, perintah > 200 ribu |
-| Harga context caching | Tidak tersedia | *Sama seperti Standard*  $0,20, perintah <= 200 ribu token $0,40, perintah > 200 ribu token $4,50 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 permintaan per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 1.00 美元：提示 <= 20 万个 token 2.00 美元：提示 > 20 万个 token |
+| 输出价格（包括思考 token） | 不可用 | 6.00 美元：提示 <= 20 万个 token 9.00 美元：提示 > 20 万个 token |
+| 上下文缓存价格 | 不可用 | 与标准层级相同  0.20 美元：提示 <= 20 万个 token 0.40 美元：提示 > 20 万个 token 4.50 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 个请求（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 个请求（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Lipat
+### Flex
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $1,00, perintah <= 200 ribu token $2,00, perintah > 200 ribu token |
-| Harga output (termasuk token pemikiran) | Tidak tersedia | $6,00, perintah <= 200 ribu token $9,00, perintah > 200 ribu |
-| Harga context caching | Tidak tersedia | *Sama seperti Standard*  $0,20, perintah <= 200 ribu token $0,40, perintah > 200 ribu token $4,50 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 permintaan per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 1.00 美元：提示 <= 20 万个 token 2.00 美元：提示 > 20 万个 token |
+| 输出价格（包括思考 token） | 不可用 | 6.00 美元：提示 <= 20 万个 token 9.00 美元：提示 > 20 万个 token |
+| 上下文缓存价格 | 不可用 | 与标准层级相同  0.20 美元：提示 <= 20 万个 token 0.40 美元：提示 > 20 万个 token 4.50 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 个请求（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 个请求（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Prioritas
+### 优先级
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $3,60, perintah <= 200 ribu token $7,20, perintah > 200 ribu token |
-| Harga output (termasuk token pemikiran) | Tidak tersedia | $21,60, perintah <= 200 ribu token $32,40, perintah > 200 ribu |
-| Harga context caching | Tidak tersedia | $0,36, perintah <= 200 ribu token $0,72, perintah > 200 ribu $8,10 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 3.60 美元：提示 <= 20 万个 token 7.20 美元：提示 > 20 万个 token |
+| 输出价格（包括思考 token） | 不可用 | 21.60 美元：提示 <= 20 万个 token 32.40 美元：提示 > 20 万个 token |
+| 上下文缓存价格 | 不可用 | 0.36 美元：提示 <= 20 万个 token 0.72 美元：提示 > 20 万个 token 8.10 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-\* Permintaan yang dikirimkan pelanggan ke Gemini dapat menghasilkan satu atau beberapa
-kueri ke Google Penelusuran. Anda akan dikenai biaya untuk setiap kueri penelusuran individual yang dilakukan.
+\* 客户向 Gemini 提交的请求可能会触发一次或多次 Google 搜索查询。每执行一次搜索查询，系统都会单独收取费用。
 
-\*\* Dapat diuji di Google AI Studio.
-
-## Pratinjau Langsung Gemini 3.1 Flash
+## Gemini 3.1 Flash Live 预览版
 
 *`gemini-3.1-flash-live-preview`*
 
-[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-live-preview&hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-live-preview&hl=zh-cn)
 
-Model audio-ke-audio latensi rendah kami dioptimalkan untuk dialog real-time dengan deteksi nuansa akustik, presisi numerik, dan kesadaran multimodal.
+Google 的低延迟音频转音频模型，针对实时对话场景进行了优化，具备声学细微差别检测、数值精准处理及多模态感知能力。
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $0,75 (teks) $3,00 atau $0,005/menit (audio) $1,00 atau $0,002/menit (gambar/video) |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $4,50 (teks) $12,00 atau $0,018/menit (audio) |
-| Grounding dengan Google Penelusuran\* | Didukung | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 0.75 美元（文本） 3.00 美元或 0.005 美元/分钟（音频） 1.00 美元或 0.002 美元/分钟（图片/视频） |
+| 输出价格（包括思考 token） | 免费 | 4.50 美元（文本） 12.00 美元或 0.018 美元/分钟（音频） |
+| 依托 Google 搜索进行接地\* | 支持 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-\* Permintaan yang dikirimkan pelanggan ke Gemini dapat menghasilkan satu atau beberapa
-kueri ke Google Penelusuran. Anda akan dikenai biaya untuk setiap kueri penelusuran individual yang dilakukan.
+\* 客户向 Gemini 提交的请求可能会触发一次或多次 Google 搜索查询。每执行一次搜索查询，系统都会单独收取费用。
 
 ## Gemini 3.1 Flash Image (Nano Banana 2) 🍌
 
 *`gemini-3.1-flash-image`*
 
-[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-image&hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-image&hl=zh-cn)
 
-Model pembuatan Gambar Gemini 3.1 Flash yang didesain untuk kecepatan dan efisiensi ini efektif untuk respons interaktif yang cepat dan throughput tinggi.
+Gemini 3.1 Flash 图片生成模型专为速度和效率而打造，非常适合快速交互式响应和高吞吐量场景。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,50 (teks/gambar) |
-| Harga output | Tidak tersedia | $3 (teks dan pemikiran)  $60,00 (gambar)  Setara dengan $0,045 per 0,5K gambar\*  $0,067 per 1K gambar\*, $0,101 per 2K gambar\*, dan $0,151 per 4K gambar\*. |
-| Melakukan grounding dengan Google Penelusuran Web dan Gambar\*\* | Tidak tersedia\*\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan untuk perujukan berbasis teks dan gambar. |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 0.50 美元（文本/图片） |
+| 输出价格 | 不可用 | 3 美元（文本和思考）  60.00 美元（图片）  相当于每张 0.5K 图片 0.045 美元\*  每张 1K 图片 0.067 美元\*、 每张 2K 图片 0.101 美元\*， 以及每张 4K 图片 0.151 美元\*。 |
+| 依托 Google 网页搜索和图片搜索进行接地\*\* | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后针对基于文本和图片的接地，按每 1,000 次搜索查询 14 美元计费。 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,25 (teks, gambar) |
-| Harga output | Tidak tersedia | $1,50 (teks dan pemikiran)  $30,00 (gambar)  Setara dengan $0,022 per 0,5 ribu gambar\*  $0,034 per 1 ribu gambar\*,  $0,050 per 2 ribu gambar\*,  dan $0,076 per 4 ribu gambar\*. |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 0.25 美元（文本、图片） |
+| 输出价格 | 不可用 | 1.50 美元（文本和思考）  30.00 美元（图片）  相当于每张 0.5K 图片 0.022 美元\*  每张 1K 图片 0.034 美元\*、  每张 2K 图片 0.050 美元\*，  以及每张 4K 图片 0.076 美元\*。 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-\* Output gambar dikenai biaya $60 per 1.000.000 token.
-Gambar output pada 0,5K (512 piksel) menggunakan 747 token dan setara dengan $0,045 per
-gambar. Gambar output pada 1K (1024x1024 piksel) menggunakan 1.120 token dan setara dengan $0,067 per gambar. Gambar output pada 2K (2048x2048 piksel) menggunakan 1.680 token dan setara dengan $0,101 per gambar. Gambar output dalam 4K (4096x4096 piksel) menggunakan
-2.520 token dan setara dengan $0,151 per gambar.
+\* 图片输出的价格为 60 美元/100 万个 token。分辨率为 0.5K (512px) 的输出图片会消耗 747 个 token，相当于每张图片 0.045 美元。分辨率为 1K (1024x1024px) 的输出图片会消耗 1120 个 token，相当于每张图片 0.067 美元。分辨率为 2K (2048x2048px) 的输出图片会消耗 1680 个 token，相当于每张图片 0.101 美元。分辨率为 4K (4096x4096px) 的输出图片会消耗 2520 个 token，相当于每张图片 0.151 美元。
 
-\*\* Permintaan yang dikirimkan pelanggan ke Gemini dapat menghasilkan satu atau beberapa
-kueri ke Google Penelusuran. Anda akan dikenai biaya untuk setiap kueri penelusuran individual yang dilakukan. Konteks yang diambil (teks atau gambar) yang disediakan oleh Perujukan dengan Google Penelusuran tidak dikenai biaya sebagai token input.
+\*\* 客户向 Gemini 提交的请求可能会触发一次或多次 Google 搜索查询。每执行一次搜索查询，系统都会单独收取费用。通过“依托 Google 搜索进行接地”功能检索到的上下文（文本或图片）不计入输入 token 费用。
 
-\*\*\* Dapat diuji di Google AI Studio.
-
-## Gambar Gemini 3.1 Flash Lite (Nano Banana 2 Lite) 🍌
+## Gemini 3.1 Flash Lite 映像（Nano Banana 2 Lite）🍌
 
 *`gemini-3.1-flash-lite-image`*
 
-[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-image&hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-image&hl=zh-cn)
 
-Didesain sebagai spesialis efisiensi dalam rangkaian model pembuatan gambar, model Gemini 3.1 Flash Lite Image dirancang untuk latensi sangat rendah serta pembuatan dan pengeditan gambar yang hemat biaya.
+Gemini 3.1 Flash Lite Image 模型是图片生成系列中的效率专家，专为超低延迟和经济高效的图片生成和编辑而设计。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,25 (teks/gambar/video) |
-| Harga output | Tidak tersedia | $1,50 (teks dan pemikiran)  $30,00 (gambar)  Setara dengan $0,0336 per gambar beresolusi 1K\* |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 0.25 美元（文本/图片/视频） |
+| 输出价格 | 不可用 | 1.50 美元（文本和思考）  30.00 美元（图片）  相当于每张 1K 分辨率图片 0.0336 美元\* |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,125 (teks/gambar/video) |
-| Harga output | Tidak tersedia | $0,75 (teks dan pemikiran)  $15,00 (gambar)  Setara dengan $0,0168 per gambar resolusi 1K\* |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 0.125 美元（文本/图片/视频） |
+| 输出价格 | 不可用 | 0.75 美元（文本和思考）  15.00 美元（图片）  相当于每张 1K 分辨率图片 0.0168 美元\* |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-\* Output gambar dihargai $30 per 1.000.000 token. Gambar output pada 1K (1024x1024 piksel) menggunakan 1.120 token dan setara dengan $0,0336 per gambar.
+\* 图片输出的价格为 30 美元/100 万个 token。分辨率为 1K (1024x1024px) 的输出图片会消耗 1120 个 token，相当于每张图片 0.0336 美元。
 
-## Pratinjau Gemini 3.1 Flash TTS
+## Gemini 3.1 Flash TTS 预览版
 
 *`gemini-3.1-flash-tts-preview`*
 
-[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-tts-preview&hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-tts-preview&hl=zh-cn)
 
-Model audio Text-to-Speech 3.1 Flash kami dioptimalkan untuk performa harga yang baik, pembuatan ucapan yang mudah dikontrol, dan latensi rendah.
+Google 的 3.1 Flash 文字转语音音频模型，经过优化，可实现高性价比、低延迟且可控的语音生成。
 
-Model pratinjau dapat berubah sebelum menjadi stabil dan memiliki batas laju yang lebih ketat.
+预览版模型在转为稳定版之前可能会发生变化，且速率限制会更为严格。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $1,00 (teks) |
-| Harga output | Tanpa biaya | $20,00 (audio) |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 1.00 美元（文本） |
+| 输出价格 | 免费 | 20.00 美元（音频） |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,50 (teks) |
-| Harga output | Tidak tersedia | Rp100.000 (audio) |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 0.50 美元（文本） |
+| 输出价格 | 不可用 | 10.00 美元（音频） |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-\* Token audio sesuai dengan 25 token per detik audio.
+\* 音频 token 的换算标准为每秒音频 25 个 token。
 
-## Pratinjau Gemini 3 Flash
+## Gemini 3 Flash 预览版
 
 *`gemini-3-flash-preview`*
 
-[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-3-flash-preview&hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com?model=gemini-3-flash-preview&hl=zh-cn)
 
-Model tercerdas kami yang dibuat untuk kecepatan, menggabungkan kecerdasan terdepan dengan penelusuran dan perujukan yang unggul.
+Google 最智能的模型，专为速度而打造，将前沿智能与卓越的搜索和接地能力完美结合。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $0,50 (teks / gambar / video) $1,00 (audio) |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $3,00 |
-| Harga context caching | Tanpa biaya | $0,05 (teks / gambar / video) $0,10 (audio) $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 0.50 美元（文本 / 图片 / 视频） 1.00 美元（音频） |
+| 输出价格（包括思考 token） | 免费 | $3.00 |
+| 上下文缓存价格 | 免费 | 0.05 美元（文本/图片/视频） 0.10 美元（音频） 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,25 (teks / gambar / video) $0,50 (audio) |
-| Harga output (termasuk token pemikiran) | Tidak tersedia | $1,50 |
-| Harga context caching | Tidak tersedia | *Sama seperti Standard*  $0,05 (teks / gambar / video)  $0,10 (audio)  $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 permintaan per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 0.25 美元（文本 / 图片 / 视频） 0.50 美元（音频） |
+| 输出价格（包括思考 token） | 不可用 | $1.50 |
+| 上下文缓存价格 | 不可用 | 与标准层级相同  0.05 美元（文本/图片/视频）  0.10 美元（音频）  1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 个请求（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 个请求（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Lipat
+### Flex
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,25 (teks / gambar / video) $0,50 (audio) |
-| Harga output (termasuk token pemikiran) | Tidak tersedia | $1,50 |
-| Harga context caching | Tidak tersedia | *Sama seperti Standard*  $0,05 (teks / gambar / video)  $0,10 (audio)  $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 permintaan per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 0.25 美元（文本 / 图片 / 视频） 0.50 美元（音频） |
+| 输出价格（包括思考 token） | 不可用 | $1.50 |
+| 上下文缓存价格 | 不可用 | 与标准层级相同  0.05 美元（文本/图片/视频）  0.10 美元（音频）  1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 个请求（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 个请求（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Prioritas
+### 优先级
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $0,90 (teks / gambar / video) $1,80 (audio) |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $5,40 |
-| Harga context caching | Tanpa biaya | $0,09 (teks / gambar / video) $0,18 (audio) $1,80 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran\* | Tidak tersedia\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Grounding with Google Maps | Tidak tersedia\*\* | 5.000 perintah per bulan (gratis, dibagikan di Gemini 3), lalu $14 / 1.000 kueri penelusuran |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 0.90 美元（文本 / 图片 / 视频） 1.80 美元（音频） |
+| 输出价格（包括思考 token） | 免费 | $5.40 |
+| 上下文缓存价格 | 免费 | 0.09 美元（文本/图片/视频） 0.18 美元（音频） 1.80 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地\* | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-\* Permintaan yang dikirimkan pelanggan ke Gemini dapat menghasilkan satu atau beberapa
-kueri ke Google Penelusuran. Anda akan dikenai biaya untuk setiap kueri penelusuran individual yang dilakukan.
+\* 客户向 Gemini 提交的请求可能会触发一次或多次 Google 搜索查询。每执行一次搜索查询，系统都会单独收取费用。
 
-\*\* Dapat diuji di Google AI Studio.
-
-## Gambar Gemini 3 Pro (Nano Banana Pro) 🍌
+## Gemini 3 Pro Image (Nano Banana Pro) 🍌
 
 *`gemini-3-pro-image`*
 
-[Coba di Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3-pro-image&hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com/prompts/new_chat?model=gemini-3-pro-image&hl=zh-cn)
 
-Model pembuatan gambar native kami, yang dioptimalkan untuk kecepatan, fleksibilitas, dan pemahaman kontekstual. **Input dan output teks** memiliki harga yang sama dengan
-[Gemini 3.1 Pro](#gemini-3.1-pro-preview).
+Google 的原生图片生成模型，针对速度、灵活性和上下文理解进行了优化。**文本输入和输出**的价格与 [Gemini 3.1 Pro](#gemini-3.1-pro-preview) 相同。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $2,00 (teks/gambar),  setara dengan $0,0011 per gambar\* |
-| Harga output | Tidak tersedia | $12,00 (teks dan pemikiran)  $120,00 (gambar)  Setara dengan $0,134 per gambar 1K/2K\*\*  dan $0,24 per gambar 4K\*\* |
-| Grounding dengan Google Penelusuran\*\*\* | Tidak tersedia\*\*\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 2.00 美元（文本/图片），  相当于每张图片 0.0011 美元\* |
+| 输出价格 | 不可用 | 12.00 美元（文本和思考）  120.00 美元（图片）  相当于每张 1K/2K 图片 0.134 美元\*\*  每张 4K 图片 0.24 美元\*\* |
+| 依托 Google 搜索进行接地\*\*\* | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $1,00 (teks), $0,0006 (gambar)\* |
-| Harga output | Tidak tersedia | $6,00 (teks dan pemikiran)  $0,067 per gambar 1K/2K\*\*  $0,12 per gambar 4K\*\* |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 1.00 美元（文本）， 0.0006 美元（图片）\* |
+| 输出价格 | 不可用 | 6.00 美元（文本和思考）  每张 1K/2K 图片 0.067 美元\*\*  每张 4K 图片 0.12 美元\*\* |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Lipat
+### Flex
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $1,00 (teks), $0,0006 (gambar)\* |
-| Harga output | Tidak tersedia | $6,00 (teks dan pemikiran)  $0,067 per gambar 1K/2K\*\*  $0,12 per gambar 4K\*\* |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 1.00 美元（文本）， 0.0006 美元（图片）\* |
+| 输出价格 | 不可用 | 6.00 美元（文本和思考）  每张 1K/2K 图片 0.067 美元\*\*  每张 4K 图片 0.12 美元\*\* |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Prioritas
+### 优先级
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $3,60 (teks/gambar) |
-| Harga output | Tidak tersedia | $21,60 (teks dan pemikiran)  $216,00 (gambar) |
-| Grounding dengan Google Penelusuran\*\*\* | Tidak tersedia\*\*\*\* | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 3.60 美元（文本/图片） |
+| 输出价格 | 不可用 | 21.60 美元（文本和思考）  216.00 美元（图片） |
+| 依托 Google 搜索进行接地\*\*\* | 不可用 | 每月 5,000 条提示（免费，在 Gemini 3 中共享），超出后按每 1,000 次搜索查询 14 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-\* Input gambar ditetapkan pada 560 token atau $0,0011 per gambar.
+\* 图片输入计费标准为每张图片 560 个 token 或 0.0011 美元。
 
-\*\* Output gambar dihargai $120 per 1.000.000 token. Gambar output dari 1024x1024 piksel (1K) hingga 2048x2048 piksel (2K) menggunakan 1.120 token dan setara dengan $0,134 per gambar. Gambar output hingga 4096x4096 piksel (4K) menggunakan
-2.000 token dan setara dengan $0,24 per gambar.
+\*\*图片输出的价格为 120 美元/100 万个 token。分辨率介于 1024x1024px (1K) 到 2048x2048px (2K) 之间的输出图片会消耗 1120 个 token，相当于每张图片 0.134 美元。分辨率最高为 4096x4096px (4K) 的输出图片会消耗 2000 个 token，相当于每张图片 0.24 美元。
 
-\*\*\* Permintaan yang dikirimkan pelanggan ke Gemini dapat menghasilkan satu atau beberapa kueri ke Google Penelusuran. Anda akan dikenai biaya untuk setiap kueri penelusuran individual yang dilakukan.
-
-\*\*\*\* Dapat diuji di Google AI Studio.
+\*\*\* 客户向 Gemini 提交的请求可能会触发一次或多次 Google 搜索查询。每执行一次搜索查询，系统都会单独收取费用。
 
 ## Gemini 2.5 Pro
 
 *`gemini-2.5-pro`*
 
-[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-2.5-pro&hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com?model=gemini-2.5-pro&hl=zh-cn)
 
-Model serbaguna canggih kami, yang unggul dalam tugas coding dan penalaran yang kompleks.
+Google 的前沿多用途模型，在编程和复杂推理任务方面表现卓越。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $1,25, perintah <= 200 ribu token $2,50, perintah > 200 ribu token |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $10,00, perintah <= 200 ribu token $15,00, perintah > 200 ribu |
-| Harga context caching | Tidak tersedia | $0,125, perintah <= 200 ribu token $0,25, perintah > 200 ribu token $4,50 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran | Tidak tersedia | 1.500 RPD (gratis), lalu $35 / 1.000 perintah berbasis data |
-| Grounding with Google Maps | Tidak tersedia | 10.000 RPD (gratis), lalu $25 / 1.000 perintah yang memiliki rujukan |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 1.25 美元：提示 <= 20 万个 token 2.50 美元：提示 > 20 万个 token |
+| 输出价格（包括思考 token） | 免费 | 10.00 美元：提示 <= 20 万个 token 15.00 美元：提示 > 20 万个 token |
+| 上下文缓存价格 | 不可用 | 0.125 美元：提示 <= 20 万个 token 0.25 美元：提示 > 20 万个 token 4.50 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地 | 不可用 | 1,500 RPD（免费），超出后按每 1,000 条接地提示 35 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 10,000 RPD（免费），超出后按每 1,000 条接地提示 25 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,625, perintah <= 200 ribu token $1,25, perintah > 200 ribu token |
-| Harga output (termasuk token pemikiran) | Tidak tersedia | $5,00, perintah <= 200 ribu token $7,50, perintah > 200 ribu |
-| Harga context caching | Tidak tersedia | $0,125, perintah <= 200 ribu token $0,25, perintah > 200 ribu token $4,50 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran | Tidak tersedia | 1.500 RPD (gratis), lalu $35 / 1.000 perintah berbasis data |
-| Grounding with Google Maps | Tidak tersedia | Tidak tersedia |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 0.625 美元：提示 <= 20 万个 token 1.25 美元：提示 > 20 万个 token |
+| 输出价格（包括思考 token） | 不可用 | 5.00 美元：提示 <= 20 万个 token 7.50 美元：提示 > 20 万个 token |
+| 上下文缓存价格 | 不可用 | 0.125 美元：提示 <= 20 万个 token 0.25 美元：提示 > 20 万个 token 4.50 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地 | 不可用 | 1,500 RPD（免费），超出后按每 1,000 条接地提示 35 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 不可用 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Lipat
+### Flex
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,625, perintah <= 200 ribu token $1,25, perintah > 200 ribu token |
-| Harga output (termasuk token pemikiran) | Tidak tersedia | $5,00, perintah <= 200 ribu token $7,50, perintah > 200 ribu |
-| Harga context caching | Tidak tersedia | $0,125, perintah <= 200 ribu token $0,25, perintah > 200 ribu token $4,50 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran | Tidak tersedia | 1.500 RPD (gratis), lalu $35 / 1.000 perintah berbasis data |
-| Grounding with Google Maps | Tidak tersedia | Tidak tersedia |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 0.625 美元：提示 <= 20 万个 token 1.25 美元：提示 > 20 万个 token |
+| 输出价格（包括思考 token） | 不可用 | 5.00 美元：提示 <= 20 万个 token 7.50 美元：提示 > 20 万个 token |
+| 上下文缓存价格 | 不可用 | 0.125 美元：提示 <= 20 万个 token 0.25 美元：提示 > 20 万个 token 4.50 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地 | 不可用 | 1,500 RPD（免费），超出后按每 1,000 条接地提示 35 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 不可用 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Prioritas
+### 优先级
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $2,25, perintah <= 200 ribu token $4,50, perintah > 200 ribu token |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $18,00, perintah <= 200 ribu token $27,00, perintah > 200 ribu |
-| Harga context caching | Tidak tersedia | $0,225, perintah <= 200 ribu token $0,45, perintah > 200 ribu token $8,10 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran | Tidak tersedia | 1.500 RPD (gratis), lalu $35 / 1.000 perintah berbasis data |
-| Grounding with Google Maps | Tidak tersedia | 10.000 RPD (gratis), lalu $25 / 1.000 perintah yang memiliki rujukan |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 2.25 美元：提示 <= 20 万个 token 4.50 美元：提示 > 20 万个 token |
+| 输出价格（包括思考 token） | 免费 | 18.00 美元：提示 <= 20 万个 token 27.00 美元：提示 > 20 万个 token |
+| 上下文缓存价格 | 不可用 | 0.225 美元：提示 <= 20 万个 token 0.45 美元：提示 > 20 万个 token 8.10 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地 | 不可用 | 1,500 RPD（免费），超出后按每 1,000 条接地提示 35 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 10,000 RPD（免费），超出后按每 1,000 条接地提示 25 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
 ## Gemini 2.5 Flash
 
 *`gemini-2.5-flash`*
 
-[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash&hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com?model=gemini-2.5-flash&hl=zh-cn)
 
-Model penalaran hybrid pertama kami yang mendukung jendela konteks 1 juta token dan memiliki anggaran berpikir.
+Google 首款混合推理模型，支持 100 万 token 的上下文窗口，并配备了思考预算功能。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $0,30 (teks / gambar / video) $1,00 (audio) |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $2,50 |
-| Harga context caching | Tidak tersedia | $0,03 (teks / gambar / video) $0,1 (audio) $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran | Gratis, hingga 500 RPD (batas yang sama dengan RPD Flash-Lite) | 1.500 RPD (gratis, batasnya sama dengan RPD Flash-Lite), lalu $35 / 1.000 perintah yang dilarang |
-| Grounding with Google Maps | 500 RPD | 1.500 RPD (gratis), lalu $25 / 1.000 perintah yang memiliki rujukan |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 0.30 美元（文本 / 图片 / 视频） 1.00 美元（音频） |
+| 输出价格（包括思考 token） | 免费 | $2.50 |
+| 上下文缓存价格 | 不可用 | 0.03 美元（文本/图片/视频） 0.1 美元（音频） 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地 | 免费，最多 500 RPD（与 Flash-Lite RPD 共享此限额） | 1,500 RPD（免费，与 Flash-Lite RPD 共享此限额），超出后按每 1,000 条接地提示 35 美元计费 |
+| 依托 Google 地图进行接地 | 500 RPD | 1,500 RPD（免费），超出后按每 1,000 条接地提示 25 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,15 (teks / gambar / video) $0,50 (audio) |
-| Harga output (termasuk token pemikiran) | Tidak tersedia | $1.25 |
-| Harga context caching | Tidak tersedia | $0,03 (teks / gambar / video) $0,1 (audio) $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran | Tidak tersedia | 1.500 RPD (gratis, batasnya sama dengan RPD Flash-Lite), lalu $35 / 1.000 perintah yang dilarang |
-| Grounding with Google Maps | Tidak tersedia | Tidak tersedia |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 0.15 美元（文本 / 图片 / 视频） 0.50 美元（音频） |
+| 输出价格（包括思考 token） | 不可用 | $1.25 |
+| 上下文缓存价格 | 不可用 | 0.03 美元（文本/图片/视频） 0.1 美元（音频） 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地 | 不可用 | 1,500 RPD（免费，与 Flash-Lite RPD 共享此限额），超出后按每 1,000 条接地提示 35 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 不可用 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Lipat
+### Flex
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,15 (teks / gambar / video) $0,50 (audio) |
-| Harga output (termasuk token pemikiran) | Tidak tersedia | $1.25 |
-| Harga context caching | Tidak tersedia | $0,03 (teks / gambar / video) $0,1 (audio) $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran | Tidak tersedia | 1.500 RPD (gratis, batasnya sama dengan RPD Flash-Lite), lalu $35 / 1.000 perintah yang dilarang |
-| Grounding with Google Maps | Tidak tersedia | Tidak tersedia |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 0.15 美元（文本 / 图片 / 视频） 0.50 美元（音频） |
+| 输出价格（包括思考 token） | 不可用 | $1.25 |
+| 上下文缓存价格 | 不可用 | 0.03 美元（文本/图片/视频） 0.1 美元（音频） 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地 | 不可用 | 1,500 RPD（免费，与 Flash-Lite RPD 共享此限额），超出后按每 1,000 条接地提示 35 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 不可用 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Prioritas
+### 优先级
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $0,54 (teks / gambar / video) $1,80 (audio) |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $4,50 |
-| Harga context caching | Tidak tersedia | $0,054 (teks / gambar / video) $0,18 (audio) $1,80 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran | Gratis, hingga 500 RPD (batas yang sama dengan RPD Flash-Lite) | 1.500 RPD (gratis, batasnya sama dengan RPD Flash-Lite), lalu $35 / 1.000 perintah yang dilarang |
-| Grounding with Google Maps | 500 RPD | 1.500 RPD (gratis), lalu $25 / 1.000 perintah yang memiliki rujukan |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 0.54 美元（文本 / 图片 / 视频） 1.80 美元（音频） |
+| 输出价格（包括思考 token） | 免费 | $4.50 |
+| 上下文缓存价格 | 不可用 | 0.054 美元（文本/图片/视频） 0.18 美元（音频） 1.80 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地 | 免费，最多 500 RPD（与 Flash-Lite RPD 共享此限额） | 1,500 RPD（免费，与 Flash-Lite RPD 共享此限额），超出后按每 1,000 条接地提示 35 美元计费 |
+| 依托 Google 地图进行接地 | 500 RPD | 1,500 RPD（免费），超出后按每 1,000 条接地提示 25 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
 ## Gemini 2.5 Flash-Lite
 
 *`gemini-2.5-flash-lite`*
 
-[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=zh-cn)
 
-Model terkecil dan paling hemat biaya kami, yang dibuat untuk penggunaan dalam skala besar.
+Google 体积最小、性价比最高的模型，专为大规模应用场景而打造。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input (teks, gambar, video) | Tanpa biaya | $0,10 (teks / gambar / video) $0,30 (audio) |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $0,40 |
-| Harga context caching | Tidak tersedia | $0,01 (teks / gambar / video) $0,03 (audio) $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran | Gratis, hingga 500 RPD (batas yang sama dengan RPD Flash) | 1.500 RPD (gratis, batas dibagikan dengan RPD Flash), lalu $35 / 1.000 perintah yang sudah diproses |
-| Grounding with Google Maps | 500 RPD | 1.500 RPD (gratis), lalu $25 / 1.000 perintah yang memiliki rujukan |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格（文字、图片、视频） | 免费 | 0.10 美元（文本 / 图片 / 视频） 0.30 美元（音频） |
+| 输出价格（包括思考 token） | 免费 | $0.40 |
+| 上下文缓存价格 | 不可用 | 0.01 美元（文本/图片/视频） 0.03 美元（音频） 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地 | 免费，最多 500 RPD（与 Flash RPD 共享此限额） | 1,500 RPD（免费，与 Flash RPD 共享此限额），超出后按每 1,000 条接地提示 35 美元计费 |
+| 依托 Google 地图进行接地 | 500 RPD | 1,500 RPD（免费），超出后按每 1,000 条接地提示 25 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input (teks, gambar, video) | Tidak tersedia | $0,05 (teks / gambar / video) $0,15 (audio) |
-| Harga output (termasuk token pemikiran) | Tidak tersedia | $0,20 |
-| Harga context caching | Tidak tersedia | $0,01 (teks / gambar / video) $0,03 (audio) $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran | Tidak tersedia | 1.500 RPD (gratis, batas dibagikan dengan RPD Flash), lalu $35 / 1.000 perintah yang sudah diproses |
-| Grounding with Google Maps | Tidak tersedia | Tidak tersedia |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格（文字、图片、视频） | 不可用 | 0.05 美元（文本 / 图片 / 视频） 0.15 美元（音频） |
+| 输出价格（包括思考 token） | 不可用 | $0.20 |
+| 上下文缓存价格 | 不可用 | 0.01 美元（文本/图片/视频） 0.03 美元（音频） 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地 | 不可用 | 1,500 RPD（免费，与 Flash RPD 共享此限额），超出后按每 1,000 条接地提示 35 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 不可用 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Lipat
+### Flex
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input (teks, gambar, video) | Tidak tersedia | $0,05 (teks / gambar / video) $0,15 (audio) |
-| Harga output (termasuk token pemikiran) | Tidak tersedia | $0,20 |
-| Harga context caching | Tidak tersedia | $0,01 (teks / gambar / video) $0,03 (audio) $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran | Tidak tersedia | 1.500 RPD (gratis, batas dibagikan dengan RPD Flash), lalu $35 / 1.000 perintah yang sudah diproses |
-| Grounding with Google Maps | Tidak tersedia | Tidak tersedia |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格（文字、图片、视频） | 不可用 | 0.05 美元（文本 / 图片 / 视频） 0.15 美元（音频） |
+| 输出价格（包括思考 token） | 不可用 | $0.20 |
+| 上下文缓存价格 | 不可用 | 0.01 美元（文本/图片/视频） 0.03 美元（音频） 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地 | 不可用 | 1,500 RPD（免费，与 Flash RPD 共享此限额），超出后按每 1,000 条接地提示 35 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 不可用 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Prioritas
+### 优先级
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input (teks, gambar, video) | Tanpa biaya | $0,18 (teks / gambar / video) $0,54 (audio) |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $0,72 |
-| Harga context caching | Tidak tersedia | $0,018 (teks / gambar / video) $0,054 (audio) $1,80 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran | Gratis, hingga 500 RPD (batas yang sama dengan RPD Flash) | 1.500 RPD (gratis, batas dibagikan dengan RPD Flash), lalu $35 / 1.000 perintah yang sudah diproses |
-| Grounding with Google Maps | 500 RPD | 1.500 RPD (gratis), lalu $25 / 1.000 perintah yang memiliki rujukan |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格（文字、图片、视频） | 免费 | 0.18 美元（文本 / 图片 / 视频） 0.54 美元（音频） |
+| 输出价格（包括思考 token） | 免费 | $0.72 |
+| 上下文缓存价格 | 不可用 | 0.018 美元（文本/图片/视频） 0.054 美元（音频） 1.80 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地 | 免费，最多 500 RPD（与 Flash RPD 共享此限额） | 1,500 RPD（免费，与 Flash RPD 共享此限额），超出后按每 1,000 条接地提示 35 美元计费 |
+| 依托 Google 地图进行接地 | 500 RPD | 1,500 RPD（免费），超出后按每 1,000 条接地提示 25 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-## Pratinjau Gemini 2.5 Flash-Lite
+## Gemini 2.5 Flash-Lite 预览版
 
 *`gemini-2.5-flash-lite-preview-09-2025`*
 
-[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite-preview-09-2025&hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com?model=gemini-2.5-flash-lite-preview-09-2025&hl=zh-cn)
 
-Model terbaru berdasarkan Gemini 2.5 Flash lite yang dioptimalkan untuk efisiensi biaya, throughput tinggi, dan kualitas tinggi.
+基于 Gemini 2.5 Flash Lite 打造的全新模型，专为极致性价比、高吞吐量和卓越品质而优化。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input (teks, gambar, video) | Tanpa biaya | $0,10 (teks / gambar / video) $0,30 (audio) |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $0,40 |
-| Harga context caching | Tidak tersedia | $0,01 (teks / gambar / video) $0,03 (audio) $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran | Gratis, hingga 500 RPD (batas yang sama dengan RPD Flash) | 1.500 RPD (gratis, batas dibagikan dengan RPD Flash), lalu $35 / 1.000 perintah yang sudah diproses |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格（文字、图片、视频） | 免费 | 0.10 美元（文本 / 图片 / 视频） 0.30 美元（音频） |
+| 输出价格（包括思考 token） | 免费 | $0.40 |
+| 上下文缓存价格 | 不可用 | 0.01 美元（文本/图片/视频） 0.03 美元（音频） 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地 | 免费，最多 500 RPD（与 Flash RPD 共享此限额） | 1,500 RPD（免费，与 Flash RPD 共享此限额），超出后按每 1,000 条接地提示 35 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input (teks, gambar, video) | Tidak tersedia | $0,05 (teks / gambar / video) $0,15 (audio) |
-| Harga output (termasuk token pemikiran) | Tidak tersedia | $0,20 |
-| Harga context caching | Tidak tersedia | $0,01 (teks / gambar / video) $0,03 (audio) $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran | Tidak tersedia | 1.500 RPD (gratis, batas dibagikan dengan RPD Flash), lalu $35 / 1.000 perintah yang sudah diproses |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格（文字、图片、视频） | 不可用 | 0.05 美元（文本 / 图片 / 视频） 0.15 美元（音频） |
+| 输出价格（包括思考 token） | 不可用 | $0.20 |
+| 上下文缓存价格 | 不可用 | 0.01 美元（文本/图片/视频） 0.03 美元（音频） 1.00 美元/100 万个 token/小时（存储价格） |
+| 依托 Google 搜索进行接地 | 不可用 | 1,500 RPD（免费，与 Flash RPD 共享此限额），超出后按每 1,000 条接地提示 35 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-## Audio Native Gemini 2.5 Flash (Live API)
+## Gemini 2.5 Flash Native Audio (Live API)
 
 *`gemini-2.5-flash-native-audio-preview-12-2025`*
 
-[Coba di Google AI Studio](https://aistudio.google.com/app/live?hl=id#gemini-2.5-flash-native-audio-preview-12-2025)
+[在 Google AI Studio 中试用](https://aistudio.google.com/app/live?hl=zh-cn#gemini-2.5-flash-native-audio-preview-12-2025)
 
-Model audio asli [Live API](https://ai.google.dev/gemini-api/docs/live?hl=id) kami dioptimalkan untuk output audio berkualitas lebih tinggi dengan kecepatan, kealamian suara, verbositas, dan suasana yang lebih baik.
+Google 的 [Live API](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn) 原生音频模型，经过优化，可输出更高质量的音频，在语速节奏、语音自然度、表达丰富度及情绪表现力上均有提升。
 
-Model pratinjau dapat berubah sebelum menjadi stabil dan memiliki batas laju yang lebih ketat.
+预览版模型在转为稳定版之前可能会发生变化，且速率限制会更为严格。
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $0,50 (teks) $3,00 (audio / video) |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $2,00 (teks) $12,00 (audio) |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 0.50 美元（文本） 3.00 美元（音频 / 视频） |
+| 输出价格（包括思考 token） | 免费 | 2.00 美元（文本） 12.00 美元（音频） |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
 ## Gemini 2.5 Flash Image (Nano Banana) 🍌
 
 *`gemini-2.5-flash-image`*
 
-[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=zh-cn)
 
-Model pembuatan gambar native kami, yang dioptimalkan untuk kecepatan, fleksibilitas, dan pemahaman kontekstual. Input dan output teks dihargai sama dengan
-[2.5 Flash](#gemini-2.5-flash).
+Google 的原生图片生成模型，针对速度、灵活性和上下文理解进行了优化。文本输入和输出的价格与 [2.5 Flash](#gemini-2.5-flash) 相同。
 
-Model pratinjau dapat berubah sebelum menjadi stabil dan memiliki batas laju yang lebih ketat.
+预览版模型在转为稳定版之前可能会发生变化，且速率限制会更为严格。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,30 (teks / gambar) |
-| Harga output | Tidak tersedia | $0,039 per gambar\* |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 0.30 美元（文本 / 图片） |
+| 输出价格 | 不可用 | 0.039 美元/张图片\* |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,15 (teks / gambar) |
-| Harga output | Tidak tersedia | $0,0195 per gambar\* |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 0.15 美元（文本 / 图片） |
+| 输出价格 | 不可用 | 0.0195 美元/张图片\* |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Lipat
+### Flex
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,15 (teks / gambar) |
-| Harga output | Tidak tersedia | $0,0195 per gambar\* |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 0.15 美元（文本 / 图片） |
+| 输出价格 | 不可用 | 0.0195 美元/张图片\* |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Prioritas
+### 优先级
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,54 (teks / gambar) |
-| Harga output | Tidak tersedia | $0,0702 per gambar\* |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 0.54 美元（文本 / 图片） |
+| 输出价格 | 不可用 | 每张图片 0.0702 美元\* |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-[\*] Output gambar dikenai biaya $30 per 1.000.000 token. Gambar output hingga 1024x1024 piksel menggunakan 1290 token dan setara dengan $0,039 per gambar.
+[\*] 图片输出的价格为 30 美元/100 万个 token。分辨率最高为 1024x1024px 的输出图片会消耗 1290 个 token，相当于每张图片 0.039 美元。
 
-## Gemini 2.5 Flash Preview TTS
+## Gemini 2.5 Flash 预览版 TTS
 
 *`gemini-2.5-flash-preview-tts`*
 
-[Coba di Google AI Studio](https://aistudio.google.com/generate-speech?hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com/generate-speech?hl=zh-cn)
 
-Model audio text-to-speech 2.5 Flash kami dioptimalkan untuk performa harga yang kompetitif, latensi rendah, dan pembuatan ucapan yang dapat dikontrol.
+Google 的 2.5 Flash 文字转语音音频模型，经过优化，可实现高性价比、低延迟、可控的语音生成。
 
-Model pratinjau dapat berubah sebelum menjadi stabil dan memiliki batas laju yang lebih ketat.
+预览版模型在转为稳定版之前可能会发生变化，且速率限制会更为严格。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $0,50 (teks) |
-| Harga output | Tanpa biaya | Rp100.000 (audio) |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 0.50 美元（文本） |
+| 输出价格 | 免费 | 10.00 美元（音频） |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,25 (teks) |
-| Harga output | Tidak tersedia | $5,00 (audio) |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 0.25 美元（文本） |
+| 输出价格 | 不可用 | 5.00 美元（音频） |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-## Gemini 2.5 Pro Preview TTS
+## Gemini 2.5 Pro 预览版 TTS
 
 *`gemini-2.5-pro-preview-tts`*
 
-[Coba di Google AI Studio](https://aistudio.google.com/generate-speech?hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com/generate-speech?hl=zh-cn)
 
-Model audio text-to-speech 2.5 Pro kami dioptimalkan untuk menghasilkan ucapan yang kuat dan latensi rendah, sehingga menghasilkan output yang lebih alami dan perintah yang lebih mudah diarahkan.
+Google 的 2.5 Pro 文字转语音音频模型，经过优化，具备强大的低延迟语音生成能力，语音输出更自然，提示引导也更易实现。
 
-Model pratinjau dapat berubah sebelum menjadi stabil dan memiliki batas laju yang lebih ketat.
+预览版模型在转为稳定版之前可能会发生变化，且速率限制会更为严格。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $1,00 (teks) |
-| Harga output | Tidak tersedia | $20,00 (audio) |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 1.00 美元（文本） |
+| 输出价格 | 不可用 | 20.00 美元（音频） |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,50 (teks) |
-| Harga output | Tidak tersedia | Rp100.000 (audio) |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 0.50 美元（文本） |
+| 输出价格 | 不可用 | 10.00 美元（音频） |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
 ## Gemini 2.0 Flash
 
 *`gemini-2.0-flash`*
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $0,10 (teks / gambar / video) $0,70 (audio) |
-| Harga output | Tanpa biaya | $0,40 |
-| Harga context caching | Tanpa biaya | $0,025 / 1.000.000 token (teks/gambar/video) $0,175 / 1.000.000 token (audio) |
-| Context caching (penyimpanan) | Tidak tersedia | $1,00 / 1.000.000 token per jam |
-| Harga pembuatan gambar | Tidak tersedia ([dimatikan](https://ai.google.dev/gemini-api/docs/deprecations?hl=id#gemini-2.0-models)) | Tidak tersedia ([dimatikan](https://ai.google.dev/gemini-api/docs/deprecations?hl=id#gemini-2.0-models)) |
-| Harga penyesuaian | Tidak tersedia | Tidak tersedia |
-| Grounding dengan Google Penelusuran | Tanpa biaya, hingga 500 RPD | 1.500 RPD (gratis), lalu $35 / 1.000 perintah berbasis data |
-| Grounding with Google Maps | 500 RPD | 1.500 RPD (gratis), lalu $25 / 1.000 perintah yang memiliki rujukan |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 0.10 美元（文本 / 图片 / 视频） 0.70 美元（音频） |
+| 输出价格 | 免费 | $0.40 |
+| 上下文缓存价格 | 免费 | 0.025 美元 / 100 万个 token（文本/图片/视频） 0.175 美元 / 100 万个 token（音频） |
+| 上下文缓存（存储） | 不可用 | 1.00 美元/100 万个 token/小时 |
+| 图片生成价格 | 不适用（[已关停](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn#gemini-2.0-models)） | 不适用（[已关停](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn#gemini-2.0-models)） |
+| 调优价格 | 不可用 | 不可用 |
+| 依托 Google 搜索进行接地 | 免费，最多 500 RPD | 1,500 RPD（免费），超出后按每 1,000 条接地提示 35 美元计费 |
+| 依托 Google 地图进行接地 | 500 RPD | 1,500 RPD（免费），超出后按每 1,000 条接地提示 25 美元计费 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,05 (teks / gambar / video) $0,35 (audio) |
-| Harga output | Tidak tersedia | $0,20 |
-| Harga context caching | Tidak tersedia | $0,025 / 1.000.000 token (teks/gambar/video) $0,175 / 1.000.000 token (audio) |
-| Context caching (penyimpanan) | Tidak tersedia | $1,00 / 1.000.000 token per jam |
-| Harga pembuatan gambar | Tidak tersedia ([dimatikan](https://ai.google.dev/gemini-api/docs/deprecations?hl=id#gemini-2.0-models)) | Tidak tersedia ([dimatikan](https://ai.google.dev/gemini-api/docs/deprecations?hl=id#gemini-2.0-models)) |
-| Harga penyesuaian | Tidak tersedia | Tidak tersedia |
-| Grounding dengan Google Penelusuran | Tidak tersedia | 1.500 RPD (gratis), lalu $35 / 1.000 perintah berbasis data |
-| Grounding with Google Maps | Tidak tersedia | Tidak tersedia |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 0.05 美元（文本 / 图片 / 视频） 0.35 美元（音频） |
+| 输出价格 | 不可用 | $0.20 |
+| 上下文缓存价格 | 不可用 | 0.025 美元 / 100 万个 token（文本/图片/视频） 0.175 美元 / 100 万个 token（音频） |
+| 上下文缓存（存储） | 不可用 | 1.00 美元/100 万个 token/小时 |
+| 图片生成价格 | 不适用（[已关停](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn#gemini-2.0-models)） | 不适用（[已关停](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn#gemini-2.0-models)） |
+| 调优价格 | 不可用 | 不可用 |
+| 依托 Google 搜索进行接地 | 不可用 | 1,500 RPD（免费），超出后按每 1,000 条接地提示 35 美元计费 |
+| 依托 Google 地图进行接地 | 不可用 | 不可用 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-[\*] Output gambar dikenai biaya $30 per 1.000.000 token. Gambar output hingga 1024x1024 piksel menggunakan 1290 token dan setara dengan $0,039 per gambar.
+[\*] 图片输出的价格为 30 美元/100 万个 token。分辨率最高为 1024x1024px 的输出图片会消耗 1290 个 token，相当于每张图片 0.039 美元。
 
 ## Gemini 2.0 Flash-Lite
 
 *`gemini-2.0-flash-lite`*
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $0,075 |
-| Harga output | Tanpa biaya | $0,30 |
-| Harga context caching | Tidak tersedia | Tidak tersedia |
-| Context caching (penyimpanan) | Tidak tersedia | Tidak tersedia |
-| Harga penyesuaian | Tidak tersedia | Tidak tersedia |
-| Grounding dengan Google Penelusuran | Tidak tersedia | Tidak tersedia |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | $0.075 |
+| 输出价格 | 免费 | $0.30 |
+| 上下文缓存价格 | 不可用 | 不可用 |
+| 上下文缓存（存储） | 不可用 | 不可用 |
+| 调优价格 | 不可用 | 不可用 |
+| 依托 Google 搜索进行接地 | 不可用 | 不可用 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,0375 |
-| Harga output | Tidak tersedia | $0,15 |
-| Harga context caching | Tidak tersedia | Tidak tersedia |
-| Context caching (penyimpanan) | Tidak tersedia | Tidak tersedia |
-| Harga penyesuaian | Tidak tersedia | Tidak tersedia |
-| Grounding dengan Google Penelusuran | Tidak tersedia | Tidak tersedia |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | $0.0375 |
+| 输出价格 | 不可用 | $0.15 |
+| 上下文缓存价格 | 不可用 | 不可用 |
+| 上下文缓存（存储） | 不可用 | 不可用 |
+| 调优价格 | 不可用 | 不可用 |
+| 依托 Google 搜索进行接地 | 不可用 | 不可用 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
 ## Imagen 4
 
-*`imagen-4.0-generate-001`, `imagen-4.0-ultra-generate-001`, `imagen-4.0-fast-generate-001`*
+`imagen-4.0-generate-001`、`imagen-4.0-ultra-generate-001`、`imagen-4.0-fast-generate-001`
 
-[Coba di Google AI Studio](https://aistudio.google.com/generate-image?hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com/generate-image?hl=zh-cn)
 
-Model pembuatan gambar terbaru kami, dengan rendering teks yang jauh lebih baik dan kualitas gambar keseluruhan yang lebih baik.
+Google 最新的图像生成模型，文字渲染效果大幅提升，整体图片质量也更为出色。
 
-Model pratinjau dapat berubah sebelum menjadi stabil dan memiliki batas laju yang lebih ketat.
+预览版模型在转为稳定版之前可能会发生变化，且速率限制会更为严格。
 
-|  | Paket Gratis | Tingkatan Berbayar, per Gambar dalam USD |
+|  | 免费层级 | 付费层级（美元/张图片） |
 | --- | --- | --- |
-| Harga gambar cepat Imagen 4 | Tidak tersedia | $0,02 |
-| Harga gambar Standar Imagen 4 | Tidak tersedia | $0,04 |
-| Harga gambar Imagen 4 Ultra | Tidak tersedia | $0,06 |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| Imagen 4 Fast 图片价格 | 不可用 | $0.02 |
+| Imagen 4 Standard 图片价格 | 不可用 | $0.04 |
+| Imagen 4 Ultra 图片价格 | 不可用 | $0.06 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
 ## Veo 3.1
 
-*`veo-3.1-generate-preview`, `veo-3.1-fast-generate-preview`, `veo-3.1-lite-generate-preview`*
+`veo-3.1-generate-preview`、`veo-3.1-fast-generate-preview`、`veo-3.1-lite-generate-preview`
 
-[Coba Veo 3.1](https://deepmind.google/models/veo/?hl=id)
+[试用 Veo 3.1](https://deepmind.google/models/veo/?hl=zh-cn)
 
-Model pembuatan video terbaru kami, tersedia untuk developer di tingkat berbayar Gemini API.
+Google 最新的视频生成模型，现已面向使用 Gemini API 付费层级的开发者开放。
 
-Model pratinjau dapat berubah sebelum menjadi stabil dan memiliki batas laju yang lebih ketat.
+预览版模型在转为稳定版之前可能会发生变化，且速率限制会更为严格。
 
-|  | Paket Gratis | Paket Berbayar, per detik dalam USD |
+|  | 免费层级 | 付费层级（美元/秒） |
 | --- | --- | --- |
-| Harga video standar Veo 3.1 dengan audio (default) | Tidak tersedia | $0,40 (720p dan 1080p) $0,60 (4k) |
-| Harga video Veo 3.1 Fast dengan audio (default) | Tidak tersedia | $0,10 (720p) $0,12 (1080p) $0,30 (4k) |
-| Harga video Veo 3.1 Lite dengan audio (default) | Tidak tersedia | $0,05 (720p) $0,08 (1080p) (output 4k tidak didukung) |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| Veo 3.1 Standard 视频（含音频）价格（默认） | 不可用 | 0.40 美元（720p 和 1080p） 0.60 美元 (4k) |
+| Veo 3.1 Fast 视频（含音频）价格（默认） | 不可用 | 0.10 美元 (720p) 0.12 美元 (1080p) 0.30 美元 (4k) |
+| Veo 3.1 Lite 视频（含音频）价格（默认） | 不可用 | 0.05 美元 (720p) 0.08 美元 (1080p) （不支持 4k 输出） |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
 ## Veo 3
 
-*`veo-3.0-generate-001`, `veo-3.0-fast-generate-001`*
+*`veo-3.0-generate-001`、`veo-3.0-fast-generate-001`*
 
-[Coba Veo 3](https://deepmind.google/models/veo/?hl=id)
+[试用 Veo 3](https://deepmind.google/models/veo/?hl=zh-cn)
 
-Model pembuatan video stabil kami, yang tersedia bagi developer di tingkat berbayar Gemini API.
+Google 的稳定版视频生成模型，现已面向使用 Gemini API 付费层级的开发者开放。
 
-|  | Paket Gratis | Paket Berbayar, per detik dalam USD |
+|  | 免费层级 | 付费层级（美元/秒） |
 | --- | --- | --- |
-| Harga video dengan audio Veo 3 Standard (default) | Tidak tersedia | $0,40 |
-| Harga video Veo 3 Fast dengan audio (default) | Tidak tersedia | $0,10 (720p) $0,12 (1080p) $0,30 (4k) |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| Veo 3 Standard 视频（含音频）价格（默认） | 不可用 | $0.40 |
+| Veo 3 Fast 视频（含音频）价格（默认） | 不可用 | 0.10 美元 (720p) 0.12 美元 (1080p) 0.30 美元 (4k) |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
 ## Veo 2
 
 *`veo-2.0-generate-001`*
 
-[Coba API](https://ai.google.dev/gemini-api/docs/video?hl=id)
+[试用 API](https://ai.google.dev/gemini-api/docs/video?hl=zh-cn)
 
-Model pembuatan video tercanggih kami, yang tersedia bagi developer di tingkat berbayar Gemini API.
+Google 的前沿视频生成模型，现已面向使用 Gemini API 付费层级的开发者开放。
 
-|  | Paket Gratis | Paket Berbayar, per detik dalam USD |
+|  | 免费层级 | 付费层级（美元/秒） |
 | --- | --- | --- |
-| Harga video | Tidak tersedia | $0,35 |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 视频价格 | 不可用 | $0.35 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
 ## Lyria 3
 
-*`lyria-3-clip-preview` dan `lyria-3-pro-preview`*
+*`lyria-3-clip-preview` 和 `lyria-3-pro-preview`*
 
-Rangkaian model pembuatan musik Google. Model pratinjau dapat berubah sebelum menjadi stabil dan memiliki batas penggunaan yang lebih ketat.
+Google 的音乐创作模型系列。预览版模型在转为稳定版之前可能会发生变化，且速率限制会更为严格。
 
-|  | Paket Gratis | Paket Berbayar, per permintaan dalam USD |
+|  | 免费层级 | 付费层级（美元/次请求） |
 | --- | --- | --- |
-| Pratinjau Klip Lyria 3 (30 detik) | Tidak tersedia | $0,04 per lagu |
-| Pratinjau Lyria 3 Pro (Lagu Lengkap) | Tidak tersedia | $0,08 per lagu |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| Lyria 3 Clip 预览版（30 秒） | 不可用 | 0.04 美元/首歌曲 |
+| Lyria 3 Pro 预览版（完整歌曲） | 不可用 | 0.08 美元/首歌曲 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-## Penyematan Gemini 2
+## Gemini Embedding 2
 
 *`gemini-embedding-2`*
 
-[Coba API](https://ai.google.dev/gemini-api/docs/embeddings?hl=id)
+[试用 API](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-cn)
 
-Model embedding multimodal pertama kami, yang memetakan teks, gambar, video, audio, dan PDF ke dalam ruang embedding terpadu.
+Google 的首款多模态嵌入模型，可将文本、图片、视频、音频和 PDF 映射到统一的嵌入空间中。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input teks | Tanpa biaya | $0,20 |
-| Harga input gambar | Tanpa biaya | $0,45 ($0,00012 per gambar) |
-| Harga input audio | Tanpa biaya | $6,50 ($0,00016 per detik) |
-| Harga input video | Tanpa biaya | $12,00 ($0,00079 per frame) |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 文本输入价格 | 免费 | $0.20 |
+| 图片输入价格 | 免费 | 0.45 美元（每张图片 0.00012 美元） |
+| 音频输入价格 | 免费 | 6.50 美元（每秒 0.00016 美元） |
+| 视频输入价格 | 免费 | 12.00 美元（每帧 0.00079 美元） |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input teks | Tidak tersedia | $0,10 |
-| Harga input gambar | Tidak tersedia | $0,225 ($0,00006 per gambar) |
-| Harga input audio | Tidak tersedia | $3,25 ($0,00008 per detik) |
-| Harga input video | Tidak tersedia | $6,00 ($0,000395 per frame) |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 文本输入价格 | 不可用 | $0.10 |
+| 图片输入价格 | 不可用 | 0.225 美元（每张图片 0.00006 美元） |
+| 音频输入价格 | 不可用 | 3.25 美元（每秒 0.00008 美元） |
+| 视频输入价格 | 不可用 | 6.00 美元（每帧 0.000395 美元） |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-## Penyematan Gemini
+## Gemini Embedding
 
 *`gemini-embedding-001`*
 
-[Coba API](https://ai.google.dev/gemini-api/docs/embeddings?hl=id)
+[试用 API](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-cn)
 
-Model Gemini Embeddings kami untuk kasus penggunaan khusus teks, tersedia bagi developer di tingkat gratis dan berbayar Gemini API.
+Google 的 Gemini Embeddings 模型，专为纯文本应用场景打造，现已面向使用 Gemini API 免费层级和付费层级的开发者开放。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $0,15 |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | $0.15 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,075 |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | $0.075 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-## Pratinjau Gemini Robotics ER 2
-
-*`gemini-robotics-er-2-preview`*
-
-[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-preview&hl=id)
-
-Gemini Robotics ER 2, atau Gemini Robotics Embodied Reasoning 2, adalah endpoint model bahasa visual yang memungkinkan robot memahami lingkungan mereka secara akurat, mendukung orkestrasi agentic robot, pemahaman progres video, kolaborasi multi-robot, dan penalaran spasial tingkat lanjut.
-
-### Standar
-
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
-| --- | --- | --- |
-| Harga input | Tanpa biaya | $2,00 (teks / gambar / video / audio) |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $10,00 |
-| Harga context caching | Tidak tersedia | $0,20 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran | Tidak tersedia | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
-
-### Batch
-
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
-| --- | --- | --- |
-| Harga input | Tidak tersedia | $1,00 (teks / gambar / video / audio) |
-| Harga output (termasuk token pemikiran) | Tidak tersedia | $5,00 |
-| Harga context caching | Tidak tersedia | $0,10 $1,00 / 1.000.000 token per jam (harga penyimpanan) |
-| Grounding dengan Google Penelusuran | Tidak tersedia | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
-
-## Pratinjau Streaming Gemini Robotics ER 2
-
-*`gemini-robotics-er-2-streaming-preview`*
-
-[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-streaming-preview&hl=id)
-
-Gemini Robotics ER 2 Streaming adalah endpoint model bahasa-penglihatan untuk robotik yang dioptimalkan untuk streaming teks real-time menggunakan Live API. API ini menerima input teks, gambar, video, dan audio serta mendukung streaming dua arah dengan panggilan fungsi.
-
-### Standar
-
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
-| --- | --- | --- |
-| Harga input | Tanpa biaya | $2,00 (teks / gambar / video / audio) |
-| Harga output | Tanpa biaya | $10,00 |
-| Grounding dengan Google Penelusuran | Tidak tersedia | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
-
-## Pratinjau Gemini Robotics ER 1.6
+## Gemini Robotics-ER 1.6 预览版
 
 *`gemini-robotics-er-1.6-preview`*
 
-[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-1.6-preview&hl=id)
+[在 Google AI Studio 中试用](https://aistudio.google.com?model=gemini-robotics-er-1.6-preview&hl=zh-cn)
 
-Gemini Robotics ER, singkatan dari Gemini Robotics-Embodied Reasoning, adalah model berpikir yang meningkatkan kemampuan robot untuk memahami dan berinteraksi dengan dunia fisik.
+Gemini Robotics-ER（全称为 Gemini Robotics-Embodied Reasoning）是一款思考模型，旨在增强机器人理解物理世界并与之交互的能力。
 
-### Standar
+### 标准
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | $1,00 (teks / gambar / video) $2,00 (audio) |
-| Harga output (termasuk token pemikiran) | Tanpa biaya | $5,00 |
-| Grounding dengan Google Penelusuran | Tidak tersedia | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 1.00 美元（文本 / 图片 / 视频） 2.00 美元（音频） |
+| 输出价格（包括思考 token） | 免费 | 5.00 美元 |
+| 依托 Google 搜索进行接地 | 不可用 | 每月 5,000 条提示（免费，与 Flash 共享此限额），超出后针对基于文本和图片的接地，按每 1,000 次搜索查询 14 美元计费。 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-### Batch
+### 批量
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $0,50 (teks / gambar / video) $1,00 (audio) |
-| Harga output (termasuk token pemikiran) | Tidak tersedia | $2,50 |
-| Grounding dengan Google Penelusuran | Tidak tersedia | 5.000 permintaan penelusuran gratis per bulan (dibagikan di semua model Gemini 3.x), lalu $14 per 1.000 permintaan. |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 0.50 美元（文本 / 图片 / 视频） 1.00 美元（音频） |
+| 输出价格（包括思考 token） | 不可用 | $2.50 |
+| 依托 Google 搜索进行接地 | 不可用 | 不可用 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-## Pratinjau Penggunaan Komputer Gemini 2.5
+## Gemini 2.5 Computer Use 预览版
 
 *`gemini-2.5-computer-use-preview-10-2025`*
 
-Model Penggunaan Komputer kami dioptimalkan untuk membangun agen kontrol browser yang mengotomatiskan tugas.
+Google 的 Computer Use 模型，经过优化，专门用于构建可自动执行任务的浏览器控制智能体。
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tidak tersedia | $1,25, perintah <= 200 ribu token $2,50, perintah > 200 ribu token |
-| Harga output | Tidak tersedia | $10,00, perintah <= 200 ribu token $15,00, perintah > 200 ribu |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 不可用 | 1.25 美元：提示 <= 20 万个 token 2.50 美元：提示 > 20 万个 token |
+| 输出价格 | 不可用 | 10.00 美元：提示 <= 20 万个 token 15.00 美元：提示 > 20 万个 token |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
 ## Gemma 4
 
-Model terbuka kami yang ringan, canggih, dan dibangun dari teknologi yang sama dengan yang mendukung model Gemini kami.
+Google 的一款先进的轻量级开放模型，基于 Gemini 模型所用的相同技术构建而成。
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| Harga input | Tanpa biaya | Tidak tersedia |
-| Harga output | Tanpa biaya | Tidak tersedia |
-| Harga context caching | Tanpa biaya | Tidak tersedia |
-| Context caching (penyimpanan) | Tanpa biaya | Tidak tersedia |
-| Harga penyesuaian | Tidak tersedia | Tidak tersedia |
-| Grounding dengan Google Penelusuran | Tidak tersedia | Tidak tersedia |
-| Digunakan untuk meningkatkan kualitas produk kami | [Ya](https://ai.google.dev/gemini-api/terms?hl=id) | [Tidak](https://ai.google.dev/gemini-api/terms?hl=id) |
+| 输入价格 | 免费 | 不可用 |
+| 输出价格 | 免费 | 不可用 |
+| 上下文缓存价格 | 免费 | 不可用 |
+| 上下文缓存（存储） | 免费 | 不可用 |
+| 调优价格 | 不可用 | 不可用 |
+| 依托 Google 搜索进行接地 | 不可用 | 不可用 |
+| 用于改进 Google 产品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-cn) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-cn) |
 
-## Harga untuk alat
+## 工具价格
 
-Alat dikenai biaya sesuai tarifnya sendiri, yang diterapkan pada model yang menggunakannya.
-Periksa halaman [Model](https://ai.google.dev/gemini-api/docs/models?hl=id) untuk mengetahui alat yang tersedia untuk setiap model.
+各类工具按自身费率计费，相关费用将计入调用该工具的模型费用中。
+查看[模型](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn)页面，了解各模型分别支持哪些工具。
 
-|  | Paket Gratis | Paket Berbayar, per 1 Juta token dalam USD |
+|  | 免费层级 | 付费层级（美元/100 万个 token） |
 | --- | --- | --- |
-| [Google Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id#pricing) | 500 RPD gratis (batas yang sama untuk Flash dan Flash-Lite). Tidak tersedia untuk Pro. | Model Gemini 2.5:  1.500 RPD gratis (batas penggunaan bersama untuk Flash dan Flash-Lite). Kemudian $35 / 1.000 perintah berbasis perujukan   Model Gemini 3:  5.000 permintaan penelusuran gratis per bulan (digunakan bersama di semua model Gemini), lalu $14 per 1.000 permintaan. |
-| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=id#pricing_and_rate_limits) | 500 RPD Tidak tersedia untuk Pro. | 1.500 RPD gratis (batas bersama untuk Flash dan Flash-Lite) 10.000 RPD gratis untuk Pro. Kemudian $25 / 1.000 perintah yang tidak mendasar |
-| [Eksekusi kode](https://ai.google.dev/gemini-api/docs/code-execution?hl=id#billing) | Tanpa biaya | Eksekusi kode ditagih dengan tarif token standar untuk model yang dipilih. Biaya ditentukan hanya oleh penggunaan alat, tidak ada biaya yang terakumulasi untuk runtime sesi. Kode yang dihasilkan dan hasil eksekusi ditagih sebagai **Token output** saat dibuat, dan sebagai **Token input** saat model menggunakannya sebagai bagian dari proses penalaran iteratifnya. |
-| [Konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id#limitations) | Tanpa biaya | Ditagih sebagai token input per harga model. |
-| [Penggunaan komputer](https://ai.google.dev/gemini-api/docs/computer-use?hl=id) | Tidak tersedia | Ditagih sebagai token reguler per harga model (misalnya, harga [Gemini 3.5 Flash](#gemini-3.6-flash) standar). Lihat tabel harga [Pratinjau Penggunaan Komputer Gemini 2.5](#gemini-2.5-computer-use-preview-10-2025) untuk tarif model lama. |
-| [Penelusuran file](https://ai.google.dev/gemini-api/docs/file-search?hl=id#pricing) | Tanpa biaya | Ditagih untuk [embedding](#gemini-embedding) sebesar $0,15 / 1 juta token. Token dokumen yang diambil ditagih sebagai token reguler sesuai harga per model. |
-| [Endpoint Alat Kustom (Pratinjau Gemini 3.1 Pro)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=id) | Tidak tersedia | Sama dengan harga [Pratinjau Gemini 3.1 Pro](#gemini-3.1-pro-preview) |
+| [Google 搜索](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn#pricing) | 500 RPD（免费，Flash 和 Flash-Lite 共享此限额）。 不适用于 Pro。 | Gemini 2.5 模型：  1,500 RPD（免费，Flash 和 Flash-Lite 共享此限额）。 超出后按每 1,000 条接地提示 35 美元计费   Gemini 3 模型：  每月 5,000 条提示（免费），超出后按每 1,000 次搜索查询 14 美元计费 |
+| [Google 地图](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-cn#pricing_and_rate_limits) | 500 RPD 不适用于 Pro。 | 1,500 RPD（免费，Flash 和 Flash-Lite 共享此限额） Pro 提供 10,000 RPD 免费额度。 超出后按每 1,000 条接地提示 25 美元计费 |
+| [代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn#billing) | 免费 | 代码执行将按照所选模型的标准 token 费率计费。 费用完全取决于工具的使用情况，会话运行时间不会产生任何费用。生成的代码和执行结果在创建时按**输出 token** 计费；当模型在迭代推理过程中使用它们时，则按**输入 token** 计费。 |
+| [网址上下文](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn#limitations) | 免费 | 根据对应模型的价格，按输入 token 计费。 |
+| [计算机使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-cn) | 不可用 | 根据对应模型的价格，按照常规 token 计费（例如，标准 [Gemini 3.5 Flash](#gemini-3.6-flash) 价格）。如需了解旧版模型的费率，请参阅 [Gemini 2.5 Computer Use 预览版](#gemini-2.5-computer-use-preview-10-2025)价格表。 |
+| [文件搜索](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-cn#pricing) | 免费 | [嵌入](#gemini-embedding)按 0.15 美元 / 100 万个 token 计费。 检索到的文档 token 根据对应模型的价格，按照常规 token 计费。 |
+| [自定义工具端点（Gemini 3.1 Pro 预览版）](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-cn) | 不可用 | 与 [Gemini 3.1 Pro 预览版](#gemini-3.1-pro-preview)价格相同 |
 
-## Harga untuk agen
+## 智能体价格
 
-Biaya penggunaan agen dihitung berdasarkan penggunaan token pokok dan penggunaan alat.
+智能体使用费根据底层的 token 消耗量和工具使用情况计算。
 
-|  | Model | Alat |
+|  | 模型 | 工具 |
 | --- | --- | --- |
-| [Agen Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) | Semua inferensi model dikenai biaya sesuai tarif daftar Gemini standar, termasuk token input, output, dan input / penalaran perantara yang dihasilkan selama loop agentik. | Biaya penggunaan alat berlaku per struktur harga yang ada, dengan mempertahankan perbedaan standar untuk Perujukan Penelusuran (token yang diambil dikecualikan) versus Penelusuran File / Url\_context (token yang diambil disertakan dalam semua alat lainnya). |
-| [Agen terkelola di Gemini API](https://ai.google.dev/gemini-api/docs/agents?hl=id) | Semua inferensi model dikenai biaya sesuai tarif daftar Gemini standar, termasuk token input, output, dan input / penalaran perantara yang dihasilkan selama loop agentik. (Lihat [detail harga](https://ai.google.dev/gemini-api/docs/agents?hl=id#pricing)). | Komputasi lingkungan (CPU, memori, eksekusi sandbox) tidak ditagih selama periode pratinjau. |
-| [Agen Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=id) | Semua inferensi model dikenai biaya sesuai tarif daftar Gemini standar, termasuk token input, output, dan input / penalaran perantara yang dihasilkan selama loop agentik. (Lihat [detail harga](https://ai.google.dev/gemini-api/docs/agents?hl=id#pricing)). | Komputasi lingkungan (CPU, memori, eksekusi sandbox) tidak ditagih selama periode pratinjau. |
+| [Gemini Deep Research 智能体](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) | 所有模型推理均按 Gemini 标准价格表费率计费，包括在智能体循环期间生成的输入、输出以及中间输入 / 推理 token。 | 工具使用费按照现有价格结构收取；针对搜索接地（检索到的 token 不计费）与 Url\_context / 文件搜索（检索到的 token 计入所有其他工具）仍沿用标准计费区分规则。 |
+| [Gemini API 中的托管式智能体](https://ai.google.dev/gemini-api/docs/agents?hl=zh-cn) | 所有模型推理均按 Gemini 标准价格表费率计费，包括在智能体循环期间生成的输入、输出以及中间输入 / 推理 token。（查看[价格详情](https://ai.google.dev/gemini-api/docs/agents?hl=zh-cn#pricing)）。 | 在预览版期间，环境计算资源（CPU、内存、沙盒执行）不计费。 |
+| [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=zh-cn) | 所有模型推理均按 Gemini 标准价格表费率计费，包括在智能体循环期间生成的输入、输出以及中间输入 / 推理 token。（查看[价格详情](https://ai.google.dev/gemini-api/docs/agents?hl=zh-cn#pricing)）。 | 在预览版期间，环境计算资源（CPU、内存、沙盒执行）不计费。 |
 
-## Catatan
+## 备注
 
-- **Penagihan token dokumen:** Token untuk modalitas `DOCUMENT` (misalnya, PDF) ditagih dengan tarif token gambar. Dalam respons API, token ini muncul di bawah modalitas `DOCUMENT` dalam `promptTokensDetails`.
-- Penggunaan Google AI Studio tidak dikenai biaya di semua [wilayah yang tersedia](https://ai.google.dev/gemini-api/docs/available-regions?hl=id). Lihat [FAQ Penagihan](https://ai.google.dev/gemini-api/docs/billing?hl=id) untuk mengetahui detailnya.
-- Harga dapat berbeda dengan harga yang tercantum di sini dan harga yang ditawarkan di Gemini Enterprise Agent Platform. Untuk mengetahui harga Gemini Enterprise Agent Platform, lihat [halaman harga Gemini Enterprise Agent Platform](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=id).
-- Jika Anda menggunakan [pengambilan dinamis](https://ai.google.dev/gemini-api/docs/grounding?hl=id) untuk mengoptimalkan biaya, hanya permintaan yang berisi setidaknya satu URL dukungan perujukan dari web dalam responsnya yang ditagih untuk Grounding with Google Search.
-  Biaya untuk Gemini selalu berlaku. Batas frekuensi panggilan dapat berubah sewaktu-waktu.
+- **文档 token 计费规则**：`DOCUMENT` 模态（例如 PDF）的 token 按照图片 token 费率计费。在 API 响应中，这些 token 会归类在 `promptTokensDetails` 内的 `DOCUMENT` 模态下。
+- 在所有[可用区域](https://ai.google.dev/gemini-api/docs/available-regions?hl=zh-cn)，Google AI Studio 均可免费使用。如需了解详情，请参阅[结算常见问题解答](https://ai.google.dev/gemini-api/docs/billing?hl=zh-cn)。
+- 实际价格可能与此处列出的价格以及 Gemini Enterprise Agent Platform 上提供的价格有所不同。如需了解 Gemini Enterprise Agent Platform 的价格详情，请访问 [Gemini Enterprise Agent Platform 价格页面](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=zh-cn)。
+- 如果您正通过[动态检索](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-cn)来优化成本，那么只有当响应中包含至少一个来自网络的接地支持网址时，该请求才会产生“依托 Google 搜索进行接地”的费用。使用 Gemini 始终会产生费用。速率限制可能会随时调整。
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Terakhir diperbarui pada 2026-08-11 UTC.
+最后更新时间 (UTC)：2026-09-12。
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-08-11 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-12。"],[],[]]

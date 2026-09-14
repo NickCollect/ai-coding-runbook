@@ -1,28 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=ko
-fetched_at: 2026-09-07T05:33:11.408947+00:00
-title: "Gemini Deep Research \uc5d0\uc774\uc804\ud2b8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=he
+fetched_at: 2026-09-14T05:51:20.425603+00:00
+title: "Gemini Deep Research Agent \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-의견 보내기
+שליחת משוב
 
-# Gemini Deep Research 에이전트
+# Gemini Deep Research Agent
 
-Gemini Deep Research Agent는 여러 단계로 이루어진 연구 작업을 자율적으로 계획, 실행, 합성합니다. Gemini를 기반으로 복잡한 정보 환경을 탐색하여 인용된 상세 보고서를 생성합니다. 새로운 기능을 사용하면 에이전트와 공동으로 계획하고, MCP 서버를 사용하여 외부 도구에 연결하고, 시각화 (예: 차트 및 그래프)를 포함하고, 문서를 직접 입력으로 제공할 수 있습니다.
+סוכן Deep Research של Gemini מתכנן, מבצע ומסכם באופן אוטונומי משימות מחקר מרובות שלבים. הוא מבוסס על Gemini, ולכן הוא יכול לנווט בין מערכי מידע מורכבים כדי ליצור דוחות מפורטים עם ציטוטים. יכולות חדשות מאפשרות לתכנן יחד עם הסוכן, להתחבר לכלים חיצוניים באמצעות שרתי MCP, לכלול ויזואליזציות (כמו תרשימים וגרפים) ולספק מסמכים ישירות כקלט.
 
-조사 작업에는 반복적인 검색과 읽기가 포함되며 완료하는 데 몇 분이 걸릴 수 있습니다. [백그라운드 실행](https://ai.google.dev/gemini-api/docs/background-execution?hl=ko) (`background=true` 설정)을 사용하여 에이전트를 비동기적으로 실행하고 결과를 폴링하거나 업데이트를 스트리밍해야 합니다. 자세한 내용은 [장기 실행 작업 처리](#long-running-tasks)를 참고하세요.
+משימות מחקר כוללות חיפוש וקריאה חוזרים, והן יכולות להימשך כמה דקות. כדי להפעיל את הסוכן באופן אסינכרוני ולשאול לגבי תוצאות או לעדכן את הנתונים בסטרימינג, צריך להשתמש ב[הפעלה ברקע](https://ai.google.dev/gemini-api/docs/background-execution?hl=he) (הגדרה של `background=true`). פרטים נוספים מופיעים במאמר בנושא [טיפול במשימות ממושכות](#long-running-tasks).
 
-다음 예에서는 백그라운드에서 연구 작업을 시작하고 결과를 폴링하는 방법을 보여줍니다.
+בדוגמה הבאה מוצג איך מתחילים משימת מחקר ברקע ומבצעים סקר כדי לקבל את התוצאות.
 
 ### Python
 
@@ -51,7 +51,7 @@ while True:
     time.sleep(10)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -97,20 +97,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## 지원되는 버전
+## גרסאות נתמכות
 
-Deep Research 에이전트는 두 가지 버전으로 제공됩니다.
+סוכן Deep Research זמין בשתי גרסאות:
 
-- **Deep Research** (`deep-research-preview-04-2026`): 속도와 효율성을 위해 설계되었으며 클라이언트 UI로 다시 스트리밍하는 데 적합합니다.
-- **Deep Research Max** (`deep-research-max-preview-04-2026`): 자동 컨텍스트 수집 및 합성의 최대 포괄성입니다.
+- ‫**Deep Research** (`deep-research-preview-04-2026`): מודל שנועד לפעול במהירות וביעילות, ומתאים במיוחד להזרמה חזרה לממשק משתמש של לקוח.
+- ‫**Deep Research Max** (`deep-research-max-preview-04-2026`): מקיף ביותר, לאיסוף ולסינתזה אוטומטיים של הקשר.
 
-## 공동 계획
+## תכנון משותף
 
-협업 계획을 사용하면 에이전트가 작업을 시작하기 전에 조사 계획을 검토하고 수정하여 조사 방향을 제어할 수 있습니다. 사용 설정하면 에이전트가 즉시 실행하는 대신 제안된 조사 계획을 반환합니다. 그런 다음 여러 차례의 상호작용을 통해 계획을 검토, 수정 또는 승인할 수 있습니다.
+תכנון שיתופי מאפשר לכם לשלוט בכיוון המחקר לפני שהסוכן מתחיל לעבוד, כי אתם יכולים לבדוק ולשפר את תוכנית המחקר לפני הביצוע. כשהתכונה מופעלת, הסוכן מחזיר תוכנית מחקר מוצעת במקום לבצע אותה באופן מיידי. לאחר מכן תוכלו לבדוק, לשנות או לאשר את התוכנית באמצעות אינטראקציות מרובות.
 
-### 1단계: 요금제 요청
+### שלב 1: שליחת בקשה לתוכנית
 
-첫 번째 상호작용에서 `collaborative_planning=True`를 설정합니다. 에이전트가 전체 보고서 대신 조사 계획을 반환합니다.
+מגדירים את `collaborative_planning=True` באינטראקציה הראשונה. הסוכן
+מחזיר תוכנית מחקר במקום דוח מלא.
 
 ### Python
 
@@ -137,7 +138,7 @@ while (result := client.interactions.get(id=plan_interaction.id)).status != "com
 print(result.steps[-1].content[0].text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const planInteraction = await client.interactions.create({
@@ -176,9 +177,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 2단계: 계획 수정 (선택사항)
+### שלב 2: שיפור התוכנית (אופציונלי)
 
-`previous_interaction_id`을 사용하여 대화를 계속하고 계획을 반복합니다. 계획 모드를 유지하려면 `collaborative_planning=True`을 유지합니다.
+כדי להמשיך את השיחה ולשפר את התוכנית, אפשר להשתמש ב-`previous_interaction_id`. מחזיקים את המקש `collaborative_planning=True` כדי להישאר במצב תכנון.
 
 ### Python
 
@@ -201,7 +202,7 @@ while (result := client.interactions.get(id=refined_plan.id)).status != "complet
 print(result.steps[-1].content[0].text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const refinedPlan = await client.interactions.create({
@@ -242,9 +243,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 3단계: 승인 및 실행
+### שלב 3: אישור וביצוע
 
-계획을 승인하고 조사를 시작하려면 `collaborative_planning=False`를 설정하거나 생략합니다.
+מגדירים את הערך `collaborative_planning=False` (או משמיטים אותו) כדי לאשר את התוכנית ולהתחיל את המחקר.
 
 ### Python
 
@@ -267,7 +268,7 @@ while (result := client.interactions.get(id=final_report.id)).status != "complet
 print(result.steps[-1].content[0].text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const finalReport = await client.interactions.create({
@@ -308,10 +309,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 시각화
+## הצגה חזותית
 
-`visualization`이 `"auto"`로 설정되면 에이전트가 연구 결과를 뒷받침하는 차트, 그래프, 기타 시각적 요소를 생성할 수 있습니다.
-생성된 이미지는 대답 단계에 포함되며 `image` 델타로 스트리밍됩니다. 최상의 결과를 얻으려면 질문에 시각적 요소를 명시적으로 요청하세요. 예를 들어 '시간에 따른 추세를 보여주는 차트를 포함해' 또는 '시장 점유율을 비교하는 그래픽을 생성해'와 같이 요청할 수 있습니다. `visualization`을 `"auto"`로 설정하면 기능이 사용 설정되지만, 에이전트는 프롬프트에서 시각적 요소를 요청하는 경우에만 시각적 요소를 생성합니다.
+כשההגדרה `visualization` מוגדרת לערך `"auto"`, הסוכן יכול ליצור תרשימים, גרפים ורכיבים ויזואליים אחרים כדי לתמוך בממצאי המחקר שלו.
+תמונות שנוצרו על ידי AI נכללות בשלבי התשובה ומוזרמות כדלתאות `image`. כדי לקבל את התוצאות הטובות ביותר, כדאי לבקש באופן מפורש תמונות בשאילתה – לדוגמה, "תכלול תרשימים שמציגים מגמות לאורך זמן" או "תייצר גרפיקה להשוואה של נתח השוק". הגדרת `visualization` לערך `"auto"` מפעילה את היכולת, אבל הסוכן יוצר תמונות רק כשמבקשים זאת בהנחיה.
 
 ### Python
 
@@ -348,7 +349,7 @@ for step in result.steps:
                 print(f"Received image: {len(image_bytes)} bytes")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -402,21 +403,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 지원되는 도구
+## כלים נתמכים
 
-Deep Research는 여러 기본 제공 도구와 외부 도구를 지원합니다. 기본적으로(`tools` 매개변수가 제공되지 않은 경우) 에이전트는 Google 검색, URL 컨텍스트, 코드 실행에 액세스할 수 있습니다. 에이전트의 기능을 제한하거나 확장할 도구를 명시적으로 지정할 수 있습니다.
+‫Deep Research תומך בכמה כלים מובנים וחיצוניים. כברירת מחדל (כשלא מציינים פרמטר `tools`), לסוכן יש גישה לחיפוש Google, להקשר של כתובת האתר ולביצוע קוד. אתם יכולים לציין במפורש כלים כדי להגביל את היכולות של הסוכן או להרחיב אותן.
 
-| 도구 | 유형 값 | 설명 |
+| כלי | הקלדת ערך | תיאור |
 | --- | --- | --- |
-| Google 검색 | `google_search` | 공개 웹을 검색합니다. 기본적으로 사용 설정됩니다. |
-| URL 컨텍스트 | `url_context` | 웹페이지 콘텐츠를 읽고 요약합니다. 기본적으로 사용 설정됩니다. |
-| 코드 실행 | `code_execution` | 코드를 실행하여 계산 및 데이터 분석을 수행합니다. 기본적으로 사용 설정됩니다. |
-| MCP 서버 | `mcp_server` | 외부 도구 액세스를 위해 원격 MCP 서버에 연결 |
-| 파일 검색 | `file_search` | 업로드된 문서 코퍼스를 검색합니다. |
+| חיפוש Google | `google_search` | חיפוש באינטרנט הציבורי. מופעל כברירת מחדל. |
+| URL Context | `url_context` | לקרוא ולסכם את התוכן בדף אינטרנט. מופעל כברירת מחדל. |
+| הרצת קוד | `code_execution` | להריץ קוד כדי לבצע חישובים וניתוח נתונים. מופעל כברירת מחדל. |
+| שרת MCP | `mcp_server` | מתחברים לשרתי MCP מרוחקים כדי לגשת לכלי חיצוניים. |
+| חיפוש קבצים | `file_search` | חיפוש במקורות המידע של המסמכים שהועלו. |
 
-### Google 검색
+### חיפוש Google
 
-Google 검색을 유일한 도구로 명시적으로 사용 설정합니다.
+הפעלת חיפוש Google ככלי היחיד:
 
 ### Python
 
@@ -429,7 +430,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const interaction = await client.interactions.create({
@@ -454,9 +455,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### URL 컨텍스트
+### URL Context
 
-에이전트가 특정 웹페이지를 읽고 요약할 수 있도록 합니다.
+לתת לסוכן את היכולת לקרוא ולסכם דפי אינטרנט ספציפיים:
 
 ### Python
 
@@ -469,7 +470,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const interaction = await client.interactions.create({
@@ -494,9 +495,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 코드 실행
+### הרצת קוד
 
-에이전트가 계산 및 데이터 분석을 위해 코드를 실행하도록 허용합니다.
+ההרשאה לסוכן להריץ קוד לחישובים ולניתוח נתונים:
 
 ### Python
 
@@ -509,7 +510,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const interaction = await client.interactions.create({
@@ -534,21 +535,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### MCP 서버
+### שרתי MCP
 
-원격 MCP 서버에 연결하여 에이전트가 외부 도구 및 서비스에 액세스할 수 있도록 합니다.
+התחברות לשרתי MCP מרוחקים כדי לתת לסוכן גישה לכלים ולשירותים חיצוניים.
 
-도구 구성에서 서버 `name` 및 `url`을 제공합니다. 인증 사용자 인증 정보를 전달하고 에이전트가 호출할 수 있는 도구를 제한할 수도 있습니다.
+מזינים את השרת `name` ואת `url` בהגדרות של הכלי. אפשר גם להעביר פרטי אימות ולהגביל את הכלים שהסוכן יכול להפעיל.
 
-| 필드 | 유형 | 필수 | 설명 |
+| שדה | סוג | נדרש | תיאור |
 | --- | --- | --- | --- |
-| `type` | `string` | 예 | `"mcp_server"`이어야 합니다. |
-| `name` | `string` | 아니요 | MCP 서버의 표시 이름입니다. |
-| `url` | `string` | 아니요 | MCP 서버 엔드포인트의 전체 URL입니다. |
-| `headers` | `object` | 아니요 | 서버에 대한 모든 요청과 함께 HTTP 헤더로 전송되는 키-값 쌍 (예: 인증 토큰)입니다. |
-| `allowed_tools` | `array` | 아니요 | 에이전트가 호출할 수 있는 서버의 도구를 제한합니다. |
+| `type` | `string` | כן | חייב להיות `"mcp_server"`. |
+| `name` | `string` | לא | השם המוצג של שרת ה-MCP. |
+| `url` | `string` | לא | כתובת ה-URL המלאה של נקודת הקצה של שרת ה-MCP. |
+| `headers` | `object` | לא | זוגות של מפתח וערך שנשלחים ככותרות HTTP עם כל בקשה לשרת (לדוגמה, אסימוני אימות). |
+| `allowed_tools` | `array` | לא | הגבלת הכלים בשרת שהסוכן יכול להשתמש בהם. |
 
-#### 기본 사용법
+#### שימוש בסיסי
 
 ### Python
 
@@ -568,7 +569,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const interaction = await client.interactions.create({
@@ -607,9 +608,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 파일 검색
+### חיפוש קבצים
 
-[파일 검색](https://ai.google.dev/gemini-api/docs/file-search?hl=ko) 도구를 사용하여 에이전트가 자체 데이터에 액세스할 수 있도록 합니다.
+כדי לתת לסוכן גישה לנתונים שלכם, משתמשים בכלי [חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he).
 
 ### Python
 
@@ -632,7 +633,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const interaction = await client.interactions.create({
@@ -661,11 +662,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 조향성 및 서식
+## הכוונה ועיצוב
 
-프롬프트에 구체적인 서식 지정 안내를 제공하여 에이전트의 출력을 유도할 수 있습니다. 이를 통해 보고서를 특정 섹션과 하위 섹션으로 구성하고, 데이터 표를 포함하거나, 다양한 잠재고객 (예: '기술', '임원', '일반')에 맞게 어조를 조정할 수 있습니다.
+אתם יכולים להנחות את הפלט של הסוכן באמצעות מתן הוראות ספציפיות לפורמט בהנחיה. כך תוכלו לבנות דוחות עם חלקים ותתי-חלקים ספציפיים, לכלול טבלאות נתונים או להתאים את הטון לקהלים שונים (למשל, 'טכני', 'מנהלים', 'לא רשמי').
 
-입력 텍스트에 원하는 출력 형식을 명시적으로 정의합니다.
+מגדירים במפורש את פורמט הפלט הרצוי בטקסט הקלט.
 
 ### Python
 
@@ -686,7 +687,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const prompt = `
@@ -718,9 +719,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 멀티모달 입력
+## קלט מרובה מצבים
 
-Deep Research는 이미지와 문서 (PDF)를 비롯한 멀티모달 입력을 지원하므로 에이전트가 시각적 콘텐츠를 분석하고 제공된 입력에 따라 컨텍스트화된 웹 기반 조사를 수행할 수 있습니다.
+‫Deep Research תומך בקלטים מולטי-מודאליים, כולל תמונות ומסמכים (קובצי PDF), ומאפשר לסוכן לנתח תוכן חזותי ולבצע מחקר מבוסס-אינטרנט בהקשר של הקלטים שסופקו.
 
 ### Python
 
@@ -763,7 +764,7 @@ while True:
     time.sleep(10)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -826,10 +827,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### 문서 이해
+### הבנת מסמכים
 
-문서 이해를 사용하면 문서를 멀티모달 입력으로 직접 전달할 수 있습니다.
-에이전트는 제공된 문서를 분석하고 콘텐츠에 기반한 조사를 수행합니다.
+הבנת מסמכים מאפשרת להעביר מסמכים ישירות כקלט מרובה-אופנים.
+הסוכן מנתח את המסמכים שסיפקתם ומבצע מחקר שמבוסס על התוכן שלהם.
 
 ### Python
 
@@ -852,7 +853,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -890,28 +891,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 장기 실행 작업 처리
+## טיפול במשימות לטווח ארוך
 
-Deep Research는 계획, 검색, 읽기, 쓰기와 관련된 다단계 프로세스입니다. 이 주기는 일반적으로 동기 API 호출의 표준 제한 시간을 초과합니다.
+‫Deep Research הוא תהליך רב-שלבי שכולל תכנון, חיפוש, קריאה וכתיבה. המחזור הזה בדרך כלל חורג ממגבלות הזמן הקצוב לתפוגה הרגילות של קריאות API סינכרוניות.
 
-에이전트는 `background=True`를 사용해야 합니다. API는 부분 `Interaction` 객체를 즉시 반환합니다. `id` 속성을 사용하여 폴링을 위한 상호작용을 가져올 수 있습니다. 상호작용 상태가 `in_progress`에서 `completed` 또는 `failed`로 전환됩니다. 백그라운드 작업 관리에 관한 자세한 가이드는 [백그라운드 실행](https://ai.google.dev/gemini-api/docs/background-execution?hl=ko)을 참고하세요.
+הנציגים נדרשים להשתמש ב-`background=True`. ה-API מחזיר אובייקט `Interaction` חלקי באופן מיידי. אפשר להשתמש במאפיין `id` כדי לאחזר אינטראקציה לצורך בדיקה. מצב האינטראקציה ישתנה מ`in_progress` ל`completed` או ל`failed`. מדריך מקיף לניהול משימות ברקע זמין במאמר [הפעלה ברקע](https://ai.google.dev/gemini-api/docs/background-execution?hl=he).
 
-### 스트리밍
+### סטרימינג
 
-Deep Research는 생각 요약, 텍스트 출력, 생성된 이미지 등 연구 진행 상황에 관한 실시간 업데이트를 수신하기 위한 스트리밍을 지원합니다.
-`stream=True` 및 `background=True`를 설정해야 합니다.
+התכונה Deep Research תומכת בהזרמת נתונים כדי לקבל עדכונים בזמן אמת על התקדמות המחקר, כולל סיכומי מחשבות, פלט טקסט ותמונות שנוצרו.
+צריך להגדיר את `stream=True` ואת `background=True`.
 
-중간 추론 단계 (생각)와 진행 상황 업데이트를 받으려면 `agent_config`에서 `thinking_summaries`를 `"auto"`로 설정하여 **생각 요약**을 사용 설정해야 합니다. 이 기능이 없으면 스트림에서 최종 결과만 제공할 수 있습니다.
+כדי לקבל שלבי נימוק (מחשבות) ועדכוני התקדמות, צריך להפעיל **סיכומי חשיבה** על ידי הגדרת `thinking_summaries` לערך `"auto"` ב-`agent_config`. בלי זה, יכול להיות שהזרם יספק רק את התוצאות הסופיות.
 
-#### 스트림 이벤트 유형
+#### סוגי אירועים במקור נתונים
 
-| 이벤트 유형 | 델타 유형 | 설명 |
+| סוג אירוע | סוג הדלתא | תיאור |
 | --- | --- | --- |
-| `step.delta` | `thought` | 에이전트의 중간 추론 단계입니다. |
-| `step.delta` | `text` | 최종 텍스트 출력의 일부입니다. |
-| `step.delta` | `image` | 생성된 이미지 (base64 인코딩) |
+| `step.delta` | `thought` | שלב ביניים של הסוכן בתהליך החשיבה. |
+| `step.delta` | `text` | חלק מהפלט הסופי של הטקסט. |
+| `step.delta` | `image` | תמונה שנוצרה (בקידוד Base64). |
 
-다음 예에서는 연구 작업을 시작하고 자동 재연결로 스트림을 처리합니다. 연결이 끊어지면 (예: 600초 시간 제한 후) 중단된 위치에서 다시 시작할 수 있도록 `interaction_id` 및 `last_event_id`를 추적합니다.
+בדוגמה הבאה מתחילים משימת מחקר ומעבדים את הסטרימינג עם חיבור מחדש אוטומטי. הוא עוקב אחרי `interaction_id` ו-`last_event_id`, כך שאם החיבור ייפסק (לדוגמה, אחרי פסק הזמן של 600 שניות), אפשר יהיה להמשיך מהמקום שבו הוא נעצר.
 
 ### Python
 
@@ -959,7 +960,7 @@ while not is_complete and interaction_id:
     process_stream(stream)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1032,9 +1033,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/INTER
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## 후속 질문 및 상호작용
+## שאלות המשך ואינטראקציות
 
-에이전트가 최종 보고서를 반환한 후 `previous_interaction_id`를 사용하여 대화를 계속할 수 있습니다. 이렇게 하면 전체 작업을 다시 시작하지 않고도 연구의 특정 섹션에 대한 설명, 요약 또는 자세한 설명을 요청할 수 있습니다.
+אחרי שהנציג או הנציגה ישלחו את הדוח הסופי, תוכלו להמשיך את השיחה באמצעות `previous_interaction_id`. כך תוכלו לבקש הבהרה, סיכום או פירוט של קטעים ספציפיים במחקר בלי להפעיל מחדש את כל המשימה.
 
 ### Python
 
@@ -1053,7 +1054,7 @@ interaction = client.interactions.create(
 print(interaction.steps[-1].content[0].text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const interaction = await client.interactions.create({
@@ -1077,28 +1078,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Gemini Deep Research Agent를 사용해야 하는 경우
+## מתי כדאי להשתמש ב-Gemini Deep Research Agent
 
-Deep Research는 모델이 아닌 **에이전트**입니다. 지연 시간이 짧은 채팅보다는 '분석가-인-어-박스' 접근 방식이 필요한 워크로드에 가장 적합합니다.
+‫Deep Research הוא **סוכן**, ולא רק מודל. הוא מתאים במיוחד לעומסי עבודה שדורשים גישה של "אנליסט בקופסה" ולא צ'אט עם זמן אחזור נמוך.
 
-| 기능 | 표준 Gemini 모델 | Gemini Deep Research 에이전트 |
+| תכונה | מודלים רגילים של Gemini | סוכן Gemini Deep Research |
 | --- | --- | --- |
-| **지연 시간** | 초 | 분 (비동기/백그라운드) |
-| **절차** | 생성 -> 출력 | 계획 -> 검색 -> 읽기 -> 반복 -> 출력 |
-| **출력** | 대화형 텍스트, 코드, 짧은 요약 | 자세한 보고서, 긴 형식의 분석, 비교 표 |
-| **용도** | 챗봇, 추출, 창의적 글쓰기 | 시장 분석, 실사, 문헌 검토, 경쟁 환경 |
+| **זמן אחזור** | שניות | דקות (אסינכרוני/ברקע) |
+| **Process** | יצירה -> פלט | תכנון -> חיפוש -> קריאה -> חזרה על הפעולה -> פלט |
+| **פלט** | טקסט שיחה, קוד, סיכומים קצרים | דוחות מפורטים, ניתוח ארוך, טבלאות השוואה |
+| **מתאים במיוחד עבור** | צ'אטבוטים, חילוץ, כתיבה יוצרת | ניתוח שוק, בדיקת נאותות, סקירת ספרות, ניתוח מצב התחרות |
 
-## 에이전트 구성
+## הגדרת הסוכן
 
-Deep Research는 `agent_config` 매개변수를 사용하여 동작을 제어합니다.
-다음 필드가 포함된 사전으로 전달합니다.
+הפרמטר `agent_config` משמש לשליטה בהתנהגות של Deep Research.
+מעבירים אותו כמילון עם השדות הבאים:
 
-| 필드 | 유형 | 기본값 | 설명 |
+| שדה | סוג | ברירת מחדל | תיאור |
 | --- | --- | --- | --- |
-| `type` | `string` | 필수 | `"deep-research"`이어야 합니다. |
-| `thinking_summaries` | `string` | `"none"` | 스트리밍 중에 중간 추론 단계를 수신하려면 `"auto"`로 설정합니다. 사용 중지하려면 `"none"`로 설정합니다. |
-| `visualization` | `string` | `"auto"` | 에이전트 생성 차트 및 이미지를 사용 설정하려면 `"auto"`로 설정합니다. 사용 중지하려면 `"off"`로 설정합니다. |
-| `collaborative_planning` | `boolean` | `false` | 조사가 시작되기 전에 다중 턴 계획 검토를 사용 설정하려면 `true`로 설정합니다. |
+| `type` | `string` | חובה | חייב להיות `"deep-research"`. |
+| `thinking_summaries` | `string` | `"none"` | מגדירים את הערך `"auto"` כדי לקבל שלבי ביניים של חשיבה רציונלית במהלך הסטרימינג. כדי להשבית, מגדירים את הערך `"none"`. |
+| `visualization` | `string` | `"auto"` | מגדירים את הערך `"auto"` כדי להפעיל תרשימים ותמונות שנוצרו על ידי סוכן. כדי להשבית, מגדירים את הערך `"off"`. |
+| `collaborative_planning` | `boolean` | `false` | מגדירים את האפשרות `true` כדי להפעיל את בדיקת התוכנית בכמה איטרציות לפני תחילת המחקר. |
 
 ### Python
 
@@ -1118,7 +1119,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const interaction = await client.interactions.create({
@@ -1153,57 +1154,58 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 사용 가능 여부 및 가격 책정
+## זמינות ומחירים
 
-Google AI Studio 및 Gemini API의 Interactions API를 사용하여 Gemini Deep Research Agent에 액세스할 수 있습니다.
+אפשר לגשת לסוכן Deep Research של Gemini באמצעות Interactions API ב-Google AI Studio וב-Gemini API.
 
-가격은 기본 Gemini 모델과 에이전트가 사용하는 특정 도구를 기반으로 [사용한 만큼만 지불 모델](https://ai.google.dev/gemini-api/docs/pricing?hl=ko#pricing-for-agents)을 따릅니다. 요청이 하나의 출력으로 이어지는 표준 채팅 요청과 달리 Deep Research 작업은 에이전트형 워크플로입니다. 단일 요청으로 계획, 검색, 읽기, 추론의 자율 루프가 트리거됩니다.
+התמחור מבוסס על [מודל של תשלום לפי שימוש](https://ai.google.dev/gemini-api/docs/pricing?hl=he#pricing-for-agents), בהתאם למודלים הבסיסיים של Gemini ולכלים הספציפיים שבהם הסוכן משתמש. בניגוד לבקשות צ'אט רגילות, שבהן בקשה מובילה לפלט אחד, משימת Deep Research היא תהליך עבודה של AI אקטיבי. בקשה אחת מפעילה לולאה אוטונומית של תכנון, חיפוש, קריאה והסקת מסקנות.
 
-### 예상 비용
+### עלויות משוערות
 
-비용은 필요한 연구의 깊이에 따라 다릅니다. 에이전트는 프롬프트에 답변하는 데 필요한 읽기 및 검색의 양을 자율적으로 결정합니다.
+העלויות משתנות בהתאם לעומק המחקר הנדרש. הסוכן קובע באופן אוטונומי כמה קריאה וחיפוש נדרשים כדי לענות על ההנחיה.
 
-- **Deep Research** (`deep-research-preview-04-2026`): 중간 수준의 분석이 필요한 일반적인 질문의 경우 에이전트가 검색어 약 80개, 입력 토큰 약 250,000개 (50~70% 캐시됨), 출력 토큰 약 60,000개를 사용할 수 있습니다.
-  - **예상 총액:** 작업당$1.00~$3.00
-- **Deep Research Max** (`deep-research-max-preview-04-2026`): 심층적인 경쟁 환경 분석 또는 광범위한 실사를 위해 에이전트는 최대 ~160개의 검색어, ~900,000개의 입력 토큰 (~50~70% 캐시됨), ~80,000개의 출력 토큰을 사용할 수 있습니다.
-  - **예상 총액:** 작업당$3.00~$7.00
+- ‫**Deep Research** (`deep-research-preview-04-2026`): בשאילתה טיפוסית שדורשת ניתוח מתון, יכול להיות שהסוכן ישתמש בכ-80 שאילתות חיפוש, בכ-250,000 טוקנים של קלט (כ-50-70% במטמון) ובכ-60,000 טוקנים של פלט.
+  - **סך הכול משוער:** כ-4 ש"ח עד 12 ש"ח לכל משימה
+- ‫**Deep Research Max** ‏ (`deep-research-max-preview-04-2026`): לניתוח מעמיק של הסביבה התחרותית או לבדיקת נאותות מקיפה, יכול להיות שהסוכן ישתמש בעד 160 שאילתות חיפוש, עד 900,000 טוקנים של קלט (כ-50-70% במטמון) ועד 80,000 טוקנים של פלט.
+  - **סכום משוער:** כ-3.00$עד 7.00$ לכל משימה
 
-## 안전 고려사항
+## שיקולי בטיחות
 
-에이전트가 웹과 비공개 파일에 액세스하도록 허용하려면 안전 위험을 신중하게 고려해야 합니다.
+כדי לתת לסוכן גישה לאינטרנט ולקבצים הפרטיים שלכם, צריך לשקול היטב את סיכוני הבטיחות.
 
-- **파일을 사용한 프롬프트 삽입:** 에이전트가 제공된 파일의 콘텐츠를 읽습니다. 업로드된 문서 (PDF, 텍스트 파일)가 신뢰할 수 있는 출처에서 제공된 것인지 확인합니다. 악성 파일에는 에이전트의 출력을 조작하기 위해 설계된 숨겨진 텍스트가 포함될 수 있습니다.
-- **웹 콘텐츠 위험:** 에이전트가 공개 웹을 검색합니다. 강력한 안전 필터를 구현하고 있지만 에이전트가 악성 웹페이지를 접하고 처리할 위험이 있습니다. 소스 확인을 위해 대답에 제공된 `citations`를 검토하는 것이 좋습니다.
-- **무단 반출:** 웹 탐색을 허용하는 경우 에이전트에게 민감한 내부 데이터를 요약해 달라고 요청할 때 주의해야 합니다.
+- **החדרת הנחיות באמצעות קבצים:** הסוכן קורא את התוכן של הקבצים שאתם מספקים. חשוב לוודא שהמסמכים שהועלו (קובצי PDF, קובצי טקסט) מגיעים ממקורות מהימנים. קובץ זדוני יכול להכיל טקסט מוסתר שנועד לתמרן את הפלט של הסוכן.
+- **סיכונים בתוכן אינטרנט:** הסוכן מחפש באינטרנט הציבורי. אנחנו מטמיעים מסנני בטיחות חזקים, אבל קיים סיכון שהסוכן ייתקל בדפי אינטרנט זדוניים ויעבד אותם. מומלץ לעיין ב`citations` שצוינו בתשובה כדי לאמת את המקורות.
+- **העברת נתונים:** חשוב לנקוט משנה זהירות כשמבקשים מהסוכן לסכם נתונים פנימיים רגישים אם מאפשרים לו גם לגלוש באינטרנט.
 
-## 권장사항
+## שיטות מומלצות
 
-- **알 수 없는 항목에 대한 프롬프트:** 누락된 데이터를 처리하는 방법을 상담사에게 안내합니다.
-  예를 들어 프롬프트에 *'2025년의 구체적인 수치를 사용할 수 없는 경우 추정하지 말고 예측치이거나 사용할 수 없다고 명시하세요'*를 추가합니다.
-- **컨텍스트 제공:** 입력 프롬프트에 배경 정보나 제약 조건을 직접 제공하여 에이전트의 조사를 그라운딩합니다.
-- **공동 계획 사용:** 복잡한 질문의 경우 실행 전에 조사 계획을 검토하고 다듬을 수 있도록 공동 계획을 사용 설정합니다.
-- **멀티모달 입력:** Deep Research Agent는 멀티모달 입력을 지원합니다.
-  비용이 증가하고 컨텍스트 윈도우 오버플로 위험이 있으므로 신중하게 사용하세요.
+- **הנחיה לגבי נתונים לא ידועים:** הנחיה של הסוכן לגבי אופן הטיפול בנתונים חסרים.
+  לדוגמה, אפשר להוסיף את ההנחיה *"אם נתונים ספציפיים לשנת 2025 לא זמינים,
+  ציין במפורש שהם תחזיות או לא זמינים, במקום להעריך"*.
+- **מספקים הקשר:** כדי שהסוכן יתמקד במחקר, כדאי לספק מידע רקע או מגבלות ישירות בהנחיית הקלט.
+- **שימוש בתכנון שיתופי:** בשאילתות מורכבות, מומלץ להפעיל תכנון שיתופי כדי לבדוק ולשפר את תוכנית המחקר לפני הביצוע.
+- ‫**Multimodal inputs:** Deep Research Agent supports multi-modal inputs.
+  צריך להשתמש בזה בזהירות, כי זה מגדיל את העלויות ואת הסיכון לחריגה מחלון ההקשר.
 
-## 제한사항
+## מגבלות
 
-- **맞춤 도구:** 현재 맞춤 함수 호출 도구를 제공할 수는 없지만, Deep Research 에이전트와 함께 원격 MCP (모델 컨텍스트 프로토콜) 서버를 사용할 수 있습니다.
-- **구조화된 출력:** 현재 Deep Research 에이전트는 구조화된 출력을 지원하지 않습니다.
-- **최대 조사 시간:** Deep Research 에이전트의 최대 조사 시간은 60분입니다. 대부분의 작업은 20분 이내에 완료됩니다.
-- **저장소 요구사항:** `background=True`를 사용하는 에이전트 실행에는 `store=True`가 필요합니다.
-- **Google 검색:** [Google 검색](https://ai.google.dev/gemini-api/docs/google-search?hl=ko)은 기본적으로 사용 설정되어 있으며 그라운딩된 결과에는 [특정 제한사항](https://ai.google.dev/gemini-api/terms?hl=ko#use-restrictions2)이 적용됩니다.
+- **כלים בהתאמה אישית:** נכון לעכשיו, אי אפשר לספק כלים מותאמים אישית להפעלת פונקציות, אבל אפשר להשתמש בשרתי MCP (Model Context Protocol) מרוחקים עם סוכן המחקר המעמיק.
+- **פלט מובנה:** כרגע, סוכן המחקר המעמיק לא תומך בפלט מובנה.
+- **זמן המחקר המקסימלי:** ל-Deep Research יש זמן מחקר מקסימלי של 60 דקות. רוב המשימות אמורות להסתיים תוך 20 דקות.
+- **דרישה לחנות:** הפעלת הסוכן באמצעות `background=True` מחייבת `store=True`.
+- **חיפוש Google:** [חיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he) מופעל כברירת מחדל, ויש [הגבלות ספציפיות](https://ai.google.dev/gemini-api/terms?hl=he#use-restrictions2) על התוצאות שמוצגות.
 
-## 다음 단계
+## המאמרים הבאים
 
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)에 대해 자세히 알아보세요.
-- [파일 검색](https://ai.google.dev/gemini-api/docs/file-search?hl=ko) 도구를 사용하여 자체 데이터를 사용하는 방법을 알아보세요.
+- [מידע נוסף על Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he)
+- [כך משתמשים בנתונים שלכם באמצעות הכלי 'חיפוש קבצים'](https://ai.google.dev/gemini-api/docs/file-search?hl=he)
 
-의견 보내기
+שליחת משוב
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-최종 업데이트: 2026-07-14(UTC)
+עדכון אחרון: 2026-07-14 (שעון UTC).
 
-의견을 전달하고 싶나요?
+רוצה לתת לנו משוב?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-14(UTC)"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-14 (שעון UTC)."],[],[]]

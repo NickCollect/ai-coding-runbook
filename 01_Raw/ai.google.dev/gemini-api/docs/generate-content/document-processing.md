@@ -1,39 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=pl
-fetched_at: 2026-09-07T05:42:28.923288+00:00
-title: "rozumienie dokument\u00f3w; \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=tr
+fetched_at: 2026-09-14T05:43:03.962698+00:00
+title: "Belge anlama \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs/generate-content?hl=tr)
 
-Prześlij opinię
+Geri bildirim gönderin
 
-# rozumienie dokumentów;
+# Belge anlama
 
-Modele Gemini mogą przetwarzać dokumenty w formacie PDF, korzystając z natywnego rozpoznawania obrazu, aby zrozumieć kontekst całego dokumentu. To coś więcej niż tylko wyodrębnianie tekstu. Gemini może:
+Gemini modelleri, doküman bağlamlarının tamamını anlamak için yerel görsel işleme özelliğini kullanarak PDF biçimindeki dokümanları işleyebilir. Bu, yalnızca metin ayıklamanın ötesine geçerek Gemini'ın aşağıdaki işlemleri yapmasına olanak tanır:
 
-- analizować i interpretować treści, w tym tekst, obrazy, diagramy, wykresy i tabele, nawet w długich dokumentach do 1000 stron;
-- wyodrębniać informacje do [ustrukturyzowanych formatów wyjściowych](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl);
-- podsumowywać dokumenty i odpowiadać na pytania na podstawie elementów wizualnych i tekstowych;
-- transkrybować zawartość dokumentu (np. do HTML), zachowując układ i formatowanie, do wykorzystania w aplikacjach podrzędnych.
+- Metin, resim, diyagram, grafik ve tablo gibi içerikleri 1.000 sayfaya kadar olan uzun dokümanlarda bile analiz edip yorumlayın.
+- Bilgileri [yapılandırılmış çıkış](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr) biçimlerinde ayıklayın.
+- Bir belgedeki hem görsel hem de metin öğelerini temel alarak özetleme ve soru yanıtlama
+- Aşağı akış uygulamalarında kullanılmak üzere düzenleri ve biçimlendirmeyi koruyarak doküman içeriğini (ör. HTML'ye) transkribe edin.
 
-W ten sam sposób możesz też przekazywać dokumenty w innych formatach niż PDF, ale Gemini będzie je traktować jako zwykły tekst, co spowoduje utratę kontekstu, np. wykresów czy formatowania.
+PDF olmayan dokümanları da aynı şekilde iletebilirsiniz ancak Gemini bunları normal metin olarak görür. Bu durumda grafikler veya biçimlendirme gibi bağlamlar ortadan kalkar.
 
-## Przekazywanie danych PDF w tekście
+## PDF verilerini satır içi olarak iletme
 
-Dane PDF możesz przekazywać w tekście w żądaniu do `generateContent`. Najlepiej sprawdza się to w przypadku mniejszych dokumentów lub przetwarzania tymczasowego, gdy nie musisz odwoływać się do pliku w kolejnych żądaniach. W przypadku większych dokumentów, do których musisz się odwoływać w interakcjach wieloetapowych, zalecamy korzystanie z interfejsu [Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=pl#large-pdfs)
-aby skrócić czas oczekiwania na odpowiedź i zmniejszyć zużycie przepustowości.
+PDF verilerini `generateContent` isteğinde satır içi olarak iletebilirsiniz. Bu yöntem, daha küçük belgeler veya dosyaya sonraki isteklerde başvurmanız gerekmeyen geçici işlemler için en uygun yöntemdir. İstek gecikmesini iyileştirmek ve bant genişliği kullanımını azaltmak için çok aşamalı etkileşimlerde başvurmanız gereken daha büyük belgeler için [Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=tr#large-pdfs)'yi kullanmanızı öneririz.
 
-Poniższy przykład pokazuje, jak pobrać plik PDF z adresu URL i przekonwertować go na bajty do przetworzenia:
+Aşağıdaki örnekte, bir URL'den PDF'nin nasıl getirileceği ve işlenmek üzere baytlara nasıl dönüştürüleceği gösterilmektedir:
 
 ### Python
 
@@ -72,8 +71,8 @@ import { GoogleGenAI } from "@google/genai";
 const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
 
 async function main() {
-    const pdfResp = await fetch('https://discovery.ucl.ac.uk/id/eprint/10089234/1/343019_3_art_0_py4t4l_convrt.pdf'>)
-        .then((response) = response.arrayBuffer());
+    const pdfResp = await fetch('https://discovery.ucl.ac.uk/id/eprint/10089234/1/343019_3_art_0_py4t4l_convrt.pdf')
+        .then((response) => response.arrayBuffer());
 
     const contents = [
         { text: "Summarize this document" },
@@ -111,22 +110,22 @@ import (
 
 func main() {
 
-    ctx :=& context.Background()
-    client, _ := genai.NewClient(ctx, genai.ClientConfig{
+    ctx := context.Background()
+    client, _ := genai.NewClient(ctx, &genai.ClientConfig{
         APIKey:  os.Getenv("GEMINI_API_KEY"),
         Backend: genai.BackendGeminiAPI,
     })
 
-    pdfResp, _ := http.Get("https://discovery.ucl.ac.uk/id/eprint/10089234/1/343019&&_3_art_0_py4t4l_convrt.pdf")
+    pdfResp, _ := http.Get("https://discovery.ucl.ac.uk/id/eprint/10089234/1/343019_3_art_0_py4t4l_convrt.pdf")
     var pdfBytes []byte
-    if pdfResp != nil  pdfResp.Body != nil {
-        pdfBytes, _ = io.ReadAll(pdfRes&p.Body)
-        pdfResp.Body.Close()&
+    if pdfResp != nil && pdfResp.Body != nil {
+        pdfBytes, _ = io.ReadAll(pdfResp.Body)
+        pdfResp.Body.Close()
     }
 
     parts := []*genai.Part{
-        genai.Part{
-            InlineData: genai.Blob{
+        &genai.Part{
+            InlineData: &genai.Blob{
                 MIMEType: "application/pdf",
                 Data:     pdfBytes,
             },
@@ -159,8 +158,8 @@ DISPLAY_NAME="base64_pdf"
 # Download the PDF
 wget -O "${DISPLAY_NAME}.pdf" "${DOC_URL}"
 
-# Check for FreeBSD base64 and>& set flags accordingly
-if [[ "$(base64 --version 21)" = *"FreeBSD"* ]]; then
+# Check for FreeBSD base64 and set flags accordingly
+if [[ "$(base64 --version 2>&1)" = *"FreeBSD"* ]]; then
   B64FLAGS="--input"
 else
   B64FLAGS="-w0"
@@ -176,11 +175,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
     -d '{
       "contents": [{
         "parts":[
-      >    {">inline_data": {"mime_type": "application/pdf", "data": "'"$ENCODED_PDF"'"}},
+          {"inline_data": {"mime_type": "application/pdf", "data": "'"$ENCODED_PDF"'"}},
           {"text": "'$PROMPT'"}
         ]
       }]
-    }' 2 /dev/null  response.json
+    }' 2> /dev/null > response.json
 
 cat response.json
 echo
@@ -191,7 +190,7 @@ jq ".candidates[].content.parts[].text" response.json
 rm "${DISPLAY_NAME}.pdf"
 ```
 
-Możesz też odczytać plik PDF z pliku lokalnego do przetworzenia:
+İşleme için yerel bir dosyadan PDF de okuyabilirsiniz:
 
 ### Python
 
@@ -260,17 +259,17 @@ import (
 
 func main() {
 
-    ctx := context.Background(&)
-    client, _ := genai.NewClient(ctx, genai.ClientConfig{
+    ctx := context.Background()
+    client, _ := genai.NewClient(ctx, &genai.ClientConfig{
         APIKey:  os.Getenv("GEMINI_API_KEY"),
         Backend: genai.BackendGeminiAPI,
     })
 
-    pdfBytes, _ := os.ReadFile("path/t&o/your/file.pdf")
+    pdfBytes, _ := os.ReadFile("path/to/your/file.pdf")
 
-    parts :=& []*genai.Part{
-        genai.Part{
-            InlineData: genai.Blob{
+    parts := []*genai.Part{
+        &genai.Part{
+            InlineData: &genai.Blob{
                 MIMEType: "application/pdf",
                 Data:     pdfBytes,
             },
@@ -292,13 +291,13 @@ func main() {
 }
 ```
 
-## Przesyłanie plików PDF za pomocą interfejsu Files API
+## Files API'yi kullanarak PDF yükleme
 
-W przypadku większych plików lub gdy chcesz ponownie użyć dokumentu w wielu żądaniach, zalecamy korzystanie z interfejsu Files API. Poprawia to czas oczekiwania na odpowiedź i zmniejsza zużycie przepustowości, ponieważ przesyłanie plików jest oddzielone od żądań do modelu.
+Daha büyük dosyalar için veya bir dokümanı birden fazla istekte yeniden kullanmak istediğinizde Files API'yi kullanmanızı öneririz. Bu sayede, dosya yükleme işlemi model isteklerinden ayrılır ve istek gecikmesi iyileşirken bant genişliği kullanımı azalır.
 
-### Duże pliki PDF z adresów URL
+### URL'lerden alınan büyük PDF'ler
 
-Użyj interfejsu File API, aby uprościć przesyłanie i przetwarzanie dużych plików PDF z adresów URL:
+URL'lerden büyük PDF dosyalarını yükleme ve işleme sürecini basitleştirmek için File API'yi kullanın:
 
 ### Python
 
@@ -339,8 +338,8 @@ const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
 
 async function main() {
 
-    const pdfBuffer = await fetch("https://www.nasa.gov/wp-content/uploads/static/history/alsj/a17/A17_FlightPlan.pdf&quo>t;)
-        .then((response) = response.arrayBuffer());
+    const pdfBuffer = await fetch("https://www.nasa.gov/wp-content/uploads/static/history/alsj/a17/A17_FlightPlan.pdf")
+        .then((response) => response.arrayBuffer());
 
     const fileBlob = new Blob([pdfBuffer], { type: 'application/pdf' });
 
@@ -356,9 +355,9 @@ async function main() {
     while (getFile.state === 'PROCESSING') {
         getFile = await ai.files.get({ name: file.name });
         console.log(`current file status: ${getFile.state}`);
-        console.log('File is still processing, retry>ing in 5 seconds');
+        console.log('File is still processing, retrying in 5 seconds');
 
-        await new Promise((resolve) = {
+        await new Promise((resolve) => {
             setTimeout(resolve, 5000);
         });
     }
@@ -367,11 +366,11 @@ async function main() {
     }
 
     // Add the file to the contents.
-    &&const content = [
+    const content = [
         'Summarize this document',
     ];
 
-    if (file.uri  file.mimeType) {
+    if (file.uri && file.mimeType) {
         const fileContent = createPartFromUri(file.uri, file.mimeType);
         content.push(fileContent);
     }
@@ -404,8 +403,8 @@ import (
 
 func main() {
 
-  ctx &:= context.Background()
-  client, _ := genai.NewClient(ctx, genai.ClientConfig{
+  ctx := context.Background()
+  client, _ := genai.NewClient(ctx, &genai.ClientConfig{
     APIKey:  os.Getenv("GEMINI_API_KEY"),
     Backend: genai.BackendGeminiAPI,
   })
@@ -416,12 +415,12 @@ func main() {
   respHttp, _ := http.Get(pdfURL)
   defer respHttp.Body.Close()
 
-  outFile, _ := os.Create(localPdfP&ath)
+  outFile, _ := os.Create(localPdfPath)
   defer outFile.Close()
 
   _, _ = io.Copy(outFile, respHttp.Body)
 
-  uploadConfig := genai.UploadFileConfig{MIMEType: "application/pdf"}
+  uploadConfig := &genai.UploadFileConfig{MIMEType: "application/pdf"}
   uploadedFile, _ := client.Files.UploadFromPath(ctx, localPdfPath, uploadConfig)
 
   promptParts := []*genai.Part{
@@ -453,8 +452,8 @@ PROMPT="Summarize this document"
 # Download the PDF from the provided URL
 wget -O "${DISPLAY_NAME}.pdf" "${PDF_PATH}"
 
-MIME_TYPE=$(file -b --m<ime-type "${DISPLAY_NAME}.pdf")
-NUM_BYTES=$(wc -c  "${DISPLAY_NAME}.pdf")
+MIME_TYPE=$(file -b --mime-type "${DISPLAY_NAME}.pdf")
+NUM_BYTES=$(wc -c < "${DISPLAY_NAME}.pdf")
 
 echo "MIME_TYPE: ${MIME_TYPE}"
 echo "NUM_BYTES: ${NUM_BYTES}"
@@ -468,34 +467,34 @@ curl "${BASE_URL}/upload/v1beta/files?key=${GOOGLE_API_KEY}" \
   -H "X-Goog-Upload-Protocol: resumable" \
   -H "X-Goog-Upload-Command: start" \
   -H "X-Goog-Upload-Header-Content-Length: ${NUM_BYTES}" \
-  -H "X-Goog-Upl>oad-Header-Content-Type: ${MIME_TYPE}" \
+  -H "X-Goog-Upload-Header-Content-Type: ${MIME_TYPE}" \
   -H "Content-Type: application/json" \
-  -d "{'file': {'display_name': '${DISPLAY_NAME}'}}" 2 /dev/null
+  -d "{'file': {'display_name': '${DISPLAY_NAME}'}}" 2> /dev/null
 
 upload_url=$(grep -i "x-goog-upload-url: " "${tmp_header_file}" | cut -d" " -f2 | tr -d "\r")
-rm "${>tmp_header_>file}"
+rm "${tmp_header_file}"
 
 # Upload the actual bytes.
 curl "${upload_url}" \
   -H "Content-Length: ${NUM_BYTES}" \
   -H "X-Goog-Upload-Offset: 0" \
   -H "X-Goog-Upload-Command: upload, finalize" \
-  --data-binary "@${DISPLAY_NAME}.pdf" 2 /dev/null  file_info.json
+  --data-binary "@${DISPLAY_NAME}.pdf" 2> /dev/null > file_info.json
 
 file_uri=$(jq ".file.uri" file_info.json)
 echo "file_uri: ${file_uri}"
 
 # Now generate content using that file
-curl "https://generativelanguage.googleapis.com/v1b>eta/models/>gemini-3.6-flash:generateContent?key=$GOOGLE_API_KEY" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=$GOOGLE_API_KEY" \
     -H 'Content-Type: application/json' \
     -X POST \
     -d '{
-      ";contents": [{
+      "contents": [{
         "parts":[
           {"text": "'$PROMPT'"},
           {"file_data":{"mime_type": "application/pdf", "file_uri": '$file_uri'}}]
         }]
-      }' 2 /dev/null  response.json
+      }' 2> /dev/null > response.json
 
 cat response.json
 echo
@@ -506,7 +505,7 @@ jq ".candidates[].content.parts[].text" response.json
 rm "${DISPLAY_NAME}.pdf"
 ```
 
-### Duże pliki PDF przechowywane lokalnie
+### Yerel olarak depolanan büyük PDF'ler
 
 ### Python
 
@@ -554,9 +553,9 @@ async function main() {
     while (getFile.state === 'PROCESSING') {
         getFile = await ai.files.get({ name: file.name });
         console.log(`current file status: ${getFile.state}`);
-        console.log('File is still processing, retrying in 5 s>econds');
+        console.log('File is still processing, retrying in 5 seconds');
 
-        await new Promise((resolve) = {
+        await new Promise((resolve) => {
             setTimeout(resolve, 5000);
         });
     }
@@ -565,17 +564,17 @@ async function main() {
     }
 
     // Add the file to the contents.
-    const cont&&ent = [
+    const content = [
         'Summarize this document',
     ];
 
-    if (file.uri  file.mimeType) {
+    if (file.uri && file.mimeType) {
         const fileContent = createPartFromUri(file.uri, file.mimeType);
         content.push(fileContent);
     }
 
     const response = await ai.models.generateContent({
-        model: 'gemini-3.6-flash9;,
+        model: 'gemini-3.6-flash',
         contents: content,
     });
 
@@ -600,14 +599,14 @@ import (
 
 func main() {
 
-    ctx := context.Background(&)
-    client, _ := genai.NewClient(ctx, genai.ClientConfig{
+    ctx := context.Background()
+    client, _ := genai.NewClient(ctx, &genai.ClientConfig{
         APIKey:  os.Getenv("GEMINI_API_KEY"),
         Backend: genai.BackendGeminiAPI,
     })
-    localPd&fPath := "/path/to/file.pdf"
+    localPdfPath := "/path/to/file.pdf"
 
-    uploadConfig := genai.UploadFileConfig{MIMEType: "application/pdf"}
+    uploadConfig := &genai.UploadFileConfig{MIMEType: "application/pdf"}
     uploadedFile, _ := client.Files.UploadFromPath(ctx, localPdfPath, uploadConfig)
 
     promptParts := []*genai.Part{
@@ -644,18 +643,18 @@ curl "${BASE_URL}/upload/v1beta/files?key=${GEMINI_API_KEY}" \
   -H "X-Goog-Upload-Command: start" \
   -H "X-Goog-Upload-Header-Content-Length: ${NUM_BYTES}" \
   -H "X-Goog-Upload-Header-Content-Type: application/pdf" \
-  -H "Content-Type: applicati>on/json" \
-  -d "{'file': {'display_name': '${DISPLAY_NAME}'}}" 2 /dev/null
+  -H "Content-Type: application/json" \
+  -d "{'file': {'display_name': '${DISPLAY_NAME}'}}" 2> /dev/null
 
 upload_url=$(grep -i "x-goog-upload-url: " "${tmp_header_file}" | cut -d" " -f2 | tr -d "\r")
 rm "${tmp_header_file}"
 
 # Upload the actual bytes.
-curl "${upload_u>rl}" \>
+curl "${upload_url}" \
   -H "Content-Length: ${NUM_BYTES}" \
   -H "X-Goog-Upload-Offset: 0" \
   -H "X-Goog-Upload-Command: upload, finalize" \
-  --data-binary "@${PDF_PATH}" 2 /dev/null  file_info.json
+  --data-binary "@${PDF_PATH}" 2> /dev/null > file_info.json
 
 file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
@@ -663,14 +662,14 @@ echo file_uri=$file_uri
 # Now generate content using that file
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=$GOOGLE_API_KEY" \
     -H 'Content-Type: application/json' \
- >   -X POST >\
+    -X POST \
     -d '{
       "contents": [{
         "parts":[
           {"text": "Can you add a few more lines to this poem?"},
           {"file_data":{"mime_type": "application/pdf", "file_uri": '$file_uri'}}]
         }]
-      }' 2 /dev/null  response.json
+      }' 2> /dev/null > response.json
 
 cat response.json
 echo
@@ -678,8 +677,8 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-Możesz sprawdzić, czy interfejs API prawidłowo zapisał przesłany plik, i pobrać jego
-metadane, wywołując [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=pl). Unikalne są tylko `name` (a co za tym idzie, `uri`).
+[`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=tr) işlevini çağırarak API'nin yüklenen dosyayı başarıyla sakladığını doğrulayabilir ve dosyanın meta verilerini alabilirsiniz. Yalnızca `name`
+(ve dolayısıyla `uri`) benzersizdir.
 
 ### Python
 
@@ -703,7 +702,7 @@ print(file_info.model_dump_json(indent=4))
 ```
 name=$(jq ".file.name" file_info.json)
 # Get the file of interest to check state
-curl https://generativelanguage.googleapis.com/v1beta/fi>les/$name  file_info.json
+curl https://generativelanguage.googleapis.com/v1beta/files/$name > file_info.json
 # Print some information about the file you got
 name=$(jq ".file.name" file_info.json)
 echo name=$name
@@ -711,9 +710,9 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## Przekazywanie wielu plików PDF
+## Birden fazla PDF'yi iletme
 
-Interfejs Gemini API może przetwarzać wiele dokumentów PDF (do 1000 stron) w jednym żądaniu, o ile łączny rozmiar dokumentów i prompta tekstowego mieści się w oknie kontekstu modelu.
+Gemini API, belgelerin ve metin isteminin toplam boyutu modelin bağlam penceresi içinde kaldığı sürece tek bir istekte birden fazla PDF belgesini (1.000 sayfaya kadar) işleyebilir.
 
 ### Python
 
@@ -759,7 +758,7 @@ const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
 
 async function uploadRemotePDF(url, displayName) {
     const pdfBuffer = await fetch(url)
-      >  .then((response) = response.arrayBuffer());
+        .then((response) => response.arrayBuffer());
 
     const fileBlob = new Blob([pdfBuffer], { type: 'application/pdf' });
 
@@ -775,9 +774,9 @@ async function uploadRemotePDF(url, displayName) {
     while (getFile.state === 'PROCESSING') {
         getFile = await ai.files.get({ name: file.name });
         console.log(`current file status: ${getFile.state}`);
-        console.log('File is still processing, retrying in 5 seconds&#>39;);
+        console.log('File is still processing, retrying in 5 seconds');
 
-        await new Promise((resolve) = {
+        await new Promise((resolve) => {
             setTimeout(resolve, 5000);
         });
     }
@@ -793,13 +792,13 @@ async function main() {
         'What is the difference between each of the main benchmarks between these two papers? Output these in a table.',
     ];
 
-    let file1 = await uploadRemot&&ePDF("https://arxiv.org/pdf/2312.11805", "PDF 1")
-    if (file1.uri  file1.mimeType) {
+    let file1 = await uploadRemotePDF("https://arxiv.org/pdf/2312.11805", "PDF 1")
+    if (file1.uri && file1.mimeType) {
         const fileContent = createPartFromUri(file1.uri, file1.mimeType);
         content.push(fileContent);
     }
-    let file2&& = await uploadRemotePDF("https://arxiv.org/pdf/2403.05530", "PDF 2")
-    if (file2.uri  file2.mimeType) {
+    let file2 = await uploadRemotePDF("https://arxiv.org/pdf/2403.05530", "PDF 2")
+    if (file2.uri && file2.mimeType) {
         const fileContent = createPartFromUri(file2.uri, file2.mimeType);
         content.push(fileContent);
     }
@@ -831,8 +830,8 @@ import (
 
 func main() {
 
-    ctx :=& context.Background()
-    client, _ := genai.NewClient(ctx, genai.ClientConfig{
+    ctx := context.Background()
+    client, _ := genai.NewClient(ctx, &genai.ClientConfig{
         APIKey:  os.Getenv("GEMINI_API_KEY"),
         Backend: genai.BackendGeminiAPI,
     })
@@ -852,14 +851,14 @@ func main() {
     respHttp2, _ := http.Get(docUrl2)
     defer respHttp2.Body.Close()
 
-    outFile2, _ := &os.Create(localPath2)
+    outFile2, _ := os.Create(localPath2)
     _, _ = io.Copy(outFile2, respHttp2.Body)
     outFile2.Close()
 
-    uploadConfig1 := genai.UploadFileConfig{MIMEType: "applicati&on/pdf"}
+    uploadConfig1 := &genai.UploadFileConfig{MIMEType: "application/pdf"}
     uploadedFile1, _ := client.Files.UploadFromPath(ctx, localPath1, uploadConfig1)
 
-    uploadConfig2 := genai.UploadFileConfig{MIMEType: "application/pdf"}
+    uploadConfig2 := &genai.UploadFileConfig{MIMEType: "application/pdf"}
     uploadedFile2, _ := client.Files.UploadFromPath(ctx, localPath2, uploadConfig2)
 
     promptParts := []*genai.Part{
@@ -901,9 +900,9 @@ upload_pdf() {
 
   # Download the PDF
   wget -O "${display_name}.pdf" "${doc_url}"
-<
+
   local MIME_TYPE=$(file -b --mime-type "${display_name}.pdf")
-  local NUM_BYTES=$(wc -c  "${display_name}.pdf")
+  local NUM_BYTES=$(wc -c < "${display_name}.pdf")
 
   echo "MIME_TYPE: ${MIME_TYPE}"
   echo "NUM_BYTES: ${NUM_BYTES}"
@@ -915,12 +914,12 @@ upload_pdf() {
     -D "${tmp_header_file}" \
     -H "X-Goog-Upload-Protocol: resumable" \
     -H "X-Goog-Upload-Command: start" \
-    -H "X-Goog-Upload-Header-Content-Length>: ${NUM_BYTES}" \
+    -H "X-Goog-Upload-Header-Content-Length: ${NUM_BYTES}" \
     -H "X-Goog-Upload-Header-Content-Type: ${MIME_TYPE}" \
     -H "Content-Type: application/json" \
-    -d "{'file': {'display_name': '${display_name}'}}" 2 /dev/null
+    -d "{'file': {'display_name': '${display_name}'}}" 2> /dev/null
 
-  local upload_url=$(grep -i "x-goog-upload-url: " "${tmp_header_file}" | cut -d" >" -f2 >| tr -d "\r")
+  local upload_url=$(grep -i "x-goog-upload-url: " "${tmp_header_file}" | cut -d" " -f2 | tr -d "\r")
   rm "${tmp_header_file}"
 
   # Upload the PDF
@@ -928,7 +927,7 @@ upload_pdf() {
     -H "Content-Length: ${NUM_BYTES}" \
     -H "X-Goog-Upload-Offset: 0" \
     -H "X-Goog-Upload-Command: upload, finalize" \
-    --data-binary "@${display_name}.pdf" 2 /dev/null  "file_info_${display_name}.json"
+    --data-binary "@${display_name}.pdf" 2> /dev/null > "file_info_${display_name}.json"
 
   local file_uri=$(jq ".file.uri" "file_info_${display_name}.json")
   echo "file_uri for ${display_name}: ${file_uri}"
@@ -946,7 +945,7 @@ file_uri_1=$(upload_pdf "${DOC_URL_1}" "${DISPLAY_NAME_1}")
 file_uri_2=$(upload_pdf "${DOC_URL_2}" "${DISPLAY_NAME_2}")
 
 # Now generate content using both files
-curl "https://g>enerativela>nguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=$GOOGLE_API_KEY" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=$GOOGLE_API_KEY" \
     -H 'Content-Type: application/json' \
     -X POST \
     -d '{
@@ -957,7 +956,7 @@ curl "https://g>enerativela>nguage.googleapis.com/v1beta/models/gemini-3.6-flash
           {"text": "'$PROMPT'"}
         ]
       }]
-    }' 2 /dev/null  response.json
+    }' 2> /dev/null > response.json
 
 cat response.json
 echo
@@ -965,57 +964,51 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## Szczegóły techniczne
+## Teknik ayrıntılar
 
-Gemini obsługuje pliki PDF o rozmiarze do 50 MB lub 1000 stron. Ten limit dotyczy zarówno danych w tekście, jak i przesyłania za pomocą interfejsu Files API. Każda strona dokumentu odpowiada 258 tokenom.
+Gemini, 50 MB veya 1.000 sayfaya kadar olan PDF dosyalarını destekler. Bu sınır hem satır içi veriler hem de Files API yüklemeleri için geçerlidir. Her belge sayfası 258 jetona karşılık gelir.
 
-Oprócz
-okna [kontekstu](https://ai.google.dev/gemini-api/docs/long-context?hl=pl) modelu nie ma konkretnych limitów liczby pikseli w dokumencie. Większe strony są
-zmniejszane do maksymalnej rozdzielczości 3072 x 3072 pikseli przy zachowaniu oryginalnych
-proporcji, a mniejsze strony są powiększane do 768 x 768 pikseli. Nie ma obniżki kosztów w przypadku stron o mniejszym rozmiarze (oprócz przepustowości) ani poprawy wydajności w przypadku stron o wyższej rozdzielczości.
+Modelin [bağlam penceresi](https://ai.google.dev/gemini-api/docs/long-context?hl=tr) dışında bir dokümandaki piksel sayısıyla ilgili belirli bir sınır olmasa da daha büyük sayfalar, orijinal en boy oranları korunarak maksimum 3072 x 3072 çözünürlüğe ölçeklendirilirken daha küçük sayfalar 768 x 768 piksele ölçeklendirilir. Daha küçük boyutlardaki sayfalar için bant genişliği dışında maliyet düşüşü veya daha yüksek çözünürlükteki sayfalar için performans artışı olmaz.
 
-### Modele Gemini 3
+### Gemini 3 modelleri
 
-Gemini 3 wprowadza szczegółową kontrolę nad przetwarzaniem obrazu multimodalnego za pomocą parametru `media_resolution`. Teraz możesz ustawić rozdzielczość na niską, średnią lub wysoką dla każdej części multimedialnej. Wraz z tym dodatkiem zaktualizowano przetwarzanie dokumentów PDF:
+Gemini 3, `media_resolution` parametresiyle çok formatlı görüntü işleme üzerinde ayrıntılı kontrol sunar. Artık çözünürlüğü her bir medya parçası için ayrı ayrı düşük, orta veya yüksek olarak ayarlayabilirsiniz. Bu eklemeyle birlikte PDF belgelerinin işlenmesi güncellendi:
 
-1. **Natywne uwzględnianie tekstu:** tekst natywnie osadzony w pliku PDF jest wyodrębniany i przekazywany do modelu.
-2. **Rozliczenia i raportowanie tokenów:**
-   - **Nie naliczamy opłat** za tokeny pochodzące z wyodrębnionego **tekstu natywnego** w plikach PDF.
-   - W sekcji `usage_metadata` odpowiedzi interfejsu API tokeny wygenerowane na podstawie przetwarzania stron PDF (jako obrazów) są teraz zliczane w ramach modalności `IMAGE`, a nie w osobnej modalności `DOCUMENT`, jak w niektórych wcześniejszych wersjach.
+1. **Doğal metin ekleme:** PDF'ye doğal olarak yerleştirilmiş metin çıkarılır ve modele sağlanır.
+2. **Faturalandırma ve jeton raporlama:**
+   - PDF'lerdeki çıkarılan **yerel metinden** kaynaklanan jetonlar için **ücretlendirilmezsiniz**.
+   - API yanıtının `usage_metadata` bölümünde, PDF sayfalarının (resim olarak) işlenmesiyle oluşturulan jetonlar artık `IMAGE` biçimi altında sayılıyor. Bazı önceki sürümlerde olduğu gibi ayrı bir `DOCUMENT` biçimi altında sayılmıyor.
 
-Więcej informacji o parametrze rozdzielczości multimediów znajdziesz w
-[przewodniku po rozdzielczości multimediów](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=pl).
+Medya çözünürlüğü parametresi hakkında daha fazla bilgi için [Medya çözünürlüğü](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=tr) kılavuzuna bakın.
 
-### Typy dokumentów
+### Belge türleri
 
-Technicznie możesz przekazywać inne typy MIME do rozpoznawania dokumentów, takie jak TXT, Markdown, HTML, XML itp. Jednak rozpoznawanie dokumentów ***rozumie tylko pliki PDF***. Inne typy będą wyodrębniane jako czysty tekst, a model nie będzie w stanie zinterpretować tego, co widzimy w renderowaniu tych plików. Utracone zostaną wszelkie szczegóły dotyczące typu pliku, takie jak wykresy, diagramy, tagi HTML, formatowanie Markdown itp.
+Teknik olarak, doküman anlama için TXT, Markdown, HTML, XML gibi diğer MIME türlerini iletebilirsiniz. Ancak dokümanla ilgili görsel algılama ***yalnızca PDF'leri anlamlı bir şekilde anlar***. Diğer türler düz metin olarak ayıklanır ve model, bu dosyaların oluşturulmasında gördüklerimizi yorumlayamaz. Grafikler, diyagramlar, HTML etiketleri, Markdown biçimlendirmesi vb. gibi dosya türüne özgü tüm özellikler kaybolur.
 
-Więcej informacji o innych metodach wprowadzania plików znajdziesz w
-[przewodniku po metodach wprowadzania plików](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=pl).
+Diğer dosya giriş yöntemleri hakkında bilgi edinmek için [Dosya giriş yöntemleri](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=tr) kılavuzuna bakın.
 
-### Sprawdzone metody
+### En iyi uygulamalar
 
-Aby uzyskać najlepsze wyniki:
+En iyi sonuçlar için:
 
-- Przed przesłaniem obróć strony do prawidłowej orientacji.
-- Unikaj rozmazanych stron.
-- Jeśli używasz jednej strony, umieść prompta tekstowego po stronie.
+- Yüklemeden önce sayfaları doğru yöne döndürün.
+- Bulanık sayfalardan kaçının.
+- Tek sayfa kullanıyorsanız metin istemini sayfanın sonuna yerleştirin.
 
-## Co dalej?
+## Sırada ne var?
 
-Więcej informacji znajdziesz w tych materiałach:
+Daha fazla bilgi edinmek için aşağıdaki kaynakları inceleyin:
 
-- [Strategie tworzenia promptów z plików](https://ai.google.dev/gemini-api/docs/files?hl=pl#prompt-guide): interfejs Gemini API obsługuje tworzenie promptów za pomocą danych tekstowych, graficznych, dźwiękowych i wideo, czyli tworzenie promptów multimodalnych.
-- [Instrukcje systemowe](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl#system-instructions):
-  Instrukcje systemowe pozwalają sterować działaniem modelu na podstawie
-  konkretnych potrzeb i przypadków użycia.
+- [Dosya istemi stratejileri](https://ai.google.dev/gemini-api/docs/files?hl=tr#prompt-guide): Gemini API, çok formatlı istem olarak da bilinen metin, resim, ses ve video verileriyle istemi destekler.
+- [Sistem talimatları](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr#system-instructions):
+  Sistem talimatları, modelin davranışını özel ihtiyaçlarınıza ve kullanım alanlarınıza göre yönlendirmenizi sağlar.
 
-Prześlij opinię
+Geri bildirim gönderin
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Ostatnia aktualizacja: 2026-07-30 UTC.
+Son güncelleme tarihi: 2026-09-12 UTC.
 
-Chcesz przekazać coś jeszcze?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-12 UTC."],[],[]]

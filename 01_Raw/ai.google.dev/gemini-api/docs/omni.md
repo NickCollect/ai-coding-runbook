@@ -1,33 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/omni?hl=pl
-fetched_at: 2026-09-07T05:38:36.299446+00:00
-title: "Generowanie i edytowanie film\u00f3w za pomoc\u0105 Gemini Omni Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/omni?hl=pt-BR
+fetched_at: 2026-09-14T05:43:24.759424+00:00
+title: "Gerar e editar v\u00eddeos com o Gemini Omni Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Prześlij opinię
+Envie comentários
 
-# Generowanie i edytowanie filmów za pomocą Gemini Omni Flash
+# Gerar e editar vídeos com o Gemini Omni Flash
 
-Gemini Omni Flash (`gemini-omni-1.1-flash`) to wydajny model multimodalny zaprojektowany z myślą o szybkim generowaniu i edytowaniu filmów oraz sterowaniu ich charakterem.
-Gemini Omni ma te podstawowe funkcje, które odróżniają go od poprzednich modeli wideo:
+O Gemini Omni Flash (`gemini-omni-1.1-flash`) é um modelo multimodal de alta performance projetado para geração, edição e controle cinematográfico de vídeos em alta velocidade.
+O Gemini Omni foi criado com base nos seguintes recursos principais que o diferenciam dos modelos de vídeo anteriores:
 
-- **Natywna multimodalność:** przetwarza tekst, obrazy, dźwięk i wideo jednocześnie, co zapewnia bardziej spójne, konsekwentne i kontrolowane dane wyjściowe.
-- **Edytowanie w trybie konwersacyjnym:** umożliwia iteracyjne ulepszanie i edytowanie filmów za pomocą rozmowy w języku naturalnym. Jest dostępne dzięki [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl). Opisz, co chcesz zmienić, a model zastosuje zmiany, zachowując te części filmu, które chcesz pozostawić.
-- **Wiedza o świecie:** Gemini Omni łączy zrozumienie fizyki z wiedzą Gemini o historii, nauce i kontekście kulturowym, wypełniając lukę między fotorealizmem a znaczącą narracją.
+- **Multimodalidade nativa**:processa texto, imagem, áudio e vídeo simultaneamente, oferecendo uma saída mais coesa, consistente e controlável.
+- **Edição conversacional**:ativada pela [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br), ela permite refinar e editar seus vídeos de forma iterativa usando linguagem natural. Descreva o que você quer mudar, e o modelo vai aplicar a edição preservando as partes do vídeo que você quer manter.
+- **Conhecimento do mundo**:o Gemini Omni combina a compreensão da física com o conhecimento de história, ciência e contexto cultural do Gemini, unindo o fotorrealismo a uma narrativa significativa.
 
-## Generowanie filmu na podstawie tekstu
+## Geração de texto para vídeo
 
-Generowanie filmu na podstawie prompta tekstowego. Model generuje film z dźwiękiem na podstawie opisu tekstowego. Aby uzyskać jak najlepsze wyniki, pisz prompty zawierające szczegóły, takie jak opis sceny, ruch kamery, oświetlenie i nastrój.
+Gere um vídeo com base em um comando de texto. O modelo gera um vídeo com áudio
+com base na sua descrição em texto. Escreva comandos com detalhes como descrição da cena, movimento da câmera, iluminação e clima para ter os melhores resultados.
 
 ### Python
 
@@ -62,6 +63,36 @@ if (interaction.output_video?.data) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-omni-1.1-flash"))
+        .input(InteractionsInput.of("A marble rolling fast on a chain reaction style track, continuous smooth shot."))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.outputVideo().isPresent() && interaction.outputVideo().get().data().isPresent()) {
+    byte[] videoBytes = Base64.getDecoder().decode(interaction.outputVideo().get().data().get());
+    Files.write(Paths.get("marble.mp4"), videoBytes);
+}
+```
+
 ### REST
 
 ```
@@ -73,12 +104,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### Schemat odpowiedzi REST
+### Esquema de resposta REST
 
-Pole wygody `interaction.output_video` jest **dostępne tylko w pakiecie SDK**.
-Pobierz dane wyjściowe wideo z tablicy `steps`, gdy używasz bezpośrednio interfejsu API REST.
+O campo de conveniência `interaction.output_video` é **somente para SDK**.
+Receba a saída de vídeo da matriz `steps` ao usar a API REST diretamente.
 
-**Nieprzetworzona struktura JSON REST:**
+**Estrutura JSON REST bruta:**
 
 ```
 {
@@ -103,9 +134,9 @@ Pobierz dane wyjściowe wideo z tablicy `steps`, gdy używasz bezpośrednio int
 }
 ```
 
-### Sterowanie formatem obrazu
+### Controlar a proporção
 
-Ustaw `aspect_ratio` na `"9:16"`, aby tworzyć filmy w orientacji pionowej. Domyślnie jest to orientacja pozioma (16:9).
+Defina o `aspect_ratio` como `"9:16"` para criar vídeos no modo retrato. Paisagem (16:9) é a opção padrão.
 
 ### Python
 
@@ -148,6 +179,46 @@ if (interaction.output_video?.data) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.interactions.VideoResponseFormat;
+import com.google.genai.gaos.models.interactions.VideoResponseFormatAspectRatio;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
+
+Client client = new Client();
+
+VideoResponseFormat videoFormat =
+    VideoResponseFormat.builder()
+        .aspectRatio(VideoResponseFormatAspectRatio.of("9:16"))
+        .build();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-omni-1.1-flash"))
+        .input(InteractionsInput.of("A futuristic city with neon lights and flying cars, cyberpunk style"))
+        .responseFormat(CreateModelInteractionResponseFormat.of(ResponseFormat.of(videoFormat)))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.outputVideo().isPresent() && interaction.outputVideo().get().data().isPresent()) {
+    byte[] videoBytes = Base64.getDecoder().decode(interaction.outputVideo().get().data().get());
+    Files.write(Paths.get("example.mp4"), videoBytes);
+}
+```
+
 ### REST
 
 ```
@@ -163,16 +234,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### Rozdzielczość wyjściowa
+### Resolução de saída
 
-Kontroluj rozdzielczość wyjściową wygenerowanego filmu za pomocą parametru `resolution` w `response_format`. Domyślna rozdzielczość to 720p.
+Controle a resolução de saída do vídeo gerado usando o parâmetro `resolution`
+em `response_format`. A resolução padrão é 720p.
 
-| Wartość | Opis |
+| Valor | Descrição |
 | --- | --- |
-| `360p` | rozdzielczość wyjściowa 360p, |
-| `720p` | rozdzielczość wyjściowa 720p (domyślna), |
-| `1080p` | Wyjście 1080p (zwiększona rozdzielczość) |
-| `4k` | Wyjście 4K (większa rozdzielczość) |
+| `360p` | Resolução de saída de 360p |
+| `720p` | Resolução de saída de 720p (padrão) |
+| `1080p` | Saída de 1080p (resolução ampliada) |
+| `4k` | Saída 4K (de alta qualidade) |
 
 ### Python
 
@@ -215,6 +287,46 @@ if (interaction.output_video?.data) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.Resolution;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.interactions.VideoResponseFormat;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
+
+Client client = new Client();
+
+VideoResponseFormat videoFormat =
+    VideoResponseFormat.builder()
+        .resolution(Resolution.of("1080p"))
+        .build();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-omni-1.1-flash"))
+        .input(InteractionsInput.of("A drone shot of a mountain landscape at sunrise."))
+        .responseFormat(CreateModelInteractionResponseFormat.of(ResponseFormat.of(videoFormat)))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.outputVideo().isPresent() && interaction.outputVideo().get().data().isPresent()) {
+    byte[] videoBytes = Base64.getDecoder().decode(interaction.outputVideo().get().data().get());
+    Files.write(Paths.get("hires.mp4"), videoBytes);
+}
+```
+
 ### REST
 
 ```
@@ -230,21 +342,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-## Generowanie filmu na podstawie obrazu
+[
 
-Do prompta tekstowego możesz dodać obraz referencyjny. W zależności od prompta model zdecyduje, jak wykorzystać obraz. Jest to przydatne w przypadku zdjęć produktów, ilustracji lub fotografii.
+Seu navegador não é compatível com a tag de vídeo.
+](https://storage.googleapis.com/generativeai-downloads/videos/omni_misty_mountains_1080p.mp4)
 
-Poniższy przykład pokazuje, jak użyć obrazu referencyjnego przedstawiającego rysunek ryby wyskakującej z wody:
+## Geração de vídeo a partir de imagens
 
-![Rysunek ryby wyskakującej z wody](https://ai.google.dev/static/gemini-api/docs/images/fish-jumping-inputimage.png?hl=pl)
+Você pode fornecer uma imagem de referência com seu comando de texto. Dependendo do seu comando, o modelo vai decidir como usar a imagem. Isso é útil para dar vida a fotos de produtos, ilustrações ou fotografias.
 
-Wpisz ten prompt:
+O exemplo a seguir mostra como usar a imagem de referência de um desenho de um peixe pulando para fora da água:
+
+![Desenho de um peixe pulando da água](https://ai.google.dev/static/gemini-api/docs/images/fish-jumping-inputimage.png?hl=pt-br)
+
+Com o seguinte comando:
 
 ```
 turn this into realistic footage, using the drawing only as a guide for movement, do not show the drawing in the final video
 ```
 
-Aby wygenerować realistyczny film przedstawiający rysunek.
+Para gerar um vídeo realista do desenho.
 
 ### Python
 
@@ -285,6 +402,58 @@ if (interaction.output_video?.data) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
+
+Client client = new Client();
+
+byte[] imageBytes = Files.readAllBytes(Paths.get("first_frame.png"));
+String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
+Content imageContent =
+    ImageContent.builder()
+        .data(base64Image)
+        .mimeType(ImageContentMimeType.IMAGE_PNG)
+        .build();
+
+Content textContent =
+    TextContent.builder()
+        .text("A mythical dragon perched on a craggy peak slowly unfolds its wings and lets out a roar.")
+        .build();
+
+List<Content> contents = Arrays.asList(imageContent, textContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-omni-1.1-flash"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.outputVideo().isPresent() && interaction.outputVideo().get().data().isPresent()) {
+    byte[] videoBytes = Base64.getDecoder().decode(interaction.outputVideo().get().data().get());
+    Files.write(Paths.get("dragon.mp4"), videoBytes);
+}
+```
+
 ### REST
 
 ```
@@ -299,11 +468,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### Interpolacja pierwszej i ostatniej klatki
+### Interpolação do primeiro e do último frame
 
-Gemini Omni Flash obsługuje interpolację wideo, co umożliwia generowanie filmów, które płynnie przechodzą od obrazu początkowego (pierwszej klatki) do obrazu końcowego (ostatniej klatki).
+O Gemini Omni Flash oferece suporte à interpolação de vídeo, permitindo gerar um vídeo que faz a transição suave entre uma imagem inicial (primeiro frame) e uma imagem final (último frame).
 
-Podaj 2 obrazy na liście `input` i opisz w prompcie pożądane przejście. Model animuje scenę od pierwszej do ostatniej klatki.
+Forneça duas imagens na lista `input` e descreva a transição desejada no comando. O modelo vai animar a cena do primeiro ao último frame.
 
 ### Python
 
@@ -346,6 +515,64 @@ if (interaction.output_video?.data) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
+
+Client client = new Client();
+
+String firstFrameB64 = Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get("first_frame.jpg")));
+String lastFrameB64 = Base64.getEncoder().encodeToString(Files.readAllBytes(Paths.get("last_frame.jpg")));
+
+Content firstFrame =
+    ImageContent.builder()
+        .data(firstFrameB64)
+        .mimeType(ImageContentMimeType.IMAGE_JPEG)
+        .build();
+
+Content lastFrame =
+    ImageContent.builder()
+        .data(lastFrameB64)
+        .mimeType(ImageContentMimeType.IMAGE_JPEG)
+        .build();
+
+Content prompt =
+    TextContent.builder()
+        .text("A smooth cinematic transition from a lush green forest at sunrise to a snowy forest under a starry night sky.")
+        .build();
+
+List<Content> contents = Arrays.asList(firstFrame, lastFrame, prompt);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-omni-1.1-flash"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.outputVideo().isPresent() && interaction.outputVideo().get().data().isPresent()) {
+    byte[] videoBytes = Base64.getDecoder().decode(interaction.outputVideo().get().data().get());
+    Files.write(Paths.get("interpolation.mp4"), videoBytes);
+}
+```
+
 ### REST
 
 ```
@@ -361,10 +588,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### Odniesienie do obiektu
+[
 
-Możesz wygenerować film z określonymi obiektami podanymi jako obrazy referencyjne.
-Na przykład poniższy kod pokazuje, jak podać 2 obrazy kota i włóczki, aby wygenerować film przedstawiający kota bawiącego się włóczką.
+Seu navegador não é compatível com a tag de vídeo.
+](https://storage.googleapis.com/generativeai-downloads/videos/omni_keyframe_interpolation.mp4)
+
+### Referência de assunto
+
+Você pode gerar um vídeo incorporando assuntos específicos fornecidos como imagens de referência.
+Por exemplo, o código a seguir mostra como fornecer duas imagens de um gato e um novelo de lã
+para gerar um vídeo do gato brincando com a lã.
 
 ### Python
 
@@ -407,6 +640,58 @@ if (interaction.output_video?.data) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
+
+Client client = new Client();
+
+byte[] imageBytes = Files.readAllBytes(Paths.get("reference.png"));
+String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
+Content imageContent =
+    ImageContent.builder()
+        .data(base64Image)
+        .mimeType(ImageContentMimeType.IMAGE_PNG)
+        .build();
+
+Content textContent =
+    TextContent.builder()
+        .text("A cute small creature like the one in <image_1> is running in a sunny park chasing a butterfly.")
+        .build();
+
+List<Content> contents = Arrays.asList(imageContent, textContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-omni-1.1-flash"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.outputVideo().isPresent() && interaction.outputVideo().get().data().isPresent()) {
+    byte[] videoBytes = Base64.getDecoder().decode(interaction.outputVideo().get().data().get());
+    Files.write(Paths.get("creature.mp4"), videoBytes);
+}
+```
+
 ### REST
 
 ```
@@ -422,11 +707,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### Parametr zadań
+### Parâmetro "Tasks"
 
-Użyj parametru `task` w `video_config`, aby wyraźnie określić zamierzone działanie. Jeśli na przykład chcesz, aby model wygenerował film na podstawie obrazu, możesz ustawić parametr na `image_to_video`. Jeśli nie zostanie ustawiona, model wywnioskuje, czego oczekujesz, na podstawie promptu.
+Use o parâmetro `task` no `video_config` para especificar explicitamente o comportamento desejado. Por exemplo, se você quiser que o modelo gere um vídeo de uma imagem, defina o parâmetro como `image_to_video`. Se não for definido, o modelo vai inferir o que você quer com base no comando.
 
-Dozwolone wartości:
+Estes são os valores permitidos:
 
 - `text_to_video`
 - `image_to_video`
@@ -434,7 +719,7 @@ Dozwolone wartości:
 - `edit`
 - `extend`
 
-Poniższy przykład pokazuje, jak ustawić tę wartość w przypadku przedstawionego wcześniej przykładu obrazu do filmu.
+O exemplo a seguir mostra como definir isso para o exemplo de imagem para vídeo mostrado anteriormente.
 
 ### Python
 
@@ -485,6 +770,67 @@ if (interaction.output_video?.data) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.GenerationConfig;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.Task;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.interactions.VideoConfig;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
+
+Client client = new Client();
+
+byte[] imageBytes = Files.readAllBytes(Paths.get("reference.png"));
+String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
+Content imageContent =
+    ImageContent.builder()
+        .data(base64Image)
+        .mimeType(ImageContentMimeType.IMAGE_PNG)
+        .build();
+
+Content textContent =
+    TextContent.builder()
+        .text("A fast red sports car drives down an empty desert highway at dusk.")
+        .build();
+
+List<Content> contents = Arrays.asList(imageContent, textContent);
+
+GenerationConfig generationConfig =
+    GenerationConfig.builder()
+        .videoConfig(VideoConfig.builder().task(Task.IMAGE_TO_VIDEO).build())
+        .build();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-omni-1.1-flash"))
+        .input(InteractionsInput.ofContent(contents))
+        .generationConfig(generationConfig)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.outputVideo().isPresent() && interaction.outputVideo().get().data().isPresent()) {
+    byte[] videoBytes = Base64.getDecoder().decode(interaction.outputVideo().get().data().get());
+    Files.write(Paths.get("task_output.mp4"), videoBytes);
+}
+```
+
 ### REST
 
 ```
@@ -512,12 +858,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Edytowanie filmów z zachowaniem stanu
+## Edição de vídeo com estado
 
-Generuj film i edytuj go iteracyjnie za pomocą dodatkowych promptów. Każda tura
-bazuje na poprzednim wyniku. Model zapamiętuje kontekst filmu i stosuje zmiany, zachowując elementy, o których nie wspominasz. Użyj `previous_interaction_id`, aby śledzić historię rozmowy i stan wygenerowanego filmu bez ponownego przesyłania poprzedniego filmu.
+Gerar e editar um vídeo de forma iterativa usando comandos de acompanhamento. Cada turno se baseia no resultado anterior. O modelo se lembra do contexto do vídeo e aplica suas mudanças preservando os elementos que você não mencionou. Use o
+`previous_interaction_id` para acompanhar o histórico de conversas e o estado do
+vídeo gerado sem fazer upload do vídeo anterior.
 
-Ten przykład pokazuje, jak wygenerować pierwszy film, a potem go edytować:
+O exemplo a seguir demonstra como gerar um primeiro vídeo e depois editá-lo:
 
 ### Python
 
@@ -565,6 +912,48 @@ if (res2.output_video?.data) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
+
+Client client = new Client();
+
+// Turn 1: Generate initial video
+CreateModelInteraction turn1Params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-omni-1.1-flash"))
+        .input(InteractionsInput.of("A person in a red jacket standing in a snowy landscape."))
+        .build();
+
+Interaction turn1 =
+    client.interactions.create(CreateInteractionRequestBody.of(turn1Params)).interaction().get();
+
+// Turn 2: Edit the previous video using previousInteractionId
+CreateModelInteraction turn2Params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-omni-1.1-flash"))
+        .input(InteractionsInput.of("Change the jacket to bright yellow."))
+        .previousInteractionId(turn1.id().get())
+        .build();
+
+Interaction turn2 =
+    client.interactions.create(CreateInteractionRequestBody.of(turn2Params)).interaction().get();
+
+if (turn2.outputVideo().isPresent() && turn2.outputVideo().get().data().isPresent()) {
+    byte[] videoBytes = Base64.getDecoder().decode(turn2.outputVideo().get().data().get());
+    Files.write(Paths.get("edited.mp4"), videoBytes);
+}
+```
+
 ### REST
 
 ```
@@ -577,17 +966,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-Przykład początkowego filmu:
+Exemplo de um vídeo inicial:
 
-Przykład edytowanego filmu:
+Exemplo de um vídeo editado:
 
-Każda tura rozmowy generuje nowy film. Model rozumie kontekst z poprzednich tur, co pozwala wprowadzać stopniowe zmiany, takie jak dostosowywanie oświetlenia czy zamiana tła, bez konieczności ponownego opisywania całej sceny.
+Cada turno na conversa gera um novo vídeo. O modelo entende o contexto de turnos anteriores, permitindo que você faça mudanças incrementais, como ajustar a iluminação e trocar os planos de fundo, sem precisar descrever toda a cena novamente.
 
-### Edytowanie własnych filmów
+### Editar seus próprios vídeos
 
-Prześlij filmy za pomocą [interfejsu Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl), aby je edytować za pomocą Gemini Omni Flash.
+Faça upload dos seus vídeos usando a [API Files](https://ai.google.dev/gemini-api/docs/files?hl=pt-br) para editá-los
+com o Gemini Omni Flash.
 
-Poniższy przykład pokazuje, jak edytować ten oryginalny film:
+O exemplo a seguir mostra como editar este vídeo original:
 
 ### Python
 
@@ -614,7 +1004,7 @@ print(f'Video processing complete: ' + video_file.uri)
 interaction = client.interactions.create(
     model="gemini-omni-1.1-flash",
     input=[
-        {"type": "document", "uri": video_file.uri},
+        {"type": "video", "uri": video_file.uri},
         {"type": "text", "text": "When the person touches the mirror, make the mirror ripple beautifully like liquid, and the person's arm turns into reflective mirror material"}
     ],
 )
@@ -649,13 +1039,65 @@ console.log('Video processing complete: ' + videoFile.uri);
 const interaction = await ai.interactions.create({
   model: 'gemini-omni-1.1-flash',
   input: [
-    { type: 'document', uri: videoFile.uri },
+    { type: 'video', uri: videoFile.uri },
     { type: 'text', text: "When the person touches the mirror, make the mirror ripple beautifully like liquid, and the person's arm turns into reflective mirror material" }
   ],
 });
 
 if (interaction.output_video?.data) {
   fs.writeFileSync('example.mp4', Buffer.from(interaction.output_video.data, 'base64'));
+}
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.interactions.VideoContent;
+import com.google.genai.gaos.models.interactions.VideoContentMimeType;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
+
+Client client = new Client();
+
+byte[] videoBytes = Files.readAllBytes(Paths.get("my_video.mp4"));
+String base64Video = Base64.getEncoder().encodeToString(videoBytes);
+
+Content videoContent =
+    VideoContent.builder()
+        .data(base64Video)
+        .mimeType(VideoContentMimeType.VIDEO_MP4)
+        .build();
+
+Content textContent =
+    TextContent.builder()
+        .text("Make the violin completely invisible while keeping the musician playing normally in the air.")
+        .build();
+
+List<Content> contents = Arrays.asList(videoContent, textContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-omni-1.1-flash"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.outputVideo().isPresent() && interaction.outputVideo().get().data().isPresent()) {
+    byte[] editedBytes = Base64.getDecoder().decode(interaction.outputVideo().get().data().get());
+    Files.write(Paths.get("edited_invisible_violin.mp4"), editedBytes);
 }
 ```
 
@@ -692,12 +1134,14 @@ curl -sS -w "\n[HTTP %{http_code}]\n" "https://generativelanguage.googleapis.com
 EOF
 ```
 
-Przykład edytowanego filmu:
+Exemplo de um vídeo editado:
 
-## Pobieranie filmów za pomocą identyfikatora URI
+## Como recuperar vídeos com um URI
 
-Użyj parametru `delivery="uri"` w `response_format`, aby pobrać wygenerowane filmy o rozmiarze większym niż 4 MB.
-Zwraca to adres URI hostowany przez Google, który możesz sprawdzać, dopóki film nie będzie `ACTIVE` przed pobraniem.
+Use o parâmetro `delivery="uri"` em
+`response_format` para recuperar vídeos gerados com mais de 4 MB.
+Isso retorna um URI hospedado pelo Google que você pode consultar até que o
+vídeo esteja `ACTIVE` antes do download.
 
 ### Python
 
@@ -765,6 +1209,44 @@ await ai.files.download({
 console.log("💾 Saved video to output.mp4");
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.interactions.VideoResponseFormat;
+import com.google.genai.gaos.models.interactions.VideoResponseFormatDelivery;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+// 1. Request video via URI delivery
+VideoResponseFormat videoFormat =
+    VideoResponseFormat.builder()
+        .delivery(VideoResponseFormatDelivery.URI)
+        .build();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-omni-1.1-flash"))
+        .input(InteractionsInput.of("A camera flies over a misty redwood forest at sunrise."))
+        .responseFormat(CreateModelInteractionResponseFormat.of(ResponseFormat.of(videoFormat)))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+// 2. Extract file URI
+interaction.outputVideo().flatMap(v -> v.uri()).ifPresent(uri -> {
+    System.out.println("Video URI: " + uri);
+});
+```
+
 ### REST
 
 ```
@@ -810,7 +1292,7 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/files/$FILE_ID:
 echo "Done! Video saved to output.mp4"
 ```
 
-**Nieprzetworzona struktura JSON REST (URI):**
+**Estrutura JSON REST bruta (URI):**
 
 ```
 {
@@ -835,15 +1317,15 @@ echo "Done! Video saved to output.mp4"
 }
 ```
 
-## Rozszerzenie wideo
+## Extensão de vídeo
 
-Wydłużanie istniejącego filmu przez wygenerowanie płynnej kontynuacji na końcu klipu. W prompcie opisz, jak ma się rozwijać film, np. `"Extend this video"` lub `"Continue the scene: the camera pans across the mountains"`.
-Model analizuje film wejściowy, aby wygenerować jego kontynuację trwającą 3–10 sekund.
+Estenda um vídeo gerando uma continuação perfeita no final do clipe. Descreva como você quer que o vídeo continue no comando, por exemplo, `"Extend this video"` ou `"Continue the scene: the camera pans across the mountains"`.
+O modelo analisa o vídeo de entrada para gerar uma continuação de 3 a 10 segundos.
 
-Możesz przedłużyć:
+Você pode estender:
 
-- **Filmy wygenerowane przez model (wieloetapowe):** przedłuż wcześniej wygenerowany film, odwołując się do jego `previous_interaction_id`.
-- **Przesłane filmy:** podaj przesłany plik wideo (za pomocą interfejsu Files API) wraz z promptem do rozszerzenia.
+- **Vídeos gerados pelo modelo (multiturno)**: estenda um vídeo gerado anteriormente referenciando o `previous_interaction_id` dele.
+- **Vídeos enviados**: forneça um arquivo de vídeo enviado (pela API Files) junto com o comando da extensão.
 
 ### Python
 
@@ -860,7 +1342,7 @@ video_file = client.files.upload(file="my_video.mp4")
 interaction = client.interactions.create(
     model="gemini-omni-1.1-flash",
     input=[
-        {"type": "document", "uri": video_file.uri},
+        {"type": "video", "uri": video_file.uri},
         {"type": "text", "text": "Continue the scene."}
     ],
 )
@@ -889,7 +1371,7 @@ while (videoFile.state === 'PROCESSING') {
 const interaction = await ai.interactions.create({
   model: 'gemini-omni-1.1-flash',
   input: [
-    { type: 'document', uri: videoFile.uri },
+    { type: 'video', uri: videoFile.uri },
     { type: 'text', text: 'Continue the scene.' }
   ],
 });
@@ -899,21 +1381,85 @@ if (interaction.output_video?.data) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.interactions.VideoContent;
+import com.google.genai.gaos.models.interactions.VideoContentMimeType;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
+
+Client client = new Client();
+
+// Load base video
+byte[] videoBytes = Files.readAllBytes(Paths.get("my_video.mp4"));
+String base64Video = Base64.getEncoder().encodeToString(videoBytes);
+
+Content videoContent =
+    VideoContent.builder()
+        .data(base64Video)
+        .mimeType(VideoContentMimeType.VIDEO_MP4)
+        .build();
+
+// Prompt describing seamless continuation
+Content promptContent =
+    TextContent.builder()
+        .text("Continue the scene.")
+        .build();
+
+List<Content> contents = Arrays.asList(videoContent, promptContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-omni-1.1-flash"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.outputVideo().isPresent() && interaction.outputVideo().get().data().isPresent()) {
+    byte[] extendedBytes = Base64.getDecoder().decode(interaction.outputVideo().get().data().get());
+    Files.write(Paths.get("extended.mp4"), extendedBytes);
+}
+```
+
 ### REST
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$API_KEY"     -H "Content-Type: application/json"     -d '{
  "model": "gemini-omni-1.1-flash",
  "input": [
-   {"type": "document", "uri": "'"$VIDEO_URI"'"},
+   {"type": "video", "uri": "'"$VIDEO_URI"'"},
    {"type": "text", "text": "Continue the scene."}
  ]
 }'
 ```
 
-### Rozszerzanie za pomocą multimediów referencyjnych
+[
 
-Obrazy referencyjne możesz podać w tablicy `input` wraz z promptem, aby wprowadzić do dłuższego filmu nowe postacie lub elementy:
+Seu navegador não é compatível com a tag de vídeo.
+](https://storage.googleapis.com/generativeai-downloads/videos/omni_scene_extension_base.mp4)
+
+[
+
+Seu navegador não é compatível com a tag de vídeo.
+](https://storage.googleapis.com/generativeai-downloads/videos/omni_scene_extension_extended.mp4)
+
+### Extensão com mídia de referência
+
+Você pode fornecer imagens de referência na matriz `input` junto com o comando para introduzir novos personagens ou elementos no vídeo estendido:
 
 ### Python
 
@@ -931,8 +1477,8 @@ character_img = client.files.upload(file="character.png")
 interaction = client.interactions.create(
     model="gemini-omni-1.1-flash",
     input=[
-        {"type": "document", "uri": video_file.uri},
-        {"type": "document", "uri": character_img.uri},
+        {"type": "video", "uri": video_file.uri},
+        {"type": "image", "uri": character_img.uri},
         {"type": "text", "text": "Extend this video: have the character shown in <IMAGE_REF_0> enter the scene and wave."}
     ],
 )
@@ -961,8 +1507,8 @@ while (videoFile.state === 'PROCESSING' || characterImg.state === 'PROCESSING') 
 const interaction = await ai.interactions.create({
   model: 'gemini-omni-1.1-flash',
   input: [
-    { type: 'document', uri: videoFile.uri },
-    { type: 'document', uri: characterImg.uri },
+    { type: 'video', uri: videoFile.uri },
+    { type: 'image', uri: characterImg.uri },
     { type: 'text', text: 'Extend this video: have the character shown in <IMAGE_REF_0> enter the scene and wave.' }
   ],
 });
@@ -972,135 +1518,200 @@ if (interaction.output_video?.data) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.interactions.VideoContent;
+import com.google.genai.gaos.models.interactions.VideoContentMimeType;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
+
+Client client = new Client();
+
+// Load base video and reference character image
+byte[] videoBytes = Files.readAllBytes(Paths.get("my_video.mp4"));
+byte[] charBytes = Files.readAllBytes(Paths.get("character.png"));
+
+Content baseVideo =
+    VideoContent.builder()
+        .data(Base64.getEncoder().encodeToString(videoBytes))
+        .mimeType(VideoContentMimeType.VIDEO_MP4)
+        .build();
+
+Content characterImg =
+    ImageContent.builder()
+        .data(Base64.getEncoder().encodeToString(charBytes))
+        .mimeType(ImageContentMimeType.IMAGE_PNG)
+        .build();
+
+Content prompt =
+    TextContent.builder()
+        .text("Extend the video: the car stops, and the traveler from <image_1> steps out and waves at the sunset.")
+        .build();
+
+List<Content> contents = Arrays.asList(baseVideo, characterImg, prompt);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-omni-1.1-flash"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.outputVideo().isPresent() && interaction.outputVideo().get().data().isPresent()) {
+    byte[] extendedBytes = Base64.getDecoder().decode(interaction.outputVideo().get().data().get());
+    Files.write(Paths.get("extended_with_character.mp4"), extendedBytes);
+}
+```
+
 ### REST
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$API_KEY"     -H "Content-Type: application/json"     -d '{
  "model": "gemini-omni-1.1-flash",
- "input": [
-   {"type": "document", "uri": "'$VIDEO_URI'"},
-   {"type": "document", "uri": "'$CHARACTER_IMG_URI'"},
-   {"type": "text", "text": "Extend this video: have the character shown in <IMAGE_REF_0> enter the scene and wave."}
- ]
+  "input": [
+    {"type": "video", "uri": "'$VIDEO_URI'"},
+    {"type": "image", "uri": "'$CHARACTER_IMG_URI'"},
+    {"type": "text", "text": "Extend this video: have the character shown in <IMAGE_REF_0> enter the scene and wave."}
+  ]
 }'
 ```
 
-### Ograniczenia i wytyczne dotyczące rozszerzeń
+[
 
-Podczas wydłużania filmów pamiętaj o tych zasadach i ograniczeniach:
+Seu navegador não é compatível com a tag de vídeo.
+](https://storage.googleapis.com/generativeai-downloads/videos/omni_traveler_extension.mp4)
 
-- **Wypowiadane dialogi w przesłanych filmach:** obecnie nie możesz wydłużyć przesłanego filmu, w którym ktoś mówi, aby dodać dodatkowy dialog (jest to obsługiwane, jeśli postać milczy lub jeśli prompt nie dodaje dialogu).
-- **Rozszerzenie głosowe z wieloma turami:** generowanie mówionego dialogu lub mowy jest obsługiwane podczas rozszerzania wcześniej wygenerowanych filmów za pomocą funkcji wieloturnowej (`previous_interaction_id`).
-- **Tylko na końcu klipu:** rozszerzenie jest ograniczone do dodawania na końcu filmu.
-  Nie możesz dodawać treści na początku ani wydłużać środka klipu.
-- **Ograniczenie czasu trwania:** przesyłane filmy do rozszerzenia muszą mieć długość nie większą niż 10 sekund (chyba że używasz wieloetapowych odpowiedzi).
-- **Dostępność w poszczególnych regionach:** wydłużanie przesłanych filmów nie jest obecnie dostępne dla użytkowników z Europejskiego Obszaru Gospodarczego (EOG), Szwajcarii i Wielkiej Brytanii (wydłużanie filmów wygenerowanych przez model jest obsługiwane we wszystkich dostępnych regionach).
+### Restrições e diretrizes de extensão
 
-## Sprawdzone metody
+Lembre-se das seguintes regras e restrições ao estender vídeos:
 
-- **Używaj dostarczania URI w przypadku dużych filmów:** w przypadku filmów większych niż 4 MB (w razie dostępności – >720p) używaj `delivery="uri"` w `response_format`, aby uniknąć limitów rozmiaru ładunku.
-- **Zoptymalizowana wydajność:** ustaw `background=false`, `store=false` i `stream=false`, aby uzyskać szybsze, synchroniczne generowanie pojedynczych odpowiedzi. Pamiętaj, że ustawienie
-  `store=false` oznacza, że wygenerowanego filmu nie będzie można edytować w kolejnych
-  rundach za pomocą `previous_interaction_id`.
-- **Precyzja promptu:** szczegółowe informacje znajdziesz w sekcji [wskazówki dotyczące promptów](#prompt-guide).
+- **Diálogo falado em vídeos enviados**: no momento, não é possível estender um vídeo enviado em que alguém está falando para adicionar mais diálogo. Isso é possível se o personagem permanecer em silêncio ou se o comando não adicionar diálogo.
+- **Extensão de voz multiturno**: é possível gerar diálogos ou falas ao estender vídeos gerados anteriormente em multiturno (`previous_interaction_id`).
+- **Somente no final do clipe**: a extensão é limitada à adição ao final do vídeo.
+  Não é possível adicionar conteúdo no início nem estender o meio de um clipe.
+- **Limite de duração**: os vídeos de entrada para extensão precisam ter 10 segundos ou menos ao fazer upload (a menos que você esteja usando multiturno).
+- **Disponibilidade regional**: no momento, não é possível estender vídeos enviados para usuários no Espaço Econômico Europeu (EEE), na Suíça e no Reino Unido. No entanto, é possível estender vídeos gerados pelo modelo em todas as regiões disponíveis.
 
-## Ograniczenia
+## Práticas recomendadas
 
-- Przesyłanie i edytowanie obrazów przedstawiających osoby niepełnoletnie nie jest obsługiwane w Europejskim Obszarze Gospodarczym, Szwajcarii i Wielkiej Brytanii.
-- Przesyłanie i edytowanie obrazów przedstawiających niektóre rozpoznawalne osoby nie jest obsługiwane.
-- Edytowanie lub wydłużanie przesłanych filmów nie jest obecnie dostępne dla użytkowników z Europejskiego Obszaru Gospodarczego (EOG), Szwajcarii i Wielkiej Brytanii (edytowanie i wydłużanie filmów wygenerowanych przez model jest obsługiwane).
-- Filmy wejściowe do edycji i rozszerzania muszą mieć podczas przesyłania długość maksymalnie 10 sekund (chyba że rozszerzasz filmy wygenerowane przez model w ramach wieloetapowej konwersacji).
-- Rozszerzenie wideo można dodać tylko na końcu filmu. Dodawanie na początku lub w środku klipu nie jest obsługiwane.
-- Nie możesz wydłużyć przesłanego filmu, w którym ktoś mówi, aby dodać dodatkowe dialogi (postacie mogą milczeć lub można użyć wieloetapowego rozszerzenia z `previous_interaction_id`).
-- Edytowanie głosem nie jest obsługiwane.
-- Przesyłanie referencji audio nie jest obsługiwane w bieżącej wersji interfejsu API.
-- Referencje wideo najlepiej sprawdzają się w przypadku podobieństw. Dźwięk w referencji wideo jest ignorowany. Filmy referencyjne mogą zawierać maksymalnie 3 klipy, z których każdy może trwać do 3 sekund.
-- Odwoływanie się do wielu filmów lub wyciąganie z nich wniosków nie jest obsługiwane. Próba użycia promptów z wieloma filmami może spowodować pogorszenie wydajności modelu lub nieoczekiwane wyniki.
-- Udostępniona przepustowość nieobsługiwany.
-- Instrukcje systemowe, temperatura, `top_p`, sekwencje zatrzymania i negatywne prompty nie są obsługiwane (negatywne prompty możesz umieścić w zwykłym prompcie, np. „Nie rób X”).
-- Używanie filmów z YouTube jako źródła multimediów nie jest obsługiwane.
+- **Use a entrega de URI para vídeos grandes**:para vídeos maiores que 4 MB (>720p quando disponível), use `delivery="uri"` em `response_format` para evitar limites de tamanho de payload.
+- **Performance otimizada**:defina `background=false`, `store=false` e `stream=false` para uma geração unária síncrona mais rápida. Observação: definir `store=false` significa que o vídeo gerado não poderá ser editado em comandos subsequentes usando o `previous_interaction_id`.
+- **Precisão do comando**:consulte a seção [orientações sobre comandos](#prompt-guide) para mais detalhes.
 
-## Szczegóły techniczne
+## Limitações
 
-- Wszystkie wygenerowane filmy zawierają znak wodny SynthID, który jest niewidoczny dla widzów, ale można go wykryć programowo w celu weryfikacji pochodzenia.
-- Czas generowania filmów zależy od ich długości, rozdzielczości i bieżącego obciążenia interfejsu API. Generowanie dłuższych filmów w wyższej rozdzielczości zajmuje więcej czasu.
-- Omni stosuje filtry bezpieczeństwa treści zarówno do promptów wejściowych, jak i wygenerowanych filmów (różnią się one w zależności od regionu). Prompty, które naruszają zasady użytkowania, są blokowane.
-- Język angielski jest w pełni obsługiwany, ale inne języki nie zostały jeszcze ocenione, więc mogą działać, ale wyniki mogą się różnić.
+- Fazer upload e editar imagens com menores de idade é indisponível no Espaço Econômico Europeu, na Suíça e no Reino Unido.
+- Não é possível fazer upload e editar imagens que contenham pessoas reconhecíveis.
+- No momento, a edição ou extensão de vídeos enviados não está disponível para usuários no Espaço Econômico Europeu (EEE), na Suíça e no Reino Unido. No entanto, é possível editar ou estender vídeos gerados pelo modelo.
+- Os vídeos de entrada para edição e extensão precisam ter no máximo 10 segundos ao fazer upload (a menos que sejam extensões de vídeos gerados pelo modelo em multiturno).
+- A extensão de vídeo é limitada à adição ao final de um vídeo. Não é possível adicionar ao início ou estender o meio de um clipe.
+- Não é possível estender um vídeo enviado em que alguém está falando para adicionar mais diálogo. Os personagens podem ficar em silêncio ou usar a extensão multiturno com `previous_interaction_id`.
+- A edição de voz não é compatível.
+- O upload de referências de áudio não é compatível com a versão atual da API.
+- As referências de vídeo funcionam melhor com semelhanças. O áudio em uma referência de vídeo é ignorado. As referências de vídeo aceitam no máximo três clipes de até três segundos cada.
+- Não é possível fazer referência ou raciocinar em vários vídeos. Tentar usar vários vídeos pode resultar em desempenho degradado do modelo ou saídas inesperadas.
+- O throughput provisionado não é aceito.
+- Instruções do sistema, temperatura, `top_p`, sequências de parada e comandos negativos não são aceitos. Você pode colocar seus comandos negativos no comando normal, por exemplo, "Não faça X".
+- Não é possível usar vídeos do YouTube como fonte de mídia.
 
-## Przewodnik po tworzeniu promptów w Gemini Omni Flash
+## Detalhes técnicos
 
-W tej sekcji znajdziesz wskazówki i przykłady dotyczące skutecznego promptowania Gemini Omni Flash.
+- Todos os vídeos gerados incluem marca-d'água do SynthID, que é invisível para os espectadores, mas pode ser detectada programaticamente para verificação de procedência.
+- Os tempos de geração de vídeo variam de acordo com a duração, a resolução e a carga atual da API. Vídeos mais longos e com resolução mais alta levam mais tempo para serem gerados.
+- O Omni aplica filtros de segurança de conteúdo aos comandos de entrada e ao vídeo gerado, que variam de acordo com a região. Comandos que violam as políticas de uso são bloqueados.
+- O inglês (EN) tem suporte total, mas outros idiomas não foram avaliados. Portanto, eles podem funcionar, mas os resultados podem variar.
 
-### Pojedyncza scena
+## Guia de comandos do Gemini Omni Flash
 
-Domyślnie Omni Flash spróbuje utworzyć film z kilkoma różnymi ujęciami.
-Spróbuje stworzyć ciekawą opowieść na podstawie promptu.
+Esta seção contém dicas e exemplos de como usar o Gemini Omni Flash de maneira eficaz.
 
-Jeśli chcesz, aby wygenerowany film zawierał tylko jedną scenę, musisz to określić w prompcie:
+### Cena única
 
-- w jednej nieprzerwanej scenie,
-- w jednym ciągłym ujęciu.
-- Brak cięć scen
+Por padrão, o Omni Flash tenta criar um vídeo com algumas cenas diferentes.
+Ele vai tentar criar uma narrativa interessante com base no comando.
 
-Na przykład:
+Se você quiser que o vídeo de saída tenha uma única cena, faça o seguinte comando:
+
+- Em uma única cena ininterrupta
+- Em um único plano-sequência
+- Sem cortes de cena
+
+Exemplo:
 
 ```
 Continuous, unbroken handheld shot of a fluffy tabby cat sitting on a sunny windowsill, looking out into a leafy garden. The cat's tail twitches slowly, and its ears rotate slightly toward ambient noises. Sunbeams illuminate dust motes in the air. Sound design: Gentle breeze, distant bird chirps. No dialogue.
 ```
 
-### Usuwanie niechcianych elementów
+### Remover elementos indesejados
 
-Jeśli wygenerowany film zawiera elementy, których nie chcesz, użyj prostych negatywnych promptów, aby ich uniknąć:
+Se o vídeo gerado tiver algo que você não quer, inclua comandos negativos simples para evitar isso:
 
-- Brak dialogów
-- Bez ozdób
-- Brak dodatkowych efektów dźwiękowych
+- Sem diálogo
+- Sem enfeites
+- Sem efeitos sonoros extras
 
-### Prompty do edycji
+### Comandos para edição
 
-W przypadku edycji wideo najlepiej sprawdzają się proste prompty. Zbyt szczegółowe prompty mogą prowadzić do niezamierzonych zmian.
+Comandos simples funcionam melhor para edição de vídeo. Comandos excessivamente descritivos podem levar a mudanças indesejadas.
 
-Oto więcej przykładów prostych promptów do edycji:
+Confira mais exemplos de comandos simples de edição:
 
-- Przekształć ten film w anime
-- Załóż tej osobie modny kapelusz
-- Zmień oświetlenie, aby było bardziej dramatyczne
-- Zmień tekst na znaku na „Omni Flash”
+- Transforme este vídeo em anime
+- Coloque um chapéu elegante nessa pessoa
+- Mude a iluminação para ser mais dramática
+- Mude o texto na placa para "Omni Flash"
 
-Podczas edytowania konkretnego aspektu filmu dodaj `"Keep everything else the same"`, aby zachować spójność wizualną.
+Ao editar um aspecto específico do vídeo, inclua `"Keep everything else the same"` para manter a consistência visual.
 
-Oto kilka przykładów, które pokazują, jak zastosować tę technikę:
+Confira alguns exemplos de como aplicar essa técnica:
 
-- **Czego unikać:** `In the video of the man sitting on the sofa, please add a small
+- **Evite:** `In the video of the man sitting on the sofa, please add a small
   black cat that runs from the right side of the screen, jumps onto his lap,
   and then he starts to stroke its head while looking down.`
-  - **Uprość:** `Add a cat that jumps onto his lap, he begins to pet it.
+  - **Simplificação**:`Add a cat that jumps onto his lap, he begins to pet it.
     Keep everything else the same.`
-- **Czego unikać:** `Please remove the cell phone that the person is holding in
+- **Evite:** `Please remove the cell phone that the person is holding in
   their hand and fill in the background so it looks like they are just holding
   their hand empty.`
-  - **Uprość:** `Make the phone invisible. Keep everything else the
+  - **Simplificação**:`Make the phone invisible. Keep everything else the
     same.`
 
-### Promptowanie dźwięku
+### Comando de áudio
 
-Domyślnie model będzie próbował wygenerować odpowiednią ścieżkę dźwiękową do filmu. Nie zawsze jest to pożądane. W prompcie możesz opisać typ dźwięku, który chcesz uzyskać. Jest to szczególnie ważne, jeśli chcesz użyć w filmie muzyki:
+Por padrão, o modelo tenta gerar uma faixa de áudio adequada para um vídeo. Isso nem sempre é o que você quer. Use o comando para descrever o tipo de áudio que você quer. Isso é especialmente importante se você quiser
+música no seu vídeo:
 
-- Dodaj spokojną muzykę w tle
-- Film ma energetyczny beat techno
-- W tle słychać cichą, metaliczną audycję radiową z odtwarzaną piosenką.
+- Incluir uma música de fundo calma
+- O vídeo tem uma batida techno de alta energia
+- O áudio é uma transmissão de rádio baixa e estridente em segundo plano, tocando uma música
 
-### Zdarzenia związane z czasem
+### Marcação de tempo de eventos
 
-Możesz poprosić o wykonanie określonych czynności w określonych momentach filmu. Nie musisz używać precyzyjnej składni, możesz używać języka naturalnego. Jest to szczególnie przydatne przy tworzeniu własnych cięć scen, rytmu lub szybkich sekwencji.
-Przykłady znajdziesz poniżej:
+Você pode pedir que as coisas aconteçam em momentos específicos do vídeo. Não é necessário usar uma sintaxe precisa, e você pode usar linguagem natural. Isso é especialmente útil para criar cortes de cena, ritmo ou sequências rápidas.
+Confira exemplos:
 
-- Po 3 sekundach na scenie pojawia się kobieta.
-- W 5 sekundzie w tle zaczyna się refren.
-- Co 2 sekundy przełączanie na nową klatkę.
-- W sekwencji szybkiego ognia co pół sekundy (12 klatek przy 24 kl./s) zmieniaj scenę na nową lokalizację.
+- Depois de três segundos, uma mulher entra em cena.
+- Aos 5 segundos, o refrão começa no áudio em segundo plano.
+- Corte para um novo frame a cada 2 segundos.
+- Em uma sequência rápida, a cada meio segundo (12 frames a 24 fps), mude a cena para um novo local.
 
-Możesz też użyć składni kodu czasowego:
+Você também pode usar uma sintaxe de timecode:
 
 ```
 [0-3s] A person is walking
@@ -1108,52 +1719,57 @@ Możesz też użyć składni kodu czasowego:
 [6-10s] They start running
 ```
 
-### Tworzenie metapromptów
+### Metacomandos
 
-Możesz poprosić Gemini Omni Flash o zwrócenie uwagi na ogólne cechy lub zasady generowania filmów:
+Você pode pedir ao Gemini Omni Flash para prestar atenção às qualidades ou princípios gerais da geração de vídeo:
 
-- Zwróć uwagę na mikrodetale, wyraz i timing, aby stworzyć bardzo bogatą w szczegóły, ale całkowicie naturalną scenę.
-- Opisuj postacie i środowiska bardzo szczegółowo.
-  Stosuj zasady projektowania kostiumów do postaci. Opisz dokładnie osoby, przedmioty i obiekty na scenie.
-- Dodaj do elementów tła wiele odpowiednich szczegółów, aby scena wyglądała realistycznie i naturalnie.
-- Utwórz film z szybko zmieniającymi się ujęciami, w którym co sekundę pojawia się inny rzadki `[thing]`. Dodaj do niego wesołą muzykę i tekst z nazwą obiektu.
+- Considere microdetalhes, expressão e tempo para criar uma cena muito rica, detalhada, mas totalmente natural.
+- Seja extremamente detalhado nas descrições de personagens e ambientes.
+  Aplicar princípios de design de figurino aos personagens. Seja muito específico sobre as pessoas, os itens e os objetos na cena.
+- Inclua muitos detalhes adequados nos elementos de plano de fundo para que a cena pareça realista e natural.
+- Faça um vídeo rápido que mostre um `[thing]` raro diferente a cada segundo, com música
+  alegre e texto para rotular o item.
 
-### Tekst w filmach
+### Texto em vídeos
 
-Możesz poprosić o uwzględnienie tekstu w filmie, a Gemini Omni wyrenderuje go w prawidłowy i czytelny sposób. Jeśli w filmie pojawi się tekst, nawet w elementach tła, warto określić, co ma on zawierać.
+Você pode pedir para incluir texto no vídeo, e o Gemini Omni vai renderizar de uma
+maneira correta e legível. Se houver texto no vídeo, mesmo em elementos de plano de fundo, defina o que ele deve dizer.
 
-- Po jednym słowie na ekranie: „czy, wiesz, że, Omni, potrafi, tworzyć, świetne, teksty?” Każde słowo pojawia się na sekundę w innym stylu animacji. Brak dialogów.
-- Na znaku drogowym widnieje napis: „This is an AI generation by Omni” (To obraz wygenerowany przez AI od Omni), na fasadzie sklepu jest napis: „All you need AI” (AI, której potrzebujesz), a na tablicy rejestracyjnej samochodu widnieje napis: „OMNI1.1”.
+- Uma palavra por vez na tela: "você, sabia, que, o, Omni, pode, criar,
+  textos, incríveis?" Cada palavra aparece por um segundo com um estilo animado diferente. Sem
+  diálogo.
+- Há uma placa de rua que diz: "Esta é uma geração de IA do Omni", uma vitrine que diz: "Tudo o que você precisa de IA" e um carro com a placa "OMNI1.1".
 
-### Prompty do wydłużania filmu
+### Comandos para estender um vídeo
 
-Dzięki Gemini Omni 1.1 Flash możesz wydłużać filmy za pomocą promptów takich jak `"Extend this video"` lub `"The scene continues"`. Możesz wydłużyć filmy o 10 sekund, do łącznej długości 40 sekund.
+Com o Gemini Omni 1.1 Flash, você pode estender vídeos com comandos como `"Extend this video"` ou `"The scene continues"`. Você pode estender os vídeos em 10 segundos, até uma duração total de 40 segundos.
 
-Omni tworzy rozszerzenie, które zachowuje spójność filmu, ruchu, postaci i dźwięku, wykorzystując jako kontekst ostatnie 10 sekund oryginalnego filmu. Niektóre z ostatnich klatek filmu wejściowego zostaną zmodyfikowane, aby przejście było płynne.
+O Omni cria uma extensão que mantém a coerência de vídeo, movimento, personagens e áudio usando os últimos 10 segundos do vídeo original como contexto. Alguns dos frames finais do vídeo de entrada serão editados para tornar a transição perfeita.
 
-Podczas rozszerzania nadal obowiązują wszystkie wskazówki dotyczące promptów Omni z tego przewodnika:
+Ao estender, todas as dicas de solicitação do Omni deste guia ainda se aplicam:
 
-- Opisz dźwięk w rozszerzonej scenie, zwłaszcza jeśli chcesz go zmienić: `"The music continues into the chorus"`
-- Opisz, czy scena jest kontynuowana, czy następuje cięcie do nowej sceny (być może z tymi samymi postaciami): `"Show the same characters in the next scene"`
-- Dołączaj obrazy i filmy jako materiały referencyjne, aby zwiększyć dokładność wyników lub wprowadzić nowe postacie: `"The person shown in the reference image enters the scene"`, `"The dog in the reference video <VIDEO_REF_0> jumps onto the sofa"`
-- Jeśli używasz sygnatur czasowych lub składni kodu czasowego, 0s odnosi się do początku rozszerzonej części filmu. Jeśli przedłużasz 10-sekundowy film, cięcie sceny w tym prompcie nastąpi po 12 sekundach: `"After 2s cut to a new scene with the same characters"`
+- Descreva o áudio na cena estendida, principalmente se você precisar que ele mude: `"The music continues into the chorus"`
+- Descreva se a cena continua ou se há um corte para uma nova cena (talvez com os mesmos personagens): `"Show the same characters in the next scene"`
+- Inclua imagens e vídeos como referências ao estender para manter a precisão das respostas ou apresentar novos personagens: `"The person shown in the reference image enters the scene"`, `"The dog in the reference video <VIDEO_REF_0> jumps onto the sofa"`
+- Se você usar carimbos de data/hora ou uma sintaxe de timecode, "0s" se refere ao início da parte estendida do vídeo. Se você estiver estendendo um vídeo de 10 segundos, o corte de cena nesse comando vai acontecer após 12 segundos: `"After 2s cut to a new scene with the same characters"`
 
-### Używanie tagów w promptach do określania ról obrazów i filmów
+### Como usar tags em comandos para definir funções de imagem e vídeo
 
-Za pomocą tagów możesz powiązać przesłane multimedia z określonymi rolami generowania. Dzięki temu możesz określić, czy każdy obraz lub film jest klatką początkową, klatką końcową czy odniesieniem.
+É possível usar tags para vincular a mídia enviada a funções de geração específicas. Assim, você pode especificar se cada imagem ou vídeo é um frame inicial, um frame final ou uma referência.
 
-#### 1. Proste tagi (zalecane)
+#### 1. Tags simples (recomendadas)
 
-W prostych przypadkach, gdy role multimediów są jasne na podstawie prompta, możesz bezpośrednio przypisywać obrazy i filmy do ról:
+Para casos simples em que as funções de mídia estão claras no comando, é possível vincular imagens e vídeos diretamente às funções:
 
-- **`<FIRST_FRAME>`**: użyj obrazu jako klatki początkowej filmu, np. `<FIRST_FRAME> a woman is walking`
-- **`<LAST_FRAME>`**: użyj obrazu jako ostatniej klatki filmu, do której nastąpi przejście. Musi być używany z parametrem `<FIRST_FRAME>`, np. `<FIRST_FRAME> <LAST_FRAME> a woman is walking`
-- **`<IMAGE_REF_N>`**: użyj obrazu jako odniesienia, np. `in the
-  style of <IMAGE_REF_0> a woman <IMAGE_REF_1> is walking` (łączy odniesienie do stylu z pierwszego obrazu i odniesienie do obiektu z drugiego obrazu).
-  Odwołania do obrazów zaczynają się od 0.
-- **`<VIDEO_REF_N>`**: używać filmu jako odniesienia do postaci lub obiektu, np.`the person in <VIDEO_REF_0> is playing the violin`. Wartości odniesień do filmów również zaczynają się od 0.
+- **`<FIRST_FRAME>`**: use a imagem como o frame inicial do vídeo. Por exemplo: `<FIRST_FRAME> a woman is walking`
+- **`<LAST_FRAME>`**: use a imagem como o frame final do vídeo para fazer a transição. Precisa ser usado com `<FIRST_FRAME>`. Por exemplo: `<FIRST_FRAME> <LAST_FRAME> a woman is walking`
+- **`<IMAGE_REF_N>`**: use a imagem como referência, por exemplo: `in the
+  style of <IMAGE_REF_0> a woman <IMAGE_REF_1> is walking` (combina a referência de estilo da primeira imagem e a referência de assunto da segunda imagem).
+  As referências de imagem começam em 0.
+- **`<VIDEO_REF_N>`**: use o vídeo como referência de personagem ou objeto, por exemplo:
+  `the person in <VIDEO_REF_0> is playing the violin`. As referências de vídeo também começam em 0.
 
-Oto przykład z 6 obrazami referencyjnymi:
+Confira um exemplo com seis imagens de referência:
 
 ```
 [0-3s] A studio fashion sequence. Starting with woman <IMAGE_REF_0>, she is holding <IMAGE_REF_1>
@@ -1161,54 +1777,55 @@ Oto przykład z 6 obrazami referencyjnymi:
 [6-10s] And finally another woman <IMAGE_REF_4> who is holding <IMAGE_REF_5> while walking.
 ```
 
-#### 2. Deklarowanie źródeł i odwołań
+#### 2. Como declarar fontes e referências
 
-W bardziej złożonych przypadkach, w których występuje wiele danych wejściowych multimediów i wiele ról, możesz używać jawnych tagów prefiksów w połączeniu z instrukcjami w języku naturalnym. Na początku prompta należy zadeklarować te źródła i odniesienia.
+Para casos mais complexos com várias entradas de mídia e várias funções, use
+tags de prefixo explícitas combinadas com instruções em linguagem natural. Declare essas fontes e referências no início do comando.
 
-- `[# Sources <FIRST_FRAME>@Image1]` użyje pierwszego obrazu jako klatki początkowej.
-- `[# Sources <FIRST_FRAME>@Image1 <LAST_FRAME>@Image2]` użyje pierwszego obrazu jako klatki początkowej, a drugiego jako klatki końcowej.
-- `[# Sources <FIRST_FRAME>@Image1 <LAST_FRAME>@Image1]` użyje pierwszego obrazu jako pierwszej i ostatniej klatki, tworząc film, który będzie się zapętlać.
-- `[# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2]` użyje pierwszego obrazu jako klatki początkowej, a drugiego jako obrazu referencyjnego.
-- `[# Sources <VIDEO_0>@Video1]` użyje filmu jako głównego źródła do edycji lub modyfikacji.
-- `[# Sources <PREVIOUS_VIDEO>@Video1]` użyje filmu z poprzedniej tury, aby go przedłużyć.
-- `[# References <IMAGE_REF_0>@Image1]` użyje pierwszego obrazu jako odniesienia.
-- `[# References <IMAGE_REF_1>@Image2]` użyje drugiego obrazu jako referencyjnego.
-- `[# References <IMAGE_REF_0>@Image1 <IMAGE_REF_1>@Image2]` użyje obu obrazów jako przykładów.
-- `[# References <VIDEO_REF_0>@Video1]` użyje pierwszego filmu jako referencyjnego.
-- `[# References <IMAGE_REF_0>@Image1 <VIDEO_REF_0>@Video1]` użyje zarówno obrazu, jak i filmu jako materiałów referencyjnych.
+- O `[# Sources <FIRST_FRAME>@Image1]` vai usar a primeira imagem como o frame inicial.
+- O `[# Sources <FIRST_FRAME>@Image1 <LAST_FRAME>@Image2]` vai usar a primeira imagem como o frame inicial e a segunda como o frame final.
+- O `[# Sources <FIRST_FRAME>@Image1 <LAST_FRAME>@Image1]` vai usar a primeira imagem como o primeiro e o último frame, criando um vídeo em loop.
+- O `[# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2]` vai usar a primeira imagem como o frame inicial e a segunda como referência.
+- O `[# Sources <VIDEO_0>@Video1]` vai usar o vídeo como fonte principal para edição ou modificação.
+- O `[# Sources <PREVIOUS_VIDEO>@Video1]` vai usar o vídeo da vez anterior para estender.
+- O `[# References <IMAGE_REF_0>@Image1]` vai usar a primeira imagem como referência.
+- O `[# References <IMAGE_REF_1>@Image2]` vai usar a segunda imagem como referência.
+- O `[# References <IMAGE_REF_0>@Image1 <IMAGE_REF_1>@Image2]` vai usar as duas imagens como referências.
+- O `[# References <VIDEO_REF_0>@Video1]` vai usar o primeiro vídeo como referência.
+- O `[# References <IMAGE_REF_0>@Image1 <VIDEO_REF_0>@Video1]` vai usar uma imagem e um vídeo como referência.
 
-Dodaj instrukcje na końcu prompta:
+Adicione instruções no final do comando:
 
-- W przypadku klatki początkowej: `"Use this image as the starting frame."`
-- W przypadku zapętlonego filmu za pomocą klatek początkowej i końcowej: `"Use this image as the first frame and the last frame."`
-- W przypadku obrazów referencyjnych: `"Use the given image(s) as references for video generation. The images should not be used as literal initial frames."`
-- W przypadku filmów referencyjnych: `"Use the given video(s) as references. Do not use them as a source for video editing."`
+- Para um frame inicial: `"Use this image as the starting frame."`
+- Para um vídeo em loop usando frames de início e fim: `"Use this image as the first frame and the last frame."`
+- Para imagens de referência: `"Use the given image(s) as references for video generation. The images should not be used as literal initial frames."`
+- Para vídeos de referência: `"Use the given video(s) as references. Do not use them as a source for video editing."`
 
-Przykłady promptów z deklaracjami źródła i referencji:
+Alguns exemplos de comandos com declarações de fonte e referência:
 
-**Klatka początkowa połączona z obrazem referencyjnym:**
+**Frame inicial combinado com uma imagem de referência**:
 
 ```
 [# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2] a woman <IMAGE_REF_0> is walking. Use Image1 as the starting frame. Use Image2 as a reference for the video generation.
 ```
 
-**Film referencyjny z postacią połączony z obrazem referencyjnym obiektu:**
+**Vídeo de referência de personagem combinado com uma imagem de referência de objeto:**
 
 ```
 [# References <IMAGE_REF_0>@Image1 <VIDEO_REF_0>@Video1] The woman in <VIDEO_REF_0> is playing the violin shown in <IMAGE_REF_0>. Use Video1 as a character reference and Image1 as an object reference.
 ```
 
-## Co dalej?
+## A seguir
 
-- Zacznij korzystać z Gemini Omni Flash, eksperymentując w [Omni Quickstart Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Omni.ipynb?hl=pl).
-- Dowiedz się, jak pisać jeszcze lepsze prompty, korzystając z naszego [wprowadzenia do projektowania promptów](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=pl).
+- Comece a usar o Gemini Omni Flash testando o [Omni Quickstart Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Omni.ipynb?hl=pt-br).
+- Aprenda a escrever comandos ainda melhores com nossa [Introdução ao design de comandos](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=pt-br).
 
-Prześlij opinię
+Envie comentários
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Ostatnia aktualizacja: 2026-08-30 UTC.
+Última atualização 2026-09-10 UTC.
 
-Chcesz przekazać coś jeszcze?
+Quer enviar seu feedback?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-08-30 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-10 UTC."],[],[]]

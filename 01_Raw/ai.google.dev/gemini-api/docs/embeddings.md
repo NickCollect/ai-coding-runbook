@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/embeddings?hl=vi
-fetched_at: 2026-09-07T05:46:55.850855+00:00
-title: "M\u1ee5c nh\u00fang \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-CN
+fetched_at: 2026-09-14T05:52:17.819749+00:00
+title: "Embeddings \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+Gemini 3.8 Flash 现已推出。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Gửi ý kiến phản hồi
+发送反馈
 
-# Mục nhúng
+# Embeddings
 
-Gemini API cung cấp các mô hình nhúng để tạo các mục nhúng cho văn bản, hình ảnh, video và nội dung khác. Sau đó, bạn có thể dùng các vectơ nhúng thu được cho những tác vụ như tìm kiếm ngữ nghĩa, phân loại và phân cụm, mang lại kết quả chính xác hơn và nhận biết được ngữ cảnh so với các phương pháp dựa trên từ khoá.
+Gemini API 提供嵌入模型，可为文本、图片、视频和其他内容生成嵌入。然后，这些生成的嵌入可用于语义搜索、分类和聚类等任务，与基于关键字的方法相比，可提供更准确、更贴合情境的结果。
 
-Mô hình mới nhất, `gemini-embedding-2`, là mô hình nhúng đa phương thức đầu tiên trong Gemini API. Mô hình này ánh xạ văn bản, hình ảnh, video, âm thanh và tài liệu vào một không gian nhúng thống nhất, cho phép tìm kiếm, phân loại và phân cụm đa phương thức trên hơn 100 ngôn ngữ. Hãy xem [phần về các vectơ nhúng đa phương thức](#multimodal) để tìm hiểu thêm. Đối với các trường hợp sử dụng chỉ có văn bản, bạn vẫn có thể dùng `gemini-embedding-001`.
+最新模型 `gemini-embedding-2` 是 Gemini API 中的首个多模态嵌入模型。它将文本、图片、视频、音频和文档映射到统一的嵌入空间中，从而能够以 100 多种语言进行跨模态搜索、分类和聚类。如需了解详情，请参阅[多模态嵌入部分](#multimodal)。对于纯文字用例，`gemini-embedding-001` 仍然可用。
 
-Xây dựng hệ thống Tạo sinh tăng cường truy xuất (RAG) là một trường hợp sử dụng phổ biến cho các sản phẩm AI. Dữ liệu nhúng đóng vai trò quan trọng trong việc cải thiện đáng kể kết quả của mô hình nhờ độ chính xác về thông tin thực tế, tính nhất quán và mức độ phong phú về ngữ cảnh được cải thiện. Nếu bạn muốn sử dụng một giải pháp RAG được quản lý, chúng tôi đã tạo công cụ [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi) để giúp bạn quản lý RAG dễ dàng hơn và tiết kiệm chi phí hơn.
+构建检索增强生成 (RAG) 系统是 AI 产品的一种常见使用场景。嵌入在显著提升模型输出方面发挥着关键作用，可提高事实准确性、连贯性和上下文丰富度。如果您想使用托管式 RAG 解决方案，我们构建了[文件搜索](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-cn)工具，可让您更轻松地管理 RAG 并提高成本效益。
 
-## Tạo các vectơ nhúng
+## 生成嵌入
 
-Dùng phương thức `embedContent` để tạo các vectơ nhúng văn bản:
+使用 `embedContent` 方法生成文本嵌入：
 
 ### Python
 
@@ -61,6 +61,25 @@ async function main() {
 }
 
 main();
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.EmbedContentResponse;
+import java.util.Collections;
+
+Client client = new Client();
+
+EmbedContentResponse response =
+    client.models.embedContent("text-embedding-004", "Why is the sky blue?", null);
+
+response.embeddings().ifPresent(list -> {
+  for (var emb : list) {
+    System.out.println("Embedding values: " + emb.values().orElse(Collections.emptyList()));
+  }
+});
 ```
 
 ### Go
@@ -120,28 +139,30 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-## Chỉ định loại việc cần làm để cải thiện hiệu suất
+## 指定任务类型以提高性能
 
-Bạn có thể sử dụng các vectơ nhúng cho nhiều tác vụ, từ phân loại đến tìm kiếm tài liệu. Việc chỉ định đúng loại tác vụ sẽ giúp tối ưu hoá các mục nhúng cho các mối quan hệ dự kiến, tối đa hoá độ chính xác và hiệu quả.
+您可以将嵌入用于从分类到文档搜索的各种任务。指定正确的任务类型有助于针对预期关系优化嵌入，从而最大限度地提高准确性和效率。
 
-### Các loại nhiệm vụ có Embeddings 2
+### 使用 Embeddings 2 的任务类型
 
-Đối với các tác vụ chỉ có văn bản có `gemini-embedding-2`, bạn nên thêm hướng dẫn cho tác vụ vào câu lệnh. Bạn có thể thực hiện việc này bằng cách định dạng truy vấn và tài liệu bằng tiền tố nhiệm vụ chính xác.
+对于使用 `gemini-embedding-2` 的纯文本任务，我们强烈建议您在提示中添加任务指令。为此，您可以使用正确的任务前缀设置查询和文档的格式。
 
-Các bảng sau đây cho thấy ví dụ về cách định dạng truy vấn và tài liệu cho các trường hợp sử dụng đối xứng và bất đối xứng bằng mô hình `gemini-embedding-2`.
+在[基于多模态输入生成单个嵌入](#embedding-aggregation)时，我们通常不建议在输入的文本部分添加任务指令作为前缀。在某些情况下，它可以提高性能，但在其他情况下，它会降低性能。
 
-**Trường hợp sử dụng truy xuất (Định dạng bất đối xứng)**
+下表展示了如何使用 `gemini-embedding-2` 模型针对对称和非对称用例设置查询和文档的格式。
 
-Trong các trường hợp sử dụng không đối xứng, hãy thêm tiền tố tác vụ vào truy vấn và áp dụng cấu trúc tài liệu cho nội dung bạn muốn nhúng và truy xuất.
+**检索用例（非对称格式）**
 
-| Trường hợp sử dụng | Cấu trúc truy vấn | Cấu trúc tài liệu |
+在非对称使用情形下，请向查询添加任务前缀，并为要嵌入和检索的内容应用文档结构。
+
+| 使用场景 | 查询结构 | 文档结构 |
 | --- | --- | --- |
-| Truy vấn tìm kiếm | `task: search result | query: {content}` | `title: {title} | text: {content}` Nếu không có tiêu đề, hãy dùng `title: none`. |
-| Trả lời câu hỏi | `task: question answering | query: {content}` | `title: {title} | text: {content}` |
-| Kiểm chứng thông tin | `task: fact checking | query: {content}` | `title: {title} | text: {content}` |
-| Truy xuất mã | `task: code retrieval | query: {content}` | `title: {title} | text: {content}` |
+| 搜索查询 | `task: search result | query: {content}` | `title: {title} | text: {content}` 如果没有标题，则使用 `title: none`。 |
+| 问答 | `task: question answering | query: {content}` | `title: {title} | text: {content}` |
+| 事实核查 | `task: fact checking | query: {content}` | `title: {title} | text: {content}` |
+| 代码检索 | `task: code retrieval | query: {content}` | `title: {title} | text: {content}` |
 
-**Ví dụ về cách sử dụng**
+**使用示例**
 
 ### Python
 
@@ -160,17 +181,17 @@ def prepare_document(content, title=None):
     return f"title: {title} | text: {content}"
 ```
 
-**Trường hợp sử dụng một đầu vào (Định dạng đối xứng)**
+**单输入源用例（对称格式）**
 
-Trong các trường hợp sử dụng đối xứng, đối với cùng một tác vụ, hãy sử dụng cùng một định dạng cho cụm từ tìm kiếm và tài liệu.
+在对称使用情形中，对于同一任务，请对查询和文档使用相同的格式。
 
-| Trường hợp sử dụng | Cấu trúc đầu vào |
+| 使用场景 | 输入结构 |
 | --- | --- |
-| Phân loại | `task: classification | query: {content}` |
-| Tạo cụm | `task: clustering | query: {content}` |
-| Tính tương đồng về mặt ngữ nghĩa | `task: sentence similarity | query: {content}` Không dùng mã này để tìm kiếm hoặc truy xuất. Mô hình này được thiết kế để đo mức độ tương đồng về ngữ nghĩa giữa các văn bản. |
+| 分类 | `task: classification | query: {content}` |
+| 聚簇 | `task: clustering | query: {content}` |
+| 语义相似度 | `task: sentence similarity | query: {content}` 请勿将此方法用于搜索或检索。它旨在用于语义文本相似度。 |
 
-**Ví dụ về cách sử dụng**
+**使用示例**
 
 ### Python
 
@@ -182,13 +203,13 @@ def prepare_query_and_document(content):
     return f'task: classification | query: {content}'
 ```
 
-Điều quan trọng là bạn phải sử dụng tác vụ này một cách nhất quán. Ví dụ: nếu tài liệu được nhúng bằng `f'task: classification | query: {content}'`, thì truy vấn cũng phải được nhúng theo định dạng tác vụ này.
+请务必坚持使用该任务。例如，如果文档嵌入了 `f'task: classification | query: {content}'`，则查询也应按照此任务格式嵌入。
 
-### Các loại nhiệm vụ có tính năng Nhúng 1
+### 使用 Embeddings 1 的任务类型
 
-Đối với `gemini-embedding-001`, bạn có thể chỉ định `task_type` trong phương thức `embedContent`. Để biết danh sách đầy đủ các loại tác vụ được hỗ trợ, hãy xem bảng [Các loại tác vụ được hỗ trợ](#supported-task-types).
+对于 `gemini-embedding-001`，您可以在 `embedContent` 方法中指定 `task_type`。如需查看支持的任务类型的完整列表，请参阅[支持的任务类型](#supported-task-types)表格。
 
-Ví dụ sau đây cho thấy cách bạn có thể dùng `SEMANTIC_SIMILARITY` để kiểm tra mức độ tương đồng về ý nghĩa của các chuỗi văn bản.
+以下示例展示了如何使用 `SEMANTIC_SIMILARITY` 来检查文本字符串在含义上的相似程度。
 
 ### Python
 
@@ -257,6 +278,25 @@ async function main() {
 }
 
 main();
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.EmbedContentResponse;
+import java.util.Collections;
+
+Client client = new Client();
+
+EmbedContentResponse response =
+    client.models.embedContent("text-embedding-004", "Why is the sky blue?", null);
+
+response.embeddings().ifPresent(list -> {
+  for (var emb : list) {
+    System.out.println("Embedding values: " + emb.values().orElse(Collections.emptyList()));
+  }
+});
 ```
 
 ### Go
@@ -350,28 +390,28 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-0
     }'
 ```
 
-Các đoạn mã sẽ cho biết mức độ tương đồng giữa các khối văn bản khi chạy.
+代码段将展示在运行时，不同的文本块彼此之间的相似程度。
 
-#### Các loại việc cần làm được hỗ trợ
+#### 支持的任务类型
 
-Các loại nhiệm vụ được hỗ trợ cho `gemini-embedding-001`:
+`gemini-embedding-001` 支持的任务类型：
 
-| Loại việc cần làm | Mô tả | Ví dụ |
+| 任务类型 | 说明 | 示例 |
 | --- | --- | --- |
-| **SEMANTIC\_SIMILARITY** | Các vectơ nhúng được tối ưu hoá để đánh giá mức độ tương đồng của văn bản. | Hệ thống đề xuất, phát hiện nội dung trùng lặp |
-| **PHÂN LOẠI** | Các vectơ nhúng được tối ưu hoá để phân loại văn bản theo nhãn đặt sẵn. | Phân tích cảm xúc, phát hiện tin nhắn rác |
-| **PHÂN CỤM** | Các vectơ nhúng được tối ưu hoá để phân cụm văn bản dựa trên mức độ tương đồng. | Sắp xếp tài liệu, nghiên cứu thị trường, phát hiện điểm bất thường |
-| **RETRIEVAL\_DOCUMENT** | Các vectơ nhúng được tối ưu hoá cho tính năng tìm kiếm tài liệu. | Lập chỉ mục các bài viết, sách hoặc trang web để tìm kiếm. |
-| **RETRIEVAL\_QUERY** | Các vectơ được tối ưu hoá cho các cụm từ tìm kiếm chung. Sử dụng `RETRIEVAL_QUERY` cho các truy vấn; `RETRIEVAL_DOCUMENT` cho các tài liệu cần truy xuất. | Tìm kiếm tùy chỉnh |
-| **CODE\_RETRIEVAL\_QUERY** | Các vectơ nhúng được tối ưu hoá để truy xuất các khối mã dựa trên truy vấn bằng ngôn ngữ tự nhiên. Sử dụng `CODE_RETRIEVAL_QUERY` cho các câu hỏi; `RETRIEVAL_DOCUMENT` cho các khối mã cần truy xuất. | Đề xuất và tìm kiếm mã |
-| **QUESTION\_ANSWERING** | Các vectơ nhúng cho câu hỏi trong hệ thống trả lời câu hỏi, được tối ưu hoá để tìm tài liệu trả lời câu hỏi. Sử dụng `QUESTION_ANSWERING` cho câu hỏi; `RETRIEVAL_DOCUMENT` cho tài liệu cần truy xuất. | Hộp trò chuyện |
-| **FACT\_VERIFICATION** | Các câu cần được xác minh sẽ được nhúng, tối ưu hoá để truy xuất những tài liệu có bằng chứng hỗ trợ hoặc bác bỏ câu đó. Sử dụng `FACT_VERIFICATION` cho văn bản mục tiêu; `RETRIEVAL_DOCUMENT` cho tài liệu cần truy xuất | Hệ thống kiểm chứng tự động |
+| **SEMANTIC\_SIMILARITY** | 经过优化以评估文本相似度的嵌入。 | 推荐系统、重复内容检测 |
+| **分类** | 经过优化的嵌入，可根据预设标签对文本进行分类。 | 情感分析、垃圾信息检测 |
+| **聚类** | 经过优化的嵌入，可根据文本的相似性对文本进行聚类。 | 文档整理、市场调研、异常检测 |
+| **RETRIEVAL\_DOCUMENT** | 针对文档搜索进行了优化的嵌入。 | 为搜索编制文章、图书或网页的索引。 |
+| **RETRIEVAL\_QUERY** | 针对一般搜索查询进行了优化的嵌入。 使用 `RETRIEVAL_QUERY` 表示查询；使用 `RETRIEVAL_DOCUMENT` 表示要检索的文档。 | 自定义搜索 |
+| **CODE\_RETRIEVAL\_QUERY** | 经过优化的嵌入，可根据自然语言查询检索代码块。 使用 `CODE_RETRIEVAL_QUERY` 表示查询；使用 `RETRIEVAL_DOCUMENT` 表示要检索的代码块。 | 代码建议和搜索 |
+| **QUESTION\_ANSWERING** | 问答系统中问题的嵌入内容，经过优化，可用于查找回答问题的文档。 使用 `QUESTION_ANSWERING` 提出问题；使用 `RETRIEVAL_DOCUMENT` 指定要检索的文档。 | 聊天框 |
+| **FACT\_VERIFICATION** | 需要验证的陈述的嵌入，针对检索包含支持或反驳陈述的证据的文档进行了优化。 使用 `FACT_VERIFICATION` 表示目标文本；使用 `RETRIEVAL_DOCUMENT` 表示要检索的文档 | 自动化事实核查系统 |
 
-## Kiểm soát kích thước nhúng
+## 控制嵌入大小
 
-Cả `gemini-embedding-001` và `gemini-embedding-2` đều được huấn luyện bằng kỹ thuật Học biểu diễn Matryoshka (MRL), giúp dạy một mô hình học các mục nhúng có nhiều chiều có các phân đoạn ban đầu (hoặc tiền tố) cũng là các phiên bản đơn giản hơn và hữu ích của cùng một dữ liệu.
+`gemini-embedding-001` 和 `gemini-embedding-2` 均使用 Matryoshka Representation Learning (MRL) 技术进行训练，该技术可教导模型学习具有初始段（或前缀）的高维嵌入，这些初始段也是相同数据的有用且更简单的版本。
 
-Sử dụng tham số `output_dimensionality` để kiểm soát kích thước của vectơ nhúng đầu ra. Việc chọn một chiều đầu ra nhỏ hơn có thể giúp tiết kiệm dung lượng lưu trữ và tăng hiệu quả tính toán cho các ứng dụng hạ nguồn, đồng thời ít ảnh hưởng đến chất lượng. Theo mặc định, cả hai mô hình đều xuất ra một mục nhúng 3072 chiều, nhưng bạn có thể cắt bớt mục nhúng này thành kích thước nhỏ hơn mà không làm giảm chất lượng để tiết kiệm dung lượng lưu trữ. Bạn nên sử dụng kích thước đầu ra là 768, 1536 hoặc 3072.
+使用 `output_dimensionality` 参数控制输出嵌入向量的大小。选择较小的输出维度可以节省存储空间并提高下游应用的计算效率，同时在质量方面几乎不会有任何损失。默认情况下，这两个模型都会输出一个 3072 维的嵌入，但您可以将其截断为较小的尺寸，而不会损失质量，从而节省存储空间。建议使用 768、1536 或 3072 输出维度。
 
 ### Python
 
@@ -412,6 +452,25 @@ async function main() {
 }
 
 main();
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.EmbedContentResponse;
+import java.util.Collections;
+
+Client client = new Client();
+
+EmbedContentResponse response =
+    client.models.embedContent("text-embedding-004", "Why is the sky blue?", null);
+
+response.embeddings().ifPresent(list -> {
+  for (var emb : list) {
+    System.out.println("Embedding values: " + emb.values().orElse(Collections.emptyList()));
+  }
+});
 ```
 
 ### Go
@@ -468,17 +527,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-emb
     }'
 ```
 
-Ví dụ về đầu ra của đoạn mã:
+代码段的输出示例：
 
 ```
 Length of embedding: 768
 ```
 
-## Đảm bảo chất lượng cho các kích thước nhỏ hơn
+## 确保较小尺寸的质量
 
-Mặc dù các mục nhúng 3072 chiều mặc định luôn được chuẩn hoá, nhưng Gemini Embedding 2 cũng tự động chuẩn hoá các chiều bị cắt (ví dụ: 768, 1536). Điều này đảm bảo rằng mức độ tương đồng về ngữ nghĩa được tính toán thông qua hướng vectơ thay vì độ lớn, mang lại kết quả chính xác hơn ngay từ đầu.
+虽然默认的 3072 维嵌入始终会进行归一化，但 Gemini Embedding 2 也会自动归一化截断的维度（例如 768、1536）。这可确保通过向量方向而非大小来计算语义相似度，从而提供更准确的开箱即用型结果。
 
-**Các mô hình cũ**: Nếu đang dùng `gemini-embedding-001`, bạn phải chuẩn hoá các phương diện không phải 3072 theo cách thủ công như sau:
+**旧版模型**：如果您使用的是 `gemini-embedding-001`，则必须手动对非 3072 维度的维度进行归一化处理，如下所示：
 
 ### Python
 
@@ -494,45 +553,45 @@ print(f"Normed embedding length: {len(normed_embedding)}")
 print(f"Norm of normed embedding: {np.linalg.norm(normed_embedding):.6f}") # Should be very close to 1
 ```
 
-Ví dụ về đầu ra từ đoạn mã này:
+此代码段的输出示例：
 
 ```
 Normed embedding length: 768
 Norm of normed embedding: 1.000000
 ```
 
-Bảng sau đây cho thấy điểm MTEB (một điểm chuẩn thường dùng cho các mục nhúng) cho nhiều phương diện. Đáng chú ý là kết quả cho thấy hiệu suất không hoàn toàn phụ thuộc vào kích thước của phương diện nhúng, với các phương diện thấp hơn đạt được điểm số tương đương với các phương diện cao hơn.
+下表显示了不同维度下的 MTEB 分数（一种常用的嵌入模型基准）。值得注意的是，结果表明性能并不严格取决于嵌入维度的规模，较低维度可实现与较高维度相当的分数。
 
-| Phương diện MRL | Điểm MTEB (Gemini Embedding 001) |
+| MRL 维度 | MTEB 得分（Gemini Embedding 001） |
 | --- | --- |
-| 2048 | 68,16 |
-| 1536 | 68,17 |
-| 768 | 67,99 |
-| 512 | 67,55 |
-| 256 | 66,19 |
-| 128 | 63,31 |
+| 2048 | 68.16 |
+| 1536 | 68.17 |
+| 768 | 67.99 |
+| 512 | 67.55 |
+| 256 | 66.19 |
+| 128 | 63.31 |
 
-## Nhúng đa phương thức
+## 多模态嵌入
 
-Mô hình `gemini-embedding-2` hỗ trợ dữ liệu đầu vào đa phương thức, cho phép bạn nhúng nội dung hình ảnh, video, âm thanh và tài liệu cùng với văn bản. Tất cả các phương thức đều được ánh xạ vào cùng một không gian nhúng, cho phép tìm kiếm và so sánh đa phương thức.
+`gemini-embedding-2` 模型支持多模态输入，让您能够将图片、视频、音频和文档内容与文本一起嵌入。所有模态都映射到同一嵌入空间中，从而实现跨模态搜索和比较。
 
-### Các phương thức và giới hạn được hỗ trợ
+### 支持的模态和限制
 
-Giới hạn tổng số mã thông báo đầu vào tối đa là 8192 mã thông báo.
+输入词元的总数上限为 8,192 个。
 
-| Phương thức | Quy cách và giới hạn |
+| 模态 | 规范和限制 |
 | --- | --- |
-| **Văn bản** | Hỗ trợ tối đa 8.192 mã thông báo. |
-| **Image** | Tối đa 6 hình ảnh cho mỗi yêu cầu. Các định dạng được hỗ trợ: PNG, JPEG. |
-| **Âm thanh** | Thời lượng tối đa là 180 giây. Các định dạng được hỗ trợ: MP3, WAV. |
-| **Video** | Thời lượng tối đa là 120 giây. Các định dạng được hỗ trợ: MP4, MOV. Các bộ mã hoá và giải mã được hỗ trợ: H264, H265, AV1, VP9.  Hệ thống xử lý tối đa 32 khung hình cho mỗi video: video ngắn (≤32 giây) được lấy mẫu ở tốc độ 1 khung hình/giây, trong khi video dài hơn được lấy mẫu đồng đều thành 32 khung hình. Các tệp video không xử lý bản âm thanh. |
-| **Tài liệu (PDF)** | Mỗi yêu cầu có tối đa 1 tệp, tối đa 6 trang. |
+| **文本** | 支持最多 8,192 个 token。 |
+| **Image** | 每个请求最多 6 张图片。支持的格式：PNG、JPEG。 |
+| **音频** | 时长上限为 180 秒。支持的格式：MP3、WAV。 |
+| **视频** | 时长上限为 120 秒。支持的格式：MP4、MOV。支持的编解码器：H264、H265、AV1、VP9。  系统最多处理每个视频 32 帧：短视频（≤32 秒）以 1 fps 的速率进行抽样，而较长的视频则均匀抽样为 32 帧。视频文件中的音轨不会被处理。 |
+| **文档 (PDF)** | 每个请求最多包含 1 个文件，最多 6 页。 |
 
-### Nhúng hình ảnh
+### 嵌入图片
 
-Ví dụ sau đây cho thấy cách nhúng hình ảnh bằng `gemini-embedding-2`.
+以下示例展示了如何使用 `gemini-embedding-2` 嵌入图片。
 
-Bạn có thể cung cấp hình ảnh dưới dạng dữ liệu nội tuyến hoặc dưới dạng tệp đã tải lên thông qua [Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi).
+图片可以通过内嵌数据或通过 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn) 上传的文件提供。
 
 ### Python
 
@@ -585,6 +644,25 @@ async function main() {
 main();
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.EmbedContentResponse;
+import java.util.Collections;
+
+Client client = new Client();
+
+EmbedContentResponse response =
+    client.models.embedContent("text-embedding-004", "Why is the sky blue?", null);
+
+response.embeddings().ifPresent(list -> {
+  for (var emb : list) {
+    System.out.println("Embedding values: " + emb.values().orElse(Collections.emptyList()));
+  }
+});
+```
+
 ### REST
 
 ```
@@ -606,15 +684,15 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### Tổng hợp dữ liệu nhúng
+### 嵌入聚合
 
-Khi làm việc với nội dung đa phương thức, cách bạn cấu trúc dữ liệu đầu vào sẽ ảnh hưởng đến kết quả nhúng:
+处理多模态内容时，输入内容的结构会影响嵌入输出：
 
-- **Nhiều phần (được tổng hợp):** Việc thêm nhiều dữ liệu đầu vào trực tiếp vào tham số `contents` sẽ tạo ra một vectơ nhúng tổng hợp cho tất cả dữ liệu đầu vào.
-- **Nhiều đối tượng `Content` (riêng biệt):** Việc bao bọc từng đầu vào trong một đối tượng `Content` và truyền các đối tượng đó vào tham số `contents` sẽ trả về các mục nhúng riêng biệt cho từng mục.
-- **Biểu diễn ở cấp bài đăng:** Đối với các đối tượng phức tạp như bài đăng trên mạng xã hội có nhiều mục nội dung nghe nhìn, bạn nên tổng hợp các mục nhúng riêng biệt (ví dụ: bằng cách tính trung bình) để tạo một biểu diễn nhất quán ở cấp bài đăng.
+- **多个部分（聚合）**：直接向 `contents` 参数添加多个输入会生成一个包含所有输入的聚合嵌入内容。
+- **多个 `Content` 对象（单独）**：将每个输入内容封装在 `Content` 对象中，并通过 `contents` 参数传递这些对象，这样会为每个条目返回单独的嵌入内容。
+- **帖子级表示法**：对于包含多个媒体项的社交媒体帖子等复杂对象，我们建议汇总单独的嵌入内容（例如通过求平均值），以创建连贯的帖子级表示法。
 
-Ví dụ sau đây cho thấy cách tạo một vectơ nhúng tổng hợp cho văn bản và dữ liệu đầu vào là hình ảnh. Bạn chỉ cần thêm nhiều dữ liệu đầu vào vào tham số `contents`:
+以下示例展示了如何为文本和图片输入创建一种聚合嵌入。只需向 `contents` 参数添加多个输入即可：
 
 ### Python
 
@@ -676,6 +754,25 @@ async function main() {
 main();
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.EmbedContentResponse;
+import java.util.Collections;
+
+Client client = new Client();
+
+EmbedContentResponse response =
+    client.models.embedContent("text-embedding-004", "Why is the sky blue?", null);
+
+response.embeddings().ifPresent(list -> {
+  for (var emb : list) {
+    System.out.println("Embedding values: " + emb.values().orElse(Collections.emptyList()));
+  }
+});
+```
+
 ### REST
 
 ```
@@ -700,7 +797,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-Mặt khác, nếu bạn sử dụng các đối tượng `Content` bên trong tham số `contents`, thì hàm này sẽ trả về các mục nhúng riêng biệt. Ví dụ này tạo nhiều mục nhúng trong một lệnh gọi nhúng:
+另一方面，如果您在 `contents` 参数中使用 `Content` 对象，则会返回单独的嵌入内容。此示例在一个嵌入调用中创建多个嵌入：
 
 ### Python
 
@@ -716,7 +813,7 @@ with open('dog.png', 'rb') as f:
 result = client.models.embed_content(
     model="gemini-embedding-2",
     contents=[
-        types.Content(parts=[types.Part.from_text(text="An image of a dog")]),
+        types.Content(parts=[types.Part.from_text(text="task: classification | query: An image of a dog")]),
         types.Content(
             parts=[
                 types.Part.from_bytes(
@@ -747,7 +844,7 @@ async function main() {
     const response = await ai.models.embedContent({
         model: 'gemini-embedding-2',
         contents: [
-            { parts: [{ text: 'An image of a dog' }] },
+            { parts: [{ text: 'task: classification | query: An image of a dog' }] },
             {
                 parts: [{
                     inlineData: {
@@ -768,6 +865,25 @@ async function main() {
 main();
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.EmbedContentResponse;
+import java.util.Collections;
+
+Client client = new Client();
+
+EmbedContentResponse response =
+    client.models.embedContent("text-embedding-004", "Why is the sky blue?", null);
+
+response.embeddings().ifPresent(list -> {
+  for (var emb : list) {
+    System.out.println("Embedding values: " + emb.values().orElse(Collections.emptyList()));
+  }
+});
+```
+
 ### REST
 
 ```
@@ -781,7 +897,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
         "requests": [
             {
                 "model": "models/gemini-embedding-2",
-                "content": {"parts": [{"text": "An image of a dog"}]}
+                "content": {"parts": [{"text": "task: classification | query: An image of a dog"}]}
             },
             {
                 "model": "models/gemini-embedding-2",
@@ -791,11 +907,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### Nhúng âm thanh
+### 嵌入音频
 
-Ví dụ sau đây cho biết cách nhúng một tệp âm thanh bằng `gemini-embedding-2`.
+以下示例展示了如何使用 `gemini-embedding-2` 嵌入音频文件。
 
-Bạn có thể cung cấp tệp âm thanh dưới dạng dữ liệu nội tuyến hoặc dưới dạng tệp được tải lên thông qua [Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi).
+音频文件可以通过 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn) 以内嵌数据或上传文件的形式提供。
 
 ### Python
 
@@ -848,6 +964,25 @@ async function main() {
 main();
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.EmbedContentResponse;
+import java.util.Collections;
+
+Client client = new Client();
+
+EmbedContentResponse response =
+    client.models.embedContent("text-embedding-004", "Why is the sky blue?", null);
+
+response.embeddings().ifPresent(list -> {
+  for (var emb : list) {
+    System.out.println("Embedding values: " + emb.values().orElse(Collections.emptyList()));
+  }
+});
+```
+
 ### REST
 
 ```
@@ -869,11 +1004,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### Nhúng video
+### 嵌入视频
 
-Ví dụ sau đây cho thấy cách nhúng video bằng `gemini-embedding-2`.
+以下示例展示了如何使用 `gemini-embedding-2` 嵌入视频。
 
-Bạn có thể cung cấp video dưới dạng dữ liệu nội tuyến hoặc dưới dạng tệp được tải lên thông qua [Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi).
+视频可以通过 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn) 以内嵌数据或上传文件的形式提供。
 
 ### Python
 
@@ -926,6 +1061,25 @@ async function main() {
 main();
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.EmbedContentResponse;
+import java.util.Collections;
+
+Client client = new Client();
+
+EmbedContentResponse response =
+    client.models.embedContent("text-embedding-004", "Why is the sky blue?", null);
+
+response.embeddings().ifPresent(list -> {
+  for (var emb : list) {
+    System.out.println("Embedding values: " + emb.values().orElse(Collections.emptyList()));
+  }
+});
+```
+
 ### REST
 
 ```
@@ -947,29 +1101,29 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-Nếu cần nhúng video dài hơn 120 giây, bạn có thể chia video thành các đoạn chồng chéo và nhúng từng đoạn.
+如果您需要嵌入时长超过 120 秒的视频，可以将视频分块为重叠的片段，然后单独嵌入这些片段。
 
-### Nhúng tài liệu
+### 嵌入文档
 
-Bạn có thể nhúng trực tiếp tài liệu ở định dạng PDF. Mô hình này xử lý nội dung trực quan và văn bản của từng trang.
+PDF 格式的文档可以直接嵌入。模型会处理每个网页的视觉和文本内容。
 
-Bạn có thể cung cấp tệp PDF dưới dạng dữ liệu nội tuyến hoặc dưới dạng tệp được tải lên thông qua [Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi).
+可以通过 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn) 以内嵌数据或上传文件的形式提供 PDF。
 
-#### Cách mô hình xử lý tệp PDF
+#### 模型处理 PDF 的方式
 
-Khi bạn nhúng một tệp PDF, mô hình sẽ xử lý tài liệu bằng cả tính năng hình ảnh và văn bản:
+嵌入 PDF 时，模型会同时使用视觉特征和文本特征来处理文档：
 
-- **Biểu diễn trực quan:** Mô hình kết xuất mỗi trang dưới dạng một hình ảnh, tiêu thụ **258 mã thông báo** cho mỗi trang.
-- **Trích xuất văn bản:** Mô hình trích xuất văn bản từ tài liệu. Đối với **tệp PDF gốc** (chứa văn bản kỹ thuật số), mô hình sẽ trích xuất văn bản trực tiếp. Đối với **tệp PDF được quét** (chứa hình ảnh văn bản), mô hình sẽ tự động chạy công nghệ nhận dạng ký tự quang học (OCR) để trích xuất văn bản.
+- **直观表示**：模型将每个网页渲染为图片，每个网页消耗 **258 个 token**。
+- **文本提取**：模型从文档中提取文本。对于**原生 PDF**（包含数字文本），模型会直接提取文本。对于**扫描的 PDF**（其中包含文本图片），模型会自动运行光学字符识别 (OCR) 来提取文本。
 
-Để tính tổng số mã thông báo cho một tệp PDF, hãy cộng số mã thông báo trực quan (258 mã thông báo cho mỗi trang) với số mã thông báo văn bản. Thông tin đầu vào của bạn phải nằm trong **giới hạn 8.192 mã thông báo** của mô hình (được chia sẻ trên tất cả các phương thức). Hệ thống sẽ tự động cắt bớt những nội dung đầu vào vượt quá giới hạn này.
+如需计算 PDF 的总 token 数量，请将视觉 token（每页 258 个）与文本 token 相加。您的输入必须在模型的 **8,192 个词元限制**（适用于所有模态）范围内。系统会以静默方式截断超出此限制的输入。
 
-#### Giới hạn về tệp PDF
+#### PDF 限制
 
-- **Số lượng tệp trên mỗi yêu cầu:** Bạn có thể gửi tối đa 1 tệp PDF.
-- **Giới hạn về số trang:** Bạn có thể gửi tối đa 6 trang cho mỗi tệp. Để có chất lượng tốt nhất, bạn nên sử dụng 1 trang cho mỗi tệp PDF.
+- **每个请求的文件数**：您最多可以提交 1 个 PDF 文件。
+- **页数限制**：每个文件最多可提交 6 页。为了获得最佳质量，我们强烈建议每个 PDF 使用 1 个页面。
 
-Ví dụ sau đây cho thấy cách nhúng một tệp PDF bằng `gemini-embedding-2`:
+以下示例展示了如何使用 `gemini-embedding-2` 嵌入 PDF：
 
 ### Python
 
@@ -1022,6 +1176,25 @@ async function main() {
 main();
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.EmbedContentResponse;
+import java.util.Collections;
+
+Client client = new Client();
+
+EmbedContentResponse response =
+    client.models.embedContent("text-embedding-004", "Why is the sky blue?", null);
+
+response.embeddings().ifPresent(list -> {
+  for (var emb : list) {
+    System.out.println("Embedding values: " + emb.values().orElse(Collections.emptyList()));
+  }
+});
+```
+
 ### REST
 
 ```
@@ -1043,91 +1216,90 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-## Trường hợp sử dụng
+## 使用场景
 
-Vectơ hoá văn bản là yếu tố quan trọng đối với nhiều trường hợp sử dụng AI phổ biến, chẳng hạn như:
+文本嵌入对于各种常见的 AI 应用场景至关重要，例如：
 
-- **Tạo sinh tăng cường khả năng truy xuất (RAG):** Các vectơ nhúng giúp nâng cao chất lượng của văn bản được tạo bằng cách truy xuất và kết hợp thông tin liên quan vào ngữ cảnh của một mô hình.
-- **Truy xuất thông tin:** Tìm kiếm văn bản hoặc tài liệu có ngữ nghĩa tương tự nhất dựa trên một đoạn văn bản đầu vào.
+- **检索增强生成 (RAG)**：通过检索相关信息并将其纳入模型的情境中，嵌入可提高生成文本的质量。
+- **信息检索**：根据一段输入文本搜索语义上最相似的文本或文档。
 
-  [Hướng dẫn tìm kiếm tài liệutask](https://github.com/google-gemini/cookbook/blob/main/examples/Talk_to_documents_with_embeddings.ipynb)
-- **Sắp xếp lại kết quả tìm kiếm**: Ưu tiên các mục phù hợp nhất bằng cách tính điểm ngữ nghĩa cho kết quả ban đầu dựa trên cụm từ tìm kiếm.
+  [文档搜索教程task](https://github.com/google-gemini/cookbook/blob/main/examples/Talk_to_documents_with_embeddings.ipynb)
+- **搜索结果重新排名**：根据初始结果与查询的语义相关性得分，优先显示最相关的项。
 
-  [Hướng dẫn về việc sắp xếp lại kết quả tìm kiếmtask](https://github.com/google-gemini/cookbook/blob/main/examples/Search_reranking_using_embeddings.ipynb)
-- **Phát hiện điểm bất thường:** Việc so sánh các nhóm vectơ nhúng có thể giúp xác định các xu hướng hoặc điểm ngoại lệ bị ẩn.
+  [搜索重排名教程task](https://github.com/google-gemini/cookbook/blob/main/examples/Search_reranking_using_embeddings.ipynb)
+- **异常值检测**：比较嵌入群组有助于发现隐藏的趋势或离群点。
 
-  [Hướng dẫn phát hiện hoạt động bất thườngbubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/Anomaly_detection_with_embeddings.ipynb)
-- **Phân loại:** Tự động phân loại văn bản dựa trên nội dung, chẳng hạn như phân tích cảm xúc hoặc phát hiện tin nhắn rác
+  [异常值检测教程bubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/Anomaly_detection_with_embeddings.ipynb)
+- **分类**：根据文本内容自动对文本进行分类，例如情感分析或垃圾信息检测
 
-  [Hướng dẫn phân loạitoken](https://github.com/google-gemini/cookbook/blob/main/examples/Classify_text_with_embeddings.ipynb)
-- **Phân cụm:** Nắm bắt hiệu quả các mối quan hệ phức tạp bằng cách tạo các cụm và hình ảnh trực quan về các thành phần nhúng.
+  [分类教程token](https://github.com/google-gemini/cookbook/blob/main/examples/Classify_text_with_embeddings.ipynb)
+- **聚类**：通过创建嵌入的聚类和可视化图表，有效掌握复杂的关系。
 
-  [Hướng dẫn về hình ảnh trực quan của việc phân cụmbubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/clustering_with_embeddings.ipynb)
+  [聚类可视化教程bubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/clustering_with_embeddings.ipynb)
 
-## Lưu trữ mục nhúng
+## 存储嵌入
 
-Khi đưa các mục nhúng vào sản xuất, bạn thường sử dụng **cơ sở dữ liệu vectơ** để lưu trữ, lập chỉ mục và truy xuất các mục nhúng có nhiều chiều một cách hiệu quả. Google Cloud cung cấp các dịch vụ dữ liệu được quản lý có thể dùng cho mục đích này, bao gồm [Gemini Enterprise Agent Platform Vector Search 2.0](https://docs.cloud.google.com/gemini-enterprise-agent-platform/BUILD/vector-search-2?hl=vi), [BigQuery](https://cloud.google.com/bigquery/docs/introduction?hl=vi), [AlloyDB](https://cloud.google.com/alloydb/docs/overview?hl=vi) và [Cloud SQL](https://cloud.google.com/sql/docs/postgres/introduction?hl=vi).
+在将嵌入投入生产环境时，通常会使用**向量数据库**来高效存储、索引和检索高维嵌入。Google Cloud 提供可用于此目的的托管数据服务，包括 [Gemini Enterprise Agent Platform Vector Search 2.0](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/vector-search-2/overview?hl=zh-cn)、[BigQuery](https://cloud.google.com/bigquery/docs/introduction?hl=zh-cn)、[AlloyDB](https://cloud.google.com/alloydb/docs/overview?hl=zh-cn) 和 [Cloud SQL](https://cloud.google.com/sql/docs/postgres/introduction?hl=zh-cn)。
 
-Các hướng dẫn sau đây cho biết cách sử dụng các cơ sở dữ liệu vectơ của bên thứ ba khác với Gemini Embedding.
+以下教程展示了如何将其他第三方向量数据库与 Gemini Embedding 搭配使用。
 
-- [Hướng dẫn về ChromaDBbolt](https://docs.trychroma.com/integrations/embedding-models/google-gemini)
-- [Hướng dẫn về QDrantbolt](https://qdrant.tech/documentation/embeddings/gemini/)
-- [Hướng dẫn về Weaviatebolt](https://docs.weaviate.io/weaviate/model-providers/google)
-- [Hướng dẫn về Pineconebolt](https://github.com/google-gemini/cookbook/blob/main/examples/langchain/Gemini_LangChain_QA_Pinecone_WebLoad.ipynb)
+- [ChromaDB 教程bolt](https://docs.trychroma.com/integrations/embedding-models/google-gemini)
+- [QDrant 教程bolt](https://qdrant.tech/documentation/embeddings/gemini/)
+- [Weaviate 教程bolt](https://docs.weaviate.io/weaviate/model-providers/google)
+- [Pinecone 教程bolt](https://github.com/google-gemini/cookbook/blob/main/examples/langchain/Gemini_LangChain_QA_Pinecone_WebLoad.ipynb)
 
-## Phiên bản mô hình
+## 模型版本
 
 ### Gemini Embedding 2
 
-| Thuộc tính | Mô tả |
+| 属性 | 说明 |
 | --- | --- |
-| id\_cardMã kiểu máy | **Gemini API**  `gemini-embedding-2` |
-| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, hình ảnh, video, âm thanh, PDF  **Đầu ra**  Mục nhúng văn bản |
-| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  8.192  **Kích thước phương diện đầu ra**  Linh hoạt, hỗ trợ: 128 – 3072, Nên dùng: 768, 1536, 3072 |
-| 123Phiên bản | Đọc [các mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm thông tin chi tiết.  - Ổn định: `gemini-embedding-2` |
-| calendar\_monthThông tin cập nhật mới nhất | Tháng 4 năm 2026 |
+| id\_card 模型代码 | **Gemini API**  `gemini-embedding-2` |
+| 保存支持的数据类型 | **输入**  文本、图片、视频、音频、PDF  **输出**  文本嵌入 |
+| token\_auto令牌限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入 token 限制**  8192  **输出维度大小**  灵活，支持：128 - 3072，推荐：768、1536、3072 |
+| 123 版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 稳定版：`gemini-embedding-2` |
+| calendar\_month最新更新 | 2026 年 4 月 |
 
 ### Gemini Embedding
 
-| Thuộc tính | Mô tả |
+| 属性 | 说明 |
 | --- | --- |
-| id\_cardMã kiểu máy | **Gemini API**  `gemini-embedding-001` |
-| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản  **Đầu ra**  Mục nhúng văn bản |
-| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  2.048  **Kích thước phương diện đầu ra**  Linh hoạt, hỗ trợ: 128 – 3072, Nên dùng: 768, 1536, 3072 |
-| 123Phiên bản | Đọc [các mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm thông tin chi tiết.  - Ổn định: `gemini-embedding-001` |
-| calendar\_monthThông tin cập nhật mới nhất | Tháng 6 năm 2025 |
+| id\_card 模型代码 | **Gemini API**  `gemini-embedding-001` |
+| 保存支持的数据类型 | **输入**  文本  **输出**  文本嵌入 |
+| token\_auto令牌限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入 token 限制**  2048  **输出维度大小**  灵活，支持：128 - 3072，推荐：768、1536、3072 |
+| 123 版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 稳定版：`gemini-embedding-001` |
+| calendar\_month最新更新 | 2025 年 6 月 |
 
-Đối với các mô hình Nhúng không dùng nữa, hãy truy cập trang [Ngừng cung cấp](https://ai.google.dev/gemini-api/docs/deprecations?hl=vi)
+如需了解已弃用的嵌入模型，请访问[弃用](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn)页面
 
-## Di chuyển từ gemini-embedding-001
+## 从 gemini-embedding-001 迁移
 
-Các khoảng trống nhúng giữa `gemini-embedding-001` và `gemini-embedding-2` là **không tương thích**. Điều này có nghĩa là bạn không thể so sánh trực tiếp các vectơ nhúng do một mô hình tạo ra với các vectơ nhúng do mô hình khác tạo ra. Nếu đang nâng cấp lên `gemini-embedding-2`, bạn phải nhúng lại tất cả dữ liệu hiện có.
+`gemini-embedding-001` 和 `gemini-embedding-2` 之间的嵌入空间**不兼容**。这意味着您无法直接比较一个模型生成的嵌入与另一个模型生成的嵌入。如果您要升级到 `gemini-embedding-2`，则必须重新嵌入所有现有数据。
 
-Ngoài sự không tương thích, còn có một số điểm khác biệt đáng chú ý khác giữa hai mô hình này:
+除了不兼容之外，这两个模型之间还有其他几个显著的区别：
 
-- **Quy cách về loại tác vụ:** Với `gemini-embedding-001`, bạn chỉ định loại tác vụ bằng cách sử dụng tham số `task_type` (ví dụ: `SEMANTIC_SIMILARITY`, `RETRIEVAL_DOCUMENT`). Với `gemini-embedding-2`, tham số `task_type` không được hỗ trợ. Thay vào đó, bạn nên đưa hướng dẫn về nhiệm vụ trực tiếp vào câu lệnh cho các nhiệm vụ chỉ có văn bản. Hãy xem [Các loại nhiệm vụ có Embeddings 2](#task-types-embeddings-2) để biết thông tin chi tiết về cách định dạng câu lệnh cho các trường hợp sử dụng khác nhau.
-- **Tổng hợp mục nhúng:** `gemini-embedding-001` tạo các mục nhúng riêng lẻ cho từng chuỗi trong danh sách dữ liệu đầu vào. Ngược lại, `gemini-embedding-2` tạo ra một vectơ nhúng tổng hợp duy nhất khi nhiều dữ liệu đầu vào (chẳng hạn như văn bản và hình ảnh) được cung cấp trực tiếp trong một yêu cầu. Để tạo các vectơ nhúng riêng biệt cho từng đầu vào, hãy bao bọc từng đầu vào trong một đối tượng `Content` hoặc sử dụng [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi#batch-embedding). Hãy xem phần [Nhúng tính năng tổng hợp](#embedding-aggregation) để biết thêm thông tin.
-- **Chuẩn hoá:** Nếu bạn dùng `output_dimensionality` để yêu cầu các mục nhúng có ít hơn 3072 phương diện, thì `gemini-embedding-2` sẽ tự động chuẩn hoá các mục nhúng bị cắt bớt này. Với `gemini-embedding-001`, bạn cần thực hiện chuẩn hoá thủ công cho các phương diện khác ngoài 3072. Hãy xem phần [Đảm bảo chất lượng cho các kích thước nhỏ hơn](#quality-for-smaller-dimensions) để biết thông tin chi tiết.
+- **任务类型规范**：使用 `gemini-embedding-001` 时，您可以使用 `task_type` 参数（例如 `SEMANTIC_SIMILARITY`、`RETRIEVAL_DOCUMENT`）指定任务类型。使用 `gemini-embedding-2` 时，不支持 `task_type` 参数。您应直接在纯文本任务的提示中添加任务说明。如需详细了解如何针对不同的使用场景设置提示格式，请参阅[使用 Embeddings 2 的任务类型](#task-types-embeddings-2)。
+- **嵌入汇总**： `gemini-embedding-001` 为输入列表中的每个字符串生成单独的嵌入。相比之下，当一个请求中直接提供多个输入（例如文本和图片）时，`gemini-embedding-2` 会生成单个聚合嵌入。如需为各个输入生成单独的嵌入内容，请将每个输入封装在 `Content` 对象中，或使用 [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn#batch-embedding)。如需了解详情，请参阅[嵌入聚合](#embedding-aggregation)。
+- **归一化**：如果您使用 `output_dimensionality` 请求维度数少于 3072 的嵌入内容，`gemini-embedding-2` 会自动对这些截断的嵌入内容进行归一化处理。使用 `gemini-embedding-001` 时，您需要对 3072 以外的维度执行手动归一化。如需了解详情，请参阅[确保较小尺寸的质量](#quality-for-smaller-dimensions)。
 
-## Nhúng hàng loạt
+## 批量嵌入
 
-Nếu không lo ngại về độ trễ, hãy thử sử dụng các mô hình Gemini Embeddings với [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi#batch-embedding). Điều này cho phép công suất cao hơn nhiều ở mức 50% giá Nhúng mặc định.
-Bạn có thể tìm thấy các ví dụ về cách bắt đầu trong [sổ tay về Batch API](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb).
+如果延迟不是问题，请尝试使用 [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn#batch-embedding) 和 Gemini Embeddings 模型。这样一来，吞吐量可大幅提高，但价格仅为默认嵌入价格的 50%。如需查看有关如何开始使用批量 API 的示例，请参阅[批量 API 实战宝典](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb)。
 
-## Thông báo về việc sử dụng có trách nhiệm
+## 负责任的使用声明
 
-Không giống như các mô hình AI tạo sinh tạo ra nội dung mới, Mô hình nhúng Gemini chỉ nhằm mục đích chuyển đổi định dạng dữ liệu đầu vào của bạn thành một biểu diễn bằng số. Mặc dù Google chịu trách nhiệm cung cấp một mô hình nhúng giúp chuyển đổi định dạng dữ liệu đầu vào của bạn sang định dạng số được yêu cầu, nhưng người dùng vẫn hoàn toàn chịu trách nhiệm về dữ liệu mà họ nhập và các mục nhúng thu được. Khi sử dụng mô hình Gemini Embedding, bạn xác nhận rằng bạn có các quyền cần thiết đối với mọi nội dung mình tải lên. Đừng tạo nội dung vi phạm quyền tài sản trí tuệ hoặc quyền riêng tư của người khác. Khi sử dụng dịch vụ này, bạn phải tuân thủ [Chính sách về các hành vi bị cấm khi sử dụng](https://policies.google.com/terms/generative-ai/use-policy?hl=vi) và [Điều khoản dịch vụ của Google](https://ai.google.dev/gemini-api/terms?hl=vi).
+与创建新内容的生成式 AI 模型不同，Gemini Embedding 模型仅用于将输入数据的格式转换为数值表示形式。虽然 Google 负责提供一种嵌入模型，将输入数据的格式转换为所需的数值格式，但用户仍需对他们输入的数据和生成的嵌入内容承担全部责任。使用 Gemini Embedding 模型，即表示您确认已拥有对所上传内容的必要权利。请勿生成会侵犯他人知识产权或隐私权的内容。使用此服务时，您必须遵守我们的[《使用限制政策》](https://policies.google.com/terms/generative-ai/use-policy?hl=zh-cn)和 [Google 的《服务条款》](https://ai.google.dev/gemini-api/terms?hl=zh-cn)。
 
-## Bắt đầu xây dựng bằng các thành phần nhúng
+## 开始使用嵌入模型进行构建
 
-Hãy xem [notebook bắt đầu nhanh về các vectơ nhúng](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Embeddings.ipynb) để khám phá các chức năng của mô hình và tìm hiểu cách tuỳ chỉnh cũng như trực quan hoá các vectơ nhúng.
+您可以查看[嵌入快速入门笔记本](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Embeddings.ipynb)，了解模型功能以及如何自定义和直观呈现嵌入。
 
-Gửi ý kiến phản hồi
+发送反馈
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Cập nhật lần gần đây nhất: 2026-06-22 UTC.
+最后更新时间 (UTC)：2026-09-08。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+需要向我们提供更多信息？
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-22 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-08。"],[],[]]

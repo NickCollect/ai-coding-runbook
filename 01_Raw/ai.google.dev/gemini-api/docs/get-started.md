@@ -1,69 +1,70 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/get-started?hl=it
-fetched_at: 2026-09-07T05:39:59.448862+00:00
-title: "Guida introduttiva \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/get-started?hl=th
+fetched_at: 2026-09-14T05:44:24.622315+00:00
+title: "\u0e01\u0e32\u0e23\u0e40\u0e23\u0e34\u0e48\u0e21\u0e15\u0e49\u0e19\u0e43\u0e0a\u0e49\u0e07\u0e32\u0e19 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Invia feedback
+ส่งความคิดเห็น
 
-# Guida introduttiva
+# การเริ่มต้นใช้งาน
 
-Questa guida ti aiuta a iniziare a utilizzare l'API Gemini utilizzando l'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it). Eseguirai la tua prima chiamata API in meno di un minuto ed esplorerai la generazione di testo, la comprensione multimodale, la generazione di immagini, l'output strutturato, gli strumenti, la chiamata di funzione, gli agenti e l'esecuzione in background.
+คู่มือนี้จะช่วยให้คุณเริ่มต้นใช้งาน Gemini API โดยใช้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) คุณจะทำการเรียก API ครั้งแรกได้ภายในไม่ถึงนาที และสำรวจการสร้างข้อความ ความเข้าใจแบบหลายรูปแบบ การสร้างรูปภาพ เอาต์พุตที่มีโครงสร้าง เครื่องมือ การเรียกใช้ฟังก์ชัน Agent และการดำเนินการในเบื้องหลัง
 
-L'API Interactions è disponibile tramite gli SDK [Python](https://github.com/googleapis/python-genai) e [JavaScript](https://github.com/googleapis/js-genai), nonché tramite REST.
+Interactions API พร้อมใช้งานผ่าน SDK ของ [Python](https://github.com/googleapis/python-genai) และ [JavaScript](https://github.com/googleapis/js-genai) รวมถึงผ่าน REST
 
-## 1. Ottieni una chiave API
+## 1. รับคีย์ API
 
-Per utilizzare l'API Gemini, devi disporre di una chiave API per autenticare le richieste, applicare limiti di sicurezza e monitorare l'utilizzo del tuo account.
+หากต้องการใช้ Gemini API คุณต้องมีคีย์ API เพื่อตรวจสอบสิทธิ์คำขอ บังคับใช้ขีดจำกัดด้านความปลอดภัย และติดตามการใช้งานในบัญชี
 
-- Google AI Studio crea automaticamente un progetto e una chiave API per i nuovi utenti.
-  Puoi copiarla dalla [pagina Chiavi API](https://aistudio.google.com/api-keys?hl=it).
-- Se hai bisogno di una nuova chiave, fai clic su **Crea chiave API** in AI Studio e segui la
-  finestra di dialogo per aggiungere una nuova coppia chiave-progetto.
+- Google AI Studio จะสร้างโปรเจ็กต์และคีย์ API ให้กับผู้ใช้ใหม่โดยอัตโนมัติ
+  คุณคัดลอกได้จาก[หน้าคีย์ API](https://aistudio.google.com/api-keys?hl=th)
+- หากต้องการคีย์ใหม่ ให้คลิก**สร้างคีย์ API** ใน AI Studio แล้วทำตาม
+  กล่องโต้ตอบเพื่อเพิ่มคู่คีย์-โปรเจ็กต์ใหม่
 
-[Crea una chiave API Gemini](https://aistudio.google.com/apikey?hl=it)
+[สร้างคีย์ Gemini API](https://aistudio.google.com/apikey?hl=th)
 
-Imposta la chiave come variabile di ambiente:
+ตั้งค่าคีย์เป็นตัวแปรสภาพแวดล้อม
 
 ```
 export GEMINI_API_KEY="YOUR_API_KEY"
 ```
 
-### Eseguire l'upgrade al livello a pagamento
+### อัปเกรดเป็นระดับแบบชำระเงิน
 
-L'upgrade al livello a pagamento aumenta i limiti di frequenza e richiede la configurazione
-di fatturazione Cloud.
+การอัปเกรดเป็นระดับแบบชำระเงินจะเพิ่มการจำกัดอัตราคำขอและต้องตั้งค่าการเรียกเก็บเงินใน Cloud
 
-- Fai clic su **Configura la fatturazione** nelle pagine [Chiavi API](https://aistudio.google.com/api-keys?hl=it) o [Progetti](https://aistudio.google.com/projects?hl=it) di AI Studio.
-- Segui la finestra di dialogo Fatturazione Cloud per creare o collegare un account di fatturazione, aggiungere un metodo di pagamento e pagare in anticipo un minimo di 10 $ (o l'equivalente in valuta) in crediti a pagamento.
-- Visualizza l'utilizzo dell'API in [Google AI Studio](https://aistudio.google.com/usage?hl=it)
-  in **Dashboard** > **Utilizzo**.
+- คลิก**ตั้งค่าการเรียกเก็บเงิน**ในหน้า[คีย์ API](https://aistudio.google.com/api-keys?hl=th) หรือ[โปรเจ็กต์](https://aistudio.google.com/projects?hl=th)ของ AI Studio
+- ทำตามกล่องโต้ตอบการเรียกเก็บเงินใน Cloud เพื่อสร้างหรือลิงก์บัญชีสำหรับการเรียกเก็บเงิน เพิ่ม
+  วิธีการชำระเงิน และชำระเงินล่วงหน้าอย่างน้อย $10 (หรือเทียบเท่าในสกุลเงินอื่น) ใน
+  เครดิตที่ชำระเงินแล้ว
+- ดูการใช้งาน API ใน [Google AI Studio](https://aistudio.google.com/usage?hl=th)
+  ในส่วน**แดชบอร์ด** > **การใช้งาน**
 
-Per ulteriori informazioni, consulta la [pagina Fatturazione](https://ai.google.dev/gemini-api/docs/billing?hl=it).
+ดูข้อมูลเพิ่มเติมได้ที่[หน้าการเรียกเก็บเงิน](https://ai.google.dev/gemini-api/docs/billing?hl=th)
 
-## 2. Installa l'SDK ed effettua la tua prima chiamata
+## 2. ติดตั้ง SDK และทำการเรียกครั้งแรก
 
-Installa l'SDK e genera il testo con una singola chiamata API.
+ติดตั้ง SDK และสร้างข้อความด้วยการเรียก API เพียงครั้งเดียว
 
 ### Python
 
-Installa l'SDK:
+ติดตั้ง SDK โดยทำดังนี้
 
 ```
 pip install -U google-genai
 ```
 
-Inizializza il client ed effettua una richiesta:
+เริ่มต้นไคลเอ็นต์และส่งคำขอ
 
 ```
 from google import genai
@@ -79,13 +80,13 @@ print(interaction.output_text)
 
 ### JavaScript
 
-Installa l'SDK:
+ติดตั้ง SDK โดยทำดังนี้
 
 ```
 npm install @google/genai
 ```
 
-Inizializza il client ed effettua una richiesta:
+เริ่มต้นไคลเอ็นต์และส่งคำขอ
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -111,7 +112,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**Risposta:**
+**คำตอบ:**
 
 ```
 {
@@ -143,13 +144,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-Quando utilizzi REST, l'API restituisce la risorsa `Interaction` completa contenente metadati, statistiche di utilizzo e la cronologia passo passo della svolta.
+เมื่อใช้ REST API จะแสดง`Interaction`แบบเต็มซึ่งมีข้อมูลเมตา สถิติการใช้งาน และประวัติแบบทีละขั้นตอนของคำพูด
 
-Sebbene gli SDK espongano la risposta completa, forniscono anche proprietà pratiche come `interaction.output_text` e `interaction.output_image` per accedere direttamente agli output finali. Scopri di più sulla struttura della risposta nella [Panoramica delle interazioni](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) o leggi la [guida alla generazione di testo](https://ai.google.dev/gemini-api/docs/text-generation?hl=it) per informazioni dettagliate sulle istruzioni di sistema e sulla configurazione della generazione.
+แม้ว่า SDK จะแสดงการตอบกลับทั้งหมด แต่ก็ยังมีพร็อพเพอร์ตี้ที่สะดวก เช่น `interaction.output_text` และ `interaction.output_image` เพื่อเข้าถึงเอาต์พุตสุดท้ายได้โดยตรง ดูข้อมูลเพิ่มเติมเกี่ยวกับโครงสร้างการตอบกลับได้ใน[ภาพรวมของการโต้ตอบ](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) หรืออ่าน[คู่มือการสร้างข้อความ](https://ai.google.dev/gemini-api/docs/text-generation?hl=th)เพื่อดูรายละเอียดเกี่ยวกับวิธีการของระบบและการกำหนดค่าการสร้าง
 
-## 3. Visualizzare in streaming la risposta
+## 3. สตรีมคำตอบ
 
-Per interazioni più fluide, riproduci in streaming la risposta man mano che viene generata. Ogni evento `step.delta` fornisce un blocco di testo che puoi visualizzare immediatamente.
+สตรีมคำตอบขณะที่ระบบสร้างขึ้นเพื่อให้การโต้ตอบราบรื่นยิ่งขึ้น เหตุการณ์ `step.delta` แต่ละรายการจะส่งข้อความเป็นกลุ่มที่คุณแสดงได้ทันที
 
 ### Python
 
@@ -199,9 +200,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-Durante lo streaming, il server risponde con un flusso di eventi inviati dal server (SSE). Ogni evento include un tipo e dati JSON.
+เมื่อสตรีม เซิร์ฟเวอร์จะตอบกลับด้วยสตรีมของเหตุการณ์ที่เซิร์ฟเวอร์ส่ง (SSE) แต่ละเหตุการณ์จะมีประเภทและข้อมูล JSON
 
-**Risposta:**
+**คำตอบ:**
 
 ```
 event: interaction.created
@@ -232,18 +233,18 @@ event: interaction.completed
 data: {"interaction":{"id":"v1_Chd...","status":"completed","usage":{"total_tokens":197}},"event_type":"interaction.completed"}
 ```
 
-Per un'analisi dettagliata della gestione degli eventi di streaming e dei tipi di delta, consulta la [guida alle interazioni di streaming](https://ai.google.dev/gemini-api/docs/streaming?hl=it).
+ดูรายละเอียดเกี่ยวกับการจัดการเหตุการณ์การสตรีมและประเภทเดลต้าได้ที่[คู่มือการโต้ตอบในการสตรีม](https://ai.google.dev/gemini-api/docs/streaming?hl=th)
 
-## 4. Conversazioni a più turni
+## 4. การสนทนาแบบหลายรอบ
 
-L'API Interactions supporta le conversazioni multi-turno con due approcci:
+API การโต้ตอบรองรับการสนทนาแบบหลายรอบด้วย 2 วิธีดังนี้
 
-- **Stateful (consigliato)**: continua una conversazione sul server utilizzando `previous_interaction_id`. Ideale per la maggior parte dei workflow di chat e agentici in cui vuoi che il server gestisca la cronologia e ottimizzi la memorizzazione nella cache.
-- **Senza stato**: gestisci la cronologia della conversazione sul client passando tutti i turni precedenti (inclusi i passaggi intermedi del modello e degli strumenti) in ogni richiesta.
+- **มีสถานะ (แนะนำ)**: สนทนาต่อในเซิร์ฟเวอร์โดยใช้ `previous_interaction_id` เหมาะสำหรับเวิร์กโฟลว์การแชทและเวิร์กโฟลว์ของเอเจนต์ส่วนใหญ่ที่คุณต้องการให้เซิร์ฟเวอร์จัดการประวัติและเพิ่มประสิทธิภาพการแคช
+- **ไม่มีสถานะ**: จัดการประวัติการสนทนาในไคลเอ็นต์โดยส่งทุกช่วงของการสนทนาที่ผ่านมา (รวมถึงความคิดของโมเดลขั้นกลางและขั้นตอนของเครื่องมือ) ในแต่ละคำขอ
 
-### Stateful (consigliato)
+### มีสถานะ (แนะนำ)
 
-Concatenare le interazioni passando `previous_interaction_id`. Il server gestisce l'intera cronologia delle conversazioni per te.
+เชื่อมโยงการโต้ตอบโดยส่ง `previous_interaction_id` เซิร์ฟเวอร์จะจัดการประวัติการสนทนาทั้งหมดให้คุณ
 
 ### Python
 
@@ -313,9 +314,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Stateless
+### ไม่เก็บสถานะ
 
-Imposta `store=false` e gestisci la cronologia delle conversazioni sul lato client. Devi conservare e inviare nuovamente tutti i passaggi generati dal modello (inclusi i passaggi `thought` e `function_call`) esattamente come li hai ricevuti.
+ตั้งค่า`store=false`และจัดการประวัติการสนทนาในฝั่งไคลเอ็นต์ คุณต้องเก็บรักษาและส่งขั้นตอนทั้งหมดที่โมเดลสร้างขึ้น (รวมถึงขั้นตอน `thought` และ `function_call`) อีกครั้งตามที่ได้รับ
 
 ### Python
 
@@ -427,7 +428,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-**Risposta:**
+**คำตอบ:**
 
 ```
 {
@@ -454,11 +455,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-La seconda interazione restituisce un oggetto di risposta completo che include solo i nuovi passaggi, ma si basa sul contesto del turno precedente. Scopri di più sul mantenimento dello stato nella [guida alle conversazioni multi-turn](https://ai.google.dev/gemini-api/docs/text-generation?hl=it#multi-turn-conversations) o esplora la [modalità stateless](https://ai.google.dev/gemini-api/docs/text-generation?hl=it#stateless-conversations) per la gestione della cronologia lato client.
+การโต้ตอบครั้งที่ 2 จะแสดงออบเจ็กต์การตอบกลับที่สมบูรณ์ซึ่งมีเฉพาะขั้นตอนใหม่ แต่จะอิงตามบริบทของเทิร์นก่อนหน้า ดูข้อมูลเพิ่มเติมเกี่ยวกับการรักษาสถานะใน[คู่มือการสนทนาแบบหลายรอบ](https://ai.google.dev/gemini-api/docs/text-generation?hl=th#multi-turn-conversations) หรือสำรวจ[โหมดแบบไม่เก็บสถานะ](https://ai.google.dev/gemini-api/docs/text-generation?hl=th#stateless-conversations)สำหรับการจัดการประวัติฝั่งไคลเอ็นต์
 
-## 5. Comprensione multimodale
+## 5. การทำความเข้าใจแบบ Multimodal
 
-I modelli Gemini comprendono immagini, audio, video e documenti in modo nativo. Trasmetti contenuti multimediali insieme al testo in un'unica richiesta.
+โมเดล Gemini เข้าใจรูปภาพ เสียง วิดีโอ และเอกสารได้โดยตรง ส่งสื่อพร้อมกับข้อความในคำขอเดียว
 
 ### Python
 
@@ -550,7 +551,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions"   -
   }'
 ```
 
-**Risposta:**
+**คำตอบ:**
 
 ```
 {
@@ -575,27 +576,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions"   -
 }
 ```
 
-Scopri come passare immagini, video e file audio nella [guida alla comprensione delle immagini](https://ai.google.dev/gemini-api/docs/image-understanding?hl=it).
+ดูวิธีส่งไฟล์รูปภาพ วิดีโอ และเสียงใน[คู่มือการทำความเข้าใจรูปภาพ](https://ai.google.dev/gemini-api/docs/image-understanding?hl=th)
 
 [hearing
 
-Comprensione dell'audio
+การทำความเข้าใจเสียง
 
-Trascrivi, riassumi o rispondi a domande sui file audio.](https://ai.google.dev/gemini-api/docs/audio?hl=it)
+ถอดเสียง สรุป หรือตอบคำถามเกี่ยวกับไฟล์เสียง](https://ai.google.dev/gemini-api/docs/audio?hl=th)
 [videocam
 
-Comprensione dei video
+การทำความเข้าใจวิดีโอ
 
-Analizza i contenuti video, individua gli eventi e descrivi le azioni.](https://ai.google.dev/gemini-api/docs/video-understanding?hl=it)
+วิเคราะห์เนื้อหาวิดีโอ ค้นหาเหตุการณ์ และอธิบายการดำเนินการ](https://ai.google.dev/gemini-api/docs/video-understanding?hl=th)
 [description
 
-Elaborazione di documenti
+การประมวลผลเอกสาร
 
-Estrai informazioni da PDF e altri formati di documenti.](https://ai.google.dev/gemini-api/docs/document-processing?hl=it)
+ดึงข้อมูลจาก PDF และรูปแบบเอกสารอื่นๆ](https://ai.google.dev/gemini-api/docs/document-processing?hl=th)
 
-## 6. Generazione multimodale
+## 6. การสร้างแบบหลายรูปแบบ
 
-Gemini può generare immagini in modo nativo utilizzando i modelli di immagini [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=it).
+Gemini สามารถสร้างรูปภาพได้โดยตรงโดยใช้โมเดลรูปภาพ [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)
 
 ### Python
 
@@ -648,7 +649,7 @@ curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
   }'
 ```
 
-**Risposta:**
+**คำตอบ:**
 
 ```
 {
@@ -671,22 +672,22 @@ curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
 }
 ```
 
-Quando il modello genera un'immagine, restituisce i dati dell'immagine codificati in base64 in un passaggio all'interno dell'array `steps`, nonché tramite la proprietà di convenienza `output_image`. Consulta la [guida alla generazione di immagini](https://ai.google.dev/gemini-api/docs/image-generation?hl=it) per scoprire di più su proporzioni, modifica delle immagini e riferimenti.
+เมื่อโมเดลสร้างรูปภาพ ระบบจะแสดงผลข้อมูลรูปภาพที่เข้ารหัส Base64 ในขั้นตอนภายในอาร์เรย์ `steps` รวมถึงผ่านพร็อพเพอร์ตี้ความสะดวก `output_image` ดู[คำแนะนำในการสร้างรูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)เพื่อดูข้อมูลเกี่ยวกับสัดส่วนภาพ การแก้ไขรูปภาพ และข้อมูลอ้างอิง
 
 [record\_voice\_over
 
-Generazione di voce
+การสร้างคำพูด
 
-Genera una voce espressiva con più relatori con Gemini 3.1 Flash TTS.](https://ai.google.dev/gemini-api/docs/speech-generation?hl=it)
+สร้างคำพูดที่สื่ออารมณ์ซึ่งมีผู้พูดหลายคนด้วย TTS ของ Gemini 3.1 Flash](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th)
 [music\_note
 
-Generazione di musica
+การสร้างเสียงดนตรี
 
-Crea clip e brani completi con Lyria 3.](https://ai.google.dev/gemini-api/docs/music-generation?hl=it)
+สร้างคลิปและเพลงแบบเต็มด้วย Lyria 3](https://ai.google.dev/gemini-api/docs/music-generation?hl=th)
 
-## 7. Utilizzare l'output strutturato
+## 7. ใช้เอาต์พุตที่มีโครงสร้าง
 
-Configura il modello in modo che restituisca JSON che corrisponda a uno schema che definisci. L'output strutturato funziona con [Pydantic](https://docs.pydantic.dev/latest/) (Python) e [Zod](https://zod.dev/) (JavaScript).
+กำหนดค่าโมเดลให้แสดงผล JSON ที่ตรงกับสคีมาที่คุณกำหนด เอาต์พุตที่มีโครงสร้างใช้ได้กับ [Pydantic](https://docs.pydantic.dev/latest/) (Python) และ [Zod](https://zod.dev/) (JavaScript)
 
 ### Python
 
@@ -789,7 +790,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**Risposta:**
+**คำตอบ:**
 
 ```
 {
@@ -811,11 +812,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-Il blocco di testo di output contiene una stringa JSON valida conforme esattamente allo schema richiesto. Per scoprire come definire strutture più complesse e schemi ricorsivi, consulta la [guida all'output strutturato](https://ai.google.dev/gemini-api/docs/structured-output?hl=it).
+บล็อกข้อความเอาต์พุตมีสตริง JSON ที่ถูกต้องซึ่งเป็นไปตามสคีมาที่ขออย่างแน่นอน ดูวิธีกำหนดโครงสร้างที่ซับซ้อนและสคีมาแบบเรียกซ้ำได้ที่[คู่มือเอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)
 
-## 8. Utilizzare gli strumenti
+## 8. ใช้เครื่องมือ
 
-Basare la risposta del modello su informazioni in tempo reale con la Ricerca Google. L'API esegue automaticamente la ricerca, elabora i risultati e restituisce le citazioni.
+อ้างอิงคำตอบของโมเดลจากข้อมูลแบบเรียลไทม์ด้วย Google Search API จะค้นหา ประมวลผลผลลัพธ์ และแสดงการอ้างอิงโดยอัตโนมัติ
 
 ### Python
 
@@ -888,7 +889,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**Risposta:**
+**คำตอบ:**
 
 ```
 {
@@ -938,41 +939,41 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-I passaggi della ricerca sono descritti in dettaglio nella cronologia delle interazioni e l'output finale include citazioni in linea che rimandano a fonti web.
+ขั้นตอนการค้นหาจะแสดงรายละเอียดภายในประวัติการโต้ตอบ และเอาต์พุตสุดท้ายจะมีอ้างอิงในบรรทัดที่ชี้ไปยังแหล่งข้อมูลบนเว็บ
 
-Puoi scoprire come estrarre le citazioni della ricerca nella [guida alla base della Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it) o vedere come combinare più strumenti nella [guida alla combinazione di strumenti](https://ai.google.dev/gemini-api/docs/tool-combination?hl=it).
+คุณดูวิธีแยกข้อมูลอ้างอิงในการค้นหาได้ใน[คู่มือการอ้างอิงของ Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th) หรือดูวิธีรวมเครื่องมือหลายอย่างได้ใน[คู่มือการรวมเครื่องมือ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=th)
 
 [code
 
-Eseguire il codice
+การเรียกใช้โค้ด
 
-Esegui il codice Python in un ambiente Borg sandbox sicuro.](https://ai.google.dev/gemini-api/docs/code-execution?hl=it)
+เรียกใช้โค้ด Python ในสภาพแวดล้อม Borg ที่แซนด์บ็อกซ์และปลอดภัย](https://ai.google.dev/gemini-api/docs/code-execution?hl=th)
 [link
 
-Contesto URL
+บริบท URL
 
-Trasmetti gli URL web pubblici direttamente per basare le risposte sui contenuti delle pagine web.](https://ai.google.dev/gemini-api/docs/url-context?hl=it)
+ส่ง URL ของเว็บสาธารณะโดยตรงเพื่ออ้างอิงคำตอบในเนื้อหาหน้าเว็บ](https://ai.google.dev/gemini-api/docs/url-context?hl=th)
 [search
 
-Ricerca di file
+ค้นหาไฟล์
 
-Indicizza ed esegui ricerche nei documenti e nei file multimediali caricati.](https://ai.google.dev/gemini-api/docs/file-search?hl=it)
+จัดทำดัชนีและค้นหาในเอกสารและไฟล์สื่อที่อัปโหลด](https://ai.google.dev/gemini-api/docs/file-search?hl=th)
 [map
 
 Google Maps
 
-Basare le risposte su dati geospaziali e di posizione reali.](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it)
+อ้างอิงคำตอบจากข้อมูลเชิงพื้นที่และข้อมูลตำแหน่งในโลกแห่งความเป็นจริง](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th)
 [computer
 
-Uso del computer
+การใช้คอมพิวเตอร์
 
-Automazione del browser e interazione con lo schermo.](https://ai.google.dev/gemini-api/docs/computer-use?hl=it)
+การทำงานอัตโนมัติของเบราว์เซอร์และการโต้ตอบกับหน้าจอ](https://ai.google.dev/gemini-api/docs/computer-use?hl=th)
 
-## 9. Chiamare le proprie funzioni
+## 9. เรียกใช้ฟังก์ชันของคุณเอง
 
-La chiamata di funzione consente di connettere il modello al codice. Dichiari il nome e i parametri di una funzione, il modello decide quando chiamarla e restituisce argomenti strutturati, tu la esegui localmente e invii il risultato.
+การเรียกใช้ฟังก์ชันช่วยให้คุณเชื่อมต่อโมเดลกับโค้ดได้ คุณประกาศชื่อและพารามิเตอร์ของฟังก์ชัน โมเดลจะตัดสินใจว่าจะเรียกใช้ฟังก์ชันเมื่อใดและส่งคืนอาร์กิวเมนต์ที่มีโครงสร้าง จากนั้นคุณจะเรียกใช้ฟังก์ชันในเครื่องและส่งผลลัพธ์กลับ
 
-### Stateful (consigliato)
+### มีสถานะ (แนะนำ)
 
 ### Python
 
@@ -1157,13 +1158,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Stateless
+### ไม่เก็บสถานะ
 
-Puoi anche utilizzare la chiamata di funzioni in modalità stateless gestendo la cronologia della conversazione sul lato client e impostando `store=false`. In modalità stateless, devi trasmettere la cronologia completa della conversazione nel campo `input` di ogni richiesta successiva. Questa cronologia deve includere:
+นอกจากนี้ คุณยังใช้การเรียกฟังก์ชันในโหมดแบบไม่เก็บสถานะได้โดยจัดการประวัติการสนทนาฝั่งไคลเอ็นต์และตั้งค่า `store=false` ในโหมดแบบไม่เก็บสถานะ คุณต้องส่งประวัติการสนทนาทั้งหมดในฟิลด์ `input` ของคำขอที่ตามมาแต่ละรายการ ประวัติการเข้าชมต้องมีข้อมูลต่อไปนี้
 
-1. Il passaggio iniziale `user_input`.
-2. Tutti i passaggi generati dal modello restituiti nel Turno 1 (inclusi i passaggi `thought` e `function_call`) esattamente come ricevuti.
-3. Il passaggio `function_result` contenente l'output della funzione eseguita.
+1. `user_input`ขั้นตอนเริ่มต้น
+2. ขั้นตอนทั้งหมดที่โมเดลสร้างขึ้นซึ่งส่งคืนในเทิร์นที่ 1 (รวมถึงขั้นตอน `thought` และ `function_call`) จะเหมือนกับที่ได้รับทุกประการ
+3. `function_result` ขั้นตอนที่มีเอาต์พุตของฟังก์ชันที่เรียกใช้
 
 ### Python
 
@@ -1371,9 +1372,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-**Risposta:**
+**คำตอบ:**
 
-Durante il Turn 1, il modello restituisce una risposta con lo stato `requires_action` e il passaggio `function_call`:
+ในเทิร์นที่ 1 โมเดลจะแสดงคำตอบที่มีสถานะ `requires_action` และขั้นตอน `function_call` ดังนี้
 
 ```
 {
@@ -1394,7 +1395,7 @@ Durante il Turn 1, il modello restituisce una risposta con lo stato `requires_ac
 }
 ```
 
-Dopo aver eseguito la funzione in locale e inviato il risultato (Turno 2), viene restituita l'interazione finale completata:
+หลังจากเรียกใช้ฟังก์ชันในเครื่องและส่งผลลัพธ์ (เทิร์นที่ 2) แล้ว การโต้ตอบที่เสร็จสมบูรณ์สุดท้ายจะแสดงขึ้น
 
 ```
 {
@@ -1424,11 +1425,11 @@ Dopo aver eseguito la funzione in locale e inviato il risultato (Turno 2), viene
 }
 ```
 
-Per funzionalità avanzate come la chiamata di funzione parallela o le modalità di scelta della funzione, consulta la [guida alla chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it).
+สำหรับฟีเจอร์ขั้นสูง เช่น การเรียกใช้ฟังก์ชันแบบขนานหรือโหมดการเลือกฟังก์ชัน โปรดดู[คู่มือการเรียกใช้ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)
 
-## 10. Eseguire un agente gestito
+## 10. เรียกใช้ Agent ที่มีการจัดการ
 
-Gli agenti gestiti vengono eseguiti in una sandbox remota con accesso a strumenti come l'esecuzione di codice e la gestione dei file. Passa un `agent` anziché un `model` e imposta `environment="remote"`.
+เอเจนต์ที่มีการจัดการจะทำงานในแซนด์บ็อกซ์ระยะไกลพร้อมสิทธิ์เข้าถึงเครื่องมือต่างๆ เช่น การรันโค้ดและการจัดการไฟล์ ส่ง `agent` แทน `model` และตั้งค่า `environment="remote"`
 
 ### Python
 
@@ -1475,27 +1476,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Puoi anche definire e salvare [agenti personalizzati](https://ai.google.dev/gemini-api/docs/custom-agents?hl=it) con istruzioni, competenze e origini dati personalizzate.
+นอกจากนี้ คุณยังกำหนดและบันทึก[เอเจนต์ที่กำหนดเอง](https://ai.google.dev/gemini-api/docs/custom-agents?hl=th)พร้อมคำสั่ง ทักษะ และแหล่งข้อมูลของคุณเองได้ด้วย
 
 [rocket\_launch
 
-Guida rapida
+คู่มือเริ่มใช้งานฉบับย่อ
 
-Effettua la tua prima chiamata con l'agente, trasmetti in streaming le risposte e crea un agente personalizzato.](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it)
+โทรหา Agent เป็นครั้งแรก สตรีมคำตอบ และสร้าง Agent ที่กำหนดเอง](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=th)
 [smart\_toy
 
-Agente Antigravity
+Agent ของ Antigravity
 
-Funzionalità, strumenti, input multimodale e prezzi per l'agente predefinito.](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it)
+ความสามารถ เครื่องมือ อินพุตมัลติโมดอล และราคาสำหรับเอเจนต์เริ่มต้น](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th)
 [experiment
 
-Agent in AI Studio
+Agent ใน AI Studio
 
-Playground visivo per la prototipazione di agenti senza scrivere codice.](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=it)
+พื้นที่ทดลองแบบภาพสำหรับการสร้างต้นแบบเอเจนต์โดยไม่ต้องเขียนโค้ด](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=th)
 
-## 11. Eseguire attività in background
+## 11. เรียกใช้งานในเบื้องหลัง
 
-Imposta `background=True` per eseguire attività di lunga durata in modo asincrono. Sondaggio per i risultati con `interactions.get()`. Per maggiori dettagli, consulta la [Guida all'esecuzione in background](https://ai.google.dev/gemini-api/docs/background-execution?hl=it).
+ตั้งค่า `background=True` ให้เรียกใช้ฟังก์ชันที่ใช้เวลานานแบบไม่พร้อมกัน สำรวจผลลัพธ์ด้วย `interactions.get()` ดูรายละเอียดเพิ่มเติมได้ที่[คู่มือการดำเนินการในเบื้องหลัง](https://ai.google.dev/gemini-api/docs/background-execution?hl=th)
 
 ### Python
 
@@ -1590,9 +1591,9 @@ while true; do
 done
 ```
 
-**Risposta:**
+**คำตอบ:**
 
-La risposta iniziale viene restituita immediatamente con lo stato `in_progress`:
+การตอบกลับครั้งแรกจะแสดงทันทีพร้อมสถานะ `in_progress` ดังนี้
 
 ```
 {
@@ -1603,7 +1604,7 @@ La risposta iniziale viene restituita immediatamente con lo stato `in_progress`:
 }
 ```
 
-Una volta eseguita completamente l'attività in background, il controllo dello stato dell'interazione restituisce:
+เมื่อดำเนินการงานในเบื้องหลังเสร็จสมบูรณ์แล้ว การตรวจสอบสถานะการโต้ตอบจะแสดงผลดังนี้
 
 ```
 {
@@ -1625,27 +1626,27 @@ Una volta eseguita completamente l'attività in background, il controllo dello s
 }
 ```
 
-Scopri di più sull'esecuzione asincrona di modelli e agenti nella [guida all'esecuzione in background](https://ai.google.dev/gemini-api/docs/background-execution?hl=it).
+อ่านเกี่ยวกับการเรียกใช้โมเดลและเอเจนต์แบบไม่พร้อมกันได้ใน[คู่มือการดำเนินการในเบื้องหลัง](https://ai.google.dev/gemini-api/docs/background-execution?hl=th)
 
-## Passaggi successivi
+## ขั้นตอนถัดไป
 
-- [Esecuzione in background](https://ai.google.dev/gemini-api/docs/background-execution?hl=it): esegui attività di lunga durata in modo asincrono e gestisci lo stato.
-- [Generazione di testo](https://ai.google.dev/gemini-api/docs/text-generation?hl=it): istruzioni di sistema, configurazione della generazione e pattern di testo avanzati.
-- [Generazione di immagini](https://ai.google.dev/gemini-api/docs/image-generation?hl=it): proporzioni, modifica delle immagini e riferimenti di stile.
-- [Comprensione delle immagini](https://ai.google.dev/gemini-api/docs/image-understanding?hl=it): classificazione, rilevamento di oggetti e domande e risposte visive.
-- [Ragionamento](https://ai.google.dev/gemini-api/docs/thinking?hl=it): utilizza il chain-of-thought per attività complesse.
-- [Chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it): modalità di funzione parallela, compositiva e vincolata.
-- [Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it): grounding, citazioni e suggerimenti di ricerca.
-- [Agenti gestiti](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it): agenti predefiniti con esecuzione del codice e gestione dei file.
-- [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it): ricerca autonoma in più passaggi con pianificazione e sintesi.
-- [Output strutturato](https://ai.google.dev/gemini-api/docs/structured-output?hl=it): schemi JSON, enumerazioni e definizioni di tipi ricorsivi.
+- [การดำเนินการในเบื้องหลัง](https://ai.google.dev/gemini-api/docs/background-execution?hl=th): เรียกใช้งานที่ใช้เวลานานแบบไม่พร้อมกันและจัดการสถานะ
+- [การสร้างข้อความ](https://ai.google.dev/gemini-api/docs/text-generation?hl=th): คำสั่งของระบบ การกำหนดค่าการสร้าง และรูปแบบข้อความขั้นสูง
+- [การสร้างรูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th): สัดส่วนภาพ การแก้ไขรูปภาพ และการอ้างอิงสไตล์
+- [การทำความเข้าใจรูปภาพ](https://ai.google.dev/gemini-api/docs/image-understanding?hl=th): การจัดประเภท การตรวจจับออบเจ็กต์ และคำถามและคำตอบเกี่ยวกับภาพ
+- [การคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th): ใช้การให้เหตุผลแบบลูกโซ่สำหรับงานที่ซับซ้อน
+- [การเรียกใช้ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th): โหมดฟังก์ชันแบบขนาน แบบประกอบ และแบบจำกัด
+- [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th): การอ้างอิง การอ้างอิง และคำแนะนำในการค้นหา
+- [Agent ที่ได้รับการจัดการ](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=th): Agent ที่สร้างไว้ล่วงหน้าพร้อมการรันโค้ดและการจัดการไฟล์
+- [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th): การค้นคว้าแบบอัตโนมัติหลายขั้นตอนพร้อมการวางแผนและการสังเคราะห์
+- [เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th): สคีมา JSON, การแจงนับ และคำจำกัดความประเภทแบบเรียกซ้ำ
 
-Invia feedback
+ส่งความคิดเห็น
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Ultimo aggiornamento 2026-07-30 UTC.
+อัปเดตล่าสุด 2026-09-12 UTC
 
-Vuoi dirci altro?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-12 UTC"],[],[]]

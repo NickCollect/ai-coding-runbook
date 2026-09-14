@@ -1,35 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=it
-fetched_at: 2026-09-07T05:35:00.427594+00:00
-title: "Contesto URL \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=zh-TW
+fetched_at: 2026-09-14T05:50:32.547118+00:00
+title: "\u7db2\u5740\u80cc\u666f\u8cc7\u8a0a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Invia feedback
+提供意見
 
-# Contesto URL
+# 網址背景資訊
 
-[Lo strumento Contesto URL ti consente di fornire un contesto aggiuntivo ai modelli sotto forma di URL. Se includi gli URL nella richiesta, il modello accederà ai contenuti di queste pagine (purché non si tratti di un tipo di URL elencato nella sezione Limitazioni) per informare e migliorare la sua risposta.](#limitations)
+網址背景資訊工具可讓您以網址形式，為模型提供額外背景資訊。在要求中加入網址後，模型就會存取這些網頁的內容 (只要網址類型未列於[限制一節](#limitations))，藉此提供更完善的回覆。
 
-Lo strumento Contesto URL è utile per attività come le seguenti:
+網址脈絡工具適用於下列工作：
 
-- **Estrarre dati**: estrai informazioni specifiche come prezzi, nomi o risultati
-  chiave da più URL.
-- **Confrontare documenti**: analizza più report, articoli o PDF per
-  identificare le differenze e monitorare le tendenze.
-- **Sintetizzare e creare contenuti**: combina le informazioni di più URL di origine per generare riepiloghi, post di blog o report accurati.
-- **Analizzare codice e documenti**: indica un repository GitHub o una documentazione tecnica per spiegare il codice, generare istruzioni di configurazione o rispondere a domande.
+- **擷取資料**：從多個網址擷取特定資訊，例如價格、名稱或重要發現。
+- **比較文件**：分析多份報表、文章或 PDF，找出差異並追蹤趨勢。
+- **統整及建立內容**：整合多個來源網址的資訊，生成準確的摘要、網誌文章或報告。
+- **分析程式碼和文件**：指向 GitHub 存放區或技術文件，即可說明程式碼、生成設定說明或回答問題。
 
-L'esempio seguente mostra come confrontare due ricette di siti web diversi.
+以下範例說明如何比較不同網站的兩道食譜。
 
 ### Python
 
@@ -113,25 +111,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Come funziona
+## 運作方式
 
-Lo strumento Contesto URL utilizza una procedura di recupero in due passaggi per bilanciare velocità, costi e accesso ai dati aggiornati. Quando fornisci un URL, lo strumento tenta innanzitutto di recuperare i contenuti da una cache di indici interni. Questa funge da cache altamente ottimizzata. Se un URL non è disponibile nell'indice (ad esempio, se si tratta di una pagina molto recente), lo strumento esegue automaticamente il fallback a un recupero live.
-In questo modo, l'URL viene acceduto direttamente per recuperare i relativi contenuti in tempo reale.
+網址內容工具採用兩步驟的擷取程序，兼顧速度、成本和最新資料存取權。提供網址後，這項工具會先嘗試從內部索引快取擷取內容。這可做為經過高度最佳化的快取。如果網址未編入索引 (例如網頁剛發布)，工具會自動改為擷取實際網頁。這項工具會直接存取網址，即時擷取內容。
 
-## Combinazione con altri strumenti
+## 與其他工具搭配使用
 
-Puoi combinare lo strumento Contesto URL con altri strumenti per creare workflow più potenti.
+您可以將網址內容工具與其他工具結合，建立功能更強大的工作流程。
 
-[I modelli Gemini 3](#supported-models) supportano la combinazione di strumenti integrati
-(come Contesto URL) con strumenti personalizzati (chiamata di funzioni). Scopri di più nella pagina delle
-[combinazioni di strumenti](https://ai.google.dev/gemini-api/docs/tool-combination?hl=it).
+[Gemini 3 模型](#supported-models)支援結合內建工具 (例如網址背景資訊) 和自訂工具 (函式呼叫)。詳情請參閱「[工具組合](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-tw)」頁面。
 
-### Grounding con la Ricerca
+### 以搜尋結果為基準
 
-Se sono attivi sia Contesto URL sia
-[Grounding con la Ricerca Google](https://ai.google.dev/gemini-api/docs/grounding?hl=it),
-il modello può utilizzare le sue funzionalità di ricerca per trovare
-informazioni pertinenti online e poi utilizzare lo strumento Contesto URL per comprendere meglio le pagine che trova. Questo approccio è efficace per i prompt che richiedono sia una ricerca ampia sia un'analisi approfondita di pagine specifiche.
+同時啟用網址背景資訊和 [以 Google 搜尋強化事實基礎](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-tw)後，模型就能使用搜尋功能在網路上尋找相關資訊，然後使用網址背景資訊工具深入瞭解找到的網頁。這種做法非常適合需要廣泛搜尋，並深入分析特定網頁的提示。
 
 ### Python
 
@@ -204,21 +196,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Comprendere la risposta
+## 瞭解回覆內容
 
-Quando il modello utilizza lo strumento Contesto URL, la risposta di testo include annotazioni `url_citation` in linea nel blocco di contenuti di testo. Ogni annotazione collega un segmento del testo di risposta (tramite `start_index` e `end_index`) all'URL di origine da cui è stato derivato. Questo è il modo principale per visualizzare le citazioni nella tua
-applicazione. Per scoprire come estrarle, consulta l'[esempio principale riportato sopra](#get-started).
+模型使用網址背景資訊工具時，文字回覆會在文字內容區塊中加入行內 `url_citation` 註解。每則註解都會將回覆文字的片段 (透過 `start_index` 和 `end_index`) 連結至衍生來源網址。這是應用程式中顯示引文的主要方式，請參閱[上方的主要範例](#get-started)，瞭解如何擷取引文。
 
-La risposta include anche un passaggio `url_context_result` con i metadati relativi a ogni tentativo di recupero dell'URL (stato, URL recuperato). Questo è utile soprattutto per il debug.
+回應中也會納入 `url_context_result` 步驟，其中含有每個網址擷取嘗試的中繼資料 (狀態、擷取的網址)。這項功能主要用於偵錯。
 
-### Assegni assicurati
+### 安全檢查
 
-Il sistema esegue un controllo di moderazione dei contenuti sugli URL per verificare che soddisfino gli standard di sicurezza. Se un URL non supera questo controllo, il passaggio corrispondente
-`url_context_result` mostrerà uno `status` di `"unsafe"`.
+系統會對網址執行內容審查檢查，確認網址符合安全標準。如果網址未通過這項檢查，對應的 `url_context_result` 步驟會顯示 `status` `"unsafe"`。
 
-### Conteggio dei token
+### 符記數量
 
-I contenuti recuperati dagli URL specificati nel prompt vengono conteggiati come parte dei token di input. Puoi visualizzare il conteggio dei token nell'oggetto `usage` dell'interazione. Di seguito è riportato un esempio:
+系統會將從提示中指定網址擷取的內容，計為輸入權杖的一部分。您可以在互動的 `usage` 物件中查看詞元數。範例如下：
 
 ```
 'usage': {
@@ -232,62 +222,57 @@ I contenuti recuperati dagli URL specificati nel prompt vengono conteggiati come
 }
 ```
 
-Il prezzo per token dipende dal modello utilizzato. Per i dettagli, consulta la
-[pagina dei prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it).
+每個權杖的價格取決於使用的模型，詳情請參閱[定價](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw)頁面。
 
-## Modelli supportati
+## 支援的模型
 
-| Modello | Contesto URL |
+| 模型 | 網址背景資訊 |
 | --- | --- |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=it) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=it) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=it) | ✔️ |
-| [Gemini 3.1 Pro (anteprima)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=it) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=it) | ✔️ |
-| [Gemini 3 Flash (anteprima)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=it) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=it) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=it) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=it) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=zh-tw) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-tw) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=zh-tw) | ✔️ |
+| [Gemini 3.1 Pro 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-tw) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-tw) | ✔️ |
+| [Gemini 3 Flash 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-tw) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-tw) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=zh-tw) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-tw) | ✔️ |
 
-## Best practice
+## 最佳做法
 
-- **Fornisci URL specifici**: per ottenere risultati ottimali, fornisci URL diretti ai
-  contenuti che vuoi che il modello analizzi. Il modello recupererà solo i contenuti degli URL che fornisci, non i contenuti dei link nidificati.
-- **Verifica l'accessibilità**: verifica che gli URL che fornisci non rimandino a
-  pagine che richiedono l'accesso o che siano protette da paywall.
-- **Utilizza l'URL completo**: fornisci l'URL completo, incluso il protocollo
-  (ad es. https://www.google.com anziché solo google.com).
+- **提供具體網址**：為獲得最佳結果，請提供您希望模型分析的內容的直接網址。模型只會從您提供的網址擷取內容，不會從巢狀連結擷取任何內容。
+- **檢查存取權**：確認提供的網址不會導向需要登入或位於付費牆後的網頁。
+- **使用完整網址**：請提供完整網址，包括通訊協定 (例如 https://www.google.com，而不是只有 google.com)。
 
-## Limitazioni
+## 限制
 
-- Limite delle richieste: lo strumento può elaborare fino a 20 URL per richiesta.
-- Dimensioni dei contenuti dell'URL: la dimensione massima dei contenuti recuperati da un singolo URL è di 34 MB.
-- Accessibilità pubblica: gli URL devono essere accessibili pubblicamente sul web.
-  Gli indirizzi localhost (ad es. localhost, 127.0.0.1), le reti private e i servizi di tunneling (ad es. ngrok, pinggy) non sono supportati.
+- 要求限制：這項工具每次最多可處理 20 個網址。
+- 網址內容大小：從單一網址擷取的內容大小上限為 34 MB。
+- 公開存取：網址必須可在網路上公開存取。
+  系統不支援本機主機位址 (例如 localhost、127.0.0.1)、私人網路和通道服務 (例如 ngrok、pinggy)。
+- 僅限 Gemini API：網址背景資訊僅適用於 Gemini API，不適用於 Gemini Enterprise Agent Platform。
 
-### Tipi di contenuti supportati e non supportati
+### 支援及不支援的內容類型
 
-Lo strumento può estrarre contenuti dagli URL con i seguenti tipi di contenuti:
+這項工具可從下列內容類型的網址中擷取內容：
 
-- Testo (text/html, application/json, text/plain, text/xml, text/css, text/javascript , text/csv, text/rtf)
-- Immagine (image/png, image/jpeg, image/bmp, image/webp)
+- 文字 (text/html、application/json、text/plain、text/xml、text/css、text/javascript、text/csv、text/rtf)
+- 圖片 (image/png、image/jpeg、image/bmp、image/webp)
 - PDF (application/pdf)
 
-I seguenti tipi di contenuti **non** sono supportati:
+系統「不」支援下列內容類型：
 
-- Contenuti protetti da paywall
-- Video di YouTube (per scoprire
-  [come elaborare gli URL di YouTube](https://ai.google.dev/gemini-api/docs/video-understanding?hl=it#youtube), consulta la sezione
-  Comprensione dei video)
-- File di Google Workspace come Documenti o Fogli Google
-- File video e audio
+- 付費牆內容
+- YouTube 影片 (請參閱[影片理解](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-tw#youtube)，瞭解如何處理 YouTube 網址)
+- Google Workspace 檔案，例如 Google 文件或試算表
+- 影片和音訊檔案
 
-Invia feedback
+提供意見
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Ultimo aggiornamento 2026-07-31 UTC.
+上次更新時間：2026-09-12 (世界標準時間)。
 
-Vuoi dirci altro?
+想進一步說明嗎？
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-31 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-12 (世界標準時間)。"],[],[]]

@@ -1,37 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=ja
-fetched_at: 2026-09-07T05:41:47.236796+00:00
-title: "\u30e1\u30c7\u30a3\u30a2\u306e\u89e3\u50cf\u5ea6 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=pt-BR
+fetched_at: 2026-09-14T05:45:15.767640+00:00
+title: "Resolu\u00e7\u00e3o da m\u00eddia \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs/generate-content?hl=pt-br)
 
-フィードバックを送信
+Envie comentários
 
-# メディアの解像度
+# Resolução da mídia
 
-`media_resolution` パラメータは、メディア入力に割り当てられる**トークンの最大数** を決定することで、画像、動画、PDF
-ドキュメントなどのメディア入力を Gemini API
-が処理する方法を制御します。これにより、レスポンスの品質とレイテンシ、費用のバランスを取ることができます。設定が異なる場合、デフォルト値とトークンへの対応については、[トークン数のセクション](#token-counts)をご覧ください。
+O parâmetro `media_resolution` controla como a API Gemini processa entradas de mídia, como imagens, vídeos e documentos PDF, determinando o **número máximo de tokens** alocados para entradas de mídia. Assim, é possível equilibrar a qualidade da resposta com a latência e o custo. Para conferir diferentes configurações, valores padrão e como eles correspondem a tokens, consulte a seção [Contagem de tokens](#token-counts).
 
-メディアの解像度は、次の 2 つの方法で構成できます。
+É possível configurar a resolução da mídia de duas maneiras:
 
-- [パートごと](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ja#per-part-media-resolution)（Gemini 3 のみ）
-- [グローバルに](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ja#global-media-resolution) `generateContent` リクエスト全体で（すべてのマルチモーダル モデル）
+- [Por parte](https://ai.google.dev/gemini-api/docs/media-resolution?hl=pt-br#per-part-media-resolution) (somente Gemini 3)
+- [Globalmente](https://ai.google.dev/gemini-api/docs/media-resolution?hl=pt-br#global-media-resolution) para uma solicitação `generateContent` inteira (todos os modelos multimodais)
 
-## パートごとのメディアの解像度（Gemini 3 のみ）
+## Resolução de mídia por parte (somente Gemini 3)
 
-Gemini 3 では、リクエスト内の個々のメディア オブジェクトのメディアの解像度を設定できるため、トークンの使用量をきめ細かく最適化できます。1
-つのリクエストで解像度レベルを混在させることができます。たとえば、複雑な図には高解像度を使用し、シンプルなコンテキスト画像には低解像度を使用します。この設定は、特定のパートのグローバル構成をオーバーライドします。デフォルト設定については、[トークン数](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ja#token-counts)のセクションをご覧ください。
+Com o Gemini 3, é possível definir a resolução de mídia para objetos individuais na sua solicitação, oferecendo uma otimização refinada do uso de tokens. É possível misturar níveis de resolução em uma única solicitação. Por exemplo, use alta resolução para um diagrama complexo e baixa resolução para uma imagem contextual simples. Essa configuração substitui qualquer configuração global de uma peça específica. Para conferir as configurações padrão, consulte a seção [Contagem de tokens](https://ai.google.dev/gemini-api/docs/media-resolution?hl=pt-br#token-counts).
 
 ### Python
 
@@ -39,10 +36,10 @@ Gemini 3 では、リクエスト内の個々のメディア オブジェクト�
 from google import genai
 from google.genai import types
 
-# The media_resolution parameter for parts is available in the v1beta API version.
+# The media_resolution parameter for parts is currently only available in the v1alpha API version. (experimental)
 client = genai.Client(
   http_options={
-      'api_version': 'v1beta',
+      'api_version': 'v1alpha',
   }
 )
 
@@ -74,7 +71,7 @@ import { GoogleGenAI, MediaResolution, Part } from '@google/genai';
 import * as fs from 'fs';
 import { Buffer } from 'buffer'; // Node.js
 
-const ai = new GoogleGenAI({ httpOptions: { apiVersion: 'v1beta' } });
+const ai = new GoogleGenAI({ httpOptions: { apiVersion: 'v1alpha' } });
 
 // Helper function to convert local file to a Part object
 function fileToGenerativePart(path, mimeType, mediaResolution) {
@@ -128,16 +125,16 @@ echo '{
   }' > request.json
 
 curl -s -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/${MODEL_ID}:generateContent" \
+  "https://generativelanguage.googleapis.com/v1alpha/models/${MODEL_ID}:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d @request.json
 ```
 
-## グローバル メディアの解像度
+## Resolução de mídia global
 
-`GenerationConfig` を使用して、リクエスト内のすべてのメディア パートのデフォルトの解像度を設定できます。これは、すべてのマルチモーダル
-モデルでサポートされています。リクエストにグローバル設定と[パートごとの設定](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ja#per-part-media-resolution)の両方が含まれている場合、その特定のアイテムにはパートごとの設定が優先されます。
+É possível definir uma resolução padrão para todas as partes de mídia em uma solicitação usando o
+`GenerationConfig`. Isso é compatível com todos os modelos multimodais. Se uma solicitação incluir configurações globais e [por parte](https://ai.google.dev/gemini-api/docs/media-resolution?hl=pt-br#per-part-media-resolution), a configuração por parte terá precedência para esse item específico.
 
 ### Python
 
@@ -205,86 +202,86 @@ curl -s -X POST \
   }'
 ```
 
-## 使用可能な解像度の値
+## Valores de resolução disponíveis
 
-Gemini API では、メディアの解像度に対して次のレベルが定義されています。
+A API Gemini define os seguintes níveis de resolução de mídia:
 
-- `MEDIA_RESOLUTION_UNSPECIFIED`: デフォルト設定。このレベルのトークン数は、Gemini 3 とそれ以前の Gemini モデルで大きく異なります。
-- `MEDIA_RESOLUTION_LOW`: トークン数が少ないため、処理が高速になり、費用が削減されますが、詳細度は低くなります。
-- `MEDIA_RESOLUTION_MEDIUM`: 詳細度、費用、レイテンシのバランスが取れています。
-- `MEDIA_RESOLUTION_HIGH`: トークン数が多く、モデルが処理できる詳細度が高くなりますが、レイテンシと費用が増加します。
-- `MEDIA_RESOLUTION_ULTRA_HIGH`（パートごと）: トークン数が最も多く、特定の
-  ユースケース（[パソコンの使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=ja)など）で必要になります。
+- `MEDIA_RESOLUTION_UNSPECIFIED`: a configuração padrão. A contagem de tokens para
+  esse nível varia muito entre o Gemini 3 e os modelos anteriores do Gemini.
+- `MEDIA_RESOLUTION_LOW`: menor contagem de tokens, resultando em processamento mais rápido e custo menor, mas com menos detalhes.
+- `MEDIA_RESOLUTION_MEDIUM`: um equilíbrio entre detalhes, custo e latência.
+- `MEDIA_RESOLUTION_HIGH`: contagem de tokens mais alta, fornecendo mais detalhes para o modelo trabalhar, mas com aumento da latência e do custo.
+- `MEDIA_RESOLUTION_ULTRA_HIGH` (por parte apenas): maior contagem de tokens, necessária para casos de uso específicos, como [uso de computador](https://ai.google.dev/gemini-api/docs/computer-use?hl=pt-br).
 
-`MEDIA_RESOLUTION_HIGH` は、ほとんどのユースケースで最適なパフォーマンスを提供します。
+Observação: o `MEDIA_RESOLUTION_HIGH` oferece o desempenho ideal para a maioria dos casos de uso.
 
-これらの各レベルで生成されるトークンの正確な数は、**メディアの種類** （画像、動画、PDF）と**モデルのバージョン** の両方によって異なります。
+O número exato de tokens gerados para cada um desses níveis depende do **tipo de mídia** (imagem, vídeo, PDF) e da **versão do modelo**.
 
-## トークン数
+## Contagem de tokens
 
-次の表に、モデル ファミリーごとの `media_resolution` の値とメディアの種類のおおよそのトークン数を示します。
+As tabelas abaixo resumem as contagens aproximadas de tokens para cada valor de `media_resolution` e tipo de mídia por família de modelos.
 
-**Gemini 3 モデル**
+**Modelos do Gemini 3**
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| **MediaResolution** | **画像** | **動画** | **PDF** |
-| `MEDIA_RESOLUTION_UNSPECIFIED` （デフォルト） | 1,120 | 70 | 560 |
-| `MEDIA_RESOLUTION_LOW` | 280 | 70 | 280 + ネイティブ テキスト |
-| `MEDIA_RESOLUTION_MEDIUM` | 560 | 70 | 560 + ネイティブ テキスト |
-| `MEDIA_RESOLUTION_HIGH` | 1,120 | 280 | 1,120 + ネイティブ テキスト |
-| `MEDIA_RESOLUTION_ULTRA_HIGH` | 2,240 | なし | なし |
+| **MediaResolution** | **Imagem** | **Vídeo** | **PDF** |
+| `MEDIA_RESOLUTION_UNSPECIFIED` (padrão) | 1120 | 70 | 560 |
+| `MEDIA_RESOLUTION_LOW` | 280 | 70 | 280 + texto nativo |
+| `MEDIA_RESOLUTION_MEDIUM` | 560 | 70 | 560 + texto nativo |
+| `MEDIA_RESOLUTION_HIGH` | 1120 | 280 | 1120 + texto nativo |
+| `MEDIA_RESOLUTION_ULTRA_HIGH` | 2240 | N/A | N/A |
 
-**Gemini 2.5 モデル**
+**Modelos do Gemini 2.5**
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **MediaResolution** | **画像** | **動画** | **PDF（スキャン）** | **PDF（ネイティブ）** |
-| `MEDIA_RESOLUTION_UNSPECIFIED` （デフォルト） | 256 + パンとスキャン（~2,048） | 256 | 256 + OCR | 256 + ネイティブ テキスト |
-| `MEDIA_RESOLUTION_LOW` | 64 | 64 | 64 + OCR | 64 + ネイティブ テキスト |
-| `MEDIA_RESOLUTION_MEDIUM` | 256 | 256 | 256 + OCR | 256 + ネイティブ テキスト |
-| `MEDIA_RESOLUTION_HIGH` | 256 + パンとスキャン | 256 | 256 + OCR | 256 + ネイティブ テキスト |
+| **MediaResolution** | **Imagem** | **Vídeo** | **PDF (digitalizado)** | **PDF (nativo)** |
+| `MEDIA_RESOLUTION_UNSPECIFIED` (padrão) | 256 + Pan & Scan (~2048) | 256 | 256 + OCR | 256 + texto nativo |
+| `MEDIA_RESOLUTION_LOW` | 64 | 64 | 64 + OCR | 64 + texto nativo |
+| `MEDIA_RESOLUTION_MEDIUM` | 256 | 256 | 256 + OCR | 256 + texto nativo |
+| `MEDIA_RESOLUTION_HIGH` | 256 + Pan & Scan | 256 | 256 + OCR | 256 + texto nativo |
 
-## 適切な解像度の選択
+## Como escolher a resolução certa
 
-- **デフォルト（`UNSPECIFIED`）:** デフォルトから始めます。これは、最も一般的なユースケースで品質、レイテンシ、費用のバランスが取れるように調整されています。
-- **`LOW`:** 費用とレイテンシが最優先で、詳細な情報が重要でないシナリオで使用します。
-- **`MEDIUM` / `HIGH`:** タスクでメディア内の複雑な詳細を理解する必要がある場合は、解像度を上げます。これは、複雑なビジュアル分析、グラフの読み取り、密度の高いドキュメントの理解で必要になることがよくあります。
-- **`ULTRA HIGH`** - パートごとの設定でのみ使用できます。パソコンの使用など特定のユースケースや、テストで `HIGH` よりも明確な改善が見られる場合におすすめします。
-- **パートごとの制御（Gemini 3）:** トークンの使用量を最適化します。たとえば、複数の画像を含むプロンプトでは、複雑な図には `HIGH` を使用し、シンプルなコンテキスト画像には `LOW` または `MEDIUM` を使用します。
+- **Padrão (`UNSPECIFIED`)**: comece com o padrão. Ele é ajustado para um bom equilíbrio de qualidade, latência e custo nos casos de uso mais comuns.
+- **`LOW`**:use em cenários em que o custo e a latência são fundamentais e
+  o detalhe refinado é menos importante.
+- **`MEDIUM` / `HIGH`**:aumente a resolução quando a tarefa exigir a compreensão de detalhes complexos na mídia. Isso geralmente é necessário para análises visuais complexas, leitura de gráficos ou compreensão de documentos densos.
+- **`ULTRA HIGH`**: disponível apenas para a configuração por parte. Recomendado para casos de uso específicos, como uso de computador ou quando os testes mostram uma melhoria clara em relação ao `HIGH`.
+- **Controle por parte (Gemini 3)**: otimiza o uso de tokens. Por exemplo, em um comando com várias imagens, use `HIGH` para um diagrama complexo e `LOW` ou `MEDIUM` para imagens contextuais mais simples.
 
-**おすすめの設定**
+**Configurações recomendadas**
 
-以下に、サポートされているメディアの種類ごとにおすすめのメディアの解像度設定を示します。
+Confira abaixo as configurações de resolução de mídia recomendadas para cada tipo de mídia compatível.
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| **メディアの種類** | **おすすめの設定** | **最大トークン数** | **使用上のガイダンス** |
-| **画像検索** | `MEDIA_RESOLUTION_HIGH` | 1,120 | 品質を最大限に高めるために、ほとんどの画像分析タスクにおすすめします。 |
-| **PDF** | `MEDIA_RESOLUTION_MEDIUM` | 560 | ドキュメントの理解に最適です。通常、品質は `medium` で飽和します。`high` に上げても、標準ドキュメントの OCR 結果が改善されることはほとんどありません。 |
-| **動画** （全般） | `MEDIA_RESOLUTION_LOW` （または `MEDIA_RESOLUTION_MEDIUM`） | 70（フレームごと） | **注:** 動画の場合、コンテキストの使用量を最適化するために、`low` 設定と `medium` 設定は同じように扱われます（70 トークン）。ほとんどのアクション認識と説明のタスクで十分です。 |
-| **動画** （テキストが多い） | `MEDIA_RESOLUTION_HIGH` | 280（フレームごと） | ユースケースで、動画フレーム内の密度の高いテキスト（OCR）や細かい部分を読み取る場合にのみ必要です。 |
+| **Tipo de mídia** | **Configuração recomendada** | **Máximo de tokens** | **Orientações de uso** |
+| **Imagens** | `MEDIA_RESOLUTION_HIGH` | 1120 | Recomendado para a maioria das tarefas de análise de imagens para garantir a qualidade máxima. |
+| **PDFs** | `MEDIA_RESOLUTION_MEDIUM` | 560 | Ideal para compreensão de documentos. A qualidade geralmente satura em `medium`. Aumentar para `high` raramente melhora os resultados do OCR em documentos padrão. |
+| **Vídeo** (Geral) | `MEDIA_RESOLUTION_LOW` (ou `MEDIA_RESOLUTION_MEDIUM`) | 70 (por frame) | **Observação**:para vídeo, as configurações `low` e `medium` são tratadas de forma idêntica (70 tokens) para otimizar o uso do contexto. Isso é suficiente para a maioria das tarefas de reconhecimento e descrição de ações. |
+| **Vídeo** (com muito texto) | `MEDIA_RESOLUTION_HIGH` | 280 (por frame) | Obrigatório apenas quando o caso de uso envolve a leitura de texto denso (OCR) ou pequenos detalhes em frames de vídeo. |
 
-品質、レイテンシ、費用の最適なトレードオフを見つけるには、特定のアプリケーションに対するさまざまな解像度設定の影響を常にテストして評価してください。
+Sempre teste e avalie o impacto de diferentes configurações de resolução no seu aplicativo específico para encontrar o melhor equilíbrio entre qualidade, latência e custo.
 
-## バージョンの互換性の概要
+## Resumo da compatibilidade de versões
 
-- `MediaResolution` 列挙型は、メディア入力をサポートするすべてのモデルで使用できます。
-- 各列挙型レベルに関連付けられたトークン数は、Gemini 3 モデルとそれ以前の Gemini バージョンで**異なります** 。
-- 個々の `Part` オブジェクトに `media_resolution` を設定できるのは**Gemini 3 モデルのみ** です。
+- O tipo enumerado `MediaResolution` está disponível para todos os modelos que aceitam entrada de mídia.
+- As contagens de tokens associadas a cada nível de enumeração **são diferentes** entre os modelos do Gemini 3 e as versões anteriores do Gemini.
+- A definição de `media_resolution` em objetos `Part` individuais é **exclusiva dos
+  modelos do Gemini 3**.
 
-## 次のステップ
+## Próximas etapas
 
-- Gemini API のマルチモーダル機能について、
-  [画像理解](https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=ja)、[動画理解](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=ja)、
-  [ドキュメント理解](https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=ja)のガイドで詳しく学習する。
+- Saiba mais sobre os recursos multimodais da API Gemini nos guias de [compreensão de imagens](https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=pt-br), [compreensão de vídeos](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=pt-br) e [compreensão de documentos](https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=pt-br).
 
-フィードバックを送信
+Envie comentários
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-最終更新日 2026-07-30 UTC。
+Última atualização 2026-09-12 UTC.
 
-ご意見をお聞かせください
+Quer enviar seu feedback?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-30 UTC。"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-12 UTC."],[],[]]

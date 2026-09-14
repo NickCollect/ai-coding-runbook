@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it
-fetched_at: 2026-09-07T05:43:46.469826+00:00
-title: "Grounding con Google Maps \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi
+fetched_at: 2026-09-14T05:51:38.935027+00:00
+title: "Google Maps \u0915\u0940 \u092e\u0926\u0926 \u0938\u0947 \u0917\u094d\u0930\u093e\u0909\u0902\u0921\u093f\u0902\u0917 \u0915\u0930\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Invia feedback
+सुझाव भेजें
 
-# Grounding con Google Maps
+# Google Maps की मदद से ग्राउंडिंग करना
 
-Grounding con Google Maps collega le funzionalità generative di Gemini ai dati ricchi, fattuali e aggiornati di Google Maps. Questa funzionalità consente agli sviluppatori di incorporare facilmente funzionalità basate sulla località nelle loro applicazioni. Quando una query utente ha un contesto correlato ai dati di Maps, il modello Gemini utilizza Google Maps per fornire risposte fattualmente accurate e aggiornate pertinenti alla località o all'area generale specificata dall'utente.
+Google Maps से जानकारी लेने की सुविधा, Gemini की जनरेटिव क्षमताओं को Google Maps के सटीक, अप-टू-डेट, और ज़्यादा जानकारी वाले डेटा से जोड़ती है. इस सुविधा की मदद से, डेवलपर अपने ऐप्लिकेशन में जगह की जानकारी देने वाली सुविधा को आसानी से शामिल कर सकते हैं. जब किसी उपयोगकर्ता की क्वेरी में Maps के डेटा से जुड़ा कॉन्टेक्स्ट होता है, तो Gemini मॉडल, Google Maps का इस्तेमाल करके तथ्यों पर आधारित और अप-टू-डेट जवाब देता है. ये जवाब, उपयोगकर्ता की बताई गई जगह या जगह की अनुमानित जानकारी के हिसाब से होते हैं.
 
-- **Risposte accurate e basate sulla località:** sfrutta i dati estesi e attuali di Google Maps per le query geograficamente specifiche.
-- **Personalizzazione avanzata:** personalizza consigli e informazioni in base alle località fornite dall'utente.
+- **जगह की जानकारी के हिसाब से सटीक जवाब:** भौगोलिक तौर पर खास क्वेरी के लिए, Google Maps के मौजूदा और ज़्यादा डेटा का इस्तेमाल करें.
+- **बेहतर तरीके से मनमुताबिक अनुभव देना:** उपयोगकर्ता की बताई गई जगहों के आधार पर, सुझाव और जानकारी दें.
 
-## Inizia
+## शुरू करें
 
-Questo esempio mostra come integrare Grounding con Google Maps nella tua applicazione per fornire risposte accurate e basate sulla località alle query degli utenti. Il prompt richiede consigli locali con una località utente facoltativa, consentendo al modello Gemini di utilizzare i dati di Google Maps.
+इस उदाहरण में, Google Maps से जानकारी लेने की सुविधा को अपने ऐप्लिकेशन में इंटिग्रेट करने का तरीका बताया गया है. इससे उपयोगकर्ता की क्वेरी के सटीक जवाब दिए जा सकते हैं और जगह की जानकारी के हिसाब से जवाब दिए जा सकते हैं. प्रॉम्प्ट में, स्थानीय सुझावों के बारे में पूछा गया है. इसमें उपयोगकर्ता की जगह की जानकारी देने का विकल्प भी है. इससे Gemini मॉडल, Google Maps के डेटा का इस्तेमाल कर सकता है.
 
 ### Python
 
@@ -118,38 +118,38 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Come funziona Grounding con Google Maps
+## Google Maps से जानकारी लेने की सुविधा कैसे काम करती है
 
-Grounding con Google Maps integra l'API Gemini con l'ecosistema Google Geo utilizzando l'API di Google Maps come origine di grounding. Quando la query di un utente contiene un contesto geografico, il modello Gemini può richiamare lo strumento Grounding con Google Maps. Il modello può quindi generare risposte basate sui dati di Google Maps pertinenti alla località fornita.
+Google Maps से जानकारी लेने की सुविधा, Maps API को सोर्स के तौर पर इस्तेमाल करके, Gemini API को Google Geo इकोसिस्टम के साथ इंटिग्रेट करती है. जब किसी उपयोगकर्ता की क्वेरी में भौगोलिक कॉन्टेक्स्ट होता है, तो Gemini मॉडल, Google Maps से जानकारी लेने की सुविधा को चालू कर सकता है. इसके बाद, मॉडल, दी गई जगह के हिसाब से Google Maps के डेटा के आधार पर जवाब जनरेट कर सकता है.
 
-In genere, la procedura prevede i seguenti passaggi:
+आम तौर पर, इस प्रोसेस में ये चरण शामिल होते हैं:
 
-1. **Query utente:** un utente invia una query alla tua applicazione, che potrebbe includere un contesto geografico (ad es. "bar nelle vicinanze", "musei a San Francisco").
-2. **Richiamo dello strumento:** il modello Gemini, riconoscendo l'intento geografico, richiama lo strumento Grounding con Google Maps. Questo strumento può essere fornito facoltativamente con la `latitude` e la `longitude` dell'utente. Lo strumento è uno strumento di ricerca testuale e si comporta in modo simile alla ricerca su Maps, in quanto le query locali ("nelle vicinanze") utilizzeranno le coordinate, mentre è improbabile che le query specifiche o non locali siano influenzate dalla località esplicita.
-3. **Recupero dei dati:** il servizio Grounding con Google Maps esegue una query su Google Maps per informazioni pertinenti (ad es. luoghi, recensioni, foto, indirizzi, orari di apertura).
-4. **Generazione basata su dati di fatto:** i dati di Maps recuperati vengono utilizzati per informare la risposta del modello Gemini, garantendo accuratezza e pertinenza fattuali.
-5. **Risposta e annotazioni:** il modello restituisce una risposta di testo con annotazioni in linea che rimandano alle fonti di Google Maps, consentendo agli sviluppatori di visualizzare le citazioni.
+1. **उपयोगकर्ता की क्वेरी:** कोई उपयोगकर्ता आपके ऐप्लिकेशन में क्वेरी सबमिट करता है.इसमें भौगोलिक कॉन्टेक्स्ट शामिल हो सकता है. जैसे, "मेरे आस-पास की कॉफ़ी शॉप", "सैन फ़्रांसिस्को में मौजूद म्यूज़ियम".
+2. **टूल को चालू करना:** Gemini मॉडल, भौगोलिक इरादे को पहचानकर, Google Maps से जानकारी लेने की सुविधा को चालू करता है. इस टूल को उपयोगकर्ता की `latitude` और `longitude` की जानकारी भी दी जा सकती है. यह टूल, टेक्स्ट के आधार पर खोज करने वाला टूल है और यह Maps पर खोज करने की तरह काम करता है. जैसे, स्थानीय क्वेरी ("मेरे आस-पास") के लिए, निर्देशांकों का इस्तेमाल किया जाएगा. वहीं, खास या गैर-स्थानीय क्वेरी पर, साफ़ तौर पर बताई गई जगह का असर नहीं पड़ेगा.
+3. **डेटा वापस पाना:** Google Maps से जानकारी लेने की सुविधा, Google Maps से काम की जानकारी (जैसे, जगहें, समीक्षाएं, फ़ोटो, पते, कारोबार के खुले होने का समय) के लिए क्वेरी करती है.
+4. **जानकारी के आधार पर जवाब जनरेट करना:** वापस पाए गए Maps के डेटा का इस्तेमाल, Gemini मॉडल के जवाब के लिए किया जाता है. इससे यह पक्का किया जाता है कि जवाब सटीक और काम का हो.
+5. **जवाब और एनोटेशन:** मॉडल, टेक्स्ट में जवाब देता है. इसमें इनलाइन एनोटेशन होते हैं, जो Google Maps के सोर्स से लिंक होते हैं. इससे डेवलपर, सोर्स की जानकारी दिखा सकते हैं.
 
-## Perché e quando utilizzare Grounding con Google Maps
+## Google Maps से जानकारी लेने की सुविधा का इस्तेमाल कब और क्यों करना चाहिए
 
-Grounding con Google Maps è ideale per le applicazioni che richiedono informazioni accurate, aggiornate e specifiche per la località. Migliora l'esperienza utente fornendo contenuti pertinenti e personalizzati supportati dall'ampio database di Google Maps di oltre 250 milioni di luoghi in tutto il mondo.
+Google Maps से जानकारी लेने की सुविधा, उन ऐप्लिकेशन के लिए सबसे सही है जिनमें सटीक, अप-टू-डेट, और जगह के हिसाब से जानकारी की ज़रूरत होती है. यह सुविधा, उपयोगकर्ता को काम का और मनमुताबिक कॉन्टेंट देकर, उनके अनुभव को बेहतर बनाती है. यह कॉन्टेंट, Google Maps के दुनिया भर में 25 करोड़ से ज़्यादा जगहों के डेटाबेस पर आधारित होता है.
 
-Devi utilizzare Grounding con Google Maps quando la tua applicazione deve:
+Google Maps से जानकारी लेने की सुविधा का इस्तेमाल तब करें, जब आपके ऐप्लिकेशन को:
 
-- Fornire risposte complete e accurate a domande specifiche per la località.
-- Creare pianificatori di viaggi conversazionali e guide locali.
-- Consigliare punti di interesse in base alla località e alle preferenze dell'utente, come ristoranti o negozi.
-- Creare esperienze basate sulla località per servizi social, di vendita al dettaglio o di consegna di cibo.
+- जगह से जुड़े सवालों के सटीक और पूरे जवाब देने हों.
+- बातचीत के ज़रिए ट्रिप प्लानर और स्थानीय गाइड बनाने हों.
+- जगह और उपयोगकर्ता की प्राथमिकताओं (जैसे, रेस्टोरेंट या दुकानें) के आधार पर, लोकप्रिय जगहों के सुझाव देने हों.
+- सामाजिक, खुदरा या फ़ूड डिलीवरी सेवाओं के लिए, जगह की जानकारी के हिसाब से अनुभव बनाने हों.
 
-Grounding con Google Maps eccelle nei casi d'uso in cui la prossimità e i dati fattuali attuali sono fondamentali, ad esempio per trovare il "miglior bar nelle vicinanze" o ottenere indicazioni stradali.
+Google Maps से जानकारी लेने की सुविधा, उन मामलों में सबसे अच्छी तरह काम करती है जहां आस-पास की जानकारी और मौजूदा सटीक डेटा ज़रूरी होता है. जैसे, "मेरे आस-पास की सबसे अच्छी कॉफ़ी शॉप" ढूंढना या दिशा-निर्देश पाना.
 
-## Casi d'uso
+## इस्तेमाल के उदाहरण
 
-Grounding con Google Maps supporta una serie di casi d'uso basati sulla località.
+Google Maps से जानकारी लेने की सुविधा, जगह की जानकारी के हिसाब से कई तरह के मामलों में काम करती है.
 
-### Gestire le domande specifiche per il luogo
+### जगह से जुड़े सवालों के जवाब देना
 
-Poni domande dettagliate su un luogo specifico per ottenere risposte basate sulle recensioni degli utenti di Google e su altri dati di Maps.
+किसी खास जगह के बारे में ज़्यादा जानकारी वाले सवाल पूछें, ताकि Google पर उपयोगकर्ताओं की समीक्षाओं और Maps के अन्य डेटा के आधार पर जवाब मिल सकें.
 
 ### Python
 
@@ -222,9 +222,9 @@ async function main() {
 main();
 ```
 
-### Fornire personalizzazione basata sulla località
+### जगह के हिसाब से मनमुताबिक अनुभव देना
 
-Ricevi consigli personalizzati in base alle preferenze di un utente e a un'area geografica specifica.
+उपयोगकर्ता की प्राथमिकताओं और किसी खास इलाके के हिसाब से सुझाव पाएं.
 
 ### Python
 
@@ -297,9 +297,9 @@ async function main() {
 main();
 ```
 
-### Aiutare con la pianificazione dell'itinerario
+### यात्रा की योजना बनाने में मदद करना
 
-Genera piani di più giorni con indicazioni stradali e informazioni su varie località, perfetti per le applicazioni di viaggio.
+कई दिनों की यात्रा की योजनाएं जनरेट करें. इनमें दिशा-निर्देश और अलग-अलग जगहों के बारे में जानकारी शामिल होती है. यह सुविधा, यात्रा से जुड़े ऐप्लिकेशन के लिए सबसे सही है.
 
 ### Python
 
@@ -364,102 +364,103 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Requisiti per l'utilizzo del servizio
+## सेवा के इस्तेमाल से जुड़ी ज़रूरी शर्तें
 
-Questa sezione descrive i requisiti per l'utilizzo del servizio Grounding con Google Maps.
+इस सेक्शन में, Google Maps से जानकारी लेने की सुविधा के इस्तेमाल से जुड़ी ज़रूरी शर्तों के बारे में बताया गया है.
 
-### Informa l'utente dell'utilizzo delle fonti di Google Maps
+### उपयोगकर्ता को Google Maps के सोर्स के इस्तेमाल के बारे में बताना
 
-Con ogni risultato basato su Google Maps, riceverai annotazioni delle fonti nei blocchi di contenuti del passaggio `model_output` che supportano ogni risposta. Vengono restituiti i seguenti metadati:
+Google Maps से जानकारी के आधार पर मिले हर नतीजे के साथ, आपको `model_output` चरण के कॉन्टेंट ब्लॉक पर सोर्स के एनोटेशन मिलेंगे. ये एनोटेशन, हर जवाब के साथ दिखते हैं. ये मेटाडेटा दिखाए जाते हैं:
 
-- URL di origine
-- nome
+- सोर्स यूआरएल
+- नाम
 
-Quando presenti i risultati di Grounding con Google Maps, devi specificare le fonti di Google Maps associate e informare gli utenti di quanto segue:
+Google Maps से जानकारी लेने की सुविधा से मिले नतीजे दिखाते समय, आपको Google Maps के सोर्स की जानकारी देनी होगी. साथ ही, अपने उपयोगकर्ताओं को यह जानकारी देनी होगी:
 
-- Le fonti di Google Maps devono seguire immediatamente i contenuti generati che supportano. Questi contenuti generati sono anche chiamati risultati basati su Google Maps.
-- Le fonti di Google Maps devono essere visualizzabili all'interno di un'interazione utente.
+- Google Maps के सोर्स, जनरेट किए गए उस कॉन्टेंट के तुरंत बाद दिखने चाहिए जिसके लिए सोर्स की जानकारी दी गई है. जनरेट किए गए इस कॉन्टेंट को, Google Maps से जानकारी के आधार पर मिला नतीजा भी कहा जाता है.
+- Google Maps के सोर्स, उपयोगकर्ता के एक इंटरैक्शन में दिखने चाहिए.
 
-### Visualizzare le fonti di Google Maps con i link di Google Maps
+### Google Maps के लिंक के साथ, Google Maps के सोर्स दिखाना
 
-Per ogni annotazione della fonte, è necessario generare un'anteprima del link che soddisfi i seguenti requisiti:
+सोर्स के हर एनोटेशन के लिए, लिंक का प्रीव्यू जनरेट करना ज़रूरी है. इसके लिए, इन ज़रूरी शर्तों का पालन करें:
 
-- Attribuisci ogni fonte a Google Maps seguendo le linee guida per l'attribuzione del testo
-  [di Google Maps](#maps-attribution-guidelines).
-- Visualizza il nome della fonte fornito nella risposta.
-- Collega alla fonte utilizzando l'`url` dell'annotazione.
+- Google Maps के टेक्स्ट
+  [एट्रिब्यूशन के दिशा-निर्देशों के मुताबिक, हर सोर्स को Google Maps से एट्रिब्यूट करें.](#maps-attribution-guidelines)
+- जवाब में दिए गए सोर्स का नाम दिखाएं.
+- एनोटेशन में मौजूद `url` का इस्तेमाल करके, सोर्स से लिंक करें.
 
-### Linee guida per l'attribuzione del testo di Google Maps
+### Google Maps के टेक्स्ट एट्रिब्यूशन के दिशा-निर्देश
 
-Quando attribuisci le fonti a Google Maps nel testo, segui queste linee guida:
+टेक्स्ट में सोर्स को Google Maps से एट्रिब्यूट करते समय, इन दिशा-निर्देशों का पालन करें:
 
-- Non modificare in alcun modo il testo Google Maps:
-  - Non modificare le maiuscole/minuscole di Google Maps.
-  - Non mandare a capo Google Maps su più righe.
-  - Non localizzare Google Maps in un'altra lingua.
-  - Impedisci ai browser di tradurre Google Maps utilizzando l'attributo HTML translate="no".
+- Google Maps के टेक्स्ट में किसी भी तरह का बदलाव न करें:
+  - Google Maps के केस में बदलाव न करें.
+  - Google Maps को कई लाइनों में न दिखाएं.
+  - Google Maps को किसी दूसरी भाषा में स्थानीय भाषा में अनुवाद न करें.
+  - HTML एट्रिब्यूट translate="no" का इस्तेमाल करके, ब्राउज़र को Google Maps का अनुवाद करने से रोकें.
 
-Per ulteriori informazioni su alcuni dei nostri fornitori di dati di Google Maps e sui relativi
-termini di licenza, consulta le [note legali di Google Maps e Google Earth](https://www.google.com/help/legalnotices_maps/?hl=it).
+Google Maps के कुछ डेटा देने वाले पार्टनर और उनकी
+लाइसेंस की शर्तों के बारे में ज़्यादा जानकारी के लिए, [Google Maps और Google Earth के कानूनी नोटिस देखें](https://www.google.com/help/legalnotices_maps/?hl=hi).
 
-## Best practice
+## सबसे सही तरीके
 
-- **Fornisci la località dell'utente:** per le risposte più pertinenti e personalizzate, includi sempre la `latitude` e la `longitude` nella configurazione dello strumento `google_maps` quando la località dell'utente è nota.
-- **Informa gli utenti finali:** informa chiaramente gli utenti finali che i dati di Google Maps vengono utilizzati per rispondere alle loro query, soprattutto quando lo strumento è abilitato.
-- **Disattiva quando non è necessario:** Grounding con Google Maps è disattivato per impostazione predefinita. Abilitalo (`"tools": [{"type": "google_maps"}]`) solo quando una query ha un
-  contesto geografico chiaro, per ottimizzare il rendimento e i costi.
+- **उपयोगकर्ता की जगह की जानकारी देना:** सबसे काम के और मनमुताबिक जवाब पाने के लिए, उपयोगकर्ता की जगह की जानकारी मिलने पर, हमेशा `google_maps` टूल के कॉन्फ़िगरेशन में `latitude` और `longitude` शामिल करें.
+- **आखिरी उपयोगकर्ताओं को जानकारी देना:** अपने आखिरी उपयोगकर्ताओं को साफ़ तौर पर बताएं कि उनकी क्वेरी के जवाब देने के लिए, Google Maps के डेटा का इस्तेमाल किया जा रहा है. खास तौर पर, तब जब टूल चालू हो.
+- **ज़रूरत न होने पर टॉगल बंद करना:** Google Maps से जानकारी लेने की सुविधा, डिफ़ॉल्ट रूप से बंद होती है. इसे सिर्फ़ तब चालू करें (`"tools": [{"type": "google_maps"}]`) जब किसी क्वेरी में
+  भौगोलिक कॉन्टेक्स्ट मौजूद हो. इससे परफ़ॉर्मेंस और लागत को ऑप्टिमाइज़ किया जा सकता है.
 
-## Limitazioni
+## सीमाएं
 
-- Al momento, Grounding con Google Maps supporta solo prompt e risposte in lingua inglese.
-- Lo strumento potrebbe non essere disponibile in tutte le regioni.
-- I risultati possono variare in base all'accuratezza della località e ai dati di Maps disponibili.
-- **Ambito geografico:** Grounding con Google Maps è disponibile a livello globale.
-- **Stato predefinito:** lo strumento Grounding con Google Maps è disattivato per impostazione predefinita.
-  Devi abilitarlo esplicitamente nelle richieste API.
+- फ़िलहाल, Google Maps से जानकारी लेने की सुविधा, सिर्फ़ अंग्रेज़ी भाषा में प्रॉम्प्ट और जवाब देती है.
+- ऐसा हो सकता है कि यह टूल सभी देशों/इलाकों में उपलब्ध न हो.
+- नतीजे, जगह की सटीक जानकारी और Maps के उपलब्ध डेटा के आधार पर अलग-अलग हो सकते हैं.
+- **भौगोलिक दायरा:** Google Maps से जानकारी लेने की सुविधा, दुनिया भर में उपलब्ध है.
+- **डिफ़ॉल्ट स्थिति:** Google Maps से जानकारी लेने की सुविधा, डिफ़ॉल्ट रूप से बंद होती है.
+  आपको एपीआई के अनुरोधों में इसे साफ़ तौर पर चालू करना होगा.
 
-## Prezzi e limiti di frequenza
+## कीमत और दर की सीमाएं
 
-I prezzi di Grounding con Google Maps variano in base alla generazione del modello:
+Google Maps से जानकारी लेने की सुविधा की कीमत, मॉडल जनरेशन के हिसाब से अलग-अलग होती है:
 
-- **Modelli Gemini 3:** il tuo progetto viene addebitato per ogni **query di ricerca** che il modello decide di eseguire. Un singolo **prompt di ricerca** (la tua richiesta API al modello) potrebbe comportare l'esecuzione di più query di ricerca da parte del modello per trovare le informazioni necessarie. Ognuna di queste query viene conteggiata come utilizzo fatturabile dello strumento.
-- **Modelli Gemini 2.5 e precedenti:** il tuo progetto viene addebitato per **prompt di ricerca**.
-  Una richiesta viene addebitata solo se il prompt restituisce correttamente almeno un risultato basato su Google Maps, indipendentemente dal numero di singole query di ricerca eseguite internamente dal modello per ottenere il risultato.
+- **Gemini 3 मॉडल:** आपके प्रोजेक्ट के लिए, **खोज क्वेरी** के हिसाब से बिल भेजा जाता है. यह क्वेरी, मॉडल के ज़रिए एक्ज़ीक्यूट की जाती है. ज़रूरी जानकारी ढूंढने के लिए, मॉडल एक **खोज प्रॉम्प्ट** (मॉडल को भेजा गया आपका एपीआई अनुरोध) के लिए, कई खोज क्वेरी एक्ज़ीक्यूट कर सकता है. इनमें से हर क्वेरी को, टूल के बिल किए जा सकने वाले इस्तेमाल के तौर पर गिना जाता है.
+- **Gemini 2.5 और इससे पुराने मॉडल:** आपके प्रोजेक्ट के लिए, **खोज प्रॉम्प्ट** के हिसाब से बिल भेजा जाता है.
+  किसी अनुरोध के लिए बिल सिर्फ़ तब भेजा जाता है, जब प्रॉम्प्ट से Google Maps से जानकारी के आधार पर कम से कम एक नतीजा मिलता है. भले ही, उस नतीजे को पाने के लिए मॉडल ने अंदरूनी तौर पर कितनी भी खोज क्वेरी की हों.
 
-Per informazioni dettagliate sui prezzi, consulta la [pagina dei prezzi dell'API Gemini](https://ai.google.dev/gemini-api/docs/pricing?hl=it).
+कीमत की ज़्यादा जानकारी के लिए, [Gemini API की कीमत वाला पेज](https://ai.google.dev/gemini-api/docs/pricing?hl=hi) देखें.
 
-## Modelli supportati
+## इस्तेमाल किए जा सकने वाले मॉडल
 
-I seguenti modelli supportano Grounding con Google Maps:
+Google Maps से जानकारी लेने की सुविधा, इन मॉडल के साथ काम करती है:
 
-| Modello | Grounding con Google Maps |
+| मॉडल | Google Maps से जानकारी लेने की सुविधा |
 | --- | --- |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=it) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=it) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=it) | ✔️ |
-| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=it) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=it) | ✔️ |
-| [Gemini 3 Flash Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=it) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=it) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=it) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=it) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=hi) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=hi) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=hi) | ✔️ |
+| [Gemini 3.1 Pro का प्रीव्यू](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=hi) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=hi) | ✔️ |
+| [Gemini 3 Flash का प्रीव्यू](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=hi) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=hi) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=hi) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=hi) | ✔️ |
 
-## Combinazioni di strumenti supportate
+## टूल के इस्तेमाल के लिए काम करने वाले कॉम्बिनेशन
 
-I modelli Gemini 3 supportano la combinazione di strumenti integrati (come Grounding con Google Maps) con strumenti personalizzati (chiamata di funzioni). Scopri di più nella pagina delle
-[combinazioni di strumenti](https://ai.google.dev/gemini-api/docs/tool-combination?hl=it).
+Gemini 3 मॉडल, बिल्ट-इन टूल (जैसे, Google Maps से जानकारी लेने की सुविधा) को कस्टम टूल (फ़ंक्शन कॉलिंग) के साथ मिलाकर इस्तेमाल करने की सुविधा देते हैं. ज़्यादा जानने के लिए,
+[टूल के कॉम्बिनेशन](https://ai.google.dev/gemini-api/docs/tool-combination?hl=hi) वाला पेज देखें.
 
-## Passaggi successivi
+## आगे क्या करना है
 
-- Scopri di più sugli altri [strumenti disponibili](https://ai.google.dev/gemini-api/docs/tools?hl=it).
-- Per scoprire di più sulle best practice per l'AI responsabile e sui filtri di sicurezza dell'API Gemini, consulta [la guida alle impostazioni di sicurezza](https://ai.google.dev/gemini-api/docs/safety-settings?hl=it).
+- अन्य [उपलब्ध टूल](https://ai.google.dev/gemini-api/docs/tools?hl=hi) के बारे में जानें.
+- ज़िम्मेदारी से एआई के इस्तेमाल के सबसे सही तरीकों और Gemini API के सुरक्षा
+  फ़िल्टर के बारे में ज़्यादा जानने के लिए, [सुरक्षा सेटिंग के बारे में गाइड देखें](https://ai.google.dev/gemini-api/docs/safety-settings?hl=hi).
 
-Invia feedback
+सुझाव भेजें
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Ultimo aggiornamento 2026-07-30 UTC.
+आखिरी बार 2026-09-12 (UTC) को अपडेट किया गया.
 
-Vuoi dirci altro?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-12 (UTC) को अपडेट किया गया."],[],[]]

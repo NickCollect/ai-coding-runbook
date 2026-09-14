@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/background-execution?hl=pt-BR
-fetched_at: 2026-09-07T05:49:23.547211+00:00
-title: "Execu\u00e7\u00e3o em segundo plano \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/background-execution?hl=vi
+fetched_at: 2026-09-14T05:39:05.201826+00:00
+title: "Ch\u1ea1y \u1edf ch\u1ebf \u0111\u1ed9 n\u1ec1n \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Envie comentários
+Gửi ý kiến phản hồi
 
-# Execução em segundo plano
+# Chạy ở chế độ nền
 
-Para tarefas de longa duração, como pesquisa detalhada, raciocínio complexo ou execuções de agentes de várias etapas, os tempos limite de conexão podem interromper as solicitações HTTP padrão (que normalmente são fechadas após 60 segundos). A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) oferece **execução em segundo plano** para executar essas tarefas de forma assíncrona.
+Đối với các tác vụ kéo dài như nghiên cứu chuyên sâu, lập luận phức tạp hoặc thực thi tác nhân nhiều bước, thời gian chờ kết nối có thể làm gián đoạn các yêu cầu HTTP tiêu chuẩn (thường đóng sau 60 giây). [API Tương tác](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) cung cấp **hoạt động thực thi trong nền** để chạy các tác vụ này một cách không đồng bộ.
 
-Para permitir que a interação seja executada até concluir a tarefa no servidor, defina `"background": true` ao criar a interação. A API retorna imediatamente um ID de interação, que os aplicativos cliente podem usar para pesquisar o status, transmitir o progresso ou se reconectar a um stream desconectado.
+Để cho phép hoạt động tương tác chạy cho đến khi hoàn tất tác vụ trên máy chủ, hãy đặt `"background": true` khi tạo hoạt động tương tác. API này sẽ trả về ngay lập tức một mã nhận dạng tương tác mà các ứng dụng khách có thể dùng để thăm dò trạng thái, tiến trình truyền phát hoặc kết nối lại với một luồng bị ngắt kết nối.
 
-A execução em segundo plano é compatível com modelos padrão do Gemini (como `gemini-3.8-flash` e `gemini-3.1-pro-preview`) e agentes gerenciados (como `antigravity-preview-05-2026`).
+Chế độ thực thi trong nền được hỗ trợ cho các mô hình Gemini tiêu chuẩn (chẳng hạn như `gemini-3.6-flash` và `gemini-3.1-pro-preview`) và Tác nhân được quản lý (chẳng hạn như `antigravity-preview-05-2026`).
 
-## Criar uma interação em segundo plano
+## Tạo một hoạt động tương tác ở chế độ nền
 
-Para iniciar uma interação em segundo plano, defina o parâmetro `background` como `true` ao criar o recurso.
+Để bắt đầu một hoạt động tương tác ở chế độ nền, hãy đặt tham số `background` thành `true` khi tạo tài nguyên.
 
 ### Python
 
@@ -36,7 +36,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.8-flash",
+    model="gemini-3.6-flash",
     input="Write a guide on space exploration.",
     background=True,
 )
@@ -51,45 +51,11 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.8-flash",
+    model: "gemini-3.6-flash",
     input: "Write a guide on space exploration.",
     background: true,
 });
 console.log(`Created background interaction ID: ${interaction.id}`);
-```
-
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.CreateModelInteractionEnvironment;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-import com.google.genai.gaos.models.operations.GetInteractionByIdRequest;
-import com.google.genai.gaos.models.operations.GetInteractionByIdResponse;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Execute this background task."))
-        .background(true)
-        .environment(CreateModelInteractionEnvironment.of("remote"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-String interactionId = interaction.id().orElse("");
-
-// Poll status using GetInteractionByIdRequest
-GetInteractionByIdResponse getResponse =
-    client.interactions.get(new GetInteractionByIdRequest(interactionId));
-Interaction polled = getResponse.interaction().get();
-System.out.println("Status: " + polled.status().orElse(null));
 ```
 
 ### REST
@@ -100,37 +66,37 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3.8-flash",
+    "model": "gemini-3.6-flash",
     "input": "Write a guide on space exploration.",
     "background": true
   }'
 ```
 
-## Como funciona a execução em segundo plano
+## Cách hoạt động của tính năng thực thi ở chế độ nền
 
-Quando você cria uma interação em segundo plano, a tarefa é executada de forma assíncrona no servidor. A interação passa por vários estados de execução:
+Khi bạn tạo một hoạt động tương tác ở chế độ nền, tác vụ sẽ chạy không đồng bộ trên máy chủ. Tương tác sẽ chuyển đổi qua nhiều trạng thái thực thi:
 
-- `in_progress`: o servidor está executando ativamente a interação (como executar código ou pesquisar).
-- `requires_action`: a interação foi pausada e está aguardando a entrada do cliente (como confirmar a execução de uma ferramenta ou responder a uma pergunta).
-- `completed`: a interação foi concluída e a saída está disponível.
-- `failed`: ocorreu um erro durante a execução (como falha na ferramenta ou limites de taxa).
-- `cancelled`: uma solicitação do cliente interrompeu a execução.
+- `in_progress`: Máy chủ đang tích cực thực hiện hoạt động tương tác (chẳng hạn như chạy mã hoặc nghiên cứu).
+- `requires_action`: Hoạt động tương tác đã tạm dừng và đang chờ thông tin đầu vào của ứng dụng (chẳng hạn như xác nhận việc thực thi một công cụ hoặc trả lời một câu hỏi).
+- `completed`: Tương tác hoàn tất thành công và có sẵn đầu ra.
+- `failed`: Đã xảy ra lỗi trong quá trình thực thi (chẳng hạn như lỗi công cụ hoặc giới hạn về tốc độ).
+- `cancelled`: Yêu cầu của ứng dụng khách đã dừng quá trình thực thi.
 
-### Casos de uso
+### Trường hợp sử dụng
 
-Use a execução em segundo plano para:
+Sử dụng chế độ thực thi trong nền cho:
 
-- **Execuções de agentes**:tarefas que exigem execução de código, navegação na Web ou orquestração de subagentes (como `antigravity-preview-05-2026`).
-- **Pesquisa detalhada**:execuções usando `deep-research-preview-04-2026` ou `deep-research-max-preview-04-2026`, que levam vários minutos.
-- **Raciocínio longo**:tarefas em que as etapas de pensamento do modelo excedem os limites de conexão HTTP padrão.
+- **Hoạt động của trợ lý ảo:** Các tác vụ yêu cầu thực thi mã, duyệt web hoặc điều phối trợ lý ảo phụ (chẳng hạn như `antigravity-preview-05-2026`).
+- **Deep Research:** Chạy bằng `deep-research-preview-04-2026` hoặc `deep-research-max-preview-04-2026` và mất vài phút.
+- **Lý luận dài:** Những tác vụ mà các bước suy nghĩ của mô hình vượt quá giới hạn kết nối HTTP tiêu chuẩn.
 
-## Recuperar resultados
+## Truy xuất kết quả
 
-Receba resultados de interação em segundo plano usando **polling** ou **streaming**.
+Nhận kết quả tương tác trong nền bằng cách sử dụng **polling** hoặc **streaming**.
 
-### Padrão de polling (sem bloqueio)
+### Mẫu thăm dò (không chặn)
 
-O polling verifica o status da interação periodicamente usando solicitações GET sem bloqueio até que ela atinja um estado terminal.
+Cơ chế thăm dò định kỳ kiểm tra trạng thái tương tác bằng cách sử dụng các yêu cầu GET không chặn cho đến khi đạt đến trạng thái kết thúc.
 
 ### Python
 
@@ -173,40 +139,6 @@ if (interaction.status === "completed") {
 }
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.CreateModelInteractionEnvironment;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-import com.google.genai.gaos.models.operations.GetInteractionByIdRequest;
-import com.google.genai.gaos.models.operations.GetInteractionByIdResponse;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Execute this background task."))
-        .background(true)
-        .environment(CreateModelInteractionEnvironment.of("remote"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-String interactionId = interaction.id().orElse("");
-
-// Poll status using GetInteractionByIdRequest
-GetInteractionByIdResponse getResponse =
-    client.interactions.get(new GetInteractionByIdRequest(interactionId));
-Interaction polled = getResponse.interaction().get();
-System.out.println("Status: " + polled.status().orElse(null));
-```
-
 ### REST
 
 ```
@@ -215,9 +147,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/YOUR_
   -H "Api-Revision: 2026-05-20"
 ```
 
-### Padrão de streaming
+### Mẫu truyền trực tuyến
 
-Se uma interrupção de rede desconectar um stream, o streaming poderá ser retomado do último evento recebido. Cada delta contém um `event_id` exclusivo no payload. A transmissão desse ID como `last_event_id` retoma o stream desse evento.
+Nếu mạng bị gián đoạn và ngắt kết nối một luồng, thì quá trình phát trực tuyến có thể tiếp tục từ sự kiện đã nhận gần đây nhất. Mỗi delta chứa một `event_id` duy nhất trong tải trọng của nó. Việc truyền mã nhận dạng này dưới dạng `last_event_id` sẽ tiếp tục phát trực tuyến từ sự kiện đó.
 
 ### Python
 
@@ -300,40 +232,6 @@ async function streamWithReconnect(id) {
 await streamWithReconnect(interactionId);
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.CreateModelInteractionEnvironment;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-import com.google.genai.gaos.models.operations.GetInteractionByIdRequest;
-import com.google.genai.gaos.models.operations.GetInteractionByIdResponse;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Execute this background task."))
-        .background(true)
-        .environment(CreateModelInteractionEnvironment.of("remote"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-String interactionId = interaction.id().orElse("");
-
-// Poll status using GetInteractionByIdRequest
-GetInteractionByIdResponse getResponse =
-    client.interactions.get(new GetInteractionByIdRequest(interactionId));
-Interaction polled = getResponse.interaction().get();
-System.out.println("Status: " + polled.status().orElse(null));
-```
-
 ### REST
 
 ```
@@ -342,14 +240,14 @@ curl -N -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/YO
   -H "Api-Revision: 2026-05-20"
 ```
 
-## Conversas multiturno
+## Cuộc trò chuyện nhiều lượt
 
-As interações subsequentes podem ser encadeadas a uma conversa em segundo plano usando `previous_interaction_id`, sujeitas a estas restrições:
+Các lượt tương tác tiếp theo có thể liên kết với một cuộc trò chuyện ở chế độ nền bằng cách sử dụng `previous_interaction_id`, tuỳ thuộc vào những ràng buộc sau:
 
-1. **Execuções ativas são bloqueadas**:o encadeamento de uma interação subsequente a uma com status `in_progress` retorna um erro `400 Bad Request`. Aguarde a interação atingir o estado `completed` antes de iniciar a próxima.
-2. **Parâmetro de ambiente para agentes gerenciados**:ao encadear interações para agentes gerenciados (como `antigravity-preview-05-2026`), as solicitações precisam incluir `previous_interaction_id` e `environment`.
+1. **Các lệnh thực thi đang hoạt động bị chặn:** Việc liên kết một lượt tương tác tiếp theo với một lượt tương tác có trạng thái `in_progress` sẽ trả về lỗi `400 Bad Request`. Chờ cho thao tác tương tác đạt đến trạng thái `completed` trước khi bắt đầu thao tác tiếp theo.
+2. **Tham số môi trường cho Tác nhân được quản lý:** Khi liên kết các lượt tương tác cho Tác nhân được quản lý (chẳng hạn như `antigravity-preview-05-2026`), các yêu cầu phải bao gồm cả `previous_interaction_id` và `environment`.
 
-Os exemplos a seguir mostram como encadear interações:
+Các ví dụ sau đây minh hoạ cách liên kết các hoạt động tương tác:
 
 ### Python
 
@@ -420,40 +318,6 @@ const interaction2 = await client.interactions.create({
 });
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.CreateModelInteractionEnvironment;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-import com.google.genai.gaos.models.operations.GetInteractionByIdRequest;
-import com.google.genai.gaos.models.operations.GetInteractionByIdResponse;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Execute this background task."))
-        .background(true)
-        .environment(CreateModelInteractionEnvironment.of("remote"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-String interactionId = interaction.id().orElse("");
-
-// Poll status using GetInteractionByIdRequest
-GetInteractionByIdResponse getResponse =
-    client.interactions.get(new GetInteractionByIdRequest(interactionId));
-Interaction polled = getResponse.interaction().get();
-System.out.println("Status: " + polled.status().orElse(null));
-```
-
 ### REST
 
 ```
@@ -471,12 +335,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Cancelamento e exclusão
+## Huỷ và xoá
 
-Controle as execuções em andamento e gerencie o armazenamento usando solicitações de cancelamento e exclusão:
+Kiểm soát các hoạt động đang chạy và quản lý bộ nhớ bằng cách sử dụng các yêu cầu huỷ và xoá:
 
-- **Cancelar (`POST /interactions/{id}/cancel`)** : interrompe a tarefa em execução. O status faz a transição para `cancelled`. As ações de limpeza no servidor podem causar um pequeno atraso antes que o status seja atualizado nas solicitações GET.
-- **Excluir (`DELETE /interactions/{id}`)** : remove os registros de interação do servidor. As solicitações GET subsequentes retornam um erro `404 Not Found`.
+- **Huỷ (`POST /interactions/{id}/cancel`):** Dừng việc cần làm đang chạy. Trạng thái chuyển thành `cancelled`. Các thao tác dọn dẹp trên máy chủ có thể gây ra một chút chậm trễ trước khi các bản cập nhật trạng thái trong yêu cầu GET xuất hiện.
+- **Xoá (`DELETE /interactions/{id}`):** Xoá các bản ghi tương tác khỏi máy chủ. Các yêu cầu GET tiếp theo sẽ trả về lỗi `404 Not Found`.
 
 ### Python
 
@@ -506,40 +370,6 @@ await client.interactions.cancel("YOUR_INTERACTION_ID");
 await client.interactions.delete("YOUR_INTERACTION_ID");
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.CreateModelInteractionEnvironment;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-import com.google.genai.gaos.models.operations.GetInteractionByIdRequest;
-import com.google.genai.gaos.models.operations.GetInteractionByIdResponse;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Execute this background task."))
-        .background(true)
-        .environment(CreateModelInteractionEnvironment.of("remote"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-String interactionId = interaction.id().orElse("");
-
-// Poll status using GetInteractionByIdRequest
-GetInteractionByIdResponse getResponse =
-    client.interactions.get(new GetInteractionByIdRequest(interactionId));
-Interaction polled = getResponse.interaction().get();
-System.out.println("Status: " + polled.status().orElse(null));
-```
-
 ### REST
 
 ```
@@ -554,18 +384,18 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/interactions/YO
   -H "Api-Revision: 2026-05-20"
 ```
 
-## Próximas etapas
+## Các bước tiếp theo
 
-- Leia a [visão geral da API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) para entender o gerenciamento de sessão e estado.
-- Consulte o guia [Interações de streaming](https://ai.google.dev/gemini-api/docs/streaming?hl=pt-br) para detalhes sobre atualizações de eventos em tempo real.
-- Confira o [guia de início rápido de agentes gerenciados](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=pt-br) para criar agentes com estado multiturno.
+- Đọc [Thông tin tổng quan về Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) để hiểu rõ về việc quản lý phiên và trạng thái.
+- Hãy xem hướng dẫn về [Tương tác trong quá trình phát trực tiếp](https://ai.google.dev/gemini-api/docs/streaming?hl=vi) để biết thông tin chi tiết về thông tin cập nhật sự kiện theo thời gian thực.
+- Khám phá [Hướng dẫn nhanh về tác nhân được quản lý](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=vi) để tạo tác nhân có trạng thái nhiều lượt tương tác.
 
-Envie comentários
+Gửi ý kiến phản hồi
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Última atualização 2026-09-04 UTC.
+Cập nhật lần gần đây nhất: 2026-09-12 UTC.
 
-Quer enviar seu feedback?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-04 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-12 UTC."],[],[]]

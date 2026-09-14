@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/priority-inference?hl=de
-fetched_at: 2026-09-07T05:46:27.410764+00:00
-title: "Priorit\u00e4tsinferenz \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/priority-inference?hl=ar
+fetched_at: 2026-09-14T05:40:57.490001+00:00
+title: "\u0627\u0644\u0627\u0633\u062a\u062f\u0644\u0627\u0644 \u062d\u0633\u0628 \u0627\u0644\u0623\u0648\u0644\u0648\u064a\u0629 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Feedback geben
+إرسال ملاحظات
 
-# Prioritätsinferenz
+# الاستدلال حسب الأولوية
 
-Beschreibung: Informationen zur Optimierung der Latenz mit der Priority-Inferenzstufe in der Interactions API
+الوصف: تعرَّف على كيفية تحسين وقت الاستجابة باستخدام مستوى الاستنتاج "الأولوية" في Interactions API
 
-Die Gemini Priority API ist eine Premium-Inferenzstufe, die für geschäftskritische Arbeitslasten entwickelt wurde, die eine geringere Latenz und höchste Zuverlässigkeit erfordern. Sie ist zu einem Premiumpreis verfügbar. Der Traffic der Priority-Stufe hat eine höhere Priorität als der Traffic der Standard-API und der Flex-Stufe.
+‫Gemini Priority API هو مستوى استنتاج متميّز مصمّم لأحمال العمل الأساسية للمؤسسة التي تتطلّب وقت استجابة منخفضًا وأعلى مستوى من الموثوقية بسعر متميّز. تُمنح الأولوية لحركة المرور في مستوى "الأولوية" على حركة المرور في واجهة برمجة التطبيقات العادية ومستوى "المرونة".
 
-Die Priority-Inferenz ist für alle Endpunkte der Interactions API verfügbar.
+يتوفّر الاستنتاج في مستوى "الأولوية" في جميع نقاط نهاية Interactions API.
 
-## Priority verwenden
+## كيفية استخدام مستوى "الأولوية"
 
-Wenn Sie die Priority-Stufe verwenden möchten, legen Sie das Feld `service_tier` in Ihrer Anfrage auf `priority` fest. Wenn das Feld ausgelassen wird, ist die Standardstufe die Standardeinstellung.
+لاستخدام مستوى "الأولوية"، اضبط حقل `service_tier` في طلبك على `priority`. المستوى التلقائي هو "عادي" إذا تم حذف الحقل.
 
 ### Python
 
@@ -75,87 +75,84 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Funktionsweise der Priority-Inferenz
+## آلية عمل الاستنتاج في مستوى "الأولوية"
 
-Bei der Priority-Inferenz werden Anfragen an Rechenwarteschlangen mit hoher Kritikalität weitergeleitet, was eine vorhersehbare, schnelle Leistung für nutzerorientierte Anwendungen ermöglicht. Der primäre Mechanismus ist ein reibungsloser serverseitiger Downgrade auf die Standardverarbeitung für Traffic, der dynamische Limits überschreitet. So wird die Anwendungsstabilität gewährleistet, anstatt die Anfrage abzulehnen.
+يوجّه الاستنتاج في مستوى "الأولوية" الطلبات إلى قوائم انتظار الحوسبة عالية الأهمية، ما يوفّر أداءً سريعًا ويمكن التنبؤ به للتطبيقات التي يتفاعل معها المستخدمون. آليته الأساسية هي الرجوع السلس من جهة الخادم إلى المعالجة العادية لحركة المرور التي تتجاوز الحدود الديناميكية، ما يضمن استقرار التطبيق بدلاً من تعذُّر معالجة الطلب.
 
-| Funktion | Priorität | Standard | Flex | Batch |
+| الميزة | الأولوية | خطة "الرزمة العادية" | التعبير | مجمّعة |
 | --- | --- | --- | --- | --- |
-| **Preise** | 75–100% mehr als Standard | Standardpreis | 50% Rabatt | 50% Rabatt |
-| **Latenz** | Sekunden | Sekunden bis Minuten | Minuten (Ziel: 1–15 Minuten) | Bis zu 24 Stunden |
-| **Zuverlässigkeit** | Hoch (nicht absetzbar) | Hoch / Mittel bis hoch | Best-Effort-Ansatz (absetzbar) | Hoch (für Durchsatz) |
-| **Schnittstelle** | Synchron | Synchron | Synchron | Asynchron |
+| **الأسعار** | أعلى بنسبة %75 إلى %100 من الخطة العادية | السعر الكامل | خصم% 50 | خصم% 50 |
+| **وقت الاستجابة** | ثوانٍ | من ثوانٍ إلى دقائق | دقائق (الهدف من دقيقة واحدة إلى 15 دقيقة) | ما يصل إلى 24 ساعة |
+| **الموثوقية** | عالية (لا يمكن تقليلها) | عالية / متوسطة إلى عالية | أفضل جهد (يمكن تقليلها) | عالية (للإنتاجية) |
+| **الواجهة** | متزامن | متزامن | متزامن | غير متزامن |
 
-### Hauptvorteile
+### المزايا الرئيسية
 
-- **Geringe Latenz**: Entwickelt für Reaktionszeiten im Sekundenbereich für interaktive,
-  nutzerorientierte KI-Tools.
-- **Hohe Zuverlässigkeit**: Der Traffic wird mit höchster Kritikalität behandelt und ist
-  nicht absetzbar.
-- **Graceful Degradation**: Trafficspitzen, die dynamische Limits überschreiten, werden
-  automatisch auf die Standardstufe für die Verarbeitung herabgestuft, anstatt abzulehnen.
-  So werden Dienstausfälle verhindert.
-- **Geringe Reibung**: Verwendet dieselbe synchrone `create` Methode wie die
-  Standard- und Flex-Stufen.
+- **وقت استجابة منخفض**: مصمّم لأوقات الاستجابة بالثواني لأدوات الذكاء الاصطناعي التفاعلية التي يتفاعل معها المستخدمون.
+- **موثوقية عالية**: يتم التعامل مع حركة المرور بأعلى مستوى من الأهمية ولا يمكن
+  تقليلها على الإطلاق.
+- **التكيّف مع الإصدارات الأقدم**: يتم تلقائيًا الرجوع إلى مستوى "الرزمة العادية" لمعالجة الارتفاعات المفاجئة في حركة المرور التي تتجاوز الحدود الديناميكية بدلاً من تعذُّر معالجتها، ما يمنع انقطاع الخدمة.
+- **الحدّ من المش1اكل**: يستخدم الطريقة المتزامنة نفسها `create` التي يستخدمها مستوى "
+  الرزمة العادية" ومستوى "المرونة".
 
-### Anwendungsfälle
+### حالات الاستخدام
 
-Die Priority-Verarbeitung ist ideal für geschäftskritische Arbeitsabläufe, bei denen Leistung und Zuverlässigkeit von größter Bedeutung sind.
+تكون المعالجة في مستوى "الأولوية" مثالية لسير العمل الأساسي للمؤسسة حيث يكون الأداء والموثوقية في غاية الأهمية.
 
-- **Interaktive KI-Anwendungen**: Kundenservice-Chatbots und Copiloten, bei denen
-  Nutzer einen Aufpreis zahlen und schnelle, konsistente Antworten erwarten.
-- **Entscheidungsmaschinen in Echtzeit**: Systeme, die hochzuverlässige Ergebnisse mit geringer Latenz
-  erfordern, z. B. Live-Ticket-Triage oder Betrugserkennung.
-- **Premium-Kundenfunktionen**: Entwickler, die höhere Service
-  Level Objectives (SLOs) für zahlende Kunden garantieren müssen.
+- **تطبيقات الذكاء الاصطناعي التفاعلية**: روبوتات الدردشة ومساعدو خدمة العملاء حيث
+  يدفع المستخدمون سعرًا متميّزًا ويتوقّعون استجابات سريعة ومتّسقة.
+- **محركات اتخاذ القرارات في الوقت الفعلي**: الأنظمة التي تتطلّب نتائج موثوقة جدًا ومنخفضة وقت الاستجابة
+  ، مثل فرز التذاكر المباشر أو رصد الاحتيال.
+- **ميزات العملاء المتميّزين**: المطوّرون الذين يحتاجون إلى ضمان أهداف أعلى على مستوى الخدمة (SLOs) للعملاء الذين يدفعون.
 
-### Ratenlimits
+### حدود معدّل الاستخدام
 
-Für die Priority-Nutzung gelten eigene Ratenlimits, auch wenn die Nutzung auf die [allgemeinen Ratenlimits für interaktiven Traffic angerechnet wird](https://aistudio.google.com/rate-limit?hl=de). Die Standardratenlimits für die Priority-Inferenz sind **0,3-mal das Standardratenlimit für Modell / Stufe**.
+تفرض حدود معدّل الاستخدام الخاصة بها على الاستهلاك في مستوى "الأولوية"، على الرغم من احتساب الاستهلاك
+ضمن [حدود معدّل الاستخدام الإجمالية لحركة المرور التفاعلية](https://aistudio.google.com/rate-limit?hl=ar). حدود معدّل الاستخدام التلقائية للاستنتاج في مستوى "الأولوية" هي **0.3 ضعف حدّ معدّل الاستخدام العادي للطراز / المستوى**
 
-### Graceful-Downgrade-Logik
+### تسلسل منطقي للرجوع السلس
 
-Wenn die Priority-Limits aufgrund von Überlastung überschritten werden, werden Anfragen, die das Limit überschreiten, **automatisch und reibungslos** auf die Standardverarbeitung herabgestuft, anstatt mit einem 503- oder 429-Fehler abzulehnen. Herabgestufte Anfragen werden zum Standardpreis und nicht zum Premiumpreis für Priority abgerechnet.
+إذا تم تجاوز حدود مستوى "الأولوية" بسبب الازدحام، يتم **تلقائيًا وبشكل سلس** الرجوع إلى المعالجة العادية للطلبات التي تتجاوز الحدّ بدلاً من تعذُّر معالجتها مع ظهور الخطأ 503 أو 429. تتم فوترة الطلبات التي تم الرجوع إلى معالجتها بالسعر العادي، وليس بالسعر المتميّز لمستوى "الأولوية".
 
-### Verantwortung des Clients
+### مسؤولية العميل
 
-- **Monitoring der Antwort**: Entwickler sollten den `x-gemini-service-tier`
-  Header in der API-Antwort beobachten, um festzustellen, ob Anfragen häufig auf
-  `standard` herabgestuft werden.
-- **Wiederholungen**: Clients müssen eine Logik für Wiederholungen/exponentielle Backoffs für
-  Standardfehler wie `DEADLINE_EXCEEDED` implementieren.
+- **مراقبة الردود**: على المطوّرين مراقبة `x-gemini-service-tier`
+  العنوان في ردّ واجهة برمجة التطبيقات لرصد ما إذا كان يتم الرجوع بشكل متكرّر إلى
+  `standard` لمعالجة الطلبات.
+- **إعادة المحاولات**: على العملاء تنفيذ تسلسل منطقي لإعادة المحاولة/الرجوع الأسي لـ
+  الأخطاء العادية، مثل `DEADLINE_EXCEEDED`.
 
-## Preise
+## الأسعار
 
-Die Priority-Inferenz kostet 75–100% mehr als die [Standard-API](https://ai.google.dev/gemini-api/docs/pricing?hl=de) und wird pro Token abgerechnet.
+يتم تسعير الاستنتاج في مستوى "الأولوية" بنسبة %75 إلى %100 أعلى من [واجهة برمجة التطبيقات العادية](https://ai.google.dev/gemini-api/docs/pricing?hl=ar) ويتم تحصيل الرسوم لكل رمز مميّز.
 
-## Unterstützte Modelle
+## الطُرز المتوافقة
 
-Die folgenden Modelle unterstützen die Priority-Inferenz:
+تسمح الطُرز التالية بالاستنتاج في مستوى "الأولوية":
 
-| Modell | Priority-Inferenz |
+| الطراز | الاستنتاج في مستوى "الأولوية" |
 | --- | --- |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=de) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=de) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=de) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=de) | ✔️ |
-| [Gemini 3.1 Pro (Vorschau)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=de) | ✔️ |
-| [Gemini 3 Flash (Vorschau)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=de) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=de) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=de) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=de) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=ar) | ‫✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=ar) | ‫✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ar) | ‫✔️ |
+| [‫Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ar) | ‫✔️ |
+| [‫Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ar) | ‫✔️ |
+| [‫Gemini 3 Flash Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ar) | ‫✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ar) | ‫✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ar) | ‫✔️ |
+| [‫Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ar) | ‫✔️ |
 
-## Nächste Schritte
+## الخطوات التالية
 
-- [Flex-Inferenz](https://ai.google.dev/gemini-api/docs/flex-inference?hl=de) zur Kostensenkung.
-- [Tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=de): Informationen zu Tokens.
+- [الاستنتاج المرن](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ar) لتقليل التكلفة
+- [الرموز المميّزة](https://ai.google.dev/gemini-api/docs/tokens?hl=ar): التعرّف على الرموز المميّزة
 
-Feedback geben
+إرسال ملاحظات
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Zuletzt aktualisiert: 2026-07-30 (UTC).
+تاريخ التعديل الأخير: 2026-09-12 (حسب التوقيت العالمي المتفَّق عليه)
 
-Haben Sie Feedback für uns?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-30 (UTC)."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-12 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

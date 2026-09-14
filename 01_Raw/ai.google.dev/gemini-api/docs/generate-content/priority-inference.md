@@ -1,33 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/priority-inference?hl=zh-TW
-fetched_at: 2026-09-07T05:43:18.919655+00:00
-title: "\u512a\u5148\u9806\u5e8f\u63a8\u65b7 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/priority-inference?hl=tr
+fetched_at: 2026-09-14T05:37:12.993183+00:00
+title: "\u00d6ncelik \u00e7\u0131kar\u0131m\u0131 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs/generate-content?hl=tr)
 
-提供意見
+Geri bildirim gönderin
 
-# 優先順序推斷
+# Öncelik çıkarımı
 
-說明：瞭解如何透過「優先」推論層級最佳化延遲
+Açıklama: Priority çıkarım katmanıyla gecikmeyi nasıl optimize edeceğinizi öğrenin
 
-Gemini Priority API 是進階推論層級，專為需要低延遲和最高可靠性的重要業務工作負載設計，價格較高。系統會優先處理 Priority 層級的流量，再處理 Standard API 和 Flex 層級的流量。
+Gemini Priority API, daha düşük gecikme süresi ve en yüksek güvenilirlik gerektiren, işletme açısından kritik iş yükleri için tasarlanmış premium bir çıkarım katmanıdır. Bu katman, premium fiyat noktasında sunulur. Öncelikli katman trafiğine, standart API ve esnek katman trafiğine göre öncelik verilir.
 
-[第 2 層和第 3 層](https://ai.google.dev/gemini-api/docs/billing?hl=zh-tw#about-billing)使用者可透過 GenerateContent API 和 Interactions API 端點，使用優先順序推論功能。
+Öncelikli çıkarım, GenerateContent API ve Interactions API uç noktalarında [2. ve 3. katman](https://ai.google.dev/gemini-api/docs/billing?hl=tr#about-billing) kullanıcıları tarafından kullanılabilir.
 
-## 如何使用優先檔案區
+## Öncelik özelliğini kullanma
 
-如要使用「優先」層級，請將要求主體中的 `service_tier` 欄位設為 `priority`。如未填寫此欄位，則預設級別為標準。
+Öncelik katmanını kullanmak için istek gövdesindeki `service_tier` alanını `priority` olarak ayarlayın. Alan atlanırsa varsayılan katman standarttır.
 
 ### Python
 
@@ -138,82 +138,82 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
 }'
 ```
 
-## 優先推論的運作方式
+## Öncelikli çıkarımın işleyiş şekli
 
-優先順序推論會將要求轉送至高重要性的運算佇列，為面向使用者的應用程式提供可預測的快速效能。主要機制是將超過動態限制的流量，從伺服器端順暢降級為標準處理程序，確保應用程式穩定性，而非讓要求失敗。
+Öncelikli çıkarım, istekleri yüksek önem dereceli bilgi işlem kuyruklarına yönlendirerek kullanıcıya yönelik uygulamalar için tahmin edilebilir ve hızlı performans sunar. Birincil mekanizması, dinamik sınırları aşan trafik için sunucu tarafında standart işleme sorunsuz bir şekilde geçiş yaparak isteği başarısız kılmak yerine uygulama kararlılığını sağlamaktır.
 
-| 功能 | 優先順序 | 標準 | Flex | 批次 |
+| Özellik | Öncelik | Standart | Yaratıcılığınızı | Toplu |
 | --- | --- | --- | --- | --- |
-| **定價** | 比 Standard 方案多 75% 至 100% | 原價 | 50% 折扣 | 50% 折扣 |
-| **延遲** | 秒 | 秒至分鐘 | 分鐘 (目標：1 到 15 分鐘) | 長達 24 小時 |
-| **穩定性** | 高 (不會脫落) | 高 / 中高 | 盡可能提供最佳服務 (可卸載) | 高 (處理量) |
-| **介面** | 同步 | 同步 | 同步 | 非同步 |
+| **Fiyatlandırma** | Standart'tan% 75-100 daha fazla | Tam fiyat | %50 indirim | %50 indirim |
+| **Gecikme** | Saniye | Saniyeden dakikaya | Dakika (1-15 dakika hedef) | En fazla 24 saat |
+| **Güvenilirlik** | Yüksek (tüy dökmeyen) | Yüksek / Biraz yüksek | En iyi sonuç (Sheddable) | Yüksek (işleme hızı için) |
+| **Arayüz** | Eşzamanlı | Eşzamanlı | Eşzamanlı | Eşzamansız |
 
-### 主要優點
+### Temel avantajlar
 
-- **低延遲**：專為互動式 AI 工具設計，可直接與使用者互動，並在幾秒內回應。
-- **高可靠性**：流量會以最高重要性處理，且嚴格來說不可捨棄。
-- **正常降級**：如果流量尖峰超過動態限制，系統會自動將流量降級為標準層級，以利處理，避免服務中斷。
-- **低摩擦**：使用與標準和 Flex 層級相同的同步 `generateContent` 方法。
+- **Düşük gecikme**: Etkileşimli, kullanıcıya yönelik yapay zeka araçları için saniyelik yanıt süreleri sunmak üzere tasarlanmıştır.
+- **Yüksek güvenilirlik**: Trafik en yüksek öncelik seviyesinde ele alınır ve kesinlikle bırakılmaz.
+- **Kontrollü azalma**: Dinamik sınırları aşan trafik artışları, başarısız olmak yerine işleme için otomatik olarak Standart katmanına düşürülür ve hizmet kesintileri önlenir.
+- **Kolay**: Standart ve Flex katmanlarıyla aynı senkron `generateContent` yöntemi kullanılır.
 
-### 用途
+### Kullanım alanları
 
-優先處理非常適合用於效能和可靠性至關重要的重要業務工作流程。
+Öncelikli işleme, performans ve güvenilirliğin en önemli olduğu, işletme açısından kritik iş akışları için idealdir.
 
-- **互動式 AI 應用程式**：客戶服務聊天機器人和副手，使用者會支付額外費用，並期望獲得快速且一致的回覆。
-- **即時決策引擎**：需要高度可靠的低延遲結果的系統，例如即時票證分類或詐欺偵測。
-- **進階客戶功能**：開發人員需要為付費客戶確保更高的服務等級目標 (SLO)。
+- **Etkileşimli yapay zeka uygulamaları**: Kullanıcıların premium ödeme yaptığı ve hızlı, tutarlı yanıtlar beklediği müşteri hizmetleri chatbot'ları ve yardımcı pilotlar.
+- **Anlık karar motorları**: Canlı bilet önceliklendirme veya sahtekarlık tespiti gibi yüksek güvenilirlik ve düşük gecikme süresi gerektiren sistemler.
+- **Premium müşteri özellikleri**: Ücretli müşteriler için daha yüksek hizmet düzeyi hedefleri (SLO'lar) garanti etmesi gereken geliştiriciler.
 
-### 頻率限制
+### Hız sınırları
 
-即使優先取用量會計入[整體互動式流量速率限制](https://aistudio.google.com/rate-limit?hl=zh-tw)，仍有自己的速率限制。Priority 推論的預設速率限制為**模型 / 層級的標準速率限制的 0.3 倍**
+Öncelikli tüketim, [genel etkileşimli trafik hızı sınırlarına](https://aistudio.google.com/rate-limit?hl=tr) dahil edilse de kendi hız sınırlarına sahiptir. Öncelikli çıkarım için varsayılan sıklık sınırları **Model / Katman için standart sıklık sınırının 0,3 katıdır**.
 
-### 優雅降級邏輯
+### Kontrollü sürüm düşürme mantığı
 
-如果因壅塞而超出優先順序限制，系統會**自動且正常**將溢出的要求降級為標準處理，而不是因 503 或 429 錯誤而失敗。降級的要求會以標準費率計費，而非優先級進階費率。
+Yoğunluk nedeniyle öncelik sınırları aşılırsa taşma istekleri, 503 veya 429 hatasıyla başarısız olmak yerine **otomatik olarak ve sorunsuz bir şekilde** standart işleme düşürülür. Düşürülmüş istekler, öncelikli premium oran üzerinden değil, standart oran üzerinden faturalandırılır.
 
-### 客戶責任
+### Müşterinin sorumluluğu
 
-- **回應監控**：開發人員應監控 API 回應中的 `x-gemini-service-tier`
-  標頭，偵測要求是否經常降級為 `standard`。
-- **重試**：用戶端必須為標準錯誤 (例如 `DEADLINE_EXCEEDED`) 實作重試邏輯/指數輪詢。
+- **Yanıt izleme**: Geliştiriciler, isteklerin sık sık `x-gemini-service-tier`
+  sürümüne düşürülüp düşürülmediğini tespit etmek için API yanıtındaki `standard` başlığını izlemelidir.
+- **Yeniden denemeler**: İstemciler, `DEADLINE_EXCEEDED` gibi standart hatalar için yeniden deneme mantığı/eksponansiyel geri yükleme uygulamalıdır.
 
-## 定價
+## Fiyatlandırma
 
-優先推論的價格比[標準 API](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw) 高出 75% 至 100%，並以每詞元計費。
+Öncelikli çıkarım, [standart API](https://ai.google.dev/gemini-api/docs/pricing?hl=tr)'den% 75-100 daha yüksek bir fiyatla sunulur ve jeton başına faturalandırılır.
 
-## 支援的模型
+## Desteklenen modeller
 
-下列模型支援優先推論：
+Aşağıdaki modellerde öncelikli çıkarım desteklenir:
 
-| 模型 | 優先順序推斷 |
+| Model | Öncelik çıkarımı |
 | --- | --- |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=zh-tw) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-tw) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=zh-tw) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-tw) | ✔️ |
-| [Gemini 3.1 Pro 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-tw) | ✔️ |
-| [Gemini 3 Flash 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-tw) | ✔️ |
-| [Gemini 3 Pro Image 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-tw) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=tr) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=tr) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=tr) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=tr) | ✔️ |
+| [Gemini 3.1 Pro Önizlemesi](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=tr) | ✔️ |
+| [Gemini 3 Flash Önizlemesi](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=tr) | ✔️ |
+| [Gemini 3 Pro ile Görüntü Önizleme](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=tr) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=tr) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=tr) | ✔️ |
+| [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=tr) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=tr) | ✔️ |
 
-## 後續步驟
+## Sırada ne var?
 
-請參閱其他 [Gemini 推論和最佳化](https://ai.google.dev/gemini-api/docs/optimization?hl=zh-tw)選項：
+Gemini'ın diğer [çıkarım ve optimizasyon](https://ai.google.dev/gemini-api/docs/optimization?hl=tr) seçenekleri hakkında bilgi edinin:
 
-- [彈性推論](https://ai.google.dev/gemini-api/docs/flex-inference?hl=zh-tw)，可降低 50% 的成本。
-- [批次 API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-tw)：在 24 小時內進行非同步處理。
-- [脈絡快取](https://ai.google.dev/gemini-api/docs/caching?hl=zh-tw)功能，可降低輸入權杖費用。
+- %50 maliyet tasarrufu için [Flex çıkarımı](https://ai.google.dev/gemini-api/docs/flex-inference?hl=tr).
+- 24 saat içinde eşzamansız işleme için [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr).
+- Giriş jetonu maliyetlerini azaltmak için [bağlam önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr).
 
-提供意見
+Geri bildirim gönderin
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-上次更新時間：2026-07-30 (世界標準時間)。
+Son güncelleme tarihi: 2026-09-12 UTC.
 
-想進一步說明嗎？
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-30 (世界標準時間)。"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-12 UTC."],[],[]]

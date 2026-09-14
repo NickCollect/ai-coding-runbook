@@ -1,49 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash
-fetched_at: 2026-09-07T05:39:09.686689+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=zh-TW
+fetched_at: 2026-09-14T05:53:25.832785+00:00
 title: "Gemini 3.7 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash is now available. [Try it out](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-- [Home](https://ai.google.dev/)
-- [Gemini API](https://ai.google.dev/gemini-api)
-- [Docs](https://ai.google.dev/gemini-api/docs)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Send feedback
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+
+提供意見
 
 # Gemini 3.7 Flash
 
-Gemini 3.7 Flash is the next iteration in the Gemini 3 series of highly-capable,
-natively multimodal, reasoning models.
+Gemini 3.7 Flash 是 Gemini 3 系列的下一個迭代版本，具備強大功能，且原生支援多模態推理模型。
 
-[Try in Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.7-flash)
+[在 Google AI Studio 中試用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.7-flash&hl=zh-tw)
 
-## Documentation
+## 說明文件
 
-Visit the
-[Latest model](https://ai.google.dev/gemini-api/docs/latest-model)
-page for full coverage of features and capabilities.
+如要全面瞭解功能和用途，請前往「[最新機型](https://ai.google.dev/gemini-api/docs/latest-model?hl=zh-tw)」頁面。
 
 ## gemini-3.7-flash
 
-| Property | Description |
+| 屬性 | 說明 |
 | --- | --- |
-| id\_cardModel code | `gemini-3.7-flash` |
-| saveSupported data types | **Inputs**  Text, Image, Video, Audio, and PDF  **Output**  Text |
-| token\_autoToken limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens) | **Input token limit**  1,048,576  **Output token limit**  65,536 |
-| handymanCapabilities | **[Audio generation](https://ai.google.dev/gemini-api/docs/speech-generation)**  Not supported  **[Caching](https://ai.google.dev/gemini-api/docs/caching)**  Supported  **[Code execution](https://ai.google.dev/gemini-api/docs/code-execution)**  Supported  **[Computer use](https://ai.google.dev/gemini-api/docs/computer-use)**  Supported (Preview)  **[File search](https://ai.google.dev/gemini-api/docs/file-search)**  Supported  **[Function calling](https://ai.google.dev/gemini-api/docs/function-calling)**  Supported  **[Grounding with Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding)**  Supported  **[Image generation](https://ai.google.dev/gemini-api/docs/image-generation)**  Not supported  **[Live API](https://ai.google.dev/gemini-api/docs/live-api)**  Not supported  **[Search grounding](https://ai.google.dev/gemini-api/docs/google-search)**  Supported  **[Structured outputs](https://ai.google.dev/gemini-api/docs/structured-output)**  Supported  **[Thinking](https://ai.google.dev/gemini-api/docs/thinking)**  Supported (low, medium, high)  Note: `minimal` is not supported and returns an error.  **[URL context](https://ai.google.dev/gemini-api/docs/url-context)**  Supported |
-| speedConsumption options | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api)**  Supported  **[Flex inference](https://ai.google.dev/gemini-api/docs/flex-inference)**  Supported  **[Priority inference](https://ai.google.dev/gemini-api/docs/priority-inference)**  Supported |
-| 123Versions | Read the [model version patterns](https://ai.google.dev/gemini-api/docs/models/gemini#model-versions) for more details.  - Stable: `gemini-3.7-flash` |
-| calendar\_monthLatest update | August 2026 |
-| id\_cardModel card | [Model card](https://deepmind.google/models/model-cards/gemini-3-7-flash/) |
+| id\_card 模型代碼 | `gemini-3.7-flash` |
+| save支援的資料類型 | **輸入裝置**  文字、圖片、影片、音訊和 PDF  **輸出內容**  文字 |
+| token\_auto 代幣限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw) | **輸入權杖限制**  1,048,576  **輸出詞元限制**  65,536 |
+| handyman功能 | **[生成音訊](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-tw)**  不支援  **[快取](https://ai.google.dev/gemini-api/docs/caching?hl=zh-tw)**  支援  **[執行程式碼](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)**  支援  **[電腦使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-tw)**  支援 (預覽版)  **[檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw)**  支援  **[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)**  支援  **[利用 Google 地圖建立基準](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-tw)**  支援  **[圖像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw)**  不支援  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-tw)**  不支援  **[以搜尋為基準](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)**  支援  **[結構化輸出內容](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-tw)**  支援  **[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-tw)**  支援 (低、中、高)  注意：系統不支援 `minimal`，且會傳回錯誤。  **[網址內容](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw)**  支援 |
+| speed計費方案 | **[批次 API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-tw)**  支援  **[Flex 推論](https://ai.google.dev/gemini-api/docs/flex-inference?hl=zh-tw)**  支援  **[優先推論](https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-tw)**  支援 |
+| 123 個版本 | 詳閱[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw#model-versions)。  - 穩定：`gemini-3.7-flash` |
+| calendar\_month最新更新 | 2026 年 8 月 |
+| id\_card模型資訊卡 | [模型資訊卡](https://deepmind.google/models/model-cards/gemini-3-7-flash/?hl=zh-tw) |
 
-Send feedback
+提供意見
 
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Last updated 2026-08-13 UTC.
+上次更新時間：2026-09-11 (世界標準時間)。
 
-Need to tell us more?
+想進一步說明嗎？
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-08-13 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-11 (世界標準時間)。"],[],[]]

@@ -1,40 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=id
-fetched_at: 2026-09-07T05:36:31.437006+00:00
-title: "Membuat gambar menggunakan Imagen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=he
+fetched_at: 2026-09-14T05:39:32.146458+00:00
+title: "\u05d9\u05e6\u05d9\u05e8\u05ea \u05ea\u05de\u05d5\u05e0\u05d5\u05ea \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea Imagen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Kirim masukan
+שליחת משוב
 
-# Membuat gambar menggunakan Imagen
+# יצירת תמונות באמצעות Imagen
 
-Imagen adalah model pembuatan gambar fidelitas tinggi Google, yang mampu menghasilkan gambar realistis dan berkualitas tinggi dari perintah teks. Semua gambar yang dihasilkan menyertakan watermark SynthID. Untuk mempelajari lebih lanjut varian model Imagen yang tersedia, lihat bagian [Versi model](#model-versions).
+‫Imagen הוא מודל של Google ליצירת תמונות באיכות גבוהה, שיכול ליצור תמונות מציאותיות ואיכותיות מהנחיות טקסט. כל התמונות שנוצרו כוללות סימן מים של SynthID. מידע נוסף על הווריאציות הזמינות של מודל Imagen זמין בקטע [גרסאות המודל](#model-versions).
 
-## Migrasi ke Nano Banana
+## מעבר ל-Nano Banana
 
-Model Imagen tidak digunakan lagi dan akan dihentikan pada 17 Agustus 2026. Sebaiknya Anda bermigrasi ke Nano Banana untuk memenuhi kebutuhan pembuatan gambar Anda.
+הוצאנו משימוש את מודלי Imagen, והם יושבתו ב-17 באוגוסט 2026. מומלץ לעבור ל-Nano Banana כדי ליצור תמונות.
 
-Migrasi melibatkan perubahan berikut:
+ההעברה כוללת את השינויים הבאים:
 
-- **Nama model**: Gunakan `gemini-2.5-flash-image`, bukan nama model Imagen.
-- **Metode**: Gunakan `client.models.generate_content`, bukan `client.models.generate_images`.
-- **Penanganan respons**: Nano Banana menampilkan bagian konten, yang dapat mencakup data gambar, bukan objek respons gambar tertentu.
+- **שם המודל**: משתמשים ב-`gemini-2.5-flash-image` במקום בשמות של מודלי Imagen.
+- **שיטה**: במקום `client.models.generate_images`, צריך להשתמש ב-`client.models.generate_content`.
+- **טיפול בתשובה**: Nano Banana מחזיר חלקי תוכן, שעשויים לכלול נתוני תמונה, במקום אובייקט תשובה ספציפי של תמונה.
 
-Lihat [Panduan pembuatan gambar](https://ai.google.dev/gemini-api/docs/image-generation?hl=id) untuk mengetahui detail dan contoh selengkapnya.
+[במדריך ליצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he) אפשר למצוא פרטים נוספים ודוגמאות.
 
-## Membuat gambar menggunakan model Imagen
+## יצירת תמונות באמצעות מודלים של Imagen
 
-Contoh ini menunjukkan pembuatan gambar dengan [model Imagen](https://deepmind.google/technologies/imagen/?hl=id):
+בדוגמה הזו מוסבר איך ליצור תמונות באמצעות [מודל Imagen](https://deepmind.google/technologies/imagen/?hl=he):
 
 ### Python
 
@@ -144,395 +144,365 @@ curl -X POST \
       }'
 ```
 
-![Gambar buatan AI dari robot yang memegang papan seluncur merah](https://ai.google.dev/static/gemini-api/docs/images/robot-skateboard.png?hl=id)
+![תמונה שנוצרה על ידי AI של רובוט שמחזיק סקייטבורד אדום](https://ai.google.dev/static/gemini-api/docs/images/robot-skateboard.png?hl=he)
 
-Gambar buatan AI dari robot yang memegang papan seluncur merah
+תמונה שנוצרה על ידי AI של רובוט שמחזיק סקייטבורד אדום
 
-### Konfigurasi Imagen
+### הגדרות של Imagen
 
-Saat ini, Imagen hanya mendukung perintah dalam bahasa Inggris dan parameter berikut:
+בשלב הזה, Imagen תומך רק בהנחיות באנגלית ובפרמטרים הבאים:
 
-- `numberOfImages`: Jumlah gambar yang akan dibuat, dari 1 hingga 4 (inklusif).
-  Defaultnya adalah 4.
-- `imageSize`: Ukuran gambar yang dihasilkan. Fitur ini hanya didukung untuk model Standard dan Ultra. Nilai yang didukung adalah `1K` dan `2K`.
-  Default-nya adalah `1K`.
-- `aspectRatio`: Mengubah rasio aspek gambar yang dihasilkan. Nilai
-  yang didukung adalah `"1:1"`, `"3:4"`, `"4:3"`, `"9:16"`, dan `"16:9"`. Defaultnya adalah
-  `"1:1"`.
-- `personGeneration`: Mengizinkan model membuat gambar orang. Nilai berikut didukung:
+- ‫`numberOfImages`: מספר התמונות שייווצרו, מ-1 עד 4 (כולל).
+  ערך ברירת המחדל הוא 4.
+- ‫`imageSize`: הגודל של התמונה שנוצרה. התמיכה ניתנת רק במודלים Standard ו-Ultra. הערכים הנתמכים הם `1K` ו-`2K`.
+  ערך ברירת המחדל הוא `1K`.
+- ‫`aspectRatio`: שינוי יחס הגובה-רוחב של התמונה שנוצרה. הערכים הנתמכים הם `"1:1"`,‏ `"3:4"`,‏ `"4:3"`,‏ `"9:16"` ו-`"16:9"`. ערך ברירת המחדל הוא `"1:1"`.
+- ‫`personGeneration`: מאפשרים למודל ליצור תמונות של אנשים. יש תמיכה בערכים הבאים:
 
-  - `"dont_allow"`: Memblokir pembuatan gambar orang.
-  - `"allow_adult"`: Menghasilkan gambar orang dewasa, tetapi bukan anak-anak. Ini adalah
-    defaultnya.
-  - `"allow_all"`: Buat gambar yang menyertakan orang dewasa dan anak-anak.
+  - ‫`"dont_allow"`: חסימת יצירת תמונות של אנשים.
+  - ‫`"allow_adult"`: יצירת תמונות של מבוגרים, אבל לא של ילדים. זוהי אפשרות ברירת המחדל.
+  - ‫`"allow_all"`: יצירת תמונות שכוללות מבוגרים וילדים.
 
-## Panduan perintah Imagen
+## מדריך לכתיבת פרומפטים ל-Imagen
 
-Bagian panduan Imagen ini menunjukkan cara memodifikasi perintah text-to-image
-dapat menghasilkan hasil yang berbeda, beserta contoh gambar yang dapat Anda buat.
+בקטע הזה במדריך ל-Imagen מוסבר איך שינוי של הנחיה ליצירת תמונות לפי טקסט יכול להניב תוצאות שונות, ומוצגות דוגמאות לתמונות שאפשר ליצור.
 
-### Dasar-dasar penulisan perintah
+### יסודות כתיבת ההנחיות
 
-Perintah yang baik bersifat deskriptif dan jelas, serta menggunakan kata kunci dan pengubah yang bermakna. Mulailah dengan memikirkan **subjek**, **konteks**, dan **gaya** Anda.
+הנחיה טובה היא תיאורית וברורה, וכוללת מילות מפתח ומשנים משמעותיים. מתחילים לחשוב על **הנושא**, **ההקשר** ו**הסגנון**.
 
-![Perintah dengan subjek, konteks, dan gaya yang ditekankan](https://ai.google.dev/static/gemini-api/docs/images/imagen/style-subject-context.png?hl=id)
+![הנחיה עם דגש על הנושא, ההקשר והסגנון](https://ai.google.dev/static/gemini-api/docs/images/imagen/style-subject-context.png?hl=he)
 
-Teks gambar: *Sketsa* (**gaya**) dari *gedung apartemen modern*
-(**subjek**) dikelilingi *pilar* (**konteks dan latar belakang**).
+טקסט התמונה: *סקיצה* (**סגנון**) של *בניין דירות מודרני* (**נושא**) מוקף *גורדי שחקים* (**הקשר ורקע**).
 
-1. **Subjek**: Hal pertama yang harus dipikirkan dengan perintah apa pun adalah
-   *subjek*: objek, orang, hewan, atau pemandangan yang Anda inginkan gambarnya.
-2. **Konteks dan latar belakang:** Sama pentingnya adalah *latar belakang atau konteks*
-   tempat subjek akan ditempatkan. Coba tempatkan subjek di berbagai
-   latar belakang. Misalnya, studio dengan latar belakang putih, di luar ruangan, atau
-   di dalam ruangan.
-3. **Gaya:** Terakhir, tambahkan gaya gambar yang Anda inginkan. *Gaya* dapat bersifat umum
-   (lukisan, foto, sketsa) atau yang sangat spesifik (lukisan pastel, gambar arang, 3D isometrik). Anda juga dapat menggabungkan gaya.
+1. **נושא**: הדבר הראשון שצריך לחשוב עליו כשכותבים הנחיה הוא *הנושא*: האובייקט, האדם, החיה או הנוף שרוצים ליצור מהם תמונה.
+2. **הקשר ורקע:** חשוב לא פחות הוא *הרקע או ההקשר* שבהם יוצג הנושא. נסו למקם את מושא הצילום על רקעים שונים. לדוגמה, סטודיו עם רקע לבן, בחוץ או בסביבות פנימיות.
+3. **סגנון:** לסיום, מוסיפים את סגנון התמונה הרצוי. *סגנונות* יכולים להיות כלליים (ציור, צילום, סקיצות) או ספציפיים מאוד (ציור פסטל, רישום בפחם, תלת-ממד איזומטרי). אפשר גם לשלב בין סגנונות.
 
-Setelah menulis versi pertama perintah, perbaiki perintah dengan menambahkan
-lebih banyak detail hingga Anda mendapatkan gambar yang diinginkan. Iterasi penting.
-Mulailah dengan menentukan ide inti Anda, lalu sempurnakan dan kembangkan ide inti tersebut hingga gambar yang dihasilkan mendekati visi Anda.
+אחרי שכותבים גרסה ראשונה של ההנחיה, מוסיפים לה פרטים נוספים עד שמקבלים את התמונה הרצויה. חשוב לבצע איטרציות.
+מתחילים עם הרעיון המרכזי, ואז משפרים ומרחיבים אותו עד שהתמונה שנוצרת קרובה לחזון שלכם.
 
 |  |  |  |
 | --- | --- | --- |
-| contoh gambar fotorealistik 1   Perintah: Taman di musim semi di samping danau | gambar contoh fotorealistik 2   Perintah: Taman di musim semi di samping danau, **matahari terbenam di seberang danau, golden hour** | gambar contoh fotorealistik 3   Perintah: Taman di musim semi di samping danau, ***matahari terbenam di seberang danau, golden hour, bunga liar merah*** |
+| תמונה פוטוריאליסטית לדוגמה 1   הנחיה: פארק באביב ליד אגם | תמונה פוטוריאליסטית לדוגמה 2   הנחיה: פארק באביב ליד אגם, **השמש שוקעת מעל האגם, שעת הזהב** | תמונת דוגמה פוטוריאליסטית 3   הנחיה: פארק באביב ליד אגם, ***השמש שוקעת מעבר לאגם, שעת הזהב, פרחי בר אדומים*** |
 
-Model Imagen dapat mengubah ide Anda menjadi gambar yang mendetail, baik perintah Anda singkat maupun panjang dan mendetail. Sempurnakan visi Anda melalui perintah berulang, tambahkan detail hingga Anda mendapatkan hasil yang sempurna.
+מודלים של Imagen יכולים להפוך את הרעיונות שלכם לתמונות מפורטות, לא משנה אם ההנחיות שלכם קצרות או ארוכות ומפורטות. משפרים את החזון באמצעות הנחיות חוזרות, ומוסיפים פרטים עד שמגיעים לתוצאה המושלמת.
 
 |  |  |
 | --- | --- |
-| Perintah singkat memungkinkan Anda membuat gambar dengan cepat.  Contoh perintah singkat Imagen 4   Perintah: foto close-up seorang wanita berusia 20-an, fotografi jalanan, cuplikan film, nuansa hangat oranye lembut | Dengan perintah yang lebih panjang, Anda dapat menambahkan detail spesifik dan membuat gambar.  Contoh perintah panjang Imagen 4   Perintah: foto memukau seorang wanita berusia 20-an yang menggunakan gaya fotografi jalanan. Gambar harus terlihat seperti cuplikan film dengan warna hangat oranye yang lembut. |
+| הנחיות קצרות מאפשרות ליצור תמונה במהירות.  דוגמה להנחיה קצרה ב-Imagen 4   הנחיה: תמונה בתקריב של אישה בשנות ה-20 לחייה, צילום רחוב, פריים מסרט, גוונים חמים של כתום מושתק | הנחיות ארוכות יותר מאפשרות להוסיף פרטים ספציפיים ולבנות את התמונה.  דוגמה להנחיה ארוכה ב-Imagen 4   הנחיה: תמונה שובה לב של אישה בשנות ה-20 לחייה בסגנון צילום רחוב. התמונה צריכה להיראות כמו צילום סטילס עם גוונים חמים כתומים מושתקים. |
 
-Saran tambahan untuk penulisan perintah Imagen:
+עצות נוספות לכתיבת הנחיות ל-Imagen:
 
-- **Gunakan bahasa deskriptif**: Gunakan kata sifat dan kata keterangan yang mendetail untuk
-  menggambarkan dengan jelas kepada Imagen.
-- **Berikan konteks**: Jika perlu, sertakan informasi latar belakang untuk membantu AI memahami.
-- **Merujuk pada artis atau gaya tertentu**: Jika Anda memiliki estetika tertentu, merujuk pada artis atau gerakan seni tertentu dapat membantu.
-- **Gunakan alat rekayasa perintah**: Pertimbangkan untuk mempelajari alat atau referensi rekayasa perintah untuk membantu Anda menyempurnakan perintah dan mendapatkan hasil yang optimal.
-- **Meningkatkan kualitas detail wajah dalam gambar pribadi dan grup Anda**: Tentukan detail wajah sebagai fokus foto (misalnya, gunakan kata "potret" dalam perintah).
+- **משתמשים בשפה תיאורית**: כדאי להשתמש בשמות תואר ובפעלים תיאוריים מפורטים כדי ליצור תמונה ברורה עבור Imagen.
+- **מספקים הקשר**: אם צריך, כוללים מידע רקע כדי לעזור ל-AI להבין את התוכן.
+- **הפניה לאומנים או לסגנונות ספציפיים**: אם יש לכם אסתטיקה מסוימת בראש, כדאי להפנות לאומנים או לזרמים באומנות ספציפיים.
+- **שימוש בכלים להנדסת פרומפטים**: כדאי לנסות כלים או משאבים להנדסת פרומפטים שיעזרו לכם לחדד את הפרומפטים ולהשיג תוצאות אופטימליות.
+- **שיפור הפרטים של הפנים בתמונות אישיות ובתמונות קבוצתיות**: מציינים את פרטי הפנים כנקודת המיקוד של התמונה (לדוגמה, משתמשים במילה "פורטרט" בהנחיה).
 
-### Membuat teks dalam gambar
+### יצירת טקסט בתמונות
 
-Model Imagen dapat menambahkan teks ke dalam gambar, sehingga membuka lebih banyak kemungkinan pembuatan gambar yang kreatif. Gunakan panduan berikut untuk mendapatkan hasil maksimal dari fitur ini:
+מודלים של Imagen יכולים להוסיף טקסט לתמונות, וכך מאפשרים ליצור תמונות בצורה יצירתית יותר. כדי להפיק את המרב מהתכונה הזו, מומלץ לפעול לפי ההנחיות הבאות:
 
-- **Lakukan iterasi dengan percaya diri**: Anda mungkin harus membuat ulang gambar hingga Anda mendapatkan tampilan yang diinginkan. Integrasi teks Imagen masih
-  berkembang, dan terkadang beberapa upaya akan memberikan hasil terbaik.
-- **Buat teks singkat**: Batasi teks hingga 25 karakter atau kurang untuk generasi yang optimal.
-- **Beberapa frasa**: Bereksperimenlah dengan dua atau tiga frasa berbeda untuk memberikan informasi tambahan. Hindari penggunaan lebih dari tiga frasa untuk komposisi yang lebih bersih.
+- **חזרה על הפעולה עד לקבלת התוצאה הרצויה**: יכול להיות שתצטרכו ליצור מחדש את התמונות עד שתקבלו את המראה שרציתם. השילוב של טקסט ב-Imagen עדיין בתהליך פיתוח, ולפעמים צריך לנסות כמה פעמים כדי לקבל את התוצאות הטובות ביותר.
+- **הקפידו על ניסוח קצר**: כדי לקבל תוצאות אופטימליות, הגבילו את הטקסט ל-25 תווים או פחות.
+- **כמה ביטויים**: כדאי להתנסות עם שניים או שלושה ביטויים שונים כדי לספק מידע נוסף. כדי ליצור קומפוזיציות נקיות יותר, מומלץ להשתמש בלא יותר משלושה משפטים.
 
-  ![Contoh teks yang dihasilkan Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_generate-text.png?hl=id)
+  ![דוגמה ליצירת טקסט באמצעות Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_generate-text.png?hl=he)
 
-  Perintah: Poster dengan teks "Summerland" dalam font tebal sebagai
-  judul, di bawah teks ini terdapat slogan "Summer never felt so good"
-- **Penempatan Panduan**: Meskipun Imagen dapat mencoba memosisikan teks sesuai arahan, terkadang ada variasi. Fitur ini terus ditingkatkan.
-- **Gaya font Inspire**: Tentukan gaya font umum untuk memengaruhi pilihan Imagen secara halus. Jangan mengandalkan replikasi font yang presisi, tetapi harapkan interpretasi kreatif.
-- **Ukuran font**: Tentukan ukuran font atau indikasi ukuran umum (misalnya, *kecil*, *sedang*, *besar*) untuk memengaruhi pembuatan ukuran font.
+  הנחיה: פוסטר עם הטקסט Summerland בגופן מודגש ככותרת, מתחת לטקסט הזה מופיע הסלוגן Summer never felt so good
+- **מיקום הטקסט**: מודל Imagen יכול לנסות למקם את הטקסט לפי ההנחיות, אבל יכול להיות שיהיו מדי פעם שינויים. אנחנו כל הזמן משפרים את התכונה הזו.
+- **סגנון גופן מעורר השראה**: מציינים סגנון גופן כללי כדי להשפיע בעדינות על הבחירות של Imagen. אל תצפו לשכפול מדויק של הגופן, אלא לפרשנויות יצירתיות.
+- **גודל הגופן**: מציינים גודל גופן או אינדיקציה כללית לגודל (לדוגמה, *קטן*, *בינוני*, *גדול*) כדי להשפיע על יצירת גודל הגופן.
 
-### Parameterisasi perintah
+### הגדרת פרמטרים להנחיות
 
-Untuk mengontrol hasil output dengan lebih baik, Anda mungkin merasa terbantu dengan memparameterisasi
-input ke Imagen. Misalnya, Anda ingin pelanggan dapat membuat logo untuk bisnis mereka, dan Anda ingin memastikan logo selalu dibuat dengan latar belakang warna solid. Anda
-juga ingin membatasi opsi yang dapat dipilih klien dari menu.
+כדי לשלוט טוב יותר בתוצאות הפלט, כדאי להגדיר פרמטרים לקלט ב-Imagen. לדוגמה, נניח שאתם רוצים שהלקוחות יוכלו ליצור לוגו לעסק שלהם, ואתם רוצים לוודא שהלוגו תמיד ייווצר על רקע בצבע אחיד. אתם רוצים גם להגביל את האפשרויות שהלקוח יכול לבחור מהתפריט.
 
-Dalam contoh ini, Anda dapat membuat perintah berparameter yang mirip dengan
-berikut:
+בדוגמה הזו, אפשר ליצור הנחיה עם פרמטרים שדומה להנחיה הבאה:
 
 ```
 A {logo_style} logo for a {company_area} company on a solid color background. Include the text {company_name}.
 ```
 
-Di antarmuka pengguna kustom Anda, pelanggan dapat memasukkan parameter menggunakan
-menu, dan nilai yang dipilihnya akan mengisi perintah yang diterima Imagen.
+בממשק המשתמש המותאם אישית, הלקוח יכול להזין את הפרמטרים באמצעות תפריט, והערך שהוא בוחר מאכלס את ההנחיה שמתקבלת ב-Imagen.
 
-Contoh:
+לדוגמה:
 
-1. Perintah: `A minimalist logo for a health care company on a solid color background. Include the text Journey.`
+1. הנחיה: `A minimalist logo for a health care company on a solid color background. Include the text Journey.`
 
-   ![Contoh 1 parameterisasi perintah Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_healthcare.png?hl=id)
-2. Perintah: `A modern logo for a software company on a solid color background. Include the text Silo.`
+   ![דוגמה 1 לפרמטרים של הנחיה ב-Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_healthcare.png?hl=he)
+2. הנחיה: `A modern logo for a software company on a solid color background. Include the text Silo.`
 
-   ![Contoh parameterisasi perintah Imagen 4 2](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_software.png?hl=id)
-3. Perintah: `A traditional logo for a baking company on a solid color background. Include the text Seed.`
+   ![דוגמה 2 לפרמטרים של הנחיה ב-Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_software.png?hl=he)
+3. הנחיה: `A traditional logo for a baking company on a solid color background. Include the text Seed.`
 
-   ![Contoh parameterisasi perintah Imagen 4 3](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_baking.png?hl=id)
+   ![דוגמה 3 לפרמטרים של הנחיה ב-Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_baking.png?hl=he)
 
-### Teknik penulisan perintah lanjutan
+### טכניקות מתקדמות לכתיבת הנחיות
 
-Gunakan contoh berikut untuk membuat perintah yang lebih spesifik berdasarkan atribut
-seperti deskripsi fotografi, bentuk dan bahan, gerakan seni
-historis, dan pengubah kualitas gambar.
+אפשר להשתמש בדוגמאות הבאות כדי ליצור הנחיות ספציפיות יותר על סמך מאפיינים כמו תיאורי צילום, צורות וחומרים, תנועות אמנותיות היסטוריות ומשנים של איכות התמונה.
 
-#### Fotografi
+#### צילום
 
-- Perintah menyertakan: *"Foto..."*
+- ההנחיה כוללת: *"תמונה של..."*
 
-Untuk menggunakan gaya ini, mulai dengan menggunakan kata kunci yang dengan jelas memberi tahu
-Imagen bahwa Anda mencari foto. Mulailah perintah Anda dengan *"Foto. . ."*. Misalnya:
+כדי להשתמש בסגנון הזה, מתחילים במילות מפתח שמציינות בבירור ל-Imagen שאתם מחפשים תמונה. ההנחיות צריכות להתחיל במילים
+*"תמונה של. . ‫."*. לדוגמה:
 
 |  |  |  |
 | --- | --- | --- |
-| contoh gambar fotorealistik 1   Perintah: **Foto** biji kopi di dapur pada permukaan kayu | gambar contoh fotorealistik 2   Perintah: **Foto** cokelat batangan di meja dapur | gambar contoh fotorealistik 3   Perintah: **Foto** bangunan modern dengan latar belakang air |
+| תמונה פוטוריאליסטית לדוגמה 1   הנחיה: **תמונה של** פולי קפה במטבח על משטח עץ | תמונה פוטוריאליסטית לדוגמה 2   הנחיה: **תמונה של** חטיף שוקולד על משטח במטבח | תמונת דוגמה פוטוריאליסטית 3   הנחיה: **תמונה של** בניין מודרני עם מים ברקע |
 
-Sumber gambar: Setiap gambar dibuat menggunakan perintah teks yang sesuai dengan model Imagen 4.
+מקור התמונה: כל תמונה נוצרה באמצעות פרומפט טקסטואלי מתאים, באמצעות מודל Imagen 4.
 
-##### Pengubah fotografi
+##### שינויים בצילום
 
-Pada contoh berikut, Anda dapat melihat beberapa pengubah dan parameter khusus fotografi. Anda dapat menggabungkan beberapa pengubah untuk kontrol yang lebih akurat.
+בדוגמאות הבאות אפשר לראות כמה פרמטרים ומשנים שספציפיים לצילום. אפשר לשלב כמה משנים כדי לקבל שליטה מדויקת יותר.
 
-1. **Kedekatan Kamera** - *Jarak dekat, diambil dari jarak jauh*
-
-   |  |  |
-   | --- | --- |
-   | gambar contoh kamera jarak dekat   Perintah: Foto **jarak dekat** biji kopi | gambar contoh kamera yang diperkecil   Perintah: Foto **diperkecil** sekantong kecil biji kopi  di dapur yang berantakan |
-2. **Posisi Kamera** - *dari atas, dari bawah*
+1. **קירבה למצלמה** – *תקריב, צילום מרחוק*
 
    |  |  |
    | --- | --- |
-   | gambar contoh foto dari atas   Perintah: **foto dari atas** kota dengan gedung pencakar langit | contoh gambar tampilan dari bawah   Perintah: Foto kanopi hutan dengan langit biru **dari bawah** |
-3. **Pencahayaan** - *alami, dramatis, hangat, dingin*
+   | תמונה לדוגמה שצולמה במצלמה במצב תקריב   פרומפט: תמונה **מקרוב** של פולי קפה | תמונה לדוגמה של מצלמה בהגדלה מוקטנת   הנחיה: תמונה **ממרחק** של שקית קטנה של  פולי קפה במטבח מבולגן |
+2. **מיקום המצלמה** – *צילום אווירי, מלמטה*
 
    |  |  |
    | --- | --- |
-   | gambar contoh pencahayaan alami   Perintah: foto studio kursi berlengan modern, **cahaya alami** | gambar contoh pencahayaan dramatis   Perintah: foto studio kursi berlengan modern, **cahaya dramatis** |
-4. **Setelan Kamera** *- motion blur, soft focus, bokeh, potret*
+   | תמונה לדוגמה של תצלום אווירי   הנחיה: **תמונה אווירית** של עיר עם גורדי שחקים | תמונה לדוגמה של מבט מלמטה   הנחיה: תמונה של צמרת עצים ביער עם שמיים כחולים **מלמטה** |
+3. **תאורה** – *טבעית, דרמטית, חמה, קרה*
 
    |  |  |
    | --- | --- |
-   | gambar contoh motion blur   Perintah: foto kota dengan gedung pencakar langit dari dalam mobil dengan **motion blur** | gambar contoh soft focus   Perintah: Foto **soft focus** jembatan di kota perkotaan pada malam hari |
-5. **Jenis lensa** - *35 mm, 50 mm, mata ikan, sudut lebar, makro*
+   | תמונה לדוגמה עם תאורה טבעית   הנחיה: תמונה בסטודיו של כורסה מודרנית, **תאורה טבעית** | תמונה לדוגמה של תאורה דרמטית   הנחיה: תמונה בסגנון סטודיו של כורסה מודרנית, **תאורה דרמטית** |
+4. **הגדרות המצלמה** *– טשטוש תנועה, פוקוס רך, בוקה, צילום פורטרט*
 
    |  |  |
    | --- | --- |
-   | gambar contoh lensa makro   Perintah: foto daun, **lensa makro** | gambar contoh lensa mata ikan   Perintah: fotografi jalanan, kota new york, **lensa mata ikan** |
-6. **Jenis film** - *hitam dan putih, polaroid*
+   | תמונה לדוגמה של טשטוש תנועה   הנחיה: תמונה של עיר עם גורדי שחקים מתוך מכונית עם **טשטוש תנועה** | תמונה לדוגמה של פוקוס רך   הנחיה: **תמונה עם מוקד רך** של גשר בעיר בלילה |
+5. **סוגי עדשות** – *35 מ"מ, 50 מ"מ, עין הדג, זווית רחבה, מאקרו*
 
    |  |  |
    | --- | --- |
-   | gambar sampel foto polaroid   Perintah: **potret polaroid** yang memakai kacamata hitam | gambar contoh foto hitam putih   Perintah: **foto hitam putih** yang memakai kacamata hitam |
+   | תמונה לדוגמה שצולמה בעדשת מאקרו   הנחיה: תמונה של עלה, **עדשת מאקרו** | תמונה לדוגמה בעדשת עין הדג   הנחיה: צילום רחוב, העיר ניו יורק, **עדשת עין הדג** |
+6. **סוגי סרטים** – *שחור-לבן, פולרואיד*
 
-Sumber gambar: Setiap gambar dibuat menggunakan perintah teks yang sesuai dengan model Imagen 4.
+   |  |  |
+   | --- | --- |
+   | תמונה לדוגמה של תמונת פולרואיד   הנחיה: **תמונת פולרואיד** של כלב עם משקפי שמש | תמונה לדוגמה בשחור-לבן   פרומפט: **תמונה בשחור-לבן** של כלב עם משקפי שמש |
 
-### Ilustrasi dan seni
+מקור התמונה: כל תמונה נוצרה באמצעות פרומפט טקסטואלי מתאים, באמצעות מודל Imagen 4.
 
-- Perintah menyertakan: *"painting dari..."*, *"sketch dari..."*
+### איור ואומנות
 
-Gaya seni bervariasi mulai dari gaya monokrom seperti sketsa pensil, hingga seni digital
-yang sangat realistis. Misalnya, gambar berikut menggunakan perintah yang sama dengan
-gaya yang berbeda:
+- ההנחיה כוללת: *"painting של..."*, *‫"sketch של…"*
 
-*"[art style or creation technique] sedan listrik sporty bersudut dengan
-pencakar langit di latar belakang"*
+סגנונות האומנות משתנים מסגנונות מונוכרומטיים כמו שרטוטי עיפרון, ועד לאומנות דיגיטלית היפר-ריאליסטית. לדוגמה, בתמונות הבאות נעשה שימוש באותו הנחיה עם סגנונות שונים:
+
+*"תמונה של מכונית סדאן חשמלית ספורטיבית עם קווים זוויתיים, עם גורדי שחקים ברקע"*[art style or creation technique]
 
 |  |  |  |
 | --- | --- | --- |
-| gambar contoh karya seni   Perintah: **Gambar dengan teknik pensil** dari sebuah sudut... | gambar contoh karya seni   Perintah: **Gambar arang** dari sudut... | gambar contoh karya seni   Perintah: **Gambar pensil warna** dari sudut... |
+| תמונות לדוגמה של אומנות   הנחיה: **ציור טכני בעיפרון** של... | תמונות לדוגמה של אומנות   פרומפט: **רישום פחם** של... | תמונות לדוגמה של אומנות   פרומפט: **ציור בעיפרון צבעוני** של... |
 
 |  |  |  |
 | --- | --- | --- |
-| gambar contoh karya seni   Perintah: **Lukisan pastel** dari sebuah sudut... | gambar contoh karya seni   Perintah: **Seni digital** dari sudut... | gambar contoh karya seni   Perintah: **Art deco (poster)** dari sudut... |
+| תמונות לדוגמה של אומנות   פרומפט: **ציור בצבעי פסטל** של זוויתי... | תמונות לדוגמה של אומנות   פרומפט: **יצירת אומנות דיגיטלית** של... | תמונות לדוגמה של אומנות   הנחיה: **פוסטר בסגנון ארט דקו** של... |
 
-Sumber gambar: Setiap gambar dibuat menggunakan perintah teks yang sesuai dengan model Imagen 2.
+מקור התמונה: כל תמונה נוצרה באמצעות הפרומפט הטקסטואלי המתאים, בעזרת מודל Imagen 2.
 
-##### Bentuk dan bahan
+##### צורות וחומרים
 
-- Perintah mencakup: *"...terbuat dari..."*, *"...dalam bentuk..."*
+- ההנחיה כוללת: *"...made of..."*, *"...בצורה של..."*
 
-Salah satu keunggulan teknologi ini adalah Anda dapat membuat citra yang
-sulit atau tidak mungkin dilakukan. Misalnya, Anda dapat membuat ulang
-logo perusahaan dengan bahan dan tekstur yang berbeda.
+אחת מנקודות החוזק של הטכנולוגיה הזו היא האפשרות ליצור תמונות שקשה או בלתי אפשרי ליצור בדרך אחרת. לדוגמה, אפשר ליצור מחדש את הלוגו של החברה בחומרים ובמרקמים שונים.
 
 |  |  |  |
 | --- | --- | --- |
-| contoh gambar bentuk dan bahan 1   Perintah: tas wol **terbuat dari** keju | contoh gambar bentuk dan bahan 2   Perintah: tabung neon **dalam bentuk** burung | contoh gambar 3 bentuk dan bahan 3   Perintah: kursi berlengan **terbuat dari kertas**, foto studio, gaya origami |
+| תמונה 1 של דוגמה לצורות ולחומרים   פרומפט: תיק דאפל **עשוי** מגבינה | תמונה 2 של דוגמה לצורות ולחומרים   הנחיה: צינורות ניאון **בצורה** של ציפור | תמונה 3 של דוגמה לצורות ולחומרים   הנחיה: כורסה **עשויה מנייר**, תמונה שצולמה באולפן, בסגנון אוריגמי |
 
-Sumber gambar: Setiap gambar dibuat menggunakan perintah teks yang sesuai dengan model Imagen 4.
+מקור התמונה: כל תמונה נוצרה באמצעות פרומפט טקסטואלי מתאים, באמצעות מודל Imagen 4.
 
-#### Referensi seni bersejarah
+#### הפניות לאומנות היסטורית
 
-- Perintah mencakup: *"...dalam gaya..."*
+- ההנחיה כוללת: *"…בסגנון של…"*
 
-Gaya tertentu telah menjadi ikon selama bertahun-tahun. Berikut adalah beberapa ide
-lukisan sejarah atau gaya seni yang dapat Anda coba.
+סגנונות מסוימים הפכו לאייקוניים במהלך השנים. הנה כמה רעיונות לסגנונות ציור או אמנות היסטוריים שאפשר לנסות.
 
-*"buat gambar dengan gaya [art period or movement]
-: ladang kincir angin"*
+*"צור תמונה בסגנון של [art period or movement]
+: חוות טורבינות רוח"*
 
 |  |  |  |
 | --- | --- | --- |
-| gambar contoh impresionisme   Perintah: buat gambar **dengan gaya *lukisan impresionis***: ladang kincir angin | gambar contoh renaisans   Perintah: buat gambar **dengan gaya *lukisan renaisans***: ladang kincir angin | gambar contoh seni pop   Perintah: buat gambar **dengan gaya *seni pop***: ladang kincir angin |
+| תמונה לדוגמה של אימפרסיוניזם   הנחיה: צור תמונה **בסגנון של *ציור אימפרסיוניסטי***: חוות טורבינות רוח | תמונה לדוגמה מתקופת הרנסנס   הנחיה: צור תמונה **בסגנון של *ציור מתקופת הרנסנס***: חוות רוח | תמונה לדוגמה של פופ ארט   הנחיה: צור תמונה **בסגנון *פופ ארט***: חוות רוח |
 
-Sumber gambar: Setiap gambar dibuat menggunakan perintah teks yang sesuai dengan model Imagen 4.
+מקור התמונה: כל תמונה נוצרה באמצעות פרומפט טקסטואלי מתאים, באמצעות מודל Imagen 4.
 
-#### Pengubah kualitas gambar
+#### משנים של איכות התמונה
 
-Kata kunci tertentu dapat memberi tahu model bahwa Anda mencari aset berkualitas tinggi. Contoh pengubah kualitas mencakup hal berikut:
+מילות מפתח מסוימות יכולות להבהיר למודל שאתם מחפשים נכס באיכות גבוהה. דוגמאות למשני איכות:
 
-- **Pengubah Umum** - *berkualitas tinggi, indah, bergaya*
-- **Foto** - *4K, HDR, Foto Studio*
-- **Seni, Ilustrasi** - *oleh profesional, mendetail*
+- **משנים כלליים** – *איכות גבוהה, יפה, מסוגנן*
+- ‫**Photos** – *4K, ‏ HDR, ‏ Studio Photo*
+- **אומנות, איור** – *על ידי איש מקצוע, מפורט*
 
-Berikut adalah beberapa contoh perintah tanpa pengubah kualitas dan
-perintah yang sama dengan pengubah kualitas.
+הנה כמה דוגמאות להנחיות ללא משפרי איכות ולהנחיות זהות עם משפרי איכות.
 
 |  |  |
 | --- | --- |
-| gambar contoh jagung tanpa pengubah   Perintah (tanpa pengubah kualitas): foto batang jagung | gambar contoh jagung dengan pengubah   Perintah (dengan pengubah kualitas): **Foto 4k HDR yang indah**   dari sebuah foto batang jagung **diambil oleh   fotografer profesional** |
+| תמונה לדוגמה של תירס ללא משנים   הנחיה (ללא משפרי איכות): תמונה של גבעול תירס | דוגמה לתמונה של תירס עם משנים   הנחיה (עם משפרי איכות): **תמונה יפה באיכות 4K HDR**   של גבעול תירס **שצולמה על ידי   צלם מקצועי** |
 
-Sumber gambar: Setiap gambar dibuat menggunakan perintah teks yang sesuai dengan model Imagen 4.
+מקור התמונה: כל תמונה נוצרה באמצעות פרומפט טקסטואלי מתאים, באמצעות מודל Imagen 4.
 
-#### Rasio aspek
+#### יחסי גובה-רוחב
 
-Pembuatan gambar Imagen memungkinkan Anda menetapkan lima rasio aspek gambar yang berbeda.
+יצירת תמונות באמצעות Imagen מאפשרת להגדיר חמישה יחסי גובה-רוחב שונים.
 
-1. **Persegi** (1:1, default) - Foto persegi standar. Penggunaan umum untuk rasio aspek ini mencakup postingan media sosial.
-2. **Layar penuh** (4:3) - Rasio aspek ini umumnya digunakan dalam media atau film.
-   Ukuran ini juga merupakan dimensi sebagian besar TV lama (non-layar lebar) dan kamera format
-   sedang. Rasio ini menangkap lebih banyak pemandangan secara horizontal (dibandingkan dengan 1:1),
-   sehingga menjadi rasio aspek pilihan untuk fotografi.
-
-   |  |  |
-   | --- | --- |
-   | contoh rasio aspek   Perintah: close up jari seorang musisi sedang bermain piano, film hitam putih, vintage (rasio aspek 4:3) | contoh rasio aspek   Perintah: Foto studio profesional kentang goreng untuk restoran kelas atas, dengan gaya majalah makanan (rasio aspek 4:3) |
-3. **Layar penuh potret** (3:4) - Ini adalah rasio aspek layar penuh yang diputar 90 derajat. Hal ini memungkinkan Anda merekam lebih banyak bagian pemandangan secara vertikal dibandingkan dengan rasio aspek 1:1.
+1. **ריבוע** (1:1, ברירת מחדל) – תמונה ריבועית רגילה. יחס הגובה-רוחב הזה נפוץ בפוסטים ברשתות חברתיות.
+2. **מסך מלא** (4:3) – יחס הגובה-רוחב הזה נפוץ בשימוש במדיה או בסרטים.
+   אלה גם המידות של רוב הטלוויזיות הישנות (לא רחבות) ושל מצלמות בפורמט בינוני. היחס הזה מאפשר לצלם חלק גדול יותר מהסצנה לרוחב (בהשוואה ליחס של 1:1),
+   ולכן הוא מועדף בצילום.
 
    |  |  |
    | --- | --- |
-   | contoh rasio aspek   Perintah: seorang wanita sedang mendaki, close-up sepatu botnya terpantul di genangan air, pegunungan besar di latar belakang, dengan gaya iklan, sudut dramatis (rasio aspek 3:4) | contoh rasio aspek   Perintah: foto dari atas sungai yang mengalir ke atas lembah mistis (rasio aspek 3:4) |
-4. **Layar lebar** (16:9) - Rasio ini telah menggantikan 4:3 dan kini menjadi rasio aspek yang paling umum untuk TV, monitor, dan layar ponsel (lanskap).
-   Gunakan rasio aspek ini jika Anda ingin mengambil lebih banyak latar belakang (misalnya, pemandangan indah).
+   | דוגמה ליחס גובה-רוחב   הנחיה: תקריב של אצבעות של מוזיקאי שמנגן בפסנתר, סרט בשחור-לבן, וינטג' (יחס גובה-רוחב של 4:3) | דוגמה ליחס גובה-רוחב   הנחיה: תמונה מקצועית שצולמה בסטודיו של צ'יפס למסעדה יוקרתית, בסגנון של מגזין אוכל (יחס רוחב-גובה של 4:3) |
+3. **מסך מלא לאורך** (3:4) – יחס הגובה-רוחב למסך מלא מסובב ב-90 מעלות. כך אפשר לצלם חלק גדול יותר מהסצנה בצורה אנכית בהשוואה ליחס גובה-רוחב של 1:1.
 
-   ![contoh rasio aspek](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_16-9_man.png?hl=id)
+   |  |  |
+   | --- | --- |
+   | דוגמה ליחס גובה-רוחב   הנחיה: אישה מטיילת, תקריב של מגפיים שמשתקפים בשלולית, הרים גדולים ברקע, בסגנון של פרסומת, זוויות דרמטיות (יחס גובה-רוחב של 3:4) | דוגמה ליחס גובה-רוחב   הנחיה: צילום אווירי של נהר שזורם במעלה עמק מיסטי (יחס גובה-רוחב 3:4) |
+4. **מסך רחב** (16:9) – היחס הזה החליף את 4:3 והוא עכשיו יחס הגובה-רוחב הנפוץ ביותר בטלוויזיות, במסכים ובמסכי טלפונים ניידים (לרוחב).
+   כדאי להשתמש ביחס הגובה-רוחב הזה כשרוצים לצלם חלק גדול יותר מהרקע (לדוגמה, נופים).
 
-   Perintah: seorang pria yang mengenakan pakaian serba putih sedang duduk di pantai, close up, pencahayaan golden hour (rasio aspek 16:9)
-5. **Potret** (9:16) - Rasio ini adalah layar lebar yang diputar. Rasio aspek ini relatif baru dan telah dipopulerkan oleh aplikasi video pendek (misalnya, YouTube Shorts). Gunakan ini untuk objek tinggi dengan orientasi vertikal yang kuat seperti bangunan, pohon, air terjun, atau objek serupa lainnya.
+   ![דוגמה ליחס גובה-רוחב](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_16-9_man.png?hl=he)
 
-   ![contoh rasio aspek](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_9-16_skyscraper.png?hl=id)
+   הנחיה: צילום תקריב של גבר לבוש בבגדים לבנים יושב על החוף, תאורה של שעת הזהב (יחס גובה-רוחב של 16:9)
+5. **לאורך** (9:16) – יחס הגובה-רוחב הזה הוא מסך רחב אבל מסובב. זהו יחס רוחב-גובה חדש יחסית, שהפך לפופולרי בקרב אפליקציות של סרטונים קצרים (לדוגמה, סרטוני YouTube Shorts). השתמשו בערך הזה לאובייקטים גבוהים עם אוריינטציה אנכית חזקה, כמו בניינים, עצים, מפלים או אובייקטים דומים אחרים.
 
-   Perintah: rendering digital gedung pencakar langit besar, modern,
-   megah, epik dengan latar belakang matahari terbenam yang indah (rasio aspek 9:16)
+   ![דוגמה ליחס גובה-רוחב](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_9-16_skyscraper.png?hl=he)
 
-#### Gambar fotorealistik
+   הנחיה: הדמיה דיגיטלית של גורד שחקים עצום, מודרני, מפואר, אפי עם שקיעה יפה ברקע (יחס גובה-רוחב של 9:16)
 
-Model pembuatan gambar
-yang berbeda mungkin menawarkan campuran output artistik dan fotorealistik. Gunakan kata-kata berikut dalam perintah untuk menghasilkan output yang lebih fotorealistik, berdasarkan subjek yang ingin Anda buat.
+#### תמונות פוטוריאליסטיות
 
-| Kasus penggunaan | Jenis lensa | Panjang fokal | Detail tambahan |
+גרסאות שונות של מודל יצירת התמונות עשויות להציע שילוב של פלט אמנותי ופוטו-ריאליסטי. כדי ליצור פלט היפר-ריאליסטי יותר, כדאי להשתמש בניסוחים הבאים בהנחיות, בהתאם לנושא שרוצים ליצור.
+
+| תרחיש שימוש | סוג העדשה | אורכי מוקד | פרטים נוספים |
 | --- | --- | --- | --- |
-| Orang (potret) | Tanda petik, zoom | 24-35mm | film hitam putih, Film noir, Kedalaman bidang, duoton (sebutkan dua warna) |
-| Makanan, serangga, tanaman (objek, still life) | Makro | 60-105mm | Detail tinggi, fokus yang presisi, pencahayaan yang terkontrol |
-| Olahraga, satwa liar (gerakan) | Zoom telefoto | 100-400mm | Kecepatan shutter cepat, Pelacakan tindakan atau gerakan |
-| Astronomi, lanskap (sudut lebar) | Sudut lebar | 10-24mm | Waktu eksposur panjang, fokus tajam, eksposur panjang, air atau awan yang halus |
+| אנשים (דיוקנאות) | Prime, zoom | 24-35 מ״מ | סרט בשחור-לבן, סרט נואר, עומק שדה, דו-גווני (צריך לציין שני צבעים) |
+| אוכל, חרקים, צמחים (אובייקטים, טבע דומם) | Macro | ‫60-105 מ״מ | רמת פירוט גבוהה, מיקוד מדויק, תאורה מבוקרת |
+| ספורט, חיות בר (תנועה) | זום טלפוטו | ‫100-400 מ״מ | מהירות תריס גבוהה, מעקב אחרי פעולה או תנועה |
+| אסטרונומי, נוף (זווית רחבה) | זווית רחבה | ‫10-24 מ״מ | זמני חשיפה ארוכים, פוקוס חד, חשיפה ארוכה, מים או עננים חלקים |
 
-##### Potret
+##### צילומי פורטרט
 
-| Kasus penggunaan | Jenis lensa | Panjang fokal | Detail tambahan |
+| תרחיש שימוש | סוג העדשה | אורכי מוקד | פרטים נוספים |
 | --- | --- | --- | --- |
-| Orang (potret) | Tanda petik, zoom | 24-35mm | film hitam putih, Film noir, Kedalaman bidang, duoton (sebutkan dua warna) |
+| אנשים (דיוקנאות) | Prime, zoom | 24-35 מ״מ | סרט בשחור-לבן, סרט אפל, עומק שדה, דו-גווני (מציינים שני צבעים) |
 
-Dengan menggunakan beberapa kata kunci dari tabel, Imagen dapat membuat potret berikut:
+בעזרת כמה מילות מפתח מהטבלה, Imagen יכול ליצור את הפורטרטים הבאים:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| contoh fotografi potret | contoh fotografi potret | contoh fotografi potret | contoh fotografi potret |
+| דוגמה לצילום דיוקנאות | דוגמה לצילום דיוקנאות | דוגמה לצילום דיוקנאות | דוגמה לצילום דיוקנאות |
 
-Perintah: *Potret wanita, 35 mm, duoton biru dan abu-abu*  
-Model: `imagen-4.0-generate-001`
-
-|  |  |  |  |
-| --- | --- | --- | --- |
-| contoh fotografi potret | contoh fotografi potret | contoh fotografi potret | contoh fotografi potret |
-
-Perintah: *Potret wanita 35 mm, film noir*  
-Model: `imagen-4.0-generate-001`
-
-##### Objek
-
-| Kasus penggunaan | Jenis lensa | Panjang fokal | Detail tambahan |
-| --- | --- | --- | --- |
-| Makanan, serangga, tanaman (objek, still life) | Makro | 60-105mm | Detail tinggi, fokus yang presisi, pencahayaan yang terkontrol |
-
-Dengan menggunakan beberapa kata kunci dari tabel, Imagen dapat membuat gambar objek berikut:
+הנחיה: *דיוקן של אישה, 35 מ"מ, גווני כחול ואפור*  
+מודל: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| contoh fotografi objek | contoh fotografi objek | contoh fotografi objek | contoh fotografi objek |
+| דוגמה לצילום דיוקנאות | דוגמה לצילום דיוקנאות | דוגמה לצילום דיוקנאות | דוגמה לצילום דיוקנאות |
 
-Perintah: *daun tanaman prayer, lensa makro, 60 mm*  
-Model: `imagen-4.0-generate-001`
+הנחיה: *A woman, 35mm portrait, film noir*  
+מודל: `imagen-4.0-generate-001`
+
+##### אובייקטים
+
+| תרחיש שימוש | סוג העדשה | אורכי מוקד | פרטים נוספים |
+| --- | --- | --- | --- |
+| אוכל, חרקים, צמחים (אובייקטים, טבע דומם) | Macro | ‫60-105 מ״מ | רמת פירוט גבוהה, מיקוד מדויק, תאורה מבוקרת |
+
+בעזרת כמה מילות מפתח מהטבלה, Imagen יכול ליצור את תמונות האובייקטים הבאות:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| contoh fotografi objek | contoh fotografi objek | contoh fotografi objek | contoh fotografi objek |
+| דוגמה לצילום אובייקט | דוגמה לצילום אובייקט | דוגמה לצילום אובייקט | דוגמה לצילום אובייקט |
 
-Perintah: *sepiring pasta, lensa Makro 100 mm*  
-Model: `imagen-4.0-generate-001`
-
-##### Gerakan
-
-| Kasus penggunaan | Jenis lensa | Panjang fokal | Detail tambahan |
-| --- | --- | --- | --- |
-| Olahraga, satwa liar (gerakan) | Zoom telefoto | 100-400mm | Kecepatan shutter cepat, Pelacakan tindakan atau gerakan |
-
-Dengan menggunakan beberapa kata kunci dari tabel, Imagen dapat membuat gambar bergerak berikut:
+הנחיה: *leaf of a prayer plant, macro lens, 60mm*  
+מודל: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| contoh fotografi motion | contoh fotografi motion | contoh fotografi motion | contoh fotografi motion |
+| דוגמה לצילום אובייקט | דוגמה לצילום אובייקט | דוגמה לצילום אובייקט | דוגמה לצילום אובייקט |
 
-Perintah: *touchdown kemenangan, kecepatan shutter cepat, pelacakan gerakan*  
-Model: `imagen-4.0-generate-001`
+הנחיה: *צלחת פסטה, עדשת מאקרו 100 מ"מ*  
+מודל: `imagen-4.0-generate-001`
+
+##### תנועה
+
+| תרחיש שימוש | סוג העדשה | אורכי מוקד | פרטים נוספים |
+| --- | --- | --- | --- |
+| ספורט, חיות בר (תנועה) | זום טלפוטו | ‫100-400 מ״מ | מהירות תריס גבוהה, מעקב אחרי פעולה או תנועה |
+
+באמצעות כמה מילות מפתח מהטבלה, Imagen יכול ליצור את תמונות התנועה הבאות:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| contoh fotografi motion | contoh fotografi motion | contoh fotografi motion | contoh fotografi motion |
+| דוגמה לצילום תמונות עם תנועה | דוגמה לצילום תמונות עם תנועה | דוגמה לצילום תמונות עם תנועה | דוגמה לצילום תמונות עם תנועה |
 
-Perintah: *Seekor rusa berlari di hutan, kecepatan shutter cepat, pelacakan gerakan*  
-Model: `imagen-4.0-generate-001`
-
-##### Sudut lebar
-
-| Kasus penggunaan | Jenis lensa | Panjang fokal | Detail tambahan |
-| --- | --- | --- | --- |
-| Astronomi, lanskap (sudut lebar) | Sudut lebar | 10-24mm | Waktu eksposur panjang, fokus tajam, eksposur panjang, air atau awan yang halus |
-
-Dengan menggunakan beberapa kata kunci dari tabel, Imagen dapat membuat gambar sudut lebar berikut:
+הנחיה: *a winning touchdown, מהירות התריס, movement tracking*  
+מודל: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| contoh fotografi sudut lebar | contoh fotografi sudut lebar | contoh fotografi sudut lebar | contoh fotografi sudut lebar |
+| דוגמה לצילום תמונות עם תנועה | דוגמה לצילום תמונות עם תנועה | דוגמה לצילום תמונות עם תנועה | דוגמה לצילום תמונות עם תנועה |
 
-Perintah: *pegunungan yang luas, lanskap sudut lebar 10 mm*  
-Model: `imagen-4.0-generate-001`
+הנחיה: *אייל רץ ביער, מהירות תריס גבוהה, מעקב אחרי תנועה*  
+מודל: `imagen-4.0-generate-001`
+
+##### זווית רחבה
+
+| תרחיש שימוש | סוג העדשה | אורכי מוקד | פרטים נוספים |
+| --- | --- | --- | --- |
+| אסטרונומי, נוף (זווית רחבה) | זווית רחבה | ‫10-24 מ״מ | זמני חשיפה ארוכים, פוקוס חד, חשיפה ארוכה, מים או עננים חלקים |
+
+באמצעות כמה מילות מפתח מהטבלה, Imagen יכול ליצור את התמונות הבאות בזווית רחבה:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| contoh fotografi sudut lebar | contoh fotografi sudut lebar | contoh fotografi sudut lebar | contoh fotografi sudut lebar |
+| דוגמה לצילום בזווית רחבה | דוגמה לצילום בזווית רחבה | דוגמה לצילום בזווית רחבה | דוגמה לצילום בזווית רחבה |
 
-Perintah: *foto bulan, fotografi astro, sudut lebar 10 mm*  
-Model: `imagen-4.0-generate-001`
+הנחיה: *רכס הרים רחב, צילום נוף בזווית רחבה של 10 מ"מ*  
+מודל: `imagen-4.0-generate-001`
 
-## Versi model
+|  |  |  |  |
+| --- | --- | --- | --- |
+| דוגמה לצילום בזווית רחבה | דוגמה לצילום בזווית רחבה | דוגמה לצילום בזווית רחבה | דוגמה לצילום בזווית רחבה |
 
-### Imagen 4 (Tidak digunakan lagi)
+הנחיה: *תמונה של הירח, צילום אסטרונומי, זווית רחבה של 10 מ"מ*  
+מודל: `imagen-4.0-generate-001`
 
-| Properti | Deskripsi |
+## גרסאות המודלים
+
+### ‫Imagen 4 (הוצא משימוש)
+
+| נכס | תיאור |
 | --- | --- |
-| Kode model id\_card | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
-| saveJenis data yang didukung | **Input**  Teks  **Output**  Gambar |
-| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Batas token input**  480 token (teks)  **Output gambar**  1 hingga 4 (Ultra/Standard/Cepat) |
-| calendar\_monthPembaruan terbaru | Juni 2025 |
+| id\_cardקוד מודל | ‫**Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
+| saveסוגי נתונים נתמכים | **קלט**  טקסט  **פלט**  תמונות |
+| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  ‫480 טוקנים (טקסט)  **תמונות פלט**  ‫1 עד 4 (Ultra/Standard/Fast) |
+| calendar\_monthהעדכון האחרון | יוני 2025 |
 
 ### Imagen 3
 
-Model Imagen 3 telah [dinonaktifkan](https://ai.google.dev/gemini-api/docs/deprecations?hl=id).
+מודל Imagen 3 [יצא משימוש](https://ai.google.dev/gemini-api/docs/deprecations?hl=he).
 
-Kirim masukan
+שליחת משוב
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Terakhir diperbarui pada 2026-07-16 UTC.
+עדכון אחרון: 2026-07-16 (שעון UTC).
 
-Ada masukan untuk kami?
+רוצה לתת לנו משוב?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-16 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-16 (שעון UTC)."],[],[]]

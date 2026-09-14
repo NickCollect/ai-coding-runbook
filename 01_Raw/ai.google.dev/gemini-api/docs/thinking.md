@@ -1,40 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=pl
-fetched_at: 2026-09-07T05:40:38.561268+00:00
-title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=tr
+fetched_at: 2026-09-14T05:42:28.940730+00:00
+title: "Gemini d\u00fc\u015f\u00fcncesi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Prześlij opinię
+Geri bildirim gönderin
 
-# Gemini
+# Gemini düşüncesi
 
-Modele z serii [Gemini 3 i 2.5](https://ai.google.dev/gemini-api/docs/models?hl=pl) korzystają z
-„procesu myślenia”, który znacznie poprawia ich zdolność do rozumowania i planowania wieloetapowego,
-dzięki czemu są bardzo skuteczne w przypadku złożonych zadań, takich jak
-kodowanie, zaawansowana matematyka i analiza danych.
+[Gemini 3 ve 2.5 serisi modeller](https://ai.google.dev/gemini-api/docs/models?hl=tr), akıl yürütme ve çok adımlı planlama yeteneklerini önemli ölçüde geliştiren bir "düşünme süreci" kullanır. Bu sayede kodlama, ileri matematik ve veri analizi gibi karmaşık görevlerde oldukça etkili olurlar.
 
-Gdy używasz modelu myślącego, Gemini przeprowadza wewnętrzne rozumowanie przed udzieleniem odpowiedzi. Interfejs API Interactions udostępnia to rozumowanie za pomocą kroków `thought`, czyli specjalnych kroków, które pojawiają się chronologicznie obok wywołań funkcji, danych wejściowych użytkownika lub danych wyjściowych modelu w tablicy `steps`.
+Düşünme modeli kullandığınızda Gemini, yanıt vermeden önce kendi içinde akıl yürütür. Etkileşimler API'si, bu gerekçeyi `thought` adımları aracılığıyla gösterir. Bu adımlar, `steps` dizisindeki işlev çağrıları, kullanıcı girişleri veya model çıkışlarıyla birlikte kronolojik olarak görünür.
 
-Każdy krok myślenia zawiera 2 pola:
+Her düşünce adımı iki alan içerir:
 
-| Pole | Wymagane | Opis |
+| Alan | Zorunlu | Açıklama |
 | --- | --- | --- |
-| `signature` | ✅ Tak | Zaszyfrowana reprezentacja wewnętrznego stanu rozumowania modelu. Zawsze obecna, nawet gdy model wykonuje minimalne rozumowanie. |
-| `summary` | ❌ Nie | Tablica treści (tekstu lub obrazów) podsumowująca rozumowanie. Może być pusta w zależności od konfiguracji [`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=pl), tego, czy model przeprowadził wystarczające rozumowanie, lub typu treści (np. obrazy mogą nie mieć podsumowań tekstowych). |
+| `signature` | ✅ Evet | Modelin dahili muhakeme durumunun şifrelenmiş temsili. Model en az muhakeme yaptığında bile her zaman mevcuttur. |
+| `summary` | ❌ Hayır | Gerekçeyi özetleyen bir dizi içerik (metin ve/veya resim). [`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=tr) yapılandırmasına, modelin yeterli akıl yürütme yapıp yapmadığına veya içerik türüne (ör. görüntü latents'lerinde metin özetleri olmayabilir) bağlı olarak boş olabilir. |
 
-## Z tego powodu podpisy są ograniczone wyłącznie do 2 znanych lokalizacji: kroków `thought` lub wbudowanych kroków narzędzi (takich jak `google\_search\_call` / `google\_search\_result`). Nigdy nie pojawiają się w danych wejściowych użytkownika, danych wyjściowych modelu ani standardowych wywołaniach funkcji.
+## Düşünceyle etkileşimler
 
-Inicjowanie interakcji z modelem myślącym jest podobne do każdego innego żądania interakcji. Określ jeden z [modeli z obsługą myślenia](#thinking-levels) w polu `model`:
+Bir düşünce modeliyle etkileşim başlatmak, diğer etkileşim isteklerine benzer. `model` alanında [düşünme desteği olan modellerden](#thinking-levels) birini belirtin:
 
 ### Python
 
@@ -44,7 +41,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.8-flash",
+    model="gemini-3.6-flash",
     input="Explain the concept of Occam's Razor and provide a simple, everyday example."
 )
 print(interaction.output_text)
@@ -58,37 +55,10 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.8-flash",
+    model: "gemini-3.6-flash",
     input: "Explain the concept of Occam's Razor and provide a simple, everyday example."
 });
 console.log(interaction.output_text);
-```
-
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.GenerationConfig;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.interactions.ThinkingLevel;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain the concept of Occam's Razor and provide a simple example."))
-        .generationConfig(GenerationConfig.builder().thinkingLevel(ThinkingLevel.HIGH).build())
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
 ```
 
 ### REST
@@ -98,15 +68,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.8-flash",
+    "model": "gemini-3.6-flash",
     "input": "Explain the concept of Occam'\''s Razor and provide a simple example."
   }'
 ```
 
-## Podsumowania myśli
+## Düşünce özetleri
 
-Podsumowania myśli zawierają informacje o wewnętrznym procesie rozumowania modelu.
-Domyślnie zwracane są tylko dane wyjściowe. Podsumowania myśli możesz włączyć za pomocą `thinking_summaries`:
+Düşünce özetleri, modelin dahili akıl yürütme süreci hakkında bilgi verir.
+Varsayılan olarak yalnızca son çıktı döndürülür. `thinking_summaries` ile düşünce özetlerini etkinleştirebilirsiniz:
 
 ### Python
 
@@ -116,7 +86,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.8-flash",
+    model="gemini-3.6-flash",
     input="What is the sum of the first 50 prime numbers?",
     generation_config={
         "thinking_summaries": "auto"
@@ -147,7 +117,7 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.8-flash",
+    model: "gemini-3.6-flash",
     input: "What is the sum of the first 50 prime numbers?",
     generation_config: {
         thinking_summaries: "auto"
@@ -173,33 +143,6 @@ for (const step of interaction.steps) {
 }
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.GenerationConfig;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.interactions.ThinkingLevel;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain the concept of Occam's Razor and provide a simple example."))
-        .generationConfig(GenerationConfig.builder().thinkingLevel(ThinkingLevel.HIGH).build())
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
-```
-
 ### REST
 
 ```
@@ -207,7 +150,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.8-flash",
+    "model": "gemini-3.6-flash",
     "input": "What is the sum of the first 50 prime numbers?",
     "generation_config": {
       "thinking_summaries": "auto"
@@ -215,23 +158,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-W tych przypadkach blok myśli może zawierać **tylko podpis bez podsumowania**:
+Düşünce bloğu, aşağıdaki durumlarda **yalnızca özet içermeyen bir imza** içerebilir:
 
-- Proste żądania, w których model nie przeprowadził wystarczającego rozumowania, aby wygenerować podsumowanie.
-- `thinking_summaries: "none"`, w którym podsumowania są wyraźnie wyłączone.
-- Niektóre typy treści myśli, takie jak obrazy, mogą nie mieć podsumowań tekstowych.
+- Modelin özet oluşturmak için yeterince akıl yürütmediği basit istekler
+- `thinking_summaries: "none"`, özetlerin açıkça devre dışı bırakıldığı yerler
+- Resimler gibi belirli düşünce içerik türlerinde metin özetleri bulunmayabilir.
 
-Twój kod powinien zawsze obsługiwać bloki myśli, w których pole `summary` jest puste lub nieobecne.
+Kodunuz, `summary` değerinin boş veya eksik olduğu düşünce bloklarını her zaman işlemelidir.
 
-## Strumieniowanie z myśleniem
+## Düşünerek yayın yapma
 
-Użyj strumieniowania, aby otrzymywać przyrostowe podsumowania myśli podczas generowania.
-Bloki myśli są dostarczane za pomocą zdarzeń wysyłanych przez serwer (SSE) z 2 różnymi typami delta:
+Oluşturma sırasında artımlı düşünce özetleri almak için akışı kullanın.
+Düşünce blokları, iki farklı delta türüyle Server-Sent Events (SSE) kullanılarak yayınlanır:
 
-| Typ delta | Zawiera | Kiedy wysłano |
+| Delta türü | Şunu içerir: | Gönderildiğinde |
 | --- | --- | --- |
-| `thought_summary` | Treść podsumowania tekstowego lub obrazu | Co najmniej 1 delta z przyrostowym podsumowaniem |
-| `thought_signature` | Podpis kryptograficzny | Ostatnia delta przed `step.stop` |
+| `thought_summary` | Metin veya resim özet içeriği | Artımlı özet içeren bir veya daha fazla delta |
+| `thought_signature` | Kriptografik imza | `step.stop` tarihinden önceki son değişiklik |
 
 ### Python
 
@@ -252,7 +195,7 @@ thoughts = ""
 answer = ""
 
 stream = client.interactions.create(
-    model="gemini-3.8-flash",
+    model="gemini-3.6-flash",
     input=prompt,
     generation_config={
         "thinking_summaries": "auto"
@@ -292,7 +235,7 @@ let thoughts = "";
 let answer = "";
 
 const stream = await client.interactions.create({
-    model: "gemini-3.8-flash",
+    model: "gemini-3.6-flash",
     input: prompt,
     generation_config: {
         thinking_summaries: "auto"
@@ -316,33 +259,6 @@ for await (const event of stream) {
 }
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.GenerationConfig;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.interactions.ThinkingLevel;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain the concept of Occam's Razor and provide a simple example."))
-        .generationConfig(GenerationConfig.builder().thinkingLevel(ThinkingLevel.HIGH).build())
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
-```
-
 ### REST
 
 ```
@@ -351,7 +267,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H 'Content-Type: application/json' \
   --no-buffer \
   -d '{
-    "model": "gemini-3.8-flash",
+    "model": "gemini-3.6-flash",
     "input": "Alice, Bob, and Carol each live in a different house on the same street: red, green, and blue. Alice does not live in the red house. Bob does not live in the green house. Carol does not live in the red or green house. Which house does each person live in?",
     "generation_config": {
       "thinking_summaries": "auto"
@@ -360,11 +276,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Odpowiedź strumieniowa korzysta ze zdarzeń wysyłanych przez serwer (SSE) i składa się z kroków i zdarzeń, np.:
+Akış yanıtı, sunucu tarafından gönderilen etkinlikleri (SSE) kullanır ve adımlar ile etkinliklerden oluşur. Örneğin:
 
 ```
 event: interaction.created
-data: {"interaction":{"id":"v1_xxx","status":"in_progress","object":"interaction","model":"gemini-3.8-flash"},"event_type":"interaction.created"}
+data: {"interaction":{"id":"v1_xxx","status":"in_progress","object":"interaction","model":"gemini-3.6-flash"},"event_type":"interaction.created"}
 
 event: step.start
 data: {"index":0,"step":{"signature":"","summary":[{"text":"**Evaluating the clues**\n\nI'm considering...","type":"text"}],"type":"thought"},"event_type":"step.start"}
@@ -391,24 +307,22 @@ event: done
 data: [DONE]
 ```
 
-## Kontrolowanie myślenia
+## Düşünceleri kontrol etme
 
-Modele Gemini domyślnie korzystają z myślenia dynamicznego, automatycznie dostosowując ilość rozumowania do złożoności żądania. To zachowanie możesz kontrolować za pomocą parametru `thinking_level`.
+Gemini modelleri, varsayılan olarak dinamik düşünme yöntemini kullanır ve isteğin karmaşıklığına göre akıl yürütme çabasını otomatik olarak ayarlar. Bu davranışı `thinking_level` parametresini kullanarak kontrol edebilirsiniz.
 
-| Model | Domyślne myślenie | Obsługiwane poziomy |
+| Model | Varsayılan Düşünme | Desteklenen Seviyeler |
 | --- | --- | --- |
-| gemini-3.8-flash | Wł. (średni) | niski, średni, wysoki |
-| gemini-3.7-flash | Wł. (średni) | niski, średni, wysoki |
-| gemini-3.6-flash | Wł. (średni) | minimalny, niski, średni, wysoki |
-| gemini-3.5-flash-lite | Wł. (minimalny) | minimalny, niski, średni, wysoki |
-| gemini-3.1-pro-preview | Wł. (wysoki) | niski, średni, wysoki |
-| gemini-3.1-flash-lite-image | Wł. (minimalny) | minimalny, wysoki |
-| gemini-3-flash-preview | Wł. (wysoki) | minimalny, niski, średni, wysoki |
-| gemini-3-pro-preview | Wł. (wysoki) | niski, wysoki |
-| gemini-3.5-flash | Wł. (średni) | minimalny, niski, średni, wysoki |
-| gemini-2.5-pro | Wł. | niski, średni, wysoki |
-| gemini-2.5-flash | Wł. | niski, średni, wysoki |
-| gemini-2.5-flash-lite | Wył. | niski, średni, wysoki |
+| gemini-3.6-flash | Açık (orta) | en az, düşük, orta, yüksek |
+| gemini-3.5-flash-lite | Açık (minimal) | en az, düşük, orta, yüksek |
+| gemini-3.1-pro-preview | Açık (yüksek) | düşük, orta, yüksek |
+| gemini-3.1-flash-lite-image | Açık (minimal) | minimal, yüksek |
+| gemini-3-flash-preview | Açık (yüksek) | en az, düşük, orta, yüksek |
+| gemini-3-pro-preview | Açık (yüksek) | düşük, yüksek |
+| gemini-3.5-flash | Açık (orta) | en az, düşük, orta, yüksek |
+| gemini-2.5-pro | Açık | düşük, orta, yüksek |
+| gemini-2.5-flash | Açık | düşük, orta, yüksek |
+| gemini-2.5-flash-lite | Kapalı | düşük, orta, yüksek |
 
 ### Python
 
@@ -418,7 +332,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.8-flash",
+    model="gemini-3.6-flash",
     input="Provide a list of 3 famous physicists and their key contributions",
     generation_config={
         "thinking_level": "low"
@@ -435,40 +349,13 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.8-flash",
+    model: "gemini-3.6-flash",
     input: "Provide a list of 3 famous physicists and their key contributions",
     generation_config: {
         thinking_level: "low"
     }
 });
 console.log(interaction.output_text);
-```
-
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.GenerationConfig;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.interactions.ThinkingLevel;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain the concept of Occam's Razor and provide a simple example."))
-        .generationConfig(GenerationConfig.builder().thinkingLevel(ThinkingLevel.HIGH).build())
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
 ```
 
 ### REST
@@ -478,7 +365,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.8-flash",
+    "model": "gemini-3.6-flash",
     "input": "Provide a list of 3 famous physicists and their key contributions",
     "generation_config": {
       "thinking_level": "low"
@@ -486,27 +373,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Podpisy myśli
+## Düşünce imzaları
 
-Podpisy myśli to zaszyfrowane reprezentacje wewnętrznego rozumowania modelu. Są one wymagane do zachowania ciągłości rozumowania w interakcjach wieloetapowych.
+Düşünce imzaları, modelin dahili muhakemesinin şifrelenmiş gösterimleridir. Çok aşamalı etkileşimlerde muhakeme sürekliliğini korumaları gerekir.
 
-Interfejs API Interactions znacznie upraszcza obsługę podpisów myśli w porównaniu z interfejsem API `generateContent`.
+Etkileşimler API'si, düşünce imzalarını `generateContent` API'sinden çok daha kolay bir şekilde yönetmenizi sağlar.
 
-### Tryb stanowy (zalecany)
+### Durumlu mod (önerilir)
 
-Domyślnie, gdy używasz interfejsu API Interactions w trybie stanowym (ustawiając `store: true` i przekazując `previous_interaction_id` w kolejnych turach), serwer automatycznie zarządza stanem rozmowy, w tym wszystkimi blokami myśli i podpisami. W tym trybie nie musisz nic robić z podpisami. Są one obsługiwane w całości po stronie serwera.
+Varsayılan olarak, Interactions API'yi durum bilgisi olan modda kullandığınızda (`store: true` ayarlanarak ve sonraki dönüşlerde `previous_interaction_id` iletilerek) sunucu, tüm düşünce blokları ve imzalar dahil olmak üzere sohbet durumunu otomatik olarak yönetir. Bu modda imzalarla ilgili herhangi bir işlem yapmanız gerekmez. Tamamen sunucu tarafında işlenirler.
 
-### Tryb bezstanowy
+### Durumsuz mod
 
-Jeśli samodzielnie zarządzasz stanem rozmowy (tryb bezstanowy) i przekazujesz pełną historię danych wejściowych i wyjściowych w każdym żądaniu:
+Sohbet durumunu kendiniz yönetiyorsanız (durum bilgisiz mod) ve her istekte giriş ve çıkışların tam geçmişini iletiyorsanız:
 
-- **MUSISZ** zawsze ponownie wysyłać wszystkie bloki `thought` dokładnie tak, jak zostały odebrane z modelu.
-- **NIE POWINIENEŚ** usuwać ani modyfikować bloków myśli w historii, ponieważ zawierają one podpisy wymagane do kontynuowania rozumowania przez model.
-- Podczas przełączania modeli w ramach sesji nadal należy ponownie wysyłać bloki myśli poprzedniego modelu. Backend zarządza zgodnością.
+- Tüm `thought` bloklarını modelden alındığı şekilde **MUTLAKA** yeniden göndermelisiniz.
+- Modelin akıl yürütmeye devam etmesi için gereken imzaları içerdiğinden, geçmişteki düşünce bloklarını **KALDIRMAMALI** veya değiştirmemelisiniz.
+- Bir oturumda modeller arasında geçiş yaparken önceki modelin düşünce bloklarını yine de yeniden göndermeniz gerekir. Uyumluluk, arka uç tarafından yönetilir.
 
-## Ceny
+## Fiyatlandırma
 
-Gdy myślenie jest włączone, cena odpowiedzi jest sumą tokenów wyjściowych i tokenów myślenia. Łączną liczbę wygenerowanych tokenów myślenia możesz uzyskać z pola `total_thought_tokens`.
+Düşünme etkinleştirildiğinde yanıt fiyatı, çıkış jetonlarının ve düşünme jetonlarının toplamıdır. Oluşturulan düşünme jetonlarının toplam sayısını `total_thought_tokens` alanından alabilirsiniz.
 
 ### Python
 
@@ -522,61 +409,32 @@ console.log(`Thoughts tokens: ${interaction.usage.total_thought_tokens}`);
 console.log(`Output tokens: ${interaction.usage.total_output_tokens}`);
 ```
 
-### Java
+Düşünme modelleri, nihai yanıtın kalitesini artırmak için tam düşünceler üretir ve ardından düşünce süreci hakkında bilgi vermek için [özetler](#summaries) oluşturur. Fiyatlandırma, API'den yalnızca özet çıkışı yapılmasına rağmen modelin oluşturması gereken tam düşünce jetonlarına göre belirlenir.
 
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.GenerationConfig;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.interactions.ThinkingLevel;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+Jetonlar hakkında daha fazla bilgiyi [Jeton sayma](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) kılavuzunda bulabilirsiniz.
 
-Client client = new Client();
+## En iyi uygulamalar
 
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain the concept of Occam's Razor and provide a simple example."))
-        .generationConfig(GenerationConfig.builder().thinkingLevel(ThinkingLevel.HIGH).build())
-        .build();
+Aşağıdaki yönergeleri uygulayarak düşünce modellerini verimli bir şekilde kullanın.
 
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+- **Gerekçeyi inceleme**: Hataları anlamak ve istemleri iyileştirmek için düşünce özetlerini analiz edin.
+- **Düşünme bütçesini kontrol etme**: Jeton tasarrufu için modelden uzun çıktılarda daha az düşünmesini isteyin.
+- **Basit görevler**: Bilgi alma veya sınıflandırma için minimum düzeyde düşünme ya da az düşünme kullanın (ör. "DeepMind nerede kuruldu?").
+- **Denetleme görevleri**: Kavramları karşılaştırmak veya yaratıcı akıl yürütme için varsayılan düşünceyi kullanın (ör. elektrikli ve hibrit arabaları karşılaştırın).
+- **Karmaşık görevler**: Gelişmiş kodlama, matematik veya çok adımlı planlama (ör. AIME matematik problemlerini çözme) için maksimum düşünme özelliğini kullanın.
 
-System.out.println(interaction.outputText().orElse(""));
-```
+## Sırada ne var?
 
-Modele myślące generują pełne myśli, aby poprawić jakość ostatecznej
-odpowiedzi, a następnie wyświetlają [podsumowania](#summaries), aby zapewnić wgląd w
-proces myślenia. Ceny są oparte na pełnych tokenach myśli, które model musi wygenerować, mimo że interfejs API wyświetla tylko podsumowanie.
+- [Metin üretme](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr): Temel metin yanıtları
+- [İşlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr): Araçlara bağlanma
+- [Gemini 3 rehberi](https://ai.google.dev/gemini-api/docs/gemini-3?hl=tr): Modele özgü özellikler
 
-Więcej informacji o tokenach znajdziesz w przewodniku po [zliczaniu tokenów](https://ai.google.dev/gemini-api/docs/tokens?hl=pl).
+Geri bildirim gönderin
 
-## Sprawdzone metody
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Aby efektywnie korzystać z modeli myślących, postępuj zgodnie z tymi wskazówkami.
+Son güncelleme tarihi: 2026-09-12 UTC.
 
-- **Sprawdzaj rozumowanie**: analizuj podsumowania myśli, aby zrozumieć błędy i ulepszyć prompty.
-- **Kontroluj budżet na myślenie**: poproś model, aby mniej myślał w przypadku długich danych wyjściowych, aby zaoszczędzić tokeny.
-- **Proste zadania**: używaj minimalnego lub niskiego myślenia do wyszukiwania faktów lub klasyfikacji (np. „Gdzie założono DeepMind?”).
-- **Umiarkowane zadania**: używaj domyślnego myślenia do porównywania pojęć lub kreatywnego rozumowania (np. porównaj samochody elektryczne i hybrydowe).
-- **Złożone zadania**: używaj maksymalnego myślenia do zaawansowanego kodowania, matematyki lub planowania wieloetapowego (np. rozwiązywania zadań matematycznych AIME).
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-## Co dalej?
-
-- [Generowanie tekstu](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl): podstawowe odpowiedzi tekstowe
-- [Wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl): łączenie z narzędziami
-- [Przewodnik po Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=pl): funkcje specyficzne dla modelu
-
-Prześlij opinię
-
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
-
-Ostatnia aktualizacja: 2026-09-04 UTC.
-
-Chcesz przekazać coś jeszcze?
-
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-04 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-12 UTC."],[],[]]

@@ -1,46 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/api-errors?hl=hi
-fetched_at: 2026-09-07T05:48:44.720313+00:00
-title: "\u090f\u092a\u0940\u0906\u0908 \u0938\u0947 \u091c\u0941\u0921\u093c\u0940 \u0917\u0921\u093c\u092c\u0921\u093c\u093f\u092f\u093e\u0902 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/api-errors?hl=tr
+fetched_at: 2026-09-14T05:41:36.565786+00:00
+title: "API hatalar\u0131 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs/generate-content?hl=tr)
 
-सुझाव भेजें
+Geri bildirim gönderin
 
-# एपीआई से जुड़ी गड़बड़ियां
+# API hataları
 
-इस पेज पर, `GenerateContent` API से मिलने वाले बैकएंड गड़बड़ी के कोड के बारे में जानकारी दी गई है. इसमें gRPC गड़बड़ी के जवाब के फ़ॉर्मैट के बारे में बताया गया है. साथ ही, गड़बड़ी को ठीक करने के तरीके भी दिए गए हैं.
+Bu sayfada, `GenerateContent` API'si tarafından döndürülen arka uç hata kodları için bir referans sağlanmakta, gRPC hata yanıtı biçimi açıklanmakta ve sorun giderme adımları sunulmaktadır.
 
-## एचटीटीपी गड़बड़ी के कोड
+## HTTP hata kodları
 
-यहां दी गई टेबल में, बैकएंड की सामान्य गड़बड़ी के कोड, उनकी वजहें, और उन्हें ठीक करने के सुझाव दिए गए हैं:
+Aşağıdaki tabloda, yaygın olarak görülen arka uç hata kodları, nedenleriyle ilgili açıklamalar ve önerilen çözümler listelenmektedir:
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **एचटीटीपी कोड** | **स्टेटस** | **ब्यौरा** | **उदाहरण** | **गड़बड़ी ठीक करने का तरीका** |
-| 400 | INVALID\_ARGUMENT | अनुरोध का मुख्य हिस्सा गलत तरीके से बनाया गया है. | आपके अनुरोध में, टाइप करने में कोई गड़बड़ी हुई है या कोई ज़रूरी फ़ील्ड मौजूद नहीं है. | अनुरोध के फ़ॉर्मैट, उदाहरणों, और काम करने वाले वर्शन के लिए, [एपीआई रेफ़रंस](https://ai.google.dev/api?hl=hi) देखें. पुराने एंडपॉइंट के साथ, एपीआई के नए वर्शन की सुविधाओं का इस्तेमाल करने पर गड़बड़ियां हो सकती हैं. |
-| 400 | FAILED\_PRECONDITION | आपके देश में, Gemini API का मुफ़्त टियर उपलब्ध नहीं है. कृपया Google AI Studio में अपने प्रोजेक्ट के लिए बिलिंग की सुविधा चालू करें. | आपने किसी ऐसे इलाके में अनुरोध किया है जहां मुफ़्त टियर उपलब्ध नहीं है. साथ ही, आपने Google AI Studio में अपने प्रोजेक्ट के लिए बिलिंग की सुविधा चालू नहीं की है. | Gemini API का इस्तेमाल करने के लिए, आपको [Google AI Studio](https://aistudio.google.com/apikey?hl=hi) का इस्तेमाल करके, कोई पेड प्लान सेट अप करना होगा. |
-| 403 | PERMISSION\_DENIED | आपके एपीआई पासकोड के पास ज़रूरी अनुमतियां नहीं हैं. | आपने गलत एपीआई पासकोड का इस्तेमाल किया है. साथ ही, आपने [सही तरीके से पुष्टि किए बिना](https://ai.google.dev/gemini-api/docs/model-tuning?hl=hi), ट्यून किए गए मॉडल का इस्तेमाल करने की कोशिश की है. | पक्का करें कि आपका एपीआई पासकोड सेट हो और उसके पास सही ऐक्सेस हो. साथ ही, ट्यून किए गए मॉडल का इस्तेमाल करने के लिए, सही तरीके से पुष्टि करना न भूलें. |
-| 404 | NOT\_FOUND | अनुरोध किया गया संसाधन नहीं मिला. | आपके अनुरोध में रेफ़रंस की गई कोई इमेज, ऑडियो या वीडियो फ़ाइल नहीं मिली. | देखें कि आपके अनुरोध में शामिल सभी पैरामीटर, एपीआई के आपके वर्शन के लिए मान्य हैं या नहीं. |
-| 429 | RESOURCE\_EXHAUSTED | आपने एपीआई की दर से जुड़ी किसी एक सीमा (आरपीएम, टीपीएम, आरपीडी, खर्च वगैरह) को पार कर लिया है. | आपने बहुत ज़्यादा अनुरोध भेजे हैं, बहुत ज़्यादा टोकन का इस्तेमाल किया है या अपने खाते के बिलिंग इतिहास और टियर के लिए, खर्च के आधार पर तय की गई सीमाओं को पार कर लिया है. | पक्का करें कि आपने मॉडल की [दर से जुड़ी सीमाओं](https://ai.google.dev/gemini-api/docs/rate-limits?hl=hi) के अंदर ही अनुरोध भेजे हों. कुछ समय इंतज़ार करें और फिर से कोशिश करें. अनुरोध भेजने की दर या अनुरोधों का साइज़ कम करें. अगर ज़रूरत हो, तो [दर से जुड़ी सीमा बढ़ाने का अनुरोध करें](https://ai.google.dev/gemini-api/docs/rate-limits?hl=hi#request-rate-limit-increase). |
-| 499 | CANCELLED | कार्रवाई रद्द कर दी गई. आम तौर पर, ऐसा कॉल करने वाले व्यक्ति की वजह से होता है. | एपीआई के जवाब देने से पहले ही, क्लाइंट ने कनेक्शन बंद कर दिया. | देखें कि आपका क्लाइंट या नेटवर्क इन्फ़्रास्ट्रक्चर, कनेक्शन को समय से पहले बंद तो नहीं कर रहा है. उदाहरण के लिए, क्लाइंट-साइड टाइम आउट की वजह से. |
-| 500 | INTERNAL | Google की तरफ़ से कोई गड़बड़ी हुई. | आपका इनपुट कॉन्टेक्स्ट बहुत लंबा है. | किसी भी तरह की समस्या के बारे में जानने के लिए, [Gemini API के स्टेटस पेज](https://aistudio.google.com/status?hl=hi) पर जाएं. अपना इनपुट कॉन्टेक्स्ट कम करें या कुछ समय के लिए किसी दूसरे मॉडल पर स्विच करें. जैसे, Gemini 2.5 Pro से Gemini 2.5 Flash पर स्विच करें और देखें कि यह काम करता है या नहीं. इसके अलावा, कुछ समय इंतज़ार करें और फिर से अनुरोध करें. अगर फिर से कोशिश करने के बाद भी समस्या बनी रहती है, तो कृपया Google AI Studio में **सुझाव/राय भेजें या शिकायत करें** बटन का इस्तेमाल करके, इसकी शिकायत करें. |
-| 503 | UNAVAILABLE | ऐसा हो सकता है कि सेवा पर कुछ समय के लिए बहुत ज़्यादा लोड हो या वह डाउन हो. | फ़िलहाल, सेवा की क्षमता खत्म हो रही है. | किसी भी तरह की समस्या के बारे में जानने के लिए, [Gemini API के स्टेटस पेज](https://aistudio.google.com/status?hl=hi) पर जाएं. कुछ समय के लिए किसी दूसरे मॉडल पर स्विच करें. जैसे, Gemini 2.5 Pro से Gemini 2.5 Flash पर स्विच करें और देखें कि यह काम करता है या नहीं. इसके अलावा, कुछ समय इंतज़ार करें और फिर से अनुरोध करें. अगर फिर से कोशिश करने के बाद भी समस्या बनी रहती है, तो कृपया Google AI Studio में **सुझाव/राय भेजें या शिकायत करें** बटन का इस्तेमाल करके, इसकी शिकायत करें. |
-| 504 | DEADLINE\_EXCEEDED | सेवा, तय समय में अनुरोध को प्रोसेस नहीं कर पा रही है. | आपका प्रॉम्प्ट (या कॉन्टेक्स्ट) इतना बड़ा है कि उसे समय पर प्रोसेस नहीं किया जा सकता. | इस गड़बड़ी से बचने के लिए, अपने क्लाइंट के अनुरोध में 'टाइम आउट' की ज़्यादा वैल्यू सेट करें. |
+| **HTTP Kodu** | **Durum** | **Açıklama** | **Örnek** | **Çözüm** |
+| 400 | INVALID\_ARGUMENT | İstek metni yanlış biçimlendirilmiş. | İsteğinizde yazım hatası var veya zorunlu bir alan eksik. | İstek biçimi, örnekler ve desteklenen sürümler için [API referansına](https://ai.google.dev/api?hl=tr) bakın. Daha yeni bir API sürümündeki özellikleri daha eski bir uç nokta ile kullanmak hatalara neden olabilir. |
+| 400 | FAILED\_PRECONDITION | Gemini API ücretsiz katmanı ülkenizde kullanılamıyor. Lütfen Google AI Studio'da projenizde faturalandırmayı etkinleştirin. | Ücretsiz katmanın desteklenmediği bir bölgede istekte bulunuyorsunuz ve Google AI Studio'daki projenizde faturalandırmayı etkinleştirmediniz. | Gemini API'yi kullanmak için [Google AI Studio](https://aistudio.google.com/apikey?hl=tr)'yu kullanarak ücretli bir plan oluşturmanız gerekir. |
+| 403 | PERMISSION\_DENIED | API anahtarınız gerekli izinlere sahip değil. | Yanlış API anahtarını kullanıyorsunuz. [Uygun kimlik doğrulama](https://ai.google.dev/gemini-api/docs/model-tuning?hl=tr) işleminden geçmeden ayarlanmış bir modeli kullanmaya çalışıyorsunuz. | API anahtarınızın ayarlandığından ve doğru erişime sahip olduğundan emin olun. Ayrıca, ince ayarlı modelleri kullanmak için uygun kimlik doğrulama sürecinden geçtiğinizden emin olun. |
+| 404 | NOT\_FOUND | İstenen kaynak bulunamadı. | İsteğinizde referans verilen bir resim, ses veya video dosyası bulunamadı. | İsteğinizdeki tüm parametrelerin API sürümünüz için geçerli olup olmadığını kontrol edin. |
+| 429 | RESOURCE\_EXHAUSTED | API'nin hız sınırlarından birini (RPM, TPM, RPD, harcama vb.) aştınız. | Çok fazla istek gönderiyor, çok fazla jeton kullanıyor veya hesabınızın fatura geçmişi ve katmanı için harcamaya dayalı sınırları aşıyorsunuz. | Modelin [hız sınırları](https://ai.google.dev/gemini-api/docs/rate-limits?hl=tr) dahilinde olduğunuzu doğrulayın. Bekleyin ve kısa bir süre sonra tekrar deneyin. İsteklerinizin sıklığını veya boyutunu azaltın. Gerekirse [hız sınırı artışı isteyin](https://ai.google.dev/gemini-api/docs/rate-limits?hl=tr#request-rate-limit-increase). |
+| 499 | İPTAL EDİLDİ | İşlem iptal edildi (genellikle arayan tarafından). | İstemci, API yanıt vermeyi tamamlamadan önce bağlantıyı kapattı. | İstemcinizin veya ağ altyapınızın bağlantıyı erken kapatıp kapatmadığını kontrol edin (ör. istemci tarafında zaman aşımı nedeniyle). |
+| 500 | ŞİRKET İÇİ | Google'dan kaynaklanan beklenmeyen bir hata oluştu. | Giriş bağlamınız çok uzun. | Devam eden olaylar için [Gemini API durum sayfasını](https://aistudio.google.com/status?hl=tr) kontrol edin. Giriş bağlamınızı azaltın veya geçici olarak başka bir modele (ör. Gemini 2.5 Pro'dan Gemini 2.5 Flash'e) geçip sorunun çözülüp çözülmediğini kontrol edin. Dilerseniz biraz bekleyip isteğinizi yeniden deneyebilirsiniz. Yeniden denedikten sonra sorun devam ederse lütfen Google AI Studio'daki **Geri bildirim gönder** düğmesini kullanarak sorunu bildirin. |
+| 503 | UNAVAILABLE | Hizmet geçici olarak aşırı yüklü veya kapalı olabilir. | Hizmetin kapasitesi geçici olarak dolmuş olabilir. | Devam eden olaylar için [Gemini API durum sayfasını](https://aistudio.google.com/status?hl=tr) kontrol edin. Geçici olarak başka bir modele (ör. Gemini 2.5 Pro'dan Gemini 2.5 Flash'e) geçip çalışıp çalışmadığını kontrol edin. Dilerseniz biraz bekleyip isteğinizi yeniden deneyebilirsiniz. Yeniden denedikten sonra sorun devam ederse lütfen Google AI Studio'daki **Geri bildirim gönder** düğmesini kullanarak sorunu bildirin. |
+| 504 | DEADLINE\_EXCEEDED | Hizmet, işleme işlemini son tarihe kadar tamamlayamıyor. | İsteminiz (veya bağlamınız), zamanında işlenemeyecek kadar büyük. | Bu hatayı önlemek için istemci isteğinizde daha büyük bir "zaman aşımı" ayarlayın. |
 
-## गड़बड़ी के जवाब का फ़ॉर्मैट
+## Hata yanıtı biçimi
 
-जब `GenerateContent` का कोई अनुरोध पूरा नहीं हो पाता, तो एपीआई, एचटीटीपी स्टेटस कोड सेट करता है. जैसे, `400 Bad Request`, `403 Forbidden` या `429 Too Many Requests`. साथ ही, gRPC स्टेटस की जानकारी वाला JSON जवाब का मुख्य हिस्सा दिखाता है:
+Bir `GenerateContent` isteği başarısız olduğunda API, HTTP durum kodunu (ör. `400 Bad Request`, `403 Forbidden` veya `429 Too Many Requests`) ayarlar ve gRPC durum ayrıntılarını içeren bir JSON yanıt gövdesi döndürür:
 
 ```
 {
@@ -67,24 +67,24 @@ Google आपकी पसंदीदा भाषा में कॉन्ट
 }
 ```
 
-| फ़ील्ड | टाइप | ब्यौरा |
+| Alan | Tür | Açıklama |
 | --- | --- | --- |
-| `code` | पूर्णांक | एचटीटीपी स्टेटस कोड. |
-| `message` | स्ट्रिंग | गड़बड़ी का ऐसा ब्यौरा जिसे कोई भी व्यक्ति आसानी से पढ़ सकता है. |
-| `status` | स्ट्रिंग | `SCREAMING_CASE` में gRPC स्टेटस कोड. |
-| `details` | अरे | गड़बड़ी का अतिरिक्त कॉन्टेक्स्ट. जैसे, `ErrorInfo` या `LocalizedMessage`. |
+| `code` | tam sayı | HTTP durum kodu. |
+| `message` | dize | Hatayla ilgili, kullanıcıların okuyabileceği bir açıklama. |
+| `status` | dize | `SCREAMING_CASE` içindeki gRPC durum kodu. |
+| `details` | dizi | `ErrorInfo` veya `LocalizedMessage` gibi ek hata bağlamı. |
 
-## आगे क्या करना है
+## Sırada ne var?
 
-- [एपीआई की गड़बड़ी ठीक करना](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=hi): सामान्य समस्याएं और गड़बड़ी के उदाहरण हल करना.
-- [दर से जुड़ी सीमाएं](https://ai.google.dev/gemini-api/docs/rate-limits?hl=hi): अनुरोध की सीमाओं और कोटा को मैनेज करने के बारे में जानकारी.
+- [API sorunlarını giderme](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=tr): Sık karşılaşılan sorunları ve hata senaryolarını çözün.
+- [Hız sınırları](https://ai.google.dev/gemini-api/docs/rate-limits?hl=tr): İstek sınırları ve kota işleme hakkında bilgi edinin.
 
-सुझाव भेजें
+Geri bildirim gönderin
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया.
+Son güncelleme tarihi: 2026-09-11 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-11 UTC."],[],[]]

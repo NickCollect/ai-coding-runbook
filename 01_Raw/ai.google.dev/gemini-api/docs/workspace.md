@@ -1,50 +1,54 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/workspace?hl=de
-fetched_at: 2026-09-07T05:37:15.883236+00:00
-title: "Mit Ihrem Workspace-Konto auf Google AI Studio zugreifen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/workspace?hl=pt-BR
+fetched_at: 2026-09-14T05:52:46.404438+00:00
+title: "Acesse o Google AI Studio com sua conta do Workspace \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Feedback geben
+Envie comentários
 
-# Mit Ihrem Workspace-Konto auf Google AI Studio zugreifen
+# Acesse o Google AI Studio com sua conta do Workspace
 
-Alle [Google Workspace](https://workspace.google.com?hl=de)-Nutzer haben standardmäßig Zugriff auf AI Studio. Wenn Sie Workspace-Nutzer sind und mit AI Studio beginnen möchten, lesen Sie die [AI Studio-Kurzanleitung](https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=de).
+Todos os usuários do [Google Workspace](https://workspace.google.com?hl=pt-br) têm acesso ao AI Studio por padrão. Se você usa o Workspace e quer começar a usar o
+AI Studio, confira o
+[guia de início rápido do AI Studio](https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=pt-br).
 
-## Fehlerbehebung
+## Solução de problemas
 
-Wenn der Zugriff auf AI Studio für Ihr Google Workspace-Konto deaktiviert ist, wird möglicherweise eine Fehlermeldung wie die folgende angezeigt:
+Se o acesso ao AI Studio estiver desativado para sua conta do Google Workspace, talvez você veja um erro como este:
 
 `We are sorry, but you do not have access to Google AI Studio. Please contact
 your Organization Administrator for access.`
 
-Wenn Sie der Meinung sind, dass Sie Zugriff auf AI Studio haben sollten, wenden Sie sich an Ihren Workspace-Administrator.
+Se você acha que deveria ter acesso ao AI Studio, entre em contato com seu administrador do Workspace.
 
-## AI Studio für Workspace-Nutzer aktivieren
+## Ativar o AI Studio para usuários do Workspace
 
-Als Google Workspace-Administrator können Sie festlegen, wer AI Studio verwenden darf:
+Como administrador do Google Workspace, você pode controlar quem usa o AI Studio:
 
-- AI Studio ist standardmäßig für alle Versionen aktiviert.
-- Sie können AI Studio für Nutzergruppen in oder innerhalb von Organisationseinheiten deaktivieren oder aktivieren.
-- Google Workspace for Education-Versionen: Nutzer unter 18 Jahren können AI Studio nicht mit ihren Google Workspace for Education-Konten verwenden. Das gilt auch dann, wenn die AI Studio-Einstellung aktiviert ist. Weitere Informationen finden Sie im Hilfeartikel [Altersabhängige Zugriffseinstellungen für Google-Dienste festlegen](https://support.google.com/a/answer/10651918?hl=de).
+- O AI Studio está ativado por padrão em todas as edições.
+- É possível ativar ou desativar o AI Studio para conjuntos de usuários em várias unidades organizacionais ou dentro delas.
+- Edições do Google Workspace for Education: os usuários com menos de 18 anos não podem usar o AI Studio com as contas do Google Workspace for Education. Isso é válido mesmo quando a configuração do AI Studio está
+  ativada. Saiba mais em [Controlar o acesso aos Serviços do Google por idade](https://support.google.com/a/answer/10651918?hl=pt-br).
 
-Informationen zum Aktivieren oder Deaktivieren von AI Studio für Nutzer in Ihrer Organisation finden Sie unter [Google AI Studio für Nutzer aktivieren oder deaktivieren](https://support.google.com/a/answer/15004095?hl=de).
+Para ativar ou desativar o AI Studio para usuários na sua organização, consulte
+[Ativar ou desativar o Google AI Studio para os usuários](https://support.google.com/a/answer/15004095?hl=pt-br).
 
-Feedback geben
+Envie comentários
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Zuletzt aktualisiert: 2026-04-29 (UTC).
+Última atualização 2026-04-29 UTC.
 
-Haben Sie Feedback für uns?
+Quer enviar seu feedback?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-04-29 (UTC)."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]

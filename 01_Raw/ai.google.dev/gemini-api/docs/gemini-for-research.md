@@ -1,41 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=zh-CN
-fetched_at: 2026-09-07T05:35:54.456789+00:00
-title: "\u4f7f\u7528 Gemini for Research \u52a0\u901f\u53d1\u73b0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=es-419
+fetched_at: 2026-09-14T05:46:15.838887+00:00
+title: "Acelera el descubrimiento con Gemini para la investigaci\u00f3n \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
 
-# 使用 Gemini for Research 加速发现
+# Acelera el descubrimiento con Gemini para la investigación
 
-[获取 Gemini API 密钥](https://aistudio.google.com/apikey?hl=zh-cn)
+[Obtén una clave de API de Gemini](https://aistudio.google.com/apikey?hl=es-419)
 
-Gemini 模型可用于推进各个学科的基础研究。
-以下是探索 Gemini 以进行研究的方式：
+Los modelos de Gemini se pueden usar para avanzar en la investigación fundamental en todas las disciplinas.
+Estas son algunas formas en las que puedes explorar Gemini para tu investigación:
 
-- **分析和控制模型输出**：如需进一步分析，您可以使用
-  等工具检查模型生成的
-  `CitationMetadata`。您还可以配置模型生成和输出的选项，例如 `responseSchema`、`topP` 和 `topK`。[了解详情](https://ai.google.dev/api/generate-content?hl=zh-cn)。
-- **多模态输入**：Gemini 可以处理图片、音频和视频，从而实现
-  众多令人兴奋的研究方向。[了解详情](https://ai.google.dev/gemini-api/docs/vision?hl=zh-cn)。
-- **长上下文功能**：Gemini 3.0 Flash 和 Pro 配备了 100 万个 token 的
-  上下文窗口。[了解详情](https://ai.google.dev/gemini-api/docs/long-context?hl=zh-cn)。
-- **Grow with Google 谷歌成长计划**：通过 API 和 Google AI Studio 快速访问 Gemini 模型，以用于生产用例。如果您正在寻找基于 Google Cloud 的平台，Gemini Enterprise Agent Platform 可以提供额外的支持基础架构。
+- **Analiza y controla los resultados del modelo**: Para realizar un análisis más detallado, puedes examinar un candidato a respuesta generado por el modelo con herramientas como `CitationMetadata`. También puedes configurar opciones para la generación y los resultados del modelo, como `responseSchema`, `topP` y `topK`. [Obtén más información](https://ai.google.dev/api/generate-content?hl=es-419).
+- **Entradas multimodales**: Gemini puede procesar imágenes, audio y videos, lo que permite una gran cantidad de emocionantes direcciones de investigación. [Obtén más información](https://ai.google.dev/gemini-api/docs/vision?hl=es-419).
+- **Capacidades de contexto extenso**: Gemini 3.0 Flash y Pro incluyen una ventana de contexto de 1 millón de tokens. [Obtén más información](https://ai.google.dev/gemini-api/docs/long-context?hl=es-419).
+- **Crece con Google**: Accede rápidamente a los modelos de Gemini a través de la API y Google AI Studio para casos de uso de producción. Si buscas una plataforma basada en Google Cloud, Gemini Enterprise Agent Platform puede proporcionar infraestructura de asistencia adicional.
 
-为了支持学术研究并推动前沿研究，Google 通过
-[Gemini 学术计划](https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=zh-cn#gemini-academic-program)为科学家和学术研究人员提供
-Gemini API 积分。
+Para respaldar la investigación académica y promover la investigación de vanguardia, Google proporciona acceso a créditos de la API de Gemini para científicos e investigadores académicos a través del [Programa Académico de Gemini](https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=es-419#gemini-academic-program).
 
-## 开始使用 Gemini
+## Comienza a usar Gemini
 
-借助 Gemini API 和 Google AI Studio，您可以开始使用 Google 的最新模型，并将您的想法转化为可扩缩的应用。
+La API de Gemini y Google AI Studio te ayudan a comenzar a trabajar con los modelos más recientes de Google y a convertir tus ideas en aplicaciones que se pueden escalar.
 
 ### Python
 
@@ -44,7 +38,7 @@ from google import genai
 
 client = genai.Client()
 response = client.models.generate_content(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     contents="How large is the universe?",
 )
 
@@ -60,7 +54,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const response = await ai.models.generateContent({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: "How large is the universe?",
   });
   console.log(response.text);
@@ -72,7 +66,7 @@ await main();
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -H 'Content-Type: application/json' \
 -X POST \
@@ -83,50 +77,40 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
    }'
 ```
 
-## 精选学者
+## Académicos destacados
 
-![](https://ai.google.dev/static/site-assets/images/diyi-yang.png?hl=zh-cn)
+![](https://ai.google.dev/static/site-assets/images/diyi-yang.png?hl=es-419)
 
-“我们的研究从稳健性和安全性角度调查了 Gemini 作为视觉语言模型 (VLM) 及其在各种环境中的智能体行为。到目前为止，我们已经评估了 Gemini 在 VLM 智能体执行计算机任务时应对弹出式窗口等干扰的稳健性，并利用 Gemini 根据视频输入分析社交互动、时间事件以及风险因素。”
+"Nuestra investigación analiza Gemini como un modelo de lenguaje visual (VLM) y sus comportamientos de agente en diversos entornos desde perspectivas de solidez y seguridad. Hasta ahora, evaluamos la solidez de Gemini ante distracciones, como ventanas emergentes, cuando los agentes de VLM realizan tareas en la computadora, y aprovechamos Gemini para analizar la interacción social, los eventos temporales y los factores de riesgo en función de la entrada de video".
 
-[Diyi Yang 的网站](https://cs.stanford.edu/~diyiy/)
+[Sitio web de Diyi Yang](https://cs.stanford.edu/~diyiy/)
 
-![](https://ai.google.dev/static/site-assets/images/lerrel-pinto.png?hl=zh-cn)
+![](https://ai.google.dev/static/site-assets/images/lerrel-pinto.png?hl=es-419)
 
-“Gemini Pro 和 Flash 具有长上下文窗口，一直在帮助我们完成 OK-Robot（我们的开放词汇移动操作项目）。Gemini 支持对机器人的‘记忆’进行复杂的自然语言查询和命令：在本例中，是指机器人之前在长时间运行期间进行的观察。我和 Mahi Shafiullah 也在使用 Gemini 将任务分解为机器人可以在现实世界中执行的代码。”
+"Gemini Pro y Flash, con su larga ventana de contexto, nos han ayudado en OK-Robot, nuestro proyecto de manipulación móvil de vocabulario abierto. Gemini permite realizar consultas y comandos complejos en lenguaje natural sobre la "memoria" del robot: en este caso, las observaciones anteriores que realizó el robot durante un largo período de funcionamiento. Mahi Shafiullah y yo también usamos Gemini para desglosar tareas en código que el robot puede ejecutar en el mundo real".
 
-[Lerrel Pinto 的网站](https://www.lerrelpinto.com/)
+[Sitio web de Lerrel Pinto](https://www.lerrelpinto.com/)
 
-## Gemini 学术计划
+## Programa académico de Gemini
 
-符合条件的学术研究人员（例如教职员工和博士生）可以在 [支持的
-国家/地区](https://ai.google.dev/gemini-api/docs/available-regions?hl=zh-cn)申请 Gemini API
-积分和更高的研究项目速率限制。此支持可提高科学实验的吞吐量并推进研究。
+Los investigadores académicos calificados (como el cuerpo docente, el personal y los estudiantes de doctorado) de los [países admitidos](https://ai.google.dev/gemini-api/docs/available-regions?hl=es-419) pueden solicitar créditos de la API de Gemini y límites de frecuencia más altos para proyectos de investigación. Esta compatibilidad permite una mayor capacidad de procesamiento para los experimentos científicos y avanza la investigación.
 
-我们对以下部分的研究领域特别感兴趣，但也欢迎来自不同科学学科的申请：
+Nos interesan especialmente las áreas de investigación que se mencionan en la siguiente sección, pero aceptamos solicitudes de diversas disciplinas científicas:
 
-- **评估和基准**：社区认可的评估方法，
-  可在事实性、安全性、
-  指令遵循、推理和规划等领域提供强大的性能信号。
-- **加速科学发现，造福人类**：AI 在跨学科科学研究中的潜在
-  应用，包括罕见病和被忽视的疾病、实验生物学、材料科学
-  和可持续性等领域。
-- **具身和互动**：利用大语言模型
-  调查具身 AI、环境
-  互动、机器人技术和人机交互领域的新型互动。
-- **新兴功能**：探索增强推理和规划所需的新智能体功能，以及如何在推理期间扩展功能（例如，利用 Gemini Flash）。
-- **多模态互动和理解**：确定多模态基础模型在各种任务中进行分析、推理
-  和规划的差距和
-  机会。
+- **Evaluaciones y comparativas**: Métodos de evaluación respaldados por la comunidad que pueden proporcionar una señal de rendimiento sólida en áreas como la facticidad, la seguridad, el cumplimiento de instrucciones, el razonamiento y la planificación.
+- **Acelerar el descubrimiento científico en beneficio de la humanidad**: Aplicaciones potenciales de la IA en la investigación científica interdisciplinaria, incluidas áreas como las enfermedades raras y desatendidas, la biología experimental, la ciencia de los materiales y la sustentabilidad
+- **Incorporación e interacciones**: Utilizar modelos de lenguaje grandes para investigar interacciones novedosas en los campos de la IA incorporada, las interacciones ambientales, la robótica y la interacción humano-computadora
+- **Capacidades emergentes**: Exploramos nuevas capacidades de agentes necesarias para mejorar el razonamiento y la planificación, y cómo se pueden expandir las capacidades durante la inferencia (p.ej., utilizando Gemini Flash).
+- **Interacción y comprensión multimodales**: Identificar brechas y oportunidades para los modelos de base multimodales para el análisis, el razonamiento y la planificación en una variedad de tareas
 
-资格条件：只有隶属于有效学术机构或学术研究组织的个人（教职员工、研究人员或同等人员）可以申请。请注意，API 访问权限和积分将由 Google 自行决定授予和移除。我们会每月审核申请。
+Elegibilidad: Solo pueden postularse personas físicas (miembros del cuerpo docente, investigadores o equivalentes) afiliadas a una institución académica o una organización de investigación académica válidas. Ten en cuenta que el acceso a la API y los créditos se otorgarán y quitarán a discreción de Google. Revisamos las solicitudes todos los meses.
 
-### 开始使用 Gemini API 进行研究
+### Comienza a investigar con la API de Gemini
 
-[立即申请](https://forms.gle/HMviQstU8PxC5iCt5)
+[Postularse ahora](https://forms.gle/HMviQstU8PxC5iCt5)
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-最后更新时间 (UTC)：2026-07-01。
+Última actualización: 2026-09-12 (UTC)
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-01。"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-09-12 (UTC)"],[],[]]

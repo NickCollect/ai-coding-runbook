@@ -1,41 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=hi
-fetched_at: 2026-09-07T05:33:15.274152+00:00
-title: "Gemini \u0914\u0930 CrewAI \u0915\u0940 \u092e\u0926\u0926 \u0938\u0947, \u0917\u094d\u0930\u093e\u0939\u0915 \u0938\u0939\u093e\u092f\u0924\u093e \u0938\u0947 \u091c\u0941\u0921\u093c\u0947 \u0921\u0947\u091f\u093e \u0915\u093e \u0935\u093f\u0936\u094d\u0932\u0947\u0937\u0923 \u0915\u0930\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=he
+fetched_at: 2026-09-14T05:44:58.831761+00:00
+title: "\u05e0\u05d9\u05ea\u05d5\u05d7 \u05e9\u05dc \u05ea\u05de\u05d9\u05db\u05ea \u05dc\u05e7\u05d5\u05d7\u05d5\u05ea \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea Gemini \u05d5-CrewAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-सुझाव भेजें
+שליחת משוב
 
-# Gemini और CrewAI की मदद से, ग्राहक सहायता से जुड़े डेटा का विश्लेषण करना
+# ניתוח של תמיכת לקוחות באמצעות Gemini ו-CrewAI
 
-[CrewAI](https://docs.crewai.com/introduction), अपने-आप काम करने वाले एआई एजेंट को व्यवस्थित करने के लिए एक फ़्रेमवर्क है. ये एजेंट, मुश्किल लक्ष्यों को हासिल करने के लिए साथ मिलकर काम करते हैं. इसकी मदद से, एजेंट को उनकी भूमिकाएं, लक्ष्य, और बैकस्टोरी के हिसाब से तय किया जा सकता है. इसके बाद, उनके लिए टास्क तय किए जा सकते हैं.
+‫[CrewAI](https://docs.crewai.com/introduction) הוא פריימוורק לניהול סוכני AI אוטונומיים שמשתפים פעולה כדי להשיג יעדים מורכבים. הוא מאפשר להגדיר סוכנים על ידי ציון תפקידים, יעדים וסיפורי רקע, ולאחר מכן להגדיר להם משימות.
 
-इस उदाहरण में, ग्राहक सहायता से जुड़े डेटा का विश्लेषण करने के लिए, कई एजेंट वाला सिस्टम बनाने का तरीका बताया गया है. इससे समस्याओं का पता लगाया जा सकता है और Gemini 3 Flash का इस्तेमाल करके, प्रोसेस को बेहतर बनाने के सुझाव दिए जा सकते हैं. साथ ही, इसमें एक ऐसी रिपोर्ट जनरेट करने का तरीका भी बताया गया है जिसे मुख्य परिचालन अधिकारी (सीओओ) पढ़ सके.
+בדוגמה הזו נסביר איך לבנות מערכת מרובת סוכנים לניתוח נתונים של תמיכת לקוחות כדי לזהות בעיות ולהציע שיפורים בתהליכים באמצעות Gemini 3 Flash. המערכת יוצרת דוח שמיועד לקריאה על ידי מנהל תפעול ראשי (COO).
 
-इस गाइड में, आपको एआई एजेंट की एक "क्रू" बनाने का तरीका बताया जाएगा. यह क्रू, ये काम कर सकता है:
+במדריך הזה נסביר איך ליצור 'צוות' של סוכני AI שיכולים לבצע את המשימות הבאות:
 
-1. ग्राहक सहायता से जुड़ा डेटा फ़ेच करना और उसका विश्लेषण करना. इस उदाहरण में, डेटा को सिम्युलेट किया गया है.
-2. बार-बार होने वाली समस्याओं और प्रोसेस में आने वाली रुकावटों की पहचान करना.
-3. कार्रवाई करने लायक सुझाव दो.
-4. इन नतीजों को एक छोटी रिपोर्ट में शामिल करो, ताकि सीओओ को आसानी से समझ आ सके.
+1. אחזור וניתוח של נתוני תמיכת לקוחות (סימולציה בדוגמה הזו).
+2. זיהוי בעיות חוזרות וצווארי בקבוק בתהליך.
+3. להציע שיפורים פרקטיים.
+4. לרכז את הממצאים בדוח תמציתי שמתאים למנהל תפעול ראשי.
 
-आपके पास Gemini API पासकोड होना चाहिए. अगर आपके पास पहले से कोई Gemini Pro 1.0 API कुंजी नहीं है, तो [Google AI Studio में जाकर इसे पाएं](https://aistudio.google.com/apikey?hl=hi).
+אתם צריכים מפתח Gemini API. אם עדיין אין לכם חשבון, אתם יכולים [ליצור חשבון ב-Google AI Studio](https://aistudio.google.com/apikey?hl=he).
 
 ```
 pip install "crewai[tools]"
 ```
 
-अपने Gemini API पासकोड को `GEMINI_API_KEY` नाम के एनवायरमेंट वैरिएबल के तौर पर सेट करें. इसके बाद, CrewAI को Gemini मॉडल का इस्तेमाल करने के लिए कॉन्फ़िगर करें.
+מגדירים את מפתח Gemini API כמשתנה סביבה בשם `GEMINI_API_KEY`, ואז מגדירים את CrewAI כך שישתמש במודל Gemini.
 
 ```
 import os
@@ -44,19 +44,19 @@ from crewai import LLM
 gemini_api_key = os.getenv("GEMINI_API_KEY")
 
 gemini_llm = LLM(
-    model='gemini/gemini-3.5-flash',
+    model='gemini/gemini-3.6-flash',
     api_key=gemini_api_key,
     temperature=1.0  # Use the Gemini 3 recommended temperature
 )
 ```
 
-## कॉम्पोनेंट तय करना
+## הגדרת רכיבים
 
-**टूल**, **एजेंट**, **टास्क**, और **क्रू** का इस्तेमाल करके, CrewAI ऐप्लिकेशन बनाएं. यहां दिए गए सेक्शन में, इन सभी कॉम्पोनेंट के बारे में बताया गया है.
+פיתוח אפליקציות CrewAI באמצעות **Tools**,‏ **Agents**,‏ **Tasks** ו-**Crew**. בקטעים הבאים מוסבר על כל אחד מהרכיבים האלה.
 
-### टूल
+### כלים
 
-टूल, ऐसी सुविधाएं होती हैं जिनका इस्तेमाल एजेंट, बाहरी दुनिया से इंटरैक्ट करने या खास कार्रवाइयां करने के लिए कर सकते हैं. यहां, ग्राहक सहायता से जुड़ा डेटा फ़ेच करने का सिम्युलेट करने के लिए, प्लेसहोल्डर टूल तय किया जाता है. किसी असली ऐप्लिकेशन में, आपको डेटाबेस, एपीआई या फ़ाइल सिस्टम से कनेक्ट करना होगा. टूल के बारे में ज़्यादा जानकारी के लिए, [CrewAI टूल गाइड](https://docs.crewai.com/concepts/tools) देखें.
+כלים הם יכולות שסוכנים יכולים להשתמש בהן כדי ליצור אינטראקציה עם העולם החיצוני או לבצע פעולות ספציפיות. כאן מגדירים כלי placeholder כדי לדמות אחזור של נתוני תמיכת לקוחות. באפליקציה אמיתית, מתחברים למסד נתונים, ל-API או למערכת קבצים. מידע נוסף על כלים זמין [במדריך הכלים של CrewAI](https://docs.crewai.com/concepts/tools).
 
 ```
 from crewai.tools import BaseTool
@@ -86,9 +86,9 @@ class CustomerSupportDataTool(BaseTool):
 support_data_tool = CustomerSupportDataTool()
 ```
 
-### एजेंट
+### סוכנים
 
-एजेंट, आपकी क्रू में शामिल एआई वर्कर होते हैं. हर एजेंट के पास एक खास `role`, `goal`, `backstory`, असाइन किया गया `llm`, और वैकल्पिक `tools` होता है. एजेंट के बारे में ज़्यादा जानकारी के लिए, [CrewAI एजेंट गाइड](https://docs.crewai.com/concepts/agents) देखें.
+סוכנים הם עובדי ה-AI האישיים בצוות. לכל סוכן יש `role`,‏ `goal`,‏ `backstory` ספציפיים, `llm` מוקצה ו`tools` אופציונלי. מידע נוסף על סוכנים זמין [במדריך לסוכני CrewAI](https://docs.crewai.com/concepts/agents).
 
 ```
 from crewai import Agent
@@ -137,7 +137,7 @@ report_writer = Agent(
 
 ### Tasks
 
-टास्क से, एजेंट के लिए खास असाइनमेंट तय किए जाते हैं. हर टास्क में `description` और `expected_output` होता है. साथ ही, इसे `agent` को असाइन किया जाता है. टास्क डिफ़ॉल्ट रूप से क्रम से पूरे किए जाते हैं. इनमें पिछले टास्क का कॉन्टेक्स्ट शामिल होता है. टास्क के बारे में ज़्यादा जानकारी के लिए, [CrewAI टास्क गाइड](https://docs.crewai.com/concepts/tasks) देखें.
+המשימות מגדירות את המטלות הספציפיות של הסוכנים. לכל משימה יש `description`, ‏ `expected_output`, והיא מוקצית ל`agent`. כברירת מחדל, המשימות מופעלות ברצף וכוללות את ההקשר של המשימה הקודמת. מידע נוסף על משימות זמין ב[מדריך למשימות ב-CrewAI](https://docs.crewai.com/concepts/tasks).
 
 ```
 from crewai import Task
@@ -196,9 +196,9 @@ Ensure the report is easy to understand, focuses on actionable insights, and is 
 )
 ```
 
-### क्रू
+### צוות ההפקה
 
-`Crew`, एजेंट और टास्क को एक साथ लाता है. साथ ही, वर्कफ़्लो प्रोसेस (जैसे कि "क्रमिक") तय करता है.
+`Crew` מאחד בין הסוכנים והמשימות, ומגדיר את תהליך העבודה (למשל, 'רציף').
 
 ```
 from crewai import Crew, Process
@@ -211,9 +211,9 @@ support_analysis_crew = Crew(
 )
 ```
 
-## क्रू को मैनेज करना
+## הרצת הצוות
 
-आखिर में, ज़रूरी इनपुट के साथ क्रू के काम को शुरू करें.
+לבסוף, מפעילים את צוות הביצוע עם כל נתוני הקלט הנדרשים.
 
 ```
 # Start the crew's work
@@ -227,17 +227,17 @@ print("--- Final Report for COO ---")
 print(result)
 ```
 
-अब स्क्रिप्ट चलेगी. `Data Analyst` टूल का इस्तेमाल करेगा, `Process
-Optimizer` नतीजों का विश्लेषण करेगा, और `Report Writer` फ़ाइनल रिपोर्ट तैयार करेगा. इसके बाद, इसे कंसोल पर प्रिंट किया जाएगा. `verbose=True` सेटिंग से, हर एजेंट की सोच और कार्रवाइयों के बारे में पूरी जानकारी मिलेगी.
+הסקריפט יופעל. ‫`Data Analyst` ישתמש בכלי, `Process
+Optimizer` ינתח את הממצאים ו-`Report Writer` ירכז את הדוח הסופי, שיוצג במסוף. ההגדרה `verbose=True` תציג את תהליך החשיבה המפורט ואת הפעולות של כל סוכן.
 
-CrewAI के बारे में ज़्यादा जानने के लिए, [CrewAI का परिचय](https://docs.crewai.com/introduction) पढ़ें.
+מידע נוסף על CrewAI זמין ב[מבוא ל-CrewAI](https://docs.crewai.com/introduction).
 
-सुझाव भेजें
+שליחת משוב
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-आखिरी बार 2026-06-10 (UTC) को अपडेट किया गया.
+עדכון אחרון: 2026-09-12 (שעון UTC).
 
-क्या आपको हमें और कुछ बताना है?
+רוצה לתת לנו משוב?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-06-10 (UTC) को अपडेट किया गया."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-12 (שעון UTC)."],[],[]]

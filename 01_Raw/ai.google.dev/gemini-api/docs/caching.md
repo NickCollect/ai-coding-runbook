@@ -1,55 +1,55 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/caching?hl=pl
-fetched_at: 2026-09-07T05:42:56.988524+00:00
-title: "Buforowanie kontekstu \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/caching?hl=pt-BR
+fetched_at: 2026-09-14T05:47:28.079918+00:00
+title: "O armazenamento em cache de contexto \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Prześlij opinię
+Envie comentários
 
-# Buforowanie kontekstu
+# O armazenamento em cache de contexto
 
-W typowym procesie AI możesz wielokrotnie przekazywać te same tokeny wejściowe do modelu. Interfejs Gemini API oferuje niejawne buforowanie, które optymalizuje wydajność i koszty.
+Em um fluxo de trabalho de IA típico, você pode transmitir os mesmos tokens de entrada várias vezes para um modelo. A API Gemini oferece armazenamento em cache implícito para otimizar a performance e os custos.
 
- Jawne buforowanie (ręczne tworzenie obiektów pamięci podręcznej i zarządzanie nimi) nie jest obsługiwane w interfejsie Interactions API. Aby korzystać z jawnego buforowania, przejdź na interfejs
-[generateContent API](https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=pl).
+## Armazenamento em cache implícito
 
-## Niejawne buforowanie
+O armazenamento em cache implícito é ativado por padrão para todos os modelos do Gemini 2.5 e mais recentes. Ele é
+compatível com modos de conversa com [estado](https://ai.google.dev/gemini-api/docs/text-generation?hl=pt-br#multi-turn-conversations) (usando `previous_interaction_id`)
+e sem [estado](https://ai.google.dev/gemini-api/docs/text-generation?hl=pt-br#stateless-conversations).
+Transmitimos automaticamente a economia de custos se a solicitação atingir os caches. Não é necessário fazer nada para ativar esse recurso. A contagem mínima de tokens de entrada para o armazenamento em cache de contexto está listada na tabela a seguir para cada modelo:
 
-Niejawne buforowanie jest domyślnie włączone we wszystkich modelach Gemini 2.5 i nowszych. Jest ono
-obsługiwane zarówno w trybie konwersacji [stanowej](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl#multi-turn-conversations) (z użyciem parametru `previous_interaction_id`)
-jak i [bezstanowej](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl#stateless-conversations).
-Jeśli Twoje żądanie trafi do pamięci podręcznej, automatycznie przekażemy Ci oszczędności. Aby włączyć tę funkcję, nie musisz nic robić. Minimalna liczba tokenów wejściowych w przypadku buforowania kontekstu jest podana w tabeli poniżej dla każdego modelu:
-
-| Model | Minimalny limit tokenów |
+| Modelo | Limite mínimo de tokens |
 | --- | --- |
-| Gemini 3.5 Flash | 4096 |
-| Gemini 3.1 Pro (wersja testowa) | 4096 |
-| Gemini 2.5 Flash | 2048 |
-| Gemini 2.5 Pro | 2048 |
+| Gemini 3.8 Flash | 4.096 |
+| Gemini 3.7 Flash | 4.096 |
+| Gemini 3.6 Flash | 4.096 |
+| Gemini 3.5 Flash | 4.096 |
+| Pré-lançamento do Gemini 3.1 Pro | 4.096 |
+| Gemini 2.5 Flash | 2.048 |
+| Gemini 2.5 Pro | 2.048 |
 
-Aby zwiększyć szansę na trafienie do niejawnej pamięci podręcznej:
+Para aumentar a chance de um acerto de cache implícito:
 
-- Spróbuj umieścić duże i popularne treści na początku prompta.
-- Spróbuj wysyłać żądania z podobnym prefiksem w krótkim czasie.
+- Tente colocar conteúdos grandes e comuns no início do prompt.
+- Tente enviar solicitações com prefixo semelhante em um curto período.
 
-Liczbę tokenów, które zostały trafione do pamięci podręcznej, możesz sprawdzić w polu `usage.total_cached_tokens` (Python i JavaScript) w obiekcie odpowiedzi.
+Você pode conferir o número de tokens que foram acertos de cache no campo `usage.total_cached_tokens` do objeto de resposta (Python e JavaScript).
 
-Prześlij opinię
+Envie comentários
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Ostatnia aktualizacja: 2026-07-30 UTC.
+Última atualização 2026-09-10 UTC.
 
-Chcesz przekazać coś jeszcze?
+Quer enviar seu feedback?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-10 UTC."],[],[]]

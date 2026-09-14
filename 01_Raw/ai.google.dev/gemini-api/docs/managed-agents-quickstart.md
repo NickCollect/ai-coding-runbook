@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ar
-fetched_at: 2026-09-07T05:42:34.595421+00:00
-title: "\u0627\u0644\u0628\u062f\u0621 \u0627\u0644\u0633\u0631\u064a\u0639 \u0641\u064a \u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u0648\u0643\u0644\u0627\u0621 \u0627\u0644\u0645\u064f\u062f\u0627\u0631\u064a\u0646 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=zh-CN
+fetched_at: 2026-09-14T05:36:27.081426+00:00
+title: "\u53d7\u7ba1\u4ee3\u7406\u5feb\u901f\u5165\u95e8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+Gemini 3.8 Flash 现已推出。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-إرسال ملاحظات
+发送反馈
 
-# البدء السريع في استخدام الوكلاء المُدارين
+# 受管代理快速入门
 
-يرشدك هذا الدليل إلى كيفية إنشاء واستخدام "الوكلاء المُدارون" على Gemini API باستخدام [وكيل Antigravity](https://ai.google.dev/gemini-api/docs/agents/antigravity-agent?hl=ar). ستجري مكالمتك الأولى مع الوكيل، وتواصل محادثة مترابطة، وتبث الرد، وتنزّل الملفات من وضع الحماية، وتعمل مع وكيل Antigravity المُدار.
+本指南将引导您使用 [Antigravity 智能体](https://ai.google.dev/gemini-api/docs/agents/antigravity-agent?hl=zh-cn)，在 Gemini API 上创建和使用托管式智能体。您将进行首次代理调用、继续多轮对话、流式传输响应、从沙盒下载文件，以及使用 Antigravity 托管代理。
 
-## إجراء تفاعلك الأول مع الوكيل
+## 运行您的首次智能体互动
 
-يؤدي طلب واحد إلى [واجهة برمجة التطبيقات Interactions API](https://ai.google.dev/gemini-api/docs?hl=ar) إلى توفير بيئة اختبارية لنظام التشغيل Linux، وتشغيل حلقة الوكيل، وعرض النتيجة. عليك تحديد ثلاث مَعلمات:
+只需对 [Interactions API](https://ai.google.dev/gemini-api/docs?hl=zh-cn) 进行一次调用，即可预配 Linux 沙盒、运行智能体循环并返回结果。您将定义三个参数：
 
-- مرِّر `agent` كـ `"antigravity-preview-05-2026",`، وهو الإصدار الحالي من الوكيل المُدار المحدّد مسبقًا والعام.
-- حدِّد `environment="remote"` لتوفير بيئة وضع الحماية جديدة.
-- أنشئ إدخالاً يحدّد ما تريد أن يفعله الوكيل.
+- 传入 `agent` 作为 `"antigravity-preview-05-2026",`，这是我们预定义的一般用途的受管代理的当前版本。
+- 定义 `environment="remote"`，以预配新的沙盒环境。
+- 创建输入，定义您希望代理执行的操作。
 
 ### Python
 
@@ -79,16 +79,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-تعرض الاستجابة عنصر `Interaction`. يمكنك تخزين `interaction.id` و`interaction.environment_id` لمواصلة المحادثة في بيئة الاختبار المعزولة نفسها. استخدِم `interaction.output_text` للوصول إلى الردّ النهائي من الموظف. تعرض `interaction.steps` كل خطوة اتّخذها الوكيل (الاستدلال، واستدعاء الأدوات، وتطبيق الرموز البرمجية).
+响应会返回一个 `Interaction` 对象。存储 `interaction.id` 和 `interaction.environment_id`，以便在同一沙盒中继续对话。使用 `interaction.output_text` 访问代理的最终回答。`interaction.steps` 列出了智能体采取的每个步骤（推理、工具调用、代码执行）。
 
-## مواصلة المحادثة (محادثة مترابطة)
+## 继续对话（多回合）
 
-تتتبّع واجهة برمجة التطبيقات سمتَين مستقلتَين للحالة:
+该 API 会跟踪两个独立的状态维度：
 
-- **سياق المحادثة:** سجلّ المحادثات، وتتبُّع الاستدلال، واستخدام الأدوات، واستخدام `previous_interaction_id`
-- [**حالة البيئة:**](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ar) الملفات والحِزم المثبَّتة وحالة وضع الحماية، باستخدام `environment`
+- **对话上下文**：聊天记录、推理轨迹、工具使用情况、使用 `previous_interaction_id`。
+- [**环境状态**：](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-cn)使用 `environment` 的文件、已安装的软件包和沙盒状态。
 
-يجب تمرير كليهما في مكانهما المناسب لاستئناف العملية:
+在各自的位置传递这两个实参以恢复：
 
 ### Python
 
@@ -130,20 +130,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-تظل الملفات من الجولة الأولى (`fibonacci.txt`) متوفرة في الجولة الثانية. يحتفظ الوكيل أيضًا بسياق المحادثة.
+回合 1 (`fibonacci.txt`) 中的文件会保留到回合 2。智能体还会保留对话上下文。
 
-يمكنك الجمع بين هذه الخيارات بشكل مستقل:
+您可以独立混搭使用这些功能：
 
-- **محو المحادثة والاحتفاظ بالملفات:** احذف `previous_interaction_id`، ومرِّر رقم تعريف البيئة فقط باستخدام `environment` لإجراء محادثة جديدة في مساحة العمل نفسها.
-- **الاحتفاظ بالمحادثة، مساحة عمل جديدة:** أدخِل `previous_interaction_id`، واضبط `environment="remote"` لإنشاء بيئة اختبارية جديدة.
+- **清除对话，保留文件**：省略 `previous_interaction_id`，仅使用 `environment` 传递环境 ID，以便在同一工作区中开始新的对话。
+- **保留对话，新工作区**：传递 `previous_interaction_id`，为全新沙盒设置 `environment="remote"`。
 
-### ضغط السياق التلقائي
+### 自动压缩上下文
 
-في المحادثات الطويلة المتعددة الأدوار، يمكن أن يزداد حجم السجلّ الأولي لخطوات الاستدلال واستدعاء الأدوات ومحتوى الملفات الكبيرة بسرعة ويستهلك مساحة كبيرة من السياق. لمنع حدوث أخطاء بسبب تجاوز الحد الأقصى للرموز المميزة والحفاظ على تركيز الوكيل (منع "تدهور السياق")، تتضمّن واجهة برمجة التطبيقات "الوكلاء المُدارون" خطوة مدمجة لضغط السياق عند حوالي 135 ألف رمز مميز. وتتم هذه العملية تلقائيًا.
+在长时间的多轮对话中，推理步骤、工具调用和大型文件内容的原始历史记录可能会快速增长，并占用大量上下文空间。为防止出现令牌限制错误并保持托管式智能体的专注度（防止出现“上下文腐烂”），Managed Agents API 在大约 13.5 万个令牌时会执行原生上下文压缩步骤。这个过程是自动进行的。
 
-## عرض الرد تدريجيًا
+## 以流式传输回答
 
-بالنسبة إلى المهام التي تستغرق وقتًا طويلاً، يمكنك بث الردّ لمشاهدة الوكيل وهو يعمل في الوقت الفعلي:
+对于长时间运行的任务，您可以流式传输响应，以实时查看代理的工作情况：
 
 ### Python
 
@@ -201,11 +201,11 @@ curl -N -s -X POST "https://generativelanguage.googleapis.com/v1beta/interaction
 }'
 ```
 
-تعرض ميزة البث فروق الخطوات مع التعديلات المتزايدة. عند اكتمال إحدى الخطوات، يتضمّن الحدث `step.stop` إحصاءات الاستخدام المتراكمة. يمكنك الاطّلاع على مزيد من المعلومات في [دليل البث](https://ai.google.dev/gemini-api/docs/streaming?hl=ar).
+流式传输会返回步数增量，并进行增量更新。当某个步骤完成时，`step.stop` 事件会包含累积的使用情况统计信息。如需了解详情，请参阅[流式传输指南](https://ai.google.dev/gemini-api/docs/streaming?hl=zh-cn)。
 
-## تنزيل ملفات من البيئة
+## 从环境中下载文件
 
-عندما ينشئ الوكيل ملفات داخل البيئة التجريبية يمكنك تنزيلها باستخدام Files API من خلال طلب HTTP مباشر (لا تتوفّر طريقة SDK حتى الآن):
+当代理在沙盒内创建文件时。使用 Files API 通过直接 HTTP 请求（尚无 SDK 方法）下载这些文件：
 
 ### Python
 
@@ -272,13 +272,13 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/files/environme
 tar -xf snapshot.tar -C extracted_snapshot
 ```
 
-## حفظ وكيل مُدار
+## 保存受管代理
 
-في الخطوات السابقة، استخدمنا وكيل Antigravity التلقائي وعدّلناه بشكل مضمّن. بعد تكرار عملية الإعداد (التعليمات والمهارات واختيار النموذج والبيئة)، يمكنك حفظها كوكيل مُدار قابل لإعادة الاستخدام. يتيح لك ذلك استدعاءه حسب رقم التعريف بدون تكرار الإعداد.
+在之前的步骤中，我们使用了默认的 Antigravity 智能体，并对其进行了内嵌自定义。对配置（指令、技能、模型选择和环境）进行迭代后，您可以将其保存为可重复使用的受管代理。这样一来，您就可以通过 ID 调用该配置，而无需重复配置。
 
-عند حفظ وكيل، لاحظ التماثل المعماري مع التفاعلات المضمّنة: يمكنك تحديد `base_agent: "antigravity-preview-05-2026"` ويمكنك تمرير `agent_config` مع `model` الذي اخترته تمامًا كما تفعل على `interactions.create`. يمكنك أيضًا تحديد `base_environment` (إما من المصادر أو عن طريق إنشاء نسخة من بيئة حالية). سيستخدم الوكيل إعدادات البيئة والنموذج هذه لكل تفاعل جديد.
+保存代理时，请注意与内嵌互动之间的架构对称性：您可以指定 `base_agent: "antigravity-preview-05-2026"`，并传递包含所选 `model` 的 `agent_config`，就像在 `interactions.create` 上一样。您还可以定义 `base_environment`（通过来源或派生现有环境）。代理将针对每次新互动使用此环境和模型配置。
 
-**من المصادر:** يمكنك تحديد المصادر مباشرةً أو من مصادر أخرى، مثل GitHub أو Cloud Storage.
+**来自来源**：内嵌定义来源，或从 GitHub 或 Cloud Storage 等其他来源定义来源。
 
 ### Python
 
@@ -288,7 +288,7 @@ agent = client.agents.create(
     base_agent="antigravity-preview-05-2026",
     agent_config={
         "type": "antigravity",
-        "model": "gemini-3.7-flash",
+        "model": "gemini-3.6-flash",
     },
     system_instruction="You are a math analysis agent. Generate sequences, visualize them, and export results as PDF reports.",
     base_environment={
@@ -319,7 +319,7 @@ const agent = await client.agents.create({
     base_agent: "antigravity-preview-05-2026",
     agent_config: {
         type: "antigravity",
-        model: "gemini-3.7-flash",
+        model: "gemini-3.6-flash",
     },
     system_instruction: "You are a math analysis agent. Generate sequences, visualize them, and export results as PDF reports.",
     base_environment: {
@@ -353,7 +353,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
     "base_agent": "antigravity-preview-05-2026",
     "agent_config": {
         "type": "antigravity",
-        "model": "gemini-3.7-flash"
+        "model": "gemini-3.6-flash"
     },
     "system_instruction": "You are a math analysis agent. Generate sequences, visualize them, and export results as PDF reports.",
     "base_environment": {
@@ -374,9 +374,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 }'
 ```
 
-## استدعاء الوكيل المُدار
+## 调用受管理的代理
 
-بعد حفظ وكيل مُدار، يمكنك استدعاؤه باستخدام المعرّف. يؤدي كل استدعاء إلى إنشاء نسخة من البيئة الأساسية، لذا يبدأ كل تشغيل بشكل نظيف:
+保存受管理的代理后，您可以通过 ID 调用它。每次调用都会派生出基本环境，因此每次运行都是从干净的状态开始的：
 
 ### Python
 
@@ -417,19 +417,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## الخطوات التالية
+## 后续步骤
 
-- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ar): الإمكانات والأدوات المتوافقة والإدخال المتعدد الوسائط والأسعار والقيود
-- [إنشاء وكلاء مُدارين](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ar): يمكنك توسيع نطاق Antigravity باستخدام التعليمات والمهارات والبيانات الخاصة بك.
-- [البيئات](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ar): المصادر والشبكات ودورة الحياة وحدود الموارد
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar): هي واجهة برمجة التطبيقات الأساسية للنماذج والوكلاء.
+- [反重力智能体](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=zh-cn)：功能、支持的工具、多模态输入、价格和限制。
+- [构建托管式智能体](https://ai.google.dev/gemini-api/docs/custom-agents?hl=zh-cn)：使用您自己的指令、技能和数据来扩展 Antigravity。
+- [环境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-cn)：来源、网络、生命周期、资源限制。
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn)：模型和代理的基础 API。
 
-إرسال ملاحظات
+发送反馈
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-تاريخ التعديل الأخير: 2026-08-19 (حسب التوقيت العالمي المتفَّق عليه)
+最后更新时间 (UTC)：2026-09-12。
 
-هل تريد مشاركة ملاحظاتك معنا؟
+需要向我们提供更多信息？
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-08-19 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-12。"],[],[]]

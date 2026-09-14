@@ -1,37 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/files?hl=th
-fetched_at: 2026-09-07T05:33:32.791026+00:00
-title: "API \u0e02\u0e2d\u0e07\u0e44\u0e1f\u0e25\u0e4c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/files?hl=tr
+fetched_at: 2026-09-14T05:36:15.326588+00:00
+title: "Dosyalar API'si \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-ส่งความคิดเห็น
+Geri bildirim gönderin
 
-# API ของไฟล์
+# Dosyalar API'si
 
-Gemini สามารถจัดการข้อมูลอินพุตประเภทต่างๆ ได้พร้อมกัน ซึ่งรวมถึงข้อความ รูปภาพ และเสียง
+Gemini, metin, resim ve ses gibi çeşitli giriş verilerini aynı anda işleyebilir.
 
-คู่มือนี้จะแสดงวิธีทำงานกับไฟล์สื่อโดยใช้ Files API
-การดำเนินการพื้นฐานจะเหมือนกันสำหรับไฟล์เสียง รูปภาพ วิดีโอ เอกสาร และ
-ประเภทไฟล์อื่นๆ ที่รองรับ
+Bu kılavuzda, Files API'yi kullanarak medya dosyalarıyla nasıl çalışacağınız gösterilmektedir. Ses dosyaları, resimler, videolar, dokümanlar ve desteklenen diğer dosya türleri için temel işlemler aynıdır.
 
-ดูคำแนะนำในการใช้พรอมต์สำหรับไฟล์ได้ที่ส่วน[คู่มือการใช้พรอมต์สำหรับไฟล์](https://ai.google.dev/gemini-api/docs/files?hl=th#prompt-guide)
+Dosya istemiyle ilgili rehberlik için [Dosya istemi kılavuzu](https://ai.google.dev/gemini-api/docs/files?hl=tr#prompt-guide) bölümüne göz atın.
 
-## อัปโหลดไฟล์
+## Dosya yükleyin
 
-คุณใช้ Files API เพื่ออัปโหลดไฟล์สื่อได้ ใช้ Files API เสมอเมื่อขนาดคำขอทั้งหมด (รวมถึงไฟล์ พรอมต์ข้อความ คำสั่งของระบบ ฯลฯ) ใหญ่กว่า 100 MB สำหรับไฟล์ PDF จะมีขีดจำกัดอยู่ที่ 50 MB
+Medya dosyası yüklemek için Files API'yi kullanabilirsiniz. Toplam istek boyutu (dosyalar, metin istemi, sistem talimatları vb. dahil) 100 MB'tan büyük olduğunda her zaman Files API'yi kullanın. Bu sınır, PDF dosyaları için 50 MB'tır.
 
-โค้ดต่อไปนี้จะอัปโหลดไฟล์ แล้วใช้ไฟล์ในการเรียกไปยัง
-`interactions.create`
+Aşağıdaki kod, bir dosyayı yükler ve ardından `interactions.create` çağrısında dosyayı kullanır.
 
 ### Python
 
@@ -43,7 +40,7 @@ client = genai.Client()
 myfile = client.files.upload(file="path/to/sample.mp3")
 
 interaction = client.interactions.create(
-    model="gemini-3.8-flash",
+    model="gemini-3.6-flash",
     input=[
         {"type": "text", "text": "Describe this audio clip"},
         {"type": "audio", "uri": myfile.uri, "mime_type": myfile.mime_type}
@@ -67,7 +64,7 @@ async function main() {
   });
 
   const interaction = await client.interactions.create({
-    model: "gemini-3.8-flash",
+    model: "gemini-3.6-flash",
     input: [
       { type: "text", text: "Describe this audio clip" },
       { type: "audio", uri: myfile.uri, mime_type: myfile.mimeType }
@@ -79,23 +76,6 @@ async function main() {
 await main();
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.types.File;
-import com.google.genai.types.UploadFileConfig;
-
-Client client = new Client();
-
-File file = client.files.upload(
-    new java.io.File("path/to/sample.txt"),
-    UploadFileConfig.builder().mimeType("text/plain").build()
-);
-
-System.out.println("Uploaded file URI: " + file.uri().orElse(""));
-```
-
 ### Go
 
 ```
@@ -105,7 +85,7 @@ if err != nil {
 }
 defer client.Files.Delete(ctx, file.Name)
 
-interaction, err := client.Interactions.Create(ctx, "gemini-3.8-flash", &genai.InteractionRequest{
+interaction, err := client.Interactions.Create(ctx, "gemini-3.6-flash", &genai.InteractionRequest{
     Input: []interface{}{
         genai.NewPartFromFile(*file),
         genai.NewPartFromText("Describe this audio clip"),
@@ -168,7 +148,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d '{
-      "model": "gemini-3.8-flash",
+      "model": "gemini-3.6-flash",
       "input": [
         {"type": "text", "text": "Describe this audio clip"},
         {"type": "audio", "uri": '$file_uri', "mime_type": "'${MIME_TYPE}'"}
@@ -181,9 +161,9 @@ echo
 jq ".outputs[] | select(.type == \"text\") | .text" response.json
 ```
 
-## รับข้อมูลเมตาของไฟล์
+## Dosyanın meta verilerini alma
 
-คุณสามารถยืนยันว่า API จัดเก็บไฟล์ที่อัปโหลดเรียบร้อยแล้วและรับข้อมูลเมตาของไฟล์ได้โดยการเรียก `files.get`
+`files.get` işlevini çağırarak API'nin yüklenen dosyayı başarıyla depoladığını doğrulayabilir ve dosyanın meta verilerini alabilirsiniz.
 
 ### Python
 
@@ -221,23 +201,6 @@ async function main() {
 await main();
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.types.File;
-import com.google.genai.types.UploadFileConfig;
-
-Client client = new Client();
-
-File file = client.files.upload(
-    new java.io.File("path/to/sample.txt"),
-    UploadFileConfig.builder().mimeType("text/plain").build()
-);
-
-System.out.println("Uploaded file URI: " + file.uri().orElse(""));
-```
-
 ### Go
 
 ```
@@ -268,9 +231,9 @@ file_uri=$(jq -r ".uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## แสดงรายการไฟล์ที่อัปโหลด
+## Yüklenen dosyaları listeleme
 
-โค้ดต่อไปนี้จะรับรายการไฟล์ทั้งหมดที่อัปโหลด
+Aşağıdaki kod, yüklenen tüm dosyaların listesini alır:
 
 ### Python
 
@@ -303,23 +266,6 @@ async function main() {
 await main();
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.types.File;
-import com.google.genai.types.UploadFileConfig;
-
-Client client = new Client();
-
-File file = client.files.upload(
-    new java.io.File("path/to/sample.txt"),
-    UploadFileConfig.builder().mimeType("text/plain").build()
-);
-
-System.out.println("Uploaded file URI: " + file.uri().orElse(""));
-```
-
 ### Go
 
 ```
@@ -340,9 +286,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/files" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## ลบไฟล์ที่อัปโหลด
+## Yüklenen dosyaları silme
 
-ระบบจะลบไฟล์โดยอัตโนมัติหลังจากผ่านไป 48 ชั่วโมง นอกจากนี้ คุณยังลบไฟล์ที่อัปโหลดด้วยตนเองได้โดยทำดังนี้
+Dosyalar 48 saat sonra otomatik olarak silinir. Yüklenen bir dosyayı manuel olarak da silebilirsiniz:
 
 ### Python
 
@@ -377,23 +323,6 @@ async function main() {
 await main();
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.types.File;
-import com.google.genai.types.UploadFileConfig;
-
-Client client = new Client();
-
-File file = client.files.upload(
-    new java.io.File("path/to/sample.txt"),
-    UploadFileConfig.builder().mimeType("text/plain").build()
-);
-
-System.out.println("Uploaded file URI: " + file.uri().orElse(""));
-```
-
 ### Go
 
 ```
@@ -411,220 +340,191 @@ curl --request "DELETE" https://generativelanguage.googleapis.com/v1beta/$name \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## ข้อมูลการใช้งาน
+## Kullanım bilgileri
 
-คุณใช้ Files API เพื่ออัปโหลดและโต้ตอบกับไฟล์สื่อได้ Files API
-ช่วยให้คุณจัดเก็บไฟล์ได้สูงสุด 20 GB ต่อโปรเจ็กต์ โดยแต่ละไฟล์ต้องมีขนาดไม่เกิน 2 GB
-ระบบจะจัดเก็บไฟล์ไว้เป็นเวลา 48 ชั่วโมง
+Medya dosyalarını yüklemek ve bu dosyalarla etkileşim kurmak için Files API'yi kullanabilirsiniz. Files API, proje başına 20 GB'a kadar dosya depolamanıza olanak tanır. Dosya başına maksimum boyut 2 GB'tır. Dosyalar 48 saat boyunca saklanır. Bu süre zarfında, dosyalarla ilgili meta verileri almak için API'yi kullanabilirsiniz ancak dosyaları indiremezsiniz.
+Files API, Gemini API'nin kullanılabildiği tüm bölgelerde ücretsiz olarak kullanılabilir.
 
-ในระหว่างนั้น คุณสามารถใช้ API เพื่อรับข้อมูลเมตาเกี่ยวกับไฟล์ได้ อย่างไรก็ตาม คุณจะดาวน์โหลดไฟล์ที่ผู้ใช้อัปโหลดไม่ได้ คุณดาวน์โหลดไฟล์ที่โมเดลสร้างขึ้น เช่น วิดีโอ ได้โดยใช้เมธอด `files.download` Files API พร้อมให้บริการโดยไม่มีค่าใช้จ่ายในทุกภูมิภาคที่มี Gemini API พร้อมให้บริการ
+## Dosya istemi stratejileri
 
-## กลยุทธ์การแจ้งไฟล์
+Bu bölümde, Gemini API için istemlerle medya dosyalarını kullanmayla ilgili rehberlik ve en iyi uygulamalar yer almaktadır.
 
-ส่วนนี้จะให้คำแนะนำและแนวทางปฏิบัติแนะนำสำหรับการใช้ไฟล์สื่อกับ
-พรอมต์สำหรับ Gemini API
-
-การใช้ข้อมูลประเภทต่างๆ ในพรอมต์จะช่วยให้คุณมีความยืดหยุ่นมากขึ้นในแง่ของงานที่สามารถจัดการได้ด้วย Gemini API เช่น คุณสามารถส่งรูปภาพอาหารแสนอร่อยให้โมเดลและขอให้เขียนบล็อกสั้นๆ เกี่ยวกับอาหารนั้น
+İstemlerinizde çeşitli veri türlerini kullanabilmek, Gemini API ile hangi görevleri yapabileceğiniz konusunda daha fazla esneklik sağlar. Örneğin, modele lezzetli bir yemeğin fotoğrafını gönderip yemekle ilgili kısa bir blog yazısı yazmasını isteyebilirsiniz.
 
 |  |  |
 | --- | --- |
-| **พรอมต์** | **การตอบกลับ** |
-| เขียนบล็อกโพสต์สั้นๆ ที่น่าสนใจจากรูปภาพนี้ โดยควร มีคำอธิบายเกี่ยวกับอาหารในรูปภาพและพูดถึงเส้นทางการ เตรียมอาหารของฉัน   คุกกี้ | การเตรียมอาหารเป็นวิธีที่ยอดเยี่ยมในการประหยัดเวลาและเงิน รวมถึงยังช่วยให้คุณกินอาหารที่ดีต่อสุขภาพมากขึ้นได้ด้วย มื้ออาหารนี้เป็นตัวอย่างที่ดีของมื้ออาหารเพื่อสุขภาพ และอร่อยที่เตรียมไว้ล่วงหน้าได้  มื้อนี้มีข้าวกล้อง ผักย่าง และไก่เทริยากิ ข้าวกล้องเป็นคาร์โบไฮเดรตเชิงซ้อนที่ดีต่อสุขภาพซึ่งจะให้พลังงานแก่คุณอย่างต่อเนื่อง ผักย่างเป็นวิธีที่ยอดเยี่ยมในการรับวิตามินและแร่ธาตุในแต่ละวัน ส่วนไก่เทอริยากิก็เป็นตัวเลือกที่อร่อยและ มีโปรตีนสูง  นอกจากนี้ อาหารมื้อนี้ยังเตรียมได้ง่ายๆ อีกด้วย เพียงหุงข้าวกล้อง คั่วผัก และทำไก่เทริยากิ เมื่อปรุงอาหารทุกอย่างเสร็จแล้ว ให้แบ่งอาหารใส่ภาชนะสำหรับเตรียมอาหารและเก็บไว้ในตู้เย็น จากนั้นก็หยิบกล่องแล้วออกไปทำงานในเช้าวันที่เร่งรีบได้เลย  หากคุณกำลังมองหามื้ออาหารเพื่อสุขภาพที่อร่อยและ เตรียมไว้ล่วงหน้าได้ มื้อนี้เป็นตัวเลือกที่ยอดเยี่ยม อัดแน่นไปด้วย สารอาหารและรสชาติ และจะช่วยให้คุณรู้สึกอิ่มและพึงพอใจ  ขอให้คุณเตรียมอาหารได้อย่างอร่อยและดีต่อสุขภาพ |
+| **İstem** | **Yanıt** |
+| Bu resme dayalı olarak kısa ve ilgi çekici bir blog yayını yaz. Fotoğraftaki yemeğin açıklamasını içermeli ve yemek hazırlama yolculuğumdan bahsetmelidir.   Çerezler | Yemek hazırlığı, zamandan ve paradan tasarruf etmenin yanı sıra daha sağlıklı beslenmenize de yardımcı olur. Bu yemek, önceden hazırlanabilen sağlıklı ve lezzetli bir yemeğe harika bir örnektir.  Bu öğünde kahverengi pirinç, fırında sebzeler ve teriyaki soslu tavuk bulunur. Esmer pirinç, size uzun süreli enerji verecek sağlıklı ve kompleks bir karbonhidrattır. Kızartılmış sebzeler, günlük vitamin ve mineral ihtiyacınızı karşılamak için harika bir seçenektir. Teriyaki soslu tavuk ise lezzetli ve protein açısından zengin bir seçenektir.  Bu yemeği hazırlamak da kolaydır. Kahverengi pirinci pişirin, sebzeleri fırında kızartın ve teriyaki soslu tavuğu pişirin. Her şey piştikten sonra yemek hazırlama kaplarına bölüp buzdolabında saklayın. Ardından, yoğun sabahlarınızda bir kap alıp çıkabilirsiniz.  Önceden hazırlanabilen sağlıklı ve lezzetli bir yemek arıyorsanız bu yemek harika bir seçenek. Besinler ve lezzetlerle dolu bu yemek, sizi tok ve memnun hissettirecek.  Sağlıklı ve lezzetli yemek hazırlama! |
 
-หากพบปัญหาในการรับเอาต์พุตที่ต้องการจากพรอมต์ที่ใช้ไฟล์สื่อ
-คุณสามารถใช้กลยุทธ์บางอย่างเพื่อช่วยให้ได้ผลลัพธ์ที่ต้องการ
-ส่วนต่อไปนี้จะอธิบายแนวทางการออกแบบและเคล็ดลับในการแก้ปัญหา
-เพื่อปรับปรุงพรอมต์ที่ใช้ข้อมูลหลายรูปแบบ
+Medya dosyalarının kullanıldığı istemlerden istediğiniz çıkışı almakta zorlanıyorsanız istediğiniz sonuçları elde etmenize yardımcı olabilecek bazı stratejiler vardır. Aşağıdaki bölümlerde, çok formatlı giriş kullanan istemleri iyileştirmeye yönelik tasarım yaklaşımları ve sorun giderme ipuçları verilmektedir.
 
-คุณปรับปรุงพรอมต์มัลติโมดัลได้โดยทําตามแนวทางปฏิบัติแนะนําต่อไปนี้
+Aşağıdaki en iyi uygulamaları izleyerek çok formatlı istemlerinizi iyileştirebilirsiniz:
 
-- ### [ข้อมูลพื้นฐานเกี่ยวกับการออกแบบพรอมต์](#specific-instructions)
+- ### [İstem tasarımıyla ilgili temel bilgiler](#specific-instructions)
 
-  - **ระบุคำสั่งอย่างชัดเจน**: สร้างคำสั่งที่ชัดเจนและกระชับซึ่งมีโอกาสน้อยที่จะเกิดการตีความผิด
-  - **เพิ่มตัวอย่าง 2-3 รายการลงในพรอมต์:** ใช้ตัวอย่างแบบ Few-Shot ที่สมจริงเพื่อแสดงให้เห็นสิ่งที่คุณต้องการทำให้สำเร็จ
-  - **แบ่งงานออกเป็นขั้นตอน**: แบ่งงานที่ซับซ้อนออกเป็นเป้าหมายย่อยที่จัดการได้ เพื่อนำโมเดลไปตลอดกระบวนการ
-  - **ระบุรูปแบบเอาต์พุต**: ในพรอมต์ ให้ขอเอาต์พุตในรูปแบบที่ต้องการ เช่น Markdown, JSON, HTML และอื่นๆ
-  - **วางรูปภาพไว้ก่อนสำหรับพรอมต์ที่มีรูปภาพเดียว**: แม้ว่า Gemini จะจัดการอินพุตรูปภาพและข้อความได้ทุกรูปแบบ แต่สำหรับพรอมต์ที่มีรูปภาพเดียว การวางรูปภาพ (หรือวิดีโอ) ไว้ก่อนพรอมต์ข้อความอาจช่วยให้ได้ผลลัพธ์ที่ดีกว่า อย่างไรก็ตาม สำหรับพรอมต์ที่ต้องสลับรูปภาพกับข้อความอย่างมากเพื่อให้เข้าใจได้ ให้ใช้ลำดับที่ดูเป็นธรรมชาติที่สุด
-- ### [การแก้ปัญหาพรอมต์มัลติโมดัล](#troubleshooting)
+  - **Talimatlarınızda net olun**: Yanlış yorumlamaya en az yer bırakacak şekilde net ve kısa talimatlar oluşturun.
+  - **İsteminize birkaç örnek ekleyin:** Ne elde etmek istediğinizi göstermek için gerçekçi birkaç görev örneği kullanın.
+  - **Adım adım ilerleyin**: Karmaşık görevleri yönetilebilir alt hedeflere ayırarak modele süreç boyunca rehberlik edin.
+  - **Çıkış biçimini belirtin**: İsteminizde, çıkışın istediğiniz biçimde (ör. Markdown, JSON, HTML vb.) olmasını isteyin.
+  - **Tek resimli istemlerde resminizi önce girin**: Gemini, resim ve metin girişlerini herhangi bir sırada işleyebilse de tek resim içeren istemlerde, resim (veya video) metin isteminden önce yerleştirilirse daha iyi performans gösterebilir. Ancak, anlamlı olması için resimlerin metinlerle yoğun bir şekilde iç içe geçmesini gerektiren istemlerde en doğal olan sırayı kullanın.
+- ### [Çok formatlı isteminizle ilgili sorunları giderme](#troubleshooting)
 
-  - **หากโมเดลไม่ได้ดึงข้อมูลจากส่วนที่เกี่ยวข้องของรูปภาพ** ให้บอกใบ้ว่าคุณต้องการให้พรอมต์ดึงข้อมูลจากส่วนใดของรูปภาพ
-  - **หากเอาต์พุตโมเดลเป็นแบบทั่วไปมากเกินไป (ไม่ปรับให้เข้ากับอินพุตรูปภาพ/วิดีโอมากพอ):** ที่จุดเริ่มต้นของพรอมต์ ให้ลองขอให้โมเดลอธิบายรูปภาพหรือวิดีโอก่อนที่จะให้คำสั่งงาน หรือลองขอให้โมเดลอ้างอิงถึงสิ่งที่อยู่ในรูปภาพ
-  - **หากต้องการแก้ปัญหาว่าส่วนใดล้มเหลว** ให้ขอให้โมเดลอธิบายรูปภาพ หรือขอให้โมเดลอธิบายเหตุผลเพื่อวัดความเข้าใจเริ่มต้นของโมเดล
-  - **หากพรอมต์ทำให้เกิดเนื้อหาที่โมเดลแต่งขึ้น** ให้ลองลดการตั้งค่าอุณหภูมิหรือขอให้โมเดลอธิบายสั้นลง เพื่อลดโอกาสที่โมเดลจะคาดการณ์รายละเอียดเพิ่มเติม
-  - **การปรับพารามิเตอร์การสุ่มตัวอย่าง:** ทดลองใช้การตั้งค่าอุณหภูมิและการเลือกแบบ Top-k ที่แตกต่างกันเพื่อปรับความคิดสร้างสรรค์ของโมเดล
+  - **Model, resmin ilgili bölümünden bilgi almıyorsa:** İstemden, resmin hangi yönleriyle ilgili bilgi almasını istediğinize dair ipuçları verin.
+  - **Model çıktısı çok genel ise (resim/video girişine yeterince uyarlanmamışsa):** İstemin başında, görev talimatını vermeden önce modelden resimleri veya videoyu açıklamasını ya da modelden resimdeki içeriğe atıfta bulunmasını isteyin.
+  - **Hangi bölümün başarısız olduğunu belirlemek için:** Modelin ilk anlayışını ölçmek üzere modelden resmi açıklamasını veya gerekçesini açıklamasını isteyin.
+  - **İsteminiz halüsinasyon içeren içeriklerle sonuçlanıyorsa:** Sıcaklık ayarını düşürmeyi veya modelden daha kısa açıklamalar istemeyi deneyin. Böylece modelin ek ayrıntılar üretme olasılığı azalır.
+  - **Örnekleme parametrelerini ayarlama:** Modelin yaratıcılığını ayarlamak için farklı sıcaklık ayarları ve top-k seçimleriyle denemeler yapın.
 
-### ระบุคำสั่งให้ชัดเจน
+### Talimatlarınızda net olun
 
-พรอมต์จะประสบความสำเร็จมากที่สุดเมื่อมีความชัดเจนและละเอียด หากคุณมีผลลัพธ์ที่เฉพาะเจาะจงในใจ
-ควรระบุข้อกำหนดนั้นในพรอมต์
-เพื่อให้มั่นใจว่าคุณจะได้รับผลลัพธ์ที่ต้องการ
+İstemler en iyi sonucu net ve ayrıntılı olduğunda verir. Aklınızda belirli bir çıkış varsa istediğiniz çıkışı elde etmek için bu şartı isteme eklemeniz daha iyi olur.
 
-สำหรับรูปภาพกระดานในสนามบินนี้ การขอให้โมเดล "อธิบายรูปภาพนี้" อาจสร้างคำอธิบายทั่วไป หากต้องการให้โมเดลแยกวิเคราะห์
-เวลาและเมืองจากรูปภาพ คุณสามารถใส่คำขอนั้นลงในพรอมต์ได้โดยตรง
+Havaalanı panosunun yer aldığı bu resim için modele yalnızca "bu resmi açıkla" komutunu verdiğinizde genel bir açıklama oluşturulabilir. Modelin resimdeki saati ve şehri ayrıştırması gerekiyorsa bu isteği doğrudan isteminize ekleyebilirsiniz.
 
-| พรอมต์ | คำตอบของโมเดล |
+| İstem | Model yanıtı |
 | --- | --- |
-| อธิบายรูปภาพนี้ | รูปภาพแสดงตารางเที่ยวบินขาเข้าและขาออกของสนามบิน |
+| Bu resmi tanımla. | Resimde, havalimanındaki gelen ve giden uçuşlar tabelası gösteriliyor. |
 
-| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
+| **Güncellenen istem** | **İyileştirilmiş yanıt** |
 | --- | --- |
-| ตารางเวลาการเดินทาง แยกวิเคราะห์เวลาและเมืองจากบอร์ดสนามบินที่แสดงในรูปภาพนี้เป็นรายการ | - 10:50 มอสโก - 11:05 เอดินบะระ - 11:05 ลอนดอน - 11:10 บูคาเรสต์ - 11:30 น. เคียฟ - 11:35 ดับลิน - 11:45 อีสต์มิดแลนส์ - 12:15 โซเฟีย - 12:30 ลอนดอน - 12:30 น. นิวคาสเซิล - 12:40 เซนต์ปีเตอร์สเบิร์ก - 12:40 ลอนดอน - 12:45 แมนเชสเตอร์ |
+| Seyahat zaman çizelgesi Bu resimde gösterilen havaalanı panosundaki saati ve şehri ayrıştırarak listeleyin. | - 10:50 Moskova - 11:05 Edinburgh - 11:05 Londra - 11:10 Bükreş - 11:30 Kiev - 11:35 Dublin - 11:45 East Midlands - 12:15 Sofya - 12:30 Londra - 12:30 Newcastle - 12:40 St Petersburg - 12:40 Londra - 12:45 Manchester |
 
-### เพิ่มตัวอย่าง
+### Birkaç örnek ekleyin
 
-โมเดล Gemini รับอินพุตได้หลายรายการ ซึ่งสามารถใช้เป็นตัวอย่างเพื่อ
-ทำความเข้าใจเอาต์พุตที่คุณต้องการ การเพิ่มตัวอย่างเหล่านี้จะช่วยให้โมเดล
-ระบุรูปแบบและใช้ความสัมพันธ์ระหว่างรูปภาพและ
-คำตอบที่ระบุกับตัวอย่างใหม่ได้ หรือที่เรียกว่าการเรียนรู้แบบ "Few-Shot"
+Gemini modeli, istediğiniz çıktıyı anlamak için örnek olarak kullanabileceği birden fazla giriş kabul edebilir. Bu örnekleri eklemek, modelin kalıpları belirlemesine ve verilen resimler ile yanıtlar arasındaki ilişkiyi yeni örneğe uygulamasına yardımcı olabilir. Bu, "az görevli" öğrenme olarak da adlandırılır.
 
-ในตัวอย่างต่อไปนี้ เอาต์พุตเริ่มต้นจะเขียนในรูปแบบประโยค
-และมีประเทศ (บราซิล) ด้วย สมมติว่าคุณต้องการเอาต์พุตใน
-รูปแบบหรือสไตล์อื่น และต้องการเฉพาะเมือง ไม่ใช่ประเทศ การเพิ่มตัวอย่างแบบ Few-Shot ลงในพรอมต์จะช่วยให้โมเดลตอบสนองในแบบที่คุณต้องการ
+Aşağıdaki örnekte, ilk çıkış cümle şeklinde yazılmış ve ülkeyi (Brezilya) de içeriyor. Çıktının farklı bir biçimde veya tarzda olmasını ve yalnızca şehri (ülkeyi değil) istiyorsunuz. İsteminize birkaç görevli örnek eklemek, modelin istediğiniz şekilde yanıt vermesini sağlayabilir.
 
-| **พรอมต์** | **คำตอบของโมเดล** |
+| **İstem** | **Model yanıtı** |
 | --- | --- |
-| ตารางเวลาการเดินทาง ระบุเมืองพร้อมกับสถานที่สำคัญ | สถานที่สำคัญคือรูปปั้นพระคริสต์ผู้ไถ่ในรีโอเดจาเนโร ประเทศบราซิล |
+| Seyahat zaman çizelgesi Simge yapıyla birlikte şehri belirleyin. | Bu simge yapı, Brezilya'nın Rio de Janeiro şehrindeki Kurtarıcı İsa heykelidir. |
 
-| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
+| **Güncellenen istem** | **İyileştirilmiş yanıt** |
 | --- | --- |
-| ระบุเมืองพร้อมกับสถานที่สำคัญ โคลอสเซียม | เมือง: โรม, สถานที่สำคัญ: โคลอสเซียม |
-| นครต้องห้าม | เมือง: ปักกิ่ง, สถานที่สำคัญ: พระราชวังต้องห้าม |
-| forbidden-city | เมือง: รีโอเดจาเนโร, สถานที่สำคัญ: รูปปั้นพระคริสต์ผู้ไถ่ |
+| Simge yapıyla birlikte şehri belirleyin. colosseum | city: Rome, landmark: the Colosseum. |
+| Yasak Şehir | city: Beijing, landmark: Forbidden City |
+| forbidden-city | city: Rio de Janeiro, landmark: Christ the Redeemer statue |
 
-### ดูรายละเอียดทีละขั้นตอน
+### Adım adım inceleme
 
-สำหรับงานที่ซับซ้อน เช่น งานที่ต้องใช้ทั้งความเข้าใจด้านภาพและการให้เหตุผล การแบ่งงานออกเป็นขั้นตอนย่อยๆ ที่ตรงไปตรงมามากขึ้นอาจเป็นประโยชน์ หรือคุณอาจขอให้โมเดล "คิดทีละขั้นตอน" ในพรอมต์โดยตรงก็ได้
+Hem görsel anlayış hem de akıl yürütme gerektiren görevler gibi karmaşık görevleri daha küçük ve basit adımlara bölmek faydalı olabilir. Alternatif olarak, isteminizde doğrudan modelden "adım adım düşünmesini" istemek de etkili olabilir.
 
-| พรอมต์ | คำตอบของโมเดล |
+| İstem | Model yanıtı |
 | --- | --- |
-| กระดาษชำระจะหมดเมื่อใด | คุณจะเหลือรีลเพียง 3 รายการในเร็วๆ นี้ |
+| Tuvalet kağıdım ne zaman bitecek? | Çok yakında yalnızca 3 rulo hakkınız kalacak. |
 
-| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
+| **Güncellenen istem** | **İyileştirilmiş yanıt** |
 | --- | --- |
-| 1. ก่อนอื่น ให้นับม้วนกระดาษชำระในรูปภาพนี้ 2. จากนั้นให้พิจารณาว่าโดยทั่วไปแล้วคนเราใช้กระดาษชำระวันละเท่าไร 3. คำนวณว่ากระดาษชำระม้วนเหล่านี้จะใช้ได้นานเท่าใด | 1. มีม้วนกระดาษชำระ 3 ม้วนในรูปภาพนี้ 2. โดยทั่วไปแล้ว คนเราใช้กระดาษชำระประมาณ 20 แผ่นต่อวัน 3. หากกระดาษชำระแต่ละม้วนมี 200 แผ่น กระดาษชำระแต่ละม้วนจะใช้ได้ประมาณ 10 วัน ดังนั้น ฟิล์ม 3 ม้วนจะใช้งานได้ประมาณ 1 เดือน |
+| 1. Öncelikle bu resimde kaç rulo tuvalet kağıdı olduğunu sayın. 2. Ardından, bir kişinin günde ne kadar tuvalet kağıdı kullandığını belirleyin. 3. Bu tuvalet kağıdı rulolarının ne kadar süre dayanacağını hesaplayın. | 1. Bu resimde 3 rulo tuvalet kağıdı var. 2. Tipik bir kişi günde yaklaşık 20 yaprak tuvalet kağıdı kullanır. 3. Her ruloda 200 yaprak varsa her rulo yaklaşık 10 gün dayanır. Bu nedenle, 3 rulo yaklaşık bir ay dayanır. |
 
-โจทย์คณิตศาสตร์หรือโจทย์ประเภทอื่นๆ เป็นตัวเลือกที่ยอดเยี่ยมในการขอให้โมเดลคิดแบบทีละขั้นตอน
+Matematik problemleri veya diğer sözel problemler, modelden adım adım düşünmesini istemek için idealdir.
 
-| **พรอมต์** | **การตอบกลับ** |
+| **İstem** | **Yanıt** |
 | --- | --- |
-| พจน์ที่ 4 ในลำดับคืออะไร | -135 |
+| Dizideki 4. terim nedir? | -135 |
 
-คำตอบจากโมเดลไม่ถูกต้อง วิธีปรับปรุงเรื่องนี้คือการขอให้โมเดลวิเคราะห์ปัญหาก่อนตอบพรอมต์
+Modelin yanıtı yanlış. Bunu iyileştirmenin bazı yolları, modelden isteme yanıt vermeden önce sorunu ayrıştırmasını istemektir.
 
-| **พรอมต์** | **การตอบกลับ** |
+| **İstem** | **Yanıt** |
 | --- | --- |
-| แยกวิเคราะห์สูตรในรูปภาพก่อน  จากนั้นตอบคำถาม "พจน์ที่ 4 ในลำดับคืออะไร" โดยอิงตามสูตร | *คลิกเพื่อขยายผลลัพธ์* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. แทนค่า n = 4 ในสูตร $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. เราไม่ทราบค่าของ b(3) ดังนั้นให้แทนค่า n = 3 ลงในสูตร $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. เราไม่ทราบค่าของ b(2) จึงแทนค่า n = 2 ลงในสูตร $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. เรารู้ว่าค่าของ b(1) คือ 15 ดังนั้นให้แทนค่าลงในสูตร $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. ตอนนี้เราทราบค่าของ b(2) แล้ว ให้แทนค่าลงในสูตรสำหรับ b(3) ดังนี้ $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. ตอนนี้เราทราบค่าของ b(3) แล้ว ให้แทนค่าลงในสูตรสำหรับ b(4) ดังนี้ $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   ดังนั้น พจน์ที่ 4 ในลำดับคือ -405 |
+| Önce resimdeki formülü ayrıştırın.  Ardından, formüle göre "Dizideki 4. terim nedir?" sorusunu yanıtlayın. | *Sonucu genişletmek için tıklayın* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. n = 4 değerini formülde yerine koyun: $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. b(3) değerini bilmiyoruz. Bu nedenle, n = 3 değerini formülde yerine koyun: $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. b(2) değerini bilmiyoruz. Bu nedenle, n = 2 değerini formülde yerine koyun: $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. b(1) değerinin 15 olduğunu biliyoruz. Bu nedenle, formülde yerine koyalım: $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. b(2) değerini bildiğimize göre bunu b(3) formülünde yerine koyalım: $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. Artık b(3) değerini bildiğimize göre bu değeri b(4) formülünde yerine koyabiliriz: $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   Bu nedenle, dizideki 4. terim -405'tir. |
 
-คำตอบของโมเดลนี้ถูกต้องแล้ว แต่หากต้องการให้คำตอบมีประสิทธิภาพมากยิ่งขึ้น
-คุณสามารถขอให้โมเดลคิดทีละขั้นตอนได้
+Bu model yanıtı doğru. Yanıtı daha da kolaylaştırmak için modele adım adım düşünmesini söyleyebilirsiniz.
 
-| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
+| **Güncellenen istem** | **İyileştirilmiş yanıt** |
 | --- | --- |
-| พจน์ที่ 4 ในลำดับคืออะไร คิดทีละขั้นตอน | โดยพจน์แรกคือ 15  พจน์ที่ 2 คือ b(1) \* (-3) = 15 \* (-3) = -45  พจน์ที่ 3 คือ b(2) \* (-3) = -45 \* (-3) = 135  พจน์ที่ 4 คือ b(3) \* (-3) = 135 \* (-3) = -405 |
+| Dizideki 4. terim nedir? Adım adım düşünün. | İlk terim 15'tir.  İkinci terim b(1) \* (-3) = 15 \* (-3) = -45 olur.  Üçüncü terim b(2) \* (-3) = -45 \* (-3) = 135'tir.  Dördüncü terim b(3) \* (-3) = 135 \* (-3) = -405 olur. |
 
-### ระบุรูปแบบเอาต์พุต
+### Çıkış biçimini belirtin
 
-ปัญหาที่พบบ่อยคือความจำเป็นที่เอาต์พุตของโมเดลต้องอยู่ในรูปแบบที่แน่นอน
-(เช่น มาร์กดาวน์, JSON, HTML) โดยเฉพาะอย่างยิ่งหากงานดาวน์สตรีมต้อง
-รับข้อมูลเอาต์พุตของโมเดล คุณลองสร้างเอาต์พุตในรูปแบบนั้นได้
-โดยสั่งให้โมเดลทำเช่นนั้นภายในพรอมต์ ตัวอย่าง 2 รายการมีดังนี้
+Model çıkışının belirli bir biçimde (ör.Markdown, JSON, HTML) olması gerektiğinde yaygın bir sorun yaşanır. Bu durum, özellikle model çıkışının sonraki bir görev tarafından alınması gerektiğinde ortaya çıkar. İstemde modeli bu biçimde çıkış üretmeye yönlendirerek bu biçimde çıkış üretmeyi deneyebilirsiniz. Aşağıda iki örnek verilmiştir:
 
-| พรอมต์ | คำตอบของโมเดล |
+| İstem | Model yanıtı |
 | --- | --- |
-| แยกวิเคราะห์ตารางในรูปภาพนี้เป็นรูปแบบมาร์กดาวน์ | ```none | วิชา | สถานะ | เวลา | วันที่เริ่มต้น | กำหนดส่ง | | ------- | ------ | ---- | ---------- | ------ | | คณิตศาสตร์ | เสร็จแล้ว | 1.5 ชม. | 29/11/2023 | 1/12/2023 | | ภูมิศาสตร์ | เสร็จแล้ว | 30 นาที | 2/12/2023 | 4/12/2023 | | ฟิสิกส์ | กำลังดำเนินการ | 2 ชม. | 3/12/2023 | 5/12/2023 | | ชีววิทยา | ยังไม่ได้เริ่ม | 6 ชม. | 2/11/2016 | 6/12/2023 | ``` |
+| Bu resimdeki tabloyu Markdown biçiminde ayrıştır | ```none | Konu | Durum | Süre | Başlangıç tarihi | Son tarih | | ------- | ------ | ---- | ---------- | ------ | | Matematik | Tamamlandı | 1,5 saat | 29.11.2023 | 01.12.2023 | | Coğrafya | Tamamlandı | 30 dakika | 02.12.2023 | 04.12.2023 | | Fizik | Devam ediyor | 2 saat | 03.12.2023 | 05.12.2023 | | Biyoloji | Başlatılmadı | 6 saat | 02.11.2016 | 06.12.2023 | ``` |
 
-| **พรอมต์** | **คำตอบของโมเดล** |
+| **İstem** | **Model yanıtı** |
 | --- | --- |
-| ระบุรายการแอตทริบิวต์ต่อไปนี้ทั้งหมด  ส่วนผสม ประเภทอาหาร มังสวิรัติหรือไม่ ในรูปแบบ JSON | ```json { "ingredients": [ "rice", "shrimp", "clams", "mussels", "peas", "tomatoes", "onions", "garlic", "olive oil", "paprika", "salt", "pepper" ], "type of cuisine": "Spanish", "vegetarian": false } ``` |
+| Aşağıdaki tüm özelliklerin listesini sağlayın:  Malzemeler, mutfak türü, vejetaryen olup olmadığı (JSON biçiminde) | ```json { "ingredients": [ "rice", "shrimp", "clams", "mussels", "peas", "tomatoes", "onions", "garlic", "olive oil", "paprika", "salt", "pepper" ], "type of cuisine": "Spanish", "vegetarian": false } ``` |
 
-### วางรูปภาพไว้ก่อนสำหรับพรอมต์แบบรูปภาพเดียว
+### Tek resim istemlerinde resminizi ön plana çıkarma
 
-แม้ว่า Gemini จะตีความรูปภาพและข้อความในพรอมต์ได้ตามลำดับใดก็ได้ แต่การวาง
-รูปภาพเดี่ยวไว้ก่อนพรอมต์ข้อความอาจให้ผลลัพธ์ที่ดีกว่า
-ในตัวอย่างต่อไปนี้ คุณจะเห็นว่ารูปภาพจะมาก่อนข้อความในแต่ละพรอมต์
+Gemini, istemdeki görüntü ve metni herhangi bir sırada yorumlayabilir ancak metin isteminden önce tek bir görüntü yerleştirmek daha iyi sonuçlar verebilir.
+Aşağıdaki örneklerde, her istemde önce resmin, ardından metnin geldiğini göreceksiniz.
 
-### การแก้ปัญหาพรอมต์มัลติโมดัล
+### Çok formatlı isteminizle ilgili sorunları giderme
 
-คุณอาจต้องแก้ปัญหาพรอมต์หากไม่ได้รับคำตอบที่เป็นประโยชน์
-คุณลองใช้กลยุทธ์ต่อไปนี้ได้
+Faydalı bir yanıt alamıyorsanız isteminizle ilgili sorunları gidermeniz gerekebilir. Deneyebileceğiniz birkaç strateji:
 
-#### หากโมเดลไม่ได้ดึงข้อมูลจากส่วนที่เกี่ยวข้องของรูปภาพ
+#### Model, resmin ilgili bölümünden bilgi almıyorsa
 
-หากต้องการคำตอบที่เจาะจงมากขึ้น คุณสามารถระบุลักษณะของรูปภาพ
-ที่ต้องการให้พรอมต์ดึงข้อมูลมาใช้ในการตอบกลับได้
+Daha ayrıntılı bir yanıt almak için istemin, yanıtını oluştururken hangi resim öğelerinden bilgi almasını istediğinizi belirtebilirsiniz.
 
-| พรอมต์ | คำตอบของโมเดล |
+| İstem | Model yanıtı |
 | --- | --- |
-| ผ้าอ้อมเหล่านี้จะใช้ได้นานกี่วันสำหรับทารก | ผ้าอ้อมจะใช้ได้ 198 วันก่อนที่จะหมด |
+| Bu bezler bir bebeğe kaç gün yeter? | Bezler bitmeden 198 gün boyunca kullanılabilir. |
 
-| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
+| **Güncellenen istem** | **İyileştirilmiş yanıt** |
 | --- | --- |
-| ผ้าอ้อมเหล่านี้จะใช้ได้นานเท่าไรก่อนจะหมด  ใช้น้ำหนักที่แสดงบนกล่องเพื่อกำหนดอายุของเด็ก และใช้จำนวนผ้าอ้อมทั้งหมดในกล่อง  นำจำนวนทั้งหมดมาหารด้วยจำนวนผ้าอ้อมที่เด็กใช้ต่อวัน | กล่องนี้มีผ้าอ้อม 198 ชิ้น กล่องระบุว่าผ้าอ้อมเหมาะสำหรับเด็กที่มีน้ำหนัก 22-37 ปอนด์  เด็กที่มีน้ำหนักในช่วงนี้โดยเฉลี่ยจะมีอายุระหว่าง 1-2 ปี  โดยปกติแล้วเด็กอายุ 2 ขวบจะใช้ผ้าอ้อม 6 ผืนต่อวัน ดังนั้นผ้าอ้อมจะใช้ได้ประมาณ 33 วัน (198/6) |
+| Bu bezler bitmeden ne kadar süre dayanır?  Çocuğun yaşını belirlemek için kutunun üzerinde gösterilen ağırlığı ve kutudaki toplam bebek bezi sayısını kullanın.  Toplam sayıyı, çocuğun günde kullandığı bez sayısına bölün. | Kutuda 198 adet bez bulunur. Kutuda, bezlerin 10-17 kg ağırlığındaki çocuklar için olduğu belirtiliyor.  Bu ağırlık aralığındaki ortalama bir çocuk muhtemelen 1-2 yaşlarındadır.  2 yaşındaki bir çocuk genellikle günde 6 bez kullanır. Bu nedenle, bezler yaklaşık 33 gün (198/6) dayanır. |
 
-#### หากเอาต์พุตโมเดลเป็นแบบทั่วไปมากเกินไปและไม่ปรับให้เข้ากับอินพุตรูปภาพ
+#### Model çıkışı çok genel ve resim girişine yeterince uyarlanmamışsa
 
-หากต้องการช่วยให้โมเดลปรับคำตอบให้เหมาะกับรูปภาพ ให้ลองขอให้โมเดลอธิบายรูปภาพก่อนที่จะทำงานให้เหตุผล
+Modelin yanıtını resimlere göre uyarlamasına yardımcı olmak için akıl yürütme görevini gerçekleştirmeden önce resimleri açıklamasını isteyin.
 
-| พรอมต์ | คำตอบของโมเดล |
+| İstem | Model yanıtı |
 | --- | --- |
-| รูปภาพเหล่านี้มีอะไรที่เหมือนกัน | รูปภาพทั้ง 4 รูปเป็นตัวอย่างของการถ่ายภาพทิวทัศน์ |
+| Bu resimlerin ortak noktası nedir? | Dört resmin tamamı manzara fotoğrafı örnekleridir. |
 
-| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
+| **Güncellenen istem** | **İyileştirilmiş yanıt** |
 | --- | --- |
-| ก่อนอื่น ให้อธิบายสิ่งที่อยู่ในแต่ละภาพโดยละเอียด รูปภาพเหล่านี้มีอะไรที่เหมือนกัน | รูปภาพแรกแสดงภาพคนกำลังจัดกระเป๋าเดินทาง ภาพที่ 2 แสดงทางเดินที่ว่างเปล่าในห้างสรรพสินค้า ภาพที่ 3 แสดงม้วนกระดาษชำระ รูปภาพที่ 4 แสดงทะเลที่มืดครึ้มและมีพายุ  ความเหมือนกันของภาพเหล่านี้คือเป็นตัวอย่างของพื้นที่กึ่งกลาง Liminal Space คือสถานที่หรือสถานการณ์ที่อยู่ระหว่างสถานที่หรือสถานการณ์อื่นๆ 2 แห่ง โดยมักมีลักษณะของความไม่แน่นอนหรือความคลุมเครือ  ภาพแรกแสดงให้เห็นว่าบุคคลดังกล่าวอยู่บ้านและเดินทาง ภาพที่ 2 แสดงทางเดินระหว่างร้านค้า 2 ร้าน ภาพที่ 3 เป็นกระดาษชำระ ซึ่งแสดงถึงห้องน้ำ ห้องน้ำเป็นพื้นที่เปลี่ยนผ่านระหว่างพื้นที่ส่วนตัว และพื้นที่สาธารณะ เป็นสถานที่ที่เราเตรียมตัวเพื่อเข้าหรือออกจากโลกภายนอก  ภาพที่ 4 แสดงให้เห็นทะเลที่อยู่ระหว่างความสงบกับความปั่นป่วน  พื้นที่กึ่งกลางอาจทั้งน่าตื่นเต้นและน่ากังวล ซึ่งอาจเป็นจุดเริ่มต้นใหม่หรือจุดสิ้นสุดก็ได้ ซึ่งอาจเป็นที่ที่ใช้ไตร่ตรองหรือที่ที่ใช้ลงมือทำ |
+| Öncelikle her resimde ne olduğunu ayrıntılı olarak açıklayın. Bu resimlerin ortak noktası nedir? | İlk resimde, bir kişinin bavul hazırladığı gösteriliyor. İkinci resimde, bir alışveriş merkezindeki boş koridor gösteriliyor. Üçüncü resimde bir rulo tuvalet kağıdı gösteriliyor. Dördüncü resimde karanlık ve fırtınalı bir deniz gösteriliyor.  Bu resimlerin ortak özelliği, hepsinin geçiş alanlarına örnek olmasıdır. Geçiş alanları, iki yer veya durum arasında kalan yerler ya da durumlardır. Genellikle belirsizlik veya muğlaklık hissiyle karakterize edilirler.  İlk resimde, kişinin evde ve seyahatte olduğu gösteriliyor. İkinci resimde, iki mağaza arasındaki koridor gösteriliyor. Üçüncü resimde, banyoyu temsil edebilecek tuvalet kağıdı gösteriliyor. Banyo, özel ve kamusal alanlar arasında geçiş yapılan bir yerdir. Dış dünyaya girerken veya dış dünyadan çıkarken kendimizi hazırladığımız bir yerdir.  Dördüncü resimde, sakin ve fırtınalı deniz arasında bir geçiş gösteriliyor.  Geçiş alanları hem heyecan verici hem de rahatsız edici olabilir. Yeni başlangıçların veya sonların yeri olabilirler. Bunlar, düşünme veya harekete geçme yeri olabilir. |
 
-นอกจากนี้ คุณยังลองถามโมเดลอย่างชัดเจนให้ดูสิ่งที่อยู่ในรูปภาพได้ด้วย
+Ayrıca modelden, resimdeki içeriğe açıkça atıfta bulunmasını da isteyebilirsiniz.
 
-| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
+| **Güncellenen istem** | **İyileştirilmiş yanıt** |
 | --- | --- |
-| รูปภาพเหล่านี้มีอะไรที่เหมือนกัน อ้างอิงสิ่งที่อยู่ในรูปภาพในคำตอบ | รูปภาพทั้งหมดเกี่ยวข้องกับการท่องเที่ยว ภาพแรกแสดงภาพคนกำลังจัดกระเป๋าเดินทาง ภาพที่ 2 แสดงภาพทางเดินที่ว่างเปล่าในห้างสรรพสินค้า ภาพที่ 3 แสดงภาพกระดาษชำระที่วางซ้อนกัน และภาพที่ 4 แสดงภาพทะเลที่มืดครึ้มและมีพายุ  รูปภาพเหล่านี้เกี่ยวข้องกับการเดินทางทั้งหมดเนื่องจากเป็นสิ่งที่ผู้คนต้องการหรือใช้เมื่อ เดินทาง รูปภาพแรกแสดงให้เห็นบุคคลกำลังจัดกระเป๋าเดินทาง ซึ่งเป็น สิ่งที่ผู้คนทำเมื่อจะเดินทาง รูปภาพที่ 2 แสดงทางเดินที่ว่างเปล่าในห้างสรรพสินค้า ซึ่งเป็นสถานที่ที่ผู้คน มักจะไปซื้อของสำหรับการเดินทาง รูปภาพที่ 3 แสดงกองกระดาษชำระ ซึ่งเป็นสิ่งที่ผู้คนมักใช้เมื่อเดินทาง รูปภาพที่ 4 แสดงทะเลที่มืดครึ้มและมีพายุ ซึ่งเป็น สิ่งที่ผู้คนมักพบเจอเมื่อเดินทาง |
+| Bu resimlerin ortak noktası nedir? Yanıtınızda resimlerdeki içeriklere atıfta bulunun. | Resimlerin tamamı seyahatle ilgili. İlk resimde valiz hazırlayan bir kişi, ikinci resimde alışveriş merkezindeki boş bir koridor, üçüncü resimde bir rulo tuvalet kağıdı, dördüncü resimde ise karanlık ve fırtınalı bir deniz gösteriliyor.  Bu resimlerin hepsi seyahatle ilgili çünkü seyahat edenlerin ihtiyaç duyduğu veya kullandığı şeyler. İlk resimde, bir valizi hazırlayan bir kişi gösteriliyor. Bu, insanların seyahate çıkarken yaptığı bir şeydir. İkinci resimde, insanların seyahatleri için eşya satın almak üzere sık sık gittiği bir yer olan alışveriş merkezindeki boş bir koridor gösteriliyor. Üçüncü resimde, insanların seyahat ederken sıkça kullandığı bir ürün olan tuvalet kağıdı rulosu gösteriliyor. Dördüncü resimde, insanların seyahat ederken sıkça karşılaştığı bir durum olan karanlık ve fırtınalı bir deniz gösteriliyor. |
 
-เคล็ดลับเดียวกันนี้ใช้ได้กับผลงานครีเอทีฟโฆษณาจากรูปภาพด้วย ในตัวอย่างต่อไปนี้ที่มี
-กระต่าย การขอให้โมเดลรวมแง่มุมจากรูปภาพอย่างชัดเจนจะ
-ปรับปรุงเอาต์พุตได้
+Aynı ipuçları, resimlerden elde edilen reklam öğesi çıkışları için de geçerlidir. Tavşanın yer aldığı aşağıdaki örnekte, modelden resimdeki unsurları dahil etmesini açıkça istemek çıkışı iyileştirebilir.
 
-| พรอมต์ | คำตอบของโมเดล |
+| İstem | Model yanıtı |
 | --- | --- |
-| ช่วยแต่งกลอนเกี่ยวกับรูปภาพนี้ให้หน่อยได้ไหม | กระต่ายน้อยตัวนุ่มสีน้ำตาล  กระโดดโลดเต้นไปทั่วทุ่ง  หูยาว หางสั้น  เจ้าเป็นสัตว์ที่น่ารักที่สุดในบรรดาสัตว์ทั้งหมด  เจ้าแทะหญ้าเขียวหวาน  แล้วกระโดดหนีเมื่อเห็นฉัน  แต่ฉันจะเป็นเพื่อนของเธอเสมอ  กระต่ายน้อย จนกว่าจะถึงวันสุดท้าย |
+| Bu resim hakkında bir şiir yazabilir misin? | Küçük tavşan, yumuşacık ve kahverengi,  Tarlada zıplıyor, yukarı ve aşağı.  Kulakların uzun, kuyruğun küçük,  Sen hepsinin en tatlısısın.  Yeşil ve tatlı çimleri yersin,  Beni görünce de zıplayarak uzaklaşırsın.  Ama her zaman arkadaşın olacağım,  Küçük tavşan, sonuna kadar. |
 
-| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
+| **Güncellenen istem** | **İyileştirilmiş yanıt** |
 | --- | --- |
-| ช่วยแต่งกลอนที่บรรยายและน่าทึ่งเกี่ยวกับรูปภาพนี้พร้อมระบุสถานที่ได้ไหม | กระต่ายน้อยบนทุ่งหญ้าเขียว  หูยาวเฟื้อยน่ารัก  เจ้าเห็นอะไรที่นั่น  ในระยะไกลที่เจ้าจ้องมอง  เป็นสีครามของมหาสมุทร  ส่องประกายในแสงแดดไหม  หรือคลื่นที่ซัดสาดและคำราม  จังหวะที่คุณชื่นชอบ  กระต่ายน้อยบอกฉันหน่อย  อะไรที่ดึงดูดความสนใจของเธอ  ลมทะเลเค็ม  หรือเสียงร้องของนกนางนวลที่ทำให้เพลิน  อาจเป็นเพราะความกว้างใหญ่ของทุกสิ่ง  โลกที่ทั้งใหญ่และเล็ก  ที่ซึ่งความฝันจะโลดแล่น  และหว่านการผจญภัย  กระต่ายน้อย ฉันสงสัยว่าเธอฝันถึงอะไร  ขณะนั่งอยู่บนหญ้าอย่างเงียบสงบ  คุณอยากสำรวจใต้ทะเลลึก  หรือจะอยู่บนบกที่กระโดดโลดเต้นได้  ไม่ว่าจะเป็นอะไรก็ตาม เจ้ากระต่ายน้อย  จงรักษาประกายแห่งความสงสัยให้ส่องสว่างต่อไป  เพราะในความฝันและความปรารถนา  มีโลกที่รอให้คุณสร้างสรรค์ |
+| Bu resim hakkında, yeri de belirterek betimleyici ve etkileyici bir şiir yazabilir misin? | Çayırda küçük bir tavşan,  Kulakları çok uzun, çok keskin.  Uzakta, baktığın yerde ne görüyorsun?  Is it the ocean blue,  Sparkling in the sun's hue?  Ya da dalgaların çarpıp kükremesi,  Bayıldığınız bir ritim?  Küçük tavşan, doğruyu söyle bana,  İlginizi bu kadar çok çeken şey ne?  Tuzlu esinti mi,  Yoksa martıların çığlıkları mı hoşunuza gidiyor?  Belki de her şeyin büyüklüğüdür,  Dünya hem çok büyük hem de çok küçük.  Hayallerin dolaşabileceği,  Maceraların ekilebileceği bir yer.  Küçük tavşan, ne hayal ettiğini merak ediyorum,  Çimlerin üzerinde otururken, çok sakinsin.  Derinlikleri keşfetmek mi istersin,  Yoksa karada kalıp zıplamayı mı?  Ne olursa olsun, küçük tavşan,  Merak kıvılcımını parlak bir şekilde yakmaya devam et.  Çünkü hayallerinizde ve arzularınızda,  Yaratılmayı bekleyen bir dünya var. |
 
-#### การแก้ปัญหาว่าส่วนใดของพรอมต์ไม่สำเร็จ
+#### İstemin hangi bölümünün başarısız olduğunu belirleme
 
-การทราบว่าพรอมต์ล้มเหลวเนื่องจากโมเดล**ไม่เข้าใจรูปภาพ**ตั้งแต่แรก หรือโมเดลเข้าใจรูปภาพแต่ไม่ได้ทำ**ขั้นตอนการให้เหตุผล**ที่ถูกต้องในภายหลังอาจเป็นเรื่องยาก
-หากต้องการแยกแยะเหตุผลเหล่านั้น ให้ขอให้โมเดลอธิบายสิ่งที่อยู่ในรูปภาพ
+Bir istemin başarısız olmasının nedeni, modelin **görüntüyü anlamaması** mı yoksa görüntüyü anlamasına rağmen doğru **akıl yürütme adımlarını** uygulamaması mı, bunu anlamak zor olabilir.
+Bu nedenleri netleştirmek için modele resimde ne olduğunu sorun.
 
-ในตัวอย่างต่อไปนี้ หากโมเดลตอบกลับด้วยของว่างที่ดูน่าประหลาดใจเมื่อจับคู่กับชา (เช่น ป๊อปคอร์น) คุณสามารถแก้ปัญหาเบื้องต้นเพื่อพิจารณาว่าโมเดลจดจำได้อย่างถูกต้องว่ารูปภาพมีชาหรือไม่
+Aşağıdaki örnekte, model çayla birlikte şaşırtıcı görünen bir atıştırmalıkla (ör. patlamış mısır) yanıt verirse önce modelin resimde çay olduğunu doğru tanıyıp tanımadığını belirlemek için sorun giderme işlemi yapabilirsiniz.
 
-| พรอมต์ | พรอมต์สำหรับการแก้ปัญหา |
+| İstem | Sorun giderme istemi |
 | --- | --- |
-| มีของว่างอะไรที่ฉันทำได้ใน 1 นาทีและกินกับสิ่งนี้ได้บ้าง | อธิบายสิ่งที่อยู่ในรูปภาพนี้ |
+| Bununla iyi gidecek, 1 dakikada hazırlayabileceğim bir atıştırmalık önerir misin? | Bu resimde ne olduğunu açıklayın. |
 
-อีกกลยุทธ์หนึ่งคือการขอให้โมเดลอธิบายเหตุผล ซึ่งจะช่วยให้คุณ
-จำกัดส่วนของการให้เหตุผลที่ผิดพลาดได้ หากมี
+Diğer bir strateji ise modelden gerekçesini açıklamasını istemektir. Bu, muhakemenin hangi kısmının (varsa) bozulduğunu daraltmanıza yardımcı olabilir.
 
-| พรอมต์ | พรอมต์สำหรับการแก้ปัญหา |
+| İstem | Sorun giderme istemi |
 | --- | --- |
-| มีของว่างอะไรที่ฉันทำได้ใน 1 นาทีและกินกับสิ่งนี้ได้บ้าง | มีของว่างอะไรที่ฉันทำได้ใน 1 นาทีและกินกับสิ่งนี้ได้บ้าง โปรดให้เหตุผล |
+| Bununla iyi gidecek, 1 dakikada hazırlayabileceğim bir atıştırmalık önerir misin? | Bununla iyi gidecek, 1 dakikada hazırlayabileceğim bir atıştırmalık önerir misin? Lütfen nedeniyle birlikte açıklayın. |
 
-## ขั้นตอนถัดไป
+## Sırada ne var?
 
-- ลองเขียนพรอมต์มัลติโมดัลของคุณเองโดยใช้ [Google AI
-  Studio](http://aistudio.google.com?hl=th)
-- ดูข้อมูลเกี่ยวกับการใช้ Gemini Files API สำหรับ
-  การอัปโหลดไฟล์สื่อและการรวมไฟล์เหล่านั้นไว้ในพรอมต์ได้ที่คำแนะนำเกี่ยวกับ
-  [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=th), [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=th) และ
-  [การประมวลผลเอกสาร](https://ai.google.dev/gemini-api/docs/document-processing?hl=th)
-- ดูคำแนะนำเพิ่มเติมเกี่ยวกับการออกแบบพรอมต์ เช่น การปรับพารามิเตอร์การสุ่มตัวอย่าง ได้ที่หน้า[กลยุทธ์พรอมต์](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=th)
+- [Google AI Studio](http://aistudio.google.com?hl=tr)'yu kullanarak kendi çok formatlı istemlerinizi yazmayı deneyin.
+- Medya dosyalarını yüklemek ve istemlerinize dahil etmek için Gemini Files API'yi kullanma hakkında bilgi edinmek üzere [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=tr), [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=tr) ve [Document processing](https://ai.google.dev/gemini-api/docs/document-processing?hl=tr) kılavuzlarına bakın.
+- İstem tasarımıyla ilgili daha fazla bilgi (ör. örnekleme parametrelerini ayarlama) için [İstem stratejileri](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=tr) sayfasına bakın.
 
-ส่งความคิดเห็น
+Geri bildirim gönderin
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-อัปเดตล่าสุด 2026-09-04 UTC
+Son güncelleme tarihi: 2026-09-12 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-04 UTC"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-12 UTC."],[],[]]

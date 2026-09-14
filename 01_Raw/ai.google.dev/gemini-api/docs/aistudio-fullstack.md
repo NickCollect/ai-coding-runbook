@@ -1,166 +1,167 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=vi
-fetched_at: 2026-09-07T05:36:09.724206+00:00
-title: "Ph\u00e1t tri\u1ec3n c\u00e1c \u1ee9ng d\u1ee5ng to\u00e0n ng\u0103n x\u1ebfp trong Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=tr
+fetched_at: 2026-09-14T05:37:27.922607+00:00
+title: "Google AI Studio'da tam y\u0131\u011f\u0131n uygulamalar geli\u015ftirme \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Gửi ý kiến phản hồi
+Geri bildirim gönderin
 
-# Phát triển các ứng dụng toàn ngăn xếp trong Google AI Studio
+# Google AI Studio'da tam yığın uygulamalar geliştirme
 
-Giờ đây, Google AI Studio hỗ trợ hoạt động phát triển full stack, cho phép bạn tạo các ứng dụng vượt xa nguyên mẫu phía máy khách. Với thời gian chạy phía máy chủ, bạn có thể quản lý các khoá bí mật, kết nối với các API bên ngoài và tạo trải nghiệm nhiều người chơi theo thời gian thực.
+Google AI Studio artık tam yığın geliştirmeyi destekliyor. Bu sayede, istemci tarafı prototiplerin ötesine geçen uygulamalar oluşturabilirsiniz. Sunucu tarafı çalışma zamanı ile sırları yönetebilir, harici API'lere bağlanabilir ve gerçek zamanlı çok oyunculu deneyimler oluşturabilirsiniz.
 
-## Thời gian chạy phía máy chủ
+## Sunucu tarafı çalışma zamanı
 
-Giờ đây, các ứng dụng Google AI Studio có thể bao gồm một thành phần phía máy chủ (Node.js).
-Điều này cho phép bạn:
+Google AI Studio uygulamaları artık sunucu tarafı bileşeni (Node.js) içerebilir.
+Böylece aşağıdakileri yapabilirsiniz:
 
-- **Thực thi logic phía máy chủ**: Chạy mã không được hiển thị cho máy khách.
-- **Truy cập vào các gói npm**: [Antigravity Agent](https://antigravity.google/docs/agent?hl=vi) có thể cài đặt và sử dụng các gói từ hệ sinh thái npm rộng lớn.
-- **Xử lý thông tin bí mật**: Sử dụng khoá API và thông tin đăng nhập một cách an toàn.
+- **Sunucu tarafı mantığını yürütme**: İstemciye gösterilmemesi gereken kodu çalıştırın.
+- **npm paketlerine erişme**: [Antigravity Agent](https://antigravity.google/docs/agent?hl=tr), geniş npm ekosistemindeki paketleri yükleyip kullanabilir.
+- **Gizli anahtarları işleme**: API anahtarlarını ve kimlik bilgilerini güvenli bir şekilde kullanın.
 
-### Sử dụng các gói npm
+### npm paketlerini kullanma
 
-Bạn không cần chạy `npm install` theo cách thủ công. Bạn chỉ cần yêu cầu Agent thêm chức năng yêu cầu một gói, và Agent sẽ xử lý việc cài đặt và nhập gói đó.
+`npm install`'ı manuel olarak çalıştırmanız gerekmez. Temsilciden paket gerektiren işlevler eklemesini istemeniz yeterlidir. Temsilci, yükleme ve içe aktarma işlemlerini gerçekleştirir.
 
-**Ví dụ**: > "Sử dụng `axios` để tìm nạp dữ liệu từ API bên ngoài."
+**Örnek**: > "Harici API'den veri getirmek için `axios` kullan."
 
-## Quản lý bí mật một cách an toàn
+## Gizli anahtarları güvenli bir şekilde yönetme
 
-Với tính năng quản lý mã và khoá bí mật phía máy chủ, giờ đây, bạn có thể tạo các ứng dụng tương tác với thế giới.
+Sunucu tarafı kodu ve gizli anahtar yönetimi sayesinde artık dünyayla etkileşime geçen uygulamalar oluşturabilirsiniz.
 
-### Khoá Gemini API
+### Gemini API anahtarı
 
-Khi bạn tạo một ứng dụng mới sử dụng Gemini API, AI Studio sẽ tự động định cấu hình `GEMINI_API_KEY` của bạn dưới dạng một khoá bí mật phía máy chủ mà không cần thiết lập thủ công. Bạn có thể xem khoá này trong bảng điều khiển **Khoá bí mật** trong phần Cài đặt. Các lệnh gọi Gemini API của ứng dụng được thực hiện từ mã phía máy chủ bằng khoá này, vì vậy, khoá này sẽ không bao giờ xuất hiện trong trình duyệt.
+Gemini API'yi kullanan yeni bir uygulama oluşturduğunuzda AI Studio, `GEMINI_API_KEY` değerinizi otomatik olarak sunucu tarafı gizli anahtarı olarak yapılandırır. Manuel kurulum gerekmez. Bu anahtarı Ayarlar'daki **Gizli Diziler** panelinde görüntüleyebilirsiniz. Uygulamanızın Gemini API çağrıları, bu anahtar kullanılarak sunucu tarafı kodundan yapılır. Bu nedenle, tarayıcıda hiçbir zaman gösterilmez.
 
-### Khoá API của bên thứ ba
+### Üçüncü taraf API anahtarları
 
-Đối với các dịch vụ khác, bạn có thể thêm khoá API theo cách thủ công:
+Diğer hizmetler için API anahtarlarını manuel olarak ekleyebilirsiniz:
 
-- **API của bên thứ ba**: Kết nối với các dịch vụ như Stripe, SendGrid hoặc API REST tuỳ chỉnh.
-- **Cơ sở dữ liệu**: Kết nối với cơ sở dữ liệu bên ngoài (ví dụ: thông qua Supabase, Firebase hoặc MongoDB Atlas) để duy trì dữ liệu ngoài phiên.
+- **Üçüncü taraf API'leri**: Stripe, SendGrid gibi hizmetlere veya özel REST API'lerine bağlanın.
+- **Veritabanları**: Oturumun ötesinde verileri kalıcı hale getirmek için harici veritabanlarına (ör. Supabase, Firebase veya MongoDB Atlas aracılığıyla) bağlanın.
 
-Khi tạo các ứng dụng trong thế giới thực, bạn thường cần kết nối với các dịch vụ bên thứ ba (chẳng hạn như Twilio, Slack hoặc cơ sở dữ liệu) yêu cầu khoá API. Bạn có thể thêm khoá theo cách thủ công bằng cách làm theo các bước sau:
+Gerçek dünya uygulamaları oluştururken genellikle API anahtarları gerektiren üçüncü taraf hizmetlerine (ör. Twilio, Slack veya veritabanları) bağlanmanız gerekir. Aşağıdaki adımları uygulayarak anahtarları manuel olarak ekleyebilirsiniz:
 
-1. **Thêm một khoá bí mật**: Chuyển đến trình đơn **Cài đặt** trong Google AI Studio rồi tìm phần Khoá bí mật.
-2. **Lưu trữ khoá**: Thêm khoá API hoặc mã thông báo bí mật của bạn vào đây.
-3. **Truy cập trong mã**: Agent có thể viết mã phía máy chủ để truy cập vào các bí mật này một cách an toàn (thường là thông qua các biến môi trường), đảm bảo rằng chúng không bao giờ bị lộ cho trình duyệt phía máy khách.
+1. **Gizli dizi ekleme**: Google AI Studio'da **Ayarlar** menüsüne gidip Gizli Diziler bölümünü bulun.
+2. **Anahtarınızı saklama**: API anahtarlarınızı veya gizli jetonlarınızı buraya ekleyin.
+3. **Kodda erişim**: Aracı, bu sırları güvenli bir şekilde (genellikle ortam değişkenleri aracılığıyla) erişen sunucu tarafı kodu yazabilir ve bunların hiçbir zaman istemci tarafı tarayıcıya gösterilmemesini sağlayabilir.
 
-Khi cần, tác nhân cũng sẽ hiển thị một thẻ trong cuộc trò chuyện, nhắc bạn thêm khoá bất cứ khi nào cần một bí mật mới hoặc khi phát hiện thấy một khoá mới trong các biến môi trường của dự án.
+Gerekli olduğunda, yeni bir sır gerektiğinde veya projenin ortam değişkenlerinde yeni bir anahtar algılandığında, aracı sohbet penceresinde anahtar eklemenizi isteyen bir kart da gösterir.
 
-### Tích hợp Firebase cho cơ sở dữ liệu và xác thực
+### Veritabanı ve kimlik doğrulama için Firebase entegrasyonu
 
-Giờ đây, Google AI Studio giúp bạn dễ dàng thêm cơ sở dữ liệu hoặc tính năng xác thực vào ứng dụng thông qua tính năng [tích hợp Firebase](https://firebase.google.com/docs/ai-assistance/ai-studio-integration?hl=vi).
-Antigravity Agent có thể tự động cung cấp và thiết lập các dịch vụ sau cho bạn:
+Google AI Studio, [Firebase entegrasyonu](https://firebase.google.com/docs/ai-assistance/ai-studio-integration?hl=tr) aracılığıyla uygulamanıza veritabanı veya kimlik doğrulama eklemeyi kolaylaştırır.
+Antigravity Agent, aşağıdaki hizmetleri sizin için otomatik olarak sağlayıp ayarlayabilir:
 
-- **Cơ sở dữ liệu Firestore**: một cơ sở dữ liệu đám mây NoSQL linh hoạt, có thể mở rộng để lưu trữ và đồng bộ hoá dữ liệu cho quá trình phát triển phía máy khách và phía máy chủ.
-- **Xác thực Firebase**: cho phép người dùng đăng nhập an toàn vào ứng dụng của bạn bằng quy trình "Đăng nhập bằng Google".
+- **Firestore veritabanı**: İstemci ve sunucu tarafı geliştirme için verileri depolamak ve senkronize etmek üzere kullanılan esnek ve ölçeklenebilir bir NoSQL bulut veritabanı.
+- **Firebase Authentication**: Kullanıcılarınızın "Google ile oturum açma" akışlarını kullanarak uygulamanızda güvenli bir şekilde oturum açmasına izin verin.
 
-Bạn chỉ cần yêu cầu tác nhân "thêm cơ sở dữ liệu vào ứng dụng của tôi" hoặc "thiết lập tính năng Đăng nhập bằng Google", tác nhân sẽ xử lý cấu hình cần thiết và tạo mã cho bạn.
+Aracıdan "uygulamama veritabanı ekle" veya "Google ile Giriş'i ayarla" demeniz yeterlidir. Aracı, gerekli yapılandırmayı ve kod oluşturma işlemlerini sizin için yapar.
 
-Firebase cho phép bạn bắt đầu miễn phí và tuỳ ý mở rộng quy mô bằng tài khoản trả phí bất cứ khi nào bạn cần thêm hạn mức hoặc sử dụng các tính năng trả phí.
+Firebase'i ücretsiz olarak kullanmaya başlayabilir ve daha fazla kota veya ücretli özellikler kullanmaya hazır olduğunuzda ücretli bir hesapla ölçeklendirebilirsiniz.
 
-## API Google Workspace
+## Google Workspace API'leri
 
-Google AI Studio cho phép bạn tạo các ứng dụng kết nối với API Google Workspace, nhờ đó người dùng có thể làm việc với dữ liệu thực của họ: email, bảng tính, tài liệu, sự kiện trên lịch và nhiều dữ liệu khác, tất cả đều nằm trong ứng dụng của bạn. Bạn không cần thiết lập dự án trên đám mây của Google, định cấu hình OAuth hoặc quản lý API theo cách thủ công nữa.
+Google AI Studio, Google Workspace API'lerine bağlanan uygulamalar oluşturmanıza olanak tanır. Böylece kullanıcılarınız, e-postalar, elektronik tablolar, dokümanlar, takvim etkinlikleri ve daha fazlası gibi gerçek verileriyle doğrudan uygulamanızda çalışabilir. Artık Google Cloud projesi oluşturmanız, OAuth'u yapılandırmanız veya API'nizi manuel olarak yönetmeniz gerekmez.
 
-### Cách hoạt động
+### İşleyiş şekli
 
-Bạn có thể thêm một chế độ tích hợp Workspace theo hai cách:
+Workspace entegrasyonunu iki şekilde ekleyebilirsiniz:
 
-- **Mô tả yêu cầu trong bảng điều khiển trò chuyện**: Bạn chỉ cần cho tác nhân biết những gì bạn muốn trong bảng điều khiển trò chuyện ở dưới cùng. Ví dụ: *"Tạo một trình theo dõi chi phí ghi lại biên nhận vào Google Trang tính của tôi"* hoặc *"Tạo một trang tổng quan tóm tắt các thư chưa đọc của tôi trong Gmail"*.
-- **Chọn trong bảng điều khiển tích hợp**: Mở bảng điều khiển **Tích hợp** trong thanh bên bên phải của Chế độ tạo và bật ứng dụng trong Workspace mà bạn muốn kết nối.
+- **Sohbet panelinde açıklayın**: Alt kısımdaki sohbet panelinde, temsilciye ne istediğinizi söylemeniz yeterlidir. Örneğin, *"Makbuzları Google E-Tablolar'a kaydeden bir gider izleyici oluştur"* veya *"Okunmamış Gmail mesajlarımı özetleyen bir kontrol paneli oluştur."*
+- **Entegrasyonlar panelinden seçme**: Oluşturma modunun sağ kenar çubuğunda **Entegrasyonlar** panelini açın ve bağlamak istediğiniz Workspace uygulamasını etkinleştirin.
 
-Khi bạn thêm một ứng dụng trong Workspace, AI Studio sẽ tự động:
+Bir Workspace uygulaması eklediğinizde AI Studio otomatik olarak:
 
-1. Kết nối API Google cần thiết cho ứng dụng của bạn.
-2. Tạo mã phía máy chủ để gọi API.
-3. Thêm một quy trình "Đăng nhập bằng Google" an toàn để người dùng cuối của ứng dụng có thể uỷ quyền truy cập vào dữ liệu của riêng họ.
+1. Uygulamanız için gerekli Google API'sini bağlar.
+2. API'yi çağırmak için sunucu tarafı kodu oluşturur.
+3. Uygulamanızın son kullanıcılarının kendi verilerine erişimi yetkilendirebilmesi için güvenli bir "Google ile oturum açma" akışı ekler.
 
-### Ứng dụng được hỗ trợ
+### Desteklenen uygulamalar
 
-Các ứng dụng Google Workspace sau đây hiện có:
+Aşağıdaki Google Workspace uygulamaları kullanılabilir:
 
-| Ứng dụng | Những gì bạn có thể tạo |
+| Uygulama | Neler oluşturabilirsiniz? |
 | --- | --- |
-| Lịch Google | Đọc, tạo và quản lý sự kiện cũng như lịch |
-| Google Chat | Đọc và tương tác với các cuộc trò chuyện và không gian nhóm |
-| Google Tài liệu | Tạo, đọc, cập nhật và định dạng tài liệu |
-| Google Drive | Sắp xếp, tìm kiếm và quản lý tệp cũng như thư mục |
-| Google Biểu mẫu | Tạo khảo sát, cập nhật câu hỏi và truy xuất câu trả lời |
-| Gmail | Đọc, gửi và quản lý nội dung email |
-| Google Keep | Quản lý ghi chú, danh sách và tệp đính kèm |
-| Google Meet | Lên lịch và quản lý cuộc gọi video |
-| Danh bạ | Đồng bộ hoá và quản lý danh bạ |
-| Google Trang tính | Đọc, ghi và định dạng dữ liệu bảng tính |
-| Google Trang trình bày | Tạo và chỉnh sửa bản trình bày |
-| Google Tasks | Tạo, quản lý và sắp xếp việc cần làm |
+| Google Takvim | Etkinlikleri ve takvimleri okuma, oluşturma ve yönetme |
+| Google Chat | İleti dizilerini ve grup alanlarını okuma ve bunlarla etkileşime geçme |
+| Google Dokümanlar | Doküman oluşturma, okuma, güncelleme ve biçimlendirme |
+| Google Drive | Dosya ve klasörleri düzenleme, arama ve yönetme |
+| Google Formlar | Anket oluşturma, soruları güncelleme ve yanıtları alma |
+| Gmail | E-posta içeriğini okuma, gönderme ve yönetme |
+| Google Keep | Notları, listeleri ve ekleri yönetme |
+| Google Meet | Görüntülü görüşme planlama ve yönetme |
+| Kişiler | Kişileri senkronize etme ve yönetme |
+| Google E-Tablolar | E-tablo verilerini okuma, yazma ve biçimlendirme |
+| Google Slaytlar | Sunu oluşturma ve değiştirme |
+| Google Görevler | Görev oluşturma, yönetme ve düzenleme |
 
-### Xác thực và quyền
+### Kimlik doğrulama ve izinler
 
-Là nhà phát triển, bạn không cần định cấu hình ứng dụng OAuth, quản lý thông tin đăng nhập hoặc thiết lập dự án trên đám mây của Google. AI Studio sẽ xử lý mọi vấn đề này cho bạn.
+Oluşturucu olarak OAuth istemcilerini yapılandırmanız, kimlik bilgilerini yönetmeniz veya Google Cloud projesi oluşturmanız gerekmez. AI Studio tüm bu işlemleri sizin için yapar.
 
-Các ứng dụng có tích hợp API Workspace sử dụng tính năng "Đăng nhập bằng Google" để xác thực người dùng cuối. Khi người dùng mở ứng dụng của bạn, họ sẽ được nhắc đăng nhập và cấp các quyền cụ thể mà ứng dụng của bạn cần (ví dụ: quyền chỉ đọc đối với lịch của họ hoặc khả năng chỉnh sửa bảng tính). Ứng dụng của bạn chỉ truy cập vào dữ liệu của người đang sử dụng ứng dụng. Mỗi người dùng sẽ uỷ quyền truy cập vào tài khoản của riêng mình.
+Workspace API'lerinin entegre edildiği uygulamalar, son kullanıcıların kimliğini doğrulamak için "Google ile oturum açma" özelliğini kullanır. Kullanıcılar uygulamanızı açtığında oturum açmaları ve uygulamanızın ihtiyaç duyduğu belirli izinleri (örneğin, takvimlerine salt okunur erişim veya bir e-tabloyu düzenleme olanağı) vermeleri istenir. Uygulamanız yalnızca uygulamayı kullanan kişinin verilerine erişir. Her kullanıcı, kendi hesabına erişim yetkisi verir.
 
-### Câu lệnh mẫu
+### Örnek istemler
 
-Sau đây là một số ý tưởng để bắt đầu sử dụng các tính năng tích hợp của Workspace:
+Workspace entegrasyonlarını kullanmaya başlamak için birkaç öneri:
 
-- *"Xây dựng một ứng dụng đọc Lịch Google của tôi và soạn thảo email chuẩn bị trong Gmail cho mỗi cuộc họp."*
-- *"Tạo một công cụ lấy một tài liệu trên Google Tài liệu và tạo một bản trình bày tóm tắt gồm 5 trang trên Google Trang trình bày."*
-- *"Tạo một công cụ theo dõi chi phí, trong đó tôi tải biên nhận lên, Gemini trích xuất thông tin chi tiết và ghi lại một hàng mới trong Google Trang tính của tôi."*
+- *"Google Takvim'imi okuyup her toplantı için Gmail'de hazırlık e-postaları oluşturan bir uygulama geliştir."*
+- *"Google Dokümanı alıp Google Slaytlar'da 5 slaytlık bir özet sunu oluşturan bir araç geliştir."*
+- *"Makbuz yüklediğim, Gemini'ın ayrıntıları çıkardığı ve Google E-Tablomda yeni bir satırın kaydedildiği bir gider izleyici oluştur."*
 
-### Thiết lập OAuth
+### OAuth'u ayarlama
 
-Một trường hợp sử dụng chính cho việc quản lý bí mật là thiết lập OAuth để kết nối với các trang web hoặc ứng dụng khác. Khi câu lệnh của bạn có hướng dẫn về cách kết nối với một ứng dụng bên thứ ba yêu cầu xác thực OAuth, thì trợ lý sẽ cung cấp hướng dẫn về cách thiết lập OAuth cho ứng dụng đó. Các hướng dẫn này sẽ bao gồm những URL gọi lại cần thiết để định cấu hình Ứng dụng OAuth.
-Bạn cũng có thể tìm thấy các URL gọi lại trong mục **Tích hợp** trong bảng Cài đặt.
+Sır yönetimiyle ilgili temel kullanım alanlarından biri, diğer web sitelerine veya uygulamalara bağlanmak için OAuth'u ayarlamaktır. İsteminizde, OAuth kimlik doğrulaması gerektiren bir üçüncü taraf uygulamasına bağlanmayla ilgili talimatlar varsa aracı, bu uygulama için OAuth'u ayarlama talimatlarını sağlar. Bu talimatlar, OAuth uygulamanızı yapılandırmak için gerekli geri çağırma URL'lerini içerir.
+Geri çağırma URL'lerini Ayarlar panelindeki **Entegrasyonlar** bölümünde de bulabilirsiniz.
 
-## Tạo trải nghiệm nhiều người chơi
+## Çok oyunculu deneyimler oluşturma
 
-Thời gian chạy toàn ngăn xếp cho phép các tính năng cộng tác theo thời gian thực.
+Tam yığın çalışma zamanı, gerçek zamanlı ortak çalışma özelliklerini etkinleştirir.
 
-- **Trạng thái theo thời gian thực**: Bạn có thể yêu cầu Trợ lý tạo các tính năng như "một cuộc trò chuyện trực tiếp", "một bảng trắng cộng tác" hoặc "một trò chơi nhiều người chơi".
-- **Phiên được đồng bộ hoá**: Máy chủ quản lý trạng thái, cho phép nhiều người dùng tương tác với cùng một phiên bản ứng dụng theo thời gian thực.
+- **Gerçek zamanlı durum**: Aracının "canlı sohbet", "ortak beyaz tahta" veya "çok oyunculu oyun" gibi özellikler oluşturmasını isteyebilirsiniz.
+- **Senkronize oturumlar**: Sunucu durumu yönetir ve birden fazla kullanıcının aynı uygulama örneğiyle gerçek zamanlı olarak etkileşim kurmasına olanak tanır.
 
-**Ví dụ về câu lệnh**: > "Hãy biến đây thành một trò chơi nhiều người chơi, trong đó người chơi có thể nhìn thấy con trỏ của nhau."
+**Örnek istem**: > "Bunu, oyuncuların birbirlerinin imleçlerini görebileceği çok oyunculu bir oyun haline getir."
 
-### Mẹo kiểm thử ứng dụng nhiều người chơi
+### Çok oyunculu uygulamaları test etme ipuçları
 
-Bạn có thể kiểm thử chế độ nhiều người chơi theo 2 cách trước khi triển khai ứng dụng.
+Uygulamanızı dağıtmadan önce çok oyunculu modu iki şekilde test edebilirsiniz.
 
-1. Mở ứng dụng của bạn ở chế độ Tạo của Google AI Studio trong nhiều thẻ. Khi phát triển ở chế độ Build, ứng dụng của bạn sẽ nằm trong một vùng chứa dành cho nhà phát triển. Việc mở ứng dụng ở nhiều thẻ sẽ cho phép bạn mô phỏng nhiều người chơi sử dụng ứng dụng của mình.
-2. Chia sẻ ứng dụng với người khác bằng trình đơn **Chia sẻ** ở trên cùng bên phải, sau đó sử dụng **URL được chia sẻ** trong thẻ **Tích hợp** của trình đơn **Chia sẻ** để sử dụng ứng dụng với những người chơi mà bạn đã chia sẻ ứng dụng.
+1. Uygulamanızı Google AI Studio'nun Build (Oluştur) modunda birden fazla sekmede açın. Uygulamanız, Build modunda geliştirilirken bir geliştirme container'ında bulunur. Uygulamayı birden fazla sekmede açarak uygulamanızı kullanan birden fazla oyuncuyu simüle edebilirsiniz.
+2. Sağ üstteki **Paylaş** menüsünü kullanarak uygulamayı başkalarıyla paylaşın.
+   Ardından, uygulamayı paylaştığınız oyuncularla kullanmak için **Paylaş** menüsünün **Entegrasyonlar** sekmesindeki **Paylaşılan URL**'yi kullanın.
 
-## Các phương pháp hay nhất
+## En iyi uygulamalar
 
-- **Lệnh gọi Gemini API**: `GEMINI_API_KEY` của bạn sẽ tự động được định cấu hình làm khoá bí mật phía máy chủ. Gọi Gemini API từ mã phía máy chủ bằng khoá này. Bạn có thể xem khoá này trong bảng điều khiển **Secrets** (Khoá bí mật).
-- **Bảo mật bí mật**: Luôn sử dụng Trình quản lý bí mật cho các khoá nhạy cảm.
-  Đừng bao giờ mã hoá cứng các giá trị này trong tệp.
-- **Phân tách các mối lo ngại**: Giữ logic giao diện người dùng trong khung phía máy khách (React/Angular) và logic nghiệp vụ/xử lý dữ liệu ở phía máy chủ.
-- **Xử lý lỗi**: Đảm bảo mã phía máy chủ của bạn xử lý lỗi một cách mạnh mẽ từ các lệnh gọi API bên ngoài để ngăn ứng dụng gặp sự cố.
+- **Gemini API çağrıları**: `GEMINI_API_KEY`, otomatik olarak sunucu tarafı gizli anahtarı olarak yapılandırılır. Bu anahtarı kullanarak sunucu tarafı kodunuzdan Gemini API çağrıları yapın. Bu bilgiyi **Sırlar** panelinde görüntüleyebilirsiniz.
+- **Gizli anahtar güvenliği**: Hassas anahtarlar için her zaman Secret Manager'ı kullanın.
+  Bunları dosyalarınızda asla sabit kodlamayın.
+- **İlgi alanlarının ayrılması**: Kullanıcı arayüzü mantığınızı istemci tarafı çerçevesinde (React/Angular), iş mantığınızı/veri işlemeyi ise sunucu tarafında tutun.
+- **Hata işleme**: Uygulamanın kilitlenmesini önlemek için sunucu tarafı kodunuzun harici API çağrılarından kaynaklanan hataları etkili bir şekilde işlemesini sağlayın.
 
-## Tiếp theo là gì?
+## Sırada ne var?
 
-- [Tạo ứng dụng trong Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=vi)
-- [Triển khai từ Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=vi)
-- [App Gallery](https://aistudio.google.com/apps?source=showcase&hl=vi)
+- [Google AI Studio'da uygulama geliştirme](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=tr)
+- [Google AI Studio'dan dağıtma](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=tr)
+- [App Gallery](https://aistudio.google.com/apps?source=showcase&hl=tr)
 
-Gửi ý kiến phản hồi
+Geri bildirim gönderin
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Cập nhật lần gần đây nhất: 2026-08-19 UTC.
+Son güncelleme tarihi: 2026-08-19 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-08-19 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-08-19 UTC."],[],[]]

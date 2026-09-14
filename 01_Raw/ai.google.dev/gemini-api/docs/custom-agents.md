@@ -1,35 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=vi
-fetched_at: 2026-09-07T05:40:46.146512+00:00
-title: "T\u1ea1o t\u00e1c nh\u00e2n \u0111\u01b0\u1ee3c qu\u1ea3n l\u00fd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=it
+fetched_at: 2026-09-14T05:40:24.620116+00:00
+title: "Creazione di agenti gestiti \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Gửi ý kiến phản hồi
+Invia feedback
 
-# Tạo tác nhân được quản lý
+# Creazione di agenti gestiti
 
-Các tác nhân được quản lý trên Gemini API cho phép bạn mở rộng tác nhân Antigravity bằng các hướng dẫn, kỹ năng và dữ liệu của riêng bạn. Bạn có thể [tuỳ chỉnh tác nhân nội tuyến](#customize-inline) tại thời điểm tương tác hoặc [lưu cấu hình](#save-agent) dưới dạng một tác nhân được quản lý mà bạn gọi bằng mã nhận dạng.
+Gli agenti gestiti nell'API Gemini ti consentono di estendere l'agente Antigravity con istruzioni, competenze e dati personalizzati. Puoi [personalizzare l'agente in linea](#customize-inline) al momento dell'interazione o [salvare la configurazione](#save-agent) come agente gestito che richiami per ID.
 
-## Tuỳ chỉnh tác nhân Antigravity
+## Personalizzare l'agente Antigravity
 
-Cách nhanh nhất để tạo một tác nhân tuỳ chỉnh là truyền cấu hình nội tuyến trong khi tạo một lượt tương tác mới mà không cần bước đăng ký. Bạn có thể mở rộng tác nhân theo một số cách chính:
+Il modo più rapido per creare un agente personalizzato è passare la configurazione in linea durante la creazione di una nuova interazione senza dover eseguire un passaggio di registrazione. Puoi estendere l'agente in diversi modi principali:
 
-- **[Lựa chọn mô hình](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=vi#model-selection)**: Chọn mô hình Gemini cơ bản thông qua biểu tượng `agent_config` (mặc định là **Gemini 3.7 Flash**).
-- **Hướng dẫn hệ thống**: Truyền văn bản nội tuyến qua `system_instruction` để định hình hành vi.
-- **Công cụ**: Ghi đè các công cụ mặc định (Thực thi mã, Tìm kiếm, Ngữ cảnh URL), đăng ký các máy chủ MCP từ xa hoặc xác định các hàm tuỳ chỉnh (Gọi hàm).
-- **Tệp và kỹ năng**: Gắn các tệp như `AGENTS.md` và `SKILL.md` vào môi trường.
+- **[Selezione del modello](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it#model-selection)**: scegli il modello Gemini sottostante tramite `agent_config` (per impostazione predefinita è **Gemini 3.8 Flash**).
+- **Istruzioni di sistema**: passa il testo in linea tramite `system_instruction` per definire il comportamento.
+- **Strumenti**: esegui l'override degli strumenti predefiniti (esecuzione del codice, ricerca, contesto URL), registra i server MCP remoti o definisci funzioni personalizzate (chiamata di funzioni).
+- **File e competenze**: monta file come `AGENTS.md` e `SKILL.md` nell'ambiente.
 
-Sau đây là ví dụ về cách truyền cả ba tham số nội tuyến:
+Ecco un esempio di passaggio di tutti e tre in linea:
 
 ### Python
 
@@ -41,7 +41,7 @@ client = genai.Client()
 interaction = client.interactions.create(
     agent="antigravity-preview-05-2026",
     input="Analyze the Q1 revenue data and create a slide deck.",
-    system_instruction="You are a data analyst. Always include visualizations and export results as PDF.",        
+    system_instruction="You are a data analyst. Always include visualizations and export results as PDF.",
     environment={
         "type": "remote",
         "sources": [
@@ -72,7 +72,7 @@ const client = new GoogleGenAI({});
 const interaction = await client.interactions.create({
     agent: "antigravity-preview-05-2026",
     input: "Analyze the Q1 revenue data and create a slide deck.",
-    system_instruction: "You are a data analyst. Always include visualizations and export results as PDF.",        
+    system_instruction: "You are a data analyst. Always include visualizations and export results as PDF.",
     environment: {
         type: "remote",
         sources: [
@@ -91,6 +91,30 @@ const interaction = await client.interactions.create({
 }, { timeout: 300000 });
 
 console.log(interaction.output_text);
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent(AgentOption.of("antigravity-preview-05-2026"))
+        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
 ```
 
 ### REST
@@ -121,22 +145,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Mọi thứ đều được xác định tại thời điểm tương tác. Bạn không cần đăng ký trước bất cứ thông tin nào. Khung vận hành tác nhân Antigravity cung cấp thời gian chạy (thực thi mã, quản lý tệp, truy cập web) và các lớp cấu hình của bạn ở trên cùng.
+Tutto è definito al momento dell'interazione. Non è necessario registrare nulla in anticipo. L'infrastruttura agentica Antigravity fornisce il runtime (esecuzione del codice, gestione dei file, accesso web) e i livelli di configurazione.
 
-### Công cụ và hướng dẫn về hệ thống
+### Strumenti e istruzioni di sistema
 
-Bạn có thể tuỳ chỉnh hành vi và khả năng của tác nhân cho một lượt tương tác cụ thể bằng cách sử dụng các tham số `system_instruction` và `tools`.
+Puoi personalizzare il comportamento e le funzionalità dell'agente per un'interazione specifica utilizzando i parametri `system_instruction` e `tools`.
 
-- **Hướng dẫn của hệ thống**: Sử dụng tham số `system_instruction` để truyền văn bản nội tuyến định hình hành vi của tác nhân. Đây là lựa chọn lý tưởng cho những điều chỉnh nhanh mà bạn muốn thay đổi cho mỗi cuộc gọi. `system_instruction` và `AGENTS.md` là các giá trị cộng thêm; cả hai đều được áp dụng khi xuất hiện.
-- **Công cụ**: Theo mặc định, tác nhân Antigravity có quyền truy cập vào `code_execution`, `google_search` và `url_context`. Bạn có thể ghi đè danh sách này bằng cách truyền tham số `tools` tại thời điểm tương tác. Bạn cũng có thể đăng ký [các máy chủ MCP từ xa](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=vi#mcp-servers) hoặc xác định [các hàm tuỳ chỉnh (gọi hàm)](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=vi#function-calling) để kết nối tác nhân với các API và cơ sở dữ liệu của riêng bạn. Để biết thông tin chi tiết về các công cụ hiện có, hãy xem bài viết [Antigravity Agent: Các công cụ được hỗ trợ](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=vi#supported-tools).
+- **Istruzioni di sistema**: utilizza il parametro `system_instruction` per passare il testo in linea che definisce il comportamento dell'agente. Questa opzione è ideale per le modifiche rapide che vuoi apportare per ogni chiamata. `system_instruction` e `AGENTS.md` sono additivi; entrambi si applicano quando sono presenti.
+- **Strumenti**: per impostazione predefinita, l'agente Antigravity ha accesso a `code_execution`, `google_search` e `url_context`. Puoi eseguire l'override di questo elenco passando il parametro `tools` al momento dell'interazione. Puoi anche registrare [server MCP remoti](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it#mcp-servers) o definire [funzioni personalizzate (chiamata di funzioni)](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it#function-calling) per connettere l'agente alle tue API e ai tuoi database. Per informazioni dettagliate sugli strumenti disponibili, vedi [Agente Antigravity: strumenti supportati](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it#supported-tools).
 
-### Tuỳ chỉnh dựa trên tệp
+### Personalizzazione basata su file
 
-#### Cấu trúc thư mục tác nhân
+#### Struttura della directory dell'agente
 
-Mặc dù có thể truyền cấu hình nội tuyến, nhưng bạn nên sắp xếp các tệp của tác nhân trong một thư mục có cấu trúc. Điều này giúp bạn quản lý, quản lý phiên bản và gắn vào môi trường của tác nhân dễ dàng hơn.
+Anche se puoi passare la configurazione in linea, ti consigliamo di organizzare i file dell'agente in una directory strutturata. In questo modo è più facile gestire, controllare la versione e montare i file nell'ambiente dell'agente.
 
-Thư mục dự án tác nhân điển hình có dạng như sau:
+Una tipica directory di progetto dell'agente ha questo aspetto:
 
 ```
 my-agent/
@@ -147,13 +171,13 @@ my-agent/
 └── workspace/       # Initial data files and knowledge
 ```
 
-Thời gian chạy Antigravity sẽ quét `.agents/` (và gốc của môi trường) để tìm các tệp này.
+Il runtime di Antigravity esegue la scansione di `.agents/` (e della root dell'ambiente) per questi file.
 
 #### AGENTS.md
 
-Tác nhân sẽ tự động tải `.agents/AGENTS.md` (hoặc `/.agents/AGENTS.md`) từ môi trường dưới dạng hướng dẫn hệ thống khi khởi động. Sử dụng `AGENTS.md` cho các định nghĩa về vai trò ở dạng dài, hướng dẫn chi tiết và hướng dẫn mà bạn muốn quản lý phiên bản cùng với mã của mình.
+L'agente carica automaticamente `.agents/AGENTS.md` (o `/.agents/AGENTS.md`) dall'ambiente come istruzioni di sistema all'avvio. Utilizza `AGENTS.md` per le definizioni di persona in formato lungo, le linee guida dettagliate e le istruzioni di cui vuoi controllare le versioni insieme al codice.
 
-Gắn `AGENTS.md` bằng nguồn cùng dòng:
+Monta un file `AGENTS.md` utilizzando un'origine in linea:
 
 ### Python
 
@@ -207,6 +231,30 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent(AgentOption.of("antigravity-preview-05-2026"))
+        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -230,9 +278,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-#### Kỹ năng: SKILL.md
+#### Competenze: SKILL.md
 
-වන Các kỹ năng là những tệp mở rộng khả năng của đặc vụ. Đặt các thiết bị này trong `.agents/skills/<skill-name>/SKILL.md` và harness sẽ tự động phát hiện và đăng ký chúng.
+Le competenze sono file che estendono le funzionalità dell'agente. Inseriscili in `.agents/skills/<skill-name>/SKILL.md` e l'interfaccia li rileva e li registra automaticamente.
 
 ```
 .agents/
@@ -242,7 +290,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
         └── SKILL.md
 ```
 
-Gắn một kỹ năng bằng nguồn cùng dòng:
+Monta una competenza utilizzando un'origine in linea:
 
 ### Python
 
@@ -296,6 +344,30 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent(AgentOption.of("antigravity-preview-05-2026"))
+        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -319,17 +391,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Các kỹ năng được tải từ `.agents/skills/` và `/.agents/skills/` đều được phát hiện tự động.
+Le competenze caricate da `.agents/skills/` e `/.agents/skills/` vengono rilevate automaticamente.
 
-## Tạo một tác nhân được quản lý
+## Creare un agente gestito
 
-Sau khi lặp lại cấu hình, bạn có thể tạo cấu hình đó dưới dạng một tác nhân được quản lý bằng `agents.create`. Nhờ đó, bạn có thể gọi tác nhân theo mã nhận dạng mà không cần lặp lại cấu hình mỗi lần.
+Una volta eseguite le iterazioni sulla configurazione, puoi crearla come agente gestito con `agents.create`. In questo modo puoi richiamare l'agente per ID senza ripetere la configurazione ogni volta.
 
-`id` mà bạn chỉ định khi tạo một tác nhân được quản lý phải là duy nhất cho dự án của bạn và không được bắt đầu bằng các tiền tố dành riêng (ví dụ: `google-`, `gemini-`). Hãy xem [Các hạn chế về mã nhận dạng tác nhân](#agent-id-restrictions) để biết danh sách đầy đủ các tiền tố bị hạn chế.
+L'`id` che specifichi quando crei un agente gestito deve essere univoco per il tuo progetto e non deve iniziare con prefissi riservati (ad es. `google-`, `gemini-`). Per l'elenco completo dei prefissi limitati, vedi [Limitazioni dell'ID agente](#agent-id-restrictions).
 
-### Từ các nguồn
+### Dalle origini
 
-Chỉ định `base_agent`, `id`, `agent_config`, `system_instruction` và `base_environment` bằng các nguồn. Nền tảng này cung cấp một hộp cát mới chứa các tệp của bạn trên mọi lệnh gọi. Hãy xem phần [Môi trường](https://ai.google.dev/gemini-api/docs/agent-environment?hl=vi) để biết các loại nguồn có sẵn (Git, GCS, nội tuyến).
+Specifica `base_agent`, `id`, `agent_config`, `system_instruction` e `base_environment` con le origini. La piattaforma esegue il provisioning di una nuova sandbox con i tuoi file a ogni chiamata. Per i tipi di origine disponibili (Git, GCS, in linea), vedi [Ambienti](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it).
 
 ### Python
 
@@ -343,7 +415,7 @@ agent = client.agents.create(
     base_agent="antigravity-preview-05-2026",
     agent_config={
         "type": "antigravity",
-        "model": "gemini-3.7-flash",
+        "model": "gemini-3.8-flash",
     },
     system_instruction="You are a data analyst. Always include visualizations and export results as PDF.",
     base_environment={
@@ -383,7 +455,7 @@ const agent = await client.agents.create({
     base_agent: "antigravity-preview-05-2026",
     agent_config: {
         type: "antigravity",
-        model: "gemini-3.7-flash",
+        model: "gemini-3.8-flash",
     },
     system_instruction: "You are a data analyst. Always include visualizations and export results as PDF.",
     base_environment: {
@@ -411,6 +483,30 @@ const agent = await client.agents.create({
 console.log(`Created agent: ${agent.id}`);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent(AgentOption.of("antigravity-preview-05-2026"))
+        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -422,7 +518,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
     "base_agent": "antigravity-preview-05-2026",
     "agent_config": {
         "type": "antigravity",
-        "model": "gemini-3.7-flash"
+        "model": "gemini-3.8-flash"
     },
     "system_instruction": "You are a data analyst. Always include visualizations and export results as PDF.",
     "base_environment": {
@@ -448,9 +544,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 }'
 ```
 
-### Từ một môi trường hiện có (phân nhánh)
+### Da un ambiente esistente (fork)
 
-Lặp lại với tác nhân Antigravity cơ bản cho đến khi môi trường phù hợp (đã cài đặt các gói, tệp ở đúng vị trí), sau đó phân nhánh tác nhân này thành một tác nhân được quản lý.
+Esegui l'iterazione con l'agente Antigravity di base finché l'ambiente non è corretto (pacchetti installati, file presenti), quindi esegui il fork in un agente gestito.
 
 ### Python
 
@@ -501,6 +597,30 @@ const agent = await client.agents.create({
 console.log(`Forked agent successfully: ${agent.id}`);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent(AgentOption.of("antigravity-preview-05-2026"))
+        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -514,11 +634,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Có quy tắc mạng
+### Con regole di rete
 
-Bạn có thể khoá quyền truy cập đi hoặc chèn thông tin đăng nhập khi lưu một tác nhân được quản lý. Aware For the full allowlist schema, credential patterns, and wildcards, see [Environments: Network configuration](https://ai.google.dev/gemini-api/docs/agent-environment?hl=vi#network-configuration) (Môi trường: Cấu hình mạng).
+Puoi bloccare l'accesso in uscita o inserire le credenziali quando salvi un agente gestito. Per lo schema completo della lista consentita, i pattern delle credenziali e i caratteri jolly, vedi [Ambienti: configurazione di rete](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it#network-configuration).
 
-Ví dụ sau đây sẽ tạo một tác nhân `issue-resolver` chỉ có thể truy cập vào GitHub và PyPI, với thông tin đăng nhập được chèn cho GitHub:
+L'esempio seguente crea un agente `issue-resolver` che può accedere solo a GitHub e PyPI, con le credenziali inserite per GitHub:
 
 ### Python
 
@@ -594,6 +714,30 @@ const agent = await client.agents.create({
 console.log(`Created issue-resolver agent successfully: ${agent.id}`);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent(AgentOption.of("antigravity-preview-05-2026"))
+        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -628,9 +772,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
   }'
 ```
 
-## Gọi tác nhân
+## Richiamare l'agente
 
-Gọi tác nhân được quản lý bằng mã nhận dạng tác nhân bằng cách tạo một lượt tương tác mới. Mỗi lệnh gọi sẽ phân nhánh môi trường cơ sở, vì vậy, mọi lượt chạy đều bắt đầu từ đầu.
+Chiama l'agente gestito con il relativo ID creando una nuova interazione. Ogni chiamata esegue il fork dell'ambiente di base, quindi ogni esecuzione inizia da zero.
 
 ### Python
 
@@ -656,6 +800,30 @@ const result = await client.interactions.create({
 console.log(result.output_text);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent(AgentOption.of("antigravity-preview-05-2026"))
+        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -669,15 +837,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Đối với các cuộc trò chuyện nhiều lượt và phát trực tuyến, hãy xem phần [Bắt đầu nhanh](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=vi). Các mẫu `previous_interaction_id` và `environment` tương tự cũng áp dụng cho các tác nhân được quản lý.
+Per le conversazioni e lo streaming in più turni, consulta la [guida rapida](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it). Gli stessi pattern `previous_interaction_id` e `environment` si applicano agli agenti gestiti.
 
-Các tác nhân được quản lý cũng hỗ trợ việc thực thi và huỷ trong nền. Để biết thông tin chi tiết và ví dụ về mã, hãy xem bài viết [Antigravity Agent: Background execution](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=vi#background-execution) (Tác nhân chống trọng lực: Thực thi ở chế độ nền).
+Gli agenti gestiti supportano anche l'esecuzione in background e l'annullamento. Per dettagli ed esempi di codice, vedi [Agente Antigravity: esecuzione in background](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it#background-execution).
 
-## Ghi đè cấu hình khi gọi
+## Eseguire l'override della configurazione al momento della chiamata
 
-Bạn có thể ghi đè cấu hình mạng `system_instruction`, `tools` và `environment` mặc định của tác nhân khi tạo một lượt tương tác. Thao tác này cho phép bạn sửa đổi hành vi, khả năng hoặc thông tin đăng nhập của tác nhân cho một lần chạy cụ thể mà không thay đổi định nghĩa tác nhân đã lưu trữ.
+Puoi eseguire l'override della configurazione di rete `system_instruction`, `tools` e `environment` predefinita dell'agente quando crei un'interazione. In questo modo puoi modificare il comportamento, le funzionalità o le credenziali dell'agente per un'esecuzione specifica senza modificare la definizione dell'agente memorizzata.
 
-### Ghi đè hướng dẫn và công cụ hệ thống
+### Eseguire l'override delle istruzioni di sistema e degli strumenti
 
 ### Python
 
@@ -706,6 +874,30 @@ const result = await client.interactions.create({
 console.log(result.output_text);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent(AgentOption.of("antigravity-preview-05-2026"))
+        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -721,9 +913,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Ghi đè cấu hình mạng (làm mới thông tin đăng nhập)
+### Eseguire l'override della configurazione di rete (aggiornare le credenziali)
 
-Nếu tác nhân được quản lý của bạn có thông tin đăng nhập mạng được tích hợp vào `base_environment`, bạn có thể ghi đè thông tin đăng nhập đó tại thời điểm gọi để làm mới mã thông báo đã hết hạn hoặc xoay khoá API. Truyền một đối tượng `environment` có cấu hình `network` mới. Các quy tắc mạng mới sẽ thay thế hoàn toàn các quy tắc trước đó cho hoạt động tương tác đó. Các nguồn (tệp, kho lưu trữ) của môi trường cơ sở sẽ được giữ nguyên.
+Se le credenziali di rete dell'agente gestito sono integrate nel relativo `base_environment`, puoi eseguirne l'override al momento della chiamata per aggiornare i token scaduti o ruotare le chiavi API. Passa un oggetto `environment` con una nuova configurazione `network`. Le nuove regole di rete sostituiscono completamente quelle precedenti per l'interazione. Le origini (file, repository) dell'ambiente di base vengono conservate.
 
 ### Python
 
@@ -777,6 +969,30 @@ const result = await client.interactions.create({
 console.log(result.output_text);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent(AgentOption.of("antigravity-preview-05-2026"))
+        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -803,11 +1019,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Quản lý nhân viên hỗ trợ
+## Gestire gli agenti
 
-Bạn có thể liệt kê, nhận và xoá các tác nhân.
+Puoi elencare, recuperare ed eliminare gli agenti.
 
-### Liệt kê các tác nhân
+### Elencare gli agenti
 
 ### Python
 
@@ -828,6 +1044,30 @@ if (agents.agents) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent(AgentOption.of("antigravity-preview-05-2026"))
+        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -835,7 +1075,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/agents" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Nhận tác nhân
+### Recuperare un agente
 
 ### Python
 
@@ -851,6 +1091,30 @@ const agent = await client.agents.get("data-analyst");
 console.log(agent);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent(AgentOption.of("antigravity-preview-05-2026"))
+        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -858,9 +1122,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/agents/data-analys
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Xoá một nhân viên hỗ trợ
+### Eliminare un agente
 
-Thao tác xoá sẽ loại bỏ cấu hình. Các môi trường và hoạt động tương tác hiện có do tác nhân tạo ra sẽ không bị ảnh hưởng.
+L'eliminazione rimuove la configurazione. Gli ambienti e le interazioni esistenti creati dall'agente non sono interessati.
 
 ### Python
 
@@ -874,6 +1138,30 @@ client.agents.delete(id="data-analyst")
 await client.agents.delete("data-analyst");
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent(AgentOption.of("antigravity-preview-05-2026"))
+        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -881,24 +1169,24 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/agents/data-ana
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Thông tin tham khảo về định nghĩa tác nhân
+## Riferimento alla definizione dell'agente
 
-| Trường | Loại | Bắt buộc | Mô tả |
+| Campo | Tipo | Obbligatorio | Descrizione |
 | --- | --- | --- | --- |
-| `id` | chuỗi | Có | Giá trị nhận dạng riêng biệt của tác nhân trong dự án trên đám mây Google. Dùng để gọi tác nhân. Không được sử dụng tiền tố dành riêng. Xem [Hạn chế về mã nhận dạng của tác nhân](#agent-id-restrictions). |
-| `description` | chuỗi | Không | Nội dung mô tả mà con người có thể đọc được về tác nhân. |
-| `base_agent` | chuỗi | Có | Mã nhận dạng tác nhân cơ sở (ví dụ: `antigravity-preview-05-2026`). |
-| `agent_config` | đối tượng | Không | Cấu hình cho tác nhân cơ sở, bao gồm cả lựa chọn mô hình (`{"type": "antigravity", "model": "gemini-3.7-flash"}`). Mặc định là `gemini-3.7-flash` nếu bị bỏ qua. Không thể ghi đè vào thời điểm tương tác đối với các nhân viên hỗ trợ được đặt tên. |
-| `system_instruction` | chuỗi | Không | Lời nhắc hệ thống xác định hành vi và tính cách. |
-| `tools` | mảng | Không | Các công cụ mà trợ lý có thể sử dụng. ഓം Nếu bị bỏ qua, giá trị mặc định sẽ là `code_execution`, `google_search` và `url_context`. Các công cụ được hỗ trợ bao gồm `code_execution`, `google_search`, `url_context`, `mcp_server` và các định nghĩa `function` tuỳ chỉnh. |
-| `base_environment` | chuỗi hoặc đối tượng | Không | `"remote"`, `environment_id` hoặc một đối tượng cấu hình có `sources` và `network`. Xem phần Môi trường. |
+| `id` | stringa | Sì | Identificatore univoco dell'agente all'interno del progetto Google Cloud. Utilizzato per richiamare l'agente. Non deve utilizzare prefissi riservati. Vedi [Limitazioni dell'ID agente](#agent-id-restrictions). |
+| `description` | stringa | No | Descrizione dell'agente leggibile da una persona. |
+| `base_agent` | stringa | Sì | ID agente di base (ad es. `antigravity-preview-05-2026`). |
+| `agent_config` | oggetto | No | Configurazione dell'agente di base, inclusa la selezione del modello (`{"type": "antigravity", "model": "gemini-3.8-flash"}`). Se omesso, il valore predefinito è `gemini-3.8-flash`. Non può essere sostituito al momento dell'interazione per gli agenti denominati. |
+| `system_instruction` | stringa | No | Prompt di sistema che definisce il comportamento e la persona. |
+| `tools` | matrice | No | Strumenti che l'agente può utilizzare. Se omesso, il valore predefinito è `code_execution`, `google_search` e `url_context`. Gli strumenti supportati includono `code_execution`, `google_search`, `url_context`, `mcp_server` e definizioni di `function` personalizzate. |
+| `base_environment` | stringa o oggetto | No | `"remote"`, un `environment_id`, o un oggetto di configurazione con `sources` e `network`. Vedi Ambienti. |
 
-### Các hạn chế về mã nhận dạng tác nhân
+### Limitazioni dell'ID agente
 
-Khi tạo một tác nhân được quản lý, `id` mà bạn chỉ định phải tuân theo các quy tắc sau:
+Quando crei un agente gestito, l'`id` che specifichi deve rispettare queste regole:
 
-- Giá trị này phải dành riêng cho dự án trên đám mây của bạn trên Google Cloud.
-- Tên này **không** được bắt đầu bằng bất kỳ tiền tố dành riêng nào sau đây (không phân biệt chữ hoa chữ thường), nếu không, quá trình tạo sẽ thất bại:
+- Deve essere univoco per il tuo progetto Google Cloud.
+- Non deve **non** iniziare con uno dei seguenti prefissi riservati (senza distinzione tra maiuscole e minuscole), altrimenti la creazione non andrà a buon fine:
   - `antigravity-`
   - `veo-`
   - `omni-`
@@ -916,35 +1204,35 @@ Khi tạo một tác nhân được quản lý, `id` mà bạn chỉ định ph�
   - `nest-`
   - `kaggle-`
 
-## Quy trình lặp lại
+## Workflow di iterazione
 
-1. **Tạo nguyên mẫu** bằng tác nhân Antigravity cơ bản. Truyền hướng dẫn hệ thống và các nguồn môi trường nội tuyến. Kiểm tra hướng dẫn, kỹ năng và chế độ thiết lập môi trường một cách tương tác.
-2. **Ổn định** môi trường. Cài đặt các gói, gắn nguồn, xác minh mọi thứ đều hoạt động.
-3. **Duy trì** dưới dạng một tác nhân được quản lý bằng cách tạo một tác nhân mới, từ các nguồn hoặc bằng cách phân nhánh môi trường.
-4. **Cập nhật** định nghĩa về tác nhân. Thay đổi chỉ dẫn hệ thống, chuyển đổi kỹ năng hoặc thêm nguồn. Lần gọi tiếp theo sẽ lấy cấu hình mới.
+1. **Prototipo** con l'agente Antigravity di base. Passa le origini delle istruzioni di sistema e dell'ambiente in linea. Testa in modo interattivo le istruzioni, le competenze e la configurazione dell'ambiente.
+2. **Stabilizza** l'ambiente. Installa i pacchetti, monta le origini e verifica che tutto funzioni.
+3. **Persisti** come agente gestito creando un nuovo agente, dalle origini o eseguendo il fork dell'ambiente.
+4. **Aggiorna** la definizione dell'agente. Modifica le istruzioni di sistema, scambia le competenze o aggiungi origini. La prossima chiamata rileva la nuova configurazione.
 
-## Các điểm hạn chế
+## Limitazioni
 
-- **Trạng thái xem trước**: Các tác nhân được quản lý đang ở giai đoạn xem trước. Các tính năng và giản đồ có thể thay đổi.
-- **Tác nhân và mô hình cơ sở**: Chỉ `antigravity-preview-05-2026` được hỗ trợ dưới dạng `base_agent`. Các lựa chọn về mô hình được hỗ trợ trong `agent_config` là `gemini-3.7-flash` (mặc định), `gemini-3.6-flash`, `gemini-3.5-flash` và `gemini-3.5-flash-lite`. Đối với các tác nhân được đặt tên, bạn không thể ghi đè mô hình tại thời điểm tương tác.
-- **Không có tính năng quản lý phiên bản**: Hiện chưa có tính năng quản lý phiên bản và khôi phục phiên bản cũ của tác nhân.
-- **спортивные ставки**
-- Bạn có thể có tối đa 1.000 nhân viên hỗ trợ được quản lý.
+- **Stato dell'anteprima**: gli agenti gestiti sono in anteprima. Le funzionalità e gli schemi potrebbero cambiare.
+- **Agente e modelli di base**: solo `antigravity-preview-05-2026` è supportato come `base_agent`. Le opzioni di modello supportate in `agent_config` sono `gemini-3.8-flash` (valore predefinito), `gemini-3.7-flash`, `gemini-3.6-flash`, `gemini-3.5-flash` e `gemini-3.5-flash-lite`. Per gli agenti denominati, il modello non può essere sostituito al momento dell'interazione.
+- **Nessun controllo delle versioni**: il controllo delle versioni e il rollback dell'agente non sono ancora disponibili.
+- **Nessun annidamento di subagenti**: la delega dei subagenti non è ancora supportata.
+- Puoi avere fino a 1000 agenti gestiti.
 
-## Bước tiếp theo
+## Passaggi successivi
 
-- [Tổng quan về tác nhân](https://ai.google.dev/gemini-api/docs/agents?hl=vi): Tìm hiểu về các khái niệm cốt lõi của tác nhân được quản lý.
-- [Bắt đầu nhanh](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=vi): Bắt đầu xây dựng bằng các cuộc trò chuyện nhiều lượt và tính năng phát trực tuyến.
-- Sponsored by [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=vi): Khám phá các chức năng, công cụ và giá của tác nhân mặc định.
-- [Môi trường của tác nhân](https://ai.google.dev/gemini-api/docs/agent-environment?hl=vi): Định cấu hình hộp cát, nguồn và mạng.
-- [Managed Agents API trên Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/managed-agents?hl=vi): Để tạo các tác nhân được quản lý có cơ chế quản trị tổ chức tích hợp.
+- [Panoramica degli agenti](https://ai.google.dev/gemini-api/docs/agents?hl=it): scopri i concetti fondamentali degli agenti gestiti.
+- [Guida rapida](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it): inizia a creare con conversazioni multi-turno e streaming.
+- [Agente Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it): esplora le funzionalità, gli strumenti e i prezzi dell'agente predefinito.
+- [Ambienti degli agenti](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it): configura sandbox, origini e networking.
+- [API degli agenti gestiti su Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/managed-agents?hl=it): per la creazione di agenti con governance organizzativa integrata.
 
-Gửi ý kiến phản hồi
+Invia feedback
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Cập nhật lần gần đây nhất: 2026-08-19 UTC.
+Ultimo aggiornamento 2026-09-10 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Vuoi dirci altro?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-08-19 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-10 UTC."],[],[]]

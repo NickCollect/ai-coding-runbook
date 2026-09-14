@@ -1,43 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=vi
-fetched_at: 2026-09-07T05:49:16.998283+00:00
-title: "M\u00e3 th\u00f4ng b\u00e1o t\u1ea1m th\u1eddi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=tr
+fetched_at: 2026-09-14T05:36:18.916834+00:00
+title: "Ge\u00e7ici jetonlar \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Gửi ý kiến phản hồi
+Geri bildirim gönderin
 
-# Mã thông báo tạm thời
+# Geçici jetonlar
 
-Mã thông báo tạm thời là mã thông báo xác thực có thời hạn ngắn để truy cập vào Gemini API thông qua [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). Chúng được thiết kế để tăng cường bảo mật khi bạn kết nối trực tiếp từ thiết bị của người dùng với API (một cách triển khai [từ ứng dụng đến máy chủ](https://ai.google.dev/gemini-api/docs/live?hl=vi#implementation-approach)). Giống như khoá API tiêu chuẩn, bạn có thể trích xuất mã thông báo tạm thời từ các ứng dụng phía máy khách, chẳng hạn như trình duyệt web hoặc ứng dụng di động. Tuy nhiên, vì mã thông báo tạm thời hết hạn nhanh chóng và có thể bị hạn chế, nên chúng giúp giảm đáng kể các rủi ro bảo mật trong môi trường thực tế. Bạn nên sử dụng các khoá này khi truy cập trực tiếp Live API từ các ứng dụng phía máy khách để tăng cường tính bảo mật của khoá API.
+Geçici jetonlar, Gemini API'ye [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) üzerinden erişmek için kullanılan kısa ömürlü kimlik doğrulama jetonlarıdır. Bunlar, doğrudan bir kullanıcının cihazından API'ye ([istemciden sunucuya](https://ai.google.dev/gemini-api/docs/live?hl=tr#implementation-approach)
+uygulaması) bağlanırken güvenliği artırmak için tasarlanmıştır. Kısa ömürlü jetonlar, standart API anahtarları gibi web tarayıcıları veya mobil uygulamalar gibi istemci tarafı uygulamalardan çıkarılabilir. Ancak kısa ömürlü jetonlar hızlı bir şekilde sona erdiğinden ve kısıtlanabildiğinden üretim ortamındaki güvenlik risklerini önemli ölçüde azaltır. API anahtarı güvenliğini artırmak için bunları, Live API'ye doğrudan istemci tarafı uygulamalarından erişirken kullanmanız gerekir.
 
-## Cách hoạt động của mã thông báo tạm thời
+## Geçici jetonların işleyiş şekli
 
-Sau đây là cách hoạt động của mã thông báo tạm thời ở cấp độ tổng quát:
+Geçici jetonların genel olarak işleyiş şekli:
 
-1. Ứng dụng khách của bạn (ví dụ: ứng dụng web) xác thực bằng phụ trợ.
-2. Phần phụ trợ của bạn yêu cầu một mã thông báo tạm thời từ dịch vụ cung cấp của Gemini API.
-3. Gemini API phát hành một mã thông báo ngắn hạn.
-4. Phụ trợ của bạn sẽ gửi mã thông báo này đến máy khách để kết nối WebSocket với Live API. Bạn có thể thực hiện việc này bằng cách thay thế khoá API bằng một mã thông báo tạm thời.
-5. Sau đó, ứng dụng sẽ sử dụng mã thông báo này như thể đó là một khoá API.
+1. İstemciniz (ör. web uygulaması) arka ucunuzda kimliğini doğrular.
+2. Arka ucunuz, Gemini API'nin sağlama hizmetinden kısa ömürlü bir jeton ister.
+3. Gemini API, kısa ömürlü bir jeton yayınlar.
+4. Arka uçunuz, Live API'ye WebSocket bağlantıları için jetonu istemciye gönderir. Bunu, API anahtarınızı kısa ömürlü bir jetonla değiştirerek yapabilirsiniz.
+5. İstemci daha sonra jetonu API anahtarı gibi kullanır.
 
-![Tổng quan về mã thông báo tạm thời](https://ai.google.dev/static/gemini-api/docs/images/Live_API_01.png?hl=vi)
+![Geçici jetonlara genel bakış](https://ai.google.dev/static/gemini-api/docs/images/Live_API_01.png?hl=tr)
 
-Điều này giúp tăng cường tính bảo mật vì ngay cả khi được trích xuất, mã thông báo cũng chỉ tồn tại trong thời gian ngắn, không giống như khoá API tồn tại trong thời gian dài được triển khai phía máy khách. Vì ứng dụng gửi dữ liệu trực tiếp đến Gemini, nên điều này cũng giúp cải thiện độ trễ và tránh việc các máy chủ phụ trợ của bạn cần phải làm trung gian cho dữ liệu theo thời gian thực.
+Bu, güvenliği artırır. Çünkü jeton, istemci tarafında dağıtılan uzun ömürlü bir API anahtarının aksine, çıkarılsa bile kısa ömürlüdür. İstemci verileri doğrudan Gemini'a gönderdiğinden bu durum gecikmeyi de azaltır ve arka uçlarınızın gerçek zamanlı verileri proxy'lemesi gerekmez.
 
-## Tạo mã thông báo tạm thời
+## Kısa ömürlü jeton oluşturma
 
-Sau đây là một ví dụ đơn giản về cách lấy mã thông báo tạm thời từ Gemini.
-Theo mặc định, bạn sẽ có 1 phút để bắt đầu các phiên Live API mới bằng mã thông báo từ yêu cầu này (`newSessionExpireTime`) và 30 phút để gửi thông báo qua kết nối đó (`expireTime`).
+Gemini'dan kısa ömürlü jeton alma işleminin basitleştirilmiş bir örneğini aşağıda bulabilirsiniz.
+Varsayılan olarak, bu istekteki jetonu (`newSessionExpireTime`) kullanarak yeni Live API oturumları başlatmak için 1 dakikanız, bu bağlantı üzerinden (`expireTime`) mesaj göndermek için ise 30 dakikanız olur.
 
 ### Python
 
@@ -91,10 +92,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/auth_tokens" \
   }'
 ```
 
-Để biết các quy tắc ràng buộc, giá trị mặc định và thông số kỹ thuật khác của trường `expireTime`, hãy xem [Tài liệu tham khảo API](https://ai.google.dev/api/live?hl=vi#ephemeral-auth-tokens).
-Trong khung thời gian `expireTime`, bạn sẽ cần [`sessionResumption`](https://ai.google.dev/gemini-api/docs/live-session?hl=vi#session-resumption) để kết nối lại cuộc gọi sau mỗi 10 phút (bạn có thể thực hiện việc này bằng cùng một mã thông báo ngay cả khi `uses: 1`).
+`expireTime` değeri kısıtlamaları, varsayılanları ve diğer alan özellikleri için [API referansına](https://ai.google.dev/api/live?hl=tr#ephemeral-auth-tokens) bakın.
+`expireTime` zaman aralığında, her 10 dakikada bir aramayı yeniden bağlamanız gerekir (bu işlem, `uses: 1` olsa bile aynı jetonla yapılabilir). [`sessionResumption`](https://ai.google.dev/gemini-api/docs/live-session?hl=tr#session-resumption)
 
-Bạn cũng có thể khoá mã thông báo tạm thời đối với một nhóm cấu hình. Điều này có thể hữu ích để cải thiện hơn nữa tính bảo mật của ứng dụng và giữ các chỉ dẫn hệ thống ở phía máy chủ.
+Geçici jetonları bir dizi yapılandırmaya kilitlemek de mümkündür. Bu, uygulamanızın güvenliğini daha da artırmak ve sistem talimatlarınızı sunucu tarafında tutmak için faydalı olabilir.
 
 ### Python
 
@@ -163,13 +164,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/auth_tokens" \
   }'
 ```
 
-Bạn cũng có thể khoá một số trường. Hãy xem [tài liệu về SDK](https://googleapis.github.io/python-genai/genai.html#genai.types.CreateAuthTokenConfig.lock_additional_fields) để biết thêm thông tin.
+Ayrıca, alanların bir alt kümesini de kilitleyebilirsiniz. Daha fazla bilgi için [SDK dokümanlarına](https://googleapis.github.io/python-genai/genai.html#genai.types.CreateAuthTokenConfig.lock_additional_fields) bakın.
 
-## Kết nối với Live API bằng mã thông báo tạm thời
+## Geçici jetonla Live API'ye bağlanma
 
-Sau khi có mã thông báo tạm thời, bạn có thể sử dụng mã thông báo này như thể đó là một khoá API (nhưng hãy nhớ rằng mã thông báo này chỉ hoạt động với API trực tiếp và chỉ với phiên bản `v1beta` của API).
+Geçici bir jetonunuz olduğunda, bunu API anahtarı gibi kullanırsınız (ancak yalnızca canlı API'de ve yalnızca API'nin `v1beta` sürümünde çalıştığını unutmayın).
 
-Việc sử dụng mã thông báo tạm thời chỉ có giá trị khi triển khai các ứng dụng tuân theo phương pháp [triển khai từ máy khách đến máy chủ](https://ai.google.dev/gemini-api/docs/live?hl=vi#implementation-approach).
+Geçici jetonların kullanılması yalnızca [istemciden sunucuya uygulama](https://ai.google.dev/gemini-api/docs/live?hl=tr#implementation-approach) yaklaşımını izleyen uygulamalar dağıtılırken değer katar.
 
 ### JavaScript
 
@@ -199,29 +200,29 @@ async function main() {
 main();
 ```
 
-Hãy xem bài viết [Làm quen với Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi) để biết thêm ví dụ.
+Daha fazla örnek için [Live API'yi kullanmaya başlama](https://ai.google.dev/gemini-api/docs/live?hl=tr) bölümüne bakın.
 
-## Các phương pháp hay nhất
+## En iyi uygulamalar
 
-- Đặt thời hạn ngắn bằng cách sử dụng tham số `expire_time`.
-- Mã thông báo hết hạn, yêu cầu khởi động lại quy trình cấp phép.
-- Xác minh quy trình xác thực an toàn cho phụ trợ của riêng bạn. Mã thông báo tạm thời sẽ chỉ an toàn như phương thức xác thực phụ trợ của bạn.
-- Nhìn chung, hãy tránh sử dụng mã thông báo tạm thời cho các kết nối từ phụ trợ đến Gemini, vì đường dẫn này thường được coi là an toàn.
+- `expire_time` parametresini kullanarak kısa bir geçerlilik süresi ayarlayın.
+- Jetonların süresi dolduğunda temel hazırlık işleminin yeniden başlatılması gerekir.
+- Kendi arka uç sisteminiz için güvenli kimlik doğrulamayı doğrulayın. Kısa ömürlü jetonlar yalnızca arka uç kimlik doğrulama yönteminiz kadar güvenlidir.
+- Genel olarak, bu yol genellikle güvenli kabul edildiğinden arka uçtan Gemini'a bağlantılar için kısa ömürlü jeton kullanmaktan kaçının.
 
-## Các điểm hạn chế
+## Sınırlamalar
 
-Hiện tại, mã thông báo tạm thời chỉ tương thích với [Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi).
+Geçici jetonlar şu anda yalnızca [Live API](https://ai.google.dev/gemini-api/docs/live?hl=tr) ile uyumludur.
 
-## Bước tiếp theo
+## Sırada ne var?
 
-- Hãy đọc phần [tài liệu tham khảo](https://ai.google.dev/api/live?hl=vi#ephemeral-auth-tokens) về Live API đối với mã thông báo tạm thời để biết thêm thông tin.
+- Daha fazla bilgi için Live API [referansındaki](https://ai.google.dev/api/live?hl=tr#ephemeral-auth-tokens) geçici jetonlar bölümünü inceleyin.
 
-Gửi ý kiến phản hồi
+Geri bildirim gönderin
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Cập nhật lần gần đây nhất: 2026-07-30 UTC.
+Son güncelleme tarihi: 2026-07-30 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-30 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]

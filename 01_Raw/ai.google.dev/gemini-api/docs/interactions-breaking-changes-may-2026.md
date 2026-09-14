@@ -1,49 +1,52 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=fr
-fetched_at: 2026-09-07T05:41:07.508773+00:00
-title: "Guide de migration des modifications destructives de l'API Interactions (mai\u00a02026) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=th
+fetched_at: 2026-09-14T05:46:39.832717+00:00
+title: "API \u0e01\u0e32\u0e23\u0e42\u0e15\u0e49\u0e15\u0e2d\u0e1a: \u0e04\u0e39\u0e48\u0e21\u0e37\u0e2d\u0e01\u0e32\u0e23\u0e22\u0e49\u0e32\u0e22\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e01\u0e32\u0e23\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e41\u0e1b\u0e25\u0e07\u0e17\u0e35\u0e48\u0e44\u0e21\u0e48\u0e23\u0e2d\u0e07\u0e23\u0e31\u0e1a\u0e01\u0e32\u0e23\u0e17\u0e33\u0e07\u0e32\u0e19\u0e22\u0e49\u0e2d\u0e19\u0e2b\u0e25\u0e31\u0e07 (\u0e1e\u0e24\u0e29\u0e20\u0e32\u0e04\u0e21 2026) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Envoyer des commentaires
+ส่งความคิดเห็น
 
-# Guide de migration des modifications destructives de l'API Interactions (mai 2026)
+# API การโต้ตอบ: คู่มือการย้ายข้อมูลการเปลี่ยนแปลงที่ไม่รองรับการทำงานย้อนหลัง (พฤษภาคม 2026)
 
-L'API Interactions `v1beta` introduit des modifications incompatibles qui restructurent la forme de l'API pour prendre en charge de futures fonctionnalités telles que le pilotage en cours de vol et les appels d'outils asynchrones. Cette page explique ce qui change et fournit des exemples de code avant et après pour vous aider à migrer. Il existe deux catégories de modifications :
+Interactions API `v1beta` มีการเปลี่ยนแปลงที่ทำให้เกิดข้อผิดพลาด ซึ่งจะปรับโครงสร้าง API ใหม่เพื่อรองรับความสามารถในอนาคต เช่น การควบคุมระหว่างการเดินทางและการเรียกใช้เครื่องมือแบบไม่พร้อมกัน หน้านี้จะอธิบายสิ่งที่เปลี่ยนแปลงและแสดงตัวอย่างโค้ดก่อนและหลังการเปลี่ยนแปลงเพื่อช่วยคุณย้ายข้อมูล การเปลี่ยนแปลงมี 2 หมวดหมู่ ได้แก่
 
-1. [**Schéma "Steps"**](#steps-schema) : un nouveau tableau `steps` remplace le tableau `outputs`, fournissant une chronologie structurée de chaque tour d'interaction.
-2. [**Configuration du format de sortie**](#output-format-config) : un nouveau `response_format` polymorphe consolide tous les contrôles du format de sortie et supprime `response_mime_type`.
+1. [**สคีมา `steps`**](#steps-schema): อาร์เรย์ `steps` ใหม่จะแทนที่อาร์เรย์
+   `outputs` เพื่อแสดงไทม์ไลน์ที่มีโครงสร้างของการโต้ตอบแต่ละครั้ง
+2. [**การกำหนดค่ารูปแบบเอาต์พุต**](#output-format-config): `response\_format` แบบ Polymorphic ใหม่จะรวมการควบคุมรูปแบบเอาต์พุตทั้งหมดและนำ `response\_mime\_type` ออก`response_format``response_mime_type`
 
-Suivez la procédure décrite dans [Migrer vers le nouveau schéma](#how-to-migrate) pour mettre à jour votre intégration.
+ทำตามขั้นตอนใน [วิธีย้ายข้อมูลไปยังสคีมาใหม่](#how-to-migrate) เพื่อ
+อัปเดตการผสานรวม
 
-## Modification principale : `outputs` vers `steps`
+## การเปลี่ยนแปลงหลัก: `outputs` เป็น `steps`
 
-Le nouveau schéma remplace le tableau `outputs` par un tableau `steps`.
+สคีมาใหม่จะแทนที่อาร์เรย์ `outputs` ด้วยอาร์เรย์ `steps`
 
-- **Ancien** : les réponses renvoyaient un tableau `outputs` plat contenant uniquement le contenu généré par le modèle.
-- **Nouveau schéma** : les réponses renvoient un tableau `steps` contenant des étapes structurées avec des discriminateurs de type.
+- **เดิม**: การตอบกลับจะแสดงอาร์เรย์ `outputs` แบบแบนที่มีเฉพาะเนื้อหาที่สร้างขึ้นโดยโมเดล
+- **สคีมาใหม่**: การตอบกลับจะแสดงอาร์เรย์ `steps` ที่มีขั้นตอนที่มีโครงสร้างพร้อมตัวแยกประเภท
 
-`POST /interactions` ne renvoie que les étapes de sortie. `GET /interactions/{id}` renvoie la chronologie complète des étapes, y compris l'étape initiale `user_input`.
+`POST /interactions` จะแสดงเฉพาะขั้นตอนเอาต์พุต `GET /interactions/{id}`
+จะแสดงไทม์ไลน์ขั้นตอนทั้งหมด รวมถึงขั้นตอน `user_input` เริ่มต้น
 
-### Entrée/Sortie de base (unaire)
+### อินพุต/เอาต์พุตพื้นฐาน (Unary)
 
-#### Avant (ancienne version)
+#### ก่อนการเปลี่ยนแปลง (เดิม)
 
 ### Python
 
 ```
 # Request
 interaction = client.interactions.create(
-    model="gemini-3.5-flash", input="Tell me a joke."
+    model="gemini-3.6-flash", input="Tell me a joke."
 )
 
 # Response access
@@ -55,7 +58,7 @@ print(interaction.outputs[-1].text)
 ```
 // Request
 const interaction = await client.interactions.create({
-    model: 'gemini-3.5-flash',
+    model: 'gemini-3.6-flash',
     input: 'Tell me a joke.'
 });
 
@@ -69,7 +72,7 @@ console.log(interaction.outputs[-1].text);
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "Tell me a joke."
   }'
 ```
@@ -88,14 +91,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### Après (nouveau schéma)
+#### หลังการเปลี่ยนแปลง (สคีมาใหม่)
 
 ### Python
 
 ```
 # Request
 interaction = client.interactions.create(
-    model="gemini-3.5-flash", input="Tell me a joke."
+    model="gemini-3.6-flash", input="Tell me a joke."
 )
 
 # Response access (Recommended sugar)
@@ -107,7 +110,7 @@ print(interaction.output_text)
 ```
 // Request
 const interaction = await client.interactions.create({
-    model: 'gemini-3.5-flash',
+    model: 'gemini-3.6-flash',
     input: 'Tell me a joke.'
 });
 
@@ -125,7 +128,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "Tell me a joke."
   }'
 ```
@@ -170,11 +173,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### Appel de fonction
+### การเรียกใช้ฟังก์ชัน
 
-La structure de la requête reste inchangée, mais la réponse remplace le contenu `outputs` plat par des étapes structurées.
+โครงสร้างคำขอจะยังคงเหมือนเดิม แต่การตอบกลับจะแทนที่เนื้อหา `outputs` แบบแบนด้วยขั้นตอนที่มีโครงสร้าง
 
-#### Avant (ancienne version)
+#### ก่อนการเปลี่ยนแปลง (เดิม)
 
 ### Python
 
@@ -219,7 +222,7 @@ for (const output of interaction.outputs) {
 }
 ```
 
-#### Après (nouveau schéma)
+#### หลังการเปลี่ยนแปลง (สคีมาใหม่)
 
 ### Python
 
@@ -267,11 +270,11 @@ for (const step of interaction.steps) {
 }
 ```
 
-### Outils côté serveur
+### เครื่องมือฝั่งเซิร์ฟเวอร์
 
-Les outils côté serveur (comme la recherche Google ou l'exécution de code) génèrent désormais des types d'étapes spécifiques dans le tableau `steps`. Alors que l'ancien schéma renvoyait ces opérations en tant que types de contenu spécifiques dans le tableau `outputs`, le nouveau schéma les déplace dans le tableau `steps`. Les exemples suivants utilisent la recherche Google.
+ตอนนี้เครื่องมือฝั่งเซิร์ฟเวอร์ (เช่น Google Search หรือการดำเนินการโค้ด) จะแสดงประเภทขั้นตอนที่เฉพาะเจาะจงในอาร์เรย์ `steps` แม้ว่าสคีมาเดิมจะแสดงการดำเนินการเหล่านี้เป็นประเภทเนื้อหาที่เฉพาะเจาะจงภายในอาร์เรย์ `outputs` แต่สคีมาใหม่จะย้ายการดำเนินการเหล่านี้ไปยังอาร์เรย์ `steps` ตัวอย่างต่อไปนี้ใช้ Google Search
 
-#### Avant (ancienne version)
+#### ก่อนการเปลี่ยนแปลง (เดิม)
 
 ### Python
 
@@ -303,7 +306,7 @@ for (const output of interaction.outputs) {
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "Who won the last Super Bowl?",
     "tools": [
       { "type": "google_search" }
@@ -345,7 +348,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### Après (nouveau schéma)
+#### หลังการเปลี่ยนแปลง (สคีมาใหม่)
 
 ### Python
 
@@ -379,7 +382,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "Who won the last Super Bowl?",
     "tools": [
       { "type": "google_search" }
@@ -429,11 +432,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### Streaming
+### สตรีมมิง
 
-Le streaming expose de nouveaux types d'événements :
+สตรีมมิงจะแสดงประเภทเหตุการณ์ใหม่ ดังนี้
 
-#### Nouveaux types d'événements
+#### ประเภทเหตุการณ์ใหม่
 
 - `interaction.created`
 - `interaction.completed`
@@ -443,29 +446,32 @@ Le streaming expose de nouveaux types d'événements :
 - `step.delta`
 - `step.stop`
 
-#### Types d'événements obsolètes
+#### ประเภทเหตุการณ์ที่เลิกใช้งานแล้ว
 
-Les anciens types d'événements suivants sont remplacés par les nouveaux événements listés ci-dessus :
+ระบบจะแทนที่ประเภทเหตุการณ์เดิมต่อไปนี้ด้วยเหตุการณ์ใหม่ที่ระบุไว้ข้างต้น
 
-- `interaction.start` → `interaction.created`
+- `interaction.start` → `interaction.created`
 - `content.start` → `step.start`
 - `content.delta` → `step.delta`
 - `content.stop` → `step.stop`
-- `interaction.complete` → `interaction.completed`
-- `interaction.status_update` → remplacé par `interaction.in_progress`, `interaction.requires_action`, etc.
+- `interaction.complete` → `interaction.completed`
+- `interaction.status_update` → แทนที่ด้วย `interaction.in_progress`, `interaction.requires_action` และอื่นๆ
 
-**Appels de fonction en streaming** : lorsque vous utilisez le streaming avec les appels de fonction, l'événement `step.start` fournit le nom de la fonction, et les événements `step.delta` transmettent les arguments sous forme de chaînes JSON partielles (à l'aide de `arguments_delta`). Vous devez cumuler ces deltas pour obtenir les arguments complets. Cela diffère des appels unaires où vous recevez l'objet d'appel de fonction complet en une seule fois.
+**การเรียกใช้ฟังก์ชันสตรีมมิง**: เมื่อใช้สตรีมมิงกับการเรียกใช้ฟังก์ชัน
+เหตุการณ์ `step.start` จะแสดงชื่อฟังก์ชัน และเหตุการณ์ `step.delta` จะ
+สตรีมอาร์กิวเมนต์เป็นสตริง JSON บางส่วน (โดยใช้ `arguments_delta`) คุณ
+ต้องสะสม Delta เหล่านี้เพื่อรับอาร์กิวเมนต์ทั้งหมด ซึ่งแตกต่างจากการเรียกใช้แบบ Unary ที่คุณจะได้รับออบเจ็กต์การเรียกใช้ฟังก์ชันที่สมบูรณ์ในครั้งเดียว
 
-#### Exemples
+#### ตัวอย่าง
 
-##### Avant (ancienne version)
+##### ก่อนการเปลี่ยนแปลง (เดิม)
 
 ### Python
 
 ```
 # Legacy streaming used content.delta
 stream = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="Explain quantum entanglement in simple terms.",
     stream=True,
 )
@@ -481,7 +487,7 @@ for chunk in stream:
 ```
 // Legacy streaming used content.delta
 const stream = await client.interactions.create({
-    model: 'gemini-3.5-flash',
+    model: 'gemini-3.6-flash',
     input: 'Explain quantum entanglement in simple terms.',
     stream: true,
 });
@@ -501,7 +507,7 @@ for await (const chunk of stream) {
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "Explain quantum entanglement in simple terms.",
     "stream": true
   }'
@@ -525,14 +531,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 // data: {"id": "int_123", "status": "done", "usage": {"total_tokens": 42}}
 ```
 
-##### Après (nouveau schéma)
+##### หลังการเปลี่ยนแปลง (สคีมาใหม่)
 
 ### Python
 
 ```
 # Consuming stream and handling new event types
 for event in client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="Tell me a story.",
     stream=True,
 ):
@@ -546,7 +552,7 @@ for event in client.interactions.create(
 ```
 // Consuming stream and handling new event types
 const stream = await client.interactions.create({
-    model: 'gemini-3.5-flash',
+    model: 'gemini-3.6-flash',
     input: 'Tell me a story.',
     stream: true,
 });
@@ -569,7 +575,7 @@ for await (const event of stream) {
    -H "Accept: text/event-stream" \
    -H "Api-Revision: 2026-05-20" \
    -d '{
-     "model": "gemini-3.5-flash",
+     "model": "gemini-3.6-flash",
      "input": "Tell me a story.",
      "stream": true
    }'
@@ -578,7 +584,7 @@ for await (const event of stream) {
 ```
  // Response (SSE Lines)
  // event: interaction.created
- // data: {"interaction": {"id": "int_xyz", "status": "in_progress", "object": "interaction", "model": "gemini-3.5-flash"}, "event_type": "interaction.created"}
+ // data: {"interaction": {"id": "int_xyz", "status": "in_progress", "object": "interaction", "model": "gemini-3.6-flash"}, "event_type": "interaction.created"}
  //
  // event: interaction.in_progress
  // data: {"interaction_id": "int_xyz", "event_type": "interaction.in_progress"}
@@ -602,35 +608,38 @@ for await (const event of stream) {
  // data: {"type": "interaction.completed", "interaction": {"id": "int_xyz", "status": "completed", "usage": {"prompt_tokens": 10, "completion_tokens": 5, "total_tokens": 15}}} // NEW: Dedicated completion event
 ```
 
-### Historique des conversations sans état
+### ประวัติการสนทนาแบบ Stateless
 
-Si vous gérez manuellement l'historique des conversations côté client (cas d'utilisation sans état), vous devez modifier la façon dont vous enchaînez les tours précédents.
+หากคุณจัดการประวัติการสนทนาด้วยตนเองในฝั่งไคลเอ็นต์ (กรณีการใช้งานแบบ Stateless) คุณต้องอัปเดตวิธีเชื่อมโยงการสนทนาก่อนหน้า
 
-- **Ancien** : les développeurs collectaient souvent le tableau `outputs` à partir des réponses et le renvoyaient dans le champ `input` au tour suivant.
-- **Nouveau schéma** : vous devez maintenant collecter le tableau `steps` à partir de la réponse et le transmettre dans le champ `input` de la prochaine requête, en ajoutant votre nouveau tour d'utilisateur en tant qu'étape `user_input`.
+- **เดิม**: นักพัฒนามักจะรวบรวมอาร์เรย์ `outputs` จากการตอบกลับและส่งกลับในช่อง `input` ในการสนทนาครั้งถัดไป
+- **สคีมาใหม่**: ตอนนี้คุณควรรวบรวมอาร์เรย์ `steps` จากการตอบกลับและส่งในช่อง `input` ของคำขอถัดไป โดยเพิ่มการสนทนาใหม่ของผู้ใช้เป็นขั้นตอน `user_input`
 
-## Modifications apportées à la configuration du format de sortie : `response_format`
+## การกำหนดค่ารูปแบบเอาต์พุต: การเปลี่ยนแปลง `response_format`
 
-La nouvelle API regroupe tous les contrôles de format de sortie dans un champ `response_format` polymorphe unifié. Cela centralise la configuration de la sortie au niveau supérieur et permet à `generation_config` de se concentrer sur le comportement du modèle (comme la température, top\_p et la réflexion).
+API ที่อัปเดตจะรวมการควบคุมรูปแบบเอาต์พุตทั้งหมดไว้ในช่อง `response_format` แบบ Polymorphic ที่รวมเป็นหนึ่งเดียว ซึ่งจะรวมการกำหนดค่าเอาต์พุตไว้ที่ระดับบนสุด และทำให้ `generation_config` มุ่งเน้นไปที่ลักษณะการทำงานของโมเดล (เช่น อุณหภูมิ, top\_p และการคิด)
 
-### Principales modifications
+### การเปลี่ยนแปลงที่สำคัญ
 
-- **L'API supprime `response_mime_type`.** Vous devez maintenant spécifier le type MIME par entrée de format dans `response_format`.
-- **`response_format` est désormais un objet (ou un tableau) polymorphe.** Chaque entrée comporte un discriminant `type` (`text`, `audio`, `image`) et des champs spécifiques au type. Pour demander plusieurs modalités de sortie, transmettez un tableau d'entrées de format.
-- **`image_config` passe de `generation_config` à `response_format`.**
-  Vous pouvez désormais spécifier les paramètres de sortie des images, comme `aspect_ratio` et `image_size`, dans une entrée `response_format` avec `"type": "image"`.
+- **API จะนำ `response_mime_type` ออก** ตอนนี้คุณระบุประเภท MIME ต่อรายการรูปแบบภายใน `response_format`
+- **ตอนนี้ `response_format` เป็นออบเจ็กต์ (หรืออาร์เรย์) แบบ Polymorphic** แต่ละรายการมีตัวแยกประเภท `type` (`text`, `audio`, `image`) และช่องที่เฉพาะเจาะจงตามประเภท หากต้องการขอเอาต์พุตหลายรูปแบบ ให้ส่งอาร์เรย์ของรายการรูปแบบ
+- **`image_config` จะย้ายจาก `generation_config` ไปยัง `response_format`**
+  ตอนนี้คุณระบุการตั้งค่าเอาต์พุตของรูปภาพ เช่น `aspect_ratio` และ `image_size`
+  ในรายการ `response_format` ที่มี `"type": "image"`
 
-### Sortie structurée (JSON)
+### เอาต์พุตที่มีโครงสร้าง (JSON)
 
-Le nouveau schéma supprime le champ `response_mime_type`. Spécifiez plutôt le type MIME et le schéma JSON dans un objet `response_format` avec `"type": "text"`.
+สคีมาใหม่จะนำช่อง `response_mime_type` ออก แต่ให้ระบุประเภท
+MIME และสคีมา JSON ภายในออบเจ็กต์ `response_format` ที่มี
+`"type": "text"`
 
-#### Avant (ancienne version)
+#### ก่อนการเปลี่ยนแปลง (เดิม)
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="Summarize this article.",
     response_mime_type="application/json",
     response_format={
@@ -648,7 +657,7 @@ print(interaction.outputs[-1].text)
 
 ```
 const interaction = await client.interactions.create({
-    model: 'gemini-3.5-flash',
+    model: 'gemini-3.6-flash',
     input: 'Summarize this article.',
     response_mime_type: 'application/json',
     response_format: {
@@ -668,7 +677,7 @@ console.log(interaction.outputs[-1].text);
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "Summarize this article.",
     "response_mime_type": "application/json",
     "response_format": {
@@ -680,13 +689,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### Après (nouveau schéma)
+#### หลังการเปลี่ยนแปลง (สคีมาใหม่)
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="Summarize this article.",
     # response_mime_type is removed — specify mime_type inside response_format
     response_format={
@@ -709,7 +718,7 @@ print(interaction.output_text)
 
 ```
 const interaction = await client.interactions.create({
-    model: 'gemini-3.5-flash',
+    model: 'gemini-3.6-flash',
     input: 'Summarize this article.',
     // response_mime_type is removed — specify mime_type inside response_format
     response_format: {
@@ -736,7 +745,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "Summarize this article.",
     "response_format": {
       "type": "text",
@@ -751,17 +760,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-### Configuration des images
+### การกำหนดค่ารูปภาพ
 
-Le nouveau schéma supprime `image_config` de `generation_config`. Vous spécifiez désormais les paramètres de sortie d'image dans une entrée `response_format` avec `"type": "image"`.
+สคีมาใหม่จะนำ `image_config` ออกจาก `generation_config` ตอนนี้คุณระบุ
+การตั้งค่าเอาต์พุตของรูปภาพในรายการ `response_format` ที่มี `"type": "image"`
 
-#### Avant (ancienne version)
+#### ก่อนการเปลี่ยนแปลง (เดิม)
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="Generate an image of a sunset over the ocean.",
     generation_config={
         "image_config": {
@@ -776,7 +786,7 @@ interaction = client.interactions.create(
 
 ```
 const interaction = await client.interactions.create({
-    model: 'gemini-3.5-flash',
+    model: 'gemini-3.6-flash',
     input: 'Generate an image of a sunset over the ocean.',
     generation_config: {
         image_config: {
@@ -793,7 +803,7 @@ const interaction = await client.interactions.create({
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "Generate an image of a sunset over the ocean.",
     "generation_config": {
       "image_config": {
@@ -804,13 +814,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### Après (nouveau schéma)
+#### หลังการเปลี่ยนแปลง (สคีมาใหม่)
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="Generate an image of a sunset over the ocean.",
     # image_config is removed from generation_config — use response_format
     response_format={
@@ -826,7 +836,7 @@ interaction = client.interactions.create(
 
 ```
 const interaction = await client.interactions.create({
-    model: 'gemini-3.5-flash',
+    model: 'gemini-3.6-flash',
     input: 'Generate an image of a sunset over the ocean.',
     // image_config is removed from generation_config — use response_format
     response_format: {
@@ -846,7 +856,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "Generate an image of a sunset over the ocean.",
     "response_format": {
       "type": "image",
@@ -857,11 +867,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-### Configuration audio
+### การกำหนดค่าเสียง
 
-Le nouveau schéma remplace `response_modalities: ["audio"]` par une entrée `response_format` de `"type": "audio"`.
+สคีมาใหม่จะแทนที่ `response_modalities: ["audio"]` ด้วยรายการ `response_format` ที่มี `"type": "audio"`
 
-#### Avant (ancienne version)
+#### ก่อนการเปลี่ยนแปลง (เดิม)
 
 ### Python
 
@@ -910,7 +920,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### Après (nouveau schéma)
+#### หลังการเปลี่ยนแปลง (สคีมาใหม่)
 
 ### Python
 
@@ -969,51 +979,53 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-Pour demander plusieurs modalités de sortie (par exemple, du texte et de l'audio ensemble), transmettez un tableau d'entrées de format à `response_format` au lieu d'un seul objet.
+หากต้องการขอเอาต์พุตหลายรูปแบบ (เช่น ข้อความและเสียงพร้อมกัน) ให้ส่งอาร์เรย์ของรายการรูปแบบไปยัง `response_format` แทนที่จะส่งออบเจ็กต์เดียว
 
-## Migrer vers le nouveau schéma
+## วิธีย้ายข้อมูลไปยังสคีมาใหม่
 
-### Utilisateurs du SDK
+### ผู้ใช้ SDK
 
-Passez à la dernière version du SDK (Python ≥2.0.0, JavaScript ≥2.0.0). Le SDK vous inscrit automatiquement au nouveau schéma. Vous n'avez pas besoin de modifier le code, si ce n'est pour mettre à jour la façon dont vous lisez les réponses (voir les exemples ci-dessus). Notez que seul le nouveau schéma est compatible avec ces versions du SDK. Les anciennes versions du SDK (Python 1.x.x, JavaScript 1.x.x) continueront de fonctionner jusqu'à la suppression de l'ancien schéma le **8 juin 2026**.
+อัปเกรดเป็น SDK เวอร์ชันล่าสุด (Python ≥2.0.0, JavaScript ≥2.0.0) SDK จะเลือกใช้สคีมาใหม่ให้คุณโดยอัตโนมัติ คุณจึงไม่ต้องเปลี่ยนแปลงโค้ดใดๆ นอกเหนือจากการอัปเดตวิธีอ่านการตอบกลับ (ดูตัวอย่างด้านบน) โปรดทราบว่า SDK เวอร์ชันเหล่านี้รองรับเฉพาะสคีมาใหม่ SDK เวอร์ชันเก่า (Python 1.x.x, JavaScript 1.x.x) จะยังคงทำงานได้จนกว่าระบบจะนำสคีมาเดิมออกในวันที่ **8 มิถุนายน 2026**
 
-### Utilisateurs de l'API REST
+### ผู้ใช้ REST API
 
-Ajoutez l'en-tête `Api-Revision: 2026-05-20` à vos requêtes pour activer le nouveau schéma dès maintenant. Après le **26 mai**, le nouveau schéma deviendra celui par défaut pour toutes les requêtes. Vous pouvez désactiver temporairement l'ancienne API avec `Api-Revision: 2026-05-07` jusqu'au **8 juin**, date à laquelle l'ancienne API sera définitivement supprimée.
+เพิ่มส่วนหัว `Api-Revision: 2026-05-20` ลงในคำขอเพื่อเลือกใช้สคีมาใหม่ได้แล้วตอนนี้ หลังจากวันที่ **26 พฤษภาคม** สคีมาใหม่จะกลายเป็นค่าเริ่มต้นสำหรับคำขอทั้งหมด
+คุณเลือกไม่ใช้ชั่วคราวได้ด้วย `Api-Revision: 2026-05-07`
+จนถึงวันที่ **8 มิถุนายน** ซึ่งเป็นวันที่ API จะนำสคีมาเดิมออกอย่างถาวร
 
-### Chronologie
+### ไทม์ไลน์
 
-| Date | Phase | Utilisateurs du SDK | Utilisateurs de l'API REST |
+| วันที่ | ระยะ | ผู้ใช้ SDK | ผู้ใช้ REST API |
 | --- | --- | --- | --- |
-| **7 mai** | Activer | Une nouvelle version du SDK est disponible (Python ≥2.0.0, JS ≥2.0.0). Passez à un forfait supérieur pour obtenir automatiquement le nouveau schéma. | Ajoutez l'en-tête `Api-Revision: 2026-05-20` pour activer cette fonctionnalité. L'ancienne version reste la version par défaut. |
-| **26 mai** | Inversion par défaut | Aucune action n'est requise si vous avez déjà effectué la mise à niveau. Les anciens SDK (Python 1.x.x, JS 1.x.x) fonctionnent toujours, mais renvoient des réponses anciennes. | Le nouveau schéma est désormais celui par défaut. Envoyez l'en-tête `Api-Revision: 2026-05-07` pour ne plus recevoir de messages. |
-| **8 juin** | Coucher du soleil | Les versions 1.x.x des SDK Python et JS ne fonctionneront plus pour les appels d'API Interactions. | L'ancien schéma a été supprimé pour l'API Interactions. En-tête `Api-Revision` ignoré. |
+| **7 พฤษภาคม** | เลือกเข้าร่วม | SDK เวอร์ชันใหม่พร้อมใช้งานแล้ว (Python ≥2.0.0, JS ≥2.0.0) อัปเกรดเพื่อรับสคีมาใหม่โดยอัตโนมัติ | เพิ่มส่วนหัว `Api-Revision: 2026-05-20` เพื่อเลือกเข้าร่วม ค่าเริ่มต้นจะยังคงเป็นสคีมาเดิม |
+| **26 พฤษภาคม** | พลิกค่าเริ่มต้น | หากอัปเกรดแล้ว คุณไม่ต้องดำเนินการใดๆ SDK เวอร์ชันเก่า (Python 1.x.x, JS 1.x.x) จะยังคงทำงานได้ แต่จะแสดงการตอบกลับเดิม | ตอนนี้สคีมาใหม่เป็นค่าเริ่มต้นแล้ว ส่งส่วนหัว `Api-Revision: 2026-05-07` เพื่อเลือกไม่ใช้ |
+| **8 มิถุนายน** | การเลิกใช้งาน | SDK เวอร์ชัน Python 1.x.x และ JS 1.x.x จะหยุดทำงานสำหรับการเรียกใช้ Interactions API | ระบบจะนำสคีมาเดิมออกสำหรับ Interactions API ระบบจะไม่สนใจส่วนหัว `Api-Revision` |
 
-## Liste de contrôle de la migration
+## รายการตรวจสอบการย้ายข้อมูล
 
-### Schéma des étapes (`steps`)
+### สคีมา `steps`
 
-- Mettez à jour le code pour lire le contenu de la réponse à partir du tableau `steps` au lieu de `outputs`. [Voir des exemples](#basic-unary)
-- Vérifiez que votre code gère les types d'étapes `user_input` et `model_output`. [Voir des exemples](#basic-unary)
-- (Appel de fonction) Mettez à jour le code pour trouver les étapes `function_call` dans le tableau `steps`. [Voir des exemples](#function-calling)
-- (Outils côté serveur) Mettez à jour le code pour gérer les étapes spécifiques aux outils (par exemple, `google_search_call`, `google_search_result`). [Consultez des exemples](#server-side-tools).
-- (Historique sans état) Mettez à jour la gestion de l'historique pour transmettre le tableau `steps` dans le champ `input` de la prochaine requête. [En savoir plus](#stateless-history)
-- (Streaming uniquement) Mettez à jour le client pour qu'il écoute les nouveaux types d'événements SSE (`interaction.created`, `step.delta`, etc.). [Voir des exemples](#streaming)
+- อัปเดตโค้ดเพื่ออ่านเนื้อหาการตอบกลับจากอาร์เรย์ `steps` แทน `outputs` [ดูตัวอย่าง](#basic-unary)
+- ตรวจสอบว่าโค้ดของคุณจัดการประเภทขั้นตอน `user_input` และ `model_output` ได้ [ดูตัวอย่าง](#basic-unary)
+- (การเรียกใช้ฟังก์ชัน) อัปเดตโค้ดเพื่อค้นหาขั้นตอน `function_call` ในอาร์เรย์ `steps` [ดูตัวอย่าง](#function-calling)
+- (เครื่องมือฝั่งเซิร์ฟเวอร์) อัปเดตโค้ดเพื่อจัดการขั้นตอนที่เฉพาะเจาะจงของเครื่องมือ (เช่น `google_search_call`, `google_search_result`) [ดูตัวอย่าง](#server-side-tools)
+- (ประวัติแบบ Stateless) อัปเดตการจัดการประวัติเพื่อส่งอาร์เรย์ `steps` ในช่อง `input` ของคำขอถัดไป [ดูรายละเอียด](#stateless-history)
+- (สตรีมมิงเท่านั้น) อัปเดตไคลเอ็นต์เพื่อฟังประเภทเหตุการณ์ SSE ใหม่ (`interaction.created`, `step.delta` และอื่นๆ) [ดูตัวอย่าง](#streaming)
 
-### Configuration du format de sortie (`response_format`)
+### การกำหนดค่ารูปแบบเอาต์พุต (`response_format`)
 
-- Remplacez `response_mime_type` par un champ `mime_type` dans `response_format`. [Voir des exemples](#structured-output)
-- Encapsulez votre schéma JSON `response_format` existant dans un objet `{"type": "text", "schema": ...}`. [Voir des exemples](#structured-output)
-- (Génération d'images) Déplacez `image_config` de `generation_config` vers une entrée `{"type": "image", ...}` dans `response_format`. [Voir des exemples](#image-config)
-- (Génération de la parole) Remplacez `response_modalities=["audio"]` par une entrée `{"type": "audio"}` dans `response_format`. [Voir des exemples](#audio-config)
-- (Multimodal) Convertissez `response_format` d'un seul objet en tableau lorsque vous demandez plusieurs modalités de sortie.
+- แทนที่ `response_mime_type` ด้วยช่อง `mime_type` ภายใน `response_format` [ดูตัวอย่าง](#structured-output)
+- รวมสคีมา JSON `response_format` ที่มีอยู่ภายในออบเจ็กต์ `{"type": "text", "schema": ...}` [ดูตัวอย่าง](#structured-output)
+- (การสร้างรูปภาพ) ย้าย `image_config` จาก `generation_config` ไปยังรายการ `{"type": "image", ...}` ใน `response_format` [ดูตัวอย่าง](#image-config)
+- (การสร้างคำพูด) แทนที่ `response_modalities=["audio"]` ด้วยรายการ `{"type": "audio"}` ใน `response_format` [ดูตัวอย่าง](#audio-config)
+- (มัลติโมดัล) แปลง `response_format` จากออบเจ็กต์เดียวเป็นอาร์เรย์เมื่อขอเอาต์พุตหลายรูปแบบ
 
-Envoyer des commentaires
+ส่งความคิดเห็น
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Dernière mise à jour le 2026/07/07 (UTC).
+อัปเดตล่าสุด 2026-09-12 UTC
 
-Voulez-vous nous donner plus d'informations ?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/07 (UTC)."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-12 UTC"],[],[]]

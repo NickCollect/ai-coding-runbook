@@ -1,43 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=tr
-fetched_at: 2026-09-07T05:48:03.079018+00:00
-title: "Interactions API'ye ge\u00e7i\u015f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=he
+fetched_at: 2026-09-14T05:38:24.556874+00:00
+title: "\u05de\u05e2\u05d1\u05e8 \u05dc-Interactions API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Geri bildirim gönderin
+שליחת משוב
 
-# Interactions API'ye geçiş
+# מעבר ל-Interactions API
 
-Bu kılavuz, `generateContent` API'den Interactions API'ye geçiş yapmanıza yardımcı olur.
+המדריך הזה יעזור לכם לעבור מ-`generateContent` API ל-Interactions API.
 
-Etkileşimler API'si, Gemini modelleri ve aracılarıyla uygulama geliştirmenin en basit ve en iyi yoludur. `generateContent` tam olarak desteklenmeye devam etse de tüm yeni geliştirmeler için Interactions API'sini kullanmanızı öneririz.
+‫Interactions API הוא הדרך הכי פשוטה וטובה לבנות עם מודלים וסוכנים של Gemini. למרות ש-`generateContent` עדיין נתמך באופן מלא, מומלץ להשתמש ב-Interactions API לכל פיתוח חדש.
 
-### Neden taşıma işlemi yapmalısınız?
+### למה כדאי לעבור?
 
-Etkileşimler API'si, Gemini modelleri ve aracılarıyla geliştirme yapmanın en basit ve en iyi yoludur:
+‫Interactions API הוא הדרך הכי פשוטה וטובה שלנו לבנות באמצעות מודלים וסוכנים של Gemini:
 
-- **Sunucu tarafı geçmiş yönetimi**: `previous_interaction_id` aracılığıyla basitleştirilmiş çok aşamalı etkileşim akışları. Sunucu, durumu varsayılan olarak etkinleştirir (`store=true`), ancak `store=false`'yi ayarlayarak durumsuz davranışı etkinleştirebilirsiniz.
-- **Gözlemlenebilir yürütme adımları**: Yazılan adımlar, karmaşık akışlarda hata ayıklamayı ve ara etkinlikler (ör. düşünceler veya arama widget'ları) için kullanıcı arayüzü oluşturmayı kolaylaştırır.
-- **Araç kullanımı ve asenkron iş akışları**: Çok adımlı araç kullanımı, düzenleme ve karmaşık akıl yürütme akışları için yazılı yürütme adımları aracılığıyla yerel destek.
-- **Uzun süren ve arka plan görevleri**: `background=true` kullanarak Deep Think ve Deep Research gibi zaman alan işlemlerin arka plan süreçlerine aktarılmasını destekler.
+- **ניהול היסטוריה בצד השרת**: תהליכים פשוטים יותר של שיחות מרובות תורות באמצעות `previous_interaction_id`. השרת מפעיל את המצב כברירת מחדל (`store=true`), אבל אפשר להגדיר התנהגות ללא מצב על ידי הגדרת `store=false`.
+- **שלבי ביצוע שניתן לצפות בהם**: שלבים מוקלדים מקלים על ניפוי באגים בתהליכים מורכבים ועל עיבוד ממשק משתמש לאירועים ביניים (כמו מחשבות או ווידג'טים של חיפוש).
+- **שימוש בכלים ותהליכי עבודה שמבוססים על סוכנים**: תמיכה מובנית בשימוש בכלים מרובי-שלבים, בתזמור ובזרימות מורכבות של נימוקים באמצעות שלבי ביצוע מוקלדים.
+- **משימות ארוכות וברקע**: תמיכה בהעברת פעולות שדורשות הרבה זמן, כמו Deep Think ו-Deep Research, לתהליכים ברקע באמצעות `background=true`.
 
-## Temel giriş/çıkış
+## קלט/פלט בסיסי
 
-Bu bölümde, basit bir metin oluşturma isteğinin nasıl taşınacağı gösterilmektedir.
+בקטע הזה נסביר איך להעביר בקשה פשוטה ליצירת טקסט.
 
-### Önce (`generateContent`)
+### לפני (`generateContent`)
 
-`generateContent` API'si durum bilgisi içermez ve yanıtı doğrudan döndürür. Yanıt yapısı, çıkışı `candidates` listesi içinde sarmalar. Bu listedeki her öğe, ayrıştırılacak `parts` listesini içeren `content` öğesini içerir.
+‫`generateContent` API הוא חסר מצב ומחזיר את התגובה ישירות. מבנה התגובה עוטף את הפלט ברשימה של `candidates`, שכל אחת מהן מכילה `content` עם רשימה של `parts` לניתוח.
 
 ### Python
 
@@ -64,30 +64,6 @@ const response = await ai.models.generateContent({
   contents: "Tell me a joke.",
 });
 console.log(response.text);
-```
-
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain how AI works in a few words"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
 ```
 
 ### REST
@@ -129,9 +105,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-Interactions API'si, `steps` zaman çizelgesiyle birlikte depolanmış bir etkileşim kaynağı döndürür. Ara etkinlikleri bulmak için `steps` dizisini manuel olarak inceleyebilirsiniz ancak Google üretken yapay zeka SDK'ları, nihai çıkışa erişmek için doğrudan döndürülen `Interaction` nesnesinde kolaylık özellikleri sağlar.
+‫Interactions API מחזיר משאב אינטראקציה מאוחסן עם `steps`ציר זמן. אפשר לבדוק את המערך `steps` באופן ידני כדי למצוא אירועים ביניים, אבל ערכות ה-SDK של GenAI מבית Google מספקות מאפיינים נוחים ישירות באובייקט `Interaction` שמוחזר כדי לגשת לפלט הסופי.
 
-En yaygın kolaylık özelliği, modelin yanıtının sonundaki ardışık `TextContent` bloklarını otomatik olarak ayıklayıp birleştiren **`.output_text`** (Dize) özelliğidir. Bu yöntem basit yanıtlar için mükemmel olsa da metin dışı içeriklerle (ör. düşünceler, resimler, ses veya araç çağrıları) ayrılmış önceki metin bloklarını içermez. Karmaşık veya iç içe geçmiş çok formatlı yanıtlarda bunun yerine `steps` üzerinde manuel olarak yineleme yapmanız gerekir.
+מאפיין הנוחות הנפוץ ביותר הוא **`.output_text`** (מחרוזת), שבאמצעותו אפשר לחלץ ולצרף באופן אוטומטי בלוקים עוקבים של `TextContent` בסוף התשובה של המודל. השיטה הזו מתאימה לתשובות פשוטות, אבל היא לא כוללת בלוקים קודמים של טקסט שמפריד ביניהם תוכן שאינו טקסט (כמו מחשבות, תמונות, אודיו או קריאות לכלים). לתשובות מורכבות או משולבות
+ממגוון סוגים, צריך להשתמש בשיטה `steps` באופן ידני.
 
 ### Python
 
@@ -141,7 +118,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.8-flash", input="Tell me a joke."
+    model="gemini-3.6-flash", input="Tell me a joke."
 )
 
 print(interaction.output_text)
@@ -155,35 +132,11 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({});
 
 let interaction = await client.interactions.create({
-    model: 'gemini-3.8-flash',
+    model: 'gemini-3.6-flash',
     input: 'Tell me a joke.'
 });
 
 console.log(interaction.output_text);
-```
-
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain how AI works in a few words"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
 ```
 
 ### REST
@@ -194,7 +147,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "gemini-3.8-flash",
+    "model": "gemini-3.6-flash",
     "input": "Tell me a joke."
 }'
 
@@ -227,17 +180,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## Çok aşamalı etkileşimli görüşmeler
+## שיחות עם זיכרון
 
-Etkileşimler API'si, etkileşimleri varsayılan olarak depolar ve çok adımlı görüşmeler için sunucu tarafında durum yönetimi sağlar.
+ה-Interactions API מאחסן אינטראקציות כברירת מחדל, וכך מאפשר ניהול מצב בצד השרת לשיחות מרובות.
 
-### Önce (`generateContent`)
+### לפני (`generateContent`)
 
-`generateContent`'da, `contents` dizisini veya istemci tarafı sohbet yardımcısını kullanarak sohbet geçmişini manuel olarak yönetmeniz gerekir.
+ב-`generateContent`, צריך לנהל את היסטוריית השיחות באופן ידני באמצעות מערך `contents` או כלי עזר לצ'אט בצד הלקוח.
 
 ### Python
 
-**Sohbet yardımcısını kullanma (önerilir)**
+**שימוש בכלי העזר לצ'אט (מומלץ)**
 
 ```
 from google import genai
@@ -252,7 +205,7 @@ response2 = chat.send_message("What is my name?")
 print(response2.text)
 ```
 
-**Geçmişi manuel olarak yönetme**
+**ניהול ההיסטוריה באופן ידני**
 
 ```
 from google import genai
@@ -280,7 +233,7 @@ print(response.text)
 
 ### JavaScript
 
-**Sohbet yardımcısını kullanma (önerilir)**
+**שימוש בכלי העזר לצ'אט (מומלץ)**
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -295,31 +248,7 @@ response = await chat.sendMessage({ message: 'What is my name?' });
 console.log(response.text);
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain how AI works in a few words"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
-```
-
-**Geçmişi manuel olarak yönetme**
+**ניהול ההיסטוריה באופן ידני**
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -371,9 +300,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### Sonra (Interactions API)
+### ‫After (Interactions API)
 
-Etkileşimler API'si, sunucudaki durumu yönetir. `previous_interaction_id` referansını vererek sohbete devam edebilirsiniz.
+ה-API של האינטראקציות מנהל את המצב בשרת. כדי להמשיך שיחה, מציינים את `previous_interaction_id`.
 
 ### Python
 
@@ -383,12 +312,12 @@ from google import genai
 client = genai.Client()
 
 interaction1 = client.interactions.create(
-    model="gemini-3.8-flash", input="Hi, my name is Phil."
+    model="gemini-3.6-flash", input="Hi, my name is Phil."
 )
 print("Response 1:", interaction1.output_text)
 
 interaction2 = client.interactions.create(
-    model="gemini-3.8-flash",
+    model="gemini-3.6-flash",
     previous_interaction_id=interaction1.id,
     input="What is my name?",
 )
@@ -403,41 +332,17 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({});
 
 let interaction = await client.interactions.create({
-    model: 'gemini-3.8-flash',
+    model: 'gemini-3.6-flash',
     input: 'Hi, my name is Phil.'
 });
 console.log("Response 1:", interaction.output_text);
 
 interaction = await client.interactions.create({
-    model: 'gemini-3.8-flash',
+    model: 'gemini-3.6-flash',
     previous_interaction_id: interaction.id,
     input: 'What is my name?'
 });
 console.log("Response 2:", interaction.output_text);
-```
-
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain how AI works in a few words"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
 ```
 
 ### REST
@@ -448,7 +353,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "gemini-3.8-flash",
+    "model": "gemini-3.6-flash",
     "input": "Hi, my name is Phil."
 }'
 
@@ -457,7 +362,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "gemini-3.8-flash",
+    "model": "gemini-3.6-flash",
     "previous_interaction_id": "int_123",
     "input": "What is my name?"
 }'
@@ -490,13 +395,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## Çok formatlı girişler
+## קלט מרובה מצבים
 
-Her iki API de çok formatlı girişleri (metin, resim, video vb.) destekler.
+שני ממשקי ה-API תומכים בקלט מולטי-מודאלי (טקסט, תמונות, סרטונים וכו').
 
-### Önce (`generateContent`)
+### לפני (`generateContent`)
 
-`generateContent` içinde, `contents` dizisinde bir `parts` listesi iletirsiniz. Yanıt, ilk adayda `parts` çıkışını döndürüyor.
+ב-`generateContent`, מעבירים רשימה של `parts` במערך `contents`. התגובה מחזירה פלט ב-`parts` של המועמד הראשון.
 
 ### Python
 
@@ -544,30 +449,6 @@ const response = await client.models.generateContent({
 console.log(response.text);
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain how AI works in a few words"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
-```
-
 ### REST
 
 ```
@@ -608,9 +489,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### Sonra (Interactions API)
+### ‫After (Interactions API)
 
-Etkileşimler API'sinde, `input` alanına bir dizi iletirsiniz. Zaman çizelgesinde `model_output` adımını bularak çıkış içeriğini alırsınız.
+ב-API של אינטראקציות, מעבירים מערך לשדה `input`. כדי לאחזר את תוכן הפלט, מאתרים את השלב `model_output` בציר הזמן.
 
 ### Python
 
@@ -625,7 +506,7 @@ with open("sample.jpg", "rb") as f:
 image_b64 = base64.b64encode(image_bytes).decode("utf-8")
 
 interaction = client.interactions.create(
-    model="gemini-3.8-flash",
+    model="gemini-3.6-flash",
     input=[
         {
             "type": "image",
@@ -649,7 +530,7 @@ const client = new GoogleGenAI({});
 const imageBytes = fs.readFileSync('sample.jpg').toString('base64');
 
 const interaction = await client.interactions.create({
-    model: 'gemini-3.8-flash',
+    model: 'gemini-3.6-flash',
     input: [
         {
             type: 'image',
@@ -665,30 +546,6 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain how AI works in a few words"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
-```
-
 ### REST
 
 ```
@@ -697,7 +554,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "gemini-3.8-flash",
+    "model": "gemini-3.6-flash",
     "input": [
         {
             "type": "image",
@@ -744,13 +601,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## Yapılandırılmış çıkış
+## פלט מובנה
 
-Modelin belirli bir şemaya uygun JSON döndürmesini sağlamak için yanıt biçimini yapılandırın.
+כדי שהמודל יחזיר JSON שתואם לסכימה ספציפית, צריך להגדיר את פורמט התגובה.
 
-### Önce (`generateContent`)
+### לפני (`generateContent`)
 
-`generateContent` içinde, çıkış biçimini `config` (veya `generationConfig`) nesnesinin içine yerleştirilmiş `response_mime_type` ve `response_schema` alanlarını kullanarak yapılandırırsınız.
+ב-`generateContent`, מגדירים את פורמט הפלט באמצעות השדות `response_mime_type` ו-`response_schema` שמוטמעים באובייקט `config` (או `generationConfig`).
 
 ### Python
 
@@ -804,30 +661,6 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain how AI works in a few words"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
-```
-
 ### REST
 
 ```
@@ -874,9 +707,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### Sonra (Interactions API)
+### ‫After (Interactions API)
 
-Interactions API'de çıkış biçimi kontrolleri üst düzey bir `response_format` dizisine taşınır.
+ב-Interactions API, אמצעי הבקרה של פורמט הפלט עוברים למערך `response_format` ברמה העליונה.
 
 ### Python
 
@@ -891,7 +724,7 @@ class Recipe(BaseModel):
     ingredients: list[str]
 
 interaction = client.interactions.create(
-    model="gemini-3.8-flash",
+    model="gemini-3.6-flash",
     input="Give me a recipe for chocolate chip cookies.",
     response_format=[
         {
@@ -913,7 +746,7 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    model: 'gemini-3.8-flash',
+    model: 'gemini-3.6-flash',
     input: 'Give me a recipe for chocolate chip cookies.',
     response_format: [
         {
@@ -936,30 +769,6 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain how AI works in a few words"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
-```
-
 ### REST
 
 ```
@@ -968,7 +777,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "gemini-3.8-flash",
+    "model": "gemini-3.6-flash",
     "input": "Give me a recipe for chocolate chip cookies.",
     "response_format": [
         {
@@ -1012,13 +821,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## Çok formatlı üretim
+## יצירה מולטי-מודאלית
 
-Metin dışındaki formatlarda (ör. resim veya ses) içerik oluştururken temel fark, yanıtın oluşturulan medyayı nasıl yapılandırdığıdır.
+כשיוצרים תוכן במודאליות שאינה טקסט (כמו תמונות או אודיו), ההבדל העיקרי הוא במבנה התשובה של המדיה שנוצרה.
 
-### Önce (`generateContent`)
+### לפני (`generateContent`)
 
-`generateContent` içinde, yanıt oluşturulan medyayı doğrudan aday `parts` içinde döndürür. Bu medya genellikle `inlineData` içinde base64 verileri olarak bulunur.
+ב-`generateContent`, התשובה מחזירה מדיה שנוצרה ישירות ב-`parts` של המועמד, בדרך כלל כנתוני base64 ב-`inlineData`.
 
 ```
 # Response structure concept
@@ -1043,9 +852,9 @@ Metin dışındaki formatlarda (ör. resim veya ses) içerik oluştururken temel
 }
 ```
 
-### Sonra (Interactions API)
+### ‫After (Interactions API)
 
-Etkileşimler API'sinde, oluşturulan medya, etkileşimin kronolojik akışını koruyarak zaman çizelgesindeki bir `model_output` adımının `content` dizisinde ayrı öğeler olarak görünür.
+ב-Interactions API, מדיה שנוצרה מופיעה כפריטים נפרדים במערך `content` של שלב `model_output` בציר הזמן, תוך שמירה על הרצף הכרונולוגי של האינטראקציה.
 
 ```
 # Response structure concept
@@ -1071,15 +880,15 @@ Etkileşimler API'sinde, oluşturulan medya, etkileşimin kronolojik akışını
 }
 ```
 
-Bu sayede, yanıt ayrıştırma işlemi girişlerin ve metin çıkışlarının işlenme şekliyle tutarlı olur. Her şey zaman çizelgesinde bir adım olarak değerlendirilir.
+כך ניתוח התגובה נשאר עקבי עם האופן שבו קלטים ופלט טקסט מטופלים – כל דבר הוא שלב בציר הזמן.
 
-## Sunucu tarafı araçlar
+## כלים בצד השרת
 
-Gemini, Google Arama bağlama uydurma gibi yerleşik sunucu tarafı araçlarını destekler. Temel fark, yanıtın araç yürütmeyi nasıl temsil ettiğidir.
+‫Gemini תומך בכלים מובנים בצד השרת, כמו עיגון נתונים של חיפוש Google. ההבדל העיקרי הוא באופן שבו התשובה מייצגת את הפעלת הכלי.
 
-### Önce (`generateContent`)
+### לפני (`generateContent`)
 
-`generateContent`'da sunucu tarafı araçlar büyük ölçüde opak durumdadır. Aracı etkinleştirirsiniz ve ayrı bir `groundingMetadata` nesnesiyle nihai yanıtı alırsınız. En önemlisi, alıntılar satır içi değildir. `groundingSupports`, metin segmentlerini `groundingChunks` içindeki web kaynaklarıyla yeniden eşlemek için karakter dizinlerini kullanır.
+ב-`generateContent`, הכלים בצד השרת הם ברובם אטומים. אתם מפעילים את הכלי ומקבלים תשובה סופית עם אובייקט `groundingMetadata` נפרד. חשוב לציין שהציטוטים לא מוצגים בתוך הטקסט. `groundingSupports` נעשה שימוש באינדקסים של תווים כדי למפות פלחי טקסט בחזרה למקורות באינטרנט ב-`groundingChunks`.
 
 ### Python
 
@@ -1127,30 +936,6 @@ if (metadata.searchEntryPoint) {
 for (const support of metadata.groundingSupports) {
     console.log(`Citation: ${support.segment.text}`);
 }
-```
-
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain how AI works in a few words"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
 ```
 
 ### REST
@@ -1211,11 +996,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### Sonra (Interactions API)
+### ‫After (Interactions API)
 
-Etkileşimler API'sinde sunucu tarafı araçlar, zaman çizelgesiyle ilgili tam şeffaflık sağlar. API, çağrıyı ve sonucu ayrı yürütmeler `steps` (`google_search_call` ve `google_search_result`) olarak kaydeder ve modelin tam olarak hangi verileri aldığını gösterir.
+ב-Interactions API, כלים בצד השרת מספקים שקיפות מלאה של ציר הזמן. ה-API מתעד את הקריאה ואת התוצאה כביצועים נפרדים `steps` (`google_search_call` ו-`google_search_result`), וחושף בדיוק אילו נתונים המודל אחזר.
 
-Ayrıca API, alıntıları **satır içi** olarak döndürür. Ayrı bir meta veri nesnesindeki dizinleri eşlemek yerine, `model_output` adımındaki metin öğesi, doğrudan kaynağa bağlanan kendi `annotations` dizisini içerir.
+בנוסף, ה-API מחזיר ציטוטים **בגוף הטקסט**. במקום למפות אינדקסים מאובייקט מטא-נתונים נפרד, פריט הטקסט בשלב `model_output` מכיל מערך `annotations` משלו שמקושר ישירות למקור.
 
 ### Python
 
@@ -1225,7 +1010,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.8-flash",
+    model="gemini-3.6-flash",
     input="Who won Euro 2024?",
     tools=[{"type": "google_search"}],
 )
@@ -1248,7 +1033,7 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    model: 'gemini-3.8-flash',
+    model: 'gemini-3.6-flash',
     input: 'Who won Euro 2024?',
     tools: [{ type: 'google_search' }]
 });
@@ -1267,30 +1052,6 @@ for (const step of interaction.steps) {
 }
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain how AI works in a few words"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
-```
-
 ### REST
 
 ```
@@ -1299,7 +1060,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "gemini-3.8-flash",
+    "model": "gemini-3.6-flash",
     "input": "Who won Euro 2024?",
     "tools": [{"type": "google_search"}]
 }'
@@ -1324,7 +1085,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
       "content": [
         {
           "type": "text",
-          "text": "Spain won Euro 2024..."
+          "text": "Spain won Euro 2024..." 
         }
       ]
     },
@@ -1350,13 +1111,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## İşlev çağırma
+## בקשה להפעלת פונקציה
 
-İşlev çağrılarının ve sonuçların yapısı da Steps şemasına uyacak şekilde değiştirildi.
+גם המבנה של קריאות לפונקציות והתוצאות שלהן השתנה כדי להתאים לסכימת השלבים.
 
-### Önce (`generateContent`)
+### לפני (`generateContent`)
 
-`generateContent` içinde yanıt, adaylar içindeki işlev çağrılarını döndürür.\* {Python}
+ב-`generateContent`, התגובה מחזירה קריאות לפונקציות בתוך המועמדים.\* {Python}
 
 ```
 ```python
@@ -1440,30 +1201,6 @@ response = await client.models.generateContent({
 console.log(response.text);
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain how AI works in a few words"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
-```
-
 ### REST
 
 ```
@@ -1514,9 +1251,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### Sonra (Interactions API)
+### ‫After (Interactions API)
 
-Araç çağrıları ve sonuçları artık zaman çizelgesinde ayrı adımlar olarak gösteriliyor.
+עכשיו, קריאות לכלים ותוצאות הן שלבים נפרדים בציר הזמן.
 
 ### Python
 
@@ -1538,7 +1275,7 @@ weather_tool = {
 }
 
 interaction = client.interactions.create(
-    model="gemini-3.8-flash",
+    model="gemini-3.6-flash",
     input="What's the weather in Boston?",
     tools=[weather_tool],
 )
@@ -1550,7 +1287,7 @@ for step in interaction.steps:
         result = "52°F and rain"
 
         interaction = client.interactions.create(
-            model="gemini-3.8-flash",
+            model="gemini-3.6-flash",
             previous_interaction_id=interaction.id,
             input=[
                 {
@@ -1585,7 +1322,7 @@ const weatherTool = {
 };
 
 const interaction = await client.interactions.create({
-    model: 'gemini-3.8-flash',
+    model: 'gemini-3.6-flash',
     input: "What's the weather in Boston?",
     tools: [weatherTool]
 });
@@ -1597,7 +1334,7 @@ for (const step of interaction.steps) {
         const result = "52°F and rain";
 
         const nextInteraction = await client.interactions.create({
-            model: 'gemini-3.8-flash',
+            model: 'gemini-3.6-flash',
             previous_interaction_id: interaction.id,
             input: [
                 {
@@ -1614,30 +1351,6 @@ for (const step of interaction.steps) {
 }
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain how AI works in a few words"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
-```
-
 ### REST
 
 ```
@@ -1646,7 +1359,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "gemini-3.8-flash",
+    "model": "gemini-3.6-flash",
     "input": "What's the weather in Boston?",
     "tools": [{
         "type": "function",
@@ -1689,7 +1402,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "gemini-3.8-flash",
+    "model": "gemini-3.6-flash",
     "previous_interaction_id": "int_001",
     "input": {
         "type": "function_result",
@@ -1725,15 +1438,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## Canlı Yayın
+## סטרימינג
 
-Akışla ilgili önemli bir fark, Interactions API'nin istek gövdesinde `"stream": true` ile aynı uç noktayı kullanmasıdır. `generateContent` API ise özel bir uç noktanın (`:streamGenerateContent`) çağrılmasını gerektiriyordu.
+ההבדל העיקרי בסטרימינג הוא שב-Interactions API משתמשים באותה נקודת קצה עם `"stream": true` בגוף הבקשה, בעוד שב-`generateContent` API נדרשה קריאה לנקודת קצה ייעודית (`:streamGenerateContent`).
 
-Ayrıca, yayın etkinlikleri artık etkileşim yaşam döngüsünü izlemek ve zaman çizelgesindeki yürütme adımlarını takip etmek için özel türler kullanıyor.
+בנוסף, אירועים בשידור חי משתמשים עכשיו בסוגים מיוחדים כדי לעקוב אחרי מחזור החיים של האינטראקציה ואחרי שלבי הביצוע לאורך ציר הזמן.
 
-### Önce (`generateContentStream`)
+### לפני (`generateContentStream`)
 
-`generateContent` ile yanıt parçaları akışını tüketirsiniz.
+עם `generateContent`, אתם צורכים זרם של חלקי תגובה.
 
 ### Python
 
@@ -1759,30 +1472,6 @@ const responseStream = await client.models.generateContentStream({
 for await (const chunk of responseStream) {
     process.stdout.write(chunk.text);
 }
-```
-
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain how AI works in a few words"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
 ```
 
 ### REST
@@ -1815,9 +1504,9 @@ event: content.stop
 data: {"event_type": "content.stop", "index": 1}
 ```
 
-### Sonra (Interactions API)
+### ‫After (Interactions API)
 
-Etkileşimler API'sinde akış, yürütme adımlarını gerçekleşirken temsil etmek için sunucu tarafından gönderilen etkinlikleri (SSE) ve özel delta türlerini kullanır.
+ב-Interactions API, הסטרימינג משתמש ב-Server-Sent Events ‏ (SSE) ובסוגי דלתא מיוחדים כדי לייצג שלבי ביצוע בזמן שהם מתרחשים.
 
 ### Python
 
@@ -1827,7 +1516,7 @@ from google import genai
 client = genai.Client()
 
 stream = client.interactions.create(
-    model="gemini-3.8-flash",
+    model="gemini-3.6-flash",
     input="Tell me a story",
     stream=True,
 )
@@ -1848,7 +1537,7 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({});
 
 const stream = await client.interactions.create({
-    model: 'gemini-3.8-flash',
+    model: 'gemini-3.6-flash',
     input: 'Tell me a story',
     stream: true,
 });
@@ -1864,33 +1553,9 @@ for await (const event of stream) {
 }
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain how AI works in a few words"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
-```
-
 ### REST
 
-# Örnek SSE akışı çıkışı
+# Example SSE stream output
 **event: interaction.created
 data: {"type": "interaction.created", "interaction": {"id": "int\_xyz", "status": "created"}}
 event: interaction.in\_progress
@@ -1911,13 +1576,13 @@ event: interaction.completed
 data: {"type": "interaction.completed", "interaction": {"id": "int\_xyz", "status": "completed", "usage": {"prompt\_tokens": 10, "completion\_tokens": 5, "total\_tokens": 15}}}**
 ```
 
-### Akış araçları ve işlev çağrıları
+### כלים לסטרימינג וקריאות לפונקציות
 
-Akışta araçların davranış şekli, daha ayrıntılı kontrol ve görünürlük sağlamak için `generateContent` önemli ölçüde değişti.
+התנהגות הכלים בסטרימינג השתנתה באופן משמעותי מגרסה `generateContent` כדי לספק שליטה מפורטת יותר ושקיפות רבה יותר.
 
-#### Önce (`generateContent`)
+#### לפני (`generateContent`)
 
-`generateContent` ile akış işlevi çağrıları tek bir parça halinde tamamlanmış olarak geliyordu. Oluşturulan bağımsız değişkenleri gerçek zamanlı olarak göremediğiniz için işleyici yalnızca eksiksiz bir `functionCall` nesnesi olup olmadığını kontrol ediyordu.
+עם `generateContent`, קריאות לפונקציות סטרימינג מגיעות בשלמותן בחלק אחד. לא ניתן היה לראות את הארגומנטים שנוצרו בזמן אמת, ולכן הפונקציה לבדיקת הבקשות פשוט בדקה אם יש אובייקט `functionCall` שלם.
 
 ### Python
 
@@ -1965,30 +1630,6 @@ for await (const chunk of stream) {
 }
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain how AI works in a few words"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
-```
-
 ### REST
 
 ```
@@ -2005,9 +1646,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 {"candidates": [{"content": {"parts": [{"functionCall": {"name": "get_weather", "args": {"location": "Boston, MA"}}}]}}]}
 ```
 
-#### Sonra (Interactions API)
+#### ‫After (Interactions API)
 
-Etkileşimler API'si, işlev çağrısı bağımsız değişkenlerini `arguments` etkinlikleri olarak karakter karakter yayınlar. Aracın tüm yaşam döngüsü (düşünme, görüşme, sonuç ve çıkış) bir dizi farklı adım olarak gerçekleşir.
+ה-Interactions API מעביר את הארגומנטים של הקריאה לפונקציה כזרם של אירועים, תו אחר תו, כשהוא משתמש ב-`arguments`. מחזור החיים המלא של הכלי – מחשבה, קריאה, תוצאה ופלט – מתרחש כסדרה של שלבים נפרדים.
 
 ### Python
 
@@ -2017,7 +1658,7 @@ from google import genai
 client = genai.Client()
 
 stream = client.interactions.create(
-    model="gemini-3.8-flash",
+    model="gemini-3.6-flash",
     input="What's the weather in Boston?",
     tools=[get_weather_tool],
     stream=True,
@@ -2044,7 +1685,7 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({});
 
 const stream = await client.interactions.create({
-    model: 'gemini-3.8-flash',
+    model: 'gemini-3.6-flash',
     input: "What's the weather in Boston?",
     tools: [getWeatherTool],
     stream: true,
@@ -2067,30 +1708,6 @@ for await (const event of stream) {
 }
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-
-Client client = new Client();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(InteractionsInput.of("Explain how AI works in a few words"))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
-```
-
 ### REST
 
 ```
@@ -2099,7 +1716,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "gemini-3.8-flash",
+    "model": "gemini-3.6-flash",
     "input": "What is the weather in Boston?",
     "tools": [{"type": "function", "name": "get_weather", "parameters": {"type": "object", "properties": {"location": {"type": "string"}}}}],
     "stream": true
@@ -2176,12 +1793,12 @@ event: interaction.completed
 data: {"type": "interaction.completed", "interaction": {"id": "int_xyz", "status": "completed", "usage": {"prompt_tokens": 256, "completion_tokens": 128, "total_tokens": 384}}}
 ```
 
-Geri bildirim gönderin
+שליחת משוב
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Son güncelleme tarihi: 2026-09-04 UTC.
+עדכון אחרון: 2026-09-12 (שעון UTC).
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+רוצה לתת לנו משוב?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-04 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-12 (שעון UTC)."],[],[]]

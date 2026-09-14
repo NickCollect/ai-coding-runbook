@@ -1,45 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ko
-fetched_at: 2026-09-07T05:48:49.732562+00:00
-title: "Gemini 3.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=fr
+fetched_at: 2026-09-14T05:47:32.323391+00:00
+title: "Gemini\u00a03.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-의견 보내기
+Envoyer des commentaires
 
-# Gemini 3.1 Flash-Lite
+# Gemini 3.1 Flash-Lite
 
-Gemini 3.1 Flash-Lite는 짧은 지연 시간과 비용 효율성을 갖춘 멀티모달 모델로, 고빈도 경량 작업에 최적화되어 있습니다. 이 모델은 텍스트, 이미지, 동영상, 오디오, PDF 입력을 지원하며, 대량 에이전트형 워크플로, 간단한 데이터 추출, 지연 시간과 API 비용이 기본 제약 조건인 애플리케이션을 위해 설계되었습니다.
+Gemini 3.1 Flash-Lite est un modèle multimodal économique à faible latence, optimisé pour les tâches légères à haute fréquence. Le modèle prend en charge les entrées de type texte, image, vidéo, audio et PDF. Il est conçu pour les workflows agentiques à volume élevé, l'extraction de données simple et les applications où la latence et le coût de l'API sont les principales contraintes.
 
-[Google AI Studio에서 사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=ko)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=fr)
 
 ## gemini-3.1-flash-lite
 
-| 속성 | 설명 |
+| Propriété | Description |
 | --- | --- |
-| id\_card모델 코드 | `gemini-3.1-flash-lite` |
-| save지원되는 데이터 유형 | **입력**  텍스트, 이미지, 동영상, 오디오, PDF  **출력**  텍스트 |
-| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 토큰 한도**  1,048,576  **출력 토큰 한도**  65,536 |
-| handyman기능 | **[오디오 생성](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ko)**  지원되지 않음  **[캐싱](https://ai.google.dev/gemini-api/docs/caching?hl=ko)**  지원됨  **[코드 실행](https://ai.google.dev/gemini-api/docs/code-execution?hl=ko)**  지원됨  **[컴퓨터 사용](https://ai.google.dev/gemini-api/docs/computer-use?hl=ko)**  지원되지 않음  **[파일 검색](https://ai.google.dev/gemini-api/docs/file-search?hl=ko)**  지원됨  **[함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)**  지원됨  **[Google 지도 기반 그라운딩](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ko)**  지원됨  **[이미지 생성](https://ai.google.dev/gemini-api/docs/image-generation?hl=ko)**  지원되지 않음  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ko)**  지원되지 않음  **[검색 그라운딩](https://ai.google.dev/gemini-api/docs/google-search?hl=ko)**  지원됨  **[구조화된 출력](https://ai.google.dev/gemini-api/docs/structured-output?hl=ko)**  지원됨  **[사고](https://ai.google.dev/gemini-api/docs/thinking?hl=ko)**  지원됨  **[URL 컨텍스트](https://ai.google.dev/gemini-api/docs/url-context?hl=ko)**  지원됨 |
-| speed소비 옵션 | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ko)**  지원됨  **[유연한 추론](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ko)**  지원됨  **[우선순위 추론](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ko)**  지원됨 |
-| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - `Stable: gemini-3.1-flash-lite` |
-| calendar\_month최신 업데이트 | 2026년 5월 |
-| id\_card모델 카드 | [모델 카드](https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/?hl=ko) |
+| id\_cardCode du modèle | `gemini-3.1-flash-lite` |
+| saveTypes de données compatibles | **Entrées**  Texte, image, vidéo, audio et PDF  **Résultat**  Texte |
+| token\_auto[Limites de jetons[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  1 048 576  **Limite de jetons de sortie**  65 536 |
+| handymanFonctionnalités | **[Génération d'audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=fr)**  Not supported  **[Mise en cache](https://ai.google.dev/gemini-api/docs/caching?hl=fr)**  Compatible  **[Exécution de code](https://ai.google.dev/gemini-api/docs/code-execution?hl=fr)**  Compatible  **[Utilisation de l'ordinateur](https://ai.google.dev/gemini-api/docs/computer-use?hl=fr)**  Not supported  **[Recherche de fichiers](https://ai.google.dev/gemini-api/docs/file-search?hl=fr)**  Compatible  **[Appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr)**  Compatible  **[Ancrage avec Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fr)**  Compatible  **[Génération d'images](https://ai.google.dev/gemini-api/docs/image-generation?hl=fr)**  Not supported  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=fr)**  Not supported  **[Ancrage de recherche](https://ai.google.dev/gemini-api/docs/google-search?hl=fr)**  Compatible  **[Sorties structurées](https://ai.google.dev/gemini-api/docs/structured-output?hl=fr)**  Compatible  **[Réflexion](https://ai.google.dev/gemini-api/docs/thinking?hl=fr)**  Compatible  **[Contexte d'URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr)**  Compatible |
+| speedOptions de consommation | **[API par lot](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr)**  Compatible  **[Inférence Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=fr)**  Compatible  **[Inférence prioritaire](https://ai.google.dev/gemini-api/docs/priority-inference?hl=fr)**  Compatible |
+| 123Versions | Pour en savoir plus, consultez la section [Schémas de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - `Stable: gemini-3.1-flash-lite` |
+| calendar\_monthDernière mise à jour | Mai 2026 |
+| id\_cardFiche de modèle | [fiche de modèle](https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/?hl=fr) |
 
-## 개발자 가이드
+## Guide du développeur
 
-Gemini 3.1 Flash-Lite는 대규모의 간단한 작업을 처리하는 데 가장 적합합니다. 다음은 Gemini 3.1 Flash-Lite에 가장 적합한 사용 사례입니다.
+Gemini 3.1 Flash-Lite est idéal pour gérer des tâches simples à grande échelle. Voici quelques cas d'utilisation qui conviennent le mieux à Gemini 3.1 Flash-Lite :
 
-- **번역**: 대규모로 채팅 메시지, 리뷰, 지원 티켓을 처리하는 등 빠르고 저렴하며 대량의 번역 시스템 명령어를 사용하여 추가 해설 없이 번역된 텍스트만 출력하도록 제한할 수 있습니다.
+- **Traduction** : traduction rapide, économique et à volume élevé, par exemple pour traiter des messages de chat, des avis et des tickets d'assistance à grande échelle. Vous pouvez utiliser des instructions système pour limiter la sortie au texte traduit sans commentaire supplémentaire :
 
   ```
   from google import genai
@@ -57,7 +57,8 @@ Gemini 3.1 Flash-Lite는 대규모의 간단한 작업을 처리하는 데 가�
 
   print(response.text)
   ```
-- **스크립트 작성**: 별도의 음성 텍스트 변환 파이프라인을 실행하지 않고 텍스트 스크립트가 필요한 녹음 파일, 음성 메모 또는 오디오 콘텐츠를 처리합니다. 멀티모달 입력을 지원하므로 스크립트 작성을 위해 오디오 파일을 직접 전달할 수 있습니다.
+- **Transcription** : traitez des enregistrements, des notes vocales ou tout contenu audio
+  pour lequel vous avez besoin d'une transcription textuelle sans avoir à créer un pipeline de conversion de la parole en texte distinct. Il est compatible avec les entrées multimodales. Vous pouvez donc transmettre directement des fichiers audio pour la transcription :
 
   ```
   from google import genai
@@ -77,7 +78,9 @@ Gemini 3.1 Flash-Lite는 대규모의 간단한 작업을 처리하는 데 가�
 
   print(response.text)
   ```
-- **경량 에이전트 작업 및 데이터 추출**: 구조화된 JSON 출력을 지원하는 항목 추출, 분류, 경량 데이터 처리 파이프라인 예를 들어 이커머스 고객 리뷰에서 구조화된 데이터를 추출하는 경우:
+- **Tâches agentiques légères et extraction de données** : extraction d'entités,
+  classification et pipelines de traitement de données légers compatibles avec
+  une sortie JSON structurée. Par exemple, extraction de données structurées à partir d'un avis client sur un site d'e-commerce :
 
   ```
   from google import genai
@@ -105,7 +108,8 @@ Gemini 3.1 Flash-Lite는 대규모의 간단한 작업을 처리하는 데 가�
 
   print(response.text)
   ```
-- **문서 처리 및 요약**: PDF를 파싱하고 간결한 요약을 반환합니다. 문서 처리 파이프라인을 빌드하거나 수신 파일을 빠르게 분류하는 데 유용합니다.
+- **Traitement et résumé de documents** : analysez des PDF et renvoyez des résumés concis, par exemple pour créer un pipeline de traitement de documents ou trier rapidement
+  les fichiers entrants :
 
   ```
   from google import genai
@@ -132,7 +136,10 @@ Gemini 3.1 Flash-Lite는 대규모의 간단한 작업을 처리하는 데 가�
 
   print(response.text)
   ```
-- **모델 라우팅**: 지연 시간이 짧고 비용이 저렴한 모델을 작업 복잡성에 따라 적절한 모델로 쿼리를 라우팅하는 분류기로 사용합니다. 이는 프로덕션의 실제 패턴입니다. 오픈소스 [Gemini CLI](https://geminicli.com/docs/core/#model-fallback)는 Flash-Lite를 사용하여 작업 복잡성을 분류하고 이에 따라 Flash 또는 Pro로 라우팅합니다.
+- **Routage de modèle** : utilisez un modèle à faible latence et à faible coût comme classificateur qui
+  achemine les requêtes vers le modèle approprié en fonction de la complexité de la tâche. Il s'agit d'un
+  schéma réel en production : la CLI [Gemini Open Source](https://geminicli.com/docs/core/#model-fallback) utilise Flash-Lite pour
+  classer la complexité des tâches et les acheminer vers Flash ou Pro en conséquence.
 
   ```
   from google import genai
@@ -185,7 +192,7 @@ Gemini 3.1 Flash-Lite는 대규모의 간단한 작업을 처리하는 데 가�
 
   print(response.text)
   ```
-- **사고**: 단계별 추론의 이점을 누릴 수 있는 작업의 정확성을 높이려면 모델이 최종 출력을 생성하기 전에 내부 추론에 추가 컴퓨팅을 사용하도록 사고를 구성하세요.
+- **Raisonnement** : pour améliorer la justesse des tâches qui bénéficient d'un raisonnement étape par étape, configurez le raisonnement afin que le modèle consacre davantage de calcul au raisonnement interne avant de produire le résultat final :
 
   ```
   from google import genai
@@ -204,12 +211,12 @@ Gemini 3.1 Flash-Lite는 대규모의 간단한 작업을 처리하는 데 가�
   print(response.text)
   ```
 
-의견 보내기
+Envoyer des commentaires
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-최종 업데이트: 2026-07-21(UTC)
+Dernière mise à jour le 2026/07/21 (UTC).
 
-의견을 전달하고 싶나요?
+Voulez-vous nous donner plus d'informations ?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-21(UTC)"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/21 (UTC)."],[],[]]

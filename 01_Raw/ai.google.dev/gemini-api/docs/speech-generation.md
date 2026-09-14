@@ -1,49 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/speech-generation?hl=th
-fetched_at: 2026-09-07T05:45:17.635010+00:00
-title: "\u0e01\u0e32\u0e23\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e48\u0e32\u0e19\u0e2d\u0e2d\u0e01\u0e40\u0e2a\u0e35\u0e22\u0e07\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21 (TTS) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/speech-generation?hl=es-419
+fetched_at: 2026-09-14T05:53:40.162982+00:00
+title: "Generaci\u00f3n de texto a voz (TTS) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-ส่งความคิดเห็น
+Enviar comentarios
 
-# การสร้างการอ่านออกเสียงข้อความ (TTS)
+# Generación de texto a voz (TTS)
 
-Gemini API สามารถเปลี่ยนอินพุตข้อความเป็นเสียงแบบผู้พูดคนเดียวหรือหลายคน
-โดยใช้ความสามารถในการสร้างข้อความเป็นเสียง (TTS) ของ Gemini
-การสร้างการอ่านออกเสียงข้อความ (TTS) เป็นแบบ*[ควบคุมได้](#controllable)*
-ซึ่งหมายความว่าคุณสามารถใช้ภาษาธรรมชาติเพื่อจัดโครงสร้างการโต้ตอบและกำหนด*สไตล์* *สำเนียง* *จังหวะ* และ*โทนเสียง*ของเสียงได้
+La API de Gemini puede transformar la entrada de texto en audio de un solo orador o de varios oradores con las capacidades de generación de texto a voz (TTS) de Gemini.
+La generación de texto a voz (TTS) es *[controlable](#controllable)*, lo que significa que puedes usar el lenguaje natural para estructurar las interacciones y guiar el *estilo*, el *acento*, el *ritmo* y el *tono* del audio.
 
-ความสามารถของ TTS แตกต่างจากการสร้างคำพูดที่ให้บริการผ่าน [Live API](https://ai.google.dev/gemini-api/docs/live?hl=th) ซึ่งออกแบบมาสำหรับเสียงแบบโต้ตอบที่ไม่มีโครงสร้าง รวมถึงอินพุตและเอาต์พุตแบบหลายรูปแบบ แม้ว่า Live API จะโดดเด่น
-ในบริบทการสนทนาแบบไดนามิก แต่ TTS ผ่าน Gemini API
-ได้รับการปรับแต่งสำหรับสถานการณ์ที่ต้องมีการอ่านข้อความที่แน่นอนพร้อมการควบคุม
-สไตล์และเสียงอย่างละเอียด เช่น การสร้างพอดแคสต์หรือหนังสือเสียง
+La capacidad de TTS difiere de la generación de voz que se proporciona a través de la [API en vivo](https://ai.google.dev/gemini-api/docs/live?hl=es-419), que está diseñada para audio interactivo y no estructurado, y entradas y salidas multimodales. Si bien la API de Live se destaca en contextos conversacionales dinámicos, la API de Gemini ofrece TTS adaptado para situaciones que requieren una recitación de texto exacta con un control detallado sobre el estilo y el sonido, como la generación de podcasts o audiolibros.
 
-คู่มือนี้จะแสดงวิธีสร้างเสียงแบบผู้พูดคนเดียวและแบบผู้พูดหลายคนจากข้อความ
+En esta guía, se muestra cómo generar audio de uno o varios oradores a partir de texto.
 
-## ก่อนเริ่มต้น
+## Antes de comenzar
 
-ตรวจสอบว่าคุณใช้โมเดล Gemini 2.5 ที่มีฟีเจอร์ข้อความเป็นเสียง (TTS) ของ Gemini ตามที่ระบุไว้ในส่วน[โมเดลที่รองรับ](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th#supported-models)
-โปรดพิจารณาว่าโมเดลใดเหมาะกับกรณีการใช้งานเฉพาะของคุณมากที่สุดเพื่อให้ได้ผลลัพธ์ที่ดีที่สุด
+Asegúrate de usar una variante del modelo Gemini 2.5 con capacidades de texto a voz (TTS) de Gemini, como se indica en la sección [Modelos compatibles](https://ai.google.dev/gemini-api/docs/speech-generation?hl=es-419#supported-models). Para obtener resultados óptimos, considera qué modelo se adapta mejor a tu caso de uso específico.
 
-คุณอาจเห็นว่าการ[ทดสอบโมเดล TTS ของ Gemini ใน AI Studio](https://aistudio.google.com/generate-speech?hl=th) มีประโยชน์ก่อนที่จะเริ่มสร้าง
+Antes de comenzar a compilar, te recomendamos [probar los modelos de Gemini TTS en AI Studio](https://aistudio.google.com/generate-speech?hl=es-419).
 
-## TTS แบบผู้พูดคนเดียว
+## TTS de un solo orador
 
-หากต้องการแปลงข้อความเป็นเสียงแบบลำโพงเดียว ให้ตั้งค่ารูปแบบการตอบกลับเป็น "เสียง"
-และส่งออบเจ็กต์ `speech_config` พร้อมชื่อเสียง
-คุณจะต้องเลือกชื่อเสียงจาก[เสียงเอาต์พุต](#voices)ที่สร้างไว้ล่วงหน้า
+Para convertir texto en audio de un solo orador, configura la modalidad de respuesta como "audio" y pasa un objeto `speech_config` con un nombre de voz.
+Deberás elegir un nombre de voz de las [voces de salida](#voices) precompiladas.
 
-ตัวอย่างนี้จะบันทึกเสียงเอาต์พุตจากโมเดลในไฟล์ Wave
+En este ejemplo, se guarda el audio de salida del modelo en un archivo wave:
 
 ### Python
 
@@ -144,13 +137,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-คุณสามารถดึงข้อมูลเสียงที่สร้างขึ้นได้โดยใช้พร็อพเพอร์ตี้ `interaction.output_audio`
-ซึ่งจะแสดงผลบล็อกเสียงที่สร้างล่าสุด ดูรายละเอียดเกี่ยวกับพร็อพเพอร์ตี้ความสะดวกได้ที่[ภาพรวมของการโต้ตอบ](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th#convenience-properties)
+Puedes recuperar los datos de audio generados con la propiedad `interaction.output_audio`, que devuelve el último bloque de audio generado. Para obtener detalles sobre las propiedades de conveniencia, consulta la [descripción general de las interacciones](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419#convenience-properties).
 
-## TTS แบบหลายผู้พูด
+## TTS con varios interlocutores
 
-สำหรับเสียงแบบหลายลำโพง คุณจะต้องมีออบเจ็กต์ `multi_speaker_voice_config` ที่กำหนดค่าลำโพงแต่ละตัว (สูงสุด 2 ตัว) เป็น `speaker_voice_config`
-คุณจะต้องกําหนด `speaker` แต่ละรายการด้วยชื่อเดียวกันกับที่ใช้ใน[พรอมต์](#controllable) ดังนี้
+Para el audio con varios interlocutores, necesitarás un objeto `multi_speaker_voice_config` con cada interlocutor (hasta 2) configurado como un `speaker_voice_config`.
+Deberás definir cada `speaker` con los mismos nombres que se usan en la [instrucción](#controllable):
 
 ### Python
 
@@ -263,11 +255,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## ควบคุมสไตล์การพูดด้วยพรอมต์
+## Controla el estilo del discurso con instrucciones
 
-คุณควบคุมสไตล์ น้ำเสียง สำเนียง และจังหวะได้โดยใช้พรอมต์ภาษาธรรมชาติ
-สำหรับการอ่านออกเสียงข้อความ (TTS) แบบเสียงเดียวและหลายเสียง
-ตัวอย่างเช่น ในพรอมต์ที่มีผู้พูดคนเดียว คุณอาจพูดว่า
+Puedes controlar el estilo, el tono, el acento y el ritmo con instrucciones en lenguaje natural para la función de TTS de uno o varios oradores.
+Por ejemplo, en una instrucción de un solo orador, puedes decir lo siguiente:
 
 ```
 Say in an spooky whisper:
@@ -275,9 +266,7 @@ Say in an spooky whisper:
 Something wicked this way comes"
 ```
 
-ในพรอมต์ที่มีผู้พูดหลายคน ให้ระบุชื่อของผู้พูดแต่ละคนและ
-ข้อความถอดเสียงที่เกี่ยวข้องแก่โมเดล นอกจากนี้ คุณยังให้คำแนะนำแก่ผู้พูดแต่ละคน
-ได้ด้วย
+En una instrucción con varios oradores, proporciona al modelo el nombre de cada orador y la transcripción correspondiente. También puedes brindar orientación a cada orador de forma individual:
 
 ```
 Make Speaker1 sound tired and bored, and Speaker2 sound excited and happy:
@@ -286,12 +275,11 @@ Speaker1: So... what's on the agenda today?
 Speaker2: You're never going to guess!
 ```
 
-ลองใช้[ตัวเลือกเสียง](#voices)ที่สอดคล้องกับสไตล์หรืออารมณ์ที่คุณต้องการสื่อ เพื่อเน้นย้ำให้ชัดเจนยิ่งขึ้น เช่น ในพรอมต์ก่อนหน้า เสียงลมของ *Enceladus* อาจเน้นคำว่า "เหนื่อย" และ "เบื่อ" ในขณะที่โทนเสียงที่ร่าเริงของ *Puck* อาจเสริมคำว่า "ตื่นเต้น" และ "มีความสุข"
+Intenta usar una [opción de voz](#voices) que corresponda al estilo o la emoción que quieras transmitir para enfatizarlo aún más. En la instrucción anterior, por ejemplo, la respiración de *Enceladus* podría enfatizar "cansado" y "aburrido", mientras que el tono alegre de *Puck* podría complementar "emocionado" y "feliz".
 
-## สร้างพรอมต์เพื่อแปลงเป็นเสียง
+## Genera una instrucción para convertirla en audio
 
-โมเดล TTS จะแสดงผลเฉพาะเสียง แต่คุณสามารถใช้[โมเดลอื่นๆ](https://ai.google.dev/gemini-api/docs/models?hl=th) เพื่อสร้างข้อความถอดเสียงก่อน
-แล้วส่งข้อความถอดเสียงนั้นไปยังโมเดล TTS เพื่ออ่านออกเสียง
+Los modelos de TTS solo generan audio, pero puedes usar [otros modelos](https://ai.google.dev/gemini-api/docs/models?hl=es-419) para generar primero una transcripción y, luego, pasarla al modelo de TTS para que la lea en voz alta.
 
 ### Python
 
@@ -351,9 +339,9 @@ const ttsInteraction = await client.interactions.create({
 await main();
 ```
 
-## การสร้างคำพูดแบบสตรีมมิง
+## Generación de voz en vivo
 
-คุณสามารถสตรีมเสียงที่โมเดลสร้างขึ้นขณะที่โมเดลกำลังสร้างเสียงได้โดยการตั้งค่า `stream: true`
+Puedes transmitir el audio generado a medida que el modelo lo genera configurando `stream: true`.
 
 ### Python
 
@@ -432,146 +420,125 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions"    
   }'
 ```
 
-## ตัวเลือกเสียง
+## Opciones de voz
 
-โมเดล TTS รองรับตัวเลือกเสียง 30 แบบต่อไปนี้ในฟิลด์ `voice_name`
+Los modelos de TTS admiten las siguientes 30 opciones de voz en el campo `voice_name`:
 
 |  |  |  |
 | --- | --- | --- |
-| **Zephyr** -- *Bright* | **Puck** - *Upbeat* | **Charon** - *ให้ข้อมูล* |
-| **เกาหลี** -- *Firm* | **Fenrir** - *ตื่นเต้นง่าย* | **Leda** -- *วัยรุ่น* |
-| **Orus** -- *Firm* | **Aoede** -- *Breezy* | **Callirrhoe** -- *สบายๆ* |
-| **Autonoe** -- *Bright* | **Enceladus** -- *Breathy* | **Iapetus** -- *Clear* |
-| **Umbriel** -- *สบายๆ* | **Algieba** -- *Smooth* | **Despina** -- *Smooth* |
-| **Erinome** -- *ล้าง* | **Algenib** -- *Gravelly* | **Rasalgethi** -- *ให้ข้อมูล* |
-| **Laomedeia** -- *Upbeat* | **Achernar** -- *Soft* | **Alnilam** -- *Firm* |
-| **Schedar** -- *Even* | **Gacrux** -- *ผู้ใหญ่* | **Pulcherrima** -- *Forward* |
-| **Achird** -- *เป็นมิตร* | **Zubenelgenubi** -- *สบายๆ* | **Vindemiatrix** -- *อ่อนโยน* |
-| **Sadachbia** -- *มีชีวิตชีวา* | **Sadaltager** -- *มีความรู้* | **Sulafat** -- *Warm* |
+| **Zephyr**: *Brillante* | **Puck**: *Optimista* | **Charon**: *Informativa* |
+| **Kore**, *Firme* | **Fenrir**: *Excitabilidad* | **Leda**: *Juvenil* |
+| **Orus**: *Firme* | **Aoede**: *Breezy* | **Callirrhoe**: *Relajada* |
+| **Autonoe**: *Brillo* | **Enceladus**: *Respiración* | **Iapetus**: *Claro* |
+| **Umbriel**: *Tranquilo* | **Algieba**: *Suave* | **Despina**: *Suave* |
+| **Erinome**: *Despejado* | **Algenib**: *Gravelly* | **Rasalgethi**: *Informativa* |
+| **Laomedeia**: *Optimista* | **Achernar**: *Suave* | **Alnilam**: *Firme* |
+| **Schedar**: *Par* | **Gacrux**: *Contenido para mayores* | **Pulcherrima** -- *Reenviar* |
+| **Achird**: *Amistoso* | **Zubenelgenubi**: *Casual* | **Vindemiatrix**: *Suave* |
+| **Sadachbia**: *Animada* | **Sadaltager**: *Conocimiento* | **Sulafat**: *Cálida* |
 
-คุณสามารถฟังตัวเลือกเสียงทั้งหมดได้ใน [AI Studio](https://aistudio.google.com/generate-speech?hl=th)
+Puedes escuchar todas las opciones de voz en [AI Studio](https://aistudio.google.com/generate-speech?hl=es-419).
 
-## ภาษาที่รองรับ
+## Idiomas admitidos
 
-โมเดล TTS จะตรวจหาภาษาที่ป้อนโดยอัตโนมัติ ภาษาที่รองรับมีดังนี้
+Los modelos de TTS detectan automáticamente el idioma de entrada. Se admiten los siguientes idiomas:
 
-| ภาษา | รหัส BCP-47 | ภาษา | รหัส BCP-47 |
+| Idioma | Código BCP-47 | Idioma | Código BCP-47 |
 | --- | --- | --- | --- |
-| อาหรับ | ar | ฟิลิปปินส์ | fil |
-| เบงกอล | bn | ฟินแลนด์ | fi |
-| ดัตช์ | nl | กาลิเชียน | gl |
-| อังกฤษ | en | จอร์เจีย | ka |
-| ฝรั่งเศส | fr | กรีก | el |
-| เยอรมัน | de | คุชราต | gu |
-| ฮินดี | hi | เฮติครีโอล | ht |
-| อินโดนีเซีย | id | ฮีบรู | เขา |
-| อิตาลี | it | ฮังการี | hu |
-| ญี่ปุ่น | ja | ไอซ์แลนด์ | is |
-| เกาหลี | ko | ชวา | jv |
-| มราฐี | mr | กันนาดา | kn |
-| โปแลนด์ | pl | กงกณี | kok |
-| โปรตุเกส | pt | ภาษาลาว | lo |
-| โรมาเนีย | ro | ลาติน | la |
-| รัสเซีย | ru | ลัตเวีย | lv |
-| สเปน | es | ลิทัวเนีย | lt |
-| ทมิฬ | ta | ลักเซมเบิร์ก | ปอนด์ |
-| เตลูกู | te | มาซีโดเนีย | mk |
-| ไทย | th | ไมถิลี | mai |
-| ตุรกี | tr | มาลากาซี | มก. |
-| ยูเครน | uk | มาเลย์ | มิลลิวินาที |
-| เวียดนาม | vi | มาลายาลัม | ml |
-| อาฟรีกานส์ | af | มองโกเลีย | mn |
-| แอลเบเนีย | sq | เนปาล | ne |
-| อัมฮาริก | am | นอร์เวย์ (บ็อกมอล) | nb |
-| อาร์เมเนีย | hy | นอร์เวย์ (นีนอสก์) | nn |
-| อาร์เซอร์ไบจัน | az | โอเดีย | หรือ |
-| บาสก์ | eu | พาชตู | ps |
-| เบลารุส | be | เปอร์เซีย | fa |
-| บัลแกเรีย | bg | ปัญจาบ | pa |
-| พม่า | my | เซอร์เบีย | sr |
-| คาตาลัน | ca | สินธี | SD |
-| ซีบัวโน | ceb | สิงหล | si |
-| จีนกลาง | cmn | สโลวัก | sk |
-| โครเอเชีย | ชม. | สโลวีเนีย | sl |
-| เช็ก | cs | สวาฮิลี | sw |
-| เดนมาร์ก | da | สวีเดน | sv |
-| เอสโตเนีย | et | อูรดู | ur |
+| Árabe | ar | Filipino | fil |
+| Bengalí | bn | Finlandés | fi |
+| Neerlandés | nl | Gallego | gl |
+| Inglés | en | Georgiano | ka |
+| Francés | fr | Griego | el |
+| Alemán | de | Gujarati | gu |
+| Hindi | hi | Criollo haitiano | ht |
+| Indonesio | id | Hebreo | él |
+| Italiano | it | Húngaro | hu |
+| Japonés | ja | Islandés | es |
+| Coreano | ko | Javanés | jv |
+| Marathi | mr | Canarés | kn |
+| Polaco | pl | Konkani | kok |
+| Portugués | pt | Laosiano | lo |
+| Rumano | ro | Latín | la |
+| Ruso | ru | Letón | lv |
+| Español | es | Lituano | lt |
+| Tamil | ta | Luxemburgués | lb |
+| Telugu | te | Macedonio | mk |
+| Tailandés | th | Maithili | mai |
+| Turco | tr | Malgache | mg |
+| Ucraniano | uk | Malayo | ms |
+| Vietnamita | vi | Malayalam | ml |
+| Afrikaans | af | Mongol | mn |
+| Albanés | sq | Nepalí | ne |
+| Amárico | am | Noruego (Bokmål) | nb |
+| Armenio | hy | Noruego (Nynorsk) | nn |
+| Azerí | az | Oriya | o |
+| Vasco | eu | Pashto | ps |
+| Bielorruso | be | Persa | fa |
+| Búlgaro | bg | Punyabí | pa |
+| Birmano | my | Serbio | sr |
+| Catalán | ca | Sindhi | sd |
+| Cebuano | ceb | Cingalés | si |
+| Chino (mandarín) | cmn | Eslovaco | sk |
+| Croata | h | Esloveno | sl |
+| Checo | cs | Suajili | sw |
+| Danés | da | Sueco | sv |
+| Estonio | et | Urdu | ur |
 
-## รุ่นที่รองรับ
+## Modelos compatibles
 
-| รุ่น | ผู้พูดคนเดียว | Multispeaker |
+| Modelo | Orador único | Varios oradores |
 | --- | --- | --- |
-| [ตัวอย่าง TTS ของ Gemini 3.1 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=th) | ✔️ | ✔️ |
-| [TTS ของ Gemini 2.5 Flash (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=th) | ✔️ | ✔️ |
-| [TTS เวอร์ชันตัวอย่างของ Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=th) | ✔️ | ✔️ |
+| [Versión preliminar del TTS de Gemini 3.1 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=es-419) | ✔️ | ✔️ |
+| [TTS de Gemini 2.5 Flash Preview](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=es-419) | ✔️ | ✔️ |
+| [TTS de Gemini 2.5 Pro en versión preliminar](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=es-419) | ✔️ | ✔️ |
 
-## คำแนะนำในการเขียนพรอมต์
+## Guía de instrucciones
 
-โมเดล**การสร้างเสียงแบบเนทีฟของ Gemini Native Audio Generation Text-to-Speech (TTS)** แตกต่างจากโมเดล TTS ทั่วไปโดยใช้โมเดลภาษาขนาดใหญ่ที่***ไม่เพียงรู้ว่าจะพูดอะไร แต่ยังรู้วิธีพูดด้วย***
+El modelo de **generación de audio nativo de Gemini con texto a voz (TTS)** se diferencia de los modelos de TTS convencionales porque usa un modelo de lenguaje grande que sabe ***no solo qué decir, sino también cómo decirlo***.
 
-คุณอาจมองว่าพรอมต์ขั้นสูงเป็นคำสั่งของระบบที่โมเดลต้อง
-ทำตาม ซึ่งเป็นวิธีให้บริบทแก่โมเดลมากขึ้นและควบคุมประสิทธิภาพได้
+Puedes considerar una instrucción avanzada como una instrucción del sistema que el modelo debe seguir. Es una forma de brindarle más contexto al modelo y controlar su rendimiento.
 
-หากต้องการปลดล็อกความสามารถนี้ ผู้ใช้สามารถคิดว่าตนเองเป็นผู้กำกับที่กำลังจัดฉาก
-ให้ผู้พากย์เสมือนจริงแสดง เราขอแนะนำให้คุณพิจารณาส่วนประกอบต่อไปนี้ในการสร้างพรอมต์
-**โปรไฟล์เสียง**ที่กำหนดตัวตนหลักและต้นแบบของตัวละคร
-**คำอธิบายฉาก**ที่สร้างสภาพแวดล้อมทางกายภาพและ"กลิ่นอาย" ทางอารมณ์ และ**หมายเหตุของผู้กำกับ**ที่ให้คำแนะนำด้านการแสดงที่แม่นยำยิ่งขึ้นเกี่ยวกับสไตล์ สำเนียง และการควบคุมจังหวะ
+Para desbloquear esta capacidad, los usuarios pueden imaginarse como directores que preparan una escena para que la interprete un talento de voz virtual. Para crear una instrucción, te recomendamos que tengas en cuenta los siguientes componentes: un **perfil de audio** que defina la identidad y el arquetipo principales del personaje, una **descripción de la escena** que establezca el entorno físico y el "ambiente" emocional, y **notas del director** que ofrezcan una guía de interpretación más precisa en cuanto al estilo, el acento y el control del ritmo.
 
-การให้คำสั่งที่ละเอียด เช่น สำเนียงเฉพาะภูมิภาค ลักษณะทางภาษาที่เฉพาะเจาะจง (เช่น เสียงลม) หรือจังหวะ จะช่วยให้ผู้ใช้ใช้ประโยชน์จากการรับรู้บริบทของโมเดลเพื่อสร้างเสียงที่มีความเคลื่อนไหว เป็นธรรมชาติ และสื่ออารมณ์สูง เราขอแนะนำให้**ข้อความถอดเสียง**และพรอมต์ของผู้กำกับสอดคล้องกันเพื่อให้  *"ใครเป็นคนพูด"* ตรงกับ *"สิ่งที่พูด"* และ *"วิธีการพูด"* เพื่อให้ได้ประสิทธิภาพสูงสุด
+Al proporcionar instrucciones detalladas, como un acento regional preciso, características paralingüísticas específicas (p.ej., respiración) o ritmo, los usuarios pueden aprovechar la capacidad del modelo para comprender el contexto y generar interpretaciones de audio altamente dinámicas, naturales y expresivas. Para obtener un rendimiento óptimo, recomendamos que las instrucciones de **Transcripción** y las indicaciones del director se alineen, *de modo que "quién lo dice"* coincida con *"lo que se dice"* y *"cómo se dice".*
 
-จุดประสงค์ของคู่มือนี้คือการให้คำแนะนำพื้นฐานและจุดประกายไอเดียเมื่อ
-พัฒนาประสบการณ์ด้านเสียงโดยใช้การสร้างเสียง TTS ของ Gemini เราตื่นเต้น
-ที่จะได้เห็นผลงานของคุณ
+El objetivo de esta guía es ofrecer orientación fundamental y generar ideas cuando desarrolles experiencias de audio con la generación de audio de Gemini TTS. ¡Estamos ansiosos por ver tus creaciones!
 
-### แท็กเสียง
+### Etiquetas de audio
 
-แท็กคือตัวแก้ไขในบรรทัด เช่น `[whispers]` หรือ `[laughs]` ที่ช่วยให้คุณควบคุมการนำส่งได้อย่างละเอียด
-คุณสามารถใช้เครื่องหมายเหล่านี้เพื่อเปลี่ยนน้ำเสียง จังหวะ และ
-อารมณ์ของบรรทัดหรือส่วนของข้อความถอดเสียงได้ คุณยังใช้สติกเกอร์เหล่านี้เพื่อ
-เพิ่มคำอุทานและเสียงอื่นๆ ที่ไม่ใช่คำพูดลงในการแสดงได้ด้วย เช่น
-`[cough]`, `[sighs]` หรือ `[gasp]`
+Las etiquetas son modificadores intercalados, como `[whispers]` o `[laughs]`, que te brindan un control detallado sobre la publicación. Puedes usarlos para cambiar el tono, el ritmo y el ambiente emocional de una línea o sección de la transcripción. También puedes usarlos para agregar interjecciones y algunos otros sonidos no verbales a la interpretación, como `[cough]`, `[sighs]` o `[gasp]`.
 
-ไม่มีรายการที่ครอบคลุมว่าแท็กใดใช้ได้และใช้ไม่ได้ เราขอแนะนําให้
-ทดลองใช้อารมณ์และคำพูดต่างๆ เพื่อดูว่าเอาต์พุต
-เปลี่ยนแปลงไปอย่างไร
+No hay una lista exhaustiva de las etiquetas que funcionan y las que no. Te recomendamos que experimentes con diferentes emociones y expresiones para ver cómo cambia el resultado.
 
-หากข้อความถอดเสียงไม่ได้เป็นภาษาอังกฤษ เราขอแนะนำให้คุณ
-ยังคงใช้แท็กเสียงภาษาอังกฤษเพื่อให้ได้ผลลัพธ์ที่ดีที่สุด
+Si tu transcripción no está en inglés, para obtener mejores resultados, te recomendamos que uses etiquetas de audio en inglés.
 
-**ใช้แท็กเสียงอย่างสร้างสรรค์**
+**Sé creativo con las etiquetas de audio**
 
-เพื่อแสดงให้เห็นถึงความหลากหลายที่คุณจะได้รับจากแท็กเสียง ต่อไปนี้คือชุด
-ตัวอย่างที่แต่ละตัวอย่างพูดถึงสิ่งเดียวกัน แต่การนำส่งจะเปลี่ยนแปลงไปตาม
-แท็กที่ใช้
+Para mostrar la variabilidad que puedes obtener con las etiquetas de audio, aquí tienes un conjunto de ejemplos que dicen lo mismo, pero la entrega cambia según las etiquetas que se usan.
 
-คุณเปลี่ยนการเน้นการนำส่งได้โดยเพิ่มแท็กที่จุดเริ่มต้นของ
-บรรทัดเพื่อให้ผู้พูดตื่นเต้น เบื่อ หรือไม่เต็มใจ
+Puedes cambiar el énfasis de la entrega agregando etiquetas al comienzo de una línea para que el orador se muestre emocionado, aburrido o reacio:
 
-- `[excitedly]` สวัสดี ฉันเป็นโมเดลแปลงข้อความเป็นคำพูดตัวใหม่ และพูดได้หลายแบบ
-  วันนี้มีอะไรให้ช่วยบ้าง
-- `[bored]` สวัสดี ฉันเป็นโมเดลข้อความเป็นเสียงพูดใหม่…
-- `[reluctantly]` สวัสดี ฉันเป็นโมเดลข้อความเป็นเสียงพูดใหม่…
+- `[excitedly]` Hola, soy un nuevo modelo de texto a voz y puedo decir cosas de muchas maneras diferentes. ¿En qué puedo ayudarte?
+- `[bored]` Hola, soy un nuevo modelo de texto a voz…
+- `[reluctantly]` Hola, soy un nuevo modelo de texto a voz…
 
-นอกจากนี้ คุณยังใช้แท็กเพื่อเปลี่ยนจังหวะการอ่านหรือรวมจังหวะ
-กับการเน้นได้ด้วย
+Las etiquetas también se pueden usar para cambiar el ritmo de la entrega o para combinar el ritmo con el énfasis:
 
-- `[very fast]` สวัสดี ฉันเป็นโมเดลข้อความเป็นเสียงพูดใหม่…
-- `[very slow]` สวัสดี ฉันเป็นโมเดลข้อความเป็นเสียงพูดใหม่…
-- `[sarcastically, one painfully slow word at a time]` สวัสดี ฉันเป็นโมเดลใหม่สำหรับ
-  การแปลงข้อความเป็นคำพูด…
+- `[very fast]` Hola, soy un nuevo modelo de texto a voz…
+- `[very slow]` Hola, soy un nuevo modelo de texto a voz…
+- `[sarcastically, one painfully slow word at a time]` Hola, soy un nuevo modelo de texto a voz…
 
-นอกจากนี้ คุณยังควบคุมส่วนต่างๆ ได้อย่างแม่นยำ ซึ่งหมายความว่าคุณสามารถกระซิบ
-ส่วนหนึ่งและตะโกนอีกส่วนหนึ่งได้
+También tienes un control preciso sobre secciones específicas, lo que significa que puedes susurrar una parte y gritar otra.
 
-- `[whispers]` สวัสดี ฉันเป็นโมเดลข้อความเป็นเสียงรุ่นใหม่ `[shouting]` และพูดได้หลายแบบ
-  `[whispers]` วันนี้คุณต้องการความช่วยเหลือเรื่องใด
+- `[whispers]` Hola, soy un nuevo modelo de texto a voz `[shouting]` y puedo decir cosas de muchas maneras diferentes. `[whispers]` ¿En qué puedo ayudarte?
 
-นอกจากนี้ คุณยังทดลองใช้ไอเดียครีเอทีฟโฆษณาที่ต้องการได้ด้วย
+También puedes experimentar con cualquier idea creativa que desees:
 
-- `[like a cartoon dog]` สวัสดี ฉันเป็นโมเดลข้อความเป็นเสียงพูดใหม่…
-- `[like dracula]` สวัสดี ฉันเป็นโมเดลข้อความเป็นเสียงพูดใหม่…
+- `[like a cartoon dog]` Hola, soy un nuevo modelo de texto a voz…
+- `[like dracula]` Hola, soy un nuevo modelo de texto a voz…
 
-แท็กที่ใช้กันโดยทั่วไป ได้แก่
+Las etiquetas de uso frecuente incluyen las siguientes:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
@@ -580,24 +547,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions"    
 | `[mischievously]` | `[panicked]` | `[sarcastic]` | `[serious]` |
 | `[shouting]` | `[tired]` | `[trembling]` | `[whispers]` |
 
-แท็กช่วยให้ควบคุมการส่งข้อความถอดเสียงได้อย่างรวดเร็ว หากต้องการควบคุมมากยิ่งขึ้น คุณสามารถใช้ร่วมกับพรอมต์บริบทเพื่อกำหนดโทนและบรรยากาศโดยรวมของประสิทธิภาพได้
+Las etiquetas te permiten controlar rápidamente la entrega de tu transcripción. Para tener aún más control, puedes combinarlas con una instrucción de contexto para establecer el tono y el ambiente generales de la interpretación.
 
-### โครงสร้างพรอมต์
+### Estructura de las instrucciones
 
-พรอมต์ที่มีประสิทธิภาพควรมีองค์ประกอบต่อไปนี้ซึ่งทำงานร่วมกันเพื่อ
-สร้างประสิทธิภาพที่ยอดเยี่ยม
+Una instrucción sólida idealmente incluye los siguientes elementos que se combinan para crear un gran rendimiento:
 
-- **โปรไฟล์เสียง** - สร้างลักษณะตัวตนของเสียง โดยกำหนดเอกลักษณ์ของตัวละคร ต้นแบบ และลักษณะอื่นๆ เช่น อายุ ภูมิหลัง ฯลฯ
-- **ฉาก** - เตรียมความพร้อม อธิบายทั้งสภาพแวดล้อมทางกายภาพและ"บรรยากาศ"
-- **หมายเหตุจากผู้กำกับ** - คำแนะนำด้านประสิทธิภาพที่คุณสามารถแจกแจงคำสั่งที่สำคัญสำหรับพรสวรรค์เสมือนให้จดบันทึกได้ ตัวอย่างเช่น
-  สไตล์การพูด การหายใจ การเว้นจังหวะ การออกเสียง และสำเนียง
-- **บริบทตัวอย่าง** - ให้จุดเริ่มต้นตามบริบทแก่โมเดล เพื่อให้
-  นักแสดงเสมือนเข้าสู่ฉากที่คุณตั้งค่าไว้อย่างเป็นธรรมชาติ
-- **ข้อความ** - ข้อความที่โมเดลจะพูด โปรดทราบว่าหัวข้อของข้อความถอดเสียงและรูปแบบการเขียนควรสอดคล้องกับ
-  คำสั่งที่คุณให้เพื่อประสิทธิภาพที่ดีที่สุด
-- **แท็กเสียง** - ตัวแก้ไขที่คุณใส่ลงในข้อความถอดเสียงเพื่อเปลี่ยนวิธีแสดงข้อความบางส่วน เช่น `[whispers]` หรือ `[shouting]`
+- **Perfil de audio**: Establece un arquetipo para la voz, define una identidad de personaje, un arquetipo y cualquier otra característica, como la edad, el origen, etcétera.
+- **Escena**: Establece el contexto. Describe tanto el entorno físico como el "ambiente".
+- **Notas del director**: Orientación sobre el rendimiento en la que puedes desglosar qué instrucciones son importantes para que tu talento virtual las tenga en cuenta. Algunos ejemplos son el estilo, la respiración, el ritmo, la articulación y el acento.
+- **Contexto de ejemplo**: Le proporciona al modelo un punto de partida contextual, de modo que tu actor virtual ingrese a la escena que configuraste de forma natural.
+- **Transcripción**: Es el texto que pronunciará el modelo. Para obtener el mejor rendimiento, recuerda que el tema y el estilo de escritura de la transcripción deben correlacionarse con las instrucciones que das.
+- **Etiquetas de audio**: Son modificadores que puedes agregar a una transcripción para cambiar la forma en que se entrega esa parte del texto, como `[whispers]` o `[shouting]`.
 
-ตัวอย่างพรอมต์แบบเต็ม
+Ejemplo de instrucción completa:
 
 ```
 # AUDIO PROFILE: Jaz R.
@@ -635,20 +598,18 @@ there pretending to work... stop it. Seriously, I see you. Turn this up!
 We've got the project roadmap landing in three, two... let's go!
 ```
 
-### กลยุทธ์การแจ้งโดยละเอียด
+### Estrategias de instrucciones detalladas
 
-แยกย่อยแต่ละองค์ประกอบของพรอมต์ดังนี้
+Desglosa cada elemento de la instrucción de la siguiente manera:
 
-#### โปรไฟล์เสียง
+#### Perfil de audio
 
-อธิบายตัวตนของตัวละครโดยย่อ
+Describe brevemente el arquetipo del personaje.
 
-- **ชื่อ** การตั้งชื่อตัวละครจะช่วยให้โมเดลและ
-  การแสดงเชื่อมโยงกันอย่างใกล้ชิด โปรดอ้างอิงถึงตัวละครด้วยชื่อเมื่อตั้งค่าฉากและ
-  บริบท
-- **บทบาท** ตัวตนหลักและต้นแบบของตัวละครที่กำลังแสดงในฉาก เช่น ดีเจวิทยุ ผู้จัดพอดแคสต์ ผู้สื่อข่าว เป็นต้น
+- **Nombre.** Ponerle un nombre a tu personaje ayuda a fundamentar el modelo y a unir la interpretación. Refiérete al personaje por su nombre cuando definas la escena y el contexto.
+- **Rol:** Identidad y arquetipo principales del personaje que se interpreta en la escena, p. ej., DJ de radio, podcaster, reportero de noticias, etc.
 
-ตัวอย่าง
+Ejemplos:
 
 ```
 # AUDIO PROFILE: Jaz R.
@@ -660,15 +621,11 @@ We've got the project roadmap landing in three, two... let's go!
 ## "The Beauty Influencer"
 ```
 
-#### บรรยากาศ
+#### Scene
 
-กำหนดบริบทของฉาก รวมถึงสถานที่ อารมณ์ และรายละเอียดด้านสิ่งแวดล้อม
-ที่สร้างโทนและบรรยากาศ อธิบายสิ่งที่เกิดขึ้นรอบตัว
-ตัวละครและผลกระทบที่มีต่อตัวละคร ฉากจะให้บริบทด้านสภาพแวดล้อม
-สำหรับการโต้ตอบทั้งหมดและเป็นแนวทางในการแสดง
-อย่างเป็นธรรมชาติ
+Establece el contexto de la escena, incluida la ubicación, el ambiente y los detalles ambientales que establecen el tono y la atmósfera. Describe lo que sucede alrededor del personaje y cómo lo afecta. La escena proporciona el contexto ambiental para toda la interacción y guía la actuación de una manera sutil y orgánica.
 
-ตัวอย่าง
+Ejemplos:
 
 ```
 ## THE SCENE: The London Studio
@@ -687,18 +644,15 @@ deadened by plush velvet curtains and a heavy rug, but there is a
 distinct "proximity effect."
 ```
 
-#### หมายเหตุของผู้กำกับ
+#### Notas de los directores
 
-ส่วนสำคัญนี้มีคำแนะนำด้านประสิทธิภาพที่เฉพาะเจาะจง คุณข้ามองค์ประกอบอื่นๆ ทั้งหมดได้ แต่เราขอแนะนำให้รวมองค์ประกอบนี้ไว้
+Esta sección fundamental incluye orientación específica sobre el rendimiento. Puedes omitir todos los demás elementos, pero te recomendamos que incluyas este.
 
-กำหนดเฉพาะสิ่งที่สำคัญต่อประสิทธิภาพ โดยระมัดระวังไม่ให้
-ระบุมากเกินไป กฎที่เข้มงวดมากเกินไปจะจำกัดความคิดสร้างสรรค์ของโมเดลและอาจ
-ส่งผลให้ประสิทธิภาพแย่ลง ปรับสมดุลบทบาทและคำอธิบายฉากกับ
-กฎการแสดงเฉพาะ
+Define solo lo que es importante para el rendimiento y ten cuidado de no especificar demasiado. Demasiadas reglas estrictas limitarán la creatividad de los modelos y pueden generar un rendimiento peor. Equilibra la descripción del rol y la escena con las reglas de interpretación específicas.
 
-คำแนะนำที่พบบ่อยที่สุดคือ**สไตล์ จังหวะ และสำเนียง** แต่โมเดลไม่ได้จำกัดอยู่เพียงคำแนะนำเหล่านี้ และไม่จำเป็นต้องใช้คำแนะนำเหล่านี้ คุณสามารถใส่คำสั่งที่กำหนดเองเพื่อระบุรายละเอียดเพิ่มเติมที่สำคัญต่อประสิทธิภาพ และระบุรายละเอียดมากหรือน้อยเท่าที่จำเป็น
+Las instrucciones más comunes son **Estilo, ritmo y acento**, pero el modelo no se limita a ellas ni las requiere. No dudes en incluir instrucciones personalizadas para abarcar cualquier detalle adicional importante para tu rendimiento y proporciona tantos o tan pocos detalles como sea necesario.
 
-เช่น
+Por ejemplo:
 
 ```
 ### DIRECTOR'S NOTES
@@ -711,17 +665,13 @@ delivery influencers use in short form videos.
 Accent: Southern california valley girl from Laguna Beach |
 ```
 
-**รูปแบบ:**
+**Estilo:**
 
-กำหนดโทนและสไตล์ของเสียงพูดที่สร้างขึ้น ระบุอารมณ์ เช่น สดใส
-กระตือรือร้น ผ่อนคลาย เบื่อ ฯลฯ เพื่อเป็นแนวทางในการแสดง อธิบายให้ชัดเจนและ
-ให้รายละเอียดมากที่สุดเท่าที่จำเป็น: *"ความกระตือรือร้นที่แพร่หลาย ผู้ฟัง
-ควรรู้สึกเหมือนเป็นส่วนหนึ่งของกิจกรรมชุมชนที่ยิ่งใหญ่และน่าตื่นเต้น"* ได้ผลดีกว่าการพูดว่า *"กระตือรือร้นและกระปรี้กระเปร่า"*
+Establece el tono y el estilo del discurso generado. Incluye elementos como alegre, enérgico, relajado, aburrido, etcétera, para guiar la interpretación. Sé descriptivo y proporciona todos los detalles necesarios: *"Entusiasmo contagioso. El oyente debe sentir que forma parte de un evento comunitario masivo y emocionante".* funciona mejor que decir *"enérgico y entusiasta".*
 
-คุณอาจลองใช้คำที่ได้รับความนิยมในอุตสาหกรรมเสียงบรรยาย เช่น "เสียง
-ยิ้ม" คุณซ้อนลักษณะสไตล์ได้มากเท่าที่ต้องการ
+Incluso puedes probar con términos populares en la industria de la voz en off, como "sonrisa vocal". Puedes superponer tantas características de estilo como desees.
 
-ตัวอย่าง
+Ejemplos:
 
 Simple Emotion
 
@@ -732,7 +682,7 @@ Style: Frustrated and angry developer who can't get the build to run.
 ...
 ```
 
-ความลึกมากขึ้น
+Más profundidad
 
 ```
 DIRECTORS NOTES
@@ -741,7 +691,7 @@ Style: Sassy GenZ beauty YouTuber, who mostly creates content for YouTube Shorts
 ...
 ```
 
-ซับซ้อน
+Complejo
 
 ```
 DIRECTORS NOTES
@@ -752,12 +702,11 @@ always raised to keep the tone bright, sunny, and explicitly inviting.
 elongated vowels on excitement words (e.g., "Beauuutiful morning").
 ```
 
-**เครื่องหมายแสดงการเน้นเสียง:**
+**Acento:**
 
-อธิบายสำเนียงที่เลือก ยิ่งเจาะจงมากเท่าไหร่ ผลลัพธ์ก็จะยิ่งดีขึ้นเท่านั้น เช่น ใช้ "*สำเนียงภาษาอังกฤษแบบอังกฤษที่ได้ยินในครอยดอน
-ประเทศอังกฤษ*" แทน "*สำเนียงอังกฤษ*"
+Describe el acento seleccionado. Cuanto más específica sea tu solicitud, mejores serán los resultados. Por ejemplo, usa "*Acento británico como el que se escucha en Croydon, Inglaterra*" en lugar de "*Acento británico*".
 
-ตัวอย่าง
+Ejemplos:
 
 ```
 ### DIRECTORS NOTES
@@ -773,13 +722,13 @@ Accent: Jaz is a from Brixton, London
 ...
 ```
 
-**การกำหนดอัตราการแสดงโฆษณา:**
+**Ritmo:**
 
-การกำหนดจังหวะโดยรวมและความหลากหลายของจังหวะตลอดทั้งเพลง
+El ritmo general y la variación del ritmo a lo largo de la pieza.
 
-ตัวอย่าง
+Ejemplos:
 
-เรียบง่าย
+Simple
 
 ```
 ### DIRECTORS NOTES
@@ -788,7 +737,7 @@ Pacing: Speak as fast as possible
 ...
 ```
 
-ความลึกเพิ่มเติม
+Más profundidad
 
 ```
 ### DIRECTORS NOTES
@@ -797,7 +746,7 @@ Pacing: Speaks at a faster, energetic pace, keeping up with fast paced music.
 ...
 ```
 
-ซับซ้อน
+Complejo
 
 ```
 ### DIRECTORS NOTES
@@ -806,53 +755,39 @@ Pacing: The "Drift": The tempo is incredibly slow and liquid. Words bleed into e
 ...
 ```
 
-**ลองใช้เลย**
+**Pruébelo**
 
-ลองใช้ตัวอย่างเหล่านี้ด้วยตัวคุณเองใน[แอป TTS](http://aistudio.google.com/app/apps/bundled/synergy_intro?hl=th) แล้วให้ Gemini
-เป็นผู้กำกับ โปรดคำนึงถึงเคล็ดลับต่อไปนี้เพื่อสร้างการแสดงเสียงร้องที่ยอดเยี่ยม
+Prueba algunos de estos ejemplos en la [app de TTS](http://aistudio.google.com/app/apps/bundled/synergy_intro?hl=es-419) y deja que Gemini te ponga en la silla del director. Ten en cuenta estas sugerencias para lograr interpretaciones vocales excelentes:
 
-- อย่าลืมทำให้พรอมต์ทั้งหมดสอดคล้องกัน โดยสคริปต์และคำสั่งจะทำงานร่วมกันในการสร้างการแสดงที่ยอดเยี่ยม
-- คุณไม่จำเป็นต้องอธิบายทุกอย่าง บางครั้งการเว้นช่องว่างให้โมเดลเติมเต็มจะช่วยให้เป็นธรรมชาติมากขึ้น (เหมือนนักแสดงมากความสามารถ)
-- หากคุณรู้สึกตัน ให้ Gemini ช่วยคุณร่างสคริปต์หรือการแสดง
+- Recuerda que toda la instrucción debe ser coherente: el guion y la dirección van de la mano para crear una gran actuación.
+- No sientas que debes describir todo. A veces, darle espacio al modelo para que complete los vacíos ayuda a que el texto sea más natural. (Al igual que un actor talentoso)
+- Si alguna vez te sientes bloqueado, pídele ayuda a Gemini para crear tu guion o presentación.
 
-## ข้อจำกัด
+## Limitaciones
 
-- โมเดล TTS รับได้เฉพาะข้อความที่ป้อนและสร้างเอาต์พุตเสียงเท่านั้น
-- เซสชัน TTS มีขีดจำกัด[หน้าต่างบริบท](https://ai.google.dev/gemini-api/docs/long-context?hl=th)ที่ 32,000 โทเค็น
-- ดูส่วน[ภาษา](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th#languages)เพื่อดูการรองรับภาษา
-- TTS ไม่รองรับการสตรีม ยกเว้นเมื่อใช้ `gemini-3.1-flash-tts-preview`
+- Los modelos de TTS solo pueden recibir entradas de texto y generar salidas de audio.
+- Una sesión de TTS tiene un límite de [ventana de contexto](https://ai.google.dev/gemini-api/docs/long-context?hl=es-419) de 32,000 tokens.
+- Revisa la sección [Idiomas](https://ai.google.dev/gemini-api/docs/speech-generation?hl=es-419#languages) para conocer los idiomas admitidos.
+- La TTS no admite la transmisión, excepto cuando se usa `gemini-3.1-flash-tts-preview`.
 
-ข้อจำกัดต่อไปนี้จะมีผลเฉพาะเมื่อใช้โมเดลตัวอย่าง TTS ของ Gemini 3.1 Flash
-สำหรับการสร้างคำพูด
+Las siguientes restricciones se aplican específicamente cuando se usa el modelo de TTS de Gemini 3.1 Flash en versión preliminar para la generación de voz:
 
-- **เสียงไม่สอดคล้องกับวิธีการในพรอมต์:** เอาต์พุตของโมเดลอาจไม่ตรงกับ
-  ลำโพงที่เลือกเสมอไป ซึ่งทำให้เสียงที่ได้แตกต่างจากที่คาดไว้
-  หากต้องการหลีกเลี่ยงการใช้เสียงที่ไม่ตรงกัน (เช่น เสียงผู้ชายทุ้ม
-  พยายามพูดเหมือนเด็กผู้หญิง) ให้ตรวจสอบว่าโทนและบริบทที่เขียนในพรอมต์สอดคล้องกับโปรไฟล์ของลำโพงที่เลือกอย่างเป็นธรรมชาติ
-- **คุณภาพของเอาต์พุตที่ยาวขึ้น:** คุณภาพและความสอดคล้องของคำพูดอาจเริ่ม
-  เปลี่ยนแปลงไปเมื่อเอาต์พุตที่สร้างขึ้นยาวกว่า 2-3 นาที เราขอแนะนำให้แบ่งข้อความถอดเสียงออกเป็นส่วนเล็กๆ
-- **การแสดงผลโทเค็นข้อความเป็นครั้งคราว:** โมเดลจะแสดงผลโทเค็นข้อความ
-  แทนโทเค็นเสียงเป็นครั้งคราว ซึ่งทำให้เซิร์ฟเวอร์ไม่สามารถดำเนินการตามคำขอ
-  และแสดงข้อผิดพลาด `500` เนื่องจากปัญหานี้เกิดขึ้นแบบสุ่มในคำขอเพียงไม่กี่เปอร์เซ็นต์ คุณจึงควรใช้ตรรกะการลองใหม่โดยอัตโนมัติในแอปพลิเคชันเพื่อจัดการกับปัญหาเหล่านี้
-- **การปฏิเสธที่ผิดพลาดของเครื่องมือคัดแยกพรอมต์:** พรอมต์ที่คลุมเครืออาจไม่ทริกเกอร์
-  เครื่องมือคัดแยกการสังเคราะห์เสียงพูด ทำให้คำขอถูกปฏิเสธ
-  (`PROHIBITED_CONTENT`) หรือทำให้โมเดลอ่านคำสั่งสไตล์และหมายเหตุของผู้กำกับ
-  ออกมา ตรวจสอบความถูกต้องของพรอมต์โดยเพิ่มคำนำที่ชัดเจน
-  ซึ่งสั่งให้โมเดลสังเคราะห์เสียงพูด และติดป้ายกำกับอย่างชัดเจนว่า
-  ข้อความถอดเสียงที่พูดจริงเริ่มต้นที่ใด
+- **Inconsistencia de la voz con las instrucciones de la instrucción:** Es posible que la salida del modelo no siempre coincida estrictamente con el orador seleccionado, lo que hace que el audio suene diferente de lo esperado. Para evitar tonos que no coincidan (como una voz masculina profunda que intenta hablar como una niña), asegúrate de que el tono y el contexto escritos de tu instrucción se alineen de forma natural con el perfil del orador seleccionado.
+- **Calidad de los resultados más largos:** La calidad y la coherencia del discurso pueden comenzar a disminuir con los resultados generados que duran más de unos minutos. Te recomendamos que dividas tus transcripciones en fragmentos más pequeños.
+- **Devoluciones ocasionales de tokens de texto:** En ocasiones, el modelo devuelve tokens de texto en lugar de tokens de audio, lo que provoca que el servidor rechace la solicitud con un error `500`. Dado que esto ocurre de forma aleatoria en un porcentaje muy pequeño de solicitudes, debes implementar una lógica de reintento automatizada en tu aplicación para controlarlas.
+- **Rechazos falsos del clasificador de instrucciones:** Las instrucciones vagas pueden no activar el clasificador de síntesis de voz, lo que genera una solicitud rechazada (`PROHIBITED_CONTENT`) o hace que el modelo lea en voz alta las instrucciones de estilo y las notas del director. Valida tus instrucciones agregando un preámbulo claro que le indique al modelo que sintetice el habla y etiquetando de forma explícita dónde comienza la transcripción hablada real.
 
-## ขั้นตอนถัดไป
+## ¿Qué sigue?
 
-- [Live API](https://ai.google.dev/gemini-api/docs/live?hl=th) ของ Gemini มีตัวเลือกการสร้างเสียงแบบอินเทอร์แอกทีฟ
-  ที่คุณสามารถสลับกับรูปแบบอื่นๆ ได้
-- หากต้องการทำงานกับ*อินพุต*เสียง โปรดไปที่คู่มือ[การทำความเข้าใจเสียง](https://ai.google.dev/gemini-api/docs/audio?hl=th)
+- La [API de Live](https://ai.google.dev/gemini-api/docs/live?hl=es-419) de Gemini ofrece opciones interactivas de generación de audio que puedes intercalar con otras modalidades.
+- Para trabajar con *entradas* de audio, consulta la guía de [Comprensión de audio](https://ai.google.dev/gemini-api/docs/audio?hl=es-419).
 
-ส่งความคิดเห็น
+Enviar comentarios
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-อัปเดตล่าสุด 2026-07-30 UTC
+Última actualización: 2026-09-12 (UTC)
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+¿Quieres brindar más información?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-30 UTC"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-09-12 (UTC)"],[],[]]

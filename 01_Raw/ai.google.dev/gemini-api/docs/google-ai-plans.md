@@ -1,79 +1,67 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/google-ai-plans?hl=fr
-fetched_at: 2026-09-07T05:41:33.869542+00:00
-title: "Forfaits Google\u00a0AI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/google-ai-plans?hl=ko
+fetched_at: 2026-09-14T05:43:26.897270+00:00
+title: "Google AI \uc694\uae08\uc81c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
+이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
 
-Envoyer des commentaires
+의견 보내기
 
-# Forfaits Google AI
+# Google AI 요금제
 
-Utilisez votre forfait Google AI dans AI Studio.
+AI Studio에서 Google AI 구독 요금제를 사용하세요.
 
-Les forfaits Google AI Pro et Ultra offrent un accès plus étendu aux modèles et des limites de débit plus élevées pour le prototypage et le développement dans AI Studio par rapport au niveau sans frais.
+Google AI Pro 및 Ultra 구독 요금제는 무료 등급에 비해 AI Studio에서 프로토타입 제작 및 개발을 위한 모델 액세스 권한과 비율 제한이 더 높습니다.
 
-Pour souscrire un forfait Google AI, vous pouvez passer à un forfait supérieur directement depuis Google AI Studio en cliquant sur le bouton **Changer de forfait** dans le menu de navigation de gauche. Vous pouvez également vous inscrire en accédant à la
-[page Forfaits Google AI](https://one.google.com/about/google-ai-plans/?hl=fr).
+Google AI 요금제에 가입하려면 Google AI Studio 내에서 왼쪽 탐색 메뉴의 **업그레이드** 버튼을 클릭하여 직접 업그레이드하면 됩니다. 또는
+[Google AI 요금제 페이지](https://one.google.com/about/google-ai-plans/?hl=ko)를 방문하여 가입할 수도 있습니다.
 
-## Présentation
+## 개요
 
-Les abonnements Google AI Pro et Ultra permettent aux développeurs de débloquer des modèles payants
-et des limites de débit plus élevées dans le Playground de Google AI Studio, ainsi que des fonctionnalités
-telles que l'assistant de code en [mode "Compilation"](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=fr)
-pour le codage Vibe. Les abonnés bénéficient de quotas quotidiens de base
-plus élevés que ceux du niveau sans frais pour une utilisation dans les interfaces
-[Playground](https://aistudio.google.com/prompts/new_chat?hl=fr) et
-[Compilation](https://aistudio.google.com/apps?hl=fr). Les limites quotidiennes sont appliquées à l'aide de réinitialisations plutôt que de fenêtres temporelles glissantes, ce qui garantit une expérience de développement fluide avant de passer au développement à l'échelle de la production avec Cloud Billing.
+Google AI Pro 및 Ultra 구독을 사용하면 개발자가 Google AI Studio Playground에서 유료 모델과 더 높은 비율 제한을 활용하고, 바이브 코딩을 위한 [빌드 모드](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=ko)의 코드 어시스턴트와 같은 기능을 사용할 수 있습니다. [[구독자는 Playground 및 빌드 인터페이스에서 사용할 수 있는 무료 등급보다 높은 기준 일일 할당량 허용치를 받습니다.](https://aistudio.google.com/prompts/new_chat?hl=ko)](https://aistudio.google.com/apps?hl=ko) 일일 한도는 롤링 시간 창이 아닌 재설정을 사용하여 적용되므로 Cloud Billing으로 프로덕션 규모 개발로 전환하기 전에 원활한 개발 환경을 보장합니다.
 
-| Plan | Utilisation d'AI Studio | Accès aux modèles et avantages |
+| 계획 | AI Studio 사용량 | 모델 액세스 및 이점 |
 | --- | --- | --- |
-| **Free** | Quota modeste | Limites et accès de base, avec possibilité de passer à un forfait supérieur pour en bénéficier davantage. |
-| **AI Pro** | Quota plus élevé | Accès à des modèles premium tels que Gemini Pro, Nano Banana et Lyria. |
-| **AI Ultra** | Quota le plus élevé | Limites les plus élevées pour le prototypage, le développement et les modèles de pointe avancés. |
+| **무료** | 적당한 할당량 | 기본 한도 및 액세스 권한이 제공되며, 업그레이드하여 더 많은 혜택을 누릴 수 있습니다. |
+| **AI Pro** | 더 높은 할당량 | Gemini Pro, Nano Banana, Lyria와 같은 프리미엄 모델에 액세스할 수 있습니다. |
+| **AI Ultra** | 최고 할당량 | 프로토타입 제작, 개발, 고급 프런티어 모델을 위한 최고 한도입니다. |
 
-## Utilisation de l'API Gemini
+## Gemini API 사용량
 
-Lorsque les quotas d'abonnement de base quotidiens sont épuisés dans AI Studio, vous pouvez poursuivre vos workflows à l'aide d'une clé API Gemini avec la facturation Cloud activée pour une utilisation directe de l'API Gemini avec paiement à la requête.
-L'utilisation de l'API Gemini pour les projets et les clés API peut être observée dans le
-[tableau de bord AI Studio](https://aistudio.google.com/projects?hl=fr).
+AI Studio에서 일일 기준 구독 할당량이 소진되면 Gemini API의 요청당 사용량에 대해 Cloud 결제가 사용 설정된 Gemini API 키를 사용하여 워크플로를 계속할 수 있습니다.
+프로젝트 및 API 키의 Gemini API 사용량은
+[AI Studio 대시보드](https://aistudio.google.com/projects?hl=ko)에서 확인할 수 있습니다.
 
-Les abonnés disposant de projets Google Cloud Platform (GCP) et de Cloud Billing
-activé peuvent recevoir des crédits Cloud mensuels du
-[Google Developer Program](https://developers.google.com/program?hl=fr)
-pour les services Cloud, y compris l'API Gemini. L'utilisation et la facturation prépayées et postpayées restent inchangées. Pour les utilisateurs ayant une facturation prépayée, un solde payant supérieur à 0 $ est requis dans AI Studio pour activer les crédits promotionnels. Les crédits Google Cloud éligibles, s'il y en a, sont appliqués en premier.
-[En savoir plus](https://ai.google.dev/gemini-api/docs/billing?hl=fr#billing-plans).
+Google Cloud Platform (GCP) 프로젝트가 있고 Cloud Billing이 사용 설정된 구독자는 [Google Developer Program](https://developers.google.com/program?hl=ko)에서 Gemini API를 비롯한 Cloud 서비스에 대해 월간 Cloud 크레딧을 받을 수 있습니다. 선불 및 후불 사용량과 청구는 변경되지 않습니다. 선불 결제를 사용하는 사용자의 경우 프로모션 크레딧을 활성화하려면 AI Studio에서 0달러를 초과하는 유료 잔액이 필요합니다. 자격 요건을 충족하는 Google Cloud 크레딧이 있는 경우 먼저 적용됩니다.
+[자세히 알아보기](https://ai.google.dev/gemini-api/docs/billing?hl=ko#billing-plans).
 
-L'intégration de l'abonnement Google AI facilite l'expérimentation et le développement avancés. Toutefois, pour les déploiements en production à grande échelle, nous vous recommandons d'utiliser les projets Google Cloud, le [niveau Starter Google Cloud](https://cloud.google.com/blog/topics/developers-practitioners/the-starter-tier-for-google-ai-studio-explained?hl=fr), et les clés API Gemini.
+Google AI 구독 통합은 고급 실험 및 개발의 진입 장벽을 낮춥니다. 하지만 대규모 프로덕션
+배포의 경우 Google Cloud 프로젝트,
+[Google Cloud 스타터 등급](https://cloud.google.com/blog/topics/developers-practitioners/the-starter-tier-for-google-ai-studio-explained?hl=ko),
+Gemini API 키를 사용하는 것이 좋습니다.
 
-## Limites et compatibilité
+## 제한사항 및 호환성
 
-- **Interface utilisateur AI Studio uniquement** : les avantages du forfait Google AI pour l'utilisation par les développeurs ne s'appliquent que dans l'interface Web de Google AI Studio. L'utilisation directe de l'API Gemini (par exemple, à l'aide de clés API ou d'applications externes) est facturée et gérée séparément. Vous pouvez toutefois utiliser votre abonnement dans d'autres produits Google (voir [Forfaits Google AI](https://one.google.com/about/google-ai-plans/?hl=fr)).
-- **Différent de la facturation de l'API** : les forfaits Google AI pour AI Studio sont distincts
-  des [niveaux d'utilisation de l'API Gemini](https://ai.google.dev/gemini-api/docs/billing?hl=fr), qui couvrent
-  l'utilisation de l'API pour le développement et la production.
-- **Crédits Google One** : [les crédits Google One AI](https://support.google.com/googleone/answer/16287445?hl=fr) sont un
-  système de crédits distinct qui n'est pas compatible avec AI Studio et ne
-  chevauche pas les crédits Google Cloud.
-- **Accès aux agents** : l'accès aux agents (Deep Research et Antigravity Preview)
-  dans AI Studio n'est pas inclus dans les forfaits Google AI et nécessite une
-  [clé API payante](https://ai.google.dev/gemini-api/docs/billing?hl=fr#setup-billing).
+- **AI Studio UI 전용:** 개발자 사용을 위한 Google AI 요금제 혜택은 Google AI Studio 웹 인터페이스 내에서만 적용됩니다. Gemini API를 직접 사용하는 경우(예: API 키 또는 외부 애플리케이션 사용) 별도로 청구되고 관리됩니다. 하지만 다른 Google
+  제품에서 구독을 사용할 수 있습니다 ([Google AI 요금제](https://one.google.com/about/google-ai-plans/?hl=ko) 참고).
+- **API 청구와 다름:** AI Studio용 Google AI 요금제는 개발 및 프로덕션 API 사용량을 포함하는 [Gemini API 사용량 등급](https://ai.google.dev/gemini-api/docs/billing?hl=ko)과 별개입니다.
+- **Google One 크레딧:** [Google One AI 크레딧](https://support.google.com/googleone/answer/16287445?hl=ko)은 AI Studio 내에서 지원되지 않으며 Google Cloud 크레딧과 중복되지 않는 별도의 크레딧 시스템입니다.
+- **에이전트 액세스:** AI Studio 내의 에이전트 (Deep Research 및 Antigravity 미리보기)에 대한 액세스 권한은 Google AI 요금제에 포함되지 않으며 [유료 API 키](https://ai.google.dev/gemini-api/docs/billing?hl=ko#setup-billing)가 필요합니다.
 
-Envoyer des commentaires
+의견 보내기
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Dernière mise à jour le 2026/08/19 (UTC).
+최종 업데이트: 2026-08-19(UTC)
 
-Voulez-vous nous donner plus d'informations ?
+의견을 전달하고 싶나요?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/08/19 (UTC)."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-08-19(UTC)"],[],[]]

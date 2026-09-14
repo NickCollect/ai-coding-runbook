@@ -1,53 +1,53 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=de
-fetched_at: 2026-09-07T05:43:07.646922+00:00
-title: "Leitfaden zu den Live API-Funktionen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=zh-CN
+fetched_at: 2026-09-14T05:38:04.842509+00:00
+title: "Live API \u529f\u80fd\u6307\u5357 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+Gemini 3.8 Flash 现已推出。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Feedback geben
+发送反馈
 
-# Leitfaden zu den Live API-Funktionen
+# Live API 功能指南
 
-Dieser umfassende Leitfaden behandelt die Funktionen und Konfigurationen, die mit der Live API verfügbar sind.
-Auf der Seite [Erste Schritte mit der Live API](https://ai.google.dev/gemini-api/docs/live?hl=de) finden Sie eine Übersicht und Beispielcode für gängige Anwendungsfälle.
+这是一份全面的指南，介绍了 Live API 提供的功能和配置。
+如需查看常见用例的概览和示例代码，请参阅[开始使用 Live API](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn) 页面。
 
-## Hinweis
+## 准备工作
 
-- **Mit den grundlegenden Konzepten vertraut machen**:Wenn Sie das noch nicht getan haben, lesen Sie zuerst die Seite [Erste Schritte mit der Live API](https://ai.google.dev/gemini-api/docs/live?hl=de) .
-  Hier erfahren Sie mehr über die grundlegenden Prinzipien der Live API, ihre Funktionsweise und die verschiedenen [Implementierungsansätze](https://ai.google.dev/gemini-api/docs/live?hl=de#implementation-approach).
-- **Live API in AI Studio ausprobieren**:Es kann hilfreich sein, die Live API in [Google AI Studio](https://aistudio.google.com/app/live?hl=de) auszuprobieren, bevor Sie mit der Entwicklung beginnen. Wenn Sie die Live API in Google AI Studio verwenden möchten, wählen Sie **Stream** aus.
+- **熟悉核心概念**：如果您尚未这样做，请先阅读[开始使用 Live API](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn)  页面。
+  本文将向您介绍 Live API 的基本原理、运作方式以及不同的[实现方法](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn#implementation-approach)。
+- **在 AI Studio 中试用 Live API**：在开始构建之前，您可能会发现先在 [Google AI Studio](https://aistudio.google.com/app/live?hl=zh-cn) 中试用 Live API 会很有用。如需在 Google AI Studio 中使用实时 API，请选择 **Stream**。
 
-## Modellvergleich
+## 模型对比
 
-In der folgenden Tabelle sind die wichtigsten Unterschiede zwischen den Modellen [Gemini 3.1 Flash Live Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=de) und [Gemini 2.5 Flash Live Preview](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=de) zusammengefasst:
+下表总结了 [Gemini 3.1 Flash Live 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=zh-cn)和 [Gemini 2.5 Flash Live 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=zh-cn)模型之间的主要区别：
 
-| Funktion | Gemini 3.1 Flash Live Preview | Gemini 2.5 Flash Live Preview |
+| 功能 | Gemini 3.1 Flash Live 预览版 | Gemini 2.5 Flash Live 预览版 |
 | --- | --- | --- |
-| **[Antwort wird generiert](#native-audio-output-thinking)** | Verwendet `thinkingLevel`, um den Detailgrad des Denkprozesses mit Einstellungen wie `minimal`, `low`, `medium` und `high` zu steuern. Die Standardeinstellung ist `minimal`, um die Latenz zu minimieren. [Weitere Informationen zu Denkebenen und Budgets](https://ai.google.dev/gemini-api/docs/thinking?hl=de#levels-budgets) | Verwendet `thinkingBudget`, um die Anzahl der Tokens für den Thinking-Modus festzulegen. Die Funktion „Dynamisches Denken“ ist standardmäßig aktiviert. Setzen Sie `thinkingBudget` auf `0`, um die Funktion zu deaktivieren. [Weitere Informationen zu Denkebenen und Budgets](https://ai.google.dev/gemini-api/docs/thinking?hl=de#levels-budgets) |
-| **[Antwort erhalten](https://ai.google.dev/api/live?hl=de#bidigeneratecontentservercontent)** | Ein einzelnes Serverereignis kann mehrere Inhaltsteile gleichzeitig enthalten, z. B. `inlineData` und ein Transkript. Achten Sie darauf, dass in Ihrem Code alle Teile jedes Ereignisses verarbeitet werden, damit keine Inhalte fehlen. | Jedes Serverereignis enthält nur einen Inhaltsteil. Teile werden in separaten Ereignissen bereitgestellt. |
-| **[Kundeninhalte](#incremental-updates)** | `send_client_content` wird nur zum Erstellen des Verlaufs des ursprünglichen Kontexts unterstützt. Dazu muss `initial_history_in_client_content` in der Sitzungskonfiguration festgelegt werden. Wenn Sie während der Unterhaltung Textupdates senden möchten, verwenden Sie stattdessen `send_realtime_input`. | `send_client_content` wird während der gesamten Unterhaltung unterstützt, um inkrementelle Inhaltsaktualisierungen zu senden und Kontext zu schaffen. |
-| **[Abdeckung für die Navigation](https://ai.google.dev/api/live?hl=de#turncoverage)** | Die Standardeinstellung ist `TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO`. Der Zug des Modells umfasst erkannte Audioaktivitäten und alle Videoframes. | Die Standardeinstellung ist `TURN_INCLUDES_ONLY_ACTIVITY`. Der Zug des Modells umfasst nur die erkannte Aktivität. |
-| **[Benutzerdefinierte VAD](#disable-automatic-vad)** (`activity_start`/`activity_end`) | Unterstützt. Deaktivieren Sie die automatische VAD und senden Sie `activityStart`- und `activityEnd`-Nachrichten manuell, um die Sprecherwechsel zu steuern. | Unterstützt. Deaktivieren Sie die automatische VAD und senden Sie `activityStart`- und `activityEnd`-Nachrichten manuell, um die Sprecherwechsel zu steuern. |
-| **[Automatische VAD-Konfiguration](#configure-automatic-vad)** | Unterstützt. Konfigurieren Sie Parameter wie `start_of_speech_sensitivity`, `end_of_speech_sensitivity`, `prefix_padding_ms` und `silence_duration_ms`. | Unterstützt. Konfigurieren Sie Parameter wie `start_of_speech_sensitivity`, `end_of_speech_sensitivity`, `prefix_padding_ms` und `silence_duration_ms`. |
-| **[Asynchrone Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/live-tools?hl=de#async-function-calling)** (`behavior: NON_BLOCKING`) | Nicht unterstützt. Funktionsaufrufe sind nur sequenziell möglich. Das Modell beginnt erst mit der Antwort, wenn Sie die Tool-Antwort gesendet haben. | Unterstützt. Legen Sie `behavior` für eine Funktionsdeklaration auf `NON_BLOCKING` fest, damit das Modell während der Ausführung der Funktion weiter interagieren kann. Mit dem Parameter `scheduling` (`INTERRUPT`, `WHEN_IDLE` oder `SILENT`) können Sie festlegen, wie das Modell Antworten verarbeitet. |
-| **[Proaktive Audiofunktionen](#proactive-audio)** | Nicht unterstützt | Unterstützt. Wenn diese Option aktiviert ist, kann das Modell proaktiv entscheiden, nicht zu antworten, wenn die Eingabeinhalte nicht relevant sind. Legen Sie in der `proactivity`-Konfiguration `proactive_audio` auf `true` fest (erfordert `v1beta`). |
-| **[Empathischer Dialog](#affective-dialog)** | Nicht unterstützt | Unterstützt. Das Modell passt seinen Antwortstil an die Ausdrucksweise und den Tonfall der Eingabe an. Legen Sie `enable_affective_dialog` in der Sitzungskonfiguration auf `true` fest (erfordert `v1beta`). |
+| **[思考](#native-audio-output-thinking)** | 使用 `thinkingLevel` 通过 `minimal`、`low`、`medium` 和 `high` 等设置来控制思考深度。默认值为 `minimal`，以优化最低延迟。请参阅[思维水平和预算](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn#levels-budgets)。 | 使用 `thinkingBudget` 设置思考 token 的数量。默认情况下，系统会启用动态思考。将 `thinkingBudget` 设置为 `0` 即可停用。请参阅[思维水平和预算](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn#levels-budgets)。 |
+| **[接收响应](https://ai.google.dev/api/live?hl=zh-cn#bidigeneratecontentservercontent)** | 单个服务器事件可以同时包含多个内容部分（例如 `inlineData` 和转写）。确保您的代码处理每个事件中的所有部分，以免遗漏内容。 | 每个服务器事件仅包含一个内容部分。各个部分通过单独的事件进行传递。 |
+| **[客户内容](#incremental-updates)** | `send_client_content` 仅支持为初始上下文历史记录提供种子数据（需要在会话配置中设置 `initial_history_in_client_content`）。如需在对话期间发送文本更新，请改用 `send_realtime_input`。 | 在整个对话过程中，`send_client_content` 都可用于发送增量内容更新和建立上下文。 |
+| **[开启覆盖](https://ai.google.dev/api/live?hl=zh-cn#turncoverage)** | 默认为 `TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO`。模型的回合包括检测到的音频活动和所有视频帧。 | 默认为 `TURN_INCLUDES_ONLY_ACTIVITY`。模型的回答仅包含检测到的活动。 |
+| **[自定义 VAD](#disable-automatic-vad)**（`activity_start`/`activity_end`） | 支持。停用自动 VAD，并手动发送 `activityStart` 和 `activityEnd` 消息来控制轮流边界。 | 支持。停用自动 VAD，并手动发送 `activityStart` 和 `activityEnd` 消息来控制轮流边界。 |
+| **[自动 VAD 配置](#configure-automatic-vad)** | 支持。配置 `start_of_speech_sensitivity`、`end_of_speech_sensitivity`、`prefix_padding_ms` 和 `silence_duration_ms` 等参数。 | 支持。配置 `start_of_speech_sensitivity`、`end_of_speech_sensitivity`、`prefix_padding_ms` 和 `silence_duration_ms` 等参数。 |
+| **[异步函数调用](https://ai.google.dev/gemini-api/docs/live-tools?hl=zh-cn#async-function-calling)** (`behavior: NON_BLOCKING`) | 不支持。函数调用只能按顺序进行。在您发送工具响应之前，模型不会开始回答。 | 支持。将函数声明中的 `behavior` 设置为 `NON_BLOCKING`，以便模型在函数运行时继续互动。通过 `scheduling` 参数（`INTERRUPT`、`WHEN_IDLE` 或 `SILENT`）控制模型如何处理回答。 |
+| **[主动音频](#proactive-audio)** | 不受支持 | 支持。启用后，如果输入内容不相关，模型可以主动决定不做出回答。在 `proactivity` 配置中将 `proactive_audio` 设置为 `true`（需要 `v1beta`）。 |
+| **[共情对话](#affective-dialog)** | 不受支持 | 支持。模型会调整回答风格，以匹配输入内容的情绪表达和语气。在会话配置中将 `enable_affective_dialog` 设置为 `true`（需要 `v1beta`）。 |
 
-Informationen zur Migration von Gemini 2.5 Flash Live zu Gemini 3.1 Flash Live finden Sie im [Migrationsleitfaden](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=de#migrating).
+如需从 Gemini 2.5 Flash Live 迁移到 Gemini 3.1 Flash Live，请参阅[迁移指南](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=zh-cn#migrating)。
 
-## Verbindung herstellen
+## 建立连接
 
-Im folgenden Beispiel wird gezeigt, wie Sie eine Verbindung mit einem API-Schlüssel erstellen:
+以下示例展示了如何使用 API 密钥创建连接：
 
 ### Python
 
@@ -108,13 +108,13 @@ async function main() {
 main();
 ```
 
-## Interaktionsmodalitäten
+## 互动模式
 
-In den folgenden Abschnitten finden Sie Beispiele und Kontext für die verschiedenen Eingabe- und Ausgabemodalitäten, die in der Live API verfügbar sind.
+以下部分提供了 Live API 中提供的不同输入和输出模态的示例和支持上下文。
 
-### Audio senden
+### 发送音频
 
-Audio muss als rohe PCM-Daten gesendet werden (rohes 16-Bit-PCM-Audio, 16 kHz, Little Endian).
+音频需要以原始 PCM 数据（原始 16 位 PCM 音频，16kHz，小端序）的形式发送。
 
 ### Python
 
@@ -140,13 +140,13 @@ session.sendRealtimeInput({
 });
 ```
 
-### Audioformate
+### 音频格式
 
-Audiodaten in der Live API sind immer unkomprimiert, Little-Endian und 16-Bit-PCM. Die Audioausgabe erfolgt immer mit einer Abtastrate von 24 kHz. Die Eingabe-Audiodaten haben nativ eine Abtastrate von 16 kHz. Die Live API führt jedoch bei Bedarf ein Resampling durch, sodass jede Abtastrate gesendet werden kann. Um die Samplerate des eingegebenen Audiosignals anzugeben, legen Sie den MIME-Typ jedes [Blob](https://ai.google.dev/api/caching?hl=de#Blob), das Audio enthält, auf einen Wert wie `audio/pcm;rate=16000` fest.
+Live API 中的音频数据始终是原始的小端序 16 位 PCM。音频输出始终使用 24kHz 的采样率。输入音频的原始采样率为 16kHz，但 Live API 会在需要时重新采样，因此可以发送任何采样率。如需传达输入音频的采样率，请将每个包含音频的 [Blob](https://ai.google.dev/api/caching?hl=zh-cn#Blob) 的 MIME 类型设置为类似 `audio/pcm;rate=16000` 的值。
 
-### Audio empfangen
+### 接收音频
 
-Die Audioantworten des Modells werden als Datenblöcke empfangen.
+模型以数据块的形式返回音频回答。
 
 ### Python
 
@@ -174,9 +174,9 @@ if (content?.modelTurn?.parts) {
 }
 ```
 
-### SMS wird gesendet
+### 正在发送短信
 
-Text kann mit `send_realtime_input` (Python) oder `sendRealtimeInput` (JavaScript) gesendet werden.
+您可以使用 `send_realtime_input` (Python) 或 `sendRealtimeInput` (JavaScript) 发送文本。
 
 ### Python
 
@@ -192,9 +192,9 @@ session.sendRealtimeInput({
 });
 ```
 
-### Video wird gesendet
+### 正在发送视频
 
-Videoframes werden als einzelne Bilder (z. B. JPEG oder PNG) mit einer bestimmten Framerate (max. 1 Frame pro Sekunde) gesendet.
+视频帧以特定帧速率（每秒最多 1 帧）作为单独的图片（例如 JPEG 或 PNG）发送。
 
 ### Python
 
@@ -220,9 +220,9 @@ session.sendRealtimeInput({
 });
 ```
 
-#### Inkrementelle Aktualisierungen von Inhalten
+#### 增量内容更新
 
-Verwenden Sie inkrementelle Updates, um Texteingaben zu senden, Sitzungskontext herzustellen oder wiederherzustellen. Bei kurzen Kontexten können Sie Turn-by-Turn-Interaktionen senden, um die genaue Abfolge der Ereignisse darzustellen:
+使用增量更新来发送文本输入、建立会话上下文或恢复会话上下文。对于简短的上下文，您可以发送逐轮互动来表示确切的事件序列：
 
 ### Python
 
@@ -254,13 +254,13 @@ inputTurns = [{ "role": "user", "parts": [{ "text": "What is the capital of Germ
 session.sendClientContent({ turns: inputTurns, turnComplete: true })
 ```
 
-Bei längeren Kontexten empfiehlt es sich, eine Zusammenfassung der einzelnen Nachrichten bereitzustellen, um das Kontextfenster für nachfolgende Interaktionen freizugeben. Eine weitere Methode zum Laden des Sitzungskontexts finden Sie unter [Sitzungswiederaufnahme](https://ai.google.dev/gemini-api/docs/live-session?hl=de#session-resumption).
+对于较长的上下文，建议提供单个消息摘要，以释放上下文窗口，以便进行后续互动。如需了解加载会话上下文的其他方法，请参阅[会话恢复](https://ai.google.dev/gemini-api/docs/live-session?hl=zh-cn#session-resumption)。
 
-### Audiotranskripte
+### 音频转录
 
-Zusätzlich zur Modellantwort können Sie auch Transkriptionen der Audioausgabe und der Audioeingabe erhalten.
+除了模型回答之外，您还可以收到音频输出和音频输入的转写内容。
 
-Wenn Sie die Transkription der Audioausgabe des Modells aktivieren möchten, senden Sie `output_audio_transcription` in der Einrichtungskonfiguration. Die Sprache der Transkription wird aus der Antwort des Modells abgeleitet.
+如需启用模型音频输出的转写功能，请在设置配置中发送 `output_audio_transcription`。转写语言是从模型的回答中推断出来的。
 
 ### Python
 
@@ -378,7 +378,7 @@ async function main() {
 main();
 ```
 
-Wenn Sie die Transkription der Audioeingabe des Modells aktivieren möchten, senden Sie `input_audio_transcription` in der Einrichtungskonfiguration.
+如需启用模型音频输入的转写功能，请在设置配置中发送 `input_audio_transcription`。
 
 ### Python
 
@@ -523,11 +523,11 @@ async function main() {
 main();
 ```
 
-### Stimme und Sprache ändern
+### 更改语音和语言
 
-[Modelle mit nativer Audioausgabe](#native-audio-output) unterstützen alle Stimmen, die für unsere [TTS-Modelle (Text-to-Speech)](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de#voices) verfügbar sind. Alle Stimmen sind in [AI Studio](https://aistudio.google.com/app/live?hl=de) verfügbar.
+[原生音频输出](#native-audio-output)模型支持我们的[文字转语音 (TTS)](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-cn#voices) 模型提供的任何语音。您可以在 [AI Studio](https://aistudio.google.com/app/live?hl=zh-cn) 中试听所有语音。
 
-Wenn Sie eine Stimme angeben möchten, legen Sie den Namen der Stimme im `speechConfig`-Objekt als Teil der Sitzungskonfiguration fest:
+如需指定语音，请在 `speechConfig` 对象中设置语音名称，作为会话配置的一部分：
 
 ### Python
 
@@ -549,16 +549,16 @@ const config = {
 };
 ```
 
-Die Live API unterstützt [mehrere Sprachen](#supported-languages).
-Bei Modellen mit [nativer Audioausgabe](#native-audio-output) wird die passende Sprache automatisch ausgewählt. Das explizite Festlegen des Sprachcodes wird nicht unterstützt.
+Live API 支持[多种语言](#supported-languages)。
+[原生音频输出](#native-audio-output)模型会自动选择合适的语言，不支持明确设置语言代码。
 
-## Native Audiofunktionen
+## 原生音频功能
 
-Unsere neuesten Modelle bieten [native Audioausgabe](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=de), die für natürlich und realistisch klingende Sprache und eine verbesserte mehrsprachige Leistung sorgt.
+我们的最新模型具有[原生音频输出](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=zh-cn)功能，可提供自然、逼真的语音，并改进了多语言性能。
 
-### Thinking
+### 思考
 
-Gemini 3.1-Modelle verwenden `thinkingLevel`, um die Tiefe der Überlegungen zu steuern. Dazu gibt es Einstellungen wie `minimal`, `low`, `medium` und `high`. Der Standardwert ist `minimal`, um die Latenz zu minimieren. Bei Gemini 2.5-Modellen wird stattdessen `thinkingBudget` verwendet, um die Anzahl der Tokens für den Thinking-Modus festzulegen. Weitere Informationen zu Ebenen und Budgets finden Sie unter [Ebenen und Budgets](https://ai.google.dev/gemini-api/docs/thinking?hl=de#levels-budgets).
+Gemini 3.1 模型使用 `thinkingLevel` 来控制思考深度，并提供 `minimal`、`low`、`medium` 和 `high` 等设置。默认值为 `minimal`，以优化为最低延迟时间。Gemini 2.5 模型使用 `thinkingBudget` 来设置思考 token 的数量。如需详细了解级别与预算之间的关系，请参阅[思考级别和预算](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn#levels-budgets)。
 
 ### Python
 
@@ -603,7 +603,7 @@ async function main() {
 main();
 ```
 
-Außerdem können Sie Zusammenfassungen von Gedanken aktivieren, indem Sie in der Konfiguration `includeThoughts` auf `true` setzen. Weitere Informationen finden Sie unter [Zusammenfassungen von Gedanken](https://ai.google.dev/gemini-api/docs/thinking?hl=de#summaries):
+此外，您还可以在配置中将 `includeThoughts` 设置为 `true`，以启用思路总结。如需了解详情，请参阅[思考总结](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn#summaries)：
 
 ### Python
 
@@ -632,11 +632,11 @@ const config = {
 };
 ```
 
-### Empathischer Dialog
+### 共情对话
 
-Mit dieser Funktion kann Gemini seinen Antwortstil an die Ausdrucksweise und den Tonfall der Eingabe anpassen.
+借助此功能，Gemini 可以根据输入内容的情绪表达和语气调整回答风格。
 
-Wenn Sie affektive Dialoge verwenden möchten, legen Sie die API-Version in der Einrichtungsnachricht auf `v1beta` und `enable_affective_dialog` auf `true` fest:
+如需使用共情对话，请在设置消息中将 API 版本设置为 `v1beta`，并将 `enable_affective_dialog` 设置为 `true`：
 
 ### Python
 
@@ -660,11 +660,11 @@ const config = {
 };
 ```
 
-### Proaktive Audioeingabe
+### 主动音频
 
-Wenn diese Funktion aktiviert ist, kann Gemini proaktiv entscheiden, nicht zu antworten, wenn die Inhalte nicht relevant sind.
+启用此功能后，如果内容不相关，Gemini 可以主动决定不做出回应。
 
-Wenn Sie die API verwenden möchten, legen Sie die API-Version auf `v1beta` fest, konfigurieren Sie das Feld `proactivity` in der Einrichtungsnachricht und legen Sie `proactive_audio` auf `true` fest:
+如需使用该功能，请将 API 版本设置为 `v1beta`，在设置消息中配置 `proactivity` 字段，并将 `proactive_audio` 设置为 `true`：
 
 ### Python
 
@@ -688,19 +688,19 @@ const config = {
 }
 ```
 
-## Live-Übersetzung
+## 实时翻译
 
-Die Live API unterstützt die Übersetzung gesprochener Unterhaltungen in Echtzeit mit geringer Latenz. Damit können Sie Anwendungen für die Echtzeitübersetzung von Sprache in Sprache entwickeln.
+Live API 支持实时、低延迟地翻译语音对话。借助此功能，您可以构建实时语音翻译应用。
 
-Weitere Informationen und Beispiele finden Sie im [Leitfaden zur Live-Übersetzung](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=de).
+如需了解详情和示例，请参阅[实时翻译指南](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=zh-cn)。
 
-## Erkennung von Sprachaktivität (Voice Activity Detection, VAD)
+## 语音活动检测 (VAD)
 
-Mit der Spracherkennungsfunktion (Voice Activity Detection, VAD) kann das Modell erkennen, wann eine Person spricht. Das ist wichtig, um natürliche Unterhaltungen zu ermöglichen, da Nutzer das Modell jederzeit unterbrechen können.
+语音活动检测 (VAD) 可让模型识别用户何时在说话。这对于创建自然对话至关重要，因为这使用户可以随时中断模型。
 
-Wenn VAD eine Unterbrechung erkennt, wird die laufende Generierung abgebrochen und verworfen. Im Sitzungsverlauf werden nur die Informationen gespeichert, die bereits an den Kunden gesendet wurden. Der Server sendet dann eine [`BidiGenerateContentServerContent`](https://ai.google.dev/api/live?hl=de#bidigeneratecontentservercontent)-Nachricht, um die Unterbrechung zu melden.
+当 VAD 检测到中断时，系统会取消并舍弃正在进行的生成操作。会话历史记录中仅保留已发送给客户端的信息。服务器随后会发送一条 [`BidiGenerateContentServerContent`](https://ai.google.dev/api/live?hl=zh-cn#bidigeneratecontentservercontent) 消息来报告中断情况。
 
-Der Gemini-Server verwirft dann alle ausstehenden Funktionsaufrufe und sendet eine `BidiGenerateContentServerContent`-Nachricht mit den IDs der abgebrochenen Aufrufe.
+然后，Gemini 服务器会舍弃所有待处理的函数调用，并发送一条 `BidiGenerateContentServerContent` 消息，其中包含已取消调用的 ID。
 
 ### Python
 
@@ -728,11 +728,11 @@ for (const turn of turns) {
 }
 ```
 
-### Automatische VAD
+### 自动 VAD
 
-Standardmäßig führt das Modell automatisch eine VAD für einen kontinuierlichen Audioeingabestream durch. VAD kann mit dem Feld [`realtimeInputConfig.automaticActivityDetection`](https://ai.google.dev/api/live?hl=de#RealtimeInputConfig.AutomaticActivityDetection) der [Einrichtungskonfiguration](https://ai.google.dev/api/live?hl=de#BidiGenerateContentSetup) konfiguriert werden.
+默认情况下，模型会对连续的音频输入流自动执行 VAD。可以使用[设置配置](https://ai.google.dev/api/live?hl=zh-cn#BidiGenerateContentSetup)的 [`realtimeInputConfig.automaticActivityDetection`](https://ai.google.dev/api/live?hl=zh-cn#RealtimeInputConfig.AutomaticActivityDetection) 字段配置 VAD。
 
-Wenn der Audiostream länger als eine Sekunde pausiert wird (z. B. weil der Nutzer das Mikrofon deaktiviert hat), sollte ein [`audioStreamEnd`](https://ai.google.dev/api/live?hl=de#BidiGenerateContentRealtimeInput.FIELDS.bool.BidiGenerateContentRealtimeInput.audio_stream_end)-Ereignis gesendet werden, um zwischengespeicherte Audiodaten zu leeren. Der Client kann das Senden von Audiodaten jederzeit fortsetzen.
+当音频串流暂停超过一秒时（例如，因为用户关闭了麦克风），应发送 [`audioStreamEnd`](https://ai.google.dev/api/live?hl=zh-cn#BidiGenerateContentRealtimeInput.FIELDS.bool.BidiGenerateContentRealtimeInput.audio_stream_end) 事件来清空所有已缓存的音频。客户端可以随时恢复发送音频数据。
 
 ### Python
 
@@ -868,11 +868,11 @@ async function main() {
 main();
 ```
 
-Mit `send_realtime_input` reagiert die API automatisch auf Audio basierend auf VAD. Bei `send_client_content` werden Nachrichten in der richtigen Reihenfolge zum Modellkontext hinzugefügt, während `send_realtime_input` auf Reaktionsfähigkeit optimiert ist, was auf Kosten der deterministischen Reihenfolge geht.
+使用 `send_realtime_input`，API 将根据 VAD 自动响应音频。虽然 `send_client_content` 会按顺序将消息添加到模型上下文，但 `send_realtime_input` 经过优化，可提高响应速度，但会牺牲确定性排序。
 
-### Automatische VAD-Konfiguration
+### 自动 VAD 配置
 
-Wenn Sie die VAD-Aktivität besser steuern möchten, können Sie die folgenden Parameter konfigurieren. Weitere Informationen finden Sie in der [API-Referenz](https://ai.google.dev/api/live?hl=de#automaticactivitydetection).
+如需更精细地控制 VAD 活动，您可以配置以下参数。如需了解详情，请参阅 [API 参考文档](https://ai.google.dev/api/live?hl=zh-cn#automaticactivitydetection)。
 
 ### Python
 
@@ -912,9 +912,61 @@ const config = {
 };
 ```
 
-### Automatische VAD deaktivieren
+### 混合 VAD
 
-Alternativ kann die automatische VAD deaktiviert werden, indem Sie in der Einrichtungsnachricht `realtimeInputConfig.automaticActivityDetection.disabled` auf `true` setzen. In dieser Konfiguration ist der Client dafür verantwortlich, die Sprache des Nutzers zu erkennen und [`activityStart`](https://ai.google.dev/api/live?hl=de#BidiGenerateContentRealtimeInput.FIELDS.BidiGenerateContentRealtimeInput.ActivityStart.BidiGenerateContentRealtimeInput.activity_start)- und [`activityEnd`](https://ai.google.dev/api/live?hl=de#BidiGenerateContentRealtimeInput.FIELDS.BidiGenerateContentRealtimeInput.ActivityEnd.BidiGenerateContentRealtimeInput.activity_end)-Nachrichten zum richtigen Zeitpunkt zu senden. In dieser Konfiguration wird kein `audioStreamEnd` gesendet. Stattdessen wird jede Unterbrechung des Streams durch eine `activityEnd`-Meldung gekennzeichnet.
+混合 VAD 兼具自动 VAD（可靠的语音开始检测）和手动 VAD（低延迟响应最终确定）的优势。
+
+在本配置中：
+
+1. 服务器上**自动 VAD 仍处于启用状态**。服务器会自动检测用户语音的开始，并使用前缀填充来避免截断话语的开头。
+2. 客户端使用**客户端 VAD** 来检测用户何时停止说话。
+3. 当客户端 VAD 检测到语音结束时，会向服务器发送 [`audio_stream_end`](https://ai.google.dev/api/live?hl=zh-cn#BidiGenerateContentRealtimeInput.FIELDS.bool.BidiGenerateContentRealtimeInput.audio_stream_end) 信号。
+4. 服务器会将 `audio_stream_end` 信号视为立即完成提示，从而绕过默认的服务器端静音检测延迟，并以最短的延迟时间返回转写和模型响应。
+5. 如果客户端 VAD 未能触发，服务器端 VAD 会作为后备方案来检测语音结束。
+
+请注意，如果客户端 VAD 阈值设置得过高，可能会导致语音截断。不过，这种方法可以避免手动 VAD 可能会出现的前端截断问题。
+
+### Python
+
+```
+# Set up with automatic VAD enabled (default)
+config = {
+    "response_modalities": ["AUDIO"],
+}
+
+async with client.aio.live.connect(model=model, config=config) as session:
+    # Send audio data normally
+    await session.send_realtime_input(
+        audio=types.Blob(data=audio_bytes, mime_type="audio/pcm;rate=16000")
+    )
+
+    # When client-side VAD detects the end of speech, send:
+    await session.send_realtime_input(audio_stream_end=True)
+```
+
+### JavaScript
+
+```
+// Set up with automatic VAD enabled (default)
+const config = {
+  responseModalities: [Modality.AUDIO],
+};
+
+// Send audio data normally
+session.sendRealtimeInput({
+  audio: {
+    data: base64Audio,
+    mimeType: "audio/pcm;rate=16000"
+  }
+});
+
+// When client-side VAD detects the end of speech, send:
+session.sendRealtimeInput({ audioStreamEnd: true });
+```
+
+### 停用自动 VAD
+
+或者，您也可以在设置消息中将 `realtimeInputConfig.automaticActivityDetection.disabled` 设置为 `true`，以停用自动 VAD。在此配置中，客户端负责检测用户语音，并在适当的时间发送 [`activityStart`](https://ai.google.dev/api/live?hl=zh-cn#BidiGenerateContentRealtimeInput.FIELDS.BidiGenerateContentRealtimeInput.ActivityStart.BidiGenerateContentRealtimeInput.activity_start) 和 [`activityEnd`](https://ai.google.dev/api/live?hl=zh-cn#BidiGenerateContentRealtimeInput.FIELDS.BidiGenerateContentRealtimeInput.ActivityEnd.BidiGenerateContentRealtimeInput.activity_end) 消息。此配置中未发送 `audioStreamEnd`，而是会通过 `activityEnd` 消息标记任何流中断。
 
 ### Python
 
@@ -961,34 +1013,33 @@ session.sendRealtimeInput(
 session.sendRealtimeInput({ activityEnd: {} })
 ```
 
-### VAD-Parameter und ihre Auswirkungen auf die Qualität
+### 了解 VAD 参数及其对质量的影响
 
-Bei der automatischen VAD steuern zwei wichtige Parameter, wie Audio in Sprechabschnitte segmentiert wird, bevor es an das Modell gesendet wird:
+使用自动 VAD 时，有两个关键参数可控制如何将音频分割为语音轮次，然后再将其发送给模型：
 
-- **`prefixPaddingMs`**: Die Menge an Audio, die *vor* der Erkennung von Sprache enthalten sein soll. Durch diesen „Rückblick“ wird sichergestellt, dass das Modell den vollständigen Beginn der Sprache erfasst, einschließlich der ersten Silbe, die möglicherweise vor dem Auslösen des VAD beginnt. Bei einem Wert von `0` werden möglicherweise die Anfänge von Wörtern abgeschnitten.
-- **`silenceDurationMs`**: Wie lange der Server bei Stille wartet, bevor er einen Sprachabschnitt beendet. Damit wird festgelegt, wie tolerant das System gegenüber natürlichen Pausen mitten im Satz ist (z.B. zum Nachdenken, Atmen oder an Satzgrenzen).
+- **`prefixPaddingMs`**：在检测到语音之前要包含的音频量（以毫秒为单位）。这种“回溯”可确保模型捕获完整的语音开始，包括可能在 VAD 触发器之前开始的第一个音节。值为 `0` 可能会导致字词开头被剪掉。
+- **`silenceDurationMs`**：服务器在静默状态下等待多长时间后结束语音轮次。这决定了系统对句子中自然停顿（例如思考、呼吸或子句边界）的容忍程度。
 
-#### Auswirkungen von `silenceDurationMs` auf die Audioqualität
+#### `silenceDurationMs` 对音质的影响
 
-Der Wert `silenceDurationMs` wirkt sich direkt auf die Größe und Vollständigkeit der Audio-Chunks aus, die das Modell zur Verarbeitung erhält:
+`silenceDurationMs` 值会直接影响模型接收到的音频块的大小和完整性，以供模型进行处理：
 
-- **Empfohlen (500–800 ms)**: Bietet ein gutes Gleichgewicht. Das Modell erhält vollständige, kontextreiche Audioblöcke, während die Latenz angemessen bleibt. Der interne Standardwert des Servers beträgt etwa 800 ms.
-- **Zu niedrig (z.B. 100–200 ms)**: Das System beendet Sprechrunden während natürlicher Pausen und teilt eine einzelne Äußerung in mehrere kleine Audiofragmente auf. Das Modell empfängt diese Fragmente einzeln, wodurch der fragmentübergreifende Kontext verloren geht und die Qualität der Transkription und Antwort sinkt.
-- **Zu hoch (z. B. 2.000 ms oder mehr)**: Das System wartet lange, nachdem der Nutzer aufgehört hat zu sprechen. Dadurch wird die wahrgenommene Latenz erhöht, bevor das Modell antwortet.
+- **建议（500 毫秒 - 800 毫秒）**：可实现良好的平衡 - 模型接收完整且包含丰富上下文的音频块，同时保持合理的延迟时间。服务器的内部默认值为大约 800 毫秒。
+- **过低（例如 100 毫秒到 200 毫秒）**：系统会在自然停顿期间结束语音轮次，从而将单个话语拆分为多个小音频片段。模型会单独接收这些片段，从而丢失片段间的上下文，导致转写和回答质量下降。
+- **过高（例如，2000 毫秒以上）**：用户停止说话后，系统会等待很长时间，从而增加模型响应前的感知延迟。
 
-#### Best Practices für die manuelle (clientseitige) VAD
+#### 手动（客户端）VAD 的最佳实践
 
-Wenn Sie die automatische VAD deaktivieren und `activityStart`/`activityEnd`-Signale über Ihre eigene clientseitige Spracherkennung verwalten, werden die integrierten Audio-Puffermechanismen des Servers umgangen. Das bedeutet:
+当您停用自动 VAD 并通过自己的客户端语音检测来管理 `activityStart`/`activityEnd` 信号时，请注意，服务器的内置音频缓冲机制会被绕过。这意味着：
 
-1. **Kein Pre-Speech-Puffer**:Der Server fügt kein Audio mehr vor dem erkannten Sprachbeginn ein. Ihr Kunde sollte vor dem Senden von `activityStart` ausreichend Audio-Kontext bereitstellen.
-2. **Keine Stille-Toleranz**:Der Server reagiert sofort auf Ihr `activityEnd`-Signal, ohne zusätzliche Wartezeit. Wenn Ihr clientseitiges VAD einen aggressiven End-of-Speech-Schwellenwert verwendet (z.B. 200 ms Stille), kann es sein, dass die Sprache während natürlicher Pausen mitten im Satz unterbrochen wird.
+1. **无语音前缓冲区**：服务器不再在检测到的语音开始之前预先添加音频。客户端应在发送 `activityStart` 之前包含足够的音频上下文。
+2. **无静音容忍度**：服务器会立即对您的 `activityEnd` 信号做出响应，无需额外等待。如果您的客户端 VAD 使用激进的语音结束阈值（例如 200 毫秒的静音），则在自然停顿期间，语音可能会在句子中被切断。
 
-Damit die Audioqualität bei der manuellen VAD erhalten bleibt, sollten Sie in der Spracherkennung des Clients einen Stille-Grenzwert für das Ende der Sprache von mindestens **500 ms** verwenden.
-Schwellenwerte unter diesem Wert führen häufig zu fragmentierten Audioinhalten, was die Qualität der Transkription und der Modellantworten beeinträchtigt.
+如需使用手动 VAD 来保持音质，请在客户端的语音活动检测器中使用至少 **500 毫秒的语音结束静音阈值。**低于此值的阈值通常会导致音频片段化，从而降低转写和模型响应质量。
 
-## Tokenanzahl
+## Token 计数
 
-Die Gesamtzahl der verbrauchten Tokens finden Sie im Feld [usageMetadata](https://ai.google.dev/api/live?hl=de#usagemetadata) der zurückgegebenen Servernachricht.
+您可以在返回的服务器消息的 [usageMetadata](https://ai.google.dev/api/live?hl=zh-cn#usagemetadata) 字段中找到消耗的 token 总数。
 
 ### Python
 
@@ -1022,9 +1073,9 @@ for (const turn of turns) {
 }
 ```
 
-## Auflösung von Medien
+## 媒体分辨率
 
-Sie können die Media-Auflösung für die Eingabemedien festlegen, indem Sie das Feld `mediaResolution` als Teil der Sitzungskonfiguration festlegen:
+您可以在会话配置中设置 `mediaResolution` 字段，以指定输入媒体的媒体分辨率：
 
 ### Python
 
@@ -1048,99 +1099,98 @@ const config = {
 };
 ```
 
-## Beschränkungen
+## 限制
 
-Beachten Sie beim Planen Ihres Projekts die folgenden Einschränkungen der Live API.
+在规划项目时，请考虑 Live API 的以下限制。
 
-### Antwortmodalitäten
+### 回答模式
 
-Die nativen Audiomodelle unterstützen nur den Antworttyp „AUDIO“. Wenn Sie die Modellantwort als Text benötigen, verwenden Sie die Funktion [output audio transcription](#audio-transcription).
+原生音频模型仅支持 `AUDIO` 回答模态。如果您需要以文本形式获取模型响应，请使用[输出音频转写](#audio-transcription)功能。
 
-### Clientauthentifizierung
+### 客户端身份验证
 
-Die Live API bietet standardmäßig nur die Server-zu-Server-Authentifizierung. Wenn Sie Ihre Live API-Anwendung mit einem [Client-zu-Server-Ansatz](https://ai.google.dev/gemini-api/docs/live?hl=de#implementation-approach) implementieren, müssen Sie [ephemere Tokens](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=de) verwenden, um Sicherheitsrisiken zu minimieren.
+Live API 默认仅提供服务器到服务器的身份验证。如果您要使用[客户端到服务器的方法](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn#implementation-approach)来实现 Live API 应用，则需要使用[临时令牌](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=zh-cn)来降低安全风险。
 
-### Sitzungsdauer
+### 会话时长
 
-Sitzungen mit nur Audio sind auf 15 Minuten begrenzt, Sitzungen mit Audio und Video auf 2 Minuten.
-Sie können jedoch verschiedene [Methoden zur Sitzungsverwaltung](https://ai.google.dev/gemini-api/docs/live-session?hl=de) konfigurieren, um die Sitzungsdauer unbegrenzt zu verlängern.
+纯音频会话时长上限为 15 分钟，音频加视频会话时长上限为 2 分钟。不过，您可以配置不同的[会话管理技术](https://ai.google.dev/gemini-api/docs/live-session?hl=zh-cn)，以无限延长会话时长。
 
-### Kontextfenster
+### 上下文窗口
 
-Eine Sitzung hat ein Kontextfensterlimit von:
+会话的上下文窗口限制为：
 
-- 128.000 Tokens für Modelle mit [nativer Audioausgabe](#native-audio-output)
-- 32.000 Tokens für andere Live API-Modelle
+- 对于[原生音频输出](#native-audio-output)模型，为 128,000 个 token
+- 其他 Live API 模型的令牌数量为 32,000
 
-## Unterstützte Sprachen
+## 支持的语言
 
-Die Live API unterstützt die folgenden 97 Sprachen.
+Live API 支持以下 97 种语言。
 
-| Sprache | BCP-47-Code | Sprache | BCP-47-Code |
+| 语言 | BCP-47 代码 | 语言 | BCP-47 代码 |
 | --- | --- | --- | --- |
-| Afrikaans | `af` | Lettisch | `lv` |
-| Akan | `ak` | Litauisch | `lt` |
-| Albanisch | `sq` | Mazedonisch | `mk` |
-| Amharisch | `am` | Malaiisch | `ms` |
-| Arabisch | `ar` | Malayalam | `ml` |
-| Armenisch | `hy` | Maltesisch | `mt` |
-| Assamesisch | `as` | Maori | `mi` |
-| Aserbaidschanisch | `az` | Marathi | `mr` |
-| Baskisch | `eu` | Mongolisch | `mn` |
-| Belarussisch | `be` | Nepalesisch | `ne` |
-| Bengalisch | `bn` | Norwegisch | `no` |
-| Bosnisch | `bs` | Oriya | `or` |
-| Bulgarisch | `bg` | Oromo | `om` |
-| Burmesisch | `my` | Paschtu | `ps` |
-| Katalanisch | `ca` | Persisch | `fa` |
-| Cebuano | `ceb` | Polnisch | `pl` |
-| Chinesisch | `zh` | Portugiesisch | `pt` |
-| Kroatisch | `hr` | Punjabi | `pa` |
-| Tschechisch | `cs` | Quechua | `qu` |
-| Dänisch | `da` | Rumänisch | `ro` |
-| Niederländisch | `nl` | Rätoromanisch | `rm` |
-| Englisch | `en` | Russisch | `ru` |
-| Estnisch | `et` | Serbisch | `sr` |
-| Färöisch | `fo` | Sindhi | `sd` |
-| Filipino | `fil` | Singhalesisch | `si` |
-| Finnisch | `fi` | Slowakisch | `sk` |
-| Französisch | `fr` | Slowenisch | `sl` |
-| Galizisch | `gl` | Somali | `so` |
-| Georgisch | `ka` | Sesotho | `st` |
-| Deutsch | `de` | Spanisch | `es` |
-| Griechisch | `el` | Swahili | `sw` |
-| Gujarati | `gu` | Schwedisch | `sv` |
-| Hausa | `ha` | Tadschikisch | `tg` |
-| Hebräisch | `iw` | Tamil | `ta` |
-| Hindi | `hi` | Telugu | `te` |
-| Ungarisch | `hu` | Thailändisch | `th` |
-| Isländisch | `is` | Setswana | `tn` |
-| Indonesisch | `id` | Türkisch | `tr` |
-| Irisch | `ga` | Turkmenisch | `tk` |
-| Italienisch | `it` | Ukrainisch | `uk` |
-| Japanisch | `ja` | Urdu | `ur` |
-| Kannada | `kn` | Usbekisch | `uz` |
-| Kasachisch | `kk` | Vietnamesisch | `vi` |
-| Khmer | `km` | Walisisch | `cy` |
-| Kinyarwanda | `rw` | Westfriesisch | `fy` |
-| Koreanisch | `ko` | Wolof | `wo` |
-| Kurdisch | `ku` | Yoruba | `yo` |
-| Kirgisisch | `ky` | Zulu | `zu` |
-| Lao | `lo` |  |  |
+| 南非荷兰语 | `af` | 拉脱维亚语 | `lv` |
+| 阿坎语 | `ak` | 立陶宛语 | `lt` |
+| 阿尔巴尼亚语 | `sq` | 马其顿语 | `mk` |
+| 阿姆哈拉语 | `am` | 马来语 | `ms` |
+| 阿拉伯语 | `ar` | 马拉雅拉姆语 | `ml` |
+| 亚美尼亚语 | `hy` | 马耳他语 | `mt` |
+| 阿萨姆语 | `as` | 毛利语 | `mi` |
+| 阿塞拜疆语 | `az` | 马拉地语 | `mr` |
+| 巴斯克语 | `eu` | 蒙古语 | `mn` |
+| 白俄罗斯语 | `be` | 尼泊尔语 | `ne` |
+| 孟加拉语 | `bn` | 挪威语 | `no` |
+| 波斯尼亚语 | `bs` | 奥里亚语 | `or` |
+| 保加利亚语 | `bg` | 奥罗莫语 | `om` |
+| 缅甸语 | `my` | 普什图语 | `ps` |
+| 加泰罗尼亚语 | `ca` | 波斯语 | `fa` |
+| 宿务语 | `ceb` | 波兰语 | `pl` |
+| 中文 | `zh` | 葡萄牙语 | `pt` |
+| 克罗地亚语 | `hr` | 旁遮普语 | `pa` |
+| 捷克语 | `cs` | 克丘亚语 | `qu` |
+| 丹麦语 | `da` | 罗马尼亚语 | `ro` |
+| 荷兰语 | `nl` | 罗曼什语 | `rm` |
+| 英语 | `en` | 俄语 | `ru` |
+| 爱沙尼亚语 | `et` | 塞尔维亚语 | `sr` |
+| 法罗语 | `fo` | 信德语 | `sd` |
+| 菲律宾语 | `fil` | 僧伽罗语 | `si` |
+| 芬兰语 | `fi` | 斯洛伐克语 | `sk` |
+| 法语 | `fr` | 斯洛文尼亚语 | `sl` |
+| 加利西亚语 | `gl` | 索马里语 | `so` |
+| 格鲁吉亚语 | `ka` | 南索托语 | `st` |
+| 德语 | `de` | 西班牙语 | `es` |
+| 希腊语 | `el` | 斯瓦希里语 | `sw` |
+| 古吉拉特语 | `gu` | 瑞典语 | `sv` |
+| 豪萨语 | `ha` | 塔吉克语 | `tg` |
+| 希伯来语 | `iw` | 泰米尔语 | `ta` |
+| 印地语 | `hi` | 泰卢固语 | `te` |
+| 匈牙利语 | `hu` | 泰语 | `th` |
+| 冰岛语 | `is` | 茨瓦纳语 | `tn` |
+| 印度尼西亚语 | `id` | 土耳其语 | `tr` |
+| 爱尔兰语 | `ga` | 土库曼语 | `tk` |
+| 意大利语 | `it` | 乌克兰语 | `uk` |
+| 日语 | `ja` | 乌尔都语 | `ur` |
+| 卡纳达语 | `kn` | 乌兹别克语 | `uz` |
+| 哈萨克语 | `kk` | 越南语 | `vi` |
+| 高棉语 | `km` | 威尔士语 | `cy` |
+| 卢旺达语 | `rw` | 西弗里西亚语 | `fy` |
+| 韩语 | `ko` | 沃洛夫语 | `wo` |
+| 库尔德语 | `ku` | 约鲁巴语 | `yo` |
+| 吉尔吉斯语 | `ky` | 祖鲁语 | `zu` |
+| 老挝语 | `lo` |  |  |
 
-## Nächste Schritte
+## 后续步骤
 
-- In den Anleitungen [Tool Use](https://ai.google.dev/gemini-api/docs/live-tools?hl=de) (Tool-Nutzung) und [Session Management](https://ai.google.dev/gemini-api/docs/live-session?hl=de) (Sitzungsverwaltung) finden Sie wichtige Informationen zur effektiven Nutzung der Live API.
-- Testen Sie die Live API in [Google AI Studio](https://aistudio.google.com/app/live?hl=de).
-- Weitere Informationen zu den Live API-Modellen finden Sie auf der Seite „Modelle“ unter [Gemini 2.5 Flash Native Audio](https://ai.google.dev/gemini-api/docs/models?hl=de#gemini-2.5-flash-native-audio).
-- Weitere Beispiele finden Sie im [Live API-Cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=de), im [Live API Tools-Cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=de) und im [Live API-Script für die ersten Schritte](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.py).
+- 请参阅[工具使用](https://ai.google.dev/gemini-api/docs/live-tools?hl=zh-cn)和[会话管理](https://ai.google.dev/gemini-api/docs/live-session?hl=zh-cn)指南，了解有关如何有效使用 Live API 的重要信息。
+- 在 [Google AI Studio](https://aistudio.google.com/app/live?hl=zh-cn) 中试用 Live API。
+- 有关 Live API 模型的更多信息，请参阅模型页面上的 [Gemini 2.5 Flash Native Audio](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#gemini-2.5-flash-native-audio)。
+- 请尝试查看 [Live API cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=zh-cn)、[Live API Tools cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=zh-cn) 和 [Live API Get Started script](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.py) 中的更多示例。
 
-Feedback geben
+发送反馈
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Zuletzt aktualisiert: 2026-07-31 (UTC).
+最后更新时间 (UTC)：2026-09-08。
 
-Haben Sie Feedback für uns?
+需要向我们提供更多信息？
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-31 (UTC)."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-08。"],[],[]]

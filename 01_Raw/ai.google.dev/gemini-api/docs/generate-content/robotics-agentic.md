@@ -1,35 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-agentic?hl=tr
-fetched_at: 2026-09-07T05:35:43.209903+00:00
-title: "Ajan tabanl\u0131 g\u00f6r\u00fc\u015f yetenekleri \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-agentic?hl=zh-CN
+fetched_at: 2026-09-14T05:39:23.533335+00:00
+title: "\u667a\u80fd\u4f53\u89c6\u89c9\u529f\u80fd \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-cn)
 
-Geri bildirim gönderin
+发送反馈
 
-# Ajan tabanlı görüş yetenekleri
+# 智能体视觉功能
 
-Gemini Robotics ER modelleri, resimleri değiştirmek ve yanıt vermeden önce mantık uygulamak için Python kodu yazıp yürütebilir. Bu sayfada, kod yürütme örnekleri (yakınlaştırma ve kırpma ile nesne tespit etme, cihaz okuma, sıvı ölçümü, devre kartı okuma ve görüntü ek açıklaması) ele alınmaktadır.
+Gemini Robotics ER 模型可以编写和执行 Python 代码来处理图片，并在回答问题之前应用逻辑。本页介绍了代码执行示例：使用缩放和裁剪功能进行对象检测、乐器读数、液体测量、电路板读数和图片注释。
 
-Bu örnekleri kendi kullanım alanınıza uyarlamak için istem metnini ve yüklenen resim dosyasını kendinizinkilerle değiştirin. Ayrıca, istemdeki istenen JSON şemasını uygulamanızın ihtiyaç duyduğu çıkış yapısına uyacak şekilde ayarlayabilir veya çıkış biçimini ve doğruluğunu zorunlu kılmak için `system_instruction` ekleyebilirsiniz.
+如需根据自己的使用场景调整这些示例，请将提示文本和上传的图片文件替换为您自己的内容。您还可以调整提示中请求的 JSON 架构，以匹配应用所需的输出结构，或者添加 `system_instruction` 来强制执行输出格式和精度。
 
-Çalıştırılabilir kodun tamamı için [Robotics cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)'a (Robotik yemek kitabı) bakın.
+如需查看完整的可运行代码，请参阅[机器人技术食谱](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)。
 
-## Düşünme düzeyi
+## 思考等级
 
-Gecikmeyi doğrulukla değiştirmek için düşünme düzeyini kontrol edebilirsiniz. Nesne tespit etme gibi uzamsal görevler, düşük düşünme seviyesinde iyi performans gösterir. Sayma veya ağırlık tahmini gibi karmaşık görevler, daha yüksek bir düşünme seviyesinden yararlanır.
+您可以控制思考级别，以牺牲延迟时间来换取准确性。对象检测等空间任务在低思维水平下表现良好。计数或重量估计等复杂任务需要更高的思维水平。
 
-Aşağıdaki örnekte, karmaşık bir sayma görevi için düşünme düzeyi `high` olarak ayarlanmıştır:
+以下示例将复杂计数任务的思考水平设置为 `high`：
 
 ### Python
 
@@ -59,11 +59,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Ayrıntılar için [Thinking](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=tr) (Düşünme) bölümüne bakın.
+如需了解详情，请参阅[思考](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=zh-cn)。
 
-## Nesne tespit etme (yakınlaştırma ve kırpma)
+## 对象检测（缩放和裁剪）
 
-Aşağıdaki örnekte, nesneleri algılarken ve sınırlayıcı kutuları döndürürken daha net bir görünüm için kodu yürütme özelliğini kullanarak bir resmi nasıl yakınlaştırıp kırpacağınız gösterilmektedir.
+以下示例演示了如何使用代码执行功能在检测到对象并返回边界框时缩放和裁剪图片，以便更清晰地查看。
 
 ### Python
 
@@ -101,7 +101,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Model çıkışı, aşağıdaki JSON yanıtına benzer olacaktır:
+模型输出将类似于以下 JSON 响应：
 
 ```
 [
@@ -113,13 +113,13 @@ Model çıkışı, aşağıdaki JSON yanıtına benzer olacaktır:
 ]
 ```
 
-Aşağıdaki resimde, modelden döndürülen kutular gösterilmektedir.
+下图显示了模型返回的方框。
 
-![Bulunan nesnelerin sınırlayıcı kutularını gösteren bir örnek](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=tr)
+![显示检测到的对象的边界框的示例](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=zh-cn)
 
-## Analog bir göstergeyi okuma ve mantık uygulama
+## 读取模拟仪表并应用逻辑
 
-Aşağıdaki örnekte, analog bir ölçüm cihazını okumak ve zaman hesaplamaları yapmak için modelin nasıl kullanılacağı gösterilmektedir. JSON çıkışını zorunlu kılmak için sistem talimatı kullanır.
+以下示例演示了如何使用该模型读取模拟表盘并执行时间计算。它使用系统指令来强制生成 JSON 输出。
 
 ### Python
 
@@ -155,9 +155,9 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-## Bir kaptaki sıvıyı ölçme
+## 测量容器中的液体
 
-Aşağıdaki örnekte, bir kaptaki sıvı seviyesini ölçmek için kod yürütmenin nasıl kullanılacağı gösterilmektedir.
+以下示例演示了如何使用代码执行来测量容器中的液体量。
 
 ### Python
 
@@ -192,9 +192,9 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-## Devre kartındaki işaretleri okuma
+## 读取电路板上的标记
 
-Aşağıdaki örnekte, devre kartındaki işaretleri okumak için kod yürütmenin nasıl kullanılacağı gösterilmektedir.
+以下示例演示了如何使用代码执行功能读取电路板上的标记。
 
 ### Python
 
@@ -229,11 +229,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-![Bir devre kartındaki işaretleri gösteren örnek](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=tr)
+![显示电路板上标记的示例](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=zh-cn)
 
-## Resim ek açıklaması
+## 图片注释
 
-Aşağıdaki örnekte, kod yürütme özelliğini kullanarak bir resmi nasıl açıklayacağınız (ör. imha talimatları için ok çizme) ve değiştirilen resmi nasıl döndüreceğiniz gösterilmektedir.
+以下示例演示了如何使用代码执行功能来注释图片（例如，绘制箭头以指示处置说明），并返回修改后的图片。
 
 ### Python
 
@@ -270,11 +270,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Aşağıda örnek bir resim girişi verilmiştir.
+以下是输入图片的示例。
 
-![Okumak için saat gösteren bir örnek](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=tr)
+![显示时钟的示例](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=zh-cn)
 
-Model çıkışı aşağıdaki gibi olur:
+模型输出将类似于以下内容：
 
 ```
   The annotated image shows the suggested disposal locations for the items on the table:
@@ -283,18 +283,18 @@ Model çıkışı aşağıdaki gibi olur:
   - **Black bin (Trash)**: Chocolate bar wrapper, Welch's packet, and white tissue.
 ```
 
-## Sırada ne var?
+## 后续步骤
 
-- [Görev düzenleme](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=tr): Özel robot API'leri içeren uzun vadeli görevler.
-- [Yayın özellikli robotik](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=tr): Gerçek zamanlı çift yönlü yayın (yalnızca Gemini Robotics ER 2).
-- [Video anlama](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=tr): Anları bulma ve ilerleme sınıflandırması (yalnızca Gemini Robotics ER 2).
+- [任务编排](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=zh-cn) - 使用自定义机器人 API 的长时程任务。
+- [支持流式传输的机器人](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=zh-cn) - 实时双向流式传输（仅限 Gemini Robotics ER 2）。
+- [视频理解](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=zh-cn) - 时刻查找和进度分类（仅限 Gemini Robotics ER 2）。
 
-Geri bildirim gönderin
+发送反馈
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Son güncelleme tarihi: 2026-09-04 UTC.
+最后更新时间 (UTC)：2026-09-08。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+需要向我们提供更多信息？
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-04 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-08。"],[],[]]

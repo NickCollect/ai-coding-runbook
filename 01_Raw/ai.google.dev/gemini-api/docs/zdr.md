@@ -1,59 +1,59 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/zdr?hl=he
-fetched_at: 2026-09-07T05:49:52.477300+00:00
-title: "\u05e9\u05de\u05d9\u05e8\u05ea \u05e0\u05ea\u05d5\u05e0\u05d9\u05dd \u05d0\u05e4\u05e1\u05d9\u05ea \u05d1-Gemini Developer API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/zdr?hl=fr
+fetched_at: 2026-09-14T05:51:10.341385+00:00
+title: "R\u00e9tention des donn\u00e9es nulle dans l'API Gemini\u00a0Developer \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-שליחת משוב
+Envoyer des commentaires
 
-# שמירת נתונים אפסית ב-Gemini Developer API
+# Rétention des données nulle dans l'API Gemini Developer
 
-בדף הזה מפורטים פרטים על מה שנקרא בדרך כלל 'שמירת נתונים אפסית' ב-Gemini Developer API.
+Cette page décrit en détail ce que l'on appelle communément la "rétention zéro des données" dans l'API Gemini Developer.
 
-## הגבלת אימון
+## Restriction liée à l'entraînement
 
-כפי שמפורט [בתנאים ובהגבלות של Gemini API](https://ai.google.dev/gemini-api/terms?hl=he), כשמשתמשים בשירותים בתשלום, Google לא משתמשת בהנחיות (כולל הוראות מערכת משויכות, תוכן במטמון וקבצים כמו תמונות, סרטונים או מסמכים) או בתשובות כדי לשפר את המוצרים שלה. הגדרת השירותים בתשלום מופיעה [כאן](https://ai.google.dev/gemini-api/terms?hl=he#paid-services).
+Comme indiqué dans les [Conditions d'utilisation de l'API Gemini](https://ai.google.dev/gemini-api/terms?hl=fr), lorsque vous utilisez des Services payants, Google n'utilise pas vos requêtes (y compris les instructions système associées, le contenu mis en cache et les fichiers tels que les images, les vidéos ou les documents) ni les réponses pour améliorer ses produits. Les Services payants sont définis [ici](https://ai.google.dev/gemini-api/terms?hl=fr#paid-services).
 
-## שמירת נתוני לקוחות והשגת מצב של אפס שמירת נתונים
+## Conservation des données client et objectif de zéro conservation des données
 
-בדרך כלל, נתוני הלקוחות נשמרים לפרקי זמן מוגבלים בתרחישים ובתנאים הבאים. כדי להגיע למצב של אפס שמירת נתונים, הלקוחות צריכים לבצע פעולות ספציפיות או להימנע משימוש בתכונות ספציפיות בכל אחד מהתחומים הבאים:
+Les données client sont généralement conservées pendant une durée limitée dans les scénarios et conditions suivants. Pour ne conserver aucune donnée, les clients doivent effectuer des actions spécifiques ou éviter certaines fonctionnalités dans chacun de ces domaines :
 
-- **רישום ביומן של הנחיות לצורך מעקב אחר שימוש לרעה**: כפי שמתואר [בתנאים והגבלות הנוספים למתן שירות של Gemini API](https://ai.google.dev/gemini-api/terms?hl=he), בשירותים בתשלום, Google רושמת ביומן את ההנחיות והתשובות למשך זמן מוגבל, אך ורק לצורך זיהוי הפרות של [המדיניות בנושא שימוש אסור](https://policies.google.com/terms/generative-ai/use-policy?hl=he). כשהבקשה שלכם ל-ZDR עבור פרויקט מסוים מאושרת, כל תוכן המשתמשים (ההנחיות והתשובות) והמטא-נתונים שניתן לזהות (כמו כתובות IP ומזהי חשבון Google) נמחקים לפני הרישום ביומן. הרשומה שמתקבלת מסומנת כרשומה שעברה סניטציה, והיא לא מכילה מידע מזהה של משתמש. כך נשמרת התאימות עם פלטפורמת הסוכנים של Gemini Enterprise, שבה לא מתבצע שימור נתונים.
-- **עיגון באמצעות חיפוש Google**: כמו שמתואר [בתנאים הנוספים של Gemini API](https://ai.google.dev/gemini-api/terms?hl=he#grounding-with-google-search),‏ Google שומרת הנחיות, מידע הקשרי ותוצאות שנוצרו למשך שלושים (30) ימים לצורך יצירת תוצאות מעוגנות והצעות לחיפוש.
-  יכול להיות שנשתמש במידע השמור הזה לצורך ניפוי באגים ובדיקות של מערכות שתומכות בהארקה. **אם משתמשים ב-עיגון באמצעות חיפוש Google, אי אפשר להשבית את השמירה של המידע הזה.**
-- **עיגון בעזרת מפות Google**: כפי שמפורט [בתנאים ובהגבלות הנוספים של Gemini API](https://ai.google.dev/gemini-api/terms?hl=he),‏ Google מאחסנת הנחיות, מידע הקשרי ותוצאות שנוצרו למשך שלושים (30) ימים לצורך יצירת תוצאות מבוססות. אפשר להשתמש במידע הזה רק לצורך הנדסת אמינות, למשל לצורך ניפוי באגים במקרה של בעיות בשירות.
-  **אם משתמשים ב-עיגון בעזרת מפות Google, אין אפשרות להשבית את האחסון של המידע הזה.**
-- ‫**Interactions API**: ‏Interactions API מנהל את המצב הפעיל של שיחה כדי לאפשר שיחות מרובות תורות. **כברירת מחדל, ה-API של האינטראקציות מאפשר אחסון של מצב**. כדי להבטיח שלא יישארו עקבות של נתונים, צריך להגדיר במפורש את הפרמטר `store` לערך `false` בבקשות ה-API כדי לבטל את ההסכמה לשמירת מצב ברירת המחדל.
-- ‫**Live API**: ממשק API עם שמירת מצב שמאפשר התחברות מחדש בזמן אמת על ידי שמירת מצב השיחה. כדי להשיג אפס שמירת נתונים, **אל תגדירו את SessionResumptionConfig**. אם נוצר כינוי לסשן, מצב השיחה (כולל טקסט, אודיו ווידאו) נשמר למשך עד 24 שעות.
-- ‫**File API Storage**: File API מאפשר למשתמשים להעלות נכסים גדולים.
-  הקבצים מאוחסנים במצב לא פעיל עד שהמשתמש מוחק אותם או עד שתוקף שלהם פג.
-  השימוש ב-File API לא תלוי ברישום ביומן של ZDR. כדי לוודא שלא נשארים נתונים, המשתמשים צריכים למחוק את הקבצים באופן ידני.
-- **שמירת הקשר במטמון באופן מפורש**: המשתמשים יכולים לשמור במטמון באופן ידני מערכי נתונים גדולים (למשל, סרטונים ארוכים או ספריות מסמכים) באמצעות השדה `cached_content`. היומנים של הבקשות האלה פועלים לפי מדיניות ההשמטה של ZDR, אבל ההקשר ששמור במטמון מאוחסן עם `ttl` או `expire_time` שהוגדרו על ידי המשתמש. כדי להשיג טביעת רגל של אפס נתונים, אל תשתמשו בתכונה cached\_content.
-- **שמירה במטמון בזיכרון באופן מרומז**: כברירת מחדל, מודלים של Gemini שומרים נתונים במטמון בזיכרון כדי להפחית את זמן האחזור ואת העלות למפתחים. הנתונים האלה נמצאים רק ב-RAM (לא במצב מנוחה), מבודדים ברמת הפרויקט, ויש להם TTL של 24 שעות.
-  **הפעולה הזו לא מהווה הפרה של מדיניות אפס שמירת נתונים.**
+- **Journalisation des requêtes pour la surveillance des utilisations abusives** : comme indiqué dans les [Conditions d'utilisation supplémentaires de l'API Gemini](https://ai.google.dev/gemini-api/terms?hl=fr), pour les Services payants, Google enregistre les requêtes et les réponses pendant une durée limitée uniquement pour détecter les cas de non-respect du [Règlement sur les utilisations interdites](https://policies.google.com/terms/generative-ai/use-policy?hl=fr). Lorsque votre demande de ZDR pour un projet spécifique est approuvée, tous les contenus utilisateur (requêtes et réponses) et les métadonnées identifiables (telles que les adresses IP et les ID de compte Google) sont effacés avant la journalisation. L'enregistrement obtenu est marqué comme nettoyé et ne contient aucune donnée utilisateur permettant de l'identifier, ce qui garantit la parité avec la plate-forme Gemini Enterprise Agent Zero Data Retention.
+- **Ancrage avec la recherche Google** : comme indiqué dans les [Conditions d'utilisation supplémentaires de l'API Gemini](https://ai.google.dev/gemini-api/terms?hl=fr#grounding-with-google-search), Google stocke les requêtes, les informations contextuelles et les résultats générés pendant 30 jours afin de créer des résultats ancrés et des suggestions de recherche.
+  Ces informations stockées peuvent être utilisées pour le débogage et le test des systèmes qui prennent en charge l'ancrage. **Il n'est pas possible de désactiver le stockage de ces informations si vous utilisez l'ancrage avec la recherche Google.**
+- **Ancrage avec Google Maps** : comme indiqué dans les [Conditions d'utilisation supplémentaires de l'API Gemini](https://ai.google.dev/gemini-api/terms?hl=fr), Google stocke les requêtes, les informations contextuelles et les résultats générés pendant 30 jours afin de créer des résultats ancrés. Ces informations stockées ne peuvent être utilisées que pour l'ingénierie de la fiabilité, par exemple pour le débogage en cas de problèmes de service.
+  **Il n'est pas possible de désactiver le stockage de ces informations si vous utilisez l'ancrage avec Google Maps.**
+- **API Interactions** : l'API Interactions gère l'état actif d'une conversation pour permettre les tours multitours. **Par défaut, l'API Interactions permet le stockage de l'état.** Pour garantir une empreinte de données nulle, vous devez définir explicitement le paramètre `store` sur `false` dans vos requêtes API afin de désactiver la conservation de l'état par défaut.
+- **API Live** : cette API avec état permet une reconnexion en temps réel en stockant l'état de la conversation. Si vous ne souhaitez pas conserver de données, **ne configurez pas SessionResumptionConfig**. Si un identifiant de session est généré, l'état de la conversation (y compris le texte, l'audio et la vidéo) est conservé pendant 24 heures maximum.
+- **Stockage de l'API File** : l'API File permet aux utilisateurs d'importer des composants volumineux.
+  Les fichiers sont stockés au repos jusqu'à ce qu'ils soient supprimés par l'utilisateur ou qu'ils expirent.
+  L'utilisation de l'API File est indépendante de la journalisation ZDR. Les utilisateurs doivent supprimer manuellement les fichiers pour s'assurer qu'il ne reste aucune trace de données.
+- **Mise en cache explicite du contexte** : les utilisateurs peuvent mettre manuellement en cache de grands ensembles de données (par exemple, de longues vidéos ou des bibliothèques de documents) à l'aide du champ `cached_content`. Bien que les journaux de ces requêtes suivent les règles de suppression ZDR, le contexte mis en cache lui-même est stocké avec un `ttl` ou un `expire_time` défini par l'utilisateur. Pour obtenir une empreinte de données absolument nulle, n'utilisez pas la fonctionnalité cached\_content.
+- **Mise en cache implicite en mémoire** : par défaut, les modèles Gemini mettent en cache les données en mémoire pour réduire la latence et les coûts pour les développeurs. Ces données sont strictement stockées dans la RAM (et non au repos), isolées au niveau du projet et ont une durée de vie de 24 heures.
+  **Cela ne constitue pas une violation de la conservation zéro des données.**
 
-## המאמרים הבאים
+## Étape suivante
 
-- [מידע על המדיניות בנושא שימוש אסור ב-AI גנרטיבי](https://policies.google.com/terms/generative-ai/use-policy?hl=he)
-- קוראים את [התנאים וההגבלות הנוספים של Gemini API](https://ai.google.dev/gemini-api/terms?hl=he).
-- אם אתם צריכים אמצעי בקרה של ZDR ברמה הארגונית בשירות עצמי, כדאי לעיין [במדריך בנושא שמירת נתונים אפסית בפלטפורמת הסוכנים של Gemini Enterprise](https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/zero-data-retention?hl=he).
+- En savoir plus sur le [Règlement sur les utilisations interdites de l'IA générative](https://policies.google.com/terms/generative-ai/use-policy?hl=fr)
+- Consultez les [Conditions d'utilisation supplémentaires de l'API Gemini](https://ai.google.dev/gemini-api/terms?hl=fr).
+- Si vous avez besoin de contrôles ZDR en libre-service de niveau entreprise, consultez le [guide Gemini Enterprise Agent Platform Zero Data Retention](https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/zero-data-retention?hl=fr).
 
-שליחת משוב
+Envoyer des commentaires
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-עדכון אחרון: 2026-05-28 (שעון UTC).
+Dernière mise à jour le 2026/05/28 (UTC).
 
-רוצה לתת לנו משוב?
+Voulez-vous nous donner plus d'informations ?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-05-28 (שעון UTC)."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/05/28 (UTC)."],[],[]]

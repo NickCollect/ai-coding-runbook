@@ -1,34 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-video-progress?hl=hi
-fetched_at: 2026-09-07T05:35:46.682168+00:00
-title: "\u0935\u0940\u0921\u093f\u092f\u094b \u0915\u0940 \u092c\u093e\u0930\u0940\u0915\u093c\u0940 \u0938\u0947 \u092a\u0939\u091a\u093e\u0928 \u0915\u0930\u0928\u093e \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-video-progress?hl=pl
+fetched_at: 2026-09-14T05:46:43.908994+00:00
+title: "Rozpoznawanie film\u00f3w \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs/generate-content?hl=pl)
 
-सुझाव भेजें
+Prześlij opinię
 
-# वीडियो की बारीक़ी से पहचान करना
+# Rozpoznawanie filmów
 
-Gemini Robotics ER 2, दो सुविधाओं का इस्तेमाल करके, लगातार वीडियो फ़ीड से टास्क की प्रोग्रेस को ट्रैक कर सकता है:
+Model Gemini Robotics ER 2 może śledzić postępy zadań na podstawie ciągłych strumieni wideo dzięki 2 funkcjom:
 
-- मोमेंट फ़ाइंडिंग: इससे सटीक टाइमस्टैंप की पहचान की जा सकती है, जहां कोई मुख्य इवेंट होता है.
-- प्रोग्रेस क्लासिफ़िकेशन: इससे हर वीडियो को पांच कंप्लीशन ब्रैकेट में से किसी एक में असाइन किया जा सकता है. ये ब्रैकेट 0–20%, 20–40%, 40–60%, 60–80%, और 80–100% हैं.
+- Wyszukiwanie momentów: identyfikuje dokładny znacznik czasu, w którym występuje kluczowe zdarzenie.
+- Klasyfikacja postępów: przypisuje każdy film do jednego z 5 przedziałów ukończenia (0–20%, 20–40%, 40–60%, 60–80%, 80–100%).
 
-## मोमेंट फ़ाइंडिंग
+## Wyszukiwanie momentów
 
-मोमेंट फ़ाइंडिंग से, वीडियो के उस सटीक फ़्रेम की पहचान की जा सकती है जहां कोई अहम इवेंट होता है. उदाहरण के लिए, जब कोई कप भर जाता है या कोई गांठ बांधी जाती है. रोबोट इसका इस्तेमाल, सफलता की पुष्टि करने, चरणों को क्रम से लगाने, और गड़बड़ियों को ठीक करने के लिए करते हैं.
+Wyszukiwanie momentów identyfikuje dokładną klatkę wideo, w której występuje krytyczne zdarzenie – na przykład gdy kubek jest pełny lub węzeł jest zawiązany. Roboty używają tej funkcji do weryfikowania powodzenia, sekwencjonowania kroków i wywoływania korekt.
 
-यहां दिए गए उदाहरण में, प्रॉम्प्ट मॉडल से किसी वीडियो में दिए गए टास्क के पूरा होने के मोमेंट की पहचान करने के लिए कहता है:
+Poniższy przykład prompta prosi model o zidentyfikowanie momentu ukończenia danego zadania w filmie:
 
 ```
 from google import genai
@@ -56,15 +56,15 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-यहां मोमेंट फ़ाइंडिंग वाले वीडियो के उदाहरण के तौर पर फ़्रेम दिखाए गए हैं. इनमें मॉडल, टास्क के पूरा होने का टाइमस्टैंप दिखाता है:
+Poniżej przedstawiamy przykładowe klatki z filmu, w którym wyszukiwane są momenty. Model identyfikuje znacznik czasu ukończenia zadania:
 
-![टाइमस्टैंप ओवरले के साथ, वीडियो फ़्रेम में किसी खास पल को ढूंढने का आउटपुट दिखाने वाले वीडियो फ़्रेम का उदाहरण](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-moment-finding.png?hl=hi)
+![Przykładowe klatki filmu pokazujące moment znalezienia wyniku z nałożoną sygnaturą czasową](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-moment-finding.png?hl=pl)
 
-## प्रोग्रेस क्लासिफ़िकेशन
+## Klasyfikacja postępów
 
-प्रोग्रेस क्लासिफ़िकेशन से, किसी वीडियो को पांच कंप्लीशन ब्रैकेट में से किसी एक में असाइन किया जा सकता है. ये ब्रैकेट 0–20%, 20–40%, 40–60%, 60–80%, या 80–100% हैं. इससे रोबोट को रीयल-टाइम में स्थिति की जानकारी मिलती है. इसलिए, वे पूरे वर्कफ़्लो को रीस्टार्ट किए बिना, कार्रवाइयों को अडजस्ट कर सकते हैं या फ़ेल हुए चरणों को फिर से आज़मा सकते हैं.
+Klasyfikacja postępów przypisuje film do jednego z 5 przedziałów ukończenia: 0–20%, 20–40%, 40–60%, 60–80% lub 80–100%. Dzięki temu roboty mają świadomość sytuacji w czasie rzeczywistym, co pozwala im dostosowywać działania lub ponawiać nieudane kroki bez konieczności ponownego uruchamiania całego przepływu pracy.
 
-यहां दिए गए उदाहरण में, प्रॉम्प्ट मॉडल से किसी वीडियो में मौजूदा प्रोग्रेस लेवल को क्लासिफ़ाई करने के लिए कहता है:
+Poniższy przykład prompta prosi model o sklasyfikowanie bieżącego poziomu postępu na podstawie filmu:
 
 ```
 from google import genai
@@ -92,27 +92,27 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-यहां प्रोग्रेस क्लासिफ़िकेशन वाले वीडियो के उदाहरण के तौर पर फ़्रेम दिखाए गए हैं. इनमें मॉडल, प्रोग्रेस ब्रैकेट असाइन करता है:
+Poniżej przedstawiamy przykładowe klatki z filmu, w którym klasyfikowane są postępy. Model przypisuje przedział postępu:
 
-![प्रोग्रेस ब्रैकेट के लेबल के साथ, प्रोग्रेस क्लासिफ़िकेशन का आउटपुट दिखाने वाले वीडियो फ़्रेम का उदाहरण](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-progress-classification.png?hl=hi)
+![Przykładowe klatki filmu pokazujące wynik klasyfikacji postępu z etykietą przedziału postępu](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-progress-classification.png?hl=pl)
 
-## उदाहरण
+## Przykłady
 
-मल्टी-स्टेप टास्क ट्रैकिंग की सुविधा वाले, पूरी तरह से रन किए जा सकने वाले उदाहरण देखने के लिए,
-[Robotics cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb) देखें.
+Pełne przykłady, które można uruchomić, w tym śledzenie zadań wieloetapowych, znajdziesz w
+[przewodniku Robotics](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-## आगे क्या करना है
+## Co dalej?
 
-- [रोबोटिक्स के लिए Live API](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=hi) — रीयल-टाइम में दोनों दिशाओं में स्ट्रीमिंग.
-- [टास्क ऑर्केस्ट्रेशन](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=hi) — स्पेस से जुड़ी जानकारी के साथ, लंबे समय तक चलने वाले टास्क.
-- [Gemini Robotics ER की खास जानकारी](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=hi) — मॉडल की तुलना और उसकी सुविधाएं.
+- [Interfejs Live API dla robotyki](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=pl) – dwukierunkowe przesyłanie strumieniowe w czasie rzeczywistym.
+- [Orkiestracja zadań](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=pl) – zadania długoterminowe z rozumowaniem przestrzennym.
+- [Omówienie modelu Gemini Robotics ER](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=pl) – porównanie modeli i możliwości.
 
-सुझाव भेजें
+Prześlij opinię
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया.
+Ostatnia aktualizacja: 2026-09-08 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Chcesz przekazać coś jeszcze?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-08 UTC."],[],[]]

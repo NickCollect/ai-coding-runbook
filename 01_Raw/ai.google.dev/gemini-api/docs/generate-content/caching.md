@@ -1,66 +1,64 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=pl
-fetched_at: 2026-09-07T05:36:07.026077+00:00
-title: "Buforowanie kontekstu \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=hi
+fetched_at: 2026-09-14T05:50:10.423802+00:00
+title: "\u0915\u0949\u0928\u094d\u091f\u0947\u0915\u094d\u0938\u094d\u091f \u0915\u0948\u0936 \u092e\u0947\u092e\u094b\u0930\u0940 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs/generate-content?hl=hi)
 
-Prześlij opinię
+सुझाव भेजें
 
-# Buforowanie kontekstu
+# कॉन्टेक्स्ट कैश मेमोरी
 
-W typowym procesie AI możesz wielokrotnie przekazywać te same tokeny wejściowe do modelu. Gemini API oferuje 2 różne mechanizmy buforowania:
+एआई के सामान्य वर्कफ़्लो में, एक ही इनपुट टोकन को बार-बार किसी मॉडल को पास किया जा सकता है. Gemini API, कैश मेमोरी की सुविधा के लिए दो अलग-अलग तरीके उपलब्ध कराता है:
 
-- niejawne buforowanie (automatycznie włączone w modelach Gemini 2.5 i nowszych, bez gwarancji oszczędności kosztów);
-- jawne buforowanie (można je włączyć ręcznie w większości modeli, z gwarancją oszczędności kosztów).
+- इंप्लिसिट कैश मेमोरी (Gemini 2.5 और नए मॉडल पर अपने-आप चालू हो जाती है. इससे लागत कम होने की कोई गारंटी नहीं है)
+- एक्सप्लिसिट कैश मेमोरी (इसे ज़्यादातर मॉडल पर मैन्युअल तरीके से चालू किया जा सकता है. इससे लागत कम करने की गारंटी मिलती है)
 
-Jawne buforowanie jest przydatne w przypadkach, gdy chcesz zagwarantować oszczędności kosztów, ale musisz wykonać dodatkowe prace programistyczne.
+एक्सप्लिसिट कैशिंग उन मामलों में फ़ायदेमंद होती है जहां आपको लागत में बचत की गारंटी चाहिए. हालांकि, इसमें डेवलपर को कुछ अतिरिक्त काम करना पड़ता है.
 
-## Niejawne buforowanie
+## इंप्लिसिट कैशिंग
 
-Niejawne buforowanie jest domyślnie włączone we wszystkich modelach Gemini 2.5 i nowszych. Automatycznie przekazujemy oszczędności kosztów, jeśli Twoje żądanie trafi do pamięci podręcznej. Aby to włączyć, nie musisz nic robić. Minimalna liczba tokenów wejściowych w przypadku buforowania kontekstu jest podana w tabeli poniżej dla każdego modelu:
+Gemini 2.5 और इसके बाद के सभी मॉडल के लिए, इंप्लिसिट कैश मेमोरी की सुविधा डिफ़ॉल्ट रूप से चालू होती है. अगर आपका अनुरोध कैश मेमोरी से मिलता है, तो हम लागत में हुई बचत को अपने-आप लागू कर देते हैं. इसे चालू करने के लिए, आपको कुछ भी करने की ज़रूरत नहीं है. कॉन्टेक्स्ट कैश मेमोरी के लिए, हर मॉडल के हिसाब से कम से कम इनपुट टोकन की संख्या यहां दी गई है:
 
-| Model | Minimalny limit tokenów |
+| मॉडल | कम से कम टोकन सीमा |
 | --- | --- |
 | Gemini 3.5 Flash | 4096 |
-| Gemini 3.1 Pro (wersja testowa) | 4096 |
+| Gemini 3.1 Pro की झलक | 4096 |
 | Gemini 2.5 Flash | 2048 |
 | Gemini 2.5 Pro | 2048 |
 
-Aby zwiększyć szansę na trafienie do niejawnej pamięci podręcznej:
+इंप्लिसिट कैश हिट की संभावना बढ़ाने के लिए:
 
-- Spróbuj umieścić duże i popularne treści na początku prompta.
-- Spróbuj wysyłać żądania z podobnym prefiksem w krótkim czasie.
+- अपने प्रॉम्प्ट की शुरुआत में, बड़े और सामान्य कॉन्टेंट को शामिल करें
+- कम समय में, एक जैसे प्रीफ़िक्स वाले अनुरोध भेजने की कोशिश करना
 
-Liczbę tokenów, które zostały trafione do pamięci podręcznej, możesz sprawdzić w polu `usage_metadata` obiektu odpowiedzi.
+आपको रिस्पॉन्स ऑब्जेक्ट के `usage_metadata` फ़ील्ड में, उन टोकन की संख्या दिखेगी जो कैश मेमोरी में मौजूद थे.
 
-## Jawne buforowanie
+## एक्सप्लिसिट कैशिंग
 
-Dzięki funkcji jawnego buforowania Gemini API możesz przekazać modelowi część treści, zapisać tokeny wejściowe w pamięci podręcznej, a następnie odwoływać się do nich w kolejnych żądaniach. W przypadku określonych ilości używanie tokenów z pamięci podręcznej jest tańsze niż wielokrotne przekazywanie tego samego korpusu tokenów.
+Gemini API की एक्सप्लिसिट कैशिंग सुविधा का इस्तेमाल करके, मॉडल को एक बार कुछ कॉन्टेंट दिया जा सकता है. साथ ही, इनपुट टोकन को कैश मेमोरी में सेव किया जा सकता है. इसके बाद, अगले अनुरोधों के लिए कैश मेमोरी में सेव किए गए टोकन का इस्तेमाल किया जा सकता है. कुछ वॉल्यूम पर, कैश किए गए टोकन का इस्तेमाल करना, टोकन के एक ही कॉर्पस को बार-बार पास करने की तुलना में कम खर्चीला होता है.
 
-Gdy zapisujesz w pamięci podręcznej zestaw tokenów, możesz wybrać, jak długo ma ona istnieć, zanim tokeny zostaną automatycznie usunięte. Ten czas buforowania nazywa się *czasem życia danych* (TTL). Jeśli nie jest ustawiony, domyślny czas TTL wynosi 1 godzinę. Koszt buforowania zależy od rozmiaru tokena wejściowego i czasu, przez jaki chcesz przechowywać tokeny.
+टोकन के सेट को कैश मेमोरी में सेव करते समय, यह चुना जा सकता है कि टोकन के अपने-आप मिटने से पहले, कैश मेमोरी कितने समय तक सेव रहे. कैश मेमोरी में सेव रहने की इस अवधि को *टाइम टू लिव* (टीटीएल) कहा जाता है. अगर इसे सेट नहीं किया जाता है, तो टीटीएल डिफ़ॉल्ट रूप से एक घंटे पर सेट होता है. कैशिंग की लागत, इनपुट टोकन के साइज़ और टोकन को सेव रखने की अवधि पर निर्भर करती है.
 
-W tej sekcji zakładamy, że masz zainstalowany pakiet SDK Gemini (lub zainstalowany curl)
-i skonfigurowany klucz interfejsu API zgodnie z instrukcjami w
-[przewodniku dla początkujących](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl).
+इस सेक्शन में यह माना गया है कि आपने Gemini SDK इंस्टॉल कर लिया है या आपके पास curl इंस्टॉल है. साथ ही, आपने [शुरू करने से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=hi) में दिखाए गए तरीके से एपीआई पासकोड कॉन्फ़िगर कर लिया है.
 
-### Generowanie treści za pomocą pamięci podręcznej
+### कैश मेमोरी का इस्तेमाल करके कॉन्टेंट जनरेट करना
 
 ### Python
 
-Poniższy przykład pokazuje, jak wygenerować treści za pomocą instrukcji systemowej i pliku wideo z pamięci podręcznej.
+यहां दिए गए उदाहरण में, कैश मेमोरी में सेव किए गए सिस्टम के निर्देश और वीडियो फ़ाइल का इस्तेमाल करके, कॉन्टेंट जनरेट करने का तरीका बताया गया है.
 
-### Filmy
+### वीडियो
 
 ```
 import os
@@ -119,7 +117,7 @@ print(response.usage_metadata)
 print(response.text)
 ```
 
-### Pliki PDF
+### PDF
 
 ```
 from google import genai
@@ -167,7 +165,7 @@ print('\n\n', response.text)
 
 ### JavaScript
 
-Poniższy przykład pokazuje, jak wygenerować treści za pomocą instrukcji systemowej i pliku tekstowego z pamięci podręcznej.
+यहां दिए गए उदाहरण में, कैश मेमोरी में सेव किए गए सिस्टम के निर्देश और टेक्स्ट फ़ाइल का इस्तेमाल करके कॉन्टेंट जनरेट करने का तरीका बताया गया है.
 
 ```
 import {
@@ -206,9 +204,9 @@ async function main() {
 await main();
 ```
 
-### Go
+### ऐप पर जाएं
 
-Poniższy przykład pokazuje, jak wygenerować treści za pomocą pamięci podręcznej.
+यहां दिए गए उदाहरण में, कैश मेमोरी का इस्तेमाल करके कॉन्टेंट जनरेट करने का तरीका बताया गया है.
 
 ```
 package main
@@ -278,9 +276,9 @@ func main() {
 
 ### REST
 
-Poniższy przykład pokazuje, jak utworzyć pamięć podręczną, a następnie użyć jej do wygenerowania treści.
+यहां दिए गए उदाहरण में, कैश मेमोरी बनाने और फिर उसका इस्तेमाल करके कॉन्टेंट जनरेट करने का तरीका बताया गया है.
 
-### Filmy
+### वीडियो
 
 ```
 wget https://storage.googleapis.com/generativeai-downloads/data/a11.txt
@@ -331,7 +329,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
     }'
 ```
 
-### Pliki PDF
+### PDF
 
 ```
 DOC_URL="https://sma.nasa.gov/SignificantIncidents/assets/a11_missionreport.pdf"
@@ -429,22 +427,20 @@ cat response.json
 echo jq ".candidates[].content.parts[].text" response.json
 ```
 
-### Wyświetlanie pamięci podręcznych
+### कैश मेमोरी की सूची बनाना
 
-Nie można pobrać ani wyświetlić treści z pamięci podręcznej, ale można pobrać
-metadane pamięci podręcznej (`name`, `model`, `display_name`, `usage_metadata`,
-`create_time`, `update_time` i `expire_time`).
+कैश किए गए कॉन्टेंट को वापस नहीं लाया जा सकता और न ही देखा जा सकता है. हालांकि, कैश मेटाडेटा (`name`, `model`, `display_name`, `usage_metadata`, `create_time`, `update_time`, और `expire_time`) को वापस लाया जा सकता है.
 
 ### Python
 
-Aby wyświetlić metadane wszystkich przesłanych pamięci podręcznych, użyj `CachedContent.list()`:
+अपलोड की गई सभी कैश मेमोरी के लिए मेटाडेटा की सूची बनाने के लिए, `CachedContent.list()` का इस्तेमाल करें:
 
 ```
 for cache in client.caches.list():
   print(cache)
 ```
 
-Aby pobrać metadane jednego obiektu pamięci podręcznej, jeśli znasz jego nazwę, użyj `get`:
+अगर आपको किसी कैश मेमोरी ऑब्जेक्ट का नाम पता है, तो उसका मेटाडेटा पाने के लिए `get` का इस्तेमाल करें:
 
 ```
 client.caches.get(name=name)
@@ -452,7 +448,7 @@ client.caches.get(name=name)
 
 ### JavaScript
 
-Aby wyświetlić metadane wszystkich przesłanych pamięci podręcznych, użyj `GoogleGenAI.caches.list()`:
+अपलोड की गई सभी कैश मेमोरी के लिए मेटाडेटा की सूची बनाने के लिए, `GoogleGenAI.caches.list()` का इस्तेमाल करें:
 
 ```
 console.log("My caches:");
@@ -467,9 +463,9 @@ while (true) {
 }
 ```
 
-### Go
+### ऐप पर जाएं
 
-Poniższy przykład pokazuje, jak wyświetlić wszystkie pamięci podręczne.
+यहां दिए गए उदाहरण में, सभी कैश मेमोरी की सूची दी गई है.
 
 ```
 caches, err := client.Caches.All(ctx)
@@ -482,7 +478,7 @@ for _, item := range caches {
 }
 ```
 
-Poniższy przykład pokazuje, jak wyświetlić pamięci podręczne z rozmiarem strony 2.
+यहां दिए गए उदाहरण में, 2 पेज साइज़ का इस्तेमाल करके कैश मेमोरी की सूची दी गई है.
 
 ```
 page, err := client.Caches.List(ctx, &genai.ListCachedContentsConfig{PageSize: 2})
@@ -515,13 +511,13 @@ for {
 curl "https://generativelanguage.googleapis.com/v1beta/cachedContents?key=$GEMINI_API_KEY"
 ```
 
-### Aktualizowanie pamięci podręcznej
+### कैश मेमोरी अपडेट करना
 
-Możesz ustawić nowy `ttl` lub `expire_time` dla pamięci podręcznej. Zmiana innych ustawień pamięci podręcznej nie jest obsługiwana.
+किसी कैश मेमोरी के लिए, नया `ttl` या `expire_time` सेट किया जा सकता है. कैश मेमोरी के बारे में कोई और बदलाव नहीं किया जा सकता.
 
 ### Python
 
-Poniższy przykład pokazuje, jak zaktualizować `ttl` pamięci podręcznej za pomocą `client.caches.update()`.
+यहां दिए गए उदाहरण में, `client.caches.update()` का इस्तेमाल करके, कैश मेमोरी के `ttl` को अपडेट करने का तरीका बताया गया है.
 
 ```
 from google import genai
@@ -535,10 +531,7 @@ client.caches.update(
 )
 ```
 
-Aby ustawić czas wygaśnięcia, możesz użyć obiektu `datetime`lub ciągu daty i godziny w formacie ISO (`dt.isoformat()`, np.
-`2025-01-27T16:02:36.473528+00:00`). Czas musi zawierać strefę czasową
-(`datetime.utcnow()` nie dołącza strefy czasowej,
-`datetime.now(datetime.timezone.utc)` ją dołącza).
+मैसेज की समयसीमा खत्म होने का समय सेट करने के लिए, यह `datetime` ऑब्जेक्ट या आईएसओ फ़ॉर्मैट वाली तारीख और समय की स्ट्रिंग (`dt.isoformat()`, जैसे कि `2025-01-27T16:02:36.473528+00:00`) स्वीकार करता है. आपके समय में टाइम ज़ोन शामिल होना चाहिए (`datetime.utcnow()` में टाइम ज़ोन शामिल नहीं होता है, `datetime.now(datetime.timezone.utc)` में टाइम ज़ोन शामिल होता है).
 
 ```
 from google import genai
@@ -558,7 +551,7 @@ client.caches.update(
 
 ### JavaScript
 
-Poniższy przykład pokazuje, jak zaktualizować `ttl` pamięci podręcznej za pomocą `GoogleGenAI.caches.update()`.
+यहां दिए गए उदाहरण में, `GoogleGenAI.caches.update()` का इस्तेमाल करके, कैश मेमोरी के `ttl` को अपडेट करने का तरीका बताया गया है.
 
 ```
 const ttl = `${2 * 3600}s`; // 2 hours in seconds
@@ -569,9 +562,9 @@ const updatedCache = await ai.caches.update({
 console.log("After update (TTL):", updatedCache);
 ```
 
-### Go
+### ऐप पर जाएं
 
-Poniższy przykład pokazuje, jak zaktualizować `TTL` pamięci podręcznej.
+यहां दिए गए उदाहरण में, कैश मेमोरी के `TTL` को अपडेट करने का तरीका बताया गया है.
 
 ```
 // Update the TTL (2 hours).
@@ -587,7 +580,7 @@ fmt.Println(cache)
 
 ### REST
 
-Poniższy przykład pokazuje, jak zaktualizować `ttl` pamięci podręcznej.
+यहां दिए गए उदाहरण में, कैश मेमोरी के `ttl` को अपडेट करने का तरीका बताया गया है.
 
 ```
 curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY" \
@@ -595,9 +588,9 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=
 -d '{"ttl": "600s"}'
 ```
 
-### Usuwanie pamięci podręcznej
+### कैश मेमोरी मिटाना
 
-Usługa buforowania udostępnia operację usuwania, która umożliwia ręczne usuwanie treści z pamięci podręcznej. Poniższy przykład pokazuje, jak usunąć pamięć podręczną:
+कैशिंग सेवा, कैश मेमोरी से कॉन्टेंट को मैन्युअल तरीके से हटाने के लिए, मिटाने की सुविधा देती है. यहां दिए गए उदाहरण में, कैश मेमोरी मिटाने का तरीका बताया गया है:
 
 ### Python
 
@@ -611,7 +604,7 @@ client.caches.delete(cache.name)
 await ai.caches.delete({ name: cache.name });
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 _, err = client.Caches.Delete(ctx, cache.Name, &genai.DeleteCachedContentConfig{})
@@ -627,48 +620,46 @@ fmt.Println("Cache deleted:", cache.Name)
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY"
 ```
 
-### Jawne buforowanie za pomocą biblioteki OpenAI
+### OpenAI लाइब्रेरी का इस्तेमाल करके, कैश मेमोरी को साफ़ तौर पर मैनेज करना
 
-Jeśli używasz biblioteki [OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=pl), możesz włączyć
-jawne buforowanie za pomocą właściwości `cached_content` w
-[`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=pl#extra-body).
+अगर [OpenAI लाइब्रेरी](https://ai.google.dev/gemini-api/docs/openai?hl=hi) का इस्तेमाल किया जा रहा है, तो [`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=hi#extra-body) पर `cached_content` प्रॉपर्टी का इस्तेमाल करके, एक्सप्लिसिट कैश मेमोरी चालू की जा सकती है.
 
-## Kiedy używać jawnego buforowania
+## एक्सप्लिसिट कैशिंग का इस्तेमाल कब करें
 
-Buforowanie kontekstu jest szczególnie przydatne w sytuacjach, gdy obszerny kontekst początkowy jest wielokrotnie przywoływany przez krótsze żądania. Rozważ użycie buforowania kontekstu w takich przypadkach:
+कॉन्टेक्स्ट कैश मेमोरी की सुविधा, खास तौर पर उन स्थितियों के लिए सही है जहां शुरुआती कॉन्टेक्स्ट के बड़े हिस्से को छोटे अनुरोधों में बार-बार रेफ़र किया जाता है. इन जैसे इस्तेमाल के उदाहरणों के लिए, कॉन्टेक्स्ट कैश मेमोरी का इस्तेमाल करें:
 
-- czatboty z rozbudowanymi [instrukcjami systemowymi](https://ai.google.dev/gemini-api/docs/system-instructions?hl=pl)
-- powtarzająca się analiza długich plików wideo;
-- powtarzające się zapytania dotyczące dużych zbiorów dokumentów;
-- częsta analiza repozytorium kodu lub naprawianie błędów.
+- [सिस्टम के निर्देशों](https://ai.google.dev/gemini-api/docs/system-instructions?hl=hi) के साथ चैटबॉट
+- लंबी वीडियो फ़ाइलों का बार-बार विश्लेषण करना
+- दस्तावेज़ों के बड़े सेट के ख़िलाफ़ बार-बार की जाने वाली क्वेरी
+- कोड रिपॉज़िटरी का बार-बार विश्लेषण करना या गड़बड़ी ठीक करना
 
-### Jak jawne buforowanie obniża koszty
+### एक्सप्लिसिट कैशिंग से लागत कैसे कम होती है
 
-Buforowanie kontekstu to płatna funkcja, która ma na celu obniżenie kosztów. Rozliczenia zależą od tych czynników:
+कॉन्टेक्स्ट कैश मेमोरी, पैसे चुकाकर इस्तेमाल की जाने वाली सुविधा है. इसे लागत कम करने के लिए डिज़ाइन किया गया है. बिलिंग इन बातों पर निर्भर करती है:
 
-1. **Liczba tokenów w pamięci podręcznej:** liczba tokenów wejściowych zapisanych w pamięci podręcznej, za które naliczana jest niższa opłata, gdy są one uwzględniane w kolejnych promptach.
-2. **Czas przechowywania:** czas przechowywania tokenów w pamięci podręcznej (TTL), za który naliczana jest opłata na podstawie czasu TTL liczby tokenów w pamięci podręcznej. Nie ma minimalnego ani maksymalnego czasu TTL.
-3. **Inne czynniki:** obowiązują inne opłaty, np. za tokeny wejściowe i wyjściowe, które nie są zapisane w pamięci podręcznej.
+1. **कैश किए गए टोकन की संख्या:** कैश किए गए इनपुट टोकन की संख्या. इन्हें बाद के प्रॉम्प्ट में शामिल करने पर, कम दर पर बिल किया जाता है.
+2. **स्टोरेज की अवधि:** कैश मेमोरी में सेव किए गए टोकन को सेव रखने की अवधि (टीटीएल).
+   कैश मेमोरी में सेव किए गए टोकन की संख्या के टीटीएल के आधार पर बिल भेजा जाता है. टीटीएल के लिए, कम से कम या ज़्यादा से ज़्यादा की कोई सीमा नहीं होती.
+3. **अन्य कारक:** अन्य शुल्क लागू होते हैं. जैसे, कैश मेमोरी में सेव न किए गए इनपुट टोकन और आउटपुट टोकन के लिए.
 
-Aktualne informacje o cenach znajdziesz na stronie cennika Gemini API [pricing
-page](https://ai.google.dev/pricing?hl=pl). Aby dowiedzieć się, jak liczyć tokeny, zapoznaj się z przewodnikiem po [tokenach](https://ai.google.dev/gemini-api/docs/tokens?hl=pl).
+कीमत के बारे में अप-टू-डेट जानकारी के लिए, Gemini API के [कीमत वाले पेज](https://ai.google.dev/pricing?hl=hi) पर जाएं. टोकन की गिनती करने का तरीका जानने के लिए, [टोकन गाइड](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) देखें.
 
-### Uwagi dodatkowe
+### ज़रूरी बातें
 
-Korzystając z buforowania kontekstu, pamiętaj o tych kwestiach:
+कॉन्टेक्स्ट कैश मेमोरी का इस्तेमाल करते समय, इन बातों का ध्यान रखें:
 
-- *Minimalna* liczba tokenów wejściowych w przypadku buforowania kontekstu różni się w zależności od modelu. *Maksymalna* liczba tokenów jest taka sama jak maksymalna liczba tokenów w danym modelu. (Więcej informacji o liczeniu tokenów,
-  zobacz [przewodnik po tokenach](https://ai.google.dev/gemini-api/docs/tokens?hl=pl)).
-- Model nie rozróżnia tokenów z pamięci podręcznej i zwykłych tokenów wejściowych. Treści z pamięci podręcznej są prefiksem prompta.
-- W przypadku buforowania kontekstu nie obowiązują żadne specjalne limity stawek ani limity wykorzystania. Obowiązują standardowe limity stawek dla `GenerateContent`, a limity tokenów obejmują tokeny z pamięci podręcznej.
-- Liczba tokenów z pamięci podręcznej jest zwracana w `usage_metadata` z operacji tworzenia, pobierania i wyświetlania usługi pamięci podręcznej, a także w `GenerateContent` podczas korzystania z pamięci podręcznej.
+- कॉन्टेक्स्ट कैश मेमोरी के लिए, *कम से कम* इनपुट टोकन की संख्या मॉडल के हिसाब से अलग-अलग होती है. *ज़्यादा से ज़्यादा*
+  की वैल्यू, दिए गए मॉडल के लिए ज़्यादा से ज़्यादा वैल्यू के बराबर होती है. (टोकन की गिनती के बारे में ज़्यादा जानने के लिए, [टोकन गाइड](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) देखें).
+- यह मॉडल, कैश किए गए टोकन और सामान्य इनपुट टोकन के बीच कोई अंतर नहीं करता. कैश किया गया कॉन्टेंट, प्रॉम्प्ट का प्रीफ़िक्स होता है.
+- कॉन्टेक्स्ट को कैश मेमोरी में सेव करने पर, इस्तेमाल की कोई सीमा या खास शुल्क नहीं लगता. `GenerateContent` के लिए, दर की स्टैंडर्ड सीमाएं लागू होती हैं. साथ ही, टोकन की सीमाओं में कैश मेमोरी में सेव किए गए टोकन शामिल होते हैं.
+- कैश किए गए टोकन की संख्या, कैश सेवा के create, get, और list ऑपरेशनों के `usage_metadata` में दिखाई जाती है. साथ ही, कैश का इस्तेमाल करते समय `GenerateContent` में भी यह संख्या दिखती है.
 
-Prześlij opinię
+सुझाव भेजें
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Ostatnia aktualizacja: 2026-07-30 UTC.
+आखिरी बार 2026-09-12 (UTC) को अपडेट किया गया.
 
-Chcesz przekazać coś jeszcze?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-12 (UTC) को अपडेट किया गया."],[],[]]

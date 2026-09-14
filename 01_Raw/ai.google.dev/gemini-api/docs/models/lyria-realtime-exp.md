@@ -1,47 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=zh-CN
-fetched_at: 2026-09-07T05:41:37.305392+00:00
-title: "Lyria RealTime \u5b9e\u9a8c\u7248 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=he
+fetched_at: 2026-09-14T05:47:25.798550+00:00
+title: "\u202bLyria RealTime experimental \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-发送反馈
+שליחת משוב
 
-# Lyria RealTime 实验版
+# ‫Lyria RealTime experimental
 
-一款用于高保真音乐合成的实验性引擎，可提供创新功能来生成和转换音频内容。Lyria RealTime 非常适合需要对旋律和节奏进行深度控制的 AI 辅助歌曲创作、独特的乐器生成和创意音频工作流程，且不包含人声。
+מנוע ניסיוני לסינתזה מוזיקלית באיכות גבוהה, שמציע יכולות חדשניות ליצירה ולשינוי של תוכן אודיו. ‫Lyria RealTime
+הוא הכלי הכי טוב לכתיבת שירים בעזרת AI, ליצירת מוזיקה אינסטרומנטלית ייחודית ולתהליכי עבודה יצירתיים עם אודיו שדורשים שליטה מלאה במלודיה ובקצב, ללא שירה.
 
-[试用 Lyria RealTime](https://deepmind.google/models/lyria/lyria-realtime/?hl=zh-cn)
+[איך משתמשים ב-Lyria RealTime](https://deepmind.google/models/lyria/lyria-realtime/?hl=he)
 
-## 文档
+## מאמרי עזרה
 
-如需全面了解功能和功能，请访问[实时音乐生成](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=zh-cn)页面。
+למידע מלא על התכונות והיכולות, אפשר לעבור לדף [יצירת מוזיקה בזמן אמת](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=he).
 
 ## lyria-realtime-exp
 
-| 属性 | 说明 |
+| נכס | תיאור |
 | --- | --- |
-| id\_card 模型代码 | **Gemini API**  `lyria-realtime-exp` |
-| 保存支持的数据类型 | **输入**  文本（加权提示）  **输出**  音频（原始 16 位 PCM） |
-| token\_auto直播限制 | **采样率**  48kHz（立体声）  **控制延迟**  最长 2 秒 |
-| 123 版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 实验性：`lyria-realtime-exp` |
-| calendar\_month最新更新 | 2025 年 5 月 |
+| id\_cardקוד מודל | ‫**Gemini API**  `lyria-realtime-exp` |
+| saveסוגי נתונים נתמכים | **קלט**  טקסט (הנחיות עם משקל)  **פלט**  אודיו (PCM גולמי של 16 ביט) |
+| token\_autoהגבלות סטרימינג | **תדירות הדגימה**  ‫48kHz (סטריאו)  **שליטה בזמן האחזור**  עד 2 שניות |
+| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - ניסיוני: `lyria-realtime-exp` |
+| calendar\_monthהעדכון האחרון | מאי 2025 |
 
-发送反馈
+שליחת משוב
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-最后更新时间 (UTC)：2026-04-29。
+עדכון אחרון: 2026-04-29 (שעון UTC).
 
-需要向我们提供更多信息？
+רוצה לתת לנו משוב?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]

@@ -1,109 +1,112 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe
-fetched_at: 2026-09-07T05:45:42.796585+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=ko
+fetched_at: 2026-09-14T05:38:40.634009+00:00
 title: "Gemini 3.5 Transcribe \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash is now available. [Try it out](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash).
+이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
 
-- [Home](https://ai.google.dev/)
-- [Gemini API](https://ai.google.dev/gemini-api)
-- [Docs](https://ai.google.dev/gemini-api/docs)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Send feedback
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+
+의견 보내기
 
 # Gemini 3.5 Transcribe
 
-Gemini 3.5 Transcribe is a speech-to-text model based on Gemini's audio understanding capabilities. It provides low-latency, accurate transcription with utterance-based language detection, speaker diarization, word-level timestamps, Smart transcription, and custom vocabulary speech biasing.
+Gemini 3.5 Transcribe는 Gemini의 오디오 이해 기능을 기반으로 하는 음성 텍스트 변환 모델입니다. 발화 기반 언어 감지, 화자 분할, 단어 수준 타임스탬프, 스마트 스크립트, 맞춤 어휘 음성 편향을 통해 지연 시간이 짧고 정확한 스크립트를 제공합니다.
 
-[Try in Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-transcribe)
+[Google AI Studio에서 사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-transcribe&hl=ko)
 
-## Documentation
+## 문서
 
-Gemini 3.5 Transcribe converts speech to text from audio files. It automatically detects 85+ languages, handles multi-language code-switching, identifies individual speakers, outputs word-level timestamps, and adapts to domain-specific terms through custom vocabulary biasing.
+Gemini 3.5 Transcribe는 오디오 파일의 음성을 텍스트로 변환합니다. 85개 이상의 언어를 자동으로 감지하고, 다국어 코드 전환을 처리하며, 개별 화자를 식별하고, 단어 수준 타임스탬프를 출력하며, 맞춤 어휘 바이어스를 통해 도메인별 용어에 적응합니다.
 
-Visit the [Audio transcription](https://ai.google.dev/gemini-api/docs/transcribe) guide for full coverage of non-streaming features. For real-time, low-latency streaming transcription over WebSockets, visit the [Live transcription](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe) guide using `gemini-3.5-transcribe-live`. For detailed pricing, see the [Pricing page](https://ai.google.dev/gemini-api/docs/pricing#gemini-3.5-transcribe).
+스트리밍되지 않는 기능에 관한 전체 내용은 [오디오 텍스트 변환](https://ai.google.dev/gemini-api/docs/transcribe?hl=ko) 가이드를 참고하세요. `gemini-3.5-transcribe-live`를 사용하여 WebSocket을 통해 지연 시간이 짧은 실시간 스트리밍 음성 자막 변환을 보려면 [실시간 음성 자막 변환](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=ko) 가이드를 참고하세요. 자세한 가격은 [가격 페이지](https://ai.google.dev/gemini-api/docs/pricing?hl=ko#gemini-3.5-transcribe)를 참고하세요.
 
 ## gemini-3.5-transcribe
 
-| Property | Description |
+| 속성 | 설명 |
 | --- | --- |
-| id\_cardModel code | `gemini-3.5-transcribe` |
-| saveSupported data types | **Inputs**  Audio (up to 1 hour)  **Output**  Text, Word annotations |
-| token\_autoAudio limits | **Unary audio limit**  Up to 1 hour per request (up to 30 minutes when speaker diarization or word-level timestamps are enabled) |
-| handymanCapabilities | **[Audio transcription](https://ai.google.dev/gemini-api/docs/transcribe)**  Supported  **[Speaker diarization](https://ai.google.dev/gemini-api/docs/transcribe#speaker-diarization)**  Supported  **[Word-level timestamps](https://ai.google.dev/gemini-api/docs/transcribe#word-timestamps)**  Supported  **[Custom vocabulary](https://ai.google.dev/gemini-api/docs/transcribe#custom-vocabulary)**  Supported  **[Smart transcription](https://ai.google.dev/gemini-api/docs/transcribe#transcription-modes)**  Supported  **[Caching](https://ai.google.dev/gemini-api/docs/caching)**  Not supported  **[Code execution](https://ai.google.dev/gemini-api/docs/code-execution)**  Not supported  **[File search](https://ai.google.dev/gemini-api/docs/file-search)**  Not supported  **[Function calling](https://ai.google.dev/gemini-api/docs/function-calling)**  Not supported  **[Image generation](https://ai.google.dev/gemini-api/docs/image-generation)**  Not supported  **[Thinking](https://ai.google.dev/gemini-api/docs/thinking)**  Not supported |
-| speedConsumption options | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api)**  Not supported  **[Flex inference](https://ai.google.dev/gemini-api/docs/flex-inference)**  Not supported  **[Priority inference](https://ai.google.dev/gemini-api/docs/priority-inference)**  Not supported |
-| 123Versions | Read the [model version patterns](https://ai.google.dev/gemini-api/docs/models/gemini#model-versions) for more details.  - `gemini-3.5-transcribe` (Unary) - `gemini-3.5-transcribe-live` (Live API) |
-| calendar\_monthLatest update | August 2026 |
+| id\_card모델 코드 | `gemini-3.5-transcribe` |
+| save지원되는 데이터 유형 | **입력**  오디오 (최대 1시간)  **출력**  텍스트, 단어 주석 |
+| token\_auto오디오 한도 | **단항 오디오 한도**  요청당 최대 1시간 (화자 분할 또는 단어 수준 타임스탬프가 사용 설정된 경우 최대 30분) |
+| handyman기능 | **[오디오 스크립트 작성](https://ai.google.dev/gemini-api/docs/transcribe?hl=ko)**  지원됨  **[화자 분할](https://ai.google.dev/gemini-api/docs/transcribe?hl=ko#speaker-diarization)**  지원됨  **[단어 수준 타임스탬프](https://ai.google.dev/gemini-api/docs/transcribe?hl=ko#word-timestamps)**  지원됨  **[맞춤 어휘](https://ai.google.dev/gemini-api/docs/transcribe?hl=ko#custom-vocabulary)**  지원됨  **[스마트 스크립트 작성](https://ai.google.dev/gemini-api/docs/transcribe?hl=ko#transcription-modes)**  지원됨  **[캐싱](https://ai.google.dev/gemini-api/docs/caching?hl=ko)**  지원되지 않음  **[코드 실행](https://ai.google.dev/gemini-api/docs/code-execution?hl=ko)**  지원되지 않음  **[파일 검색](https://ai.google.dev/gemini-api/docs/file-search?hl=ko)**  지원되지 않음  **[함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)**  지원되지 않음  **[이미지 생성](https://ai.google.dev/gemini-api/docs/image-generation?hl=ko)**  지원되지 않음  **[사고](https://ai.google.dev/gemini-api/docs/thinking?hl=ko)**  지원되지 않음 |
+| speed소비 옵션 | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ko)**  지원되지 않음  **[Flex 추론](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ko)**  지원되지 않음  **[우선순위 추론](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ko)**  지원되지 않음 |
+| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - `gemini-3.5-transcribe` (단항) - `gemini-3.5-transcribe-live` (Live API) |
+| calendar\_month최신 업데이트 | 2026년 8월 |
 
-## Feature support and limitations
+## 기능 지원 및 제한사항
 
-Gemini 3.5 Transcribe supports the following features across its two endpoints:
+Gemini 3.5 Transcribe는 두 엔드포인트에서 다음 기능을 지원합니다.
 
-| Feature | Live Streaming (`gemini-3.5-transcribe-live`) | Audio File Processing (`gemini-3.5-transcribe`) | Notes / Limitations |
+| 기능 | 라이브 스트리밍 (`gemini-3.5-transcribe-live`) | 오디오 파일 처리 (`gemini-3.5-transcribe`) | 참고 / 제한사항 |
 | --- | --- | --- | --- |
-| **Language Auto-detection** | Supported (85+ languages) | Supported (85+ languages) | Includes mid-session code-mixing. |
-| **Word-level Timestamps** | Not Supported | Supported | Degrades transcription accuracy. Incompatible with custom vocabulary. |
-| **Custom Vocabulary Biasing** | Supported (up to 1,000 terms) | Supported (up to 1,000 terms) | Customers typically see best results with up to 100 terms. Incompatible with diarization and timestamps. |
-| **Smart Dictation & Formatting** | Supported | Supported | Includes filler word removal and intent-aware alphanumeric formatting. |
-| **Speaker Diarization** | Not Supported | Supported (up to 8 speakers) | Attribution for 3+ speakers is experimental. Incompatible with custom vocabulary. |
-| **Max Audio Duration** | 10 minutes per session. | Up to 1 hour | File processing is limited to 30 minutes when features like diarization or timestamps are enabled. |
+| **언어 자동 감지** | 지원됨 (85개 이상의 언어) | 지원됨 (85개 이상의 언어) | 세션 중 코드 혼합이 포함됩니다. |
+| **단어 수준 타임스탬프** | 지원되지 않음 | 지원됨 | 스크립트 작성 정확도가 저하됩니다. |
+| **맞춤 어휘 바이어스** | 지원됨 (최대 1,000개 용어) | 지원됨 (최대 1,000개 용어) | 일반적으로 최대 100개의 검색어로 최상의 결과를 얻을 수 있습니다. |
+| **스마트 받아쓰기 및 서식 지정** | 지원됨 | 지원됨 | 추임새 삭제 및 의도 인식 영숫자 서식 지정이 포함됩니다. |
+| **화자 분할** | 지원되지 않음 | 지원됨 (최대 8개 스피커) | 3개 이상의 스피커에 대한 저작자 표시는 실험 단계에 있습니다. |
+| **최대 오디오 길이** | 세션당 10분 | 최대 1시간 | 화자 분리 또는 타임스탬프와 같은 기능을 사용 설정하면 파일 처리가 30분으로 제한됩니다. |
 
-## Supported languages
+## 지원 언어
 
-The following languages and BCP-47 language codes are supported for Gemini 3.5 Transcribe:
+Gemini 3.5 Transcribe에서 지원되는 언어와 BCP-47 언어 코드는 다음과 같습니다.
 
-| Language | BCP-47 Code | Language | BCP-47 Code |
+| 언어 | BCP-47 코드 | 언어 | BCP-47 코드 |
 | --- | --- | --- | --- |
-| Afrikaans | `af-ZA` | Japanese | `ja-JP` |
-| Amharic | `am-ET` | Javanese | `jv-ID` |
-| Arabic (Egypt) | `ar-EG` | Kabuverdianu | `kea-CV` |
-| Armenian | `hy-AM` | Kannada | `kn-IN` |
-| Assamese | `as-IN` | Kazakh | `kk-KZ` |
-| Azerbaijani | `az-AZ` | Korean | `ko-KR` |
-| Belarusian | `be-BY` | Kyrgyz | `ky-KG` |
-| Bengali (Bangladesh) | `bn-BD` | Latvian | `lv-LV` |
-| Bengali (India) | `bn-IN` | Lingala | `ln-CD` |
-| Bosnian | `bs-BA` | Lithuanian | `lt-LT` |
-| Bulgarian | `bg-BG` | Macedonian | `mk-MK` |
-| Bulgarian (Aromanian) | `rup-BG` | Malay | `ms-MY` |
-| Burmese | `my-MM` | Malayalam | `ml-IN` |
-| Cantonese (Traditional) | `yue-Hant-HK` | Maltese | `mt-MT` |
-| Catalan | `ca-ES` | Mandarin Chinese (Simplified) | `cmn-Hans-CN` |
-| Cebuano | `ceb` | Marathi | `mr-IN` |
-| Central Khmer | `km-KH` | Mongolian | `mn-MN` |
-| Croatian | `hr-HR` | Nepali | `ne-NP` |
-| Czech | `cs-CZ` | Norwegian | `nb-NO` |
-| Danish | `da-DK` | Oriya | `or-IN` |
-| Dutch | `nl-NL` | Polish | `pl-PL` |
-| English (Great Britain) | `en-GB` | Portuguese (Brazil) | `pt-BR` |
-| English (India) | `en-IN` | Portuguese (Portugal) | `pt-PT` |
-| English (United States) | `en-US` | Punjabi | `pa-IN` |
-| Estonian | `et-EE` | Punjabi (Gurmukhi script) | `pa-Guru-IN` |
-| Farsi | `fa-IR` | Romanian | `ro-RO` |
-| Filipino | `fil-PH` | Russian | `ru-RU` |
-| Finnish | `fi-FI` | Serbian | `sr-RS` |
-| French | `fr-FR` | Sindhi (Arabic script) | `sd-Arab-IN` |
-| Galician | `gl-ES` | Slovak | `sk-SK` |
-| Georgian | `ka-GE` | Slovenian | `sl-SI` |
-| German | `de-DE` | Spanish (Latin America) | `es-419` |
-| Greek | `el-GR` | Spanish (United States) | `es-US` |
-| Gujarati | `gu-IN` | Swahili (Kenya) | `sw-KE` |
-| Hausa | `ha-NG` | Swedish | `sv-SE` |
-| Hebrew | `he-IL` | Tajik | `tg-TJ` |
-| Hindi | `hi-IN` | Telugu | `te-IN` |
-| Hungarian | `hu-HU` | Thai | `th-TH` |
-| Icelandic | `is-IS` | Turkish | `tr-TR` |
-| Indian English | `en-IN` | Ukrainian | `uk-UA` |
-| Indonesian | `id-ID` | Uzbek | `uz-UZ` |
-| Italian | `it-IT` | Vietnamese | `vi-VN` |
+| 아프리칸스어 | `af-ZA` | 일본어 | `ja-JP` |
+| 암하라어 | `am-ET` | 자바어 | `jv-ID` |
+| 아랍어(이집트) | `ar-EG` | Kabuverdianu | `kea-CV` |
+| 아르메니아어 | `hy-AM` | 칸나다어 | `kn-IN` |
+| 아삼어 | `as-IN` | 카자흐어 | `kk-KZ` |
+| 아제르바이잔어 | `az-AZ` | 한국어 | `ko-KR` |
+| 벨라루스어 | `be-BY` | 키르기스어 | `ky-KG` |
+| 벵골어(방글라데시) | `bn-BD` | 라트비아어 | `lv-LV` |
+| 벵골어(인도) | `bn-IN` | 링갈라어 | `ln-CD` |
+| 보스니아어 | `bs-BA` | 리투아니아어 | `lt-LT` |
+| 불가리아어 | `bg-BG` | 마케도니아어 | `mk-MK` |
+| 불가리아어 (아로마어) | `rup-BG` | 말레이어 | `ms-MY` |
+| 버마어 | `my-MM` | 말라얄람어 | `ml-IN` |
+| 광둥어 (번체) | `yue-Hant-HK` | 몰타어 | `mt-MT` |
+| 카탈로니아어 | `ca-ES` | 중국어 (간체) | `cmn-Hans-CN` |
+| 세부아노어 | `ceb` | 마라타어 | `mr-IN` |
+| 표준 크메르어 | `km-KH` | 몽골어 | `mn-MN` |
+| 크로아티아어 | `hr-HR` | 네팔어 | `ne-NP` |
+| 체코어 | `cs-CZ` | 노르웨이어 | `nb-NO` |
+| 덴마크어 | `da-DK` | 오리야어 | `or-IN` |
+| 네덜란드어 | `nl-NL` | 폴란드어 | `pl-PL` |
+| 영어(영국) | `en-GB` | 포르투갈어(브라질) | `pt-BR` |
+| 영어(인도) | `en-IN` | 포르투갈어(포르투갈) | `pt-PT` |
+| 영어(미국) | `en-US` | 펀자브어 | `pa-IN` |
+| 에스토니아어 | `et-EE` | 펀자브어 (구르무키 문자) | `pa-Guru-IN` |
+| 페르시아어 | `fa-IR` | 루마니아어 | `ro-RO` |
+| 필리핀어 | `fil-PH` | 러시아어 | `ru-RU` |
+| 핀란드어 | `fi-FI` | 세르비아어 | `sr-RS` |
+| 프랑스어 | `fr-FR` | 신디어 (아랍 문자) | `sd-Arab-IN` |
+| 갈리시아어 | `gl-ES` | 슬로바키아어 | `sk-SK` |
+| 조지아어 | `ka-GE` | 슬로베니아어 | `sl-SI` |
+| 독일어 | `de-DE` | 스페인어(라틴 아메리카) | `es-419` |
+| 그리스어 | `el-GR` | 스페인어(미국) | `es-US` |
+| 구자라트어 | `gu-IN` | 스와힐리어(케냐) | `sw-KE` |
+| 하우사어 | `ha-NG` | 스웨덴어 | `sv-SE` |
+| 히브리어 | `he-IL` | 타지크어 | `tg-TJ` |
+| 힌디어 | `hi-IN` | 텔루구어 | `te-IN` |
+| 헝가리어 | `hu-HU` | 태국어 | `th-TH` |
+| 아이슬란드어 | `is-IS` | 튀르키예어 | `tr-TR` |
+| 인도 영어 | `en-IN` | 우크라이나어 | `uk-UA` |
+| 인도네시아어 | `id-ID` | 우즈베크어 | `uz-UZ` |
+| 이탈리아어 | `it-IT` | 베트남어 | `vi-VN` |
 
-Send feedback
+의견 보내기
 
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Last updated 2026-09-01 UTC.
+최종 업데이트: 2026-09-10(UTC)
 
-Need to tell us more?
+의견을 전달하고 싶나요?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-09-01 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-10(UTC)"],[],[]]

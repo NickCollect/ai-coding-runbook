@@ -1,118 +1,114 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agents?hl=de
-fetched_at: 2026-09-07T05:39:37.687572+00:00
-title: "Agenten\u00a0\u2013 \u00dcbersicht \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agents?hl=pl
+fetched_at: 2026-09-14T05:50:04.734107+00:00
+title: "Informacje o\u00a0agentach \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Feedback geben
+Prześlij opinię
 
-# Agenten – Übersicht
+# Informacje o agentach
 
-Verwaltete KI-Agenten in der Gemini API bieten Ihnen eine konfigurierbare Agentenplattform. Mit einem einzigen API-Aufruf wird eine Linux-Sandbox bereitgestellt, in der der Agent autonom Schlussfolgerungen zieht, Code ausführt, Dateien verwaltet und im Web surft.
+Zarządzane agenty w Gemini API zapewniają konfigurowalny szkielet agenta. Pojedyncze wywołanie interfejsu API powoduje udostępnienie piaskownicy Linux, w której agent samodzielnie wnioskuje, wykonuje kod, zarządza plikami i przegląda internet.
 
 [rocket\_launch
 
-Kurzanleitung
+Krótkie wprowadzenie
 
-Ersten Agentenaufruf ausführen, Antworten streamen und benutzerdefinierten Agenten erstellen](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=de)
+Wykonaj pierwsze wywołanie agenta, przesyłaj odpowiedzi strumieniowo i utwórz niestandardowego agenta.](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=pl)
 [smart\_toy
 
-Antigravity-Agent
+Agent Antigravity
 
-Funktionen, Tools, multimodale Eingabe und Preise für den Standardagenten](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=de)
+Możliwości, narzędzia, dane wejściowe multimodalne i ceny domyślnego agenta.](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pl)
 [experiment
 
-Agenten in AI Studio
+Agenci w AI Studio
 
-Visuelle Sandbox für das Prototyping von Agenten ohne Code](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=de)
+Wizualne środowisko testowe do tworzenia prototypów agentów bez pisania kodu.](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=pl)
 
-## Verfügbare verwaltete KI-Agenten
+## Dostępne zarządzane agenty
 
-- **[Antigravity-Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=de)**: Verwalteter Agent für allgemeine Zwecke, der auf Gemini 3.7 Flash basiert. Führt Code aus, verwaltet Dateien und durchsucht das Web in einer sicheren Linux-Sandbox, die von Google gehostet wird. Sie können
-  das zugrunde liegende Modell (z. B. Gemini 3.7 Flash, Gemini 3.6 Flash oder Gemini 3.5 Flash)
-  mit `agent_config` konfigurieren und es mit eigenen Anweisungen, Skills und Daten erweitern, um
-  [einen benutzerdefinierten Agenten zu erstellen](https://ai.google.dev/gemini-api/docs/custom-agents?hl=de).
-- **[Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de)**: Autonomer Recherche-Agent, der mehrstufige Rechercheaufgaben für Anwendungsfälle wie Marktanalysen, Due-Diligence-Prüfungen und Literaturrecherchen plant, ausführt und zusammenfasst.
+- **[agent Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pl)**: zarządzany agent do zwykłych obciążeń oparty na Gemini 3.8 Flash. Uruchamia kod, zarządza plikami i wyszukuje informacje w internecie w bezpiecznej piaskownicy Linux hostowanej przez Google. Za pomocą `agent_config` możesz skonfigurować model bazowy (np. Gemini 3.7 Flash, Gemini 3.6 Flash lub Gemini 3.5 Flash) i rozszerzyć go o własne instrukcje, umiejętności i dane, aby [utworzyć niestandardowego agenta](https://ai.google.dev/gemini-api/docs/custom-agents?hl=pl).
+- **[Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl)**: autonomiczny agent badawczy
+  który planuje, wykonuje i syntetyzuje wieloetapowe zadania badawcze na potrzeby takich przypadków użycia
+  jak analiza rynku, należyta staranność i przeglądy literatury.
 
-## Sicherheit und Best Practices
+## Bezpieczeństwo i sprawdzone metody
 
-Jeder Agent wird in einer Sandbox-Umgebung ausgeführt, die auf Betriebssystemebene isoliert ist.
-Die Sandbox hat standardmäßig uneingeschränkten ausgehenden Netzwerkzugriff. Sie können den Netzwerkzugriff mit einer Zulassungsliste einschränken oder deaktivieren.
+Każdy agent działa w środowisku piaskownicy, które jest izolowane na poziomie systemu operacyjnego.
+Piaskownica ma domyślnie nieograniczony dostęp do sieci wychodzącej. Możesz ograniczyć lub wyłączyć dostęp do sieci za pomocą listy dozwolonych.
 
-### Netzwerkzugriff
+### Dostęp do sieci
 
-Standardmäßig haben Umgebungen uneingeschränkten ausgehenden Netzwerkzugriff. Verwenden Sie eine `network`-Zulassungsliste, um den ausgehenden Traffic auf bestimmte Domains oder Platzhaltermuster zu beschränken. Weitere Informationen zur Konfiguration finden Sie unter
-[Zulassungsliste für Netzwerke](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=de#network_allow_list) (AI
-Studio) oder [Netzwerkregeln](https://ai.google.dev/gemini-api/docs/custom-agents?hl=de#with_network_rules)
+Domyślnie środowiska mają nieograniczony dostęp do sieci wychodzącej. Użyj listy dozwolonych `network`, aby ograniczyć ruch wychodzący do określonych domen lub wzorców z symbolami wieloznacznymi. Szczegółowe informacje o konfiguracji znajdziesz w sekcji
+[Lista dozwolonych sieci](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=pl#network_allow_list) (AI
+Studio) lub [Reguły sieciowe](https://ai.google.dev/gemini-api/docs/custom-agents?hl=pl#with_network_rules)
 (API).
 
-### Externe Tools und APIs
+### Narzędzia i interfejsy API zewnętrzne
 
-Sie können externe Tools und APIs verbinden, um den Agenten zu erweitern. Verwenden Sie nur Tools aus vertrauenswürdigen Quellen und beschränken Sie die Berechtigungen auf das Minimum. Anmeldedaten können sicher über Egress-Proxy-Header-Transformationen eingefügt werden und werden in der Sandbox nie offengelegt. Der Agent kann alle Anmeldedaten verwenden, auf die er Zugriff hat. Geben Sie daher nur Anmeldedaten an, deren vollen Umfang Sie gewähren möchten.
+Aby rozszerzyć możliwości agenta, możesz połączyć go z narzędziami i interfejsami API zewnętrznymi. Używaj tylko narzędzi z zaufanych źródeł i ogranicz uprawnienia do minimum. Dane logowania można bezpiecznie wstrzykiwać za pomocą transformacji nagłówków serwera proxy ruchu wychodzącego. Nigdy nie są one udostępniane w piaskownicy. Agent może używać dowolnych danych logowania, do których ma dostęp, dlatego udostępniaj tylko te dane logowania, których pełny zakres uprawnień chcesz przyznać.
 
-- Verwenden Sie Dienstkonten oder API-Schlüssel mit den geringsten Berechtigungen.
-- Bevorzugen Sie kurzlebige Tokens gegenüber langlebigen Schlüsseln.
-- Geben Sie nur Anmeldedaten an, deren vollen Umfang Sie gewähren möchten.
-- Rotieren Sie Anmeldedaten regelmäßig.
+- Używaj kont usługi lub kluczy API o jak najmniejszych uprawnieniach.
+- Zamiast kluczy długoterminowych używaj tokenów krótkoterminowych.
+- Udostępniaj tylko te dane logowania, których pełny zakres uprawnień chcesz przyznać.
+- Regularnie wykonuj rotację danych logowania.
 
-Weitere Informationen zum Konfigurieren von Header-Transformationen finden Sie unter
-[Anmeldedaten](https://ai.google.dev/gemini-api/docs/agent-environment?hl=de#credentials).
+Więcej informacji o konfigurowaniu transformacji nagłówków znajdziesz w sekcji
+[Dane logowania](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl#credentials).
 
-### Menschliche Aufsicht
+### Nadzór człowieka
 
-Überprüfen Sie die Ausgaben (generierter Code, Datentransformationen, Konfigurationsänderungen) immer, bevor Sie sie bereitstellen, insbesondere bei Aufgaben, bei denen Daten geändert werden oder mit externen Systemen interagiert wird.
+Zanim wdrożysz wyniki (wygenerowany kod, transformacje danych, zmiany konfiguracji), zawsze je sprawdź, zwłaszcza w przypadku zadań, które modyfikują dane lub wchodzą w interakcje z systemami zewnętrznymi.
 
-## Preise
+## Ceny
 
-Für verwaltete KI-Agenten gilt ein [Pay as you go-Modell](https://ai.google.dev/gemini-api/docs/pricing?hl=de#pricing-for-agents)
-das auf Gemini-Modell-Tokens und der Toolnutzung basiert. Eine einzelne Interaktion kann mehrere Reasoning-Schleifen auslösen, wobei in der Regel 100.000 bis 3 Millionen Tokens verbraucht werden. Die Compute-Kosten für die Umgebung werden während der Vorschau **nicht in Rechnung gestellt**. Die [geschätzten Kosten](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=de#availability-and-pricing)
-für die Aufschlüsselung nach Aufgabe finden Sie hier. Verwaltete KI-Agenten sind auch im kostenlosen Abo mit einem kostenlosen Ratenlimit und Nutzungskontingent verfügbar.
+Zarządzane agenty korzystają z modelu [płatność według wykorzystania](https://ai.google.dev/gemini-api/docs/pricing?hl=pl#pricing-for-agents) opartego na tokenach modelu Gemini i korzystaniu z narzędzi. Pojedyncza interakcja może wywołać wiele pętli wnioskowania, które zwykle zużywają od 100 tys. do 3 mln tokenów. W okresie korzystania z wersji przedpremierowej **nie naliczamy opłat** za obliczenia w środowisku. Zobacz [szacunkowe koszty](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pl#availability-and-pricing)
+podziału na zadania. Zarządzane agenty są też dostępne w ramach bezpłatnego pakietu z bezpłatnym limitem liczby żądań i limitem wykorzystania.
 
-## Limits
+## Limity
 
-| Limit | Beschreibung |
+| Limit | Opis |
 | --- | --- |
-| **Lebensdauer der Umgebung** | Umgebungen werden nach 7 Tagen Inaktivität endgültig gelöscht. |
-| **VM-Herunterfahren** | VMs werden nach kurzer Inaktivität heruntergefahren, um Ressourcen zu sparen. Bei der nächsten Anfrage wird der Status wiederhergestellt (mit einem Kaltstart). |
-| **Vorinstallierte Software** | Ubuntu-basierte Umgebung mit Python 3.12 und Node.js 22. Weitere Informationen zum Basis-Image der Umgebung finden Sie unter [Vorinstallierte Software](https://ai.google.dev/gemini-api/docs/agent-environment?hl=de#pre-installed-software). |
-| **Maximale Anzahl von Agenten** | Sie können bis zu 1.000 verwaltete KI-Agenten haben. |
+| **Okres istnienia środowiska** | Środowiska są trwale usuwane po 7 dniach nieaktywności. |
+| **Wyłączanie maszyny wirtualnej** | Aby oszczędzać zasoby, maszyny wirtualne wyłączają się po krótkim okresie nieaktywności. Następne żądanie przywraca stan (z uruchomieniem „na zimno”). |
+| **Zainstalowane oprogramowanie** | Środowisko oparte na Ubuntu z Pythonem 3.12 i Node.js 22. Więcej informacji o obrazie bazowym środowiska znajdziesz w sekcji [Zainstalowane oprogramowanie](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl#pre-installed-software). |
+| **Maksymalna liczba agentów** | Możesz mieć maksymalnie 1000 zarządzanych agentów. |
 
-## Agenten-Frameworks
+## Platformy agentów
 
-Sie können auch Agenten mit Gemini und den folgenden Frameworks und SDKs erstellen:
+Możesz też tworzyć agentów za pomocą Gemini, korzystając z tych platform i pakietów SDK:
 
-- [**\*\*LangChain / LangGraph\*\***](https://ai.google.dev/gemini-api/docs/langgraph-example?hl=de): Erstellen Sie
-  zustandsorientierte, komplexe Anwendungsabläufe und Multi-Agent-Systeme mit Graph
-  strukturen.
-- [**LlamaIndex**](https://ai.google.dev/gemini-api/docs/llama-index?hl=de): Verbinden Sie Gemini-Agenten mit
-  Ihren privaten Daten für RAG-optimierte Workflows.
-- [**CrewAI**](https://ai.google.dev/gemini-api/docs/crewai-example?hl=de): Orchestrieren Sie kollaborative,
-  Rollenspiel-basierte autonome KI-Agenten.
-- [**Vercel AI SDK**](https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=de): Erstellen Sie
-  KI-gestützte Benutzeroberflächen und Agenten in JavaScript/TypeScript.
-- [**Google ADK**](https://google.github.io/adk-docs/get-started/python/): An
-  Open-Source-Framework zum Erstellen und Orchestrieren interoperabler KI
-  Agenten.
-- [**Antigravity SDK**](https://antigravity.google/product/antigravity-sdk?hl=de): Erstellen Sie
-  autonome KI-Agenten mit denselben Tools, derselben Agentenschleife und derselben Kontext
-  verwaltung, die Google Antigravity zugrunde liegen. Programmierbar in Python.
+- [**LangChain / LangGraph**](https://ai.google.dev/gemini-api/docs/langgraph-example?hl=pl): Twórz
+  złożone przepływy aplikacji ze stanem i systemy wieloagentowe za pomocą struktur
+  grafów.
+- [**LlamaIndex**](https://ai.google.dev/gemini-api/docs/llama-index?hl=pl): łącz agentów Gemini z
+  danymi prywatnymi, aby korzystać z przepływów pracy z rozszerzonym wyszukiwaniem generatywnym.
+- [**CrewAI**](https://ai.google.dev/gemini-api/docs/crewai-example?hl=pl): zarządzaj autonomicznymi agentami AI, którzy współpracują i odgrywają role.
+- [**Vercel AI SDK**](https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=pl): Build
+  twórz interfejsy użytkownika i agentów opartych na AI w JavaScript/TypeScript.
+- [**Google ADK**](https://google.github.io/adk-docs/get-started/python/): platforma
+  open source do tworzenia i zarządzania interoperacyjnymi agentami AI.
+- [**Antigravity SDK**](https://antigravity.google/product/antigravity-sdk?hl=pl): Twórz
+  autonomiczne agenty AI za pomocą tych samych narzędzi, pętli agenta i zarządzania
+  kontekstem, które są używane w Google Antigravity. Możesz je programować w Pythonie.
 
-Feedback geben
+Prześlij opinię
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Zuletzt aktualisiert: 2026-08-19 (UTC).
+Ostatnia aktualizacja: 2026-09-10 UTC.
 
-Haben Sie Feedback für uns?
+Chcesz przekazać coś jeszcze?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-08-19 (UTC)."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-10 UTC."],[],[]]

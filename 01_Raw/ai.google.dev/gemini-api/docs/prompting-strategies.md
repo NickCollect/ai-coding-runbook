@@ -1,207 +1,202 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=he
-fetched_at: 2026-09-07T05:48:57.143761+00:00
-title: "\u05d0\u05e1\u05d8\u05e8\u05d8\u05d2\u05d9\u05d5\u05ea \u05dc\u05e2\u05d9\u05e6\u05d5\u05d1 \u05d4\u05e0\u05d7\u05d9\u05d5\u05ea \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=de
+fetched_at: 2026-09-14T05:47:57.727289+00:00
+title: "Strategien f\u00fcr Prompt-Design \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-שליחת משוב
+Feedback geben
 
-# אסטרטגיות לעיצוב הנחיות
+# Strategien für Prompt-Design
 
-*עיצוב פרומפטים* הוא תהליך של יצירת פרומפטים, או בקשות בשפה טבעית, שמניבים תשובות מדויקות ואיכותיות ממודל שפה.
+Beim *Prompt-Design* werden Prompts oder Anfragen in natürlicher Sprache erstellt, die genaue, hochwertige Antworten aus einem Language Model auslösen.
 
-בדף הזה מוסברים מושגים בסיסיים, אסטרטגיות ושיטות מומלצות שיעזרו לכם להתחיל לכתוב הנחיות כדי להפיק את המרב ממודלים של Gemini AI.
+Auf dieser Seite werden grundlegende Konzepte, Strategien und Best Practices vorgestellt, die Ihnen den Einstieg in die Entwicklung von Prompts erleichtern, um die Gemini AI-Modelle optimal zu nutzen.
 
-## מדריכים לכתיבת הנחיות בנושאים ספציפיים
+## Themenspezifische Prompt-Leitfäden
 
-רוצים ללמוד עוד אסטרטגיות ספציפיות לכתיבת הנחיות? כדאי לעיין במדריכים הנוספים שלנו לכתיבת הנחיות בנושאים הבאים:
+Suchen Sie nach spezifischeren Prompt-Strategien? Dann sehen Sie sich unsere anderen Leitfäden für Prompts zu folgenden Themen an:
 
-- [יצירת הנחיות עם קובצי מדיה](https://ai.google.dev/gemini-api/docs/files?hl=he#prompt-guide)
-- הנחיות ליצירת תמונות באמצעות [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=he#imagen-prompt-guide) ו[יצירת תמונות מקוריות ב-Gemini](https://ai.google.dev/gemini-api/docs/image-generation?hl=he#prompt-guide)
-- [יצירת סרטונים באמצעות הנחיות](https://ai.google.dev/gemini-api/docs/video?hl=he#prompt-guide)
+- [Prompts mit Mediendateien](https://ai.google.dev/gemini-api/docs/files?hl=de#prompt-guide)
+- Prompts für die Bildgenerierung mit [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=de#imagen-prompt-guide) und [Gemini Native Image Generation](https://ai.google.dev/gemini-api/docs/image-generation?hl=de#prompt-guide)
+- [Prompts für die Videogenerierung](https://ai.google.dev/gemini-api/docs/video?hl=de#prompt-guide)
 
-דוגמאות נוספות להנחיות מופיעות ב[גלריית ההנחיות](https://ai.google.dev/gemini-api/prompts?hl=he), שנועדה להציג באופן אינטראקטיבי רבים מהמושגים שמופיעים במדריך הזה.
+Weitere Beispiel-Prompts finden Sie in der [Prompt-Galerie](https://ai.google.dev/gemini-api/prompts?hl=de). Dort werden viele der in diesem Leitfaden beschriebenen Konzepte interaktiv vorgestellt.
 
-## הוראות ברורות וספציפיות
+## Klare und spezifische Anweisungen
 
-דרך יעילה ונוחה להתאים אישית את התנהגות המודל היא לספק לו הוראות ברורות וספציפיות. ההוראות יכולות להיות בצורת שאלה, משימות מפורטות או מורכבות כמו מיפוי של חוויית המשתמש והלך הרוח שלו.
+Eine effektive und effiziente Möglichkeit, das Modellverhalten anzupassen, besteht darin, dem Modell klare und spezifische Anweisungen zu geben. Anleitungen können in Form einer Frage, von Schritt-für-Schritt-Aufgaben oder so komplex wie die Darstellung der Erfahrungen und Denkweisen eines Nutzers erfolgen.
 
-### קלט
+### Eingabe
 
-קלט הוא הטקסט הנדרש בהנחיה שרוצים שהמודל יספק לו תשובה. קלט יכול להיות שאלה שהמודל עונה עליה (קלט של שאלה), משימה שהמודל מבצע (קלט של משימה), ישות שהמודל פועל עליה (קלט של ישות) או קלט חלקי שהמודל משלים או ממשיך (קלט של השלמה).
+Die Eingabe ist der erforderliche Text im Prompt, für den das Modell eine Antwort bereitstellen soll. Eingaben können eine Frage sein, die das Modell beantwortet (Frageneingabe), eine Aufgabe, die das Modell ausführt (Aufgabeneingabe), eine Entität, mit der das Modell arbeitet (Entitätseingabe), oder eine Teileingabe, die das Modell vervollständigt (Abschlusseingabe).
 
-| **סוג הקלט** | **הנחיה** | **פלט שנוצר באמצעות AI** |
+| **Eingabetyp** | **Eingabeaufforderung** | **Generierte Ausgabe** |
 | --- | --- | --- |
-| שאלה | ```     What's a good name for a flower shop that specializes in selling bouquets of     dried flowers? Create a list of 5 options with just the names. ``` | ```     Here are 5 names for a flower shop specializing in dried flowers:      1. Everlasting Blooms     2. Dried & Delightful     3. The Petal Preserve     4. Whispers of Wildflowers     5. Forever Blooms ``` |
-| משימה | ```     Give me a simple list of just the things that I must bring on a camping trip. The list should have 5 items. ``` | ```     1. **Tent:** Your shelter from the elements.     2. **Sleeping Bag:** Stay warm and comfortable.     3. **Sleeping Pad:** Insulation and cushioning for a good night's sleep.     4. **Headlamp or Flashlight:** Light for nighttime activities.     5. **First Aid Kit:** Be prepared for minor injuries. ``` |
-| ישות | ```     Classify the following items as [large, small]: Elephant Mouse Snail ``` | ``` Here's the classification:  * **Elephant:** Large * **Mouse:** Small * **Snail:** Small ``` |
+| Frage | ```     What's a good name for a flower shop that specializes in selling bouquets of     dried flowers? Create a list of 5 options with just the names. ``` | ```     Here are 5 names for a flower shop specializing in dried flowers:      1. Everlasting Blooms     2. Dried & Delightful     3. The Petal Preserve     4. Whispers of Wildflowers     5. Forever Blooms ``` |
+| Aufgabe | ```     Give me a simple list of just the things that I must bring on a camping trip. The list should have 5 items. ``` | ```     1. **Tent:** Your shelter from the elements.     2. **Sleeping Bag:** Stay warm and comfortable.     3. **Sleeping Pad:** Insulation and cushioning for a good night's sleep.     4. **Headlamp or Flashlight:** Light for nighttime activities.     5. **First Aid Kit:** Be prepared for minor injuries. ``` |
+| Entität | ```     Classify the following items as [large, small]: Elephant Mouse Snail ``` | ``` Here's the classification:  * **Elephant:** Large * **Mouse:** Small * **Snail:** Small ``` |
 
-#### השלמה חלקית של קלט
+#### Teilweise Vervollständigung der Eingabe
 
-מודלים גנרטיביים של שפה פועלים כמו כלי מתקדם להשלמה אוטומטית. כשמספקים תוכן חלקי, המודל יכול לספק את שאר התוכן או את מה שהוא חושב שהוא המשך של התוכן הזה כתשובה. כשעושים את זה, אם כוללים דוגמאות או הקשר, המודל יכול להתחשב בהם.
+Generative Sprachmodelle funktionieren wie ein erweitertes Tool zur automatischen Vervollständigung. Wenn Sie nur Teilinhalte angeben, kann das Modell den Rest des Inhalts bereitstellen oder das, was es als Fortsetzung des Inhalts betrachtet. Wenn Sie Beispiele oder Kontexte einbeziehen, kann das Modell diese Beispiele oder den Kontext berücksichtigen.
 
-בדוגמה הבאה מופיעה הנחיה עם הוראה וקלט של ישות:
-
-|  |
-| --- |
-| **הנחיה:**    ``` For the given order, return a JSON object that has the fields cheeseburger, hamburger, fries, or drink, with the value being the quantity.  Order: A burger and a drink. ```  **תשובה:**    ``` {   "cheeseburger": 0,   "hamburger": 1,   "fries": 0,   "drink": 1 } ```  (gemini-2.5-flash) |
-
-המודל פעל לפי ההנחיה, אבל לפעמים קשה לכתוב את ההוראות בשפה טבעית, והמודל צריך לפרש אותן.
-לדוגמה, התפריט של מסעדה יכול להכיל הרבה פריטים. כדי להקטין את הגודל של תגובת ה-JSON, כדאי להשמיט את הפריטים שלא הוזמנו. במקרה כזה, אפשר לתת דוגמה וקידומת לתשובה ולתת למודל להשלים אותה:
+Das folgende Beispiel zeigt einen Prompt mit einer Anweisung und einer Entitätseingabe:
 
 |  |
 | --- |
-| **הנחיה:**    ``` Valid fields are cheeseburger, hamburger, fries, and drink. Order: Give me a cheeseburger and fries Output: ``` {   "cheeseburger": 1,   "fries": 1 } ``` Order: I want two burgers, a drink, and fries. Output: ```  **תשובה:**    ``` ``` {   "hamburger": 2,   "drink": 1,   "fries": 1 } ``` ```  (gemini-2.5-flash) |
+| **Prompt:**    ``` For the given order, return a JSON object that has the fields cheeseburger, hamburger, fries, or drink, with the value being the quantity.  Order: A burger and a drink. ```  **Antwort:**    ``` {   "cheeseburger": 0,   "hamburger": 1,   "fries": 0,   "drink": 1 } ```  (gemini-2.5-flash) |
 
-שימו לב שהמילה cheeseburger לא נכללה בפלט כי היא לא הייתה חלק מההזמנה.
-
-אפשר לציין את הפורמט של אובייקטים פשוטים של תגובות JSON באמצעות הנחיות, אבל מומלץ להשתמש בתכונה [פלט מובנה](https://ai.google.dev/gemini-api/docs/structured-output?hl=he) של Gemini API כשמציינים סכימת JSON מורכבת יותר לתגובה.
-
-### מגבלות
-
-מציינים מגבלות לגבי קריאת ההנחיה או יצירת תשובה. אפשר להגיד למודל מה לעשות ומה לא לעשות. לדוגמה, אפשר לציין בהנחיה מגבלה לגבי אורך הסיכום:
+Auch wenn das Modell wie beschrieben funktioniert, kann es schwierig sein, die Anweisungen in natürlicher Sprache zu geben. Dabei bleibt der Interpretation des Modells viel überlassen.
+Eine Restaurantkarte kann beispielsweise viele Elemente enthalten. Um die Größe der JSON-Antwort zu reduzieren, sollten Sie die Elemente weglassen, die nicht bestellt wurden. In diesem Fall können Sie ein Beispiel und ein Antwortpräfix angeben. Lassen Sie das Modell es dann vervollständigen:
 
 |  |
 | --- |
-| **הנחיה:**     ``` Summarize this text in one sentence: Text: A quantum computer exploits quantum mechanical phenomena to perform calculations exponentially faster than any modern traditional computer. At very tiny scales, physical matter acts as both particles and as waves, and quantum computing uses specialized hardware to leverage this behavior. The operating principles of quantum devices is beyond the scope of classical physics. When deployed at scale, quantum computers could be used in a wide variety of applications such as: in cybersecurity to break existing encryption methods while helping researchers create new ones, in meteorology to develop better weather forecasting etc. However, the current state of the art quantum computers are still largely experimental and impractical. ```     **תשובה:**     ```       Exploiting quantum mechanical phenomena, quantum computers can perform calculations exponentially faster than traditional computers for potential applications like cybersecurity and meteorology, although they are currently largely experimental and impractical. ```  (gemini-2.5-flash) |
+| **Prompt:**    ``` Valid fields are cheeseburger, hamburger, fries, and drink. Order: Give me a cheeseburger and fries Output: ``` {   "cheeseburger": 1,   "fries": 1 } ``` Order: I want two burgers, a drink, and fries. Output: ```  **Antwort:**    ``` ``` {   "hamburger": 2,   "drink": 1,   "fries": 1 } ``` ```  (gemini-2.5-flash) |
 
-### פורמט התשובה
+Beachten Sie, dass „Cheeseburger“ von der Ausgabe ausgeschlossen wurde, da er nicht Teil der Bestellung war.
 
-אתם יכולים לתת הוראות שמציינות את פורמט התשובה. לדוגמה,
-אתם יכולים לבקש שהתשובה תהיה בפורמט של טבלה, רשימה עם תבליטים, הצגה עצמית קצרה, מילות מפתח, משפט או פסקה. ההוראה הבאה למערכת מורה למודל להיות יותר שיחתי בתשובה שלו:
+Sie können das Format einfacher JSON-Antwortobjekte zwar mit Prompts angeben, wir empfehlen jedoch, die Funktion [strukturierte Ausgabe](https://ai.google.dev/gemini-api/docs/structured-output?hl=de) der Gemini API zu verwenden, wenn Sie ein komplexeres JSON-Schema für die Antwort angeben.
 
-|  |
-| --- |
-| **הוראות מערכת**    ```     All questions should be answered comprehensively with details, unless the user requests a concise response specifically. ```  **הנחיה**    ```     What is a smart way to make a business that sells DVD's in 2026? ```  **תשובה:**    ``` Starting a business selling DVDs in 2026 presents significant challenges due to the overwhelming dominance of digital streaming and on-demand services; a "smart" approach would therefore require a highly specialized niche, a strong value proposition beyond just the disc, and likely a focus on community or collector markets rather than mainstream consumption.  Here's a breakdown of what a smart DVD business in 2026 would likely entail:  1. Extreme Niche Specialization: You cannot compete with streaming libraries. Your business must focus on what digital doesn't offer easily or at all. This could include:      * Out-of-Print & Rare Titles: Sourcing films or TV shows that have never been released digitally or are currently unavailable on major streaming platforms.     .... ```  (gemini-2.5-flash) |
+### Einschränkungen
 
-#### עיצוב התשובות באמצעות אסטרטגיית ההשלמה
-
-[אסטרטגיית ההשלמה](#completion) יכולה לעזור גם בעיצוב התשובה.
-בדוגמה הבאה, המודל מתבקש ליצור טיוטה של חיבור:
+Geben Sie alle Einschränkungen für das Lesen des Prompts oder das Generieren einer Antwort an. Sie können dem Modell mitteilen, was es tun und was es nicht tun soll. Sie können beispielsweise im Prompt eine Einschränkung für die Länge einer Zusammenfassung angeben:
 
 |  |
 | --- |
-| **הנחיה:**    ``` Create an outline for an essay about hummingbirds. ```  **תשובה:**    ``` Here is a possible outline for an essay about hummingbirds:  I. Introduction A. Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). B. Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds. C. Thesis Statement: State the main point of the essay, which could be about the remarkable adaptations, behaviors, and ecological importance of hummingbirds.  II. Appearance and Identification ..... ```  (gemini-2.5-flash) |
+| **Prompt:**     ``` Summarize this text in one sentence: Text: A quantum computer exploits quantum mechanical phenomena to perform calculations exponentially faster than any modern traditional computer. At very tiny scales, physical matter acts as both particles and as waves, and quantum computing uses specialized hardware to leverage this behavior. The operating principles of quantum devices is beyond the scope of classical physics. When deployed at scale, quantum computers could be used in a wide variety of applications such as: in cybersecurity to break existing encryption methods while helping researchers create new ones, in meteorology to develop better weather forecasting etc. However, the current state of the art quantum computers are still largely experimental and impractical. ```     **Antwort:**     ```       Exploiting quantum mechanical phenomena, quantum computers can perform calculations exponentially faster than traditional computers for potential applications like cybersecurity and meteorology, although they are currently largely experimental and impractical. ```  (gemini-2.5-flash) |
 
-בהנחיה לא צוין פורמט לתוכן, והמודל בחר פורמט בשבילכם. כדי שהמודל יחזיר תוכן בפורמט ספציפי, אפשר להוסיף טקסט שמייצג את תחילת התוכן ולתת למודל להשלים אותו על סמך התבנית שהתחלתם.
+### Antwortformat
 
-|  |
-| --- |
-| **הנחיה:**    ``` Create an outline for an essay about hummingbirds. I. Introduction    * ```  **תשובה:**    ``` Okay, here is an outline for an essay about hummingbirds, starting from the introduction you provided:  I. Introduction * Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). * Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds, and their general characteristics. * Thesis Statement: State the main point of the essay, focusing on the remarkable adaptations, behaviors, and ecological significance that make hummingbirds extraordinary. ..... ```  (gemini-2.5-flash) |
-
-## הנחיות ישירות (Zero-shot) לעומת הנחיות עם כמה דוגמאות (Few-shot)
-
-אתם יכולים לכלול בהנחיה דוגמאות שמראות למודל איך נראית תשובה נכונה. המודל מנסה לזהות דפוסים וקשרים בדוגמאות ומיישם אותם כשהוא יוצר תשובה. הנחיות שמכילות כמה דוגמאות נקראות הנחיות *עם כמה דוגמאות*, והנחיות שלא מכילות דוגמאות נקראות הנחיות *ללא דוגמאות*. הנחיות עם כמה דוגמאות משמשות בדרך כלל כדי להסדיר את הפורמט, הניסוח, ההיקף או הדפוס הכללי של תשובות המודל. כדאי להשתמש בדוגמאות ספציפיות ומגוונות כדי לעזור למודל לצמצם את המיקוד שלו וליצור תוצאות מדויקות יותר.
-
-מומלץ תמיד לכלול בדחיפות דוגמאות של few-shot. דחיפות ללא דוגמאות של few-shot צפויות להיות פחות יעילות. למעשה, אפשר להסיר את ההוראות מהדחיפה אם הדוגמאות מבהירות מספיק את המשימה.
-
-ההנחיה הבאה היא הנחיית zero-shot שבה המודל מתבקש לבחור את ההסבר הטוב ביותר.
+Sie können auch Anweisungen zum Formatieren der Antwort geben. Sie können beispielsweise festlegen, dass die Antwort als Tabelle, Aufzählungsliste, Elevator Pitch, Keywords, Satz oder Absatz formatiert wird. Die folgende Systemanweisung weist das Modell an, in seiner Antwort einen eher konversationellen Stil zu verwenden:
 
 |  |
 | --- |
-| **הנחיה:**    ``` Please choose the best explanation to the question:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **תשובה:**    ``` Explanation1 is the better explanation because it provides more detail on the process, including how ice crystals combine and grow into snowflakes as they fall through the atmosphere. ```  (gemini-2.5-flash) |
+| **Systemanweisung**    ```     All questions should be answered comprehensively with details, unless the user requests a concise response specifically. ```  **Prompt**    ```     What is a smart way to make a business that sells DVD's in 2026? ```  **Antwort:**    ``` Starting a business selling DVDs in 2026 presents significant challenges due to the overwhelming dominance of digital streaming and on-demand services; a "smart" approach would therefore require a highly specialized niche, a strong value proposition beyond just the disc, and likely a focus on community or collector markets rather than mainstream consumption.  Here's a breakdown of what a smart DVD business in 2026 would likely entail:  1. Extreme Niche Specialization: You cannot compete with streaming libraries. Your business must focus on what digital doesn't offer easily or at all. This could include:      * Out-of-Print & Rare Titles: Sourcing films or TV shows that have never been released digitally or are currently unavailable on major streaming platforms.     .... ```  (gemini-2.5-flash) |
 
-אם תרצו שהמודל יפיק תשובות תמציתיות, תוכלו לכלול בהנחיה דוגמאות שמראות שהתשובות צריכות להיות תמציתיות.
+#### Antworten mit der Vervollständigungsstrategie formatieren
 
-ההנחיה הבאה מספקת שתי דוגמאות שבהן מוצגת העדפה להסברים קצרים יותר. בתגובה, אפשר לראות שהדוגמאות הנחו את המודל לבחור בהסבר הקצר יותר (`Explanation2`) ולא בהסבר הארוך יותר (`Explanation1`) כמו שהוא עשה קודם.
-
-|  |
-| --- |
-| **הנחיה:**    ``` Below are some examples showing a question, explanation, and answer format:  Question: Why is the sky blue? Explanation1: The sky appears blue because of Rayleigh scattering, which causes shorter blue wavelengths of light to be scattered more easily than longer red wavelengths, making the sky look blue. Explanation2: Due to Rayleigh scattering effect. Answer: Explanation2  Question: What is the cause of earthquakes? Explanation1: Sudden release of energy in the Earth's crust. Explanation2: Earthquakes happen when tectonic plates suddenly slip or break apart, causing a release of energy that creates seismic waves that can shake the ground and cause damage. Answer: Explanation1  Now, Answer the following question given the example formats above:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **תשובה:**    ``` Answer: Explanation2 ```  (gemini-2.5-flash) |
-
-### מספר הדוגמאות האופטימלי
-
-מודלים כמו Gemini יכולים לזהות דפוסים באמצעות כמה דוגמאות, אבל יכול להיות שתצטרכו להתנסות במספר הדוגמאות שאתם מספקים בהנחיה כדי לקבל את התוצאות הכי טובות. יחד עם זאת, אם תכללו יותר מדי דוגמאות, יכול להיות שהמודל יתחיל [להתאים יתר על המידה](https://developers.google.com/machine-learning/glossary?hl=he#overfitting) את התשובה לדוגמאות.
-
-### עיצוב עקבי
-
-כדי למנוע תשובות בפורמטים לא רצויים, חשוב לוודא שהמבנה והפורמט של הדוגמאות עם ההסברים הזהים. אחת המטרות העיקריות של הוספת דוגמאות בשיטת ה-few-shot בהנחיות היא להראות למודל את פורמט התשובה. לכן, חשוב לוודא שהפורמט עקבי בכל הדוגמאות, ובמיוחד לשים לב לתגי XML, לרווחים, למעברי שורה ולמפרידי הדוגמאות.
-
-## הוספת הקשר
-
-אתם יכולים לכלול בהנחיה הוראות ומידע שהמודל צריך כדי לפתור בעיה, במקום להניח שלמודל יש את כל המידע הנדרש. המידע ההקשרי הזה עוזר למודל להבין את האילוצים והפרטים של מה שאתם מבקשים ממנו לעשות.
-
-בדוגמה הבאה, המודל מתבקש לספק הנחיות לפתרון בעיות בנתב:
+Die [Vervollständigungsstrategie](#completion) kann auch bei der Formatierung der Antwort hilfreich sein.
+Im folgenden Beispiel wird das Modell aufgefordert, einen Aufzug zu erstellen:
 
 |  |
 | --- |
-| **הנחיה:**    ``` What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly. ```  **תשובה:**    ```   A yellow blinking light on your Google Wifi router usually indicates a problem   with the internet connection. Here are some steps to troubleshoot and fix the   issue:   1. Restart your router and modem:     - Unplug your modem from the power outlet and wait for 30 seconds.     - Plug your modem back in and wait for it to fully boot up.     - Unplug your Google Wifi router and wait for 30 seconds.     - Plug your Google Wifi router back in and wait for it to fully boot up. ..... ```  (gemini-2.5-flash) |
+| **Prompt:**    ``` Create an outline for an essay about hummingbirds. ```  **Antwort:**    ``` Here is a possible outline for an essay about hummingbirds:  I. Introduction A. Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). B. Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds. C. Thesis Statement: State the main point of the essay, which could be about the remarkable adaptations, behaviors, and ecological importance of hummingbirds.  II. Appearance and Identification ..... ```  (gemini-2.5-flash) |
 
-התשובה נראית כמו מידע כללי לפתרון בעיות שלא ספציפי לנתב או לסטטוס של נוריות ה-LED.
-
-כדי להתאים אישית את התשובה לנתב הספציפי, אפשר להוסיף להנחיה את מדריך פתרון הבעיות של הנתב כהקשר שאליו כדאי להתייחס כשמספקים תשובה.
+In dem Prompt wurde nicht das Format für den Umriss angegeben, und das Modell hat ein Format für Sie ausgewählt. Damit das Modell einen Umriss in einem bestimmten Format zurückgibt, können Sie Text hinzufügen, der den Anfang des Umrisses darstellt, und das Modell anhand des von Ihnen initiierten Musters fertigstellen lassen.
 
 |  |
 | --- |
-| **הנחיה:**    ``` Answer the question using the text below. Respond with only the text provided. Question: What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly.  Text: Color: Slowly pulsing yellow What it means: There is a network error. What to do: Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again.  Color: Fast blinking yellow What it means: You are holding down the reset button and are factory resetting this device. What to do: If you keep holding down the reset button, after about 12 seconds, the light will turn solid yellow. Once it is solid yellow, let go of the factory reset button.  Color: Solid yellow What it means: Router is factory resetting. What to do: This can take up to 10 minutes. When it's done, the device will reset itself and start pulsing white, letting you know it's ready for setup.  Color: Solid red What it means: Something is wrong. What to do: Critical failure. Factory reset the router. If the light stays red, contact Wifi customer support. ```  **תשובה:**    ``` Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again. ```  (gemini-2.5-flash) |
+| **Prompt:**    ``` Create an outline for an essay about hummingbirds. I. Introduction    * ```  **Antwort:**    ``` Okay, here is an outline for an essay about hummingbirds, starting from the introduction you provided:  I. Introduction * Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). * Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds, and their general characteristics. * Thesis Statement: State the main point of the essay, focusing on the remarkable adaptations, behaviors, and ecological significance that make hummingbirds extraordinary. ..... ```  (gemini-2.5-flash) |
 
-## פירוק ההנחיות לרכיבים
+## Zero-Shot- und Few-Shot-Prompts im Vergleich
 
-בתרחישי שימוש שבהם נדרשות הנחיות מורכבות, אפשר לפשט את המודל על ידי פירוק הדברים לרכיבים פשוטים יותר.
+Sie können Beispiele in den Prompt einfügen, die dem Modell zeigen, wie es aussieht, richtig zu liegen. Das Modell versucht, Muster und Beziehungen aus den Beispielen zu identifizieren und diese beim Generieren einer Antwort anzuwenden. Prompts, die einige Beispiele enthalten, werden als *Few-Shot*-Prompts bezeichnet, während Prompts, die keine Beispiele enthalten, als *Zero-Shot*-Prompts bezeichnet werden. Häufig werden Few-Shot-Prompts verwendet, um die Formatierung, die Formulierung, den Geltungsbereich oder das allgemeine Muster der Modellantworten zu regulieren. Verwenden Sie spezifische und vielfältige Beispiele, damit das Modell den Fokus eingrenzen und genauere Ergebnisse generieren kann.
 
-1. **פירוט ההוראות:** במקום לכתוב הרבה הוראות בהנחיה אחת, כדאי ליצור הנחיה אחת לכל הוראה. אתם יכולים לבחור איזו הנחיה לעבד על סמך הקלט של המשתמש.
-2. **שרשור הנחיות:** למשימות מורכבות שכוללות כמה שלבים עוקבים,
-   אפשר להפוך כל שלב להנחיה ולשרשר את ההנחיות ברצף. בשרשרת הרציפה הזו של הנחיות, הפלט של הנחיה אחת ברצף הופך לקלט של ההנחיה הבאה. הפלט של ההנחיה האחרונה ברצף
-   הוא הפלט הסופי.
-3. **תשובות מצטברות:** צבירה היא מצב שבו רוצים לבצע משימות מקבילות שונות בחלקים שונים של הנתונים, ולצבור את התוצאות כדי ליצור את הפלט הסופי. לדוגמה, אפשר להנחות את המודל לבצע פעולה אחת בחלק הראשון של הנתונים, לבצע פעולה אחרת בשאר הנתונים ולצבור את התוצאות.
+Wir empfehlen, immer Few-Shot-Beispiele in Ihre Prompts aufzunehmen. Prompts ohne Few-Shot-Beispiele sind wahrscheinlich weniger effektiv. Tatsächlich können Sie eine Anleitung aus Ihrer Prompt entfernen, wenn Ihre Beispiele klar genug sind, um die vorliegende Aufgabe zu zeigen.
 
-## ניסוי עם פרמטרים של מודל
+In dem folgenden Prompt wird das Modell aufgefordert, die beste Erklärung auszuwählen.
 
-כל קריאה ששולחים למודל כוללת ערכי פרמטרים שקובעים איך המודל יוצר תגובה. המודל יכול ליצור תוצאות שונות עבור ערכי פרמטרים שונים. כדאי להתנסות עם ערכי פרמטרים שונים כדי לקבל את הערכים הכי טובים למשימה. הפרמטרים שזמינים למודלים שונים עשויים להיות שונים. הפרמטרים הנפוצים ביותר הם:
+|  |
+| --- |
+| **Prompt:**    ``` Please choose the best explanation to the question:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **Antwort:**    ``` Explanation1 is the better explanation because it provides more detail on the process, including how ice crystals combine and grow into snowflakes as they fall through the atmosphere. ```  (gemini-2.5-flash) |
 
-1. ‫**Max output tokens:** מציין את המספר המקסימלי של טוקנים שאפשר ליצור בתשובה. כל טוקן הוא בערך באורך של ארבעה תווים. ‫100 טוקנים מקבילים בערך ל-60-80 מילים.
-2. **טמפרטורה:** הטמפרטורה שולטת במידת האקראיות בבחירת האסימון. רמת האקראיות משמשת לדגימה במהלך תהליך יצירת תשובות, שמתרחש כשמחילים את `topP` ואת `topK`. טמפרטורות נמוכות טובות להנחיות שדורשות תשובה יותר דטרמיניסטית או פחות פתוחה, ואילו טמפרטורות גבוהות יכולות להוביל לתוצאות יותר מגוונות או יצירתיות. רמת אקראיות של 0 היא דטרמיניסטית, כלומר תמיד נבחרת התגובה עם ההסתברות הכי גבוהה.
-3. ‫**`topK`:** הפרמטר `topK` משנה את האופן שבו המודל בוחר טוקנים לפלט. ערך של `topK`‏ 1 מציין שהאסימון שנבחר הוא האסימון הסביר ביותר מבין כל האסימונים באוצר המילים של המודל (נקרא גם פענוח חמדני), ואילו ערך של `topK`‏ 3 מציין שהאסימון הבא נבחר מבין 3 האסימונים הסבירים ביותר באמצעות הטמפרטורה. בכל שלב של בחירת טוקנים, מתבצעת דגימה של `topK` הטוקנים עם ההסתברויות הכי גבוהות. לאחר מכן, הטוקנים מסוננים עוד יותר על סמך `topP`, והטוקן הסופי נבחר באמצעות דגימה של הטמפרטורה.
-4. ‫**`topP`:** הפרמטר `topP` משנה את האופן שבו המודל בוחר טוקנים לפלט. הטוקנים נבחרים מהסבירות הגבוהה ביותר לסבירות הנמוכה ביותר עד שסכום ההסתברויות שלהם שווה לערך `topP`. לדוגמה, אם ההסתברות של הטוקנים A,‏ B,‏
-   ו-C היא 0.3,‏ 0.2 ו-0.1, והערך של `topP` הוא 0.5,
-   אז המודל יבחר ב-A או ב-B כטוקן הבא באמצעות רמת האקראיות, ויפסול את C כמועמד. ערך ברירת המחדל של `topP` הוא 0.95.
-5. ‫**`stop_sequences`:** הגדרת רצף עצירה כדי להנחות את המודל להפסיק ליצור תוכן. רצף עצירה יכול להיות כל רצף של תווים. כדאי להימנע משימוש ברצף של תווים שעשויים להופיע בתוכן שנוצר.
+Wenn Ihr Anwendungsfall erfordert, dass das Modell prägnante Antworten erstellt, können Sie Beispiele in den Prompt einfügen, der prägnante Antworten bevorzugt.
 
-## אסטרטגיות לחידוד הנחיות
+Der folgende Prompt enthält zwei Beispiele, die die kürzeren Erklärungen zeigen. In der Antwort sehen Sie, dass die Beispiele das Modell dazu veranlasst haben, die kürzere Erklärung auszuwählen (`Explanation2`), im Gegensatz zur längeren Erklärung (`Explanation1`) wie zuvor.
 
-לפעמים צריך לבצע כמה איטרציות של עיצוב הנחיה כדי לקבל באופן עקבי את התשובה שמחפשים. בקטע הזה מפורטות כמה פעולות שאפשר לנסות כשמשפרים את ההנחיות:
+|  |
+| --- |
+| **Prompt:**    ``` Below are some examples showing a question, explanation, and answer format:  Question: Why is the sky blue? Explanation1: The sky appears blue because of Rayleigh scattering, which causes shorter blue wavelengths of light to be scattered more easily than longer red wavelengths, making the sky look blue. Explanation2: Due to Rayleigh scattering effect. Answer: Explanation2  Question: What is the cause of earthquakes? Explanation1: Sudden release of energy in the Earth's crust. Explanation2: Earthquakes happen when tectonic plates suddenly slip or break apart, causing a release of energy that creates seismic waves that can shake the ground and cause damage. Answer: Explanation1  Now, Answer the following question given the example formats above:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **Antwort:**    ``` Answer: Explanation2 ```  (gemini-2.5-flash) |
 
-1. **שימוש בניסוחים שונים:** שימוש במילים או בניסוחים שונים בהנחיות לרוב יוביל לתשובות שונות מהמודל, גם אם המשמעות של ההנחיות זהה. אם לא קיבלתם את התוצאות שציפיתם להן מההנחיה, נסו לנסח אותה מחדש.
+### Optimale Anzahl von Beispielen
+
+Modelle wie Gemini können anhand einiger Beispiele häufig Muster erkennen. Möglicherweise müssen Sie jedoch mit der Anzahl der Beispiele experimentieren, die im Prompt für die besten Ergebnisse bereitgestellt werden sollen. Wenn Sie zu viele Beispiele hinzufügen, kann das Modell die Antwort auf die Beispiele [überanpassen](https://developers.google.com/machine-learning/glossary?hl=de#overfitting).
+
+### Einheitliches Format
+
+Achten Sie darauf, dass die Struktur und Formatierung von Few-Shot-Beispielen identisch sind, um Antworten mit unerwünschten Formaten zu vermeiden. Eines der Hauptziele beim Hinzufügen von Few-Shot-Beispielen in Prompts besteht darin, dem Modell das Antwortformat zu zeigen. Daher ist es wichtig, dass Sie für alle Beispiele ein konsistentes Format gewährleisten, insbesondere auf XML-Tags, Leerzeichen, Zeilenumbrüche und Beispiel-Splitter achten.
+
+## Kontext hinzufügen
+
+Sie können in einem Prompt Anweisungen und Informationen angeben, die das Modell benötigt, um ein Problem zu lösen, anstatt davon auszugehen, dass das Modell alle erforderlichen Informationen hat. Diese Kontextinformationen helfen dem Modell, die Einschränkungen und Details dessen zu verstehen, was es tun soll.
+
+Im folgenden Beispiel wird das Modell aufgefordert, eine Anleitung zur Fehlerbehebung für einen Router bereitzustellen:
+
+|  |
+| --- |
+| **Prompt:**    ``` What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly. ```  **Antwort:**    ```   A yellow blinking light on your Google Wifi router usually indicates a problem   with the internet connection. Here are some steps to troubleshoot and fix the   issue:   1. Restart your router and modem:     - Unplug your modem from the power outlet and wait for 30 seconds.     - Plug your modem back in and wait for it to fully boot up.     - Unplug your Google Wifi router and wait for 30 seconds.     - Plug your Google Wifi router back in and wait for it to fully boot up. ..... ```  (gemini-2.5-flash) |
+
+Die Antwort sieht wie allgemeine Informationen zur Fehlerbehebung aus, die nicht spezifisch für den Router oder den Status der LED-Anzeigen sind.
+
+Um die Antwort für den jeweiligen Router anzupassen, können Sie der Anleitung zur Fehlerbehebung des Routers als Kontext hinzufügen, auf den Sie beim Antworten verweisen.
+
+|  |
+| --- |
+| **Prompt:**    ``` Answer the question using the text below. Respond with only the text provided. Question: What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly.  Text: Color: Slowly pulsing yellow What it means: There is a network error. What to do: Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again.  Color: Fast blinking yellow What it means: You are holding down the reset button and are factory resetting this device. What to do: If you keep holding down the reset button, after about 12 seconds, the light will turn solid yellow. Once it is solid yellow, let go of the factory reset button.  Color: Solid yellow What it means: Router is factory resetting. What to do: This can take up to 10 minutes. When it's done, the device will reset itself and start pulsing white, letting you know it's ready for setup.  Color: Solid red What it means: Something is wrong. What to do: Critical failure. Factory reset the router. If the light stays red, contact Wifi customer support. ```  **Antwort:**    ``` Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again. ```  (gemini-2.5-flash) |
+
+## Prompts in Komponenten aufteilen
+
+Bei Anwendungsfällen, die komplexe Prompts erfordern, können Sie das Modell bei der Bewältigung dieser Komplexität unterstützen, indem Sie Elemente in einfachere Komponenten unterteilen.
+
+1. **Anweisungen aufteilen**:Anstatt viele Anweisungen in einem Prompt zu verwenden, sollten Sie einen Prompt pro Anweisung erstellen. Sie können auswählen, welche Prompt basierend auf der Eingabe des Nutzers verarbeitet werden soll.
+2. **Prompts verketten**:Bei komplexen Aufgaben, die mehrere aufeinanderfolgende Schritte umfassen, sollten Sie jeden Schritt zu einem Prompt machen und die Prompts in einer Sequenz verketten. In dieser sequenziellen Kette von Prompts wird die Ausgabe eines Prompts in der Sequenz zur Eingabe des nächsten Prompts. Die Ausgabe des letzten Prompts in der Sequenz ist die endgültige Ausgabe.
+3. **Antworten aggregieren**:Bei der Aggregation werden verschiedene parallele Aufgaben für verschiedene Teile der Daten ausgeführt und die Ergebnisse werden aggregiert, um die endgültige Ausgabe zu erzeugen. Sie können das Modell beispielsweise anweisen, einen Vorgang für den ersten Teil der Daten und einen anderen Vorgang für den Rest der Daten auszuführen und die Ergebnisse zu aggregieren.
+
+## Mit Modellparametern experimentieren
+
+Jeder Aufruf, den Sie an ein Modell senden, enthält Parameterwerte, die steuern, wie das Modell eine Antwort generiert. Das Modell kann für verschiedene Parameterwerte unterschiedliche Ergebnisse generieren. Experimentieren Sie mit verschiedenen Parameterwerten, um die besten Werte für die Aufgabe zu erhalten. Die für verschiedene Modelle verfügbaren Parameter können unterschiedlich sein. Die häufigsten Parameter sind:
+
+1. **Maximale Anzahl an Ausgabetokens**:Gibt die maximale Anzahl an Tokens an, die in der Antwort generiert werden können. Ein Token besteht aus etwa vier Zeichen. 100 Tokens entsprechen etwa 60–80 Wörtern.
+2. **Temperatur**:Die Temperatur bestimmt den Grad der Zufälligkeit bei der Tokenauswahl. Die Temperatur wird für die Probenahme während der Generierung von Antworten verwendet. Dies passiert, wenn `topP` und `topK` angewendet werden. Niedrigere Temperaturen eignen sich für Prompts, die deterministischere oder weniger offene Antworten erfordern, während höhere Temperaturen zu vielfältigeren oder kreativen Ergebnissen führen können. Eine Temperatur von 0 ist deterministisch, d. h., die Antwort mit der höchsten Wahrscheinlichkeit wird immer ausgewählt.
+3. **`topK`**:Der Parameter `topK` ändert, wie das Modell Tokens für die Ausgabe auswählt. Ein `topK` von 1 bedeutet, dass das ausgewählte Token das wahrscheinlichste unter allen Tokens im Vokabular des Modells ist (auch als „Greedy Decoding“ bezeichnet). Ein `topK` von 3 bedeutet dagegen, dass das nächste Token aus den 3 wahrscheinlichsten Tokens ausgewählt wird (mithilfe der Temperatur). Für jeden Tokenauswahlschritt werden die `topK`-Tokens mit den höchsten Wahrscheinlichkeiten abgetastet. Anschließend werden Tokens weitergehend auf der Grundlage von `topP` gefiltert, wobei das endgültige Token mithilfe von Temperaturproben ausgewählt wird.
+4. **`topP`**:Der Parameter `topP` ändert, wie das Modell Tokens für die Ausgabe auswählt. Tokens werden vom wahrscheinlichsten bis zum am wenigsten wahrscheinlichen Token ausgewählt, bis die Summe ihrer Wahrscheinlichkeiten dem Wert `topP` entspricht. Beispiel: Wenn die Tokens A, B und C eine Wahrscheinlichkeit von 0,3, 0,2 und 0,1 haben und der Wert `topP` 0,5 ist, wählt das Modell entweder A oder B als nächstes Token aus, indem es die Temperatur verwendet und C als Kandidaten ausschließt. Der Standardwert für `topP` ist 0,95.
+5. **`stop_sequences`**:Legen Sie eine Stoppsequenz fest, um dem Modell mitzuteilen, dass es keine Inhalte mehr generieren soll. Eine Stoppsequenz kann eine beliebige Zeichenfolge sein. Vermeiden Sie die Verwendung einer Zeichenfolge, die im generierten Inhalt vorkommen kann.
+
+## Strategien für Prompt-Iteration
+
+Das Prompt-Design erfordert manchmal einige Iterationen, bevor Sie durchgehend die gewünschte Antwort erhalten. In diesem Abschnitt finden Sie Anweisungen zu einigen Dingen, die Sie beim Iterieren Ihrer Prompts versuchen können:
+
+1. **Andere Formulierungen verwenden**:Die Verwendung unterschiedlicher Wörter oder Formulierungen in Ihren Prompts liefert häufig unterschiedliche Antworten vom Modell, obwohl sie alle dieselbe Bedeutung haben. Wenn Sie nicht die erwarteten Ergebnisse von dem Prompt erhalten, versuchen Sie, ihn umzuformulieren.
 
    |  |
    | --- |
    | ``` Version 1: How do I bake a pie?  Version 2: Suggest a recipe for a pie.  Version 3: What's a good pie recipe? ``` |
-2. **מעבר למשימה דומה:** אם לא הצלחתם לגרום למודל לפעול לפי ההוראות שנתתם לו למשימה מסוימת, נסו לתת לו הוראות למשימה דומה שתשיג את אותה תוצאה.
+2. **Auf eine ähnliche Aufgabe umstellen**:Wenn Sie das Modell nicht dazu bringen können, den Anweisungen für eine Aufgabe zu folgen, versuchen Sie, ihm Anweisungen für eine ähnliche Aufgabe zu geben, die dasselbe Ergebnis erzielt.
 
-   ההנחיה הזו אומרת למודל לסווג ספר באמצעות קטגוריות מוגדרות מראש:
-
-   |  |
-   | --- |
-   | **הנחיה:**    ``` Which category does The Odyssey belong to: thriller sci-fi mythology biography ```  **תשובה:**    ```     The Odyssey belongs to the category of **mythology**.       Here's why:      * **Mythology:** The Odyssey tells the story of Odysseus, a hero from Greek mythology, and his     journey home after the Trojan War. It features gods, monsters, and supernatural events common to     Greek mythology. ..... ```  (gemini-2.5-flash) |
-
-   התשובה נכונה, אבל המודל לא נשאר בגבולות האפשרויות. אתם רוצים שהמודל ישיב רק עם אחת מהאפשרויות ולא עם משפט מלא. במקרה כזה, אפשר לנסח מחדש את ההוראות כשאלה אמריקאית ולבקש מהמודל לבחור אפשרות.
+   In diesem Prompt wird das Modell angewiesen, ein Buch mithilfe vordefinierter Kategorien zu kategorisieren:
 
    |  |
    | --- |
-   | **הנחיה:**    ``` Multiple choice problem: Which of the following options describes the book The Odyssey? Options: ``` |
+   | **Prompt:**    ``` Which category does The Odyssey belong to: thriller sci-fi mythology biography ```  **Antwort:**    ```     The Odyssey belongs to the category of **mythology**.       Here's why:      * **Mythology:** The Odyssey tells the story of Odysseus, a hero from Greek mythology, and his     journey home after the Trojan War. It features gods, monsters, and supernatural events common to     Greek mythology. ..... ```  (gemini-2.5-flash) |
+
+   Die Antwort ist korrekt, aber das Modell blieb nicht innerhalb der Grenzen der Optionen. Sie möchten auch, dass das Modell nur mit einer der Optionen antwortet und nicht mit einem ganzen Satz. In diesem Fall können Sie die Anweisungen als Multiple-Choice-Frage umformulieren und das Modell bitten, eine Option auszuwählen.
+
+   |  |
+   | --- |
+   | **Prompt:**    ``` Multiple choice problem: Which of the following options describes the book The Odyssey? Options: ``` |
 
    - thriller
    - sci-fi
    - mythology
    - biography
-     **תשובה:**
+     **Antwort:**
 
      ```
      The correct answer is mythology.
      ```
 
      (gemini-2.5-flash)
-   - **שינוי הסדר של התוכן בהנחיה:** לפעמים הסדר של התוכן בהנחיה משפיע על התשובה. כדאי לנסות לשנות את סדר התוכן ולראות איך זה משפיע על התשובה.
+   - **Reihenfolge der Prompt-Inhalte ändern**:Die Reihenfolge des Inhalts im Prompt kann sich manchmal auf die Antwort auswirken. Ändern Sie die Inhaltsreihenfolge und prüfen Sie, wie sich dies auf die Antwort auswirkt.
 
      ```
      Version 1:
@@ -220,50 +215,51 @@ title: "\u05d0\u05e1\u05d8\u05e8\u05d8\u05d2\u05d9\u05d5\u05ea \u05dc\u05e2\u05d
      [context]
      ```
 
-## תשובות חלופיות
+## Fallback-Antworten
 
-תשובת גיבוי היא תשובה שמוחזרת על ידי המודל אם ההנחיה או התשובה מפעילות מסנן בטיחות. דוגמה לתשובה חלופית: "אני לא יכול לעזור בזה, כי אני רק מודל שפה".
+Eine Fallback-Antwort ist eine Antwort, die vom Modell zurückgegeben wird, wenn entweder der Prompt oder die Antwort einen Sicherheitsfilter auslöst. Ein Beispiel für eine Fallback-Antwort ist: "Ich kann dir nicht helfen, da ich nur ein Sprachmodell habe."
 
-אם המודל מגיב בתשובה חלופית, נסו להגדיל את רמת האקראיות.
+Wenn das Modell mit einer Fallback-Antwort antwortet, versuchen Sie, die Temperatur zu erhöhen.
 
-## הארקה והרצת קוד
+## Fundierung und Codeausführung
 
-‫Gemini יכול להשתמש בכלים כדי להימנע מהזיות בתרחישים שבהם הוא עלול לתת תשובות שגויות.
+Gemini kann Tools verwenden, um Halluzinationen in Szenarien zu vermeiden, in denen sonst möglicherweise falsche Antworten generiert würden.
 
-[עיגון באמצעות חיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he) מחבר את מודל Gemini לתוכן מהאינטרנט שמתעדכן בזמן אמת, וכדאי להפעיל אותו בכל פעם שהמודל עשוי להזדקק למידע על עובדות לא מוכרות או עדכניות.
+Durch die [Fundierung mit der Google Suche](https://ai.google.dev/gemini-api/docs/google-search?hl=de) wird das Gemini-Modell in Echtzeit mit Webinhalten verbunden. Diese Funktion sollte immer aktiviert sein, wenn das Modell möglicherweise obskure oder aktuelle Fakten kennen muss.
 
-[כלי הרצת הקוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he) של Gemini מאפשר למודל ליצור ולהריץ קוד Python, וצריך להפעיל אותו בכל פעם שהמודל צריך לבצע פעולות אריתמטיות, ספירה או חישובים.
+Mit dem [Tool zur Codeausführung](https://ai.google.dev/gemini-api/docs/code-execution?hl=de) von Gemini kann das Modell Python-Code generieren und ausführen. Es sollte immer aktiviert werden, wenn das Modell arithmetische Operationen, Zählungen oder Berechnungen durchführen muss.
 
-## Gemini 3
+## Gemini 3
 
-[מודלים של Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=he#gemini-3) מיועדים להסקת מסקנות מתקדמת ולביצוע הוראות. הם מגיבים בצורה הטובה ביותר להנחיות ישירות ומובנות היטב, שמגדירות בבירור את המשימה ואת כל המגבלות. כדי לקבל תוצאות אופטימליות עם Gemini 3, מומלץ לפעול לפי השיטות הבאות:
+[Gemini 3-Modelle](https://ai.google.dev/gemini-api/docs/models?hl=de#gemini-3) wurden für komplexes logisches Denken und das Befolgen von Anweisungen entwickelt.
+Sie reagieren am besten auf Prompts, die direkt, gut strukturiert sind und in denen die Aufgabe und alle Einschränkungen klar definiert sind. Für optimale Ergebnisse mit Gemini 3 werden die folgenden Vorgehensweisen empfohlen:
 
-### עקרונות חשובים לכתיבת הנחיות
+### Grundlegende Prompting-Prinzipien
 
-- **היו מדויקים וישירים:** ציינו את המטרה שלכם בצורה ברורה ותמציתית. מומלץ להימנע משפה מיותרת או משכנעת מדי.
-- **שימוש במבנה עקבי:** כדאי להשתמש בתווים ברורים להפרדה בין חלקים שונים בהנחיה. תגים בסגנון XML (לדוגמה, `<context>`, `<task>`) או כותרות ב-Markdown. בוחרים פורמט אחד ומשתמשים בו באופן עקבי בהנחיה אחת.
-- **הגדרת פרמטרים:** הסבירו במפורש כל מונח או פרמטר מעורפל.
-- **שליטה ברמת הפירוט של הפלט:** כברירת מחדל, מודלים של Gemini 3 מספקים תשובות ישירות ויעילות. אם אתם צריכים תשובה יותר מפורטת או כזו שמתנהלת כמו שיחה, אתם צריכים לציין את זה במפורש בהוראות.
-- **טיפול עקבי בקלט מולטימודאלי:** כשמשתמשים בטקסט, בתמונות, באודיו או בסרטונים, צריך להתייחס אליהם כאל קלט מאותו סוג. חשוב לוודא שההוראות מתייחסות בבירור לכל מודאליות לפי הצורך.
-- **תעדוף הוראות קריטיות:** כדאי להוסיף את ההגבלות ההתנהגותיות החשובות, את הגדרות התפקיד (פרסונה) ואת הדרישות לגבי פורמט הפלט בהוראות המערכת או בתחילת ההנחיה למשתמש.
-- **מבנה להקשרים ארוכים:** כשמספקים כמויות גדולות של הקשר (למשל, מסמכים, קוד), צריך לספק את כל ההקשר קודם. ממקמים את ההוראות או השאלות הספציפיות *בסוף* ההנחיה.
-- **הקשר של נקודת העוגן:** אחרי בלוק גדול של נתונים, כדאי להשתמש במשפט מעבר ברור כדי לקשר בין ההקשר לבין השאילתה, למשל "בהתבסס על המידע שלמעלה...".
+- **Präzise und direkt sein**:Formulieren Sie Ihr Ziel klar und prägnant. Vermeiden Sie unnötige oder zu überzeugende Formulierungen.
+- **Konsistente Struktur verwenden**:Verwenden Sie eindeutige Trennzeichen, um verschiedene Teile Ihres Prompts zu trennen. XML-Tags (z.B. `<context>`, `<task>`) oder Markdown-Überschriften sind effektiv. Wählen Sie ein Format aus und verwenden Sie es einheitlich in einem einzelnen Prompt.
+- **Parameter definieren**:Erläutern Sie alle mehrdeutigen Begriffe oder Parameter explizit.
+- **Ausführlichkeit der Ausgabe steuern**:Standardmäßig liefern Gemini 3-Modelle direkte und effiziente Antworten. Wenn Sie eine ausführlichere Antwort oder eine Antwort im Konversationsstil benötigen, müssen Sie dies in Ihren Anweisungen explizit angeben.
+- **Multimodale Eingaben einheitlich verarbeiten**:Wenn Sie Text, Bilder, Audio oder Video verwenden, behandeln Sie sie als gleichwertige Eingaben. Achten Sie darauf, dass in Ihren Anweisungen bei Bedarf deutlich auf die einzelnen Modalitäten verwiesen wird.
+- **Kritische Anweisungen priorisieren**:Platzieren Sie wichtige Verhaltensbeschränkungen, Rollendefinitionen (Persona) und Anforderungen an das Ausgabeformat in der Systemanweisung oder ganz am Anfang des Nutzer-Prompts.
+- **Struktur für lange Kontexte**:Wenn Sie große Mengen an Kontext bereitstellen (z.B. Dokumente, Code), geben Sie zuerst den gesamten Kontext an. Platzieren Sie Ihre spezifischen Anweisungen oder Fragen ganz *am Ende* des Prompts.
+- **Ankerkontext**:Verwenden Sie nach einem großen Datenblock eine klare Übergangsformulierung, um den Kontext und Ihre Anfrage zu verknüpfen, z. B. „Basierend auf den oben genannten Informationen…“.
 
-### אסטרטגיות של Gemini 3 Flash
+### Gemini 3 Flash-Strategien
 
-- **דיוק של היום הנוכחי:** מוסיפים את הסעיף הבא להוראות המערכת כדי לעזור למודל לשים לב שהיום הנוכחי הוא בשנת 2026:
+- **Genauigkeit für den aktuellen Tag**:Fügen Sie den Systemanweisungen die folgende Klausel hinzu, damit das Modell berücksichtigt, dass der aktuelle Tag im Jahr 2026 liegt:
 
   ```
   For time-sensitive user queries that require up-to-date information, you
   MUST follow the provided current time (date and year) when formulating
   search queries in tool calls. Remember it is 2026 this year.
   ```
-- **דיוק של מועד סיום הידע:** מוסיפים את הסעיף הבא להוראות המערכת כדי שהמודל יהיה מודע למועד סיום הידע שלו:
+- **Genauigkeit des Wissensstandes**:Fügen Sie den Systemanweisungen die folgende Klausel hinzu, damit das Modell seinen Wissensstand kennt:
 
   ```
   Your knowledge cutoff date is January 2025.
   ```
-- **ביצועי ההארקה:** כדי לשפר את היכולת של המודל להארקת התשובות בהקשר שסופק, מוסיפים את הסעיף הבא להוראות המערכת (עם עריכות לפי הצורך):
+- **Fundierungsleistung**:Fügen Sie den Systemanweisungen den folgenden Satz hinzu (ggf. mit Änderungen), um die Fähigkeit des Modells zu verbessern, Antworten im bereitgestellten Kontext zu fundieren:
 
   ```
   You are a strictly grounded assistant limited to the information provided in
@@ -279,17 +275,17 @@ title: "\u05d0\u05e1\u05d8\u05e8\u05d8\u05d2\u05d9\u05d5\u05ea \u05dc\u05e2\u05d
   the context, you must state that the information is not available.
   ```
 
-### שיפור היכולות של הסקת מסקנות ותכנון
+### Schlussfolgern und Planen verbessern
 
-מודלים מסדרות Gemini 2.5 ו-3 יוצרים באופן אוטומטי טקסט פנימי של 'חשיבה' כדי לשפר את ביצועי החשיבה הרציונלית. לכן, בדרך כלל אין צורך שהמודל יציג את שלבי החשיבה הרציונלית בתשובה עצמה. לבעיות שדורשות חשיבה רציונלית מורכבת, בקשות פשוטות כמו 'תחשוב טוב לפני שתענה' יכולות לשפר את הביצועים, אבל הן כרוכות בשימוש נוסף בטוקנים של חשיבה.
+Gemini 2.5- und Gemini 3-Modelle generieren automatisch internen „Denk“-Text, um die Leistung beim Schlussfolgern zu verbessern. Daher ist es in der Regel nicht erforderlich, dass das Modell in der zurückgegebenen Antwort selbst die einzelnen Schritte des Denkprozesses umreißt, plant oder detailliert. Bei Problemen, die viel Schlussfolgerung erfordern, können einfache Anfragen wie „Denke sehr genau nach, bevor du antwortest“ die Leistung verbessern, allerdings auf Kosten zusätzlicher Denk-Tokens.
 
-פרטים נוספים זמינים במאמר בנושא [התהליך של Gemini לחשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he).
+Weitere Informationen finden Sie in der [Dokumentation zu Gemini-Überlegungen](https://ai.google.dev/gemini-api/docs/thinking?hl=de).
 
-### דוגמאות להנחיות מובנות
+### Beispiele für strukturierte Prompts
 
-שימוש בתגים או ב-Markdown עוזר למודל להבחין בין הוראות, הקשר ומשימות.
+Durch die Verwendung von Tags oder Markdown kann das Modell zwischen Anweisungen, Kontext und Aufgaben unterscheiden.
 
-**דוגמה לפורמט XML:**
+**XML-Beispiel:**
 
 ```
 <role>
@@ -310,7 +306,7 @@ You are a helpful assistant.
 </task>
 ```
 
-**דוגמה לשימוש ב-Markdown:**
+**Markdown-Beispiel:**
 
 ```
 # Identity
@@ -324,11 +320,11 @@ You are a senior solution architect.
 Return a single code block.
 ```
 
-### דוגמה לתבנית שמשלבת שיטות מומלצות
+### Beispielvorlage mit Best Practices
 
-התבנית הזו כוללת את העקרונות המרכזיים לכתיבת הנחיות ל-Gemini 3. חשוב תמיד לחזור על התהליך ולשנות את ההגדרות בהתאם לתרחיש השימוש הספציפי שלכם.
+Diese Vorlage enthält die wichtigsten Prinzipien für das Erstellen von Prompts mit Gemini 3. Denken Sie daran, die Prompts immer an Ihren spezifischen Anwendungsfall anzupassen.
 
-**הוראה למערכת:**
+**Systemanweisung:**
 
 ```
 <role>
@@ -355,7 +351,7 @@ Structure your response as follows:
 </output_format>
 ```
 
-**הנחיה למשתמש:**
+**Nutzer-Prompt:**
 
 ```
 <context>
@@ -371,41 +367,41 @@ Remember to think step-by-step before answering.
 </final_instruction>
 ```
 
-## Agentic workflows
+## Agentische Workflows
 
-בתהליכי עבודה מורכבים של סוכנים, לעיתים קרובות נדרשות הוראות ספציפיות כדי לשלוט באופן שבו המודל מסיק מסקנות, מתכנן ומבצע משימות. למרות ש-Gemini מספק ביצועים כלליים טובים, כדי להשתמש בסוכנים מורכבים צריך לעיתים קרובות להגדיר את האיזון בין עלות החישוב (זמן האחזור והטוקנים) לבין דיוק המשימה.
+Für komplexe agentische Arbeitsabläufe sind oft spezifische Anweisungen erforderlich, um zu steuern, wie das Modell Aufgaben begründet, plant und ausführt. Gemini bietet zwar eine gute allgemeine Leistung, bei komplexen Agenten müssen Sie jedoch oft den Kompromiss zwischen Rechenkosten (Latenz und Tokens) und Aufgabenrichtigkeit konfigurieren.
 
-כשמעצבים הנחיות לסוכנים, כדאי להתייחס למאפייני ההתנהגות הבאים שאפשר להגדיר בסוכן:
+Berücksichtigen Sie beim Erstellen von Prompts für Agents die folgenden Verhaltensdimensionen, die Sie im Agent steuern können:
 
-### חשיבה רציונלית ואסטרטגיה
+### Schlussfolgern und Strategie
 
-הגדרה של אופן החשיבה והתכנון של המודל לפני שהוא מבצע פעולה.
+Konfiguration dafür, wie das Modell denkt und plant, bevor es Maßnahmen ergreift.
 
-- **פירוק לוגי:** מגדיר את רמת הניתוח של האילוצים, הדרישות המוקדמות וסדר הפעולות.
-- **אבחון בעיות**: קובע את עומק הניתוח בזיהוי הסיבות לבעיות ואת השימוש של המודל בהיסק אבדוקטיבי. ההגדרה הזו קובעת אם המודל יקבל את התשובה הכי ברורה או יחפש הסברים מורכבים ופחות סבירים.
-- **מידע מקיף:** איזון בין ניתוח של כל המדיניות והמסמכים הזמינים לבין מתן עדיפות ליעילות ולמהירות.
+- **Logische Zerlegung**:Definiert, wie gründlich das Modell Einschränkungen, Voraussetzungen und die Reihenfolge der Vorgänge analysieren muss.
+- **Problemdiagnose**: Steuert die Tiefe der Analyse bei der Ermittlung von Ursachen und die Verwendung von abduktivem Denken durch das Modell. Legt fest, ob das Modell die offensichtlichste Antwort akzeptieren oder komplexe, weniger wahrscheinliche Erklärungen untersuchen soll.
+- **Vollständigkeit der Informationen**:Hier geht es um den Kompromiss zwischen der Analyse aller verfügbaren Richtlinien und Dokumente und der Priorisierung von Effizienz und Geschwindigkeit.
 
-### ביצוע ואמינות
+### Ausführung und Zuverlässigkeit
 
-הגדרות לגבי האופן שבו הסוכן פועל באופן אוטונומי ומטפל בבעיות.
+Konfiguration für die autonome Funktionsweise des Agents und den Umgang mit Hindernissen.
 
-- **יכולת הסתגלות:** איך המודל מגיב לנתונים חדשים. ההגדרה הזו קובעת אם המודל צריך לדבוק בתוכנית הראשונית שלו או לשנות אותה באופן מיידי כשהתצפיות סותרות את ההנחות.
-- **התמדה ושחזור:** המידה שבה המודל מנסה לתקן שגיאות בעצמו. התמדה גבוהה מגדילה את שיעורי ההצלחה, אבל עלולה להגדיל את עלויות הטוקן או ליצור לולאות.
-- **הערכת סיכונים:** הלוגיקה להערכת ההשלכות. ההבדלה בין פעולות חקר בסיכון נמוך (קריאות) לבין שינויים במצב בסיכון גבוה (כתיבות) נעשית באופן מפורש.
+- **Anpassungsfähigkeit**:Wie das Modell auf neue Daten reagiert. Legt fest, ob das Modell sich strikt an den ursprünglichen Plan halten oder sofort umschwenken soll, wenn Beobachtungen Annahmen widersprechen.
+- **Persistenz und Wiederherstellung**:Der Grad, in dem das Modell versucht, Fehler selbst zu korrigieren. Eine hohe Persistenz erhöht die Erfolgsraten, birgt aber das Risiko höherer Token-Kosten oder Schleifen.
+- **Risikobewertung**:Die Logik zur Bewertung von Konsequenzen. Es wird explizit zwischen explorativen Aktionen mit geringem Risiko (Lesevorgänge) und Zustandsänderungen mit hohem Risiko (Schreibvorgänge) unterschieden.
 
-### אינטראקציה ופלט
+### Interaktion und Ausgabe
 
-הגדרות לגבי אופן התקשורת של הסוכן עם המשתמש ופורמט התוצאות.
+Konfiguration für die Kommunikation des Agents mit dem Nutzer und die Formatierung der Ergebnisse.
 
-- **טיפול בדו-משמעות ובהרשאות:** ההגדרה הזו קובעת מתי המודל יכול להניח הנחות ומתי הוא צריך להשהות את הביצוע כדי לבקש מהמשתמש הבהרה או הרשאה.
-- **רמת הפירוט:** קובעת את נפח הטקסט שנוצר לצד קריאות הכלים. ההגדרה הזו קובעת אם המודל יסביר למשתמש את הפעולות שלו או יישאר שקט במהלך הביצוע.
-- **דיוק ושלמות:** רמת הדיוק הנדרשת של הפלט. מציינים אם המודל צריך לפתור כל מקרה קצה ולספק נתונים מדויקים, או אם אפשר להשתמש בהערכות גסות.
+- **Mehrdeutigkeit und Berechtigungsverwaltung**:Definiert, wann das Modell Annahmen treffen darf und wann die Ausführung angehalten werden muss, um den Nutzer um Klärung oder Berechtigung zu bitten.
+- **Ausführlichkeit**:Steuert die Menge an Text, die neben Tool-Aufrufen generiert wird. Damit wird festgelegt, ob das Modell seine Aktionen dem Nutzer erklärt oder während der Ausführung stumm bleibt.
+- **Präzision und Vollständigkeit**:Die erforderliche Genauigkeit der Ausgabe. Gibt an, ob das Modell jeden Grenzfall berücksichtigen und genaue Zahlen liefern muss oder ob Schätzungen akzeptabel sind.
 
-### תבנית הוראות למערכת
+### Vorlage für Systemanweisungen
 
-ההוראה הבאה למערכת היא דוגמה שנבדקה על ידי חוקרים כדי לשפר את הביצועים במדדים של סוכנים שבהם המודל צריך לפעול לפי מערכת מורכבת של כללים ולקיים אינטראקציה עם משתמש. ההנחיה מעודדת את הסוכן לפעול כמתכנן וכמנמק חזק, אוכפת התנהגויות ספציפיות בממדים שמפורטים למעלה ומחייבת את המודל לתכנן מראש לפני ביצוע פעולה כלשהי.
+Die folgende Systemanweisung ist ein Beispiel, das von Forschern evaluiert wurde, um die Leistung bei agentenbasierten Benchmarks zu verbessern, bei denen das Modell komplexe Regeln einhalten und mit einem Nutzer interagieren muss. Es regt den Agenten an, als starker Planer und Problemlöser zu agieren, erzwingt bestimmte Verhaltensweisen in den oben aufgeführten Dimensionen und erfordert, dass das Modell proaktiv plant, bevor es Maßnahmen ergreift.
 
-אפשר להתאים את התבנית הזו למגבלות של תרחיש השימוש הספציפי שלכם.
+Sie können diese Vorlage an die Einschränkungen Ihres speziellen Anwendungsfalls anpassen.
 
 ```
 You are a very strong reasoner and planner. Use these critical instructions to structure your plans, thoughts, and responses.
@@ -453,19 +449,19 @@ Before taking any action (either tool calls *or* responses to the user), you mus
 9) Inhibit your response: only take an action after all the above reasoning is completed. Once you've taken an action, you cannot take it back.
 ```
 
-## השלבים הבאים
+## Nächste Schritte
 
-- עכשיו, אחרי שהבנתם יותר טוב איך לכתוב הנחיות, אתם יכולים לנסות לכתוב הנחיות משלכם באמצעות [Google AI Studio](http://aistudio.google.com?hl=he).
-- [מידע נוסף על הנחיות ל-multimodal](https://ai.google.dev/gemini-api/docs/files?hl=he#prompt-guide)
-- כדי לקבל מידע על הנחיות ליצירת תמונות, אפשר לעיין במדריכים להנחיות של [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=he#prompt-guide) ושל [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=he#imagen-prompt-guide).
-- מידע על הנחיות ליצירת סרטונים זמין ב[מדריך לכתיבת הנחיות של Veo](https://ai.google.dev/gemini-api/docs/video?hl=he#prompt-guide).
+- Nachdem Sie jetzt ein besseres Verständnis für das Erstellen von Prompts haben, können Sie Ihre eigenen Prompts mit [Google AI Studio](http://aistudio.google.com?hl=de) schreiben.
+- Weitere Informationen zu multimodalen Prompts finden Sie unter [Prompts mit Mediendateien](https://ai.google.dev/gemini-api/docs/files?hl=de#prompt-guide).
+- Weitere Informationen zu Bild-Prompts finden Sie in den Prompt-Leitfäden für [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=de#prompt-guide) und [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=de#imagen-prompt-guide).
+- Weitere Informationen zu Video-Prompts finden Sie im [Veo-Prompt-Leitfaden](https://ai.google.dev/gemini-api/docs/video?hl=de#prompt-guide).
 
-שליחת משוב
+Feedback geben
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-עדכון אחרון: 2026-06-10 (שעון UTC).
+Zuletzt aktualisiert: 2026-06-10 (UTC).
 
-רוצה לתת לנו משוב?
+Haben Sie Feedback für uns?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-10 (שעון UTC)."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-06-10 (UTC)."],[],[]]

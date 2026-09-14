@@ -1,26 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/openai?hl=id
-fetched_at: 2026-09-07T05:43:35.527910+00:00
-title: "Kompatibilitas OpenAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/openai?hl=it
+fetched_at: 2026-09-14T05:53:06.330980+00:00
+title: "Compatibilit\u00e0 con OpenAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Kirim masukan
+Invia feedback
 
-# Kompatibilitas OpenAI
+# Compatibilità con OpenAI
 
-Model Gemini dapat diakses menggunakan library OpenAI (Python dan TypeScript/JavaScript) beserta REST API, dengan memperbarui tiga baris kode dan menggunakan [kunci Gemini API](https://aistudio.google.com/apikey?hl=id) Anda. Jika Anda
-belum menggunakan library OpenAI, sebaiknya panggil
-[Gemini API secara langsung](https://ai.google.dev/gemini-api/docs/get-started?hl=id).
+I modelli Gemini sono accessibili utilizzando le librerie OpenAI (Python e TypeScript /
+JavaScript) insieme all'API REST, aggiornando tre righe di codice
+e utilizzando la chiave API [Gemini](https://aistudio.google.com/apikey?hl=it). Se non utilizzi già le librerie OpenAI, ti consigliamo di chiamare direttamente l'
+[API Gemini](https://ai.google.dev/gemini-api/docs/get-started?hl=it).
 
 ### Python
 
@@ -33,7 +34,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     messages=[
         {   "role": "system",
             "content": "You are a helpful assistant."
@@ -59,7 +60,7 @@ const openai = new OpenAI({
 });
 
 const response = await openai.chat.completions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     messages: [
         {   role: "system",
             content: "You are a helpful assistant." 
@@ -81,7 +82,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $GEMINI_API_KEY" \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "messages": [
       {
         "role": "user",
@@ -91,22 +92,21 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   }'
 ```
 
-Apa yang berubah? Hanya tiga baris.
+Che cosa è cambiato? Solo tre righe!
 
-- **`api_key="GEMINI_API_KEY"`**: Ganti "`GEMINI_API_KEY`" dengan kunci API Gemini Anda yang sebenarnya, yang bisa Anda dapatkan di [Google AI Studio](https://aistudio.google.com?hl=id).
-- **`base_url="https://generativelanguage.googleapis.com/v1beta/openai/"`:** Kode ini
-  memberi tahu library OpenAI untuk mengirim permintaan ke endpoint Gemini API, bukan
-  URL default.
-- **`model="gemini-3.5-flash"`**: Memilih model Gemini yang kompatibel
+- **`api_key="GEMINI_API_KEY"`**: sostituisci "`GEMINI_API_KEY`" con la tua chiave API Gemini
+  effettiva, che puoi ottenere in [Google AI Studio](https://aistudio.google.com?hl=it).
+- **`base_url="https://generativelanguage.googleapis.com/v1beta/openai/"`:** Questo
+  indica alla libreria OpenAI di inviare le richieste all'endpoint dell'API Gemini anziché
+  all'URL predefinito.
+- **`model="gemini-3.6-flash"`**: scegli un modello Gemini compatibile
 
-## Penalaran
+## Pensiero
 
-Model Gemini dilatih untuk memikirkan masalah yang kompleks, sehingga
-penalaran meningkat secara signifikan. Gemini API dilengkapi dengan [parameter
-pemikiran](https://ai.google.dev/gemini-api/docs/thinking?hl=id) yang memberikan kontrol
-terperinci atas seberapa banyak model akan berpikir.
+I modelli Gemini sono addestrati a risolvere problemi complessi, con un miglioramento significativo del ragionamento. L'API Gemini include parametri di [pensiero
+che consentono di controllare con precisione la quantità di ragionamento del modello.](https://ai.google.dev/gemini-api/docs/thinking?hl=it)
 
-Model Gemini yang berbeda memiliki konfigurasi penalaran yang berbeda. Anda dapat melihat pemetaannya dengan upaya penalaran OpenAI sebagai berikut:
+I diversi modelli Gemini hanno configurazioni di ragionamento diverse. Di seguito puoi vedere come vengono mappate le configurazioni di ragionamento di OpenAI:
 
 | `reasoning_effort` (OpenAI) | `thinking_level` (Gemini 3.1 Pro) | `thinking_level` (Gemini 3.1 Flash-Lite) | `thinking_level` (Gemini 3 Flash) | `thinking_budget` (Gemini 2.5) |
 | --- | --- | --- | --- | --- |
@@ -115,9 +115,11 @@ Model Gemini yang berbeda memiliki konfigurasi penalaran yang berbeda. Anda dapa
 | `medium` | `medium` | `medium` | `medium` | `8,192` |
 | `high` | `high` | `high` | `high` | `24,576` |
 
-Jika tidak ada `reasoning_effort` yang ditentukan, Gemini akan menggunakan [tingkat](https://ai.google.dev/gemini-api/docs/thinking?hl=id#levels) atau [anggaran](https://ai.google.dev/gemini-api/docs/thinking?hl=id#set-budget) default model.
+Se non viene specificato alcun `reasoning_effort`, Gemini utilizza il
+livello [predefinito](https://ai.google.dev/gemini-api/docs/thinking?hl=it#levels) o il [budget](https://ai.google.dev/gemini-api/docs/thinking?hl=it#set-budget) del modello.
 
-Jika ingin menonaktifkan penalaran, Anda dapat menyetel `reasoning_effort` ke `"none"` untuk model 2.5. Penalaran tidak dapat dinonaktifkan untuk model Gemini 2.5 Pro atau 3.
+Se vuoi disattivare il ragionamento, puoi impostare `reasoning_effort` su `"none"` per
+i modelli 2.5. Il ragionamento non può essere disattivato per i modelli Gemini 2.5 Pro o 3.
 
 ### Python
 
@@ -130,7 +132,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     reasoning_effort="low",
     messages=[
         {   "role": "system",
@@ -157,7 +159,7 @@ const openai = new OpenAI({
 });
 
 const response = await openai.chat.completions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     reasoning_effort: "low",
     messages: [
         {   role: "system",
@@ -180,7 +182,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $GEMINI_API_KEY" \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "reasoning_effort": "low",
     "messages": [
       {
@@ -191,10 +193,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   }'
 ```
 
-Model pemikiran Gemini juga menghasilkan [ringkasan pemikiran](https://ai.google.dev/gemini-api/docs/thinking?hl=id#summaries).
-Anda dapat menggunakan kolom [`extra_body`](#extra-body) untuk menyertakan kolom Gemini dalam permintaan Anda.
+I modelli di ragionamento Gemini producono anche [riepiloghi dei pensieri](https://ai.google.dev/gemini-api/docs/thinking?hl=it#summaries).
+Puoi utilizzare il [`extra_body`](#extra-body) campo per includere i campi Gemini
+nella richiesta.
 
-Perhatikan bahwa `reasoning_effort` dan `thinking_level`/`thinking_budget` memiliki fungsi yang tumpang-tindih, sehingga tidak dapat digunakan secara bersamaan.
+Tieni presente che `reasoning_effort` e `thinking_level`/`thinking_budget` si sovrappongono, quindi non possono essere utilizzati contemporaneamente.
 
 ### Python
 
@@ -207,7 +210,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     messages=[{"role": "user", "content": "Explain to me how AI works"}],
     extra_body={
       'extra_body': {
@@ -235,7 +238,7 @@ const openai = new OpenAI({
 });
 
 const response = await openai.chat.completions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     messages: [{role: "user", content: "Explain to me how AI works",}],
     extra_body: {
       "google": {
@@ -257,7 +260,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer GEMINI_API_KEY" \
   -d '{
-      "model": "gemini-3.5-flash",
+      "model": "gemini-3.6-flash",
         "messages": [{"role": "user", "content": "Explain to me how AI works"}],
         "extra_body": {
           "google": {
@@ -270,11 +273,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
       }'
 ```
 
-Gemini 3 mendukung kompatibilitas OpenAI untuk tanda tangan pemikiran di API penyelesaian chat. Anda dapat menemukan contoh lengkap di halaman [tanda tangan pikiran](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=id#openai).
+Gemini 3 supporta la compatibilità con OpenAI per le firme dei pensieri nelle API di completamento della chat. Puoi trovare l'esempio completo nella pagina delle [firme dei pensieri](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=it#openai).
 
 ## Streaming
 
-Gemini API mendukung [respons streaming](https://ai.google.dev/gemini-api/docs/text-generation?lang=python&hl=id#generate-a-text-stream).
+L'API Gemini supporta le risposte in [streaming](https://ai.google.dev/gemini-api/docs/text-generation?lang=python&hl=it#generate-a-text-stream).
 
 ### Python
 
@@ -287,7 +290,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-  model="gemini-3.5-flash",
+  model="gemini-3.6-flash",
   messages=[
     {
         "role": "system",
@@ -316,7 +319,7 @@ const openai = new OpenAI({
 
 async function main() {
   const completion = await openai.chat.completions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     messages: [
       {
           "role": "system",
@@ -345,7 +348,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer GEMINI_API_KEY" \
   -d '{
-      "model": "gemini-3.5-flash",
+      "model": "gemini-3.6-flash",
       "messages": [
           {"role": "user", "content": "Explain to me how AI works"}
       ],
@@ -353,9 +356,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
     }'
 ```
 
-## Panggilan fungsi
+## Chiamata di funzione
 
-Panggilan fungsi mempermudah Anda mendapatkan output data terstruktur dari model generatif dan [didukung di Gemini API](https://ai.google.dev/gemini-api/docs/function-calling/tutorial?hl=id).
+La chiamata di funzione semplifica l'ottenimento di output di dati strutturati dai
+modelli generativi ed è [supportata nell'API Gemini](https://ai.google.dev/gemini-api/docs/function-calling/tutorial?hl=it).
 
 ### Python
 
@@ -390,7 +394,7 @@ tools = [
 
 messages = [{"role": "user", "content": "What's the weather like in Chicago today?"}]
 response = client.chat.completions.create(
-  model="gemini-3.5-flash",
+  model="gemini-3.6-flash",
   messages=messages,
   tools=tools,
   tool_choice="auto"
@@ -433,7 +437,7 @@ async function main() {
   ];
 
   const response = await openai.chat.completions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     messages: messages,
     tools: tools,
     tool_choice: "auto",
@@ -452,7 +456,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer GEMINI_API_KEY" \
 -d '{
-  "model": "gemini-3.5-flash",
+  "model": "gemini-3.6-flash",
   "messages": [
     {
       "role": "user",
@@ -486,9 +490,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
 }'
 ```
 
-## Pemahaman gambar
+## Comprensione delle immagini
 
-Model Gemini secara native bersifat multimodal dan memberikan performa terbaik di kelasnya untuk [banyak tugas visual umum](https://ai.google.dev/gemini-api/docs/vision?hl=id).
+I modelli Gemini sono nativamente multimodali e offrono prestazioni di prima classe in
+[molte attività di visione comuni](https://ai.google.dev/gemini-api/docs/vision?hl=it).
 
 ### Python
 
@@ -510,7 +515,7 @@ def encode_image(image_path):
 base64_image = encode_image("Path/to/agi/image.jpeg")
 
 response = client.chat.completions.create(
-  model="gemini-3.5-flash",
+  model="gemini-3.6-flash",
   messages=[
     {
       "role": "user",
@@ -578,7 +583,7 @@ async function main() {
 
   try {
     const response = await openai.chat.completions.create({
-      model: "gemini-3.5-flash",
+      model: "gemini-3.6-flash",
       messages: messages,
     });
 
@@ -600,7 +605,7 @@ bash -c '
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer GEMINI_API_KEY" \
     -d "{
-      \"model\": \"gemini-3.5-flash\",
+      \"model\": \"gemini-3.6-flash\",
       \"messages\": [
         {
           \"role\": \"user\",
@@ -617,9 +622,9 @@ bash -c '
 '
 ```
 
-## Buat gambar
+## Genera un'immagine
 
-Buat gambar menggunakan `gemini-2.5-flash-image` atau `gemini-3-pro-image-preview`. Parameter yang didukung mencakup `prompt`, `model`, `n`, `size`, dan `response_format`. Parameter lain yang tidak tercantum di sini atau di bagian [`extra_body`](#extra-body) akan diabaikan secara diam-diam oleh lapisan kompatibilitas.
+Genera un'immagine utilizzando `gemini-2.5-flash-image` o `gemini-3-pro-image-preview`. I parametri supportati includono `prompt`, `model`, `n`, `size` e `response_format`. Tutti gli altri parametri non elencati qui o nella sezione [`extra_body`](#extra-body) verranno ignorati silenziosamente dal livello di compatibilità.
 
 ### Python
 
@@ -686,12 +691,12 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/images/generations
       }'
 ```
 
-## Membuat video
+## Genera un video
 
-Buat video menggunakan `veo-3.1-generate-preview` melalui endpoint `/v1/videos` yang kompatibel dengan Sora. Parameter tingkat teratas yang didukung adalah `prompt` dan `model`. Parameter tambahan seperti `duration_seconds`, `image`, dan `aspect_ratio` harus diteruskan dengan `extra_body`. Lihat bagian [`extra_body`](#extra-body)
-untuk semua parameter yang tersedia.
+Genera un video utilizzando `veo-3.1-generate-preview` tramite l'endpoint `/v1/videos` compatibile con Sora. I parametri di primo livello supportati sono `prompt` e `model`. I parametri aggiuntivi come `duration_seconds`, `image` e `aspect_ratio` devono essere passati con `extra_body`. Consulta la sezione [`extra_body`](#extra-body)
+per tutti i parametri disponibili.
 
-Pembuatan video adalah operasi yang berjalan lama yang menampilkan ID operasi yang dapat Anda polling untuk mengetahui penyelesaiannya.
+La generazione di video è un'operazione a lunga esecuzione che restituisce un ID operazione che puoi eseguire il polling per il completamento.
 
 ### Python
 
@@ -746,10 +751,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/videos" \
   -F "prompt=A cinematic drone shot of a waterfall"
 ```
 
-### Memeriksa status video
+### Controlla lo stato del video
 
-Pembuatan video bersifat asinkron. Gunakan `GET /v1/videos/{id}` untuk melakukan polling status
-dan mengambil URL video akhir setelah selesai:
+La generazione di video è asincrona. Utilizza `GET /v1/videos/{id}` per eseguire il polling dello stato e recuperare l'URL del video finale al termine:
 
 ### Python
 
@@ -813,9 +817,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/videos/VIDEO_ID" \
   -H "Authorization: Bearer $GEMINI_API_KEY"
 ```
 
-## Pemahaman audio
+## Comprensione dell'audio
 
-Menganalisis input audio:
+Analizza l'input audio:
 
 ### Python
 
@@ -832,7 +836,7 @@ with open("/path/to/your/audio/file.wav", "rb") as audio_file:
   base64_audio = base64.b64encode(audio_file.read()).decode('utf-8')
 
 response = client.chat.completions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     messages=[
     {
       "role": "user",
@@ -872,7 +876,7 @@ const base64Audio = Buffer.from(audioFile).toString("base64");
 
 async function main() {
   const response = await client.chat.completions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     messages: [
       {
         role: "user",
@@ -908,7 +912,7 @@ bash -c '
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer GEMINI_API_KEY" \
     -d "{
-      \"model\": \"gemini-3.5-flash\",
+      \"model\": \"gemini-3.6-flash\",
       \"messages\": [
         {
           \"role\": \"user\",
@@ -928,9 +932,9 @@ bash -c '
 '
 ```
 
-## Output terstruktur
+## Output strutturato
 
-Model Gemini dapat menghasilkan objek JSON dalam [struktur apa pun yang Anda tentukan](https://ai.google.dev/gemini-api/docs/structured-output?hl=id).
+I modelli Gemini possono generare oggetti JSON in qualsiasi [struttura definita](https://ai.google.dev/gemini-api/docs/structured-output?hl=it).
 
 ### Python
 
@@ -949,7 +953,7 @@ class CalendarEvent(BaseModel):
     participants: list[str]
 
 completion = client.beta.chat.completions.parse(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     messages=[
         {"role": "system", "content": "Extract the event information."},
         {"role": "user", "content": "John and Susan are going to an AI conference on Friday."},
@@ -979,7 +983,7 @@ const CalendarEvent = z.object({
 });
 
 const completion = await openai.chat.completions.parse({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   messages: [
     { role: "system", content: "Extract the event information." },
     { role: "user", content: "John and Susan are going to an AI conference on Friday" },
@@ -991,11 +995,10 @@ const event = completion.choices[0].message.parsed;
 console.log(event);
 ```
 
-## Embedding
+## Incorporamenti
 
-Embedding teks mengukur keterkaitan string teks dan dapat dibuat menggunakan [Gemini API](https://ai.google.dev/gemini-api/docs/embeddings?hl=id). Anda dapat menggunakan
-`gemini-embedding-2-preview` untuk embedding multimodal atau
-`gemini-embedding-001` untuk embedding khusus teks.
+Gli incorporamenti di testo misurano la correlazione delle stringhe di testo e possono essere generati
+utilizzando l'[API Gemini](https://ai.google.dev/gemini-api/docs/embeddings?hl=it). Puoi utilizzare `gemini-embedding-2-preview` per gli incorporamenti multimodali o `gemini-embedding-001` per gli incorporamenti solo di testo.
 
 ### Python
 
@@ -1049,23 +1052,23 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/embeddings" \
   }'
 ```
 
-## Batch API
+## API Batch
 
-Anda dapat membuat [tugas batch](https://ai.google.dev/gemini-api/docs/batch-mode?hl=id), mengirimkannya, dan memeriksa statusnya menggunakan library OpenAI.
+Puoi creare [job batch](https://ai.google.dev/gemini-api/docs/batch-mode?hl=it), inviarli e controllare
+lo stato utilizzando la libreria OpenAI.
 
-Anda harus menyiapkan file JSONL dalam format input OpenAI. Contoh:
+Dovrai preparare il file JSONL nel formato di input OpenAI. Ad esempio:
 
 ```
-{"custom_id": "request-1", "method": "POST", "url": "/v1/chat/completions", "body": {"model": "gemini-3.5-flash", "messages": [{"role": "user", "content": "Tell me a one-sentence joke."}]}}
-{"custom_id": "request-2", "method": "POST", "url": "/v1/chat/completions", "body": {"model": "gemini-3.5-flash", "messages": [{"role": "user", "content": "Why is the sky blue?"}]}}
+{"custom_id": "request-1", "method": "POST", "url": "/v1/chat/completions", "body": {"model": "gemini-3.6-flash", "messages": [{"role": "user", "content": "Tell me a one-sentence joke."}]}}
+{"custom_id": "request-2", "method": "POST", "url": "/v1/chat/completions", "body": {"model": "gemini-3.6-flash", "messages": [{"role": "user", "content": "Why is the sky blue?"}]}}
 ```
 
-Kompatibilitas OpenAI untuk Batch mendukung pembuatan batch,
-pemantauan status tugas, dan melihat hasil batch.
+La compatibilità con OpenAI per Batch supporta la creazione di un batch, il monitoraggio dello stato del job e la visualizzazione dei risultati del batch.
 
-Kompatibilitas untuk upload dan download saat ini tidak didukung. Sebagai gantinya, contoh
-berikut menggunakan klien `genai` untuk mengupload dan mendownload
-[file](https://ai.google.dev/gemini-api/docs/files?hl=id), sama seperti saat menggunakan [Batch API](https://ai.google.dev/gemini-api/docs/batch-mode?hl=id#input-file) Gemini.
+Al momento la compatibilità per il caricamento e il download non è supportata. Il seguente esempio utilizza invece il
+client `genai`per caricare e scaricare
+[i file](https://ai.google.dev/gemini-api/docs/files?hl=it), come quando si utilizza l'API Gemini [Batch](https://ai.google.dev/gemini-api/docs/batch-mode?hl=it#input-file).
 
 ### Python
 
@@ -1111,9 +1114,7 @@ for line in file_content.splitlines():
     print(line)
 ```
 
-OpenAI SDK juga mendukung [pembuatan embedding dengan Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=id#batch-embeddings). Untuk melakukannya, ganti kolom `endpoint` metode
-`create` dengan endpoint embedding, serta kunci
-`url` dan `model` dalam file JSONL:
+L'SDK OpenAI supporta anche la [generazione di incorporamenti con l'API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=it#batch-embeddings). Per farlo, sostituisci il campo `endpoint` del metodo `create` con un endpoint di incorporamenti, nonché le chiavi `url` e `model` nel file JSONL:
 
 ```
 # JSONL file using embeddings model and endpoint
@@ -1130,13 +1131,12 @@ batch = openai_client.batches.create(
 )
 ```
 
-Lihat bagian [Pembuatan penyematan batch](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb)
-di buku resep kompatibilitas OpenAI untuk contoh lengkap.
+Per un esempio completo, consulta la sezione [Generazione di incorporamenti batch](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb)
+del ricettario di compatibilità con OpenAI.
 
-## Inferensi Flex dan Prioritas
+## Inferenza Flex e Priority
 
-Gemini API cocok dengan parameter `service_tier` OpenAI dalam nama dan logika,
-menerapkan batas dan mengarahkan traffic dengan baik untuk tingkat inferensi Flex dan Priority.
+L'API Gemini corrisponde al parametro `service_tier` di OpenAI per nome e logica, applicando i limiti e indirizzando correttamente il traffico per i livelli di inferenza Flex e Priority.
 
 ### Python
 
@@ -1149,7 +1149,7 @@ client = OpenAI(
 )
 
 completion = client.chat.completions.create(
-  model="gemini-3.5-flash",
+  model="gemini-3.6-flash",
   messages=[
     {"role": "user", "content": "Write a short poem about clouds."}
   ],
@@ -1159,39 +1159,38 @@ completion = client.chat.completions.create(
 print(completion)
 ```
 
-Jika tidak ditetapkan secara eksplisit, `service_tier` akan ditetapkan secara default ke `standard`, yang setara dengan
-`default` untuk OpenAI.
-Pelajari lebih lanjut tingkat inferensi dalam dokumentasi [Pengoptimalan](https://ai.google.dev/gemini-api/docs/optimization?hl=id).
+Se non viene assegnato esplicitamente, `service_tier` assume il valore predefinito `standard`, equivalente a `default` per OpenAI.
+Scopri di più sui livelli di inferenza nella documentazione relativa all'[ottimizzazione](https://ai.google.dev/gemini-api/docs/optimization?hl=it).
 
-## Mengaktifkan fitur Gemini dengan `extra_body`
+## Attiva le funzionalità di Gemini con `extra_body`
 
-Ada beberapa fitur yang didukung oleh Gemini yang tidak tersedia di model OpenAI, tetapi dapat diaktifkan menggunakan kolom `extra_body`.
+Esistono diverse funzionalità supportate da Gemini che non sono disponibili nei modelli OpenAI, ma che possono essere attivate utilizzando il campo `extra_body`.
 
-| Parameter | Jenis | Endpoint | Deskripsi |
+| Parametro | Tipo | Endpoint | Descrizione |
 | --- | --- | --- | --- |
-| **`cached_content`** | Teks | Chat | Sesuai dengan cache konten umum Gemini. |
-| **`thinking_config`** | Objek | Chat | Sesuai dengan ThinkingConfig Gemini. |
-| **`aspect_ratio`** | Teks | Gambar | Rasio aspek output (misalnya, `"16:9"`, `"1:1"`, `"9:16"`). |
-| **`generation_config`** | Objek | Gambar | Objek konfigurasi pembuatan Gemini (misalnya, `{"responseModalities": ["IMAGE"], "candidateCount": 2}`). |
-| **`safety_settings`** | Daftar | Gambar | Filter nilai minimum keamanan kustom (misalnya, `[{"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}]`). |
-| **`tools`** | Daftar | Gambar | Mengaktifkan perujukan (misalnya, `[{"google_search": {}}]`). Hanya untuk `gemini-3-pro-image-preview`. |
-| **`aspect_ratio`** | Teks | Video | Dimensi video output (`16:9` untuk lanskap, `9:16` untuk potret). Memetakan dari `size` jika tidak ditentukan. |
-| **`resolution`** | Teks | Video | Resolusi output (`720p`, `1080p`, `4K`). Catatan: `1080p` dan `4K` memicu pipeline upsampler. |
-| **`duration_seconds`** | Bilangan bulat | Video | Panjang pembuatan (nilai: `4`, `6`, `8`). Harus `8` saat menggunakan `reference_images`, interpolasi, atau ekstensi. |
-| **`frame_rate`** | Teks | Video | Kecepatan frame untuk output video (misalnya, `"24"`). |
-| **`input_reference`** | Teks | Video | Input referensi untuk pembuatan video. |
-| **`extend_video_id`** | Teks | Video | ID video yang ada untuk diperpanjang. |
-| **`negative_prompt`** | Teks | Video | Item yang akan dikecualikan (misalnya, `"shaky camera"`). |
-| **`seed`** | Bilangan bulat | Video | Bilangan bulat untuk pembuatan deterministik. |
-| **`style`** | Teks | Video | Gaya visual (`cinematic` default, `creative` untuk dioptimalkan di media sosial). |
-| **`person_generation`** | Teks | Video | Mengontrol pembuatan orang (`allow_adult`, `allow_all`, `dont_allow`). |
-| **`reference_images`** | Daftar | Video | Hingga 3 gambar untuk referensi gaya/karakter (aset base64). |
-| **`image`** | Teks | Video | Gambar input awal berenkode Base64 untuk mengondisikan pembuatan video. |
-| **`last_frame`** | Objek | Video | Gambar akhir untuk interpolasi (memerlukan `image` sebagai frame pertama). |
+| **`cached_content`** | Testo | Chat | Corrisponde alla cache dei contenuti generali di Gemini. |
+| **`thinking_config`** | Oggetto | Chat | Corrisponde a ThinkingConfig di Gemini. |
+| **`aspect_ratio`** | Testo | Google Immagini | Proporzioni dell'output (ad es. `"16:9"`, `"1:1"`, `"9:16"`). |
+| **`generation_config`** | Oggetto | Google Immagini | Oggetto di configurazione della generazione di Gemini (ad es. `{"responseModalities": ["IMAGE"], "candidateCount": 2}`). |
+| **`safety_settings`** | Elenco | Google Immagini | Filtri di soglia di sicurezza personalizzati (ad es. `[{"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}]`). |
+| **`tools`** | Elenco | Google Immagini | Attiva il grounding (ad es. `[{"google_search": {}}]`). Solo per `gemini-3-pro-image-preview`. |
+| **`aspect_ratio`** | Testo | Video | Dimensioni del video di output (`16:9` per orizzontale, `9:16` per verticale). Esegue il mapping da `size` se non specificato. |
+| **`resolution`** | Testo | Video | Risoluzione dell'output (`720p`, `1080p`, `4K`). Nota: `1080p` e `4K` attivano la pipeline di upsampling. |
+| **`duration_seconds`** | Numero intero | Video | Durata della generazione (valori: `4`, `6`, `8`). Deve essere `8` quando si utilizzano `reference_images`, l'interpolazione o l'estensione. |
+| **`frame_rate`** | Testo | Video | Frequenza fotogrammi per l'output video (ad es. `"24"`). |
+| **`input_reference`** | Testo | Video | Input di riferimento per la generazione di video. |
+| **`extend_video_id`** | Testo | Video | ID di un video esistente da estendere. |
+| **`negative_prompt`** | Testo | Video | Elementi da escludere (ad es. `"shaky camera"`). |
+| **`seed`** | Numero intero | Video | Numero intero per la generazione deterministica. |
+| **`style`** | Testo | Video | Stile visivo (`cinematic` predefinito, `creative` per l'ottimizzazione per i social media). |
+| **`person_generation`** | Testo | Video | Controlla la generazione di persone (`allow_adult`, `allow_all`, `dont_allow`). |
+| **`reference_images`** | Elenco | Video | Fino a 3 immagini per il riferimento di stile/personaggio (asset base64). |
+| **`image`** | Testo | Video | Immagine di input iniziale con codifica base64 per condizionare la generazione del video. |
+| **`last_frame`** | Oggetto | Video | Immagine finale per l'interpolazione (richiede `image` come primo frame). |
 
-### Contoh penggunaan `extra_body`
+### Esempio di utilizzo di `extra_body`
 
-Berikut adalah contoh penggunaan `extra_body` untuk menyetel `cached_content`:
+Ecco un esempio di utilizzo di `extra_body` per impostare `cached_content`:
 
 ### Python
 
@@ -1204,7 +1203,7 @@ client = OpenAI(
 )
 
 stream = client.chat.completions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     n=1,
     messages=[
         {
@@ -1229,9 +1228,9 @@ for chunk in stream:
     print(chunk.usage.to_dict())
 ```
 
-## Membuat daftar model
+## Elenco modelli
 
-Mendapatkan daftar model Gemini yang tersedia:
+Recupera un elenco dei modelli Gemini disponibili:
 
 ### Python
 
@@ -1275,9 +1274,9 @@ curl https://generativelanguage.googleapis.com/v1beta/openai/models \
 -H "Authorization: Bearer GEMINI_API_KEY"
 ```
 
-## Mengambil model
+## Recupera un modello
 
-Mengambil model Gemini:
+Recupera un modello Gemini:
 
 ### Python
 
@@ -1289,7 +1288,7 @@ client = OpenAI(
   base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
 )
 
-model = client.models.retrieve("gemini-3.5-flash")
+model = client.models.retrieve("gemini-3.6-flash")
 print(model.id)
 ```
 
@@ -1304,7 +1303,7 @@ const openai = new OpenAI({
 });
 
 async function main() {
-  const model = await openai.models.retrieve("gemini-3.5-flash");
+  const model = await openai.models.retrieve("gemini-3.6-flash");
   console.log(model.id);
 }
 
@@ -1314,26 +1313,27 @@ main();
 ### REST
 
 ```
-curl https://generativelanguage.googleapis.com/v1beta/openai/models/gemini-3.5-flash \
+curl https://generativelanguage.googleapis.com/v1beta/openai/models/gemini-3.6-flash \
 -H "Authorization: Bearer GEMINI_API_KEY"
 ```
 
-## Batasan saat ini
+## Limitazioni attuali
 
-Dukungan untuk pustaka OpenAI masih dalam versi beta saat kami memperluas dukungan fitur.
+Il supporto per le librerie OpenAI è ancora in versione beta mentre estendiamo il supporto delle funzionalità.
 
-Jika ada pertanyaan tentang parameter yang didukung, fitur mendatang, atau mengalami masalah saat mulai menggunakan Gemini, bergabunglah dengan [Forum Developer](https://discuss.ai.google.dev/c/gemini-api/4?hl=id) kami.
+Se hai domande sui parametri supportati, sulle funzionalità future o se riscontri
+problemi durante l'utilizzo di Gemini, partecipa al nostro [forum per gli sviluppatori](https://discuss.ai.google.dev/c/gemini-api/4?hl=it).
 
-## Langkah berikutnya
+## Passaggi successivi
 
-Coba [Colab Kompatibilitas OpenAI](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb?hl=id) kami untuk mempelajari contoh yang lebih mendetail.
+Prova il nostro [Colab di compatibilità con OpenAI](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb?hl=it) per esaminare esempi più dettagliati.
 
-Kirim masukan
+Invia feedback
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Terakhir diperbarui pada 2026-06-22 UTC.
+Ultimo aggiornamento 2026-09-12 UTC.
 
-Ada masukan untuk kami?
+Vuoi dirci altro?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-22 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-12 UTC."],[],[]]

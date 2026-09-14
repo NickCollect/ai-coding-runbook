@@ -1,28 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-hooks?hl=zh-TW
-fetched_at: 2026-09-07T05:39:09.170997+00:00
+source_url: https://ai.google.dev/gemini-api/docs/agent-hooks?hl=ko
+fetched_at: 2026-09-14T05:51:44.813478+00:00
 title: "Hooks \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
 
-提供意見
+의견 보내기
 
 # Hooks
 
-您可以使用 Hook 在代理程式執行程式碼或修改遠端沙箱內的檔案前後，執行自訂指令碼或外部 HTTP 要求。使用掛鉤擴充代理迴圈，並搭配自動防護措施和背景工作流程，例如：
+후크를 사용하면 에이전트가 코드를 실행하거나 원격 샌드박스 내에서 파일을 수정하기 직전 또는 직후에 맞춤 스크립트 또는 외부 HTTP 요청을 실행할 수 있습니다. 후크를 사용하여 다음과 같은 자동 가드레일 및 백그라운드 워크플로로 에이전트 루프를 확장합니다.
 
-- **強制執行安全和存取防護措施**，再執行高風險的殼層指令或受限的檔案讀取作業。
-- **在代理程式建立或修改檔案後，自動轉換資料管道**。
-- 工具執行後，**將企業稽核遙測資料串流至外部監控系統**。
+- 위험도가 높은 셸 명령어 또는 제한된 파일 읽기가 실행되기 전에 **안전 및 액세스 가드레일 적용**
+- 에이전트가 파일을 만들거나 수정한 직후에 **데이터 파이프라인 변환 자동화**
+- 도구 실행 후 **엔터프라이즈 감사 원격 분석 스트리밍** 을 외부 모니터링 시스템으로
 
 ### Python
 
@@ -167,20 +166,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 支援的生命週期事件
+## 지원되는 수명 주기 이벤트
 
-沙箱中的 Hook 支援 2 個事件：
+후크는 샌드박스 내에서 2개의 이벤트를 지원합니다.
 
-| 事件 | 觸發時機 | 用途 |
+| 이벤트 | 실행 시점 | 기능 |
 | --- | --- | --- |
-| `pre_tool_execution` | 工具執行前 | 可以在工具執行前核准 (`allow`) 或封鎖 (`deny`) 工具。遭到封鎖時，模型會看到拒絕原因並進行調整。 |
-| `post_tool_execution` | 工具執行完畢後 | 執行後續工作，例如格式化程式碼、執行單元測試或記錄遙測資料。無法封鎖或復原已完成的動作。 |
+| `pre_tool_execution` | 도구가 실행되기 직전 | 실행되기 전에 도구를 승인 (`allow`)하거나 차단 (`deny`)할 수 있습니다. 차단되면 모델은 거부 사유를 확인하고 이에 맞게 조정합니다. |
+| `post_tool_execution` | 도구가 완료된 직후 | 코드 형식 지정, 단위 테스트 실행, 원격 분석 로깅과 같은 후속 작업을 실행합니다. 완료된 작업을 차단하거나 실행취소할 수 없습니다. |
 
 ### `pre_tool_execution`
 
-在工具執行前觸發。您的指令碼會從 `stdin` 讀取工具呼叫詳細資料，並將決策 JSON (`allow` 或 `deny`) 輸出至 `stdout`。
+도구가 실행되기 직전에 실행됩니다. 스크립트는 `stdin`에서 도구 호출 세부정보를 읽고 결정 JSON (`allow` 또는 `deny`)을 `stdout`으로 출력합니다.
 
-**輸入酬載 (`stdin`)：**
+**입력 페이로드 (`stdin`):**
 
 ```
 {
@@ -195,9 +194,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-**輸出回覆 (`stdout`)：**
+**출력 응답 (`stdout`):**
 
-如要核准工具呼叫：
+도구 호출을 승인하려면 다음을 실행하세요.
 
 ```
 {
@@ -205,7 +204,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-如要封鎖工具呼叫並將意見回饋傳回模型，請執行下列操作：
+도구 호출을 차단하고 모델에 의견을 반환하려면 다음을 실행하세요.
 
 ```
 {
@@ -214,15 +213,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-如果掛鉤拒絕指令，系統會立即略過工具呼叫。代理程式會在目前的對話輪次中看到錯誤結果，其中包含拒絕原因。接著，模型可以選擇替代指令或向使用者說明封鎖原因，藉此自我修正。
+후크가 명령어를 거부하면 도구 호출이 즉시 건너뛰어집니다. 에이전트는 현재 턴 내에서 거부 사유가 포함된 오류 결과를 확인합니다. 그러면 모델은 대체 명령어를 선택하거나 사용자에게 차단을 설명하여 자체적으로 수정할 수 있습니다.
 
-如果指令碼輸出無法辨識的 JSON、純文字或 `{"decision": "deny"}` 以外的任何內容，執行階段會將回應視為核准 (`allow`)。
+스크립트가 인식할 수 없는 JSON, 일반 텍스트 또는 `{"decision": "deny"}` 이외의 항목을 출력하면 런타임은 응답을 승인 (`allow`)으로 처리합니다.
 
 ### `post_tool_execution`
 
-工具完成後立即觸發。指令碼會從 `stdin` 讀取執行詳細資料和任何錯誤狀態。
+도구가 완료된 직후에 실행됩니다. 스크립트는 `stdin`에서 실행 세부정보와 오류 상태를 읽습니다.
 
-**輸入酬載 (`stdin`)：**
+**입력 페이로드 (`stdin`):**
 
 ```
 {
@@ -237,27 +236,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-如果殼層指令將錯誤輸出至標準錯誤 (`stderr`) 或檔案系統作業失敗，酬載中會包含含有錯誤文字的 `"error"` 欄位。如果指令順利執行且未發生錯誤，系統會完全省略 `"error"` 欄位。
+셸 명령어가 표준 오류 (`stderr`)에 오류를 출력하거나 파일 시스템 작업이 실패하면 오류 텍스트가 포함된 `"error"` 필드가 페이로드에 포함됩니다. 오류 없이 명령어가 성공하면 `"error"` 필드가 완전히 생략됩니다.
 
-**輸出回覆 (`stdout`)：**
+**출력 응답 (`stdout`):**
 
 ```
 {}
 ```
 
-由於工具後續掛鉤僅適用於程式碼格式化或記錄等背景工作，因此執行階段會忽略 `stdout` 傳回的任何決策值。
+도구 후크는 코드 형식 지정 또는 로깅과 같은 백그라운드 작업에만 엄격하게 실행되므로 런타임은 `stdout`에서 반환된 결정 값을 무시합니다.
 
-## 設定探索
+## 구성 검색
 
-執行階段會自動從沙箱環境中的 `.agents/hooks.json` 或 `/.agents/hooks.json` 探索 Hook 定義。您可以使用任何支援的[環境來源](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-tw#mount_from_a_source)，在自訂指令碼旁提供 `hooks.json`：
+런타임은 샌드박스 환경 내의 `.agents/hooks.json` 또는 `/.agents/hooks.json`에서 후크 정의를 자동으로 검색합니다. 지원되는 [환경 소스](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko#mount_from_a_source)를 사용하여 맞춤 스크립트와 함께 `hooks.json`을 제공할 수 있습니다.
 
-- **存放區掛接**：包含 `.agents/hooks.json` 和 `AGENTS.md` 的 Git 存放區。
-- **Cloud Storage (`gcs`)**：包含複製到環境中的 `hooks.json` 的 GCS bucket。
-- **內嵌來源**：呼叫 `client.interactions.create` 時，以 `environment.sources` 傳遞的原始 JSON 字串和指令碼內容。
+- **저장소 마운트**: `AGENTS.md`와 함께 `.agents/hooks.json`이 포함된 Git 저장소입니다.
+- **Cloud Storage (`gcs`)**: 환경에 복사된 `hooks.json`이 포함된 GCS 버킷입니다.
+- **인라인 소스**: `environment.sources`에 전달되는 원시 JSON 문자열 및 스크립트 콘텐츠입니다. `client.interactions.create` 호출 시
 
-### `hooks.json` 個結構定義
+### `hooks.json` 스키마
 
-`hooks.json` 檔案會將事件定義 (`pre_tool_execution` 或 `post_tool_execution`) 分組到自訂名稱下。你可以分別啟用或停用各個群組：
+`hooks.json` 파일은 이벤트 정의 (`pre_tool_execution` 또는 `post_tool_execution`)를 맞춤 이름으로 그룹화합니다. 각 그룹을 독립적으로 사용 설정하거나 중지할 수 있습니다.
 
 ```
 {
@@ -293,71 +292,71 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### 比對器語法和規則
+### 일치자 구문 및 규칙
 
-`hooks.json` 中的每個規則群組都會使用 `matcher` 和 `hooks` 屬性，定義處理常式觸發的時機和方式：
+`hooks.json`의 각 규칙 그룹은 `matcher` 및 `hooks` 속성을 사용하여 핸들러가 실행되는 시점과 방법을 정의합니다.
 
-| 欄位 | 類型 | 說明 |
+| 필드 | 유형 | 설명 |
 | --- | --- | --- |
-| `enabled` | `boolean` | (選用步驟) 設為 `false` 即可停用群組 (預設為 `true`)。 |
-| `matcher` | `string` | 規則運算式模式，用於比對容器內的目標工具名稱。 |
-| `hooks` | `array` | 處理常式定義的已排序清單 (`command` 或 `http`)。處理常式會依宣告順序依序執行。 |
+| `enabled` | `boolean` | 선택사항입니다. 그룹을 중지하려면 `false`로 설정합니다 (기본값은 `true`). |
+| `matcher` | `string` | 컨테이너 내에서 대상 도구 이름과 일치하는 정규 표현식 패턴입니다. |
+| `hooks` | `array` | 핸들러 정의 (`command` 또는 `http`)의 정렬된 목록입니다. 핸들러는 선언 순서대로 순차적으로 실행됩니다. |
 
-#### 規則運算式評估的運作方式
+#### 정규 표현식 평가 작동 방식
 
-當代理在沙箱中叫用工具時，執行階段會使用標準 RE2 規則運算式，根據 `matcher` 模式評估工具的容器名稱。如果規則運算式與工具名稱相符，`hooks` 陣列中的所有處理常式會依序執行。如果多個規則群組符合同一項工具，系統會執行所有對應的處理常式陣列。
+에이전트가 샌드박스 내에서 도구를 호출하면 런타임은 표준 RE2 정규 표현식을 사용하여 도구의 컨테이너 이름을 `matcher` 패턴과 비교하여 평가합니다. 정규 표현식이 도구 이름과 일치하면 `hooks` 배열의 모든 핸들러가 순서대로 실행됩니다. 여러 규칙 그룹이 동일한 도구와 일치하면 해당하는 모든 핸들러 배열이 실행됩니다.
 
-您可以指定任何內建容器工具名稱：執行程式碼 (`code_execution`) 或檔案系統作業 (`read_file`、`write_file`、`list_files` 和 `delete_file`)。
+코드 실행 (`code_execution`) 또는 파일 시스템 작업 (`read_file`, `write_file`, `list_files`, `delete_file`)과 같은 모든 기본 제공 컨테이너 도구 이름을 타겟팅할 수 있습니다.
 
-#### 常見的比對運算式
+#### 일반적인 일치자 표현식
 
-- `"code_execution"`：完全比對殼層指令和指令碼執行的字串。
-- `"write_file"`：完全符合檔案系統檔案建立和磁碟寫入作業。
-- `"read_file|write_file"`：以直立線分隔，在單一規則中比對多個特定工具名稱。
-- `".*_file"`：規則運算式萬用字元，可比對任何以 `_file` 結尾的工具 (例如 `read_file`、`write_file` 或 `delete_file`)。標準 RE2 規則運算式需要 `.*`；簡單的殼層 glob (例如 `*_file`) 是無效的規則運算式語法，無法比對。
-- `".*"` 或 `"*"` 或 `""`：攔截容器內每個工具呼叫的萬用模式。
+- `"code_execution"`: 셸 명령어 및 스크립트 실행과 정확히 일치하는 문자열입니다.
+- `"write_file"`: 파일 시스템 파일 생성 및 디스크 쓰기와 정확히 일치합니다.
+- `"read_file|write_file"`: 파이프 분리는 단일 규칙에서 여러 특정 도구 이름과 일치합니다.
+- `".*_file"`: `_file` (예: `read_file`, `write_file`, `delete_file`)로 끝나는 모든 도구와 일치하는 정규 표현식 와일드카드입니다. 표준 RE2 정규 표현식에는 `.*`이 필요합니다. `*_file`과 같은 간단한 셸 글로브는 잘못된 정규 표현식 구문이며 일치하지 않습니다.
+- `".*"` 또는 `"*"` 또는 `""`: 컨테이너 내의 모든 단일 도구 호출을 가로채는 캐치올 패턴입니다.
 
-## 處理常式類型
+## 핸들러 유형
 
-### 指令掛鉤
+### 명령어 후크
 
-指令掛鉤會在沙箱內執行殼層指令或指令碼。指令碼會在 `stdin` 接收事件 JSON，並在 `stdout` 輸出決策 JSON。
+명령어 후크는 샌드박스 내에서 셸 명령어 또는 스크립트를 실행합니다. 스크립트는 `stdin`에서 이벤트 JSON을 수신하고 `stdout`에서 결정 JSON을 출력합니다.
 
-| 欄位 | 類型 | 說明 |
+| 필드 | 유형 | 설명 |
 | --- | --- | --- |
-| `type` | `string` | 必須為 `"command"`。 |
-| `command` | `string` | 要在沙箱內執行的指令列 (例如 `python3 /.agents/hooks-scripts/gate.py`)。 |
-| `timeout` | `integer` | 逾時時間 (以秒為單位)。預設：`30`。 |
+| `type` | `string` | `"command"`여야 합니다. |
+| `command` | `string` | 샌드박스 내에서 실행할 명령어 줄입니다 (예: `python3 /.agents/hooks-scripts/gate.py`). |
+| `timeout` | `integer` | 제한 시간(초)입니다. 기본값: `30` |
 
-### HTTP 勾點
+### HTTP 후크
 
-HTTP 勾點會從沙箱網路內部，以 POST 要求的形式，將事件 JSON 直接傳送至外部 HTTPS 網址。目標伺服器會使用完全相同的 JSON 格式 (`{"decision": "allow"}` 或 `{"decision": "deny", "reason": "..."}`)，在 HTTP 回應主體中傳回決策。
+HTTP 후크는 샌드박스 네트워크 내에서 직접 외부 HTTPS URL로 이벤트 JSON을 POST 요청으로 전송합니다. 대상 서버는 정확히 동일한 JSON 형식 (`{"decision": "allow"}` 또는 `{"decision": "deny", "reason": "..."}`)을 사용하여 HTTP 응답 본문에 결정을 반환합니다.
 
-| 欄位 | 類型 | 說明 |
+| 필드 | 유형 | 설명 |
 | --- | --- | --- |
-| `type` | `string` | 必須為 `"http"`。 |
-| `url` | `string` | 要將事件酬載 POST 至的外部 HTTPS 端點。 |
-| `headers` | `object` | 非機密自訂標頭的選用鍵/值組合 (例如 `{"X-Event-Source": "agent-sandbox"}`)。如需驗證憑證，請改用網路 Proxy。 |
-| `timeout` | `integer` | 逾時時間 (以秒為單位)。預設：`30`。 |
+| `type` | `string` | `"http"`여야 합니다. |
+| `url` | `string` | 이벤트 페이로드를 게시할 외부 HTTPS 엔드포인트입니다. |
+| `headers` | `object` | 민감하지 않은 맞춤 헤더의 선택적 키-값 쌍입니다 (예: `{"X-Event-Source": "agent-sandbox"}`). 인증 사용자 인증 정보의 경우 네트워크 프록시를 대신 사용하세요. |
+| `timeout` | `integer` | 제한 시간(초)입니다. 기본값: `30` |
 
-#### 輸出 Proxy 和權杖轉換
+#### 이그레스 프록시 및 토큰 변환
 
-由於 HTTP 勾點會直接從沙箱網路命名空間內執行，因此輸出要求會通過透明輸出 Proxy。這種架構可提供 2 項重要安全性優勢：
+HTTP 후크는 샌드박스 네트워크 네임스페이스 내에서 직접 실행되므로 나가는 요청은 투명한 이그레스 프록시를 통과합니다. 이 아키텍처는 다음과 같은 두 가지 중요한 보안 이점을 제공합니다.
 
-- **網路許可清單：**環境的 `network.allowlist` 必須明確允許目標端點。Proxy 會封鎖迴路流量 (`127.0.0.1` 或 `localhost`)，請一律以許可清單中的外部端點為目標。
-- **權杖轉換：**您不需要在 `.agents/hooks.json` 內儲存 API 金鑰或密鑰持有者權杖，也不必將這些權杖掛接到容器。請改為在[網路設定](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-tw#network-configuration) (`network.allowlist.transform`) 中設定權杖轉換規則。輸出 Proxy 會自動攔截外送 HTTP Hook 流量，並在離開沙箱前，在網路上插入實際的驗證標頭。
+- **네트워크 허용 목록:** 대상 엔드포인트는 환경의 `network.allowlist`에서 명시적으로 허용되어야 합니다. 루프백 트래픽 (`127.0.0.1` 또는 `localhost`)은 프록시에 의해 차단됩니다. 항상 허용 목록에 있는 외부 엔드포인트를 타겟팅하세요.
+- **토큰 변환:** `.agents/hooks.json` 내에 API 키 또는 비밀 전달자 토큰을 저장하거나 컨테이너에 마운트할 필요가 없습니다. 대신 [네트워크 구성](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko#network-configuration) (`network.allowlist.transform`)에서 토큰 변환 규칙을 구성합니다. 이그레스 프록시는 나가는 HTTP 후크 트래픽을 자동으로 가로채고 샌드박스를 나가기 전에 실제 인증 헤더를 와이어에 삽입합니다.
 
-## 執行階段如何處理決策和失敗
+## 런타임에서 결정 및 실패를 처리하는 방법
 
-- **同步等待：**代理程式會暫停並等待掛鉤完成，然後再繼續。
-- **封鎖工具執行：**如果工具前置掛鉤傳回 `{"decision": "deny", "reason": "<your reason>"}`，執行階段會立即取消工具呼叫。模型會在對話記錄中看到拒絕原因，並選擇安全替代方案或向使用者說明封鎖原因，藉此調整回應。
-- **處理指令碼當機、HTTP 錯誤和逾時：**如果指令碼當機 (非零結束狀態)、HTTP 勾點傳回非 2xx 狀態碼 (例如 4xx 或 5xx 伺服器錯誤)，或作業逾時或傳回無法辨識的 JSON，執行階段會將其視為核准 (`allow`)。工具執行作業會正常繼續，因此損毀的指令碼或無法連線的遙測伺服器絕不會導致應用程式死結。
+- **동기식 대기:** 에이전트는 계속하기 전에 후크가 완료될 때까지 일시중지하고 기다립니다.
+- **도구 실행 차단:** 도구 후크가 `{"decision": "deny", "reason": "<your reason>"}`를 반환하면 런타임은 도구 호출을 즉시 취소합니다. 모델은 대화 기록에서 거부 사유를 확인하고 안전한 대안을 선택하거나 사용자에게 차단을 설명하여 이에 맞게 조정합니다.
+- **스크립트 비정상 종료, HTTP 오류, 제한 시간 처리:** 명령어 스크립트가 비정상 종료되거나 (0이 아닌 종료 상태) HTTP 후크가 2xx가 아닌 상태 코드 (예: 4xx 또는 5xx 서버 오류)를 반환하거나 작업이 제한 시간 초과되거나 인식할 수 없는 JSON을 반환하면 런타임은 이를 승인 (`allow`)으로 처리합니다. 도구 실행은 정상적으로 계속되므로 손상된 스크립트 또는 연결할 수 없는 원격 분석 서버로 인해 애플리케이션이 교착 상태에 빠지지 않습니다.
 
-## 常見用途
+## 일반적인 사용 사례
 
-### 多輪對話復原功能，確保資料隱私權和法規遵循
+### 데이터 개인 정보 보호 및 규정 준수를 위한 다중 턴 복구
 
-如果 Hook 封鎖受限資源的存取權 (例如含有個人識別資訊 (PII) 或機密財務記錄的目錄)，您可以在下一次呼叫時傳遞 `previous_interaction_id`，繼續在相同環境中進行回合。代理程式會讀取拒絕說明，並改為查詢核准的公開資料表，自動復原。
+후크가 개인 식별 정보 (PII) 또는 기밀 재무 기록이 포함된 디렉터리와 같은 제한된 리소스에 대한 액세스를 차단하는 경우 다음 호출에서 `previous_interaction_id`를 전달하여 동일한 환경에서 턴을 계속할 수 있습니다. 에이전트는 거부 설명을 읽고 승인된 공개 테이블을 대신 쿼리하여 자동으로 복구합니다.
 
 ### Python
 
@@ -571,12 +570,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 #   }'
 ```
 
-### 外部稽核記錄和遙測
+### 외부 감사 로깅 및 원격 분석
 
-每當讀取或修改檔案時，從沙箱內部將即時稽核事件傳送至外部監控伺服器。
+파일을 읽거나 수정할 때마다 샌드박스 내에서 외부 모니터링 서버로 실시간 감사 이벤트를 전송합니다.
 
-- **比對多個工具：**由於比對器使用標準規則運算式，因此您可以在單一規則中，使用直立線 (`read_file|write_file`) 或萬用字元 (`.*_file`) 組合多個工具。
-- **避免在設定中加入密鑰：**在環境的[網路設定](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-tw#network-configuration) (`network.allowlist.transform`) 中定義驗證權杖。輸出 Proxy 會在傳送要求時自動插入實際的承載權杖。
+- **여러 도구 일치:** 일치자는 표준 정규 표현식을 사용하므로 파이프 (`read_file|write_file`) 또는 와일드카드 (`.*_file`)를 사용하여 단일 규칙에서 여러 도구를 결합할 수 있습니다.
+- **구성에 비밀번호를 포함하지 않음:** 환경의 [네트워크 구성](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko#network-configuration) (`network.allowlist.transform`)에서 인증 토큰을 정의합니다. 이그레스 프록시는 나가는 요청에 실제 전달자 토큰을 자동으로 삽입합니다.
 
 ### Python
 
@@ -718,25 +717,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 限制
+## 제한사항
 
-- **沙箱工具範圍：**掛鉤會攔截沙箱內的內建工具：執行程式碼 (`code_execution`) 和檔案系統作業 (`read_file`、`write_file`、`list_files` 和 `delete_file`)。掛鉤不會針對自訂函式呼叫 (`function`) 或在容器外處理的外部 Model Context Protocol (`mcp_server`) 工具觸發。
-- **網路許可清單：**HTTP 勾點會在容器網路內執行。您必須在環境的 `network.allowlist` 中明確允許目標網址。Proxy 會封鎖迴路位址 (`localhost`、`127.0.0.1`)。
-- **發生錯誤時自動核准：**如果 Hook 指令碼當機 (非零的結束狀態)、逾時或失敗，執行階段會記錄失敗情形，並允許工具呼叫繼續執行。這樣一來，損毀的 Linter 指令碼或閒置的程序就不會導致應用程式死結。
-- **沙箱設定保護：**由於 Hook 會在容器沙箱內執行，因此具備檔案系統寫入工具或殼層程式碼執行權限的代理程式，可以修改可寫入工作區中的本機 `.agents/hooks.json` 或指令碼。使用容器掛鉤做為自動政策指引和作業防護措施；如果需要嚴格防範不受信任的模型執行作業遭到竄改，請從唯讀存放區掛接設定來源。
+- **샌드박스 도구 범위:** 후크는 샌드박스 내의 기본 제공 도구(코드 실행(`code_execution`) 및 파일 시스템 작업(`read_file`, `write_file`, `list_files`, `delete_file`))를 가로챕니다. 컨테이너 외부에서 처리되는 맞춤 함수 호출(`function`) 또는 외부 모델 컨텍스트 프로토콜(`mcp_server`) 도구에는 실행되지 않습니다.
+- **네트워크 허용 목록:** HTTP 후크는 컨테이너 네트워크 내에서 실행됩니다. 환경의 `network.allowlist`에서 대상 URL을 명시적으로 허용해야 합니다. 루프백 주소 (`localhost`, `127.0.0.1`)는 프록시에 의해 차단됩니다.
+- **오류 시 자동 승인:** 후크 스크립트가 비정상 종료되거나 (0이 아닌 종료 상태) 제한 시간 초과되거나 실패하면 런타임은 실패를 로깅하고 도구 호출이 계속되도록 허용합니다. 이렇게 하면 손상된 린터 스크립트 또는 정지된 프로세스로 인해 애플리케이션이 교착 상태에 빠지지 않습니다.
+- **샌드박스 구성 보호:** 후크는 컨테이너 샌드박스 내에서 실행되므로 파일 시스템 쓰기 도구 또는 셸 코드 실행 권한이 있는 에이전트는 쓰기 가능한 작업공간 내에서 로컬 `.agents/hooks.json` 또는 스크립트를 수정할 수 있습니다. 컨테이너 후크를 자동화된 정책 안내 및 운영 가드레일로 사용합니다. 신뢰할 수 없는 모델 실행에 대해 엄격한 변조 방지 기능이 필요한 경우 읽기 전용 저장소에서 구성 소스를 마운트합니다.
 
-## 後續步驟
+## 다음 단계
 
-- 瞭解如何設定永久[遠端沙箱和環境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-tw)。
-- 探索 [Antigravity 代理程式](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=zh-tw)的功能和內建工具。
-- 如要瞭解多輪對話工作階段和串流，請參閱 [Interactions API 總覽](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw)。
+- 영구 [원격 샌드박스 및 환경](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko)을 구성하는 방법을 알아봅니다.
+- [Antigravity 에이전트](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ko)의 기능과 기본 제공 도구를 살펴봅니다.
+- 다중 턴 세션 및 스트리밍에 관한 [Interactions API 개요](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)를 검토합니다.
 
-提供意見
+의견 보내기
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-上次更新時間：2026-07-30 (世界標準時間)。
+최종 업데이트: 2026-09-11(UTC)
 
-想進一步說明嗎？
+의견을 전달하고 싶나요?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-30 (世界標準時間)。"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-11(UTC)"],[],[]]

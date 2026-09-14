@@ -1,67 +1,66 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl
-fetched_at: 2026-09-07T05:33:38.194222+00:00
-title: "Pierwsze kroki \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id
+fetched_at: 2026-09-14T05:52:07.228992+00:00
+title: "Memulai \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+Gemini 3.8 Flash kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=id).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs/generate-content?hl=id)
 
-Prześlij opinię
+Kirim masukan
 
-# Pierwsze kroki
+# Memulai
 
-Z tego przewodnika dowiesz się, jak zacząć korzystać z starszego interfejsu **generateContent** API.
-W przypadku nowych projektów i aplikacji zdecydowanie zalecamy korzystanie z nowego **interfejsu Interactions API** , który jest najprostszym i najlepszym sposobem na tworzenie aplikacji z wykorzystaniem modeli i agentów Gemini.
+Panduan ini akan membantu Anda memulai penggunaan **generateContent** API lama. Untuk project dan aplikasi baru, sebaiknya gunakan **Interactions API** baru, yang merupakan cara terbaik dan paling sederhana untuk membangun dengan model dan agen Gemini.
 
-Z tego przewodnika dowiesz się, jak zainstalować nasze
-[biblioteki](https://ai.google.dev/gemini-api/docs/libraries?hl=pl) i wysłać pierwsze żądanie, przesyłać strumieniowo
-odpowiedzi, tworzyć rozmowy wieloetapowe i korzystać z narzędzi za pomocą standardowej
-`generateContent` metody.
+Panduan memulai ini menunjukkan cara menginstal
+[library](https://ai.google.dev/gemini-api/docs/libraries?hl=id) kami dan membuat permintaan pertama, melakukan streaming
+respons, membuat percakapan multi-giliran, dan menggunakan alat menggunakan metode standar
+`generateContent`.
 
-## Uzyskiwanie klucza interfejsu API
+## Mendapatkan kunci API
 
-Aby korzystać z Gemini API, musisz mieć klucz interfejsu API, który umożliwi uwierzytelnianie żądań, egzekwowanie limitów bezpieczeństwa i śledzenie wykorzystania na koncie.
+Untuk menggunakan Gemini API, Anda harus memiliki kunci API untuk mengautentikasi permintaan, menerapkan batas keamanan, dan melacak penggunaan ke akun Anda.
 
-- Google AI Studio automatycznie tworzy projekt i klucz interfejsu API dla nowych użytkowników.
-  Możesz go skopiować ze strony [kluczy interfejsów API](https://aistudio.google.com/api-keys?hl=pl).
-- Jeśli potrzebujesz nowego klucza, w AI Studio kliknij **Utwórz klucz interfejsu API** i postępuj zgodnie z instrukcjami w oknie, aby dodać nową parę klucz-projekt.
+- Google AI Studio otomatis membuat project dan kunci API untuk pengguna baru.
+  Anda dapat menyalinnya dari halaman kunci [API](https://aistudio.google.com/api-keys?hl=id).
+- Jika memerlukan kunci baru, klik **Create API key** di AI Studio dan ikuti dialog untuk menambahkan pasangan kunci-project baru.
 
-[Utwórz klucz Gemini API](https://aistudio.google.com/apikey?hl=pl)
+[Membuat Kunci Gemini API](https://aistudio.google.com/apikey?hl=id)
 
-Ustaw klucz jako zmienną środowiskową:
+Tetapkan kunci Anda sebagai variabel lingkungan:
 
 ```
 export GEMINI_API_KEY="YOUR_API_KEY"
 ```
 
-### Przejście na płatny poziom
+### Mengupgrade ke paket berbayar
 
-Przejście na płatny poziom zwiększa limity szybkości i wymaga skonfigurowania Rozliczeń usługi Google Cloud.
+Mengupgrade ke paket berbayar akan meningkatkan batas frekuensi Anda dan mengharuskan Anda menyiapkan Penagihan Cloud.
 
-- [[Na stronach kluczy interfejsów API lub projektów w AI Studio kliknij **Skonfiguruj rozliczenia**.](https://aistudio.google.com/api-keys?hl=pl)](https://aistudio.google.com/projects?hl=pl)
-- Postępuj zgodnie z instrukcjami w oknie Cloud Billing, aby utworzyć lub połączyć konto rozliczeniowe, dodać formę płatności i zapłacić z góry co najmniej 10 USD (lub równowartość w innej walucie) w postaci płatnych środków.
-- Wykorzystanie interfejsu API możesz sprawdzić w [Google AI Studio](https://aistudio.google.com/usage?hl=pl)
-  w sekcji **Panel** > **Wykorzystanie**.
+- Klik **Set up billing** di halaman kunci [API](https://aistudio.google.com/api-keys?hl=id) atau [Project](https://aistudio.google.com/projects?hl=id) AI Studio.
+- Ikuti dialog Penagihan Cloud untuk membuat atau menautkan akun penagihan, menambahkan metode pembayaran, dan membayar di muka minimal $10 (atau nilai mata uang yang setara) dalam kredit berbayar.
+- Lihat penggunaan API Anda di [Google AI Studio](https://aistudio.google.com/usage?hl=id)
+  di bagian **Dashboard** > **Usage**.
 
-Więcej informacji znajdziesz na stronie [Rozliczenia](https://ai.google.dev/gemini-api/docs/billing?hl=pl).
+Lihat halaman [Penagihan](https://ai.google.dev/gemini-api/docs/billing?hl=id) untuk mengetahui informasi selengkapnya.
 
-## Instalowanie pakietu Google GenAI SDK
+## Menginstal Google GenAI SDK
 
 ### Python
 
-W [Pythonie 3.9 lub nowszym](https://www.python.org/downloads/) zainstaluj pakiet
-[`google-genai`](https://pypi.org/project/google-genai/)
-za pomocą tego
-[polecenia pip](https://packaging.python.org/en/latest/tutorials/installing-packages/):
+Dengan menggunakan [Python 3.9+](https://www.python.org/downloads/), instal paket
+[`google-genai` menggunakan](https://pypi.org/project/google-genai/)
+perintah
+[pip berikut](https://packaging.python.org/en/latest/tutorials/installing-packages/):
 
 ```
 pip install -q -U google-genai
@@ -69,20 +68,20 @@ pip install -q -U google-genai
 
 ### JavaScript
 
-W [Node.js w wersji 18 lub nowszej](https://nodejs.org/en/download/package-manager),
-zainstaluj
-[pakiet Google Gen AI SDK dla TypeScript i JavaScript](https://www.npmjs.com/package/@google/genai)
-za pomocą tego
-[polecenia npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm):
+Dengan menggunakan [Node.js v18+](https://nodejs.org/en/download/package-manager),
+instal
+[Google Gen AI SDK untuk TypeScript dan JavaScript](https://www.npmjs.com/package/@google/genai)
+menggunakan
+[perintah npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) berikut:
 
 ```
 npm install @google/genai
 ```
 
-## Generowanie tekstu
+## Membuat teks
 
-Aby wygenerować odpowiedź tekstową, użyj metody `models.generate_content`
-.
+Gunakan metode `models.generate_content` untuk
+[membuat respons teks](https://ai.google.dev/gemini-api/docs/text-generation?hl=id).
 
 ### Python
 
@@ -138,11 +137,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-## Odpowiadanie na bieżąco
+## Mengaktifkan respons bertahap
 
-Domyślnie model zwraca odpowiedź dopiero po zakończeniu całego procesu generowania. Aby przyspieszyć działanie i zwiększyć interaktywność, możesz
-[przesyłać strumieniowo fragmenty odpowiedzi](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl#stream) w miarę ich
-generowania.
+Secara default, model hanya menampilkan respons setelah seluruh proses pembuatan selesai. Untuk pengalaman yang lebih cepat dan interaktif, Anda dapat
+[melakukan streaming potongan respons](https://ai.google.dev/gemini-api/docs/text-generation?hl=id#stream) saat
+dibuat.
 
 ### Python
 
@@ -194,11 +193,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:s
   }'
 ```
 
-## Rozmowy wieloetapowe
+## Percakapan multi-giliran
 
-W przypadku rozmów wieloetapowych pakiety SDK udostępniają pomocniczą funkcję `chats` z informacjami o stanie, która
-umożliwia tworzenie [czatu wieloetapowego](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl#chat)
-automatycznie zarządzającego historią rozmów.
+Untuk percakapan multi-giliran, SDK menyediakan helper `chats` stateful untuk
+membangun pengalaman [chat multi-giliran](https://ai.google.dev/gemini-api/docs/text-generation?hl=id#chat)
+yang otomatis mengelola histori percakapan.
 
 ### Python
 
@@ -254,9 +253,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-## Korzystanie z narzędzi
+## Menggunakan alat
 
-[Rozszerz możliwości modelu, powiązując odpowiedzi z wyszukiwarką Google, aby uzyskać dostęp do treści z internetu w czasie rzeczywistości.](https://ai.google.dev/gemini-api/docs/google-search?hl=pl) Model automatycznie decyduje, kiedy wyszukiwać, wykonuje zapytania i syntetyzuje odpowiedź.
+Perluas kemampuan model dengan
+[melakukan grounding respons dengan Google Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id)
+untuk mengakses konten web real-time. Model akan otomatis menentukan kapan harus menelusuri, menjalankan kueri, dan membuat respons.
 
 ### Python
 
@@ -343,26 +344,27 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-Gemini API obsługuje też inne wbudowane narzędzia:
+Gemini API juga mendukung alat bawaan lainnya:
 
-- **[Wykonywanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl)**:
-  umożliwia modelowi pisanie i uruchamianie kodu Pythona w celu rozwiązywania złożonych problemów matematycznych.
-- **[Kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl)**: umożliwia powiązanie odpowiedzi z określonymi adresami URL stron internetowych.
-- **[Wyszukiwanie plików](https://ai.google.dev/gemini-api/docs/file-search?hl=pl)**: umożliwia
-  przesyłanie plików i powiązanie odpowiedzi z ich treścią za pomocą wyszukiwania semantycznego.
-- **[Mapy Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pl)**: umożliwiają
-  powiązanie odpowiedzi z danymi o lokalizacji oraz wyszukiwanie miejsc, tras i
-  map.
-- **[Korzystanie z komputera](https://ai.google.dev/gemini-api/docs/computer-use?hl=pl)**: umożliwia
-  modelowi interakcję z wirtualnym ekranem komputera, klawiaturą i myszą w celu
-  wykonywania zadań.
+- **[Eksekusi kode](https://ai.google.dev/gemini-api/docs/code-execution?hl=id)**:
+  Memungkinkan model menulis dan menjalankan kode Python untuk memecahkan masalah matematika yang kompleks.
+- **[Konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id)**: Memungkinkan Anda
+  melakukan grounding respons di URL halaman web tertentu yang Anda berikan.
+- **[Penelusuran file](https://ai.google.dev/gemini-api/docs/file-search?hl=id)**: Memungkinkan Anda
+  mengupload file dan melakukan grounding respons dalam kontennya menggunakan penelusuran semantik.
+- **[Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=id)**: Memungkinkan Anda
+  melakukan grounding respons dalam data lokasi dan menelusuri tempat, rute, dan
+  peta.
+- **[Penggunaan komputer](https://ai.google.dev/gemini-api/docs/computer-use?hl=id)**: Memungkinkan
+  model berinteraksi dengan layar, keyboard, dan mouse komputer virtual untuk
+  melakukan tugas.
 
-## Wywoływanie funkcji niestandardowych
+## Memanggil fungsi kustom
 
-Użyj **[wywoływania funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl)** , aby połączyć
-modele z niestandardowymi narzędziami i interfejsami API. Model określa, kiedy wywołać funkcję, i zwraca w odpowiedzi `functionCall`, którą aplikacja ma wykonać.
+Gunakan **[panggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id)** untuk menghubungkan
+model ke alat dan API kustom Anda. Model akan menentukan kapan harus memanggil fungsi Anda dan menampilkan `functionCall` dalam respons agar aplikasi Anda dapat dieksekusi.
 
-Ten przykład deklaruje funkcję symulującą temperaturę i sprawdza, czy model chce ją wywołać.
+Contoh ini mendeklarasikan fungsi suhu tiruan dan memeriksa apakah model ingin memanggilnya.
 
 ### Python
 
@@ -524,25 +526,25 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-## Co dalej?
+## Langkah berikutnya
 
-Teraz, gdy masz już podstawy korzystania z Gemini API, zapoznaj się z tymi przewodnikami, aby tworzyć bardziej zaawansowane aplikacje:
+Setelah Anda mulai menggunakan Gemini API, pelajari panduan berikut untuk membuat aplikasi yang lebih canggih:
 
-- [Generowanie tekstu](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl)
-- [Generowanie obrazów](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl)
-- [Rozpoznawanie obrazów](https://ai.google.dev/gemini-api/docs/image-understanding?hl=pl)
-- [Myślę](https://ai.google.dev/gemini-api/docs/thinking?hl=pl)
-- [Wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl)
-- [Powiązanie ze źródłami informacji przy użyciu wyszukiwarki Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pl)
-- [Długi kontekst](https://ai.google.dev/gemini-api/docs/long-context?hl=pl)
-- [Osadzanie](https://ai.google.dev/gemini-api/docs/embeddings?hl=pl)
+- [Pembuatan teks](https://ai.google.dev/gemini-api/docs/text-generation?hl=id)
+- [Pembuatan gambar](https://ai.google.dev/gemini-api/docs/image-generation?hl=id)
+- [Pemahaman gambar](https://ai.google.dev/gemini-api/docs/image-understanding?hl=id)
+- [Penalaran](https://ai.google.dev/gemini-api/docs/thinking?hl=id)
+- [Panggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id)
+- [Grounding with Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=id)
+- [Konteks panjang](https://ai.google.dev/gemini-api/docs/long-context?hl=id)
+- [Embedding](https://ai.google.dev/gemini-api/docs/embeddings?hl=id)
 
-Prześlij opinię
+Kirim masukan
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Ostatnia aktualizacja: 2026-07-30 UTC.
+Terakhir diperbarui pada 2026-09-12 UTC.
 
-Chcesz przekazać coś jeszcze?
+Ada masukan untuk kami?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-12 UTC."],[],[]]

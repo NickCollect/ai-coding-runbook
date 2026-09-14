@@ -1,137 +1,136 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api?hl=id
-fetched_at: 2026-09-07T05:37:51.592353+00:00
-title: "Ringkasan Gemini Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api?hl=hi
+fetched_at: 2026-09-14T05:54:42.007435+00:00
+title: "Gemini Live API \u0915\u0947 \u092c\u093e\u0930\u0947 \u092e\u0947\u0902 \u0916\u093e\u0938 \u091c\u093e\u0928\u0915\u093e\u0930\u0940 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Kirim masukan
+सुझाव भेजें
 
-# Ringkasan Gemini Live API
+# Gemini Live API के बारे में खास जानकारी
 
-Live API memungkinkan interaksi suara dan visi real-time dengan latensi rendah bersama Gemini. Fitur ini memproses aliran audio, gambar, dan teks yang berkelanjutan untuk menghasilkan respons lisan yang langsung dan mirip manusia, sehingga menciptakan pengalaman percakapan yang alami bagi pengguna Anda.
+Live API की मदद से, Gemini के साथ कम समय में रीयल-टाइम में आवाज़ और विज़न से जुड़ी बातचीत की जा सकती है. यह ऑडियो, इमेज, और टेक्स्ट की लगातार स्ट्रीम को प्रोसेस करता है, ताकि आपको तुरंत और इंसानों जैसी आवाज़ में जवाब मिल सकें. इससे आपके उपयोगकर्ताओं को बातचीत का नैचुरल अनुभव मिलता है.
 
-![Ringkasan Live API](https://ai.google.dev/static/gemini-api/docs/images/live-api-overview.png?hl=id)
+![Live API के बारे में खास जानकारी](https://ai.google.dev/static/gemini-api/docs/images/live-api-overview.png?hl=hi)
 
-[Coba Live API di Google AI Studiomic](https://aistudio.google.com/live?hl=id)
-[Clone aplikasi contoh dari GitHubcode](https://github.com/google-gemini/gemini-live-api-examples)
-[Gunakan keterampilan agen pengodeanterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=id)
+[Google AI Studio में Live API आज़माएंmic](https://aistudio.google.com/live?hl=hi)
+[GitHub से उदाहरण ऐप्लिकेशन क्लोन करेंcode](https://github.com/google-gemini/gemini-live-api-examples)
+[कोडिंग एजेंट की क्षमताओं का इस्तेमाल करेंterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=hi)
 
-## Kasus penggunaan
+## उपयोग के उदाहरण
 
-Live API dapat digunakan untuk membangun agen suara real-time untuk berbagai industri, termasuk:
+लाइव एपीआई का इस्तेमाल, कई तरह के उद्योगों के लिए रीयल-टाइम में वॉइस एजेंट बनाने के लिए किया जा सकता है. जैसे:
 
-- **E-commerce dan retail:** Asisten belanja yang menawarkan rekomendasi yang dipersonalisasi dan agen dukungan yang menyelesaikan masalah pelanggan.
-- **Game:** Karakter non-pemain (NPC) interaktif, asisten bantuan dalam game, dan terjemahan real-time konten dalam game.
-- **Antarmuka generasi berikutnya:** Pengalaman yang mendukung suara dan video dalam robotika, kacamata pintar, dan kendaraan.
-- **Layanan kesehatan:** Pendamping kesehatan untuk dukungan dan edukasi pasien.
-- **Layanan keuangan:** Penasihat AI untuk manajemen kekayaan dan panduan investasi.
-- **Pendidikan:** Mentor AI dan pendamping pelajar yang memberikan instruksi dan masukan yang dipersonalisasi.
-- **Terjemahan dan pelokalan:** Terjemahan real-time dan latensi rendah untuk percakapan lisan, sehingga memungkinkan komunikasi multibahasa yang lancar.
+- **ई-कॉमर्स और खुदरा कारोबार:** शॉपिंग असिस्टेंट, लोगों की दिलचस्पी के हिसाब से सुझाव देती हैं. साथ ही, सहायता एजेंट खरीदारों की समस्याओं को हल करते हैं.
+- **गेमिंग:** इंटरैक्टिव नॉन-प्लेयर कैरेक्टर (एनपीसी), गेम में मदद करने वाले असिस्टेंट, और गेम में मौजूद कॉन्टेंट का रीयल-टाइम में अनुवाद.
+- **नेक्स्ट जनरेशन इंटरफ़ेस:** रोबोटिक्स, स्मार्ट ग्लास, और वाहनों में आवाज़ और वीडियो की सुविधा वाले अनुभव.
+- **स्वास्थ्य सेवा:** मरीज़ों की मदद करने और उन्हें जानकारी देने के लिए स्वास्थ्य से जुड़े कंपैनियन.
+- **वित्तीय सेवाएं:** वेल्थ मैनेजमेंट और निवेश से जुड़ी सलाह देने के लिए एआई सलाहकार.
+- **शिक्षा:** एआई मेंटर और सीखने वाले लोगों के साथी, जो उनके हिसाब से निर्देश और सुझाव देते हैं.
+- **अनुवाद और स्थानीयकरण:** बोली गई बातचीत का रीयल-टाइम में और कम समय में अनुवाद किया जा सकता है. इससे अलग-अलग भाषाओं में आसानी से बातचीत की जा सकती है.
+- **लाइव ट्रांसक्रिप्शन और कैप्शन:** रीयल-टाइम में बोले गए शब्दों को लेख में बदलकर कैप्शन बनाने की सुविधा. इसका इस्तेमाल लाइव सबटाइटल, मीटिंग ट्रांसक्रिप्शन, बोलकर टाइप करने, और ग्राहक की कॉल लॉग करने के लिए किया जा सकता है.
 
-## Fitur utama
+## मुख्य सुविधाएं
 
-Live API menawarkan serangkaian fitur komprehensif untuk membangun agen suara yang andal:
+Live API में, आवाज़ से काम करने वाले एजेंट बनाने के लिए कई तरह की सुविधाएँ उपलब्ध हैं:
 
-- [**Dukungan multibahasa**](https://ai.google.dev/gemini-api/docs/live-guide?hl=id#supported-languages):
-  Berkomunikasi dalam 70 bahasa yang didukung.
-- [**Barge-in**](https://ai.google.dev/gemini-api/docs/live-guide?hl=id#interruptions):
-  Pengguna dapat mengganggu model kapan saja untuk interaksi responsif.
-- [**Penggunaan alat**](https://ai.google.dev/gemini-api/docs/live-tools?hl=id):
-  Mengintegrasikan alat seperti panggilan fungsi dan Google Penelusuran untuk interaksi dinamis.
-- [**Transkripsi audio**](https://ai.google.dev/gemini-api/docs/live-guide?hl=id#audio-transcription):
-  Menyediakan transkrip teks untuk input pengguna dan output model.
-- [**Audio proaktif**](https://ai.google.dev/gemini-api/docs/live-guide?hl=id#proactive-audio):
-  Memungkinkan Anda mengontrol kapan model merespons dan dalam konteks apa.
-- [**Dialog afektif**](https://ai.google.dev/gemini-api/docs/live-guide?hl=id#affective-dialog):
-  Menyesuaikan gaya dan nada respons agar sesuai dengan ekspresi input pengguna.
-- [**Terjemahan Langsung**](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=id):
-  Terjemahan suara-ke-suara real-time dalam lebih dari 70 bahasa.
+- [**कई भाषाओं में बातचीत करने की सुविधा**](https://ai.google.dev/gemini-api/docs/live-guide?hl=hi#supported-languages):
+  70 भाषाओं में बातचीत करें.
+- [**बार्ज-इन**](https://ai.google.dev/gemini-api/docs/live-guide?hl=hi#interruptions):
+  उपयोगकर्ता, जवाब देने के लिए मॉडल को किसी भी समय बाधित कर सकते हैं.
+- [**टूल का इस्तेमाल करना**](https://ai.google.dev/gemini-api/docs/live-tools?hl=hi):
+  इसमें डाइनैमिक इंटरैक्शन के लिए, फ़ंक्शन कॉलिंग और Google Search जैसे टूल इंटिग्रेट किए जाते हैं.
+- [**ऑडियो ट्रांसक्रिप्ट**](https://ai.google.dev/gemini-api/docs/live-guide?hl=hi#audio-transcription):
+  इसमें उपयोगकर्ता के इनपुट और मॉडल आउटपुट, दोनों की टेक्स्ट ट्रांसक्रिप्ट मिलती है.
+- [**पहले से ही ऑडियो जनरेट करने की सुविधा**](https://ai.google.dev/gemini-api/docs/live-guide?hl=hi#proactive-audio):
+  इस सुविधा की मदद से, यह कंट्रोल किया जा सकता है कि मॉडल कब और किन संदर्भों में जवाब दे.
+- [**अफ़ेक्टिव डायलॉग**](https://ai.google.dev/gemini-api/docs/live-guide?hl=hi#affective-dialog):
+  जवाब देने की स्टाइल और टोन को, उपयोगकर्ता के इनपुट एक्सप्रेशन के हिसाब से बदला जाता है.
+- [**लाइव ट्रांसक्रिप्शन**](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=hi):
+  यह सुविधा, बोली को रीयल-टाइम में लगातार लिखाई में बदलती है. इसमें भाषा की अपने-आप पहचान होने की सुविधा और कस्टम शब्दावली शामिल है.
+- [**लाइव ट्रांसलेशन**](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=hi):
+  70 से ज़्यादा भाषाओं में, बोले जा रहे शब्दों का रीयल-टाइम में अनुवाद.
 
-## Spesifikasi teknis
+## तकनीकी जानकारी
 
-Tabel berikut menguraikan spesifikasi teknis untuk Live API:
+यहां दी गई टेबल में, Live API की तकनीकी खास जानकारी दी गई है:
 
-| Kategori | Detail |
+| कैटगरी | विवरण |
 | --- | --- |
-| Modalitas input | Audio (audio PCM 16-bit mentah, 16 kHz, little-endian), gambar (JPEG <= 1 FPS), teks |
-| Modalitas output | Audio (audio PCM 16-bit mentah, 24 kHz, little-endian) |
-| Protokol | Koneksi WebSocket stateful (WSS) |
+| इनपुट के तरीके | ऑडियो (रॉ 16-बिट पीसीएम ऑडियो, 16 किलोहर्ट्ज़, लिटिल-एंडियन), इमेज (JPEG <= 1 एफ़पीएस), टेक्स्ट |
+| आउटपुट के तरीके | ऑडियो (रॉ 16-बिट पीसीएम ऑडियो, 24 किलोहर्ट्ज़, लिटिल-एंडियन) |
+| प्रोटोकॉल | स्टेटफ़ुल WebSocket कनेक्शन (WSS) |
 
-## Memilih pendekatan implementasi
+## लागू करने का तरीका चुनना
 
-Saat berintegrasi dengan Live API, Anda harus memilih salah satu pendekatan implementasi berikut:
+Live API के साथ इंटिग्रेट करते समय, आपको लागू करने के लिए इनमें से कोई एक तरीका चुनना होगा:
 
-- **Server-ke-server**: Backend Anda terhubung ke Live API menggunakan
-  [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). Biasanya, klien Anda mengirim data streaming (audio, video, teks) ke server Anda, yang kemudian meneruskannya ke Live API.
-- **Klien-ke-server**: Kode frontend Anda terhubung langsung ke Live API
-  menggunakan [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) untuk men-streaming data, sehingga melewati backend Anda.
+- **सर्वर-टू-सर्वर**: आपका बैकएंड, [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) का इस्तेमाल करके Live API से कनेक्ट होता है. आम तौर पर, आपका क्लाइंट स्ट्रीम डेटा (ऑडियो, वीडियो, टेक्स्ट) को आपके सर्वर पर भेजता है. इसके बाद, सर्वर इसे Live API को भेजता है.
+- **क्लाइंट-टू-सर्वर**: आपका फ़्रंटएंड कोड, डेटा स्ट्रीम करने के लिए सीधे तौर पर Live API से कनेक्ट होता है. इसके लिए, [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) का इस्तेमाल किया जाता है. इससे आपका बैकएंड बायपास हो जाता है.
 
-## Mulai
+## अपनी प्रोफ़ाइल बनाना शुरू करें
 
-Pilih panduan yang sesuai dengan lingkungan pengembangan Anda:
+अपने डेवलपमेंट एनवायरमेंट के हिसाब से गाइड चुनें:
 
-Server-ke-server
+सर्वर-टू-सर्वर
 
-### [Tutorial GenAI SDK](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=id)
+### [GenAI SDK ट्यूटोरियल](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=hi)
 
-Hubungkan ke Gemini Live API menggunakan GenAI SDK untuk membangun aplikasi multimodal real-time dengan backend Python.
+Python बैकएंड के साथ रीयल-टाइम मल्टीमॉडल ऐप्लिकेशन बनाने के लिए, GenAI SDK का इस्तेमाल करके Gemini Live API से कनेक्ट करें.
 
-Klien-ke-server
+क्लाइंट से सर्वर
 
-### [Tutorial WebSocket](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=id)
+### [WebSocket ट्यूटोरियल](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=hi)
 
-Hubungkan ke Gemini Live API menggunakan WebSockets untuk membangun aplikasi multimodal real-time dengan frontend JavaScript dan token sementara.
+WebSockets का इस्तेमाल करके, Gemini Live API से कनेक्ट करें. इससे JavaScript फ़्रंटएंड और कुछ समय के लिए मान्य टोकन के साथ, रीयल-टाइम मल्टीमॉडल ऐप्लिकेशन बनाया जा सकता है.
 
-Agent Development Kit
+Agent development kit
 
-### [Tutorial ADK](https://google.github.io/adk-docs/streaming/)
+### [ADK ट्यूटोरियल](https://google.github.io/adk-docs/streaming/)
 
-Buat agen dan gunakan Streaming Agent Development Kit (ADK) untuk mengaktifkan komunikasi suara dan video.
+कोई एजेंट बनाएं और आवाज़ और वीडियो के ज़रिए बातचीत करने की सुविधा चालू करने के लिए, Agent Development Kit (ADK) स्ट्रीमिंग का इस्तेमाल करें.
 
-## Integrasi partner
+## पार्टनर इंटिग्रेशन
 
-Untuk menyederhanakan pengembangan aplikasi audio dan video real-time, Anda dapat menggunakan
-integrasi pihak ketiga yang mendukung Gemini Live
-API melalui WebRTC atau WebSockets.
+रीयल-टाइम में ऑडियो और वीडियो ऐप्लिकेशन डेवलप करने के लिए, तीसरे पक्ष के इंटिग्रेशन का इस्तेमाल किया जा सकता है. यह इंटिग्रेशन, WebRTC या WebSockets के ज़रिए Gemini Live API के साथ काम करता है.
 
 [LiveKit
 
-Gunakan Gemini Live API dengan Agen LiveKit.](https://docs.livekit.io/agents/models/realtime/plugins/gemini/)
-[Pipecat dari Daily
+LiveKit एजेंट के साथ Gemini Live API का इस्तेमाल करें.](https://docs.livekit.io/agents/models/realtime/plugins/gemini/)
+[Pipecat by Daily
 
-Buat chatbot AI real-time menggunakan Gemini Live dan Pipecat.](https://docs.pipecat.ai/guides/features/gemini-live)
-[Fishjam dari Software Mansion
+Gemini Live और Pipecat का इस्तेमाल करके, रीयल-टाइम में एआई चैटबॉट बनाएँ.](https://docs.pipecat.ai/guides/features/gemini-live)
+[Software Mansion का Fishjam
 
-Buat aplikasi streaming video dan audio live dengan Fishjam.](https://docs.fishjam.io/tutorials/gemini-live-integration)
-[Agen Vision dari Stream
+Fishjam की मदद से, लाइव वीडियो और ऑडियो स्ट्रीमिंग वाले ऐप्लिकेशन बनाएं.](https://docs.fishjam.io/tutorials/gemini-live-integration)
+[स्ट्रीम के हिसाब से विज़न एजेंट
 
-Buat aplikasi AI suara dan video real-time dengan Agen Vision.](https://visionagents.ai/integrations/gemini)
+Vision Agents की मदद से, रीयल-टाइम में आवाज़ और वीडियो वाले एआई ऐप्लिकेशन बनाएं.](https://visionagents.ai/integrations/gemini)
 [Voximplant
 
-Hubungkan panggilan masuk dan keluar ke Live API dengan Voximplant.](https://voximplant.com/products/gemini-client)
-[Agora
+Voximplant की मदद से, आने वाले और जाने वाले कॉल को Live API से कनेक्ट करें.](https://voximplant.com/products/gemini-client)
+[अगोरा
 
-Buat aplikasi AI percakapan real-time dengan Agora.](https://docs.agora.io/en/conversational-ai/models/mllm/gemini)
+Agora की मदद से, रीयल-टाइम में बातचीत करने वाले एआई ऐप्लिकेशन बनाएं.](https://docs.agora.io/en/conversational-ai/models/mllm/gemini)
 [Firebase AI SDK
 
-Mulai menggunakan Gemini Live API dengan Firebase AI Logic.](https://firebase.google.com/docs/ai-logic/live-api?api=dev&hl=id)
+Firebase AI Logic का इस्तेमाल करके, Gemini Live API का इस्तेमाल शुरू करें.](https://firebase.google.com/docs/ai-logic/live-api?api=dev&hl=hi)
 
-Kirim masukan
+सुझाव भेजें
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Terakhir diperbarui pada 2026-06-12 UTC.
+आखिरी बार 2026-09-10 (UTC) को अपडेट किया गया.
 
-Ada masukan untuk kami?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-12 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-10 (UTC) को अपडेट किया गया."],[],[]]

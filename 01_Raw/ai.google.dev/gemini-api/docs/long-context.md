@@ -1,133 +1,155 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/long-context?hl=zh-TW
-fetched_at: 2026-09-07T05:35:06.469098+00:00
-title: "\u9577\u8108\u7d61 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/long-context?hl=it
+fetched_at: 2026-09-14T05:44:32.304456+00:00
+title: "Contesto lungo \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-提供意見
+Invia feedback
 
-# 長脈絡
+# Contesto lungo
 
-許多 Gemini 模型都提供 100 萬個以上的詞元脈絡窗口。
-過去，大型語言模型 (LLM) 一次可傳遞給模型的文字 (或權杖) 數量有限，Gemini 長脈絡窗口可支援許多新的應用實例和開發人員範例。
+Molti modelli Gemini sono dotati di finestre contestuali di grandi dimensioni, con 1 milione o più token.
+Storicamente, i modelli linguistici di grandi dimensioni (LLM) erano notevolmente limitati dalla quantità di testo (o token) che poteva essere passata al modello contemporaneamente.
+La finestra contestuale lunga di Gemini sblocca molti nuovi casi d'uso e paradigmi per gli sviluppatori.
 
-您目前用於[文字生成](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-tw)或[多模態輸入](https://ai.google.dev/gemini-api/docs/vision?hl=zh-tw)等用途的程式碼，無需任何變更即可搭配長脈絡使用。
+Il codice che utilizzi già per casi come la [generazione](https://ai.google.dev/gemini-api/docs/text-generation?hl=it) di
+testo
+o gli [input](https://ai.google.dev/gemini-api/docs/vision?hl=it)
+multimodali
+funzionerà senza modifiche con il contesto lungo.
 
-這份文件將概略說明如何使用脈絡窗口達 100 萬個以上詞元的模型。本頁面簡要介紹脈絡窗口，並探討開發人員應如何看待長脈絡、長脈絡的各種實際用途，以及如何最佳化長脈絡的使用方式。
+Questo documento fornisce una panoramica di ciò che puoi ottenere utilizzando modelli con finestre contestuali di 1 milione o più token. La pagina fornisce una breve panoramica di una finestra contestuale ed esplora il modo in cui gli sviluppatori dovrebbero pensare al contesto lungo, a vari casi d'uso reali per il contesto lungo e ai modi per ottimizzare l'utilizzo del contesto lungo.
 
-如要瞭解特定模型的脈絡窗口大小，請參閱「[模型](https://ai.google.dev/gemini-api/docs/models?hl=zh-tw)」頁面。
+Per le dimensioni della finestra contestuale di modelli specifici, consulta la
+[pagina Modelli](https://ai.google.dev/gemini-api/docs/models?hl=it).
 
-## 什麼是脈絡窗口？
+## Cos'è una finestra contestuale?
 
-使用 Gemini 模型的基本方式是將資訊 (脈絡) 傳遞給模型，模型隨後會生成回覆。情境視窗就像短期記憶。人的短期記憶體可儲存的資訊量有限，生成模型也是如此。
+Il modo di base in cui utilizzi i modelli Gemini consiste nel passare informazioni (contesto) al modello, che successivamente genererà una risposta. Una finestra contestuale è analoga alla memoria a breve termine. La quantità di informazioni che può essere memorizzata nella memoria a breve termine di una persona è limitata, così come per i modelli generativi.
 
-如要進一步瞭解模型運作方式，請參閱[生成模型指南](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=zh-tw#under-the-hood)。
+Puoi scoprire di più sul funzionamento dei modelli nel nostro [documento sui modelli generativi
+guide](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=it#under-the-hood).
 
-## 開始使用長內容
+## Inizia a utilizzare il contesto lungo
 
-舊版生成模型一次只能處理 8,000 個權杖。新版模型更進一步，可接受 32,000 個，甚至是 128,000 個權杖。Gemini 是第一個可接受 100 萬個權杖的模型。
+Le versioni precedenti dei modelli generativi erano in grado di elaborare solo 8000 token alla volta. I modelli più recenti hanno spinto questo limite accettando 32.000 o persino 128.000 token. Gemini è il primo modello in grado di accettare 1 milione di token.
 
-實務上，100 萬個權杖會如下所示：
+In pratica, 1 milione di token sarebbero:
 
-- 50,000 行程式碼 (每行標準 80 個半形字元)
-- 過去 5 年內傳送的所有簡訊
-- 8 本平均長度的英文小說
-- 超過 200 集平均長度的 Podcast 轉錄稿
+- 50.000 righe di codice (con gli 80 caratteri standard per riga)
+- Tutti gli SMS che hai inviato negli ultimi 5 anni
+- 8 romanzi in inglese di lunghezza media
+- Trascrizioni di oltre 200 puntate di podcast di lunghezza media
 
-許多其他模型常見的脈絡窗口較小，因此通常需要採取策略，例如任意捨棄舊訊息、摘要內容、搭配向量資料庫使用 RAG，或篩選提示來節省權杖。
+Le finestre contestuali più limitate comuni in molti altri modelli spesso richiedono strategie come l'eliminazione arbitraria di messaggi precedenti, il riepilogo dei contenuti, l'utilizzo di RAG con database vettoriali o il filtraggio dei prompt per salvare i token.
 
-雖然這些技術在特定情境中仍有價值，但 Gemini 的脈絡窗口範圍廣泛，因此建議採用更直接的方法：預先提供所有相關資訊。Gemini 模型專為龐大的脈絡功能而打造，因此展現了強大的脈絡內學習能力。舉例來說，Gemini 僅使用情境內教學教材 (500 頁的參考文法、字典和約 400 個平行句子)，就[學會將英文翻譯成卡拉芒文](https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf)。卡拉芒文是巴布亞語言，使用者不到 200 人，但 Gemini 的翻譯品質與使用相同教材的人類學習者相近。這說明 Gemini 長脈絡功能帶來的典範轉移，透過強大的脈絡內學習功能，開創全新可能性。
+Sebbene queste tecniche rimangano preziose in scenari specifici, la finestra contestuale estesa di Gemini invita a un approccio più diretto: fornire in anticipo tutte le informazioni pertinenti. Poiché i modelli Gemini sono stati creati appositamente con funzionalità di contesto massicce, dimostrano un potente apprendimento in-context. Ad
+esempio, utilizzando solo materiali didattici in-context (una grammatica di riferimento di 500 pagine,
+un dizionario e circa 400 frasi parallele), Gemini
+[ha imparato a tradurre](https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf)
+dall'inglese al kalamang, una lingua papuana con
+meno di 200 parlanti, con una qualità simile a quella di uno studente umano che utilizza gli stessi
+materiali. Questo illustra il cambio di paradigma reso possibile dal contesto lungo di Gemini, che offre nuove possibilità grazie a un solido apprendimento in-context.
 
-## 長脈絡用途
+## Casi d'uso del contesto lungo
 
-雖然大多數生成式模型的標準用途仍是文字輸入，但 Gemini 模型系列可支援全新的多模態用途。這些模型可原生理解文字、影片、音訊和圖片。並搭配 [Gemini API，可接收多模態檔案類型](https://ai.google.dev/gemini-api/docs/prompting_with_media?hl=zh-tw)，方便使用。
+Sebbene il caso d'uso standard per la maggior parte dei modelli generativi sia ancora l'input di testo, la famiglia di modelli Gemini consente un nuovo paradigma di casi d'uso multimodali. Questi modelli possono comprendere in modo nativo testo, video, audio e immagini. Sono
+accompagnati dall'[API Gemini che accetta tipi di file multimodali
+per
+comodità.](https://ai.google.dev/gemini-api/docs/prompting_with_media?hl=it)
 
-### 長篇文字
+### Testo in formato lungo
 
-事實證明，文字是 LLM 發展動能背後的重要智慧層。如前文所述，LLM 的許多實用限制，都是因為沒有足夠大的脈絡視窗來執行特定工作。這促使檢索增強生成 (RAG) 和其他技術迅速普及，可動態為模型提供相關情境資訊。現在，隨著脈絡窗口越來越大，我們可以使用新技術，發掘新的應用情境。
+Il testo si è dimostrato il livello di intelligence alla base di gran parte dello slancio intorno agli LLM. Come accennato in precedenza, gran parte della limitazione pratica degli LLM era dovuta al fatto di non avere una finestra contestuale sufficientemente grande per eseguire determinate attività. Ciò ha portato alla rapida adozione della generazione RAG (Retrieval Augmented Generation) e di altre tecniche che forniscono dinamicamente al modello informazioni contestuali pertinenti. Ora, con finestre contestuali sempre più grandi, sono disponibili nuove tecniche che sbloccano nuovi casi d'uso.
 
-文字型長背景資訊的新興和標準用途包括：
+Alcuni casi d'uso emergenti e standard per il contesto lungo basato su testo includono:
 
-- 生成大量文字的摘要
-  - 如果使用較小的脈絡模型，先前的摘要選項會需要滑動視窗或其他技術，才能在將新權杖傳遞至模型時，保留先前章節的狀態
-- 問答
-  - 由於脈絡量有限，且模型的事實回憶率偏低，因此過去只有 RAG 才能做到這點
-- 代理工作流程
-  - 文字是代理程式記錄已完成事項和待辦事項的基礎，如果缺乏世界和代理程式目標的相關資訊，代理程式的可靠性就會受到限制
+- Riassunto di grandi corpus di testo
+  - Le opzioni di riepilogo precedenti con modelli di contesto più piccoli richiederebbero una finestra scorrevole o un'altra tecnica per mantenere lo stato delle sezioni precedenti man mano che nuovi token vengono passati al modello
+- Domande e risposte
+  - Storicamente, ciò era possibile solo con RAG, data la quantità limitata di contesto e il richiamo fattuale dei modelli era basso
+- Workflow agentici
+  - Il testo è alla base del modo in cui gli agenti mantengono lo stato di ciò che hanno fatto e di ciò che devono fare; non avere informazioni sufficienti sul mondo e sull'obiettivo dell'agente è una limitazione dell'affidabilità degli agenti
 
-[大量樣本脈絡學習](https://arxiv.org/pdf/2404.11018)是長脈絡模型最獨特的功能之一。研究顯示，採用常見的「單樣本」或「多樣本」範例範式，向模型呈現一或多個工作範例，並將範例擴增至數百、數千，甚至數十萬個，可帶來全新的模型功能。研究結果顯示，這種多樣本方法與針對特定工作微調的模型效能相近。如果 Gemini 模型在某些應用情境中的效能仍不足以用於正式版，可以嘗試多樣本方法。如您稍後在長內容最佳化一節中瞭解，內容快取可大幅降低這類高輸入權杖工作負載的成本，在某些情況下甚至能縮短延遲時間。
+[L'apprendimento in-context many-shot](https://arxiv.org/pdf/2404.11018) è una delle
+funzionalità più esclusive sbloccate dai modelli di contesto lungo. La ricerca ha dimostrato che l'adozione del paradigma di esempio comune "single shot" o "multi-shot", in cui al modello vengono presentati uno o pochi esempi di un'attività, e il suo aumento a centinaia, migliaia o persino centinaia di migliaia di esempi, può portare a nuove funzionalità del modello. È stato inoltre dimostrato che questo approccio many-shot ha un rendimento simile a quello dei modelli ottimizzati per un'attività specifica. Per i casi d'uso in cui il rendimento di un modello Gemini non è ancora sufficiente per un lancio in produzione, puoi provare l'approccio many-shot. Come potresti esplorare più avanti nella sezione sull'ottimizzazione del contesto lungo, la memorizzazione nella cache del contesto rende questo tipo di workload con token di input elevati molto più fattibile dal punto di vista economico e persino con una latenza inferiore in alcuni casi.
 
-### 長篇影片
+### Video in formato lungo
 
-長期以來，由於影片本身缺乏無障礙功能，因此影片內容的實用性受到限制。難以快速瀏覽內容、轉錄稿經常無法捕捉影片的細微差異，而且大多數工具無法同時處理圖片、文字和音訊。Gemini 的長文脈文字功能可解讀多模態輸入內容，並持續提供優異的推理和問答能力。
+L'utilità dei contenuti video è stata a lungo limitata dalla mancanza di accessibilità del mezzo stesso. Era difficile sfogliare i contenuti, le trascrizioni spesso non riuscivano a cogliere le sfumature di un video e la maggior parte degli strumenti non elabora immagini, testo e audio insieme. Con Gemini, le funzionalità di testo in contesto lungo si traducono nella capacità di ragionare e rispondere a domande su input multimodali con un rendimento costante.
 
-影片長背景資訊的新興和標準用途包括：
+Alcuni casi d'uso emergenti e standard per il contesto lungo dei video includono:
 
-- 影片問答
-- 影片記憶體，如 [Google 的 Project Astra](https://deepmind.google/technologies/gemini/project-astra/?hl=zh-tw) 所示
-- 影片字幕
-- 影片推薦系統，透過新的多模態理解功能豐富現有中繼資料
-- 影片客製化：查看資料和相關影片中繼資料，然後移除與觀眾無關的影片部分
-- 影片內容審查
-- 即時影片處理
+- Domande e risposte sui video
+- Memoria video, come mostrato con [il progetto Astra di Google](https://deepmind.google/technologies/gemini/project-astra/?hl=it)
+- Sottotitolaggio video
+- Sistemi di consigli sui video, arricchendo i metadati esistenti con una nuova comprensione multimodale
+- Personalizzazione dei video, esaminando un corpus di dati e i metadati video associati e poi rimuovendo le parti dei video non pertinenti per lo spettatore
+- Moderazione dei contenuti video
+- Elaborazione video in tempo reale
 
-處理影片時，請務必考量[影片如何轉換為權杖](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw#media-token)，這會影響帳單和用量限制。如要進一步瞭解如何使用影片檔案提示，請參閱[提示指南](https://ai.google.dev/gemini-api/docs/prompting_with_media?lang=python&hl=zh-tw#prompting-with-videos)。
+Quando lavori con i video, è importante considerare come i [video vengono
+elaborati in token](https://ai.google.dev/gemini-api/docs/tokens?hl=it#media-token), il che influisce sulla
+fatturazione e sui limiti di utilizzo. Puoi scoprire di più sui prompt con i file video in
+la [guida ai prompt](https://ai.google.dev/gemini-api/docs/prompting_with_media?lang=python&hl=it#prompting-with-videos).
 
-### 長篇音訊
+### Audio in formato lungo
 
-Gemini 模型是首批可解讀音訊的本質多模態大型語言模型。過去，開發人員通常會將多個特定領域的模型串連在一起，例如語音轉文字模型和文字轉文字模型，藉此處理音訊。這導致執行多個往返要求時需要額外延遲，且效能下降通常歸因於多個模型設定的架構中斷連線。
+I modelli Gemini sono stati i primi modelli linguistici di grandi dimensioni nativamente multimodali in grado di comprendere l'audio. Storicamente, il workflow tipico degli sviluppatori prevedeva l'unione di più modelli specifici del dominio, come un modello di conversione della voce in testo e un modello da testo a testo, per elaborare l'audio. Ciò ha comportato una latenza aggiuntiva richiesta dall'esecuzione di più richieste di andata e ritorno e una riduzione del rendimento solitamente attribuita alle architetture disconnesse della configurazione di più modelli.
 
-音訊背景資訊的新興和標準用途包括：
+Alcuni casi d'uso emergenti e standard per il contesto audio includono:
 
-- 即時語音轉錄及翻譯
-- Podcast / 影片問答
-- 會議語音轉錄和摘要
-- 語音助理
+- Trascrizione e traduzione in tempo reale
+- Domande e risposte su podcast / video
+- Trascrizione e riepilogo delle riunioni
+- Assistenti vocali
 
-如要進一步瞭解如何使用音訊檔案提示，請參閱[提示指南](https://ai.google.dev/gemini-api/docs/prompting_with_media?lang=python&hl=zh-tw#prompting-with-videos)。
+Puoi scoprire di più sui prompt con i file audio nella [guida
+ai prompt](https://ai.google.dev/gemini-api/docs/prompting_with_media?lang=python&hl=it#prompting-with-videos).
 
-## 長脈絡最佳化
+## Ottimizzazioni del contesto lungo
 
-使用長脈絡和 Gemini 模型時，主要最佳化方式是使用[脈絡快取](https://ai.google.dev/gemini-api/docs/caching?hl=zh-tw)。除了先前無法在單一要求中處理大量詞元，另一個主要限制是費用。假設您有一個「與資料對話」應用程式，使用者上傳了 10 份 PDF、一部影片和一些工作文件。過去，您必須使用較複雜的檢索增強生成 (RAG) 工具/框架來處理這些要求，並支付大量權杖費用，才能將資料移至內容視窗。現在您可以快取使用者上傳的檔案，並按小時付費儲存這些檔案。舉例來說，使用 Gemini Flash 時，每項要求的輸入 / 輸出費用比標準輸入 / 輸出費用低約 4 倍，因此如果使用者與資料的對話次數夠多，您身為開發人員就能大幅節省費用。
+L'ottimizzazione principale quando lavori con il contesto lungo e i modelli Gemini
+è l'utilizzo della memorizzazione nella cache del [contesto](https://ai.google.dev/gemini-api/docs/caching?hl=it). Oltre alla precedente impossibilità di elaborare molti token in una singola richiesta, l'altro vincolo principale era il costo. Se hai un'app "Chatta con i tuoi dati" in cui un utente carica 10 PDF, un video e alcuni documenti di lavoro, in passato avresti dovuto lavorare con uno strumento/framework di generazione RAG (Retrieval Augmented Generation) più complesso per elaborare queste richieste e pagare un importo significativo per i token spostati nella finestra contestuale. Ora puoi memorizzare nella cache i file caricati dall'utente e pagare per archiviarli su base oraria. Il costo di input / output per richiesta con Gemini Flash, ad esempio, è circa 4 volte inferiore al costo di input / output standard, quindi se l'utente chatta abbastanza con i suoi dati, diventa un enorme risparmio sui costi per te come sviluppatore.
 
-## 長脈絡限制
+## Limitazioni del contesto lungo
 
-在本指南的各個章節中，我們說明瞭 Gemini 模型如何在各種大海撈針檢索評估中，展現優異的效能。這些測試會考量最基本的設定，也就是您要尋找單一針頭。如果有多個「針」或特定資訊要尋找，模型的準確度會降低。成效可能會因脈絡而異。請務必考慮這點，因為擷取正確資訊和成本之間存在固有的取捨關係。單一查詢的準確率可達 99%，但每次傳送查詢時，您都必須支付輸入權杖費用。因此，如要擷取 100 筆資訊，且需要 99% 的效能，您可能需要傳送 100 個要求。這就是一個很好的例子，說明內容快取如何大幅降低使用 Gemini 模型相關的成本，同時維持高效能。
+In varie sezioni di questa guida, abbiamo parlato di come i modelli Gemini raggiungono un rendimento elevato in varie valutazioni di recupero di un ago in un pagliaio. Questi test considerano la configurazione più semplice, in cui hai un singolo ago che stai cercando. Nei casi in cui potresti avere più "aghi" o informazioni specifiche che stai cercando, il modello non funziona con la stessa precisione. Il rendimento può variare notevolmente a seconda del contesto. È importante tenerlo presente perché esiste un compromesso intrinseco tra il recupero delle informazioni corrette e il costo. Puoi ottenere circa il 99% su una singola query, ma devi pagare il costo del token di input ogni volta che invii la query. Quindi, per recuperare 100 informazioni, se hai bisogno di un rendimento del 99%, probabilmente dovrai inviare 100 richieste. Questo è un buon esempio di dove la memorizzazione nella cache del contesto può ridurre significativamente il costo associato all'utilizzo dei modelli Gemini mantenendo un rendimento elevato.
 
-## 常見問題
+## Domande frequenti
 
-### 在脈絡窗口中，查詢的最佳位置在哪裡？
+### Qual è il posto migliore per inserire la query nella finestra contestuale?
 
-在大多數情況下，如果整體脈絡很長，將查詢 / 問題放在提示結尾 (所有其他脈絡之後)，模型效能會更好。
+Nella maggior parte dei casi, soprattutto se il contesto totale è lungo, il rendimento del modello sarà migliore se inserisci la query / domanda alla fine del prompt (dopo tutto l'altro contesto).
 
-### 在查詢中加入更多權杖時，模型效能是否會受到影響？
+### Perdo il rendimento del modello quando aggiungo altri token a una query?
 
-一般來說，如果不需要將權杖傳遞至模型，最好避免傳遞。不過，如果有一大段含有某些資訊的詞元，且想詢問與該資訊相關的問題，模型就能準確擷取資訊 (在許多情況下，準確率高達 99%)。
+In genere, se non hai bisogno che i token vengano passati al modello, è meglio evitarlo. Tuttavia, se hai un blocco di token di grandi dimensioni con alcune informazioni e vuoi porre domande su queste informazioni, il modello è in grado di estrarre queste informazioni (fino al 99% di accuratezza in molti casi).
 
-### 如何透過長內容查詢降低費用？
+### Come posso ridurre i costi con le query di contesto lungo?
 
-如果您有一組類似的權杖 / 脈絡想重複使用多次，[脈絡快取](https://ai.google.dev/gemini-api/docs/caching?hl=zh-tw)功能有助於減少與該資訊相關的提問費用。
+[Se hai un insieme simile di token / contesto che vuoi riutilizzare più volte, la memorizzazione nella cache del contesto può aiutarti a ridurre i costi associati alla richiesta di informazioni su queste informazioni.](https://ai.google.dev/gemini-api/docs/caching?hl=it)
 
-### 背景資訊長度會影響模型延遲嗎？
+### La finestra contestuale influisce sulla latenza del modello?
 
-無論要求大小為何，都會有固定的延遲時間，但一般來說，查詢時間越長，延遲時間 (第一個權杖的時間) 就越長。
+Esiste una quantità fissa di latenza in qualsiasi richiesta, indipendentemente dalle dimensioni, ma in genere le query più lunghe avranno una latenza maggiore (tempo al primo token).
 
-提供意見
+Invia feedback
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-上次更新時間：2026-06-22 (世界標準時間)。
+Ultimo aggiornamento 2026-06-22 UTC.
 
-想進一步說明嗎？
+Vuoi dirci altro?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-22 (世界標準時間)。"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-06-22 UTC."],[],[]]

@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=fr
-fetched_at: 2026-09-07T05:46:01.575908+00:00
-title: "Environnements dans les agents g\u00e9r\u00e9s \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=es-419
+fetched_at: 2026-09-14T05:42:15.421418+00:00
+title: "Entornos en agentes administrados \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
+Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-Envoyer des commentaires
+Enviar comentarios
 
-# Environnements dans les agents gérés
+# Entornos en agentes administrados
 
-Les environnements sont des bacs à sable Linux gérés qui offrent aux agents un espace isolé pour exécuter du code et conserver des fichiers. Ils sont dissociés du contexte d'interaction. Vous pouvez donc réutiliser le même environnement dans plusieurs interactions ou repartir de zéro à tout moment.
+Los entornos son zonas de pruebas de Linux administradas que les brindan a los agentes un lugar aislado para ejecutar código y conservar archivos. Están separados del contexto de interacción, por lo que puedes reutilizar el mismo entorno en varias interacciones o comenzar de nuevo en cualquier momento.
 
-L'exemple suivant montre comment créer une interaction avec un nouvel environnement distant et récupérer son ID :
+En el siguiente ejemplo, se muestra cómo crear una interacción con un entorno remoto nuevo y recuperar su ID:
 
 ### Python
 
@@ -67,17 +67,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Paramètre `environment`
+## El parámetro `environment`
 
-Le paramètre `environment` accepte trois formes :
+El parámetro `environment` acepta tres formas:
 
-| Formulaire | Exemple | Quand les utiliser ? |
+| Técnica | Ejemplo | Cuándo debe utilizarse |
 | --- | --- | --- |
-| `"remote"` | `environment="remote"` | Provisionner un nouveau bac à sable. |
-| ID de l'environnement | `environment="env_abc123"` | Réutiliser un bac à sable existant avec tous ses fichiers et packages. |
-| Objet de configuration | `environment={...}` | Provisionner un nouveau bac à sable avec des sources, des règles réseau ou les deux. |
+| `"remote"` | `environment="remote"` | Aprovisiona una zona de pruebas nueva. |
+| ID del entorno | `environment="env_abc123"` | Reutiliza una zona de pruebas existente con todos sus archivos y paquetes. |
+| Objeto de configuración | `environment={...}` | Aprovisiona una zona de pruebas nueva con fuentes, reglas de red o ambas. |
 
-Les exemples suivants illustrent les trois façons d'utiliser le paramètre `environment`.
+En los siguientes ejemplos, se muestran las tres formas de usar el parámetro `environment`.
 
 ### Python
 
@@ -205,10 +205,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Configurer un environnement
+## Configura un entorno
 
-Une façon de configurer un environnement consiste à indiquer à l'agent ce que vous devez installer.
-Il gère la résolution des dépendances et le dépannage. Une fois l'environnement prêt, enregistrez l'`environment_id` et réutilisez-le.
+Una forma de configurar un entorno es indicarle al agente lo que necesitas instalar.
+Se encarga de la resolución de dependencias y la solución de problemas. Una vez que el entorno esté listo, guarda el `environment_id` y vuelve a usarlo.
 
 ### Python
 
@@ -285,15 +285,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Monter à partir d'une source
+### Realiza el montaje desde una fuente
 
-Si vous savez exactement quels fichiers l'agent doit utiliser, montez-les en un seul appel au lieu d'itérer. L'objet de configuration `environment` accepte un tableau `sources` avec trois types :
+Si sabes exactamente qué archivos necesita el agente, móntalos en una sola llamada en lugar de iterar. El objeto de configuración `environment` acepta un array `sources` con tres tipos:
 
-| Type de source | Valeur `type` | Description | Limite |
+| Tipo de fuente | Valor `type` | Descripción | Límite |
 | --- | --- | --- | --- |
-| Dépôt Git | `repository` | Clone un dépôt à partir d'une URL dans le bac à sable au niveau de `target`. | 500 Mo |
-| Cloud Storage | `gcs` | Copie un fichier ou un répertoire de Cloud Storage dans le bac à sable au niveau de `target`. | 2 Go |
-| Contenu intégré | `inline` | Écrit du contenu texte brut dans un fichier du bac à sable au niveau de `target`. | 1 Mo par fichier, 2 Mo au total |
+| Repositorio de Git | `repository` | Clona un repositorio desde una URL en la zona de pruebas en `target`. | 500 MB |
+| Cloud Storage | `gcs` | Copia un archivo o directorio de Cloud Storage en la zona de pruebas en `target`. | 2 GB |
+| Contenido intercalado | `inline` | Escribe contenido de texto sin procesar en un archivo de la zona de pruebas en `target`. | 1 MB por archivo, 2 MB en total |
 
 ### Python
 
@@ -398,20 +398,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Vous pouvez combiner les deux approches : monter des sources connues de manière déclarative, puis itérer avec des interactions de suivi pour installer des packages ou exécuter des scripts de configuration. Vous ne pouvez pas définir la racine (`/`) comme cible lorsque vous ajoutez une source personnalisée. Vous devez toujours spécifier un sous-répertoire.
+Puedes combinar ambos enfoques: montar fuentes conocidas de forma declarativa y, luego, iterar con interacciones de seguimiento para instalar paquetes o ejecutar secuencias de comandos de configuración. No puedes establecer la raíz (`/`) como destino cuando agregas una fuente personalizada. Siempre debes especificar un subdirectorio.
 
-### Accroches
+### Ganchos
 
-Vous pouvez également monter un fichier de configuration `.agents/hooks.json` et des scripts d'interception personnalisés dans le bac à sable pour appliquer des garde-fous de sécurité ou exécuter des validations automatisées chaque fois que des outils sont exécutés. Pour obtenir des définitions de schéma et des exemples de code, consultez [Accroches](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=fr).
+También puedes montar un archivo de configuración `.agents/hooks.json` y secuencias de comandos de intercepción personalizadas en la zona de pruebas para aplicar barreras de seguridad o ejecutar validaciones automatizadas cada vez que se ejecuten las herramientas. Para obtener definiciones de esquemas y ejemplos de código, consulta [Ganchos](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=es-419).
 
-### Sources privées
+### Fuentes privadas
 
-Vous pouvez également télécharger des données à partir de dépôts GitHub privés ou de buckets Cloud Storage privés en ajoutant les identifiants dans la configuration réseau :
+También puedes descargar desde repositorios privados de GitHub o buckets privados de Cloud Storage agregando las credenciales en la configuración de red:
 
-Pour les **dépôts Git privés**, utilisez l'`Basic` authentification avec votre
-[jeton d'accès personnel GitHub
-(PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
-Encodez le jeton à l'aide de `x-oauth-basic` comme nom d'utilisateur :
+Para **repositorios privados de Git**, usa la autenticación `Basic` con tu
+[token de acceso personal (PAT) de GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
+Codifica el token con `x-oauth-basic` como nombre de usuario:
 
 ```
 echo -n "x-oauth-basic:ghp_YourPATHere" | base64
@@ -516,7 +515,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Pour les **buckets Cloud Storage privés**, utilisez un jeton de support OAuth 2.0 standard :
+Para **buckets privados de Cloud Storage**, usa un token del portador OAuth 2.0 estándar:
 
 ```
 gcloud auth print-access-token
@@ -621,25 +620,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Logiciel pré-installé
+## Software ya instalado
 
-Le bac à sable s'exécute sur Ubuntu et est fourni avec des environnements d'exécution et des packages courants pré-installés. L'agent peut installer des packages supplémentaires au moment de l'exécution à l'aide de `pip
-install` ou `npm install`. Les packages installés lors d'une interaction sont conservés lorsque vous réutilisez le même `environment_id`.
+La zona de pruebas se ejecuta en Ubuntu y viene con entornos de ejecución y paquetes comunes preinstalados. El agente puede instalar paquetes adicionales en el tiempo de ejecución con `pip
+install` o `npm install`. Los paquetes instalados durante una interacción persisten cuando vuelves a usar el mismo `environment_id`.
 
-| Catégorie | Packages pré-installés |
+| Categoría | Paquetes preinstalados |
 | --- | --- |
-| **Outils UNIX** | `curl`, `wget`, `git`, `rsync`, `unzip`, `ripgrep`, `fd-find`, `gawk`, `bc`, `tree`, `which`, `lsof`, `htop`, `jq`, `iproute2`, `procps`, `gcloud CLI` |
+| **Herramientas de UNIX** | `curl`, `wget`, `git`, `rsync`, `unzip`, `ripgrep`, `fd-find`, `gawk`, `bc`, `tree`, `which`, `lsof`, `htop`, `jq`, `iproute2`, `procps`, `gcloud CLI` |
 | **Python 3.12** | `numpy`, `pandas`, `requests`, `google-genai`, `beautifulsoup4`, `pyyaml`, `ast-grep-cli` |
 | **Node.js 22** | `create-next-app`, `create-vite`, `typescript` |
 
-## Configuration du réseau
+## Configuración de red
 
-Par défaut, les environnements disposent d'un accès réseau sortant illimité. Utilisez le champ `network` pour limiter le trafic sortant à des domaines spécifiques. Chaque règle spécifie un `domain` et un objet `transform` facultatif pour injecter des en-têtes dans les requêtes correspondantes. Ces en-têtes peuvent être uniques pour chaque interaction, et vous pouvez les mettre à jour pour le même environnement.
+De forma predeterminada, los entornos tienen acceso a la red de salida sin restricciones. Usa el campo `network` para restringir el tráfico de salida a dominios específicos. Cada regla especifica un `domain` y un objeto `transform` opcional para insertar encabezados en las solicitudes coincidentes. Estos encabezados pueden ser únicos por interacción, y puedes actualizarlos para el mismo entorno.
 
-| Champ | Type | Description |
+| Campo | Tipo | Descripción |
 | --- | --- | --- |
-| `domain` | `string` | Domaine à mettre en correspondance. Utilisez un nom d'hôte exact ou `*` pour tous les domaines. |
-| `transform` | `object` | Objet contenant des paires clé/valeur plates représentant les en-têtes à injecter dans les requêtes correspondantes, par exemple `{"Authorization": "Bearer ..."}`. |
+| `domain` | `string` | Dominio que se hará coincidir. Usa un nombre de host exacto o `*` para todos los dominios. |
+| `transform` | `object` | Objeto que contiene pares clave-valor planos que representan los encabezados que se insertarán en las solicitudes coincidentes, p.ej., `{"Authorization": "Bearer ..."}`. |
 
 ### Python
 
@@ -728,15 +727,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Lorsqu'une liste d'autorisation est définie, seules les requêtes adressées aux domaines explicitement listés sont autorisées. Vous pouvez utiliser des caractères génériques pour mettre en correspondance des sous-domaines (par exemple, `{"domain":
-"*.example.com"}`), mais notez que cela ne correspond pas au domaine racine
-`example.com`, qui doit être ajouté séparément. Pour autoriser tout autre trafic, tel
-que le routage de domaines non listés sans en-têtes injectés, ajoutez `{"domain": "*"}` comme entrée
-générique.
+Cuando se establece una lista de entidades permitidas, solo se permiten las solicitudes a los dominios que se enumeran de forma explícita. Puedes usar comodines para hacer coincidir subdominios (p.ej., `{"domain":
+"*.example.com"}`), pero ten en cuenta que esto no coincide con el dominio raíz
+`example.com`, que se debe agregar por separado. Para permitir todo el tráfico restante, como enrutar dominios no incluidos en la lista sin encabezados insertados, agrega `{"domain": "*"}` como una
+entrada de captura total.
 
-### Identifiants
+### Credenciales
 
-Vous pouvez ajouter des identifiants à utiliser par votre agent en ajoutant des transformations d'en-tête. Les identifiants sont injectés dans les en-têtes HTTP respectifs par un proxy de sortie. Ils ne sont jamais exposés dans le bac à sable en tant que variables d'environnement ou fichiers.
+Puedes agregar credenciales para que las use tu agente agregando transformaciones de encabezado. Un proxy de salida inserta las credenciales en los encabezados HTTP respectivos. Nunca se exponen dentro de la zona de pruebas como variables de entorno o archivos.
 
 ### Python
 
@@ -829,9 +827,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Désactiver l'accès au réseau
+### Inhabilita el acceso a la red
 
-Pour bloquer tout accès réseau sortant, définissez `network` sur `disabled` :
+Para bloquear todo el acceso a la red de salida, establece `network` en `disabled`:
 
 ### Python
 
@@ -887,10 +885,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Actualiser les identifiants
+### Actualiza las credenciales
 
-Les identifiants tels que les jetons d'accès et les clés API à courte durée de vie expirent.
-Vous pouvez les actualiser en transmettant l'`environment_id` existant avec une nouvelle configuration `network` lors de la prochaine interaction. Les nouvelles règles réseau remplacent complètement les précédentes, tandis que l'état du système de fichiers de l'environnement (packages installés, fichiers, dépôts) est conservé.
+Las credenciales, como los tokens de acceso y las claves de API de corta duración, vencen.
+Puedes actualizarlas pasando el `environment_id` existente junto con una nueva configuración `network` en la siguiente interacción. Las nuevas reglas de red reemplazan por completo las anteriores, mientras que se conserva el estado del sistema de archivos del entorno (paquetes instalados, archivos, repositorios).
 
 ### Python
 
@@ -1017,26 +1015,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Cycle de vie de l'environnement
+## Ciclo de vida del entorno
 
-Les environnements suivent ce cycle de vie :
+Los entornos siguen este ciclo de vida:
 
-| État | Comportement |
+| Estado | Comportamiento |
 | --- | --- |
-| **Créé** | Provisionné lorsqu'une interaction spécifie `environment: "remote"` ou un objet de configuration. |
-| **Actif** | En cours d'exécution pendant une interaction. |
-| **Inactif** | Instantané automatique et arrêté après 15 minutes d'inactivité. |
-| **Hors connexion** | Conservé pendant sept jours depuis la dernière activité. Peut être repris en transmettant son ID. |
-| **Supprimé** | Supprimé automatiquement du système après l'expiration de la durée de conservation TTL de sept jours ou lors d'une suppression manuelle. |
+| **Creado** | Se aprovisiona cuando una interacción especifica `environment: "remote"` o un objeto de configuración. |
+| **Activo** | Se ejecuta mientras una interacción está en curso. |
+| **Inactivo** | Se toma una instantánea automática y se detiene después de 15 minutos de inactividad. |
+| **Sin conexión** | Se retiene durante 7 días desde la última actividad. Se puede reanudar pasando su ID. |
+| **Eliminado** | Se quita del sistema automáticamente después de que vence la retención de TTL de 7 días o cuando se borra de forma manual. |
 
-## API Environments
+## API de Environments
 
-Vous pouvez utiliser l'API Environments pour gérer les sessions de bac à sable de manière programmatique.
-L'énumération des environnements vous permet de découvrir les ID de session actifs et de récupérer l'état si une connexion client se termine lors d'une tâche de longue durée. Vous pouvez également inspecter les métadonnées de session et supprimer explicitement les environnements lorsque les workflows se terminent au lieu d'attendre l'expiration automatique de la durée de conservation TTL.
+Puedes usar la API de Environments para administrar sesiones de zona de pruebas de forma programática.
+La enumeración de entornos te permite descubrir IDs de sesión activos y recuperar el estado si finaliza una conexión del cliente durante una tarea de larga duración. También puedes inspeccionar los metadatos de la sesión y borrar entornos de forma explícita cuando finalizan los flujos de trabajo en lugar de esperar el vencimiento automático del TTL.
 
-### Répertorier les environnements
+### Enumera entornos
 
-Répertoriez les environnements actifs appartenant à votre projet. Utilisez les paramètres de pagination pour contrôler la taille de lot des réponses.
+Enumera los entornos activos que pertenecen a tu proyecto. Usa parámetros de paginación para controlar el tamaño del lote de respuesta.
 
 ### Python
 
@@ -1069,7 +1067,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments?pageS
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-La réponse ressemble à ce qui suit :
+El resultado es similar al siguiente:
 
 ```
 {
@@ -1087,9 +1085,9 @@ La réponse ressemble à ce qui suit :
 }
 ```
 
-### Obtenir un environnement
+### Obtén un entorno
 
-Récupérez les métadonnées et les informations de configuration d'un environnement spécifique par son nom de ressource.
+Recupera metadatos y detalles de configuración para un entorno específico por su nombre de recurso.
 
 ### Python
 
@@ -1120,7 +1118,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/YOUR_
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-La réponse ressemble à ce qui suit :
+El resultado es similar al siguiente:
 
 ```
 {
@@ -1146,9 +1144,9 @@ La réponse ressemble à ce qui suit :
 }
 ```
 
-### Supprimer un environnement
+### Borra un entorno
 
-Arrêtez et supprimez explicitement un environnement pour libérer de l'espace sur les ressources du bac à sable lorsque vos tâches ou pipelines sont terminés.
+Finaliza y borra un entorno de forma explícita para limpiar los recursos de la zona de pruebas cuando finalicen tus tareas o canalizaciones.
 
 ### Python
 
@@ -1177,9 +1175,9 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/environments/YO
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Télécharger des fichiers depuis l'environnement
+## Descarga archivos del entorno
 
-L'agent crée des fichiers dans le bac à sable lors de l'exécution. Vous pouvez télécharger l'instantané complet de l'environnement sous forme de fichier tar à l'aide de l'API Files :
+El agente crea archivos dentro de la zona de pruebas durante la ejecución. Puedes descargar la instantánea completa del entorno como un archivo tar con la API de Files:
 
 ### Python
 
@@ -1274,43 +1272,43 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 #   -o snapshot.tar
 ```
 
-## Tarifs et ressources
+## Precios y recursos
 
-Chaque environnement s'exécute avec des allocations de ressources fixes :
+Cada entorno se ejecuta con asignaciones de recursos fijas:
 
-| Ressource | Valeur |
+| Recurso | Valor |
 | --- | --- |
-| **Processeur** | 4 cœurs |
-| **Mémoire** | 16 Go |
+| **CPU** | 4 núcleos |
+| **Memoria** | 16 GB |
 
-Le calcul de l'environnement (processeur, mémoire, exécution du bac à sable) **n'est pas facturé** pendant la période de preview. Consultez
-[Tarifs](https://ai.google.dev/gemini-api/docs/pricing?hl=fr#pricing-for-agents) pour
-connaître les coûts des jetons d'agent.
+El procesamiento del entorno (CPU, memoria, ejecución de zona de pruebas) **no se factura** durante el período de vista previa. Consulta
+[Precios](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419#pricing-for-agents) para
+conocer los costos de los tokens de agente.
 
-## Limites
+## Limitaciones
 
-- **État de la preview** : les environnements et les agents gérés sont en preview. Les fonctionnalités et les schémas peuvent changer.
-- **Taille de la source intégrée** : les sources intégrées sont limitées à 1 Mo par fichier et à 2 Mo au total pour tous les fichiers.
-- **Taille de la source** : les dépôts Git sont limités à 500 Mo et les dépôts Cloud Storage à 2 Go.
-- **Démarrage de l'environnement** : le provisionnement d'un nouvel environnement prend jusqu'à cinq secondes. Les grands dépôts sources peuvent augmenter ce délai.
-- **Expiration de l'environnement** : les environnements hors connexion inactifs sont conservés pendant sept jours avant d'expirer à l'aide du nettoyage automatique de la durée de conservation TTL. La transmission d'un ID d'environnement expiré ou non valide renvoie une erreur `404 Not Found`.
-- **Compatibilité avec les fichiers** : l'agent est actuellement limité à la lecture de fichiers texte et image. La compatibilité avec les fichiers binaires n'est pas encore disponible.
-- **Aucun montage à partir de la racine** : vous ne pouvez pas définir la racine (`/`) comme cible lorsque vous ajoutez une source personnalisée. Vous devez toujours spécifier un sous-répertoire.
+- **Estado de la versión preliminar:** Los entornos y los agentes administrados están en versión preliminar. Las funciones y los esquemas pueden cambiar.
+- **Tamaño de la fuente intercalada:** Las fuentes intercaladas están limitadas a 1 MB por archivo y a 2 MB en total en todos los archivos.
+- **Tamaño de la fuente**: Los repositorios de Git están limitados a 500 MB y los repositorios de Cloud Storage a 2 GB.
+- **Inicio del entorno:** El aprovisionamiento de un entorno nuevo tarda hasta ~5 segundos. Los repositorios de fuentes grandes pueden aumentar este tiempo.
+- **Vencimiento del entorno:** Los entornos sin conexión inactivos se retienen durante 7 días antes de vencer con la limpieza automática del TTL. Si se pasa un ID de entorno vencido o no válido, se muestra un error `404 Not Found`.
+- **Compatibilidad con archivos:** Actualmente, el agente está restringido a la lectura de archivos de texto y de imagen. La compatibilidad con archivos binarios aún no está disponible.
+- **No se realiza el montaje desde la raíz:** No puedes establecer la raíz (`/`) como destino cuando agregas una fuente personalizada. Siempre debes especificar un subdirectorio.
 
-## Étape suivante
+## ¿Qué sigue?
 
-- [Présentation des agents](https://ai.google.dev/gemini-api/docs/agents?hl=fr) : découvrez les concepts de base des agents gérés.
-- [Guide de démarrage rapide](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=fr) : commencez à créer des conversations multitours et des flux.
-- [Agent Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr) : découvrez les fonctionnalités, les outils, la sélection de modèles et les tarifs de l'agent par défaut.
-- [Créer des agents personnalisés](https://ai.google.dev/gemini-api/docs/custom-agents?hl=fr) : définissez vos propres agents à l'aide de `AGENTS.md` et `SKILL.md`.
-- [Accroches](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=fr) : appliquez des garde-fous de sécurité et exécutez des validations d'effets secondaires dans le bac à sable.
+- [Descripción general de los agentes](https://ai.google.dev/gemini-api/docs/agents?hl=es-419): Obtén información sobre los conceptos básicos de los agentes administrados.
+- [Guía de inicio rápido](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=es-419): Comienza a compilar con conversaciones de varios turnos y transmisión.
+- [Agente antigravedad](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419): Explora las capacidades, las herramientas, la selección de modelos y los precios del agente predeterminado.
+- [Compila agentes personalizados](https://ai.google.dev/gemini-api/docs/custom-agents?hl=es-419): Define tus propios agentes con `AGENTS.md` y `SKILL.md`.
+- [Ganchos](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=es-419): Aplica barreras de seguridad y ejecuta validaciones de efectos secundarios dentro de la zona de pruebas.
 
-Envoyer des commentaires
+Enviar comentarios
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-Dernière mise à jour le 2026/08/19 (UTC).
+Última actualización: 2026-09-11 (UTC)
 
-Voulez-vous nous donner plus d'informations ?
+¿Quieres brindar más información?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/08/19 (UTC)."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-09-11 (UTC)"],[],[]]

@@ -1,273 +1,274 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=th
-fetched_at: 2026-09-07T05:41:50.009425+00:00
-title: "\u0e20\u0e39\u0e21\u0e34\u0e20\u0e32\u0e04\u0e17\u0e35\u0e48\u0e1e\u0e23\u0e49\u0e2d\u0e21\u0e43\u0e2b\u0e49\u0e1a\u0e23\u0e34\u0e01\u0e32\u0e23\u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a Google AI Studio \u0e41\u0e25\u0e30 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=tr
+fetched_at: 2026-09-14T05:40:53.723243+00:00
+title: "Google AI Studio ve Gemini API'nin kullan\u0131labildi\u011fi b\u00f6lgeler \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-ส่งความคิดเห็น
+Geri bildirim gönderin
 
-# ภูมิภาคที่พร้อมให้บริการสำหรับ Google AI Studio และ Gemini API
+# Google AI Studio ve Gemini API'nin kullanılabildiği bölgeler
 
-หากคุณมาที่หน้านี้ขณะพยายามเข้าถึง [Google AI Studio](https://aistudio.google.com/?hl=th) อาจเกิดจากสาเหตุใดสาเหตุหนึ่งต่อไปนี้
+[Google AI Studio](https://aistudio.google.com/?hl=tr)'ya erişmeye çalışırken bu sayfaya yönlendirildiyseniz bunun nedeni aşağıdakilerden biri olabilir:
 
-- **ข้อจำกัดระดับภูมิภาค**: Google AI Studio ไม่พร้อมให้บริการในภูมิภาคของคุณ ดูรายการภูมิภาคที่รองรับได้ที่ส่วนด้านล่าง
-- **ข้อกำหนดด้านอายุ**: คุณมีอายุไม่ถึงข้อกำหนดด้านอายุขั้นต่ำ (ตั้งแต่ 18 ปีขึ้นไป) ในการเข้าถึงบริการนี้
-- **การยืนยันบัญชี**: คุณอาจมีสิทธิ์เข้าถึงบริการ แต่ยังไม่ได้[ยืนยันอายุ](https://support.google.com/accounts/answer/10071085?hl=th)ในบัญชี Google
+- **Bölgesel kısıtlamalar**: Google AI Studio, bölgenizde kullanılamıyor. Desteklenen bölgelerin listesi için aşağıdaki bölüme bakın.
+- **Yaş şartları**: Bu hizmete erişmek için minimum yaş şartını (18 yaş) karşılamıyor olabilirsiniz.
+- **Hesap doğrulama**: Hizmete erişebilirsiniz ancak Google Hesabınızda henüz [yaşınızı doğrulamamışsınızdır](https://support.google.com/accounts/answer/10071085?hl=tr).
 
-ดูรายละเอียดเพิ่มเติมเกี่ยวกับข้อกำหนดได้ใน[ข้อกำหนดในการให้บริการ](https://ai.google.dev/gemini-api/terms?hl=th)
+Koşullarla ilgili daha fazla bilgi için [Hizmet Şartlarımızı](https://ai.google.dev/gemini-api/terms?hl=tr) inceleyin.
 
-## ภูมิภาคที่สามารถใช้บริการได้
+## Kullanılabildiği bölgeler
 
-Gemini API และ Google AI Studio พร้อมให้บริการในประเทศและเขตแดนต่อไปนี้ หากคุณไม่ได้อยู่ในประเทศหรือเขตแดนเหล่านี้ ให้ลองใช้
-[Gemini API ในแพลตฟอร์ม Agent ของ Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform?hl=th)
+kullanarak kontrol edebilirsiniz.
 
-- แอลเบเนีย
-- แอลจีเรีย
-- อเมริกันซามัว
-- อันดอร์รา
-- แองโกลา
-- แองกวิลลา
-- แอนตาร์กติกา
-- แอนติกัวและบาร์บูดา
-- อาร์เจนตินา
-- อาร์เมเนีย
-- อารูบา
-- ออสเตรเลีย
-- ออสเตรีย
-- อาเซอร์ไบจาน
-- บาฮามาส
-- บาห์เรน
-- บังกลาเทศ
-- บาร์เบโดส
-- เบลเยียม
-- เบลีซ
-- เบนิน
-- เบอร์มิวดา
-- ภูฏาน
-- โบลิเวีย
-- บอสเนียและเฮอร์เซโกวีนา
-- บอตสวานา
-- บราซิล
-- ดินแดนมหาสมุทรอินเดียของอังกฤษ
-- หมู่เกาะบริติชเวอร์จิน
-- บรูไน
-- บัลแกเรีย
-- บูร์กินาฟาโซ
-- บุรุนดี
-- กาบูเวร์ดี
-- กัมพูชา
-- แคเมอรูน
-- แคนาดา
-- เนเธอร์แลนด์แคริบเบียน
-- หมู่เกาะเคย์แมน
-- สาธารณรัฐแอฟริกากลาง
-- ชาด
-- ชิลี
-- เกาะคริสต์มาส
-- หมู่เกาะโคโคส (คีลิง)
-- โคลอมเบีย
-- คอโมโรส
-- หมู่เกาะคุก
-- คอสตาริกา
-- โกตดิวัวร์
-- โครเอเชีย
-- คูราเซา
-- สาธารณรัฐเช็ก
-- สาธารณรัฐประชาธิปไตยคองโก
-- เดนมาร์ก
-- จิบูตี
-- โดมินิกา
-- สาธารณรัฐโดมินิกัน
-- เอกวาดอร์
-- อียิปต์
-- เอลซัลวาดอร์
-- อิเควทอเรียลกินี
-- เอริเทรีย
-- เอสโตเนีย
-- เอสวาตินี
-- เอธิโอเปีย
-- หมู่เกาะฟอล์กแลนด์ (หมู่เกาะมัลวีนัส)
-- หมู่เกาะแฟโร
-- ฟิจิ
-- ฟินแลนด์
-- ฝรั่งเศส
-- เฟรนช์เกียนา
-- กาบอง
-- แกมเบีย
-- จอร์เจีย
-- เยอรมนี
-- กานา
-- ยิบรอลตาร์
-- กรีซ
-- กรีนแลนด์
-- เกรเนดา
-- กวม
-- กัวเตมาลา
-- เกิร์นซีย์
-- กินี
-- กินี-บิสเซา
-- กายอานา
-- เฮติ
-- เกาะเฮิร์ดและหมู่เกาะแมกดอนัลด์
-- ฮอนดูรัส
-- ฮังการี
-- ไอซ์แลนด์
-- อินเดีย
-- อินโดนีเซีย
-- อิรัก
-- ไอร์แลนด์
-- เกาะแมน
-- อิสราเอล
-- อิตาลี
-- จาเมกา
-- ญี่ปุ่น
-- เจอร์ซี
-- จอร์แดน
-- คาซัคสถาน
-- เคนยา
-- คิริบาส
-- โคโซโว
-- คูเวต
-- คีร์กีซสถาน
-- ลาว
-- ลัตเวีย
-- เลบานอน
-- เลโซโท
-- ไลบีเรีย
-- ลิเบีย
-- ลิกเตนสไตน์
-- ลิทัวเนีย
-- ลักเซมเบิร์ก
-- มาดากัสการ์
-- มาลาวี
-- มาเลเซีย
-- มัลดีฟส์
-- มาลี
-- มอลตา
-- หมู่เกาะมาร์แชล
-- มอริเตเนีย
-- มอริเชียส
-- เม็กซิโก
-- ไมโครนีเชีย
-- มอลโดวา
-- โมนาโก
-- มองโกเลีย
-- มอนเตเนโกร
-- มอนต์เซอร์รัต
-- โมร็อกโก
-- โมซัมบิก
-- นามิเบีย
-- นาอูรู
-- เนปาล
-- เนเธอร์แลนด์
-- นิวแคลิโดเนีย
-- นิวซีแลนด์
-- นิการากัว
-- ไนเจอร์
-- ไนจีเรีย
-- นีอูเอ
-- เกาะนอร์ฟอล์ก
-- มาซิโดเนียเหนือ
-- หมู่เกาะนอร์เทิร์นมาเรียนา
-- นอร์เวย์
-- โอมาน
-- ปากีสถาน
-- ปาเลา
-- ปาเลสไตน์
-- ปานามา
-- ปาปัวนิวกินี
-- ปารากวัย
-- เปรู
-- ฟิลิปปินส์
-- หมู่เกาะพิตแคร์น
-- โปแลนด์
-- โปรตุเกส
-- เปอร์โตริโก
-- กาตาร์
-- สาธารณรัฐไซปรัส
-- สาธารณรัฐคองโก
-- โรมาเนีย
-- รวันดา
-- เรอูนียง
-- เซนต์บาร์เธเลมี
-- เซนต์เฮเลนา แอสเซนชัน และตริสตันดากูนยา
-- เซนต์คิตส์และเนวิส
-- เซนต์ลูเชีย
-- แซงปิแยร์และมีเกอลง
-- เซนต์วินเซนต์และเกรนาดีนส์
-- ซามัว
-- ซานมารีโน
-- เซาโตเมและปรินซิเป
-- ซาอุดีอาระเบีย
-- เซเนกัล
-- เซอร์เบีย
-- เซเชลส์
-- เซียร์ราลีโอน
-- สิงคโปร์
-- สโลวาเกีย
-- สโลวีเนีย
-- หมู่เกาะโซโลมอน
-- โซมาเลีย
-- แอฟริกาใต้
-- เกาะเซาท์จอร์เจียและหมู่เกาะเซาท์แซนด์วิช
-- เกาหลีใต้
-- เซาท์ซูดาน
-- สเปน
-- ศรีลังกา
-- ซูดาน
-- ซูรินาเม
-- สวีเดน
-- สวิตเซอร์แลนด์
-- ไต้หวัน
-- ทาจิกิสถาน
-- แทนซาเนีย
-- ไทย
-- ติมอร์เลสเต
-- โตโก
-- โตเกเลา
-- ตองกา
-- ตรินิแดดและโตเบโก
-- ตูนิเซีย
-- เติร์กเมนิสถาน
-- หมู่เกาะเติกส์และหมู่เกาะเคคอส
-- ตูวาลู
-- ตุรกี
-- ยูกันดา
-- ยูเครน
-- สหรัฐอาหรับเอมิเรตส์
-- สหราชอาณาจักร
-- สหรัฐอเมริกา
-- เกาะเล็กรอบนอกของสหรัฐอเมริกา
-- อุรุกวัย
-- หมู่เกาะเวอร์จินของสหรัฐอเมริกา
-- อุซเบกิสถาน
-- วานูวาตู
-- นครรัฐวาติกัน
-- เวเนซุเอลา
-- เวียดนาม
-- วาลิสและฟูตูนา
-- ซาฮาราตะวันตก
-- เยเมน
-- แซมเบีย
-- ซิมบับเว
-- หมู่เกาะโอลันด์
+Gemini API ve Google AI Studio aşağıdaki ülke ve idari bölgelerde kullanılabilir. Bu ülkelerden veya idari bölgelerden birinde değilseniz [Gemini Enterprise Ajan Platformu'ndaki Gemini API'yi](https://cloud.google.com/gemini-enterprise-agent-platform?hl=tr) deneyin:
 
-ส่งความคิดเห็น
+- Arnavutluk
+- Cezayir
+- Amerikan Samoası
+- Andorra
+- Angola
+- Anguilla
+- Antarktika
+- Antigua ve Barbuda
+- Arjantin
+- Ermenistan
+- Aruba
+- Avustralya
+- Avusturya
+- Azerbaycan
+- Bahamalar
+- Bahreyn
+- Bangladeş
+- Barbados
+- Belçika
+- Belize
+- Benin
+- Bermuda
+- Bhutan
+- Bolivya
+- Bosna Hersek
+- Botsvana
+- Brezilya
+- Britanya Hint Okyanusu Toprakları
+- Britanya Virjin Adaları
+- Brunei
+- Bulgaristan
+- Burkina Faso
+- Burundi
+- Yeşil Burun Adaları
+- Kamboçya
+- Kamerun
+- Kanada
+- Hollanda Karayipleri
+- Cayman Adaları
+- Orta Afrika Cumhuriyeti
+- Çad
+- Şili
+- Christmas Adası
+- Cocos (Keeling) Adaları
+- Kolombiya
+- Komorlar
+- Cook Adaları
+- Kosta Rika
+- Fildişi Sahili
+- Hırvatistan
+- Curaçao
+- Çekya
+- Kongo Demokratik Cumhuriyeti
+- Danimarka
+- Cibuti
+- Dominika
+- Dominik Cumhuriyeti
+- Ekvador
+- Mısır
+- El Salvador
+- Ekvator Ginesi
+- Eritre
+- Estonya
+- Eswatini
+- Etiyopya
+- Falkland Adaları (Islas Malvinas)
+- Faroe Adaları
+- Fiji
+- Finlandiya
+- Fransa
+- Fransız Guyanası
+- Gabon
+- Gambiya
+- Gürcistan
+- Almanya
+- Gana
+- Cebelitarık
+- Yunanistan
+- Grönland
+- Grenada
+- Guam
+- Guatemala
+- Guernsey
+- Gine
+- Gine-Bissau
+- Guyana
+- Haiti
+- Heard Adası ve McDonald Adaları
+- Honduras
+- Macaristan
+- İzlanda
+- Hindistan
+- Endonezya
+- Irak
+- İrlanda
+- Man Adası
+- İsrail
+- İtalya
+- Jamaika
+- Japonya
+- Jersey
+- Ürdün
+- Kazakistan
+- Kenya
+- Kiribati
+- Kosova
+- Kuveyt
+- Kırgızistan
+- Laos
+- Letonya
+- Lübnan
+- Lesotho
+- Liberya
+- Libya
+- Liechtenstein
+- Litvanya
+- Lüksemburg
+- Madagaskar
+- Malawi
+- Malezya
+- Maldivler
+- Mali
+- Malta
+- Marshall Adaları
+- Moritanya
+- Mauritius Adası
+- Meksika
+- Mikronezya
+- Moldova
+- Monako
+- Moğolistan
+- Karadağ
+- Montserrat
+- Fas
+- Mozambik
+- Namibya
+- Nauru
+- Nepal
+- Hollanda
+- Yeni Kaledonya
+- Yeni Zelanda
+- Nikaragua
+- Nijer
+- Nijerya
+- Niue
+- Norfolk Adası
+- Kuzey Makedonya
+- Kuzey Mariana Adaları
+- Norveç
+- Umman
+- Pakistan
+- Palau
+- Filistin
+- Panama
+- Papua Yeni Gine
+- Paraguay
+- Peru
+- Filipinler
+- Pitcairn Adaları
+- Polonya
+- Portekiz
+- Porto Riko
+- Katar
+- Güney Kıbrıs Rum Yönetimi
+- Kongo Cumhuriyeti
+- Romanya
+- Ruanda
+- Reunion
+- Saint Barthelemy
+- Saint Helena, Ascension ve Tristan da Cunha
+- Saint Kitts ve Nevis
+- Saint Lucia
+- Saint Pierre ve Miquelon
+- Saint Vincent ve Grenadinler
+- Samoa
+- San Marino
+- São Tomé ve Príncipe
+- Suudi Arabistan
+- Senegal
+- Sırbistan
+- Seyşeller
+- Sierra Leone
+- Singapur
+- Slovakya
+- Slovenya
+- Solomon Adaları
+- Somali
+- Güney Afrika
+- Güney Georgia ve Güney Sandwich Adaları
+- Güney Kore
+- Güney Sudan
+- İspanya
+- Sri Lanka
+- Sudan
+- Surinam
+- İsveç
+- İsviçre
+- Tayvan
+- Tacikistan
+- Tanzanya
+- Tayland
+- Doğu Timor
+- Togo
+- Tokelau
+- Tonga
+- Trinidad ve Tobago
+- Tunus
+- Türkmenistan
+- Turks ve Caicos Adaları
+- Tuvalu
+- Türkiye
+- Uganda
+- Ukrayna
+- Birleşik Arap Emirlikleri
+- Birleşik Krallık
+- Amerika Birleşik Devletleri
+- ABD Sınır Dışı Küçük Adaları
+- Uruguay
+- ABD Virjin Adaları
+- Özbekistan
+- Vanuatu
+- Vatikan Şehir Devleti
+- Venezuela
+- Vietnam
+- Wallis ve Futuna
+- Batı Sahara
+- Yemen
+- Zambiya
+- Zimbabve
+- Åland Adaları
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Geri bildirim gönderin
 
-อัปเดตล่าสุด 2026-04-29 UTC
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Son güncelleme tarihi: 2026-04-29 UTC.
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-29 UTC"],[],[]]
+Bize geri bildirimde bulunmak mı istiyorsunuz?
+
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]

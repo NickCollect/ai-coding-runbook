@@ -1,47 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=th
-fetched_at: 2026-09-07T05:48:37.023804+00:00
-title: "\u0e01\u0e32\u0e23\u0e17\u0e33\u0e04\u0e27\u0e32\u0e21\u0e40\u0e02\u0e49\u0e32\u0e43\u0e08\u0e27\u0e34\u0e14\u0e35\u0e42\u0e2d \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=ja
+fetched_at: 2026-09-14T05:48:32.676028+00:00
+title: "\u52d5\u753b\u7406\u89e3 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+Gemini 3.8 Flash が利用可能になりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ja)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs/generate-content?hl=ja)
 
-ส่งความคิดเห็น
+フィードバックを送信
 
-# การทำความเข้าใจวิดีโอ
+# 動画理解
 
-> ดูข้อมูลเกี่ยวกับการสร้างวิดีโอได้ที่คู่มือ [Veo](https://ai.google.dev/gemini-api/docs/video?hl=th)
+> 動画生成については、[Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=ja) ガイドをご覧ください。
 
-โมเดล Gemini สามารถประมวลผลวิดีโอ ซึ่งช่วยให้เกิดกรณีการใช้งานของนักพัฒนาแอปที่ล้ำสมัยมากมาย ซึ่งในอดีตต้องใช้โมเดลเฉพาะโดเมน
-ความสามารถด้านวิชันซิสเต็มบางอย่างของ Gemini ได้แก่ ความสามารถในการอธิบาย แบ่งส่วน และดึงข้อมูลจากวิดีโอ ตอบคำถามเกี่ยวกับเนื้อหาวิดีโอ และอ้างอิงการประทับเวลาที่เฉพาะเจาะจงภายในวิดีโอ
+Gemini モデルは動画を処理できるため、これまでドメイン固有のモデルが必要だった多くの最先端のデベロッパーのユースケースに対応できます。
+Gemini のビジョン機能には、動画の説明、セグメント化、情報抽出、動画コンテンツに関する質問への回答、動画内の特定のタイムスタンプの参照などがあります。
 
-คุณสามารถระบุวิดีโอเป็นอินพุตให้กับ Gemini ได้ด้วยวิธีต่อไปนี้
+Gemini に動画を入力する方法は次のとおりです。
 
-| วิธีการป้อนข้อมูล | ขนาดสูงสุด | กรณีการใช้งานที่แนะนำ |
+| 入力方法 | 最大サイズ | おすすめの使用例 |
 | --- | --- | --- |
-| [File API](#upload-video) | 20 GB (แบบชำระเงิน) / 2 GB (ฟรี) | ไฟล์ขนาดใหญ่ (100 MB ขึ้นไป), วิดีโอแบบยาว (10 นาทีขึ้นไป), ไฟล์ที่ใช้ซ้ำได้ |
-| [การลงทะเบียน Cloud Storage](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=th#registration) | 2 GB (ต่อไฟล์ ไม่จำกัดพื้นที่เก็บข้อมูล) | ไฟล์ขนาดใหญ่ (100 MB ขึ้นไป), วิดีโอแบบยาว (10 นาทีขึ้นไป), ไฟล์ที่คงอยู่และใช้ซ้ำได้ |
-| [ข้อมูลแบบอินไลน์](#inline-video) | < 100 MB | ไฟล์ขนาดเล็ก (<100 MB), ระยะเวลาสั้น (<1 นาที), อินพุตแบบครั้งเดียว |
-| [URL ของ YouTube](#youtube) | ไม่มี | วิดีโอ YouTube สาธารณะ |
+| [ファイル API](#upload-video) | 20 GB（有料）/ 2 GB（無料） | 大きなファイル（100 MB 以上）、長い動画（10 分以上）、再利用可能なファイル。 |
+| [Cloud Storage 登録](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ja#registration) | 2 GB（ファイルごと、ストレージの上限なし） | 大きなファイル（100 MB 以上）、長い動画（10 分以上）、永続的で再利用可能なファイル。 |
+| [インライン データ](#inline-video) | 100 MB 未満 | 小さなファイル（100 MB 未満）、短い時間（1 分未満）、1 回限りの入力。 |
+| [YouTube の URL](#youtube) | なし | 公開 YouTube 動画。 |
 
-> **หมายเหตุ:** เราขอแนะนำให้ใช้ [File API](#upload-video) สำหรับกรณีการใช้งานส่วนใหญ่ โดยเฉพาะอย่างยิ่งสำหรับไฟล์ที่มีขนาดใหญ่กว่า 100 MB หรือเมื่อคุณต้องการใช้ไฟล์ซ้ำในคำขอหลายรายการ
+> **注:** [ファイル API](#upload-video) は、ほとんどのユースケースにおすすめです。特に 100 MB を超えるファイルの場合や、複数のリクエストでファイルを再利用する場合は、ファイル API を使用してください。
 
-[ดูข้อมูลเกี่ยวกับวิธีการป้อนข้อมูลไฟล์อื่นๆ เช่น การใช้ URL ภายนอกหรือไฟล์ที่จัดเก็บไว้ใน Google Cloud ได้ที่คู่มือวิธีการป้อนข้อมูลไฟล์](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=th)
+外部 URL や Google Cloud に保存されたファイルの使用など、他のファイル入力方法については、
+[ファイル入力方法](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ja)ガイドをご覧ください。
 
-### อัปโหลดไฟล์วิดีโอ
+### 動画ファイルをアップロードする
 
-โค้ดต่อไปนี้จะดาวน์โหลดวิดีโอตัวอย่าง อัปโหลดโดยใช้ [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th),
-รอให้ระบบประมวลผล และใช้ข้อมูลอ้างอิงไฟล์ที่อัปโหลดเพื่อ
-สรุปวิดีโอ
+次のコードは、サンプル動画をダウンロードし、[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja) を使用してアップロードし、
+処理が完了するまで待ってから、アップロードされたファイル参照を使用して
+動画を要約します。
 
 ### Python
 
@@ -53,7 +54,7 @@ client = genai.Client()
 myfile = client.files.upload(file="path/to/sample.mp4")
 
 response = client.models.generate_content(
-    model="gemini-3.6-flash", contents=[myfile, "Summarize this video. Then create a quiz with an answer key based on the information in this video."]
+    model="gemini-3.8-flash", contents=[myfile, "Summarize this video. Then create a quiz with an answer key based on the information in this video."]
 )
 
 print(response.text)
@@ -77,7 +78,7 @@ async function main() {
   });
 
   const response = await ai.models.generateContent({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     contents: createUserContent([
       createPartFromUri(myfile.uri, myfile.mimeType),
       "Summarize this video. Then create a quiz with an answer key based on the information in this video.",
@@ -105,7 +106,7 @@ contents := []*genai.Content{
 
 result, _ := client.Models.GenerateContent(
     ctx,
-    "gemini-3.6-flash",
+    "gemini-3.8-flash",
     contents,
     nil,
 )
@@ -151,7 +152,7 @@ echo "File uploaded successfully. File URI: ${file_uri}"
 
 # --- 3. Generate content using the uploaded video file ---
 echo "Generating content from video..."
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -X POST \
@@ -166,17 +167,19 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 jq -r ".candidates[].content.parts[].text" response.json
 ```
 
-ใช้ Files API เสมอเมื่อขนาดคำขอทั้งหมด (รวมถึงไฟล์ พรอมต์ข้อความ คำแนะนำของระบบ ฯลฯ) ใหญ่กว่า 20 MB ความยาววิดีโอมีความสำคัญ หรือหากคุณต้องการใช้วิดีโอเดียวกันในพรอมต์หลายรายการ
-File API ยอมรับรูปแบบไฟล์วิดีโอโดยตรง
+トークンの効率とパフォーマンスを最適化するには、
+[エージェント型動画処理](#agentic-video-understanding)の使用を検討してください。
 
-ดูข้อมูลเพิ่มเติมเกี่ยวกับการทำงานกับไฟล์สื่อได้ที่
-[Files API](https://ai.google.dev/gemini-api/docs/files?hl=th)
+リクエストの合計サイズ（ファイル、テキスト プロンプト、システム指示などを含む）が 20 MB を超える場合、動画の再生時間が長い場合、または複数のプロンプトで同じ動画を使用する場合は、常に Files API を使用してください。ファイル API は、動画ファイル形式を直接受け入れます。
 
-### ส่งข้อมูลวิดีโอแบบอินไลน์
+メディア ファイルの操作の詳細については、
+[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja) をご覧ください。
 
-คุณสามารถส่งวิดีโอขนาดเล็กโดยตรงในคำขอ `generateContent` แทนการอัปโหลดไฟล์วิดีโอโดยใช้ File API วิธีนี้เหมาะสำหรับวิดีโอสั้นๆ ที่มีขนาดคำขอทั้งหมดไม่เกิน 20 MB
+### 動画データをインラインで渡す
 
-ตัวอย่างการระบุข้อมูลวิดีโอแบบอินไลน์
+ファイル API を使用して動画ファイルをアップロードする代わりに、リクエストで小さな動画を `generateContent` に直接渡すことができます。これは、リクエストの合計サイズが 20 MB 未満の短い動画に適しています。
+
+インライン動画データの提供例を次に示します。
 
 ### Python
 
@@ -190,7 +193,7 @@ video_bytes = open(video_file_name, 'rb').read()
 
 client = genai.Client()
 response = client.models.generate_content(
-    model='gemini-3.6-flash',
+    model='gemini-3.8-flash',
     contents=types.Content(
         parts=[
             types.Part(
@@ -225,7 +228,7 @@ const contents = [
 ];
 
 const response = await ai.models.generateContent({
-  model: "gemini-3.6-flash",
+  model: "gemini-3.8-flash",
   contents: contents,
 });
 console.log(response.text);
@@ -242,7 +245,7 @@ else
   B64FLAGS="-w0"
 fi
 
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -X POST \
@@ -261,9 +264,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
     }' 2> /dev/null
 ```
 
-### ส่ง URL ของ YouTube
+### YouTube の URL を渡す
 
-คุณสามารถส่ง URL ของ YouTube ไปยัง Gemini API ได้โดยตรงเป็นส่วนหนึ่งของคำขอตามวิธีต่อไปนี้
+リクエストの一部として、YouTube の URL を Gemini API に直接渡すことができます。
 
 ### Python
 
@@ -273,7 +276,7 @@ from google.genai import types
 
 client = genai.Client()
 response = client.models.generate_content(
-    model='gemini-3.6-flash',
+    model='gemini-3.8-flash',
     contents=types.Content(
         parts=[
             types.Part(
@@ -303,7 +306,7 @@ const contents = [
 ];
 
 const response = await ai.models.generateContent({
-  model: "gemini-3.6-flash",
+  model: "gemini-3.8-flash",
   contents: contents,
 });
 console.log(response.text);
@@ -339,7 +342,7 @@ func main() {
 
   result, _ := client.Models.GenerateContent(
       ctx,
-      "gemini-3.6-flash",
+      "gemini-3.8-flash",
       contents,
       nil,
   )
@@ -351,7 +354,7 @@ func main() {
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -X POST \
@@ -369,22 +372,364 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
     }' 2> /dev/null
 ```
 
-**ข้อจำกัด**
+**制限事項:**
 
-- สำหรับแพ็กเกจฟรี คุณจะอัปโหลดวิดีโอ YouTube ได้ไม่เกิน 8 ชั่วโมงต่อวัน
-- สำหรับแพ็กเกจแบบชำระเงิน จะไม่มีการจำกัดตามความยาววิดีโอ
-- สำหรับโมเดลก่อน Gemini 2.5 คุณจะอัปโหลดวิดีโอได้เพียง 1 รายการต่อคำขอ สำหรับโมเดล Gemini 2.5 และรุ่นที่ใหม่กว่า คุณจะอัปโหลดวิดีโอได้สูงสุด 10 รายการต่อคำขอ
-- คุณอัปโหลดได้เฉพาะวิดีโอสาธารณะ (ไม่ใช่ส่วนตัวหรือวิดีโอที่ไม่เป็นสาธารณะ)
+- 無料枠の場合、1 日にアップロードできる YouTube 動画は 8 時間までです。
+- 有料枠の場合、動画の長さに基づく制限はありません。
+- Gemini 2.5 より前のモデルでは、リクエストごとにアップロードできる動画は 1 つのみです。Gemini 2.5 以降のモデルでは、リクエストごとに最大 10 個の動画をアップロードできます。
+- アップロードできるのは公開動画のみです（非公開動画や限定公開動画はアップロードできません）。
 
-## ใช้การแคชบริบทสำหรับวิดีโอแบบยาว
+## エージェント型動画理解
 
-สำหรับวิดีโอที่มีความยาวมากกว่า 10 นาที หรือเมื่อคุณวางแผนที่จะส่งคำขอหลายรายการ
-ไปยังไฟล์วิดีโอเดียวกัน ให้ใช้ [การแคชบริบท](https://ai.google.dev/gemini-api/docs/caching?hl=th) เพื่อ
-ลดค่าใช้จ่ายและปรับปรุงเวลาในการตอบสนอง การแคชบริบทช่วยให้คุณประมวลผลวิดีโอได้เพียงครั้งเดียวและใช้โทเค็นซ้ำสำหรับการค้นหาในภายหลัง ซึ่งเหมาะอย่างยิ่งสำหรับเซสชันการแชทหรือการวิเคราะห์เนื้อหาแบบยาวซ้ำๆ
+デフォルトでは、動画入力は静的処理（1 FPS でフレームを抽出）を使用します。
+Gemini 3.8 Flash、3.7 Flash、3.6 Flash、3.5 Flash Lite モデルは、
+**エージェント型動画理解** もサポートしています。このモデルでは、動画
+タイムラインを動的に探索し、プロンプトに基づいてトランスクリプトを選択的に検査し、フレーム
+レートと解像度を適応的に調整します。
 
-## อ้างอิงการประทับเวลาในเนื้อหา
+| **Mode** | **説明** | **サポートモデル** |
+| --- | --- | --- |
+| **静的** （デフォルト） | 固定レート（1 FPS）でフレームを抽出し、1 回のパスでコンテキストに配置します。短いクリップに適しています。 | すべての Gemini モデル |
+| **エージェント型ツール** | モデルは動画タイムラインを動的に移動し、プロンプトに基づいて必要なコンテンツのみを読み込みます。トークンの効率が最大 88% 向上し、長尺コンテンツの品質が約 7% 向上します。 | Gemini 3.8 Flash、3.7 Flash、3.6 Flash、3.5 Flash Lite |
 
-คุณสามารถถามคำถามเกี่ยวกับจุดที่เฉพาะเจาะจงในวิดีโอได้โดยใช้การประทับเวลาในรูปแบบ `MM:SS`
+### 処理モードを選択する
+
+一般的なガイドラインとして、特にレスポンスの品質やトークンの効率を最適化する場合は、**エージェント型ツール** モードから始めます。
+
+- **エージェント型ツール:** 長尺動画または特定の時点を対象とするクエリ。モデルはタイムラインを動的に移動し、コンテキスト ウィンドウを埋めることなく、コンテキストに関連する情報をターゲットにします。
+- **静的:** 短いクリップ（5 分未満）に対するレイテンシの影響を受けやすいクエリ、またはクリップ全体でフレームレベルの精度が必要な場合。
+
+> **注:** エージェント型処理に時間がかかる長い動画や複雑なプロンプトの場合は、ストリーミング（`client.models.generate_content_stream`）を使用します。これにより、接続がアクティブな状態に保たれ、中間推論ステップが表示され、接続または認証のタイムアウトが回避されます。
+
+### 処理モードを設定する
+
+### Python
+
+```
+import time
+from google import genai
+from google.genai import types
+
+client = genai.Client()
+
+video_file = client.files.upload(file="path/to/lecture.mp4")
+
+while video_file.state.name == "PROCESSING":
+    time.sleep(2)
+    video_file = client.files.get(name=video_file.name)
+
+response = client.models.generate_content(
+    model="gemini-3.8-flash",
+    contents=[
+        types.Part.from_uri(
+            file_uri=video_file.uri,
+            mime_type=video_file.mime_type,
+            media_processing="AGENTIC",
+        ),
+        "What are the three main arguments presented?",
+    ],
+)
+print(response.text)
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+
+const ai = new GoogleGenAI({});
+
+let videoFile = await ai.files.upload({
+  file: "path/to/lecture.mp4",
+  config: { mimeType: "video/mp4" },
+});
+
+while (videoFile.state === "PROCESSING") {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  videoFile = await ai.files.get({ name: videoFile.name });
+}
+
+const response = await ai.models.generateContent({
+  model: "gemini-3.8-flash",
+  contents: [
+    {
+      role: "user",
+      parts: [
+        {
+          fileData: {
+            fileUri: videoFile.uri,
+            mimeType: videoFile.mimeType,
+          },
+          mediaProcessing: "AGENTIC",
+        },
+        { text: "What are the three main arguments presented?" },
+      ],
+    },
+  ],
+});
+console.log(response.text);
+```
+
+### Go
+
+```
+uploadedFile, _ := client.Files.UploadFromPath(ctx, "path/to/lecture.mp4", nil)
+parts := []*genai.Part{
+    {
+        FileData: &genai.FileData{
+            FileURI:  uploadedFile.URI,
+            MIMEType: uploadedFile.MIMEType,
+        },
+        MediaProcessing: genai.MediaProcessingAgentic,
+    },
+    genai.NewPartFromText("What are the three main arguments presented?"),
+}
+contents := []*genai.Content{
+    genai.NewContentFromParts(parts, genai.RoleUser),
+}
+result, _ := client.Models.GenerateContent(
+    ctx,
+    "gemini-3.8-flash",
+    contents,
+    nil,
+)
+fmt.Println(result.Text())
+```
+
+### REST
+
+```
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=$GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "contents": [{
+      "parts": [
+        {
+          "file_data": {
+            "file_uri": "'${file_uri}'",
+            "mime_type": "video/mp4"
+          },
+          "media_processing": "AGENTIC"
+        },
+        {"text": "What are the three main arguments presented?"}
+      ]
+    }]
+  }'
+```
+
+> **注:** エージェント型処理が使用されたことを確認するには、`response.candidates[0].content.parts` を調べます。`MEDIA_PROCESSING` ツールタイプで `tool_call` パーツと `tool_response` パーツが存在する場合は、モデルが動画を動的に移動したことを示します。
+
+> **注:** 他のサーバーサイド ツール（Google 検索や URL コンテキストなど）とは異なり、エージェント型動画では、ツール呼び出しと結果を返したりストリーミングしたりするために、`ToolConfig` で `include_server_side_tool_invocations=True` を設定する必要はありません。動画ナビゲーションの `tool_call` パーツと `tool_response` パーツは、入力パーツに `media_processing="AGENTIC"` が設定されている場合に自動的に返されます。
+
+### レスポンスの構造
+
+エージェント型処理が有効になっている場合、レスポンスには内部ナビゲーション トレースを公開する追加パーツが含まれます。
+
+- `tool_call` **パーツ** （`tool_type: "MEDIA_PROCESSING"`）: モデルが動画セグメントまたは音声トランスクリプトをリクエストするたびに生成されます。
+- `tool_response` **パーツ** （`tool_type: "MEDIA_PROCESSING"`）: 各読み込みオペレーションの結果。
+
+これらのパーツを手動で処理したり、返信したりする必要はありません。会話履歴として完全なレスポンスを渡すと、自動的に処理されます。
+
+`ThinkingConfig` で `include_thoughts=True` が設定されている場合、推論ステップはツール呼び出し/レスポンス ペアとインターリーブされた `thought: true` パーツとして表示されます。思考が無効になっている場合、思考テキストは省略されますが、ツールパーツは引き続き存在します。
+
+次の例は、ツール呼び出しとレスポンスのパーツがインターリーブされたレスポンス ペイロードを示しています。
+
+```
+{
+  "candidates": [
+    {
+      "content": {
+        "role": "model",
+        "parts": [
+          {
+            "thought": true,
+            "text": "Inspecting transcript for key discussion topics..."
+          },
+          {
+            "thought_signature": "sig_A",
+            "tool_call": {
+              "tool_type": "MEDIA_PROCESSING"
+            }
+          },
+          {
+            "thought_signature": "sig_B",
+            "tool_response": {
+              "tool_type": "MEDIA_PROCESSING"
+            }
+          },
+          {
+            "thought": true,
+            "text": "Loading visual frames to verify slide content..."
+          },
+          {
+            "thought_signature": "sig_C",
+            "tool_call": {
+              "tool_type": "MEDIA_PROCESSING"
+            }
+          },
+          {
+            "thought_signature": "sig_D",
+            "tool_response": {
+              "tool_type": "MEDIA_PROCESSING"
+            }
+          },
+          {
+            "thought": true,
+            "text": "Synthesizing answer from gathered evidence..."
+          },
+          {
+            "text": "The three main arguments presented in the lecture are...",
+            "thought_signature": "sig_E"
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+### 動画間で処理モードを混在させる
+
+同じリクエストで、動画パーツごとに異なる処理モードを設定できます。
+
+### Python
+
+```
+from google import genai
+from google.genai import types
+
+client = genai.Client()
+
+lecture = client.files.upload(file="path/to/long-lecture.mp4")
+experiment = client.files.upload(file="path/to/short-experiment.mp4")
+
+response = client.models.generate_content(
+    model="gemini-3.8-flash",
+    contents=[
+        types.Part.from_uri(
+            file_uri=lecture.uri,
+            mime_type=lecture.mime_type,
+            media_processing="AGENTIC",  # Use agentic video understanding
+        ),
+        types.Part.from_uri(
+            file_uri=experiment.uri,
+            mime_type=experiment.mime_type,
+            media_processing="STATIC",  # Use static processing
+        ),
+        "Compare the lecture content with the experiment results.",
+    ],
+)
+print(response.text)
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+
+const ai = new GoogleGenAI({});
+
+const lecture = await ai.files.upload({
+  file: "path/to/long-lecture.mp4",
+  config: { mimeType: "video/mp4" },
+});
+const experiment = await ai.files.upload({
+  file: "path/to/short-experiment.mp4",
+  config: { mimeType: "video/mp4" },
+});
+
+const response = await ai.models.generateContent({
+  model: "gemini-3.8-flash",
+  contents: [
+    {
+      role: "user",
+      parts: [
+        {
+          fileData: {
+            fileUri: lecture.uri,
+            mimeType: lecture.mimeType,
+          },
+          mediaProcessing: "AGENTIC", // Use agentic video understanding
+        },
+        {
+          fileData: {
+            fileUri: experiment.uri,
+            mimeType: experiment.mimeType,
+          },
+          mediaProcessing: "STATIC", // Use static processing
+        },
+        { text: "Compare the lecture content with the experiment results." },
+      ],
+    },
+  ],
+});
+console.log(response.text);
+```
+
+### Go
+
+```
+lecturePart := &genai.Part{
+    FileData: &genai.FileData{
+        FileURI:  lectureFile.URI,
+        MIMEType: lectureFile.MIMEType,
+    },
+    MediaProcessing: genai.MediaProcessingAgentic, // Use agentic
+}
+experimentPart := &genai.Part{
+    FileData: &genai.FileData{
+        FileURI:  experimentFile.URI,
+        MIMEType: experimentFile.MIMEType,
+    },
+    MediaProcessing: genai.MediaProcessingStatic, // Use static
+}
+parts := []*genai.Part{
+    lecturePart,
+    experimentPart,
+    genai.NewPartFromText("Compare the lecture content with the experiment results."),
+}
+contents := []*genai.Content{
+    genai.NewContentFromParts(parts, genai.RoleUser),
+}
+result, _ := client.Models.GenerateContent(ctx, "gemini-3.8-flash", contents, nil)
+fmt.Println(result.Text())
+```
+
+### REST
+
+```
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=$GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "contents": [{
+      "parts": [
+        {
+          "file_data": {
+            "file_uri": "'${lecture_uri}'",
+            "mime_type": "video/mp4"
+          },
+          "media_processing": "AGENTIC"
+        },
+        {
+          "file_data": {
+            "file_uri": "'${experiment_uri}'",
+            "mime_type": "video/mp4"
+          },
+          "media_processing": "STATIC"
+        },
+        {"text": "Compare the lecture content with the experiment results."}
+      ]
+    }]
+  }'
+```
+
+## 長い動画にコンテキスト キャッシュを使用する
+
+10 分を超える動画の場合や、同じ動画ファイルに対して複数のリクエストを行う予定がある場合は、[コンテキスト キャッシュ](https://ai.google.dev/gemini-api/docs/caching?hl=ja)を使用して費用を削減し、レイテンシを改善します。コンテキスト キャッシュを使用すると、動画を 1 回処理して、後続のクエリでトークンを再利用できるため、チャット セッションや長尺コンテンツの繰り返し分析に最適です。
+
+## コンテンツ内のタイムスタンプを参照する
+
+`MM:SS` 形式のタイムスタンプを使用して、動画内の特定の時点について質問できます。
 
 ### Python
 
@@ -403,7 +748,7 @@ const prompt = "What are the examples given at 00:05 and 00:10 supposed to show 
 ```
     prompt := []*genai.Part{
         genai.NewPartFromURI(currentVideoFile.URI, currentVideoFile.MIMEType),
-         // Adjusted timestamps for the NASA video
+          // Adjusted timestamps for the NASA video
         genai.NewPartFromText("What are the examples given at 00:05 and " +
             "00:10 supposed to show us?"),
     }
@@ -415,12 +760,12 @@ const prompt = "What are the examples given at 00:05 and 00:10 supposed to show 
 PROMPT="What are the examples given at 00:05 and 00:10 supposed to show us?"
 ```
 
-## ดึงข้อมูลเชิงลึกโดยละเอียดจากวิดีโอ
+## 動画から詳細な分析情報を抽出する
 
-โมเดล Gemini มีความสามารถอันทรงพลังในการทำความเข้าใจเนื้อหาวิดีโอโดยการประมวลผลข้อมูลจากทั้งสตรีม**เสียงและภาพ** ซึ่งช่วยให้คุณดึงรายละเอียดต่างๆ มากมาย รวมถึงการสร้างคำอธิบายเกี่ยวกับสิ่งที่เกิดขึ้นในวิดีโอและการตอบคำถามเกี่ยวกับเนื้อหา
+Gemini モデルは、**音声ストリームとビジュアル** ストリームの両方から情報を処理することで、動画コンテンツを理解するための強力な機能を提供します。これにより、動画で何が起こっているかの説明を生成したり、コンテンツに関する質問に回答したりするなど、豊富な詳細情報を抽出できます。
 
-สำหรับคำอธิบายภาพ โมเดลจะสุ่มตัวอย่างวิดีโอที่อัตรา **1 เฟรมต่อวินาที** (FPS) อัตราการสุ่มตัวอย่างเริ่มต้นนี้เหมาะสำหรับเนื้อหาส่วนใหญ่ แต่โปรดทราบว่าอาจพลาดรายละเอียดในวิดีโอที่มีการเคลื่อนไหวอย่างรวดเร็วหรือมีการเปลี่ยนฉากอย่างรวดเร็ว
-สำหรับเนื้อหาที่มีการเคลื่อนไหวสูงเช่นนี้ ให้ลอง[ตั้งค่าอัตราเฟรมที่กำหนดเอง](#custom-frame-rate)
+ビジュアルな説明の場合、モデルは **1 フレーム/秒** （FPS）のレートで動画をサンプリングします。このデフォルトのサンプリング レートはほとんどのコンテンツに適していますが、動きが速い動画やシーンがすばやく切り替わる動画では詳細が失われる可能性があります。
+このような動きの多いコンテンツの場合は、[カスタム フレームレートの設定を検討してください](#custom-frame-rate)。
 
 ### Python
 
@@ -450,15 +795,14 @@ const prompt = "Describe the key events in this video, providing both audio and 
 PROMPT="Describe the key events in this video, providing both audio and visual details. Include timestamps for salient moments."
 ```
 
-## ปรับแต่งการประมวลผลวิดีโอ
+## 動画処理をカスタマイズする
 
-คุณสามารถปรับแต่งการประมวลผลวิดีโอใน Gemini API ได้โดยการตั้งค่าช่วงการตัดหรือระบุการสุ่มตัวอย่างอัตราเฟรมที่กำหนดเอง
+Gemini API で、クリッピング間隔を設定するか、カスタム フレームレート サンプリングを指定することで、動画処理をカスタマイズできます。これらのカスタマイズ オプション
+は、`"static"` モードで動画を処理する場合にのみサポートされます。
 
- 
+### クリッピング間隔を設定する
 
-### ตั้งค่าช่วงการตัด
-
-คุณสามารถตัดวิดีโอได้โดยระบุ `videoMetadata` พร้อมออฟเซ็ตเริ่มต้นและสิ้นสุด
+開始オフセットと終了オフセットで `videoMetadata` を指定すると、動画をクリップできます。
 
 ### Python
 
@@ -468,7 +812,7 @@ from google.genai import types
 
 client = genai.Client()
 response = client.models.generate_content(
-    model='models/gemini-3.6-flash',
+    model='models/gemini-3.8-flash',
     contents=types.Content(
         parts=[
             types.Part(
@@ -489,7 +833,7 @@ response = client.models.generate_content(
 ```
 import { GoogleGenAI } from '@google/genai';
 const ai = new GoogleGenAI({});
-const model = 'gemini-3.6-flash';
+const model = 'gemini-3.8-flash';
 
 async function main() {
 const contents = [
@@ -525,9 +869,9 @@ console.log(response.text)
 await main();
 ```
 
-### ตั้งค่าอัตราเฟรมที่กำหนดเอง
+### カスタム フレームレートを設定する
 
-คุณสามารถตั้งค่าการสุ่มตัวอย่างอัตราเฟรมที่กำหนดเองได้โดยส่งอาร์กิวเมนต์ `fps` ไปยัง `videoMetadata`
+`videoMetadata` に `fps` 引数を渡すことで、カスタム フレームレート サンプリングを設定できます。
 
 ### Python
 
@@ -541,7 +885,7 @@ video_bytes = open(video_file_name, 'rb').read()
 
 client = genai.Client()
 response = client.models.generate_content(
-    model='models/gemini-3.6-flash',
+    model='models/gemini-3.8-flash',
     contents=types.Content(
         parts=[
             types.Part(
@@ -556,11 +900,11 @@ response = client.models.generate_content(
 )
 ```
 
-โดยค่าเริ่มต้น ระบบจะสุ่มตัวอย่าง 1 เฟรมต่อวินาที (FPS) จากวิดีโอ คุณอาจต้องการตั้งค่า FPS ต่ำ (< 1) สำหรับวิดีโอแบบยาว วิธีนี้มีประโยชน์อย่างยิ่งสำหรับวิดีโอที่ส่วนใหญ่เป็นภาพนิ่ง (เช่น การบรรยาย) ใช้ FPS ที่สูงขึ้นสำหรับวิดีโอที่ต้องมีการวิเคราะห์ตามเวลาแบบละเอียด เช่น การทำความเข้าใจการกระทำที่รวดเร็วหรือการติดตามการเคลื่อนไหวความเร็วสูง
+デフォルトでは、動画から 1 フレーム/秒（FPS）がサンプリングされます。長い動画の場合は、FPS を低く（1 未満）設定することをおすすめします。この機能は、ほとんど静止している動画（講義など）に特に役立ちます。高速アクションの理解や高速モーション トラッキングなど、詳細な時間分析が必要な動画には、高い FPS を使用します。
 
-## รูปแบบวิดีโอที่รองรับ
+## サポートされている動画形式
 
-Gemini รองรับ MIME ประเภทรูปแบบวิดีโอต่อไปนี้
+Gemini は、次の動画形式の MIME タイプをサポートしています。
 
 - `video/mp4`
 - `video/mpeg`
@@ -572,56 +916,64 @@ Gemini รองรับ MIME ประเภทรูปแบบวิดี�
 - `video/wmv`
 - `video/3gpp`
 
-## รายละเอียดทางเทคนิคเกี่ยวกับวิดีโอ
+## 動画に関する技術的な詳細
 
-- **โมเดลและบริบทที่รองรับ**: Gemini ทุกรุ่นสามารถประมวลผลข้อมูลวิดีโอได้
-  - โมเดลที่มีหน้าต่างบริบท 1 ล้านโทเค็นสามารถประมวลผลวิดีโอที่มีความยาวสูงสุด 1 ชั่วโมงที่ความละเอียดสื่อเริ่มต้น หรือ 3 ชั่วโมงที่ความละเอียดสื่อต่ำ
-- **การประมวลผล File API**: เมื่อใช้ File API ระบบจะจัดเก็บวิดีโอที่ 1
-  เฟรมต่อวินาที (FPS) และประมวลผลเสียงที่ 1 Kbps (ช่องเดียว)
-  ระบบจะเพิ่มการประทับเวลาทุกวินาที
-  - อัตราเหล่านี้อาจมีการเปลี่ยนแปลงในอนาคตเพื่อปรับปรุงการอนุมาน
-  - คุณสามารถลบล้างอัตราการสุ่มตัวอย่าง 1 FPS ได้โดยการ[ตั้งค่าอัตราเฟรมที่กำหนดเอง](#custom-frame-rate)
-- **การคำนวณโทเค็น**: ระบบจะแปลงวิดีโอแต่ละวินาทีเป็นโทเค็นดังนี้
-  - เฟรมแต่ละเฟรม (สุ่มตัวอย่างที่ 1 FPS)
-    - หากตั้งค่า [`mediaResolution`](https://ai.google.dev/api/generate-content?hl=th#MediaResolution) เป็นต่ำ ระบบจะแปลงเฟรมเป็นโทเค็นที่ 66 โทเค็นต่อเฟรม
-    - ไม่เช่นนั้น ระบบจะแปลงเฟรมเป็นโทเค็นที่ 258 โทเค็นต่อเฟรม
-  - เสียง: 32 โทเค็นต่อวินาที
-  - รวมข้อมูลเมตาด้วย
-  - รวม: ประมาณ 300 โทเค็นต่อวินาทีของวิดีโอที่ความละเอียดสื่อเริ่มต้น หรือ 100 โทเค็นต่อวินาทีของวิดีโอที่ความละเอียดสื่อต่ำ
-- **ความละเอียดสื่อ**: Gemini 3 ขอแนะนำการควบคุมแบบละเอียดเกี่ยวกับการประมวลผลวิชันซิสเต็มแบบมัลติโมดัล
-  ด้วยพารามิเตอร์ `media_resolution` พารามิเตอร์ `media_resolution` จะกำหนด**จำนวนโทเค็นสูงสุดที่จัดสรรต่อรูปภาพอินพุตหรือเฟรมวิดีโอ**
-  ความละเอียดที่สูงขึ้นจะช่วยเพิ่มความสามารถของโมเดลในการอ่านข้อความขนาดเล็กหรือระบุรายละเอียดเล็กๆ แต่จะเพิ่มการใช้โทเค็นและเวลาในการตอบสนอง
+- **サポートされているモデルとコンテキスト**: すべての Gemini モデルで動画データを処理できます。
+  - 100 万個のコンテキスト ウィンドウを持つモデルは、デフォルトで最大 3 時間（低メディア解像度）、高メディア解像度で最大 1 時間の動画を処理できます。
+- **処理モード**: Gemini 3.8 Flash、3.7 Flash、3.6 Flash、3.5 Flash Lite
+  以降のモデルは、次の 2 つの動画処理モードをサポートしています:
+  - **静的**: フレームは 1 FPS で抽出され、コンテキストに配置されます（すべてのモデルでデフォルト
+    ）。音声は 1 Kbps（シングル チャンネル）で処理されます。
+    タイムスタンプは 1 秒ごとに追加されます。短いクリップや、すべてのフレームが重要な場合（フレームごとの検査など）に最適です。1 FPS のサンプリング レートでは、高速なアクション シーケンスの詳細が失われる可能性があります。
+  - **エージェント型ツール**: モデルは動画を動的に移動し、
+    必要に応じてトランスクリプト、フレーム、音声、またはその両方を読み込みます。これにより、長尺コンテンツのトークン使用量が最大 88% 削減されますが、生成が開始される前の内部推論とツールのラウンドトリップにより、短いクリップ（5 分未満）の Time to First Token（TTFT）がわずかに増加する可能性があります。
+    レスポンスには、ターン間で推論コンテキストを維持するための `MEDIA_PROCESSING` ツール呼び出しとレスポンスのパーツが含まれます。トークン費用とレスポンスの品質を最適化するために、長尺動画に最適です。Gemini 3.8 Flash、3.7 Flash、3.6 Flash、3.5 Flash Lite でサポートされています。詳細については、
+    [エージェント型動画理解](#agentic-video-understanding)をご覧ください。
+- **トークンの計算（静的モード）**: 動画の各秒は次のようにトークン化されます:
+  - 個々のフレーム（1 FPS でサンプリング）:
+    - `media_resolution` が低に設定されている場合、フレームはフレームあたり 66 個のトークンでトークン化されます。
+    - それ以外の場合、フレームはフレームあたり 258 個のトークンでトークン化されます。
+  - 音声: 1 秒あたり 32 トークン。
+  - メタデータも含まれます。
+  - 合計: デフォルト（低）メディア解像度では動画 1 秒あたり約 100 トークン、高メディア解像度では動画 1 秒あたり約 300 トークン。
+- **トークンの計算（エージェント型ツール モード）**: トークンの使用量は、コンテンツ
+  の複雑さとモデルのナビゲーション戦略によって異なります。動画探索中に生成されるナビゲーション推論トークンは**思考トークン**
+  （`thoughts_token_count`）としてカウントされ、必要に応じて読み込まれるフレーム、音声、トランスクリプトはツール プロンプト トークン（`tool_use_prompt_token_count`）としてカウントされます。エージェント型処理では、モデルがプロンプトに回答するために必要なトランスクリプト、フレーム、音声、またはその両方のみを読み込むため、長尺コンテンツの合計トークン数が静的処理よりも最大 88% 削減されます（[トークンガイド](https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=ja#video-token-usage)をご覧ください）。
+- **メディアの解像度**: Gemini 3 では、マルチモーダル
+  ビジョン処理をきめ細かく制御できます。`media_resolution``media_resolution` パラメータは、**入力画像または動画フレームごとに割り当てられるトークンの最大数** を決定します。解像度が高いほど、モデルが細かいテキストを読み取ったり、小さな詳細を識別する能力が向上しますが、トークンの使用量とレイテンシが増加します。`media_resolution` パラメータと `media_processing` パラメータは独立しています。同じ動画パーツに両方を設定できます。
 
-  ดูรายละเอียดเพิ่มเติมเกี่ยวกับพารามิเตอร์และวิธีที่พารามิเตอร์นี้อาจส่งผลต่อการคำนวณโทเค็น
-  ได้ที่คู่มือ[ความละเอียดสื่อ](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=th)
-- **รูปแบบการประทับเวลา**: เมื่ออ้างอิงถึงช่วงเวลาที่เฉพาะเจาะจงในวิดีโอภายในพรอมต์ ให้ใช้รูปแบบ `MM:SS` (เช่น `01:15` สำหรับ 1 นาที 15 วินาที)
-- **แนวทางปฏิบัติแนะนำ**:
+トークンの計算の詳細については、
+[トークン](https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=ja)ガイドをご覧ください。
 
-  - ใช้เพียงวิดีโอเดียวต่อคำขอพรอมต์เพื่อให้ได้ผลลัพธ์ที่ดีที่สุด
-  - หากรวมข้อความและวิดีโอเดียว ให้วางพรอมต์ข้อความ *หลัง* ส่วนวิดีโอในอาร์เรย์ `contents`
-  - โปรดทราบว่าลำดับการกระทำที่รวดเร็วอาจสูญเสียรายละเอียดเนื่องจากอัตราการสุ่มตัวอย่าง 1 FPS ให้ลองชะลอคลิปดังกล่าวหากจำเป็น
+- **タイムスタンプの形式**: プロンプト内で動画の特定の時点を参照する場合は、`MM:SS` 形式（例: `01:15` 1 分 15 秒の場合）を使用します。
+- **プロンプトの配置**: テキストと 1 つの動画を組み合わせる場合は、`contents` 配列の動画部分の
+  *後に*テキスト プロンプトを配置します。
+- **長いリクエストのタイムアウト**: 処理時間が長い動画や、複雑なマルチステップの推論が必要な動画の場合は、ストリーミング
+  （`client.models.generate_content_stream`）を使用します。需要が高いときにバックエンドで再試行が発生する同期リクエスト（ストリーミング以外）は、接続または認証トークンの有効期間を超える可能性があり、予期しない
+  `401 Unauthorized`エラーやタイムアウト エラーが発生する可能性があります。ストリーミングにより、接続がアクティブな状態に保たれ、中間推論とツール呼び出しの進行状況が表示されます。
 
-## ขั้นตอนถัดไป
+## 次のステップ
 
-คู่มือนี้แสดงวิธีอัปโหลดไฟล์วิดีโอและสร้างเอาต์พุตข้อความจากอินพุตวิดีโอ ดูข้อมูลเพิ่มเติมได้จากแหล่งข้อมูลต่อไปนี้
+- [メディアの解像度](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=ja): 動画フレームの
+  解像度を制御して、品質とトークンの使用量のバランスを取ります。
+- [トークン](https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=ja): 静的処理モードとエージェント型処理モードの両方で、動画コンテンツがどのようにトークン化されるかを理解します。
+- [システム指示](https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=ja#system-instructions):
+  システム指示を使用すると、特定のニーズやユースケースに基づいてモデルの動作を制御できます。
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja): Gemini で使用する
+  ファイルのアップロードと管理の詳細について学習します。
+- [ファイル プロンプト戦略](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide): Gemini
+  API は、テキスト、画像、音声、動画データを使用したプロンプト（
+  マルチモーダル プロンプトとも呼ばれます）をサポートしています。
+- [安全に関するガイダンス](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=ja): 生成 AI
+  モデルは、不正確、
+  偏見がある、不快な出力など、予期しない出力を生成することがあります。このような出力による危害のリスクを抑えるには、後処理と人間による評価が不可欠です。
 
-- [คำแนะนำของระบบ](https://ai.google.dev/gemini-api/docs/text-generation?hl=th#system-instructions):
-  คำแนะนำของระบบช่วยให้คุณกำหนดลักษณะการทำงานของโมเดลตาม
-  ความต้องการและกรณีการใช้งานที่เฉพาะเจาะจง
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th): ดูข้อมูลเพิ่มเติมเกี่ยวกับการอัปโหลดและจัดการ
-  ไฟล์เพื่อใช้กับ Gemini
-- [กลยุทธ์การเขียนพรอมต์ไฟล์](https://ai.google.dev/gemini-api/docs/files?hl=th#prompt-guide): Gemini API รองรับการเขียนพรอมต์ด้วยข้อมูลข้อความ รูปภาพ เสียง และวิดีโอ หรือที่เรียกว่าการเขียนพรอมต์แบบหลายรูปแบบ
-- [คำแนะนำด้านความปลอดภัย](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=th): บางครั้งโมเดล Generative
-  AI จะสร้างเอาต์พุตที่ไม่คาดคิด เช่น เอาต์พุตที่ไม่ถูกต้อง
-  มีอคติ หรือไม่เหมาะสม การประมวลผลภายหลังและการประเมินโดยเจ้าหน้าที่เป็นสิ่งสำคัญในการ
-  จำกัดความเสี่ยงที่จะเกิดอันตรายจากเอาต์พุตดังกล่าว
+フィードバックを送信
 
-ส่งความคิดเห็น
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+最終更新日 2026-09-12 UTC。
 
-อัปเดตล่าสุด 2026-07-30 UTC
+ご意見をお聞かせください
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
-
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-30 UTC"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-12 UTC。"],[],[]]

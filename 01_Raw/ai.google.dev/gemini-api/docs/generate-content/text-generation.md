@@ -1,27 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=tr
-fetched_at: 2026-09-07T05:38:26.906521+00:00
-title: "Metin olu\u015fturma \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=zh-TW
+fetched_at: 2026-09-14T05:46:33.352172+00:00
+title: "\u6587\u5b57\u751f\u6210 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-tw)
 
-Geri bildirim gönderin
+提供意見
 
-# Metin oluşturma
+# 文字生成
 
-Gemini API, metin, resim, video ve ses girişlerinden metin çıkışı oluşturabilir.
+Gemini API 可根據文字、圖片、影片和音訊輸入內容生成文字輸出內容。
 
-Temel bir örnek:
+基本範例如下：
 
 ### Python
 
@@ -125,7 +125,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-### Apps Komut Dosyası
+### Apps Script
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -160,11 +160,11 @@ function main() {
 }
 ```
 
-## Gemini ile düşünme
+## 與 Gemini 一起思考
 
-Gemini modellerinde genellikle ["düşünme"](https://ai.google.dev/gemini-api/docs/thinking?hl=tr) özelliği varsayılan olarak etkindir. Bu özellik, modelin bir isteğe yanıt vermeden önce akıl yürütmesini sağlar.
+Gemini 模型預設會啟用「思考」功能，因此模型會在回覆要求前先進行推論。
 
-Her model, maliyet, gecikme ve zeka üzerinde kontrol sahibi olmanızı sağlayan farklı düşünme yapılandırmalarını destekler. Daha fazla ayrıntı için [düşünme kılavuzuna](https://ai.google.dev/gemini-api/docs/thinking?hl=tr#set-budget) bakın.
+每種模型支援不同的思考設定，可讓您控管成本、延遲和智慧。詳情請參閱[思考指南](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-tw#set-budget)。
 
 ### Python
 
@@ -296,7 +296,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-### Apps Komut Dosyası
+### Apps Script
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -336,9 +336,9 @@ function main() {
 }
 ```
 
-## Sistem talimatları ve diğer yapılandırmalar
+## 系統指令和其他設定
 
-Sistem talimatlarıyla Gemini modellerinin davranışını yönlendirebilirsiniz. Bunun için [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=tr#v1beta.GenerationConfig) nesnesi iletin.
+你可以使用系統指令引導 Gemini 模型的行為。如要這麼做，請傳遞 [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=zh-tw#v1beta.GenerationConfig) 物件。
 
 ### Python
 
@@ -468,7 +468,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-### Apps Komut Dosyası
+### Apps Script
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -510,8 +510,7 @@ function main() {
 }
 ```
 
-[`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=tr#v1beta.GenerationConfig)
-Nesnesi, [`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=tr#v1beta.GenerationConfig) gibi varsayılan oluşturma parametrelerini de geçersiz kılmanıza olanak tanır.
+[`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=zh-tw#v1beta.GenerationConfig) 物件也允許您覆寫預設生成參數，例如 [`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=zh-tw#v1beta.GenerationConfig)。
 
 ### Python
 
@@ -636,7 +635,7 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:ge
   }'
 ```
 
-### Apps Komut Dosyası
+### Apps Script
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -677,11 +676,11 @@ function main() {
 }
 ```
 
-Yapılandırılabilir parametrelerin ve açıklamalarının tam listesi için API referansımızdaki [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=tr#v1beta.GenerationConfig) bölümüne bakın.
+如需可設定參數的完整清單及其說明，請參閱 API 參考資料中的 [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=zh-tw#v1beta.GenerationConfig)。
 
-## Çok formatlı girişler
+## 多模態輸入內容
 
-Gemini API, çok formatlı girişleri destekler. Bu sayede metinleri medya dosyalarıyla birleştirebilirsiniz. Aşağıdaki örnekte resim sağlama gösterilmektedir:
+Gemini API 支援多模態輸入內容，可讓您結合文字和媒體檔案。以下範例說明如何提供圖片：
 
 ### Python
 
@@ -842,7 +841,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   -d "@$TEMP_JSON"
 ```
 
-### Apps Komut Dosyası
+### Apps Script
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -889,14 +888,13 @@ function getImageData(url) {
 }
 ```
 
-Resim sağlamanın alternatif yöntemleri ve daha gelişmiş resim işleme hakkında bilgi edinmek için [Görüntü Anlama Rehberimizi](https://ai.google.dev/gemini-api/docs/image-understanding?hl=tr) inceleyin.
-API ayrıca [doküman](https://ai.google.dev/gemini-api/docs/document-processing?hl=tr), [video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=tr) ve [ses](https://ai.google.dev/gemini-api/docs/audio?hl=tr) girişlerini ve bu girişlerin anlaşılmasını da destekler.
+如需提供圖片的替代方法和更進階的圖片處理方式，請參閱[圖片理解指南](https://ai.google.dev/gemini-api/docs/image-understanding?hl=zh-tw)。API 也支援[文件](https://ai.google.dev/gemini-api/docs/document-processing?hl=zh-tw)、[影片](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-tw)和[音訊](https://ai.google.dev/gemini-api/docs/audio?hl=zh-tw)輸入和理解。
 
-## Yanıtları akış şeklinde gösterme
+## 逐句顯示回覆
 
-Varsayılan olarak, model yalnızca tüm oluşturma işlemi tamamlandıktan sonra yanıt verir.
+根據預設，整個生成程序完成後，模型才會傳回回覆。
 
-Daha akıcı etkileşimler için, [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=tr#v1beta.GenerateContentResponse) örneklerini oluşturuldukça artımlı olarak almak üzere akışı kullanın.
+如要獲得更流暢的互動體驗，請使用串流功能，逐步接收生成的 [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=zh-tw#v1beta.GenerateContentResponse) 執行個體。
 
 ### Python
 
@@ -1015,7 +1013,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:s
   }'
 ```
 
-### Apps Komut Dosyası
+### Apps Script
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -1050,9 +1048,9 @@ function main() {
 }
 ```
 
-## Çok aşamalı etkileşimli görüşmeler (sohbet)
+## 多輪對話 (即時通訊)
 
-SDK'larımız, birden fazla istem ve yanıt turunu bir sohbette toplama işlevi sunarak sohbet geçmişini kolayca takip etmenizi sağlar.
+我們的 SDK 提供多輪提示和回覆的收集功能，方便您追蹤對話記錄。
 
 ### Python
 
@@ -1212,7 +1210,7 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:ge
   }'
 ```
 
-### Apps Komut Dosyası
+### Apps Script
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -1260,7 +1258,7 @@ function main() {
 }
 ```
 
-Yayın, çok aşamalı etkileşimler için de kullanılabilir.
+串流功能也可用於多輪對話。
 
 ### Python
 
@@ -1431,7 +1429,7 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:st
   }'
 ```
 
-### Apps Komut Dosyası
+### Apps Script
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -1479,40 +1477,40 @@ function main() {
 }
 ```
 
-## İstem ipuçları
+## 提示詞訣竅
 
-Gemini'dan en iyi şekilde yararlanmayla ilgili öneriler için [istem mühendisliği kılavuzumuza](https://ai.google.dev/gemini/docs/prompting-strategies?hl=tr) göz atın.
+如要瞭解如何充分發揮 Gemini 的效用，請參閱[提示工程指南](https://ai.google.dev/gemini/docs/prompting-strategies?hl=zh-tw)。
 
-## Sırada ne var?
+## 後續步驟
 
-- [Google AI Studio'da Gemini](https://aistudio.google.com?hl=tr)'ı deneyin.
-- JSON benzeri yanıtlar için [yapılandırılmış çıkışlarla](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr) denemeler yapın.
-- Gemini'ın [görüntü](https://ai.google.dev/gemini-api/docs/image-understanding?hl=tr),
-  [video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=tr), [ses](https://ai.google.dev/gemini-api/docs/audio?hl=tr)
-  ve [doküman](https://ai.google.dev/gemini-api/docs/document-processing?hl=tr) anlama özelliklerini keşfedin.
-- Çok formatlı [dosya istemi stratejileri](https://ai.google.dev/gemini-api/docs/files?hl=tr#prompt-guide) hakkında bilgi edinin.
+- 在 [Google AI Studio 中試用 Gemini](https://aistudio.google.com?hl=zh-tw)。
+- 嘗試使用[結構化輸出內容](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-tw)，取得類似 JSON 的回覆。
+- 探索 Gemini 的[圖片](https://ai.google.dev/gemini-api/docs/image-understanding?hl=zh-tw)、
+  [影片](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-tw)、[音訊](https://ai.google.dev/gemini-api/docs/audio?hl=zh-tw)
+  和[文件](https://ai.google.dev/gemini-api/docs/document-processing?hl=zh-tw)理解功能。
+- 瞭解多模態[檔案提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw#prompt-guide)。
 
-## İçerik oluşturma
+## 內容生成
 
-Bu, modele istem göndermek için kullanılan merkezi uç noktadır. İçerik oluşturmak için iki uç nokta vardır. Temel fark, yanıtı nasıl aldığınızdır:
+這是將提示傳送至模型的主要端點。生成內容的端點有兩個，主要差異在於接收回應的方式：
 
-- **[`generateContent`](https://ai.google.dev/api/generate-content?hl=tr#method:-models.generatecontent)
-  (REST)**:
-  İsteği alır ve model tüm oluşturma işlemini tamamladıktan sonra tek bir yanıt verir.
-- **[`streamGenerateContent`](https://ai.google.dev/api/generate-content?hl=tr#method:-models.streamgeneratecontent)
-  (SSE)**: Tamamen aynı isteği alır ancak model, yanıtın parçalarını oluşturuldukça geri aktarır. Bu, kısmi sonuçları hemen görüntülemenize olanak tanıdığı için etkileşimli uygulamalarda daha iyi bir kullanıcı deneyimi sağlar.
+- **[`generateContent`](https://ai.google.dev/api/generate-content?hl=zh-tw#method:-models.generatecontent)
+  (REST)**：
+  接收要求，並在模型完成整個生成程序後，提供單一回覆。
+- **[`streamGenerateContent`](https://ai.google.dev/api/generate-content?hl=zh-tw#method:-models.streamgeneratecontent)
+  (SSE)**：接收完全相同的要求，但模型會在生成回覆時，將回覆內容分塊串流傳回。這項功能可立即顯示部分結果，因此能為互動式應用程式提供更優質的使用者體驗。
 
-### İstek metni yapısı
+### 要求主體結構
 
-[İstek gövdesi](https://ai.google.dev/api/generate-content?hl=tr#request-body), hem standart hem de akış modları için **aynı** olan ve birkaç temel nesneden oluşturulan bir JSON nesnesidir:
+[要求主體](https://ai.google.dev/api/generate-content?hl=zh-tw#request-body)是 JSON 物件，在標準和串流模式中**完全相同**，且由幾個核心物件建構而成：
 
-- [`Content`](https://ai.google.dev/api/caching?hl=tr#Content) nesnesi: Bir görüşmedeki tek bir dönüşü temsil eder.
-- [`Part`](https://ai.google.dev/api/caching?hl=tr#Part) nesnesi: `Content` dönüşündeki bir veri parçası (ör. metin veya resim).
-- `inline_data` ([`Blob`](https://ai.google.dev/api/caching?hl=tr#Blob)): İşlenmemiş medya baytları ve bunların MIME türü için bir kapsayıcı.
+- [`Content`](https://ai.google.dev/api/caching?hl=zh-tw#Content) 物件：代表對話中的單一回合。
+- [`Part`](https://ai.google.dev/api/caching?hl=zh-tw#Part) 物件：`Content` 輪流中的一筆資料 (例如文字或圖片)。
+- `inline_data` ([`Blob`](https://ai.google.dev/api/caching?hl=zh-tw#Blob))：原始媒體位元組及其 MIME 類型的容器。
 
-En üst düzeyde, istek gövdesinde bir `contents` nesnesi bulunur. Bu nesne, her biri sohbetteki dönüşleri temsil eden `Content` nesnelerinin listesidir. Çoğu durumda, temel metin oluşturma için tek bir `Content` nesneniz olur. Ancak görüşme geçmişini korumak istiyorsanız birden fazla `Content` nesne kullanabilirsiniz.
+在最高層級，要求主體包含 `contents` 物件，這是 `Content` 物件的清單，每個物件代表對話中的一輪。在大多數情況下，如要生成基本文字，您會使用單一 `Content` 物件，但如要保留對話記錄，則可使用多個 `Content` 物件。
 
-Aşağıda tipik bir `generateContent` istek gövdesi gösterilmektedir:
+以下是典型的 `generateContent` 要求主體：
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
@@ -1537,20 +1535,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-### Yanıt gövdesi yapısı
+### 回應主體結構
 
-[Yanıt metni](https://ai.google.dev/api/generate-content?hl=tr#response-body), aşağıdakiler hariç hem akış hem de standart mod için benzerdir:
+串流和標準模式的[回應內文](https://ai.google.dev/api/generate-content?hl=zh-tw#response-body)類似，但有以下例外狀況：
 
-- Standart mod: Yanıt gövdesi, [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=tr#v1beta.GenerateContentResponse) öğesinin bir örneğini içerir.
-- Akış modu: Yanıt metni, [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=tr#v1beta.GenerateContentResponse) örneklerinin akışını içerir.
+- 標準模式：回應主體會包含 [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=zh-tw#v1beta.GenerateContentResponse) 的例項。
+- 串流模式：回應主體包含 [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=zh-tw#v1beta.GenerateContentResponse) 例項的串流。
 
-Genel olarak, yanıt gövdesinde `candidates` nesnesi bulunur. Bu nesne, `Candidate` nesnelerinin listesidir. `Candidate` nesnesi, modelden döndürülen oluşturulmuş yanıtı içeren bir `Content` nesnesi içerir.
+整體來說，回應主體包含 `candidates` 物件，這是 `Candidate` 物件的清單。`Candidate` 物件包含 `Content` 物件，該物件具有模型傳回的生成回覆。
 
-## REST API örnekleri
+## REST API 範例
 
-### Çok formatlı istem (metin ve resim)
+### 多模態提示 (文字和圖片)
 
-İstemde hem metin hem de resim sağlamak için `parts` dizisi iki `Part` nesne içermelidir: biri metin, diğeri resim `inline_data` için.
+如要在提示中同時提供文字和圖片，`parts` 陣列應包含兩個 `Part` 物件：一個用於文字，另一個用於圖片 `inline_data`。
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
@@ -1572,9 +1570,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-### Çok aşamalı etkileşimli görüşmeler (sohbet)
+### 多輪對話 (即時通訊)
 
-Birden fazla dönüş içeren bir görüşme oluşturmak için `contents` dizisini birden fazla `Content` nesnesiyle tanımlarsınız. API, sonraki yanıt için bağlam olarak bu geçmişin tamamını kullanır. Her `Content` nesnesinin `role` değeri `user` ve `model` arasında değişmelidir.
+如要建構多輪對話，請定義包含多個 `Content` 物件的 `contents` 陣列。API 會將整個記錄做為下一個回應的脈絡資訊。每個 `Content` 物件的 `role` 應在 `user` 和 `model` 之間交替。
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
@@ -1605,25 +1603,24 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-### Temel çıkarımlar
+### 重點整理
 
-- `Content` zarfı temsil eder: Kullanıcıdan veya modelden gelen bir mesaj dönüşü için üst düzey kapsayıcıdır.
-- `Part` çok formatlılığı etkinleştirir: Farklı veri türlerini (metin, resim, video URI'si vb.) birleştirmek için tek bir `Content` nesnesinde birden fazla `Part` nesnesi kullanın.
-- Veri yönteminizi seçin:
-  - Doğrudan yerleştirilmiş küçük medya öğeleri (ör. çoğu resim) için `Part` ile `inline_data` kullanın.
-  - Daha büyük dosyalar veya istekler arasında yeniden kullanmak istediğiniz dosyalar için dosyayı yüklemek üzere File API'yi kullanın ve `file_data` bölümüyle referans verin.
-- Konuşma geçmişini yönetme: REST API'yi kullanan sohbet uygulamaları için her dönüşte `Content` nesnelerini ekleyerek `contents` dizisini oluşturun. `"user"` ve `"model"` rolleri arasında geçiş yapın. SDK kullanıyorsanız
-  konuşma geçmişini yönetmenin önerilen yolu için SDK belgelerine bakın.
+- `Content` 是信封：這是訊息回合的頂層容器，無論訊息來自使用者或模型都適用。
+- `Part` 啟用多模態：在單一 `Content` 物件中使用多個 `Part` 物件，即可合併不同類型的資料 (文字、圖片、影片 URI 等)。
+- 選擇資料方法：
+  - 如果是直接嵌入的小型媒體 (例如大多數圖片)，請使用 `Part`，並搭配 `inline_data`。
+  - 如要上傳較大的檔案，或在多個要求中重複使用檔案，請使用 File API 上傳檔案，並以 `file_data` 部分參照該檔案。
+- 管理對話記錄：如果是使用 REST API 的即時通訊應用程式，請為每個回合附加 `Content` 物件，交替使用 `"user"` 和 `"model"` 角色，藉此建構 `contents` 陣列。如果您使用 SDK，請參閱 SDK 說明文件，瞭解管理對話記錄的建議方式。
 
-## Yanıt örnekleri
+## 回覆範例
 
-Aşağıdaki örneklerde, bu bileşenlerin farklı istek türleri için nasıl bir araya geldiği gösterilmektedir.
+下列範例說明這些元件如何搭配運作，處理不同類型的要求。
 
-### Yalnızca metin içeren yanıt
+### 純文字回覆
 
-Varsayılan metin yanıtı, modelin yanıtını içeren bir veya daha fazla `content` nesnesi içeren bir `candidates` dizisinden oluşur.
+預設文字回覆包含 `candidates` 陣列，其中有一或多個包含模型回覆的 `content` 物件。
 
-Aşağıda, **standart** bir yanıta örnek verilmiştir:
+以下是**標準**回應的範例：
 
 ```
 {
@@ -1644,7 +1641,7 @@ Aşağıda, **standart** bir yanıta örnek verilmiştir:
 }
 ```
 
-Aşağıda bir dizi **aktarım** yanıtı verilmiştir. Her yanıtta, yanıtın tamamını bir araya getiren bir `responseId` bulunur:
+以下是一連串的**串流**回應。每個回應都包含一個 `responseId`，可將完整的回應連結在一起：
 
 ```
 {
@@ -1694,35 +1691,35 @@ Aşağıda bir dizi **aktarım** yanıtı verilmiştir. Her yanıtta, yanıtın 
 
 ## Live API (BidiGenerateContent) WebSockets API
 
-Live API, gerçek zamanlı yayın kullanım alanlarını etkinleştirmek için çift yönlü yayın yapmaya yönelik durum bilgisi içeren bir WebSocket tabanlı API sunar. Daha fazla bilgi için [Live API kılavuzunu](https://ai.google.dev/gemini-api/docs/live?hl=tr) ve [Live API referansını](https://ai.google.dev/api/live?hl=tr) inceleyebilirsiniz.
+Live API 提供以 WebSocket 為基礎的具狀態 API，可進行雙向串流，實現即時串流用途。如需更多詳細資料，請參閱 [Live API 指南](https://ai.google.dev/gemini-api/docs/live?hl=zh-tw)和 [Live API 參考資料](https://ai.google.dev/api/live?hl=zh-tw)。
 
-## Uzmanlaşmış modeller
+## 專用模型
 
-Gemini API, Gemini model ailesine ek olarak [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=tr), [Lyria](https://ai.google.dev/gemini-api/docs/music-generation?hl=tr) ve [gömme](https://ai.google.dev/gemini-api/docs/embeddings?hl=tr) modelleri gibi özel modeller için uç noktalar sunar. Modeller bölümündeki bu kılavuzlara göz atabilirsiniz.
+除了 Gemini 系列模型，Gemini API 也提供 [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=zh-tw)、[Lyria](https://ai.google.dev/gemini-api/docs/music-generation?hl=zh-tw) 和[嵌入](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-tw)模型等專業模型的端點。請參閱「模型」部分中的指南。
 
-## Platform API'leri
+## 平台 API
 
-Diğer uç noktalar, şu ana kadar açıklanan ana uç noktalarla birlikte kullanılabilecek ek özellikler sağlar. Daha fazla bilgi edinmek için Kılavuzlar bölümündeki [Toplu iş modu](https://ai.google.dev/gemini-api/docs/batch-mode?hl=tr) ve [File API](https://ai.google.dev/gemini-api/docs/files?hl=tr) konularına göz atın.
+其餘端點可啟用其他功能，與目前所述的主要端點搭配使用。如要瞭解詳情，請參閱「指南」部分的「[批次模式](https://ai.google.dev/gemini-api/docs/batch-mode?hl=zh-tw)」和「[檔案 API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw)」主題。
 
-## Sırada ne var?
+## 後續步驟
 
-Yeni başlıyorsanız Gemini API programlama modelini anlamanıza yardımcı olacak aşağıdaki kılavuzlara göz atın:
+如果是剛開始使用，請參閱下列指南，瞭解 Gemini API 程式設計模型：
 
-- [Gemini API'yi kullanmaya başlama kılavuzu](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Gemini model rehberi](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr)
+- [Gemini API 入門指南](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
+- [Gemini 模型指南](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw)
 
-Farklı Gemini API özelliklerini tanıtan ve kod örnekleri sunan özellik kılavuzlarına da göz atabilirsiniz:
+您也可以參閱功能指南，瞭解不同的 Gemini API 功能並取得程式碼範例：
 
-- [Metin üretme](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr)
-- [Bağlamı önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr)
-- [Yerleştirmeler](https://ai.google.dev/gemini-api/docs/embeddings?hl=tr)
+- [生成文字](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-tw)
+- [脈絡快取](https://ai.google.dev/gemini-api/docs/caching?hl=zh-tw)
+- [嵌入](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-tw)
 
-Geri bildirim gönderin
+提供意見
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Son güncelleme tarihi: 2026-07-30 UTC.
+上次更新時間：2026-09-12 (世界標準時間)。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+想進一步說明嗎？
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-12 (世界標準時間)。"],[],[]]
