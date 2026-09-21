@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/models/list
-fetched_at: 2026-09-14T05:36:12.045507+00:00
+fetched_at: 2026-09-21T05:44:05.966312+00:00
 fetch_method: mintlify_md
 ---
 
@@ -43,7 +43,7 @@ The Models API response can be used to determine which models are available for 
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -135,6 +135,8 @@ The Models API response can be used to determine which models are available for 
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `"anthropic-workspace-id": optional string`
 
 ## Returns
@@ -176,6 +178,20 @@ The Models API response can be used to determine which models are available for 
     - `code_execution: BetaCapabilitySupport`
 
       Whether the model supports code execution tools.
+
+    - `compaction: BetaCompactionCapability or null`
+
+      Compaction capability details: whether the model accepts the top-level
+      `compaction` request parameter, with one entry per supported
+      `compaction.type` value.
+
+      - `summarize: BetaCapabilitySupport`
+
+        Whether the summarize compaction type is supported.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
 
     - `context_management: BetaContextManagementCapability`
 
@@ -313,6 +329,12 @@ curl https://api.anthropic.com/v1/models \
           "supported": true
         },
         "code_execution": {
+          "supported": true
+        },
+        "compaction": {
+          "summarize": {
+            "supported": true
+          },
           "supported": true
         },
         "context_management": {

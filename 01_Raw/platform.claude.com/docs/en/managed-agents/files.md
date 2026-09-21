@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/files
-fetched_at: 2026-09-14T05:36:06.644514+00:00
+fetched_at: 2026-09-21T05:44:01.736900+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,11 +10,11 @@ url: https://platform.claude.com/docs/en/managed-agents/files
 description: Upload files and mount them in your sandbox for reading and processing.
 ---
 
-You can provide files to your agent by uploading them through the Files API and mounting them in the session's sandbox.
+## Compatibility
+- Status: Beta
+- [Beta header](https://platform.claude.com/docs/en/api/beta-headers): `managed-agents-2026-04-01`
 
-<Note>
-  Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](https://platform.claude.com/docs/en/api/beta-headers#endpoint-specific-headers).
-</Note>
+You can provide files to your agent by uploading them through the Files API and mounting them in the session's sandbox.
 
 ## Uploading files
 
@@ -25,8 +25,7 @@ First, upload a file using the [Files API](https://platform.claude.com/docs/en/b
   file=$(curl --fail-with-body -sS "${auth[@]}" \
     "${base_url}/files" \
     -F file=@data.csv)
-  file_id=$(jq -er '.id' <<<"${file}")
-  printf 'File ID: %s\n' "${file_id}"
+  FILE_ID=$(jq -er '.id' <<<"${file}")
   ```
 
   ```bash CLI
@@ -97,37 +96,32 @@ Mount uploaded files into the sandbox by adding them to the `resources` array wh
 
 <CodeGroup>
   ```bash cURL
-  session=$(
-    jq -n \
-      --arg agent_id "${agent_id}" \
-      --arg environment_id "${environment_id}" \
-      --arg file_id "${file_id}" \
-      '{
-        agent: $agent_id,
-        environment_id: $environment_id,
-        resources: [
-          {
-            type: "file",
-            file_id: $file_id,
-            mount_path: "/data.csv"
-          }
-        ]
-      }' | curl --fail-with-body -sS "${auth[@]}" "${base_url}/sessions" --json @-
-  )
-  session_id=$(jq -er '.id' <<<"${session}")
+  jq -n \
+    --arg agent_id "${AGENT_ID}" \
+    --arg environment_id "${ENVIRONMENT_ID}" \
+    --arg file_id "${FILE_ID}" \
+    '{
+      agent: $agent_id,
+      environment_id: $environment_id,
+      resources: [
+        {
+          type: "file",
+          file_id: $file_id,
+          mount_path: "/data.csv"
+        }
+      ]
+    }' | curl --fail-with-body -sS "${auth[@]}" "${base_url}/sessions" --json @-
   ```
 
   ```bash CLI
-  SESSION_ID=$(ant beta:sessions create \
+  ant beta:sessions create \
     --agent "$AGENT_ID" \
-    --environment-id "$ENVIRONMENT_ID" \
-    --transform id --raw-output <<EOF
+    --environment-id "$ENVIRONMENT_ID" <<EOF
   resources:
     - type: file
       file_id: $FILE_ID
       mount_path: /data.csv
   EOF
-  )
   ```
 
   ```python Python
@@ -374,21 +368,16 @@ You can add or remove files from a session after creation using the session reso
 
 <CodeGroup>
   ```bash cURL
-  resource=$(
-    jq -n --arg file_id "${file_id}" '{type: "file", file_id: $file_id}' \
-      | curl --fail-with-body -sS "${auth[@]}" \
-          "${base_url}/sessions/${session_id}/resources" --json @-
-  )
-  resource_id=$(jq -er '.id' <<<"${resource}")
-  printf '%s\n' "${resource_id}"  # "sesrsc_01ABC..."
+  jq -n --arg file_id "${FILE_ID}" '{type: "file", file_id: $file_id}' \
+    | curl --fail-with-body -sS "${auth[@]}" \
+        "${base_url}/sessions/${SESSION_ID}/resources" --json @-
   ```
 
   ```bash CLI
-  RESOURCE_ID=$(ant beta:sessions:resources add \
+  ant beta:sessions:resources add \
     --session-id "$SESSION_ID" \
     --type file \
-    --file-id "$FILE_ID" \
-    --transform id --raw-output)
+    --file-id "$FILE_ID"
   ```
 
   ```python Python
@@ -472,11 +461,10 @@ List all resources on a session with `resources.list`. To remove a file, call `r
 <CodeGroup>
   ```bash cURL
   curl --fail-with-body -sS "${auth[@]}" \
-    "${base_url}/sessions/${session_id}/resources" \
-    | jq -r '.data[] | "\(.id) \(.type)"'
+    "${base_url}/sessions/${SESSION_ID}/resources"
 
   curl --fail-with-body -sS "${auth[@]}" -X DELETE \
-    "${base_url}/sessions/${session_id}/resources/${resource_id}" >/dev/null
+    "${base_url}/sessions/${SESSION_ID}/resources/${RESOURCE_ID}" >/dev/null
   ```
 
   ```bash CLI
@@ -538,12 +526,15 @@ List all resources on a session with `resources.list`. To remove a file, call `r
   ```java Java
   var listed = client.beta().sessions().resources().list(session.id());
   for (var entry : listed.data()) {
-      if (entry.isFile()) {
-          var fileResource = entry.asFile();
-          IO.println(fileResource.id() + " " + fileResource.type());
-      } else if (entry.isGitHubRepository()) {
-          var repoResource = entry.asGitHubRepository();
-          IO.println(repoResource.id() + " " + repoResource.type());
+      switch (entry.type().value()) {
+          case FILE -> {
+              var fileResource = entry.asFile();
+              IO.println(fileResource.id() + " " + fileResource.type());
+          }
+          case GITHUB_REPOSITORY -> {
+              var repoResource = entry.asGitHubRepository();
+              IO.println(repoResource.id() + " " + repoResource.type());
+          }
       }
   }
 
@@ -655,7 +646,7 @@ Filtering by `scope_id` requires the `managed-agents-2026-04-01` beta header, so
   }
 
   // Download a file
-  resp, err := client.Files.Download(ctx, files.Data[0].ID)
+  resp, err := client.Files.Download(ctx, files.Data[0].ID, anthropic.FileDownloadParams{})
   if err != nil {
   	panic(err)
   }

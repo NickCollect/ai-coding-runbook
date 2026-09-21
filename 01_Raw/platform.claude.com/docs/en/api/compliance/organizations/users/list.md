@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/organizations/users/list
-fetched_at: 2026-09-14T05:36:21.875493+00:00
+fetched_at: 2026-09-21T05:44:14.618362+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,12 +35,6 @@ List current user members of an organization.
 
 ## Headers
 
-- `"anthropic-version": optional string`
-
-  The version of the Claude API you want to use.
-
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning).
-
 - `"x-api-key": optional string`
 
 ## Returns
@@ -67,7 +61,7 @@ List current user members of an organization.
 
     User's current full name
 
-  - `organization_role: "admin" or "billing" or "claude_code_user" or 6 more`
+  - `organization_role: "admin" or "billing" or "claude_code_user" or 8 more`
 
     User's built-in role within the organization. This is distinct from any custom RBAC roles that may also be assigned.
 
@@ -85,6 +79,10 @@ List current user members of an organization.
 
     - `"owner"`
 
+    - `"parent_org_admin"`
+
+    - `"parent_org_owner"`
+
     - `"primary_owner"`
 
     - `"user"`
@@ -101,6 +99,7 @@ List current user members of an organization.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/users \
+    -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 

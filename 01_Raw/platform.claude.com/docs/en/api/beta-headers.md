@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta-headers
-fetched_at: 2026-08-24T02:18:39.984220+00:00
+fetched_at: 2026-09-21T05:44:04.802175+00:00
 fetch_method: mintlify_md
 ---
 
@@ -174,7 +174,15 @@ To use multiple beta features in a single request, include all feature names in 
 anthropic-beta: feature1,feature2,feature3
 ```
 
-When using an SDK, list each feature in the `betas` parameter (for example, `betas=["feature1", "feature2"]`). With the CLI, pass a single `--beta` flag with the feature names separated by commas (for example, `--beta feature1,feature2`). Avoid repeating the flag: currently only the first flag's value takes effect.
+You can also send the `anthropic-beta` header more than once in the same request. The Claude API reads every `anthropic-beta` header, so the following is equivalent to the previous example:
+
+```http
+anthropic-beta: feature1
+anthropic-beta: feature2
+anthropic-beta: feature3
+```
+
+When using an SDK, list each feature in the `betas` parameter (for example, `betas=["feature1", "feature2"]`). With the CLI, pass a single `--beta` flag with the feature names separated by commas (for example, `--beta feature1,feature2`). You can also repeat the flag (for example, `--beta feature1 --beta feature2`).
 
 ### Endpoint-specific headers
 

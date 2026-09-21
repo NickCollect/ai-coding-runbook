@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/compaction
-fetched_at: 2026-09-07T05:31:25.952486+00:00
+fetched_at: 2026-09-21T05:44:00.514292+00:00
 fetch_method: mintlify_md
 ---
 
@@ -44,6 +44,8 @@ When compaction is enabled, Claude automatically summarizes your conversation wh
 On subsequent requests, append the response to your messages. The API automatically drops all content blocks prior to the `compaction` block, continuing the conversation from the summary.
 
 ![Compaction flow: when input tokens reach the trigger, Claude writes a summary into a compaction block and continues](https://platform.claude.com/docs/images/compaction-flow.svg)
+
+The previous steps describe threshold compaction, which most of this page covers. With the `compact-2026-09-04` beta header, you can instead request a summary on demand. That request is separate from your conversation turns and returns only the summary, so it can run in the background. When the block arrives, you swap it in for the messages it summarizes. See [Compact on demand with the `compaction` parameter](https://platform.claude.com/docs/en/build-with-claude/compaction#compact-on-demand-with-the-compaction-parameter).
 
 ## Basic usage
 
@@ -1759,17 +1761,22 @@ The compaction block streams differently from text blocks. You receive a `conten
       context_management={"edits": [{"type": "compact_20260112"}]},
   ) as stream:
       for event in stream:
-          if event.type == "content_block_start":
-              if event.content_block.type == "compaction":
-                  print("Compaction started...")
-              elif event.content_block.type == "text":
-                  print("Text response started...")
+          match event.type:
+              case "content_block_start":
+                  block = event.content_block
+                  match block.type:
+                      case "compaction":
+                          print("Compaction started...")
+                      case "text":
+                          print("Text response started...")
 
-          elif event.type == "content_block_delta":
-              if event.delta.type == "compaction_delta":
-                  print(f"Compaction complete: {len(event.delta.content or '')} chars")
-              elif event.delta.type == "text_delta":
-                  print(event.delta.text, end="", flush=True)
+              case "content_block_delta":
+                  delta = event.delta
+                  match delta.type:
+                      case "compaction_delta":
+                          print(f"Compaction complete: {len(delta.content or '')} chars")
+                      case "text_delta":
+                          print(delta.text, end="", flush=True)
 
       # Get the final accumulated message
       message = stream.get_final_message()
@@ -1793,18 +1800,27 @@ The compaction block streams differently from text blocks. You receive a `conten
   });
 
   for await (const event of stream) {
-    if (event.type === "content_block_start") {
-      if (event.content_block.type === "compaction") {
-        console.log("Compaction started...");
-      } else if (event.content_block.type === "text") {
-        console.log("Text response started...");
-      }
-    } else if (event.type === "content_block_delta") {
-      if (event.delta.type === "compaction_delta") {
-        console.log(`Compaction complete: ${event.delta.content?.length ?? 0} chars`);
-      } else if (event.delta.type === "text_delta") {
-        process.stdout.write(event.delta.text);
-      }
+    switch (event.type) {
+      case "content_block_start":
+        switch (event.content_block.type) {
+          case "compaction":
+            console.log("Compaction started...");
+            break;
+          case "text":
+            console.log("Text response started...");
+            break;
+        }
+        break;
+      case "content_block_delta":
+        switch (event.delta.type) {
+          case "compaction_delta":
+            console.log(`Compaction complete: ${event.delta.content?.length ?? 0} chars`);
+            break;
+          case "text_delta":
+            process.stdout.write(event.delta.text);
+            break;
+        }
+        break;
     }
   }
 
@@ -1939,6 +1955,13 @@ The compaction block streams differently from text blocks. You receive a `conten
   ```
 
   ```php PHP
+  use Anthropic\Beta\Messages\BetaCompactionBlock;
+  use Anthropic\Beta\Messages\BetaCompactionContentBlockDelta;
+  use Anthropic\Beta\Messages\BetaRawContentBlockDeltaEvent;
+  use Anthropic\Beta\Messages\BetaRawContentBlockStartEvent;
+  use Anthropic\Beta\Messages\BetaTextBlock;
+  use Anthropic\Beta\Messages\BetaTextDelta;
+
   $client = new Client();
   $messages = [['role' => 'user', 'content' => 'Hello, Claude']];
 
@@ -1955,18 +1978,27 @@ The compaction block streams differently from text blocks. You receive a `conten
   );
 
   foreach ($stream as $event) {
-      if ($event->type === 'content_block_start') {
-          if ($event->contentBlock->type === 'compaction') {
-              echo "Compaction started...\n";
-          } elseif ($event->contentBlock->type === 'text') {
-              echo "Text response started...\n";
-          }
-      } elseif ($event->type === 'content_block_delta') {
-          if ($event->delta->type === 'compaction_delta') {
-              echo "Compaction complete: " . strlen($event->delta->content ?? '') . " chars\n";
-          } elseif ($event->delta->type === 'text_delta') {
-              echo $event->delta->text;
-          }
+      switch (true) {
+          case $event instanceof BetaRawContentBlockStartEvent:
+              switch (true) {
+                  case $event->contentBlock instanceof BetaCompactionBlock:
+                      echo "Compaction started...\n";
+                      break;
+                  case $event->contentBlock instanceof BetaTextBlock:
+                      echo "Text response started...\n";
+                      break;
+              }
+              break;
+          case $event instanceof BetaRawContentBlockDeltaEvent:
+              switch (true) {
+                  case $event->delta instanceof BetaCompactionContentBlockDelta:
+                      echo "Compaction complete: " . strlen($event->delta->content ?? '') . " chars\n";
+                      break;
+                  case $event->delta instanceof BetaTextDelta:
+                      echo $event->delta->text;
+                      break;
+              }
+              break;
       }
   }
   ```
@@ -1986,18 +2018,21 @@ The compaction block streams differently from text blocks. You receive a `conten
   )
 
   stream.each do |event|
-    case event.type
-    when :content_block_start
-      if event.content_block.type == :compaction
+    case event
+    when Anthropic::Models::BetaRawContentBlockStartEvent
+      case event.content_block
+      when Anthropic::Models::BetaCompactionBlock
         puts "Compaction started..."
-      elsif event.content_block.type == :text
+      when Anthropic::Models::BetaTextBlock
         puts "Text response started..."
       end
-    when :content_block_delta
-      if event.delta.type == :compaction_delta
-        puts "Compaction complete: #{(event.delta.content || "").length} chars"
-      elsif event.delta.type == :text_delta
-        print event.delta.text
+    when Anthropic::Models::BetaRawContentBlockDeltaEvent
+      delta = event.delta
+      case delta
+      when Anthropic::Models::BetaCompactionContentBlockDelta
+        puts "Compaction complete: #{(delta.content || "").length} chars"
+      when Anthropic::Models::BetaTextDelta
+        print delta.text
       end
     end
   end
@@ -3414,6 +3449,390 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
   ```text wrap
   Summarize the transcript inside <summary></summary> tags. Include relevant information in the summary for continuing the task in the next context window. Do not call any tools while writing this summary; respond with text only.
   ```
+
+## Compact on demand with the `compaction` parameter
+
+The `compact-2026-09-04` beta adds a second way to compact. Threshold compaction summarizes partway through a request once the threshold you set is reached. With this beta, you instead send the top-level `compaction` parameter on a request of your choosing. The response contains a single signed `compaction` block and no reply. From then on, send that block first in `messages`, in place of the messages it summarizes, followed by any turns taken since. Claude sees the summary where those messages were. Everything after the summary reaches Claude unchanged. A threshold compaction block follows the messages it summarizes, but a signed block replaces them. Leaving the summarized messages in front of a signed block is a 400 error.
+
+Compacting this way gives you three things. First, you decide when to compact. Second, the summarization request can run in the background while the conversation continues on its full history, and you swap the block in when it arrives. This is often called async or background compaction. Third, you can keep recent turns word for word after the summary, which is often called keep-tail compaction. Models with [preserved thinking](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking) check earlier thinking blocks against the conversation. On those models, the thinking in turns that follow the summary, from either pattern, can stay valid after the swap, under the conditions in [Continue from the summary](https://platform.claude.com/docs/en/build-with-claude/compaction#continue-from-the-summary). That lets a long-running agent keep its train of thought. Use threshold compaction when you want the API to manage context inside ordinary requests. Use the `compaction` parameter when your application needs to control when compaction happens, can't pause while a summary is written, or must keep recent turns and their thinking after the summary.
+
+Send the `compact-2026-09-04` beta header on the request that asks for the summary and on every later request that carries the signed block. On-demand compaction is available on the Claude API but not on Amazon Bedrock or Google Cloud. It works on Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Mythos Preview, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6. You can also call the [Models API](https://platform.claude.com/docs/en/api/beta/models/list) with the beta header and read each model's `capabilities.compaction`. You can't combine `compaction` with `context_management` on one request.
+
+### Request a summary
+
+Send the conversation as it stands with `"compaction": {"type": "summarize"}`. The API summarizes every message in the request once, generates no reply after it, and returns the block alone with `stop_reason` `"compaction"`. Send the same `system` prompt and `tools` that you use for the rest of the conversation. The summarizer reads them, and on models with preserved thinking, the turns you keep stay valid only if they match. The conversation in this example has no `system` prompt or tools, so the request sends neither:
+
+<CodeGroup>
+  ```bash cURL
+  # max_tokens caps the whole call, including any thinking, so allow several thousand tokens.
+  curl https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: compact-2026-09-04" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-5",
+      "max_tokens": 4096,
+      "messages": [
+        {"role": "user", "content": "I am building a recipe app. Help me name the main entities in the data model."},
+        {"role": "assistant", "content": "Start with Recipe, Ingredient, and Step. Add a RecipeIngredient entry that holds the quantity and unit for each ingredient in a recipe."},
+        {"role": "user", "content": "Good. Now suggest field names for Recipe."}
+      ],
+      "compaction": {"type": "summarize"}
+    }'
+  ```
+
+  <MultiFileExample language="cli" label="CLI">
+    ```bash CLI
+    ant beta:messages create --beta compact-2026-09-04 < request.yaml
+    ```
+
+    <File filename="request.yaml">
+      ```yaml
+      model: claude-opus-5
+      # max_tokens caps the whole call, including any thinking, so allow several thousand tokens.
+      max_tokens: 4096
+      messages:
+        - role: user
+          content: I am building a recipe app. Help me name the main entities in the data model.
+        - role: assistant
+          content: Start with Recipe, Ingredient, and Step. Add a RecipeIngredient entry that holds the quantity and unit for each ingredient in a recipe.
+        - role: user
+          content: Good. Now suggest field names for Recipe.
+      compaction:
+        type: summarize
+      ```
+    </File>
+  </MultiFileExample>
+
+  ```python Python
+  from anthropic.types.beta import BetaMessageParam
+
+  client = anthropic.Anthropic()
+
+  history: list[BetaMessageParam] = [
+      {
+          "role": "user",
+          "content": "I am building a recipe app. Help me name the main entities in the data model.",
+      },
+      {
+          "role": "assistant",
+          "content": "Start with Recipe, Ingredient, and Step. Add a RecipeIngredient entry that holds the quantity and unit for each ingredient in a recipe.",
+      },
+      {"role": "user", "content": "Good. Now suggest field names for Recipe."},
+  ]
+
+  response = client.beta.messages.create(
+      model="claude-opus-5",
+      # max_tokens caps the whole call, including any thinking, so allow several thousand tokens.
+      max_tokens=4096,
+      betas=["compact-2026-09-04"],
+      messages=history,
+      compaction={"type": "summarize"},
+  )
+  print(f"Stop reason: {response.stop_reason}")
+  ```
+
+  ```typescript TypeScript
+  const client = new Anthropic();
+
+  const history: Anthropic.Beta.Messages.BetaMessageParam[] = [
+    {
+      role: "user",
+      content: "I am building a recipe app. Help me name the main entities in the data model."
+    },
+    {
+      role: "assistant",
+      content:
+        "Start with Recipe, Ingredient, and Step. Add a RecipeIngredient entry that holds the quantity and unit for each ingredient in a recipe."
+    },
+    { role: "user", content: "Good. Now suggest field names for Recipe." }
+  ];
+
+  const response = await client.beta.messages.create({
+    model: "claude-opus-5",
+    // max_tokens caps the whole call, including any thinking, so allow several thousand tokens.
+    max_tokens: 4096,
+    betas: ["compact-2026-09-04"],
+    messages: history,
+    compaction: { type: "summarize" }
+  });
+  console.log(`Stop reason: ${response.stop_reason}`);
+  ```
+
+  ```csharp C#
+  using Anthropic.Models.Beta;
+  using Anthropic.Models.Beta.Messages;
+  using Model = Anthropic.Models.Messages.Model;
+
+  AnthropicClient client = new();
+
+  List<BetaMessageParam> history =
+  [
+      new()
+      {
+          Role = Role.User,
+          Content = "I am building a recipe app. Help me name the main entities in the data model.",
+      },
+      new()
+      {
+          Role = Role.Assistant,
+          Content = "Start with Recipe, Ingredient, and Step. Add a RecipeIngredient entry that holds the quantity and unit for each ingredient in a recipe.",
+      },
+      new() { Role = Role.User, Content = "Good. Now suggest field names for Recipe." },
+  ];
+
+  var response = await client.Beta.Messages.Create(new MessageCreateParams
+  {
+      Model = Model.ClaudeOpus5,
+      // max_tokens caps the whole call, including any thinking, so allow several thousand tokens.
+      MaxTokens = 4096,
+      Betas = [AnthropicBeta.Compact2026_09_04],
+      Messages = history,
+      Compaction = new BetaCompactionConfig(), // type defaults to "summarize"
+  });
+
+  Console.WriteLine($"Stop reason: {response.StopReason?.Raw()}");
+  ```
+
+  ```go Go
+  client := anthropic.NewClient()
+
+  history := []anthropic.BetaMessageParam{
+  	anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("I am building a recipe app. Help me name the main entities in the data model.")),
+  	{
+  		Role:    anthropic.BetaMessageParamRoleAssistant,
+  		Content: []anthropic.BetaContentBlockParamUnion{anthropic.NewBetaTextBlock("Start with Recipe, Ingredient, and Step. Add a RecipeIngredient entry that holds the quantity and unit for each ingredient in a recipe.")},
+  	},
+  	anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Good. Now suggest field names for Recipe.")),
+  }
+
+  response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
+  	Model: anthropic.ModelClaudeOpus5,
+  	// max_tokens caps the whole call, including any thinking, so allow several thousand tokens.
+  	MaxTokens: 4096,
+  	Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaCompact2026_09_04},
+  	Messages:  history,
+  	Compaction: anthropic.BetaCompactionConfigUnionParam{
+  		OfSummarize: &anthropic.BetaSummarizeCompactionParam{},
+  	},
+  })
+  if err != nil {
+  	log.Fatal(err)
+  }
+  fmt.Println("Stop reason:", response.StopReason)
+  ```
+
+  ```java Java
+  import com.anthropic.models.beta.AnthropicBeta;
+  import com.anthropic.models.beta.messages.BetaCompactionConfig;
+  import com.anthropic.models.beta.messages.MessageCreateParams;
+
+  void main() {
+      var client = AnthropicOkHttpClient.fromEnv();
+
+      var params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_5)
+          // max_tokens caps the whole call, including any thinking, so allow several thousand tokens.
+          .maxTokens(4096)
+          .addBeta(AnthropicBeta.COMPACT_2026_09_04)
+          .addUserMessage("I am building a recipe app. Help me name the main entities in the data model.")
+          .addAssistantMessage("Start with Recipe, Ingredient, and Step. Add a RecipeIngredient entry that holds the quantity and unit for each ingredient in a recipe.")
+          .addUserMessage("Good. Now suggest field names for Recipe.")
+          .compaction(BetaCompactionConfig.builder().build()) // type defaults to "summarize"
+          .build();
+
+      var response = client.beta().messages().create(params);
+      response.stopReason().ifPresent(reason -> IO.println("Stop reason: " + reason));
+  }
+  ```
+
+  ```php PHP
+  use Anthropic\Beta\AnthropicBeta;
+  use Anthropic\Beta\Messages\BetaCompactionConfig;
+  use Anthropic\Beta\Messages\BetaMessageParam;
+  use Anthropic\Beta\Messages\BetaMessageParam\Role;
+
+  $client = new Client();
+
+  $history = [
+      BetaMessageParam::with(
+          role: Role::USER,
+          content: 'I am building a recipe app. Help me name the main entities in the data model.',
+      ),
+      BetaMessageParam::with(
+          role: Role::ASSISTANT,
+          content: 'Start with Recipe, Ingredient, and Step. Add a RecipeIngredient entry that holds the quantity and unit for each ingredient in a recipe.',
+      ),
+      BetaMessageParam::with(role: Role::USER, content: 'Good. Now suggest field names for Recipe.'),
+  ];
+
+  $response = $client->beta->messages->create(
+      model: Model::CLAUDE_OPUS_5,
+      // max_tokens caps the whole call, including any thinking, so allow several thousand tokens.
+      maxTokens: 4096,
+      betas: [AnthropicBeta::COMPACT_2026_09_04],
+      messages: $history,
+      compaction: BetaCompactionConfig::with(), // type defaults to 'summarize'
+  );
+
+  echo "Stop reason: {$response->stopReason}", PHP_EOL;
+  ```
+
+  ```ruby Ruby
+  client = Anthropic::Client.new
+
+  history = [
+    {
+      role: "user",
+      content: "I am building a recipe app. Help me name the main entities in the data model."
+    },
+    {
+      role: "assistant",
+      content: "Start with Recipe, Ingredient, and Step. Add a RecipeIngredient entry that holds the quantity and unit for each ingredient in a recipe."
+    },
+    { role: "user", content: "Good. Now suggest field names for Recipe." }
+  ]
+
+  response = client.beta.messages.create(
+    model: Anthropic::Model::CLAUDE_OPUS_5,
+    # max_tokens caps the whole call, including any thinking, so allow several thousand tokens.
+    max_tokens: 4096,
+    betas: [Anthropic::AnthropicBeta::COMPACT_2026_09_04],
+    messages: history,
+    compaction: { type: "summarize" }
+  )
+  puts "Stop reason: #{response.stop_reason}"
+  ```
+</CodeGroup>
+
+```json Response
+{
+  "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message",
+  "role": "assistant",
+  "model": "claude-opus-5",
+  "content": [
+    {
+      "type": "compaction",
+      "content": "Summary of the conversation: the user is designing the data model for a recipe app. The entities agreed so far are Recipe, Ingredient, Step, and RecipeIngredient, which holds the quantity and unit. The user then asked for field names for Recipe.",
+      "signature": "EuYBCkQY..."
+    }
+  ],
+  "stop_reason": "compaction",
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "iterations": [{ "type": "compaction", "input_tokens": 144, "output_tokens": 276 }]
+  }
+}
+```
+
+The summarization call uses the request's model, `system`, `tools`, thinking settings, and `max_tokens`. The summarizer reads the tool definitions but never runs a tool, and the response carries no thinking. `max_tokens` caps the whole call, including any thinking the model does before it writes the summary, so allow several thousand tokens. It is billed and rate-limited like any other request, and `usage.iterations` reports it as the `compaction` entry. The top-level `input_tokens` and `output_tokens` are zero because no reply was generated.
+
+If the last `assistant` turn ends in a tool call with no result yet, the API rejects the request. Send that turn's tool results first. Also leave out `stop_sequences`, structured-output `output_config.format`, and a `tool_choice` of type `any` or `tool`. They would do nothing on a summarization call, and the API rejects them. The conversation must still fit the model's context window, so compact before you outgrow it, not after.
+
+When you stream the response, the block arrives whole. You get one `content_block_start` event carrying the complete block, then `content_block_stop`, with no `content_block_delta` events. `ping` events can arrive before or between them.
+
+### Continue from the summary
+
+In your history, replace the messages you sent with the returned assistant message. Keep the `compaction` block exactly as the API returned it, including its `signature`. Send it first on every later request, with the beta header:
+
+```json
+{
+  "model": "claude-opus-5",
+  "max_tokens": 2048,
+  "messages": [
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "compaction",
+          "content": "Summary of the conversation: the user is designing the data model for a recipe app. The entities agreed so far are Recipe, Ingredient, Step, and RecipeIngredient, which holds the quantity and unit. The user then asked for field names for Recipe.",
+          "signature": "EuYBCkQY..."
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": "For Recipe, use title, description, servings, prep_minutes, and cook_minutes. Add created_at and updated_at timestamps."
+    },
+    { "role": "user", "content": "Now do the same for Ingredient." }
+  ]
+}
+```
+
+Here the second `assistant` message is the reply to the last summarized `user` turn. It arrived while the summary was being written, so it was not among the messages summarized. Two `assistant` messages in a row are fine here, because the block still comes first.
+
+The API puts the summary where the block stands and passes every later message to Claude unchanged. Follow these rules:
+
+* Put the block first in `messages`, either as an `assistant` message of its own or as the first content block of the first message, whether that is a `user` or `assistant` message.
+* Remove the summarized messages. If any remain in front of the block, the request returns a 400 error (`compaction_block_misplaced`). If any remain after it, the API doesn't reject the request for that reason and sends them to the model again.
+* Send exactly one `compaction` block per request, on every later request. A request without the block reaches Claude without the summary.
+
+To keep a tail of recent turns word for word, leave those turns out of the compaction request. The API summarizes every message it is sent, so send only the older turns, then put the block in front of the turns you kept.
+
+If the conversation took more turns while a background summary request ran, drop exactly the messages you sent in the compaction request from the front of your history. Put the returned message in their place, and keep everything appended since:
+
+```python
+# sent_count = len(messages sent in the compaction request)
+# response   = that request's result, arriving while the agent kept working
+if response.stop_reason == "compaction":
+    compaction_message = {"role": "assistant", "content": response.content}
+    history = [compaction_message] + history[sent_count:]
+# Otherwise keep the full history and try again later (see "When no summary comes back").
+```
+
+Don't edit your history between sending the compaction request and making the swap, and make the swap on the first request after the block arrives. That way, thinking produced while the summary was being written stays valid.
+
+On models with preserved thinking, the thinking blocks in the kept turns stay valid as long as both of these conditions hold:
+
+* The kept turns directly followed the summarized messages.
+* The `system` parameter and the `tools` not marked `defer_loading: true` are unchanged from the compaction request.
+
+The first condition also rules out a first kept message that the API would merge into the last summarized message: one with the same role as the last summarized message, or a `role: "system"` message. The simplest way to meet it is to compact exactly the `messages` of a request you already made. To change `system` or `tools` without invalidating any kept thinking, compact the whole conversation first, so no turns are kept. Then change them on the next request.
+
+A later request can use a different model, `system`, or `tools` than the compaction request, and the API still accepts the block. Such a change can invalidate the thinking in the kept turns, but it has no other effect.
+
+To compact a conversation that already starts with a block, send `compaction` again. The new block summarizes the old summary and everything after it. From then on, send only the newest block.
+
+### Write your own summarization prompt
+
+Without `instructions`, the API uses its own summarization prompt. A non-blank `instructions` string (up to 16,384 characters) replaces that prompt entirely, as it does for threshold compaction (see [Custom summarization instructions](https://platform.claude.com/docs/en/build-with-claude/compaction#custom-summarization-instructions)). For example:
+
+```json
+{
+  "compaction": {
+    "type": "summarize",
+    "instructions": "Summarize this recipe app design conversation. Preserve every entity and field name agreed so far, and the user's latest open request. Do not call tools; respond with the summary text only."
+  }
+}
+```
+
+The summarizer reads the whole conversation, earlier thinking included, with or without `instructions`. That differs from threshold compaction on Claude Fable 5.1 and Claude Mythos 5.1, where custom `instructions` leave earlier thinking out. In your `instructions`, say what the summary must retain and tell the model not to call tools. The summarization call runs under the same safeguards as any other request.
+
+### When no summary comes back
+
+A summary is produced only when the summarization call ends normally with text and no tool call. Otherwise, the response is still a 200 with empty `content`. The call is still billed and reported in `usage.iterations`, with zero usage when no call could be made. The `stop_reason` is the one the summarization call ended with:
+
+* `"max_tokens"`: the summary was cut off.
+* `"model_context_window_exceeded"`: there was no room for the summarization prompt.
+* `"refusal"`: the request was declined. It is subject to the same safeguards as your other requests, and [`stop_details`](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons#refusal) identifies the policy category behind it.
+* `"tool_use"`: the model called a tool instead of writing the summary.
+* `"end_turn"`: the call returned no text.
+
+Resend with a larger `max_tokens` after `"max_tokens"`, with shorter `instructions` or fewer messages after `"model_context_window_exceeded"`, or with `instructions` that tell the model not to call tools after `"tool_use"`. You can also continue without a summary.
+
+A transient server problem while producing a block, or while reading one you sent back, returns a retryable 529 `overloaded_error` with `error.details.error_code` set to `compaction_unavailable`. Retry the request. Other rejections specific to this beta are 400 errors, and most have a message that says what to remove or resend. The exception is a request that leaves out the beta header: it fails with a generic validation error, such as `compaction: Extra inputs are not permitted`, that doesn't mention the header. Some also carry an `error.details.error_code` that starts with `compaction_`, mostly the errors about the block itself: an altered, misplaced, or duplicated block, or a request with nothing left to summarize. Parameter errors, such as a field that can't be combined with `compaction`, carry the message only.
+
+### How it fits with the rest of the API
+
+* **Threshold compaction and context editing.** You can't send `compaction` and `context_management` on the same request. Threshold compaction (`compact_20260112`) can't run on a request that carries a signed block.
+* **Prompt caching.** `cache_control` on the block places a breakpoint after the summary.
+* **Mid-conversation system messages and tool changes.** `role: "system"` messages inside the summarized range are summarized. What they declared stops applying once the block replaces them. If an instruction or a [tool change](https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages#mid-conversation-tool-changes) still matters, state it again in a `role: "system"` message. Send that message right after your next new `user` turn, which comes after the kept turns, and leave it in your history from then on. Don't put it between the block and the kept turns, because that breaks the kept turns' thinking.
+* **Task budgets.** Don't send the `remaining` value of a [task budget](https://platform.claude.com/docs/en/build-with-claude/task-budgets) (`output_config.task_budget.remaining`) with `compaction` or on requests that carry the block. Doing so returns a 400 error.
+* **Token counting.** The [token counting](https://platform.claude.com/docs/en/build-with-claude/token-counting) endpoint ignores the `compaction` parameter.
+* **Content the summary can't carry.** Images, documents, `container_upload` blocks, and fetched URLs inside the summarized messages are gone once the block replaces them. Restate or re-upload anything a later turn still needs.
 
 ## Next steps
 

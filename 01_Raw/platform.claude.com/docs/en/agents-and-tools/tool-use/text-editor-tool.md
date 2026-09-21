@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool
-fetched_at: 2026-09-07T05:31:25.583903+00:00
+fetched_at: 2026-09-21T05:44:00.265130+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1510,18 +1510,19 @@ The tool type is `type: "text_editor_20250728"` for Claude 4 and later models.
           command = input_params.get("command", "")
           file_path = input_params.get("path", "")
 
-          if command == "view":
-              # Read and return file contents
-              pass
-          elif command == "str_replace":
-              # Replace text in file
-              pass
-          elif command == "create":
-              # Create new file
-              pass
-          elif command == "insert":
-              # Insert text at location
-              pass
+          match command:
+              case "view":
+                  # Read and return file contents
+                  pass
+              case "str_replace":
+                  # Replace text in file
+                  pass
+              case "create":
+                  # Create new file
+                  pass
+              case "insert":
+                  # Insert text at location
+                  pass
       ```
 
       ```typescript TypeScript
@@ -1530,14 +1531,19 @@ The tool type is `type: "text_editor_20250728"` for Claude 4 and later models.
         const command = inputParams.command ?? "";
         const filePath = inputParams.path ?? "";
 
-        if (command === "view") {
-          // Read and return file contents
-        } else if (command === "str_replace") {
-          // Replace text in file
-        } else if (command === "create") {
-          // Create new file
-        } else if (command === "insert") {
-          // Insert text at location
+        switch (command) {
+          case "view":
+            // Read and return file contents
+            break;
+          case "str_replace":
+            // Replace text in file
+            break;
+          case "create":
+            // Create new file
+            break;
+          case "insert":
+            // Insert text at location
+            break;
         }
       }
       ```

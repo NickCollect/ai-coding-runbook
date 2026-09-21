@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/webhooks
-fetched_at: 2026-08-24T02:18:38.006860+00:00
+fetched_at: 2026-09-21T05:44:01.645805+00:00
 fetch_method: mintlify_md
 ---
 
@@ -9,6 +9,10 @@ title: Subscribe to webhooks
 url: https://platform.claude.com/docs/en/managed-agents/webhooks
 description: Get notified when major events happen without polling.
 ---
+
+## Compatibility
+- Status: Beta
+- [Beta header](https://platform.claude.com/docs/en/api/beta-headers): `managed-agents-2026-04-01`
 
 Sessions are long-running interactions. While most real-time interactions happen through the [SSE event stream](https://platform.claude.com/docs/en/managed-agents/events-and-streaming), webhooks notify you of major state changes.
 

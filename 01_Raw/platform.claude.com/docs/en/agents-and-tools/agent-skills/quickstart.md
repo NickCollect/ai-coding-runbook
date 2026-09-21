@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/quickstart
-fetched_at: 2026-09-07T05:31:26.327639+00:00
+fetched_at: 2026-09-21T05:44:00.821060+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,7 +35,7 @@ Pre-built Agent Skills extend Claude's capabilities with specialized expertise f
 
 First, check what Skills are available. Use the Skills API to list all Anthropic-managed Skills. Each language tab is an excerpt from one continuous script, with any imports and client setup at the top:
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   # List Anthropic-managed Skills
   curl --fail-with-body -sS "https://api.anthropic.com/v1/skills?source=anthropic" \
@@ -505,7 +505,7 @@ The presentation was created in the code execution container and saved as a file
   if fileID != "" {
   	// Download the file and save it
   	outputPath := filepath.Join(os.TempDir(), "renewable_energy.pptx")
-  	fileContent, err := client.Files.Download(ctx, fileID)
+  	fileContent, err := client.Files.Download(ctx, fileID, anthropic.FileDownloadParams{})
   	if err != nil {
   		panic(err)
   	}

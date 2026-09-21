@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/onboarding
-fetched_at: 2026-08-17T02:15:15.978269+00:00
+fetched_at: 2026-09-21T05:44:01.330572+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,11 +10,11 @@ url: https://platform.claude.com/docs/en/managed-agents/onboarding
 description: Create, test, and iterate on agents visually in Console, then run them from your code with the API.
 ---
 
-[Console](https://platform.claude.com/workspaces/default/agent-quickstart/) provides a visual interface for creating and configuring agents. It lets you iterate on configuration interactively before writing code.
+## Compatibility
+- Status: Beta
+- [Beta header](https://platform.claude.com/docs/en/api/beta-headers): `managed-agents-2026-04-01`
 
-<Note>
-  Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](https://platform.claude.com/docs/en/api/beta-headers#endpoint-specific-headers).
-</Note>
+[Console](https://platform.claude.com/workspaces/default/agent-quickstart/) provides a visual interface for creating and configuring agents. It lets you iterate on configuration interactively before writing code.
 
 ## How to build an agent
 
@@ -38,9 +38,9 @@ Once your agent works as expected:
 1. Copy the agent ID and [environment ID](https://platform.claude.com/docs/en/managed-agents/environments) from Console.
 2. Reference them in your code when [creating sessions](https://platform.claude.com/docs/en/managed-agents/sessions):
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
-  session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
+  curl -fsSL https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -49,7 +49,7 @@ Once your agent works as expected:
       "agent": "agent_01J8XkN5uT3vHpLqRfWdY2",
       "environment_id": "env_01K2mPsT7hNwR4jXuLvCqD8",
       "title": "My first session"
-    }')
+    }'
   ```
 
   ```bash CLI

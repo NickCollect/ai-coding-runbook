@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool
-fetched_at: 2026-09-07T05:31:25.903285+00:00
+fetched_at: 2026-09-21T05:44:00.307051+00:00
 fetch_method: mintlify_md
 ---
 
@@ -44,9 +44,9 @@ Computer use has unique risks distinct from standard API features. These risks a
 
 In some circumstances, Claude will follow commands found in content even when they conflict with your instructions. For example, instructions on webpages or contained in images might override your instructions or cause Claude to make mistakes. Take precautions to isolate Claude from sensitive data and actions to avoid risks related to prompt injection.
 
-Anthropic has trained the model to resist these prompt injections and has added an extra layer of defense. If you use the computer use tools, classifiers will automatically run on your prompts to flag potential instances of prompt injections. When these classifiers identify potential prompt injections in screenshots, they will automatically steer the model to ask for user confirmation before proceeding with the next action. This extra protection won't be ideal for every use case (for example, use cases without a human in the loop), so if you'd like to opt out and turn it off, [contact support](https://support.claude.com/en/).
+Anthropic has trained the model to resist these prompt injections and has added an extra layer of defense. If you use the computer use tools, classifiers will automatically scan what the tools return, such as screenshots, to flag potential prompt injections. When these classifiers identify a potential prompt injection, they will automatically steer the model to check whether the instruction really came from you before acting on it.
 
-These precautions remain important even with the classifier defense layer in place.
+This extra protection won't be ideal for every use case (for example, use cases without a human in the loop), so if you'd like to opt out and turn it off, [contact support](https://support.claude.com/en/). The precautions above remain important even with these classifiers in place.
 
 Inform end users of relevant risks and obtain their consent prior to enabling computer use in your own products.
 
@@ -935,13 +935,14 @@ The computer use tool is implemented as a schema-less tool. When using this tool
 
 
       def handle_computer_action(name, tool_input):
-          if name == "screenshot":
-              return capture_screenshot()
-          elif name == "left_click":
-              # coordinate is optional; without it, click where the cursor already is
-              return click(tool_input.get("coordinate"))
-          elif name == "type":
-              return type_text(tool_input["text"])
+          match name:
+              case "screenshot":
+                  return capture_screenshot()
+              case "left_click":
+                  # coordinate is optional; without it, click where the cursor already is
+                  return click(tool_input.get("coordinate"))
+              case "type":
+                  return type_text(tool_input["text"])
           # Handle other actions as needed
           raise ValueError(f"Unknown or unimplemented member: {name}")
       ```
@@ -982,17 +983,21 @@ The computer use tool is implemented as a schema-less tool. When using this tool
       ): string | Anthropic.ImageBlockParam[] {
         const params: object =
           typeof input === "object" && input !== null ? input : {};
-        if (action === "screenshot") {
-          return captureScreenshot();
-        } else if (action === "left_click") {
-          // coordinate is optional on the toolset; without one, click at the cursor
-          if ("coordinate" in params && Array.isArray(params.coordinate)) {
-            const [x, y] = params.coordinate;
-            return clickAt(x, y);
-          }
-          return clickAtCursor();
-        } else if (action === "type" && "text" in params) {
-          return typeText(String(params.text));
+        switch (action) {
+          case "screenshot":
+            return captureScreenshot();
+          case "left_click":
+            // coordinate is optional on the toolset; without one, click at the cursor
+            if ("coordinate" in params && Array.isArray(params.coordinate)) {
+              const [x, y] = params.coordinate;
+              return clickAt(x, y);
+            }
+            return clickAtCursor();
+          case "type":
+            if ("text" in params) {
+              return typeText(String(params.text));
+            }
+            break;
         }
         // Handle other actions as needed
         throw new Error(`Unknown or unimplemented member: ${action}`);
@@ -1501,7 +1506,7 @@ The computer use tool is implemented as a schema-less tool. When using this tool
           $failed = false;
           foreach ($response->content as $block) {
               // This example declares only the computer toolset; route other tools here if you add them.
-              if (!($block instanceof ToolUseBlock) || $block->toolsetName !== 'computer') {
+              if (!($block instanceof \Anthropic\Messages\ToolUseBlock) || $block->toolsetName !== 'computer') {
                   continue;
               }
               $result = ['type' => 'tool_result', 'tool_use_id' => $block->id, 'toolset_name' => 'computer'];

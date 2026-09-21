@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/about-claude/use-case-guides/content-moderation
-fetched_at: 2026-08-31T06:29:34.306485+00:00
+fetched_at: 2026-09-21T05:44:03.085784+00:00
 fetch_method: mintlify_md
 ---
 
@@ -786,7 +786,7 @@ To use Claude for content moderation, Claude must understand the moderation requ
 
       // Parse the JSON response from Claude. The SDK decodes each content block
       // into its concrete class, so find the TextBlock before reading the text.
-      $textBlock = array_find($response->content, fn ($block) => $block instanceof TextBlock)
+      $textBlock = array_find($response->content, fn ($block) => $block instanceof \Anthropic\Messages\TextBlock)
           ?? throw new RuntimeException('Expected a text block in the response.');
       $assessment = json_decode($textBlock->text, associative: true, flags: JSON_THROW_ON_ERROR);
 
@@ -1339,7 +1339,7 @@ One additional consideration is that instead of treating content moderation as a
 
       // Parse the JSON response from Claude. The SDK decodes each content block
       // into its concrete class, so find the TextBlock before reading the text.
-      $textBlock = array_find($response->content, fn ($block) => $block instanceof TextBlock)
+      $textBlock = array_find($response->content, fn ($block) => $block instanceof \Anthropic\Messages\TextBlock)
           ?? throw new RuntimeException('Expected a text block in the response.');
       $assessment = json_decode($textBlock->text, associative: true, flags: JSON_THROW_ON_ERROR);
 
@@ -2079,7 +2079,7 @@ In addition to listing the unsafe categories in the prompt, further improvements
 
       // Parse the JSON response from Claude. The SDK decodes each content block
       // into its concrete class, so find the TextBlock before reading the text.
-      $textBlock = array_find($response->content, fn ($block) => $block instanceof TextBlock)
+      $textBlock = array_find($response->content, fn ($block) => $block instanceof \Anthropic\Messages\TextBlock)
           ?? throw new RuntimeException('Expected a text block in the response.');
       $assessment = json_decode($textBlock->text, associative: true, flags: JSON_THROW_ON_ERROR);
 
@@ -2654,7 +2654,7 @@ To reduce costs in situations where real-time moderation isn't necessary, consid
 
       // Parse the JSON response from Claude. The SDK decodes each content block
       // into its concrete class, so find the TextBlock before reading the text.
-      $textBlock = array_find($response->content, fn ($block) => $block instanceof TextBlock)
+      $textBlock = array_find($response->content, fn ($block) => $block instanceof \Anthropic\Messages\TextBlock)
           ?? throw new RuntimeException('Expected a text block in the response.');
 
       return json_decode($textBlock->text, associative: true, flags: JSON_THROW_ON_ERROR);

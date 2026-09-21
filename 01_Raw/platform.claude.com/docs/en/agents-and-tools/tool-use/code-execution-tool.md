@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool
-fetched_at: 2026-09-07T05:31:25.543647+00:00
+fetched_at: 2026-09-21T05:44:00.148193+00:00
 fetch_method: mintlify_md
 ---
 
@@ -692,12 +692,12 @@ When Claude saves files to its output directory during code execution (see [How 
   	fileIDs := extractFileIDs(response)
 
   	for _, fileID := range fileIDs {
-  		fileMetadata, err := client.Files.GetMetadata(ctx, fileID)
+  		fileMetadata, err := client.Files.GetMetadata(ctx, fileID, anthropic.FileGetMetadataParams{})
   		if err != nil {
   			log.Fatal(err)
   		}
 
-  		fileContent, err := client.Files.Download(ctx, fileID)
+  		fileContent, err := client.Files.Download(ctx, fileID, anthropic.FileDownloadParams{})
   		if err != nil {
   			log.Fatal(err)
   		}

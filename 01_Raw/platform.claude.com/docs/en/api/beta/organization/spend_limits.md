@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits
-fetched_at: 2026-09-14T05:36:20.790947+00:00
+fetched_at: 2026-09-21T05:44:13.615438+00:00
 fetch_method: mintlify_md
 ---
 
@@ -15,11 +15,15 @@ url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits
 
 **POST** `/v1/organizations/spend_limits`
 
-Set a per-user spend limit override.
+Set a spend limit.
 
 Upsert keyed on (scope, period): setting a limit that already exists
-overwrites it in place. Only `scope.type: "user"` is accepted; seat-tier,
-group, and organization-level defaults are configured in claude.ai.
+overwrites it in place. A Claude Enterprise organization sets `user`
+limits. Its seat-tier, group, and organization-level defaults are configured
+in claude.ai. A Claude Console organization sets `organization` and
+`workspace` limits, which are monthly and always carry an amount. Setting those
+limits is in an early access preview. To request access, contact your
+Anthropic account team.
 
 ### Body parameters
 
@@ -27,19 +31,43 @@ group, and organization-level defaults are configured in claude.ai.
 
   Limit amount as a non-negative integer decimal string in the minor unit of the organization's billing currency (cents for USD): "50000" is $500.00. `null` sets an explicit no-limit override for this scope and `period` only — each period resolves independently, so caps for other periods still apply.
 
-- `scope: object`
+- `scope: User or Organization or Workspace`
 
-  Scope selecting a single member of the organization.
+  What the limit applies to. Claude Enterprise organizations set `user` limits. Claude Console organizations set `organization` and `workspace` limits. Any other combination returns 400. Setting `organization` and `workspace` limits through the API is in an early access preview. To request access, contact your Anthropic account team.
 
-  - `type: "user"`
+  - `User object`
 
-    Scope type. Always `user` for this scope.
+    Scope selecting a single member of the organization.
 
-    default: user
+    - `type: "user"`
 
-  - `user_id: string`
+      Scope type. Always `user` for this scope.
 
-    Tagged ID of the member the spend limit applies to.
+      default: user
+
+    - `user_id: string`
+
+      Tagged ID of the member the spend limit applies to.
+
+  - `Organization object`
+
+    - `type: "organization"`
+
+      default: organization
+
+  - `Workspace object`
+
+    Scope selecting one workspace of a Claude Console organization.
+
+    - `type: "workspace"`
+
+      Scope type. Always `workspace` for this scope.
+
+      default: workspace
+
+    - `workspace_id: string`
+
+      Tagged ID of the workspace the spend limit applies to.
 
 - `period: optional "daily" or "monthly" or "weekly"`
 
@@ -89,7 +117,7 @@ group, and organization-level defaults are configured in claude.ai.
 
     - `"weekly"`
 
-  - `scope: object or object or object or 2 more`
+  - `scope: User or SeatTier or RBACGroup or 3 more`
 
     What the limit applies to. A tagged union on `type`; each variant carries the identifier for its scope.
 
@@ -136,6 +164,20 @@ group, and organization-level defaults are configured in claude.ai.
       - `type: "organization"`
 
         default: organization
+
+    - `Workspace object`
+
+      Scope selecting one workspace of a Claude Console organization.
+
+      - `type: "workspace"`
+
+        Scope type. Always `workspace` for this scope.
+
+        default: workspace
+
+      - `workspace_id: string`
+
+        Tagged ID of the workspace the spend limit applies to.
 
   - `updated_at: string`
 
@@ -230,7 +272,7 @@ Retrieve a spend limit by ID.
 
     - `"weekly"`
 
-  - `scope: object or object or object or 2 more`
+  - `scope: User or SeatTier or RBACGroup or 3 more`
 
     What the limit applies to. A tagged union on `type`; each variant carries the identifier for its scope.
 
@@ -278,6 +320,20 @@ Retrieve a spend limit by ID.
 
         default: organization
 
+    - `Workspace object`
+
+      Scope selecting one workspace of a Claude Console organization.
+
+      - `type: "workspace"`
+
+        Scope type. Always `workspace` for this scope.
+
+        default: workspace
+
+      - `workspace_id: string`
+
+        Tagged ID of the workspace the spend limit applies to.
+
   - `updated_at: string`
 
     RFC 3339 datetime at which the spend limit was last modified.
@@ -314,11 +370,13 @@ curl https://api.anthropic.com/v1/organizations/spend_limits/$SPEND_LIMIT_ID \
 
 **DELETE** `/v1/organizations/spend_limits/{spend_limit_id}`
 
-Delete a per-user spend limit override.
+Delete a spend limit.
 
-The member falls back to any inherited spend limit at that period.
-Seat-tier, group, and organization-level rows cannot be deleted via
-this endpoint.
+For a Claude Enterprise organization, this deletes a per-user override, and
+the member falls back to any inherited spend limit at that period. Its
+seat-tier, group, and organization-level rows cannot be deleted via this
+endpoint. A Claude Console organization deletes its organization and
+workspace limits. Deleting them through the API is in an early access preview.
 
 ### Path parameters
 
@@ -396,35 +454,47 @@ Paginates by member, so a member's periods never split across pages.
 
 - `data: array of BetaSpendSummary`
 
-  - `actor: object`
+  - `actor: UserActor or ScopedAPIKeyActor`
 
-    A user within the organization. `name` and `email_address` are
-    null when the underlying account is unavailable or has been deleted;
-    `deleted` is true only for deleted accounts.
+    - `UserActor object`
 
-    - `type: "user_actor"`
+      A user within the organization. `name` and `email_address` are
+      null when the underlying account is unavailable or has been deleted;
+      `deleted` is true only for deleted accounts.
 
-      Actor type. Always `user_actor`.
+      - `type: "user_actor"`
 
-      default: user_actor
+        Actor type. Always `user_actor`.
 
-    - `deleted: boolean`
+        default: user_actor
 
-      True only when the underlying account has been deleted.
+      - `deleted: boolean`
 
-      default: false
+        True only when the underlying account has been deleted.
 
-    - `email_address: string or null`
+        default: false
 
-      The user's email address. Null when the account is unavailable or has been deleted.
+      - `email_address: string or null`
 
-    - `name: string or null`
+        The user's email address. Null when the account is unavailable or has been deleted.
 
-      The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
+      - `name: string or null`
 
-    - `user_id: string`
+        The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
 
-      Tagged ID of the user.
+      - `user_id: string`
+
+        Tagged ID of the user.
+
+    - `ScopedAPIKeyActor object`
+
+      A scoped Admin API key acting on behalf of the organization.
+
+      - `type: "scoped_api_key_actor"`
+
+        default: scoped_api_key_actor
+
+      - `scoped_api_key_id: string`
 
   - `amount: string or null`
 
@@ -448,21 +518,7 @@ Paginates by member, so a member's periods never split across pages.
 
     The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
-  - `scope: object`
-
-    Scope selecting a single member of the organization.
-
-    - `type: "user"`
-
-      Scope type. Always `user` for this scope.
-
-      default: user
-
-    - `user_id: string`
-
-      Tagged ID of the member the spend limit applies to.
-
-  - `source: object or object or object or 2 more`
+  - `scope: User or SeatTier or RBACGroup or 3 more`
 
     - `User object`
 
@@ -507,6 +563,80 @@ Paginates by member, so a member's periods never split across pages.
       - `type: "organization"`
 
         default: organization
+
+    - `Workspace object`
+
+      Scope selecting one workspace of a Claude Console organization.
+
+      - `type: "workspace"`
+
+        Scope type. Always `workspace` for this scope.
+
+        default: workspace
+
+      - `workspace_id: string`
+
+        Tagged ID of the workspace the spend limit applies to.
+
+  - `source: User or SeatTier or RBACGroup or 3 more`
+
+    - `User object`
+
+      Scope selecting a single member of the organization.
+
+      - `type: "user"`
+
+        Scope type. Always `user` for this scope.
+
+        default: user
+
+      - `user_id: string`
+
+        Tagged ID of the member the spend limit applies to.
+
+    - `SeatTier object`
+
+      - `type: "seat_tier"`
+
+        default: seat_tier
+
+      - `seat_tier: string`
+
+    - `RBACGroup object`
+
+      - `type: "rbac_group"`
+
+        default: rbac_group
+
+      - `rbac_group_id: string`
+
+    - `OrganizationService object`
+
+      - `type: "organization_service"`
+
+        default: organization_service
+
+      - `service: string`
+
+    - `Organization object`
+
+      - `type: "organization"`
+
+        default: organization
+
+    - `Workspace object`
+
+      Scope selecting one workspace of a Claude Console organization.
+
+      - `type: "workspace"`
+
+        Scope type. Always `workspace` for this scope.
+
+        default: workspace
+
+      - `workspace_id: string`
+
+        Tagged ID of the workspace the spend limit applies to.
 
   - `spend_limit_id: string`
 
@@ -594,7 +724,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limits/effective \
 
     - `"weekly"`
 
-  - `scope: object or object or object or 2 more`
+  - `scope: User or SeatTier or RBACGroup or 3 more`
 
     What the limit applies to. A tagged union on `type`; each variant carries the identifier for its scope.
 
@@ -642,6 +772,20 @@ curl https://api.anthropic.com/v1/organizations/spend_limits/effective \
 
         default: organization
 
+    - `Workspace object`
+
+      Scope selecting one workspace of a Claude Console organization.
+
+      - `type: "workspace"`
+
+        Scope type. Always `workspace` for this scope.
+
+        default: workspace
+
+      - `workspace_id: string`
+
+        Tagged ID of the workspace the spend limit applies to.
+
   - `updated_at: string`
 
     RFC 3339 datetime at which the spend limit was last modified.
@@ -654,35 +798,47 @@ curl https://api.anthropic.com/v1/organizations/spend_limits/effective \
 
   Per-member effective-limit report row (`GET /spend_limits/effective`).
 
-  - `actor: object`
+  - `actor: UserActor or ScopedAPIKeyActor`
 
-    A user within the organization. `name` and `email_address` are
-    null when the underlying account is unavailable or has been deleted;
-    `deleted` is true only for deleted accounts.
+    - `UserActor object`
 
-    - `type: "user_actor"`
+      A user within the organization. `name` and `email_address` are
+      null when the underlying account is unavailable or has been deleted;
+      `deleted` is true only for deleted accounts.
 
-      Actor type. Always `user_actor`.
+      - `type: "user_actor"`
 
-      default: user_actor
+        Actor type. Always `user_actor`.
 
-    - `deleted: boolean`
+        default: user_actor
 
-      True only when the underlying account has been deleted.
+      - `deleted: boolean`
 
-      default: false
+        True only when the underlying account has been deleted.
 
-    - `email_address: string or null`
+        default: false
 
-      The user's email address. Null when the account is unavailable or has been deleted.
+      - `email_address: string or null`
 
-    - `name: string or null`
+        The user's email address. Null when the account is unavailable or has been deleted.
 
-      The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
+      - `name: string or null`
 
-    - `user_id: string`
+        The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
 
-      Tagged ID of the user.
+      - `user_id: string`
+
+        Tagged ID of the user.
+
+    - `ScopedAPIKeyActor object`
+
+      A scoped Admin API key acting on behalf of the organization.
+
+      - `type: "scoped_api_key_actor"`
+
+        default: scoped_api_key_actor
+
+      - `scoped_api_key_id: string`
 
   - `amount: string or null`
 
@@ -706,21 +862,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limits/effective \
 
     The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
-  - `scope: object`
-
-    Scope selecting a single member of the organization.
-
-    - `type: "user"`
-
-      Scope type. Always `user` for this scope.
-
-      default: user
-
-    - `user_id: string`
-
-      Tagged ID of the member the spend limit applies to.
-
-  - `source: object or object or object or 2 more`
+  - `scope: User or SeatTier or RBACGroup or 3 more`
 
     - `User object`
 
@@ -765,6 +907,80 @@ curl https://api.anthropic.com/v1/organizations/spend_limits/effective \
       - `type: "organization"`
 
         default: organization
+
+    - `Workspace object`
+
+      Scope selecting one workspace of a Claude Console organization.
+
+      - `type: "workspace"`
+
+        Scope type. Always `workspace` for this scope.
+
+        default: workspace
+
+      - `workspace_id: string`
+
+        Tagged ID of the workspace the spend limit applies to.
+
+  - `source: User or SeatTier or RBACGroup or 3 more`
+
+    - `User object`
+
+      Scope selecting a single member of the organization.
+
+      - `type: "user"`
+
+        Scope type. Always `user` for this scope.
+
+        default: user
+
+      - `user_id: string`
+
+        Tagged ID of the member the spend limit applies to.
+
+    - `SeatTier object`
+
+      - `type: "seat_tier"`
+
+        default: seat_tier
+
+      - `seat_tier: string`
+
+    - `RBACGroup object`
+
+      - `type: "rbac_group"`
+
+        default: rbac_group
+
+      - `rbac_group_id: string`
+
+    - `OrganizationService object`
+
+      - `type: "organization_service"`
+
+        default: organization_service
+
+      - `service: string`
+
+    - `Organization object`
+
+      - `type: "organization"`
+
+        default: organization
+
+    - `Workspace object`
+
+      Scope selecting one workspace of a Claude Console organization.
+
+      - `type: "workspace"`
+
+        Scope type. Always `workspace` for this scope.
+
+        default: workspace
+
+      - `workspace_id: string`
+
+        Tagged ID of the workspace the spend limit applies to.
 
   - `spend_limit_id: string`
 
@@ -869,7 +1085,7 @@ Requests whose requester is no longer a member are excluded.
 
     format: date-time
 
-  - `resolved_by: object or object or null`
+  - `resolved_by: UserActor or ScopedAPIKeyActor or null`
 
     - `UserActor object`
 
@@ -915,35 +1131,47 @@ Requests whose requester is no longer a member are excluded.
 
     Per-member effective-limit report row (`GET /spend_limits/effective`).
 
-    - `actor: object`
+    - `actor: UserActor or ScopedAPIKeyActor`
 
-      A user within the organization. `name` and `email_address` are
-      null when the underlying account is unavailable or has been deleted;
-      `deleted` is true only for deleted accounts.
+      - `UserActor object`
 
-      - `type: "user_actor"`
+        A user within the organization. `name` and `email_address` are
+        null when the underlying account is unavailable or has been deleted;
+        `deleted` is true only for deleted accounts.
 
-        Actor type. Always `user_actor`.
+        - `type: "user_actor"`
 
-        default: user_actor
+          Actor type. Always `user_actor`.
 
-      - `deleted: boolean`
+          default: user_actor
 
-        True only when the underlying account has been deleted.
+        - `deleted: boolean`
 
-        default: false
+          True only when the underlying account has been deleted.
 
-      - `email_address: string or null`
+          default: false
 
-        The user's email address. Null when the account is unavailable or has been deleted.
+        - `email_address: string or null`
 
-      - `name: string or null`
+          The user's email address. Null when the account is unavailable or has been deleted.
 
-        The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
+        - `name: string or null`
 
-      - `user_id: string`
+          The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
 
-        Tagged ID of the user.
+        - `user_id: string`
+
+          Tagged ID of the user.
+
+      - `ScopedAPIKeyActor object`
+
+        A scoped Admin API key acting on behalf of the organization.
+
+        - `type: "scoped_api_key_actor"`
+
+          default: scoped_api_key_actor
+
+        - `scoped_api_key_id: string`
 
     - `amount: string or null`
 
@@ -967,21 +1195,7 @@ Requests whose requester is no longer a member are excluded.
 
       The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
-    - `scope: object`
-
-      Scope selecting a single member of the organization.
-
-      - `type: "user"`
-
-        Scope type. Always `user` for this scope.
-
-        default: user
-
-      - `user_id: string`
-
-        Tagged ID of the member the spend limit applies to.
-
-    - `source: object or object or object or 2 more`
+    - `scope: User or SeatTier or RBACGroup or 3 more`
 
       - `User object`
 
@@ -1026,6 +1240,80 @@ Requests whose requester is no longer a member are excluded.
         - `type: "organization"`
 
           default: organization
+
+      - `Workspace object`
+
+        Scope selecting one workspace of a Claude Console organization.
+
+        - `type: "workspace"`
+
+          Scope type. Always `workspace` for this scope.
+
+          default: workspace
+
+        - `workspace_id: string`
+
+          Tagged ID of the workspace the spend limit applies to.
+
+    - `source: User or SeatTier or RBACGroup or 3 more`
+
+      - `User object`
+
+        Scope selecting a single member of the organization.
+
+        - `type: "user"`
+
+          Scope type. Always `user` for this scope.
+
+          default: user
+
+        - `user_id: string`
+
+          Tagged ID of the member the spend limit applies to.
+
+      - `SeatTier object`
+
+        - `type: "seat_tier"`
+
+          default: seat_tier
+
+        - `seat_tier: string`
+
+      - `RBACGroup object`
+
+        - `type: "rbac_group"`
+
+          default: rbac_group
+
+        - `rbac_group_id: string`
+
+      - `OrganizationService object`
+
+        - `type: "organization_service"`
+
+          default: organization_service
+
+        - `service: string`
+
+      - `Organization object`
+
+        - `type: "organization"`
+
+          default: organization
+
+      - `Workspace object`
+
+        Scope selecting one workspace of a Claude Console organization.
+
+        - `type: "workspace"`
+
+          Scope type. Always `workspace` for this scope.
+
+          default: workspace
+
+        - `workspace_id: string`
+
+          Tagged ID of the workspace the spend limit applies to.
 
     - `spend_limit_id: string`
 
@@ -1172,7 +1460,7 @@ requester at the request's period.
 
     format: date-time
 
-  - `resolved_by: object or object or null`
+  - `resolved_by: UserActor or ScopedAPIKeyActor or null`
 
     - `UserActor object`
 
@@ -1218,35 +1506,47 @@ requester at the request's period.
 
     Per-member effective-limit report row (`GET /spend_limits/effective`).
 
-    - `actor: object`
+    - `actor: UserActor or ScopedAPIKeyActor`
 
-      A user within the organization. `name` and `email_address` are
-      null when the underlying account is unavailable or has been deleted;
-      `deleted` is true only for deleted accounts.
+      - `UserActor object`
 
-      - `type: "user_actor"`
+        A user within the organization. `name` and `email_address` are
+        null when the underlying account is unavailable or has been deleted;
+        `deleted` is true only for deleted accounts.
 
-        Actor type. Always `user_actor`.
+        - `type: "user_actor"`
 
-        default: user_actor
+          Actor type. Always `user_actor`.
 
-      - `deleted: boolean`
+          default: user_actor
 
-        True only when the underlying account has been deleted.
+        - `deleted: boolean`
 
-        default: false
+          True only when the underlying account has been deleted.
 
-      - `email_address: string or null`
+          default: false
 
-        The user's email address. Null when the account is unavailable or has been deleted.
+        - `email_address: string or null`
 
-      - `name: string or null`
+          The user's email address. Null when the account is unavailable or has been deleted.
 
-        The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
+        - `name: string or null`
 
-      - `user_id: string`
+          The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
 
-        Tagged ID of the user.
+        - `user_id: string`
+
+          Tagged ID of the user.
+
+      - `ScopedAPIKeyActor object`
+
+        A scoped Admin API key acting on behalf of the organization.
+
+        - `type: "scoped_api_key_actor"`
+
+          default: scoped_api_key_actor
+
+        - `scoped_api_key_id: string`
 
     - `amount: string or null`
 
@@ -1270,21 +1570,7 @@ requester at the request's period.
 
       The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
-    - `scope: object`
-
-      Scope selecting a single member of the organization.
-
-      - `type: "user"`
-
-        Scope type. Always `user` for this scope.
-
-        default: user
-
-      - `user_id: string`
-
-        Tagged ID of the member the spend limit applies to.
-
-    - `source: object or object or object or 2 more`
+    - `scope: User or SeatTier or RBACGroup or 3 more`
 
       - `User object`
 
@@ -1329,6 +1615,80 @@ requester at the request's period.
         - `type: "organization"`
 
           default: organization
+
+      - `Workspace object`
+
+        Scope selecting one workspace of a Claude Console organization.
+
+        - `type: "workspace"`
+
+          Scope type. Always `workspace` for this scope.
+
+          default: workspace
+
+        - `workspace_id: string`
+
+          Tagged ID of the workspace the spend limit applies to.
+
+    - `source: User or SeatTier or RBACGroup or 3 more`
+
+      - `User object`
+
+        Scope selecting a single member of the organization.
+
+        - `type: "user"`
+
+          Scope type. Always `user` for this scope.
+
+          default: user
+
+        - `user_id: string`
+
+          Tagged ID of the member the spend limit applies to.
+
+      - `SeatTier object`
+
+        - `type: "seat_tier"`
+
+          default: seat_tier
+
+        - `seat_tier: string`
+
+      - `RBACGroup object`
+
+        - `type: "rbac_group"`
+
+          default: rbac_group
+
+        - `rbac_group_id: string`
+
+      - `OrganizationService object`
+
+        - `type: "organization_service"`
+
+          default: organization_service
+
+        - `service: string`
+
+      - `Organization object`
+
+        - `type: "organization"`
+
+          default: organization
+
+      - `Workspace object`
+
+        Scope selecting one workspace of a Claude Console organization.
+
+        - `type: "workspace"`
+
+          Scope type. Always `workspace` for this scope.
+
+          default: workspace
+
+        - `workspace_id: string`
+
+          Tagged ID of the workspace the spend limit applies to.
 
     - `spend_limit_id: string`
 
@@ -1484,7 +1844,7 @@ the member was blocked on. Anthropic emails the requester unless
 
   format: date-time
 
-- `resolved_by: object or object or null`
+- `resolved_by: UserActor or ScopedAPIKeyActor or null`
 
   - `UserActor object`
 
@@ -1564,7 +1924,7 @@ the member was blocked on. Anthropic emails the requester unless
 
     - `"weekly"`
 
-  - `scope: object or object or object or 2 more`
+  - `scope: User or SeatTier or RBACGroup or 3 more`
 
     What the limit applies to. A tagged union on `type`; each variant carries the identifier for its scope.
 
@@ -1612,6 +1972,20 @@ the member was blocked on. Anthropic emails the requester unless
 
         default: organization
 
+    - `Workspace object`
+
+      Scope selecting one workspace of a Claude Console organization.
+
+      - `type: "workspace"`
+
+        Scope type. Always `workspace` for this scope.
+
+        default: workspace
+
+      - `workspace_id: string`
+
+        Tagged ID of the workspace the spend limit applies to.
+
   - `updated_at: string`
 
     RFC 3339 datetime at which the spend limit was last modified.
@@ -1622,35 +1996,47 @@ the member was blocked on. Anthropic emails the requester unless
 
   Per-member effective-limit report row (`GET /spend_limits/effective`).
 
-  - `actor: object`
+  - `actor: UserActor or ScopedAPIKeyActor`
 
-    A user within the organization. `name` and `email_address` are
-    null when the underlying account is unavailable or has been deleted;
-    `deleted` is true only for deleted accounts.
+    - `UserActor object`
 
-    - `type: "user_actor"`
+      A user within the organization. `name` and `email_address` are
+      null when the underlying account is unavailable or has been deleted;
+      `deleted` is true only for deleted accounts.
 
-      Actor type. Always `user_actor`.
+      - `type: "user_actor"`
 
-      default: user_actor
+        Actor type. Always `user_actor`.
 
-    - `deleted: boolean`
+        default: user_actor
 
-      True only when the underlying account has been deleted.
+      - `deleted: boolean`
 
-      default: false
+        True only when the underlying account has been deleted.
 
-    - `email_address: string or null`
+        default: false
 
-      The user's email address. Null when the account is unavailable or has been deleted.
+      - `email_address: string or null`
 
-    - `name: string or null`
+        The user's email address. Null when the account is unavailable or has been deleted.
 
-      The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
+      - `name: string or null`
 
-    - `user_id: string`
+        The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
 
-      Tagged ID of the user.
+      - `user_id: string`
+
+        Tagged ID of the user.
+
+    - `ScopedAPIKeyActor object`
+
+      A scoped Admin API key acting on behalf of the organization.
+
+      - `type: "scoped_api_key_actor"`
+
+        default: scoped_api_key_actor
+
+      - `scoped_api_key_id: string`
 
   - `amount: string or null`
 
@@ -1674,21 +2060,7 @@ the member was blocked on. Anthropic emails the requester unless
 
     The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
-  - `scope: object`
-
-    Scope selecting a single member of the organization.
-
-    - `type: "user"`
-
-      Scope type. Always `user` for this scope.
-
-      default: user
-
-    - `user_id: string`
-
-      Tagged ID of the member the spend limit applies to.
-
-  - `source: object or object or object or 2 more`
+  - `scope: User or SeatTier or RBACGroup or 3 more`
 
     - `User object`
 
@@ -1733,6 +2105,80 @@ the member was blocked on. Anthropic emails the requester unless
       - `type: "organization"`
 
         default: organization
+
+    - `Workspace object`
+
+      Scope selecting one workspace of a Claude Console organization.
+
+      - `type: "workspace"`
+
+        Scope type. Always `workspace` for this scope.
+
+        default: workspace
+
+      - `workspace_id: string`
+
+        Tagged ID of the workspace the spend limit applies to.
+
+  - `source: User or SeatTier or RBACGroup or 3 more`
+
+    - `User object`
+
+      Scope selecting a single member of the organization.
+
+      - `type: "user"`
+
+        Scope type. Always `user` for this scope.
+
+        default: user
+
+      - `user_id: string`
+
+        Tagged ID of the member the spend limit applies to.
+
+    - `SeatTier object`
+
+      - `type: "seat_tier"`
+
+        default: seat_tier
+
+      - `seat_tier: string`
+
+    - `RBACGroup object`
+
+      - `type: "rbac_group"`
+
+        default: rbac_group
+
+      - `rbac_group_id: string`
+
+    - `OrganizationService object`
+
+      - `type: "organization_service"`
+
+        default: organization_service
+
+      - `service: string`
+
+    - `Organization object`
+
+      - `type: "organization"`
+
+        default: organization
+
+    - `Workspace object`
+
+      Scope selecting one workspace of a Claude Console organization.
+
+      - `type: "workspace"`
+
+        Scope type. Always `workspace` for this scope.
+
+        default: workspace
+
+      - `workspace_id: string`
+
+        Tagged ID of the workspace the spend limit applies to.
 
   - `spend_limit_id: string`
 
@@ -1894,7 +2340,7 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
     format: date-time
 
-  - `resolved_by: object or object or null`
+  - `resolved_by: UserActor or ScopedAPIKeyActor or null`
 
     - `UserActor object`
 
@@ -1940,35 +2386,47 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
     Per-member effective-limit report row (`GET /spend_limits/effective`).
 
-    - `actor: object`
+    - `actor: UserActor or ScopedAPIKeyActor`
 
-      A user within the organization. `name` and `email_address` are
-      null when the underlying account is unavailable or has been deleted;
-      `deleted` is true only for deleted accounts.
+      - `UserActor object`
 
-      - `type: "user_actor"`
+        A user within the organization. `name` and `email_address` are
+        null when the underlying account is unavailable or has been deleted;
+        `deleted` is true only for deleted accounts.
 
-        Actor type. Always `user_actor`.
+        - `type: "user_actor"`
 
-        default: user_actor
+          Actor type. Always `user_actor`.
 
-      - `deleted: boolean`
+          default: user_actor
 
-        True only when the underlying account has been deleted.
+        - `deleted: boolean`
 
-        default: false
+          True only when the underlying account has been deleted.
 
-      - `email_address: string or null`
+          default: false
 
-        The user's email address. Null when the account is unavailable or has been deleted.
+        - `email_address: string or null`
 
-      - `name: string or null`
+          The user's email address. Null when the account is unavailable or has been deleted.
 
-        The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
+        - `name: string or null`
 
-      - `user_id: string`
+          The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
 
-        Tagged ID of the user.
+        - `user_id: string`
+
+          Tagged ID of the user.
+
+      - `ScopedAPIKeyActor object`
+
+        A scoped Admin API key acting on behalf of the organization.
+
+        - `type: "scoped_api_key_actor"`
+
+          default: scoped_api_key_actor
+
+        - `scoped_api_key_id: string`
 
     - `amount: string or null`
 
@@ -1992,21 +2450,7 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
       The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
-    - `scope: object`
-
-      Scope selecting a single member of the organization.
-
-      - `type: "user"`
-
-        Scope type. Always `user` for this scope.
-
-        default: user
-
-      - `user_id: string`
-
-        Tagged ID of the member the spend limit applies to.
-
-    - `source: object or object or object or 2 more`
+    - `scope: User or SeatTier or RBACGroup or 3 more`
 
       - `User object`
 
@@ -2051,6 +2495,80 @@ Idempotent on `denied`; denying an already-`approved` request returns
         - `type: "organization"`
 
           default: organization
+
+      - `Workspace object`
+
+        Scope selecting one workspace of a Claude Console organization.
+
+        - `type: "workspace"`
+
+          Scope type. Always `workspace` for this scope.
+
+          default: workspace
+
+        - `workspace_id: string`
+
+          Tagged ID of the workspace the spend limit applies to.
+
+    - `source: User or SeatTier or RBACGroup or 3 more`
+
+      - `User object`
+
+        Scope selecting a single member of the organization.
+
+        - `type: "user"`
+
+          Scope type. Always `user` for this scope.
+
+          default: user
+
+        - `user_id: string`
+
+          Tagged ID of the member the spend limit applies to.
+
+      - `SeatTier object`
+
+        - `type: "seat_tier"`
+
+          default: seat_tier
+
+        - `seat_tier: string`
+
+      - `RBACGroup object`
+
+        - `type: "rbac_group"`
+
+          default: rbac_group
+
+        - `rbac_group_id: string`
+
+      - `OrganizationService object`
+
+        - `type: "organization_service"`
+
+          default: organization_service
+
+        - `service: string`
+
+      - `Organization object`
+
+        - `type: "organization"`
+
+          default: organization
+
+      - `Workspace object`
+
+        Scope selecting one workspace of a Claude Console organization.
+
+        - `type: "workspace"`
+
+          Scope type. Always `workspace` for this scope.
+
+          default: workspace
+
+        - `workspace_id: string`
+
+          Tagged ID of the workspace the spend limit applies to.
 
     - `spend_limit_id: string`
 

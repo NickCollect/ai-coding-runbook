@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/agent-setup
-fetched_at: 2026-09-07T05:31:27.212757+00:00
+fetched_at: 2026-09-21T05:44:01.448655+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,13 +10,13 @@ url: https://platform.claude.com/docs/en/managed-agents/agent-setup
 description: Create a reusable, versioned agent configuration.
 ---
 
+## Compatibility
+- Status: Beta
+- [Beta header](https://platform.claude.com/docs/en/api/beta-headers): `managed-agents-2026-04-01`
+
 An agent is a reusable, versioned configuration that defines persona and capabilities. It bundles the model, system prompt, tools, MCP servers, and skills that shape how Claude behaves during a session.
 
 Create the agent once as a reusable resource and reference it by ID each time you [start a session](https://platform.claude.com/docs/en/managed-agents/sessions). Agents are versioned and easier to manage across many sessions.
-
-<Note>
-  Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](https://platform.claude.com/docs/en/api/beta-headers#endpoint-specific-headers).
-</Note>
 
 ## Agent configuration fields
 
@@ -471,7 +471,7 @@ With the CLI, edit the agent's file and run `ant apply` again; apply supplies `v
 
 The preceding example supplies `version` from the create response, so the update only applies if nothing else has changed the agent since you read it. To apply an update unconditionally, omit `version` from the request:
 
-<CodeGroup defaultLanguage="cURL">
+<CodeGroup>
   ```bash cURL
   updated_agent=$(curl -fsSL "https://api.anthropic.com/v1/agents/$AGENT_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -516,7 +516,7 @@ The preceding example supplies `version` from the create response, so the update
 
 Fetch the full version history to track how an agent has changed over time. Results are paginated, and the SDK examples fetch every page automatically.
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   curl -fsSL "https://api.anthropic.com/v1/agents/$AGENT_ID/versions" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -582,7 +582,7 @@ Fetch the full version history to track how an agent has changed over time. Resu
 
 Archiving makes the agent read-only and cannot be undone. Existing sessions continue to run, but new sessions cannot reference the agent. The response sets `archived_at` to the archive timestamp.
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   archived=$(curl -fsSL -X POST "https://api.anthropic.com/v1/agents/$AGENT_ID/archive" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/java
-fetched_at: 2026-09-07T05:31:31.655093+00:00
+fetched_at: 2026-09-21T05:44:04.739016+00:00
 fetch_method: mintlify_md
 ---
 
@@ -21,7 +21,7 @@ The Anthropic Java SDK provides convenient access to the Claude API from applica
 <Tabs>
   <Tab title="Gradle">
     ```kotlin
-    implementation("com.anthropic:anthropic-java:2.60.0")
+    implementation("com.anthropic:anthropic-java:2.63.0")
     ```
   </Tab>
 
@@ -30,7 +30,7 @@ The Anthropic Java SDK provides convenient access to the Claude API from applica
     <dependency>
         <groupId>com.anthropic</groupId>
         <artifactId>anthropic-java</artifactId>
-        <version>2.60.0</version>
+        <version>2.63.0</version>
     </dependency>
     ```
   </Tab>
@@ -1090,7 +1090,7 @@ The Java SDK supports the following platforms through separate dependencies that
 
 Use `BedrockMantleBackend` for new projects; `BedrockBackend` remains for existing applications using the Bedrock `InvokeModel` API.
 
-Each `Backend` implementation is passed to the client with `.backend()` on `AnthropicOkHttpClient.builder()`. Each cloud backend pulls in its respective cloud-platform SDK classes as transitive dependencies.
+The platform artifacts are add-ons to the base `com.anthropic:anthropic-java` dependency, which provides `AnthropicOkHttpClient`, so install both. Each `Backend` implementation is passed to the client with `.backend()` on `AnthropicOkHttpClient.builder()`. Each cloud backend pulls in its respective cloud-platform SDK classes as transitive dependencies.
 
 ## Advanced usage
 

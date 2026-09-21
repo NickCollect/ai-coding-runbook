@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/cmek
-fetched_at: 2026-09-14T05:36:07.386663+00:00
+fetched_at: 2026-09-21T05:44:02.425098+00:00
 fetch_method: mintlify_md
 ---
 
@@ -29,7 +29,7 @@ The use of CMEK is optional. Eligible organizations can **opt in** to use custom
 
 ## How it works
 
-Only Organization Admins (on Claude Platform; the Admin role on Claude Platform on AWS) or Owners and the Primary Owner (on Claude Enterprise) can configure CMEK. On Claude Platform, CMEK is scoped per workspace and configured with the Admin API (on Claude Platform on AWS, in the Claude Console or through the IAM-authorized external key and workspace endpoints). On Claude Enterprise, CMEK is scoped per organization and configured in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls). On either product, CMEK protects data written after your key takes effect. Existing data (prior chats, files, and sessions) remains encrypted with Anthropic-managed keys and is not re-encrypted under your key.
+Only Organization Admins (on Claude Platform; the Admin role on Claude Platform on AWS) or Owners and the Primary Owner (on Claude Enterprise) can configure CMEK. On Claude Platform, CMEK is scoped per workspace and configured in the Claude Console or with the Admin API (on Claude Platform on AWS, in the Claude Console or through the IAM-authorized external key and workspace endpoints). On Claude Enterprise, CMEK is scoped per organization and configured in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls). On either product, CMEK protects data written after your key takes effect. Existing data (prior chats, files, and sessions) remains encrypted with Anthropic-managed keys and is not re-encrypted under your key.
 
 On Claude Platform, Anthropic recommends attaching your key to a new workspace before you send any requests to that workspace. If you attach a key to a workspace that already receives requests, your key can take up to a day to take effect. Data written before then, like existing data, is encrypted with Anthropic-managed keys and is not re-encrypted.
 
@@ -64,7 +64,7 @@ What CMEK covers depends on which product you use.
 **Claude Platform**
 
 * Message content, files and attachments (both inline attachments sent with a request and Files API uploads), and MCP and tool configuration.
-* [Claude Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview) data, including agent configurations, environments, webhooks, and sessions and their events.
+* [Claude Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview) data, including agent configurations, environments, webhooks, sessions and their events, [memory stores](https://platform.claude.com/docs/en/managed-agents/memory) and their memories and memory versions, and [dreams](https://platform.claude.com/docs/en/managed-agents/dreams).
 
 **Claude Enterprise**
 
@@ -112,7 +112,7 @@ These features remain available, but their data is not encrypted under your key.
 **Claude Enterprise**
 
 * Beta and research preview features might not be covered by CMEK and can break in CMEK organizations, for example, Claude Security and Claude Design.
-* [Personal preferences - Instructions for Claude section](https://claude.ai/new#settings/general) and Cowork Global instructions. These are set at the account level and shared across all of a user's organizations.
+* [Personal preferences - Instructions for Claude section](https://claude.ai/new#settings/account) and Cowork Global instructions. These are set at the account level and shared across all of a user's organizations.
 
 On both products, account data for users in your organization (such as names, email addresses, and profile pictures) is not encrypted under your key.
 
@@ -128,8 +128,8 @@ The following Claude Platform APIs and tools store data at rest under your key w
 | Batch                 | Bash tool                                                                                         |
 | Skills                | Text editor tool                                                                                  |
 | Claude Managed Agents | MCP connector                                                                                     |
-|                       | Structured outputs (not available for Claude Fable or Claude Mythos models in CMEK organizations) |
-|                       | Advisor tool                                                                                      |
+| Memory stores         | Structured outputs (not available for Claude Fable or Claude Mythos models in CMEK organizations) |
+| Dreams                | Advisor tool                                                                                      |
 |                       | Computer use                                                                                      |
 |                       | Browser use                                                                                       |
 |                       | Context management                                                                                |

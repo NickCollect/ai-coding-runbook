@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/sessions
-fetched_at: 2026-08-17T02:15:16.301501+00:00
+fetched_at: 2026-09-21T05:44:01.542175+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,19 +10,19 @@ url: https://platform.claude.com/docs/en/managed-agents/sessions
 description: Create a session to run your agent and begin executing tasks.
 ---
 
-A session is an agent instance within an environment. Each session references an [agent](https://platform.claude.com/docs/en/managed-agents/agent-setup) and an [environment](https://platform.claude.com/docs/en/managed-agents/environments) (both created separately), and maintains conversation history across multiple interactions. Sessions follow a two-step lifecycle: first [create the session](https://platform.claude.com/docs/en/managed-agents/sessions#creating-a-session), then [send a user event](https://platform.claude.com/docs/en/managed-agents/sessions#starting-the-session) to start work. You can also collapse both steps into one call with [`initial_events`](https://platform.claude.com/docs/en/managed-agents/sessions#seed-the-session-with-initial-events).
+## Compatibility
+- Status: Beta
+- [Beta header](https://platform.claude.com/docs/en/api/beta-headers): `managed-agents-2026-04-01`
 
-<Note>
-  Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](https://platform.claude.com/docs/en/api/beta-headers#endpoint-specific-headers).
-</Note>
+A session is an agent instance within an environment. Each session references an [agent](https://platform.claude.com/docs/en/managed-agents/agent-setup) and an [environment](https://platform.claude.com/docs/en/managed-agents/environments) (both created separately), and maintains conversation history across multiple interactions. Sessions follow a two-step lifecycle: first [create the session](https://platform.claude.com/docs/en/managed-agents/sessions#creating-a-session), then [send a user event](https://platform.claude.com/docs/en/managed-agents/sessions#starting-the-session) to start work. You can also collapse both steps into one call with [`initial_events`](https://platform.claude.com/docs/en/managed-agents/sessions#seed-the-session-with-initial-events).
 
 ## Creating a session
 
 A session requires an `agent` ID and an `environment` ID. Agents are versioned resources; passing in the `agent` ID as a string creates the session with the latest agent version.
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
-  session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
+  curl -fsSL https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -33,8 +33,6 @@ A session requires an `agent` ID and an `environment` ID. Agents are versioned r
     "environment_id": "$ENVIRONMENT_ID"
   }
   EOF
-  )
-  SESSION_ID=$(jq -r '.id' <<< "$session")
   ```
 
   ```bash CLI
@@ -101,9 +99,9 @@ A session requires an `agent` ID and an `environment` ID. Agents are versioned r
 
 To pin a session to a specific agent version, pass an object. This lets you control exactly which version runs and stage rollouts of new versions independently.
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
-  pinned_session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
+  curl -fsSL https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -114,8 +112,6 @@ To pin a session to a specific agent version, pass an object. This lets you cont
     "environment_id": "$ENVIRONMENT_ID"
   }
   EOF
-  )
-  PINNED_SESSION_ID=$(jq -r '.id' <<< "$pinned_session")
   ```
 
   ```bash CLI
@@ -203,7 +199,7 @@ You can create a session and start its work in one call. `initial_events` is an 
 
 The following example creates a session with a single `user.message` in `initial_events`:
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   seeded_session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -487,9 +483,9 @@ In the response, the `agent` object reflects the configuration the session runs 
 
 The following example starts a session that overrides the model and clears the system prompt:
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
-  override_session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
+  curl -fsSL https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -505,17 +501,12 @@ The following example starts a session that overrides the model and clears the s
     "environment_id": "$ENVIRONMENT_ID"
   }
   EOF
-  )
-  jq '.agent | {id, version, model, system}' <<< "$override_session"
-  OVERRIDE_SESSION_ID=$(jq -r '.id' <<< "$override_session")
   ```
 
   ```bash CLI
   # The response's `agent` is the resolved snapshot: each override replaces that
   # field for this session only, and the agent resource keeps its id and version.
-  ant beta:sessions create \
-    --transform 'agent.{id,version,model,system}' \
-    --format json <<YAML
+  ant beta:sessions create <<YAML
   agent:
     type: agent_with_overrides
     id: $AGENT_ID
@@ -659,7 +650,7 @@ Because a `model` override replaces the agent's `model` object in full, it also 
 
 The following example starts a session from an agent whose model has no geo pin, pins the session's model requests to US inference by including `inference_geo` in the `model` override, and prints the value echoed in the response's `agent.model`:
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   # Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
   session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
@@ -842,9 +833,9 @@ See [Session budgets](https://platform.claude.com/docs/en/managed-agents/budgets
 
 If your agent uses MCP tools that require authentication, pass `vault_ids` at session creation to reference a vault containing stored OAuth credentials. Anthropic manages token refresh on your behalf. See [Authenticate with vaults](https://platform.claude.com/docs/en/managed-agents/vaults) for how to create vaults and register credentials.
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
-  vault_session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
+  curl -fsSL https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -856,8 +847,6 @@ If your agent uses MCP tools that require authentication, pass `vault_ids` at se
     "vault_ids": ["$VAULT_ID"]
   }
   EOF
-  )
-  VAULT_SESSION_ID=$(jq -r '.id' <<< "$vault_session")
   ```
 
   ```bash CLI
@@ -936,7 +925,7 @@ If your agent uses MCP tools that require authentication, pass `vault_ids` at se
 
 Creating a session without `initial_events` registers the session but does not start any work; the environment's sandbox begins provisioning as soon as the session is created, so the first tool call does not wait on it. To delegate a task, send events to the session using a [user event](https://platform.claude.com/docs/en/managed-agents/reference#event-types). To supply the first event in the create request instead, see [Seed the session with initial events](https://platform.claude.com/docs/en/managed-agents/sessions#seed-the-session-with-initial-events). The session acts as a state machine that tracks progress while events drive the actual execution.
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \

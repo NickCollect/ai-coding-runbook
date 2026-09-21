@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/skills-guide
-fetched_at: 2026-09-07T05:31:26.545892+00:00
+fetched_at: 2026-09-21T05:44:01.031339+00:00
 fetch_method: mintlify_md
 ---
 
@@ -572,12 +572,12 @@ To provide input files for Skills to work on, [upload them with the Files API](h
 
   	// Step 3: Download the file using Files API
   	for _, fileID := range fileIDs {
-  		fileMetadata, err := client.Files.GetMetadata(context.TODO(), fileID)
+  		fileMetadata, err := client.Files.GetMetadata(context.TODO(), fileID, anthropic.FileGetMetadataParams{})
   		if err != nil {
   			log.Fatal(err)
   		}
 
-  		fileContent, err := client.Files.Download(context.TODO(), fileID)
+  		fileContent, err := client.Files.Download(context.TODO(), fileID, anthropic.FileDownloadParams{})
   		if err != nil {
   			log.Fatal(err)
   		}
@@ -853,7 +853,7 @@ To provide input files for Skills to work on, [upload them with the Files API](h
   fileID := "file_011CNha8iCJcU1wXNR6q4V8w"
 
   // Get file metadata
-  fileInfo, err := client.Files.GetMetadata(context.TODO(), fileID)
+  fileInfo, err := client.Files.GetMetadata(context.TODO(), fileID, anthropic.FileGetMetadataParams{})
   if err != nil {
   	log.Fatal(err)
   }
@@ -870,7 +870,7 @@ To provide input files for Skills to work on, [upload them with the Files API](h
   }
 
   // Delete a file
-  _, err = client.Files.Delete(context.TODO(), fileID)
+  _, err = client.Files.Delete(context.TODO(), fileID, anthropic.FileDeleteParams{})
   if err != nil {
   	log.Fatal(err)
   }
@@ -2172,7 +2172,7 @@ Upload your custom Skill to make it available in your workspace. You can upload 
 
 Files are identified by the filename you attach (the `;filename=` suffix in the cURL example and the filename arguments in the SDK examples). For the walkthrough's skill, create a zip with `zip -r financial_skill.zip financial_skill/` and substitute it for the `example_skill.zip` placeholder in the zip-upload options.
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   curl -X POST "https://api.anthropic.com/v1/skills" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -2477,7 +2477,7 @@ For complete request/response schemas, see the [Create Skill API reference](http
 
 Retrieve all Skills available to your workspace, including both Anthropic pre-built Skills and your custom Skills. Use the `source` parameter to filter by skill type:
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   # List all Skills
   curl "https://api.anthropic.com/v1/skills" \
@@ -2623,7 +2623,7 @@ See the [List Skills API reference](https://platform.claude.com/docs/en/api/skil
 
 Get details about a specific Skill:
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   curl "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -2670,6 +2670,7 @@ Get details about a specific Skill:
   skill, err := client.Skills.Get(
   	context.TODO(),
   	"skill_01AbCdEfGhIjKlMnOpQrStUv",
+  	anthropic.SkillGetParams{},
   )
   if err != nil {
   	log.Fatal(err)
@@ -2719,7 +2720,7 @@ Get details about a specific Skill:
 
 Deleting a Skill also removes all of its versions.
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   curl -X DELETE "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -2754,6 +2755,7 @@ Deleting a Skill also removes all of its versions.
   _, err := client.Skills.Delete(
   	context.TODO(),
   	"skill_01AbCdEfGhIjKlMnOpQrStUv",
+  	anthropic.SkillDeleteParams{},
   )
   if err != nil {
   	log.Fatal(err)
@@ -2799,7 +2801,7 @@ Skills support versioning to manage updates safely:
 
 A new version is a complete snapshot, not a delta: upload the Skill's full file set each time. Files you omit are not carried over, and the `name` in the new version's `SKILL.md` must match the Skill's existing name. The following examples re-upload the complete `financial_skill/` bundle from [Creating a Skill](https://platform.claude.com/docs/en/build-with-claude/skills-guide#creating-a-skill).
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   # Create a new version
   NEW_VERSION=$(curl -X POST "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv/versions" \

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/thinking
-fetched_at: 2026-09-14T05:36:04.181157+00:00
+fetched_at: 2026-09-21T05:43:59.855921+00:00
 fetch_method: mintlify_md
 ---
 
@@ -104,10 +104,11 @@ On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6, thi
   )
 
   for block in response.content:
-      if block.type == "thinking":
-          print(f"\nThinking: {block.thinking}")
-      elif block.type == "text":
-          print(f"\nResponse: {block.text}")
+      match block.type:
+          case "thinking":
+              print(f"\nThinking: {block.thinking}")
+          case "text":
+              print(f"\nResponse: {block.text}")
   ```
 
   ```typescript TypeScript
@@ -129,10 +130,13 @@ On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6, thi
   });
 
   for (const block of response.content) {
-    if (block.type === "thinking") {
-      console.log(`\nThinking: ${block.thinking}`);
-    } else if (block.type === "text") {
-      console.log(`\nResponse: ${block.text}`);
+    switch (block.type) {
+      case "thinking":
+        console.log(`\nThinking: ${block.thinking}`);
+        break;
+      case "text":
+        console.log(`\nResponse: ${block.text}`);
+        break;
     }
   }
   ```
@@ -226,6 +230,9 @@ On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6, thi
   ```
 
   ```php PHP
+  use Anthropic\Messages\TextBlock;
+  use Anthropic\Messages\ThinkingBlock;
+
   $client = new Client();
 
   $message = $client->messages->create(
@@ -241,10 +248,13 @@ On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6, thi
   );
 
   foreach ($message->content as $block) {
-      if ($block->type === 'thinking') {
-          echo "\nThinking: " . $block->thinking;
-      } elseif ($block->type === 'text') {
-          echo "\nResponse: " . $block->text;
+      switch (true) {
+          case $block instanceof ThinkingBlock:
+              echo "\nThinking: " . $block->thinking;
+              break;
+          case $block instanceof TextBlock:
+              echo "\nResponse: " . $block->text;
+              break;
       }
   }
   ```
@@ -268,10 +278,10 @@ On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6, thi
   )
 
   message.content.each do |block|
-    case block.type
-    when :thinking
+    case block
+    when Anthropic::Models::ThinkingBlock
       puts "\nThinking: #{block.thinking}"
-    when :text
+    when Anthropic::Models::TextBlock
       puts "\nResponse: #{block.text}"
     end
   end
@@ -476,7 +486,7 @@ Keep the following in mind when working with omitted thinking:
 * If you pass thinking blocks back in multi-turn conversations, pass them unchanged. The server decrypts the `signature` to reconstruct the original thinking for prompt construction (see [Preserving thinking blocks](https://platform.claude.com/docs/en/build-with-claude/thinking#preserving-thinking-blocks)). Any text you place in the `thinking` field of a round-tripped omitted block is ignored.
 * `display` is invalid with `thinking.type: "disabled"` (there is nothing to display).
 * When using `thinking.type: "adaptive"` and the model skips thinking for a simple request, no thinking block is produced regardless of `display`.
-* When streaming with `display: "omitted"`, no `thinking_delta` events are emitted. With `display: "updates"`, only [progress-update blocks](https://platform.claude.com/docs/en/build-with-claude/thinking#progress-updates) stream `thinking_delta` events. See [Streaming thinking](https://platform.claude.com/docs/en/build-with-claude/thinking#streaming-thinking) for the event sequence.
+* When streaming with `display: "omitted"`, no thinking text is streamed. Each thinking block streams a `thinking_delta` with an empty `thinking` string, then its `signature_delta`. With `display: "updates"`, only [progress-update blocks](https://platform.claude.com/docs/en/build-with-claude/thinking#progress-updates) stream `thinking_delta` events that carry text. See [Streaming thinking](https://platform.claude.com/docs/en/build-with-claude/thinking#streaming-thinking) for the event sequence.
 
 <Note>
   The `signature` field is identical whichever `display` value you set. Switching `display` values between turns in a conversation is supported.
@@ -506,7 +516,7 @@ To see the model's reasoning, read the `thinking` blocks rather than prompting f
 
 Thinking works with [streaming](https://platform.claude.com/docs/en/build-with-claude/streaming). Thinking blocks stream as `thinking_delta` events inside `content_block_delta` events, followed by a single `signature_delta` event just before the block's `content_block_stop`. Text blocks stream afterward as usual.
 
-![Diagram of the streaming event sequence with thinking: the thinking block opens, thinking deltas stream only when the display setting returns text (summarized, or updates for progress-update blocks), a single signature delta closes the block, then text deltas stream](https://platform.claude.com/docs/images/how-thinking-streams.svg)
+![Diagram of the streaming event sequence with thinking: the thinking block opens, thinking deltas carry text only when the display setting returns text (summarized, or updates for progress-update blocks), a single signature delta closes the block, then text deltas stream](https://platform.claude.com/docs/images/how-thinking-streams.svg)
 
 The following examples stream a response with adaptive thinking, printing thinking and text deltas as they arrive:
 
@@ -558,13 +568,16 @@ The following examples stream a response with adaptive thinking, printing thinki
       ],
   ) as stream:
       for event in stream:
-          if event.type == "content_block_start":
-              print(f"\nStarting {event.content_block.type} block...")
-          elif event.type == "content_block_delta":
-              if event.delta.type == "thinking_delta":
-                  print(event.delta.thinking, end="", flush=True)
-              elif event.delta.type == "text_delta":
-                  print(event.delta.text, end="", flush=True)
+          match event.type:
+              case "content_block_start":
+                  print(f"\nStarting {event.content_block.type} block...")
+              case "content_block_delta":
+                  delta = event.delta
+                  match delta.type:
+                      case "thinking_delta":
+                          print(delta.thinking, end="", flush=True)
+                      case "text_delta":
+                          print(delta.text, end="", flush=True)
   ```
 
   ```typescript TypeScript
@@ -578,14 +591,20 @@ The following examples stream a response with adaptive thinking, printing thinki
   });
 
   for await (const event of stream) {
-    if (event.type === "content_block_start") {
-      console.log(`\nStarting ${event.content_block.type} block...`);
-    } else if (event.type === "content_block_delta") {
-      if (event.delta.type === "thinking_delta") {
-        process.stdout.write(event.delta.thinking);
-      } else if (event.delta.type === "text_delta") {
-        process.stdout.write(event.delta.text);
-      }
+    switch (event.type) {
+      case "content_block_start":
+        console.log(`\nStarting ${event.content_block.type} block...`);
+        break;
+      case "content_block_delta":
+        switch (event.delta.type) {
+          case "thinking_delta":
+            process.stdout.write(event.delta.thinking);
+            break;
+          case "text_delta":
+            process.stdout.write(event.delta.text);
+            break;
+        }
+        break;
     }
   }
   ```
@@ -673,22 +692,24 @@ The following examples stream a response with adaptive thinking, printing thinki
 
       try (var streamResponse = client.messages().createStreaming(params)) {
           streamResponse.stream().forEach(event -> {
-              if (event.contentBlockStart().isPresent()) {
-                  var startEvent = event.contentBlockStart().get();
-                  var block = startEvent.contentBlock();
-                  if (block.isThinking()) {
-                      IO.println("\nStarting thinking block...");
-                  } else if (block.isText()) {
-                      IO.println("\nStarting text block...");
+              switch (event.type().value()) {
+                  case CONTENT_BLOCK_START -> {
+                      var startEvent = event.asContentBlockStart();
+                      var block = startEvent.contentBlock();
+                      switch (block.type().value()) {
+                          case THINKING -> IO.println("\nStarting thinking block...");
+                          case TEXT -> IO.println("\nStarting text block...");
+                      }
                   }
-              } else if (event.contentBlockDelta().isPresent()) {
-                  var deltaEvent = event.contentBlockDelta().get();
-                  deltaEvent.delta().thinking().ifPresent(td ->
-                      IO.print(td.thinking())
-                  );
-                  deltaEvent.delta().text().ifPresent(td ->
-                      IO.print(td.text())
-                  );
+                  case CONTENT_BLOCK_DELTA -> {
+                      var deltaEvent = event.asContentBlockDelta();
+                      deltaEvent.delta().thinking().ifPresent(td ->
+                          IO.print(td.thinking())
+                      );
+                      deltaEvent.delta().text().ifPresent(td ->
+                          IO.print(td.text())
+                      );
+                  }
               }
           });
       }
@@ -696,6 +717,11 @@ The following examples stream a response with adaptive thinking, printing thinki
   ```
 
   ```php PHP
+  use Anthropic\Messages\RawContentBlockDeltaEvent;
+  use Anthropic\Messages\RawContentBlockStartEvent;
+  use Anthropic\Messages\TextDelta;
+  use Anthropic\Messages\ThinkingDelta;
+
   $client = new Client();
 
   $stream = $client->messages->createStream(
@@ -708,14 +734,20 @@ The following examples stream a response with adaptive thinking, printing thinki
   );
 
   foreach ($stream as $event) {
-      if ($event->type === 'content_block_start') {
-          echo "\nStarting {$event->contentBlock->type} block...\n";
-      } elseif ($event->type === 'content_block_delta') {
-          if ($event->delta->type === 'thinking_delta') {
-              echo $event->delta->thinking;
-          } elseif ($event->delta->type === 'text_delta') {
-              echo $event->delta->text;
-          }
+      switch (true) {
+          case $event instanceof RawContentBlockStartEvent:
+              echo "\nStarting {$event->contentBlock->type} block...\n";
+              break;
+          case $event instanceof RawContentBlockDeltaEvent:
+              switch (true) {
+                  case $event->delta instanceof ThinkingDelta:
+                      echo $event->delta->thinking;
+                      break;
+                  case $event->delta instanceof TextDelta:
+                      echo $event->delta->text;
+                      break;
+              }
+              break;
       }
   }
   ```
@@ -786,11 +818,14 @@ To reassemble complete thinking blocks with their signatures after streaming, us
   ```
 </Accordion>
 
-When `display: "omitted"` is set, the thinking block opens, a single `signature_delta` arrives, and the block closes without any `thinking_delta` events. Text streaming begins immediately after:
+When `display: "omitted"` is set, the thinking block opens, a `thinking_delta` with an empty `thinking` string arrives, a single `signature_delta` follows, and the block closes. Text streaming begins immediately after:
 
 ```sse Output
 event: content_block_start
 data: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":"","signature":""}}
+
+event: content_block_delta
+data: {"type":"content_block_delta","index":0,"delta":{"type":"thinking_delta","thinking":""}}
 
 event: content_block_delta
 data: {"type":"content_block_delta","index":0,"delta":{"type":"signature_delta","signature":"EosnCkYICxIMMb3LzNrMu..."}}
@@ -1135,21 +1170,21 @@ You can't prefill the assistant response while thinking is on. Forced tool use (
 Each model accepts `max_tokens` up to the ceiling listed here. On the [Message Batches API](https://platform.claude.com/docs/en/build-with-claude/batch-processing#extended-output-beta), the `output-300k-2026-03-24` [beta header](https://platform.claude.com/docs/en/api/beta-headers) raises that ceiling for the models with a batches ceiling listed.
 
 | Model                 | Max output tokens | Batches beta ceiling |
-| --------------------- | ----------------- | -------------------- |
-| Claude Fable 5.1      | 128k              | —                    |
-| Claude Mythos 5.1     | 128k              | —                    |
-| Claude Fable 5        | 128k              | —                    |
-| Claude Mythos 5       | 128k              | —                    |
-| Claude Mythos Preview | 128k              | Not available        |
-| Claude Opus 5         | 128k              | 300k                 |
-| Claude Opus 4.8       | 128k              | 300k                 |
-| Claude Opus 4.7       | 128k              | 300k                 |
-| Claude Sonnet 5       | 128k              | 300k                 |
-| Claude Opus 4.6       | 128k              | 300k                 |
-| Claude Sonnet 4.6     | 128k              | 300k                 |
-| Claude Haiku 4.5      | 64k               | Not available        |
-| Claude Sonnet 4.5     | 64k               | Not available        |
-| Claude Opus 4.5       | 64k               | Not available        |
+| :-------------------- | :---------------- | :------------------- |
+| Claude Fable 5.1      | 128K              | —                    |
+| Claude Mythos 5.1     | 128K              | —                    |
+| Claude Fable 5        | 128K              | —                    |
+| Claude Mythos 5       | 128K              | —                    |
+| Claude Mythos Preview | 128K              | Not available        |
+| Claude Opus 5         | 128K              | 300K                 |
+| Claude Opus 4.8       | 128K              | 300K                 |
+| Claude Opus 4.7       | 128K              | 300K                 |
+| Claude Opus 4.6       | 128K              | 300K                 |
+| Claude Opus 4.5       | 64K               | Not available        |
+| Claude Sonnet 5       | 128K              | 300K                 |
+| Claude Sonnet 4.6     | 128K              | 300K                 |
+| Claude Sonnet 4.5     | 64K               | Not available        |
+| Claude Haiku 4.5      | 64K               | Not available        |
 
 See the [models overview](https://platform.claude.com/docs/en/models/overview) for limits on legacy models.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/skills
-fetched_at: 2026-09-07T05:31:27.353323+00:00
+fetched_at: 2026-09-21T05:44:01.464928+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,6 +10,10 @@ url: https://platform.claude.com/docs/en/managed-agents/skills
 description: Attach pre-built or custom skills to an agent in Claude Managed Agents to give it reusable, filesystem-based expertise for domain-specific workflows.
 ---
 
+## Compatibility
+- Status: Beta
+- [Beta header](https://platform.claude.com/docs/en/api/beta-headers): `managed-agents-2026-04-01`
+
 Skills are reusable, filesystem-based resources that give your agent domain-specific expertise: workflows, context, and best practices that turn a general-purpose agent into a specialist. Each skill you add incurs a modest cost on the session's context window, adding instructions and metadata that help the model use the skill. Learn more in the [Agent Skills](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) overview.
 
 Skills reach your agent in two ways: attach them through the agent's `skills` array, or [load them from a GitHub repository](https://platform.claude.com/docs/en/managed-agents/skills#load-skills-from-a-github-repository) mounted on the session. Attached skills come in two types. All skills work the same way: your agent invokes them automatically when they are relevant to the task.
@@ -18,10 +22,6 @@ Skills reach your agent in two ways: attach them through the agent's `skills` ar
 * **Custom skills:** Skills you author and upload to your workspace.
 
 To learn how to author custom skills, see [Agent Skills](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) and [Skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices). To upload a custom skill to your workspace, see [Create a custom skill](https://platform.claude.com/docs/en/managed-agents/skills#create-a-custom-skill).
-
-<Note>
-  Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](https://platform.claude.com/docs/en/api/beta-headers#endpoint-specific-headers).
-</Note>
 
 ## Create a custom skill
 
@@ -37,9 +37,24 @@ These examples omit the optional `display_name` field, so the skill's display na
     -F "files[]=@example_skill.zip"
   ```
 
-  ```bash CLI
-  ant skills create --file example_skill.zip
-  ```
+  <MultiFileExample language="cli" label="CLI">
+    ```bash CLI
+    ant apply skills/pr-summary
+    ```
+
+    <File filename="skills/pr-summary/SKILL.md">
+      ```markdown
+      ---
+      name: pr-summary
+      description: Summarize a pull request's changes and risks in the team's review format.
+      ---
+
+      # PR summary
+
+      List what changed, why, and anything a reviewer should look at closely, in three short sections.
+      ```
+    </File>
+  </MultiFileExample>
 
   ```python Python
   import anthropic
@@ -183,6 +198,10 @@ These examples omit the optional `display_name` field, so the skill's display na
   puts "Created skill: #{skill.id}"
   puts "Latest version: #{skill.latest_version_id}"
   ```
+
+  <ForLanguage tab="CLI">
+    [`ant apply`](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/apply) uploads the `skills/pr-summary` directory, prints the new skill's ID, and records it in `claude-lock.json`. Commit `claude-lock.json` so the next `ant apply` uploads your edits as a new version instead of creating a second skill.
+  </ForLanguage>
 </CodeGroup>
 
 To list, retrieve, delete, and version custom skills, see [Managing custom skills](https://platform.claude.com/docs/en/build-with-claude/skills-guide#managing-custom-skills). For the full request and response schemas, see the [Create Skill API reference](https://platform.claude.com/docs/en/api/skills/create). Skill bundles upload directly to the Skills API rather than through the [Files API](https://platform.claude.com/docs/en/build-with-claude/files).
@@ -418,7 +437,7 @@ Repository skills use the same `SKILL.md` format as the custom skills you upload
 
 To load skills from a repository, create a session that mounts it. This is the same request shown in [Accessing GitHub](https://platform.claude.com/docs/en/managed-agents/github#token-permissions); `mount_path` is optional and defaults to `/workspace/<repo-name>`:
 
-<CodeGroup defaultLanguage="CLI">
+<CodeGroup>
   ```bash cURL
   session_id=$(curl -fsS https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \

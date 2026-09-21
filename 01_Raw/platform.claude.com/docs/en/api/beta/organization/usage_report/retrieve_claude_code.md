@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/usage_report/retrieve_claude_code
-fetched_at: 2026-09-14T05:36:19.469118+00:00
+fetched_at: 2026-09-21T05:44:12.633344+00:00
 fetch_method: mintlify_md
 ---
 
@@ -42,7 +42,7 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
     List of Claude Code usage records for the requested date.
 
-    - `actor: object or object`
+    - `actor: UserActor or APIActor`
 
       The user or API key that performed the Claude Code actions.
 

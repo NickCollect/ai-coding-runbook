@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/get-started
-fetched_at: 2026-09-07T05:31:24.326507+00:00
+fetched_at: 2026-09-21T05:43:59.301303+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,7 +13,7 @@ description: Make your first API call to Claude and build a simple web search as
 ## Prerequisites
 
 * A [Claude Console account](https://platform.claude.com)
-* An [API key](https://platform.claude.com/settings/keys)
+* An [API key](https://platform.claude.com/docs/en/get-api-key)
 
 ## Call the API
 
@@ -442,7 +442,7 @@ description: Make your first API call to Claude and build a simple web search as
             }
 
             dependencies {
-                implementation("com.anthropic:anthropic-java:2.60.0")
+                implementation("com.anthropic:anthropic-java:2.63.0")
             }
 
             application {
@@ -468,7 +468,7 @@ description: Make your first API call to Claude and build a simple web search as
                 <dependency>
                   <groupId>com.anthropic</groupId>
                   <artifactId>anthropic-java</artifactId>
-                  <version>2.60.0</version>
+                  <version>2.63.0</version>
                 </dependency>
               </dependencies>
             </project>

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/streaming
-fetched_at: 2026-09-07T05:31:24.727911+00:00
+fetched_at: 2026-09-21T05:43:59.632896+00:00
 fetch_method: mintlify_md
 ---
 
@@ -363,7 +363,7 @@ When using [thinking](https://platform.claude.com/docs/en/build-with-claude/thin
 
 For thinking content, a special `signature_delta` event is sent just before the `content_block_stop` event. This signature is used to verify the integrity of the thinking block.
 
-When `display: "omitted"` is set on the thinking configuration, no `thinking_delta` events are sent. The thinking block opens, receives a single `signature_delta`, and closes. With `display: "updates"` (beta), reasoning blocks stream the same way, and only the [progress updates](https://platform.claude.com/docs/en/build-with-claude/thinking#progress-updates) that some models write between tool calls stream `thinking_delta` events. See [Controlling thinking display](https://platform.claude.com/docs/en/build-with-claude/thinking#controlling-thinking-display).
+When `display: "omitted"` is set on the thinking configuration, no thinking text is streamed. The thinking block opens, receives a `thinking_delta` with an empty `thinking` string and then a single `signature_delta`, and closes. With `display: "updates"` (beta), reasoning blocks stream the same way, and only the [progress updates](https://platform.claude.com/docs/en/build-with-claude/thinking#progress-updates) that some models write between tool calls stream `thinking_delta` events that carry text. See [Controlling thinking display](https://platform.claude.com/docs/en/build-with-claude/thinking#controlling-thinking-display).
 
 A typical thinking delta looks like:
 
@@ -1019,10 +1019,12 @@ This request enables thinking with streaming. The `display: "summarized"` settin
   ) as stream:
       for event in stream:
           if event.type == "content_block_delta":
-              if event.delta.type == "thinking_delta":
-                  print(event.delta.thinking, end="", flush=True)
-              elif event.delta.type == "text_delta":
-                  print(event.delta.text, end="", flush=True)
+              delta = event.delta
+              match delta.type:
+                  case "thinking_delta":
+                      print(delta.thinking, end="", flush=True)
+                  case "text_delta":
+                      print(delta.text, end="", flush=True)
   ```
 
   ```typescript TypeScript
@@ -1042,10 +1044,13 @@ This request enables thinking with streaming. The `display: "summarized"` settin
 
   for await (const event of stream) {
     if (event.type === "content_block_delta") {
-      if (event.delta.type === "thinking_delta") {
-        process.stdout.write(event.delta.thinking);
-      } else if (event.delta.type === "text_delta") {
-        process.stdout.write(event.delta.text);
+      switch (event.delta.type) {
+        case "thinking_delta":
+          process.stdout.write(event.delta.thinking);
+          break;
+        case "text_delta":
+          process.stdout.write(event.delta.text);
+          break;
       }
     }
   }
@@ -1160,11 +1165,13 @@ This request enables thinking with streaming. The `display: "summarized"` settin
   )
 
   stream.each do |event|
-    if event.type == :content_block_delta
-      if event.delta.type == :thinking_delta
-        print(event.delta.thinking)
-      elsif event.delta.type == :text_delta
-        print(event.delta.text)
+    if event.is_a?(Anthropic::Models::RawContentBlockDeltaEvent)
+      delta = event.delta
+      case delta
+      when Anthropic::Models::ThinkingDelta
+        print(delta.thinking)
+      when Anthropic::Models::TextDelta
+        print(delta.text)
       end
     end
   end

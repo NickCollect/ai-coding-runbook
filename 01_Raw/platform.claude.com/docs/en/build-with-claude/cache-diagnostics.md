@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics
-fetched_at: 2026-08-31T06:29:32.262287+00:00
+fetched_at: 2026-09-21T05:44:00.623995+00:00
 fetch_method: mintlify_md
 ---
 
@@ -686,11 +686,16 @@ In streaming responses, `diagnostics` appears on the `message_start` event.
 
   $diagnostics = null;
   foreach ($stream as $event) {
-      if ($event instanceof BetaRawMessageStartEvent) {
-          // diagnostics arrives on the message_start event's embedded BetaMessage
-          $diagnostics = $event->message->diagnostics;
-      } elseif ($event instanceof BetaRawContentBlockDeltaEvent && $event->delta instanceof BetaTextDelta) {
-          echo $event->delta->text;
+      switch (true) {
+          case $event instanceof \Anthropic\Beta\Messages\BetaRawMessageStartEvent:
+              // diagnostics arrives on the message_start event's embedded BetaMessage
+              $diagnostics = $event->message->diagnostics;
+              break;
+          case $event instanceof \Anthropic\Beta\Messages\BetaRawContentBlockDeltaEvent:
+              if ($event->delta instanceof \Anthropic\Beta\Messages\BetaTextDelta) {
+                  echo $event->delta->text;
+              }
+              break;
       }
   }
   echo PHP_EOL;

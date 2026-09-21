@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks
-fetched_at: 2026-08-17T02:15:17.835002+00:00
+fetched_at: 2026-09-21T05:44:03.289324+00:00
 fetch_method: mintlify_md
 ---
 
@@ -165,7 +165,11 @@ Structure your application so that Claude can reliably distinguish untrusted con
 
   [computer use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool)
 
-  , Anthropic runs additional classifiers that detect potential prompt injections in screenshots and steer Claude to ask for user confirmation before acting. See that page for details and opt-out information.
+   or the 
+
+  [browser use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool)
+
+  , Anthropic runs additional classifiers that scan what the tools return, such as screenshots or page text, for potential prompt injections and steer Claude to check whether the instruction really came from you before acting. See those pages for details and opt-out information.
 </Note>
 
 ## Continuous monitoring

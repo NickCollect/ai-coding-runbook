@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/extended-thinking
-fetched_at: 2026-09-14T05:36:04.330564+00:00
+fetched_at: 2026-09-21T05:43:59.851280+00:00
 fetch_method: mintlify_md
 ---
 
@@ -60,7 +60,7 @@ Here is an example of using extended thinking in the Messages API:
 
   ```bash CLI
   ant messages create \
-    --transform content --format yaml <<'YAML'
+    --format yaml <<'YAML'
   model: claude-sonnet-4-6
   max_tokens: 16000
   thinking:
@@ -116,10 +116,13 @@ Here is an example of using extended thinking in the Messages API:
 
   // The response contains summarized thinking blocks and text blocks
   for (const block of response.content) {
-    if (block.type === "thinking") {
-      console.log(`\nThinking summary: ${block.thinking}`);
-    } else if (block.type === "text") {
-      console.log(`\nResponse: ${block.text}`);
+    switch (block.type) {
+      case "thinking":
+        console.log(`\nThinking summary: ${block.thinking}`);
+        break;
+      case "text":
+        console.log(`\nResponse: ${block.text}`);
+        break;
     }
   }
   ```
@@ -228,9 +231,9 @@ Here is an example of using extended thinking in the Messages API:
 
   // The response contains summarized thinking blocks and text blocks
   foreach ($response->content as $block) {
-      echo match ($block->type) {
-          'thinking' => "\nThinking summary: {$block->thinking}",
-          'text' => "\nResponse: {$block->text}",
+      echo match (true) {
+          $block instanceof \Anthropic\Messages\ThinkingBlock => "\nThinking summary: {$block->thinking}",
+          $block instanceof \Anthropic\Messages\TextBlock => "\nResponse: {$block->text}",
           default => '',
       };
   }
@@ -257,11 +260,10 @@ Here is an example of using extended thinking in the Messages API:
   # The response contains summarized thinking blocks and text blocks
   response.content.each do |block|
     case block
-    in {type: :thinking, thinking:}
-      puts "\nThinking summary: #{thinking}"
-    in {type: :text, text:}
-      puts "\nResponse: #{text}"
-    else
+    when Anthropic::Models::ThinkingBlock
+      puts "\nThinking summary: #{block.thinking}"
+    when Anthropic::Models::TextBlock
+      puts "\nResponse: #{block.text}"
     end
   end
   ```

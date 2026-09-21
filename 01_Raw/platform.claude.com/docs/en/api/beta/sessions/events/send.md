@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/sessions/events/send
-fetched_at: 2026-09-14T05:36:13.653761+00:00
+fetched_at: 2026-09-21T05:44:07.321093+00:00
 fetch_method: mintlify_md
 ---
 
@@ -27,7 +27,7 @@ Send Events
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -118,6 +118,8 @@ Send Events
     - `"thinking-binding-controls-2026-08-01"`
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `"compact-2026-09-04"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -717,7 +719,7 @@ Send Events
 
       - `session_thread_id: optional string or null`
 
-        When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+        Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
     - `BetaManagedAgentsUserCustomToolResultEvent object`
 
@@ -799,7 +801,7 @@ Send Events
 
       - `session_thread_id: optional string or null`
 
-        Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+        Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
     - `BetaManagedAgentsUserDefineOutcomeEvent object`
 
@@ -901,7 +903,7 @@ Send Events
 
       - `session_thread_id: optional string or null`
 
-        Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+        Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
     - `BetaManagedAgentsSystemMessageEvent object`
 
