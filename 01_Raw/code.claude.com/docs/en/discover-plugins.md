@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/discover-plugins
-fetched_at: 2026-09-14T05:36:03.161853+00:00
+fetched_at: 2026-09-21T05:44:03.440891+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,6 +13,8 @@ fetch_method: mintlify_md
 > Find and install plugins from marketplaces to extend Claude Code with new skills, agents, and capabilities.
 
 Plugins extend Claude Code with skills, agents, hooks, and MCP servers. Plugin marketplaces are catalogs that help you discover and install these extensions without building them yourself.
+
+You can also enable plugins on claude.ai, for yourself or through your organization. Claude Code syncs those into your sessions without a marketplace install, as [Plugins synced from claude.ai](/docs/en/plugins-reference#synced-plugins) describes.
 
 Looking to create and distribute your own marketplace? See [Create and distribute a plugin marketplace](/docs/en/plugin-marketplaces).
 
@@ -78,7 +80,7 @@ Install the language server binary from the table below before using these plugi
 You can also [create your own LSP plugin](/docs/en/plugins-reference#lsp-servers) for other languages.
 
 <Note>
-  If you see `Executable not found in $PATH` in the `/plugin` Errors tab after installing a plugin, install the required binary from the table above.
+  If you see `Executable not found in $PATH` in the `/plugin` Errors tab after installing a plugin, install the binary the [code intelligence](#code-intelligence) table lists for that plugin.
 </Note>
 
 #### What Claude gains from code intelligence plugins
@@ -221,6 +223,7 @@ Use the `/plugin marketplace add` command to add marketplaces from different sou
 * **Git URLs**: any git repository URL, including GitLab, Bitbucket, and self-hosted servers
 * **Local paths**: directories or direct paths to `marketplace.json` files
 * **Remote URLs**: direct URLs to hosted `marketplace.json` files
+* **claude.ai**: marketplaces hosted on claude.ai for your account, such as your organization's plugin library, which you [add by name from the **Marketplaces** tab or your shell](#add-from-claude-ai) rather than by source
 
 ### Add from GitHub
 
@@ -290,9 +293,27 @@ Add a remote `marketplace.json` file via URL:
   URL-based marketplaces have some limitations compared to Git-based marketplaces. If plugin installs from a URL-based marketplace fail, see [Troubleshooting](/docs/en/plugin-marketplaces#plugins-with-relative-paths-fail-in-url-based-marketplaces).
 </Note>
 
+### Add from claude.ai
+
+In terminal sessions where [plugins sync from your claude.ai account](/docs/en/plugins-reference#synced-plugins), claude.ai can also list marketplaces for you, such as your organization's plugin library and your own claude.ai uploads. `claude plugin marketplace list` prints them in a `From claude.ai:` section, and the `/plugin` **Marketplaces** tab lists them. Select one there to add it. Adding a marketplace from claude.ai requires Claude Code v2.1.273 or later.
+
+To add one from your shell, run `claude plugin marketplace add` with the `--claudeai` flag and the name shown in the list:
+
+```bash theme={null}
+claude plugin marketplace add --claudeai claudeai-organization-library
+```
+
+Claude Code registers the marketplace under a local name that starts with `claudeai-`, derived from the name that claude.ai lists it under: a marketplace listed as "Organization library" registers as `claudeai-organization-library`. Install its plugins by that name, for example with `claude plugin install <plugin>@claudeai-organization-library`.
+
+If you sign out or sign in with a different account, the marketplace stays configured but shows no plugins, and the plugins you already installed from it keep loading.
+
+The `From claude.ai:` section can also list git-based marketplaces shared through claude.ai. You add those with the ordinary `marketplace add` command, using the source that the list prints.
+
 ## Install plugins
 
-Once you've added marketplaces, you can install a plugin by name:
+Once you've added marketplaces, you can install a plugin by name. For a marketplace you haven't added yet, you can instead [add it and install in one command](#add-a-marketplace-and-install-in-one-command).
+
+To install by name:
 
 ```shell theme={null}
 /plugin install plugin-name@marketplace-name
@@ -334,6 +355,18 @@ The `claude plugin install` shell command doesn't run in a session, so Claude Co
   Make sure you trust a plugin before installing it. Anthropic doesn't control what MCP servers, files, or other software are included in plugins and can't verify that they work as intended. Check each plugin's homepage for more information.
 </Warning>
 
+### Add a marketplace and install in one command
+
+To install a plugin from a marketplace you haven't added yet, name the marketplace source with `--marketplace`. Requires Claude Code v2.1.275 or later.
+
+```shell theme={null}
+/plugin install quality-review-plugin --marketplace your-org/plugins
+```
+
+The source takes [the same forms as `/plugin marketplace add`](#add-marketplaces), such as GitHub `owner/repo`, a git URL, or a local path, except that it can't contain spaces. Give the plugin name bare, without an `@marketplace` suffix.
+
+If you haven't added that marketplace yet, Claude Code shows the source it resolved and asks you to confirm before adding it. Declining cancels the install and adds nothing. Once the marketplace is added, the plugin's details open and you choose an [installation scope](/docs/en/settings#where-settings-live).
+
 ## Manage installed plugins
 
 Run `/plugin` and go to the **Installed** tab to view, enable, disable, or uninstall your plugins. The list is grouped by scope and sorted so you see problems first: plugins with load errors or unresolved dependencies appear at the top, followed by your favorites, with disabled plugins folded behind a collapsed header at the bottom.
@@ -343,6 +376,8 @@ From the list you can:
 * press `f` to favorite or unfavorite the selected plugin
 * type to filter by plugin name or description
 * press Enter to open a plugin's detail view and enable, disable, or uninstall it
+
+Claude Code also lists the [plugins synced from your claude.ai account](/docs/en/plugins-reference#synced-plugins) in the **Installed** tab, with `synced` as their source. You can enable or disable one there unless your organization marked it as required. To remove one, turn it off on claude.ai. Synced plugins appear in terminal sessions on Claude Code v2.1.273 or later.
 
 When you uninstall a plugin that a project's `.claude/settings.json` enables, Claude Code asks which scope you mean: disable it for you alone, which writes an override to your `.claude/settings.local.json` and leaves the plugin installed for the project, or uninstall it for everyone, which removes it from the shared `.claude/settings.json`.
 
@@ -414,6 +449,7 @@ For plugin changes that happen outside the menu, run `/reload-plugins` yourself.
 * A `claude plugin` command you ran in another terminal
 * Edits to a plugin you loaded with [`--plugin-dir`](/docs/en/plugins#test-your-plugins-locally) while you develop it
 * A plugin [auto-update](#configure-auto-updates) whose notification asks you to reload
+* A [sync from your claude.ai account](/docs/en/plugins-reference#synced-plugins) that added, updated, or removed a plugin and showed a notification asking you to reload
 * A change in a [`--plugin-dir` folder](/docs/en/plugins#test-your-plugins-locally) that Claude Code held because applying it would invalidate the prompt cache
 
 Before v2.1.268, plugins you enabled, disabled, or uninstalled in the menu, and installs that didn't activate during the install, stayed pending until you ran `/reload-plugins`.
@@ -483,7 +519,7 @@ Toggle auto-update for individual marketplaces through the UI:
 3. Choose a marketplace from the list
 4. Select **Enable auto-update** or **Disable auto-update**
 
-`claude-plugins-official` and most other official Anthropic marketplaces have auto-update enabled by default. Third-party and local development marketplaces have auto-update disabled by default.
+`claude-plugins-official`, most other official Anthropic marketplaces, and [marketplaces added from claude.ai](#add-from-claude-ai) have auto-update enabled by default. Other third-party marketplaces and local development marketplaces have auto-update disabled by default.
 
 Administrators can also set `"autoUpdate": true` on each [`extraKnownMarketplaces`](/docs/en/settings-reference#extraknownmarketplaces) entry in managed settings to enable auto-update for an organization marketplace without requiring each user to toggle it.
 

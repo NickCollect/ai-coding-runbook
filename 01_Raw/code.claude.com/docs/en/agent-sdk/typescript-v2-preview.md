@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/typescript-v2-preview
-fetched_at: 2026-08-10T03:07:47.053771+00:00
+fetched_at: 2026-09-21T05:44:01.688386+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ fetch_method: mintlify_md
   To migrate, use the [`query()` API](/docs/en/agent-sdk/typescript) and the [session options](/docs/en/agent-sdk/sessions) it accepts. Pass an `AsyncIterable<SDKUserMessage>` for multi-turn conversations, or `options.resume` to continue a saved session. This page is kept for reference if you maintain code on Agent SDK 0.2.x or earlier.
 </Warning>
 
-V2 was an experimental session API that removed the need for async generators and yield coordination. Instead of managing generator state across turns, each turn was a separate `send()`/`stream()` cycle. The API surface reduced to three concepts:
+V2 was an experimental session API that removed the need for async generators and yield coordination. Instead of managing generator state across turns, each turn was a separate `send()`/`stream()` cycle. The API surface reduced to creating a session, sending a message, and streaming the response:
 
 * `createSession()` / `resumeSession()`: Start or continue a conversation
 * `session.send()`: Send a message

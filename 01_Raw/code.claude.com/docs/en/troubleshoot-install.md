@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/troubleshoot-install
-fetched_at: 2026-09-14T05:36:04.077672+00:00
+fetched_at: 2026-09-21T05:44:06.346673+00:00
 fetch_method: mintlify_md
 ---
 
@@ -876,7 +876,7 @@ The `npm error path` line names the directory npm couldn't move. Delete that dir
     rm -rf "$(npm root -g)/@anthropic-ai/claude-code"
     ```
 
-    Then remove any leftover temp directories. If zsh prints `no matches found`, there were none to remove:
+    Then remove any leftover temp directories. If Zsh prints `no matches found`, there were none to remove:
 
     ```bash theme={null}
     rm -rf "$(npm root -g)/@anthropic-ai/.claude-code-"*

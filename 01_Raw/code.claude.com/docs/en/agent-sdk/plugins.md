@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/plugins
-fetched_at: 2026-09-14T05:36:01.888875+00:00
+fetched_at: 2026-09-21T05:44:01.165292+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ fetch_method: mintlify_md
 
 > Load custom plugins to extend Claude Code with skills, agents, hooks, and MCP servers through the Agent SDK
 
-Plugins allow you to extend Claude Code with custom functionality that can be shared across projects. Through the Agent SDK, you can programmatically load plugins from local directories to add capabilities to your agent sessions. A plugin can include:
+Plugins let you extend Claude Code with custom functionality that can be shared across projects. Through the Agent SDK, you can programmatically load plugins from local directories to add capabilities to your agent sessions. A plugin can include:
 
 * **Skills**: capabilities Claude invokes autonomously when relevant. You can also invoke a plugin skill directly with `/plugin-name:skill-name`.
 * **Agents**: specialized subagents for specific tasks

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/features-overview
-fetched_at: 2026-09-14T05:36:03.061261+00:00
+fetched_at: 2026-09-21T05:44:03.609435+00:00
 fetch_method: mintlify_md
 ---
 
@@ -240,7 +240,7 @@ Each feature loads at different points in your session. The tabs below explain w
   </Tab>
 
   <Tab title="Skills">
-    Skills are extra capabilities in Claude's toolkit. They can be reference material (like an API style guide) or invocable workflows you trigger with `/<name>` (like `/deploy`). Claude Code includes [bundled skills](/docs/en/commands) like `/code-review`, `/batch`, and `/debug` that work out of the box. You can also create your own.
+    Skills are extra capabilities in Claude's toolkit. They can be reference material (like an API style guide) or invocable workflows you trigger with `/<name>` (like `/deploy`). Claude Code includes [bundled skills](/docs/en/commands) like `/code-review`, `/batch`, and `/debug` that work without setup. You can also create your own.
 
     **When:** Depends on the skill's configuration. By default, descriptions load at session start and full content loads when used. For user-only skills (`disable-model-invocation: true`), nothing loads until you invoke them.
 
@@ -282,7 +282,7 @@ Each feature loads at different points in your session. The tabs below explain w
 
     * The agent's own system prompt, not the Claude Code system prompt
     * Full content of skills listed in the agent's `skills:` field
-    * CLAUDE.md and git status, except the built-in Explore and Plan agents [omit both](/docs/en/sub-agents#what-loads-at-startup)
+    * CLAUDE.md and git status, except the built-in Explore and Plan agents [omit both](/docs/en/sub-agents#what-loads-at-startup), and an agent whose definition sets [`omitClaudeMd`](/docs/en/sub-agents#supported-frontmatter-fields) skips the user, project, and local CLAUDE.md files
     * Whatever context the lead agent passes in the prompt
 
     For a [fork](/docs/en/sub-agents#fork-the-current-conversation), Claude Code loads the parent's conversation so far, system prompt, and tools instead.

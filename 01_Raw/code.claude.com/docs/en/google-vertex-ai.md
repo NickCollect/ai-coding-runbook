@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/google-vertex-ai
-fetched_at: 2026-09-14T05:36:03.153347+00:00
+fetched_at: 2026-09-21T05:44:04.121123+00:00
 fetch_method: mintlify_md
 ---
 
@@ -144,7 +144,7 @@ gcloud services enable aiplatform.googleapis.com
 
 Request access to Claude models in Google Cloud's Agent Platform:
 
-1. Navigate to the [Google Cloud's Agent Platform Model Garden](https://console.cloud.google.com/vertex-ai/model-garden)
+1. Go to the [Google Cloud's Agent Platform Model Garden](https://console.cloud.google.com/vertex-ai/model-garden)
 2. Search for "Claude" models
 3. Request access to desired Claude models (for example, Claude Sonnet 4.6)
 4. Wait for approval (may take 24-48 hours)

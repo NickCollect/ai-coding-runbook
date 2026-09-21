@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins
-fetched_at: 2026-09-14T05:36:03.579102+00:00
+fetched_at: 2026-09-21T05:44:05.212362+00:00
 fetch_method: mintlify_md
 ---
 
@@ -72,12 +72,12 @@ This quickstart walks you through creating a plugin with a custom skill. You'll 
     }
     ```
 
-    | Field         | Purpose                                                                                                                                                                                                                                                                                                                                    |
-    | :------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | `name`        | Unique identifier and skill namespace. Skills are prefixed with this (e.g., `/my-first-plugin:hello`).                                                                                                                                                                                                                                     |
-    | `description` | Shown in the plugin manager when browsing or installing plugins.                                                                                                                                                                                                                                                                           |
-    | `version`     | Optional. If set, users only receive updates when you bump this field, except for a [`command` source](/docs/en/plugin-marketplaces#command-sources); see [version management](/docs/en/plugins-reference#version-management). If omitted, the version comes from the next source in [version management](/docs/en/plugins-reference#version-management). |
-    | `author`      | Optional. Helpful for attribution.                                                                                                                                                                                                                                                                                                         |
+    | Field         | Purpose                                                                                                                                                                                                                                                                                                                                                                                                                            |
+    | :------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `name`        | Unique identifier and skill namespace. Skills are prefixed with this (e.g., `/my-first-plugin:hello`).                                                                                                                                                                                                                                                                                                                             |
+    | `description` | Shown in the plugin manager when browsing or installing plugins.                                                                                                                                                                                                                                                                                                                                                                   |
+    | `version`     | Optional. If set, users only receive updates when you bump this field, except for a [`command` source](/docs/en/plugin-marketplaces#command-sources) or a plugin [loaded in place](/docs/en/plugins-reference#plugin-caching-and-file-resolution); see [version management](/docs/en/plugins-reference#version-management). If omitted, the version comes from the next source in [version management](/docs/en/plugins-reference#version-management). |
+    | `author`      | Optional. Helpful for attribution.                                                                                                                                                                                                                                                                                                                                                                                                 |
 
     For additional fields like `homepage`, `repository`, and `license`, see the [full manifest schema](/docs/en/plugins-reference#plugin-manifest-schema).
   </Step>

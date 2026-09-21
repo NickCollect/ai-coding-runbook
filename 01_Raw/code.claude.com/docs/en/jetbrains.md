@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/jetbrains
-fetched_at: 2026-08-31T06:29:41.719741+00:00
+fetched_at: 2026-09-21T05:44:04.254050+00:00
 fetch_method: mintlify_md
 ---
 
@@ -92,7 +92,7 @@ Configure the Claude Code plugin by going to **Settings → Tools → Claude Cod
 #### General settings
 
 * **Claude command**: specify a custom command to run Claude, for example `claude`, `/usr/local/bin/claude`, or `npx @anthropic-ai/claude-code`
-* **Suppress notification for Claude command not found**: skip notifications about not finding the Claude command
+* **Suppress notification for when Claude Command is not found**: skip notifications about not finding the Claude command
 * **Enable using Option+Enter for multi-line prompts**: on macOS only. When enabled, Option+Enter inserts new lines in Claude Code prompts. Disable if the Option key is being captured unexpectedly. Requires a terminal restart.
 * **Enable automatic updates**: automatically check for and install plugin updates, applied on restart
 
@@ -195,7 +195,7 @@ If clicking the Claude icon shows "command not found":
 
 ## Security considerations
 
-When Claude Code runs in a JetBrains IDE in [`acceptEdits` permission mode](/docs/en/permission-modes#auto-approve-file-edits-with-acceptedits-mode), it may be able to modify IDE configuration files that can be automatically executed by your IDE. This may increase the risk of running Claude Code in `acceptEdits` mode and allow bypassing Claude Code's permission prompts for bash execution.
+When Claude Code runs in a JetBrains IDE in [`acceptEdits` permission mode](/docs/en/permission-modes#auto-approve-file-edits-with-acceptedits-mode), it may be able to modify IDE configuration files that can be automatically executed by your IDE. This may increase the risk of running Claude Code in `acceptEdits` mode and allow bypassing Claude Code's permission prompts for Bash execution.
 
 When running in JetBrains IDEs, consider:
 
@@ -217,9 +217,9 @@ The server is named `ide` and is hidden from `/mcp` because there's nothing to c
 
 **Tools exposed to the model.** The server hosts several tools, but only one is visible to the model. The rest are internal RPC the CLI uses for its own UI, such as opening diffs and reading selections, and are filtered out before the tool list reaches Claude.
 
-| Tool name (as seen by hooks) | What it does                                                                                                          | Read-only |
-| ---------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------- |
-| `mcp__ide__getDiagnostics`   | Returns the IDE's inspection diagnostics, the errors and warnings shown in the editor. Optionally scoped to one file. | Yes       |
+| Tool name (as seen by hooks) | What it does                                                                                                                                                                                                  | Read-only |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| `mcp__ide__getDiagnostics`   | Returns the IDE's inspection diagnostics, the errors and warnings shown in the editor. Each call covers one file: the file Claude specifies, or the file in your active editor if Claude doesn't specify one. | Yes       |
 
 The JetBrains plugin does not expose a code-execution tool to the model.
 

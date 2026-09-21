@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugin-dependencies
-fetched_at: 2026-09-14T05:36:03.603749+00:00
+fetched_at: 2026-09-21T05:44:05.028074+00:00
 fetch_method: mintlify_md
 ---
 
@@ -43,7 +43,7 @@ The following manifest declares one unversioned dependency and one constrained d
 }
 ```
 
-An entry can be a bare string with only the plugin name, like `"audit-logger"` in the example above, which depends on whatever version that plugin's marketplace provides. For more control, use an object with these fields:
+An entry can be a bare string with only the plugin name, like `"audit-logger"` in the `deploy-kit` manifest, which depends on whatever version that plugin's marketplace provides. For more control, use an object with these fields:
 
 | Field         | Type   | Description                                                                                                                                                                                                                                                             |
 | :------------ | :----- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -75,7 +75,7 @@ For example, a platform team can publish role-specific bundles in an internal ma
 
 Installing `backend-standard` resolves and installs all four dependencies.
 
-To add a tool to the standard set later, publish a new `backend-standard` version with the extra dependency. Auto-update is off by default for non-Anthropic marketplaces, so engineers pick up the new version in one of two ways:
+To add a tool to the standard set later, publish a new `backend-standard` version with the extra dependency. Unless the marketplace [auto-updates](/docs/en/discover-plugins#configure-auto-updates), engineers pick up the new version in one of two ways:
 
 * Enable auto-update for the marketplace in `/plugin`. The next auto-update moves the bundle to the new version and installs any dependencies it adds.
 * Run `claude plugin update backend-standard`, then `/reload-plugins` to install the newly added dependencies.

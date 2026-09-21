@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/self-hosted-environments-deploy
-fetched_at: 2026-09-14T05:36:03.813476+00:00
+fetched_at: 2026-09-21T05:44:05.739123+00:00
 fetch_method: mintlify_md
 ---
 
@@ -154,7 +154,7 @@ Whichever mechanism you configure must work without a prompt, because the runner
 * The runner sets `GCM_INTERACTIVE=never`, so Git Credential Manager doesn't open a sign-in dialog.
 * The runner clears `core.askPass`, so if you use an askpass helper, set it through the `GIT_ASKPASS` environment variable instead.
 
-If your git host rejects the credential, or you didn't configure one, the runner retries a few times and then fails repository preparation. The runner doesn't pass these settings into the session's environment.
+If your git host rejects the credential, or you didn't configure one, the runner retries a few times and then fails repository preparation when the repository is the one the session pushes results to. For a repository the session only reads from, [Troubleshooting](#troubleshooting) covers when the runner skips it instead. The runner doesn't pass these settings into the session's environment.
 
 If checkout directories are owned by a different uid than the runner process, git refuses to operate on them; add `safe.directory`:
 
@@ -394,6 +394,10 @@ What the reuse path does and doesn't guarantee:
 
 * **Any clone shape works**: a full, shallow, or single-branch clone at the path is used as-is. The runner never passes `--depth` when fetching into an existing clone, so a full pre-warm keeps its full history and a shallow one stays shallow. `CLAUDE_RUNNER_FETCH_DEPTH` (`full`, `0`, or a number; default 50) controls only the cold clone the runner makes when no clone exists yet.
 * **Tracked changes reset, untracked files persist**: each session starts from a hard reset that wipes the previous session's tracked modifications, but the runner never runs `git clean`, so untracked files from the locked owner's earlier sessions stay in the tree.
+* **Per-session directories persist too**: alongside the checkout, the runner creates per-session entries under `<base-dir>/_sessions/` for every session it runs. The session's Claude config directory holds a local copy of the conversation transcript. Next to it sit the session's uploaded files, when the session has any. The session directory sits there too: it holds any per-session worktrees and `checkout` hook checkouts while the session runs, and it keeps whatever else Claude wrote in it.
+
+  By default the runner leaves these in place when the session ends, so on a disk that outlives the runner process they accumulate. Every session runs as the runner's own user, so any later session that disk serves can read them. If you keep a persistent `--base-dir`, size the volume for that growth. The same applies to any setup that restarts the runner on the same filesystem, including the [Docker Compose recipe](#docker-compose).
+* **With `--remove-session-state`, per-session directories don't persist**: start the runner with [`--remove-session-state`](/docs/en/self-hosted-environments-reference#runner-cli-flags) to have it delete each session's per-session directories as the session ends. The deletion is best-effort: the directories stay when the runner is killed before its cleanup runs. The canonical clone and files a session wrote elsewhere on the host, such as the temporary directory, stay regardless.
 * **With the git proxy, the reset becomes a checkout**: with [`--use-anthropic-git-proxy`](#use-the-anthropic-git-proxy), the runner sanitizes the clone's `.git/` before each session, keeping the object store, refs, and shallow state but deleting the index, so each session pays a full working-tree checkout instead of a near-instant reset; it still never re-clones. Submodule pre-warms aren't supported under the proxy.
 * **Long clones need no workaround**: the runner bounds each git operation with a 120-second no-progress watchdog and a 30-minute hard cap, not a flat timeout, so a slow cold clone that keeps reporting progress completes.
 
@@ -471,10 +475,24 @@ Common issues:
 * **Sessions can't reach the network through an authenticating egress proxy**: when the source you set with [`--proxy-authorization-command` or `--proxy-authorization-file`](#authenticate-to-an-egress-proxy) fails, times out after 30 seconds, or yields an empty value, the runner answers that connection `502 Bad Gateway` and logs why. The runner redacts the command's stderr in that log and never logs the header value. With `--proxy-authorization-command`, run the command yourself on the host to confirm it prints the whole header value on stdout. If the runner instead exits at startup with `could not start the proxy-authorization listener`, it couldn't open its loopback listener.
 * **Runner logs `Poll failed` lines containing `rejecting the malformed poll response`**: the runner received a work-poll response whose body isn't the queue's expected JSON, most often because something between the runner and `api.anthropic.com`, such as an intercepting proxy or a captive portal, answered with its own page. The runner rejects the response, counts it under the `transport` kind of the `claude_code_self_hosted_runner_poll_errors_total` [metric](/docs/en/self-hosted-environments-reference#prometheus-metrics), and retries on the failed-poll schedule described in [Session lifecycle](/docs/en/self-hosted-environments#session-lifecycle). The runner keeps serving its live sessions. Configure the proxy to pass responses from `api.anthropic.com` through unaltered. Before v2.1.246, the runner read such a response as an empty work queue, which could end its live sessions or make it exit.
 * **A session's branch no longer exists on the remote**: for a git source the session only reads from, the runner skips that source and continues on the remaining ones. For the source the session pushes results to, a deleted branch, typically because it was merged and auto-deleted, fails the session with an error naming the repository and branch and asking you to restore the branch and retry. The runner fails the session with the same error when skipping would leave it with no repository at all. Before v2.1.228, such a session started in an empty directory.
+* **A session starts without one of its repositories**: on a runner with no [`checkout` hook](/docs/en/self-hosted-environments-configuration#checkout), the git host can refuse the runner's access check for a repository the session only reads from. The runner then skips that repository, logs a `[runner:warn] could not access context source` line naming the refusal, and starts the session on the remaining ones.
+
+  The runner skips only a clear refusal: the host answers that the repository wasn't found, git finds no credentials for the host, or authentication fails. A network failure, a timeout, or an HTTP `403` still fails the session start, as does a refusal for a repository the session pushes results to. The runner still fails a session that skipping would leave with no repository at all. With [`--use-anthropic-git-proxy`](#use-the-anthropic-git-proxy), the runner skips only a repository the git proxy itself denies.
+
+  The access check runs again each time the session starts on a runner, so once the runner's git identity has read access, the next start clones the repository. Before v2.1.274, each of these refusals failed the session start.
 * **Sessions take minutes to start**: the initial clone usually dominates. Watch the `claude_code_self_hosted_runner_session_init_duration_seconds` [metric](/docs/en/self-hosted-environments-reference#prometheus-metrics) to confirm, and cut the clone with a [pre-warmed checkout](#reuse-a-pre-warmed-checkout) or a smaller `CLAUDE_RUNNER_FETCH_DEPTH`.
+* **Turns fail with a 401**: each session authenticates model calls with the short-lived [`CLAUDE_CODE_OAUTH_TOKEN`](/docs/en/self-hosted-environments-configuration#wrapper-scripts) that the runner fetches from Anthropic and rotates over the session's stdin. When a turn ends with a 401 or 403 from the model API, the runner fetches a fresh token and passes it to the session. The failed turn isn't retried.
+
+  When a fetch fails, the runner logs an `inference_token refresh failed` line that says when it will retry, and it keeps retrying for as long as the session runs.
+
+  If every call starts failing about 30 minutes into a session, a wrapper script has likely severed the session's stdin, so token rotations can't reach it; see [Keep stdin and file descriptor 3 attached](/docs/en/self-hosted-environments-configuration#keep-stdin-and-file-descriptor-3-attached).
+
+  Before v2.1.274, the runner stopped retrying a failed fetch after a few attempts and waited for the next scheduled one. A failed turn didn't trigger a fetch, so every turn failed with a 401 until the next scheduled fetch.
 * **Pod is killed mid-drain**: raise `terminationGracePeriodSeconds` to at least the value the runner logs at startup. See [Shutdown timing](#shutdown-timing).
 
-Once logging is initialized, the runner writes its lifecycle log, including `[runner:fatal]` lines, to stdout, and debug output to stderr, all as plain-text lines rather than JSON. The startup failures described in the troubleshooting entries above print to stderr before that point. Capture both streams with `--log-file`, which also lets `self-hosted-runner doctor` tail them, or with your platform's log collection. Each session's child process writes a separate debug log. On failure the runner preserves the log, prints the log's path in the runner log, and surfaces the log's tail alongside the session in claude.ai/code.
+Once logging is initialized, the runner writes its lifecycle log, including `[runner:fatal]` lines, to stdout, and debug output to stderr, all as plain-text lines rather than JSON. The startup failures described in the troubleshooting entries above print to stderr before that point. Capture both streams with `--log-file`, which also lets `self-hosted-runner doctor` tail them, or with your platform's log collection.
+
+Each session's child process writes a separate debug log. On failure the runner surfaces the log's tail alongside the session in claude.ai/code. Unless you started the runner with [`--remove-session-state`](/docs/en/self-hosted-environments-reference#runner-cli-flags), it also keeps a failed session's log on disk and prints its path in the runner log.
 
 ## What's next
 

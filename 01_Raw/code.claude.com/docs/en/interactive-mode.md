@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/interactive-mode
-fetched_at: 2026-09-14T05:36:03.228120+00:00
+fetched_at: 2026-09-21T05:44:04.149971+00:00
 fetch_method: mintlify_md
 ---
 
@@ -548,7 +548,8 @@ The panel also opens on its own once Claude starts editing files, if your termin
 While the panel is open, you can:
 
 * **Jump to a file**: click its row in the list. Scroll the panel with the mouse wheel. When the file list itself is too long to fit, scroll it with `Alt+Up` and `Alt+Down`, or `Ctrl+Up` and `Ctrl+Down`.
-* **Ask Claude about specific lines**: select them in the panel with the mouse. Claude Code attaches the selection to your next prompt and shows a line count next to the input until you send it.
+* **Ask Claude about specific lines**: select them in the panel with the mouse. Claude Code attaches the selection to your next prompt and shows a line count in the input until you send it.
+  * To send the prompt without the selection, move the cursor to just after the line-count indicator and press `Backspace` to delete it. Requires Claude Code v2.1.271 or later.
 * **Show the files the panel leaves out**: the list skips test files and generated files, and collapses changes from before this session into one line at the bottom. Click either count line to expand it.
 * **Change what the panel compares against**: press `Ctrl+X B` to cycle from this session's changes, to your uncommitted changes as one list, to everything since your branch split from the default branch. Claude Code remembers the choice for each project.
 
@@ -580,7 +581,7 @@ Claude answers a side question from what's already in the conversation: your mes
 In the [VS Code extension](/docs/en/vs-code#use-the-prompt-box)'s chat panel, `/btw` opens a panel rather than the overlay this section describes, and you ask follow-up questions right in the panel. The panel's thread survives window reloads, on the retention schedule that page describes. You need the extension at v2.1.227 or later. Earlier extension versions don't offer `/btw`.
 
 * **Available while Claude is working**: you can run `/btw` even while Claude is processing a response. The side question runs independently and doesn't interrupt the main turn. It sees everything in the conversation so far, except the reply Claude is still writing.
-* **No tool access**: side questions answer only from what is already in context. Claude can't read files, run commands, or search when answering a side question.
+* **No tool access**: side questions answer only from what is already in context. Claude can't read files, run commands, or search when answering a side question. If Claude writes out tool calls as text anyway, the answer ends with a note that nothing was executed.
 * **Single response**: there are no follow-up turns in the overlay. To continue the thread, ask another `/btw` question. To continue with full tool access in a local session, press `f` to fork this question and answer into a [background subagent](/docs/en/sub-agents#fork-the-current-conversation).
 * **Low cost**: while the conversation's [prompt cache](/docs/en/prompt-caching) is warm, a side question costs little beyond the answer itself.
 

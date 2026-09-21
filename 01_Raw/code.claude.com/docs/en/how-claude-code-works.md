@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/how-claude-code-works
-fetched_at: 2026-08-24T02:18:38.779565+00:00
+fetched_at: 2026-09-21T05:44:04.056509+00:00
 fetch_method: mintlify_md
 ---
 
@@ -74,7 +74,7 @@ When you run `claude` in a directory, Claude Code gains access to:
 * **Your project.** Files in your directory and subdirectories, plus files elsewhere with your permission.
 * **Your terminal.** Any command you could run: build tools, git, package managers, system utilities, scripts. If you can do it from the command line, Claude can too.
 * **Your git state.** Current branch, uncommitted changes, and recent commit history.
-* **Your [CLAUDE.md](/docs/en/memory).** A markdown file where you store project-specific instructions, conventions, and context that Claude should know every session.
+* **Your [CLAUDE.md](/docs/en/memory).** A markdown file where you store project-specific instructions, conventions, and context that Claude should know every session. If your repository has an AGENTS.md for other coding agents, Claude [can read that](/docs/en/memory#agents-md) on its own or alongside CLAUDE.md.
 * **[Auto memory](/docs/en/memory#auto-memory).** Learnings Claude saves automatically as you work, like your preferences. The first 200 lines or 25KB of MEMORY.md, whichever comes first, load at the start of each session.
 * **Extensions you configure.** [MCP servers](/docs/en/mcp) for external services, [skills](/docs/en/skills) for workflows, [subagents](/docs/en/sub-agents) for delegated work, and [Claude in Chrome](/docs/en/chrome) for browser interaction.
 
@@ -82,7 +82,7 @@ Because Claude sees your whole project, it can work across it. When you ask Clau
 
 ## Environments and interfaces
 
-The agentic loop, tools, and capabilities described above are the same everywhere you use Claude Code. What changes is where the code executes and how you interact with it.
+The [agentic loop](#the-agentic-loop), [tools](#tools), and capabilities are the same everywhere you use Claude Code. What changes is where the code executes and how you interact with it.
 
 ### Execution environments
 
@@ -181,7 +181,7 @@ Claude Code can teach you how to use it. Ask questions like "how do I set up hoo
 
 Built-in commands also guide you through setup:
 
-* `/init` walks you through creating a CLAUDE.md for your project
+* `/init` generates a starter CLAUDE.md for your project
 * `/doctor` runs a setup checkup that diagnoses installation and configuration issues and can fix them
 
 ### It's a conversation

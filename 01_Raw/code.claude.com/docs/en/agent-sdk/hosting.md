@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/hosting
-fetched_at: 2026-09-07T05:31:22.150047+00:00
+fetched_at: 2026-09-21T05:44:00.988906+00:00
 fetch_method: mintlify_md
 ---
 
@@ -141,7 +141,7 @@ The pattern hinges on resuming a session by ID with a shared store attached:
 
   declare const userInput: string;
   declare const sessionId: string;          // looked up from your database by user
-  declare const sessionStore: SessionStore; // S3, Redis, Postgres, or your own adapter
+  declare const sessionStore: SessionStore; // an object store, key-value store, database, or your own adapter
 
   for await (const message of query({
     prompt: userInput,
@@ -157,7 +157,7 @@ The pattern hinges on resuming a session by ID with a shared store attached:
 
   user_input: str = ...
   session_id: str = ...              # looked up from your database by user
-  session_store: SessionStore = ...  # S3, Redis, Postgres, or your own adapter
+  session_store: SessionStore = ...  # an object store, key-value store, database, or your own adapter
 
 
   async def main():
@@ -222,7 +222,7 @@ Work through these decisions before shipping a self-hosted agent.
 
 ### Session and state persistence
 
-Default local disk is lost on restart, scale-down, or a move to a different node. For any session a user expects to resume, mirror the transcript to durable storage with a [`SessionStore` adapter](/docs/en/agent-sdk/session-storage). See [Reference implementations](/docs/en/agent-sdk/session-storage#reference-implementations) for S3, Redis, and Postgres adapters and a conformance suite for your own.
+Default local disk is lost on restart, scale-down, or a move to a different node. For any session a user expects to resume, mirror the transcript to durable storage with a [`SessionStore` adapter](/docs/en/agent-sdk/session-storage). See [Reference implementations](/docs/en/agent-sdk/session-storage#reference-implementations) for example adapters for an object store, a key-value store, and a database, and a conformance suite for your own.
 
 Three things to know about how `SessionStore` behaves:
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/artifacts
-fetched_at: 2026-09-14T05:36:02.405928+00:00
+fetched_at: 2026-09-21T05:44:01.866337+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ fetch_method: mintlify_md
   Artifacts are available on Pro, Max, Team, and Enterprise plans and require a session signed in with [`/login`](/docs/en/setup#authenticate). See [Availability](#availability) for the full set of requirements.
 </Note>
 
-An artifact is a live, interactive web page that Claude Code publishes from your session to a private URL on claude.ai. You open it in a browser, and it updates in place as the session continues. Share it from the page header when you want someone else to see it too.
+An [artifact](https://claude.com/features/artifacts) is a live, interactive web page that Claude Code publishes from your session to a private URL on claude.ai. You open it in a browser, and it updates in place as the session continues. Share it from the page header when you want someone else to see it too.
 
 <Frame>
   <img src="https://mintcdn.com/claude-code/kaHIYYMIYMYPxQg9/images/artifacts-viewer.png?fit=max&auto=format&n=kaHIYYMIYMYPxQg9&q=85&s=dbfd671cdb0d15f49f808b9e89778fe1" alt="An artifact open in a browser at claude.ai/code/artifact. The viewer header shows the artifact title acme-funnel-fix, a Share button, and the author avatar. The Share menu is open with the Always share latest version toggle, a version picker reading Sharing version 2, an Everyone at Acme audience selector, and a Copy link button. Below the header, the artifact page shows two mobile mockups side by side, a funnel chart, and a row of metric cards." width="2511" height="1890" data-path="images/artifacts-viewer.png" />
@@ -130,7 +130,7 @@ To ask for the comments yourself, give Claude the URL:
 Read the comments on https://claude.ai/code/artifact/5fbea6f3-... and make the changes the commenters ask for.
 ```
 
-If Claude tells you it can't read comments, check three things:
+If Claude tells you it can't read comments, confirm your version, your session, and your feature-flag setting:
 
 * You're running Claude Code v2.1.221 or later.
 * You're not in your first session since you installed Claude Code or upgraded from a version before v2.1.221. In that [first session after an install or upgrade](/docs/en/env-vars#first-session-after-an-install-or-upgrade), Claude might not be able to read comments yet; start a new session and ask again.
@@ -239,7 +239,7 @@ Build an artifact with sliders for the easing curve, duration, and delay so I ca
 
 ### Bring the result back to your session
 
-An artifact can act as a lightweight editor for a decision you then hand back to Claude. Ask for an export control that produces text you can paste into the terminal, so the result of interacting with the page flows back into the session instead of staying on the page.
+An artifact can act as a lightweight editor for a decision you then send back to Claude. Ask for an export control that produces text you can paste into the terminal, so the result of interacting with the page flows back into the session instead of staying on the page.
 
 ```text wrap theme={null}
 Make a triage board artifact with each open issue as a draggable card across Now, Next, Later, and Cut columns. Add a "Copy as prompt" button that gives me the final ordering to paste back here.
@@ -255,7 +255,7 @@ Turn this migration plan into a checklist artifact. Check items off as you compl
 
 ## Improve the visual design
 
-Claude applies a built-in design skill when it builds an artifact, so pages get a deliberate palette, typography, and layout without extra prompting. Requires Claude Code v2.1.182 or later. That skill also looks for an existing design system in your project before choosing its own. Design tokens are the named color, typography, and spacing values your design system reuses. To keep artifacts consistent with your product's branding, record them where Claude can find them, such as the project's [CLAUDE.md](/docs/en/memory) or a theme file in your repository:
+Claude applies a built-in design skill when it builds an artifact, so pages get a deliberate palette, typography, and layout without extra prompting. That skill also looks for an existing design system in your project before choosing its own. Design tokens are the named color, typography, and spacing values your design system reuses. To keep artifacts consistent with your product's branding, record them where Claude can find them, such as the project's [CLAUDE.md](/docs/en/memory) or a theme file in your repository:
 
 ```markdown theme={null}
 ## Design system
@@ -271,15 +271,15 @@ For typography, Claude can load a typeface from Google Fonts, the one external f
 
 ## Draft a design canvas
 
-To mock up a UI, a screen flow, a landing page, or a poster rather than build a page, run `/design` with a brief. Claude drafts the design as artboards on one canvas and publishes the canvas as an artifact that runs a research preview of Claude Design's editor. The brief names what you want drawn:
+To mock up a UI, a screen flow, a landing page, or a poster rather than build a page, run `/design` with a brief. Claude drafts the design as artboards on one canvas and publishes the canvas as a Design artifact. The brief names what you want drawn:
 
 ```text wrap theme={null}
 /design a settings screen for a mobile banking app
 ```
 
-Open the published artifact to review the artboards. Where saving is enabled for your account, select an element on an artboard, change it, and save to publish a new version; otherwise you view the draft and export it as PNG or PDF.
+Open the published artifact in a desktop browser to review the artboards. Select an element on an artboard and change it, and your edits save automatically. You can export each artboard as PNG or PDF.
 
-`/design` requires a session where [artifacts are available](#availability) and Claude Code v2.1.234 or later.
+`/design` requires a session where [artifacts are available](#availability) and Claude Code v2.1.265 or later.
 
 ## Page constraints
 
@@ -291,7 +291,7 @@ Each artifact is one self-contained page. Claude Code wraps the file you publish
 | No backend        | An artifact is a static page. It can't authenticate viewers itself.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | Downloads         | The page can't start a download itself. To let viewers save a file the page generates, Claude declares the downloads capability. See [Offer a file download](#offer-a-file-download).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | Single page       | Relative links do not resolve, because nothing is deployed alongside the page. For multi-section content, Claude uses in-page anchors rather than separate files.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| Source file types | The published file must be `.html`, `.htm`, or `.md`, and must decode as UTF-8, or as little-endian UTF-16 by its byte-order mark. Markdown files render as styled HTML. A file that doesn't decode, or that contains the replacement character `U+FFFD`, is [refused with the line and column to fix](/docs/en/errors#the-source-file-is-not-valid-utf-8-text).                                                                                                                                                                                                                                                                                                                       |
+| Source file types | The published file must be `.html`, `.htm`, or `.md`, and must decode as UTF-8, or as little-endian UTF-16 by its byte-order mark. Markdown files render as styled document pages with syntax-highlighted code. A file that doesn't decode, or that contains the replacement character `U+FFFD`, is [refused with the line and column to fix](/docs/en/errors#the-source-file-is-not-valid-utf-8-text).                                                                                                                                                                                                                                                                                |
 | Rendered size     | The rendered page must be 16 MiB or smaller. Large embedded images are the usual cause when a publish fails for size.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 Generating an artifact uses output tokens like any other response, and a styled page is more token-intensive than the same content as terminal text. Inline CSS, JavaScript for interactive controls, and especially images embedded as data URIs are the main contributors. To reduce an artifact's token cost:

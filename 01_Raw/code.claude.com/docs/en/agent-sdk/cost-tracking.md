@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/cost-tracking
-fetched_at: 2026-08-31T06:29:33.663590+00:00
+fetched_at: 2026-09-21T05:44:00.865691+00:00
 fetch_method: mintlify_md
 ---
 
@@ -80,7 +80,7 @@ To total the whole call, add the last result from before each `/clear` to the ca
 
 In TypeScript, the SDK also emits an [`SDKConversationResetMessage`](/docs/en/agent-sdk/typescript#sdkconversationresetmessage) at each reset, so you can detect resets from the stream. In Python, the SDK likewise emits a `ConversationResetMessage`. Before Python SDK v0.2.137, the Python iterator dropped that message, so on those versions count the resets yourself from the `/clear` turns your app sends.
 
-`maxBudgetUsd`, or `max_budget_usd` in Python, is compared against the same running total, so a `/clear` also starts the budget over.
+`maxBudgetUsd` (TypeScript) or `max_budget_usd` (Python) is compared against the same running total, so a `/clear` also starts the budget over.
 
 ## Get the total cost of a query
 

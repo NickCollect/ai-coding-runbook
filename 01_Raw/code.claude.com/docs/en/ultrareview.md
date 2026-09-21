@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/ultrareview
-fetched_at: 2026-09-14T05:36:04.108783+00:00
+fetched_at: 2026-09-21T05:44:06.466794+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,15 +16,15 @@ fetch_method: mintlify_md
   Ultrareview is a research preview feature. The feature, pricing, and availability may change based on feedback. The command is `/code-review ultra`. When ultrareview is available to your account, `/ultrareview` is an alias.
 </Note>
 
-Ultrareview is a deep code review that runs on Claude Code on the web infrastructure. When you run `/code-review ultra`, Claude Code launches a fleet of reviewer agents in a remote sandbox to find bugs in your branch or pull request.
+Ultrareview is a deep code review that runs as a [cloud session](/docs/en/claude-code-on-the-web) on Anthropic's infrastructure. When you run `/code-review ultra`, Claude Code launches a fleet of reviewer agents in a cloud sandbox to find bugs in your branch or pull request.
 
 Compared to a local `/code-review`, ultrareview offers:
 
 * **Higher signal**: every reported finding is independently reproduced and verified, so the results focus on real bugs rather than style suggestions
 * **Broader coverage**: a larger fleet of reviewer agents explores the change in parallel, which surfaces issues that a local review can miss
-* **No local resource use**: the review runs entirely in a remote sandbox, so your terminal stays free for other work while it runs
+* **No local resource use**: the review runs entirely in a cloud sandbox, so your terminal stays free for other work while it runs
 
-Ultrareview requires authentication with a claude.ai account because it runs on Claude Code on the web infrastructure. If you are signed in with an API key only, run `/login` and authenticate with claude.ai first. Ultrareview is not available when using Claude Code with Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry, and it is not available to organizations that have enabled Zero Data Retention. When ultrareview is not available, `/code-review ultra` runs a local review in your session instead.
+Ultrareview requires authentication with a claude.ai account because it runs as a cloud session on Anthropic's infrastructure. If you are signed in with an API key only, run `/login` and authenticate with claude.ai first. Ultrareview is not available when using Claude Code with Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry, and it is not available to organizations that have enabled Zero Data Retention. When ultrareview is not available, `/code-review ultra` runs a local review in your session instead.
 
 ## Run ultrareview from the CLI
 
@@ -36,7 +36,7 @@ Start a review from any git repository:
 
 Without arguments, ultrareview reviews the diff between your current branch and the default branch, including uncommitted and staged changes. For uncommitted changes to files named like credentials or keys, such as `.env` and `*.tfvars` files, Claude Code follows the rules for [uploading a local repository to a cloud session](/docs/en/claude-code-on-the-web#send-local-repositories-without-github).
 
-For a branch review, Claude Code bundles the repository state and uploads it to a remote sandbox; when you [review a pull request](#review-a-pull-request), Claude Code uploads nothing from your machine.
+For a branch review, Claude Code bundles the repository state and uploads it to a cloud sandbox; when you [review a pull request](#review-a-pull-request), Claude Code uploads nothing from your machine.
 
 Before launching, Claude Code shows a confirmation dialog with the review scope, your remaining free runs, and the estimated cost; for a branch review, the scope includes the file and line count. After you confirm, the review continues in the background while you keep using your session.
 
@@ -62,7 +62,7 @@ To review a GitHub pull request instead of a local branch, pass the PR number:
 
 The command also accepts `#1234`, `PR 1234`, and pasted PR URLs; a pasted URL must point to the repository in your current directory.
 
-In PR mode, the remote sandbox clones the pull request directly from the host rather than bundling your local working tree. PR mode works with repositories on `github.com` and on [GitHub Enterprise Server](/docs/en/github-enterprise-server) instances that an Owner has connected to Claude Code.
+In PR mode, the cloud sandbox clones the pull request directly from the host rather than bundling your local working tree. PR mode works with repositories on `github.com` and on [GitHub Enterprise Server](/docs/en/github-enterprise-server) instances that an Owner has connected to Claude Code.
 
 For repositories on `github.com`, the sandbox clones with the GitHub account connected to your Claude account, so the account must be able to read the PR's repository. Claude Code checks this before creating the cloud session, unless you've set [`CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`](/docs/en/env-vars#variables), and refuses the launch when [no account is connected](/docs/en/errors#no-github-account-is-connected-to-your-claude-account) or [the account can't see the repository](/docs/en/errors#your-connected-github-account-cant-see-the-repository); the refusal names the fix. Before v2.1.248, Claude Code didn't check this before launch.
 
@@ -77,11 +77,15 @@ Claude Code never posts unless you choose to on that run, and `--no-post` is the
 * **Interactive**: in the launch dialog, select **Run and post the findings to the PR as me**. If you add `--post` to the command, as in `/code-review ultra 1234 --post`, Claude Code preselects that choice and still asks before launching.
 * **Non-interactive**: run the [`claude ultrareview` subcommand](#run-ultrareview-non-interactively) with `--post`. You consent to the post by running the subcommand with the flag, so Claude Code posts without asking. In a `claude -p '/code-review ultra'` run, Claude Code exits before the findings arrive, so it posts nothing; use the subcommand instead.
 
-Claude Code doesn't post from your machine. It sends the findings to a session on [Claude Code on the web](/docs/en/claude-code-on-the-web), which posts the comment through the GitHub account you've connected to Claude. Posting requires the same claude.ai sign-in as the review itself. Because posting runs through Claude Code on the web, it isn't available on third-party providers or when you set [`CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`](/docs/en/env-vars).
+Claude Code doesn't post from your machine. It sends the review's session ID to the Anthropic API, which posts the review's stored findings as the comment through the GitHub account you've connected to Claude. Posting requires the same claude.ai sign-in as the review itself, and it isn't available on third-party providers or when you set [`CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`](/docs/en/env-vars).
 
 In an interactive session, Claude Code starts the post when the findings arrive, so keep the session open until the review finishes. Claude Code keeps the posting choice only in that session. If the session ends before the review finishes, Claude Code posts nothing, even if you resume the conversation later.
 
-When the post can't start while your session is open, Claude tells you that nothing went to the PR and why, and the findings stay in your terminal so you can post them by hand.
+When the post finishes, Claude tells you the outcome:
+
+* **Posted**: Claude gives you a link to the comment.
+* **Already posted**: an earlier post of the same review already put the comment on the PR, so Claude links you to the pull request instead of posting again.
+* **Failed**: Claude tells you why, and the findings stay in your terminal so you can post them by hand.
 
 ### Pass a request in plain words
 
@@ -173,7 +177,10 @@ The subcommand exits with one of three codes:
 
 If you interrupt the subcommand, the remote review keeps running; follow the session URL printed to stderr to watch it in the browser.
 
-With `--post`, the subcommand starts the post right after it prints the findings. If the run fails, times out, or you interrupt it, the subcommand posts nothing. If the review completes but the post can't start, Claude Code prints the reason to stderr, and the findings stay on stdout so you can post them by hand.
+With `--post`, the subcommand starts the post right after printing the findings, and prints the link to stderr.
+
+* If the run fails, times out, or you interrupt it, the subcommand posts nothing.
+* If the review completes but the comment isn't posted, Claude Code prints the reason to stderr, and the findings stay on stdout so you can post them by hand.
 
 For automatic reviews on GitHub pull requests, [Code Review](/docs/en/code-review) integrates with your repository directly and posts findings as inline PR comments without a CLI step.
 
@@ -184,7 +191,7 @@ Both reviews examine code, but you use them at different stages of your workflow
 |          | `/code-review`                                         | `/code-review ultra`                                            |
 | -------- | ------------------------------------------------------ | --------------------------------------------------------------- |
 | Target   | your working diff, a pull request, a branch, or a path | your working diff or a pull request                             |
-| Runs     | locally in your session                                | remotely in a cloud sandbox                                     |
+| Runs     | locally in your session                                | in a cloud sandbox                                              |
 | Depth    | scales with the effort argument                        | multi-agent fleet with independent verification                 |
 | Duration | seconds to a few minutes                               | roughly 5 to 10 minutes                                         |
 | Cost     | counts toward normal usage                             | free runs, then roughly \$5 to \$25 per review as usage credits |
@@ -194,5 +201,5 @@ Use `/code-review` for fast feedback as you work, or pass a PR number to review 
 
 ## Related resources
 
-* [Claude Code on the web](/docs/en/claude-code-on-the-web): learn how cloud sessions and cloud sandboxes work
+* [Use Claude Code in the cloud](/docs/en/claude-code-on-the-web): learn how cloud sessions and cloud sandboxes work
 * [Manage costs effectively](/docs/en/costs): track usage and set spending limits

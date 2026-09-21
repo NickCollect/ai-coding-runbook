@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/worktrees
-fetched_at: 2026-09-14T05:36:04.485591+00:00
+fetched_at: 2026-09-21T05:44:07.391694+00:00
 fetch_method: mintlify_md
 ---
 
@@ -129,7 +129,7 @@ Claude Code runs a periodic sweep that removes worktrees that Claude created for
 When you [background](/docs/en/agent-view#send-the-session-to-the-background) a `--worktree` session, its worktree becomes a background-session worktree that the sweep can remove. The sweep leaves a worktree in place in these cases:
 
 * The worktree still holds work: changed or untracked files, or unpushed commits.
-* Claude Code can't determine which filter drivers the repository config defines, in any of the [three cases that also block worktree creation](#git-lfs-content-is-missing-from-a-worktree-claude-code-created).
+* One of the [four cases that also block worktree creation](#git-lfs-content-is-missing-from-a-worktree-claude-code-created) applies: Claude Code can't determine which filter drivers the repository config defines, or finds a setting there it can't switch off.
 * The worktree belongs to a `--worktree` session you haven't backgrounded, whatever its age.
 * You created the worktree yourself with `git worktree add`, even if you then ran a `--worktree <name>` session in it and backgrounded that session.
 
@@ -319,11 +319,12 @@ Claude Code skips the repository's own filter drivers when it creates a worktree
 
 To get the real files, run `git lfs pull` inside the worktree.
 
-In three rare cases, Claude Code can't tell which filter drivers the repository's config defines, and creates no worktree at all. Match the error to its fix:
+In four rare cases, Claude Code creates no worktree at all: it can't tell which filter drivers the repository's config defines, or it finds a setting there it can't switch off. Match the error to its fix:
 
 * **`Could not read the repository git config to neutralize filter drivers`**: Claude Code couldn't read the repository's `.git/config`, for example because of its permissions. Fix that and retry.
 * **`The repository git config defines a filter driver whose name cannot be neutralized (contains "=" or a newline)`**: rename or remove that filter driver in `.git/config` and retry.
 * **`The repository git config has a conditional include (includeIf)`**: move the settings the `includeIf` in `.git/config` pulls in directly into that file, remove the `includeIf`, and retry. An `includeIf` in your global git config doesn't trigger this.
+* **`Git was not run: the repository's own git config sets <key>`**: the message names a key that points Git LFS at a program to run, such as `lfs.customtransfer.<name>.path` or `lfs.standalonetransferagent`. If that setting is yours, move it to your global git config. If you don't recognize it, remove it from the repository's git config, since a tool or checkout you don't trust may have written it. Retry once the key is gone from the repository's config.
 
 ### Claude Code refuses to use a worktree
 
@@ -367,6 +368,8 @@ The messages take different shapes from the interactive messages in the table:
 * `Notice: the worktree <path> for this session no longer exists...` for a gone worktree; Claude Code prints it and continues the session, as an interactive resume does
 
 The refusal ending embedded in each error is shared with the interactive notices, so it still matches its entry under [Claude Code refuses to use a worktree](#claude-code-refuses-to-use-a-worktree).
+
+In the stream-json result, [`startup_failure_reason`](/docs/en/agent-sdk/typescript#startup_failure_reason) is `worktree_unverified` for the `could not verify worktree` error and `worktree_resume_refused` for the `cannot resume into worktree` and `The worktree binding is kept` errors. An application can branch on it instead of matching the error text. Before v2.1.274, the result carried no `startup_failure_reason` field.
 
 ## See also
 

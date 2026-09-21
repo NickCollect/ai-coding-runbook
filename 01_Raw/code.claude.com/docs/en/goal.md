@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/goal
-fetched_at: 2026-09-14T05:36:03.140995+00:00
+fetched_at: 2026-09-21T05:44:03.897625+00:00
 fetch_method: mintlify_md
 ---
 
@@ -59,7 +59,7 @@ While the goal is active, the transcript shows each verdict the evaluator return
 
 ### Write an effective condition
 
-The [evaluator](#how-evaluation-works) judges your condition against what Claude has surfaced in the conversation. It doesn't run commands or read files independently, so write the condition as something Claude's own output can demonstrate. "All tests in `test/auth` pass" works because Claude runs the tests and the result lands in the transcript for the evaluator to read.
+The [evaluator](#how-evaluation-works) judges your condition against what Claude has surfaced in the conversation. It doesn't run commands or read files independently, so write the condition as something Claude's own output can demonstrate. "All tests in `test/auth` pass" works because Claude runs the tests and the result appears in the transcript for the evaluator to read.
 
 A condition that holds up across many turns usually has:
 

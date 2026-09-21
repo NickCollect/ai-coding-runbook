@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/self-hosted-environments-identity
-fetched_at: 2026-08-31T06:29:45.225142+00:00
+fetched_at: 2026-09-21T05:44:06.051333+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ fetch_method: mintlify_md
   Self-hosted environments are in public beta on Team and Enterprise plans; an [Owner](/docs/en/cloud-environments#organization-shared-environments) enables them by turning on **Allow self-hosted environments** on the [**Cloud environments** admin page](https://claude.ai/admin-settings/cloud-environments). This page covers session identity verification; see the [quickstart](/docs/en/self-hosted-environments-quickstart) for setup and [Deploy to production](/docs/en/self-hosted-environments-deploy) for the fleet recipes.
 </Note>
 
-A [self-hosted environment](/docs/en/self-hosted-environments) lets [Claude Code on the web](/docs/en/claude-code-on-the-web) sessions run on infrastructure you operate instead of on Anthropic's. Because the session runs inside your network, Claude can call your internal services directly. Those services need a way to confirm that a request came from a Claude Code session in your environment, and to identify the user or service identity that created that session.
+A [self-hosted environment](/docs/en/self-hosted-environments) lets Claude Code [cloud sessions](/docs/en/claude-code-on-the-web) run on infrastructure you operate instead of on Anthropic's. Because the session runs inside your network, Claude can call your internal services directly. Those services need a way to confirm that a request came from a Claude Code session in your environment, and to identify the user or service identity that created that session.
 
 Every session in a self-hosted environment receives a signed JSON Web Token (JWT) in the `CLAUDE_CODE_SESSION_ACCESS_TOKEN` environment variable. A session presents the token like any bearer credential; for example, a script Claude runs can call your service with `curl -H "Authorization: Bearer $CLAUDE_CODE_SESSION_ACCESS_TOKEN"`. Anthropic signs the token and publishes the verification keys at a public JWKS endpoint. Your services fetch those keys, verify the signature, and read the claims to decide what access to grant.
 

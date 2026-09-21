@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/server-managed-settings
-fetched_at: 2026-09-14T05:36:03.903712+00:00
+fetched_at: 2026-09-21T05:44:05.923718+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,7 +35,7 @@ Claude Code supports two approaches for centralized configuration. Server-manage
 | **Server-managed settings**                                               | Organizations without MDM, or users on unmanaged devices | Settings that Claude Code fetches from Anthropic's servers at startup and refreshes hourly during the session |
 | **[Endpoint-managed settings](/docs/en/managed-settings#delivery-mechanisms)** | Organizations with MDM or endpoint management            | Settings deployed to devices via MDM configuration profiles, registry policies, or managed settings files     |
 
-If your devices are enrolled in an MDM or endpoint management solution, endpoint-managed settings provide stronger security guarantees because the settings file can be protected from user modification at the OS level. Endpoint-managed settings don't reach [cloud sessions](/docs/en/model-config#surface-coverage) in Anthropic-hosted environments, so organizations using Claude Code on the web should configure server-managed settings as well. Sessions in a [self-hosted environment](/docs/en/self-hosted-environments) also read the managed settings file in the runner image. The [settings precedence](#settings-precedence) below says when that file applies.
+If your devices are enrolled in an MDM or endpoint management solution, endpoint-managed settings provide stronger security guarantees because the settings file can be protected from user modification at the OS level. Endpoint-managed settings don't reach [cloud sessions](/docs/en/model-config#surface-coverage) in Anthropic-hosted environments, so organizations whose developers run cloud sessions should configure server-managed settings as well. Sessions in a [self-hosted environment](/docs/en/self-hosted-environments) also read the managed settings file in the runner image. The [settings precedence](#settings-precedence) below says when that file applies.
 
 ## Configure server-managed settings
 
@@ -151,7 +151,9 @@ If you clear your server-managed configuration in the admin console with the int
 
 Three kinds of keys are exceptions to the no-merge rule:
 
-* **Cross-source lock keys**: a small set of keys, such as the sandbox allowlist locks, [listed on the managed settings page](/docs/en/managed-settings#precedence-within-the-managed-tier). Claude Code honors them when any admin-controlled managed source sets them; the user-writable HKCU registry tier is excluded. When a [`policyHelper`](/docs/en/settings-reference#policyhelper) supplies managed settings, its output is the only source these checks read, apart from [`forceRemoteSettingsRefresh`](/docs/en/settings-reference#forceremotesettingsrefresh), which Claude Code reads from the admin sources directly at startup.
+* **Cross-source lock keys**: a small set of keys, such as the sandbox allowlist locks, [listed on the managed settings page](/docs/en/managed-settings#precedence-within-the-managed-tier). Claude Code honors them when any admin-controlled managed source sets them; the user-writable HKCU registry tier is excluded.
+
+  When a [`policyHelper`](/docs/en/settings-reference#policyhelper) supplies managed settings, its output is the only source these checks read, apart from [`forceRemoteSettingsRefresh`](/docs/en/settings-reference#forceremotesettingsrefresh), which Claude Code reads from the admin sources directly at startup.
 * **The `env` block**: apart from the telemetry unit and routing variables paired with a credential key, both covered below, it merges per key across the admin-controlled sources. For each environment variable, the highest-priority source defining it wins, and lower admin sources fill in variables the higher sources leave unset. An endpoint-managed `env` entry therefore applies whenever the server-managed configuration leaves that variable unset, or while a cached server value for it is [withheld pending server confirmation](#fetch-and-caching-behavior). Requires Claude Code v2.1.223 or later. Before v2.1.223, Claude Code applies the selected source's whole `env` block only.
   * **Telemetry unit**: the `OTEL_EXPORTER_OTLP_*` exporter keys, the `OTEL_LOG_*` content-capture toggles, `OTEL_LOGS_EXPORTER`, and the beta tracing variables `ENABLE_BETA_TRACING_DETAILED` and `BETA_TRACING_ENDPOINT` follow the highest source that sets any of them as a unit. A source that delivers the `otelHeadersHelper` credential key claims the unit too, but lands these variables only when it is the selected source: a source that isn't selected but delivers the key contributes none of them and still blocks lower sources from filling them in. Either way, an exporter endpoint from one source can never pair with credentials from another.
   * **Credential-paired routing**: a source that pairs routing variables with a selected-source-only credential key, such as `apiKeyHelper` or `otelHeadersHelper`, contributes those routing variables only when it wins the slot.
