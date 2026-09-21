@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/organizations
-fetched_at: 2026-08-31T06:29:32.396390+00:00
+fetched_at: 2026-09-21T05:44:02.227170+00:00
 fetch_method: mintlify_md
 ---
 
@@ -85,7 +85,7 @@ See [Organization Groups](https://cursor.com/docs/enterprise/organization-groups
 
 ## How limits and permissions combine
 
-Users can pick up settings, such as spend limits and allowed models, from organization-level groups and team-level directory groups at once. Cursor reconciles them with a most-permissive-wins model.
+Users can pick up settings, such as spend limits and allowed models, from Organization Groups and Team directory groups at once. Cursor reconciles them with a most-permissive-wins model.
 
 For example, if a user is in an organization-level group and a team, Cursor uses the higher of the two spend limits.
 

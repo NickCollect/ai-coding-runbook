@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/reference/ignore-file
-fetched_at: 2026-08-31T06:29:33.965513+00:00
+fetched_at: 2026-09-21T05:44:04.256817+00:00
 fetch_method: mintlify_md
 ---
 
@@ -47,9 +47,7 @@ dist/           # Directory
 
 ### Hierarchical ignore
 
-Enable `Cursor Settings` > `Features` > `Editor` > `Hierarchical Cursor Ignore` to search parent directories for `.cursorignore` files.
-
-Starting in Cursor 3.11, this setting moves to `Cursor Settings` > `Indexing` > `Ignore Files` > `Hierarchical Cursor Ignore`.
+Enable `Cursor Settings` > `Indexing` > `Ignore Files` > `Hierarchical Cursor Ignore` to search parent directories for `.cursorignore` files.
 
 ## Global ignore files
 

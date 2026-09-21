@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted/pool
-fetched_at: 2026-09-14T05:36:07.572282+00:00
+fetched_at: 2026-09-21T05:44:01.708232+00:00
 fetch_method: mintlify_md
 ---
 
@@ -175,7 +175,7 @@ Use `--name` and `--pool <name>` to make multi-repo workers recognizable in the 
 
 In pool mode, one Cloud Agent claims the worker at a time. Without `--pool`, shared assignment is allowed. Add `--management-addr 0.0.0.0:8080` before `start` when you need `/healthz`, `/readyz`, and `/metrics` for an orchestrator.
 
-Non-git directories can be execution roots, but they don't contribute repo routing metadata. All repos needed by the agent must already be cloned and accessible to the worker before the process starts. The worker process also needs filesystem and SCM access to each root.
+Non-git directories can be execution roots, but they don't contribute repo routing metadata. For a multi-repo worker, clone each repository before the worker starts. To start from an empty workspace and let the worker bootstrap source control after assignment, use an [any-repo pool](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#any-repo-pools).
 
 ## Any-repo pools
 
@@ -188,7 +188,29 @@ mkdir -p "$HOME/cursor-sandboxes/default"
 agent worker --pool sandbox --worker-dir "$HOME/cursor-sandboxes/default" start
 ```
 
-Add a [`.cursor/rules`](https://cursor.com/docs/rules.md) file in that directory to teach Cursor which directories and tools are available on those machines.
+To give every any-repo request repository instructions, create an `.mdc` file under `.cursor/rules` inside the directory passed to `--worker-dir`. The filename is arbitrary. This example uses `repo-info.mdc`:
+
+```md title=".cursor/rules/repo-info.mdc"
+---
+alwaysApply: true
+---
+
+This any-repo worker can clone from `github.acme.internal` with the
+pre-authenticated `gh` CLI.
+
+- For requests about payments, billing, or checkout, use
+  `platform/payments-service`. If it is missing, run:
+  `GH_HOST=github.acme.internal gh repo clone platform/payments-service`
+- For requests about the member portal or account settings, use
+  `web/member-portal`. If it is missing, run:
+  `GH_HOST=github.acme.internal gh repo clone web/member-portal`
+- Clone only the repositories needed for the request. Run subsequent commands
+  from the cloned repository.
+- If no mapping matches the request, report that the repository is not
+  configured. Do not guess a repository name, clone URL, or credentials.
+```
+
+[`alwaysApply: true`](https://cursor.com/docs/rules.md#rule-anatomy) includes the rule in every request. Keep the file in the worker directory so it is available before cloning, and replace the example mappings with your repositories and SCM commands.
 
 To have the worker clone the claimed agent's repos on claim, pass `--clone-git-repos`. This is opt-in. Default any-repo behavior does not clone.
 
@@ -206,7 +228,7 @@ If clone fails, the request stays in the queue. Operators see a generic clone fa
 
 `--clone-git-repos`, `--mint-github-token`, and `--sync-dashboard-secrets` assume one worker per container or OS user. Co-locating multiple credential-enabled workers under the same user is unsupported.
 
-Any-repo pools omit `repo=` routing labels. Start agents against them with `env.type: "pool"` and `env.name` set to the pool name, and omit `repos` (see [Create An Agent](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-an-agent)). Pick the pool under **Any repo** on [cursor.com/agents](https://cursor.com/agents).
+Any-repo pools omit `repo=` routing labels. Start agents against them with `env.type: "pool"` and `env.name` set to the pool name, and omit `repos` (see [Create An Agent](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-an-agent)). Pick the pool under **Any repo** on [cursor.com/agents](https://cursor.com/agents). In Slack, an any-repo pool set as the [team default pool](https://cursor.com/docs/integrations/slack.md#team-default-pool) lets `@Cursor` start an agent even when no repository resolves from the message or defaults.
 
 ## Manage pools
 
@@ -247,7 +269,7 @@ Use pool triggers when you want a Cloud Agent to run on your team's shared worke
 
 Team admins control self-hosted routing from the Self-Hosted section of the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents). **Allow Self-Hosted Machines** lets users opt in per request. Without opt-in, runs use Cursor's managed infrastructure. **Require Self-Hosted Machines** routes Cloud Agent runs to self-hosted workers.
 
-When Cursor starts a pool agent, it matches workers with labels. Every pool request includes a `repo=<owner/repo>` label. Requests for a named pool also include `pool=<name>`.
+When Cursor starts a pool agent, it matches workers with labels. Pool requests for a repository include a `repo=<owner/repo>` label; requests to an [any-repo pool](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#any-repo-pools) without a repository omit it. Requests for a named pool also include `pool=<name>`.
 
 Pool workers handle:
 
@@ -260,7 +282,7 @@ Pool workers handle:
 
 Use these options from integrations to start pool agents:
 
-- **Slack**: Mention `@Cursor` with `self_hosted=true`, standalone `self_hosted`, `selfhosted`, or `pool=<name>`. Legacy aliases like `private_worker=true`, `useprivateworker`, and `useprivateworkers=false` still work.
+- **Slack**: Mention `@Cursor` with `self_hosted=true`, standalone `self_hosted`, `selfhosted`, or `pool=<name>`. Legacy aliases like `private_worker=true`, `useprivateworker`, and `useprivateworkers=false` still work. Team admins can set a [team default pool](https://cursor.com/docs/integrations/slack.md#team-default-pool) with `@Cursor pool set <name>` so members run on it without an option in each mention. Explicit `pool=`, `worker=`, `machine=`, or `self_hosted=false` override the default, and an any-repo default pool lets Slack launch without a resolved repository.
 - **GitHub**: Comment `@cursoragent self_hosted=true ...` or `@cursoragent pool=<name> ...` on an issue, pull request, or review comment. The legacy `private_worker=true` alias still works.
 - **Linear**: Add `pool=<name>` or `[pool=<name>]` to the issue body. You can also use issue or project labels where the parent label is `pool` and the child label is the value. Linear does not parse standalone `self_hosted=true`.
 

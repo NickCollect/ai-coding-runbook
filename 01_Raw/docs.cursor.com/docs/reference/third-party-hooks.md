@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/reference/third-party-hooks
-fetched_at: 2026-07-13T04:25:39.573660+00:00
+fetched_at: 2026-09-21T05:44:04.400244+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,10 +14,7 @@ Cursor can load and execute hooks configured for Claude Code, allowing you to us
 
 ### Requirements
 
-To enable Claude Code hooks compatibility:
-
-1. **Enable Third-party skills** in Cursor Settings → Rules, Skills, Subagents → Include third-party Plugins, Skills, and other configs
-2. The feature must be enabled for your account
+Claude Code hooks load when **Include Third-Party Plugins, Skills, and Other Configs** is enabled in Cursor Settings → Agents → Third-Party Imports. The setting is on by default.
 
 ### Configuration Locations
 
@@ -181,7 +178,7 @@ exit 0
 
 If you have existing Claude Code hooks, you can:
 
-1. **Keep using Claude Code config files**: Enable third-party skills and your existing `.claude/settings.json` hooks will work automatically
+1. **Keep using Claude Code config files**: Leave **Include Third-Party Plugins, Skills, and Other Configs** enabled and your existing `.claude/settings.json` hooks will work automatically
 2. **Migrate to Cursor format**: Copy your hooks to `.cursor/hooks.json` using the Cursor format for full feature support
 
 **Cursor format equivalent:**
@@ -245,9 +242,9 @@ Claude Code tool names are mapped to Cursor tool names:
 | `Edit`           | `Write`     | Yes       |
 | `Grep`           | `Grep`      | Yes       |
 | `Task`           | `Task`      | Yes       |
+| `WebFetch`       | `WebFetch`  | Yes       |
+| `WebSearch`      | `WebSearch` | Yes       |
 | `Glob`           | -           | No        |
-| `WebFetch`       | -           | No        |
-| `WebSearch`      | -           | No        |
 
 ### Limitations
 
@@ -261,7 +258,7 @@ Some features are only available when using the native Cursor format:
 
 **Claude Code hooks not loading**
 
-1. Verify "Third-party skills" is enabled in Cursor Settings
+1. Verify "Include Third-Party Plugins, Skills, and Other Configs" is enabled in Cursor Settings → Agents → Third-Party Imports
 2. Check that your `.claude/settings.json` file is valid JSON
 3. Cursor watches config files and reloads them automatically. If hooks still do not load, restart Cursor.
 

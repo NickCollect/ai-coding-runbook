@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/setup
-fetched_at: 2026-08-17T02:15:17.737867+00:00
+fetched_at: 2026-09-21T05:44:01.772669+00:00
 fetch_method: mintlify_md
 ---
 
@@ -111,6 +111,28 @@ Computer use is supported for repos with Dockerfiles based on Debian/Ubuntu-base
 Each cloud agent runs on a default VM profile with limited memory and CPU. If you are on an Enterprise plan and your repo needs more resources, contact support and we can increase limits for your workspace.
 
 Self-serve custom resource configuration is coming soon.
+
+## Start from scratch
+
+You can start a cloud agent without a repository or a connected source control provider. Select **Start from scratch** in the repository picker at [cursor.com/agents](https://cursor.com/agents) or in the [Agents Window](https://cursor.com/docs/agent/agents-window.md), then send your prompt. Cursor creates a draft [Origin](https://cursor.com/docs/origin.md) repository for the agent in the background, and the agent works in it from the first turn.
+
+Start from scratch needs a paid plan and Origin. If your team hasn't set up Origin yet, Cursor points you to [Origin setup](https://cursor.com/docs/origin.md#enable-origin) first. If an admin has turned Origin off for your team, the agent starts without a repository.
+
+### Save the work to a repository
+
+When the agent's work is where you want it, select **Create repo** above the agent input. Pick one of the suggested names, or choose **Other** and type your own. Names can use letters, digits, hyphens, and underscores, up to 100 characters. On a team, choose who can see the code: **Private** (only you) or **Internal** (anyone on your team can view and edit). Then select **Create Origin repo**.
+
+Cursor publishes the draft repository under that name, so the agent's work comes with it. The repository appears at [cursor.com/codebase](https://cursor.com/codebase), where you can [browse it](https://cursor.com/docs/origin/browse.md), [clone it](https://cursor.com/docs/origin/git.md), and change its [visibility](https://cursor.com/docs/origin/settings.md#permissions).
+
+### Preview the running app
+
+Cursor forwards ports from the agent's environment to your machine, so you can open the app the agent is building while it runs. In the [Agents Window](https://cursor.com/docs/agent/agents-window.md), open the **Forwarded Ports** menu in the editor panel. Ports that processes in the agent's environment listen on appear under **Detected**. Turn on **Auto-Forward Ports** to forward them automatically, or enter a port number to forward one yourself. Select **Open in internal browser** on a forwarded port to preview the app, and use [Design Mode](https://cursor.com/docs/agent/design-mode.md) to point at elements and direct the agent from the page.
+
+### Publish to a live URL
+
+Once the repository exists, connect a Vercel account and, in the [Agents Window](https://cursor.com/docs/agent/agents-window.md), select **Publish** above the agent input. If you haven't added the Vercel plugin yet, Cursor offers **Add Vercel** first. The agent links the repository to a Vercel project, deploys the default branch, and replies with the deployment URL. Later commits to the default branch deploy on their own.
+
+Publishing requires a Vercel account. If you're on a Cursor team, deploy to a Vercel team on a plan above Hobby.
 
 ## Install script
 

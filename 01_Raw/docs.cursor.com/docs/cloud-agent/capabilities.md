@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/capabilities
-fetched_at: 2026-09-07T05:31:27.232530+00:00
+fetched_at: 2026-09-21T05:44:01.234943+00:00
 fetch_method: mintlify_md
 ---
 
@@ -34,7 +34,7 @@ Cloud agents run in a remote VM that can be fully onboarded with your repo, depe
 
 Cloud agents can use [MCP (Model Context Protocol)](https://cursor.com/docs/mcp.md) servers configured for your team. This gives agents access to external tools and data sources like databases, APIs, and third-party services during their runs.
 
-Add and enable personal MCP servers through the MCP dropdown in [cursor.com/agents](https://cursor.com/agents). Team admins configure shared servers under **Dashboard -> Integrations & MCP**.
+Add and enable personal MCP servers through the MCP dropdown in [cursor.com/agents](https://cursor.com/agents). Team admins configure shared servers under **Dashboard -> Plugins & MCPs**.
 
 Admins can link shared Team MCP servers to the [Default team marketplace](https://cursor.com/docs/plugins.md#migrate-existing-team-mcps). Linking keeps the servers available to Cloud Agents and also makes them available for teammates to install and configure in the Agent Window, IDE, and CLI.
 
@@ -146,6 +146,14 @@ Agents can subscribe to events from these integrations:
 - Subscriptions belong to a single agent conversation. Events wake that agent as follow-up messages.
 - Bursts coalesce. Several events arriving close together can wake the agent once, and the agent re-reads the source (the PR, thread, or issue) before acting.
 - A subscription lasts at most 180 days. Agents also unsubscribe on their own when the wait is over.
+
+### GitHub CI subscriptions
+
+A CI subscription waits until every check on the commit has completed, then delivers one commit-wide result: success, or failure with the names of the failed checks.
+
+Some checks stay pending for a long time, for example while a person approves them. A single pending check holds back the whole result, and the agent keeps waiting.
+
+Finish those checks with GitHub's [`action_required`](https://docs.github.com/en/rest/checks/runs#create-a-check-run) conclusion instead of leaving them pending. The check completes, still requires action, and still blocks merge when it's a required check, so the CI subscription delivers while merge stays protected.
 
 ## Fixing CI Failures
 

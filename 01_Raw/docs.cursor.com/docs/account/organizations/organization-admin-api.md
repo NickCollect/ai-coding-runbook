@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/organizations/organization-admin-api
-fetched_at: 2026-09-07T05:31:25.250954+00:00
+fetched_at: 2026-09-21T05:43:59.537853+00:00
 fetch_method: mintlify_md
 ---
 
@@ -17,7 +17,7 @@ Organization API keys are organization-scoped credentials. Team API keys are tea
 
 Use an **Organization API key** when calling organization-level endpoints like `/organizations/team-memberships/sync`, `/organizations/pooled-usage`, and `/organizations/groups`.
 
-Use a **Team API key** when calling team-level endpoints under `/teams/*` (for example, `/teams/members` and `/teams/spend`).
+Use a **Team API key** when calling endpoints under `/teams/*` (for example, `/teams/members` and `/teams/spend`).
 
 ### Key differences
 
@@ -1339,11 +1339,12 @@ Bulk org routes (`PUT .../providers/:provider`, `PUT .../providers/:provider/mod
 
 ## Organization Groups
 
-Organization groups organize members across teams linked to the same organization. For dashboard setup and group-level controls, see [Organization Groups](https://cursor.com/docs/enterprise/organization-groups.md).
+Organization groups organize members across teams linked to the same organization. For dashboard setup and group-level controls, see [Organization Groups](https://cursor.com/docs/enterprise/organization-groups.md). Team directory groups use the Team Admin API at [`/teams/directory-groups`](https://cursor.com/docs/account/teams/admin-api.md#team-directory-groups) and `team_group_…` ids. Those routes do not accept Organization Group `id` (`g_`) or `publicId` (`grp_`) values.
 
 - **Availability**: Enterprise only
 - **Authentication**: Organization API key (Basic auth). Every group route, read or write, requires the **`members:*`** scope. Keys with **`admin:*`** also work because admin implies members.
-- **Group IDs**: Organization group IDs use the `g_` prefix.
+- **Group IDs**: Each group has two IDs. `id` (`g_` prefix) is the Organization API group ID; use it wherever a route takes `:groupId`. `publicId` (`grp_` prefix) is the group's public ID.
+- **Name lookup**: To find a group's IDs from its name, call [List Organization Groups](https://cursor.com/docs/account/organizations/organization-admin-api.md#list-organization-groups) with the `name` query parameter. No route accepts a name in place of `:groupId`.
 - **Pagination**: List routes accept `page` and `pageSize`. Both values must be positive integers.
 - **Rate limit**: Each route allows 20 requests per minute per organization. See [rate limits and best practices](https://cursor.com/docs/api.md#rate-limits).
 - **SCIM-synced groups**: Manage membership in your identity provider. Member add and remove requests return `400` for SCIM-synced groups.
@@ -1361,7 +1362,7 @@ Group routes share these error responses:
 
 /organizations/groups
 
-Retrieve organization groups for the organization attached to your API key.
+Retrieve organization groups for the organization attached to your API key. Pass `name` to look up one group by its exact name.
 
 #### Query parameters
 
@@ -1373,11 +1374,16 @@ Page number. Defaults to `1`.
 
 Number of groups per page. Defaults to `50`. Capped at 200; values above 200 are clamped to 200.
 
+`name` string
+
+Exact name of one group, URL-encoded (for example `Platform%20Engineering`). Group names are unique within an organization, so the response is the normal list payload with one group or none. A name with no match returns `200` with an empty `groups` array, not `404`. Omit `name`, or send it blank, to list every group.
+
 #### Response Fields
 
 Each object in `groups` contains:
 
 - `id` string - Organization group ID with the `g_` prefix
+- `publicId` string - Public group ID with the `grp_` prefix
 - `name` string - Group name
 - `memberCount` number - Number of members in the group
 - `monthlySpendingLimitDollars` number | null - Monthly spending limit in whole dollars for each group member. `null` means the group has no limit.
@@ -1393,6 +1399,13 @@ curl -X GET "https://api.cursor.com/organizations/groups?page=1&pageSize=50" \
   -u YOUR_ORGANIZATION_API_KEY:
 ```
 
+Look up one group by name:
+
+```bash
+curl -X GET "https://api.cursor.com/organizations/groups?name=Engineering" \
+  -u YOUR_ORGANIZATION_API_KEY:
+```
+
 **Response:**
 
 ```json
@@ -1400,6 +1413,7 @@ curl -X GET "https://api.cursor.com/organizations/groups?page=1&pageSize=50" \
   "groups": [
     {
       "id": "g_PDSPmvukpYgZEDXsoNirw3CFhy",
+      "publicId": "grp_01k2ja2000e0080000000000n2",
       "name": "Engineering",
       "memberCount": 12,
       "monthlySpendingLimitDollars": 500,
@@ -1408,6 +1422,7 @@ curl -X GET "https://api.cursor.com/organizations/groups?page=1&pageSize=50" \
     },
     {
       "id": "g_kljUvI0ASZORvSEXf9hV0ydcso",
+      "publicId": "grp_01k2jb4000e0080000000000p7",
       "name": "Design",
       "memberCount": 8,
       "monthlySpendingLimitDollars": null,
@@ -1419,6 +1434,32 @@ curl -X GET "https://api.cursor.com/organizations/groups?page=1&pageSize=50" \
     "page": 1,
     "pageSize": 50,
     "totalCount": 2,
+    "totalPages": 1,
+    "hasNextPage": false,
+    "hasPreviousPage": false
+  }
+}
+```
+
+**Response (name lookup):**
+
+```json
+{
+  "groups": [
+    {
+      "id": "g_PDSPmvukpYgZEDXsoNirw3CFhy",
+      "publicId": "grp_01k2ja2000e0080000000000n2",
+      "name": "Engineering",
+      "memberCount": 12,
+      "monthlySpendingLimitDollars": 500,
+      "createdAt": "2026-01-15T10:30:00.000Z",
+      "updatedAt": "2026-01-20T14:22:00.000Z"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "pageSize": 50,
+    "totalCount": 1,
     "totalPages": 1,
     "hasNextPage": false,
     "hasPreviousPage": false
@@ -1440,7 +1481,7 @@ Organization group ID with the `g_` prefix.
 
 #### Response Fields
 
-The `group` object contains `id`, `name`, `memberCount`, `monthlySpendingLimitDollars`, `createdAt`, and `updatedAt`. These fields match the [List Organization Groups](https://cursor.com/docs/account/organizations/organization-admin-api.md#list-organization-groups) response.
+The `group` object contains `id`, `publicId`, `name`, `memberCount`, `monthlySpendingLimitDollars`, `createdAt`, and `updatedAt`. These fields match the [List Organization Groups](https://cursor.com/docs/account/organizations/organization-admin-api.md#list-organization-groups) response.
 
 ```bash
 curl -X GET https://api.cursor.com/organizations/groups/g_PDSPmvukpYgZEDXsoNirw3CFhy \
@@ -1453,6 +1494,7 @@ curl -X GET https://api.cursor.com/organizations/groups/g_PDSPmvukpYgZEDXsoNirw3
 {
   "group": {
     "id": "g_PDSPmvukpYgZEDXsoNirw3CFhy",
+    "publicId": "grp_01k2ja2000e0080000000000n2",
     "name": "Engineering",
     "memberCount": 12,
     "monthlySpendingLimitDollars": 500,
@@ -1476,7 +1518,7 @@ Group name. Must be unique among the organization's active groups. Cursor remove
 
 #### Response Fields
 
-Returns `201 Created` with the new `group` object. The object contains `id`, `name`, `memberCount`, `monthlySpendingLimitDollars`, `createdAt`, and `updatedAt`.
+Returns `201 Created` with the new `group` object. The object contains `id`, `publicId`, `name`, `memberCount`, `monthlySpendingLimitDollars`, `createdAt`, and `updatedAt`.
 
 #### Errors
 
@@ -1497,6 +1539,7 @@ curl -X POST https://api.cursor.com/organizations/groups \
 {
   "group": {
     "id": "g_PDSPmvukpYgZEDXsoNirw3CFhy",
+    "publicId": "grp_01k2ja2000e0080000000000n2",
     "name": "Engineering",
     "memberCount": 0,
     "monthlySpendingLimitDollars": null,
@@ -1534,7 +1577,7 @@ Set to `true` to remove the group spending limit. Do not include `monthlySpendin
 
 #### Response Fields
 
-Returns the updated `group` object with `id`, `name`, `memberCount`, `monthlySpendingLimitDollars`, `createdAt`, and `updatedAt`.
+Returns the updated `group` object with `id`, `publicId`, `name`, `memberCount`, `monthlySpendingLimitDollars`, `createdAt`, and `updatedAt`.
 
 #### Errors
 
@@ -1556,6 +1599,7 @@ curl -X PATCH https://api.cursor.com/organizations/groups/g_PDSPmvukpYgZEDXsoNir
 {
   "group": {
     "id": "g_PDSPmvukpYgZEDXsoNirw3CFhy",
+    "publicId": "grp_01k2ja2000e0080000000000n2",
     "name": "Platform Engineering",
     "memberCount": 12,
     "monthlySpendingLimitDollars": 500,

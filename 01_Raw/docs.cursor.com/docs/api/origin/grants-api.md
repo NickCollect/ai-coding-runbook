@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin/grants-api
-fetched_at: 2026-09-14T05:36:05.628516+00:00
+fetched_at: 2026-09-21T05:44:00.126052+00:00
 title: "Origin Grants API | Cursor Docs"
 ---
 
@@ -21,12 +21,12 @@ Each grant names exactly one principal.
 | Principal | Field | Identifies |
 | --- | --- | --- |
 | `user` | `user.id` | A Cursor user, by the encoded `user_…` id the organization API uses. |
-| `group` | `group.id` | A Cursor organization group, by its public `grp_…` id. |
+| `group` | `group.id` | A Cursor group, by its public `grp_…` id: either a group the owner's team owns, or a group in that team's organization, returned as `publicId` by the [Organization API](https://cursor.com/docs/account/organizations/organization-admin-api#organization-groups) group routes. The `g_…` `id` those routes take is a different identifier. |
 | `teamGroup` | `teamGroup.kind` | One of the owning team's built-in groups: `members` (every team member) or `admins` (team admins). |
 
 A team-group grant is the floor every member of that built-in group holds on the resource. On a namespace it is the team's namespace floor. On a repository it is the team's per-repository override, and deleting it returns the repository to the namespace floor.
 
-Users and groups must belong to the owner's organization. The write endpoints answer a user or group that does not exist exactly like one outside the organization, so a response never confirms that a principal exists. List responses omit principals that no longer resolve to an active user, group, or the owning team.
+Users must belong to the owner's organization. A group must be one the owner's team owns, or an active group in that team's organization; a team's own groups are grantable even when the team is not linked to an organization. The write endpoints answer a user or group that does not exist exactly like one outside the organization, so a response never confirms that a principal exists. List responses omit principals that no longer resolve to an active user, group, or the owning team.
 
 ## [Permissions](#permissions)
 

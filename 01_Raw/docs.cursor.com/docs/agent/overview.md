@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/overview
-fetched_at: 2026-08-31T06:29:30.663815+00:00
+fetched_at: 2026-09-21T05:43:59.765488+00:00
 fetch_method: mintlify_md
 ---
 
@@ -9,6 +9,8 @@ fetch_method: mintlify_md
 Agent is Cursor's assistant that can complete complex coding tasks independently, run terminal commands, and edit code. Access in sidepane with Cmd+I.
 
 Learn more about [how agents work](https://cursor.com/learn/agents.md) and help you build faster.
+
+For a larger body of work, such as a feature or a migration, create a [Project](https://cursor.com/docs/agent/projects.md): a coordinator agent plans the work and delegates it to other agents.
 
 ## How Agent works
 
@@ -116,6 +118,12 @@ You can send a follow-up to steer the agent while it's working, without interrup
 This is available on [cursor.com/agents](https://cursor.com/agents) now and rolling out in the [Agents Window](https://cursor.com/docs/agent/agents-window.md). Press Tab to queue the message for after the turn instead.
 
 In the [CLI](https://cursor.com/docs/cli/overview.md), pressing Enter while the agent works steers the active run at a safe boundary, and pressing Enter again interrupts the turn.
+
+## Side chats
+
+Open a [side chat](https://cursor.com/help/ai-features/side-chats.md) to ask a question or investigate a tangent without interrupting the main conversation. Type `/side` or `/btw` in the chat input, optionally followed by your question, or use the plus button at the top of the chat panel.
+
+A side chat is a durable agent conversation. It uses the parent thread as hidden reference context and keeps its own transcript. @-mention the side chat in the main thread to pull that context back.
 
 ## Goals with /goal
 

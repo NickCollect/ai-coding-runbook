@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/reference/plugins
-fetched_at: 2026-08-10T03:07:42.039351+00:00
+fetched_at: 2026-09-21T05:44:04.399612+00:00
 fetch_method: mintlify_md
 ---
 
@@ -19,7 +19,7 @@ Cursor loads plugins in two formats, identified by their manifest location:
 | [Agent Plugins](https://agent-plugins.org) (open standard) | `plugin.json` at the plugin root | Skills, MCP servers                                            |
 | Cursor Plugins                                             | `.cursor-plugin/plugin.json`     | Skills, MCP servers, rules, agents, commands, hooks, variables |
 
-A plugin that conforms to the [Agent Plugins specification](https://github.com/agentplugins/agent-plugins-spec) loads in Cursor without changes. The rest of this reference documents the Cursor plugin format, which is developed in parallel with the standard and supports the full set of Cursor components.
+A plugin that conforms to the [Agent Plugins specification](https://github.com/agentplugins/agent-plugins-spec) loads in Cursor. Cursor does not expand the standard's `${PLUGIN_ROOT}` and `${PLUGIN_DATA}` variables in `mcp.json`; see [MCP servers](https://cursor.com/docs/reference/plugins.md#mcp-servers). The rest of this reference documents the Cursor plugin format, which is developed in parallel with the standard and supports the full set of Cursor components.
 
 ## Plugin structure
 
@@ -346,11 +346,13 @@ Cursor variables and infer the transport from `command` or `url`.
     "code-review": {
       "type": "stdio",
       "command": "./bin/code-review",
-      "cwd": "${PLUGIN_ROOT}"
+      "cwd": "${CURSOR_PLUGIN_ROOT}"
     }
   }
 }
 ```
+
+Cursor expands `${CURSOR_PLUGIN_ROOT}` and `${CLAUDE_PLUGIN_ROOT}` to the plugin's install path in `command`, `args`, `env` values, and `cwd`. It does not expand the standard's `${PLUGIN_ROOT}` and `${PLUGIN_DATA}` variables, so use `${CURSOR_PLUGIN_ROOT}` for the plugin root.
 
 See the [Agent Plugins MCP reference](https://agent-plugins.org/plugin-authors/mcp-servers)
 for supported transports, paths, and data directories.
@@ -430,12 +432,12 @@ A single Git repository can contain multiple plugins using a **marketplace manif
 
 ### Marketplace manifest fields
 
-| Field      | Type   | Description                                                                           |
-| :--------- | :----- | :------------------------------------------------------------------------------------ |
-| `name`     | string | **(required)** Marketplace identifier (kebab-case)                                    |
-| `owner`    | object | **(required)** `name` (required), `email` (optional)                                  |
-| `plugins`  | array  | **(required)** Array of plugin entries (max 500)                                      |
-| `metadata` | object | Optional. `description`, `version`, `pluginRoot` (prefix path for all plugin sources) |
+| Field      | Type   | Description                                                                               |
+| :--------- | :----- | :---------------------------------------------------------------------------------------- |
+| `name`     | string | **(required)** Marketplace identifier (kebab-case)                                        |
+| `owner`    | object | **(required)** `name` (required), `email` (optional)                                      |
+| `plugins`  | array  | **(required)** Array of plugin entries. The whole manifest file must be 10 MB or smaller. |
+| `metadata` | object | Optional. `description`, `version`, `pluginRoot` (prefix path for all plugin sources)     |
 
 ### Plugin entry fields
 

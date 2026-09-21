@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/scim
-fetched_at: 2026-09-07T05:31:25.551534+00:00
+fetched_at: 2026-09-21T05:43:59.646679+00:00
 fetch_method: mintlify_md
 ---
 
@@ -30,7 +30,7 @@ Users are automatically added to Cursor when assigned to the SCIM application in
 
 ### Directory groups
 
-Directory groups and their membership sync from your identity provider. Manage groups and users in your identity provider; Cursor displays this information as read-only. Within a team, directory groups control spend limits and policy.
+Directory groups and their membership sync from your identity provider. Manage groups and users in your identity provider; Cursor displays this information as read-only. Within a team, directory groups control spend limits and policy, including [Grok Bot group settings](https://cursor.com/docs/grok-bot/teams.md#group-settings).
 
 To drive team membership and roles from your directory, sync a directory group into an [Organization Group](https://cursor.com/docs/enterprise/organization-groups.md#set-up-scim-synced-groups) and map that group to a team. See [Use groups to power teams](https://cursor.com/docs/enterprise/organization-groups.md#use-groups-to-power-teams).
 

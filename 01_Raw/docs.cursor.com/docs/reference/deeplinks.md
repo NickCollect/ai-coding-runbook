@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/reference/deeplinks
-fetched_at: 2026-05-05T19:55:43.361033+00:00
+fetched_at: 2026-09-21T05:44:04.256000+00:00
 fetch_method: mintlify_md
 ---
 
@@ -151,7 +151,7 @@ print(deeplink)
 
 ### What is the maximum length for deeplink URLs?
 
-Deeplink URLs have a maximum length of 8,000 characters. When generating deeplinks programmatically, ensure your content doesn't exceed this limit when URL-encoded. The interactive generators above will show you the current URL length and remaining characters as you type.
+Deeplink URLs have a maximum length of 10,000 characters. When generating deeplinks programmatically, ensure your content doesn't exceed this limit when URL-encoded. The interactive generators above will show you the current URL length and remaining characters as you type.
 
 ### How do I use deeplinks on the web instead of in the Cursor app?
 

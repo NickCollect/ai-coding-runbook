@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/reference/keyboard-shortcuts
-fetched_at: 2026-08-31T06:29:33.963097+00:00
+fetched_at: 2026-09-21T05:44:04.285058+00:00
 fetch_method: mintlify_md
 ---
 
@@ -30,26 +30,25 @@ All Cursor keybindings, including Cursor-specific features, can be remapped in K
 
 Shortcuts for the chat input box.
 
-| Shortcut                                  | Action                       |
-| ----------------------------------------- | ---------------------------- |
-| Return                                    | Nudge (default)              |
-| Ctrl Return                               | Queue message                |
-| Cmd Return when typing                    | Force send message           |
-| Cmd Shift Backspace                       | Cancel generation            |
-| Cmd Shift L with code selected            | Add selected code as context |
-| Cmd V with code or log in clipboard       | Add clipboard as context     |
-| Cmd Shift V with code or log in clipboard | Add clipboard to input box   |
-| Cmd Return with suggested changes         | Accept all changes           |
-| Cmd Backspace                             | Reject all changes           |
-| Tab                                       | Cycle to next message        |
-| Shift Tab                                 | Rotate between Agent modes   |
-| Cmd Opt /                                 | Model toggle                 |
-| Cmd N / Cmd R                             | New chat                     |
-| Cmd T                                     | New chat tab                 |
-| Cmd \[                                    | Previous chat                |
-| Cmd ]                                     | Next chat                    |
-| Cmd W                                     | Close chat                   |
-| Escape                                    | Unfocus field                |
+| Shortcut                                   | Action                       |
+| ------------------------------------------ | ---------------------------- |
+| Return                                     | Queue message (default)      |
+| Cmd Return when typing                     | Force send message           |
+| Cmd Shift Backspace                        | Cancel generation            |
+| Cmd Shift L with code selected             | Add selected code as context |
+| Cmd V with code or log in clipboard        | Add clipboard as context     |
+| Cmd Shift V with code or log in clipboard  | Add clipboard to input box   |
+| Cmd Return with suggested changes          | Accept all changes           |
+| Cmd Shift Backspace with suggested changes | Reject all changes           |
+| Tab                                        | Cycle to next message        |
+| Shift Tab                                  | Rotate between Agent modes   |
+| Cmd Opt /                                  | Model toggle                 |
+| Cmd N / Cmd R                              | New chat                     |
+| Cmd T                                      | New chat tab                 |
+| Cmd \[                                     | Previous chat                |
+| Cmd ]                                      | Next chat                    |
+| Cmd W                                      | Close chat                   |
+| Escape                                     | Unfocus field                |
 
 ## Inline Edit
 
@@ -70,7 +69,6 @@ Shortcuts for the chat input box.
 | Cmd Shift L                     | Add selection to Chat                                    |
 | Cmd Shift K                     | Add selection to Edit                                    |
 | Cmd L                           | Add selection to new chat                                |
-| Cmd M                           | Toggle file reading strategies                           |
 | Cmd →                           | Accept next word of suggestion                           |
 | Cmd Return                      | Search codebase in chat                                  |
 | Select code, Cmd C, Cmd V       | Add copied reference code as context                     |
