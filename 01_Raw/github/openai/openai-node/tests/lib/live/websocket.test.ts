@@ -12,6 +12,7 @@ import { VERSION } from 'openai/version';
 // SDK-owned input-contract tests. No network connections are opened.
 const { handshake } = vi.hoisted(() => ({ handshake: vi.fn() }));
 
+// oxlint-disable-next-line anti-slop/no-module-mocking -- Validate public handshake options and constructor failures before network I/O; socket constructors are not injectable.
 vi.mock('ws', async () => {
   const { EventEmitter } = await import('node:events');
   return {
@@ -23,7 +24,12 @@ vi.mock('ws', async () => {
 
       constructor(url: URL, options: ClientOptions) {
         super();
-        handshake(url, options);
+        handshake(url, {
+          ...options,
+          headers: Object.fromEntries(
+            Object.entries(options.headers ?? {}).map(([name, value]) => [name.toLowerCase(), value]),
+          ),
+        });
       }
     },
   };
@@ -88,11 +94,11 @@ describe.each(variants)('Live $name WebSocket inputs', ({ connect, path, query }
             handshakeTimeout: 1234,
             followRedirects: false,
             headers: {
-              Authorization: 'Bearer fake-live-key',
+              authorization: 'Bearer fake-live-key',
 
-              'User-Agent': `OpenAI/JS ${VERSION}`,
-              'X-Test': 'custom',
-              'X-Optional': 'custom',
+              'user-agent': `OpenAI/JS ${VERSION}`,
+              'x-test': 'custom',
+              'x-optional': 'custom',
             },
           }),
         );
@@ -116,16 +122,16 @@ describe.each(variants)('Live $name WebSocket inputs', ({ connect, path, query }
         followRedirects,
         headers: { 'X-Test': 'custom', 'User-Agent': 'custom-client/1', 'X-Optional': 'custom' },
         reconnect: { onReconnecting, maxRetries: 1, initialDelay: 0, maxDelay: 0 },
-      } as unknown as LiveOptions);
+      });
       try {
         const expected = expect.objectContaining({
           followRedirects: false,
           headers: expect.objectContaining({
-            Authorization: 'Bearer fake-live-key',
+            authorization: 'Bearer fake-live-key',
 
-            'User-Agent': 'custom-client/1',
-            'X-Test': 'custom',
-            'X-Optional': 'custom',
+            'user-agent': 'custom-client/1',
+            'x-test': 'custom',
+            'x-optional': 'custom',
           }),
         });
         expect(handshake).toHaveBeenNthCalledWith(1, live.url, expected);

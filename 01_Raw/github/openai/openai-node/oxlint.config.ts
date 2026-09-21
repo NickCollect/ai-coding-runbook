@@ -2,13 +2,49 @@ const requireConfig = require('node:module').createRequire(__filename);
 
 const { defineConfig } = requireConfig('oxlint');
 const core = requireConfig('ultracite/oxlint/core').default;
+const antiSlop = requireConfig('ultracite/oxlint/anti-slop').default;
 const generatedFiles = requireConfig('./scripts/generated-files.cjs');
 
 // Existing handwritten SDK patterns predate these preset rules.
-const compatibilityRules = ['func-style', 'sort-keys'];
+const compatibilityRules = [
+  'func-style',
+  'sort-keys',
+  // Conditional literal fields preserve omission and create own data properties,
+  // keeping complete request and wire fixtures visible in one construction.
+  'anti-slop/no-conditional-empty-object-spread',
+];
+
+// Fixtures exercise malformed inputs, examples receive application-owned values,
+// and vendored code retains its upstream validation contracts.
+const fixtureAndVendorFiles = [
+  'tests/**',
+  'examples/**',
+  'ecosystem-tests/**',
+  'src/_vendor/**',
+  'scripts/_vendor/**',
+];
+
+// These modules own parsing, transport adaptation, or application callback
+// boundaries. They establish types from external values rather than assuming them.
+const sdkBoundaryFiles = [
+  'src/auth/**',
+  'src/internal/auth/**',
+  'src/helpers/**',
+  'src/realtime/**',
+  'src/beta/realtime/**',
+  'src/lib/*Stream.ts',
+  'src/lib/webrtc/**',
+  'src/core/streaming.ts',
+  'src/internal/uploads.ts',
+  'src/internal/to-file.ts',
+  'src/internal/assistant-stream-delta.ts',
+  'src/lib/parser.ts',
+  'src/lib/transform.ts',
+  'src/lib/agents/agent-session-stream.ts',
+];
 
 module.exports = defineConfig({
-  extends: [core],
+  extends: [core, antiSlop],
   categories: {
     correctness: 'off',
   },
@@ -32,6 +68,47 @@ module.exports = defineConfig({
   },
   ignorePatterns: [...core.ignorePatterns, 'dist/**', 'coverage/**', ...generatedFiles],
   overrides: [
+    {
+      // Runtime validation and host capability detection need typeof at the
+      // boundary itself, including checks that throw instead of returning a predicate.
+      files: [
+        ...fixtureAndVendorFiles,
+        ...sdkBoundaryFiles,
+        'src/providers/**',
+        'src/internal/qs/**',
+        'src/internal/stream-utils.ts',
+        'src/internal/ws*.ts',
+      ],
+      rules: {
+        'anti-slop/no-runtime-typeof': 'off',
+      },
+    },
+    {
+      // Validators, transport failures, and application callbacks must accept
+      // unknown inputs before establishing or forwarding their actual contracts.
+      files: [...fixtureAndVendorFiles, ...sdkBoundaryFiles],
+      rules: {
+        'anti-slop/no-unknown-parameters': 'off',
+      },
+    },
+    {
+      // Schema keywords, partial wire payloads, and captured option descriptors
+      // have open keys and unvalidated values. Keep dictionary checks elsewhere.
+      files: [
+        ...fixtureAndVendorFiles,
+        'src/helpers/**',
+        'src/lib/transform.ts',
+        'src/internal/assistant-stream-delta.ts',
+        'src/internal/uploads.ts',
+        'src/internal/ws.ts',
+        'src/auth/x509-transport.ts',
+        'src/lib/AssistantStream.ts',
+        'src/lib/agents/agent-session-stream.ts',
+      ],
+      rules: {
+        'anti-slop/no-unsafe-dictionary-type': 'off',
+      },
+    },
     {
       // This example intentionally shows both mutually exclusive Next.js router
       // response styles in one place.
@@ -157,6 +234,10 @@ module.exports = defineConfig({
         'examples/chat-completions/tool-call-helpers.ts',
         'examples/chat-completions/tool-calls-stream.ts',
         'examples/images/picture.ts',
+        'examples/mtls/bun.mjs',
+        'examples/mtls/deno.mjs',
+        'examples/mtls/node.mjs',
+        'examples/mtls/x509-workload-identity.mjs',
         'src/helpers/standard-schema.ts',
         'src/internal/decoders/line.ts',
         'src/internal/to-file.ts',
@@ -488,6 +569,7 @@ module.exports = defineConfig({
         'src/lib/transform.ts',
         'src/realtime/internal-base.ts',
         'tests/helpers/zod.test.ts',
+        'tests/lib/raw-streaming-fetch-example.test.ts',
         'tests/path.test.ts',
         'tests/qs/stringify.test.ts',
         'tests/utils/mock-snapshots.ts',

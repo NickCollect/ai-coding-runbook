@@ -268,6 +268,9 @@ from .beta_response_output_item_done_event import BetaResponseOutputItemDoneEven
 from .agent_session_environment_ready_event import (
     AgentSessionEnvironmentReadyEvent as AgentSessionEnvironmentReadyEvent,
 )
+from .agent_session_environment_reset_event import (
+    AgentSessionEnvironmentResetEvent as AgentSessionEnvironmentResetEvent,
+)
 from .beta_response_content_part_done_event import BetaResponseContentPartDoneEvent as BetaResponseContentPartDoneEvent
 from .beta_response_custom_tool_call_output import BetaResponseCustomToolCallOutput as BetaResponseCustomToolCallOutput
 from .beta_response_function_tool_call_item import BetaResponseFunctionToolCallItem as BetaResponseFunctionToolCallItem
@@ -353,6 +356,9 @@ from .agent_session_turn_output_text_done_event import (
 )
 from .beta_response_audio_transcript_done_event import (
     BetaResponseAudioTranscriptDoneEvent as BetaResponseAudioTranscriptDoneEvent,
+)
+from .beta_response_compaction_compacting_event import (
+    BetaResponseCompactionCompactingEvent as BetaResponseCompactionCompactingEvent,
 )
 from .beta_response_compaction_item_param_param import (
     BetaResponseCompactionItemParamParam as BetaResponseCompactionItemParamParam,

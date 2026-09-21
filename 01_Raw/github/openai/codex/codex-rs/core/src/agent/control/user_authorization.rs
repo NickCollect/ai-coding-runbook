@@ -1,11 +1,11 @@
-//! Projects bounded root evidence for worker reviewers using the thread's context mode.
-//! Legacy mode keeps parent-window selection; retained mode preserves original source scope.
+//! Projects bounded root evidence for worker reviewers using the session's capture policy.
+//! Retained root instructions stay authoritative while old checkpoints use legacy review.
 //! Projection limits do not change authorization completeness; unavailable source text does.
 //! Retained-history reconciliation owns recovery order and missing-instruction provenance.
 
 use std::borrow::Cow;
 
-use super::AgentControl;
+use super::LocalAgentControl;
 use crate::codex_thread::GuardianRootMessage;
 use crate::codex_thread::GuardianRootSnapshot;
 use crate::compact::is_summary_message;
@@ -29,7 +29,7 @@ use codex_protocol::protocol::MultiAgentVersion;
 
 const MAX_ROOT_MESSAGES: usize = 8;
 
-impl AgentControl {
+impl LocalAgentControl {
     /// Returns bounded root conversation and authorization state for a MultiAgent V2 worker.
     pub(crate) async fn root_user_authorization(
         &self,
@@ -52,12 +52,13 @@ impl AgentControl {
             .services
             .thread_extension_data
             .get_or_init(GuardianReviewEvidence::default);
+        let context_mode = root_thread.session.guardian_context_mode;
         let mut latest_user_turn_id = None;
-        let (messages, authorization_version) = if root_evidence.context_mode()
-            == GuardianContextMode::ThreadOwned
+        let (messages, authorization_version) = if context_mode == GuardianContextMode::ThreadOwned
         {
+            let retained_context = root_history.retained_context();
             let reconciled = ReconciledRetainedContext::new(
-                history.retained_context(),
+                Some(retained_context),
                 root_history
                     .annotated_items()
                     .iter()
@@ -174,8 +175,8 @@ impl AgentControl {
             messages.insert(/*index*/ 0, GuardianRootMessage::RetainedContextScope);
             (messages, authorization_version)
         } else {
-            let mut messages = root_history
-                .raw_items()
+            let mut messages = history
+                .review_items()
                 .filter_map(|item| match (parse_turn_item(item), item) {
                     (Some(TurnItem::UserMessage(message)), _) => {
                         let message = message.message();
@@ -222,6 +223,7 @@ impl AgentControl {
             .map(|turn_id| root_evidence.trusted_skill_paths(turn_id))
             .unwrap_or_default();
         Some(GuardianRootSnapshot {
+            root_thread_id,
             authorization_version,
             messages,
             trusted_skill_paths,

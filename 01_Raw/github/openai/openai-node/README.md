@@ -455,6 +455,12 @@ On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
 
+### Cancellation
+
+Pass an `AbortSignal` in the request's `signal` option to cancel a request, including while its response body is being read.
+
+When native signal composition is unavailable or incompatible with the supplied signal, the SDK shares one listener per caller signal and holds request callbacks weakly. Cleanup depends on garbage collection; keeping a raw response or its body alive can keep its cancellation subscription alive after consumption. Older runtimes without `WeakRef` or `FinalizationRegistry` keep the existing fallback, which can retain a listener for each successful request until the caller aborts.
+
 ## Request IDs
 
 > For more information on debugging requests, see [these docs](https://platform.openai.com/docs/api-reference/debugging-requests)
@@ -653,9 +659,12 @@ Available log levels, from most to least verbose:
 - `'error'` - Show only errors
 - `'off'` - Disable all logging
 
-At the `'debug'` level, all HTTP requests and responses are logged, including headers and bodies.
-Some authentication-related headers are redacted, but sensitive data in request and response bodies
-may still be visible.
+At the `'debug'` level, HTTP request and response metadata and headers are logged.
+Authentication-related headers are redacted. Serialized string request bodies, including JSON, and
+parsed JSON response bodies are summarized by their format and JavaScript string length instead of
+being logged in full. This avoids inspecting or copying large payloads for logging and leaves the
+actual request and response data unchanged. Other body types retain their existing diagnostic
+representation and may contain sensitive data.
 
 #### Custom logger
 

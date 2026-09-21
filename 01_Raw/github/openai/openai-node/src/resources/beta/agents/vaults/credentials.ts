@@ -9,6 +9,113 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
+// Recognizable options across SDK runtime versions. Keep this independent of
+// private RequestOptions fields so older handwritten runtimes still compile.
+const normalizeRequestOptionsForQueryKeys = new Set([
+  'method',
+  'path',
+  'query',
+  'body',
+  'headers',
+  'maxRetries',
+  'stream',
+  'timeout',
+  'httpAgent',
+  'fetchOptions',
+  'signal',
+  'idempotencyKey',
+  'defaultBaseURL',
+  '__metadata',
+  '__binaryRequest',
+  '__binaryResponse',
+  '__streamClass',
+  '__security',
+  '__synthesizeEventData',
+]);
+
+function normalizeRequestOptionsForQuery(
+  value: unknown,
+  queryKeys: ReadonlyArray<string>,
+  options: RequestOptions | undefined,
+):
+  | ({
+      [K in 'headers' | 'maxRetries' | 'timeout' | 'signal' | 'idempotencyKey' | 'query']?: RequestOptions[K];
+    } & {
+      [
+        K in
+          | 'method'
+          | 'path'
+          | 'body'
+          | 'stream'
+          | 'httpAgent'
+          | 'fetchOptions'
+          | 'defaultBaseURL'
+          | '__metadata'
+          | '__binaryRequest'
+          | '__binaryResponse'
+          | '__streamClass'
+          | '__security'
+          | '__synthesizeEventData'
+      ]?: never;
+    })
+  | undefined {
+  if (typeof value !== 'object' || value === null) return undefined;
+  // Optional never fields can still be explicitly undefined unless consumers
+  // enable exactOptionalPropertyTypes. Snapshot data without invoking getters.
+  const entries = Object.entries(Object.getOwnPropertyDescriptors(value)).filter(
+    ([, descriptor]) => descriptor.enumerable && (!('value' in descriptor) || descriptor.value !== undefined),
+  );
+  const keys = entries.map(([key]) => key);
+  const requestOnly = keys.some(
+    (key) => normalizeRequestOptionsForQueryKeys.has(key) && !queryKeys.includes(key),
+  );
+  if (!requestOnly) return undefined;
+  // Declared query fields, including stream, must use the query argument.
+  // Mixing them with request-only options is ambiguous and could change the return type.
+  if (
+    options !== undefined ||
+    keys.some((key) => !normalizeRequestOptionsForQueryKeys.has(key) || queryKeys.includes(key))
+  ) {
+    throw new TypeError('Query parameters and request options must be passed as separate arguments.');
+  }
+  // The query position must not gain authority to change the request destination
+  // or transport. Those overrides require the explicit request options argument.
+  if (
+    keys.some(
+      (key) => !['headers', 'maxRetries', 'timeout', 'signal', 'idempotencyKey', 'query'].includes(key),
+    )
+  ) {
+    throw new TypeError('Pass transport overrides in the explicit request options argument.');
+  }
+  // Copy only the validated fields. Spreading value would reintroduce undefined
+  // transport overrides, and deleting them would mutate the caller's object.
+  return Object.fromEntries(
+    entries.map(([key, descriptor]) => {
+      if ('value' in descriptor) return [key, descriptor.value];
+      return [key, descriptor.get ? Reflect.apply(descriptor.get, value, []) : undefined];
+    }),
+  ) as {
+    [K in 'headers' | 'maxRetries' | 'timeout' | 'signal' | 'idempotencyKey' | 'query']?: RequestOptions[K];
+  } & {
+    [
+      K in
+        | 'method'
+        | 'path'
+        | 'body'
+        | 'stream'
+        | 'httpAgent'
+        | 'fetchOptions'
+        | 'defaultBaseURL'
+        | '__metadata'
+        | '__binaryRequest'
+        | '__binaryResponse'
+        | '__streamClass'
+        | '__security'
+        | '__synthesizeEventData'
+    ]?: never;
+  };
+}
+
 export class Credentials extends APIResource {
   /**
    * Creates a vault credential. Secret values are write-only and are never returned.
@@ -114,9 +221,103 @@ export class Credentials extends APIResource {
    */
   list(
     vaultID: string,
-    query: CredentialListParams | null | undefined = {},
+    query?:
+      | (CredentialListParams &
+          (
+            | {
+                [
+                  K in
+                    | 'method'
+                    | 'path'
+                    | 'query'
+                    | 'body'
+                    | 'headers'
+                    | 'maxRetries'
+                    | 'stream'
+                    | 'timeout'
+                    | 'httpAgent'
+                    | 'fetchOptions'
+                    | 'signal'
+                    | 'idempotencyKey'
+                    | 'defaultBaseURL'
+                    | '__metadata'
+                    | '__binaryRequest'
+                    | '__binaryResponse'
+                    | '__streamClass'
+                    | '__security'
+                    | '__synthesizeEventData'
+                ]?: never;
+              }
+            | null
+            | undefined
+          ))
+      | null
+      | undefined,
+    options?: RequestOptions,
+  ): PagePromise<CredentialsPage, Credential>;
+  list(
+    vaultID: string,
+    options?: {
+      [K in 'headers' | 'maxRetries' | 'timeout' | 'signal' | 'idempotencyKey' | 'query']?: RequestOptions[K];
+    } & {
+      [
+        K in
+          | 'method'
+          | 'path'
+          | 'body'
+          | 'stream'
+          | 'httpAgent'
+          | 'fetchOptions'
+          | 'defaultBaseURL'
+          | '__metadata'
+          | '__binaryRequest'
+          | '__binaryResponse'
+          | '__streamClass'
+          | '__security'
+          | '__synthesizeEventData'
+      ]?: never;
+    },
+  ): PagePromise<CredentialsPage, Credential>;
+  list(
+    vaultID: string,
+    query:
+      | CredentialListParams
+      | ({
+          [
+            K in 'headers' | 'maxRetries' | 'timeout' | 'signal' | 'idempotencyKey' | 'query'
+          ]?: RequestOptions[K];
+        } & {
+          [
+            K in
+              | 'method'
+              | 'path'
+              | 'body'
+              | 'stream'
+              | 'httpAgent'
+              | 'fetchOptions'
+              | 'defaultBaseURL'
+              | '__metadata'
+              | '__binaryRequest'
+              | '__binaryResponse'
+              | '__streamClass'
+              | '__security'
+              | '__synthesizeEventData'
+          ]?: never;
+        })
+      | null
+      | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CredentialsPage, Credential> {
+    const normalizeRequestOptionsForQueryOptions = normalizeRequestOptionsForQuery(
+      query,
+      ['after', 'limit', 'order', 'status'],
+      options,
+    );
+    if (normalizeRequestOptionsForQueryOptions !== undefined) {
+      options = normalizeRequestOptionsForQueryOptions;
+      query = {};
+    }
+    query = query as CredentialListParams | null | undefined;
     return this._client.getAPIList(path`/vaults/${vaultID}/credentials`, CursorPage<Credential>, {
       query,
       ...options,
@@ -155,7 +356,7 @@ export class Credentials extends APIResource {
 export type CredentialsPage = CursorPage<Credential>;
 
 /**
- * Metadata for a stored MCP server credential. Secret values are never returned.
+ * Metadata for a stored credential. Secret values are never returned.
  */
 export interface Credential {
   /**
@@ -164,7 +365,7 @@ export interface Credential {
   id: string;
 
   /**
-   * The authentication method and non-secret configuration for the MCP server.
+   * The authentication method and non-secret configuration of the credential.
    */
   auth: CredentialAuth;
 
@@ -195,12 +396,12 @@ export interface Credential {
 }
 
 /**
- * The MCP server and authentication configuration of a vault credential, excluding
- * secrets.
+ * The authentication configuration of a vault credential, excluding secrets.
  */
 export type CredentialAuth =
   | CredentialAuth.VaultCredentialAuthResourceMcpOauth
-  | CredentialAuth.VaultCredentialAuthResourceStaticBearer;
+  | CredentialAuth.VaultCredentialAuthResourceStaticBearer
+  | CredentialAuth.VaultCredentialAuthResourceEnvironmentVariable;
 
 export namespace CredentialAuth {
   /**
@@ -219,8 +420,7 @@ export namespace CredentialAuth {
     mcp_server_url: string;
 
     /**
-     * Configuration used to refresh an MCP OAuth access token, excluding secret
-     * values.
+     * Public refresh metadata without refresh tokens or OAuth client secrets.
      */
     refresh: VaultCredentialAuthResourceMcpOauth.Refresh | null;
 
@@ -232,8 +432,7 @@ export namespace CredentialAuth {
 
   export namespace VaultCredentialAuthResourceMcpOauth {
     /**
-     * Configuration used to refresh an MCP OAuth access token, excluding secret
-     * values.
+     * Public refresh metadata without refresh tokens or OAuth client secrets.
      */
     export interface Refresh {
       /**
@@ -278,14 +477,39 @@ export namespace CredentialAuth {
      */
     type: 'static_bearer';
   }
+
+  /**
+   * Metadata for an HTTP credential used only in OpenAI-hosted environments. Sandbox
+   * code receives a placeholder. The proxy substitutes the secret for allowed HTTPS
+   * destinations on ports 443 and 8443. The real secret is not available to sandbox
+   * code for local computation and is never returned in this resource.
+   */
+  export interface VaultCredentialAuthResourceEnvironmentVariable {
+    /**
+     * The destinations where the proxy can substitute the secret, subject to the
+     * environment network policy.
+     */
+    networking: CredentialsAPI.CredentialNetworking;
+
+    /**
+     * The environment variable name that receives the placeholder in the sandbox.
+     */
+    secret_name: string;
+
+    /**
+     * The type of the object. Always `environment_variable`.
+     */
+    type: 'environment_variable';
+  }
 }
 
 /**
- * Authentication credentials for an MCP server used by agent tools.
+ * Authentication credentials for an MCP server or an OpenAI-hosted environment.
  */
 export type CredentialAuthCreateParam =
   | CredentialAuthCreateParam.CreateVaultCredentialAuthParamMcpOauth
-  | CredentialAuthCreateParam.CreateVaultCredentialAuthParamStaticBearer;
+  | CredentialAuthCreateParam.CreateVaultCredentialAuthParamStaticBearer
+  | CredentialAuthCreateParam.CreateVaultCredentialAuthParamEnvironmentVariable;
 
 export namespace CredentialAuthCreateParam {
   /**
@@ -313,14 +537,14 @@ export namespace CredentialAuthCreateParam {
     expires_at?: string | null;
 
     /**
-     * Configuration for refreshing the access token of an MCP OAuth credential.
+     * Optional refresh configuration for an HTTPS OAuth token endpoint.
      */
     refresh?: CreateVaultCredentialAuthParamMcpOauth.Refresh | null;
   }
 
   export namespace CreateVaultCredentialAuthParamMcpOauth {
     /**
-     * Configuration for refreshing the access token of an MCP OAuth credential.
+     * Optional refresh configuration for an HTTPS OAuth token endpoint.
      */
     export interface Refresh {
       /**
@@ -378,15 +602,52 @@ export namespace CredentialAuthCreateParam {
      */
     type: 'static_bearer';
   }
+
+  /**
+   * An HTTP credential for OpenAI-hosted environments only. The sandbox receives an
+   * environment variable containing a placeholder, not the secret. Use the
+   * placeholder unchanged in outgoing requests. The egress proxy replaces the
+   * placeholder with the secret for allowed HTTPS destinations on ports 443 and
+   * 8443. Sandbox code cannot read the real secret or use it for local computation,
+   * such as signing a request.
+   */
+  export interface CreateVaultCredentialAuthParamEnvironmentVariable {
+    /**
+     * The destinations where the proxy can substitute this secret. The environment
+     * network policy must also allow them.
+     */
+    networking: CredentialsAPI.CredentialNetworkingParam;
+
+    /**
+     * The environment variable name that receives the placeholder, such as
+     * `SERVICE_API_KEY`. Use ASCII letters, digits, and underscores, starting with a
+     * letter or underscore. Names starting with `CODEX_` and managed proxy or
+     * certificate variable names are reserved.
+     */
+    secret_name: string;
+
+    /**
+     * The write-only secret to store. Never returned in credential resources or
+     * supplied directly to sandbox code. Must be nonempty and must not contain
+     * carriage returns, newlines, or NUL bytes.
+     */
+    secret_value: string;
+
+    /**
+     * The type of the object. Always `environment_variable`.
+     */
+    type: 'environment_variable';
+  }
 }
 
 /**
- * Updates to a vault credential without changing its authentication method or MCP
- * server.
+ * Updates to a vault credential without changing its authentication method or
+ * destination configuration.
  */
 export type CredentialAuthRotateParam =
   | CredentialAuthRotateParam.RotateVaultCredentialAuthParamMcpOauth
-  | CredentialAuthRotateParam.RotateVaultCredentialAuthParamStaticBearer;
+  | CredentialAuthRotateParam.RotateVaultCredentialAuthParamStaticBearer
+  | CredentialAuthRotateParam.RotateVaultCredentialAuthParamEnvironmentVariable;
 
 export namespace CredentialAuthRotateParam {
   /**
@@ -411,14 +672,14 @@ export namespace CredentialAuthRotateParam {
     expires_at?: string | null;
 
     /**
-     * Updates to an MCP credential's existing OAuth refresh configuration.
+     * Optional write-only refresh-token and client-secret updates.
      */
     refresh?: RotateVaultCredentialAuthParamMcpOauth.Refresh | null;
   }
 
   export namespace RotateVaultCredentialAuthParamMcpOauth {
     /**
-     * Updates to an MCP credential's existing OAuth refresh configuration.
+     * Optional write-only refresh-token and client-secret updates.
      */
     export interface Refresh {
       /**
@@ -434,8 +695,7 @@ export namespace CredentialAuthRotateParam {
       scope?: string | null;
 
       /**
-       * Client-secret updates that preserve the credential's OAuth authentication
-       * method.
+       * Client-secret updates for the existing token endpoint authentication method.
        */
       token_endpoint_auth?: CredentialsAPI.McpOauthTokenEndpointAuthRotateParam | null;
     }
@@ -455,6 +715,24 @@ export namespace CredentialAuthRotateParam {
      * The type of the object. Always `static_bearer`.
      */
     type: 'static_bearer';
+  }
+
+  /**
+   * Replace the secret for an OpenAI-hosted environment credential. The environment
+   * variable name and networking configuration remain unchanged.
+   */
+  export interface RotateVaultCredentialAuthParamEnvironmentVariable {
+    /**
+     * The write-only replacement secret. Never returned in credential resources or
+     * supplied directly to sandbox code. Must be nonempty and must not contain
+     * carriage returns, newlines, or NUL bytes.
+     */
+    secret_value: string;
+
+    /**
+     * The type of the object. Always `environment_variable`.
+     */
+    type: 'environment_variable';
   }
 }
 
@@ -476,6 +754,86 @@ export interface CredentialDeleted {
    * The object type. Always `vault.credential.deleted`.
    */
   object: 'vault.credential.deleted';
+}
+
+/**
+ * Destination permissions for an environment-variable credential. These do not
+ * grant network access to the environment.
+ */
+export type CredentialNetworking =
+  | CredentialNetworking.VaultCredentialNetworkingResourceUnrestricted
+  | CredentialNetworking.VaultCredentialNetworkingResourceLimited;
+
+export namespace CredentialNetworking {
+  /**
+   * Allows substitution for destinations permitted by the environment network
+   * policy. Requires `environment.network.access` to be `restricted`, with explicit
+   * `allowed_domains`.
+   */
+  export interface VaultCredentialNetworkingResourceUnrestricted {
+    /**
+     * The type of the object. Always `unrestricted`.
+     */
+    type: 'unrestricted';
+  }
+
+  /**
+   * Allows substitution only for the listed hosts. The environment network policy
+   * must also allow these hosts.
+   */
+  export interface VaultCredentialNetworkingResourceLimited {
+    /**
+     * The 1 to 16 distinct allowed hostnames or IPv4 addresses, normalized to
+     * lowercase. Entries contain no scheme, path, port, or wildcard. IPv6 addresses
+     * are not supported.
+     */
+    allowed_hosts: Array<string>;
+
+    /**
+     * The type of the object. Always `limited`.
+     */
+    type: 'limited';
+  }
+}
+
+/**
+ * Destination permissions for an environment-variable credential. These do not
+ * grant network access to the environment.
+ */
+export type CredentialNetworkingParam =
+  | CredentialNetworkingParam.VaultCredentialNetworkingParamUnrestricted
+  | CredentialNetworkingParam.VaultCredentialNetworkingParamLimited;
+
+export namespace CredentialNetworkingParam {
+  /**
+   * Allows substitution for destinations permitted by the environment network
+   * policy. Requires `environment.network.access` to be `restricted`, with explicit
+   * `allowed_domains`.
+   */
+  export interface VaultCredentialNetworkingParamUnrestricted {
+    /**
+     * The type of the object. Always `unrestricted`.
+     */
+    type: 'unrestricted';
+  }
+
+  /**
+   * Allows substitution only for the listed hosts. The environment network policy
+   * must also allow these hosts.
+   */
+  export interface VaultCredentialNetworkingParamLimited {
+    /**
+     * The 1 to 16 distinct allowed hostnames or IPv4 addresses, normalized to
+     * lowercase. Entries contain no scheme, path, port, or wildcard. IPv6 addresses
+     * are not supported.
+     */
+    allowed_hosts: Array<string>;
+
+    /**
+     * The type of the object. Always `limited`.
+     */
+    type: 'limited';
+  }
 }
 
 /**
@@ -612,7 +970,7 @@ export namespace McpOauthTokenEndpointAuthRotateParam {
 
 export interface CredentialCreateParams {
   /**
-   * The authentication method and secret values to store for the MCP server.
+   * The authentication method and write-only secret values to store.
    */
   auth: CredentialAuthCreateParam;
 
@@ -643,7 +1001,13 @@ export interface CredentialUpdateParams {
   auth: CredentialAuthRotateParam;
 }
 
-export interface CredentialListParams extends CursorPageParams {
+export interface CredentialListParams extends Omit<CursorPageParams, 'limit'> {
+  /**
+   * The maximum number of resources to return. Defaults to 20. Values are clamped
+   * between 1 and 100.
+   */
+  limit?: number | null;
+
   /**
    * Sort order by the `created_at` timestamp. Use `asc` for ascending order or
    * `desc` for descending order. Defaults to `desc`.
@@ -674,6 +1038,8 @@ export declare namespace Credentials {
     type CredentialAuthCreateParam as CredentialAuthCreateParam,
     type CredentialAuthRotateParam as CredentialAuthRotateParam,
     type CredentialDeleted as CredentialDeleted,
+    type CredentialNetworking as CredentialNetworking,
+    type CredentialNetworkingParam as CredentialNetworkingParam,
     type McpOauthTokenEndpointAuth as McpOauthTokenEndpointAuth,
     type McpOauthTokenEndpointAuthCreateParam as McpOauthTokenEndpointAuthCreateParam,
     type McpOauthTokenEndpointAuthRotateParam as McpOauthTokenEndpointAuthRotateParam,

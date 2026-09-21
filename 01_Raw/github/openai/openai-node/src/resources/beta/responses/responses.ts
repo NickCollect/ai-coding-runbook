@@ -13,6 +13,9 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+/**
+ * Create and manage model responses.
+ */
 export class Responses extends APIResource {
   inputItems: InputItemsAPI.InputItems = new InputItemsAPI.InputItems(this._client);
   inputTokens: InputTokensAPI.InputTokens = new InputTokensAPI.InputTokens(this._client);
@@ -1194,6 +1197,8 @@ export interface BetaResponse {
     | 'gpt-4o-2024-11-20'
     | 'gpt-4o-2024-08-06'
     | 'gpt-4o-2024-05-13'
+    | 'gpt-audio-mini'
+    | 'gpt-audio-mini-2025-12-15'
     | 'gpt-4o-audio-preview'
     | 'gpt-4o-audio-preview-2024-10-01'
     | 'gpt-4o-audio-preview-2024-12-17'
@@ -2434,6 +2439,49 @@ export namespace BetaResponseCodeInterpreterToolCall {
 
   /**
    * The agent that produced this item.
+   */
+  export interface Agent {
+    /**
+     * The canonical name of the agent that produced this item.
+     */
+    agent_name: string;
+  }
+}
+
+/**
+ * Emitted when new summary content is sampled for a compaction trigger. Contains
+ * no summary content.
+ */
+export interface BetaResponseCompactionCompactingEvent {
+  /**
+   * The ID of the compaction output item.
+   */
+  item_id: string;
+
+  /**
+   * The index of the compaction output item.
+   */
+  output_index: number;
+
+  /**
+   * The sequence number of the event that was emitted.
+   */
+  sequence_number: number;
+
+  /**
+   * The type of the event, always `response.compaction.compacting`.
+   */
+  type: 'response.compaction.compacting';
+
+  /**
+   * The agent that owns this multi-agent streaming event.
+   */
+  agent?: BetaResponseCompactionCompactingEvent.Agent;
+}
+
+export namespace BetaResponseCompactionCompactingEvent {
+  /**
+   * The agent that owns this multi-agent streaming event.
    */
   export interface Agent {
     /**
@@ -9265,7 +9313,7 @@ export namespace BetaResponseOutputText {
  */
 export interface BetaResponseOutputTextAnnotationAddedEvent {
   /**
-   * An annotation that applies to a span of output text.
+   * The annotation object being added. (See annotation schema for details.)
    */
   annotation:
     | BetaResponseOutputTextAnnotationAddedEvent.FileCitation
@@ -10942,6 +10990,7 @@ export type BetaResponseStreamEvent =
   | BetaResponseCodeInterpreterCallCompletedEvent
   | BetaResponseCodeInterpreterCallInProgressEvent
   | BetaResponseCodeInterpreterCallInterpretingEvent
+  | BetaResponseCompactionCompactingEvent
   | BetaResponseCompletedEvent
   | BetaResponseContentPartAddedEvent
   | BetaResponseContentPartDoneEvent
@@ -11727,6 +11776,8 @@ export namespace BetaResponsesClientEvent {
       | 'gpt-4o-2024-11-20'
       | 'gpt-4o-2024-08-06'
       | 'gpt-4o-2024-05-13'
+      | 'gpt-audio-mini'
+      | 'gpt-audio-mini-2025-12-15'
       | 'gpt-4o-audio-preview'
       | 'gpt-4o-audio-preview-2024-10-01'
       | 'gpt-4o-audio-preview-2024-12-17'
@@ -12135,6 +12186,12 @@ export namespace BetaResponsesClientEvent {
       mode?: 'implicit' | 'explicit';
 
       /**
+       * Prepares the prompt cache without generating output. Defaults to `false`. When
+       * set to `true`, overrides the `generate` field to `false`.
+       */
+      prewarm?: boolean;
+
+      /**
        * The minimum lifetime applied to every implicit and explicit cache breakpoint
        * written by the request. Defaults to `30m`, which is currently the only supported
        * value. The backend may retain cache entries for longer.
@@ -12231,6 +12288,7 @@ export type BetaResponsesServerEvent =
   | BetaResponsesServerEvent.BetaResponseCodeInterpreterCallWsCompleted
   | BetaResponsesServerEvent.BetaResponseCodeInterpreterCallInWsProgress
   | BetaResponsesServerEvent.BetaResponseCodeInterpreterCallWsInterpreting
+  | BetaResponsesServerEvent.BetaResponseCompactionWsCompacting
   | BetaResponsesServerEvent.BetaResponseWsCompleted
   | BetaResponsesServerEvent.BetaResponseContentPartWsAdded
   | BetaResponsesServerEvent.BetaResponseContentPartWsDone
@@ -12380,6 +12438,18 @@ export namespace BetaResponsesServerEvent {
    * Emitted when the code interpreter is actively interpreting the code snippet.
    */
   export interface BetaResponseCodeInterpreterCallWsInterpreting extends BetaResponseCodeInterpreterCallInterpretingEvent {
+    /**
+     * The WebSocket lane that emitted this event. This field is present when the
+     * originating `response.create` event supplied a `stream_id`.
+     */
+    stream_id?: string;
+  }
+
+  /**
+   * Emitted when new summary content is sampled for a compaction trigger. Contains
+   * no summary content.
+   */
+  export interface BetaResponseCompactionWsCompacting extends BetaResponseCompactionCompactingEvent {
     /**
      * The WebSocket lane that emitted this event. This field is present when the
      * originating `response.create` event supplied a `stream_id`.
@@ -13162,10 +13232,14 @@ export namespace BetaTool {
     authorization?: string;
 
     /**
-     * Identifier for service connectors, like those available in ChatGPT. One of
-     * `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more about
-     * service connectors
+     * @deprecated Identifier for service connectors, like those available in ChatGPT.
+     * One of `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more
+     * about service connectors
      * [here](https://developers.openai.com/api/docs/guides/tools-connectors-mcp#connectors).
+     *
+     * This field is deprecated for models released after September 1, 2026. Use
+     * `server_url` to connect to a remote MCP server, or `tunnel_id` to connect
+     * through a Secure MCP Tunnel.
      *
      * Currently supported `connector_id` values are:
      *
@@ -13383,10 +13457,9 @@ export namespace BetaTool {
     background?: 'transparent' | 'opaque' | 'auto';
 
     /**
-     * Control how much effort the model will exert to match the style and features,
-     * especially facial features, of input images. This parameter is only supported
-     * for `gpt-image-1` and `gpt-image-1.5` and later models, unsupported for
-     * `gpt-image-1-mini`. Supports `high` and `low`. Defaults to `low`.
+     * Controls fidelity to the original input image(s). This parameter is supported
+     * for GPT image models that support input fidelity. `gpt-image-2` and
+     * `gpt-image-2-2026-04-21` ignore this parameter.
      */
     input_fidelity?: 'high' | 'low' | null;
 
@@ -13957,6 +14030,8 @@ export interface ResponseCreateParamsBase {
     | 'gpt-4o-2024-11-20'
     | 'gpt-4o-2024-08-06'
     | 'gpt-4o-2024-05-13'
+    | 'gpt-audio-mini'
+    | 'gpt-audio-mini-2025-12-15'
     | 'gpt-4o-audio-preview'
     | 'gpt-4o-audio-preview-2024-10-01'
     | 'gpt-4o-audio-preview-2024-12-17'
@@ -14366,6 +14441,12 @@ export namespace ResponseCreateParams {
     mode?: 'implicit' | 'explicit';
 
     /**
+     * Prepares the prompt cache without generating output. Defaults to `false`. When
+     * set to `true`, overrides the `generate` field to `false`.
+     */
+    prewarm?: boolean;
+
+    /**
      * The minimum lifetime applied to every implicit and explicit cache breakpoint
      * written by the request. Defaults to `30m`, which is currently the only supported
      * value. The backend may retain cache entries for longer.
@@ -14619,6 +14700,8 @@ export interface ResponseCompactParams {
     | 'gpt-4o-2024-11-20'
     | 'gpt-4o-2024-08-06'
     | 'gpt-4o-2024-05-13'
+    | 'gpt-audio-mini'
+    | 'gpt-audio-mini-2025-12-15'
     | 'gpt-4o-audio-preview'
     | 'gpt-4o-audio-preview-2024-10-01'
     | 'gpt-4o-audio-preview-2024-12-17'
@@ -14820,6 +14903,7 @@ export declare namespace Responses {
     type BetaResponseCodeInterpreterCallInProgressEvent as BetaResponseCodeInterpreterCallInProgressEvent,
     type BetaResponseCodeInterpreterCallInterpretingEvent as BetaResponseCodeInterpreterCallInterpretingEvent,
     type BetaResponseCodeInterpreterToolCall as BetaResponseCodeInterpreterToolCall,
+    type BetaResponseCompactionCompactingEvent as BetaResponseCompactionCompactingEvent,
     type BetaResponseCompactionItem as BetaResponseCompactionItem,
     type BetaResponseCompactionItemParam as BetaResponseCompactionItemParam,
     type BetaResponseCompletedEvent as BetaResponseCompletedEvent,

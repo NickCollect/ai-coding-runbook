@@ -31,6 +31,49 @@ test('parsed response deltas retain their required snapshots', () => {
 });
 
 describe('.stream()', () => {
+  it.each([0, 2])('forwards %i compaction progress events over SSE', async (count) => {
+    const item = { id: 'cmp_123', type: 'compaction', encrypted_content: '' } as const;
+    const completed = { ...item, encrypted_content: 'encrypted-test-summary' };
+    const progress = Array.from({ length: count }, (_, index) => ({
+      type: 'response.compaction.compacting' as const,
+      sequence_number: index + 2,
+      output_index: 0,
+      item_id: item.id,
+    }));
+    const events: ResponseStreamEvent[] = [
+      { type: 'response.created', sequence_number: 0, response: makeResponse() },
+      { type: 'response.output_item.added', sequence_number: 1, output_index: 0, item },
+      ...progress,
+      { type: 'response.output_item.done', sequence_number: count + 2, output_index: 0, item: completed },
+      {
+        type: 'response.completed',
+        sequence_number: count + 3,
+        response: makeResponse({ status: 'completed', output: [completed] }),
+      },
+    ];
+    const client = new OpenAI({
+      apiKey: 'test-key',
+      fetch: async () =>
+        new Response(events.map((event) => `data: ${JSON.stringify(event)}\n\n`).join(''), {
+          headers: { 'content-type': 'text/event-stream' },
+        }),
+    });
+    const stream = client.responses.stream({ model: 'test-model', input: [{ type: 'compaction_trigger' }] });
+    const named = vi.fn();
+    const generic = vi.fn();
+    stream.on('response.compaction.compacting', named);
+    stream.on('event', generic);
+    const received = [];
+    for await (const event of stream) {
+      received.push(event);
+    }
+    expect(received).toEqual(events);
+    expect(named.mock.calls).toEqual(progress.map((event) => [event]));
+    expect(generic.mock.calls).toEqual(events.map((event) => [event]));
+    const final = await stream.finalResponse();
+    expect(final.output).toEqual([completed]);
+  });
+
   it.each(['on', 'once'] as const)('preserves callback receivers for %s listeners', async (method) => {
     const events: ResponseStreamEvent[] = [
       { type: 'response.created', sequence_number: 0, response: makeResponse() },
@@ -370,6 +413,7 @@ describe('.stream()', () => {
         yield* events;
       },
     };
+    // oxlint-disable-next-line anti-slop/no-chained-type-assertions -- SAFETY: The test client implements only responses.create to supply the controlled transport.
     const client = { responses: { create: vi.fn(async () => transport) } } as unknown as OpenAI;
     const stream = ResponseStream.createResponse(client, { model: 'gpt-test', input: 'route safely' });
     const emitted = vi.fn();
@@ -684,7 +728,9 @@ describe('.stream()', () => {
 
     expect(rejection).toBeInstanceOf(OpenAIError);
     expect(rejection).toBeInstanceOf(APIError);
+    // SAFETY: The preceding instance assertion establishes the error class; inspect its diagnostic fields and optional cause without changing the captured rejection.
     expect((rejection as APIError).message).toBe('The server had an error while processing your request.');
+    // SAFETY: The preceding instance assertion establishes the error class; inspect its diagnostic fields and optional cause without changing the captured rejection.
     expect((rejection as APIError).code).toBe('server_error');
     // `.on('error')` must observe the converted error, not the raw stream frame.
     expect(listenerErrors).toHaveLength(1);
@@ -1154,7 +1200,7 @@ describe('.stream()', () => {
         item: { id: 'msg_1', type: 'message', role: 'assistant', status: 'in_progress', content: [] },
       },
     ];
-    const malformedEvent = {
+    const malformedEvent: ResponseStreamEvent = {
       type: 'response.output_text.delta',
       sequence_number: 2,
       item_id: 'msg_1',
@@ -1162,7 +1208,7 @@ describe('.stream()', () => {
       content_index: 0,
       delta: 'boom',
       logprobs: [],
-    } as unknown as ResponseStreamEvent;
+    };
 
     const stream = ResponseStream.fromReadableStream(
       readableStreamFromEvents([...validEvents, malformedEvent]),
@@ -1187,6 +1233,7 @@ describe('.stream()', () => {
     );
 
     expect(failure).toBeInstanceOf(OpenAIError);
+    // SAFETY: The preceding instance assertion establishes the error class; inspect its diagnostic fields and optional cause without changing the captured rejection.
     expect((failure as OpenAIError).message).toBe('missing output at index 99');
     await expect(iterator.next()).resolves.toEqual({ value: undefined, done: true });
   });
@@ -1198,6 +1245,7 @@ function readableStreamFromEvents(events: ResponseStreamEvent[]) {
 }
 
 function makeResponse(overrides: Partial<APIResponse> = {}): APIResponse {
+  // SAFETY: This synthetic wire response intentionally uses nullable legacy metadata defaults; the stream tests exercise its lifecycle and output.
   return {
     id: 'resp_123',
     object: 'response',

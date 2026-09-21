@@ -31,6 +31,113 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+// Recognizable options across SDK runtime versions. Keep this independent of
+// private RequestOptions fields so older handwritten runtimes still compile.
+const normalizeRequestOptionsForQueryKeys = new Set([
+  'method',
+  'path',
+  'query',
+  'body',
+  'headers',
+  'maxRetries',
+  'stream',
+  'timeout',
+  'httpAgent',
+  'fetchOptions',
+  'signal',
+  'idempotencyKey',
+  'defaultBaseURL',
+  '__metadata',
+  '__binaryRequest',
+  '__binaryResponse',
+  '__streamClass',
+  '__security',
+  '__synthesizeEventData',
+]);
+
+function normalizeRequestOptionsForQuery(
+  value: unknown,
+  queryKeys: ReadonlyArray<string>,
+  options: RequestOptions | undefined,
+):
+  | ({
+      [K in 'headers' | 'maxRetries' | 'timeout' | 'signal' | 'idempotencyKey' | 'query']?: RequestOptions[K];
+    } & {
+      [
+        K in
+          | 'method'
+          | 'path'
+          | 'body'
+          | 'stream'
+          | 'httpAgent'
+          | 'fetchOptions'
+          | 'defaultBaseURL'
+          | '__metadata'
+          | '__binaryRequest'
+          | '__binaryResponse'
+          | '__streamClass'
+          | '__security'
+          | '__synthesizeEventData'
+      ]?: never;
+    })
+  | undefined {
+  if (typeof value !== 'object' || value === null) return undefined;
+  // Optional never fields can still be explicitly undefined unless consumers
+  // enable exactOptionalPropertyTypes. Snapshot data without invoking getters.
+  const entries = Object.entries(Object.getOwnPropertyDescriptors(value)).filter(
+    ([, descriptor]) => descriptor.enumerable && (!('value' in descriptor) || descriptor.value !== undefined),
+  );
+  const keys = entries.map(([key]) => key);
+  const requestOnly = keys.some(
+    (key) => normalizeRequestOptionsForQueryKeys.has(key) && !queryKeys.includes(key),
+  );
+  if (!requestOnly) return undefined;
+  // Declared query fields, including stream, must use the query argument.
+  // Mixing them with request-only options is ambiguous and could change the return type.
+  if (
+    options !== undefined ||
+    keys.some((key) => !normalizeRequestOptionsForQueryKeys.has(key) || queryKeys.includes(key))
+  ) {
+    throw new TypeError('Query parameters and request options must be passed as separate arguments.');
+  }
+  // The query position must not gain authority to change the request destination
+  // or transport. Those overrides require the explicit request options argument.
+  if (
+    keys.some(
+      (key) => !['headers', 'maxRetries', 'timeout', 'signal', 'idempotencyKey', 'query'].includes(key),
+    )
+  ) {
+    throw new TypeError('Pass transport overrides in the explicit request options argument.');
+  }
+  // Copy only the validated fields. Spreading value would reintroduce undefined
+  // transport overrides, and deleting them would mutate the caller's object.
+  return Object.fromEntries(
+    entries.map(([key, descriptor]) => {
+      if ('value' in descriptor) return [key, descriptor.value];
+      return [key, descriptor.get ? Reflect.apply(descriptor.get, value, []) : undefined];
+    }),
+  ) as {
+    [K in 'headers' | 'maxRetries' | 'timeout' | 'signal' | 'idempotencyKey' | 'query']?: RequestOptions[K];
+  } & {
+    [
+      K in
+        | 'method'
+        | 'path'
+        | 'body'
+        | 'stream'
+        | 'httpAgent'
+        | 'fetchOptions'
+        | 'defaultBaseURL'
+        | '__metadata'
+        | '__binaryRequest'
+        | '__binaryResponse'
+        | '__streamClass'
+        | '__security'
+        | '__synthesizeEventData'
+    ]?: never;
+  };
+}
+
 export class Agents extends APIResource {
   environments: EnvironmentsAPI.Environments = new EnvironmentsAPI.Environments(this._client);
   vaults: VaultsAPI.Vaults = new VaultsAPI.Vaults(this._client);
@@ -108,9 +215,101 @@ export class Agents extends APIResource {
    * ```
    */
   list(
-    query: AgentListParams | null | undefined = {},
+    query?:
+      | (AgentListParams &
+          (
+            | {
+                [
+                  K in
+                    | 'method'
+                    | 'path'
+                    | 'query'
+                    | 'body'
+                    | 'headers'
+                    | 'maxRetries'
+                    | 'stream'
+                    | 'timeout'
+                    | 'httpAgent'
+                    | 'fetchOptions'
+                    | 'signal'
+                    | 'idempotencyKey'
+                    | 'defaultBaseURL'
+                    | '__metadata'
+                    | '__binaryRequest'
+                    | '__binaryResponse'
+                    | '__streamClass'
+                    | '__security'
+                    | '__synthesizeEventData'
+                ]?: never;
+              }
+            | null
+            | undefined
+          ))
+      | null
+      | undefined,
+    options?: RequestOptions,
+  ): PagePromise<AgentsPage, Agent>;
+  list(
+    options?: {
+      [K in 'headers' | 'maxRetries' | 'timeout' | 'signal' | 'idempotencyKey' | 'query']?: RequestOptions[K];
+    } & {
+      [
+        K in
+          | 'method'
+          | 'path'
+          | 'body'
+          | 'stream'
+          | 'httpAgent'
+          | 'fetchOptions'
+          | 'defaultBaseURL'
+          | '__metadata'
+          | '__binaryRequest'
+          | '__binaryResponse'
+          | '__streamClass'
+          | '__security'
+          | '__synthesizeEventData'
+      ]?: never;
+    },
+  ): PagePromise<AgentsPage, Agent>;
+  list(
+    query:
+      | AgentListParams
+      | ({
+          [
+            K in 'headers' | 'maxRetries' | 'timeout' | 'signal' | 'idempotencyKey' | 'query'
+          ]?: RequestOptions[K];
+        } & {
+          [
+            K in
+              | 'method'
+              | 'path'
+              | 'body'
+              | 'stream'
+              | 'httpAgent'
+              | 'fetchOptions'
+              | 'defaultBaseURL'
+              | '__metadata'
+              | '__binaryRequest'
+              | '__binaryResponse'
+              | '__streamClass'
+              | '__security'
+              | '__synthesizeEventData'
+          ]?: never;
+        })
+      | null
+      | undefined = {},
     options?: RequestOptions,
   ): PagePromise<AgentsPage, Agent> {
+    const normalizeRequestOptionsForQueryOptions = normalizeRequestOptionsForQuery(
+      query,
+      ['after', 'limit', 'order'],
+      options,
+    );
+    if (normalizeRequestOptionsForQueryOptions !== undefined) {
+      options = normalizeRequestOptionsForQueryOptions;
+      query = {};
+    }
+    query = query as AgentListParams | null | undefined;
     return this._client.getAPIList('/agents', CursorPage<Agent>, {
       query,
       ...options,
@@ -607,12 +806,13 @@ export type AgentOutputItemStatus = 'in_progress' | 'completed' | 'incomplete';
  */
 export interface AgentReasoning {
   /**
-   * The amount of reasoning effort used by an agent.
+   * The requested reasoning effort, or `null` when the model selects its own
+   * default.
    */
   effort: 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh' | 'max' | null;
 
   /**
-   * The reasoning summary format requested from an agent.
+   * The requested reasoning summary format, or `null` when summaries are disabled.
    *
    * - `concise` - Returns a concise reasoning summary when supported.
    * - `detailed` - Returns a detailed reasoning summary when supported.
@@ -632,7 +832,7 @@ export interface AgentReasoningItem {
   id: string;
 
   /**
-   * The status of an agent output item.
+   * The status of the reasoning item.
    */
   status: AgentOutputItemStatus | null;
 
@@ -657,12 +857,13 @@ export interface AgentReasoningItem {
  */
 export interface AgentReasoningParam {
   /**
-   * The amount of reasoning effort the model should use.
+   * The amount of reasoning effort the model should use. Omission lets the model
+   * select it.
    */
   effort?: 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh' | 'max' | null;
 
   /**
-   * The reasoning summary format requested from the model.
+   * Controls whether the response includes a reasoning summary.
    *
    * - `concise` - Returns a concise reasoning summary when supported.
    * - `detailed` - Returns a detailed reasoning summary when supported.
@@ -811,7 +1012,8 @@ export interface AgentSession {
   status: 'idle' | 'in_progress' | 'requires_action' | 'failed';
 
   /**
-   * Recorded token usage for a session or turn. Usage is best effort and may change.
+   * Best-effort token usage for the session, or null if unknown. Recorded usage may
+   * change.
    */
   usage: TokenUsage | null;
 
@@ -934,7 +1136,7 @@ export interface AgentSessionAssistantMessage {
   content: Array<OutputText>;
 
   /**
-   * The phase of an assistant message.
+   * The phase of the assistant message.
    *
    * - `commentary` - Commentary produced while the agent works.
    * - `final_answer` - The agent's final answer.
@@ -1155,6 +1357,42 @@ export interface AgentSessionEnvironmentReadyEvent {
 }
 
 /**
+ * Emitted after a hosted sandbox is replaced. Conversation history survives;
+ * changes to the previous sandbox's files and processes do not.
+ */
+export interface AgentSessionEnvironmentResetEvent {
+  /**
+   * The stable environment ID, retained across sandbox replacements.
+   */
+  environment_id: string;
+
+  /**
+   * The unique ID of the event.
+   */
+  event_id: string;
+
+  /**
+   * Monotonically increasing reset number. Repeated notifications share this number.
+   */
+  reset_count: number;
+
+  /**
+   * The ID of the session associated with the event.
+   */
+  session_id: string;
+
+  /**
+   * The associated turn, when applicable.
+   */
+  turn_id: string | null;
+
+  /**
+   * The type of the object. Always `agent.session.environment.reset`.
+   */
+  type: 'agent.session.environment.reset';
+}
+
+/**
  * The current state of a session environment.
  */
 export interface AgentSessionEnvironmentState {
@@ -1164,7 +1402,7 @@ export interface AgentSessionEnvironmentState {
   id: string;
 
   /**
-   * An error reported while preparing a session environment.
+   * The error reported while preparing the environment, if any.
    */
   error: AgentSessionEnvironmentState.Error | null;
 
@@ -1187,7 +1425,7 @@ export interface AgentSessionEnvironmentState {
 
 export namespace AgentSessionEnvironmentState {
   /**
-   * An error reported while preparing a session environment.
+   * The error reported while preparing the environment, if any.
    */
   export interface Error {
     /**
@@ -1238,6 +1476,7 @@ export interface AgentSessionErrorEvent {
 export type AgentSessionEvent =
   | AgentSessionErrorEvent
   | AgentSessionEnvironmentReadyEvent
+  | AgentSessionEnvironmentResetEvent
   | AgentOutputCommandExecutionOutputDeltaEvent
   | AgentSessionCreatedEvent
   | AgentSessionTurnCreatedEvent
@@ -1411,7 +1650,7 @@ export namespace AgentSessionInputParam {
     error?: string | null;
 
     /**
-     * A function result represented as text or supported model-input content.
+     * The function result when the call succeeded.
      */
     output?: AgentsAPI.AgentFunctionCallOutputParam | null;
   }
@@ -1457,7 +1696,7 @@ export namespace AgentSessionItem {
     error: string | null;
 
     /**
-     * The text or model-input content supplied as a function result.
+     * The function result, if the call succeeded.
      */
     output: AgentsAPI.AgentFunctionCallOutput | null;
 
@@ -1529,7 +1768,7 @@ export interface AgentSessionMessage {
   content: Array<AgentSessionMessageContent>;
 
   /**
-   * The phase of an assistant message.
+   * The phase of an assistant message. Null for user messages.
    *
    * - `commentary` - Commentary produced while the agent works.
    * - `final_answer` - The agent's final answer.
@@ -1723,7 +1962,7 @@ export interface AgentSessionTurnCancelledEvent {
   type: 'agent.session.turn.cancelled';
 
   /**
-   * Recorded token usage for a session or turn. Usage is best effort and may change.
+   * Token usage by the root agent during the turn, when available.
    */
   usage: TokenUsage | null;
 }
@@ -1758,7 +1997,7 @@ export interface AgentSessionTurnCompletedEvent {
   type: 'agent.session.turn.completed';
 
   /**
-   * Recorded token usage for a session or turn. Usage is best effort and may change.
+   * Token usage by the root agent during the turn, when available.
    */
   usage: TokenUsage | null;
 }
@@ -1913,7 +2152,7 @@ export interface AgentSessionTurnFailedEvent {
   type: 'agent.session.turn.failed';
 
   /**
-   * Recorded token usage for a session or turn. Usage is best effort and may change.
+   * Token usage by the root agent during the turn, when available.
    */
   usage: TokenUsage | null;
 }
@@ -2315,12 +2554,13 @@ export interface AgentText {
  */
 export interface AgentTextParam {
   /**
-   * The output format for generated text.
+   * The output format. Omission uses ordinary text (`{"type": "text"}`).
    */
   format?: TextFormatParam | null;
 
   /**
-   * The amount of text the model should produce.
+   * The amount of text the model should produce. Defaults to `medium`, matching
+   * Responses.
    *
    * - `low` - Produces less text.
    * - `medium` - Uses the default amount of text.
@@ -2445,7 +2685,7 @@ export namespace AgentTool {
     context_size: 'low' | 'medium' | 'high';
 
     /**
-     * Approximate user location used to localize web search results.
+     * Approximate location used to localize search results, if provided.
      */
     location: AgentToolResourceWebSearch.Location | null;
 
@@ -2462,7 +2702,7 @@ export namespace AgentTool {
 
   export namespace AgentToolResourceWebSearch {
     /**
-     * Approximate user location used to localize web search results.
+     * Approximate location used to localize search results, if provided.
      */
     export interface Location {
       /**
@@ -2580,7 +2820,9 @@ export namespace AgentToolParam {
     allowed_tools?: Array<string> | null;
 
     /**
-     * Where outbound MCP HTTP connections originate.
+     * Selects where outbound MCP HTTP connections originate. Omitted or `service` uses
+     * the Managed Agents service network; `environment` uses the session's selected
+     * environment.
      *
      * - `service` - Uses the Managed Agents service network.
      * - `environment` - Uses the session's execution environment.
@@ -2620,17 +2862,17 @@ export namespace AgentToolParam {
     allowed_domains?: Array<string> | null;
 
     /**
-     * The amount of web search context made available to the model.
+     * The amount of search context made available to the model. Defaults to `medium`.
      */
     context_size?: 'low' | 'medium' | 'high' | null;
 
     /**
-     * Approximate user location used to localize web search results.
+     * Approximate location used to localize search results.
      */
     location?: AgentToolConfigParamWebSearch.Location | null;
 
     /**
-     * The source used for web search results.
+     * The source used for web search results. Defaults to `live`.
      *
      * - `disabled` - Disables web search.
      * - `cached` - Uses cached search results.
@@ -2641,7 +2883,7 @@ export namespace AgentToolParam {
 
   export namespace AgentToolConfigParamWebSearch {
     /**
-     * Approximate user location used to localize web search results.
+     * Approximate location used to localize search results.
      */
     export interface Location {
       /**
@@ -2712,7 +2954,7 @@ export interface AgentWebSearchCallItem {
   id: string;
 
   /**
-   * An action performed by the web search tool.
+   * The action performed by the web search tool.
    */
   action: WebSearchAction | null;
 
@@ -2921,12 +3163,13 @@ export namespace EnvironmentParam {
     files?: Array<AgentsAPI.HostedEnvironmentFileParam> | null;
 
     /**
-     * Network access for an OpenAI-hosted environment.
+     * Network access policy for the environment. Defaults to disabled for GA requests
+     * and enabled for alpha/beta requests.
      */
     network?: EnvironmentParamOpenAIHosted.Network | null;
 
     /**
-     * Packages to install in an OpenAI-hosted environment.
+     * Packages to install in the environment. Defaults to empty package lists.
      */
     packages?: EnvironmentParamOpenAIHosted.Packages | null;
 
@@ -2949,14 +3192,14 @@ export namespace EnvironmentParam {
 
   export namespace EnvironmentParamOpenAIHosted {
     /**
-     * Network access for an OpenAI-hosted environment.
+     * Network access policy for the environment. Defaults to disabled for GA requests
+     * and enabled for alpha/beta requests.
      */
     export interface Network {
       /**
        * The environment's network access mode.
        *
-       * - `enabled` - Allows unrestricted network access, matching an omitted network
-       *   policy.
+       * - `enabled` - Allows unrestricted network access.
        * - `disabled` - Disables network access.
        * - `restricted` - Allows access only to configured domains.
        */
@@ -2969,7 +3212,7 @@ export namespace EnvironmentParam {
     }
 
     /**
-     * Packages to install in an OpenAI-hosted environment.
+     * Packages to install in the environment. Defaults to empty package lists.
      */
     export interface Packages {
       /**
@@ -3672,7 +3915,7 @@ export namespace PersistedAgentTool {
     context_size: 'low' | 'medium' | 'high';
 
     /**
-     * Approximate user location used to localize web search results.
+     * Approximate location used to localize search results, if provided.
      */
     location: PersistedAgentToolResourceWebSearch.Location | null;
 
@@ -3689,7 +3932,7 @@ export namespace PersistedAgentTool {
 
   export namespace PersistedAgentToolResourceWebSearch {
     /**
-     * Approximate user location used to localize web search results.
+     * Approximate location used to localize search results, if provided.
      */
     export interface Location {
       /**
@@ -3807,7 +4050,7 @@ export namespace PersistedAgentToolParam {
     allowed_tools?: Array<string> | null;
 
     /**
-     * Where outbound MCP HTTP connections originate.
+     * Selects where outbound MCP HTTP connections originate.
      *
      * - `service` - Uses the Managed Agents service network.
      * - `environment` - Uses the session's execution environment.
@@ -3847,17 +4090,17 @@ export namespace PersistedAgentToolParam {
     allowed_domains?: Array<string> | null;
 
     /**
-     * The amount of web search context made available to the model.
+     * The amount of search context made available to the model. Defaults to `medium`.
      */
     context_size?: 'low' | 'medium' | 'high' | null;
 
     /**
-     * Approximate user location used to localize web search results.
+     * Approximate location used to localize search results.
      */
     location?: PersistedAgentToolConfigParamWebSearch.Location | null;
 
     /**
-     * The source used for web search results.
+     * The source used for web search results. Defaults to `live`.
      *
      * - `disabled` - Disables web search.
      * - `cached` - Uses cached search results.
@@ -3868,7 +4111,7 @@ export namespace PersistedAgentToolParam {
 
   export namespace PersistedAgentToolConfigParamWebSearch {
     /**
-     * Approximate user location used to localize web search results.
+     * Approximate location used to localize search results.
      */
     export interface Location {
       /**
@@ -4048,6 +4291,7 @@ export interface SessionTurnError {
    * - `session_budget_exceeded` - The session has reached its usage budget.
    * - `usage_limit_exceeded` - The organization has reached a usage, plan, or
    *   billing limit.
+   * - `credit_balance_exhausted` - The organization has no API credits remaining.
    * - `rate_limit_exceeded` - The request exceeds the available rate limit.
    * - `server_overloaded` - The model service is temporarily overloaded.
    * - `cyber_policy` - The request was rejected by a safety policy.
@@ -4070,6 +4314,7 @@ export interface SessionTurnError {
     | 'context_length_exceeded'
     | 'session_budget_exceeded'
     | 'usage_limit_exceeded'
+    | 'credit_balance_exhausted'
     | 'rate_limit_exceeded'
     | 'server_overloaded'
     | 'cyber_policy'
@@ -4387,7 +4632,8 @@ export interface AgentCreateParams {
   metadata?: { [key: string]: string } | null;
 
   /**
-   * Explicit configuration for creating and coordinating subagents.
+   * Configuration for creating and coordinating subagents. Subagent tools are
+   * disabled by default.
    */
   multi_agent?: MultiAgentConfigParam | null;
 
@@ -4397,12 +4643,12 @@ export interface AgentCreateParams {
   name?: string | null;
 
   /**
-   * Reasoning configuration for the agent.
+   * Configuration for model reasoning. Omission uses the model's default effort.
    */
   reasoning?: AgentReasoningParam | null;
 
   /**
-   * The service tier used for model requests.
+   * The service tier used for model requests. Defaults to `auto`.
    *
    * - `auto` - Selects the service tier automatically.
    * - `default` - Uses the default service tier.
@@ -4413,7 +4659,8 @@ export interface AgentCreateParams {
   service_tier?: 'auto' | 'default' | 'flex' | 'priority' | 'fast' | null;
 
   /**
-   * Configuration for text generated by the agent.
+   * Configuration for generated text. Defaults to the `text` format and medium
+   * verbosity.
    */
   text?: AgentTextParam | null;
 
@@ -4443,7 +4690,7 @@ export interface AgentUpdateParams {
   model?: string;
 
   /**
-   * Explicit configuration for creating and coordinating subagents.
+   * Configuration for creating and coordinating subagents.
    */
   multi_agent?: MultiAgentConfigParam | null;
 
@@ -4453,7 +4700,8 @@ export interface AgentUpdateParams {
   name?: string | null;
 
   /**
-   * Reasoning configuration for the agent.
+   * Configuration for model reasoning. Omit to keep the current settings; pass
+   * `null` to reset to the model's default effort.
    */
   reasoning?: AgentReasoningParam | null;
 
@@ -4479,7 +4727,12 @@ export interface AgentUpdateParams {
   tools?: Array<PersistedAgentToolParam> | null;
 }
 
-export interface AgentListParams extends CursorPageParams {
+export interface AgentListParams extends Omit<CursorPageParams, 'limit'> {
+  /**
+   * The maximum number of resources to return.
+   */
+  limit?: number | null;
+
   /**
    * The order in which resources are returned. Defaults to `desc`.
    *
@@ -4524,6 +4777,7 @@ export declare namespace Agents {
     type AgentSessionEnvironmentFailedEvent as AgentSessionEnvironmentFailedEvent,
     type AgentSessionEnvironmentPendingEvent as AgentSessionEnvironmentPendingEvent,
     type AgentSessionEnvironmentReadyEvent as AgentSessionEnvironmentReadyEvent,
+    type AgentSessionEnvironmentResetEvent as AgentSessionEnvironmentResetEvent,
     type AgentSessionEnvironmentState as AgentSessionEnvironmentState,
     type AgentSessionErrorEvent as AgentSessionErrorEvent,
     type AgentSessionEvent as AgentSessionEvent,

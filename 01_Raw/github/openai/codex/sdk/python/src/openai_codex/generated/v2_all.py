@@ -43,6 +43,12 @@ class AmazonBedrockAccount(BaseModel):
     ] = False
 
 
+class AccountRoutingOverride(Enum):
+    no_constraint = "NO_CONSTRAINT"
+    us = "us"
+    us_cr = "us_cr"
+
+
 class AccountTokenUsageDailyBucket(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
@@ -2453,6 +2459,21 @@ class MarketplaceUpgradeResponse(BaseModel):
     errors: list[MarketplaceUpgradeErrorInfo]
     selected_marketplaces: Annotated[list[str], Field(alias="selectedMarketplaces")]
     upgraded_roots: Annotated[list[AbsolutePathBuf], Field(alias="upgradedRoots")]
+
+
+class McpAppDisplayMode(Enum):
+    inline = "inline"
+    fullscreen = "fullscreen"
+
+
+class McpAppUi(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True,
+    )
+    preferred_model_display_mode: Annotated[
+        McpAppDisplayMode, Field(alias="preferredModelDisplayMode")
+    ]
+    resource_uri: Annotated[str, Field(alias="resourceUri")]
 
 
 class McpAuthStatus(Enum):
@@ -5297,7 +5318,14 @@ class McpToolCallThreadItem(BaseModel):
         str | None,
         Field(
             alias="mcpAppResourceUri",
-            description="Deprecated: use `appContext.resourceUri` instead.",
+            description="Legacy compatibility field; prefer `mcpAppUi.resourceUri` when available.",
+        ),
+    ] = None
+    mcp_app_ui: Annotated[
+        McpAppUi | None,
+        Field(
+            alias="mcpAppUi",
+            description="Presentation captured from the invoked descriptor; absent in older history.",
         ),
     ] = None
     plugin_id: Annotated[str | None, Field(alias="pluginId")] = None
@@ -5806,7 +5834,12 @@ class ThreadResumeParams(BaseModel):
         str | None, Field(description="Configuration overrides for the resumed thread, if any.")
     ] = None
     model_provider: Annotated[str | None, Field(alias="modelProvider")] = None
-    personality: Personality | None = None
+    personality: Annotated[
+        Personality | None,
+        Field(
+            description="@deprecated `friendly` and `pragmatic` no longer select a style. Changing this does not rewrite the thread's existing instructions."
+        ),
+    ] = None
     sandbox: SandboxMode | None = None
     service_tier: Annotated[str | None, Field(alias="serviceTier")] = None
     thread_id: Annotated[str, Field(alias="threadId")]
@@ -6146,6 +6179,12 @@ class Tool(BaseModel):
     title: str | None = None
 
 
+class ToolExposureSurface(Enum):
+    code_mode = "code_mode"
+    deferred = "deferred"
+    direct = "direct"
+
+
 class TurnDiffUpdatedNotification(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
@@ -6243,6 +6282,15 @@ class ImageUserInput(BaseModel):
     url: str
 
 
+class FileIdUserInput(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True,
+    )
+    detail: ImageDetail | None = None
+    type: Annotated[Literal["image"], Field(title="ImageUserInputType")]
+    file_id: Annotated[str, Field(alias="fileId")]
+
+
 class LocalImageUserInput(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
@@ -6290,6 +6338,7 @@ class UserInput(
     RootModel[
         TextUserInput
         | ImageUserInput
+        | FileIdUserInput
         | LocalImageUserInput
         | AudioUserInput
         | LocalAudioUserInput
@@ -6303,6 +6352,7 @@ class UserInput(
     root: (
         TextUserInput
         | ImageUserInput
+        | FileIdUserInput
         | LocalImageUserInput
         | AudioUserInput
         | LocalAudioUserInput
@@ -6417,6 +6467,12 @@ class WebSearchToolConfig(BaseModel):
     location: WebSearchLocation | None = None
 
 
+class WindowsSandboxImplementation(Enum):
+    elevated = "elevated"
+    unelevated = "unelevated"
+    mxc = "mxc"
+
+
 class WindowsSandboxReadiness(Enum):
     ready = "ready"
     not_configured = "notConfigured"
@@ -6463,6 +6519,17 @@ class WorkspaceMessageType(Enum):
     headline = "headline"
     announcement = "announcement"
     unknown = "unknown"
+
+
+class WorkspaceRouting(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True,
+    )
+    account_routing_override: Annotated[
+        AccountRoutingOverride, Field(alias="accountRoutingOverride")
+    ]
+    backend_origin: Annotated[str, Field(alias="backendOrigin")]
+    chatgpt_account_id: Annotated[str, Field(alias="chatgptAccountId")]
 
 
 class WriteStatus(Enum):
@@ -6525,6 +6592,10 @@ class AppConfig(BaseModel):
     enabled: bool | None = True
     links: Annotated[
         AppLinksConfig | None, Field(description="Per-account approval settings keyed by link ID.")
+    ] = None
+    omit_tools_from: Annotated[
+        list[ToolExposureSurface] | None,
+        Field(description="Additional model-facing surfaces omitted for this connector's tools."),
     ] = None
     open_world_enabled: bool | None = None
     tools: AppToolsConfig | None = None
@@ -7767,20 +7838,37 @@ class InputImageContentItem(BaseModel):
         populate_by_name=True,
     )
     detail: ImageDetail | None = None
-    image_url: str
     type: Annotated[Literal["input_image"], Field(title="InputImageContentItemType")]
+    image_url: str
+
+
+class FileIdContentItem(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True,
+    )
+    detail: ImageDetail | None = None
+    type: Annotated[Literal["input_image"], Field(title="InputImageContentItemType")]
+    file_id: str
 
 
 class ContentItem(
     RootModel[
-        InputTextContentItem | InputImageContentItem | InputAudioContentItem | OutputTextContentItem
+        InputTextContentItem
+        | InputImageContentItem
+        | FileIdContentItem
+        | InputAudioContentItem
+        | OutputTextContentItem
     ]
 ):
     model_config = ConfigDict(
         populate_by_name=True,
     )
     root: (
-        InputTextContentItem | InputImageContentItem | InputAudioContentItem | OutputTextContentItem
+        InputTextContentItem
+        | InputImageContentItem
+        | FileIdContentItem
+        | InputAudioContentItem
+        | OutputTextContentItem
     )
 
 
@@ -7963,16 +8051,28 @@ class InputImageFunctionCallOutputContentItem(BaseModel):
         populate_by_name=True,
     )
     detail: ImageDetail | None = None
-    image_url: str
     type: Annotated[
         Literal["input_image"], Field(title="InputImageFunctionCallOutputContentItemType")
     ]
+    image_url: str
+
+
+class FileIdFunctionCallOutputContentItem(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True,
+    )
+    detail: ImageDetail | None = None
+    type: Annotated[
+        Literal["input_image"], Field(title="InputImageFunctionCallOutputContentItemType")
+    ]
+    file_id: str
 
 
 class FunctionCallOutputContentItem(
     RootModel[
         InputTextFunctionCallOutputContentItem
         | InputImageFunctionCallOutputContentItem
+        | FileIdFunctionCallOutputContentItem
         | InputAudioFunctionCallOutputContentItem
         | EncryptedContentFunctionCallOutputContentItem
     ]
@@ -7983,6 +8083,7 @@ class FunctionCallOutputContentItem(
     root: Annotated[
         InputTextFunctionCallOutputContentItem
         | InputImageFunctionCallOutputContentItem
+        | FileIdFunctionCallOutputContentItem
         | InputAudioFunctionCallOutputContentItem
         | EncryptedContentFunctionCallOutputContentItem,
         Field(
@@ -8435,7 +8536,13 @@ class Model(BaseModel):
     supported_reasoning_efforts: Annotated[
         list[ReasoningEffortOption], Field(alias="supportedReasoningEfforts")
     ]
-    supports_personality: Annotated[bool | None, Field(alias="supportsPersonality")] = False
+    supports_personality: Annotated[
+        bool | None,
+        Field(
+            alias="supportsPersonality",
+            description="@deprecated Always false; models no longer support personality selection.",
+        ),
+    ] = False
     upgrade: str | None = None
     upgrade_info: Annotated[ModelUpgradeInfo | None, Field(alias="upgradeInfo")] = None
 
@@ -9885,7 +9992,12 @@ class ThreadSettings(BaseModel):
     effort: ReasoningEffort | None = None
     model: str
     model_provider: Annotated[str, Field(alias="modelProvider")]
-    personality: Personality | None = None
+    personality: Annotated[
+        Personality | None,
+        Field(
+            description="@deprecated Reports the saved setting; `friendly` and `pragmatic` no longer select a style."
+        ),
+    ] = None
     sandbox_policy: Annotated[SandboxPolicy, Field(alias="sandboxPolicy")]
     service_tier: Annotated[str | None, Field(alias="serviceTier")] = None
     summary: ReasoningSummary | None = None
@@ -9918,7 +10030,10 @@ class ThreadStartParams(BaseModel):
     ephemeral: bool | None = None
     model: str | None = None
     model_provider: Annotated[str | None, Field(alias="modelProvider")] = None
-    personality: Personality | None = None
+    personality: Annotated[
+        Personality | None,
+        Field(description="@deprecated `friendly` and `pragmatic` no longer select a style."),
+    ] = None
     sandbox: SandboxMode | None = None
     service_name: Annotated[str | None, Field(alias="serviceName")] = None
     service_tier: Annotated[str | None, Field(alias="serviceTier")] = None
@@ -10338,7 +10453,7 @@ class ConfigBatchWriteParams(BaseModel):
         bool | None,
         Field(
             alias="reloadUserConfig",
-            description="When true, hot-reload updated runtime settings into loaded threads after writing. Session-static model, reasoning-effort, Plan-mode reasoning-effort, service-tier, and personality defaults are not reloaded.",
+            description="When true, hot-reload updated runtime settings into loaded threads after writing. Session-static model, reasoning-effort, Plan-mode reasoning-effort, and service-tier defaults are not reloaded. The deprecated personality setting is also not reloaded.",
         ),
     ] = None
 
@@ -11280,6 +11395,13 @@ class ConfigRequirements(BaseModel):
     allowed_approval_policies: Annotated[
         list[AskForApproval] | None, Field(alias="allowedApprovalPolicies")
     ] = None
+    allowed_login_methods: Annotated[
+        list[ForcedLoginMethod] | None,
+        Field(
+            alias="allowedLoginMethods",
+            description="Effective login methods after managed, forced-login, and workspace restrictions. An empty list permits no login method. Older servers may omit this field.",
+        ),
+    ] = None
     allowed_permission_profiles: Annotated[
         dict[str, Any] | None, Field(alias="allowedPermissionProfiles")
     ] = None
@@ -11290,7 +11412,8 @@ class ConfigRequirements(BaseModel):
         list[WebSearchMode] | None, Field(alias="allowedWebSearchModes")
     ] = None
     allowed_windows_sandbox_implementations: Annotated[
-        list[WindowsSandboxSetupMode] | None, Field(alias="allowedWindowsSandboxImplementations")
+        list[WindowsSandboxImplementation] | None,
+        Field(alias="allowedWindowsSandboxImplementations"),
     ] = None
     auto_review: Annotated[AutoReviewRequirements | None, Field(alias="autoReview")] = None
     browser_use: Annotated[BrowserUseRequirements | None, Field(alias="browserUse")] = None
@@ -11329,9 +11452,6 @@ class ConfigRequirements(BaseModel):
     ] = None
     models: ModelsRequirements | None = None
     sqlite_home: Annotated[str | None, Field(alias="sqliteHome")] = None
-    windows_sandbox_private_desktop: Annotated[
-        bool | None, Field(alias="windowsSandboxPrivateDesktop")
-    ] = None
 
 
 class ConfigRequirementsReadResponse(BaseModel):
@@ -11451,6 +11571,13 @@ class PluginDetail(BaseModel):
     marketplace_name: Annotated[str, Field(alias="marketplaceName")]
     marketplace_path: Annotated[AbsolutePathBuf | None, Field(alias="marketplacePath")] = None
     mcp_servers: Annotated[list[str], Field(alias="mcpServers")]
+    onboarding_skill: Annotated[
+        SkillSummary | None,
+        Field(
+            alias="onboardingSkill",
+            description="The declared onboarding skill, when the plugin and visible skill are enabled.",
+        ),
+    ] = None
     scheduled_tasks: Annotated[list[ScheduledTaskSummary] | None, Field(alias="scheduledTasks")] = (
         None
     )
@@ -11842,6 +11969,13 @@ class ThreadResumeResponse(BaseModel):
             description="Reviewer currently used for approval requests on this thread.",
         ),
     ]
+    collaboration_mode: Annotated[
+        CollaborationMode | None,
+        Field(
+            alias="collaborationMode",
+            description="Effective collaboration mode. Absent when resuming from an older server.",
+        ),
+    ] = None
     cwd: AbsolutePathBuf
     disabled_plugin_ids: Annotated[
         list[str] | None,
@@ -12040,7 +12174,9 @@ class TurnStartParams(BaseModel):
     ] = None
     personality: Annotated[
         Personality | None,
-        Field(description="Override the personality for this turn and subsequent turns."),
+        Field(
+            description="@deprecated `friendly` and `pragmatic` no longer select a style. Changing this does not rewrite the thread's existing instructions."
+        ),
     ] = None
     sandbox_policy: Annotated[
         SandboxPolicy | None,

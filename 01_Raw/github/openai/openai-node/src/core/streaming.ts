@@ -139,7 +139,7 @@ export class Stream<Item> implements AsyncIterable<Item> {
             let data;
 
             try {
-              data = JSON.parse(sse.data) as any;
+              data = JSON.parse(sse.data);
             } catch {
               logger.error(`Could not parse message into JSON:`);
               logger.error(`From chunk:`);
@@ -164,6 +164,7 @@ export class Stream<Item> implements AsyncIterable<Item> {
               logger.error(`From chunk:`);
               throw new SyntaxError('Error reading response: malformed server-sent event JSON.');
             }
+            // SAFETY: Named SSE events use the public stream's event/data envelope; Item is the caller-selected API event contract.
             yield { event: sse.event, data } as any;
           }
         }
@@ -264,6 +265,7 @@ export class Stream<Item> implements AsyncIterable<Item> {
           if (line) {
             let data: Item;
             try {
+              // SAFETY: Item is the caller's NDJSON response contract; JSON syntax is parsed here without a per-resource runtime schema.
               data = JSON.parse(line) as Item;
             } catch (error) {
               if (error instanceof SyntaxError) {
@@ -352,10 +354,13 @@ export class Stream<Item> implements AsyncIterable<Item> {
    * which can be turned back into a Stream with `Stream.fromReadableStream()`.
    * Canceling a response-backed readable aborts its request. Canceling a tee
    * branch discards its buffered events and leaves sibling consumers running.
+   * Read or serialization failures also release the iterator without replacing the original error.
    */
   toReadableStream(): ReadableStream {
     const { controller } = this;
     let iter: AsyncIterator<Item>;
+    let cancellation: Promise<void> | undefined;
+    const cancel = () => (cancellation ??= this.#cancelIterator(iter, controller));
 
     return makeReadableStream({
       start: async () => {
@@ -373,9 +378,12 @@ export class Stream<Item> implements AsyncIterable<Item> {
           ctrl.enqueue(bytes);
         } catch (err) {
           ctrl.error(err);
+          // An errored readable never invokes its cancel hook. Release the source ourselves,
+          // without letting failed or stalled cleanup replace the read/serialization error.
+          void cancel().catch(() => undefined);
         }
       },
-      cancel: () => this.#cancelIterator(iter, controller),
+      cancel,
     });
   }
 
@@ -385,6 +393,7 @@ export class Stream<Item> implements AsyncIterable<Item> {
       if (!this.#isTeeBranch) {
         controller.abort();
       }
+      // oxlint-disable-next-line anti-slop/no-reflect-apply -- Invoke the captured iterator method with its receiver even if a caller-supplied function shadows call.
       await Reflect.apply(returnMethod, iterator, []);
     }
   }
@@ -524,6 +533,7 @@ export async function* _iterSSEMessages(
 ): AsyncGenerator<ServerSentEvent, void, unknown> {
   if (!response.body) {
     controller.abort();
+    // SAFETY: navigator is optional across SDK runtimes; this compatibility branch checks its presence before identifying React Native.
     if (
       (globalThis as any).navigator !== undefined &&
       (globalThis as any).navigator.product === 'ReactNative'
@@ -568,6 +578,15 @@ export async function* _iterSSEMessages(
       if (sse) {
         yield sse;
       }
+    }
+    // Servers sometimes omit the trailing blank line that normally
+    // terminates the last event. Flush any in-progress event exactly once.
+    if (signal.aborted) {
+      return;
+    }
+    const pending = sseDecoder.flush();
+    if (pending) {
+      yield pending;
     }
   } catch (error) {
     failed = true;
@@ -698,6 +717,15 @@ class SSEDecoder {
     }
 
     return null;
+  }
+
+  /**
+   * Emits a pending event at EOF when the stream omitted the trailing blank
+   * line. Returns `null` when no event is in progress so a record that already
+   * ended with a blank line is not delivered twice.
+   */
+  flush(): ServerSentEvent | null {
+    return this.decode('');
   }
 }
 

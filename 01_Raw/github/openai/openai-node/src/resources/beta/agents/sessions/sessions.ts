@@ -34,6 +34,113 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
+// Recognizable options across SDK runtime versions. Keep this independent of
+// private RequestOptions fields so older handwritten runtimes still compile.
+const normalizeRequestOptionsForQueryKeys = new Set([
+  'method',
+  'path',
+  'query',
+  'body',
+  'headers',
+  'maxRetries',
+  'stream',
+  'timeout',
+  'httpAgent',
+  'fetchOptions',
+  'signal',
+  'idempotencyKey',
+  'defaultBaseURL',
+  '__metadata',
+  '__binaryRequest',
+  '__binaryResponse',
+  '__streamClass',
+  '__security',
+  '__synthesizeEventData',
+]);
+
+function normalizeRequestOptionsForQuery(
+  value: unknown,
+  queryKeys: ReadonlyArray<string>,
+  options: RequestOptions | undefined,
+):
+  | ({
+      [K in 'headers' | 'maxRetries' | 'timeout' | 'signal' | 'idempotencyKey' | 'query']?: RequestOptions[K];
+    } & {
+      [
+        K in
+          | 'method'
+          | 'path'
+          | 'body'
+          | 'stream'
+          | 'httpAgent'
+          | 'fetchOptions'
+          | 'defaultBaseURL'
+          | '__metadata'
+          | '__binaryRequest'
+          | '__binaryResponse'
+          | '__streamClass'
+          | '__security'
+          | '__synthesizeEventData'
+      ]?: never;
+    })
+  | undefined {
+  if (typeof value !== 'object' || value === null) return undefined;
+  // Optional never fields can still be explicitly undefined unless consumers
+  // enable exactOptionalPropertyTypes. Snapshot data without invoking getters.
+  const entries = Object.entries(Object.getOwnPropertyDescriptors(value)).filter(
+    ([, descriptor]) => descriptor.enumerable && (!('value' in descriptor) || descriptor.value !== undefined),
+  );
+  const keys = entries.map(([key]) => key);
+  const requestOnly = keys.some(
+    (key) => normalizeRequestOptionsForQueryKeys.has(key) && !queryKeys.includes(key),
+  );
+  if (!requestOnly) return undefined;
+  // Declared query fields, including stream, must use the query argument.
+  // Mixing them with request-only options is ambiguous and could change the return type.
+  if (
+    options !== undefined ||
+    keys.some((key) => !normalizeRequestOptionsForQueryKeys.has(key) || queryKeys.includes(key))
+  ) {
+    throw new TypeError('Query parameters and request options must be passed as separate arguments.');
+  }
+  // The query position must not gain authority to change the request destination
+  // or transport. Those overrides require the explicit request options argument.
+  if (
+    keys.some(
+      (key) => !['headers', 'maxRetries', 'timeout', 'signal', 'idempotencyKey', 'query'].includes(key),
+    )
+  ) {
+    throw new TypeError('Pass transport overrides in the explicit request options argument.');
+  }
+  // Copy only the validated fields. Spreading value would reintroduce undefined
+  // transport overrides, and deleting them would mutate the caller's object.
+  return Object.fromEntries(
+    entries.map(([key, descriptor]) => {
+      if ('value' in descriptor) return [key, descriptor.value];
+      return [key, descriptor.get ? Reflect.apply(descriptor.get, value, []) : undefined];
+    }),
+  ) as {
+    [K in 'headers' | 'maxRetries' | 'timeout' | 'signal' | 'idempotencyKey' | 'query']?: RequestOptions[K];
+  } & {
+    [
+      K in
+        | 'method'
+        | 'path'
+        | 'body'
+        | 'stream'
+        | 'httpAgent'
+        | 'fetchOptions'
+        | 'defaultBaseURL'
+        | '__metadata'
+        | '__binaryRequest'
+        | '__binaryResponse'
+        | '__streamClass'
+        | '__security'
+        | '__synthesizeEventData'
+    ]?: never;
+  };
+}
+
 export class Sessions extends APIResource {
   /** Stream one turn on an idle session with a single input writer. See AgentSessionStream for lifecycle and tool handling. */
   stream(sessionID: string, params: AgentSessionStreamParams, options?: RequestOptions): AgentSessionStream {
@@ -100,7 +207,8 @@ export class Sessions extends APIResource {
   }
 
   /**
-   * Updates session metadata. Omitted fields are unchanged. See
+   * Updates session metadata, model, reasoning effort, or service tier. Model
+   * settings apply to subsequent turns. Omitted fields are unchanged. See
    * [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
    *
    * @example
@@ -136,9 +244,101 @@ export class Sessions extends APIResource {
    * ```
    */
   list(
-    query: SessionListParams | null | undefined = {},
+    query?:
+      | (SessionListParams &
+          (
+            | {
+                [
+                  K in
+                    | 'method'
+                    | 'path'
+                    | 'query'
+                    | 'body'
+                    | 'headers'
+                    | 'maxRetries'
+                    | 'stream'
+                    | 'timeout'
+                    | 'httpAgent'
+                    | 'fetchOptions'
+                    | 'signal'
+                    | 'idempotencyKey'
+                    | 'defaultBaseURL'
+                    | '__metadata'
+                    | '__binaryRequest'
+                    | '__binaryResponse'
+                    | '__streamClass'
+                    | '__security'
+                    | '__synthesizeEventData'
+                ]?: never;
+              }
+            | null
+            | undefined
+          ))
+      | null
+      | undefined,
+    options?: RequestOptions,
+  ): PagePromise<AgentSessionsPage, AgentsAPI.AgentSession>;
+  list(
+    options?: {
+      [K in 'headers' | 'maxRetries' | 'timeout' | 'signal' | 'idempotencyKey' | 'query']?: RequestOptions[K];
+    } & {
+      [
+        K in
+          | 'method'
+          | 'path'
+          | 'body'
+          | 'stream'
+          | 'httpAgent'
+          | 'fetchOptions'
+          | 'defaultBaseURL'
+          | '__metadata'
+          | '__binaryRequest'
+          | '__binaryResponse'
+          | '__streamClass'
+          | '__security'
+          | '__synthesizeEventData'
+      ]?: never;
+    },
+  ): PagePromise<AgentSessionsPage, AgentsAPI.AgentSession>;
+  list(
+    query:
+      | SessionListParams
+      | ({
+          [
+            K in 'headers' | 'maxRetries' | 'timeout' | 'signal' | 'idempotencyKey' | 'query'
+          ]?: RequestOptions[K];
+        } & {
+          [
+            K in
+              | 'method'
+              | 'path'
+              | 'body'
+              | 'stream'
+              | 'httpAgent'
+              | 'fetchOptions'
+              | 'defaultBaseURL'
+              | '__metadata'
+              | '__binaryRequest'
+              | '__binaryResponse'
+              | '__streamClass'
+              | '__security'
+              | '__synthesizeEventData'
+          ]?: never;
+        })
+      | null
+      | undefined = {},
     options?: RequestOptions,
   ): PagePromise<AgentSessionsPage, AgentsAPI.AgentSession> {
+    const normalizeRequestOptionsForQueryOptions = normalizeRequestOptionsForQuery(
+      query,
+      ['after', 'agent_id', 'limit', 'order'],
+      options,
+    );
+    if (normalizeRequestOptionsForQueryOptions !== undefined) {
+      options = normalizeRequestOptionsForQueryOptions;
+      query = {};
+    }
+    query = query as SessionListParams | null | undefined;
     return this._client.getAPIList('/agents/sessions', CursorPage<AgentsAPI.AgentSession>, {
       query,
       ...options,
@@ -149,7 +349,9 @@ export class Sessions extends APIResource {
 
   /**
    * Removes a managed agent session from the public API and returns a deletion
-   * confirmation. Physical cleanup may continue asynchronously. See
+   * confirmation. If backend execution has ended, deletion can cancel a still-open
+   * public turn and abandon unpublished outputs. Running execution must be cancelled
+   * first. Physical cleanup may continue asynchronously. See
    * [managing sessions](https://developers.openai.com/api/docs/guides/agents-api/sessions/manage).
    *
    * @example
@@ -188,7 +390,10 @@ export interface SessionCreateParamsBase {
   agent_id?: string;
 
   /**
-   * Initial input submitted when creating a session.
+   * Initial input to submit when the session is created. A string is shorthand for a
+   * single user message. Required when `environment.type` is `none`, or when
+   * `stream` is `true` for an environment that is not `self_hosted`; optional for
+   * self-hosted and non-streaming execution environments.
    */
   input?: string | Array<AgentsAPI.AgentSessionInputMessageParam> | null;
 
@@ -227,12 +432,13 @@ export namespace SessionCreateParams {
     model?: string;
 
     /**
-     * Explicit configuration for creating and coordinating subagents.
+     * Configuration for creating and coordinating subagents.
      */
     multi_agent?: AgentsAPI.MultiAgentConfigParam | null;
 
     /**
-     * Reasoning configuration for the agent.
+     * Configuration for model reasoning. Omit to keep the current settings; pass
+     * `null` to reset to the model's default effort.
      */
     reasoning?: AgentsAPI.AgentReasoningParam | null;
 
@@ -278,6 +484,11 @@ export interface SessionCreateParamsStreaming extends SessionCreateParamsBase {
 
 export interface SessionUpdateParams {
   /**
+   * Model settings for subsequent turns. Omitted fields stay unchanged.
+   */
+  agent?: SessionUpdateParams.Agent;
+
+  /**
    * Replaces all metadata. Omit to leave unchanged, or pass null or {} to clear it.
    * Up to 16 string key-value pairs, with keys up to 64 and values up to 512
    * characters.
@@ -285,12 +496,57 @@ export interface SessionUpdateParams {
   metadata?: { [key: string]: string } | null;
 }
 
-export interface SessionListParams extends CursorPageParams {
+export namespace SessionUpdateParams {
+  /**
+   * Model settings for subsequent turns. Omitted fields stay unchanged.
+   */
+  export interface Agent {
+    /**
+     * The model for subsequent turns. Omit to keep the current model.
+     */
+    model?: string;
+
+    /**
+     * Reasoning settings to update. Omit to keep the current effort.
+     */
+    reasoning?: Agent.Reasoning;
+
+    /**
+     * Omit to keep the current tier. Null resets it to auto.
+     *
+     * - `auto` - Selects the service tier automatically.
+     * - `default` - Uses the default service tier.
+     * - `flex` - Uses the flex service tier.
+     * - `priority` - Uses the priority service tier.
+     * - `fast` - Uses the fast service tier.
+     */
+    service_tier?: 'auto' | 'default' | 'flex' | 'priority' | 'fast' | null;
+  }
+
+  export namespace Agent {
+    /**
+     * Reasoning settings to update. Omit to keep the current effort.
+     */
+    export interface Reasoning {
+      /**
+       * Omit to keep the current effort. Null selects the model's default effort.
+       */
+      effort?: 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh' | 'max' | null;
+    }
+  }
+}
+
+export interface SessionListParams extends Omit<CursorPageParams, 'limit'> {
   /**
    * Only return sessions whose root agent has this ID. Omit to return sessions for
    * all agents.
    */
   agent_id?: string;
+
+  /**
+   * The maximum number of resources to return.
+   */
+  limit?: number | null;
 
   /**
    * Sort order by the `created_at` timestamp. Use `asc` for ascending order or

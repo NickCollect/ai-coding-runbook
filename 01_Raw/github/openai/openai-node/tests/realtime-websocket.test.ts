@@ -20,6 +20,7 @@ type FakeNodeSocket = {
   dispatch: (event: string, value: unknown) => void;
 };
 
+// oxlint-disable-next-line anti-slop/no-module-mocking -- Capture public adapter handshakes and dispatch deterministic transport events without network I/O.
 vi.mock('ws', () => ({
   WebSocket: vi.fn().mockImplementation(function WebSocket(url: URL, options: FakeNodeSocket['options']) {
     const listeners = new Map<string, Listener>();
@@ -62,7 +63,7 @@ class FakeBrowserSocket {
 }
 
 const originalWebSocket = globalThis.WebSocket;
-const nodeSocketConstructor = WS.WebSocket as unknown as Mock;
+const nodeSocketConstructor = vi.mocked(WS.WebSocket);
 const azureCredentialCases = [
   {
     authentication: 'an Azure API key',
@@ -83,12 +84,18 @@ function lastBrowserSocket(): FakeBrowserSocket {
 }
 
 function lastNodeSocket(): FakeNodeSocket {
+  // SAFETY: The mocked ws constructor returns FakeNodeSocket; the preceding constructor call records that exact instance.
   return nodeSocketConstructor.mock.results[nodeSocketConstructor.mock.results.length - 1]!
     .value as FakeNodeSocket;
 }
 
-function onRealtimeEvent(realtime: unknown, event: string, listener: Listener): void {
-  (realtime as { on: (event: string, listener: Listener) => unknown }).on(event, listener);
+function onRealtimeEvent(
+  realtime: StableBrowserRealtime | StableNodeRealtime | BetaBrowserRealtime | BetaNodeRealtime,
+  event: string,
+  listener: Listener,
+): void {
+  // SAFETY: Each listed realtime wrapper implements on; this helper registers only the shared event listener contract and discards the return value.
+  (realtime as { on: (event: string, listener: Listener) => void }).on(event, listener);
 }
 
 function createClient(
@@ -248,6 +255,29 @@ describe.each([
     expect(errors).toHaveBeenCalledTimes(3);
   });
 
+  test('reports native socket failures with their message and cause', () => {
+    const realtime = new Realtime({ model: 'gpt-realtime' }, createClient());
+    const socket = lastBrowserSocket();
+    const errors = vi.fn();
+    const described = new Error('Received network error or non-101 status code.');
+    // oxlint-disable-next-line unicorn/error-message -- Node's native WebSocket reports connection failures this way.
+    const undescribed = new TypeError('');
+
+    onRealtimeEvent(realtime, 'error', errors);
+
+    socket.dispatch('error', { type: 'error', message: described.message, error: described });
+    socket.dispatch('error', { type: 'error', message: '', error: described });
+    socket.dispatch('error', { type: 'error', message: '', error: undescribed });
+    socket.dispatch('error', { type: 'error' });
+
+    expect(errors.mock.calls.map(([error]) => [error.message, error.cause])).toEqual([
+      [described.message, described],
+      [described.message, described],
+      ['unknown error', undescribed],
+      ['unknown error', null],
+    ]);
+  });
+
   test.each(['__proto__', 'constructor', 'toString', 'hasOwnProperty', 'valueOf'])(
     'dispatches Object.prototype event type %s without crashing',
     (eventType) => {
@@ -265,6 +295,7 @@ describe.each([
     const realtime = new Realtime({ model: 'gpt-realtime' }, createClient());
     const socket = lastBrowserSocket();
 
+    // SAFETY: This minimal outbound event fixture tests socket serialization; its omitted session fields are not interpreted by the wrapper.
     realtime.send({ type: 'session.update' } as any);
     expect(socket.send).toHaveBeenCalledWith(JSON.stringify({ type: 'session.update' }));
 
@@ -287,6 +318,7 @@ describe.each([
       throw new Error('close failed');
     });
 
+    // SAFETY: This minimal outbound event fixture tests socket serialization; its omitted session fields are not interpreted by the wrapper.
     realtime.send({ type: 'session.update' } as any);
     realtime.close();
     expect(errors).toHaveBeenCalledTimes(2);
@@ -482,6 +514,7 @@ describe('stable browser realtime transcription', () => {
     { intent: 'unsupported' },
   ])('rejects conflicting Azure transcription targets before opening a socket %#', async (options) => {
     await expect(
+      // SAFETY: These table rows deliberately violate Azure connection option constraints to exercise runtime rejection.
       StableBrowserRealtime.azure(createAzureClient({ deployment: 'configured' }), options as any),
     ).rejects.toThrow(
       'Pass exactly one of `deploymentName`, `callID`, or transcription `intent` when opening an Azure Realtime WebSocket.',
@@ -607,6 +640,7 @@ describe.each([
     const realtime = new Realtime({ model: 'gpt-realtime' }, createClient());
     const socket = lastNodeSocket();
 
+    // SAFETY: This minimal outbound event fixture tests socket serialization; its omitted session fields are not interpreted by the wrapper.
     realtime.send({ type: 'session.update' } as any);
     realtime.close();
     realtime.close({ code: 1001, reason: 'done' });
@@ -629,6 +663,7 @@ describe.each([
       throw new Error('close failed');
     });
 
+    // SAFETY: This minimal outbound event fixture tests socket serialization; its omitted session fields are not interpreted by the wrapper.
     realtime.send({ type: 'session.update' } as any);
     realtime.close();
     expect(errors).toHaveBeenCalledTimes(2);
@@ -744,6 +779,7 @@ describe('stable Node realtime transcription', () => {
     { intent: 'unsupported' },
   ])('rejects conflicting Azure transcription targets before opening a socket %#', async (options) => {
     await expect(
+      // SAFETY: These table rows deliberately violate Azure connection option constraints to exercise runtime rejection.
       StableNodeRealtime.azure(createAzureClient({ deployment: 'configured' }), options as any),
     ).rejects.toThrow(
       'Pass exactly one of `deploymentName`, `callID`, or transcription `intent` when opening an Azure Realtime WebSocket.',
@@ -921,6 +957,8 @@ describe('stable Node realtime custom URL builder', () => {
     expect(
       () =>
         new StableNodeRealtime(
+          // SAFETY: The invalid URL fixture deliberately bypasses the typed builder contract to test validation before transport creation.
+          // oxlint-disable-next-line anti-slop/no-chained-type-assertions -- Return a malformed URL from a custom URL builder to verify rejection before opening a socket.
           { model: 'gpt-realtime', buildRealtimeURL: () => 'not a valid URL' as unknown as URL },
           createClient(),
         ),

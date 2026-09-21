@@ -73,6 +73,116 @@ export interface ParsedResponse<ParsedT> extends Response {
 
 export type ResponseParseParams = ResponseCreateParamsNonStreaming;
 
+// Recognizable options across SDK runtime versions. Keep this independent of
+// private RequestOptions fields so older handwritten runtimes still compile.
+const normalizeRequestOptionsForQueryKeys = new Set([
+  'method',
+  'path',
+  'query',
+  'body',
+  'headers',
+  'maxRetries',
+  'stream',
+  'timeout',
+  'httpAgent',
+  'fetchOptions',
+  'signal',
+  'idempotencyKey',
+  'defaultBaseURL',
+  '__metadata',
+  '__binaryRequest',
+  '__binaryResponse',
+  '__streamClass',
+  '__security',
+  '__synthesizeEventData',
+]);
+
+function normalizeRequestOptionsForQuery(
+  value: unknown,
+  queryKeys: ReadonlyArray<string>,
+  options: RequestOptions | undefined,
+):
+  | ({
+      [K in 'headers' | 'maxRetries' | 'timeout' | 'signal' | 'idempotencyKey' | 'query']?: RequestOptions[K];
+    } & {
+      [
+        K in
+          | 'method'
+          | 'path'
+          | 'body'
+          | 'stream'
+          | 'httpAgent'
+          | 'fetchOptions'
+          | 'defaultBaseURL'
+          | '__metadata'
+          | '__binaryRequest'
+          | '__binaryResponse'
+          | '__streamClass'
+          | '__security'
+          | '__synthesizeEventData'
+      ]?: never;
+    })
+  | undefined {
+  if (typeof value !== 'object' || value === null) return undefined;
+  // Optional never fields can still be explicitly undefined unless consumers
+  // enable exactOptionalPropertyTypes. Snapshot data without invoking getters.
+  const entries = Object.entries(Object.getOwnPropertyDescriptors(value)).filter(
+    ([, descriptor]) => descriptor.enumerable && (!('value' in descriptor) || descriptor.value !== undefined),
+  );
+  const keys = entries.map(([key]) => key);
+  const requestOnly = keys.some(
+    (key) => normalizeRequestOptionsForQueryKeys.has(key) && !queryKeys.includes(key),
+  );
+  if (!requestOnly) return undefined;
+  // Declared query fields, including stream, must use the query argument.
+  // Mixing them with request-only options is ambiguous and could change the return type.
+  if (
+    options !== undefined ||
+    keys.some((key) => !normalizeRequestOptionsForQueryKeys.has(key) || queryKeys.includes(key))
+  ) {
+    throw new TypeError('Query parameters and request options must be passed as separate arguments.');
+  }
+  // The query position must not gain authority to change the request destination
+  // or transport. Those overrides require the explicit request options argument.
+  if (
+    keys.some(
+      (key) => !['headers', 'maxRetries', 'timeout', 'signal', 'idempotencyKey', 'query'].includes(key),
+    )
+  ) {
+    throw new TypeError('Pass transport overrides in the explicit request options argument.');
+  }
+  // Copy only the validated fields. Spreading value would reintroduce undefined
+  // transport overrides, and deleting them would mutate the caller's object.
+  return Object.fromEntries(
+    entries.map(([key, descriptor]) => {
+      if ('value' in descriptor) return [key, descriptor.value];
+      return [key, descriptor.get ? Reflect.apply(descriptor.get, value, []) : undefined];
+    }),
+  ) as {
+    [K in 'headers' | 'maxRetries' | 'timeout' | 'signal' | 'idempotencyKey' | 'query']?: RequestOptions[K];
+  } & {
+    [
+      K in
+        | 'method'
+        | 'path'
+        | 'body'
+        | 'stream'
+        | 'httpAgent'
+        | 'fetchOptions'
+        | 'defaultBaseURL'
+        | '__metadata'
+        | '__binaryRequest'
+        | '__binaryResponse'
+        | '__streamClass'
+        | '__security'
+        | '__synthesizeEventData'
+    ]?: never;
+  };
+}
+
+/**
+ * Create and manage model responses.
+ */
 export class Responses extends APIResource {
   inputItems: InputItemsAPI.InputItems = new InputItemsAPI.InputItems(this._client);
   inputTokens: InputTokensAPI.InputTokens = new InputTokensAPI.InputTokens(this._client);
@@ -136,24 +246,164 @@ export class Responses extends APIResource {
    */
   retrieve(
     responseID: string,
-    query?: ResponseRetrieveParamsNonStreaming,
+    query?: ResponseRetrieveParamsNonStreaming &
+      (
+        | {
+            [
+              K in
+                | 'method'
+                | 'path'
+                | 'query'
+                | 'body'
+                | 'headers'
+                | 'maxRetries'
+                | 'timeout'
+                | 'httpAgent'
+                | 'fetchOptions'
+                | 'signal'
+                | 'idempotencyKey'
+                | 'defaultBaseURL'
+                | '__metadata'
+                | '__binaryRequest'
+                | '__binaryResponse'
+                | '__streamClass'
+                | '__security'
+                | '__synthesizeEventData'
+            ]?: never;
+          }
+        | null
+        | undefined
+      ),
     options?: RequestOptions,
   ): APIPromise<Response>;
   retrieve(
     responseID: string,
-    query: ResponseRetrieveParamsStreaming,
+    query: ResponseRetrieveParamsStreaming &
+      (
+        | {
+            [
+              K in
+                | 'method'
+                | 'path'
+                | 'query'
+                | 'body'
+                | 'headers'
+                | 'maxRetries'
+                | 'timeout'
+                | 'httpAgent'
+                | 'fetchOptions'
+                | 'signal'
+                | 'idempotencyKey'
+                | 'defaultBaseURL'
+                | '__metadata'
+                | '__binaryRequest'
+                | '__binaryResponse'
+                | '__streamClass'
+                | '__security'
+                | '__synthesizeEventData'
+            ]?: never;
+          }
+        | null
+        | undefined
+      ),
     options?: RequestOptions,
   ): APIPromise<Stream<ResponseStreamEvent>>;
   retrieve(
     responseID: string,
-    query?: ResponseRetrieveParamsBase | undefined,
+    query?:
+      | (ResponseRetrieveParamsBase &
+          (
+            | {
+                [
+                  K in
+                    | 'method'
+                    | 'path'
+                    | 'query'
+                    | 'body'
+                    | 'headers'
+                    | 'maxRetries'
+                    | 'timeout'
+                    | 'httpAgent'
+                    | 'fetchOptions'
+                    | 'signal'
+                    | 'idempotencyKey'
+                    | 'defaultBaseURL'
+                    | '__metadata'
+                    | '__binaryRequest'
+                    | '__binaryResponse'
+                    | '__streamClass'
+                    | '__security'
+                    | '__synthesizeEventData'
+                ]?: never;
+              }
+            | null
+            | undefined
+          ))
+      | undefined,
     options?: RequestOptions,
   ): APIPromise<Stream<ResponseStreamEvent> | Response>;
   retrieve(
     responseID: string,
-    query: ResponseRetrieveParams | undefined = {},
+    options?: {
+      [K in 'headers' | 'maxRetries' | 'timeout' | 'signal' | 'idempotencyKey' | 'query']?: RequestOptions[K];
+    } & {
+      [
+        K in
+          | 'method'
+          | 'path'
+          | 'body'
+          | 'stream'
+          | 'httpAgent'
+          | 'fetchOptions'
+          | 'defaultBaseURL'
+          | '__metadata'
+          | '__binaryRequest'
+          | '__binaryResponse'
+          | '__streamClass'
+          | '__security'
+          | '__synthesizeEventData'
+      ]?: never;
+    },
+  ): APIPromise<Response>;
+  retrieve(
+    responseID: string,
+    query:
+      | ResponseRetrieveParamsBase
+      | ({
+          [
+            K in 'headers' | 'maxRetries' | 'timeout' | 'signal' | 'idempotencyKey' | 'query'
+          ]?: RequestOptions[K];
+        } & {
+          [
+            K in
+              | 'method'
+              | 'path'
+              | 'body'
+              | 'stream'
+              | 'httpAgent'
+              | 'fetchOptions'
+              | 'defaultBaseURL'
+              | '__metadata'
+              | '__binaryRequest'
+              | '__binaryResponse'
+              | '__streamClass'
+              | '__security'
+              | '__synthesizeEventData'
+          ]?: never;
+        })
+      | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Response> | APIPromise<Stream<ResponseStreamEvent>> {
+    const normalizeRequestOptionsForQueryOptions = normalizeRequestOptionsForQuery(
+      query,
+      ['include', 'include_obfuscation', 'starting_after', 'stream'],
+      options,
+    );
+    if (normalizeRequestOptionsForQueryOptions !== undefined) {
+      options = normalizeRequestOptionsForQueryOptions;
+      query = {};
+    }
+    query = query as ResponseRetrieveParams | undefined;
     return (
       this._client.get(path`/responses/${responseID}`, {
         query,
@@ -2024,6 +2274,32 @@ export namespace ResponseCodeInterpreterToolCall {
      */
     url: string;
   }
+}
+
+/**
+ * Emitted when new summary content is sampled for a compaction trigger. Contains
+ * no summary content.
+ */
+export interface ResponseCompactionCompactingEvent {
+  /**
+   * The ID of the compaction output item.
+   */
+  item_id: string;
+
+  /**
+   * The index of the compaction output item.
+   */
+  output_index: number;
+
+  /**
+   * The sequence number of the event that was emitted.
+   */
+  sequence_number: number;
+
+  /**
+   * The type of the event, always `response.compaction.compacting`.
+   */
+  type: 'response.compaction.compacting';
 }
 
 /**
@@ -6759,7 +7035,7 @@ export namespace ResponseOutputText {
  */
 export interface ResponseOutputTextAnnotationAddedEvent {
   /**
-   * An annotation that applies to a span of output text.
+   * The annotation object being added. (See annotation schema for details.)
    */
   annotation:
     | ResponseOutputTextAnnotationAddedEvent.FileCitation
@@ -8136,6 +8412,7 @@ export type ResponseStreamEvent =
   | ResponseCodeInterpreterCallCompletedEvent
   | ResponseCodeInterpreterCallInProgressEvent
   | ResponseCodeInterpreterCallInterpretingEvent
+  | ResponseCompactionCompactingEvent
   | ResponseCompletedEvent
   | ResponseContentPartAddedEvent
   | ResponseContentPartDoneEvent
@@ -9084,6 +9361,12 @@ export namespace ResponsesClientEvent {
       mode?: 'implicit' | 'explicit';
 
       /**
+       * Prepares the prompt cache without generating output. Defaults to `false`. When
+       * set to `true`, overrides the `generate` field to `false`.
+       */
+      prewarm?: boolean;
+
+      /**
        * The minimum lifetime applied to every implicit and explicit cache breakpoint
        * written by the request. Defaults to `30m`, which is currently the only supported
        * value. The backend may retain cache entries for longer.
@@ -9128,6 +9411,7 @@ export type ResponsesServerEvent =
   | ResponsesServerEvent.ResponseCodeInterpreterCallWsCompleted
   | ResponsesServerEvent.ResponseCodeInterpreterCallInWsProgress
   | ResponsesServerEvent.ResponseCodeInterpreterCallWsInterpreting
+  | ResponsesServerEvent.ResponseCompactionWsCompacting
   | ResponsesServerEvent.ResponseWsCompleted
   | ResponsesServerEvent.ResponseContentPartWsAdded
   | ResponsesServerEvent.ResponseContentPartWsDone
@@ -9275,6 +9559,18 @@ export namespace ResponsesServerEvent {
    * Emitted when the code interpreter is actively interpreting the code snippet.
    */
   export interface ResponseCodeInterpreterCallWsInterpreting extends ResponseCodeInterpreterCallInterpretingEvent {
+    /**
+     * The WebSocket lane that emitted this event. This field is present when the
+     * originating `response.create` event supplied a `stream_id`.
+     */
+    stream_id?: string;
+  }
+
+  /**
+   * Emitted when new summary content is sampled for a compaction trigger. Contains
+   * no summary content.
+   */
+  export interface ResponseCompactionWsCompacting extends ResponseCompactionCompactingEvent {
     /**
      * The WebSocket lane that emitted this event. This field is present when the
      * originating `response.create` event supplied a `stream_id`.
@@ -10034,10 +10330,14 @@ export namespace Tool {
     authorization?: string;
 
     /**
-     * Identifier for service connectors, like those available in ChatGPT. One of
-     * `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more about
-     * service connectors
+     * @deprecated Identifier for service connectors, like those available in ChatGPT.
+     * One of `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more
+     * about service connectors
      * [here](https://developers.openai.com/api/docs/guides/tools-connectors-mcp#connectors).
+     *
+     * This field is deprecated for models released after September 1, 2026. Use
+     * `server_url` to connect to a remote MCP server, or `tunnel_id` to connect
+     * through a Secure MCP Tunnel.
      *
      * Currently supported `connector_id` values are:
      *
@@ -10255,10 +10555,9 @@ export namespace Tool {
     background?: 'transparent' | 'opaque' | 'auto';
 
     /**
-     * Control how much effort the model will exert to match the style and features,
-     * especially facial features, of input images. This parameter is only supported
-     * for `gpt-image-1` and `gpt-image-1.5` and later models, unsupported for
-     * `gpt-image-1-mini`. Supports `high` and `low`. Defaults to `low`.
+     * Controls fidelity to the original input image(s). This parameter is supported
+     * for GPT image models that support input fidelity. `gpt-image-2` and
+     * `gpt-image-2-2026-04-21` ignore this parameter.
      */
     input_fidelity?: 'high' | 'low' | null;
 
@@ -11094,6 +11393,12 @@ export namespace ResponseCreateParams {
     mode?: 'implicit' | 'explicit';
 
     /**
+     * Prepares the prompt cache without generating output. Defaults to `false`. When
+     * set to `true`, overrides the `generate` field to `false`.
+     */
+    prewarm?: boolean;
+
+    /**
      * The minimum lifetime applied to every implicit and explicit cache breakpoint
      * written by the request. Defaults to `30m`, which is currently the only supported
      * value. The backend may retain cache entries for longer.
@@ -11275,6 +11580,8 @@ export interface ResponseCompactParams {
     | 'gpt-4o-2024-11-20'
     | 'gpt-4o-2024-08-06'
     | 'gpt-4o-2024-05-13'
+    | 'gpt-audio-mini'
+    | 'gpt-audio-mini-2025-12-15'
     | 'gpt-4o-audio-preview'
     | 'gpt-4o-audio-preview-2024-10-01'
     | 'gpt-4o-audio-preview-2024-12-17'
@@ -11468,6 +11775,7 @@ export declare namespace Responses {
     type ResponseCodeInterpreterCallInProgressEvent as ResponseCodeInterpreterCallInProgressEvent,
     type ResponseCodeInterpreterCallInterpretingEvent as ResponseCodeInterpreterCallInterpretingEvent,
     type ResponseCodeInterpreterToolCall as ResponseCodeInterpreterToolCall,
+    type ResponseCompactionCompactingEvent as ResponseCompactionCompactingEvent,
     type ResponseCompactionItem as ResponseCompactionItem,
     type ResponseCompactionItemParam as ResponseCompactionItemParam,
     type ResponseCompletedEvent as ResponseCompletedEvent,

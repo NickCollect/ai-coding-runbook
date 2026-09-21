@@ -110,6 +110,7 @@ async function runExample(
   });
   server.on('connection', (socket, upgradeRequest) => {
     socket.on('message', (data) => {
+      // SAFETY: The local server receives serialized ResponsesClientEvent messages from the example under test and records them before returning fixture events.
       const request = JSON.parse(data.toString()) as ResponsesClientEvent;
       requests.push(request);
       const response = reply(request, requests.length);
@@ -223,6 +224,10 @@ test('completes all turns and closes normally without reporting an unfinished re
   expect(result.exitCode).toBe(0);
   expect(result.stderr).toBe('');
   expect(result.requests).toHaveLength(6);
+  for (const request of result.requests) {
+    expect(request).not.toHaveProperty('stream');
+    expect(request).not.toHaveProperty('background');
+  }
   expect(result.stdout.match(/Assistant: Synthetic answer/gu)).toHaveLength(3);
   expect(result.requests.map((request) => request.previous_response_id)).toEqual([
     null,

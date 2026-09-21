@@ -3,7 +3,7 @@ import type { promisify } from 'node:util';
 import type pAll from 'p-all';
 
 const packedPackageAcorn: {
-  parse: (source: string, options: { ecmaVersion: 2020; sourceType: 'module' }) => unknown;
+  parse: (source: string, options: { ecmaVersion: 2020; sourceType: 'module' }) => void;
 } = require(require.resolve('acorn', { paths: [require.resolve('ts-node/package.json')] }));
 const packedPackageAssert = require('node:assert/strict');
 const packedPackageChildProcess = require('node:child_process');
@@ -50,6 +50,13 @@ const packedPackagePath = require('node:path');
     'OAuthError',
     'SubjectTokenProviderError',
   ];
+  const paginationExportNames = [
+    'ConversationCursorPage',
+    'CursorPage',
+    'NextCursorPage',
+    'Page',
+    'TokenPage',
+  ];
   const run = (command: string, args: string[], options: RunOptions = {}): string =>
     childProcess.execFileSync(command, args, {
       cwd: temporaryDirectory,
@@ -66,9 +73,11 @@ const packedPackagePath = require('node:path');
     return stdout;
   };
   const readPackage = (file: string): PackageMetadata =>
+    // SAFETY: This reads the package manifest produced by the local pack step; the checks below validate its engine and peer metadata.
     JSON.parse(fs.readFileSync(file, 'utf-8')) as PackageMetadata;
   const findSourceMaps = (directory: string): string[] => {
     const maps: string[] = [];
+    // SAFETY: withFileTypes requests native Dirent entries; the dynamically required fs module does not retain that overload in its inferred type.
     const entries = fs.readdirSync(directory, { withFileTypes: true }) as Dirent[];
     for (const entry of entries) {
       const resolved = path.join(directory, entry.name);
@@ -119,6 +128,7 @@ const packedPackagePath = require('node:path');
       path.join(temporaryDirectory, 'consumer.cjs'),
       [
         "const OpenAI = require('openai');",
+        "const pagination = require('openai/core/pagination');",
         "const { bedrock } = require('openai/providers/bedrock');",
         "const auth = require('openai/auth');",
         "if (typeof OpenAI !== 'function') throw new Error('CommonJS default export is not constructable');",
@@ -127,6 +137,10 @@ const packedPackagePath = require('node:path');
           (name) =>
             `if (typeof auth.${name} !== 'function') throw new Error('CommonJS auth export ${name} is unavailable');`,
         ),
+        ...paginationExportNames.map(
+          (name) =>
+            `if (typeof OpenAI.${name} !== 'function' || OpenAI.${name} !== pagination.${name}) throw new Error('CommonJS pagination static ${name} does not match its public export');`,
+        ),
         "new OpenAI({ apiKey: 'test' });",
       ].join('\n'),
     );
@@ -134,6 +148,7 @@ const packedPackagePath = require('node:path');
       path.join(temporaryDirectory, 'consumer.mjs'),
       [
         "import OpenAI from 'openai';",
+        "import * as pagination from 'openai/core/pagination';",
         "import { bedrock } from 'openai/providers/bedrock';",
         `import { ${authExportNames.join(', ')} } from 'openai/auth';`,
         "if (typeof OpenAI !== 'function') throw new Error('ESM default export is not constructable');",
@@ -141,6 +156,10 @@ const packedPackagePath = require('node:path');
         ...authExportNames.map(
           (name) =>
             `if (typeof ${name} !== 'function') throw new Error('ESM auth export ${name} is unavailable');`,
+        ),
+        ...paginationExportNames.map(
+          (name) =>
+            `if (typeof OpenAI.${name} !== 'function' || OpenAI.${name} !== pagination.${name}) throw new Error('ESM pagination static ${name} does not match its public export');`,
         ),
         "new OpenAI({ apiKey: 'test' });",
       ].join('\n'),
@@ -335,7 +354,10 @@ const packedPackagePath = require('node:path');
     }
     assert(!fs.existsSync(optionalUndici), 'Importing public authentication helpers must not install Undici');
 
-    const privateX509Modules = [
+    const privateModules = [
+      'openai/internal/chat-completion-runner-state',
+      'openai/internal/chat-completion-runner-state.js',
+      'openai/internal/chat-completion-runner-state.mjs',
       'openai/internal/auth/x509-transport-capability',
       'openai/internal/auth/x509-transport-capability.js',
       'openai/internal/auth/x509-transport-capability.mjs',
@@ -354,7 +376,7 @@ const packedPackagePath = require('node:path');
       'openai/internal/auth/x509-transport-state-browser.js',
       'openai/internal/auth/x509-transport-state-browser.mjs',
     ];
-    const moduleNames = JSON.stringify(privateX509Modules);
+    const moduleNames = JSON.stringify(privateModules);
     run(process.execPath, [
       '--input-type=commonjs',
       '--eval',
@@ -366,12 +388,26 @@ const packedPackagePath = require('node:path');
       `for (const name of ${moduleNames}) { try { await import(name); throw new Error(name + ' is publicly accessible'); } catch (error) { if (error.code !== 'ERR_PACKAGE_PATH_NOT_EXPORTED') throw error; } }`,
     ]);
 
+    assert(
+      ['.js', '.mjs'].every(
+        (extension) =>
+          !fs.existsSync(
+            path.join(
+              temporaryDirectory,
+              `node_modules/openai/internal/chat-completion-runner-state${extension}`,
+            ),
+          ),
+      ),
+      'Tool-runner mode must not be emitted as a shared mutable module',
+    );
+
     const unsupportedDispatcher =
       'assert.throws(direct, /Undici 5\\.2\\.0 or later/u); assert.throws(httpConnect, /Undici 5\\.2\\.0 or later/u); assert.throws(httpsConnect, /Undici 5\\.2\\.0 or later/u);';
     const unsupportedProxy =
       'assert.doesNotThrow(direct); assert.throws(httpConnect, /CONNECT.*Undici 5\\.5\\.1 or later/u); assert.throws(httpsConnect, /CONNECT.*Undici 5\\.5\\.1 or later/u);';
     const supportedTransports =
       'assert.doesNotThrow(direct); assert.doesNotThrow(httpConnect); assert.doesNotThrow(httpsConnect);';
+    // SAFETY: The controlled certificate-fixture subprocess serializes exactly certificateChain and privateKey for this local packing test.
     const certificateFixture = JSON.parse(
       run(
         process.execPath,
@@ -510,6 +546,7 @@ const packedPackagePath = require('node:path');
     const sourceMaps = findSourceMaps(installedPackageRoot);
     sourceMaps.sort();
     for (const mapPath of sourceMaps) {
+      // SAFETY: These files are emitted source maps discovered in the built package; the validator checks their source paths and contents.
       const sourceMap = JSON.parse(fs.readFileSync(mapPath, 'utf-8')) as SourceMap;
       for (const source of sourceMap.sources) {
         const resolvedSource: string = path.resolve(

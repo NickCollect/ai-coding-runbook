@@ -75,6 +75,8 @@ export type ChatModel =
   | 'gpt-4o-2024-11-20'
   | 'gpt-4o-2024-08-06'
   | 'gpt-4o-2024-05-13'
+  | 'gpt-audio-mini'
+  | 'gpt-audio-mini-2025-12-15'
   | 'gpt-4o-audio-preview'
   | 'gpt-4o-audio-preview-2024-10-01'
   | 'gpt-4o-audio-preview-2024-12-17'
