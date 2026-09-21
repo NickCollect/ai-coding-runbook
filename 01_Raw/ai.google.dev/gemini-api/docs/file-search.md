@@ -1,30 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/file-search?hl=de
-fetched_at: 2026-09-14T05:43:45.639412+00:00
-title: "Dateisuche \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/file-search?hl=ja
+fetched_at: 2026-09-21T05:55:04.835313+00:00
+title: "\u30d5\u30a1\u30a4\u30eb\u691c\u7d22 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Feedback geben
+フィードバックを送信
 
-# Dateisuche
+# ファイル検索
 
-Die Gemini API ermöglicht Retrieval-Augmented Generation („RAG“) über das Tool „File Search“. Bei der Dateisuche werden Ihre Daten importiert, in Chunks aufgeteilt und indexiert, damit relevante Informationen auf Grundlage eines bereitgestellten Prompts schnell abgerufen werden können. Diese abgerufenen Informationen werden dann als Kontext für das Modell verwendet, damit es genauere und relevantere Antworten liefern kann. Die Dateisuche bietet auch multimodale Funktionen mit Texteinbettungen, die von `gemini-embedding-001` unterstützt werden, und Bild-/multimodalen Einbettungen, die von `gemini-embedding-2` unterstützt werden.
+Gemini API では、ファイル検索ツールを使用して検索拡張生成（RAG）が可能です。ファイル検索は、データをインポート、チャンク化、インデックス登録して、指定されたプロンプトに基づいて関連情報をすばやく取得できるようにします。取得した情報はモデルのコンテキストとして使用され、より正確で関連性の高い回答を提供できるようになります。ファイル検索では、`gemini-embedding-001` でサポートされているテキスト エンベディングと、`gemini-embedding-2` でサポートされている画像/マルチモーダル エンベディングを使用して、マルチモーダル機能を提供することもできます。
 
-Die Dateispeicherung und die Generierung von Einbettungen zur Abfragezeit sind kostenlos. Sie zahlen nur für das Erstellen von Einbettungen, wenn Sie Ihre Dateien zum ersten Mal indexieren, sowie für die normalen Kosten für Gemini-Modell-Ein- und Ausgabetokens. Dieses neue Abrechnungsmodell macht es einfacher und kostengünstiger, das Tool zur Dateisuche zu entwickeln und zu skalieren. Weitere Informationen finden Sie im Abschnitt zu [Preisen](#pricing).
+クエリ時のファイル ストレージとエンベディング生成は無料です。エンベディングの作成に対してのみ料金が発生します。これは、最初にファイルをインデックス登録するときと、通常の Gemini モデルの入力 / 出力トークンの費用です。この新しい課金パラダイムにより、ファイル検索ツールをより簡単に、費用対効果の高い方法で構築してスケーリングできます。詳細については、[料金](#pricing)セクションをご覧ください。
 
-## Direkt in den File Search-Speicher hochladen
+## ファイル検索ストアに直接アップロードする
 
-In diesem Beispiel wird gezeigt, wie Sie eine Datei direkt in den [Dateisuchspeicher](https://ai.google.dev/api/file-search/file-search-stores?hl=de#method:-media.uploadtofilesearchstore) hochladen:
+この例は、[ファイル検索ストア](https://ai.google.dev/api/file-search/file-search-stores?hl=ja#method:-media.uploadtofilesearchstore)にファイルを直接アップロードする方法を示しています。
 
 ### Python
 
@@ -55,7 +55,7 @@ while not operation.done:
     operation = client.operations.get(operation)
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="Can you tell me about [insert question]",
     tools=[{
         "type": "file_search",
@@ -104,7 +104,7 @@ async function run() {
   }
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: "Can you tell me about [insert question]",
     tools: [{
       type: "file_search",
@@ -132,6 +132,91 @@ async function run() {
 }
 
 run();
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Annotation;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.FileCitation;
+import com.google.genai.gaos.models.interactions.FileSearch;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.types.CreateFileSearchStoreConfig;
+import com.google.genai.types.FileSearchStore;
+import com.google.genai.types.UploadToFileSearchStoreConfig;
+import com.google.genai.types.UploadToFileSearchStoreOperation;
+import java.util.Arrays;
+
+Client client = new Client();
+
+FileSearchStore fileSearchStore =
+    client.fileSearchStores.create(
+        CreateFileSearchStoreConfig.builder()
+            .displayName("your-fileSearchStore-name")
+            .embeddingModel("models/gemini-embedding-2")
+            .build());
+
+UploadToFileSearchStoreOperation operation =
+    client.fileSearchStores.uploadToFileSearchStore(
+        fileSearchStore.name().get(),
+        "sample.txt",
+        UploadToFileSearchStoreConfig.builder().displayName("display-file-name").build());
+
+while (!operation.done().orElse(false)) {
+  Thread.sleep(5000);
+  operation = client.operations.get(operation, null);
+}
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("Can you tell me about [insert question]"))
+        .tools(
+            Arrays.asList(
+                FileSearch.builder()
+                    .fileSearchStoreNames(Arrays.asList(fileSearchStore.name().get()))
+                    .build()))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content contentBlock : outputStep.content().get()) {
+          if (contentBlock instanceof TextContent) {
+            TextContent textContent = (TextContent) contentBlock;
+            System.out.println(textContent.text().orElse(""));
+            if (textContent.annotations().isPresent()
+                && !textContent.annotations().get().isEmpty()) {
+              System.out.println("\nSources:");
+              for (Annotation annotation : textContent.annotations().get()) {
+                if (annotation instanceof FileCitation) {
+                  FileCitation citation = (FileCitation) annotation;
+                  System.out.printf(
+                      "  - %s: %s%n",
+                      citation.fileName().orElse(""), citation.source().orElse(""));
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
 ### REST
@@ -174,7 +259,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H "Content-Type: application/json" \
     -d '{
-      "model": "gemini-3.6-flash",
+      "model": "gemini-3.8-flash",
       "input": "Can you tell me about [insert question]",
       "tools": [{
         "type": "file_search",
@@ -183,11 +268,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-Weitere Informationen finden Sie in der API-Referenz für [`uploadToFileSearchStore`](https://ai.google.dev/api/file-search/file-search-stores?hl=de#method:-media.uploadtofilesearchstore).
+詳しくは、[`uploadToFileSearchStore`](https://ai.google.dev/api/file-search/file-search-stores?hl=ja#method:-media.uploadtofilesearchstore) の API リファレンスをご覧ください。
 
-## Dateien importieren
+## ファイルのインポート
 
-Alternativ können Sie eine vorhandene Datei hochladen und [in Ihren Dateispeicher für die Suche importieren](https://ai.google.dev/api/file-search/file-search-stores?hl=de#method:-filesearchstores.importfile):
+または、既存のファイルをアップロードして、[ファイル検索ストアにインポート](https://ai.google.dev/api/file-search/file-search-stores?hl=ja#method:-filesearchstores.importfile)することもできます。
 
 ### Python
 
@@ -217,7 +302,7 @@ while not operation.done:
     operation = client.operations.get(operation)
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="Can you tell me about [insert question]",
     tools=[{
         "type": "file_search",
@@ -263,7 +348,7 @@ async function run() {
   }
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: "Can you tell me about [insert question]",
     tools: [{
       type: "file_search",
@@ -283,6 +368,80 @@ async function run() {
 }
 
 run();
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.FileSearch;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.types.CreateFileSearchStoreConfig;
+import com.google.genai.types.File;
+import com.google.genai.types.FileSearchStore;
+import com.google.genai.types.ImportFileOperation;
+import com.google.genai.types.UploadFileConfig;
+import java.util.Arrays;
+
+Client client = new Client();
+
+File sampleFile =
+    client.files.upload(
+        "sample.txt", UploadFileConfig.builder().displayName("display_file_name").build());
+
+FileSearchStore fileSearchStore =
+    client.fileSearchStores.create(
+        CreateFileSearchStoreConfig.builder()
+            .displayName("your-fileSearchStore-name")
+            .embeddingModel("models/gemini-embedding-2")
+            .build());
+
+ImportFileOperation operation =
+    client.fileSearchStores.importFile(
+        fileSearchStore.name().get(), sampleFile.name().get(), null);
+
+while (!operation.done().orElse(false)) {
+  Thread.sleep(5000);
+  operation = client.operations.get(operation, null);
+}
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("Can you tell me about [insert question]"))
+        .tools(
+            Arrays.asList(
+                FileSearch.builder()
+                    .fileSearchStoreNames(Arrays.asList(fileSearchStore.name().get()))
+                    .build()))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content contentBlock : outputStep.content().get()) {
+          if (contentBlock instanceof TextContent) {
+            TextContent textContent = (TextContent) contentBlock;
+            System.out.println(textContent.text().orElse(""));
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
 ### REST
@@ -330,7 +489,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H "Content-Type: application/json" \
     -d '{
-      "model": "gemini-3.6-flash",
+      "model": "gemini-3.8-flash",
       "input": "Can you tell me about [insert question]",
       "tools": [{
         "type": "file_search",
@@ -339,11 +498,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-Weitere Informationen finden Sie in der API-Referenz für [`importFile`](https://ai.google.dev/api/file-search/file-search-stores?hl=de#method:-filesearchstores.importfile).
+詳しくは、[`importFile`](https://ai.google.dev/api/file-search/file-search-stores?hl=ja#method:-filesearchstores.importfile) の API リファレンスをご覧ください。
 
-## Konfiguration der Blockaufteilung
+## チャンク構成
 
-Wenn Sie eine Datei in einen File Search-Speicher importieren, wird sie automatisch in Chunks aufgeteilt, eingebettet, indexiert und in Ihren File Search-Speicher hochgeladen. Wenn Sie mehr Kontrolle über die Chunking-Strategie benötigen, können Sie die Einstellung [`chunking_config`](https://ai.google.dev/api/file-search/file-search-stores?hl=de#request-body_5) verwenden, um eine maximale Anzahl von Tokens pro Chunk und eine maximale Anzahl von sich überschneidenden Tokens festzulegen.
+ファイルをファイル検索ストアにインポートすると、ファイルは自動的にチャンクに分割され、埋め込み、インデックス登録され、ファイル検索ストアにアップロードされます。チャンク分割戦略をより詳細に制御する必要がある場合は、[`chunking_config`](https://ai.google.dev/api/file-search/file-search-stores?hl=ja#request-body_5) 設定を指定して、チャンクあたりの最大トークン数と重複するトークンの最大数を設定できます。
 
 ### Python
 
@@ -402,6 +561,41 @@ while (!operation.done) {
 console.log("Custom chunking complete.");
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.ChunkingConfig;
+import com.google.genai.types.UploadToFileSearchStoreConfig;
+import com.google.genai.types.UploadToFileSearchStoreOperation;
+import com.google.genai.types.WhiteSpaceConfig;
+
+Client client = new Client();
+
+UploadToFileSearchStoreOperation operation =
+    client.fileSearchStores.uploadToFileSearchStore(
+        "fileSearchStores/my-file-search-store",
+        "sample.txt",
+        UploadToFileSearchStoreConfig.builder()
+            .displayName("file-name")
+            .chunkingConfig(
+                ChunkingConfig.builder()
+                    .whiteSpaceConfig(
+                        WhiteSpaceConfig.builder()
+                            .maxTokensPerChunk(200)
+                            .maxOverlapTokens(20)
+                            .build())
+                    .build())
+            .build());
+
+while (!operation.done().orElse(false)) {
+  Thread.sleep(5000);
+  operation = client.operations.get(operation, null);
+}
+
+System.out.println("Custom chunking complete.");
+```
+
 ### REST
 
 ```
@@ -435,35 +629,33 @@ curl "${upload_url}" \
 cat upload_response.json
 ```
 
-Wenn Sie Ihren File Search-Speicher verwenden möchten, übergeben Sie ihn als Tool an die `interactions.create`-Methode, wie in den Beispielen [Upload](#upload) und [Import](#importing-files) gezeigt.
+ファイル検索ストアを使用するには、[アップロード](#upload)と[インポート](#importing-files)の例に示すように、ツールとして `interactions.create` メソッドに渡します。
 
-## Funktionsweise
+## 仕組み
 
-Bei der Dateisuche wird ein Verfahren namens „semantische Suche“ verwendet, um Informationen zu finden, die für den Nutzer-Prompt relevant sind. Im Gegensatz zur standardmäßigen stichwortbasierten Suche werden bei der semantischen Suche die Bedeutung und der Kontext Ihrer Anfrage berücksichtigt.
+ファイル検索では、セマンティック検索と呼ばれる手法を使用して、ユーザーのプロンプトに関連する情報を見つけます。標準的なキーワード ベースの検索とは異なり、セマンティック検索はクエリの意味とコンテキストを理解します。
 
-Wenn Sie eine Datei importieren, wird sie in numerische Darstellungen umgewandelt, die als [Einbettungen](https://ai.google.dev/gemini-api/docs/embeddings?hl=de) bezeichnet werden und die semantische Bedeutung der hochgeladenen Inhalte erfassen. Diese Einbettungen werden in einer speziellen File Search-Datenbank gespeichert.
-Wenn Sie eine Anfrage stellen, wird diese ebenfalls in eine Einbettung umgewandelt. Anschließend führt das System eine Dateisuche durch, um die ähnlichsten und relevantesten Dokument-Chunks aus dem Dateisuchspeicher zu finden.
+ファイルをインポートすると、アップロードされたコンテンツのセマンティックな意味を捉えた[エンベディング](https://ai.google.dev/gemini-api/docs/embeddings?hl=ja)と呼ばれる数値表現に変換されます。これらのエンベディングは、専用のファイル検索データベースに保存されます。クエリを行うと、クエリもエンベディングに変換されます。次に、システムはファイル検索を実行して、ファイル検索ストアから最も類似した関連性の高いドキュメント チャンクを見つけます。
 
-Für Einbettungen gibt es keine Gültigkeitsdauer (Time To Live, TTL). Sie bleiben erhalten, bis sie manuell gelöscht werden oder das Modell eingestellt wird. Dateien werden jedoch nach 48 Stunden gelöscht.
+エンベディングには有効期間（TTL）はありません。手動で削除されるか、モデルが非推奨になるまで保持されます。ただし、ファイルは 48 時間後に削除されます。
 
-So verwenden Sie die File Search `uploadToFileSearchStore` API:
+ファイル検索 `uploadToFileSearchStore` API を使用する手順は次のとおりです。
 
-1. **File Search-Speicher erstellen**: Ein File Search-Speicher enthält die verarbeiteten Daten aus Ihren Dateien. Er ist der persistente Container für die Einbettungen, auf denen die semantische Suche basiert.
-2. **Datei hochladen und in einen File Search-Speicher importieren**: Sie können gleichzeitig eine Datei hochladen und die Ergebnisse in Ihren File Search-Speicher importieren. Dadurch wird ein temporäres `File`-Objekt erstellt, das eine Referenz zu Ihrem Rohdokument ist. Diese Daten werden dann in Chunks aufgeteilt, in File Search-Einbettungen umgewandelt und indexiert. Das `File`-Objekt wird nach 48 Stunden gelöscht. Die in den File Search-Speicher importierten Daten werden dagegen auf unbestimmte Zeit gespeichert, bis Sie sie löschen.
-3. **Abfrage mit der Dateisuche**: Schließlich verwenden Sie das Tool `FileSearch` in einem `generateContent`-Aufruf. In der Toolkonfiguration geben Sie einen `FileSearchRetrievalResource` an, der auf die `FileSearchStore` verweist, die Sie durchsuchen möchten. Dadurch wird das Modell angewiesen, eine semantische Suche in diesem bestimmten File Search-Speicher durchzuführen, um relevante Informationen für die Fundierung der Antwort zu finden.
+1. **ファイル検索ストアを作成する**: ファイル検索ストアには、ファイルから処理されたデータが含まれます。これは、セマンティック検索が動作するエンベディングの永続コンテナです。
+2. **ファイルをアップロードしてファイル検索ストアにインポートする**: ファイルをアップロードすると同時に、結果をファイル検索ストアにインポートします。これにより、未加工ドキュメントへの参照である一時的な `File` オブジェクトが作成されます。このデータはチャンク化され、ファイル検索エンベディングに変換されて、インデックスが作成されます。`File` オブジェクトは 48 時間後に削除されますが、ファイル検索ストアにインポートされたデータは、削除するまで無期限に保存されます。
+3. **ファイル検索でクエリを実行する**: 最後に、`generateContent` 呼び出しで `FileSearch` ツールを使用します。ツール構成で、検索する `FileSearchStore` を指す `FileSearchRetrievalResource` を指定します。これにより、モデルは特定のファイル検索ストアに対してセマンティック検索を実行し、回答のグラウンディングに関連する情報を検索します。
 
-![Indexierungs- und Abfrageprozess der Dateisuche](https://ai.google.dev/static/gemini-api/docs/images/File-search.png?hl=de)
+![ファイル検索のインデックス登録とクエリのプロセス](https://ai.google.dev/static/gemini-api/docs/images/File-search.png?hl=ja)
 
-Indexierungs- und Abfrageprozess der Dateisuche
+ファイル検索のインデックス登録とクエリのプロセス
 
-Im Diagramm stellt die gepunktete Linie von *Dokumente* zu *Einbettungsmodell* (mit [`gemini-embedding-001`](https://ai.google.dev/gemini-api/docs/embeddings?hl=de)) die `uploadToFileSearchStore` API dar (*Dateispeicher* wird umgangen).
-Andernfalls wird der Indexierungsprozess durch die separate Erstellung und den anschließenden Import von Dateien mit der [Files API](https://ai.google.dev/gemini-api/docs/files?hl=de) von *Dokumente* zu *Dateispeicher* und dann zu *Einbettungsmodell* verschoben.
+この図では、*ドキュメント*から*エンベディング モデル*（[`gemini-embedding-001`](https://ai.google.dev/gemini-api/docs/embeddings?hl=ja) を使用）への点線は、`uploadToFileSearchStore` API（*ファイル ストレージ*をバイパス）を表しています。それ以外の場合、[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja) を使用してファイルを個別に作成してからインポートすると、インデックス登録プロセスが *Documents* から *File storage* に移動し、*Embedding model* に移動します。
 
-## Dateispeicher
+## ファイル検索ストア
 
-Ein File Search-Speicher ist ein Container für Ihre Dokumenteinbettungen. Rohdateien, die über die File API hochgeladen werden, werden nach 48 Stunden gelöscht. Die in einem File Search-Speicher importierten Daten werden jedoch auf unbestimmte Zeit gespeichert, bis Sie sie manuell löschen. Sie können mehrere File Search-Speicher erstellen, um Ihre Dokumente zu organisieren. Mit der `FileSearchStore` API können Sie Ihre Dateisuchspeicher erstellen, auflisten, abrufen und löschen. Die Namen von File Search-Speichern sind global.
+ファイル検索ストアは、ドキュメント エンベディングのコンテナです。File API を介してアップロードされた未加工ファイルは 48 時間後に削除されますが、ファイル検索ストアにインポートされたデータは、手動で削除するまで無期限に保存されます。複数のファイル検索ストアを作成して、ドキュメントを整理できます。`FileSearchStore` API を使用すると、ファイル検索ストアの作成、一覧表示、取得、削除を行って管理できます。ファイル検索ストア名はグローバル スコープです。
 
-Hier sind einige Beispiele für die Verwaltung Ihrer File Search-Speicher:
+ファイル検索ストアの管理方法の例を次に示します。
 
 ### Python
 
@@ -508,6 +700,34 @@ await ai.fileSearchStores.delete({
 });
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.CreateFileSearchStoreConfig;
+import com.google.genai.types.DeleteFileSearchStoreConfig;
+import com.google.genai.types.FileSearchStore;
+
+Client client = new Client();
+
+FileSearchStore fileSearchStore =
+    client.fileSearchStores.create(
+        CreateFileSearchStoreConfig.builder()
+            .displayName("myfilesearchstore123")
+            .embeddingModel("models/gemini-embedding-2")
+            .build());
+
+for (FileSearchStore store : client.fileSearchStores.list(null)) {
+  System.out.println(store);
+}
+
+FileSearchStore myFileSearchStore =
+    client.fileSearchStores.get(fileSearchStore.name().get(), null);
+
+client.fileSearchStores.delete(
+    fileSearchStore.name().get(), DeleteFileSearchStoreConfig.builder().force(true).build());
+```
+
 ### REST
 
 ```
@@ -522,9 +742,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilese
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilesearchstore123?key=${GEMINI_API_KEY}"
 ```
 
-## Dokumente für die Dateisuche
+## ファイル検索のドキュメント
 
-Mit der API [File Search Documents](https://ai.google.dev/api/file-search/documents?hl=de) können Sie einzelne Dokumente in Ihren Dateispeichern verwalten. Sie können `list` jedes Dokument in einem Dateisuchspeicher, `get` Informationen zu einem Dokument und `delete` ein Dokument nach Namen.
+[ファイル検索ドキュメント](https://ai.google.dev/api/file-search/documents?hl=ja) API を使用して、ファイル ストア内の個々のドキュメントを管理できます。この API を使用すると、ファイル検索ストア内の各ドキュメントの `list`、ドキュメントに関する情報の `get`、名前によるドキュメントの `delete` を行うことができます。
 
 ### Python
 
@@ -558,6 +778,30 @@ await ai.fileSearchStores.documents.delete({
 });
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.DeleteDocumentConfig;
+import com.google.genai.types.Document;
+
+Client client = new Client();
+
+for (Document documentInStore :
+    client.fileSearchStores.documents.list("fileSearchStores/myfilesearchstore123", null)) {
+  System.out.println(documentInStore);
+}
+
+Document fileSearchDocument =
+    client.fileSearchStores.documents.get(
+        "fileSearchStores/myfilesearchstore123/documents/sampletxt123", null);
+System.out.println(fileSearchDocument);
+
+client.fileSearchStores.documents.delete(
+    "fileSearchStores/myfilesearchstore123/documents/sampletxt123",
+    DeleteDocumentConfig.builder().force(true).build());
+```
+
 ### REST
 
 ```
@@ -568,9 +812,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilese
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilesearchstore123/documents/sampletxt123?key=${GEMINI_API_KEY}&force=true"
 ```
 
-## Dateimetadaten
+## ファイルのメタデータ
 
-Sie können Ihren Dateien benutzerdefinierte Metadaten hinzufügen, um sie zu filtern oder zusätzlichen Kontext bereitzustellen. Metadaten sind eine Reihe von Schlüssel/Wert-Paaren.
+ファイルにカスタム メタデータを追加すると、ファイルをフィルタしたり、追加のコンテキストを提供したりするのに役立ちます。メタデータは Key-Value ペアのセットです。
 
 ### Python
 
@@ -602,13 +846,36 @@ let operation = await ai.fileSearchStores.importFile({
 });
 ```
 
-Das ist nützlich, wenn Sie mehrere Dokumente in einem Dateisuchspeicher haben und nur in einer Teilmenge davon suchen möchten.
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.CustomMetadata;
+import com.google.genai.types.ImportFileConfig;
+import com.google.genai.types.ImportFileOperation;
+import java.util.Arrays;
+
+Client client = new Client();
+
+ImportFileOperation op =
+    client.fileSearchStores.importFile(
+        "fileSearchStores/myfilesearchstore123",
+        "files/samplefile123",
+        ImportFileConfig.builder()
+            .customMetadata(
+                Arrays.asList(
+                    CustomMetadata.builder().key("author").stringValue("Robert Graves").build(),
+                    CustomMetadata.builder().key("year").numericValue(1934f).build()))
+            .build());
+```
+
+これは、ファイル検索ストアに複数のドキュメントがあり、そのサブセットのみを検索する場合に便利です。
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="Tell me about the book 'I, Claudius'",
     tools=[{
         "type": "file_search",
@@ -628,7 +895,7 @@ for step in interaction.steps:
 
 ```
 const interaction = await ai.interactions.create({
-  model: "gemini-3.6-flash",
+  model: "gemini-3.8-flash",
   input: "Tell me about the book 'I, Claudius'",
   tools: [{
     type: "file_search",
@@ -648,6 +915,56 @@ for (const step of interaction.steps) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.FileSearch;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("Tell me about the book 'I, Claudius'"))
+        .tools(
+            Arrays.asList(
+                FileSearch.builder()
+                    .fileSearchStoreNames(Arrays.asList("fileSearchStores/myfilesearchstore123"))
+                    .metadataFilter("author=\"Robert Graves\"")
+                    .build()))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content contentBlock : outputStep.content().get()) {
+          if (contentBlock instanceof TextContent) {
+            TextContent textContent = (TextContent) contentBlock;
+            System.out.println(textContent.text().orElse(""));
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 ### REST
 
 ```
@@ -656,7 +973,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H 'Content-Type: application/json' \
     -X POST \
     -d '{
-            "model": "gemini-3.6-flash",
+            "model": "gemini-3.8-flash",
             "input": [{"type": "text", "text": "Tell me about the book I, Claudius"}],
             "tools": [{
                 "type": "file_search",
@@ -668,15 +985,15 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
 cat response.json
 ```
 
-Eine Anleitung zur Implementierung der Listenfiltersyntax für `metadata_filter` finden Sie unter [google.aip.dev/160](https://google.aip.dev/160).
+`metadata_filter` のリストフィルタ構文の実装に関するガイダンスについては、[google.aip.dev/160](https://google.aip.dev/160) をご覧ください。
 
-## Multimodale Dateisuche
+## マルチモーダル ファイル検索
 
-Mit der multimodalen Dateisuche können Sie Bilder nativ einbetten und durchsuchen, was umfangreiche, multimodale RAG-Anwendungen ermöglicht.
+マルチモーダル ファイル検索を使用すると、画像をネイティブに埋め込んで検索できるため、リッチなマルチモーダル RAG アプリケーションを構築できます。
 
-### Einbettungsmodell konfigurieren
+### エンベディング モデルを構成する
 
-Wenn Sie ein `FileSearchStore` erstellen, müssen Sie das Standardmodell für Nur-Text-Einbettungen überschreiben, um ein multimodales Modell zu verwenden. Mit `models/gemini-embedding-2` können sowohl Text als auch Bilder verarbeitet werden.
+`FileSearchStore` を作成する場合は、デフォルトのテキストのみのエンベディング モデルをオーバーライドして、マルチモーダル モデルを使用する必要があります。`models/gemini-embedding-2` を使用して、テキストと画像の両方を処理します。
 
 ### Python
 
@@ -700,6 +1017,23 @@ const fileSearchStore = await ai.fileSearchStores.create({
 });
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.CreateFileSearchStoreConfig;
+import com.google.genai.types.FileSearchStore;
+
+Client client = new Client();
+
+FileSearchStore store =
+    client.fileSearchStores.create(
+        CreateFileSearchStoreConfig.builder()
+            .displayName("Multimodal Catalog")
+            .embeddingModel("models/gemini-embedding-2")
+            .build());
+```
+
 ### REST
 
 ```
@@ -711,20 +1045,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/fileSearchStores?
     }'
 ```
 
-### Bilder hochladen
+### 画像のアップロード
 
-Nachdem Sie den Speicher mit einem multimodalen Einbettungsmodell erstellt haben, können Sie Bilddateien direkt mit denselben Upload-APIs hochladen, die unter [Direkt in File Search-Speicher hochladen](#upload) oder [Dateien importieren](#importing-files) beschrieben werden.
+マルチモーダル エンベディング モデルを使用してストアを作成したら、[ファイル検索ストアに直接アップロードする](#upload)または[ファイルのインポート](#importing-files)で説明されている同じアップロード API を使用して、画像ファイルを直接アップロードできます。
 
-**Anforderungen an Bilddateien**:
+**画像ファイルの要件:**
 
-- Bilddateien dürfen maximal 4K × 4K Pixel groß sein.
-- Unterstützte Formate sind PNG und JPEG.
+- 画像ファイルの解像度は 4K x 4K ピクセル以下にする必要があります。
+- サポートされている形式は PNG、JPEG です。
 
-## Zitationen
+## 引用
 
-Wenn Sie die Dateisuche verwenden, kann die Antwort des Modells Zitationen enthalten, in denen angegeben wird, welche Teile Ihrer hochgeladenen Dokumente zum Generieren der Antwort verwendet wurden. Das hilft bei Faktenchecks und der Überprüfung.
+ファイル検索を使用すると、モデルの回答に、アップロードしたドキュメントのどの部分が回答の生成に使用されたかを指定する引用が含まれることがあります。これはファクト チェックと検証に役立ちます。
 
-Sie können über das Attribut `annotations` in den `content`-Blöcken des Schritts `model_output` der Antwort auf Zitationsinformationen zugreifen.
+引用情報には、レスポンスの `model_output` ステップの `content` ブロック内の `annotations` 属性を介してアクセスできます。
 
 ### Python
 
@@ -744,6 +1078,57 @@ for (const step of interaction.steps) {
     for (const contentBlock of step.content) {
       if (contentBlock.type === 'text' && contentBlock.annotations) {
         console.log(JSON.stringify(contentBlock.annotations, null, 2));
+      }
+    }
+  }
+}
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.FileSearch;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("Can you tell me about [insert question]"))
+        .tools(
+            Arrays.asList(
+                FileSearch.builder()
+                    .fileSearchStoreNames(Arrays.asList("fileSearchStores/myfilesearchstore123"))
+                    .build()))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content content : outputStep.content().get()) {
+          if (content instanceof TextContent) {
+            TextContent textContent = (TextContent) content;
+            if (textContent.annotations().isPresent()) {
+              System.out.println(textContent.annotations().get());
+            }
+          }
+        }
       }
     }
   }
@@ -775,12 +1160,11 @@ for (const step of interaction.steps) {
 }
 ```
 
-Ausführliche Informationen zur Struktur der Zitationen finden Sie in der [API-Referenz für Interaktionen](https://ai.google.dev/api/interactions-api?hl=de#Resource:FileCitation).
+引用の構造の詳細については、[インタラクションの API リファレンス](https://ai.google.dev/api/interactions-api?hl=ja#Resource:FileCitation)をご覧ください。
 
-### Seitennummern
+### ページ番号
 
-Wenn Sie die Dateisuche mit Dokumenten verwenden, die Seiten haben (z. B. PDFs), kann die Antwort des Modells die Seitenzahl enthalten, auf der die Informationen gefunden wurden.
-Sie können über das Attribut `page_number` einer `file_citation`-Annotation auf diese Informationen zugreifen.
+ページがあるドキュメント（PDF など）でファイル検索を使用すると、モデルの回答に情報が見つかったページ番号が含まれることがあります。この情報には、`file_citation` アノテーションの `page_number` 属性からアクセスできます。
 
 ### Python
 
@@ -804,6 +1188,66 @@ for (const step of interaction.steps) {
         for (const annotation of block.annotations) {
           if (annotation.type === 'file_citation' && annotation.pageNumber) {
             console.log(`Cited Page: ${annotation.pageNumber}`);
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Annotation;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.FileCitation;
+import com.google.genai.gaos.models.interactions.FileSearch;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("Can you tell me about [insert question]"))
+        .tools(
+            Arrays.asList(
+                FileSearch.builder()
+                    .fileSearchStoreNames(Arrays.asList("fileSearchStores/myfilesearchstore123"))
+                    .build()))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content content : outputStep.content().get()) {
+          if (content instanceof TextContent) {
+            TextContent textContent = (TextContent) content;
+            if (textContent.annotations().isPresent()) {
+              for (Annotation annotation : textContent.annotations().get()) {
+                if (annotation instanceof FileCitation) {
+                  FileCitation citation = (FileCitation) annotation;
+                  if (citation.pageNumber().isPresent()) {
+                    System.out.println("Cited Page: " + citation.pageNumber().get());
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -838,11 +1282,11 @@ for (const step of interaction.steps) {
 }
 ```
 
-### Quellenangaben für Medien
+### メディアでの引用
 
-Wenn das Modell während der Generierung auf einen Bild-Chunk verweist, gibt die API in den Anmerkungen eine Anmerkung vom Typ `file_citation` zurück, die ein `media_id` enthält. Mit dieser ID können Sie den genauen Bildausschnitt herunterladen, auf den sich das Modell bezogen hat. Diese `media_id` ist über mehrere Suchaufrufe hinweg persistent. So können Sie dasselbe Bild zuverlässig abrufen oder mithilfe der ID im Cache speichern.
+モデルが生成中に画像チャンクを参照すると、API は `media_id` を含むアノテーションで `file_citation` 型のアノテーションを返します。この ID を使用して、モデルが参照した正確な画像チャンクをダウンロードできます。この `media_id` は複数の検索呼び出しにわたって永続化されるため、ID を使用して同じ画像を確実に取得したり、キャッシュに保存したりできます。
 
-Das folgende Snippet ist ein Beispiel für einen REST-Antwortschritt:
+次のスニペットは、REST レスポンス ステップの例です。
 
 ```
 {
@@ -863,7 +1307,7 @@ Das folgende Snippet ist ein Beispiel für einen REST-Antwortschritt:
 }
 ```
 
-Die folgenden Code-Snippets zeigen, wie Sie die `media_id` abrufen und die Medien herunterladen:
+次のコード スニペットは、`media_id` を取得してメディアをダウンロードする方法を示しています。
 
 ### Python
 
@@ -899,6 +1343,68 @@ for (const step of interaction.steps) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Annotation;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.FileCitation;
+import com.google.genai.gaos.models.interactions.FileSearch;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("Can you tell me about [insert question]"))
+        .tools(
+            Arrays.asList(
+                FileSearch.builder()
+                    .fileSearchStoreNames(Arrays.asList("fileSearchStores/myfilesearchstore123"))
+                    .build()))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content content : outputStep.content().get()) {
+          if (content instanceof TextContent) {
+            TextContent textContent = (TextContent) content;
+            if (textContent.annotations().isPresent()) {
+              for (Annotation annotation : textContent.annotations().get()) {
+                if (annotation instanceof FileCitation) {
+                  FileCitation citation = (FileCitation) annotation;
+                  if (citation.mediaId().isPresent()) {
+                    System.out.println("Cited Media ID: " + citation.mediaId().get());
+                    byte[] blobContent =
+                        client.fileSearchStores.downloadMedia(citation.mediaId().get(), null);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 ### REST
 
 ```
@@ -906,15 +1412,15 @@ curl -X GET "https://generativelanguage.googleapis.com/v1/fileSearchStores/my-st
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Benutzerdefinierte Metadaten
+## カスタム メタデータ
 
-Wenn Sie Ihren Dateien benutzerdefinierte Metadaten hinzugefügt haben, können Sie in den Anmerkungen der Antwort des Modells darauf zugreifen. Das ist nützlich, um zusätzlichen Kontext (z. B. URLs, Seitenzahlen oder Autoren) aus Ihren Quelldokumenten an Ihre Anwendungslogik zu übergeben. Jede Zitationsanmerkung vom Typ `file_citation` enthält diese benutzerdefinierten Metadaten.
+ファイルにカスタム メタデータを追加した場合は、モデルのレスポンスのアノテーションでアクセスできます。これは、ソースドキュメントからアプリケーション ロジックに追加のコンテキスト（URL、ページ番号、著者など）を渡す場合に便利です。`file_citation` タイプの各引用アノテーションには、このカスタム メタデータが含まれます。
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="Tell me about [insert question]",
     tools=[{
         "type": "file_search",
@@ -934,7 +1440,7 @@ for step in interaction.steps:
 
 ```
 const interaction = await ai.interactions.create({
-  model: "gemini-3.6-flash",
+  model: "gemini-3.8-flash",
   input: "Tell me about [insert question]",
   tools: [{
     type: "file_search",
@@ -949,6 +1455,60 @@ for (const step of interaction.steps) {
         contentBlock.annotations.forEach((annotation) => {
           console.log(annotation);
         });
+      }
+    }
+  }
+}
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Annotation;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.FileSearch;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("Tell me about [insert question]"))
+        .tools(
+            Arrays.asList(
+                FileSearch.builder()
+                    .fileSearchStoreNames(Arrays.asList("fileSearchStores/myfilesearchstore123"))
+                    .build()))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content contentBlock : outputStep.content().get()) {
+          if (contentBlock instanceof TextContent) {
+            TextContent textContent = (TextContent) contentBlock;
+            if (textContent.annotations().isPresent()) {
+              for (Annotation annotation : textContent.annotations().get()) {
+                System.out.println(annotation);
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -989,9 +1549,9 @@ for (const step of interaction.steps) {
 }
 ```
 
-## Strukturierte Ausgabe
+## 構造化出力
 
-Ab Gemini 3-Modellen können Sie das Tool zur Dateisuche mit [strukturierten Ausgaben](https://ai.google.dev/gemini-api/docs/structured-output?hl=de) kombinieren.
+Gemini 3 モデル以降では、ファイル検索ツールと[構造化された出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)を組み合わせることができます。
 
 ### Python
 
@@ -1003,7 +1563,7 @@ class Money(BaseModel):
     currency: str = Field(description="The currency of amount.")
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="What is the minimum hourly wage in Tokyo right now?",
     tools=[{
         "type": "file_search",
@@ -1037,7 +1597,7 @@ const moneySchema = z.fromJSONSchema(moneyJsonSchema);
 
 async function run() {
   const interaction = await ai.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: "What is the minimum hourly wage in Tokyo right now?",
     tools: [{
       type: "file_search",
@@ -1057,6 +1617,69 @@ async function run() {
 run();
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.FileSearch;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.interactions.TextResponseFormat;
+import com.google.genai.gaos.models.interactions.TextResponseFormatMimeType;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+Client client = new Client();
+
+Map<String, Object> properties = new HashMap<>();
+
+Map<String, Object> amountProp = new HashMap<>();
+amountProp.put("type", "string");
+amountProp.put("description", "The numerical part of the amount.");
+properties.put("amount", amountProp);
+
+Map<String, Object> currencyProp = new HashMap<>();
+currencyProp.put("type", "string");
+currencyProp.put("description", "The currency of amount.");
+properties.put("currency", currencyProp);
+
+Map<String, Object> moneyJsonSchema = new HashMap<>();
+moneyJsonSchema.put("type", "object");
+moneyJsonSchema.put("properties", properties);
+moneyJsonSchema.put("required", Arrays.asList("amount", "currency"));
+
+CreateModelInteractionResponseFormat format =
+    CreateModelInteractionResponseFormat.of(
+        ResponseFormat.of(
+            TextResponseFormat.builder()
+                .mimeType(TextResponseFormatMimeType.APPLICATION_JSON)
+                .schema(moneyJsonSchema)
+                .build()));
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("What is the minimum hourly wage in Tokyo right now?"))
+        .tools(
+            Arrays.asList(
+                FileSearch.builder()
+                    .fileSearchStoreNames(Arrays.asList("fileSearchStores/myfilesearchstore123"))
+                    .build()))
+        .responseFormat(format)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -1065,7 +1688,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H 'Content-Type: application/json' \
   -X POST \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": "What is the minimum hourly wage in Tokyo right now?",
     "tools": [{
       "type": "file_search",
@@ -1086,24 +1709,26 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Unterstützte Modelle
+## サポートされているモデル
 
-Die folgenden Modelle unterstützen die Dateisuche:
+次のモデルはファイル検索をサポートしています。
 
-| Modell | Dateisuche |
+| モデル | ファイル検索 |
 | --- | --- |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=de) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=de) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=de) | ✔️ |
-| [Gemini 3.1 Pro (Vorabversion)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=de) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=de) | ✔️ |
-| [Gemini 3 Flash (Vorabversion)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=de) | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=ja) | ✔️ |
+| [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=ja) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=ja) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=ja) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ja) | ✔️ |
+| [Gemini 3.1 Pro プレビュー版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ja) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ja) | ✔️ |
+| [Gemini 3 Flash プレビュー](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ja) | ✔️ |
 
-## Unterstützte Dateitypen
+## サポートされているファイル形式
 
-Die Dateisuche unterstützt eine Vielzahl von Dateiformaten, die in den folgenden Abschnitten aufgeführt sind.
+ファイル検索は、次のセクションに記載されている幅広いファイル形式をサポートしています。
 
-### Anwendungsdateitypen
+### アプリケーション ファイルの種類
 
 - `application/dart`
 - `application/ecmascript`
@@ -1136,7 +1761,7 @@ Die Dateisuche unterstützt eine Vielzahl von Dateiformaten, die in den folgende
 - `application/xml`
 - `application/zip`
 
-### Textdateitypen
+### テキスト ファイル形式
 
 - `text/1d-interleaved-parityfec`
 - `text/RED`
@@ -1295,40 +1920,40 @@ Die Dateisuche unterstützt eine Vielzahl von Dateiformaten, die in den folgende
 - `text/xml-external-parsed-entity`
 - `text/yaml`
 
-## Beschränkungen
+## 制限事項
 
-- **Live API**:Die Dateisuche wird in der [Live API](https://ai.google.dev/gemini-api/docs/live?hl=de) nicht unterstützt.
-- **Inkompatibilität von Tools**:Integrierte Fundierungstools können nicht miteinander kombiniert werden. So kann beispielsweise die Dateisuche nicht gleichzeitig mit [Fundierung mit der Google Suche](https://ai.google.dev/gemini-api/docs/google-search?hl=de) oder [URL Context](https://ai.google.dev/gemini-api/docs/url-context?hl=de) in derselben Anfrage verwendet werden.
+- **Live API:** [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ja) ではファイル検索は対象外です。
+- **ツールの互換性がない:** 組み込みのグラウンディング ツールを組み合わせることはできません。たとえば、同じリクエストでファイル検索を [Google 検索によるグラウンディング](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)や [URL コンテキスト](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)と同時に使用することはできません。
 
-### Ratenlimits
+### レート上限
 
-Die File Search API unterliegt den folgenden Einschränkungen, um die Stabilität des Dienstes zu gewährleisten:
+File Search API には、サービスの安定性を維持するため、次の制限が適用されます。
 
-- **Maximale Dateigröße / Beschränkung pro Dokument**: 100 MB
-- **Gesamtgröße der von der Projektsuche gespeicherten Dateien** (basierend auf der Nutzerstufe):
-  - **Kostenlos**: 1 GB
-  - **Stufe 1**: 10 GB
-  - **Stufe 2**: 100 GB
-  - **Stufe 3**: 1 TB
-- **Empfehlung**: Beschränken Sie die Größe jedes File Search-Speichers auf unter 20 GB, um optimale Abruflatenzen zu erzielen.
+- **最大ファイルサイズ / ドキュメントあたりの上限**: 100 MB
+- **プロジェクト ファイル検索ストアの合計サイズ**（ユーザーの階層に基づく）:
+  - **無料**: 1 GB
+  - **Tier 1**: 10 GB
+  - **Tier 2**: 100 GB
+  - **Tier 3**: 1 TB
+- **推奨事項**: 最適な取得レイテンシを確保するため、各ファイル検索ストアのサイズを 20 GB 未満に制限します。
 
-## Preise
+## 料金
 
-- Die Kosten für Einbettungen werden Ihnen zum Zeitpunkt der Indexierung gemäß den bestehenden [Preisen für Einbettungen](https://ai.google.dev/gemini-api/docs/pricing?hl=de#gemini-embedding-2) in Rechnung gestellt.
-- Die Speicherung ist kostenlos.
-- Einbettungen zur Abfragezeit sind kostenlos.
-- Abgerufene Dokument-Tokens werden als reguläre [Kontext-Tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=de) abgerechnet.
+- エンベディングの料金は、既存の[エンベディングの料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#gemini-embedding-2)に基づいて、インデックス登録時に請求されます。
+- ストレージは無料です。
+- クエリタイム エンベディングは無料です。
+- 取得したドキュメント トークンは、通常の[コンテキスト トークン](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)として課金されます。
 
-## Nächste Schritte
+## 次のステップ
 
-- [API-Referenz für File Search Stores](https://ai.google.dev/api/file-search/file-search-stores?hl=de) und [File Search Documents](https://ai.google.dev/api/file-search/documents?hl=de)
+- [ファイル検索ストア](https://ai.google.dev/api/file-search/file-search-stores?hl=ja)とファイル検索[ドキュメント](https://ai.google.dev/api/file-search/documents?hl=ja)の API リファレンスをご覧ください。
 
-Feedback geben
+フィードバックを送信
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Zuletzt aktualisiert: 2026-09-12 (UTC).
+最終更新日 2026-09-18 UTC。
 
-Haben Sie Feedback für uns?
+ご意見をお聞かせください
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-12 (UTC)."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-18 UTC。"],[],[]]

@@ -1,413 +1,312 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models?hl=pt-BR
-fetched_at: 2026-09-14T05:53:28.912512+00:00
-title: "Modelos \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models?hl=ja
+fetched_at: 2026-09-21T05:50:30.847593+00:00
+title: "\u30e2\u30c7\u30eb \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Envie comentários
+フィードバックを送信
 
-# Modelos
+# モデル
 
-Este guia apresenta todos os modelos disponíveis na API Gemini.
+このガイドでは、Gemini API で使用可能なすべてのモデルを紹介します。
 
 ---
 
 ## Gemini 3
 
-### Estável
+### Stable
 
+[spark
+
+### Gemini 3.8 Flash
+
+長期的なソフトウェア エンジニアリング、自律型エージェント、複雑なエンタープライズ ワークフロー向けに設計された、Google 史上最もインテリジェントな Flash モデル。
+
+新機能 安定版](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=ja)
+[settings\_voice
+
+### Gemini 3.8 Live
+
+推論の遅延のない、低レイテンシの音声エージェント エクスペリエンスのほとんどのデフォルトの Live API モデル。
+
+新機能 安定版](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=ja)
+[psychology
+
+### Gemini 3.8 Live Extended Thinking
+
+音声インタラクション用の高推論 Live API モデル。高度なバックグラウンド推論が必要な場合に推奨されます。
+
+新機能 安定版](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=ja)
+[spark
+
+### Gemini 3.7 Flash
+
+複雑なコーディング、エージェント ワークフロー、信頼性の高い複数ステップの実行のための前世代の Flash モデル。
+
+Stable](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=ja)
 [spark
 
 ### Gemini 3.6 Flash
 
-Nosso modelo mais recente que equilibra velocidade e inteligência para oferecer um desempenho forte em tarefas agênticas e multimodais.
+前世代の Flash モデル。一般的なエージェント タスクと日常的なタスクで、速度とマルチモーダル機能をバランスよく実現します。
 
-Estável](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=pt-br)
+Stable](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=ja)
 [spark
 
 ### Gemini 3.5 Flash
 
-Modelo mais inteligente para desempenho de ponta sustentado em tarefas agênticas e de programação.
+Google の従来の Flash モデル。ルーティンで高スループットのワークロードに対して、ベースラインの速度と基本的なパフォーマンスを提供します。
 
-Estável](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=pt-br)
+Stable](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ja)
 [bolt
 
 ### Gemini 3.5 Flash-Lite
 
-Nosso modelo 3.5 mais rápido e econômico para execução de alta capacidade.
+高スループット実行向けの最も高速で費用対効果の高い 3.5 モデル。
 
-Estável](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=pt-br)
+Stable](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=ja)
 [bolt
 
 ### Gemini 3.1 Flash-Lite
 
-Desempenho de classe de ponta que rivaliza com modelos maiores a uma fração do custo.
+大規模モデルに匹敵するパフォーマンスを、わずかな費用で実現します。
 
-Estável](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=pt-br)
+Stable](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ja)
 [🍌🍌
 
 ### Nano Banana 2
 
-Geração e edição de imagens eficientes e avançadas, otimizadas para velocidade e casos de uso de alto volume.
+高速で大容量のユースケース向けに最適化された、強力で高効率な画像生成と編集。
 
-Estável](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=pt-br)
+Stable](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=ja)
 [🍌
 
 ### Nano Banana 2 Lite
 
-Geração e edição de imagens de latência ultrabaixa e econômicas, projetadas para casos de uso interativos de alto volume.
+大容量のインタラクティブなユースケース向けに設計された、超低レイテンシで費用対効果の高い画像生成と編集。
 
-Estável](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=pt-br)
+Stable](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=ja)
 [🍌
 
 ### Nano Banana Pro
 
-Modelos de geração e edição de imagens de última geração para criação de imagens nativas altamente contextuais.
+コンテキストに沿ったネイティブ画像を作成するための最先端の画像生成および編集モデル。
 
-Estável](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=pt-br)
+Stable](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=ja)
+[speech\_to\_text
 
-### Pré-lançamento
+### Gemini 3.5 Transcribe
+
+発話ベースの言語検出、話者ダイアライゼーション、単語タイムスタンプを備えた低遅延の音声文字変換モデル。
+
+新機能 安定版](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=ja)
+
+### プレビュー
 
 [auto\_awesome
 
 ### Gemini 3.1 Pro
 
-Inteligência avançada, habilidades complexas de resolução de problemas e recursos avançados de programação agêntica e de vibe.
+高度なインテリジェンス、複雑な問題解決能力、強力なエージェントとバイブレーションのコーディング機能。
 
-Pré-lançamento](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=pt-br)
+プレビュー](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ja)
 [spark
 
 ### Gemini 3 Flash
 
-Desempenho de classe de ponta que rivaliza com modelos maiores a uma fração do custo.
+大規模モデルに匹敵するパフォーマンスを、わずかな費用で実現します。
 
-Pré-lançamento](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=pt-br)
+プレビュー](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ja)
 [translate
 
 ### Gemini 3.5 Live Translate
 
-Modelo de tradução de fala em tempo real e de baixa latência que oferece suporte a mais de 70 idiomas.
+70 以上の言語をサポートする、低レイテンシのリアルタイム音声翻訳モデル。
 
-Novo pré-lançamento](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=pt-br)
+新機能](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=ja)
 [settings\_voice
 
 ### Gemini 3.1 Flash Live
 
-Modelo de API Live de alta qualidade e baixa latência para aplicativos de diálogo em tempo real e de IA com voz.
+以前の Live API プレビュー モデル。Gemini 3.8 Live に更新することをおすすめします。
 
-Novo pré-lançamento](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=pt-br)
+新機能](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=ja)
 [graphic\_eq
 
 ### Gemini 3.1 Flash TTS
 
-Geração de fala avançada e de baixa latência.
+強力で低レイテンシの音声生成。
 
-Novo pré-lançamento](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=pt-br)
+新機能](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=ja)
 [movie\_filter
 
 ### Gemini Omni Flash
 
-Geração e edição de vídeo conversacional e rápida. Transforme texto e imagens em vídeo e refine os resultados usando linguagem natural.
+ネイティブ音声による高速な動画生成、編集、キーフレーム補間、拡張。
 
-Novo pré-lançamento](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=pt-br)
+新機能](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=ja)
 
----
+### すべての Gemini 3 モデル
+
+| モデル | エンドポイント |
+| --- | --- |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=ja) | ``` gemini-3.8-flash ``` |
+| [Gemini 3.8 Live](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=ja) | ``` gemini-3.8-live ``` |
+| [Gemini 3.8 Live Extended Thinking](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=ja) | ``` gemini-3.8-live-extended-thinking ``` |
+| [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=ja) | ``` gemini-3.7-flash ``` |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=ja) | ``` gemini-3.6-flash ``` |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ja) | ``` gemini-3.5-flash ``` |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=ja) | ``` gemini-3.5-flash-lite ``` |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ja) | ``` gemini-3.1-flash-lite ``` |
+| [Nano Banana 2](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=ja) | ``` gemini-3.1-flash-image ``` |
+| [Nano Banana 2 Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=ja) | ``` gemini-3.1-flash-lite-image ``` |
+| [Nano Banana Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=ja) | ``` gemini-3-pro-image ``` |
+| [Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ja) | ``` gemini-3.1-pro-preview ``` |
+| [Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ja) | ``` gemini-3-flash-preview ``` |
+| [Gemini 3.5 Live Translate](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=ja) | ``` gemini-3.5-live-translate-preview ``` |
+| [Gemini 3.1 Flash Live](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=ja) | ``` gemini-3.1-flash-live-preview ``` |
+| [Gemini 3.1 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=ja) | ``` gemini-3.1-flash-tts-preview ``` |
+| [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=ja) | ``` gemini-omni-1.1-flash ``` |
+| [Gemini 3.5 Transcribe](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=ja) | ``` gemini-3.5-transcribe gemini-3.5-transcribe-live ``` |
 
 ## Gemini 2.5 Flash
 
-bolt
-
-### [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=pt-br)
-
-Nosso melhor modelo de preço-desempenho para tarefas de baixa latência e alto volume que exigem raciocínio.
-
-image\_search
-
-### [Nano Banana](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=pt-br)
-
-Geração e edição de imagens nativas de última geração projetadas para fluxos de trabalho rápidos e criativos.
-
-settings\_voice
-
-### [Pré-lançamento do Gemini 2.5 Flash Live Preview](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=pt-br)
-
-Otimizado para agentes conversacionais em tempo real com streaming de áudio nativo de menos de um segundo.
-
-record\_voice\_over
-
-### [Pré-lançamento do Gemini 2.5 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=pt-br)
-
-Geração de áudio de conversão de texto em voz controlável com controle refinado sobre estilo e ritmo.
-
----
+| モデル | 説明 | エンドポイント |
+| --- | --- | --- |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ja) | 推論を必要とする低レイテンシで大容量のタスクに最適な価格とパフォーマンスのモデル。 | ``` gemini-2.5-flash ``` |
+| [Nano Banana](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=ja) | 高速なクリエイティブ ワークフロー向けに設計された、最先端のネイティブ画像生成と編集。 | ``` gemini-2.5-flash-image ``` |
+| [Gemini 2.5 Flash Live](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=ja) | 1 秒未満のネイティブ音声ストリーミングでリアルタイムの会話エージェント向けに最適化されています。 | ``` gemini-2.5-flash-native-audio-preview-12-2025 ``` |
+| [Gemini 2.5 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=ja) | スタイルとペースを細かく制御できる、制御可能なテキスト読み上げ音声生成。 | ``` gemini-2.5-flash-preview-tts ``` |
 
 ## Gemini 2.5 Flash-Lite
 
-speed
-
-### [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=pt-br)
-
-O modelo multimodal mais rápido e econômico da família 2.5.
-
----
+| モデル | 説明 | エンドポイント |
+| --- | --- | --- |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ja) | 2.5 ファミリーの中で最も高速で費用対効果の高いマルチモーダル モデル。 | ``` gemini-2.5-flash-lite ``` |
 
 ## Gemini 2.5 Pro
 
-psychology
+| モデル | 説明 | エンドポイント |
+| --- | --- | --- |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ja) | 2.5 ファミリーの深い推論とコーディングの能力を備えた、複雑なタスク向けの最先端モデル。 | ``` gemini-2.5-pro ``` |
+| [Gemini 2.5 Pro TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=ja) | ポッドキャストやオーディオブックなどの構造化されたワークフローで品質を最適化する高忠実度の音声合成。 | ``` gemini-2.5-pro-preview-tts ``` |
 
-### [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=pt-br)
+## 音声モデル
 
-Nosso modelo mais avançado para tarefas complexas, com recursos de raciocínio e programação.
+*このセクションには、他のセクションにすでに記載されている可能性のあるものを含め、すべての音声モデルが含まれています。*
 
-record\_voice\_over
+| モデル | 説明 | エンドポイント |
+| --- | --- | --- |
+| [Gemini 3.8 Live](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=ja) | ほとんどの低レイテンシの音声エージェント エクスペリエンスと、推論の遅延のないリアルタイムの会話のデフォルト オプション。 | ``` gemini-3.8-live ``` |
+| [Gemini 3.8 Live Extended Thinking](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=ja) | ライブでのやり取りで高度な背景推論が必要な場合におすすめの、高度な推論を行う音声対音声モデル。 | ``` gemini-3.8-live-extended-thinking ``` |
+| [Gemini 3.1 Flash Live](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=ja) | 以前の音声から音声へのプレビュー モデル。Gemini 3.8 Live に更新することをおすすめします。 | ``` gemini-3.1-flash-live-preview ``` |
+| [Gemini 3.1 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=ja) | 強力で低レイテンシの音声生成。自然な出力、ステアリング可能なプロンプト、正確なナレーション制御のための新しい表現力豊かな音声タグを備えています。 | ``` gemini-3.1-flash-tts-preview ``` |
+| [Gemini 3.5 Transcribe](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=ja) | 発話ベースの言語検出、話者ダイアライゼーション、単語レベルのタイムスタンプ、カスタム語彙バイアスを備えた低レイテンシの音声文字変換モデル。 | ``` gemini-3.5-transcribe gemini-3.5-transcribe-live ``` |
+| [Gemini 2.5 Flash Live](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=ja) | ネイティブ音声推論を備えた低レイテンシの双方向音声および動画エージェント向けの主力 Live API モデル。 | ``` gemini-2.5-flash-native-audio-preview-12-2025 ``` |
+| [Gemini 2.5 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=ja) | 低レイテンシで費用対効果の高いアプリケーションやリアルタイム アシスタント向けの、高速で制御可能なテキスト読み上げ。 | ``` gemini-2.5-flash-preview-tts ``` |
+| [Gemini 2.5 Pro TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=ja) | ポッドキャストやオーディオブックなどの構造化されたワークフローで品質を最適化する高忠実度の音声合成。 | ``` gemini-2.5-pro-preview-tts ``` |
 
-### [Pré-lançamentodo Gemini 2.5 Pro TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=pt-br)
+## 生成メディアモデル
 
-Síntese de fala de alta fidelidade otimizada para qualidade em fluxos de trabalho estruturados, como podcasts e audiolivros.
+*このセクションには、他のセクションにすでに記載されているものも含め、すべての生成メディア モデルが含まれています。*
 
----
+| モデル | 説明 | エンドポイント |
+| --- | --- | --- |
+| [Nano Banana 2](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=ja) | Gemini 3 シリーズのインテリジェンスと超高速の生成速度を組み合わせた、高効率のプロダクション スケールのビジュアル作成。 | ``` gemini-3.1-flash-image ``` |
+| [Nano Banana 2 Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=ja) | 画像生成ファミリーの効率性スペシャリストとして設計されており、超低レイテンシで費用対効果の高い画像生成と編集を実現します。 | ``` gemini-3.1-flash-lite-image ``` |
+| [Veo 3.1](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=ja) | 高度なクリエイティブ コントロールとネイティブに同期された音声による最先端のシネマティック動画生成。 | ``` veo-3.1-generate-preview ``` |
+| [Nano Banana Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=ja) | スタジオ品質の 4K ビジュアル、複雑なレイアウト、正確なテキスト レンダリングを実現する推論コアを備えたプロフェッショナルなデザイン エンジン。 | ``` gemini-3-pro-image ``` |
+| [Veo 3.1 Lite](https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=ja) | Veo 3.1 ファミリーの、高効率で低コストのデベロッパー ファーストの動画生成、編集、映画のようなコントロール。 | ``` veo-3.1-lite-generate-preview ``` |
+| [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=ja) | ネイティブ音声による動画の高速生成、編集、キーフレーム補間、拡張。 | ``` gemini-omni-1.1-flash ``` |
+| [Nano Banana](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=ja) | 高速なクリエイティブ ワークフロー向けに設計された、最先端のネイティブ画像生成と編集。 | ``` gemini-2.5-flash-image ``` |
+| Imagen 4（シャットダウン） | 高速および超高速生成を特徴とするテキストから画像へのモデル（シャットダウン）。 | ``` imagen-4.0-generate ``` |
 
-## Modelos de áudio
+## 音楽生成モデル
 
-*Esta seção contém todos os modelos de áudio, incluindo aqueles que já podem estar listados em outras seções*
+*このセクションには、他のセクションにすでに記載されている可能性のあるものを含め、すべての音楽生成モデルが含まれています。*
 
-settings\_input\_antenna
+| モデル | 説明 | エンドポイント |
+| --- | --- | --- |
+| [Lyria 3.5](https://ai.google.dev/gemini-api/docs/models/lyria-3.5?hl=ja) | 複雑な構造の一貫性を備えたフルレングスの曲向けに最適化された、Google の主力音楽生成モデル。 | ``` lyria-3.5 ``` |
+| [Lyria 3 Clip](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=ja) | 最大 30 秒の短い音楽クリップ、ループ、プレビューの生成に最適化されています。 | ``` lyria-3-clip-preview ``` |
+| [Lyria 3 Pro](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=ja) | フルレングスの曲用の前世代の音楽生成モデル。 | ``` lyria-3-pro-preview ``` |
+| [Lyria RealTime](https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=ja) | きめ細かいクリエイティブ コントロールとリアルタイム ストリーミング機能を提供する高忠実度の音楽生成モデル。 | ``` lyria-realtime-exp ``` |
 
-### [Pré-lançamento do Gemini 3.1 Flash Live Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=pt-br)
+## ツールとエージェント モデル
 
-Nosso modelo de áudio para áudio (A2A) de alta qualidade e baixa latência, projetado para aplicativos de diálogo em tempo real e de IA com voz.
+| モデル | 説明 | エンドポイント |
+| --- | --- | --- |
+| [コンピュータの使用](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=ja) | デジタル画面を「見て」、クリック、入力、移動などの UI アクションを実行して、複雑なブラウザタスクを自動化できる特殊なモデル。 | ``` gemini-2.5-computer-use-preview-10-2025 ``` |
+| [Gemini Deep Research](https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=ja) | 数百ものソースにわたって複数ステップのリサーチを自律的に計画して実行し、引用付きのインタラクティブなレポートを生成するエージェント モデル。 | ``` deep-research-preview-04-2026 ``` |
+| [Gemini Deep Research Max](https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=ja) | 数百ものソースからコンテキストを自動的に収集して統合する際の包括性を最大限に高めます。 | ``` deep-research-max-preview-04-2026 ``` |
+| [Antigravity エージェント](https://ai.google.dev/gemini-api/docs/models/antigravity-preview-05-2026?hl=ja) | 安全で隔離された Linux サンドボックス内で、自律的に計画、推論、コードの実行、ファイルの管理、ウェブの閲覧を行う汎用マネージド エージェント。 | ``` antigravity-preview-05-2026 ``` |
 
-graphic\_eq
+## 特殊なタスクモデル
 
-### [Pré-lançamento do Gemini 3.1 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=pt-br)
+| モデル | 説明 | エンドポイント |
+| --- | --- | --- |
+| [Gemini エンベディング 2](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=ja) | テキスト、画像、動画、音声、PDF を高度なセマンティック検索と RAG システム用の統一されたエンベディング空間にマッピングする、初のマルチモーダル エンベディング モデル。 | ``` gemini-embedding-2-preview ``` |
+| [Gemini エンベディング](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-001?hl=ja) | 高度なセマンティック検索、テキスト分類、RAG システム用の高次元ベクトル表現。 | ``` gemini-embedding-001 ``` |
+| [Gemini Robotics ER 2](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=ja) | ロボティクス タスク向けに高度な動画理解、空間推論、複数ステップのツール オーケストレーション、マルチロボット コラボレーションを実現するエンボディード推論モデル。 | ``` gemini-robotics-er-2-preview ``` |
+| [Gemini Robotics ER 1.6](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.6-preview?hl=ja) | 物理空間を理解し、計測器の読み取り、空間的および物理的な推論の改善などの新機能を備えたロボット エージェントの複数ステップのタスクを計画する、高度なエンボディード推論モデル。 | ``` gemini-robotics-er-1.6-preview ``` |
 
-Geração de fala avançada e de baixa latência, com saídas naturais, comandos direcionáveis e novas tags de áudio expressivas para controle preciso da narração.
+## 以前のモデル
 
-settings\_voice
+| モデル | 説明 | エンドポイント |
+| --- | --- | --- |
+| [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=ja)（シャットダウン） | 優れたスピード、ネイティブ ツールの使用、100 万トークンのコンテキスト ウィンドウなど、次世代の機能と強化された機能を備えた第 2 世代の主力モデル。 | ``` gemini-2.0-flash ``` |
+| [Gemini 2.0 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash-lite?hl=ja)（シャットダウン） | 費用対効果と低レイテンシを重視して最適化された、最も高速な第 2 世代モデル。 | ``` gemini-2.0-flash-lite ``` |
+| [Gemini 3.1 Flash-Lite プレビュー版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=ja)（シャットダウン） | 最も費用対効果の高いマルチモーダル モデルで、高頻度の軽量タスクに最速のパフォーマンスを提供します。 | ``` gemini-3.1-flash-lite-preview ``` |
+| [Gemini 3 Pro プレビュー](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-preview?hl=ja)（シャットダウン） | 高度なマルチモーダル理解を備えた最先端の推論モデル。 | ``` gemini-3-pro-preview ``` |
 
-### [Pré-lançamento do Gemini 2.5 Flash Live Preview](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=pt-br)
+## モデル バージョン名のパターン
 
-Nosso modelo de API Live principal para agentes de voz e vídeo bidirecionais de baixa latência com raciocínio de áudio nativo.
+Gemini モデルには、*安定版*、*プレビュー版*、*最新版*、*試験運用版*があります。
 
-bolt
+### Stable
 
-### [Pré-lançamento do Gemini 2.5 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=pt-br)
+特定の安定版モデルを参照します。安定したモデルは通常変更されません。ほとんどの本番環境アプリでは、特定の安定版モデルを使用する必要があります。
 
-Conversão de texto em voz rápida e controlável para aplicativos de baixa latência e econômicos e assistentes em tempo real.
+例: `gemini-3.6-flash`。
 
-record\_voice\_over
+### プレビュー
 
-### [Pré-lançamentodo Gemini 2.5 Pro TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=pt-br)
+本番環境で使用できるプレビュー モデルを指します。プレビュー モデルでは通常、課金が有効になっています。レート制限が厳しくなる可能性があり、少なくとも 2 週間前に通知されてから非推奨になります。
 
-Síntese de fala de alta fidelidade otimizada para qualidade em fluxos de trabalho estruturados, como podcasts e audiolivros.
+例: `gemini-2.5-flash-preview-09-2025`。
 
----
+### 最新
 
-## Modelos de mídia generativa
+特定のモデル バリエーションの最新リリースを指します。これは、安定版、プレビュー版、試験運用版のいずれかのリリースです。このエイリアスは、特定のモデル バリエーションの新作ごとにホットスワップされます。互換性を破る変更については、最新のバージョンが変更される前に、メールで**2 週間前の通知**が提供されます。
 
-*Esta seção contém todos os modelos de mídia generativa, incluindo aqueles que já podem estar listados em outras seções*
+例: `gemini-flash-latest`。
 
-blur\_on
+### 試験運用版
 
-### [Nano Banana 2](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=pt-br)
+試験運用版モデルを指します。通常、本番環境での使用には適しておらず、レート制限が厳しくなっています。試験運用モデルをリリースしてフィードバックを収集し、最新のアップデートを開発者に迅速に提供します。
 
-Criação visual de alta eficiência e escala de produção, combinando a inteligência da série Gemini 3 com velocidades de geração extremamente rápidas.
+試験運用版モデルは安定しておらず、モデル エンドポイントの可用性は変更される可能性があります。
 
-image\_edit
+## モデル（非推奨）
 
-### [Nano Banana 2 Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=pt-br)
+モデルの非推奨については、[Gemini の非推奨](https://ai.google.dev/gemini-api/docs/deprecations?hl=ja)のページをご覧ください。
 
-Projetado como o especialista em eficiência da família de geração de imagens, oferecendo geração e edição de imagens de latência ultrabaixa e econômicas.
+フィードバックを送信
 
-movie\_filter
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-### [Pré-lançamentodo Veo 3.1](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=pt-br)
+最終更新日 2026-09-18 UTC。
 
-Geração de vídeo cinematográfico de última geração com controles criativos avançados e áudio sincronizado nativamente.
+ご意見をお聞かせください
 
-image\_edit
-
-### [Nano Banana Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=pt-br)
-
-Um mecanismo de design profissional com um núcleo de raciocínio para recursos visuais 4K com qualidade de estúdio, layouts complexos e renderização de texto precisa.
-
-movie\_edit
-
-### [Pré-lançamentodo Veo 3.1 Lite](https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=pt-br)
-
-Geração, edição e controle cinematográfico de vídeo de alta eficiência, baixo custo e prioridade para desenvolvedores da família Veo 3.1.
-
-movie\_filter
-
-### [Pré-lançamento do Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=pt-br)
-
-Geração e edição de vídeo conversacional e rápida. Transforme texto e imagens em vídeo e refine os resultados usando linguagem natural.
-
-image\_search
-
-### [Nano Banana](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=pt-br)
-
-Geração e edição de imagens nativas de última geração projetadas para fluxos de trabalho rápidos e criativos.
-
-palette
-
-### [Imagen 4 descontinuado](https://ai.google.dev/gemini-api/docs/models/imagen?hl=pt-br)
-
-Modelo de texto para imagem, com geração rápida e ultrarrápida e clareza excepcional de até 2K de resolução.
-
----
-
-## Modelos de geração de música
-
-*Esta seção contém todos os modelos de geração de música, incluindo aqueles que já podem estar listados em outras seções*
-
-music\_note
-
-### [Pré-lançamento do Lyria 3 Pro](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=pt-br)
-
-Nosso modelo principal de geração de música, otimizado para músicas completas com coerência estrutural complexa.
-
-music\_note\_2
-
-### [Pré-lançamento do Lyria 3 Clip](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=pt-br)
-
-Otimizado para gerar clipes musicais curtos, loops e pré-lançamentos de até 30 segundos.
-
-music\_history
-
-### [Lyria RealTime Experimental](https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=pt-br)
-
-Modelo de geração de música de alta fidelidade que oferece controle criativo granular e recursos de streaming em tempo real.
-
----
-
-## Modelos de ferramentas e agentes
-
-desktop\_windows
-
-### [Pré-lançamento do uso do computador](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=pt-br)
-
-Um modelo especializado que pode "ver" uma tela digital e realizar ações de interface, como clicar, digitar e navegar, para automatizar tarefas complexas do navegador.
-
-travel\_explore
-
-### [Pré-lançamento do Gemini Deep Research](https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=pt-br)
-
-Um modelo agêntico que planeja e executa de forma autônoma pesquisas de várias etapas em centenas de fontes para produzir relatórios interativos e citados.
-
-travel\_explore
-
-### [Pré-lançamento do Gemini Deep Research Max](https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=pt-br)
-
-Máxima abrangência para coleta e síntese de contexto automatizadas em centenas de fontes.
-
-terminal
-
-### [Pré-lançamentodo agente Antigravity](https://ai.google.dev/gemini-api/docs/models/antigravity-preview-05-2026?hl=pt-br)
-
-Um agente gerenciado de uso geral que planeja, raciocina, executa código, gerencia arquivos e navega na Web de forma autônoma em uma sandbox Linux segura e isolada.
-
----
-
-## Modelos de tarefas especializadas
-
-hub
-
-### [Embedding do Gemini 2](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=pt-br)
-
-Nosso primeiro modelo de embedding multimodal, que mapeia texto, imagens, vídeo, áudio e PDFs em um espaço de embedding unificado para pesquisa semântica avançada e sistemas RAG.
-
-hub
-
-### [Embedding do Gemini](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-001?hl=pt-br)
-
-Representações vetoriais de alta dimensão para pesquisa semântica avançada, classificação de texto e sistemas RAG.
-
-precision\_manufacturing
-
-### [Pré-lançamento do Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.6-preview?hl=pt-br)
-
-Modelo avançado de raciocínio incorporado que entende espaços físicos e planeja tarefas de várias etapas para agentes robóticos com novos recursos, como leitura de instrumentos, raciocínio espacial e físico aprimorado.
-
----
-
-## Modelos anteriores
-
-history
-
-### [Desativação do Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash?hl=pt-br)
-
-Nosso modelo de segunda geração, com recursos de última geração e capacidades aprimoradas, incluindo velocidade superior, uso de ferramentas nativas e uma janela de contexto de 1 milhão de tokens.
-
-restore
-
-### [Desativação do Gemini 2.0 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash-lite?hl=pt-br)
-
-Nosso modelo de segunda geração mais rápido, otimizado para eficiência de custo e baixa latência.
-
-restore
-
-### [Desativação do pré-lançamento do Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=pt-br)
-
-Nosso modelo multimodal mais econômico, que oferece o desempenho mais rápido para tarefas leves e de alta frequência.
-
-restore
-
-### [Desativação do pré-lançamento do Gemini 3 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-preview?hl=pt-br)
-
-Nosso modelo de raciocínio de última geração, com compreensão multimodal avançada.
-
----
-
-## Padrões de nome de versão do modelo
-
-Os modelos do Gemini estão disponíveis nas versões *estável*, *pré-lançamento*, *mais recente* ou
-*experimental*.
-
-### Estável
-
-Aponta para um modelo estável específico. Os modelos estáveis geralmente não mudam. A maioria dos apps de produção precisa usar um modelo estável específico.
-
-Por exemplo: `gemini-3.6-flash`.
-
-### Pré-lançamento
-
-Aponta para um modelo de pré-lançamento que pode ser usado para produção. Os modelos de pré-lançamento normalmente têm o faturamento ativado, podem vir com limites de taxa mais restritivos e serão descontinuados com pelo menos duas semanas de antecedência.
-
-Por exemplo: `gemini-2.5-flash-preview-09-2025`.
-
-### Mais recentes
-
-Aponta para a versão mais recente de uma variação de modelo específica. Pode ser uma versão estável, de pré-lançamento ou experimental. Esse alias será trocado a quente com cada novo lançamento de uma variação de modelo específica. Para mudanças interruptivas, um **aviso de duas semanas** será enviado por e-mail antes que a versão mais recente seja alterada.
-
-Por exemplo: `gemini-flash-latest`.
-
-### Experimental
-
-Aponta para um modelo experimental que normalmente não é adequado para uso em produção e vem com limites de taxa mais restritivos. Lançamos modelos experimentais para coletar feedback e disponibilizar nossas atualizações mais recentes aos desenvolvedores rapidamente.
-
-Os modelos experimentais não são estáveis, e a disponibilidade dos endpoints do modelo está sujeita a mudanças.
-
-## Descontinuações de modelos
-
-Para mais informações sobre descontinuações de modelos, acesse a página de [descontinuações do Gemini](https://ai.google.dev/gemini-api/docs/deprecations?hl=pt-br).
-
-Envie comentários
-
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
-
-Última atualização 2026-09-12 UTC.
-
-Quer enviar seu feedback?
-
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-12 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-18 UTC。"],[],[]]

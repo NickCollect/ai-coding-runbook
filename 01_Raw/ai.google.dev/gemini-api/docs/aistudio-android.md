@@ -1,134 +1,149 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-android?hl=vi
-fetched_at: 2026-09-14T05:37:53.644431+00:00
-title: "T\u1ea1o \u1ee9ng d\u1ee5ng Android trong Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-android?hl=ja
+fetched_at: 2026-09-21T05:54:37.392380+00:00
+title: "Google AI Studio \u3067 Android \u30a2\u30d7\u30ea\u3092\u69cb\u7bc9\u3059\u308b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-# Tạo ứng dụng Android trong Google AI Studio
+# Google AI Studio で Android アプリを構築する
 
-Google AI Studio cho phép bạn tạo các ứng dụng Android gốc từ một câu lệnh bằng ngôn ngữ tự nhiên. Mô tả ứng dụng bạn muốn, và [Antigravity Agent](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=vi#antigravity-agent) sẽ tạo một dự án hoàn chỉnh bằng Kotlin và [Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=vi). Trên trình duyệt, bạn có thể xem trước ứng dụng trong trình mô phỏng Android dựa trên trình duyệt, cài đặt ứng dụng trên một thiết bị thực và xuất bản ứng dụng để kiểm thử.
+Google AI Studio を使用すると、自然言語プロンプトからネイティブ Android アプリを構築できます。必要なアプリについて説明すると、
+[Antigravity Agent](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=ja#antigravity-agent)
+が完全な Kotlin プロジェクトと[Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=ja)
+プロジェクトを生成します。ブラウザから、ブラウザベースの Android エミュレータでアプリをプレビューしたり、実機にインストールしたり、テスト用に公開したりできます。
 
-## Bắt đầu
+## 始める
 
-Cách bắt đầu tạo một ứng dụng Android:
+Android アプリの構築を開始する手順は次のとおりです。
 
-1. Chuyển đến [Chế độ xây dựng](https://aistudio.google.com/apps?hl=vi) trong Google AI Studio bằng bảng điều hướng bên trái.
-2. Chọn **Android** trong bộ chọn nền tảng.
-3. Nhập một câu lệnh mô tả ứng dụng bạn muốn tạo (ví dụ: *"Tạo một bảng theo dõi nhiệm vụ hằng ngày có bộ nhớ cục bộ"* hoặc *"Tạo một Máy tính đơn giản"*).
-4. Tác nhân sẽ tạo dự án và chạy dự án đó trong trình mô phỏng Android dựa trên trình duyệt.
+1. 左側のナビゲーション パネルを使用して、Google AI Studio の [[ビルド] モード](https://aistudio.google.com/apps?hl=ja)に移動します。
+2. プラットフォーム ピッカーから [**Android**] を選択します。
+3. 構築するアプリの説明を入力します（例: *「ローカル ストレージを使用して毎日のタスク トラッカーを作成する」* または *「シンプルな電卓を作成する」*）。
+4. エージェントがプロジェクトを生成し、ブラウザベースの Android エミュレータで起動します。
 
-Sau đó, bạn có thể lặp lại quy trình này trên ứng dụng bằng cách sử dụng bảng trò chuyện, giống như trải nghiệm trên web. Tác nhân này quản lý tất cả các tệp trong dự án Android của bạn và truyền các thay đổi trên toàn bộ cơ sở mã.
+チャットパネルを使用して、ウェブと同じようにアプリを反復処理できます。エージェントは Android プロジェクト内のすべてのファイルを管理し、コードベース全体に変更を反映します。
 
-## Trình mô phỏng Android dựa trên trình duyệt
+## ブラウザベースの Android エミュレータ
 
-Trình mô phỏng Android chạy hoàn toàn trên đám mây và truyền trực tuyến đến trình duyệt của bạn.
-Bạn không cần cài đặt Android SDK, Android Studio hoặc trình mô phỏng cục bộ.
+Android エミュレータはクラウドで完全に実行され、ブラウザにストリーミングされます。
+Android SDK、Android Studio、ローカル エミュレータをインストールする必要はありません。
 
-Trình mô phỏng này cung cấp:
+エミュレータには次の機能があります。
 
-- **Mô phỏng thiết bị giống Pixel**: nhấn, cuộn và tương tác với ứng dụng của bạn giống như trên một thiết bị thực.
-- **Hỗ trợ xoay**: chuyển đổi giữa hướng dọc và hướng ngang.
-- **Xem trước trực tiếp**: khi tác nhân thực hiện các thay đổi về mã, ứng dụng sẽ tạo lại và trình mô phỏng sẽ tự động làm mới.
+- **Pixel のようなデバイスのシミュレーション**: 実機と同じように、アプリをタップ、スクロール、操作できます。
+- **回転のサポート**: 縦向きと横向きを切り替えます。
+- **ライブプレビュー**: エージェントがコードを変更すると、アプリが再ビルドされ、
+  エミュレータが自動的に更新されます。
 
-### Giới hạn của trình mô phỏng
+### エミュレータの制限事項
 
-Trình mô phỏng dựa trên trình duyệt không hỗ trợ tất cả các tính năng phần cứng. Trình mô phỏng không có các tính năng sau:
+ブラウザベースのエミュレータは、すべてのハードウェア機能をサポートしていません。エミュレータでは次の機能は使用できません。
 
-- Chụp ảnh và quay video bằng camera
-- NFC và Bluetooth
-- GPS (vị trí được mô phỏng)
-- Dịch vụ Google Play (Đăng nhập bằng Google, Maps và các tính năng khác của Dịch vụ Play hoạt động trên thiết bị thực nhưng không hoạt động trong trình mô phỏng)
+- カメラと写真のキャプチャ
+- NFC と Bluetooth
+- GPS（位置情報はシミュレートされます）
+- Google Play 開発者サービス（Google ログイン、マップ、その他の Google Play 開発者サービスの機能は、実機では動作しますが、エミュレータでは動作しません）
 
-## Cài đặt trên thiết bị có ADB
+## ADB を使用してデバイスにインストールする
 
-Bạn có thể cài đặt trực tiếp APK đã tạo trên một thiết bị Android thực được kết nối với máy tính bằng USB. Tính năng này sử dụng [WebUSB](https://developer.chrome.com/docs/capabilities/usb?hl=vi) để giao tiếp với thiết bị của bạn thông qua trình duyệt. Không cần cài đặt ADB cục bộ.
+ビルドした APK は、USB でパソコンに接続された実機の Android デバイスに直接インストールできます。これには、
+[WebUSB](https://developer.chrome.com/docs/capabilities/usb?hl=ja) を
+使用してブラウザ経由でデバイスと通信します。ローカル ADB のインストールは不要です。
 
-### Điều kiện tiên quyết
+### 前提条件
 
-- Trình duyệt Chrome hoặc Edge hỗ trợ WebUSB.
-- Một thiết bị Android đã bật [Tuỳ chọn cho nhà phát triển và Gỡ lỗi qua USB](https://developer.android.com/studio/debug/dev-options?hl=vi).
-- Cáp USB kết nối thiết bị với máy tính.
+- WebUSB をサポートする Chrome または Edge ブラウザ。
+- [[デベロッパー向けオプション] と [USB デバッグ](https://developer.android.com/studio/debug/dev-options?hl=ja)]
+  が有効になっている Android デバイス。
+- デバイスをパソコンに接続する USB ケーブル。
 
-### Cài đặt ứng dụng trên thiết bị
+### デバイスにアプリをインストールする
 
-1. Nhấp vào **Cài đặt trên thiết bị** trong bảng điều khiển xem trước.
-2. Chọn thiết bị Android của bạn trong trình chọn thiết bị USB của trình duyệt.
-3. Tệp APK sẽ được chuyển và cài đặt trên thiết bị của bạn.
-4. Ứng dụng sẽ tự động chạy.
+1. プレビュー パネルで [**Install on Device**] をクリックします。
+2. ブラウザの USB デバイス ピッカーから Android デバイスを選択します。
+3. APK が転送され、デバイスにインストールされます。
+4. アプリが自動的に起動します。
 
-## Phát hành lên Cửa hàng Play
+## Google Play ストアに公開する
 
-Bạn có thể xuất bản ứng dụng Android của mình lên kênh kiểm thử nội bộ của [Google Play Console](https://play.google.com/console?hl=vi). Kênh này cho phép bạn phân phối ứng dụng cho tối đa 100 người kiểm thử.
+Android アプリを
+[Google Play Console](https://play.google.com/console?hl=ja) の内部
+テストトラックに公開して、最大 100 人のテスターにアプリを配布できます。
 
-### Điều kiện tiên quyết
+### 前提条件
 
-- [Tài khoản nhà phát triển trên Google Play](https://play.google.com/console/signup?hl=vi) (bạn phải trả phí đăng ký một lần là 25 USD).
-- Hồ sơ nhà phát triển đã hoàn tất trong Play Console.
+- [Google Play デベロッパー アカウント](https://play.google.com/console/signup?hl=ja)
+  （1 回限りの登録料 25 ドルが必要です）。
+- Google Play Console でデベロッパー プロファイルが完成していること。
 
-### Phát hành ứng dụng
+### アプリを公開する
 
-1. Mở **Settings > Publish** (Cài đặt > Xuất bản) trong Google AI Studio.
-2. Nhấp vào **Xuất bản lên Cửa hàng Play**.
-3. Xác thực bằng tài khoản nhà phát triển trên Google Play của bạn.
-4. AI Studio ký APK, tạo trang thông tin trên Cửa hàng Play (hoặc tải phiên bản mới lên) và xuất bản lên kênh kiểm thử nội bộ.
-5. Bạn sẽ nhận được một đường liên kết để chia sẻ với người kiểm thử.
+1. Google AI Studio で **[Settings] > [Publish]** を開きます。
+2. [**Google Play ストアに公開**] をクリックします。
+3. Google Play デベロッパー アカウントで認証します。
+4. AI Studio が APK に署名し、アプリの掲載情報を作成（または新しいバージョンをアップロード）して、内部テストトラックに公開します。
+5. テスターと共有するリンクが届きます。
 
-AI Studio tự động quản lý việc ký APK bằng kho khoá được quản lý. Bạn có thể tuỳ chỉnh trang thông tin ứng dụng (biểu tượng, ảnh chụp màn hình, nội dung mô tả) sau này trong Play Console.
+AI Studio は、マネージド キーストアを使用して APK の署名を自動的に管理します。アプリの掲載情報（アイコン、スクリーンショット、説明）は、後で Google Play Console でカスタマイズできます。
 
-## Nội dung được tạo
+## 生成されるもの
 
-Khi bạn tạo một ứng dụng Android, tác nhân sẽ tạo một dự án tiêu chuẩn dựa trên Gradle có cấu trúc như sau:
+Android アプリをビルドすると、エージェントは次の構造で標準の Gradle ベースのプロジェクトを生成します。
 
-- **Cấu hình bản dựng**: Các tệp `build.gradle.kts` (cấp dự án và cấp ứng dụng) bằng Kotlin DSL.
-- **Lớp giao diện người dùng**: Các thành phần [Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=vi) có giao diện [Material 3](https://m3.material.io/).
-- **Cấu trúc**: cấu trúc một hoạt động với ViewModel và các lớp dữ liệu.
-- **Tài nguyên**: `AndroidManifest.xml`, các đối tượng có thể vẽ, chuỗi và các tài nguyên khác của Android.
+- **ビルド構成**: `build.gradle.kts` ファイル（プロジェクト レベルとアプリレベル）
+  Kotlin DSL を使用。
+- **UI レイヤ**: [マテリアル デザイン 3](https://developer.android.com/develop/ui/compose?hl=ja) のテーマ設定を使用した [Jetpack Compose](https://m3.material.io/)
+  コンポーネント。
+- **アーキテクチャ**: ViewModel とデータ
+  クラスを使用した単一アクティビティ アーキテクチャ。
+- **リソース**: `AndroidManifest.xml`、ドローアブル、文字列、その他の Android
+  リソース。
 
-Tác nhân này tự động quản lý các phần phụ thuộc Gradle, thêm các gói từ kho lưu trữ Maven và Google khi cần.
+エージェントは Gradle の依存関係を自動的に管理し、必要に応じて Maven リポジトリと Google リポジトリからパッケージを追加します。
 
-Bạn có thể xem và chỉnh sửa mã được tạo bằng thẻ **Code** (Mã) trong bảng xem trước. Để tiếp tục phát triển trong Android Studio, hãy tải dự án xuống dưới dạng **tệp ZIP**.
+生成されたコードは、プレビュー パネルの [**Code**] タブで表示、編集できます。Android Studio で開発を続行するには、プロジェクトを**ZIP ファイル** としてダウンロードします。
 
-## Các điểm hạn chế
+## 制限事項
 
-Hoạt động tạo ứng dụng Android trong AI Studio có những hạn chế sau:
+AI Studio での Android アプリのビルドには、次の制限があります。
 
-### Các hạn chế về nền tảng
+### プラットフォームの制限
 
-- **Chỉ phía máy khách**: Các ứng dụng Android không có thành phần phía máy chủ.
-  Các tính năng yêu cầu thời gian chạy máy chủ (quản lý bí mật, nhiều người chơi, Firebase, API Google Workspace) không dùng được.
-- **Cấu trúc một hoạt động**: chỉ hỗ trợ các dự án một hoạt động, một mô-đun.
-- **Chỉ Jetpack Compose**: ứng dụng sử dụng Kotlin và Jetpack Compose. Không hỗ trợ bố cục Java và XML.
-- **Không có NDK hoặc mã gốc**: Mã C và C++ không được hỗ trợ.
-- **Không có Wear OS hoặc Android TV**: chỉ hỗ trợ hệ số hình dạng điện thoại và máy tính bảng.
+- **クライアントサイドのみ**: Android アプリにはサーバーサイド コンポーネントが含まれていません。サーバー ランタイムを必要とする機能（シークレット管理、マルチプレイヤー、Firebase、Google Workspace API）は使用できません。
+- **単一アクティビティ アーキテクチャ**: 単一アクティビティ、単一モジュール
+  プロジェクトのみがサポートされています。
+- **Jetpack Compose のみ**: アプリは Kotlin と Jetpack Compose を使用します。Java と XML レイアウトはサポートされていません。
+- **NDK またはネイティブ コードなし**: C コードと C++ コードはサポートされていません。
+- **Wear OS または Android TV なし**: スマートフォンとタブレットのフォーム ファクタのみが
+  サポートされています。
 
-### Hạn chế khi xuất
+### エクスポートの制限事項
 
-- **Chỉ tải tệp ZIP xuống**: bạn có thể tải dự án xuống dưới dạng tệp ZIP. Tính năng xuất sang GitHub hiện chưa được cung cấp cho các dự án Android.
+- **ZIP ダウンロードのみ**: プロジェクトを ZIP ファイルとしてダウンロードできます。Android プロジェクトでは、GitHub エクスポートはまだ使用できません。
 
-## Bước tiếp theo
+## 次のステップ
 
-- [Tạo ứng dụng trong Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=vi)
-- [Phát triển ứng dụng Full-Stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=vi) (web)
-- Xem các ví dụ trong [Thư viện ứng dụng](https://aistudio.google.com/apps?source=showcase&hl=vi).
+- [Google AI Studio でアプリをビルドする](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=ja)
+- [フルスタック アプリの開発](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=ja)（ウェブ）
+- [App Gallery](https://aistudio.google.com/apps?source=showcase&hl=ja) で例を見る。
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Cập nhật lần gần đây nhất: 2026-08-19 UTC.
+最終更新日 2026-08-19 UTC。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+ご意見をお聞かせください
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-08-19 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-08-19 UTC。"],[],[]]

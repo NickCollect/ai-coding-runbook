@@ -1,48 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=he
-fetched_at: 2026-09-14T05:47:25.798550+00:00
-title: "\u202bLyria RealTime experimental \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=vi
+fetched_at: 2026-09-21T05:50:11.549430+00:00
+title: "Lyria RealTime (th\u1eed nghi\u1ec7m) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-שליחת משוב
+Gửi ý kiến phản hồi
 
-# ‫Lyria RealTime experimental
+# Lyria RealTime (thử nghiệm)
 
-מנוע ניסיוני לסינתזה מוזיקלית באיכות גבוהה, שמציע יכולות חדשניות ליצירה ולשינוי של תוכן אודיו. ‫Lyria RealTime
-הוא הכלי הכי טוב לכתיבת שירים בעזרת AI, ליצירת מוזיקה אינסטרומנטלית ייחודית ולתהליכי עבודה יצירתיים עם אודיו שדורשים שליטה מלאה במלודיה ובקצב, ללא שירה.
+Một công cụ thử nghiệm để tổng hợp nhạc có độ trung thực cao, cung cấp các tính năng cải tiến để tạo và chuyển đổi nội dung âm thanh. Lyria RealTime phù hợp nhất với việc viết bài hát có sự hỗ trợ của AI, tạo nhạc cụ độc đáo và quy trình làm việc sáng tạo với âm thanh đòi hỏi khả năng kiểm soát sâu sắc giai điệu và nhịp điệu, không có giọng hát.
 
-[איך משתמשים ב-Lyria RealTime](https://deepmind.google/models/lyria/lyria-realtime/?hl=he)
+[Dùng thử Lyria RealTime](https://deepmind.google/models/lyria/lyria-realtime/?hl=vi)
 
-## מאמרי עזרה
+## Tài liệu
 
-למידע מלא על התכונות והיכולות, אפשר לעבור לדף [יצירת מוזיקה בזמן אמת](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=he).
+Hãy truy cập [trang Tạo nhạc theo thời gian thực](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=vi) để xem đầy đủ các tính năng và chức năng.
 
 ## lyria-realtime-exp
 
-| נכס | תיאור |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardקוד מודל | ‫**Gemini API**  `lyria-realtime-exp` |
-| saveסוגי נתונים נתמכים | **קלט**  טקסט (הנחיות עם משקל)  **פלט**  אודיו (PCM גולמי של 16 ביט) |
-| token\_autoהגבלות סטרימינג | **תדירות הדגימה**  ‫48kHz (סטריאו)  **שליטה בזמן האחזור**  עד 2 שניות |
-| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - ניסיוני: `lyria-realtime-exp` |
-| calendar\_monthהעדכון האחרון | מאי 2025 |
+| id\_cardMã mô hình | **Gemini API**  `lyria-realtime-exp` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản (Câu lệnh có trọng số)  **Đầu ra**  Âm thanh (PCM 16 bit thô) |
+| token\_autoGiới hạn xem trực tuyến | **Tần số lấy mẫu**  48kHz (Âm thanh nổi)  **Độ trễ của tính năng điều khiển**  Tối đa 2 giây |
+| 123Phiên bản | Hãy đọc các [mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm chi tiết.  - Thử nghiệm: `lyria-realtime-exp` |
+| calendar\_monthNội dung cập nhật mới nhất | Tháng 5 năm 2025 |
 
-שליחת משוב
+Gửi ý kiến phản hồi
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-עדכון אחרון: 2026-04-29 (שעון UTC).
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-רוצה לתת לנו משוב?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

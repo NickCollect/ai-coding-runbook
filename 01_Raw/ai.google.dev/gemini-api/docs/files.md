@@ -1,34 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/files?hl=tr
-fetched_at: 2026-09-14T05:36:15.326588+00:00
-title: "Dosyalar API'si \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/files?hl=pl
+fetched_at: 2026-09-21T05:49:53.037654+00:00
+title: "Interfejs API plik\u00f3w \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Geri bildirim gönderin
+Prześlij opinię
 
-# Dosyalar API'si
+# Interfejs API plików
 
-Gemini, metin, resim ve ses gibi çeşitli giriş verilerini aynı anda işleyebilir.
+Model Gemini może jednocześnie przetwarzać różne typy danych wejściowych, w tym tekst, obrazy i dźwięk.
 
-Bu kılavuzda, Files API'yi kullanarak medya dosyalarıyla nasıl çalışacağınız gösterilmektedir. Ses dosyaları, resimler, videolar, dokümanlar ve desteklenen diğer dosya türleri için temel işlemler aynıdır.
+Z tego przewodnika dowiesz się, jak pracować z plikami multimedialnymi za pomocą interfejsu Files API. Podstawowe operacje są takie same w przypadku plików audio, obrazów, filmów, dokumentów i innych obsługiwanych typów plików.
 
-Dosya istemiyle ilgili rehberlik için [Dosya istemi kılavuzu](https://ai.google.dev/gemini-api/docs/files?hl=tr#prompt-guide) bölümüne göz atın.
+Wskazówki dotyczące tworzenia promptów do plików znajdziesz w sekcji [Przewodnik po tworzeniu promptów do plików](https://ai.google.dev/gemini-api/docs/files?hl=pl#prompt-guide).
 
-## Dosya yükleyin
+## Prześlij plik
 
-Medya dosyası yüklemek için Files API'yi kullanabilirsiniz. Toplam istek boyutu (dosyalar, metin istemi, sistem talimatları vb. dahil) 100 MB'tan büyük olduğunda her zaman Files API'yi kullanın. Bu sınır, PDF dosyaları için 50 MB'tır.
+Aby przesłać plik multimedialny, możesz użyć interfejsu Files API. Zawsze używaj interfejsu Files API, gdy łączny rozmiar żądania (w tym plików, promptu tekstowego, instrukcji systemowych itp.) przekracza 100 MB. W przypadku plików PDF limit wynosi 50 MB.
 
-Aşağıdaki kod, bir dosyayı yükler ve ardından `interactions.create` çağrısında dosyayı kullanır.
+Poniższy kod przesyła plik, a następnie używa go w wywołaniu funkcji `interactions.create`.
 
 ### Python
 
@@ -40,7 +40,7 @@ client = genai.Client()
 myfile = client.files.upload(file="path/to/sample.mp3")
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input=[
         {"type": "text", "text": "Describe this audio clip"},
         {"type": "audio", "uri": myfile.uri, "mime_type": myfile.mime_type}
@@ -64,7 +64,7 @@ async function main() {
   });
 
   const interaction = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: [
       { type: "text", text: "Describe this audio clip" },
       { type: "audio", uri: myfile.uri, mime_type: myfile.mimeType }
@@ -76,6 +76,52 @@ async function main() {
 await main();
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AudioContent;
+import com.google.genai.gaos.models.interactions.AudioContentMimeType;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.types.File;
+import com.google.genai.types.UploadFileConfig;
+import java.util.Arrays;
+import java.util.List;
+
+Client client = new Client();
+
+File myFile =
+    client.files.upload(
+        new java.io.File("path/to/sample.mp3"),
+        UploadFileConfig.builder().mimeType("audio/mp3").build());
+
+Content textContent = TextContent.builder().text("Describe this audio clip").build();
+Content audioContent =
+    AudioContent.builder()
+        .uri(myFile.uri().orElse(""))
+        .mimeType(AudioContentMimeType.of(myFile.mimeType().orElse("audio/mp3")))
+        .build();
+
+List<Content> contents = Arrays.asList(textContent, audioContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### Go
 
 ```
@@ -85,7 +131,7 @@ if err != nil {
 }
 defer client.Files.Delete(ctx, file.Name)
 
-interaction, err := client.Interactions.Create(ctx, "gemini-3.6-flash", &genai.InteractionRequest{
+interaction, err := client.Interactions.Create(ctx, "gemini-3.8-flash", &genai.InteractionRequest{
     Input: []interface{}{
         genai.NewPartFromFile(*file),
         genai.NewPartFromText("Describe this audio clip"),
@@ -148,7 +194,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d '{
-      "model": "gemini-3.6-flash",
+      "model": "gemini-3.8-flash",
       "input": [
         {"type": "text", "text": "Describe this audio clip"},
         {"type": "audio", "uri": '$file_uri', "mime_type": "'${MIME_TYPE}'"}
@@ -161,9 +207,9 @@ echo
 jq ".outputs[] | select(.type == \"text\") | .text" response.json
 ```
 
-## Dosyanın meta verilerini alma
+## Pobieranie metadanych pliku
 
-`files.get` işlevini çağırarak API'nin yüklenen dosyayı başarıyla depoladığını doğrulayabilir ve dosyanın meta verilerini alabilirsiniz.
+Możesz sprawdzić, czy interfejs API zapisał przesłany plik, i pobrać jego metadane, wywołując funkcję `files.get`.
 
 ### Python
 
@@ -201,6 +247,25 @@ async function main() {
 await main();
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.File;
+import com.google.genai.types.UploadFileConfig;
+
+Client client = new Client();
+
+File myFile =
+    client.files.upload(
+        new java.io.File("path/to/sample.mp3"),
+        UploadFileConfig.builder().mimeType("audio/mp3").build());
+
+String fileName = myFile.name().orElse("");
+File fileMetadata = client.files.get(fileName, null);
+System.out.println(fileMetadata);
+```
+
 ### Go
 
 ```
@@ -231,9 +296,9 @@ file_uri=$(jq -r ".uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## Yüklenen dosyaları listeleme
+## Wyświetlanie listy przesłanych plików
 
-Aşağıdaki kod, yüklenen tüm dosyaların listesini alır:
+Poniższy kod pobiera listę wszystkich przesłanych plików:
 
 ### Python
 
@@ -266,6 +331,20 @@ async function main() {
 await main();
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.File;
+
+Client client = new Client();
+
+System.out.println("My files:");
+for (File f : client.files.list(null)) {
+  System.out.println("  " + f.name().orElse(""));
+}
+```
+
 ### Go
 
 ```
@@ -286,9 +365,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/files" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Yüklenen dosyaları silme
+## Usuwanie przesłanych plików
 
-Dosyalar 48 saat sonra otomatik olarak silinir. Yüklenen bir dosyayı manuel olarak da silebilirsiniz:
+Pliki są automatycznie usuwane po 48 godzinach. Możesz też ręcznie usunąć przesłany plik:
 
 ### Python
 
@@ -323,6 +402,23 @@ async function main() {
 await main();
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.File;
+import com.google.genai.types.UploadFileConfig;
+
+Client client = new Client();
+
+File myFile =
+    client.files.upload(
+        new java.io.File("path/to/sample.mp3"),
+        UploadFileConfig.builder().mimeType("audio/mp3").build());
+
+client.files.delete(myFile.name().orElse(""), null);
+```
+
 ### Go
 
 ```
@@ -340,191 +436,192 @@ curl --request "DELETE" https://generativelanguage.googleapis.com/v1beta/$name \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Kullanım bilgileri
+## informacje o korzystaniu z usługi,
 
-Medya dosyalarını yüklemek ve bu dosyalarla etkileşim kurmak için Files API'yi kullanabilirsiniz. Files API, proje başına 20 GB'a kadar dosya depolamanıza olanak tanır. Dosya başına maksimum boyut 2 GB'tır. Dosyalar 48 saat boyunca saklanır. Bu süre zarfında, dosyalarla ilgili meta verileri almak için API'yi kullanabilirsiniz ancak dosyaları indiremezsiniz.
-Files API, Gemini API'nin kullanılabildiği tüm bölgelerde ücretsiz olarak kullanılabilir.
+Interfejs Files API umożliwia przesyłanie plików multimedialnych i korzystanie z nich. Interfejs Files API umożliwia przechowywanie do 20 GB plików na projekt, przy czym maksymalny rozmiar pojedynczego pliku to 2 GB. Pliki są przechowywane przez 48 godzin.
 
-## Dosya istemi stratejileri
+W tym czasie możesz używać interfejsu API do pobierania metadanych plików. Nie możesz jednak pobierać plików przesłanych przez użytkowników. Pliki wygenerowane przez modele, takie jak filmy, możesz pobrać za pomocą metody `files.download`. Interfejs Files API jest dostępny bezpłatnie we wszystkich regionach, w których dostępny jest interfejs Gemini API.
 
-Bu bölümde, Gemini API için istemlerle medya dosyalarını kullanmayla ilgili rehberlik ve en iyi uygulamalar yer almaktadır.
+## Strategie dotyczące promptów w plikach
 
-İstemlerinizde çeşitli veri türlerini kullanabilmek, Gemini API ile hangi görevleri yapabileceğiniz konusunda daha fazla esneklik sağlar. Örneğin, modele lezzetli bir yemeğin fotoğrafını gönderip yemekle ilgili kısa bir blog yazısı yazmasını isteyebilirsiniz.
+W tej sekcji znajdziesz wskazówki i sprawdzone metody dotyczące używania plików multimedialnych z promptami w interfejsie Gemini API.
+
+Możliwość używania w promptach różnych typów danych zapewnia większą elastyczność w zakresie zadań, które możesz wykonywać za pomocą interfejsu Gemini API. Możesz na przykład wysłać modelowi zdjęcie pysznego posiłku i poprosić go o napisanie krótkiego bloga na jego temat.
 
 |  |  |
 | --- | --- |
-| **İstem** | **Yanıt** |
-| Bu resme dayalı olarak kısa ve ilgi çekici bir blog yayını yaz. Fotoğraftaki yemeğin açıklamasını içermeli ve yemek hazırlama yolculuğumdan bahsetmelidir.   Çerezler | Yemek hazırlığı, zamandan ve paradan tasarruf etmenin yanı sıra daha sağlıklı beslenmenize de yardımcı olur. Bu yemek, önceden hazırlanabilen sağlıklı ve lezzetli bir yemeğe harika bir örnektir.  Bu öğünde kahverengi pirinç, fırında sebzeler ve teriyaki soslu tavuk bulunur. Esmer pirinç, size uzun süreli enerji verecek sağlıklı ve kompleks bir karbonhidrattır. Kızartılmış sebzeler, günlük vitamin ve mineral ihtiyacınızı karşılamak için harika bir seçenektir. Teriyaki soslu tavuk ise lezzetli ve protein açısından zengin bir seçenektir.  Bu yemeği hazırlamak da kolaydır. Kahverengi pirinci pişirin, sebzeleri fırında kızartın ve teriyaki soslu tavuğu pişirin. Her şey piştikten sonra yemek hazırlama kaplarına bölüp buzdolabında saklayın. Ardından, yoğun sabahlarınızda bir kap alıp çıkabilirsiniz.  Önceden hazırlanabilen sağlıklı ve lezzetli bir yemek arıyorsanız bu yemek harika bir seçenek. Besinler ve lezzetlerle dolu bu yemek, sizi tok ve memnun hissettirecek.  Sağlıklı ve lezzetli yemek hazırlama! |
+| **Prompt** | **Odpowiedź** |
+| Napisz krótki, angażujący post na bloga na podstawie tego zdjęcia. Powinien zawierać opis posiłku na zdjęciu i opowiadać o mojej przygodzie z przygotowywaniem posiłków.   Pliki cookie | Przygotowywanie posiłków z wyprzedzeniem to świetny sposób na oszczędzanie czasu i pieniędzy, a także na zdrowsze odżywianie. Ten posiłek to świetny przykład zdrowego i smacznego dania, które można przygotować z wyprzedzeniem.  Posiłek składa się z brązowego ryżu, pieczonych warzyw i kurczaka teriyaki. Brązowy ryż to zdrowy i złożony węglowodan, który zapewni Ci energię na dłużej. Pieczone warzywa to świetny sposób na dostarczenie organizmowi codziennej dawki witamin i minerałów, a kurczak teriyaki to pyszna i bogata w białko opcja.  To danie jest też proste w przygotowaniu. Wystarczy ugotować brązowy ryż, upiec warzywa i przygotować kurczaka teriyaki. Gdy wszystko będzie gotowe, podziel danie na porcje i umieść je w pojemnikach, a następnie przechowuj w lodówce. W zajęte poranki możesz po prostu wziąć pojemnik i wyjść z domu.  Jeśli szukasz zdrowego i pysznego posiłku, który można przygotować wcześniej, to danie będzie świetnym wyborem. Jest pełna składników odżywczych i smaku, a do tego zaspokaja głód i daje uczucie sytości.  Życzymy zdrowego i smacznego przygotowywania posiłków! |
 
-Medya dosyalarının kullanıldığı istemlerden istediğiniz çıkışı almakta zorlanıyorsanız istediğiniz sonuçları elde etmenize yardımcı olabilecek bazı stratejiler vardır. Aşağıdaki bölümlerde, çok formatlı giriş kullanan istemleri iyileştirmeye yönelik tasarım yaklaşımları ve sorun giderme ipuçları verilmektedir.
+Jeśli masz problem z uzyskaniem oczekiwanych wyników z promptów, które wykorzystują pliki multimedialne, możesz zastosować kilka strategii, które pomogą Ci osiągnąć zamierzony efekt. W kolejnych sekcjach znajdziesz podejścia do projektowania i wskazówki dotyczące rozwiązywania problemów, które pomogą Ci ulepszyć prompty korzystające z danych wejściowych w różnych formatach.
 
-Aşağıdaki en iyi uygulamaları izleyerek çok formatlı istemlerinizi iyileştirebilirsiniz:
+Aby ulepszyć prompty multimodalne, postępuj zgodnie z tymi sprawdzonymi metodami:
 
-- ### [İstem tasarımıyla ilgili temel bilgiler](#specific-instructions)
+- ### [Podstawy projektowania promptów](#specific-instructions)
 
-  - **Talimatlarınızda net olun**: Yanlış yorumlamaya en az yer bırakacak şekilde net ve kısa talimatlar oluşturun.
-  - **İsteminize birkaç örnek ekleyin:** Ne elde etmek istediğinizi göstermek için gerçekçi birkaç görev örneği kullanın.
-  - **Adım adım ilerleyin**: Karmaşık görevleri yönetilebilir alt hedeflere ayırarak modele süreç boyunca rehberlik edin.
-  - **Çıkış biçimini belirtin**: İsteminizde, çıkışın istediğiniz biçimde (ör. Markdown, JSON, HTML vb.) olmasını isteyin.
-  - **Tek resimli istemlerde resminizi önce girin**: Gemini, resim ve metin girişlerini herhangi bir sırada işleyebilse de tek resim içeren istemlerde, resim (veya video) metin isteminden önce yerleştirilirse daha iyi performans gösterebilir. Ancak, anlamlı olması için resimlerin metinlerle yoğun bir şekilde iç içe geçmesini gerektiren istemlerde en doğal olan sırayı kullanın.
-- ### [Çok formatlı isteminizle ilgili sorunları giderme](#troubleshooting)
+  - **Podawaj konkretne instrukcje:** twórz jasne i zwięzłe instrukcje, które pozostawiają jak najmniej miejsca na błędną interpretację.
+  - **Dodaj do prompta kilka przykładów few-shot:** użyj realistycznych przykładów few-shot, aby zilustrować, co chcesz osiągnąć.
+  - **Podziel zadanie na mniejsze części:** podziel złożone zadania na łatwe do wykonania podcele, prowadząc model przez cały proces.
+  - **Określ format wyjściowy:** w prompcie poproś o wygenerowanie danych wyjściowych w wybranym formacie, np. Markdown, JSON, HTML itp.
+  - **W przypadku promptów z jednym obrazem umieszczaj go na pierwszym miejscu:** Gemini może przetwarzać dane wejściowe w postaci obrazów i tekstu w dowolnej kolejności, ale w przypadku promptów zawierających jeden obraz może działać lepiej, jeśli ten obraz (lub film) zostanie umieszczony przed promptem tekstowym. W przypadku promptów, które wymagają, aby obrazy były ściśle powiązane z tekstem, użyj kolejności, która jest najbardziej naturalna.
+- ### [Rozwiązywanie problemów z promptem multimodalnym](#troubleshooting)
 
-  - **Model, resmin ilgili bölümünden bilgi almıyorsa:** İstemden, resmin hangi yönleriyle ilgili bilgi almasını istediğinize dair ipuçları verin.
-  - **Model çıktısı çok genel ise (resim/video girişine yeterince uyarlanmamışsa):** İstemin başında, görev talimatını vermeden önce modelden resimleri veya videoyu açıklamasını ya da modelden resimdeki içeriğe atıfta bulunmasını isteyin.
-  - **Hangi bölümün başarısız olduğunu belirlemek için:** Modelin ilk anlayışını ölçmek üzere modelden resmi açıklamasını veya gerekçesini açıklamasını isteyin.
-  - **İsteminiz halüsinasyon içeren içeriklerle sonuçlanıyorsa:** Sıcaklık ayarını düşürmeyi veya modelden daha kısa açıklamalar istemeyi deneyin. Böylece modelin ek ayrıntılar üretme olasılığı azalır.
-  - **Örnekleme parametrelerini ayarlama:** Modelin yaratıcılığını ayarlamak için farklı sıcaklık ayarları ve top-k seçimleriyle denemeler yapın.
+  - **Jeśli model nie pobiera informacji z odpowiedniej części obrazu:** podaj wskazówki dotyczące aspektów obrazu, z których prompt ma pobierać informacje.
+  - **Jeśli dane wyjściowe modelu są zbyt ogólne (niedostosowane do danych wejściowych obrazu/filmu):**  na początku prompta poproś model o opisanie obrazów lub filmu przed podaniem instrukcji zadania albo poproś model o odniesienie się do tego, co znajduje się na obrazie.
+  - **Aby sprawdzić, która część zawiodła:** poproś model o opisanie obrazu lub wyjaśnienie jego rozumowania, aby ocenić wstępne zrozumienie modelu.
+  - **Jeśli prompt spowoduje wygenerowanie halucynacji:** spróbuj zmniejszyć ustawienie temperatury lub poproś model o krótsze opisy, aby zmniejszyć prawdopodobieństwo ekstrapolacji dodatkowych szczegółów.
+  - **Dostrajanie parametrów próbkowania:** eksperymentuj z różnymi ustawieniami temperatury i wyborami Top-K, aby dostosować kreatywność modelu.
 
-### Talimatlarınızda net olun
+### Podawaj szczegółowe instrukcje
 
-İstemler en iyi sonucu net ve ayrıntılı olduğunda verir. Aklınızda belirli bir çıkış varsa istediğiniz çıkışı elde etmek için bu şartı isteme eklemeniz daha iyi olur.
+Prompty są najbardziej skuteczne, gdy są jasne i szczegółowe. Jeśli masz na myśli konkretny wynik, lepiej uwzględnić to wymaganie w prompcie, aby mieć pewność, że uzyskasz oczekiwany rezultat.
 
-Havaalanı panosunun yer aldığı bu resim için modele yalnızca "bu resmi açıkla" komutunu verdiğinizde genel bir açıklama oluşturulabilir. Modelin resimdeki saati ve şehri ayrıştırması gerekiyorsa bu isteği doğrudan isteminize ekleyebilirsiniz.
+W przypadku tego zdjęcia tablicy na lotnisku poproszenie modelu o „opisanie tego obrazu” może wygenerować ogólny opis. Jeśli chcesz, aby model przeanalizował czas i miasto na obrazie, możesz uwzględnić to żądanie bezpośrednio w prompcie.
 
-| İstem | Model yanıtı |
+| Prompt | Odpowiedź modelu |
 | --- | --- |
-| Bu resmi tanımla. | Resimde, havalimanındaki gelen ve giden uçuşlar tabelası gösteriliyor. |
+| Opisz ten obraz. | Obraz przedstawia tablicę przylotów i odlotów na lotnisku. |
 
-| **Güncellenen istem** | **İyileştirilmiş yanıt** |
+| **Zaktualizowany prompt** | **Ulepszona odpowiedź** |
 | --- | --- |
-| Seyahat zaman çizelgesi Bu resimde gösterilen havaalanı panosundaki saati ve şehri ayrıştırarak listeleyin. | - 10:50 Moskova - 11:05 Edinburgh - 11:05 Londra - 11:10 Bükreş - 11:30 Kiev - 11:35 Dublin - 11:45 East Midlands - 12:15 Sofya - 12:30 Londra - 12:30 Newcastle - 12:40 St Petersburg - 12:40 Londra - 12:45 Manchester |
+| Rozkład podróży Przeanalizuj czas i miasto z tablicy lotniska widocznej na tym obrazie i utwórz z nich listę. | - 10:50 Moskwa - 11:05 Edynburg - 11:05 Londyn - 11:10 Bukareszt - 11:30 Kijów - 11:35 Dublin - 11:45 East Midlands - 12:15 Sofia - 12:30 Londyn - 12:30 Newcastle - 12:40 St Petersburg - 12:40 Londyn - 12:45 Manchester |
 
-### Birkaç örnek ekleyin
+### Dodaj kilka przykładów
 
-Gemini modeli, istediğiniz çıktıyı anlamak için örnek olarak kullanabileceği birden fazla giriş kabul edebilir. Bu örnekleri eklemek, modelin kalıpları belirlemesine ve verilen resimler ile yanıtlar arasındaki ilişkiyi yeni örneğe uygulamasına yardımcı olabilir. Bu, "az görevli" öğrenme olarak da adlandırılır.
+Model Gemini może akceptować wiele danych wejściowych, których może używać jako przykładów, aby zrozumieć, jakich danych wyjściowych oczekujesz. Dodanie tych przykładów może pomóc modelowi w identyfikowaniu wzorców i stosowaniu relacji między podanymi obrazami a odpowiedziami do nowego przykładu. Jest to tzw. uczenie „few-shot”.
 
-Aşağıdaki örnekte, ilk çıkış cümle şeklinde yazılmış ve ülkeyi (Brezilya) de içeriyor. Çıktının farklı bir biçimde veya tarzda olmasını ve yalnızca şehri (ülkeyi değil) istiyorsunuz. İsteminize birkaç görevli örnek eklemek, modelin istediğiniz şekilde yanıt vermesini sağlayabilir.
+W poniższym przykładzie początkowy wynik jest zapisany w formie zdania i zawiera też nazwę kraju (Brazylia). Załóżmy, że chcesz uzyskać dane wyjściowe w innym formacie lub stylu i potrzebujesz tylko nazwy miasta, a nie kraju. Dodanie do promptu przykładów few-shot może nakierować model na udzielenie odpowiedzi w sposób, w jaki chcesz.
 
-| **İstem** | **Model yanıtı** |
+| **Prompt** | **Odpowiedź modelu** |
 | --- | --- |
-| Seyahat zaman çizelgesi Simge yapıyla birlikte şehri belirleyin. | Bu simge yapı, Brezilya'nın Rio de Janeiro şehrindeki Kurtarıcı İsa heykelidir. |
+| Rozkład podróży Określ miasto wraz z punktem orientacyjnym. | Jest to statua Chrystusa Zbawiciela w Rio de Janeiro w Brazylii. |
 
-| **Güncellenen istem** | **İyileştirilmiş yanıt** |
+| **Zaktualizowany prompt** | **Ulepszona odpowiedź** |
 | --- | --- |
-| Simge yapıyla birlikte şehri belirleyin. colosseum | city: Rome, landmark: the Colosseum. |
-| Yasak Şehir | city: Beijing, landmark: Forbidden City |
-| forbidden-city | city: Rio de Janeiro, landmark: Christ the Redeemer statue |
+| Określ miasto wraz z punktem orientacyjnym. Koloseum | miasto: Rzym, punkt orientacyjny: Koloseum. |
+| Zakazane Miasto | miasto: Pekin, punkt orientacyjny: Zakazane Miasto |
+| zakazane-miasto | miasto: Rio de Janeiro, punkt orientacyjny: Statua Chrystusa Zbawiciela |
 
-### Adım adım inceleme
+### Szczegółowe instrukcje
 
-Hem görsel anlayış hem de akıl yürütme gerektiren görevler gibi karmaşık görevleri daha küçük ve basit adımlara bölmek faydalı olabilir. Alternatif olarak, isteminizde doğrudan modelden "adım adım düşünmesini" istemek de etkili olabilir.
+W przypadku złożonych zadań, takich jak te, które wymagają zarówno zrozumienia wizualnego, jak i rozumowania, warto podzielić zadanie na mniejsze, prostsze etapy. Możesz też bezpośrednio poprosić model, aby „myślał krok po kroku”.
 
-| İstem | Model yanıtı |
+| Prompt | Odpowiedź modelu |
 | --- | --- |
-| Tuvalet kağıdım ne zaman bitecek? | Çok yakında yalnızca 3 rulo hakkınız kalacak. |
+| Kiedy skończy mi się papier toaletowy? | Wkrótce zostaną Ci tylko 3 rolki. |
 
-| **Güncellenen istem** | **İyileştirilmiş yanıt** |
+| **Zaktualizowany prompt** | **Ulepszona odpowiedź** |
 | --- | --- |
-| 1. Öncelikle bu resimde kaç rulo tuvalet kağıdı olduğunu sayın. 2. Ardından, bir kişinin günde ne kadar tuvalet kağıdı kullandığını belirleyin. 3. Bu tuvalet kağıdı rulolarının ne kadar süre dayanacağını hesaplayın. | 1. Bu resimde 3 rulo tuvalet kağıdı var. 2. Tipik bir kişi günde yaklaşık 20 yaprak tuvalet kağıdı kullanır. 3. Her ruloda 200 yaprak varsa her rulo yaklaşık 10 gün dayanır. Bu nedenle, 3 rulo yaklaşık bir ay dayanır. |
+| 1. Najpierw policz, ile rolek papieru toaletowego znajduje się na tym zdjęciu. 2. Następnie określ, ile papieru toaletowego zużywa przeciętna osoba w ciągu dnia. 3. Oblicz, na jak długo wystarczą te rolki papieru toaletowego. | 1. Na tym zdjęciu są 3 rolki papieru toaletowego. 2. Przeciętna osoba zużywa około 20 arkuszy papieru toaletowego dziennie. 3. Jeśli każda rolka zawiera 200 arkuszy, wystarczy na około 10 dni. Dlatego 3 rolki wystarczą na około miesiąc. |
 
-Matematik problemleri veya diğer sözel problemler, modelden adım adım düşünmesini istemek için idealdir.
+Zadania matematyczne i inne zadania tekstowe to świetne przykłady, w przypadku których warto poprosić model o rozwiązanie krok po kroku.
 
-| **İstem** | **Yanıt** |
+| **Prompt** | **Odpowiedź** |
 | --- | --- |
-| Dizideki 4. terim nedir? | -135 |
+| Jaki jest czwarty wyraz w ciągu? | -135 |
 
-Modelin yanıtı yanlış. Bunu iyileştirmenin bazı yolları, modelden isteme yanıt vermeden önce sorunu ayrıştırmasını istemektir.
+Odpowiedź modelu jest nieprawidłowa. Aby to poprawić, możesz poprosić model o przeanalizowanie problemu przed udzieleniem odpowiedzi na prompt.
 
-| **İstem** | **Yanıt** |
+| **Prompt** | **Odpowiedź** |
 | --- | --- |
-| Önce resimdeki formülü ayrıştırın.  Ardından, formüle göre "Dizideki 4. terim nedir?" sorusunu yanıtlayın. | *Sonucu genişletmek için tıklayın* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. n = 4 değerini formülde yerine koyun: $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. b(3) değerini bilmiyoruz. Bu nedenle, n = 3 değerini formülde yerine koyun: $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. b(2) değerini bilmiyoruz. Bu nedenle, n = 2 değerini formülde yerine koyun: $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. b(1) değerinin 15 olduğunu biliyoruz. Bu nedenle, formülde yerine koyalım: $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. b(2) değerini bildiğimize göre bunu b(3) formülünde yerine koyalım: $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. Artık b(3) değerini bildiğimize göre bu değeri b(4) formülünde yerine koyabiliriz: $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   Bu nedenle, dizideki 4. terim -405'tir. |
+| Najpierw przeanalizuj formułę na obrazie.  Następnie na podstawie wzoru odpowiedz na pytanie „Jaki jest czwarty wyraz ciągu?”. | *Kliknij, aby rozwinąć wynik* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. Podstaw n = 4 do wzoru: $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. Nie znamy wartości b(3), więc podstawiamy n = 3 do wzoru: $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. Nie znamy wartości b(2), więc wstawiamy n = 2 do wzoru: $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. Wiemy, że wartość b(1) wynosi 15, więc podstawiamy ją do wzoru: $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. Znamy już wartość b(2), więc możemy ją podstawić do wzoru na b(3): $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. Teraz, gdy znamy wartość b(3), podstawmy ją do wzoru na b(4): $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   Czwarty wyraz ciągu to zatem -405. |
 
-Bu model yanıtı doğru. Yanıtı daha da kolaylaştırmak için modele adım adım düşünmesini söyleyebilirsiniz.
+Odpowiedź modelu jest prawidłowa. Aby ją jeszcze bardziej usprawnić, możesz poprosić model o przemyślenie krok po kroku.
 
-| **Güncellenen istem** | **İyileştirilmiş yanıt** |
+| **Zaktualizowany prompt** | **Ulepszona odpowiedź** |
 | --- | --- |
-| Dizideki 4. terim nedir? Adım adım düşünün. | İlk terim 15'tir.  İkinci terim b(1) \* (-3) = 15 \* (-3) = -45 olur.  Üçüncü terim b(2) \* (-3) = -45 \* (-3) = 135'tir.  Dördüncü terim b(3) \* (-3) = 135 \* (-3) = -405 olur. |
+| Jaki jest czwarty wyraz w ciągu? Myśl krok po kroku. | Pierwszy wyraz to 15.  Drugi wyraz to b(1) \* (-3) = 15 \* (-3) = -45.  Trzeci wyraz to b(2) \* (-3) = -45 \* (-3) = 135.  Czwarty wyraz to b(3) \* (-3) = 135 \* (-3) = -405. |
 
-### Çıkış biçimini belirtin
+### Określanie formatu wyjściowego
 
-Model çıkışının belirli bir biçimde (ör.Markdown, JSON, HTML) olması gerektiğinde yaygın bir sorun yaşanır. Bu durum, özellikle model çıkışının sonraki bir görev tarafından alınması gerektiğinde ortaya çıkar. İstemde modeli bu biçimde çıkış üretmeye yönlendirerek bu biçimde çıkış üretmeyi deneyebilirsiniz. Aşağıda iki örnek verilmiştir:
+Częstym problemem jest konieczność generowania danych wyjściowych modelu w określonym formacie (np. Markdown, JSON, HTML), zwłaszcza jeśli dane wyjściowe modelu mają być wykorzystywane w dalszych zadaniach. Możesz spróbować uzyskać dane wyjściowe w tym formacie, instruując model w prompcie. Oto 2 przykłady:
 
-| İstem | Model yanıtı |
+| Prompt | Odpowiedź modelu |
 | --- | --- |
-| Bu resimdeki tabloyu Markdown biçiminde ayrıştır | ```none | Konu | Durum | Süre | Başlangıç tarihi | Son tarih | | ------- | ------ | ---- | ---------- | ------ | | Matematik | Tamamlandı | 1,5 saat | 29.11.2023 | 01.12.2023 | | Coğrafya | Tamamlandı | 30 dakika | 02.12.2023 | 04.12.2023 | | Fizik | Devam ediyor | 2 saat | 03.12.2023 | 05.12.2023 | | Biyoloji | Başlatılmadı | 6 saat | 02.11.2016 | 06.12.2023 | ``` |
+| Przekształć tabelę na tym obrazie w format Markdown | ```none | Przedmiot | Stan | Czas | Data rozpoczęcia | Termin | | ------- | ------ | ---- | ---------- | ------ | | Matematyka | Gotowe | 1,5 godz. | 29.11.2023 | 1.12.2023 | | Geografia | Gotowe | 30 min | 2.12.2023 | 4.12.2023 | | Fizyka | W trakcie | 2 godz. | 3.12.2023 | 5.12.2023 | | Biologia | Nierozpoczęte | 6 godz. | 2.11.2016 | 6.12.2023 | ``` |
 
-| **İstem** | **Model yanıtı** |
+| **Prompt** | **Odpowiedź modelu** |
 | --- | --- |
-| Aşağıdaki tüm özelliklerin listesini sağlayın:  Malzemeler, mutfak türü, vejetaryen olup olmadığı (JSON biçiminde) | ```json { "ingredients": [ "rice", "shrimp", "clams", "mussels", "peas", "tomatoes", "onions", "garlic", "olive oil", "paprika", "salt", "pepper" ], "type of cuisine": "Spanish", "vegetarian": false } ``` |
+| Podaj listę wszystkich tych atrybutów:  składniki, rodzaj kuchni, czy danie jest wegetariańskie, w formacie JSON. | ```json { "ingredients": [ "rice", "shrimp", "clams", "mussels", "peas", "tomatoes", "onions", "garlic", "olive oil", "paprika", "salt", "pepper" ], "type of cuisine": "Spanish", "vegetarian": false } ``` |
 
-### Tek resim istemlerinde resminizi ön plana çıkarma
+### W przypadku promptów z pojedynczym obrazem umieść obraz na pierwszym miejscu.
 
-Gemini, istemdeki görüntü ve metni herhangi bir sırada yorumlayabilir ancak metin isteminden önce tek bir görüntü yerleştirmek daha iyi sonuçlar verebilir.
-Aşağıdaki örneklerde, her istemde önce resmin, ardından metnin geldiğini göreceksiniz.
+Gemini może interpretować obraz i tekst w dowolnej kolejności w prompcie, ale umieszczenie jednego obrazu przed promptem tekstowym może przynieść lepsze wyniki.
+W poniższych przykładach obraz jest zawsze podany przed tekstem w każdym promcie.
 
-### Çok formatlı isteminizle ilgili sorunları giderme
+### Rozwiązywanie problemów z promptem multimodalnym
 
-Faydalı bir yanıt alamıyorsanız isteminizle ilgili sorunları gidermeniz gerekebilir. Deneyebileceğiniz birkaç strateji:
+Jeśli nie otrzymujesz pomocnej odpowiedzi, może być konieczne rozwiązanie problemu z promptem. Oto kilka strategii, które możesz wypróbować.
 
-#### Model, resmin ilgili bölümünden bilgi almıyorsa
+#### Jeśli model nie pobiera informacji z odpowiedniej części obrazu
 
-Daha ayrıntılı bir yanıt almak için istemin, yanıtını oluştururken hangi resim öğelerinden bilgi almasını istediğinizi belirtebilirsiniz.
+Aby uzyskać bardziej szczegółową odpowiedź, możesz wskazać, z których aspektów obrazu ma czerpać informacje prompt, aby na ich podstawie udzielić odpowiedzi.
 
-| İstem | Model yanıtı |
+| Prompt | Odpowiedź modelu |
 | --- | --- |
-| Bu bezler bir bebeğe kaç gün yeter? | Bezler bitmeden 198 gün boyunca kullanılabilir. |
+| Na ile dni wystarczą te pieluszki dla dziecka? | Pieluchy wystarczą na 198 dni. |
 
-| **Güncellenen istem** | **İyileştirilmiş yanıt** |
+| **Zaktualizowany prompt** | **Ulepszona odpowiedź** |
 | --- | --- |
-| Bu bezler bitmeden ne kadar süre dayanır?  Çocuğun yaşını belirlemek için kutunun üzerinde gösterilen ağırlığı ve kutudaki toplam bebek bezi sayısını kullanın.  Toplam sayıyı, çocuğun günde kullandığı bez sayısına bölün. | Kutuda 198 adet bez bulunur. Kutuda, bezlerin 10-17 kg ağırlığındaki çocuklar için olduğu belirtiliyor.  Bu ağırlık aralığındaki ortalama bir çocuk muhtemelen 1-2 yaşlarındadır.  2 yaşındaki bir çocuk genellikle günde 6 bez kullanır. Bu nedenle, bezler yaklaşık 33 gün (198/6) dayanır. |
+| Na jak długo wystarczą mi te pieluszki?  Na podstawie wagi podanej na opakowaniu określ wiek dziecka, a następnie podaj łączną liczbę pieluszek w opakowaniu.  Podziel łączną liczbę pieluch przez liczbę pieluch zużywanych przez dziecko dziennie. | Pudełko zawiera 198 pieluszek. Na opakowaniu jest napisane, że pieluszki są przeznaczone dla dziecka o wadze 10–17 kg.  Średnie dziecko w tym przedziale wagowym ma prawdopodobnie od 1 do 2 lat.  2-letnie dziecko zużywa zwykle 6 pieluszek dziennie, więc wystarczą one na około 33 dni (198/6). |
 
-#### Model çıkışı çok genel ve resim girişine yeterince uyarlanmamışsa
+#### Jeśli dane wyjściowe modelu są zbyt ogólne i niedostosowane do obrazu wejściowego.
 
-Modelin yanıtını resimlere göre uyarlamasına yardımcı olmak için akıl yürütme görevini gerçekleştirmeden önce resimleri açıklamasını isteyin.
+Aby pomóc modelowi dostosować odpowiedź do obrazów, poproś go o ich opisanie przed wykonaniem zadania związanego z rozumowaniem.
 
-| İstem | Model yanıtı |
+| Prompt | Odpowiedź modelu |
 | --- | --- |
-| Bu resimlerin ortak noktası nedir? | Dört resmin tamamı manzara fotoğrafı örnekleridir. |
+| Co łączy te obrazy? | Wszystkie 4 obrazy to przykłady fotografii krajobrazowej. |
 
-| **Güncellenen istem** | **İyileştirilmiş yanıt** |
+| **Zaktualizowany prompt** | **Ulepszona odpowiedź** |
 | --- | --- |
-| Öncelikle her resimde ne olduğunu ayrıntılı olarak açıklayın. Bu resimlerin ortak noktası nedir? | İlk resimde, bir kişinin bavul hazırladığı gösteriliyor. İkinci resimde, bir alışveriş merkezindeki boş koridor gösteriliyor. Üçüncü resimde bir rulo tuvalet kağıdı gösteriliyor. Dördüncü resimde karanlık ve fırtınalı bir deniz gösteriliyor.  Bu resimlerin ortak özelliği, hepsinin geçiş alanlarına örnek olmasıdır. Geçiş alanları, iki yer veya durum arasında kalan yerler ya da durumlardır. Genellikle belirsizlik veya muğlaklık hissiyle karakterize edilirler.  İlk resimde, kişinin evde ve seyahatte olduğu gösteriliyor. İkinci resimde, iki mağaza arasındaki koridor gösteriliyor. Üçüncü resimde, banyoyu temsil edebilecek tuvalet kağıdı gösteriliyor. Banyo, özel ve kamusal alanlar arasında geçiş yapılan bir yerdir. Dış dünyaya girerken veya dış dünyadan çıkarken kendimizi hazırladığımız bir yerdir.  Dördüncü resimde, sakin ve fırtınalı deniz arasında bir geçiş gösteriliyor.  Geçiş alanları hem heyecan verici hem de rahatsız edici olabilir. Yeni başlangıçların veya sonların yeri olabilirler. Bunlar, düşünme veya harekete geçme yeri olabilir. |
+| Najpierw szczegółowo opisz, co znajduje się na każdym obrazie. Co łączy te obrazy? | Pierwszy obraz przedstawia osobę pakującą walizkę. Drugi obraz przedstawia pusty korytarz w centrum handlowym. Trzeci obraz przedstawia rolkę papieru toaletowego. Czwarty obraz przedstawia ciemne i sztormowe morze.  Wspólną cechą tych obrazów jest to, że wszystkie są przykładami przestrzeni liminalnych. Przestrzenie liminalne to miejsca lub sytuacje, które znajdują się pomiędzy dwoma innymi miejscami lub sytuacjami. Często charakteryzują się poczuciem niepewności lub niejednoznaczności.  Pierwszy obraz przedstawia osobę, która jest w domu i w podróży. Drugi obraz przedstawia korytarz między dwoma sklepami. Trzeci obraz przedstawia papier toaletowy, który może symbolizować łazienkę. Łazienka to przestrzeń przejściowa między strefą prywatną a publiczną. To miejsce, w którym przygotowujemy się do wejścia do świata zewnętrznego lub wyjścia z niego.  Na czwartym zdjęciu widać morze w stanie pośrednim między spokojnym a sztormowym.  Przestrzenie liminalne mogą być zarówno ekscytujące, jak i niepokojące. Mogą być miejscem nowego początku lub zakończenia. Mogą być miejscem refleksji lub miejscem działania. |
 
-Ayrıca modelden, resimdeki içeriğe açıkça atıfta bulunmasını da isteyebilirsiniz.
+Możesz też wyraźnie poprosić model o odniesienie się do tego, co znajduje się na obrazie.
 
-| **Güncellenen istem** | **İyileştirilmiş yanıt** |
+| **Zaktualizowany prompt** | **Ulepszona odpowiedź** |
 | --- | --- |
-| Bu resimlerin ortak noktası nedir? Yanıtınızda resimlerdeki içeriklere atıfta bulunun. | Resimlerin tamamı seyahatle ilgili. İlk resimde valiz hazırlayan bir kişi, ikinci resimde alışveriş merkezindeki boş bir koridor, üçüncü resimde bir rulo tuvalet kağıdı, dördüncü resimde ise karanlık ve fırtınalı bir deniz gösteriliyor.  Bu resimlerin hepsi seyahatle ilgili çünkü seyahat edenlerin ihtiyaç duyduğu veya kullandığı şeyler. İlk resimde, bir valizi hazırlayan bir kişi gösteriliyor. Bu, insanların seyahate çıkarken yaptığı bir şeydir. İkinci resimde, insanların seyahatleri için eşya satın almak üzere sık sık gittiği bir yer olan alışveriş merkezindeki boş bir koridor gösteriliyor. Üçüncü resimde, insanların seyahat ederken sıkça kullandığı bir ürün olan tuvalet kağıdı rulosu gösteriliyor. Dördüncü resimde, insanların seyahat ederken sıkça karşılaştığı bir durum olan karanlık ve fırtınalı bir deniz gösteriliyor. |
+| Co łączy te obrazy? Odwołuj się do tego, co znajduje się na obrazach. | Wszystkie obrazy są związane z podróżami. Pierwsze zdjęcie przedstawia osobę pakującą walizkę, drugie – pusty korytarz w centrum handlowym, trzecie – stos papieru toaletowego, a czwarte – ciemne i burzliwe morze.  Wszystkie te obrazy są związane z podróżami, ponieważ przedstawiają rzeczy, których ludzie potrzebują lub używają podczas podróży. Pierwsze zdjęcie przedstawia osobę pakującą walizkę, co robią ludzie, gdy wybierają się w podróż. Drugie zdjęcie przedstawia pusty korytarz w centrum handlowym, czyli miejscu, do którego ludzie często chodzą, aby kupić rzeczy na wyjazdy. Trzeci obraz przedstawia stos papieru toaletowego, którego ludzie często używają w podróży. Czwarty obraz przedstawia ciemne i sztormowe morze, które często można spotkać podczas podróży. |
 
-Aynı ipuçları, resimlerden elde edilen reklam öğesi çıkışları için de geçerlidir. Tavşanın yer aldığı aşağıdaki örnekte, modelden resimdeki unsurları dahil etmesini açıkça istemek çıkışı iyileştirebilir.
+Te same wskazówki dotyczą wyników kreatywnych z obrazów. W tym przykładzie z królikiem wyraźne poproszenie modelu o uwzględnienie aspektów obrazu może poprawić wynik.
 
-| İstem | Model yanıtı |
+| Prompt | Odpowiedź modelu |
 | --- | --- |
-| Bu resim hakkında bir şiir yazabilir misin? | Küçük tavşan, yumuşacık ve kahverengi,  Tarlada zıplıyor, yukarı ve aşağı.  Kulakların uzun, kuyruğun küçük,  Sen hepsinin en tatlısısın.  Yeşil ve tatlı çimleri yersin,  Beni görünce de zıplayarak uzaklaşırsın.  Ama her zaman arkadaşın olacağım,  Küçük tavşan, sonuna kadar. |
+| Czy możesz napisać wiersz o tym obrazie? | Mały króliczku, tak miękki i brązowy,  skaczący po polu w górę i w dół.  Uszy masz długie, ogon krótki,  Jesteś najsłodszym stworzeniem ze wszystkich.  Skubiesz trawę, tak zieloną i słodką,  I odskakujesz, gdy mnie widzisz.  Ale zawsze będę Twoim przyjacielem,  Króliczku, aż do samego końca. |
 
-| **Güncellenen istem** | **İyileştirilmiş yanıt** |
+| **Zaktualizowany prompt** | **Ulepszona odpowiedź** |
 | --- | --- |
-| Bu resim hakkında, yeri de belirterek betimleyici ve etkileyici bir şiir yazabilir misin? | Çayırda küçük bir tavşan,  Kulakları çok uzun, çok keskin.  Uzakta, baktığın yerde ne görüyorsun?  Is it the ocean blue,  Sparkling in the sun's hue?  Ya da dalgaların çarpıp kükremesi,  Bayıldığınız bir ritim?  Küçük tavşan, doğruyu söyle bana,  İlginizi bu kadar çok çeken şey ne?  Tuzlu esinti mi,  Yoksa martıların çığlıkları mı hoşunuza gidiyor?  Belki de her şeyin büyüklüğüdür,  Dünya hem çok büyük hem de çok küçük.  Hayallerin dolaşabileceği,  Maceraların ekilebileceği bir yer.  Küçük tavşan, ne hayal ettiğini merak ediyorum,  Çimlerin üzerinde otururken, çok sakinsin.  Derinlikleri keşfetmek mi istersin,  Yoksa karada kalıp zıplamayı mı?  Ne olursa olsun, küçük tavşan,  Merak kıvılcımını parlak bir şekilde yakmaya devam et.  Çünkü hayallerinizde ve arzularınızda,  Yaratılmayı bekleyen bir dünya var. |
+| Napisz opisowy i dramatyczny wiersz o tym obrazie, podając lokalizację. | Mały króliczek na zielonej łące,  Uszy takie długie, takie bystre.  Co widzisz tam,  W oddali, gdzie wpatrujesz się?  Czy jest niebieskie jak ocean,  Błyszczące w słońcu?  A może szum fal,  Rytm, który uwielbiasz?  Króliczku, powiedz mi,  Co tak bardzo przyciąga Twoją uwagę?  Czy to słona bryza,  Czy krzyk mew sprawia Ci przyjemność?  Może to ogrom wszystkiego,  Świat tak wielki i mały.  Miejsce, gdzie marzenia mogą się spełniać,  A przygody – rodzić.  Mały króliczku, co Ci się śni,  Gdy siedzisz na trawie, taki spokojny.  Czy chcesz odkrywać głębiny,  Czy wolisz zostać na lądzie, gdzie możesz skakać?  Cokolwiek to będzie, mały króliczku,  niech ta iskra ciekawości płonie jasno.  Bo w Twoich marzeniach i aspiracjach  tkwi świat czekający na Twoje stworzenie. |
 
-#### İstemin hangi bölümünün başarısız olduğunu belirleme
+#### Rozwiązywanie problemów z nieudaną częścią prompta
 
-Bir istemin başarısız olmasının nedeni, modelin **görüntüyü anlamaması** mı yoksa görüntüyü anlamasına rağmen doğru **akıl yürütme adımlarını** uygulamaması mı, bunu anlamak zor olabilir.
-Bu nedenleri netleştirmek için modele resimde ne olduğunu sorun.
+Trudno stwierdzić, czy prompt nie zadziałał, ponieważ model nie **zrozumiał obrazu**, czy też zrozumiał obraz, ale nie wykonał prawidłowych **kroków rozumowania**.
+Aby odróżnić te powody, poproś model o opisanie, co znajduje się na obrazie.
 
-Aşağıdaki örnekte, model çayla birlikte şaşırtıcı görünen bir atıştırmalıkla (ör. patlamış mısır) yanıt verirse önce modelin resimde çay olduğunu doğru tanıyıp tanımadığını belirlemek için sorun giderme işlemi yapabilirsiniz.
+Jeśli na przykład model zaproponuje przekąskę, która wydaje się zaskakująca w połączeniu z herbatą (np. popcorn), możesz najpierw sprawdzić, czy model prawidłowo rozpoznał, że na obrazie jest herbata.
 
-| İstem | Sorun giderme istemi |
+| Prompt | Prompt do rozwiązywania problemów |
 | --- | --- |
-| Bununla iyi gidecek, 1 dakikada hazırlayabileceğim bir atıştırmalık önerir misin? | Bu resimde ne olduğunu açıklayın. |
+| Jaką przekąskę mogę przygotować w 1 minutę, która będzie do tego pasować? | Opisz, co jest na tym obrazie. |
 
-Diğer bir strateji ise modelden gerekçesini açıklamasını istemektir. Bu, muhakemenin hangi kısmının (varsa) bozulduğunu daraltmanıza yardımcı olabilir.
+Inną strategią jest poproszenie modelu o wyjaśnienie jego rozumowania. Może to pomóc w określeniu, która część rozumowania zawiodła, jeśli w ogóle.
 
-| İstem | Sorun giderme istemi |
+| Prompt | Prompt do rozwiązywania problemów |
 | --- | --- |
-| Bununla iyi gidecek, 1 dakikada hazırlayabileceğim bir atıştırmalık önerir misin? | Bununla iyi gidecek, 1 dakikada hazırlayabileceğim bir atıştırmalık önerir misin? Lütfen nedeniyle birlikte açıklayın. |
+| Jaką przekąskę mogę przygotować w 1 minutę, która będzie do tego pasować? | Jaką przekąskę mogę przygotować w 1 minutę, która będzie do tego pasować? W jaki sposób? |
 
-## Sırada ne var?
+## Co dalej?
 
-- [Google AI Studio](http://aistudio.google.com?hl=tr)'yu kullanarak kendi çok formatlı istemlerinizi yazmayı deneyin.
-- Medya dosyalarını yüklemek ve istemlerinize dahil etmek için Gemini Files API'yi kullanma hakkında bilgi edinmek üzere [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=tr), [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=tr) ve [Document processing](https://ai.google.dev/gemini-api/docs/document-processing?hl=tr) kılavuzlarına bakın.
-- İstem tasarımıyla ilgili daha fazla bilgi (ör. örnekleme parametrelerini ayarlama) için [İstem stratejileri](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=tr) sayfasına bakın.
+- Spróbuj napisać własne prompty multimodalne, korzystając z [Google AI Studio](http://aistudio.google.com?hl=pl).
+- Informacje o korzystaniu z interfejsu Gemini Files API do przesyłania plików multimedialnych i dołączania ich do promptów znajdziesz w przewodnikach dotyczących [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=pl), [dźwięku](https://ai.google.dev/gemini-api/docs/audio?hl=pl) i [przetwarzania dokumentów](https://ai.google.dev/gemini-api/docs/document-processing?hl=pl).
+- Więcej wskazówek dotyczących projektowania promptów, np. dostrajania parametrów próbkowania, znajdziesz na stronie [Strategie dotyczące promptów](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=pl).
 
-Geri bildirim gönderin
+Prześlij opinię
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Son güncelleme tarihi: 2026-09-12 UTC.
+Ostatnia aktualizacja: 2026-09-18 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Chcesz przekazać coś jeszcze?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-12 UTC."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-18 UTC."],[],[]]

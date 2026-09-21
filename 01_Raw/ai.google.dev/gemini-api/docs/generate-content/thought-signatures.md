@@ -1,103 +1,98 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=pt-BR
-fetched_at: 2026-09-14T05:45:59.756341+00:00
-title: "Assinaturas de racioc\u00ednio \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=ar
+fetched_at: 2026-09-21T05:49:15.260170+00:00
+title: "\u062a\u0648\u0642\u064a\u0639\u0627\u062a \u0627\u0644\u0623\u0641\u0643\u0627\u0631 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
+‫Gemini 3.8 Flash متاح الآن. [جرِّبه](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ar).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs/generate-content?hl=pt-br)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs/generate-content?hl=ar)
 
-Envie comentários
+إرسال ملاحظات
 
-# Assinaturas de raciocínio
+# توقيعات الأفكار
 
-As assinaturas de pensamento são representações criptografadas do processo de pensamento interno do modelo e são usadas para preservar o contexto de raciocínio em interações de várias etapas.
-Ao usar modelos de pensamento (como as séries Gemini 3 e 2.5), a API pode
-retornar um campo `thoughtSignature` nas [partes de conteúdo](https://ai.google.dev/api/caching?hl=pt-br#Part)
-da resposta (por exemplo, partes `text` ou `functionCall`).
+توقيعات الأفكار هي تمثيلات مشفّرة لعملية التفكير الداخلية التي يجريها النموذج، وتُستخدَم للحفاظ على سياق الاستدلال في التفاعلات المتعدّدة الخطوات.
+عند استخدام نماذج التفكير (مثل سلسلة Gemini 3 و2.5)، قد تعرض واجهة برمجة التطبيقات الحقل `thoughtSignature` ضمن [أجزاء المحتوى](https://ai.google.dev/api/caching?hl=ar#Part) في الردّ (مثل الأجزاء `text` أو `functionCall`).
 
-Como regra geral, se você receber uma assinatura de pensamento em uma resposta do modelo, transmita-a exatamente como recebida ao enviar o histórico da conversa na próxima interação.
-**Ao usar modelos do Gemini 3, é necessário transmitir assinaturas de pensamento durante a chamada de função. Caso contrário, você receberá um erro de validação** (código de status 4xx).
-Isso inclui o uso da configuração de `minimal`
-[nível de pensamento](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br#thinking-levels) para o Gemini 3
+كقاعدة عامة، إذا تلقّيت توقيعًا فكريًا في ردّ نموذجي، عليك إعادة إرساله تمامًا كما تلقّيته عند إرسال سجلّ المحادثة في الدور التالي.
+**عند استخدام نماذج Gemini 3، يجب إعادة توقيعات الأفكار أثناء
+استدعاء الدوال، وإلا سيظهر لك خطأ في التحقّق من الصحة** (رمز الحالة 4xx).
+ويشمل ذلك استخدام إعداد `minimal`
+[مستوى التفكير](https://ai.google.dev/gemini-api/docs/thinking?hl=ar#thinking-levels) في Gemini 3
 Flash.
 
-## Como funciona
+## آلية العمل
 
-O gráfico abaixo mostra o significado de "interação" e "etapa" em relação a
-[chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br) na API Gemini. Uma "interação" é uma troca única e completa em uma conversa entre um usuário e um modelo. Uma "etapa" é uma ação ou operação mais detalhada realizada pelo modelo, geralmente como parte de um processo maior para concluir uma interação.
+يوضّح الرسم البياني أدناه معنى "الدورة" و "الخطوة" في ما يتعلق
+[باستدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar) في Gemini API. "الدورة" هي تبادل واحد وكامل في محادثة بين مستخدم ونموذج. "الخطوة" هي إجراء أو عملية أكثر دقة ينفّذها النموذج، وغالبًا ما تكون جزءًا من عملية أكبر لإكمال دورة المحادثة.
 
-![Diagrama de turnos e etapas de chamada de função](https://ai.google.dev/static/gemini-api/docs/images/fc-turns.png?hl=pt-br)
+![مخطّط بياني يوضّح خطوات استدعاء الدالة](https://ai.google.dev/static/gemini-api/docs/images/fc-turns.png?hl=ar)
 
-*Este documento se concentra no processamento de chamadas de função para modelos do Gemini 3. Consulte
-a seção sobre o [comportamento do modelo](#model-behavior) para conferir discrepâncias com a versão 2.5.*
+*يركّز هذا المستند على كيفية التعامل مع ميزة "استدعاء الدالة" في نماذج Gemini 3. راجِع قسم [سلوك النموذج](#model-behavior) لمعرفة التناقضات مع الإصدار 2.5.*
 
-O Gemini 3 retorna assinaturas de pensamento para todas as respostas do modelo (respostas da API) com uma chamada de função. As assinaturas de pensamento aparecem nos seguintes casos:
+يعرض Gemini 3 توقيعات الأفكار لجميع ردود النموذج (الردود من واجهة برمجة التطبيقات) مع استدعاء دالة. تظهر توقيعات الأفكار في الحالات التالية:
 
-- Quando há [chamadas de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br#parallel_function_calling)
-  paralelas, a primeira parte da chamada de função retornada pela resposta do modelo terá uma
-  assinatura de pensamento.
-- Quando há chamadas de função sequenciais (várias etapas), cada chamada de função terá uma assinatura, e você precisará transmitir todas as assinaturas.
-- As respostas do modelo sem uma chamada de função vão retornar uma assinatura de pensamento na última parte retornada pelo modelo.
+- عندما تكون هناك طلبات [لدوال متوازية](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar#parallel_function_calling)، سيحتوي الجزء الأول من طلب الدالة الذي تعرضه استجابة النموذج على توقيع فكري.
+- عندما تكون هناك طلبات متسلسلة لاستدعاء الدوال (متعددة الخطوات)، سيكون لكل طلب استدعاء دالة توقيع، ويجب إعادة جميع التواقيع.
+- ستعرض ردود النموذج التي لا تتضمّن استدعاء دالة توقيعًا فكريًا داخل الجزء الأخير الذي يعرضه النموذج.
 
-A tabela a seguir mostra uma visualização para chamadas de função de várias etapas, combinando as definições de interações e etapas com o conceito de assinaturas apresentado acima:
+يوضّح الجدول التالي تمثيلاً مرئيًا لعمليات استدعاء الدوال المتعدّدة الخطوات،
+حيث يجمع بين تعريفات الأدوار والخطوات ومفهوم التوقيعات
+الموضّح أعلاه:
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Interação** | **Etapa** | **Solicitação do usuário** | **Resposta do modelo** | **FunctionResponse** |
+| **الاستدارة** | **Step** | **طلب المستخدم** | **ردّ النموذج** | **FunctionResponse** |
 | 1 | 1 | `request1 = user_prompt` | `FC1 + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + (FC1 + signature) + FR1` | `FC2 + signature` | `FR2` |
-| 1 | 3 | `request3 = request2 + (FC2 + signature) + FR2` | `text_output`  `(no FCs)` | Nenhum |
+| 1 | 3 | `request3 = request2 + (FC2 + signature) + FR2` | `text_output`  `(no FCs)` | بلا |
 
-## Assinaturas em partes de chamada de função
+## التواقيع في أجزاء استدعاء الدالة
 
-Quando o Gemini gera um `functionCall`, ele depende da `thought_signature` para processar a saída da ferramenta corretamente na próxima interação.
+عندما ينشئ Gemini `functionCall`، يعتمد على `thought_signature`
+لمعالجة نتيجة الأداة بشكل صحيح في الجولة التالية.
 
-- **Comportamento**:
-  - **Chamada de função única**: a parte `functionCall` vai conter uma `thought_signature`.
-  - **Chamadas de função paralelas**: se o modelo gerar chamadas de função paralelas
-    em uma resposta, a `thought_signature` será anexada **apenas à primeira**
-    `functionCall` parte. As partes `functionCall` subsequentes na mesma resposta **não** vão conter uma assinatura.
-- **Requisito**: você **precisa** retornar essa assinatura na parte exata em que ela
-  foi recebida ao enviar o histórico da conversa.
-- **Validação**: a validação estrita é aplicada a todas as chamadas de função na
-  interação atual . Somente a interação atual é necessária. Não validamos as interações anteriores.
-  - A API volta no histórico (do mais recente ao mais antigo) para encontrar a mensagem **do usuário** mais recente que contém conteúdo padrão (por exemplo, `text`), que seria o início da interação atual. Essa mensagem **be** será uma `functionResponse`.
-  - **Todas** as interações `functionCall` do modelo que ocorrem após essa mensagem de uso específica são consideradas parte da interação.
-  - A **primeira** parte `functionCall` em **cada etapa** da interação atual **precisa** incluir a `thought_signature`.
-  - Se você omitir uma `thought_signature` para a primeira parte `functionCall` em qualquer etapa da interação atual, a solicitação vai falhar com um erro 400.
-- **Se as assinaturas adequadas não forem retornadas, veja como você vai receber um erro**
-  - Modelos do Gemini 3: a falha ao incluir assinaturas vai resultar em um erro 400. A redação será do formulário:
-    - A chamada de função `<Function Call>` no bloco de conteúdo `<index of contents array>`
-      está faltando um `thought_signature`. Por exemplo, *a chamada de função
-      `FC1` no bloco de conteúdo `1.` está faltando um `thought_signature`.*
+- **السلوك**:
+  - **استدعاء دالة واحدة**: سيحتوي الجزء `functionCall` على `thought_signature`.
+  - **استدعاء الدوال المتوازية**: إذا أنشأ النموذج استدعاءات دوال متوازية في ردّ، سيتم إرفاق `thought_signature` **بالجزء الأول فقط**
+    `functionCall` من الرد.
+    **لن** تتضمّن الأجزاء اللاحقة `functionCall` في الاستجابة نفسها توقيعًا.
+- **شرط**: **يجب** إرجاع هذه التوقيع في الجزء نفسه الذي تم استلامه فيه عند إعادة إرسال سجلّ المحادثات.
+- **التحقّق من الصحة**: يتم فرض التحقّق الصارم من الصحة على جميع طلبات الدوال ضمن المحادثة الحالية . (يجب إدخال الدور الحالي فقط، ولا نتحقّق من الأدوار السابقة)
+  - تعود واجهة برمجة التطبيقات إلى سجلّ المحادثات (من الأحدث إلى الأقدم) للعثور على أحدث رسالة **مستخدم** تتضمّن محتوًى عاديًا (مثل `text`) ( وهي بداية الدور الحالي). لن **be** هذا `functionResponse`.
+  - يتم اعتبار جميع **منعطفات** النموذج `functionCall` التي تحدث بعد رسالة الاستخدام المحددة هذه جزءًا من المنعطف.
+  - يجب أن يتضمّن الجزء **الأول** `functionCall` في **كل خطوة** من الدور الحالي `thought_signature`.
+  - إذا حذفت `thought_signature` من الجزء الأول `functionCall` في أي خطوة من خطوات المحادثة الحالية، سيتعذّر تنفيذ الطلب وسيظهر الخطأ 400.
+- **في حال عدم عرض التواقيع الصحيحة، إليك كيفية ظهور الخطأ**
+  - نماذج Gemini 3: سيؤدي عدم تضمين التواقيع إلى ظهور الخطأ 400. ستكون الصياغة على النحو التالي:
+    - يفتقد استدعاء الدالة `<Function Call>` في كتلة المحتوى `<index of contents array>` إلى `thought_signature`. على سبيل المثال، *استدعاء
+      الدالة `FC1` في حظر المحتوى `1.` لا يتضمّن `thought_signature`.*
 
-### Exemplo de chamada de função sequencial
+### مثال على استدعاء الدوال التسلسلي
 
-Esta seção mostra um exemplo de várias chamadas de função em que o usuário faz uma pergunta complexa que exige várias tarefas.
+يعرض هذا القسم مثالاً على عدة طلبات لتنفيذ وظائف حيث يطرح المستخدم سؤالاً معقّدًا يتطلّب تنفيذ مهام متعددة.
 
-Vamos analisar um exemplo de chamada de função de várias interações em que o usuário faz
-uma pergunta complexa que exige várias tarefas: `"Check flight status for AA100 and
+لنتناول مثالاً على عملية استدعاء دالة تتضمّن عدة مراحل حيث يطرح المستخدم سؤالاً معقّدًا يتطلّب تنفيذ عدة مهام: `"Check flight status for AA100 and
 book a taxi if delayed"`.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Interação** | **Etapa** | **Solicitação do usuário** | **Resposta do modelo** | **FunctionResponse** |
+| **الاستدارة** | **Step** | **طلب المستخدم** | **ردّ النموذج** | **FunctionResponse** |
 | 1 | 1 | `request1="Check flight status for AA100 and book a taxi 2 hours before if delayed."` | `FC1 ("check_flight") + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + FC1 ("check_flight") + signature + FR1` | `FC2("book_taxi") + signature` | `FR2` |
 | 1 | 3 | `request3 = request2 + FC2 ("book_taxi") + signature + FR2` | `text_output`  `(no FCs)` | `None` |
 
-O código a seguir ilustra a sequência na tabela acima.
+يوضّح الرمز التالي التسلسل في الجدول أعلاه.
 
-**Interação 1, etapa 1 (solicitação do usuário)**
+**الجولة 1، الخطوة 1 (طلب المستخدم)**
 
 ```
 {
@@ -152,7 +147,7 @@ O código a seguir ilustra a sequência na tabela acima.
 }
 ```
 
-**Interação 1, etapa 1 (resposta do modelo)**
+**الجولة 1، الخطوة 1 (ردّ نموذجي)**
 
 ```
 {
@@ -173,8 +168,7 @@ O código a seguir ilustra a sequência na tabela acima.
 }
 ```
 
-**Interação 1, etapa 2 (resposta do usuário: envio de saídas de ferramentas)** Como essa interação do usuário contém apenas uma `functionResponse` (sem texto novo), ainda estamos na interação 1. É
-necessário preservar `<Signature_A>`.
+**الجولة 1، الخطوة 2 (ردّ المستخدم - إرسال نتائج الأدوات)** بما أنّ هذه الجولة من المحادثة تتضمّن `functionResponse` فقط (بدون نص جديد)، ما زلنا في الجولة 1. علينا الحفاظ على `<Signature_A>`.
 
 ```
 {
@@ -215,7 +209,8 @@ necessário preservar `<Signature_A>`.
 }
 ```
 
-**Interação 1, etapa 2 (modelo)** O modelo agora decide reservar um táxi com base na saída da ferramenta anterior.
+**الجولة 1، الخطوة 2 (النموذج)** يقرّر النموذج الآن حجز سيارة أجرة استنادًا إلى
+نتائج الأداة السابقة.
 
 ```
 {
@@ -236,8 +231,7 @@ necessário preservar `<Signature_A>`.
 }
 ```
 
-**Interação 1, etapa 3 (usuário: envio da saída da ferramenta)** Para enviar a confirmação da reserva de táxi, é necessário incluir assinaturas para **TODAS** as chamadas de função neste loop
-(`<Signature A>` + `<Signature B>`).
+**الجولة 1، الخطوة 3 (المستخدم - إرسال ناتج الأداة)** لإرسال تأكيد حجز سيارة الأجرة، يجب تضمين توقيعات **جميع** طلبات الدوال في هذه الحلقة (`<Signature A>` + `<Signature B>`).
 
 ```
 {
@@ -306,19 +300,19 @@ necessário preservar `<Signature_A>`.
 }
 ```
 
-### Exemplo de chamada de função paralela
+### مثال على استدعاء الدوال المتوازي
 
-Vamos analisar um exemplo de chamada de função paralela em que os usuários perguntam
-`"Check weather in Paris and London"` para ver onde o modelo faz a validação.
+لنتناول مثالاً على استدعاء الدوال المتوازية حيث يطلب المستخدم من
+`"Check weather in Paris and London"` معرفة المكان الذي يجري فيه النموذج عملية التحقّق من صحة البيانات.
 
-| **Interação** | **Etapa** | **Solicitação do usuário** | **Resposta do modelo** | **FunctionResponse** |
+| **الاستدارة** | **Step** | **طلب المستخدم** | **ردّ النموذج** | **FunctionResponse** |
 | --- | --- | --- | --- | --- |
-| 1 | 1 | `request1="Check the weather in Paris and London"` | FC1 ("Paris") + signature  FC2 ("London") | FR1 |
-| 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | text\_output  (no FCs) | Nenhum |
+| 1 | 1 | `request1="Check the weather in Paris and London"` | FC1 ("باريس") + التوقيع  FC2 ("London") | FR1 |
+| 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | text\_output  (no FCs) | بلا |
 
-O código a seguir ilustra a sequência na tabela acima.
+يوضّح الرمز التالي التسلسل في الجدول أعلاه.
 
-**Interação 1, etapa 1 (solicitação do usuário)**
+**الجولة 1، الخطوة 1 (طلب المستخدم)**
 
 ```
 {
@@ -357,7 +351,7 @@ O código a seguir ilustra a sequência na tabela acima.
 }
 ```
 
-**Interação 1, etapa 1 (resposta do modelo)**
+**الجولة 1، الخطوة 1 (ردّ نموذجي)**
 
 ```
 {
@@ -385,8 +379,8 @@ O código a seguir ilustra a sequência na tabela acima.
 }
 ```
 
-**Interação 1, etapa 2 (resposta do usuário: envio de saídas de ferramentas)** É necessário preservar
-`<Signature_A>` na primeira parte exatamente como recebida.
+**الجولة 1، الخطوة 2 (ردّ المستخدم - إرسال نتائج الأدوات)** يجب الحفاظ على
+`<Signature_A>` في الجزء الأول تمامًا كما تم استلامه.
 
 ```
 [
@@ -444,20 +438,20 @@ O código a seguir ilustra a sequência na tabela acima.
 ]
 ```
 
-## Assinaturas em partes não `functionCall`
+## التوقيعات في الأجزاء غير `functionCall`
 
-O Gemini também pode retornar `thought_signatures` na parte final da resposta em partes que não são de chamada de função.
+قد يعرض Gemini أيضًا `thought_signatures` في الجزء الأخير من الرد
+في الأجزاء التي لا تتضمّن طلبات تنفيذ وظائف.
 
-- **Comportamento**: a parte de conteúdo final (`text, inlineData…`) retornada pelo
-  modelo pode conter um `thought_signature`.
-- **Recomendação**: o retorno dessas assinaturas é **recomendado** para garantir que
-  o modelo mantenha um raciocínio de alta qualidade, especialmente para instruções complexas
-  seguindo ou fluxos de trabalho de agente simulados.
-- **Validação**: a API **não** aplica a validação de forma estrita. Você não vai receber um erro de bloqueio se omiti-las, embora a performance possa ser degradada.
+- **السلوك**: قد يحتوي الجزء الأخير من المحتوى (`text, inlineData…`) الذي يعرضه النموذج على `thought_signature`.
+- **اقتراح**: **ننصح** بعرض هذه التواقيع لضمان
+  أن يحافظ النموذج على جودة عالية في الاستدلال، خاصةً في المهام المعقدة التي تتطلّب اتّباع التعليمات
+  أو محاكاة سير العمل المستند إلى الوكلاء.
+- **التحقّق من الصحة**: **لا** تفرض واجهة برمجة التطبيقات التحقّق من الصحة بشكل صارم. ولن يظهر لك خطأ حظر إذا لم تدرجها، ولكن قد ينخفض الأداء.
 
-### Texto/raciocínio no contexto (sem validação)
+### النص/الاستدلال في السياق (بدون التحقّق من الصحة)
 
-**Interação 1, etapa 1 (resposta do modelo)**
+**الجولة 1، الخطوة 1 (ردّ نموذجي)**
 
 ```
 {
@@ -471,7 +465,7 @@ O Gemini também pode retornar `thought_signatures` na parte final da resposta e
 }
 ```
 
-**Interação 2, etapa 1 (usuário)**
+**الدور 2، الخطوة 1 (المستخدم)**
 
 ```
 [
@@ -489,27 +483,27 @@ O Gemini também pode retornar `thought_signatures` na parte final da resposta e
 ]
 ```
 
-## Assinaturas para compatibilidade com a OpenAI
+## توقيعات التوافق مع OpenAI
 
-Os exemplos a seguir mostram como processar assinaturas de pensamento para uma API de conclusão de chat
-usando [compatibilidade com a OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=pt-br).
+توضّح الأمثلة التالية كيفية التعامل مع توقيعات الأفكار لواجهة برمجة تطبيقات لإكمال المحادثة باستخدام [التوافق مع OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=ar).
 
-### Exemplo de chamada de função sequencial
+### مثال على استدعاء الدوال التسلسلي
 
-Este é um exemplo de várias chamadas de função em que o usuário faz uma pergunta complexa que exige várias tarefas.
+هذا مثال على استخدام أدوات متعددة في آن واحد، حيث يطرح المستخدم سؤالاً معقّدًا يتطلّب تنفيذ مهام متعددة.
 
-Vamos analisar um exemplo de chamada de função de várias interações em que o usuário pergunta `Check flight status for AA100 and book a taxi if delayed` e você pode ver o que acontece quando o usuário faz uma pergunta complexa que exige várias tarefas.
+لنتعرّف على مثال على استخدام وظائف متعددة الأدوار حيث يسأل المستخدم
+`Check flight status for AA100 and book a taxi if delayed` ويمكنك الاطّلاع على ما يحدث عندما يطرح المستخدم سؤالاً معقّدًا يتطلّب تنفيذ مهام متعددة.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Interação** | **Etapa** | **Solicitação do usuário** | **Resposta do modelo** | **FunctionResponse** |
+| **الاستدارة** | **Step** | **طلب المستخدم** | **ردّ النموذج** | **FunctionResponse** |
 | 1 | 1 | `request1 = "Check flight status for AA100 and book a taxi 2 hours before if delayed."` | `FC1 ("check_flight") + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + FC1 ("check_flight") + signature + FR1` | `FC2("book_taxi") + signature` | `FR2` |
 | 1 | 3 | `request3 = request2 + FC2 ("book_taxi") + signature + FR2` | `text_output`  `(no FCs)` | `None` |
 
-O código a seguir mostra a sequência fornecida.
+يتنقّل الرمز التالي خلال التسلسل المحدّد.
 
-**Interação 1, etapa 1 (solicitação do usuário)**
+**الجولة 1، الخطوة 1 (طلب المستخدم)**
 
 ```
 {
@@ -563,7 +557,7 @@ O código a seguir mostra a sequência fornecida.
 }
 ```
 
-**Interação 1, etapa 1 (resposta do modelo)**
+**الجولة 1، الخطوة 1 (الردّ النموذجي)**
 
 ```
 {
@@ -586,10 +580,9 @@ O código a seguir mostra a sequência fornecida.
     }
 ```
 
-**Interação 1, etapa 2 (resposta do usuário: envio de saídas de ferramentas)**
+**الجولة 1، الخطوة 2 (ردّ المستخدم - إرسال نواتج الأدوات)**
 
-Como essa interação do usuário contém apenas uma `functionResponse` (sem texto novo), ainda estamos
-na interação 1 e é necessário preservar `<Signature_A>`.
+بما أنّ دور المستخدم هذا لا يحتوي إلا على `functionResponse` (بدون نص جديد)، سنبقى في الدور 1 ويجب الاحتفاظ بـ `<Signature_A>`.
 
 ```
 "messages": [
@@ -624,9 +617,9 @@ na interação 1 e é necessário preservar `<Signature_A>`.
   ]
 ```
 
-**Interação 1, etapa 2 (modelo)**
+**الجولة 1، الخطوة 2 (نموذج)**
 
-O modelo agora decide reservar um táxi com base na saída da ferramenta anterior.
+يقرّر النموذج الآن حجز سيارة أجرة استنادًا إلى نتيجة الأداة السابقة.
 
 ```
 {
@@ -649,10 +642,9 @@ O modelo agora decide reservar um táxi com base na saída da ferramenta anterio
 }
 ```
 
-**Interação 1, etapa 3 (usuário: envio da saída da ferramenta)**
+**الجولة 1، الخطوة 3 (المستخدم - إرسال ناتج الأداة)**
 
-Para enviar a confirmação da reserva de táxi, é necessário incluir assinaturas para TODAS as
-chamadas de função neste loop (`<Signature A>` + `<Signature B>`).
+لإرسال تأكيد حجز سيارة الأجرة، يجب تضمين توقيعات لجميع استدعاءات الدوال في هذه الحلقة (`<Signature A>` + `<Signature B>`).
 
 ```
 "messages": [
@@ -711,21 +703,20 @@ chamadas de função neste loop (`<Signature A>` + `<Signature B>`).
   ]
 ```
 
-### Exemplo de chamada de função paralela
+### مثال على استدعاء الدوال المتوازي
 
-Vamos analisar um exemplo de chamada de função paralela em que os usuários perguntam
-`"Check weather in Paris and London"` e você pode ver onde o modelo faz
-validação.
+لنتناول مثالاً على استدعاء الدوال المتوازية حيث يطرح المستخدم السؤال
+`"Check weather in Paris and London"` ويمكنك الاطّلاع على المكان الذي يجري فيه النموذج عملية التحقّق.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Interação** | **Etapa** | **Solicitação do usuário** | **Resposta do modelo** | **FunctionResponse** |
+| **الاستدارة** | **Step** | **طلب المستخدم** | **ردّ النموذج** | **FunctionResponse** |
 | 1 | 1 | `request1="Check the weather in Paris and London"` | `FC1 ("Paris") + signature`  `FC2 ("London")` | `FR1` |
 | 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | `text_output`  `(no FCs)` | `None` |
 
-Confira o código para analisar a sequência fornecida.
+في ما يلي الرمز البرمجي لتصفّح التسلسل المحدّد.
 
-**Interação 1, etapa 1 (solicitação do usuário)**
+**الجولة 1، الخطوة 1 (طلب المستخدم)**
 
 ```
 {
@@ -764,7 +755,7 @@ Confira o código para analisar a sequência fornecida.
 }
 ```
 
-**Interação 1, etapa 1 (resposta do modelo)**
+**الجولة 1، الخطوة 1 (الردّ النموذجي)**
 
 ```
 {
@@ -795,9 +786,9 @@ Confira o código para analisar a sequência fornecida.
 }
 ```
 
-**Interação 1, etapa 2 (resposta do usuário: envio de saídas de ferramentas)**
+**الجولة 1، الخطوة 2 (ردّ المستخدم - إرسال نواتج الأدوات)**
 
-É necessário preservar `<Signature_A>` na primeira parte exatamente como recebida.
+يجب الحفاظ على `<Signature_A>` في الجزء الأول تمامًا كما تم استلامه.
 
 ```
 "messages": [
@@ -846,52 +837,40 @@ Confira o código para analisar a sequência fornecida.
   ]
 ```
 
-## Perguntas frequentes
+## الأسئلة الشائعة
 
-1. **Como faço para transferir o histórico de um modelo diferente para o Gemini 3 com uma parte de chamada de função na interação e etapa atuais? Preciso fornecer partes de chamada de função
-   que não foram geradas pela API e, portanto, não têm uma assinatura de pensamento associada
-   ?**
+1. **كيف يمكنني نقل السجلّ من نموذج مختلف إلى Gemini 3 مع جزء من استدعاء دالة في الخطوة الحالية؟ هل يجب تقديم أجزاء من استدعاء الدالة لم تنشئها واجهة برمجة التطبيقات وبالتالي ليس لديها توقيع فكري مرتبط بها؟**
 
-   Embora a injeção de blocos de chamada de função personalizados na solicitação seja fortemente
-   desencorajada, em casos em que não é possível evitá-la, por exemplo, fornecer informações
-   ao modelo sobre chamadas de função e respostas que foram executadas
-   de forma determinística pelo cliente ou transferir um rastreamento de um modelo diferente
-   que não inclui assinaturas de pensamento, é possível definir as seguintes
-   assinaturas fictícias de `"context_engineering_is_the_way_to_go"` ou
-   `"skip_thought_signature_validator"` no campo de assinatura de pensamento para ignorar a
-   validação.
-2. **Estou enviando chamadas e respostas de função paralelas intercaladas, e a API está retornando um erro 400. Por quê?**
+   مع أنّنا لا ننصح بشدة بإدخال كتل مخصّصة لاستدعاء الدوال في الطلب، يمكنك ضبط التوقيعات الوهمية التالية `"context_engineering_is_the_way_to_go"` أو `"skip_thought_signature_validator"` في حقل توقيع الفكرة لتخطّي عملية التحقّق في الحالات التي لا يمكن تجنُّب ذلك فيها، مثلاً عند تقديم معلومات للنموذج عن استدعاءات الدوال والردود التي نفّذها العميل بشكل حتمي، أو عند نقل عملية تتبُّع من نموذج مختلف لا يتضمّن توقيعات الأفكار.
+2. **أرسلُ طلبات استدعاء دالات متوازية متداخلة وردودًا، ويتلقّى واجهة برمجة التطبيقات الرمز 400. ما السبب؟**
 
-   Quando a API retorna chamadas de função paralelas "FC1 + assinatura, FC2", a resposta do usuário esperada é "FC1 + assinatura, FC2, FR1, FR2". Se você as tiver intercaladas como "FC1 + assinatura, FR1, FC2, FR2", a API vai retornar um erro 400.
-3. **Ao fazer streaming, e o modelo não está retornando uma chamada de função, não consigo encontrar
-   a assinatura de pensamento**
+   عندما تعرض واجهة برمجة التطبيقات استدعاءات دالات متوازية "FC1 + التوقيع، FC2"، تكون استجابة المستخدم المتوقّعة هي "FC1 + التوقيع، FC2، FR1، FR2". إذا كانت البيانات متداخلة على النحو التالي: "FC1 + signature, FR1, FC2, FR2"، ستعرض واجهة برمجة التطبيقات الخطأ 400.
+3. **عند البث وعدم عرض النموذج لطلب دالة، لا يمكنني العثور على
+   توقيع الفكرة**
 
-   Durante uma resposta do modelo que não contém uma FC com uma solicitação de streaming, o modelo pode retornar a assinatura de pensamento em uma parte com uma parte de conteúdo de texto vazia. É recomendável analisar toda a solicitação até que o `finish_reason` seja retornado pelo modelo.
+   خلال استجابة نموذج لا تحتوي على مكالمة وظيفة مع طلب بث، قد يعرض النموذج توقيع الفكرة في جزء يتضمّن جزءًا فارغًا من محتوى النص. يُنصح بتحليل الطلب بأكمله إلى أن يعرض النموذج `finish_reason`.
 
-## Assinaturas de pensamento para diferentes modelos
+## توقيعات الأفكار لنماذج مختلفة
 
-[Os modelos do Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=pt-br#gemini-3) e do Gemini 2.5
-se comportam de maneira diferente com assinaturas de pensamento em chamadas de função:
+تتصرّف [نماذج Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=ar#gemini-3) ونماذج Gemini 2.5 بشكل مختلف مع توقيعات الأفكار في عمليات استدعاء الدوال:
 
-- Se houver chamadas de função em uma resposta,
-  - O Gemini 3 sempre terá a assinatura na primeira parte da chamada de função.
-    É **obrigatório** retornar essa parte.
-  - O Gemini 2.5 terá a assinatura na primeira parte (independente do tipo). É **opcional** retornar essa parte.
-- Se não houver chamadas de função em uma resposta,
-  - O Gemini 3 terá a assinatura na última parte se o modelo gerar um pensamento.
-  - O Gemini 2.5 não terá uma assinatura em nenhuma parte.
+- إذا كانت هناك استدعاءات للدوال في الرد،
+  - سيحتوي Gemini 3 دائمًا على التوقيع في الجزء الأول من استدعاء الدالة.
+    **يجب** إرجاع هذا الجزء.
+  - سيتضمّن Gemini 2.5 التوقيع في الجزء الأول (بغض النظر عن النوع). **يمكنك** إرجاع هذا الجزء.
+- إذا لم تتضمّن الاستجابة أي طلبات وظائف،
+  - سيحتوي Gemini 3 على التوقيع في الجزء الأخير إذا أنشأ النموذج فكرة.
+  - لن يتضمّن Gemini 2.5 توقيعًا في أي جزء.
 
-Consulte a página [Pensamento](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br#signatures) para mais
-detalhes sobre a comparação.
-Para modelos de imagem do Gemini 3, consulte a seção sobre o processo de pensamento do
-[guia de geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br#thinking-process).
+يمكنك الرجوع إلى صفحة [التفكير](https://ai.google.dev/gemini-api/docs/thinking?hl=ar#signatures) للاطّلاع على مزيد من التفاصيل حول المقارنة.
+بالنسبة إلى نماذج Gemini 3 Image، يُرجى الاطّلاع على قسم "عملية التفكير" في دليل [إنشاء الصور](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar#thinking-process).
 
-Envie comentários
+إرسال ملاحظات
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Última atualização 2026-09-08 UTC.
+تاريخ التعديل الأخير: 2026-09-08 (حسب التوقيت العالمي المتفَّق عليه)
 
-Quer enviar seu feedback?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-08 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-08 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

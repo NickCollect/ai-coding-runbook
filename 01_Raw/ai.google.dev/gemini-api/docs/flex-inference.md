@@ -1,28 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/flex-inference?hl=ja
-fetched_at: 2026-09-14T05:42:02.406236+00:00
-title: "Flex \u63a8\u8ad6 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/flex-inference?hl=fr
+fetched_at: 2026-09-21T05:51:01.103075+00:00
+title: "Inf\u00e9rence flexible \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-フィードバックを送信
+Envoyer des commentaires
 
-# Flex 推論
+# Inférence flexible
 
-Gemini Flex API は推論階層で、レイテンシが変動し、ベスト エフォート型の可用性となる代わりに、標準料金と比較して 50% のコスト削減を実現します。同期処理が必要だが、標準 API のリアルタイム パフォーマンスは必要ない、レイテンシ許容型のワークロード向けに設計されています。
+L'API Gemini Flex est un niveau d'inférence qui offre une réduction de 50% des coûts par rapport aux tarifs standards, en échange d'une latence variable et d'une disponibilité optimale. Elle est conçue pour les charges de travail tolérantes à la latence qui nécessitent un traitement synchrone, mais qui n'ont pas besoin des performances en temps réel de l'API standard.
 
-## Flex の使用方法
+## Utiliser Flex
 
-Flex 階層を使用するには、リクエストで `service_tier` を `flex` として指定します。このフィールドを省略すると、リクエストはデフォルトで標準階層を使用します。
+Pour utiliser le niveau Flex, spécifiez `service_tier` comme `flex` dans votre requête. Par défaut, les requêtes utilisent le niveau standard si ce champ est omis.
 
 ### Python
 
@@ -32,7 +32,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="Analyze this dataset for trends...",
     service_tier='flex'
 )
@@ -48,13 +48,39 @@ const client = new GoogleGenAI({});
 
 async function main() {
     const interaction = await client.interactions.create({
-        model: 'gemini-3.6-flash',
+        model: 'gemini-3.8-flash',
         input: 'Analyze this dataset for trends...',
         service_tier: 'flex'
     });
     console.log(interaction.output_text);
 }
 await main();
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ServiceTier;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("Analyze this dataset for trends..."))
+        .serviceTier(ServiceTier.FLEX)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
 ```
 
 ### REST
@@ -64,65 +90,70 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "Content-Type: application/json" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -d '{
-      "model": "gemini-3.6-flash",
+      "model": "gemini-3.8-flash",
       "input": "Analyze this dataset for trends...",
       "service_tier": "flex"
   }'
 ```
 
-## Flex 推論の仕組み
+## Fonctionnement de l'inférence Flex
 
-Gemini Flex 推論は、標準 API と 24 時間
-の [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja) のターンアラウンド タイムのギャップを埋めます。オフピークの「削減可能な」コンピューティング容量を利用して、バックグラウンド タスクとシーケンシャル ワークフローに費用対効果の高いソリューションを提供します。
+L'inférence Gemini Flex comble le fossé entre l'API standard et le délai de traitement de 24 heures
+de l'[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr). Elle utilise une capacité de calcul "réductible" en dehors des heures de pointe pour fournir une solution économique pour les tâches en arrière-plan et les workflows séquentiels.
 
-| 機能 | Flex | 候補 | 標準 | バッチ |
+| Fonctionnalité | Flex | Priorité | Standard | Lot |
 | --- | --- | --- | --- | --- |
-| **料金** | 50% 割引 | 標準より 75 ～ 100% 高い | 通常料金 | 50% 割引 |
-| **レイテンシ** | 分（目標 1 ～ 15 分） | 低（秒） | 数秒～数分 | 最大 24 時間 |
-| **信頼性** | ベスト エフォート（削減可能） | 高（削減不可） | 高 / 中～高 | 高（スループットの場合） |
-| **インターフェース** | 同期 | 同期 | 同期 | 非同期 |
+| **Tarifs** | 50% de remise | 75 à 100% de plus que le tarif standard | Plein tarif | 50% de remise |
+| **Latence** | Minutes (1 à 15 minutes cibles) | Faible (secondes) | Secondes à minutes | Jusqu'à 24 heures |
+| **Fiabilité** | Optimisation limitée (réductible) | Élevée (non réductible) | Élevée / Moyenne haute | Élevée (pour le débit) |
+| **Interface** | Synchrone | Synchrone | Synchrone | Asynchrone |
 
-### 主な特典
+### Principaux avantages
 
-- **費用対効果**: 本番環境以外の評価、バックグラウンド エージェント、データ拡充で大幅なコスト削減を実現します。
-- **摩擦が少ない**: 既存のリクエストに 1 つのパラメータを追加するだけです。
-- **同期ワークフロー**: 次のリクエストが前のリクエストの出力に依存するシーケンシャル API チェーンに最適です。エージェント ワークフローでは、Batch よりも柔軟性が高くなります。
+- **Rentabilité** : économies substantielles pour les évaluations hors production, les agents en arrière-plan et l'enrichissement des données.
+- **Faible friction** : il vous suffit d'ajouter un seul paramètre à vos requêtes existantes.
+- **Workflows synchrones** : idéal pour les chaînes d'API séquentielles où la requête suivante dépend du résultat de la précédente, ce qui la rend plus flexible que Batch pour les workflows agentiques.
 
-### ユースケース
+### Cas d'utilisation
 
-- **オフライン評価**: 「LLM-as-a-Judge」回帰テストまたはリーダーボードの実行。
-- **バックグラウンド エージェント**: CRM の更新、プロファイルの作成、コンテンツ モデレーションなど、数分の遅延が許容されるシーケンシャル タスク。
-- **予算が限られた研究**: 限られた予算で大量のトークンを必要とする学術的な実験。
+- **Évaluations hors connexion** : exécution de tests de régression ou de classements « LLM-as-a-Judge ».
+- **Agents en arrière-plan** : tâches séquentielles telles que les mises à jour CRM, la création de profils ou la modération de contenu où quelques minutes de délai sont acceptables.
+- **Recherche avec budget limité** : expériences universitaires nécessitant un volume de jetons élevé avec un budget limité.
 
-### レート上限
+### Limites de débit
 
-Flex 推論トラフィックは一般的な [レート上限](https://aistudio.google.com/rate-limit?hl=ja)にカウントされます。
-[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja) のようなレート上限の引き上げは提供されません。
+Le trafic d'inférence Flex est comptabilisé dans vos [limites de débit](https://aistudio.google.com/rate-limit?hl=fr) générales. Il n'offre pas
+de limites de débit étendues comme l'[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr).
 
-### 削減可能な容量
+### Capacité réductible
 
-Flex トラフィックは低い優先度で処理されます。標準トラフィックが急増した場合、優先度の高いユーザーの容量を確保するために、Flex リクエストがプリエンプトまたは削除されることがあります。優先度の高い推論をお探しの場合は、
-[優先度付き推論](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ja)をご覧ください。
+Le trafic Flex est traité avec une priorité inférieure. En cas de pic de trafic standard, les requêtes Flex peuvent être préemptées ou supprimées pour garantir la capacité des utilisateurs prioritaires. Si vous recherchez une inférence prioritaire, consultez la section
+[Inférence prioritaire](https://ai.google.dev/gemini-api/docs/priority-inference?hl=fr)
 
-### エラーコード
+### Codes d'erreur
 
-Flex 容量が使用できない場合や、システムが輻輳している場合、API は標準のエラーコードを返します。
+Lorsque la capacité Flex n'est pas disponible ou que le système est surchargé, l'API renvoie des codes d'erreur standards :
 
-- **503 Service Unavailable**: 現在、システム容量の上限に達しています。
-- **429 Too Many Requests**: レート上限またはリソースの枯渇。
+- **503 Service Unavailable** : le système a atteint sa capacité maximale.
+- **429 Too Many Requests** : limites de débit ou épuisement des ressources.
 
-### クライアントの責任
+### Responsabilité du client
 
-- **サーバーサイドのフォールバックなし**: 予期しない料金が発生しないように、Flex 容量が上限に達した場合でも、Flex リクエストが自動的に標準階層にアップグレードされることはありません。
-- **再試行**: 指数バックオフを使用して、独自のクライアントサイドの再試行ロジックを実装する必要があります。
-- **タイムアウト**: Flex リクエストはキューに置かれる可能性があるため、接続が途中で切断されないように、クライアントサイドのタイムアウトを 10 分以上に増やすことをおすすめします。
+- **Aucune reprise côté serveur** : pour éviter les frais inattendus, le système ne
+  met pas automatiquement à niveau une requête Flex vers le niveau Standard si la capacité Flex est
+  pleine.
+- **Nouvelles tentatives** : vous devez implémenter votre propre logique de nouvelle tentative côté client avec
+  un intervalle exponentiel entre les tentatives.
+- **Délais avant expiration** : étant donné que les requêtes Flex peuvent se trouver dans une file d'attente, nous vous recommandons
+  d’augmenter les délais avant expiration côté client à 10 minutes ou plus pour éviter une
+  fermeture prématurée de la connexion.
 
-## タイムアウト ウィンドウを調整する
+## Ajuster les fenêtres de délai avant expiration
 
-REST API とクライアント ライブラリのリクエストごとのタイムアウトを構成できます。
-クライアントサイドのタイムアウトが、目的のサーバーの待機ウィンドウ（Flex 待機キューの場合は 600 秒以上）をカバーしていることを常に確認してください。SDK では、タイムアウト値はミリ秒単位で指定します。
+Vous pouvez configurer des délais avant expiration par requête pour l'API REST et les bibliothèques clientes.
+Assurez-vous toujours que le délai avant expiration côté client couvre la fenêtre de patience du serveur prévue (par exemple, 600 secondes ou plus pour les files d'attente Flex). Les SDK attendent des valeurs de délai avant expiration en millisecondes.
 
-### リクエストごとのタイムアウト
+### Délais avant expiration par requête
 
 ### Python
 
@@ -132,7 +163,7 @@ from google import genai
 client = genai.Client(http_options={"timeout": 900000})
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="why is the sky blue?",
     service_tier="flex",
 )
@@ -147,7 +178,7 @@ const client = new GoogleGenAI({});
 
 async function main() {
     const interaction = await client.interactions.create({
-        model: "gemini-3.6-flash",
+        model: "gemini-3.8-flash",
         input: "why is the sky blue?",
         service_tier: "flex",
     }, {timeout: 900000});
@@ -156,9 +187,37 @@ async function main() {
 await main();
 ```
 
-## 再試行を実装する
+### Java
 
-Flex は削減可能で、503 エラーで失敗するため、失敗したリクエストを続行するために再試行ロジックを実装する例を次に示します。
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ServiceTier;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.types.HttpOptions;
+
+Client client =
+    Client.builder()
+        .httpOptions(HttpOptions.builder().timeout(900000).build())
+        .build();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("why is the sky blue?"))
+        .serviceTier(ServiceTier.FLEX)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+```
+
+## Implémenter des nouvelles tentatives
+
+Étant donné que Flex est réductible et échoue avec des erreurs 503, voici un exemple d'implémentation facultative d'une logique de nouvelle tentative pour poursuivre les requêtes ayant échoué :
 
 ### Python
 
@@ -172,7 +231,7 @@ def call_with_retry(max_retries=3, base_delay=5):
     for attempt in range(max_retries):
         try:
             return client.interactions.create(
-                model="gemini-3.6-flash",
+                model="gemini-3.8-flash",
                 input="Analyze this batch statement.",
                 service_tier="flex",
             )
@@ -184,7 +243,7 @@ def call_with_retry(max_retries=3, base_delay=5):
             else:
                 print("Flex exhausted, falling back to Standard...")
                 return client.interactions.create(
-                    model="gemini-3.6-flash",
+                    model="gemini-3.8-flash",
                     input="Analyze this batch statement."
                 )
 
@@ -208,7 +267,7 @@ async function callWithRetry(maxRetries = 3, baseDelay = 5) {
     try {
       console.log(`Attempt ${attempt + 1}: Calling Flex tier...`);
       const interaction = await ai.interactions.create({
-        model: "gemini-3.6-flash",
+        model: "gemini-3.8-flash",
         input: "Analyze this batch statement.",
         service_tier: 'flex',
       });
@@ -221,7 +280,7 @@ async function callWithRetry(maxRetries = 3, baseDelay = 5) {
       } else {
         console.log("Flex exhausted, falling back to Standard...");
         return await ai.interactions.create({
-          model: "gemini-3.6-flash",
+          model: "gemini-3.8-flash",
           input: "Analyze this batch statement.",
         });
       }
@@ -237,38 +296,95 @@ async function main() {
 await main();
 ```
 
-## 料金
+### Java
 
-Flex 推論の料金は、[標準 API](https://ai.google.dev/gemini-api/docs/pricing?hl=ja) の 50% で、
-トークン単位で課金されます。
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ServiceTier;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
 
-## サポートされているモデル
+Client client = new Client();
 
-次のモデルは Flex 推論をサポートしています。
+int maxRetries = 3;
+int baseDelay = 5;
+Interaction interaction = null;
 
-| モデル | Flex 推論 |
+for (int attempt = 0; attempt < maxRetries; attempt++) {
+  try {
+    CreateModelInteraction flexParams =
+        CreateModelInteraction.builder()
+            .model(Model.of("gemini-3.8-flash"))
+            .input(InteractionsInput.of("Analyze this batch statement."))
+            .serviceTier(ServiceTier.FLEX)
+            .build();
+    interaction =
+        client.interactions.create(CreateInteractionRequestBody.of(flexParams)).interaction().get();
+    break;
+  } catch (Exception e) {
+    if (attempt < maxRetries - 1) {
+      int delay = baseDelay * (1 << attempt); // Exponential Backoff
+      System.out.println("Flex busy, retrying in " + delay + "s...");
+      Thread.sleep(delay * 1000L);
+    } else {
+      System.out.println("Flex exhausted, falling back to Standard...");
+      CreateModelInteraction standardParams =
+          CreateModelInteraction.builder()
+              .model(Model.of("gemini-3.8-flash"))
+              .input(InteractionsInput.of("Analyze this batch statement."))
+              .build();
+      interaction =
+          client
+              .interactions
+              .create(CreateInteractionRequestBody.of(standardParams))
+              .interaction()
+              .get();
+    }
+  }
+}
+
+if (interaction != null) {
+  System.out.println(interaction.outputText().orElse(""));
+}
+```
+
+## Tarifs
+
+L'inférence Flex est facturée à 50% de l'[API standard](https://ai.google.dev/gemini-api/docs/pricing?hl=fr)
+et facturée par jeton.
+
+## Modèles compatibles
+
+Les modèles suivants sont compatibles avec l'inférence Flex :
+
+| Modèle | Inférence Flex |
 | --- | --- |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=ja) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=ja) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ja) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ja) | ✔️ |
-| [Gemini 3.1 Pro プレビュー](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ja) | ✔️ |
-| [Gemini 3 Flash プレビュー](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ja) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ja) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ja) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ja) | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=fr) | ✔️ |
+| [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=fr) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=fr) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=fr) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=fr) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=fr) | ✔️ |
+| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=fr) | ✔️ |
+| [Preview Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=fr) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=fr) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=fr) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=fr) | ✔️ |
 
-## 次のステップ
+## Étape suivante
 
-- [超低レイテンシの](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ja)優先度付き推論。
-- [トークン](https://ai.google.dev/gemini-api/docs/tokens?hl=ja): トークンについて理解する。
+- [Inférence prioritaire](https://ai.google.dev/gemini-api/docs/priority-inference?hl=fr) pour une latence ultra-faible.
+- [Jetons](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) : consultez la documentation sur les jetons.
 
-フィードバックを送信
+Envoyer des commentaires
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-最終更新日 2026-09-12 UTC。
+Dernière mise à jour le 2026/09/18 (UTC).
 
-ご意見をお聞かせください
+Voulez-vous nous donner plus d'informations ?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-12 UTC。"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/18 (UTC)."],[],[]]

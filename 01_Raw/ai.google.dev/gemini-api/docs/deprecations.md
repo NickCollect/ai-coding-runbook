@@ -1,163 +1,190 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/deprecations?hl=tr
-fetched_at: 2026-09-14T05:47:07.278327+00:00
-title: "Gemini deste\u011fi sonland\u0131r\u0131lan \u00f6zellikler \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/deprecations?hl=pl
+fetched_at: 2026-09-21T05:57:42.796499+00:00
+title: "Wycofanie Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Geri bildirim gönderin
+Prześlij opinię
 
-# Gemini desteği sonlandırılan özellikler
+# Wycofanie Gemini
 
-Bu sayfada, Gemini API'deki [kararlı (GA)](https://ai.google.dev/gemini-api/docs/models?hl=tr#stable) ve [önizleme](https://ai.google.dev/gemini-api/docs/models?hl=tr#preview) modelleri için bilinen desteği sonlandırma planları listelenmektedir. "**Desteğin sonlandırılması**", bir model için artık destek sağlamadığımızı ve modelin yakın gelecekte "**kapatılacağını**" duyurmamızdır. Bir model "**kapatıldığında**" tamamen devre dışı bırakılır ve uç nokta artık kullanılamaz.
+Na tej stronie znajdziesz znane harmonogramy wycofywania [stabilnych (ogólnodostępnych)](https://ai.google.dev/gemini-api/docs/models?hl=pl#stable) i [wersji podglądowych](https://ai.google.dev/gemini-api/docs/models?hl=pl#preview) modeli oraz zarządzanych agentów w interfejsie Gemini API. „**Wycofanie**” to ogłoszenie, że nie będziemy już obsługiwać danego modelu i że w najbliższej przyszłości zostanie on „**wyłączony**”. Gdy model zostanie „**wyłączony**”, zostanie całkowicie wyłączony, a punkt końcowy przestanie być dostępny.
 
-Desteği sonlandırma duyuruları [Sürüm notları](https://ai.google.dev/gemini-api/docs/changelog?hl=tr) sayfasında yapılır ve duyurulan en erken kapatma tarihleri bu sayfada takip edilir.
-Daha önce kapatılmış modeller gri arka planla gösterilir.
+Ogłoszenia o wycofaniu są publikowane na stronie [Informacje o wersji](https://ai.google.dev/gemini-api/docs/changelog?hl=pl), a ogłoszone najwcześniejsze daty wyłączenia są śledzone na tej stronie.
+Modele, które zostały już wyłączone, są oznaczone szarym tłem.
 
-## Gemini 3 modelleri
+## Modele Gemini 3
 
-| **Model** | **Yayınlanma tarihi** | **Kapatma tarihi** | **Önerilen değiştirme** |
+| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
 | --- | --- | --- | --- |
-| `gemini-3.6-flash` | 21 Temmuz 2026 | Kapatma tarihi duyurulmadı |  |
-| `gemini-3.5-flash-lite` | 21 Temmuz 2026 | Kapatma tarihi duyurulmadı |  |
-| `gemini-3.5-flash` | 19 Mayıs 2026 | Kapatma tarihi duyurulmadı |  |
-| `gemini-3.1-flash-image` | 28 Mayıs 2026 | Kapatma tarihi duyurulmadı |  |
-| `gemini-3-pro-image` | 28 Mayıs 2026 | Kapatma tarihi duyurulmadı |  |
-| `gemini-3.1-flash-lite` | 7 Mayıs 2026 | 7 Mayıs 2027 | `gemini-3.5-flash-lite` |
-| Modelleri önizleme | | | |
-| `gemini-3.1-flash-image-preview` | 26 Şubat 2026 | 25 Haziran 2026 | `gemini-3.1-flash-image` |
-| `gemini-3.1-pro-preview` | 19 Şubat 2026 | Kapatma tarihi duyurulmadı |  |
-| `gemini-3-pro-image-preview` | 20 Kasım 2025 | 25 Haziran 2026 | `gemini-3-pro-image` |
-| `gemini-3-flash-preview` | 17 Aralık 2025 | Kapatma tarihi duyurulmadı | `gemini-3.6-flash` |
-| `gemini-3-pro-preview` | 18 Kasım 2025 | 9 Mart 2026 | `gemini-3.1-pro-preview` |
-| `gemini-3.1-flash-lite-preview` | 3 Mart 2026 | 25 Mayıs 2026 | `gemini-3.1-flash-lite` |
+| `gemini-3.8-live` | 15 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| `gemini-3.8-live-extended-thinking` | 15 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| `gemini-3.8-flash` | 2 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| `gemini-3.7-flash` | 13 sierpnia 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| `gemini-3.6-flash` | 21 lipca 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| `gemini-3.5-flash-lite` | 21 lipca 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| `gemini-3.5-flash` | 19 maja 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| `gemini-3.1-flash-image` | 28 maja 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| `gemini-3-pro-image` | 28 maja 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| `gemini-3.1-flash-lite` | 7 maja 2026 r. | 7 maja 2027 r. | `gemini-3.5-flash-lite` |
+| Podgląd modeli | | | |
+| `gemini-3.1-flash-image-preview` | 26 lutego 2026 r. | 25 czerwca 2026 r. | `gemini-3.1-flash-image` |
+| `gemini-3.1-pro-preview` | 19 lutego 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| `gemini-3-pro-image-preview` | 20 listopada 2025 r. | 25 czerwca 2026 r. | `gemini-3-pro-image` |
+| `gemini-3-flash-preview` | 17 grudnia 2025 r. | Nie ogłoszono daty wyłączenia | `gemini-3.6-flash` |
+| `gemini-3-pro-preview` | 18 listopada 2025 r. | 9 marca 2026 r. | `gemini-3.1-pro-preview` |
+| `gemini-3.1-flash-lite-preview` | 3 marca 2026 r. | 25 maja 2026 r. | `gemini-3.1-flash-lite` |
 
-## Gemini 2.5 Pro modelleri
+## modele Gemini 2.5 Pro,
 
-| **Model** | **Yayınlanma tarihi** | **Kapatma tarihi** | **Önerilen değiştirme** |
+| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
 | --- | --- | --- | --- |
-| `gemini-2.5-pro` | 17 Haziran 2025 | 16 Ekim 2026 | `gemini-3.1-pro-preview` |
-| Modelleri önizleme | | | |
-| `gemini-2.5-pro-preview-03-25` | 3 Mart 2025 | 2 Aralık 2025 | `gemini-3.1-pro-preview` |
-| `gemini-2.5-pro-preview-05-06` | 6 Mayıs 2025 | 2 Aralık 2025 | `gemini-3.1-pro-preview` |
-| `gemini-2.5-pro-preview-06-05` | 5 Haziran 2025 | 2 Aralık 2025 | `gemini-3.1-pro-preview` |
+| `gemini-2.5-pro` | 17 czerwca 2025 r. | Nie ogłoszono daty wyłączenia |  |
+| Podgląd modeli | | | |
+| `gemini-2.5-pro-preview-03-25` | 3 marca 2025 r. | 2 grudnia 2025 r. | `gemini-3.1-pro-preview` |
+| `gemini-2.5-pro-preview-05-06` | 6 maja 2025 r. | 2 grudnia 2025 r. | `gemini-3.1-pro-preview` |
+| `gemini-2.5-pro-preview-06-05` | 5 czerwca 2025 r. | 2 grudnia 2025 r. | `gemini-3.1-pro-preview` |
 
-## Gemini 2.5 Flash modelleri
+## Modele Gemini 2.5 Flash
 
-| **Model** | **Yayınlanma tarihi** | **Kapatma tarihi** | **Önerilen değiştirme** |
+| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
 | --- | --- | --- | --- |
-| `gemini-2.5-flash` | 17 Haziran 2025 | 16 Ekim 2026 | `gemini-3.6-flash` |
-| `gemini-2.5-flash-image` | 2 Ekim 2025 | 2 Ekim 2026 | `gemini-3.1-flash-image-preview` |
-| `gemini-2.5-flash-lite` | 22 Temmuz 2025 | 16 Ekim 2026 | `gemini-3.1-flash-lite` |
-| Modelleri önizleme | | | |
-| `gemini-2.5-flash-lite-preview-09-2025` | 25 Eylül 2025 | 31 Mart 2026 | `gemini-3.1-flash-lite` |
-| `gemini-2.5-flash-preview-05-20` | 20 Mayıs 2025 | 18 Kasım 2025 | `gemini-3.6-flash` |
-| `gemini-2.5-flash-image-preview` | 7 Mayıs 2025 | 15 Ocak 2026 | `gemini-2.5-flash-image` |
-| `gemini-2.5-flash-preview-09-25` | 25 Eylül 2025 | 17 Şubat 2026 | `gemini-3.6-flash` |
+| `gemini-2.5-flash` | 17 czerwca 2025 r. | Nie ogłoszono daty wyłączenia |  |
+| `gemini-2.5-flash-image` | 2 października 2025 r. | 2 października 2026 r. | `gemini-3.1-flash-image-preview` |
+| `gemini-2.5-flash-lite` | 22 lipca 2025 r. | Nie ogłoszono daty wyłączenia |  |
+| Podgląd modeli | | | |
+| `gemini-2.5-flash-lite-preview-09-2025` | 25 września 2025 r. | 31 marca 2026 r. | `gemini-3.1-flash-lite` |
+| `gemini-2.5-flash-preview-05-20` | 20 maja 2025 r. | 18 listopada 2025 r. | `gemini-3.6-flash` |
+| `gemini-2.5-flash-image-preview` | 7 maja 2025 r. | 15 stycznia 2026 r. | `gemini-2.5-flash-image` |
+| `gemini-2.5-flash-preview-09-25` | 25 września 2025 r. | 17 lutego 2026 r. | `gemini-3.6-flash` |
 
-## Gemini 2.0 modelleri
+## Modele Gemini 2.0
 
-| **Model** | **Yayınlanma tarihi** | **Kapatma tarihi** | **Önerilen değiştirme** |
+| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
 | --- | --- | --- | --- |
-| `gemini-2.0-flash` | 5 Şubat 2025 | 1 Haziran 2026 | `gemini-3.6-flash` |
-| `gemini-2.0-flash-001` | 5 Şubat 2025 | 1 Haziran 2026 | `gemini-3.6-flash` |
-| `gemini-2.0-flash-lite` | 25 Şubat 2025 | 1 Haziran 2026 | `gemini-3.1-flash-lite` |
-| `gemini-2.0-flash-lite-001` | 25 Şubat 2025 | 1 Haziran 2026 | `gemini-3.1-flash-lite` |
-| Modelleri önizleme | | | |
-| `gemini-2.0-flash-preview-image-generation` | 7 Mayıs 2025 | 14 Kasım 2025 | `gemini-2.5-flash-image` |
-| `gemini-2.0-flash-lite-preview` | 5 Şubat 2025 | 9 Aralık 2025 | `gemini-2.5-flash-lite` |
-| `gemini-2.0-flash-lite-preview-02-05` | 5 Şubat 2025 | 9 Aralık 2025 | `gemini-2.5-flash-lite` |
+| `gemini-2.0-flash` | 5 lutego 2025 r. | 1 czerwca 2026 r. | `gemini-3.6-flash` |
+| `gemini-2.0-flash-001` | 5 lutego 2025 r. | 1 czerwca 2026 r. | `gemini-3.6-flash` |
+| `gemini-2.0-flash-lite` | 25 lutego 2025 r. | 1 czerwca 2026 r. | `gemini-3.1-flash-lite` |
+| `gemini-2.0-flash-lite-001` | 25 lutego 2025 r. | 1 czerwca 2026 r. | `gemini-3.1-flash-lite` |
+| Podgląd modeli | | | |
+| `gemini-2.0-flash-preview-image-generation` | 7 maja 2025 r. | 14 listopada 2025 r. | `gemini-2.5-flash-image` |
+| `gemini-2.0-flash-lite-preview` | 5 lutego 2025 r. | 9 grudnia 2025 r. | `gemini-2.5-flash-lite` |
+| `gemini-2.0-flash-lite-preview-02-05` | 5 lutego 2025 r. | 9 grudnia 2025 r. | `gemini-2.5-flash-lite` |
 
-## Live API modelleri
+## Modele interfejsu Live API
 
-| **Model** | **Yayınlanma tarihi** | **Kapatma tarihi** | **Önerilen değiştirme** |
+| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
 | --- | --- | --- | --- |
-| `gemini-2.0-flash-live-001` | 9 Nisan 2025 | 9 Aralık 2025 | `gemini-3.1-flash-live-preview` |
-| Modelleri önizleme | | | |
-| `gemini-3.1-flash-live-preview` | 11 Mart 2026 | Kapatma tarihi duyurulmadı |  |
-| `gemini-2.5-flash-native-audio-preview-12-2025` | 12 Aralık 2025 | Kapatma tarihi duyurulmadı | `gemini-3.1-flash-live-preview` |
-| `gemini-live-2.5-flash-preview` | 17 Haziran 2025 | 9 Aralık 2025 | `gemini-3.1-flash-live-preview` |
+| `gemini-3.8-live` | 15 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| `gemini-3.8-live-extended-thinking` | 15 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| `gemini-3.5-transcribe-live` | Sierpień 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| `gemini-2.0-flash-live-001` | 9 kwietnia 2025 r. | 9 grudnia 2025 r. | `gemini-3.8-live` |
+| Podgląd modeli | | | |
+| `gemini-3.5-live-translate-preview` | Czerwiec 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| `gemini-3.1-flash-live-preview` | 11 marca 2026 r. | Nie ogłoszono daty wyłączenia | `gemini-3.8-live` |
+| `gemini-2.5-flash-native-audio-preview-12-2025` | 12 grudnia 2025 r. | Nie ogłoszono daty wyłączenia | `gemini-3.8-live` |
+| `gemini-live-2.5-flash-preview` | 17 czerwca 2025 r. | 9 grudnia 2025 r. | `gemini-3.8-live` |
 
-## Ses modelleri
+## Modele audio
 
-| **Model** | **Yayınlanma tarihi** | **Kapatma tarihi** | **Önerilen değiştirme** |
+| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
 | --- | --- | --- | --- |
-| Modelleri önizleme | | | |
-| `gemini-3.1-flash-tts-preview` | 13 Nisan 2026 | Kapatma tarihi duyurulmadı |  |
-| `gemini-2.5-flash-preview-tts` | 20 Mayıs 2025 | Kapatma tarihi duyurulmadı | `gemini-3.1-flash-tts-preview` |
-| `gemini-2.5-pro-preview-tts` | 20 Mayıs 2025 | Kapatma tarihi duyurulmadı | `gemini-3.1-flash-tts-preview` |
+| `gemini-3.5-transcribe` | Sierpień 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| Podgląd modeli | | | |
+| `gemini-3.1-flash-tts-preview` | 13 kwietnia 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| `gemini-2.5-flash-preview-tts` | 20 maja 2025 r. | Nie ogłoszono daty wyłączenia | `gemini-3.1-flash-tts-preview` |
+| `gemini-2.5-pro-preview-tts` | 20 maja 2025 r. | Nie ogłoszono daty wyłączenia | `gemini-3.1-flash-tts-preview` |
 
-## Yerleştirme modelleri
+## Modele wektorów dystrybucyjnych
 
-| **Model** | **Yayınlanma tarihi** | **Kapatma tarihi** | **Önerilen değiştirme** |
+| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
 | --- | --- | --- | --- |
-| `gemini-embedding-2` | 22 Nisan 2026 | Kapatma tarihi duyurulmadı |  |
-| `gemini-embedding-001` | 14 Temmuz 2025 | 14 Temmuz 2026 | `gemini-embedding-2` |
-| `text-embedding-004` | 9 Nisan 2024 | 14 Ocak 2026 | `gemini-embedding-2` |
-| Modelleri önizleme | | | |
-| `embedding-2-preview` | 10 Mart 2026 | 10 Ağustos 2026 | `gemini-embedding-2` |
-| `embedding-001` | 9 Nisan 2024 | 30 Ekim 2025 | `gemini-embedding-2` |
-| `embedding-gecko-001` |  | 30 Ekim 2025 | `gemini-embedding-2` |
-| `gemini-embedding-exp` |  | 30 Ekim 2025 | `gemini-embedding-2` |
-| `gemini-embedding-exp-03-07` |  | 30 Ekim 2025 | `gemini-embedding-2` |
+| `gemini-embedding-2` | 22 kwietnia 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| `gemini-embedding-001` | 14 lipca 2025 r. | 14 maja 2028 r. | `gemini-embedding-2` |
+| `text-embedding-004` | 9 kwietnia 2024 r. | 14 stycznia 2026 r. | `gemini-embedding-2` |
+| Podgląd modeli | | | |
+| `embedding-2-preview` | 10 marca 2026 r. | 10 sierpnia 2026 r. | `gemini-embedding-2` |
+| `embedding-001` | 9 kwietnia 2024 r. | 30 października 2025 r. | `gemini-embedding-2` |
+| `embedding-gecko-001` |  | 30 października 2025 r. | `gemini-embedding-2` |
+| `gemini-embedding-exp` |  | 30 października 2025 r. | `gemini-embedding-2` |
+| `gemini-embedding-exp-03-07` |  | 30 października 2025 r. | `gemini-embedding-2` |
 
-## Imagen modelleri
+## Modele Imagen
 
-| **Model** | **Yayınlanma tarihi** | **Kapatma tarihi** | **Önerilen değiştirme** |
+| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
 | --- | --- | --- | --- |
-| `imagen-4.0-generate-001` | 24 Haziran 2025 | 17 Ağustos 2026 | `gemini-3.1-flash-image` |
-| `imagen-4.0-ultra-generate-001` | 24 Haziran 2025 | 17 Ağustos 2026 | `gemini-3.1-flash-image` |
-| `imagen-4.0-fast-generate-001` | 24 Haziran 2025 | 17 Ağustos 2026 | `gemini-3.1-flash-image` |
-| `imagen-3.0-generate-002` | 6 Şubat 2025 | 10 Kasım 2025 | `imagen-4.0-generate-001` |
-| Modelleri önizleme | | | |
-| `imagen-4.0-generate-preview-06-06` | 24 Haziran 2025 | 17 Şubat 2026 | `imagen-4.0-generate-001` |
-| `imagen-4.0-ultra-generate-preview-06-06` | 24 Haziran 2025 | 17 Şubat 2026 | `imagen-4.0-ultra-generate-001` |
+| `imagen-4.0-generate-001` | 24 czerwca 2025 r. | 17 sierpnia 2026 r. | `gemini-3.1-flash-image` |
+| `imagen-4.0-ultra-generate-001` | 24 czerwca 2025 r. | 17 sierpnia 2026 r. | `gemini-3.1-flash-image` |
+| `imagen-4.0-fast-generate-001` | 24 czerwca 2025 r. | 17 sierpnia 2026 r. | `gemini-3.1-flash-image` |
+| `imagen-3.0-generate-002` | 6 lutego 2025 r. | 10 listopada 2025 r. | `imagen-4.0-generate-001` |
+| Podgląd modeli | | | |
+| `imagen-4.0-generate-preview-06-06` | 24 czerwca 2025 r. | 17 lutego 2026 r. | `imagen-4.0-generate-001` |
+| `imagen-4.0-ultra-generate-preview-06-06` | 24 czerwca 2025 r. | 17 lutego 2026 r. | `imagen-4.0-ultra-generate-001` |
 
-## Veo modelleri
+## Modele Veo
 
-| **Model** | **Yayınlanma tarihi** | **Kapatma tarihi** | **Önerilen değiştirme** |
+| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
 | --- | --- | --- | --- |
-| `veo-3.0-generate-001` | 9 Eylül 2025 | 30 Haziran 2026 | `veo-3.1-generate-preview` veya [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=tr)'daki GA modelleri |
-| `veo-3.0-fast-generate-001` | 9 Eylül 2025 | 30 Haziran 2026 | `veo-3.1-fast-generate-preview` veya [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=tr)'daki GA modelleri |
-| `veo-2.0-generate-001` | 9 Nisan 2025 | 30 Haziran 2026 | `veo-3.1-generate-preview` veya [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=tr)'daki GA modelleri |
-| Modelleri önizleme | | | |
-| `veo-3.1-lite-generate-preview` | 31 Mart 2026 | Kapatma tarihi duyurulmadı |  |
-| `veo-3.1-generate-preview` | 15 Ekim 2025 | Kapatma tarihi duyurulmadı |  |
-| `veo-3.1-fast-generate-preview` | 15 Ekim 2025 | Kapatma tarihi duyurulmadı |  |
-| `veo-3.0-generate-preview` | 31 Temmuz 2025 | 12 Kasım 2025 | `veo-3.1-generate-preview` |
-| `veo-3.0-fast-generate-preview` | 31 Temmuz 2025 | 12 Kasım 2025 | `veo-3.1-fast-generate-preview` |
+| `veo-3.0-generate-001` | 9 września 2025 r. | 30 czerwca 2026 r. | `veo-3.1-generate-preview` lub modele GA na [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=pl). |
+| `veo-3.0-fast-generate-001` | 9 września 2025 r. | 30 czerwca 2026 r. | `veo-3.1-fast-generate-preview` lub modele GA na [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=pl). |
+| `veo-2.0-generate-001` | 9 kwietnia 2025 r. | 30 czerwca 2026 r. | `veo-3.1-generate-preview` lub modele GA na [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=pl). |
+| Podgląd modeli | | | |
+| `veo-3.1-lite-generate-preview` | 31 marca 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| `veo-3.1-generate-preview` | 15 października 2025 r. | Nie ogłoszono daty wyłączenia |  |
+| `veo-3.1-fast-generate-preview` | 15 października 2025 r. | Nie ogłoszono daty wyłączenia |  |
+| `veo-3.0-generate-preview` | 31 lipca 2025 r. | 12 listopada 2025 r. | `veo-3.1-generate-preview` |
+| `veo-3.0-fast-generate-preview` | 31 lipca 2025 r. | 12 listopada 2025 r. | `veo-3.1-fast-generate-preview` |
 
-## Lyria modelleri
+## Modele Gemini Omni Flash
 
-| **Model** | **Yayınlanma tarihi** | **Kapatma tarihi** | **Önerilen değiştirme** |
+| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
 | --- | --- | --- | --- |
-| `lyria-3-clip-preview` | 25 Mart 2026 | Kapatma tarihi duyurulmadı |  |
-| `lyria-3-pro-preview` | 25 Mart 2026 | Kapatma tarihi duyurulmadı |  |
-| `lyria-realtime-exp` | 20 Mayıs 2025 | Kapatma tarihi duyurulmadı |  |
+| `gemini-omni-1.1-flash` | 27 sierpnia 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| Wycofane modele | | | |
+| `gemini-omni-flash-preview` | 30 czerwca 2026 r. | 30 września 2026 r. | `gemini-omni-1.1-flash` |
 
-## Robotik modeller
+## Modele Lyria
 
-| **Model** | **Yayınlanma tarihi** | **Kapatma tarihi** | **Önerilen değiştirme** |
+| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
 | --- | --- | --- | --- |
-| Modelleri önizleme | | | |
-| `gemini-robotics-er-1.6-preview` | 14 Nisan 2026 | Kapanış tarihi duyurulmadı |  |
-| `gemini-robotics-er-1.5-preview` | 25 Eylül 2025 | 30 Nisan 2026 | `gemini-robotics-er-1.6-preview` |
+| `lyria-3.5` | 3 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| Podgląd modeli | | | |
+| `lyria-3-clip-preview` | 25 marca 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| `lyria-3-pro-preview` | 25 marca 2026 r. | Nie ogłoszono daty wyłączenia | `lyria-3.5` |
+| `lyria-realtime-exp` | 20 maja 2025 r. | Nie ogłoszono daty wyłączenia |  |
 
-Geri bildirim gönderin
+## Modele robotów
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| --- | --- | --- | --- |
+| Podgląd modeli | | | |
+| `gemini-robotics-er-1.6-preview` | 14 kwietnia 2026 r. | 31 sierpnia 2026 r. | gemini-robotics-er-2-preview |
+| `gemini-robotics-er-1.5-preview` | 25 września 2025 r. | 30 kwietnia 2026 r. | `gemini-robotics-er-1.6-preview` |
 
-Son güncelleme tarihi: 2026-09-12 UTC.
+## Zarządzane agenty
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+| **Agent** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| --- | --- | --- | --- |
+| Wyświetlanie podglądu agentów | | | |
+| `antigravity-preview-09-2026` | 17 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| `antigravity-preview-05-2026` | 19 maja 2026 r. | 5 października 2026 r. | `antigravity-preview-09-2026` |
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-12 UTC."],[],[]]
+Prześlij opinię
+
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+
+Ostatnia aktualizacja: 2026-09-18 UTC.
+
+Chcesz przekazać coś jeszcze?
+
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-18 UTC."],[],[]]

@@ -1,27 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/tool-combination?hl=ko
-fetched_at: 2026-09-14T05:40:03.501610+00:00
-title: "\uae30\ubcf8 \uc81c\uacf5 \ub3c4\uad6c\uc640 \ud568\uc218 \ud638\ucd9c \uacb0\ud569 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/tool-combination?hl=ja
+fetched_at: 2026-09-21T05:50:39.420422+00:00
+title: "\u7d44\u307f\u8fbc\u307f\u30c4\u30fc\u30eb\u3068\u95a2\u6570\u547c\u3073\u51fa\u3057\u3092\u7d44\u307f\u5408\u308f\u305b\u308b \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
+Gemini 3.8 Flash が利用可能になりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ja)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs/generate-content?hl=ko)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs/generate-content?hl=ja)
 
-의견 보내기
+フィードバックを送信
 
-# 기본 제공 도구와 함수 호출 결합
+# 組み込みツールと関数呼び出しを組み合わせる
 
-Gemini는 도구 호출의 컨텍스트 기록을 보존하고 노출하여 단일 생성에서 `google_search`와 같은 [내장 도구](https://ai.google.dev/gemini-api/docs/tools?hl=ko)와 [함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)(*맞춤 도구*라고도 함)을 결합할 수 있습니다. 기본 제공 및 맞춤 도구 조합을 사용하면 모델이 특정 비즈니스 로직을 호출하기 전에 실시간 웹 데이터를 기반으로 그라운딩할 수 있는 복잡한 에이전트 워크플로가 가능합니다.
+Gemini では、ツール呼び出しのコンテキスト履歴を保持して公開することで、`google_search` などの[組み込みツール](https://ai.google.dev/gemini-api/docs/tools?hl=ja)と[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)（カスタムツールとも呼ばれます）を 1 回の生成で組み合わせることができます。組み込みツールとカスタムツールの組み合わせにより、複雑なエージェント ワークフローが可能になります。たとえば、モデルは特定のビジネス ロジックを呼び出す前に、リアルタイムのウェブデータに基づいてグラウンディングできます。
 
-다음은 `google_search` 및 맞춤 함수 `getWeather`을 사용하여 기본 제공 도구와 맞춤 도구 조합을 사용 설정하는 예입니다.
+`google_search` とカスタム関数 `getWeather` を使用して、組み込みツールとカスタムツールの組み合わせを有効にする例を次に示します。
 
 ### Python
 
@@ -388,54 +388,53 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
 }'
 ```
 
-## 작동 방식
+## 仕組み
 
-Gemini 3 모델은 *도구 컨텍스트 순환*을 사용하여 기본 제공 및 맞춤 도구 조합을 지원합니다. 도구 컨텍스트 순환을 사용하면 기본 제공 도구의 컨텍스트를 보존하고 노출하여 턴마다 동일한 호출에서 맞춤 도구와 공유할 수 있습니다.
+Gemini 3 モデルは、*ツール コンテキストの循環*を使用して、組み込みツールとカスタムツールの組み合わせを可能にします。ツール コンテキストの循環により、組み込みツールのコンテキストを保持して公開し、ターンごとに同じ呼び出しでカスタムツールと共有できます。
 
-### 도구 조합 사용 설정
+### ツールの組み合わせを有効にする
 
-- 도구 컨텍스트 순환을 사용 설정하려면 `include_server_side_tool_invocations` 플래그를 `true`로 설정해야 합니다.
-- [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko#function-declarations)를 사용하려는 내장 도구와 함께 포함하여 조합 동작을 트리거합니다.
-  - `function_declarations`를 포함하지 않아도 플래그가 설정되어 있는 한 도구 컨텍스트 순환은 포함된 기본 제공 도구에 계속 적용됩니다.
+- ツール コンテキストの循環を有効にするには、`include_server_side_tool_invocations` フラグを `true` に設定する必要があります。
+- [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja#function-declarations) と、使用する組み込みツールを含めて、組み合わせの動作をトリガーします。
+  - `function_declarations` を含めない場合でも、フラグが設定されていれば、ツール コンテキストの循環は、含まれている組み込みツールに対して機能します。
 
-### API 반환 파트
+### API の戻り値のパーツ
 
-단일 응답에서 API는 내장 도구 호출의 `toolCall` 및 `toolResponse` 부분을 반환합니다. 함수 (맞춤 도구) 호출의 경우 API는 `functionCall` 호출 부분을 반환하며, 사용자는 다음 턴에서 `functionResponse` 부분을 제공합니다.
+API は、1 つのレスポンスで、組み込みツール呼び出しの `toolCall` 部分と `toolResponse` 部分を返します。関数（カスタムツール）呼び出しの場合、API は `functionCall` 呼び出し部分を返します。ユーザーは次のターンで `functionResponse` 部分を提供します。
 
-- `toolCall` 및 `toolResponse`: API는 다음 턴을 위해 서버 측에서 실행되는 도구의 컨텍스트와 실행 결과를 보존하기 위해 이러한 부분을 반환합니다.
-- `functionCall` 및 `functionResponse`: API는 사용자가 작성할 함수 호출을 사용자에게 전송하고 사용자는 함수 응답에서 결과를 다시 전송합니다. 이러한 부분은 도구 조합 기능에 고유한 것이 아니라 Gemini API의 모든 [함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)에 표준입니다.
-- ([코드 실행](https://ai.google.dev/gemini-api/docs/code-execution?hl=ko) 도구만 해당)
-  `executableCode` 및 `codeExecutionResult`:
-  코드 실행 도구를 사용하는 경우 `functionCall` 및 `functionResponse` 대신 API는 `executableCode` (실행되도록 모델에서 생성된 코드) 및 `codeExecutionResult` (실행 가능한 코드의 결과)를 반환합니다.
+- `toolCall` と `toolResponse`: API は、サーバーサイドで実行されるツールのコンテキストと、その実行結果を次のターンで保持するために、これらの部分を返します。
+- `functionCall` と `functionResponse`: API は関数呼び出しをユーザーに送信して入力させ、ユーザーは関数レスポンスで結果を返します（これらの部分は Gemini API のすべての[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)に共通であり、ツール組み合わせ機能に固有のものではありません）。
+- （[コード実行](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)ツールのみ）
+  `executableCode` と `codeExecutionResult`:
+  コード実行ツールを使用する場合、API は `functionCall` と `functionResponse` の代わりに、`executableCode`（実行されるモデルによって生成されたコード）と `codeExecutionResult`（実行可能コードの結果）を返します。
 
-컨텍스트를 유지하고 도구 조합을 사용 설정하려면 각 턴에서 포함된 모든 [필드](#critical-fields)를 포함한 모든 파트를 모델에 반환해야 합니다.
+コンテキストを維持してツールの組み合わせを有効にするには、各ターンで、すべての[フィールド](#critical-fields)を含むすべての部分をモデルに返す必要があります。
 
-### 반환된 파트의 중요 필드
+### 返された部品の重要なフィールド
 
-[API에서 반환되는 특정 부분](#api-returns-parts)에는 `id`, `tool_type`, `thought_signature` 필드가 포함됩니다. 이러한 필드는 도구 컨텍스트를 유지하는 데 중요하므로 (따라서 도구 조합에 중요함) 후속 요청에서 *응답에 제공된 대로* 모든 부분을 반환해야 합니다.
+[API から返される特定の部分](#api-returns-parts)には、`id`、`tool_type`、`thought_signature` フィールドが含まれます。これらのフィールドは、ツールのコンテキストを維持するために重要です（したがって、ツールの組み合わせにとっても重要です）。後続のリクエストでは、*レスポンスで指定されたとおり*にすべての部分を返す必要があります。
 
-- `id`: 호출을 응답에 매핑하는 고유 식별자입니다. `id`는 도구 컨텍스트 순환과 관계없이 **모든 함수 호출 응답에서 설정**됩니다.
-  함수 호출에서 API가 제공하는 것과 동일한 `id`을 함수 응답에서 제공*해야 합니다*. 기본 제공 도구는 도구 호출과 도구 응답 간에 `id`를 자동으로 공유합니다.
-  - 모든 도구 관련 부분에서 발견됨: `toolCall`, `toolResponse`, `functionCall`, `functionResponse`, `executableCode`, `codeExecutionResult`
-- `tool_type`: 사용 중인 특정 도구를 식별합니다. 리터럴 내장 도구 (예: `URL_CONTEXT`) 또는 함수 (예: `getWeather`) 이름입니다.
-  - `toolCall` 및 `toolResponse` 부분에서 찾을 수 있습니다.
-- `thought_signature`: **API에서 반환된 각 부분**에 삽입된 실제 암호화된 컨텍스트입니다. 사고 서명 없이는 컨텍스트를 재구성할 수 없습니다. 턴마다 모든 파트의 사고 서명을 반환하지 않으면 모델에 오류가 발생합니다.
-  - *모든* 부위에서 발견됩니다.
+- `id`: 呼び出しをレスポンスにマッピングする一意の識別子。`id` は、ツールのコンテキストの循環に関係なく、**すべての関数呼び出しレスポンスで設定**されます。API が関数呼び出しで提供するのと同じ `id` を関数レスポンスで提供する*必要があります*。組み込みツールは、ツール呼び出しとツール レスポンスの間で `id` を自動的に共有します。
+  - すべてのツール関連部分に存在: `toolCall`、`toolResponse`、`functionCall`、`functionResponse`、`executableCode`、`codeExecutionResult`
+- `tool_type`: 使用されている特定のツールを識別します。リテラル組み込みツール（`URL_CONTEXT` など）または関数（`getWeather` など）の名前。
+  - `toolCall` パーツと `toolResponse` パーツにあります。
+- `thought_signature`: **API によって返される各部分**に埋め込まれた実際の暗号化コンテキスト。思考シグネチャがないとコンテキストを再構築できません。すべてのターンのすべての部分の思考シグネチャを返さないと、モデルはエラーを返します。
+  - *すべての*パーツにあります。
 
-### 도구별 데이터
+### ツール固有のデータ
 
-일부 내장 도구는 도구 유형에 따라 사용자에게 표시되는 데이터 인수를 반환합니다.
+一部の組み込みツールは、ツールタイプに固有のユーザーに表示されるデータ引数を返します。
 
-| 도구 | 사용자에게 표시되는 도구 호출 인수 (있는 경우) | 사용자에게 표시되는 도구 응답 (있는 경우) |
+| ツール | ユーザーに表示されるツール呼び出し引数（ある場合） | ユーザーに表示されるツール レスポンス（ある場合） |
 | --- | --- | --- |
 | **GOOGLE\_SEARCH** | `queries` | `search_suggestions` |
 | **GOOGLE\_MAPS** | `queries` | `places` `google_maps_widget_context_token` |
-| **URL\_CONTEXT** | `urls` 탐색할 URL | `urls_metadata` `retrieved_url`: 탐색한 URL `url_retrieval_status`: 탐색 상태 |
-| **FILE\_SEARCH** | 없음 | 없음 |
+| **URL\_CONTEXT** | `urls` ブラウジングする URL | `urls_metadata` `retrieved_url`: 閲覧した URL `url_retrieval_status`: 閲覧ステータス |
+| **FILE\_SEARCH** | なし | なし |
 
-## 도구 조합 요청 구조의 예
+## ツール組み合わせリクエスト構造の例
 
-다음 요청 구조는 '미국에서 가장 북쪽에 있는 도시는 어디야?'라는 프롬프트의 요청 구조를 보여줍니다. 오늘 날씨가 어때?'라고 말해 줘. 기본 제공 Gemini 도구 `google_search` 및 `code_execution`, 맞춤 함수 `get_weather`의 세 가지 도구를 결합합니다.
+次のリクエスト構造は、「米国最北端の都市はどこですか？」というプロンプトのリクエスト構造を示しています。今日の天気はどうですか？」組み込みの Gemini ツール `google_search` と `code_execution`、カスタム関数 `get_weather` の 3 つのツールを組み合わせたものです。
 
 ```
 {
@@ -504,49 +503,48 @@ Gemini 3 모델은 *도구 컨텍스트 순환*을 사용하여 기본 제공 �
 }
 ```
 
-## 토큰 및 가격 책정
+## トークンと料金
 
-요청의 `toolCall` 및 `toolResponse` 부분은 `prompt_token_count`에 포함됩니다. 이제 이러한 중간 도구 단계가 표시되고 사용자에게 반환되므로 대화 기록의 일부가 됩니다. 이는 *응답*이 아닌 *요청*에만 해당합니다.
+リクエストの `toolCall` 部分と `toolResponse` 部分は `prompt_token_count` にカウントされます。これらの中間ツールステップは表示され、ユーザーに返されるため、会話履歴の一部となります。これは*リクエスト*の場合のみであり、*レスポンス*には適用されません。
 
-Google 검색 도구는 이 규칙에서 제외됩니다. Google 검색은 이미 쿼리 수준에서 자체 가격 책정 모델을 적용하므로 토큰이 이중 청구되지 않습니다 ([가격 책정](https://ai.google.dev/gemini-api/docs/pricing?hl=ko) 페이지 참고).
+Google 検索ツールはこのルールの例外です。Google 検索では、クエリレベルで独自の料金モデルがすでに適用されているため、トークンが二重に課金されることはありません（[料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja)ページを参照）。
 
-자세한 내용은 [토큰](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) 페이지를 참고하세요.
+詳細については、[トークン](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)のページをご覧ください。
 
-## 제한사항
+## 制限事項
 
-- `include_server_side_tool_invocations` 플래그가 사용 설정된 경우 `VALIDATED` 모드로 기본 설정 (`AUTO` 모드는 지원되지 않음)
-- `google_search`와 같은 내장 도구는 위치 및 현재 시간 정보를 사용하므로 `system_instruction` 또는 `function_declaration.description`에 충돌하는 위치 및 시간 정보가 있으면 도구 조합 기능이 제대로 작동하지 않을 수 있습니다.
+- `include_server_side_tool_invocations` フラグが有効の場合、デフォルトは `VALIDATED` モード（`AUTO` モードは対象外）
+- `google_search` などの組み込みツールは、位置情報と現在時刻の情報に依存しています。そのため、`system_instruction` または `function_declaration.description` に矛盾する位置情報と時刻情報が含まれていると、ツールを組み合わせた機能が正常に動作しないことがあります。
 
-## 지원되는 도구
+## サポートされているツール
 
-표준 도구 컨텍스트 순환은 서버 측 (내장) 도구에 적용됩니다.
-코드 실행도 서버 측 도구이지만 컨텍스트 순환을 위한 자체 내장 솔루션이 있습니다. Computer Use와 함수 호출은 클라이언트 측 도구이며 컨텍스트 순환을 위한 내장 솔루션도 있습니다.
+標準のツール コンテキストの循環は、サーバーサイド（組み込み）ツールに適用されます。Code Execution もサーバーサイド ツールですが、コンテキスト循環のための独自の組み込みソリューションがあります。コンピュータ使用と関数呼び出しはクライアントサイドのツールであり、コンテキスト循環の組み込みソリューションも備えています。
 
-| 도구 | 실행 측 | 컨텍스트 순환 지원 |
+| ツール | 実行側 | コンテキストの循環のサポート |
 | --- | --- | --- |
-| [Google 검색](https://ai.google.dev/gemini-api/docs/google-search?hl=ko) | 서버 측 | 지원됨 |
-| [Google 지도](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ko) | 서버 측 | 지원됨 |
-| [URL 컨텍스트](https://ai.google.dev/gemini-api/docs/url-context?hl=ko) | 서버 측 | 지원됨 |
-| [파일 검색](https://ai.google.dev/gemini-api/docs/file-search?hl=ko) | 서버 측 | 지원됨 |
-| [코드 실행](https://ai.google.dev/gemini-api/docs/code-execution?hl=ko) | 서버 측 | 지원됨 (내장, `executableCode` 및 `codeExecutionResult` 파트 사용) |
-| [컴퓨터 사용](https://ai.google.dev/gemini-api/docs/computer-use?hl=ko) | 클라이언트 측 | 지원됨 (내장, `functionCall` 및 `functionResponse` 파트 사용) |
-| [맞춤 함수](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko) | 클라이언트 측 | 지원됨 (내장, `functionCall` 및 `functionResponse` 파트 사용) |
+| [Google 検索](https://ai.google.dev/gemini-api/docs/google-search?hl=ja) | サーバー側 | サポート対象 |
+| [Google マップ](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ja) | サーバー側 | サポート対象 |
+| [URL コンテキスト](https://ai.google.dev/gemini-api/docs/url-context?hl=ja) | サーバー側 | サポート対象 |
+| [ファイル検索](https://ai.google.dev/gemini-api/docs/file-search?hl=ja) | サーバー側 | サポート対象 |
+| [コードの実行](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja) | サーバー側 | サポート対象（内蔵、`executableCode` と `codeExecutionResult` の部品を使用） |
+| [コンピュータの使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=ja) | クライアントサイド | サポート対象（内蔵、`functionCall` と `functionResponse` の部品を使用） |
+| [カスタム関数](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja) | クライアントサイド | サポート対象（内蔵、`functionCall` と `functionResponse` の部品を使用） |
 
-## 다음 단계
+## 次のステップ
 
-- Gemini API의 [함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)에 대해 자세히 알아보세요.
-- 지원되는 도구를 살펴봅니다.
-  - [Google 검색](https://ai.google.dev/gemini-api/docs/google-search?hl=ko)
-  - [Google 지도](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ko)
-  - [URL 컨텍스트](https://ai.google.dev/gemini-api/docs/url-context?hl=ko)
-  - [파일 검색](https://ai.google.dev/gemini-api/docs/file-search?hl=ko)
+- Gemini API の[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)の詳細を確認する。
+- サポートされているツールを確認します。
+  - [Google 検索](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)
+  - [Google マップ](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ja)
+  - [URL コンテキスト](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)
+  - [ファイル検索](https://ai.google.dev/gemini-api/docs/file-search?hl=ja)
 
-의견 보내기
+フィードバックを送信
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-최종 업데이트: 2026-09-12(UTC)
+最終更新日 2026-09-12 UTC。
 
-의견을 전달하고 싶나요?
+ご意見をお聞かせください
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-12(UTC)"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-12 UTC。"],[],[]]

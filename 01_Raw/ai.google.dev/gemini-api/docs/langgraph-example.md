@@ -1,42 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/langgraph-example?hl=de
-fetched_at: 2026-09-14T05:45:49.569665+00:00
-title: "ReAct-Agent mit Gemini und LangGraph von Grund auf erstellen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/langgraph-example?hl=it
+fetched_at: 2026-09-21T05:51:13.917534+00:00
+title: "Agente ReAct da zero con Gemini e LangGraph \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
+Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Feedback geben
+Invia feedback
 
-# ReAct-Agent mit Gemini und LangGraph von Grund auf erstellen
+# Agente ReAct da zero con Gemini e LangGraph
 
-LangGraph ist ein Framework zum Erstellen zustandsorientierter LLM-Anwendungen und eignet sich daher gut für die Entwicklung von ReAct-Agents (Reasoning and Acting).
+LangGraph è un framework per la creazione di applicazioni LLM stateful, il che lo rende una buona scelta per la creazione di agenti ReAct (Reasoning and Acting).
 
-ReAct-Agents kombinieren LLM-Logik mit der Ausführung von Aktionen. Sie denken iterativ, verwenden Tools und reagieren auf Beobachtungen, um Nutzerziele zu erreichen, wobei sie ihren Ansatz dynamisch anpassen. Dieses Muster wurde 2023 in [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629) eingeführt und versucht, die flexible Problemlösung von Menschen anstelle von starren Workflows nachzubilden.
+Gli agenti ReAct combinano il ragionamento LLM con l'esecuzione delle azioni. Pensano, utilizzano strumenti e agiscono in base alle osservazioni per raggiungere gli obiettivi degli utenti, adattando dinamicamente il loro approccio. Introdotto in ["ReAct: Synergizing Reasoning and Acting
+in Language Models"](https://arxiv.org/abs/2210.03629) (2023), questo pattern
+cerca di imitare la risoluzione di problemi flessibile e simile a quella umana rispetto a flussi di lavoro rigidi.
 
-LangGraph bietet einen vordefinierten ReAct-Agenten ([`create_react_agent`](https://langchain-ai.github.io/langgraph/reference/prebuilt/#langgraph.prebuilt.chat_agent_executor.create_react_agent)), der sich besonders eignet, wenn Sie mehr Kontrolle und Anpassungsmöglichkeiten für Ihre ReAct-Implementierungen benötigen. In diesem Leitfaden wird eine vereinfachte Version beschrieben.
+LangGraph offre un agente ReAct predefinito ([`create_react_agent`](https://langchain-ai.github.io/langgraph/reference/prebuilt/#langgraph.prebuilt.chat_agent_executor.create_react_agent)),
+ideale quando hai bisogno di maggiore controllo e personalizzazione per le implementazioni ReAct. Questa guida ti mostrerà una versione semplificata.
 
-Bei LangGraph werden Agents als Graphen mit drei Hauptkomponenten modelliert:
+LangGraph modella gli agenti come grafici utilizzando tre componenti chiave:
 
-- `State`: Gemeinsame Datenstruktur (in der Regel `TypedDict` oder `Pydantic BaseModel`), die den aktuellen Snapshot der Anwendung darstellt.
-- `Nodes`: Codiert die Logik Ihrer Agents. Sie erhalten den aktuellen Status als Eingabe, führen eine Berechnung oder einen Nebeneffekt aus und geben einen aktualisierten Status zurück, z. B. LLM- oder Tool-Aufrufe.
-- `Edges`: Definiert den nächsten `Node`, der auf Grundlage des aktuellen `State` ausgeführt werden soll. Dies ermöglicht bedingte Logik und feste Übergänge.
+- `State`: struttura dati condivisa (in genere `TypedDict` o `Pydantic BaseModel`) che rappresenta lo snapshot attuale dell'applicazione.
+- `Nodes`: codifica la logica degli agenti. Ricevono lo stato attuale come input, eseguono alcuni calcoli o effetti collaterali e restituiscono uno stato aggiornato, ad esempio chiamate LLM o chiamate di strumenti.
+- `Edges`: definisci il successivo `Node` da eseguire in base all'`State` corrente, consentendo la logica condizionale e le transizioni fisse.
 
-Wenn Sie noch keinen API-Schlüssel haben, können Sie einen in [Google AI Studio](https://aistudio.google.com/apikey?hl=de) abrufen.
+Se non hai ancora una chiave API, puoi ottenerla da [Google AI
+Studio](https://aistudio.google.com/apikey?hl=it).
 
 ```
 pip install langgraph langchain-google-genai geopy requests
 ```
 
-Legen Sie Ihren API-Schlüssel in der Umgebungsvariable `GEMINI_API_KEY` fest.
+Imposta la chiave API nella variabile di ambiente `GEMINI_API_KEY`.
 
 ```
 import os
@@ -45,11 +49,13 @@ import os
 api_key = os.getenv("GEMINI_API_KEY")
 ```
 
-In diesem Leitfaden wird anhand eines praktischen Beispiels erläutert, wie Sie einen ReAct-Agenten mit LangGraph implementieren. Sie erstellen einen Agent, dessen Ziel es ist, mit einem Tool das aktuelle Wetter für einen bestimmten Ort zu ermitteln.
+Per capire meglio come implementare un agente ReAct utilizzando LangGraph, questa guida
+illustra un esempio pratico. Creerai un agente il cui obiettivo è utilizzare uno strumento per trovare il meteo attuale per una località specificata.
 
-Für diesen Wetter-Agent wird der `State` zur Veranschaulichung den laufenden Unterhaltungsverlauf (als Liste von Nachrichten) und einen Zähler (als Ganzzahl) für die Anzahl der ausgeführten Schritte beibehalten.
+Per questo agente meteo, `State` manterrà la cronologia della conversazione in corso (come elenco di messaggi) e un contatore (come numero intero) del numero di passi eseguiti, a scopo illustrativo.
 
-LangGraph bietet die Hilfsfunktion `add_messages` zum Aktualisieren von Listen mit Statusmeldungen. Sie fungiert als [Reducer](https://langchain-ai.github.io/langgraph/concepts/low_level/#reducers), der die aktuelle Liste und die neuen Nachrichten entgegennimmt und eine kombinierte Liste zurückgibt. Es verarbeitet Aktualisierungen anhand der Nachrichten-ID und verwendet standardmäßig das Verhalten „Nur anhängen“ für neue, noch nicht gesehene Nachrichten.
+LangGraph fornisce una funzione helper, `add_messages`, per l'aggiornamento degli elenchi di messaggi di stato. Funziona come un [riduttore](https://langchain-ai.github.io/langgraph/concepts/low_level/#reducers),
+che prende l'elenco attuale, più i nuovi messaggi, e restituisce un elenco combinato. Gestisce gli aggiornamenti in base all'ID messaggio e per impostazione predefinita adotta un comportamento di "aggiunta" per i nuovi messaggi non letti.
 
 ```
 from typing import Annotated,Sequence, TypedDict
@@ -63,7 +69,7 @@ class AgentState(TypedDict):
     number_of_steps: int
 ```
 
-Als Nächstes definieren Sie Ihr Wettertool.
+Poi, definisci lo strumento meteo.
 
 ```
 from langchain_core.tools import tool
@@ -102,7 +108,7 @@ def get_weather_forecast(location: str, date: str):
 tools = [get_weather_forecast]
 ```
 
-Initialisieren Sie nun das Modell und binden Sie die Tools an das Modell.
+Ora inizializza il modello e associa gli strumenti al modello.
 
 ```
 from datetime import datetime
@@ -125,14 +131,19 @@ res=model.invoke(f"What is the weather in Berlin on {datetime.today()}?")
 print(res)
 ```
 
-Der letzte Schritt, bevor Sie Ihren Agent ausführen können, besteht darin, die Knoten und Kanten zu definieren.
-In diesem Beispiel gibt es zwei Knoten und eine Kante.
+L'ultimo passaggio prima di poter eseguire l'agente è definire i nodi e gli archi.
+In questo esempio, hai due nodi e un arco.
 
-- `call_tool`-Knoten, der die Tool-Methode ausführt. LangGraph hat einen vordefinierten Knoten dafür namens [ToolNode](https://langchain-ai.github.io/langgraph/how-tos/tool-calling/).
-- `call_model`-Knoten, der das Modell mit dem `model_with_tools` aufruft.
-- `should_continue`-Kante, die entscheidet, ob das Tool oder das Modell aufgerufen wird.
+- `call_tool` che esegue il metodo dello strumento. LangGraph ha un nodo predefinito
+  per questo chiamato
+  [ToolNode](https://langchain-ai.github.io/langgraph/how-tos/tool-calling/).
+- nodo `call_model` che utilizza `model_with_tools` per chiamare il modello.
+- `should_continue` che decide se chiamare lo strumento o il modello.
 
-Die Anzahl der Knoten und Kanten ist nicht festgelegt. Sie können Ihrem Diagramm beliebig viele Knoten und Kanten hinzufügen. Sie können beispielsweise einen Knoten zum Hinzufügen strukturierter Ausgaben oder einen Knoten zur Selbstüberprüfung/Reflexion hinzufügen, um die Modellausgabe zu prüfen, bevor Sie das Tool oder das Modell aufrufen.
+Il numero di nodi e archi non è fisso. Puoi aggiungere tutti i nodi e gli archi
+che vuoi al grafico. Ad esempio, puoi aggiungere un nodo per aggiungere
+un output strutturato o un nodo di autoverifica/riflessione per controllare l'output
+del modello prima di chiamare lo strumento o il modello.
 
 ```
 from langchain_core.messages import ToolMessage
@@ -176,7 +187,7 @@ def should_continue(state: AgentState):
     return "continue"
 ```
 
-Nachdem alle Agent-Komponenten fertig sind, können Sie sie jetzt zusammenfügen.
+Ora che tutti i componenti dell'agente sono pronti, puoi assemblarli.
 
 ```
 from langgraph.graph import StateGraph, END
@@ -212,7 +223,7 @@ workflow.add_edge("tools", "llm")
 graph = workflow.compile()
 ```
 
-Mit der Methode `draw_mermaid_png` können Sie den Graphen visualisieren.
+Puoi visualizzare il grafico utilizzando il metodo `draw_mermaid_png`.
 
 ```
 from IPython.display import Image, display
@@ -220,9 +231,9 @@ from IPython.display import Image, display
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-![png](https://ai.google.dev/static/gemini-api/docs/images/langgraph-react-agent_16_0.png?hl=de)
+![png](https://ai.google.dev/static/gemini-api/docs/images/langgraph-react-agent_16_0.png?hl=it)
 
-Führen Sie den Agent jetzt aus.
+Ora esegui l'agente.
 
 ```
 from datetime import datetime
@@ -235,7 +246,7 @@ for state in graph.stream(inputs, stream_mode="values"):
     last_message.pretty_print()
 ```
 
-Sie können die Unterhaltung jetzt fortsetzen, nach dem Wetter in einer anderen Stadt fragen oder einen Vergleich anfordern.
+Ora puoi continuare la conversazione, chiedere informazioni sul meteo in un'altra città o richiedere un confronto.
 
 ```
 state["messages"].append(("user", "Would it be warmer in Munich?"))
@@ -245,12 +256,12 @@ for state in graph.stream(state, stream_mode="values"):
     last_message.pretty_print()
 ```
 
-Feedback geben
+Invia feedback
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Zuletzt aktualisiert: 2026-09-12 (UTC).
+Ultimo aggiornamento 2026-09-12 UTC.
 
-Haben Sie Feedback für uns?
+Vuoi dirci altro?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-12 (UTC)."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-12 UTC."],[],[]]

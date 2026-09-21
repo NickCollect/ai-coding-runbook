@@ -1,41 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=he
-fetched_at: 2026-09-14T05:44:58.831761+00:00
-title: "\u05e0\u05d9\u05ea\u05d5\u05d7 \u05e9\u05dc \u05ea\u05de\u05d9\u05db\u05ea \u05dc\u05e7\u05d5\u05d7\u05d5\u05ea \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea Gemini \u05d5-CrewAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=vi
+fetched_at: 2026-09-21T05:51:35.729264+00:00
+title: "Ph\u00e2n t\u00edch d\u1ecbch v\u1ee5 h\u1ed7 tr\u1ee3 kh\u00e1ch h\u00e0ng b\u1eb1ng Gemini v\u00e0 CrewAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-שליחת משוב
+Gửi ý kiến phản hồi
 
-# ניתוח של תמיכת לקוחות באמצעות Gemini ו-CrewAI
+# Phân tích dịch vụ hỗ trợ khách hàng bằng Gemini và CrewAI
 
-‫[CrewAI](https://docs.crewai.com/introduction) הוא פריימוורק לניהול סוכני AI אוטונומיים שמשתפים פעולה כדי להשיג יעדים מורכבים. הוא מאפשר להגדיר סוכנים על ידי ציון תפקידים, יעדים וסיפורי רקע, ולאחר מכן להגדיר להם משימות.
+[CrewAI](https://docs.crewai.com/introduction) là một khung để điều phối các tác nhân AI tự quản cộng tác nhằm đạt được các mục tiêu phức tạp. Nó cho phép bạn xác định các tác nhân bằng cách chỉ định vai trò, mục tiêu và bối cảnh, sau đó xác định các nhiệm vụ cho các tác nhân đó.
 
-בדוגמה הזו נסביר איך לבנות מערכת מרובת סוכנים לניתוח נתונים של תמיכת לקוחות כדי לזהות בעיות ולהציע שיפורים בתהליכים באמצעות Gemini 3 Flash. המערכת יוצרת דוח שמיועד לקריאה על ידי מנהל תפעול ראשי (COO).
+Ví dụ này minh hoạ cách xây dựng một hệ thống đa tác nhân để phân tích dữ liệu hỗ trợ khách hàng nhằm xác định vấn đề và đề xuất các điểm cải tiến quy trình bằng Gemini 3 Flash, tạo một báo cáo dành cho Giám đốc vận hành (COO).
 
-במדריך הזה נסביר איך ליצור 'צוות' של סוכני AI שיכולים לבצע את המשימות הבאות:
+Hướng dẫn này sẽ hướng dẫn bạn cách tạo một "nhóm" gồm các tác nhân AI có thể thực hiện những việc sau:
 
-1. אחזור וניתוח של נתוני תמיכת לקוחות (סימולציה בדוגמה הזו).
-2. זיהוי בעיות חוזרות וצווארי בקבוק בתהליך.
-3. להציע שיפורים פרקטיים.
-4. לרכז את הממצאים בדוח תמציתי שמתאים למנהל תפעול ראשי.
+1. Tìm nạp và phân tích dữ liệu hỗ trợ khách hàng (mô phỏng trong ví dụ này).
+2. Xác định các vấn đề tái diễn và nút thắt cổ chai trong quy trình.
+3. Đề xuất các điểm cải thiện có thể thực hiện.
+4. Tổng hợp các phát hiện thành một báo cáo ngắn gọn phù hợp với COO.
 
-אתם צריכים מפתח Gemini API. אם עדיין אין לכם חשבון, אתם יכולים [ליצור חשבון ב-Google AI Studio](https://aistudio.google.com/apikey?hl=he).
+Bạn cần có khoá Gemini API. Nếu chưa có, bạn có thể [tạo một khoá API trong Google AI Studio](https://aistudio.google.com/apikey?hl=vi).
 
 ```
 pip install "crewai[tools]"
 ```
 
-מגדירים את מפתח Gemini API כמשתנה סביבה בשם `GEMINI_API_KEY`, ואז מגדירים את CrewAI כך שישתמש במודל Gemini.
+Đặt khoá Gemini API làm biến môi trường có tên là `GEMINI_API_KEY`, sau đó định cấu hình CrewAI để sử dụng mô hình Gemini.
 
 ```
 import os
@@ -50,13 +50,13 @@ gemini_llm = LLM(
 )
 ```
 
-## הגדרת רכיבים
+## Xác định các thành phần
 
-פיתוח אפליקציות CrewAI באמצעות **Tools**,‏ **Agents**,‏ **Tasks** ו-**Crew**. בקטעים הבאים מוסבר על כל אחד מהרכיבים האלה.
+Xây dựng các ứng dụng CrewAI bằng **Công cụ**, **Tác nhân**, **Nhiệm vụ** và chính **Nhóm**. Các phần sau đây sẽ giải thích từng thành phần này.
 
-### כלים
+### Công cụ
 
-כלים הם יכולות שסוכנים יכולים להשתמש בהן כדי ליצור אינטראקציה עם העולם החיצוני או לבצע פעולות ספציפיות. כאן מגדירים כלי placeholder כדי לדמות אחזור של נתוני תמיכת לקוחות. באפליקציה אמיתית, מתחברים למסד נתונים, ל-API או למערכת קבצים. מידע נוסף על כלים זמין [במדריך הכלים של CrewAI](https://docs.crewai.com/concepts/tools).
+Công cụ là những chức năng mà các đặc vụ có thể dùng để tương tác với thế giới bên ngoài hoặc thực hiện các hành động cụ thể. Tại đây, bạn xác định một công cụ giữ chỗ để mô phỏng việc tìm nạp dữ liệu hỗ trợ khách hàng. Trong một ứng dụng thực tế, bạn sẽ kết nối với cơ sở dữ liệu, API hoặc hệ thống tệp. Để biết thêm thông tin về các công cụ, hãy xem [hướng dẫn về các công cụ CrewAI](https://docs.crewai.com/concepts/tools).
 
 ```
 from crewai.tools import BaseTool
@@ -86,9 +86,9 @@ class CustomerSupportDataTool(BaseTool):
 support_data_tool = CustomerSupportDataTool()
 ```
 
-### סוכנים
+### Nhân viên hỗ trợ
 
-סוכנים הם עובדי ה-AI האישיים בצוות. לכל סוכן יש `role`,‏ `goal`,‏ `backstory` ספציפיים, `llm` מוקצה ו`tools` אופציונלי. מידע נוסף על סוכנים זמין [במדריך לסוכני CrewAI](https://docs.crewai.com/concepts/agents).
+Tác nhân là những nhân viên AI riêng lẻ trong nhóm của bạn. Mỗi tác nhân có một `role`, `goal`, `backstory` cụ thể, được chỉ định `llm` và `tools` không bắt buộc. Để biết thêm thông tin về trợ lý ảo, hãy xem [hướng dẫn về trợ lý ảo CrewAI](https://docs.crewai.com/concepts/agents).
 
 ```
 from crewai import Agent
@@ -137,7 +137,7 @@ report_writer = Agent(
 
 ### Tasks
 
-המשימות מגדירות את המטלות הספציפיות של הסוכנים. לכל משימה יש `description`, ‏ `expected_output`, והיא מוקצית ל`agent`. כברירת מחדל, המשימות מופעלות ברצף וכוללות את ההקשר של המשימה הקודמת. מידע נוסף על משימות זמין ב[מדריך למשימות ב-CrewAI](https://docs.crewai.com/concepts/tasks).
+Các nhiệm vụ xác định những việc cụ thể được giao cho nhân viên hỗ trợ. Mỗi việc cần làm đều có `description`, `expected_output` và được giao cho một `agent`. Theo mặc định, các tác vụ được chạy tuần tự và bao gồm cả bối cảnh của tác vụ trước đó. Để biết thêm thông tin về các tác vụ, hãy xem [hướng dẫn về các tác vụ của CrewAI](https://docs.crewai.com/concepts/tasks).
 
 ```
 from crewai import Task
@@ -196,9 +196,9 @@ Ensure the report is easy to understand, focuses on actionable insights, and is 
 )
 ```
 
-### צוות ההפקה
+### Nhóm sản xuất
 
-`Crew` מאחד בין הסוכנים והמשימות, ומגדיר את תהליך העבודה (למשל, 'רציף').
+`Crew` kết hợp các tác nhân và tác vụ, xác định quy trình công việc (chẳng hạn như "tuần tự").
 
 ```
 from crewai import Crew, Process
@@ -211,9 +211,9 @@ support_analysis_crew = Crew(
 )
 ```
 
-## הרצת הצוות
+## Run the crew
 
-לבסוף, מפעילים את צוות הביצוע עם כל נתוני הקלט הנדרשים.
+Cuối cùng, hãy bắt đầu thực thi nhóm bằng mọi thông tin đầu vào cần thiết.
 
 ```
 # Start the crew's work
@@ -227,17 +227,17 @@ print("--- Final Report for COO ---")
 print(result)
 ```
 
-הסקריפט יופעל. ‫`Data Analyst` ישתמש בכלי, `Process
-Optimizer` ינתח את הממצאים ו-`Report Writer` ירכז את הדוח הסופי, שיוצג במסוף. ההגדרה `verbose=True` תציג את תהליך החשיבה המפורט ואת הפעולות של כל סוכן.
+Tập lệnh sẽ thực thi. `Data Analyst` sẽ sử dụng công cụ này, `Process
+Optimizer` sẽ phân tích các kết quả và `Report Writer` sẽ biên soạn báo cáo cuối cùng, sau đó báo cáo này sẽ được in ra bảng điều khiển. Chế độ cài đặt `verbose=True` sẽ cho thấy quy trình suy nghĩ và hành động chi tiết của từng tác nhân.
 
-מידע נוסף על CrewAI זמין ב[מבוא ל-CrewAI](https://docs.crewai.com/introduction).
+Để tìm hiểu thêm về CrewAI, hãy xem [giới thiệu về CrewAI](https://docs.crewai.com/introduction).
 
-שליחת משוב
+Gửi ý kiến phản hồi
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-עדכון אחרון: 2026-09-12 (שעון UTC).
+Cập nhật lần gần đây nhất: 2026-09-12 UTC.
 
-רוצה לתת לנו משוב?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-12 (שעון UTC)."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-12 UTC."],[],[]]

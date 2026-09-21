@@ -1,46 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=de
-fetched_at: 2026-09-14T05:51:28.449613+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=it
+fetched_at: 2026-09-21T05:44:39.176201+00:00
 title: "Gemini Omni Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
+Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Feedback geben
+Invia feedback
 
 # Gemini Omni Flash
 
-Gemini Omni Flash ist ein Vorabmodell, das für die schnelle, dialogorientierte Videogenerierung und ‑bearbeitung entwickelt wurde. Sie eignet sich hervorragend, um Text und Bilder in Videos umzuwandeln. Außerdem können Sie generierte Videos über Konversationen in natürlicher Sprache mithilfe der Interactions API optimieren und bearbeiten.
+Gemini Omni Flash è un modello di anteprima progettato per la generazione e la modifica di video
+conversazionali rapidi. È ideale per trasformare testo e immagini in video,
+consente di perfezionare e modificare i video generati tramite conversazioni in linguaggio naturale
+utilizzando l'API Interactions.
 
-[In Google AI Studio ausprobieren](https://aistudio.google.com?model=gemini-omni-flash-preview&hl=de)
+[Prova in Google AI Studio](https://aistudio.google.com?model=gemini-omni-flash-preview&hl=it)
 
-## Dokumentation
+## Documentazione
 
-Auf der Seite [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=de) finden Sie eine vollständige Übersicht über die Funktionen.
+Visita la pagina [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=it)
+per una copertura completa delle funzionalità.
 
 ## gemini-omni-flash-preview
 
-| Attribut | Beschreibung |
+| Proprietà | Descrizione |
 | --- | --- |
-| id\_cardModellcode | **Gemini API**  `gemini-omni-flash-preview` |
-| saveUnterstützte Datentypen | **Eingabe**  Text, Bild, Video (bis zu 10 Sekunden für die Bearbeitung)  **Ausgabe**  Video |
-| token\_auto-Limits | **Kontextfenster**  1.048.576 Tokens  **Ausgabe-Video**  3–10 Sekunden (720p, 24 FPS) |
-| calendar\_monthLetzte Aktualisierung | Juni 2026 |
+| Codice modello id\_card | **API Gemini**  `gemini-omni-flash-preview` |
+| saveTipi di dati supportati | **Ingresso**  Testo, immagine, video (fino a 10 secondi per la modifica)  **Output**  Video |
+| Limiti di token\_auto | **Finestra contestuale**  1.048.576 token  **Video di output**  3s-10s (720p, 24 FPS) |
+| calendar\_monthUltimo aggiornamento | Giugno 2026 |
 
-Feedback geben
+Invia feedback
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Zuletzt aktualisiert: 2026-06-30 (UTC).
+Ultimo aggiornamento 2026-06-30 UTC.
 
-Haben Sie Feedback für uns?
+Vuoi dirci altro?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-06-30 (UTC)."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-06-30 UTC."],[],[]]

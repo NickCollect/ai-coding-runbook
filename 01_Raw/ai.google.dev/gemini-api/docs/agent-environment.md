@@ -1,26 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=es-419
-fetched_at: 2026-09-14T05:42:15.421418+00:00
-title: "Entornos en agentes administrados \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=id
+fetched_at: 2026-09-21T05:52:03.852424+00:00
+title: "Lingkungan di agen terkelola \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Enviar comentarios
+Kirim masukan
 
-# Entornos en agentes administrados
+# Lingkungan di agen terkelola
 
-Los entornos son zonas de pruebas de Linux administradas que les brindan a los agentes un lugar aislado para ejecutar código y conservar archivos. Están separados del contexto de interacción, por lo que puedes reutilizar el mismo entorno en varias interacciones o comenzar de nuevo en cualquier momento.
+Lingkungan adalah sandbox Linux terkelola yang memberi agen tempat terisolasi untuk
+mengeksekusi kode dan mempertahankan file. Lingkungan ini tidak terikat dengan konteks interaksi, sehingga Anda dapat menggunakan kembali lingkungan yang sama di beberapa interaksi atau memulai dari awal kapan saja.
 
-En el siguiente ejemplo, se muestra cómo crear una interacción con un entorno remoto nuevo y recuperar su ID:
+Contoh berikut menunjukkan cara membuat interaksi dengan lingkungan jarak jauh
+baru dan mengambil ID-nya:
 
 ### Python
 
@@ -30,7 +32,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    agent="antigravity-preview-05-2026",
+    agent="antigravity-preview-09-2026",
     input="Install pandas and matplotlib, verify the imports, and print the versions.",
     environment="remote",
 )
@@ -46,12 +48,35 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
+    agent: "antigravity-preview-09-2026",
     input: "Install pandas and matplotlib, verify the imports, and print the versions.",
     environment: "remote",
 });
 
 console.log(`Environment ID: ${interaction.environment_id}`);
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.CreateAgentInteractionEnvironment;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+CreateAgentInteraction params = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("antigravity-preview-09-2026"))
+    .input(InteractionsInput.of("Install pandas and matplotlib, verify the imports, and print the versions."))
+    .environment(CreateAgentInteractionEnvironment.of("remote"))
+    .build();
+
+Interaction interaction = client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+System.out.println("Environment ID: " + interaction.environmentId().orElse(""));
 ```
 
 ### REST
@@ -61,23 +86,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "agent": "antigravity-preview-05-2026",
+    "agent": "antigravity-preview-09-2026",
     "input": "Install pandas and matplotlib, verify the imports, and print the versions.",
     "environment": "remote"
 }'
 ```
 
-## El parámetro `environment`
+## Parameter `environment`
 
-El parámetro `environment` acepta tres formas:
+Parameter `environment` menerima tiga bentuk:
 
-| Técnica | Ejemplo | Cuándo debe utilizarse |
+| Formulir | Contoh | Kapan digunakan |
 | --- | --- | --- |
-| `"remote"` | `environment="remote"` | Aprovisiona una zona de pruebas nueva. |
-| ID del entorno | `environment="env_abc123"` | Reutiliza una zona de pruebas existente con todos sus archivos y paquetes. |
-| Objeto de configuración | `environment={...}` | Aprovisiona una zona de pruebas nueva con fuentes, reglas de red o ambas. |
+| `"remote"` | `environment="remote"` | Sediakan sandbox baru. |
+| ID Lingkungan | `environment="env_abc123"` | Menggunakan kembali sandbox yang ada dengan semua file dan paketnya. |
+| Objek konfigurasi | `environment={...}` | Sediakan sandbox baru dengan sumber, aturan jaringan, variabel lingkungan, atau kombinasi. |
 
-En los siguientes ejemplos, se muestran las tres formas de usar el parámetro `environment`.
+Contoh berikut menunjukkan tiga cara menggunakan parameter `environment`.
 
 ### Python
 
@@ -88,14 +113,14 @@ client = genai.Client()
 
 # Fresh sandbox
 interaction = client.interactions.create(
-    agent="antigravity-preview-05-2026",
+    agent="antigravity-preview-09-2026",
     input="Write a hello world script.",
     environment="remote",
 )
 
 # Reuse an existing sandbox
 interaction_2 = client.interactions.create(
-    agent="antigravity-preview-05-2026",
+    agent="antigravity-preview-09-2026",
     input="Modify the script to accept a name argument.",
     environment=interaction.environment_id,
     previous_interaction_id=interaction.id,
@@ -103,7 +128,7 @@ interaction_2 = client.interactions.create(
 
 # New sandbox with sources
 interaction_3 = client.interactions.create(
-    agent="antigravity-preview-05-2026",
+    agent="antigravity-preview-09-2026",
     input="List all files and summarize the project.",
     environment={
         "type": "remote",
@@ -129,14 +154,14 @@ const client = new GoogleGenAI({});
 
 // Fresh sandbox
 const interaction = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
+    agent: "antigravity-preview-09-2026",
     input: "Write a hello world script.",
     environment: "remote",
 });
 
 // Reuse an existing sandbox
 const interaction2 = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
+    agent: "antigravity-preview-09-2026",
     input: "Modify the script to accept a name argument.",
     environment: interaction.environment_id,
     previous_interaction_id: interaction.id,
@@ -144,7 +169,7 @@ const interaction2 = await client.interactions.create({
 
 // New sandbox with sources
 const interaction3 = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
+    agent: "antigravity-preview-09-2026",
     input: "List all files and summarize the project.",
     environment: {
         type: "remote",
@@ -161,6 +186,61 @@ const interaction3 = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.CreateAgentInteractionEnvironment;
+import com.google.genai.gaos.models.interactions.Environment;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Source;
+import com.google.genai.gaos.models.interactions.SourceType;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.List;
+
+Client client = new Client();
+
+// Fresh sandbox
+CreateAgentInteraction params1 = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("antigravity-preview-09-2026"))
+    .input(InteractionsInput.of("Write a hello world script."))
+    .environment(CreateAgentInteractionEnvironment.of("remote"))
+    .build();
+Interaction interaction = client.interactions.create(CreateInteractionRequestBody.of(params1)).interaction().get();
+
+// Reuse an existing sandbox
+CreateAgentInteraction params2 = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("antigravity-preview-09-2026"))
+    .input(InteractionsInput.of("Modify the script to accept a name argument."))
+    .environment(CreateAgentInteractionEnvironment.of(interaction.environmentId().orElse("")))
+    .previousInteractionId(interaction.id().orElse(""))
+    .build();
+Interaction interaction2 = client.interactions.create(CreateInteractionRequestBody.of(params2)).interaction().get();
+
+// New sandbox with sources
+Environment env3 = Environment.builder()
+    .sources(List.of(
+        Source.builder()
+            .type(SourceType.REPOSITORY)
+            .source("https://github.com/octocat/Spoon-Knife")
+            .target("/workspace/spoon-knife")
+            .build()
+    ))
+    .build();
+
+CreateAgentInteraction params3 = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("antigravity-preview-09-2026"))
+    .input(InteractionsInput.of("List all files and summarize the project."))
+    .environment(CreateAgentInteractionEnvironment.of(env3))
+    .build();
+Interaction interaction3 = client.interactions.create(CreateInteractionRequestBody.of(params3)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -169,7 +249,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "agent": "antigravity-preview-05-2026",
+    "agent": "antigravity-preview-09-2026",
     "input": [{"type": "text", "text": "Write a hello world script."}],
     "environment": "remote"
 }'
@@ -179,7 +259,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d "{
-    \"agent\": \"antigravity-preview-05-2026\",
+    \"agent\": \"antigravity-preview-09-2026\",
     \"input\": [{\"type\": \"text\", \"text\": \"Modify the script to accept a name argument.\"}],
     \"environment\": \"$ENV_ID\",
     \"previous_interaction_id\": \"$INTERACTION_ID\"
@@ -190,7 +270,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "agent": "antigravity-preview-05-2026",
+    "agent": "antigravity-preview-09-2026",
     "input": [{"type": "text", "text": "List all files and summarize the project."}],
     "environment": {
         "type": "remote",
@@ -205,10 +285,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Configura un entorno
+## Mengonfigurasi lingkungan
 
-Una forma de configurar un entorno es indicarle al agente lo que necesitas instalar.
-Se encarga de la resolución de dependencias y la solución de problemas. Una vez que el entorno esté listo, guarda el `environment_id` y vuelve a usarlo.
+Salah satu cara untuk menyiapkan lingkungan adalah dengan memberi tahu agen apa yang perlu diinstal.
+API ini menangani penyelesaian dan pemecahan masalah dependensi. Setelah lingkungan siap, simpan `environment_id` dan gunakan kembali.
 
 ### Python
 
@@ -218,14 +298,14 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    agent="antigravity-preview-05-2026",
+    agent="antigravity-preview-09-2026",
     input="Install pandas, matplotlib, and seaborn. Verify all imports work and print the installed versions.",
     environment="remote",
 )
 
 # Reuse the configured environment
 interaction_2 = client.interactions.create(
-    agent="antigravity-preview-05-2026",
+    agent="antigravity-preview-09-2026",
     input="Clone https://github.com/octocat/Spoon-Knife into /workspace/tools. Run the test suite and fix any missing dependencies.",
     environment=interaction.environment_id,
     previous_interaction_id=interaction.id,
@@ -233,7 +313,7 @@ interaction_2 = client.interactions.create(
 
 # Reuse the configured environment
 interaction_3 = client.interactions.create(
-    agent="antigravity-preview-05-2026",
+    agent="antigravity-preview-09-2026",
     input="Using the tools in /workspace/tools, list the files.",
     environment=interaction.environment_id,
     previous_interaction_id=interaction_2.id,
@@ -250,25 +330,66 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
+    agent: "antigravity-preview-09-2026",
     input: "Install pandas, matplotlib, and seaborn. Verify all imports work and print the installed versions.",
     environment: "remote",
 });
 
 const interaction2 = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
+    agent: "antigravity-preview-09-2026",
     input: "Clone https://github.com/octocat/Spoon-Knife into /workspace/tools. Run the test suite and fix any missing dependencies.",
     environment: interaction.environment_id,
     previous_interaction_id: interaction.id,
 });
 
 const interaction3 = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
+    agent: "antigravity-preview-09-2026",
     input: "Using the tools in /workspace/tools, list the files.",
     environment: interaction.environment_id,
     previous_interaction_id: interaction2.id,
 });
 console.log(interaction.output_text);
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.CreateAgentInteractionEnvironment;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+CreateAgentInteraction params1 = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("antigravity-preview-09-2026"))
+    .input(InteractionsInput.of("Install pandas, matplotlib, and seaborn. Verify all imports work and print the installed versions."))
+    .environment(CreateAgentInteractionEnvironment.of("remote"))
+    .build();
+Interaction interaction = client.interactions.create(CreateInteractionRequestBody.of(params1)).interaction().get();
+
+// Reuse the configured environment
+CreateAgentInteraction params2 = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("antigravity-preview-09-2026"))
+    .input(InteractionsInput.of("Clone https://github.com/octocat/Spoon-Knife into /workspace/tools. Run the test suite and fix any missing dependencies."))
+    .environment(CreateAgentInteractionEnvironment.of(interaction.environmentId().orElse("")))
+    .previousInteractionId(interaction.id().orElse(""))
+    .build();
+Interaction interaction2 = client.interactions.create(CreateInteractionRequestBody.of(params2)).interaction().get();
+
+// Reuse the configured environment
+CreateAgentInteraction params3 = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("antigravity-preview-09-2026"))
+    .input(InteractionsInput.of("Using the tools in /workspace/tools, list the files."))
+    .environment(CreateAgentInteractionEnvironment.of(interaction.environmentId().orElse("")))
+    .previousInteractionId(interaction2.id().orElse(""))
+    .build();
+Interaction interaction3 = client.interactions.create(CreateInteractionRequestBody.of(params3)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
 ```
 
 ### REST
@@ -279,21 +400,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "agent": "antigravity-preview-05-2026",
+    "agent": "antigravity-preview-09-2026",
     "input": "Install pandas, matplotlib, and seaborn. Verify all imports work and print the installed versions.",
     "environment": "remote"
 }'
 ```
 
-### Realiza el montaje desde una fuente
+### Memasang dari sumber
 
-Si sabes exactamente qué archivos necesita el agente, móntalos en una sola llamada en lugar de iterar. El objeto de configuración `environment` acepta un array `sources` con tres tipos:
+Jika Anda tahu persis file yang dibutuhkan agen, pasang file tersebut dalam satu panggilan, bukan melakukan iterasi. Objek konfigurasi `environment` menerima array `sources`
+dengan tiga jenis:
 
-| Tipo de fuente | Valor `type` | Descripción | Límite |
+| Jenis sumber | Nilai `type` | Deskripsi | Batas |
 | --- | --- | --- | --- |
-| Repositorio de Git | `repository` | Clona un repositorio desde una URL en la zona de pruebas en `target`. | 500 MB |
-| Cloud Storage | `gcs` | Copia un archivo o directorio de Cloud Storage en la zona de pruebas en `target`. | 2 GB |
-| Contenido intercalado | `inline` | Escribe contenido de texto sin procesar en un archivo de la zona de pruebas en `target`. | 1 MB por archivo, 2 MB en total |
+| Repositori Git | `repository` | Meng-clone repositori dari URL ke sandbox di `target`. | 500 MB |
+| Cloud Storage | `gcs` | Menyalin file atau direktori dari Cloud Storage ke sandbox di `target`. | 2 GB |
+| Konten inline | `inline` | Menulis konten teks mentah ke file di sandbox pada `target`. | 1 MB per file, total 2 MB |
 
 ### Python
 
@@ -303,7 +425,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    agent="antigravity-preview-05-2026",
+    agent="antigravity-preview-09-2026",
     input="List all files under /workspace and describe what you find.",
     environment={
         "type": "remote",
@@ -338,7 +460,7 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
+    agent: "antigravity-preview-09-2026",
     input: "List all files under /workspace and describe what you find.",
     environment: {
         type: "remote",
@@ -365,6 +487,53 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.CreateAgentInteractionEnvironment;
+import com.google.genai.gaos.models.interactions.Environment;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Source;
+import com.google.genai.gaos.models.interactions.SourceType;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.List;
+
+Client client = new Client();
+
+Environment env = Environment.builder()
+    .sources(List.of(
+        Source.builder()
+            .type(SourceType.REPOSITORY)
+            .source("https://github.com/octocat/Spoon-Knife")
+            .target("/workspace/spoon-knife")
+            .build(),
+        Source.builder()
+            .type(SourceType.GCS)
+            .source("gs://cloud-samples-data/bigquery/us-states/")
+            .target("/workspace/gcs-data")
+            .build(),
+        Source.builder()
+            .type(SourceType.INLINE)
+            .content("# Project Notes\n\n- Analyze state population data\n- Create visualizations\n")
+            .target("/workspace/notes/readme.md")
+            .build()
+    ))
+    .build();
+
+CreateAgentInteraction params = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("antigravity-preview-09-2026"))
+    .input(InteractionsInput.of("List all files under /workspace and describe what you find."))
+    .environment(CreateAgentInteractionEnvironment.of(env))
+    .build();
+
+Interaction interaction = client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -373,7 +542,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "agent": "antigravity-preview-05-2026",
+    "agent": "antigravity-preview-09-2026",
     "input": "List all files under /workspace and describe what you find.",
     "environment": {
         "type": "remote",
@@ -398,19 +567,37 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Puedes combinar ambos enfoques: montar fuentes conocidas de forma declarativa y, luego, iterar con interacciones de seguimiento para instalar paquetes o ejecutar secuencias de comandos de configuración. No puedes establecer la raíz (`/`) como destino cuando agregas una fuente personalizada. Siempre debes especificar un subdirectorio.
+Anda dapat menggabungkan kedua pendekatan: pasang sumber yang diketahui secara deklaratif, lalu lakukan iterasi dengan interaksi lanjutan untuk menginstal paket atau menjalankan skrip penyiapan. Anda tidak dapat
+menetapkan root (`/`) sebagai target saat menambahkan sumber kustom, Anda harus selalu menentukan
+subdirektori.
 
-### Ganchos
+### Hook
 
-También puedes montar un archivo de configuración `.agents/hooks.json` y secuencias de comandos de intercepción personalizadas en la zona de pruebas para aplicar barreras de seguridad o ejecutar validaciones automatizadas cada vez que se ejecuten las herramientas. Para obtener definiciones de esquemas y ejemplos de código, consulta [Ganchos](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=es-419).
+Anda juga dapat memasang file konfigurasi `.agents/hooks.json` dan skrip pencegatan kustom ke sandbox untuk menerapkan batas keamanan atau menjalankan validasi otomatis setiap kali alat dijalankan. Untuk definisi skema dan contoh kode, lihat [Hooks](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=id).
 
-### Fuentes privadas
+### Sumber pribadi
 
-También puedes descargar desde repositorios privados de GitHub o buckets privados de Cloud Storage agregando las credenciales en la configuración de red:
+Anda juga dapat mendownload dari repositori GitHub pribadi atau bucket Cloud Storage pribadi dengan mengautentikasi domain sumber dalam konfigurasi jaringan.
 
-Para **repositorios privados de Git**, usa la autenticación `Basic` con tu
-[token de acceso personal (PAT) de GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
-Codifica el token con `x-oauth-basic` como nombre de usuario:
+Salah satu opsi adalah [kredensial](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=id) yang disimpan
+dan dirujuk berdasarkan ID, sehingga Anda menyimpan secret satu kali dan setiap lingkungan yang memerlukan
+sumber tersebut dapat merujuknya:
+
+```
+"network": {
+    "allowlist": [
+        { "domain": "github.com", "credential": "github-production" },
+        { "domain": "*" }
+    ]
+}
+```
+
+Anda juga dapat menyetel header sebaris dengan `transform`, seperti yang dilakukan contoh berikut. Proxy keluar menerapkan kedua bentuk dengan cara yang sama, dan dalam kedua kasus tersebut, rahasia tidak berada di dalam sandbox.
+
+Untuk **repositori Git pribadi**, gunakan autentikasi `Basic` dengan
+[Token Akses Pribadi GitHub
+(PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) Anda.
+Encode token menggunakan `x-oauth-basic` sebagai nama pengguna:
 
 ```
 echo -n "x-oauth-basic:ghp_YourPATHere" | base64
@@ -420,7 +607,7 @@ echo -n "x-oauth-basic:ghp_YourPATHere" | base64
 
 ```
 interaction = client.interactions.create(
-    agent="antigravity-preview-05-2026",
+    agent="antigravity-preview-09-2026",
     input="Run the test for my backend app and fix any issue.",
     environment={
         "type": "remote",
@@ -452,7 +639,7 @@ interaction = client.interactions.create(
 
 ```
 const interaction = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
+    agent: "antigravity-preview-09-2026",
     input: "Run the test for my backend app and fix any issue.",
     environment: {
         type: "remote",
@@ -480,6 +667,64 @@ const interaction = await client.interactions.create({
 });
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.Allowlist;
+import com.google.genai.gaos.models.interactions.AllowlistEntry;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.CreateAgentInteractionEnvironment;
+import com.google.genai.gaos.models.interactions.Environment;
+import com.google.genai.gaos.models.interactions.EnvironmentNetworkEgressAllowlist;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Network;
+import com.google.genai.gaos.models.interactions.Source;
+import com.google.genai.gaos.models.interactions.SourceType;
+import com.google.genai.gaos.models.interactions.Transform;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.List;
+import java.util.Map;
+
+Client client = new Client();
+
+Environment env = Environment.builder()
+    .sources(List.of(
+        Source.builder()
+            .type(SourceType.REPOSITORY)
+            .source("https://github.com/your-org/backend")
+            .target("/backend-app")
+            .build()
+    ))
+    .network(Network.of(EnvironmentNetworkEgressAllowlist.of(
+        Allowlist.builder()
+            .allowlist(List.of(
+                AllowlistEntry.builder()
+                    .domain("github.com")
+                    .transform(Transform.of(Map.of(
+                        "Authorization", "Basic YOUR_BASE64_TOKEN"
+                    )))
+                    .build(),
+                AllowlistEntry.builder()
+                    .domain("*")
+                    .build()
+            ))
+            .build()
+    )))
+    .build();
+
+CreateAgentInteraction params = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("antigravity-preview-09-2026"))
+    .input(InteractionsInput.of("Run the test for my backend app and fix any issue."))
+    .environment(CreateAgentInteractionEnvironment.of(env))
+    .build();
+
+Interaction interaction = client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -487,7 +732,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "agent": "antigravity-preview-05-2026",
+    "agent": "antigravity-preview-09-2026",
     "input": "Run the test for my backend app and fix any issue.",
     "environment": {
         "type": "remote",
@@ -515,7 +760,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Para **buckets privados de Cloud Storage**, usa un token del portador OAuth 2.0 estándar:
+Untuk **bucket Cloud Storage pribadi**, gunakan token OAuth 2.0 Bearer standar:
 
 ```
 gcloud auth print-access-token
@@ -525,7 +770,7 @@ gcloud auth print-access-token
 
 ```
 interaction = client.interactions.create(
-    agent="antigravity-preview-05-2026",
+    agent="antigravity-preview-09-2026",
     input="Analyze the discrepancies across the data in workspace",
     environment={
         "type": "remote",
@@ -557,7 +802,7 @@ interaction = client.interactions.create(
 
 ```
 const interaction = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
+    agent: "antigravity-preview-09-2026",
     input: "Analyze the discrepancies across the data in workspace",
     environment: {
         type: "remote",
@@ -585,6 +830,64 @@ const interaction = await client.interactions.create({
 });
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.Allowlist;
+import com.google.genai.gaos.models.interactions.AllowlistEntry;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.CreateAgentInteractionEnvironment;
+import com.google.genai.gaos.models.interactions.Environment;
+import com.google.genai.gaos.models.interactions.EnvironmentNetworkEgressAllowlist;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Network;
+import com.google.genai.gaos.models.interactions.Source;
+import com.google.genai.gaos.models.interactions.SourceType;
+import com.google.genai.gaos.models.interactions.Transform;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.List;
+import java.util.Map;
+
+Client client = new Client();
+
+Environment env = Environment.builder()
+    .sources(List.of(
+        Source.builder()
+            .type(SourceType.GCS)
+            .source("gs://my-private-bucket/data")
+            .target("/workspace")
+            .build()
+    ))
+    .network(Network.of(EnvironmentNetworkEgressAllowlist.of(
+        Allowlist.builder()
+            .allowlist(List.of(
+                AllowlistEntry.builder()
+                    .domain("*.googleapis.com")
+                    .transform(Transform.of(Map.of(
+                        "Authorization", "Bearer YOUR_GCS_TOKEN"
+                    )))
+                    .build(),
+                AllowlistEntry.builder()
+                    .domain("*")
+                    .build()
+            ))
+            .build()
+    )))
+    .build();
+
+CreateAgentInteraction params = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("antigravity-preview-09-2026"))
+    .input(InteractionsInput.of("Analyze the discrepancies across the data in workspace"))
+    .environment(CreateAgentInteractionEnvironment.of(env))
+    .build();
+
+Interaction interaction = client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -592,7 +895,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "agent": "antigravity-preview-05-2026",
+    "agent": "antigravity-preview-09-2026",
     "input": "Analyze the discrepancies across the data in workspace",
     "environment": {
         "type": "remote",
@@ -620,25 +923,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Software ya instalado
+## Software yang sudah diinstal sebelumnya
 
-La zona de pruebas se ejecuta en Ubuntu y viene con entornos de ejecución y paquetes comunes preinstalados. El agente puede instalar paquetes adicionales en el tiempo de ejecución con `pip
-install` o `npm install`. Los paquetes instalados durante una interacción persisten cuando vuelves a usar el mismo `environment_id`.
+Sandbox berjalan di Ubuntu dan dilengkapi dengan runtime dan paket umum yang telah diinstal sebelumnya. Agen dapat menginstal paket tambahan saat runtime menggunakan `pip
+install` atau `npm install`. Paket yang diinstal selama interaksi akan tetap ada saat Anda menggunakan kembali `environment_id` yang sama.
 
-| Categoría | Paquetes preinstalados |
+| Kategori | Paket yang telah diinstal sebelumnya |
 | --- | --- |
-| **Herramientas de UNIX** | `curl`, `wget`, `git`, `rsync`, `unzip`, `ripgrep`, `fd-find`, `gawk`, `bc`, `tree`, `which`, `lsof`, `htop`, `jq`, `iproute2`, `procps`, `gcloud CLI` |
+| **Alat UNIX** | `curl`, `wget`, `git`, `rsync`, `unzip`, `ripgrep`, `fd-find`, `gawk`, `bc`, `tree`, `which`, `lsof`, `htop`, `jq`, `iproute2`, `procps`, `gcloud CLI` |
 | **Python 3.12** | `numpy`, `pandas`, `requests`, `google-genai`, `beautifulsoup4`, `pyyaml`, `ast-grep-cli` |
 | **Node.js 22** | `create-next-app`, `create-vite`, `typescript` |
 
-## Configuración de red
+## Variabel lingkungan
 
-De forma predeterminada, los entornos tienen acceso a la red de salida sin restricciones. Usa el campo `network` para restringir el tráfico de salida a dominios específicos. Cada regla especifica un `domain` y un objeto `transform` opcional para insertar encabezados en las solicitudes coincidentes. Estos encabezados pueden ser únicos por interacción, y puedes actualizarlos para el mismo entorno.
+Gunakan kolom `env` untuk menetapkan variabel lingkungan di dalam sandbox. Setiap entri
+memetakan nama variabel ke string literal untuk konfigurasi atau
+referensi ke [kredensial](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=id) yang disimpan untuk
+secret. Agen melihatnya seperti di shell mana pun, sehingga alat dan skrip yang membaca dari lingkungan proses akan mengambilnya tanpa penyiapan tambahan.
 
-| Campo | Tipo | Descripción |
+| Kolom | Jenis | Deskripsi |
 | --- | --- | --- |
-| `domain` | `string` | Dominio que se hará coincidir. Usa un nombre de host exacto o `*` para todos los dominios. |
-| `transform` | `object` | Objeto que contiene pares clave-valor planos que representan los encabezados que se insertarán en las solicitudes coincidentes, p.ej., `{"Authorization": "Bearer ..."}`. |
+| `env` | `object` | Peta nama variabel ke nilai. Nilai dapat berupa literal `string` atau referensi kredensial dalam bentuk `{"credential": "credential-id"}`. |
 
 ### Python
 
@@ -648,7 +953,95 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    agent="antigravity-preview-05-2026",
+    agent="antigravity-preview-09-2026",
+    input="Build the project and run the test suite.",
+    environment={
+        "type": "remote",
+        "env": {
+            "NODE_ENV": "production",
+            "LOG_LEVEL": "debug",
+            "API_TOKEN": {"credential": "my-api-token"},
+        },
+    },
+)
+
+print(interaction.output_text)
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+
+const client = new GoogleGenAI({});
+
+const interaction = await client.interactions.create({
+    agent: "antigravity-preview-09-2026",
+    input: "Build the project and run the test suite.",
+    environment: {
+        type: "remote",
+        env: {
+            NODE_ENV: "production",
+            LOG_LEVEL: "debug",
+            API_TOKEN: { credential: "my-api-token" },
+        },
+    },
+});
+
+console.log(interaction.output_text);
+```
+
+### REST
+
+```
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+-H "Content-Type: application/json" \
+-H "x-goog-api-key: $GEMINI_API_KEY" \
+-d '{
+    "agent": "antigravity-preview-09-2026",
+    "input": [{"type": "text", "text": "Build the project and run the test suite."}],
+    "environment": {
+        "type": "remote",
+        "env": {
+            "NODE_ENV": "production",
+            "LOG_LEVEL": "debug",
+            "API_TOKEN": {"credential": "my-api-token"}
+        }
+    }
+}'
+```
+
+Variabel berlaku untuk setiap perintah yang dijalankan agen dalam interaksi tersebut, termasuk
+perintah shell, langkah-langkah build, dan proses apa pun yang dimulainya.
+
+Kedua jenis nilai ini berperilaku berbeda. String literal ditulis ke dalam
+penampung sebagai teks biasa. Referensi kredensial bukan: variabel menerima
+placeholder, dan proxy egress mengganti rahasia sebenarnya hanya pada permintaan
+keluar ke domain tepercaya kredensial tersebut. Lihat
+[Menggunakan kredensial sebagai variabel lingkungan](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=id#environment-variables)
+untuk mengetahui cara kerjanya.
+
+## Konfigurasi jaringan
+
+Secara default, lingkungan memiliki akses jaringan keluar yang tidak dibatasi. Gunakan kolom
+`network` untuk membatasi traffic keluar ke domain tertentu. Setiap aturan menentukan `domain`, ditambah `credential` opsional untuk menyisipkan rahasia tersimpan dan objek `transform` opsional untuk menyisipkan header ke dalam permintaan yang cocok.
+Header ini dapat bersifat unik per interaksi, dan Anda dapat memperbaruinya untuk lingkungan yang sama.
+
+| Kolom | Jenis | Deskripsi |
+| --- | --- | --- |
+| `domain` | `string` | Domain yang akan dicocokkan. Gunakan nama host yang sama persis atau `*` untuk semua domain. |
+| `credential` | `string` | ID [kredensial](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=id) yang disimpan. Proxy keluar akan menyelesaikannya dan menyuntikkan header autentikasi pada waktu permintaan. |
+| `transform` | `object` | Objek yang berisi pasangan nilai kunci datar yang merepresentasikan header untuk disisipkan ke dalam permintaan yang cocok, misalnya `{"Authorization": "Bearer ..."}`. |
+
+### Python
+
+```
+from google import genai
+
+client = genai.Client()
+
+interaction = client.interactions.create(
+    agent="antigravity-preview-09-2026",
     input="Fetch the latest issues from the GitHub API for my-org/my-repo.",
     environment={
         "type": "remote",
@@ -678,7 +1071,7 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
+    agent: "antigravity-preview-09-2026",
     input: "Fetch the latest issues from the GitHub API for my-org/my-repo.",
     environment: {
         type: "remote",
@@ -700,6 +1093,54 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.Allowlist;
+import com.google.genai.gaos.models.interactions.AllowlistEntry;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.CreateAgentInteractionEnvironment;
+import com.google.genai.gaos.models.interactions.Environment;
+import com.google.genai.gaos.models.interactions.EnvironmentNetworkEgressAllowlist;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Network;
+import com.google.genai.gaos.models.interactions.Transform;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.List;
+import java.util.Map;
+
+Client client = new Client();
+
+Environment env = Environment.builder()
+    .network(Network.of(EnvironmentNetworkEgressAllowlist.of(
+        Allowlist.builder()
+            .allowlist(List.of(
+                AllowlistEntry.builder()
+                    .domain("api.github.com")
+                    .transform(Transform.of(Map.of(
+                        "Authorization", "Bearer ghp_your_github_token"
+                    )))
+                    .build(),
+                AllowlistEntry.builder().domain("pypi.org").build(),
+                AllowlistEntry.builder().domain("*").build()
+            ))
+            .build()
+    )))
+    .build();
+
+CreateAgentInteraction params = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("antigravity-preview-09-2026"))
+    .input(InteractionsInput.of("Fetch the latest issues from the GitHub API for my-org/my-repo."))
+    .environment(CreateAgentInteractionEnvironment.of(env))
+    .build();
+
+Interaction interaction = client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -707,7 +1148,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "agent": "antigravity-preview-05-2026",
+    "agent": "antigravity-preview-09-2026",
     "input": [{"type": "text", "text": "Fetch the latest issues from the GitHub API for my-org/my-repo."}],
     "environment": {
         "type": "remote",
@@ -727,14 +1168,118 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Cuando se establece una lista de entidades permitidas, solo se permiten las solicitudes a los dominios que se enumeran de forma explícita. Puedes usar comodines para hacer coincidir subdominios (p.ej., `{"domain":
-"*.example.com"}`), pero ten en cuenta que esto no coincide con el dominio raíz
-`example.com`, que se debe agregar por separado. Para permitir todo el tráfico restante, como enrutar dominios no incluidos en la lista sin encabezados insertados, agrega `{"domain": "*"}` como una
-entrada de captura total.
+Jika daftar yang diizinkan ditetapkan, hanya permintaan ke domain yang tercantum secara eksplisit yang
+diizinkan. Anda dapat menggunakan karakter pengganti untuk mencocokkan subdomain (misalnya, `{"domain":
+"*.example.com"}`), tetapi perhatikan bahwa karakter ini tidak cocok dengan domain root `example.com`, yang harus ditambahkan secara terpisah. Untuk mengizinkan semua traffic lainnya, seperti merutekan domain yang tidak tercantum tanpa header yang disisipkan, tambahkan `{"domain": "*"}` sebagai entri catch-all.
 
-### Credenciales
+### Kredensial
 
-Puedes agregar credenciales para que las use tu agente agregando transformaciones de encabezado. Un proxy de salida inserta las credenciales en los encabezados HTTP respectivos. Nunca se exponen dentro de la zona de pruebas como variables de entorno o archivos.
+Ada dua cara untuk mengautentikasi traffic keluar, yaitu kredensial tersimpan yang dirujuk oleh ID dan `transform` inline pada aturan daftar yang diizinkan. Proxy keluar diterapkan di jaringan, sehingga dalam kedua kasus tersebut, rahasia tidak pernah masuk ke sandbox dan tidak pernah muncul di payload interaksi Anda.
+
+[Kredensial terkelola](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=id) adalah kredensial yang harus dijangkau
+saat Anda ingin menyimpan rahasia sekali dan menggunakannya kembali. Setiap lingkungan, agen, dan pemicu dalam project Anda dapat mereferensikan ID yang sama, dan Anda dapat menggantinya di satu tempat.
+
+### Python
+
+```
+from google import genai
+
+client = genai.Client()
+
+# Store the secret once
+client.credentials.create(
+    id="github-production",
+    type="bearer_token",
+    token="ghp_your_github_token",
+)
+
+interaction = client.interactions.create(
+    agent="antigravity-preview-09-2026",
+    input="Fetch the latest issues from the GitHub API for my-org/my-repo.",
+    environment={
+        "type": "remote",
+        "network": {
+            "allowlist": [
+                {"domain": "api.github.com", "credential": "github-production"},
+                {"domain": "*"},
+            ]
+        },
+    },
+)
+
+print(interaction.output_text)
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+
+const client = new GoogleGenAI({});
+
+// Store the secret once
+await client.credentials.create({
+    id: "github-production",
+    type: "bearer_token",
+    token: "ghp_your_github_token",
+});
+
+const interaction = await client.interactions.create({
+    agent: "antigravity-preview-09-2026",
+    input: "Fetch the latest issues from the GitHub API for my-org/my-repo.",
+    environment: {
+        type: "remote",
+        network: {
+            allowlist: [
+                { domain: "api.github.com", credential: "github-production" },
+                { domain: "*" },
+            ]
+        }
+    },
+});
+
+console.log(interaction.output_text);
+```
+
+### REST
+
+```
+# Store the secret once
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
+-H "Content-Type: application/json" \
+-H "x-goog-api-key: $GEMINI_API_KEY" \
+-d '{
+    "id": "github-production",
+    "type": "bearer_token",
+    "token": "ghp_your_github_token"
+}'
+
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+-H "Content-Type: application/json" \
+-H "x-goog-api-key: $GEMINI_API_KEY" \
+-d '{
+    "agent": "antigravity-preview-09-2026",
+    "input": "Fetch the latest issues from the GitHub API for my-org/my-repo.",
+    "environment": {
+        "type": "remote",
+        "network": {
+            "allowlist": [
+                { "domain": "api.github.com", "credential": "github-production" },
+                { "domain": "*" }
+            ]
+        }
+    }
+}'
+```
+
+Kredensial `oauth2` juga merefresh token aksesnya sendiri, sehingga interaksi yang berjalan lama tidak akan terganggu saat token berakhir. Lihat
+[Kredensial](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=id) untuk mengetahui daftar lengkap
+jenis kredensial dan operasi pengelolaan.
+
+Anda juga dapat menyetel header sebaris dengan `transform`. Hal ini cocok jika nilai
+termasuk dalam satu panggilan, misalnya token yang Anda buat tepat sebelum membuat
+interaksi. Header yang ditetapkan dengan cara ini disuntikkan oleh proxy keluar yang sama,
+header tersebut tidak pernah diekspos di dalam sandbox sebagai variabel lingkungan atau file.
 
 ### Python
 
@@ -750,7 +1295,7 @@ gcloud_token = subprocess.check_output(
 client = genai.Client()
 
 interaction = client.interactions.create(
-    agent="antigravity-preview-05-2026",
+    agent="antigravity-preview-09-2026",
     input="List the files in gs://my-bucket/reports/ using the GCS JSON API.",
     environment={
         "type": "remote",
@@ -782,7 +1327,7 @@ const gcloudToken = execSync("gcloud auth print-access-token").toString().trim()
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
+    agent: "antigravity-preview-09-2026",
     input: "List the files in gs://my-bucket/reports/ using the GCS JSON API.",
     environment: {
         type: "remote",
@@ -802,6 +1347,57 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.Allowlist;
+import com.google.genai.gaos.models.interactions.AllowlistEntry;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.CreateAgentInteractionEnvironment;
+import com.google.genai.gaos.models.interactions.Environment;
+import com.google.genai.gaos.models.interactions.EnvironmentNetworkEgressAllowlist;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Network;
+import com.google.genai.gaos.models.interactions.Transform;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Map;
+
+// Fetch a short-lived access token from your local gcloud CLI
+Process process = new ProcessBuilder("gcloud", "auth", "print-access-token").start();
+String gcloudToken = new String(process.getInputStream().readAllBytes(), StandardCharsets.UTF_8).trim();
+
+Client client = new Client();
+
+Environment env = Environment.builder()
+    .network(Network.of(EnvironmentNetworkEgressAllowlist.of(
+        Allowlist.builder()
+            .allowlist(List.of(
+                AllowlistEntry.builder()
+                    .domain("storage.googleapis.com")
+                    .transform(Transform.of(Map.of(
+                        "Authorization", "Bearer " + gcloudToken
+                    )))
+                    .build()
+            ))
+            .build()
+    )))
+    .build();
+
+CreateAgentInteraction params = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("antigravity-preview-09-2026"))
+    .input(InteractionsInput.of("List the files in gs://my-bucket/reports/ using the GCS JSON API."))
+    .environment(CreateAgentInteractionEnvironment.of(env))
+    .build();
+
+Interaction interaction = client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -809,7 +1405,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "agent": "antigravity-preview-05-2026",
+    "agent": "antigravity-preview-09-2026",
     "input": "List the files in gs://my-bucket/reports/ using the GCS JSON API.",
     "environment": {
         "type": "remote",
@@ -827,9 +1423,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Inhabilita el acceso a la red
+`credential` dan `transform` dapat muncul pada aturan yang sama. Kredensial diterapkan terlebih dahulu dan `transform` digabungkan di atas, sehingga header `transform` eksplisit akan menang jika keduanya menetapkan kunci yang sama. Pola umum adalah kredensial untuk
+header autentikasi ditambah `transform` untuk header tambahan yang diharapkan layanan
+bersama dengan kredensial tersebut.
 
-Para bloquear todo el acceso a la red de salida, establece `network` en `disabled`:
+### Menonaktifkan akses jaringan
+
+Untuk memblokir semua akses jaringan keluar, tetapkan `network` ke `disabled`:
 
 ### Python
 
@@ -839,7 +1439,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    agent="antigravity-preview-05-2026",
+    agent="antigravity-preview-09-2026",
     input="Analyze the local files only.",
     environment={
         "type": "remote",
@@ -858,7 +1458,7 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
+    agent: "antigravity-preview-09-2026",
     input: "Analyze the local files only.",
     environment: {
         type: "remote",
@@ -869,6 +1469,36 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.CreateAgentInteractionEnvironment;
+import com.google.genai.gaos.models.interactions.Environment;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Network;
+import com.google.genai.gaos.models.interactions.NetworkEnum;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+Environment env = Environment.builder()
+    .network(Network.of(NetworkEnum.DISABLED))
+    .build();
+
+CreateAgentInteraction params = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("antigravity-preview-09-2026"))
+    .input(InteractionsInput.of("Analyze the local files only."))
+    .environment(CreateAgentInteractionEnvironment.of(env))
+    .build();
+
+Interaction interaction = client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -876,7 +1506,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "agent": "antigravity-preview-05-2026",
+    "agent": "antigravity-preview-09-2026",
     "input": "Analyze the local files only.",
     "environment": {
         "type": "remote",
@@ -885,10 +1515,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Actualiza las credenciales
+### Memperbarui kredensial
 
-Las credenciales, como los tokens de acceso y las claves de API de corta duración, vencen.
-Puedes actualizarlas pasando el `environment_id` existente junto con una nueva configuración `network` en la siguiente interacción. Las nuevas reglas de red reemplazan por completo las anteriores, mientras que se conserva el estado del sistema de archivos del entorno (paquetes instalados, archivos, repositorios).
+Token inline seperti token akses dan kunci API yang memiliki masa aktif singkat akan habis masa berlakunya.
+Anda dapat memperbaruinya dengan meneruskan `environment_id` yang ada bersama dengan
+konfigurasi `network` baru pada interaksi berikutnya. Aturan jaringan baru sepenuhnya menggantikan aturan sebelumnya, sementara status sistem file lingkungan (paket, file, repositori yang diinstal) dipertahankan.
+
+Jika Anda menggunakan [kredensial](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=id) tersimpan sebagai gantinya, Anda tidak memerlukan ini. Kredensial `oauth2` diperbarui dengan sendirinya, dan merotasi kredensial apa pun adalah `PATCH` pada kredensial yang membuat setiap aturan daftar yang diizinkan yang mereferensikannya tidak berubah.
 
 ### Python
 
@@ -899,7 +1532,7 @@ client = genai.Client()
 
 # First interaction: use an initial token
 first = client.interactions.create(
-    agent="antigravity-preview-05-2026",
+    agent="antigravity-preview-09-2026",
     input="List the files in gs://my-bucket/reports/ using the GCS JSON API.",
     environment={
         "type": "remote",
@@ -918,7 +1551,7 @@ first = client.interactions.create(
 
 # Later: refresh the token on the same environment
 result = client.interactions.create(
-    agent="antigravity-preview-05-2026",
+    agent="antigravity-preview-09-2026",
     input="Now download the file reports/q1.csv from the same bucket.",
     environment={
         "type": "remote",
@@ -948,7 +1581,7 @@ const client = new GoogleGenAI({});
 
 // First interaction: use an initial token
 const first = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
+    agent: "antigravity-preview-09-2026",
     input: "List the files in gs://my-bucket/reports/ using the GCS JSON API.",
     environment: {
         type: "remote",
@@ -967,7 +1600,7 @@ const first = await client.interactions.create({
 
 // Later: refresh the token on the same environment
 const result = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
+    agent: "antigravity-preview-09-2026",
     input: "Now download the file reports/q1.csv from the same bucket.",
     environment: {
         type: "remote",
@@ -988,6 +1621,78 @@ const result = await client.interactions.create({
 console.log(result.output_text);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.Allowlist;
+import com.google.genai.gaos.models.interactions.AllowlistEntry;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.CreateAgentInteractionEnvironment;
+import com.google.genai.gaos.models.interactions.Environment;
+import com.google.genai.gaos.models.interactions.EnvironmentNetworkEgressAllowlist;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Network;
+import com.google.genai.gaos.models.interactions.Transform;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.List;
+import java.util.Map;
+
+Client client = new Client();
+
+// First interaction: use an initial token
+Environment initialEnv = Environment.builder()
+    .network(Network.of(EnvironmentNetworkEgressAllowlist.of(
+        Allowlist.builder()
+            .allowlist(List.of(
+                AllowlistEntry.builder()
+                    .domain("storage.googleapis.com")
+                    .transform(Transform.of(Map.of(
+                        "Authorization", "Bearer INITIAL_TOKEN"
+                    )))
+                    .build()
+            ))
+            .build()
+    )))
+    .build();
+
+CreateAgentInteraction firstParams = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("antigravity-preview-09-2026"))
+    .input(InteractionsInput.of("List the files in gs://my-bucket/reports/ using the GCS JSON API."))
+    .environment(CreateAgentInteractionEnvironment.of(initialEnv))
+    .build();
+
+Interaction first = client.interactions.create(CreateInteractionRequestBody.of(firstParams)).interaction().get();
+
+// Later: refresh the token on the same environment
+Environment refreshedEnv = Environment.builder()
+    .environmentId(first.environmentId().orElse(""))
+    .network(Network.of(EnvironmentNetworkEgressAllowlist.of(
+        Allowlist.builder()
+            .allowlist(List.of(
+                AllowlistEntry.builder()
+                    .domain("storage.googleapis.com")
+                    .transform(Transform.of(Map.of(
+                        "Authorization", "Bearer REFRESHED_TOKEN"
+                    )))
+                    .build()
+            ))
+            .build()
+    )))
+    .build();
+
+CreateAgentInteraction secondParams = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("antigravity-preview-09-2026"))
+    .input(InteractionsInput.of("Now download the file reports/q1.csv from the same bucket."))
+    .environment(CreateAgentInteractionEnvironment.of(refreshedEnv))
+    .build();
+
+Interaction result = client.interactions.create(CreateInteractionRequestBody.of(secondParams)).interaction().get();
+System.out.println(result.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -996,7 +1701,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "agent": "antigravity-preview-05-2026",
+    "agent": "antigravity-preview-09-2026",
     "input": "Now download the file reports/q1.csv from the same bucket.",
     "environment": {
         "type": "remote",
@@ -1015,26 +1720,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Ciclo de vida del entorno
+## Siklus proses lingkungan
 
-Los entornos siguen este ciclo de vida:
+Lingkungan mengikuti siklus proses ini:
 
-| Estado | Comportamiento |
+| Negara bagian/Provinsi | Perilaku |
 | --- | --- |
-| **Creado** | Se aprovisiona cuando una interacción especifica `environment: "remote"` o un objeto de configuración. |
-| **Activo** | Se ejecuta mientras una interacción está en curso. |
-| **Inactivo** | Se toma una instantánea automática y se detiene después de 15 minutos de inactividad. |
-| **Sin conexión** | Se retiene durante 7 días desde la última actividad. Se puede reanudar pasando su ID. |
-| **Eliminado** | Se quita del sistema automáticamente después de que vence la retención de TTL de 7 días o cuando se borra de forma manual. |
+| **Dibuat** | Disediakan saat interaksi menentukan `environment: "remote"` atau objek konfigurasi. |
+| **Aktif** | Berjalan saat interaksi sedang berlangsung. |
+| **Idle** | Snapshot otomatis dan dihentikan setelah 15 menit tidak ada aktivitas. |
+| **Offline** | Dipertahankan selama 7 hari sejak terakhir aktif. Dapat dilanjutkan dengan meneruskan ID-nya. |
+| **Dihapus** | Dihapus dari sistem secara otomatis setelah retensi TTL 7 hari berakhir atau saat penghapusan manual. |
 
-## API de Environments
+## Environments API
 
-Puedes usar la API de Environments para administrar sesiones de zona de pruebas de forma programática.
-La enumeración de entornos te permite descubrir IDs de sesión activos y recuperar el estado si finaliza una conexión del cliente durante una tarea de larga duración. También puedes inspeccionar los metadatos de la sesión y borrar entornos de forma explícita cuando finalizan los flujos de trabajo en lugar de esperar el vencimiento automático del TTL.
+Anda dapat menggunakan Environments API untuk mengelola sesi sandbox secara terprogram.
+Dengan menghitung lingkungan, Anda dapat menemukan ID sesi aktif dan memulihkan status
+jika koneksi klien berakhir selama tugas yang berjalan lama. Anda juga dapat memeriksa metadata sesi dan menghapus lingkungan secara eksplisit saat alur kerja selesai, bukan menunggu masa berlaku TTL otomatis berakhir.
 
-### Enumera entornos
+### Mencantumkan lingkungan
 
-Enumera los entornos activos que pertenecen a tu proyecto. Usa parámetros de paginación para controlar el tamaño del lote de respuesta.
+Mencantumkan lingkungan aktif yang termasuk dalam project Anda. Gunakan parameter penomoran halaman
+untuk mengontrol ukuran batch respons.
 
 ### Python
 
@@ -1043,8 +1750,9 @@ from google import genai
 
 client = genai.Client()
 
-for env in client.environments.list(page_size=10):
-    print(f"Environment ID: {env.environment_id}, Type: {env.type}")
+response = client.environments.list(page_size=10)
+for env in response.environments:
+    print(f"Environment ID: {env.id}, Status: {env.status}")
 ```
 
 ### JavaScript
@@ -1054,9 +1762,30 @@ import { GoogleGenAI } from "@google/genai";
 
 const client = new GoogleGenAI({});
 
-const response = await client.environments.list({ pageSize: 10 });
+const response = await client.environments.list({ page_size: 10 });
 for (const env of response.environments) {
-    console.log(`Environment ID: ${env.environment_id}, Type: ${env.type}`);
+    console.log(`Environment ID: ${env.id}, Status: ${env.status}`);
+}
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.environments.Environment;
+import com.google.genai.gaos.models.environments.ListEnvironmentsResponse;
+import java.util.List;
+
+Client client = new Client();
+
+ListEnvironmentsResponse response = client.environments.listEnvironments()
+    .pageSize(10)
+    .call()
+    .listEnvironmentsResponse()
+    .get();
+
+for (Environment env : response.environments().orElse(List.of())) {
+    System.out.println("Environment ID: " + env.id().orElse("") + ", Status: " + env.status().orElse(null));
 }
 ```
 
@@ -1067,27 +1796,28 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments?pageS
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-El resultado es similar al siguiente:
+Responsnya akan terlihat seperti berikut:
 
 ```
 {
   "environments": [
     {
-      "environment_id": "140128b2a13c12c00a5a0d8cf7af9469",
-      "type": "remote"
+      "id": "140128b2a13c12c00a5a0d8cf7af9469",
+      "status": "active"
     },
     {
-      "environment_id": "362b738275a1d74af6f1c62bc050da73",
-      "type": "remote"
+      "id": "362b738275a1d74af6f1c62bc050da73",
+      "status": "active"
     }
   ],
   "next_page_token": "Cj...5aE="
 }
 ```
 
-### Obtén un entorno
+### Mendapatkan lingkungan
 
-Recupera metadatos y detalles de configuración para un entorno específico por su nombre de recurso.
+Mengambil metadata dan detail konfigurasi untuk lingkungan tertentu berdasarkan
+nama resource-nya.
 
 ### Python
 
@@ -1096,8 +1826,8 @@ from google import genai
 
 client = genai.Client()
 
-env = client.environments.get(name="environments/YOUR_ENVIRONMENT_ID")
-print(f"Environment ID: {env.environment_id}, Type: {env.type}")
+env = client.environments.get(id="YOUR_ENVIRONMENT_ID")
+print(f"Environment ID: {env.id}, Status: {env.status}")
 ```
 
 ### JavaScript
@@ -1107,8 +1837,20 @@ import { GoogleGenAI } from "@google/genai";
 
 const client = new GoogleGenAI({});
 
-const env = await client.environments.get({ name: "environments/YOUR_ENVIRONMENT_ID" });
-console.log(`Environment ID: ${env.environment_id}, Type: ${env.type}`);
+const env = await client.environments.get("YOUR_ENVIRONMENT_ID");
+console.log(`Environment ID: ${env.id}, Status: ${env.status}`);
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.environments.Environment;
+
+Client client = new Client();
+
+Environment env = client.environments.getEnvironment("YOUR_ENVIRONMENT_ID").environment().get();
+System.out.println("Environment ID: " + env.id().orElse("") + ", Status: " + env.status().orElse(null));
 ```
 
 ### REST
@@ -1118,12 +1860,12 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/YOUR_
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-El resultado es similar al siguiente:
+Responsnya akan terlihat seperti berikut:
 
 ```
 {
-  "environment_id": "140128b2a13c12c00a5a0d8cf7af9469",
-  "type": "remote",
+  "id": "140128b2a13c12c00a5a0d8cf7af9469",
+  "status": "active",
   "sources": [
     {
       "type": "repository",
@@ -1144,9 +1886,10 @@ El resultado es similar al siguiente:
 }
 ```
 
-### Borra un entorno
+### Menghapus lingkungan
 
-Finaliza y borra un entorno de forma explícita para limpiar los recursos de la zona de pruebas cuando finalicen tus tareas o canalizaciones.
+Hentikan dan hapus lingkungan secara eksplisit untuk membersihkan resource sandbox
+saat tugas atau pipeline Anda selesai.
 
 ### Python
 
@@ -1155,7 +1898,7 @@ from google import genai
 
 client = genai.Client()
 
-client.environments.delete(name="environments/YOUR_ENVIRONMENT_ID")
+client.environments.delete(id="YOUR_ENVIRONMENT_ID")
 ```
 
 ### JavaScript
@@ -1165,7 +1908,17 @@ import { GoogleGenAI } from "@google/genai";
 
 const client = new GoogleGenAI({});
 
-await client.environments.delete({ name: "environments/YOUR_ENVIRONMENT_ID" });
+await client.environments.delete("YOUR_ENVIRONMENT_ID");
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+
+Client client = new Client();
+
+client.environments.deleteEnvironment("YOUR_ENVIRONMENT_ID");
 ```
 
 ### REST
@@ -1175,44 +1928,268 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/environments/YO
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Descarga archivos del entorno
+## Mengelola file di lingkungan
 
-El agente crea archivos dentro de la zona de pruebas durante la ejecución. Puedes descargar la instantánea completa del entorno como un archivo tar con la API de Files:
+Agen membuat dan mengubah file di dalam sandbox selama eksekusi. Anda
+dapat menjelajahi konten direktori, mendapatkan metadata file, mendownload file satu per satu atau
+seluruh direktori sebagai arsip tar, dan mengupload file atau mengekstrak arsip
+langsung ke lingkungan. Penyimpanan di lingkungan sandbox tunduk pada
+batas penggunaan wajar.
+
+### Mencantumkan file dalam direktori
+
+Mencantumkan isi direktori di lingkungan. Secara default, mencantumkan direktori root.
+
+#### Parameter kueri
+
+| Parameter | Jenis | Deskripsi |
+| --- | --- | --- |
+| `recursive` | boolean | Saat `true`, mencantumkan semua file dan direktori secara rekursif. Default: `false`. |
 
 ### Python
 
 ```
-import os
-import requests
+from google import genai
+
+client = genai.Client()
+
+# List root directory
+response = client.environments.files.list(
+    environment="YOUR_ENVIRONMENT_ID",
+    path="",
+)
+for file in response.files:
+    print(f"{file.name} ({file.type}) - {file.path}")
+
+# List a subdirectory recursively
+response = client.environments.files.list(
+    environment="YOUR_ENVIRONMENT_ID",
+    path="src",
+    recursive=True,
+)
+for file in response.files:
+    print(f"{file.name} ({file.type}) - {file.path}")
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+
+const client = new GoogleGenAI({});
+
+// List root directory
+const response = await client.environments.files.list({
+    environment: "YOUR_ENVIRONMENT_ID",
+    path: "",
+});
+for (const file of response.files) {
+    console.log(`${file.name} (${file.type}) - ${file.path}`);
+}
+
+// List a subdirectory recursively
+const srcResponse = await client.environments.files.list({
+    environment: "YOUR_ENVIRONMENT_ID",
+    path: "src",
+    recursive: true,
+});
+for (const file of srcResponse.files) {
+    console.log(`${file.name} (${file.type}) - ${file.path}`);
+}
+```
+
+### REST
+
+```
+# List root directory
+curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_ID/files" \
+  -H "x-goog-api-key: $GEMINI_API_KEY"
+
+# List a subdirectory
+curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_ID/files/src" \
+  -H "x-goog-api-key: $GEMINI_API_KEY"
+
+# List all files recursively
+curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_ID/files?recursive=true" \
+  -H "x-goog-api-key: $GEMINI_API_KEY"
+```
+
+Respons menampilkan array `files` dengan metadata untuk setiap entri:
+
+```
+{
+  "files": [
+    {
+      "name": "config",
+      "path": "config",
+      "type": "DIRECTORY",
+      "created": "2026-08-12T07:44:18Z",
+      "modified": "2026-08-12T07:44:18Z"
+    },
+    {
+      "name": "main.py",
+      "path": "src/main.py",
+      "type": "FILE",
+      "size_bytes": "15",
+      "mime_type": "text/x-python; charset=utf-8",
+      "created": "2026-08-12T07:44:20Z",
+      "modified": "2026-08-12T07:44:20Z"
+    }
+  ]
+}
+```
+
+#### Kolom entri file
+
+| Kolom | Jenis | Deskripsi |
+| --- | --- | --- |
+| `name` | string | Nama file atau direktori. |
+| `path` | string | Jalur lengkap relatif terhadap root lingkungan. |
+| `type` | string | `FILE` atau `DIRECTORY`. |
+| `size_bytes` | string | Ukuran file dalam byte (khusus file). |
+| `mime_type` | string | Jenis MIME (khusus file). |
+| `created` | string | Stempel waktu pembuatan ISO 8601. |
+| `modified` | string | Stempel waktu terakhir diubah ISO 8601. |
+
+### Mendapatkan metadata file
+
+Mendapatkan metadata untuk file tertentu berdasarkan jalur.
+
+### Python
+
+```
+from google import genai
+
+client = genai.Client()
+
+response = client.environments.files.list(
+    environment="YOUR_ENVIRONMENT_ID",
+    path="src/main.py",
+)
+file = response.files[0]
+print(f"Name: {file.name}, Size: {file.size_bytes} bytes, Type: {file.mime_type}")
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+
+const client = new GoogleGenAI({});
+
+const response = await client.environments.files.list({
+    environment: "YOUR_ENVIRONMENT_ID",
+    path: "src/main.py",
+});
+const file = response.files[0];
+console.log(`Name: ${file.name}, Size: ${file.size_bytes} bytes, Type: ${file.mime_type}`);
+```
+
+### REST
+
+```
+curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_ID/files/src/main.py" \
+  -H "x-goog-api-key: $GEMINI_API_KEY"
+```
+
+Respons menampilkan metadata file yang dienkapsulasi dalam array `files`:
+
+```
+{
+  "files": [
+    {
+      "name": "main.py",
+      "path": "src/main.py",
+      "type": "FILE",
+      "size_bytes": "15",
+      "mime_type": "text/x-python; charset=utf-8",
+      "created": "2026-08-12T07:44:20Z",
+      "modified": "2026-08-12T07:44:20Z"
+    }
+  ]
+}
+```
+
+Jika file tidak ada, API akan menampilkan error `404`:
+
+```
+{
+  "error": {
+    "message": "Path 'nonexistent.txt' not found in environment 'ENV_ID'.",
+    "code": "not_found"
+  }
+}
+```
+
+### Mendownload satu file
+
+Mendownload konten file tertentu. Di SDK, gunakan metode `download()`. Dalam permintaan REST, tambahkan parameter kueri `?alt=media` ke jalur file. Server merespons dengan `200 OK` dan melakukan streaming konten file mentah.
+
+### Python
+
+```
+from google import genai
+
+client = genai.Client()
+
+content = client.environments.files.download(
+    environment="YOUR_ENVIRONMENT_ID",
+    path="src/main.py",
+)
+
+with open("main.py", "wb") as f:
+    f.write(content)
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+import * as fs from "fs";
+
+const client = new GoogleGenAI({});
+
+const bytes = await client.environments.files.download({
+    environment: "YOUR_ENVIRONMENT_ID",
+    path: "src/main.py",
+});
+
+fs.writeFileSync("main.py", Buffer.from(bytes));
+```
+
+### REST
+
+```
+curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_ID/files/src/main.py?alt=media" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -o main.py
+```
+
+### Mendownload direktori sebagai arsip tar
+
+Download seluruh direktori sebagai arsip tar dengan meminta jalur direktori
+dengan `?alt=media`. Perintah ini akan menampilkan file tar POSIX (tidak di-gzip). Gunakan
+`recursive=true` untuk menyertakan subdirektori bertingkat.
+
+### Python
+
+```
 import tarfile
 from google import genai
 
 client = genai.Client()
 
-interaction = client.interactions.create(
-    agent="antigravity-preview-05-2026",
-    input="Write a file environments_test.txt with content 'Environments' inside the sandbox.",
-    environment="remote",
+# Download a subdirectory archive
+archive = client.environments.files.download(
+    environment="YOUR_ENVIRONMENT_ID",
+    path="src",
 )
 
-env_id = interaction.environment_id
-api_key = os.environ.get("GEMINI_API_KEY")
+with open("src.tar", "wb") as f:
+    f.write(archive)
 
-response = requests.get(
-    f"https://generativelanguage.googleapis.com/v1beta/files/environment-{env_id}:download",
-    params={"alt": "media"},
-    headers={"x-goog-api-key": api_key},
-    allow_redirects=True,
-)
-
-with open("snapshot_env.tar", "wb") as f:
-    f.write(response.content)
-
-os.makedirs("extracted_env_snapshot", exist_ok=True)
-with tarfile.open("snapshot_env.tar") as tar:
-    tar.extractall(path="extracted_env_snapshot")
-
-print(os.listdir("extracted_env_snapshot"))
+with tarfile.open("src.tar") as tar:
+    tar.extractall(path="./extracted")
 ```
 
 ### JavaScript
@@ -1224,91 +2201,369 @@ import * as fs from "fs";
 
 const client = new GoogleGenAI({});
 
-const interaction = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
-    input: "Write a file environments_test.txt with content 'Environments' inside the sandbox.",
-    environment: "remote",
+// Download a subdirectory archive
+const bytes = await client.environments.files.download({
+    environment: "YOUR_ENVIRONMENT_ID",
+    path: "src",
 });
 
-const envId = interaction.environment_id;
-const apiKey = process.env.GEMINI_API_KEY || "";
-
-const url = `https://generativelanguage.googleapis.com/v1beta/files/environment-${envId}:download?alt=media`;
-const response = await fetch(url, {
-    headers: {
-        "x-goog-api-key": apiKey,
-    },
-});
-
-if (!response.ok) {
-    throw new Error(`Failed to download file: ${response.statusText}`);
-}
-
-const buffer = Buffer.from(await response.arrayBuffer());
-fs.writeFileSync("snapshot_env.tar", buffer);
-
-if (!fs.existsSync("extracted_env_snapshot")) {
-    fs.mkdirSync("extracted_env_snapshot");
-}
-execSync("tar -xf snapshot_env.tar -C extracted_env_snapshot");
-
-console.log(fs.readdirSync("extracted_env_snapshot"));
+fs.writeFileSync("src.tar", Buffer.from(bytes));
+execSync("tar -xf src.tar -C ./extracted");
 ```
 
 ### REST
 
 ```
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
--H "Content-Type: application/json" \
--H "x-goog-api-key: $GEMINI_API_KEY" \
--d '{
-    "agent": "antigravity-preview-05-2026",
-    "input": "Write a file environments_test.txt with content '\''Environments'\'' inside the sandbox.",
-    "environment": "remote"
-}'
-# Step 2: Download snapshot (reusing environment ID from Step 1)
-# curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/files/environment-$ENV_ID:download?alt=media" \
-#   -H "x-goog-api-key: $API_KEY" \
-#   -o snapshot.tar
+# Download a subdirectory (top-level files only)
+curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_ID/files/src?alt=media" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -o src.tar
+
+# Download a subdirectory recursively (includes nested directories)
+curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_ID/files/config?alt=media&recursive=true" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -o config.tar
+
+# Download root directory
+curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_ID/files?alt=media" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -o snapshot.tar
+
+# Extract the archive
+tar xf snapshot.tar -C ./extracted
 ```
 
-## Precios y recursos
+#### Matriks perilaku
 
-Cada entorno se ejecuta con asignaciones de recursos fijas:
+Matriks perilaku berikut merangkum respons dan perilaku pengarsipan yang diharapkan di seluruh endpoint file dan direktori, metode HTTP, dan parameter kueri:
 
-| Recurso | Valor |
+| Permintaan | `alt` | `recursive` | `extract` | `overwrite` | Respons |
+| --- | --- | --- | --- | --- | --- |
+| `GET /files` | (tidak ada) | (tidak ada) | - | - | Listingan JSON direktori root |
+| `GET /files/{path}` (file) | (tidak ada) | - | - | - | Metadata JSON untuk file |
+| `GET /files/{path}` (dir) | (tidak ada) | `false` | - | - | Daftar JSON anak langsung |
+| `GET /files/{path}` (dir) | (tidak ada) | `true` | - | - | Listingan JSON dari semua turunan |
+| `GET /files/{path}?alt=media` (file) | `media` | - | - | - | Konten file mentah |
+| `GET /files/{path}?alt=media` (dir) | `media` | `false` | - | - | Arsip tar file langsung di direktori |
+| `GET /files/{path}?alt=media` (dir) | `media` | `true` | - | - | Arsip tar semua file secara rekursif |
+| `GET /files?alt=media` | `media` | `false` | - | - | Arsip tar hanya berisi file tingkat root |
+| `PUT /files/{path}` (file) | - | - | `false` | `false` | Menulis file di jalur. Menampilkan `409 Conflict` jika sudah ada |
+| `PUT /files/{path}?overwrite=true` | - | - | `false` | `true` | Menulis atau mengganti file di jalur |
+| `PUT /files/{path}?extract=true` | - | - | `true` | `false` | Mengekstrak arsip ke direktori tujuan. Menampilkan `409 Conflict` jika ada file target |
+| `PUT /files/{path}?extract=true&overwrite=true` | - | - | `true` | `true` | Mengekstrak arsip, menggantikan file yang ada |
+
+### Mengupload file ke lingkungan
+
+Upload file individual atau arsip direktori langsung ke sandbox lingkungan yang ada menggunakan HTTP `PUT`. Direktori induk dibuat secara otomatis jika belum ada. Penyimpanan di lingkungan tunduk pada batas penggunaan yang wajar.
+
+#### Mengupload satu file
+
+### Python
+
+```
+from google import genai
+
+client = genai.Client()
+
+with open("local_file.txt", "rb") as f:
+    result = client.environments.files.upload(
+        environment="YOUR_ENVIRONMENT_ID",
+        path="workspace/data/file.txt",
+        file=f,
+        mime_type="text/plain",
+        overwrite=True,
+    )
+
+file = result.files[0]
+print(f"Uploaded: {file.name} ({file.size_bytes} bytes)")
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+import * as fs from "fs";
+
+const client = new GoogleGenAI({});
+
+const content = fs.readFileSync("local_file.txt");
+const result = await client.environments.files.upload({
+    environment: "YOUR_ENVIRONMENT_ID",
+    path: "workspace/data/file.txt",
+    file: content,
+    mime_type: "text/plain",
+    overwrite: true,
+});
+
+const file = result.files[0];
+console.log(`Uploaded: ${file.name} (${file.size_bytes} bytes)`);
+```
+
+### REST
+
+```
+curl -X PUT "https://generativelanguage.googleapis.com/upload/v1beta/environments/$ENV_ID/files/workspace/data/file.txt" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H "Content-Type: text/plain" \
+  --data-binary @local_file.txt
+```
+
+Respons menampilkan metadata untuk file yang diupload, yang di-wrap dalam array `files`
+agar konsisten dengan endpoint daftar dan pengambilan:
+
+```
+{
+  "files": [
+    {
+      "name": "file.txt",
+      "path": "workspace/data/file.txt",
+      "type": "FILE",
+      "size_bytes": "1024",
+      "mime_type": "text/plain"
+    }
+  ]
+}
+```
+
+#### Mengupload dan mengekstrak arsip direktori
+
+Untuk mengisi seluruh codebase atau struktur direktori dalam satu permintaan, upload arsip
+`.tar` atau `.tar.gz` dengan `extract=true`.
+
+### Python
+
+```
+from google import genai
+
+client = genai.Client()
+
+with open("source.tar.gz", "rb") as f:
+    result = client.environments.files.upload(
+        environment="YOUR_ENVIRONMENT_ID",
+        path="workspace/src/",
+        file=f,
+        extract=True,
+    )
+
+for entry in result.files:
+    print(f"Extracted: {entry.path}")
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+import * as fs from "fs";
+
+const client = new GoogleGenAI({});
+
+const archive = fs.readFileSync("source.tar.gz");
+const result = await client.environments.files.upload({
+    environment: "YOUR_ENVIRONMENT_ID",
+    path: "workspace/src/",
+    file: archive,
+    extract: true,
+});
+
+for (const entry of result.files) {
+    console.log(`Extracted: ${entry.path}`);
+}
+```
+
+### REST
+
+```
+curl -X PUT "https://generativelanguage.googleapis.com/upload/v1beta/environments/$ENV_ID/files/workspace/src/?extract=true" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H "Content-Type: application/x-tar" \
+  --data-binary @source.tar.gz
+```
+
+Respons mencantumkan setiap file yang ditulis oleh arsip:
+
+```
+{
+  "files": [
+    {
+      "name": "app.py",
+      "path": "workspace/src/app.py",
+      "type": "FILE",
+      "size_bytes": "15",
+      "mime_type": "text/x-python"
+    },
+    {
+      "name": "requirements.txt",
+      "path": "workspace/src/requirements.txt",
+      "type": "FILE",
+      "size_bytes": "17",
+      "mime_type": "text/plain"
+    }
+  ]
+}
+```
+
+#### Mengupload file besar dengan sesi yang dapat dilanjutkan
+
+Untuk payload besar, atau saat mengupload melalui koneksi yang tidak andal, gunakan sesi yang dapat dilanjutkan, bukan mengirim seluruh isi dalam satu permintaan. Upload yang dapat dilanjutkan membagi transfer menjadi beberapa bagian yang dapat dicoba ulang satu per satu, sehingga kegagalan di tengah proses tidak mengharuskan Anda memulai dari awal.
+
+Mulai dengan memulai sesi menggunakan `uploadType=resumable`. Kirim isi kosong
+dan gunakan header `X-Upload-Content-Type` dan `X-Upload-Content-Length` untuk
+mendeklarasikan jenis media dan total ukuran payload yang ingin Anda upload:
+
+```
+PUT /upload/v1beta/environments/$ENV_ID/files/workspace/data/large_dataset.bin?uploadType=resumable HTTP/1.1
+Host: generativelanguage.googleapis.com
+X-Upload-Content-Type: application/octet-stream
+X-Upload-Content-Length: 20971520
+Content-Length: 0
+x-goog-api-key: $GEMINI_API_KEY
+```
+
+Respons membawa URL sesi di header `Location`. URL ini sudah berisi `upload_id`, sehingga tidak memerlukan kunci API lagi:
+
+```
+HTTP/1.1 200 OK
+Location: https://generativelanguage.googleapis.com/upload/v1beta/environments/$ENV_ID/files/workspace/data/large_dataset.bin?uploadType=resumable&upload_id=AJjja9bfHjiYlGi60pUazCaTuPY
+Content-Length: 0
+```
+
+Upload payload ke URL tersebut dalam potongan. Setiap bagian menyatakan rentang byte dan
+ukuran total dengan header `Content-Range`:
+
+```
+PUT /upload/v1beta/environments/$ENV_ID/files/workspace/data/large_dataset.bin?uploadType=resumable&upload_id=AJjja9bfHjiYlGi60pUazCaTuPY HTTP/1.1
+Host: generativelanguage.googleapis.com
+Content-Type: application/octet-stream
+Content-Range: bytes 0-10485759/20971520
+Content-Length: 10485760
+
+<10 MB binary payload>
+```
+
+Setiap bagian kecuali yang terakhir menampilkan `308 Resume Incomplete`. Header `Range` memberi tahu Anda jumlah byte yang telah di-commit server, yang merupakan titik tempat Anda melanjutkan jika chunk gagal:
+
+```
+HTTP/1.1 308 Resume Incomplete
+Range: bytes=0-10485759
+Content-Length: 0
+```
+
+Kirimkan bagian yang tersisa dengan cara yang sama:
+
+```
+PUT /upload/v1beta/environments/$ENV_ID/files/workspace/data/large_dataset.bin?uploadType=resumable&upload_id=AJjja9bfHjiYlGi60pUazCaTuPY HTTP/1.1
+Host: generativelanguage.googleapis.com
+Content-Type: application/octet-stream
+Content-Range: bytes 10485760-20971519/20971520
+Content-Length: 10485760
+
+<remaining 10 MB binary payload>
+```
+
+Chunk terakhir menyelesaikan upload dan menampilkan metadata file, dalam amplop
+`files` yang sama seperti upload sekali kirim:
+
+```
+{
+  "files": [
+    {
+      "name": "large_dataset.bin",
+      "path": "workspace/data/large_dataset.bin",
+      "type": "FILE",
+      "size_bytes": "20971520",
+      "mime_type": "application/octet-stream"
+    }
+  ]
+}
+```
+
+Sesi yang dapat dilanjutkan juga berfungsi dengan `extract` dan `overwrite`. Tetapkan parameter kueri tersebut pada permintaan inisiasi, bukan pada setiap bagian.
+
+#### Perlindungan penimpaan
+
+Secara default, `overwrite` adalah `false`. Jika jalur tujuan sudah ada, permintaan akan menampilkan error `409 Conflict` dan tidak ada yang ditulis:
+
+```
+{
+  "error": {
+    "message": "Requested entity already exists",
+    "code": "aborted"
+  }
+}
+```
+
+Untuk mengganti file atau direktori yang ada, tetapkan `overwrite=true` (atau tambahkan
+`?overwrite=true` di REST). Dengan `extract=true`, pemeriksaan konflik berlaku untuk
+setiap file dalam arsip, sehingga permintaan akan gagal jika ada file target.
+
+### Download snapshot lengkap (tidak digunakan lagi)
+
+Untuk memigrasikan kode yang ada ke API file lingkungan:
+
+- **Python**: Ganti permintaan download file lama dengan:
+
+  ```
+  archive = client.environments.files.download(
+      environment="YOUR_ENVIRONMENT_ID",
+      path="workspace",
+  )
+  with open("snapshot.tar", "wb") as f:
+      f.write(archive)
+  ```
+- **JavaScript**: Ganti permintaan download file lama dengan:
+
+  ```
+  const bytes = await client.environments.files.download({
+      environment: "YOUR_ENVIRONMENT_ID",
+      path: "workspace",
+  });
+  fs.writeFileSync("snapshot.tar", Buffer.from(bytes));
+  ```
+- **REST**: Ganti `GET /v1beta/files/environment-$ENV_ID:download?alt=media` dengan:
+
+  ```
+  curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_ID/files?alt=media" \
+    -H "x-goog-api-key: $GEMINI_API_KEY" \
+    -o snapshot.tar
+  ```
+
+## Harga & referensi
+
+Setiap lingkungan berjalan dengan alokasi resource tetap:
+
+| Resource | Nilai |
 | --- | --- |
-| **CPU** | 4 núcleos |
-| **Memoria** | 16 GB |
+| **CPU** | 4 core |
+| **Memori** | 16 GB |
 
-El procesamiento del entorno (CPU, memoria, ejecución de zona de pruebas) **no se factura** durante el período de vista previa. Consulta
-[Precios](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419#pricing-for-agents) para
-conocer los costos de los tokens de agente.
+Komputasi lingkungan (CPU, memori, eksekusi sandbox) **tidak ditagih** selama
+periode pratinjau. Lihat
+[Harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id#pricing-for-agents) untuk mengetahui biaya token agen.
 
-## Limitaciones
+## Batasan
 
-- **Estado de la versión preliminar:** Los entornos y los agentes administrados están en versión preliminar. Las funciones y los esquemas pueden cambiar.
-- **Tamaño de la fuente intercalada:** Las fuentes intercaladas están limitadas a 1 MB por archivo y a 2 MB en total en todos los archivos.
-- **Tamaño de la fuente**: Los repositorios de Git están limitados a 500 MB y los repositorios de Cloud Storage a 2 GB.
-- **Inicio del entorno:** El aprovisionamiento de un entorno nuevo tarda hasta ~5 segundos. Los repositorios de fuentes grandes pueden aumentar este tiempo.
-- **Vencimiento del entorno:** Los entornos sin conexión inactivos se retienen durante 7 días antes de vencer con la limpieza automática del TTL. Si se pasa un ID de entorno vencido o no válido, se muestra un error `404 Not Found`.
-- **Compatibilidad con archivos:** Actualmente, el agente está restringido a la lectura de archivos de texto y de imagen. La compatibilidad con archivos binarios aún no está disponible.
-- **No se realiza el montaje desde la raíz:** No puedes establecer la raíz (`/`) como destino cuando agregas una fuente personalizada. Siempre debes especificar un subdirectorio.
+- **Status pratinjau:** Lingkungan dan agen terkelola dalam pratinjau. Fitur dan skema dapat berubah.
+- **Ukuran sumber inline:** Sumber inline dibatasi hingga 1 MB per file, dan total 2 MB di semua file.
+- **Ukuran sumber**: Repositori Git dibatasi hingga 500 MB dan repositori Cloud Storage hingga 2 GB.
+- **Startup lingkungan:** Penyediaan lingkungan baru membutuhkan waktu hingga ~5 detik. Repositori sumber yang besar dapat memperpanjang waktu ini.
+- **Masa berlaku lingkungan:** Lingkungan offline yang tidak aktif dipertahankan selama 7 hari sebelum masa berlakunya berakhir menggunakan pembersihan TTL otomatis. Meneruskan ID lingkungan yang sudah tidak berlaku atau tidak valid akan menampilkan error `404 Not Found`.
+- **Dukungan file:** Saat ini, agen hanya dapat membaca file teks dan gambar. Dukungan file biner belum tersedia.
+- **Tidak ada pemasangan dari root:** Anda tidak dapat menetapkan root (`/`) sebagai target saat menambahkan sumber kustom, Anda harus selalu menentukan subdirektori.
 
-## ¿Qué sigue?
+## Langkah berikutnya
 
-- [Descripción general de los agentes](https://ai.google.dev/gemini-api/docs/agents?hl=es-419): Obtén información sobre los conceptos básicos de los agentes administrados.
-- [Guía de inicio rápido](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=es-419): Comienza a compilar con conversaciones de varios turnos y transmisión.
-- [Agente antigravedad](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419): Explora las capacidades, las herramientas, la selección de modelos y los precios del agente predeterminado.
-- [Compila agentes personalizados](https://ai.google.dev/gemini-api/docs/custom-agents?hl=es-419): Define tus propios agentes con `AGENTS.md` y `SKILL.md`.
-- [Ganchos](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=es-419): Aplica barreras de seguridad y ejecuta validaciones de efectos secundarios dentro de la zona de pruebas.
+- [Ringkasan Agen](https://ai.google.dev/gemini-api/docs/agents?hl=id): Pelajari konsep inti agen terkelola.
+- [Panduan memulai](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=id): Mulai membangun dengan percakapan multi-turn dan streaming.
+- [Agen Antigravitasi](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=id): Jelajahi kemampuan, alat, pemilihan model, dan harga untuk agen default.
+- [Membangun Agen Kustom](https://ai.google.dev/gemini-api/docs/custom-agents?hl=id): Tentukan agen Anda sendiri menggunakan `AGENTS.md` dan `SKILL.md`.
+- [Hook](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=id): Menerapkan perlindungan keamanan dan menjalankan validasi efek samping di dalam sandbox.
 
-Enviar comentarios
+Kirim masukan
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Última actualización: 2026-09-11 (UTC)
+Terakhir diperbarui pada 2026-09-18 UTC.
 
-¿Quieres brindar más información?
+Ada masukan untuk kami?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-09-11 (UTC)"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-18 UTC."],[],[]]

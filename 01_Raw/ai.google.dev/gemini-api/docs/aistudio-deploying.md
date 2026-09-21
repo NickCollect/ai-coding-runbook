@@ -1,101 +1,112 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=de
-fetched_at: 2026-09-14T05:53:55.945835+00:00
-title: "\u00dcber Google\u00a0AI Studio bereitstellen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=ar
+fetched_at: 2026-09-21T05:46:57.200142+00:00
+title: "\u0627\u0644\u0646\u0634\u0631 \u0645\u0646 Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Feedback geben
+إرسال ملاحظات
 
-# Über Google AI Studio bereitstellen
+# النشر من Google AI Studio
 
-Mit Google AI Studio können Sie Ihre Full-Stack-Anwendungen direkt über den Build-Modus bereitstellen. So können Sie schnell von einem Prototyp zu einer verwalteten, skalierbaren Produktionsumgebung wechseln.
+يتيح لك Google AI Studio نشر تطبيقاتك الكاملة مباشرةً من "وضع الإنشاء". ويوفّر ذلك مسارًا سريعًا من النموذج الأوّلي إلى بيئة إنتاج مُدارة وقابلة للتوسّع.
 
-## Optionen der Bereitstellung
+## خيارات النشر
 
-Die Anforderungen für die Bereitstellung Ihrer Anwendung über den AI Studio Build-Modus hängen von der verwendeten Stufe ab:
+لنشر تطبيقك من "وضع الإنشاء" في AI Studio، تعتمد المتطلبات على المستوى الذي تستخدمه:
 
-- [**Google Cloud-Starterpaket**](https://docs.cloud.google.com/docs/starter-tier?hl=de): Damit können Sie bis zu zwei Full-Stack-Anwendungen veröffentlichen, ohne ein Google Cloud-Projekt oder ein Abrechnungskonto einzurichten.
-- **Standardbereitstellung**: Hierfür ist ein Google Cloud-Projekt erforderlich, das mit Ihrem AI Studio-Konto verknüpft ist und für das die Abrechnung aktiviert ist.
+- [**Google Cloud Starter Tier**](https://docs.cloud.google.com/docs/starter-tier?hl=ar):
+  يتيح لك نشر ما يصل إلى تطبيقَين كاملَين بدون إعداد مشروع Google Cloud أو حساب فوترة.
+- **النشر العادي**: يتطلّب مشروع Google Cloud مرتبطًا بحسابك على
+  AI Studio وتفعيل الفوترة في هذا المشروع.
 
-## Starter-Stufe
+## لمحة عن Starter Tier
 
-Der Google Cloud Starter Tier bietet einen einfachen Weg, Anwendungen direkt aus Google AI Studio in Google Cloud bereitzustellen, ohne eine vollständige Google Cloud-Umgebung oder ein Abrechnungskonto einrichten zu müssen.
+يوفّر Google Cloud Starter Tier مسارًا مبسطًا لنشر التطبيقات على Google Cloud مباشرةً من Google AI Studio بدون إعداد بيئة Google Cloud كاملة أو حساب فوترة.
 
-Bei jeder Google AI Studio-Bereitstellung wird ein entsprechender Dienst in Cloud Run erstellt. Für Dienste, die in Google AI Studio mit dem Starter-Abo bereitgestellt werden, gelten die folgenden Einschränkungen:
+ينشئ كل عملية نشر في Google AI Studio خدمة مقابلة في Cloud Run. بالنسبة إلى الخدمات التي يتم نشرها في Google AI Studio باستخدام Starter Tier، تسري القيود التالية:
 
-- Sie können bis zu zwei Dienste bereitstellen.
-- Ihre Dienste werden in einer [einzigen Cloud Run-Region](https://docs.cloud.google.com/run/docs/locations?hl=de) bereitgestellt.
+- يمكنك نشر ما يصل إلى خدمتَين.
+- [يتم نشر خدماتك في منطقة واحدة من Cloud Run.](https://docs.cloud.google.com/run/docs/locations?hl=ar)
 
-## Bereitstellungsschritte für die Starter-Stufe
+## خطوات نشر Starter Tier
 
-Nachdem Sie Ihre App im Build-Modus entworfen haben, können Sie sie mit dem Starter-Tarif bereitstellen:
+بعد تصميم تطبيقك في "وضع الإنشاء"، يمكنك نشره باستخدام Starter Tier:
 
-1. Klicken Sie rechts oben auf die Schaltfläche **Veröffentlichen**.
-2. Klicken Sie auf **Jetzt starten**.
-3. Klicken Sie auf **App veröffentlichen**.
+1. انقر على الزر **نشر** في أعلى يسار الصفحة.
+2. انقر على **البدء**.
+3. انقر على **نشر التطبيق**.
 
-Nach Abschluss der Bereitstellung stellt AI Studio eine Cloud Run-URL bereit, über die Sie auf Ihre Live-Anwendung zugreifen können.
+بعد اكتمال عملية النشر، يوفّر AI Studio عنوان URL لـ Cloud Run يمكنك من خلاله الوصول إلى تطبيقك المباشر.
 
-## Benutzerdefinierte URLs für AI Studio
+## عناوين URL المخصّصة لـ AI Studio
 
-Wenn Sie eine Anwendung über Google AI Studio veröffentlichen, können Sie unter `ai.studio` eine benutzerdefinierte, einprägsame Subdomain festlegen, z. B. `https://your-app-name.ai.studio`.
+عند نشر تطبيق من Google AI Studio، يمكنك ضبط نطاق فرعي مخصّص،
+لا يُنسى ضمن `ai.studio` (على سبيل المثال،
+`https://your-app-name.ai.studio`).
 
-Für Google AI Studio müssen Subdomains in allen Projekten global eindeutig sein. Sie werden nach dem Prinzip „First come, first served“ zugewiesen. Wenn ein anderer Name bereits in einem anderen Projekt verwendet wird, werden Sie in AI Studio aufgefordert, einen anderen Namen auszuwählen. Wenn Sie eine Anwendung aus dem Play Store entfernen oder löschen, wird die benutzerdefinierte URL freigegeben und kann von anderen Nutzern beansprucht werden.
+يتطلّب Google AI Studio أن تكون النطاقات الفرعية فريدة على مستوى العالم في جميع المشاريع، ويتم تخصيصها حسب أسبقية الطلب. إذا كان مشروع آخر يستخدم اسمًا، يطلب منك AI Studio اختيار اسم مختلف. إذا ألغيت نشر تطبيق أو حذفْته، يتم إطلاق عنوان URL المخصّص له ويصبح متاحًا للمستخدمين الآخرين للمطالبة به.
 
-### Benutzerdefinierte URL festlegen
+### ضبط عنوان URL مخصّص
 
-So legen Sie eine benutzerdefinierte URL für Ihre Anwendung fest oder aktualisieren sie:
+لضبط عنوان URL مخصّص لتطبيقك أو تعديله، اتّبِع الخطوات التالية:
 
-1. Öffnen Sie Ihre Anwendung in Google AI Studio im Modus **Build** (Erstellen).
-2. Klicken Sie rechts oben auf **Veröffentlichen**.
-3. Geben Sie in der Bereitstellungskonfiguration im Feld **Benutzerdefinierte URL** die gewünschte Subdomain ein oder übernehmen Sie die vorgeschlagene URL.
-4. Klicken Sie auf **App veröffentlichen**.
+1. افتح تطبيقك في Google AI Studio في **وضع الإنشاء**.
+2. انقر على **نشر** في أعلى يسار الصفحة.
+3. في إعدادات النشر، أدخِل النطاق الفرعي المفضّل في حقل **عنوان URL المخصّص** أو اقبل عنوان URL المقترَح.
+4. انقر على **نشر التطبيق**.
 
-Wenn Sie eine vorhandene benutzerdefinierte URL auf eine andere Anwendung übertragen möchten, müssen Sie zuerst die Anwendung, der diese benutzerdefinierte URL zugewiesen ist, aus dem Play Store entfernen oder die Veröffentlichung aufheben. Anschließend können Sie Ihre neue Anwendung mit der ausgewählten Subdomain veröffentlichen.
+لنقل عنوان URL مخصّص حالي إلى تطبيق مختلف، عليك أولاً إلغاء نشر التطبيق الذي تم تخصيص عنوان URL المخصّص له أو حذفه، ثم نشر تطبيقك الجديد باستخدام النطاق الفرعي الذي تم اختياره.
 
-### Marken- oder Urheberrechtsprobleme melden
+### الإبلاغ عن مشاكل العلامات التجارية أو حقوق الطبع والنشر
 
-Benutzerdefinierte Subdomains müssen den [Google-Nutzungsbedingungen](https://policies.google.com/terms?hl=de) entsprechen. Wenn Sie eine benutzerdefinierte URL sehen, die gegen das Markenrecht verstößt oder einen urheberrechtlich geschützten Namen ohne Erlaubnis verwendet, können Sie sie über die [Google-Fehlerbehebung für rechtliche Probleme](https://support.google.com/legal/troubleshooter/1114905?hl=de) melden.
+يجب أن تتوافق النطاقات الفرعية المخصّصة مع الـ
+[بنود خدمة Google](https://policies.google.com/terms?hl=ar). [إذا لاحظت عنوان URL مخصّصًا ينتهك علامة تجارية أو يستخدم اسمًا محميًا بحقوق الطبع والنشر بدون إذن، يمكنك الإبلاغ عنه باستخدام أداة حلّ المشاكل القانونية من Google.](https://support.google.com/legal/troubleshooter/1114905?hl=ar)
 
-## Standardmäßige Bereitstellung
+## النشر العادي
 
-Wenn sich Ihre Anwendungen weiterentwickeln, benötigen Sie möglicherweise Funktionen, die über den Einstiegstarif hinausgehen, z. B. höhere Kontingente, mehr Rechenressourcen oder andere Google Cloud-Produkte, die im Einstiegstarif nicht verfügbar sind. Wenn Sie diese Funktionen nutzen möchten, können Sie Ihr vollständig verwaltetes Projekt im Einstiegstarif in ein Standard-Google Cloud-Projekt umwandeln.
+مع تطوّر تطبيقاتك، قد تحتاج إلى إمكانات تتجاوز Starter Tier، مثل حصص أعلى أو موارد حوسبة أكبر أو منتجات Google Cloud أخرى غير متاحة في Starter Tier. للاستفادة من هذه الإمكانات، يمكنك تحويل مشروعك المُدار بالكامل في Starter Tier إلى مشروع Google Cloud عادي.
 
-So können Sie nahtlos skalieren, ohne Ihren Fortschritt zu verlieren. Folgen Sie der Anleitung zum [Erstellen eines Cloud-Rechnungskontos](https://docs.cloud.google.com/billing/docs/how-to/create-billing-account?hl=de#create-new-billing-account), akzeptieren Sie die standardmäßigen Google Cloud-Nutzungsbedingungen und [führen Sie ein Upgrade auf ein standardmäßiges Google Cloud-Projekt durch](https://docs.cloud.google.com/docs/starter-tier?hl=de#upgradee).
-Weitere Informationen finden Sie unter [Einrichtung für kostenpflichtige Konten](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=de#paid-setup).
+يضمن ذلك إمكانية التوسّع بسلاسة بدون فقدان التقدّم الذي أحرزته. اتّبِع الخطوات لـ
+[إنشاء حساب فوترة على Cloud](https://docs.cloud.google.com/billing/docs/how-to/create-billing-account?hl=ar#create-new-billing-account)، و
+قبول بنود خدمة Google Cloud العادية رسميًا، و
+[الترقية إلى مشروع Google Cloud عادي](https://docs.cloud.google.com/docs/starter-tier?hl=ar#upgradee).
+لمزيد من المعلومات، يُرجى الاطّلاع على مقالة
+[إعداد الحسابات المدفوعة](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=ar#paid-setup).
 
-Weitere Informationen zu Abrechnungsstufen finden Sie unter [Abrechnung](https://ai.google.dev/gemini-api/docs/billing?hl=de).
+لمزيد من المعلومات عن مستويات الفوترة، يُرجى الاطّلاع على مقالة [الفوترة](https://ai.google.dev/gemini-api/docs/billing?hl=ar).
 
-## Anwendung löschen
+## حذف تطبيقك
 
-Wenn Sie Ihre App nicht mehr benötigen, können Sie sie in Google AI Studio löschen. Gehen Sie dazu so vor:
+إذا لم تعُد بحاجة إلى تطبيقك، يمكنك حذفه في Google AI Studio باتّباع هذه التعليمات:
 
-1. Rufen Sie in Google AI Studio die Seite [Apps](https://aistudio.google.com/app/apps?hl=de) auf.
-2. Wählen Sie im Menü auf der linken Seite **Apps** aus.
-3. Bewegen Sie den Mauszeiger auf die App, die Sie löschen möchten.
-4. Klicken Sie rechts neben der Zeile auf das Papierkorbsymbol, um die App zu löschen.
+1. في Google AI Studio، انتقِل إلى صفحة "
+   [التطبيقات](https://aistudio.google.com/app/apps?hl=ar)".
+2. في القائمة اليمنى، انقر على **التطبيقات**.
+3. مرِّر المؤشر فوق التطبيق الذي تريد حذفه.
+4. انقر على رمز سلة المهملات على الجانب الأيسر من الصف لإزالة التطبيق.
 
-## Nächste Schritte
+## الخطوات التالية
 
-- [Weitere Informationen zur Google Cloud Starter-Stufe](https://docs.cloud.google.com/docs/starter-tier?hl=de)
-- [Weitere Informationen zur Abrechnung](https://ai.google.dev/gemini-api/docs/billing?hl=de)
+- مزيد من المعلومات عن
+  [Google Cloud Starter Tier](https://docs.cloud.google.com/docs/starter-tier?hl=ar).
+- مزيد من المعلومات عن [الفوترة](https://ai.google.dev/gemini-api/docs/billing?hl=ar) في Gemini API
 
-Feedback geben
+إرسال ملاحظات
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Zuletzt aktualisiert: 2026-07-10 (UTC).
+تاريخ التعديل الأخير: 2026-07-10 (حسب التوقيت العالمي المتفَّق عليه)
 
-Haben Sie Feedback für uns?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-10 (UTC)."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-10 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

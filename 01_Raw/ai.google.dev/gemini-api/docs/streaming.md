@@ -1,24 +1,24 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/streaming?hl=ar
-fetched_at: 2026-09-14T05:52:43.323430+00:00
-title: "\u062a\u0641\u0627\u0639\u0644\u0627\u062a \u0627\u0644\u0628\u062b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/streaming?hl=he
+fetched_at: 2026-09-21T05:53:15.140986+00:00
+title: "\u05d0\u05d9\u05e0\u05d8\u05e8\u05d0\u05e7\u05e6\u05d9\u05d5\u05ea \u05e2\u05dd \u05e1\u05d8\u05e8\u05d9\u05de\u05d9\u05e0\u05d2 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-إرسال ملاحظات
+שליחת משוב
 
-# تفاعلات البث
+# אינטראקציות עם סטרימינג
 
-عند إنشاء Interaction، يمكنك ضبط `stream: true` لبث الرد بشكل تدريجي باستخدام [الأحداث التي يرسلها الخادم](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) (SSE).
+כשיוצרים אינטראקציה, אפשר להגדיר את `stream: true` להזרמה מצטברת של התגובה באמצעות [אירועים שנשלחים מהשרת](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) (SSE).
 
 ### Python
 
@@ -28,7 +28,7 @@ from google import genai
 client = genai.Client()
 
 stream = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="Count from 1 to 25.",
     stream=True,
 )
@@ -46,7 +46,7 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const stream = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: "Count from 1 to 25.",
     stream: true,
 });
@@ -59,6 +59,47 @@ for await (const event of stream) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.InteractionSSEEvent;
+import com.google.genai.gaos.models.interactions.InteractionSSEStreamEvent;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.StepDelta;
+import com.google.genai.gaos.models.interactions.StepDeltaData;
+import com.google.genai.gaos.models.interactions.TextDelta;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.operations.CreateInteractionResponse;
+import com.google.genai.gaos.utils.EventStream;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("Count from 1 to 25."))
+        .stream(true)
+        .build();
+
+CreateInteractionResponse response =
+    client.interactions.create(CreateInteractionRequestBody.of(params));
+
+try (EventStream<InteractionSSEStreamEvent> events = response.events()) {
+  for (InteractionSSEStreamEvent streamEvent : events) {
+    InteractionSSEEvent event = streamEvent.data().orElse(null);
+    if (event instanceof StepDelta stepDelta) {
+      StepDeltaData data = stepDelta.delta().orElse(null);
+      if (data instanceof TextDelta textDelta) {
+        textDelta.text().ifPresent(System.out::print);
+      }
+    }
+  }
+}
+```
+
 ### REST
 
 ```
@@ -67,7 +108,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "Content-Type: application/json" \
   --no-buffer \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": "Count from 1 to 25.",
     "stream": true
   }'
@@ -75,7 +116,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 ```
 event: interaction.created
-data: {"interaction":{"id":"v1_...","status":"in_progress","object":"interaction","model":"gemini-3.6-flash"},"event_type":"interaction.created"}
+data: {"interaction":{"id":"v1_...","status":"in_progress","object":"interaction","model":"gemini-3.8-flash"},"event_type":"interaction.created"}
 
 event: interaction.status_update
 data: {"interaction_id":"v1_...","status":"in_progress","event_type":"interaction.status_update"}
@@ -104,39 +145,39 @@ event: step.stop
 data: {"index":1,"event_type":"step.stop"}
 
 event: interaction.completed
-data: {"interaction":{"id":"v1_...","status":"completed","usage":{"total_tokens":346,"total_input_tokens":11,"input_tokens_by_modality":[{"modality":"text","tokens":11}],"total_cached_tokens":0,"total_output_tokens":90,"total_tool_use_tokens":0,"total_thought_tokens":245},"created":"2026-05-12T18:44:51Z","updated":"2026-05-12T18:44:51Z","service_tier":"standard","object":"interaction","model":"gemini-3.6-flash"},"event_type":"interaction.completed"}
+data: {"interaction":{"id":"v1_...","status":"completed","usage":{"total_tokens":346,"total_input_tokens":11,"input_tokens_by_modality":[{"modality":"text","tokens":11}],"total_cached_tokens":0,"total_output_tokens":90,"total_tool_use_tokens":0,"total_thought_tokens":245},"created":"2026-05-12T18:44:51Z","updated":"2026-05-12T18:44:51Z","service_tier":"standard","object":"interaction","model":"gemini-3.8-flash"},"event_type":"interaction.completed"}
 
 event: done
 data: [DONE]
 ```
 
-## أنواع الأحداث
+## סוגי אירועים
 
-يتضمّن كل حدث يتم إرساله من الخادم `event_type` باسم وبيانات JSON مرتبطة. تستخدم واجهة برمجة التطبيقات Interactions API نموذج بث متماثلًا يتدفّق فيه كل المحتوى، أي النصوص واستدعاءات الأدوات والتفكير، من خلال حدث متسق **قائم على الخطوات**.
+כל אירוע שנשלח מהשרת כולל שם `event_type` ונתוני JSON משויכים. ב-Interactions API נעשה שימוש במודל סימטרי של סטרימינג, שבו כל התוכן – טקסט, קריאות לכלים, חשיבה – עובר דרך אירוע **מבוסס-שלבים** עקבי.
 
-يتّبع كل مصدر بيانات تدفّق الأحداث التالي:
+כל עדכון תוכן פועל לפי רצף האירועים הבא:
 
-1. ‫`interaction.created`: تم إنشاء التفاعل ويتضمّن بيانات وصفية (المعرّف والنموذج والحالة).
-2. سلسلة من **الخطوات**، تتألف كل خطوة مما يلي:
-   - حدث `step.start`، يشير إلى نوع الخطوة (مثل `model_output` أو `thought` أو `function_call`)
-   - حدث واحد أو أكثر من أحداث `step.delta` مع بيانات إضافية لتلك الخطوة
-   - حدث `step.stop` يشير إلى أنّ الخطوة مكتملة.
-3. `interaction.completed` حدث يتضمّن إحصاءات `usage` نهائية
+1. ‫`interaction.created`: האינטראקציה נוצרת וכוללת מטא-נתונים (מזהה, מודל, סטטוס).
+2. סדרה של **שלבים**, שכל אחד מהם מורכב מ:
+   - אירוע `step.start` שמציין את סוג השלב (למשל, `model_output`,‏ `thought`,‏ `function_call`).
+   - אירוע `step.delta` אחד או יותר עם נתונים מצטברים של השלב הזה.
+   - אירוע `step.stop` שמסמן את השלב כהושלם.
+3. אירוע `interaction.completed` עם נתוני `usage` סופיים.
 
-عند ضبط `stream: false`، تعرض واجهة برمجة التطبيقات عنصر `interaction` واحدًا مع مصفوفة `steps`. كل عنصر في `steps` هو النسخة المجمّعة بالكامل من دورة `step.start` → `step.delta` → `step.stop`.
+כשמגדירים את הערך `stream: false`, ה-API מחזיר אובייקט `interaction` יחיד עם מערך `steps`. כל אלמנט ב-`steps` הוא הגרסה המורכבת במלואה של מחזור אחד של `step.start` → `step.delta`(s) → `step.stop`.
 
 ### `interaction.created`
 
-يتم إرسال هذا الحدث عند إنشاء التفاعل لأول مرة. يحتوي على رقم تعريف التفاعل والنموذج والحالة الأولية.
+האירוע הזה נשלח כשיוצרים את האינטראקציה בפעם הראשונה. מכיל את מזהה האינטראקציה, המודל והסטטוס הראשוני.
 
 ```
 event: interaction.created
-data: {"interaction": {"id": "...", "model": "gemini-3.6-flash", "status": "in_progress", "object": "interaction"}, "event_type": "interaction.created"}
+data: {"interaction": {"id": "...", "model": "gemini-3.8-flash", "status": "in_progress", "object": "interaction"}, "event_type": "interaction.created"}
 ```
 
 ### `interaction.status_update`
 
-تشير إلى انتقال الحالة على مستوى التفاعل. قد تظهر بين الخطوات.
+האות הזה מציין מעבר סטטוס ברמת האינטראקציה. יכול להיות שיופיע בין השלבים.
 
 ```
 event: interaction.status_update
@@ -145,23 +186,23 @@ data: {"interaction_id": "...", "status": "in_progress", "event_type": "interact
 
 ### `step.start`
 
-تحدّد هذه السمة بداية خطوة جديدة. يتضمّن الخطوتَين `type` و`index`. يحدّد نوع الخطوة أنواع البيانات التفاضلية المتوقّعة وكيفية ظهور الخطوة في استجابة غير متدفّقة:
+מציין את תחילתו של שלב חדש. מכיל את השלבים `type` ו-`index`. סוג השלב קובע אילו סוגי דלתא צפויים ואיך השלב יופיע בתגובה שלא מועברת בסטרימינג:
 
-| نوع الخطوة | أنواع دلتا المتوقّعة | الوصف |
+| סוג השלב | סוגי הדלתא הצפויים | תיאור |
 | --- | --- | --- |
-| `model_output` | ‫`text`، `image`، `audio` | محتوى الردّ النهائي للنموذج. |
-| `thought` | ‫`thought_signature`، `thought_summary` | الاستدلال بسلسلة الأفكار لا يظهر `summary` إلا عندما يكون `thinking_summaries` مفعَّلاً. |
-| `function_call` | `arguments_delta` | طلب من العميل تنفيذ دالة تضبط هذه السمة حالة التفاعل على `requires_action`. |
-| الأدوات من جهة الخادم | يختلف حسب الأداة | الأدوات التي يتم تنفيذها من خلال واجهة برمجة التطبيقات (مثل `google_search_call` و`google_search_result` و`code_execution_call` و`code_execution_result`) |
+| `model_output` | `text`,‏ `image`,‏ `audio` | תוכן התשובה הסופית של המודל. |
+| `thought` | `thought_signature`, `thought_summary` | נימוק לפי שרשרת מחשבות. האפשרות `summary` מופיעה רק אם האפשרות `thinking_summaries` מופעלת. |
+| `function_call` | `arguments_delta` | בקשה מהלקוח להפעיל פונקציה. הסטטוס של האינטראקציה מוגדר ל`requires_action`. |
+| כלים בצד השרת | משתנה בהתאם לכלי | כלים שמופעלים על ידי ה-API (לדוגמה, `google_search_call`, ‏ `google_search_result`, ‏ `code_execution_call`, ‏ `code_execution_result`). |
 
-يمكنك الاطّلاع على [مرجع واجهة برمجة التطبيقات الخاصة بالتفاعلات](https://ai.google.dev/api/interactions-api?hl=ar) للحصول على القائمة الكاملة.
+הרשימה המלאה מופיעה ב[הפניית API של אינטראקציות](https://ai.google.dev/api/interactions-api?hl=he).
 
 ```
 event: step.start
 data: {"index": 0, "step": {"type": "model_output"}, "event_type": "step.start"}
 ```
 
-بالنسبة إلى استدعاءات الدوال، تتضمّن الخطوة اسم الدالة ومعرّفها ووسيطات فارغة `{}`.
+במקרה של קריאות לפונקציות, השלב כולל את שם הפונקציה, המזהה שלה וארגומנטים ריקים `{}`.
 
 ```
 event: step.start
@@ -170,11 +211,11 @@ data: {"index": 0, "step": {"type": "function_call", "id":"un6k8t18", "name": "g
 
 ### `step.delta`
 
-البيانات التزايدية للخطوة الحالية يحتوي الكائن `delta` على حقل `type` يحدّد شكله.
+נתונים מצטברים של השלב הנוכחי. האובייקט `delta` מכיל שדה `type` שקובע את הצורה שלו.
 
-**أمثلة:**
+**לדוגמה:**
 
-**`text`:** رمز نصي متزايد من خطوة `model_output`:
+‫**`text`:** אסימון טקסט מצטבר משלב `model_output`:
 
 ```
 event: step.delta
@@ -184,41 +225,51 @@ event: step.delta
 data: {"index": 0, "delta": {"type": "text", "text": ", and I live in Germany." }, "event_type": "step.delta"}
 ```
 
-**`image`:** بيانات الصورة بترميز Base64 من خطوة `model_output`:
+‫**`image`:** נתוני תמונה בקידוד Base64 משלב `model_output`:
 
 ```
 event: step.delta
 data: {"index": 0, "delta": {"type": "image", "mime_type": "image/jpeg", "data": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCg..."}, "event_type": "step.delta"}
 ```
 
-**`thought_summary`:** ملخّص التفكير من الخطوة `thought`:
+‫**`thought_summary`:** סיכום של תהליך החשיבה משלב `thought`:
 
 ```
 event: step.delta
 data: {"index": 0, "delta": {"type": "thought_summary", "content": {"type": "text", "text": "I need to find the GCD..."}}, "event_type": "step.delta"}
 ```
 
-**`arguments_delta`:** سلسلة JSON (جزئية) لوسيطات استدعاء الدالة. يجب أن يتم تجميعها على مستوى التغييرات:
+‫**`arguments_delta`:** מחרוזת JSON (חלקית) של ארגומנטים לקריאה לפונקציה. צריך לצבור את הנקודות הנדרשות בשינויים:
 
 ```
 event: step.delta
 data: {"index": 0, "delta": {"type": "arguments_delta", "arguments": "{\"location\": \"San Francisco, CA\"}"}, "event_type": "step.delta"}
 ```
 
-في ما يلي بعض أنواع التغييرات الأكثر شيوعًا. للاطّلاع على القائمة الكاملة بجميع أنواع التغييرات، يُرجى الرجوع إلى [مرجع Interactions API](https://ai.google.dev/api/interactions-api?hl=ar).
+אלה כמה מהסוגים הנפוצים ביותר של דלתא. רשימה מלאה של כל סוגי הדלתא זמינה במאמר [Interactions API reference](https://ai.google.dev/api/interactions-api?hl=he).
 
 ### `step.stop`
 
-تحدّد هذه السمة نهاية الخطوة. يحتوي على الخطوة `index`.
+סימון סוף השלב. הוא מכיל את השלב `index`.
 
 ```
 event: step.stop
 data: {"index": 0, "event_type": "step.stop"}
 ```
 
+כשמשתמשים ב-[Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=he), יכול להיות שאירוע `step.stop` יכלול גם נתוני שימוש:
+
+- ‫**`usage`**: השימוש המצטבר (הסכום הכולל) מאז תחילת האינטראקציה.
+- ‫**`step_usage`**: השימוש בשלב הספציפי הזה.
+
+```
+event: step.stop
+data: {"index": 2, "event_type": "step.stop", "usage": {"total_tokens": 4650, "total_input_tokens": 3577, "total_output_tokens": 305, "total_cached_tokens": 0}, "step_usage": {"total_tokens": 303, "total_input_tokens": 31, "total_output_tokens": 3, "total_cached_tokens": 0}}
+```
+
 ### `interaction.completed`
 
-يتم إرسال هذا الحدث عند انتهاء التفاعل. يحتوي على عنصر التفاعل النهائي مع إحصاءات `usage`. في الوضع غير المتدفّق، يكون هذا هو عنصر الاستجابة ذو المستوى الأعلى نفسه. لا يتضمّن `steps` في الردّ.
+האירוע נשלח בסיום האינטראקציה. מכיל את אובייקט האינטראקציה הסופי עם נתוני `usage`. במצב לא סטרימינג, זהו אובייקט התגובה ברמה העליונה. לא כולל את `steps` בתשובה.
 
 ```
 event: interaction.completed
@@ -227,25 +278,24 @@ data: {"interaction": {"id": "v1_abc123", "status": "completed", "usage": {"tota
 
 ### `error`
 
-يتم إرسال هذا الحدث عند حدوث خطأ أثناء التفاعل. يحتوي على عنصر خطأ يتضمّن رسالة ورمزًا.
+האירוע נשלח כשמתרחשת שגיאה במהלך האינטראקציה. מכיל אובייקט שגיאה עם הודעה וקוד.
 
 ```
 event: error
 data: {"error":{"message":"Deadline expired before operation could complete.","code":"gateway_timeout"},"event_type":"error"}
 ```
 
-## البث المباشر باستخدام الأدوات
+## סטרימינג באמצעות כלים
 
-تتيح واجهة Interactions API إمكانية البث باستخدام أدوات من جهة العميل (مثل استدعاء الدوال) وأدوات من جهة الخادم (مثل &quot;بحث Google&quot; و&quot;تنفيذ الرموز&quot; وما إلى ذلك) في طلب واحد. أثناء البث، تظهر استدعاءات الأدوات كخطوات مكتوبة في بث الأحداث. بالنسبة إلى استدعاءات الدوال، يقدّم الحدث `step.start` اسم الدالة، بينما تبث أحداث `step.delta` الوسيطات كسلاسل JSON (`arguments_delta`). يجب تجميع هذه التغييرات للحصول على الوسيطات الكاملة.
-يتم تنفيذ الأدوات من جهة الخادم، مثل &quot;بحث Google&quot;، تلقائيًا من خلال واجهة برمجة التطبيقات، ما يؤدي إلى إنشاء الخطوتَين `google_search_call` و`google_search_result`.
+ממשק Interactions API תומך בסטרימינג גם עם כלים בצד הלקוח (הפעלת פונקציות) וגם עם כלים בצד השרת (חיפוש Google, הפעלת קוד וכו') בבקשה אחת. במהלך הסטרימינג, הפעלות של כלים מופיעות כשלבים מוקלדים בסטרימינג של האירועים. במקרה של קריאות לפונקציות, האירוע `step.start` מעביר את שם הפונקציה, והאירועים `step.delta` מעבירים את הארגומנטים כמחרוזות JSON‏ (`arguments_delta`). כדי לקבל את הארגומנטים המלאים, צריך לצבור את הדלתאות האלה.
+כלים בצד השרת כמו חיפוש Google מופעלים אוטומטית על ידי ה-API, וכך נוצרים שלבים `google_search_call` ו-`google_search_result`.
 
-### البث المباشر باستخدام ميزة "استدعاء الدالة"
+### הזרמה עם בקשה להפעלת פונקציה
 
-لإجراء عملية استدعاء الدوال باستخدام البث، يجب أن يتعامل العميل مع محادثة متعدّدة الأدوار:
+כדי לבצע קריאה להפעלת פונקציות עם סטרימינג, הלקוח צריך לנהל שיחה רב-שלבית:
 
-1. **الجولة 1 (طلب الدالة):** استدعِ الدالة `interactions.create` مع `stream: true`
-   و`tools` الذي حدّدته. ستبث واجهة برمجة التطبيقات خطوة `function_call`. يجب تجميع سلاسل JSON الخاصة بالوسيطة المتزايدة (`arguments_delta`) من أحداث `step.delta` إلى أن يكتمل التفاعل بالحالة `requires_action`.
-2. **الجولة 2 (إرسال النتيجة):** اتّصِل بوظيفة `interactions.create` مرة أخرى، مع تمرير `previous_interaction_id` (مطابقة معرّف التفاعل الأول) وإرسال حزمة `function_result` ضمن مصفوفة `input`. يؤدي ذلك إلى استئناف البث، ما يسمح للنموذج بإنشاء الرد النهائي.
+1. **תור 1 (בקשת פונקציה):** קוראים לפונקציה `interactions.create` עם `stream: true` והפונקציה `tools` שהגדרתם. ה-API ישדר שלב `function_call`. צריך לצבור את מחרוזות ה-JSON של הארגומנטים המצטברים (`arguments_delta`) מאירועי `step.delta` עד שהאינטראקציה מסתיימת עם הסטטוס `requires_action`.
+2. **תור 2 (שליחת התוצאה):** קוראים שוב לפונקציה `interactions.create`, מעבירים את `previous_interaction_id` (שמתאים למזהה של האינטראקציה הראשונה) ושולחים בלוק `function_result` במערך `input`. הפעולה הזו מחדשת את הסטרימינג, ומאפשרת למודל ליצור את התשובה הסופית שלו.
 
 ### Python
 
@@ -272,7 +322,7 @@ weather_tool = {
 
 # Turn 1: Request function call
 stream = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     tools=[weather_tool],
     input="What is the weather in Paris right now?",
     stream=True,
@@ -303,7 +353,7 @@ if func_call_id:
     }
 
     stream2 = client.interactions.create(
-        model="gemini-3.6-flash",
+        model="gemini-3.8-flash",
         previous_interaction_id=first_interaction_id,
         input=[{
             "type": "function_result",
@@ -345,7 +395,7 @@ const weatherTool = {
 
 // Turn 1: Request function call
 const stream = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     tools: [weatherTool],
     input: "What is the weather in Paris right now?",
     stream: true,
@@ -379,7 +429,7 @@ if (funcCallId && firstInteractionId && funcCallName) {
     };
 
     const stream2 = await client.interactions.create({
-        model: "gemini-3.6-flash",
+        model: "gemini-3.8-flash",
         previous_interaction_id: firstInteractionId,
         input: [{
             type: "function_result",
@@ -400,9 +450,133 @@ if (funcCallId && firstInteractionId && funcCallName) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.ArgumentsDelta;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Function;
+import com.google.genai.gaos.models.interactions.FunctionCallStep;
+import com.google.genai.gaos.models.interactions.FunctionResultStep;
+import com.google.genai.gaos.models.interactions.FunctionResultStepResultUnion;
+import com.google.genai.gaos.models.interactions.InteractionCreatedEvent;
+import com.google.genai.gaos.models.interactions.InteractionSSEEvent;
+import com.google.genai.gaos.models.interactions.InteractionSSEStreamEvent;
+import com.google.genai.gaos.models.interactions.InteractionSseEventInteraction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.StepDelta;
+import com.google.genai.gaos.models.interactions.StepDeltaData;
+import com.google.genai.gaos.models.interactions.StepStart;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.interactions.TextDelta;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.operations.CreateInteractionResponse;
+import com.google.genai.gaos.utils.EventStream;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+Client client = new Client();
+
+Map<String, Object> locationProp = new HashMap<>();
+locationProp.put("type", "string");
+locationProp.put("description", "The city and state, e.g. San Francisco, CA");
+
+Map<String, Object> properties = new HashMap<>();
+properties.put("location", locationProp);
+
+Map<String, Object> parameters = new HashMap<>();
+parameters.put("type", "object");
+parameters.put("properties", properties);
+parameters.put("required", Arrays.asList("location"));
+
+Function weatherTool =
+    Function.builder()
+        .name("get_weather")
+        .description("Get the current weather in a given location")
+        .parameters(parameters)
+        .build();
+
+// Turn 1: Request function call
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .tools(Arrays.asList(weatherTool))
+        .input(InteractionsInput.of("What is the weather in Paris right now?"))
+        .stream(true)
+        .build();
+
+CreateInteractionResponse response =
+    client.interactions.create(CreateInteractionRequestBody.of(params));
+
+String firstInteractionId = null;
+String funcCallId = null;
+String funcCallName = null;
+StringBuilder funcArgsAccumulated = new StringBuilder();
+
+try (EventStream<InteractionSSEStreamEvent> stream = response.events()) {
+  for (InteractionSSEStreamEvent streamEvent : stream) {
+    InteractionSSEEvent event = streamEvent.data().orElse(null);
+    if (event instanceof InteractionCreatedEvent createdEvent) {
+      firstInteractionId =
+          createdEvent.interaction().flatMap(InteractionSseEventInteraction::id).orElse(null);
+    } else if (event instanceof StepStart stepStart) {
+      Step step = stepStart.step().orElse(null);
+      if (step instanceof FunctionCallStep fcStep) {
+        funcCallId = fcStep.id().orElse(null);
+        funcCallName = fcStep.name().orElse(null);
+      }
+    } else if (event instanceof StepDelta stepDelta) {
+      StepDeltaData delta = stepDelta.delta().orElse(null);
+      if (delta instanceof ArgumentsDelta argsDelta) {
+        funcArgsAccumulated.append(argsDelta.arguments().orElse(""));
+      }
+    }
+  }
+}
+
+// Turn 2: Execute tool and send the result back to resume stream
+if (funcCallId != null && firstInteractionId != null && funcCallName != null) {
+  FunctionResultStep resultStep =
+      FunctionResultStep.builder()
+          .name(funcCallName)
+          .callId(funcCallId)
+          .result(
+              FunctionResultStepResultUnion.of(
+                  Arrays.asList(TextContent.builder().text("{\"weather\": \"Sunny and 22°C\"}").build())))
+          .build();
+
+  CreateModelInteraction params2 =
+      CreateModelInteraction.builder()
+          .model(Model.of("gemini-3.8-flash"))
+          .previousInteractionId(firstInteractionId)
+          .input(InteractionsInput.ofStep(Arrays.asList(resultStep)))
+          .stream(true)
+          .build();
+
+  CreateInteractionResponse response2 =
+      client.interactions.create(CreateInteractionRequestBody.of(params2));
+
+  try (EventStream<InteractionSSEStreamEvent> stream2 = response2.events()) {
+    for (InteractionSSEStreamEvent streamEvent : stream2) {
+      InteractionSSEEvent event = streamEvent.data().orElse(null);
+      if (event instanceof StepDelta stepDelta) {
+        StepDeltaData delta = stepDelta.delta().orElse(null);
+        if (delta instanceof TextDelta textDelta) {
+          textDelta.text().ifPresent(System.out::print);
+        }
+      }
+    }
+  }
+}
+```
+
 ### REST
 
-**الجولة 1:** طلب استدعاء الدالة
+**תור 1:** בקשה להפעלת פונקציה
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -410,7 +584,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "Content-Type: application/json" \
   --no-buffer \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": "What is the weather in Paris right now?",
     "stream": true,
     "tools": [
@@ -433,7 +607,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**الجولة 2:** أرسِل نتيجة الدالة باستخدام `previous_interaction_id` و`call_id` من الجولة 1
+**תור 2:** שליחת התוצאה של הפונקציה באמצעות `previous_interaction_id` ו-`call_id` מתור 1
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -441,7 +615,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "Content-Type: application/json" \
   --no-buffer \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "previous_interaction_id": "v1_ChdGUVFJYXBXVUdLVEF4TjhQ...",
     "stream": true,
     "input": [
@@ -462,9 +636,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### البث باستخدام أدوات متعددة
+### סטרימינג באמצעות כמה כלים
 
-يستخدم المثال التالي كلاً من أداة `function` و`google_search` في طلب واحد:
+בדוגמה הבאה נעשה שימוש גם בכלי `function` וגם ב-`google_search` בבקשה אחת:
 
 ### Python
 
@@ -493,7 +667,7 @@ tools = [
 ]
 
 stream = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     tools=tools,
     input="Search what is the largest mountain in Europe and what the weather is there right now?",
     stream=True,
@@ -549,7 +723,7 @@ const tools = [
 ];
 
 const stream = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     tools: tools,
     input: "Search what is the largest mountain in Europe and what the weather is there right now?",
     stream: true,
@@ -583,6 +757,121 @@ for await (const event of stream) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.ArgumentsDelta;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Function;
+import com.google.genai.gaos.models.interactions.FunctionCallStep;
+import com.google.genai.gaos.models.interactions.GoogleSearch;
+import com.google.genai.gaos.models.interactions.GoogleSearchCallDelta;
+import com.google.genai.gaos.models.interactions.GoogleSearchCallStep;
+import com.google.genai.gaos.models.interactions.GoogleSearchResultStep;
+import com.google.genai.gaos.models.interactions.InteractionCompletedEvent;
+import com.google.genai.gaos.models.interactions.InteractionSSEEvent;
+import com.google.genai.gaos.models.interactions.InteractionSSEStreamEvent;
+import com.google.genai.gaos.models.interactions.InteractionSseEventInteractionStatus;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.StepDelta;
+import com.google.genai.gaos.models.interactions.StepDeltaData;
+import com.google.genai.gaos.models.interactions.StepStart;
+import com.google.genai.gaos.models.interactions.TextDelta;
+import com.google.genai.gaos.models.interactions.Tool;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.operations.CreateInteractionResponse;
+import com.google.genai.gaos.utils.EventStream;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+Client client = new Client();
+
+Map<String, Object> locationProp = new HashMap<>();
+locationProp.put("type", "string");
+locationProp.put("description", "The city and state, e.g. San Francisco, CA");
+
+Map<String, Object> properties = new HashMap<>();
+properties.put("location", locationProp);
+
+Map<String, Object> parameters = new HashMap<>();
+parameters.put("type", "object");
+parameters.put("properties", properties);
+parameters.put("required", Arrays.asList("location"));
+
+List<Tool> tools =
+    Arrays.asList(
+        new GoogleSearch(),
+        Function.builder()
+            .name("get_weather")
+            .description("Get the current weather in a given location")
+            .parameters(parameters)
+            .build());
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .tools(tools)
+        .input(
+            InteractionsInput.of(
+                "Search what is the largest mountain in Europe and what the weather is there right now?"))
+        .stream(true)
+        .build();
+
+CreateInteractionResponse response =
+    client.interactions.create(CreateInteractionRequestBody.of(params));
+
+try (EventStream<InteractionSSEStreamEvent> stream = response.events()) {
+  for (InteractionSSEStreamEvent streamEvent : stream) {
+    InteractionSSEEvent event = streamEvent.data().orElse(null);
+    if (event instanceof StepStart stepStart) {
+      Step step = stepStart.step().orElse(null);
+      if (step != null) {
+        System.out.printf("%n--- Step %d: %s ---%n", stepStart.index().orElse(0), step.type());
+        if (step instanceof GoogleSearchCallStep searchCall) {
+          System.out.println("  Search ID: " + searchCall.id().orElse(""));
+        } else if (step instanceof GoogleSearchResultStep searchResult) {
+          System.out.println("  Result for: " + searchResult.callId().orElse(""));
+        } else if (step instanceof FunctionCallStep fcStep) {
+          System.out.printf(
+              "  Function: %s(%s)%n",
+              fcStep.name().orElse(""), fcStep.arguments().orElse(Collections.emptyMap()));
+        }
+      }
+    } else if (event instanceof StepDelta stepDelta) {
+      StepDeltaData delta = stepDelta.delta().orElse(null);
+      if (delta instanceof TextDelta textDelta) {
+        textDelta.text().ifPresent(System.out::print);
+      } else if (delta instanceof GoogleSearchCallDelta searchDelta) {
+        System.out.println("  Queries: " + searchDelta.arguments().orElse(null));
+      } else if (delta instanceof ArgumentsDelta argsDelta) {
+        System.out.print("  Args chunk: " + argsDelta.arguments().orElse(""));
+      }
+    } else if (event instanceof InteractionCompletedEvent completedEvent) {
+      completedEvent
+          .interaction()
+          .ifPresent(
+              interaction -> {
+                String status =
+                    interaction
+                        .status()
+                        .map(InteractionSseEventInteractionStatus::value)
+                        .orElse("");
+                System.out.println("\n\nStatus: " + status);
+                if ("requires_action".equals(status)) {
+                  System.out.println("Action required: provide function call results to continue.");
+                }
+              });
+    }
+  }
+}
+```
+
 ### REST
 
 ```
@@ -591,7 +880,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "Content-Type: application/json" \
   --no-buffer \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": "Search what is the largest mountain in Europe and what the weather is there right now?",
     "stream": true,
     "tools": [
@@ -617,7 +906,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 ```
 event: interaction.created
-data: {"interaction":{"id":"v1_...","status":"in_progress","object":"interaction","model":"gemini-3.6-flash"},"event_type":"interaction.created"}
+data: {"interaction":{"id":"v1_...","status":"in_progress","object":"interaction","model":"gemini-3.8-flash"},"event_type":"interaction.created"}
 
 event: interaction.status_update
 data: {"interaction_id":"v1_...","status":"in_progress","event_type":"interaction.status_update"}
@@ -659,15 +948,15 @@ event: step.stop
 data: {"index":3,"event_type":"step.stop"}
 
 event: interaction.completed
-data: {"interaction":{"id":"v1_...","status":"requires_action","usage":{"total_tokens":299,"total_input_tokens":138,"input_tokens_by_modality":[{"modality":"text","tokens":138}],"total_cached_tokens":0,"total_output_tokens":20,"total_tool_use_tokens":0,"total_thought_tokens":141},"created":"2026-05-12T17:24:26Z","updated":"2026-05-12T17:24:26Z","service_tier":"standard","object":"interaction","model":"gemini-3.6-flash"},"event_type":"interaction.completed"}
+data: {"interaction":{"id":"v1_...","status":"requires_action","usage":{"total_tokens":299,"total_input_tokens":138,"input_tokens_by_modality":[{"modality":"text","tokens":138}],"total_cached_tokens":0,"total_output_tokens":20,"total_tool_use_tokens":0,"total_thought_tokens":141},"created":"2026-05-12T17:24:26Z","updated":"2026-05-12T17:24:26Z","service_tier":"standard","object":"interaction","model":"gemini-3.8-flash"},"event_type":"interaction.completed"}
 
 event: done
 data: [DONE]
 ```
 
-## البث مع التفكير
+## סטרימינג עם חשיבה
 
-عندما يستخدم النموذج التفكير، ستتلقّى خطوات `thought` بنوعَين مختلفَين من البيانات التفاضلية: `thought_summary` (محتوى ملخّص نصي أو مرئي تدريجي)، و`thought_signature` (تمثيل مشفّر لعملية الاستدلال الداخلية للنموذج، يتم إرساله كآخر بيانات تفاضلية قبل `step.stop`). إذا كانت `thinking_summaries` مفعّلة، ستعرض البيانات التفاضلية `thought_summary` ملخّصًا لعملية الاستدلال التي أجراها النموذج. لمزيد من التفاصيل حول التفكير، اطّلِع على [دليل التفكير](https://ai.google.dev/gemini-api/docs/thinking?hl=ar).
+כשמשתמשים במודל חשיבה, מקבלים `thought` שלבים עם שני סוגים שונים של דלתא: `thought_summary` (תוכן מצטבר של סיכום טקסט או תמונה) ו-`thought_signature` (ייצוג מוצפן של ההיגיון הפנימי של המודל, שנשלח כדלתא האחרונה לפני `step.stop`). אם האפשרות `thinking_summaries` מופעלת, הדלתאות `thought_summary` מעבירות בסטרימינג סיכום של ההיגיון של המודל. מידע נוסף על חשיבה זמין ב[מדריך החשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he).
 
 ### Python
 
@@ -677,7 +966,7 @@ from google import genai
 client = genai.Client()
 
 stream = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="What is the greatest common divisor of 1071 and 462?",
     generation_config={
         "thinking_summaries": "auto"
@@ -703,7 +992,7 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const stream = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: "What is the greatest common divisor of 1071 and 462?",
     generation_config: {
         thinking_summaries: "auto",
@@ -725,6 +1014,66 @@ for await (const event of stream) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.GenerationConfig;
+import com.google.genai.gaos.models.interactions.InteractionSSEEvent;
+import com.google.genai.gaos.models.interactions.InteractionSSEStreamEvent;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.StepDelta;
+import com.google.genai.gaos.models.interactions.StepDeltaData;
+import com.google.genai.gaos.models.interactions.StepStart;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.interactions.TextDelta;
+import com.google.genai.gaos.models.interactions.ThinkingSummaries;
+import com.google.genai.gaos.models.interactions.ThoughtSummaryDelta;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.operations.CreateInteractionResponse;
+import com.google.genai.gaos.utils.EventStream;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("What is the greatest common divisor of 1071 and 462?"))
+        .generationConfig(
+            GenerationConfig.builder().thinkingSummaries(ThinkingSummaries.AUTO).build())
+        .stream(true)
+        .build();
+
+CreateInteractionResponse response =
+    client.interactions.create(CreateInteractionRequestBody.of(params));
+
+try (EventStream<InteractionSSEStreamEvent> stream = response.events()) {
+  for (InteractionSSEStreamEvent streamEvent : stream) {
+    InteractionSSEEvent event = streamEvent.data().orElse(null);
+    if (event instanceof StepStart stepStart) {
+      Step step = stepStart.step().orElse(null);
+      if (step != null) {
+        System.out.printf("%n--- Step: %s ---%n", step.type());
+      }
+    } else if (event instanceof StepDelta stepDelta) {
+      StepDeltaData delta = stepDelta.delta().orElse(null);
+      if (delta instanceof ThoughtSummaryDelta thoughtDelta) {
+        Content content = thoughtDelta.content().orElse(null);
+        if (content instanceof TextContent textContent) {
+          textContent.text().ifPresent(System.out::print);
+        }
+      } else if (delta instanceof TextDelta textDelta) {
+        textDelta.text().ifPresent(System.out::print);
+      }
+    }
+  }
+}
+```
+
 ### REST
 
 ```
@@ -733,7 +1082,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "Content-Type: application/json" \
   --no-buffer \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": "What is the greatest common divisor of 1071 and 462?",
     "stream": true,
     "generation_config": {
@@ -744,7 +1093,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 ```
 event: interaction.created
-data: {"interaction":{"id":"v1_...","status":"in_progress","object":"interaction","model":"gemini-3.6-flash"},"event_type":"interaction.created"}
+data: {"interaction":{"id":"v1_...","status":"in_progress","object":"interaction","model":"gemini-3.8-flash"},"event_type":"interaction.created"}
 
 event: interaction.status_update
 data: {"interaction_id":"v1_...","status":"in_progress","event_type":"interaction.status_update"}
@@ -767,9 +1116,9 @@ data: {"index":1,"step":{"type":"model_output"},"event_type":"step.start"}
 ...
 ```
 
-## البث المباشر باستخدام الوكلاء
+## שידור באמצעות סוכנים
 
-تتيح واجهة Interactions API استخدام وكلاء، مثل Deep Research. تستخدم البرامج الآلية `background=True` وتعرض النتائج بشكل غير متزامن، ولكن يمكنك أيضًا بث تفاعلات البرنامج الآلي لتلقّي آخر الأخبار عن حالة الطلب والخطوات الوسيطة فور حدوثها. لمزيد من التفاصيل، يُرجى الاطّلاع على [دليل التنفيذ في الخلفية](https://ai.google.dev/gemini-api/docs/background-execution?hl=ar) و[دليل البحث المتعمّق](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar).
+‫Interactions API תומך בסוכנים כמו Deep Research. סוכנים משתמשים ב-`background=True` ומחזירים תוצאות באופן אסינכרוני, אבל אפשר גם להזרים אינטראקציות עם סוכנים כדי לקבל עדכוני התקדמות ושלבי ביניים בזמן שהם מתרחשים. פרטים נוספים זמינים [במדריך להרצת אפליקציות ברקע](https://ai.google.dev/gemini-api/docs/background-execution?hl=he) וב[מדריך Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he).
 
 ### Python
 
@@ -835,6 +1184,77 @@ for await (const event of stream) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.DeepResearchAgentConfig;
+import com.google.genai.gaos.models.interactions.InteractionCompletedEvent;
+import com.google.genai.gaos.models.interactions.InteractionSSEEvent;
+import com.google.genai.gaos.models.interactions.InteractionSSEStreamEvent;
+import com.google.genai.gaos.models.interactions.InteractionSseEventInteraction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.StepDelta;
+import com.google.genai.gaos.models.interactions.StepDeltaData;
+import com.google.genai.gaos.models.interactions.StepStart;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.interactions.TextDelta;
+import com.google.genai.gaos.models.interactions.ThinkingSummaries;
+import com.google.genai.gaos.models.interactions.ThoughtSummaryDelta;
+import com.google.genai.gaos.models.interactions.Usage;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.operations.CreateInteractionResponse;
+import com.google.genai.gaos.utils.EventStream;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent("deep-research-preview-04-2026")
+        .input(InteractionsInput.of("Research the latest advances in quantum computing."))
+        .stream(true)
+        .background(true)
+        .agentConfig(
+            DeepResearchAgentConfig.builder()
+                .thinkingSummaries(ThinkingSummaries.AUTO)
+                .build())
+        .build();
+
+CreateInteractionResponse response =
+    client.interactions.create(CreateInteractionRequestBody.of(params));
+
+try (EventStream<InteractionSSEStreamEvent> stream = response.events()) {
+  for (InteractionSSEStreamEvent streamEvent : stream) {
+    InteractionSSEEvent event = streamEvent.data().orElse(null);
+    if (event instanceof StepStart stepStart) {
+      Step step = stepStart.step().orElse(null);
+      if (step != null) {
+        System.out.printf("%n--- Step: %s ---%n", step.type());
+      }
+    } else if (event instanceof StepDelta stepDelta) {
+      StepDeltaData delta = stepDelta.delta().orElse(null);
+      if (delta instanceof TextDelta textDelta) {
+        textDelta.text().ifPresent(System.out::print);
+      } else if (delta instanceof ThoughtSummaryDelta thoughtDelta) {
+        Content content = thoughtDelta.content().orElse(null);
+        if (content instanceof TextContent textContent) {
+          textContent.text().ifPresent(System.out::print);
+        }
+      }
+    } else if (event instanceof InteractionCompletedEvent completedEvent) {
+      completedEvent
+          .interaction()
+          .flatMap(InteractionSseEventInteraction::usage)
+          .flatMap(Usage::totalTokens)
+          .ifPresent(tokens -> System.out.println("\n\nTotal Tokens: " + tokens));
+    }
+  }
+}
+```
+
 ### REST
 
 ```
@@ -888,11 +1308,11 @@ event: done
 data: [DONE]
 ```
 
-## إنشاء الصور أثناء البث
+## יצירת תמונות בסטרימינג
 
-تتيح Interactions API بث وسائط إخراج متعددة في الوقت نفسه. من خلال طلب كل من `text` و`image` في `response_format`، يمكنك تلقّي نص متداخل وصور من إنشاء الذكاء الاصطناعي في البث نفسه.
+‫Interactions API תומך בסטרימינג של כמה מצבי פלט בו-זמנית. אם תבקשו גם `text` וגם `image` ב-`response_format`, תקבלו באותו הזרם טקסט משולב ותמונות שנוצרו.
 
-يستخدم المثال التالي `gemini-3.1-flash-image` (Nano Banana 2) للبحث عن معلومات وإنشاء قصة تتضمّن رسومات توضيحية متداخلة.
+בדוגמה הבאה נעשה שימוש ב-`gemini-3.1-flash-image` (Nano Banana 2) כדי לחפש מידע וליצור סיפור עם איורים משולבים.
 
 ### Python
 
@@ -946,6 +1366,74 @@ for await (const event of stream) {
             console.log(`\n[Image chunk: ${event.delta.data.length} bytes]`);
         }
     }
+}
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.GoogleSearch;
+import com.google.genai.gaos.models.interactions.GoogleSearchSearchType;
+import com.google.genai.gaos.models.interactions.ImageDelta;
+import com.google.genai.gaos.models.interactions.ImageResponseFormat;
+import com.google.genai.gaos.models.interactions.InteractionSSEEvent;
+import com.google.genai.gaos.models.interactions.InteractionSSEStreamEvent;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.interactions.StepDelta;
+import com.google.genai.gaos.models.interactions.StepDeltaData;
+import com.google.genai.gaos.models.interactions.TextDelta;
+import com.google.genai.gaos.models.interactions.TextResponseFormat;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.operations.CreateInteractionResponse;
+import com.google.genai.gaos.utils.EventStream;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .tools(
+            Arrays.asList(
+                GoogleSearch.builder()
+                    .searchTypes(
+                        Arrays.asList(
+                            GoogleSearchSearchType.of("web_search"),
+                            GoogleSearchSearchType.of("image_search")))
+                    .build()))
+        .input(
+            InteractionsInput.of(
+                "Search for the history of the Colosseum and write a short illustrated story about a gladiator named Marcus. Interleave text and generated images."))
+        .responseFormat(
+            CreateModelInteractionResponseFormat.of(
+                Arrays.asList(
+                    ResponseFormat.of(TextResponseFormat.builder().build()),
+                    ResponseFormat.of(ImageResponseFormat.builder().build()))))
+        .stream(true)
+        .build();
+
+CreateInteractionResponse response =
+    client.interactions.create(CreateInteractionRequestBody.of(params));
+
+try (EventStream<InteractionSSEStreamEvent> stream = response.events()) {
+  for (InteractionSSEStreamEvent streamEvent : stream) {
+    InteractionSSEEvent event = streamEvent.data().orElse(null);
+    if (event instanceof StepDelta stepDelta) {
+      StepDeltaData delta = stepDelta.delta().orElse(null);
+      if (delta instanceof TextDelta textDelta) {
+        textDelta.text().ifPresent(System.out::print);
+      } else if (delta instanceof ImageDelta imageDelta) {
+        imageDelta
+            .data()
+            .ifPresent(data -> System.out.printf("%n[Image chunk: %d bytes]", data.length()));
+      }
+    }
+  }
 }
 ```
 
@@ -1045,24 +1533,24 @@ event: done
 data: [DONE]
 ```
 
-## التعامل مع الأحداث غير المعروفة
+## טיפול באירועים לא ידועים
 
-وفقًا لسياسة تحديد الإصدارات لواجهة برمجة التطبيقات، قد تتم إضافة أنواع جديدة من الأحداث وأنواع التغييرات بمرور الوقت. يجب أن يتعامل الرمز البرمجي مع أنواع الأحداث غير المعروفة بشكل سليم، أي أن يسجّل أي أحداث لا يتعرّف عليها ويتخطّاها بدلاً من عرض خطأ.
+בהתאם למדיניות בנושא ניהול גרסאות של ה-API, יכול להיות שנוסיף עם הזמן סוגים חדשים של אירועים וסוגים חדשים של שינויים מצטברים. הקוד צריך לטפל בסוגי אירועים לא מוכרים בצורה חלקה – לתעד ולדלג על אירועים שלא מזוהים במקום להציג שגיאה.
 
-## الخطوات التالية
+## המאמרים הבאים
 
-- [مزيد من المعلومات عن Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar)
-- استكشاف [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar) باستخدام الأدوات
-- [مزيد من المعلومات حول ميزة "التفكير"](https://ai.google.dev/gemini-api/docs/thinking?hl=ar) لتحسين عملية الاستدلال
-- جرِّب [وكيل Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) للمهام الطويلة المدى.
-- راجِع [مرجع واجهة برمجة التطبيقات الخاصة بالتفاعلات](https://ai.google.dev/api/interactions-api?hl=ar) للاطّلاع على جميع أنواع الأحداث وأنواع التغيير.
+- [מידע נוסף על Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he)
+- [הסבר על שימוש בפונקציות](https://ai.google.dev/gemini-api/docs/function-calling?hl=he) בעזרת כלים
+- מידע נוסף על [Thinking](https://ai.google.dev/gemini-api/docs/thinking?hl=he) לשיפור החשיבה הרציונלית.
+- כדאי לנסות את [Deep Research agent](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) למשימות לטווח ארוך.
+- ב[הפניה ל-Interactions API](https://ai.google.dev/api/interactions-api?hl=he) מפורטים כל סוגי האירועים וסוגי הדלתא.
 
-إرسال ملاحظات
+שליחת משוב
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-تاريخ التعديل الأخير: 2026-09-12 (حسب التوقيت العالمي المتفَّق عليه)
+עדכון אחרון: 2026-09-18 (שעון UTC).
 
-هل تريد مشاركة ملاحظاتك معنا؟
+רוצה לתת לנו משוב?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-12 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-18 (שעון UTC)."],[],[]]

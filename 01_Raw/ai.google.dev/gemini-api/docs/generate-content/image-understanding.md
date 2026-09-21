@@ -1,40 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=pl
-fetched_at: 2026-09-14T05:51:07.096316+00:00
-title: "Interpretacja obrazu \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=ja
+fetched_at: 2026-09-21T05:48:29.811747+00:00
+title: "\u753b\u50cf\u306e\u7406\u89e3 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
+Gemini 3.8 Flash が利用可能になりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ja)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs/generate-content?hl=pl)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs/generate-content?hl=ja)
 
-Prześlij opinię
+フィードバックを送信
 
-# Interpretacja obrazu
+# 画像の理解
 
-Modele Gemini są od podstaw tworzone z myślą o multimodalności, co umożliwia wykonywanie wielu zadań związanych z przetwarzaniem obrazów i widzeniem komputerowym, w tym tworzenie podpisów do obrazów, klasyfikowanie ich i odpowiadanie na pytania dotyczące obrazów, bez konieczności trenowania specjalistycznych modeli uczenia maszynowego.
+Gemini モデルは、マルチモーダル AI として一から構築されています。そのため、画像キャプション、分類、視覚的な質問応答など、さまざまな画像処理タスクやコンピュータ ビジョン タスクを、専用の ML モデルをトレーニングすることなく実行できます。
 
-Oprócz ogólnych możliwości multimodalnych modele Gemini oferują **większą dokładność** w przypadku konkretnych zastosowań, takich jak [wykrywanie obiektów](#object-detection), dzięki dodatkowemu trenowaniu.
+Gemini モデルは、一般的なマルチモーダル機能に加えて、追加のトレーニングにより、[オブジェクト検出](#object-detection)などの特定のユースケースで**精度が向上**しています。
 
-## Przekazywanie obrazów do Gemini
+## Gemini に画像を渡す
 
-Obrazy możesz przekazywać do Gemini na 2 sposoby:
+Gemini に画像を渡す方法は 2 つあります。
 
-- [Przekazywanie danych obrazu w formie inline:](#inline-image) idealne rozwiązanie w przypadku mniejszych plików (łączny rozmiar żądania, w tym promptów, jest mniejszy niż 20 MB).
-- [Przesyłanie obrazów za pomocą interfejsu File API:](#upload-image) zalecane w przypadku większych plików lub ponownego wykorzystywania obrazów w wielu żądaniach.
+- [インライン画像データを渡す](#inline-image): 小さいファイル（プロンプトを含む合計リクエスト サイズが 20 MB 未満）に最適です。
+- [File API を使用して画像をアップロードする](#upload-image): 大きなファイルや、複数のリクエストで画像を再利用する場合におすすめします。
 
-### Przekazywanie danych obrazu w tekście
+### インライン画像データを渡す
 
-Możesz przekazywać dane obrazu w formie wbudowanej w żądaniu do `generateContent`. Dane obrazu możesz podać jako ciągi tekstowe z kodowaniem Base64 lub odczytując bezpośrednio pliki lokalne (w zależności od języka).
+`generateContent` へのリクエストでインライン画像データを渡すことができます。画像データは、Base64 エンコード文字列として提供するか、ローカルファイルを直接読み取って提供できます（言語によって異なります）。
 
-Poniższy przykład pokazuje, jak odczytać obraz z pliku lokalnego i przekazać go do interfejsu `generateContent` API w celu przetworzenia.
+次の例は、ローカル ファイルから画像を読み取り、処理のために `generateContent` API に渡す方法を示しています。
 
 ### Python
 
@@ -142,7 +142,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }' 2> /dev/null
 ```
 
-Możesz też pobrać obraz z adresu URL, przekonwertować go na bajty i przekazać do `generateContent`, jak pokazano w przykładach poniżej.
+次の例に示すように、URL から画像を取得してバイトに変換し、`generateContent` に渡すこともできます。
 
 ### Python
 
@@ -284,9 +284,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
     }' 2> /dev/null
 ```
 
-### Przesyłanie obrazów za pomocą interfejsu File API
+### File API を使用して画像をアップロードする
 
-W przypadku dużych plików lub jeśli chcesz wielokrotnie używać tego samego pliku obrazu, użyj interfejsu Files API. Poniższy kod przesyła plik obrazu, a następnie używa go w wywołaniu funkcji `generateContent`. Więcej informacji i przykłady znajdziesz w [przewodniku po interfejsie Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl).
+大きなファイルの場合や、同じ画像ファイルを繰り返し使用できるようにするには、Files API を使用します。次のコードは、画像ファイルをアップロードし、`generateContent` の呼び出しでそのファイルを使用します。詳細と例については、[Files API ガイド](https://ai.google.dev/gemini-api/docs/files?hl=ja)をご覧ください。
 
 ### Python
 
@@ -431,9 +431,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## Prompty z wieloma obrazami
+## 複数の画像を使用したプロンプト
 
-W jednym promcie możesz podać wiele obrazów, umieszczając w tablicy `contents` wiele obiektów `Part`image. Mogą to być dane wbudowane (lokalne pliki lub adresy URL) i odwołania do interfejsu File API.
+`contents` 配列に複数の画像 `Part` オブジェクトを含めることで、1 つのプロンプトで複数の画像を指定できます。インライン データ（ローカル ファイルまたは URL）と File API 参照を混在させることができます。
 
 ### Python
 
@@ -618,9 +618,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## Wykrywanie obiektów
+## オブジェクト検出
 
-Modele są trenowane pod kątem wykrywania obiektów na obrazie i uzyskiwania współrzędnych ich ramek ograniczających. Współrzędne są skalowane do zakresu [0, 1000] względem wymiarów obrazu. Musisz przeskalować te współrzędne na podstawie oryginalnego rozmiaru obrazu.
+モデルは、画像内のオブジェクトを検出し、その境界ボックスの座標を取得するようにトレーニングされます。画像の寸法を基準とした座標は、[0, 1000] にスケーリングされます。元の画像サイズに基づいて、これらの座標をスケールダウンする必要があります。
 
 ### Python
 
@@ -822,78 +822,75 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }' 2> /dev/null
 ```
 
-Więcej przykładów znajdziesz w tych notatnikach w [Gemini Cookbook](https://github.com/google-gemini/cookbook):
+その他の例については、[Gemini クックブック](https://github.com/google-gemini/cookbook)の次のノートブックをご覧ください。
 
-- [Notatnik dotyczący przestrzennego rozumienia 2D](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Spatial_understanding.ipynb?hl=pl)
-- [Eksperymentalny notatnik do wskazywania 3D](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/examples/Spatial_understanding_3d.ipynb?hl=pl)
+- [2D 空間認識ノートブック](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Spatial_understanding.ipynb?hl=ja)
+- [試験運用版の 3D ポインティング ノートブック](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/examples/Spatial_understanding_3d.ipynb?hl=ja)
 
-## Obsługiwane formaty obrazów
+## サポートされている画像形式
 
-Gemini obsługuje te typy MIME formatów obrazów:
+Gemini は、次の画像形式の MIME タイプをサポートしています。
 
-- PNG – `image/png`
-- JPEG – `image/jpeg`
-- WEBP – `image/webp`
-- HEIC – `image/heic`
+- PNG - `image/png`
+- JPEG - `image/jpeg`
+- WEBP - `image/webp`
+- HEIC - `image/heic`
 - HEIF - `image/heif`
 
-Więcej informacji o innych metodach wprowadzania plików znajdziesz w przewodniku [Metody wprowadzania plików](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=pl).
+その他のファイル入力方法については、[ファイル入力方法](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ja)ガイドをご覧ください。
 
-## Uprawnienia
+## 機能
 
-Wszystkie wersje modelu Gemini są wielomodalne i mogą być wykorzystywane w szerokim zakresie zadań związanych z przetwarzaniem obrazów i rozpoznawaniem obrazów, w tym m.in. do tworzenia podpisów do obrazów, odpowiadania na pytania dotyczące obrazów, klasyfikowania obrazów i wykrywania obiektów.
+すべての Gemini モデル バージョンはマルチモーダルであり、画像キャプション、Visual Question & Answering、画像分類、オブジェクト検出など、幅広い画像処理タスクやコンピュータ ビジョン タスクで使用できます。
 
-W zależności od wymagań dotyczących jakości i skuteczności Gemini może zmniejszyć potrzebę korzystania ze specjalistycznych modeli uczenia maszynowego.
+Gemini を使用すると、品質とパフォーマンスの要件に応じて、特殊な ML モデルを使用する必要性が軽減されます。
 
-Najnowsze wersje modeli są specjalnie trenowane, aby zwiększyć dokładność w przypadku specjalistycznych zadań, a także ogólnych funkcji, takich jak ulepszone [wykrywanie obiektów](#object-detection).
+最新のモデル バージョンは、一般的な機能に加えて、[オブジェクト検出](#object-detection)の強化など、専門的なタスクの精度を向上させるために特別にトレーニングされています。
 
-## Ograniczenia i najważniejsze informacje techniczne
+## 制限事項と主な技術情報
 
-### Limit plików
+### ファイルの上限
 
-Modele Gemini obsługują maksymalnie 3600 plików obrazów na żądanie.
+Gemini モデルは、リクエストあたり最大 3,600 個の画像ファイルをサポートしています。
 
-### Obliczanie tokenów
+### トークンの計算
 
-- 258 tokenów, jeśli oba wymiary są mniejsze lub równe 384 pikselom.
-  Większe obrazy są dzielone na kafelki o rozmiarze 768 x 768 pikseli, z których każdy kosztuje 258 tokenów.
+- 両方の寸法が 384 ピクセル以下の場合、258 個のトークン。大きな画像は 768x768 ピクセルのタイルに分割され、各タイルに 258 個のトークンが使用されます。
 
-Przybliżony wzór na obliczenie liczby płytek jest następujący:
+タイルの数を計算するおおよその式は次のとおりです。
 
-- Oblicz rozmiar jednostki przycięcia, który wynosi w przybliżeniu: floor(min(width, height) / 1.5).
-- Podziel każdy wymiar przez rozmiar jednostki przycinania i pomnóż wyniki, aby uzyskać liczbę kafelków.
+- 切り抜き単位のサイズを計算します。これはおおよそ floor(min(width, height) / 1.5) です。
+- 各ディメンションをクロップ単位サイズで割り、乗算してタイルの数を取得します。
 
-Na przykład w przypadku obrazu o wymiarach 960 x 540 rozmiar jednostki przycięcia wyniesie 360. Podziel każdy wymiar przez 360, a liczba kafelków wyniesie 3 \* 2 = 6.
+たとえば、960x540 のサイズの画像の場合、切り抜き単位のサイズは 360 になります。各ディメンションを 360 で割ると、タイルの数は 3 \* 2 = 6 になります。
 
-### Rozdzielczość multimediów
+### メディアの解像度
 
-Gemini 3 wprowadza szczegółową kontrolę nad przetwarzaniem obrazu multimodalnego za pomocą parametru `media_resolution`. Parametr `media_resolution` określa **maksymalną liczbę tokenów przypisanych do każdego obrazu wejściowego lub klatki filmu**.
-Wyższe rozdzielczości zwiększają zdolność modelu do odczytywania drobnego tekstu lub rozpoznawania małych szczegółów, ale zwiększają wykorzystanie tokenów i opóźnienia.
+Gemini 3 では、`media_resolution` パラメータを使用して、マルチモーダル ビジョン処理をきめ細かく制御できます。`media_resolution` パラメータは、**入力画像または動画フレームごとに割り当てられるトークンの最大数**を決定します。解像度が高いほど、モデルが細かいテキストを読み取ったり、小さな詳細を識別する能力が向上しますが、トークンの使用量とレイテンシが増加します。
 
-Więcej informacji o tym parametrze i jego wpływie na obliczenia tokenów znajdziesz w przewodniku dotyczącym [rozdzielczości multimediów](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=pl).
+パラメータとそのトークン計算への影響について詳しくは、[メディア解像度](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=ja)ガイドをご覧ください。
 
-## Porady i sprawdzone metody
+## おすすめの方法やお役立ち情報
 
-- Sprawdź, czy obrazy są prawidłowo obrócone.
-- Używaj wyraźnych, nierozmytych obrazów.
-- Jeśli używasz pojedynczego obrazu z tekstem, umieść prompt tekstowy *po* części obrazu w tablicy `contents`.
+- 画像が正しく回転することを確認します。
+- 鮮明でぼやけていない画像を使用します。
+- テキストを含む 1 つの画像を使用する場合は、`contents` 配列の画像部分の後にテキスト プロンプトを配置します。
 
-## Co dalej?
+## 次のステップ
 
-Z tego przewodnika dowiesz się, jak przesyłać pliki graficzne i generować dane wyjściowe w postaci tekstu na podstawie danych wejściowych w postaci obrazów. Więcej informacji znajdziesz w tych materiałach:
+このガイドでは、画像ファイルをアップロードし、画像入力からテキスト出力を生成する方法について説明します。詳細については、次のリソースをご覧ください。
 
-- [Interfejs Files API:](https://ai.google.dev/gemini-api/docs/files?hl=pl) dowiedz się więcej o przesyłaniu plików i zarządzaniu nimi na potrzeby Gemini.
-- [Instrukcje systemowe:](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl#system-instructions)
-  instrukcje systemowe pozwalają sterować zachowaniem modelu na podstawie konkretnych potrzeb i przypadków użycia.
-- [Strategie tworzenia promptów z plikami:](https://ai.google.dev/gemini-api/docs/files?hl=pl#prompt-guide) interfejs Gemini API obsługuje tworzenie promptów za pomocą danych tekstowych, obrazów, dźwięku i wideo, czyli tworzenie promptów multimodalnych.
-- [Wskazówki dotyczące bezpieczeństwa:](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=pl) modele generatywnej AI czasami generują nieoczekiwane dane wyjściowe, np. niedokładne, stronnicze lub obraźliwe. Przetwarzanie końcowe i ocena przez weryfikatora są niezbędne, aby ograniczyć ryzyko szkód wynikających z takich danych wyjściowych.
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja): Gemini で使用するファイルのアップロードと管理について説明します。
+- [システム指示](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja#system-instructions): システム指示を使用すると、特定のニーズやユースケースに基づいてモデルの動作を制御できます。
+- [ファイル プロンプト戦略](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide): Gemini API は、テキスト、画像、音声、動画データを使用したプロンプト（マルチモーダル プロンプトとも呼ばれます）をサポートしています。
+- [安全に関するガイダンス](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=ja): 生成 AI モデルは、不正確、偏見がある、不快な出力など、予期しない出力を生成することがあります。このような出力による危害のリスクを軽減するには、後処理と人間による評価が不可欠です。
 
-Prześlij opinię
+フィードバックを送信
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Ostatnia aktualizacja: 2026-09-12 UTC.
+最終更新日 2026-09-12 UTC。
 
-Chcesz przekazać coś jeszcze?
+ご意見をお聞かせください
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-12 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-12 UTC。"],[],[]]

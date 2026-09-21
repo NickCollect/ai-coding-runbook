@@ -1,38 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=th
-fetched_at: 2026-09-14T05:37:32.002464+00:00
-title: "\u0e01\u0e32\u0e23\u0e1b\u0e23\u0e30\u0e2a\u0e32\u0e19\u0e07\u0e32\u0e19\u0e07\u0e32\u0e19 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=zh-CN
+fetched_at: 2026-09-21T05:56:44.343310+00:00
+title: "\u4efb\u52a1\u7f16\u6392 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+Gemini 3.8 Flash 现已推出。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-ส่งความคิดเห็น
+发送反馈
 
-# การประสานงานงาน
+# 任务编排
 
-โมเดล Gemini Robotics ER สามารถวางแผนงานและให้เหตุผลเกี่ยวกับพื้นที่ โดยอนุมานการดำเนินการที่จะทำและวัตถุที่จะย้ายเพื่อให้บรรลุเป้าหมาย หน้านี้
-แสดงตัวอย่างสำหรับ [การขับเคลื่อนการดำเนินการหยิบและวาง](https://ai.google.dev/gemini-api/docs/calling-custom-robot-api?hl=th)
-ผ่าน API ของหุ่นยนต์ที่กำหนดเองเพื่อจัดระเบียบงานในการวางสิ่งของ
-ลงในชาม ตัวอย่างนี้ใช้โมเดล Gemini ER 2 มาตรฐาน สำหรับตัวอย่างการสตรีม
-โปรดดู[คู่มือการสตรีมของ Gemini ER 2](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=th)
+Gemini Robotics ER 模型可以规划任务并推理空间，从而推断出要采取哪些行动以及要移动哪些物体才能完成目标。此页面展示了一个示例，该示例说明了如何通过自定义机器人 API [驱动拾放](https://ai.google.dev/gemini-api/docs/calling-custom-robot-api?hl=zh-cn)操作，以编排将物品放入碗中的任务。此示例使用的是标准 Gemini ER 2 模型。如需查看流式传输示例，请参阅 [Gemini ER 2 流式传输指南](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=zh-cn)。
 
-ดูโค้ดที่เรียกใช้ได้ทั้งหมดที่
-[Cookbook สำหรับหุ่นยนต์](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)
+如需查看完整的可运行代码，请参阅[机器人技术食谱](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)。
 
-## การใช้ API ของหุ่นยนต์ที่กำหนดเอง
+## 使用自定义机器人 API
 
-ตัวอย่างนี้แสดงการจัดระเบียบงานด้วย API ของหุ่นยนต์ที่กำหนดเอง โดยจะแนะนำ API จำลองที่ออกแบบมาสำหรับการดำเนินการหยิบและวาง งานคือการหยิบบล็อกสีน้ำเงินและวางลงในชามสีส้ม ดังนี้
+此示例演示了如何使用自定义机器人 API 进行任务编排。它引入了一个专为放置操作设计的模拟 API。任务是拿起一个蓝色积木，然后将其放入橙色碗中：
 
-![รูปภาพบล็อกและชาม](https://ai.google.dev/static/gemini-api/docs/images/robotics/robot-api-example.png?hl=th)
+![方块和碗的图片](https://ai.google.dev/static/gemini-api/docs/images/robotics/robot-api-example.png?hl=zh-cn)
 
-ตัวอย่างนี้ใช้ API ของหุ่นยนต์จำลองต่อไปนี้
+此示例使用以下模拟机器人 API：
 
 ### Python
 
@@ -75,7 +71,7 @@ set_gripper_state_function = {
 }
 ```
 
-ตัวอย่างต่อไปนี้จะส่งพรอมต์และรูปภาพไปยังโมเดลพร้อมคำจำกัดความของเครื่องมือ จากนั้นจะเรียกใช้ลูปแบบ Agent โดยหลังจากที่โมเดลตอบกลับแต่ละครั้ง ระบบจะเรียกใช้ฟังก์ชันที่ขอ (`move`, `setGripperState`), ส่งผลลัพธ์กลับไปยังโมเดลโดยใช้ `previous_interaction_id` และทำซ้ำจนกว่าโมเดลจะหยุดเรียกใช้ฟังก์ชันหรือถึงขีดจำกัดของขั้นตอน
+以下示例将提示和图片连同工具定义一起发送给模型。然后，它会运行代理循环：在每次模型响应后，它会执行任何请求的函数调用（`move`、`setGripperState`），使用 `previous_interaction_id` 将结果返回给模型，并重复此过程，直到模型停止调用函数或达到步数限制。
 
 ### Python
 
@@ -151,7 +147,7 @@ while step_count < max_steps:
     )
 ```
 
-ตัวอย่างต่อไปนี้แสดงเอาต์พุตที่เป็นไปได้ของโมเดลตามพรอมต์และ API ของหุ่นยนต์จำลอง เอาต์พุตประกอบด้วยเอาต์พุตของการเรียกใช้ฟังก์ชันของหุ่นยนต์ที่โมเดลจัดลำดับไว้ด้วยกัน
+以下内容展示了模型基于提示和模拟机器人 API 的可能输出。输出包括模型按顺序排列的机器人函数调用的输出。
 
 ```
 --- Executing Orchestrated Plan ---
@@ -168,18 +164,18 @@ Sequence complete.
 Model Summary: I have completed the task of picking up the blue block and placing it into the orange bowl.
 ```
 
-## ขั้นตอนถัดไป
+## 后续步骤
 
-- [หุ่นยนต์ที่มีการสตรีม](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=th) - การสตรีมแบบเรียลไทม์ด้วยการเรียกใช้ฟังก์ชัน (Gemini Robotics ER 2 เท่านั้น)
-- [ความเข้าใจวิดีโอ](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=th) - ติดตามความคืบหน้าของงานจากวิดีโอ (ER 2 เท่านั้น)
-- [การให้เหตุผลเชิงพื้นที่](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=th) - ตัวอย่างการชี้ การติดตาม และกรอบล้อมรอบ
+- [支持流式传输的机器人](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=zh-cn) - 支持函数调用的实时流式传输（仅限 Gemini Robotics ER 2）。
+- [视频理解](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=zh-cn) - 跟踪视频中的任务进度（仅限 ER 2）。
+- [空间推理](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=zh-cn) - 指向、跟踪和边界框示例。
 
-ส่งความคิดเห็น
+发送反馈
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-อัปเดตล่าสุด 2026-09-08 UTC
+最后更新时间 (UTC)：2026-09-08。
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+需要向我们提供更多信息？
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-08 UTC"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-08。"],[],[]]

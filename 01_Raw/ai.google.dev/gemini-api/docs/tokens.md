@@ -1,46 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=it
-fetched_at: 2026-09-14T05:36:34.925609+00:00
-title: "Comprendi e conteggia i token \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=he
+fetched_at: 2026-09-21T05:58:02.713147+00:00
+title: "\u05d4\u05e1\u05d1\u05e8 \u05e2\u05dc \u05d0\u05e1\u05d9\u05de\u05d5\u05e0\u05d9\u05dd \u05d5\u05e1\u05e4\u05d9\u05e8\u05d4 \u05e9\u05dc\u05d4\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Invia feedback
+שליחת משוב
 
-# Comprendi e conteggia i token
+# הסבר על אסימונים וספירה שלהם
 
-Gemini e altri modelli di AI generativa elaborano input e output con una granularità chiamata *token*.
+‫Gemini ומודלים אחרים של AI גנרטיבי מעבדים קלט ופלט ברמת פירוט שנקראת *טוקן*.
 
-**Per i modelli Gemini, un token equivale a circa 4 caratteri.
-100 token equivalgono a circa 60-80 parole in inglese.**
+**במודלים של Gemini, טוקן שווה בערך ל-4 תווים.
+‫100 טוקנים שווים לכ-60-80 מילים באנגלית.**
 
-## Informazioni sui token
+## מידע על טוקנים
 
-I token possono essere singoli caratteri come `z` o parole intere come `cat`. Le parole lunghe vengono suddivise in più token. L'insieme di tutti i token utilizzati dal modello è chiamato vocabolario e il processo di suddivisione del testo in token è chiamato *tokenizzazione*.
+אסימונים יכולים להיות תווים בודדים כמו `z` או מילים שלמות כמו `cat`. מילים ארוכות
+מפוצלות לכמה טוקנים. קבוצת כל האסימונים שבהם נעשה שימוש במודל נקראת אוצר מילים, והתהליך של פיצול טקסט לאסימונים נקרא *טוקניזציה*.
 
-Quando la fatturazione è abilitata, il [costo di una chiamata all'API Gemini](https://ai.google.dev/pricing?hl=it) è
-determinato in parte dal numero di token di input e output, quindi sapere come
-contare i token può essere utile.
+כשמופעל חיוב, [העלות של קריאה ל-Gemini API](https://ai.google.dev/pricing?hl=he) נקבעת בין היתר לפי מספר הטוקנים של הקלט והפלט, ולכן כדאי לדעת איך לספור טוקנים.
 
-## Contare i token
+## ספירת טוקנים
 
-Tutti gli input e gli output dell'API Gemini vengono tokenizzati, inclusi testo, file immagine e altre modalità non testuali.
+כל הקלט והפלט של Gemini API עוברים טוקניזציה, כולל טקסט, קובצי תמונות וסוגים אחרים של נתונים שאינם טקסט.
 
-Puoi contare i token nei seguenti modi:
+אפשר לספור טוקנים בדרכים הבאות:
 
-- **Chiama `count_tokens` con l'input della richiesta.** Restituisce il numero totale di token *solo nell'input*. Esegui questa chiamata prima di inviare l'input per verificare le dimensioni delle richieste.
-- **Utilizza il `usage` nella risposta di interazione.** Restituisce i conteggi dei token per input (`total_input_tokens`), output (`total_output_tokens`), pensiero (`total_thought_tokens`), contenuti memorizzati nella cache (`total_cached_tokens`), utilizzo degli strumenti (`total_tool_use_tokens`) e totale (`total_tokens`).
+- **מתקשרים אל `count_tokens` ומזינים את הבקשה.** הפונקציה מחזירה את המספר הכולל של הטוקנים *בקלט בלבד*. כדאי לבצע את השיחה הזו לפני שליחת קלט כדי לבדוק את גודל הבקשות.
+- **משתמשים בלחצן `usage` בתגובה לאינטראקציה.** הפונקציה מחזירה את מספר הטוקנים של הקלט (`total_input_tokens`), הפלט (`total_output_tokens`), החשיבה (`total_thought_tokens`), התוכן שנשמר במטמון (`total_cached_tokens`), השימוש בכלי (`total_tool_use_tokens`) והסך הכולל (`total_tokens`).
 
-### Contare i token di testo
+### ספירת טוקנים של טקסט
 
 ### Python
 
@@ -53,14 +52,14 @@ prompt = "The quick brown fox jumps over the lazy dog."
 
 # Count tokens before sending
 total_tokens = client.models.count_tokens(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     contents=prompt
 )
 print("total_tokens:", total_tokens.total_tokens)
 
 # Get usage from interaction
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input=prompt
 )
 print(interaction.usage)
@@ -77,32 +76,63 @@ const prompt = "The quick brown fox jumps over the lazy dog.";
 
 // Count tokens before sending
 const countResponse = await client.models.countTokens({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     contents: prompt,
 });
 console.log(countResponse.totalTokens);
 
 // Get usage from interaction
 const interaction = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: prompt,
 });
 console.log(interaction.usage);
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.types.CountTokensResponse;
+
+Client client = new Client();
+String prompt = "The quick brown fox jumps over the lazy dog.";
+
+// Count tokens before sending
+CountTokensResponse countResponse =
+    client.models.countTokens("gemini-3.8-flash", prompt, null);
+System.out.println("total_tokens: " + countResponse.totalTokens().orElse(0));
+
+// Get usage from interaction
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of(prompt))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+System.out.println(interaction.usage().orElse(null));
 ```
 
 ### REST
 
 ```
 # Specifies the API revision to avoid breaking changes when they become default
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:countTokens" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:countTokens" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"contents": [{"parts": [{"text": "The quick brown fox."}]}]}'
 ```
 
-### Contare i token multi-turn
+### ספירת טוקנים רב-שלביים
 
-Conta i token nella cronologia delle conversazioni utilizzando `previous_interaction_id`:
+כדי לספור את הטוקנים בהיסטוריית השיחות, משתמשים ב-`previous_interaction_id`:
 
 ### Python
 
@@ -110,13 +140,13 @@ Conta i token nella cronologia delle conversazioni utilizzando `previous_interac
 # This will only work for SDK newer than 2.0.0
 # First interaction
 interaction1 = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="Hi, my name is Bob"
 )
 
 # Second interaction continues the conversation
 interaction2 = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="What's my name?",
     previous_interaction_id=interaction1.id
 )
@@ -133,13 +163,13 @@ print(f"Total tokens: {interaction2.usage.total_tokens}")
 // This will only work for SDK newer than 2.0.0
 // First interaction
 const interaction1 = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: "Hi, my name is Bob"
 });
 
 // Second interaction continues the conversation
 const interaction2 = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: "What's my name?",
     previous_interaction_id: interaction1.id
 });
@@ -148,16 +178,59 @@ console.log(`Input tokens: ${interaction2.usage.total_input_tokens}`);
 console.log(`Output tokens: ${interaction2.usage.total_output_tokens}`);
 ```
 
-### Contare i token multimodali
+### Java
 
-Tutti gli input dell'API Gemini vengono tokenizzati, incluse immagini, video e audio.
-Punti chiave sulla tokenizzazione:
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.Usage;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
 
-- **Immagini**: le immagini ≤384 pixel in entrambe le dimensioni vengono conteggiate come 258 token. Le immagini più grandi vengono suddivise in riquadri di 768x768 pixel, ognuno dei quali viene conteggiato come 258 token.
-- **Video**: 263 token al secondo
-- **Audio**: 32 token al secondo
+Client client = new Client();
 
-#### Token immagine
+// First interaction
+CreateModelInteraction params1 =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("Hi, my name is Bob"))
+        .build();
+
+Interaction interaction1 =
+    client.interactions.create(CreateInteractionRequestBody.of(params1)).interaction().get();
+
+// Second interaction continues the conversation
+CreateModelInteraction params2 =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("What's my name?"))
+        .previousInteractionId(interaction1.id().orElse(""))
+        .build();
+
+Interaction interaction2 =
+    client.interactions.create(CreateInteractionRequestBody.of(params2)).interaction().get();
+
+// Usage includes tokens from both turns
+if (interaction2.usage().isPresent()) {
+  Usage usage = interaction2.usage().get();
+  System.out.println("Input tokens: " + usage.totalInputTokens().orElse(0));
+  System.out.println("Output tokens: " + usage.totalOutputTokens().orElse(0));
+  System.out.println("Total tokens: " + usage.totalTokens().orElse(0));
+}
+```
+
+### ספירת טוקנים מולטי-מודאליים
+
+כל הקלט ל-Gemini API עובר טוקניזציה, כולל תמונות, סרטונים ואודיו.
+נקודות חשובות לגבי יצירת טוקנים:
+
+- **תמונות**: תמונות בגודל של ‎384 פיקסלים או פחות בשני הממדים נחשבות כ-258 טוקנים. תמונות גדולות יותר מחולקות למקטעים בגודל ‎768x768 פיקסלים, וכל מקטע נחשב כ-258 טוקנים.
+- **סרטון**: 263 אסימונים לשנייה (רלוונטי לעיבוד סטטי). במקרה של עיבוד מבוסס-סוכן, השימוש בטוקנים משתנה. [מידע נוסף על השימוש באסימוני וידאו לפי מצב עיבוד](#video-token-usage)
+- **אודיו**: 32 טוקנים לשנייה
+
+#### טוקנים של תמונות
 
 ### Python
 
@@ -167,14 +240,14 @@ uploaded_file = client.files.upload(file="path/to/image.jpg")
 
 # Count tokens for image + text
 total_tokens = client.models.count_tokens(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     contents=["Tell me about this image", uploaded_file]
 )
 print(f"Total tokens: {total_tokens}")
 
 # Generate with image
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input=[
         {"type": "text", "text": "Tell me about this image"},
         {"type": "image", "uri": uploaded_file.uri, "mime_type": uploaded_file.mime_type}
@@ -194,7 +267,7 @@ const uploadedFile = await client.files.upload({
 
 // Count tokens
 const countResponse = await client.models.countTokens({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     contents: [
         { text: "Tell me about this image" },
         { fileData: { fileUri: uploadedFile.uri, mimeType: uploadedFile.mimeType } }
@@ -203,7 +276,65 @@ const countResponse = await client.models.countTokens({
 console.log(countResponse.totalTokens);
 ```
 
-**Esempio di dati in linea:**
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.types.Content;
+import com.google.genai.types.CountTokensResponse;
+import com.google.genai.types.File;
+import com.google.genai.types.Part;
+import com.google.genai.types.UploadFileConfig;
+import java.util.Arrays;
+
+Client client = new Client();
+
+File uploadedFile =
+    client.files.upload(
+        new java.io.File("path/to/image.jpg"),
+        UploadFileConfig.builder().mimeType("image/jpeg").build());
+
+// Count tokens for image + text
+CountTokensResponse countResponse =
+    client.models.countTokens(
+        "gemini-3.8-flash",
+        Arrays.asList(
+            Content.fromParts(
+                Part.fromText("Tell me about this image"),
+                Part.fromUri(
+                    uploadedFile.uri().orElse(""), uploadedFile.mimeType().orElse("image/jpeg")))),
+        null);
+System.out.println("Total tokens: " + countResponse.totalTokens().orElse(0));
+
+// Generate with image
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(
+            InteractionsInput.ofContent(
+                Arrays.asList(
+                    TextContent.builder().text("Tell me about this image").build(),
+                    ImageContent.builder()
+                        .uri(uploadedFile.uri().orElse(""))
+                        .mimeType(
+                            ImageContentMimeType.of(uploadedFile.mimeType().orElse("image/jpeg")))
+                        .build())))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+System.out.println(interaction.usage().orElse(null));
+```
+
+**דוגמה לנתונים מוטבעים:**
 
 ### Python
 
@@ -215,7 +346,7 @@ with open('image.jpg', 'rb') as f:
     image_bytes = f.read()
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input=[
         {"type": "text", "text": "Describe this image"},
         {
@@ -228,7 +359,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### Token video
+#### אסימונים של סרטונים
 
 ### Python
 
@@ -243,16 +374,16 @@ while not video_file.state or video_file.state.name != "ACTIVE":
     time.sleep(5)
     video_file = client.files.get(name=video_file.name)
 
-# A 60-second video is approximately 263 * 60 = 15,780 tokens
+# A 60-second video is approximately 100 * 60 = 6,000 tokens
 total_tokens = client.models.count_tokens(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     contents=["Summarize this video", video_file]
 )
 print(f"Total tokens: {total_tokens}")
 
 # Generate with video
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input=[
         {"type": "text", "text": "Summarize this video"},
         {"type": "video", "uri": video_file.uri, "mime_type": video_file.mime_type}
@@ -261,7 +392,25 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### Token audio
+#### שימוש באסימוני וידאו לפי מצב עיבוד
+
+השימוש באסימונים עבור סרטונים תלוי במצב העיבוד:
+
+| **מצב עיבוד** | **חישוב של טוקנים** | **שימוש רגיל** |
+| --- | --- | --- |
+| **סטטי** (ברירת מחדל) | כ-100 טוקנים לשנייה כברירת מחדל (רזולוציה נמוכה) או כ-300 טוקנים לשנייה (רזולוציה גבוהה). כל הפריימים נדגמים בקצב של 1 FPS. | צפוי, ביחס למשך נכס הווידאו. |
+| **Agentic** | משתנה בהתאם למורכבות התוכן. המערכת טוענת רק את התמליל, את הפריימים או את האודיו שנדרשים כדי לענות על ההנחיה. | עד 88% פחות טוקנים לתוכן ארוך. |
+
+בעיבוד מבוסס-סוכן, הרצאה של שעה שבה נעשה שימוש ב-1.08 מיליון טוקנים במצב סטטי, עשויה להשתמש ב-108,000 טוקנים, בהתאם להנחיה ולתוכן.
+
+כדי לבדוק את השימוש בפועל בטוקנים עבור בקשה, בודקים את `interaction.usage`. אסימונים של סרטונים עם סוכנים מדווחים בשדות הבאים:
+
+- **ההנחיה הראשונית** (קובץ עזר של סרטון + הנחיית משתמש): `total_input_tokens`
+- **חשיבה על ניווט**: `total_thought_tokens`
+- **תמליל, פריימים ואודיו נטענים לפי דרישה**: `total_tool_use_tokens`
+- **תשובה סופית**: `total_output_tokens`
+
+#### טוקנים של אודיו
 
 ### Python
 
@@ -271,14 +420,14 @@ audio_file = client.files.upload(file="path/to/audio.mp3")
 
 # A 60-second audio clip is approximately 32 * 60 = 1,920 tokens
 total_tokens = client.models.count_tokens(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     contents=["Transcribe this audio", audio_file]
 )
 print(f"Total tokens: {total_tokens}")
 
 # Generate with audio
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input=[
         {"type": "text", "text": "Transcribe this audio"},
         {"type": "audio", "uri": audio_file.uri, "mime_type": audio_file.mime_type}
@@ -287,16 +436,16 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-### Contare i token delle istruzioni di sistema
+### ספירת טוקנים של הוראות למערכת
 
-Le istruzioni di sistema vengono conteggiate come parte dei token di input:
+ההוראות למערכת נספרות כחלק מאסימוני הקלט:
 
 ### Python
 
 ```
 # This will only work for SDK newer than 2.0.0
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="Hello!",
     system_instruction="You are a helpful assistant who speaks like a pirate."
 )
@@ -305,9 +454,9 @@ interaction = client.interactions.create(
 print(f"Input tokens: {interaction.usage.total_input_tokens}")
 ```
 
-### Contare i token degli strumenti
+### ספירת טוקנים בכלי
 
-Vengono conteggiati anche gli strumenti (funzioni, esecuzione del codice, Ricerca Google):
+גם כלים (פונקציות, ביצוע קוד, חיפוש Google) נספרים:
 
 ### Python
 
@@ -328,7 +477,7 @@ tools = [
 ]
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="What's the weather in Tokyo?",
     tools=tools
 )
@@ -337,17 +486,17 @@ print(f"Input tokens: {interaction.usage.total_input_tokens}")
 print(f"Tool use tokens: {interaction.usage.total_tool_use_tokens}")
 ```
 
-## Finestra contestuale
+## חלון ההקשר
 
-Ogni modello Gemini ha un numero massimo di token che può gestire. La finestra contestuale definisce il limite combinato di token di input e output.
+לכל מודל Gemini יש מספר מקסימלי של טוקנים שהוא יכול לטפל בהם. חלון ההקשר מגדיר את המגבלה המשולבת של טוקנים של קלט ופלט.
 
-### Ottenere le dimensioni della finestra contestuale a livello di programmazione
+### קבלת גודל חלון ההקשר באופן פרוגרמטי
 
 ### Python
 
 ```
 # This will only work for SDK newer than 2.0.0
-model_info = client.models.get(model="gemini-3.6-flash")
+model_info = client.models.get(model="gemini-3.8-flash")
 print(f"Input token limit: {model_info.input_token_limit}")
 print(f"Output token limit: {model_info.output_token_limit}")
 ```
@@ -356,25 +505,38 @@ print(f"Output token limit: {model_info.output_token_limit}")
 
 ```
 // This will only work for SDK newer than 2.0.0
-const modelInfo = await client.models.get({ model: "gemini-3.6-flash" });
+const modelInfo = await client.models.get({ model: "gemini-3.8-flash" });
 console.log(`Input token limit: ${modelInfo.inputTokenLimit}`);
 console.log(`Output token limit: ${modelInfo.outputTokenLimit}`);
 ```
 
-Trova le dimensioni della finestra contestuale nella pagina dei [modelli](https://ai.google.dev/gemini-api/docs/models?hl=it).
+### Java
 
-## Passaggi successivi
+```
+import com.google.genai.Client;
+import com.google.genai.types.Model;
 
-- [Generazione di testo](https://ai.google.dev/gemini-api/docs/text-generation?hl=it): nozioni di base sulla generazione
-- [Memorizzazione nella cache](https://ai.google.dev/gemini-api/docs/caching?hl=it): ridurre i costi con la memorizzazione nella cache
-- [Prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it): comprendere i costi
+Client client = new Client();
 
-Invia feedback
+Model modelInfo = client.models.get("gemini-3.8-flash", null);
+System.out.println("Input token limit: " + modelInfo.inputTokenLimit().orElse(0));
+System.out.println("Output token limit: " + modelInfo.outputTokenLimit().orElse(0));
+```
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+אפשר לראות את גודל חלון ההקשר בדף [מודלים](https://ai.google.dev/gemini-api/docs/models?hl=he).
 
-Ultimo aggiornamento 2026-09-12 UTC.
+## המאמרים הבאים
 
-Vuoi dirci altro?
+- [יצירת טקסט](https://ai.google.dev/gemini-api/docs/text-generation?hl=he): יסודות היצירה
+- [שמירה במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he): הפחתת עלויות באמצעות שמירה במטמון
+- [תמחור](https://ai.google.dev/gemini-api/docs/pricing?hl=he): הסבר על העלויות
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-12 UTC."],[],[]]
+שליחת משוב
+
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+
+עדכון אחרון: 2026-09-18 (שעון UTC).
+
+רוצה לתת לנו משוב?
+
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-18 (שעון UTC)."],[],[]]

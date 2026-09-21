@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi
-fetched_at: 2026-09-14T05:51:38.935027+00:00
-title: "Google Maps \u0915\u0940 \u092e\u0926\u0926 \u0938\u0947 \u0917\u094d\u0930\u093e\u0909\u0902\u0921\u093f\u0902\u0917 \u0915\u0930\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi
+fetched_at: 2026-09-21T05:45:41.085773+00:00
+title: "C\u0103n c\u1ee9 v\u00e0o Google Maps \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-सुझाव भेजें
+Gửi ý kiến phản hồi
 
-# Google Maps की मदद से ग्राउंडिंग करना
+# Căn cứ vào Google Maps
 
-Google Maps से जानकारी लेने की सुविधा, Gemini की जनरेटिव क्षमताओं को Google Maps के सटीक, अप-टू-डेट, और ज़्यादा जानकारी वाले डेटा से जोड़ती है. इस सुविधा की मदद से, डेवलपर अपने ऐप्लिकेशन में जगह की जानकारी देने वाली सुविधा को आसानी से शामिल कर सकते हैं. जब किसी उपयोगकर्ता की क्वेरी में Maps के डेटा से जुड़ा कॉन्टेक्स्ट होता है, तो Gemini मॉडल, Google Maps का इस्तेमाल करके तथ्यों पर आधारित और अप-टू-डेट जवाब देता है. ये जवाब, उपयोगकर्ता की बताई गई जगह या जगह की अनुमानित जानकारी के हिसाब से होते हैं.
+Tính năng Bám sát nguồn bằng Google Maps kết nối các khả năng tạo sinh của Gemini với dữ liệu phong phú, thực tế và mới nhất của Google Maps. Tính năng này giúp nhà phát triển dễ dàng tích hợp chức năng nhận biết vị trí vào các ứng dụng của họ. Khi một cụm từ tìm kiếm của người dùng có bối cảnh liên quan đến dữ liệu trên Maps, mô hình Gemini sẽ tận dụng Google Maps để cung cấp câu trả lời chính xác về mặt thực tế và mới nhất, đồng thời liên quan đến vị trí cụ thể hoặc khu vực khái quát mà người dùng chỉ định.
 
-- **जगह की जानकारी के हिसाब से सटीक जवाब:** भौगोलिक तौर पर खास क्वेरी के लिए, Google Maps के मौजूदा और ज़्यादा डेटा का इस्तेमाल करें.
-- **बेहतर तरीके से मनमुताबिक अनुभव देना:** उपयोगकर्ता की बताई गई जगहों के आधार पर, सुझाव और जानकारी दें.
+- **Câu trả lời chính xác, nhận biết vị trí:** Tận dụng dữ liệu phong phú và mới nhất của Google Maps cho các cụm từ tìm kiếm theo địa lý cụ thể.
+- **Cá nhân hoá nâng cao:** Điều chỉnh đề xuất và thông tin dựa trên vị trí do người dùng cung cấp.
 
-## शुरू करें
+## Bắt đầu
 
-इस उदाहरण में, Google Maps से जानकारी लेने की सुविधा को अपने ऐप्लिकेशन में इंटिग्रेट करने का तरीका बताया गया है. इससे उपयोगकर्ता की क्वेरी के सटीक जवाब दिए जा सकते हैं और जगह की जानकारी के हिसाब से जवाब दिए जा सकते हैं. प्रॉम्प्ट में, स्थानीय सुझावों के बारे में पूछा गया है. इसमें उपयोगकर्ता की जगह की जानकारी देने का विकल्प भी है. इससे Gemini मॉडल, Google Maps के डेटा का इस्तेमाल कर सकता है.
+Ví dụ này minh hoạ cách tích hợp tính năng Neo bám vào Google Maps vào ứng dụng của bạn để cung cấp câu trả lời có độ chính xác cao, nhận biết vị trí cho các truy vấn của người dùng. Câu lệnh yêu cầu đề xuất địa điểm ở địa phương kèm theo vị trí người dùng (không bắt buộc), cho phép mô hình Gemini sử dụng dữ liệu của Google Maps.
 
 ### Python
 
@@ -36,7 +36,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="What are the best Italian restaurants within a 15-minute walk from here?",
     tools=[{
         "type": "google_maps",
@@ -68,7 +68,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const interaction = await ai.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: "What are the best Italian restaurants within a 15-minute walk from here?",
     tools: [{
       type: "google_maps",
@@ -100,6 +100,69 @@ async function main() {
 main();
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Annotation;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.GoogleMaps;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.PlaceCitation;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(
+            InteractionsInput.of(
+                "What are the best Italian restaurants within a 15-minute walk from here?"))
+        .tools(
+            Arrays.asList(
+                GoogleMaps.builder().latitude(34.050481).longitude(-118.248526).build()))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+// Print the model's text response and annotations
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content contentBlock : outputStep.content().get()) {
+          if (contentBlock instanceof TextContent) {
+            TextContent textContent = (TextContent) contentBlock;
+            System.out.println(textContent.text().orElse(""));
+            if (textContent.annotations().isPresent()
+                && !textContent.annotations().get().isEmpty()) {
+              System.out.println("\nSources:");
+              for (Annotation annotation : textContent.annotations().get()) {
+                if (annotation instanceof PlaceCitation) {
+                  PlaceCitation citation = (PlaceCitation) annotation;
+                  System.out.printf(
+                      "  - %s: %s%n", citation.name().orElse(""), citation.url().orElse(""));
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 ### REST
 
 ```
@@ -108,7 +171,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": "What are the best Italian restaurants within a 15-minute walk from here?",
     "tools": [{
       "type": "google_maps",
@@ -118,38 +181,38 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Google Maps से जानकारी लेने की सुविधा कैसे काम करती है
+## Cách hoạt động của tính năng Neo bám vào Google Maps
 
-Google Maps से जानकारी लेने की सुविधा, Maps API को सोर्स के तौर पर इस्तेमाल करके, Gemini API को Google Geo इकोसिस्टम के साथ इंटिग्रेट करती है. जब किसी उपयोगकर्ता की क्वेरी में भौगोलिक कॉन्टेक्स्ट होता है, तो Gemini मॉडल, Google Maps से जानकारी लेने की सुविधा को चालू कर सकता है. इसके बाद, मॉडल, दी गई जगह के हिसाब से Google Maps के डेटा के आधार पर जवाब जनरेट कर सकता है.
+Tính năng neo bám vào Google Maps tích hợp Gemini API với hệ sinh thái Google Geo bằng cách sử dụng Maps API làm nguồn neo bám. Khi cụm từ tìm kiếm của người dùng có ngữ cảnh địa lý, mô hình Gemini có thể gọi công cụ Nền tảng với Google Maps. Sau đó, mô hình có thể tạo ra câu trả lời dựa trên dữ liệu của Google Maps liên quan đến vị trí được cung cấp.
 
-आम तौर पर, इस प्रोसेस में ये चरण शामिल होते हैं:
+Quy trình này thường bao gồm:
 
-1. **उपयोगकर्ता की क्वेरी:** कोई उपयोगकर्ता आपके ऐप्लिकेशन में क्वेरी सबमिट करता है.इसमें भौगोलिक कॉन्टेक्स्ट शामिल हो सकता है. जैसे, "मेरे आस-पास की कॉफ़ी शॉप", "सैन फ़्रांसिस्को में मौजूद म्यूज़ियम".
-2. **टूल को चालू करना:** Gemini मॉडल, भौगोलिक इरादे को पहचानकर, Google Maps से जानकारी लेने की सुविधा को चालू करता है. इस टूल को उपयोगकर्ता की `latitude` और `longitude` की जानकारी भी दी जा सकती है. यह टूल, टेक्स्ट के आधार पर खोज करने वाला टूल है और यह Maps पर खोज करने की तरह काम करता है. जैसे, स्थानीय क्वेरी ("मेरे आस-पास") के लिए, निर्देशांकों का इस्तेमाल किया जाएगा. वहीं, खास या गैर-स्थानीय क्वेरी पर, साफ़ तौर पर बताई गई जगह का असर नहीं पड़ेगा.
-3. **डेटा वापस पाना:** Google Maps से जानकारी लेने की सुविधा, Google Maps से काम की जानकारी (जैसे, जगहें, समीक्षाएं, फ़ोटो, पते, कारोबार के खुले होने का समय) के लिए क्वेरी करती है.
-4. **जानकारी के आधार पर जवाब जनरेट करना:** वापस पाए गए Maps के डेटा का इस्तेमाल, Gemini मॉडल के जवाब के लिए किया जाता है. इससे यह पक्का किया जाता है कि जवाब सटीक और काम का हो.
-5. **जवाब और एनोटेशन:** मॉडल, टेक्स्ट में जवाब देता है. इसमें इनलाइन एनोटेशन होते हैं, जो Google Maps के सोर्स से लिंक होते हैं. इससे डेवलपर, सोर्स की जानकारी दिखा सकते हैं.
+1. **Cụm từ tìm kiếm của người dùng:** Người dùng gửi một cụm từ tìm kiếm đến ứng dụng của bạn, có thể bao gồm cả bối cảnh địa lý (ví dụ: "quán cà phê gần tôi", "bảo tàng ở San Francisco").
+2. **Gọi công cụ:** Mô hình Gemini, khi nhận ra ý định về địa lý, sẽ gọi công cụ Grounding with Google Maps. Bạn có thể cung cấp cho công cụ này `latitude` và `longitude` của người dùng (không bắt buộc). Công cụ này là một công cụ tìm kiếm bằng văn bản và hoạt động tương tự như khi bạn tìm kiếm trên Maps, trong đó các cụm từ tìm kiếm tại địa phương ("gần tôi") sẽ sử dụng toạ độ, trong khi các cụm từ tìm kiếm cụ thể hoặc không phải tại địa phương sẽ khó bị ảnh hưởng bởi vị trí rõ ràng.
+3. **Truy xuất dữ liệu:** Dịch vụ Grounding with Google Maps truy vấn Google Maps để tìm thông tin liên quan (ví dụ: địa điểm, bài đánh giá, ảnh, địa chỉ, giờ mở cửa).
+4. **Tạo câu trả lời dựa trên dữ liệu:** Dữ liệu được truy xuất từ Maps được dùng để cung cấp thông tin cho câu trả lời của mô hình Gemini, đảm bảo tính chính xác và mức độ phù hợp của thông tin.
+5. **Phản hồi và chú thích:** Mô hình này trả về một phản hồi bằng văn bản kèm theo chú thích nội tuyến liên kết đến các nguồn trên Google Maps, cho phép nhà phát triển hiển thị nội dung trích dẫn.
 
-## Google Maps से जानकारी लेने की सुविधा का इस्तेमाल कब और क्यों करना चाहिए
+## Lý do và thời điểm nên sử dụng tính năng Neo bám vào Google Maps
 
-Google Maps से जानकारी लेने की सुविधा, उन ऐप्लिकेशन के लिए सबसे सही है जिनमें सटीक, अप-टू-डेट, और जगह के हिसाब से जानकारी की ज़रूरत होती है. यह सुविधा, उपयोगकर्ता को काम का और मनमुताबिक कॉन्टेंट देकर, उनके अनुभव को बेहतर बनाती है. यह कॉन्टेंट, Google Maps के दुनिया भर में 25 करोड़ से ज़्यादा जगहों के डेटाबेस पर आधारित होता है.
+Neo bám vào Google Maps là lựa chọn lý tưởng cho những ứng dụng cần thông tin chính xác, mới nhất và theo vị trí cụ thể. Nhờ cơ sở dữ liệu phong phú của Google Maps với hơn 250 triệu địa điểm trên toàn thế giới, tính năng này mang đến nội dung phù hợp và được cá nhân hoá, giúp nâng cao trải nghiệm người dùng.
 
-Google Maps से जानकारी लेने की सुविधा का इस्तेमाल तब करें, जब आपके ऐप्लिकेशन को:
+Bạn nên sử dụng tính năng Neo bám vào Google Maps khi ứng dụng của bạn cần:
 
-- जगह से जुड़े सवालों के सटीक और पूरे जवाब देने हों.
-- बातचीत के ज़रिए ट्रिप प्लानर और स्थानीय गाइड बनाने हों.
-- जगह और उपयोगकर्ता की प्राथमिकताओं (जैसे, रेस्टोरेंट या दुकानें) के आधार पर, लोकप्रिय जगहों के सुझाव देने हों.
-- सामाजिक, खुदरा या फ़ूड डिलीवरी सेवाओं के लिए, जगह की जानकारी के हिसाब से अनुभव बनाने हों.
+- Đưa ra câu trả lời đầy đủ và chính xác cho các câu hỏi theo vị trí địa lý.
+- Xây dựng công cụ lập kế hoạch chuyến đi và hướng dẫn viên địa phương dựa trên cuộc trò chuyện.
+- Đề xuất các địa điểm yêu thích dựa trên vị trí và lựa chọn ưu tiên của người dùng, chẳng hạn như nhà hàng hoặc cửa hàng.
+- Tạo trải nghiệm nhận biết vị trí cho các dịch vụ xã hội, bán lẻ hoặc giao đồ ăn.
 
-Google Maps से जानकारी लेने की सुविधा, उन मामलों में सबसे अच्छी तरह काम करती है जहां आस-पास की जानकारी और मौजूदा सटीक डेटा ज़रूरी होता है. जैसे, "मेरे आस-पास की सबसे अच्छी कॉफ़ी शॉप" ढूंढना या दिशा-निर्देश पाना.
+Neo bám vào Google Maps vượt trội trong các trường hợp sử dụng mà dữ liệu thực tế hiện tại và khoảng cách là yếu tố quan trọng, chẳng hạn như tìm "quán cà phê ngon nhất gần tôi" hoặc nhận chỉ đường.
 
-## इस्तेमाल के उदाहरण
+## Trường hợp sử dụng
 
-Google Maps से जानकारी लेने की सुविधा, जगह की जानकारी के हिसाब से कई तरह के मामलों में काम करती है.
+Tính năng liên kết với Google Maps hỗ trợ nhiều trường hợp sử dụng có nhận biết vị trí.
 
-### जगह से जुड़े सवालों के जवाब देना
+### Xử lý các câu hỏi về địa điểm cụ thể
 
-किसी खास जगह के बारे में ज़्यादा जानकारी वाले सवाल पूछें, ताकि Google पर उपयोगकर्ताओं की समीक्षाओं और Maps के अन्य डेटा के आधार पर जवाब मिल सकें.
+Đặt câu hỏi chi tiết về một địa điểm cụ thể để nhận câu trả lời dựa trên các bài đánh giá của người dùng trên Google và dữ liệu khác trên Maps.
 
 ### Python
 
@@ -160,7 +223,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="Is there a cafe near the corner of 1st and Main that has outdoor seating?",
     tools=[{
         "type": "google_maps",
@@ -191,7 +254,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const interaction = await ai.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: "Is there a cafe near the corner of 1st and Main that has outdoor seating?",
     tools: [{
       type: "google_maps",
@@ -222,9 +285,71 @@ async function main() {
 main();
 ```
 
-### जगह के हिसाब से मनमुताबिक अनुभव देना
+### Java
 
-उपयोगकर्ता की प्राथमिकताओं और किसी खास इलाके के हिसाब से सुझाव पाएं.
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Annotation;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.GoogleMaps;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.PlaceCitation;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(
+            InteractionsInput.of(
+                "Is there a cafe near the corner of 1st and Main that has outdoor seating?"))
+        .tools(
+            Arrays.asList(
+                GoogleMaps.builder().latitude(34.050481).longitude(-118.248526).build()))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content contentBlock : outputStep.content().get()) {
+          if (contentBlock instanceof TextContent) {
+            TextContent textContent = (TextContent) contentBlock;
+            System.out.println(textContent.text().orElse(""));
+            if (textContent.annotations().isPresent()
+                && !textContent.annotations().get().isEmpty()) {
+              System.out.println("\nSources:");
+              for (Annotation annotation : textContent.annotations().get()) {
+                if (annotation instanceof PlaceCitation) {
+                  PlaceCitation citation = (PlaceCitation) annotation;
+                  System.out.printf(
+                      "  - %s: %s%n", citation.name().orElse(""), citation.url().orElse(""));
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### Cung cấp tính năng cá nhân hoá dựa trên vị trí
+
+Nhận đề xuất phù hợp với lựa chọn ưu tiên của người dùng và một khu vực địa lý cụ thể.
 
 ### Python
 
@@ -235,7 +360,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="Which family-friendly restaurants near here have the best playground reviews?",
     tools=[{
         "type": "google_maps",
@@ -266,7 +391,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const interaction = await ai.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: "Which family-friendly restaurants near here have the best playground reviews?",
     tools: [{
       type: "google_maps",
@@ -297,9 +422,70 @@ async function main() {
 main();
 ```
 
-### यात्रा की योजना बनाने में मदद करना
+### Java
 
-कई दिनों की यात्रा की योजनाएं जनरेट करें. इनमें दिशा-निर्देश और अलग-अलग जगहों के बारे में जानकारी शामिल होती है. यह सुविधा, यात्रा से जुड़े ऐप्लिकेशन के लिए सबसे सही है.
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Annotation;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.GoogleMaps;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.PlaceCitation;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(
+            InteractionsInput.of(
+                "Which family-friendly restaurants near here have the best playground reviews?"))
+        .tools(
+            Arrays.asList(GoogleMaps.builder().latitude(30.2672).longitude(-97.7431).build()))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content contentBlock : outputStep.content().get()) {
+          if (contentBlock instanceof TextContent) {
+            TextContent textContent = (TextContent) contentBlock;
+            System.out.println(textContent.text().orElse(""));
+            if (textContent.annotations().isPresent()
+                && !textContent.annotations().get().isEmpty()) {
+              System.out.println("\nSources:");
+              for (Annotation annotation : textContent.annotations().get()) {
+                if (annotation instanceof PlaceCitation) {
+                  PlaceCitation citation = (PlaceCitation) annotation;
+                  System.out.printf(
+                      "  - %s: %s%n", citation.name().orElse(""), citation.url().orElse(""));
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### Hỗ trợ lập kế hoạch cho hành trình
+
+Tạo kế hoạch nhiều ngày kèm theo chỉ đường và thông tin về nhiều địa điểm, phù hợp với các ứng dụng du lịch.
 
 ### Python
 
@@ -312,7 +498,7 @@ client = genai.Client()
 prompt = "Plan a day in San Francisco for me. I want to see the Golden Gate Bridge, visit a museum, and have a nice dinner."
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input=prompt,
     tools=[{
         "type": "google_maps",
@@ -333,7 +519,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const interaction = await ai.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: "Plan a day in San Francisco for me. I want to see the Golden Gate Bridge, visit a museum, and have a nice dinner.",
     tools: [{
       type: "google_maps",
@@ -346,6 +532,38 @@ async function main() {
 main();
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.GoogleMaps;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+String prompt =
+    "Plan a day in San Francisco for me. I want to see the Golden Gate Bridge, visit a museum, and have a nice dinner.";
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of(prompt))
+        .tools(
+            Arrays.asList(GoogleMaps.builder().latitude(37.78193).longitude(-122.40476).build()))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+// ... code to process response
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -354,7 +572,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": "Plan a day in San Francisco for me. I want to see the Golden Gate Bridge, visit a museum, and have a nice dinner.",
     "tools": [{
       "type": "google_maps",
@@ -364,103 +582,100 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## सेवा के इस्तेमाल से जुड़ी ज़रूरी शर्तें
+## Yêu cầu về việc sử dụng dịch vụ
 
-इस सेक्शन में, Google Maps से जानकारी लेने की सुविधा के इस्तेमाल से जुड़ी ज़रूरी शर्तों के बारे में बताया गया है.
+Phần này mô tả các yêu cầu về việc sử dụng dịch vụ để sử dụng tính năng Grounding with Google Maps.
 
-### उपयोगकर्ता को Google Maps के सोर्स के इस्तेमाल के बारे में बताना
+### Thông báo cho người dùng về việc sử dụng các nguồn của Google Maps
 
-Google Maps से जानकारी के आधार पर मिले हर नतीजे के साथ, आपको `model_output` चरण के कॉन्टेंट ब्लॉक पर सोर्स के एनोटेशन मिलेंगे. ये एनोटेशन, हर जवाब के साथ दिखते हैं. ये मेटाडेटा दिखाए जाते हैं:
+Với mỗi kết quả dựa trên dữ liệu thực tế trên Google Maps, bạn sẽ nhận được chú thích nguồn trên các khối nội dung của bước `model_output` hỗ trợ từng câu trả lời. Hệ thống sẽ trả về siêu dữ liệu sau:
 
-- सोर्स यूआरएल
-- नाम
+- URL nguồn
+- tên
 
-Google Maps से जानकारी लेने की सुविधा से मिले नतीजे दिखाते समय, आपको Google Maps के सोर्स की जानकारी देनी होगी. साथ ही, अपने उपयोगकर्ताओं को यह जानकारी देनी होगी:
+Khi trình bày kết quả từ tính năng Grounding with Google Maps, bạn phải chỉ định các nguồn liên kết trên Google Maps và thông báo cho người dùng về những điều sau:
 
-- Google Maps के सोर्स, जनरेट किए गए उस कॉन्टेंट के तुरंत बाद दिखने चाहिए जिसके लिए सोर्स की जानकारी दी गई है. जनरेट किए गए इस कॉन्टेंट को, Google Maps से जानकारी के आधार पर मिला नतीजा भी कहा जाता है.
-- Google Maps के सोर्स, उपयोगकर्ता के एक इंटरैक्शन में दिखने चाहिए.
+- Các nguồn trên Google Maps phải nằm ngay sau nội dung được tạo mà các nguồn đó hỗ trợ. Nội dung được tạo này còn được gọi là Kết quả dựa trên vị trí thực tế trên Google Maps.
+- Người dùng phải xem được các nguồn dữ liệu của Google Maps trong một lượt tương tác của người dùng.
 
-### Google Maps के लिंक के साथ, Google Maps के सोर्स दिखाना
+### Hiển thị các nguồn trên Google Maps bằng đường liên kết đến Google Maps
 
-सोर्स के हर एनोटेशन के लिए, लिंक का प्रीव्यू जनरेट करना ज़रूरी है. इसके लिए, इन ज़रूरी शर्तों का पालन करें:
+Đối với mỗi chú thích nguồn, bạn phải tạo bản xem trước đường liên kết theo các yêu cầu sau:
 
-- Google Maps के टेक्स्ट
-  [एट्रिब्यूशन के दिशा-निर्देशों के मुताबिक, हर सोर्स को Google Maps से एट्रिब्यूट करें.](#maps-attribution-guidelines)
-- जवाब में दिए गए सोर्स का नाम दिखाएं.
-- एनोटेशन में मौजूद `url` का इस्तेमाल करके, सोर्स से लिंक करें.
+- Ghi công từng nguồn cho Google Maps theo [nguyên tắc ghi công](#maps-attribution-guidelines) văn bản của Google Maps.
+- Hiển thị tên nguồn có trong phản hồi.
+- Liên kết đến nguồn bằng cách sử dụng `url` từ chú giải.
 
-### Google Maps के टेक्स्ट एट्रिब्यूशन के दिशा-निर्देश
+### Nguyên tắc ghi công bằng văn bản của Google Maps
 
-टेक्स्ट में सोर्स को Google Maps से एट्रिब्यूट करते समय, इन दिशा-निर्देशों का पालन करें:
+Khi ghi nguồn cho Google Maps bằng văn bản, hãy tuân thủ các nguyên tắc sau:
 
-- Google Maps के टेक्स्ट में किसी भी तरह का बदलाव न करें:
-  - Google Maps के केस में बदलाव न करें.
-  - Google Maps को कई लाइनों में न दिखाएं.
-  - Google Maps को किसी दूसरी भाषा में स्थानीय भाषा में अनुवाद न करें.
-  - HTML एट्रिब्यूट translate="no" का इस्तेमाल करके, ब्राउज़र को Google Maps का अनुवाद करने से रोकें.
+- Không sửa đổi văn bản Google Maps theo bất kỳ cách nào:
+  - Không thay đổi kiểu viết hoa của Google Maps.
+  - Đừng xuống dòng Google Maps.
+  - Đừng bản địa hoá Google Maps sang một ngôn ngữ khác.
+  - Ngăn trình duyệt dịch Google Maps bằng cách sử dụng thuộc tính HTML translate="no".
 
-Google Maps के कुछ डेटा देने वाले पार्टनर और उनकी
-लाइसेंस की शर्तों के बारे में ज़्यादा जानकारी के लिए, [Google Maps और Google Earth के कानूनी नोटिस देखें](https://www.google.com/help/legalnotices_maps/?hl=hi).
+Để biết thêm thông tin về một số nhà cung cấp dữ liệu của Google Maps và điều khoản cấp phép của họ, hãy xem [Thông báo pháp lý của Google Maps và Google Earth](https://www.google.com/help/legalnotices_maps/?hl=vi).
 
-## सबसे सही तरीके
+## Các phương pháp hay nhất
 
-- **उपयोगकर्ता की जगह की जानकारी देना:** सबसे काम के और मनमुताबिक जवाब पाने के लिए, उपयोगकर्ता की जगह की जानकारी मिलने पर, हमेशा `google_maps` टूल के कॉन्फ़िगरेशन में `latitude` और `longitude` शामिल करें.
-- **आखिरी उपयोगकर्ताओं को जानकारी देना:** अपने आखिरी उपयोगकर्ताओं को साफ़ तौर पर बताएं कि उनकी क्वेरी के जवाब देने के लिए, Google Maps के डेटा का इस्तेमाल किया जा रहा है. खास तौर पर, तब जब टूल चालू हो.
-- **ज़रूरत न होने पर टॉगल बंद करना:** Google Maps से जानकारी लेने की सुविधा, डिफ़ॉल्ट रूप से बंद होती है. इसे सिर्फ़ तब चालू करें (`"tools": [{"type": "google_maps"}]`) जब किसी क्वेरी में
-  भौगोलिक कॉन्टेक्स्ट मौजूद हो. इससे परफ़ॉर्मेंस और लागत को ऑप्टिमाइज़ किया जा सकता है.
+- **Cung cấp vị trí của người dùng:** Để nhận được câu trả lời phù hợp và được cá nhân hoá nhất, hãy luôn thêm `latitude` và `longitude` vào cấu hình công cụ `google_maps` khi bạn biết vị trí của người dùng.
+- **Thông báo cho Người dùng cuối:** Thông báo rõ ràng cho người dùng cuối rằng dữ liệu trên Google Maps đang được dùng để trả lời các câu hỏi của họ, đặc biệt là khi công cụ này được bật.
+- **Tắt khi không cần thiết:** Theo mặc định, tính năng tiếp đất bằng Google Maps sẽ ở trạng thái tắt. Chỉ bật (`"tools": [{"type": "google_maps"}]`) khi truy vấn có ngữ cảnh địa lý rõ ràng để tối ưu hoá hiệu suất và chi phí.
 
-## सीमाएं
+## Các điểm hạn chế
 
-- फ़िलहाल, Google Maps से जानकारी लेने की सुविधा, सिर्फ़ अंग्रेज़ी भाषा में प्रॉम्प्ट और जवाब देती है.
-- ऐसा हो सकता है कि यह टूल सभी देशों/इलाकों में उपलब्ध न हो.
-- नतीजे, जगह की सटीक जानकारी और Maps के उपलब्ध डेटा के आधार पर अलग-अलग हो सकते हैं.
-- **भौगोलिक दायरा:** Google Maps से जानकारी लेने की सुविधा, दुनिया भर में उपलब्ध है.
-- **डिफ़ॉल्ट स्थिति:** Google Maps से जानकारी लेने की सुविधा, डिफ़ॉल्ट रूप से बंद होती है.
-  आपको एपीआई के अनुरोधों में इसे साफ़ तौर पर चालू करना होगा.
+- Tính năng căn cứ vào Google Maps hiện chỉ hỗ trợ câu lệnh và câu trả lời bằng tiếng Anh.
+- Công cụ này có thể không dùng được ở một số khu vực.
+- Kết quả có thể khác nhau tuỳ thuộc vào độ chính xác của vị trí và dữ liệu có sẵn trên Maps.
+- **Phạm vi địa lý:** Tính năng neo bám vào Google Maps được cung cấp trên toàn cầu.
+- **Trạng thái mặc định:** Công cụ Neo bám vào Google Maps sẽ tắt theo mặc định.
+  Bạn phải bật tính năng này một cách rõ ràng trong các yêu cầu API.
 
-## कीमत और दर की सीमाएं
+## Mức giá và hạn mức
 
-Google Maps से जानकारी लेने की सुविधा की कीमत, मॉडल जनरेशन के हिसाब से अलग-अलग होती है:
+Mức giá của tính năng neo bám vào Google Maps sẽ khác nhau tuỳ thuộc vào thế hệ mô hình:
 
-- **Gemini 3 मॉडल:** आपके प्रोजेक्ट के लिए, **खोज क्वेरी** के हिसाब से बिल भेजा जाता है. यह क्वेरी, मॉडल के ज़रिए एक्ज़ीक्यूट की जाती है. ज़रूरी जानकारी ढूंढने के लिए, मॉडल एक **खोज प्रॉम्प्ट** (मॉडल को भेजा गया आपका एपीआई अनुरोध) के लिए, कई खोज क्वेरी एक्ज़ीक्यूट कर सकता है. इनमें से हर क्वेरी को, टूल के बिल किए जा सकने वाले इस्तेमाल के तौर पर गिना जाता है.
-- **Gemini 2.5 और इससे पुराने मॉडल:** आपके प्रोजेक्ट के लिए, **खोज प्रॉम्प्ट** के हिसाब से बिल भेजा जाता है.
-  किसी अनुरोध के लिए बिल सिर्फ़ तब भेजा जाता है, जब प्रॉम्प्ट से Google Maps से जानकारी के आधार पर कम से कम एक नतीजा मिलता है. भले ही, उस नतीजे को पाने के लिए मॉडल ने अंदरूनी तौर पर कितनी भी खोज क्वेरी की हों.
+- **Mô hình Gemini 3:** Dự án của bạn sẽ bị tính phí cho mỗi **cụm từ tìm kiếm** mà mô hình quyết định thực hiện. Một **câu lệnh tìm kiếm** (yêu cầu API của bạn đối với mô hình) có thể khiến mô hình thực hiện nhiều truy vấn tìm kiếm để tìm thông tin cần thiết. Mỗi truy vấn này được tính là một lần sử dụng có tính phí của công cụ.
+- **Gemini 2.5 và các mô hình cũ:** Dự án của bạn sẽ được tính phí theo **câu lệnh tìm kiếm**.
+  Bạn chỉ bị tính phí cho yêu cầu nếu câu lệnh trả về thành công ít nhất một kết quả có căn cứ trên Google Maps, bất kể mô hình đã thực hiện bao nhiêu truy vấn tìm kiếm riêng lẻ ở nội bộ để nhận được kết quả đó.
 
-कीमत की ज़्यादा जानकारी के लिए, [Gemini API की कीमत वाला पेज](https://ai.google.dev/gemini-api/docs/pricing?hl=hi) देखें.
+Để biết thông tin chi tiết về giá, hãy xem [trang định giá Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=vi).
 
-## इस्तेमाल किए जा सकने वाले मॉडल
+## Mô hình được hỗ trợ
 
-Google Maps से जानकारी लेने की सुविधा, इन मॉडल के साथ काम करती है:
+Các mô hình sau đây hỗ trợ tính năng Neo bám vào Google Maps:
 
-| मॉडल | Google Maps से जानकारी लेने की सुविधा |
+| Mô hình | Neo bám vào Google Maps |
 | --- | --- |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=hi) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=hi) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=hi) | ✔️ |
-| [Gemini 3.1 Pro का प्रीव्यू](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=hi) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=hi) | ✔️ |
-| [Gemini 3 Flash का प्रीव्यू](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=hi) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=hi) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=hi) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=hi) | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=vi) | ✔️ |
+| [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=vi) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=vi) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=vi) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=vi) | ✔️ |
+| [Bản dùng thử Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=vi) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=vi) | ✔️ |
+| [Bản dùng thử Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=vi) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=vi) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=vi) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=vi) | ✔️ |
 
-## टूल के इस्तेमाल के लिए काम करने वाले कॉम्बिनेशन
+## Các tổ hợp công cụ được hỗ trợ
 
-Gemini 3 मॉडल, बिल्ट-इन टूल (जैसे, Google Maps से जानकारी लेने की सुविधा) को कस्टम टूल (फ़ंक्शन कॉलिंग) के साथ मिलाकर इस्तेमाल करने की सुविधा देते हैं. ज़्यादा जानने के लिए,
-[टूल के कॉम्बिनेशन](https://ai.google.dev/gemini-api/docs/tool-combination?hl=hi) वाला पेज देखें.
+Bạn có thể sử dụng tính năng Nền tảng kiến thức dựa trên Google Maps cùng với các công cụ tích hợp khác như [Nền tảng kiến thức dựa trên Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi) (được hỗ trợ trên Gemini 3.5 Flash và các mô hình sau này) để hỗ trợ các trường hợp sử dụng phức tạp hơn. Các mô hình Gemini 3 cũng hỗ trợ kết hợp những công cụ tích hợp này với các công cụ tuỳ chỉnh (gọi hàm). Tìm hiểu thêm trên trang [các tổ hợp công cụ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi).
 
-## आगे क्या करना है
+## Bước tiếp theo
 
-- अन्य [उपलब्ध टूल](https://ai.google.dev/gemini-api/docs/tools?hl=hi) के बारे में जानें.
-- ज़िम्मेदारी से एआई के इस्तेमाल के सबसे सही तरीकों और Gemini API के सुरक्षा
-  फ़िल्टर के बारे में ज़्यादा जानने के लिए, [सुरक्षा सेटिंग के बारे में गाइड देखें](https://ai.google.dev/gemini-api/docs/safety-settings?hl=hi).
+- Tìm hiểu về [các công cụ khác hiện có](https://ai.google.dev/gemini-api/docs/tools?hl=vi).
+- Để tìm hiểu thêm về các phương pháp hay nhất về AI có trách nhiệm và bộ lọc an toàn của Gemini API, hãy xem [hướng dẫn về Chế độ cài đặt an toàn](https://ai.google.dev/gemini-api/docs/safety-settings?hl=vi).
 
-सुझाव भेजें
+Gửi ý kiến phản hồi
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-आखिरी बार 2026-09-12 (UTC) को अपडेट किया गया.
+Cập nhật lần gần đây nhất: 2026-09-18 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-12 (UTC) को अपडेट किया गया."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-18 UTC."],[],[]]

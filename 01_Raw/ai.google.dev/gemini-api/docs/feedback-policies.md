@@ -1,59 +1,55 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/feedback-policies?hl=pl
-fetched_at: 2026-09-14T05:41:12.608452+00:00
-title: "Prze\u015blij opini\u0119 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/feedback-policies?hl=es-419
+fetched_at: 2026-09-21T05:48:09.848454+00:00
+title: "Comentarios \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
+Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-Prześlij opinię
+Enviar comentarios
 
-# Prześlij opinię
+# Comentarios
 
-## Głosowanie na preferencje w tekście
+## Votación de preferencias intercalada
 
-W Google AI Studio możesz czasami zobaczyć porównanie dwóch różnych odpowiedzi na Twój prompt. Jest to część naszego systemu głosowania na preferencje w tekście. Poprosimy Cię o wybranie odpowiedzi, którą wolisz. Pomoże nam to zrozumieć, które wyniki modelu są najbardziej przydatne dla użytkowników.
+En Google AI Studio, es posible que, en ocasiones, veas una comparación en paralelo de dos respuestas diferentes a tu instrucción. Esto forma parte de nuestro sistema de votación de preferencias intercalada. Se te pedirá que elijas la respuesta que prefieras. Esto nos ayuda a comprender qué resultados del modelo les resultan más útiles a los usuarios.
 
-### Dlaczego oferujemy tę usługę?
+### ¿Por qué lo haremos?
 
-Nieustannie pracujemy nad ulepszaniem naszych modeli i usług AI. Twoja opinia
-w ramach głosowania na preferencje w tekście pomaga nam udostępniać, ulepszać i rozwijać usługi Google
-oraz technologie uczenia maszynowego, w tym funkcje, produkty i usługi Google dla przedsiębiorstw, zgodnie z
-[dodatkowymi warunkami korzystania z usługi Gemini API](https://ai.google.dev/gemini-api/terms?hl=pl) i
-[Polityką prywatności](https://policies.google.com/privacy?hl=pl).
+Trabajamos constantemente para mejorar nuestros modelos y servicios de IA. Tus comentarios a través de la votación de preferencias intercalada nos ayudan a proporcionar, mejorar y desarrollar los productos y servicios de Google, así como las tecnologías de aprendizaje automático, incluidas las funciones, los productos y los servicios empresariales de Google, de conformidad con las [Condiciones del Servicio Adicionales de la API de Gemini](https://ai.google.dev/gemini-api/terms?hl=es-419) y la [Política de Privacidad](https://policies.google.com/privacy?hl=es-419).
 
-### Jakie dane są uwzględniane w opinii?
+### ¿Qué datos se incluyen en los comentarios?
 
-Aby podejmować świadome decyzje dotyczące naszych modeli, zbieramy określone dane, gdy bierzesz udział w głosowaniu na preferencje w tekście:
+Para tomar decisiones fundamentadas sobre nuestros modelos, recopilamos ciertos datos cuando participas en la votación de preferencias intercalada:
 
-- **Prompty i odpowiedzi:** rejestrujemy wszystkie prompty i odpowiedzi, w tym przesłane treści, w rozmowie, w której przesłano opinię. Rejestrujemy też 2 opcje odpowiedzi, które zostały wybrane. Pomaga nam to zrozumieć kontekst Twoich preferencji.
-- **Twój głos:** rejestrujemy, którą odpowiedź wolisz. Jest to główna część zbieranej przez nas opinii.
-- **Szczegóły użytkowania:** obejmują informacje o tym, który model wygenerował odpowiedź, oraz inne szczegóły techniczne i operacyjne dotyczące korzystania z tej funkcji.
+- **Instrucciones y respuestas:** Registramos todas las instrucciones y respuestas, incluido el contenido que se subió, en la conversación sobre la que enviaste comentarios. También registramos las dos opciones de respuesta que seleccionaste. Esto nos ayuda a comprender el contexto de tu preferencia.
+- **Tu voto:** Registramos qué respuesta preferiste. Este es el núcleo de los comentarios que recopilamos.
+- **Detalles de uso:** Incluyen información sobre qué modelo generó la respuesta y otros detalles técnicos y operativos sobre tu uso de esta función.
 
-### Twoja prywatność
+### Tu privacidad
 
-Szanujemy Twoją prywatność. W ramach tego procesu Google podejmuje odpowiednie działania, aby chronić Twoją prywatność. Obejmuje to odłączanie tych danych od Twojego konta Google, klucza API i projektu w chmurze, zanim weryfikatorzy je zobaczą lub opatrzą adnotacjami. **Nie przesyłaj opinii o rozmowach, które zawierają informacje wrażliwe, poufne lub osobiste.**
+En Google nos tomamos tu privacidad en serio. En este proceso, Google toma medidas para proteger tu privacidad. Esto incluye desvincular estos datos de tu Cuenta de Google, clave de API y proyecto de Cloud antes de que los revisores los vean o les agreguen anotaciones. **No envíes comentarios sobre conversaciones que incluyan información personal, confidencial o sensible.**
 
-### Wyłączenie funkcji
+### Cómo inhabilitar la función
 
-Gdy pojawi się głosowanie na preferencje w tekście, możesz je pominąć.
+Podrás omitir la votación de preferencias intercalada cuando aparezca.
 
-Dziękujemy za pomoc w ulepszaniu Google AI Studio.
+Gracias por ayudarnos a mejorar Google AI Studio.
 
-Prześlij opinię
+Enviar comentarios
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-Ostatnia aktualizacja: 2026-04-29 UTC.
+Última actualización: 2026-04-29 (UTC)
 
-Chcesz przekazać coś jeszcze?
+¿Quieres brindar más información?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]

@@ -1,46 +1,56 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/webhooks?hl=zh-CN
-fetched_at: 2026-09-14T05:39:11.977117+00:00
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/webhooks?hl=it
+fetched_at: 2026-09-21T05:46:20.697428+00:00
 title: "Webhook \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-cn)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs/generate-content?hl=it)
 
-发送反馈
+Invia feedback
 
 # Webhook
 
-借助 Webhook，Gemini API 可以在异步操作或长时间运行的操作 (LRO) 完成时，向您的服务器推送实时通知。这样一来，就不再需要轮询 API 以获取状态更新，从而缩短延迟时间并减少开销。
+I webhook consentono all'API Gemini di inviare notifiche in tempo reale al tuo server
+al termine delle operazioni asincrone o di lunga durata (LRO). In questo modo non è più necessario eseguire il polling dell'API per gli aggiornamenti di stato, riducendo la latenza e l'overhead.
 
-Webhook 可用于[批量](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn)作业、[互动](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn)和[视频生成](https://ai.google.dev/gemini-api/docs/video?hl=zh-cn)等操作。
+I webhook sono disponibili per operazioni come i job [batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=it),
+le [interazioni](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) e la [generazione di video](https://ai.google.dev/gemini-api/docs/video?hl=it).
 
-## 运作方式
+## Come funziona
 
-您可以配置 Gemini API Webhook，以便在事件触发时立即向监听器网址发送 HTTP POST 请求，而无需反复轮询 `GET /operations` 来检查作业是否已完成。
+Anziché eseguire il polling di `GET /operations` ripetutamente per verificare se un job è terminato,
+puoi configurare i webhook dell'API Gemini per inviare una richiesta HTTP POST al tuo
+URL listener immediatamente dopo l'attivazione di un evento.
 
-Gemini API 支持两种配置网络钩子的方式：
+L'API Gemini supporta due modi per configurare i webhook:
 
-- [**静态 Webhook**](#static-webhooks)：使用 Gemini [WebhookService API](https://ai.google.dev/api?hl=zh-cn) 配置的项目级端点。适用于全局集成（例如，通知 Slack、同步数据库等）。
-- [**动态网络钩子**](#dynamic-webhooks)：请求级替换，在特定作业调用的配置载荷中传递网络钩子网址。非常适合将特定作业路由到专用端点。
+- [**Webhook statici**](#static-webhooks): endpoint a livello di progetto configurati
+  con l'[API WebhookService](https://ai.google.dev/api?hl=it). Ideale per le integrazioni globali (ad es. notifica di Slack, sincronizzazione di un database e così via).
+- [**Webhook dinamici**](#dynamic-webhooks): override a livello di richiesta che passano un
+  URL webhook nel payload di configurazione di una chiamata di lavoro specifica. Ideale per
+  indirizzare job specifici a endpoint dedicati.
 
-## 静态 Webhook
+## Webhook statici
 
-静态 webhook 是针对整个[项目](https://ai.google.dev/gemini-api/docs/api-key?hl=zh-cn#google-cloud-projects)注册的，并且会针对任何匹配的事件触发。
+I webhook statici vengono registrati per un intero [progetto](https://ai.google.dev/gemini-api/docs/api-key?hl=it#google-cloud-projects) e vengono attivati per qualsiasi evento corrispondente.
 
-### 创建网络钩子
+### Crea un webhook
 
-您可以使用 SDK 或 REST API 创建端点。
+Puoi creare endpoint utilizzando l'SDK o l'API REST.
 
-**重要提示**：创建 Webhook 时，API **仅返回一次**签名密钥。您必须安全地存储此密钥（例如，存储在环境变量中），以便日后验证签名。如果您丢失了签名密钥，则必须[轮换](#rotate-signing-secret)该密钥。
+**IMPORTANTE**: quando crei un webhook, l'API restituisce un **segreto di firma**
+**solo una volta**. Devi memorizzarlo in modo sicuro (ad es. nelle variabili di ambiente)
+per verificare le firme in un secondo momento. Se perdi il secret di firma, dovrai
+[ruotarlo](#rotate-signing-secret).
 
 ### Python
 
@@ -96,11 +106,12 @@ curl -X POST \
   }'
 ```
 
-如需详细了解如何设置服务器以接收数据，请参阅[处理 Webhook 请求](#handle-webhook-requests)部分。
+Per informazioni dettagliate sulla configurazione del server per la ricezione dei dati, consulta la sezione
+[Gestire le richieste webhook](#handle-webhook-requests).
 
-### 获取网络钩子
+### Recuperare un webhook
 
-按资源名称检索特定 Webhook 的详细信息。
+Recupera i dettagli di un webhook specifico in base al nome della risorsa.
 
 ### Python
 
@@ -142,9 +153,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### 列出网络钩子
+### Elenco webhook
 
-列出当前项目的所有已配置的 Webhook，并可选择进行分页。
+Elenca tutti i webhook configurati per il progetto corrente, con paginazione facoltativa.
 
 ### Python
 
@@ -185,9 +196,10 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### 更新网络钩子
+### Aggiorna un webhook
 
-更新现有 Webhook 的属性，例如显示名称、目标 URI 或订阅的事件。
+Aggiorna le proprietà di un webhook esistente, ad esempio il nome visualizzato, l'URI di destinazione o
+gli eventi a cui è stato eseguito l'abbonamento.
 
 ### Python
 
@@ -237,9 +249,10 @@ curl -X PATCH \
   }'
 ```
 
-### 删除网络钩子
+### Eliminare un webhook
 
-从项目中移除 webhook 端点。这样一来，系统就不会再向相应端点传送未来的活动。
+Rimuovi un endpoint webhook dal progetto. In questo modo, le future distribuzioni di eventi
+a quell'endpoint vengono interrotte.
 
 ### Python
 
@@ -277,11 +290,12 @@ curl -X DELETE \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### 轮替签名密钥
+### Ruotare un secret di firma
 
-轮替网络钩子的签名密钥。您可以配置是立即撤消之前有效的 Secret，还是在 24 小时的宽限期后撤消。
+Ruota il secret di firma per un webhook. Puoi configurare se i segreti attivi in precedenza
+vengono revocati immediatamente o dopo un periodo di tolleranza di 24 ore.
 
-**重要提示**：新的签名密钥仅在轮换时返回一次。在更新验证逻辑之前，请务必妥善存储该密钥。
+**IMPORTANTE**: il nuovo segreto di firma viene restituito **solo una volta** al momento della rotazione. Archivialo in modo sicuro prima di aggiornare la logica di verifica.
 
 ### Python
 
@@ -334,13 +348,16 @@ curl -X POST \
   }'
 ```
 
-### 在服务器上处理网络钩子请求
+### Gestire le richieste webhook su un server
 
-当发生您订阅的事件时，您的网络钩子网址会收到 HTTP POST 请求。您的端点必须在几秒钟内以 2xx 状态代码进行响应，以避免重试。为确保交付，Gemini API 会使用指数退避算法自动重试失败的请求，重试时间长达 24 小时。
+Quando si verifica un evento a cui hai eseguito la registrazione, il tuo URL webhook riceverà
+una richiesta POST HTTP. L'endpoint deve rispondere con un codice di stato 2xx
+entro pochi secondi per evitare un nuovo tentativo. Per garantire la consegna, l'API Gemini
+ritenta automaticamente le richieste non riuscite per 24 ore utilizzando il backoff esponenziale.
 
-Gemini 严格遵循[标准 Webhook](https://github.com/standard-webhooks/standard-webhooks) 规范来设置安全标头。使用签名标头签名和您存储的静态签名密钥，在服务器上验证载荷。如需了解载荷信息，请参阅[网络钩子信封](#webhook-envelope)部分。
+Gemini segue rigorosamente la specifica [Standard Webhooks](https://github.com/standard-webhooks/standard-webhooks) per le intestazioni di sicurezza. Verifica il payload sul tuo server utilizzando le firme delle intestazioni firmate e la chiave segreta di firma statica memorizzata. Per informazioni sul payload, consulta la sezione [Webhook envelope](#webhook-envelope).
 
-以下是使用 Flask 的 HTTP 监听器示例：
+Ecco un esempio che utilizza Flask per il listener HTTP:
 
 ### Python
 
@@ -429,13 +446,15 @@ app.listen(8000, () => {
 });
 ```
 
-## 动态 webhook
+## Webhook dinamici
 
-借助动态 webhook，您可以将 webhook 端点绑定到**特定请求配置**，非常适合代理编排队列。动态 Webhook 利用非对称公钥 JWKS 签名（而非对称密钥）。
+I webhook dinamici ti consentono di associare un endpoint webhook a una **configurazione di richiesta specifica**, ideale per le code di orchestrazione degli agenti. Gli webhook dinamici utilizzano
+firme JWKS con chiavi pubbliche asimmetriche anziché segreti simmetrici.
 
-### 提交动态请求
+### Inviare una richiesta dinamica
 
-在触发异步作业（例如创建 Batch）时添加了 `webhook_config`。
+Aggiungi un `webhook_config` quando attivi un job asincrono (ad esempio, la creazione di un
+batch).
 
 ### Python
 
@@ -499,9 +518,10 @@ curl -X POST \
   }'
 ```
 
-### 验证动态签名 (JWKS)
+### Verifica delle firme dinamiche (JWKS)
 
-动态 Webhook 请求会发出 JSON Web 令牌 (JWT) 签名。您的监听器必须提取签名，并使用 [Google 的公共证书端点](https://www.googleapis.com/oauth2/v3/certs)对其进行验证。
+Le richieste webhook dinamiche emettono una firma JSON Web Token (JWT). Il listener
+deve estrarre la firma e verificarla utilizzando gli [endpoint del certificato pubblico di Google](https://www.googleapis.com/oauth2/v3/certs).
 
 ### Python
 
@@ -602,11 +622,13 @@ app.post('/gemini-webhook-dynamic', (req, res) => {
 });
 ```
 
-## 网络钩子信封
+## Busta del webhook
 
-为避免带宽拥塞，Gemini webhook 使用**精简的载荷**模型来传送数据。传送内容会发送包含状态详细信息和结果指针的快照，而不是原始输出文件本身。
+Per evitare la congestione della larghezza di banda, i webhook Gemini utilizzano un modello di **payload sottile** per
+trasferire i dati.
+I trasferimenti inviano uno snapshot contenente i dettagli dello stato e i puntatori ai risultati, anziché il file di output non elaborato.
 
-以下是载荷格式示例：
+Ecco un esempio di formato del payload:
 
 ```
 {
@@ -620,40 +642,44 @@ app.post('/gemini-webhook-dynamic', (req, res) => {
 }
 ```
 
-## 事件目录参考
+## Riferimento al catalogo degli eventi
 
-系统会针对支持的作业触发以下事件：
+Per i job di supporto vengono attivati i seguenti eventi:
 
-| 事件类型 | 触发器 | 载荷项 (`data`) |
+| Tipo di evento | Trigger | Elemento payload (`data`) |
 | --- | --- | --- |
-| `batch.succeeded` | 处理已成功完成。 | `id`、`output_file_uri` |
-| `batch.cancelled` | 用户取消了请求 | `id` |
-| `batch.expired` | 批次在 24 小时内未处理（完成） | `id` |
-| `batch.failed` | 批量作业失败（系统或验证错误）。 | `id`、`error_code`、`error_message` |
-| `interaction.requires_action` | 函数调用，用户需要执行某些操作 | `id` |
-| `interaction.completed` | 互动 API 中的 LRO 成功 | `id` |
-| `interaction.failed` | 互动 API 中的 LRO 失败（系统或验证错误）。 | `id`、`error_code`、`error_message` |
-| `interaction.cancelled` | 取消了 interactions API 中的 LRO | `id` |
-| `video.generated` | 视频生成 LRO 已完成。 | `id`、`output_file_uri`、`file_name` |
+| `batch.succeeded` | Elaborazione completata. | `id`, `output_file_uri` |
+| `batch.cancelled` | Richiesta annullata dall'utente | `id` |
+| `batch.expired` | Il batch non è stato elaborato (completato) nell'arco di 24 ore | `id` |
+| `batch.failed` | Il job batch non è riuscito (errore di sistema o di convalida). | `id`, `error_code`, `error_message` |
+| `interaction.requires_action` | Chiamata di funzione, l'utente deve fare qualcosa | `id` |
+| `interaction.completed` | LRO nell'API Interactions riuscita | `id` |
+| `interaction.failed` | LRO nell'API Interactions non riuscita (errore di sistema o di convalida). | `id`, `error_code`, `error_message` |
+| `interaction.cancelled` | LRO nell'API Interactions annullata | `id` |
+| `video.generated` | L'operazione LRO di generazione del video è stata completata. | `id`, `output_file_uri`, `file_name` |
 
-## 最佳做法
+## Best practice
 
-为确保可靠、可扩缩的运行：
+Per garantire un funzionamento affidabile e scalabile:
 
-- **严格的重放保护检查**：所有请求都带有 `webhook-timestamp` 标头。请务必在服务器配置层验证此时间戳，以拒绝超过 **5 分钟**的载荷（以缓解重放攻击）。
-- **异步处理**：在检测到有效签名后立即以 `2xx OK` 进行响应，并在内部将解析操作加入队列。如果监听器保持时间过长，系统会触发传送重试周期。
-- **重复数据处理**：标准 Webhook 提供“至少一次”的交付保证。使用一致的 `webhook-id` 标头来处理高拥塞流量中可能出现的重复项。
+- **Controllo rigoroso della protezione dal replay**: tutte le richieste includono un'intestazione `webhook-timestamp`. Convalida sempre questo timestamp nel livello di configurazione del server per
+  rifiutare i payload più vecchi di **5 minuti** (per mitigare gli attacchi di replay).
+- **Elabora in modo asincrono**: rispondi con `2xx OK` immediatamente dopo il rilevamento di una firma valida e metti in coda internamente le operazioni di analisi. Tempi di attesa prolungati
+  attiveranno un ciclo di nuovi tentativi di consegna.
+- **Gestione della deduplicazione**: i webhook standard vengono distribuiti "almeno una volta". Utilizza l'intestazione
+  `webhook-id` coerente per gestire i potenziali duplicati nei flussi con congestione
+  più elevata.
 
-## 接下来怎么做？
+## Passaggi successivi
 
-- [Batch API](https://ai.google.dev/gemini-api/docs/batch?hl=zh-cn)：利用 Webhook 自动执行高流量端点。
+- [API Batch](https://ai.google.dev/gemini-api/docs/batch?hl=it): utilizza i webhook per automatizzare gli endpoint ad alto volume.
 
-发送反馈
+Invia feedback
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-最后更新时间 (UTC)：2026-09-12。
+Ultimo aggiornamento 2026-09-12 UTC.
 
-需要向我们提供更多信息？
+Vuoi dirci altro?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-12。"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-12 UTC."],[],[]]

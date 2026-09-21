@@ -1,44 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=th
-fetched_at: 2026-09-14T05:40:32.143769+00:00
-title: "\u0e40\u0e2d\u0e40\u0e08\u0e19\u0e15\u0e4c\u0e27\u0e34\u0e08\u0e31\u0e22\u0e15\u0e25\u0e32\u0e14\u0e14\u0e49\u0e27\u0e22 Gemini \u0e41\u0e25\u0e30 AI SDK \u0e42\u0e14\u0e22 Vercel \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=ko
+fetched_at: 2026-09-21T05:47:46.877065+00:00
+title: "Vercel\uc758 Gemini \ubc0f AI SDK\ub97c \uc0ac\uc6a9\ud558\ub294 \uc2dc\uc7a5 \uc870\uc0ac \uc5d0\uc774\uc804\ud2b8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-ส่งความคิดเห็น
+의견 보내기
 
-# เอเจนต์วิจัยตลาดด้วย Gemini และ AI SDK โดย Vercel
+# Vercel의 Gemini 및 AI SDK를 사용하는 시장 조사 에이전트
 
-[AI SDK ของ Vercel](https://ai-sdk.dev) เป็นไลบรารีโอเพนซอร์สที่มีประสิทธิภาพสำหรับ
-การสร้างแอปพลิเคชัน อินเทอร์เฟซผู้ใช้ และเอเจนต์ที่ขับเคลื่อนด้วย AI ใน TypeScript
+[Vercel의 AI SDK](https://ai-sdk.dev)는 TypeScript에서 AI 기반 애플리케이션, 사용자 인터페이스, 에이전트를 빌드하기 위한 강력한 오픈소스 라이브러리입니다.
 
-คู่มือนี้จะแนะนำคุณในการสร้างแอปพลิเคชัน Node.js ด้วย TypeScript
-ที่ใช้ AI SDK เพื่อเชื่อมต่อกับ Gemini API ผ่าน[ผู้ให้บริการ Generative AI ของ Google](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai) และทำการวิเคราะห์เทรนด์ตลาดโดยอัตโนมัติ แอปพลิเคชันสุดท้ายจะมีลักษณะดังนี้
+이 가이드에서는 AI SDK를 사용하여 [Google 생성형 AI 제공업체](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai)를 통해 Gemini API에 연결하고 자동화된 시장 동향 분석을 실행하는 TypeScript로 Node.js 애플리케이션을 빌드하는 방법을 안내합니다. 최종 애플리케이션은 다음을 수행합니다.
 
-1. ใช้ Gemini กับ Google Search เพื่อค้นคว้าวิจัยเทรนด์ตลาดปัจจุบัน
-2. แยก Structured Data จากการวิจัยเพื่อสร้างแผนภูมิ
-3. รวมการวิจัยและแผนภูมิไว้ในรายงาน HTML ระดับมืออาชีพ แล้วบันทึกเป็น PDF
+1. Google 검색과 함께 Gemini를 사용하여 현재 시장 동향을 조사하세요.
+2. 조사에서 구조화된 데이터를 추출하여 차트를 생성합니다.
+3. 연구 결과와 차트를 전문적인 HTML 보고서로 결합하고 PDF로 저장합니다.
 
-## ข้อกำหนดเบื้องต้น
+## 기본 요건
 
-คุณต้องมีสิ่งต่อไปนี้จึงจะทำตามคู่มือนี้ได้
+이 가이드를 완료하려면 다음이 필요합니다.
 
-- คีย์ Gemini API คุณสร้างคีย์ได้ฟรีใน [Google AI Studio](https://aistudio.google.com/apikey?hl=th)
-- [Node.js](https://nodejs.org/en/download) เวอร์ชัน 18 ขึ้นไป
-- เครื่องมือจัดการแพ็กเกจ เช่น `npm`, `pnpm`, หรือ `yarn`
+- Gemini API 키 [Google AI Studio](https://aistudio.google.com/apikey?hl=ko)에서 무료로 만들 수 있습니다.
+- [Node.js](https://nodejs.org/en/download) 버전 18 이상
+- `npm`, `pnpm`, `yarn`와 같은 패키지 관리자
 
-## ตั้งค่าแอปพลิเคชัน
+## 애플리케이션 설정
 
-ขั้นแรก ให้สร้างไดเรกทอรีใหม่สำหรับโปรเจ็กต์แล้วเริ่มต้นไดเรกทอรี
+먼저 프로젝트의 새 디렉터리를 만들고 초기화합니다.
 
 ### npm
 
@@ -56,7 +54,7 @@ cd market-trend-app
 pnpm init
 ```
 
-### yarn
+### 털실
 
 ```
 mkdir market-trend-app
@@ -64,9 +62,9 @@ cd market-trend-app
 yarn init -y
 ```
 
-### ติดตั้งการอ้างอิง
+### 종속 항목 설치
 
-จากนั้นติดตั้ง AI SDK, ผู้ให้บริการ Generative AI ของ Google และการอ้างอิงอื่นๆ ที่จำเป็น
+그런 다음 AI SDK, Google 생성형 AI 제공자, 기타 필요한 종속 항목을 설치합니다.
 
 ### npm
 
@@ -75,7 +73,7 @@ npm install ai @ai-sdk/google zod
 npm install -D @types/node tsx typescript && npx tsc --init
 ```
 
-ให้ใส่ความคิดเห็นในบรรทัดต่อไปนี้ใน `tsconfig.json` ที่สร้างขึ้นเพื่อป้องกันข้อผิดพลาดของคอมไพเลอร์ TypeScript
+TypeScript 컴파일러 오류를 방지하려면 생성된 `tsconfig.json`에서 다음 줄을 주석 처리하세요.
 
 ```
 //"verbatimModuleSyntax": true,
@@ -88,21 +86,20 @@ pnpm add ai @ai-sdk/google zod
 pnpm add -D @types/node tsx typescript
 ```
 
-### yarn
+### 털실
 
 ```
 yarn add ai @ai-sdk/google zod
 yarn add -D @types/node tsx typescript && yarn tsc --init
 ```
 
-ให้ใส่ความคิดเห็นในบรรทัดต่อไปนี้ใน `tsconfig.json` ที่สร้างขึ้นเพื่อป้องกันข้อผิดพลาดของคอมไพเลอร์ TypeScript
+TypeScript 컴파일러 오류를 방지하려면 생성된 `tsconfig.json`에서 다음 줄을 주석 처리하세요.
 
 ```
 //"verbatimModuleSyntax": true,
 ```
 
-แอปพลิเคชันนี้จะใช้แพ็กเกจของบุคคลที่สามอย่าง [Puppeteer](https://pptr.dev/)
-และ [Chart.js](https://www.chartjs.org) สำหรับการแสดงแผนภูมิและการสร้าง PDF ด้วย
+이 애플리케이션은 차트를 렌더링하고 PDF를 만들기 위해 서드 파티 패키지 [Puppeteer](https://pptr.dev/)와 [Chart.js](https://www.chartjs.org)도 사용합니다.
 
 ### npm
 
@@ -118,18 +115,18 @@ pnpm add puppeteer chart.js
 pnpm add -D @types/chart.js
 ```
 
-### yarn
+### 털실
 
 ```
 yarn add puppeteer chart.js
 yarn add -D @types/chart.js
 ```
 
-แพ็กเกจ `puppeteer` ต้องใช้สคริปต์เพื่อดาวน์โหลดเบราว์เซอร์ Chromium เครื่องมือจัดการแพ็กเกจอาจขออนุมัติ ดังนั้นโปรดอนุมัติสคริปต์เมื่อได้รับข้อความแจ้ง
+`puppeteer` 패키지를 사용하려면 스크립트를 실행하여 Chromium 브라우저를 다운로드해야 합니다. 패키지 관리자에서 승인을 요청할 수 있으므로 메시지가 표시되면 스크립트를 승인해야 합니다.
 
-### กำหนดค่าคีย์ API
+### API 키 구성
 
-ตั้งค่าตัวแปรสภาพแวดล้อม `GOOGLE_GENERATIVE_AI_API_KEY` ด้วยคีย์ Gemini API ผู้ให้บริการ Generative AI ของ Google จะค้นหาคีย์ API ในตัวแปรสภาพแวดล้อมนี้โดยอัตโนมัติ
+`GOOGLE_GENERATIVE_AI_API_KEY` 환경 변수를 Gemini API 키로 설정합니다. Google 생성형 AI 제공자는 이 환경 변수에서 API 키를 자동으로 찾습니다.
 
 ### MacOS/Linux
 
@@ -143,11 +140,11 @@ export GOOGLE_GENERATIVE_AI_API_KEY="YOUR_API_KEY_HERE"
 setx GOOGLE_GENERATIVE_AI_API_KEY "YOUR_API_KEY_HERE"
 ```
 
-## สร้างแอปพลิเคชัน
+## 자체 애플리케이션 구축
 
-ตอนนี้เรามาสร้างไฟล์หลักสำหรับแอปพลิเคชันกัน สร้างไฟล์ใหม่ชื่อ `main.ts` ในไดเรกทอรีโปรเจ็กต์ คุณจะสร้างตรรกะในไฟล์นี้ทีละขั้นตอน
+이제 애플리케이션의 기본 파일을 만들어 보겠습니다. 프로젝트 디렉터리에 `main.ts`라는 새 파일을 만듭니다. 이 파일에서 로직을 단계별로 빌드합니다.
 
-หากต้องการทดสอบอย่างรวดเร็วเพื่อให้แน่ใจว่าตั้งค่าทุกอย่างถูกต้องแล้ว ให้เพิ่มโค้ดต่อไปนี้ลงใน `main.ts` ตัวอย่างพื้นฐานนี้ใช้ `generateText` เพื่อรับการตอบกลับอย่างง่ายจาก Gemini
+모든 항목이 올바르게 설정되었는지 빠르게 테스트하려면 `main.ts`에 다음 코드를 추가하세요. 이 기본 예에서는 `generateText`을 사용하여 Gemini로부터 간단한 대답을 가져옵니다.
 
 ```
 import { google } from "@ai-sdk/google";
@@ -165,7 +162,7 @@ async function main() {
 main().catch(console.error);
 ```
 
-ก่อนเพิ่มความซับซ้อน ให้เรียกใช้สคริปต์นี้เพื่อตรวจสอบว่าสภาพแวดล้อมของคุณได้รับการกำหนดค่าอย่างถูกต้อง เรียกใช้คำสั่งต่อไปนี้ในเทอร์มินัล
+더 복잡한 작업을 추가하기 전에 이 스크립트를 실행하여 환경이 올바르게 구성되었는지 확인하세요. 터미널에서 다음 명령어를 실행합니다.
 
 ### npm
 
@@ -179,20 +176,19 @@ npx tsc && node main.js
 pnpm tsx main.ts
 ```
 
-### yarn
+### 털실
 
 ```
 yarn tsc && node main.js
 ```
 
-หากตั้งค่าทุกอย่างถูกต้อง คุณจะเห็นการตอบกลับของ Gemini พิมพ์ลงในคอนโซล
+모든 항목이 올바르게 설정되면 Gemini의 대답이 콘솔에 출력됩니다.
 
-## ทำการวิจัยตลาดด้วย Google Search
+## Google 검색으로 시장 조사하기
 
-หากต้องการรับข้อมูลล่าสุด คุณสามารถเปิดใช้เครื่องมือ
-[Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th) สำหรับ Gemini ได้ เมื่อเครื่องมือนี้ทำงานอยู่ โมเดลจะค้นหาเว็บเพื่อตอบคำสั่งและแสดงแหล่งข้อมูลที่ใช้
+최신 정보를 얻으려면 Gemini의 [Google 검색](https://ai.google.dev/gemini-api/docs/google-search?hl=ko) 도구를 사용 설정하세요. 이 도구가 활성화되면 모델이 웹을 검색하여 프롬프트에 답변하고 사용한 소스를 반환합니다.
 
-แทนที่เนื้อหาของ `main.ts` ด้วยโค้ดต่อไปนี้เพื่อทำการวิเคราะห์ขั้นตอนแรก
+`main.ts`의 콘텐츠를 다음 코드로 바꿔 분석의 첫 번째 단계를 실행합니다.
 
 ```
 import { google } from "@ai-sdk/google";
@@ -218,13 +214,13 @@ async function main() {
 main().catch(console.error);
 ```
 
-## แยกข้อมูลแผนภูมิ
+## 차트 데이터 추출
 
-จากนั้นมาประมวลผลข้อความการวิจัยเพื่อแยก Structured Data ที่เหมาะสำหรับแผนภูมิ ใช้ฟังก์ชัน `generateObject` ของ AI SDK พร้อมกับสคีมา `zod` เพื่อกำหนดโครงสร้างข้อมูลที่แน่นอน
+다음으로 연구 텍스트를 처리하여 차트에 적합한 구조화된 데이터를 추출해 보겠습니다. AI SDK의 `generateObject` 함수를 `zod` 스키마와 함께 사용하여 정확한 데이터 구조를 정의합니다.
 
-นอกจากนี้ ให้สร้างฟังก์ชันตัวช่วยเพื่อแปลง Structured Data นี้ให้เป็นการกำหนดค่าที่ `Chart.js` เข้าใจได้
+또한 이 구조화된 데이터를 `Chart.js`가 이해할 수 있는 구성으로 변환하는 도우미 함수를 만듭니다.
 
-เพิ่มโค้ดต่อไปนี้ลงใน `main.ts` โปรดสังเกตการนำเข้าใหม่และ "ขั้นตอนที่ 2" ที่เพิ่มเข้ามา
+다음 코드를 `main.ts`에 추가합니다. 새 가져오기와 추가된 '2단계'를 참고하세요.
 
 ```
 import { google } from "@ai-sdk/google";
@@ -306,13 +302,12 @@ ${marketTrends}
 main().catch(console.error);
 ```
 
-## สร้างรายงานขั้นสุดท้าย
+## 최종 보고서 생성
 
-ในขั้นตอนสุดท้าย ให้สั่งให้ Gemini ทำหน้าที่เป็นผู้เขียนรายงานผู้เชี่ยวชาญ
-ระบุการวิจัยตลาด การกำหนดค่าแผนภูมิ และชุดคำแนะนำที่ชัดเจนสำหรับการสร้างรายงาน HTML จากนั้นใช้
-[Puppeteer](https://pptr.dev/) เพื่อแสดง HTML นี้และบันทึกเป็น PDF
+마지막 단계에서는 Gemini가 전문가 보고서 작성자 역할을 하도록 지시합니다.
+시장 조사, 차트 구성, HTML 보고서 빌드를 위한 명확한 지침을 제공합니다. 그런 다음 [Puppeteer](https://pptr.dev/)를 사용하여 이 HTML을 렌더링하고 PDF로 저장합니다.
 
-เพิ่มการนำเข้า `puppeteer` ขั้นสุดท้ายและ "ขั้นตอนที่ 3" ลงในไฟล์ `main.ts`
+최종 `puppeteer` 가져오기 및 'Step 3'을 `main.ts` 파일에 추가합니다.
 
 ```
 // ... (imports from previous step)
@@ -373,9 +368,9 @@ async function main() {
 main().catch(console.error);
 ```
 
-## เรียกใช้แอปพลิเคชัน
+## 애플리케이션 실행
 
-ตอนนี้คุณพร้อมที่จะเรียกใช้แอปพลิเคชันแล้ว เรียกใช้คำสั่งต่อไปนี้ในเทอร์มินัล
+이제 애플리케이션을 실행할 수 있습니다. 터미널에서 다음 명령어를 실행합니다.
 
 ### npm
 
@@ -389,33 +384,33 @@ npx tsc && node main.js
 pnpm tsx main.ts
 ```
 
-### yarn
+### 털실
 
 ```
 yarn tsc && node main.js
 ```
 
-คุณจะเห็นการบันทึกในเทอร์มินัลเมื่อสคริปต์ดำเนินการแต่ละขั้นตอน
-เมื่อเสร็จแล้ว ระบบจะสร้างไฟล์ `report.pdf` ที่มีการวิเคราะห์ตลาดในไดเรกทอรีโปรเจ็กต์
+스크립트가 각 단계를 실행하면 터미널에 로깅이 표시됩니다.
+완료되면 시장 분석이 포함된 `report.pdf` 파일이 프로젝트 디렉터리에 생성됩니다.
 
-ด้านล่างนี้ คุณจะเห็น 2 หน้าแรกของรายงาน PDF ตัวอย่าง
+아래는 PDF 보고서의 처음 두 페이지의 예입니다.
 
-![รายงานการวิเคราะห์ตลาด](https://ai.google.dev/static/gemini-api/docs/images/market-research-pdf.jpg?hl=th)
+![시장 분석 보고서](https://ai.google.dev/static/gemini-api/docs/images/market-research-pdf.jpg?hl=ko)
 
-## แหล่งข้อมูลเพิ่มเติม
+## 추가 자료
 
-ดูข้อมูลเพิ่มเติมเกี่ยวกับการสร้างด้วย Gemini และ AI SDK ได้จากแหล่งข้อมูลต่อไปนี้
+Gemini 및 AI SDK로 빌드하는 방법에 관한 자세한 내용은 다음 리소스를 참고하세요.
 
-- [เอกสาร AI SDK](https://ai-sdk.dev/docs)
-- [เอกสาร Generative AI ของ Google สำหรับ AI SDK](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai)
-- [คู่มือ AI SDK: เริ่มต้นใช้งาน Gemini](https://ai-sdk.dev/cookbook/guides/gemini)
+- [AI SDK 문서](https://ai-sdk.dev/docs)
+- [AI SDK Google 생성형 AI 문서](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai)
+- [AI SDK 쿡북: Gemini 시작하기](https://ai-sdk.dev/cookbook/guides/gemini)
 
-ส่งความคิดเห็น
+의견 보내기
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-อัปเดตล่าสุด 2026-09-12 UTC
+최종 업데이트: 2026-09-12(UTC)
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+의견을 전달하고 싶나요?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-12 UTC"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-12(UTC)"],[],[]]

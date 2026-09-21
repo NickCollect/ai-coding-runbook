@@ -1,32 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/code-execution?hl=es-419
-fetched_at: 2026-09-14T05:46:04.913482+00:00
-title: "Ejecuci\u00f3n de c\u00f3digo \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-BR
+fetched_at: 2026-09-21T05:54:05.863699+00:00
+title: "Execu\u00e7\u00e3o de c\u00f3digo \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
+O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Enviar comentarios
+Envie comentários
 
-# Ejecución de código
+# Execução de código
 
-La API de Gemini proporciona una herramienta de ejecución de código que permite que el modelo genere y ejecute código de Python. Luego, el modelo puede aprender de forma iterativa a partir de los resultados de la ejecución de código hasta llegar a un resultado final. Puedes usar la ejecución de código para crear aplicaciones que se beneficien del razonamiento basado en código. Por ejemplo, puedes usar la ejecución de código para resolver ecuaciones o procesar texto. También puedes
-usar las [bibliotecas](#supported-libraries) incluidas en el entorno de ejecución de código
-para realizar tareas más especializadas.
+A API Gemini oferece uma ferramenta de execução de código que permite que o modelo gere e execute código Python. Em seguida, o modelo pode aprender de forma iterativa com os resultados da execução de código até chegar a uma saída final. É possível usar a execução de código para criar aplicativos que se beneficiam do raciocínio baseado em código. Por exemplo, é possível usar a execução de código para resolver equações ou processar texto. Também é possível usar as [bibliotecas](#supported-libraries) incluídas no ambiente de execução de código para realizar tarefas mais especializadas.
 
-Gemini solo puede ejecutar código en Python. Aun así, puedes pedirle a Gemini que genere código en otro lenguaje, pero el modelo no puede usar la herramienta de ejecución de código para ejecutarlo.
+O Gemini só pode executar código em Python. Ainda é possível pedir ao Gemini para gerar código em outro idioma, mas o modelo não pode usar a ferramenta de execução de código para executá-lo.
 
-## Habilita la ejecución de código
+## Ativar a execução de código
 
-Para habilitar la ejecución de código, configura la herramienta de ejecución de código en el modelo. Esto permite que el modelo genere y ejecute código.
+Para ativar a execução de código, configure a ferramenta de execução de código no modelo. Isso permite que o modelo gere e execute código.
 
 ### Python
 
@@ -36,7 +34,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="What is the sum of the first 50 prime numbers? "
           "Generate and run code for the calculation, and make sure you get all 50.",
     tools=[{"type": "code_execution"}]
@@ -61,7 +59,7 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: "What is the sum of the first 50 prime numbers? " +
            "Generate and run code for the calculation, and make sure you get all 50.",
     tools: [{ type: "code_execution" }]
@@ -82,6 +80,57 @@ for (const step of interaction.steps) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CodeExecution;
+import com.google.genai.gaos.models.interactions.CodeExecutionCallStep;
+import com.google.genai.gaos.models.interactions.CodeExecutionResultStep;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+import java.util.Collections;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model("gemini-3.8-flash")
+        .input(
+            InteractionsInput.of(
+                "What is the sum of the first 50 prime numbers? "
+                    + "Generate and run code for the calculation, and make sure you get all 50."))
+        .tools(Arrays.asList(CodeExecution.builder().build()))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+for (Step step : interaction.steps().orElse(Collections.emptyList())) {
+  if (step instanceof ModelOutputStep) {
+    ModelOutputStep outputStep = (ModelOutputStep) step;
+    for (Content contentBlock : outputStep.content().orElse(Collections.emptyList())) {
+      if (contentBlock instanceof TextContent) {
+        System.out.println(((TextContent) contentBlock).text().orElse(""));
+      }
+    }
+  } else if (step instanceof CodeExecutionCallStep) {
+    CodeExecutionCallStep callStep = (CodeExecutionCallStep) step;
+    callStep.arguments().ifPresent(args -> System.out.println(args.code().orElse("")));
+  } else if (step instanceof CodeExecutionResultStep) {
+    CodeExecutionResultStep resultStep = (CodeExecutionResultStep) step;
+    System.out.println(resultStep.result().orElse(""));
+  }
+}
+```
+
 ### REST
 
 ```
@@ -89,13 +138,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -H 'Content-Type: application/json' \
 -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": "What is the sum of the first 50 prime numbers? Generate and run code for the calculation, and make sure you get all 50.",
     "tools": [{"type": "code_execution"}]
 }'
 ```
 
-El resultado podría ser similar al siguiente, que se formateó para facilitar la lectura:
+A saída pode ser semelhante à seguinte, que foi formatada para facilitar a leitura:
 
 ```
 Okay, I need to calculate the sum of the first 50 prime numbers. Here's how I'll
@@ -144,29 +193,29 @@ sum_of_primes=5117
 The sum of the first 50 prime numbers is 5117.
 ```
 
-Este resultado combina varias partes de contenido que el modelo muestra cuando se usa la ejecución de código:
+Essa saída combina várias partes de conteúdo que o modelo retorna ao usar a execução de código:
 
-- `text`: Texto intercalado generado por el modelo
-- `code_execution_call`: Código generado por el modelo que se ejecutará
-- `code_execution_result`: Resultado del código ejecutable
+- `text`: texto inline gerado pelo modelo
+- `code_execution_call`: código gerado pelo modelo que deve ser executado
+- `code_execution_result`: resultado do código executável
 
-## Ejecución de código con imágenes (Gemini 3)
+## Execução de código com imagens (Gemini 3)
 
-El modelo Gemini 3 Flash ahora puede escribir y ejecutar código de Python para manipular y examinar imágenes de forma activa.
+O modelo Gemini 3 Flash agora pode escrever e executar código Python para manipular e inspecionar imagens ativamente.
 
 **Casos de uso**
 
-- **Acercar y examinar**: El modelo detecta de forma implícita cuando los detalles son demasiado pequeños
-  (p.ej., leer un indicador distante) y escribe código para recortar y volver a examinar el área
-  con una resolución más alta.
-- **Matemáticas visuales**: El modelo puede ejecutar cálculos de varios pasos con código (p.ej.,
-  sumar los artículos de una factura).
-- **Anotación de imágenes**: El modelo puede anotar imágenes para responder preguntas, como
-  dibujar flechas para mostrar relaciones.
+- **Zoom e inspeção**: o modelo detecta implicitamente quando os detalhes são muito pequenos
+  (por exemplo, ler um medidor distante) e escreve código para cortar e reexaminar a área
+  em resolução mais alta.
+- **Matemática visual**: o modelo pode executar cálculos de várias etapas usando código (por exemplo,
+  somar itens de linha em um recibo).
+- **Anotação de imagem**: o modelo pode anotar imagens para responder a perguntas, como
+  desenhar setas para mostrar relações.
 
-## Habilita la ejecución de código con imágenes
+## Ativar a execução de código com imagens
 
-La ejecución de código con imágenes se admite oficialmente en Gemini 3 Flash. Para activar este comportamiento, habilita la ejecución de código como herramienta y el razonamiento.
+A execução de código com imagens é oficialmente compatível com o Gemini 3 Flash. É possível ativar esse comportamento ativando a execução de código como uma ferramenta e o raciocínio.
 
 ### Python
 
@@ -183,7 +232,7 @@ image_bytes = requests.get(image_path).content
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input=[
         {"type": "image", "data": base64.b64encode(image_bytes).decode('utf-8'), "mime_type": "image/jpeg"},
         {"type": "text", "text": "Zoom into the expression pedals and tell me how many pedals are there?"}
@@ -219,7 +268,7 @@ async function main() {
   const base64ImageData = Buffer.from(imageArrayBuffer).toString('base64');
 
   const interaction = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: [
       {
         type: "image",
@@ -249,11 +298,89 @@ async function main() {
 main();
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CodeExecution;
+import com.google.genai.gaos.models.interactions.CodeExecutionCallStep;
+import com.google.genai.gaos.models.interactions.CodeExecutionResultStep;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.io.InputStream;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Collections;
+
+String imageUrl = "https://goo.gle/instrument-img";
+byte[] imageBytes;
+try (InputStream in = URI.create(imageUrl).toURL().openStream()) {
+  imageBytes = in.readAllBytes();
+}
+String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model("gemini-3.8-flash")
+        .input(
+            InteractionsInput.ofContent(
+                Arrays.asList(
+                    ImageContent.builder()
+                        .data(base64Image)
+                        .mimeType(ImageContentMimeType.IMAGE_JPEG)
+                        .build(),
+                    TextContent.builder()
+                        .text(
+                            "Zoom into the expression pedals and tell me how many pedals are there?")
+                        .build())))
+        .tools(Arrays.asList(CodeExecution.builder().build()))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+for (Step step : interaction.steps().orElse(Collections.emptyList())) {
+  if (step instanceof ModelOutputStep) {
+    ModelOutputStep outputStep = (ModelOutputStep) step;
+    for (Content contentBlock : outputStep.content().orElse(Collections.emptyList())) {
+      if (contentBlock instanceof TextContent) {
+        System.out.println(((TextContent) contentBlock).text().orElse(""));
+      } else if (contentBlock instanceof ImageContent) {
+        ImageContent imgContent = (ImageContent) contentBlock;
+        if (imgContent.data().isPresent()) {
+          byte[] decoded = Base64.getDecoder().decode(imgContent.data().get());
+          Files.write(Paths.get("output_image.jpg"), decoded);
+        }
+      }
+    }
+  } else if (step instanceof CodeExecutionCallStep) {
+    CodeExecutionCallStep callStep = (CodeExecutionCallStep) step;
+    callStep.arguments().ifPresent(args -> System.out.println(args.code().orElse("")));
+  } else if (step instanceof CodeExecutionResultStep) {
+    CodeExecutionResultStep resultStep = (CodeExecutionResultStep) step;
+    System.out.println(resultStep.result().orElse(""));
+  }
+}
+```
+
 ### REST
 
 ```
 IMG_URL="https://goo.gle/instrument-img"
-MODEL="gemini-3.6-flash"
+MODEL="gemini-3.8-flash"
 
 MIME_TYPE=$(curl -sIL "$IMG_URL" | grep -i '^content-type:' | awk -F ': ' '{print $2}' | sed 's/\r$//' | head -n 1)
 if [[ -z "$MIME_TYPE" || ! "$MIME_TYPE" == image/* ]]; then
@@ -274,7 +401,7 @@ jq -n \
   --rawfile b64 image_b64.txt \
   --arg mime "$MIME_TYPE" \
   '{
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: [
       {type: "image", data: $b64, mime_type: $mime},
       {type: "text", text: "Zoom into the expression pedals and tell me how many pedals are there?"}
@@ -288,9 +415,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -d @payload.json
 ```
 
-## Usa la ejecución de código en interacciones de varios turnos
+## Usar a execução de código em interações multiturno
 
-También puedes usar la ejecución de código como parte de una conversación de varios turnos con `previous_interaction_id`.
+Também é possível usar a execução de código como parte de uma conversa multiturno usando `previous_interaction_id`.
 
 ### Python
 
@@ -300,14 +427,14 @@ from google import genai
 client = genai.Client()
 
 interaction1 = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="I have a math question for you.",
     tools=[{"type": "code_execution"}]
 )
 print(interaction1.output_text)
 
 interaction2 = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     previous_interaction_id=interaction1.id,
     input="What is the sum of the first 50 prime numbers? "
           "Generate and run code for the calculation, and make sure you get all 50.",
@@ -333,14 +460,14 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction1 = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: "I have a math question for you.",
     tools: [{ type: "code_execution" }]
 });
 console.log(interaction1.output_text);
 
 const interaction2 = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     previous_interaction_id: interaction1.id,
     input: "What is the sum of the first 50 prime numbers? " +
            "Generate and run code for the calculation, and make sure you get all 50.",
@@ -362,6 +489,69 @@ for (const step of interaction2.steps) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CodeExecution;
+import com.google.genai.gaos.models.interactions.CodeExecutionCallStep;
+import com.google.genai.gaos.models.interactions.CodeExecutionResultStep;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+import java.util.Collections;
+
+Client client = new Client();
+
+CreateModelInteraction params1 =
+    CreateModelInteraction.builder()
+        .model("gemini-3.8-flash")
+        .input(InteractionsInput.of("I have a math question for you."))
+        .tools(Arrays.asList(CodeExecution.builder().build()))
+        .build();
+
+Interaction interaction1 =
+    client.interactions.create(CreateInteractionRequestBody.of(params1)).interaction().get();
+System.out.println(interaction1.outputText().orElse(""));
+
+CreateModelInteraction params2 =
+    CreateModelInteraction.builder()
+        .model("gemini-3.8-flash")
+        .previousInteractionId(interaction1.id().get())
+        .input(
+            InteractionsInput.of(
+                "What is the sum of the first 50 prime numbers? "
+                    + "Generate and run code for the calculation, and make sure you get all 50."))
+        .tools(Arrays.asList(CodeExecution.builder().build()))
+        .build();
+
+Interaction interaction2 =
+    client.interactions.create(CreateInteractionRequestBody.of(params2)).interaction().get();
+
+for (Step step : interaction2.steps().orElse(Collections.emptyList())) {
+  if (step instanceof ModelOutputStep) {
+    ModelOutputStep outputStep = (ModelOutputStep) step;
+    for (Content contentBlock : outputStep.content().orElse(Collections.emptyList())) {
+      if (contentBlock instanceof TextContent) {
+        System.out.println(((TextContent) contentBlock).text().orElse(""));
+      }
+    }
+  } else if (step instanceof CodeExecutionCallStep) {
+    CodeExecutionCallStep callStep = (CodeExecutionCallStep) step;
+    callStep.arguments().ifPresent(args -> System.out.println(args.code().orElse("")));
+  } else if (step instanceof CodeExecutionResultStep) {
+    CodeExecutionResultStep resultStep = (CodeExecutionResultStep) step;
+    System.out.println(resultStep.result().orElse(""));
+  }
+}
+```
+
 ### REST
 
 ```
@@ -370,7 +560,7 @@ RESPONSE1=$(curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/in
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -H 'Content-Type: application/json' \
 -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": "I have a math question for you.",
     "tools": [{"type": "code_execution"}]
 }')
@@ -382,89 +572,89 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -H 'Content-Type: application/json' \
 -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "previous_interaction_id": "'"$INTERACTION_ID"'",
     "input": "What is the sum of the first 50 prime numbers? Generate and run code for the calculation, and make sure you get all 50.",
     "tools": [{"type": "code_execution"}]
 }'
 ```
 
-## Entrada y salida (E/S)
+## Entrada/Saída (E/S)
 
-En los modelos actuales de Gemini, como
-[Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=es-419#gemini-3.6-flash), la ejecución de código
-admite la entrada de archivos y la salida de gráficos. Con estas capacidades de entrada y salida
-, puedes subir archivos CSV y de texto, hacer preguntas sobre los
-archivos y generar gráficos de [Matplotlib](https://matplotlib.org/) como parte
-de la respuesta. Los archivos de salida se muestran como imágenes intercaladas en la respuesta.
+Nos modelos atuais do Gemini, como
+[Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#gemini-3.5-flash), a execução de código
+oferece suporte à entrada de arquivos e à saída de gráficos. Usando esses recursos de entrada e saída
+é possível fazer upload de arquivos CSV e de texto, fazer perguntas sobre os
+arquivos e gerar gráficos do [Matplotlib](https://matplotlib.org/) como parte
+da resposta. Os arquivos de saída são retornados como imagens inline na resposta.
 
-### Precios de E/S
+### Preços de E/S
 
-Cuando usas la E/S de ejecución de código, se te cobra por los tokens de entrada y salida:
+Ao usar a E/S de execução de código, você recebe cobranças por tokens de entrada e saída:
 
-**Tokens de entrada:**
+**Tokens de entrada** :
 
-- Instrucción del usuario
+- Comando do usuário
 
-**Tokens de salida:**
+**Tokens de saída** :
 
-- Código generado por el modelo
-- Resultado de la ejecución de código en el entorno de código
-- Tokens de razonamiento
-- Resumen generado por el modelo
+- Código gerado pelo modelo
+- Saída de execução de código no ambiente de código
+- Tokens de raciocínio
+- Resumo gerado pelo modelo
 
-### Detalles de E/S
+### Detalhes de E/S
 
-Cuando trabajes con la E/S de ejecución de código, ten en cuenta los siguientes detalles técnicos:
+Ao trabalhar com a E/S de execução de código, esteja ciente dos seguintes detalhes técnicos:
 
-- El tiempo de ejecución máximo del entorno de código es de 30 segundos.
-- Si el entorno de código genera un error, es posible que el modelo decida volver a generar el resultado de código. Esto puede suceder hasta 5 veces.
-- El tamaño máximo de entrada de archivos está limitado por la ventana de tokens del modelo. Si subes un archivo que supera la ventana de contexto máxima del modelo, la API mostrará un error.
-- La ejecución de código funciona mejor con archivos de texto y CSV.
-- El archivo de entrada se puede pasar como datos intercalados o subir con la
-  [API de Files](https://ai.google.dev/gemini-api/docs/files?hl=es-419),
-  y el archivo de salida siempre se muestra como datos intercalados.
+- O tempo máximo de execução do ambiente de código é de 30 segundos.
+- Se o ambiente de código gerar um erro, o modelo poderá decidir regenerar a saída de código. Isso pode acontecer até cinco vezes.
+- O tamanho máximo de entrada de arquivo é limitado pela janela de token do modelo. Se você fizer upload de um arquivo que exceda a janela de contexto máxima do modelo, a API vai retornar um erro.
+- A execução de código funciona melhor com arquivos de texto e CSV.
+- O arquivo de entrada pode ser transmitido como dados inline ou enviado usando a
+  [API Files](https://ai.google.dev/gemini-api/docs/files?hl=pt-br),
+  e o arquivo de saída é sempre retornado como dados inline.
 
-## Facturación
+## Faturamento
 
-No hay cargos adicionales por habilitar la ejecución de código desde la API de Gemini.
-Se te facturará según la tarifa actual de los tokens de entrada y salida en función del modelo de Gemini que uses.
+Não há cobrança adicional para ativar a execução de código na API Gemini.
+Você vai receber cobranças pela taxa atual de tokens de entrada e saída com base no modelo do Gemini que está usando.
 
-Estos son algunos aspectos que debes tener en cuenta sobre la facturación de la ejecución de código:
+Confira outras informações sobre o faturamento da execução de código:
 
-- Solo se te factura una vez por los tokens de entrada que pasas al modelo, y se te factura por los tokens de salida finales que te muestra el modelo.
-- Los tokens que representan el código generado se cuentan como tokens de salida. El código generado puede incluir texto y resultados multimodales, como imágenes.
-- Los resultados de la ejecución de código también se cuentan como tokens de salida.
+- Você só recebe cobranças uma vez pelos tokens de entrada transmitidos ao modelo e pelos tokens de saída finais retornados pelo modelo.
+- Os tokens que representam o código gerado são contados como tokens de saída. O código gerado pode incluir texto e saída multimodal, como imagens.
+- Os resultados da execução de código também são contados como tokens de saída.
 
-El modelo de facturación se muestra en el siguiente diagrama:
+O modelo de faturamento é mostrado no diagrama a seguir:
 
-![Modelo de facturación de ejecución de código](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=es-419)
+![modelo de faturamento de execução de código](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=pt-br)
 
-- Se te facturará según la tarifa actual de los tokens de entrada y salida en función del modelo de Gemini que uses.
-- Si Gemini usa la ejecución de código cuando genera tu respuesta, la instrucción original, el código generado y el resultado del código ejecutado se etiquetan como *tokens intermedios* y se facturan como *tokens de entrada*.
-- Luego, Gemini genera un resumen y muestra el código generado, el resultado del código ejecutado y el resumen final. Estos se facturan como *tokens de salida*.
-- La API de Gemini incluye un recuento de tokens intermedios en la respuesta de la API, por lo que sabes por qué obtienes tokens de entrada adicionales más allá de tu instrucción inicial.
+- Você vai receber cobranças pela taxa atual de tokens de entrada e saída com base no modelo do Gemini que está usando.
+- Se o Gemini usar a execução de código ao gerar sua resposta, o comando original, o código gerado e o resultado do código executado serão rotulados como *tokens intermediários* e faturados como *tokens de entrada*.
+- Em seguida, o Gemini gera um resumo e retorna o código gerado, o resultado do código executado e o resumo final. Esses itens são faturados como *tokens de saída*.
+- A API Gemini inclui uma contagem de tokens intermediários na resposta da API para que você saiba por que está recebendo tokens de entrada adicionais além do comando inicial.
 
-## Limitaciones
+## Limitações
 
-- El modelo solo puede generar y ejecutar código. No puede mostrar otros artefactos, como archivos multimedia.
-- En algunos casos, habilitar la ejecución de código puede provocar regresiones en otras áreas del resultado del modelo (por ejemplo, escribir una historia).
-- Existe cierta variación en la capacidad de los diferentes modelos para usar la ejecución de código de forma correcta.
+- O modelo só pode gerar e executar código. Ele não pode retornar outros artefatos, como arquivos de mídia.
+- Em alguns casos, ativar a execução de código pode levar a regressões em outras áreas da saída do modelo (por exemplo, escrever uma história).
+- Há algumas variações na capacidade dos diferentes modelos de usar a execução de código com sucesso.
 
-## Combinaciones de herramientas compatibles
+## Combinações de ferramentas compatíveis
 
-La herramienta de ejecución de código se puede combinar con
-[Grounding with Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=es-419) para
-potenciar casos de uso más complejos.
+A ferramenta de execução de código pode ser combinada com
+[o embasamento com a Pesquisa Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br) para
+oferecer suporte a casos de uso mais complexos.
 
-Los modelos de Gemini 3 admiten la combinación de herramientas integradas (como la ejecución de código) con herramientas personalizadas (llamadas a funciones).
+Os modelos do Gemini 3 oferecem suporte à combinação de ferramentas integradas (como a execução de código) com ferramentas personalizadas (chamada de função).
 
-## Bibliotecas compatibles
+## Bibliotecas permitidas
 
-El entorno de ejecución de código incluye las siguientes bibliotecas:
+O ambiente de execução de código inclui as seguintes bibliotecas:
 
 - attrs
-- ajedrez
+- xadrez
 - contourpy
 - fpdf
 - geopandas
@@ -479,9 +669,9 @@ El entorno de ejecución de código incluye las siguientes bibliotecas:
 - numpy
 - opencv-python
 - openpyxl
-- empaquetado
+- empacotamento
 - pandas
-- almohada
+- pillow
 - protobuf
 - pylatex
 - pyparsing
@@ -501,21 +691,21 @@ El entorno de ejecución de código incluye las siguientes bibliotecas:
 - toolz
 - xlrd
 
-No puedes instalar tus propias bibliotecas.
+Não é possível instalar suas próprias bibliotecas.
 
-## ¿Qué sigue?
+## A seguir
 
-- Prueba la guía de inicio rápido de la API de [Interactions](https://ai.google.dev/gemini-api/docs/quickstart?hl=es-419).
-- Obtén información sobre otras herramientas de la API de Gemini:
-  - [Llamada a función](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419)
-  - [Grounding with Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=es-419)
+- Confira o [início rápido da API Interactions](https://ai.google.dev/gemini-api/docs/quickstart?hl=pt-br).
+- Saiba mais sobre outras ferramentas da API Gemini:
+  - [Chamadas de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br)
+  - [Embasamento com a Pesquisa Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br)
 
-Enviar comentarios
+Envie comentários
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Última actualización: 2026-09-12 (UTC)
+Última atualização 2026-09-18 UTC.
 
-¿Quieres brindar más información?
+Quer enviar seu feedback?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-09-12 (UTC)"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-18 UTC."],[],[]]

@@ -1,44 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2-preview?hl=ar
-fetched_at: 2026-09-14T05:37:16.773189+00:00
-title: "\u0646\u0645\u0648\u0630\u062c Gemini Embedding 2 \u0627\u0644\u062a\u062c\u0631\u064a\u0628\u064a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2-preview?hl=it
+fetched_at: 2026-09-21T05:57:24.789390+00:00
+title: "Modello di anteprima Gemini Embedding 2 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
 
-إرسال ملاحظات
+Invia feedback
 
-# نموذج Gemini Embedding 2 التجريبي
+# Modello di anteprima Gemini Embedding 2
 
-أول نموذج تضمين متعدد الوسائط، يوفّر عملية ربط رقمية فعّالة للنصوص والصور والفيديوهات والمقاطع الصوتية وملفات PDF في مساحة تضمين موحّدة واحدة. يُعدّ نموذج Gemini Embedding 2 الخيار الأفضل للبحث الدلالي المتعدّد الوسائط واسترجاع المستندات وأنظمة الاقتراحات التي تتطلّب إجراء حسابات سريعة وقابلة للتوسّع بشأن التشابه في مجموعات البيانات الكبيرة المتعدّدة الوسائط.
+Il nostro primo modello di incorporamento multimodale, che fornisce una mappatura numerica efficiente di
+testo, immagini, video, audio e PDF in un unico spazio di incorporamento unificato. Il modello
+Gemini Embedding 2 è ideale per la ricerca semantica cross-modale, il recupero di documenti e i sistemi di raccomandazione che richiedono calcoli di similarità rapidi e scalabili su grandi set di dati multimodali.
 
-## الوثائق
+## Documentazione
 
-يمكنك الانتقال إلى صفحة [التضمينات](https://ai.google.dev/gemini-api/docs/embeddings?hl=ar) للاطّلاع على التغطية الكاملة للميزات والإمكانات.
+Visita la pagina [Incorporamenti](https://ai.google.dev/gemini-api/docs/embeddings?hl=it) per una copertura completa
+di funzionalità e capacità.
 
 ## gemini-embedding-2-preview
 
-| الموقع | الوصف |
+| Proprietà | Descrizione |
 | --- | --- |
-| id\_cardرمز النموذج | **Gemini API**  `gemini-embedding-2-preview` |
-| saveأنواع البيانات المتوافقة | **الإدخال**  النصوص والصور والفيديوهات وملفات الصوت وملفات PDF  **الناتج**  تضمينات النص |
-| token\_autoحدود الرموز المميزة[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحدّ الأقصى لعدد الرموز المميزة التي يمكن إدخالها**  8,192  **حجم سمة الإخراج**  مرن، ويتوافق مع: 128 - 3072، الحجم المقترَح: 768 و1536 و3072 |
-| 123الإصدارات | لمزيد من التفاصيل، يُرجى الاطّلاع على [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions).  - معاينة: `gemini-embedding-2-preview` |
-| calendar\_monthآخر تعديل | مارس 2026 |
+| Codice modello id\_card | **API Gemini**  `gemini-embedding-2-preview` |
+| saveTipi di dati supportati | **Ingresso**  Testo, immagine, video, audio, PDF  **Output**  Text embedding |
+| token\_autoLimiti dei token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Limite di token di input**  8192  **Dimensioni della dimensione di output**  Flessibile, supporta: 128 - 3072, consigliato: 768, 1536, 3072 |
+| Versioni 123 | Per ulteriori dettagli, leggi i [pattern delle versioni del modello](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#model-versions).  - Anteprima: `gemini-embedding-2-preview` |
+| calendar\_monthUltimo aggiornamento | Marzo 2026 |
 
-إرسال ملاحظات
+Invia feedback
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-تاريخ التعديل الأخير: 2026-08-19 (حسب التوقيت العالمي المتفَّق عليه)
+Ultimo aggiornamento 2026-08-19 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Vuoi dirci altro?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-08-19 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-08-19 UTC."],[],[]]

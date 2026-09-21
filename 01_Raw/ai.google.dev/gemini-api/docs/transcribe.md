@@ -1,25 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/transcribe?hl=ar
-fetched_at: 2026-09-14T05:45:11.451137+00:00
-title: "\u062a\u062d\u0648\u064a\u0644 \u0627\u0644\u0635\u0648\u062a \u0625\u0644\u0649 \u0646\u0635 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/transcribe?hl=de
+fetched_at: 2026-09-21T05:50:43.621049+00:00
+title: "Audiotranskript \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-إرسال ملاحظات
+Feedback geben
 
-# تحويل الصوت إلى نص
+# Audiotranskript
 
-تحوّل Gemini API الكلام في الملفات الصوتية إلى نص باستخدام نموذج Gemini 3.5 Transcribe (`gemini-3.5-transcribe`). واستنادًا إلى إمكانات Gemini في فهم الصوت، يقدّم خدمة تحويل الصوت إلى نص بدقة مع التعرّف التلقائي على اللغة، وتحديد المتحدث، والطوابع الزمنية على مستوى الكلمات، وتلميحات المفردات المخصّصة. يتضمّن أيضًا وضع [تحويل الصوت إلى نص بذكاء](#transcription-modes) الذي يزيل الأخطاء اللغوية ويوفّر تنسيقًا ذكيًا.
+Die Gemini API wandelt Sprache in Audiodateien mit dem Gemini 3.5 Transcribe-Modell (`gemini-3.5-transcribe`) in Text um. Dank der Audio-Analysefunktionen von Gemini bietet sie eine genaue Transkription mit automatischer Spracherkennung, Sprecherzuordnung, Zeitstempeln auf Wortebene und benutzerdefinierten Vokabelhinweisen. Außerdem gibt es einen [intelligenten Transkriptionsmodus](#transcription-modes), in dem Füllwörter entfernt und die Formatierung optimiert wird.
 
-لتحويل ملف صوتي إلى نص، حمِّل الملف الصوتي وأرسِله إلى `gemini-3.5-transcribe`:
+Wenn Sie eine Audiodatei transkribieren möchten, laden Sie die Audiodatei hoch und übergeben Sie sie an `gemini-3.5-transcribe`:
 
 ### Python
 
@@ -89,26 +90,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## نظرة عامة
+## Übersicht
 
-تم تحسين Gemini 3.5 Transcribe لمهام تحويل الكلام إلى نص. تتعامل هذه الميزة مع اللهجات المختلفة والضوضاء في الخلفية والمحادثات المتعددة اللغات.
+Gemini 3.5 Transcribe ist für Speech-to-Text-Aufgaben optimiert. Sie kann mit verschiedenen Akzenten, Hintergrundgeräuschen und mehrsprachigen Unterhaltungen umgehen.
 
-تشمل الإمكانات الرئيسية ما يلي:
+Zu den wichtigsten Funktionen gehören:
 
-- **التعرّف التلقائي على الكلام (ASR):** يتم تلقائيًا رصد اللغات في أكثر من [85 منطقة](#supported-languages). يتعامل مع التبديل بين اللغات داخل الجملة وبين الجمل بدون إعداد يدوي.
-- **المفردات المخصّصة:** يتم تحسين التعرّف على المصطلحات والاختصارات والأسماء الخاصة بالنطاق من خلال إدخال ما يصل إلى 1,000 عبارة.
-- **تحديد المتحدّثين:** يميز بين المتحدّثين المتعددين وينسب المقاطع المنطوقة إلى تصنيفات مختلفة.
-- **الطوابع الزمنية على مستوى الكلمات:** يتم إنشاء إزاحات دقيقة لوقتَي البدء والانتهاء لكل كلمة يتم التعرّف عليها.
-- **تحويل الصوت إلى نص بذكاء:** تنقّح هذه الميزة النص من أخطاء الطلاقة وكلمات الحشو والتكرار، وتطبّق تنسيقًا منظَّمًا.
-- **التنسيق والتسوية:** يتم تطبيق الكتابة بالأحرف اللاتينية الكبيرة وعلامات الترقيم وتسوية النص العكسية، مثل تحويل "ستة وعشرون مليون دولار أمريكي" إلى "26 مليون دولار أمريكي".
+- **Automatische Spracherkennung (ASR)**: Erkennt automatisch Sprachen in [über 85 Regionen](#supported-languages). Es werden Code-Switching innerhalb und zwischen Sätzen ohne manuelle Konfiguration unterstützt.
+- **Benutzerdefiniertes Vokabular**:Die Erkennung wird auf fachspezifische Begriffe, Akronyme und Eigennamen ausgerichtet, indem bis zu 1.000 Ausdrücke übergeben werden.
+- **Sprecherzuordnung**:Unterscheidet zwischen mehreren Sprechern und weist gesprochene Segmente bestimmten Labels zu.
+- **Zeitstempel auf Wortebene**:Generiert genaue Start- und Endzeit-Offsets für jedes erkannte Wort.
+- **Intelligente Transkription**:Unflüssigkeiten, Füllwörter und Wiederholungen werden entfernt und eine strukturierte Formatierung wird angewendet.
+- **Formatierung und Normalisierung**:Hier werden Großschreibung, Zeichensetzung und inverse Textnormalisierung angewendet, z. B. wird „twenty six million dollars“ in „$26M“ umgewandelt.
 
-لفهم المحتوى الصوتي بشكل عام أو الإجابة عن أسئلة حوله، استخدِم [فهم المحتوى الصوتي](https://ai.google.dev/gemini-api/docs/audio?hl=ar). لتركيب الصوت من النص، استخدِم [تحويل النص إلى كلام](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ar).
+Wenn Sie Audioinhalte allgemein analysieren oder Fragen zu Audioinhalten beantworten lassen möchten, verwenden Sie [Audio-Analyse](https://ai.google.dev/gemini-api/docs/audio?hl=de). Für die Audiosynthese mit Text-to-Speech verwenden Sie [Text-to-Speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de).
 
-## اكتشاف اللغة وتقديم تلميحات
+## Spracherkennung und Hinweise
 
-يتعرّف النموذج تلقائيًا على اللغة المنطوقة. ويبدّل بين اللغات بشكل ديناميكي عندما يغيّر المتحدثون اللغة.
+Standardmäßig wird die gesprochene Sprache automatisch erkannt. Die Sprache wird dynamisch gewechselt, wenn die Sprecher die Sprache wechseln.
 
-لاستخدام ميزة "الرصد التلقائي"، احذف `language_codes` أو قدِّم قائمة فارغة:
+Wenn Sie die automatische Erkennung verwenden möchten, lassen Sie `language_codes` weg oder geben Sie eine leere Liste an:
 
 ### Python
 
@@ -173,7 +174,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-إذا كنت تعرف اللغة مسبقًا، حدِّد رموز اللغة BCP-47 في `language_codes` لتحسين دقة النسخ (راجِع [اللغات المتوافقة](#supported-languages)):
+Wenn Sie die Sprache im Voraus kennen, geben Sie BCP-47-Sprachcodes in `language_codes` an, um die Genauigkeit der Transkription zu verbessern (siehe [Unterstützte Sprachen](#supported-languages)):
 
 ### Python
 
@@ -207,9 +208,9 @@ const generationConfig = {
 }
 ```
 
-## المفردات المخصّصة
+## Benutzerdefiniertes Vokabular
 
-يمكنك توجيه نموذج الكلام نحو الكلمات غير الشائعة أو المصطلحات الفنية أو أسماء العلامات التجارية أو أسماء العَلم. قدِّم ما يصل إلى 1,000 عبارة في مصفوفة `custom_vocabulary` (عادةً ما يتم تحقيق أفضل النتائج باستخدام ما يصل إلى 100 عبارة):
+Sie können das Sprachmodell auf ungewöhnliche Wörter, Fachjargon, Markennamen oder Eigennamen ausrichten. Geben Sie bis zu 1.000 Begriffe im `custom_vocabulary`-Array an. Die besten Ergebnisse werden in der Regel mit bis zu 100 Begriffen erzielt:
 
 ### Python
 
@@ -274,11 +275,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## تمييز أصوات المتحدّثِين
+## Sprecherbestimmung
 
-تحدّد ميزة "تحديد المتحدّث" الأصوات المختلفة في التسجيل وتضع علامة على كل مقطع باستخدام معرّف المتحدّث، مثل `spk_1` أو `spk_2`. يمكن استخدام ما يصل إلى 8 مكبّرات صوت (تكون ميزة تحديد المصدر لـ 3 مكبّرات صوت أو أكثر تجريبية).
+Bei der Sprecherbestimmung werden verschiedene Stimmen in der Aufnahme identifiziert und jedes Segment wird mit einer Sprecher-ID wie `spk_1` oder `spk_2` getaggt. Es werden bis zu acht Sprecher unterstützt. Die Zuordnung für drei oder mehr Sprecher ist experimentell.
 
-فعِّل ميزة "تمييز أصوات المتحدّثِين" من خلال ضبط `diarization_mode` ضمن `mode`:
+Aktivieren Sie die Sprecherbestimmung, indem Sie `diarization_mode` in `mode` konfigurieren:
 
 ### Python
 
@@ -352,11 +353,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## الطوابع الزمنية على مستوى الكلمات
+## Zeitstempel auf Wortebene
 
-توفّر الطوابع الزمنية على مستوى الكلمات إزاحات دقيقة للبداية والنهاية لكل كلمة يتم التعرّف عليها في بث صوتي.
+Zeitstempel auf Wortebene geben den genauen Start- und End-Offset für jedes erkannte Wort im Audio-Stream an.
 
-فعِّل الطوابع الزمنية من خلال ضبط `timestamp_granularities` ضمن `mode`:
+Aktivieren Sie Zeitstempel, indem Sie `timestamp_granularities` in `mode` konfigurieren:
 
 ### Python
 
@@ -430,7 +431,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-يمكنك الجمع بين `diarization_mode` و`timestamp_granularities` في `mode` لتلقّي تصنيفات المتحدّثين والطوابع الزمنية للكلمات:
+Sie können `diarization_mode` und `timestamp_granularities` in `mode` kombinieren, um sowohl Sprecherlabels als auch Wortzeitstempel zu erhalten:
 
 ### Python
 
@@ -479,21 +480,21 @@ const generationConfig = {
 }
 ```
 
-## أوضاع تحويل الصوت إلى نص
+## Transkriptionsmodi
 
-تتيح أداة Gemini 3.5 Transcribe وضعَين لتحويل الصوت إلى نص من خلال المَعلمة `mode`:
+Gemini 3.5 Transcribe unterstützt zwei Transkriptionsmodi über den Parameter `mode`:
 
-- **`verbatim` (الإعداد التلقائي)**: تعرض هذه القيمة نصًا مطابقًا تمامًا لكل ما يُقال، مع الحفاظ على الكلمات الحشو الخام ("أمم" و"آه" و"مثل" و"كما تعلم") والتكرار والتوقفات المؤقتة وبدايات الجمل الخاطئة. يتم ضبط الطوابع الزمنية وتمييز أصوات المتحدّثين ضمن هذا الوضع (`{"type": "verbatim", ...}`).
-- **`smart` (النسخ الذكي)**: تحسين النص لتسهيل قراءته من خلال تطبيق معالجة ذكية بعد التسجيل:
-  - **إزالة التلعثم**: تزيل هذه الميزة الكلمات التي تُستخدم لملء الفراغات في المحادثة والتلعثم وبدايات الجمل الخاطئة.
-  - **التصحيحات الذاتية المضمّنة**: تحلّ التصحيحات المنطوقة مباشرةً (على سبيل المثال، *"لنجتمع يوم الثلاثاء، لا بل يوم الأربعاء في الساعة الثانية"* تصبح *"لنجتمع يوم الأربعاء في الساعة 2:00 ظهرًا"*).
-  - **التنسيق المنظَّم التلقائي**: ينظّم الأفكار المنطوقة تلقائيًا في فقرات وقوائم مرقّمة ونقاط تعداد وتواريخ وعملات وأرقام منسَّقة.
-  - **التصحيح النحوي**: يضيف علامات الترقيم المناسبة ويعدّل حالة الأحرف في الجملة ويحسّن من سلاسة النص.
+- **`verbatim` (Standard)**: Gibt ein exaktes Wort-für-Wort-Transkript von allem Gesprochenen zurück, wobei Füllwörter („um“, „äh“, „wie“, „du weißt schon“), Wiederholungen, Pausen und Fehlstarts beibehalten werden. In diesem Modus (`{"type": "verbatim", ...}`) werden Zeitstempel und Sprecherbestimmung konfiguriert.
+- **`smart` (Smart Transcription)**: Optimiert das Transkript für die Lesbarkeit durch intelligente Nachbearbeitung:
+  - **Entfernen von Füllwörtern**: Füllwörter, Stottern und Fehlstarts werden entfernt.
+  - **Inline-Selbstkorrekturen**: Gesprochene Korrekturen werden direkt berücksichtigt (z. B. wird aus *„Lass uns am Dienstag treffen, nein, am Mittwoch um 14:00 Uhr“* *„Lass uns am Mittwoch um 14:00 Uhr treffen“*).
+  - **Automatische strukturierte Formatierung**: Gesprochene Gedanken werden automatisch in Absätze, nummerierte Listen, Aufzählungszeichen, formatierte Datumsangaben, Währungen und Zahlen strukturiert.
+  - **Grammatische Bereinigung**: Wendet natürliche Zeichensetzung, Groß- und Kleinschreibung und einen natürlichen Fluss an.
 
-| محتوى كلامي صوتي | `verbatim` الناتج | ناتج `smart` (التحويل الذكي من صوت إلى نص) |
+| Gesprochene Audioinhalte | `verbatim`-Ausgabe | `smart`-Ausgabe (Smart Transcription) |
 | --- | --- | --- |
-| "حسنًا، بالنسبة إلى الاجتماع، أعتقد أنّه علينا دعوة "منى"، لا، "عماد" و"كارول". | "حسنًا، بالنسبة إلى الاجتماع، أعتقد أنّه علينا دعوة أليس، لا، بل دعوة بوب وكارول". | "أعتقد أنّه علينا دعوة "بوب" و"كارول" إلى الاجتماع". |
-| مراجعة العنصر الأول للميزانية، وضع اللمسات الأخيرة على الجدول الزمني للعنصر الثاني، إرسال ملخّص للعنصر الثالث | "مراجعة العنصر الأول، تحديد الميزانية، وضع اللمسات الأخيرة على الجدول الزمني للعنصر الثاني، إرسال ملخّص للعنصر الثالث" | "1- مراجعة الميزانية 2. إنهاء المخطّط الزمني ‫3. إرسال ملخّص" |
+| „Ähm, also für die Besprechung sollten wir, äh, Alice einladen und, nein, Bob und Carol.“ | „Für die Besprechung sollten wir Alice und äh Bob und Carol einladen.“ | „Ich denke, wir sollten Bob und Carol zu dem Meeting einladen.“ |
+| „First item review budget second item finalize timeline third item send recap“ (Erster Punkt: Budget prüfen, zweiter Punkt: Zeitachse fertigstellen, dritter Punkt: Zusammenfassung senden) | „first item review budget second item finalize timeline third item send recap“ (erstes Element: Budget prüfen; zweites Element: Zeitachse fertigstellen; drittes Element: Zusammenfassung senden) | "1. Prüfen Sie das Budget 2. Zeitachse fertigstellen 3. Zusammenfassung senden“ |
 
 ### Python
 
@@ -560,13 +561,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## تحليل نتيجة تحويل الصوت إلى نص
+## Transkriptionsausgabe parsen
 
-يتم عرض نص المحادثة الكامل في `interaction.output_text`.
+Der vollständige Transkripttext wird in `interaction.output_text` zurückgegeben.
 
-عند تفعيل `timestamp_granularities` أو `diarization_mode`، تعرض واجهة برمجة التطبيقات أيضًا تعليقات توضيحية مفصّلة على مستوى الكلمات مرفقة بمحتوى التفاعل.
+Wenn `timestamp_granularities` oder `diarization_mode` aktiviert ist, gibt die API auch detaillierte Anmerkungen auf Wortebene zurück, die an den Interaktionsinhalt angehängt sind.
 
-في ما يلي كيفية استخراج الطوابع الزمنية للكلمات ونوبات التحدث وتكرارها:
+So extrahieren und durchlaufen Sie Wortzeitstempel und Sprecherwechsel:
 
 ### Python
 
@@ -653,117 +654,117 @@ for (const w of words) {
 }
 ```
 
-## اللغات المتاحة
+## Unterstützte Sprachen
 
-تتوفّر ميزة "النسخ الصوتي" في Gemini 3.5 باللغات ورموز اللغة BCP-47 التالية:
+Die folgenden Sprachen und BCP-47-Sprachcodes werden für Gemini 3.5 Transcribe unterstützt:
 
-| اللغة | رمز BCP-47 | اللغة | رمز BCP-47 |
+| Sprache | BCP-47-Code | Sprache | BCP-47-Code |
 | --- | --- | --- | --- |
-| الأفريقانية | `af-ZA` | اليابانية | `ja-JP` |
-| الأمهرية | `am-ET` | الجافانية | `jv-ID` |
-| العربية (مصر) | `ar-EG` | كابوفيرديانيو | `kea-CV` |
-| الأرمينية | `hy-AM` | الكانادا | `kn-IN` |
-| الأسامية | `as-IN` | الكازاخية | `kk-KZ` |
-| أذربيجان | `az-AZ` | الكورية | `ko-KR` |
-| البيلاروسية | `be-BY` | القيرغيزية | `ky-KG` |
-| البنغالية (بنغلاديش) | `bn-BD` | اللاتفية | `lv-LV` |
-| البنغالية (الهند) | `bn-IN` | اللينجالا | `ln-CD` |
-| البوسنية | `bs-BA` | الليتوانية | `lt-LT` |
-| البلغارية | `bg-BG` | المقدونية | `mk-MK` |
-| البلغارية (الأرومانية) | `rup-BG` | الماليزية | `ms-MY` |
-| البورمية | `my-MM` | المالايالامية | `ml-IN` |
-| الكانتونية (التقليدية) | `yue-Hant-HK` | المالطية | `mt-MT` |
-| الكتالانية | `ca-ES` | الصينية الماندرين (المبسطة) | `cmn-Hans-CN` |
-| السيبيوانية | `ceb` | المراثية | `mr-IN` |
-| الخميرية القياسية | `km-KH` | المنغولية | `mn-MN` |
-| الكرواتية | `hr-HR` | النيبالية | `ne-NP` |
-| التشيكية | `cs-CZ` | النرويجية | `nb-NO` |
-| الدانماركية | `da-DK` | الأوريا | `or-IN` |
-| الهولندية | `nl-NL` | البولندية | `pl-PL` |
-| الإنجليزية (بريطانيا العظمى) | `en-GB` | البرتغالية (البرازيل) | `pt-BR` |
-| الإنجليزية (الهند) | `en-IN` | البرتغالية (البرتغال) | `pt-PT` |
-| الإنجليزية (الولايات المتحدة) | `en-US` | البنجابية | `pa-IN` |
-| الإستونية | `et-EE` | البنجابية (نص غورموخي) | `pa-Guru-IN` |
-| الفارسية | `fa-IR` | الرومانية | `ro-RO` |
-| الفلبينية | `fil-PH` | الروسية | `ru-RU` |
-| الفنلندية | `fi-FI` | الصربية | `sr-RS` |
-| الفرنسية | `fr-FR` | السندية (الخط العربي) | `sd-Arab-IN` |
-| الغليشيانية | `gl-ES` | السلوفاكية | `sk-SK` |
-| الجورجية | `ka-GE` | السلوفينية | `sl-SI` |
-| الألمانية | `de-DE` | الإسبانية (أمريكا اللاتينية) | `es-419` |
-| اليونانية | `el-GR` | الإسبانية (الولايات المتحدة) | `es-US` |
-| الغوجاراتية | `gu-IN` | السواحيلية (كينيا) | `sw-KE` |
-| الهوسا | `ha-NG` | السويدية | `sv-SE` |
-| العبرية | `he-IL` | الطاجيكية | `tg-TJ` |
-| الهندية | `hi-IN` | التيلوغوية | `te-IN` |
-| الهنغارية | `hu-HU` | التايلاندية | `th-TH` |
-| الأيسلندية | `is-IS` | التركية | `tr-TR` |
-| الإنجليزية الهندية | `en-IN` | الأوكرانية | `uk-UA` |
-| الإندونيسية | `id-ID` | الأوزبكية | `uz-UZ` |
-| الإيطالية | `it-IT` | الفيتنامية | `vi-VN` |
+| Afrikaans | `af-ZA` | Japanisch | `ja-JP` |
+| Amharisch | `am-ET` | Javanisch | `jv-ID` |
+| Arabisch (Ägypten) | `ar-EG` | Kabuverdianu | `kea-CV` |
+| Armenisch | `hy-AM` | Kannada | `kn-IN` |
+| Assamesisch | `as-IN` | Kasachisch | `kk-KZ` |
+| Aserbaidschanisch | `az-AZ` | Koreanisch | `ko-KR` |
+| Belarussisch | `be-BY` | Kirgisisch | `ky-KG` |
+| Bengalisch (Bangladesch) | `bn-BD` | Lettisch | `lv-LV` |
+| Bengalisch (Indien) | `bn-IN` | Lingala | `ln-CD` |
+| Bosnisch | `bs-BA` | Litauisch | `lt-LT` |
+| Bulgarisch | `bg-BG` | Mazedonisch | `mk-MK` |
+| Bulgarisch (Aromanisch) | `rup-BG` | Malaiisch | `ms-MY` |
+| Burmesisch | `my-MM` | Malayalam | `ml-IN` |
+| Kantonesisch (traditionell) | `yue-Hant-HK` | Maltesisch | `mt-MT` |
+| Katalanisch | `ca-ES` | Chinesisch (Mandarin, vereinfacht) | `cmn-Hans-CN` |
+| Cebuano | `ceb` | Marathi | `mr-IN` |
+| Standard-Khmer | `km-KH` | Mongolisch | `mn-MN` |
+| Kroatisch | `hr-HR` | Nepalesisch | `ne-NP` |
+| Tschechien | `cs-CZ` | Norwegisch | `nb-NO` |
+| Dänisch | `da-DK` | Oriya | `or-IN` |
+| Niederländisch | `nl-NL` | Polnisch | `pl-PL` |
+| Englisch (Vereinigtes Königreich) | `en-GB` | Portugiesisch (Brasilien) | `pt-BR` |
+| Englisch (Indien) | `en-IN` | Portugiesisch (Portugal) | `pt-PT` |
+| Englisch (USA) | `en-US` | Punjabi | `pa-IN` |
+| Estnisch | `et-EE` | Panjabi (Gurmukhi-Schrift) | `pa-Guru-IN` |
+| Farsi | `fa-IR` | Rumänisch | `ro-RO` |
+| Filipino | `fil-PH` | Russisch | `ru-RU` |
+| Finnisch | `fi-FI` | Serbisch | `sr-RS` |
+| Französisch | `fr-FR` | Sindhi (arabische Schrift) | `sd-Arab-IN` |
+| Galizisch | `gl-ES` | Slowakisch | `sk-SK` |
+| Georgisch | `ka-GE` | Slowenisch | `sl-SI` |
+| Deutsch | `de-DE` | Spanisch (Lateinamerika) | `es-419` |
+| Griechisch | `el-GR` | Spanisch (USA) | `es-US` |
+| Gujarati | `gu-IN` | Swahili (Kenia) | `sw-KE` |
+| Hausa | `ha-NG` | Schwedisch | `sv-SE` |
+| Hebräisch | `he-IL` | Tadschikisch | `tg-TJ` |
+| Hindi | `hi-IN` | Telugu | `te-IN` |
+| Ungarisch | `hu-HU` | Thailändisch | `th-TH` |
+| Isländisch | `is-IS` | Türkisch | `tr-TR` |
+| Indisches Englisch | `en-IN` | Ukrainisch | `uk-UA` |
+| Indonesisch | `id-ID` | Usbekisch | `uz-UZ` |
+| Italienisch | `it-IT` | Vietnamesisch | `vi-VN` |
 
-## تنسيقات الصوت المتوافقة
+## Unterstützte Audioformate
 
-يتوافق Gemini 3.5 Transcribe مع أنواع MIME التالية لتنسيقات الصوت:
+Gemini 3.5 Transcribe unterstützt die folgenden MIME-Typen für Audioformate:
 
 - WAV - `audio/wav`
 - MP3 - `audio/mp3`
-- AIFF - `audio/aiff`
+- AIFF – `audio/aiff`
 - AAC - `audio/aac`
 - OGG - `audio/ogg`
 - FLAC - `audio/flac`
 - MPEG - `audio/mpeg`
 - M4A - `audio/m4a`
-- ‫L16 - `audio/l16`
-- ‫Opus - ‏`audio/opus`
+- L16 – `audio/l16`
+- Opus – `audio/opus`
 - ALAW - `audio/alaw`
 - MULAW - `audio/mulaw`
 - WebM - `audio/webm`
 
-للاطّلاع على القائمة الكاملة بأنواع MIME المتوافقة ومخططات المَعلمات، يُرجى الرجوع إلى [مرجع Interactions API](https://ai.google.dev/api/interactions-api?hl=ar#Resource:Content).
+Eine vollständige Liste der unterstützten MIME-Typen und Parameterschemas finden Sie in der [Interactions API-Referenz](https://ai.google.dev/api/interactions-api?hl=de#Resource:Content).
 
-## مرجع المَعلمة
+## Parameterverweis
 
-اضبط إعدادات تحويل الصوت إلى نص من خلال تحديد الحقول ضِمن الكائن `transcription_config` في `generation_config`:
+Konfigurieren Sie die Transkription, indem Sie Felder im `transcription_config`-Objekt in `generation_config` festlegen:
 
-| الحقل | النوع | الوصف |
+| Feld | Typ | Beschreibung |
 | --- | --- | --- |
-| `language_codes` | مصفوفة سلاسل | رموز اللغة BCP-47 (مثل `["en-US"]`). في حال حذفها أو تركها فارغة (`[]`)، يرصد النموذج اللغة تلقائيًا ويتعامل مع تبديل الرموز. |
-| `custom_vocabulary` | مصفوفة سلاسل | ما يصل إلى 1,000 مصطلح أو اختصار أو اسم علم مخصّص لتحسين دقة التعرّف على الكلام |
-| `mode` | كائن أو سلسلة | إعدادات وضع تحويل الصوت إلى نص يقبل `"smart"` أو عنصر وضع مطابق (`{"type": "verbatim", ...}`). الإعداد التلقائي هو "نسخ مطابق". |
-| `mode.type` | سلسلة | *(وضع "النص المطابق" فقط)* معرّف الوضع يجب ضبطها دائمًا على `"verbatim"`. |
-| `mode.timestamp_granularities` | مصفوفة سلاسل | *(وضع "المطابقة التامة" فقط)* دقة الطوابع الزمنية التي سيتم عرضها. مرِّر `["word"]` لتفعيل إزاحات بداية الكلمة ونهايتها. |
-| `mode.diarization_mode` | سلسلة | *(وضع "النص المطابق" فقط)* وضع تحديد هوية المتحدث. مرِّر `"speaker"` لتحديد المتحدّثين المميّزين وتصنيفهم. |
+| `language_codes` | String-Array | BCP-47-Sprachcodes (z.B. `["en-US"]`). Wenn dieser Parameter weggelassen oder leer ist (`[]`), erkennt das Modell die Sprache automatisch und verarbeitet Sprachwechsel. |
+| `custom_vocabulary` | String-Array | Bis zu 1.000 benutzerdefinierte Begriffe, Akronyme oder Eigennamen, um die Spracherkennung zu optimieren. |
+| `mode` | Objekt oder String | Konfiguration des Transkriptionsmodus. Akzeptiert `"smart"` oder ein Objekt im Wortlautmodus (`{"type": "verbatim", ...}`). Die Standardeinstellung ist die wortgetreue Transkription. |
+| `mode.type` | String | *(Nur Modus „Wort für Wort“)* Modus-ID. Immer auf `"verbatim"` gesetzt. |
+| `mode.timestamp_granularities` | String-Array | *(Nur wortwörtlicher Modus)* Granularität der zurückzugebenden Zeitstempel. Übergeben Sie `["word"]`, um den zeitlichen Versatz für Wortanfang und ‑ende zu aktivieren. |
+| `mode.diarization_mode` | String | *(Nur wortwörtlicher Modus)* Diarisierungsmodus. Übergeben Sie `"speaker"`, um verschiedene Sprecher zu identifizieren und mit Labels zu versehen. |
 
-## أفضل الممارسات
+## Best Practices
 
-- **توفير صوت واضح:** تأكَّد من أنّ التسجيلات الصوتية تتضمّن فصلًا واضحًا للأصوات وتجنَّب التقطيع الشديد.
-- **تقديم تلميحات حول اللغة عند معرفتها:** إذا كنت تعرف لغة الصوت مسبقًا، حدِّد `language_codes` لزيادة الدقة إلى أقصى حد.
-- **استهداف المفردات المخصّصة:** لا تضمِّن في `custom_vocabulary` سوى عبارات مميّزة خاصة بالنطاق أو أسماء علامات تجارية أو أسماء علم، بدلاً من الكلمات الشائعة اليومية.
-- **استخدام Files API للتسجيلات الكبيرة:** بالنسبة إلى الملفات التي تزيد مدتها عن بضع ثوانٍ، حمِّل الملف باستخدام `client.files.upload` ومرِّر معرّف الموارد المنتظم (URI) للملف الذي تم إرجاعه إلى النموذج.
+- **Saubere Audioinhalte bereitstellen**:Achten Sie darauf, dass die Sprachaufnahmen klar getrennt sind und es nicht zu starkem Clipping kommt.
+- **Sprachhinweise angeben, wenn bekannt**:Wenn Sie die Sprache des Audios im Voraus kennen, geben Sie `language_codes` an, um die Genauigkeit zu maximieren.
+- **Benutzerdefiniertes Vokabular für das Zielvorhaben**:Verwenden Sie in `custom_vocabulary` nur eindeutige Fachbegriffe, Markennamen oder Eigennamen und keine gängigen Alltagswörter.
+- **Files API für lange Aufnahmen verwenden**:Bei Dateien, die länger als einige Sekunden sind, laden Sie die Datei mit `client.files.upload` hoch und übergeben Sie den zurückgegebenen Datei-URI an das Modell.
 
-## القيود
+## Beschränkungen
 
-- **مدة الصوت:** تتيح الطلبات الأحادية العادية استخدام ملفات صوتية تصل مدتها إلى ساعة واحدة. تقتصر معالجة الصوت على 30 دقيقة عند تفعيل ميزات، مثل تحديد هوية المتحدث أو الطوابع الزمنية على مستوى الكلمات.
-- **الطوابع الزمنية على مستوى الكلمات:** قد يؤدي تفعيل الطوابع الزمنية على مستوى الكلمات إلى انخفاض دقة تحويل الصوت إلى نص بشكل عام.
-- **تمييز أصوات المتحدّثِين:** تتيح هذه الميزة التعرّف على ما يصل إلى 8 متحدثين. ميزة تحديد المتحدثين لثلاثة أشخاص أو أكثر هي ميزة تجريبية.
-- **المفردات المخصّصة:** يمكنك تقديم ما يصل إلى 1,000 عبارة في `custom_vocabulary`، ولكن عادةً ما يتم تحقيق أفضل النتائج باستخدام ما يصل إلى 100 عبارة.
-- **التوافق مع الأوضاع:** لا يمكن دمج ميزة "النسخ الذكي" (`"smart"`) مع `timestamp_granularities` أو `diarization_mode`.
+- **Audiodauer**:Standardmäßige unäre Anfragen unterstützen Audiodateien mit einer Länge von bis zu einer Stunde. Die Audioverarbeitung ist auf 30 Minuten begrenzt, wenn Funktionen wie die Sprecherbestimmung oder Zeitstempel auf Wortebene aktiviert sind.
+- **Zeitstempel auf Wortebene**:Wenn Sie Zeitstempel auf Wortebene aktivieren, kann sich die allgemeine Transkriptionsgenauigkeit verschlechtern.
+- **Sprecherbestimmung**:Die Sprecherbestimmung unterstützt bis zu 8 Sprecher. Die Sprecherzuordnung für mindestens drei Sprecher ist eine experimentelle Funktion.
+- **Benutzerdefiniertes Vokabular**:Sie können bis zu 1.000 Begriffe in `custom_vocabulary` angeben. Die besten Ergebnisse werden jedoch in der Regel mit bis zu 100 Begriffen erzielt.
+- **Moduskompatibilität**:Die intelligente Transkription (`"smart"`) kann nicht mit `timestamp_granularities` oder `diarization_mode` kombiniert werden.
 
-## الخطوات التالية
+## Nächste Schritte
 
-- يمكنك بث الصوت في الوقت الفعلي باستخدام [دليل "تحويل الصوت إلى نص مباشرةً"](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=ar) من خلال Live API.
-- استكشِف [فهم الصوت](https://ai.google.dev/gemini-api/docs/audio?hl=ar) لتحليل المحتوى الصوتي أو تلخيصه أو البحث فيه.
-- تعرَّف على كيفية إنشاء صوت من نص باستخدام ميزة [تحويل النص إلى كلام](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ar).
-- راجِع [صفحة الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#gemini-3.5-transcribe) لمعرفة أسعار النماذج وحدود الرموز المميزة.
-- راجِع دليل [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ar) لمعرفة تفاصيل حول تحميل ملفات الوسائط وإدارتها.
+- Mit der Live API können Sie Audio in Echtzeit streamen. Eine Anleitung dazu finden Sie im [Leitfaden zur Live-Transkription](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=de).
+- Mit [Audio-Analyse](https://ai.google.dev/gemini-api/docs/audio?hl=de) können Sie Audioinhalte analysieren, zusammenfassen oder abfragen.
+- Hier erfahren Sie, wie Sie mit [Text-to-Speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de) Audioinhalte aus Text synthetisieren.
+- Informationen zu Modellpreisen und Tokenlimits finden Sie auf der [Seite „Preise“](https://ai.google.dev/gemini-api/docs/pricing?hl=de#gemini-3.5-transcribe).
+- Weitere Informationen zum Hochladen und Verwalten von Media-Dateien finden Sie im [Files API](https://ai.google.dev/gemini-api/docs/files?hl=de)-Leitfaden.
 
-إرسال ملاحظات
+Feedback geben
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-تاريخ التعديل الأخير: 2026-08-28 (حسب التوقيت العالمي المتفَّق عليه)
+Zuletzt aktualisiert: 2026-08-28 (UTC).
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Haben Sie Feedback für uns?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-08-28 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-08-28 (UTC)."],[],[]]

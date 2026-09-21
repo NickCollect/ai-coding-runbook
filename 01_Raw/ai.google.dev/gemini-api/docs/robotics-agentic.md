@@ -1,34 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=ko
-fetched_at: 2026-09-14T05:36:30.612163+00:00
-title: "\uc5d0\uc774\uc804\ud2b8\ud615 \ube44\uc804 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=it
+fetched_at: 2026-09-21T05:52:59.467573+00:00
+title: "Agentic Vision \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
+Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-의견 보내기
+Invia feedback
 
-# 에이전트형 비전
+# Agentic Vision
 
-Gemini Robotics ER 모델은 Python 코드를 작성하고 실행하여 이미지를 조작하고 답변하기 전에 로직을 적용할 수 있습니다. 이 페이지에서는 코드 실행 예시(확대/축소 및 자르기를 사용한 객체 감지, 계측기 읽기, 유체 측정, 회로 기판 읽기, 이미지 주석)를 다룹니다.
+I modelli ER di Gemini Robotics possono scrivere ed eseguire codice Python per manipolare le immagini e applicare la logica prima di rispondere. Questa pagina illustra esempi di esecuzione del codice: rilevamento di oggetti con zoom e ritaglio, lettura di strumenti, misurazione di fluidi, lettura di schede di circuiti e annotazione di immagini.
 
-이러한 예시를 자체 사용 사례에 맞게 조정하려면 프롬프트 텍스트와 업로드된 이미지 파일을 자체 파일로 바꾸세요. 프롬프트에서 요청된 JSON 스키마를 애플리케이션에 필요한 출력 구조와 일치하도록 조정하거나 `system_instruction`을 추가하여 출력 형식과 정밀도를 적용할 수도 있습니다.
+Per adattare questi esempi al tuo caso d'uso, sostituisci il testo del prompt e il file immagine caricato con i tuoi. Puoi anche modificare lo schema JSON richiesto nel prompt in modo che corrisponda alla struttura di output di cui ha bisogno la tua applicazione oppure aggiungere un `system_instruction` per applicare il formato e la precisione dell'output.
 
-실행 가능한 전체 코드는
-[로봇공학 Cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)을 참고하세요.
+Per il codice eseguibile completo, consulta il
+[ricettario di Robotics](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-## 사고 수준
+## Livello di pensiero
 
-모델의 사고 수준을 제어하여 지연 시간과 정확도를 절충할 수 있습니다. 객체 감지와 같은 공간 작업은 낮은 사고 수준에서 잘 작동합니다. 계산 또는 무게 추정과 같은 복잡한 작업은 더 높은 사고 수준에서 이점을 얻습니다.
+Puoi controllare il livello di ragionamento del modello per scambiare la latenza con l'accuratezza. Le attività spaziali come il rilevamento di oggetti funzionano bene con un livello di pensiero basso. Le attività complesse come il conteggio o la stima del peso traggono vantaggio da un livello di pensiero più elevato.
 
-다음 예시에서는 복잡한 계산 작업의 사고 수준을 `high`로 설정합니다.
+L'esempio seguente imposta il livello di pensiero su `high` per un'attività di conteggio complessa:
 
 ### Python
 
@@ -57,11 +58,11 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-자세한 내용은 [사고](https://ai.google.dev/gemini-api/docs/thinking?hl=ko)를 참고하세요.
+Per i dettagli, consulta la sezione [Pensiero](https://ai.google.dev/gemini-api/docs/thinking?hl=it).
 
-## 객체 감지 (확대/축소 및 자르기)
+## Rilevamento di oggetti (zoom e ritaglio)
 
-다음 예시에서는 코드 실행을 사용하여 객체를 감지하고 경계 상자를 반환할 때 더 명확하게 볼 수 있도록 이미지를 확대/축소하고 자릅니다.
+L'esempio seguente utilizza l'esecuzione del codice per ingrandire e ritagliare un'immagine per una visualizzazione più chiara durante il rilevamento degli oggetti e la restituzione dei riquadri di delimitazione.
 
 ### Python
 
@@ -95,7 +96,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-모델 출력은 다음 JSON 응답과 유사합니다.
+L'output del modello sarà simile alla seguente risposta JSON:
 
 ```
 [
@@ -107,13 +108,13 @@ print(interaction.output_text)
 ]
 ```
 
-다음 이미지는 모델에서 반환된 상자를 보여줍니다.
+L'immagine seguente mostra le caselle restituite dal modello.
 
-![발견된 객체의 경계 상자를 보여주는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=ko)
+![Un esempio che mostra i riquadri di delimitazione per gli oggetti trovati](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=it)
 
-## 아날로그 게이지 읽기 및 로직 적용
+## Leggere un indicatore analogico e applicare la logica
 
-다음 예시에서는 모델을 사용하여 아날로그 게이지를 읽고 시간 계산을 실행하는 방법을 보여줍니다. 시스템 명령어를 사용하여 JSON 출력을 적용합니다.
+L'esempio seguente mostra come utilizzare il modello per leggere un indicatore analogico ed eseguire calcoli temporali. Utilizza un'istruzione di sistema per applicare un output JSON.
 
 ### Python
 
@@ -144,9 +145,9 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-## 컨테이너의 유체 측정
+## Misurare il fluido in un contenitore
 
-다음 예시에서는 코드 실행을 사용하여 컨테이너의 유체 수준을 측정하는 방법을 보여줍니다.
+L'esempio seguente mostra come utilizzare l'esecuzione del codice per misurare il livello del fluido in un contenitore.
 
 ### Python
 
@@ -176,9 +177,9 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-## 회로 기판의 표시 읽기
+## Leggere i segni su una scheda di circuiti
 
-다음 예시에서는 코드 실행을 사용하여 회로 기판의 표시를 읽는 방법을 보여줍니다.
+L'esempio seguente mostra come utilizzare l'esecuzione del codice per leggere i segni su una scheda di circuiti.
 
 ### Python
 
@@ -208,11 +209,11 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-![회로 기판의 표시를 보여주는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=ko)
+![Esempio che mostra i segni su una scheda di circuito](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=it)
 
-## 이미지 주석
+## Annotazione immagine
 
-다음 예시에서는 코드 실행을 사용하여 이미지에 주석을 달고 (예: 폐기 안내 화살표 그리기) 수정된 이미지를 반환하는 방법을 보여줍니다.
+L'esempio seguente mostra come utilizzare l'esecuzione del codice per annotare un'immagine (ad es. disegnare frecce per le istruzioni di smaltimento) e restituire l'immagine modificata.
 
 ### Python
 
@@ -246,11 +247,11 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-다음은 이미지 입력의 예입니다.
+Di seguito è riportata un'immagine di input di esempio.
 
-![읽을 시계를 보여주는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=ko)
+![Un esempio che mostra un orologio da leggere](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=it)
 
-모델 출력은 다음과 유사합니다.
+L'output del modello sarà simile al seguente:
 
 ```
   The annotated image shows the suggested disposal locations for the items on the table:
@@ -259,18 +260,18 @@ print(interaction.output_text)
   - **Black bin (Trash)**: Chocolate bar wrapper, Welch's packet, and white tissue.
 ```
 
-## 다음 단계
+## Passaggi successivi
 
-- [작업 조정](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=ko) - 맞춤 로봇 API를 사용한 장기 작업
-- [스트리밍을 사용한 로봇공학](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=ko) - 실시간 양방향 스트리밍 (Gemini Robotics ER 2만 해당)
-- [동영상 이해](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=ko) - 순간 찾기 및 진행률 분류 (Gemini Robotics ER 2만 해당)
+- [Orchestrazione delle attività](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=it): attività a lungo termine con API robot personalizzate.
+- [Robotica con streaming](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=it): streaming bidirezionale in tempo reale (solo Gemini Robotics ER 2).
+- [Comprensione video](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=it): ricerca di momenti e classificazione dei progressi (solo Gemini Robotics ER 2).
 
-의견 보내기
+Invia feedback
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-최종 업데이트: 2026-09-08(UTC)
+Ultimo aggiornamento 2026-09-08 UTC.
 
-의견을 전달하고 싶나요?
+Vuoi dirci altro?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-08(UTC)"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-08 UTC."],[],[]]

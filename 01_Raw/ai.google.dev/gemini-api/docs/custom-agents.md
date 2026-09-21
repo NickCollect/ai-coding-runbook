@@ -1,35 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=it
-fetched_at: 2026-09-14T05:40:24.620116+00:00
-title: "Creazione di agenti gestiti \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=th
+fetched_at: 2026-09-21T05:56:27.344257+00:00
+title: "\u0e01\u0e32\u0e23\u0e2a\u0e23\u0e49\u0e32\u0e07 Agent \u0e17\u0e35\u0e48\u0e21\u0e35\u0e01\u0e32\u0e23\u0e08\u0e31\u0e14\u0e01\u0e32\u0e23 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Invia feedback
+ส่งความคิดเห็น
 
-# Creazione di agenti gestiti
+# การสร้าง Agent ที่มีการจัดการ
 
-Gli agenti gestiti nell'API Gemini ti consentono di estendere l'agente Antigravity con istruzioni, competenze e dati personalizzati. Puoi [personalizzare l'agente in linea](#customize-inline) al momento dell'interazione o [salvare la configurazione](#save-agent) come agente gestito che richiami per ID.
+Agent ที่ได้รับการจัดการใน Gemini API ช่วยให้คุณขยาย Agent ของ Antigravity ด้วยคำสั่ง ทักษะ และข้อมูลของคุณเองได้ คุณสามารถ[ปรับแต่งเอเจนต์ในบรรทัด](#customize-inline)ในเวลาที่โต้ตอบ หรือ[บันทึกการกำหนดค่า](#save-agent)เป็นเอเจนต์ที่มีการจัดการซึ่งคุณเรียกใช้ด้วยรหัส
 
-## Personalizzare l'agente Antigravity
+## ปรับแต่ง Agent ของ Antigravity
 
-Il modo più rapido per creare un agente personalizzato è passare la configurazione in linea durante la creazione di una nuova interazione senza dover eseguire un passaggio di registrazione. Puoi estendere l'agente in diversi modi principali:
+วิธีที่เร็วที่สุดในการสร้างเอเจนต์ที่กำหนดเองคือการส่งการกำหนดค่าแบบอินไลน์ขณะสร้างการโต้ตอบใหม่โดยไม่ต้องลงทะเบียน คุณขยาย Agent ได้หลายวิธีหลักๆ ดังนี้
 
-- **[Selezione del modello](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it#model-selection)**: scegli il modello Gemini sottostante tramite `agent_config` (per impostazione predefinita è **Gemini 3.8 Flash**).
-- **Istruzioni di sistema**: passa il testo in linea tramite `system_instruction` per definire il comportamento.
-- **Strumenti**: esegui l'override degli strumenti predefiniti (esecuzione del codice, ricerca, contesto URL), registra i server MCP remoti o definisci funzioni personalizzate (chiamata di funzioni).
-- **File e competenze**: monta file come `AGENTS.md` e `SKILL.md` nell'ambiente.
+- **[การเลือกโมเดล](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th#model-selection)**: เลือกโมเดล Gemini พื้นฐานผ่าน `agent_config` (ค่าเริ่มต้นคือ **Gemini 3.8 Flash**)
+- **คำสั่งของระบบ**: ส่งข้อความในบรรทัดผ่าน `system_instruction` เพื่อกำหนดลักษณะการทำงาน
+- **เครื่องมือ**: ลบล้างเครื่องมือเริ่มต้น (การดำเนินการโค้ด การค้นหา บริบท URL) ลงทะเบียนเซิร์ฟเวอร์ MCP ระยะไกล หรือกำหนดฟังก์ชันที่กำหนดเอง (การเรียกใช้ฟังก์ชัน)
+- **ไฟล์และทักษะ**: เมานต์ไฟล์ เช่น `AGENTS.md` และ `SKILL.md` ลงในสภาพแวดล้อม
 
-Ecco un esempio di passaggio di tutti e tre in linea:
+ตัวอย่างการส่งทั้ง 3 รายการแบบอินไลน์
 
 ### Python
 
@@ -39,7 +39,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    agent="antigravity-preview-05-2026",
+    agent="antigravity-preview-09-2026",
     input="Analyze the Q1 revenue data and create a slide deck.",
     system_instruction="You are a data analyst. Always include visualizations and export results as PDF.",
     environment={
@@ -70,7 +70,7 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
+    agent: "antigravity-preview-09-2026",
     input: "Analyze the Q1 revenue data and create a slide deck.",
     system_instruction: "You are a data analyst. Always include visualizations and export results as PDF.",
     environment: {
@@ -99,21 +99,40 @@ console.log(interaction.output_text);
 import com.google.genai.Client;
 import com.google.genai.gaos.models.interactions.AgentOption;
 import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.CreateAgentInteractionEnvironment;
+import com.google.genai.gaos.models.interactions.Environment;
 import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Source;
+import com.google.genai.gaos.models.interactions.SourceType;
 import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.List;
 
 Client client = new Client();
 
-CreateAgentInteraction params =
-    CreateAgentInteraction.builder()
-        .agent(AgentOption.of("antigravity-preview-05-2026"))
-        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
-        .build();
+Environment env = Environment.builder()
+    .sources(List.of(
+        Source.builder()
+            .type(SourceType.INLINE)
+            .target(".agents/AGENTS.md")
+            .content("Always use matplotlib for charts. Include a summary table in every report.")
+            .build(),
+        Source.builder()
+            .type(SourceType.INLINE)
+            .target(".agents/skills/slide-maker/SKILL.md")
+            .content("---\nname: slide-maker\n---\n# Slide Maker\nCreate HTML slide decks from data analysis results.")
+            .build()
+    ))
+    .build();
 
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+CreateAgentInteraction params = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("antigravity-preview-09-2026"))
+    .input(InteractionsInput.of("Analyze the Q1 revenue data and create a slide deck."))
+    .systemInstruction("You are a data analyst. Always include visualizations and export results as PDF.")
+    .environment(CreateAgentInteractionEnvironment.of(env))
+    .build();
 
+Interaction interaction = client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 System.out.println(interaction.outputText().orElse(""));
 ```
 
@@ -124,7 +143,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "agent": "antigravity-preview-05-2026",
+    "agent": "antigravity-preview-09-2026",
     "input": "Analyze the Q1 revenue data and create a slide deck.",
     "system_instruction": "You are a data analyst. Always include visualizations and export results as PDF.",
     "environment": {
@@ -145,22 +164,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Tutto è definito al momento dell'interazione. Non è necessario registrare nulla in anticipo. L'infrastruttura agentica Antigravity fornisce il runtime (esecuzione del codice, gestione dei file, accesso web) e i livelli di configurazione.
+ทุกอย่างจะกำหนดไว้ในเวลาที่เกิดการโต้ตอบ โดยคุณไม่จำเป็นต้องลงทะเบียนอะไรก่อน ระบบควบคุมการทำงานของ Agent ของ Antigravity มีรันไทม์ (การเรียกใช้โค้ด การจัดการไฟล์ การเข้าถึงเว็บ) และเลเยอร์การกำหนดค่าของคุณอยู่ด้านบน
 
-### Strumenti e istruzioni di sistema
+### เครื่องมือและวิธีการของระบบ
 
-Puoi personalizzare il comportamento e le funzionalità dell'agente per un'interazione specifica utilizzando i parametri `system_instruction` e `tools`.
+คุณปรับแต่งลักษณะการทำงานและความสามารถของเอเจนต์สำหรับการโต้ตอบที่เฉพาะเจาะจงได้โดยใช้พารามิเตอร์ `system_instruction` และ `tools`
 
-- **Istruzioni di sistema**: utilizza il parametro `system_instruction` per passare il testo in linea che definisce il comportamento dell'agente. Questa opzione è ideale per le modifiche rapide che vuoi apportare per ogni chiamata. `system_instruction` e `AGENTS.md` sono additivi; entrambi si applicano quando sono presenti.
-- **Strumenti**: per impostazione predefinita, l'agente Antigravity ha accesso a `code_execution`, `google_search` e `url_context`. Puoi eseguire l'override di questo elenco passando il parametro `tools` al momento dell'interazione. Puoi anche registrare [server MCP remoti](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it#mcp-servers) o definire [funzioni personalizzate (chiamata di funzioni)](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it#function-calling) per connettere l'agente alle tue API e ai tuoi database. Per informazioni dettagliate sugli strumenti disponibili, vedi [Agente Antigravity: strumenti supportati](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it#supported-tools).
+- **วิธีการของระบบ**: ใช้พารามิเตอร์ `system_instruction` เพื่อส่งข้อความในบรรทัดที่กำหนดลักษณะการทำงานของเอเจนต์ ซึ่งเหมาะสำหรับการปรับแต่งอย่างรวดเร็วที่คุณต้องการเปลี่ยนแปลงต่อการโทร `system_instruction` และ `AGENTS.md` จะเพิ่มขึ้น โดยทั้ง 2 อย่างจะมีผลเมื่อมีอยู่
+- **เครื่องมือ**: โดยค่าเริ่มต้น Agent ของ Antigravity จะมีสิทธิ์เข้าถึง `code_execution`, `google_search` และ `url_context` คุณลบล้างรายการนี้ได้โดยส่งพารามิเตอร์ `tools` ในเวลาที่เกิดการโต้ตอบ นอกจากนี้ คุณยังลงทะเบียน[เซิร์ฟเวอร์ MCP ระยะไกล](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th#mcp-servers)หรือกำหนด[ฟังก์ชันที่กำหนดเอง (การเรียกใช้ฟังก์ชัน)](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th#function-calling) เพื่อเชื่อมต่อเอเจนต์กับ API และฐานข้อมูลของคุณเองได้ด้วย โปรดดูรายละเอียดทั้งหมดเกี่ยวกับเครื่องมือที่มีที่หัวข้อ [Antigravity Agent: เครื่องมือที่รองรับ](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th#supported-tools)
 
-### Personalizzazione basata su file
+### การปรับแต่งตามไฟล์
 
-#### Struttura della directory dell'agente
+#### โครงสร้างไดเรกทอรีของ Agent
 
-Anche se puoi passare la configurazione in linea, ti consigliamo di organizzare i file dell'agente in una directory strutturata. In questo modo è più facile gestire, controllare la versione e montare i file nell'ambiente dell'agente.
+แม้ว่าคุณจะส่งการกำหนดค่าแบบอินไลน์ได้ แต่เราขอแนะนำให้จัดระเบียบไฟล์ของเอเจนต์ในไดเรกทอรีที่มีโครงสร้าง ซึ่งจะช่วยให้จัดการ ควบคุมเวอร์ชัน และติดตั้งในสภาพแวดล้อมของเอเจนต์ได้ง่ายขึ้น
 
-Una tipica directory di progetto dell'agente ha questo aspetto:
+ไดเรกทอรีโปรเจ็กต์เอเจนต์ทั่วไปมีลักษณะดังนี้
 
 ```
 my-agent/
@@ -171,13 +190,13 @@ my-agent/
 └── workspace/       # Initial data files and knowledge
 ```
 
-Il runtime di Antigravity esegue la scansione di `.agents/` (e della root dell'ambiente) per questi file.
+รันไทม์ Antigravity จะสแกน `.agents/` (และรูทของสภาพแวดล้อม) เพื่อหาไฟล์เหล่านี้
 
 #### AGENTS.md
 
-L'agente carica automaticamente `.agents/AGENTS.md` (o `/.agents/AGENTS.md`) dall'ambiente come istruzioni di sistema all'avvio. Utilizza `AGENTS.md` per le definizioni di persona in formato lungo, le linee guida dettagliate e le istruzioni di cui vuoi controllare le versioni insieme al codice.
+Agent จะโหลด `.agents/AGENTS.md` (หรือ `/.agents/AGENTS.md`) จากสภาพแวดล้อมโดยอัตโนมัติเป็นคำสั่งของระบบเมื่อเริ่มต้น ใช้ `AGENTS.md` สำหรับคำจำกัดความของกลุ่มเป้าหมายแบบยาว หลักเกณฑ์โดยละเอียด และวิธีการที่คุณต้องการควบคุมเวอร์ชันควบคู่ไปกับโค้ด
 
-Monta un file `AGENTS.md` utilizzando un'origine in linea:
+เมานต์ `AGENTS.md` โดยใช้แหล่งข้อมูลในบรรทัด
 
 ### Python
 
@@ -187,7 +206,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    agent="antigravity-preview-05-2026",
+    agent="antigravity-preview-09-2026",
     input="Analyze the Q1 revenue data and create a report.",
     system_instruction="You are a data analyst. Always include visualizations and export results as PDF.",
     environment={
@@ -213,7 +232,7 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
+    agent: "antigravity-preview-09-2026",
     input: "Analyze the Q1 revenue data and create a report.",
     system_instruction: "You are a data analyst. Always include visualizations and export results as PDF.",
     environment: {
@@ -237,21 +256,35 @@ console.log(interaction.output_text);
 import com.google.genai.Client;
 import com.google.genai.gaos.models.interactions.AgentOption;
 import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.CreateAgentInteractionEnvironment;
+import com.google.genai.gaos.models.interactions.Environment;
 import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Source;
+import com.google.genai.gaos.models.interactions.SourceType;
 import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.List;
 
 Client client = new Client();
 
-CreateAgentInteraction params =
-    CreateAgentInteraction.builder()
-        .agent(AgentOption.of("antigravity-preview-05-2026"))
-        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
-        .build();
+Environment env = Environment.builder()
+    .sources(List.of(
+        Source.builder()
+            .type(SourceType.INLINE)
+            .target(".agents/AGENTS.md")
+            .content("Always use matplotlib for charts. Include a summary table in every report.")
+            .build()
+    ))
+    .build();
 
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+CreateAgentInteraction params = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("antigravity-preview-09-2026"))
+    .input(InteractionsInput.of("Analyze the Q1 revenue data and create a report."))
+    .systemInstruction("You are a data analyst. Always include visualizations and export results as PDF.")
+    .environment(CreateAgentInteractionEnvironment.of(env))
+    .build();
 
+Interaction interaction = client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 System.out.println(interaction.outputText().orElse(""));
 ```
 
@@ -262,7 +295,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "Content-Type: application/json" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -d '{
-      "agent": "antigravity-preview-05-2026",
+      "agent": "antigravity-preview-09-2026",
       "input": "Analyze the Q1 revenue data and create a report.",
       "system_instruction": "You are a data analyst. Always include visualizations and export results as PDF.",
       "environment": {
@@ -278,9 +311,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-#### Competenze: SKILL.md
+#### ทักษะ: SKILL.md
 
-Le competenze sono file che estendono le funzionalità dell'agente. Inseriscili in `.agents/skills/<skill-name>/SKILL.md` e l'interfaccia li rileva e li registra automaticamente.
+ทักษะคือไฟล์ที่ขยายความสามารถของ Agent วางไว้ใต้ `.agents/skills/<skill-name>/SKILL.md` แล้ว Harness จะค้นหาและลงทะเบียนโดยอัตโนมัติ
 
 ```
 .agents/
@@ -290,7 +323,7 @@ Le competenze sono file che estendono le funzionalità dell'agente. Inseriscili 
         └── SKILL.md
 ```
 
-Monta una competenza utilizzando un'origine in linea:
+ติดตั้งทักษะโดยใช้แหล่งข้อมูลในบรรทัด
 
 ### Python
 
@@ -300,7 +333,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    agent="antigravity-preview-05-2026",
+    agent="antigravity-preview-09-2026",
     input="Create a presentation about our Q1 results.",
     system_instruction="You create presentations from data.",
     environment={
@@ -326,7 +359,7 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
+    agent: "antigravity-preview-09-2026",
     input: "Create a presentation about our Q1 results.",
     system_instruction: "You create presentations from data.",
     environment: {
@@ -350,21 +383,35 @@ console.log(interaction.output_text);
 import com.google.genai.Client;
 import com.google.genai.gaos.models.interactions.AgentOption;
 import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.CreateAgentInteractionEnvironment;
+import com.google.genai.gaos.models.interactions.Environment;
 import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Source;
+import com.google.genai.gaos.models.interactions.SourceType;
 import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.List;
 
 Client client = new Client();
 
-CreateAgentInteraction params =
-    CreateAgentInteraction.builder()
-        .agent(AgentOption.of("antigravity-preview-05-2026"))
-        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
-        .build();
+Environment env = Environment.builder()
+    .sources(List.of(
+        Source.builder()
+            .type(SourceType.INLINE)
+            .target(".agents/skills/slide-maker/SKILL.md")
+            .content("---\nname: slide-maker\ndescription: Create HTML slide decks\n---\n# Slide Maker\n\nWhen asked to create a presentation:\n1. Analyze the input data\n2. Create an HTML slide deck with reveal.js\n3. Save to /workspace/output/slides.html")
+            .build()
+    ))
+    .build();
 
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+CreateAgentInteraction params = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("antigravity-preview-09-2026"))
+    .input(InteractionsInput.of("Create a presentation about our Q1 results."))
+    .systemInstruction("You create presentations from data.")
+    .environment(CreateAgentInteractionEnvironment.of(env))
+    .build();
 
+Interaction interaction = client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 System.out.println(interaction.outputText().orElse(""));
 ```
 
@@ -375,7 +422,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "Content-Type: application/json" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -d '{
-      "agent": "antigravity-preview-05-2026",
+      "agent": "antigravity-preview-09-2026",
       "input": "Create a presentation about our Q1 results.",
       "system_instruction": "You create presentations from data.",
       "environment": {
@@ -391,17 +438,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Le competenze caricate da `.agents/skills/` e `/.agents/skills/` vengono rilevate automaticamente.
+ระบบจะค้นพบทักษะที่โหลดจาก `.agents/skills/` และ `/.agents/skills/` โดยอัตโนมัติ
 
-## Creare un agente gestito
+## สร้าง Agent ที่มีการจัดการ
 
-Una volta eseguite le iterazioni sulla configurazione, puoi crearla come agente gestito con `agents.create`. In questo modo puoi richiamare l'agente per ID senza ripetere la configurazione ogni volta.
+เมื่อทำการกำหนดค่าซ้ำแล้ว คุณจะสร้างเป็นเอเจนต์ที่มีการจัดการด้วย `agents.create` ได้ ซึ่งช่วยให้คุณเรียกใช้ Agent ตามรหัสได้โดยไม่ต้องกำหนดค่าซ้ำทุกครั้ง
 
-L'`id` che specifichi quando crei un agente gestito deve essere univoco per il tuo progetto e non deve iniziare con prefissi riservati (ad es. `google-`, `gemini-`). Per l'elenco completo dei prefissi limitati, vedi [Limitazioni dell'ID agente](#agent-id-restrictions).
+`id` ที่คุณระบุเมื่อสร้างเอเจนต์ที่มีการจัดการต้องไม่ซ้ำกันในโปรเจ็กต์ของคุณ และต้องไม่ขึ้นต้นด้วยคำนำหน้าที่สงวนไว้ (เช่น `google-`, `gemini-`) ดูรายการคำนำหน้าที่ถูกจำกัดทั้งหมดได้ที่[ข้อจำกัดของรหัสเอเจนต์](#agent-id-restrictions)
 
-### Dalle origini
+### จากแหล่งข้อมูล
 
-Specifica `base_agent`, `id`, `agent_config`, `system_instruction` e `base_environment` con le origini. La piattaforma esegue il provisioning di una nuova sandbox con i tuoi file a ogni chiamata. Per i tipi di origine disponibili (Git, GCS, in linea), vedi [Ambienti](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it).
+ระบุ `base_agent`, `id`, `agent_config`, `system_instruction` และ `base_environment` พร้อมแหล่งที่มา แพลตฟอร์มจะจัดสรรแซนด์บ็อกซ์ใหม่พร้อมไฟล์ของคุณทุกครั้งที่เรียกใช้ ดูประเภทแหล่งข้อมูลที่ใช้ได้ (Git, GCS, อินไลน์) ใน[สภาพแวดล้อม](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th)
 
 ### Python
 
@@ -412,7 +459,7 @@ client = genai.Client()
 
 agent = client.agents.create(
     id="data-analyst",
-    base_agent="antigravity-preview-05-2026",
+    base_agent="antigravity-preview-09-2026",
     agent_config={
         "type": "antigravity",
         "model": "gemini-3.8-flash",
@@ -452,7 +499,7 @@ const client = new GoogleGenAI({});
 
 const agent = await client.agents.create({
     id: "data-analyst",
-    base_agent: "antigravity-preview-05-2026",
+    base_agent: "antigravity-preview-09-2026",
     agent_config: {
         type: "antigravity",
         model: "gemini-3.8-flash",
@@ -487,24 +534,51 @@ console.log(`Created agent: ${agent.id}`);
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.AgentOption;
-import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.agents.Agent;
+import com.google.genai.gaos.models.agents.AgentConfig;
+import com.google.genai.gaos.models.agents.BaseEnvironment;
+import com.google.genai.gaos.models.interactions.AntigravityAgentConfig;
+import com.google.genai.gaos.models.interactions.Environment;
+import com.google.genai.gaos.models.interactions.Source;
+import com.google.genai.gaos.models.interactions.SourceType;
+import java.util.List;
 
 Client client = new Client();
 
-CreateAgentInteraction params =
-    CreateAgentInteraction.builder()
-        .agent(AgentOption.of("antigravity-preview-05-2026"))
-        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
-        .build();
+Environment env = Environment.builder()
+    .sources(List.of(
+        Source.builder()
+            .type(SourceType.INLINE)
+            .target(".agents/AGENTS.md")
+            .content("Always use matplotlib for charts. Include a summary table in every report.")
+            .build(),
+        Source.builder()
+            .type(SourceType.INLINE)
+            .target(".agents/skills/slide-maker/SKILL.md")
+            .content("---\nname: slide-maker\n---\n# Slide Maker\nCreate HTML slide decks from data analysis results.")
+            .build(),
+        Source.builder()
+            .type(SourceType.REPOSITORY)
+            .source("https://github.com/my-org/analysis-templates")
+            .target("/workspace/templates")
+            .build()
+    ))
+    .build();
 
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+Agent agentParams = Agent.builder()
+    .id("data-analyst")
+    .baseAgent("antigravity-preview-09-2026")
+    .agentConfig(AgentConfig.of(
+        AntigravityAgentConfig.builder()
+            .model("gemini-3.8-flash")
+            .build()
+    ))
+    .systemInstruction("You are a data analyst. Always include visualizations and export results as PDF.")
+    .baseEnvironment(BaseEnvironment.of(env))
+    .build();
 
-System.out.println(interaction.outputText().orElse(""));
+Agent agent = client.agents.create(agentParams).agent().get();
+System.out.println("Created agent: " + agent.id().orElse(""));
 ```
 
 ### REST
@@ -515,7 +589,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
     "id": "data-analyst",
-    "base_agent": "antigravity-preview-05-2026",
+    "base_agent": "antigravity-preview-09-2026",
     "agent_config": {
         "type": "antigravity",
         "model": "gemini-3.8-flash"
@@ -544,9 +618,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 }'
 ```
 
-### Da un ambiente esistente (fork)
+### จากสภาพแวดล้อมที่มีอยู่ (Fork)
 
-Esegui l'iterazione con l'agente Antigravity di base finché l'ambiente non è corretto (pacchetti installati, file presenti), quindi esegui il fork in un agente gestito.
+วนซ้ำกับเอเจนต์ Antigravity ฐานจนกว่าสภาพแวดล้อมจะเหมาะสม (ติดตั้งแพ็กเกจแล้ว วางไฟล์แล้ว) จากนั้นแยกเป็นเอเจนต์ที่มีการจัดการ
 
 ### Python
 
@@ -557,7 +631,7 @@ client = genai.Client()
 
 # Step 1: set up the environment interactively
 interaction = client.interactions.create(
-    agent="antigravity-preview-05-2026",
+    agent="antigravity-preview-09-2026",
     input="Install pandas, matplotlib, and seaborn. Create an analysis template at /workspace/template.py.",
     environment="remote",
 )
@@ -566,7 +640,7 @@ interaction = client.interactions.create(
 
 agent = client.agents.create(
     id="my-data-analyst",
-    base_agent="antigravity-preview-05-2026",
+    base_agent="antigravity-preview-09-2026",
     system_instruction="You are a data analyst. Use the template at /workspace/template.py for all reports.",
     base_environment=interaction.environment_id,
 )
@@ -582,14 +656,14 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    agent: "antigravity-preview-05-2026",
+    agent: "antigravity-preview-09-2026",
     input: "Install pandas, matplotlib, and seaborn. Create an analysis template at /workspace/template.py.",
     environment: "remote",
 }, { timeout: 300000 });
 
 const agent = await client.agents.create({
     id: "my-data-analyst",
-    base_agent: "antigravity-preview-05-2026",
+    base_agent: "antigravity-preview-09-2026",
     system_instruction: "You are a data analyst. Use the template at /workspace/template.py for all reports.",
     base_environment: interaction.environment_id,
 });
@@ -601,24 +675,36 @@ console.log(`Forked agent successfully: ${agent.id}`);
 
 ```
 import com.google.genai.Client;
+import com.google.genai.gaos.models.agents.Agent;
+import com.google.genai.gaos.models.agents.BaseEnvironment;
 import com.google.genai.gaos.models.interactions.AgentOption;
 import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.CreateAgentInteractionEnvironment;
 import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
 
 Client client = new Client();
 
-CreateAgentInteraction params =
-    CreateAgentInteraction.builder()
-        .agent(AgentOption.of("antigravity-preview-05-2026"))
-        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
-        .build();
+// Step 1: set up the environment interactively
+CreateAgentInteraction params = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("antigravity-preview-09-2026"))
+    .input(InteractionsInput.of("Install pandas, matplotlib, and seaborn. Create an analysis template at /workspace/template.py."))
+    .environment(CreateAgentInteractionEnvironment.of("remote"))
+    .build();
 
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+Interaction interaction = client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 
-System.out.println(interaction.outputText().orElse(""));
+// Step 2: fork that environment into a managed agent
+Agent agentParams = Agent.builder()
+    .id("my-data-analyst")
+    .baseAgent("antigravity-preview-09-2026")
+    .systemInstruction("You are a data analyst. Use the template at /workspace/template.py for all reports.")
+    .baseEnvironment(BaseEnvironment.of(interaction.environmentId().orElse("")))
+    .build();
+
+Agent agent = client.agents.create(agentParams).agent().get();
+System.out.println("Forked agent successfully: " + agent.id().orElse(""));
 ```
 
 ### REST
@@ -628,17 +714,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "Content-Type: application/json" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -d '{
-      "agent": "antigravity-preview-05-2026",
+      "agent": "antigravity-preview-09-2026",
       "input": "Install pandas, matplotlib, and seaborn. Create an analysis template at /workspace/template.py.",
       "environment": "remote"
   }'
 ```
 
-### Con regole di rete
+### ใช้กฎเครือข่าย
 
-Puoi bloccare l'accesso in uscita o inserire le credenziali quando salvi un agente gestito. Per lo schema completo della lista consentita, i pattern delle credenziali e i caratteri jolly, vedi [Ambienti: configurazione di rete](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it#network-configuration).
+คุณสามารถล็อกการเข้าถึงขาออกหรือแทรกข้อมูลเข้าสู่ระบบเมื่อบันทึกเอเจนต์ที่มีการจัดการ ดูสคีมารายการที่อนุญาต รูปแบบข้อมูลเข้าสู่ระบบ และสัญลักษณ์แทนทั้งหมดได้ที่[สภาพแวดล้อม: การกำหนดค่าเครือข่าย](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th#network-configuration)
 
-L'esempio seguente crea un agente `issue-resolver` che può accedere solo a GitHub e PyPI, con le credenziali inserite per GitHub:
+อ้างอิง[ข้อมูลเข้าสู่ระบบ](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=th)ที่จัดเก็บไว้ตามรหัสในกฎรายการที่อนุญาต (`"credential": "github-production"`) และพร็อกซีขาออกจะแทรกข้อมูลลับในเวลาที่ส่งคำขอ จึงไม่มีการระบุข้อมูลลับในคำจำกัดความของเอเจนต์ ตัวอย่างนี้จะตั้งค่าส่วนหัวแบบอินไลน์ด้วย `transform` แทน พร็อกซีจะใช้ทั้ง 2 รูปแบบในลักษณะเดียวกัน นอกจากนี้ ข้อมูลเข้าสู่ระบบยังช่วยให้คุณนำข้อมูลลับไปใช้ซ้ำในเอเจนต์ต่างๆ และหมุนเวียนข้อมูลลับได้ในที่เดียว
+
+ตัวอย่างต่อไปนี้สร้าง`issue-resolver`เอเจนต์ที่เข้าถึงได้เฉพาะ GitHub และ PyPI โดยมีการแทรกข้อมูลเข้าสู่ระบบสำหรับ GitHub
 
 ### Python
 
@@ -649,7 +737,7 @@ client = genai.Client()
 
 agent = client.agents.create(
     id="issue-resolver",
-    base_agent="antigravity-preview-05-2026",
+    base_agent="antigravity-preview-09-2026",
     system_instruction="You resolve GitHub issues. Clone the repo, find the bug, write the fix, run the tests, and open a PR.",
     base_environment={
         "type": "remote",
@@ -686,7 +774,7 @@ const client = new GoogleGenAI({});
 
 const agent = await client.agents.create({
     id: "issue-resolver",
-    base_agent: "antigravity-preview-05-2026",
+    base_agent: "antigravity-preview-09-2026",
     system_instruction: "You resolve GitHub issues. Clone the repo, find the bug, write the fix, run the tests, and open a PR.",
     base_environment: {
         type: "remote",
@@ -718,24 +806,53 @@ console.log(`Created issue-resolver agent successfully: ${agent.id}`);
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.AgentOption;
-import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.agents.Agent;
+import com.google.genai.gaos.models.agents.BaseEnvironment;
+import com.google.genai.gaos.models.interactions.Allowlist;
+import com.google.genai.gaos.models.interactions.AllowlistEntry;
+import com.google.genai.gaos.models.interactions.Environment;
+import com.google.genai.gaos.models.interactions.EnvironmentNetworkEgressAllowlist;
+import com.google.genai.gaos.models.interactions.Network;
+import com.google.genai.gaos.models.interactions.Source;
+import com.google.genai.gaos.models.interactions.SourceType;
+import com.google.genai.gaos.models.interactions.Transform;
+import java.util.List;
+import java.util.Map;
 
 Client client = new Client();
 
-CreateAgentInteraction params =
-    CreateAgentInteraction.builder()
-        .agent(AgentOption.of("antigravity-preview-05-2026"))
-        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
-        .build();
+Environment env = Environment.builder()
+    .sources(List.of(
+        Source.builder()
+            .type(SourceType.REPOSITORY)
+            .source("https://github.com/my-org/backend")
+            .target("/workspace/repo")
+            .build()
+    ))
+    .network(Network.of(EnvironmentNetworkEgressAllowlist.of(
+        Allowlist.builder()
+            .allowlist(List.of(
+                AllowlistEntry.builder()
+                    .domain("api.github.com")
+                    .transform(Transform.of(Map.of(
+                        "Authorization", "Basic YOUR_BASE64_TOKEN"
+                    )))
+                    .build(),
+                AllowlistEntry.builder().domain("pypi.org").build()
+            ))
+            .build()
+    )))
+    .build();
 
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+Agent agentParams = Agent.builder()
+    .id("issue-resolver")
+    .baseAgent("antigravity-preview-09-2026")
+    .systemInstruction("You resolve GitHub issues. Clone the repo, find the bug, write the fix, run the tests, and open a PR.")
+    .baseEnvironment(BaseEnvironment.of(env))
+    .build();
 
-System.out.println(interaction.outputText().orElse(""));
+Agent agent = client.agents.create(agentParams).agent().get();
+System.out.println("Created issue-resolver agent successfully: " + agent.id().orElse(""));
 ```
 
 ### REST
@@ -746,7 +863,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -d '{
       "id": "issue-resolver",
-      "base_agent": "antigravity-preview-05-2026",
+      "base_agent": "antigravity-preview-09-2026",
       "system_instruction": "You resolve GitHub issues. Clone the repo, find the bug, write the fix, run the tests, and open a PR.",
       "base_environment": {
           "type": "remote",
@@ -772,9 +889,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
   }'
 ```
 
-## Richiamare l'agente
+## เรียกใช้ Agent
 
-Chiama l'agente gestito con il relativo ID creando una nuova interazione. Ogni chiamata esegue il fork dell'ambiente di base, quindi ogni esecuzione inizia da zero.
+โทรหา Agent ที่มีการจัดการด้วยรหัส Agent โดยสร้างการโต้ตอบใหม่ การเรียกใช้แต่ละครั้งจะแยกสภาพแวดล้อมพื้นฐานออกเป็นหลายๆ ส่วน ดังนั้นการเรียกใช้ทุกครั้งจึงเริ่มต้นจากสภาพแวดล้อมที่สะอาด
 
 ### Python
 
@@ -806,22 +923,21 @@ console.log(result.output_text);
 import com.google.genai.Client;
 import com.google.genai.gaos.models.interactions.AgentOption;
 import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.CreateAgentInteractionEnvironment;
 import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
 
 Client client = new Client();
 
-CreateAgentInteraction params =
-    CreateAgentInteraction.builder()
-        .agent(AgentOption.of("antigravity-preview-05-2026"))
-        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
-        .build();
+CreateAgentInteraction params = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("data-analyst"))
+    .input(InteractionsInput.of("Analyze Q1 revenue data from /workspace/templates/sample.csv and create a slide deck."))
+    .environment(CreateAgentInteractionEnvironment.of("remote"))
+    .build();
 
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
+Interaction result = client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+System.out.println(result.outputText().orElse(""));
 ```
 
 ### REST
@@ -837,15 +953,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Per le conversazioni e lo streaming in più turni, consulta la [guida rapida](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it). Gli stessi pattern `previous_interaction_id` e `environment` si applicano agli agenti gestiti.
+สำหรับการสนทนาไปมาและการสตรีม โปรดดู[คู่มือเริ่มใช้งานฉบับย่อ](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=th) รูปแบบ `previous_interaction_id` และ `environment` เดียวกันนี้จะมีผลกับเอเจนต์ที่มีการจัดการ
 
-Gli agenti gestiti supportano anche l'esecuzione in background e l'annullamento. Per dettagli ed esempi di codice, vedi [Agente Antigravity: esecuzione in background](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it#background-execution).
+นอกจากนี้ เอเจนต์ที่มีการจัดการยังรองรับการดำเนินการและการยกเลิกในเบื้องหลังด้วย ดูรายละเอียดและตัวอย่างโค้ดได้ที่[Antigravity Agent: การดำเนินการในเบื้องหลัง](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th#background-execution)
 
-## Eseguire l'override della configurazione al momento della chiamata
+## การลบล้างการกำหนดค่าเมื่อเรียกใช้
 
-Puoi eseguire l'override della configurazione di rete `system_instruction`, `tools` e `environment` predefinita dell'agente quando crei un'interazione. In questo modo puoi modificare il comportamento, le funzionalità o le credenziali dell'agente per un'esecuzione specifica senza modificare la definizione dell'agente memorizzata.
+คุณสามารถลบล้างการกำหนดค่าเครือข่าย `system_instruction`, `tools` และ `environment` เริ่มต้นของเอเจนต์เมื่อสร้างการโต้ตอบ ซึ่งจะช่วยให้คุณแก้ไขลักษณะการทำงาน ความสามารถ หรือข้อมูลเข้าสู่ระบบของเอเจนต์สำหรับการเรียกใช้ที่เฉพาะเจาะจงได้โดยไม่ต้องเปลี่ยนคำจำกัดความของเอเจนต์ที่จัดเก็บไว้
 
-### Eseguire l'override delle istruzioni di sistema e degli strumenti
+### ลบล้างคำสั่งและเครื่องมือของระบบ
 
 ### Python
 
@@ -879,23 +995,26 @@ console.log(result.output_text);
 ```
 import com.google.genai.Client;
 import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.CodeExecution;
 import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.CreateAgentInteractionEnvironment;
 import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.List;
 
 Client client = new Client();
 
-CreateAgentInteraction params =
-    CreateAgentInteraction.builder()
-        .agent(AgentOption.of("antigravity-preview-05-2026"))
-        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
-        .build();
+CreateAgentInteraction params = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("data-analyst"))
+    .input(InteractionsInput.of("Analyze Q1 revenue data, but do not create a slide deck. Just output a summary table."))
+    .systemInstruction("You are a data analyst. Focus ONLY on summary tables. Ignore default instructions about slides.")
+    .tools(List.of(CodeExecution.builder().build())) // Override to only use code execution
+    .environment(CreateAgentInteractionEnvironment.of("remote"))
+    .build();
 
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
+Interaction result = client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+System.out.println(result.outputText().orElse(""));
 ```
 
 ### REST
@@ -913,9 +1032,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Eseguire l'override della configurazione di rete (aggiornare le credenziali)
+### ลบล้างการกำหนดค่าเครือข่าย (รีเฟรชข้อมูลเข้าสู่ระบบ)
 
-Se le credenziali di rete dell'agente gestito sono integrate nel relativo `base_environment`, puoi eseguirne l'override al momento della chiamata per aggiornare i token scaduti o ruotare le chiavi API. Passa un oggetto `environment` con una nuova configurazione `network`. Le nuove regole di rete sostituiscono completamente quelle precedenti per l'interazione. Le origini (file, repository) dell'ambiente di base vengono conservate.
+หากเอเจนต์ที่มีการจัดการมีข้อมูลเข้าสู่ระบบเครือข่ายฝังอยู่ใน `base_environment`,
+คุณจะลบล้างข้อมูลดังกล่าวในเวลาที่เรียกใช้เพื่อรีเฟรชโทเค็นที่หมดอายุหรือหมุนเวียนคีย์ API ได้
+ส่งออบเจ็กต์ `environment` ที่มีการกำหนดค่า `network` ใหม่ กฎเครือข่ายใหม่จะแทนที่กฎก่อนหน้าสำหรับการโต้ตอบนั้นโดยสมบูรณ์ แหล่งที่มา (ไฟล์ ที่เก็บ) ของ
+สภาพแวดล้อมพื้นฐานจะยังคงอยู่
+
+หาก `base_environment` อ้างอิง[ข้อมูลเข้าสู่ระบบ](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=th)ที่จัดเก็บไว้แทนโทเค็นแบบอินไลน์ คุณก็ไม่จำเป็นต้องลบล้างสิ่งใด หมุนเวียนข้อมูลเข้าสู่ระบบด้วย `PATCH` และทุก
+เอเจนต์ที่อ้างอิงข้อมูลเข้าสู่ระบบนั้นจะรับข้อมูลลับใหม่ในการเรียกใช้ครั้งถัดไป
 
 ### Python
 
@@ -974,23 +1099,47 @@ console.log(result.output_text);
 ```
 import com.google.genai.Client;
 import com.google.genai.gaos.models.interactions.AgentOption;
+import com.google.genai.gaos.models.interactions.Allowlist;
+import com.google.genai.gaos.models.interactions.AllowlistEntry;
 import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.CreateAgentInteractionEnvironment;
+import com.google.genai.gaos.models.interactions.Environment;
+import com.google.genai.gaos.models.interactions.EnvironmentNetworkEgressAllowlist;
 import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Network;
+import com.google.genai.gaos.models.interactions.Transform;
 import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.List;
+import java.util.Map;
 
 Client client = new Client();
 
-CreateAgentInteraction params =
-    CreateAgentInteraction.builder()
-        .agent(AgentOption.of("antigravity-preview-05-2026"))
-        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
-        .build();
+// Invoke the agent with a fresh token, overriding the base_environment credentials
+Environment env = Environment.builder()
+    .network(Network.of(EnvironmentNetworkEgressAllowlist.of(
+        Allowlist.builder()
+            .allowlist(List.of(
+                AllowlistEntry.builder()
+                    .domain("api.github.com")
+                    .transform(Transform.of(Map.of(
+                        "Authorization", "Bearer ghp_REFRESHED_TOKEN"
+                    )))
+                    .build(),
+                AllowlistEntry.builder().domain("pypi.org").build()
+            ))
+            .build()
+    )))
+    .build();
 
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+CreateAgentInteraction params = CreateAgentInteraction.builder()
+    .agent(AgentOption.of("issue-resolver"))
+    .input(InteractionsInput.of("Fix issue #42 and open a PR."))
+    .environment(CreateAgentInteractionEnvironment.of(env))
+    .build();
 
-System.out.println(interaction.outputText().orElse(""));
+Interaction result = client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+System.out.println(result.outputText().orElse(""));
 ```
 
 ### REST
@@ -1019,11 +1168,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Gestire gli agenti
+## จัดการ Agent
 
-Puoi elencare, recuperare ed eliminare gli agenti.
+คุณแสดงรายการ รับ และลบเอเจนต์ได้
 
-### Elencare gli agenti
+### แสดงรายการ Agent
 
 ### Python
 
@@ -1048,24 +1197,15 @@ if (agents.agents) {
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.AgentOption;
-import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.agents.Agent;
+import java.util.List;
 
 Client client = new Client();
 
-CreateAgentInteraction params =
-    CreateAgentInteraction.builder()
-        .agent(AgentOption.of("antigravity-preview-05-2026"))
-        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
+List<Agent> agents = client.agents.listDirect().agentListResponse().get().agents().orElse(List.of());
+for (Agent a : agents) {
+    System.out.println(a.id().orElse("") + ": " + a.description().orElse(""));
+}
 ```
 
 ### REST
@@ -1075,7 +1215,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/agents" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Recuperare un agente
+### รับ Agent
 
 ### Python
 
@@ -1095,24 +1235,12 @@ console.log(agent);
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.AgentOption;
-import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.agents.Agent;
 
 Client client = new Client();
 
-CreateAgentInteraction params =
-    CreateAgentInteraction.builder()
-        .agent(AgentOption.of("antigravity-preview-05-2026"))
-        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
+Agent agent = client.agents.get("data-analyst").agent().get();
+System.out.println(agent);
 ```
 
 ### REST
@@ -1122,9 +1250,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/agents/data-analys
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Eliminare un agente
+### ลบ Agent
 
-L'eliminazione rimuove la configurazione. Gli ambienti e le interazioni esistenti creati dall'agente non sono interessati.
+การลบจะนำการกำหนดค่าออก สภาพแวดล้อมและการโต้ตอบที่มีอยู่ซึ่งสร้างโดยเอเจนต์จะไม่ได้รับผลกระทบ
 
 ### Python
 
@@ -1142,24 +1270,10 @@ await client.agents.delete("data-analyst");
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.AgentOption;
-import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
 
 Client client = new Client();
 
-CreateAgentInteraction params =
-    CreateAgentInteraction.builder()
-        .agent(AgentOption.of("antigravity-preview-05-2026"))
-        .input(InteractionsInput.of("Build a simple REST API server in Node.js."))
-        .build();
-
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
-
-System.out.println(interaction.outputText().orElse(""));
+client.agents.delete("data-analyst");
 ```
 
 ### REST
@@ -1169,24 +1283,24 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/agents/data-ana
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Riferimento alla definizione dell'agente
+## ข้อมูลอ้างอิงคำจำกัดความของ Agent
 
-| Campo | Tipo | Obbligatorio | Descrizione |
+| ช่อง | ประเภท | ต้องระบุ | คำอธิบาย |
 | --- | --- | --- | --- |
-| `id` | stringa | Sì | Identificatore univoco dell'agente all'interno del progetto Google Cloud. Utilizzato per richiamare l'agente. Non deve utilizzare prefissi riservati. Vedi [Limitazioni dell'ID agente](#agent-id-restrictions). |
-| `description` | stringa | No | Descrizione dell'agente leggibile da una persona. |
-| `base_agent` | stringa | Sì | ID agente di base (ad es. `antigravity-preview-05-2026`). |
-| `agent_config` | oggetto | No | Configurazione dell'agente di base, inclusa la selezione del modello (`{"type": "antigravity", "model": "gemini-3.8-flash"}`). Se omesso, il valore predefinito è `gemini-3.8-flash`. Non può essere sostituito al momento dell'interazione per gli agenti denominati. |
-| `system_instruction` | stringa | No | Prompt di sistema che definisce il comportamento e la persona. |
-| `tools` | matrice | No | Strumenti che l'agente può utilizzare. Se omesso, il valore predefinito è `code_execution`, `google_search` e `url_context`. Gli strumenti supportati includono `code_execution`, `google_search`, `url_context`, `mcp_server` e definizioni di `function` personalizzate. |
-| `base_environment` | stringa o oggetto | No | `"remote"`, un `environment_id`, o un oggetto di configurazione con `sources` e `network`. Vedi Ambienti. |
+| `id` | สตริง | ใช่ | ตัวระบุที่ไม่ซ้ำกันของ Agent ภายในโปรเจ็กต์ที่อยู่ในระบบคลาวด์ของ Google ใช้เพื่อเรียกใช้ Agent ต้องไม่ใช้คำนำหน้าที่สงวนไว้ ดู[ข้อจำกัดของรหัสตัวแทน](#agent-id-restrictions) |
+| `description` | สตริง | ไม่ | คำอธิบาย Agent ที่มนุษย์อ่านได้ |
+| `base_agent` | สตริง | ใช่ | รหัสตัวแทนฐาน (เช่น `antigravity-preview-09-2026`) |
+| `agent_config` | ออบเจ็กต์ | ไม่ | การกำหนดค่าสำหรับเอเจนต์พื้นฐาน รวมถึงการเลือกรุ่น (`{"type": "antigravity", "model": "gemini-3.8-flash"}`) ค่าเริ่มต้นคือ `gemini-3.8-flash` หากละเว้น ไม่สามารถลบล้างได้ในเวลาที่โต้ตอบสำหรับตัวแทนที่มีชื่อ |
+| `system_instruction` | สตริง | ไม่ | พรอมต์ของระบบที่กำหนดลักษณะการทำงานและตัวตน |
+| `tools` | อาร์เรย์ | ไม่ | เครื่องมือที่ตัวแทนใช้ได้ หากละไว้ ค่าเริ่มต้นจะเป็น `code_execution`, `google_search` และ `url_context` เครื่องมือที่รองรับ ได้แก่ `code_execution`, `google_search`, `url_context`, `mcp_server` และคำจำกัดความ `function` ที่กำหนดเอง |
+| `base_environment` | สตริงหรือออบเจ็กต์ | ไม่ | `"remote"`, `environment_id` หรือออบเจ็กต์การกำหนดค่าที่มี `sources` และ `network` ดูสภาพแวดล้อม |
 
-### Limitazioni dell'ID agente
+### ข้อจำกัดเกี่ยวกับรหัสตัวแทน
 
-Quando crei un agente gestito, l'`id` che specifichi deve rispettare queste regole:
+เมื่อสร้างเอเจนต์ที่มีการจัดการ `id` ที่คุณระบุต้องเป็นไปตามกฎต่อไปนี้
 
-- Deve essere univoco per il tuo progetto Google Cloud.
-- Non deve **non** iniziare con uno dei seguenti prefissi riservati (senza distinzione tra maiuscole e minuscole), altrimenti la creazione non andrà a buon fine:
+- โดยต้องไม่ซ้ำกันในโปรเจ็กต์ Google Cloud
+- ต้อง**ไม่**ขึ้นต้นด้วยคำนำหน้าที่สงวนไว้ต่อไปนี้ (ไม่คำนึงถึงตัวพิมพ์เล็กและตัวพิมพ์ใหญ่) ไม่เช่นนั้นการสร้างจะล้มเหลว
   - `antigravity-`
   - `veo-`
   - `omni-`
@@ -1204,35 +1318,35 @@ Quando crei un agente gestito, l'`id` che specifichi deve rispettare queste rego
   - `nest-`
   - `kaggle-`
 
-## Workflow di iterazione
+## เวิร์กโฟลว์การทำซ้ำ
 
-1. **Prototipo** con l'agente Antigravity di base. Passa le origini delle istruzioni di sistema e dell'ambiente in linea. Testa in modo interattivo le istruzioni, le competenze e la configurazione dell'ambiente.
-2. **Stabilizza** l'ambiente. Installa i pacchetti, monta le origini e verifica che tutto funzioni.
-3. **Persisti** come agente gestito creando un nuovo agente, dalle origini o eseguendo il fork dell'ambiente.
-4. **Aggiorna** la definizione dell'agente. Modifica le istruzioni di sistema, scambia le competenze o aggiungi origini. La prossima chiamata rileva la nuova configurazione.
+1. **สร้างต้นแบบ**ด้วย Agent พื้นฐานของ Antigravity ส่งคำสั่งของระบบและแหล่งที่มาของสภาพแวดล้อมแบบอินไลน์ ทดสอบวิธีการ ทักษะ และการตั้งค่าสภาพแวดล้อมแบบอินเทอร์แอกทีฟ
+2. **รักษาความเสถียร**ของสภาพแวดล้อม ติดตั้งแพ็กเกจ เมานต์แหล่งที่มา และตรวจสอบว่าทุกอย่างทำงานได้
+3. **คงอยู่**ในฐานะ Agent ที่มีการจัดการโดยการสร้าง Agent ใหม่จากแหล่งที่มาหรือโดยการแยกสาขาสภาพแวดล้อม
+4. **อัปเดต**คำจำกัดความของเอเจนต์ เปลี่ยนคำสั่งของระบบ สลับทักษะ หรือเพิ่มแหล่งข้อมูล การเรียกใช้ครั้งถัดไปจะใช้การกำหนดค่าใหม่
 
-## Limitazioni
+## ข้อจำกัด
 
-- **Stato dell'anteprima**: gli agenti gestiti sono in anteprima. Le funzionalità e gli schemi potrebbero cambiare.
-- **Agente e modelli di base**: solo `antigravity-preview-05-2026` è supportato come `base_agent`. Le opzioni di modello supportate in `agent_config` sono `gemini-3.8-flash` (valore predefinito), `gemini-3.7-flash`, `gemini-3.6-flash`, `gemini-3.5-flash` e `gemini-3.5-flash-lite`. Per gli agenti denominati, il modello non può essere sostituito al momento dell'interazione.
-- **Nessun controllo delle versioni**: il controllo delle versioni e il rollback dell'agente non sono ancora disponibili.
-- **Nessun annidamento di subagenti**: la delega dei subagenti non è ancora supportata.
-- Puoi avere fino a 1000 agenti gestiti.
+- **สถานะเวอร์ชันตัวอย่าง**: เอเจนต์ที่มีการจัดการอยู่ในเวอร์ชันตัวอย่าง ฟีเจอร์และสคีมาอาจมีการเปลี่ยนแปลง
+- **เอเจนต์และโมเดลพื้นฐาน**: รองรับเฉพาะ `antigravity-preview-09-2026` เป็น `base_agent` ตัวเลือกโมเดลที่รองรับใน `agent_config` ได้แก่ `gemini-3.8-flash` (ค่าเริ่มต้น), `gemini-3.7-flash`, `gemini-3.6-flash`, `gemini-3.5-flash` และ `gemini-3.5-flash-lite` สำหรับเอเจนต์ที่มีชื่อ คุณจะลบล้างโมเดลในเวลาที่โต้ตอบไม่ได้
+- **ไม่มีการกำหนดเวอร์ชัน**: การกำหนดเวอร์ชันและการย้อนกลับของเอเจนต์ยังไม่พร้อมใช้งาน
+- **ไม่มีการซ้อน Agent ย่อย**: ระบบยังไม่รองรับการมอบสิทธิ์ Agent ย่อย
+- คุณมีตัวแทนที่มีการจัดการได้สูงสุด 1,000 ราย
 
-## Passaggi successivi
+## ขั้นตอนถัดไป
 
-- [Panoramica degli agenti](https://ai.google.dev/gemini-api/docs/agents?hl=it): scopri i concetti fondamentali degli agenti gestiti.
-- [Guida rapida](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it): inizia a creare con conversazioni multi-turno e streaming.
-- [Agente Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it): esplora le funzionalità, gli strumenti e i prezzi dell'agente predefinito.
-- [Ambienti degli agenti](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it): configura sandbox, origini e networking.
-- [API degli agenti gestiti su Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/managed-agents?hl=it): per la creazione di agenti con governance organizzativa integrata.
+- [ภาพรวมของ Agent](https://ai.google.dev/gemini-api/docs/agents?hl=th): ดูข้อมูลเกี่ยวกับแนวคิดหลักของ Agent ที่มีการจัดการ
+- [เริ่มต้นใช้งานฉบับย่อ](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=th): เริ่มสร้างด้วยการสนทนาไปมาและการสตรีม
+- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th): ดูความสามารถ เครื่องมือ และราคาของเอเจนต์เริ่มต้น
+- [สภาพแวดล้อมของเอเจนต์](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th): กำหนดค่าแซนด์บ็อกซ์ แหล่งที่มา และเครือข่าย
+- [Managed Agents API ใน Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/managed-agents?hl=th): สำหรับการสร้าง Agent ที่ได้รับการจัดการซึ่งมีการกำกับดูแลขององค์กรในตัว
 
-Invia feedback
+ส่งความคิดเห็น
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Ultimo aggiornamento 2026-09-10 UTC.
+อัปเดตล่าสุด 2026-09-18 UTC
 
-Vuoi dirci altro?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-10 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-18 UTC"],[],[]]

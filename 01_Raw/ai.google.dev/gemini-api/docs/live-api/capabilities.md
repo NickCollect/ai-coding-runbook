@@ -1,53 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=zh-CN
-fetched_at: 2026-09-14T05:38:04.842509+00:00
-title: "Live API \u529f\u80fd\u6307\u5357 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=hi
+fetched_at: 2026-09-21T05:57:18.925873+00:00
+title: "Live API \u0915\u0940 \u0938\u0941\u0935\u093f\u0927\u093e\u0913\u0902 \u0915\u0947 \u092c\u093e\u0930\u0947 \u092e\u0947\u0902 \u0917\u093e\u0907\u0921 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash 现已推出。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn)。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-发送反馈
+सुझाव भेजें
 
-# Live API 功能指南
+# Live API की सुविधाओं के बारे में गाइड
 
-这是一份全面的指南，介绍了 Live API 提供的功能和配置。
-如需查看常见用例的概览和示例代码，请参阅[开始使用 Live API](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn) 页面。
+यह एक पूरी गाइड है. इसमें Live API के साथ उपलब्ध सुविधाओं और कॉन्फ़िगरेशन के बारे में बताया गया है.
+लाइव एपीआई के बारे में खास जानकारी और इस्तेमाल के सामान्य उदाहरणों के लिए सैंपल कोड देखने के लिए, [लाइव एपीआई का इस्तेमाल शुरू करें](https://ai.google.dev/gemini-api/docs/live?hl=hi) पेज पर जाएं.
 
-## 准备工作
+## शुरू करने से पहले
 
-- **熟悉核心概念**：如果您尚未这样做，请先阅读[开始使用 Live API](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn)  页面。
-  本文将向您介绍 Live API 的基本原理、运作方式以及不同的[实现方法](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn#implementation-approach)。
-- **在 AI Studio 中试用 Live API**：在开始构建之前，您可能会发现先在 [Google AI Studio](https://aistudio.google.com/app/live?hl=zh-cn) 中试用 Live API 会很有用。如需在 Google AI Studio 中使用实时 API，请选择 **Stream**。
+- **बुनियादी कॉन्सेप्ट के बारे में जानें:** अगर आपने अब तक ऐसा नहीं किया है, तो सबसे पहले [Live API का इस्तेमाल शुरू करना](https://ai.google.dev/gemini-api/docs/live?hl=hi)  पेज पढ़ें.
+  इससे आपको Live API के बुनियादी सिद्धांतों, इसके काम करने के तरीके, और [लागू करने के अलग-अलग तरीकों](https://ai.google.dev/gemini-api/docs/live?hl=hi#implementation-approach) के बारे में जानकारी मिलेगी.
+- **AI Studio में Live API आज़माएं:** ऐप्लिकेशन बनाना शुरू करने से पहले, [Google AI Studio](https://aistudio.google.com/app/live?hl=hi) में Live API आज़माएं. इससे आपको मदद मिल सकती है. Google AI Studio में Live API का इस्तेमाल करने के लिए, **स्ट्रीम करें** को चुनें.
 
-## 模型对比
+## मॉडल की तुलना
 
-下表总结了 [Gemini 3.1 Flash Live 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=zh-cn)和 [Gemini 2.5 Flash Live 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=zh-cn)模型之间的主要区别：
+यहां दी गई टेबल में, [Gemini 3.8 Live](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=hi), [ज़्यादा सोच-विचार करके जवाब देने वाला Gemini 3.8 Live](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=hi), और [Gemini 3.1 Flash Live Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=hi) मॉडल के बीच के मुख्य अंतर को दिखाया गया है:
 
-| 功能 | Gemini 3.1 Flash Live 预览版 | Gemini 2.5 Flash Live 预览版 |
-| --- | --- | --- |
-| **[思考](#native-audio-output-thinking)** | 使用 `thinkingLevel` 通过 `minimal`、`low`、`medium` 和 `high` 等设置来控制思考深度。默认值为 `minimal`，以优化最低延迟。请参阅[思维水平和预算](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn#levels-budgets)。 | 使用 `thinkingBudget` 设置思考 token 的数量。默认情况下，系统会启用动态思考。将 `thinkingBudget` 设置为 `0` 即可停用。请参阅[思维水平和预算](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn#levels-budgets)。 |
-| **[接收响应](https://ai.google.dev/api/live?hl=zh-cn#bidigeneratecontentservercontent)** | 单个服务器事件可以同时包含多个内容部分（例如 `inlineData` 和转写）。确保您的代码处理每个事件中的所有部分，以免遗漏内容。 | 每个服务器事件仅包含一个内容部分。各个部分通过单独的事件进行传递。 |
-| **[客户内容](#incremental-updates)** | `send_client_content` 仅支持为初始上下文历史记录提供种子数据（需要在会话配置中设置 `initial_history_in_client_content`）。如需在对话期间发送文本更新，请改用 `send_realtime_input`。 | 在整个对话过程中，`send_client_content` 都可用于发送增量内容更新和建立上下文。 |
-| **[开启覆盖](https://ai.google.dev/api/live?hl=zh-cn#turncoverage)** | 默认为 `TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO`。模型的回合包括检测到的音频活动和所有视频帧。 | 默认为 `TURN_INCLUDES_ONLY_ACTIVITY`。模型的回答仅包含检测到的活动。 |
-| **[自定义 VAD](#disable-automatic-vad)**（`activity_start`/`activity_end`） | 支持。停用自动 VAD，并手动发送 `activityStart` 和 `activityEnd` 消息来控制轮流边界。 | 支持。停用自动 VAD，并手动发送 `activityStart` 和 `activityEnd` 消息来控制轮流边界。 |
-| **[自动 VAD 配置](#configure-automatic-vad)** | 支持。配置 `start_of_speech_sensitivity`、`end_of_speech_sensitivity`、`prefix_padding_ms` 和 `silence_duration_ms` 等参数。 | 支持。配置 `start_of_speech_sensitivity`、`end_of_speech_sensitivity`、`prefix_padding_ms` 和 `silence_duration_ms` 等参数。 |
-| **[异步函数调用](https://ai.google.dev/gemini-api/docs/live-tools?hl=zh-cn#async-function-calling)** (`behavior: NON_BLOCKING`) | 不支持。函数调用只能按顺序进行。在您发送工具响应之前，模型不会开始回答。 | 支持。将函数声明中的 `behavior` 设置为 `NON_BLOCKING`，以便模型在函数运行时继续互动。通过 `scheduling` 参数（`INTERRUPT`、`WHEN_IDLE` 或 `SILENT`）控制模型如何处理回答。 |
-| **[主动音频](#proactive-audio)** | 不受支持 | 支持。启用后，如果输入内容不相关，模型可以主动决定不做出回答。在 `proactivity` 配置中将 `proactive_audio` 设置为 `true`（需要 `v1beta`）。 |
-| **[共情对话](#affective-dialog)** | 不受支持 | 支持。模型会调整回答风格，以匹配输入内容的情绪表达和语气。在会话配置中将 `enable_affective_dialog` 设置为 `true`（需要 `v1beta`）。 |
+| सुविधा | Gemini 3.8 Live | Gemini 3.8 Live Extended Thinking | Gemini 3.1 Flash की लाइव प्रीव्यू सुविधा |
+| --- | --- | --- | --- |
+| **इसके लिए सुझाव दिया गया है** | आवाज़ से निर्देश देने वाले एजेंट की कम से कम रुकावट वाली सुविधाओं के लिए, यह डिफ़ॉल्ट विकल्प है. | इस मोड का इस्तेमाल तब करें, जब ज़्यादा गहराई से विश्लेषण की ज़रूरत हो. | झलक दिखाने वाला लेगसी मॉडल. हमारा सुझाव है कि आप [Gemini 3.8 Live](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=hi) पर अपडेट करें. |
+| **[सोचना](#native-audio-output-thinking)** | काम करता है (जवाब में तर्क शामिल किए गए हैं). `thinkingLevel` का इस्तेमाल नहीं किया जा सकता (सेटअप से हटाएं). | काम करता है. कॉन्फ़िगर किया जा सकने वाला बैकग्राउंड रीज़निंग (`thinkingLevel`: `low`, `medium`, `high`; `minimal` काम नहीं करता). | यह `thinkingLevel` का इस्तेमाल करके, जवाब देने के लिए जानकारी के स्तर को कंट्रोल करता है. इसके लिए, `minimal`, `low`, `medium`, और `high` जैसी सेटिंग का इस्तेमाल किया जाता है. डिफ़ॉल्ट रूप से, इसे `minimal` पर सेट किया जाता है, ताकि इंतज़ार के समय को कम किया जा सके. [Live API के बारे में जानकारी](https://ai.google.dev/gemini-api/docs/live-api/thinking?hl=hi) देखें. |
+| **[जवाब पाना](https://ai.google.dev/api/live?hl=hi#bidigeneratecontentservercontent)** | एक सर्वर इवेंट में, एक साथ कॉन्टेंट के कई हिस्से शामिल हो सकते हैं. | एक सर्वर इवेंट में, एक साथ कॉन्टेंट के कई हिस्से शामिल हो सकते हैं. एसिंक्रोनस रीज़निंग चालू होने पर, `turnComplete: true` से यह पता नहीं चलता कि सेशन निष्क्रिय है. इसलिए, `interaction_status` (`IN_PROGRESS` बनाम `IDLE`) का इस्तेमाल करें. | किसी एक सर्वर इवेंट में, कॉन्टेंट के कई हिस्से एक साथ शामिल हो सकते हैं. उदाहरण के लिए, `inlineData` और ट्रांसक्रिप्ट. पक्का करें कि आपका कोड, हर इवेंट के सभी हिस्सों को प्रोसेस करता हो, ताकि कोई भी कॉन्टेंट न छूटे. |
+| **[क्लाइंट का कॉन्टेंट](#incremental-updates)** | `send_client_content` को पूरे सेशन के लाइफ़साइकल के दौरान इस्तेमाल किया जा सकता है. इसके लिए, साफ़ तौर पर भूमिकाएं (`user` या `model`) तय की जाती हैं. `turn_complete=true`, जनरेट होने वाले कॉन्टेंट को तुरंत रोक देता है. | `send_client_content` को पूरे सेशन के लाइफ़साइकल के दौरान इस्तेमाल किया जा सकता है. इसके लिए, साफ़ तौर पर भूमिकाएं (`user` या `model`) तय की जाती हैं. `turn_complete=true`, जनरेट होने वाले कॉन्टेंट को तुरंत रोक देता है. | `send_client_content` को पूरे सेशन के लाइफ़साइकल के दौरान इस्तेमाल किया जा सकता है. इसके लिए, साफ़ तौर पर भूमिकाएं (`user` या `model`) तय की जाती हैं. `turn_complete=true`, जनरेट होने वाले कॉन्टेंट को तुरंत रोक देता है. |
+| **[एसिंक्रोनस फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/live-tools?hl=hi#async-function-calling)** (`behavior: NON_BLOCKING`) | काम करता है (डिफ़ॉल्ट). `behavior: NON_BLOCKING` सेट करें या `behavior: BLOCKING` के साथ, पुराने सिस्टम के साथ काम करने वाले ब्लॉकिंग मोड का इस्तेमाल करें. फ़ंक्शन शेड्यूल करने की सुविधा (`SILENT`, `WHEN_IDLE`, `INTERRUPTED`) उपलब्ध है. | उपलब्ध है (सिर्फ़ एक साथ काम नहीं करने वाली प्रोसेस के लिए). सिर्फ़ `NON_BLOCKING` को लागू किया जा सकता है. ब्लॉकिंग मोड और फ़ंक्शन शेड्यूल करने की सुविधा मौजूद नहीं है. | यह सुविधा उपलब्ध नहीं है. फ़ंक्शन कॉलिंग सिर्फ़ क्रम में की जा सकती है. जब तक टूल का जवाब नहीं भेजा जाता, तब तक मॉडल जवाब देना शुरू नहीं करेगा. |
 
-如需从 Gemini 2.5 Flash Live 迁移到 Gemini 3.1 Flash Live，请参阅[迁移指南](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=zh-cn#migrating)。
+Gemini 3.8 Live पर माइग्रेट करने के लिए, [माइग्रेशन गाइड](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=hi#migrating) देखें.
+Thinking के बारे में ज़्यादा जानने के लिए, [Thinking गाइड](https://ai.google.dev/gemini-api/docs/live-api/thinking?hl=hi) और [अपग्रेड गाइड](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=hi#upgrading) देखें.
 
-## 建立连接
+## कनेक्शन बनाया जा रहा है
 
-以下示例展示了如何使用 API 密钥创建连接：
+यहां दिए गए उदाहरण में, एपीआई पासकोड की मदद से कनेक्शन बनाने का तरीका बताया गया है:
 
 ### Python
 
@@ -57,7 +54,7 @@ from google import genai
 
 client = genai.Client()
 
-model = "gemini-3.1-flash-live-preview"
+model = "gemini-3.8-live"
 config = {"response_modalities": ["AUDIO"]}
 
 async def main():
@@ -75,7 +72,7 @@ if __name__ == "__main__":
 import { GoogleGenAI, Modality } from '@google/genai';
 
 const ai = new GoogleGenAI({});
-const model = 'gemini-3.1-flash-live-preview';
+const model = 'gemini-3.8-live';
 const config = { responseModalities: [Modality.AUDIO] };
 
 async function main() {
@@ -108,13 +105,13 @@ async function main() {
 main();
 ```
 
-## 互动模式
+## इंटरैक्शन के तरीके
 
-以下部分提供了 Live API 中提供的不同输入和输出模态的示例和支持上下文。
+यहां दिए गए सेक्शन में, Live API में उपलब्ध अलग-अलग इनपुट और आउटपुट मोड के उदाहरण और उनसे जुड़ी जानकारी दी गई है.
 
-### 发送音频
+### ऑडियो भेजना
 
-音频需要以原始 PCM 数据（原始 16 位 PCM 音频，16kHz，小端序）的形式发送。
+ऑडियो को रॉ पीसीएम डेटा (रॉ 16-बिट पीसीएम ऑडियो, 16kHz, लिटिल-एंडियन) के तौर पर भेजा जाना चाहिए.
 
 ### Python
 
@@ -140,13 +137,13 @@ session.sendRealtimeInput({
 });
 ```
 
-### 音频格式
+### ऑडियो फ़ॉर्मैट
 
-Live API 中的音频数据始终是原始的小端序 16 位 PCM。音频输出始终使用 24kHz 的采样率。输入音频的原始采样率为 16kHz，但 Live API 会在需要时重新采样，因此可以发送任何采样率。如需传达输入音频的采样率，请将每个包含音频的 [Blob](https://ai.google.dev/api/caching?hl=zh-cn#Blob) 的 MIME 类型设置为类似 `audio/pcm;rate=16000` 的值。
+Live API में ऑडियो डेटा हमेशा रॉ, लिटिल-एंडियन, और 16-बिट पीसीएम होता है. ऑडियो डिवाइस हमेशा 24 किलोहर्ट्ज़ के सैंपल रेट का इस्तेमाल करता है. इनपुट ऑडियो मूल रूप से 16 किलोहर्ट्ज़ का होता है. हालांकि, Live API ज़रूरत पड़ने पर इसे फिर से सैंपल करेगा. इसलिए, किसी भी सैंपल रेट को भेजा जा सकता है. इनपुट ऑडियो के सैंपल रेट के बारे में बताने के लिए, ऑडियो वाले हर [Blob](https://ai.google.dev/api/caching?hl=hi#Blob) के एमआईएमई टाइप को `audio/pcm;rate=16000` जैसे किसी वैल्यू पर सेट करें.
 
-### 接收音频
+### ऑडियो पाना
 
-模型以数据块的形式返回音频回答。
+मॉडल के ऑडियो जवाब, डेटा के हिस्सों के तौर पर मिलते हैं.
 
 ### Python
 
@@ -174,9 +171,9 @@ if (content?.modelTurn?.parts) {
 }
 ```
 
-### 正在发送短信
+### टेक्स्ट भेजा जा रहा है
 
-您可以使用 `send_realtime_input` (Python) 或 `sendRealtimeInput` (JavaScript) 发送文本。
+टेक्स्ट को `send_realtime_input` (Python) या `sendRealtimeInput` (JavaScript) का इस्तेमाल करके भेजा जा सकता है.
 
 ### Python
 
@@ -192,9 +189,9 @@ session.sendRealtimeInput({
 });
 ```
 
-### 正在发送视频
+### वीडियो भेजा जा रहा है
 
-视频帧以特定帧速率（每秒最多 1 帧）作为单独的图片（例如 JPEG 或 PNG）发送。
+वीडियो फ़्रेम को अलग-अलग इमेज (जैसे, JPEG या PNG) के तौर पर, किसी खास फ़्रेम रेट (ज़्यादा से ज़्यादा एक फ़्रेम प्रति सेकंड) पर भेजा जाता है.
 
 ### Python
 
@@ -220,9 +217,9 @@ session.sendRealtimeInput({
 });
 ```
 
-#### 增量内容更新
+#### कॉन्टेंट में धीरे-धीरे किए जाने वाले अपडेट
 
-使用增量更新来发送文本输入、建立会话上下文或恢复会话上下文。对于简短的上下文，您可以发送逐轮互动来表示确切的事件序列：
+टेक्स्ट इनपुट भेजने, सेशन का कॉन्टेक्स्ट सेट अप करने या सेशन का कॉन्टेक्स्ट वापस लाने के लिए, इंक्रीमेंटल अपडेट का इस्तेमाल करें. छोटे कॉन्टेक्स्ट के लिए, इवेंट के सटीक क्रम को दिखाने के लिए, बारी-बारी से इंटरैक्शन भेजे जा सकते हैं:
 
 ### Python
 
@@ -254,13 +251,13 @@ inputTurns = [{ "role": "user", "parts": [{ "text": "What is the capital of Germ
 session.sendClientContent({ turns: inputTurns, turnComplete: true })
 ```
 
-对于较长的上下文，建议提供单个消息摘要，以释放上下文窗口，以便进行后续互动。如需了解加载会话上下文的其他方法，请参阅[会话恢复](https://ai.google.dev/gemini-api/docs/live-session?hl=zh-cn#session-resumption)。
+बड़े कॉन्टेक्स्ट के लिए, हमारा सुझाव है कि एक मैसेज की खास जानकारी दी जाए, ताकि बाद की बातचीत के लिए कॉन्टेक्स्ट विंडो खाली हो जाए. सेशन के कॉन्टेक्स्ट को लोड करने के किसी अन्य तरीके के लिए, [सेशन फिर से शुरू करना](https://ai.google.dev/gemini-api/docs/live-session?hl=hi#session-resumption) देखें.
 
-### 音频转录
+### ऑडियो ट्रांसक्रिप्शन
 
-除了模型回答之外，您还可以收到音频输出和音频输入的转写内容。
+मॉडल के जवाब के अलावा, आपको ऑडियो आउटपुट और ऑडियो इनपुट, दोनों की ट्रांसक्रिप्ट भी मिल सकती हैं.
 
-如需启用模型音频输出的转写功能，请在设置配置中发送 `output_audio_transcription`。转写语言是从模型的回答中推断出来的。
+मॉडल के ऑडियो आउटपुट को टेक्स्ट में बदलने की सुविधा चालू करने के लिए, सेटअप कॉन्फ़िगरेशन में `output_audio_transcription` भेजें. बोले जा रहे शब्दों को टेक्स्ट में बदलने के लिए, भाषा का अनुमान मॉडल के जवाब से लगाया जाता है.
 
 ### Python
 
@@ -270,7 +267,7 @@ from google import genai
 from google.genai import types
 
 client = genai.Client()
-model = "gemini-3.1-flash-live-preview"
+model = "gemini-3.8-live"
 
 config = {
     "response_modalities": ["AUDIO"],
@@ -301,7 +298,7 @@ if __name__ == "__main__":
 import { GoogleGenAI, Modality } from '@google/genai';
 
 const ai = new GoogleGenAI({});
-const model = 'gemini-3.1-flash-live-preview';
+const model = 'gemini-3.8-live';
 
 const config = {
   responseModalities: [Modality.AUDIO],
@@ -378,7 +375,7 @@ async function main() {
 main();
 ```
 
-如需启用模型音频输入的转写功能，请在设置配置中发送 `input_audio_transcription`。
+मॉडल के ऑडियो इनपुट को टेक्स्ट में बदलने की सुविधा चालू करने के लिए, सेटअप कॉन्फ़िगरेशन में `input_audio_transcription` भेजें.
 
 ### Python
 
@@ -389,7 +386,7 @@ from google import genai
 from google.genai import types
 
 client = genai.Client()
-model = "gemini-3.1-flash-live-preview"
+model = "gemini-3.8-live"
 
 config = {
     "response_modalities": ["AUDIO"],
@@ -421,7 +418,7 @@ import pkg from 'wavefile';
 const { WaveFile } = pkg;
 
 const ai = new GoogleGenAI({});
-const model = 'gemini-3.1-flash-live-preview';
+const model = 'gemini-3.8-live';
 
 const config = {
   responseModalities: [Modality.AUDIO],
@@ -523,11 +520,11 @@ async function main() {
 main();
 ```
 
-### 更改语音和语言
+### आवाज़ और भाषा बदलना
 
-[原生音频输出](#native-audio-output)模型支持我们的[文字转语音 (TTS)](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-cn#voices) 模型提供的任何语音。您可以在 [AI Studio](https://aistudio.google.com/app/live?hl=zh-cn) 中试听所有语音。
+[नेटिव ऑडियो आउटपुट](#native-audio-output) मॉडल, [लिखाई को बोली में बदलने (टीटीएस)](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi#voices) मॉडल के लिए उपलब्ध किसी भी आवाज़ के साथ काम करते हैं. [AI Studio](https://aistudio.google.com/app/live?hl=hi) में जाकर, सभी आवाज़ें सुनी जा सकती हैं.
 
-如需指定语音，请在 `speechConfig` 对象中设置语音名称，作为会话配置的一部分：
+आवाज़ तय करने के लिए, सेशन कॉन्फ़िगरेशन के हिस्से के तौर पर, `speechConfig` ऑब्जेक्ट में आवाज़ का नाम सेट करें:
 
 ### Python
 
@@ -549,21 +546,21 @@ const config = {
 };
 ```
 
-Live API 支持[多种语言](#supported-languages)。
-[原生音频输出](#native-audio-output)模型会自动选择合适的语言，不支持明确设置语言代码。
+Live API, [कई भाषाओं](#supported-languages) में काम करता है.
+[नेटिव ऑडियो आउटपुट](#native-audio-output) वाले मॉडल, सही भाषा को अपने-आप चुनते हैं. साथ ही, ये भाषा कोड को साफ़ तौर पर सेट करने की सुविधा के साथ काम नहीं करते.
 
-## 原生音频功能
+## नेटिव ऑडियो की सुविधाएं
 
-我们的最新模型具有[原生音频输出](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=zh-cn)功能，可提供自然、逼真的语音，并改进了多语言性能。
+हमारे नए मॉडल में [नेटिव ऑडियो आउटपुट](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=hi) की सुविधा है. इससे आपको नैचुरल और असली आवाज़ मिलती है. साथ ही, यह कई भाषाओं में बेहतर परफ़ॉर्म करता है.
 
-### 思考
+### सूझ-बूझ वाला मॉडल
 
-Gemini 3.1 模型使用 `thinkingLevel` 来控制思考深度，并提供 `minimal`、`low`、`medium` 和 `high` 等设置。默认值为 `minimal`，以优化为最低延迟时间。Gemini 2.5 模型使用 `thinkingBudget` 来设置思考 token 的数量。如需详细了解级别与预算之间的关系，请参阅[思考级别和预算](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn#levels-budgets)。
+ज़्यादा सोच-विचार करके जवाब देने वाले Gemini 3.8 Live और Gemini 3.1 मॉडल, `thinkingLevel` का इस्तेमाल करते हैं, ताकि वे ज़्यादा सोच-विचार करके जवाब दे सकें. `gemini-3.8-live` के लिए, `thinkingLevel` मौजूद नहीं है और सेटअप में इसे शामिल नहीं किया जाना चाहिए. ज़्यादा सोच-विचार करके जवाब देने वाले Gemini 3.8 Live में `low`, `medium`, और `high` का इस्तेमाल किया जा सकता है. हालांकि, `minimal` मौजूद नहीं है. Gemini 3.1 मॉडल, `minimal`, `low`, `medium`, और `high` के साथ काम करते हैं. ज़्यादा जानकारी के लिए, [लाइव एपीआई के बारे में जानकारी](https://ai.google.dev/gemini-api/docs/live-api/thinking?hl=hi) लेख पढ़ें.
 
 ### Python
 
 ```
-model = "gemini-3.1-flash-live-preview"
+model = "gemini-3.8-live-extended-thinking"
 
 config = types.LiveConnectConfig(
     response_modalities=["AUDIO"]
@@ -579,7 +576,7 @@ async with client.aio.live.connect(model=model, config=config) as session:
 ### JavaScript
 
 ```
-const model = 'gemini-3.1-flash-live-preview';
+const model = 'gemini-3.8-live-extended-thinking';
 const config = {
   responseModalities: [Modality.AUDIO],
   thinkingConfig: {
@@ -603,12 +600,12 @@ async function main() {
 main();
 ```
 
-此外，您还可以在配置中将 `includeThoughts` 设置为 `true`，以启用思路总结。如需了解详情，请参阅[思考总结](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn#summaries)：
+इसके अलावा, अपने कॉन्फ़िगरेशन में `includeThoughts` को `true` पर सेट करके, सोच के बारे में खास जानकारी देने वाली सुविधा चालू की जा सकती है. ज़्यादा जानकारी के लिए, [सोच के बारे में खास जानकारी](https://ai.google.dev/gemini-api/docs/thinking?hl=hi#summaries) देखें:
 
 ### Python
 
 ```
-model = "gemini-3.1-flash-live-preview"
+model = "gemini-3.8-live-extended-thinking"
 
 config = types.LiveConnectConfig(
     response_modalities=["AUDIO"]
@@ -622,7 +619,7 @@ config = types.LiveConnectConfig(
 ### JavaScript
 
 ```
-const model = 'gemini-3.1-flash-live-preview';
+const model = 'gemini-3.8-live-extended-thinking';
 const config = {
   responseModalities: [Modality.AUDIO],
   thinkingConfig: {
@@ -632,11 +629,11 @@ const config = {
 };
 ```
 
-### 共情对话
+### अफ़ेक्टिव डायलॉग
 
-借助此功能，Gemini 可以根据输入内容的情绪表达和语气调整回答风格。
+इस सुविधा की मदद से, Gemini अपने जवाब देने के तरीके को इनपुट एक्सप्रेशन और टोन के हिसाब से बदल सकता है.
 
-如需使用共情对话，请在设置消息中将 API 版本设置为 `v1beta`，并将 `enable_affective_dialog` 设置为 `true`：
+भावनाओं से जुड़े डायलॉग का इस्तेमाल करने के लिए, एपीआई वर्शन को `v1beta` पर सेट करें. साथ ही, सेटअप मैसेज में `enable_affective_dialog` को `true` पर सेट करें:
 
 ### Python
 
@@ -660,11 +657,11 @@ const config = {
 };
 ```
 
-### 主动音频
+### आवाज़ सुनकर ज़रूरत के मुताबिक जवाब देने की सुविधा
 
-启用此功能后，如果内容不相关，Gemini 可以主动决定不做出回应。
+इस सुविधा के चालू होने पर, Gemini यह तय कर सकता है कि अगर कॉन्टेंट काम का नहीं है, तो जवाब न दिया जाए.
 
-如需使用该功能，请将 API 版本设置为 `v1beta`，在设置消息中配置 `proactivity` 字段，并将 `proactive_audio` 设置为 `true`：
+इसका इस्तेमाल करने के लिए, एपीआई वर्शन को `v1beta` पर सेट करें. इसके बाद, सेटअप मैसेज में `proactivity` फ़ील्ड को कॉन्फ़िगर करें और `proactive_audio` को `true` पर सेट करें:
 
 ### Python
 
@@ -688,19 +685,19 @@ const config = {
 }
 ```
 
-## 实时翻译
+## लाइव अनुवाद
 
-Live API 支持实时、低延迟地翻译语音对话。借助此功能，您可以构建实时语音翻译应用。
+लाइव एपीआई, बोली गई बातचीत का रीयल-टाइम में कम समय में अनुवाद करने की सुविधा देता है. इस सुविधा की मदद से, रीयल-टाइम में बोली का अनुवाद करने वाले ऐप्लिकेशन बनाए जा सकते हैं.
 
-如需了解详情和示例，请参阅[实时翻译指南](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=zh-cn)。
+ज़्यादा जानकारी और उदाहरणों के लिए, [रीयल-टाइम में अनुवाद पाने की सुविधा से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=hi) देखें.
 
-## 语音活动检测 (VAD)
+## आवाज़ का पता लगाने की तकनीक (वीएडी)
 
-语音活动检测 (VAD) 可让模型识别用户何时在说话。这对于创建自然对话至关重要，因为这使用户可以随时中断模型。
+आवाज़ का पता लगाने की तकनीक (वीएडी) की मदद से, मॉडल यह पहचान पाता है कि कोई व्यक्ति कब बोल रहा है. इससे बातचीत को नैचुरल बनाने में मदद मिलती है, क्योंकि यह सुविधा उपयोगकर्ता को किसी भी समय मॉडल को रोकने की अनुमति देती है.
 
-当 VAD 检测到中断时，系统会取消并舍弃正在进行的生成操作。会话历史记录中仅保留已发送给客户端的信息。服务器随后会发送一条 [`BidiGenerateContentServerContent`](https://ai.google.dev/api/live?hl=zh-cn#bidigeneratecontentservercontent) 消息来报告中断情况。
+जब VAD को किसी रुकावट का पता चलता है, तो जनरेट की जा रही ऑडियो को रद्द कर दिया जाता है और उसे हटा दिया जाता है. सेशन के इतिहास में, सिर्फ़ वह जानकारी सेव की जाती है जो क्लाइंट को पहले ही भेजी जा चुकी है. इसके बाद, सर्वर [`BidiGenerateContentServerContent`](https://ai.google.dev/api/live?hl=hi#bidigeneratecontentservercontent) मैसेज भेजकर, रुकावट की सूचना देता है.
 
-然后，Gemini 服务器会舍弃所有待处理的函数调用，并发送一条 `BidiGenerateContentServerContent` 消息，其中包含已取消调用的 ID。
+इसके बाद, Gemini का सर्वर फ़ंक्शन कॉल के सभी अनुरोधों को खारिज कर देता है. साथ ही, रद्द किए गए कॉल के आईडी के साथ `BidiGenerateContentServerContent` मैसेज भेजता है.
 
 ### Python
 
@@ -728,11 +725,11 @@ for (const turn of turns) {
 }
 ```
 
-### 自动 VAD
+### ऑटोमैटिक वीएडी
 
-默认情况下，模型会对连续的音频输入流自动执行 VAD。可以使用[设置配置](https://ai.google.dev/api/live?hl=zh-cn#BidiGenerateContentSetup)的 [`realtimeInputConfig.automaticActivityDetection`](https://ai.google.dev/api/live?hl=zh-cn#RealtimeInputConfig.AutomaticActivityDetection) 字段配置 VAD。
+डिफ़ॉल्ट रूप से, मॉडल लगातार ऑडियो इनपुट स्ट्रीम पर वीएडी की प्रोसेस अपने-आप करता है. वीएडी को [सेटअप कॉन्फ़िगरेशन](https://ai.google.dev/api/live?hl=hi#BidiGenerateContentSetup) के [`realtimeInputConfig.automaticActivityDetection`](https://ai.google.dev/api/live?hl=hi#RealtimeInputConfig.AutomaticActivityDetection) फ़ील्ड की मदद से कॉन्फ़िगर किया जा सकता है.
 
-当音频串流暂停超过一秒时（例如，因为用户关闭了麦克风），应发送 [`audioStreamEnd`](https://ai.google.dev/api/live?hl=zh-cn#BidiGenerateContentRealtimeInput.FIELDS.bool.BidiGenerateContentRealtimeInput.audio_stream_end) 事件来清空所有已缓存的音频。客户端可以随时恢复发送音频数据。
+अगर ऑडियो स्ट्रीम को एक सेकंड से ज़्यादा समय के लिए रोका जाता है (उदाहरण के लिए, क्योंकि उपयोगकर्ता ने माइक्रोफ़ोन बंद कर दिया है), तो [`audioStreamEnd`](https://ai.google.dev/api/live?hl=hi#BidiGenerateContentRealtimeInput.FIELDS.bool.BidiGenerateContentRealtimeInput.audio_stream_end) इवेंट भेजा जाना चाहिए, ताकि कैश किए गए ऑडियो को हटाया जा सके. क्लाइंट, ऑडियो डेटा भेजना किसी भी समय फिर से शुरू कर सकता है.
 
 ### Python
 
@@ -746,7 +743,7 @@ from google import genai
 from google.genai import types
 
 client = genai.Client()
-model = "gemini-3.1-flash-live-preview"
+model = "gemini-3.8-live"
 
 config = {"response_modalities": ["AUDIO"]}
 
@@ -779,7 +776,7 @@ import { GoogleGenAI, Modality } from '@google/genai';
 import * as fs from "node:fs";
 
 const ai = new GoogleGenAI({});
-const model = 'gemini-3.1-flash-live-preview';
+const model = 'gemini-3.8-live';
 const config = { responseModalities: [Modality.AUDIO] };
 
 async function live() {
@@ -868,11 +865,11 @@ async function main() {
 main();
 ```
 
-使用 `send_realtime_input`，API 将根据 VAD 自动响应音频。虽然 `send_client_content` 会按顺序将消息添加到模型上下文，但 `send_realtime_input` 经过优化，可提高响应速度，但会牺牲确定性排序。
+`send_realtime_input` की मदद से, एपीआई वीएडी के आधार पर ऑडियो का जवाब अपने-आप देगा. `send_client_content`, मॉडल के कॉन्टेक्स्ट में मैसेज जोड़ता है. वहीं, `send_realtime_input` को जवाब देने के लिए ऑप्टिमाइज़ किया जाता है. हालांकि, इससे मैसेज के क्रम पर असर पड़ता है.
 
-### 自动 VAD 配置
+### वीएडी के अपने-आप कॉन्फ़िगर होने की सुविधा
 
-如需更精细地控制 VAD 活动，您可以配置以下参数。如需了解详情，请参阅 [API 参考文档](https://ai.google.dev/api/live?hl=zh-cn#automaticactivitydetection)。
+वीएडी की गतिविधि को ज़्यादा कंट्रोल करने के लिए, यहां दिए गए पैरामीटर कॉन्फ़िगर किए जा सकते हैं. ज़्यादा जानकारी के लिए, [एपीआई का संदर्भ](https://ai.google.dev/api/live?hl=hi#automaticactivitydetection) देखें.
 
 ### Python
 
@@ -912,19 +909,19 @@ const config = {
 };
 ```
 
-### 混合 VAD
+### हाइब्रिड वीएडी
 
-混合 VAD 兼具自动 VAD（可靠的语音开始检测）和手动 VAD（低延迟响应最终确定）的优势。
+हाइब्रिड वीएडी में, ऑटोमैटिक वीएडी (बोलना शुरू होने का सटीक पता लगाने की सुविधा) और मैन्युअल वीएडी (कम समय में जवाब तैयार करने की सुविधा) के फ़ायदे मिलते हैं.
 
-在本配置中：
+इस कॉन्फ़िगरेशन में:
 
-1. 服务器上**自动 VAD 仍处于启用状态**。服务器会自动检测用户语音的开始，并使用前缀填充来避免截断话语的开头。
-2. 客户端使用**客户端 VAD** 来检测用户何时停止说话。
-3. 当客户端 VAD 检测到语音结束时，会向服务器发送 [`audio_stream_end`](https://ai.google.dev/api/live?hl=zh-cn#BidiGenerateContentRealtimeInput.FIELDS.bool.BidiGenerateContentRealtimeInput.audio_stream_end) 信号。
-4. 服务器会将 `audio_stream_end` 信号视为立即完成提示，从而绕过默认的服务器端静音检测延迟，并以最短的延迟时间返回转写和模型响应。
-5. 如果客户端 VAD 未能触发，服务器端 VAD 会作为后备方案来检测语音结束。
+1. सर्वर पर **अपने-आप वीएडी की सुविधा चालू रहती है**. सर्वर, उपयोगकर्ता के बोलने की शुरुआत का अपने-आप पता लगाता है. इसके लिए, प्रीफ़िक्स पैडिंग का इस्तेमाल किया जाता है, ताकि उच्चारण की शुरुआत में आवाज़ न कटे.
+2. क्लाइंट, **क्लाइंट-साइड वीएडी** का इस्तेमाल करके यह पता लगाता है कि उपयोगकर्ता ने बोलना कब बंद किया.
+3. जब क्लाइंट-साइड वीएडी को बातचीत खत्म होने का पता चलता है, तो वह सर्वर को [`audio_stream_end`](https://ai.google.dev/api/live?hl=hi#BidiGenerateContentRealtimeInput.FIELDS.bool.BidiGenerateContentRealtimeInput.audio_stream_end) सिग्नल भेजता है.
+4. सर्वर, `audio_stream_end` सिग्नल को तुरंत जवाब देने के प्रॉम्प्ट के तौर पर लेता है. इससे सर्वर-साइड पर, बातचीत रुकने का पता लगाने में लगने वाला डिफ़ॉल्ट समय नहीं लगता. साथ ही, ट्रांसक्रिप्ट और मॉडल का जवाब कम से कम समय में मिल जाता है.
+5. अगर क्लाइंट-साइड वीएडी ट्रिगर नहीं होता है, तो सर्वर-साइड वीएडी, स्पीच के खत्म होने का पता लगाने के लिए फ़ॉलबैक के तौर पर काम करता है.
 
-请注意，如果客户端 VAD 阈值设置得过高，可能会导致语音截断。不过，这种方法可以避免手动 VAD 可能会出现的前端截断问题。
+ध्यान दें कि अगर क्लाइंट-साइड वीएडी थ्रेशोल्ड को बहुत ज़्यादा पर सेट किया जाता है, तो इसकी वजह से स्पीच कटऑफ़ हो सकते हैं. हालांकि, इस तरीके से फ़्रंट-ट्रंकेशन की समस्याओं को रोका जा सकता है. ये समस्याएं, मैन्युअल वीएडी के साथ हो सकती हैं.
 
 ### Python
 
@@ -964,9 +961,9 @@ session.sendRealtimeInput({
 session.sendRealtimeInput({ audioStreamEnd: true });
 ```
 
-### 停用自动 VAD
+### अपने-आप वीएडी की सुविधा बंद करना
 
-或者，您也可以在设置消息中将 `realtimeInputConfig.automaticActivityDetection.disabled` 设置为 `true`，以停用自动 VAD。在此配置中，客户端负责检测用户语音，并在适当的时间发送 [`activityStart`](https://ai.google.dev/api/live?hl=zh-cn#BidiGenerateContentRealtimeInput.FIELDS.BidiGenerateContentRealtimeInput.ActivityStart.BidiGenerateContentRealtimeInput.activity_start) 和 [`activityEnd`](https://ai.google.dev/api/live?hl=zh-cn#BidiGenerateContentRealtimeInput.FIELDS.BidiGenerateContentRealtimeInput.ActivityEnd.BidiGenerateContentRealtimeInput.activity_end) 消息。此配置中未发送 `audioStreamEnd`，而是会通过 `activityEnd` 消息标记任何流中断。
+इसके अलावा, सेटअप मैसेज में `realtimeInputConfig.automaticActivityDetection.disabled` को `true` पर सेट करके, वीएडी की सुविधा को अपने-आप बंद होने से रोका जा सकता है. इस कॉन्फ़िगरेशन में, उपयोगकर्ता की आवाज़ का पता लगाने और सही समय पर [`activityStart`](https://ai.google.dev/api/live?hl=hi#BidiGenerateContentRealtimeInput.FIELDS.BidiGenerateContentRealtimeInput.ActivityStart.BidiGenerateContentRealtimeInput.activity_start) और [`activityEnd`](https://ai.google.dev/api/live?hl=hi#BidiGenerateContentRealtimeInput.FIELDS.BidiGenerateContentRealtimeInput.ActivityEnd.BidiGenerateContentRealtimeInput.activity_end) मैसेज भेजने की ज़िम्मेदारी क्लाइंट की होती है. इस कॉन्फ़िगरेशन में `audioStreamEnd` नहीं भेजा जाता है. इसके बजाय, स्ट्रीम में किसी भी तरह की रुकावट को `activityEnd` मैसेज से मार्क किया जाता है.
 
 ### Python
 
@@ -1013,33 +1010,34 @@ session.sendRealtimeInput(
 session.sendRealtimeInput({ activityEnd: {} })
 ```
 
-### 了解 VAD 参数及其对质量的影响
+### वीएडी पैरामीटर और क्वालिटी पर उनके असर के बारे में जानकारी
 
-使用自动 VAD 时，有两个关键参数可控制如何将音频分割为语音轮次，然后再将其发送给模型：
+ऑटोमैटिक वीएडी का इस्तेमाल करते समय, दो मुख्य पैरामीटर यह तय करते हैं कि मॉडल को भेजने से पहले, ऑडियो को स्पीच टर्न में कैसे बांटा जाए:
 
-- **`prefixPaddingMs`**：在检测到语音之前要包含的音频量（以毫秒为单位）。这种“回溯”可确保模型捕获完整的语音开始，包括可能在 VAD 触发器之前开始的第一个音节。值为 `0` 可能会导致字词开头被剪掉。
-- **`silenceDurationMs`**：服务器在静默状态下等待多长时间后结束语音轮次。这决定了系统对句子中自然停顿（例如思考、呼吸或子句边界）的容忍程度。
+- **`prefixPaddingMs`**: यह वह ऑडियो है जिसे आवाज़ का पता चलने *से पहले* शामिल किया जाना है. "लुक-बैक" सुविधा की मदद से, यह पक्का किया जाता है कि मॉडल, बोली की शुरुआत को पूरी तरह से कैप्चर करे. इसमें पहला सिलेबल भी शामिल है, जो वीएडी ट्रिगर होने से पहले शुरू हो सकता है. `0` की वैल्यू की वजह से, शब्दों की शुरुआत में मौजूद अक्षर कट सकते हैं.
+- **`silenceDurationMs`**: सर्वर, बोलने की बारी खत्म होने से पहले कितने समय तक इंतज़ार करता है. इससे यह तय होता है कि सिस्टम, वाक्य के बीच में रुकने (जैसे, सोचने, सांस लेने या क्लॉज़ की सीमाओं) को कितना बर्दाश्त कर सकता है.
 
-#### `silenceDurationMs` 对音质的影响
+#### ऑडियो की क्वालिटी पर `silenceDurationMs` का असर
 
-`silenceDurationMs` 值会直接影响模型接收到的音频块的大小和完整性，以供模型进行处理：
+`silenceDurationMs` वैल्यू से, मॉडल को प्रोसेस करने के लिए मिलने वाले ऑडियो चंक के साइज़ और पूरे होने पर सीधा असर पड़ता है:
 
-- **建议（500 毫秒 - 800 毫秒）**：可实现良好的平衡 - 模型接收完整且包含丰富上下文的音频块，同时保持合理的延迟时间。服务器的内部默认值为大约 800 毫秒。
-- **过低（例如 100 毫秒到 200 毫秒）**：系统会在自然停顿期间结束语音轮次，从而将单个话语拆分为多个小音频片段。模型会单独接收这些片段，从而丢失片段间的上下文，导致转写和回答质量下降。
-- **过高（例如，2000 毫秒以上）**：用户停止说话后，系统会等待很长时间，从而增加模型响应前的感知延迟。
+- **सुझाया गया (500 मि॰से॰–800 मि॰से॰):** इससे अच्छा बैलेंस मिलता है. मॉडल को कॉन्टेक्स्ट के हिसाब से ऑडियो के पूरे और काम के हिस्से मिलते हैं. साथ ही, इसमें लगने वाला समय भी कम होता है. सर्वर का इंटरनल डिफ़ॉल्ट समय लगभग 800 मि॰से॰ होता है.
+- **बहुत कम (जैसे, 100 मि॰से॰–200 मि॰से॰):** सिस्टम, बातचीत के दौरान स्वाभाविक रूप से रुकने पर, बोलने की बारी को खत्म कर देता है. इससे एक ही वाक्य को कई छोटे-छोटे ऑडियो फ़्रैगमेंट में बांट दिया जाता है. मॉडल को ये फ़्रैगमेंट अलग-अलग मिलते हैं. इस वजह से, उसे फ़्रैगमेंट के बीच के कॉन्टेक्स्ट के बारे में जानकारी नहीं मिल पाती. साथ ही, ट्रांसक्रिप्शन और जवाब की क्वालिटी भी कम हो जाती है.
+- **बहुत ज़्यादा (जैसे, 2000 मि॰से॰ से ज़्यादा):** उपयोगकर्ता के बोलना बंद करने के बाद, सिस्टम काफ़ी देर तक इंतज़ार करता है. इससे मॉडल के जवाब देने में लगने वाले समय में बढ़ोतरी होती है.
 
-#### 手动（客户端）VAD 的最佳实践
+#### मैन्युअल (क्लाइंट-साइड) वीएडी के लिए सबसे सही तरीके
 
-当您停用自动 VAD 并通过自己的客户端语音检测来管理 `activityStart`/`activityEnd` 信号时，请注意，服务器的内置音频缓冲机制会被绕过。这意味着：
+ऑटोमैटिक वीएडी की सुविधा बंद करने और क्लाइंट-साइड पर आवाज़ पहचानने की सुविधा से `activityStart`/`activityEnd` सिग्नल मैनेज करने पर, ध्यान रखें कि सर्वर के ऑडियो बफ़रिंग के बिल्ट-इन मैकेनिज़्म को बायपास कर दिया जाता है. इसका मतलब है कि:
 
-1. **无语音前缓冲区**：服务器不再在检测到的语音开始之前预先添加音频。客户端应在发送 `activityStart` 之前包含足够的音频上下文。
-2. **无静音容忍度**：服务器会立即对您的 `activityEnd` 信号做出响应，无需额外等待。如果您的客户端 VAD 使用激进的语音结束阈值（例如 200 毫秒的静音），则在自然停顿期间，语音可能会在句子中被切断。
+1. **बोलने से पहले ऑडियो बफ़र नहीं होता:** सर्वर अब, बोली शुरू होने से पहले ऑडियो नहीं जोड़ता है. `activityStart` भेजने से पहले, आपके क्लाइंट को ऑडियो के बारे में ज़रूरी जानकारी देनी चाहिए.
+2. **कोई साइलेंस टॉलरेंस नहीं:** सर्वर, आपके `activityEnd` सिग्नल पर तुरंत कार्रवाई करता है. इसके लिए, उसे इंतज़ार नहीं करना पड़ता. अगर क्लाइंट-साइड वीएडी, बातचीत खत्म होने का थ्रेशोल्ड बहुत कम (जैसे, 200 मि॰से॰ का साइलेंस) इस्तेमाल करता है, तो बातचीत के दौरान स्वाभाविक रूप से रुकने पर, वाक्य के बीच में ही आवाज़ कट सकती है.
 
-如需使用手动 VAD 来保持音质，请在客户端的语音活动检测器中使用至少 **500 毫秒的语音结束静音阈值。**低于此值的阈值通常会导致音频片段化，从而降低转写和模型响应质量。
+मैन्युअल वीएडी के साथ ऑडियो की क्वालिटी बनाए रखने के लिए, अपने क्लाइंट के वॉइस ऐक्टिविटी डिटेक्टर में, बातचीत खत्म होने के बाद कम से कम **500 मि॰से॰** का साइलेंस थ्रेशोल्ड इस्तेमाल करें.
+इस वैल्यू से कम थ्रेशोल्ड होने पर, ऑडियो के छोटे-छोटे हिस्से मिलते हैं. इससे ट्रांसक्रिप्शन और मॉडल के जवाब की क्वालिटी खराब हो जाती है.
 
-## Token 计数
+## टोकन की गिनती
 
-您可以在返回的服务器消息的 [usageMetadata](https://ai.google.dev/api/live?hl=zh-cn#usagemetadata) 字段中找到消耗的 token 总数。
+इस्तेमाल किए गए टोकन की कुल संख्या, सर्वर से मिले मैसेज के [usageMetadata](https://ai.google.dev/api/live?hl=hi#usagemetadata) फ़ील्ड में देखी जा सकती है.
 
 ### Python
 
@@ -1073,9 +1071,9 @@ for (const turn of turns) {
 }
 ```
 
-## 媒体分辨率
+## मीडिया रिज़ॉल्यूशन
 
-您可以在会话配置中设置 `mediaResolution` 字段，以指定输入媒体的媒体分辨率：
+सेशन कॉन्फ़िगरेशन के हिस्से के तौर पर `mediaResolution` फ़ील्ड सेट करके, इनपुट मीडिया के लिए मीडिया रिज़ॉल्यूशन तय किया जा सकता है:
 
 ### Python
 
@@ -1099,98 +1097,102 @@ const config = {
 };
 ```
 
-## 限制
+ऑडियो, वीडियो या इमेज इनपुट वाले मल्टीमॉडल सेशन के लिए, `mediaResolution` को कॉन्फ़िगर किया जा सकता है. `mediaResolution`, विज़ुअल इनपुट के लिए हर फ़्रेम के हिसाब से टोकन का बंटवारा करता है. वहीं, ऑडियो स्ट्रीम को सभी रिज़ॉल्यूशन सेटिंग में, हर सेकंड के हिसाब से एक तय दर पर टोकन में बदला जाता है. ज़्यादा जानकारी के लिए, [मीडिया रिज़ॉल्यूशन](https://ai.google.dev/gemini-api/docs/media-resolution?hl=hi) गाइड देखें.
 
-在规划项目时，请考虑 Live API 的以下限制。
+## सीमाएं
 
-### 回答模式
+अपना प्रोजेक्ट प्लान करते समय, Live API की इन सीमाओं को ध्यान में रखें.
 
-原生音频模型仅支持 `AUDIO` 回答模态。如果您需要以文本形式获取模型响应，请使用[输出音频转写](#audio-transcription)功能。
+### जवाब देने के तरीके
 
-### 客户端身份验证
+नेटिव ऑडियो मॉडल, सिर्फ़ `AUDIO response modality के साथ काम करते हैं. अगर आपको मॉडल से मिले जवाब को टेक्स्ट के तौर पर चाहिए, तो [आउटपुट ऑडियो ट्रांसक्रिप्शन](#audio-transcription) सुविधा का इस्तेमाल करें.
 
-Live API 默认仅提供服务器到服务器的身份验证。如果您要使用[客户端到服务器的方法](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn#implementation-approach)来实现 Live API 应用，则需要使用[临时令牌](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=zh-cn)来降低安全风险。
+### क्लाइंट प्रमाणीकरण
 
-### 会话时长
+Live API, डिफ़ॉल्ट रूप से सिर्फ़ सर्वर-टू-सर्वर पुष्टि करने की सुविधा देता है. अगर आपको [क्लाइंट-टू-सर्वर अप्रोच](https://ai.google.dev/gemini-api/docs/live?hl=hi#implementation-approach) का इस्तेमाल करके, Live API ऐप्लिकेशन लागू करना है, तो आपको सुरक्षा से जुड़े जोखिमों को कम करने के लिए, [कुछ समय के लिए मान्य टोकन](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=hi) का इस्तेमाल करना होगा.
 
-纯音频会话时长上限为 15 分钟，音频加视频会话时长上限为 2 分钟。不过，您可以配置不同的[会话管理技术](https://ai.google.dev/gemini-api/docs/live-session?hl=zh-cn)，以无限延长会话时长。
+### सत्र की अवधि
 
-### 上下文窗口
+सिर्फ़ ऑडियो वाले सेशन 15 मिनट तक किए जा सकते हैं. वहीं, ऑडियो और वीडियो, दोनों वाले सेशन सिर्फ़ दो मिनट तक किए जा सकते हैं.
+हालांकि, सेशन की अवधि के दौरान असीमित एक्सटेंशन के लिए, अलग-अलग [सेशन मैनेजमेंट तकनीकें](https://ai.google.dev/gemini-api/docs/live-session?hl=hi) कॉन्फ़िगर की जा सकती हैं.
 
-会话的上下文窗口限制为：
+### कॉन्टेक्स्ट विंडो
 
-- 对于[原生音频输出](#native-audio-output)模型，为 128,000 个 token
-- 其他 Live API 模型的令牌数量为 32,000
+किसी सेशन के लिए कॉन्टेक्स्ट विंडो की सीमा यह होती है:
 
-## 支持的语言
+- [नेटिव ऑडियो आउटपुट](#native-audio-output) मॉडल के लिए 1,28,000 टोकन
+- Live API के अन्य मॉडल के लिए 32 हज़ार टोकन
 
-Live API 支持以下 97 种语言。
+## इस्तेमाल की जा सकने वाली भाषाएं
 
-| 语言 | BCP-47 代码 | 语言 | BCP-47 代码 |
+लाइव एपीआई, इन 99 भाषाओं में काम करता है.
+
+| भाषा | BCP-47 कोड | भाषा | BCP-47 कोड |
 | --- | --- | --- | --- |
-| 南非荷兰语 | `af` | 拉脱维亚语 | `lv` |
-| 阿坎语 | `ak` | 立陶宛语 | `lt` |
-| 阿尔巴尼亚语 | `sq` | 马其顿语 | `mk` |
-| 阿姆哈拉语 | `am` | 马来语 | `ms` |
-| 阿拉伯语 | `ar` | 马拉雅拉姆语 | `ml` |
-| 亚美尼亚语 | `hy` | 马耳他语 | `mt` |
-| 阿萨姆语 | `as` | 毛利语 | `mi` |
-| 阿塞拜疆语 | `az` | 马拉地语 | `mr` |
-| 巴斯克语 | `eu` | 蒙古语 | `mn` |
-| 白俄罗斯语 | `be` | 尼泊尔语 | `ne` |
-| 孟加拉语 | `bn` | 挪威语 | `no` |
-| 波斯尼亚语 | `bs` | 奥里亚语 | `or` |
-| 保加利亚语 | `bg` | 奥罗莫语 | `om` |
-| 缅甸语 | `my` | 普什图语 | `ps` |
-| 加泰罗尼亚语 | `ca` | 波斯语 | `fa` |
-| 宿务语 | `ceb` | 波兰语 | `pl` |
-| 中文 | `zh` | 葡萄牙语 | `pt` |
-| 克罗地亚语 | `hr` | 旁遮普语 | `pa` |
-| 捷克语 | `cs` | 克丘亚语 | `qu` |
-| 丹麦语 | `da` | 罗马尼亚语 | `ro` |
-| 荷兰语 | `nl` | 罗曼什语 | `rm` |
-| 英语 | `en` | 俄语 | `ru` |
-| 爱沙尼亚语 | `et` | 塞尔维亚语 | `sr` |
-| 法罗语 | `fo` | 信德语 | `sd` |
-| 菲律宾语 | `fil` | 僧伽罗语 | `si` |
-| 芬兰语 | `fi` | 斯洛伐克语 | `sk` |
-| 法语 | `fr` | 斯洛文尼亚语 | `sl` |
-| 加利西亚语 | `gl` | 索马里语 | `so` |
-| 格鲁吉亚语 | `ka` | 南索托语 | `st` |
-| 德语 | `de` | 西班牙语 | `es` |
-| 希腊语 | `el` | 斯瓦希里语 | `sw` |
-| 古吉拉特语 | `gu` | 瑞典语 | `sv` |
-| 豪萨语 | `ha` | 塔吉克语 | `tg` |
-| 希伯来语 | `iw` | 泰米尔语 | `ta` |
-| 印地语 | `hi` | 泰卢固语 | `te` |
-| 匈牙利语 | `hu` | 泰语 | `th` |
-| 冰岛语 | `is` | 茨瓦纳语 | `tn` |
-| 印度尼西亚语 | `id` | 土耳其语 | `tr` |
-| 爱尔兰语 | `ga` | 土库曼语 | `tk` |
-| 意大利语 | `it` | 乌克兰语 | `uk` |
-| 日语 | `ja` | 乌尔都语 | `ur` |
-| 卡纳达语 | `kn` | 乌兹别克语 | `uz` |
-| 哈萨克语 | `kk` | 越南语 | `vi` |
-| 高棉语 | `km` | 威尔士语 | `cy` |
-| 卢旺达语 | `rw` | 西弗里西亚语 | `fy` |
-| 韩语 | `ko` | 沃洛夫语 | `wo` |
-| 库尔德语 | `ku` | 约鲁巴语 | `yo` |
-| 吉尔吉斯语 | `ky` | 祖鲁语 | `zu` |
-| 老挝语 | `lo` |  |  |
+| अफ़्रीकान्स | `af` | लातवियन | `lv` |
+| आकान | `ak` | लिथुएनियन | `lt` |
+| अल्बेनियन | `sq` | मैसेडोनियन | `mk` |
+| अमहैरिक | `am` | मलय | `ms` |
+| अरबी | `ar` | मलयालम | `ml` |
+| आर्मीनियन | `hy` | मोल्टीज़ | `mt` |
+| असमिया | `as` | माओरी | `mi` |
+| अज़रबैजानी | `az` | मराठी | `mr` |
+| बॉस्क | `eu` | मंगोलियन | `mn` |
+| बेलारूसी | `be` | नेपाली | `ne` |
+| बांग्ला | `bn` | नॉर्वीजन | `no`, `nb` |
+| बोस्नियन | `bs` | ओड़िया | `or` |
+| बल्गैरियन | `bg` | ओरोमो | `om` |
+| बर्मीज़ | `my` | पश्तो | `ps` |
+| कैटलैन | `ca` | फ़ारसी | `fa` |
+| सेबुआनो | `ceb` | पोलिश | `pl` |
+| चाइनीज़ (सिंप्लिफ़ाइड) | `zh-Hans` | पॉर्चुगीज़ (ब्राज़ील) | `pt-BR` |
+| चाइनीज़ (ट्रेडिशनल) | `zh-Hant` | पॉर्चगीज़ (पुर्तगाल) | `pt-PT` |
+| क्रोएशियन | `hr` | पंजाबी | `pa` |
+| चेक | `cs` | क्वेचा | `qu` |
+| डैनिश | `da` | रोमानियन | `ro` |
+| डच | `nl` | रोमैंश | `rm` |
+| अंग्रेज़ी | `en` | रूसी | `ru` |
+| एस्टोनियन | `et` | सर्बियन | `sr` |
+| फ़ैरोईज़ | `fo` | सिंधी | `sd` |
+| फ़िलिपीनी | `fil` | सिंहला | `si` |
+| फ़िनिश | `fi` | स्लोवाक | `sk` |
+| फ़्रांसीसी | `fr` | स्लोवेनियन | `sl` |
+| गैलिशियन | `gl` | सोमाली | `so` |
+| जॉर्जियन | `ka` | सदर्न सुटू | `st` |
+| जर्मन | `de` | स्पैनिश | `es` |
+| ग्रीक | `el` | स्वाहिली | `sw` |
+| गुजराती | `gu` | स्वीडिश | `sv` |
+| हौसा | `ha` | ताजिक | `tg` |
+| हिब्रू | `he` | तमिल | `ta` |
+| हिन्दी | `hi` | तेलुगु | `te` |
+| हंगेरियन | `hu` | थाई | `th` |
+| आइसलैंडिक | `is` | स्वाना | `tn` |
+| इंडोनेशियन | `id` | टर्किश | `tr` |
+| आयरिश | `ga` | तुर्कमेन | `tk` |
+| इटैलियन | `it` | यूक्रेनियन | `uk` |
+| जापानी | `ja` | उर्दू | `ur` |
+| कन्नड़ | `kn` | उज़्बेक | `uz` |
+| कज़ाक | `kk` | वियतनामीज़ | `vi` |
+| खमेर | `km` | वेल्श | `cy` |
+| किन्यारवांडा | `rw` | वेस्टर्न फ़्रीजन | `fy` |
+| कोरियन | `ko` | वोलॉफ़ | `wo` |
+| कुर्दिश | `ku` | योरुबा | `yo` |
+| किर्गिज़ | `ky` | ज़ुलू | `zu` |
+| लाओ | `lo` |  |  |
 
-## 后续步骤
+## आगे क्या करना है
 
-- 请参阅[工具使用](https://ai.google.dev/gemini-api/docs/live-tools?hl=zh-cn)和[会话管理](https://ai.google.dev/gemini-api/docs/live-session?hl=zh-cn)指南，了解有关如何有效使用 Live API 的重要信息。
-- 在 [Google AI Studio](https://aistudio.google.com/app/live?hl=zh-cn) 中试用 Live API。
-- 有关 Live API 模型的更多信息，请参阅模型页面上的 [Gemini 2.5 Flash Native Audio](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#gemini-2.5-flash-native-audio)。
-- 请尝试查看 [Live API cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=zh-cn)、[Live API Tools cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=zh-cn) 和 [Live API Get Started script](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.py) 中的更多示例。
+- लाइव एपीआई का असरदार तरीके से इस्तेमाल करने के बारे में ज़रूरी जानकारी पाने के लिए, [टूल इस्तेमाल करने](https://ai.google.dev/gemini-api/docs/live-tools?hl=hi) और [सेशन मैनेज करने](https://ai.google.dev/gemini-api/docs/live-session?hl=hi) से जुड़ी गाइड पढ़ें.
+- [Google AI Studio](https://aistudio.google.com/app/live?hl=hi) में Live API को आज़माएं.
+- Live API मॉडल के बारे में ज़्यादा जानने के लिए, [Gemini 3.8 Live](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=hi) और [Gemini 3.8 Live Extended Thinking](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=hi) मॉडल के पेज देखें.
+- [Live API कुकबुक](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=hi), [Live API Tools कुकबुक](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=hi), और [Live API Get Started स्क्रिप्ट](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.py) में दिए गए अन्य उदाहरणों को आज़माएं.
 
-发送反馈
+सुझाव भेजें
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-最后更新时间 (UTC)：2026-09-08。
+आखिरी बार 2026-09-19 (UTC) को अपडेट किया गया.
 
-需要向我们提供更多信息？
+क्या आपको हमें और कुछ बताना है?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-08。"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-19 (UTC) को अपडेट किया गया."],[],[]]

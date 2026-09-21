@@ -1,47 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=de
-fetched_at: 2026-09-14T05:45:29.895948+00:00
-title: "Tool mit der Live API verwenden \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=pl
+fetched_at: 2026-09-21T05:48:14.440074+00:00
+title: "Korzystanie z narz\u0119dzia w po\u0142\u0105czeniu z interfejsem Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
+Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Feedback geben
+Prześlij opinię
 
-# Tool mit der Live API verwenden
+# Korzystanie z narzędzia w połączeniu z interfejsem Live API
 
-Durch die Verwendung von Tools kann die Live API mehr als nur Unterhaltungen ermöglichen. Sie kann Aktionen in der realen Welt ausführen und externen Kontext abrufen, während eine Echtzeitverbindung aufrechterhalten wird.
-Sie können Tools wie [Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/function-calling?hl=de)
-und [die Google Suche](https://ai.google.dev/gemini-api/docs/grounding?hl=de) mit der Live API definieren.
+Korzystanie z narzędzi umożliwia interfejsowi Live API wyjście poza zwykłą rozmowę, ponieważ pozwala mu wykonywać działania w świecie rzeczywistym i pobierać kontekst zewnętrzny przy jednoczesnym utrzymaniu połączenia w czasie rzeczywistym.
+Za pomocą interfejsu Live API możesz definiować narzędzia, takie jak [wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl)
+i [wyszukiwarka Google](https://ai.google.dev/gemini-api/docs/grounding?hl=pl).
 
-## Übersicht über unterstützte Tools
+## Omówienie obsługiwanych narzędzi
 
-Hier finden Sie eine kurze Übersicht über die verfügbaren Tools für Live API-Modelle:
+Oto krótkie omówienie narzędzi dostępnych w przypadku modeli interfejsu Live API:
 
-| Tool | Gemini 3.1 Flash Live (Vorabversion) | Gemini 2.5 Flash Live (Vorabversion) |
+| Narzędzie | Gemini 3.1 Flash Live (wersja testowa) | Gemini 2.5 Flash Live (wersja testowa) |
 | --- | --- | --- |
-| **Suche** | Unterstützt | Unterstützt |
-| **Funktionsaufrufe** | Unterstützt (nur synchron) | Unterstützt (synchron und [asynchron](#async-function-calling)) |
-| **Google Maps** | Nicht unterstützt | Nicht unterstützt |
-| **Code-Ausführung** | Nicht unterstützt | Nicht unterstützt |
-| **URL-Kontext** | Nicht unterstützt | Nicht unterstützt |
+| **Szukaj** | Obsługiwane | Obsługiwane |
+| **Wywoływanie funkcji** | Obsługiwane (tylko synchroniczne) | Obsługiwane (synchroniczne i [asynchroniczne](#async-function-calling)) |
+| **Mapy Google** | Nieobsługiwane | Nieobsługiwane |
+| **Wykonywanie kodu** | Nieobsługiwane | Nieobsługiwane |
+| **Kontekst adresu URL** | Nieobsługiwane | Nieobsługiwane |
 
-## Funktionsaufrufe
+## Wywoływanie funkcji
 
-Die Live API unterstützt Funktionsaufrufe genau wie reguläre Anfragen zur Inhaltserstellung. Mit Funktionsaufrufen kann die Live API mit externen Daten und Programmen interagieren, wodurch sich die Möglichkeiten Ihrer Anwendungen erheblich erweitern.
+Interfejs Live API obsługuje wywoływanie funkcji, podobnie jak zwykłe żądania generowania treści. Wywoływanie funkcji umożliwia interfejsowi Live API interakcję z danymi i programami zewnętrznymi, co znacznie zwiększa możliwości aplikacji.
 
-Sie können Funktionsdeklarationen als Teil der Sitzungskonfiguration definieren.
-Nachdem Tool-Aufrufe eingegangen sind, sollte der Client mit einer Liste von `FunctionResponse`-Objekten mithilfe der Methode `session.send_tool_response` antworten.
+Deklaracje funkcji możesz zdefiniować w ramach konfiguracji sesji.
+Po otrzymaniu wywołań narzędzi klient powinien odpowiedzieć listą obiektów `FunctionResponse` za pomocą metody `session.send_tool_response`.
 
-Weitere Informationen finden Sie in der Anleitung zu [Funktionsaufrufen](https://ai.google.dev/gemini-api/docs/function-calling?hl=de), um mehr zu erfahren.
+Więcej informacji znajdziesz w [samouczku dotyczącym wywoływania funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl).
 
 ### Python
 
@@ -53,7 +53,7 @@ from google.genai import types
 
 client = genai.Client()
 
-model = "gemini-3.1-flash-live-preview"
+model = "gemini-3.8-live"
 
 # Simple function definitions
 turn_on_the_lights = {"name": "turn_on_the_lights"}
@@ -103,7 +103,7 @@ import pkg from 'wavefile';  // npm install wavefile
 const { WaveFile } = pkg;
 
 const ai = new GoogleGenAI({});
-const model = 'gemini-3.1-flash-live-preview';
+const model = 'gemini-3.8-live';
 
 // Simple function definitions
 const turn_on_the_lights = { name: "turn_on_the_lights" } // , description: '...', parameters: { ... }
@@ -218,14 +218,13 @@ async function main() {
 main();
 ```
 
-Mit einer einzigen Eingabeaufforderung kann das Modell mehrere Funktionsaufrufe und den Code generieren, der zum Verketten der Ausgaben erforderlich ist. Dieser Code wird in einer Sandbox
-Umgebung ausgeführt und generiert nachfolgende [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=de#bidigeneratecontenttoolcall) Nachrichten.
+Na podstawie jednego promptu model może wygenerować wiele wywołań funkcji i kod niezbędny do łączenia ich danych wyjściowych. Ten kod jest wykonywany w środowisku piaskownicy, co powoduje generowanie kolejnych [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=pl#bidigeneratecontenttoolcall).
 
-## Asynchrone Funktionsaufrufe
+## Asynchroniczne wywoływanie funkcji
 
-Funktionsaufrufe werden standardmäßig sequenziell ausgeführt. Das bedeutet, dass die Ausführung pausiert wird, bis die Ergebnisse jedes Funktionsaufrufs verfügbar sind. So wird die sequenzielle Verarbeitung sichergestellt. Sie können also nicht weiter mit dem Modell interagieren, während die Funktionen ausgeführt werden.
+Domyślnie wywoływanie funkcji jest wykonywane sekwencyjnie, co oznacza, że wykonanie jest wstrzymywane do momentu, aż będą dostępne wyniki każdego wywołania funkcji. Zapewnia to sekwencyjne przetwarzanie, co oznacza, że nie będziesz mieć możliwości dalszej interakcji z modelem podczas wykonywania funkcji.
 
-Wenn Sie die Unterhaltung nicht blockieren möchten, können Sie das Modell anweisen, die Funktionen asynchron auszuführen. Dazu müssen Sie zuerst den Funktionsdefinitionen ein `behavior` hinzufügen:
+Jeśli nie chcesz blokować rozmowy, możesz poinformować model, aby uruchamiał funkcje asynchronicznie. Aby to zrobić, musisz najpierw dodać `behavior` do definicji funkcji:
 
 ### Python
 
@@ -249,15 +248,15 @@ const turn_off_the_lights = {name: "turn_off_the_lights"}
 const tools = [{ functionDeclarations: [turn_on_the_lights, turn_off_the_lights] }]
 ```
 
-`NON-BLOCKING` sorgt dafür, dass die Funktion asynchron ausgeführt wird, während Sie weiter mit dem Modell interagieren können.
+`NON-BLOCKING` zapewnia, że funkcja będzie działać asynchronicznie, a Ty będziesz mieć możliwość dalszej interakcji z modelem.
 
-Anschließend müssen Sie dem Modell mithilfe des Parameters `scheduling` mitteilen, wie es sich verhalten soll, wenn es die `FunctionResponse` erhält. Es gibt folgende Möglichkeiten:
+Następnie musisz poinformować model, jak ma się zachowywać, gdy otrzyma `FunctionResponse`, za pomocą parametru `scheduling`. Może on:
 
-- Die aktuelle Aufgabe unterbrechen und Sie sofort über die erhaltene Antwort informieren
+- przerwać wykonywane działanie i od razu poinformować Cię o otrzymanej odpowiedzi
   (`scheduling="INTERRUPT"`),
-- Warten, bis die aktuelle Aufgabe abgeschlossen ist
-  (`scheduling="WHEN_IDLE"`)
-- Nichts tun und dieses Wissen später in der Unterhaltung verwenden
+- poczekać, aż skończy wykonywać bieżące działanie
+  (`scheduling="WHEN_IDLE"`),
+- lub nic nie robić i wykorzystać tę wiedzę później w dyskusji
   (`scheduling="SILENT"`)
 
 ### Python
@@ -290,10 +289,9 @@ const functionResponse = {
 }
 ```
 
-## Fundierung mit der Google Suche
+## Powiązanie ze źródłem informacji przy użyciu wyszukiwarki Google
 
-Sie können die Fundierung mit der Google Suche als Teil der Sitzungskonfiguration aktivieren. Dadurch wird die Genauigkeit der Live API erhöht und Halluzinationen werden verhindert. Weitere Informationen finden Sie in der [Anleitung zur Fundierung](https://ai.google.dev/gemini-api/docs/grounding?hl=de)
-um mehr zu erfahren.
+W ramach konfiguracji sesji możesz włączyć powiązanie ze źródłem informacji przy użyciu wyszukiwarki Google. Zwiększa to dokładność interfejsu Live API i zapobiega halucynacjom. Więcej informacji znajdziesz w [samouczku dotyczącym powiązania ze źródłem informacji](https://ai.google.dev/gemini-api/docs/grounding?hl=pl).
 
 ### Python
 
@@ -305,7 +303,7 @@ from google.genai import types
 
 client = genai.Client()
 
-model = "gemini-3.1-flash-live-preview"
+model = "gemini-3.8-live"
 
 tools = [{'google_search': {}}]
 config = {"response_modalities": ["AUDIO"], "tools": tools}
@@ -350,7 +348,7 @@ import pkg from 'wavefile';  // npm install wavefile
 const { WaveFile } = pkg;
 
 const ai = new GoogleGenAI({});
-const model = 'gemini-3.1-flash-live-preview';
+const model = 'gemini-3.8-live';
 
 const tools = [{ googleSearch: {} }]
 const config = {
@@ -452,9 +450,9 @@ async function main() {
 main();
 ```
 
-## Mehrere Tools kombinieren
+## Łączenie wielu narzędzi
 
-Sie können mehrere Tools in der Live API kombinieren, um die Möglichkeiten Ihrer Anwendung noch weiter zu erweitern:
+W ramach interfejsu Live API możesz łączyć wiele narzędzi, co jeszcze bardziej zwiększa możliwości aplikacji:
 
 ### Python
 
@@ -502,19 +500,19 @@ const config = {
 // ... remaining model call
 ```
 
-## Nächste Schritte
+## Co dalej?
 
-- Weitere Beispiele für die Verwendung von Tools mit der Live API finden Sie im
-  [Kochbuch zur Tool-Verwendung](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=de).
-- Alle Informationen zu Funktionen und Konfigurationen finden Sie im
-  [Leitfaden zu den Funktionen der Live API](https://ai.google.dev/gemini-api/docs/live-guide?hl=de).
+- Więcej przykładów używania narzędzi z interfejsem Live API znajdziesz w
+  [przewodniku Korzystanie z narzędzi](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=pl).
+- Więcej informacji o funkcjach i konfiguracjach znajdziesz w
+  [przewodniku Możliwości interfejsu Live API](https://ai.google.dev/gemini-api/docs/live-guide?hl=pl).
 
-Feedback geben
+Prześlij opinię
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Zuletzt aktualisiert: 2026-09-08 (UTC).
+Ostatnia aktualizacja: 2026-09-17 UTC.
 
-Haben Sie Feedback für uns?
+Chcesz przekazać coś jeszcze?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-08 (UTC)."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-17 UTC."],[],[]]

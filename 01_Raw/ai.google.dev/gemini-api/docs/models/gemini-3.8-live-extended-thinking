@@ -1,0 +1,67 @@
+---
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=ko
+fetched_at: 2026-09-21T05:57:33.671507+00:00
+title: "Gemini 3.8 Live Extended Thinking \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+---
+
+이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
+
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+
+의견 보내기
+
+# Gemini 3.8 Live Extended Thinking
+
+Gemini 3.8 Live Extended Thinking은 실시간 음성 상호작용 중에 복잡한 다단계 문제 해결을 위해 더 높은 배경 추론이 필요한 경우에 권장되는 추론 능력이 뛰어난 오디오 간 변환 모델입니다. 연속 오디오 응답을 스트리밍하는 동안 백그라운드 추론과 비동기 도구 호출을 처리합니다.
+
+[Google AI Studio에서 사용해 보기](https://aistudio.google.com/live?model=gemini-3.8-live-extended-thinking&hl=ko)
+
+## 문서
+
+기능 및 기능에 관한 전체 내용은 [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ko) 가이드를 참고하세요.
+
+## gemini-3.8-live-extended-thinking
+
+| 속성 | 설명 |
+| --- | --- |
+| id\_card모델 코드 | `gemini-3.8-live-extended-thinking` |
+| save지원되는 데이터 유형 | **입력**  텍스트, 이미지, 오디오, 동영상  **출력**  텍스트 및 오디오 |
+| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 토큰 한도**  131,072  **출력 토큰 한도**  65,536 |
+| handyman기능 | **[오디오 생성](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ko)**  지원됨  **[캐싱](https://ai.google.dev/gemini-api/docs/caching?hl=ko)**  지원되지 않음  **[코드 실행](https://ai.google.dev/gemini-api/docs/code-execution?hl=ko)**  지원되지 않음  **[파일 검색](https://ai.google.dev/gemini-api/docs/file-search?hl=ko)**  지원되지 않음  **[함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)**  지원됨 (비동기만 해당)  **[Google 지도 기반 그라운딩](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ko)**  지원되지 않음  **[이미지 생성](https://ai.google.dev/gemini-api/docs/image-generation?hl=ko)**  지원되지 않음  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ko)**  지원됨  **[검색 그라운딩](https://ai.google.dev/gemini-api/docs/google-search?hl=ko)**  지원됨  **[구조화된 출력](https://ai.google.dev/gemini-api/docs/structured-output?hl=ko)**  지원되지 않음  **[사고](https://ai.google.dev/gemini-api/docs/thinking?hl=ko)**  지원됨  **[URL 컨텍스트](https://ai.google.dev/gemini-api/docs/url-context?hl=ko)**  지원되지 않음 |
+| speed소비 옵션 | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ko)**  지원되지 않음 |
+| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - 안정화 버전: `gemini-3.8-live-extended-thinking` |
+| calendar\_month최신 업데이트 | 2026년 9월 |
+| id\_card모델 카드 | [모델 카드](https://deepmind.google/models/model-cards/gemini-3-8-audio/?hl=ko) |
+
+## Gemini 3.8 Live Extended Thinking으로 업그레이드
+
+Gemini 3.8 Live Extended Thinking은 라이브 오디오 세션 중에 백그라운드 추론을 도입합니다. 이 모델을 통합할 때는 비동기 추론 신호를 처리하도록 클라이언트 상태 관리를 업데이트하세요.
+
+- **비동기 추론 프로토콜**: 비동기 추론을 사용하는 모델과 상호작용할 때 `turnComplete: true`는 더 이상 모델이 유휴 상태임을 나타내지 않습니다. 서버는 백그라운드 추론 또는 도구 호출을 계속 처리할 수 있습니다. 클라이언트는 `turnComplete: true`가 도착한 후 후속 서버 메시지 (예: 도구 호출 또는 오디오 프레임)를 계속 수신해야 합니다.
+- **모니터링 `interaction_status`**: 수신 서버 메시지의 `interaction_status` 필드를 사용하여 현재 서버 상태를 확인합니다.
+  - `IN_PROGRESS`: 서버가 사용자 입력을 적극적으로 처리하거나, 백그라운드 추론을 실행하거나, 비동기 도구 호출에 대한 응답을 기다리고 있습니다.
+    추가 모델 출력 또는 도구 호출이 이어질 수 있습니다.
+  - `IDLE`: 서버가 모든 처리, 추론, 도구 호출을 완료했습니다.
+    세션이 유휴 상태이며 사용자 입력을 기다리고 있습니다.
+- **비동기 함수 호출**: 비동기 비차단 실행(`behavior: NON_BLOCKING`)만 지원됩니다. 동기 차단 모드는 지원되지 않으며 심각한 오류를 반환합니다. 함수 예약 구성은 지원되지 않습니다.
+- **사고 구성**: 설정 구성 (`thinking_level`: `low`, `medium` 또는 `high`)에서 `thinking_config`를 사용하여 백그라운드 추론을 구성합니다. `MINIMAL`은 지원되지 않습니다.
+- **클라이언트 콘텐츠 업데이트**: `send_client_content`는 명시적 역할 (`user` 또는 `model`)을 사용하여 전체 세션 수명 주기에서 지원됩니다. `turn_complete=true`를 설정하면 활성 생성이 즉시 중단됩니다.
+- **능동적 오디오**: 영구적으로 사용 설정됩니다. `proactive_audio: false`를 설정하면 오류가 반환됩니다.
+
+모든 Live API 모델의 기능 비교는 [모델 비교](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=ko#model-comparison) 표를 참고하세요.
+
+의견 보내기
+
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+
+최종 업데이트: 2026-09-17(UTC)
+
+의견을 전달하고 싶나요?
+
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-17(UTC)"],[],[]]

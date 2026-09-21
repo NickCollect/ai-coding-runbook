@@ -1,42 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/image-understanding?hl=it
-fetched_at: 2026-09-14T05:46:55.720614+00:00
-title: "Comprensione delle immagini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/image-understanding?hl=zh-TW
+fetched_at: 2026-09-21T05:46:01.959891+00:00
+title: "\u5716\u50cf\u89e3\u8b80 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Invia feedback
+提供意見
 
-# Comprensione delle immagini
+# 圖像解讀
 
-I modelli Gemini sono progettati per essere multimodali fin dalla base, consentendo un'ampia gamma di attività di elaborazione delle immagini e visione artificiale, tra cui, a titolo esemplificativo, la didascalia, la classificazione e la risposta a domande visive, senza dover addestrare modelli di ML specializzati.
+Gemini 模型從一開始就建構於多模態的基礎上，因此可執行各種圖像處理和電腦視覺工作，包括但不限於生成圖像說明文字、分類和回答圖像問題，無須訓練專門的機器學習模型。
 
-Oltre alle funzionalità multimodali generali, i modelli Gemini offrono
-**maggiore precisione** per casi d'uso specifici come il [rilevamento di oggetti](#object-detection)
-e la [segmentazione](#segmentation), grazie a un addestramento aggiuntivo.
+除了提供一般多模態功能，Gemini 模型還透過額外訓練，針對特定用途 (例如[物件偵測](#object-detection)和[區隔](#segmentation)) **提升準確度**。
 
-## Trasferire immagini a Gemini
+## 將圖片傳送給 Gemini
 
-Puoi fornire immagini come input a Gemini utilizzando diversi metodi:
+你可以透過下列幾種方式，將圖片做為 Gemini 的輸入內容：
 
-- [Trasmissione dell'immagine tramite URL](#url-image): ideale per immagini accessibili pubblicamente.
-- [Trasmissione dei dati immagine incorporati](#inline-image): per i dati immagine con codifica base64.
-- [Caricamento di immagini tramite l'API File](#upload-image): consigliato per
-  file di dimensioni maggiori o per riutilizzare le immagini in più richieste.
+- [使用網址傳遞圖片](#url-image)：適合公開存取的圖片。
+- [傳遞內嵌圖片資料](#inline-image)：適用於採用 Base64 編碼的圖片資料。
+- [使用 File API 上傳圖片](#upload-image)：建議用於較大的檔案，或在多個要求中重複使用圖片。
 
-### Trasmissione dell'immagine tramite URL
+### 使用網址傳遞圖片
 
-Puoi caricare un'immagine utilizzando l'[API Files](https://ai.google.dev/gemini-api/docs/files?hl=it) e passarla
-nella richiesta:
+您可以使用 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw) 上傳圖片，並在要求中傳遞圖片：
 
 ### Python
 
@@ -48,7 +44,7 @@ client = genai.Client()
 uploaded_file = client.files.upload(file="path/to/organ.jpg")
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input=[
         {"type": "text", "text": "Caption this image."},
         {
@@ -74,7 +70,7 @@ const uploadedFile = await client.files.upload({
 });
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: [
         {type: "text", text: "Caption this image."},
         {
@@ -87,6 +83,51 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.types.File;
+import com.google.genai.types.UploadFileConfig;
+import java.util.Arrays;
+import java.util.List;
+
+Client client = new Client();
+
+File uploadedFile =
+    client.files.upload(
+        new java.io.File("path/to/organ.jpg"),
+        UploadFileConfig.builder().mimeType("image/jpeg").build());
+
+Content textContent = TextContent.builder().text("Caption this image.").build();
+Content imageContent =
+    ImageContent.builder()
+        .uri(uploadedFile.uri().orElse(""))
+        .mimeType(ImageContentMimeType.of(uploadedFile.mimeType().orElse("image/jpeg")))
+        .build();
+
+List<Content> contents = Arrays.asList(textContent, imageContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -95,7 +136,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": [
       {"type": "text", "text": "Caption this image."},
       {
@@ -107,9 +148,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Trasferimento dei dati delle immagini in linea
+### 傳遞內嵌圖片資料
 
-Puoi fornire i dati immagine come stringhe con codifica base64:
+您可以提供採用 Base64 編碼的字串做為圖片資料：
 
 ### Python
 
@@ -123,7 +164,7 @@ with open('path/to/small-sample.jpg', 'rb') as f:
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input=[
         {"type": "text", "text": "Caption this image."},
         {
@@ -148,7 +189,7 @@ const base64ImageFile = fs.readFileSync("path/to/small-sample.jpg", {
 });
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: [
         {type: "text", text: "Caption this image."},
         {
@@ -159,6 +200,50 @@ const interaction = await client.interactions.create({
     ]
 });
 console.log(interaction.output_text);
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
+
+byte[] imageBytes = Files.readAllBytes(Paths.get("path/to/small-sample.jpg"));
+String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
+Client client = new Client();
+
+Content textContent = TextContent.builder().text("Caption this image.").build();
+Content imageContent =
+    ImageContent.builder()
+        .data(base64Image)
+        .mimeType(ImageContentMimeType.IMAGE_JPEG)
+        .build();
+
+List<Content> contents = Arrays.asList(textContent, imageContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+System.out.println(interaction.outputText().orElse(""));
 ```
 
 ### REST
@@ -176,7 +261,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": [
       {"type": "text", "text": "Caption this image."},
       {
@@ -188,9 +273,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Caricamento di immagini utilizzando l'API File
+### 使用 File API 上傳圖片
 
-Per file di grandi dimensioni o per poter utilizzare ripetutamente lo stesso file immagine, utilizza l'API Files. Consulta la [guida all'API Files](https://ai.google.dev/gemini-api/docs/files?hl=it).
+如要處理大型檔案或重複使用同一張圖片，請使用 Files API。請參閱 [Files API 指南](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw)。
 
 ### Python
 
@@ -202,7 +287,7 @@ client = genai.Client()
 my_file = client.files.upload(file="path/to/sample.jpg")
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input=[
         {"type": "text", "text": "Caption this image."},
         {
@@ -228,7 +313,7 @@ const myfile = await client.files.upload({
 });
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: [
         {type: "text", text: "Caption this image."},
         {
@@ -241,6 +326,51 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.types.File;
+import com.google.genai.types.UploadFileConfig;
+import java.util.Arrays;
+import java.util.List;
+
+Client client = new Client();
+
+File myFile =
+    client.files.upload(
+        new java.io.File("path/to/sample.jpg"),
+        UploadFileConfig.builder().mimeType("image/jpeg").build());
+
+Content textContent = TextContent.builder().text("Caption this image.").build();
+Content imageContent =
+    ImageContent.builder()
+        .uri(myFile.uri().orElse(""))
+        .mimeType(ImageContentMimeType.of(myFile.mimeType().orElse("image/jpeg")))
+        .build();
+
+List<Content> contents = Arrays.asList(textContent, imageContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -251,7 +381,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": [
       {"type": "text", "text": "Caption this image."},
       {
@@ -263,10 +393,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Prompt con più immagini
+## 使用多張圖片撰寫提示
 
-Puoi fornire più immagini in un singolo prompt includendo più oggetti immagine
-nell'array `input`:
+您可以在單一提示中提供多張圖片，方法是在 `input` 陣列中加入多個圖片物件：
 
 ### Python
 
@@ -276,7 +405,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input=[
         {"type": "text", "text": "What is different between these two images?"},
         {
@@ -302,7 +431,7 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: [
         {type: "text", text: "What is different between these two images?"},
         {
@@ -320,6 +449,50 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+import java.util.List;
+
+Client client = new Client();
+
+Content textContent =
+    TextContent.builder().text("What is different between these two images?").build();
+Content image1 =
+    ImageContent.builder()
+        .uri("https://example.com/image1.jpg")
+        .mimeType(ImageContentMimeType.IMAGE_JPEG)
+        .build();
+Content image2 =
+    ImageContent.builder()
+        .uri("https://example.com/image2.jpg")
+        .mimeType(ImageContentMimeType.IMAGE_JPEG)
+        .build();
+
+List<Content> contents = Arrays.asList(textContent, image1, image2);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -327,7 +500,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": [
       {"type": "text", "text": "What is different between these two images?"},
       {
@@ -344,10 +517,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Rilevamento di oggetti
+## 物件偵測
 
-I modelli vengono addestrati per rilevare gli oggetti in un'immagine e ottenere le coordinate del riquadro di delimitazione. Le coordinate, relative alle dimensioni dell'immagine, vengono scalate a [0, 1000]. Devi ridimensionare queste coordinate in base alle dimensioni
-originali dell'immagine.
+模型經過訓練後，可偵測圖片中的物件並取得定界框座標。座標會根據圖片尺寸縮放至 [0, 1000]。您需要根據原始圖片大小，縮放這些座標。
 
 ### Python
 
@@ -369,7 +541,7 @@ class BoundingBoxes(BaseModel):
     boxes: List[BoundingBox]
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input=[
         {"type": "text", "text": prompt},
         {
@@ -407,7 +579,7 @@ const boundingBoxesSchema = z.object({
 });
 
 const interaction = await client.interactions.create({
-  model: "gemini-3.6-flash",
+  model: "gemini-3.8-flash",
   input: [
     { type: "text", text: prompt },
     {
@@ -427,6 +599,85 @@ const result = boundingBoxesSchema.parse(JSON.parse(interaction.output_text));
 console.log(result);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.interactions.TextResponseFormat;
+import com.google.genai.gaos.models.interactions.TextResponseFormatMimeType;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+Client client = new Client();
+String prompt =
+    "Detect the all of the prominent items in the image. The box_2d should be [ymin, xmin, ymax, xmax] normalized to 0-1000.";
+
+Map<String, Object> boundingBoxSchema =
+    Map.of(
+        "type", "object",
+        "properties",
+            Map.of(
+                "box_2d",
+                    Map.of(
+                        "type", "array",
+                        "items", Map.of("type", "integer"),
+                        "description",
+                            "The 2D bounding box of the item as [ymin, xmin, ymax, xmax] normalized to 0-1000."),
+                "mask",
+                    Map.of(
+                        "type", "array",
+                        "items", Map.of("type", "array", "items", Map.of("type", "integer")),
+                        "description",
+                            "The segmentation mask of the item as a polygon of [x,y] coordinates, normalized to 0-1000."),
+                "label",
+                    Map.of("type", "string", "description", "A descriptive label for the item.")),
+        "required", List.of("box_2d", "mask", "label"));
+
+Map<String, Object> boundingBoxesSchema =
+    Map.of(
+        "type", "object",
+        "properties", Map.of("boxes", Map.of("type", "array", "items", boundingBoxSchema)),
+        "required", List.of("boxes"));
+
+CreateModelInteractionResponseFormat format =
+    CreateModelInteractionResponseFormat.of(
+        ResponseFormat.of(
+            TextResponseFormat.builder()
+                .mimeType(TextResponseFormatMimeType.APPLICATION_JSON)
+                .schema(boundingBoxesSchema)
+                .build()));
+
+Content textContent = TextContent.builder().text(prompt).build();
+Content imageContent =
+    ImageContent.builder()
+        .uri("https://example.com/image.png")
+        .mimeType(ImageContentMimeType.IMAGE_PNG)
+        .build();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.ofContent(Arrays.asList(textContent, imageContent)))
+        .responseFormat(format)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -434,7 +685,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": [
       {"type": "text", "text": "Detect the all of the prominent items in the image. The box_2d should be [ymin, xmin, ymax, xmax] normalized to 0-1000."},
       {
@@ -468,13 +719,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Per altri esempi, visita il [cookbook di Gemini](https://github.com/google-gemini/cookbook).
+如需更多範例，請參閱 [Gemini 教戰手冊](https://github.com/google-gemini/cookbook)。
 
-## Segmentazione
+## 區隔
 
-I modelli Gemini non solo rilevano gli elementi, ma li segmentano e forniscono le relative maschere di contorno.
+Gemini 模型不僅能偵測項目，還能區隔項目並提供輪廓遮罩。
 
-Il modello prevede un elenco JSON, in cui ogni elemento rappresenta una maschera di segmentazione. Ogni elemento ha un riquadro di selezione ("`box_2d`") nel formato `[ymin, xmin, ymax, xmax]` con coordinate normalizzate comprese tra 0 e 1000, un'etichetta ("`label`") che identifica l'oggetto e infine la maschera di segmentazione all'interno del riquadro di selezione come poligono di coordinate `[x, y]` normalizzate a 0-1000.
+模型會預測 JSON 清單，其中每個項目代表一個區隔遮罩。每個項目都有一個定界框 (「`box_2d`」)，格式為 `[ymin, xmin, ymax, xmax]`，內含介於 0 到 1000 之間的正規化座標、識別物件的標籤 (「`label`」)，以及定界框內的區隔遮罩 (以正規化為 0 到 1000 的 `[x, y]` 座標多邊形表示)。
 
 ### Python
 
@@ -502,7 +753,7 @@ class BoundingBoxes(BaseModel):
     boxes: List[BoundingBox]
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input=[
         {"type": "text", "text": prompt},
         {
@@ -548,7 +799,7 @@ const boundingBoxesSchema = z.object({
 });
 
 const interaction = await client.interactions.create({
-  model: "gemini-3.6-flash",
+  model: "gemini-3.8-flash",
   input: [
     { type: "text", text: prompt },
     {
@@ -571,6 +822,92 @@ const result = boundingBoxesSchema.parse(JSON.parse(interaction.output_text));
 console.log(result);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.GenerationConfig;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.interactions.TextResponseFormat;
+import com.google.genai.gaos.models.interactions.TextResponseFormatMimeType;
+import com.google.genai.gaos.models.interactions.ThinkingLevel;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+Client client = new Client();
+
+String prompt =
+    "Give the segmentation masks for the wooden and glass items.\n"
+        + "Output a JSON list of segmentation masks where each entry contains the 2D\n"
+        + "bounding box in the key \"box_2d\", the segmentation mask in key \"mask\", and\n"
+        + "the text label in the key \"label\". Use descriptive labels.";
+
+Map<String, Object> boundingBoxSchema =
+    Map.of(
+        "type", "object",
+        "properties",
+            Map.of(
+                "box_2d",
+                    Map.of(
+                        "type", "array",
+                        "items", Map.of("type", "integer"),
+                        "description",
+                            "The 2D bounding box of the item as [ymin, xmin, ymax, xmax] normalized to 0-1000."),
+                "mask",
+                    Map.of(
+                        "type", "array",
+                        "items", Map.of("type", "array", "items", Map.of("type", "integer")),
+                        "description",
+                            "The segmentation mask of the item as a polygon of [x,y] coordinates, normalized to 0-1000."),
+                "label",
+                    Map.of("type", "string", "description", "A descriptive label for the item.")),
+        "required", List.of("box_2d", "mask", "label"));
+
+Map<String, Object> boundingBoxesSchema =
+    Map.of(
+        "type", "object",
+        "properties", Map.of("boxes", Map.of("type", "array", "items", boundingBoxSchema)),
+        "required", List.of("boxes"));
+
+CreateModelInteractionResponseFormat format =
+    CreateModelInteractionResponseFormat.of(
+        ResponseFormat.of(
+            TextResponseFormat.builder()
+                .mimeType(TextResponseFormatMimeType.APPLICATION_JSON)
+                .schema(boundingBoxesSchema)
+                .build()));
+
+Content textContent = TextContent.builder().text(prompt).build();
+Content imageContent =
+    ImageContent.builder()
+        .uri("https://example.com/image.png")
+        .mimeType(ImageContentMimeType.IMAGE_PNG)
+        .build();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.ofContent(Arrays.asList(textContent, imageContent)))
+        .responseFormat(format)
+        .generationConfig(GenerationConfig.builder().thinkingLevel(ThinkingLevel.MINIMAL).build())
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+System.out.println("Segmentation results: " + interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -578,7 +915,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": [
       {"type": "text", "text": "Give the segmentation masks for the wooden and glass items.\nOutput a JSON list of segmentation masks where each entry contains the 2D\nbounding box in the key \"box_2d\", the segmentation mask in key \"mask\", and\nthe text label in the key \"label\". Use descriptive labels."},
       {
@@ -615,87 +952,75 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-![Un tavolo con cupcake, con gli oggetti in legno e vetro evidenziati](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=it)
+![桌上擺著杯子蛋糕，木製和玻璃物品以醒目方式顯示](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=zh-tw)
 
-Un esempio di output di segmentazione con oggetti e maschere di segmentazione
+含有物件和區隔遮罩的區隔輸出範例
 
-## Formati di immagine supportati
+## 支援的圖片格式
 
-Gemini supporta i seguenti tipi MIME di formati immagine:
+Gemini 支援下列圖片格式 MIME 類型：
 
 - PNG - `image/png`
 - JPEG - `image/jpeg`
-- WEBP - `image/webp`
+- WebP - `image/webp`
 - HEIC - `image/heic`
 - HEIF - `image/heif`
 
-Per scoprire altri metodi di input dei file, consulta la guida
-[Metodi di input dei file](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=it).
+如要瞭解其他檔案輸入方式，請參閱「[檔案輸入方式](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-tw)」指南。
 
-## Funzionalità
+## 功能
 
-Tutte le versioni del modello Gemini sono multimodali e possono essere utilizzate in un'ampia gamma
-di attività di elaborazione delle immagini e visione artificiale, tra cui, a titolo esemplificativo,
-la didascalia delle immagini, le domande e risposte visive, la classificazione delle immagini,
-il rilevamento e la segmentazione degli oggetti.
+所有 Gemini 模型版本都是多模態模型，可用於各種圖像處理和電腦視覺工作，包括但不限於圖像說明文字、圖像問答、圖像分類、物件偵測和分割。
 
-Gemini può ridurre la necessità di utilizzare modelli di ML specializzati a seconda dei tuoi requisiti di qualità e prestazioni.
+視品質和效能需求而定，Gemini 可減少使用專業機器學習模型的需求。
 
-Le versioni più recenti del modello sono addestrate in modo specifico per migliorare l'accuratezza di attività specializzate, oltre alle funzionalità generiche, come il [rilevamento degli oggetti](#object-detection) e la [segmentazione](#segmentation) avanzati.
+最新模型版本經過特別訓練，除了通用功能外，還能提升特定工作的準確度，例如強化[物件偵測](#object-detection)和[區隔](#segmentation)。
 
-## Limitazioni e informazioni tecniche chiave
+## 限制和重要技術資訊
 
-### Limite di file
+### 檔案限制
 
-I modelli Gemini supportano un massimo di 3600 file immagine per richiesta.
+Gemini 模型每項要求最多支援 3,600 個圖片檔案。
 
-### Calcolo dei token
+### 代幣計算
 
-- 258 token se entrambe le dimensioni sono <= 384 pixel.
-  Le immagini più grandi vengono suddivise in riquadri di 768 x 768 pixel, ognuno dei quali costa 258 token.
+- 如果兩個維度都 <= 384 像素，則為 258 個權杖。
+  較大的圖片會分割成 768x768 像素的圖塊，每個圖塊需支付 258 個權杖。
 
-Una formula approssimativa per calcolare il numero di riquadri è la seguente:
+計算圖塊數量的粗略公式如下：
 
-- Calcola la dimensione dell'unità di ritaglio, che è approssimativamente: `floor(min(width, height)` / 1,5.
-- Dividi ogni dimensione per la dimensione dell'unità di ritaglio e moltiplica i risultati per ottenere il
-  numero di riquadri.
+- 計算裁剪單元大小，大約是 `floor(min(width, height)` / 1.5)。
+- 將每個維度除以裁剪單元大小，然後相乘，即可取得圖塊數量。
 
-Ad esempio, per un'immagine di dimensioni 960 x 540, la dimensione dell'unità di ritaglio
-è 360. Dividi ogni dimensione per 360 e il numero di riquadri è 3 \* 2 = 6.
+舉例來說，如果圖片尺寸為 960x540，裁剪單位大小為 360。將每個維度除以 360，圖塊數量為 3 \* 2 = 6。
 
-### Risoluzione dei contenuti multimediali
+### 媒體解析度
 
-Gemini 3 introduce un controllo granulare sull'elaborazione della visione multimodale con il parametro
-`media_resolution`. Il parametro `media_resolution` determina il
-**numero massimo di token allocati per ogni immagine di input o frame video.**
-Risoluzioni più elevate migliorano la capacità del modello di leggere testi piccoli o identificare piccoli dettagli, ma aumentano l'utilizzo di token e la latenza.
+Gemini 3 推出 `media_resolution` 參數，可精細控管多模態視覺處理作業。`media_resolution` 參數會決定**每個輸入圖片或影片影格分配到的詞元數量上限。**
+解析度越高，模型就越能辨識細小文字或細節，但也會增加權杖用量和延遲時間。
 
-## Suggerimenti e best practice
+## 提示與最佳做法
 
-- Verifica che le immagini siano ruotate correttamente.
-- Utilizza immagini chiare e non sfocate.
-- Quando utilizzi una singola immagine con testo, posiziona il prompt di testo *prima* dell'immagine nell'array `input`.
+- 確認圖片已正確旋轉。
+- 使用清晰的圖片，避免模糊不清。
+- 使用含有文字的單一圖片時，請將文字提示詞*放在* `input` 陣列中的圖片前面。
 
-## Passaggi successivi
+## 後續步驟
 
-Questa guida mostra come caricare file immagine e generare output di testo
-dagli input immagine. Per saperne di più, consulta le seguenti risorse:
+本指南說明如何上傳圖片檔案，以及如何從圖片輸入內容生成文字輸出內容。如要進一步瞭解相關內容，請參閱下列資源：
 
-- [API Files](https://ai.google.dev/gemini-api/docs/files?hl=it): scopri di più sul caricamento e sulla gestione dei file da utilizzare con Gemini.
-- [Istruzioni di sistema](https://ai.google.dev/gemini-api/docs/text-generation?hl=it#system-instructions):
-  Le istruzioni di sistema ti consentono di orientare il comportamento del modello in base alle tue
-  esigenze e ai tuoi casi d'uso specifici.
-- [Strategie di richiesta di file](https://ai.google.dev/gemini-api/docs/files?hl=it#prompt-guide): l'API
-  Gemini supporta le richieste con dati di testo, immagine, audio e video, note anche come richieste multimodali.
-- [Linee guida per la sicurezza](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=it): a volte i modelli di AI generativa producono output inaspettati, ad esempio output imprecisi, distorti o offensivi. Il post-processing e la valutazione umana sono essenziali per
-  limitare il rischio di danni derivanti da questi output.
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw)：進一步瞭解如何上傳及管理檔案，以便搭配 Gemini 使用。
+- [系統指令](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-tw#system-instructions)：
+  系統指令可根據特定需求和用途，引導模型行為。
+- [檔案提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw#prompt-guide)：Gemini API 支援使用文字、圖片、音訊和影片資料提示，也稱為多模態提示。
+- [安全指引](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=zh-tw)：生成式 AI 模型有時會產生出乎意料的輸出內容，例如不準確、有偏見或令人反感的內容。後續處理和人工評估是不可或缺的步驟，有助於降低這類輸出內容造成危害的風險。
 
-Invia feedback
+提供意見
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Ultimo aggiornamento 2026-09-12 UTC.
+上次更新時間：2026-09-18 (世界標準時間)。
 
-Vuoi dirci altro?
+想進一步說明嗎？
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-12 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-18 (世界標準時間)。"],[],[]]

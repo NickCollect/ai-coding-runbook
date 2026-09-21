@@ -1,31 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-spatial?hl=he
-fetched_at: 2026-09-14T05:38:57.009849+00:00
-title: "\u05d7\u05e9\u05d9\u05d1\u05d4 \u05de\u05e8\u05d7\u05d1\u05d9\u05ea \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-spatial?hl=th
+fetched_at: 2026-09-21T05:44:15.048923+00:00
+title: "\u0e01\u0e32\u0e23\u0e43\u0e2b\u0e49\u0e40\u0e2b\u0e15\u0e38\u0e1c\u0e25\u0e40\u0e0a\u0e34\u0e07\u0e1e\u0e37\u0e49\u0e19\u0e17\u0e35\u0e48 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs/generate-content?hl=he)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs/generate-content?hl=th)
 
-שליחת משוב
+ส่งความคิดเห็น
 
-# חשיבה מרחבית
+# การให้เหตุผลเชิงพื้นที่
 
-מודלים של Gemini Robotics ER יכולים להצביע על אובייקטים, לעקוב אחריהם בסרטון, לזהות אותם באמצעות תיבות תוחמות וליצור מסלולי תנועה. כל הדוגמאות בדף הזה מבוססות על הנחיות בשפה טבעית עם `generateContent`.
+โมเดล Gemini Robotics ER สามารถชี้ไปยังออบเจ็กต์ ติดตามออบเจ็กต์ในวิดีโอ ตรวจจับออบเจ็กต์ด้วยกรอบล้อมรอบ และสร้างเส้นทางการเคลื่อนที่ ตัวอย่างทั้งหมดในหน้านี้ใช้พรอมต์ภาษาธรรมชาติกับ `generateContent`
 
-קוד מלא שניתן להרצה זמין ב-[Robotics cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+ดูโค้ดที่เรียกใช้ได้ทั้งหมดที่
+[Cookbook สำหรับ Robotics](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)
 
-## הצבעה על אובייקטים
+## ชี้ไปยังออบเจ็กต์
 
-בדוגמה הבאה מוצגים אובייקטים ספציפיים בתמונה ומוחזרות הקואורדינטות המנורמלות של `[y, x]`:
+ตัวอย่างต่อไปนี้จะค้นหาออบเจ็กต์ที่เฉพาะเจาะจงในรูปภาพและแสดงผลพิกัด `[y, x]` ที่เป็นค่าปกติ
 
 ### Python
 
@@ -98,7 +99,7 @@ curl -X POST \
   }'
 ```
 
-הפלט יהיה מערך JSON שמכיל אובייקטים, שלכל אחד מהם יש `point` (קואורדינטות `[y, x]` מנורמלות) ו-`label` שמזהה את האובייקט.
+เอาต์พุตจะเป็นอาร์เรย์ JSON ที่มีออบเจ็กต์ ซึ่งแต่ละออบเจ็กต์จะมี `point` (พิกัด `[y, x]` ที่เป็นค่าปกติ) และ `label` ที่ระบุออบเจ็กต์
 
 ### JSON
 
@@ -117,13 +118,13 @@ curl -X POST \
 ]
 ```
 
-בתמונה הבאה אפשר לראות דוגמה לאופן שבו הנקודות האלה יכולות להופיע:
+รูปภาพต่อไปนี้แสดงตัวอย่างวิธีแสดงจุดเหล่านี้
 
-![דוגמה שמציגה את הנקודות של אובייקטים בתמונה](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=he)
+![ตัวอย่างที่แสดงจุดของออบเจ็กต์ในรูปภาพ](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=th)
 
-## מעקב אחרי אובייקטים בסרטון
+## การติดตามออบเจ็กต์ในวิดีโอ
 
-‫Gemini Robotics ER 2 יכול גם לנתח פריימים של סרטונים כדי לעקוב אחרי אובייקטים לאורך זמן. רשימה של פורמטים נתמכים של סרטונים זמינה במאמר בנושא [קלט של סרטונים](https://ai.google.dev/gemini-api/docs/video-understanding?hl=he#supported-formats).
+Gemini Robotics ER 2 ยังวิเคราะห์เฟรมวิดีโอเพื่อติดตามออบเจ็กต์เมื่อเวลาผ่านไปได้ด้วย ดูรายการรูปแบบวิดีโอที่รองรับได้ที่ [อินพุตวิดีโอ](https://ai.google.dev/gemini-api/docs/video-understanding?hl=th#supported-formats)
 
 ### Python
 
@@ -162,10 +163,9 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-## זיהוי אובייקטים ותיבות תוחמות
+## การตรวจจับออบเจ็กต์และกรอบล้อมรอบ
 
-בנוסף לנקודות, אפשר להנחות את המודל להחזיר תיבות תוחמות דו-ממדיות,
-שמספקות פרטים מרחביים נוספים לגבי אובייקטים שזוהו.
+นอกเหนือจากจุดแล้ว คุณยังสามารถพรอมต์ให้โมเดลแสดงผลกรอบล้อมรอบ 2 มิติ ซึ่งให้รายละเอียดเชิงพื้นที่เพิ่มเติมสำหรับออบเจ็กต์ที่ตรวจพบ
 
 ### Python
 
@@ -203,12 +203,11 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-## מסלולים
+## เส้นทาง
 
-‫Gemini Robotics ER 2 יכול ליצור רצפים של נקודות שמגדירות מסלול, שימושי להנחיית תנועת הרובוט.
+Gemini Robotics ER 2 สามารถสร้างลำดับของจุดที่กำหนดเส้นทาง ซึ่งมีประโยชน์สำหรับการนำทางการเคลื่อนที่ของหุ่นยนต์
 
-בדוגמה הזו, המשתמש מבקש מסלול להזזת עט אדום למארגן, כולל הערכה של נקודות הביניים. הקוד צומצם כדי להציג
-רק את ההנחיה.
+ตัวอย่างนี้ขอเส้นทางเพื่อย้ายปากกาสีแดงไปยังกล่องใส่เครื่องเขียน รวมถึงการประมาณจุดอ้างอิงระหว่างทาง เราได้ลดโค้ดลงเพื่อแสดงเฉพาะพรอมต์
 
 ### Python
 
@@ -221,11 +220,9 @@ prompt = """
         """
 ```
 
-## מפנים מקום למחשב נייד
+## การจัดพื้นที่สำหรับแล็ปท็อป
 
-בדוגמה הזו אפשר לראות איך Gemini Robotics ER מנתח מרחב. ההנחיה
-מבקשת מהמודל לזהות איזה אובייקט צריך להזיז כדי ליצור
-מקום לפריט אחר.
+ตัวอย่างนี้แสดงวิธีที่ Gemini Robotics ER สามารถให้เหตุผลเกี่ยวกับพื้นที่ พรอมต์ขอให้โมเดลระบุออบเจ็กต์ที่ต้องย้ายเพื่อสร้างพื้นที่สำหรับรายการอื่น
 
 ### Python
 
@@ -261,7 +258,7 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-התגובה מכילה קואורדינטה דו-ממדית של האובייקט שנותן מענה לשאלה של המשתמש. במקרה הזה, האובייקט שצריך להזיז כדי לפנות מקום למחשב נייד.
+การตอบกลับจะมีพิกัด 2 มิติของออบเจ็กต์ที่ตอบคำถามของผู้ใช้ ซึ่งในกรณีนี้คือออบเจ็กต์ที่ควรย้ายเพื่อให้มีพื้นที่สำหรับแล็ปท็อป
 
 ```
 [
@@ -269,11 +266,11 @@ print(image_response.text)
 ]
 ```
 
-![דוגמה שמראה איזה אובייקט צריך להעביר כדי שאובייקט אחר](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=he)
+![ตัวอย่างที่แสดงว่าต้องย้ายออบเจ็กต์ใดสำหรับออบเจ็กต์อื่น](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=th)
 
-## אריזת ארוחת צהריים
+## การจัดเตรียมอาหารกลางวัน
 
-המודל יכול גם לספק הוראות למשימות מרובות שלבים ולהצביע על אובייקטים רלוונטיים לכל שלב. בדוגמה הזו אפשר לראות איך המודל מתכנן סדרה של שלבים לאריזת תיק לארוחת צהריים.
+โมเดลยังสามารถให้คำแนะนำสำหรับงานหลายขั้นตอนและชี้ไปยังออบเจ็กต์ที่เกี่ยวข้องสำหรับแต่ละขั้นตอนได้ด้วย ตัวอย่างนี้แสดงวิธีที่โมเดลวางแผนชุดขั้นตอนเพื่อจัดเตรียมอาหารกลางวันใส่กระเป๋า
 
 ### Python
 
@@ -310,13 +307,13 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-התשובה לפרומפט הזה היא סדרה של הוראות מפורטות לאריזת תיק לארוחת צהריים על סמך קלט התמונה.
+การตอบกลับของพรอมต์นี้คือชุดคำแนะนำทีละขั้นตอนเกี่ยวกับวิธีจัดเตรียมอาหารกลางวันใส่กระเป๋าจากรูปภาพอินพุต
 
-**תמונת קלט**
+**รูปภาพอินพุต**
 
-![תמונה של קופסת אוכל ופריטים שאפשר להכניס לתוכה](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=he)
+![รูปภาพกล่องอาหารกลางวันและสิ่งของที่จะใส่ลงในกล่อง](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=th)
 
-**פלט המודל**
+**เอาต์พุตโมเดล**
 
 ```
 Based on the image, here is a plan to pack the lunch box and lunch bag:
@@ -339,19 +336,19 @@ Here is the list of objects and their locations:
 *   [{"point": [448, 501], "label": "brown lunch bag"}]
 ```
 
-## המאמרים הבאים
+## ขั้นตอนถัดไป
 
-- [יכולות אג'נטיות](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=he) – ביצוע קוד, קריאת מכשירים, הוספת הערות לתמונות.
-- [תיזמור משימות](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=he) – משימות ארוכות טווח עם ממשקי API מותאמים אישית של רובוטים.
-- [רובוטיקה עם סטרימינג](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=he) – סטרימינג דו-כיווני בזמן אמת (Gemini Robotics ER 2 בלבד).
-- [הבנת סרטונים](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=he) – איתור רגעים וסיווג התקדמות (Gemini Robotics ER 2 בלבד).
+- [ความสามารถด้าน Agentic AI](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=th) — การเรียกใช้โค้ด การอ่านเครื่องมือ การใส่คำอธิบายประกอบรูปภาพ
+- [การจัดระเบียบงาน](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=th) — งานระยะยาวที่มี API ของหุ่นยนต์ที่กำหนดเอง
+- [Robotics พร้อมการสตรีม](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=th) — การสตรีมแบบ 2 ทางแบบเรียลไทม์ (Gemini Robotics ER 2 เท่านั้น)
+- [ความเข้าใจวิดีโอ](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=th) — การค้นหาช่วงเวลาและการจัดประเภทความคืบหน้า (Gemini Robotics ER 2 เท่านั้น)
 
-שליחת משוב
+ส่งความคิดเห็น
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-עדכון אחרון: 2026-09-09 (שעון UTC).
+อัปเดตล่าสุด 2026-09-09 UTC
 
-רוצה לתת לנו משוב?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-09 (שעון UTC)."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-09 UTC"],[],[]]

@@ -1,0 +1,66 @@
+---
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=he
+fetched_at: 2026-09-21T05:57:21.395386+00:00
+title: "\u202bGemini 3.8 \u05d1\u05de\u05e6\u05d1 \u05dc\u05d9\u05d9\u05d1 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+---
+
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+
+שליחת משוב
+
+# ‫Gemini 3.8 במצב לייב
+
+‫Gemini 3.8 Live היא האפשרות שמוגדרת כברירת מחדל ברוב המקרים שבהם רוצים להשתמש בסוכן קולי עם השהיה נמוכה, וליהנות מדיאלוג בזמן אמת ללא עיכובים שנובעים מהסקת מסקנות. הוא תומך בהסקה משולבת, בקריאה אסינכרונית לפונקציה, בעדכונים מלאים של תוכן הלקוח של הסשן ובסטרימינג מובנה של אודיו.
+
+[לניסיון ב-Google AI Studio](https://aistudio.google.com/live?model=gemini-3.8-live&hl=he)
+
+## מאמרי עזרה
+
+מידע מקיף על התכונות והיכולות זמין במדריך בנושא [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=he).
+
+## gemini-3.8-live
+
+| נכס | תיאור |
+| --- | --- |
+| id\_cardקוד מודל | `gemini-3.8-live` |
+| שמירהסוגי נתונים נתמכים | **קלטים**  טקסט, תמונות, אודיו, וידאו  **פלט**  טקסט ואודיו |
+| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  131,072  **מגבלת טוקנים של פלט**  65,536 |
+| handymanיכולות | **[יצירת אודיו](https://ai.google.dev/gemini-api/docs/speech-generation?hl=he)**  נתמך  **[שמירת נתונים במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he)**  לא נתמך  **[הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he)**  לא נתמך  **[חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he)**  לא נתמך  **[בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he)**  נתמך  **[עיגון בעזרת מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he)**  לא נתמך  **[יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he)**  לא נתמך  ‫**[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=he)**  נתמך  **[חיפוש עם עיגון בנתונים](https://ai.google.dev/gemini-api/docs/google-search?hl=he)**  נתמך  **[פלטים מובנים](https://ai.google.dev/gemini-api/docs/structured-output?hl=he)**  לא נתמך  **[תהליך החשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he)**  נתמך (הסברים ורציונל משולבים)  **[הקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he)**  לא נתמך |
+| speedאפשרויות צריכה | ‫**[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he)**  לא נתמך |
+| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - יציב: `gemini-3.8-live` |
+| calendar\_monthהעדכון האחרון | ספטמבר 2026 |
+| id\_cardכרטיס מודל | [כרטיס מודל](https://deepmind.google/models/model-cards/gemini-3-8-audio/?hl=he) |
+
+## מעבר מ-Gemini 3.1 Flash Live
+
+‫Gemini 3.8 Live מספק אינטראקציות קוליות עם זמן טעינה קצר במיוחד, ומרחיב את התמיכה בתהליכי עבודה אסינכרוניים. אם אתם מעבירים נתונים מ-`gemini-3.1-flash-live-preview`, כדאי לעיין בעדכונים הבאים:
+
+- **מחרוזת המודל**: מעדכנים את מחרוזת המודל מ-`gemini-3.1-flash-live-preview` ל-`gemini-3.8-live`.
+- **רמת חשיבה**: `thinking_level` לא אפשרי עבור `gemini-3.8-live`.
+  לא לכלול את `thinking_level` (או `thinking_config`) בהגדרת הסשן.
+- **הפעלה אסינכרונית של פונקציות**: ביצוע אסינכרוני (`behavior: NON_BLOCKING`) הוא עכשיו מצב ברירת המחדל להפעלת פונקציות. עדיין אפשר להשתמש במצב חסימה סינכרוני לצורך תאימות לאחור. לשם כך, צריך להגדיר `behavior: BLOCKING` on בהצהרות על הכלים. יש תמיכה בתזמון פונקציות (`SILENT`, ‏ `WHEN_IDLE`,‏ `INTERRUPTED`).
+- **עדכוני תוכן של לקוחות**: יש תמיכה ב-`send_client_content` לאורך כל מחזור החיים של הסשן עם תפקידים מפורשים (`user` או `model`). הגדרה של `turn_complete=true` קוטעת ללא תנאי את יצירת המודל הפעיל. אם שולחים תוכן בלי `turn_complete`, השרת מחכה להודעות הבאות לפני שהוא מגיב.
+- **סינון אודיו יזום**: סינון האודיו היזום מופעל עכשיו באופן קבוע. הגדרת `proactive_audio: false` מחזירה שגיאה.
+- **דיאלוג אפקטיבי**: דיאלוג אפקטיבי מוסר מה-API. מסירים מהקוד את כל ההגדרות של `enable_affective_dialog`.
+- **היקף הכיסוי**: ברירת המחדל היא `TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO`. כברירת מחדל, פריימים של סרטונים נשלחים למודל, לכן כדאי לשלוח פריימים רק כשצריך כדי לנהל את ההקשר והעלות.
+- **אמצעי תגובה**: אודיו הוא אמצעי התגובה הנתמך. הפעלת תמלול אודיו של הפלט אם האפליקציה דורשת תמליל טקסט.
+
+טבלת [השוואה בין מודלים](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=he#model-comparison) מציגה השוואה בין כל המודלים של Live API.
+
+שליחת משוב
+
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+
+עדכון אחרון: 2026-09-17 (שעון UTC).
+
+רוצה לתת לנו משוב?
+
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-17 (שעון UTC)."],[],[]]

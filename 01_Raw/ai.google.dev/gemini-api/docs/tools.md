@@ -1,114 +1,112 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tools?hl=de
-fetched_at: 2026-09-14T05:41:00.769873+00:00
-title: "Tools mit der Gemini API verwenden \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tools?hl=th
+fetched_at: 2026-09-21T05:49:24.792788+00:00
+title: "\u0e01\u0e32\u0e23\u0e43\u0e0a\u0e49\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e21\u0e37\u0e2d\u0e01\u0e31\u0e1a Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Feedback geben
+ส่งความคิดเห็น
 
-# Tools mit der Gemini API verwenden
+# การใช้เครื่องมือกับ Gemini API
 
-Tools erweitern die Funktionen von Gemini-Modellen und ermöglichen es ihnen, in der Welt zu agieren, auf Echtzeitinformationen zuzugreifen und komplexe Berechnungsaufgaben auszuführen. Modelle können Tools sowohl in Standardinteraktionen mit Anfragen und Antworten als auch in
-Echtzeit-Streamingsitzungen mit der [Live API](https://ai.google.dev/gemini-api/docs/live-tools?hl=de) verwenden.
+เครื่องมือจะขยายขีดความสามารถของโมเดล Gemini โดยช่วยให้โมเดลดำเนินการต่างๆ ในโลกแห่งความเป็นจริง เข้าถึงข้อมูลแบบเรียลไทม์ และทำงานด้านการคำนวณที่ซับซ้อนได้ โมเดลสามารถใช้เครื่องมือได้ทั้งในการโต้ตอบแบบคำขอและการตอบกลับมาตรฐาน รวมถึง
+เซสชันการสตรีมแบบเรียลไทม์โดยใช้ [Live API](https://ai.google.dev/gemini-api/docs/live-tools?hl=th)
 
-Tools sind bestimmte Funktionen (z. B. Google Suche oder Codeausführung), die ein Modell verwenden kann, um Anfragen zu beantworten. Die Gemini API bietet eine Reihe vollständig
-verwalteter, integrierter Tools. Sie können aber auch benutzerdefinierte Tools mit [Funktions
-aufrufen](https://ai.google.dev/gemini-api/docs/function-calling?hl=de) definieren.
+เครื่องมือคือขีดความสามารถเฉพาะ (เช่น Google Search หรือการรันโค้ด) ที่โมเดลใช้เพื่อตอบคำค้นหาได้ Gemini API มีชุดเครื่องมือในตัวที่จัดการโดยสมบูรณ์
+หรือคุณจะกำหนดเครื่องมือที่กำหนดเองโดยใช้ [การเรียก
+ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)ก็ได้
 
-Informationen zum Erstellen mehrstufiger, zielorientierter Systeme finden Sie in der [Übersicht zu Agents](https://ai.google.dev/gemini-api/docs/agents?hl=de).
+หากต้องการสร้างระบบหลายขั้นตอนที่มุ่งเน้นเป้าหมาย โปรดดู[ภาพรวม
+ของ Agent](https://ai.google.dev/gemini-api/docs/agents?hl=th)
 
-## Verfügbare integrierte Tools
+## เครื่องมือในตัวที่พร้อมใช้งาน
 
-| Tool | Beschreibung | Anwendungsfälle |
+| เครื่องมือ | คำอธิบาย | กรณีการใช้งาน |
 | --- | --- | --- |
-| [Google Suche](https://ai.google.dev/gemini-api/docs/google-search?hl=de) | Antworten mit aktuellen Ereignissen und Fakten aus dem Web untermauern, um Halluzinationen zu reduzieren. | Fragen zu aktuellen Ereignissen beantworten, Fakten mit verschiedenen Quellen überprüfen. |
-| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=de) | Standortbezogene Assistenten erstellen, die Orte finden, Wegbeschreibungen abrufen und umfassende lokale Informationen bereitstellen können. | Reisepläne mit mehreren Stationen erstellen, lokale Unternehmen anhand von Nutzerkriterien finden. |
-| [Codeausführung](https://ai.google.dev/gemini-api/docs/code-execution?hl=de) | Das Modell kann Python-Code schreiben und ausführen, um mathematische Probleme zu lösen oder Daten genau zu verarbeiten. | Komplexe mathematische Gleichungen lösen, Textdaten präzise verarbeiten und analysieren. |
-| [URL-Kontext](https://ai.google.dev/gemini-api/docs/url-context?hl=de) | Das Modell kann Inhalte von bestimmten Webseiten oder aus bestimmten Dokumenten lesen und analysieren. | Fragen basierend auf bestimmten URLs oder Dokumenten beantworten, Informationen auf verschiedenen Webseiten abrufen. |
-| [Computernutzung (Vorschau)](https://ai.google.dev/gemini-api/docs/computer-use?hl=de) | Gemini kann einen Bildschirm anzeigen und Aktionen generieren, um mit Webbrowser-UIs zu interagieren (clientseitige Ausführung). | Wiederholte webbasierte Workflows automatisieren, Benutzeroberflächen von Webanwendungen testen. |
-| [Dateisuche](https://ai.google.dev/gemini-api/docs/file-search?hl=de) | Eigene Dokumente indexieren und durchsuchen, um Retrieval-Augmented Generation (RAG) zu ermöglichen. | Technische Handbücher durchsuchen, Fragen zu proprietären Daten beantworten. |
+| [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th) | อิงคำตอบตามข้อเท็จจริงและเหตุการณ์ปัจจุบันจากเว็บเพื่อลดการสร้างข้อมูลที่ไม่ถูกต้อง | ตอบคำถามเกี่ยวกับเหตุการณ์ล่าสุด ยืนยันข้อเท็จจริงด้วยแหล่งข้อมูลที่หลากหลาย |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th) | สร้างผู้ช่วยที่รับรู้ตำแหน่งซึ่งสามารถค้นหาสถานที่ ขอเส้นทาง และให้บริบทท้องถิ่นที่สมบูรณ์ได้ | วางแผนการเดินทางที่มีหลายจุดแวะ ค้นหาธุรกิจในท้องถิ่นตามเกณฑ์ของผู้ใช้ |
+| [การรันโค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th) | อนุญาตให้โมเดลเขียนและรันโค้ด Python เพื่อแก้ปัญหาทางคณิตศาสตร์หรือประมวลผลข้อมูลได้อย่างแม่นยำ | แก้สมการทางคณิตศาสตร์ที่ซับซ้อน ประมวลผลและวิเคราะห์ข้อมูลข้อความได้อย่างแม่นยำ |
+| [บริบท URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th) | สั่งให้โมเดลอ่านและวิเคราะห์เนื้อหาจากหน้าเว็บหรือเอกสารที่เฉพาะเจาะจง | ตอบคำถามโดยอิงตาม URL หรือเอกสารที่เฉพาะเจาะจง ดึงข้อมูลจากหน้าเว็บต่างๆ |
+| [การใช้คอมพิวเตอร์ (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/computer-use?hl=th) | เปิดใช้ Gemini เพื่อดูหน้าจอและสร้างการดำเนินการเพื่อโต้ตอบกับ UI ของเว็บเบราว์เซอร์ (การรันฝั่งไคลเอ็นต์) | ทำให้เวิร์กโฟลว์ที่อิงตามเว็บซึ่งต้องทำซ้ำๆ เป็นระบบอัตโนมัติ ทดสอบ UI ของเว็บแอปพลิเคชัน |
+| [การค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th) | จัดทำดัชนีและค้นหาเอกสารของคุณเองเพื่อเปิดใช้ Retrieval Augmented Generation (RAG) | ค้นหาคู่มือทางเทคนิค ตอบคำถามจากข้อมูลที่เป็นกรรมสิทธิ์ |
 
-Auf der [Preisseite](https://ai.google.dev/gemini-api/docs/pricing?hl=de#pricing_for_tools) finden Sie Details
-zu den Kosten für bestimmte Tools.
+ดูรายละเอียดเกี่ยวกับค่าใช้จ่ายที่เกี่ยวข้องกับเครื่องมือที่เฉพาะเจาะจงได้ใน[หน้าการกำหนดราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th#pricing_for_tools)
 
-## Funktionsweise der Toolausführung
+## วิธีการทำงานของการรันเครื่องมือ
 
-Mit Tools kann das Modell während einer Unterhaltung Aktionen anfordern. Der Ablauf unterscheidet sich je nachdem, ob das Tool integriert (von Google verwaltet) oder benutzerdefiniert (von Ihnen verwaltet) ist.
+เครื่องมือช่วยให้โมเดลขอการดำเนินการระหว่างการสนทนาได้ ขั้นตอนจะแตกต่างกันไปโดยขึ้นอยู่กับว่าเครื่องมือเป็นเครื่องมือในตัว (จัดการโดย Google) หรือเครื่องมือที่กำหนดเอง (จัดการโดยคุณ)
 
-### Ablauf für integrierte Tools
+### ขั้นตอนการทำงานของเครื่องมือในตัว
 
-Bei integrierten Tools (Google Suche, Google Maps, URL-Kontext, Dateisuche, Codeausführung) erfolgt der gesamte Prozess in einem API-Aufruf:
+สำหรับเครื่องมือในตัว (Google Search, Google Maps, บริบท URL, การค้นหาไฟล์, การรันโค้ด) กระบวนการทั้งหมดจะเกิดขึ้นภายในหนึ่งการเรียก API ดังนี้
 
-1. **Sie** senden einen Prompt: „Was ist die Quadratwurzel des aktuellen Aktienkurses von GOOG?“
-2. **Gemini** entscheidet, dass Tools erforderlich sind, und führt sie auf den Google-Servern aus (z.B. wird nach dem Aktienkurs gesucht und dann Python-Code ausgeführt, um die Quadratwurzel zu berechnen).
-3. **Gemini** sendet die endgültige Antwort zurück, die auf den Toolergebnissen basiert.
+1. **คุณ** ส่งพรอมต์ว่า "รากที่ 2 ของราคาหุ้นล่าสุดของ GOOG คืออะไร"
+2. **Gemini** ตัดสินใจว่าต้องใช้เครื่องมือและรันเครื่องมือเหล่านั้นในเซิร์ฟเวอร์ของ Google (เช่น ค้นหาราคาหุ้น แล้วรันโค้ด Python เพื่อคำนวณรากที่ 2)
+3. **Gemini** ส่งคำตอบสุดท้ายกลับมาโดยอิงตามผลลัพธ์ของเครื่องมือ
 
-### Ablauf für benutzerdefinierte Tools (Funktionsaufrufe)
+### ขั้นตอนการทำงานของเครื่องมือที่กำหนดเอง (การเรียกฟังก์ชัน)
 
-Bei benutzerdefinierten Tools und der Computernutzung wird die Ausführung von Ihrer Anwendung übernommen:
+สำหรับเครื่องมือที่กำหนดเองและการใช้คอมพิวเตอร์ แอปพลิเคชันของคุณจะจัดการการรัน
 
-1. **Sie** senden einen Prompt zusammen mit Funktionsdeklarationen (Tools).
-2. **Gemini** sendet möglicherweise strukturiertes JSON zurück, um eine bestimmte Funktion aufzurufen
-   (z. B. `{"name": "get_order_status", "args": {"order_id": "123"}}`),
-   immer mit einer eindeutigen `id`.
-3. **Sie** führen die Funktion in Ihrer Anwendung oder Umgebung aus.
-4. **Sie** senden die Funktionsergebnisse mit derselben `id` wie der Funktionsaufruf an Gemini zurück.
-5. **Gemini** verwendet die Ergebnisse, um eine endgültige Antwort oder einen weiteren Toolaufruf zu generieren.
+1. **คุณ** ส่งพรอมต์พร้อมกับการประกาศฟังก์ชัน (เครื่องมือ)
+2. **Gemini** อาจส่ง JSON ที่มีโครงสร้างกลับมาเพื่อเรียกฟังก์ชันที่เฉพาะเจาะจง
+   (เช่น `{"name": "get_order_status", "args": {"order_id": "123"}}`),
+   พร้อม `id` ที่ไม่ซ้ำกันเสมอ
+3. **คุณ** รันฟังก์ชันในแอปพลิเคชันหรือสภาพแวดล้อมของคุณ
+4. **คุณ** ส่งผลลัพธ์ของฟังก์ชันกลับไปที่ Gemini พร้อม `id` เดียวกันกับการเรียกฟังก์ชัน
+5. **Gemini** ใช้ผลลัพธ์เพื่อสร้างการตอบกลับสุดท้ายหรือการเรียกเครื่องมืออื่น
 
-Weitere Informationen finden Sie im [Leitfaden zu Funktionsaufrufen](https://ai.google.dev/gemini-api/docs/function-calling?hl=de).
+ดูข้อมูลเพิ่มเติมได้ใน[คู่มือการเรียกฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)
 
-### Ablauf für die Kombination von integrierten und benutzerdefinierten Tools
+### การรวมขั้นตอนการทำงานของเครื่องมือในตัวและเครื่องมือที่กำหนดเอง
 
-Bei Anfragen, die integrierte und benutzerdefinierte Tools (Funktionsaufrufe) kombinieren, verwendet das
-Modell die [Toolkontextzirkulation](https://ai.google.dev/gemini-api/docs/tool-combination?hl=de), um die
-Ausführung in verschiedenen Umgebungen zu koordinieren:
+สำหรับคำขอที่รวมเครื่องมือในตัวและเครื่องมือที่กำหนดเอง (การเรียกฟังก์ชัน) โมเดลจะใช้
+[การหมุนเวียนบริบทของเครื่องมือ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=th)เพื่อ
+ประสานงานการรันในสภาพแวดล้อมต่างๆ ดังนี้
 
-1. **Sie** senden einen Prompt und deklarieren die integrierten Tools und benutzerdefinierten Funktionen, die Sie aktivieren möchten. Legen Sie ein Flag fest, um die Kombinationsunterstützung zu aktivieren.
-2. **Gemini** führt integrierte Tools aus und übergibt die Steuerung an den Nutzer, wenn clientseitige Funktionsaufrufe generiert werden (welche zuerst ausgeführt werden, hängt vom Prompt und der Entscheidung des Modells ab). Es wird eine Antwort mit Folgendem zurückgesendet:
-   - Bestätigung des Toolaufrufs
-   - Ergebnisse der Toolantwort (können nach dem JSON-Code kommen, wenn das Modell zwei parallele Funktionsaufrufe generiert hat)
-   - Strukturiertes JSON zum Aufrufen Ihrer Funktion
-   - Verschlüsselte Gedankensignaturen, um den Kontext beizubehalten
-3. **Sie** führen die Funktion in Ihrer Anwendung oder Umgebung aus.
-4. **Sie** geben alle Teile der Gemini-Antwort sowie die Ergebnisse des Funktionsaufrufs zurück.
-5. **Gemini** generiert die endgültige Antwort mit dem kombinierten Kontext.
+1. **คุณ** ส่งพรอมต์และประกาศเครื่องมือในตัวและฟังก์ชันที่กำหนดเองที่ต้องการเปิดใช้ โดยตั้งค่าแฟล็กเพื่อเปิดใช้การรองรับการรวม
+2. **Gemini** รันเครื่องมือในตัวและส่งต่อให้ผู้ใช้หากมีการสร้างการเรียกฟังก์ชันฝั่งไคลเอ็นต์ (การรันฟังก์ชันใดก่อนขึ้นอยู่กับพรอมต์และสิ่งที่โมเดลตัดสินใจ) โดยจะส่งการตอบกลับพร้อมข้อมูลต่อไปนี้
+   - การยืนยันการเรียกเครื่องมือ
+   - ผลลัพธ์ของการตอบกลับของเครื่องมือ (อาจแสดงหลังจาก JSON หากโมเดลสร้างการเรียกฟังก์ชันแบบขนาน 2 รายการ)
+   - JSON ที่มีโครงสร้างเพื่อเรียกฟังก์ชัน
+   - ลายเซ็นความคิดที่เข้ารหัสเพื่อรักษาบริบท
+3. **คุณ** รันฟังก์ชันในแอปพลิเคชันหรือสภาพแวดล้อมของคุณ
+4. **คุณ** ส่งการตอบกลับของ Gemini ทุกส่วน รวมถึงผลลัพธ์การเรียกฟังก์ชัน
+5. **Gemini** สร้างการตอบกลับสุดท้ายโดยใช้บริบทที่รวมทั้งหมด
 
-Lesen Sie den [Leitfaden zur Toolkombination](https://ai.google.dev/gemini-api/docs/tool-combination?hl=de), um zu erfahren,
-wie Sie die Unterstützung für die Kombination von integrierten und benutzerdefinierten Tools aktivieren, und finden Sie Beispiele für die
-Kontextzirkulation.
+อ่าน[คู่มือการรวมเครื่องมือ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=th)เพื่อดูวิธีเปิดใช้การรองรับการรวมเครื่องมือในตัวและเครื่องมือที่กำหนดเอง รวมถึงตัวอย่างการหมุนเวียนบริบท
 
-## Strukturierte Ausgaben im Vergleich zu Funktionsaufrufen
+## เอาต์พุตที่มีโครงสร้างเทียบกับการเรียกฟังก์ชัน
 
-Gemini bietet zwei Methoden zum Generieren strukturierter Ausgaben. Verwenden Sie [Funktions
-aufrufe](https://ai.google.dev/gemini-api/docs/function-calling?hl=de), wenn das Modell einen
-Zwischenschritt ausführen muss, indem es eine Verbindung zu Ihren eigenen Tools oder Datensystemen herstellt. Verwenden Sie
-[strukturierte Ausgaben](https://ai.google.dev/gemini-api/docs/structured-output?hl=de), wenn die endgültige Antwort des Modells unbedingt einem bestimmten Schema entsprechen muss, z. B. zum Rendern
-einer benutzerdefinierten Benutzeroberfläche.
+Gemini มี 2 วิธีในการสร้างเอาต์พุตที่มีโครงสร้าง ใช้ [การเรียกฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)เมื่อโมเดลต้องดำเนินการขั้น
+กลางโดยเชื่อมต่อกับเครื่องมือหรือระบบข้อมูลของคุณเอง ใช้
+[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)เมื่อคุณต้องการให้
+การตอบกลับสุดท้ายของโมเดลเป็นไปตามสคีมาที่เฉพาะเจาะจงอย่างเคร่งครัด เช่น เพื่อแสดงผล
+UI ที่กำหนดเอง
 
-## Strukturierte Ausgaben mit Tools
+## เอาต์พุตที่มีโครงสร้างพร้อมเครื่องมือ
 
-Sie können [strukturierte Ausgaben](https://ai.google.dev/gemini-api/docs/structured-output?hl=de) mit
-integrierten Tools kombinieren, um sicherzustellen, dass Modellantworten, die auf externen Daten oder
-Berechnungen basieren, weiterhin einem strengen Schema entsprechen.
+คุณสามารถรวม[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)กับ
+เครื่องมือในตัวเพื่อให้การตอบกลับของโมเดลที่อิงตามข้อมูลหรือ
+การคำนวณภายนอกยังคงเป็นไปตามสคีมาที่เคร่งครัด
 
-Codebeispiele finden Sie unter [Strukturierte Ausgaben mit Tools](https://ai.google.dev/gemini-api/docs/structured-output?example=recipe&hl=de#structured_outputs_with_tools).
+ดูตัวอย่างโค้ดได้ที่[เอาต์พุตที่มีโครงสร้างพร้อมเครื่องมือ](https://ai.google.dev/gemini-api/docs/structured-output?example=recipe&hl=th#structured_outputs_with_tools)
 
-Feedback geben
+ส่งความคิดเห็น
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Zuletzt aktualisiert: 2026-09-11 (UTC).
+อัปเดตล่าสุด 2026-09-11 UTC
 
-Haben Sie Feedback für uns?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-11 (UTC)."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-11 UTC"],[],[]]

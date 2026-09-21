@@ -1,43 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=zh-TW
-fetched_at: 2026-09-14T05:41:04.489499+00:00
-title: "\u8a18\u9304\u548c\u8cc7\u6599\u96c6 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=he
+fetched_at: 2026-09-21T05:56:38.227930+00:00
+title: "\u05d9\u05d5\u05de\u05e0\u05d9\u05dd \u05d5\u05de\u05e2\u05e8\u05db\u05d9 \u05e0\u05ea\u05d5\u05e0\u05d9\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-提供意見
+שליחת משוב
 
-# 記錄和資料集
+# יומנים ומערכי נתונים
 
-本指南說明如何透過 Google AI Studio 資訊主頁查看 Gemini API 使用記錄，進一步瞭解模型行為，以及使用者與應用程式的互動方式。您可以使用記錄功能觀察及偵錯，並*視需要與 Google 分享使用意見回饋，協助改善 Gemini 的開發人員用途*。[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=zh-tw)
+במדריך הזה נסביר איך לצפות ביומנים של השימוש ב-Gemini API בלוח הבקרה של Google AI Studio, כדי להבין טוב יותר את התנהגות המודל ואת האינטראקציות של המשתמשים עם האפליקציות שלכם. אפשר להשתמש ברישום ביומן כדי לצפות, לנפות באגים ו*לשתף משוב על השימוש עם Google כדי לעזור לשפר את Gemini בתרחישי שימוש שונים של מפתחים*.[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=he)
 
-系統支援所有 `GenerateContent`、`BatchGenerateContent`、`StreamGenerateContent` API 呼叫，以及 [Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-tw) API 呼叫 (不含受管理代理程式)。包括透過 [OpenAI 相容性](https://ai.google.dev/gemini-api/docs/openai?hl=zh-tw)端點發出的呼叫。
+כל הקריאות ל-API של `GenerateContent`,‏ `BatchGenerateContent` ו-`StreamGenerateContent`, וקריאות ל-API של [Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=he), נתמכות, למעט קריאות ל-API של סוכנים מנוהלים. הם כוללים שיחות שמתבצעות דרך נקודות קצה (endpoints) של [תאימות ל-OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=he).
 
-## 設定專案記錄
+## הגדרת רישום ביומן של פרויקט
 
-根據預設，API 會儲存所有互動物件 (`store=true`)，以簡化伺服器端狀態管理功能的使用。相較之下，Generate Content API 預設不會儲存要求，且必須從 AI Studio 啟用每個要求或專案層級的儲存功能。
+כברירת מחדל, ה-API שומר את כל אובייקטי האינטראקציה (`store=true`) כדי לפשט את השימוש בתכונות של ניהול מצב בצד השרת. לעומת זאת, ב-Generate Content API, הבקשות לא נשמרות כברירת מחדל, וצריך להפעיל את השמירה לכל בקשה או ברמת הפרויקט מ-AI Studio.
 
-在 Google [AI Studio](https://aistudio.google.com/logs?hl=zh-tw) 中，您可以為所有專案或特定專案啟用或停用記錄功能，並隨時透過「記錄和資料集」頁面中的「設定」面板變更這些偏好設定。您可以分別為 `generateContent` API 和[互動](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-tw) API 開啟或關閉記錄功能，藉此變更專案的預設儲存行為。
+ב-[AI Studio](https://aistudio.google.com/logs?hl=he) של Google אפשר להפעיל או להשבית את הרישום ביומן לכל הפרויקטים או לפרויקטים ספציפיים, ולשנות את ההעדפות האלה בכל שלב דרך החלונית **הגדרות** בדף [יומנים ומערכי נתונים](https://aistudio.google.com/logs?hl=he). אפשר להפעיל או להשבית את הרישום ביומן בנפרד עבור `generateContent` API ו-[Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=he) API כדי לשנות את התנהגות ברירת המחדל של האחסון בפרויקט.
 
-### 要求層級記錄
+### רישום ביומן ברמת הבקשה
 
-不同 API 的儲存和記錄行為有所不同：
+ההתנהגות של האחסון והרישום ביומן שונה בהתאם ל-API:
 
-- **[Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-tw)：**預設會儲存要求 (`store=true`)，簡化伺服器端狀態管理。
-- **生成 Content API (`generateContent`)：**預設不會儲存要求 (`store=false`)。
+- ‫**[Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=he):** מאחסן בקשות כברירת מחדל (`store=true`) כדי לפשט את ניהול המצב בצד השרת.
+- **יצירת Content API ‏ (`generateContent`):** לא שומר בקשות כברירת מחדל (`store=false`).
 
-以下說明如何設定 `store` 屬性：
+כך מגדירים את המאפיין `store`:
 
-**`generateContent` API**
+‫**GenerateContent API**
 
 ### Python
 
@@ -47,7 +47,7 @@ from google import genai
 client = genai.Client()
 
 response = client.models.generate_content(
-    model='gemini-3.6-flash',
+    model='gemini-3.8-flash',
     contents='Explain quantum entanglement in simple terms.',
     config={'store': False} # Set to True to enable logging of this request
 )
@@ -63,7 +63,7 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({});
 
 const response = await client.models.generateContent({
-    model: 'gemini-3.6-flash',
+    model: 'gemini-3.8-flash',
     contents: 'Explain quantum entanglement in simple terms.',
     config: {
         store: false // Set to true to enable logging of this request
@@ -71,6 +71,25 @@ const response = await client.models.generateContent({
 });
 
 console.log(response.text);
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.GenerateContentConfig;
+import com.google.genai.types.GenerateContentResponse;
+
+Client client = new Client();
+
+// The GenerateContent API does not store requests by default
+GenerateContentResponse response =
+    client.models.generateContent(
+        "gemini-3.8-flash",
+        "Explain quantum entanglement in simple terms.",
+        GenerateContentConfig.builder().build());
+
+System.out.println(response.text());
 ```
 
 **Interactions API**
@@ -83,7 +102,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="Explain quantum entanglement in simple terms.",
     store=True # Set to False to disable logging of this request
 )
@@ -99,7 +118,7 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    model: 'gemini-3.6-flash',
+    model: 'gemini-3.8-flash',
     input: 'Explain quantum entanglement in simple terms.',
     store: true // Set to false to disable logging of this request
 });
@@ -107,59 +126,85 @@ const interaction = await client.interactions.create({
 console.log(interaction.outputs[interaction.outputs.length - 1].text);
 ```
 
-## 在 AI Studio 中查看專案記錄
+### Java
 
-1. 前往 [AI Studio](https://aistudio.google.com/logs?hl=zh-tw) 的「記錄」頁面。
-2. 從下拉式選單中選取專案。
-3. 如果存在記錄，表格會以逆時序顯示 Interactions API 的記錄。
-4. 如要觀察 Generate Content API 的專案記錄，請先在[設定面板](#configure-logging)中啟用這項功能。
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
 
-按一下項目即可預覽酬載。您可以檢查 Gemini 的完整提示和回覆，以及先前對話的脈絡。如果是 **Interactions API** 要求，記錄也會包含 `previous_interaction_id` 的直接連結。
+Client client = new Client();
 
-## 設定專案儲存空間保留期限
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("Explain quantum entanglement in simple terms."))
+        .store(true) // Set to false to disable logging of this request
+        .build();
 
-記錄會在預設保留期限 (55 天) 過後失效，並標示為待刪除 (除非[儲存至資料集](#create)，否則不會失效)。您可以將專案記錄的保留期限設為最多 7、14、28 或 55 天。
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 
-## 建立及共用資料集
+System.out.println(interaction.outputText().orElse(""));
+```
 
-您可以將記錄檔儲存至資料集，以便更有效率地整理及匯出記錄檔。
+## צפייה ביומני הפרויקט ב-AI Studio
 
-- 在「記錄」頁面中，找出頂端的篩選列，然後選取要篩選的屬性。
-- 在篩選後的檢視畫面中，使用核取方塊選取所有或個別記錄。
-- 按一下清單頂端的「建立資料集」按鈕。
-- 為新資料集命名，並視需要新增說明。
-- 您會看到剛才建立的資料集，其中包含精選的記錄集。
-- 將資料集匯出為 CSV、JSONL 檔案或 Google 試算表，以供進一步分析。
+1. עוברים לדף 'יומנים' ב-[AI Studio](https://aistudio.google.com/logs?hl=he).
+2. בוחרים פרויקט מהתפריט הנפתח.
+3. אם יש יומנים של Interactions API, הם יופיעו בטבלה בסדר כרונולוגי הפוך.
+4. כדי לראות את יומני הפרויקט של Generate Content API, צריך קודם להפעיל את האפשרות הזו ב[חלונית ההגדרות](#configure-logging).
 
-資料集可協助您處理多種用途。
+כדי לראות תצוגה מקדימה של המטען הייעודי (payload), לוחצים על רשומה. אתם יכולים לבדוק את ההנחיה המלאה ואת התשובה מ-Gemini, ואת ההקשר מהתורות הקודמות. בבקשות של **Interactions API**, היומנים כוללים גם קישור ישיר אל `previous_interaction_id`.
 
-- **策劃挑戰集：**針對您希望 AI 改進的領域，推動未來的改善措施。
-- **策劃樣本集：**例如，從實際使用情況中取得樣本，以便透過其他模型生成回應，或是收集極端案例，以便在部署前進行例行檢查。
-- **評估集：**這類資料集代表重要功能的實際使用情況，可用於比較其他模型或系統指令疊代版本。
+## הגדרת תקופת השמירה של נתוני האחסון בפרויקט
 
-您可以選擇將資料集提供給 Google 做為示範範例，協助我們進行 Gemini 研究與開發。
+היומנים יאבדו תוקף ויסומנו למחיקה אחרי חלון שמירה שמוגדר כברירת מחדל של 55 ימים (אלא אם [נשמרו במערך נתונים](#create), שאז הם לא יאבדו תוקף).
+אפשר להגדיר את חלון השמירה של יומני פרויקט ל-7, ל-14, ל-28 או ל-55 ימים לכל היותר.
 
-## 限制
+## יצירה ושיתוף של מערכי נתונים
 
-目前系統不支援記錄下列項目：
+אפשר לשמור יומנים במערכי נתונים כדי לארגן אותם ולייצא אותם בצורה יעילה יותר.
 
-- Imagen 和 Veo 模型
-- Gemini 嵌入模型
-- Gemini Robotics 模型
-- 含有影片、GIF 或 PDF 的輸入內容
-- Gemini API 中的公開預先發布版代理
+- בדף [Logs](https://aistudio.google.com/logs?hl=he), מאתרים את סרגל הסינון בחלק העליון ובוחרים מאפיין לסינון.
+- בתצוגה המסוננת, מסמנים את התיבות כדי לבחור את כל היומנים או יומנים ספציפיים.
+- לוחצים על הלחצן **Create dataset** (יצירת מערך נתונים) שמופיע בראש הרשימה.
+- נותנים שם למערך הנתונים החדש, ואפשר גם להוסיף תיאור.
+- מערך הנתונים שיצרתם יופיע עם קבוצת היומנים שנאספו.
+- אפשר לייצא את מערך הנתונים לניתוח נוסף כקובצי CSV או JSONL, או ל-Google Sheets.
 
-## 後續步驟
+מערכי נתונים יכולים לעזור במגוון תרחישי שימוש שונים.
 
-- **使用工作階段記錄設計原型：**使用 [AI Studio Build](https://aistudio.google.com/apps?hl=zh-tw) 直覺式程式開發應用程式，並新增 API 金鑰，啟用 AI 功能的 Gemini API 記錄。
-- **使用 Gemini Batch API 重新執行記錄：**使用資料集進行回應取樣，並透過 [Gemini Batch API](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb) 重新執行記錄，評估模型或應用程式邏輯。
+- **יצירת קבוצות של אתגרים:** אתם יכולים להשתמש בנתונים כדי לשפר את התחומים שבהם אתם רוצים שה-AI ישתפר.
+- **יצירת קבוצות של דוגמאות:** לדוגמה, דוגמה משימוש אמיתי כדי ליצור תגובות ממודל אחר, או אוסף של מקרים קיצוניים לבדיקות שגרתיות לפני הפריסה.
+- **קבוצות הערכה:** קבוצות שמייצגות שימוש אמיתי ביכולות חשובות, לצורך השוואה בין מודלים אחרים או איטרציות של הוראות מערכת.
 
-提供意見
+אתם יכולים לתרום למחקר ולפיתוח של Gemini על ידי שיתוף מערכי הנתונים שלכם עם Google כדוגמאות להדגמה.
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+## מגבלות
 
-上次更新時間：2026-09-12 (世界標準時間)。
+כרגע אין תמיכה ברישום ביומן עבור הפעולות הבאות:
 
-想進一步說明嗎？
+- מודלים של Imagen ו-Veo
+- מודלים של Gemini להטמעה
+- מודל Gemini Robotics
+- קלטים שמכילים סרטונים, קובצי GIF או קובצי PDF
+- סוכנים בתוכנית Public Preview ב-Gemini API
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-12 (世界標準時間)。"],[],[]]
+## המאמרים הבאים
+
+- **יצירת אב טיפוס עם היסטוריית סשנים:** אפשר להשתמש ב-[AI Studio Build](https://aistudio.google.com/apps?hl=he) כדי ליצור אפליקציות בשיטת Vibe code ולהוסיף את מפתח ה-API כדי להפעיל היסטוריה של יומני Gemini API לתכונות מבוססות-AI.
+- **הפעלה מחדש של יומנים באמצעות Gemini Batch API:** אפשר להשתמש במערכי נתונים לדגימת תגובות ולהערכה של מודלים או של לוגיקת אפליקציה על ידי הפעלה מחדש של יומנים באמצעות [Gemini Batch API](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb).
+
+שליחת משוב
+
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+
+עדכון אחרון: 2026-09-18 (שעון UTC).
+
+רוצה לתת לנו משוב?
+
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-18 (שעון UTC)."],[],[]]

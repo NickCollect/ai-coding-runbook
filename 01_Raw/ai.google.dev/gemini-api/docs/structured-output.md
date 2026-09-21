@@ -1,41 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=vi
-fetched_at: 2026-09-14T05:52:27.130573+00:00
-title: "K\u1ebft qu\u1ea3 c\u00f3 c\u1ea5u tr\u00fac \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=ko
+fetched_at: 2026-09-21T05:48:54.746768+00:00
+title: "\uad6c\uc870\ud654\ub41c \ucd9c\ub825 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Gửi ý kiến phản hồi
+의견 보내기
 
-# Kết quả có cấu trúc
+# 구조화된 출력
 
-Bạn có thể định cấu hình các mô hình Gemini để tạo câu trả lời tuân thủ Giản đồ JSON được cung cấp. Điều này đảm bảo kết quả có thể dự đoán được, an toàn về kiểu và đơn giản hoá việc trích xuất dữ liệu có cấu trúc từ văn bản không có cấu trúc.
+제공된 JSON 스키마를 준수하는 응답을 생성하도록 Gemini 모델을 구성할 수 있습니다. 이렇게 하면 예측 가능하고 유형이 안전한 결과를 얻을 수 있으며 구조화되지 않은 텍스트에서 구조화된 데이터를 추출하는 작업이 간소화됩니다.
 
-Việc sử dụng đầu ra có cấu trúc là lý tưởng cho:
+구조화된 출력은 다음 작업에 적합합니다.
 
-- **Trích xuất dữ liệu:** Trích xuất thông tin cụ thể như tên và ngày từ văn bản.
-- **Phân loại có cấu trúc:** Phân loại văn bản thành các danh mục được xác định trước.
-- **Quy trình công việc dựa trên tác nhân:** Tạo dữ liệu đầu vào có cấu trúc cho các công cụ hoặc API.
+- **데이터 추출:** 텍스트에서 이름, 날짜와 같은 특정 정보를 가져옵니다.
+- **구조화된 분류:** 텍스트를 사전 정의된 카테고리로 분류합니다.
+- **에이전트 워크플로:** 도구 또는 API의 구조화된 입력을 생성합니다.
 
-Ngoài việc hỗ trợ Giản đồ JSON trong REST API, SDK GenAI của Google
-cho phép xác định giản đồ bằng
-[Pydantic](https://docs.pydantic.dev/latest/) (Python) và
+REST API에서 JSON 스키마를 지원하는 것 외에도 Google GenAI SDK를 사용하면
+다음과 같이 스키마를 정의할 수 있습니다.
+[Pydantic](https://docs.pydantic.dev/latest/) (Python) 및
 [Zod](https://zod.dev/) (JavaScript).
 
-## Ví dụ về đầu ra có cấu trúc
+## 구조화된 출력 예
 
-### Trình trích xuất công thức
+### 레시피 추출기
 
-Ví dụ này minh hoạ cách trích xuất dữ liệu có cấu trúc từ văn bản bằng các loại Giản đồ JSON cơ bản như `object`, `array`, `string` và `integer`.
+이 예에서는 `object`, `array`, `string`, `integer`와 같은 기본 JSON 스키마 유형을 사용하여 텍스트에서 구조화된 데이터를 추출하는 방법을 보여줍니다.
 
 ### Python
 
@@ -71,7 +71,7 @@ onto ungreased baking sheets and bake for 9 to 11 minutes.
 """
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input=prompt,
     response_format={
         "type": "text",
@@ -140,7 +140,7 @@ onto ungreased baking sheets and bake for 9 to 11 minutes.
 `;
 
 const interaction = await client.interactions.create({
-  model: "gemini-3.6-flash",
+  model: "gemini-3.8-flash",
   input: prompt,
   response_format: {
     type: 'text',
@@ -153,6 +153,104 @@ const recipe = recipeSchema.parse(JSON.parse(interaction.output_text));
 console.log(recipe);
 ```
 
+### 자바
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.interactions.TextResponseFormat;
+import com.google.genai.gaos.models.interactions.TextResponseFormatMimeType;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+Client client = new Client();
+
+Map<String, Object> ingredientProps = new HashMap<>();
+Map<String, Object> nameProp = new HashMap<>();
+nameProp.put("type", "string");
+nameProp.put("description", "Name of the ingredient.");
+ingredientProps.put("name", nameProp);
+
+Map<String, Object> quantityProp = new HashMap<>();
+quantityProp.put("type", "string");
+quantityProp.put("description", "Quantity of the ingredient, including units.");
+ingredientProps.put("quantity", quantityProp);
+
+Map<String, Object> ingredientItemSchema = new HashMap<>();
+ingredientItemSchema.put("type", "object");
+ingredientItemSchema.put("properties", ingredientProps);
+ingredientItemSchema.put("required", Arrays.asList("name", "quantity"));
+
+Map<String, Object> properties = new HashMap<>();
+
+Map<String, Object> recipeNameProp = new HashMap<>();
+recipeNameProp.put("type", "string");
+recipeNameProp.put("description", "The name of the recipe.");
+properties.put("recipe_name", recipeNameProp);
+
+Map<String, Object> prepTimeProp = new HashMap<>();
+prepTimeProp.put("type", "integer");
+prepTimeProp.put("description", "Optional time in minutes to prepare the recipe.");
+properties.put("prep_time_minutes", prepTimeProp);
+
+Map<String, Object> ingredientsProp = new HashMap<>();
+ingredientsProp.put("type", "array");
+ingredientsProp.put("items", ingredientItemSchema);
+properties.put("ingredients", ingredientsProp);
+
+Map<String, Object> instructionsProp = new HashMap<>();
+instructionsProp.put("type", "array");
+Map<String, Object> stringItem = new HashMap<>();
+stringItem.put("type", "string");
+instructionsProp.put("items", stringItem);
+properties.put("instructions", instructionsProp);
+
+Map<String, Object> recipeJsonSchema = new HashMap<>();
+recipeJsonSchema.put("type", "object");
+recipeJsonSchema.put("properties", properties);
+recipeJsonSchema.put("required", Arrays.asList("recipe_name", "ingredients", "instructions"));
+
+String prompt =
+    "Please extract the recipe from the following text.\n"
+        + "The user wants to make delicious chocolate chip cookies.\n"
+        + "They need 2 and 1/4 cups of all-purpose flour, 1 teaspoon of baking soda,\n"
+        + "1 teaspoon of salt, 1 cup of unsalted butter (softened), 3/4 cup of granulated sugar,\n"
+        + "3/4 cup of packed brown sugar, 1 teaspoon of vanilla extract, and 2 large eggs.\n"
+        + "For the best part, they'll need 2 cups of semisweet chocolate chips.\n"
+        + "First, preheat the oven to 375°F (190°C). Then, in a small bowl, whisk together the flour,\n"
+        + "baking soda, and salt. In a large bowl, cream together the butter, granulated sugar, and brown sugar\n"
+        + "until light and fluffy. Beat in the vanilla and eggs, one at a time. Gradually beat in the dry\n"
+        + "ingredients until just combined. Finally, stir in the chocolate chips. Drop by rounded tablespoons\n"
+        + "onto ungreased baking sheets and bake for 9 to 11 minutes.";
+
+CreateModelInteractionResponseFormat format =
+    CreateModelInteractionResponseFormat.of(
+        ResponseFormat.of(
+            TextResponseFormat.builder()
+                .mimeType(TextResponseFormatMimeType.APPLICATION_JSON)
+                .schema(recipeJsonSchema)
+                .build()));
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of(prompt))
+        .responseFormat(format)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -160,7 +258,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d '{
-      "model": "gemini-3.6-flash",
+      "model": "gemini-3.8-flash",
       "input": "Please extract the recipe from the following text.\nThe user wants to make delicious chocolate chip cookies.\nThey need 2 and 1/4 cups of all-purpose flour, 1 teaspoon of baking soda,\n1 teaspoon of salt, 1 cup of unsalted butter (softened), 3/4 cup of granulated sugar,\n3/4 cup of packed brown sugar, 1 teaspoon of vanilla extract, and 2 large eggs.\nFor the best part, they will need 2 cups of semisweet chocolate chips.\nFirst, preheat the oven to 375°F (190°C). Then, in a small bowl, whisk together the flour,\nbaking soda, and salt. In a large bowl, cream together the butter, granulated sugar, and brown sugar\nuntil light and fluffy. Beat in the vanilla and eggs, one at a time. Gradually beat in the dry\ningredients until just combined. Finally, stir in the chocolate chips. Drop by rounded tablespoons\nonto ungreased baking sheets and bake for 9 to 11 minutes.",
       "response_format": {
         "type": "text",
@@ -199,7 +297,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Ví dụ về phản hồi:**
+**응답 예:**
 
 ```
 {
@@ -227,9 +325,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### Kiểm duyệt nội dung
+### 콘텐츠 검토
 
-Ví dụ này trình bày `anyOf` cho giản đồ có điều kiện và `enum` cho việc phân loại, cho phép cấu trúc đầu ra thay đổi dựa trên nội dung.
+이 예에서는 조건부 스키마의 `anyOf`와 분류의 `enum`을 보여주며, 이를 통해 콘텐츠에 따라 출력 구조를 다르게 지정할 수 있습니다.
 
 ### Python
 
@@ -257,7 +355,7 @@ Content: 'Congratulations! You''ve won a free cruise to the Bahamas. Click here 
 """
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input=prompt,
     response_format={
         "type": "text",
@@ -318,7 +416,7 @@ Content: 'Congratulations! You''ve won a free cruise to the Bahamas. Click here 
 `;
 
 const interaction = await client.interactions.create({
-  model: "gemini-3.6-flash",
+  model: "gemini-3.8-flash",
   input: prompt,
   response_format: {
     type: 'text',
@@ -331,6 +429,96 @@ const result = moderationResultSchema.parse(JSON.parse(interaction.output_text))
 console.log(result);
 ```
 
+### 자바
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.interactions.TextResponseFormat;
+import com.google.genai.gaos.models.interactions.TextResponseFormatMimeType;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+Client client = new Client();
+
+Map<String, Object> spamProps = new HashMap<>();
+Map<String, Object> reasonProp = new HashMap<>();
+reasonProp.put("type", "string");
+reasonProp.put("description", "The reason why the content is considered spam.");
+spamProps.put("reason", reasonProp);
+
+Map<String, Object> spamTypeProp = new HashMap<>();
+spamTypeProp.put("type", "string");
+spamTypeProp.put("enum", Arrays.asList("phishing", "scam", "unsolicited promotion", "other"));
+spamTypeProp.put("description", "The type of spam.");
+spamProps.put("spam_type", spamTypeProp);
+
+Map<String, Object> spamDetailsSchema = new HashMap<>();
+spamDetailsSchema.put("type", "object");
+spamDetailsSchema.put("title", "SpamDetails");
+spamDetailsSchema.put("properties", spamProps);
+spamDetailsSchema.put("required", Arrays.asList("reason", "spam_type"));
+
+Map<String, Object> notSpamProps = new HashMap<>();
+Map<String, Object> summaryProp = new HashMap<>();
+summaryProp.put("type", "string");
+summaryProp.put("description", "A brief summary of the content.");
+notSpamProps.put("summary", summaryProp);
+
+Map<String, Object> isSafeProp = new HashMap<>();
+isSafeProp.put("type", "boolean");
+isSafeProp.put("description", "Whether the content is safe for all audiences.");
+notSpamProps.put("is_safe", isSafeProp);
+
+Map<String, Object> notSpamDetailsSchema = new HashMap<>();
+notSpamDetailsSchema.put("type", "object");
+notSpamDetailsSchema.put("title", "NotSpamDetails");
+notSpamDetailsSchema.put("properties", notSpamProps);
+notSpamDetailsSchema.put("required", Arrays.asList("summary", "is_safe"));
+
+Map<String, Object> decisionProp = new HashMap<>();
+decisionProp.put("anyOf", Arrays.asList(spamDetailsSchema, notSpamDetailsSchema));
+
+Map<String, Object> properties = new HashMap<>();
+properties.put("decision", decisionProp);
+
+Map<String, Object> moderationResultJsonSchema = new HashMap<>();
+moderationResultJsonSchema.put("type", "object");
+moderationResultJsonSchema.put("properties", properties);
+moderationResultJsonSchema.put("required", Arrays.asList("decision"));
+
+String prompt =
+    "Please moderate the following content and provide a decision.\n"
+        + "Content: 'Congratulations! You''ve won a free cruise to the Bahamas. Click here to claim your prize: www.definitely-not-a-scam.com'";
+
+CreateModelInteractionResponseFormat format =
+    CreateModelInteractionResponseFormat.of(
+        ResponseFormat.of(
+            TextResponseFormat.builder()
+                .mimeType(TextResponseFormatMimeType.APPLICATION_JSON)
+                .schema(moderationResultJsonSchema)
+                .build()));
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of(prompt))
+        .responseFormat(format)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -338,7 +526,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d '{
-      "model": "gemini-3.6-flash",
+      "model": "gemini-3.8-flash",
       "input": "Please moderate the following content and provide a decision.\nContent: '\''Congratulations! You have won a free cruise to the Bahamas. Click here to claim your prize: www.definitely-not-a-scam.com'\''",
       "response_format": {
         "type": "text",
@@ -378,7 +566,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Ví dụ về phản hồi:**
+**응답 예:**
 
 ```
 {
@@ -389,9 +577,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### Cấu trúc đệ quy
+### 재귀 구조
 
-Ví dụ này minh hoạ cách xác định giản đồ đệ quy, chẳng hạn như sơ đồ tổ chức.
+이 예에서는 조직도와 같은 재귀 스키마를 정의하는 방법을 보여줍니다.
 
 ### Python
 
@@ -417,7 +605,7 @@ The manager is Alice, who manages Bob and Charlie. Bob manages David.
 """
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input=prompt,
     response_format={
         "type": "text",
@@ -463,7 +651,7 @@ The manager is Alice, who manages Bob and Charlie. Bob manages David.
 `;
 
 const interaction = await client.interactions.create({
-  model: "gemini-3.6-flash",
+  model: "gemini-3.8-flash",
   input: prompt,
   response_format: {
     type: 'text',
@@ -476,6 +664,72 @@ const employee = employeeSchema.parse(JSON.parse(interaction.output_text));
 console.log(employee);
 ```
 
+### 자바
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.interactions.TextResponseFormat;
+import com.google.genai.gaos.models.interactions.TextResponseFormatMimeType;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+Client client = new Client();
+
+Map<String, Object> properties = new HashMap<>();
+
+Map<String, Object> nameProp = new HashMap<>();
+nameProp.put("type", "string");
+properties.put("name", nameProp);
+
+Map<String, Object> idProp = new HashMap<>();
+idProp.put("type", "integer");
+properties.put("employee_id", idProp);
+
+Map<String, Object> reportsProp = new HashMap<>();
+reportsProp.put("type", "array");
+reportsProp.put("description", "A list of employees reporting to this employee.");
+reportsProp.put("items", Collections.singletonMap("$ref", "#"));
+properties.put("reports", reportsProp);
+
+Map<String, Object> employeeJsonSchema = new HashMap<>();
+employeeJsonSchema.put("type", "object");
+employeeJsonSchema.put("properties", properties);
+employeeJsonSchema.put("required", Arrays.asList("name", "employee_id", "reports"));
+
+String prompt =
+    "Generate an organization chart for a small team.\n"
+        + "The manager is Alice, who manages Bob and Charlie. Bob manages David.";
+
+CreateModelInteractionResponseFormat format =
+    CreateModelInteractionResponseFormat.of(
+        ResponseFormat.of(
+            TextResponseFormat.builder()
+                .mimeType(TextResponseFormatMimeType.APPLICATION_JSON)
+                .schema(employeeJsonSchema)
+                .build()));
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of(prompt))
+        .responseFormat(format)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -483,7 +737,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d '{
-      "model": "gemini-3.6-flash",
+      "model": "gemini-3.8-flash",
       "input": "Generate an organization chart for a small team.\nThe manager is Alice, who manages Bob and Charlie. Bob manages David.",
       "response_format": {
         "type": "text",
@@ -508,7 +762,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Ví dụ về phản hồi:**
+**응답 예:**
 
 ```
 {
@@ -535,9 +789,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-## Truyền trực tuyến kết quả
+## 스트리밍 결과
 
-Bạn có thể truyền trực tuyến đầu ra có cấu trúc, cho phép bạn bắt đầu xử lý phản hồi khi phản hồi đó đang được tạo. Các khối được truyền trực tuyến là các chuỗi JSON một phần hợp lệ có thể được nối để tạo thành đối tượng JSON cuối cùng.
+구조화된 출력을 스트리밍하여 응답이 생성되는 즉시 처리를 시작할 수 있습니다. 스트리밍된 청크는 최종 JSON 객체를 형성하기 위해 연결할 수 있는 유효한 부분 JSON 문자열입니다.
 
 ### Python
 
@@ -554,7 +808,7 @@ client = genai.Client()
 prompt = "The new UI is incredibly intuitive. Add a very long summary to test streaming!"
 
 stream = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input=prompt,
     response_format={
         "type": "text",
@@ -590,7 +844,7 @@ const feedbackSchema = z.fromJSONSchema(feedbackJsonSchema);
 const client = new GoogleGenAI({});
 
 const stream = await client.interactions.create({
-  model: "gemini-3.6-flash",
+  model: "gemini-3.8-flash",
   input: "The new UI is incredibly intuitive. Add a very long summary!",
   response_format: {
     type: 'text',
@@ -609,6 +863,81 @@ for await (const event of stream) {
 }
 ```
 
+### 자바
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.InteractionSSEEvent;
+import com.google.genai.gaos.models.interactions.InteractionSSEStreamEvent;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.interactions.StepDelta;
+import com.google.genai.gaos.models.interactions.StepDeltaData;
+import com.google.genai.gaos.models.interactions.TextDelta;
+import com.google.genai.gaos.models.interactions.TextResponseFormat;
+import com.google.genai.gaos.models.interactions.TextResponseFormatMimeType;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.operations.CreateInteractionResponse;
+import com.google.genai.gaos.utils.EventStream;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+Client client = new Client();
+
+Map<String, Object> properties = new HashMap<>();
+
+Map<String, Object> sentimentProp = new HashMap<>();
+sentimentProp.put("type", "string");
+sentimentProp.put("enum", Arrays.asList("positive", "neutral", "negative"));
+properties.put("sentiment", sentimentProp);
+
+Map<String, Object> summaryProp = new HashMap<>();
+summaryProp.put("type", "string");
+properties.put("summary", summaryProp);
+
+Map<String, Object> feedbackJsonSchema = new HashMap<>();
+feedbackJsonSchema.put("type", "object");
+feedbackJsonSchema.put("properties", properties);
+feedbackJsonSchema.put("required", Arrays.asList("sentiment", "summary"));
+
+String prompt = "The new UI is incredibly intuitive. Add a very long summary to test streaming!";
+
+CreateModelInteractionResponseFormat format =
+    CreateModelInteractionResponseFormat.of(
+        ResponseFormat.of(
+            TextResponseFormat.builder()
+                .mimeType(TextResponseFormatMimeType.APPLICATION_JSON)
+                .schema(feedbackJsonSchema)
+                .build()));
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of(prompt))
+        .responseFormat(format)
+        .stream(true)
+        .build();
+
+CreateInteractionResponse response =
+    client.interactions.create(CreateInteractionRequestBody.of(params));
+
+try (EventStream<InteractionSSEStreamEvent> events = response.events()) {
+  for (InteractionSSEStreamEvent streamEvent : events) {
+    InteractionSSEEvent event = streamEvent.data().orElse(null);
+    if (event instanceof StepDelta) {
+      StepDeltaData data = ((StepDelta) event).delta().orElse(null);
+      if (data instanceof TextDelta) {
+        ((TextDelta) data).text().ifPresent(System.out::print);
+      }
+    }
+  }
+}
+```
+
 ### REST
 
 ```
@@ -616,7 +945,7 @@ curl -N -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d '{
-      "model": "gemini-3.6-flash",
+      "model": "gemini-3.8-flash",
       "input": "The new UI is incredibly intuitive. Add a very long summary!",
       "response_format": {
         "type": "text",
@@ -634,14 +963,14 @@ curl -N -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
     }'
 ```
 
-## Đầu ra có cấu trúc bằng các công cụ
+## 도구를 사용한 구조화된 출력
 
-Gemini 3 cho phép bạn kết hợp Đầu ra có cấu trúc với các công cụ tích hợp, bao gồm
-[Căn cứ với Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi),
-[Bối cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi),
-[Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi),
-[Tìm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi#structured-output), và
-[Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi).
+Gemini 3를 사용하면 Google 검색을 사용한 그라운딩
+, URL 컨텍스트
+, 코드 실행
+, 파일 검색
+, 함수 호출
+을 비롯한 기본 제공 도구와 구조화된 출력을 결합할 수 있습니다.
 
 ### Python
 
@@ -708,6 +1037,73 @@ const match = matchSchema.parse(JSON.parse(interaction.output_text));
 console.log(match);
 ```
 
+### 자바
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.GoogleSearch;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.interactions.TextResponseFormat;
+import com.google.genai.gaos.models.interactions.TextResponseFormatMimeType;
+import com.google.genai.gaos.models.interactions.URLContext;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+Client client = new Client();
+
+Map<String, Object> properties = new HashMap<>();
+
+Map<String, Object> winnerProp = new HashMap<>();
+winnerProp.put("type", "string");
+winnerProp.put("description", "The name of the winner.");
+properties.put("winner", winnerProp);
+
+Map<String, Object> scoreProp = new HashMap<>();
+scoreProp.put("type", "string");
+scoreProp.put("description", "The final match score.");
+properties.put("final_match_score", scoreProp);
+
+Map<String, Object> scorersProp = new HashMap<>();
+scorersProp.put("type", "array");
+scorersProp.put("description", "The name of the scorer.");
+scorersProp.put("items", Collections.singletonMap("type", "string"));
+properties.put("scorers", scorersProp);
+
+Map<String, Object> matchJsonSchema = new HashMap<>();
+matchJsonSchema.put("type", "object");
+matchJsonSchema.put("properties", properties);
+matchJsonSchema.put("required", Arrays.asList("winner", "final_match_score", "scorers"));
+
+CreateModelInteractionResponseFormat format =
+    CreateModelInteractionResponseFormat.of(
+        ResponseFormat.of(
+            TextResponseFormat.builder()
+                .mimeType(TextResponseFormatMimeType.APPLICATION_JSON)
+                .schema(matchJsonSchema)
+                .build()));
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-pro-preview"))
+        .input(InteractionsInput.of("Search for all details for the latest Euro."))
+        .tools(Arrays.asList(GoogleSearch.builder().build(), URLContext.builder().build()))
+        .responseFormat(format)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -734,80 +1130,80 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Hỗ trợ giản đồ JSON
+## JSON 스키마 지원
 
-Để tạo đối tượng JSON, hãy định cấu hình `response_format` bằng một đối tượng (hoặc một mảng chứa đối tượng) thuộc loại `text` và đặt `mime_type` thành `application/json`. Bạn nên cung cấp giản đồ trong trường `schema`.
+JSON 객체를 생성하려면 `text` 유형의 객체 (또는 객체를 포함하는 배열)로 `response_format`을 구성하고 `mime_type`을 `application/json`으로 설정합니다. 스키마는 `schema` 필드에 제공되어야 합니다.
 
-Chế độ đầu ra có cấu trúc của Gemini hỗ trợ một tập hợp con của
-[thông số kỹ thuật Giản đồ JSON](https://json-schema.org/).
+Gemini의 구조화된 출력 모드는
+[JSON 스키마](https://json-schema.org/) 사양의 하위 집합을 지원합니다.
 
-Các giá trị sau đây của `type` được hỗ trợ:
+다음 `type` 값이 지원됩니다.
 
-- **`string`**: Đối với văn bản.
-- **`number`**: Đối với số dấu phẩy động.
-- **`integer`**: Đối với số nguyên.
-- **`boolean`**: Đối với giá trị đúng hoặc sai.
-- **`object`**: Đối với dữ liệu có cấu trúc với các cặp khoá-giá trị.
-- **`array`**: Đối với danh sách các mục.
-- **`null`**: Để cho phép thuộc tính có giá trị rỗng, hãy thêm `"null"` vào mảng loại (ví dụ: `{"type": ["string", "null"]}`).
+- **`string`**: 텍스트용
+- **`number`**: 부동 소수점 수용
+- **`integer`**: 정수용
+- **`boolean`**: true 또는 false 값용
+- **`object`**: 키-값 쌍이 있는 구조화된 데이터용
+- **`array`**: 항목 목록용
+- **`null`**: 속성이 null이 되도록 허용하려면 유형 배열에 `"null"`을 포함합니다 (예: `{"type": ["string", "null"]}`).
 
-Các thuộc tính mô tả này giúp hướng dẫn mô hình:
+이러한 설명 속성은 모델을 안내하는 데 도움이 됩니다.
 
-- **`title`**: Nội dung mô tả ngắn về một thuộc tính.
-- **`description`**: Nội dung mô tả dài hơn và chi tiết hơn về một thuộc tính.
+- **`title`**: 속성에 대한 간단한 설명입니다.
+- **`description`**: 속성에 대한 더 길고 자세한 설명입니다.
 
-### Thuộc tính cụ thể của từng loại
+### 유형별 속성
 
-**Đối với giá trị `object`:**
+**`object` 값의 경우:**
 
-- **`properties`**: Một đối tượng trong đó mỗi khoá là tên thuộc tính và mỗi giá trị là một giản đồ cho thuộc tính đó.
-- **`required`**: Một mảng các chuỗi, liệt kê những thuộc tính bắt buộc.
-- **`additionalProperties`**: Kiểm soát xem có cho phép các thuộc tính không có trong `properties` hay không. Có thể là một giá trị boolean hoặc một giản đồ.
+- **`properties`**: 각 키가 속성 이름이고 각 값이 해당 속성의 스키마인 객체입니다.
+- **`required`**: 필수 속성을 나열하는 문자열 배열입니다.
+- **`additionalProperties`**: `properties`에 나열되지 않은 속성이 허용되는지 여부를 제어합니다. 불리언 또는 스키마일 수 있습니다.
 
-**Đối với giá trị `string`:**
+**`string` 값의 경우:**
 
-- **`enum`**: Liệt kê một tập hợp cụ thể các chuỗi có thể có cho các tác vụ phân loại.
-- **`format`**: Chỉ định cú pháp cho chuỗi, chẳng hạn như `date-time`, `date`, `time`.
+- **`enum`**: 분류 작업에 사용할 수 있는 특정 문자열 집합을 나열합니다.
+- **`format`**: `date-time`, `date`, `time`과 같은 문자열의 구문을 지정합니다.
 
-**Đối với giá trị `number` và `integer`:**
+**`number` 및 `integer` 값의 경우:**
 
-- **`enum`**: Liệt kê một tập hợp cụ thể các giá trị số có thể có.
-- **`minimum`**: Giá trị tối thiểu (bao gồm).
-- **`maximum`**: Giá trị tối đa (bao gồm).
+- **`enum`**: 가능한 숫자 값의 특정 집합을 나열합니다.
+- **`minimum`**: 최소 포함 값입니다.
+- **`maximum`**: 최대 포함 값입니다.
 
-**Đối với giá trị `array` values:**
+**`array` 값의 경우:**
 
-- **`items`**: Xác định giản đồ cho tất cả các mục trong mảng.
-- **`prefixItems`**: Xác định danh sách giản đồ cho N mục đầu tiên, cho phép các cấu trúc giống như bộ dữ liệu.
-- **`minItems`**: Số lượng mục tối thiểu trong mảng.
-- **`maxItems`**: Số lượng mục tối đa trong mảng.
+- **`items`**: 배열의 모든 항목에 대한 스키마를 정의합니다.
+- **`prefixItems`**: 첫 번째 N개 항목의 스키마 목록을 정의하여 튜플과 같은 구조를 허용합니다.
+- **`minItems`**: 배열의 최소 항목 수입니다.
+- **`maxItems`**: 배열의 최대 항목 수입니다.
 
-## So sánh giữa đầu ra có cấu trúc và lệnh gọi hàm
+## 구조화된 출력과 함수 호출 비교
 
-| Tính năng | Trường hợp sử dụng chính |
+| 기능 | 주된 사용 사례 |
 | --- | --- |
-| **Đầu ra có cấu trúc** | **Định dạng phản hồi cuối cùng.** Sử dụng khi bạn muốn *câu trả lời* của mô hình ở một định dạng cụ thể. |
-| **Lệnh gọi hàm** | **Thực hiện hành động trong cuộc trò chuyện.** Sử dụng khi mô hình cần *yêu cầu bạn* thực hiện một tác vụ trước khi đưa ra câu trả lời cuối cùng. |
+| **구조화된 출력** | **최종 응답의 형식을 지정합니다.** 모델의 *답변* 을 특정 형식으로 지정하려는 경우에 사용합니다. |
+| **함수 호출** | **대화 중에 작업을 실행합니다.** 모델이 최종 답변을 제공하기 전에 작업을 실행하도록 *요청* 해야 하는 경우에 사용합니다. |
 
-## Các phương pháp hay nhất
+## 권장사항
 
-- **Nội dung mô tả rõ ràng:** Sử dụng trường `description` để hướng dẫn mô hình.
-- **Nhập mạnh:** Sử dụng các loại cụ thể (`integer`, `string`, `enum`).
-- **Kỹ thuật tạo lời nhắc:** Nêu rõ những gì bạn muốn mô hình thực hiện.
-- **Xác thực:** Mặc dù đầu ra là JSON có cú pháp chính xác, nhưng hãy luôn xác thực các giá trị trong ứng dụng của bạn.
-- **Xử lý lỗi:** Triển khai biện pháp xử lý lỗi hữu ích cho các đầu ra tuân thủ giản đồ nhưng không chính xác về mặt ngữ nghĩa.
+- **명확한 설명:** `description` 필드를 사용하여 모델을 안내합니다.
+- **강력한 유형 지정:** 특정 유형 (`integer`, `string`, `enum`)을 사용합니다.
+- **프롬프트 엔지니어링:** 모델이 수행해야 하는 작업을 명확하게 명시합니다.
+- **유효성 검사:** 출력은 구문상 올바른 JSON이지만 항상 애플리케이션에서 값을 검증합니다.
+- **오류 처리:** 스키마를 준수하지만 의미상 올바르지 않은 출력에 대해 강력한 오류 처리를 구현합니다.
 
-## Các điểm hạn chế
+## 제한사항
 
-- **Tập hợp con của giản đồ:** Không phải tất cả các tính năng của Giản đồ JSON đều được hỗ trợ.
-- **Độ phức tạp của giản đồ:** Các giản đồ rất lớn hoặc lồng nhau sâu có thể bị từ chối.
+- **스키마 하위 집합:** 일부 JSON 스키마 기능은 지원되지 않습니다.
+- **스키마 복잡성:** 매우 크거나 깊게 중첩된 스키마는 거부될 수 있습니다.
 
-Gửi ý kiến phản hồi
+의견 보내기
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Cập nhật lần gần đây nhất: 2026-09-12 UTC.
+최종 업데이트: 2026-09-18(UTC)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+의견을 전달하고 싶나요?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-12 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-18(UTC)"],[],[]]

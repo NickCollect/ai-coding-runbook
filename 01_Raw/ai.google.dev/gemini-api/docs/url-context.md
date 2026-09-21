@@ -1,33 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=zh-TW
-fetched_at: 2026-09-14T05:50:32.547118+00:00
-title: "\u7db2\u5740\u80cc\u666f\u8cc7\u8a0a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=ar
+fetched_at: 2026-09-21T05:57:13.621525+00:00
+title: "\u0633\u064a\u0627\u0642 \u0639\u0646\u0648\u0627\u0646 URL \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-提供意見
+إرسال ملاحظات
 
-# 網址背景資訊
+# سياق عنوان URL
 
-網址背景資訊工具可讓您以網址形式，為模型提供額外背景資訊。在要求中加入網址後，模型就會存取這些網頁的內容 (只要網址類型未列於[限制一節](#limitations))，藉此提供更完善的回覆。
+تتيح لك أداة "سياق عنوان URL" توفير سياق إضافي للنماذج في الـ
+شكل عناوين URL. من خلال تضمين عناوين URL في طلبك، سيتمكّن النموذج من الوصول إلى
+المحتوى من تلك الصفحات (طالما أنّه ليس نوع عنوان URL مدرَجًا في الـ
+[قسم القيود](#limitations)) لإعلام
+ردّه وتحسينه.
 
-網址脈絡工具適用於下列工作：
+تكون أداة "سياق عنوان URL" مفيدة في مهام مثل ما يلي:
 
-- **擷取資料**：從多個網址擷取特定資訊，例如價格、名稱或重要發現。
-- **比較文件**：分析多份報表、文章或 PDF，找出差異並追蹤趨勢。
-- **統整及建立內容**：整合多個來源網址的資訊，生成準確的摘要、網誌文章或報告。
-- **分析程式碼和文件**：指向 GitHub 存放區或技術文件，即可說明程式碼、生成設定說明或回答問題。
+- **استخراج البيانات**: يمكنك سحب معلومات معيّنة، مثل الأسعار أو الأسماء أو النتائج الرئيسية
+  ، من عناوين URL متعدّدة.
+- **مقارنة المستندات**: يمكنك تحليل تقارير أو مقالات أو ملفات PDF متعدّدة لتحديد الاختلافات وتتبُّع المؤشرات.
+- **تجميع المحتوى وإنشاؤه**: يمكنك دمج المعلومات من عدة عناوين URL مصدر لإنشاء ملخّصات أو منشورات مدوّنة أو تقارير دقيقة.
+- **تحليل الرموز والمستندات**: يمكنك الإشارة إلى مستودع GitHub أو مستندات فنية لشرح الرموز أو إنشاء تعليمات الإعداد أو الإجابة عن الأسئلة.
 
-以下範例說明如何比較不同網站的兩道食譜。
+يوضّح المثال التالي كيفية مقارنة وصفتَين من موقعَين إلكترونيَين مختلفَين.
 
 ### Python
 
@@ -59,7 +64,7 @@ for step in interaction.steps:
                             print(f"  - {annotation.title}: {annotation.url}")
 ```
 
-### JavaScript
+### Javascript
 
 ```
 // This will only work for SDK newer than 2.0.0
@@ -111,19 +116,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 運作方式
+## آلية العمل
 
-網址內容工具採用兩步驟的擷取程序，兼顧速度、成本和最新資料存取權。提供網址後，這項工具會先嘗試從內部索引快取擷取內容。這可做為經過高度最佳化的快取。如果網址未編入索引 (例如網頁剛發布)，工具會自動改為擷取實際網頁。這項工具會直接存取網址，即時擷取內容。
+تستخدم أداة "سياق عنوان URL" عملية استرداد من خطوتَين لتحقيق التوازن بين السرعة والتكلفة والوصول إلى البيانات الحديثة. عند تقديم عنوان URL، تحاول الأداة أولاً جلب المحتوى من ذاكرة تخزين مؤقت لفهرس داخلي. تعمل هذه الذاكرة كذاكرة تخزين مؤقت محسّنة إلى حد كبير. إذا لم يكن عنوان URL متاحًا في الفهرس (على سبيل المثال، إذا كانت صفحة جديدة جدًا)، تعود الأداة تلقائيًا إلى إجراء عملية جلب مباشرة.
+يؤدي ذلك إلى الوصول مباشرةً إلى عنوان URL لاسترداد محتواه في الوقت الفعلي.
 
-## 與其他工具搭配使用
+## الجمع مع أدوات أخرى
 
-您可以將網址內容工具與其他工具結合，建立功能更強大的工作流程。
+يمكنك الجمع بين أداة "سياق عنوان URL" وأدوات أخرى لإنشاء مهام أكثر فعالية.
 
-[Gemini 3 模型](#supported-models)支援結合內建工具 (例如網址背景資訊) 和自訂工具 (函式呼叫)。詳情請參閱「[工具組合](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-tw)」頁面。
+[تتيح نماذج Gemini 3](#supported-models) الجمع بين الأدوات المضمّنة
+(مثل "سياق عنوان URL") والأدوات المخصّصة (استدعاء الدوال). مزيد من المعلومات في صفحة
+[مجموعات الأدوات](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ar)
 
-### 以搜尋結果為基準
+### تحديد المصدر باستخدام "بحث Google"
 
-同時啟用網址背景資訊和 [以 Google 搜尋強化事實基礎](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-tw)後，模型就能使用搜尋功能在網路上尋找相關資訊，然後使用網址背景資訊工具深入瞭解找到的網頁。這種做法非常適合需要廣泛搜尋，並深入分析特定網頁的提示。
+عند تفعيل كلّ من "سياق عنوان URL" و
+[ميزة تحديد المصدر باستخدام "بحث Google"](https://ai.google.dev/gemini-api/docs/grounding?hl=ar)، يمكن للنموذج استخدام إمكانات البحث للعثور على
+معلومات ذات صلة على الإنترنت، ثم استخدام أداة "سياق عنوان URL" للحصول على فهم أكثر
+تفصيلاً للصفحات التي يعثر عليها. يكون هذا النهج فعّالاً في حال كانت التعليمات البرمجية تتطلّب كلاً من البحث على نطاق واسع والتحليل المتعمّق لصفحات معيّنة.
 
 ### Python
 
@@ -149,7 +160,7 @@ for step in interaction.steps:
                 print(content_block.text)
 ```
 
-### JavaScript
+### Javascript
 
 ```
 // This will only work for SDK newer than 2.0.0
@@ -196,19 +207,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 瞭解回覆內容
+## فهم الردّ
 
-模型使用網址背景資訊工具時，文字回覆會在文字內容區塊中加入行內 `url_citation` 註解。每則註解都會將回覆文字的片段 (透過 `start_index` 和 `end_index`) 連結至衍生來源網址。這是應用程式中顯示引文的主要方式，請參閱[上方的主要範例](#get-started)，瞭解如何擷取引文。
+عندما يستخدم النموذج أداة "سياق عنوان URL"، يتضمّن ردّه النصي تعليقات توضيحية مضمّنة `url_citation` في كتلة المحتوى النصي. يربط كل تعليق توضيحي جزءًا من نص الردّ (من خلال `start_index` و`end_index`) بعنوان URL المصدر الذي تم استخلاص المعلومات منه. هذه هي الطريقة الأساسية لعرض الاقتباسات في تطبيقك
+. اطّلِع على [المثال الرئيسي أعلاه](#get-started) لمعرفة كيفية استخراجها.
 
-回應中也會納入 `url_context_result` 步驟，其中含有每個網址擷取嘗試的中繼資料 (狀態、擷取的網址)。這項功能主要用於偵錯。
+يتضمّن الردّ أيضًا خطوة `url_context_result` تتضمّن بيانات وصفية حول كل محاولة لاسترداد عنوان URL (الحالة، عنوان URL الذي تم استرداده). ويكون ذلك مفيدًا بشكل أساسي لتحديد المشاكل وحلّها.
 
-### 安全檢查
+### عمليات فحص الأمان
 
-系統會對網址執行內容審查檢查，確認網址符合安全標準。如果網址未通過這項檢查，對應的 `url_context_result` 步驟會顯示 `status` `"unsafe"`。
+يُجري النظام فحصًا للإشراف على المحتوى في عناوين URL للتأكّد من استيفائها لمعايير الأمان. إذا لم يستوفِ عنوان URL هذا الفحص، ستعرض الخطوة المقابلة
+`url_context_result` `status` بقيمة `"unsafe"`.
 
-### 符記數量
+### عدد الرموز المميّزة
 
-系統會將從提示中指定網址擷取的內容，計為輸入權杖的一部分。您可以在互動的 `usage` 物件中查看詞元數。範例如下：
+يتم احتساب المحتوى الذي يتم استرداده من عناوين URL التي تحدّدها في التعليمات البرمجية كجزء من الرموز المميّزة للإدخال. يمكنك الاطّلاع على عدد الرموز المميّزة في الكائن `usage` للتفاعل. في ما يلي مثال:
 
 ```
 'usage': {
@@ -222,57 +235,63 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-每個權杖的價格取決於使用的模型，詳情請參閱[定價](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw)頁面。
+يعتمد السعر لكل رمز مميّز على النموذج المستخدَم، اطّلِع على
+[صفحة الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar) للحصول على التفاصيل.
 
-## 支援的模型
+## النماذج المتوافقة
 
-| 模型 | 網址背景資訊 |
+| الطراز | سياق عنوان URL |
 | --- | --- |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=zh-tw) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-tw) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=zh-tw) | ✔️ |
-| [Gemini 3.1 Pro 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-tw) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-tw) | ✔️ |
-| [Gemini 3 Flash 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-tw) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=ar) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=ar) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ar) | ✔️ |
+| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ar) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ar) | ✔️ |
+| [Gemini 3 Flash Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ar) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ar) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ar) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ar) | ✔️ |
 
-## 最佳做法
+## أفضل الممارسات
 
-- **提供具體網址**：為獲得最佳結果，請提供您希望模型分析的內容的直接網址。模型只會從您提供的網址擷取內容，不會從巢狀連結擷取任何內容。
-- **檢查存取權**：確認提供的網址不會導向需要登入或位於付費牆後的網頁。
-- **使用完整網址**：請提供完整網址，包括通訊協定 (例如 https://www.google.com，而不是只有 google.com)。
+- **توفير عناوين URL محدّدة**: للحصول على أفضل النتائج، قدِّم عناوين URL مباشرةً إلى
+  المحتوى الذي تريد أن يحلّله النموذج. لن يستردّ النموذج سوى المحتوى من عناوين URL التي تقدّمها، وليس أي محتوى من الروابط المضمّنة.
+- **التحقّق من إمكانية الوصول**: تأكَّد من أنّ عناوين URL التي تقدّمها لا تؤدي إلى
+  صفحات تتطلّب تسجيل الدخول أو تكون محجوبة بنظام حظر الاشتراك غير المدفوع.
+- **استخدام عنوان URL الكامل**: قدِّم عنوان URL كاملاً، بما في ذلك البروتوكول
+  (على سبيل المثال، https://www.google.com بدلاً من google.com فقط).
 
-## 限制
+## القيود
 
-- 要求限制：這項工具每次最多可處理 20 個網址。
-- 網址內容大小：從單一網址擷取的內容大小上限為 34 MB。
-- 公開存取：網址必須可在網路上公開存取。
-  系統不支援本機主機位址 (例如 localhost、127.0.0.1)、私人網路和通道服務 (例如 ngrok、pinggy)。
-- 僅限 Gemini API：網址背景資訊僅適用於 Gemini API，不適用於 Gemini Enterprise Agent Platform。
+- حدّ الطلب: يمكن للأداة معالجة ما يصل إلى 20 عنوان URL لكل طلب.
+- حجم محتوى عنوان URL: الحد الأقصى لحجم المحتوى الذي يتم استرداده من عنوان URL واحد هو 34 ميغابايت.
+- إمكانية الوصول للجميع: يجب أن تكون عناوين URL متاحة للجميع على الإنترنت.
+  لا تتوافق عناوين localhost (مثل localhost و127.0.0.1) والشبكات الخاصة وخدمات الأنفاق (مثل ngrok وpinggy).
+- Gemini API فقط: لا تتوفّر ميزة "سياق عنوان URL" إلا في Gemini API، وليس من خلال Gemini Enterprise Agent Platform.
 
-### 支援及不支援的內容類型
+### أنواع المحتوى المتوافقة وغير المتوافقة
 
-這項工具可從下列內容類型的網址中擷取內容：
+يمكن للأداة استخراج المحتوى من عناوين URL التي تتضمّن أنواع المحتوى التالية:
 
-- 文字 (text/html、application/json、text/plain、text/xml、text/css、text/javascript、text/csv、text/rtf)
-- 圖片 (image/png、image/jpeg、image/bmp、image/webp)
-- PDF (application/pdf)
+- النص (text/html وapplication/json وtext/plain وtext/xml وtext/css وtext/javascript وtext/csv وtext/rtf)
+- الصورة (image/png وimage/jpeg وimage/bmp وimage/webp)
+- ملف PDF ‏ (application/pdf)
 
-系統「不」支援下列內容類型：
+أنواع المحتوى التالية **غير** متوافقة:
 
-- 付費牆內容
-- YouTube 影片 (請參閱[影片理解](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-tw#youtube)，瞭解如何處理 YouTube 網址)
-- Google Workspace 檔案，例如 Google 文件或試算表
-- 影片和音訊檔案
+- محتوى مدفوع
+- فيديوهات YouTube (اطّلِع على
+  [فهم الفيديو](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ar#youtube) لمعرفة
+  كيفية معالجة عناوين URL لفيديوهات YouTube)
+- ملفات Google Workspace، مثل مستندات Google أو جداول البيانات
+- ملفات الفيديو والصوت
 
-提供意見
+إرسال ملاحظات
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-上次更新時間：2026-09-12 (世界標準時間)。
+تاريخ التعديل الأخير: 2026-09-12 (حسب التوقيت العالمي المتفَّق عليه)
 
-想進一步說明嗎？
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-12 (世界標準時間)。"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-12 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

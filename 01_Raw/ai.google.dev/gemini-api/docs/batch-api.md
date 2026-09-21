@@ -1,49 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/batch-api?hl=de
-fetched_at: 2026-09-14T05:54:40.029390+00:00
+source_url: https://ai.google.dev/gemini-api/docs/batch-api?hl=th
+fetched_at: 2026-09-21T05:45:30.489395+00:00
 title: "Batch API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Feedback geben
+ส่งความคิดเห็น
 
 # Batch API
 
-Die Gemini Batch API wurde entwickelt, um große Mengen von Anfragen
-asynchron zu [50% der Standardkosten](https://ai.google.dev/gemini-api/docs/pricing?hl=de) zu verarbeiten.
-Die angestrebte Bearbeitungszeit beträgt 24 Stunden, ist aber in den meisten Fällen viel kürzer.
+Gemini Batch API ออกแบบมาเพื่อประมวลผลคำขอจำนวนมาก
+แบบไม่พร้อมกันโดยคิดค่าใช้จ่าย [50% ของราคามาตรฐาน](https://ai.google.dev/gemini-api/docs/pricing?hl=th)
+เวลาดำเนินการที่ตั้งไว้คือ 24 ชั่วโมง แต่ในกรณีส่วนใหญ่จะเร็วกว่านั้นมาก
 
-Verwenden Sie die Batch API für umfangreiche, nicht dringende Aufgaben wie die Datenvorverarbeitung oder die Ausführung von Auswertungen, bei denen keine sofortige Antwort erforderlich ist.
+ใช้ Batch API สำหรับงานขนาดใหญ่ที่ไม่เร่งด่วน เช่น การประมวลผลข้อมูลล่วงหน้าหรือการประเมินผลที่ไม่ได้ต้องการการตอบกลับทันที
 
-## Batchjob erstellen
+## การสร้างงานแบบกลุ่ม
 
-Es gibt zwei Möglichkeiten, Anfragen in der Batch API zu senden:
+คุณส่งคำขอใน Batch API ได้ 2 วิธี ดังนี้
 
-- **[Inline-Anfragen](#inline-requests):** Eine Liste von
-  [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=de#GenerateContentRequest)-Objekten,
-  die direkt in die Batch-Erstellungsanfrage aufgenommen werden. Diese Methode eignet sich für kleinere Batches, bei denen die Gesamtgröße der Anfrage unter 20 MB bleibt. Die vom Modell **zurückgegebene Ausgabe** ist eine Liste von `inlineResponse`-Objekten.
-- **[Eingabedatei](#input-file):** Eine [JSON Lines-Datei (JSONL)](https://jsonlines.org/)
-  , in der jede Zeile ein vollständiges
-  [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=de#GenerateContentRequest)-Objekt enthält.
-  Diese Methode wird für größere Anfragen empfohlen. Die vom Modell **zurückgegebene Ausgabe** ist eine JSONL-Datei, in der jede Zeile entweder ein `GenerateContentResponse`- oder ein Statusobjekt ist.
+- **[คำขอแบบอินไลน์](#inline-requests):** รายการออบเจ็กต์
+  [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=th#GenerateContentRequest) ที่รวมอยู่ในคำขอสร้างแบบกลุ่มโดยตรง วิธีนี้เหมาะสำหรับกลุ่มขนาดเล็กที่ทำให้ขนาดคำขอทั้งหมดไม่เกิน 20 MB **เอาต์พุต** ที่ส่งคืนจากโมเดลคือรายการออบเจ็กต์ `inlineResponse`
+- **[ไฟล์อินพุต](#input-file):** ไฟล์ [JSON Lines (JSONL)](https://jsonlines.org/)
+  ที่แต่ละบรรทัดมีออบเจ็กต์
+  [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=th#GenerateContentRequest) ที่สมบูรณ์
+  เราขอแนะนำให้ใช้วิธีนี้สำหรับคำขอขนาดใหญ่ **เอาต์พุต** ที่ส่งคืนจากโมเดลคือไฟล์ JSONL ที่แต่ละบรรทัดเป็น `GenerateContentResponse` หรือออบเจ็กต์สถานะ
 
-### Inline-Anfragen
+### คำขอแบบอินไลน์
 
-Bei einer kleinen Anzahl von Anfragen können Sie die
-[`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=de#GenerateContentRequest) Objekte
-direkt in Ihre [`BatchGenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=de#request-body) einbetten. Im
-folgenden Beispiel wird die
-[`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=de#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent)
-Methode mit Inline-Anfragen aufgerufen:
+สำหรับคำขอจำนวนเล็กน้อย คุณสามารถฝัง
+[`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=th#GenerateContentRequest) ออบเจ็กต์
+ไว้ใน [`BatchGenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=th#request-body) ได้โดยตรง ตัวอย่างต่อไปนี้จะเรียกใช้เมธอด
+[`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=th#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent)
+ด้วยคำขอแบบอินไลน์
 
 ### Python
 
@@ -70,7 +68,7 @@ inline_requests = [
 ]
 
 inline_batch_job = client.batches.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     src=inline_requests,
     config={
         'display_name': "inlined-requests-job-1",
@@ -103,7 +101,7 @@ const inlinedRequests = [
 ]
 
 const response = await ai.batches.create({
-    model: 'gemini-3.6-flash',
+    model: 'gemini-3.8-flash',
     src: inlinedRequests,
     config: {
         displayName: 'inlined-requests-job-1',
@@ -113,10 +111,54 @@ const response = await ai.batches.create({
 console.log(response);
 ```
 
+### Java
+
+```
+import java.util.Arrays;
+import com.google.genai.Client;
+import com.google.genai.types.BatchJob;
+import com.google.genai.types.BatchJobSource;
+import com.google.genai.types.Content;
+import com.google.genai.types.CreateBatchJobConfig;
+import com.google.genai.types.InlinedRequest;
+import com.google.genai.types.Part;
+import java.util.List;
+
+Client client = new Client();
+
+// A list of InlinedRequest objects
+List<InlinedRequest> inlineRequests =
+    Arrays.asList(
+        InlinedRequest.builder()
+            .contents(
+                Arrays.asList(
+                    Content.builder()
+                        .role("user")
+                        .parts(Arrays.asList(Part.fromText("Tell me a one-sentence joke.")))
+                        .build()))
+            .build(),
+        InlinedRequest.builder()
+            .contents(
+                Arrays.asList(
+                    Content.builder()
+                        .role("user")
+                        .parts(Arrays.asList(Part.fromText("Why is the sky blue?")))
+                        .build()))
+            .build());
+
+BatchJobSource src = BatchJobSource.builder().inlinedRequests(inlineRequests).build();
+CreateBatchJobConfig config =
+    CreateBatchJobConfig.builder().displayName("inlined-requests-job-1").build();
+
+BatchJob inlineBatchJob = client.batches.create("gemini-3.8-flash", src, config);
+
+System.out.println("Created batch job: " + inlineBatchJob.name().orElse(""));
+```
+
 ### REST
 
 ```
-curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:batchGenerateContent \
+curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:batchGenerateContent \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -X POST \
 -H "Content-Type:application/json" \
@@ -145,26 +187,26 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:ba
 }'
 ```
 
-### Eingabedatei
+### ไฟล์อินพุต
 
-Für größere Anfragesätze bereiten Sie eine JSON Lines-Datei (JSONL) vor. Jede Zeile in
-dieser Datei muss ein JSON-Objekt mit einem benutzerdefinierten Schlüssel und einem Anfrage
-objekt sein, wobei die Anfrage ein gültiges
-[`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=de#GenerateContentRequest)-Objekt sein muss. Der benutzerdefinierte Schlüssel wird in der Antwort verwendet, um anzugeben, welche Ausgabe das Ergebnis welcher Anfrage ist. Die Anfrage mit dem Schlüssel `request-1` wird beispielsweise mit demselben Schlüsselnamen annotiert.
+สำหรับคำขอจำนวนมาก ให้เตรียมไฟล์ JSON Lines (JSONL) แต่ละบรรทัดใน
+ไฟล์นี้ต้องเป็นออบเจ็กต์ JSON ที่มีคีย์ที่ผู้ใช้กำหนดและออบเจ็กต์คำขอ
+โดยคำขอต้องเป็นออบเจ็กต์
+[`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=th#GenerateContentRequest) ที่ถูกต้อง ระบบจะใช้คีย์ที่ผู้ใช้กำหนดในคำตอบเพื่อระบุว่าเอาต์พุตใดเป็นผลลัพธ์ของคำขอใด ตัวอย่างเช่น คำขอที่มีคีย์กำหนดเป็น `request-1` จะมีคำตอบที่ใส่คำอธิบายประกอบด้วยชื่อคีย์เดียวกัน
 
-Diese Datei wird mit der [File API](https://ai.google.dev/gemini-api/docs/files?hl=de) hochgeladen. Die maximal zulässige Dateigröße für eine Eingabedatei beträgt 2 GB.
+ระบบจะอัปโหลดไฟล์นี้โดยใช้ [File API](https://ai.google.dev/gemini-api/docs/files?hl=th) ขนาดไฟล์สูงสุดที่อนุญาตสำหรับไฟล์อินพุตคือ 2 GB
 
-Das folgende Beispiel zeigt eine JSONL-Datei. Sie können sie in einer Datei mit dem Namen `my-batch-requests.json` speichern:
+ตัวอย่างไฟล์ JSONL มีดังนี้ คุณสามารถบันทึกไฟล์นี้ในชื่อ `my-batch-requests.json` ได้
 
 ```
 {"key": "request-1", "request": {"contents": [{"parts": [{"text": "Describe the process of photosynthesis."}]}], "generation_config": {"temperature": 0.7}}}
 {"key": "request-2", "request": {"contents": [{"parts": [{"text": "What are the main ingredients in a Margherita pizza?"}]}]}}
 ```
 
-Ähnlich wie bei Inline-Anfragen können Sie in jeder JSON-Anfrage andere Parameter wie Systemanweisungen, Tools oder andere Konfigurationen angeben.
+เช่นเดียวกับคำขอแบบอินไลน์ คุณสามารถระบุพารามิเตอร์อื่นๆ เช่น คำแนะนำของระบบ เครื่องมือ หรือการกำหนดค่าอื่นๆ ใน JSON ของคำขอแต่ละรายการได้
 
-Sie können diese Datei mit der [File API](https://ai.google.dev/gemini-api/docs/files?hl=de) hochladen, wie
-im folgenden Beispiel gezeigt. Wenn Sie multimodale Eingaben verwenden, können Sie in Ihrer JSONL-Datei auf andere hochgeladene Dateien verweisen.
+คุณสามารถอัปโหลดไฟล์นี้โดยใช้ [File API](https://ai.google.dev/gemini-api/docs/files?hl=th) ตามที่
+แสดงในตัวอย่างต่อไปนี้ หากใช้ข้อมูลอินพุตหลายรูปแบบ คุณสามารถอ้างอิงไฟล์อื่นๆ ที่อัปโหลดไว้ในไฟล์ JSONL ได้
 
 ### Python
 
@@ -249,6 +291,37 @@ const uploadedFile = await ai.files.upload({file: 'my-batch-requests.jsonl', con
 console.log(uploadedFile.name);
 ```
 
+### Java
+
+```
+import java.util.Arrays;
+import com.google.genai.Client;
+import com.google.genai.types.File;
+import com.google.genai.types.UploadFileConfig;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+
+Client client = new Client();
+
+// Create a sample JSONL file
+List<String> requests =
+    Arrays.asList(
+        "{\"key\": \"request-1\", \"request\": {\"contents\": [{\"parts\": [{\"text\": \"Describe the process of photosynthesis.\"}]}]}}",
+        "{\"key\": \"request-2\", \"request\": {\"contents\": [{\"parts\": [{\"text\": \"What are the main ingredients in a Margherita pizza?\"}]}]}}");
+Files.write(Paths.get("my-batch-requests.jsonl"), requests);
+
+// Upload the file to the File API
+UploadFileConfig uploadConfig =
+    UploadFileConfig.builder()
+        .displayName("my-batch-requests")
+        .mimeType("jsonl")
+        .build();
+File uploadedFile = client.files.upload("my-batch-requests.jsonl", uploadConfig);
+
+System.out.println("Uploaded file: " + uploadedFile.name().orElse(""));
+```
+
 ### REST
 
 ```
@@ -285,9 +358,9 @@ curl "${upload_url}" \
 file_uri=$(jq ".file.uri" file_info.json)
 ```
 
-Im folgenden Beispiel wird die
-[`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=de#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent)
-Methode mit der Eingabedatei aufgerufen, die mit der File API hochgeladen wurde:
+ตัวอย่างต่อไปนี้จะเรียกใช้
+[`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=th#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent)
+เมธอดโดยใช้ไฟล์อินพุตที่อัปโหลดโดยใช้ File API
 
 ### Python
 
@@ -297,7 +370,7 @@ from google import genai
 # Assumes `uploaded_file` is the file object from the previous step
 client = genai.Client()
 file_batch_job = client.batches.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     src=uploaded_file.name,
     config={
         'display_name': "file-upload-job-1",
@@ -312,7 +385,7 @@ print(f"Created batch job: {file_batch_job.name}")
 ```
 // Assumes `uploadedFile` is the file object from the previous step
 const fileBatchJob = await ai.batches.create({
-    model: 'gemini-3.6-flash',
+    model: 'gemini-3.8-flash',
     src: uploadedFile.name,
     config: {
         displayName: 'file-upload-job-1',
@@ -322,12 +395,34 @@ const fileBatchJob = await ai.batches.create({
 console.log(fileBatchJob);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.BatchJob;
+import com.google.genai.types.BatchJobSource;
+import com.google.genai.types.CreateBatchJobConfig;
+
+Client client = new Client();
+
+// Assumes `uploadedFileName` is the file name from the previous step
+String uploadedFileName = "files/my-batch-requests-id";
+
+BatchJobSource src = BatchJobSource.builder().fileName(uploadedFileName).build();
+CreateBatchJobConfig config =
+    CreateBatchJobConfig.builder().displayName("file-upload-job-1").build();
+
+BatchJob fileBatchJob = client.batches.create("gemini-3.8-flash", src, config);
+
+System.out.println("Created batch job: " + fileBatchJob.name().orElse(""));
+```
+
 ### REST
 
 ```
 # Set the File ID taken from the upload response.
 BATCH_INPUT_FILE='files/123456'
-curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:batchGenerateContent \
+curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:batchGenerateContent \
 -X POST \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -H "Content-Type:application/json" \
@@ -341,23 +436,23 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:ba
 }"
 ```
 
-Wenn Sie einen Batchjob erstellen, wird ein Jobname zurückgegeben. Verwenden Sie diesen Namen
-für [die Überwachung](#batch-job-status) des Jobstatus sowie
-[das Abrufen der Ergebnisse](#retrieve-batch-results), sobald der Job abgeschlossen ist.
+เมื่อสร้างงานแบบกลุ่ม คุณจะได้รับชื่อของงาน ใช้ชื่อนี้
+เพื่อ [ตรวจสอบ](#batch-job-status)สถานะของงาน รวมถึง
+[ดึงข้อมูลผลลัพธ์](#retrieve-batch-results)เมื่องานเสร็จสมบูรณ์
 
-Das folgende Beispiel zeigt eine Ausgabe mit einem Jobnamen:
+ตัวอย่างเอาต์พุตที่มีชื่อของงานมีดังนี้
 
 ```
 Created batch job from file: batches/123456789
 ```
 
-### Batch-Einbettung wird unterstützt
+### การรองรับการฝังแบบกลุ่ม
 
-Sie können die Batch API verwenden, um mit dem
-[Einbettungsmodell](https://ai.google.dev/gemini-api/docs/embeddings?hl=de) zu interagieren und so einen höheren Durchsatz zu erzielen.
-Wenn Sie einen Batchjob für Einbettungen mit [Inline-Anfragen](#inline-requests)
-oder [Eingabedateien](#input-file) erstellen möchten, verwenden Sie die `batches.create_embeddings` API und
-geben Sie das Einbettungsmodell an.
+คุณสามารถใช้ Batch API เพื่อโต้ตอบกับ
+[โมเดลการฝัง](https://ai.google.dev/gemini-api/docs/embeddings?hl=th)เพื่อเพิ่มปริมาณงาน
+หากต้องการสร้างงานแบบกลุ่มการฝังด้วย[คำขอแบบอินไลน์](#inline-requests)
+หรือ[ไฟล์อินพุต](#input-file) ให้ใช้ API `batches.create_embeddings` และ
+ระบุโมเดลการฝัง
 
 ### Python
 
@@ -405,11 +500,50 @@ batchJob = await client.batches.createEmbeddings({
 console.log(`Created batch job: ${batchJob.name}`);
 ```
 
-Weitere Beispiele finden Sie im Abschnitt Einbettungen im [Batch API-Cookbook](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb).
+### Java
 
-### Anfragekonfiguration
+```
+import java.util.Arrays;
+import com.google.genai.Client;
+import com.google.genai.types.BatchJob;
+import com.google.genai.types.Content;
+import com.google.genai.types.CreateEmbeddingsBatchJobConfig;
+import com.google.genai.types.EmbedContentBatch;
+import com.google.genai.types.EmbeddingsBatchJobSource;
+import com.google.genai.types.Part;
+import java.util.List;
 
-Sie können alle Anfragekonfigurationen verwenden, die Sie auch in einer Standardanfrage ohne Batch verwenden würden. Sie können beispielsweise die Temperatur oder Systemanweisungen angeben oder sogar andere Modalitäten übergeben. Das folgende Beispiel zeigt eine Inline-Anfrage mit einer Systemanweisung für eine der Anfragen:
+Client client = new Client();
+
+String uploadedFileName = "files/my-embedding-requests-id";
+
+// Creating an embeddings batch job with an input file request:
+BatchJob fileJob =
+    client.batches.createEmbeddings(
+        "gemini-embedding-2",
+        EmbeddingsBatchJobSource.builder().fileName(uploadedFileName).build(),
+        CreateEmbeddingsBatchJobConfig.builder().displayName("Input embeddings batch").build());
+System.out.println("Created batch job: " + fileJob.name().orElse(""));
+
+// Creating an embeddings batch job with an inline request:
+EmbedContentBatch inlinedRequests =
+    EmbedContentBatch.builder()
+        .contents(Arrays.asList(Content.fromParts(Part.fromText("What is the meaning of life?"))))
+        .build();
+BatchJob batchJob =
+    client.batches.createEmbeddings(
+        "gemini-embedding-2",
+        EmbeddingsBatchJobSource.builder().inlinedRequests(inlinedRequests).build(),
+        CreateEmbeddingsBatchJobConfig.builder().displayName("Inlined embeddings batch").build());
+System.out.println("Created batch job: " + batchJob.name().orElse(""));
+```
+
+อ่านส่วนการฝังใน[คู่มือการใช้งาน Batch API](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb)
+เพื่อดูตัวอย่างเพิ่มเติม
+
+### การกำหนดค่าคำขอ
+
+คุณสามารถรวมการกำหนดค่าคำขอใดก็ได้ที่จะใช้ในคำขอมาตรฐานที่ไม่ใช่แบบกลุ่ม เช่น คุณระบุอุณหภูมิ คำแนะนำของระบบ หรือแม้แต่ส่งต่อรูปแบบอื่นๆ ได้ ตัวอย่างต่อไปนี้แสดงคำขอแบบอินไลน์ที่มีคำแนะนำของระบบสำหรับคำขอรายการหนึ่ง
 
 ### Python
 
@@ -437,8 +571,33 @@ inlineRequestsList = [
 ]
 ```
 
-Sie können auch Tools angeben, die für eine Anfrage verwendet werden sollen. Das folgende Beispiel
-zeigt eine Anfrage, die das [Google Suche-Tool](https://ai.google.dev/gemini-api/docs/google-search?hl=de) aktiviert:
+### Java
+
+```
+import java.util.Arrays;
+import com.google.genai.types.Content;
+import com.google.genai.types.GenerateContentConfig;
+import com.google.genai.types.InlinedRequest;
+import com.google.genai.types.Part;
+import java.util.List;
+
+List<InlinedRequest> inlineRequestsList =
+    Arrays.asList(
+        InlinedRequest.builder()
+            .contents(Arrays.asList(Content.fromParts(Part.fromText("Write a short poem about a cloud."))))
+            .build(),
+        InlinedRequest.builder()
+            .contents(Arrays.asList(Content.fromParts(Part.fromText("Write a short poem about a cat."))))
+            .config(
+                GenerateContentConfig.builder()
+                    .systemInstruction(
+                        Content.fromParts(Part.fromText("You are a cat. Your name is Neko.")))
+                    .build())
+            .build());
+```
+
+เช่นเดียวกัน คุณสามารถระบุเครื่องมือที่จะใช้สำหรับคำขอได้ ตัวอย่างต่อไปนี้
+แสดงคำขอที่เปิดใช้เครื่องมือ [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th)
 
 ### Python
 
@@ -459,8 +618,34 @@ inlineRequestsList = [
 ]
 ```
 
-Sie können auch eine [strukturierte Ausgabe](https://ai.google.dev/gemini-api/docs/structured-output?hl=de) angeben.
-Das folgende Beispiel zeigt, wie Sie für Ihre Batchanfragen angeben.
+### Java
+
+```
+import java.util.Arrays;
+import com.google.genai.types.Content;
+import com.google.genai.types.GenerateContentConfig;
+import com.google.genai.types.GoogleSearch;
+import com.google.genai.types.InlinedRequest;
+import com.google.genai.types.Part;
+import com.google.genai.types.Tool;
+import java.util.List;
+
+List<InlinedRequest> inlinedRequests =
+    Arrays.asList(
+        InlinedRequest.builder()
+            .contents(Arrays.asList(Content.fromParts(Part.fromText("Who won the euro 1998?"))))
+            .build(),
+        InlinedRequest.builder()
+            .contents(Arrays.asList(Content.fromParts(Part.fromText("Who won the euro 2025?"))))
+            .config(
+                GenerateContentConfig.builder()
+                    .tools(Tool.builder().googleSearch(GoogleSearch.builder().build()).build())
+                    .build())
+            .build());
+```
+
+นอกจากนี้ คุณยังระบุ[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)ได้ด้วย
+ตัวอย่างต่อไปนี้แสดงวิธีระบุสำหรับคำขอแบบกลุ่ม
 
 ### Python
 
@@ -500,7 +685,7 @@ inline_requests = [
 ]
 
 inline_batch_job = client.batches.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     src=inline_requests,
     config={
         'display_name': "structured-output-job-1"
@@ -603,7 +788,7 @@ const inlinedRequests = [
 ]
 
 const inlinedBatchJob = await ai.batches.create({
-    model: 'gemini-3.6-flash',
+    model: 'gemini-3.8-flash',
     src: inlinedRequests,
     config: {
         displayName: 'inlined-requests-job-1',
@@ -611,7 +796,124 @@ const inlinedBatchJob = await ai.batches.create({
 });
 ```
 
-Das folgende Beispiel zeigt eine Ausgabe dieses Jobs:
+### Java
+
+```
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Arrays;
+import java.util.Collections;
+import com.google.genai.Client;
+import com.google.genai.types.BatchJob;
+import com.google.genai.types.BatchJobSource;
+import com.google.genai.types.Content;
+import com.google.genai.types.CreateBatchJobConfig;
+import com.google.genai.types.GenerateContentConfig;
+import com.google.genai.types.InlinedRequest;
+import com.google.genai.types.InlinedResponse;
+import com.google.genai.types.JobState;
+import com.google.genai.types.Part;
+import com.google.genai.types.Schema;
+import com.google.genai.types.Type;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+Client client = new Client();
+
+Map<String, Schema> properties = new HashMap<>();
+properties.put("recipeName", Schema.builder().type(Type.Known.STRING).build());
+properties.put(
+    "ingredients",
+    Schema.builder()
+        .type(Type.Known.ARRAY)
+        .items(Schema.builder().type(Type.Known.STRING).build())
+        .build());
+
+Schema recipeSchema =
+    Schema.builder()
+        .type(Type.Known.ARRAY)
+        .items(
+            Schema.builder()
+                .type(Type.Known.OBJECT)
+                .properties(
+properties)
+                .required("recipeName")
+                .build())
+        .build();
+
+GenerateContentConfig jsonConfig =
+    GenerateContentConfig.builder()
+        .responseMimeType("application/json")
+        .responseSchema(recipeSchema)
+        .build();
+
+List<InlinedRequest> inlineRequests =
+    Arrays.asList(
+        InlinedRequest.builder()
+            .contents(
+                Arrays.asList(
+                    Content.builder()
+                        .role("user")
+                        .parts(
+                            Arrays.asList(
+                                Part.fromText(
+                                    "List a few popular cookie recipes, and include the amounts of ingredients.")))
+                        .build()))
+            .config(jsonConfig)
+            .build(),
+        InlinedRequest.builder()
+            .contents(
+                Arrays.asList(
+                    Content.builder()
+                        .role("user")
+                        .parts(
+                            Arrays.asList(
+                                Part.fromText(
+                                    "List a few popular gluten free cookie recipes, and include the amounts of ingredients.")))
+                        .build()))
+            .config(jsonConfig)
+            .build());
+
+BatchJob inlineBatchJob =
+    client.batches.create(
+        "gemini-3.8-flash",
+        BatchJobSource.builder().inlinedRequests(inlineRequests).build(),
+        CreateBatchJobConfig.builder().displayName("structured-output-job-1").build());
+
+// Wait for the job to finish
+String jobName = inlineBatchJob.name().get();
+System.out.println("Polling status for job: " + jobName);
+
+Set<JobState.Known> completedStates =
+    new HashSet<>(Arrays.asList(
+        JobState.Known.JOB_STATE_SUCCEEDED,
+        JobState.Known.JOB_STATE_FAILED,
+        JobState.Known.JOB_STATE_CANCELLED,
+        JobState.Known.JOB_STATE_EXPIRED));
+
+BatchJob batchJobInline = client.batches.get(jobName, null);
+while (!completedStates.contains(batchJobInline.state().get().knownEnum())) {
+  System.out.println(
+      "Job not finished. Current state: " + batchJobInline.state().get() + ". Waiting 30 seconds...");
+  Thread.sleep(30000);
+  batchJobInline = client.batches.get(jobName, null);
+}
+
+System.out.println("Job finished with state: " + batchJobInline.state().get());
+
+// Print the response
+List<InlinedResponse> responses = batchJobInline.dest().get().inlinedResponses().orElse(Collections.emptyList());
+for (int i = 0; i < responses.size(); i++) {
+  System.out.println("\n--- Response " + (i + 1) + " ---");
+  InlinedResponse inlineResponse = responses.get(i);
+  if (inlineResponse.response().isPresent()) {
+    System.out.println(inlineResponse.response().get().text());
+  }
+}
+```
+
+ตัวอย่างต่อไปนี้แสดงเอาต์พุตของงานนี้
 
 ```
 --- Response 1 ---
@@ -707,20 +1009,20 @@ Das folgende Beispiel zeigt eine Ausgabe dieses Jobs:
 ]
 ```
 
-## Jobstatus überwachen
+## การตรวจสอบสถานะของงาน
 
-Verwenden Sie den Vorgangsnamen, den Sie beim Erstellen des Batchjobs erhalten haben, um den Status abzufragen.
-Das Feld „Status“ des Batchjobs gibt den aktuellen Status an. Ein Batchjob kann einen der folgenden Status haben:
+ใช้ชื่อการดำเนินการที่ได้รับเมื่อสร้างงานแบบกลุ่มเพื่อสำรวจสถานะของงาน
+ฟิลด์สถานะของงานแบบกลุ่มจะระบุสถานะปัจจุบันของงาน งานแบบกลุ่มอาจมีสถานะอย่างใดอย่างหนึ่งต่อไปนี้
 
-- `JOB_STATE_PENDING`: Der Job wurde erstellt und wartet darauf, vom Dienst verarbeitet zu werden.
-- `JOB_STATE_RUNNING`: Der Job wird bearbeitet.
-- `JOB_STATE_SUCCEEDED`: Der Job wurde erfolgreich abgeschlossen. Sie können jetzt die Ergebnisse abrufen.
-- `JOB_STATE_FAILED`: Der Job ist fehlgeschlagen. Weitere Informationen finden Sie in den Fehlerdetails.
-- `JOB_STATE_CANCELLED`: Der Job wurde vom Nutzer abgebrochen.
-- `JOB_STATE_EXPIRED`: Der Job ist abgelaufen, weil er seit mehr als 48 Stunden ausgeführt wird oder aussteht. Für den Job sind keine Ergebnisse abrufbar.
-  Sie können versuchen, den Job noch einmal zu senden oder die Anfragen in kleinere Batches aufzuteilen.
+- `JOB_STATE_PENDING`: ระบบสร้างงานแล้วและกำลังรอให้บริการประมวลผล
+- `JOB_STATE_RUNNING`: งานกำลังดำเนินการ
+- `JOB_STATE_SUCCEEDED`: งานเสร็จสมบูรณ์แล้ว ตอนนี้คุณสามารถดึงข้อมูลผลลัพธ์ได้แล้ว
+- `JOB_STATE_FAILED`: งานล้มเหลว ดูข้อมูลเพิ่มเติมได้ในรายละเอียดข้อผิดพลาด
+- `JOB_STATE_CANCELLED`: ผู้ใช้ยกเลิกงาน
+- `JOB_STATE_EXPIRED`: งานหมดอายุเนื่องจากทำงานหรือรอนานกว่า 48 ชั่วโมง งานจะไม่มีผลลัพธ์ให้ดึงข้อมูล
+  คุณลองส่งงานอีกครั้งหรือแบ่งคำขอออกเป็นกลุ่มย่อยๆ ได้
 
-Sie können den Jobstatus regelmäßig abfragen, um zu prüfen, ob der Job abgeschlossen ist.
+คุณสามารถสำรวจสถานะของงานเป็นระยะๆ เพื่อตรวจสอบว่างานเสร็จสมบูรณ์แล้วหรือไม่
 
 ### Python
 
@@ -786,11 +1088,47 @@ try {
 }
 ```
 
-### Abfragen und Webhooks
+### Java
 
-**Keine Lust mehr auf Abfragen?** Gemini unterstützt jetzt
-[Webhooks](https://ai.google.dev/gemini-api/docs/webhooks?hl=de) für die asynchrone Verarbeitung von Vervollständigungen.
-Anstatt `GET / operations` kontinuierlich aufzurufen, abonnieren Sie direkt `batch.succeeded`, damit die Gemini API Echtzeitbenachrichtigungen an Ihren Server senden kann, wenn asynchrone oder lang andauernde Vorgänge abgeschlossen sind.
+```
+import java.util.HashSet;
+import java.util.Arrays;
+import com.google.genai.Client;
+import com.google.genai.types.BatchJob;
+import com.google.genai.types.JobState;
+import java.util.Set;
+
+Client client = new Client();
+
+// Use the name of the job you want to check
+String jobName = "batches/your-batch-id";
+
+Set<JobState.Known> completedStates =
+    new HashSet<>(Arrays.asList(
+        JobState.Known.JOB_STATE_SUCCEEDED,
+        JobState.Known.JOB_STATE_FAILED,
+        JobState.Known.JOB_STATE_CANCELLED,
+        JobState.Known.JOB_STATE_EXPIRED));
+
+System.out.println("Polling status for job: " + jobName);
+BatchJob batchJob = client.batches.get(jobName, null);
+while (!completedStates.contains(batchJob.state().get().knownEnum())) {
+  System.out.println("Current state: " + batchJob.state().get());
+  Thread.sleep(30000); // Wait for 30 seconds before polling again
+  batchJob = client.batches.get(jobName, null);
+}
+
+System.out.println("Job finished with state: " + batchJob.state().get());
+if (batchJob.state().get().knownEnum() == JobState.Known.JOB_STATE_FAILED) {
+  System.out.println("Error: " + batchJob.error().orElse(null));
+}
+```
+
+### การสำรวจและเว็บฮุค
+
+**เบื่อการสำรวจแล้วใช่ไหม** ตอนนี้ Gemini รองรับ
+[เว็บฮุค](https://ai.google.dev/gemini-api/docs/webhooks?hl=th)สำหรับการประมวลผลการเติมข้อความแบบไม่พร้อมกันแล้ว
+แทนที่จะเรียกใช้ `GET / operations` อย่างต่อเนื่อง ให้สมัครใช้บริการ `batch.succeeded` โดยตรงเพื่ออนุญาตให้ Gemini API ส่งการแจ้งเตือนแบบเรียลไทม์ไปยังเซิร์ฟเวอร์ของคุณเมื่อการดำเนินการแบบไม่พร้อมกันหรือการดำเนินการที่ใช้เวลานานเสร็จสมบูรณ์
 
 ### Python
 
@@ -828,6 +1166,32 @@ async function createWebhook() {
 createWebhook();
 ```
 
+### Java
+
+```
+import java.util.Arrays;
+import com.google.genai.Client;
+import com.google.genai.gaos.models.webhooks.Webhook;
+import com.google.genai.gaos.models.webhooks.WebhookInput;
+import com.google.genai.gaos.models.webhooks.WebhookSubscribedEvent;
+import java.util.List;
+
+Client client = new Client();
+
+WebhookInput input =
+    WebhookInput.builder()
+        .name("MyBatchWebhook")
+        .subscribedEvents(
+            Arrays.asList(
+                WebhookSubscribedEvent.BATCH_SUCCEEDED,
+                WebhookSubscribedEvent.BATCH_FAILED))
+        .uri("https://my-api.com/gemini-callback")
+        .build();
+
+Webhook webhook = client.webhooks.create(input).webhook().get();
+System.out.println("Created webhook: " + webhook.name().orElse(""));
+```
+
 ### REST
 
 ```
@@ -842,10 +1206,10 @@ curl -X POST \
   }'
 ```
 
-## Ergebnisse abrufen
+## การดึงข้อมูลผลลัพธ์
 
-Sobald der Jobstatus angibt, dass Ihr Batchjob erfolgreich war, sind die Ergebnisse im Feld `response` verfügbar.
-Standardmäßig werden Batchjob-Ergebnisse 6 Wochen lang gespeichert und können heruntergeladen werden, bevor sie endgültig gelöscht werden.
+เมื่อสถานะของงานระบุว่างานแบบกลุ่มเสร็จสมบูรณ์แล้ว ผลลัพธ์จะอยู่ในฟิลด์ `response`
+โดยค่าเริ่มต้น ระบบจะจัดเก็บผลลัพธ์ของงานแบบกลุ่มและให้ดาวน์โหลดได้เป็นเวลา 6 สัปดาห์ก่อนที่จะลบออกอย่างถาวร
 
 ### Python
 
@@ -967,6 +1331,74 @@ try {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.types.BatchJob;
+import com.google.genai.types.BatchJobDestination;
+import com.google.genai.types.InlinedEmbedContentResponse;
+import com.google.genai.types.InlinedResponse;
+import com.google.genai.types.JobState;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+
+Client client = new Client();
+
+// Use the name of the job you want to check
+String jobName = "batches/your-batch-id";
+BatchJob batchJob = client.batches.get(jobName, null);
+
+if (batchJob.state().get().knownEnum() == JobState.Known.JOB_STATE_SUCCEEDED) {
+  BatchJobDestination dest = batchJob.dest().orElse(null);
+
+  // If batch job was created with a file destination
+  if (dest != null && dest.fileName().isPresent()) {
+    String resultFileName = dest.fileName().get();
+    System.out.println("Results are in file: " + resultFileName);
+
+    System.out.println("Downloading result file content...");
+    client.files.download(resultFileName, "batch_results.jsonl", null);
+    String fileContent = Files.readString(Paths.get("batch_results.jsonl"));
+    System.out.println(fileContent);
+  }
+  // If batch job was created with inline requests
+  else if (dest != null && dest.inlinedResponses().isPresent()) {
+    System.out.println("Results are inline:");
+    List<InlinedResponse> responses = dest.inlinedResponses().get();
+    for (int i = 0; i < responses.size(); i++) {
+      System.out.println("Response " + (i + 1) + ":");
+      InlinedResponse inlineResponse = responses.get(i);
+      if (inlineResponse.response().isPresent()) {
+        System.out.println(inlineResponse.response().get().text());
+      } else if (inlineResponse.error().isPresent()) {
+        System.out.println("Error: " + inlineResponse.error().get());
+      }
+    }
+  }
+  // If batch job was an embedding batch with inline responses
+  else if (dest != null && dest.inlinedEmbedContentResponses().isPresent()) {
+    System.out.println("Embedding results found inline:");
+    List<InlinedEmbedContentResponse> responses = dest.inlinedEmbedContentResponses().get();
+    for (int i = 0; i < responses.size(); i++) {
+      System.out.println("Response " + (i + 1) + ":");
+      InlinedEmbedContentResponse inlineResponse = responses.get(i);
+      if (inlineResponse.response().isPresent()) {
+        System.out.println(inlineResponse.response().get());
+      } else if (inlineResponse.error().isPresent()) {
+        System.out.println("Error: " + inlineResponse.error().get());
+      }
+    }
+  } else {
+    System.out.println("No results found (neither file nor inline).");
+  }
+} else {
+  System.out.println("Job did not succeed. Final state: " + batchJob.state().get());
+  batchJob.error().ifPresent(err -> System.out.println("Error: " + err));
+}
+```
+
 ### REST
 
 ```
@@ -998,9 +1430,9 @@ elif [[ $batch_state == "JOB_STATE_EXPIRED" ]]; then
 fi
 ```
 
-## Batchjobs auflisten
+## การแสดงรายการงานแบบกลุ่ม
 
-Sie können Ihre letzten Batchjobs auflisten.
+คุณสามารถแสดงรายการงานแบบกลุ่มล่าสุดได้
 
 ### Python
 
@@ -1027,6 +1459,26 @@ for await (const batchJob of batchJobs) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.Pager;
+import com.google.genai.types.BatchJob;
+import com.google.genai.types.ListBatchJobsConfig;
+
+Client client = new Client();
+
+Pager<BatchJob> batchJobs = client.batches.list(null);
+
+// Optional query config:
+// Pager<BatchJob> batchJobs = client.batches.list(ListBatchJobsConfig.builder().pageSize(5).build());
+
+for (BatchJob batchJob : batchJobs) {
+  System.out.println(batchJob);
+}
+```
+
 ### REST
 
 ```
@@ -1034,9 +1486,9 @@ curl https://generativelanguage.googleapis.com/v1beta/batches \
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Batchjob abbrechen
+## การยกเลิกงานแบบกลุ่ม
 
-Sie können einen laufenden Batchjob anhand seines Namens abbrechen. Wenn ein Job abgebrochen wird, werden keine neuen Anfragen mehr verarbeitet.
+คุณสามารถยกเลิกงานแบบกลุ่มที่กำลังดำเนินการอยู่ได้โดยใช้ชื่อของงาน เมื่อยกเลิกงาน ระบบจะหยุดประมวลผลคำขอใหม่
 
 ### Python
 
@@ -1048,6 +1500,17 @@ client.batches.cancel(name=batch_job_to_cancel.name)
 
 ```
 await ai.batches.cancel({name: batchJobToCancel.name});
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+
+Client client = new Client();
+
+String batchJobToCancelName = "batches/your-batch-id";
+client.batches.cancel(batchJobToCancelName, null);
 ```
 
 ### REST
@@ -1065,9 +1528,9 @@ curl https://generativelanguage.googleapis.com/v1beta/$BATCH_NAME \
 -H "Content-Type:application/json" 2> /dev/null | jq -r '.metadata.state'
 ```
 
-## Batchjob löschen
+## การลบงานแบบกลุ่ม
 
-Sie können einen vorhandenen Batchjob anhand seines Namens löschen. Wenn ein Job gelöscht wird, werden keine neuen Anfragen mehr verarbeitet und er wird aus der Liste der Batchjobs entfernt.
+คุณสามารถลบงานแบบกลุ่มที่มีอยู่ได้โดยใช้ชื่อของงาน เมื่อลบงาน ระบบจะหยุดประมวลผลคำขอใหม่และนำงานออกจากรายการงานแบบกลุ่ม
 
 ### Python
 
@@ -1081,6 +1544,17 @@ client.batches.delete(name=batch_job_to_delete.name)
 await ai.batches.delete({name: batchJobToDelete.name});
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+
+Client client = new Client();
+
+String batchJobToDeleteName = "batches/your-batch-id";
+client.batches.delete(batchJobToDeleteName, null);
+```
+
 ### REST
 
 ```
@@ -1091,16 +1565,17 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$BATCH_NAME" \
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Bilder im Batch generieren
+## การสร้างรูปภาพแบบกลุ่ม
 
-Wenn Sie [Gemini Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=de) verwenden und viele
-Bilder generieren müssen, können Sie die Batch API nutzen, um höhere
-[Ratenlimits](https://ai.google.dev/gemini-api/docs/rate-limits?hl=de) zu erhalten. Die Bearbeitungszeit beträgt dann bis zu 24 Stunden.
+หากคุณใช้ [Gemini Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=th) และต้องการสร้างรูปภาพจำนวนมาก
+คุณสามารถใช้ Batch API เพื่อรับ
+[ขีดจำกัดอัตรา](https://ai.google.dev/gemini-api/docs/rate-limits?hl=th)ที่สูงขึ้นโดยแลกกับการดำเนินการที่ใช้เวลาสูงสุด
+24 ชั่วโมง
 
-Sie können entweder [Inline-Anfragen](#inline-requests-images) für kleine Anfragen-Batches (unter 20 MB) oder
-eine [JSONL-Eingabedatei](#input-file-images) für große Batches verwenden (empfohlen für die Bildgenerierung):
+คุณสามารถใช้[คำขอแบบอินไลน์](#inline-requests-images)สำหรับคำขอแบบกลุ่มขนาดเล็ก (ไม่เกิน 20 MB) หรือ
+ไฟล์อินพุต [JSONL](#input-file-images) สำหรับคำขอแบบกลุ่มขนาดใหญ่ (แนะนำสำหรับการสร้างรูปภาพ)
 
-### Inline-Anfragen für Bilder
+### คำขอแบบอินไลน์สำหรับรูปภาพ
 
 ### Python
 
@@ -1256,6 +1731,107 @@ async function run() {
 run();
 ```
 
+### Java
+
+```
+import java.util.HashSet;
+import java.util.Arrays;
+import java.util.Collections;
+import com.google.genai.Client;
+import com.google.genai.types.BatchJob;
+import com.google.genai.types.BatchJobSource;
+import com.google.genai.types.Content;
+import com.google.genai.types.CreateBatchJobConfig;
+import com.google.genai.types.GenerateContentConfig;
+import com.google.genai.types.InlinedRequest;
+import com.google.genai.types.InlinedResponse;
+import com.google.genai.types.JobState;
+import com.google.genai.types.Part;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Set;
+
+Client client = new Client();
+
+// 1. Create batch job with inline requests
+GenerateContentConfig imageConfig =
+    GenerateContentConfig.builder().responseModalities("TEXT", "IMAGE").build();
+
+List<InlinedRequest> inlineRequests =
+    Arrays.asList(
+        InlinedRequest.builder()
+            .contents(
+                Arrays.asList(
+                    Content.fromParts(
+                        Part.fromText(
+                            "A big letter A surrounded by animals starting with the A letter"))))
+            .config(imageConfig)
+            .build(),
+        InlinedRequest.builder()
+            .contents(
+                Arrays.asList(
+                    Content.fromParts(
+                        Part.fromText(
+                            "A big letter B surrounded by animals starting with the B letter"))))
+            .config(imageConfig)
+            .build());
+
+BatchJob inlineBatchJob =
+    client.batches.create(
+        "gemini-3-pro-image-preview",
+        BatchJobSource.builder().inlinedRequests(inlineRequests).build(),
+        CreateBatchJobConfig.builder().displayName("inlined-image-requests-job-1").build());
+
+System.out.println("Created batch job: " + inlineBatchJob.name().orElse(""));
+
+// 2. Monitor job status
+String jobName = inlineBatchJob.name().get();
+System.out.println("Polling status for job: " + jobName);
+
+Set<JobState.Known> completedStates =
+    new HashSet<>(Arrays.asList(
+        JobState.Known.JOB_STATE_SUCCEEDED,
+        JobState.Known.JOB_STATE_FAILED,
+        JobState.Known.JOB_STATE_CANCELLED,
+        JobState.Known.JOB_STATE_EXPIRED));
+
+BatchJob batchJob = client.batches.get(jobName, null);
+while (!completedStates.contains(batchJob.state().get().knownEnum())) {
+  System.out.println("Current state: " + batchJob.state().get());
+  Thread.sleep(10000); // Wait for 10 seconds before polling again
+  batchJob = client.batches.get(jobName, null);
+}
+
+System.out.println("Job finished with state: " + batchJob.state().get());
+
+// 3. Retrieve results
+if (batchJob.state().get().knownEnum() == JobState.Known.JOB_STATE_SUCCEEDED) {
+  System.out.println("Results are inline:");
+  List<InlinedResponse> responses = batchJob.dest().get().inlinedResponses().orElse(Collections.emptyList());
+  for (int i = 0; i < responses.size(); i++) {
+    System.out.println("Response " + (i + 1) + ":");
+    InlinedResponse inlineResponse = responses.get(i);
+    if (inlineResponse.response().isPresent()) {
+      for (Part part : inlineResponse.response().get().parts()) {
+        if (part.text().isPresent()) {
+          System.out.println(part.text().get());
+        } else if (part.inlineData().isPresent()) {
+          System.out.println("Image mime type: " + part.inlineData().get().mimeType().orElse(""));
+          Files.write(
+              Paths.get("image_" + (i + 1) + ".png"),
+              part.inlineData().get().data().get());
+        }
+      }
+    } else if (inlineResponse.error().isPresent()) {
+      System.out.println("Error: " + inlineResponse.error().get());
+    }
+  }
+} else if (batchJob.state().get().knownEnum() == JobState.Known.JOB_STATE_FAILED) {
+  System.out.println("Error: " + batchJob.error().orElse(null));
+}
+```
+
 ### REST
 
 ```
@@ -1311,7 +1887,7 @@ if [[ $batch_state = "JOB_STATE_SUCCEEDED" ]]; then
 fi
 ```
 
-### Eingabedatei für Bilder
+### ไฟล์อินพุตสำหรับรูปภาพ
 
 ### Python
 
@@ -1497,6 +2073,86 @@ async function run() {
 run();
 ```
 
+### Java
+
+```
+import java.util.HashSet;
+import java.util.Arrays;
+import com.google.genai.Client;
+import com.google.genai.types.BatchJob;
+import com.google.genai.types.BatchJobSource;
+import com.google.genai.types.CreateBatchJobConfig;
+import com.google.genai.types.File;
+import com.google.genai.types.JobState;
+import com.google.genai.types.UploadFileConfig;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Set;
+
+Client client = new Client();
+
+// 1. Create and upload file
+String fileName = "my-batch-image-requests.jsonl";
+List<String> requests =
+    Arrays.asList(
+        "{\"key\": \"request-1\", \"request\": {\"contents\": [{\"parts\": [{\"text\": \"A big letter A surrounded by animals starting with the A letter\"}]}], \"generation_config\": {\"responseModalities\": [\"TEXT\", \"IMAGE\"]}}}",
+        "{\"key\": \"request-2\", \"request\": {\"contents\": [{\"parts\": [{\"text\": \"A big letter B surrounded by animals starting with the B letter\"}]}], \"generation_config\": {\"responseModalities\": [\"TEXT\", \"IMAGE\"]}}}");
+Files.write(Paths.get(fileName), requests);
+
+File uploadedFile =
+    client.files.upload(
+        fileName,
+        UploadFileConfig.builder()
+            .displayName("my-batch-image-requests")
+            .mimeType("jsonl")
+            .build());
+System.out.println("Uploaded file: " + uploadedFile.name().orElse(""));
+
+// 2. Create batch job
+BatchJob fileBatchJob =
+    client.batches.create(
+        "gemini-3-pro-image-preview",
+        BatchJobSource.builder().fileName(uploadedFile.name().get()).build(),
+        CreateBatchJobConfig.builder().displayName("file-image-upload-job-1").build());
+System.out.println("Created batch job: " + fileBatchJob.name().orElse(""));
+
+// 3. Monitor job status
+String jobName = fileBatchJob.name().get();
+System.out.println("Polling status for job: " + jobName);
+
+Set<JobState.Known> completedStates =
+    new HashSet<>(Arrays.asList(
+        JobState.Known.JOB_STATE_SUCCEEDED,
+        JobState.Known.JOB_STATE_FAILED,
+        JobState.Known.JOB_STATE_CANCELLED,
+        JobState.Known.JOB_STATE_EXPIRED));
+
+BatchJob batchJob = client.batches.get(jobName, null);
+while (!completedStates.contains(batchJob.state().get().knownEnum())) {
+  System.out.println("Current state: " + batchJob.state().get());
+  Thread.sleep(10000); // Wait for 10 seconds before polling again
+  batchJob = client.batches.get(jobName, null);
+}
+
+System.out.println("Job finished with state: " + batchJob.state().get());
+
+// 4. Retrieve results
+if (batchJob.state().get().knownEnum() == JobState.Known.JOB_STATE_SUCCEEDED) {
+  String resultFileName = batchJob.dest().get().fileName().get();
+  System.out.println("Results are in file: " + resultFileName);
+  System.out.println("Downloading result file content...");
+  client.files.download(resultFileName, "batch_image_results.jsonl", null);
+  for (String line : Files.readAllLines(Paths.get("batch_image_results.jsonl"))) {
+    if (!line.isEmpty()) {
+      System.out.println(line);
+    }
+  }
+} else if (batchJob.state().get().knownEnum() == JobState.Known.JOB_STATE_FAILED) {
+  System.out.println("Error: " + batchJob.error().orElse(null));
+}
+```
+
 ### REST
 
 ```
@@ -1543,44 +2199,43 @@ if [[ $batch_state = "JOB_STATE_SUCCEEDED" ]]; then
 fi
 ```
 
-## Technische Details
+## รายละเอียดทางเทคนิค
 
-- **Unterstützte Modelle**:Die Batch API unterstützt eine Reihe von Gemini-Modellen.
-  Auf der [Seite Modelle](https://ai.google.dev/gemini-api/docs/models?hl=de) finden Sie Informationen zur Unterstützung
-  der Batch API für die einzelnen Modelle. Die unterstützten Modalitäten für die Batch API sind dieselben wie für die interaktive (oder Nicht-Batch-)API.
-- **Preise**:Die Nutzung der Batch API kostet 50% der Standardkosten für die interaktive API für das entsprechende Modell. Weitere Informationen finden Sie auf der [Preisseite](https://ai.google.dev/gemini-api/docs/pricing?hl=de). Details zu Ratenlimits für diese Funktion finden Sie auf der Seite [Ratenlimits](https://ai.google.dev/gemini-api/docs/rate-limits?hl=de#batch-mode).
-- **Service Level Objective (SLO)** : Batchjobs sollen innerhalb von 24 Stunden abgeschlossen sein. Viele Jobs können je nach Größe und aktueller Systemlast viel schneller abgeschlossen werden.
-- **Caching:** [Context-Caching](https://ai.google.dev/gemini-api/docs/caching?hl=de) wird für Batchanfragen unterstützt. Sie können Inhalte aus dem Cache wiederverwenden, indem Sie den Ressourcennamen `cached_content` in der Konfiguration einzelner Anfragen in Ihrem Batch angeben.
-  Wenn eine Anfrage in Ihrem Batch zu einem Cache-Treffer führt, zahlen Sie die
-  [Standardpreise für das Kontext-Caching](https://ai.google.dev/gemini-api/docs/pricing?hl=de).
+- **โมเดลที่รองรับ:** Batch API รองรับโมเดล Gemini หลายรุ่น
+  โปรดดูที่[หน้าโมเดล](https://ai.google.dev/gemini-api/docs/models?hl=th)เพื่อดูการรองรับ
+  Batch API ของแต่ละโมเดล รูปแบบที่รองรับสำหรับ Batch API จะเหมือนกับรูปแบบที่รองรับใน API แบบโต้ตอบ (หรือที่ไม่ใช่แบบกลุ่ม)
+- **ราคา:** การใช้งาน Batch API คิดราคา 50% ของราคา API แบบโต้ตอบมาตรฐานสำหรับโมเดลที่เทียบเท่า ดูรายละเอียดได้ใน[หน้าราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th)
+  โปรดดูรายละเอียดเกี่ยวกับขีดจำกัดอัตราสำหรับฟีเจอร์นี้ได้ในหน้า[ขีดจำกัดอัตรา](https://ai.google.dev/gemini-api/docs/rate-limits?hl=th#batch-mode)
+- **เป้าหมายระดับการให้บริการ (SLO):** งานแบบกลุ่มออกแบบมาให้เสร็จสมบูรณ์ภายในเวลาดำเนินการ 24 ชั่วโมง งานจำนวนมากอาจเสร็จสมบูรณ์เร็วกว่านั้นมาก ทั้งนี้ขึ้นอยู่กับขนาดของงานและภาระงานปัจจุบันของระบบ
+- **การแคช:** [ระบบรองรับการแคชบริบท](https://ai.google.dev/gemini-api/docs/caching?hl=th)สำหรับคำขอแบบกลุ่ม ใช้เนื้อหาที่แคชไว้ซ้ำโดยระบุชื่อทรัพยากร `cached_content` ในการกำหนดค่าคำขอแต่ละรายการภายในกลุ่ม
+  หากคำขอในกลุ่มทำให้เกิดการพบแคช คุณจะต้องชำระเงินตามอัตราการแคชบริบทมาตรฐาน
 
-## Best Practices
+## แนวทางปฏิบัติแนะนำ
 
-- **Eingabedateien für große Anfragen verwenden:** Bei einer großen Anzahl von Anfragen
-  sollten Sie immer die Dateieingabemethode verwenden
-  , um die Verwaltung zu erleichtern und die Limits für die Anfragengröße für
-  den Aufruf [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=de#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent)
-  nicht zu überschreiten. Die maximale Dateigröße pro Eingabedatei beträgt 2 GB.
-- **Fehlerbehandlung**:Prüfen Sie nach Abschluss eines Jobs `batchStats` auf `failedRequestCount`. Wenn Sie die Dateiausgabe verwenden, parsen Sie jede Zeile, um zu prüfen, ob es sich um ein `GenerateContentResponse`- oder ein Statusobjekt handelt, das einen Fehler für diese bestimmte Anfrage angibt. Eine vollständige Liste der
-  Fehlercodes finden Sie im [Leitfaden
-  zur Fehlerbehebung](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=de#error-codes).
-- **Jobs nur einmal senden**:Die Erstellung eines Batchjobs ist nicht idempotent.
-  Wenn Sie dieselbe Erstellungsanfrage zweimal senden, werden zwei separate Batchjobs erstellt.
-- **Sehr große Batches aufteilen**:Die angestrebte Bearbeitungszeit beträgt 24 Stunden. Die tatsächliche Bearbeitungszeit kann jedoch je nach Systemlast und Jobgröße variieren.
-  Bei großen Jobs sollten Sie sie in kleinere Batches aufteilen, wenn Zwischenergebnisse schneller benötigt werden.
+- **ใช้ไฟล์อินพุตสำหรับคำขอขนาดใหญ่:** สำหรับคำขอจำนวนมาก
+  ให้ใช้วิธีการป้อนไฟล์
+  เสมอเพื่อให้จัดการได้ง่ายขึ้นและหลีกเลี่ยงการถึงขีดจำกัดขนาดคำขอสำหรับ
+  การเรียก [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=th#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent)
+  เอง โปรดทราบว่าไฟล์อินพุตแต่ละไฟล์มีขีดจำกัดขนาด 2 GB
+- **การจัดการข้อผิดพลาด:** ตรวจสอบ `batchStats` เพื่อดู `failedRequestCount` หลังจากงานเสร็จสมบูรณ์ หากใช้เอาต์พุตไฟล์ ให้แยกวิเคราะห์แต่ละบรรทัดเพื่อตรวจสอบว่าเป็น `GenerateContentResponse` หรือออบเจ็กต์สถานะที่ระบุข้อผิดพลาดสำหรับคำขอนั้นๆ ดูชุดรหัสข้อผิดพลาดทั้งหมดได้ใน[คู่มือ
+  การแก้ปัญหา](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=th#error-codes)
+- **ส่งงานเพียงครั้งเดียว:** การสร้างงานแบบกลุ่มไม่ใช่การดำเนินการที่ทำซ้ำได้
+  หากคุณส่งคำขอสร้างเดียวกัน 2 ครั้ง ระบบจะสร้างงานแบบกลุ่ม 2 งานแยกกัน
+- **แบ่งกลุ่มขนาดใหญ่มาก:** แม้ว่าเวลาดำเนินการที่ตั้งไว้คือ 24 ชั่วโมง แต่เวลาประมวลผลจริงอาจแตกต่างกันไปตามภาระงานของระบบและขนาดของงาน
+  สำหรับงานขนาดใหญ่ ให้พิจารณาแบ่งงานออกเป็นกลุ่มย่อยๆ หากต้องการผลลัพธ์ระดับกลางเร็วขึ้น
 
-## Nächste Schritte
+## ขั้นตอนถัดไป
 
-- Weitere Beispiele finden Sie im [Batch API-Notebook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=de).
-- Die OpenAI-Kompatibilitätsebene unterstützt die Batch API. Beispiele finden Sie auf der
-  [Seite OpenAI-Kompatibilität](https://ai.google.dev/gemini-api/docs/openai?hl=de#batch).
+- ดูตัวอย่างเพิ่มเติมได้ในโน้ตบุ๊ก [Batch API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=th)
+- เลเยอร์ความเข้ากันได้กับ OpenAI รองรับ Batch API อ่านตัวอย่างในหน้า
+  [ความเข้ากันได้กับ OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=th#batch)
 
-Feedback geben
+ส่งความคิดเห็น
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Zuletzt aktualisiert: 2026-09-12 (UTC).
+อัปเดตล่าสุด 2026-09-18 UTC
 
-Haben Sie Feedback für uns?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-12 (UTC)."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-18 UTC"],[],[]]

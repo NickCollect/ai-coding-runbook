@@ -1,45 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=th
-fetched_at: 2026-09-14T05:46:39.832717+00:00
-title: "API \u0e01\u0e32\u0e23\u0e42\u0e15\u0e49\u0e15\u0e2d\u0e1a: \u0e04\u0e39\u0e48\u0e21\u0e37\u0e2d\u0e01\u0e32\u0e23\u0e22\u0e49\u0e32\u0e22\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e01\u0e32\u0e23\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e41\u0e1b\u0e25\u0e07\u0e17\u0e35\u0e48\u0e44\u0e21\u0e48\u0e23\u0e2d\u0e07\u0e23\u0e31\u0e1a\u0e01\u0e32\u0e23\u0e17\u0e33\u0e07\u0e32\u0e19\u0e22\u0e49\u0e2d\u0e19\u0e2b\u0e25\u0e31\u0e07 (\u0e1e\u0e24\u0e29\u0e20\u0e32\u0e04\u0e21 2026) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=zh-TW
+fetched_at: 2026-09-21T05:54:16.352662+00:00
+title: "Interactions API\uff1a\u91cd\u5927\u8b8a\u66f4\u9077\u79fb\u6307\u5357 (2026 \u5e74 5 \u6708) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-ส่งความคิดเห็น
+提供意見
 
-# API การโต้ตอบ: คู่มือการย้ายข้อมูลการเปลี่ยนแปลงที่ไม่รองรับการทำงานย้อนหลัง (พฤษภาคม 2026)
+# Interactions API：重大變更遷移指南 (2026 年 5 月)
 
-Interactions API `v1beta` มีการเปลี่ยนแปลงที่ทำให้เกิดข้อผิดพลาด ซึ่งจะปรับโครงสร้าง API ใหม่เพื่อรองรับความสามารถในอนาคต เช่น การควบคุมระหว่างการเดินทางและการเรียกใช้เครื่องมือแบบไม่พร้อมกัน หน้านี้จะอธิบายสิ่งที่เปลี่ยนแปลงและแสดงตัวอย่างโค้ดก่อนและหลังการเปลี่ยนแปลงเพื่อช่วยคุณย้ายข้อมูล การเปลี่ยนแปลงมี 2 หมวดหมู่ ได้แก่
+`v1beta` Interactions API 推出破壞性變更，重新架構 API 形狀，以支援飛行中導引和非同步工具呼叫等未來能力。本頁說明異動內容，並提供異動前後的程式碼範例，協助您完成遷移。變更分為兩類：
 
-1. [**สคีมา `steps`**](#steps-schema): อาร์เรย์ `steps` ใหม่จะแทนที่อาร์เรย์
-   `outputs` เพื่อแสดงไทม์ไลน์ที่มีโครงสร้างของการโต้ตอบแต่ละครั้ง
-2. [**การกำหนดค่ารูปแบบเอาต์พุต**](#output-format-config): `response\_format` แบบ Polymorphic ใหม่จะรวมการควบคุมรูปแบบเอาต์พุตทั้งหมดและนำ `response\_mime\_type` ออก`response_format``response_mime_type`
+1. [**步驟結構定義**](#steps-schema)：新的 `steps` 陣列會取代 `outputs` 陣列，提供每個互動回合的結構化時間軸。
+2. [**輸出格式設定**](#output-format-config)：新的多型 `response_format` 會整合所有輸出格式控制項，並移除 `response_mime_type`。
 
-ทำตามขั้นตอนใน [วิธีย้ายข้อมูลไปยังสคีมาใหม่](#how-to-migrate) เพื่อ
-อัปเดตการผสานรวม
+請按照「[如何遷移至新結構定義](#how-to-migrate)」一文中的步驟更新整合。
 
-## การเปลี่ยนแปลงหลัก: `outputs` เป็น `steps`
+## 核心異動：`outputs` 改為 `steps`
 
-สคีมาใหม่จะแทนที่อาร์เรย์ `outputs` ด้วยอาร์เรย์ `steps`
+新結構定義會將 `outputs` 陣列替換為 `steps` 陣列。
 
-- **เดิม**: การตอบกลับจะแสดงอาร์เรย์ `outputs` แบบแบนที่มีเฉพาะเนื้อหาที่สร้างขึ้นโดยโมเดล
-- **สคีมาใหม่**: การตอบกลับจะแสดงอาร์เรย์ `steps` ที่มีขั้นตอนที่มีโครงสร้างพร้อมตัวแยกประเภท
+- **舊版**：回覆會傳回平面 `outputs` 陣列，只包含模型生成的內容。
+- **新結構定義**：回覆會傳回 `steps` 陣列，其中包含具有類型鑑別器的結構化步驟。
 
-`POST /interactions` จะแสดงเฉพาะขั้นตอนเอาต์พุต `GET /interactions/{id}`
-จะแสดงไทม์ไลน์ขั้นตอนทั้งหมด รวมถึงขั้นตอน `user_input` เริ่มต้น
+`POST /interactions` 只會傳回輸出步驟。`GET /interactions/{id}` 會傳回完整步驟時間軸，包括初始 `user_input` 步驟。
 
-### อินพุต/เอาต์พุตพื้นฐาน (Unary)
+### 基本輸入/輸出 (一元)
 
-#### ก่อนการเปลี่ยนแปลง (เดิม)
+#### 之前 (舊版)
 
 ### Python
 
@@ -91,7 +88,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### หลังการเปลี่ยนแปลง (สคีมาใหม่)
+#### 之後 (新結構定義)
 
 ### Python
 
@@ -118,7 +115,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-[sdk-convenience]: /gemini-api/docs/interactions-overview#sdk-sugar
+[sdk-convenience]：/gemini-api/docs/interactions-overview#sdk-sugar
 
 ### REST
 
@@ -173,11 +170,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### การเรียกใช้ฟังก์ชัน
+### 函式呼叫
 
-โครงสร้างคำขอจะยังคงเหมือนเดิม แต่การตอบกลับจะแทนที่เนื้อหา `outputs` แบบแบนด้วยขั้นตอนที่มีโครงสร้าง
+要求結構維持不變，但回應會以結構化步驟取代平面 `outputs` 內容。
 
-#### ก่อนการเปลี่ยนแปลง (เดิม)
+#### 之前 (舊版)
 
 ### Python
 
@@ -222,7 +219,7 @@ for (const output of interaction.outputs) {
 }
 ```
 
-#### หลังการเปลี่ยนแปลง (สคีมาใหม่)
+#### 之後 (新結構定義)
 
 ### Python
 
@@ -270,11 +267,11 @@ for (const step of interaction.steps) {
 }
 ```
 
-### เครื่องมือฝั่งเซิร์ฟเวอร์
+### 伺服器端工具
 
-ตอนนี้เครื่องมือฝั่งเซิร์ฟเวอร์ (เช่น Google Search หรือการดำเนินการโค้ด) จะแสดงประเภทขั้นตอนที่เฉพาะเจาะจงในอาร์เรย์ `steps` แม้ว่าสคีมาเดิมจะแสดงการดำเนินการเหล่านี้เป็นประเภทเนื้อหาที่เฉพาะเจาะจงภายในอาร์เรย์ `outputs` แต่สคีมาใหม่จะย้ายการดำเนินการเหล่านี้ไปยังอาร์เรย์ `steps` ตัวอย่างต่อไปนี้ใช้ Google Search
+伺服器端工具 (例如 Google 搜尋或程式碼執行) 現在會在 `steps` 陣列中產生特定步驟類型。舊版架構會在 `outputs` 陣列中，將這些作業傳回為特定內容類型，但新版架構會將這些作業移至 `steps` 陣列。下列範例使用 Google 搜尋。
 
-#### ก่อนการเปลี่ยนแปลง (เดิม)
+#### 之前 (舊版)
 
 ### Python
 
@@ -348,7 +345,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### หลังการเปลี่ยนแปลง (สคีมาใหม่)
+#### 之後 (新結構定義)
 
 ### Python
 
@@ -432,11 +429,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### สตรีมมิง
+### 串流
 
-สตรีมมิงจะแสดงประเภทเหตุการณ์ใหม่ ดังนี้
+串流會公開新的事件類型：
 
-#### ประเภทเหตุการณ์ใหม่
+#### 新事件類型
 
 - `interaction.created`
 - `interaction.completed`
@@ -446,25 +443,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 - `step.delta`
 - `step.stop`
 
-#### ประเภทเหตุการณ์ที่เลิกใช้งานแล้ว
+#### 已淘汰的事件類型
 
-ระบบจะแทนที่ประเภทเหตุการณ์เดิมต่อไปนี้ด้วยเหตุการณ์ใหม่ที่ระบุไว้ข้างต้น
+上述新事件會取代下列舊版事件類型：
 
 - `interaction.start` → `interaction.created`
 - `content.start` → `step.start`
 - `content.delta` → `step.delta`
 - `content.stop` → `step.stop`
 - `interaction.complete` → `interaction.completed`
-- `interaction.status_update` → แทนที่ด้วย `interaction.in_progress`, `interaction.requires_action` และอื่นๆ
+- `interaction.status_update` → 由 `interaction.in_progress`、`interaction.requires_action` 等取代。
 
-**การเรียกใช้ฟังก์ชันสตรีมมิง**: เมื่อใช้สตรีมมิงกับการเรียกใช้ฟังก์ชัน
-เหตุการณ์ `step.start` จะแสดงชื่อฟังก์ชัน และเหตุการณ์ `step.delta` จะ
-สตรีมอาร์กิวเมนต์เป็นสตริง JSON บางส่วน (โดยใช้ `arguments_delta`) คุณ
-ต้องสะสม Delta เหล่านี้เพื่อรับอาร์กิวเมนต์ทั้งหมด ซึ่งแตกต่างจากการเรียกใช้แบบ Unary ที่คุณจะได้รับออบเจ็กต์การเรียกใช้ฟังก์ชันที่สมบูรณ์ในครั้งเดียว
+**串流函式呼叫**：使用串流和函式呼叫時，`step.start` 事件會傳送函式名稱，而 `step.delta` 事件會將引數串流為部分 JSON 字串 (使用 `arguments_delta`)。您必須累積這些 delta，才能取得完整引數。這與一元呼叫不同，因為您會一次收到完整的函式呼叫物件。
 
-#### ตัวอย่าง
+#### 範例
 
-##### ก่อนการเปลี่ยนแปลง (เดิม)
+##### 之前 (舊版)
 
 ### Python
 
@@ -531,7 +525,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 // data: {"id": "int_123", "status": "done", "usage": {"total_tokens": 42}}
 ```
 
-##### หลังการเปลี่ยนแปลง (สคีมาใหม่)
+##### 之後 (新結構定義)
 
 ### Python
 
@@ -608,32 +602,29 @@ for await (const event of stream) {
  // data: {"type": "interaction.completed", "interaction": {"id": "int_xyz", "status": "completed", "usage": {"prompt_tokens": 10, "completion_tokens": 5, "total_tokens": 15}}} // NEW: Dedicated completion event
 ```
 
-### ประวัติการสนทนาแบบ Stateless
+### 無狀態對話記錄
 
-หากคุณจัดการประวัติการสนทนาด้วยตนเองในฝั่งไคลเอ็นต์ (กรณีการใช้งานแบบ Stateless) คุณต้องอัปเดตวิธีเชื่อมโยงการสนทนาก่อนหน้า
+如果您在用戶端手動管理對話記錄 (無狀態用途)，就必須更新先前回合的串連方式。
 
-- **เดิม**: นักพัฒนามักจะรวบรวมอาร์เรย์ `outputs` จากการตอบกลับและส่งกลับในช่อง `input` ในการสนทนาครั้งถัดไป
-- **สคีมาใหม่**: ตอนนี้คุณควรรวบรวมอาร์เรย์ `steps` จากการตอบกลับและส่งในช่อง `input` ของคำขอถัดไป โดยเพิ่มการสนทนาใหม่ของผู้ใช้เป็นขั้นตอน `user_input`
+- **舊版**：開發人員通常會從回應中收集 `outputs` 陣列，並在下一個回合中將其傳回 `input` 欄位。
+- **新結構定義**：您現在應從回應中收集 `steps` 陣列，並將其傳遞至下一個要求的 `input` 欄位，將新的使用者輪流轉移附加為 `user_input` 步驟。
 
-## การกำหนดค่ารูปแบบเอาต์พุต: การเปลี่ยนแปลง `response_format`
+## 輸出格式設定：`response_format` 變更
 
-API ที่อัปเดตจะรวมการควบคุมรูปแบบเอาต์พุตทั้งหมดไว้ในช่อง `response_format` แบบ Polymorphic ที่รวมเป็นหนึ่งเดียว ซึ่งจะรวมการกำหนดค่าเอาต์พุตไว้ที่ระดับบนสุด และทำให้ `generation_config` มุ่งเน้นไปที่ลักษณะการทำงานของโมเดล (เช่น อุณหภูมิ, top\_p และการคิด)
+更新後的 API 會將所有輸出格式控制項整合為統一的多型 `response_format` 欄位。這項功能可集中管理頂層的輸出設定，並讓 `generation_config` 專注於模型行為 (例如溫度參數、Top-P 和思考)。
 
-### การเปลี่ยนแปลงที่สำคัญ
+### 主要異動
 
-- **API จะนำ `response_mime_type` ออก** ตอนนี้คุณระบุประเภท MIME ต่อรายการรูปแบบภายใน `response_format`
-- **ตอนนี้ `response_format` เป็นออบเจ็กต์ (หรืออาร์เรย์) แบบ Polymorphic** แต่ละรายการมีตัวแยกประเภท `type` (`text`, `audio`, `image`) และช่องที่เฉพาะเจาะจงตามประเภท หากต้องการขอเอาต์พุตหลายรูปแบบ ให้ส่งอาร์เรย์ของรายการรูปแบบ
-- **`image_config` จะย้ายจาก `generation_config` ไปยัง `response_format`**
-  ตอนนี้คุณระบุการตั้งค่าเอาต์พุตของรูปภาพ เช่น `aspect_ratio` และ `image_size`
-  ในรายการ `response_format` ที่มี `"type": "image"`
+- **API 會移除 `response_mime_type`。**現在，您可以在 `response_format` 內為每個格式項目指定 MIME 類型。
+- **`response_format` 現在是多型物件 (或陣列)。**每個項目都有 `type` 鑑別器 (`text`、`audio`、`image`) 和類型專屬欄位。如要要求多種輸出模態，請傳遞格式項目的陣列。
+- **「`image_config`」已從「`generation_config`」移至「`response_format`」。**
+  現在，您可以在 `response_format` 項目中指定 `aspect_ratio` 和 `image_size` 等圖片輸出設定。`"type": "image"`
 
-### เอาต์พุตที่มีโครงสร้าง (JSON)
+### 結構化輸出內容 (JSON)
 
-สคีมาใหม่จะนำช่อง `response_mime_type` ออก แต่ให้ระบุประเภท
-MIME และสคีมา JSON ภายในออบเจ็กต์ `response_format` ที่มี
-`"type": "text"`
+新結構定義會移除 `response_mime_type` 欄位。請改為在 `response_format` 物件中指定 MIME 類型和 JSON 結構定義，並使用 `"type": "text"`。
 
-#### ก่อนการเปลี่ยนแปลง (เดิม)
+#### 之前 (舊版)
 
 ### Python
 
@@ -689,7 +680,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### หลังการเปลี่ยนแปลง (สคีมาใหม่)
+#### 之後 (新結構定義)
 
 ### Python
 
@@ -760,12 +751,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-### การกำหนดค่ารูปภาพ
+### 圖片設定
 
-สคีมาใหม่จะนำ `image_config` ออกจาก `generation_config` ตอนนี้คุณระบุ
-การตั้งค่าเอาต์พุตของรูปภาพในรายการ `response_format` ที่มี `"type": "image"`
+新版結構定義會從 `generation_config` 中移除 `image_config`。您現在可以在 `"type": "image"` 中，透過 `response_format` 項目指定圖片輸出設定。
 
-#### ก่อนการเปลี่ยนแปลง (เดิม)
+#### 之前 (舊版)
 
 ### Python
 
@@ -814,7 +804,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### หลังการเปลี่ยนแปลง (สคีมาใหม่)
+#### 之後 (新結構定義)
 
 ### Python
 
@@ -867,11 +857,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-### การกำหนดค่าเสียง
+### 音訊設定
 
-สคีมาใหม่จะแทนที่ `response_modalities: ["audio"]` ด้วยรายการ `response_format` ที่มี `"type": "audio"`
+新結構定義會將 `response_modalities: ["audio"]` 取代為 `"type": "audio"` 的 `response_format` 項目。
 
-#### ก่อนการเปลี่ยนแปลง (เดิม)
+#### 之前 (舊版)
 
 ### Python
 
@@ -920,7 +910,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### หลังการเปลี่ยนแปลง (สคีมาใหม่)
+#### 之後 (新結構定義)
 
 ### Python
 
@@ -979,53 +969,51 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-หากต้องการขอเอาต์พุตหลายรูปแบบ (เช่น ข้อความและเสียงพร้อมกัน) ให้ส่งอาร์เรย์ของรายการรูปแบบไปยัง `response_format` แทนที่จะส่งออบเจ็กต์เดียว
+如要要求多種輸出模態 (例如同時輸出文字和音訊)，請將格式項目陣列傳遞至 `response_format`，而非單一物件。
 
-## วิธีย้ายข้อมูลไปยังสคีมาใหม่
+## 如何遷移至新結構定義
 
-### ผู้ใช้ SDK
+### SDK 使用者
 
-อัปเกรดเป็น SDK เวอร์ชันล่าสุด (Python ≥2.0.0, JavaScript ≥2.0.0) SDK จะเลือกใช้สคีมาใหม่ให้คุณโดยอัตโนมัติ คุณจึงไม่ต้องเปลี่ยนแปลงโค้ดใดๆ นอกเหนือจากการอัปเดตวิธีอ่านการตอบกลับ (ดูตัวอย่างด้านบน) โปรดทราบว่า SDK เวอร์ชันเหล่านี้รองรับเฉพาะสคีมาใหม่ SDK เวอร์ชันเก่า (Python 1.x.x, JavaScript 1.x.x) จะยังคงทำงานได้จนกว่าระบบจะนำสคีมาเดิมออกในวันที่ **8 มิถุนายน 2026**
+升級至最新版 SDK (Python ≥2.0.0、JavaScript ≥2.0.0)。SDK 會自動選擇採用新架構，您只需要更新讀取回應的方式 (請參閱上方的範例)，不必變更任何程式碼。請注意，這些 SDK 版本僅支援新結構定義。在 2026 年 6 月 8 日移除舊版結構定義前，舊版 SDK (Python 1.x.x、JavaScript 1.x.x) 仍可正常運作。
 
-### ผู้ใช้ REST API
+### REST API 使用者
 
-เพิ่มส่วนหัว `Api-Revision: 2026-05-20` ลงในคำขอเพื่อเลือกใช้สคีมาใหม่ได้แล้วตอนนี้ หลังจากวันที่ **26 พฤษภาคม** สคีมาใหม่จะกลายเป็นค่าเริ่มต้นสำหรับคำขอทั้งหมด
-คุณเลือกไม่ใช้ชั่วคราวได้ด้วย `Api-Revision: 2026-05-07`
-จนถึงวันที่ **8 มิถุนายน** ซึ่งเป็นวันที่ API จะนำสคีมาเดิมออกอย่างถาวร
+在要求中加入 `Api-Revision: 2026-05-20` 標頭，即可立即選擇使用新結構定義。**5 月 26 日**後，所有要求都會預設使用新結構定義。您可以使用 `Api-Revision: 2026-05-07` 暫時停用，但 **6 月 8 日**後，API 就會永久移除舊版結構定義。
 
-### ไทม์ไลน์
+### 時間軸
 
-| วันที่ | ระยะ | ผู้ใช้ SDK | ผู้ใช้ REST API |
+| 日期 | 階段 | SDK 使用者 | REST API 使用者 |
 | --- | --- | --- | --- |
-| **7 พฤษภาคม** | เลือกเข้าร่วม | SDK เวอร์ชันใหม่พร้อมใช้งานแล้ว (Python ≥2.0.0, JS ≥2.0.0) อัปเกรดเพื่อรับสคีมาใหม่โดยอัตโนมัติ | เพิ่มส่วนหัว `Api-Revision: 2026-05-20` เพื่อเลือกเข้าร่วม ค่าเริ่มต้นจะยังคงเป็นสคีมาเดิม |
-| **26 พฤษภาคม** | พลิกค่าเริ่มต้น | หากอัปเกรดแล้ว คุณไม่ต้องดำเนินการใดๆ SDK เวอร์ชันเก่า (Python 1.x.x, JS 1.x.x) จะยังคงทำงานได้ แต่จะแสดงการตอบกลับเดิม | ตอนนี้สคีมาใหม่เป็นค่าเริ่มต้นแล้ว ส่งส่วนหัว `Api-Revision: 2026-05-07` เพื่อเลือกไม่ใช้ |
-| **8 มิถุนายน** | การเลิกใช้งาน | SDK เวอร์ชัน Python 1.x.x และ JS 1.x.x จะหยุดทำงานสำหรับการเรียกใช้ Interactions API | ระบบจะนำสคีมาเดิมออกสำหรับ Interactions API ระบบจะไม่สนใจส่วนหัว `Api-Revision` |
+| **5 月 7 日** | 啟用 | 新版 SDK 現已推出 (Python ≥2.0.0、JS ≥2.0.0)。升級即可自動取得新結構定義。 | 新增 `Api-Revision: 2026-05-20` 標頭即可選擇加入。預設值仍為舊版。 |
+| **5 月 26 日** | 預設翻轉 | 如果已升級，則無須採取任何行動。舊版 SDK (Python 1.x.x、JS 1.x.x) 仍可運作，但會傳回舊版的回覆。 | 新結構定義現在為預設結構定義。如要中止，請傳送「`Api-Revision: 2026-05-07`」標頭。 |
+| **6 月 8 日** | 日落 | Python 1.x.x 和 JS 1.x.x SDK 版本會中斷 Interactions API 呼叫。 | 已移除 Interactions API 的舊版結構定義。系統會忽略 `Api-Revision` 標頭。 |
 
-## รายการตรวจสอบการย้ายข้อมูล
+## 遷移檢查清單
 
-### สคีมา `steps`
+### 步驟結構定義 (`steps`)
 
-- อัปเดตโค้ดเพื่ออ่านเนื้อหาการตอบกลับจากอาร์เรย์ `steps` แทน `outputs` [ดูตัวอย่าง](#basic-unary)
-- ตรวจสอบว่าโค้ดของคุณจัดการประเภทขั้นตอน `user_input` และ `model_output` ได้ [ดูตัวอย่าง](#basic-unary)
-- (การเรียกใช้ฟังก์ชัน) อัปเดตโค้ดเพื่อค้นหาขั้นตอน `function_call` ในอาร์เรย์ `steps` [ดูตัวอย่าง](#function-calling)
-- (เครื่องมือฝั่งเซิร์ฟเวอร์) อัปเดตโค้ดเพื่อจัดการขั้นตอนที่เฉพาะเจาะจงของเครื่องมือ (เช่น `google_search_call`, `google_search_result`) [ดูตัวอย่าง](#server-side-tools)
-- (ประวัติแบบ Stateless) อัปเดตการจัดการประวัติเพื่อส่งอาร์เรย์ `steps` ในช่อง `input` ของคำขอถัดไป [ดูรายละเอียด](#stateless-history)
-- (สตรีมมิงเท่านั้น) อัปเดตไคลเอ็นต์เพื่อฟังประเภทเหตุการณ์ SSE ใหม่ (`interaction.created`, `step.delta` และอื่นๆ) [ดูตัวอย่าง](#streaming)
+- 更新程式碼，從 `steps` 陣列而非 `outputs` 讀取回應內容。[查看範例](#basic-unary)。
+- 確認程式碼可處理 `user_input` 和 `model_output` 步驟類型。[查看範例](#basic-unary)。
+- (函式呼叫) 更新程式碼，在 `steps` 陣列中找出 `function_call` 步驟。[查看範例](#function-calling)。
+- (伺服器端工具) 更新程式碼，處理工具專屬步驟 (例如 `google_search_call`、`google_search_result`)。[查看範例](#server-side-tools)。
+- (無狀態記錄) 更新記錄管理，在下一個要求的 `input` 欄位中傳遞 `steps` 陣列。[查看詳細資料](#stateless-history)。
+- (僅限串流) 更新用戶端，監聽新的 SSE 事件類型 (`interaction.created`、`step.delta` 等)。[查看範例](#streaming)。
 
-### การกำหนดค่ารูปแบบเอาต์พุต (`response_format`)
+### 輸出格式設定 (`response_format`)
 
-- แทนที่ `response_mime_type` ด้วยช่อง `mime_type` ภายใน `response_format` [ดูตัวอย่าง](#structured-output)
-- รวมสคีมา JSON `response_format` ที่มีอยู่ภายในออบเจ็กต์ `{"type": "text", "schema": ...}` [ดูตัวอย่าง](#structured-output)
-- (การสร้างรูปภาพ) ย้าย `image_config` จาก `generation_config` ไปยังรายการ `{"type": "image", ...}` ใน `response_format` [ดูตัวอย่าง](#image-config)
-- (การสร้างคำพูด) แทนที่ `response_modalities=["audio"]` ด้วยรายการ `{"type": "audio"}` ใน `response_format` [ดูตัวอย่าง](#audio-config)
-- (มัลติโมดัล) แปลง `response_format` จากออบเจ็กต์เดียวเป็นอาร์เรย์เมื่อขอเอาต์พุตหลายรูปแบบ
+- 將 `response_format` 內的 `mime_type` 欄位替換為 `response_mime_type`。[查看範例](#structured-output)。
+- 將現有的 `response_format` JSON 結構定義包裝在 `{"type": "text", "schema": ...}` 物件中。[查看範例](#structured-output)。
+- (圖像生成) 將 `image_config` 從 `generation_config` 移至 `response_format` 中的 `{"type": "image", ...}` 項目。[查看範例](#image-config)。
+- (語音生成) 將 `response_modalities=["audio"]` 替換為 `response_format` 中的 `{"type": "audio"}` 項目。[查看範例](#audio-config)。
+- (多模態) 要求多個輸出模態時，請將 `response_format` 從單一物件轉換為陣列。
 
-ส่งความคิดเห็น
+提供意見
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-อัปเดตล่าสุด 2026-09-12 UTC
+上次更新時間：2026-09-12 (世界標準時間)。
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+想進一步說明嗎？
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-12 UTC"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-12 (世界標準時間)。"],[],[]]

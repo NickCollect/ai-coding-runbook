@@ -1,48 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=he
-fetched_at: 2026-09-14T05:36:44.273902+00:00
-title: "\u05d4\u05e1\u05d1\u05e8 \u05e2\u05dc \u05d2\u05e8\u05e1\u05d0\u05d5\u05ea API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=zh-TW
+fetched_at: 2026-09-21T05:45:36.293253+00:00
+title: "API \u7248\u672c\u8aaa\u660e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [הפניית API](https://ai.google.dev/api?hl=he)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [API 參考資料](https://ai.google.dev/api?hl=zh-tw)
 
-שליחת משוב
+提供意見
 
-# הסבר על גרסאות API
+# API 版本說明
 
-במסמך הזה מפורטת סקירה כללית של ההבדלים בין גרסאות Gemini API‏: `v1` ו-`v1beta`.
+本文將概略說明 Gemini API 的 `v1` 和 `v1beta` 版本之間的差異。
 
-- ‫**v1**: גרסה יציבה של ה-API. התכונות בגרסה היציבה נתמכות באופן מלא במהלך מחזור החיים של הגרסה הראשית. אם יש שינויים שעלולים לשבור את התאימות לאחור, תיצור גרסה ראשית חדשה של ה-API והגרסה הקיימת תצא משימוש אחרי תקופה סבירה.
-  יכול להיות שיוכנסו שינויים שלא ישפיעו על התפקוד של ממשק ה-API בלי לשנות את הגרסה הראשית. החל מיוני 2026, **Interactions API** זמין באופן כללי ונתמך ב-`v1`.
-- ‫**v1beta**: הגרסה הזו כוללת תכונות ויכולות מוקדמות שנמצאות בפיתוח פעיל. יכול להיות שנבצע שינויים בתכונות ב-`v1beta` כדי לשפר אותן על סמך המשוב שנקבל, אבל תוכלו לנסות יכולות חדשות לפני שהן יהפכו ליציבות.
+- **v1**：API 穩定版。穩定版中的功能在主要版本生命週期內完全受支援。如有任何重大變更，系統會建立下一個 API 主要版本，並在一段合理時間後淘汰現有版本。API 導入非破壞性變更時，不必變更主要版本。自 2026 年 6 月起，**Interactions API** 將全面開放使用，並支援 `v1`。
+- **v1beta**：這個版本包含正在積極開發的早期功能。`v1beta` 中的功能可能會根據意見回饋進行調整，但您可以在這些功能升級為穩定版之前搶先試用。
 
-| תכונה | v1 | v1beta |
+| 功能 | v1 | v1beta |
 | --- | --- | --- |
 | Interactions API |  |  |
-| יצירת תוכן – קלט טקסט בלבד |  |  |
-| יצירת תוכן – קלט של טקסט ותמונה |  |  |
-| יצירת תוכן – פלט טקסט |  |  |
-| יצירת תוכן – שיחות רב-שלביות (צ'אט) |  |  |
-| יצירת תוכן – קריאות לפונקציות |  |  |
-| יצירת תוכן – סטרימינג |  |  |
-| הטמעת תוכן – הזנה של טקסט בלבד |  |  |
-| יצירת תשובה |  |  |
-| מאחזר סמנטי |  |  |
+| 生成內容 - 僅輸入文字 |  |  |
+| 生成內容 - 輸入文字和圖片 |  |  |
+| 生成內容 - 文字輸出 |  |  |
+| 生成內容 - 多輪對話 (聊天) |  |  |
+| 生成內容 - 函式呼叫 |  |  |
+| 生成內容 - 串流 |  |  |
+| 嵌入內容 - 僅輸入文字 |  |  |
+| 生成答案 |  |  |
+| 語意檢索器 |  |  |
 
-- ‫ – נתמך
-- ‫ – לא תהיה תמיכה לעולם
+- - 支援
+- - Will never be supported
 
-## הגדרת גרסת API ב-SDK
+## 在 SDK 中設定 API 版本
 
-ערכות ה-SDK של Gemini API מוגדרות כברירת מחדל לגרסה `v1beta`, אבל אפשר לציין גרסאות באופן מפורש על ידי הגדרת גרסת ה-API כמו בדוגמת הקוד הבאה:
+Gemini API SDK 預設為 `v1beta`，但您可以明確指定版本，方法是設定 API 版本，如下列程式碼範例所示：
 
 ### Python
 
@@ -91,12 +90,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1/interactions" \
   }'
 ```
 
-שליחת משוב
+提供意見
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-עדכון אחרון: 2026-09-12 (שעון UTC).
+上次更新時間：2026-09-12 (世界標準時間)。
 
-רוצה לתת לנו משוב?
+想進一步說明嗎？
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-12 (שעון UTC)."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-12 (世界標準時間)。"],[],[]]

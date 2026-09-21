@@ -1,212 +1,211 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/rate-limits?hl=he
-fetched_at: 2026-09-14T05:50:02.135596+00:00
-title: "\u05de\u05d2\u05d1\u05dc\u05d5\u05ea \u05e7\u05e6\u05d1 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/rate-limits?hl=es-419
+fetched_at: 2026-09-21T05:46:54.648043+00:00
+title: "L\u00edmites de frecuencia \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-שליחת משוב
+Enviar comentarios
 
-# מגבלות קצב
+# Límites de frecuencia
 
-הגבלות על קצב יצירת הבקשות קובעות את מספר הבקשות שאפשר לשלוח ל-Gemini API
-בפרק זמן נתון. ההגבלות האלה עוזרות לנו לשמור על שימוש הוגן, להגן מפני ניצול לרעה ולשמור על ביצועי המערכת לכל המשתמשים.
+Los límites de frecuencia regulan la cantidad de solicitudes que puedes realizar a la API de Gemini en un período determinado. Estos límites ayudan a mantener un uso justo, proteger contra el abuso y mantener el rendimiento del sistema para todos los usuarios.
 
-[איך רואים את מכסות התעריפים הפעילות ב-AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=he)
+[Consulta tus límites de frecuencia activos en AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=es-419)
 
-## איך פועלות מגבלות הקצב
+## Cómo funcionan los límites de frecuencia
 
-מגבלות הקצב נמדדות בדרך כלל בשלושה ממדים:
+Por lo general, los límites de frecuencia se miden en tres dimensiones:
 
-- בקשות לדקה (**RPM**)
-- טוקנים לדקה (קלט) (**TPM**)
-- בקשות ביום (**RPD**)
+- Solicitudes por minuto (**RPM**)
+- Tokens por minuto (entrada) (**TPM**)
+- Solicitudes por día (**RPD**)
 
-השימוש שלכם נבדק מול כל מגבלה, ואם תחרגו מאחת מהן תופיע שגיאה של הגבלת קצב. לדוגמה, אם מגבלת הבקשות לדקה היא 20, שליחת 21 בקשות בתוך דקה תגרום לשגיאה, גם אם לא חרגתם ממגבלת הטוקנים לדקה או ממגבלות אחרות.
+Tu uso se evalúa en función de cada límite, y si superas alguno de ellos, se activará un error de límite de frecuencia. Por ejemplo, si tu límite de RPM es de 20, realizar 21 solicitudes en un minuto generará un error, incluso si no superaste tu límite de TPM ni otros límites.
 
-הגבלות על קצב יצירת הבקשות חלות על כל פרויקט ולא על כל מפתח API. המכסות של בקשות ליום (**RPD**) מתאפסות בחצות, לפי שעון החוף המערבי של ארה"ב.
+Los límites de frecuencia se aplican por proyecto, no por clave de API. Las cuotas de solicitudes por día (**RPD**) se restablecen a medianoche, hora del Pacífico.
 
-המגבלות משתנות בהתאם למודל הספציפי שבו משתמשים, וחלק מהמגבלות חלות רק על מודלים ספציפיים. לדוגמה, המדד 'תמונות לדקה' (IPM) מחושב רק עבור מודלים שיכולים ליצור תמונות (Nano Banana), אבל הוא דומה מבחינה רעיונית למדד 'אסימונים לדקה' (TPM). במודלים אחרים יכולה להיות מגבלה של טוקנים ליום (TPD).
+Los límites varían según el modelo específico que se use, y algunos límites solo se aplican a modelos específicos. Por ejemplo, las imágenes por minuto (IPM) solo se calculan para los modelos capaces de generar imágenes (Nano Banana), pero son conceptualmente similares a los TPM. Es posible que otros modelos tengan un límite de tokens por día (TPD).
 
-מכסות ליצירת בקשות מוגבלות יותר במודלים ניסיוניים ובמודלים בגרסת טרום-השקה (Preview).
+Los límites de frecuencia son más estrictos para los modelos experimentales y de vista previa.
 
-### מגבלות קצב שמבוססות על הוצאות
+### Límites de frecuencia basados en la inversión
 
-בנוסף למגבלות על בקשות לדקה (RPM) ועל טוקנים לדקה (TPM),‏ Gemini API אוכף מגבלות על קצב השימוש שמבוססות על הוצאות, כדי להגן מפני חיובים לא צפויים. האם המגבלות האלה חלות על החשבון שלכם? התשובה תלויה בהיסטוריית החיובים וב[רמת השימוש](#usage-tiers).
+Además de los límites de solicitudes por minuto (RPM) y tokens por minuto (TPM), la API de Gemini aplica límites de frecuencia basados en la inversión para proteger contra cargos inesperados. Si estos límites se aplican a tu cuenta, dependerá de tu historial de facturación y tu [nivel de uso](#usage-tiers).
 
-בטבלה הבאה מוצגות מכסות השימוש לפי הוצאות לכל [רמת שימוש](#usage-tiers). המגבלות האלה נבדקות בחלון מתגלגל של 10 דקות. האם המגבלות האלה חלות על החשבון שלכם? זה תלוי בהיסטוריית החיובים ובסטטוס החשבון.
+En la siguiente tabla, se muestran los límites de frecuencia basados en la inversión para cada [nivel de uso](#usage-tiers). Estos límites se evalúan en un período continuo de 10 minutos. Si estos límites se aplican a tu cuenta, dependerá de tu historial de facturación y el estado de la cuenta.
 
-| רמת שימוש | מגבלת קצב ההוצאות (לכל 10 דקות) |
+| Nivel de uso | Límite de frecuencia de inversión (por cada 10 minutos) |
 | --- | --- |
-| **Free** | לא רלוונטי |
-| **רמה 1** | $10 |
-| **רמה 2** | 800 ש"ח |
-| **רמה 3** | 800 ש"ח |
+| **Gratis** | N/A |
+| **Nivel 1** | $10 |
+| **Nivel 2** | $200 |
+| **Nivel 3** | $200 |
 
-אם חורגים ממגבלת הקצב של יצירת הבקשות שמבוססת על הוצאות, ה-API מחזיר שגיאה `429 RESOURCE_EXHAUSTED`. כדי לפתור את הבעיה:
+Si alcanzas un límite de frecuencia basado en la inversión, la API devolverá un error `429 RESOURCE_EXHAUSTED`. Para solucionar el problema, sigue estos pasos:
 
-- **מחכים ומנסים שוב** אחרי זמן קצר.
-- **מפחיתים את קצב הבקשות היקרות**, למשל באמצעות שימוש בחלונות הקשר קטנים יותר או בפלט קצר יותר.
-- אם אתם מגיעים למגבלה הזו באופן עקבי במהלך שימוש רגיל, אתם יכולים [לבקש להגדיל את המגבלה על קצב הבקשות](#request-rate-limit-increase).
+- **Espera y vuelve a intentarlo** después de un breve período.
+- **Reduce la tasa de solicitudes costosas**, por ejemplo, usando ventanas de contexto más pequeñas o resultados más cortos.
+- Si alcanzas este límite de forma sistemática durante el uso normal, [solicita un aumento del límite de frecuencia](#request-rate-limit-increase).
 
-## רמות שימוש
+## Niveles de uso
 
-הגבלות הקצב קשורות לרמת השימוש בפרויקט. ככל שהשימוש שלכם ב-API וההוצאות שלכם יגדלו, המערכת תשדרג אתכם אוטומטית לרמה גבוהה יותר עם מכסות גבוהות יותר.
+Los límites de frecuencia están vinculados al nivel de uso del proyecto. A medida que aumente tu uso y gasto de la API, se te actualizará automáticamente a un nivel superior con límites de frecuencia más altos.
 
-הקריטריונים לרמות 2 ו-3 מבוססים על סך ההוצאות המצטברות על שירותי Google Cloud (כולל, בין היתר, Gemini API) בחשבון לחיוב שמקושר לפרויקט.
+Los requisitos para los niveles 2 y 3 se basan en la inversión acumulada total en los servicios de Google Cloud (incluida, sin limitaciones, la API de Gemini) para la cuenta de facturación vinculada a tu proyecto.
 
-| רמת שימוש | מוקדמות | [מגבלת שכבת החיוב](https://ai.google.dev/gemini-api/docs/billing?hl=he#tier-spend-caps) |
+| Nivel de uso | Calificación | [Límite del nivel de facturación](https://ai.google.dev/gemini-api/docs/billing?hl=es-419#tier-spend-caps) |
 | --- | --- | --- |
-| **Free** | [פרויקט פעיל](https://ai.google.dev/gemini-api/docs/api-key?hl=he#google-cloud-projects) או תקופת ניסיון בחינם | לא רלוונטי |
-| **רמה 1** | [הגדרה וקישור של חשבון לחיוב פעיל](https://ai.google.dev/gemini-api/docs/billing?hl=he#setup-billing) | ‎$250 |
-| **רמה 2** | התשלום יתבצע בסכום של 100 $‎ + 3 ימים מהתשלום הראשון שבוצע בהצלחה | 2,000 $ |
-| **רמה 3** | התשלום בוצע בסך ‎1,000 $‎ + 30 ימים מהתשלום הראשון שבוצע בהצלחה | ‫$20,000 – $100,000 ומעלה |
+| **Gratis** | [Proyecto activo](https://ai.google.dev/gemini-api/docs/api-key?hl=es-419#google-cloud-projects) o prueba gratuita | N/A |
+| **Nivel 1** | [Configura y vincula una cuenta de facturación activa](https://ai.google.dev/gemini-api/docs/billing?hl=es-419#setup-billing) | $250 |
+| **Nivel 2** | Se pagaron USD 100 y pasaron 3 días desde el primer pago exitoso. | USD 2,000 |
+| **Nivel 3** | Se pagaron USD 1,000 y pasaron 30 días desde el primer pago exitoso. | Entre USD 20,000 y más de USD 100,000 |
 
-לרוב, אם אתם עומדים בקריטריונים שצוינו, הבקשה שלכם תאושר. עם זאת, במקרים נדירים, יכול להיות שנאשר את הבקשה שלכם לשדרוג על סמך גורמים אחרים שזיהינו במהלך תהליך הבדיקה.
+Si bien cumplir con los criterios de calificación establecidos suele ser suficiente para la aprobación, en casos excepcionales, se puede rechazar una solicitud de actualización en función de otros factores identificados durante el proceso de revisión.
 
-המערכת הזו עוזרת לשמור על האבטחה והיושרה של פלטפורמת Gemini API לכל המשתמשים.
+Este sistema ayuda a mantener la seguridad y la integridad de la plataforma de la API de Gemini para todos los usuarios.
 
-## מגבלות קצב ב-Gemini API
+## Límites de frecuencia de la API de Gemini
 
-מגבלות הקצב תלויות במגוון גורמים (כמו רמת השימוש שלכם) ואפשר לראות אותן ב-Google AI Studio. ככל שהרמה והסטטוס של החשבון משתנים לאורך זמן, מגבלות הקצב מתעדכנות באופן אוטומטי.
+Los límites de frecuencia dependen de diversos factores (como tu nivel de uso) y se pueden consultar en Google AI Studio. A medida que cambien tu nivel y el estado de tu cuenta con el tiempo, los límites de frecuencia se actualizarán automáticamente.
 
-[איך רואים את מכסות התעריפים הפעילות ב-AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=he)
+[Consulta tus límites de frecuencia activos en AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=es-419)
 
-המגבלות על קצב הבקשות שצוינו לא מובטחות, והקיבולת בפועל עשויה להשתנות.
+Los límites de frecuencia especificados no están garantizados y la capacidad real puede variar.
 
-## מגבלות קצב ליצירת בקשות של הסקת עדיפות
+## Límites de frecuencia de la inferencia de prioridad
 
-צריכה ב[עדיפות](https://ai.google.dev/gemini-api/docs/priority-inference?hl=he) כפופה למגבלות משלה, גם אם הצריכה נספרת במגבלות הכוללות של תעבורה אינטראקטיבית. **מגבלות ברירת המחדל על קצב הבקשות הן: 0.3x [ממגבלת הקצב הרגילה](https://aistudio.google.com/rate-limit?hl=he) לכל מודל ורמת שירות**
+El consumo de [prioridad](https://ai.google.dev/gemini-api/docs/priority-inference?hl=es-419) tiene sus propios límites de frecuencia, aunque el consumo se contabiliza para los límites de frecuencia generales del tráfico interactivo. **Los límites de frecuencia predeterminados son 0.3 veces el [límite de frecuencia estándar](https://aistudio.google.com/rate-limit?hl=es-419) para cada modelo y nivel**
 
-## מגבלות קצב של Batch API
+## Límites de frecuencia de la API de Batch
 
-בקשות [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he) כפופות למגבלות קצב משלהן, בנפרד מקריאות API שאינן מקובצות.
+Las solicitudes a la [API por lotes](https://ai.google.dev/gemini-api/docs/batch-api?hl=es-419) están sujetas a sus propios límites de frecuencia, que son independientes de las llamadas a la API que no son por lotes.
 
-- **בקשות באצווה במקביל:** 100
-- **המגבלה על גודל קובץ הקלט:** 2GB
-- **מגבלת אחסון הקבצים:** 20GB
-- **טוקנים שהוכנסו לתור לכל מודל:** בטבלה **Batch enqueued tokens** מפורט המספר המקסימלי של טוקנים שאפשר להכניס לתור לעיבוד באצווה בכל משימות האצווה הפעילות שלכם עבור מודל נתון.
+- **Solicitudes por lotes simultáneas:** 100
+- **Límite de tamaño del archivo de entrada:** 2 GB
+- **Límite de almacenamiento de archivos:** 20 GB
+- **Tokens en cola por modelo:** En la tabla **Tokens en cola por lotes**, se indica la cantidad máxima de tokens que se pueden poner en cola para el procesamiento por lotes en todos los trabajos por lotes activos para un modelo determinado.
 
-### שכבה 1
+### Nivel 1
 
-| מודל | Batch enqueued tokens |
+| Modelo | Tokens en cola por lotes |
 | --- | --- |
-| מודלים של טקסט לטקסט | | | | |
+| Modelos de texto de salida | | | | |
 | --- | --- | --- | --- | --- |
-| ‫Gemini 3.1 Pro Preview | ‫5,000,000 |
-| Gemini 3.5 Flash-Lite | ‫10,000,000 |
-| Gemini 3.1 Flash Lite | ‫10,000,000 |
-| ‫Gemini 3.1 Flash Lite (גרסת טרום-השקה) | ‫10,000,000 |
-| Gemini 3.6 Flash | ‫3,000,000 |
-| Gemini 3.5 Flash | ‫3,000,000 |
-| Gemini ‎2.5 Pro | ‫5,000,000 |
+| Versión preliminar de Gemini 3.1 Pro | 5,000,000 |
+| Gemini 3.5 Flash-Lite | 10,000,000 |
+| Gemini 3.1 Flash Lite | 10,000,000 |
+| Versión preliminar de Gemini 3.1 Flash-Lite | 10,000,000 |
+| Gemini 3.6 Flash | 3,000,000 |
+| Gemini 3.5 Flash | 3,000,000 |
+| Gemini 2.5 Pro | 5,000,000 |
 | Gemini 2.5 Pro TTS | 25,000 |
-| Gemini ‎2.5 Flash | ‫3,000,000 |
-| ‫Gemini 2.5 Flash Preview | ‫3,000,000 |
-| תצוגה מקדימה של תמונה ב-Gemini 2.5 Flash | ‫3,000,000 |
-| Gemini 2.5 Flash TTS | 100,000 |
-| Gemini 2.5 Flash Lite | ‫10,000,000 |
-| ‫Gemini 2.5 Flash Lite Preview | ‫10,000,000 |
-| Gemini 2.0 Flash | ‫10,000,000 |
-| תמונה של Gemini ‎2.0 Flash | ‫3,000,000 |
-| Gemini 2.0 Flash Lite | ‫10,000,000 |
-| מודלים גנרטיביים מרובי-מוֹדָלִים | | | | |
-| תצוגה מקדימה של תמונות ב-Gemini 3.1 Flash 🍌 | 1,000,000 |
-| תמונה של Gemini 3.1 Flash Lite 🍌 | ‫2,000,000 |
-| תצוגה מקדימה של תמונה ב-Gemini 3 Pro 🍌 | ‫2,000,000 |
-| מודלים להטמעה | | | | |
-| ‫Gemini Embedding | 500,000 |
+| Gemini 2.5 Flash | 3,000,000 |
+| Versión preliminar de Gemini 2.5 Flash | 3,000,000 |
+| Versión preliminar de Gemini 2.5 Flash Image | 3,000,000 |
+| TTS de Gemini 2.5 Flash | 100,000 |
+| Gemini 2.5 Flash-Lite | 10,000,000 |
+| Versión preliminar de Gemini 2.5 Flash Lite | 10,000,000 |
+| Gemini 2.0 Flash | 10,000,000 |
+| Gemini 2.0 Flash Image | 3,000,000 |
+| Gemini 2.0 Flash Lite | 10,000,000 |
+| Modelos de generación multimodales | | | | |
+| Versión preliminar de Gemini 3.1 Flash Image 🍌 | 1,000,000 |
+| Imagen de Gemini 3.1 Flash Lite 🍌 | 2,000,000 |
+| Versión preliminar de Gemini 3 Pro Image 🍌 | 2,000,000 |
+| Modelos de embeddings | | | | |
+| Embedding de Gemini | 500,000 |
 
-### שכבה 2
+### Nivel 2
 
-| מודל | Batch enqueued tokens |
+| Modelo | Tokens en cola por lotes |
 | --- | --- |
-| מודלים של טקסט לטקסט | | | | |
+| Modelos de texto de salida | | | | |
 | --- | --- | --- | --- | --- |
-| ‫Gemini 3.1 Pro Preview | ‫500,000,000 |
-| Gemini 3.5 Flash-Lite | ‫500,000,000 |
-| Gemini 3.1 Flash Lite | ‫500,000,000 |
-| ‫Gemini 3.1 Flash Lite (גרסת טרום-השקה) | ‫500,000,000 |
-| Gemini 3.6 Flash | ‫400,000,000 |
-| Gemini 3.5 Flash | ‫400,000,000 |
-| Gemini ‎2.5 Pro | ‫500,000,000 |
+| Versión preliminar de Gemini 3.1 Pro | 500,000,000 |
+| Gemini 3.5 Flash-Lite | 500,000,000 |
+| Gemini 3.1 Flash Lite | 500,000,000 |
+| Versión preliminar de Gemini 3.1 Flash-Lite | 500,000,000 |
+| Gemini 3.6 Flash | 400,000,000 |
+| Gemini 3.5 Flash | 400,000,000 |
+| Gemini 2.5 Pro | 500,000,000 |
 | Gemini 2.5 Pro TTS | 100,000 |
-| Gemini ‎2.5 Flash | ‫400,000,000 |
-| ‫Gemini 2.5 Flash Preview | ‫400,000,000 |
-| תצוגה מקדימה של תמונה ב-Gemini 2.5 Flash | ‫400,000,000 |
-| Gemini 2.5 Flash TTS | 100,000 |
-| Gemini 2.5 Flash Lite | ‫500,000,000 |
-| ‫Gemini 2.5 Flash Lite Preview | ‫500,000,000 |
+| Gemini 2.5 Flash | 400,000,000 |
+| Versión preliminar de Gemini 2.5 Flash | 400,000,000 |
+| Versión preliminar de Gemini 2.5 Flash Image | 400,000,000 |
+| TTS de Gemini 2.5 Flash | 100,000 |
+| Gemini 2.5 Flash-Lite | 500,000,000 |
+| Versión preliminar de Gemini 2.5 Flash Lite | 500,000,000 |
 | Gemini 2.0 Flash | 1,000,000,000 |
-| תמונה של Gemini ‎2.0 Flash | ‫400,000,000 |
+| Gemini 2.0 Flash Image | 400,000,000 |
 | Gemini 2.0 Flash Lite | 1,000,000,000 |
-| מודלים גנרטיביים מרובי-מוֹדָלִים | | | | |
-| תצוגה מקדימה של תמונות ב-Gemini 3.1 Flash 🍌 | 250,000,000 |
-| תמונה של Gemini 3.1 Flash Lite 🍌 | 270,000,000 |
-| תצוגה מקדימה של תמונה ב-Gemini 3 Pro 🍌 | 270,000,000 |
-| מודלים להטמעה | | | | |
-| ‫Gemini Embedding | ‫5,000,000 |
+| Modelos de generación multimodales | | | | |
+| Versión preliminar de Gemini 3.1 Flash Image 🍌 | 250,000,000 |
+| Imagen de Gemini 3.1 Flash Lite 🍌 | 270,000,000 |
+| Versión preliminar de Gemini 3 Pro Image 🍌 | 270,000,000 |
+| Modelos de embeddings | | | | |
+| Embedding de Gemini | 5,000,000 |
 
-### שכבה 3
+### Nivel 3
 
-| מודל | Batch enqueued tokens |
+| Modelo | Tokens en cola por lotes |
 | --- | --- |
-| מודלים של טקסט לטקסט | | | | |
+| Modelos de texto de salida | | | | |
 | --- | --- | --- | --- | --- |
-| ‫Gemini 3.1 Pro Preview | 1,000,000,000 |
+| Versión preliminar de Gemini 3.1 Pro | 1,000,000,000 |
 | Gemini 3.5 Flash-Lite | 1,000,000,000 |
 | Gemini 3.1 Flash Lite | 1,000,000,000 |
-| ‫Gemini 3.1 Flash Lite (גרסת טרום-השקה) | 1,000,000,000 |
+| Versión preliminar de Gemini 3.1 Flash-Lite | 1,000,000,000 |
 | Gemini 3.6 Flash | 1,000,000,000 |
 | Gemini 3.5 Flash | 1,000,000,000 |
-| Gemini ‎2.5 Pro | 1,000,000,000 |
+| Gemini 2.5 Pro | 1,000,000,000 |
 | Gemini 2.5 Pro TTS | 1,000,000 |
-| Gemini ‎2.5 Flash | 1,000,000,000 |
-| ‫Gemini 2.5 Flash Preview | 1,000,000,000 |
-| תצוגה מקדימה של תמונה ב-Gemini 2.5 Flash | 1,000,000,000 |
-| Gemini 2.5 Flash TTS | 4,000,000 |
-| Gemini 2.5 Flash Lite | 1,000,000,000 |
-| ‫Gemini 2.5 Flash Lite Preview | 1,000,000,000 |
-| Gemini 2.0 Flash | ‫5,000,000,000 |
-| תמונה של Gemini ‎2.0 Flash | 1,000,000,000 |
-| Gemini 2.0 Flash Lite | ‫5,000,000,000 |
-| מודלים גנרטיביים מרובי-מוֹדָלִים | | | | |
-| תצוגה מקדימה של תמונות ב-Gemini 3.1 Flash 🍌 | ‫750,000,000 |
-| תמונה של Gemini 3.1 Flash Lite 🍌 | 1,000,000,000 |
-| תצוגה מקדימה של תמונה ב-Gemini 3 Pro 🍌 | 1,000,000,000 |
-| מודלים להטמעה | | | | |
-| ‫Gemini Embedding | ‫10,000,000 |
+| Gemini 2.5 Flash | 1,000,000,000 |
+| Versión preliminar de Gemini 2.5 Flash | 1,000,000,000 |
+| Versión preliminar de Gemini 2.5 Flash Image | 1,000,000,000 |
+| TTS de Gemini 2.5 Flash | 4,000,000 |
+| Gemini 2.5 Flash-Lite | 1,000,000,000 |
+| Versión preliminar de Gemini 2.5 Flash Lite | 1,000,000,000 |
+| Gemini 2.0 Flash | 5,000,000,000 |
+| Gemini 2.0 Flash Image | 1,000,000,000 |
+| Gemini 2.0 Flash Lite | 5,000,000,000 |
+| Modelos de generación multimodales | | | | |
+| Versión preliminar de Gemini 3.1 Flash Image 🍌 | 750,000,000 |
+| Imagen de Gemini 3.1 Flash Lite 🍌 | 1,000,000,000 |
+| Versión preliminar de Gemini 3 Pro Image 🍌 | 1,000,000,000 |
+| Modelos de embeddings | | | | |
+| Embedding de Gemini | 10,000,000 |
 
-## איך משדרגים לרמה הבאה
+## Cómo actualizar al siguiente nivel
 
-כדי לעבור מהתוכנית בחינם לתוכנית בתשלום, קודם צריך [להגדיר חיוב ב-AI Studio](https://ai.google.dev/gemini-api/docs/billing?hl=he).
+Para cambiar del nivel gratuito a un nivel pagado, primero debes [configurar la facturación en AI Studio](https://ai.google.dev/gemini-api/docs/billing?hl=es-419).
 
-אחרי שהפרויקט יעמוד [בקריטריונים שצוינו](#usage-tiers), הוא ישודרג אוטומטית לרמה הבאה. שדרוגים של רמת השירות מהתוכנית בחינם לרמה 1 בדרך כלל נכנסים לתוקף באופן מיידי, ושדרוגים לרמות גבוהות יותר נכנסים לתוקף תוך 10 דקות. כדי לבדוק את הרמות שלכם, עוברים אל [דף הפרויקטים](https://aistudio.google.com/projects?hl=he) ב-AI Studio.
+Una vez que tu proyecto cumpla con los [criterios especificados](#usage-tiers), se actualizará automáticamente al siguiente nivel. Las actualizaciones de nivel del plan gratuito al nivel 1 suelen aplicarse de inmediato, y las actualizaciones de nivel posteriores se aplicarán en un plazo de 10 minutos. Navega a la [página Proyectos](https://aistudio.google.com/projects?hl=es-419) en AI Studio para verificar tus niveles.
 
-## בקשה להגדלת מגבלת קצב הבקשות
+## Solicita un aumento del límite de frecuencia
 
-לכל וריאציה של מודל יש מגבלת קצב משויכת (בקשות לדקה, RPM).
-פרטים על מגבלות התדירות האלה זמינים בדף [מגבלת התדירות ב-AI Studio](https://aistudio.google.com/rate-limit?hl=he).
+Cada variación del modelo tiene un límite de frecuencia asociado (solicitudes por minuto, RPM).
+Para obtener detalles sobre esos límites de frecuencia, consulta la página [Límites de frecuencia de AI Studio](https://aistudio.google.com/rate-limit?hl=es-419).
 
-[בקשה להגדלת מגבלת קצב הבקשות בתוכנית בתשלום](https://forms.gle/ETzX94k8jf7iSotH9)
+[Solicita un aumento del límite de frecuencia del nivel pagado](https://forms.gle/ETzX94k8jf7iSotH9)
 
-אנחנו לא יכולים להבטיח שנרחיב את מגבלת הקצב, אבל נעשה כמיטב יכולתנו כדי לבדוק את הבקשה.
+No ofrecemos garantías sobre el aumento del límite de frecuencia, pero haremos todo lo posible para revisar tu solicitud.
 
-שליחת משוב
+Enviar comentarios
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-עדכון אחרון: 2026-09-12 (שעון UTC).
+Última actualización: 2026-09-12 (UTC)
 
-רוצה לתת לנו משוב?
+¿Quieres brindar más información?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-12 (שעון UTC)."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-09-12 (UTC)"],[],[]]

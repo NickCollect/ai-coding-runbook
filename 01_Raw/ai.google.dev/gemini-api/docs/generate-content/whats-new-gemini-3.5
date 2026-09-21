@@ -1,46 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.5?hl=id
-fetched_at: 2026-09-14T05:48:44.028857+00:00
-title: "Yang baru di Gemini 3.5 Flash \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.5?hl=it
+fetched_at: 2026-09-21T05:44:58.596684+00:00
+title: "Novit\u00e0 di Gemini 3.5 Flash \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=id).
+Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs/generate-content?hl=id)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs/generate-content?hl=it)
 
-Kirim masukan
+Invia feedback
 
-# Yang baru di Gemini 3.5 Flash
+# Novità di Gemini 3.5 Flash
 
-[3.6 Flash & 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=id)
-[Halaman ini](#)
+[3.6 Flash & 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=it)
+[Questa pagina](#)
 
-Gemini 3.5 Flash **tersedia secara umum (GA)**, stabil, dan siap untuk penggunaan produksi berskala. Sebagai model Flash tercerdas kami, model ini memberikan performa canggih yang berkelanjutan dalam eksekusi agentic, coding, dan tugas jangka panjang dalam skala besar.
+Gemini 3.5 Flash è in **disponibilità generale (GA)**, è stabile ed è pronto per l'uso in produzione su larga scala. In quanto modello Flash più intelligente, offre prestazioni all'avanguardia sostenute in attività agentiche, di programmazione e di lungo termine su larga scala.
 
-Panduan ini berisi ringkasan peningkatan, perubahan API, dan panduan migrasi untuk Gemini 3.5 Flash.
+Questa guida contiene una panoramica dei miglioramenti, delle modifiche alle API e delle indicazioni per la migrazione a Gemini 3.5 Flash.
 
-## Model baru
+## Nuovo modello
 
-| Model | ID Model | Deskripsi |
+| Modello | ID modello | Descrizione |
 | --- | --- | --- |
-| Gemini 3.5 Flash | `gemini-3.5-flash` | Model tercerdas kami untuk performa canggih yang berkelanjutan dalam tugas agentic dan coding. |
+| Gemini 3.5 Flash | `gemini-3.5-flash` | Il nostro modello più intelligente per prestazioni all'avanguardia sostenute in attività agentiche e di programmazione. |
 
-Gemini 3.5 Flash mendukung jendela konteks token 1 juta, token output maks 65 ribu,
-penalaran, dan kumpulan alat serta fitur platform yang sama dengan Gemini 3 Flash,
-termasuk [Penggunaan Komputer (Pratinjau)](https://ai.google.dev/gemini-api/docs/computer-use?hl=id).
-Untuk mengetahui spesifikasi lengkapnya, lihat [ringkasan model](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=id).
-Untuk mengetahui harga, lihat halaman [harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id#gemini-3.5-flash).
+Gemini 3.5 Flash supporta la finestra contestuale da 1 milione di token, un massimo di 65.000 token di output,
+il ragionamento e lo stesso set di strumenti e funzionalità della piattaforma di Gemini 3 Flash,
+incluso [l'utilizzo del computer (anteprima)](https://ai.google.dev/gemini-api/docs/computer-use?hl=it).
+Per le specifiche complete, consulta la [panoramica dei modelli](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=it).
+Per i prezzi, consulta la [pagina dei prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it#gemini-3.5-flash).
 
-## Panduan memulai
+## Guida rapida
 
-Semua contoh dalam panduan ini menggunakan GenerateContent API. Interactions API juga didukung; opsi konfigurasi dan rekomendasi yang sama berlaku.
+Tutti gli esempi in questa guida utilizzano l'API GenerateContent. È supportata anche l'API Interactions; si applicano le stesse opzioni di configurazione e gli stessi consigli.
 
 ### Python
 
@@ -88,47 +88,47 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-## Yang baru
+## Novità
 
-- **Performa canggih yang berkelanjutan:** Model Flash tercerdas kami, yang dioptimalkan untuk tugas agentic dan coding dalam skala besar.
-- **Eksekusi agentic:** Deployment sub-agen, pemecahan masalah, dan loop agentic yang cepat dalam skala besar.
-- **Coding:** Siklus coding berulang, eksplorasi cepat, dan pembuatan prototipe untuk menguji jalur alternatif dan mengeksplorasi solusi secara dinamis.
-- **Jangka panjang:** Alur kerja multilangkah dan penggunaan alat dalam skala besar.
-- **Retensi penalaran:** Model mempertahankan penalaran perantara di seluruh percakapan multi-giliran secara otomatis. Tidak diperlukan perubahan API.
-- **Tingkat upaya default baru:** Upaya penalaran default diubah dari `high` menjadi `medium`. Lihat [Tingkat upaya default baru](#default-effort-level) untuk mengetahui detailnya.
-- **Peningkatan penalaran `low`:** `low` kini ditingkatkan secara signifikan untuk tugas kode
-  dan agentic yang memerlukan lebih sedikit langkah, sehingga menawarkan kualitas yang kuat dengan latensi dan biaya yang lebih rendah.
-- **Rilis GA:** Model stabil untuk penggunaan produksi berskala.
+- **Prestazioni all'avanguardia sostenute:** il nostro modello Flash più intelligente, ottimizzato per attività agentiche e di programmazione su larga scala.
+- **Esecuzione agentica:** deployment di sub-agenti, risoluzione dei problemi e loop agentici rapidi su larga scala.
+- **Programmazione:** cicli di programmazione iterativi, esplorazione rapida e prototipazione per testare percorsi alternativi ed esplorare dinamicamente le soluzioni.
+- **Orizzonte lungo:** workflow in più passaggi e utilizzo di strumenti su larga scala.
+- **Conservazione del ragionamento:** il modello mantiene automaticamente il ragionamento intermedio nelle conversazioni in più turni. Non sono necessarie modifiche all'API.
+- **Nuovo livello di sforzo predefinito:** lo sforzo di ragionamento predefinito è stato modificato da `high` a `medium`. Per maggiori dettagli, consulta [Nuovo livello di sforzo predefinito](#default-effort-level).
+- **Ragionamento `low` migliorato:** `low` è ora notevolmente migliorato per le attività di programmazione
+  e agentiche che richiedono meno passaggi, offrendo una qualità elevata a latenza e costi inferiori.
+- **Release GA:** modello stabile per l'uso in produzione su larga scala.
 
-### Memilih model Flash yang tepat
+### Scegliere il modello Flash giusto
 
-Gemini 3.5 Flash adalah model Flash tercerdas dan paling mumpuni. Namun, kasus penggunaan yang berbeda mungkin memiliki persyaratan biaya dan latensi yang berbeda.
+Gemini 3.5 Flash è il nostro modello Flash più intelligente e potente. Tuttavia, casi d'uso diversi potrebbero avere requisiti di costo e latenza diversi.
 
-- **Gemini 3.1 Flash-Lite**: Untuk tugas bervolume tinggi dan berbiaya rendah yang tidak memerlukan kedalaman penalaran lanjutan dari 3.5
-  Flash, sebaiknya gunakan [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=id).
-  Model ini stabil, jangka panjang, dan dioptimalkan untuk efisiensi. Lihat
-  [panduan developer Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=id#developer_guide)
-  untuk mengetahui detail selengkapnya.
-- **Pratinjau Gemini 3 Flash**: Meskipun kami merekomendasikan migrasi ke 3.5 Flash untuk
-  stabilitas GA dan penalaran yang ditingkatkan, [Gemini 3 Flash (Pratinjau)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=id)
-  tetap tersedia untuk developer yang ingin terus menguji dengan
-  model pratinjau.
+- **Gemini 3.1 Flash-Lite**: per attività a basso costo,
+  ad alto volume che non richiedono la profondità di ragionamento avanzata di 3.5
+  Flash, ti consigliamo di utilizzare [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=it).
+  È un modello stabile a lungo termine ottimizzato per l'efficienza. Per maggiori dettagli, consulta la
+  [guida per gli sviluppatori di Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=it#developer_guide).
+- **Gemini 3 Flash (anteprima)**: anche se ti consigliamo di eseguire la migrazione a 3.5 Flash per la
+  stabilità GA e il ragionamento migliorato, [Gemini 3 Flash (anteprima)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=it)
+  rimane disponibile per gli sviluppatori che vogliono continuare a testare il
+  modello di anteprima.
 
-## Perubahan perilaku
+## Modifiche al comportamento
 
-### Tingkat upaya default baru: `medium`
+### Nuovo livello di sforzo predefinito: `medium`
 
-Upaya penalaran default kini **`medium`**, diubah dari `high` di Gemini 3
-Pratinjau Flash. `medium` menghasilkan hasil yang sangat baik di berbagai tugas sekaligus lebih cepat dan lebih hemat biaya. Untuk masalah yang kompleks, `high` mendorong model untuk berpikir lebih mendalam.
+Lo sforzo di ragionamento predefinito è ora **`medium`**, modificato da `high` in Gemini 3
+Flash (anteprima). `medium` produce risultati molto buoni in un'ampia gamma di attività, pur essendo più veloce ed economico. Per problemi complessi, `high` incoraggia il modello a ragionare in modo più approfondito.
 
-| Tingkat upaya | Kapan digunakan |
+| Livello di sforzo | Quando utilizzarle |
 | --- | --- |
-| `minimal` | Dioptimalkan untuk kecepatan respons. Kasus penggunaan seperti chat, jawaban faktual cepat, panggilan alat yang lebih sederhana. |
-| `low` | Tugas kode dan agentic yang memerlukan latensi lebih rendah dan lebih sedikit langkah. Juga berfungsi dengan baik untuk tugas analisis dan penulisan yang memerlukan pemikiran. |
-| **`medium` (default)** | **Kualitas terbaik untuk sebagian besar tugas. Direkomendasikan untuk kasus penggunaan kode dan agentic yang kompleks.** |
-| `high` | Memaksimalkan kemampuan model untuk berpikir dan menggunakan alat. Terbaik untuk penalaran yang kompleks, matematika yang sulit, dan tugas kode atau agen yang paling sulit. Memungkinkan pemikiran dan panggilan fungsi yang diperluas. |
+| `minimal` | Ottimizzato per la velocità di risposta. Casi d'uso simili a chat, risposte rapide a domande fattuali, chiamate di strumenti più semplici. |
+| `low` | Attività di programmazione e agentiche che richiedono una latenza inferiore e meno passaggi. Funziona bene anche per le attività di analisi e scrittura che richiedono un po' di ragionamento. |
+| **`medium` (valore predefinito)** | **Qualità ottimale per la maggior parte delle attività. Consigliato per casi d'uso di programmazione e agentici complessi.** |
+| `high` | Massimizza la capacità del modello di ragionare e utilizzare gli strumenti. Ideale per ragionamenti complessi, matematica difficile e attività di programmazione o agentiche più difficili. Consente ragionamenti estesi e chiamate di funzioni. |
 
-Untuk mengganti default, tetapkan `thinking_level` dalam konfigurasi Anda:
+Per sostituire il valore predefinito, imposta `thinking_level` nella configurazione:
 
 ### Python
 
@@ -191,46 +191,46 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-Tabel berikut menunjukkan tingkat penalaran yang didukung per model:
+La tabella seguente mostra i livelli di ragionamento supportati per modello:
 
-| Tingkat Penalaran | Gemini 3.5 Flash | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | Deskripsi |
+| Livello di ragionamento | Gemini 3.5 Flash | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | Descrizione |
 | --- | --- | --- | --- | --- | --- |
-| **`minimal`** | Didukung | Tidak didukung | Didukung (Default) | Didukung | Cocok dengan setelan "tidak ada penalaran" untuk sebagian besar kueri. Perhatikan, `minimal` tidak menjamin bahwa penalaran dinonaktifkan, model mungkin melakukan penalaran yang sangat minimal untuk tugas yang kompleks. |
-| **`low`** | Didukung | Didukung | Didukung | Didukung | Meminimalkan latensi dan biaya. |
-| **`medium`** | Didukung (Default) | Didukung | Didukung | Didukung | Penalaran yang seimbang untuk sebagian besar tugas. |
-| **`high`** | Didukung (Dinamis) | Didukung (Default, Dinamis) | Didukung (Dinamis) | Didukung (Default, Dinamis) | Memaksimalkan kedalaman penalaran. |
+| **`minimal`** | Supportato | Non supportato | Supportato (valore predefinito) | Supportato | Corrisponde all'impostazione "nessun ragionamento" per la maggior parte delle query. Nota: `minimal` non garantisce che il ragionamento sia disattivato. Il modello potrebbe ragionare in modo molto minimo per le attività complesse. |
+| **`low`** | Supportato | Supportato | Supportato | Supportato | Riduce al minimo la latenza e i costi. |
+| **`medium`** | Supportato (valore predefinito) | Supportato | Supportato | Supportato | Ragionamento bilanciato per la maggior parte delle attività. |
+| **`high`** | Supportato (dinamico) | Supportato (valore predefinito, dinamico) | Supportato (dinamico) | Supportato (valore predefinito, dinamico) | Massimizza la profondità del ragionamento. |
 
-### Retensi penalaran
+### Conservazione del ragionamento
 
-Model mempertahankan penalaran perantara di seluruh percakapan multi-giliran secara otomatis. Jika ada dalam histori percakapan, konteks penalaran akan diteruskan, yang meningkatkan performa pada tugas multilangkah yang kompleks seperti proses debug berulang dan refactoring kode. Tidak diperlukan perubahan API:
+Il modello mantiene automaticamente il ragionamento intermedio nelle conversazioni in più turni. Quando è presente nella cronologia delle conversazioni, il contesto di ragionamento viene riportato, il che migliora le prestazioni nelle attività complesse in più passaggi, come il debug iterativo e il refactoring del codice. Non sono necessarie modifiche all'API:
 
-- **Interactions API**: Penalaran sudah dipertahankan secara otomatis. Tidak ada perubahan perilaku.
-- **GenerateContent API**: Mulai dari Gemini 3.5 Flash, model ini menggunakan
-  konteks penalaran dari semua giliran sebelumnya saat tanda tangan penalaran ada
-  dalam histori percakapan. Untuk mengaktifkan fitur ini, teruskan histori percakapan lengkap yang
-  tidak diubah (termasuk
-  [tanda tangan penalaran](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=id)) di `contents`.
-  SDK akan menanganinya secara otomatis.
+- **API Interazioni**: i ragionamenti vengono già conservati automaticamente. Nessuna modifica al comportamento.
+- **API GenerateContent**: a partire da Gemini 3.5 Flash, il modello utilizza
+  il contesto di ragionamento di tutti i turni precedenti quando le firme del ragionamento sono
+  presenti nella cronologia delle conversazioni. Per attivare questa funzionalità, trasmetti la cronologia delle conversazioni completa e
+  non modificata (incluse le
+  [firme del ragionamento](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=it)) in `contents`.
+  Gli SDK gestiscono questa operazione automaticamente.
 
-## Update parameter dan praktik terbaik di Gemini 3.x
+## Aggiornamenti dei parametri e best practice in Gemini 3.x
 
-Hal berikut berlaku untuk **semua model Gemini 3.x**, termasuk Gemini 3.5 Flash.
+Le seguenti indicazioni si applicano a **tutti i modelli Gemini 3.x**, incluso Gemini 3.5 Flash.
 
-- **`temperature`, `top_p`, `top_k`**: sebaiknya jangan mengubah nilai default. Kemampuan penalaran Gemini 3 dioptimalkan untuk setelan default.
-- Gunakan `thinking_level`, bukan `thinking_budget`.
-- **Pencocokan respons panggilan fungsi**: `id`, `name`, dan jumlah respons
-  harus cocok dengan panggilan sebelumnya.
-- **Respons fungsi multimodal**: sertakan konten multimodal di dalam
-  respons fungsi, bukan di luarnya.
-- **Petunjuk inline dalam respons fungsi**: tambahkan ke teks respons fungsi, bukan sebagai bagian terpisah.
-- **Mengurangi panggilan alat yang tidak perlu**: Gunakan tingkat penalaran yang lebih rendah atau bereksperimen
-  dengan petunjuk sistem untuk mengurangi panggilan alat dalam alur kerja agentic.
+- **`temperature`, `top_p`, `top_k`**: ti consigliamo vivamente di non modificare i valori predefiniti. Le funzionalità di ragionamento di Gemini 3 sono ottimizzate per le impostazioni predefinite.
+- Utilizza `thinking_level` anziché `thinking_budget`.
+- **Corrispondenza delle risposte di chiamata di funzione**: `id`, `name` e il conteggio delle risposte
+  devono corrispondere alle chiamate precedenti.
+- **Risposte di funzioni multimodali**: includi i contenuti multimodali all'interno della
+  risposta della funzione, non all'esterno.
+- **Istruzioni in linea nelle risposte delle funzioni**: aggiungile al testo della risposta della funzione, non come parti separate.
+- **Riduci le chiamate di strumenti non necessarie**: utilizza livelli di ragionamento inferiori o sperimenta
+  le istruzioni di sistema per ridurre le chiamate di strumenti nei workflow agentici.
 
-Lihat bagian di bawah untuk mengetahui cara memperbarui kode Anda.
+Consulta le sezioni seguenti per scoprire come aggiornare il codice.
 
-### Parameter pengambilan sampel (tidak lagi direkomendasikan)
+### Parametri di campionamento (non più consigliati)
 
-`temperature`, `top_p`, dan `top_k` tidak lagi direkomendasikan untuk semua model Gemini 3.x. Kemampuan penalaran Gemini 3 dioptimalkan untuk setelan default. **Hapus parameter ini dari semua permintaan.**
+`temperature`, `top_p` e `top_k` non sono più consigliati per tutti i modelli Gemini 3.x. Le funzionalità di ragionamento di Gemini 3 sono ottimizzate per le impostazioni predefinite. **Rimuovi questi parametri da tutte le richieste.**
 
 ```
 # ⚠️ Remove these parameters (not recommended)
@@ -241,11 +241,11 @@ config = types.GenerateContentConfig(
 )
 ```
 
-Untuk memastikan determinisme, sebaiknya tentukan petunjuk sistem dengan aturan eksplisit untuk kasus penggunaan spesifik Anda.
+Per garantire il determinismo, ti consigliamo di definire un'istruzione di sistema con regole esplicite per il tuo caso d'uso specifico.
 
-### `thinking_budget` (tidak lagi direkomendasikan)
+### `thinking_budget` (non più consigliato)
 
-Parameter `thinking_budget` numerik mentah tidak lagi direkomendasikan di semua model Gemini 3.x. Gunakan enum string `thinking_level` sebagai gantinya.
+Il parametro numerico non elaborato `thinking_budget` non è più consigliato per tutti i modelli Gemini 3.x. Utilizza invece l'enumerazione di stringhe `thinking_level`.
 
 ```
 # ⚠️ Before (not recommended)
@@ -259,17 +259,17 @@ config = types.GenerateContentConfig(
 )
 ```
 
-Nilai yang tersedia: `minimal`, `low`, `medium` (default), dan `high`.
+Valori disponibili: `minimal`, `low`, `medium` (valore predefinito) e `high`.
 
-### Panggilan fungsi: pencocokan respons yang ketat
+### Chiamata di funzione: corrispondenza rigorosa delle risposte
 
-Interactions API sudah menampilkan error pada respons fungsi yang tidak cocok. GenerateContent API belum menampilkan error, tetapi respons yang tidak cocok menyebabkan model menampilkan respons kosong dengan `finish_reason: STOP` dalam sebagian besar kasus. Selalu ikuti konvensi berikut:
+L'API Interactions genera già errori in caso di risposte di funzioni non corrispondenti. L'API GenerateContent non genera ancora errori, ma nella maggior parte dei casi le risposte non corrispondenti fanno sì che il modello restituisca risposte vuote con `finish_reason: STOP`. Segui sempre queste convenzioni:
 
-| Persyaratan | Detail |
+| Requisito | Dettagli |
 | --- | --- |
-| Sertakan `id` | Setiap `FunctionResponse` harus menyertakan `id` dari `FunctionCall` yang sesuai |
-| Cocokkan `name` | `name` dalam respons harus cocok dengan `name` dalam panggilan |
-| Cocokkan jumlah | Tampilkan tepat satu `FunctionResponse` untuk setiap `FunctionCall` yang diterima |
+| Includi `id` | Ogni `FunctionResponse` deve includere l'`id` corrispondente a `FunctionCall` |
+| Corrispondenza di `name` | `name` nella risposta deve corrispondere a `name` nella chiamata |
+| Corrispondenza dei conteggi | Restituisci esattamente una `FunctionResponse` per ogni `FunctionCall` ricevuta |
 
 ### Python
 
@@ -331,12 +331,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-### Respons fungsi multimodal
+### Risposte di funzioni multimodali
 
-Kami sering melihat klien menyediakan gambar di luar respons fungsi. Hal ini dapat menyebabkan perilaku model yang tidak terduga (misalnya, kebocoran penalaran) dan menghasilkan output berkualitas lebih rendah. Ikuti rekomendasi dalam
-[dokumentasi Multimodal Function Responses API](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=id#multimodal)
-dan sertakan konten multimodal di bagian respons fungsi yang Anda
-kirim ke model. Model dapat memproses konten multimodal ini pada giliran berikutnya untuk menghasilkan respons yang lebih informatif.
+Spesso i clienti forniscono immagini al di fuori della risposta della funzione. Ciò può comportare un comportamento imprevisto del modello (ad es. perdita di ragionamento) e generare output di qualità inferiore. [Segui invece il consiglio riportato nella documentazione dell'API Risposte di funzioni multimodali e includi i contenuti multimodali nelle parti della risposta della funzione che invii al modello.](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=it#multimodal) Il modello può elaborare questi contenuti multimodali nel turno successivo per produrre una risposta più informata.
 
 ### Python
 
@@ -389,9 +386,9 @@ const finalResponse = await ai.models.generateContent({
 });
 ```
 
-### Petunjuk inline dalam respons fungsi
+### Istruzioni in linea nelle risposte delle funzioni
 
-Kami sering melihat klien memberikan petunjuk tambahan bersama dengan respons fungsi sebagai `Parts` berikutnya. Hal ini dapat menyebabkan perilaku model yang tidak terduga (misalnya, kebocoran penalaran) dan menghasilkan output berkualitas lebih rendah. Sebagai gantinya, tambahkan petunjuk tambahan ke akhir teks respons fungsi yang dipisahkan oleh dua baris baru.
+Spesso i clienti forniscono istruzioni aggiuntive insieme alle risposte delle funzioni come `Parts` successive. Ciò può comportare un comportamento imprevisto del modello (ad es. perdita di ragionamento) e generare output di qualità inferiore. Aggiungi invece eventuali istruzioni aggiuntive alla fine del testo della risposta della funzione, separate da due nuove righe.
 
 ### Python
 
@@ -442,120 +439,121 @@ const finalResponse = await ai.models.generateContent({
 });
 ```
 
-### Mengurangi panggilan alat yang tidak perlu
+### Ridurre le chiamate di strumenti non necessarie
 
-Jika Anda mengalami penggunaan panggilan alat yang berlebihan, dua teknik dapat membantu meminimalkannya:
+Se riscontri un utilizzo eccessivo delle chiamate di strumenti, due tecniche possono aiutarti a ridurle al minimo:
 
-1. **Mulai dengan mengurangi tingkat penalaran** (`medium`, `low`, atau `minimal`): Tingkat penalaran yang lebih tinggi mendorong model untuk menggunakan lebih banyak alat untuk menjelajahi dan memverifikasi, sehingga menurunkan tingkat dapat mengurangi panggilan alat.
-2. **Tambahkan petunjuk sistem:** Jika penggunaan berlebihan berlanjut setelah menyesuaikan tingkat penalaran, pertimbangkan perintah yang membatasi penggunaan alat. Contoh:
+1. **Inizia riducendo il livello di ragionamento** (`medium`, `low` o `minimal`): i livelli di ragionamento più elevati incoraggiano il modello a utilizzare più strumenti per esplorare e verificare, quindi la riduzione del livello può ridurre le chiamate di strumenti.
+2. **Aggiungi un'istruzione di sistema:** se l'utilizzo eccessivo persiste dopo aver regolato il livello di ragionamento, valuta la possibilità di utilizzare un prompt che limiti l'utilizzo degli strumenti. Ad esempio:
 
    ```
    You have a limited action budget of <n> tool calls. Use them efficiently.
    ```
 
-## Checklist migrasi
+## Elenco di controllo per la migrazione
 
-### Bermigrasi dari Pratinjau Gemini 3 Flash
+### Eseguire la migrazione da Gemini 3 Flash (anteprima)
 
-- Perbarui nama model: `gemini-3-flash-preview` → `gemini-3.5-flash`
-- Tinjau harga. Gemini 3.5 Flash lebih mahal daripada Pratinjau Gemini 3 Flash. Jika kasus penggunaan Anda sangat sensitif terhadap biaya, pertimbangkan untuk bermigrasi ke
-  [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=id)
-  sebagai gantinya. Lihat halaman [harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id#gemini-3.5-flash) untuk mengetahui detailnya.
-- Hapus `temperature`, `top_p`, `top_k` dari konfigurasi Anda (tidak lagi direkomendasikan).
-- Ganti `thinking_budget` dengan `thinking_level`.
-- Tambahkan `id` dan `name` yang cocok ke semua bagian `FunctionResponse`.
-- Uji perintah Anda. Upaya default diubah dari `high` → `medium`; verifikasi kualitas, kecepatan, dan biaya.
-- Retensi penalaran kini aktif secara default. Konteks penalaran diteruskan di seluruh giliran, yang meningkatkan performa tetapi dapat meningkatkan penggunaan token.
-- Kurangi panggilan alat yang tidak perlu: mulai dengan mengurangi tingkat penalaran (`medium`, `low`, atau `minimal`); tambahkan petunjuk sistem untuk membatasi penggunaan alat jika penggunaan berlebihan berlanjut.
-- [Penggunaan Komputer](https://ai.google.dev/gemini-api/docs/computer-use?hl=id) didukung.
+- Aggiorna il nome del modello: `gemini-3-flash-preview` → `gemini-3.5-flash`
+- Esamina i prezzi. Gemini 3.5 Flash è più costoso di Gemini 3 Flash (anteprima). Se il tuo caso d'uso è molto sensibile ai costi, valuta la possibilità di eseguire la migrazione a
+  [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=it)
+  invece. Per maggiori dettagli, consulta la [pagina dei prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it#gemini-3.5-flash).
+- Rimuovi `temperature`, `top_p`, `top_k` dalla configurazione (non più consigliato).
+- Sostituisci `thinking_budget` con `thinking_level`.
+- Aggiungi `id` e `name` corrispondente a tutte le parti `FunctionResponse`.
+- Testa i prompt. Lo sforzo predefinito è stato modificato da `high` → `medium`; verifica la qualità, la velocità e il costo.
+- La conservazione del ragionamento è ora attiva per impostazione predefinita. Il contesto di ragionamento viene riportato nei turni, il che migliora le prestazioni, ma potrebbe aumentare l'utilizzo dei token.
+- Riduci le chiamate di strumenti non necessarie: inizia riducendo il livello di ragionamento (`medium`, `low` o `minimal`); aggiungi un'istruzione di sistema per limitare l'utilizzo degli strumenti se l'utilizzo eccessivo persiste.
+- [L'utilizzo del computer](https://ai.google.dev/gemini-api/docs/computer-use?hl=it) è supportato.
 
-### Bermigrasi dari Gemini 2.5
+### Eseguire la migrazione da Gemini 2.5
 
-Semua hal di atas, ditambah:
+Tutte le azioni precedenti, più:
 
-- Sederhanakan perintah. Jika Anda menggunakan teknik rekayasa perintah chain-of-thought untuk memaksa
-  penalaran, coba `thinking_level: "medium"` atau `"high"` dengan perintah yang lebih sederhana
-  sebagai gantinya.
-- Uji workload PDF dan media. Jika Anda mengandalkan perilaku tertentu untuk penguraian dokumen padat, uji setelan `media_resolution_high` untuk memastikan akurasi berkelanjutan. Bermigrasi ke default Gemini 3 juga dapat meningkatkan penggunaan token untuk PDF, tetapi menurunkannya untuk video; jika permintaan melebihi jendela konteks, kurangi `media_resolution` secara eksplisit. Lihat
-  [dokumentasi resolusi media](https://ai.google.dev/gemini-api/docs/media-resolution?hl=id) untuk mengetahui detailnya.
-- Manfaatkan [penggunaan alat gabungan](https://ai.google.dev/gemini-api/docs/tool-combination?hl=id).
-  Google Penelusuran, konteks URL, eksekusi kode, dan fungsi kustom dapat digunakan dalam permintaan yang sama.
-- Jika menggunakan respons fungsi multimodal, pindahkan konten multimodal ke dalam bagian respons fungsi, bukan di sampingnya.
-- Jika menggunakan petunjuk inline dengan respons fungsi, tambahkan petunjuk tersebut ke teks respons fungsi yang dipisahkan oleh dua baris baru, bukan sebagai bagian terpisah.
-- Segmentasi gambar tidak didukung di Gemini 3.x. Untuk workload segmentasi, terus gunakan Gemini 2.5 Flash dengan penalaran dinonaktifkan.
-- Hapus `candidate_count` dari konfigurasi Anda (tidak didukung di Gemini 3.x)
+- Semplifica i prompt. Se hai utilizzato la tecnica di prompt engineering chain-of-thought per forzare
+  il ragionamento, prova `thinking_level: "medium"` o `"high"` con prompt più semplici
+  invece.
+- Testa i workload di PDF e contenuti multimediali. Se ti affidi a un comportamento specifico per l'analisi di documenti densi, testa l'impostazione `media_resolution_high` per garantire la precisione continua. La migrazione alle impostazioni predefinite di Gemini 3 potrebbe anche aumentare l'utilizzo dei token per i PDF, ma ridurlo per i video; se le richieste superano la finestra contestuale, riduci esplicitamente `media_resolution`. Per maggiori dettagli, consulta la documentazione sulla
+  [risoluzione dei contenuti multimediali](https://ai.google.dev/gemini-api/docs/media-resolution?hl=it).
+- [Sfrutta l'utilizzo combinato degli strumenti.](https://ai.google.dev/gemini-api/docs/tool-combination?hl=it)
+  La Ricerca Google, il contesto URL, l'esecuzione del codice e le funzioni personalizzate possono essere utilizzati nella stessa richiesta.
+- Se utilizzi le risposte di funzioni multimodali, sposta i contenuti multimodali all'interno delle parti della risposta della funzione, non accanto.
+- Se utilizzi le istruzioni in linea con le risposte delle funzioni, aggiungile al testo della risposta della funzione, separate da due nuove righe, non come parti separate.
+- La segmentazione delle immagini non è supportata in Gemini 3.x. Per i workload di segmentazione, continua a utilizzare Gemini 2.5 Flash con il ragionamento disattivato.
+- Rimuovi `candidate_count` dalla configurazione (non supportato in Gemini 3.x)
 
-## Fitur rangkaian Gemini 3
+## Funzionalità della famiglia Gemini 3
 
-Gemini 3.5 Flash mewarisi semua kemampuan rangkaian Gemini 3, termasuk Penggunaan Komputer.
-Fitur yang diperkenalkan di Gemini 3 yang diteruskan:
+Gemini 3.5 Flash eredita tutte le funzionalità della famiglia Gemini 3, incluso l'utilizzo del computer.
+Funzionalità introdotte in Gemini 3 che vengono riportate:
 
-- [**Penalaran**](https://ai.google.dev/gemini-api/docs/thinking?hl=id)**:** Konteks penalaran terenkripsi yang dipertahankan di seluruh panggilan API. Otomatis di Interactions API; implisit di GenerateContent.
-- [**Output terstruktur dengan alat**](https://ai.google.dev/gemini-api/docs/structured-output?hl=id)**:** Gabungkan mode JSON dengan
-  alat bawaan (Penelusuran, konteks URL, eksekusi kode, panggilan fungsi).
-- [**Respons fungsi multimodal**](https://ai.google.dev/gemini-api/docs/function-calling?hl=id#multimodal)**:** Menampilkan
-  gambar, audio, dan media lainnya dalam hasil panggilan fungsi.
-- [**Eksekusi kode dengan gambar**](https://ai.google.dev/gemini-api/docs/code-execution?hl=id#images)**:** Menjalankan kode yang
-  memproses dan membuat gambar.
-- [****Penggunaan alat gabungan****](https://ai.google.dev/gemini-api/docs/tool-combination?hl=id): Menggunakan alat bawaan dan
-  panggilan fungsi kustom dalam permintaan yang sama.
-- [**Resolusi media**](https://ai.google.dev/gemini-api/docs/media-resolution?hl=id)**:**
-  Kontrol mendetail atas alokasi token untuk input gambar, video, dan PDF.
-  Model Gemini 3 mendukung setelan resolusi per item konten (`low`,
-  `medium`, `high`, `ultra_high`) untuk perintah dengan fidelitas campuran.
-- [**Tanda tangan penalaran**](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=id)**:**
-  Representasi terenkripsi dari penalaran internal model. Diperlukan untuk panggilan fungsi multi-giliran; dikelola secara otomatis oleh SDK resmi.
+- [**Ragionamento**](https://ai.google.dev/gemini-api/docs/thinking?hl=it)**:** contesto di ragionamento criptato conservato nelle chiamate API. Automatico nell'API Interactions; implicito in GenerateContent.
+- [**Output strutturati con gli strumenti**](https://ai.google.dev/gemini-api/docs/structured-output?hl=it)**:** combina la modalità JSON con gli
+  strumenti integrati (Ricerca, contesto URL, esecuzione del codice, chiamata di funzione).
+- [**Risposte di funzioni multimodali**](https://ai.google.dev/gemini-api/docs/function-calling?hl=it#multimodal)**:** restituisci
+  immagini, audio e altri contenuti multimediali nei risultati delle chiamate di funzioni.
+- [**Esecuzione del codice con le immagini**](https://ai.google.dev/gemini-api/docs/code-execution?hl=it#images)**:** esegui il codice che
+  elabora e genera immagini.
+- [**\*\*Utilizzo combinato degli strumenti\*\***](https://ai.google.dev/gemini-api/docs/tool-combination?hl=it)**:** utilizza gli strumenti integrati e
+  la chiamata di funzioni personalizzate nella stessa richiesta.
+- [**Risoluzione dei contenuti multimediali**](https://ai.google.dev/gemini-api/docs/media-resolution?hl=it)**:**
+  controllo granulare dell'allocazione dei token per gli input di immagini, video e PDF.
+  I modelli Gemini 3 supportano le impostazioni di risoluzione per elemento di contenuto (`low`,
+  `medium`, `high`, `ultra_high`) per i prompt a fedeltà mista.
+- [**Firme del ragionamento**](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=it)**:**
+  rappresentazioni criptate del ragionamento interno del modello. Obbligatorio per la chiamata di funzioni in più turni; gestito automaticamente dagli SDK ufficiali.
 
-## Praktik terbaik penulisan perintah
+## Best practice per i prompt
 
-Model Gemini 3.x adalah model penalaran, yang mengubah cara Anda menulis perintah.
+I modelli Gemini 3.x sono modelli di ragionamento, il che modifica il modo in cui devi creare i prompt.
 
-- **Petunjuk yang tepat:** Sampaikan dengan ringkas. Gemini 3.x merespons petunjuk yang langsung dan jelas dengan baik. Teknik rekayasa perintah yang panjang atau kompleks yang dirancang untuk model lama dapat menyebabkan model melakukan analisis berlebihan.
-- **Panjang output:** Secara default, Gemini 3.x tidak terlalu panjang dan lebih memilih jawaban yang langsung dan efisien. Jika kasus penggunaan Anda memerlukan nada percakapan, arahkan model secara eksplisit dalam perintah Anda (misalnya, "Jelaskan hal ini sebagai asisten yang ramah dan banyak bicara").
-- **Pengelolaan konteks:** Saat bekerja dengan set data besar (seperti seluruh buku, codebase, atau video panjang), tempatkan petunjuk atau pertanyaan spesifik Anda di akhir perintah, setelah konteks data. Tetapkan penalaran model dengan memulai pertanyaan Anda dengan frasa seperti, "Berdasarkan informasi sebelumnya...".
+- **Istruzioni precise:** crea prompt concisi. Gemini 3.x risponde al meglio a istruzioni dirette e chiare. Le tecniche di prompt engineering dettagliate o complesse progettate per i modelli precedenti potrebbero causare un'analisi eccessiva del modello.
+- **Dettaglio dell'output:** per impostazione predefinita, Gemini 3.x è meno dettagliato e preferisce risposte dirette ed efficienti. Se il tuo caso d'uso richiede un tono colloquiale, guida esplicitamente il modello nel prompt (ad esempio, "Spiega questo come un assistente amichevole e loquace").
+- **Gestione del contesto:** quando lavori con set di dati di grandi dimensioni (ad esempio libri interi, codebase o video lunghi), inserisci le istruzioni o le domande specifiche alla fine del prompt, dopo il contesto dei dati. Ancora il ragionamento del modello iniziando la domanda con una frase come "In base alle informazioni precedenti...".
 
-Pelajari lebih lanjut strategi desain perintah dalam panduan rekayasa perintah
-.
+Scopri di più sulle strategie di progettazione dei prompt nella
+[guida al prompt engineering](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=it).
 
-## Batasan
+## Limitazioni
 
-- Segmentasi gambar tidak didukung di Gemini 3.x. Untuk workload segmentasi, terus gunakan Gemini 2.5 Flash dengan penalaran dinonaktifkan, atau
-  [Gemini Robotics ER 2](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=id).
+- La segmentazione delle immagini non è supportata in Gemini 3.x. Per i workload di segmentazione
+  , continua a utilizzare Gemini 2.5 Flash con il ragionamento disattivato o
+  [Gemini Robotics ER 2](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=it).
 
-## FAQ
+## Domande frequenti
 
-1. **Berapa batas pengetahuan untuk Gemini 3.5 Flash?** Gemini 3.5 Flash memiliki batas pengetahuan Januari 2025. Untuk informasi terbaru, gunakan alat
-   [Grounding Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id).
-2. **Berapa batas jendela konteks?** Gemini 3.5 Flash mendukung jendela konteks input token 1 juta dan hingga 65 ribu token output.
-3. **Apakah kode `thinking_budget` lama saya masih berfungsi?** Ya, `thinking_budget` masih didukung untuk kompatibilitas mundur, tetapi sebaiknya bermigrasi ke `thinking_level` untuk performa yang lebih dapat diprediksi. Jangan gunakan keduanya dalam permintaan yang sama.
-4. **Apakah Gemini 3.5 Flash mendukung Batch API?** Ya. Lihat panduan
-   [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=id) untuk mengetahui detailnya.
-5. **Apakah Context Caching didukung?** Ya,
-   [Context Caching](https://ai.google.dev/gemini-api/docs/caching?hl=id) didukung.
-6. **Alat mana yang didukung?** Gemini 3.5 Flash mendukung
-   [Google Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id),
-   [Grounding dengan Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=id),
-   [Penelusuran File](https://ai.google.dev/gemini-api/docs/file-search?hl=id),
-   [Eksekusi Kode](https://ai.google.dev/gemini-api/docs/code-execution?hl=id),
-   [Konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id), dan
-   Panggilan Fungsi [standar](https://ai.google.dev/gemini-api/docs/function-calling?hl=id),
-   termasuk
-   [penggunaan alat gabungan](https://ai.google.dev/gemini-api/docs/tool-combination?hl=id), dan
-   [Penggunaan Komputer](https://ai.google.dev/gemini-api/docs/computer-use?hl=id).
+1. **Qual è il knowledge cutoff per Gemini 3.5 Flash?** Gemini 3.5 Flash ha un knowledge cutoff di gennaio 2025. Per informazioni più recenti, utilizza lo
+   [strumento di grounding della Ricerca](https://ai.google.dev/gemini-api/docs/google-search?hl=it) tool.
+2. **Quali sono i limiti della finestra contestuale?** Gemini 3.5 Flash supporta una finestra contestuale di input di 1 milione di token e fino a 65.000 token di output.
+3. **Il mio vecchio codice `thinking_budget` funzionerà ancora?** Sì, `thinking_budget` è ancora supportato per la compatibilità con le versioni precedenti, ma ti consigliamo di eseguire la migrazione a `thinking_level` per prestazioni più prevedibili. Non utilizzare entrambi nella stessa richiesta.
+4. **Gemini 3.5 Flash supporta l'API Batch?** Sì. Per maggiori dettagli, consulta la guida all'
+   [API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=it).
+5. **La memorizzazione nella cache del contesto è supportata?** Sì,
+   [la memorizzazione nella cache del contesto](https://ai.google.dev/gemini-api/docs/caching?hl=it) è supportata.
+6. **Quali strumenti sono supportati?** Gemini 3.5 Flash supporta
+   [la Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it),
+   [il grounding con Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it),
+   [la ricerca di file](https://ai.google.dev/gemini-api/docs/file-search?hl=it),
+   [l'esecuzione del codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it),
+   [il contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it) e
+   la [chiamata di funzioni](https://ai.google.dev/gemini-api/docs/function-calling?hl=it) standard,
+   incluso
+   [l'utilizzo combinato degli strumenti](https://ai.google.dev/gemini-api/docs/tool-combination?hl=it) e
+   [l'utilizzo del computer](https://ai.google.dev/gemini-api/docs/computer-use?hl=it).
 
-## Langkah berikutnya
+## Passaggi successivi
 
-- Pelajari lebih lanjut strategi desain perintah dalam panduan rekayasa perintah
-  .
-- Mulai menggunakan [Cookbook Gemini 3](https://github.com/google-gemini/cookbook)
-- Pelajari tentang [pengoptimalan dan inferensi Gemini API](https://ai.google.dev/gemini-api/docs/optimization?hl=id)
+- Scopri di più sulle strategie di progettazione dei prompt nella
+  [guida al prompt engineering](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=it).
+- Inizia a utilizzare il [ricettario di Gemini 3](https://github.com/google-gemini/cookbook)
+- Scopri di più sull'[ottimizzazione e sull'inferenza dell'API Gemini](https://ai.google.dev/gemini-api/docs/optimization?hl=it)
 
-Kirim masukan
+Invia feedback
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Terakhir diperbarui pada 2026-07-30 UTC.
+Ultimo aggiornamento 2026-07-30 UTC.
 
-Ada masukan untuk kami?
+Vuoi dirci altro?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-30 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]

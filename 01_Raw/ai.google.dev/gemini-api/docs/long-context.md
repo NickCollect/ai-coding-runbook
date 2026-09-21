@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/long-context?hl=it
-fetched_at: 2026-09-14T05:44:32.304456+00:00
+fetched_at: 2026-09-21T05:56:47.676497+00:00
 title: "Contesto lungo \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

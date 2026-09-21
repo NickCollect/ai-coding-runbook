@@ -1,48 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=ja
-fetched_at: 2026-09-14T05:48:32.676028+00:00
-title: "\u52d5\u753b\u7406\u89e3 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=vi
+fetched_at: 2026-09-21T05:47:27.686029+00:00
+title: "Hi\u1ec3u video \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash が利用可能になりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ja)。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs/generate-content?hl=ja)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs/generate-content?hl=vi)
 
-フィードバックを送信
+Gửi ý kiến phản hồi
 
-# 動画理解
+# Hiểu video
 
-> 動画生成については、[Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=ja) ガイドをご覧ください。
+> Để tìm hiểu về tính năng tạo video, hãy xem hướng dẫn về [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=vi).
 
-Gemini モデルは動画を処理できるため、これまでドメイン固有のモデルが必要だった多くの最先端のデベロッパーのユースケースに対応できます。
-Gemini のビジョン機能には、動画の説明、セグメント化、情報抽出、動画コンテンツに関する質問への回答、動画内の特定のタイムスタンプの参照などがあります。
+Các mô hình Gemini có thể xử lý video, cho phép nhiều trường hợp sử dụng của nhà phát triển tiên phong mà trước đây cần đến các mô hình dành riêng cho miền.
+Một số khả năng thị giác của Gemini bao gồm: mô tả, phân đoạn và trích xuất thông tin từ video, trả lời câu hỏi về nội dung video và tham khảo các dấu thời gian cụ thể trong video.
 
-Gemini に動画を入力する方法は次のとおりです。
+Bạn có thể cung cấp video làm dữ liệu đầu vào cho Gemini theo những cách sau:
 
-| 入力方法 | 最大サイズ | おすすめの使用例 |
+| Phương thức nhập | Kích thước tối đa | Trường hợp sử dụng được đề xuất |
 | --- | --- | --- |
-| [ファイル API](#upload-video) | 20 GB（有料）/ 2 GB（無料） | 大きなファイル（100 MB 以上）、長い動画（10 分以上）、再利用可能なファイル。 |
-| [Cloud Storage 登録](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ja#registration) | 2 GB（ファイルごと、ストレージの上限なし） | 大きなファイル（100 MB 以上）、長い動画（10 分以上）、永続的で再利用可能なファイル。 |
-| [インライン データ](#inline-video) | 100 MB 未満 | 小さなファイル（100 MB 未満）、短い時間（1 分未満）、1 回限りの入力。 |
-| [YouTube の URL](#youtube) | なし | 公開 YouTube 動画。 |
+| [File API](#upload-video) | 20 GB (có tính phí) / 2 GB (miễn phí) | Tệp lớn (từ 100 MB trở lên), video dài (từ 10 phút trở lên), tệp có thể dùng lại. |
+| [Đăng ký Cloud Storage](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=vi#registration) | 2 GB (mỗi tệp, không giới hạn bộ nhớ) | Tệp lớn (từ 100 MB trở lên), video dài (từ 10 phút trở lên), tệp có thể dùng lại và lưu trữ lâu dài. |
+| [Dữ liệu nội tuyến](#inline-video) | < 100MB | Tệp nhỏ (<100 MB), thời lượng ngắn (<1 phút), dữ liệu đầu vào một lần. |
+| [URL trên YouTube](#youtube) | Không áp dụng | Video công khai trên YouTube. |
 
-> **注:** [ファイル API](#upload-video) は、ほとんどのユースケースにおすすめです。特に 100 MB を超えるファイルの場合や、複数のリクエストでファイルを再利用する場合は、ファイル API を使用してください。
+> **Lưu ý:** Bạn nên dùng [File API](#upload-video) cho hầu hết các trường hợp sử dụng, đặc biệt là đối với những tệp có kích thước lớn hơn 100 MB hoặc khi bạn muốn dùng lại tệp trong nhiều yêu cầu.
 
-外部 URL や Google Cloud に保存されたファイルの使用など、他のファイル入力方法については、
-[ファイル入力方法](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ja)ガイドをご覧ください。
+Để tìm hiểu về các phương thức nhập tệp khác, chẳng hạn như sử dụng URL bên ngoài hoặc tệp được lưu trữ trong Google Cloud, hãy xem hướng dẫn [Phương thức nhập tệp](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=vi).
 
-### 動画ファイルをアップロードする
+### Tải tệp video lên
 
-次のコードは、サンプル動画をダウンロードし、[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja) を使用してアップロードし、
-処理が完了するまで待ってから、アップロードされたファイル参照を使用して
-動画を要約します。
+Đoạn mã sau đây tải một video mẫu xuống, tải video đó lên bằng [Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi), đợi video được xử lý, sau đó dùng thông tin tham chiếu về tệp đã tải lên để tóm tắt video.
 
 ### Python
 
@@ -167,19 +164,18 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 jq -r ".candidates[].content.parts[].text" response.json
 ```
 
-トークンの効率とパフォーマンスを最適化するには、
-[エージェント型動画処理](#agentic-video-understanding)の使用を検討してください。
+Để tối ưu hoá hiệu quả và hiệu suất của mã thông báo, hãy cân nhắc sử dụng [Xử lý video bằng tác nhân](#agentic-video-understanding).
 
-リクエストの合計サイズ（ファイル、テキスト プロンプト、システム指示などを含む）が 20 MB を超える場合、動画の再生時間が長い場合、または複数のプロンプトで同じ動画を使用する場合は、常に Files API を使用してください。ファイル API は、動画ファイル形式を直接受け入れます。
+Luôn sử dụng Files API khi tổng kích thước yêu cầu (bao gồm cả tệp, lời nhắc bằng văn bản, hướng dẫn hệ thống, v.v.) lớn hơn 20 MB, thời lượng video đáng kể hoặc nếu bạn dự định sử dụng cùng một video trong nhiều lời nhắc.
+File API chấp nhận trực tiếp các định dạng tệp video.
 
-メディア ファイルの操作の詳細については、
-[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja) をご覧ください。
+Để tìm hiểu thêm về cách làm việc với các tệp nội dung nghe nhìn, hãy xem [Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi).
 
-### 動画データをインラインで渡す
+### Truyền dữ liệu video nội tuyến
 
-ファイル API を使用して動画ファイルをアップロードする代わりに、リクエストで小さな動画を `generateContent` に直接渡すことができます。これは、リクエストの合計サイズが 20 MB 未満の短い動画に適しています。
+Thay vì tải tệp video lên bằng File API, bạn có thể truyền trực tiếp các video nhỏ hơn trong yêu cầu đến `generateContent`. Phương thức này phù hợp với những video ngắn có tổng kích thước yêu cầu dưới 20 MB.
 
-インライン動画データの提供例を次に示します。
+Dưới đây là ví dụ về cách cung cấp dữ liệu video nội tuyến:
 
 ### Python
 
@@ -264,9 +260,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
     }' 2> /dev/null
 ```
 
-### YouTube の URL を渡す
+### URL của YouTube
 
-リクエストの一部として、YouTube の URL を Gemini API に直接渡すことができます。
+Bạn có thể truyền trực tiếp URL của YouTube đến Gemini API trong yêu cầu của mình như sau:
 
 ### Python
 
@@ -372,36 +368,33 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
     }' 2> /dev/null
 ```
 
-**制限事項:**
+**Các điểm hạn chế:**
 
-- 無料枠の場合、1 日にアップロードできる YouTube 動画は 8 時間までです。
-- 有料枠の場合、動画の長さに基づく制限はありません。
-- Gemini 2.5 より前のモデルでは、リクエストごとにアップロードできる動画は 1 つのみです。Gemini 2.5 以降のモデルでは、リクエストごとに最大 10 個の動画をアップロードできます。
-- アップロードできるのは公開動画のみです（非公開動画や限定公開動画はアップロードできません）。
+- Đối với gói miễn phí, bạn không thể tải quá 8 giờ video trên YouTube lên mỗi ngày.
+- Đối với gói có tính phí, không có giới hạn dựa trên thời lượng video.
+- Đối với các mô hình trước Gemini 2.5, bạn chỉ có thể tải 1 video lên mỗi yêu cầu. Đối với Gemini 2.5 và các mô hình sau này, bạn có thể tải tối đa 10 video lên cho mỗi yêu cầu.
+- Bạn chỉ có thể tải video công khai lên (không thể tải video riêng tư hoặc không công khai lên).
 
-## エージェント型動画理解
+## Tính năng hiểu video dựa trên tác nhân
 
-デフォルトでは、動画入力は静的処理（1 FPS でフレームを抽出）を使用します。
-Gemini 3.8 Flash、3.7 Flash、3.6 Flash、3.5 Flash Lite モデルは、
-**エージェント型動画理解** もサポートしています。このモデルでは、動画
-タイムラインを動的に探索し、プロンプトに基づいてトランスクリプトを選択的に検査し、フレーム
-レートと解像度を適応的に調整します。
+Theo mặc định, đầu vào video sử dụng quy trình xử lý tĩnh (trích xuất khung hình ở tốc độ 1 khung hình/giây).
+Các mô hình Gemini 3.8 Flash, 3.7 Flash, 3.6 Flash và 3.5 Flash Lite cũng hỗ trợ **khả năng hiểu video dựa trên tác nhân**, trong đó mô hình này sẽ khám phá dòng thời gian của video một cách linh hoạt, chọn lọc kiểm tra bản chép lời và điều chỉnh tốc độ khung hình cũng như độ phân giải một cách thích ứng ngay lập tức dựa trên câu lệnh.
 
-| **Mode** | **説明** | **サポートモデル** |
+| **Chế độ** | **Nội dung mô tả** | **Các mẫu được hỗ trợ** |
 | --- | --- | --- |
-| **静的** （デフォルト） | 固定レート（1 FPS）でフレームを抽出し、1 回のパスでコンテキストに配置します。短いクリップに適しています。 | すべての Gemini モデル |
-| **エージェント型ツール** | モデルは動画タイムラインを動的に移動し、プロンプトに基づいて必要なコンテンツのみを読み込みます。トークンの効率が最大 88% 向上し、長尺コンテンツの品質が約 7% 向上します。 | Gemini 3.8 Flash、3.7 Flash、3.6 Flash、3.5 Flash Lite |
+| **Tĩnh** (mặc định) | Trích xuất các khung hình ở tốc độ cố định (1 khung hình/giây) và đặt chúng vào ngữ cảnh trong một lượt. Phù hợp với các đoạn video ngắn. | Tất cả các mô hình Gemini |
+| **Tác nhân** | Mô hình này điều hướng dòng thời gian của video một cách linh hoạt, chỉ tải nội dung cần thiết dựa trên câu lệnh. Hiệu quả hơn tới 88% về mã thông báo và chất lượng cao hơn khoảng 7% đối với nội dung dạng dài. | Gemini 3.8 Flash, 3.7 Flash, 3.6 Flash, 3.5 Flash Lite |
 
-### 処理モードを選択する
+### Chọn một chế độ xử lý
 
-一般的なガイドラインとして、特にレスポンスの品質やトークンの効率を最適化する場合は、**エージェント型ツール** モードから始めます。
+Theo nguyên tắc chung, hãy bắt đầu với chế độ **có tác nhân**, đặc biệt là khi tối ưu hoá để có chất lượng phản hồi hoặc hiệu quả sử dụng mã thông báo.
 
-- **エージェント型ツール:** 長尺動画または特定の時点を対象とするクエリ。モデルはタイムラインを動的に移動し、コンテキスト ウィンドウを埋めることなく、コンテキストに関連する情報をターゲットにします。
-- **静的:** 短いクリップ（5 分未満）に対するレイテンシの影響を受けやすいクエリ、またはクリップ全体でフレームレベルの精度が必要な場合。
+- **Dựa trên tác nhân:** Video dài hoặc cụm từ tìm kiếm nhắm đến những khoảnh khắc cụ thể. Mô hình này điều hướng dòng thời gian một cách linh hoạt để nhắm đến thông tin phù hợp theo ngữ cảnh mà không cần điền vào cửa sổ ngữ cảnh.
+- **Tĩnh:** Các truy vấn nhạy cảm với độ trễ trên các đoạn video ngắn (dưới 5 phút) hoặc các trường hợp cần độ chính xác ở cấp khung hình trên toàn bộ đoạn video.
 
-> **注:** エージェント型処理に時間がかかる長い動画や複雑なプロンプトの場合は、ストリーミング（`client.models.generate_content_stream`）を使用します。これにより、接続がアクティブな状態に保たれ、中間推論ステップが表示され、接続または認証のタイムアウトが回避されます。
+> **Lưu ý:** Đối với video dài hoặc câu lệnh phức tạp mà quá trình xử lý dựa trên tác nhân mất nhiều thời gian hơn, hãy sử dụng tính năng phát trực tuyến (`client.models.generate_content_stream`). Tính năng này duy trì kết nối, hiển thị các bước suy luận trung gian và tránh hết thời gian chờ kết nối hoặc xác thực.
 
-### 処理モードを設定する
+### Đặt chế độ xử lý
 
 ### Python
 
@@ -517,22 +510,22 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-> **注:** エージェント型処理が使用されたことを確認するには、`response.candidates[0].content.parts` を調べます。`MEDIA_PROCESSING` ツールタイプで `tool_call` パーツと `tool_response` パーツが存在する場合は、モデルが動画を動的に移動したことを示します。
+> **Lưu ý:** Để xác minh rằng quá trình xử lý dựa trên tác nhân đã được sử dụng, hãy kiểm tra `response.candidates[0].content.parts`. Sự xuất hiện của các phần `tool_call` và `tool_response` với loại công cụ `MEDIA_PROCESSING` cho biết rằng mô hình đã điều hướng video một cách linh hoạt.
 
-> **注:** 他のサーバーサイド ツール（Google 検索や URL コンテキストなど）とは異なり、エージェント型動画では、ツール呼び出しと結果を返したりストリーミングしたりするために、`ToolConfig` で `include_server_side_tool_invocations=True` を設定する必要はありません。動画ナビゲーションの `tool_call` パーツと `tool_response` パーツは、入力パーツに `media_processing="AGENTIC"` が設定されている場合に自動的に返されます。
+> **Lưu ý:** Không giống như các công cụ phía máy chủ khác (chẳng hạn như Google Tìm kiếm hoặc ngữ cảnh URL), video dựa trên tác nhân không yêu cầu bạn đặt `include_server_side_tool_invocations=True` trong `ToolConfig` để các lệnh gọi công cụ và kết quả được trả về hoặc truyền trực tuyến. Các phần `tool_call` và `tool_response` để điều hướng video sẽ tự động được trả về khi `media_processing="AGENTIC"` được đặt trên bất kỳ phần đầu vào nào.
 
-### レスポンスの構造
+### Cấu trúc phản hồi
 
-エージェント型処理が有効になっている場合、レスポンスには内部ナビゲーション トレースを公開する追加パーツが含まれます。
+Khi được bật, tính năng xử lý dựa trên tác nhân sẽ bao gồm các phần bổ sung cho thấy dấu vết điều hướng nội bộ:
 
-- `tool_call` **パーツ** （`tool_type: "MEDIA_PROCESSING"`）: モデルが動画セグメントまたは音声トランスクリプトをリクエストするたびに生成されます。
-- `tool_response` **パーツ** （`tool_type: "MEDIA_PROCESSING"`）: 各読み込みオペレーションの結果。
+- `tool_call` **parts** (`tool_type: "MEDIA_PROCESSING"`): được phát ra mỗi khi mô hình yêu cầu một đoạn video hoặc bản chép lời âm thanh.
+- `tool_response` **parts** (`tool_type: "MEDIA_PROCESSING"`): kết quả của mỗi thao tác tải.
 
-これらのパーツを手動で処理したり、返信したりする必要はありません。会話履歴として完全なレスポンスを渡すと、自動的に処理されます。
+Bạn không cần xử lý hoặc trả lời những phần này theo cách thủ công: hãy truyền toàn bộ câu trả lời trở lại dưới dạng nhật ký cuộc trò chuyện và những phần này sẽ được xử lý tự động.
 
-`ThinkingConfig` で `include_thoughts=True` が設定されている場合、推論ステップはツール呼び出し/レスポンス ペアとインターリーブされた `thought: true` パーツとして表示されます。思考が無効になっている場合、思考テキストは省略されますが、ツールパーツは引き続き存在します。
+Nếu `include_thoughts=True` được đặt trong `ThinkingConfig`, các bước suy luận sẽ xuất hiện dưới dạng các phần `thought: true` xen kẽ với các cặp lệnh gọi/phản hồi của công cụ. Khi tắt tính năng suy nghĩ, văn bản suy nghĩ sẽ bị bỏ qua nhưng các phần công cụ vẫn xuất hiện.
 
-次の例は、ツール呼び出しとレスポンスのパーツがインターリーブされたレスポンス ペイロードを示しています。
+Ví dụ sau đây cho thấy tải trọng phản hồi có các phần phản hồi và lệnh gọi công cụ xen kẽ:
 
 ```
 {
@@ -588,9 +581,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 }
 ```
 
-### 動画間で処理モードを混在させる
+### Kết hợp các chế độ xử lý trên nhiều video
 
-同じリクエストで、動画パーツごとに異なる処理モードを設定できます。
+Bạn có thể đặt các chế độ xử lý khác nhau cho từng Phần video trong cùng một yêu cầu:
 
 ### Python
 
@@ -723,86 +716,149 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-## 長い動画にコンテキスト キャッシュを使用する
+## Sử dụng tính năng lưu vào bộ nhớ đệm theo bối cảnh cho video dài
 
-10 分を超える動画の場合や、同じ動画ファイルに対して複数のリクエストを行う予定がある場合は、[コンテキスト キャッシュ](https://ai.google.dev/gemini-api/docs/caching?hl=ja)を使用して費用を削減し、レイテンシを改善します。コンテキスト キャッシュを使用すると、動画を 1 回処理して、後続のクエリでトークンを再利用できるため、チャット セッションや長尺コンテンツの繰り返し分析に最適です。
+Đối với những video dài hơn 10 phút hoặc khi bạn dự định đưa ra nhiều yêu cầu đối với cùng một tệp video, hãy sử dụng [tính năng lưu vào bộ nhớ đệm theo bối cảnh](https://ai.google.dev/gemini-api/docs/caching?hl=vi) để giảm chi phí và cải thiện độ trễ. Tính năng lưu vào bộ nhớ đệm theo ngữ cảnh cho phép bạn xử lý video một lần và sử dụng lại các mã thông báo cho các truy vấn tiếp theo, nhờ đó, tính năng này rất phù hợp cho các phiên trò chuyện hoặc phân tích lặp lại nội dung dạng dài.
 
-## コンテンツ内のタイムスタンプを参照する
+## Tham khảo dấu thời gian trong nội dung
 
-`MM:SS` 形式のタイムスタンプを使用して、動画内の特定の時点について質問できます。
+Bạn có thể đặt câu hỏi về những thời điểm cụ thể trong video bằng cách sử dụng dấu thời gian có dạng `MM:SS`.
 
 ### Python
 
 ```
-prompt = "What are the examples given at 00:05 and 00:10 supposed to show us?" # Adjusted timestamps for the NASA video
+response = client.models.generate_content(
+    model="gemini-3.8-flash",
+    contents=[
+        myfile,
+        "What are the examples given at 00:05 and 00:10 supposed to show us?",
+    ],
+)
+print(response.text)
 ```
 
 ### JavaScript
 
 ```
-const prompt = "What are the examples given at 00:05 and 00:10 supposed to show us?";
+const response = await ai.models.generateContent({
+  model: "gemini-3.8-flash",
+  contents: [
+    myfile,
+    "What are the examples given at 00:05 and 00:10 supposed to show us?",
+  ],
+});
+console.log(response.text);
 ```
 
 ### Go
 
 ```
-    prompt := []*genai.Part{
-        genai.NewPartFromURI(currentVideoFile.URI, currentVideoFile.MIMEType),
-          // Adjusted timestamps for the NASA video
-        genai.NewPartFromText("What are the examples given at 00:05 and " +
-            "00:10 supposed to show us?"),
-    }
+parts := []*genai.Part{
+    genai.NewPartFromURI(uploadedFile.URI, uploadedFile.MIMEType),
+    genai.NewPartFromText("What are the examples given at 00:05 and 00:10 supposed to show us?"),
+}
+
+result, _ := client.Models.GenerateContent(
+    ctx,
+    "gemini-3.8-flash",
+    []*genai.Content{genai.NewContentFromParts(parts, genai.RoleUser)},
+    nil,
+)
+fmt.Println(result.Text())
 ```
 
 ### REST
 
 ```
-PROMPT="What are the examples given at 00:05 and 00:10 supposed to show us?"
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
+    -H "x-goog-api-key: $GEMINI_API_KEY" \
+    -H 'Content-Type: application/json' \
+    -X POST \
+    -d '{
+      "contents": [{
+        "parts":[
+          {"file_data": {"file_uri": "'"${file_uri}"'", "mime_type": "'"${MIME_TYPE}"'"}},
+          {"text": "What are the examples given at 00:05 and 00:10 supposed to show us?"}
+        ]
+      }]
+    }' 2> /dev/null
 ```
 
-## 動画から詳細な分析情報を抽出する
+## Trích xuất thông tin chi tiết từ video
 
-Gemini モデルは、**音声ストリームとビジュアル** ストリームの両方から情報を処理することで、動画コンテンツを理解するための強力な機能を提供します。これにより、動画で何が起こっているかの説明を生成したり、コンテンツに関する質問に回答したりするなど、豊富な詳細情報を抽出できます。
+Các mô hình Gemini có khả năng mạnh mẽ trong việc hiểu nội dung video bằng cách xử lý thông tin từ cả luồng **âm thanh và hình ảnh**. Nhờ đó, bạn có thể trích xuất một bộ thông tin chi tiết phong phú, bao gồm cả việc tạo nội dung mô tả về những gì đang diễn ra trong video và trả lời các câu hỏi về nội dung của video.
 
-ビジュアルな説明の場合、モデルは **1 フレーム/秒** （FPS）のレートで動画をサンプリングします。このデフォルトのサンプリング レートはほとんどのコンテンツに適していますが、動きが速い動画やシーンがすばやく切り替わる動画では詳細が失われる可能性があります。
-このような動きの多いコンテンツの場合は、[カスタム フレームレートの設定を検討してください](#custom-frame-rate)。
+Đối với nội dung mô tả bằng hình ảnh, mô hình lấy mẫu video ở tốc độ **1 khung hình/giây** (FPS). Tỷ lệ lấy mẫu mặc định này phù hợp với hầu hết nội dung, nhưng lưu ý rằng tỷ lệ này có thể bỏ lỡ các chi tiết trong video có chuyển động nhanh hoặc cảnh thay đổi nhanh.
+Đối với nội dung có chuyển động nhanh như vậy, hãy cân nhắc [đặt tốc độ khung hình tuỳ chỉnh](#custom-frame-rate).
 
 ### Python
 
 ```
-prompt = "Describe the key events in this video, providing both audio and visual details. Include timestamps for salient moments."
+response = client.models.generate_content(
+    model="gemini-3.8-flash",
+    contents=[
+        myfile,
+        "Describe the key events in this video, providing both audio and visual details. Include timestamps for salient moments.",
+    ],
+)
+print(response.text)
 ```
 
 ### JavaScript
 
 ```
-const prompt = "Describe the key events in this video, providing both audio and visual details. Include timestamps for salient moments.";
+const response = await ai.models.generateContent({
+  model: "gemini-3.8-flash",
+  contents: [
+    myfile,
+    "Describe the key events in this video, providing both audio and visual details. Include timestamps for salient moments.",
+  ],
+});
+console.log(response.text);
 ```
 
 ### Go
 
 ```
-    prompt := []*genai.Part{
-        genai.NewPartFromURI(currentVideoFile.URI, currentVideoFile.MIMEType),
-        genai.NewPartFromText("Describe the key events in this video, providing both audio and visual details. " +
-      "Include timestamps for salient moments."),
-    }
+parts := []*genai.Part{
+    genai.NewPartFromURI(uploadedFile.URI, uploadedFile.MIMEType),
+    genai.NewPartFromText("Describe the key events in this video, providing both audio and visual details. " +
+        "Include timestamps for salient moments."),
+}
+
+result, _ := client.Models.GenerateContent(
+    ctx,
+    "gemini-3.8-flash",
+    []*genai.Content{genai.NewContentFromParts(parts, genai.RoleUser)},
+    nil,
+)
+fmt.Println(result.Text())
 ```
 
 ### REST
 
 ```
-PROMPT="Describe the key events in this video, providing both audio and visual details. Include timestamps for salient moments."
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
+    -H "x-goog-api-key: $GEMINI_API_KEY" \
+    -H 'Content-Type: application/json' \
+    -X POST \
+    -d '{
+      "contents": [{
+        "parts":[
+          {"file_data": {"file_uri": "'"${file_uri}"'", "mime_type": "'"${MIME_TYPE}"'"}},
+          {"text": "Describe the key events in this video, providing both audio and visual details. Include timestamps for salient moments."}
+        ]
+      }]
+    }' 2> /dev/null
 ```
 
-## 動画処理をカスタマイズする
+## Tuỳ chỉnh quy trình xử lý video
 
-Gemini API で、クリッピング間隔を設定するか、カスタム フレームレート サンプリングを指定することで、動画処理をカスタマイズできます。これらのカスタマイズ オプション
-は、`"static"` モードで動画を処理する場合にのみサポートされます。
+Bạn có thể tuỳ chỉnh quy trình xử lý video trong Gemini API bằng cách đặt khoảng thời gian cắt hoặc cung cấp chế độ lấy mẫu tốc độ khung hình tuỳ chỉnh. Các lựa chọn tuỳ chỉnh này chỉ được hỗ trợ khi xử lý video ở chế độ `"static"`.
 
-### クリッピング間隔を設定する
+### Đặt khoảng thời gian cắt
 
-開始オフセットと終了オフセットで `videoMetadata` を指定すると、動画をクリップできます。
+Bạn có thể cắt video bằng cách chỉ định `videoMetadata` với độ lệch bắt đầu và kết thúc.
 
 ### Python
 
@@ -869,9 +925,9 @@ console.log(response.text)
 await main();
 ```
 
-### カスタム フレームレートを設定する
+### Đặt tốc độ khung hình tuỳ chỉnh
 
-`videoMetadata` に `fps` 引数を渡すことで、カスタム フレームレート サンプリングを設定できます。
+Bạn có thể thiết lập chế độ lấy mẫu tốc độ khung hình tuỳ chỉnh bằng cách truyền một đối số `fps` đến `videoMetadata`.
 
 ### Python
 
@@ -900,11 +956,42 @@ response = client.models.generate_content(
 )
 ```
 
-デフォルトでは、動画から 1 フレーム/秒（FPS）がサンプリングされます。長い動画の場合は、FPS を低く（1 未満）設定することをおすすめします。この機能は、ほとんど静止している動画（講義など）に特に役立ちます。高速アクションの理解や高速モーション トラッキングなど、詳細な時間分析が必要な動画には、高い FPS を使用します。
+### JavaScript
 
-## サポートされている動画形式
+```
+import { GoogleGenAI } from "@google/genai";
 
-Gemini は、次の動画形式の MIME タイプをサポートしています。
+const ai = new GoogleGenAI({});
+
+const myfile = await ai.files.upload({
+  file: "path/to/sample.mp4",
+  mimeType: "video/mp4",
+});
+
+const response = await ai.models.generateContent({
+  model: "gemini-3.8-flash",
+  contents: [
+    {
+      fileData: {
+        fileUri: myfile.uri,
+        mimeType: myfile.mimeType,
+      },
+      videoMetadata: {
+        fps: 5,
+      },
+    },
+    "Please summarize the video in 3 sentences.",
+  ],
+});
+
+console.log(response.text);
+```
+
+Theo mặc định, 1 khung hình/giây (FPS) sẽ được lấy mẫu từ video. Bạn nên đặt FPS thấp (< 1) cho video dài. Điều này đặc biệt hữu ích đối với những video tĩnh (ví dụ: bài giảng). Sử dụng tỷ lệ khung hình trên giây (FPS) cao hơn cho những video cần phân tích chi tiết về thời gian, chẳng hạn như hiểu được hành động nhanh hoặc theo dõi chuyển động tốc độ cao.
+
+## Định dạng video được hỗ trợ
+
+Gemini hỗ trợ các loại MIME định dạng video sau:
 
 - `video/mp4`
 - `video/mpeg`
@@ -916,64 +1003,46 @@ Gemini は、次の動画形式の MIME タイプをサポートしています�
 - `video/wmv`
 - `video/3gpp`
 
-## 動画に関する技術的な詳細
+## Thông tin kỹ thuật về video
 
-- **サポートされているモデルとコンテキスト**: すべての Gemini モデルで動画データを処理できます。
-  - 100 万個のコンテキスト ウィンドウを持つモデルは、デフォルトで最大 3 時間（低メディア解像度）、高メディア解像度で最大 1 時間の動画を処理できます。
-- **処理モード**: Gemini 3.8 Flash、3.7 Flash、3.6 Flash、3.5 Flash Lite
-  以降のモデルは、次の 2 つの動画処理モードをサポートしています:
-  - **静的**: フレームは 1 FPS で抽出され、コンテキストに配置されます（すべてのモデルでデフォルト
-    ）。音声は 1 Kbps（シングル チャンネル）で処理されます。
-    タイムスタンプは 1 秒ごとに追加されます。短いクリップや、すべてのフレームが重要な場合（フレームごとの検査など）に最適です。1 FPS のサンプリング レートでは、高速なアクション シーケンスの詳細が失われる可能性があります。
-  - **エージェント型ツール**: モデルは動画を動的に移動し、
-    必要に応じてトランスクリプト、フレーム、音声、またはその両方を読み込みます。これにより、長尺コンテンツのトークン使用量が最大 88% 削減されますが、生成が開始される前の内部推論とツールのラウンドトリップにより、短いクリップ（5 分未満）の Time to First Token（TTFT）がわずかに増加する可能性があります。
-    レスポンスには、ターン間で推論コンテキストを維持するための `MEDIA_PROCESSING` ツール呼び出しとレスポンスのパーツが含まれます。トークン費用とレスポンスの品質を最適化するために、長尺動画に最適です。Gemini 3.8 Flash、3.7 Flash、3.6 Flash、3.5 Flash Lite でサポートされています。詳細については、
-    [エージェント型動画理解](#agentic-video-understanding)をご覧ください。
-- **トークンの計算（静的モード）**: 動画の各秒は次のようにトークン化されます:
-  - 個々のフレーム（1 FPS でサンプリング）:
-    - `media_resolution` が低に設定されている場合、フレームはフレームあたり 66 個のトークンでトークン化されます。
-    - それ以外の場合、フレームはフレームあたり 258 個のトークンでトークン化されます。
-  - 音声: 1 秒あたり 32 トークン。
-  - メタデータも含まれます。
-  - 合計: デフォルト（低）メディア解像度では動画 1 秒あたり約 100 トークン、高メディア解像度では動画 1 秒あたり約 300 トークン。
-- **トークンの計算（エージェント型ツール モード）**: トークンの使用量は、コンテンツ
-  の複雑さとモデルのナビゲーション戦略によって異なります。動画探索中に生成されるナビゲーション推論トークンは**思考トークン**
-  （`thoughts_token_count`）としてカウントされ、必要に応じて読み込まれるフレーム、音声、トランスクリプトはツール プロンプト トークン（`tool_use_prompt_token_count`）としてカウントされます。エージェント型処理では、モデルがプロンプトに回答するために必要なトランスクリプト、フレーム、音声、またはその両方のみを読み込むため、長尺コンテンツの合計トークン数が静的処理よりも最大 88% 削減されます（[トークンガイド](https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=ja#video-token-usage)をご覧ください）。
-- **メディアの解像度**: Gemini 3 では、マルチモーダル
-  ビジョン処理をきめ細かく制御できます。`media_resolution``media_resolution` パラメータは、**入力画像または動画フレームごとに割り当てられるトークンの最大数** を決定します。解像度が高いほど、モデルが細かいテキストを読み取ったり、小さな詳細を識別する能力が向上しますが、トークンの使用量とレイテンシが増加します。`media_resolution` パラメータと `media_processing` パラメータは独立しています。同じ動画パーツに両方を設定できます。
+- **Mô hình và ngữ cảnh được hỗ trợ**: Tất cả các mô hình Gemini đều có thể xử lý dữ liệu video.
+  - Theo mặc định, các mô hình có cửa sổ ngữ cảnh 1 triệu token có thể xử lý video dài tối đa 3 giờ (ở độ phân giải thấp) hoặc tối đa 1 giờ (ở độ phân giải cao).
+- **Chế độ xử lý**: Gemini 3.8 Flash, 3.7 Flash, 3.6 Flash, 3.5 Flash Lite và các mô hình sau này hỗ trợ 2 chế độ xử lý video:
+  - **Tĩnh**: Khung hình được trích xuất ở tốc độ 1 FPS và được đặt vào ngữ cảnh (mặc định cho tất cả các mô hình). Âm thanh được xử lý ở tốc độ 1 Kb/giây (một kênh).
+    Dấu thời gian được thêm vào mỗi giây. Phù hợp nhất với các đoạn video ngắn hoặc khi mọi khung hình đều quan trọng (chẳng hạn như kiểm tra từng khung hình). Xin lưu ý rằng các chuỗi hành động nhanh có thể mất chi tiết do tốc độ lấy mẫu 1 FPS.
+  - **Agentic**: Mô hình này điều hướng video một cách linh hoạt, tải bản chép lời và/hoặc khung hình và/hoặc âm thanh theo yêu cầu. Điều này giúp giảm số lượng mã thông báo lên đến 88% cho nội dung dài, mặc dù điều hướng có thể làm tăng nhẹ Thời gian hiển thị mã thông báo đầu tiên (TTFT) trên các đoạn video ngắn (<5 phút) do quá trình suy luận nội bộ và các chuyến đi khứ hồi của công cụ trước khi bắt đầu tạo.
+    Các phản hồi bao gồm các phần gọi công cụ và phản hồi `MEDIA_PROCESSING` để duy trì bối cảnh suy luận qua các lượt. Phù hợp nhất với video dài để tối ưu hoá chi phí mã thông báo và chất lượng phản hồi. Được hỗ trợ trên Gemini 3.8 Flash, 3.7 Flash, 3.6 Flash và 3.5 Flash Lite. Hãy xem phần [Tính năng hiểu video dựa trên tác nhân](#agentic-video-understanding) để biết thông tin chi tiết.
+- **Tính mã thông báo (chế độ tĩnh)**: Mỗi giây của video được mã hoá như sau:
+  - Khung hình riêng lẻ (lấy mẫu ở tốc độ 1 khung hình/giây):
+    - Nếu `media_resolution` được đặt thành thấp, các khung hình sẽ được mã hoá thành 66 mã thông báo trên mỗi khung hình.
+    - Nếu không, các khung hình sẽ được mã hoá thành 258 mã thông báo cho mỗi khung hình.
+  - Âm thanh: 32 mã thông báo mỗi giây.
+  - Siêu dữ liệu cũng được đưa vào.
+  - Tổng cộng: Khoảng 100 mã thông báo cho mỗi giây video ở độ phân giải mặc định (thấp) của nội dung nghe nhìn hoặc khoảng 300 mã thông báo cho mỗi giây video ở độ phân giải cao của nội dung nghe nhìn.
+- **Tính toán mã thông báo (chế độ có tác nhân)**: Mức sử dụng mã thông báo sẽ thay đổi tuỳ theo độ phức tạp của nội dung và chiến lược điều hướng của mô hình. Các mã thông báo suy luận điều hướng được tạo trong quá trình khám phá video được tính là **mã thông báo tư duy** (`thoughts_token_count`), trong khi các khung hình, âm thanh và bản chép lời được tải theo yêu cầu được tính là mã thông báo lời nhắc công cụ (`tool_use_prompt_token_count`). Xử lý bằng tác nhân thường sử dụng ít hơn đến 88% tổng số mã thông báo so với xử lý tĩnh đối với nội dung dài vì mô hình chỉ tải bản chép lời và/hoặc khung hình và/hoặc âm thanh cần thiết để trả lời lời nhắc (xem [hướng dẫn về mã thông báo](https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=vi#video-token-usage)).
+- **Độ phân giải của nội dung nghe nhìn**: Gemini 3 cho phép kiểm soát chi tiết quá trình xử lý hình ảnh đa phương thức bằng tham số `media_resolution`. Tham số `media_resolution` xác định **số lượng mã thông báo tối đa được phân bổ cho mỗi khung hình đầu vào của hình ảnh hoặc video.** Độ phân giải cao hơn giúp cải thiện khả năng đọc văn bản nhỏ hoặc xác định các chi tiết nhỏ của mô hình, nhưng làm tăng mức sử dụng mã thông báo và độ trễ. Các tham số `media_resolution` và `media_processing` là độc lập: bạn có thể đặt cả hai tham số này trên cùng một phần của video.
 
-トークンの計算の詳細については、
-[トークン](https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=ja)ガイドをご覧ください。
+Để biết thêm thông tin về cách tính mã thông báo, hãy xem hướng dẫn về [mã thông báo](https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=vi).
 
-- **タイムスタンプの形式**: プロンプト内で動画の特定の時点を参照する場合は、`MM:SS` 形式（例: `01:15` 1 分 15 秒の場合）を使用します。
-- **プロンプトの配置**: テキストと 1 つの動画を組み合わせる場合は、`contents` 配列の動画部分の
-  *後に*テキスト プロンプトを配置します。
-- **長いリクエストのタイムアウト**: 処理時間が長い動画や、複雑なマルチステップの推論が必要な動画の場合は、ストリーミング
-  （`client.models.generate_content_stream`）を使用します。需要が高いときにバックエンドで再試行が発生する同期リクエスト（ストリーミング以外）は、接続または認証トークンの有効期間を超える可能性があり、予期しない
-  `401 Unauthorized`エラーやタイムアウト エラーが発生する可能性があります。ストリーミングにより、接続がアクティブな状態に保たれ、中間推論とツール呼び出しの進行状況が表示されます。
+- **Định dạng dấu thời gian**: Khi đề cập đến những khoảnh khắc cụ thể trong video trong câu lệnh, hãy sử dụng định dạng `MM:SS` (ví dụ: `01:15` cho 1 phút 15 giây).
+- **Vị trí của câu lệnh**: Nếu kết hợp văn bản và một video, hãy đặt câu lệnh văn bản *sau* phần video trong mảng `contents`.
+- **Thời gian chờ cho các yêu cầu dài**: Đối với những video cần thời gian xử lý kéo dài hoặc có suy luận đa bước phức tạp, hãy sử dụng tính năng truyền trực tuyến (`client.models.generate_content_stream`). Các yêu cầu đồng bộ, không truyền trực tuyến gặp phải tình trạng thử lại phụ trợ trong điều kiện có nhu cầu cao có thể vượt quá thời gian hiệu lực của kết nối hoặc mã thông báo xác thực, điều này có thể xuất hiện dưới dạng lỗi `401 Unauthorized` hoặc lỗi hết thời gian chờ không mong muốn. Tính năng truyền trực tuyến duy trì kết nối và hiển thị suy luận trung gian cũng như tiến trình gọi công cụ.
 
-## 次のステップ
+## Bước tiếp theo
 
-- [メディアの解像度](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=ja): 動画フレームの
-  解像度を制御して、品質とトークンの使用量のバランスを取ります。
-- [トークン](https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=ja): 静的処理モードとエージェント型処理モードの両方で、動画コンテンツがどのようにトークン化されるかを理解します。
-- [システム指示](https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=ja#system-instructions):
-  システム指示を使用すると、特定のニーズやユースケースに基づいてモデルの動作を制御できます。
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja): Gemini で使用する
-  ファイルのアップロードと管理の詳細について学習します。
-- [ファイル プロンプト戦略](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide): Gemini
-  API は、テキスト、画像、音声、動画データを使用したプロンプト（
-  マルチモーダル プロンプトとも呼ばれます）をサポートしています。
-- [安全に関するガイダンス](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=ja): 生成 AI
-  モデルは、不正確、
-  偏見がある、不快な出力など、予期しない出力を生成することがあります。このような出力による危害のリスクを抑えるには、後処理と人間による評価が不可欠です。
+- [Độ phân giải của nội dung nghe nhìn](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=vi): Kiểm soát độ phân giải của khung hình video để cân bằng chất lượng và mức sử dụng mã thông báo.
+- [Mã thông báo](https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=vi): Tìm hiểu cách nội dung video được mã hoá ở cả chế độ xử lý tĩnh và chế độ xử lý dựa trên tác nhân.
+- [Hướng dẫn hệ thống](https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=vi#system-instructions): Hướng dẫn hệ thống giúp bạn điều hướng hành vi của mô hình dựa trên nhu cầu và trường hợp sử dụng cụ thể của bạn.
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi): Tìm hiểu thêm về cách tải lên và quản lý tệp để sử dụng với Gemini.
+- [Chiến lược đặt câu lệnh cho tệp](https://ai.google.dev/gemini-api/docs/files?hl=vi#prompt-guide): Gemini API hỗ trợ đặt câu lệnh bằng dữ liệu văn bản, hình ảnh, âm thanh và video, còn được gọi là đặt câu lệnh đa phương thức.
+- [Hướng dẫn về an toàn](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=vi): Đôi khi, các mô hình AI tạo sinh tạo ra kết quả không mong muốn, chẳng hạn như kết quả không chính xác, thiên vị hoặc phản cảm. Hậu xử lý và đánh giá của con người là những yếu tố cần thiết để hạn chế nguy cơ gây hại từ những kết quả như vậy.
 
-フィードバックを送信
+Gửi ý kiến phản hồi
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-最終更新日 2026-09-12 UTC。
+Cập nhật lần gần đây nhất: 2026-09-18 UTC.
 
-ご意見をお聞かせください
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-12 UTC。"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-18 UTC."],[],[]]

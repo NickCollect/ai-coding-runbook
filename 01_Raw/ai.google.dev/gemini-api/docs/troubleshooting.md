@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/troubleshooting?hl=zh-CN
-fetched_at: 2026-09-14T05:40:28.276689+00:00
+fetched_at: 2026-09-21T05:58:19.208201+00:00
 title: "\u95ee\u9898\u6392\u67e5\u6307\u5357 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -39,8 +39,8 @@ Gemini API 的官方客户端 SDK（例如 [Python SDK](https://github.com/googl
 如果您要直接发出 REST API 请求或自定义重试逻辑，请遵循以下最佳实践，以提高请求成功率并防止服务过载：
 
 - **使用指数退避算法**：在第一次重试之前等待一小段时间（例如 1 秒），然后以指数方式增加延迟时间（例如 2 秒、4 秒、8 秒）。
-- **添加抖动**：在延迟中添加随机“抖动”，以防止所有客户端在完全相同的时间重试。
-- **针对特定错误进行重试**：仅针对暂时性错误（例如 `429`、`408` 或 `5xx`）进行重试。请勿针对客户端错误（例如 `400` 或 `403`）进行重试，因为这些错误表示存在无效 API 密钥或语法错误等问题。
+- **添加抖动**：在延迟中添加随机“抖动”，以帮助防止所有客户端在完全相同的时间重试。
+- **针对特定错误进行重试**：仅针对暂时性错误（例如 `429`、`408` 或 `5xx`）进行重试。请勿针对客户端错误（例如 `400`、`402` 或 `403`）进行重试，因为这些错误表示存在无效的 API 密钥、预付款用完或语法错误等问题。
 - **设置重试次数上限**：定义重试次数上限，以防止无限循环。
 
 ## 检查 API 调用是否存在模型参数错误
@@ -61,11 +61,15 @@ Gemini API 的官方客户端 SDK（例如 [Python SDK](https://github.com/googl
 
 确认您使用的是我们[模型页面](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn)上列出的受支持型号。
 
-## 2.5 模型的延迟时间更长或 token 用量更高
+## 使用思考模型时延迟时间更长或 token 用量更高
 
-如果您发现 2.5 Flash 和 Pro 模型的延迟时间或令牌用量更高，这可能是因为为了提高质量，这些模型**默认启用思考功能**。如果您优先考虑速度或需要尽可能降低费用，可以调整或停用思考功能。
+延迟时间或 token 用量之所以会增加，通常是因为 Gemini 3.x 模型默认启用了思考功能。已弃用的 Gemini 2.5 模型也使用默认思考模式。
 
-如需相关指南和示例代码，请参阅[思考页面](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn#set-budget)。
+思考模型会生成内部推理令牌，以提高质量。这种推理过程会增加响应延迟时间和总令牌消耗量。
+
+如果您优先考虑降低延迟时间或需要最大限度地降低费用，可以降低思考水平或关闭思考功能。
+
+如需了解配置详情和查看代码示例，请参阅[思维指南](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn#thinking-levels)。
 
 ## 安全问题
 
@@ -84,11 +88,11 @@ Gemini API 的官方客户端 SDK（例如 [Python SDK](https://github.com/googl
 | 说明 | 原因 | 建议的解决方法 |
 | --- | --- | --- |
 | Markdown 表格中的连字符重复出现 | 如果表格内容较长，模型会尝试创建视觉上对齐的 Markdown 表格，此时可能会出现这种情况。不过，Markdown 中的对齐方式对于正确渲染而言并非必需。 | 在提示中添加说明，为模型提供有关生成 Markdown 表格的具体指南。提供符合这些准则的示例。您还可以尝试调节温度。对于生成代码或 Markdown 表格等结构化程度很高的输出，较高的温度值（>= 0.8）效果更好。  以下是一组您可以添加到提示中的准则示例，以防止出现此问题：     ```           # Markdown Table Format                      * Separator line: Markdown tables must include a separator line below             the header row. The separator line must use only 3 hyphens per             column, for example: |---|---|---|. Using more hypens like             ----, -----, ------ can result in errors. Always             use |:---|, |---:|, or |---| in these separator strings.              For example:              | Date | Description | Attendees |             |---|---|---|             | 2024-10-26 | Annual Conference | 500 |             | 2025-01-15 | Q1 Planning Session | 25 |            * Alignment: Do not align columns. Always use |---|.             For three columns, use |---|---|---| as the separator line.             For four columns use |---|---|---|---| and so on.            * Conciseness: Keep cell content brief and to the point.            * Never pad column headers or other cells with lots of spaces to             match with width of other content. Only a single space on each side             is needed. For example, always do "| column name |" instead of             "| column name                |". Extra spaces are wasteful.             A markdown renderer will automatically take care displaying             the content in a visually appealing form. ``` |
-| Markdown 表格中的重复令牌 | 与重复的连字符类似，当模型尝试直观地对齐表格内容时，就会出现这种情况。Markdown 中的对齐方式对于正确渲染而言并非必需。 | - 尝试向系统提示添加以下指令：      ```               FOR TABLE HEADINGS, IMMEDIATELY ADD ' |' AFTER THE TABLE HEADING.   ``` - 尝试调整温度。较高的温度（>= 0.8）通常有助于消除输出中的重复内容。 |
+| Markdown 表格中的重复令牌 | 与重复的连字符类似，当模型尝试直观地对齐表格内容时，就会出现这种情况。Markdown 中的对齐方式不是正确渲染的必要条件。 | - 尝试向系统提示添加以下指令：      ```               FOR TABLE HEADINGS, IMMEDIATELY ADD ' |' AFTER THE TABLE HEADING.   ``` - 尝试调整温度。较高的温度（>= 0.8）通常有助于消除输出中的重复或重复内容。 |
 | 结构化输出中存在重复的换行符 (`\n`) | 当模型输入包含 Unicode 或转义序列（例如 `\u` 或 `\t`）时，可能会导致出现重复的换行符。 | - 检查提示中是否存在禁止使用的转义序列，并将其替换为 UTF-8 字符。例如，JSON 示例中的 `\u` 转义序列可能会导致模型也在其输出中使用这些序列。 - 指示模型允许的转义。添加如下所示的系统指令：      ```               In quoted strings, the only allowed escape sequences are \\, \n, and \". Instead of \u escapes, use UTF-8.   ``` |
 | 使用结构化输出时文本重复 | 如果模型输出的字段顺序与定义的结构化架构不同，可能会导致文本重复。 | - 请勿在提示中指定字段的顺序。 - 将所有输出字段设为必需字段。 |
-| 重复的工具调用 | 如果模型丢失了之前想法的上下文，并且/或者调用了它被迫调用的不可用端点，就可能会发生这种情况。 | 指示模型在思考过程中保持状态。 将以下内容添加到系统指令的末尾：    ```         When thinking silently: ALWAYS start the thought with a brief         (one sentence) recap of the current progress on the task. In         particular, consider whether the task is already done. ``` |
-| 不属于结构化输出的重复文本 | 如果模型卡在无法解决的请求上，就会出现这种情况。 | - 如果开启了思考功能，请避免在指令中明确指示如何思考问题。只需要求提供最终输出即可。 - 尝试将温度调高到 0.8 或更高。 - 添加“简明扼要”“不要重复”或“只提供一次答案”等指令。 |
+| 重复的工具调用 | 如果模型丢失了之前想法的上下文，并且/或者调用了它被迫调用的不可用端点，就可能会出现这种情况。 | 指示模型在思考过程中保持状态。 将以下内容添加到系统指令的末尾：    ```         When thinking silently: ALWAYS start the thought with a brief         (one sentence) recap of the current progress on the task. In         particular, consider whether the task is already done. ``` |
+| 不属于结构化输出的重复文本 | 如果模型卡在无法解决的请求上，就会出现这种情况。 | - 如果开启了思考功能，请避免在指令中明确指示如何思考问题。只需要求提供最终输出即可。 - 尝试将温度调高到 0.8 或更高。 - 添加“简洁明了”“不要重复”或“只提供一次答案”等指令。 |
 
 ## 已遭屏蔽或无法正常使用的 API 密钥
 
@@ -143,8 +147,8 @@ Your API key was reported as leaked. Please use another API key.
 
 如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-最后更新时间 (UTC)：2026-09-11。
+最后更新时间 (UTC)：2026-09-20。
 
 需要向我们提供更多信息？
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-11。"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-20。"],[],[]]

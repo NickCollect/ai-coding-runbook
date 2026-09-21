@@ -1,62 +1,63 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=he
-fetched_at: 2026-09-14T05:41:53.859902+00:00
-title: "\u05ea\u05de\u05d5\u05e0\u05d4 \u05e9\u05dc Gemini 3.1 Flash Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=ko
+fetched_at: 2026-09-21T05:57:28.148026+00:00
+title: "Gemini 3.1 Flash Lite \uc774\ubbf8\uc9c0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-שליחת משוב
+의견 보내기
 
-# תמונה של Gemini 3.1 Flash Lite
+# Gemini 3.1 Flash Lite 이미지
 
-‫**Nano Banana 2 Lite** נועד להיות מומחה ליעילות במשפחת מודלים ליצירת תמונות. הוא מציע יצירה ועריכה של תמונות עם זמן טעינה קצר במיוחד ועלות משתלמת. המודל הזה מאפשר לפתח תרחישי שימוש אינטראקטיביים בהיקף גדול ויישומים לצרכנים בזמן אמת, כי הוא מבוסס על זמן אחזור של פחות משנייה ועל עלויות מחשוב נמוכות משמעותית ב-TPU.
+**Nano Banana 2 Lite** 는 이미지 생성 제품군의 효율성 전문가로 설계되었으며, 지연 시간이 매우 짧고 비용 효율적인 이미지 생성 및 편집을 제공합니다. 지연 시간이 2초 미만이고 TPU 컴퓨팅 비용이 크게 절감된 이 모델을 사용하면 대규모 대화형 개발자 사용 사례와 실시간 소비자 애플리케이션을 사용할 수 있습니다.
 
-**יכולות מרכזיות:**
+**주요 기능:**
 
-- **זמן אחזור כולל של פחות משתי שניות**
-- **יצירה ועריכה של תמונות וטקסט משולבים** עם תמיכה מובנית בטקסט -> טקסט + תמונה/תמונות ובתמונה + טקסט -> טקסט + תמונה/תמונות.
-- **אופטימיזציה לרזולוציות נמוכות יותר** של 1K‏ (‎1024x1024px).
-- תומך בקבוצה נפרדת של **14 יחסי גובה-רוחב**, כולל פורמטים סטנדרטיים.
-- **עריכות מקומיות מהירות רב-שלביות** (החלפת צבעים, יצירת סטיקרים, שינויים ברקע).
-- שומר על התאמה גבוהה של הדמויות בהשוואה לסטנדרטים המקוריים של Nano Banana.
-- יחסי גובה-רוחב חדשים: `1:1`, `3:2`, `2:3`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9`.
-- ערכים נתמכים של `image_size`: ‏ `1024px` (1K). *(הערה: רזולוציות 2K ו-4K לא נתמכות).*
-- **‫SynthID לסימני מים (תמיד מופעל) + C2PA**.
+- **2초 미만의 엔드 투 엔드 지연 시간**
+- **인터리브 생성 및 편집** 은 텍스트 -> 텍스트 + 이미지, 이미지 + 텍스트 -> 텍스트 + 이미지에 대한 기본 지원을 제공합니다.
+- 1K (1024x1024px)의 **낮은 해상도에 최적화** 되어 있습니다.
+- 표준 형식을 비롯한 **14개의 가로세로 비율** 을 지원합니다.
+- **빠른 멀티턴 로컬 수정** (색상 전환, 스티커 만들기, 배경 조정)
+- 원래 Nano Banana 표준과 일치하는 높은 문자 정렬을 유지합니다.
+- 새로운 `1:1`, `3:2`, `2:3`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9` 가로세로 비율
+- 지원되는 `image_size` 값: `1024px` (1K) *(참고: 2K 및 4K는 지원되지 않습니다).*
+- **SynthID 워터마킹 (항상 사용 설정) + C2PA**
 
-[לניסיון ב-Google AI Studio](https://aistudio.google.com?model=gemini-3.1-flash-lite-image&hl=he)
+[Google AI Studio에서 사용해 보기](https://aistudio.google.com?model=gemini-3.1-flash-lite-image&hl=ko)
 
-## מאמרי עזרה
+## 문서
 
-בדף [יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he) מופיע מידע מפורט על התכונות והיכולות.
+기능 및 기능에 대한 전체
+내용은 [이미지 생성](https://ai.google.dev/gemini-api/docs/image-generation?hl=ko) 페이지를 참고하세요.
 
 ## gemini-3.1-flash-lite-image
 
-| נכס | תיאור |
+| 속성 | 설명 |
 | --- | --- |
-| id\_cardקוד מודל | `gemini-3.1-flash-lite-image` |
-| saveסוגי נתונים נתמכים | **קלטים**  טקסט, תמונה, סרטון ו-PDF  **פלט**  תמונה וטקסט |
-| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  65,536  **Output token limit**  ‫4,096 |
-| handymanיכולות | **[יצירת אודיו](https://ai.google.dev/gemini-api/docs/speech-generation?hl=he)**  לא נתמך  **[שמירת נתונים במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he)**  לא נתמך  **[הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he)**  לא נתמך  **[חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he)**  לא נתמך  **[בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he)**  לא נתמך  **[עיגון בעזרת מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he)**  לא נתמך  **[יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he)**  נתמך  ‫**[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=he)**  לא נתמך  **[חיפוש עם עיגון בנתונים](https://ai.google.dev/gemini-api/docs/google-search?hl=he)**  לא נתמך  **[פלטים מובנים](https://ai.google.dev/gemini-api/docs/structured-output?hl=he)**  לא נתמך  **[תהליך החשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he)**  נתמך (מינימלי וגבוה)  **[הקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he)**  לא נתמך |
-| speedאפשרויות צריכה | ‫**[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he)**  נתמך  **[היקש ברמת Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=he)**  לא נתמך  **[הסקת עדיפות](https://ai.google.dev/gemini-api/docs/priority-inference?hl=he)**  לא נתמך |
-| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - יציב: `gemini-3.1-flash-lite-image` |
-| calendar\_monthהעדכון האחרון | יוני 2026 |
-| id\_cardכרטיס מודל | [כרטיס מודל](https://deepmind.google/models/model-cards/gemini-3-1-flash-lite-image/?hl=he) |
+| id\_card모델 코드 | `gemini-3.1-flash-lite-image` |
+| save지원되는 데이터 유형 | **입력**  텍스트, 이미지, 동영상, PDF  **출력**  이미지 및 텍스트 |
+| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 토큰 한도**  65,536  **출력 토큰 한도**  4,096 |
+| handyman기능 | **[오디오 생성](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ko)**  지원되지 않음  **[캐싱](https://ai.google.dev/gemini-api/docs/caching?hl=ko)**  지원되지 않음  **[코드 실행](https://ai.google.dev/gemini-api/docs/code-execution?hl=ko)**  지원되지 않음  **[파일 검색](https://ai.google.dev/gemini-api/docs/file-search?hl=ko)**  지원되지 않음  **[함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)**  지원되지 않음  **[Google 지도 기반 그라운딩](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ko)**  지원되지 않음  **[이미지 생성](https://ai.google.dev/gemini-api/docs/image-generation?hl=ko)**  지원됨  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ko)**  지원되지 않음  **[검색 그라운딩](https://ai.google.dev/gemini-api/docs/google-search?hl=ko)**  지원되지 않음  **[구조화된 출력](https://ai.google.dev/gemini-api/docs/structured-output?hl=ko)**  지원되지 않음  **[사고](https://ai.google.dev/gemini-api/docs/thinking?hl=ko)**  지원됨 (최소 및 높음)  **[URL 컨텍스트](https://ai.google.dev/gemini-api/docs/url-context?hl=ko)**  지원되지 않음 |
+| speed소비 옵션 | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ko)**  지원됨  **[가변 추론](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ko)**  지원되지 않음  **[우선순위 추론](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ko)**  지원되지 않음 |
+| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - 안정화 버전: `gemini-3.1-flash-lite-image` |
+| calendar\_month최신 업데이트 | 2026년 6월 |
+| id\_card모델 카드 | [모델 카드](https://deepmind.google/models/model-cards/gemini-3-1-flash-lite-image/?hl=ko) |
 
-שליחת משוב
+의견 보내기
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-עדכון אחרון: 2026-09-08 (שעון UTC).
+최종 업데이트: 2026-09-08(UTC)
 
-רוצה לתת לנו משוב?
+의견을 전달하고 싶나요?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-08 (שעון UTC)."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-08(UTC)"],[],[]]

@@ -1,64 +1,67 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=hi
-fetched_at: 2026-09-14T05:50:10.423802+00:00
-title: "\u0915\u0949\u0928\u094d\u091f\u0947\u0915\u094d\u0938\u094d\u091f \u0915\u0948\u0936 \u092e\u0947\u092e\u094b\u0930\u0940 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=es-419
+fetched_at: 2026-09-21T05:53:47.663419+00:00
+title: "El almacenamiento de contexto en cach\u00e9 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs/generate-content?hl=hi)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs/generate-content?hl=es-419)
 
-सुझाव भेजें
+Enviar comentarios
 
-# कॉन्टेक्स्ट कैश मेमोरी
+# El almacenamiento de contexto en caché
 
-एआई के सामान्य वर्कफ़्लो में, एक ही इनपुट टोकन को बार-बार किसी मॉडल को पास किया जा सकता है. Gemini API, कैश मेमोरी की सुविधा के लिए दो अलग-अलग तरीके उपलब्ध कराता है:
+En un flujo de trabajo de IA típico, es posible que pases los mismos tokens de entrada una y otra vez a un modelo. La API de Gemini ofrece dos mecanismos de almacenamiento en caché diferentes:
 
-- इंप्लिसिट कैश मेमोरी (Gemini 2.5 और नए मॉडल पर अपने-आप चालू हो जाती है. इससे लागत कम होने की कोई गारंटी नहीं है)
-- एक्सप्लिसिट कैश मेमोरी (इसे ज़्यादातर मॉडल पर मैन्युअल तरीके से चालू किया जा सकता है. इससे लागत कम करने की गारंटी मिलती है)
+- Almacenamiento en caché implícito (se habilita automáticamente en los modelos de Gemini 2.5 y versiones posteriores, sin garantía de ahorro de costos)
+- Almacenamiento en caché explícito (se puede habilitar manualmente en la mayoría de los modelos, garantía de ahorro de costos)
 
-एक्सप्लिसिट कैशिंग उन मामलों में फ़ायदेमंद होती है जहां आपको लागत में बचत की गारंटी चाहिए. हालांकि, इसमें डेवलपर को कुछ अतिरिक्त काम करना पड़ता है.
+El almacenamiento en caché explícito es útil en los casos en los que deseas garantizar el ahorro de costos, pero con algo de trabajo adicional para el desarrollador.
 
-## इंप्लिसिट कैशिंग
+## Almacenamiento en caché implícito
 
-Gemini 2.5 और इसके बाद के सभी मॉडल के लिए, इंप्लिसिट कैश मेमोरी की सुविधा डिफ़ॉल्ट रूप से चालू होती है. अगर आपका अनुरोध कैश मेमोरी से मिलता है, तो हम लागत में हुई बचत को अपने-आप लागू कर देते हैं. इसे चालू करने के लिए, आपको कुछ भी करने की ज़रूरत नहीं है. कॉन्टेक्स्ट कैश मेमोरी के लिए, हर मॉडल के हिसाब से कम से कम इनपुट टोकन की संख्या यहां दी गई है:
+El almacenamiento en caché implícito está habilitado de forma predeterminada para todos los modelos de Gemini 2.5 y versiones posteriores. Si tu solicitud llega a las memorias caché, te transferimos automáticamente los ahorros en costos. No es necesario que realices ninguna acción para habilitar esta función. En la siguiente tabla, se indica la cantidad mínima de tokens de entrada para el almacenamiento en caché del contexto de cada modelo:
 
-| मॉडल | कम से कम टोकन सीमा |
+| Modelo | Límite mínimo de tokens |
 | --- | --- |
-| Gemini 3.5 Flash | 4096 |
-| Gemini 3.1 Pro की झलक | 4096 |
-| Gemini 2.5 Flash | 2048 |
-| Gemini 2.5 Pro | 2048 |
+| Gemini 3.8 Flash | 4,096 |
+| Gemini 3.7 Flash | 4,096 |
+| Gemini 3.6 Flash | 4,096 |
+| Gemini 3.5 Flash | 4,096 |
+| Versión preliminar de Gemini 3.1 Pro | 4,096 |
+| Gemini 2.5 Flash | 2,048 |
+| Gemini 2.5 Pro | 2,048 |
 
-इंप्लिसिट कैश हिट की संभावना बढ़ाने के लिए:
+Para aumentar las probabilidades de un acierto de caché implícito, haz lo siguiente:
 
-- अपने प्रॉम्प्ट की शुरुआत में, बड़े और सामान्य कॉन्टेंट को शामिल करें
-- कम समय में, एक जैसे प्रीफ़िक्स वाले अनुरोध भेजने की कोशिश करना
+- Intenta colocar contenido grande y común al principio de tu instrucción.
+- Intenta enviar solicitudes con prefijos similares en un corto período
 
-आपको रिस्पॉन्स ऑब्जेक्ट के `usage_metadata` फ़ील्ड में, उन टोकन की संख्या दिखेगी जो कैश मेमोरी में मौजूद थे.
+Puedes ver la cantidad de tokens que fueron aciertos de caché en el campo `usage_metadata` del objeto de respuesta.
 
-## एक्सप्लिसिट कैशिंग
+## Almacenamiento en caché explícito
 
-Gemini API की एक्सप्लिसिट कैशिंग सुविधा का इस्तेमाल करके, मॉडल को एक बार कुछ कॉन्टेंट दिया जा सकता है. साथ ही, इनपुट टोकन को कैश मेमोरी में सेव किया जा सकता है. इसके बाद, अगले अनुरोधों के लिए कैश मेमोरी में सेव किए गए टोकन का इस्तेमाल किया जा सकता है. कुछ वॉल्यूम पर, कैश किए गए टोकन का इस्तेमाल करना, टोकन के एक ही कॉर्पस को बार-बार पास करने की तुलना में कम खर्चीला होता है.
+Con la función de almacenamiento explícito en caché de la API de Gemini, puedes pasar contenido al modelo una vez, almacenar en caché los tokens de entrada y, luego, hacer referencia a los tokens almacenados en caché para las solicitudes posteriores. Con ciertos volúmenes, usar tokens almacenados en caché es más económico que pasar el mismo corpus de tokens de forma repetida.
 
-टोकन के सेट को कैश मेमोरी में सेव करते समय, यह चुना जा सकता है कि टोकन के अपने-आप मिटने से पहले, कैश मेमोरी कितने समय तक सेव रहे. कैश मेमोरी में सेव रहने की इस अवधि को *टाइम टू लिव* (टीटीएल) कहा जाता है. अगर इसे सेट नहीं किया जाता है, तो टीटीएल डिफ़ॉल्ट रूप से एक घंटे पर सेट होता है. कैशिंग की लागत, इनपुट टोकन के साइज़ और टोकन को सेव रखने की अवधि पर निर्भर करती है.
+Cuando almacenas en caché un conjunto de tokens, puedes elegir cuánto tiempo quieres que exista la caché antes de que los tokens se borren automáticamente. Esta duración del almacenamiento en caché se denomina *tiempo de actividad* (TTL). Si no se establece, el TTL predeterminado es de 1 hora. El costo del almacenamiento en caché depende del tamaño de los tokens de entrada y del tiempo que desees que persistan los tokens.
 
-इस सेक्शन में यह माना गया है कि आपने Gemini SDK इंस्टॉल कर लिया है या आपके पास curl इंस्टॉल है. साथ ही, आपने [शुरू करने से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=hi) में दिखाए गए तरीके से एपीआई पासकोड कॉन्फ़िगर कर लिया है.
+En esta sección, se supone que instalaste un SDK de Gemini (o que tienes instalado curl) y que configuraste una clave de API, como se muestra en la [guía de inicio](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=es-419).
 
-### कैश मेमोरी का इस्तेमाल करके कॉन्टेंट जनरेट करना
+### Genera contenido con una caché
 
 ### Python
 
-यहां दिए गए उदाहरण में, कैश मेमोरी में सेव किए गए सिस्टम के निर्देश और वीडियो फ़ाइल का इस्तेमाल करके, कॉन्टेंट जनरेट करने का तरीका बताया गया है.
+En el siguiente ejemplo, se muestra cómo generar contenido con un archivo de video y una instrucción del sistema almacenados en caché.
 
-### वीडियो
+### Videos
 
 ```
 import os
@@ -87,7 +90,7 @@ while video_file.state.name == 'PROCESSING':
 
 print(f'Video processing complete: {video_file.uri}')
 
-model='models/gemini-3.6-flash'
+model='models/gemini-3.8-flash'
 
 # Create a cache with a 5 minute TTL (300 seconds)
 cache = client.caches.create(
@@ -137,7 +140,7 @@ document = client.files.upload(
   config=dict(mime_type='application/pdf')
 )
 
-model_name = "gemini-3.6-flash"
+model_name = "gemini-3.8-flash"
 system_instruction = "You are an expert analyzing transcripts."
 
 # Create a cached content object
@@ -165,7 +168,7 @@ print('\n\n', response.text)
 
 ### JavaScript
 
-यहां दिए गए उदाहरण में, कैश मेमोरी में सेव किए गए सिस्टम के निर्देश और टेक्स्ट फ़ाइल का इस्तेमाल करके कॉन्टेंट जनरेट करने का तरीका बताया गया है.
+En el siguiente ejemplo, se muestra cómo generar contenido con una instrucción del sistema almacenada en caché y un archivo de texto.
 
 ```
 import {
@@ -183,7 +186,7 @@ async function main() {
   });
   console.log("Uploaded file name:", doc.name);
 
-  const modelName = "gemini-3.6-flash";
+  const modelName = "gemini-3.8-flash";
   const cache = await ai.caches.create({
     model: modelName,
     config: {
@@ -204,9 +207,9 @@ async function main() {
 await main();
 ```
 
-### ऐप पर जाएं
+### Go
 
-यहां दिए गए उदाहरण में, कैश मेमोरी का इस्तेमाल करके कॉन्टेंट जनरेट करने का तरीका बताया गया है.
+En el siguiente ejemplo, se muestra cómo generar contenido con una caché.
 
 ```
 package main
@@ -229,7 +232,7 @@ func main() {
         log.Fatal(err)
     }
 
-    modelName := "gemini-3.6-flash"
+    modelName := "gemini-3.8-flash"
     document, err := client.Files.UploadFromPath(
         ctx,
         "media/a11.txt",
@@ -276,14 +279,14 @@ func main() {
 
 ### REST
 
-यहां दिए गए उदाहरण में, कैश मेमोरी बनाने और फिर उसका इस्तेमाल करके कॉन्टेंट जनरेट करने का तरीका बताया गया है.
+En el siguiente ejemplo, se muestra cómo crear una caché y, luego, usarla para generar contenido.
 
-### वीडियो
+### Videos
 
 ```
 wget https://storage.googleapis.com/generativeai-downloads/data/a11.txt
 echo '{
-  "model": "models/gemini-3.6-flash",
+  "model": "models/gemini-3.8-flash",
   "contents":[
     {
       "parts":[
@@ -314,7 +317,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/cachedContents?ke
 
 CACHE_NAME=$(cat cache.json | grep '"name":' | cut -d '"' -f 4 | head -n 1)
 
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=$GEMINI_API_KEY" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=$GEMINI_API_KEY" \
 -H 'Content-Type: application/json' \
 -d '{
       "contents": [
@@ -336,7 +339,7 @@ DOC_URL="https://sma.nasa.gov/SignificantIncidents/assets/a11_missionreport.pdf"
 DISPLAY_NAME="A11_Mission_Report"
 SYSTEM_INSTRUCTION="You are an expert at analyzing transcripts."
 PROMPT="Please summarize this transcript"
-MODEL="models/gemini-3.6-flash"
+MODEL="models/gemini-3.8-flash"
 TTL="300s"
 
 # Download the PDF
@@ -427,20 +430,20 @@ cat response.json
 echo jq ".candidates[].content.parts[].text" response.json
 ```
 
-### कैश मेमोरी की सूची बनाना
+### Enumera cachés
 
-कैश किए गए कॉन्टेंट को वापस नहीं लाया जा सकता और न ही देखा जा सकता है. हालांकि, कैश मेटाडेटा (`name`, `model`, `display_name`, `usage_metadata`, `create_time`, `update_time`, और `expire_time`) को वापस लाया जा सकता है.
+No es posible recuperar ni ver el contenido almacenado en caché, pero puedes recuperar los metadatos de la caché (`name`, `model`, `display_name`, `usage_metadata`, `create_time`, `update_time` y `expire_time`).
 
 ### Python
 
-अपलोड की गई सभी कैश मेमोरी के लिए मेटाडेटा की सूची बनाने के लिए, `CachedContent.list()` का इस्तेमाल करें:
+Para enumerar los metadatos de todas las cachés subidas, usa `CachedContent.list()`:
 
 ```
 for cache in client.caches.list():
   print(cache)
 ```
 
-अगर आपको किसी कैश मेमोरी ऑब्जेक्ट का नाम पता है, तो उसका मेटाडेटा पाने के लिए `get` का इस्तेमाल करें:
+Para recuperar los metadatos de un objeto de caché, si conoces su nombre, usa `get`:
 
 ```
 client.caches.get(name=name)
@@ -448,7 +451,7 @@ client.caches.get(name=name)
 
 ### JavaScript
 
-अपलोड की गई सभी कैश मेमोरी के लिए मेटाडेटा की सूची बनाने के लिए, `GoogleGenAI.caches.list()` का इस्तेमाल करें:
+Para enumerar los metadatos de todas las cachés subidas, usa `GoogleGenAI.caches.list()`:
 
 ```
 console.log("My caches:");
@@ -463,9 +466,9 @@ while (true) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
-यहां दिए गए उदाहरण में, सभी कैश मेमोरी की सूची दी गई है.
+En el siguiente ejemplo, se enumeran todos los cachés.
 
 ```
 caches, err := client.Caches.All(ctx)
@@ -478,7 +481,7 @@ for _, item := range caches {
 }
 ```
 
-यहां दिए गए उदाहरण में, 2 पेज साइज़ का इस्तेमाल करके कैश मेमोरी की सूची दी गई है.
+En el siguiente ejemplo, se enumeran las cachés con un tamaño de página de 2.
 
 ```
 page, err := client.Caches.List(ctx, &genai.ListCachedContentsConfig{PageSize: 2})
@@ -511,13 +514,13 @@ for {
 curl "https://generativelanguage.googleapis.com/v1beta/cachedContents?key=$GEMINI_API_KEY"
 ```
 
-### कैश मेमोरी अपडेट करना
+### Actualiza una caché
 
-किसी कैश मेमोरी के लिए, नया `ttl` या `expire_time` सेट किया जा सकता है. कैश मेमोरी के बारे में कोई और बदलाव नहीं किया जा सकता.
+Puedes establecer un nuevo `ttl` o `expire_time` para una caché. No se admite cambiar ningún otro aspecto de la caché.
 
 ### Python
 
-यहां दिए गए उदाहरण में, `client.caches.update()` का इस्तेमाल करके, कैश मेमोरी के `ttl` को अपडेट करने का तरीका बताया गया है.
+En el siguiente ejemplo, se muestra cómo actualizar el `ttl` de una caché con `client.caches.update()`.
 
 ```
 from google import genai
@@ -531,7 +534,7 @@ client.caches.update(
 )
 ```
 
-मैसेज की समयसीमा खत्म होने का समय सेट करने के लिए, यह `datetime` ऑब्जेक्ट या आईएसओ फ़ॉर्मैट वाली तारीख और समय की स्ट्रिंग (`dt.isoformat()`, जैसे कि `2025-01-27T16:02:36.473528+00:00`) स्वीकार करता है. आपके समय में टाइम ज़ोन शामिल होना चाहिए (`datetime.utcnow()` में टाइम ज़ोन शामिल नहीं होता है, `datetime.now(datetime.timezone.utc)` में टाइम ज़ोन शामिल होता है).
+Para establecer la hora de vencimiento, se aceptará un objeto `datetime` o una cadena de fecha y hora con formato ISO (`dt.isoformat()`, como `2025-01-27T16:02:36.473528+00:00`). La hora debe incluir una zona horaria (`datetime.utcnow()` no adjunta una zona horaria, `datetime.now(datetime.timezone.utc)` sí lo hace).
 
 ```
 from google import genai
@@ -551,7 +554,7 @@ client.caches.update(
 
 ### JavaScript
 
-यहां दिए गए उदाहरण में, `GoogleGenAI.caches.update()` का इस्तेमाल करके, कैश मेमोरी के `ttl` को अपडेट करने का तरीका बताया गया है.
+En el siguiente ejemplo, se muestra cómo actualizar el `ttl` de una caché con `GoogleGenAI.caches.update()`.
 
 ```
 const ttl = `${2 * 3600}s`; // 2 hours in seconds
@@ -562,9 +565,9 @@ const updatedCache = await ai.caches.update({
 console.log("After update (TTL):", updatedCache);
 ```
 
-### ऐप पर जाएं
+### Go
 
-यहां दिए गए उदाहरण में, कैश मेमोरी के `TTL` को अपडेट करने का तरीका बताया गया है.
+En el siguiente ejemplo, se muestra cómo actualizar el `TTL` de una caché.
 
 ```
 // Update the TTL (2 hours).
@@ -580,7 +583,7 @@ fmt.Println(cache)
 
 ### REST
 
-यहां दिए गए उदाहरण में, कैश मेमोरी के `ttl` को अपडेट करने का तरीका बताया गया है.
+En el siguiente ejemplo, se muestra cómo actualizar el `ttl` de una caché.
 
 ```
 curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY" \
@@ -588,9 +591,9 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=
 -d '{"ttl": "600s"}'
 ```
 
-### कैश मेमोरी मिटाना
+### Borra una caché
 
-कैशिंग सेवा, कैश मेमोरी से कॉन्टेंट को मैन्युअल तरीके से हटाने के लिए, मिटाने की सुविधा देती है. यहां दिए गए उदाहरण में, कैश मेमोरी मिटाने का तरीका बताया गया है:
+El servicio de almacenamiento en caché proporciona una operación de eliminación para quitar contenido de la caché de forma manual. En el siguiente ejemplo, se muestra cómo borrar una caché:
 
 ### Python
 
@@ -604,7 +607,7 @@ client.caches.delete(cache.name)
 await ai.caches.delete({ name: cache.name });
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 _, err = client.Caches.Delete(ctx, cache.Name, &genai.DeleteCachedContentConfig{})
@@ -620,46 +623,44 @@ fmt.Println("Cache deleted:", cache.Name)
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY"
 ```
 
-### OpenAI लाइब्रेरी का इस्तेमाल करके, कैश मेमोरी को साफ़ तौर पर मैनेज करना
+### Almacenamiento en caché explícito con la biblioteca de OpenAI
 
-अगर [OpenAI लाइब्रेरी](https://ai.google.dev/gemini-api/docs/openai?hl=hi) का इस्तेमाल किया जा रहा है, तो [`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=hi#extra-body) पर `cached_content` प्रॉपर्टी का इस्तेमाल करके, एक्सप्लिसिट कैश मेमोरी चालू की जा सकती है.
+Si usas una [biblioteca de OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=es-419), puedes habilitar el almacenamiento en caché explícito con la propiedad `cached_content` en [`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=es-419#extra-body).
 
-## एक्सप्लिसिट कैशिंग का इस्तेमाल कब करें
+## Cuándo usar el almacenamiento en caché explícito
 
-कॉन्टेक्स्ट कैश मेमोरी की सुविधा, खास तौर पर उन स्थितियों के लिए सही है जहां शुरुआती कॉन्टेक्स्ट के बड़े हिस्से को छोटे अनुरोधों में बार-बार रेफ़र किया जाता है. इन जैसे इस्तेमाल के उदाहरणों के लिए, कॉन्टेक्स्ट कैश मेमोरी का इस्तेमाल करें:
+El almacenamiento en caché del contexto es especialmente adecuado para situaciones en las que las solicitudes más cortas hacen referencia repetidamente a un contexto inicial sustancial. Considera usar el almacenamiento en caché de contexto para casos de uso como los siguientes:
 
-- [सिस्टम के निर्देशों](https://ai.google.dev/gemini-api/docs/system-instructions?hl=hi) के साथ चैटबॉट
-- लंबी वीडियो फ़ाइलों का बार-बार विश्लेषण करना
-- दस्तावेज़ों के बड़े सेट के ख़िलाफ़ बार-बार की जाने वाली क्वेरी
-- कोड रिपॉज़िटरी का बार-बार विश्लेषण करना या गड़बड़ी ठीक करना
+- Chatbots con [instrucciones del sistema](https://ai.google.dev/gemini-api/docs/system-instructions?hl=es-419) detalladas
+- Análisis repetitivo de archivos de video extensos
+- Consultas recurrentes en grandes conjuntos de documentos
+- Análisis frecuente del repositorio de código o corrección de errores
 
-### एक्सप्लिसिट कैशिंग से लागत कैसे कम होती है
+### Cómo el almacenamiento en caché explícito reduce los costos
 
-कॉन्टेक्स्ट कैश मेमोरी, पैसे चुकाकर इस्तेमाल की जाने वाली सुविधा है. इसे लागत कम करने के लिए डिज़ाइन किया गया है. बिलिंग इन बातों पर निर्भर करती है:
+El almacenamiento en caché del contexto es una función pagada diseñada para reducir los costos. La facturación se basa en los siguientes factores:
 
-1. **कैश किए गए टोकन की संख्या:** कैश किए गए इनपुट टोकन की संख्या. इन्हें बाद के प्रॉम्प्ट में शामिल करने पर, कम दर पर बिल किया जाता है.
-2. **स्टोरेज की अवधि:** कैश मेमोरी में सेव किए गए टोकन को सेव रखने की अवधि (टीटीएल).
-   कैश मेमोरी में सेव किए गए टोकन की संख्या के टीटीएल के आधार पर बिल भेजा जाता है. टीटीएल के लिए, कम से कम या ज़्यादा से ज़्यादा की कोई सीमा नहीं होती.
-3. **अन्य कारक:** अन्य शुल्क लागू होते हैं. जैसे, कैश मेमोरी में सेव न किए गए इनपुट टोकन और आउटपुट टोकन के लिए.
+1. **Recuento de tokens en caché:** Es la cantidad de tokens de entrada almacenados en caché, que se facturan a una tarifa reducida cuando se incluyen en instrucciones posteriores.
+2. **Duración del almacenamiento:** Es la cantidad de tiempo que se almacenan los tokens en caché (TTL), y se factura según la duración del TTL del recuento de tokens en caché. No hay límites mínimos ni máximos para el TTL.
+3. **Otros factores:** Se aplican otros cargos, como los de los tokens de entrada y salida que no se almacenan en caché.
 
-कीमत के बारे में अप-टू-डेट जानकारी के लिए, Gemini API के [कीमत वाले पेज](https://ai.google.dev/pricing?hl=hi) पर जाएं. टोकन की गिनती करने का तरीका जानने के लिए, [टोकन गाइड](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) देखें.
+Para obtener detalles actualizados sobre los precios, consulta la [página de precios](https://ai.google.dev/pricing?hl=es-419) de la API de Gemini. Para obtener información sobre cómo contar tokens, consulta la [guía de tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419).
 
-### ज़रूरी बातें
+### Consideraciones adicionales
 
-कॉन्टेक्स्ट कैश मेमोरी का इस्तेमाल करते समय, इन बातों का ध्यान रखें:
+Ten en cuenta las siguientes consideraciones cuando uses el almacenamiento en caché del contexto:
 
-- कॉन्टेक्स्ट कैश मेमोरी के लिए, *कम से कम* इनपुट टोकन की संख्या मॉडल के हिसाब से अलग-अलग होती है. *ज़्यादा से ज़्यादा*
-  की वैल्यू, दिए गए मॉडल के लिए ज़्यादा से ज़्यादा वैल्यू के बराबर होती है. (टोकन की गिनती के बारे में ज़्यादा जानने के लिए, [टोकन गाइड](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) देखें).
-- यह मॉडल, कैश किए गए टोकन और सामान्य इनपुट टोकन के बीच कोई अंतर नहीं करता. कैश किया गया कॉन्टेंट, प्रॉम्प्ट का प्रीफ़िक्स होता है.
-- कॉन्टेक्स्ट को कैश मेमोरी में सेव करने पर, इस्तेमाल की कोई सीमा या खास शुल्क नहीं लगता. `GenerateContent` के लिए, दर की स्टैंडर्ड सीमाएं लागू होती हैं. साथ ही, टोकन की सीमाओं में कैश मेमोरी में सेव किए गए टोकन शामिल होते हैं.
-- कैश किए गए टोकन की संख्या, कैश सेवा के create, get, और list ऑपरेशनों के `usage_metadata` में दिखाई जाती है. साथ ही, कैश का इस्तेमाल करते समय `GenerateContent` में भी यह संख्या दिखती है.
+- El recuento de tokens de entrada *mínimo* para el almacenamiento en caché del contexto varía según el modelo. El *máximo* es el mismo que el máximo para el modelo determinado. (Para obtener más información sobre el recuento de tokens, consulta la [Guía de tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419)).
+- El modelo no distingue entre los tokens almacenados en caché y los tokens de entrada normales. El contenido almacenado en caché es un prefijo de la instrucción.
+- No hay límites especiales de tarifas o uso para el almacenamiento en caché del contexto; se aplican los límites de tarifas estándar para `GenerateContent`, y los límites de tokens incluyen los tokens almacenados en caché.
+- La cantidad de tokens almacenados en caché se devuelve en `usage_metadata` de las operaciones de creación, obtención y enumeración del servicio de caché, y también en `GenerateContent` cuando se usa la caché.
 
-सुझाव भेजें
+Enviar comentarios
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-आखिरी बार 2026-09-12 (UTC) को अपडेट किया गया.
+Última actualización: 2026-09-16 (UTC)
 
-क्या आपको हमें और कुछ बताना है?
+¿Quieres brindar más información?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-12 (UTC) को अपडेट किया गया."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-09-16 (UTC)"],[],[]]

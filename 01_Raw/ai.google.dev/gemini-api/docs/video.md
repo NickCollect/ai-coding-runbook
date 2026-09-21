@@ -1,50 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/video?hl=fr
-fetched_at: 2026-09-14T05:40:50.441339+00:00
-title: "G\u00e9n\u00e9ration de vid\u00e9os dans l'API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/video?hl=tr
+fetched_at: 2026-09-21T05:48:35.027188+00:00
+title: "Gemini API'de video \u00fcretme \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Envoyer des commentaires
+Geri bildirim gönderin
 
-# Génération de vidéos dans l'API Gemini
+# Gemini API'de video üretme
 
-L'API Gemini propose deux modèles pour générer des vidéos : [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=fr) et [Veo](https://ai.google.dev/gemini-api/docs/veo?hl=fr).
-Chacun est conçu pour des workflows différents.
+Gemini API, video oluşturmak için iki model sunar: [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=tr) ve [Veo](https://ai.google.dev/gemini-api/docs/veo?hl=tr).
+Her biri farklı iş akışları için tasarlanmıştır.
 
-Utilisez Gemini Omni Flash comme modèle par défaut pour la génération de vidéos. Il offre une cohérence vidéo supérieure, un raisonnement multi-entrées (prenant en charge simultanément les entrées de texte, d'image, audio et vidéo), la cohérence des personnages, l'exactitude factuelle et l'édition conversationnelle multitour (par exemple, le remplacement d'éléments ou les changements de perspective). Vous avez besoin d'utiliser Veo 3.1 pour des fonctionnalités spécifiques telles que l'extension de scène, le contrôle de la dernière image ou l'intégration à des pipelines existants.
+Video üretimi için varsayılan modeliniz olarak Gemini Omni Flash'i kullanın. Üstün video tutarlılığı, çoklu giriş akıl yürütme (aynı anda metin, resim, ses ve video girişlerini destekler), karakter tutarlılığı, olgusal doğruluk ve çok turlu sohbete dayalı düzenleme (ör. öğe değiştirme veya perspektif değişiklikleri) sunar. Sahne genişletme, son kare kontrolü veya eski işlem hatlarıyla entegrasyon gibi belirli özellikler için Veo 3.1'in kullanılması gerekir.
 
-## Gemini Omni Flash
+## Gemini Omni Flash
 
-Gemini Omni Flash est un modèle multimodal rapide pour la génération de vidéos et le montage vidéo conversationnel. Elle excelle dans la transformation rapide de requêtes textuelles et d'images en courtes vidéos, et vous permet d'affiner les résultats sur plusieurs tours à l'aide de l'API Interactions.
+Gemini Omni Flash, video üretimi ve sohbet tarzında video düzenleme için hızlı, çok formatlı bir modeldir. Metin istemlerini ve resimleri hızlı bir şekilde kısa videolara dönüştürme konusunda başarılıdır. Ayrıca, Etkileşimler API'sini kullanarak sonuçları birden fazla dönüşte iyileştirmenize olanak tanır.
 
-[Premiers pas avec Gemini Omni Flash →](https://ai.google.dev/gemini-api/docs/omni?hl=fr)
+[Gemini Omni Flash'ı kullanmaya başlayın →](https://ai.google.dev/gemini-api/docs/omni?hl=tr)
 
-## Veo 3.1
+## Veo 3.1
 
-Veo 3.1 est un modèle permettant de générer des vidéos avec de l'audio natif. Il est compatible avec des fonctionnalités telles que l'extension vidéo, la génération d'images spécifiques et l'orientation basée sur les images via l'API `generateContent`.
+Veo 3.1, tümleşik ses içeren videolar üretmek için kullanılan bir modeldir. `generateContent` API aracılığıyla video uzantısı, kareye özel üretim ve resme dayalı yönlendirme gibi özellikleri destekler.
 
-[Premiers pas avec Veo 3.1 →](https://ai.google.dev/gemini-api/docs/veo?hl=fr)
+[Veo 3.1'i kullanmaya başlama →](https://ai.google.dev/gemini-api/docs/veo?hl=tr)
 
-## Compréhension des vidéos
+## Video anlama
 
-Si vous devez ingérer et analyser du contenu vidéo existant plutôt que d'en générer un nouveau, consultez le [guide de compréhension des vidéos](https://ai.google.dev/gemini-api/docs/video-understanding?hl=fr).
+Yeni video oluşturmak yerine mevcut video içeriklerini alıp analiz etmeniz gerekiyorsa [Video anlama kılavuzu](https://ai.google.dev/gemini-api/docs/video-understanding?hl=tr)'na bakın.
 
-Envoyer des commentaires
+Geri bildirim gönderin
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Dernière mise à jour le 2026/06/30 (UTC).
+Son güncelleme tarihi: 2026-06-30 UTC.
 
-Voulez-vous nous donner plus d'informations ?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/06/30 (UTC)."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-30 UTC."],[],[]]

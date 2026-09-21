@@ -1,38 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=tr
-fetched_at: 2026-09-14T05:43:03.962698+00:00
-title: "Belge anlama \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=zh-CN
+fetched_at: 2026-09-21T05:48:25.363430+00:00
+title: "\u6587\u6863\u7406\u89e3 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs/generate-content?hl=tr)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-cn)
 
-Geri bildirim gönderin
+发送反馈
 
-# Belge anlama
+# 文档理解
 
-Gemini modelleri, doküman bağlamlarının tamamını anlamak için yerel görsel işleme özelliğini kullanarak PDF biçimindeki dokümanları işleyebilir. Bu, yalnızca metin ayıklamanın ötesine geçerek Gemini'ın aşağıdaki işlemleri yapmasına olanak tanır:
+Gemini 模型可以处理 PDF 格式的文档，并使用原生视觉功能来理解整个文档的上下文。这不仅仅是提取文本，还让 Gemini 能够：
 
-- Metin, resim, diyagram, grafik ve tablo gibi içerikleri 1.000 sayfaya kadar olan uzun dokümanlarda bile analiz edip yorumlayın.
-- Bilgileri [yapılandırılmış çıkış](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr) biçimlerinde ayıklayın.
-- Bir belgedeki hem görsel hem de metin öğelerini temel alarak özetleme ve soru yanıtlama
-- Aşağı akış uygulamalarında kullanılmak üzere düzenleri ve biçimlendirmeyi koruyarak doküman içeriğini (ör. HTML'ye) transkribe edin.
+- 分析和解读内容，包括文本、图片、图表、图表和表格，即使是长达 1000 页的文档也能轻松应对。
+- 以[结构化输出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)格式提取信息。
+- 根据文档中的视觉和文本元素总结内容并回答问题。
+- 转写文档内容（例如转写为 HTML），同时保留布局和格式，以便在下游应用中使用。
 
-PDF olmayan dokümanları da aynı şekilde iletebilirsiniz ancak Gemini bunları normal metin olarak görür. Bu durumda grafikler veya biçimlendirme gibi bağlamlar ortadan kalkar.
+您也可以通过相同的方式传递非 PDF 文档，但 Gemini 会将这些文档视为普通文本，从而消除图表或格式等上下文。
 
-## PDF verilerini satır içi olarak iletme
+## 以内嵌方式传递 PDF 数据
 
-PDF verilerini `generateContent` isteğinde satır içi olarak iletebilirsiniz. Bu yöntem, daha küçük belgeler veya dosyaya sonraki isteklerde başvurmanız gerekmeyen geçici işlemler için en uygun yöntemdir. İstek gecikmesini iyileştirmek ve bant genişliği kullanımını azaltmak için çok aşamalı etkileşimlerde başvurmanız gereken daha büyük belgeler için [Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=tr#large-pdfs)'yi kullanmanızı öneririz.
+您可以在对 `generateContent` 的请求中内嵌传递 PDF 数据。此方法最适合处理小型文档或临时处理，因为您无需在后续请求中引用该文件。对于需要在多轮对话中参考的较大文档，我们建议使用 [Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=zh-cn#large-pdfs)，以缩短请求延迟时间并减少带宽使用量。
 
-Aşağıdaki örnekte, bir URL'den PDF'nin nasıl getirileceği ve işlenmek üzere baytlara nasıl dönüştürüleceği gösterilmektedir:
+以下示例展示了如何从网址提取 PDF 并将其转换为字节以进行处理：
 
 ### Python
 
@@ -190,7 +190,7 @@ jq ".candidates[].content.parts[].text" response.json
 rm "${DISPLAY_NAME}.pdf"
 ```
 
-İşleme için yerel bir dosyadan PDF de okuyabilirsiniz:
+您还可以从本地文件读取 PDF 以进行处理：
 
 ### Python
 
@@ -291,13 +291,13 @@ func main() {
 }
 ```
 
-## Files API'yi kullanarak PDF yükleme
+## 使用 Files API 上传 PDF
 
-Daha büyük dosyalar için veya bir dokümanı birden fazla istekte yeniden kullanmak istediğinizde Files API'yi kullanmanızı öneririz. Bu sayede, dosya yükleme işlemi model isteklerinden ayrılır ve istek gecikmesi iyileşirken bant genişliği kullanımı azalır.
+对于较大的文件，或者当您打算在多个请求中重复使用文档时，建议您使用 Files API。这样可以将文件上传与模型请求分离，从而缩短请求延迟时间并减少带宽用量。
 
-### URL'lerden alınan büyük PDF'ler
+### 来自网址的大型 PDF 文件
 
-URL'lerden büyük PDF dosyalarını yükleme ve işleme sürecini basitleştirmek için File API'yi kullanın:
+使用 File API 可简化通过网址上传和处理大型 PDF 文件的流程：
 
 ### Python
 
@@ -505,7 +505,7 @@ jq ".candidates[].content.parts[].text" response.json
 rm "${DISPLAY_NAME}.pdf"
 ```
 
-### Yerel olarak depolanan büyük PDF'ler
+### 本地存储的大型 PDF
 
 ### Python
 
@@ -677,8 +677,7 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-[`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=tr) işlevini çağırarak API'nin yüklenen dosyayı başarıyla sakladığını doğrulayabilir ve dosyanın meta verilerini alabilirsiniz. Yalnızca `name`
-(ve dolayısıyla `uri`) benzersizdir.
+您可以调用 [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=zh-cn) 来验证 API 是否已成功存储上传的文件并获取其元数据。只有 `name`（以及扩展的 `uri`）是唯一的。
 
 ### Python
 
@@ -710,9 +709,9 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## Birden fazla PDF'yi iletme
+## 传递多个 PDF
 
-Gemini API, belgelerin ve metin isteminin toplam boyutu modelin bağlam penceresi içinde kaldığı sürece tek bir istekte birden fazla PDF belgesini (1.000 sayfaya kadar) işleyebilir.
+Gemini API 能够在单个请求中处理多个 PDF 文档（最多 1, 000 页），前提是文档和文本提示的总大小不超过模型的上下文窗口大小。
 
 ### Python
 
@@ -964,51 +963,50 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## Teknik ayrıntılar
+## 技术详情
 
-Gemini, 50 MB veya 1.000 sayfaya kadar olan PDF dosyalarını destekler. Bu sınır hem satır içi veriler hem de Files API yüklemeleri için geçerlidir. Her belge sayfası 258 jetona karşılık gelir.
+Gemini 支持不超过 50MB 或 1,000 页的 PDF 文件。此限制适用于内嵌数据和 Files API 上传。每个文档页面相当于 258 个词元。
 
-Modelin [bağlam penceresi](https://ai.google.dev/gemini-api/docs/long-context?hl=tr) dışında bir dokümandaki piksel sayısıyla ilgili belirli bir sınır olmasa da daha büyük sayfalar, orijinal en boy oranları korunarak maksimum 3072 x 3072 çözünürlüğe ölçeklendirilirken daha küçük sayfalar 768 x 768 piksele ölçeklendirilir. Daha küçük boyutlardaki sayfalar için bant genişliği dışında maliyet düşüşü veya daha yüksek çözünürlükteki sayfalar için performans artışı olmaz.
+虽然除了模型的[上下文窗口](https://ai.google.dev/gemini-api/docs/long-context?hl=zh-cn)之外，对文档中的像素数量没有具体限制，但较大的页面会被缩小到最大分辨率 (3072 x 3072)，同时保留其原始宽高比，而较小的页面会被放大到 768 x 768 像素。除了带宽之外，较小尺寸的网页不会降低费用，而较高分辨率的网页也不会提高性能。
 
-### Gemini 3 modelleri
+### Gemini 3 模型
 
-Gemini 3, `media_resolution` parametresiyle çok formatlı görüntü işleme üzerinde ayrıntılı kontrol sunar. Artık çözünürlüğü her bir medya parçası için ayrı ayrı düşük, orta veya yüksek olarak ayarlayabilirsiniz. Bu eklemeyle birlikte PDF belgelerinin işlenmesi güncellendi:
+Gemini 3 通过 `media_resolution` 参数引入了对多模态视觉处理的精细控制。您现在可以为每个媒体部分分别设置低、中或高分辨率。添加此功能后，PDF 文档的处理方式已更新：
 
-1. **Doğal metin ekleme:** PDF'ye doğal olarak yerleştirilmiş metin çıkarılır ve modele sağlanır.
-2. **Faturalandırma ve jeton raporlama:**
-   - PDF'lerdeki çıkarılan **yerel metinden** kaynaklanan jetonlar için **ücretlendirilmezsiniz**.
-   - API yanıtının `usage_metadata` bölümünde, PDF sayfalarının (resim olarak) işlenmesiyle oluşturulan jetonlar artık `IMAGE` biçimi altında sayılıyor. Bazı önceki sürümlerde olduğu gibi ayrı bir `DOCUMENT` biçimi altında sayılmıyor.
+1. **原生文本纳入**：提取 PDF 中原生嵌入的文本并将其提供给模型。
+2. **结算和代币报告**：
+   - 您**无需付费**即可使用从 PDF 中的提取的**原生文本**生成的令牌。
+   - 在 API 响应的 `usage_metadata` 部分中，通过处理 PDF 页面（作为图片）生成的 token 现在计入 `IMAGE` 模态，而不是像某些早期版本那样计入单独的 `DOCUMENT` 模态。
 
-Medya çözünürlüğü parametresi hakkında daha fazla bilgi için [Medya çözünürlüğü](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=tr) kılavuzuna bakın.
+如需详细了解媒体分辨率参数，请参阅[媒体分辨率](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=zh-cn)指南。
 
-### Belge türleri
+### 文档类型
 
-Teknik olarak, doküman anlama için TXT, Markdown, HTML, XML gibi diğer MIME türlerini iletebilirsiniz. Ancak dokümanla ilgili görsel algılama ***yalnızca PDF'leri anlamlı bir şekilde anlar***. Diğer türler düz metin olarak ayıklanır ve model, bu dosyaların oluşturulmasında gördüklerimizi yorumlayamaz. Grafikler, diyagramlar, HTML etiketleri, Markdown biçimlendirmesi vb. gibi dosya türüne özgü tüm özellikler kaybolur.
+从技术上讲，您可以传递其他 MIME 类型以进行文档理解，例如 TXT、Markdown、HTML、XML 等。不过，文档视觉 ***仅能有意义地理解 PDF***。其他类型的文件将被提取为纯文本，模型将无法解读我们在这些文件的呈现中看到的内容。所有特定于文件类型的信息（例如图表、示意图、HTML 标记、Markdown 格式等）都将丢失。
 
-Diğer dosya giriş yöntemleri hakkında bilgi edinmek için [Dosya giriş yöntemleri](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=tr) kılavuzuna bakın.
+如需了解其他文件输入方法，请参阅[文件输入方法](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-cn)指南。
 
-### En iyi uygulamalar
+### 最佳做法
 
-En iyi sonuçlar için:
+为了达到最佳效果，请注意以下事项：
 
-- Yüklemeden önce sayfaları doğru yöne döndürün.
-- Bulanık sayfalardan kaçının.
-- Tek sayfa kullanıyorsanız metin istemini sayfanın sonuna yerleştirin.
+- 请先将页面旋转到正确的方向，然后再上传。
+- 避免页面模糊。
+- 如果使用单页，请将文本提示放在该页之后。
 
-## Sırada ne var?
+## 后续步骤
 
-Daha fazla bilgi edinmek için aşağıdaki kaynakları inceleyin:
+如需了解详情，请参阅以下资源：
 
-- [Dosya istemi stratejileri](https://ai.google.dev/gemini-api/docs/files?hl=tr#prompt-guide): Gemini API, çok formatlı istem olarak da bilinen metin, resim, ses ve video verileriyle istemi destekler.
-- [Sistem talimatları](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr#system-instructions):
-  Sistem talimatları, modelin davranışını özel ihtiyaçlarınıza ve kullanım alanlarınıza göre yönlendirmenizi sağlar.
+- [文件提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn#prompt-guide)：Gemini API 支持使用文本、图片、音频和视频数据进行提示，也称为多模态提示。
+- [系统指令](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-cn#system-instructions)：系统指令可让您根据自己的特定需求和使用情形来控制模型的行为。
 
-Geri bildirim gönderin
+发送反馈
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Son güncelleme tarihi: 2026-09-12 UTC.
+最后更新时间 (UTC)：2026-09-12。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+需要向我们提供更多信息？
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-12 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-12。"],[],[]]

@@ -1,28 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=he
-fetched_at: 2026-09-14T05:51:20.425603+00:00
-title: "Gemini Deep Research Agent \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-CN
+fetched_at: 2026-09-21T05:47:14.664890+00:00
+title: "Gemini Deep Research \u667a\u80fd\u4f53 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Gemini 3.8 Flash 现已推出。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-שליחת משוב
+发送反馈
 
-# Gemini Deep Research Agent
+# Gemini Deep Research 智能体
 
-סוכן Deep Research של Gemini מתכנן, מבצע ומסכם באופן אוטונומי משימות מחקר מרובות שלבים. הוא מבוסס על Gemini, ולכן הוא יכול לנווט בין מערכי מידע מורכבים כדי ליצור דוחות מפורטים עם ציטוטים. יכולות חדשות מאפשרות לתכנן יחד עם הסוכן, להתחבר לכלים חיצוניים באמצעות שרתי MCP, לכלול ויזואליזציות (כמו תרשימים וגרפים) ולספק מסמכים ישירות כקלט.
+Gemini Deep Research 智能体可自主规划、执行和整合多步骤研究任务。在 Gemini 的支持下，它能够驾驭复杂的信息环境，生成详细且包含引用的报告。借助新功能，您可以与智能体协作规划，使用 MCP 服务器连接到外部工具，添加可视化内容（例如图表和图形），以及直接提供文档作为输入内容。
 
-משימות מחקר כוללות חיפוש וקריאה חוזרים, והן יכולות להימשך כמה דקות. כדי להפעיל את הסוכן באופן אסינכרוני ולשאול לגבי תוצאות או לעדכן את הנתונים בסטרימינג, צריך להשתמש ב[הפעלה ברקע](https://ai.google.dev/gemini-api/docs/background-execution?hl=he) (הגדרה של `background=true`). פרטים נוספים מופיעים במאמר בנושא [טיפול במשימות ממושכות](#long-running-tasks).
+研究任务涉及迭代搜索和阅读，可能需要几分钟才能完成。您必须使用[后台执行](https://ai.google.dev/gemini-api/docs/background-execution?hl=zh-cn)（设置 `background=true`）来异步运行代理并轮询结果或流式传输更新。如需了解详情，请参阅[处理长时间运行的任务](#long-running-tasks)。
 
-בדוגמה הבאה מוצג איך מתחילים משימת מחקר ברקע ומבצעים סקר כדי לקבל את התוצאות.
+以下示例展示了如何在后台启动研究任务并轮询结果。
 
 ### Python
 
@@ -79,6 +79,49 @@ while (true) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionStatus;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.operations.GetInteractionByIdRequest;
+import java.util.Collections;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent("deep-research-preview-04-2026")
+        .input(InteractionsInput.of("Research the history of Google TPUs."))
+        .background(true)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println("Research started: " + interaction.id().orElse(""));
+
+while (true) {
+  interaction =
+      client.interactions
+          .get(GetInteractionByIdRequest.builder().id(interaction.id().get()).build())
+          .interaction()
+          .get();
+  if (InteractionStatus.COMPLETED.equals(interaction.status().orElse(null))) {
+    System.out.println(interaction.outputText().orElse(""));
+    break;
+  } else if (InteractionStatus.FAILED.equals(interaction.status().orElse(null))) {
+    System.out.println("Research failed: " + interaction.errors().orElse(Collections.emptyList()));
+    break;
+  }
+  Thread.sleep(10000);
+}
+```
+
 ### REST
 
 ```
@@ -97,21 +140,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## גרסאות נתמכות
+## 支持的版本
 
-סוכן Deep Research זמין בשתי גרסאות:
+Deep Research 智能体分为两个版本：
 
-- ‫**Deep Research** (`deep-research-preview-04-2026`): מודל שנועד לפעול במהירות וביעילות, ומתאים במיוחד להזרמה חזרה לממשק משתמש של לקוח.
-- ‫**Deep Research Max** (`deep-research-max-preview-04-2026`): מקיף ביותר, לאיסוף ולסינתזה אוטומטיים של הקשר.
+- **深度研究** (`deep-research-preview-04-2026`)：旨在提高速度和效率，非常适合流式传输回客户端界面。
+- **Deep Research Max** (`deep-research-max-preview-04-2026`)：自动收集和整合上下文信息，实现最全面的研究。
 
-## תכנון משותף
+## 协作规划
 
-תכנון שיתופי מאפשר לכם לשלוט בכיוון המחקר לפני שהסוכן מתחיל לעבוד, כי אתם יכולים לבדוק ולשפר את תוכנית המחקר לפני הביצוע. כשהתכונה מופעלת, הסוכן מחזיר תוכנית מחקר מוצעת במקום לבצע אותה באופן מיידי. לאחר מכן תוכלו לבדוק, לשנות או לאשר את התוכנית באמצעות אינטראקציות מרובות.
+通过协作式规划，您可以在代理开始工作之前控制研究方向，方法是在执行之前查看和完善研究计划。启用后，代理会返回建议的研究计划，而不是立即执行。然后，您可以通过多轮对话查看、修改或批准该计划。
 
-### שלב 1: שליחת בקשה לתוכנית
+### 第 1 步：申请方案
 
-מגדירים את `collaborative_planning=True` באינטראקציה הראשונה. הסוכן
-מחזיר תוכנית מחקר במקום דוח מלא.
+在第一次互动中设置 `collaborative_planning=True`。智能体返回的是研究计划，而不是完整报告。
 
 ### Python
 
@@ -159,6 +201,53 @@ while ((result = await client.interactions.get(planInteraction.id)).status !== '
 console.log(result.steps.at(-1).content[0].text);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.DeepResearchAgentConfig;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionStatus;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.ThinkingSummaries;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.operations.GetInteractionByIdRequest;
+
+Client client = new Client();
+
+// First interaction: request a research plan
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent("deep-research-preview-04-2026")
+        .input(InteractionsInput.of("Do some research on Google TPUs."))
+        .agentConfig(
+            DeepResearchAgentConfig.builder()
+                .thinkingSummaries(ThinkingSummaries.AUTO)
+                .collaborativePlanning(true)
+                .build())
+        .background(true)
+        .build();
+
+Interaction planInteraction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+// Wait for and retrieve the plan
+Interaction result;
+while (true) {
+  result =
+      client.interactions
+          .get(GetInteractionByIdRequest.builder().id(planInteraction.id().get()).build())
+          .interaction()
+          .get();
+  if (InteractionStatus.COMPLETED.equals(result.status().orElse(null))) {
+    break;
+  }
+  Thread.sleep(5000);
+}
+System.out.println(result.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -177,9 +266,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### שלב 2: שיפור התוכנית (אופציונלי)
+### 第 2 步：优化方案（可选）
 
-כדי להמשיך את השיחה ולשפר את התוכנית, אפשר להשתמש ב-`previous_interaction_id`. מחזיקים את המקש `collaborative_planning=True` כדי להישאר במצב תכנון.
+使用 `previous_interaction_id` 继续对话并迭代计划。按住 `collaborative_planning=True` 可保持在规划模式下。
 
 ### Python
 
@@ -224,6 +313,56 @@ while ((result = await client.interactions.get(refinedPlan.id)).status !== 'comp
 console.log(result.steps.at(-1).content[0].text);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.DeepResearchAgentConfig;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionStatus;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.ThinkingSummaries;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.operations.GetInteractionByIdRequest;
+
+Client client = new Client();
+String planInteractionId = "PLAN_INTERACTION_ID";
+
+// Second interaction: refine the plan
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent("deep-research-preview-04-2026")
+        .input(
+            InteractionsInput.of(
+                "Focus more on the differences between Google TPUs and competitor hardware, and less on the history."))
+        .agentConfig(
+            DeepResearchAgentConfig.builder()
+                .thinkingSummaries(ThinkingSummaries.AUTO)
+                .collaborativePlanning(true)
+                .build())
+        .previousInteractionId(planInteractionId)
+        .background(true)
+        .build();
+
+Interaction refinedPlan =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+Interaction result;
+while (true) {
+  result =
+      client.interactions
+          .get(GetInteractionByIdRequest.builder().id(refinedPlan.id().get()).build())
+          .interaction()
+          .get();
+  if (InteractionStatus.COMPLETED.equals(result.status().orElse(null))) {
+    break;
+  }
+  Thread.sleep(5000);
+}
+System.out.println(result.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -243,9 +382,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### שלב 3: אישור וביצוע
+### 第 3 步：批准并执行
 
-מגדירים את הערך `collaborative_planning=False` (או משמיטים אותו) כדי לאשר את התוכנית ולהתחיל את המחקר.
+设置 `collaborative_planning=False`（或省略此参数）以批准计划并开始研究。
 
 ### Python
 
@@ -290,6 +429,54 @@ while ((result = await client.interactions.get(finalReport.id)).status !== 'comp
 console.log(result.steps.at(-1).content[0].text);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.DeepResearchAgentConfig;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionStatus;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.ThinkingSummaries;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.operations.GetInteractionByIdRequest;
+
+Client client = new Client();
+String refinedPlanId = "REFINED_PLAN_ID";
+
+// Third interaction: approve the plan and kick off research
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent("deep-research-preview-04-2026")
+        .input(InteractionsInput.of("Plan looks good!"))
+        .agentConfig(
+            DeepResearchAgentConfig.builder()
+                .thinkingSummaries(ThinkingSummaries.AUTO)
+                .collaborativePlanning(false)
+                .build())
+        .previousInteractionId(refinedPlanId)
+        .background(true)
+        .build();
+
+Interaction finalReport =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+Interaction result;
+while (true) {
+  result =
+      client.interactions
+          .get(GetInteractionByIdRequest.builder().id(finalReport.id().get()).build())
+          .interaction()
+          .get();
+  if (InteractionStatus.COMPLETED.equals(result.status().orElse(null))) {
+    break;
+  }
+  Thread.sleep(5000);
+}
+System.out.println(result.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -309,10 +496,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## הצגה חזותית
+## 可视化
 
-כשההגדרה `visualization` מוגדרת לערך `"auto"`, הסוכן יכול ליצור תרשימים, גרפים ורכיבים ויזואליים אחרים כדי לתמוך בממצאי המחקר שלו.
-תמונות שנוצרו על ידי AI נכללות בשלבי התשובה ומוזרמות כדלתאות `image`. כדי לקבל את התוצאות הטובות ביותר, כדאי לבקש באופן מפורש תמונות בשאילתה – לדוגמה, "תכלול תרשימים שמציגים מגמות לאורך זמן" או "תייצר גרפיקה להשוואה של נתח השוק". הגדרת `visualization` לערך `"auto"` מפעילה את היכולת, אבל הסוכן יוצר תמונות רק כשמבקשים זאת בהנחיה.
+当 `visualization` 设置为 `"auto"` 时，智能体可以生成图表、图形和其他视觉元素来支持其研究发现。
+生成的图片包含在回答步骤中，并以 `image` delta 的形式进行流式传输。为获得最佳结果，请在查询中明确要求生成图文内容，例如“包含显示随时间变化的趋势的图表”或“生成比较市场份额的图表”。将 `visualization` 设置为 `"auto"` 可启用此功能，但智能体仅在提示要求时生成视觉效果。
 
 ### Python
 
@@ -386,6 +573,73 @@ for (const step of result.steps) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.DeepResearchAgentConfig;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionStatus;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.interactions.Visualization;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.operations.GetInteractionByIdRequest;
+import java.util.Base64;
+import java.util.Collections;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent("deep-research-preview-04-2026")
+        .input(
+            InteractionsInput.of(
+                "Analyze global semiconductor market trends. Include graphics showing market share changes."))
+        .agentConfig(DeepResearchAgentConfig.builder().visualization(Visualization.AUTO).build())
+        .background(true)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println("Research started: " + interaction.id().orElse(""));
+
+Interaction result;
+while (true) {
+  result =
+      client.interactions
+          .get(GetInteractionByIdRequest.builder().id(interaction.id().get()).build())
+          .interaction()
+          .get();
+  if (InteractionStatus.COMPLETED.equals(result.status().orElse(null))) {
+    break;
+  }
+  Thread.sleep(5000);
+}
+
+for (Step step : result.steps().orElse(Collections.emptyList())) {
+  if (step instanceof ModelOutputStep) {
+    for (Content contentItem : ((ModelOutputStep) step).content().orElse(Collections.emptyList())) {
+      if (contentItem instanceof TextContent) {
+        System.out.println(((TextContent) contentItem).text().orElse(""));
+      } else if (contentItem instanceof ImageContent) {
+        ImageContent img = (ImageContent) contentItem;
+        if (img.data().isPresent()) {
+          byte[] imageBytes = Base64.getDecoder().decode(img.data().get());
+          System.out.println("Received image: " + imageBytes.length + " bytes");
+        }
+      }
+    }
+  }
+}
+```
+
 ### REST
 
 ```
@@ -403,21 +657,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## כלים נתמכים
+## 支持的工具
 
-‫Deep Research תומך בכמה כלים מובנים וחיצוניים. כברירת מחדל (כשלא מציינים פרמטר `tools`), לסוכן יש גישה לחיפוש Google, להקשר של כתובת האתר ולביצוע קוד. אתם יכולים לציין במפורש כלים כדי להגביל את היכולות של הסוכן או להרחיב אותן.
+Deep Research 支持多种内置工具和外部工具。默认情况下（未提供 `tools` 参数时），代理可以访问 Google 搜索、网址上下文和代码执行功能。您可以明确指定工具来限制或扩展代理的功能。
 
-| כלי | הקלדת ערך | תיאור |
+| 工具 | 类型值 | 说明 |
 | --- | --- | --- |
-| חיפוש Google | `google_search` | חיפוש באינטרנט הציבורי. מופעל כברירת מחדל. |
-| URL Context | `url_context` | לקרוא ולסכם את התוכן בדף אינטרנט. מופעל כברירת מחדל. |
-| הרצת קוד | `code_execution` | להריץ קוד כדי לבצע חישובים וניתוח נתונים. מופעל כברירת מחדל. |
-| שרת MCP | `mcp_server` | מתחברים לשרתי MCP מרוחקים כדי לגשת לכלי חיצוניים. |
-| חיפוש קבצים | `file_search` | חיפוש במקורות המידע של המסמכים שהועלו. |
+| Google 搜索 | `google_search` | 在公共网络中搜索。默认处于启用状态。 |
+| 网址上下文 | `url_context` | 阅读和总结网页内容。默认处于启用状态。 |
+| 代码执行 | `code_execution` | 执行代码以进行计算和数据分析。默认处于启用状态。 |
+| MCP 服务器 | `mcp_server` | 连接到远程 MCP 服务器以访问外部工具。 |
+| 文件搜索 | `file_search` | 搜索您上传的文档语料库。 |
 
-### חיפוש Google
+### Google 搜索
 
-הפעלת חיפוש Google ככלי היחיד:
+明确启用 Google 搜索作为唯一工具：
 
 ### Python
 
@@ -441,6 +695,31 @@ const interaction = await client.interactions.create({
 });
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.GoogleSearch;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent("deep-research-preview-04-2026")
+        .input(InteractionsInput.of("What are the latest developments in quantum computing?"))
+        .tools(Arrays.asList(GoogleSearch.builder().build()))
+        .background(true)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+```
+
 ### REST
 
 ```
@@ -455,9 +734,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### URL Context
+### 网址上下文
 
-לתת לסוכן את היכולת לקרוא ולסכם דפי אינטרנט ספציפיים:
+让代理能够读取和总结特定网页的内容：
 
 ### Python
 
@@ -481,6 +760,31 @@ const interaction = await client.interactions.create({
 });
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.URLContext;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent("deep-research-preview-04-2026")
+        .input(InteractionsInput.of("Summarize the content of https://www.wikipedia.org/."))
+        .tools(Arrays.asList(URLContext.builder().build()))
+        .background(true)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+```
+
 ### REST
 
 ```
@@ -495,9 +799,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### הרצת קוד
+### 代码执行
 
-ההרשאה לסוכן להריץ קוד לחישובים ולניתוח נתונים:
+允许代理执行代码以进行计算和数据分析：
 
 ### Python
 
@@ -521,6 +825,31 @@ const interaction = await client.interactions.create({
 });
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CodeExecution;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent("deep-research-preview-04-2026")
+        .input(InteractionsInput.of("Calculate the 50th Fibonacci number."))
+        .tools(Arrays.asList(CodeExecution.builder().build()))
+        .background(true)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+```
+
 ### REST
 
 ```
@@ -535,21 +864,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### שרתי MCP
+### MCP 服务器
 
-התחברות לשרתי MCP מרוחקים כדי לתת לסוכן גישה לכלים ולשירותים חיצוניים.
+连接到远程 MCP 服务器，以便智能体访问外部工具和服务。
 
-מזינים את השרת `name` ואת `url` בהגדרות של הכלי. אפשר גם להעביר פרטי אימות ולהגביל את הכלים שהסוכן יכול להפעיל.
+在工具配置中提供服务器 `name` 和 `url`。您还可以传递身份验证凭据，并限制代理可以调用的工具。
 
-| שדה | סוג | נדרש | תיאור |
+| 字段 | 类型 | 是否必需 | 说明 |
 | --- | --- | --- | --- |
-| `type` | `string` | כן | חייב להיות `"mcp_server"`. |
-| `name` | `string` | לא | השם המוצג של שרת ה-MCP. |
-| `url` | `string` | לא | כתובת ה-URL המלאה של נקודת הקצה של שרת ה-MCP. |
-| `headers` | `object` | לא | זוגות של מפתח וערך שנשלחים ככותרות HTTP עם כל בקשה לשרת (לדוגמה, אסימוני אימות). |
-| `allowed_tools` | `array` | לא | הגבלת הכלים בשרת שהסוכן יכול להשתמש בהם. |
+| `type` | `string` | 是 | 必须为 `"mcp_server"`。 |
+| `name` | `string` | 否 | MCP 服务器的显示名称。 |
+| `url` | `string` | 否 | MCP 服务器端点的完整网址。 |
+| `headers` | `object` | 否 | 作为 HTTP 标头随每个请求一起发送到服务器的键值对（例如身份验证令牌）。 |
+| `allowed_tools` | `array` | 否 | 限制智能体可调用的服务器工具。 |
 
-#### שימוש בסיסי
+#### 基本用法
 
 ### Python
 
@@ -587,6 +916,38 @@ const interaction = await client.interactions.create({
 });
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.MCPServer;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+import java.util.Collections;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent("deep-research-preview-04-2026")
+        .input(InteractionsInput.of("Check the status of my last server deployment."))
+        .tools(
+            Arrays.asList(
+                MCPServer.builder()
+                    .name("Deployment Tracker")
+                    .url("https://mcp.example.com/mcp")
+                    .headers(Collections.singletonMap("Authorization", "Bearer my-token"))
+                    .build()))
+        .background(true)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+```
+
 ### REST
 
 ```
@@ -608,9 +969,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### חיפוש קבצים
+### 文件搜索
 
-כדי לתת לסוכן גישה לנתונים שלכם, משתמשים בכלי [חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he).
+使用[文件搜索](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-cn)工具授予智能体对您自有数据的访问权限。
 
 ### Python
 
@@ -646,6 +1007,37 @@ const interaction = await client.interactions.create({
 });
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.FileSearch;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent("deep-research-preview-04-2026")
+        .input(
+            InteractionsInput.of(
+                "Compare our 2025 fiscal year report against current public web news."))
+        .tools(
+            Arrays.asList(
+                FileSearch.builder()
+                    .fileSearchStoreNames(Arrays.asList("fileSearchStores/my-store-name"))
+                    .build()))
+        .background(true)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+```
+
 ### REST
 
 ```
@@ -662,11 +1054,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## הכוונה ועיצוב
+## 可操纵性和格式设置
 
-אתם יכולים להנחות את הפלט של הסוכן באמצעות מתן הוראות ספציפיות לפורמט בהנחיה. כך תוכלו לבנות דוחות עם חלקים ותתי-חלקים ספציפיים, לכלול טבלאות נתונים או להתאים את הטון לקהלים שונים (למשל, 'טכני', 'מנהלים', 'לא רשמי').
+您可以在提示中提供具体的格式设置说明，从而引导代理的输出。这样，您就可以将报告划分为特定部分和子部分，添加数据表格，或针对不同受众群体调整语气（例如“技术”“高管”“随意”）。
 
-מגדירים במפורש את פורמט הפלט הרצוי בטקסט הקלט.
+在输入文本中明确定义所需的输出格式。
 
 ### Python
 
@@ -706,6 +1098,35 @@ const interaction = await client.interactions.create({
 });
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+String prompt =
+    "Research the competitive landscape of EV batteries.\n\n"
+        + "Format the output as a technical report with the following structure:\n"
+        + "1. Executive Summary\n"
+        + "2. Key Players (Must include a data table comparing capacity and chemistry)\n"
+        + "3. Supply Chain Risks";
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent("deep-research-preview-04-2026")
+        .input(InteractionsInput.of(prompt))
+        .background(true)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+```
+
 ### REST
 
 ```
@@ -719,9 +1140,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## קלט מרובה מצבים
+## 多模态输入
 
-‫Deep Research תומך בקלטים מולטי-מודאליים, כולל תמונות ומסמכים (קובצי PDF), ומאפשר לסוכן לנתח תוכן חזותי ולבצע מחקר מבוסס-אינטרנט בהקשר של הקלטים שסופקו.
+Deep Research 支持多模态输入，包括图片和文档 (PDF)，让智能体能够分析视觉内容并根据提供的输入进行情境化网络研究。
 
 ### Python
 
@@ -806,6 +1227,69 @@ while (true) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionStatus;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.operations.GetInteractionByIdRequest;
+import java.util.Arrays;
+import java.util.Collections;
+
+Client client = new Client();
+
+String prompt =
+    "Analyze the interspecies dynamics and behavioral risks present "
+        + "in the provided image of the African watering hole. Specifically, investigate "
+        + "the symbiotic relationship between the avian species and the pachyderms "
+        + "shown, and conduct a risk assessment for the reticulated giraffes based on "
+        + "their drinking posture relative to the specific predator visible in the "
+        + "foreground.";
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent("deep-research-preview-04-2026")
+        .input(
+            InteractionsInput.ofContent(
+                Arrays.asList(
+                    TextContent.builder().text(prompt).build(),
+                    ImageContent.builder()
+                        .mimeType(ImageContentMimeType.IMAGE_JPEG)
+                        .uri(
+                            "https://storage.googleapis.com/generativeai-downloads/images/generated_elephants_giraffes_zebras_sunset.jpg")
+                        .build())))
+        .background(true)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println("Research started: " + interaction.id().orElse(""));
+
+while (true) {
+  interaction =
+      client.interactions
+          .get(GetInteractionByIdRequest.builder().id(interaction.id().get()).build())
+          .interaction()
+          .get();
+  if (InteractionStatus.COMPLETED.equals(interaction.status().orElse(null))) {
+    System.out.println(interaction.outputText().orElse(""));
+    break;
+  } else if (InteractionStatus.FAILED.equals(interaction.status().orElse(null))) {
+    System.out.println("Research failed: " + interaction.errors().orElse(Collections.emptyList()));
+    break;
+  }
+  Thread.sleep(10000);
+}
+```
+
 ### REST
 
 ```
@@ -827,10 +1311,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### הבנת מסמכים
+### 文档理解
 
-הבנת מסמכים מאפשרת להעביר מסמכים ישירות כקלט מרובה-אופנים.
-הסוכן מנתח את המסמכים שסיפקתם ומבצע מחקר שמבוסס על התוכן שלהם.
+文档理解功能可让您直接将文档作为多模态输入传递。
+智能体分析提供的文档，并根据文档内容进行研究。
 
 ### Python
 
@@ -874,6 +1358,39 @@ const interaction = await client.interactions.create({
 });
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.DocumentContent;
+import com.google.genai.gaos.models.interactions.DocumentContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
+
+Client client = new Client();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent("deep-research-preview-04-2026")
+        .input(
+            InteractionsInput.ofContent(
+                Arrays.asList(
+                    TextContent.builder().text("What is this document about?").build(),
+                    DocumentContent.builder()
+                        .uri("https://arxiv.org/pdf/1706.03762")
+                        .mimeType(DocumentContentMimeType.APPLICATION_PDF)
+                        .build())))
+        .background(true)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+```
+
 ### REST
 
 ```
@@ -891,28 +1408,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## טיפול במשימות לטווח ארוך
+## 处理长时间运行的任务
 
-‫Deep Research הוא תהליך רב-שלבי שכולל תכנון, חיפוש, קריאה וכתיבה. המחזור הזה בדרך כלל חורג ממגבלות הזמן הקצוב לתפוגה הרגילות של קריאות API סינכרוניות.
+Deep Research 是一个多步骤流程，包括规划、搜索、阅读和撰写。此周期通常会超出同步 API 调用的标准超时限制。
 
-הנציגים נדרשים להשתמש ב-`background=True`. ה-API מחזיר אובייקט `Interaction` חלקי באופן מיידי. אפשר להשתמש במאפיין `id` כדי לאחזר אינטראקציה לצורך בדיקה. מצב האינטראקציה ישתנה מ`in_progress` ל`completed` או ל`failed`. מדריך מקיף לניהול משימות ברקע זמין במאמר [הפעלה ברקע](https://ai.google.dev/gemini-api/docs/background-execution?hl=he).
+必须使用代理才能使用 `background=True`。该 API 会立即返回部分 `Interaction` 对象。您可以使用 `id` 属性检索用于轮询的互动。互动状态将从 `in_progress` 转换为 `completed` 或 `failed`。如需查看有关管理后台任务的全面指南，请参阅[后台执行](https://ai.google.dev/gemini-api/docs/background-execution?hl=zh-cn)。
 
-### סטרימינג
+### 流式
 
-התכונה Deep Research תומכת בהזרמת נתונים כדי לקבל עדכונים בזמן אמת על התקדמות המחקר, כולל סיכומי מחשבות, פלט טקסט ותמונות שנוצרו.
-צריך להגדיר את `stream=True` ואת `background=True`.
+Deep Research 支持流式传输，可实时接收研究进度更新，包括思路总结、文本输出和生成的图片。您必须设置 `stream=True` 和 `background=True`。
 
-כדי לקבל שלבי נימוק (מחשבות) ועדכוני התקדמות, צריך להפעיל **סיכומי חשיבה** על ידי הגדרת `thinking_summaries` לערך `"auto"` ב-`agent_config`. בלי זה, יכול להיות שהזרם יספק רק את התוצאות הסופיות.
+如需接收中间推理步骤（想法）和进度更新，您必须通过在 `agent_config` 中将 `thinking_summaries` 设置为 `"auto"` 来启用**思考总结**。如果不设置此值，流可能只会提供最终结果。
 
-#### סוגי אירועים במקור נתונים
+#### 数据流事件类型
 
-| סוג אירוע | סוג הדלתא | תיאור |
+| 事件类型 | 增量类型 | 说明 |
 | --- | --- | --- |
-| `step.delta` | `thought` | שלב ביניים של הסוכן בתהליך החשיבה. |
-| `step.delta` | `text` | חלק מהפלט הסופי של הטקסט. |
-| `step.delta` | `image` | תמונה שנוצרה (בקידוד Base64). |
+| `step.delta` | `thought` | 智能体的中间推理步骤。 |
+| `step.delta` | `text` | 最终文本输出的一部分。 |
+| `step.delta` | `image` | 生成的图片（采用 base64 编码）。 |
 
-בדוגמה הבאה מתחילים משימת מחקר ומעבדים את הסטרימינג עם חיבור מחדש אוטומטי. הוא עוקב אחרי `interaction_id` ו-`last_event_id`, כך שאם החיבור ייפסק (לדוגמה, אחרי פסק הזמן של 600 שניות), אפשר יהיה להמשיך מהמקום שבו הוא נעצר.
+以下示例启动了一项研究任务，并处理了具有自动重新连接功能的流。它会跟踪 `interaction_id` 和 `last_event_id`，以便在连接断开（例如，在 600 秒超时后）时，可以从中断处继续。
 
 ### Python
 
@@ -1009,6 +1525,110 @@ while (!isComplete && interactionId) {
 }
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.Content;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.DeepResearchAgentConfig;
+import com.google.genai.gaos.models.interactions.ErrorEvent;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionCompletedEvent;
+import com.google.genai.gaos.models.interactions.InteractionCreatedEvent;
+import com.google.genai.gaos.models.interactions.InteractionSSEEvent;
+import com.google.genai.gaos.models.interactions.InteractionSSEStreamEvent;
+import com.google.genai.gaos.models.interactions.InteractionStatus;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.StepDelta;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.interactions.TextDelta;
+import com.google.genai.gaos.models.interactions.ThinkingSummaries;
+import com.google.genai.gaos.models.interactions.ThoughtSummaryDelta;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.operations.GetInteractionByIdRequest;
+import com.google.genai.gaos.utils.EventStream;
+
+class StreamProcessor {
+  String interactionId = null;
+  String lastEventId = null;
+  boolean isComplete = false;
+
+  void processStream(EventStream<InteractionSSEStreamEvent> stream) {
+    for (InteractionSSEStreamEvent streamEvent : stream) {
+      InteractionSSEEvent event = streamEvent.data().orElse(null);
+      if (event instanceof InteractionCreatedEvent) {
+        InteractionCreatedEvent created = (InteractionCreatedEvent) event;
+        interactionId = created.interaction().flatMap(i -> i.id()).orElse(null);
+        if (created.eventId().isPresent()) {
+          lastEventId = created.eventId().get();
+        }
+      } else if (event instanceof StepDelta) {
+        StepDelta stepDelta = (StepDelta) event;
+        if (stepDelta.eventId().isPresent()) {
+          lastEventId = stepDelta.eventId().get();
+        }
+        if (stepDelta.delta().isPresent()) {
+          if (stepDelta.delta().get() instanceof TextDelta) {
+            System.out.print(((TextDelta) stepDelta.delta().get()).text().orElse(""));
+            System.out.flush();
+          } else if (stepDelta.delta().get() instanceof ThoughtSummaryDelta) {
+            ThoughtSummaryDelta thought = (ThoughtSummaryDelta) stepDelta.delta().get();
+            Content content = thought.content().orElse(null);
+            if (content instanceof TextContent) {
+              System.out.println("Thought: " + ((TextContent) content).text().orElse(""));
+            }
+          }
+        }
+      } else if (event instanceof InteractionCompletedEvent || event instanceof ErrorEvent) {
+        isComplete = true;
+      }
+    }
+  }
+}
+
+Client client = new Client();
+StreamProcessor processor = new StreamProcessor();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent("deep-research-preview-04-2026")
+        .input(InteractionsInput.of("Research the history of Google TPUs."))
+        .background(true)
+        .stream(true)
+        .agentConfig(
+            DeepResearchAgentConfig.builder().thinkingSummaries(ThinkingSummaries.AUTO).build())
+        .build();
+
+try (EventStream<InteractionSSEStreamEvent> stream =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).events()) {
+  processor.processStream(stream);
+}
+
+// Reconnect if the connection drops
+while (!processor.isComplete && processor.interactionId != null) {
+  Interaction status =
+      client.interactions
+          .get(GetInteractionByIdRequest.builder().id(processor.interactionId).build())
+          .interaction()
+          .get();
+  if (!InteractionStatus.IN_PROGRESS.equals(status.status().orElse(null))) {
+    break;
+  }
+  try (EventStream<InteractionSSEStreamEvent> stream =
+      client.interactions
+          .get(
+              GetInteractionByIdRequest.builder()
+                  .id(processor.interactionId)
+                  .stream(true)
+                  .lastEventId(processor.lastEventId)
+                  .build())
+          .events()) {
+    processor.processStream(stream);
+  }
+}
+```
+
 ### REST
 
 ```
@@ -1033,9 +1653,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/INTER
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## שאלות המשך ואינטראקציות
+## 后续问题和互动
 
-אחרי שהנציג או הנציגה ישלחו את הדוח הסופי, תוכלו להמשיך את השיחה באמצעות `previous_interaction_id`. כך תוכלו לבקש הבהרה, סיכום או פירוט של קטעים ספציפיים במחקר בלי להפעיל מחדש את כל המשימה.
+在代理返回最终报告后，您可以使用 `previous_interaction_id` 继续对话。这样，您就可以针对研究的特定部分请求澄清、总结或详细说明，而无需重新开始整个任务。
 
 ### Python
 
@@ -1065,6 +1685,30 @@ const interaction = await client.interactions.create({
 console.log(interaction.steps.at(-1).content[0].text);
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model("gemini-3.1-pro-preview")
+        .input(InteractionsInput.of("Can you elaborate on the second point in the report?"))
+        .previousInteractionId("COMPLETED_INTERACTION_ID")
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
 ### REST
 
 ```
@@ -1078,28 +1722,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## מתי כדאי להשתמש ב-Gemini Deep Research Agent
+## 何时使用 Gemini Deep Research 智能体
 
-‫Deep Research הוא **סוכן**, ולא רק מודל. הוא מתאים במיוחד לעומסי עבודה שדורשים גישה של "אנליסט בקופסה" ולא צ'אט עם זמן אחזור נמוך.
+Deep Research 是一种**智能体**，而不仅仅是一种模型。它最适合需要“开箱即用的分析师”方法而非低延迟聊天的工作负载。
 
-| תכונה | מודלים רגילים של Gemini | סוכן Gemini Deep Research |
+| 功能 | 标准 Gemini 模型 | Gemini Deep Research 智能体 |
 | --- | --- | --- |
-| **זמן אחזור** | שניות | דקות (אסינכרוני/ברקע) |
-| **Process** | יצירה -> פלט | תכנון -> חיפוש -> קריאה -> חזרה על הפעולה -> פלט |
-| **פלט** | טקסט שיחה, קוד, סיכומים קצרים | דוחות מפורטים, ניתוח ארוך, טבלאות השוואה |
-| **מתאים במיוחד עבור** | צ'אטבוטים, חילוץ, כתיבה יוצרת | ניתוח שוק, בדיקת נאותות, סקירת ספרות, ניתוח מצב התחרות |
+| **延迟时间** | 秒 | 分钟（异步/后台） |
+| **流程** | 生成 -> 输出 | 规划 -> 搜索 -> 阅读 -> 迭代 -> 输出 |
+| **输出** | 对话文本、代码、简短摘要 | 详细报告、长篇分析、比较表格 |
+| **适用场景** | 聊天机器人、提取、创意写作 | 市场分析、尽职调查、文献综述、竞争格局 |
 
-## הגדרת הסוכן
+## 代理配置
 
-הפרמטר `agent_config` משמש לשליטה בהתנהגות של Deep Research.
-מעבירים אותו כמילון עם השדות הבאים:
+Deep Research 使用 `agent_config` 参数来控制行为。
+以字典形式传递，其中包含以下字段：
 
-| שדה | סוג | ברירת מחדל | תיאור |
+| 字段 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `type` | `string` | חובה | חייב להיות `"deep-research"`. |
-| `thinking_summaries` | `string` | `"none"` | מגדירים את הערך `"auto"` כדי לקבל שלבי ביניים של חשיבה רציונלית במהלך הסטרימינג. כדי להשבית, מגדירים את הערך `"none"`. |
-| `visualization` | `string` | `"auto"` | מגדירים את הערך `"auto"` כדי להפעיל תרשימים ותמונות שנוצרו על ידי סוכן. כדי להשבית, מגדירים את הערך `"off"`. |
-| `collaborative_planning` | `boolean` | `false` | מגדירים את האפשרות `true` כדי להפעיל את בדיקת התוכנית בכמה איטרציות לפני תחילת המחקר. |
+| `type` | `string` | 必填 | 必须为 `"deep-research"`。 |
+| `thinking_summaries` | `string` | `"none"` | 设置为 `"auto"` 可在流式传输期间接收中间推理步骤。设置为 `"none"` 即可停用。 |
+| `visualization` | `string` | `"auto"` | 设置为 `"auto"` 可启用智能体生成的图表和图片。设置为 `"off"` 即可停用。 |
+| `collaborative_planning` | `boolean` | `false` | 设置为 `true` 可在研究开始前启用多轮计划审核。 |
 
 ### Python
 
@@ -1135,6 +1779,39 @@ const interaction = await client.interactions.create({
 });
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateAgentInteraction;
+import com.google.genai.gaos.models.interactions.DeepResearchAgentConfig;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.ThinkingSummaries;
+import com.google.genai.gaos.models.interactions.Visualization;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+DeepResearchAgentConfig agentConfig =
+    DeepResearchAgentConfig.builder()
+        .thinkingSummaries(ThinkingSummaries.AUTO)
+        .visualization(Visualization.AUTO)
+        .collaborativePlanning(false)
+        .build();
+
+CreateAgentInteraction params =
+    CreateAgentInteraction.builder()
+        .agent("deep-research-preview-04-2026")
+        .input(InteractionsInput.of("Research the competitive landscape of cloud GPUs."))
+        .agentConfig(agentConfig)
+        .background(true)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+```
+
 ### REST
 
 ```
@@ -1154,58 +1831,57 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## זמינות ומחירים
+## 适用范围和定价
 
-אפשר לגשת לסוכן Deep Research של Gemini באמצעות Interactions API ב-Google AI Studio וב-Gemini API.
+您可以使用 Google AI Studio 和 Gemini API 中的 Interactions API 访问 Gemini Deep Research 智能体。
 
-התמחור מבוסס על [מודל של תשלום לפי שימוש](https://ai.google.dev/gemini-api/docs/pricing?hl=he#pricing-for-agents), בהתאם למודלים הבסיסיים של Gemini ולכלים הספציפיים שבהם הסוכן משתמש. בניגוד לבקשות צ'אט רגילות, שבהן בקשה מובילה לפלט אחד, משימת Deep Research היא תהליך עבודה של AI אקטיבי. בקשה אחת מפעילה לולאה אוטונומית של תכנון, חיפוש, קריאה והסקת מסקנות.
+价格遵循[随用随付模式](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn#pricing-for-agents)，具体取决于底层 Gemini 模型和智能体使用的特定工具。与标准聊天请求（一个请求对应一个输出）不同，深度研究任务是一种智能体工作流。只需一个请求，即可触发自主规划、搜索、阅读和推理循环。
 
-### עלויות משוערות
+### 估算费用
 
-העלויות משתנות בהתאם לעומק המחקר הנדרש. הסוכן קובע באופן אוטונומי כמה קריאה וחיפוש נדרשים כדי לענות על ההנחיה.
+费用因所需研究的深度而异。智能体可自主确定需要阅读和搜索多少内容才能回答您的提示。
 
-- ‫**Deep Research** (`deep-research-preview-04-2026`): בשאילתה טיפוסית שדורשת ניתוח מתון, יכול להיות שהסוכן ישתמש בכ-80 שאילתות חיפוש, בכ-250,000 טוקנים של קלט (כ-50-70% במטמון) ובכ-60,000 טוקנים של פלט.
-  - **סך הכול משוער:** כ-4 ש"ח עד 12 ש"ח לכל משימה
-- ‫**Deep Research Max** ‏ (`deep-research-max-preview-04-2026`): לניתוח מעמיק של הסביבה התחרותית או לבדיקת נאותות מקיפה, יכול להיות שהסוכן ישתמש בעד 160 שאילתות חיפוש, עד 900,000 טוקנים של קלט (כ-50-70% במטמון) ועד 80,000 טוקנים של פלט.
-  - **סכום משוער:** כ-3.00$עד 7.00$ לכל משימה
+- **Deep Research** (`deep-research-preview-04-2026`)：对于需要中等程度分析的典型查询，该智能体可能会使用约 80 个搜索查询、约 25 万个输入 token（约 50-70% 为缓存 token）和约 6 万个输出 token。
+  - **估计总价**：每项任务约 1.00 美元至 3.00 美元
+- **Deep Research Max** (`deep-research-max-preview-04-2026`)：对于深入的竞争格局分析或广泛的尽职调查，智能体可能会使用多达约 160 次搜索查询、约 90 万个输入 token（约 50-70% 为缓存）和约 8 万个输出 token。
+  - **估计总价**：每项任务约 3.00 美元 - 7.00 美元
 
-## שיקולי בטיחות
+## 安全注意事项
 
-כדי לתת לסוכן גישה לאינטרנט ולקבצים הפרטיים שלכם, צריך לשקול היטב את סיכוני הבטיחות.
+让智能体访问网络和您的私密文件需要仔细考虑安全风险。
 
-- **החדרת הנחיות באמצעות קבצים:** הסוכן קורא את התוכן של הקבצים שאתם מספקים. חשוב לוודא שהמסמכים שהועלו (קובצי PDF, קובצי טקסט) מגיעים ממקורות מהימנים. קובץ זדוני יכול להכיל טקסט מוסתר שנועד לתמרן את הפלט של הסוכן.
-- **סיכונים בתוכן אינטרנט:** הסוכן מחפש באינטרנט הציבורי. אנחנו מטמיעים מסנני בטיחות חזקים, אבל קיים סיכון שהסוכן ייתקל בדפי אינטרנט זדוניים ויעבד אותם. מומלץ לעיין ב`citations` שצוינו בתשובה כדי לאמת את המקורות.
-- **העברת נתונים:** חשוב לנקוט משנה זהירות כשמבקשים מהסוכן לסכם נתונים פנימיים רגישים אם מאפשרים לו גם לגלוש באינטרנט.
+- **使用文件进行提示注入**：代理会读取您提供的文件的内容。确保上传的文档（PDF、文本文件）来自可信来源。恶意文件可能包含旨在操纵代理输出的隐藏文字。
+- **网络内容风险**：智能体会在公开网络中搜索内容。虽然我们实现了强大的安全过滤功能，但代理仍有可能遇到并处理恶意网页。建议您查看回答中提供的 `citations`，以验证来源。
+- **数据渗出**：如果您还允许代理浏览网页，那么在要求代理总结敏感的内部数据时，请务必谨慎。
 
-## שיטות מומלצות
+## 最佳做法
 
-- **הנחיה לגבי נתונים לא ידועים:** הנחיה של הסוכן לגבי אופן הטיפול בנתונים חסרים.
-  לדוגמה, אפשר להוסיף את ההנחיה *"אם נתונים ספציפיים לשנת 2025 לא זמינים,
-  ציין במפורש שהם תחזיות או לא זמינים, במקום להעריך"*.
-- **מספקים הקשר:** כדי שהסוכן יתמקד במחקר, כדאי לספק מידע רקע או מגבלות ישירות בהנחיית הקלט.
-- **שימוש בתכנון שיתופי:** בשאילתות מורכבות, מומלץ להפעיל תכנון שיתופי כדי לבדוק ולשפר את תוכנית המחקר לפני הביצוע.
-- ‫**Multimodal inputs:** Deep Research Agent supports multi-modal inputs.
-  צריך להשתמש בזה בזהירות, כי זה מגדיל את העלויות ואת הסיכון לחריגה מחלון ההקשר.
+- **提示未知内容**：指示代理如何处理缺失的数据。
+  例如，在提示中添加*“如果无法提供 2025 年的具体数据，请明确说明这些数据是预测数据或无法提供，而不是进行估计”*。
+- **提供背景信息**：直接在输入提示中提供背景信息或限制条件，以便为代理的研究提供背景信息。
+- **使用协作规划**：对于复杂查询，请启用协作规划，以便在执行之前查看和优化研究计划。
+- **多模态输入**：Deep Research 智能体支持多模态输入。
+  请谨慎使用，因为这会增加费用并导致上下文窗口溢出风险。
 
-## מגבלות
+## 限制
 
-- **כלים בהתאמה אישית:** נכון לעכשיו, אי אפשר לספק כלים מותאמים אישית להפעלת פונקציות, אבל אפשר להשתמש בשרתי MCP (Model Context Protocol) מרוחקים עם סוכן המחקר המעמיק.
-- **פלט מובנה:** כרגע, סוכן המחקר המעמיק לא תומך בפלט מובנה.
-- **זמן המחקר המקסימלי:** ל-Deep Research יש זמן מחקר מקסימלי של 60 דקות. רוב המשימות אמורות להסתיים תוך 20 דקות.
-- **דרישה לחנות:** הפעלת הסוכן באמצעות `background=True` מחייבת `store=True`.
-- **חיפוש Google:** [חיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he) מופעל כברירת מחדל, ויש [הגבלות ספציפיות](https://ai.google.dev/gemini-api/terms?hl=he#use-restrictions2) על התוצאות שמוצגות.
+- **自定义工具**：目前，您无法提供自定义的函数调用工具，但可以将远程 MCP（模型上下文协议）服务器与深度研究智能体搭配使用。
+- **结构化输出**：Deep Research 智能体目前不支持结构化输出。
+- **最长研究时间**：Deep Research 智能体的最长研究时间为 60 分钟。大多数任务应该会在 20 分钟内完成。
+- **商店要求**：使用 `background=True` 执行代理需要 `store=True`。
+- **Google 搜索**： [Google 搜索](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)默认处于启用状态，并且[特定限制](https://ai.google.dev/gemini-api/terms?hl=zh-cn#use-restrictions2)适用于接地结果。
 
-## המאמרים הבאים
+## 后续步骤
 
-- [מידע נוסף על Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he)
-- [כך משתמשים בנתונים שלכם באמצעות הכלי 'חיפוש קבצים'](https://ai.google.dev/gemini-api/docs/file-search?hl=he)
+- 详细了解 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn)。
+- 了解如何使用[文件搜索](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-cn)工具来使用您自己的数据。
 
-שליחת משוב
+发送反馈
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-עדכון אחרון: 2026-07-14 (שעון UTC).
+最后更新时间 (UTC)：2026-09-18。
 
-רוצה לתת לנו משוב?
+需要向我们提供更多信息？
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-14 (שעון UTC)."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-18。"],[],[]]

@@ -1,64 +1,65 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=th
-fetched_at: 2026-09-14T05:44:05.179315+00:00
-title: "\u0e23\u0e39\u0e1b\u0e20\u0e32\u0e1e Gemini 3.1 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=de
+fetched_at: 2026-09-21T05:54:08.747427+00:00
+title: "Gemini\u00a03.1 Flash Image \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-ส่งความคิดเห็น
+Feedback geben
 
-# รูปภาพ Gemini 3.1 Flash
+# Gemini 3.1 Flash Image
 
-**Nano Banana 2** ให้บริการการสร้างรูปภาพคุณภาพสูงและการแก้ไขแบบสนทนาในราคาที่เข้าถึงได้และมีความหน่วงต่ำ โดยเป็นโมเดลที่มีประสิทธิภาพสูงเทียบเท่ากับ [Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=th) ซึ่งได้รับการปรับให้เหมาะกับความเร็วและ
-กรณีการใช้งานของนักพัฒนาแอปที่มีปริมาณมาก
+**Nano Banana 2** bietet hochwertige Bildgenerierung und Konversationsbearbeitung zu einem Mainstream-Preis und mit geringer Latenz. Es ist das
+hocheffiziente Gegenstück zu [Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=de) und wurde für Geschwindigkeit und
+Anwendungsfälle mit hohem Volumen für Entwickler optimiert.
 
-**การปรับปรุงที่สำคัญมีดังนี้**
+**Wichtige Änderungen**
 
-- ตัวเลือกความละเอียดเอาต์พุตใหม่
-  - รองรับ 0.5K, 2K และ 4K ใหม่ โดยค่าเริ่มต้นคือ 1K
-- การเชื่อมต่อแหล่งข้อมูลของ Search สำหรับรูปภาพใหม่
-  - ผสานรวมผลการค้นหาทั้งข้อความและรูปภาพเพื่อแจ้งข้อมูลการสร้างด้วยข้อมูลเว็บแบบเรียลไทม์
-  - รองรับการเปิดหรือปิดฟีเจอร์ "กำลังคิด"
-- สัดส่วนภาพใหม่ 1:4, 4:1, 1:8 และ 8:1
-- ปรับปรุงการยึดมั่นในสัดส่วนภาพ
-- ปรับปรุงคุณภาพและความสอดคล้องของรูปภาพ
-- ปรับปรุงการแสดงข้อความ i18n
+- Neue Optionen für die Ausgabequalität:
+  - Neue Unterstützung für 0,5K, 2K und 4K, Standard 1K
+- Neue Fundierung für die Bildersuche:
+  - Integration von Text- und Bildsuchergebnissen, um die Generierung mit Echtzeit-Webdaten zu unterstützen
+  - Unterstützt, unabhängig davon, ob „Antwort wird generiert“ aktiviert ist
+- Neue Seitenverhältnisse: 1:4, 4:1, 1:8 und 8:1
+- Verbesserte Einhaltung des Seitenverhältnisses
+- Verbesserte Bildqualität und Konsistenz
+- Verbessertes Text-Rendering für die Internationalisierung
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com?model=gemini-3.1-flash-image&hl=th)
+[In Google AI Studio testen](https://aistudio.google.com?model=gemini-3.1-flash-image&hl=de)
 
-## เอกสารประกอบ
+## Dokumentation
 
-ไปที่หน้า[การสร้างรูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)เพื่อดู
-ฟีเจอร์และความสามารถทั้งหมด
+Auf der Seite [Bildgenerierung](https://ai.google.dev/gemini-api/docs/image-generation?hl=de) finden Sie eine vollständige
+Übersicht der Funktionen.
 
 ## gemini-3.1-flash-image
 
-| พร็อพเพอร์ตี้ | คำอธิบาย |
+| Attribut | Beschreibung |
 | --- | --- |
-| id\_cardรหัสโมเดล | `gemini-3.1-flash-image` |
-| saveประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ รูปภาพ วิดีโอ และ PDF  **เอาต์พุต**  รูปภาพและข้อความ |
-| token\_autoขีดจำกัดโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  131,072  **ขีดจำกัดโทเค็นเอาต์พุต**  32,768 |
-| handymanความสามารถ | **[การสร้างเสียง](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th)**  ไม่รองรับ  **[การแคช](https://ai.google.dev/gemini-api/docs/caching?hl=th)**  ไม่รองรับ  **[การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th)**  ไม่รองรับ  **[การค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th)**  ไม่รองรับ  **[การเรียกฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)**  ไม่รองรับ  **[การเชื่อมต่อแหล่งข้อมูลกับ Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th)**  ไม่รองรับ  **[การสร้างรูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)**  สิ่งที่ทำได้  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=th)**  ไม่รองรับ  **[การเชื่อมต่อแหล่งข้อมูลของ Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th)**  สิ่งที่ทำได้  **[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)**  ไม่รองรับ  **[กำลังคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th)**  สิ่งที่ทำได้  **[บริบท URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th)**  ไม่รองรับ |
-| speedConsumptionตัวเลือก | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th)**  สิ่งที่ทำได้  **[Flex Inference](https://ai.google.dev/gemini-api/docs/flex-inference?hl=th)**  ไม่รองรับ  **[Priority Inference](https://ai.google.dev/gemini-api/docs/priority-inference?hl=th)**  ไม่รองรับ |
-| 123เวอร์ชัน | อ่าน[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)เพื่อดูรายละเอียดเพิ่มเติม  - เสถียร: `gemini-3.1-flash-image` |
-| calendar\_monthการอัปเดตล่าสุด | กุมภาพันธ์ 2026 |
-| id\_cardการ์ดโมเดล | [การ์ดโมเดล](https://deepmind.google/models/model-cards/gemini-3-1-flash-image/?hl=th) |
+| id\_cardModellcode | `gemini-3.1-flash-image` |
+| saveUnterstützte Datentypen | **Eingaben**  Text, Bild, Video und PDF  **Ausgabe**  Bild und Text |
+| token\_autoToken limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=de) | **Tokenlimit für Eingaben**  131.072  **Tokenlimit für Ausgaben**  32.768 |
+| handymanFunktionen | **[Audiogenerierung](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de)**  Nicht unterstützt  **[Caching](https://ai.google.dev/gemini-api/docs/caching?hl=de)**  Nicht unterstützt  **[Code-Ausführung](https://ai.google.dev/gemini-api/docs/code-execution?hl=de)**  Nicht unterstützt  **[Dateisuche](https://ai.google.dev/gemini-api/docs/file-search?hl=de)**  Nicht unterstützt  **[Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/function-calling?hl=de)**  Nicht unterstützt  **[Fundierung mit Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=de)**  Nicht unterstützt  **[Bildgenerierung](https://ai.google.dev/gemini-api/docs/image-generation?hl=de)**  Unterstützt  **[Live-API](https://ai.google.dev/gemini-api/docs/live-api?hl=de)**  Nicht unterstützt  **[Suchfundierung](https://ai.google.dev/gemini-api/docs/google-search?hl=de)**  Unterstützt  **[Strukturierte Ausgaben](https://ai.google.dev/gemini-api/docs/structured-output?hl=de)**  Nicht unterstützt  **[Antwort wird generiert](https://ai.google.dev/gemini-api/docs/thinking?hl=de)**  Unterstützt  **[URL-Kontext](https://ai.google.dev/gemini-api/docs/url-context?hl=de)**  Nicht unterstützt |
+| speedVerbrauchsoptionen | **[Batch-API](https://ai.google.dev/gemini-api/docs/batch-api?hl=de)**  Unterstützt  **[Flex-Inferenz](https://ai.google.dev/gemini-api/docs/flex-inference?hl=de)**  Nicht unterstützt  **[Prioritätsinferenz](https://ai.google.dev/gemini-api/docs/priority-inference?hl=de)**  Nicht unterstützt |
+| 123Versionen | Weitere Informationen finden Sie unter [Modellversionsmuster](https://ai.google.dev/gemini-api/docs/models/gemini?hl=de#model-versions).  - Stable: `gemini-3.1-flash-image` |
+| calendar\_monthLetztes Update | Februar 2026 |
+| id\_cardModellkarte | [Modellkarte](https://deepmind.google/models/model-cards/gemini-3-1-flash-image/?hl=de) |
 
-ส่งความคิดเห็น
+Feedback geben
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-อัปเดตล่าสุด 2026-09-08 UTC
+Zuletzt aktualisiert: 2026-09-08 (UTC).
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Haben Sie Feedback für uns?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-08 UTC"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-08 (UTC)."],[],[]]

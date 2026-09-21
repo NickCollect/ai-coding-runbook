@@ -1,63 +1,64 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=ja
-fetched_at: 2026-09-14T05:50:44.650079+00:00
-title: "\u30c8\u30fc\u30af\u30f3\u3092\u7406\u89e3\u3057\u3066\u30ab\u30a6\u30f3\u30c8\u3059\u308b \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=zh-TW
+fetched_at: 2026-09-21T05:51:05.413614+00:00
+title: "\u77ad\u89e3\u53ca\u8a08\u7b97\u7b26\u8a18 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash が利用可能になりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ja)。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs/generate-content?hl=ja)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-tw)
 
-フィードバックを送信
+提供意見
 
-# トークンを理解してカウントする
+# 瞭解及計算符記
 
-Gemini などの生成 AI モデルは、入力と出力をトークンという粒度で処理します。
+Gemini 和其他生成式 AI 模型會以稱為「詞元」的細微程度處理輸入和輸出內容。
 
-**Gemini モデルの場合、1 個のトークンは約 4 文字に相当します。100 個のトークンは、約 60 ～ 80 ワード（英語）に相当します。**
+**對於 Gemini 模型，一個符記約等於 4 個字元。
+100 個符記約等於 60 到 80 個英文字。**
 
-## トークンについて
+## 關於權杖
 
-トークンは、`z` などの単一の文字、`cat` などの単語全体にすることができます。長い単語は複数のトークンに分割されます。モデルで使用されるすべてのトークンのセットを語彙と呼び、テキストをトークンに分割するプロセスをトークン化と呼びます。
+符記可以是單一字元 (例如 `z`)，也可以是整個字詞 (例如 `cat`)。長字會拆分成多個權杖。模型使用的所有符記集合稱為詞彙，將文字分割為符記的過程稱為「符記化」。
 
-課金が有効になっている場合、[Gemini API の呼び出し費用](https://ai.google.dev/pricing?hl=ja)は入力トークンと出力トークンの数によって決まるため、トークンのカウント方法を知っておくと便利です。
+啟用帳單後，系統會根據輸入和輸出權杖數量，部分決定 [Gemini API 呼叫的費用](https://ai.google.dev/pricing?hl=zh-tw)，因此瞭解如何計算權杖數量會很有幫助。
 
-Colab でトークン数のカウントを試すことができます。
+您可以在我們的 Colab 中試算權杖數量。
 
 |  |  |  |
 | --- | --- | --- |
-| [ai.google.dev で表示](https://ai.google.dev/gemini-api/docs/tokens?hl=ja) | [Colab ノートブックを試す](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ja) | [GitHub でノートブックを表示](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ja) |
+| [在 ai.google.dev 上查看](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw) | [試用 Colab 筆記本](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=zh-tw) | [在 GitHub 中查看筆記本](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=zh-tw) |
 
-## トークンのカウント
+## 計算詞元數
 
-Gemini API への入力と Gemini API からの出力はすべてトークン化されます。これには、テキスト、画像ファイル、テキスト以外のモダリティが含まれます。
+Gemini API 的所有輸入和輸出內容都會經過權杖化，包括文字、圖片檔案和其他非文字模態。
 
-トークンは次の方法でカウントできます。
+您可以透過下列方式計算權杖：
 
-- **リクエストの入力を使用して [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=ja) を呼び出します。**  
-  : *入力のみ*のトークンの合計数を返します。この呼び出しは、リクエストのサイズを確認するために、入力をモデルに送信する前に行うことができます。
-- **`generate_content` を呼び出した後、`response` オブジェクトの `usage_metadata` 属性を使用します。**  
-  : *入力と出力の両方*のトークンの合計数を返します（`total_token_count`）。  
-   また、入力トークンと出力トークンの数を別々に返します。`prompt_token_count`（入力トークン）と `candidates_token_count`（出力トークン）。
+- **使用要求的輸入內容呼叫 [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=zh-tw)。**  
+   這項函式只會傳回*輸入內容*中的權杖總數。您可以在將輸入內容傳送至模型之前，先發出這項呼叫，檢查要求的大小。
+- **在呼叫 `generate_content` 後，對 `response` 物件使用 `usage_metadata` 屬性。**  
+   這會傳回*輸入和輸出*的權杖總數：`total_token_count`。  
+   此外，這項函式也會分別傳回輸入和輸出內容的詞元數量：`prompt_token_count` (輸入詞元) 和 `candidates_token_count` (輸出詞元)。
 
-  [思考モデル](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)を使用している場合、思考プロセスで使用されたトークンは `thoughts_token_count` で返されます。[コンテキスト キャッシュ保存](https://ai.google.dev/gemini-api/docs/caching?hl=ja)を使用している場合、キャッシュに保存されているトークンの数は `cached_content_token_count` になります。
+  如果您使用[思考模型](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-tw)，思考程序中使用的權杖會以 `thoughts_token_count` 形式傳回。如果您使用[脈絡快取](https://ai.google.dev/gemini-api/docs/caching?hl=zh-tw)，快取權杖計數會顯示在 `cached_content_token_count` 中。
 
-### テキスト トークンをカウントする
+### 計算文字權杖
 
-テキストのみの入力で `count_tokens` を呼び出すと、*入力のみ*のテキストのトークン数（`total_tokens`）が返されます。この呼び出しは、`generate_content` を呼び出してリクエストのサイズを確認する前に行うことができます。
+如果您使用純文字輸入呼叫 `count_tokens`，系統只會傳回*輸入內容* (`total_tokens`) 的權杖數量。您可以在呼叫 `generate_content` 前進行這項呼叫，檢查要求大小。
 
-別の方法としては、`generate_content` を呼び出し、`response` オブジェクトの `usage_metadata` 属性を使用して次の情報を取得する方法があります。
+另一種做法是呼叫 `generate_content`，然後使用 `response` 物件的 `usage_metadata` 屬性取得下列項目：
 
-- 入力（`prompt_token_count`）、キャッシュに保存されたコンテンツ（`cached_content_token_count`）、出力（`candidates_token_count`）のトークン数の内訳
-- 思考プロセスのトークン数（`thoughts_token_count`）
-- *入力と出力の両方*のトークンの合計数（`total_token_count`）
+- 輸入 (`prompt_token_count`)、快取內容 (`cached_content_token_count`) 和輸出 (`candidates_token_count`) 的個別權杖數
+- 思考過程的權杖數量 (`thoughts_token_count`)
+- *輸入和輸出*的詞元總數 (`total_token_count`)
 
 ### Python
 
@@ -132,17 +133,17 @@ fmt.Println(string(usageMetadata))
     ```
 ```
 
-### マルチターン（チャット）トークンをカウントする
+### 計算多輪 (聊天) 詞元數
 
-チャット履歴を指定して `count_tokens` を呼び出すと、チャット内の各ロールのテキストの合計トークン数（`total_tokens`）が返されます。
+如果使用對話記錄呼叫 `count_tokens`，系統會傳回對話中每個角色文字的總權杖數 (`total_tokens`)。
 
-別の方法としては、`send_message` を呼び出し、`response` オブジェクトの `usage_metadata` 属性を使用して次の情報を取得する方法があります。
+另一種做法是呼叫 `send_message`，然後使用 `response` 物件的 `usage_metadata` 屬性取得下列項目：
 
-- 入力（`prompt_token_count`）、キャッシュに保存されたコンテンツ（`cached_content_token_count`）、出力（`candidates_token_count`）のトークン数の内訳
-- 思考プロセスのトークン数（`thoughts_token_count`）
-- *入力と出力の両方*のトークンの合計数（`total_token_count`）
+- 輸入 (`prompt_token_count`)、快取內容 (`cached_content_token_count`) 和輸出 (`candidates_token_count`) 的個別權杖數
+- 思考過程的權杖數量 (`thoughts_token_count`)
+- *輸入和輸出*的詞元總數 (`total_token_count`)
 
-次の会話のターンがどの程度の大きさになるかを把握するには、`count_tokens` を呼び出すときに履歴に追加する必要があります。
+如要瞭解下一個對話回合的大小，您需要在呼叫 `count_tokens` 時將其附加至記錄。
 
 ### Python
 
@@ -268,30 +269,31 @@ if err != nil {
 fmt.Println(secondTokenResp.TotalTokens)
 ```
 
-### マルチモーダル トークンをカウントする
+### 計算多模態權杖
 
-Gemini API への入力はすべてトークン化されます。これには、テキスト、画像ファイル、その他のテキスト以外のモダリティが含まれます。Gemini API による処理中のマルチモーダル入力のトークン化に関する主なポイントは次のとおりです。
+Gemini API 的所有輸入內容都會經過權杖化，包括文字、圖片檔案和其他非文字模態。請注意以下關於 Gemini API 處理多模態輸入內容時，權杖化的重要重點：
 
-- 両方の寸法が 384 ピクセル以下の画像入力は、258 個のトークンとしてカウントされます。1 つまたは両方の寸法が大きい画像は、必要に応じて 768x768 ピクセルのタイルに切り抜かれ、スケーリングされます。各タイルは 258 個のトークンとしてカウントされます。
-- 動画ファイルと音声ファイルは、次の固定レートでトークンに変換されます。動画は 1 秒あたり 263 トークン、音声は 1 秒あたり 32 トークン。
+- 如果圖片輸入內容的兩個維度均 <=384 像素，則會計為 258 個權杖。如果圖片在一個或兩個維度上較大，系統會視需要裁剪並縮放圖片，成為 768x768 像素的圖塊，每個圖塊算做 258 個權杖。
+- 系統會以固定費率將影片和音訊檔案轉換為權杖：
+  影片為每秒 263 個權杖，音訊為每秒 32 個權杖。
 
-#### メディアの解像度
+#### 媒體解析度
 
-[Gemini 3 モデル](https://ai.google.dev/gemini-api/docs/models?hl=ja#gemini-3)では、`media_resolution` パラメータを使用して、マルチモーダル ビジョン処理をきめ細かく制御できます。`media_resolution` パラメータは、**入力画像または動画フレームごとに割り当てられるトークンの最大数**を決定します。解像度が高いほど、モデルが細かいテキストを読み取ったり、小さな詳細を識別する能力が向上しますが、トークンの使用量とレイテンシが増加します。
+[Gemini 3 模型](https://ai.google.dev/gemini-api/docs/models?hl=zh-tw#gemini-3)導入了 `media_resolution` 參數，可精細控管多模態視覺處理作業。`media_resolution` 參數會決定**每個輸入圖片或影片影格分配到的詞元數量上限。**解析度越高，模型就越能辨識細小文字或細節，但也會增加權杖用量和延遲時間。
 
-パラメータとそのトークン計算への影響について詳しくは、[メディア解像度](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=ja)ガイドをご覧ください。
+如要進一步瞭解參數及其對權杖計算的影響，請參閱[媒體解析度](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=zh-tw)指南。
 
-#### 画像ファイル
+#### 圖片檔
 
-テキストと画像の入力を使用して `count_tokens` を呼び出すと、*入力のみ*のテキストと画像のトークン数の合計（`total_tokens`）が返されます。この呼び出しは、`generate_content` を呼び出してリクエストのサイズを確認する前に行うことができます。必要に応じて、テキストとファイルに対して個別に `count_tokens` を呼び出すこともできます。
+如果您使用文字和圖片輸入內容呼叫 `count_tokens`，系統會傳回*僅限輸入內容* (`total_tokens`) 的文字和圖片合併權杖計數。您可以在呼叫 `generate_content` 之前呼叫此函式，檢查要求大小。您也可以選擇分別對文字和檔案呼叫 `count_tokens`。
 
-別の方法としては、`generate_content` を呼び出し、`response` オブジェクトの `usage_metadata` 属性を使用して次の情報を取得する方法があります。
+另一種做法是呼叫 `generate_content`，然後使用 `response` 物件的 `usage_metadata` 屬性取得下列項目：
 
-- 入力（`prompt_token_count`）、キャッシュに保存されたコンテンツ（`cached_content_token_count`）、出力（`candidates_token_count`）のトークン数の内訳
-- 思考プロセスのトークン数（`thoughts_token_count`）
-- *入力と出力の両方*のトークンの合計数（`total_token_count`）
+- 輸入 (`prompt_token_count`)、快取內容 (`cached_content_token_count`) 和輸出 (`candidates_token_count`) 的個別權杖數
+- 思考過程的權杖數量 (`thoughts_token_count`)
+- *輸入和輸出*的詞元總數 (`total_token_count`)
 
-File API からアップロードされた画像を使用する例:
+使用 File API 上傳圖片的範例：
 
 ### Python
 
@@ -391,7 +393,7 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-画像をインライン データとして提供する例:
+以下範例會以內嵌資料的形式提供圖片：
 
 ### Python
 
@@ -488,20 +490,20 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-#### 動画ファイルまたは音声ファイル
+#### 影片或音訊檔案
 
-音声と動画は、次の固定レートでトークンに変換されます。
+音訊和視訊會分別以以下固定費率轉換為權杖：
 
-- 動画: 1 秒あたり 263 トークン
-- 音声: 1 秒あたり 32 トークン
+- 影片：每秒 263 個符記
+- 音訊：每秒 32 個權杖
 
-テキストと動画/音声の入力を使用して `count_tokens` を呼び出すと、テキストと動画/音声ファイルの結合トークン数が*入力のみ*（`total_tokens`）で返されます。この呼び出しは、`generate_content` を呼び出してリクエストのサイズを確認する前に行うことができます。必要に応じて、テキストとファイルで `count_tokens` を個別に呼び出すこともできます。
+如果您使用文字和影片/音訊輸入內容呼叫 `count_tokens`，系統會傳回*輸入內容中*文字和影片/音訊檔案的合併權杖計數 (`total_tokens`)。您可以在呼叫 `generate_content` 之前進行這項呼叫，檢查要求大小。您也可以選擇分別對文字和檔案呼叫 `count_tokens`。
 
-別の方法としては、`generate_content` を呼び出し、`response` オブジェクトの `usage_metadata` 属性を使用して次の情報を取得する方法があります。
+另一種做法是呼叫 `generate_content`，然後使用 `response` 物件的 `usage_metadata` 屬性取得下列項目：
 
-- 入力（`prompt_token_count`）、キャッシュに保存されたコンテンツ（`cached_content_token_count`）、出力（`candidates_token_count`）のトークン数の内訳
-- 思考プロセスのトークン数（`thoughts_token_count`）
-- *入力と出力の両方*のトークンの合計数（`total_token_count`）。
+- 輸入 (`prompt_token_count`)、快取內容 (`cached_content_token_count`) 和輸出 (`candidates_token_count`) 的個別權杖數
+- 思考過程的權杖數量 (`thoughts_token_count`)
+- *輸入和輸出*的詞元總數 (`total_token_count`)。
 
 ### Python
 
@@ -626,9 +628,9 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-### 思考トークンをカウントする
+### 計算思考詞元
 
-思考をオンにすると、レスポンスの料金は出力トークンと思考トークンの合計になります。生成された思考トークンの合計数は、`thoughtsTokenCount` フィールド（または SDK の同等のフィールド）から取得できます。
+開啟思考功能後，回覆價格為輸出詞元和思考詞元的總和。您可以從 `thoughtsTokenCount` 欄位 (或 SDK 對應項目) 擷取產生的思考詞元總數。
 
 ### Python
 
@@ -654,13 +656,13 @@ fmt.Println("Thoughts tokens:", response.UsageMetadata.ThoughtsTokenCount)
 fmt.Println("Output tokens:", response.UsageMetadata.CandidatesTokenCount)
 ```
 
-思考モデルは、最終的なレスポンスの品質を高めるために完全な思考を生成し、思考プロセスに関する分析情報を提供するために[要約](https://ai.google.dev/gemini-api/docs/thinking?hl=ja#summaries)を出力します。そのため、API は要約のみを出力しますが、モデルが要約を作成するために生成する完全な思考トークンに基づいて価格設定を行います。
+思考模型會生成完整的想法，以提升最終回覆的品質，然後輸出[摘要](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-tw#summaries)，深入瞭解思考過程。因此，即使 API 只會輸出摘要，但仍會根據模型生成摘要時產生的完整想法權杖計費。
 
-思考の構成方法については、[Gemini の思考](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)ガイドをご覧ください。
+如要進一步瞭解如何設定思考模式，請參閱 [Gemini 思考模式](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-tw)指南。
 
-## コンテキスト ウィンドウ
+## 脈絡窗口
 
-Gemini API で使用可能なモデルには、トークンで測定されるコンテキスト ウィンドウがあります。コンテキスト ウィンドウは、提供できる入力の量と、モデルが生成できる出力の量を定義します。コンテキスト ウィンドウのサイズは、[`models.get` エンドポイント](https://ai.google.dev/api/rest/v1/models/get?hl=ja)を呼び出すか、[モデルのドキュメント](https://ai.google.dev/gemini-api/docs/models?hl=ja)で確認できます。
+透過 Gemini API 提供的模型具有脈絡窗口，以權杖為單位。脈絡窗口會定義您可以提供的輸入內容量，以及模型可生成的輸出內容量。您可以呼叫 [`models.get` 端點](https://ai.google.dev/api/rest/v1/models/get?hl=zh-tw)，或查看[模型說明文件](https://ai.google.dev/gemini-api/docs/models?hl=zh-tw)，判斷內容視窗的大小。
 
 ### Python
 
@@ -705,12 +707,12 @@ fmt.Println("input token limit:", modelInfo.InputTokenLimit)
 fmt.Println("output token limit:", modelInfo.OutputTokenLimit)
 ```
 
-フィードバックを送信
+提供意見
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-最終更新日 2026-09-12 UTC。
+上次更新時間：2026-09-12 (世界標準時間)。
 
-ご意見をお聞かせください
+想進一步說明嗎？
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-12 UTC。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-12 (世界標準時間)。"],[],[]]

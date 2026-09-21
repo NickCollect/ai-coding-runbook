@@ -1,89 +1,103 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/image-generation?hl=ja
-fetched_at: 2026-09-14T05:49:14.874936+00:00
+source_url: https://ai.google.dev/gemini-api/docs/image-generation?hl=ar
+fetched_at: 2026-09-21T05:52:28.993512+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-フィードバックを送信
+إرسال ملاحظات
 
-# Nano Banana による画像生成
+# إنشاء الصور باستخدام Nano Banana
 
-プロンプトを使用して、完全に機能する UI 完成済みのアプリのプロトタイプを作成し、Nano Banana 2 が実際のツール、データ、Gemini エコシステムと統合されていることを確認します。コードを 1 行も書かずに、すべて完了しました。
+يمكنك تقديم طلب لإنشاء نموذج أوّلي لتطبيقات كاملة الوظائف تتضمّن واجهة مستخدم كاملة،
+والاطّلاع على Nano Banana 2 مدمجًا مع أدوات وبيانات من الواقع العملي
+ومنظومة Gemini المتكاملة. كل ذلك قبل كتابة سطر واحد من الرموز البرمجية.
 
-- プロンプトから独自のものを構築することもできます。
+- أو يمكنك إنشاء سلسلة إجراءات خاصة بك من الطلبات:
 
-- ![雑誌](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
-  ![ロンドン](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
-  ![restore](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
-  ![バナナ](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
-  ![cafe](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
-  ![記事](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
-  ![犬](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
-  ![アイソメトリック](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
-- ![雑誌](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+- ![مجلة](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+  ![london](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
+  ![استعادة](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
+  ![موزة](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
+  ![مقهى](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
+  ![مقالة](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
+  ![كلب](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
+  ![متساوي الأبعاد](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
+- ![مجلة](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
 
-  Nano Banana 2 で生成
+  تم إنشاؤها باستخدام Nano Banana 2
 
-  **プロンプト:** 「光沢のある雑誌の表紙の写真。青色のシンプルな表紙に、Nano Banana という大きな太字の単語が書かれている。」テキストはセリフフォントで、ビュー全体に表示されます。他のテキストは含めないでください。テキストの前に、洗練されたミニマルなドレスを着た人物のポートレートがあります。彼女は数字の 2 を楽しそうに持っており、それがフォーカル ポイントになっています。  
-  問題番号と「2026 年 2 月」の日付を隅にバーコードとともに配置します。雑誌は、デザイナーズ ストア内のオレンジ色の漆喰の壁に面した棚に置かれています。」
-- ![ロンドン](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
+  **الطلب:** "صورة لغلاف مجلّة لامع، الغلاف الأزرق البسيط يتضمّن الكلمات الكبيرة البارزة Nano Banana. يظهر النص بخط serif ويملأ طريقة العرض. لا أريد عرض أي نص آخر. أمام النص، تظهر صورة مقرّبة لشخص يرتدي فستانًا أنيقًا وبسيطًا. تظهر وهي تحمل الرقم 2 بشكل مرح، وهو نقطة التركيز في الصورة.
+    
+  ضَع رقم الإصدار وتاريخ "شباط (فبراير) 2026" في الزاوية مع رمز شريطي. المجلة موضوعة على رفّ أمام جدار برتقالي مكسو بالجص، داخل متجر للمصمّمين".
+- ![london](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
 
-  Nano Banana Pro で生成
+  تم إنشاؤها باستخدام Nano Banana Pro
 
-  **プロンプト:** 「ロンドンの最も象徴的なランドマークと建築要素を特徴とする、45 度の真上から見た等角投影のミニチュア 3D 漫画のシーンを明確に表現してください。リアルな PBR マテリアルと、優しくリアルなライティングと影を使用して、柔らかく洗練されたテクスチャを使用します。現在の気象条件を都市環境に直接統合して、没入感のある雰囲気を作り出します。柔らかい単色の背景を使用した、すっきりとしたミニマルな構図にします。上部中央に、大きな太字で「ロンドン」というタイトルを配置し、その下に目立つ天気アイコン、日付（小さいテキスト）、気温（中くらいのテキスト）を配置します。すべてのテキストは、一貫した間隔で中央に配置する必要があります。建物の上部とわずかに重なることがあります。」
-- ![ケツァール](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
+  **الطلب:** "قدِّم مشهدًا كرتونيًا ثلاثي الأبعاد مصغّرًا ودقيقًا من منظور متساوي القياس (أيزومتري) وزاوية رؤية علوية 45 درجة، يجسِّد مدينة لندن ويضمّ أبرز معالمها وعناصرها المعمارية. استخدِم ملمسًا ناعمًا ودقيقًا مع مواد PBR واقعية وإضاءة وظلال ناعمة وطبيعية. يمكنك دمج أحوال الطقس الحالية مباشرةً في بيئة المدينة لإنشاء أجواء غامرة. استخدِم تركيبة بسيطة وواضحة مع خلفية ناعمة بلون واحد. في أعلى منتصف الشاشة، ضَع العنوان "لندن" بخط كبير وغامق، ثم أيقونة بارزة للطقس أسفله، ثم التاريخ (بخط صغير) ودرجة الحرارة (بخط متوسط). يجب توسيط جميع النصوص مع ترك مسافة متسقة، ويجوز أن تتداخل بشكل طفيف مع أعلى المباني".
+- ![كيتزال](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
 
-  Nano Banana 2 で生成
+  تم إنشاؤها باستخدام Nano Banana 2
 
-  **プロンプト:** 「画像検索を使用して、ケツァール鳥の正確な画像を見つけてください。この鳥の美しい 3:2 の壁紙を作成してください。上から下への自然なグラデーションと、最小限の構図でお願いします。」
-- ![バナナ](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
+  **الطلب:** "استخدِم "بحث الصور" للعثور على صور دقيقة لطائر الكيتزال الرائع. أنشئ خلفية جميلة بنسبة عرض إلى ارتفاع 3:2 لهذه الطائر، مع تدرّج طبيعي من الأعلى إلى الأسفل وتصميم بسيط."
+- ![موزة](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
 
-  Nano Banana Pro で生成
+  تم إنشاؤها باستخدام Nano Banana Pro
 
-  **プロンプト:** 「このロゴをバナナの香りの香水の高級広告に配置してください。ロゴがボトルに完璧に統合されています。」
-- ![cafe](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
+  **الطلب:** "أريد وضع هذا الشعار على إعلان فاخر لعطر برائحة الموز. تم دمج الشعار بشكل مثالي في الزجاجة".
+- ![مقهى](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
 
-  Nano Banana Pro で生成
+  تم إنشاؤها باستخدام Nano Banana Pro
 
-  **プロンプト:** 「朝食を提供する忙しいカフェの日常風景の写真。前景には青い髪のアニメの男性がおり、人物の 1 人は鉛筆スケッチ、もう 1 人はクレイアニメの人物です。」
-- ![記事](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
+  **الطلب:** "صورة لمشهد يومي في مقهى مزدحم يقدّم الفطور في مقدّمة الصورة، يظهر رجل من عالم الأنمي بشعر أزرق، وأحد الأشخاص هو رسم بقلم الرصاص، والآخر هو شخص من عالم الصلصال"
+- ![مقالة](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
 
-  Nano Banana Pro で生成
+  تم إنشاؤها باستخدام Nano Banana Pro
 
-  **プロンプト:** 「検索を使用して、Gemini 3 Flash のリリースがどのように受け止められているか調べてください。この情報を使用して、それに関する短い記事（見出し付き）を書いてください。デザインに特化した光沢のある雑誌に掲載された記事の写真を返します。Gemini 3 Flash に関する記事が掲載された 1 ページの折り返し部分の写真です。ヒーロー写真 1 枚。セリフ体の見出し。」
-- ![犬](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
+  **الطلب:** "استخدِم "بحث Google" للعثور على آراء المستخدمين حول إطلاق Gemini 3 Flash. استخدِم هذه المعلومات لكتابة مقالة قصيرة حول هذا الموضوع (مع عناوين). أريد صورة للمقالة كما ظهرت في مجلة لامعة تركز على التصميم. إنّها صورة لصفحة واحدة مطوية، تعرض المقالة حول Gemini 3 Flash. صورة رئيسية واحدة عنوان بخط ذي نهايات معقوفة".
+- ![كلب](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
 
-  Nano Banana Pro で生成
+  تم إنشاؤها باستخدام Nano Banana Pro
 
-  **プロンプト:** 「かわいい犬を表すアイコン。背景は白です。アイコンをカラフルで立体的な 3D スタイルにする。テキストなし。」
-- ![アイソメトリック](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
+  **الطلب:** "أريد رمزًا يمثّل كلبًا لطيفًا. يجب أن تكون الخلفية بيضاء. اجعل الرموز بأسلوب ثلاثي الأبعاد ملوّنًا وملموسًا. لا يوجد نص".
+- ![متساوي الأبعاد](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
 
-  Nano Banana 2 で生成
+  تم إنشاؤها باستخدام Nano Banana 2
 
-  **プロンプト:** 「完全にアイソメトリックな写真を作成して。ミニチュアではなく、たまたま完全にアイソメトリックになった写真です。美しいモダンな庭の写真です。大きな 2 の形をしたプールと「Nano Banana 2」という文字があります。」
+  **الطلب:** "أريد صورة متساوية القياس تمامًا. إنّها ليست صورة مصغّرة، بل صورة تم التقاطها وكانت متساوية القياس تمامًا. إنّها صورة لحديقة عصرية جميلة. يظهر في الصورة مسبح كبير على شكل الرقم 2 والعبارة Nano Banana 2.
 
-**Nano Banana** は、Gemini のネイティブ画像生成機能の名称です。Gemini は、テキスト、画像、動画、またはその組み合わせを使用して、会話形式で画像を生成して処理できます。これにより、これまでにない高いコントロール精度で画像を作成、編集、反復的な改善ができます。
+‫**Nano Banana** هو اسم إمكانات إنشاء الصور الأصلية في Gemini.
+يمكن لـ Gemini إنشاء الصور ومعالجتها بشكل حواري
+باستخدام النصوص أو الصور أو الفيديوهات أو مزيج من هذه الوسائط. يتيح لك ذلك إنشاء المرئيات وتعديلها وتكرارها مع مستوى تحكّم غير مسبوق.
 
-Nano Banana は、Gemini API で利用できる 4 つの異なるモデルを指します。
+تشير Nano Banana إلى أربعة نماذج مميزة متوفّرة في Gemini API:
 
-- **Nano Banana 2 Lite（[Gemini 3.1 Flash Lite Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=ja)）（`gemini-3.1-flash-lite-image`）:** 速度とコストが主な運用上の制約となる速度と規模向けに設計された、最も高速で最も安価な Gemini 画像モデル。複数の参照入力やマルチターンの連続編集には最適化されていません。
-- **Nano Banana 2（[Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=ja)）（`gemini-3.1-flash-image`）:** 最も汎用性の高いモデルであり、すべてのタスクに対応する汎用的なワークホース モデルとして機能します。速度、最先端の 4K 生成、実世界の知識、信頼性の高いテキスト レンダリングのバランスが取れたオプションです。複数の参照画像の処理と一貫性に優れています。
-- **Nano Banana Pro（[Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=ja)）（`gemini-3-pro-image`）:** 最も複雑なビジュアル タスクに最適なプレミアム オプション。世界に関する最高レベルの知識、高度なローカライズ、正確なブランドの一貫性、精密なクリエイティブ制御を提供します。
-- **Nano Banana（[Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=ja)）（`gemini-2.5-flash-image`）:** Nano Banana シリーズの先駆者です。Nano Banana は信頼性の高いモデルですが、品質の向上、生成速度の向上、API 料金の引き下げを実現する Nano Banana 2 Lite への移行を強くおすすめします。
+- ‫**Nano Banana 2 Lite ([Gemini 3.1 Flash Lite Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=ar))
+  (`gemini-3.1-flash-lite-image`):** هو أسرع نموذج وأقل تكلفة لمعالجة الصور في Gemini،
+  وهو مصمَّم لتحقيق السرعة والتوسّع حيث تشكّل السرعة والتكلفة
+  القيود التشغيلية الأساسية. غير محسَّن لإدخالات مرجعية متعددة
+  أو تعديل محادثة مترابطة تسلسلي.
+- ‫**Nano Banana 2 ([Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=ar))
+  (`gemini-3.1-flash-image`):** هو النموذج الأكثر تنوعًا، وهو نموذج عام
+  يُستخدم في جميع المهام. وهو يوازن بين السرعة والجودة العالية للصور بدقة 4K والمعرفة الأوسع بالعالم الواقعي والعرض الموثوق للنصوص. التفوّق في معالجة صور مرجعية متعددة والحفاظ على الاتساق
+- **‫Nano Banana Pro ([Gemيني 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=ar))
+  (`gemini-3-pro-image`):** هو الخيار الأفضل للمهام المرئية الأكثر تعقيدًا، إذ يوفّر أعلى مستوى من المعرفة بالعالم، وميزات متقدّمة لتحديد الموقع الجغرافي، وتناسقًا دقيقًا للعلامة التجارية، وتحكّمًا إبداعيًا دقيقًا.
+- **‫Nano Banana ([Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=ar))
+  (`gemini-2.5-flash-image`):** هو الإصدار الأول من سلسلة Nano Banana.
+  على الرغم من أنّ هذا الطراز كان خيارًا موثوقًا، ننصح العملاء بشدة بالانتقال إلى Nano Banana 2 Lite للاستفادة من الجودة المحسّنة وسرعات الإنشاء الأسرع وأسعار واجهة برمجة التطبيقات الأقل.
 
-生成されたすべての画像には [SynthID の透かし](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=ja)が埋め込まれています。
+تتضمّن جميع الصور التي يتم إنشاؤها [علامة مائية من SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=ar).
 
-## 画像生成（テキスト画像変換）
+## إنشاء الصور (تحويل النص إلى صورة)
 
 ### Python
 
@@ -131,21 +145,38 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("base64"))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(
+            InteractionsInput.of(
+                "Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme"))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.outputImage().isPresent()
+    && interaction.outputImage().get().data().isPresent()) {
+  byte[] imageBytes =
+      Base64.getDecoder().decode(interaction.outputImage().get().data().get());
+  Files.write(Paths.get("generated_image.png"), imageBytes);
+}
 ```
 
 ### REST
@@ -163,15 +194,17 @@ curl -s -X POST \
   }'
 ```
 
-生成された画像データは、`interaction.output_image` プロパティを使用して取得できます。このプロパティは、最後に生成された画像ブロックを返します。便宜的なプロパティの詳細については、[インタラクションの概要](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja#convenience-properties)をご覧ください。
+يمكنك استرداد بيانات الصورة التي تم إنشاؤها باستخدام السمة `interaction.output_image` التي تعرض آخر حزمة صور تم إنشاؤها. للحصول على تفاصيل حول سمات الراحة، يُرجى الاطّلاع على [نظرة عامة على التفاعلات](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar#convenience-properties).
 
-## 画像編集（テキストと画像による画像変換）
+## تعديل الصور (تحويل النص والصورة إلى صورة)
 
-**リマインダー**: アップロードする画像に必要な権利をすべて所有していることをご確認ください。他者の権利を侵害するコンテンツ（他人を欺く、嫌がらせをする、または危害を加える動画や画像など）を生成しないでください。この生成 AI 機能の使用は、Google の[生成 AI の使用禁止に関するポリシー](https://policies.google.com/terms/generative-ai/use-policy?hl=ja)の対象となります。
+**تذكير**: يُرجى التأكّد من امتلاكك الحقوق اللازمة لأي صور قبل تحميلها.
+لا يجوز إنشاء محتوى ينتهك حقوق الآخرين، بما في ذلك الفيديوهات أو الصور التي تتسبب في الخداع أو المضايقة أو الأذى. يخضع استخدامك لخدمة الذكاء الاصطناعي التوليدي هذه [لسياسة الاستخدام المحظور](https://policies.google.com/terms/generative-ai/use-policy?hl=ar) التي نعتمدها.
 
-画像を指定し、テキスト プロンプトを使用して要素の追加、削除、変更、スタイルの変更、カラー グレーディングの調整を行います。
+قدِّم صورة واستخدِم طلبات نصية لإضافة عناصر أو إزالتها أو تعديلها، أو تغيير النمط، أو ضبط تصحيح الألوان.
 
-次の例は、`base64` エンコードされた画像をアップロードする方法を示しています。複数の画像、大きなペイロード、サポートされている MIME タイプについては、[画像理解](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja)のページをご覧ください。
+يوضّح المثال التالي كيفية تحميل صور مرمّزة `base64`.
+للحصول على معلومات حول الصور المتعددة والحِزم الأكبر وأنواع MIME المتوافقة، يُرجى الاطّلاع على صفحة [فهم الصور](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ar).
 
 ### Python
 
@@ -243,21 +276,57 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.interactions.Content;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("Create a picture of my cat eating a nano-banana in a"))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+byte[] inputBytes = Files.readAllBytes(Paths.get("/path/to/cat_image.png"));
+String base64Image = Base64.getEncoder().encodeToString(inputBytes);
+
+Content textContent =
+    TextContent.builder()
+        .text("Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme")
+        .build();
+Content imageContent =
+    ImageContent.builder()
+        .data(base64Image)
+        .mimeType(ImageContentMimeType.IMAGE_PNG)
+        .build();
+
+List<Content> contents = Arrays.asList(textContent, imageContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.outputImage().isPresent()
+    && interaction.outputImage().get().data().isPresent()) {
+  byte[] outputBytes =
+      Base64.getDecoder().decode(interaction.outputImage().get().data().get());
+  Files.write(Paths.get("generated_image.png"), outputBytes);
+}
 ```
 
 ### REST
@@ -280,9 +349,9 @@ curl -s -X POST \
     }"
 ```
 
-### マルチターンの画像編集
+### تعديل الصور في محادثة مترابطة
 
-会話形式で画像の生成と編集を続けます。画像を反復処理するには、マルチターン会話を使用することをおすすめします。次の例は、光合成に関するインフォグラフィックを生成するプロンプトを示しています。
+مواصلة إنشاء الصور وتعديلها بشكل حواري المحادثة المترابطة هي الطريقة المقترَحة لتكرار الصور. يعرض المثال التالي طلبًا لإنشاء مخطّط بياني حول عملية التمثيل الضوئي.
 
 ### Python
 
@@ -328,21 +397,41 @@ async function main() {
 await main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.GoogleSearch;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("Create a vibrant infographic that explains photosynthesis as if it were a recipe for a plant"))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(
+            InteractionsInput.of(
+                "Create a vibrant infographic that explains photosynthesis as if it were a recipe for a plant's favorite food. Show the \"ingredients\" (sunlight, water, CO2) and the \"finished dish\" (sugar/energy). The style should be like a page from a colorful kids' cookbook, suitable for a 4th grader."))
+        .tools(Arrays.asList(new GoogleSearch()))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.outputImage().isPresent()
+    && interaction.outputImage().get().data().isPresent()) {
+  byte[] imageBytes =
+      Base64.getDecoder().decode(interaction.outputImage().get().data().get());
+  Files.write(Paths.get("photosynthesis.png"), imageBytes);
+}
 ```
 
 ### REST
@@ -361,11 +450,11 @@ curl -s -X POST \
   }'
 ```
 
-![光合成に関する AI 生成のインフォグラフィック](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=ja)
+![مخطّط بياني من إنشاء الذكاء الاصطناعي حول عملية التمثيل الضوئي](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=ar)
 
-光合成に関する AI 生成のインフォグラフィック
+مخطّط بياني من إنشاء الذكاء الاصطناعي حول عملية البناء الضوئي
 
-`previous_interaction_id` を使用して、グラフィックの言語をスペイン語に変更します。
+يمكنك بعد ذلك استخدام `previous_interaction_id` لتغيير اللغة في الرسم إلى الإسبانية.
 
 ### Python
 
@@ -410,21 +499,69 @@ if (generatedImage) {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.GoogleSearch;
+import com.google.genai.gaos.models.interactions.ImageResponseFormat;
+import com.google.genai.gaos.models.interactions.ImageResponseFormatAspectRatio;
+import com.google.genai.gaos.models.interactions.ImageResponseFormatImageSize;
+import com.google.genai.gaos.models.interactions.ImageResponseFormatMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("Update this infographic to be in Spanish. Do not change any other elements of the image."))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+CreateModelInteraction turn1Params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(
+            InteractionsInput.of(
+                "Create a vibrant infographic that explains photosynthesis as if it were a recipe for a plant's favorite food."))
+        .tools(Arrays.asList(new GoogleSearch()))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(turn1Params)).interaction().get();
+
+CreateModelInteractionResponseFormat format =
+    CreateModelInteractionResponseFormat.of(
+        ResponseFormat.of(
+            ImageResponseFormat.builder()
+                .mimeType(ImageResponseFormatMimeType.IMAGE_JPEG)
+                .aspectRatio(ImageResponseFormatAspectRatio.of("16:9"))
+                .imageSize(ImageResponseFormatImageSize.TWO_K)
+                .build()));
+
+CreateModelInteraction turn2Params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(
+            InteractionsInput.of(
+                "Update this infographic to be in Spanish. Do not change any other elements of the image."))
+        .previousInteractionId(interaction.id().orElse(""))
+        .responseFormat(format)
+        .build();
+
+Interaction interaction2 =
+    client.interactions.create(CreateInteractionRequestBody.of(turn2Params)).interaction().get();
+
+if (interaction2.outputImage().isPresent()
+    && interaction2.outputImage().get().data().isPresent()) {
+  byte[] imageBytes =
+      Base64.getDecoder().decode(interaction2.outputImage().get().data().get());
+  Files.write(Paths.get("photosynthesis_spanish.png"), imageBytes);
+}
 ```
 
 ### REST
@@ -447,34 +584,37 @@ curl -s -X POST \
   }'
 ```
 
-![スペイン語で光合成のインフォグラフィックを AI が生成](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=ja)
+![مخطّط بياني من إنشاء الذكاء الاصطناعي حول عملية التمثيل الضوئي باللغة الإسبانية](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=ar)
 
-光合成のインフォグラフィックをスペイン語で AI 生成して
+مخطّط بياني من إنشاء الذكاء الاصطناعي حول عملية البناء الضوئي باللغة الإسبانية
 
-## Gemini 3 画像モデルの新機能
+## ميزات جديدة في نماذج الصور Gemini 3
 
-Gemini 3 は、最先端の画像生成および編集モデルを提供します。Gemini 3.1 Flash Image は速度と大量のユースケース向けに最適化されており、Gemini 3 Pro Image はプロフェッショナルなアセット制作向けに最適化されています。高度な推論を通じて最も困難なワークフローに取り組むように設計されており、複雑なマルチターンの作成タスクや変更タスクに優れています。
+يوفّر Gemini 3 أحدث النماذج لإنشاء الصور وتعديلها. تم تحسين أداء Gemini 3.1
+Flash Image ليكون سريعًا ومناسبًا لحالات الاستخدام التي تتطلّب إنشاء عدد كبير من الصور، بينما تم تحسين أداء Gemini 3
+Pro Image لإنتاج أصول احترافية.
+تم تصميم هذه النماذج للتعامل مع أكثر مهام سير العمل صعوبةً من خلال الاستدلال المتقدّم، وهي تتفوّق في المهام المعقّدة والمحادثة المترابطة التي تتضمّن إنشاء المحتوى وتعديله.
 
-- **高解像度出力**: 1K、2K、4K のビジュアルを生成する機能が組み込まれています。
-  - **Gemini 3.1 Flash Image** では、より小さい 512 ピクセル（0.5K）にも対応しています。
-  - **Gemini 3.1 Flash-Lite Image** は 1K 解像度のみをサポートしています。
-- **高度なテキスト レンダリング**: インフォグラフィック、メニュー、図表、マーケティング アセット用に、読みやすくスタイリッシュなテキストを生成できます。
-- **Google 検索によるグラウンディング**: モデルは、Google 検索をツールとして使用して、事実を確認し、リアルタイム データ（現在の天気図、株価チャート、最近のイベントなど）に基づいて画像生成できます。
-  - **Gemini 3.1 Flash Lite Image モデルではサポートされていません。**
-  - **Gemini 3.1 Flash Image** では、ウェブ検索に加えて Google 画像検索グラウンディングの統合が追加されています。
-- **思考モード**: モデルは「思考」プロセスを利用して、複雑なプロンプトを推論します。最終的な高品質の出力を生成する前に、構成を調整するための中間的な「思考画像」（バックエンドで表示されるが、課金されない）を生成します。
-- **最大 14 枚の参照画像**: 最大 14 枚の参照画像を組み合わせて最終的な画像を生成できるようになりました。
-- **新しいアスペクト比**: Gemini 3.1 Flash Lite Image に `1:1`、`3:2`、`2:3`、`3:4`、`4:3`、`4:5`、`5:4`、`9:16`、`16:9`、`21:9` の[アスペクト比](#aspect_ratios_and_image_size)が追加されました。
+- **إخراج بدقة عالية**: إمكانات مضمّنة لإنشاء صور بدقة 1K و2K و4K
+  - يضيف **Gemini 3.1 Flash Image** درجة الدقة الأصغر 512 بكسل (0.5K).
+  - لا يتيح **Gemini 3.1 Flash Lite Image** سوى دقة 1K.
+- **تكنولوجيا متقدمة لعرض النصوص**: يمكنها إنشاء نصوص واضحة ومصمّمة بشكل أنيق للرسومات البيانية والقوائم والمخططات ومواد التسويق.
+- **تحديد المصدر من خلال "بحث Search"**: يمكن للنموذج استخدام "بحث Google" كأداة للتحقّق من الحقائق وإنشاء صور استنادًا إلى بيانات في الوقت الفعلي (مثل خرائط الطقس الحالية، والرسومات البيانية للأسهم، والأحداث الأخيرة).
+  - **غير متوافق مع نموذج الصور Gemini 3.1 Flash Lite.**
+  - تضيف **صورة Gemini 3.1 Flash** إمكانية دمج ميزة &quot;الاستناد إلى مصادر&quot; من &quot;بحث صور Google&quot; مع &quot;بحث الويب&quot;.
+- **وضع التفكير**: يستخدم النموذج عملية "تفكير" للاستدلال على الطلبات المعقّدة. تنشئ هذه الأداة "صورًا مؤقتة" (تظهر في الخلفية ولكن لا يتم تحصيل رسوم مقابلها) لتحسين التركيب قبل إنتاج الناتج النهائي عالي الجودة.
+- **ما يصل إلى 14 صورة مرجعية**: يمكنك الآن دمج ما يصل إلى 14 صورة مرجعية لإنشاء الصورة النهائية.
+- **نسب عرض إلى ارتفاع جديدة**: يضيف Gemini 3.1 Flash Lite Image `1:1` و`3:2` و`2:3` و`3:4` و`4:3` و`4:5` و`5:4` و`9:16` و`16:9` و`21:9` [نسب عرض إلى ارتفاع](#aspect_ratios_and_image_size).
 
-### 参照画像を 14 枚まで使用する
+### استخدام ما يصل إلى 14 صورة مرجعية
 
-Gemini 3 画像モデルでは、最大 14 個の参照画像を組み合わせることができます。これらの 14 枚の画像には、次のものを含めることができます。
+تتيح لك نماذج الصور في Gemini 3 دمج ما يصل إلى 14 صورة مرجعية. يمكن أن تتضمّن هذه الصور الـ 14 ما يلي:
 
-| Gemini 3.1 Flash Lite Image | Gemini 3.1 Flash Image | Gemini 3 Pro Image |
+| Gemini 3.1 Flash Lite Image | صورة Gemini 3.1 Flash | صورة Gemini 3 Pro |
 | --- | --- | --- |
-| 最終画像に含める忠実度の高いオブジェクトの画像（最大 14 枚） | 最終画像に含める忠実度の高いオブジェクトの画像（最大 10 枚） | 最終画像に含める忠実度の高いオブジェクトの画像（最大 6 枚） |
-| なし | キャラクターの一貫性を維持するためのキャラクターの画像（最大 4 枚） | キャラクターの一貫性を維持するためのキャラクターの画像（最大 5 枚） |
-| なし | なし | スタイルの参照用として使用する画像（3 枚まで） |
+| ما يصل إلى 14 صورة لأشياء بدقة عالية لتضمينها في الصورة النهائية | ما يصل إلى 10 صور لكائنات عالية الدقة لتضمينها في الصورة النهائية | ما يصل إلى 6 صور لكائنات عالية الدقة لتضمينها في الصورة النهائية |
+| لا ينطبق | ما يصل إلى 4 صور لشخصيات للحفاظ على الاتساق في مظهر الشخصية | ما يصل إلى 5 صور للشخصيات للحفاظ على اتساقها |
+| لا ينطبق | لا ينطبق | ما يصل إلى 3 صور لاستخدامها كصور مرجعية للنمط |
 
 ### Python
 
@@ -571,21 +711,77 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.interactions.Content;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.ImageResponseFormat;
+import com.google.genai.gaos.models.interactions.ImageResponseFormatAspectRatio;
+import com.google.genai.gaos.models.interactions.ImageResponseFormatImageSize;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
+
+String prompt = "An office group photo of these people, they are making funny faces.";
+
+byte[] imageBytes = Files.readAllBytes(Paths.get("/path/to/person.png"));
+String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
+Content textContent = TextContent.builder().text(prompt).build();
+Content imageContent =
+    ImageContent.builder()
+        .data(base64Image)
+        .mimeType(ImageContentMimeType.IMAGE_PNG)
+        .build();
+
+List<Content> contents =
+    Arrays.asList(
+        textContent,
+        imageContent,
+        imageContent,
+        imageContent,
+        imageContent,
+        imageContent);
+
+CreateModelInteractionResponseFormat format =
+    CreateModelInteractionResponseFormat.of(
+        ResponseFormat.of(
+            ImageResponseFormat.builder()
+                .aspectRatio(ImageResponseFormatAspectRatio.of("5:4"))
+                .imageSize(ImageResponseFormatImageSize.TWO_K)
+                .build()));
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("An office group photo of these people, they are making funny faces."))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(InteractionsInput.ofContent(contents))
+        .responseFormat(format)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.outputImage().isPresent()
+    && interaction.outputImage().get().data().isPresent()) {
+  byte[] outBytes =
+      Base64.getDecoder().decode(interaction.outputImage().get().data().get());
+  Files.write(Paths.get("office.png"), outBytes);
+}
 ```
 
 ### REST
@@ -613,15 +809,15 @@ curl -s -X POST \
     }"
 ```
 
-![AI 生成のオフィス グループ写真](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=ja)
+![صورة جماعية للمكتب من إنشاء الذكاء الاصطناعي](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=ar)
 
-AI 生成のオフィス グループ写真
+صورة جماعية للمكتب من إنشاء الذكاء الاصطناعي
 
-### Google 検索によるグラウンディング
+### تحديد المصدر من خلال "بحث Search"
 
-[Google 検索ツール](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)を使用して、天気予報、株価チャート、最近の出来事などのリアルタイム情報に基づいて画像を生成します。
+استخدِم [أداة &quot;بحث Google&quot;](https://ai.google.dev/gemini-api/docs/google-search?hl=ar) لإنشاء صور استنادًا إلى معلومات في الوقت الفعلي، مثل توقعات الطقس أو الرسومات البيانية للأسهم أو الأحداث الأخيرة.
 
-Google 検索によるグラウンディングを画像生成で使用する場合、画像ベースの検索結果は生成モデルに渡されず、レスポンスから除外されます（[Google 画像検索によるグラウンディング](#image-search)を参照）。
+يُرجى العِلم أنّه عند استخدام ميزة Grounding with Google Search مع إنشاء الصور، لا يتم تمرير نتائج البحث المستندة إلى الصور إلى نموذج الإنشاء، ويتم استبعادها من الردّ (راجِع [Grounding with Google Image Search](#image-search)).
 
 ### Python
 
@@ -677,21 +873,56 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.GoogleSearch;
+import com.google.genai.gaos.models.interactions.ImageResponseFormat;
+import com.google.genai.gaos.models.interactions.ImageResponseFormatAspectRatio;
+import com.google.genai.gaos.models.interactions.ImageResponseFormatMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
+
+String prompt =
+    "Visualize the current weather forecast for the next 5 days in San Francisco as a clean, modern weather chart. Add a visual on what I should wear each day";
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("Visualize the current weather forecast for the next 5 days in San Francisco as a clean, modern weather chart. Add a visual on what I should wear each day"))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+CreateModelInteractionResponseFormat format =
+    CreateModelInteractionResponseFormat.of(
+        ResponseFormat.of(
+            ImageResponseFormat.builder()
+                .mimeType(ImageResponseFormatMimeType.IMAGE_JPEG)
+                .aspectRatio(ImageResponseFormatAspectRatio.of("16:9"))
+                .build()));
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(InteractionsInput.of(prompt))
+        .tools(Arrays.asList(new GoogleSearch()))
+        .responseFormat(format)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.outputImage().isPresent()
+    && interaction.outputImage().get().data().isPresent()) {
+  byte[] imageBytes =
+      Base64.getDecoder().decode(interaction.outputImage().get().data().get());
+  Files.write(Paths.get("weather.png"), imageBytes);
+}
 ```
 
 ### REST
@@ -715,20 +946,21 @@ curl -s -X POST \
   }'
 ```
 
-![サンフランシスコの 5 日間の天気予報の AI 生成グラフ](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=ja)
+![مخطط بياني للطقس في سان فرانسيسكو لمدة خمسة أيام من إنشاء الذكاء الاصطناعي](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=ar)
 
-サンフランシスコの 5 日間の天気予報の AI 生成グラフ
+مخطط الطقس لمدة خمسة أيام في سان فرانسيسكو من إنشاء الذكاء الاصطناعي
 
-レスポンスには、`google_search_call` ステップと `google_search_result` ステップ、テキスト ステップのインライン `url_citation` アノテーションが含まれます。
+تتضمّن الاستجابة الخطوتَين `google_search_call` و`google_search_result`، بالإضافة إلى التعليقات التوضيحية `url_citation` المضمَّنة في خطوة النص:
 
-- **`google_search_result`**: UI で検索候補をレンダリングするための HTML スニペットである `search_suggestions` を含みます。
-- **`url_citation` アノテーション**: テキスト ステップのインライン引用。回答の一部をウェブソースにリンクします。
+- **`google_search_result`**: يحتوي على `search_suggestions`، وهو مقتطف HTML
+  لعرض اقتراحات البحث في واجهة المستخدم.
+- **`url_citation` تعليقات توضيحية**: إشارات مضمّنة في خطوة النص تربط أجزاء من الرد بمصادرها على الويب.
 
-### 画像に対する Google 検索によるグラウンディング（3.1 Flash）
+### تحديد المصدر باستخدام "بحث Google" للصور (الإصدار 3.1 من Flash)
 
-Google 画像検索によるグラウンディングを使用すると、モデルは Google 画像検索で取得したウェブ画像を画像生成の視覚的コンテキストとして使用できます。画像検索は、既存の Google 検索によるグラウンディング ツール内の新しい検索タイプで、標準の[ウェブ検索](#use-with-grounding)とともに機能します。
+تتيح ميزة "الاستناد إلى بيانات خارجية" من خلال "صور بحث Google" للنماذج استخدام صور الويب التي يتم استرجاعها عبر "صور بحث Google" كسياق مرئي لإنشاء الصور. &quot;البحث بالصور&quot; هو نوع بحث جديد ضمن أداة &quot;تحديد المصدر من خلال &quot;بحث Search&quot;&quot; الحالية، ويعمل إلى جانب [بحث الويب](#use-with-grounding) العادي.
 
-画像検索を有効にするには、API リクエストで `google_search` ツールを構成し、`search_types` 配列内で `image_search` を指定します。画像検索は、単独で使用することも、ウェブ検索と組み合わせて使用することもできます。
+لتفعيل ميزة "البحث بالصور"، اضبط أداة `google_search` في طلب بيانات من واجهة برمجة التطبيقات وحدِّد `image_search` ضمن مصفوفة `search_types`. يمكن استخدام &quot;بحث الصور&quot; بشكل مستقل أو مع &quot;بحث الويب&quot;.
 
 ### Python
 
@@ -768,21 +1000,39 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.GoogleSearch;
+import com.google.genai.gaos.models.interactions.GoogleSearchSearchType;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("A detailed painting of a Timareta butterfly resting on a flower"))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+GoogleSearch searchTool =
+    GoogleSearch.builder()
+        .searchTypes(
+            Arrays.asList(
+                GoogleSearchSearchType.WEB_SEARCH, GoogleSearchSearchType.IMAGE_SEARCH))
+        .build();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(
+            InteractionsInput.of(
+                "A detailed painting of a Timareta butterfly resting on a flower"))
+        .tools(Arrays.asList(searchTool))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
 ### REST
@@ -799,24 +1049,25 @@ curl -s -X POST \
   }'
 ```
 
-**表示の要件**
+**متطلبات العرض**
 
-Google 検索によるグラウンディング内で画像検索を使用する場合は、`google_search_result` ステップの `search_suggestions` を表示する必要があります。利用要件の詳細は、[利用規約](https://ai.google.dev/gemini-api/terms?hl=ja#grounding-with-google-search)をご覧ください。
+عند استخدام "البحث بالصور" ضمن "الاستناد إلى معلومات من بحث Google"، يجب عرض `search_suggestions` من الخطوة `google_search_result`. يمكنك الاطّلاع على متطلبات الاستخدام الكاملة في [بنود الخدمة](https://ai.google.dev/gemini-api/terms?hl=ar#grounding-with-google-search).
 
-**レスポンス**
+**الردّ**
 
-画像検索を使用したグラウンディングされたレスポンスの場合、API はレスポンス ステップの一部としてインライン引用と帰属メタデータを返します。
+بالنسبة إلى الردود المستندة إلى مصادر باستخدام &quot;البحث بالصور&quot;، تعرض واجهة برمجة التطبيقات اقتباسات مضمّنة وبيانات وصفية خاصة بتحديد المصدر كجزء من خطوات الرد:
 
-- **`url_citation` アノテーション**: `model_output` 内のテキスト コンテンツ ブロックのインライン引用。生成されたコンテンツをそのソースにリンクします。
-- **`google_search_result`**: UI で検索候補をレンダリングするための HTML スニペットである `search_suggestions` を含みます。
+- **`url_citation` التعليقات التوضيحية**: اقتباسات مضمّنة في فقرة المحتوى النصي
+  ضمن `model_output`، تربط المحتوى الذي تم إنشاؤه بمصدره.
+- **`google_search_result`**: يحتوي على `search_suggestions`، وهو مقتطف HTML لعرض اقتراحات البحث في واجهة المستخدم.
 
-### 動画から画像への生成（3.1 Flash と 3.1 Flash Lite）
+### إنشاء صور من فيديوهات (‫3.1 Flash و3.1 Flash Lite)
 
-動画から画像への生成では、動画のコンテキストをマルチモーダル参照として使用して、新しい画像を生成できます。この機能は、高品質の動画サムネイル、映画のポスター、概要のインフォグラフィック、動画のシーンからインスピレーションを得た新しいアートワークの作成に役立ちます。
+تتيح لك ميزة "إنشاء صور من فيديوهات" إنشاء صور جديدة باستخدام سياق الفيديو كمرجع متعدد الوسائط. وهي مفيدة لإنشاء صور مصغّرة عالية الجودة للفيديوهات، أو ملصقات سينمائية، أو رسومات بيانية تلخيصية، أو أعمال فنية جديدة مستوحاة من مشهد فيديو.
 
-生成中、モデルはコンテキスト内の動画フレームを分析してビジュアル テーマとキーイベントを抽出し、テキスト プロンプトとともに使用して出力画像を合成します。
+أثناء عملية الإنشاء، يحلّل النموذج إطارات الفيديو في سياقها لاستخراج المواضيع المرئية والأحداث الرئيسية، ثم يستخدمها مع الطلب النصي لإنشاء الصورة الناتجة.
 
-API リクエストで公開 [YouTube URL](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja#youtube) を直接渡すか、[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja) を使用してローカル動画ファイルをアップロードできます。
+يمكنك تمرير [عناوين URL علنية على YouTube](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ar#youtube) مباشرةً في طلب بيانات من واجهة برمجة التطبيقات أو تحميل ملفات فيديو محلية باستخدام [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ar).
 
 ### Python
 
@@ -895,21 +1146,84 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.interactions.Content;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageResponseFormat;
+import com.google.genai.gaos.models.interactions.ImageResponseFormatAspectRatio;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.interactions.VideoContent;
+import com.google.genai.gaos.models.interactions.VideoContentMimeType;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("Generate a poster image that captures the key themes of this video."))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+Content videoContent =
+    VideoContent.builder()
+        .uri("https://www.youtube.com/watch?v=UTdfxFyOQTI")
+        .mimeType(VideoContentMimeType.VIDEO_MP4)
+        .build();
+Content textContent =
+    TextContent.builder()
+        .text("Generate a poster image that captures the key themes of this video.")
+        .build();
+
+List<Content> contents = Arrays.asList(videoContent, textContent);
+
+CreateModelInteractionResponseFormat format =
+    CreateModelInteractionResponseFormat.of(
+        ResponseFormat.of(
+            ImageResponseFormat.builder()
+                .aspectRatio(ImageResponseFormatAspectRatio.of("16:9"))
+                .build()));
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(InteractionsInput.ofContent(contents))
+        .responseFormat(format)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content block : outputStep.content().get()) {
+          if (block instanceof TextContent) {
+            System.out.println(((TextContent) block).text().orElse(""));
+          } else if (block instanceof ImageContent) {
+            ImageContent img = (ImageContent) block;
+            if (img.data().isPresent()) {
+              byte[] imgBytes = Base64.getDecoder().decode(img.data().get());
+              Files.write(Paths.get("video_poster.png"), imgBytes);
+              System.out.println("Image saved as video_poster.png");
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
 ### REST
@@ -939,15 +1253,15 @@ curl -s -X POST \
   }'
 ```
 
-![YouTube 動画から AI が生成したインフォグラフィック](https://ai.google.dev/static/gemini-api/docs/images/youtube_infographics.png?hl=ja)
+![مخطّط بياني من إنشاء الذكاء الاصطناعي من فيديو على YouTube](https://ai.google.dev/static/gemini-api/docs/images/youtube_infographics.png?hl=ar)
 
-YouTube 動画から生成された AI インフォグラフィック
+مخطط معلومات بياني من إنشاء الذكاء الاصطناعي من فيديو على YouTube
 
-### 最大 4K 解像度の画像を生成する
+### إنشاء صور بدقة تصل إلى 4K
 
-Gemini 3 画像モデルはデフォルトで 1K 画像を生成しますが、2K、4K、512 ピクセル（0.5K）（Gemini 3.1 Flash Image のみ）の画像を出力することもできます。高解像度のアセットを生成するには、`response_format` で `image_size` を指定します。
+تنشئ نماذج الصور في Gemini 3 صورًا بدقة 1000 بكسل تلقائيًا، ولكن يمكنها أيضًا إنشاء صور بدقة 2000 بكسل و4000 بكسل و512 بكسل (05.K) (Gemini 3.1 Flash Image فقط). لإنشاء مواد عرض بدقة أعلى، حدِّد `image_size` في `response_format`.
 
-大文字の「K」を使用する必要があります（例: 512px（05.K）、1K、2K、4K）。小文字のパラメータ（1k など）は拒否されます。
+يجب استخدام الحرف "K" الكبير (مثلاً 512 بكسل (05.K)، و1K، و2K، و4K). سيتم رفض المَعلمات التي تتضمّن أحرفًا صغيرة (مثل 1k).
 
 ### Python
 
@@ -1007,21 +1321,57 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.ImageResponseFormat;
+import com.google.genai.gaos.models.interactions.ImageResponseFormatAspectRatio;
+import com.google.genai.gaos.models.interactions.ImageResponseFormatImageSize;
+import com.google.genai.gaos.models.interactions.ImageResponseFormatMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
+
+String prompt =
+    "Da Vinci style anatomical sketch of a dissected Monarch butterfly. Detailed drawings of the head, wings, and legs on textured parchment with notes in English.";
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("Da Vinci style anatomical sketch of a dissected Monarch butterfly. Detailed drawings of the head, wings, and legs on textured parchment with notes in English."))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+CreateModelInteractionResponseFormat format =
+    CreateModelInteractionResponseFormat.of(
+        ResponseFormat.of(
+            ImageResponseFormat.builder()
+                .mimeType(ImageResponseFormatMimeType.IMAGE_JPEG)
+                .aspectRatio(ImageResponseFormatAspectRatio.of("1:1"))
+                .imageSize(ImageResponseFormatImageSize.ONE_K)
+                .build()));
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(InteractionsInput.of(prompt))
+        .responseFormat(format)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+
+if (interaction.outputImage().isPresent()
+    && interaction.outputImage().get().data().isPresent()) {
+  byte[] imageBytes =
+      Base64.getDecoder().decode(interaction.outputImage().get().data().get());
+  Files.write(Paths.get("butterfly.png"), imageBytes);
+}
 ```
 
 ### REST
@@ -1043,19 +1393,19 @@ curl -s -X POST \
   }'
 ```
 
-このプロンプトから生成された画像の例を次に示します。
+في ما يلي مثال على صورة تم إنشاؤها من خلال هذا الطلب:
 
-![解剖されたオオカバマダラをダ ヴィンチ風に描いた AI 生成の解剖図。](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=ja)
+![رسم تشريحي بأسلوب &quot;دافنشي&quot; من إنشاء الذكاء الاصطناعي لفراشة ملكية تم تشريحها](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=ar)
 
-解剖されたオオカバマダラのダ・ヴィンチ風の解剖図を AI が生成した画像。
+رسم تشريحي من إنشاء الذكاء الاصطناعي بأسلوب دافنشي لفراشة ملكية تم تشريحها
 
-### 思考プロセス
+### عملية التفكير
 
-Gemini 3 画像モデルは、複雑なプロンプトに推論プロセス（「思考」）を使用する思考モデルです。この機能はデフォルトで有効になっており、API で無効にすることはできません。思考プロセスの詳細については、[Gemini の思考](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)ガイドをご覧ください。
+نماذج الصور في Gemini 3 هي نماذج مُفكِّرة تستخدم عملية استدلال ("التفكير") للتعامل مع الطلبات المعقّدة. هذه الميزة مفعّلة تلقائيًا ولا يمكن إيقافها في واجهة برمجة التطبيقات. لمزيد من المعلومات حول عملية التفكير، يُرجى الاطّلاع على دليل [تفكير Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=ar).
 
-このモデルは、構成とロジックをテストするために最大 2 つの中間画像を生成します。Thinking の最後の画像は、最終的にレンダリングされた画像でもあります。
+ينشئ النموذج ما يصل إلى صورتَين مؤقتتَين لاختبار التركيب والمنطق. الصورة الأخيرة ضمن "جارٍ التفكير" هي أيضًا الصورة النهائية المعروضة.
 
-最終的な画像が生成されるまでの思考を確認できます。
+يمكنك الاطّلاع على الأفكار التي أدّت إلى إنتاج الصورة النهائية.
 
 ### Python
 
@@ -1087,28 +1437,65 @@ for (const step of interaction.steps) {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.interactions.ThoughtStep;
+import com.google.genai.gaos.models.interactions.ThoughtSummaryContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.8-flash"))
-    .input(InteractionsInput.of("Image operation"))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(
+            InteractionsInput.of(
+                "A futuristic city built inside a giant glass bottle floating in space"))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ThoughtStep) {
+      ThoughtStep thoughtStep = (ThoughtStep) step;
+      if (thoughtStep.summary().isPresent()) {
+        for (ThoughtSummaryContent contentBlock : thoughtStep.summary().get()) {
+          if (contentBlock instanceof TextContent) {
+            System.out.println(((TextContent) contentBlock).text().orElse(""));
+          } else if (contentBlock instanceof ImageContent) {
+            ImageContent img = (ImageContent) contentBlock;
+            if (img.data().isPresent()) {
+              byte[] imgBytes = Base64.getDecoder().decode(img.data().get());
+              Files.write(Paths.get("thought_image.png"), imgBytes);
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
-#### インターリーブされたテキストと画像
+#### النصوص والصور المتداخلة
 
-標準の画像生成モデルは画像のみを出力しますが、一部の高度な Gemini 3 モデル（`gemini-3-pro-image` など）は、テキスト ブロックとイラストの両方を含むストーリーや説明ガイドなどのインターリーブ コンテンツを同じレスポンス内で生成できます。
+في حين أنّ نماذج إنشاء الصور العادية تعرض صورًا فقط، يمكن لبعض نماذج Gemini 3 المتقدّمة (مثل `gemini-3-pro-image`) إنشاء محتوى متداخل، مثل القصص أو الأدلة الإرشادية التي تحتوي على كل من فقرات نصية ورسوم توضيحية ضمن الرد نفسه.
 
-出力は複雑でインターリーブされているため、`.output_image` や `.output_text` などの便利なプロパティでは完全なシーケンスをキャプチャできません。インターリーブされたコンテンツにアクセスして保存するには、`steps` を手動で反復処理する必要があります。
+بما أنّ الناتج معقّد ومتداخل، لن تتمكّن خصائص الراحة، مثل
+`.output_image` أو `.output_text`، من التقاط التسلسل الكامل. للوصول إلى المحتوى المتداخل وحفظه، يجب تكرار `steps` يدويًا:
 
 ### Python
 
@@ -1158,26 +1545,67 @@ for (const step of interaction.steps) {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.interactions.Content;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3-pro-image"))
-    .input(InteractionsInput.of("Write the story of the lifecycle of a monarch butterfly, interleave illustrations"))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3-pro-image"))
+        .input(
+            InteractionsInput.of(
+                "Write the story of the lifecycle of a monarch butterfly, interleave illustrations"))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+int imageCounter = 1;
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content contentBlock : outputStep.content().get()) {
+          if (contentBlock instanceof TextContent) {
+            System.out.println(((TextContent) contentBlock).text().orElse(""));
+          } else if (contentBlock instanceof ImageContent) {
+            ImageContent img = (ImageContent) contentBlock;
+            if (img.data().isPresent()) {
+              String filename = String.format("butterfly_lifecycle_%d.png", imageCounter);
+              byte[] imgBytes = Base64.getDecoder().decode(img.data().get());
+              Files.write(Paths.get(filename), imgBytes);
+              System.out.printf("%n[Saved illustration: %s]%n", filename);
+              imageCounter++;
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
-#### 思考レベルの制御
+#### التحكّم في مستويات التفكير
 
-Gemini 3.1 Flash Image と Gemini 3.1 Flash Lite Image を使用すると、モデルが使用する思考の量を制御して、品質とレイテンシのバランスを取ることができます。デフォルトの `thinking_level` は `minimal` で、サポートされているレベルは `minimal` と `high` です。
+باستخدام Gemini 3.1 Flash Image وGemini 3.1 Flash Lite Image، يمكنك التحكّم في مقدار التفكير الذي يستخدمه النموذج لتحقيق التوازن بين الجودة ووقت الاستجابة. القيمة التلقائية
+`thinking_level` هي `minimal`، والمستويات المتاحة هي `minimal` و`high`.
 
 ### Python
 
@@ -1226,21 +1654,43 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.GenerationConfig;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ThinkingLevel;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("A futuristic city built inside a giant glass bottle floating in space"))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(
+            InteractionsInput.of(
+                "A futuristic city built inside a giant glass bottle floating in space"))
+        .generationConfig(GenerationConfig.builder().thinkingLevel(ThinkingLevel.HIGH).build())
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+
+if (interaction.outputImage().isPresent()
+    && interaction.outputImage().get().data().isPresent()) {
+  byte[] imageBytes =
+      Base64.getDecoder().decode(interaction.outputImage().get().data().get());
+  Files.write(Paths.get("futuristic_city.png"), imageBytes);
+}
 ```
 
 ### REST
@@ -1259,32 +1709,33 @@ curl -s -X POST \
   }'
 ```
 
-思考モデルでは、思考プロセスを表示するかどうかに関係なく、デフォルトで常に思考プロセスが行われるため、思考トークンはデフォルトで課金されます。
+يُرجى العِلم أنّه يتم تلقائيًا تحصيل رسوم الرموز المميزة الخاصة بالتفكير من نماذج التفكير، لأنّ
+[عملية التفكير](#thinking-process) تحدث تلقائيًا دائمًا سواء اطّلعت على العملية أم لا.
 
-## その他の画像生成モード
+## أوضاع أخرى لإنشاء الصور
 
-ほとんどのユースケースでは Nano Banana 画像生成モデルが推奨されますが、専用の画像生成モデルを試すこともできます。
+على الرغم من أنّ نماذج إنشاء الصور في Nano Banana يُنصح بها لمعظم حالات الاستخدام، يمكنك أيضًا استكشاف نماذج مخصّصة لإنشاء الصور:
 
-- **[Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=ja)**: 高品質の画像を生成するために最適化された Google のテキスト画像変換モデル。
-- **[Veo](https://ai.google.dev/gemini-api/docs/video?hl=ja)**: Google の動画生成モデル。
+- **Imagen**: نماذج Google القديمة لتحويل النص إلى صورة (تم إيقافها).
+- ‫**[Veo](https://ai.google.dev/gemini-api/docs/video?hl=ar)**: نموذج إنشاء الفيديوهات من Google
 
-## 画像をバッチで生成する
+## إنشاء صور بشكل مجمّع
 
-このページで説明する画像生成機能はすべて、[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja#image-generation) を使用してバッチジョブとして実行することもできます。これは、多数の画像を生成する必要がある場合に最適です。最大 24 時間のターンアラウンドと引き換えに、レート上限が高くなります。
+يمكن أيضًا تنفيذ جميع إمكانات إنشاء الصور الموضّحة في هذه الصفحة كمهام مجمّعة باستخدام [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar#image-generation)، وهو أمر مثالي إذا كنت بحاجة إلى إنشاء العديد من الصور.ستحصل على حدود معدّل أعلى مقابل مدة تنفيذ تصل إلى 24 ساعة.
 
-## プロンプト ガイドと戦略
+## دليل واستراتيجيات كتابة الطلبات
 
-このセクションでは、一般的な画像生成と編集のワークフローのプロンプトの例とテンプレートを示します。各例には、再利用可能なテンプレートと Interactions API のサンプル プロンプトが含まれています。
+يقدّم هذا القسم أمثلة على الطلبات ونماذج لعمليات إنشاء الصور وتعديلها الشائعة. يتضمّن كل مثال نموذجًا يمكن إعادة استخدامه وطلبًا نموذجيًا لواجهة برمجة التطبيقات Interactions API.
 
-### 画像を生成するためのプロンプト
+### طلبات إنشاء الصور
 
-次の例は、テキスト プロンプトを使用してさまざまな種類の画像を生成する方法を示しています。
+توضّح الأمثلة التالية كيفية استخدام طلبات نصية لإنشاء أنواع مختلفة من الصور.
 
-#### 1. フォトリアリスティックなシーン
+#### 1. مشاهد واقعية
 
-シーンを詳細に描写します。プロンプトが具体的であるほど、結果をより細かく制御できます。
+قدِّم وصفًا تفصيليًا لمشهد. كلّما كانت التفاصيل أكثر دقة، زادت إمكانية التحكّم في النتائج.
 
-### テンプレート
+### نموذج
 
 ```
 A photorealistic [type of shot] of a [subject description] in a [setting
@@ -1292,7 +1743,7 @@ description]. [Description of the light]. Shot from a [camera angle]
 with a [lens type].
 ```
 
-### プロンプト
+### الطلب
 
 ```
 A photorealistic wide-angle shot of a vibrant coral reef teeming with tropical fish. Crystal-clear turquoise water with sunbeams filtering down from the surface, illuminating a sea turtle gliding gracefully over the coral. Shot from a low perspective with a wide-angle lens. Aspect ratio 16:9.
@@ -1356,21 +1807,56 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.ImageResponseFormat;
+import com.google.genai.gaos.models.interactions.ImageResponseFormatAspectRatio;
+import com.google.genai.gaos.models.interactions.ImageResponseFormatMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("A photorealistic wide-angle shot of a vibrant coral reef teeming with tropical fish. Crystal-clear turquoise water with sunbeams filtering down from the surface, illuminating a sea turtle gliding gracefully over the coral. Shot from a low perspective with a wide-angle lens. Aspect ratio 16:9."))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+CreateModelInteractionResponseFormat format =
+    CreateModelInteractionResponseFormat.of(
+        Arrays.asList(
+            ResponseFormat.of(
+                ImageResponseFormat.builder()
+                    .mimeType(ImageResponseFormatMimeType.IMAGE_JPEG)
+                    .aspectRatio(ImageResponseFormatAspectRatio.of("16:9"))
+                    .build())));
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(
+            InteractionsInput.of(
+                "A photorealistic wide-angle shot of a vibrant coral reef teeming with tropical fish. Crystal-clear turquoise water with sunbeams filtering down from the surface, illuminating a sea turtle gliding gracefully over the coral. Shot from a low perspective with a wide-angle lens. Aspect ratio 16:9."))
+        .responseFormat(format)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+
+if (interaction.outputImage().isPresent()
+    && interaction.outputImage().get().data().isPresent()) {
+  byte[] imageBytes =
+      Base64.getDecoder().decode(interaction.outputImage().get().data().get());
+  Files.write(Paths.get("coral_reef.png"), imageBytes);
+}
 ```
 
 ### REST
@@ -1391,11 +1877,11 @@ curl -s -X POST \
   }'
 ```
 
-#### 2. スタイルを適用したイラストとステッカー
+#### 2. رسومات توضيحية وملصقات ذات تنميط
 
-芸術的なスタイル、主題、媒体について説明します。一貫した結果を得るために、視覚的な詳細（太い線、色など）を具体的に指定します。
+قدِّم وصفًا للأسلوب الفني والموضوع والمادة. يجب أن تكون محددًا بشأن التفاصيل المرئية (الخطوط الغامقة والألوان وما إلى ذلك) للحصول على نتائج متسقة.
 
-### テンプレート
+### نموذج
 
 ```
 A [style] of a [subject, with details about accessories or actions]
@@ -1403,7 +1889,7 @@ doing [activity]. The design features [visual qualities, e.g., bold outlines,
 cel-shading, etc.] and [color/background preference].
 ```
 
-### プロンプト
+### الطلب
 
 ```
 A kawaii-style sticker of a happy red panda wearing a tiny bamboo hat. It's munching on a green bamboo leaf. The design features bold, clean outlines, simple cel-shading, and a vibrant color palette. The background must be white.
@@ -1462,21 +1948,57 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.interactions.Content;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("A kawaii-style sticker of a happy red panda wearing a tiny bamboo hat. It"))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(
+            InteractionsInput.of(
+                "A kawaii-style sticker of a happy red panda wearing a tiny bamboo hat. It's munching on a green bamboo leaf. The design features bold, clean outlines, simple cel-shading, and a vibrant color palette. The background must be white."))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content contentBlock : outputStep.content().get()) {
+          if (contentBlock instanceof TextContent) {
+            System.out.println(((TextContent) contentBlock).text().orElse(""));
+          } else if (contentBlock instanceof ImageContent) {
+            ImageContent img = (ImageContent) contentBlock;
+            if (img.data().isPresent()) {
+              byte[] imgBytes = Base64.getDecoder().decode(img.data().get());
+              Files.write(Paths.get("red_panda_sticker.png"), imgBytes);
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
 ### REST
@@ -1492,15 +2014,16 @@ curl -s -X POST \
   }'
 ```
 
-![赤い...](https://ai.google.dev/static/gemini-api/docs/images/red_panda_sticker.png?hl=ja)
+![ملصق بنمط &quot;كاواي&quot; لسمكة حمراء سعيدة...](https://ai.google.dev/static/gemini-api/docs/images/red_panda_sticker.png?hl=ar)
 
-幸せそうなレッサーパンダの kawaii スタイルのステッカー...
+ملصق على شكل باندا حمراء سعيدة بأسلوب كاواي...
 
-#### 3. 画像内の正確なテキスト
+#### 3- نص دقيق في الصور
 
-Gemini はテキストのレンダリングに優れています。テキスト、フォント スタイル（説明）、全体的なデザインを明確にします。Gemini 3 Pro Image を使用して、プロフェッショナルなアセットを制作します。
+يتفوّق Gemini في عرض النصوص. يجب أن يكون النص واضحًا، وأن يكون نمط الخط
+(وصفيًا)، وأن يكون التصميم العام واضحًا. استخدام Gemini 3 Pro Image لإنتاج أصول احترافية
 
-### テンプレート
+### نموذج
 
 ```
 Create a [image type] for [brand/concept] with the text "[text to render]"
@@ -1508,7 +2031,7 @@ in a [font style]. The design should be [style description], with a
 [color scheme].
 ```
 
-### プロンプト
+### الطلب
 
 ```
 Create a modern, minimalist logo for a coffee shop called 'The Daily Grind'. The text should be in a clean, bold, sans-serif font. The color scheme is black and white. Put the logo in a circle. Use a coffee bean in a clever way.
@@ -1569,21 +2092,69 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.interactions.Content;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageResponseFormat;
+import com.google.genai.gaos.models.interactions.ImageResponseFormatAspectRatio;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("Create a modern, minimalist logo for a coffee shop called "))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+CreateModelInteractionResponseFormat format =
+    CreateModelInteractionResponseFormat.of(
+        ResponseFormat.of(
+            ImageResponseFormat.builder()
+                .aspectRatio(ImageResponseFormatAspectRatio.of("1:1"))
+                .build()));
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(
+            InteractionsInput.of(
+                "Create a modern, minimalist logo for a coffee shop called 'The Daily Grind'. The text should be in a clean, bold, sans-serif font. The color scheme is black and white. Put the logo in a circle. Use a coffee bean in a clever way."))
+        .responseFormat(format)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content contentBlock : outputStep.content().get()) {
+          if (contentBlock instanceof TextContent) {
+            System.out.println(((TextContent) contentBlock).text().orElse(""));
+          } else if (contentBlock instanceof ImageContent) {
+            ImageContent img = (ImageContent) contentBlock;
+            if (img.data().isPresent()) {
+              byte[] imgBytes = Base64.getDecoder().decode(img.data().get());
+              Files.write(Paths.get("logo_example.jpg"), imgBytes);
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
 ### REST
@@ -1603,14 +2174,15 @@ curl -s -X POST \
   }'
 ```
 
-![「The Daily Grind」というコーヒー ショップのモダンでミニマルなロゴを作成して...](https://ai.google.dev/static/gemini-api/docs/images/logo_example.jpg?hl=ja)
-「The Daily Grind」というコーヒー ショップのモダンでミニマルなロゴを作成して...
+![أنشِئ شعارًا عصريًا وبسيطًا لمقهى اسمه &quot;The Daily Grind&quot;...](https://ai.google.dev/static/gemini-api/docs/images/logo_example.jpg?hl=ar)
 
-#### 4. 商品のモックアップと広告写真
+أريد إنشاء شعار عصري وبسيط لمقهى اسمه "The Daily Grind"...
 
-e コマース、広告、ブランディング用のクリーンでプロフェッショナルな商品ショットの作成に最適です。
+#### 4. نماذج المنتجات والتصوير الفوتوغرافي التجاري
 
-### テンプレート
+وهي مثالية لالتقاط صور منتجات احترافية وواضحة للتجارة الإلكترونية أو الإعلانات أو العلامات التجارية.
+
+### نموذج
 
 ```
 A high-resolution, studio-lit product photograph of a [product description]
@@ -1620,7 +2192,7 @@ a [angle type] to showcase [specific feature]. Ultra-realistic, with sharp
 focus on [key detail]. [Aspect ratio].
 ```
 
-### プロンプト
+### الطلب
 
 ```
 A high-resolution, studio-lit product photograph of a minimalist ceramic
@@ -1684,21 +2256,57 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.interactions.Content;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("A high-resolution, studio-lit product photograph of a minimalist ceramic coffee mug in matte black, presented on a polished concrete surface. The lighting is a three-point softbox setup designed to create soft, diffused highlights and eliminate harsh shadows. The camera angle is a slightly elevated 45-degree shot to showcase its clean lines. Ultra-realistic, with sharp focus on the steam rising from the coffee. Square image."))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(
+            InteractionsInput.of(
+                "A high-resolution, studio-lit product photograph of a minimalist ceramic coffee mug in matte black, presented on a polished concrete surface. The lighting is a three-point softbox setup designed to create soft, diffused highlights and eliminate harsh shadows. The camera angle is a slightly elevated 45-degree shot to showcase its clean lines. Ultra-realistic, with sharp focus on the steam rising from the coffee. Square image."))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content contentBlock : outputStep.content().get()) {
+          if (contentBlock instanceof TextContent) {
+            System.out.println(((TextContent) contentBlock).text().orElse(""));
+          } else if (contentBlock instanceof ImageContent) {
+            ImageContent img = (ImageContent) contentBlock;
+            if (img.data().isPresent()) {
+              byte[] imgBytes = Base64.getDecoder().decode(img.data().get());
+              Files.write(Paths.get("product_mockup.png"), imgBytes);
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
 ### REST
@@ -1714,15 +2322,15 @@ curl -s -X POST \
   }'
 ```
 
-![高解像度のスタジオ照明で撮影した商品写真。ミニマルなセラミック製コーヒー マグ...](https://ai.google.dev/static/gemini-api/docs/images/product_mockup.png?hl=ja)
+![صورة عالية الدقة لمنتج تم التقاطها في استوديو مضاء، وهي عبارة عن كوب قهوة سيراميك بسيط...](https://ai.google.dev/static/gemini-api/docs/images/product_mockup.png?hl=ar)
 
-ミニマルなセラミック製コーヒー マグの高解像度スタジオ撮影風の商品写真...
+صورة منتج عالية الدقة ومضاءة في استوديو، وهي عبارة عن كوب قهوة من السيراميك بتصميم بسيط...
 
-#### 5. ミニマルでネガティブ スペースを活かしたデザイン
+#### 5- التصميم البسيط والمساحة السالبة
 
-テキストを重ねて表示するウェブサイト、プレゼンテーション、マーケティング資料の背景の作成に最適です。
+وهي ممتازة لإنشاء خلفيات للمواقع الإلكترونية أو العروض التقديمية أو المواد التسويقية التي سيتم عرض النص فوقها.
 
-### テンプレート
+### نموذج
 
 ```
 A minimalist composition featuring a single [subject] positioned in the
@@ -1731,7 +2339,7 @@ A minimalist composition featuring a single [subject] positioned in the
 [Aspect ratio].
 ```
 
-### プロンプト
+### الطلب
 
 ```
 A minimalist composition featuring a single, delicate red maple leaf
@@ -1793,21 +2401,57 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.interactions.Content;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("A minimalist composition featuring a single, delicate red maple leaf positioned in the bottom-right of the frame. The background is a vast, empty off-white canvas, creating significant negative space for text. Soft, diffused lighting from the top left. Square image."))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(
+            InteractionsInput.of(
+                "A minimalist composition featuring a single, delicate red maple leaf positioned in the bottom-right of the frame. The background is a vast, empty off-white canvas, creating significant negative space for text. Soft, diffused lighting from the top left. Square image."))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content contentBlock : outputStep.content().get()) {
+          if (contentBlock instanceof TextContent) {
+            System.out.println(((TextContent) contentBlock).text().orElse(""));
+          } else if (contentBlock instanceof ImageContent) {
+            ImageContent img = (ImageContent) contentBlock;
+            if (img.data().isPresent()) {
+              byte[] imgBytes = Base64.getDecoder().decode(img.data().get());
+              Files.write(Paths.get("minimalist_design.png"), imgBytes);
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
 ### REST
@@ -1823,21 +2467,21 @@ curl -s -X POST \
   }'
 ```
 
-![1 枚の繊細な赤いカエデの葉をフィーチャーしたミニマルな構図...](https://ai.google.dev/static/gemini-api/docs/images/minimalist_design.png?hl=ja)
+![تصميم بسيط يعرض ورقة قيقب حمراء واحدة رقيقة...](https://ai.google.dev/static/gemini-api/docs/images/minimalist_design.png?hl=ar)
 
-1 枚の繊細な紅葉の葉をフィーチャーしたミニマリストの構図...
+صورة بسيطة تعرض ورقة قيقب حمراء واحدة رقيقة...
 
-#### 6. 連続したアート（コミック パネル / ストーリーボード）
+#### 6. الفن التسلسلي (لوحة الكتب المصوّرة / لوحة ترتيب الصور)
 
-キャラクターの一貫性とシーンの説明に基づいて、ビジュアル ストーリーテリング用のパネルを作成します。テキストの精度とストーリーテリング能力を高めるには、Gemini 3 Pro と Gemini 3.1 Flash Image でこれらのプロンプトを使用するのが最適です。
+تستند هذه الأداة إلى الاتساق في مظهر الشخصية ووصف المشهد لإنشاء لوحات لسرد القصص بشكل مرئي. للحصول على دقة عالية في النصوص وقدرة أفضل على سرد القصص، تعمل هذه الطلبات بشكل أفضل مع Gemini 3 Pro وGemini 3.1 Flash Image.
 
-### テンプレート
+### نموذج
 
 ```
 Make a 3 panel comic in a [style]. Put the character in a [type of scene].
 ```
 
-### プロンプト
+### الطلب
 
 ```
 Make a 3 panel comic in a gritty, noir art style with high-contrast black and white inks. Put the character in a humurous scene.
@@ -1921,21 +2565,72 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.interactions.Content;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("Make a 3 panel comic in a gritty, noir art style with high-contrast black and white inks. Put the character in a humurous scene."))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+byte[] imageBytes = Files.readAllBytes(Paths.get("/path/to/your/man_in_white_glasses.jpg"));
+String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+String textInput =
+    "Make a 3 panel comic in a gritty, noir art style with high-contrast black and white inks. Put the character in a humurous scene.";
+
+Content textContent = TextContent.builder().text(textInput).build();
+Content imageContent =
+    ImageContent.builder()
+        .data(base64Image)
+        .mimeType(ImageContentMimeType.IMAGE_JPEG)
+        .build();
+
+List<Content> contents = Arrays.asList(textContent, imageContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content contentBlock : outputStep.content().get()) {
+          if (contentBlock instanceof TextContent) {
+            System.out.println(((TextContent) contentBlock).text().orElse(""));
+          } else if (contentBlock instanceof ImageContent) {
+            ImageContent img = (ImageContent) contentBlock;
+            if (img.data().isPresent()) {
+              byte[] outBytes = Base64.getDecoder().decode(img.data().get());
+              Files.write(Paths.get("comic_panel.jpg"), outBytes);
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
 ### REST
@@ -1956,14 +2651,15 @@ curl -s -X POST \
 
 |  |  |
 | --- | --- |
-| 入力 | 出力 |
-| 白いメガネをかけた男性   入力画像 | ざらついたノワール アート スタイルの 3 コマ漫画を作成して...   ざらざらしたノワール アート スタイルの 3 コマ漫画を作成して... |
+| الإدخال | الناتج |
+| رجل يرتدي نظارات بيضاء   صورة الإدخال | أنشئ قصة مصوّرة من 3 مشاهد بأسلوب فني حادّ ومظلم...   أريد إنشاء كتاب مصوّر من 3 لوحات بأسلوب فني داكن ومثير... |
 
-#### 7. Google 検索によるグラウンディング
+#### 7. تحديد المصدر من خلال "بحث Search"
 
-Google 検索を使用して、最近の情報やリアルタイムの情報に基づいて画像を生成します。これは、ニュースや天気など、時間に敏感なトピックに役立ちます。
+استخدِم "بحث Google" لإنشاء صور استنادًا إلى معلومات حديثة أو في الوقت الفعلي.
+ويُعدّ ذلك مفيدًا للأخبار والطقس والمواضيع الأخرى التي تتطلّب عرض معلومات حديثة.
 
-### プロンプト
+### الطلب
 
 ```
 Make a simple but stylish graphic of last night's Arsenal game in the Champion's League
@@ -2028,21 +2724,72 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.interactions.Content;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.GoogleSearch;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageResponseFormat;
+import com.google.genai.gaos.models.interactions.ImageResponseFormatAspectRatio;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("Make a simple but stylish graphic of last night"))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+CreateModelInteractionResponseFormat format =
+    CreateModelInteractionResponseFormat.of(
+        ResponseFormat.of(
+            ImageResponseFormat.builder()
+                .aspectRatio(ImageResponseFormatAspectRatio.of("16:9"))
+                .build()));
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(
+            InteractionsInput.of(
+                "Make a simple but stylish graphic of last night's Arsenal game in the Champion's League"))
+        .tools(Arrays.asList(new GoogleSearch()))
+        .responseFormat(format)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content contentBlock : outputStep.content().get()) {
+          if (contentBlock instanceof TextContent) {
+            System.out.println(((TextContent) contentBlock).text().orElse(""));
+          } else if (contentBlock instanceof ImageContent) {
+            ImageContent img = (ImageContent) contentBlock;
+            if (img.data().isPresent()) {
+              byte[] imgBytes = Base64.getDecoder().decode(img.data().get());
+              Files.write(Paths.get("football-score.jpg"), imgBytes);
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
 ### REST
@@ -2063,19 +2810,19 @@ curl -s -X POST \
   }'
 ```
 
-![アーセナルのサッカーのスコアの AI 生成グラフィック](https://ai.google.dev/static/gemini-api/docs/images/football-score.jpg?hl=ja)
+![صورة من إنشاء الذكاء الاصطناعي لنتيجة مباراة كرة قدم لفريق &quot;آرسنال&quot;](https://ai.google.dev/static/gemini-api/docs/images/football-score.jpg?hl=ar)
 
-アーセナルのサッカーのスコアの AI 生成グラフィック
+صورة من إنشاء الذكاء الاصطناعي لنتيجة مباراة كرة قدم لنادي أرسنال
 
-### 画像を編集するためのプロンプト
+### طلبات تعديل الصور
 
-これらの例は、編集、構図、スタイル転送のテキスト プロンプトとともに画像を提供する方法を示しています。
+توضّح هذه الأمثلة كيفية تقديم صور إلى جانب طلباتك النصية لإجراء التعديل والتركيب ونقل الأنماط.
 
-#### 1. 要素の追加と削除
+#### 1. إضافة العناصر وإزالتها
 
-画像を提供し、変更内容を説明します。モデルは、元の画像のスタイル、照明、遠近法に一致します。
+قدِّم صورة واشرح التغيير المطلوب. سيتطابق النموذج مع نمط الصورة الأصلية وإضاءتها ومنظورها.
 
-### テンプレート
+### نموذج
 
 ```
 Using the provided image of [subject], please [add/remove/modify] [element]
@@ -2083,7 +2830,7 @@ to/from the scene. Ensure the change is [description of how the change should
 integrate].
 ```
 
-### プロンプト
+### الطلب
 
 ```
 "Using the provided image of my cat, please add a small, knitted wizard hat
@@ -2169,21 +2916,72 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.interactions.Content;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("Using the provided image of my cat, please add a small, knitted wizard hat on its head. Make it look like it"))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+byte[] imageBytes = Files.readAllBytes(Paths.get("/path/to/your/cat_photo.png"));
+String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+String textInput =
+    "Using the provided image of my cat, please add a small, knitted wizard hat on its head. Make it look like it's sitting comfortably and not falling off.";
+
+Content textContent = TextContent.builder().text(textInput).build();
+Content imageContent =
+    ImageContent.builder()
+        .data(base64Image)
+        .mimeType(ImageContentMimeType.IMAGE_PNG)
+        .build();
+
+List<Content> contents = Arrays.asList(textContent, imageContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content contentBlock : outputStep.content().get()) {
+          if (contentBlock instanceof TextContent) {
+            System.out.println(((TextContent) contentBlock).text().orElse(""));
+          } else if (contentBlock instanceof ImageContent) {
+            ImageContent img = (ImageContent) contentBlock;
+            if (img.data().isPresent()) {
+              byte[] outBytes = Base64.getDecoder().decode(img.data().get());
+              Files.write(Paths.get("cat_with_hat.png"), outBytes);
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
 ### REST
@@ -2204,14 +3002,14 @@ curl -s -X POST \
 
 |  |  |
 | --- | --- |
-| 入力 | 出力 |
-| ふわふわの茶色の猫のリアルな写真。   ふわふわの茶色の猫のリアルな写真... | 提供した猫の画像を使って、小さな編み物の魔法使いの帽子を追加してください。   提供された猫の画像を使用して、小さな編み物の魔法使いの帽子を追加してください... |
+| الإدخال | الناتج |
+| صورة واقعية لقطة ذات فرو ناعم بلون الزنجبيل   صورة واقعية لقطة برتقالية بفراء كثيف... | باستخدام صورة قطتي المرفقة، يُرجى إضافة قبعة ساحر صغيرة منسوجة...   استنادًا إلى الصورة المقدَّمة لقطتي، أرجو إضافة قبعة ساحر صغيرة منسوجة... |
 
-#### 2. インペイント（セマンティック マスク）
+#### 2. الطلاء (الإخفاء الدلالي)
 
-会話形式で「マスク」を定義して、画像の特定の部分を編集し、残りの部分はそのままにできます。
+تحديد "قناع" بشكل حواري لتعديل جزء معيّن من الصورة بدون التأثير في بقية الصورة
 
-### テンプレート
+### نموذج
 
 ```
 Using the provided image, change only the [specific element] to [new
@@ -2219,7 +3017,7 @@ element/description]. Keep everything else in the image exactly the same,
 preserving the original style, lighting, and composition.
 ```
 
-### プロンプト
+### الطلب
 
 ```
 "Using the provided image of a living room, change only the blue sofa to be
@@ -2305,21 +3103,72 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.interactions.Content;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("Using the provided image of a living room, change only the blue sofa to be a vintage, brown leather chesterfield sofa. Keep the rest of the room, including the pillows on the sofa and the lighting, unchanged."))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+byte[] imageBytes = Files.readAllBytes(Paths.get("/path/to/your/living_room.png"));
+String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+String textInput =
+    "Using the provided image of a living room, change only the blue sofa to be a vintage, brown leather chesterfield sofa. Keep the rest of the room, including the pillows on the sofa and the lighting, unchanged.";
+
+Content imageContent =
+    ImageContent.builder()
+        .data(base64Image)
+        .mimeType(ImageContentMimeType.IMAGE_PNG)
+        .build();
+Content textContent = TextContent.builder().text(textInput).build();
+
+List<Content> contents = Arrays.asList(imageContent, textContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content contentBlock : outputStep.content().get()) {
+          if (contentBlock instanceof TextContent) {
+            System.out.println(((TextContent) contentBlock).text().orElse(""));
+          } else if (contentBlock instanceof ImageContent) {
+            ImageContent img = (ImageContent) contentBlock;
+            if (img.data().isPresent()) {
+              byte[] outBytes = Base64.getDecoder().decode(img.data().get());
+              Files.write(Paths.get("living_room_edited.png"), outBytes);
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
 ### REST
@@ -2340,20 +3189,20 @@ curl -s -X POST \
 
 |  |  |
 | --- | --- |
-| 入力 | 出力 |
-| モダンで明るいリビングルームのワイドショット...   モダンで明るいリビングルームのワイドショット... | 提供されたリビングルームの画像を使用して、青いソファだけをヴィンテージの茶色の革製チェスターフィールド ソファに変更してください。   提供されたリビングルームの画像を使用して、青いソファだけをヴィンテージの茶色の革製チェスターフィールド ソファに変更してください。 |
+| الإدخال | الناتج |
+| لقطة واسعة لغرفة معيشة عصرية مضاءة جيدًا...   لقطة واسعة لغرفة معيشة حديثة ومضاءة جيدًا... | استنادًا إلى صورة غرفة المعيشة المقدَّمة، غيِّر فقط الأريكة الزرقاء إلى أريكة تشيسترفيلد قديمة من الجلد البني...   باستخدام صورة غرفة المعيشة المقدَّمة، غيِّر فقط الأريكة الزرقاء إلى أريكة تشيسترفيلد عتيقة من الجلد البني... |
 
-#### 3. 画風変換
+#### 3- تحويل النمط
 
-画像を提供し、異なる画風でコンテンツを再現するようにモデルに指示します。
+قدِّم صورة واطلب من النموذج إعادة إنشاء محتواها بأسلوب فني مختلف.
 
-### テンプレート
+### نموذج
 
 ```
 Transform the provided photograph of [subject] into the artistic style of [artist/art style]. Preserve the original composition but render it with [description of stylistic elements].
 ```
 
-### プロンプト
+### الطلب
 
 ```
 "Transform the provided photograph of a modern city street at night into the artistic style of Vincent van Gogh's 'Starry Night'. Preserve the original composition of buildings and cars, but render all elements with swirling, impasto brushstrokes and a dramatic palette of deep blues and bright yellows."
@@ -2433,21 +3282,72 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.interactions.Content;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("Transform the provided photograph of a modern city street at night into the artistic style of Vincent van Gogh"))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+byte[] imageBytes = Files.readAllBytes(Paths.get("/path/to/your/city.png"));
+String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+String textInput =
+    "Transform the provided photograph of a modern city street at night into the artistic style of Vincent van Gogh's 'Starry Night'. Preserve the original composition of buildings and cars, but render all elements with swirling, impasto brushstrokes and a dramatic palette of deep blues and bright yellows.";
+
+Content imageContent =
+    ImageContent.builder()
+        .data(base64Image)
+        .mimeType(ImageContentMimeType.IMAGE_PNG)
+        .build();
+Content textContent = TextContent.builder().text(textInput).build();
+
+List<Content> contents = Arrays.asList(imageContent, textContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content contentBlock : outputStep.content().get()) {
+          if (contentBlock instanceof TextContent) {
+            System.out.println(((TextContent) contentBlock).text().orElse(""));
+          } else if (contentBlock instanceof ImageContent) {
+            ImageContent img = (ImageContent) contentBlock;
+            if (img.data().isPresent()) {
+              byte[] outBytes = Base64.getDecoder().decode(img.data().get());
+              Files.write(Paths.get("city_style_transfer.png"), outBytes);
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
 ### REST
@@ -2468,14 +3368,14 @@ curl -s -X POST \
 
 |  |  |
 | --- | --- |
-| 入力 | 出力 |
-| にぎやかな街の通りのリアルな高解像度写真...   賑やかな街並みの高解像度でリアルな写真... | 夜の現代的な街並みの写真を提供します。   夜の現代的な街並みの写真を提供します。この写真を... |
+| الإدخال | الناتج |
+| صورة فوتوغرافية واقعية وعالية الدقة لشارع مزدحم في مدينة...   صورة فوتوغرافية واقعية وعالية الدقة لشارع مزدحم في مدينة... | حوِّل الصورة المقدَّمة لأحد شوارع المدينة الحديثة ليلاً...   حوِّل الصورة المقدَّمة لشارع في مدينة حديثة ليلاً... |
 
-#### 4. 高度な構図: 複数の画像を組み合わせる
+#### 4. التركيب المتقدّم: دمج صور متعددة
 
-複数の画像をコンテキストとして提供し、新しい複合シーンを作成します。これは、プロダクト モックアップやクリエイティブ コラージュに最適です。
+تقديم صور متعددة كسياق لإنشاء مشهد جديد ومجمّع هذه الميزة مثالية لإنشاء نماذج للمنتجات أو صور مجمّعة إبداعية.
 
-### テンプレート
+### نموذج
 
 ```
 Create a new image by combining the elements from the provided images. Take
@@ -2483,7 +3383,7 @@ the [element from image 1] and place it with/on the [element from image 2].
 The final image should be a [description of the final scene].
 ```
 
-### プロンプト
+### الطلب
 
 ```
 "Create a professional e-commerce fashion photo. Take the blue floral dress
@@ -2585,21 +3485,77 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.interactions.Content;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("Create a professional e-commerce fashion photo. Take the blue floral dress from the first image and let the woman from the second image wear it. Generate a realistic, full-body shot of the woman wearing the dress, with the lighting and shadows adjusted to match the outdoor environment."))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+byte[] dressBytes = Files.readAllBytes(Paths.get("/path/to/your/dress.png"));
+byte[] modelBytes = Files.readAllBytes(Paths.get("/path/to/your/model.png"));
+String textInput =
+    "Create a professional e-commerce fashion photo. Take the blue floral dress from the first image and let the woman from the second image wear it. Generate a realistic, full-body shot of the woman wearing the dress, with the lighting and shadows adjusted to match the outdoor environment.";
+
+Content dressContent =
+    ImageContent.builder()
+        .data(Base64.getEncoder().encodeToString(dressBytes))
+        .mimeType(ImageContentMimeType.IMAGE_PNG)
+        .build();
+Content modelContent =
+    ImageContent.builder()
+        .data(Base64.getEncoder().encodeToString(modelBytes))
+        .mimeType(ImageContentMimeType.IMAGE_PNG)
+        .build();
+Content textContent = TextContent.builder().text(textInput).build();
+
+List<Content> contents = Arrays.asList(dressContent, modelContent, textContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content contentBlock : outputStep.content().get()) {
+          if (contentBlock instanceof TextContent) {
+            System.out.println(((TextContent) contentBlock).text().orElse(""));
+          } else if (contentBlock instanceof ImageContent) {
+            ImageContent img = (ImageContent) contentBlock;
+            if (img.data().isPresent()) {
+              byte[] outBytes = Base64.getDecoder().decode(img.data().get());
+              Files.write(Paths.get("fashion_ecommerce_shot.png"), outBytes);
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
 ### REST
@@ -2621,14 +3577,15 @@ curl -s -X POST \
 
 |  |  |  |
 | --- | --- | --- |
-| 入力 1 | 入力 2 | 出力 |
-| ニュートラルな背景に置かれた青い花柄のサマードレス   ニュートラルな背景に青い花柄のサマードレス | 髪を束ねた女性の全身写真...   髪を束ねた女性の全身写真... | 屋外で青い花柄のサマードレスを着た女性   屋外で青い花柄のサマードレスを着た女性 |
+| المعلومة 1 | المعلومة 2 | الناتج |
+| فستان صيفي أزرق مزيّن بالورود على خلفية محايدة   فستان صيفي أزرق مزيّن بالزهور على خلفية محايدة | لقطة كاملة لامرأة بشعر مرفوع على شكل كعكة...   لقطة كاملة لامرأة بشعر مرفوع... | امرأة ترتدي فستانًا صيفيًا أزرق اللون مزينًا بالزهور في مكان خارجي   امرأة ترتدي فستانًا صيفيًا أزرق مزيّنًا بالزهور في مكان خارجي |
 
-#### 5. 高忠実度の詳細保持
+#### 5- الحفاظ على التفاصيل العالية الدقة
 
-編集時に重要な詳細（顔やロゴなど）が保持されるように、編集リクエストとともに詳細を説明してください。
+لضمان الحفاظ على التفاصيل المهمة (مثل وجه أو شعار) أثناء التعديل،
+يُرجى وصفها بالتفصيل مع طلب التعديل.
 
-### テンプレート
+### نموذج
 
 ```
 Using the provided images, place [element from image 2] onto [element from
@@ -2637,7 +3594,7 @@ completely unchanged. The added element should [description of how the
 element should integrate].
 ```
 
-### プロンプト
+### الطلب
 
 ```
 "Take the first image of the woman with brown hair, blue eyes, and a neutral
@@ -2724,21 +3681,77 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.interactions.Content;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("model_output"))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+byte[] womanBytes = Files.readAllBytes(Paths.get("/path/to/your/woman.png"));
+byte[] logoBytes = Files.readAllBytes(Paths.get("/path/to/your/logo.png"));
+String textInput =
+    "Take the first image of the woman with brown hair, blue eyes, and a neutral expression. Add the logo from the second image onto her black t-shirt. Ensure the woman's face and features remain completely unchanged. The logo should look like it's naturally printed on the fabric, following the folds of the shirt.";
+
+Content womanContent =
+    ImageContent.builder()
+        .data(Base64.getEncoder().encodeToString(womanBytes))
+        .mimeType(ImageContentMimeType.IMAGE_PNG)
+        .build();
+Content logoContent =
+    ImageContent.builder()
+        .data(Base64.getEncoder().encodeToString(logoBytes))
+        .mimeType(ImageContentMimeType.IMAGE_PNG)
+        .build();
+Content textContent = TextContent.builder().text(textInput).build();
+
+List<Content> contents = Arrays.asList(womanContent, logoContent, textContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content contentBlock : outputStep.content().get()) {
+          if (contentBlock instanceof TextContent) {
+            System.out.println(((TextContent) contentBlock).text().orElse(""));
+          } else if (contentBlock instanceof ImageContent) {
+            ImageContent img = (ImageContent) contentBlock;
+            if (img.data().isPresent()) {
+              byte[] outBytes = Base64.getDecoder().decode(img.data().get());
+              Files.write(Paths.get("woman_with_logo.png"), outBytes);
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
 ### REST
@@ -2760,21 +3773,21 @@ curl -s -X POST \
 
 |  |  |  |
 | --- | --- | --- |
-| 入力 1 | 入力 2 | 出力 |
-| 茶色の髪と青い目の女性のビジネス用プロフィール写真...   茶色の髪と青い目の女性のビジネス用プロフィール写真... | 文字 G と A を使用したモダンなブランド識別子   G と A の文字を使用したモダンなブランド ID | 茶色の髪、青い目、無表情の女性の最初の画像を取得します。   茶色の髪、青い目、ニュートラルな表情の女性の最初の画像を取得します... |
+| المعلومة 1 | المعلومة 2 | الناتج |
+| صورة احترافية لوجه امرأة بشعر بني وعينين زرقاوين...   صورة احترافية لوجه امرأة بشعر بني وعينين زرقاوين... | معرّف علامة تجارية حديث يتضمّن الحرفين G وA   معرّف العلامة التجارية الحديث مع الحرفين G وA | خذ الصورة الأولى للمرأة ذات الشعر البني والعينين الزرقاوين وتعبير الوجه المحايد...   أريد الصورة الأولى للمرأة ذات الشعر البني والعينين الزرقاوين وتعبيرات الوجه المحايدة... |
 
-#### 6. 命を吹き込む
+#### 6. إحياء ذكرى شخص أو حدث
 
-ラフスケッチや下絵をアップロードして、モデルに完成した画像に仕上げるよう依頼します。
+حمِّلوا رسمًا تخطيطيًا أو رسمًا عاديًا واطلبوا من النموذج تحسينه ليصبح صورة نهائية.
 
-### テンプレート
+### نموذج
 
 ```
 Turn this rough [medium] sketch of a [subject] into a [style description]
 photo. Keep the [specific features] from the sketch but add [new details/materials].
 ```
 
-### プロンプト
+### الطلب
 
 ```
 "Turn this rough pencil sketch of a futuristic car into a polished photo of the finished concept car in a showroom. Keep the sleek lines and low profile from the sketch but add metallic blue paint and neon rim lighting."
@@ -2850,21 +3863,71 @@ async function main() {
 main();
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.gaos.models.interactions.Content;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.ImageContent;
+import com.google.genai.gaos.models.interactions.ImageContentMimeType;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ModelOutputStep;
+import com.google.genai.gaos.models.interactions.Step;
+import com.google.genai.gaos.models.interactions.TextContent;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("model_output"))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+byte[] sketchBytes = Files.readAllBytes(Paths.get("/path/to/your/car_sketch.png"));
+String textInput =
+    "Turn this rough pencil sketch of a futuristic car into a polished photo of the finished concept car in a showroom. Keep the sleek lines and low profile from the sketch but add metallic blue paint and neon rim lighting.";
+
+Content sketchContent =
+    ImageContent.builder()
+        .data(Base64.getEncoder().encodeToString(sketchBytes))
+        .mimeType(ImageContentMimeType.IMAGE_PNG)
+        .build();
+Content textContent = TextContent.builder().text(textInput).build();
+
+List<Content> contents = Arrays.asList(sketchContent, textContent);
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(InteractionsInput.ofContent(contents))
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+if (interaction.steps().isPresent()) {
+  for (Step step : interaction.steps().get()) {
+    if (step instanceof ModelOutputStep) {
+      ModelOutputStep outputStep = (ModelOutputStep) step;
+      if (outputStep.content().isPresent()) {
+        for (Content contentBlock : outputStep.content().get()) {
+          if (contentBlock instanceof TextContent) {
+            System.out.println(((TextContent) contentBlock).text().orElse(""));
+          } else if (contentBlock instanceof ImageContent) {
+            ImageContent img = (ImageContent) contentBlock;
+            if (img.data().isPresent()) {
+              byte[] outBytes = Base64.getDecoder().decode(img.data().get());
+              Files.write(Paths.get("car_photo.png"), outBytes);
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
 ### REST
@@ -2885,20 +3948,20 @@ curl -s -X POST \
 
 |  |  |
 | --- | --- |
-| 入力 | 出力 |
-| 車のスケッチ   車のラフスケッチ | 最終的なコンセプトカーを示す出力   車の磨き上げられた写真 |
+| الإدخال | الناتج |
+| رسم تخطيطي لسيارة   رسم تقريبي لسيارة | الناتج الذي يعرض السيارة النموذجية النهائية   صورة محسّنة لسيارة |
 
-#### 7. キャラクターの一貫性: 360 度ビュー
+#### 7. الاتساق في مظهر الشخصية: العرض بزاوية 360 درجة
 
-さまざまな角度を繰り返しプロンプトすることで、キャラクターの 360 度ビューを生成できます。最適な結果を得るには、一貫性を保つために、以前に生成した画像を後続のプロンプトに含めます。複雑なポーズの場合は、選択したポーズの参照画像を含めます。
+يمكنك إنشاء طرق عرض بزاوية 360 درجة لشخصية ما من خلال تقديم طلبات متكرّرة للحصول على زوايا مختلفة. للحصول على أفضل النتائج، أدرِج الصور التي تم إنشاؤها سابقًا في الطلبات اللاحقة للحفاظ على التناسق. بالنسبة إلى الوضعيات المعقّدة، أدرِج صورة مرجعية للوضعية المحدّدة.
 
-### テンプレート
+### نموذج
 
 ```
 A studio portrait of [person] against [background], [looking forward/in profile looking right/etc.]
 ```
 
-### プロンプト
+### الطلب
 
 ```
 A studio portrait of this man against white, in profile looking right
@@ -2937,40 +4000,42 @@ for step in interaction.steps:
 
 |  |  |  |
 | --- | --- | --- |
-| 入力 | 出力 1 | 出力 2 |
-| 白いメガネをかけた男性の元の入力   元の画像 | 白いメガネをかけて右を向いている男性の出力   右を向いている白いメガネをかけた男性 | 白いメガネをかけて前を向いている男性の出力   白い眼鏡をかけて前を向いている男性 |
+| الإدخال | النتيجة 1 | النتيجة 2 |
+| الإدخال الأصلي لرجل يرتدي نظارات بيضاء   الصورة الأصلية | ناتج لرجل يرتدي نظارة بيضاء وينظر إلى اليمين   رجل يرتدي نظارات بيضاء وينظر إلى اليمين | ناتج لرجل يرتدي نظارة بيضاء وينظر إلى الأمام   رجل يرتدي نظارات بيضاء وينظر إلى الأمام |
 
-### ベスト プラクティス
+### أفضل الممارسات
 
-結果を優れたものにするには、これらのプロフェッショナルな戦略をワークフローに組み込みます。
+لتحسين نتائجك من جيدة إلى ممتازة، يمكنك دمج الاستراتيجيات الاحترافية التالية في سير عملك.
 
-- **具体的にする:** 詳細に説明するほど、より細かく制御できます。「ファンタジー アーマー」ではなく、「銀の葉の模様がエッチングされた、装飾的なエルフのプレート アーマー。ハイカラーとハヤブサの翼の形をした肩当て付き」とします。
-- **コンテキストと意図を提供する:** 画像の*目的*を説明します。モデルのコンテキストの理解が最終出力に影響します。たとえば、「高級感のあるミニマリストのスキンケア ブランドのロゴを作成して」は、「ロゴを作成して」よりも効果的です。
-- **繰り返して改良:** 最初の試行で完璧な画像が生成されるとは限りません。モデルの会話的な性質を利用して、小さな変更を行います。「素晴らしいですが、照明をもう少し暖色にできますか？」や「すべてそのままにして、キャラクターの表情をもっとシリアスにしてください」などのフォローアップ プロンプトを使用します。
-- **手順ガイドを使用する:** 多くの要素を含む複雑なシーンの場合は、プロンプトを手順に分割します。「まず、夜明けの静かで霧のかかった森の背景を作成して。次に、前景に苔むした古代の石の祭壇を追加して。最後に、祭壇の上に光る剣を 1 本置いて。」
-- **「セマンティック ネガティブ プロンプト」を使用する:** 「車なし」ではなく、「交通の気配のない、空っぽの寂れた通り」のように、ポジティブな表現でシーンを説明します。
-- **カメラを制御する:** 写真や映画の撮影用語を使用して、構図を制御します。`wide-angle shot`、`macro shot`、`low-angle
-  perspective` などの用語。
+- **كن دقيقًا جدًا:** كلّما قدّمت تفاصيل أكثر، زادت إمكانية التحكّم. بدلاً من كتابة "درع خيالي"، يمكنك وصفه: "درع صفائحي مزخرف خاص بالجِن، منقوش بأوراق فضية، وياقة عالية وواقيات كتف على شكل أجنحة صقر".
+- **توفير السياق والنية:** اشرح *الغرض* من الصورة. سيؤثر فهم النموذج للسياق في الناتج النهائي. على سبيل المثال، ستؤدي كتابة "أنشئ شعارًا لعلامة تجارية راقية وبسيطة للعناية بالبشرة" إلى الحصول على نتائج أفضل من كتابة "أنشئ شعارًا" فقط.
+- **التكرار والتحسين:** لا تتوقّع الحصول على صورة مثالية من المحاولة الأولى. استخدِم
+  الطبيعة الحوارية للنموذج لإجراء تغييرات بسيطة. يمكنك متابعة المحادثة بطلبات مثل "هذا رائع، ولكن هل يمكنك جعل الإضاءة أكثر دفئًا؟" أو "أريد إبقاء كل شيء كما هو، ولكن أريد تغيير تعابير وجه الشخصية لتكون أكثر جدية".
+- **استخدام تعليمات مفصّلة:** بالنسبة إلى المشاهد المعقّدة التي تتضمّن عناصر كثيرة، قسِّم طلبك إلى خطوات. "أريد أولاً إنشاء خلفية لغابة هادئة يلفّها الضباب عند الفجر. بعد ذلك، أضِف في المقدّمة مذبحًا حجريًا قديمًا مغطى بالطحالب.
+  أخيرًا، ضَع سيفًا واحدًا متوهجًا فوق المذبح".
+- **استخدام "طلبات سلبية دلالية":** بدلاً من قول "لا توجد سيارات"، صف المشهد المطلوب بشكل إيجابي: "شارع خالٍ ومهجور لا تظهر فيه أي علامات على حركة المرور".
+- **التحكّم في الكاميرا:** استخدِم لغة فوتوغرافية وسينمائية للتحكّم في التكوين. عبارات مثل `wide-angle shot` و`macro shot` و`low-angle
+  perspective`
 
-## 制限事項
+## القيود
 
-- 最高のパフォーマンスを実現するには、EN、ar-EG、de-DE、es-MX、fr-FR、hi-IN、id-ID、it-IT、ja-JP、ko-KR、pt-BR、ru-RU、ua-UA、vi-VN、zh-CN のいずれかの言語を使用してください。
-- 画像生成では、音声入力はサポートされていません。動画入力は、Gemini 3.1 Flash Image と Gemini 3.1 Flash Lite Image でのみサポートされています。
-- モデルは、ユーザーが明示的にリクエストした画像の出力数を正確に守るとは限りません。
-- `gemini-2.5-flash-image` は入力として最大 3 枚の画像を使用する場合に最適ですが、`gemini-3-pro-image` は高忠実度で 5 枚の画像をサポートし、合計で最大 14 枚の画像をサポートします。`gemini-3.1-flash-image` は、1 つのワークフローで最大 4 文字の文字類似性と最大 10 個のオブジェクトの忠実度をサポートします。
-- テキストを含む画像を生成するときは、まずテキストを生成してから、そのテキストを画像に変換するように頼むと、良い結果が得られます。
-- `gemini-3.1-flash-image` 現在、Google 検索によるグラウンディングでは、ウェブ検索から取得した人物の実写画像を使用することはできません。
-- 生成されたすべての画像には [SynthID の透かし](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=ja)が埋め込まれています。
+- للحصول على أفضل أداء، استخدِم اللغات التالية: الإنجليزية، والعربية (مصر)، والألمانية (ألمانيا)، والإسبانية (المكسيك)، والفرنسية (فرنسا)، والهندية (الهند)، والإندونيسية (إندونيسيا)، والإيطالية (إيطاليا)، واليابانية (اليابان)، والكورية (كوريا الجنوبية)، والبرتغالية (البرازيل)، والروسية (روسيا)، والأوكرانية (أوكرانيا)، والفيتنامية (فيتنام)، والصينية (الصين).
+- لا تتيح ميزة إنشاء الصور إدخال المحتوى الصوتي. لا يمكن استخدام فيديوهات كمدخلات إلا مع Gemini 3.1 Flash Image وGemini 3.1 Flash Lite Image.
+- لن يلتزم النموذج دائمًا بالعدد الدقيق للصور التي يطلبها المستخدم بشكل صريح.
+- يعمل `gemini-2.5-flash-image` على أفضل وجه مع ما يصل إلى 3 صور كمدخلات، بينما يتيح `gemini-3-pro-image` استخدام 5 صور بدقة عالية، وما يصل إلى 14 صورة إجمالاً. تتيح `gemini-3.1-flash-image` تشابه الأحرف بما يصل إلى 4 أحرف ودقة تصل إلى 10 عناصر في سير عمل واحد.
+- عند إنشاء نص لصورة، يعمل Gemini بشكل أفضل إذا أنشأت النص أولاً ثم طلبت صورة تتضمّن النص.
+- `gemini-3.1-flash-image` لا تتيح ميزة "تحديد المصدر من خلال بحث Google" حاليًا استخدام صور واقعية لأشخاص من بحث الويب.
+- تتضمّن جميع الصور التي يتم إنشاؤها [علامة مائية من SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=ar).
 
-## オプションの構成
+## الإعدادات الاختيارية
 
-必要に応じて、`response_format` パラメータを使用して、出力形式、アスペクト比、画像サイズを構成できます。
+يمكنك اختياريًا ضبط تنسيق الإخراج ونسبة العرض إلى الارتفاع وحجم الصورة باستخدام المَعلمة `response_format`.
 
-### 出力形式
+### تنسيق الإخراج
 
-このモデルは、デフォルトでテキストと画像の両方のレスポンスを返します。`response_format` パラメータで画像形式を指定すると、生成された画像のみを返す（会話テキストを省略する）ようにレスポンスを構成できます。
+يعرض النموذج بشكل تلقائي ردودًا نصية وردودًا على شكل صور. يمكنك ضبط الردّ لعرض الصور التي تم إنشاؤها فقط (مع حذف النص الحواري) من خلال تحديد تنسيق صورة في المَعلمة `response_format`.
 
-複数のモダリティ（テキストと生成された画像の両方など）をリクエストするには、代わりに `response_format` に形式エントリの配列を渡します。
+لطلب وسائط متعددة (على سبيل المثال، النص والصورة التي تم إنشاؤها)، مرِّر مصفوفة من إدخالات التنسيق إلى `response_format` بدلاً من ذلك.
 
 ### Python
 
@@ -2998,21 +4063,40 @@ const interaction = await ai.interactions.create({
 });
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.ImageResponseFormat;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.interactions.TextResponseFormat;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import java.util.Arrays;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("Write a short poem about a starry night and generate an image of it."))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+
+CreateModelInteractionResponseFormat format =
+    CreateModelInteractionResponseFormat.of(
+        Arrays.asList(
+            ResponseFormat.of(TextResponseFormat.builder().build()),
+            ResponseFormat.of(ImageResponseFormat.builder().build())));
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(
+            InteractionsInput.of(
+                "Write a short poem about a starry night and generate an image of it."))
+        .responseFormat(format)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
 ### REST
@@ -3032,9 +4116,9 @@ curl -s -X POST \
   }'
 ```
 
-### アスペクト比と画像サイズ
+### نِسَب العرض إلى الارتفاع وحجم الصورة
 
-デフォルトでは、モデルは出力画像のサイズを入力画像のサイズに合わせるか、1:1 の正方形を生成します。`type` が `"image"` に設定されている場合、`response_format` の `aspect_ratio` フィールドと `image_size` フィールドを使用して、出力画像のアスペクト比とサイズを制御できます。
+يتطابق حجم الصورة الناتجة تلقائيًا مع حجم الصورة التي أدخلتها، أو يتم إنشاء مربعات بنسبة 1:1. يمكنك التحكّم في نسبة العرض إلى الارتفاع وحجم الصورة الناتجة باستخدام الحقلَين `aspect_ratio` و`image_size` ضمن `response_format` عندما يكون `type` مضبوطًا على `"image"`.
 
 ### Python
 
@@ -3064,21 +4148,41 @@ const interaction = await ai.interactions.create({
   });
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
+import com.google.genai.gaos.models.interactions.ImageResponseFormat;
+import com.google.genai.gaos.models.interactions.ImageResponseFormatAspectRatio;
+import com.google.genai.gaos.models.interactions.ImageResponseFormatImageSize;
+import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ResponseFormat;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
 
 Client client = new Client();
-CreateModelInteraction req = CreateModelInteraction.builder()
-    .model(Model.of("gemini-3.1-flash-image"))
-    .input(InteractionsInput.of("image"))
-    .build();
-var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+String prompt = "Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme";
+
+CreateModelInteractionResponseFormat format =
+    CreateModelInteractionResponseFormat.of(
+        ResponseFormat.of(
+            ImageResponseFormat.builder()
+                .aspectRatio(ImageResponseFormatAspectRatio.of("16:9"))
+                .imageSize(ImageResponseFormatImageSize.TWO_K)
+                .build()));
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.1-flash-image"))
+        .input(InteractionsInput.of(prompt))
+        .responseFormat(format)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
 ### REST
@@ -3099,81 +4203,85 @@ curl -s -X POST \
   }'
 ```
 
-使用可能なさまざまな比率と生成される画像のサイズを次の表に示します。
+في ما يلي الجداول التي تعرض النسب المختلفة المتاحة وحجم الصورة التي يتم إنشاؤها:
 
-### 3.1 Flash Image
+### 3.1‎ Flash Image
 
-| アスペクト比 | 512 ピクセルの解像度 | 0.5K トークン | 1K 解像度 | 1K トークン | 2K 解像度 | 2K トークン | 4K 解像度 | 4K トークン |
+| نسبة العرض إلى الارتفاع | درجة الدقة 512 بكسل | ‫0.5 ألف رمز مميّز | درجة الدقة 1K | ‫1,000 رمز مميّز | درجة الدقة 2K | ‫2,000 رمز مميّز | درجة الدقة 4K | ‫4K tokens |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **1:1** | 512x512 | 747 | 1024 x 1024 | 1120 | 2,048x2,048 | 1680 | 4096x4096 | 2520 |
-| **1:4** | 256x1024 | 747 | 512x2048 | 1120 | 1024x4096 | 1680 | 2048x8192 | 2520 |
-| **1:8** | 192x1536 | 747 | 384x3072 | 1120 | 768x6144 | 1680 | 1536x12288 | 2520 |
-| **2:3** | 424x632 | 747 | 848x1264 | 1120 | 1696x2528 | 1680 | 3392x5056 | 2520 |
-| **3:2** | 632x424 | 747 | 1264x848 | 1120 | 2528x1696 | 1680 | 5056x3392 | 2520 |
-| **3:4** | 448×600 | 747 | 896x1200 | 1120 | 1792x2400 | 1680 | 3584x4800 | 2520 |
-| **4:1** | 1024x256 | 747 | 2048x512 | 1120 | 4096x1024 | 1680 | 8192x2048 | 2520 |
-| **4:3** | 600×448 | 747 | 1,200×896 | 1120 | 2400x1792 | 1680 | 4800x3584 | 2520 |
-| **4:5** | 464×576 | 747 | 928x1152 | 1120 | 1856x2304 | 1680 | 3712x4608 | 2520 |
-| **5:4** | 576x464 | 747 | 1152x928 | 1120 | 2304x1856 | 1680 | 4608x3712 | 2520 |
-| **8:1** | 1536x192 | 747 | 3072x384 | 1120 | 6144x768 | 1680 | 12288x1536 | 2520 |
-| **9:16** | 384x688 | 747 | 768x1376 | 1120 | 1536x2752 | 1680 | 3072x5504 | 2520 |
-| **16:9** | 688x384 | 747 | 1376x768 | 1120 | 2752x1536 | 1680 | 5,504 x 3,072 | 2520 |
-| **21:9** | 792×168 | 747 | 1584x672 | 1120 | 3168x1344 | 1680 | 6336x2688 | 2520 |
+| **1:1** | ‫512×512 | 747 | 1024x1024 | 1120 | 2048x2048 | 1680 | 4096x4096 | 2520 |
+| **1:4** | 256x1024 | 747 | 512x2048 | 1120 | ‫1024x4096 | 1680 | 2048x8192 | 2520 |
+| **1:8** | ‫192x1536 | 747 | ‫384x3072 | 1120 | ‫768x6144 | 1680 | 1536x12288 | 2520 |
+| **2:3** | 424x632 | 747 | 848x1264 | 1120 | 1696x2528 | 1680 | ‫3392 × 5056 | 2520 |
+| **3:2** | 632x424 | 747 | 1264x848 | 1120 | ‎2528x1696 | 1680 | 5056x3392 | 2520 |
+| **3:4** | ‫448x600 | 747 | 896x1200 | 1120 | 1792x2400 | 1680 | ‫3584x4800 | 2520 |
+| **4:1** | 1024x256 | 747 | 2048x512 | 1120 | 4096x1024 | 1680 | ‫8192x2048 | 2520 |
+| **4:3** | 600x448 | 747 | ‫1200x896 | 1120 | ‫2400 × 1792 | 1680 | 4800x3584 | 2520 |
+| **4:5** | 464x576 | 747 | ‫928×1152 | 1120 | 1856x2304 | 1680 | 3712x4608 | 2520 |
+| **5:4** | 576x464 | 747 | ‫1152x928 | 1120 | 2304x1856 | 1680 | 4608x3712 | 2520 |
+| **8:1** | 1536x192 | 747 | ‫3072x384 | 1120 | 6144x768 | 1680 | ‫12288x1536 | 2520 |
+| **9:16** | 384x688 | 747 | ‎768x1376 | 1120 | ‫1536 × 2752 | 1680 | ‫3072x5504 | 2520 |
+| ‫**16:9** | 688x384 | 747 | 1376x768 | 1120 | ‫2752x1536 | 1680 | 5504x3072 | 2520 |
+| **‫21:9** | ‫792×168 | 747 | 1584x672 | 1120 | ‫3168x1344 | 1680 | 6336x2688 | 2520 |
 
-### 3.1 Pro Image
+### ‫3.1 Pro Image
 
-| アスペクト比 | 1K 解像度 | 1K トークン | 2K 解像度 | 2K トークン | 4K 解像度 | 4K トークン |
+| نسبة العرض إلى الارتفاع | درجة الدقة 1K | ‫1,000 رمز مميّز | درجة الدقة 2K | ‫2,000 رمز مميّز | درجة الدقة 4K | ‫4K tokens |
 | --- | --- | --- | --- | --- | --- | --- |
-| **1:1** | 1024 x 1024 | 1120 | 2,048x2,048 | 1120 | 4096x4096 | 2000 |
-| **2:3** | 848x1264 | 1120 | 1696x2528 | 1120 | 3392x5056 | 2000 |
-| **3:2** | 1264x848 | 1120 | 2528x1696 | 1120 | 5056x3392 | 2000 |
-| **3:4** | 896x1200 | 1120 | 1792x2400 | 1120 | 3584x4800 | 2000 |
-| **4:3** | 1,200×896 | 1120 | 2400x1792 | 1120 | 4800x3584 | 2000 |
-| **4:5** | 928x1152 | 1120 | 1856x2304 | 1120 | 3712x4608 | 2000 |
-| **5:4** | 1152x928 | 1120 | 2304x1856 | 1120 | 4608x3712 | 2000 |
-| **9:16** | 768x1376 | 1120 | 1536x2752 | 1120 | 3072x5504 | 2000 |
-| **16:9** | 1376x768 | 1120 | 2752x1536 | 1120 | 5,504 x 3,072 | 2000 |
-| **21:9** | 1584x672 | 1120 | 3168x1344 | 1120 | 6336x2688 | 2000 |
+| **1:1** | 1024x1024 | 1120 | 2048x2048 | 1120 | 4096x4096 | 2000 |
+| **2:3** | 848x1264 | 1120 | 1696x2528 | 1120 | ‫3392 × 5056 | 2000 |
+| **3:2** | 1264x848 | 1120 | ‎2528x1696 | 1120 | 5056x3392 | 2000 |
+| **3:4** | 896x1200 | 1120 | 1792x2400 | 1120 | ‫3584x4800 | 2000 |
+| **4:3** | ‫1200x896 | 1120 | ‫2400 × 1792 | 1120 | 4800x3584 | 2000 |
+| **4:5** | ‫928×1152 | 1120 | 1856x2304 | 1120 | 3712x4608 | 2000 |
+| **5:4** | ‫1152x928 | 1120 | 2304x1856 | 1120 | 4608x3712 | 2000 |
+| **9:16** | ‎768x1376 | 1120 | ‫1536 × 2752 | 1120 | ‫3072x5504 | 2000 |
+| ‫**16:9** | 1376x768 | 1120 | ‫2752x1536 | 1120 | 5504x3072 | 2000 |
+| **‫21:9** | 1584x672 | 1120 | ‫3168x1344 | 1120 | 6336x2688 | 2000 |
 
 ### Gemini 2.5 Flash Image
 
-| アスペクト比 | 解決策 | トークン |
+| نسبة العرض إلى الارتفاع | الدقة | الرموز المميزة |
 | --- | --- | --- |
-| 1:1 | 1024 x 1024 | 1290 |
-| 2:3 | 832x1248 | 1290 |
-| 3:2 | 1248x832 | 1290 |
-| 3:4 | 864x1184 | 1290 |
-| 4:3 | 1184x864 | 1290 |
-| 4:5 | 896x1152 | 1290 |
-| 5:4 | 1152x896 | 1290 |
-| 9:16 | 768x1344 | 1290 |
+| 1:1 | 1024x1024 | 1290 |
+| 2:3 | ‫832x1248 | 1290 |
+| 3:2 | ‫1248x832 | 1290 |
+| 3:4 | ‫864 × 1184 | 1290 |
+| 4:3 | ‎1184x864 | 1290 |
+| 4:5 | ‫896×1152 | 1290 |
+| 5:4 | ‫1152x896 | 1290 |
+| 9:16 | ‫768x1344 | 1290 |
 | 16:9 | 1344x768 | 1290 |
-| 21:9 | 1536x672 | 1290 |
+| 21:9 | ‫1536x672 | 1290 |
 
-## モデルの選択
+## اختيار النموذج
 
-特定のユースケースに最適なモデルを選択します。
+اختَر النموذج الأنسب لحالة الاستخدام المحدّدة.
 
-- **Gemini 3.1 Flash Image（Nano Banana 2）**は、コストとレイテンシのバランスが取れた、最高の総合的なパフォーマンスとインテリジェンスを備えているため、画像生成モデルとして最適です。詳細については、モデルの[料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#gemini-3.1-flash-image)と[機能](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=ja)のページをご覧ください。
-- **Gemini 3.1 Flash Lite Image（Nano Banana 2 Lite）**は、画像生成ファミリーの中で最も効率的なモデルです。超低レイテンシで費用対効果の高い画像生成と編集を実現します。詳細については、モデルの[料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#gemini-3.1-flash-lite-image)と[機能](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=ja)のページをご覧ください。
-- **Gemini 3 Pro Image（Nano Banana Pro）**は、プロフェッショナルなアセット制作と複雑な指示に対応するように設計されています。このモデルは、Google 検索を使用した実世界のグラウンディング、生成前に構成を調整するデフォルトの「思考」プロセスを備えており、最大 4K の解像度の画像を生成できます。詳細については、モデルの[料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#gemini-3-pro-image)と[機能](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=ja)のページをご覧ください。
-- **Gemini 2.5 Flash Image（Nano Banana）**は、速度と効率性を重視して設計されています。このモデルは、大容量で低レイテンシのタスク向けに最適化されており、1, 024 ピクセルの解像度で画像を生成します。詳細については、モデルの[料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#gemini-2.5-flash-image)と[機能](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=ja)のページをご覧ください。
+- ننصحك باستخدام **‫Gemini 3.1 Flash Image (‏Nano Banana 2)** كنموذج أساسي لإنشاء الصور، فهو يقدّم أفضل أداء شامل ويحقق التوازن بين الذكاء والتكلفة ووقت الاستجابة. لمزيد من التفاصيل، يُرجى الاطّلاع على صفحة [الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#gemini-3.1-flash-image) و[الإمكانات](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=ar) الخاصة بالنموذج.
+- ‫**Gemini 3.1 Flash Lite Image (‫Nano Banana 2 Lite)** هو النموذج الأكثر فعالية ضمن مجموعة نماذج إنشاء الصور، إذ يوفّر إنشاء الصور وتعديلها بتأخير منخفض جدًا وبتكلفة فعالة.
+  لمزيد من التفاصيل، يُرجى الاطّلاع على صفحة [الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#gemini-3.1-flash-lite-image) و[الإمكانات](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=ar) الخاصة بالنموذج.
+- تم تصميم **Gemini 3 Pro Image (‫Nano Banana Pro)** لإنتاج مواد عرض احترافية وتنفيذ التعليمات المعقّدة. يتميّز هذا النموذج
+  بإمكانية الاستناد إلى معلومات واقعية باستخدام &quot;بحث Google&quot;، وبإجراء عملية &quot;تفكير&quot; تلقائية
+  تعمل على تحسين التركيب قبل الإنشاء، ويمكنه إنشاء صور بدقة تصل إلى 4K. لمزيد من التفاصيل، يُرجى الاطّلاع على صفحة [الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#gemini-3-pro-image) و[الإمكانات](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=ar) الخاصة بالنموذج.
+- تم تصميم **Gemini 2.5 Flash Image (المعروف أيضًا باسم Nano Banana)** ليكون سريعًا وفعّالاً. تم تحسين هذا النموذج لتنفيذ المهام التي تتطلّب عددًا كبيرًا من الطلبات ووقت استجابة منخفضًا، وهو ينشئ صورًا بدقة 1024 بكسل. يمكنك الاطّلاع على صفحة [الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#gemini-2.5-flash-image) و[الإمكانات](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=ar) الخاصة بالنموذج للحصول على مزيد من التفاصيل.
 
-### Imagen を使用する場面
+### حالات استخدام Imagen
 
-Gemini の組み込みの画像生成機能を使用するだけでなく、Gemini API を介して Google の特別な画像生成モデルである [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=ja) にもアクセスできます。シャットダウン日より前に移行する計画を立ててください。
+تم إيقاف Imagen نهائيًا ولم يعُد متاحًا من خلال Gemini API.
+استخدِم Nano Banana لإنشاء الصور وتعديلها.
 
-## 次のステップ
+## الخطوات التالية
 
-- Gemini API を使用して動画を生成する方法については、[Veo ガイド](https://ai.google.dev/gemini-api/docs/video?hl=ja)をご覧ください。
-- Gemini モデルの詳細については、[Gemini モデル](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja)をご覧ください。
+- راجِع [دليل Veo](https://ai.google.dev/gemini-api/docs/video?hl=ar) للتعرّف على كيفية إنشاء فيديوهات باستخدام Gemini API.
+- لمزيد من المعلومات حول نماذج Gemini، يُرجى الاطّلاع على [نماذج Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar).
 
-フィードバックを送信
+إرسال ملاحظات
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-最終更新日 2026-09-08 UTC。
+تاريخ التعديل الأخير: 2026-09-18 (حسب التوقيت العالمي المتفَّق عليه)
 
-ご意見をお聞かせください
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-08 UTC。"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-18 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
