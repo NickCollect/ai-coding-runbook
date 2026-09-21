@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/bloom
-fetched_at: 2026-09-14T05:36:09.409135+00:00
+fetched_at: 2026-09-21T05:44:09.025239+00:00
 title: "Introducing Bloom: Automated behavioral evals \\ Anthropic"
 ---
 
@@ -45,7 +45,7 @@ Unlike fixed evaluation sets, Bloom produces different scenarios on each run whi
 
 Researchers can extensively configure Bloom's behavior, through choosing models for each stage, adjusting the interactions’ length and modality (i.e., whether to expose tools to the target model, whether to simulate a user), controlling how diverse the evaluation scenarios are, and specifying secondary scoring dimensions, like realism or elicitation difficulty.
 
-**Example outputs from all four stages of the Bloom evaluation pipeline can be viewed [here.](https://claude.ai/redirect/website.v1.7198095a-1f5d-4026-ae7c-0bd3e870108d/public/artifacts/cbfddf51-ab0d-45a9-913b-163ae2dd4126)**
+**Example outputs from all four stages of the Bloom evaluation pipeline can be viewed [here.](https://claude.ai/redirect/website.v1.d3126093-6db1-45d5-b28e-9151a46ba2ff/public/artifacts/cbfddf51-ab0d-45a9-913b-163ae2dd4126)**
 
 ## Validation and trust
 
@@ -98,6 +98,12 @@ Copy
 
 ## Related content
 
+### How Claude is uplifting biomolecular modeling
+
+Claude made the open-source models that scientists use to predict and design biomolecules faster and more memory-efficient. Claude optimized more than 30 of these models in just under four weeks, speeding them up roughly 4x on average. It also created a low-memory mode that enables the accurate prediction of biomolecular systems larger than 10,000 tokens (amino acids, nucleotides, and atoms from small molecules and ions) on a single NVIDIA GPU node.
+
+[Read more](https://www.anthropic.com/research/claude-uplifts-biomolecular-modeling)
+
 ### Measuring tactical intelligence targeting and conventional weapons capabilities of AI models
 
 Anthropic’s Frontier Red Team developed new evaluations to measure AI capabilities in tactical intelligence targeting and conventional weapons development.
@@ -109,9 +115,3 @@ Anthropic’s Frontier Red Team developed new evaluations to measure AI capabili
 We present an alignment assessment of four incidents in which Claude models gained unauthorized access to real third-party systems.
 
 [Read more](https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents)
-
-### Formalizing Fermat's Last Theorem
-
-We are sharing the first complete computer-checked proof of Fermat’s Last Theorem. Claude worked largely autonomously over 11 days to write the proof in the Lean programming language.
-
-[Read more](https://www.anthropic.com/research/formalizing-fermats-last-theorem)

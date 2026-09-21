@@ -1,13 +1,13 @@
 ---
 source_url: https://www.anthropic.com/engineering/claude-code-best-practices
-fetched_at: 2026-09-14T05:36:07.806648+00:00
+fetched_at: 2026-09-21T05:44:07.444171+00:00
 title: "Best practices for Claude Code - Claude Code Docs"
 ---
 
 Claude Code is an agentic coding environment. Unlike a chatbot that answers questions and waits, Claude Code can read your files, run commands, make changes, and autonomously work through problems while you watch, redirect, or step away entirely.
 This changes how you work. Instead of writing code yourself and asking Claude to review it, you describe what you want and Claude figures out how to build it. Claude explores, plans, and implements.
 But this autonomy still comes with a learning curve. Claude works within certain constraints you need to understand.
-This guide covers patterns that have proven effective across Anthropic’s internal teams and for engineers using Claude Code across various codebases, languages, and environments. For how the agentic loop works under the hood, see [How Claude Code works](https://www.anthropic.com/docs/en/how-claude-code-works).
+This guide covers patterns that have proven effective across Anthropic’s internal teams and for engineers using Claude Code across various codebases, languages, and environments. For how the agentic loop works, see [How Claude Code works](https://www.anthropic.com/docs/en/how-claude-code-works).
 
 ---
 
@@ -417,7 +417,7 @@ Pick the parallel approach that fits how much coordination you want to do yourse
 - [Worktrees](https://www.anthropic.com/docs/en/worktrees): run separate CLI sessions in isolated git checkouts so edits don’t collide
 - [Cross-session messaging](https://www.anthropic.com/docs/en/cross-session-messaging): let the sessions you run yourself pass findings to each other
 - [Desktop app](https://www.anthropic.com/docs/en/desktop#work-in-parallel-with-sessions): manage multiple local sessions visually, optionally each in its own worktree
-- [Claude Code on the web](https://www.anthropic.com/docs/en/claude-code-on-the-web): run sessions in the cloud, on Anthropic-managed infrastructure by default
+- [Use Claude Code in the cloud](https://www.anthropic.com/docs/en/claude-code-on-the-web): run sessions on Anthropic-managed infrastructure by default
 - [Agent view](https://www.anthropic.com/docs/en/agent-view): research preview. Run `claude agents` to dispatch sessions that keep running in the background and watch them from one screen
 - [Agent teams](https://www.anthropic.com/docs/en/agent-teams): experimental and disabled by default. Automated coordination of multiple sessions with shared tasks, messaging, and a team lead
 
@@ -466,8 +466,6 @@ You can also integrate Claude into existing data/processing pipelines:
 ```
 claude -p "<your prompt>" --output-format json | your_command
 ```
-
-Use `--verbose` for debugging during development, and turn it off in production.
 
 ### [​](#run-autonomously-with-auto-mode) Run autonomously with auto mode
 

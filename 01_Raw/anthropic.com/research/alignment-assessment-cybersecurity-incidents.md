@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents
-fetched_at: 2026-09-14T05:36:08.625294+00:00
+fetched_at: 2026-09-21T05:44:08.434794+00:00
 title: "An alignment assessment of recent cybersecurity incidents \\ Anthropic"
 ---
 
@@ -556,7 +556,7 @@ We take a layered approach to safety on the expectation that any given layer wil
 
 ## Authors
 
-*Paul C. Bogdan, Richard Qi, Jake Eaton, Sam Kennedy, Fabien Roger, Alex Glynn, Runjin Chen, Ben Wright, Otto Stegmaier, Jon Kutasov, Dan Foreman-Mackey*
+*Paul C. Bogdan, Richard Qi, Jake Eaton, Sam Kennedy, Fabien Roger, Alex Glynn, Runjin Chen, Ben Wright, Otto Stegmaier, Jon Kutasov, Dan Foreman-Mackey, Trenton Bricken*
 
 *Sylvie Carr, Shan Carter, Monte MacDiarmid, Samuel Marks, Adam Pearce, Elana Simon*
 
@@ -579,6 +579,7 @@ We take a layered approach to safety on the expectation that any given layer wil
                   Stegmaier, Otto and
                   Kutasov, Jon and
                   Foreman-Mackey, Dan and
+                  Bricken, Trenton and
                   Carr, Sylvie and
                   Carter, Shan and
                   MacDiarmid, Monte and
@@ -609,6 +610,12 @@ Copy
 
 ## Related content
 
+### How Claude is uplifting biomolecular modeling
+
+Claude made the open-source models that scientists use to predict and design biomolecules faster and more memory-efficient. Claude optimized more than 30 of these models in just under four weeks, speeding them up roughly 4x on average. It also created a low-memory mode that enables the accurate prediction of biomolecular systems larger than 10,000 tokens (amino acids, nucleotides, and atoms from small molecules and ions) on a single NVIDIA GPU node.
+
+[Read more](https://www.anthropic.com/research/claude-uplifts-biomolecular-modeling)
+
 ### Measuring tactical intelligence targeting and conventional weapons capabilities of AI models
 
 Anthropic’s Frontier Red Team developed new evaluations to measure AI capabilities in tactical intelligence targeting and conventional weapons development.
@@ -620,9 +627,3 @@ Anthropic’s Frontier Red Team developed new evaluations to measure AI capabili
 We are sharing the first complete computer-checked proof of Fermat’s Last Theorem. Claude worked largely autonomously over 11 days to write the proof in the Lean programming language.
 
 [Read more](https://www.anthropic.com/research/formalizing-fermats-last-theorem)
-
-### Automated researchers can reliably mitigate alignment failures
-
-We had Claude autonomously train models to improve their performance on several public benchmarks that measure 10 categories of alignment failure. For all 10, Claude found fixes that improved the target benchmarks without degrading capabilities.
-
-[Read more](https://www.anthropic.com/research/automated-researchers-mitigate-alignment-failures)

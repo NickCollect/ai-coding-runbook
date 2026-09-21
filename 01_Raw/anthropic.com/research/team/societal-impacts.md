@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/societal-impacts
-fetched_at: 2026-09-14T05:36:14.621431+00:00
+fetched_at: 2026-09-21T05:44:14.428954+00:00
 title: "Societal Impacts Research \\ Anthropic"
 ---
 
@@ -26,9 +26,9 @@ Though the Societal Impacts team is technical, they often pick research question
 
 [## What 81,000 people want from AI
 
-[Mar 18, 2026
+Mar 18, 2026
 
-We invited Claude.ai users to share how they use AI, what they dream it could make possible, and what they fear it might do. Nearly 81,000 people participated—the largest and most multilingual qualitative study of its kind. Here's what we found.](https://www.anthropic.com/81k-interviews)](https://www.anthropic.com/81k-interviews)
+We invited Claude.ai users to share how they use AI, what they dream it could make possible, and what they fear it might do. Nearly 81,000 people participated—the largest and most multilingual qualitative study of its kind. Here's what we found.](https://www.anthropic.com/81k-interviews)
 
 [Societal ImpactsAug 26, 2026
 

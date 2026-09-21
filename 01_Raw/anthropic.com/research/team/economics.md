@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/economics
-fetched_at: 2026-09-14T05:36:14.511966+00:00
+fetched_at: 2026-09-21T05:44:14.321475+00:00
 title: "Economics \\ Anthropic"
 ---
 
@@ -24,7 +24,7 @@ Economic transitions create both opportunity and disruption. The speed of AI dev
 
 [## Scenarios for our Economic Future
 
-[Anthropic’s Economics team is sharing a new model of how AI may affect economic growth, jobs, wages, and more by 2030. The model lets you explore the scenarios, tell us what you think will happen, and see how your answers compare to +10,000 Americans.](https://www.anthropic.com/institute/econ-scenarios)](https://www.anthropic.com/institute/econ-scenarios)
+Anthropic’s Economics team is sharing a new model of how AI may affect economic growth, jobs, wages, and more by 2030. The model lets you explore the scenarios, tell us what you think will happen, and see how your answers compare to +10,000 Americans.](https://www.anthropic.com/institute/econ-scenarios)
 
 [EconomicsJun 26, 2026
 

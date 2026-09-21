@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/intelligence-targeting-conventional-weapons-capabilities
-fetched_at: 2026-09-14T05:36:12.406612+00:00
+fetched_at: 2026-09-21T05:44:12.129473+00:00
 title: "Measuring AI capabilities in intelligence targeting and conventional weapons \\ Anthropic"
 ---
 
@@ -176,6 +176,12 @@ Finally, as model progress continues, we expect more aspects of military and int
 
 ## Related content
 
+### How Claude is uplifting biomolecular modeling
+
+Claude made the open-source models that scientists use to predict and design biomolecules faster and more memory-efficient. Claude optimized more than 30 of these models in just under four weeks, speeding them up roughly 4x on average. It also created a low-memory mode that enables the accurate prediction of biomolecular systems larger than 10,000 tokens (amino acids, nucleotides, and atoms from small molecules and ions) on a single NVIDIA GPU node.
+
+[Read more](https://www.anthropic.com/research/claude-uplifts-biomolecular-modeling)
+
 ### An alignment assessment of recent cybersecurity incidents
 
 We present an alignment assessment of four incidents in which Claude models gained unauthorized access to real third-party systems.
@@ -187,12 +193,6 @@ We present an alignment assessment of four incidents in which Claude models gain
 We are sharing the first complete computer-checked proof of Fermat’s Last Theorem. Claude worked largely autonomously over 11 days to write the proof in the Lean programming language.
 
 [Read more](https://www.anthropic.com/research/formalizing-fermats-last-theorem)
-
-### Automated researchers can reliably mitigate alignment failures
-
-We had Claude autonomously train models to improve their performance on several public benchmarks that measure 10 categories of alignment failure. For all 10, Claude found fixes that improved the target benchmarks without degrading capabilities.
-
-[Read more](https://www.anthropic.com/research/automated-researchers-mitigate-alignment-failures)
 
 ## Subscribe to the Frontier Red Team newsletter
 
