@@ -23,71 +23,51 @@ describe('empty-state-of', () => {
     ...overrides,
   })
 
+  const emptyOf = (data: Git.DiffData | null, filesCount: number) =>
+    PaneState.emptyStateOf({ data, words: Git.GIT_WORDS }, filesCount)
+
   test("the built-in's headlines, keyed on the fetched mode", () => {
-    expect(PaneState.emptyStateOf(null, 0, Git.GIT_WORDS)?.headline).toBe(
-      'Diff unavailable',
-    )
+    expect(emptyOf(null, 0)?.headline).toBe('Diff unavailable')
 
-    expect(PaneState.emptyStateOf(dataIn('session'), 0, Git.GIT_WORDS)).toEqual(
-      {
-        headline: 'No changes this session',
-        hint: null,
-      },
+    expect(emptyOf(dataIn('session'), 0)).toEqual({
+      headline: 'No changes this session',
+      hint: null,
+    })
+
+    expect(emptyOf(dataIn('uncommitted'), 0)?.headline).toBe(
+      'No uncommitted changes',
     )
 
     expect(
-      PaneState.emptyStateOf(dataIn('uncommitted'), 0, Git.GIT_WORDS)?.headline,
-    ).toBe('No uncommitted changes')
-
-    expect(
-      PaneState.emptyStateOf(
-        dataIn('branch', { source: Fixtures.VS_MAIN }),
-        0,
-        Git.GIT_WORDS,
-      )?.headline,
+      emptyOf(dataIn('branch', { source: Fixtures.VS_MAIN }), 0)?.headline,
     ).toBe('No changes vs main')
 
-    expect(PaneState.emptyStateOf(dataIn('branch'), 0, Git.GIT_WORDS)).toEqual({
+    expect(emptyOf(dataIn('branch'), 0)).toEqual({
       headline: 'No changes vs HEAD',
       hint: 'No base branch to compare against — showing changes vs HEAD',
     })
 
-    expect(
-      PaneState.emptyStateOf(
-        dataIn('session', { isUnborn: true }),
-        0,
-        Git.GIT_WORDS,
-      ),
-    ).toEqual({
+    expect(emptyOf(dataIn('session', { isUnborn: true }), 0)).toEqual({
       headline: 'No commits yet',
       hint: "Nothing to diff against until the repo's first commit",
     })
   })
 
   test('with files to count there is no empty state', () => {
-    expect(
-      PaneState.emptyStateOf(dataIn('session'), 2, Git.GIT_WORDS),
-    ).toBeNull()
+    expect(emptyOf(dataIn('session'), 2)).toBeNull()
   })
 
   test('no tracked rows, untracked withheld: claims no more', () => {
     const withheld = { isUntrackedWithheld: true }
 
-    expect(
-      PaneState.emptyStateOf(dataIn('session', withheld), 0, Git.GIT_WORDS)
-        ?.headline,
-    ).toBe('No tracked changes')
+    expect(emptyOf(dataIn('session', withheld), 0)?.headline).toBe(
+      'No tracked changes',
+    )
 
     expect(
-      PaneState.emptyStateOf(
-        dataIn('session', { ...withheld, isUnborn: true }),
-        0,
-        Git.GIT_WORDS,
-      )?.headline,
+      emptyOf(dataIn('session', { ...withheld, isUnborn: true }), 0)?.headline,
     ).toBe('No tracked changes')
 
-    expect(
-      PaneState.emptyStateOf(dataIn('uncommitted', withheld), 1, Git.GIT_WORDS),
-    ).toBeNull()
+    expect(emptyOf(dataIn('uncommitted', withheld), 1)).toBeNull()
   })
 })

@@ -520,7 +520,7 @@ describe('fetch-diff', () => {
     expect(rows.every(row => row.isPreSession)).toBe(true)
   })
 
-  test('a rename is one row under its new name, diffed as a pair', async () => {
+  test('a rename is one row under its new name and reads no body', async () => {
     const deps = depsOf({
       'HEAD --shortstat': Fixtures.ok(' 1 file changed, 1 insertion(+)'),
       'HEAD --numstat': Fixtures.ok('1\t1\t\0old.ts\0new.ts\0'),
@@ -539,6 +539,7 @@ describe('fetch-diff', () => {
       ['new.ts', 'old.ts'],
     ])
 
-    expect(body?.hunks[0]?.lines).toEqual(['-a', '+b'])
+    expect(body).toEqual(Git.EMPTY_FILE_HUNKS)
+    expect(deps.argvs.some(argv => argv.includes('new.ts'))).toBe(false)
   })
 })

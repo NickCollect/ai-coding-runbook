@@ -31,18 +31,20 @@ describe('pane-view', () => {
   ): PaneState.PaneModel => ({
     ...PaneState.INITIAL_MODEL,
     hasSettled: true,
+    place: Fixtures.WHOLE_PLACE,
     ...overrides,
   })
 
   const EARLIER = [Fixtures.rowOf('old.ts', { isPreSession: true })]
 
-  test('header, noted rows, the earlier line, the selection', async ($, on) => {
+  test('docked: header, rows, every body, the earlier line', async ($, on) => {
     const tree = await Fixtures.dockedPane(
       $,
       on,
       modelOf({
         data: dataOf([
           Fixtures.rowOf('src/a.ts'),
+          Fixtures.rowOf('src/b.ts'),
           Fixtures.rowOf('img.png', { isBinary: true }),
           Fixtures.rowOf('notes.txt', {
             added: 0,
@@ -52,27 +54,37 @@ describe('pane-view', () => {
           Fixtures.rowOf('test/a.test.ts'),
           Fixtures.rowOf('old.ts', { isPreSession: true }),
         ]),
-        body: Fixtures.SMALL_BODY,
-        bodyState: 'ready',
+        bodies: Fixtures.bodiesOf(Fixtures.SMALL_BODY, 'src/a.ts', 'src/b.ts'),
       }),
     )
 
     const text = Fixtures.jsonOf(tree)
 
     expect(Fixtures.isDrawn(tree), 'under the node cap').toBe(true)
-    expect(text).toContain('4 files')
-    expect(text).toContain('Binary file')
-    expect(text).toContain('untracked')
+    expect(text).toContain('5 files')
+    expect(text).toContain('Binary file - cannot display diff')
+    expect(text).toContain('New file not yet staged.')
     expect(text).toContain('1 test/generated (show)')
     expect(text).not.toContain('test/a.test.ts')
     expect(text).toContain('+1 file edited before this session (show)')
-    expect(text).toContain('❯ src/a.ts')
-    expect(text).toContain('"type":"Code"')
-    expect(text).toContain('"label":"ask"')
+    expect(text).not.toContain('❯')
+
+    expect(Fixtures.codesIn(tree).map(code => code.path)).toEqual([
+      'src/a.ts',
+      'src/b.ts',
+    ])
+
+    expect(text).toContain('"key":"ask:src/b.ts"')
+
+    expect(
+      Fixtures.elementIn(tree, { type: 'Button', name: 'base' })?.props,
+      "the built-in's base chord on an empty Button",
+    ).toMatchObject({ action: 'app:cycleDiffBase', label: '' })
   })
 
   test('untracked withheld: the rows stay, the pane says so', async ($, on) => {
     const draw = Fixtures.docksPane($, on)
+    const words = { words: PaneState.INITIAL_MODEL.words }
 
     const listed = Fixtures.jsonOf(
       await draw(
@@ -89,11 +101,11 @@ describe('pane-view', () => {
     ).join('')
 
     expect(listed).toContain('1 file')
-    expect(listed).toContain('❯ src/a.ts')
-    expect(listed).toContain(Names.untrackedWithheldTextOf({ lister: 'git' }))
+    expect(listed).toContain('"label":"src/a.ts')
+    expect(listed).toContain(Names.untrackedWithheldTextOf(words))
     expect(bare).toContain('No tracked changes')
     expect(bare).not.toContain('No changes this session')
-    expect(bare).toContain(Names.untrackedWithheldTextOf({ lister: 'git' }))
+    expect(bare).toContain(Names.untrackedWithheldTextOf(words))
   })
 
   test('a file at the line cap draws under the tree caps', async ($, on) => {
@@ -106,12 +118,14 @@ describe('pane-view', () => {
       on,
       modelOf({
         data: dataOf([Fixtures.rowOf('src/long.ts')]),
-        body: {
-          hunks: [{ oldStart: 1, newStart: 1, lines }],
-          isTruncated: true,
-          isLarge: false,
-        },
-        bodyState: 'ready',
+        bodies: Fixtures.bodiesOf(
+          {
+            hunks: [{ oldStart: 1, newStart: 1, lines }],
+            isTruncated: true,
+            isLarge: false,
+          },
+          'src/long.ts',
+        ),
       }),
     )
 
@@ -138,10 +152,15 @@ describe('pane-view', () => {
       ),
     )
 
+    const loading = Fixtures.jsonOf(
+      await draw(modelOf({ data: dataOf([Fixtures.rowOf('src/a.ts')]) })),
+    )
+
     expect(untracked).toContain('New file not yet staged.')
     expect(untracked).not.toContain('"label":"ask"')
     expect(untracked).toContain('Run `git add :/notes.txt` to see line counts.')
     expect(untracked).not.toContain("':/")
+    expect(loading).toContain('Loading diff…')
 
     expect(
       Fixtures.stringsOf(await draw(modelOf({ data: null }))).join(''),
@@ -152,7 +171,7 @@ describe('pane-view', () => {
     ).toContain("isn't in a git repository")
   })
 
-  test('a picked turn draws its files under the turn title', async ($, on) => {
+  test('a picked turn draws its files under the turn line', async ($, on) => {
     const text = Fixtures.jsonOf(
       await Fixtures.dockedPane(
         $,
@@ -171,32 +190,60 @@ describe('pane-view', () => {
     expect(text).toContain('… diff truncated (exceeded 400 line limit)')
   })
 
-  test('a body past the char budget is cut, says truncated', async ($, on) => {
-    const lines = Array.from(
-      { length: Limits.MAX_LINES_PER_FILE },
-      (_, at) => `+const value${at} = ${'0'.repeat(Fixtures.LONG_LINE_CHARS)}`,
-    )
-
+  test('a long body splits into leaves under their cap', async ($, on) => {
     const tree = await Fixtures.dockedPane(
       $,
       on,
       modelOf({
         data: dataOf([Fixtures.rowOf('src/long-lines.ts')]),
-        body: {
-          hunks: [{ oldStart: 0, newStart: 1, lines }],
-          isTruncated: false,
-          isLarge: false,
-        },
-        bodyState: 'ready',
+        bodies: Fixtures.bodiesOf(Fixtures.bigBodyOf(), 'src/long-lines.ts'),
       }),
     )
 
-    expect(Fixtures.codesIn(tree).length).toBeGreaterThan(1)
-    expect(Fixtures.isDrawn(tree), 'the engine took the tree').toBe(true)
-    expect(Fixtures.jsonOf(tree)).toContain('(truncated)')
+    const codes = Fixtures.codesIn(tree)
+    const chars = codes.reduce((sum, code) => sum + code.source.length, 0)
 
-    expect(Fixtures.jsonOf(tree)).toContain(
-      '… diff truncated (exceeded 400 line limit)',
+    expect(codes.length).toBeGreaterThan(1)
+    expect(Fixtures.isDrawn(tree), 'the engine took the tree').toBe(true)
+
+    expect(
+      codes.every(code => code.source.length <= Views.MAX_CODE_CHARS),
+    ).toBe(true)
+
+    expect(chars).toBeLessThanOrEqual(Views.MAX_BODY_CHARS)
+  })
+
+  test('the window draws what is in view, a scroll the rest', async ($, on) => {
+    const draw = Fixtures.docksPane($, on)
+
+    const model = modelOf({
+      data: dataOf([Fixtures.rowOf('a.ts'), Fixtures.rowOf('b.ts')]),
+      bodies: new Map<string, Git.FileHunks>([
+        ['a.ts', Fixtures.bigBodyOf()],
+        ['b.ts', Fixtures.SMALL_BODY],
+      ]),
+      place: { ...Fixtures.WHOLE_PLACE, rows: Fixtures.BODY_ROWS },
+    })
+
+    const top = await draw(model)
+    const { tops } = Views.bodyLayoutOf(model, Views.dockPlanOf(model))
+
+    const scrolled = await draw({
+      ...model,
+      place: { ...model.place, top: tops.get('b.ts') ?? 0 },
+    })
+
+    expect(Fixtures.isDrawn(top), 'the engine took the tree').toBe(true)
+    expect(Fixtures.codesIn(top).map(code => code.path)).toEqual(['a.ts'])
+    expect(Fixtures.jsonOf(top)).toContain('"key":"file:b.ts"')
+
+    expect(
+      Fixtures.codesIn(scrolled).map(code => code.path),
+      "a.ts's tail, then b.ts whole (the window stops at the body's end)",
+    ).toEqual(['a.ts', 'b.ts'])
+
+    expect(Fixtures.jsonOf(scrolled), 'the list stays').toContain(
+      '"key":"file:a.ts"',
     )
   })
 
@@ -209,9 +256,7 @@ describe('pane-view', () => {
           Fixtures.rowOf('evil\nfake.ts  +9 -9'),
           Fixtures.rowOf('esc\u001bname.ts', { renamedFrom: 'old\u001b.ts' }),
         ]),
-        selectedPath: 'esc\u001bname.ts',
-        body: Fixtures.SMALL_BODY,
-        bodyState: 'ready',
+        bodies: Fixtures.bodiesOf(Fixtures.SMALL_BODY, 'evil\nfake.ts  +9 -9'),
       }),
     )
 
@@ -224,7 +269,7 @@ describe('pane-view', () => {
     expect(text).not.toContain('\\u001b')
     expect(text).not.toContain('evil\\nfake')
     expect(text).toContain('evilfake.ts  +9 -9')
-    expect(text).toContain('(renamed from old.ts)')
+    expect(text).toContain('old.ts => escname.ts')
   })
 
   test('a path past the string cap is cut in the header', async ($, on) => {
@@ -237,9 +282,6 @@ describe('pane-view', () => {
         data: dataOf([
           Fixtures.rowOf(longPath, { renamedFrom: `${longPath}.old` }),
         ]),
-        selectedPath: longPath,
-        body: Fixtures.SMALL_BODY,
-        bodyState: 'ready',
       }),
     )
 
@@ -274,7 +316,7 @@ describe('pane-view', () => {
 
     expect(compared).toContain('branch vs maniam')
     expect(empty).toContain('No changes vs maniam')
-    expect(compared + empty).not.toContain('\u202E')
+    expect(compared + empty).not.toContain('‮')
   })
 
   test('only a plainly safe name gets a git add to paste', async ($, on) => {
@@ -295,13 +337,13 @@ describe('pane-view', () => {
     for (const path of [
       '$(curl evil|sh).txt',
       "it's.txt",
-      'x\u2019;payload;\u2019',
+      "x';payload;'",
       'a&b.txt',
     ]) {
       hints.push(await hintOf(path))
     }
 
-    const reversed = await untrackedOf('invoice\u202Etxt.exe')
+    const reversed = await untrackedOf('invoice‮txt.exe')
 
     expect(await hintOf('src/café-2.txt')).toContain(
       'Run `git add :/src/café-2.txt` to see line counts.',
@@ -319,8 +361,8 @@ describe('pane-view', () => {
       'Run `git add',
     )
 
-    expect(Fixtures.jsonOf(reversed)).toContain('"label":"❯ invoicetxt.exe"')
-    expect(Fixtures.jsonOf(reversed)).not.toContain('\u202E')
+    expect(Fixtures.jsonOf(reversed)).toContain('"label":"invoicetxt.exe')
+    expect(Fixtures.jsonOf(reversed)).not.toContain('‮')
   })
 
   test("docked: the built-in's blank top row, last column", async ($, on) => {
@@ -329,8 +371,7 @@ describe('pane-view', () => {
       on,
       modelOf({
         data: dataOf([Fixtures.rowOf('src/a.ts')]),
-        body: Fixtures.SMALL_BODY,
-        bodyState: 'ready',
+        bodies: Fixtures.bodiesOf(Fixtures.SMALL_BODY, 'src/a.ts'),
       }),
     )
 
@@ -350,13 +391,43 @@ describe('pane-view', () => {
     expect(Fixtures.stringsOf(tree)).not.toContain(`${rule}─`)
   })
 
+  test("docked rows follow the built-in's, its hunks after", async ($, on) => {
+    expect(
+      Fixtures.rowShapesOf(
+        await Fixtures.dockedPane(
+          $,
+          on,
+          modelOf({
+            data: dataOf([Fixtures.rowOf('src/a.ts'), Fixtures.rowOf('b.ts')]),
+            bodies: Fixtures.bodiesOf(Fixtures.SMALL_BODY, 'src/a.ts', 'b.ts'),
+          }),
+        ),
+      ),
+    ).toEqual([
+      '',
+      'b.ts'.padEnd(
+        Fixtures.COLUMNS - Limits.PANE_RIGHT_PAD_COLUMNS - '+2 -1'.length,
+      ),
+      'rule',
+      'ask',
+      'rule',
+      '',
+      'blank',
+      'rule',
+      'ask',
+      'rule',
+      '',
+      'blank',
+    ])
+  })
+
   test("an empty state on the built-in's row, foot below", async ($, on) => {
     const [body] = Fixtures.childrenOf(
       await Fixtures.dockedPane($, on, modelOf({ data: dataOf(EARLIER) })),
     )
 
     const [header, pad, middle, foot, ...more] = Fixtures.childrenOf(body)
-    const [spacer, headline, controls] = Fixtures.childrenOf(middle)
+    const [spacer, headline, ...under] = Fixtures.childrenOf(middle)
     const aboveMiddle = Limits.PANE_TOP_PAD_ROWS + 2
 
     expect(body).toMatchObject({
@@ -364,7 +435,12 @@ describe('pane-view', () => {
     })
 
     expect(Fixtures.stringsOf(header)).toEqual([])
-    expect(Fixtures.jsonOf(header)).toContain('"label":"✕"')
+    expect(Fixtures.jsonOf(header)).not.toContain('✕')
+
+    expect(
+      Fixtures.elementIn(header, { type: 'Button', name: 'base' }),
+    ).toBeDefined()
+
     expect(pad).toMatchObject({ type: 'Box', props: { height: 1 } })
     expect(middle).toMatchObject({ props: { alignItems: 'center' } })
 
@@ -374,11 +450,7 @@ describe('pane-view', () => {
     })
 
     expect(Fixtures.stringsOf(headline)).toEqual(['No changes this session'])
-
-    expect(
-      Fixtures.elementIn(controls, { type: 'Select', name: 'base' }),
-    ).toBeDefined()
-
+    expect(under).toEqual([])
     expect(foot).toMatchObject({ props: { marginTop: 1, paddingBottom: 1 } })
 
     expect(Fixtures.jsonOf(foot)).toContain(
@@ -398,7 +470,7 @@ describe('pane-view', () => {
           data: dataOf(EARLIER),
           isPreSessionShown: rows === Fixtures.BODY_ROWS,
         }),
-        'dock',
+        Fixtures.DOCK_SEAT,
       ),
     )
 
@@ -408,25 +480,27 @@ describe('pane-view', () => {
 
     const cramped = await $.ui.render(Fixtures.VIEW_PANE)
 
-    const [header, pad, headline, controls, earlier, blank, row] =
+    const [header, pad, headline, blank, earlier, gap, legend, first] =
       Fixtures.childrenOf(Fixtures.childrenOf(shown)[0])
 
     expect(Fixtures.jsonOf(shown)).not.toContain('"alignItems":"center"')
     expect(Fixtures.jsonOf(cramped)).not.toContain('"alignItems":"center"')
-    expect(Fixtures.jsonOf(header)).toContain('"label":"✕"')
-    expect(pad).toMatchObject({ type: 'Box', props: { height: 1 } })
-    expect(Fixtures.stringsOf(headline)).toEqual(['No changes this session'])
 
     expect(
-      Fixtures.elementIn(controls, { type: 'Select', name: 'base' }),
+      Fixtures.elementIn(header, { type: 'Button', name: 'base' }),
     ).toBeDefined()
+
+    expect(pad).toMatchObject({ type: 'Box', props: { height: 1 } })
+    expect(Fixtures.stringsOf(headline)).toEqual(['No changes this session'])
+    expect(blank).toMatchObject({ type: 'Box', props: { height: 1 } })
 
     expect(Fixtures.jsonOf(earlier)).toContain(
       '"label":"+1 file edited before this session (hide)"',
     )
 
-    expect(blank).toMatchObject({ type: 'Box', props: { height: 1 } })
-    expect(Fixtures.jsonOf(row)).toContain('old.ts')
+    expect(gap).toMatchObject({ type: 'Box', props: { height: 1 } })
+    expect(Fixtures.stringsOf(legend)).toContain('old.ts')
+    expect(Fixtures.rowShapeOf(first), "the first body's top rule").toBe('rule')
   })
 
   test("shown pre-session rows land on the built-in's rows", async ($, on) => {
@@ -438,70 +512,84 @@ describe('pane-view', () => {
           modelOf({
             data: dataOf([
               Fixtures.rowOf('config.toml', { isPreSession: true }),
+              Fixtures.rowOf('setup.cfg', { isPreSession: true }),
             ]),
             isPreSessionShown: true,
-            body: Fixtures.SMALL_BODY,
-            bodyState: 'ready',
+            bodies: Fixtures.bodiesOf(
+              Fixtures.SMALL_BODY,
+              'config.toml',
+              'setup.cfg',
+            ),
           }),
         ),
       ).slice(1),
     ).toEqual([
       'blank',
       'No changes this session',
-      'this session',
-      '+1 file edited before this session (hide)',
       'blank',
-      '❯ config.toml',
+      '+2 files edited before this session (hide)',
+      'blank',
+      'config.toml+2 -1',
+      'setup.cfg+2 -1',
       'rule',
       'ask',
+      'rule',
+      '',
+      'rule',
+      'ask',
+      'rule',
+      '',
     ])
   })
 
-  test('a blank row sits between the rows and earlier line', async ($, on) => {
-    const draw = Fixtures.docksPane($, on)
+  test('inline: title, rows round the pick, then one body', async ($, on) => {
+    const files = Array.from(
+      { length: Limits.MAX_VISIBLE_FILES + 2 },
+      (_, at) => Fixtures.rowOf(`f${at}.ts`),
+    )
 
-    const rowsWith = async (isPreSessionShown: boolean) =>
-      Fixtures.rowShapesOf(
-        await draw(
-          modelOf({
-            data: dataOf([
-              Fixtures.rowOf('src/a.ts'),
-              Fixtures.rowOf('old.ts', { isPreSession: true }),
-            ]),
-            isPreSessionShown,
-          }),
-        ),
-      )
+    const draw = Fixtures.docksPane($, on, { placement: 'inline' })
 
-    const hidden = await rowsWith(false)
-    const shown = await rowsWith(true)
-    const hiddenAt = hidden.indexOf('+1 file edited before this session (show)')
-    const shownAt = shown.indexOf('+1 file edited before this session (hide)')
-
-    expect(hidden.slice(hiddenAt - 2, hiddenAt + 1)).toEqual([
-      '❯ src/a.ts',
-      'blank',
-      '+1 file edited before this session (show)',
-    ])
-
-    expect(shown.slice(shownAt, shownAt + 3)).toEqual([
-      '+1 file edited before this session (hide)',
-      'blank',
-      '  old.ts',
-    ])
-  })
-
-  test("the header's ✕ closes the pane in each state", async ($, on) => {
-    let closes = 0
-
-    const draw = Fixtures.docksPane($, on, {
-      actions: {
-        ...Fixtures.noopActionsOf(),
-        close: () => {
-          closes += 1
-        },
-      },
+    const listing = modelOf({
+      data: dataOf(files),
+      selectedPath: 'f6.ts',
+      isFullscreen: false,
+      bodies: Fixtures.bodiesOf(Fixtures.SMALL_BODY, 'f0.ts', 'f6.ts'),
     })
+
+    const tree = await draw(listing)
+    const text = Fixtures.jsonOf(tree)
+    const detail = await draw({ ...listing, dialogView: 'detail' })
+
+    expect(text).toContain('Uncommitted changes')
+    expect(text).toContain('(git diff HEAD)')
+    expect(text).toContain('"label":"❯ f6.ts"')
+    expect(text).toContain('"autoFocus":true')
+    expect(text).toContain(' ↑ 2 more files')
+    expect(text).not.toContain('"label":"  f0.ts"')
+    expect(Fixtures.codesIn(tree)).toEqual([])
+    expect(Fixtures.codesIn(detail).map(code => code.path)).toEqual(['f6.ts'])
+    expect(Fixtures.jsonOf(detail)).not.toContain('"label":"❯ f6.ts"')
+    expect(Fixtures.jsonOf(detail)).toContain('Esc to back')
+
+    expect(tree).toMatchObject({
+      type: 'Box',
+      props: { flexDirection: 'column' },
+    })
+
+    expect(text).not.toContain('"paddingTop"')
+  })
+
+  test('inline, too narrow: the wider-terminal line alone', async ($, on) => {
+    expect(
+      Fixtures.stringsOf(
+        await Fixtures.docksPane($, on, Fixtures.NARROW_SEAT)(modelOf({})),
+      ),
+    ).toEqual([Names.RESIZE_TERMINAL_TEXT])
+  })
+
+  test('the header row carries its controls in every state', async ($, on) => {
+    const draw = Fixtures.docksPane($, on)
 
     const models = [
       modelOf({ data: dataOf([Fixtures.rowOf('src/a.ts')]) }),
@@ -516,21 +604,17 @@ describe('pane-view', () => {
     for (const model of models) {
       const tree = await draw(model)
       const [header] = Fixtures.childrenOf(Fixtures.childrenOf(tree)[0])
-      const close = Fixtures.childrenOf(header).at(-1)
-
-      expect(close).toMatchObject({ type: 'Box', props: { key: 'close' } })
-
-      expect(
-        Fixtures.elementIn(close, { type: 'Button', name: 'close' }),
-      ).toMatchObject({ props: { label: '✕', plain: true } })
+      const isTurn = model.source.kind === 'turn'
 
       expect(Fixtures.isDrawn(tree), 'the engine took the tree').toBe(true)
+      expect(Fixtures.jsonOf(tree)).not.toContain('"label":"✕"')
 
-      expect(await $.ui.press({ plugin: 'test', key: 'close' })).toEqual({
-        element: 'close',
-      })
+      expect(
+        Fixtures.elementIn(header, {
+          type: isTurn ? 'Select' : 'Button',
+          name: isTurn ? 'source' : 'base',
+        }),
+      ).toBeDefined()
     }
-
-    expect(closes).toBe(models.length)
   })
 })

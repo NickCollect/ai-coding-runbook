@@ -4,9 +4,15 @@
  */
 export type PaneActions = {
   /**
-   * Shows this file's body under the list.
+   * Docked, scrolls the body to this file's hunks; inline, picks the file
+   * and opens its detail.
    */
   selectFile: (path: string) => void
+
+  /**
+   * Moves the docked list's window by so many files, clamped to the list.
+   */
+  scrollList: (delta: number) => void
 
   /**
    * Shows or hides the tests and generated files.
@@ -19,10 +25,9 @@ export type PaneActions = {
   togglePreSession: () => void
 
   /**
-   * Picks the comparison base by its Select value; an unknown value is
-   * ignored.
+   * Moves the comparison base on to the next mode, round to the first.
    */
-  chooseBase: (value: string) => void
+  cycleBase: () => void
 
   /**
    * Picks the source by its Select value: `current` or a turn's number.
@@ -33,10 +38,4 @@ export type PaneActions = {
    * Arms this file's diff for the next prompt, or disarms it.
    */
   toggleAsk: (path: string) => void
-
-  /**
-   * Closes the pane as `/diff` closes it, the choice kept for the next
-   * first edit.
-   */
-  close: () => void
 }

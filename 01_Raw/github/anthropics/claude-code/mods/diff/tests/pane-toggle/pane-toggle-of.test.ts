@@ -6,11 +6,10 @@ import PaneToggle from '../../hooks/pane-toggle'
 tier('builtin')
 
 describe('pane-toggle-of', () => {
-  test('a pane believed open that still draws closes, however narrow', () => {
+  test('an open pane closes, however narrow', () => {
     expect(
       PaneToggle.paneToggleOf({
-        isBelievedOpen: true,
-        wasDrawnWhenProbed: true,
+        isOpen: true,
         columns: Limits.OPEN_MIN_COLUMNS - 1,
       }),
     ).toBe('close')
@@ -19,36 +18,20 @@ describe('pane-toggle-of', () => {
   test('below the panel width it is too narrow, from it it opens', () => {
     expect(
       PaneToggle.paneToggleOf({
-        isBelievedOpen: false,
-        wasDrawnWhenProbed: false,
+        isOpen: false,
         columns: Limits.OPEN_MIN_COLUMNS - 1,
       }),
     ).toBe('too-narrow')
 
     expect(
       PaneToggle.paneToggleOf({
-        isBelievedOpen: false,
-        wasDrawnWhenProbed: false,
+        isOpen: false,
         columns: Limits.OPEN_MIN_COLUMNS,
       }),
     ).toBe('open')
 
-    expect(
-      PaneToggle.paneToggleOf({
-        isBelievedOpen: false,
-        wasDrawnWhenProbed: false,
-        columns: null,
-      }),
-    ).toBe('open')
-  })
-
-  test('a pane the person closed reopens only where it fits', () => {
-    expect(
-      PaneToggle.paneToggleOf({
-        isBelievedOpen: true,
-        wasDrawnWhenProbed: false,
-        columns: Limits.OPEN_MIN_COLUMNS - 1,
-      }),
-    ).toBe('too-narrow')
+    expect(PaneToggle.paneToggleOf({ isOpen: false, columns: null })).toBe(
+      'open',
+    )
   })
 })

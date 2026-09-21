@@ -7,4 +7,5 @@ export const CLEAR: CommandRunInput = {
   command: 'clear',
   args: '',
   origin: { kind: 'composer' },
+  presentation: { isFullscreen: true, columns: 160 },
 }

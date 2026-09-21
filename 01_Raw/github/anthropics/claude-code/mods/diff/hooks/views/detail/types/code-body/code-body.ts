@@ -1,10 +1,11 @@
-import type { CodeBlock } from '../code-block'
+import type { BodyRoom } from '../body-room'
 
 /**
- * A file's hunks as the body draws them: the `Code` blocks in order, and
- * whether the body's budget or a source's cap left any of a line out.
+ * A file's hunks as the body draws them: one `Code` source per hunk in
+ * order, whether any of a line was left out, and the room after them.
  */
 export type CodeBody = {
-  blocks: readonly CodeBlock[]
+  sources: readonly string[]
   isTruncated: boolean
+  room: BodyRoom
 }

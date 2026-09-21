@@ -6,37 +6,38 @@ import Fixtures from '../../fixtures'
 tier('builtin')
 
 describe('detail-view', () => {
-  test('hunks draw as one diff Code named by the path', async ($, on) => {
-    Fixtures.drawsPane(on, kit =>
-      Views.detailView(
-        kit,
-        {
-          words: { untrackedNoteOf: () => [] },
-          path: 'src/app/config.ts',
-          renamedFrom: null,
-          isUntracked: false,
-          isBinary: false,
-          body: {
-            hunks: [
-              {
-                oldStart: 1,
-                newStart: 1,
-                lines: [' a = 1', '-b = 2', '+b = 3', ' c = 4'],
-              },
-              {
-                oldStart: Fixtures.BIG_LINES,
-                newStart: Fixtures.BIG_LINES,
-                lines: [' x = 1', '+y = 2'],
-              },
-            ],
-            isTruncated: false,
-            isLarge: false,
+  test('each hunk draws as a diff Code named by the path', async ($, on) => {
+    Fixtures.drawsPane(
+      on,
+      kit =>
+        Views.detailView(
+          kit,
+          {
+            words: { untrackedNoteOf: () => [] },
+            path: 'src/app/config.ts',
+            displayPath: 'src/app/config.ts',
+            isUntracked: false,
+            isBinary: false,
+            body: {
+              hunks: [
+                {
+                  oldStart: 1,
+                  newStart: 1,
+                  lines: [' a = 1', '-b = 2', '+b = 3', ' c = 4'],
+                },
+                {
+                  oldStart: Fixtures.BIG_LINES,
+                  newStart: Fixtures.BIG_LINES,
+                  lines: [' x = 1', '+y = 2'],
+                },
+              ],
+              isTruncated: false,
+              isLarge: false,
+            },
+            isArmed: false,
           },
-          bodyState: 'ready',
-          isArmed: false,
-        },
-        Fixtures.noop,
-      ),
+          Views.BODY_BUDGET,
+        ).element,
     )
 
     const tree = await $.ui.render(Fixtures.VIEW_PANE)
@@ -49,10 +50,12 @@ describe('detail-view', () => {
           '-b = 2',
           '+b = 3',
           ' c = 4',
-          '@@ -1000,1 +1000,2 @@',
-          ' x = 1',
-          '+y = 2',
         ].join('\n'),
+        format: 'diff',
+        path: 'src/app/config.ts',
+      },
+      {
+        source: ['@@ -1000,1 +1000,2 @@', ' x = 1', '+y = 2'].join('\n'),
         format: 'diff',
         path: 'src/app/config.ts',
       },
@@ -65,12 +68,14 @@ describe('detail-view', () => {
   test("the name sits over the built-in's dim rule", async ($, on) => {
     let isUntracked = false
 
-    Fixtures.drawsPane(on, kit =>
-      Views.detailView(
-        kit,
-        Fixtures.configDetailOf(isUntracked),
-        Fixtures.noop,
-      ),
+    Fixtures.drawsPane(
+      on,
+      kit =>
+        Views.detailView(
+          kit,
+          Fixtures.configDetailOf(isUntracked),
+          Views.BODY_BUDGET,
+        ).element,
     )
 
     for (const untracked of [false, true]) {

@@ -2,34 +2,43 @@ import type Git from '../../git'
 import type { PaneModel } from '../pane-model'
 
 /**
- * A requested mode's name for the base line.
+ * One base mode's name in the picker, worded as the built-in's base line
+ * (diffBaseLabel) words the mode it shows.
  *
- * Branch mode names its base branch from the data, or says what stands in
- * while none is known. A working-tree diff names its own base (`HEAD`, a
- * short sha); anything else falls back to the backend's word for it.
+ * Branch mode names its base branch from the data, or once its own fetch
+ * settled without one says what stands in; uncommitted names the working
+ * tree's base. The requested mode carries an ellipsis while pending.
  *
- * @param model the mode the person picked, and the backend's words
- * @param source what the data on screen compares
- * @param phase `pending` while the requested mode's fetch has not landed
- * @returns the label without its pending ellipsis
+ * @param mode the mode to name
+ * @param model the mode the person picked, the last good fetch, the words
+ * @returns the label
  */
 export function modeLabelOf(
-  model: Pick<PaneModel, 'requestedMode' | 'words'>,
-  source: Git.DiffSource,
-  phase: 'pending' | 'settled',
-) {
-  const base = source.kind === 'working-tree' ? source.base : model.words.base
+  mode: Git.BaseMode,
+  model: Pick<PaneModel, 'requestedMode' | 'data' | 'words'>,
+): string {
+  const { data } = model
+  const source = data?.source
+  const isPending = data !== null && model.requestedMode !== data.mode
+  const isRequested = mode === model.requestedMode
+  const suffix = isRequested && isPending ? '…' : ''
+  const base = source?.kind === 'working-tree' ? source.base : model.words.base
+  const isSettledBranch = isRequested && !isPending && data?.mode === 'branch'
 
-  switch (model.requestedMode) {
-    case 'session':
-      return 'this session'
-    case 'uncommitted':
-      return `uncommitted (vs ${base})`
-    case 'branch':
-      if (source.kind === 'branch') {
-        return `branch vs ${source.baseBranch}`
-      }
+  function nameOf(): string {
+    switch (mode) {
+      case 'session':
+        return 'this session'
+      case 'uncommitted':
+        return `uncommitted (vs ${base})`
+      case 'branch':
+        if (source?.kind === 'branch') {
+          return `branch vs ${source.baseBranch}`
+        }
 
-      return phase === 'pending' ? 'branch diff' : `vs ${base} (no base branch)`
+        return isSettledBranch ? `vs ${base} (no base branch)` : 'branch diff'
+    }
   }
+
+  return `${nameOf()}${suffix}`
 }

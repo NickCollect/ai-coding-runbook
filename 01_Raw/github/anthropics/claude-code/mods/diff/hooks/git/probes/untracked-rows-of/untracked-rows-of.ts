@@ -2,14 +2,15 @@ import Limits from '../../../limits'
 import type Types from '../../types'
 import { datingsOf } from '../datings-of'
 import type { UntrackedPlace } from '../untracked-place'
+import { wasDirtyAtStart } from '../was-dirty-at-start'
 
 /**
  * Listed untracked paths as 0/0 rows: the session's own first, then,
  * when the scope asks, the tagged pre-session ones, up to the slots.
  *
  * At most MAX_UNTRACKED_PROBES are dated; a file past that or past the
- * listing budget reads as pre-session, an undatable one as the session's
- * (the built-in panel's rule).
+ * listing budget reads as pre-session, an undatable one or one that turned
+ * up since the start (wasDirtyAtStart) as the session's (the built-in's).
  *
  * @param context the fetch's stamp probe and session start
  * @param paths the untracked paths, root-relative, as the lister printed them
@@ -24,9 +25,13 @@ export async function untrackedRowsOf(
   const probedPaths = paths.slice(0, Limits.MAX_UNTRACKED_PROBES)
   const datings = await datingsOf(context, probedPaths)
 
+  const isPreSessionOf = (path: string, dating: Types.Dating | undefined) =>
+    dating === 'unlisted' ||
+    (dating === 'pre-session' && wasDirtyAtStart(context, path))
+
   const probed = probedPaths.map(path => ({
     path,
-    isPreSession: datings.get(path) !== 'session',
+    isPreSession: isPreSessionOf(path, datings.get(path)),
   }))
 
   const isWithPreSession = place.scope === 'with-pre-session'

@@ -1,6 +1,6 @@
 /**
- * The most characters a file's drawn body holds, its `Code` sources and
- * dividers in all.
+ * The most characters the drawn file bodies hold between them, their
+ * `Code` sources and dividers in all.
  *
  * Under the host's whole-tree cap (100 000), with room for the pane's rest.
  */

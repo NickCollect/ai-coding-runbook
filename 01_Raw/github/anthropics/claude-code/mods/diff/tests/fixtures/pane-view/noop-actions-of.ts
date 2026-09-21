@@ -10,8 +10,8 @@ export const noopActionsOf = (): Views.PaneActions => ({
   selectFile: noop,
   toggleNoise: noop,
   togglePreSession: noop,
-  chooseBase: noop,
+  scrollList: noop,
+  cycleBase: noop,
   chooseSource: noop,
   toggleAsk: noop,
-  close: noop,
 })

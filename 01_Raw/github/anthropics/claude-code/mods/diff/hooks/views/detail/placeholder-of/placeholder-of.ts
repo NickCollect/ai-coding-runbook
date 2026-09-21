@@ -9,7 +9,7 @@ import { SAFE_PATHSPEC_PATTERN } from './safe-pathspec-pattern'
  * letters, digits and `._/@+-`), binary, loading, unreadable, large, or
  * empty.
  *
- * @param detail the selected file
+ * @param detail the file
  * @returns the lines, or null
  */
 export function placeholderOf(detail: DetailModel): readonly string[] | null {
@@ -24,11 +24,11 @@ export function placeholderOf(detail: DetailModel): readonly string[] | null {
     return ['Binary file - cannot display diff']
   }
 
-  if (detail.bodyState === 'idle' || detail.bodyState === 'loading') {
+  if (detail.body === undefined) {
     return ['Loading diff…']
   }
 
-  if (detail.bodyState === 'failed' || !detail.body) {
+  if (detail.body === null) {
     return ['Diff unavailable']
   }
 

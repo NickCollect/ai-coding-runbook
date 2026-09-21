@@ -7,11 +7,12 @@ import type { MockClock } from 'claude-code/testing'
  * directory, the time, and each command it registers, under its name.
  *
  * @param on the test's `on`
- * @returns the clock the session reads, at 0 until the test moves it
+ * @param now where the clock starts, in milliseconds (0 when not given)
+ * @returns the clock the session reads, at `now` until the test moves it
  */
-export function startsSession(on: On): MockClock {
+export function startsSession(on: On, now = 0): MockClock {
   on('session.start', ($, e) => ({ cwd: e.cwd }))
   on('command.register', ($, e) => ({ value: { command: e.name } }))
 
-  return mock.clock(on)
+  return mock.clock(on, { now })
 }

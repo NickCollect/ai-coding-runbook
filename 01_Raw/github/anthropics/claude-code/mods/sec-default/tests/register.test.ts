@@ -298,6 +298,7 @@ describe('register', () => {
         command: 'greet',
         args: '',
         origin: { kind: 'composer' },
+        presentation: Fixtures.FULLSCREEN,
       })
 
       expect(text).toEndWith(

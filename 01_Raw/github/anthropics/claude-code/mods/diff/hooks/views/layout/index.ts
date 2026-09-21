@@ -1,5 +1,6 @@
 export * from './cell-width'
 export * from './charged-width'
+export * from './pad-end'
 export * from './plural'
 export * from './sanitize-line'
 export * from './sanitize-name'

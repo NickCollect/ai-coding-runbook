@@ -1,7 +1,6 @@
-import type Backend from '../backend'
-import type Git from '../git'
 import Names from '../names'
 import type { EmptyState } from './empty-state'
+import type { PaneModel } from './pane-model'
 
 /**
  * The headline that replaces the count when nothing is listed, worded as
@@ -11,16 +10,16 @@ import type { EmptyState } from './empty-state'
  * "Diff unavailable"; no tracked rows while the untracked listing was
  * withheld claims nothing about new files.
  *
- * @param data the last good fetch, or null when none ever settled
+ * @param model the last good fetch (null when none ever settled), the words
  * @param filesCount the header's session file count
- * @param words the backend's words
  * @returns the empty state, or null
  */
 export function emptyStateOf(
-  data: Git.DiffData | null,
+  model: Pick<PaneModel, 'data' | 'words'>,
   filesCount: number,
-  words: Backend.BackendWords,
 ): EmptyState | null {
+  const { data, words } = model
+
   if (!data) {
     return {
       headline: 'Diff unavailable',
@@ -37,7 +36,7 @@ export function emptyStateOf(
   if (data.isUntrackedWithheld) {
     return {
       headline: 'No tracked changes',
-      hint: Names.untrackedWithheldTextOf(words),
+      hint: Names.untrackedWithheldTextOf(model),
     }
   }
 

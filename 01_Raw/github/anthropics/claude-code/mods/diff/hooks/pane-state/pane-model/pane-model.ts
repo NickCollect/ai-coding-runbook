@@ -2,15 +2,16 @@ import type Backend from '../../backend'
 import type Git from '../../git'
 import type Todos from '../../todos'
 import type Turns from '../../turns'
-import type { BodyState } from '../body-state'
+import type { Bodies } from '../bodies'
 import type { Source } from '../source'
 
 /**
  * Everything one drawing of the pane reads.
  *
- * The last good fetch, what the person picked, the selected file's body,
- * the transcript's turns and todos, and the pinned backend's words and
- * base modes (git's until one is pinned).
+ * The last good fetch, what the person picked, the bodies read so far, the
+ * turns and todos, how the surface seated it, whether the layout docks a
+ * pane (once a drawing or `/diff` said), the dialog's view, and the docked
+ * scroll in its last box.
  */
 export type PaneModel = {
   words: Backend.BackendWords
@@ -25,9 +26,11 @@ export type PaneModel = {
   isPreSessionShown: boolean
   source: Source
   turns: readonly Turns.TurnDiff[]
-  body: Git.FileHunks | null
-  bodyState: BodyState
+  bodies: Bodies
   todos: Todos.TodoProgress
   armedPath: string | null
-  isFocused: boolean
+  placement: 'dock' | 'inline'
+  isFullscreen: boolean | null
+  dialogView: 'list' | 'detail'
+  place: { top: number; listStart: number; columns: number; rows: number }
 }

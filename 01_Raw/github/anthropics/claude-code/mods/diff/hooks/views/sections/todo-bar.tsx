@@ -3,10 +3,9 @@
 /* @jsxFrag Fragment */
 import type { RenderElement } from 'claude-code'
 
+import Limits from '../../limits'
 import type PaneState from '../../pane-state'
 import type { Kit } from '../kit'
-import { TODO_BAR_CELLS } from './todo-bar-cells'
-import { TODO_BAR_RESERVE } from './todo-bar-reserve'
 
 /**
  * The session's todo progress as a bar and `done/total`, drawn only while
@@ -30,7 +29,7 @@ export function todoBar(
 
   const cells = Math.max(
     1,
-    Math.min(TODO_BAR_CELLS, kit.columns - TODO_BAR_RESERVE),
+    Math.min(Limits.TODO_BAR_CELLS, kit.columns - Limits.TODO_BAR_RESERVE),
   )
 
   const filled = Math.round((todos.done / todos.total) * cells)
