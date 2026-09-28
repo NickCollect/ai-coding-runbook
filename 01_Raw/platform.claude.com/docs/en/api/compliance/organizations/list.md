@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/organizations/list
-fetched_at: 2026-09-21T05:44:14.454169+00:00
+fetched_at: 2026-09-28T06:10:56.234946+00:00
 fetch_method: mintlify_md
 ---
 
@@ -25,7 +25,7 @@ Returns organizations sorted by creation date in ascending order. Use
 
   Maximum results (default: 1000, max: 1000)
 
-  default: 1000, maximum: 1000, minimum: 1
+  default: 1000, minimum: 1, maximum: 1000
 
 - `page: optional string`
 

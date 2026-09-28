@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/tunnels/retrieve
-fetched_at: 2026-09-21T05:44:10.258248+00:00
+fetched_at: 2026-09-28T06:10:51.530812+00:00
 fetch_method: mintlify_md
 ---
 
@@ -21,6 +21,8 @@ Fetches a tunnel by ID.
 
 - `tunnel_id: string`
 
+  ID of the tunnel (`tnl_...`).
+
 ## Headers
 
 - `"anthropic-beta": optional array of AnthropicBeta`
@@ -29,7 +31,7 @@ Fetches a tunnel by ID.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -123,7 +125,15 @@ Fetches a tunnel by ID.
 
     - `"compact-2026-09-04"`
 
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
+
 - `"anthropic-workspace-id": optional string`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 ## Returns
 
@@ -139,13 +149,13 @@ Fetches a tunnel by ID.
 
   - `archived_at: string or null`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the tunnel was archived. Null if it is not archived.
 
     format: date-time
 
   - `created_at: string`
 
-    A timestamp in RFC 3339 format
+    RFC 3339 datetime string indicating when the tunnel was created.
 
     format: date-time
 

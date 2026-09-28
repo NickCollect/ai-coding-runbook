@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/api_keys
-fetched_at: 2026-09-14T05:36:17.123498+00:00
+fetched_at: 2026-09-28T06:10:51.854921+00:00
 fetch_method: mintlify_md
 ---
 
@@ -37,7 +37,7 @@ List API Keys
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
-  default: 20, maximum: 1000, minimum: 1
+  default: 20, minimum: 1, maximum: 1000
 
 - `status: optional "active" or "archived" or "expired" or "inactive"`
 
@@ -422,7 +422,7 @@ Update API Key
 
   Name of the API key.
 
-  maxLength: 500, minLength: 1
+  minLength: 1, maxLength: 500
 
 - `status: optional "active" or "archived" or "inactive" or null`
 

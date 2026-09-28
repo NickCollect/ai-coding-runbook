@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool
-fetched_at: 2026-09-21T05:44:00.481016+00:00
+fetched_at: 2026-09-28T06:10:39.530626+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,12 +8,27 @@ fetch_method: mintlify_md
 title: Browser use tool
 url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool
 description: Let Claude navigate, read, and interact with webpages in your own browser environment with the browser use tool.
+featureMetadata:
+  status: ga
+  zdr:
+    eligibility: eligible
+    note: Excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements).
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5
+    - claude-opus-4-8
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS: not available
+    Amazon Bedrock: not available
+    Google Cloud: ga
+    Microsoft Foundry: not available
 ---
-
-## Compatibility
-- [ZDR](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention): eligible (excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements))
-- Supported models: `claude-fable-5-1`, `claude-mythos-5-1`, `claude-fable-5`, `claude-mythos-5`, `claude-opus-5`, `claude-sonnet-5`, `claude-opus-4-8`
-- Platforms: Claude API, Google Cloud; not available on Claude Platform on AWS, Amazon Bedrock, Microsoft Foundry
 
 The browser use tool lets Claude navigate, read, and interact with webpages in a browser that your application runs. Claude works with the page both through its structure (the accessibility tree, elements, forms, and tabs) and through screenshots and viewport coordinates.
 
@@ -34,7 +49,7 @@ The browser use tool is available on the Claude API and [Google Cloud](https://p
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 2048,
       "tools": [
         {
@@ -52,7 +67,7 @@ The browser use tool is available on the Claude API and [Google Cloud](https://p
 
   ```bash CLI
   ant messages create <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 2048
   tools:
     - type: browser_toolset_20260801
@@ -66,7 +81,7 @@ The browser use tool is available on the Claude API and [Google Cloud](https://p
   client = anthropic.Anthropic()
 
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=2048,
       tools=[{"type": "browser_toolset_20260801"}],
       messages=[
@@ -83,7 +98,7 @@ The browser use tool is available on the Claude API and [Google Cloud](https://p
   const client = new Anthropic();
 
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 2048,
     tools: [{ type: "browser_toolset_20260801" }],
     messages: [
@@ -102,7 +117,7 @@ The browser use tool is available on the Claude API and [Google Cloud](https://p
 
   var parameters = new MessageCreateParams
   {
-      Model = Model.ClaudeOpus5,
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 2048,
       Tools = [new BrowserToolset20260801()],
       Messages =
@@ -123,7 +138,7 @@ The browser use tool is available on the Claude API and [Google Cloud](https://p
   client := anthropic.NewClient()
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus5,
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 2048,
   	Tools: []anthropic.ToolUnionParam{
   		{OfBrowserToolset20260801: &anthropic.BrowserToolset20260801Param{}},
@@ -146,7 +161,7 @@ The browser use tool is available on the Claude API and [Google Cloud](https://p
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
       MessageCreateParams params = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_5)
+          .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(2048L)
           .addTool(BrowserToolset20260801.builder().build())
           .addUserMessage("Open example.com/docs and tell me how to get started.")
@@ -165,7 +180,7 @@ The browser use tool is available on the Claude API and [Google Cloud](https://p
       messages: [
           ['role' => 'user', 'content' => 'Open example.com/docs and tell me how to get started.'],
       ],
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       tools: [
           ['type' => 'browser_toolset_20260801'],
       ],
@@ -178,7 +193,7 @@ The browser use tool is available on the Claude API and [Google Cloud](https://p
   client = Anthropic::Client.new
 
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 2048,
     tools: [
       { type: "browser_toolset_20260801" }
@@ -202,7 +217,7 @@ Claude's first response ends with `stop_reason: "tool_use"` and carries one or m
   "id": "msg_01HCDu4XSTLzTAcodEQ58vDo",
   "type": "message",
   "role": "assistant",
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "content": [
     {
       "type": "text",

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication
-fetched_at: 2026-08-31T06:29:35.717447+00:00
+fetched_at: 2026-09-28T06:10:45.139531+00:00
 fetch_method: mintlify_md
 ---
 
@@ -84,7 +84,7 @@ If you are using an API key scoped to multiple workspaces, such as a [personal o
 ```bash CLI
 ant messages create \
   --workspace-id wrkspc_01... \
-  --model claude-opus-5 \
+  --model claude-opus-5-5 \
   --max-tokens 1024 \
   --message '{role: user, content: "Hello, Claude"}'
 ```

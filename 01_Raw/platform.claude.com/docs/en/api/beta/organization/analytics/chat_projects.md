@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/analytics/chat_projects
-fetched_at: 2026-09-14T05:36:20.439179+00:00
+fetched_at: 2026-09-28T06:10:55.061097+00:00
 fetch_method: mintlify_md
 ---
 
@@ -113,7 +113,7 @@ plan. Requires an API key with the `read:analytics` scope.
 
     - `created_by: optional BetaAnalyticsUser or null`
 
-      A user in the organization, identified by tagged id and email address.
+      User who created the project. Null if the project was deleted before attribution was recorded, or if the creator's account no longer exists.
 
       - `type: "user"`
 
@@ -222,7 +222,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/apps/chat/projects \
 
     - `created_by: optional BetaAnalyticsUser or null`
 
-      A user in the organization, identified by tagged id and email address.
+      User who created the project. Null if the project was deleted before attribution was recorded, or if the creator's account no longer exists.
 
       - `type: "user"`
 

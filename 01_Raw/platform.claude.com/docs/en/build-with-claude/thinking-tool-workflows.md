@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/thinking-tool-workflows
-fetched_at: 2026-09-07T05:31:24.992681+00:00
+fetched_at: 2026-09-28T06:10:38.633468+00:00
 fetch_method: mintlify_md
 ---
 
@@ -36,6 +36,32 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
     Send a request with adaptive thinking enabled and the tool defined. Apart from the `thinking` parameter, this is a standard [tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) request:
 
     <CodeGroup>
+      ```bash cURL
+      curl https://api.anthropic.com/v1/messages \
+        -H "anthropic-version: 2023-06-01" \
+        -H "content-type: application/json" \
+        -H "x-api-key: $ANTHROPIC_API_KEY" \
+        -d @- <<'EOF'
+      {
+        "model": "claude-opus-4-8",
+        "max_tokens": 16000,
+        "thinking": {"type": "adaptive"},
+        "tools": [{
+          "name": "get_weather",
+          "description": "Get current weather for a location",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "location": {"type": "string", "description": "City name"}
+            },
+            "required": ["location"]
+          }
+        }],
+        "messages": [{"role": "user", "content": "What's the weather in Paris?"}]
+      }
+      EOF
+      ```
+
       ```bash CLI
       ant messages create --transform content <<'YAML'
       model: claude-opus-4-8
@@ -300,6 +326,11 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
     Each sample is a self-contained script: it repeats the first request, then immediately sends the follow-up using the response it just received.
 
     <CodeGroup>
+      ```bash cURL
+      # This workflow does not translate well to a one-off shell command.
+      # Use one of the SDK examples in this code group instead.
+      ```
+
       ```bash CLI
       # First turn: write the assistant content array (thinking and tool_use
       # blocks, signatures intact) to a file. Routing model-generated text

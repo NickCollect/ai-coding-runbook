@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/vaults
-fetched_at: 2026-09-21T05:44:01.731027+00:00
+fetched_at: 2026-09-28T06:10:41.646326+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,11 +8,13 @@ fetch_method: mintlify_md
 title: Authenticate with vaults
 url: https://platform.claude.com/docs/en/managed-agents/vaults
 description: Register per-user credentials when creating sessions.
+featureMetadata:
+  topic:
+    title: Managed Agents
+    url: https://platform.claude.com/docs/en/managed-agents/overview
+  status: beta
+  betaHeader: managed-agents-2026-04-01
 ---
-
-## Compatibility
-- Status: Beta
-- [Beta header](https://platform.claude.com/docs/en/api/beta-headers): `managed-agents-2026-04-01`
 
 Vaults and credentials are authentication primitives that let you register credentials for third-party services once and reference them by ID at session creation. This means you don't need to run your own secret store, transmit tokens on every call, or lose track of which end user an agent acted on behalf of.
 
@@ -41,7 +43,7 @@ A vault is the collection of `credentials` associated with an end user. Give it 
   EOF
   ```
 
-  <MultiFileExample language="cli" label="CLI">
+  <CodeGroupItem>
     ```bash CLI
     ant beta:vaults create < alice.vault.yaml
     ```
@@ -53,7 +55,7 @@ A vault is the collection of `credentials` associated with an end user. Give it 
         external_user_id: usr_abc123
       ```
     </File>
-  </MultiFileExample>
+  </CodeGroupItem>
 
   ```python Python
   vault = client.beta.vaults.create(
@@ -1003,7 +1005,7 @@ For `mcp_oauth` credentials, re-resolution also refreshes the access token if it
 
 ### Diagnose an OAuth refresh failure
 
-To diagnose why a refresh failed, call `POST /v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate` (or `client.beta.vaults.credentials.mcp_oauth_validate(...)` in the SDK). This lets you decide how to handle the failure; the right action depends on the error type.
+To diagnose why a refresh failed, call `POST /v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate` (or `client.beta.vaults.credentials.mcp_oauth_validate(...)` (typescript: `client.beta.vaults.credentials.mcpOAuthValidate(...)`; csharp: `client.Beta.Vaults.Credentials.McpOAuthValidate(...)`; go: `client.Beta.Vaults.Credentials.MCPOAuthValidate(...)`; java: `client.beta().vaults().credentials().mcpOAuthValidate(...)`; php: `$client->beta->vaults->credentials->mcpOAuthValidate(...)`) in the SDK). This lets you decide how to handle the failure; the right action depends on the error type.
 
 The top-level `status` tells you what to do next:
 

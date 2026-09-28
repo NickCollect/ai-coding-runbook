@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool
-fetched_at: 2026-09-07T05:31:25.488151+00:00
+fetched_at: 2026-09-28T06:10:39.289489+00:00
 fetch_method: mintlify_md
 ---
 
@@ -51,6 +51,7 @@ Both tool search variants are available on the following models:
 | Claude Mythos 5.1 (claude-mythos-5-1)          | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
 | Claude Fable 5 (claude-fable-5)                | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
 | Claude Mythos 5 (claude-mythos-5)              | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
+| Claude Opus 5.5 (claude-opus-5-5)              | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
 | Claude Opus 5 (claude-opus-5)                  | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
 | Claude Opus 4.8 (claude-opus-4-8)              | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
 | Claude Opus 4.7 (claude-opus-4-7)              | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
@@ -90,7 +91,7 @@ The following example includes the tool search tool and two deferred tools:
       -H "anthropic-version: 2023-06-01" \
       -H "content-type: application/json" \
       -d '{
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "max_tokens": 2048,
           "messages": [
               {
@@ -141,7 +142,7 @@ The following example includes the tool search tool and two deferred tools:
 
   ```bash CLI
   ant messages create <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 2048
   messages:
     - role: user
@@ -181,7 +182,7 @@ The following example includes the tool search tool and two deferred tools:
   client = anthropic.Anthropic()
 
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=2048,
       messages=[{"role": "user", "content": "What is the weather in San Francisco?"}],
       tools=[
@@ -222,7 +223,7 @@ The following example includes the tool search tool and two deferred tools:
   const client = new Anthropic();
 
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 2048,
     messages: [
       {
@@ -278,7 +279,7 @@ The following example includes the tool search tool and two deferred tools:
 
   var parameters = new MessageCreateParams
   {
-      Model = Model.ClaudeOpus5,
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 2048,
       Messages = [
           new() {
@@ -332,7 +333,7 @@ The following example includes the tool search tool and two deferred tools:
   client := anthropic.NewClient()
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus5,
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 2048,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("What is the weather in San Francisco?")),
@@ -405,7 +406,7 @@ The following example includes the tool search tool and two deferred tools:
           .build();
 
       MessageCreateParams params = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_5)
+          .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(2048L)
           .addUserMessage("What is the weather in San Francisco?")
           .addTool(ToolSearchToolRegex20251119.builder()
@@ -438,7 +439,7 @@ The following example includes the tool search tool and two deferred tools:
       messages: [
           ['role' => 'user', 'content' => 'What is the weather in San Francisco?'],
       ],
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       tools: [
           [
               'type' => 'tool_search_tool_regex_20251119',
@@ -486,7 +487,7 @@ The following example includes the tool search tool and two deferred tools:
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 2048,
     messages: [
       { role: "user", content: "What is the weather in San Francisco?" }

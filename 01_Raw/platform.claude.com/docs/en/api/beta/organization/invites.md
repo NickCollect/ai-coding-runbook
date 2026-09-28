@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/invites
-fetched_at: 2026-09-14T05:36:18.031863+00:00
+fetched_at: 2026-09-28T06:10:52.746646+00:00
 fetch_method: mintlify_md
 ---
 
@@ -184,7 +184,7 @@ List the organization's invites.
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
-  default: 20, maximum: 1000, minimum: 1
+  default: 20, minimum: 1, maximum: 1000
 
 - `roles: optional array of string`
 

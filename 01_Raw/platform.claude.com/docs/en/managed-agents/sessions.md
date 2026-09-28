@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/sessions
-fetched_at: 2026-09-21T05:44:01.542175+00:00
+fetched_at: 2026-09-28T06:10:41.536038+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,11 +8,13 @@ fetch_method: mintlify_md
 title: Start a session
 url: https://platform.claude.com/docs/en/managed-agents/sessions
 description: Create a session to run your agent and begin executing tasks.
+featureMetadata:
+  topic:
+    title: Managed Agents
+    url: https://platform.claude.com/docs/en/managed-agents/overview
+  status: beta
+  betaHeader: managed-agents-2026-04-01
 ---
-
-## Compatibility
-- Status: Beta
-- [Beta header](https://platform.claude.com/docs/en/api/beta-headers): `managed-agents-2026-04-01`
 
 A session is an agent instance within an environment. Each session references an [agent](https://platform.claude.com/docs/en/managed-agents/agent-setup) and an [environment](https://platform.claude.com/docs/en/managed-agents/environments) (both created separately), and maintains conversation history across multiple interactions. Sessions follow a two-step lifecycle: first [create the session](https://platform.claude.com/docs/en/managed-agents/sessions#creating-a-session), then [send a user event](https://platform.claude.com/docs/en/managed-agents/sessions#starting-the-session) to start work. You can also collapse both steps into one call with [`initial_events`](https://platform.claude.com/docs/en/managed-agents/sessions#seed-the-session-with-initial-events).
 
@@ -474,8 +476,7 @@ Each overridable field follows the same three rules:
   * Clearing `tools` returns a 400 error when the session's effective `skills` is non-empty, because skills require the `read` tool. Otherwise, `tools: null` and `tools: []` clear the field.
   * Clearing `mcp_servers` returns a 400 error when the session's effective `tools` still contains an `mcp_toolset` that references one of the agent's servers. Override `tools` in the same request to remove those `mcp_toolset` entries, then clear `mcp_servers`.
 
-* **Set the field to a value:** The value replaces the agent's value in full. Overrides never merge with the agent's configuration, so a `tools` override must list every tool the session should have. There is one exception:
-  * An `effort` level inside a per-session `model` override isn't applied, and because the override replaces the agent's `model` object in full, the agent's own `effort` isn't carried over either: a session created with a `model` override runs at the model's default effort level. To run at a specific effort level, set `effort` on the [agent](https://platform.claude.com/docs/en/managed-agents/agent-setup#agent-configuration-fields) and don't override `model` for that session.
+* **Set the field to a value:** The value replaces the agent's value in full. Overrides never merge with the agent's configuration, so a `tools` override must list every tool the session should have. Likewise, a `model` override replaces the agent's `model` object in full, so the agent's own `effort` isn't carried over. To run the session at a specific effort level, set `effort` inside the override's `model` object. A level the model doesn't support returns a 400 error, and a `model` override without `effort` runs at that model's default effort level.
 
 Overrides apply only to the session you create. They do not modify the agent resource or create a new agent version, so other sessions that reference the same agent are unaffected.
 
@@ -663,7 +664,7 @@ The following example starts a session from an agent whose model has no geo pin,
     "agent": {
       "type": "agent_with_overrides",
       "id": "$AGENT_ID",
-      "model": {"id": "claude-opus-5", "inference_geo": "us"}
+      "model": {"id": "claude-opus-5-5", "inference_geo": "us"}
     },
     "environment_id": "$ENVIRONMENT_ID"
   }
@@ -679,7 +680,7 @@ The following example starts a session from an agent whose model has no geo pin,
     type: agent_with_overrides
     id: $AGENT_ID
     model:
-      id: claude-opus-5
+      id: claude-opus-5-5
       inference_geo: us
   environment_id: $ENVIRONMENT_ID
   YAML
@@ -693,7 +694,7 @@ The following example starts a session from an agent whose model has no geo pin,
           "type": "agent_with_overrides",
           "id": agent.id,
           # Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
-          "model": {"id": "claude-opus-5", "inference_geo": "us"},
+          "model": {"id": "claude-opus-5-5", "inference_geo": "us"},
       },
       environment_id=environment.id,
   )
@@ -706,7 +707,7 @@ The following example starts a session from an agent whose model has no geo pin,
       type: "agent_with_overrides",
       id: agent.id,
       // Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
-      model: { id: "claude-opus-5", inference_geo: "us" }
+      model: { id: "claude-opus-5-5", inference_geo: "us" }
     },
     environment_id: environment.id
   });
@@ -723,7 +724,7 @@ The following example starts a session from an agent whose model has no geo pin,
           // Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
           Model = new BetaManagedAgentsModelConfigParams
           {
-              ID = BetaManagedAgentsModel.ClaudeOpus5,
+              ID = BetaManagedAgentsModel.ClaudeOpus5_5,
               InferenceGeo = "us",
           },
       },
@@ -740,7 +741,7 @@ The following example starts a session from an agent whose model has no geo pin,
   			ID:   agent.ID,
   			// Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
   			Model: anthropic.BetaManagedAgentsModelConfigParams{
-  				ID:           anthropic.BetaManagedAgentsModelClaudeOpus5,
+  				ID:           anthropic.BetaManagedAgentsModelClaudeOpus5_5,
   				InferenceGeo: anthropic.String("us"),
   			},
   		},
@@ -760,7 +761,7 @@ The following example starts a session from an agent whose model has no geo pin,
           .id(agent.id())
           // Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
           .model(BetaManagedAgentsModelConfigParams.builder()
-              .id(BetaManagedAgentsModel.CLAUDE_OPUS_5)
+              .id(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
               .inferenceGeo("us")
               .build())
           .build())
@@ -776,7 +777,7 @@ The following example starts a session from an agent whose model has no geo pin,
           type: 'agent_with_overrides',
           // Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
           model: BetaManagedAgentsModelConfigParams::with(
-              id: 'claude-opus-5',
+              id: 'claude-opus-5-5',
               inferenceGeo: 'us',
           ),
       ),
@@ -791,7 +792,7 @@ The following example starts a session from an agent whose model has no geo pin,
       type: :agent_with_overrides,
       id: agent.id,
       # Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
-      model: {id: "claude-opus-5", inference_geo: "us"}
+      model: {id: "claude-opus-5-5", inference_geo: "us"}
     },
     environment_id: environment.id
   )

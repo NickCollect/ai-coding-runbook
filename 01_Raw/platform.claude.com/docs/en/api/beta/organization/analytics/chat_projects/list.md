@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/analytics/chat_projects/list
-fetched_at: 2026-09-14T05:36:20.568166+00:00
+fetched_at: 2026-09-28T06:10:55.096215+00:00
 fetch_method: mintlify_md
 ---
 
@@ -111,7 +111,7 @@ plan. Requires an API key with the `read:analytics` scope.
 
     - `created_by: optional BetaAnalyticsUser or null`
 
-      A user in the organization, identified by tagged id and email address.
+      User who created the project. Null if the project was deleted before attribution was recorded, or if the creator's account no longer exists.
 
       - `type: "user"`
 

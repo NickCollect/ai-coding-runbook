@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/cli/apply
-fetched_at: 2026-09-14T05:36:09.736551+00:00
+fetched_at: 2026-09-28T06:10:45.235305+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,24 +18,26 @@ To install and authenticate the CLI, see the [CLI quickstart](https://platform.c
 
 Write the agent as a Markdown file under `agents/` and apply it:
 
-<MultiFileExample language="cli" label="CLI">
-  ```bash CLI
-  ant apply agents/summarizer.md
-  ```
-
-  <File filename="agents/summarizer.md">
-    ```markdown
-    ---
-    name: Summarizer
-    model: claude-opus-5
-    tools:
-      - type: agent_toolset_20260401
-    ---
-
-    You are a helpful assistant that writes concise summaries.
+<CodeGroup>
+  <CodeGroupItem>
+    ```bash CLI
+    ant apply agents/summarizer.md
     ```
-  </File>
-</MultiFileExample>
+
+    <File filename="agents/summarizer.md">
+      ```markdown
+      ---
+      name: Summarizer
+      model: claude-opus-5-5
+      tools:
+        - type: agent_toolset_20260401
+      ---
+
+      You are a helpful assistant that writes concise summaries.
+      ```
+    </File>
+  </CodeGroupItem>
+</CodeGroup>
 
 The frontmatter holds the agent's configuration (the fields from [Define your agent](https://platform.claude.com/docs/en/managed-agents/agent-setup)) and the body is its system prompt. `ant apply` [infers](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/apply#kind-inference) that the file is an agent from its path, here the `agents/` directory.
 
@@ -112,12 +114,12 @@ Any resource except a skill can be written as YAML, JSON, or Markdown. In Markdo
 
 Resources refer to each other by path. Wherever the API expects another resource's ID, write the relative path to that resource's file instead. In this project, the reviewer agent lists `../skills/pr-summary` under `skills`, the lead agent lists `./reviewer.md` in its roster, and the deployment names its agent, environment, and memory store by path. `ant apply` creates them in dependency order and fills in the real IDs. The project has six files:
 
-<MultiFileExample variant="explorer">
+<FileExplorer>
   <File filename="agents/reviewer.md">
     ```markdown
     ---
     name: Code reviewer
-    model: claude-opus-5
+    model: claude-opus-5-5
     tools:
       - type: agent_toolset_20260401
     skills:
@@ -132,7 +134,7 @@ Resources refer to each other by path. Wherever the API expects another resource
     ```markdown
     ---
     name: Engineering lead
-    model: claude-opus-5
+    model: claude-opus-5-5
     multiagent:
       type: coordinator
       agents:
@@ -158,6 +160,7 @@ Resources refer to each other by path. Wherever the API expects another resource
 
   <File filename="environments/cloud.yaml">
     ```yaml
+    # yaml-language-server: $schema=https://platform.claude.com/schemas/ant/beta/environment.json
     name: review-env
     description: Cloud container with unrestricted networking for review sessions.
     config:
@@ -169,6 +172,7 @@ Resources refer to each other by path. Wherever the API expects another resource
 
   <File filename="memory_stores/review-notes.yaml">
     ```yaml
+    # yaml-language-server: $schema=https://platform.claude.com/schemas/ant/beta/memory_store.json
     name: Review notes
     description: Recurring issues and house-style decisions the reviewer has recorded between runs.
     ```
@@ -192,7 +196,7 @@ Resources refer to each other by path. Wherever the API expects another resource
     Review any open pull requests. Start with the oldest.
     ```
   </File>
-</MultiFileExample>
+</FileExplorer>
 
 Apply the whole directory:
 

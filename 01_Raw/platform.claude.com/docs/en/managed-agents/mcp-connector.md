@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/mcp-connector
-fetched_at: 2026-09-21T05:44:01.426061+00:00
+fetched_at: 2026-09-28T06:10:41.266494+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,11 +8,13 @@ fetch_method: mintlify_md
 title: MCP connector
 url: https://platform.claude.com/docs/en/managed-agents/mcp-connector
 description: Connect MCP servers to your agents for access to external tools and data sources.
+featureMetadata:
+  topic:
+    title: Managed Agents
+    url: https://platform.claude.com/docs/en/managed-agents/overview
+  status: beta
+  betaHeader: managed-agents-2026-04-01
 ---
-
-## Compatibility
-- Status: Beta
-- [Beta header](https://platform.claude.com/docs/en/api/beta-headers): `managed-agents-2026-04-01`
 
 Claude Managed Agents supports connecting [Model Context Protocol (MCP)](https://modelcontextprotocol.io) servers to your agents. This gives the agent access to external tools, data sources, and services through a standardized protocol.
 
@@ -39,7 +41,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
     -d @- <<'EOF'
   {
     "name": "GitHub Assistant",
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "mcp_servers": [
       {
         "type": "url",
@@ -57,7 +59,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   agent_id=$(jq -r '.id' <<<"$agent_response")
   ```
 
-  <MultiFileExample language="cli" label="CLI">
+  <CodeGroupItem>
     ```bash CLI
     ant apply github-assistant.md
     ```
@@ -66,7 +68,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
       ```markdown
       ---
       name: GitHub Assistant
-      model: claude-opus-5
+      model: claude-opus-5-5
       mcp_servers:
         - type: url
           name: github
@@ -78,12 +80,12 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
       ---
       ```
     </File>
-  </MultiFileExample>
+  </CodeGroupItem>
 
   ```python Python
   agent = client.beta.agents.create(
       name="GitHub Assistant",
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       mcp_servers=[
           {
               "type": "url",
@@ -101,7 +103,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   ```typescript TypeScript
   const agent = await client.beta.agents.create({
     name: "GitHub Assistant",
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     mcp_servers: [
       {
         type: "url",
@@ -120,7 +122,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   var agent = await client.Beta.Agents.Create(new()
   {
       Name = "GitHub Assistant",
-      Model = BetaManagedAgentsModel.ClaudeOpus5,
+      Model = BetaManagedAgentsModel.ClaudeOpus5_5,
       McpServers =
       [
           new() { Type = "url", Name = "github", Url = "https://api.githubcopilot.com/mcp/" },
@@ -140,7 +142,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name: "GitHub Assistant",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: anthropic.BetaManagedAgentsModelClaudeOpus5,
+  		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
   	},
   	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{{
   		Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,
@@ -170,7 +172,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   var agent = client.beta().agents().create(
       AgentCreateParams.builder()
           .name("GitHub Assistant")
-          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
+          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
           .addMcpServer(
               BetaManagedAgentsUrlMcpServerParams.builder()
                   .type(BetaManagedAgentsUrlMcpServerParams.Type.URL)
@@ -196,7 +198,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   ```php PHP
   $agent = $client->beta->agents->create(
       name: 'GitHub Assistant',
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       mcpServers: [
           BetaManagedAgentsURLMCPServerParams::with(
               type: 'url',
@@ -219,7 +221,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "GitHub Assistant",
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     mcp_servers: [
       {
         type: "url",

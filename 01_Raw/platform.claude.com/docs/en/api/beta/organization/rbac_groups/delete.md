@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/rbac_groups/delete
-fetched_at: 2026-09-21T05:44:14.066387+00:00
+fetched_at: 2026-09-28T06:10:55.770705+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,7 +11,7 @@ url: https://platform.claude.com/docs/en/api/beta/organization/rbac_groups/delet
 
 # Delete RBAC Group
 
-**DELETE** `/v1/organizations/rbac_groups/{group_id}`
+**DELETE** `/v1/organizations/rbac_groups/{rbac_group_id}`
 
 Delete an RBAC Group. Groups provisioned by an identity provider (source type `"scim"`) cannot be deleted via the API while an organization in the tenant uses SCIM provisioning.
 
@@ -19,7 +19,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ## Path parameters
 
-- `group_id: string`
+- `rbac_group_id: string`
 
   ID of the RBAC Group.
 
@@ -42,7 +42,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 ## Example
 
 ```bash
-curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
+curl https://api.anthropic.com/v1/organizations/rbac_groups/$RBAC_GROUP_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"

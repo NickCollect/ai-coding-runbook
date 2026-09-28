@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/work/poll
-fetched_at: 2026-09-21T05:44:06.869407+00:00
+fetched_at: 2026-09-28T06:10:48.045493+00:00
 fetch_method: mintlify_md
 ---
 
@@ -43,7 +43,7 @@ Long poll for work items in the queue.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -136,6 +136,10 @@ Long poll for work items in the queue.
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"Anthropic-Worker-ID": optional string`
 

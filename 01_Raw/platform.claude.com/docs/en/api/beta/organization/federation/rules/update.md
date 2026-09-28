@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/federation/rules/update
-fetched_at: 2026-09-21T05:44:11.178517+00:00
+fetched_at: 2026-09-28T06:10:52.517668+00:00
 fetch_method: mintlify_md
 ---
 
@@ -47,7 +47,7 @@ Console session.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -141,6 +141,10 @@ Console session.
 
     - `"compact-2026-09-04"`
 
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
+
 ## Body parameters
 
 - `applies_to_all_workspaces: optional boolean or null`
@@ -159,11 +163,7 @@ Console session.
 
 - `match: optional BetaFederationRuleMatch or null`
 
-  Does the incoming JWT qualify?
-
-  All populated fields must pass; omitted fields are skipped. At least one
-  of `subject_prefix` (other than a wildcard-only value like `*`), `claims`,
-  or `condition` is required; `audience` alone is not sufficient.
+  Replaces the entire match object. All populated matcher fields must pass.
 
   - `audience: optional string or null`
 
@@ -191,7 +191,7 @@ Console session.
 
   Replaces the slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
-  maxLength: 255, minLength: 1
+  minLength: 1, maxLength: 255
 
 - `oauth_scope: optional string or null`
 
@@ -201,7 +201,7 @@ Console session.
 
 - `target: optional BetaServiceAccountTarget or null`
 
-  Bind to a fixed service account by ID.
+  Replaces the entire target object. Currently always a `service_account` target.
 
   - `type: "service_account"`
 
@@ -217,7 +217,7 @@ Console session.
 
   Replaces the lifetime in seconds for access tokens minted via this rule (60-86400). Minted tokens are capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.
 
-  maximum: 86400, minimum: 60
+  minimum: 60, maximum: 86400
 
 - `workspace_id: optional string or null`
 

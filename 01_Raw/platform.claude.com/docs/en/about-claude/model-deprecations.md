@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/about-claude/model-deprecations
-fetched_at: 2026-09-21T05:44:04.089974+00:00
+fetched_at: 2026-09-28T06:10:44.612499+00:00
 fetch_method: mintlify_md
 ---
 
@@ -70,10 +70,6 @@ At some point, Anthropic hopes to make past models publicly available again. In 
 
 ## Model status
 
-<Note>
-  [Claude Mythos Preview](https://anthropic.com/glasswing) (`claude-mythos-preview`) is deprecated. To migrate to [Claude Mythos 5](https://anthropic.com/glasswing) (`claude-mythos-5`), see the [migration guide](https://platform.claude.com/docs/en/models/fable-5/migration-guide#migrating-from-claude-mythos-preview).
-</Note>
-
 Current and recently retired models are listed in the following table with their status:
 
 | API model name             | Current state | Deprecated        | Tentative retirement date          |
@@ -83,6 +79,7 @@ Current and recently retired models are listed in the following table with their
 | claude-fable-5             | Active        | N/A               | Not sooner than June 9, 2027       |
 | claude-mythos-5            | Active        | N/A               | Not sooner than June 9, 2027       |
 | claude-mythos-preview      | Deprecated    | June 9, 2026      | To be announced                    |
+| claude-opus-5-5            | Active        | N/A               | Not sooner than September 22, 2027 |
 | claude-opus-5              | Active        | N/A               | Not sooner than July 24, 2027      |
 | claude-opus-4-8            | Active        | N/A               | Not sooner than May 28, 2027       |
 | claude-opus-4-7            | Active        | N/A               | Not sooner than April 16, 2027     |

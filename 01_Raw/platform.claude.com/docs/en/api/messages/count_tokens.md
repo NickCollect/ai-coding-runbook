@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages/count_tokens
-fetched_at: 2026-09-21T05:44:05.177863+00:00
+fetched_at: 2026-09-28T06:10:46.135316+00:00
 fetch_method: mintlify_md
 ---
 
@@ -26,6 +26,10 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
   The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
 - `"anthropic-workspace-id": optional string`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 ## Body parameters
 
@@ -129,7 +133,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
             - `document_title: string or null`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `end_char_index: number`
 
@@ -149,7 +153,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
             - `document_title: string or null`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `end_page_number: number`
 
@@ -173,7 +177,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
             - `document_title: string or null`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `end_block_index: number`
 
@@ -197,7 +201,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
             - `title: string or null`
 
-              maxLength: 512, minLength: 1
+              minLength: 1, maxLength: 512
 
             - `url: string`
 
@@ -353,7 +357,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
         - `title: optional string or null`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
       - `SearchResultBlockParam object`
 
@@ -417,7 +421,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
         - `name: string`
 
-          maxLength: 200, minLength: 1
+          minLength: 1, maxLength: 200
 
         - `cache_control: optional CacheControlEphemeral or null`
 
@@ -453,7 +457,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
           For a toolset member tool_use, the toolset family this member belongs to.
 
-          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+          minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
       - `ToolResultBlockParam object`
 
@@ -489,7 +493,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
               - `tool_name: string`
 
-                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
               - `cache_control: optional CacheControlEphemeral or null`
 
@@ -517,7 +521,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
                   The caller-assigned identifier for this tab, unique within the inventory.
 
-                  maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                  minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                 - `title: string`
 
@@ -543,7 +547,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
                 Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-                maxItems: 200, minItems: 1
+                minItems: 1, maxItems: 200
 
                 - `BrowserStateChangeTabOpened object`
 
@@ -561,7 +565,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
                     The `tab_id` of the opened tab, present in `tabs`.
 
-                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                 - `BrowserStateChangeDownloadStarted object`
 
@@ -573,7 +577,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `url: string`
 
@@ -594,7 +598,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `url: string`
 
@@ -606,7 +610,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
                     Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-                    pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `size_bytes: optional number or null`
 
@@ -624,7 +628,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `url: string`
 
@@ -636,7 +640,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
                     The failure or cancellation detail, when known.
 
-                    pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
         - `is_error: optional boolean`
 
@@ -644,7 +648,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
           For a toolset member tool_result, the toolset family of the paired tool_use.
 
-          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+          minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
       - `ServerToolUseBlockParam object`
 
@@ -1022,7 +1026,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
               - `tool_name: string`
 
-                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
               - `cache_control: optional CacheControlEphemeral or null`
 
@@ -1063,7 +1067,9 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `"claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more`
+  - `string`
+
+  - `"claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more`
 
     The model that will complete your prompt.
 
@@ -1072,6 +1078,10 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
     - `"claude-fable-5-1"`
 
       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+    - `"claude-opus-5-5"`
+
+      Powerful intelligence for coding, knowledge work, and long-running agents
 
     - `"claude-mythos-5-1"`
 
@@ -1100,10 +1110,6 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
     - `"claude-opus-4-7"`
 
       Powerful intelligence for long-running agents and coding
-
-    - `"claude-mythos-preview"`
-
-      New class of intelligence, strongest in coding and cybersecurity
 
     - `"claude-opus-4-6"`
 
@@ -1137,7 +1143,11 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       High-performance model for agents and coding
 
-  - `string`
+    - `"claude-mythos-preview"`
+
+      **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+      New class of intelligence, strongest in coding and cybersecurity
 
 - `cache_control: optional CacheControlEphemeral or null`
 
@@ -1149,7 +1159,9 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `effort: optional "low" or "medium" or "high" or 2 more or null`
 
-    All possible effort levels.
+    How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
+
+    Valid values are `low`, `medium`, `high`, `xhigh`, or `max`.
 
     - `"low"`
 
@@ -1375,7 +1387,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
+      minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -1592,12 +1604,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
     - `configs: optional BrowserToolsetConfigs or null`
 
-      Per-member configuration for `browser_toolset_20260801`: one
-      optional field per member tool, keyed by the member name — the same
-      name the member's `tool_use` blocks carry. Every member is an
-      accepted key, and a member's defaults apply wherever its key is
-      absent. Unknown keys are rejected: the field set is this toolset
-      version's complete member set.
+      Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
       - `type: optional BrowserTypeConfig or null`
 
@@ -2024,12 +2031,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
     - `configs: optional ComputerToolsetConfigs or null`
 
-      Per-member configuration for `computer_toolset_20260801`: one
-      optional field per member tool, keyed by the member name — the same
-      name the member's `tool_use` blocks carry. Every member is an
-      accepted key, and a member's defaults apply wherever its key is
-      absent. Unknown keys are rejected: the field set is this toolset
-      version's complete member set.
+      Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
       - `type: optional ComputerTypeConfig or null`
 
@@ -2383,7 +2385,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `strict: optional boolean`
 
@@ -2399,25 +2401,25 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
         The city of the user.
 
-        maxLength: 255, minLength: 1
+        minLength: 1, maxLength: 255
 
       - `country: optional string or null`
 
         The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-        maxLength: 2, minLength: 2
+        minLength: 2, maxLength: 2
 
       - `region: optional string or null`
 
         The region of the user.
 
-        maxLength: 255, minLength: 1
+        minLength: 1, maxLength: 255
 
       - `timezone: optional string or null`
 
         The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-        maxLength: 255, minLength: 1
+        minLength: 1, maxLength: 255
 
   - `WebFetchTool20250910 object`
 
@@ -2463,13 +2465,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `max_uses: optional number or null`
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `strict: optional boolean`
 
@@ -2477,12 +2479,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
     - `url_sources: optional WebFetchURLSources or null`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
       - `client_tool_results: optional WebFetchURLSourceAll or WebFetchURLSourceNone or WebFetchURLSourceOnly or WebFetchURLSourceExcept`
 
@@ -2606,7 +2603,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `strict: optional boolean`
 
@@ -2660,13 +2657,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `max_uses: optional number or null`
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `strict: optional boolean`
 
@@ -2674,12 +2671,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
     - `url_sources: optional WebFetchURLSources or null`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
   - `WebFetchTool20260309 object`
 
@@ -2727,13 +2719,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `max_uses: optional number or null`
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `strict: optional boolean`
 
@@ -2741,12 +2733,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
     - `url_sources: optional WebFetchURLSources or null`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `use_cache: optional boolean`
 
@@ -2792,7 +2779,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `response_inclusion: optional "full" or "excluded"`
 
@@ -2854,13 +2841,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `max_uses: optional number or null`
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `response_inclusion: optional "full" or "excluded"`
 
@@ -2876,12 +2863,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
     - `url_sources: optional WebFetchURLSources or null`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `use_cache: optional boolean`
 

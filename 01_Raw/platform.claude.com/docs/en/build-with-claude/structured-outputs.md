@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/structured-outputs
-fetched_at: 2026-09-21T05:43:59.605439+00:00
+fetched_at: 2026-09-28T06:10:38.318507+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,13 +8,36 @@ fetch_method: mintlify_md
 title: Structured outputs
 url: https://platform.claude.com/docs/en/build-with-claude/structured-outputs
 description: Get validated JSON results from agent workflows
+featureMetadata:
+  status: ga
+  zdr:
+    eligibility: eligible
+    note: Excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements).
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-5
+    - claude-sonnet-4-6
+    - claude-sonnet-4-5-20250929
+    - claude-opus-4-5-20251101
+    - claude-haiku-4-5-20251001
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS: ga
+    Amazon Bedrock:
+      availability: ga
+      note: On Amazon Bedrock, structured outputs are available for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5.
+    Google Cloud: ga
+    Microsoft Foundry: ga
 ---
-
-## Compatibility
-- [ZDR](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention): eligible (excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements))
-- Supported models: `claude-fable-5-1`, `claude-mythos-5-1`, `claude-fable-5`, `claude-mythos-5`, `claude-mythos-preview`, `claude-opus-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6`, `claude-sonnet-5`, `claude-sonnet-4-6`, `claude-sonnet-4-5-20250929`, `claude-opus-4-5-20251101`, `claude-haiku-4-5-20251001`
-- Platforms: Claude API, Claude Platform on AWS, Amazon Bedrock [1], Google Cloud, Microsoft Foundry
-1. On Amazon Bedrock, structured outputs are available for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5.
 
 Structured outputs constrain Claude's responses to follow a specific schema, ensuring valid, parseable output for downstream processing. Structured outputs provide two complementary features:
 
@@ -24,7 +47,7 @@ Structured outputs constrain Claude's responses to follow a specific schema, ens
 You can use these features independently or together in the same request.
 
 <Tip>
-  **Migrating from beta?** The `output_format` parameter has moved to `output_config.format`, and beta headers are no longer required. The API continues to accept the old beta header (`structured-outputs-2025-11-13`) and the `output_format` request field for a transition period, but the Python SDK (v1.0 and later) does not accept `output_format={...}` on `client.beta.messages.create()` or `count_tokens()` and raises a `TypeError`; use `output_config` instead. See the following code examples for the updated API shape.
+  **Migrating from beta?** The `output_format` parameter has moved to `output_config.format`, and beta headers are no longer required. The `output_format` parameter is deprecated and will be removed in the future. To use it anyway, add the `structured-outputs-2025-11-13` beta header. Without it, the API returns a 400 error. The Python SDK (v1.0 and later) does not accept `output_format={...}` on `client.beta.messages.create()` or `count_tokens()` and raises a `TypeError`; use `output_config` instead. See the following code examples for the updated API shape.
 </Tip>
 
 ## Why use structured outputs
@@ -60,7 +83,7 @@ JSON outputs control Claude's response format, ensuring Claude returns valid JSO
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 1024,
       "messages": [
         {
@@ -91,7 +114,7 @@ JSON outputs control Claude's response format, ensuring Claude returns valid JSO
   ant messages create \
     --transform 'content.#(type=="text").text|@fromstr' \
     --format jsonl <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 1024
   messages:
     - role: user
@@ -118,7 +141,7 @@ JSON outputs control Claude's response format, ensuring Claude returns valid JSO
   client = anthropic.Anthropic()
 
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=1024,
       messages=[
           {
@@ -150,7 +173,7 @@ JSON outputs control Claude's response format, ensuring Claude returns valid JSO
   const client = new Anthropic();
 
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: [
       {
@@ -193,7 +216,7 @@ JSON outputs control Claude's response format, ensuring Claude returns valid JSO
 
   var parameters = new MessageCreateParams
   {
-      Model = Model.ClaudeOpus5,
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 1024,
       Messages = [new() { Role = Role.User, Content = "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan." }],
       OutputConfig = new OutputConfig
@@ -226,7 +249,7 @@ JSON outputs control Claude's response format, ensuring Claude returns valid JSO
 
   response, _ := client.Messages.New(context.Background(),
   	anthropic.MessageNewParams{
-  		Model:     anthropic.ModelClaudeOpus5,
+  		Model:     anthropic.ModelClaudeOpus5_5,
   		MaxTokens: 1024,
   		Messages: []anthropic.MessageParam{
   			anthropic.NewUserMessage(
@@ -270,7 +293,7 @@ JSON outputs control Claude's response format, ensuring Claude returns valid JSO
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
       StructuredMessageCreateParams<ContactInfo> params = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_5)
+          .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(1024)
           .addUserMessage("Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan.")
           .outputConfig(ContactInfo.class)
@@ -295,7 +318,7 @@ JSON outputs control Claude's response format, ensuring Claude returns valid JSO
               'content' => 'Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan.'
           ]
       ],
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       outputConfig: [
           'format' => [
               'type' => 'json_schema',
@@ -322,7 +345,7 @@ JSON outputs control Claude's response format, ensuring Claude returns valid JSO
   client = Anthropic::Client.new
 
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: [
       {
@@ -405,7 +428,7 @@ Instead of writing raw JSON schemas, you can use familiar schema definition tool
   ant messages create \
     --transform 'content.#(type=="text").text|@fromstr|{name,email}' \
     --format yaml <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 1024
   messages:
     - role: user
@@ -443,7 +466,7 @@ Instead of writing raw JSON schemas, you can use familiar schema definition tool
   client = Anthropic()
 
   response = client.messages.parse(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=1024,
       messages=[
           {
@@ -471,7 +494,7 @@ Instead of writing raw JSON schemas, you can use familiar schema definition tool
   const client = new Anthropic();
 
   const response = await client.messages.parse({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: [
       {
@@ -496,7 +519,7 @@ Instead of writing raw JSON schemas, you can use familiar schema definition tool
 
   var response = await client.Messages.Create(new MessageCreateParams
   {
-      Model = Model.ClaudeOpus5,
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 1024,
       Messages = [new() {
           Role = Role.User,
@@ -558,7 +581,7 @@ Instead of writing raw JSON schemas, you can use familiar schema definition tool
   	schema := generateSchema(&ContactInfo{})
 
   	message, _ := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  		Model:     anthropic.ModelClaudeOpus5,
+  		Model:     anthropic.ModelClaudeOpus5_5,
   		MaxTokens: 1024,
   		Messages: []anthropic.MessageParam{
   			anthropic.NewUserMessage(anthropic.NewTextBlock(
@@ -594,7 +617,7 @@ Instead of writing raw JSON schemas, you can use familiar schema definition tool
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
       StructuredMessageCreateParams<ContactInfo> createParams = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_5)
+          .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(1024)
           .outputConfig(ContactInfo.class)
           .addUserMessage("Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.")
@@ -629,7 +652,7 @@ Instead of writing raw JSON schemas, you can use familiar schema definition tool
       messages: [
           ['role' => 'user', 'content' => 'Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.'],
       ],
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       outputConfig: ['format' => ContactInfo::class],
   );
 
@@ -650,7 +673,7 @@ Instead of writing raw JSON schemas, you can use familiar schema definition tool
   end
 
   message = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: [{
       role: "user",
@@ -678,7 +701,7 @@ Each SDK provides helpers that make working with structured outputs easier. See 
     ant messages create \
       --transform 'content.#(type=="text").text|@fromstr|{name,email}' \
       --format yaml <<'YAML'
-    model: claude-opus-5
+    model: claude-opus-5-5
     max_tokens: 1024
     messages:
       - role: user
@@ -719,7 +742,7 @@ Each SDK provides helpers that make working with structured outputs easier. See 
         plan_interest: str
     # ...
     response = client.messages.parse(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=1024,
         messages=[
             {
@@ -751,7 +774,7 @@ Each SDK provides helpers that make working with structured outputs easier. See 
     schema["properties"]["custom_field"] = {"type": "string"}
 
     response = client.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=1024,
         messages=[{"role": "user", "content": "..."}],
         output_config={
@@ -779,7 +802,7 @@ Each SDK provides helpers that make working with structured outputs easier. See 
     const client = new Anthropic();
 
     const response = await client.messages.parse({
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 1024,
       messages: [
         {
@@ -806,7 +829,7 @@ Each SDK provides helpers that make working with structured outputs easier. See 
     const client = new Anthropic();
 
     const response = await client.messages.parse({
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 1024,
       messages: [
         {
@@ -851,7 +874,7 @@ Each SDK provides helpers that make working with structured outputs easier. See 
 
     var response = await client.Messages.Create(new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages = [new() {
             Role = Role.User,
@@ -917,7 +940,7 @@ Each SDK provides helpers that make working with structured outputs easier. See 
     	schema := generateSchema(&ContactInfo{})
 
     	message, _ := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-    		Model:     anthropic.ModelClaudeOpus5,
+    		Model:     anthropic.ModelClaudeOpus5_5,
     		MaxTokens: 1024,
     		Messages: []anthropic.MessageParam{
     			anthropic.NewUserMessage(anthropic.NewTextBlock(
@@ -964,7 +987,7 @@ Each SDK provides helpers that make working with structured outputs easier. See 
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
         StructuredMessageCreateParams<ContactInfo> createParams = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_5)
+            .model(Model.CLAUDE_OPUS_5_5)
             .maxTokens(1024)
             .outputConfig(ContactInfo.class)
             .addUserMessage("Extract contact info: John Smith, john@example.com, interested in the Pro plan")
@@ -1004,7 +1027,7 @@ Each SDK provides helpers that make working with structured outputs easier. See 
 
       void main() {
           StructuredMessageCreateParams<BookList> createParams = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_5)
+              .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(2048)
               .outputConfig(BookList.class, JsonSchemaLocalValidation.NO)
               .addUserMessage("List some famous late twentieth century novels.")
@@ -1187,7 +1210,7 @@ Each SDK provides helpers that make working with structured outputs easier. See 
               .build();
 
           MessageCreateParams createParams = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_5)
+              .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(1024)
               .outputConfig(outputConfig)
               .addUserMessage(
@@ -1231,7 +1254,7 @@ Each SDK provides helpers that make working with structured outputs easier. See 
         messages: [
             ['role' => 'user', 'content' => 'Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan.'],
         ],
-        model: 'claude-opus-5',
+        model: 'claude-opus-5-5',
         outputConfig: ['format' => ContactInfo::class],
     );
 
@@ -1303,7 +1326,7 @@ Each SDK provides helpers that make working with structured outputs easier. See 
           messages: [
               ['role' => 'user', 'content' => 'Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan.'],
           ],
-          model: 'claude-opus-5',
+          model: 'claude-opus-5-5',
           outputConfig: OutputConfig::with(format: JSONOutputFormat::with(schema: [
               'type' => 'object',
               'properties' => [
@@ -1338,7 +1361,7 @@ Each SDK provides helpers that make working with structured outputs easier. See 
     client = Anthropic::Client.new
 
     message = client.messages.create(
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 1024,
       messages: [
         {
@@ -1372,7 +1395,7 @@ Each SDK provides helpers that make working with structured outputs easier. See 
       end
 
       message = client.messages.create(
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 1024,
         messages: [{role: "user", content: "give me some famous numbers"}],
         output_config: {format: Output}
@@ -1412,7 +1435,7 @@ This means Claude receives a simplified schema, but your code still enforces all
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
         -d '{
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "max_tokens": 4096,
           "messages": [
             {
@@ -1447,7 +1470,7 @@ This means Claude receives a simplified schema, but your code still enforces all
       ant messages create \
         --transform 'content.#(type=="text").text|@fromstr' \
         --format jsonl <<'YAML'
-      model: claude-opus-5
+      model: claude-opus-5-5
       max_tokens: 4096
       messages:
         - role: user
@@ -1486,7 +1509,7 @@ This means Claude receives a simplified schema, but your code still enforces all
       invoice_text = "Invoice #12345, Date: 2024-01-15, Total: $500.00"
 
       response = client.messages.parse(
-          model="claude-opus-5",
+          model="claude-opus-5-5",
           max_tokens=4096,
           output_format=Invoice,
           messages=[
@@ -1513,7 +1536,7 @@ This means Claude receives a simplified schema, but your code still enforces all
 
       const invoiceText = "Invoice #12345, Date: 2024-01-15, Total: $500.00";
       const response = await client.messages.parse({
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 4096,
         output_config: { format: zodOutputFormat(InvoiceSchema) },
         messages: [{ role: "user", content: `Extract invoice data from: ${invoiceText}` }]
@@ -1528,7 +1551,7 @@ This means Claude receives a simplified schema, but your code still enforces all
 
       var parameters = new MessageCreateParams
       {
-          Model = Model.ClaudeOpus5,
+          Model = Model.ClaudeOpus5_5,
           MaxTokens = 4096,
           OutputConfig = new OutputConfig
           {
@@ -1596,7 +1619,7 @@ This means Claude receives a simplified schema, but your code still enforces all
       }
 
       response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-      	Model:     anthropic.ModelClaudeOpus5,
+      	Model:     anthropic.ModelClaudeOpus5_5,
       	MaxTokens: 4096,
       	OutputConfig: anthropic.OutputConfigParam{
       		Format: anthropic.JSONOutputFormatParam{
@@ -1655,7 +1678,7 @@ This means Claude receives a simplified schema, but your code still enforces all
           String invoiceText = "Invoice #12345, Date: 2024-01-15, Total: $500.00";
 
           StructuredMessageCreateParams<Invoice> params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_5)
+              .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(4096L)
               .outputConfig(Invoice.class)
               .addUserMessage("Extract invoice data from: " + invoiceText)
@@ -1693,7 +1716,7 @@ This means Claude receives a simplified schema, but your code still enforces all
           messages: [
               ['role' => 'user', 'content' => "Extract invoice data from: $invoiceText"]
           ],
-          model: 'claude-opus-5',
+          model: 'claude-opus-5-5',
           outputConfig: ['format' => Invoice::class],
       );
 
@@ -1722,7 +1745,7 @@ This means Claude receives a simplified schema, but your code still enforces all
       invoice_text = "Invoice #12345, Date: 2024-01-15, Total: $500.00"
 
       message = client.messages.create(
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 4096,
         output_config: {format: Invoice},
         messages: [
@@ -1746,7 +1769,7 @@ This means Claude receives a simplified schema, but your code still enforces all
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
         -d '{
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "max_tokens": 1024,
           "messages": [
             {
@@ -1777,7 +1800,7 @@ This means Claude receives a simplified schema, but your code still enforces all
       ant messages create \
         --transform 'content.#(type=="text").text|@fromstr' \
         --format jsonl <<'YAML'
-      model: claude-opus-5
+      model: claude-opus-5-5
       max_tokens: 1024
       messages:
         - role: user
@@ -1822,7 +1845,7 @@ This means Claude receives a simplified schema, but your code still enforces all
 
       feedback_text = "Great product, but the delivery was slow."
       response = client.messages.parse(
-          model="claude-opus-5",
+          model="claude-opus-5-5",
           max_tokens=1024,
           output_format=Classification,
           messages=[{"role": "user", "content": f"Classify this feedback: {feedback_text}"}],
@@ -1846,7 +1869,7 @@ This means Claude receives a simplified schema, but your code still enforces all
 
       const feedbackText = "Great product, but the delivery was slow.";
       const response = await client.messages.parse({
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 1024,
         output_config: { format: zodOutputFormat(ClassificationSchema) },
         messages: [{ role: "user", content: `Classify this feedback: ${feedbackText}` }]
@@ -1860,7 +1883,7 @@ This means Claude receives a simplified schema, but your code still enforces all
 
       var parameters = new MessageCreateParams
       {
-          Model = Model.ClaudeOpus5,
+          Model = Model.ClaudeOpus5_5,
           MaxTokens = 1024,
           Messages = [new() { Role = Role.User, Content = $"Classify this feedback: {feedbackText}" }],
           OutputConfig = new OutputConfig
@@ -1904,7 +1927,7 @@ This means Claude receives a simplified schema, but your code still enforces all
       }
 
       response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-      	Model:     anthropic.ModelClaudeOpus5,
+      	Model:     anthropic.ModelClaudeOpus5_5,
       	MaxTokens: 1024,
       	OutputConfig: anthropic.OutputConfigParam{
       		Format: anthropic.JSONOutputFormatParam{
@@ -1951,7 +1974,7 @@ This means Claude receives a simplified schema, but your code still enforces all
           String feedbackText = "Great product, fast shipping!";
 
           StructuredMessageCreateParams<Classification> params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_5)
+              .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(1024L)
               .outputConfig(Classification.class)
               .addUserMessage("Classify this feedback: " + feedbackText)
@@ -1988,7 +2011,7 @@ This means Claude receives a simplified schema, but your code still enforces all
           messages: [
               ['role' => 'user', 'content' => "Classify this feedback: {$feedbackText}"]
           ],
-          model: 'claude-opus-5',
+          model: 'claude-opus-5-5',
           outputConfig: ['format' => Classification::class],
       );
 
@@ -2011,7 +2034,7 @@ This means Claude receives a simplified schema, but your code still enforces all
       feedback_text = "Great product, fast shipping!"
 
       message = client.messages.create(
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 1024,
         output_config: {format: Classification},
         messages: [
@@ -2033,7 +2056,7 @@ This means Claude receives a simplified schema, but your code still enforces all
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
         -d '{
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "max_tokens": 1024,
           "messages": [
             {
@@ -2067,7 +2090,7 @@ This means Claude receives a simplified schema, but your code still enforces all
       ant messages create \
         --transform 'content.#(type=="text").text' \
         --raw-output <<'YAML'
-      model: claude-opus-5
+      model: claude-opus-5-5
       max_tokens: 1024
       output_config:
         format:
@@ -2113,7 +2136,7 @@ This means Claude receives a simplified schema, but your code still enforces all
 
 
       response = client.messages.parse(
-          model="claude-opus-5",
+          model="claude-opus-5-5",
           max_tokens=1024,
           output_format=APIResponse,
           messages=[{"role": "user", "content": "Process this request: ..."}],
@@ -2136,7 +2159,7 @@ This means Claude receives a simplified schema, but your code still enforces all
       });
 
       const response = await client.messages.parse({
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 1024,
         output_config: { format: zodOutputFormat(APIResponseSchema) },
         messages: [{ role: "user", content: "Process this request..." }]
@@ -2148,7 +2171,7 @@ This means Claude receives a simplified schema, but your code still enforces all
       ```csharp C#
       var parameters = new MessageCreateParams
       {
-          Model = Model.ClaudeOpus5,
+          Model = Model.ClaudeOpus5_5,
           MaxTokens = 1024,
           Messages = [new() { Role = Role.User, Content = "Process this request: ..." }],
           OutputConfig = new OutputConfig
@@ -2184,7 +2207,7 @@ This means Claude receives a simplified schema, but your code still enforces all
       client := anthropic.NewClient()
 
       response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-      	Model:     anthropic.ModelClaudeOpus5,
+      	Model:     anthropic.ModelClaudeOpus5_5,
       	MaxTokens: 1024,
       	OutputConfig: anthropic.OutputConfigParam{
       		Format: anthropic.JSONOutputFormatParam{
@@ -2275,7 +2298,7 @@ This means Claude receives a simplified schema, but your code still enforces all
           AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
           StructuredMessageCreateParams<APIResponse> params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_5)
+              .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(1024L)
               .outputConfig(APIResponse.class)
               .addUserMessage("Process this request: ...")
@@ -2318,7 +2341,7 @@ This means Claude receives a simplified schema, but your code still enforces all
           messages: [
               ['role' => 'user', 'content' => 'Process this request: ...']
           ],
-          model: 'claude-opus-5',
+          model: 'claude-opus-5-5',
           outputConfig: ['format' => APIResponse::class],
       );
 
@@ -2352,7 +2375,7 @@ This means Claude receives a simplified schema, but your code still enforces all
       end
 
       message = client.messages.create(
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 1024,
         output_config: {format: APIResponse},
         messages: [
@@ -2385,7 +2408,7 @@ When combined, Claude can call tools with guaranteed-valid parameters AND return
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 1024,
       "messages": [
         {
@@ -2427,7 +2450,7 @@ When combined, Claude can call tools with guaranteed-valid parameters AND return
 
   ```bash CLI
   ant messages create <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 1024
   messages:
     - role: user
@@ -2466,7 +2489,7 @@ When combined, Claude can call tools with guaranteed-valid parameters AND return
 
   ```python Python
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=1024,
       messages=[
           {
@@ -2512,7 +2535,7 @@ When combined, Claude can call tools with guaranteed-valid parameters AND return
 
   ```typescript TypeScript
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Help me plan a trip to Paris departing May 15, 2026" }],
     // JSON outputs: structured response format
@@ -2566,7 +2589,7 @@ When combined, Claude can call tools with guaranteed-valid parameters AND return
   ```csharp C#
   var parameters = new MessageCreateParams
   {
-      Model = Model.ClaudeOpus5,
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 1024,
       Messages = [new() { Role = Role.User, Content = "Help me plan a trip to Paris departing May 15, 2026" }],
       // JSON outputs: structured response format
@@ -2616,7 +2639,7 @@ When combined, Claude can call tools with guaranteed-valid parameters AND return
   client := anthropic.NewClient()
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus5,
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Help me plan a trip to Paris departing May 15, 2026")),
@@ -2683,7 +2706,7 @@ When combined, Claude can call tools with guaranteed-valid parameters AND return
       .build();
 
   MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_5)
+      .model(Model.CLAUDE_OPUS_5_5)
       .maxTokens(1024L)
       .addUserMessage("Help me plan a trip to Paris departing May 15, 2026")
       .outputConfig(OutputConfig.builder()
@@ -2721,7 +2744,7 @@ When combined, Claude can call tools with guaranteed-valid parameters AND return
       messages: [
           ['role' => 'user', 'content' => 'Help me plan a trip to Paris departing May 15, 2026']
       ],
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       // JSON outputs: structured response format
       outputConfig: ['format' => TripPlan::class],
       // Strict tool use: guaranteed tool parameters
@@ -2755,7 +2778,7 @@ When combined, Claude can call tools with guaranteed-valid parameters AND return
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: [
       {role: "user", content: "Help me plan a trip to Paris departing May 15, 2026"}

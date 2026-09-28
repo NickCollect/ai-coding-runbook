@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/skills
-fetched_at: 2026-09-21T05:44:01.464928+00:00
+fetched_at: 2026-09-28T06:10:41.370590+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,11 +8,13 @@ fetch_method: mintlify_md
 title: Skills
 url: https://platform.claude.com/docs/en/managed-agents/skills
 description: Attach pre-built or custom skills to an agent in Claude Managed Agents to give it reusable, filesystem-based expertise for domain-specific workflows.
+featureMetadata:
+  topic:
+    title: Managed Agents
+    url: https://platform.claude.com/docs/en/managed-agents/overview
+  status: beta
+  betaHeader: managed-agents-2026-04-01
 ---
-
-## Compatibility
-- Status: Beta
-- [Beta header](https://platform.claude.com/docs/en/api/beta-headers): `managed-agents-2026-04-01`
 
 Skills are reusable, filesystem-based resources that give your agent domain-specific expertise: workflows, context, and best practices that turn a general-purpose agent into a specialist. Each skill you add incurs a modest cost on the session's context window, adding instructions and metadata that help the model use the skill. Learn more in the [Agent Skills](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) overview.
 
@@ -37,7 +39,7 @@ These examples omit the optional `display_name` field, so the skill's display na
     -F "files[]=@example_skill.zip"
   ```
 
-  <MultiFileExample language="cli" label="CLI">
+  <CodeGroupItem>
     ```bash CLI
     ant apply skills/pr-summary
     ```
@@ -54,7 +56,9 @@ These examples omit the optional `display_name` field, so the skill's display na
       List what changed, why, and anything a reviewer should look at closely, in three short sections.
       ```
     </File>
-  </MultiFileExample>
+
+    [`ant apply`](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/apply) uploads the `skills/pr-summary` directory, prints the new skill's ID, and records it in `claude-lock.json`. Commit `claude-lock.json` so the next `ant apply` uploads your edits as a new version instead of creating a second skill.
+  </CodeGroupItem>
 
   ```python Python
   import anthropic
@@ -198,10 +202,6 @@ These examples omit the optional `display_name` field, so the skill's display na
   puts "Created skill: #{skill.id}"
   puts "Latest version: #{skill.latest_version_id}"
   ```
-
-  <ForLanguage tab="CLI">
-    [`ant apply`](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/apply) uploads the `skills/pr-summary` directory, prints the new skill's ID, and records it in `claude-lock.json`. Commit `claude-lock.json` so the next `ant apply` uploads your edits as a new version instead of creating a second skill.
-  </ForLanguage>
 </CodeGroup>
 
 To list, retrieve, delete, and version custom skills, see [Managing custom skills](https://platform.claude.com/docs/en/build-with-claude/skills-guide#managing-custom-skills). For the full request and response schemas, see the [Create Skill API reference](https://platform.claude.com/docs/en/api/skills/create). Skill bundles upload directly to the Skills API rather than through the [Files API](https://platform.claude.com/docs/en/build-with-claude/files).
@@ -231,7 +231,7 @@ Each entry in the `skills` array uses the following fields:
     --json @- <<'EOF'
   {
     "name": "Financial Analyst",
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "system": "You are a financial analysis agent.",
     "skills": [
       {"type": "anthropic", "skill_id": "xlsx"},
@@ -242,7 +242,7 @@ Each entry in the `skills` array uses the following fields:
   )
   ```
 
-  <MultiFileExample language="cli" label="CLI">
+  <CodeGroupItem>
     ```bash CLI
     ant apply agent.md
     ```
@@ -251,7 +251,7 @@ Each entry in the `skills` array uses the following fields:
       ```markdown
       ---
       name: Financial Analyst
-      model: claude-opus-5
+      model: claude-opus-5-5
       skills:
         - type: anthropic
           skill_id: xlsx
@@ -263,12 +263,12 @@ Each entry in the `skills` array uses the following fields:
       You are a financial analysis agent.
       ```
     </File>
-  </MultiFileExample>
+  </CodeGroupItem>
 
   ```python Python
   agent = client.beta.agents.create(
       name="Financial Analyst",
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       system="You are a financial analysis agent.",
       skills=[
           {
@@ -287,7 +287,7 @@ Each entry in the `skills` array uses the following fields:
   ```typescript TypeScript
   const agent = await client.beta.agents.create({
     name: "Financial Analyst",
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     system: "You are a financial analysis agent.",
     skills: [
       {
@@ -309,7 +309,7 @@ Each entry in the `skills` array uses the following fields:
   var agent = await client.Beta.Agents.Create(new()
   {
       Name = "Financial Analyst",
-      Model = BetaManagedAgentsModel.ClaudeOpus5,
+      Model = BetaManagedAgentsModel.ClaudeOpus5_5,
       System = "You are a financial analysis agent.",
       Skills =
       [
@@ -323,7 +323,7 @@ Each entry in the `skills` array uses the following fields:
   agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name: "Financial Analyst",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: anthropic.BetaManagedAgentsModelClaudeOpus5,
+  		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
   	},
   	System: anthropic.String("You are a financial analysis agent."),
   	Skills: []anthropic.BetaManagedAgentsSkillParamsUnion{
@@ -350,7 +350,7 @@ Each entry in the `skills` array uses the following fields:
   var agent = client.beta().agents().create(
       AgentCreateParams.builder()
           .name("Financial Analyst")
-          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
+          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
           .system("You are a financial analysis agent.")
           .addSkill(
               BetaManagedAgentsAnthropicSkillParams.builder()
@@ -372,7 +372,7 @@ Each entry in the `skills` array uses the following fields:
   ```php PHP
   $agent = $client->beta->agents->create(
       name: 'Financial Analyst',
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       system: 'You are a financial analysis agent.',
       skills: [
           ['type' => 'anthropic', 'skillID' => 'xlsx'],
@@ -384,7 +384,7 @@ Each entry in the `skills` array uses the following fields:
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "Financial Analyst",
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     system_: "You are a financial analysis agent.",
     skills: [
       {type: "anthropic", skill_id: "xlsx"},

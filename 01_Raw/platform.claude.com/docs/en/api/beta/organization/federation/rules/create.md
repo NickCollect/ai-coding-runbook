@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/federation/rules/create
-fetched_at: 2026-09-21T05:44:11.051039+00:00
+fetched_at: 2026-09-28T06:10:52.469542+00:00
 fetch_method: mintlify_md
 ---
 
@@ -39,7 +39,7 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -133,6 +133,10 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
     - `"compact-2026-09-04"`
 
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
+
 ## Body parameters
 
 - `issuer_id: string`
@@ -169,7 +173,7 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
   Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
-  maxLength: 255, minLength: 1
+  minLength: 1, maxLength: 255
 
 - `oauth_scope: string`
 
@@ -209,7 +213,7 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
   Lifetime in seconds for access tokens minted via this rule (60-86400). Defaults to 3600 (1h). Minted tokens are capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.
 
-  maximum: 86400, minimum: 60
+  minimum: 60, maximum: 86400
 
 - `workspace_id: optional string or null`
 

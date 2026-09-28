@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/citations
-fetched_at: 2026-08-31T06:29:31.080545+00:00
+fetched_at: 2026-09-28T06:10:38.412413+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,11 +8,18 @@ fetch_method: mintlify_md
 title: Citations
 url: https://platform.claude.com/docs/en/build-with-claude/citations
 description: Ground Claude's responses in your source documents. Citations return the exact passages that support each claim, so you can verify answers and surface sources to your users.
+featureMetadata:
+  status: ga
+  zdr:
+    eligibility: eligible
+    note: Excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements).
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS: ga
+    Amazon Bedrock: ga
+    Google Cloud: ga
+    Microsoft Foundry: ga
 ---
-
-## Compatibility
-- [ZDR](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention): eligible (excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements))
-- Platforms: Claude API, Claude Platform on AWS, Amazon Bedrock, Google Cloud, Microsoft Foundry
 
 Claude can provide detailed citations when answering questions about documents, helping you track and verify the sources behind each response.
 
@@ -31,7 +38,7 @@ The following example shows how to enable citations on a plain text document wit
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 1024,
       "messages": [
         {
@@ -60,7 +67,7 @@ The following example shows how to enable citations on a plain text document wit
 
   ```bash CLI
   ant messages create <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 1024
   messages:
     - role: user
@@ -83,7 +90,7 @@ The following example shows how to enable citations on a plain text document wit
   client = anthropic.Anthropic()
 
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=1024,
       messages=[
           {
@@ -112,7 +119,7 @@ The following example shows how to enable citations on a plain text document wit
   const client = new Anthropic();
 
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: [
       {
@@ -146,7 +153,7 @@ The following example shows how to enable citations on a plain text document wit
   var response = await client.Messages.Create(
       new()
       {
-          Model = Model.ClaudeOpus5,
+          Model = Model.ClaudeOpus5_5,
           MaxTokens = 1024,
           Messages =
           [
@@ -180,7 +187,7 @@ The following example shows how to enable citations on a plain text document wit
   client := anthropic.NewClient()
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus5,
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(
@@ -225,7 +232,7 @@ The following example shows how to enable citations on a plain text document wit
       .build();
 
   MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_5)
+      .model(Model.CLAUDE_OPUS_5_5)
       .maxTokens(1024)
       .addUserMessageOfBlockParams(
           List.of(
@@ -266,7 +273,7 @@ The following example shows how to enable citations on a plain text document wit
               ],
           ],
       ],
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
   );
 
   echo json_encode($response, JSON_PRETTY_PRINT);
@@ -276,7 +283,7 @@ The following example shows how to enable citations on a plain text document wit
   client = Anthropic::Client.new
 
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: [
       {
@@ -402,7 +409,7 @@ The citation blocks generated in responses cannot be cached directly, but the so
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 1024,
       "messages": [
         {
@@ -429,7 +436,7 @@ The citation blocks generated in responses cannot be cached directly, but the so
   ```
 
   ```bash CLI
-  ant messages create --model claude-opus-5 --max-tokens 1024 <<'YAML'
+  ant messages create --model claude-opus-5-5 --max-tokens 1024 <<'YAML'
   messages:
     - role: user
       content:
@@ -456,7 +463,7 @@ The citation blocks generated in responses cannot be cached directly, but the so
   )  # Minimum cacheable length
 
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=1024,
       messages=[
           {
@@ -493,7 +500,7 @@ The citation blocks generated in responses cannot be cached directly, but the so
     "This is a very long document with thousands of words..." + " ... ".repeat(1000); // Minimum cacheable length
 
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: [
       {
@@ -531,7 +538,7 @@ The citation blocks generated in responses cannot be cached directly, but the so
   var response = await client.Messages.Create(
       new()
       {
-          Model = Model.ClaudeOpus5,
+          Model = Model.ClaudeOpus5_5,
           MaxTokens = 1024,
           Messages =
           [
@@ -565,7 +572,7 @@ The citation blocks generated in responses cannot be cached directly, but the so
   	strings.Repeat(" ... ", 1000) // Minimum cacheable length
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus5,
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(
@@ -607,7 +614,7 @@ The citation blocks generated in responses cannot be cached directly, but the so
       .build();
 
   MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_5)
+      .model(Model.CLAUDE_OPUS_5_5)
       .maxTokens(1024)
       .addUserMessageOfBlockParams(
           List.of(
@@ -652,7 +659,7 @@ The citation blocks generated in responses cannot be cached directly, but the so
               ],
           ],
       ],
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
   );
 
   echo json_encode($response, JSON_PRETTY_PRINT);
@@ -667,7 +674,7 @@ The citation blocks generated in responses cannot be cached directly, but the so
     " ... " * 1000 # Minimum cacheable length
 
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: [
       {
@@ -753,7 +760,7 @@ Plain text documents are automatically chunked into sentences. You can provide t
         -H "content-type: application/json" \
         -d @- <<EOF
       {
-        "model": "claude-opus-5",
+        "model": "claude-opus-5-5",
         "max_tokens": 1024,
         "messages": [
           {
@@ -779,7 +786,7 @@ Plain text documents are automatically chunked into sentences. You can provide t
 
       ```bash CLI
       ant messages create <<YAML
-      model: claude-opus-5
+      model: claude-opus-5-5
       max_tokens: 1024
       messages:
         - role: user
@@ -799,7 +806,7 @@ Plain text documents are automatically chunked into sentences. You can provide t
 
       ```python Python
       cited_response = client.messages.create(
-          model="claude-opus-5",
+          model="claude-opus-5-5",
           max_tokens=1024,
           messages=[
               {
@@ -822,7 +829,7 @@ Plain text documents are automatically chunked into sentences. You can provide t
 
       ```typescript TypeScript
       const citedResponse = await client.messages.create({
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 1024,
         messages: [
           {
@@ -850,7 +857,7 @@ Plain text documents are automatically chunked into sentences. You can provide t
       var citedResponse = await client.Messages.Create(
           new MessageCreateParams
           {
-              Model = Model.ClaudeOpus5,
+              Model = Model.ClaudeOpus5_5,
               MaxTokens = 1024,
               Messages =
               [
@@ -878,7 +885,7 @@ Plain text documents are automatically chunked into sentences. You can provide t
       ```go Go
       citedMsg, err := client.Messages.New(context.Background(),
       	anthropic.MessageNewParams{
-      		Model:     anthropic.ModelClaudeOpus5,
+      		Model:     anthropic.ModelClaudeOpus5_5,
       		MaxTokens: 1024,
       		Messages: []anthropic.MessageParam{
       			anthropic.NewUserMessage(
@@ -904,7 +911,7 @@ Plain text documents are automatically chunked into sentences. You can provide t
 
       ```java Java
       MessageCreateParams citedParams = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_5)
+          .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(1024)
           .addUserMessageOfBlockParams(List.of(
               ContentBlockParam.ofDocument(DocumentBlockParam.builder()
@@ -941,7 +948,7 @@ Plain text documents are automatically chunked into sentences. You can provide t
                   ],
               ],
           ],
-          model: 'claude-opus-5',
+          model: 'claude-opus-5-5',
       );
 
       echo $citedResponse;
@@ -949,7 +956,7 @@ Plain text documents are automatically chunked into sentences. You can provide t
 
       ```ruby Ruby
       cited_response = client.messages.create(
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 1024,
         messages: [
           {
@@ -1005,7 +1012,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
         -d '{
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "max_tokens": 1024,
           "messages": [
             {
@@ -1034,7 +1041,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
 
       ```bash CLI
       ant messages create <<'YAML'
-      model: claude-opus-5
+      model: claude-opus-5-5
       max_tokens: 1024
       messages:
         - role: user
@@ -1061,7 +1068,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
       ).decode()
 
       response = client.messages.create(
-          model="claude-opus-5",
+          model="claude-opus-5-5",
           max_tokens=1024,
           messages=[
               {
@@ -1092,7 +1099,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
       const pdfBase64 = Buffer.from(await readFile("/path/to/document.pdf")).toString("base64");
 
       const response = await client.messages.create({
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 1024,
         messages: [
           {
@@ -1128,7 +1135,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
       var response = await client.Messages.Create(
           new()
           {
-              Model = Model.ClaudeOpus5,
+              Model = Model.ClaudeOpus5_5,
               MaxTokens = 1024,
               Messages =
               [
@@ -1165,7 +1172,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
       pdfBase64 := base64.StdEncoding.EncodeToString(pdfBytes)
 
       response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-      	Model:     anthropic.ModelClaudeOpus5,
+      	Model:     anthropic.ModelClaudeOpus5_5,
       	MaxTokens: 1024,
       	Messages: []anthropic.MessageParam{
       		anthropic.NewUserMessage(
@@ -1205,7 +1212,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
           .build();
 
       MessageCreateParams params = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_5)
+          .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(1024)
           .addUserMessageOfBlockParams(
               List.of(
@@ -1248,7 +1255,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
                   ],
               ],
           ],
-          model: 'claude-opus-5',
+          model: 'claude-opus-5-5',
       );
 
       echo json_encode($response, JSON_PRETTY_PRINT);
@@ -1260,7 +1267,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
       pdf_base64 = Base64.strict_encode64(File.binread("/path/to/document.pdf"))
 
       response = client.messages.create(
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 1024,
         messages: [
           {
@@ -1299,7 +1306,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
         -d '{
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "max_tokens": 1024,
           "messages": [
             {
@@ -1327,7 +1334,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
 
       ```bash CLI
       ant messages create <<'YAML'
-      model: claude-opus-5
+      model: claude-opus-5-5
       max_tokens: 1024
       messages:
         - role: user
@@ -1349,7 +1356,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
       client = anthropic.Anthropic()
 
       response = client.messages.create(
-          model="claude-opus-5",
+          model="claude-opus-5-5",
           max_tokens=1024,
           messages=[
               {
@@ -1377,7 +1384,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
       const client = new Anthropic();
 
       const response = await client.messages.create({
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 1024,
         messages: [
           {
@@ -1410,7 +1417,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
       var response = await client.Messages.Create(
           new()
           {
-              Model = Model.ClaudeOpus5,
+              Model = Model.ClaudeOpus5_5,
               MaxTokens = 1024,
               Messages =
               [
@@ -1444,7 +1451,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
       client := anthropic.NewClient()
 
       response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-      	Model:     anthropic.ModelClaudeOpus5,
+      	Model:     anthropic.ModelClaudeOpus5_5,
       	MaxTokens: 1024,
       	Messages: []anthropic.MessageParam{
       		anthropic.NewUserMessage(
@@ -1483,7 +1490,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
           .build();
 
       MessageCreateParams params = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_5)
+          .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(1024)
           .addUserMessageOfBlockParams(
               List.of(
@@ -1523,7 +1530,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
                   ],
               ],
           ],
-          model: 'claude-opus-5',
+          model: 'claude-opus-5-5',
       );
 
       echo json_encode($response, JSON_PRETTY_PRINT);
@@ -1533,7 +1540,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
       client = Anthropic::Client.new
 
       response = client.messages.create(
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 1024,
         messages: [
           {
@@ -1574,7 +1581,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
         -H "content-type: application/json" \
         -d @- <<EOF
       {
-        "model": "claude-opus-5",
+        "model": "claude-opus-5-5",
         "max_tokens": 1024,
         "messages": [
           {
@@ -1600,7 +1607,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
 
       ```bash CLI
       ant messages create <<YAML
-      model: claude-opus-5
+      model: claude-opus-5-5
       max_tokens: 1024
       messages:
         - role: user
@@ -1620,7 +1627,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
 
       ```python Python
       cited_response = client.messages.create(
-          model="claude-opus-5",
+          model="claude-opus-5-5",
           max_tokens=1024,
           messages=[
               {
@@ -1643,7 +1650,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
 
       ```typescript TypeScript
       const citedResponse = await client.messages.create({
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 1024,
         messages: [
           {
@@ -1671,7 +1678,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
       var citedResponse = await client.Messages.Create(
           new MessageCreateParams
           {
-              Model = Model.ClaudeOpus5,
+              Model = Model.ClaudeOpus5_5,
               MaxTokens = 1024,
               Messages =
               [
@@ -1699,7 +1706,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
       ```go Go
       citedMsg, err := client.Messages.New(context.Background(),
       	anthropic.MessageNewParams{
-      		Model:     anthropic.ModelClaudeOpus5,
+      		Model:     anthropic.ModelClaudeOpus5_5,
       		MaxTokens: 1024,
       		Messages: []anthropic.MessageParam{
       			anthropic.NewUserMessage(
@@ -1725,7 +1732,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
 
       ```java Java
       MessageCreateParams citedParams = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_5)
+          .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(1024)
           .addUserMessageOfBlockParams(List.of(
               ContentBlockParam.ofDocument(DocumentBlockParam.builder()
@@ -1762,7 +1769,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
                   ],
               ],
           ],
-          model: 'claude-opus-5',
+          model: 'claude-opus-5-5',
       );
 
       echo $citedResponse;
@@ -1770,7 +1777,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
 
       ```ruby Ruby
       cited_response = client.messages.create(
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 1024,
         messages: [
           {
@@ -1822,7 +1829,7 @@ Custom content documents give you control over citation granularity. No addition
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 1024,
       "messages": [
         {
@@ -1853,7 +1860,7 @@ Custom content documents give you control over citation granularity. No addition
 
   ```bash CLI
   ant messages create <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 1024
   messages:
     - role: user
@@ -1879,7 +1886,7 @@ Custom content documents give you control over citation granularity. No addition
   client = anthropic.Anthropic()
 
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=1024,
       messages=[
           {
@@ -1910,7 +1917,7 @@ Custom content documents give you control over citation granularity. No addition
   const client = new Anthropic();
 
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: [
       {
@@ -1946,7 +1953,7 @@ Custom content documents give you control over citation granularity. No addition
   var response = await client.Messages.Create(
       new()
       {
-          Model = Model.ClaudeOpus5,
+          Model = Model.ClaudeOpus5_5,
           MaxTokens = 1024,
           Messages =
           [
@@ -1984,7 +1991,7 @@ Custom content documents give you control over citation granularity. No addition
   client := anthropic.NewClient()
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus5,
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(
@@ -2033,7 +2040,7 @@ Custom content documents give you control over citation granularity. No addition
       .build();
 
   MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_5)
+      .model(Model.CLAUDE_OPUS_5_5)
       .maxTokens(1024)
       .addUserMessageOfBlockParams(
           List.of(
@@ -2076,7 +2083,7 @@ Custom content documents give you control over citation granularity. No addition
               ],
           ],
       ],
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
   );
 
   echo json_encode($response, JSON_PRETTY_PRINT);
@@ -2086,7 +2093,7 @@ Custom content documents give you control over citation granularity. No addition
   client = Anthropic::Client.new
 
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: [
       {

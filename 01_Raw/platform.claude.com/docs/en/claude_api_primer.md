@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/claude_api_primer
-fetched_at: 2026-09-21T05:44:16.069981+00:00
+fetched_at: 2026-09-28T06:10:58.141018+00:00
 fetch_method: mintlify_md
 ---
 
@@ -17,9 +17,9 @@ description: This guide is designed to give Claude the basics of using the Claud
 ## Models
 
 ```text wrap
-Recommended default for most work, including complex agentic coding: Claude Opus 5: claude-opus-5
-Step up for the hardest long-running agentic and research tasks, at 2x Claude Opus 5 pricing: Claude Fable 5.1: claude-fable-5-1
-Previous Opus model: Claude Opus 4.8: claude-opus-4-8
+Recommended default for most work, including complex agentic coding: Claude Opus 5.5: claude-opus-5-5
+Step up for the hardest long-running agentic and research tasks, at 2.5x Claude Opus 5.5 pricing: Claude Fable 5.1: claude-fable-5-1
+Previous Opus model: Claude Opus 5: claude-opus-5
 Smart model: Claude Sonnet 5: claude-sonnet-5
 For fast, cost-effective tasks: Claude Haiku 4.5: claude-haiku-4-5-20251001
 ```
@@ -31,7 +31,7 @@ For fast, cost-effective tasks: Claude Haiku 4.5: claude-haiku-4-5-20251001
 <CodeGroup exclude="shell:cURL, typescript, csharp, go, java, php, ruby">
   ```bash CLI
   ant messages create \
-    --model claude-opus-5 \
+    --model claude-opus-5-5 \
     --max-tokens 1024 \
     --message '{"role": "user", "content": "Hello, Claude"}'
   ```
@@ -40,7 +40,7 @@ For fast, cost-effective tasks: Claude Haiku 4.5: claude-haiku-4-5-20251001
   import anthropic
 
   message = anthropic.Anthropic().messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello, Claude"}],
   )
@@ -59,7 +59,7 @@ For fast, cost-effective tasks: Claude Haiku 4.5: claude-haiku-4-5-20251001
       "text": "Hello!"
     }
   ],
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {
@@ -76,7 +76,7 @@ The Messages API is stateless, which means that you always send the full convers
 <CodeGroup exclude="shell:cURL, typescript, csharp, go, java, php, ruby">
   ```bash CLI
   ant messages create <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 1024
   messages:
     - role: user
@@ -92,7 +92,7 @@ The Messages API is stateless, which means that you always send the full convers
   import anthropic
 
   message = anthropic.Anthropic().messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=1024,
       messages=[
           {"role": "user", "content": "Hello, Claude"},
@@ -155,7 +155,7 @@ Claude can read both text and images in requests. Both `base64` and `url` source
   curl -sSo vision-example.jpg "$IMAGE_URL"
 
   ant messages create <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 1024
   messages:
     - role: user
@@ -171,7 +171,7 @@ Claude can read both text and images in requests. Both `base64` and `url` source
 
   # Option 2: URL-referenced image
   ant messages create <<YAML
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 1024
   messages:
     - role: user
@@ -196,7 +196,7 @@ Claude can read both text and images in requests. Both `base64` and `url` source
   image_data = base64.standard_b64encode(httpx2.get(image_url).content).decode("utf-8")
 
   message = anthropic.Anthropic().messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=1024,
       messages=[
           {
@@ -219,7 +219,7 @@ Claude can read both text and images in requests. Both `base64` and `url` source
 
   # Option 2: URL-referenced image
   message_from_url = anthropic.Anthropic().messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=1024,
       messages=[
           {
@@ -249,6 +249,7 @@ Temperature must be set to 1 (or left unset) whenever thinking is enabled, on al
 
 Thinking is supported in the following models:
 
+* Claude Opus 5.5 (`claude-opus-5-5`, adaptive thinking only, always on)
 * Claude Opus 5 (claude-opus-5, adaptive thinking only, on by default)
 * Claude Sonnet 5 (`claude-sonnet-5`, adaptive thinking only, on by default)
 * Claude Opus 4.8 (claude-opus-4-8, adaptive thinking only)
@@ -270,7 +271,7 @@ When thinking is on, Claude creates `thinking` content blocks where it outputs i
 <CodeGroup exclude="shell:cURL, typescript, csharp, go, java, php, ruby">
   ```bash CLI
   ant messages create --transform content --format yaml <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 16000
   thinking:
     type: adaptive
@@ -287,7 +288,7 @@ When thinking is on, Claude creates `thinking` content blocks where it outputs i
   client = anthropic.Anthropic()
 
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=16000,
       thinking={"type": "adaptive", "display": "summarized"},
       messages=[
@@ -327,7 +328,7 @@ Important limitations:
   # blocks, signatures intact) as compact JSON.
   ASSISTANT_CONTENT=$(ant messages create \
     --transform content --format jsonl <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 16000
   thinking:
     type: adaptive
@@ -354,7 +355,7 @@ Important limitations:
   # Second request: pass the captured blocks back unchanged as the assistant
   # message. The thinking block must accompany the tool_use block.
   ant messages create <<YAML
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 16000
   thinking:
     type: adaptive
@@ -401,7 +402,7 @@ Important limitations:
 
   # First request - Claude responds with thinking and tool request
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=16000,
       thinking={"type": "adaptive", "display": "summarized"},
       tools=[weather_tool],
@@ -418,7 +419,7 @@ Important limitations:
 
   # Second request - Include thinking block and tool result
   continuation = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=16000,
       thinking={"type": "adaptive", "display": "summarized"},
       tools=[weather_tool],
@@ -630,7 +631,7 @@ When working with the `tool_choice` parameter, there are four possible options:
 * `tool` forces Claude to always use a particular tool.
 * `none` prevents Claude from using any tools.
 
-On Claude Fable 5.1 and Claude Mythos 5.1, `any` and `tool` return a 400 error. Leave `tool_choice` at `auto` and set `"strict": true` on the tool definition to guarantee that any call Claude makes matches the tool's `input_schema`. See [Strict tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use).
+On Claude Opus 5.5, Claude Fable 5.1, and Claude Mythos 5.1, `any` and `tool` return a 400 error. Leave `tool_choice` at `auto` and set `"strict": true` on the tool definition to guarantee that any call Claude makes matches the tool's `input_schema`. See [Strict tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use).
 
 ### JSON output
 
@@ -732,7 +733,7 @@ When creating a Message, you can set `"stream": true` to incrementally stream th
 <CodeGroup exclude="shell:cURL, typescript, csharp, go, java, php, ruby">
   ```bash CLI
   ant messages create --stream --format jsonl \
-    --model claude-opus-5 \
+    --model claude-opus-5-5 \
     --max-tokens 1024 \
     --message '{role: user, content: "Hello"}' \
     | jq -rj 'select(.delta.type? == "text_delta") | .delta.text'
@@ -746,7 +747,7 @@ When creating a Message, you can set `"stream": true` to incrementally stream th
   with client.messages.stream(
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello"}],
-      model="claude-opus-5",
+      model="claude-opus-5-5",
   ) as stream:
       for text in stream.text_stream:
           print(text, end="", flush=True)
@@ -803,7 +804,7 @@ When using thinking with streaming:
 
 ```sse
 event: message_start
-data: {"type": "message_start", "message": {"id": "msg_1nZdL29xx5MUA1yADyHTEsnR8uuvGzszyY", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-5", "stop_reason": null, "stop_sequence": null, "usage": {"input_tokens": 25, "output_tokens": 1}}}
+data: {"type": "message_start", "message": {"id": "msg_1nZdL29xx5MUA1yADyHTEsnR8uuvGzszyY", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-5-5", "stop_reason": null, "stop_sequence": null, "usage": {"input_tokens": 25, "output_tokens": 1}}}
 
 event: content_block_start
 data: {"type": "content_block_start", "index": 0, "content_block": {"type": "text", "text": ""}}

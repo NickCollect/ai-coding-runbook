@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/usage_report
-fetched_at: 2026-09-21T05:44:12.652234+00:00
+fetched_at: 2026-09-28T06:10:54.206778+00:00
 fetch_method: mintlify_md
 ---
 
@@ -150,7 +150,7 @@ Get Messages Usage Report
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -243,6 +243,10 @@ Get Messages Usage Report
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 ### Returns
 
@@ -425,13 +429,13 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
   UTC date in YYYY-MM-DD format. Returns metrics for this single day only.
 
-  pattern: ^\d{4}-\d{2}-\d{2}$, format: date
+  format: date, pattern: ^\d{4}-\d{2}-\d{2}$
 
 - `limit: optional number`
 
   Number of records per page (default: 20, max: 1000).
 
-  default: 20, maximum: 1000, minimum: 1
+  default: 20, minimum: 1, maximum: 1000
 
 - `page: optional string`
 

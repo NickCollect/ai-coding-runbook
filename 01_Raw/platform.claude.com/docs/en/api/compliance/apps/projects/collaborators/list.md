@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/projects/collaborators/list
-fetched_at: 2026-09-21T05:44:15.439188+00:00
+fetched_at: 2026-09-28T06:10:57.354093+00:00
 fetch_method: mintlify_md
 ---
 
@@ -32,7 +32,7 @@ role.
 
   Maximum results (default: 20, max: 100)
 
-  default: 20, maximum: 100, minimum: 1
+  default: 20, minimum: 1, maximum: 100
 
 - `page: optional string`
 

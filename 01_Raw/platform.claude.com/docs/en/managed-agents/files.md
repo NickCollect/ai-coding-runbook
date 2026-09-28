@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/files
-fetched_at: 2026-09-21T05:44:01.736900+00:00
+fetched_at: 2026-09-28T06:10:41.709177+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,11 +8,13 @@ fetch_method: mintlify_md
 title: Adding files
 url: https://platform.claude.com/docs/en/managed-agents/files
 description: Upload files and mount them in your sandbox for reading and processing.
+featureMetadata:
+  topic:
+    title: Managed Agents
+    url: https://platform.claude.com/docs/en/managed-agents/overview
+  status: beta
+  betaHeader: managed-agents-2026-04-01
 ---
-
-## Compatibility
-- Status: Beta
-- [Beta header](https://platform.claude.com/docs/en/api/beta-headers): `managed-agents-2026-04-01`
 
 You can provide files to your agent by uploading them through the Files API and mounting them in the session's sandbox.
 
@@ -271,28 +273,22 @@ Mount multiple files by adding entries to the `resources` array:
     }'
   ```
 
-  <MultiFileExample language="cli" label="CLI">
-    ```bash CLI
-    ant beta:sessions create \
-      --agent agent_01J8XkN5uT3vHpLqRfWdY2 \
-      --environment-id env_01K2mPsT7hNwR4jXuLvCqD8 < session.yaml
-    ```
-
-    <File filename="session.yaml">
-      ```yaml
-      resources:
-        - type: file
-          file_id: file_011CNha8iCJcU1wXNR6q4V8w
-          mount_path: /data.csv
-        - type: file
-          file_id: file_011CPMxVD3fHLUhvTqtsQA5w
-          mount_path: /config.json
-        - type: file
-          file_id: file_011CRb3kQ7tWx9ZsLmDe2Vh4
-          mount_path: /src/main.py
-      ```
-    </File>
-  </MultiFileExample>
+  ```bash CLI
+  ant beta:sessions create \
+    --agent agent_01J8XkN5uT3vHpLqRfWdY2 \
+    --environment-id env_01K2mPsT7hNwR4jXuLvCqD8 <<YAML
+  resources:
+    - type: file
+      file_id: file_011CNha8iCJcU1wXNR6q4V8w
+      mount_path: /data.csv
+    - type: file
+      file_id: file_011CPMxVD3fHLUhvTqtsQA5w
+      mount_path: /config.json
+    - type: file
+      file_id: file_011CRb3kQ7tWx9ZsLmDe2Vh4
+      mount_path: /src/main.py
+  YAML
+  ```
 
   ```python Python
   resources = [

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/external_keys/create
-fetched_at: 2026-09-14T05:36:17.228084+00:00
+fetched_at: 2026-09-28T06:10:52.006996+00:00
 fetch_method: mintlify_md
 ---
 
@@ -75,7 +75,7 @@ Create an external key config owned by the caller's organization.
 
   Human-friendly display name.
 
-  maxLength: 255, minLength: 1
+  minLength: 1, maxLength: 255
 
 - `geo: optional "us"`
 

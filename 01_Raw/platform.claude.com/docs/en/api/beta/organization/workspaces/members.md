@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/workspaces/members
-fetched_at: 2026-09-14T05:36:18.860541+00:00
+fetched_at: 2026-09-28T06:10:53.650851+00:00
 fetch_method: mintlify_md
 ---
 
@@ -39,7 +39,7 @@ List Workspace Members
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
-  default: 20, maximum: 1000, minimum: 1
+  default: 20, minimum: 1, maximum: 1000
 
 ### Returns
 

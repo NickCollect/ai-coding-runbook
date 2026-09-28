@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits/increase_requests
-fetched_at: 2026-09-21T05:44:13.752581+00:00
+fetched_at: 2026-09-28T06:10:55.378287+00:00
 fetch_method: mintlify_md
 ---
 
@@ -28,7 +28,7 @@ Requests whose requester is no longer a member are excluded.
 
 - `limit: optional number`
 
-  default: 20, maximum: 1000, minimum: 1
+  default: 20, minimum: 1, maximum: 1000
 
 - `page: optional string`
 

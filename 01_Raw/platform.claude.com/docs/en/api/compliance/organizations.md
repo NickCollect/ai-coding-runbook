@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/organizations
-fetched_at: 2026-09-21T05:44:14.491376+00:00
+fetched_at: 2026-09-28T06:10:56.082148+00:00
 fetch_method: mintlify_md
 ---
 
@@ -27,7 +27,7 @@ Returns organizations sorted by creation date in ascending order. Use
 
   Maximum results (default: 1000, max: 1000)
 
-  default: 1000, maximum: 1000, minimum: 1
+  default: 1000, minimum: 1, maximum: 1000
 
 - `page: optional string`
 
@@ -127,7 +127,7 @@ List current user members of an organization.
 
   Maximum results (default: 500, max: 1000)
 
-  default: 500, maximum: 1000, minimum: 1
+  default: 500, minimum: 1, maximum: 1000
 
 - `page: optional string`
 
@@ -241,7 +241,7 @@ List Compliance Roles
 
   Maximum results (default: 500, max: 1000)
 
-  default: 500, maximum: 1000, minimum: 1
+  default: 500, minimum: 1, maximum: 1000
 
 - `page: optional string`
 
@@ -405,7 +405,7 @@ List Compliance Role Permissions
 
   Maximum results (default: 500, max: 1000)
 
-  default: 500, maximum: 1000, minimum: 1
+  default: 500, minimum: 1, maximum: 1000
 
 - `page: optional string`
 
@@ -557,7 +557,7 @@ unknown organizations and organizations outside the hierarchy return 404.
 
       default: boolean
 
-    - `name: "access_transparency_enabled" or "ai_powered_artifacts_enabled" or "api_workbench_feedback_collection_enabled" or 57 more`
+    - `name: "access_transparency_enabled" or "ai_powered_artifacts_enabled" or "api_workbench_feedback_collection_enabled" or 59 more`
 
       - `"access_transparency_enabled"`
 
@@ -572,6 +572,8 @@ unknown organizations and organizations outside the hierarchy return 404.
       - `"ask_your_org_enabled"`
 
       - `"chat_enabled"`
+
+      - `"claude_academy_inference_enabled"`
 
       - `"claude_ai_chat_sharing_enabled"`
 
@@ -658,6 +660,8 @@ unknown organizations and organizations outside the hierarchy return 404.
       - `"memory_enabled"`
 
       - `"org_wide_skill_sharing_enabled"`
+
+      - `"project_sharing_enabled"`
 
       - `"public_projects_enabled"`
 

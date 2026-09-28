@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/external_keys
-fetched_at: 2026-09-14T05:36:17.120352+00:00
+fetched_at: 2026-09-28T06:10:51.950506+00:00
 fetch_method: mintlify_md
 ---
 
@@ -77,7 +77,7 @@ Create an external key config owned by the caller's organization.
 
   Human-friendly display name.
 
-  maxLength: 255, minLength: 1
+  minLength: 1, maxLength: 255
 
 - `geo: optional "us"`
 
@@ -237,7 +237,7 @@ Results are ordered by creation time (newest first). Use the
 
   Number of results per page.
 
-  default: 20, maximum: 100, minimum: 1
+  default: 20, minimum: 1, maximum: 100
 
 - `page: optional string`
 
@@ -548,7 +548,7 @@ encrypted data requires the original key identity to decrypt.
 
   Human-friendly display name.
 
-  maxLength: 255, minLength: 1
+  minLength: 1, maxLength: 255
 
 - `geo: optional "us" or null`
 

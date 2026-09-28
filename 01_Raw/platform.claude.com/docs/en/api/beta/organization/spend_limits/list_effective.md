@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits/list_effective
-fetched_at: 2026-09-21T05:44:13.734090+00:00
+fetched_at: 2026-09-28T06:10:55.374375+00:00
 fetch_method: mintlify_md
 ---
 
@@ -25,7 +25,7 @@ Paginates by member, so a member's periods never split across pages.
 
   Maximum number of members per page. A member's period rows never split across pages, so a page may carry more rows than this. Defaults to `20`.
 
-  default: 20, maximum: 1000, minimum: 1
+  default: 20, minimum: 1, maximum: 1000
 
 - `page: optional string`
 

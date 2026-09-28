@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/quickstart
-fetched_at: 2026-09-21T05:44:00.821060+00:00
+fetched_at: 2026-09-28T06:10:40.574912+00:00
 fetch_method: mintlify_md
 ---
 
@@ -137,7 +137,7 @@ Use the PowerPoint Skill to create a presentation about renewable energy. Specif
       -H "anthropic-version: 2023-06-01" \
       -d @- <<'EOF'
   {
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 16000,
     "container": {
       "skills": [{"type": "anthropic", "skill_id": "pptx", "version": "latest"}]
@@ -154,7 +154,7 @@ Use the PowerPoint Skill to create a presentation about renewable energy. Specif
   ```bash CLI
   # Create a message with the PowerPoint Skill
   response=$(ant messages create --format json <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 16000
   container:
     skills:
@@ -174,7 +174,7 @@ Use the PowerPoint Skill to create a presentation about renewable energy. Specif
   ```python Python
   # Create a message with the PowerPoint Skill
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=16000,
       container={
           "skills": [{"type": "anthropic", "skill_id": "pptx", "version": "latest"}]
@@ -194,7 +194,7 @@ Use the PowerPoint Skill to create a presentation about renewable energy. Specif
   ```typescript TypeScript
   // Create a message with the PowerPoint Skill
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 16000,
     container: {
       skills: [{ type: "anthropic", skill_id: "pptx", version: "latest" }],
@@ -217,7 +217,7 @@ Use the PowerPoint Skill to create a presentation about renewable energy. Specif
   // Create a message with the PowerPoint Skill
   var response = await client.Messages.Create(new MessageCreateParams
   {
-      Model = Model.ClaudeOpus5,
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 16000,
       Container = new ContainerParams
       {
@@ -248,7 +248,7 @@ Use the PowerPoint Skill to create a presentation about renewable energy. Specif
   ```go Go
   // Create a message with the PowerPoint Skill
   response, err := client.Messages.New(ctx, anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus5,
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 16000,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -281,7 +281,7 @@ Use the PowerPoint Skill to create a presentation about renewable energy. Specif
   // Create a message with the PowerPoint Skill
   Message response = client.messages().create(
       MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_5)
+          .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(16000)
           .container(
               ContainerParams.builder()
@@ -308,7 +308,7 @@ Use the PowerPoint Skill to create a presentation about renewable energy. Specif
   ```php PHP
   // Create a message with the PowerPoint Skill
   $response = $client->messages->create(
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       maxTokens: 16000,
       container: [
           'skills' => [['type' => 'anthropic', 'skillID' => 'pptx', 'version' => 'latest']],
@@ -328,7 +328,7 @@ Use the PowerPoint Skill to create a presentation about renewable energy. Specif
   ```ruby Ruby
   # Create a message with the PowerPoint Skill
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 16_000,
     container: {
       skills: [{type: "anthropic", skill_id: "pptx", version: "latest"}]
@@ -615,7 +615,7 @@ Try these variations:
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 16000,
       "container": {
         "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
@@ -629,7 +629,7 @@ Try these variations:
 
   ```bash CLI
   ant messages create <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 16000
   container:
     skills:
@@ -647,7 +647,7 @@ Try these variations:
 
   ```python Python
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=16000,
       container={
           "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
@@ -664,7 +664,7 @@ Try these variations:
 
   ```typescript TypeScript
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 16000,
     container: {
       skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
@@ -683,7 +683,7 @@ Try these variations:
   var response = await client.Messages.Create(
       new MessageCreateParams
       {
-          Model = Model.ClaudeOpus5,
+          Model = Model.ClaudeOpus5_5,
           MaxTokens = 16000,
           Container = new ContainerParams
           {
@@ -712,7 +712,7 @@ Try these variations:
 
   ```go Go
   response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus5,
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 16000,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -742,7 +742,7 @@ Try these variations:
   ```java Java
   Message response = client.messages().create(
       MessageCreateParams.builder()
-          .model(CLAUDE_OPUS_5)
+          .model(CLAUDE_OPUS_5_5)
           .maxTokens(16000)
           .container(
               ContainerParams.builder()
@@ -764,7 +764,7 @@ Try these variations:
 
   ```php PHP
   $response = $client->messages->create(
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       maxTokens: 16000,
       container: [
           'skills' => [
@@ -783,7 +783,7 @@ Try these variations:
 
   ```ruby Ruby
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 16_000,
     container: {
       skills: [{type: "anthropic", skill_id: "xlsx", version: "latest"}]
@@ -808,7 +808,7 @@ Try these variations:
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 16000,
       "container": {
         "skills": [{"type": "anthropic", "skill_id": "docx", "version": "latest"}]
@@ -822,7 +822,7 @@ Try these variations:
 
   ```bash CLI
   ant messages create <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 16000
   container:
     skills:
@@ -840,7 +840,7 @@ Try these variations:
 
   ```python Python
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=16000,
       container={
           "skills": [{"type": "anthropic", "skill_id": "docx", "version": "latest"}]
@@ -857,7 +857,7 @@ Try these variations:
 
   ```typescript TypeScript
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 16000,
     container: {
       skills: [{ type: "anthropic", skill_id: "docx", version: "latest" }]
@@ -876,7 +876,7 @@ Try these variations:
   var response = await client.Messages.Create(
       new MessageCreateParams
       {
-          Model = Model.ClaudeOpus5,
+          Model = Model.ClaudeOpus5_5,
           MaxTokens = 16000,
           Container = new ContainerParams
           {
@@ -905,7 +905,7 @@ Try these variations:
 
   ```go Go
   response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus5,
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 16000,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -935,7 +935,7 @@ Try these variations:
   ```java Java
   Message response = client.messages().create(
       MessageCreateParams.builder()
-          .model(CLAUDE_OPUS_5)
+          .model(CLAUDE_OPUS_5_5)
           .maxTokens(16000)
           .container(
               ContainerParams.builder()
@@ -957,7 +957,7 @@ Try these variations:
 
   ```php PHP
   $response = $client->messages->create(
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       maxTokens: 16000,
       container: [
           'skills' => [
@@ -976,7 +976,7 @@ Try these variations:
 
   ```ruby Ruby
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 16_000,
     container: {
       skills: [{type: "anthropic", skill_id: "docx", version: "latest"}]
@@ -1001,7 +1001,7 @@ Try these variations:
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 16000,
       "container": {
         "skills": [{"type": "anthropic", "skill_id": "pdf", "version": "latest"}]
@@ -1015,7 +1015,7 @@ Try these variations:
 
   ```bash CLI
   ant messages create <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 16000
   container:
     skills:
@@ -1033,7 +1033,7 @@ Try these variations:
 
   ```python Python
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=16000,
       container={
           "skills": [{"type": "anthropic", "skill_id": "pdf", "version": "latest"}]
@@ -1050,7 +1050,7 @@ Try these variations:
 
   ```typescript TypeScript
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 16000,
     container: {
       skills: [{ type: "anthropic", skill_id: "pdf", version: "latest" }]
@@ -1069,7 +1069,7 @@ Try these variations:
   var response = await client.Messages.Create(
       new MessageCreateParams
       {
-          Model = Model.ClaudeOpus5,
+          Model = Model.ClaudeOpus5_5,
           MaxTokens = 16000,
           Container = new ContainerParams
           {
@@ -1098,7 +1098,7 @@ Try these variations:
 
   ```go Go
   response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus5,
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 16000,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -1128,7 +1128,7 @@ Try these variations:
   ```java Java
   Message response = client.messages().create(
       MessageCreateParams.builder()
-          .model(CLAUDE_OPUS_5)
+          .model(CLAUDE_OPUS_5_5)
           .maxTokens(16000)
           .container(
               ContainerParams.builder()
@@ -1150,7 +1150,7 @@ Try these variations:
 
   ```php PHP
   $response = $client->messages->create(
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       maxTokens: 16000,
       container: [
           'skills' => [
@@ -1169,7 +1169,7 @@ Try these variations:
 
   ```ruby Ruby
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 16_000,
     container: {
       skills: [{type: "anthropic", skill_id: "pdf", version: "latest"}]

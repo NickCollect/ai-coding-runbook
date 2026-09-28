@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/permission-policies
-fetched_at: 2026-09-21T05:44:01.459595+00:00
+fetched_at: 2026-09-28T06:10:41.320707+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,11 +8,13 @@ fetch_method: mintlify_md
 title: Permission policies
 url: https://platform.claude.com/docs/en/managed-agents/permission-policies
 description: Control when agent and MCP tools execute.
+featureMetadata:
+  topic:
+    title: Managed Agents
+    url: https://platform.claude.com/docs/en/managed-agents/overview
+  status: beta
+  betaHeader: managed-agents-2026-04-01
 ---
-
-## Compatibility
-- Status: Beta
-- [Beta header](https://platform.claude.com/docs/en/api/beta-headers): `managed-agents-2026-04-01`
 
 Permission policies control whether server-executed tools (the pre-built agent toolset and MCP toolset) run automatically, wait for your approval, or have each call evaluated by the server. Custom tools are executed by your application and controlled by you, so they are not governed by permission policies.
 
@@ -45,7 +47,7 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
     -H "content-type: application/json" \
     -d '{
       "name": "Coding Assistant",
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "tools": [
         {
           "type": "agent_toolset_20260401",
@@ -57,7 +59,7 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
     }')
   ```
 
-  <MultiFileExample language="cli" label="CLI">
+  <CodeGroupItem>
     ```bash CLI
     ant apply agent.md
     ```
@@ -66,7 +68,7 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
       ```markdown
       ---
       name: Coding Assistant
-      model: claude-opus-5
+      model: claude-opus-5-5
       tools:
         - type: agent_toolset_20260401
           default_config:
@@ -75,12 +77,12 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
       ---
       ```
     </File>
-  </MultiFileExample>
+  </CodeGroupItem>
 
   ```python Python
   agent = client.beta.agents.create(
       name="Coding Assistant",
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       tools=[
           {
               "type": "agent_toolset_20260401",
@@ -95,7 +97,7 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
   ```typescript TypeScript
   const agent = await client.beta.agents.create({
     name: "Coding Assistant",
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     tools: [
       {
         type: "agent_toolset_20260401",
@@ -113,7 +115,7 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
   var agent = await client.Beta.Agents.Create(new()
   {
       Name = "Coding Assistant",
-      Model = BetaManagedAgentsModel.ClaudeOpus5,
+      Model = BetaManagedAgentsModel.ClaudeOpus5_5,
       Tools =
       [
           new BetaManagedAgentsAgentToolset20260401Params
@@ -132,7 +134,7 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
   agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name: "Coding Assistant",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: "claude-opus-5",
+  		ID: "claude-opus-5-5",
   	},
   	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
   		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
@@ -159,7 +161,7 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
   var agent = client.beta().agents().create(
       AgentCreateParams.builder()
           .name("Coding Assistant")
-          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
+          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
           .addTool(
               BetaManagedAgentsAgentToolset20260401Params.builder()
                   .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
@@ -185,7 +187,7 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
 
   $agent = $client->beta->agents->create(
       name: 'Coding Assistant',
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       tools: [
           BetaManagedAgentsAgentToolset20260401Params::with(
               type: 'agent_toolset_20260401',
@@ -200,7 +202,7 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "Coding Assistant",
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     tools: [
       {
         type: "agent_toolset_20260401",
@@ -232,7 +234,7 @@ This example connects a GitHub MCP server and allows its tools to run without co
     -H "content-type: application/json" \
     -d '{
       "name": "Dev Assistant",
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "mcp_servers": [
         {"type": "url", "name": "github", "url": "https://mcp.example.com/github"}
       ],
@@ -249,7 +251,7 @@ This example connects a GitHub MCP server and allows its tools to run without co
     }')
   ```
 
-  <MultiFileExample language="cli" label="CLI">
+  <CodeGroupItem>
     ```bash CLI
     ant apply agent.md
     ```
@@ -258,7 +260,7 @@ This example connects a GitHub MCP server and allows its tools to run without co
       ```markdown
       ---
       name: Dev Assistant
-      model: claude-opus-5
+      model: claude-opus-5-5
       mcp_servers:
         - type: url
           name: github
@@ -273,12 +275,12 @@ This example connects a GitHub MCP server and allows its tools to run without co
       ---
       ```
     </File>
-  </MultiFileExample>
+  </CodeGroupItem>
 
   ```python Python
   agent = client.beta.agents.create(
       name="Dev Assistant",
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       mcp_servers=[
           {"type": "url", "name": "github", "url": "https://mcp.example.com/github"},
       ],
@@ -298,7 +300,7 @@ This example connects a GitHub MCP server and allows its tools to run without co
   ```typescript TypeScript
   const agent = await client.beta.agents.create({
     name: "Dev Assistant",
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     mcp_servers: [{ type: "url", name: "github", url: "https://mcp.example.com/github" }],
     tools: [
       { type: "agent_toolset_20260401" },
@@ -319,7 +321,7 @@ This example connects a GitHub MCP server and allows its tools to run without co
   var agent = await client.Beta.Agents.Create(new()
   {
       Name = "Dev Assistant",
-      Model = BetaManagedAgentsModel.ClaudeOpus5,
+      Model = BetaManagedAgentsModel.ClaudeOpus5_5,
       McpServers =
       [
           new()
@@ -352,7 +354,7 @@ This example connects a GitHub MCP server and allows its tools to run without co
   agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name: "Dev Assistant",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: "claude-opus-5",
+  		ID: "claude-opus-5-5",
   	},
   	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{{
   		Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,
@@ -392,7 +394,7 @@ This example connects a GitHub MCP server and allows its tools to run without co
   var agent = client.beta().agents().create(
       AgentCreateParams.builder()
           .name("Dev Assistant")
-          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
+          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
           .addMcpServer(
               BetaManagedAgentsUrlMcpServerParams.builder()
                   .type(BetaManagedAgentsUrlMcpServerParams.Type.URL)
@@ -433,7 +435,7 @@ This example connects a GitHub MCP server and allows its tools to run without co
 
   $agent = $client->beta->agents->create(
       name: 'Dev Assistant',
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       mcpServers: [
           BetaManagedAgentsURLMCPServerParams::with(
               type: 'url',
@@ -459,7 +461,7 @@ This example connects a GitHub MCP server and allows its tools to run without co
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "Dev Assistant",
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     mcp_servers: [
       {type: "url", name: "github", url: "https://mcp.example.com/github"}
     ],
@@ -481,7 +483,7 @@ This example connects a GitHub MCP server and allows its tools to run without co
 
 Use the `configs` array to override the default for individual tools. The `name` values for the agent toolset are listed in [Available tools](https://platform.claude.com/docs/en/managed-agents/tools#available-tools). This example allows the full agent toolset by default but requires confirmation before any bash command runs:
 
-<CodeGroup>
+<CodeGroup defaultLanguage="CLI">
   ```bash cURL
   tools='[
     {
@@ -499,21 +501,29 @@ Use the `configs` array to override the default for individual tools. The `name`
   ]'
   ```
 
-  ```bash CLI
-  ant beta:agents create <<'YAML'
-  name: Coding Assistant
-  model: claude-opus-5
-  tools:
-    - type: agent_toolset_20260401
-      default_config:
-        permission_policy:
-          type: always_allow
-      configs:
-        - name: bash
-          permission_policy:
-            type: always_ask
-  YAML
-  ```
+  <CodeGroupItem>
+    ```bash CLI
+    ant apply agent.md
+    ```
+
+    <File filename="agent.md">
+      ```markdown
+      ---
+      name: Coding Assistant
+      model: claude-opus-5-5
+      tools:
+        - type: agent_toolset_20260401
+          default_config:
+            permission_policy:
+              type: always_allow
+          configs:
+            - name: bash
+              permission_policy:
+                type: always_ask
+      ---
+      ```
+    </File>
+  </CodeGroupItem>
 
   ```python Python
   tools = [
@@ -692,7 +702,7 @@ The following example sets `auto` as the default for the agent toolset and for t
     -H "content-type: application/json" \
     -d '{
       "name": "Ops Agent",
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "mcp_servers": [
         {"type": "url", "name": "github", "url": "https://mcp.example.com/github"}
       ],
@@ -717,7 +727,7 @@ The following example sets `auto` as the default for the agent toolset and for t
     }')
   ```
 
-  <MultiFileExample language="cli" label="CLI">
+  <CodeGroupItem>
     ```bash CLI
     ant apply agent.md
     ```
@@ -726,7 +736,7 @@ The following example sets `auto` as the default for the agent toolset and for t
       ```markdown
       ---
       name: Ops Agent
-      model: claude-opus-5
+      model: claude-opus-5-5
       mcp_servers:
         - type: url
           name: github
@@ -748,12 +758,12 @@ The following example sets `auto` as the default for the agent toolset and for t
       ---
       ```
     </File>
-  </MultiFileExample>
+  </CodeGroupItem>
 
   ```python Python
   agent = client.beta.agents.create(
       name="Ops Agent",
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       mcp_servers=[
           {"type": "url", "name": "github", "url": "https://mcp.example.com/github"},
       ],
@@ -781,7 +791,7 @@ The following example sets `auto` as the default for the agent toolset and for t
   ```typescript TypeScript
   const agent = await client.beta.agents.create({
     name: "Ops Agent",
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     mcp_servers: [{ type: "url", name: "github", url: "https://mcp.example.com/github" }],
     tools: [
       {
@@ -808,7 +818,7 @@ The following example sets `auto` as the default for the agent toolset and for t
   var agent = await client.Beta.Agents.Create(new()
   {
       Name = "Ops Agent",
-      Model = BetaManagedAgentsModel.ClaudeOpus5,
+      Model = BetaManagedAgentsModel.ClaudeOpus5_5,
       McpServers =
       [
           new()
@@ -852,7 +862,7 @@ The following example sets `auto` as the default for the agent toolset and for t
   agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name: "Ops Agent",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: "claude-opus-5",
+  		ID: "claude-opus-5-5",
   	},
   	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{{
   		Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,
@@ -904,7 +914,7 @@ The following example sets `auto` as the default for the agent toolset and for t
   var agent = client.beta().agents().create(
       AgentCreateParams.builder()
           .name("Ops Agent")
-          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
+          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
           .addMcpServer(
               BetaManagedAgentsUrlMcpServerParams.builder()
                   .type(BetaManagedAgentsUrlMcpServerParams.Type.URL)
@@ -958,7 +968,7 @@ The following example sets `auto` as the default for the agent toolset and for t
 
   $agent = $client->beta->agents->create(
       name: 'Ops Agent',
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       mcpServers: [
           BetaManagedAgentsURLMCPServerParams::with(
               type: 'url',
@@ -992,7 +1002,7 @@ The following example sets `auto` as the default for the agent toolset and for t
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "Ops Agent",
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     mcp_servers: [
       {type: "url", name: "github", url: "https://mcp.example.com/github"}
     ],

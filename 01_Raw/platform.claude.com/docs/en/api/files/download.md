@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/files/download
-fetched_at: 2026-09-14T05:36:11.484710+00:00
+fetched_at: 2026-09-28T06:10:46.583746+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,6 +24,10 @@ Download File
 ## Headers
 
 - `"anthropic-workspace-id": optional string`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 ## Example
 

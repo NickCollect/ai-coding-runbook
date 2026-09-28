@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/data-residency
-fetched_at: 2026-09-07T05:31:28.550534+00:00
+fetched_at: 2026-09-28T06:10:42.598362+00:00
 fetch_method: mintlify_md
 ---
 
@@ -41,7 +41,7 @@ The `inference_geo` parameter controls where model inference runs for a specific
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 1024,
       "inference_geo": "us",
       "messages": [{
@@ -53,7 +53,7 @@ The `inference_geo` parameter controls where model inference runs for a specific
 
   ```bash CLI
   ant messages create \
-    --model claude-opus-5 \
+    --model claude-opus-5-5 \
     --max-tokens 1024 \
     --inference-geo us \
     --message '{role: user, content: "Summarize the key points of this document."}' \
@@ -64,7 +64,7 @@ The `inference_geo` parameter controls where model inference runs for a specific
   client = anthropic.Anthropic()
 
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=1024,
       inference_geo="us",
       messages=[
@@ -83,7 +83,7 @@ The `inference_geo` parameter controls where model inference runs for a specific
   const client = new Anthropic();
 
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     inference_geo: "us",
     messages: [
@@ -108,7 +108,7 @@ The `inference_geo` parameter controls where model inference runs for a specific
   var response = await client.Messages.Create(
       new MessageCreateParams
       {
-          Model = Model.ClaudeOpus5,
+          Model = Model.ClaudeOpus5_5,
           MaxTokens = 1024,
           InferenceGeo = "us",
           Messages =
@@ -134,7 +134,7 @@ The `inference_geo` parameter controls where model inference runs for a specific
   client := anthropic.NewClient()
 
   message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-  	Model:        anthropic.ModelClaudeOpus5,
+  	Model:        anthropic.ModelClaudeOpus5_5,
   	MaxTokens:    1024,
   	InferenceGeo: anthropic.String("us"),
   	Messages: []anthropic.MessageParam{
@@ -159,7 +159,7 @@ The `inference_geo` parameter controls where model inference runs for a specific
 
   Message response = client.messages().create(
           MessageCreateParams.builder()
-                  .model(Model.CLAUDE_OPUS_5)
+                  .model(Model.CLAUDE_OPUS_5_5)
                   .maxTokens(1024L)
                   .inferenceGeo("us")
                   .addUserMessage("Summarize the key points of this document.")
@@ -176,7 +176,7 @@ The `inference_geo` parameter controls where model inference runs for a specific
   $client = new Client();
 
   $response = $client->messages->create(
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       maxTokens: 1024,
       inferenceGeo: 'us',
       messages: [
@@ -197,7 +197,7 @@ The `inference_geo` parameter controls where model inference runs for a specific
   client = Anthropic::Client.new
 
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     inference_geo: "us",
     messages: [

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/skills-guide
-fetched_at: 2026-09-21T05:44:01.031339+00:00
+fetched_at: 2026-09-28T06:10:40.627943+00:00
 fetch_method: mintlify_md
 ---
 
@@ -85,7 +85,7 @@ The structure is identical for both Anthropic and custom Skills. Specify the req
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 4096,
       "container": {
         "skills": [
@@ -109,7 +109,7 @@ The structure is identical for both Anthropic and custom Skills. Specify the req
 
   ```bash CLI
   ant messages create <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   container:
     skills:
@@ -129,7 +129,7 @@ The structure is identical for both Anthropic and custom Skills. Specify the req
   client = anthropic.Anthropic()
 
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       container={
           "skills": [{"type": "anthropic", "skill_id": "pptx", "version": "latest"}]
@@ -145,7 +145,7 @@ The structure is identical for both Anthropic and custom Skills. Specify the req
   const client = new Anthropic();
 
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [
@@ -176,7 +176,7 @@ The structure is identical for both Anthropic and custom Skills. Specify the req
 
   var parameters = new MessageCreateParams
   {
-      Model = "claude-opus-5",
+      Model = "claude-opus-5-5",
       MaxTokens = 4096,
       Container = new ContainerParams
       {
@@ -202,7 +202,7 @@ The structure is identical for both Anthropic and custom Skills. Specify the req
   client := anthropic.NewClient()
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5",
+  	Model:     "claude-opus-5-5",
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -237,7 +237,7 @@ The structure is identical for both Anthropic and custom Skills. Specify the req
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
       MessageCreateParams params = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_5)
+          .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(4096L)
           .container(ContainerParams.builder()
               .addSkill(SkillParams.builder()
@@ -263,7 +263,7 @@ The structure is identical for both Anthropic and custom Skills. Specify the req
       messages: [
           ['role' => 'user', 'content' => 'Create a presentation about renewable energy']
       ],
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       container: [
           'skills' => [
               [
@@ -285,7 +285,7 @@ The structure is identical for both Anthropic and custom Skills. Specify the req
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [
@@ -330,7 +330,7 @@ To provide input files for Skills to work on, [upload them with the Files API](h
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 4096,
       "container": {
         "skills": [
@@ -370,7 +370,7 @@ To provide input files for Skills to work on, [upload them with the Files API](h
   FILE_ID=$(ant messages create \
     --transform 'content.#.content.content.#.file_id|@flatten|0' \
     --raw-output <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   container:
     skills:
@@ -403,7 +403,7 @@ To provide input files for Skills to work on, [upload them with the Files API](h
 
   # Step 1: Use a Skill to create a file
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       container={
           "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
@@ -448,7 +448,7 @@ To provide input files for Skills to work on, [upload them with the Files API](h
 
   // Step 1: Use a Skill to create a file
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
@@ -491,7 +491,7 @@ To provide input files for Skills to work on, [upload them with the Files API](h
   // Step 1: Use a Skill to create a file
   var parameters = new MessageCreateParams
   {
-      Model = "claude-opus-5",
+      Model = "claude-opus-5-5",
       MaxTokens = 4096,
       Container = new ContainerParams
       {
@@ -543,7 +543,7 @@ To provide input files for Skills to work on, [upload them with the Files API](h
 
   	// Step 1: Use a Skill to create a file
   	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  		Model:     "claude-opus-5",
+  		Model:     "claude-opus-5-5",
   		MaxTokens: 4096,
   		Container: anthropic.MessageCreateParamsContainerUnion{
   			OfContainers: &anthropic.ContainerParams{
@@ -625,7 +625,7 @@ To provide input files for Skills to work on, [upload them with the Files API](h
 
       // Step 1: Use a Skill to create a file
       MessageCreateParams params = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_5)
+          .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(4096L)
           .container(ContainerParams.builder()
               .addSkill(SkillParams.builder()
@@ -677,7 +677,7 @@ To provide input files for Skills to work on, [upload them with the Files API](h
       messages: [
           ['role' => 'user', 'content' => 'Create an Excel file with a simple budget spreadsheet']
       ],
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       container: [
           'skills' => [
               ['type' => 'anthropic', 'skillID' => 'xlsx', 'version' => 'latest']
@@ -720,7 +720,7 @@ To provide input files for Skills to work on, [upload them with the Files API](h
 
   # Step 1: Use a Skill to create a file
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
@@ -955,7 +955,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
   CONTAINER_ID=$(ant messages create \
     --transform container.id \
     --raw-output <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   container:
     skills:
@@ -970,7 +970,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
 
   # Continue conversation with same container
   ant messages create <<YAML
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   container:
     id: $CONTAINER_ID  # Reuse container
@@ -993,7 +993,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
 
   # First request creates container
   response1 = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       container={
           "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
@@ -1018,7 +1018,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
   ]
 
   response2 = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       container={
           "id": response1.container.id,  # Reuse container
@@ -1034,7 +1034,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
 
   // First request creates container
   const response1 = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
@@ -1058,7 +1058,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
   ];
 
   const response2 = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       id: response1.container!.id, // Reuse container
@@ -1075,7 +1075,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
   // First request with a Skill
   var parameters1 = new MessageCreateParams
   {
-      Model = "claude-opus-5",
+      Model = "claude-opus-5-5",
       MaxTokens = 4096,
       Container = new ContainerParams
       {
@@ -1104,7 +1104,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
 
   var parameters2 = new MessageCreateParams
   {
-      Model = "claude-opus-5",
+      Model = "claude-opus-5-5",
       MaxTokens = 4096,
       Container = new ContainerParams
       {
@@ -1136,7 +1136,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
   client := anthropic.NewClient()
 
   response1, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5",
+  	Model:     "claude-opus-5-5",
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -1170,7 +1170,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
   assistantText := strings.Join(textParts, "\n")
 
   response2, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5",
+  	Model:     "claude-opus-5-5",
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -1213,7 +1213,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
       MessageCreateParams params1 = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_5)
+          .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(4096L)
           .container(ContainerParams.builder()
               .addSkill(SkillParams.builder()
@@ -1229,7 +1229,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
       Message response1 = client.messages().create(params1);
 
       MessageCreateParams params2 = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_5)
+          .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(4096L)
           .container(ContainerParams.builder()
               .id(response1.container().get().id())
@@ -1262,7 +1262,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
       messages: [
           ['role' => 'user', 'content' => 'Create a sample sales dataset and analyze it']
       ],
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       container: [
           'skills' => [
               ['type' => 'anthropic', 'skillID' => 'xlsx', 'version' => 'latest']
@@ -1286,7 +1286,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
   $response2 = $client->messages->create(
       maxTokens: 4096,
       messages: $messages,
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       container: [
           'id' => $response1->container->id,
           'skills' => [
@@ -1305,7 +1305,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
   client = Anthropic::Client.new
 
   response1 = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
@@ -1329,7 +1329,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
   ]
 
   response2 = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       id: response1.container.id,
@@ -1359,7 +1359,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 4096,
       "container": {
         "skills": [
@@ -1391,7 +1391,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d "{
-      \"model\": \"claude-opus-5\",
+      \"model\": \"claude-opus-5-5\",
       \"max_tokens\": 4096,
       \"container\": {
         \"id\": \"$CONTAINER_ID\",
@@ -1414,7 +1414,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
 
   # Initial request: capture the full JSON response to a temp file
   ant messages create > "$RESP" <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   container:
     skills:
@@ -1435,7 +1435,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
   CONTAINER_ID=$(jq -r '.container.id' "$RESP")
 
   ant messages create > "$RESP" <<YAML
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   container:
     id: $CONTAINER_ID
@@ -1457,7 +1457,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
   max_retries = 10
 
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       container={
           "skills": [
@@ -1479,7 +1479,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
 
       messages.append({"role": "assistant", "content": response.content})
       response = client.messages.create(
-          model="claude-opus-5",
+          model="claude-opus-5-5",
           max_tokens=4096,
           container={
               "id": response.container.id,
@@ -1504,7 +1504,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
   const maxRetries = 10;
 
   let response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [{ type: "custom", skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv", version: "latest" }]
@@ -1524,7 +1524,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
       content: response.content as Anthropic.ContentBlockParam[]
     });
     response = await client.messages.create({
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 4096,
       container: {
         id: response.container!.id,
@@ -1556,7 +1556,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
   {
       var parameters = new MessageCreateParams
       {
-          Model = "claude-opus-5",
+          Model = "claude-opus-5-5",
           MaxTokens = 4096,
           Container = containerId is null
               ? new ContainerParams
@@ -1613,7 +1613,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
   maxRetries := 10
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5",
+  	Model:     "claude-opus-5-5",
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -1643,7 +1643,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
   	messages = append(messages, response.ToParam())
 
   	response, err = client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  		Model:     "claude-opus-5",
+  		Model:     "claude-opus-5-5",
   		MaxTokens: 4096,
   		Container: anthropic.MessageCreateParamsContainerUnion{
   			OfContainers: &anthropic.ContainerParams{
@@ -1690,7 +1690,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
 
       Message response = client.messages().create(
           MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_5)
+              .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(4096L)
               .container(ContainerParams.builder()
                   .addSkill(SkillParams.builder()
@@ -1713,7 +1713,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
 
           response = client.messages().create(
               MessageCreateParams.builder()
-                  .model(Model.CLAUDE_OPUS_5)
+                  .model(Model.CLAUDE_OPUS_5_5)
                   .maxTokens(4096L)
                   .container(ContainerParams.builder()
                       .id(response.container().get().id())
@@ -1741,7 +1741,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
   $response = $client->messages->create(
       maxTokens: 4096,
       messages: $messages,
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       container: [
           'skills' => [
               [
@@ -1764,7 +1764,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
       $response = $client->messages->create(
           maxTokens: 4096,
           messages: $messages,
-          model: 'claude-opus-5',
+          model: 'claude-opus-5-5',
           container: [
               'id' => $response->container->id,
               'skills' => [
@@ -1789,7 +1789,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
   max_retries = 10
 
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [
@@ -1810,7 +1810,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
     messages << { role: "assistant", content: response.content }
 
     response = client.messages.create(
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 4096,
       container: {
         id: response.container.id,
@@ -1844,7 +1844,7 @@ Combine multiple Skills in a single request to handle complex workflows:
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 4096,
       "container": {
         "skills": [
@@ -1878,7 +1878,7 @@ Combine multiple Skills in a single request to handle complex workflows:
 
   ```bash CLI
   ant messages create <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   container:
     skills:
@@ -1904,7 +1904,7 @@ Combine multiple Skills in a single request to handle complex workflows:
   client = anthropic.Anthropic()
 
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       container={
           "skills": [
@@ -1928,7 +1928,7 @@ Combine multiple Skills in a single request to handle complex workflows:
   const client = new Anthropic();
 
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [
@@ -1969,7 +1969,7 @@ Combine multiple Skills in a single request to handle complex workflows:
 
   var parameters = new MessageCreateParams
   {
-      Model = "claude-opus-5",
+      Model = "claude-opus-5-5",
       MaxTokens = 4096,
       Container = new ContainerParams
       {
@@ -2007,7 +2007,7 @@ Combine multiple Skills in a single request to handle complex workflows:
   client := anthropic.NewClient()
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5",
+  	Model:     "claude-opus-5-5",
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -2052,7 +2052,7 @@ Combine multiple Skills in a single request to handle complex workflows:
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
       MessageCreateParams params = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_5)
+          .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(4096L)
           .container(ContainerParams.builder()
               .skills(List.of(
@@ -2090,7 +2090,7 @@ Combine multiple Skills in a single request to handle complex workflows:
       messages: [
           ['role' => 'user', 'content' => 'Analyze sales data and create a presentation']
       ],
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       container: [
           'skills' => [
               [
@@ -2122,7 +2122,7 @@ Combine multiple Skills in a single request to handle complex workflows:
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [
@@ -2168,11 +2168,11 @@ Combine multiple Skills in a single request to handle complex workflows:
 
 A Skill bundle is a directory containing a `SKILL.md` file at the top level with `name` and `description` YAML frontmatter, plus any supporting scripts or resources. See [Get started with Agent Skills in the API](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/quickstart) to author one, and the **Requirements** list following the examples for the full constraints.
 
-Upload your custom Skill to make it available in your workspace. You can upload a zip archive or individual file objects. The Python SDK also provides a `files_from_dir` helper that accepts a directory path.
+Upload your custom Skill to make it available in your workspace. You can upload a zip archive or individual file objects. The Python SDK also provides a `files_from_dir` helper that accepts a directory path, and the CLI's `ant apply` uploads the directory itself.
 
 Files are identified by the filename you attach (the `;filename=` suffix in the cURL example and the filename arguments in the SDK examples). For the walkthrough's skill, create a zip with `zip -r financial_skill.zip financial_skill/` and substitute it for the `example_skill.zip` placeholder in the zip-upload options.
 
-<CodeGroup>
+<CodeGroup defaultLanguage="CLI">
   ```bash cURL
   curl -X POST "https://api.anthropic.com/v1/skills" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -2181,10 +2181,9 @@ Files are identified by the filename you attach (the `;filename=` suffix in the 
     -F "files[]=@financial_skill/analyze.py;filename=financial_skill/analyze.py"
   ```
 
-  <MultiFileExample language="cli" label="CLI">
+  <CodeGroupItem>
     ```bash CLI
-    zip -r financial_skill.zip financial_skill/
-    ant skills create --file financial_skill.zip
+    ant apply financial_skill
     ```
 
     <File filename="financial_skill/SKILL.md">
@@ -2201,7 +2200,7 @@ Files are identified by the filename you attach (the `;filename=` suffix in the 
       print("financial analysis helper")
       ```
     </File>
-  </MultiFileExample>
+  </CodeGroupItem>
 
   ```python Python
   from anthropic.lib import files_from_dir
@@ -2818,7 +2817,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d "{
-      \"model\": \"claude-opus-5\",
+      \"model\": \"claude-opus-5-5\",
       \"max_tokens\": 4096,
       \"container\": {
         \"skills\": [{
@@ -2837,7 +2836,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 4096,
       "container": {
         "skills": [{
@@ -2861,7 +2860,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
 
   # Use specific version
   ant messages create <<YAML
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   container:
     skills:
@@ -2878,7 +2877,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
 
   # Use latest version
   ant messages create <<YAML
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   container:
     skills:
@@ -2908,7 +2907,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
 
   # Use specific version
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       container={
           "skills": [
@@ -2925,7 +2924,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
 
   # Use latest version
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       container={
           "skills": [
@@ -2953,7 +2952,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
 
   // Use specific version
   const specificVersionResponse = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [
@@ -2970,7 +2969,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
 
   // Use latest version
   const latestVersionResponse = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [
@@ -3015,7 +3014,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
   // Use specific version
   var specificVersionParams = new MessageCreateParams
   {
-      Model = "claude-opus-5",
+      Model = "claude-opus-5-5",
       MaxTokens = 4096,
       Container = new ContainerParams
       {
@@ -3039,7 +3038,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
   // Use latest version
   var latestVersionParams = new MessageCreateParams
   {
-      Model = "claude-opus-5",
+      Model = "claude-opus-5-5",
       MaxTokens = 4096,
       Container = new ContainerParams
       {
@@ -3092,7 +3091,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
 
   // Use specific version
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5",
+  	Model:     "claude-opus-5-5",
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -3119,7 +3118,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
 
   // Use latest version
   latestResponse, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5",
+  	Model:     "claude-opus-5-5",
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -3175,7 +3174,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
 
   // Use specific version
   MessageCreateParams specificVersionParams = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_5)
+      .model(Model.CLAUDE_OPUS_5_5)
       .maxTokens(4096L)
       .container(ContainerParams.builder()
           .addSkill(SkillParams.builder()
@@ -3193,7 +3192,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
 
   // Use latest version
   MessageCreateParams latestVersionParams = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_5)
+      .model(Model.CLAUDE_OPUS_5_5)
       .maxTokens(4096L)
       .container(ContainerParams.builder()
           .addSkill(SkillParams.builder()
@@ -3237,7 +3236,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
   $response = $client->messages->create(
       maxTokens: 4096,
       messages: [['role' => 'user', 'content' => 'Use updated Skill']],
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       container: [
           'skills' => [[
               'type' => 'custom',
@@ -3253,7 +3252,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
   $latestResponse = $client->messages->create(
       maxTokens: 4096,
       messages: [['role' => 'user', 'content' => 'Use latest Skill version']],
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       container: [
           'skills' => [[
               'type' => 'custom',
@@ -3288,7 +3287,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
 
   # Use specific version
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [{
@@ -3304,7 +3303,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
 
   # Use latest version
   latest_response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [{
@@ -3343,61 +3342,175 @@ Skills fit both organizational and personal work. Organizations use them to appl
 
 ### Example: financial modeling
 
-Combine Excel and custom DCF analysis Skills:
+Combine Excel and custom DCF analysis Skills. First, create the custom DCF analysis Skill:
+
+<CodeGroup defaultLanguage="CLI">
+  ```bash cURL
+  curl -X POST "https://api.anthropic.com/v1/skills" \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -F "files[]=@dcf_skill/SKILL.md;filename=dcf_skill/SKILL.md"
+  ```
+
+  ```bash CLI
+  ant apply dcf_skill
+  ```
+
+  ```python Python
+  from anthropic.lib import files_from_dir
+
+  client = anthropic.Anthropic()
+
+  dcf_skill = client.skills.create(
+      files=files_from_dir("/path/to/dcf_skill"),
+  )
+  print(dcf_skill.id)
+  ```
+
+  ```typescript TypeScript
+  import Anthropic, { toFile } from "@anthropic-ai/sdk";
+  import fs from "node:fs";
+
+  const client = new Anthropic();
+
+  const dcfSkill = await client.skills.create({
+    files: [await toFile(fs.createReadStream("dcf_skill.zip"), "dcf_skill.zip")]
+  });
+  console.log(dcfSkill.id);
+  ```
+
+  ```csharp C#
+  using Anthropic.Core;
+  // ...
+  AnthropicClient client = new();
+
+  var dcfSkill = await client.Skills.Create(new SkillCreateParams
+  {
+      Files =
+      [
+          new BinaryContent
+          {
+              Stream = File.OpenRead("dcf_skill/SKILL.md"),
+              FileName = "dcf_skill/SKILL.md",
+          },
+      ],
+  });
+  Console.WriteLine(dcfSkill.ID);
+  ```
+
+  ```go Go
+  client := anthropic.NewClient()
+
+  skillMd, err := os.Open("dcf_skill/SKILL.md")
+  if err != nil {
+  	log.Fatal(err)
+  }
+  defer skillMd.Close()
+
+  dcfSkill, err := client.Skills.New(context.TODO(), anthropic.SkillNewParams{
+  	Files: []io.Reader{
+  		anthropic.File(skillMd, "dcf_skill/SKILL.md", "text/markdown"),
+  	},
+  })
+  if err != nil {
+  	log.Fatal(err)
+  }
+  fmt.Println(dcfSkill.ID)
+  ```
+
+  ```java Java
+  import com.anthropic.core.MultipartField;
+  import com.anthropic.models.skills.SkillCreateParams;
+  import com.anthropic.models.skills.Skill;
+  // ...
+  void main() throws Exception {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+      SkillCreateParams params = SkillCreateParams.builder()
+          .addFile(MultipartField.<InputStream>builder()
+              .value(Files.newInputStream(Path.of("dcf_skill/SKILL.md")))
+              .filename("dcf_skill/SKILL.md")
+              .contentType("text/markdown")
+              .build())
+          .build();
+
+      Skill dcfSkill = client.skills().create(params);
+      System.out.println(dcfSkill.id());
+  }
+  ```
+
+  ```php PHP
+  use Anthropic\Core\FileParam;
+
+  $client = new Client();
+
+  $dcfSkill = $client->skills->create(
+      files: [
+          FileParam::fromResource(
+              fopen('dcf_skill/SKILL.md', 'r'),
+              filename: 'dcf_skill/SKILL.md',
+              contentType: 'text/markdown',
+          ),
+      ],
+  );
+  echo "{$dcfSkill->id}\n";
+  ```
+
+  ```ruby Ruby
+  client = Anthropic::Client.new
+
+  dcf_skill = client.skills.create(
+    files: [
+      Anthropic::FilePart.new(
+        Pathname("dcf_skill/SKILL.md"),
+        filename: "dcf_skill/SKILL.md",
+        content_type: "text/markdown"
+      )
+    ]
+  )
+  puts dcf_skill.id
+  ```
+</CodeGroup>
+
+Then use it with the Excel Skill to create a financial model. Pass the ID of the Skill you created as the custom Skill's `skill_id`:
 
 <CodeGroup>
   ```bash cURL
-  # Create custom DCF analysis Skill
-  DCF_SKILL=$(curl -X POST "https://api.anthropic.com/v1/skills" \
-    -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -F "files[]=@dcf_skill/SKILL.md;filename=dcf_skill/SKILL.md")
-
-  DCF_SKILL_ID=$(echo "$DCF_SKILL" | jq -r '.id')
-
-  # Use with Excel to create financial model
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
-    -d "{
-      \"model\": \"claude-opus-5\",
-      \"max_tokens\": 4096,
-      \"container\": {
-        \"skills\": [
+    -d '{
+      "model": "claude-opus-5-5",
+      "max_tokens": 4096,
+      "container": {
+        "skills": [
           {
-            \"type\": \"anthropic\",
-            \"skill_id\": \"xlsx\",
-            \"version\": \"latest\"
+            "type": "anthropic",
+            "skill_id": "xlsx",
+            "version": "latest"
           },
           {
-            \"type\": \"custom\",
-            \"skill_id\": \"$DCF_SKILL_ID\",
-            \"version\": \"latest\"
+            "type": "custom",
+            "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
+            "version": "latest"
           }
         ]
       },
-      \"messages\": [{
-        \"role\": \"user\",
-        \"content\": \"Build a DCF valuation model for a SaaS company\"
+      "messages": [{
+        "role": "user",
+        "content": "Build a DCF valuation model for a SaaS company"
       }],
-      \"tools\": [{
-        \"type\": \"code_execution_20250825\",
-        \"name\": \"code_execution\"
+      "tools": [{
+        "type": "code_execution_20250825",
+        "name": "code_execution"
       }]
-    }"
+    }'
   ```
 
   ```bash CLI
-  # Create custom DCF analysis Skill
-  DCF_SKILL_ID=$(ant skills create \
-    --file dcf_skill.zip \
-    --transform id \
-    --raw-output)
-
-  # Use with Excel to create financial model
-  ant messages create <<YAML
-  model: claude-opus-5
+  ant messages create <<'YAML'
+  model: claude-opus-5-5
   max_tokens: 4096
   container:
     skills:
@@ -3405,7 +3518,7 @@ Combine Excel and custom DCF analysis Skills:
         skill_id: xlsx
         version: latest
       - type: custom
-        skill_id: $DCF_SKILL_ID
+        skill_id: skill_01AbCdEfGhIjKlMnOpQrStUv
         version: latest
   messages:
     - role: user
@@ -3417,24 +3530,19 @@ Combine Excel and custom DCF analysis Skills:
   ```
 
   ```python Python
-  from anthropic.lib import files_from_dir
-
   client = anthropic.Anthropic()
 
-  # Create custom DCF analysis Skill
-
-  dcf_skill = client.skills.create(
-      files=files_from_dir("/path/to/dcf_skill"),
-  )
+  # Custom DCF analysis Skill (ID obtained from Skills API create response)
+  dcf_skill_id = "skill_01AbCdEfGhIjKlMnOpQrStUv"
 
   # Use with Excel to create financial model
   response = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       container={
           "skills": [
               {"type": "anthropic", "skill_id": "xlsx", "version": "latest"},
-              {"type": "custom", "skill_id": dcf_skill.id, "version": "latest"},
+              {"type": "custom", "skill_id": dcf_skill_id, "version": "latest"},
           ]
       },
       messages=[
@@ -3449,24 +3557,19 @@ Combine Excel and custom DCF analysis Skills:
   ```
 
   ```typescript TypeScript
-  import Anthropic, { toFile } from "@anthropic-ai/sdk";
-  import fs from "node:fs";
-
   const client = new Anthropic();
 
-  // Create custom DCF analysis Skill
-  const dcfSkill = await client.skills.create({
-    files: [await toFile(fs.createReadStream("dcf_skill.zip"), "dcf_skill.zip")]
-  });
+  // Custom DCF analysis Skill (ID obtained from Skills API create response)
+  const dcfSkillId = "skill_01AbCdEfGhIjKlMnOpQrStUv";
 
   // Use with Excel to create financial model
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [
         { type: "anthropic", skill_id: "xlsx", version: "latest" },
-        { type: "custom", skill_id: dcfSkill.id, version: "latest" }
+        { type: "custom", skill_id: dcfSkillId, version: "latest" }
       ]
     },
     messages: [
@@ -3481,27 +3584,15 @@ Combine Excel and custom DCF analysis Skills:
   ```
 
   ```csharp C#
-  using Anthropic.Core;
-  // ...
   AnthropicClient client = new();
 
-  // Create custom DCF analysis Skill
-  var dcfSkill = await client.Skills.Create(new SkillCreateParams
-  {
-      Files =
-      [
-          new BinaryContent
-          {
-              Stream = File.OpenRead("dcf_skill/SKILL.md"),
-              FileName = "dcf_skill/SKILL.md",
-          },
-      ],
-  });
+  // Custom DCF analysis Skill (ID obtained from Skills API create response)
+  var dcfSkillId = "skill_01AbCdEfGhIjKlMnOpQrStUv";
 
   // Use with Excel to create financial model
   var parameters = new MessageCreateParams
   {
-      Model = "claude-opus-5",
+      Model = "claude-opus-5-5",
       MaxTokens = 4096,
       Container = new ContainerParams
       {
@@ -3516,7 +3607,7 @@ Combine Excel and custom DCF analysis Skills:
               new SkillParams
               {
                   Type = SkillParamsType.Custom,
-                  SkillID = dcfSkill.ID,
+                  SkillID = dcfSkillId,
                   Version = "latest",
               },
           ],
@@ -3537,7 +3628,7 @@ Combine Excel and custom DCF analysis Skills:
 
   // Use with Excel to create financial model
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5",
+  	Model:     "claude-opus-5-5",
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -3581,7 +3672,7 @@ Combine Excel and custom DCF analysis Skills:
 
       // Use with Excel Skill to create financial model
       MessageCreateParams params = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_5)
+          .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(4096L)
           .container(ContainerParams.builder()
               .skills(List.of(
@@ -3618,7 +3709,7 @@ Combine Excel and custom DCF analysis Skills:
       messages: [
           ['role' => 'user', 'content' => 'Build a DCF valuation model for a SaaS company']
       ],
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       container: [
           'skills' => [
               ['type' => 'anthropic', 'skillID' => 'xlsx', 'version' => 'latest'],
@@ -3635,25 +3726,17 @@ Combine Excel and custom DCF analysis Skills:
   ```ruby Ruby
   client = Anthropic::Client.new
 
-  # Create custom DCF analysis Skill
-  dcf_skill = client.skills.create(
-    files: [
-      Anthropic::FilePart.new(
-        Pathname("dcf_skill/SKILL.md"),
-        filename: "dcf_skill/SKILL.md",
-        content_type: "text/markdown"
-      )
-    ]
-  )
+  # Custom DCF analysis Skill (ID obtained from Skills API create response)
+  dcf_skill_id = "skill_01AbCdEfGhIjKlMnOpQrStUv"
 
   # Use with Excel to create financial model
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [
         { type: "anthropic", skill_id: "xlsx", version: "latest" },
-        { type: "custom", skill_id: dcf_skill.id, version: "latest" }
+        { type: "custom", skill_id: dcf_skill_id, version: "latest" }
       ]
     },
     messages: [
@@ -3722,7 +3805,7 @@ The SDK tabs in this section show the `container` value to include in a Messages
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 4096,
       "container": {
         "skills": [{
@@ -3739,7 +3822,7 @@ The SDK tabs in this section show the `container` value to include in a Messages
   ```bash CLI
   # Pin to specific versions for stability
   ant messages create <<YAML
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   container:
     skills:
@@ -3863,7 +3946,7 @@ The SDK tabs in this section show the `container` value to include in a Messages
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 4096,
       "container": {
         "skills": [{
@@ -3880,7 +3963,7 @@ The SDK tabs in this section show the `container` value to include in a Messages
   ```bash CLI
   # Use latest for active development
   ant messages create <<YAML
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   container:
     skills:
@@ -4006,7 +4089,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 4096,
       "container": {
         "skills": [
@@ -4023,7 +4106,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "max_tokens": 4096,
       "container": {
         "skills": [
@@ -4039,7 +4122,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
   ```bash CLI
   # Skills render into the system prompt in a fixed, cache-friendly order
   ant messages create <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   container:
     skills:
@@ -4056,7 +4139,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
 
   # Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
   ant messages create <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   container:
     skills:
@@ -4080,7 +4163,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
 
   # Skills render into the system prompt in a fixed, cache-friendly order
   response1 = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       container={
           "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
@@ -4091,7 +4174,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
 
   # Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
   response2 = client.messages.create(
-      model="claude-opus-5",
+      model="claude-opus-5-5",
       max_tokens=4096,
       container={
           "skills": [
@@ -4113,7 +4196,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
 
   // Skills render into the system prompt in a fixed, cache-friendly order
   const response1 = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
@@ -4124,7 +4207,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
 
   // Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
   const response2 = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [
@@ -4143,7 +4226,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
   // Skills render into the system prompt in a fixed, cache-friendly order
   var parameters1 = new MessageCreateParams
   {
-      Model = "claude-opus-5",
+      Model = "claude-opus-5-5",
       MaxTokens = 4096,
       Container = new ContainerParams
       {
@@ -4167,7 +4250,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
   // Different Skill set ([xlsx] vs [xlsx, pptx]) = a different prefix: a cache miss (an identical set is a cache hit)
   var parameters2 = new MessageCreateParams
   {
-      Model = "claude-opus-5",
+      Model = "claude-opus-5-5",
       MaxTokens = 4096,
       Container = new ContainerParams
       {
@@ -4200,7 +4283,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
 
   // Skills render into the system prompt in a fixed, cache-friendly order
   response1, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5",
+  	Model:     "claude-opus-5-5",
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -4227,7 +4310,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
 
   // Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
   response2, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5",
+  	Model:     "claude-opus-5-5",
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -4268,7 +4351,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
 
       // Skills render into the system prompt in a fixed, cache-friendly order
       MessageCreateParams params1 = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_5)
+          .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(4096L)
           .container(ContainerParams.builder()
               .skills(List.of(
@@ -4288,7 +4371,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
 
       // Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
       MessageCreateParams params2 = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_5)
+          .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(4096L)
           .container(ContainerParams.builder()
               .skills(List.of(
@@ -4322,7 +4405,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
       messages: [
           ['role' => 'user', 'content' => 'Analyze sales data']
       ],
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       container: [
           'skills' => [
               ['type' => 'anthropic', 'skillID' => 'xlsx', 'version' => 'latest']
@@ -4340,7 +4423,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
       messages: [
           ['role' => 'user', 'content' => 'Create a presentation']
       ],
-      model: 'claude-opus-5',
+      model: 'claude-opus-5-5',
       container: [
           'skills' => [
               ['type' => 'anthropic', 'skillID' => 'xlsx', 'version' => 'latest'],
@@ -4359,7 +4442,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
 
   # Skills render into the system prompt in a fixed, cache-friendly order
   response1 = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
@@ -4371,7 +4454,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
 
   # Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
   response2 = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [
@@ -4404,7 +4487,7 @@ Handle Skill-related errors gracefully:
   if ! RESULT=$(ant messages create \
     --transform-error error.message \
     --format-error yaml 2>&1 <<'YAML'
-  model: claude-opus-5
+  model: claude-opus-5-5
   max_tokens: 4096
   container:
     skills:
@@ -4437,7 +4520,7 @@ Handle Skill-related errors gracefully:
 
   try:
       response = client.messages.create(
-          model="claude-opus-5",
+          model="claude-opus-5-5",
           max_tokens=4096,
           container={
               "skills": [
@@ -4464,7 +4547,7 @@ Handle Skill-related errors gracefully:
 
   try {
     const response = await client.messages.create({
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 4096,
       container: {
         skills: [
@@ -4494,7 +4577,7 @@ Handle Skill-related errors gracefully:
   {
       var parameters = new MessageCreateParams
       {
-          Model = "claude-opus-5",
+          Model = "claude-opus-5-5",
           MaxTokens = 4096,
           Container = new ContainerParams
           {
@@ -4525,7 +4608,7 @@ Handle Skill-related errors gracefully:
   client := anthropic.NewClient()
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5",
+  	Model:     "claude-opus-5-5",
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -4570,7 +4653,7 @@ Handle Skill-related errors gracefully:
 
       try {
           MessageCreateParams params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_5)
+              .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(4096L)
               .container(ContainerParams.builder()
                   .addSkill(SkillParams.builder()
@@ -4606,7 +4689,7 @@ Handle Skill-related errors gracefully:
           messages: [
               ['role' => 'user', 'content' => 'Process data']
           ],
-          model: 'claude-opus-5',
+          model: 'claude-opus-5-5',
           container: [
               'skills' => [
                   [
@@ -4635,7 +4718,7 @@ Handle Skill-related errors gracefully:
 
   begin
     response = client.messages.create(
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 4096,
       container: {
         skills: [

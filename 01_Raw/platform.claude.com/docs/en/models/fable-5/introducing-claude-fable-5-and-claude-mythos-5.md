@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/models/fable-5/introducing-claude-fable-5-and-claude-mythos-5
-fetched_at: 2026-09-07T05:31:49.199612+00:00
+fetched_at: 2026-09-28T06:10:58.128414+00:00
 fetch_method: mintlify_md
 ---
 
@@ -54,7 +54,7 @@ A request that Claude Fable 5 refuses can usually be served by another Claude mo
 
 ### Billing
 
-You are not billed for a request that is refused before any output is generated. When you retry on another model, [fallback credit](https://platform.claude.com/docs/en/build-with-claude/fallback-credit) refunds the prompt-cache cost of switching, so you avoid paying that cost twice.
+A refusal that arrives before any output is billed when it is in a category with low volumes of false positives, to disrupt attempts to circumvent Anthropic's safeguards at scale. Before September 24, 2026, these refusals were not billed. A mid-stream refusal bills the input tokens and the output already streamed at normal rates. For the billed categories, see [How refusals are billed](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#how-refusals-are-billed). When you retry on another model, [fallback credit](https://platform.claude.com/docs/en/build-with-claude/fallback-credit) refunds the prompt-cache cost of switching, so you avoid paying that cost twice.
 
 ## Availability
 

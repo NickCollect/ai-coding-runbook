@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/groups/list
-fetched_at: 2026-09-21T05:44:14.819741+00:00
+fetched_at: 2026-09-28T06:10:56.601440+00:00
 fetch_method: mintlify_md
 ---
 
@@ -21,7 +21,7 @@ List Compliance Groups
 
   Maximum results (default: 500, max: 1000)
 
-  default: 500, maximum: 1000, minimum: 1
+  default: 500, minimum: 1, maximum: 1000
 
 - `name_prefix: optional string`
 

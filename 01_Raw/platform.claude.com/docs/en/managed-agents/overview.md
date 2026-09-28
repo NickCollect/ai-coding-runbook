@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/overview
-fetched_at: 2026-09-21T05:44:01.250091+00:00
+fetched_at: 2026-09-28T06:10:41.052250+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,11 +8,13 @@ fetch_method: mintlify_md
 title: Claude Managed Agents overview
 url: https://platform.claude.com/docs/en/managed-agents/overview
 description: Pre-built, configurable agent harness that runs in managed infrastructure. Best for long-running tasks and asynchronous work.
+featureMetadata:
+  topic:
+    title: Managed Agents
+    url: https://platform.claude.com/docs/en/managed-agents/overview
+  status: beta
+  betaHeader: managed-agents-2026-04-01
 ---
-
-## Compatibility
-- Status: Beta
-- [Beta header](https://platform.claude.com/docs/en/api/beta-headers): `managed-agents-2026-04-01`
 
 Anthropic offers two ways to build with Claude, each suited to different use cases:
 
