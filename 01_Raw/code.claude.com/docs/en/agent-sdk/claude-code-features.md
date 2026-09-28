@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/claude-code-features
-fetched_at: 2026-09-21T05:44:00.673070+00:00
+fetched_at: 2026-09-28T06:10:38.812213+00:00
 fetch_method: mintlify_md
 ---
 
@@ -292,7 +292,7 @@ For full details on programmatic hooks, see [Control execution with hooks](/docs
 
 The Agent SDK gives you access to several ways to extend your agent's behavior. If you're unsure which to use, this table maps common goals to the right approach.
 
-| You want to...                                                                                    | Use                                           | SDK surface                                                                                                                                                    |
+| What you want to do                                                                               | Use                                           | SDK surface                                                                                                                                                    |
 | :------------------------------------------------------------------------------------------------ | :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Set project conventions your agent always follows                                                 | [CLAUDE.md](/docs/en/memory)                       | `settingSources: ["project"]` loads it automatically                                                                                                           |
 | Give the agent reference material it loads when relevant                                          | [Skills](/docs/en/agent-sdk/skills)                | `settingSources` + `skills` option                                                                                                                             |

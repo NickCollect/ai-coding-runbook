@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/how-claude-code-works
-fetched_at: 2026-09-21T05:44:04.056509+00:00
+fetched_at: 2026-09-28T06:10:41.138366+00:00
 fetch_method: mintlify_md
 ---
 
@@ -28,7 +28,7 @@ The loop adapts to what you ask. A question about your codebase might only need 
 
 You're part of this loop too. You can interrupt at any point to steer Claude in a different direction, provide additional context, or ask it to try a different approach. Claude works autonomously but stays responsive to your input.
 
-The agentic loop is powered by two components: [models](#models) that reason and [tools](#tools) that act. Claude Code serves as the **agentic harness** around Claude: it provides the tools, context management, and execution environment that turn a language model into a capable coding agent.
+The agentic loop is powered by two components: [models](#models) that reason and [tools](#tools) that act. Claude Code is the layer around the model that provides the tools and manages the context the model sees. This surrounding layer is what the term agentic harness refers to.
 
 ### Models
 
@@ -44,13 +44,13 @@ Tools are what make Claude Code agentic. Without tools, Claude can only respond 
 
 The built-in tools generally fall into five categories, each representing a different kind of agency.
 
-| Category              | What Claude can do                                                                                                                                            |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **File operations**   | Read files, edit code, create new files, rename and reorganize                                                                                                |
-| **Search**            | Find files by pattern, search content with regex, explore codebases                                                                                           |
-| **Execution**         | Run shell commands, start servers, run tests, use git                                                                                                         |
-| **Web**               | Search the web, fetch documentation, look up error messages                                                                                                   |
-| **Code intelligence** | See type errors and warnings after edits, jump to definitions, find references (requires [code intelligence plugins](/docs/en/discover-plugins#code-intelligence)) |
+| Category              | What Claude can do                                                                                                                                   |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **File operations**   | Read files, edit code, create new files, rename and reorganize                                                                                       |
+| **Search**            | Find files by pattern, search content with regex, explore codebases                                                                                  |
+| **Execution**         | Run shell commands, start servers, run tests, use git                                                                                                |
+| **Web**               | Search the web, fetch documentation, look up error messages                                                                                          |
+| **Code intelligence** | See type errors and warnings after edits, jump to definitions, find references (requires [code intelligence plugins](/docs/en/plugins/code-intelligence)) |
 
 These are the primary capabilities. Claude also has tools for spawning subagents, asking you questions, and other orchestration tasks. See [Tools available to Claude](/docs/en/tools-reference) for the complete list.
 
@@ -128,6 +128,17 @@ Claude's context window holds your conversation history, file contents, command 
 
 For an interactive walkthrough of what loads and when, see [Explore the context window](/docs/en/context-window).
 
+#### Context Claude Code adds on its own
+
+If Claude follows a rule you didn't write, such as adding a `Co-Authored-By` trailer to a commit, the rule may have come from a [system reminder](/docs/en/glossary#system-reminder). As you work, Claude Code adds its own context to the conversation alongside your messages:
+
+* Your CLAUDE.md files
+* The instructions of your [output style](/docs/en/output-styles)
+* A note when a file Claude read earlier changes on disk
+* The commit and pull request attribution lines
+
+To change or remove the attribution lines, set [`attribution`](/docs/en/settings-reference#attribution). To remove Claude Code's built-in commit and pull request instructions, set [`includeGitInstructions`](/docs/en/settings-reference#includegitinstructions) to `false`. For the other switches, see [Turn off the context your agent replaces](/docs/en/agent-sdk/modifying-system-prompts#turn-off-the-context-your-agent-replaces).
+
 #### When context fills up
 
 Claude Code manages context automatically as you approach the limit. It clears older tool outputs first, then summarizes the conversation if needed. Your requests and key code snippets are preserved; detailed instructions from early in the conversation may be lost. Put persistent rules in CLAUDE.md rather than relying on conversation history.
@@ -162,7 +173,7 @@ Checkpoints are separate from git and remain available when you resume a convers
 
 Choose a permission mode to set what Claude can do without asking you. Press `Shift+Tab` to cycle through the permission modes:
 
-* **Auto**: a classifier reviews most actions in the background and blocks the risky ones instead of asking you. On Pro, Max, and Team plans, it's the [built-in starting permission mode](/docs/en/permission-modes#which-mode-a-session-starts-in) for interactive terminal and VS Code sessions
+* **Auto**: a classifier reviews most actions in the background and blocks the risky ones instead of asking you. With Claude Code v2.1.283 or later, it's the [built-in starting permission mode](/docs/en/permission-modes#which-mode-a-session-starts-in) for interactive terminal and VS Code sessions, and on earlier versions only on Pro, Max, and Team plans
 * **Manual**: Claude asks before file edits and shell commands
 * **Accept edits**: Claude edits files and runs common filesystem commands like `mkdir` and `mv` without asking, still asks for other commands
 * **Plan**: Claude explores and proposes a plan without editing your source files
@@ -204,10 +215,10 @@ When the first attempt isn't right, you don't start over. You iterate.
 
 #### Interrupt and steer
 
-You can redirect Claude at any point without waiting for the turn to finish or starting over:
+You can redirect Claude at any point without starting over. Do either of these:
 
 * **Press `Esc`** to stop Claude immediately. The running tool call is canceled and Claude waits for your next instruction. If you have messages queued, Claude Code [sends them next](/docs/en/interactive-mode#queue-messages-while-claude-works).
-* **Type a correction and press `Enter`** to send it without stopping the running tool. Claude reads it as soon as the current action completes and adjusts before deciding its next step.
+* **Type a correction and press `Enter`** without stopping Claude. The message shows as queued in the conversation. If Claude is running tool calls, it reads the message as soon as those calls finish, within the same turn, and adjusts before its next step. [Queue messages while Claude works](/docs/en/interactive-mode#queue-messages-while-claude-works) covers when other queued entries are sent.
 
 ### Delegate, don't dictate
 

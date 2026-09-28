@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-apps-gateway-config
-fetched_at: 2026-09-21T05:44:02.367092+00:00
+fetched_at: 2026-09-28T06:10:40.041423+00:00
 fetch_method: mintlify_md
 ---
 
@@ -41,6 +41,7 @@ Five sections are [required](#required-sections). Every other section is [option
 * [`managed`](#managed): managed settings policies by IdP group
 * [`telemetry`](#telemetry): OTLP forwarding to your observability stack
 * [`access_control`, `limits`, `timeouts`, `rate_limits`](#http-tuning): IP allow/deny, request size caps, upstream time-to-first-byte, and per-IP sign-in limits
+* [`load_test_mode`](#load_test_mode): load testing the gateway without calling a model provider
 
 ## Secret expansion
 
@@ -157,6 +158,7 @@ The `store` block points the gateway at its PostgreSQL database, which holds dev
 | `password`                | No       | Database credential. Set it here rather than in `postgres_url` so the credential stays out of the URL. Accepts any characters and takes precedence over URL credentials.                                                                                                                                                                                                                                                           |
 | `max_connections`         | No       | Postgres connection-pool size per replica. Default `5`, which is conservative and friendly to shared databases. With [spend limits](#admin) enabled, the hot path does a few operations per inference request, so raise it for a dedicated database under load, and keep replicas × this below the database's `max_connections`.                                                                                                   |
 | `connect_timeout_seconds` | No       | Seconds the gateway waits when it opens a Postgres connection. A whole number from `1` to `60`, default `5`. Raise it if connection attempts time out when a new gateway instance starts. Requires Claude Code v2.1.274 or later on the gateway server. Earlier versions refuse to start when the key is set.                                                                                                                      |
+| `readiness_grace_seconds` | No       | How many seconds `/readyz` keeps reporting ready after Postgres stops answering. A whole number from `0` to `3600`, default `0`. See [Outage behavior](/docs/en/claude-apps-gateway-deploy#outage-behavior) for how to pick a value. Requires Claude Code v2.1.282 or later on the gateway server. Earlier versions refuse to start when the key is set.                                                                                |
 
 For local development, point `postgres_url` at a throwaway Postgres container, for example `docker run --rm -p 5432:5432 -e POSTGRES_HOST_AUTH_METHOD=trust postgres`.
 
@@ -886,6 +888,8 @@ Telemetry is off in the CLI by default. When you set both `telemetry.forward_to`
 * `OTEL_EXPORTER_OTLP_ENDPOINT=<public_url>`
 * `OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf`
 
+When you [add your own labels](#add-your-own-labels), the gateway also pushes `OTEL_RESOURCE_ATTRIBUTES`.
+
 Before Claude Code v2.1.265 on the gateway server, the gateway pushed all three exporter selectors as `otlp`, including for signals no destination opted into.
 
 The pushed endpoint is built from the public URL, so metrics and logs need no OTEL configuration from developers or policies.
@@ -902,6 +906,35 @@ Without a `forward_to` destination for a signal, the gateway accepts and discard
 Set it to `1` only in the policies whose groups you want traced. A policy that doesn't set it inherits the value from your `match: {}` catch-all policy if that policy sets one, per the [merge rules](#managed). To keep a group's clients from sending traces even when a developer sets the variable locally, set it to `0` in that group's policy.
 
 Both protobuf and JSON OTLP encodings are relayed, and any OpenTelemetry-compatible backend works as a destination.
+
+#### Add your own labels
+
+To put fixed labels such as `service.namespace` or `deployment.environment.name` on the telemetry of sessions signed in through the gateway, set `telemetry.resource_attributes`. Each label is an OpenTelemetry resource attribute, and every destination receives the same labels.
+
+Sessions get the labels only when you also set `telemetry.forward_to` and `listen.public_url`. This example adds two labels:
+
+```yaml theme={null}
+telemetry:
+  forward_to:
+    - url: https://otel-collector.internal.example.com
+  resource_attributes:
+    service.namespace: claude
+    deployment.environment.name: prod
+```
+
+The gateway refuses to start when a label breaks one of these rules, and the startup error names the label:
+
+* Names use only letters, digits, `.`, `_`, and `-`
+* Names aren't reserved. Compared in any letter case, the reserved names are everything that starts with `user.`, `enduser.`, or `identity.`, plus `service.name`, `service.version`, `claude.deployment_mode`, `host.arch`, `os.type`, `os.version`, and `wsl.version`
+* Values are non-empty printable ASCII with no space and none of `, ; = \ " %`
+* Values are at most 255 characters as the gateway counts them after percent-encoding, so `/`, `:`, and `@` each count as three
+* Values are text, so quote a number, `true`, or `false`
+
+You need Claude Code v2.1.281 or later on the gateway server to set `telemetry.resource_attributes`. An earlier gateway refuses to start when it finds the key. Upgrade every replica before you add the key, and remove the key before you roll back to an earlier version.
+
+Terminal sessions signed in through `/login` receive the labels as `OTEL_RESOURCE_ATTRIBUTES`, pushed with the other [telemetry variables](#telemetry). If you set `OTEL_RESOURCE_ATTRIBUTES` in a policy's `env` block, terminal sessions that policy matches get that value instead of the labels. Claude Desktop receives the labels from the gateway alongside `user.email` and the other identity attributes.
+
+Claude Code also copies each label onto every metric data point, so you can filter metrics by it in a backend that doesn't index resource attributes. To turn that copy off, see [Metrics cardinality control](/docs/en/monitoring-usage#metrics-cardinality-control).
 
 #### Export directly to your collector
 
@@ -961,6 +994,39 @@ Both signals use the client address as the gateway resolves it. If a load balanc
 
 Behind such a front end, set [`listen.trusted_proxies`](#listen) first so the gateway sees real client addresses, and keep the gateway and everything in front of it unreachable from the public internet regardless.
 
+### `load_test_mode`
+
+The `load_test_mode` block lets you load test a gateway without calling a model provider. While it's on, the gateway builds and signs each provider request as usual, discards it instead of sending it, and streams a canned reply back through its normal response path. The reply is filler text that begins with a sentence saying it is canned.
+
+Requires Claude Code v2.1.282 or later on the gateway server. An earlier gateway refuses to start when it finds the key. Upgrade every replica before you add the block, and remove the block before you roll back.
+
+The example below turns the mode on with the defaults, a reply of roughly 750 tokens of text streamed over about 10 seconds:
+
+```yaml theme={null}
+load_test_mode:
+  enabled: true
+  reply_tokens: 750     # roughly how many tokens of text each canned reply carries
+  reply_seconds: 9.5    # how long a streamed reply takes
+```
+
+| Field           | Required | Description                                                                                                                                                     |
+| --------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `enabled`       | Yes      | `true` turns the mode on. `false` keeps your numbers in the file with the mode off. The gateway refuses to start if the block is present without it.            |
+| `reply_tokens`  | No       | Default `750`. Roughly how many tokens of text each canned reply carries, a whole number from 1 to 100000.                                                      |
+| `reply_seconds` | No       | Default `9.5`. How long a streamed reply takes, from 0 to 600. `0` sends the whole reply at once. A reply to a non-streaming request always comes back at once. |
+
+A load test in this mode covers the gateway, your Postgres, and everything in front of the gateway. It doesn't cover the provider's limits, speed, or network path.
+
+No model request is sent to the provider, so a replica's CPU per request is an estimate and reads lower than production, which also encrypts its traffic to the provider. Confirm a replica count with a small pilot against the real provider. Before v2.1.283, the estimate reads much lower.
+
+While the mode is on, a request can carry an `x-load-test-user` header holding a whole number of up to seven digits. The gateway counts each number as a separate developer, with the email and groups of the developer whose token came with the request.
+
+Give the load-test deployment its own empty database, because the gateway refuses to start with the mode on against a database in which any developer has already spent anything.
+
+<Warning>
+  Never turn this on for a gateway that developers use. Every request gets the canned reply and no model is called. The gateway logs a `load_test_mode is on` warning at boot and marks each `inference` [audit event](/docs/en/claude-apps-gateway-deploy#logs) with `load_test: true` while the mode is on.
+</Warning>
+
 ## Complete example
 
 This full reference config exercises every core section; the [HTTP tuning blocks](#http-tuning) keep their defaults. Copy it, delete what you don't need, and fill in your values. The config in the [Quickstart](/docs/en/claude-apps-gateway#quickstart) is a minimal version of this.
@@ -1011,6 +1077,7 @@ store:
   postgres_url: ${GATEWAY_POSTGRES_URL}
   # max_connections: 5
   # connect_timeout_seconds: 5
+  # readiness_grace_seconds: 300   # keep passing the readiness check through a database failover
 
 # Enables /v1/organizations/spend_limits (mirrors the Anthropic Admin API)
 # and per-developer spend enforcement on /v1/messages. Omit to disable.
@@ -1029,6 +1096,13 @@ store:
 
 # enforcement:
 #   fail_closed_on_error: false
+
+# Load test this deployment without calling a model provider. Never on a
+# gateway that developers use: every request gets a canned reply.
+# load_test_mode:
+#   enabled: true
+#   # reply_tokens: 750
+#   # reply_seconds: 9.5
 
 # Meter at contracted rates instead of USD list price. Requires admin: or a
 # managed: policy. With managed:, the same rates also go to signed-in clients.
@@ -1129,7 +1203,9 @@ By default, a registry policy on Windows or a managed-preferences plist on macOS
 
 For Claude Desktop, set the `bootstrapUrl` key in Claude Desktop's own [managed configuration](https://claude.com/docs/third-party/claude-desktop/configuration) to `<listen.public_url>/user/bootstrap`. The sign-in flow and per-group policy then match the CLI's once a policy opts in server-side with a `desktop` key; without the opt-in, `/user/bootstrap` returns 404. See [Claude Desktop overlay](#claude-desktop-overlay) for the server-side half.
 
-Claude Code honors [`forceLoginGatewayUrl`](/docs/en/settings-reference#forcelogingatewayurl), [`gatewayInternalNetworks`](/docs/en/settings-reference#gatewayinternalnetworks), and the `"gateway"` value of [`forceLoginMethod`](/docs/en/settings-reference#forceloginmethod) only from a managed source on the machine: `managed-settings.json`, the macOS plist or Windows HKLM registry, or a policy helper. A developer setting them in their own `~/.claude/settings.json` has no effect, and neither does setting them in the gateway payload.
+Claude Code honors [`forceLoginGatewayUrl`](/docs/en/settings-reference#forcelogingatewayurl), [`gatewayInternalNetworks`](/docs/en/settings-reference#gatewayinternalnetworks), and the `"gateway"` value of [`forceLoginMethod`](/docs/en/settings-reference#forceloginmethod) only from a managed source on the machine: `managed-settings.json`, the macOS plist or Windows HKLM registry, or a policy helper. Setting them in a developer's own `~/.claude/settings.json` or in the gateway payload doesn't configure the gateway sign-in.
+
+Leave `forceLoginMethod` and `forceLoginOrgUUID` out of the payload. Claude Code still reads both keys from the payload for its startup credential check, so a developer who keeps an Anthropic-issued credential on the machine gets the startup exit described under [Administrator policy requires a Cloud gateway sign-in](/docs/en/errors#administrator-policy-requires-a-cloud-gateway-sign-in) even after they sign in.
 
 ## Related
 

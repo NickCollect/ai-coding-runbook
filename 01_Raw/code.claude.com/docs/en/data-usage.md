@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/data-usage
-fetched_at: 2026-09-21T05:44:03.088049+00:00
+fetched_at: 2026-09-28T06:10:40.522205+00:00
 fetch_method: mintlify_md
 ---
 
@@ -98,8 +98,8 @@ Claude Code is built on Anthropic's APIs. For details on API security controls, 
 
 [Cloud sessions](/docs/en/claude-code-on-the-web) run in Anthropic-managed virtual machines by default instead of locally. Sessions your organization routes to a [self-hosted environment](/docs/en/self-hosted-environments) run on infrastructure you control; for what stays on your machines and what still goes to Anthropic, see [What stays on your infrastructure](/docs/en/self-hosted-environments#what-stays-on-your-infrastructure). In Anthropic-hosted cloud sessions:
 
-* **Code and data storage:** Your repository is cloned to an isolated VM. Code and session data are subject to the retention and usage policies for your account type (see Data retention section above)
-* **Credentials:** GitHub authentication is handled through a secure proxy; your GitHub credentials never enter the sandbox
+* **Code and data storage:** Your repository is cloned into the session's isolated VM. Anthropic stores the session transcript so you can return to the session later. Code and session data are subject to the [retention and usage policies](#data-retention) for your account type
+* **Credentials:** GitHub credentials are stored encrypted on Anthropic's servers and never enter the VM. GitHub traffic from the VM goes through an Anthropic proxy that attaches them on the server side
 * **Network traffic:** All outbound traffic goes through a security proxy for audit logging and abuse prevention
 * **Session data:** Prompts, code changes, and outputs follow the same data policies as local Claude Code usage
 
@@ -107,7 +107,7 @@ For security details about cloud execution, see [Security](/docs/en/security#clo
 
 ## Telemetry services
 
-Claude Code sends two kinds of operational telemetry: usage metrics and error reports. You can turn each off individually with the environment variables below, or disable all non-essential traffic at once by setting `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`. Setting `DISABLE_TELEMETRY` or `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` also disables the feature-flag evaluation that [Remote Control](/docs/en/remote-control#requirements) depends on; `DISABLE_ERROR_REPORTING` doesn't.
+Claude Code sends two kinds of operational telemetry: usage metrics and error reports. You can turn each off individually with the environment variables below, or disable all non-essential traffic at once by setting `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`. Setting `DISABLE_TELEMETRY` or `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` also disables feature-flag evaluation, which can make [Remote Control](/docs/en/remote-control#requirements) unavailable; `DISABLE_ERROR_REPORTING` doesn't.
 
 **Metrics**: latency, reliability, and usage patterns, sent to Anthropic and to third-party logging infrastructure over TLS. Metrics never include your code, prompts, or file paths. Set `DISABLE_TELEMETRY=1` to opt out.
 

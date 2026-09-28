@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/common-workflows
-fetched_at: 2026-09-21T05:44:02.851216+00:00
+fetched_at: 2026-09-28T06:10:40.306795+00:00
 fetch_method: mintlify_md
 ---
 
@@ -108,7 +108,7 @@ Suppose you need to locate code related to a specific feature or functionality.
 
   * Be specific about what you're looking for
   * Use domain language from the project
-  * Install a [code intelligence plugin](/docs/en/discover-plugins#code-intelligence) for your language to give Claude precise "go to definition" and "find references" navigation
+  * Install a [code intelligence plugin](/docs/en/plugins/code-intelligence) for your language to give Claude precise "go to definition" and "find references" navigation
 </Tip>
 
 ***
@@ -313,7 +313,7 @@ Suppose you need to work with images in your codebase, and you want Claude's hel
 
     1. Drag and drop an image into the Claude Code window
     2. Copy an image and paste it into the CLI with `Ctrl+V`, or with [`Alt+V` on Windows and WSL](/docs/en/interactive-mode#general-controls)
-    3. Provide an image path to Claude. E.g., "Analyze this image: /path/to/your/image.png"
+    3. Provide an image path to Claude, for example "Analyze this image: /path/to/your/image.png"
   </Step>
 
   <Step title="Ask Claude to analyze the image">

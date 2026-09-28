@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/examples
-fetched_at: 2026-08-10T03:07:45.202498+00:00
+fetched_at: 2026-09-28T06:10:38.962191+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ fetch_method: mintlify_md
 
 > Find a complete, runnable Agent SDK project or a guided recipe in the Claude Cookbook that matches what you want to build.
 
-This page routes you to complete, runnable Agent SDK projects and guided Claude Cookbook recipes. TypeScript applications live in the [`claude-agent-sdk-demos`](https://github.com/anthropics/claude-agent-sdk-demos) repo, and Python recipes live in the [Claude Cookbook](https://platform.claude.com/cookbook).
+This page routes you to complete, runnable Agent SDK projects and guided Claude Cookbook recipes. The applications live in the [`claude-agent-sdk-demos`](https://github.com/anthropics/claude-agent-sdk-demos) repo, and Python recipes live in the [Claude Cookbook](https://platform.claude.com/cookbook).
 
 ## Run a minimal agent first
 
@@ -22,9 +22,9 @@ If you haven't built anything with the SDK yet, start with one of these before a
 
 * [Hello World](https://github.com/anthropics/claude-agent-sdk-demos/tree/main/hello-world): a minimal TypeScript project to clone when you want to start from repo code
 
-## Explore a TypeScript application
+## Explore a demo application
 
-The TypeScript applications in [`claude-agent-sdk-demos`](https://github.com/anthropics/claude-agent-sdk-demos) are demos for local development, from an email client to a multi-agent research system. Clone the demo whose shape matches what you're building.
+The applications in [`claude-agent-sdk-demos`](https://github.com/anthropics/claude-agent-sdk-demos) are demos for local development, from an email client to a multi-agent research system. Clone the demo whose shape matches what you're building.
 
 ## Work through a Python recipe
 

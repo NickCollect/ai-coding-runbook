@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/zero-data-retention
-fetched_at: 2026-09-21T05:44:07.507113+00:00
+fetched_at: 2026-09-28T06:10:43.747681+00:00
 fetch_method: mintlify_md
 ---
 
@@ -62,7 +62,7 @@ When ZDR is enabled for a Claude Code organization on Claude for Enterprise, cer
 | Feature                                                                                                                  | Reason                                                                                                     |
 | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
 | [Cloud sessions](/docs/en/claude-code-on-the-web), including those started from the [Desktop app](/docs/en/desktop#cloud-sessions) | Requires server-side storage of session data, including conversation history with prompts and completions. |
-| [Claude Tag](/docs/en/claude-tag)                                                                                             | Retains channel memory and session transcripts.                                                            |
+| [Claude Tag](https://claude.com/docs/claude-tag)                                                                         | Retains channel memory and session transcripts.                                                            |
 | [Artifacts](/docs/en/artifacts)                                                                                               | Requires storing published page content on Anthropic-operated infrastructure.                              |
 | Feedback submission (`/feedback`, `/bug`, `/share`)                                                                      | Submitting feedback sends conversation data to Anthropic.                                                  |
 | [Remote Control](/docs/en/remote-control)                                                                                     | Stores the session transcript on Anthropic servers to sync the conversation across devices.                |

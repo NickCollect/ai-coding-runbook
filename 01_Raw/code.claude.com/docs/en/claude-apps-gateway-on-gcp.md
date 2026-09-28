@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-apps-gateway-on-gcp
-fetched_at: 2026-09-21T05:44:02.546720+00:00
+fetched_at: 2026-09-28T06:10:40.053297+00:00
 fetch_method: mintlify_md
 ---
 
@@ -179,6 +179,8 @@ The steps below provision the full deployment with `gcloud` commands.
 
     store:
       postgres_url: ${GATEWAY_POSTGRES_URL}          # GKE: ${file:/secrets/postgres-url}
+      # readiness_grace_seconds: 300                 # keep passing the readiness probe
+                                                     # through a Cloud SQL failover
 
     upstreams:
       - provider: vertex

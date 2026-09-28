@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/third-party-integrations
-fetched_at: 2026-09-21T05:44:06.337107+00:00
+fetched_at: 2026-09-28T06:10:42.874260+00:00
 fetch_method: mintlify_md
 ---
 
@@ -90,9 +90,9 @@ Organizations can deploy Claude Code through Anthropic directly or through a clo
 
 For most organizations, Claude for Teams or Claude for Enterprise provides the best experience. Team members get access to both Claude Code and Claude on the web with a single subscription, centralized billing, and no infrastructure setup required.
 
-**Claude for Teams** is self-service and includes collaboration features, admin tools, and billing management. Best for smaller teams that need to get started quickly.
+**Claude for Teams** is self-service and includes collaboration features, admin tools, SSO, billing management, and [server-managed settings](/docs/en/server-managed-settings) for organization-wide Claude Code configuration. Best for smaller teams that need to get started quickly.
 
-**Claude for Enterprise** adds SSO and domain capture, role-based permissions, compliance API access, and managed policy settings for deploying organization-wide Claude Code configurations. Best for larger organizations with security and compliance requirements.
+**Claude for Enterprise** adds domain capture, role-based permissions, and compliance API access. Best for larger organizations with security and compliance requirements.
 
 Learn more about [Team plans](https://support.claude.com/en/articles/9266767-what-is-the-team-plan) and [Enterprise plans](https://support.claude.com/en/articles/9797531-what-is-the-enterprise-plan).
 

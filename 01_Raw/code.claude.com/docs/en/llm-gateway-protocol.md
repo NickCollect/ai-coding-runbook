@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/llm-gateway-protocol
-fetched_at: 2026-09-21T05:44:04.395315+00:00
+fetched_at: 2026-09-28T06:10:41.417111+00:00
 fetch_method: mintlify_md
 ---
 
@@ -71,6 +71,10 @@ The [fast mode](/docs/en/fast-mode) availability check never appears in gateway 
 
 Stream inference responses. Claude Code reads the stream as it arrives, so if your gateway buffers complete responses before relaying them, Claude Code stalls.
 
+Deliver each response's full event sequence without dropping, duplicating, or reordering events. When an event references a content block whose `content_block_start` never arrived, or a block whose `content_block_stop` already arrived, Claude Code stops reading the stream at that event instead of applying it, so a duplicated `content_block_stop` can't run the same tool call twice. [The response above may be incomplete](/docs/en/errors#the-response-above-may-be-incomplete) describes what the user sees, under the `Part of the response never arrived` and `The response stream was malformed` variants.
+
+Relay each response through its final `message_delta` and `message_stop` events before ending the body. A body that ends after a `message_delta` carrying a `stop_reason`, with no content block still open and no content block event after that frame, counts as complete even when `message_stop` is missing. A body that your gateway ends cleanly any earlier, once a content block has started, is treated the same as a dropped connection: [Automatic retries](/docs/en/errors#automatic-retries) says when Claude Code re-issues the request, and [The response above may be incomplete](/docs/en/errors#the-response-above-may-be-incomplete) covers what it keeps once visible content has arrived. Claude Code keeps the `stop_reason` a `message_delta` delivers, so a later usage-only `message_delta` whose `delta` has `stop_reason: null` or no `stop_reason` key doesn't clear it.
+
 When the client speaks the Amazon Bedrock format, relay the `InvokeModelWithResponseStream` response body and its `Content-Type: application/vnd.amazon.eventstream` header unmodified, and don't convert the stream to server-sent events. See [Streaming errors behind a gateway or proxy](/docs/en/amazon-bedrock#streaming-errors-behind-a-gateway-or-proxy).
 
 Forward keep-alive pings as well. On connections through `ANTHROPIC_BASE_URL` or `ANTHROPIC_AWS_BASE_URL`, Claude Code counts every byte your gateway relays, including SSE `ping` events and comment lines, and aborts a stream that goes silent for 300 seconds by default. The upstream's pings are the only traffic during long thinking pauses, so if your gateway strips or buffers them, Claude Code aborts the stream during those pauses; [Automatic retries](/docs/en/errors#automatic-retries) covers what an aborted stream reports based on how far the response had progressed. An upstream that sends no pings at all, such as Amazon Bedrock's binary event-stream, leaves those pauses with nothing to forward. When translating from such an upstream, emit your own `ping` events during silent gaps. Gateways reached through `ANTHROPIC_BEDROCK_BASE_URL`, `ANTHROPIC_VERTEX_BASE_URL`, or `ANTHROPIC_FOUNDRY_BASE_URL` aren't wrapped by this byte-level watchdog, even when they relay the Anthropic Messages format; there, a [5-minute idle timeout](/docs/en/env-vars) aborts a silent stream instead, and on `ANTHROPIC_BEDROCK_BASE_URL` connections you can add the byte watchdog with [`CLAUDE_ENABLE_BYTE_WATCHDOG_BEDROCK`](/docs/en/env-vars).
@@ -131,6 +135,38 @@ Claude Code includes these headers on API requests. Header names are case-insens
 Subagent IDs are generated fresh each time Claude Code spawns a subagent. Teammate agents, the named members of an [agent team](/docs/en/agent-teams), reuse a stable name-based ID across reconnections. In both cases the ID identifies an agent, not a person or a device, so don't treat the agent ID header as a user identifier.
 
 If your developers set `ANTHROPIC_CUSTOM_HEADERS`, those headers appear on requests as well.
+
+### Gateway hint headers
+
+Claude Code can also send routing hints: per-request facts a gateway or router can use to schedule, cache, or attribute a request. Requires Claude Code v2.1.273 or later.
+
+Whether a request carries them depends on where Claude Code sends it:
+
+* Direct connection to the Anthropic API: sent by default
+* Custom base URL: off by default, because a proxy that rejects unknown headers would fail the request. To receive them, set [`CLAUDE_CODE_GATEWAY_HINT_HEADERS=1`](/docs/en/env-vars) for your developers, for example in the `env` block of [managed settings](/docs/en/managed-settings)
+* Any other backend, including Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry, and Claude Platform on AWS: sent only when `CLAUDE_CODE_GATEWAY_HINT_HEADERS=1` is set
+
+Setting `CLAUDE_CODE_GATEWAY_HINT_HEADERS` to `0` stops the headers on every connection.
+
+The headers carry only what the rows below list: fixed vocabularies, tool names, durations, and a random prompt identifier, never prompt text or file contents. Every value is printable ASCII.
+
+| Header                              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| :---------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `x-claude-code-request-class`       | What kind of request this is: `main` for a turn of the main conversation, `subagent` for a turn of a [subagent](/docs/en/sub-agents), `workflow` for an agent running inside a workflow, `compaction` for the summarization request that compacts a conversation, or `auxiliary` for side requests such as session titles, classifiers, and summaries. Sent on every request                                                                                                                  |
+| `x-claude-code-agent-type`          | The kind of subagent that issued the request: a built-in agent type name such as `Explore`, `Plan`, or `general-purpose`, or `custom` for a user-defined agent, `teammate` for an [agent team](/docs/en/agent-teams) member running in the lead's process, or `fork` for a [fork](/docs/en/sub-agents#fork-the-current-conversation). Present only on a subagent's own turns; a subagent's compaction or side requests keep the agent ID but carry no type. A user-chosen agent name is never sent |
+| `x-claude-code-compaction`          | Present on the request that summarizes the conversation during a [compaction](/docs/en/prompt-caching#compacting-the-conversation). The value says what triggered it: `auto` when the context window approached capacity, `manual` for `/compact`, or `reactive` when the API rejected a request as too long. Absent on every other request                                                                                                                                                   |
+| `x-claude-code-context-compacted`   | Present once, on the first main-conversation request after a compaction, with the same values as `x-claude-code-compaction`. The conversation prefix before this request is no longer used, so a cache keyed on it can be dropped                                                                                                                                                                                                                                                        |
+| `x-claude-code-prev-tool-durations` | Measured run time of the tool calls whose results this request carries, as `<name>=<ms>;<name>=<ms>`, for example `Bash=742;Read=9`. Sent on the next request of the same conversation after a batch of tool calls, from the main session or a subagent                                                                                                                                                                                                                                  |
+| `x-claude-code-prompt-id`           | Random UUID that identifies the user prompt a request serves. Requests serving one prompt share the value, including the turns of subagents that prompt started. Requests not attributed to a prompt omit it. Use it to group a session's requests by prompt. Requires Claude Code v2.1.283 or later                                                                                                                                                                                     |
+
+Before parsing `x-claude-code-prev-tool-durations`, check how Claude Code builds the value and what it leaves out:
+
+* Entries: one per tool call that ran, in the order its result was collected, in whole milliseconds
+* Cap: Claude Code sends at most 32 entries and 4 KB, keeping the first entries
+* Encoding: tool names are percent-encoded, covering `%`, `;`, `=`, comma, space, and any character outside printable ASCII
+* Parsing: split on `;`, then on `=`, and decode each name
+* Absence: compaction calls, side requests, and the first request of a new prompt never carry it. Don't read a missing header as a turn that ran no tools
+* Times: each one excludes permission prompts and hooks, and parallel tool calls each report their own time, so the entries don't add up to the gap between requests
 
 ### Forward as open lists
 
@@ -199,6 +235,7 @@ What Claude Code does after an upstream rejection depends on what was rejected:
 
 * When the upstream rejects the `thinking` field, a mid-conversation system message, or the `cache_control` marker on such a message, Claude Code retries the request and disables the rejected capability for the rest of the conversation
 * When the upstream rejects a [thinking signature](https://platform.claude.com/docs/en/build-with-claude/extended-thinking), including with a `400` whose message says the block is `bound to a different conversation`, Claude Code removes earlier thinking blocks from the request, retries, and keeps them out of every later request. New responses still include thinking
+* When the gateway or its upstream rejects the [advisor tool](/docs/en/advisor) entry in `tools` as an unrecognized tool type, Claude Code retries the request once without that entry and its `anthropic-beta` value. Later requests to that base URL leave the advisor out until Claude Code exits, and `/advisor` is unavailable to the developer for that time. Claude Code recognizes this rejection by a `400` or `422` response whose message names the tool type after `Input tag`, such as `Input tag 'advisor_20260301'`. Before v2.1.280, Claude Code didn't retry this rejection
 * Claude Code doesn't retry rejections of context management or tool schema fields, so those `400` errors reach the developer
 
 The `bound to a different conversation` rejection comes from the API's [preserved thinking](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking) check, which fails when `system`, `tools`, or earlier `messages` content differs from the request that produced the thinking. A gateway that rewrites any of that content can cause the rejection itself; [Libraries, proxies, and gateways](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#libraries-proxies-gateways) covers what to pass through unchanged.
@@ -207,7 +244,9 @@ The retry logic matches on the upstream's error wording, so forward error respon
 
 ### Disable pre-release capabilities
 
-`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1` stops Claude Code from sending pre-release capabilities and their body fields on every provider, including context management and the beta tool fields. The variable doesn't affect adaptive reasoning, which is selected by model rather than by beta. It never suppresses the OAuth capability that subscription authentication requires.
+`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1` stops Claude Code from sending pre-release capabilities and their body fields, including context management and the beta tool fields. The variable doesn't affect adaptive reasoning, which is selected by model rather than by beta. It never suppresses the OAuth capability that subscription authentication requires.
+
+When a host platform that embeds Claude Code sets [`CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`](/docs/en/env-vars), `CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS` doesn't stop auto mode sessions on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry, or a [Claude apps gateway](/docs/en/claude-apps-gateway) from asking the server for [classifier review](/docs/en/permission-modes#server-side-classifier-review). That review adds an `anthropic-beta` value and a `safeguards` request field. Set `CLAUDE_CODE_AUTO_MODE_SERVER=0` to stop it there.
 
 On Claude Code v2.1.227 or later, your organization can keep [MCP tool search](/docs/en/mcp#scale-with-mcp-tool-search) on under this variable through [managed settings](/docs/en/managed-settings). What Claude Code sends with that override in place depends on how you connect:
 
