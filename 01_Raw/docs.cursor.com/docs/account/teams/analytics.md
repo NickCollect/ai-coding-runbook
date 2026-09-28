@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/analytics
-fetched_at: 2026-09-14T05:36:04.652272+00:00
+fetched_at: 2026-09-28T06:10:40.339709+00:00
 fetch_method: mintlify_md
 ---
 
@@ -38,13 +38,15 @@ These lines are stored and later compared to the signatures of each line in subs
 
 All the AI detection is done on device, and never leaves the user's computer. We store the line counts as metadata and make them available via API or in the Analytics Dashboard.
 
-#### Known Limitations:
+#### Known limitations
 
 - Diff signatures may be invalidated if automated code formatting is modifying lines.
 
-- AI Code Tracking has not been implemented for Background Agents, or the Cursor CLI yet.
+- Cursor CLI commits must be scored on the same machine where the code was authored. Code signatures are stored on-device.
 
-- All code signatures are stored on-device. The git commit must be scored on the same machine as the AI code was authored.
+- Local commit and PR attribution settings only control trailers and footers. They don't control Usage Analytics.
+
+- AI Code Tracking supports Cursor CLI and Cloud Agents. The API reports these commits with `commitSource: "cli"` and `commitSource: "cloud"`. If metrics are missing for a specific workflow, report it as a bug.
 
 ## AI Output
 

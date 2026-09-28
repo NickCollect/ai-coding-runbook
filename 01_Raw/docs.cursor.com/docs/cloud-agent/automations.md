@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/automations
-fetched_at: 2026-09-21T05:44:01.128265+00:00
+fetched_at: 2026-09-28T06:10:41.807857+00:00
 fetch_method: mintlify_md
 ---
 
@@ -39,7 +39,7 @@ Automations use each model's maximum supported context window because they run a
 How usage is billed depends on **Run as** in [Share](https://cursor.com/docs/cloud-agent/automations.md#share):
 
 - **Me**: Usage is billed to you. Other members see this option as **Creator**.
-- **Service account**: Usage is billed to the team's usage pool. The automation runs as the team's shared automations service account, so it does not use any member's personal usage.
+- **Service account**: Usage is billed to the team's usage pool. The automation runs as its own dedicated service account, so it does not use any member's personal usage.
 
 Personal accounts always bill to you. They do not have a Share menu.
 
@@ -236,7 +236,7 @@ Team accounts set visibility and identity from **Share** on the automation detai
 ### Run as
 
 - **Me**: The automation runs with your auth. Usage is billed to you. Other members see this option as **Creator**.
-- **Service account**: The automation runs as the team's shared automations service account. Usage is billed to the team's usage pool. Only team admins can choose this.
+- **Service account**: The automation runs as its own dedicated service account. Usage is billed to the team's usage pool. Only team admins can choose this.
 
 ### Access
 
@@ -246,7 +246,17 @@ Team accounts set visibility and identity from **Share** on the automation detai
 
 The menu also includes **Copy link**.
 
-Changing **Run as** to **Service account** changes the identity the automation uses. It stops using your auth and starts using the team's shared automations service account. If the automation uses webhook triggers, regenerate its webhook API key after the change. If it uses MCPs or other integrations that rely on personal OAuth credentials, make sure those are configured for the team's service account instead. Only team admins can switch an automation to the service account.
+Changing **Run as** to **Service account** changes the identity the automation uses. It stops using your auth and starts using a service account dedicated to that automation. If the automation uses webhook triggers, regenerate its webhook API key after the change. If it uses MCPs or other integrations that rely on personal OAuth credentials, make sure those are configured for the team's service account instead. Only team admins can switch an automation to the service account.
+
+### Service accounts for automations
+
+Each automation set to **Run as: Service account** gets its own service account. Cursor creates it the first time the automation is saved with that setting, whether from the automation editor or through the API or Terraform provider.
+
+On Enterprise teams, these accounts are listed in Dashboard → Settings → API Keys → Service Accounts with names like `automation-<id>`. Neither the ID in the name nor the service account ID (`sa_...`) is the automation's ID.
+
+Some older automations share a single team service account named `automations`. They move to their own service account the next time they are saved.
+
+An automation that runs as a service account stops running if that service account is archived or deleted. Only archive an `automation-` service account once you're sure no automation still uses it.
 
 ## Identity
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/jira
-fetched_at: 2026-07-13T04:25:38.488243+00:00
+fetched_at: 2026-09-28T06:10:43.006978+00:00
 fetch_method: mintlify_md
 ---
 
@@ -148,6 +148,8 @@ Customize Cloud Agent behavior while using mentions with `@Cursor` with these op
 | `repo`   | Specify repository  | `repo=acme/web-app` |
 | `branch` | Specify base branch | `branch=main`       |
 | `model`  | Specify model       | `model=opus`        |
+
+Cursor skips options inside a code block and leaves the code in your prompt as written.
 
 ### Routing rules
 

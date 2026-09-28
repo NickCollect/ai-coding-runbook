@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/sso
-fetched_at: 2026-09-07T05:31:25.704969+00:00
+fetched_at: 2026-09-28T06:10:40.590421+00:00
 fetch_method: mintlify_md
 ---
 
@@ -83,11 +83,21 @@ To handle multiple domains in your organization:
 
 ## Troubleshooting
 
-If issues occur:
+### User is not assigned to this application
 
-- Verify domain is verified in Cursor
+If Microsoft Entra ID returns `AADSTS50105`, or another identity provider returns **User is not assigned to this application**, Cursor cannot grant access. The identity provider is blocking sign-in because the user is not assigned to the Cursor enterprise app.
+
+Ask an admin in your identity provider to assign the user directly, or as a direct member of an assigned group. Nested groups often fail: membership in a group that sits under an assigned group is not enough on many providers, including Microsoft Entra ID.
+
+After the assignment is saved, wait a few minutes for it to propagate, then have the user sign in again.
+
+See [SSO and authentication](https://cursor.com/help/security-and-privacy/sso.md#why-do-i-see-aadsts50105-or-user-is-not-assigned-to-this-application) for the member-facing version of this error.
+
+### Other issues
+
+- Verify the domain is verified in Cursor
 - Ensure SAML attributes are properly mapped
-- Confirm the SSO connection is active and the domain is verified.
+- Confirm the SSO connection is active and the domain is verified
 - Match first and last names between identity provider and Cursor
 - Check provider-specific guides above
 - Visit the [SSO help center](https://cursor.com/help/security-and-privacy/sso.md) if issues persist

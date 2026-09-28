@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/setup
-fetched_at: 2026-09-21T05:44:01.772669+00:00
+fetched_at: 2026-09-28T06:10:42.244093+00:00
 fetch_method: mintlify_md
 ---
 
@@ -122,7 +122,7 @@ Start from scratch needs a paid plan and Origin. If your team hasn't set up Orig
 
 When the agent's work is where you want it, select **Create repo** above the agent input. Pick one of the suggested names, or choose **Other** and type your own. Names can use letters, digits, hyphens, and underscores, up to 100 characters. On a team, choose who can see the code: **Private** (only you) or **Internal** (anyone on your team can view and edit). Then select **Create Origin repo**.
 
-Cursor publishes the draft repository under that name, so the agent's work comes with it. The repository appears at [cursor.com/codebase](https://cursor.com/codebase), where you can [browse it](https://cursor.com/docs/origin/browse.md), [clone it](https://cursor.com/docs/origin/git.md), and change its [visibility](https://cursor.com/docs/origin/settings.md#permissions).
+Cursor publishes the draft repository under that name, so the agent's work comes with it. The repository appears at [cursor.com/codebase](https://cursor.com/codebase), where you can [browse it](https://cursor.com/docs/origin/browse.md), [clone it](https://cursor.com/docs/origin/git.md), and change its [visibility](https://cursor.com/docs/origin/settings.md#access).
 
 ### Preview the running app
 

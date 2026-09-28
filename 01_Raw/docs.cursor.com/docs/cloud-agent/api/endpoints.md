@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/api/endpoints
-fetched_at: 2026-09-07T05:31:27.032980+00:00
+fetched_at: 2026-09-28T06:10:41.722673+00:00
 fetch_method: mintlify_md
 ---
 
@@ -30,7 +30,9 @@ The 15 MB image limit below applies to API image inputs. Web attachments at
 
 ### Create An Agent
 
-/v1/agents
+POST
+
+`/v1/agents`
 
 Create a Cloud Agent and immediately enqueue its initial run. The response returns both the durable `agent` and the initial `run`.
 
@@ -240,7 +242,9 @@ curl --request POST \
 
 ### List Agents
 
-/v1/agents
+GET
+
+`/v1/agents`
 
 List agents for the authenticated user, newest first.
 
@@ -296,7 +300,9 @@ curl --request GET \
 
 ### Get An Agent
 
-/v1/agents/
+GET
+
+`/v1/agents/{id}`
 
 Retrieve durable metadata for an agent. Execution status lives on runs — fetch `latestRunId` and call [Get A Run](https://cursor.com/docs/cloud-agent/api/endpoints.md#get-a-run) to read run state.
 
@@ -349,7 +355,9 @@ curl --request GET \
 
 ### Create A Run
 
-/v1/agents//runs
+POST
+
+`/v1/agents/{id}/runs`
 
 Send a follow-up prompt to an existing active agent. The new run uses the agent's current conversation and workspace state.
 
@@ -418,7 +426,9 @@ curl --request POST \
 
 ### List Runs
 
-/v1/agents//runs
+GET
+
+`/v1/agents/{id}/runs`
 
 List runs for an agent, newest first.
 
@@ -470,7 +480,9 @@ curl --request GET \
 
 ### Get A Run
 
-/v1/agents//runs/
+GET
+
+`/v1/agents/{id}/runs/{runId}`
 
 Retrieve status, timestamps, and (for terminal runs) the final result, duration, and pushed branches for a specific run.
 
@@ -535,7 +547,9 @@ curl --request GET \
 
 ### Stream A Run
 
-/v1/agents//runs//stream
+GET
+
+`/v1/agents/{id}/runs/{runId}/stream`
 
 Stream Server-Sent Events (SSE) for one run. The stream is scoped to the requested run and does not replay prior runs.
 
@@ -625,7 +639,9 @@ data: {}
 
 ### Cancel A Run
 
-/v1/agents//runs//cancel
+POST
+
+`/v1/agents/{id}/runs/{runId}/cancel`
 
 Cancel the active run for an agent. Cancellation is terminal — the run transitions to `CANCELLED` and cannot be resumed. To continue the conversation, create a new run on the same agent.
 
@@ -657,7 +673,9 @@ curl --request POST \
 
 ### Get Agent Usage
 
-/v1/agents//usage
+GET
+
+`/v1/agents/{id}/usage`
 
 Retrieve token usage for an agent, broken down per run. The response totals usage across every run on the agent and lists usage for each individual run. Token usage matches the `tokenUsage` reported by the team [usage events](https://cursor.com/docs/account/teams/admin-api.md#get-usage-events-data) endpoint.
 
@@ -750,7 +768,9 @@ Artifacts are agent-scoped because the workspace persists across runs.
 
 ### List Artifacts
 
-/v1/agents//artifacts
+GET
+
+`/v1/agents/{id}/artifacts`
 
 List artifacts produced by an agent. Each artifact's `path` is relative to the workspace's `artifacts/` directory.
 
@@ -784,7 +804,9 @@ curl --request GET \
 
 ### Download An Artifact
 
-/v1/agents//artifacts/download
+GET
+
+`/v1/agents/{id}/artifacts/download`
 
 Retrieve a temporary 15-minute presigned S3 URL for a specific artifact.
 
@@ -819,7 +841,9 @@ curl --request GET \
 
 ### Archive An Agent
 
-/v1/agents//archive
+POST
+
+`/v1/agents/{id}/archive`
 
 Archive an agent. Archived agents remain readable but cannot accept new runs until unarchived. Use this for reversible "soft delete" flows.
 
@@ -847,7 +871,9 @@ curl --request POST \
 
 ### Unarchive An Agent
 
-/v1/agents//unarchive
+POST
+
+`/v1/agents/{id}/unarchive`
 
 Unarchive an agent so it can accept new runs again.
 
@@ -875,7 +901,9 @@ curl --request POST \
 
 ### Delete An Agent Permanently
 
-/v1/agents/
+DELETE
+
+`/v1/agents/{id}`
 
 Permanently delete an agent. This action is irreversible. Use [Archive](https://cursor.com/docs/cloud-agent/api/endpoints.md#archive-an-agent) for reversible removal.
 
@@ -903,7 +931,9 @@ curl --request DELETE \
 
 ### Create A User-Scoped Worker Token
 
-/v1/sub-tokens
+POST
+
+`/v1/sub-tokens`
 
 Create a one-hour user-scoped token for a worker to run as an active team member.
 
@@ -968,7 +998,9 @@ Authenticate with the pool's service account API key via Basic auth or Bearer to
 
 ### List Workers
 
-/v0/private-workers
+GET
+
+`/v0/private-workers`
 
 List pool workers for the authenticated service account's team, newest first.
 
@@ -1047,7 +1079,9 @@ curl --request GET \
 
 ### Get Worker Summary
 
-/v0/private-workers/summary
+GET
+
+`/v0/private-workers/summary`
 
 Return connected and in-use worker counts for the authenticated user and their team. Use this to trigger scaling decisions when utilization is high.
 
@@ -1072,7 +1106,9 @@ if (team && team.totalConnected > 0) {
 
 ### Get Worker By ID
 
-/v0/private-workers/
+GET
+
+`/v0/private-workers/{id}`
 
 Retrieve a single pool worker by its ID.
 
@@ -1090,7 +1126,9 @@ curl --request GET \
 
 ### List Pools
 
-/v0/private-workers/pools
+GET
+
+`/v0/private-workers/pools`
 
 List durable pools for the authenticated service account's team. Pools remain registered after the last worker disconnects, so you can monitor scale-to-zero fleets and decide when to provision capacity.
 
@@ -1164,7 +1202,9 @@ The `sandbox` entry is any-repo: repo fields are omitted, and the pool stays sel
 
 ### Register A Pool
 
-/v0/private-workers/pools
+POST
+
+`/v0/private-workers/pools`
 
 Register a durable pool without starting a worker. Use this to make a pool selectable before any worker connects, for example when a controller provisions capacity on demand. Starting a worker with `--pool` registers the pool implicitly; this endpoint is only needed to create the pool up front.
 
@@ -1220,7 +1260,9 @@ curl --request POST \
 
 ### Deregister A Pool
 
-/v0/private-workers/pools
+DELETE
+
+`/v0/private-workers/pools`
 
 Deregister (soft-delete) a durable pool so it no longer appears in pool pickers or [List Pools](https://cursor.com/docs/cloud-agent/api/endpoints.md#list-pools). Workers currently connected to the pool are not affected. Team pools require a team admin; user pools require their owner.
 
@@ -1258,7 +1300,9 @@ curl --request DELETE \
 
 ### List Pending Pool Requests
 
-/v0/private-workers/pending-requests
+GET
+
+`/v0/private-workers/pending-requests`
 
 List pool requests that have not been assigned to a worker yet. Use this endpoint to scale capacity when users are waiting for an available pool worker, or pair it with [Claim A Pending Request](https://cursor.com/docs/cloud-agent/api/endpoints.md#claim-a-pending-request) before starting an ephemeral worker.
 
@@ -1346,7 +1390,9 @@ curl --request GET \
 
 ### Watch Pending Pool Requests
 
-/v0/private-workers/pending-requests/stream
+GET
+
+`/v0/private-workers/pending-requests/stream`
 
 Stream pending-request lifecycle events over Server-Sent Events (SSE) so controllers can react to queue changes without polling.
 
@@ -1420,7 +1466,9 @@ data: {"id":"bc-00000000-0000-0000-0000-000000000002"}
 
 ### Claim A Pending Request
 
-/v0/private-workers/claim
+POST
+
+`/v0/private-workers/claim`
 
 Reserve a pending pool request for a specific worker before that worker starts. Controllers use this to atomically assign work across replicas: read [pending requests](https://cursor.com/docs/cloud-agent/api/endpoints.md#list-pending-pool-requests), claim one, then start a worker with a stable worker id that matches the claim.
 
@@ -1437,6 +1485,24 @@ Pending request id. Same value as `id` from [List Pending Pool Requests](https:/
 `workerId` string (required)
 
 Worker id to reserve for the request. Start the worker with the same id via `CURSOR_AGENT_WORKER_ID` (or the hidden `--worker-id` flag) so the bridge registers the claimed identity.
+
+`sessionToken` boolean (optional, default: `false`)
+
+Also mint a [session token](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#session-tokens) for this claim, so the worker can start without the service account key. If the token can't be minted, the claim fails and the request stays unclaimed.
+
+#### Response Fields
+
+`id`, `workerId` string
+
+The claimed request and worker id.
+
+`token` string (optional)
+
+Session token that serves only this claim. Present when the request sent `sessionToken: true`. It stops working when the claim is released, or when the API key that minted it is deleted or expires.
+
+`expiresAt` string (optional)
+
+ISO 8601 timestamp, 7 days after minting. Present with `token`.
 
 ```bash
 curl --request POST \
@@ -1466,9 +1532,90 @@ export CURSOR_AGENT_WORKER_ID="pw_123"
 agent worker --pool gpu --worker-dir /workspace start
 ```
 
+With a session token:
+
+```bash
+curl --request POST \
+  --url "https://api.cursor.com/v0/private-workers/claim" \
+  -u "$CURSOR_API_KEY:" \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "id": "bc-00000000-0000-0000-0000-000000000002",
+    "workerId": "pw_123",
+    "sessionToken": true
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "id": "bc-00000000-0000-0000-0000-000000000002",
+  "workerId": "pw_123",
+  "token": "eyJ...",
+  "expiresAt": "2026-10-02T21:00:00.000Z"
+}
+```
+
+Start the worker with the token instead of the key:
+
+```bash
+printf '%s' "$TOKEN" > /run/cursor/token
+export CURSOR_AGENT_WORKER_ID="pw_123"
+agent worker --pool gpu --worker-dir /workspace --auth-token-file /run/cursor/token start
+```
+
+### Create A Session Token
+
+POST
+
+`/v0/private-workers/tokens`
+
+Mint a [session token](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#session-tokens) for a claim your team already holds. Use it when a worker reconnects to an existing claim, such as a revived hibernated machine, or when a run outlasts its token. `agent worker controller --session-token` calls this for you when it wakes a hibernated machine.
+
+The token serves only this claim. It stops working when the claim is released, or when the API key that minted it is deleted or expires.
+
+This endpoint requires an agent-scoped service account API key from the team that holds the claim. A repository-scoped key can mint tokens only for agents on repositories in its scope.
+
+#### Request Body
+
+`id` string (required)
+
+Agent id the claim is for. Same value as `id` on [Claim A Pending Request](https://cursor.com/docs/cloud-agent/api/endpoints.md#claim-a-pending-request).
+
+`workerId` string (required)
+
+Worker id the claim binds to the agent.
+
+```bash
+curl --request POST \
+  --url "https://api.cursor.com/v0/private-workers/tokens" \
+  -u "$CURSOR_API_KEY:" \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "id": "bc-00000000-0000-0000-0000-000000000002",
+    "workerId": "pw_123"
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "id": "bc-00000000-0000-0000-0000-000000000002",
+  "workerId": "pw_123",
+  "token": "eyJ...",
+  "expiresAt": "2026-10-02T21:00:00.000Z"
+}
+```
+
+HTTP `404` means your team holds no claim binding that worker to that agent.
+
 ### Release A Claim
 
-/v0/private-workers/claims//release
+POST
+
+`/v0/private-workers/claims/{id}/release`
 
 Drop the long-term claim that binds an agent to a self-hosted worker. After release, Cursor stops preferring that machine for the agent.
 
@@ -1507,7 +1654,9 @@ HTTP `404` means there is no live claim: already released, expired, or adopted. 
 
 ### API Key Info
 
-/v1/me
+GET
+
+`/v1/me`
 
 Retrieve information about the API key being used for authentication.
 
@@ -1563,7 +1712,9 @@ curl --request GET \
 
 ### List Models
 
-/v1/models
+GET
+
+`/v1/models`
 
 Returns the recommended models you can pass to the `model.id` field on [Create An Agent](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-an-agent), along with the parameters and variants each model accepts. Model parameters use the same `model.params` shape as the [TypeScript SDK ModelSelection](https://cursor.com/docs/sdk/typescript.md#modelselection).
 
@@ -1651,7 +1802,9 @@ curl --request GET \
 
 ### List GitHub Repositories
 
-/v1/repositories
+GET
+
+`/v1/repositories`
 
 List GitHub repositories accessible to the authenticated user through Cursor's GitHub App installation.
 

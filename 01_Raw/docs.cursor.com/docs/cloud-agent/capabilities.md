@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/capabilities
-fetched_at: 2026-09-21T05:44:01.234943+00:00
+fetched_at: 2026-09-28T06:10:41.851742+00:00
 fetch_method: mintlify_md
 ---
 
@@ -134,12 +134,12 @@ To subscribe, describe the wait in your prompt. For example, "open a PR and keep
 
 Agents can subscribe to events from these integrations:
 
-| Integration | Events                                                                                                                                                                                                                     |
-| :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| GitHub      | Pull request activity (comments, reviews, and lifecycle changes) for one PR, a whole repo, or one author's PRs, and CI results on a branch. Uses the [GitHub integration](https://cursor.com/docs/integrations/github.md). |
-| Slack       | Replies in a thread, messages in a channel, and newly created public channels. Uses the [Slack integration](https://cursor.com/docs/integrations/slack.md).                                                                |
-| Linear      | Issues created or changing state, and new comments on issues. Uses the [Linear integration](https://cursor.com/docs/integrations/linear.md).                                                                               |
-| Timers      | A point in time: a one-off reminder after a delay, or a recurring cron schedule. Recurring loops are also available as the built-in [`/loop`](https://cursor.com/docs/skills.md#built-in-cursor-skills) skill.             |
+| Integration | Events                                                                                                                                                                                                         |
+| :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| GitHub      | Pull request activity (comments, reviews, and lifecycle changes) for one PR, and CI results on a branch. Uses the [GitHub integration](https://cursor.com/docs/integrations/github.md).                        |
+| Slack       | Replies in a thread and messages in a channel. Uses the [Slack integration](https://cursor.com/docs/integrations/slack.md).                                                                                    |
+| Linear      | Issues created or changing state, and new comments on issues. Uses the [Linear integration](https://cursor.com/docs/integrations/linear.md).                                                                   |
+| Timers      | A point in time: a one-off reminder after a delay, or a recurring cron schedule. Recurring loops are also available as the built-in [`/loop`](https://cursor.com/docs/skills.md#built-in-cursor-skills) skill. |
 
 ### How subscriptions work
 

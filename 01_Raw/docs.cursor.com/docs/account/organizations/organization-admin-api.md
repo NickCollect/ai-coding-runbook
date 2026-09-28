@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/organizations/organization-admin-api
-fetched_at: 2026-09-21T05:43:59.537853+00:00
+fetched_at: 2026-09-28T06:10:40.255984+00:00
 fetch_method: mintlify_md
 ---
 
@@ -68,7 +68,9 @@ Read organization membership and move members between the teams linked to your o
 
 ### List Organization Members
 
-/organizations/members
+GET
+
+`/organizations/members`
 
 Retrieve members of the organization attached to your API key, along with each member's organization role and their assignments across linked teams. Results are paginated.
 
@@ -143,7 +145,9 @@ curl -X GET "https://api.cursor.com/organizations/members?page=1&pageSize=50" \
 
 ### Sync Organization Team Memberships
 
-/organizations/team-memberships/sync
+POST
+
+`/organizations/team-memberships/sync`
 
 Set the teams that one or more users belong to within your organization. This matches the bulk style of the CSV import API: you send an array of users and receive a result row for each one.
 
@@ -412,7 +416,9 @@ Report on usage across every team linked to your organization. These endpoints a
 
 ### Get Pooled Usage
 
-/organizations/pooled-usage
+POST
+
+`/organizations/pooled-usage`
 
 Retrieve organization-pooled usage: the pool's spend limit, total usage across the organization, and a per-team breakdown. This powers the pooled-usage section of the dashboard. All monetary fields are in cents.
 
@@ -478,7 +484,9 @@ curl -X POST https://api.cursor.com/organizations/pooled-usage \
 
 ### Get Usage Events
 
-/organizations/filtered-usage-events
+POST
+
+`/organizations/filtered-usage-events`
 
 Retrieve detailed usage events across the teams linked to your organization. This is the organization-wide counterpart to the team [`/teams/filtered-usage-events`](https://cursor.com/docs/account/teams/admin-api.md#get-usage-events-data) endpoint: it returns the same event shape, with each event tagged by its owning `teamId`.
 
@@ -636,7 +644,9 @@ curl -X POST https://api.cursor.com/organizations/filtered-usage-events \
 
 ### Get Daily Usage Data
 
-/organizations/daily-usage-data
+POST
+
+`/organizations/daily-usage-data`
 
 Retrieve daily usage metrics for every member across the teams linked to your organization. This is the organization-wide counterpart to the team [`/teams/daily-usage-data`](https://cursor.com/docs/account/teams/admin-api.md#get-daily-usage-data) endpoint, with each row tagged by its owning `teamId`. Results are paginated by user and return data for all members with a membership during the requested date range; use `page` and `pageSize` to page through them.
 
@@ -773,7 +783,9 @@ curl -X POST https://api.cursor.com/organizations/daily-usage-data \
 
 ### Get Spending Data
 
-/organizations/spend
+POST
+
+`/organizations/spend`
 
 Retrieve per-member spend across the teams linked to your organization. This is the organization-wide counterpart to the team [`/teams/spend`](https://cursor.com/docs/account/teams/admin-api.md#get-spending-data) endpoint, with each member tagged by its owning `teamId`. Unlike the team endpoint, spend is reported over the **organization contract window** (not per-team billing cycles) using the same included-spend definition as [`/organizations/pooled-usage`](https://cursor.com/docs/account/organizations/organization-admin-api.md#get-pooled-usage), so the numbers reconcile with the pool.
 
@@ -884,7 +896,9 @@ Numeric `teamId` values come from routes such as [`GET /organizations/members`](
 
 ### List Model Access Configuration
 
-/organizations/teams/model-access/configuration
+GET
+
+`/organizations/teams/model-access/configuration`
 
 List model-access configuration for linked teams. Use this to find unrestricted vs custom policy drift. For on/off drift, `GET` each team's providers and compare.
 
@@ -954,7 +968,9 @@ curl -X GET "https://api.cursor.com/organizations/teams/model-access/configurati
 
 ### Get Team Model Access Configuration
 
-/organizations/teams/:teamId/model-access/configuration
+GET
+
+`/organizations/teams/:teamId/model-access/configuration`
 
 Get configuration for one linked team.
 
@@ -971,7 +987,9 @@ curl -X GET https://api.cursor.com/organizations/teams/7/model-access/configurat
 
 ### Update Team Model Access Configuration
 
-/organizations/teams/:teamId/model-access/configuration
+PUT
+
+`/organizations/teams/:teamId/model-access/configuration`
 
 Create or update configuration for one linked team, or return that team to unrestricted. Same body and seeding behavior as the team route.
 
@@ -1016,7 +1034,9 @@ curl -X PUT https://api.cursor.com/organizations/teams/7/model-access/configurat
 
 ### Bulk Update Model Access Configuration
 
-/organizations/teams/model-access/configuration
+PUT
+
+`/organizations/teams/model-access/configuration`
 
 Create or update configuration, or return teams to unrestricted, across many linked teams. Up to 100 `teamIds` per request.
 
@@ -1085,7 +1105,9 @@ curl -X PUT https://api.cursor.com/organizations/teams/model-access/configuratio
 
 ### Get Team Model Access Providers
 
-/organizations/teams/:teamId/model-access/providers
+GET
+
+`/organizations/teams/:teamId/model-access/providers`
 
 List providers and models for one linked team, including per-model `parameters` (same shape as the team [providers](https://cursor.com/docs/account/teams/admin-api.md#list-model-access-providers) route). Returns **409** when the team does not have a custom policy.
 
@@ -1102,7 +1124,9 @@ curl -X GET https://api.cursor.com/organizations/teams/7/model-access/providers 
 
 ### Update Team Model Access Provider
 
-/organizations/teams/:teamId/model-access/providers/:provider
+PUT
+
+`/organizations/teams/:teamId/model-access/providers/:provider`
 
 Enable or disable a provider on one linked team. Returns **409** when the team does not have a custom policy.
 
@@ -1129,7 +1153,9 @@ curl -X PUT https://api.cursor.com/organizations/teams/7/model-access/providers/
 
 ### Update Team Model Access Model
 
-/organizations/teams/:teamId/model-access/providers/:provider/models/:model
+PUT
+
+`/organizations/teams/:teamId/model-access/providers/:provider/models/:model`
 
 Enable or disable a model on one linked team, and optionally set per-model `parameters` (same body as the team model route). Returns **409** when the team does not have a custom policy.
 
@@ -1188,7 +1214,9 @@ curl -X PUT https://api.cursor.com/organizations/teams/7/model-access/providers/
 
 ### Bulk Update Model Access Provider
 
-/organizations/teams/model-access/providers/:provider
+PUT
+
+`/organizations/teams/model-access/providers/:provider`
 
 Enable or disable a provider on many linked teams. Up to 100 `teamIds` per request.
 
@@ -1240,7 +1268,9 @@ In this example HTTP status is still **200** because the batch completed. Teams 
 
 ### Bulk Update Model Access Model
 
-/organizations/teams/model-access/providers/:provider/models/:model
+PUT
+
+`/organizations/teams/model-access/providers/:provider/models/:model`
 
 Enable or disable a model on many linked teams, optionally with the same `parameters` map as the single-team model PUT. Up to 100 `teamIds` per request.
 
@@ -1360,7 +1390,9 @@ Group routes share these error responses:
 
 ### List Organization Groups
 
-/organizations/groups
+GET
+
+`/organizations/groups`
 
 Retrieve organization groups for the organization attached to your API key. Pass `name` to look up one group by its exact name.
 
@@ -1469,7 +1501,9 @@ curl -X GET "https://api.cursor.com/organizations/groups?name=Engineering" \
 
 ### Get Organization Group
 
-/organizations/groups/:groupId
+GET
+
+`/organizations/groups/:groupId`
 
 Retrieve one organization group.
 
@@ -1506,7 +1540,9 @@ curl -X GET https://api.cursor.com/organizations/groups/g_PDSPmvukpYgZEDXsoNirw3
 
 ### Create Organization Group
 
-/organizations/groups
+POST
+
+`/organizations/groups`
 
 Create an organization group with manually managed membership. To create a SCIM-synced group, sync it from your identity provider in the [dashboard](https://cursor.com/docs/enterprise/organization-groups.md#set-up-scim-synced-groups) instead.
 
@@ -1551,7 +1587,9 @@ curl -X POST https://api.cursor.com/organizations/groups \
 
 ### Update Organization Group
 
-/organizations/groups/:groupId
+PATCH
+
+`/organizations/groups/:groupId`
 
 Update a group's name or monthly spending limit. Updates are partial: include at least one field, and any field you omit keeps its current value.
 
@@ -1611,7 +1649,9 @@ curl -X PATCH https://api.cursor.com/organizations/groups/g_PDSPmvukpYgZEDXsoNir
 
 ### Delete Organization Group
 
-/organizations/groups/:groupId
+DELETE
+
+`/organizations/groups/:groupId`
 
 Delete an organization group. The group must be empty: remove every member before deleting it.
 
@@ -1642,7 +1682,9 @@ curl -X DELETE https://api.cursor.com/organizations/groups/g_PDSPmvukpYgZEDXsoNi
 
 ### List Organization Group Members
 
-/organizations/groups/:groupId/members
+GET
+
+`/organizations/groups/:groupId/members`
 
 Retrieve members in an organization group.
 
@@ -1711,7 +1753,9 @@ curl -X GET "https://api.cursor.com/organizations/groups/g_PDSPmvukpYgZEDXsoNirw
 
 ### Add Organization Group Members
 
-/organizations/groups/:groupId/members/bulk-add
+POST
+
+`/organizations/groups/:groupId/members/bulk-add`
 
 Add members to a manual organization group.
 
@@ -1755,7 +1799,9 @@ curl -X POST https://api.cursor.com/organizations/groups/g_PDSPmvukpYgZEDXsoNirw
 
 ### Remove Organization Group Members
 
-/organizations/groups/:groupId/members/bulk-remove
+POST
+
+`/organizations/groups/:groupId/members/bulk-remove`
 
 Remove members from a manual organization group.
 

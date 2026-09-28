@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/overview
-fetched_at: 2026-09-21T05:43:59.765488+00:00
+fetched_at: 2026-09-28T06:10:40.738852+00:00
 fetch_method: mintlify_md
 ---
 
@@ -125,6 +125,12 @@ Open a [side chat](https://cursor.com/help/ai-features/side-chats.md) to ask a q
 
 A side chat is a durable agent conversation. It uses the parent thread as hidden reference context and keeps its own transcript. @-mention the side chat in the main thread to pull that context back.
 
+## Conversation search
+
+Search past agent transcripts from the [Agents Window](https://cursor.com/docs/agent/agents-window.md). Press Cmd+K on Mac or Ctrl+K on Windows and Linux to open the command palette, then search across conversations. Cursor builds a local search index.
+
+To find text in the open conversation, press Cmd+F on Mac or Ctrl+F on Windows and Linux.
+
 ## Goals with /goal
 
 Agent reads each message as a new job. Use `/goal` to give the agent a long-lived objective to work towards until it's fully complete:
@@ -133,7 +139,7 @@ Agent reads each message as a new job. Use `/goal` to give the agent a long-live
 /goal fix all flaky tests and make CI green
 ```
 
-In the [CLI](https://cursor.com/docs/cli/overview.md), Ctrl+C pauses the goal. Pair a goal with a [Custom Mode](https://cursor.com/docs/agent/prompting.md#custom-modes) when you want the agent to follow a playbook, or with the built-in [`/loop`](https://cursor.com/docs/skills.md#built-in-cursor-skills) skill for recurring check-ins while it pursues the objective.
+In the [CLI](https://cursor.com/docs/cli/overview.md), Ctrl+C pauses the goal. Pair a goal with a [Custom Mode](https://cursor.com/docs/agent/prompting.md#custom-modes) when you want the agent to follow a playbook, or with the built-in [`/loop`](https://cursor.com/docs/skills.md#built-in-cursor-skills) skill to run a prompt or skill on a recurring or variable interval. If you don't specify a fixed interval, the agent chooses when to wake. Stop the loop when you want it to end.
 
 `/goal` is rolling out. If you don't see it, try it in a new chat.
 

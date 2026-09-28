@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/compliance-and-monitoring
-fetched_at: 2026-09-14T05:36:07.943589+00:00
+fetched_at: 2026-09-28T06:10:42.476318+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,8 +24,8 @@ We log the following events:
 - **Privacy settings:** Privacy Mode changes at user or team level
 - **Team rules:** Team rule management (including Bugbot rules) for custom workflows
 - **Team commands:** Custom command creation, updates, and deletion
-- **Grok Bot:** Bot creation, member access changes, Team Setup manifests, and routines
-- **Integrations:** MCP authentication and Slack account links
+- **Grok Bot:** Team enablement, Bot creation, member access changes, Team Setup manifests, Bot templates, computers, and routines
+- **Integrations:** MCP server configuration, authentication, and Slack account links
 
 We do not log agent responses or generated code content.
 
@@ -70,6 +70,8 @@ Audit logs do not include OpenTelemetry trace or span ids. `metadata.event_id` i
 
 The `event_type` values include:
 
+For entries that list fields, those names are keys in Admin API `event_data` and the equivalent CSV or SIEM payload.
+
 - `login` - User login events (web or app)
 - `logout` - User logout events
 - `add_user` - User additions (with source: `sso`, `invite`, `signup`, `createTeam`, or `autoEnroll`)
@@ -91,7 +93,7 @@ The `event_type` values include:
 - `slack_share_summary` - Slack summary sharing settings
 - `slack_share_summary_in_external_channel` - External channel sharing
 - `slack_channel_repo_mappings` - Slack channel to repository mappings
-- `mcp_server_config` - MCP server configuration changes
+- `mcp_server_config` - MCP server configuration changes (`create`, `update`, `rename`, `delete`). Fields: `action`, `server_name`, `server_type`, `scope`
 - `team_repo` - Repository actions (create, delete, update\_settings)
 - `create_directory_group` - Directory group creation
 - `update_directory_group` - Directory group updates
@@ -109,14 +111,27 @@ The `event_type` values include:
 - `bugbot_team_settings` - Bugbot team settings changes
 - `bugbot_bulk_repo_update` - Bugbot bulk repository update events
 - `team_command` - Custom team command management (create, update, delete)
-- `grok_bot_created` - Bot creation (blank, from a template, or via the Agent SDK)
-- `grok_bot_access_changed` - Grok Bot member access changes (all members or specific groups)
-- `grok_bot_team_setup_manifest` - Team Setup manifest actions (save, delete)
-- `mcp_authentication` - MCP OAuth logins (as a user credential or a team service account)
-- `slack_account_link` - Slack account linking (link, relink)
-- `grok_bot_routine` - Grok Bot routine management (create, update)
+- `grok_bot_created` - Bot creation. Fields: `agent_id`, `name`, `source`, `template_id`
+- `grok_bot_lifecycle` - Bot profile and lifecycle changes (`update`, `rename`, `delete`, `primary_bot_changed`). Fields: `agent_id`, `action`, `changed_fields`, `primary_bot_cleared`, `previous_agent_id`
+- `sand_onboarding` - Team Grok Bot enablement changes (`new_completed=true` means enabled; `false` means disabled). Fields: `old_completed`, `new_completed`, `source`
+- `grok_bot_access_changed` - Member access changes. Fields: `old_mode`, `new_mode`, `old_group_ids`, `new_group_ids`, `old_group_names`, `new_group_names`
+- `grok_bot_team_setup_manifest` - Team Setup manifest changes (`save`, `delete`). Fields: `action`, `manifest_id`, `revision`, `entry_count`, `entry_ids`
+- `grok_bot_group_settings` - Group-owned Grok Bot setting changes. Fields: `group_id`, `group_name`, `setting_name`, `old_value`, `new_value`
+- `grok_bot_group_resource` - Group Rule changes (`create`, `update`, `delete`) and Group Setup Script changes (`save`, `delete`). Fields: `group_id`, `group_name`, `resource`, `action`, `resource_id`, `resource_name`
+- `mcp_authentication` - MCP OAuth authentication, disconnection, and account removal (`authenticate`, `revoke`, `remove_account`). An empty `action` means `authenticate`. Fields: `server_name`, `scope`, `service_account_id`, `action`
+- `slack_account_link` - Slack account linking (`link`, `relink`). Fields: `action`, `slack_team_id`, `slack_user_id`, `workspace_changed`. Dashboard titles for these rows stay unsuffixed
+- `grok_bot_resource` - Bot template changes (`create`, `publish`, `visibility_changed`, `delete`). Fields: `resource_type`, `resource_id`, `action`, `visibility`, `previous_visibility`
 
-Rows written as `automation` before the rename keep that name in the API, CSV, and SIEM. New routine rows use `grok_bot_routine`. Cloud Agent automations are not recorded.
+PUBLIC template rows go to the affected team, the request's team, or the member's sole team; no row is recorded when a team cannot be determined uniquely.
+
+- `grok_bot_machine` - Registered local computer changes (`register`, `rename`). Fields: `action`, `machine_id`
+- `grok_bot_vm` - Grok Bot Computer changes (`image_update_completed`, `reset`, `force_recreate`, `kill`). Fields: `action`, `tenant_id`, `operation_id`, `target_user_id`, `target_user_email`, `deleted_count`
+- `grok_bot_vm_bulk` - Grok Bot Computer changes across multiple members (`bulk_recreate`, `bulk_kill`, `bulk_permanent_delete`). Fields: `action`, `operation_id`, `target_count`, `succeeded_count`, `skipped_count`, `failed_count`
+- `grok_bot_routine` - Routine changes (`create`, `update`, `enable`, `disable`, `delete`). Fields: `action`, `automation_id`, `name`, `execution_runtime`, `sand_agent_id`, `trigger_type`, `creation_source`, `scope`, `enabled`
+
+In the **User** column, signed-in members and admins appear as their email; `Bot: <owner email>` means the Bot performed the change during its owner's conversation turn, `Api Key: <name>` identifies an API key without an associated user, and `System` means no member, API key, or Bot was identified.
+
+Grok Bot payloads carry identifiers and changed field names, never content such as instructions, template bodies, Group Rule or Setup Script text, MCP URLs, or credentials.
 
 ### Searching and filtering
 
@@ -126,8 +141,6 @@ Filter audit logs in the dashboard by:
 - Event type (authentication, user management, settings)
 - Actor (specific user)
 - Application (all applications, or Grok Bot)
-
-Grok Bot event types appear in the filter as Bot Created, Grok Bot Access Updated, Grok Bot Team Setup, MCP Server Authenticated, Slack Account Link, and Routines.
 
 Export filtered results to CSV for analysis or compliance reports. The export includes an Application column.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/reference/terminal-setup
-fetched_at: 2026-06-22T06:23:24.830349+00:00
+fetched_at: 2026-09-28T06:10:41.690137+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,10 +22,10 @@ This command detects your terminal and provides instructions for configuring Opt
 
 These methods work in **all terminals**, including tmux, screen, and SSH sessions:
 
-| Method | Description                                              |
-| :----- | :------------------------------------------------------- |
-| +Enter | Type a backslash, then press Enter to insert a newline   |
-| Ctrl+J | Standard control character for newline (ASCII line feed) |
+| Method   | Description                                              |
+| :------- | :------------------------------------------------------- |
+| \\+Enter | Type a backslash, then press Enter to insert a newline   |
+| Ctrl+J   | Standard control character for newline (ASCII line feed) |
 
 If you're in tmux or having trouble with other keybindings, Ctrl+J is the most reliable option.
 
@@ -54,7 +54,7 @@ These terminals need `/setup-terminal` to configure Option+Enter for newlines:
 **tmux** and **screen** intercept Shift+Enter before it reaches applications. Use the universal options instead:
 
 - Ctrl+J — Works reliably in all multiplexer sessions
-- +Enter — Also works universally
+- \\+Enter — Also works universally
 
 You can configure your outer terminal (e.g., iTerm2) for Shift+Enter, but the keybinding won't pass through tmux. Use the universal options for the most consistent experience.
 
@@ -249,21 +249,21 @@ VS Code's integrated terminal may not pass Shift+Enter correctly. Add to your `k
 **tmux users:**
 
 - Shift+Enter and Option+Enter won't work through tmux
-- Use Ctrl+J or +Enter instead
+- Use Ctrl+J or \\+Enter instead
 - These universal options work everywhere, including nested tmux sessions
 
 **SSH sessions:**
 
 - Remote terminal capabilities depend on your local terminal emulator
 - Ctrl+J works reliably over SSH
-- +Enter is another reliable option
+- \\+Enter is another reliable option
 
 ## Summary
 
 | Keybinding   | Works in                          | Notes                                                      |
 | :----------- | :-------------------------------- | :--------------------------------------------------------- |
 | Ctrl+J       | All terminals                     | Most reliable, works everywhere                            |
-| +Enter       | All terminals                     | Universal alternative                                      |
+| \\+Enter     | All terminals                     | Universal alternative                                      |
 | Shift+Enter  | iTerm2, Ghostty, Kitty, Warp, Zed | Native support, no config needed                           |
 | Option+Enter | After `/setup-terminal`           | Newline alternative for Apple Terminal, Alacritty, VS Code |
 

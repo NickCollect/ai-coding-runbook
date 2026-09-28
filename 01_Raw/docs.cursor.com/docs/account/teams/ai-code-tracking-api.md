@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/ai-code-tracking-api
-fetched_at: 2026-05-05T19:55:35.342849+00:00
+fetched_at: 2026-09-28T06:10:40.333775+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,9 @@ The AI Code Tracking API lets you track AI-generated code contributions across y
 
 ### Get AI Commit Metrics (JSON, paginated)
 
-/analytics/ai-code/commits
+GET
+
+`/analytics/ai-code/commits`
 
 Retrieve aggregated per-commit metrics that attribute lines to TAB, COMPOSER, and non-AI.
 
@@ -106,7 +108,9 @@ curl -X GET "https://api.cursor.com/analytics/ai-code/commits?startDate=7d&endDa
 
 ### Download AI Commit Metrics (CSV, streaming)
 
-/analytics/ai-code/commits.csv
+GET
+
+`/analytics/ai-code/commits.csv`
 
 Download commit metrics data in CSV format for large data extractions.
 
@@ -167,7 +171,9 @@ e5f6g7h8,cloud,user_3k9x8q...,developer@company.com,company/repo,feature-branch,
 
 ### Get AI Code Change Metrics (JSON, paginated)
 
-/analytics/ai-code/changes
+GET
+
+`/analytics/ai-code/changes`
 
 Retrieve granular accepted AI changes, grouped by deterministic changeId. Useful to analyze accepted AI events independent of commits.
 
@@ -250,7 +256,9 @@ curl -X GET "https://api.cursor.com/analytics/ai-code/changes?startDate=14d&endD
 
 ### Download AI Code Change Metrics (CSV, streaming)
 
-/analytics/ai-code/changes.csv
+GET
+
+`/analytics/ai-code/changes.csv`
 
 Download change metrics data in CSV format for large data extractions.
 
@@ -302,7 +310,9 @@ change_id,user_id,user_email,source,model,total_lines_added,total_lines_deleted,
 
 ### Get Commit Details
 
-/analytics/ai-code/commits/:commitHash
+GET
+
+`/analytics/ai-code/commits/:commitHash`
 
 Retrieve detailed information for one or more commits, including blame annotations and referenced conversation metadata.
 

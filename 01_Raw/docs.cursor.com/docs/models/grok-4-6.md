@@ -1,8 +1,10 @@
 ---
 source_url: https://cursor.com/docs/models/grok-4-6
-fetched_at: 2026-08-24T02:18:38.554472+00:00
+fetched_at: 2026-09-28T06:10:44.448211+00:00
 fetch_method: mintlify_md
 ---
+
+We recommend using [Grok 4.7](https://cursor.com/docs/models/grok-4-7.md) for stronger self-verification and longer-running work. Grok 4.6 remains available.
 
 Grok 4.6 is a frontier model from Cursor and SpaceXAI for complex coding and knowledge work. It builds on Grok 4.5 with improved instruction following and long-horizon agentic work.
 
@@ -26,7 +28,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Grok 4.6 is part of the [Cursor Models pool](https://cursor.com/docs/models-and-pricing.md#cursor-models) on individual and team plans. This pool also includes Grok 4.5 and Composer 2.5.
+Grok 4.6 is part of the [Cursor Models pool](https://cursor.com/docs/models-and-pricing.md#cursor-models) on individual and team plans. This pool also includes Grok 4.7, Grok 4.5, and Composer 2.5.
 
 Standard on-demand usage is priced at $2/M input tokens, $0.50/M cached input tokens, and $6/M output tokens. The Fast variant is priced at $4/M input tokens, $1/M cached input tokens, and $12/M output tokens. All prices are per million tokens.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted/integrations
-fetched_at: 2026-09-14T05:36:07.361588+00:00
+fetched_at: 2026-09-28T06:10:42.109901+00:00
 fetch_method: mintlify_md
 ---
 
@@ -23,6 +23,7 @@ Each partner maintains its own guide for running Self-Hosted Machines workers on
 - **Vercel.** [Cursor with Vercel Sandbox](https://vercel.com/kb/guide/cursor-vercel-sandbox)
 - **Tensorlake.** [Cursor Cloud Agents on Tensorlake Sandboxes](https://docs.tensorlake.ai/sandboxes/cursor-cloud-agents)
 - **Coder.** [Agent Relay for Cursor](https://coder.com/docs/@main/ai-coder/agent-relay)
+- **SuperServe.** [Run Cursor Self-Hosted Machines on Superserve](https://docs.superserve.ai/integrations/managed-agents/cursor-cloud-agents)
 
 ## Reference templates
 

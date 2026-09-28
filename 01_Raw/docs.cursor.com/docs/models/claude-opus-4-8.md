@@ -1,10 +1,10 @@
 ---
 source_url: https://cursor.com/docs/models/claude-opus-4-8
-fetched_at: 2026-08-31T06:29:33.372554+00:00
+fetched_at: 2026-09-28T06:10:43.571210+00:00
 fetch_method: mintlify_md
 ---
 
-We recommend using [Claude Opus 5](https://cursor.com/docs/models/claude-opus-5.md). It replaces Opus 4.8 with stronger agentic coding and long-horizon reasoning at the same price.
+We recommend using [Claude Opus 5.5](https://cursor.com/docs/models/claude-opus-5-5.md). It is Anthropic's latest Opus release with stronger agentic coding and long-horizon reasoning at a lower price.
 
 Claude Opus 4.8 is Anthropic's previous Opus model and a meaningful jump over Opus 4.7 on [CursorBench](https://cursor.com/blog/cursorbench). It excels at autonomous, multi-step work: it holds intent across long sessions, self-corrects when it hits friction, and writes production-ready code without hand-holding. We recommend the high thinking variant for the best results.
 
